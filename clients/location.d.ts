@@ -60,11 +60,11 @@ declare class Location extends Service {
    */
   batchPutGeofence(callback?: (err: AWSError, data: Location.Types.BatchPutGeofenceResponse) => void): Request<Location.Types.BatchPutGeofenceResponse, AWSError>;
   /**
-   * Uploads position update data for one or more devices to a tracker resource. Amazon Location uses the data when reporting the last known device position and position history.  Only one position update is stored per sample time. Location data is sampled at a fixed rate of one position per 30-second interval and retained for 30 days before it's deleted. 
+   * Uploads position update data for one or more devices to a tracker resource. Amazon Location uses the data when it reports the last known device position and position history. Amazon Location retains location data for 30 days.  Position updates are handled based on the PositionFiltering property of the tracker. When PositionFiltering is set to TimeBased, updates are evaluated against linked geofence collections, and location data is stored at a maximum of one position per 30 second interval. If your update frequency is more often than every 30 seconds, only one update per 30 seconds is stored for each unique device ID. When PositionFiltering is set to DistanceBased filtering, location data is stored and evaluated against linked geofence collections only if the device has moved more than 30 m (98.4 ft). 
    */
   batchUpdateDevicePosition(params: Location.Types.BatchUpdateDevicePositionRequest, callback?: (err: AWSError, data: Location.Types.BatchUpdateDevicePositionResponse) => void): Request<Location.Types.BatchUpdateDevicePositionResponse, AWSError>;
   /**
-   * Uploads position update data for one or more devices to a tracker resource. Amazon Location uses the data when reporting the last known device position and position history.  Only one position update is stored per sample time. Location data is sampled at a fixed rate of one position per 30-second interval and retained for 30 days before it's deleted. 
+   * Uploads position update data for one or more devices to a tracker resource. Amazon Location uses the data when it reports the last known device position and position history. Amazon Location retains location data for 30 days.  Position updates are handled based on the PositionFiltering property of the tracker. When PositionFiltering is set to TimeBased, updates are evaluated against linked geofence collections, and location data is stored at a maximum of one position per 30 second interval. If your update frequency is more often than every 30 seconds, only one update per 30 seconds is stored for each unique device ID. When PositionFiltering is set to DistanceBased filtering, location data is stored and evaluated against linked geofence collections only if the device has moved more than 30 m (98.4 ft). 
    */
   batchUpdateDevicePosition(callback?: (err: AWSError, data: Location.Types.BatchUpdateDevicePositionResponse) => void): Request<Location.Types.BatchUpdateDevicePositionResponse, AWSError>;
   /**
@@ -672,7 +672,7 @@ declare namespace Location {
      */
     DepartNow?: Boolean;
     /**
-     * The start position for the route. Defined in WGS 84 format: [longitude, latitude].   For example, [-123.115, 49.285]     If you specify a departure that's not located on a road, Amazon Location moves the position to the nearest road.  Valid Values: [-180 to 180,-90 to 90] 
+     * The start position for the route. Defined in WGS 84 format: [longitude, latitude].   For example, [-123.115, 49.285]     If you specify a departure that's not located on a road, Amazon Location moves the position to the nearest road. If Esri is the provider for your route calculator, specifying a route that is longer than 400 km returns a 400 RoutesValidationException error.  Valid Values: [-180 to 180,-90 to 90] 
      */
     DeparturePosition: Position;
     /**
@@ -700,7 +700,7 @@ declare namespace Location {
      */
     TruckModeOptions?: CalculateRouteTruckModeOptions;
     /**
-     * Specifies an ordered list of up to 23 intermediate positions to include along a route between the departure position and destination position.    For example, from the DeparturePosition [-123.115, 49.285], the route follows the order that the waypoint positions are given [[-122.757, 49.0021],[-122.349, 47.620]]     If you specify a waypoint position that's not located on a road, Amazon Location moves the position to the nearest road.  Specifying more than 23 waypoints returns a 400 ValidationException error.  Valid Values: [-180 to 180,-90 to 90] 
+     * Specifies an ordered list of up to 23 intermediate positions to include along a route between the departure position and destination position.    For example, from the DeparturePosition [-123.115, 49.285], the route follows the order that the waypoint positions are given [[-122.757, 49.0021],[-122.349, 47.620]]     If you specify a waypoint position that's not located on a road, Amazon Location moves the position to the nearest road.  Specifying more than 23 waypoints returns a 400 ValidationException error. If Esri is the provider for your route calculator, specifying a route that is longer than 400 km returns a 400 RoutesValidationException error.  Valid Values: [-180 to 180,-90 to 90] 
      */
     WaypointPositions?: CalculateRouteRequestWaypointPositionsList;
   }
@@ -721,7 +721,7 @@ declare namespace Location {
      */
     DataSource: String;
     /**
-     * The total distance covered by the route. The sum of the distance travelled between every stop on the route.  The route distance can't be greater than 250 km. If the route exceeds 250 km, the response returns a 400 RoutesValidationException error. 
+     * The total distance covered by the route. The sum of the distance travelled between every stop on the route.  If Esri is the data source for the route calculator, the route distance can’t be greater than 400 km. If the route exceeds 400 km, the response is a 400 RoutesValidationException error. 
      */
     Distance: CalculateRouteSummaryDistanceDouble;
     /**
@@ -733,7 +733,7 @@ declare namespace Location {
      */
     DurationSeconds: CalculateRouteSummaryDurationSecondsDouble;
     /**
-     * Specifies a geographical box surrounding a route. Used to zoom into a route when displaying it in a map. For example, [min x, min y, max x, max y]. The first 2 bbox parameters describe the lower southwest corner:    The first bbox position is the X coordinate or longitude of the lower southwest corner.    The second bbox position is the Y coordinate or latitude of the lower southwest corner.    The next 2 bbox parameters describe the upper northeast corner:    The third bbox position is the X coordinate, or longitude of the upper northeast corner.    The fourth bbox position is the Y coordinate, or longitude of the upper northeast corner.   
+     * Specifies a geographical box surrounding a route. Used to zoom into a route when displaying it in a map. For example, [min x, min y, max x, max y]. The first 2 bbox parameters describe the lower southwest corner:    The first bbox position is the X coordinate or longitude of the lower southwest corner.    The second bbox position is the Y coordinate or latitude of the lower southwest corner.    The next 2 bbox parameters describe the upper northeast corner:    The third bbox position is the X coordinate, or longitude of the upper northeast corner.    The fourth bbox position is the Y coordinate, or latitude of the upper northeast corner.   
      */
     RouteBBox: BoundingBox;
   }
@@ -813,7 +813,7 @@ declare namespace Location {
      */
     MapName: ResourceName;
     /**
-     * Specifies the pricing plan for your map resource. For additional details and restrictions on each pricing plan option, see the Amazon Location Service pricing page.
+     * Specifies the pricing plan for your map resource. For additional details and restrictions on each pricing plan option, see Amazon Location Service pricing.
      */
     PricingPlan: PricingPlan;
     /**
@@ -837,7 +837,7 @@ declare namespace Location {
   }
   export interface CreatePlaceIndexRequest {
     /**
-     * Specifies the data provider of geospatial data.  This field is case-sensitive. Enter the valid values as shown. For example, entering HERE returns an error.  Valid values include:    Esri – For additional information about Esri's coverage in your region of interest, see Esri details on geocoding coverage.    Here – For additional information about HERE Technologies's coverage in your region of interest, see HERE details on goecoding coverage.  Place index resources using HERE Technologies as a data provider can't store results for locations in Japan. For more information, see the AWS Service Terms for Amazon Location Service.    For additional information , see Data providers on the Amazon Location Service Developer Guide.
+     * Specifies the data provider of geospatial data.  This field is case-sensitive. Enter the valid values as shown. For example, entering HERE returns an error.  Valid values include:    Esri – For additional information about Esri's coverage in your region of interest, see Esri details on geocoding coverage.    Here – For additional information about HERE Technologies' coverage in your region of interest, see HERE details on goecoding coverage.  Place index resources using HERE Technologies as a data provider can't store results for locations in Japan. For more information, see the AWS Service Terms for Amazon Location Service.    For additional information , see Data providers on the Amazon Location Service Developer Guide.
      */
     DataSource: String;
     /**
@@ -853,7 +853,7 @@ declare namespace Location {
      */
     IndexName: ResourceName;
     /**
-     * Specifies the pricing plan for your place index resource. For additional details and restrictions on each pricing plan option, see the Amazon Location Service pricing page.
+     * Specifies the pricing plan for your place index resource. For additional details and restrictions on each pricing plan option, see Amazon Location Service pricing.
      */
     PricingPlan: PricingPlan;
     /**
@@ -881,7 +881,7 @@ declare namespace Location {
      */
     CalculatorName: ResourceName;
     /**
-     * Specifies the data provider of traffic and road network data.  This field is case-sensitive. Enter the valid values as shown. For example, entering HERE returns an error.  Valid values include:    Esri – For additional information about Esri's coverage in your region of interest, see Esri details on street networks and traffic coverage.    Here – For additional information about HERE Technologies's coverage in your region of interest, see HERE car routing coverage and HERE truck routing coverage.   For additional information , see Data providers on the Amazon Location Service Developer Guide.
+     * Specifies the data provider of traffic and road network data.  This field is case-sensitive. Enter the valid values as shown. For example, entering HERE returns an error. Route calculators that use Esri as a data source only calculate routes that are shorter than 400 km.  Valid values include:    Esri – For additional information about Esri's coverage in your region of interest, see Esri details on street networks and traffic coverage.    Here – For additional information about HERE Technologies' coverage in your region of interest, see HERE car routing coverage and HERE truck routing coverage.   For additional information , see Data providers on the Amazon Location Service Developer Guide.
      */
     DataSource: String;
     /**
@@ -921,11 +921,15 @@ declare namespace Location {
      */
     KmsKeyId?: KmsKeyId;
     /**
-     * Specifies the pricing plan for the tracker resource. For additional details and restrictions on each pricing plan option, see the Amazon Location Service pricing page.
+     * Specifies the position filtering for the tracker resource. Valid values:    TimeBased - Location updates are evaluated against linked geofence collections, but not every location update is stored. If your update frequency is more often than 30 seconds, only one update per 30 seconds is stored for each unique device ID.     DistanceBased - If the device has moved less than 30 m (98.4 ft), location updates are ignored. Location updates within this distance are neither evaluated against linked geofence collections, nor stored. This helps control costs by reducing the number of geofence evaluations and device positions to retrieve. Distance-based filtering can also reduce the jitter effect when displaying device trajectory on a map.    This field is optional. If not specified, the default value is TimeBased.
+     */
+    PositionFiltering?: PositionFiltering;
+    /**
+     * Specifies the pricing plan for the tracker resource. For additional details and restrictions on each pricing plan option, see Amazon Location Service pricing.
      */
     PricingPlan: PricingPlan;
     /**
-     * Specifies the data provider for the tracker resource.   Required value for the following pricing plans: MobileAssetTracking | MobileAssetManagement    For more information about Data Providers, and Pricing plans, see the Amazon Location Service product page.  Amazon Location Service only uses PricingPlanDataSource to calculate billing for your tracker resource. Your data will not be shared with the data provider, and will remain in your AWS account or Region unless you move it.  Valid Values: Esri | Here 
+     * Specifies the data provider for the tracker resource.   Required value for the following pricing plans: MobileAssetTracking | MobileAssetManagement    For more information about Data Providers, and Pricing plans, see the Amazon Location Service product page.  Amazon Location Service only uses PricingPlanDataSource to calculate billing for your tracker resource. Your data will not be shared with the data provider, and will remain in your AWS account or Region unless you move it.  Valid values: Esri | Here 
      */
     PricingPlanDataSource?: String;
     /**
@@ -1073,7 +1077,7 @@ declare namespace Location {
      */
     MapName: ResourceName;
     /**
-     * The pricing plan selected for the specified map resource.  &lt;p&gt;For additional details and restrictions on each pricing plan option, see the &lt;a href=&quot;https://aws.amazon.com/location/pricing/&quot;&gt;Amazon Location Service pricing page&lt;/a&gt;.&lt;/p&gt; 
+     * The pricing plan selected for the specified map resource.  &lt;p&gt;For additional details and restrictions on each pricing plan option, see &lt;a href=&quot;https://aws.amazon.com/location/pricing/&quot;&gt;Amazon Location Service pricing&lt;/a&gt;.&lt;/p&gt; 
      */
     PricingPlan: PricingPlan;
     /**
@@ -1097,7 +1101,7 @@ declare namespace Location {
      */
     CreateTime: Timestamp;
     /**
-     * The data provider of geospatial data. Indicates one of the available providers:    Esri     Here    For additional details on data providers, see the Amazon Location Service data providers page.
+     * The data provider of geospatial data. Indicates one of the available providers:    Esri     Here    For additional details on data providers, see Amazon Location Service data providers.
      */
     DataSource: String;
     /**
@@ -1117,7 +1121,7 @@ declare namespace Location {
      */
     IndexName: ResourceName;
     /**
-     * The pricing plan selected for the specified place index resource. For additional details and restrictions on each pricing plan option, see the Amazon Location Service pricing page.
+     * The pricing plan selected for the specified place index resource. For additional details and restrictions on each pricing plan option, see Amazon Location Service pricing.
      */
     PricingPlan: PricingPlan;
     /**
@@ -1189,7 +1193,11 @@ declare namespace Location {
      */
     KmsKeyId?: KmsKeyId;
     /**
-     * The pricing plan selected for the specified tracker resource. For additional details and restrictions on each pricing plan option, see the Amazon Location Service pricing page.
+     * The position filtering method of the tracker resource.
+     */
+    PositionFiltering?: PositionFiltering;
+    /**
+     * The pricing plan selected for the specified tracker resource. For additional details and restrictions on each pricing plan option, see Amazon Location Service pricing.
      */
     PricingPlan: PricingPlan;
     /**
@@ -1361,7 +1369,7 @@ declare namespace Location {
   }
   export interface GetMapGlyphsRequest {
     /**
-     * A comma-separated list of fonts to load glyphs from in order of preference. For example, Noto Sans Regular, Arial Unicode. Valid fonts for Esri styles:    VectorEsriDarkGrayCanvas – Ubuntu Medium Italic | Ubuntu Medium | Ubuntu Italic | Ubuntu Regular | Ubuntu Bold    VectorEsriLightGrayCanvas – Ubuntu Italic | Ubuntu Regular | Ubuntu Light | Ubuntu Bold    VectorEsriTopographic – Noto Sans Italic | Noto Sans Regular | Noto Sans Bold | Noto Serif Regular | Roboto Condensed Light Italic    VectorEsriStreets – Arial Regular | Arial Italic | Arial Bold    VectorEsriNavigation – Arial Regular | Arial Italic | Arial Bold    Valid fonts for HERE Technologies styles:     VectorHereBerlin – Fira GO Regular | Fira GO Bold   
+     * A comma-separated list of fonts to load glyphs from in order of preference. For example, Noto Sans Regular, Arial Unicode. Valid fonts stacks for Esri styles:    VectorEsriDarkGrayCanvas – Ubuntu Medium Italic | Ubuntu Medium | Ubuntu Italic | Ubuntu Regular | Ubuntu Bold    VectorEsriLightGrayCanvas – Ubuntu Italic | Ubuntu Regular | Ubuntu Light | Ubuntu Bold    VectorEsriTopographic – Noto Sans Italic | Noto Sans Regular | Noto Sans Bold | Noto Serif Regular | Roboto Condensed Light Italic    VectorEsriStreets – Arial Regular | Arial Italic | Arial Bold    VectorEsriNavigation – Arial Regular | Arial Italic | Arial Bold    Valid font stacks for HERE Technologies styles:    VectorHereBerlin – Fira GO Regular | Fira GO Bold   
      */
     FontStack: String;
     /**
@@ -1663,7 +1671,7 @@ declare namespace Location {
      */
     MapName: ResourceName;
     /**
-     * The pricing plan for the specified map resource. For additional details and restrictions on each pricing plan option, see the Amazon Location Service pricing page.
+     * The pricing plan for the specified map resource. For additional details and restrictions on each pricing plan option, see Amazon Location Service pricing.
      */
     PricingPlan: PricingPlan;
     /**
@@ -1699,7 +1707,7 @@ declare namespace Location {
      */
     CreateTime: Timestamp;
     /**
-     * The data provider of geospatial data. Indicates one of the available providers:    Esri     Here    For additional details on data providers, see the Amazon Location Service data providers page.
+     * The data provider of geospatial data. Indicates one of the available providers:    Esri     Here    For additional details on data providers, see Amazon Location Service data providers.
      */
     DataSource: String;
     /**
@@ -1711,7 +1719,7 @@ declare namespace Location {
      */
     IndexName: ResourceName;
     /**
-     * The pricing plan for the specified place index resource. For additional details and restrictions on each pricing plan option, see the Amazon Location Service pricing page.
+     * The pricing plan for the specified place index resource. For additional details and restrictions on each pricing plan option, see Amazon Location Service pricing.
      */
     PricingPlan: PricingPlan;
     /**
@@ -1836,7 +1844,7 @@ declare namespace Location {
      */
     Description: ResourceDescription;
     /**
-     * The pricing plan for the specified tracker resource. For additional details and restrictions on each pricing plan option, see the Amazon Location Service pricing page.
+     * The pricing plan for the specified tracker resource. For additional details and restrictions on each pricing plan option, see Amazon Location Service pricing.
      */
     PricingPlan: PricingPlan;
     /**
@@ -1855,7 +1863,7 @@ declare namespace Location {
   export type ListTrackersResponseEntryList = ListTrackersResponseEntry[];
   export interface MapConfiguration {
     /**
-     * Specifies the map style selected from an available data provider. For additional information on each map style and to preview each map style, see Esri map styles and HERE map styles. Valid Esri styles:     VectorEsriDarkGrayCanvas – The Esri Dark Gray Canvas map style. A vector basemap with a dark gray, neutral background with minimal colors, labels, and features that's designed to draw attention to your thematic content.     RasterEsriImagery – The Esri Imagery map style. A raster basemap that provides one meter or better satellite and aerial imagery in many parts of the world and lower resolution satellite imagery worldwide.     VectorEsriLightGrayCanvas – The Esri Light Gray Canvas map style, which provides a detailed vector basemap with a light gray, neutral background style with minimal colors, labels, and features that's designed to draw attention to your thematic content.     VectorEsriTopographic – The Esri Light map style, which provides a detailed vector basemap with a classic Esri map style.    VectorEsriStreets – The Esri World Streets map style, which provides a detailed vector basemap for the world symbolized with a classic Esri street map style. The vector tile layer is similar in content and style to the World Street Map raster map.    VectorEsriNavigation – The Esri World Navigation map style, which provides a detailed basemap for the world symbolized with a custom navigation map style that's designed for use during the day in mobile devices.   Valid HERE Technologies styles:     VectorHereBerlin – The HERE Berlin map style is a high contrast detailed base map of the world that blends 3D and 2D rendering.  When using HERE as your data provider, and selecting the Style VectorHereBerlin, you may not use HERE Technologies maps for Asset Management. See the AWS Service Terms for Amazon Location Service.   
+     * Specifies the map style selected from an available data provider. Valid Esri map styles:    VectorEsriDarkGrayCanvas – The Esri Dark Gray Canvas map style. A vector basemap with a dark gray, neutral background with minimal colors, labels, and features that's designed to draw attention to your thematic content.     RasterEsriImagery – The Esri Imagery map style. A raster basemap that provides one meter or better satellite and aerial imagery in many parts of the world and lower resolution satellite imagery worldwide.     VectorEsriLightGrayCanvas – The Esri Light Gray Canvas map style, which provides a detailed vector basemap with a light gray, neutral background style with minimal colors, labels, and features that's designed to draw attention to your thematic content.     VectorEsriTopographic – The Esri Light map style, which provides a detailed vector basemap with a classic Esri map style.    VectorEsriStreets – The Esri World Streets map style, which provides a detailed vector basemap for the world symbolized with a classic Esri street map style. The vector tile layer is similar in content and style to the World Street Map raster map.    VectorEsriNavigation – The Esri World Navigation map style, which provides a detailed basemap for the world symbolized with a custom navigation map style that's designed for use during the day in mobile devices.   Valid HERE Technologies map styles:    VectorHereBerlin – The HERE Berlin map style is a high contrast detailed base map of the world that blends 3D and 2D rendering.  When using HERE as your data provider, and selecting the Style VectorHereBerlin, you may not use HERE Technologies maps for Asset Management. See the AWS Service Terms for Amazon Location Service.   
      */
     Style: MapStyle;
   }
@@ -1907,6 +1915,7 @@ declare namespace Location {
   }
   export type PlaceIndexSearchResultLimit = number;
   export type Position = Double[];
+  export type PositionFiltering = "TimeBased"|"DistanceBased"|string;
   export type PricingPlan = "RequestBasedUsage"|"MobileAssetTracking"|"MobileAssetManagement"|string;
   export interface PutGeofenceRequest {
     /**
@@ -1978,7 +1987,7 @@ declare namespace Location {
   }
   export interface SearchPlaceIndexForPositionSummary {
     /**
-     * The data provider of geospatial data. Indicates one of the available providers:   Esri   HERE   For additional details on data providers, see the Amazon Location Service data providers page.
+     * The data provider of geospatial data. Indicates one of the available providers:   Esri   HERE   For additional details on data providers, see Amazon Location Service data providers.
      */
     DataSource: String;
     /**
@@ -2032,7 +2041,7 @@ declare namespace Location {
      */
     BiasPosition?: Position;
     /**
-     * The data provider of geospatial data. Indicates one of the available providers:   Esri   HERE   For additional details on data providers, see the Amazon Location Service data providers page.
+     * The data provider of geospatial data. Indicates one of the available providers:   Esri   HERE   For additional details on data providers, see Amazon Location Service data providers.
      */
     DataSource: String;
     /**
@@ -2273,6 +2282,10 @@ declare namespace Location {
      * Updates the description for the tracker resource.
      */
     Description?: ResourceDescription;
+    /**
+     * Updates the position filtering for the tracker resource. Valid values:    TimeBased - Location updates are evaluated against linked geofence collections, but not every location update is stored. If your update frequency is more often than 30 seconds, only one update per 30 seconds is stored for each unique device ID.     DistanceBased - If the device has moved less than 30 m (98.4 ft), location updates are ignored. Location updates within this distance are neither evaluated against linked geofence collections, nor stored. This helps control costs by reducing the number of geofence evaluations and device positions to retrieve. Distance-based filtering can also reduce the jitter effect when displaying device trajectory on a map.   
+     */
+    PositionFiltering?: PositionFiltering;
     /**
      * Updates the pricing plan for the tracker resource. For more information about each pricing plan option restrictions, see Amazon Location Service pricing.
      */

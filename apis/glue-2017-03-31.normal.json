@@ -6797,6 +6797,10 @@
         "ConnectionInput": {
           "shape": "ConnectionInput",
           "documentation": "<p>A <code>ConnectionInput</code> object defining the connection to create.</p>"
+        },
+        "Tags": {
+          "shape": "TagsMap",
+          "documentation": "<p>The tags you assign to the connection.</p>"
         }
       }
     },
@@ -10104,7 +10108,8 @@
           "documentation": "<p>The maximum number of partitions to return in a single response.</p>"
         },
         "ExcludeColumnSchema": {
-          "shape": "BooleanNullable"
+          "shape": "BooleanNullable",
+          "documentation": "<p>When true, specifies not returning the partition column schema. Useful when you are interested only in other partition attributes such as partition values or location. This approach avoids the problem of a large response by not returning duplicate data.</p>"
         }
       }
     },

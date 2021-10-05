@@ -2499,6 +2499,10 @@ declare namespace Glue {
      * A ConnectionInput object defining the connection to create.
      */
     ConnectionInput: ConnectionInput;
+    /**
+     * The tags you assign to the connection.
+     */
+    Tags?: TagsMap;
   }
   export interface CreateConnectionResponse {
   }
@@ -4841,6 +4845,9 @@ declare namespace Glue {
      * The maximum number of partitions to return in a single response.
      */
     MaxResults?: PageSize;
+    /**
+     * When true, specifies not returning the partition column schema. Useful when you are interested only in other partition attributes such as partition values or location. This approach avoids the problem of a large response by not returning duplicate data.
+     */
     ExcludeColumnSchema?: BooleanNullable;
   }
   export interface GetPartitionsResponse {

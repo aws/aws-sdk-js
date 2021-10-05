@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "Signer",
-  "description": "Fix the bug that httpChecksumRequired trait is not honored in SigV2"
-}

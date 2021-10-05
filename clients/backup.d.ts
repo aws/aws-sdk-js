@@ -36,11 +36,11 @@ declare class Backup extends Service {
    */
   createBackupVault(callback?: (err: AWSError, data: Backup.Types.CreateBackupVaultOutput) => void): Request<Backup.Types.CreateBackupVaultOutput, AWSError>;
   /**
-   * Creates a framework with one or more controls. A framework is a collection of controls that you can use to evaluate your backup practices. By using pre-built customizable controls to define your policies, you can evaluate whether your backup practices comply with your policies. To get insights into the compliance status of your frameworks, you can set up automatic daily reports.
+   * Creates a framework with one or more controls. A framework is a collection of controls that you can use to evaluate your backup practices. By using pre-built customizable controls to define your policies, you can evaluate whether your backup practices comply with your policies and which resources are not yet in compliance.
    */
   createFramework(params: Backup.Types.CreateFrameworkInput, callback?: (err: AWSError, data: Backup.Types.CreateFrameworkOutput) => void): Request<Backup.Types.CreateFrameworkOutput, AWSError>;
   /**
-   * Creates a framework with one or more controls. A framework is a collection of controls that you can use to evaluate your backup practices. By using pre-built customizable controls to define your policies, you can evaluate whether your backup practices comply with your policies. To get insights into the compliance status of your frameworks, you can set up automatic daily reports.
+   * Creates a framework with one or more controls. A framework is a collection of controls that you can use to evaluate your backup practices. By using pre-built customizable controls to define your policies, you can evaluate whether your backup practices comply with your policies and which resources are not yet in compliance.
    */
   createFramework(callback?: (err: AWSError, data: Backup.Types.CreateFrameworkOutput) => void): Request<Backup.Types.CreateFrameworkOutput, AWSError>;
   /**
@@ -903,7 +903,7 @@ declare namespace Backup {
   export type ControlName = string;
   export interface ControlScope {
     /**
-     * Describes whether the control scope includes a specific resource identified by its unique Amazon Resource Name (ARN).
+     * The ID of the only Amazon Web Services resource that you want your control scope to contain.
      */
     ComplianceResourceIds?: ComplianceResourceIdList;
     /**
@@ -1126,11 +1126,11 @@ declare namespace Backup {
      */
     ReportDeliveryChannel: ReportDeliveryChannel;
     /**
-     * Identifies the report template for the report. Reports are built using a report template. The report templates are:  BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT 
+     * Identifies the report template for the report. Reports are built using a report template. The report templates are:  RESOURCE_COMPLIANCE_REPORT | CONTROL_COMPLIANCE_REPORT | BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT  If the report template is RESOURCE_COMPLIANCE_REPORT or CONTROL_COMPLIANCE_REPORT, this API resource also describes the report coverage by Amazon Web Services Regions and frameworks.
      */
     ReportSetting: ReportSetting;
     /**
-     * Metadata that you can assign to help organize the frameworks that you create. Each tag is a key-value pair.
+     * Metadata that you can assign to help organize the report plans that you create. Each tag is a key-value pair.
      */
     ReportPlanTags?: stringMap;
     /**
@@ -1147,6 +1147,10 @@ declare namespace Backup {
      * An Amazon Resource Name (ARN) that uniquely identifies a resource. The format of the ARN depends on the resource type.
      */
     ReportPlanArn?: ARN;
+    /**
+     * The date and time a backup vault is created, in Unix format and Coordinated Universal Time (UTC). The value of CreationTime is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
+     */
+    CreationTime?: timestamp;
   }
   export type CronExpression = string;
   export interface DeleteBackupPlanInput {
@@ -1848,7 +1852,7 @@ declare namespace Backup {
   }
   export interface GetSupportedResourceTypesOutput {
     /**
-     * Contains a string with the supported Amazon Web Services resource types:    DynamoDB for Amazon DynamoDB    EBS for Amazon Elastic Block Store    EC2 for Amazon Elastic Compute Cloud    EFS for Amazon Elastic File System    RDS for Amazon Relational Database Service    Aurora for Amazon Aurora    Storage Gateway for Storage Gateway  
+     * Contains a string with the supported Amazon Web Services resource types:    Aurora for Amazon Aurora    DynamoDB for Amazon DynamoDB    EBS for Amazon Elastic Block Store    EC2 for Amazon Elastic Compute Cloud    EFS for Amazon Elastic File System    FSX for Amazon FSx    RDS for Amazon Relational Database Service    Storage Gateway for Storage Gateway  
      */
     ResourceTypes?: ResourceTypes;
   }
@@ -2507,7 +2511,7 @@ declare namespace Backup {
      */
     ReportPlanArn?: ARN;
     /**
-     * Identifies the report template for the report. Reports are built using a report template. The report templates are:   BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT 
+     * Identifies the report template for the report. Reports are built using a report template. The report templates are:   RESOURCE_COMPLIANCE_REPORT | CONTROL_COMPLIANCE_REPORT | BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT 
      */
     ReportTemplate?: string;
     /**
@@ -2547,7 +2551,7 @@ declare namespace Backup {
      */
     ReportPlanDescription?: ReportPlanDescription;
     /**
-     * Identifies the report template for the report. Reports are built using a report template. The report templates are:  BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT 
+     * Identifies the report template for the report. Reports are built using a report template. The report templates are:  RESOURCE_COMPLIANCE_REPORT | CONTROL_COMPLIANCE_REPORT | BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT  If the report template is RESOURCE_COMPLIANCE_REPORT or CONTROL_COMPLIANCE_REPORT, this API resource also describes the report coverage by Amazon Web Services Regions and frameworks.
      */
     ReportSetting?: ReportSetting;
     /**
@@ -2576,9 +2580,17 @@ declare namespace Backup {
   export type ReportPlanName = string;
   export interface ReportSetting {
     /**
-     * Identifies the report template for the report. Reports are built using a report template. The report templates are:  BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT 
+     * Identifies the report template for the report. Reports are built using a report template. The report templates are:  RESOURCE_COMPLIANCE_REPORT | CONTROL_COMPLIANCE_REPORT | BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT 
      */
     ReportTemplate: string;
+    /**
+     * The Amazon Resource Names (ARNs) of the frameworks a report covers.
+     */
+    FrameworkArns?: stringList;
+    /**
+     * The number of frameworks a report covers.
+     */
+    NumberOfFrameworks?: integer;
   }
   export type ResourceArns = ARN[];
   export type ResourceType = string;
@@ -2924,7 +2936,7 @@ declare namespace Backup {
      */
     ReportDeliveryChannel?: ReportDeliveryChannel;
     /**
-     * Identifies the report template for the report. Reports are built using a report template. The report templates are:  BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT 
+     * Identifies the report template for the report. Reports are built using a report template. The report templates are:  RESOURCE_COMPLIANCE_REPORT | CONTROL_COMPLIANCE_REPORT | BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT  If the report template is RESOURCE_COMPLIANCE_REPORT or CONTROL_COMPLIANCE_REPORT, this API resource also describes the report coverage by Amazon Web Services Regions and frameworks.
      */
     ReportSetting?: ReportSetting;
     /**

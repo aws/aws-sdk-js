@@ -496,6 +496,20 @@
       },
       "documentation": "<p>Cancels the specified Capacity Reservation, releases the reserved capacity, and changes the Capacity Reservation's state to <code>cancelled</code>.</p> <p>Instances running in the reserved capacity continue running until you stop them. Stopped instances that target the Capacity Reservation can no longer launch. Modify these instances to either target a different Capacity Reservation, launch On-Demand Instance capacity, or run in any open Capacity Reservation that has matching attributes and sufficient capacity.</p>"
     },
+    "CancelCapacityReservationFleets": {
+      "name": "CancelCapacityReservationFleets",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CancelCapacityReservationFleetsRequest"
+      },
+      "output": {
+        "shape": "CancelCapacityReservationFleetsResult"
+      },
+      "documentation": "<p>Cancels one or more Capacity Reservation Fleets. When you cancel a Capacity Reservation Fleet, the following happens:</p> <ul> <li> <p>The Capacity Reservation Fleet's status changes to <code>cancelled</code>.</p> </li> <li> <p>The individual Capacity Reservations in the Fleet are cancelled. Instances running in the Capacity Reservations at the time of cancelling the Fleet continue to run in shared capacity.</p> </li> <li> <p>The Fleet stops creating new Capacity Reservations.</p> </li> </ul>"
+    },
     "CancelConversionTask": {
       "name": "CancelConversionTask",
       "http": {
@@ -643,6 +657,20 @@
         "shape": "CreateCapacityReservationResult"
       },
       "documentation": "<p>Creates a new Capacity Reservation with the specified attributes.</p> <p>Capacity Reservations enable you to reserve capacity for your Amazon EC2 instances in a specific Availability Zone for any duration. This gives you the flexibility to selectively add capacity reservations and still get the Regional RI discounts for that usage. By creating Capacity Reservations, you ensure that you always have access to Amazon EC2 capacity when you need it, for as long as you need it. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-capacity-reservations.html\">Capacity Reservations</a> in the <i>Amazon EC2 User Guide</i>.</p> <p>Your request to create a Capacity Reservation could fail if Amazon EC2 does not have sufficient capacity to fulfill the request. If your request fails due to Amazon EC2 capacity constraints, either try again at a later time, try in a different Availability Zone, or request a smaller capacity reservation. If your application is flexible across instance types and sizes, try to create a Capacity Reservation with different instance attributes.</p> <p>Your request could also fail if the requested quantity exceeds your On-Demand Instance limit for the selected instance type. If your request fails due to limit constraints, increase your On-Demand Instance limit for the required instance type and try again. For more information about increasing your instance limits, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html\">Amazon EC2 Service Quotas</a> in the <i>Amazon EC2 User Guide</i>.</p>"
+    },
+    "CreateCapacityReservationFleet": {
+      "name": "CreateCapacityReservationFleet",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateCapacityReservationFleetRequest"
+      },
+      "output": {
+        "shape": "CreateCapacityReservationFleetResult"
+      },
+      "documentation": "<p>Creates a Capacity Reservation Fleet. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/work-with-cr-fleets.html#create-crfleet\">Create a Capacity Reservation Fleet</a> in the Amazon EC2 User Guide.</p>"
     },
     "CreateCarrierGateway": {
       "name": "CreateCarrierGateway",
@@ -2405,6 +2433,20 @@
         "shape": "DescribeByoipCidrsResult"
       },
       "documentation": "<p>Describes the IP address ranges that were specified in calls to <a>ProvisionByoipCidr</a>.</p> <p>To describe the address pools that were created when you provisioned the address ranges, use <a>DescribePublicIpv4Pools</a> or <a>DescribeIpv6Pools</a>.</p>"
+    },
+    "DescribeCapacityReservationFleets": {
+      "name": "DescribeCapacityReservationFleets",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeCapacityReservationFleetsRequest"
+      },
+      "output": {
+        "shape": "DescribeCapacityReservationFleetsResult"
+      },
+      "documentation": "<p>Describes one or more Capacity Reservation Fleets.</p>"
     },
     "DescribeCapacityReservations": {
       "name": "DescribeCapacityReservations",
@@ -5041,6 +5083,20 @@
         "shape": "ModifyCapacityReservationResult"
       },
       "documentation": "<p>Modifies a Capacity Reservation's capacity and the conditions under which it is to be released. You cannot change a Capacity Reservation's instance type, EBS optimization, instance store settings, platform, Availability Zone, or instance eligibility. If you need to modify any of these attributes, we recommend that you cancel the Capacity Reservation, and then create a new one with the required attributes.</p>"
+    },
+    "ModifyCapacityReservationFleet": {
+      "name": "ModifyCapacityReservationFleet",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ModifyCapacityReservationFleetRequest"
+      },
+      "output": {
+        "shape": "ModifyCapacityReservationFleetResult"
+      },
+      "documentation": "<p>Modifies a Capacity Reservation Fleet.</p> <p>When you modify the total target capacity of a Capacity Reservation Fleet, the Fleet automatically creates new Capacity Reservations, or modifies or cancels existing Capacity Reservations in the Fleet to meet the new total target capacity. When you modify the end date for the Fleet, the end dates for all of the individual Capacity Reservations in the Fleet are updated accordingly.</p>"
     },
     "ModifyClientVpnEndpoint": {
       "name": "ModifyClientVpnEndpoint",
@@ -8998,6 +9054,60 @@
       },
       "documentation": "<p>Contains the output of CancelBundleTask.</p>"
     },
+    "CancelCapacityReservationFleetError": {
+      "type": "structure",
+      "members": {
+        "Code": {
+          "shape": "CancelCapacityReservationFleetErrorCode",
+          "documentation": "<p>The error code.</p>",
+          "locationName": "code"
+        },
+        "Message": {
+          "shape": "CancelCapacityReservationFleetErrorMessage",
+          "documentation": "<p>The error message.</p>",
+          "locationName": "message"
+        }
+      },
+      "documentation": "<p>Describes a Capacity Reservation Fleet cancellation error.</p>"
+    },
+    "CancelCapacityReservationFleetErrorCode": {
+      "type": "string"
+    },
+    "CancelCapacityReservationFleetErrorMessage": {
+      "type": "string"
+    },
+    "CancelCapacityReservationFleetsRequest": {
+      "type": "structure",
+      "required": [
+        "CapacityReservationFleetIds"
+      ],
+      "members": {
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        },
+        "CapacityReservationFleetIds": {
+          "shape": "CapacityReservationFleetIdSet",
+          "documentation": "<p>The IDs of the Capacity Reservation Fleets to cancel.</p>",
+          "locationName": "CapacityReservationFleetId"
+        }
+      }
+    },
+    "CancelCapacityReservationFleetsResult": {
+      "type": "structure",
+      "members": {
+        "SuccessfulFleetCancellations": {
+          "shape": "CapacityReservationFleetCancellationStateSet",
+          "documentation": "<p>Information about the Capacity Reservation Fleets that were successfully cancelled.</p>",
+          "locationName": "successfulFleetCancellationSet"
+        },
+        "FailedFleetCancellations": {
+          "shape": "FailedCapacityReservationFleetCancellationResultSet",
+          "documentation": "<p>Information about the Capacity Reservation Fleets that could not be cancelled.</p>",
+          "locationName": "failedFleetCancellationSet"
+        }
+      }
+    },
     "CancelCapacityReservationRequest": {
       "type": "structure",
       "required": [
@@ -9395,9 +9505,139 @@
           "shape": "OutpostArn",
           "documentation": "<p>The Amazon Resource Name (ARN) of the Outpost on which the Capacity Reservation was created.</p>",
           "locationName": "outpostArn"
+        },
+        "CapacityReservationFleetId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the Capacity Reservation Fleet to which the Capacity Reservation belongs. Only valid for Capacity Reservations that were created by a Capacity Reservation Fleet.</p>",
+          "locationName": "capacityReservationFleetId"
         }
       },
       "documentation": "<p>Describes a Capacity Reservation.</p>"
+    },
+    "CapacityReservationFleet": {
+      "type": "structure",
+      "members": {
+        "CapacityReservationFleetId": {
+          "shape": "CapacityReservationFleetId",
+          "documentation": "<p>The ID of the Capacity Reservation Fleet.</p>",
+          "locationName": "capacityReservationFleetId"
+        },
+        "CapacityReservationFleetArn": {
+          "shape": "String",
+          "documentation": "<p>The ARN of the Capacity Reservation Fleet.</p>",
+          "locationName": "capacityReservationFleetArn"
+        },
+        "State": {
+          "shape": "CapacityReservationFleetState",
+          "documentation": "<p>The state of the Capacity Reservation Fleet. Possible states include:</p> <ul> <li> <p> <code>submitted</code> - The Capacity Reservation Fleet request has been submitted and Amazon Elastic Compute Cloud is preparing to create the Capacity Reservations.</p> </li> <li> <p> <code>modifying</code> - The Capacity Reservation Fleet is being modified. The Fleet remains in this state until the modification is complete.</p> </li> <li> <p> <code>active</code> - The Capacity Reservation Fleet has fulfilled its total target capacity and it is attempting to maintain this capacity. The Fleet remains in this state until it is modified or deleted.</p> </li> <li> <p> <code>partially_fulfilled</code> - The Capacity Reservation Fleet has partially fulfilled its total target capacity. There is insufficient Amazon EC2 to fulfill the total target capacity. The Fleet is attempting to asynchronously fulfill its total target capacity.</p> </li> <li> <p> <code>expiring</code> - The Capacity Reservation Fleet has reach its end date and it is in the process of expiring. One or more of its Capacity reservations might still be active.</p> </li> <li> <p> <code>expired</code> - The Capacity Reservation Fleet has reach its end date. The Fleet and its Capacity Reservations are expired. The Fleet can't create new Capacity Reservations.</p> </li> <li> <p> <code>cancelling</code> - The Capacity Reservation Fleet is in the process of being cancelled. One or more of its Capacity reservations might still be active.</p> </li> <li> <p> <code>cancelled</code> - The Capacity Reservation Fleet has been manually cancelled. The Fleet and its Capacity Reservations are cancelled and the Fleet can't create new Capacity Reservations.</p> </li> <li> <p> <code>failed</code> - The Capacity Reservation Fleet failed to reserve capacity for the specified instance types.</p> </li> </ul>",
+          "locationName": "state"
+        },
+        "TotalTargetCapacity": {
+          "shape": "Integer",
+          "documentation": "<p>The total number of capacity units for which the Capacity Reservation Fleet reserves capacity. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/crfleet-concepts.html#target-capacity\">Total target capacity</a> in the Amazon EC2 User Guide.</p>",
+          "locationName": "totalTargetCapacity"
+        },
+        "TotalFulfilledCapacity": {
+          "shape": "Double",
+          "documentation": "<p>The capacity units that have been fulfilled.</p>",
+          "locationName": "totalFulfilledCapacity"
+        },
+        "Tenancy": {
+          "shape": "FleetCapacityReservationTenancy",
+          "documentation": "<p>The tenancy of the Capacity Reservation Fleet. Tenancies include:</p> <ul> <li> <p> <code>default</code> - The Capacity Reservation Fleet is created on hardware that is shared with other Amazon Web Services accounts.</p> </li> <li> <p> <code>dedicated</code> - The Capacity Reservation Fleet is created on single-tenant hardware that is dedicated to a single Amazon Web Services account.</p> </li> </ul>",
+          "locationName": "tenancy"
+        },
+        "EndDate": {
+          "shape": "MillisecondDateTime",
+          "documentation": "<p>The date and time at which the Capacity Reservation Fleet expires.</p>",
+          "locationName": "endDate"
+        },
+        "CreateTime": {
+          "shape": "MillisecondDateTime",
+          "documentation": "<p>The date and time at which the Capacity Reservation Fleet was created.</p>",
+          "locationName": "createTime"
+        },
+        "InstanceMatchCriteria": {
+          "shape": "FleetInstanceMatchCriteria",
+          "documentation": "<p>Indicates the type of instance launches that the Capacity Reservation Fleet accepts. All Capacity Reservations in the Fleet inherit this instance matching criteria.</p> <p>Currently, Capacity Reservation Fleets support <code>open</code> instance matching criteria only. This means that instances that have matching attributes (instance type, platform, and Availability Zone) run in the Capacity Reservations automatically. Instances do not need to explicitly target a Capacity Reservation Fleet to use its reserved capacity.</p>",
+          "locationName": "instanceMatchCriteria"
+        },
+        "AllocationStrategy": {
+          "shape": "String",
+          "documentation": "<p>The strategy used by the Capacity Reservation Fleet to determine which of the specified instance types to use. For more information, see For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/crfleet-concepts.html#allocation-strategy\"> Allocation strategy</a> in the Amazon EC2 User Guide.</p>",
+          "locationName": "allocationStrategy"
+        },
+        "InstanceTypeSpecifications": {
+          "shape": "FleetCapacityReservationSet",
+          "documentation": "<p>Information about the instance types for which to reserve the capacity.</p>",
+          "locationName": "instanceTypeSpecificationSet"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>The tags assigned to the Capacity Reservation Fleet.</p>",
+          "locationName": "tagSet"
+        }
+      },
+      "documentation": "<p>Information about a Capacity Reservation Fleet.</p>"
+    },
+    "CapacityReservationFleetCancellationState": {
+      "type": "structure",
+      "members": {
+        "CurrentFleetState": {
+          "shape": "CapacityReservationFleetState",
+          "documentation": "<p>The current state of the Capacity Reservation Fleet.</p>",
+          "locationName": "currentFleetState"
+        },
+        "PreviousFleetState": {
+          "shape": "CapacityReservationFleetState",
+          "documentation": "<p>The previous state of the Capacity Reservation Fleet.</p>",
+          "locationName": "previousFleetState"
+        },
+        "CapacityReservationFleetId": {
+          "shape": "CapacityReservationFleetId",
+          "documentation": "<p>The ID of the Capacity Reservation Fleet that was successfully cancelled.</p>",
+          "locationName": "capacityReservationFleetId"
+        }
+      },
+      "documentation": "<p>Describes a Capacity Reservation Fleet that was successfully cancelled.</p>"
+    },
+    "CapacityReservationFleetCancellationStateSet": {
+      "type": "list",
+      "member": {
+        "shape": "CapacityReservationFleetCancellationState",
+        "locationName": "item"
+      }
+    },
+    "CapacityReservationFleetId": {
+      "type": "string"
+    },
+    "CapacityReservationFleetIdSet": {
+      "type": "list",
+      "member": {
+        "shape": "CapacityReservationFleetId",
+        "locationName": "item"
+      }
+    },
+    "CapacityReservationFleetSet": {
+      "type": "list",
+      "member": {
+        "shape": "CapacityReservationFleet",
+        "locationName": "item"
+      }
+    },
+    "CapacityReservationFleetState": {
+      "type": "string",
+      "enum": [
+        "submitted",
+        "modifying",
+        "active",
+        "partially_fulfilled",
+        "expiring",
+        "expired",
+        "cancelling",
+        "cancelled",
+        "failed"
+      ]
     },
     "CapacityReservationGroup": {
       "type": "structure",
@@ -10823,6 +11063,114 @@
         }
       },
       "documentation": "<p>The CPU options for the instance. Both the core count and threads per core must be specified in the request.</p>"
+    },
+    "CreateCapacityReservationFleetRequest": {
+      "type": "structure",
+      "required": [
+        "InstanceTypeSpecifications",
+        "TotalTargetCapacity"
+      ],
+      "members": {
+        "AllocationStrategy": {
+          "shape": "String",
+          "documentation": "<p>The strategy used by the Capacity Reservation Fleet to determine which of the specified instance types to use. Currently, only the <code>prioritized</code> allocation strategy is supported. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/crfleet-concepts.html#allocation-strategy\"> Allocation strategy</a> in the Amazon EC2 User Guide.</p> <p>Valid values: <code>prioritized</code> </p>"
+        },
+        "ClientToken": {
+          "shape": "String",
+          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensure Idempotency</a>.</p>",
+          "idempotencyToken": true
+        },
+        "InstanceTypeSpecifications": {
+          "shape": "ReservationFleetInstanceSpecificationList",
+          "documentation": "<p>Information about the instance types for which to reserve the capacity.</p>",
+          "locationName": "InstanceTypeSpecification"
+        },
+        "Tenancy": {
+          "shape": "FleetCapacityReservationTenancy",
+          "documentation": "<p>Indicates the tenancy of the Capacity Reservation Fleet. All Capacity Reservations in the Fleet inherit this tenancy. The Capacity Reservation Fleet can have one of the following tenancy settings:</p> <ul> <li> <p> <code>default</code> - The Capacity Reservation Fleet is created on hardware that is shared with other Amazon Web Services accounts.</p> </li> <li> <p> <code>dedicated</code> - The Capacity Reservations are created on single-tenant hardware that is dedicated to a single Amazon Web Services account.</p> </li> </ul>"
+        },
+        "TotalTargetCapacity": {
+          "shape": "Integer",
+          "documentation": "<p>The total number of capacity units to be reserved by the Capacity Reservation Fleet. This value, together with the instance type weights that you assign to each instance type used by the Fleet determine the number of instances for which the Fleet reserves capacity. Both values are based on units that make sense for your workload. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/crfleet-concepts.html#target-capacity\"> Total target capacity</a> in the Amazon EC2 User Guide.</p>"
+        },
+        "EndDate": {
+          "shape": "MillisecondDateTime",
+          "documentation": "<p>The date and time at which the Capacity Reservation Fleet expires. When the Capacity Reservation Fleet expires, its state changes to <code>expired</code> and all of the Capacity Reservations in the Fleet expire.</p> <p>The Capacity Reservation Fleet expires within an hour after the specified time. For example, if you specify <code>5/31/2019</code>, <code>13:30:55</code>, the Capacity Reservation Fleet is guaranteed to expire between <code>13:30:55</code> and <code>14:30:55</code> on <code>5/31/2019</code>. </p>"
+        },
+        "InstanceMatchCriteria": {
+          "shape": "FleetInstanceMatchCriteria",
+          "documentation": "<p>Indicates the type of instance launches that the Capacity Reservation Fleet accepts. All Capacity Reservations in the Fleet inherit this instance matching criteria.</p> <p>Currently, Capacity Reservation Fleets support <code>open</code> instance matching criteria only. This means that instances that have matching attributes (instance type, platform, and Availability Zone) run in the Capacity Reservations automatically. Instances do not need to explicitly target a Capacity Reservation Fleet to use its reserved capacity.</p>"
+        },
+        "TagSpecifications": {
+          "shape": "TagSpecificationList",
+          "documentation": "<p>The tags to assign to the Capacity Reservation Fleet. The tags are automatically assigned to the Capacity Reservations in the Fleet.</p>",
+          "locationName": "TagSpecification"
+        },
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        }
+      }
+    },
+    "CreateCapacityReservationFleetResult": {
+      "type": "structure",
+      "members": {
+        "CapacityReservationFleetId": {
+          "shape": "CapacityReservationFleetId",
+          "documentation": "<p>The ID of the Capacity Reservation Fleet.</p>",
+          "locationName": "capacityReservationFleetId"
+        },
+        "State": {
+          "shape": "CapacityReservationFleetState",
+          "documentation": "<p>The status of the Capacity Reservation Fleet.</p>",
+          "locationName": "state"
+        },
+        "TotalTargetCapacity": {
+          "shape": "Integer",
+          "documentation": "<p>The total number of capacity units for which the Capacity Reservation Fleet reserves capacity.</p>",
+          "locationName": "totalTargetCapacity"
+        },
+        "TotalFulfilledCapacity": {
+          "shape": "Double",
+          "documentation": "<p>The requested capacity units that have been successfully reserved.</p>",
+          "locationName": "totalFulfilledCapacity"
+        },
+        "InstanceMatchCriteria": {
+          "shape": "FleetInstanceMatchCriteria",
+          "documentation": "<p>The instance matching criteria for the Capacity Reservation Fleet.</p>",
+          "locationName": "instanceMatchCriteria"
+        },
+        "AllocationStrategy": {
+          "shape": "String",
+          "documentation": "<p>The allocation strategy used by the Capacity Reservation Fleet.</p>",
+          "locationName": "allocationStrategy"
+        },
+        "CreateTime": {
+          "shape": "MillisecondDateTime",
+          "documentation": "<p>The date and time at which the Capacity Reservation Fleet was created.</p>",
+          "locationName": "createTime"
+        },
+        "EndDate": {
+          "shape": "MillisecondDateTime",
+          "documentation": "<p>The date and time at which the Capacity Reservation Fleet expires.</p>",
+          "locationName": "endDate"
+        },
+        "Tenancy": {
+          "shape": "FleetCapacityReservationTenancy",
+          "documentation": "<p>Indicates the tenancy of Capacity Reservation Fleet.</p>",
+          "locationName": "tenancy"
+        },
+        "FleetCapacityReservations": {
+          "shape": "FleetCapacityReservationSet",
+          "documentation": "<p>Information about the individual Capacity Reservations in the Capacity Reservation Fleet.</p>",
+          "locationName": "fleetCapacityReservationSet"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>The tags assigned to the Capacity Reservation Fleet.</p>",
+          "locationName": "tagSet"
+        }
+      }
     },
     "CreateCapacityReservationRequest": {
       "type": "structure",
@@ -16092,6 +16440,53 @@
           "shape": "ByoipCidrSet",
           "documentation": "<p>Information about your address ranges.</p>",
           "locationName": "byoipCidrSet"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>",
+          "locationName": "nextToken"
+        }
+      }
+    },
+    "DescribeCapacityReservationFleetsMaxResults": {
+      "type": "integer",
+      "max": 100,
+      "min": 1
+    },
+    "DescribeCapacityReservationFleetsRequest": {
+      "type": "structure",
+      "members": {
+        "CapacityReservationFleetIds": {
+          "shape": "CapacityReservationFleetIdSet",
+          "documentation": "<p>The IDs of the Capacity Reservation Fleets to describe.</p>",
+          "locationName": "CapacityReservationFleetId"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>The token to use to retrieve the next page of results.</p>"
+        },
+        "MaxResults": {
+          "shape": "DescribeCapacityReservationFleetsMaxResults",
+          "documentation": "<p>The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the returned <code>nextToken</code> value. This value can be between 5 and 500. If <code>maxResults</code> is given a larger value than 500, you receive an error.</p>"
+        },
+        "Filters": {
+          "shape": "FilterList",
+          "documentation": "<p>One or more filters.</p> <ul> <li> <p> <code>state</code> - The state of the Fleet (<code>submitted</code> | <code>modifying</code> | <code>active</code> | <code>partially_fulfilled</code> | <code>expiring</code> | <code>expired</code> | <code>cancelling</code> | <code>cancelled</code> | <code>failed</code>).</p> </li> <li> <p> <code>instance-match-criteria</code> - The instance matching criteria for the Fleet. Only <code>open</code> is supported.</p> </li> <li> <p> <code>tenancy</code> - The tenancy of the Fleet (<code>default</code> | <code>dedicated</code>).</p> </li> <li> <p> <code>allocation-strategy</code> - The allocation strategy used by the Fleet. Only <code>prioritized</code> is supported.</p> </li> </ul>",
+          "locationName": "Filter"
+        },
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        }
+      }
+    },
+    "DescribeCapacityReservationFleetsResult": {
+      "type": "structure",
+      "members": {
+        "CapacityReservationFleets": {
+          "shape": "CapacityReservationFleetSet",
+          "documentation": "<p>Information about the Capacity Reservation Fleets.</p>",
+          "locationName": "capacityReservationFleetSet"
         },
         "NextToken": {
           "shape": "String",
@@ -22459,6 +22854,11 @@
     "Double": {
       "type": "double"
     },
+    "DoubleWithConstraints": {
+      "type": "double",
+      "max": 99.999,
+      "min": 0.001
+    },
     "EbsBlockDevice": {
       "type": "structure",
       "members": {
@@ -24038,6 +24438,29 @@
     "ExportVmTaskId": {
       "type": "string"
     },
+    "FailedCapacityReservationFleetCancellationResult": {
+      "type": "structure",
+      "members": {
+        "CapacityReservationFleetId": {
+          "shape": "CapacityReservationFleetId",
+          "documentation": "<p>The ID of the Capacity Reservation Fleet that could not be cancelled.</p>",
+          "locationName": "capacityReservationFleetId"
+        },
+        "CancelCapacityReservationFleetError": {
+          "shape": "CancelCapacityReservationFleetError",
+          "documentation": "<p>Information about the Capacity Reservation Fleet cancellation error.</p>",
+          "locationName": "cancelCapacityReservationFleetError"
+        }
+      },
+      "documentation": "<p>Describes a Capacity Reservation Fleet that could not be cancelled.</p>"
+    },
+    "FailedCapacityReservationFleetCancellationResultSet": {
+      "type": "list",
+      "member": {
+        "shape": "FailedCapacityReservationFleetCancellationResult",
+        "locationName": "item"
+      }
+    },
     "FailedQueuedPurchaseDeletion": {
       "type": "structure",
       "members": {
@@ -24130,6 +24553,80 @@
         "pending_fulfillment",
         "pending_termination",
         "fulfilled"
+      ]
+    },
+    "FleetCapacityReservation": {
+      "type": "structure",
+      "members": {
+        "CapacityReservationId": {
+          "shape": "CapacityReservationId",
+          "documentation": "<p>The ID of the Capacity Reservation.</p>",
+          "locationName": "capacityReservationId"
+        },
+        "AvailabilityZoneId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the Availability Zone in which the Capacity Reservation reserves capacity.</p>",
+          "locationName": "availabilityZoneId"
+        },
+        "InstanceType": {
+          "shape": "InstanceType",
+          "documentation": "<p>The instance type for which the Capacity Reservation reserves capacity.</p>",
+          "locationName": "instanceType"
+        },
+        "InstancePlatform": {
+          "shape": "CapacityReservationInstancePlatform",
+          "documentation": "<p>The type of operating system for which the Capacity Reservation reserves capacity.</p>",
+          "locationName": "instancePlatform"
+        },
+        "AvailabilityZone": {
+          "shape": "String",
+          "documentation": "<p>The Availability Zone in which the Capacity Reservation reserves capacity.</p>",
+          "locationName": "availabilityZone"
+        },
+        "TotalInstanceCount": {
+          "shape": "Integer",
+          "documentation": "<p>The total number of instances for which the Capacity Reservation reserves capacity.</p>",
+          "locationName": "totalInstanceCount"
+        },
+        "FulfilledCapacity": {
+          "shape": "Double",
+          "documentation": "<p>The number of capacity units fulfilled by the Capacity Reservation. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/crfleet-concepts.html#target-capacity\"> Total target capacity</a> in the Amazon EC2 User Guide.</p>",
+          "locationName": "fulfilledCapacity"
+        },
+        "EbsOptimized": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether the Capacity Reservation reserves capacity for EBS-optimized instance types.</p>",
+          "locationName": "ebsOptimized"
+        },
+        "CreateDate": {
+          "shape": "MillisecondDateTime",
+          "documentation": "<p>The date and time at which the Capacity Reservation was created.</p>",
+          "locationName": "createDate"
+        },
+        "Weight": {
+          "shape": "DoubleWithConstraints",
+          "documentation": "<p>The weight of the instance type in the Capacity Reservation Fleet. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/crfleet-concepts.html#instance-weight\"> Instance type weight</a> in the Amazon EC2 User Guide.</p>",
+          "locationName": "weight"
+        },
+        "Priority": {
+          "shape": "IntegerWithConstraints",
+          "documentation": "<p>The priority of the instance type in the Capacity Reservation Fleet. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/crfleet-concepts.html#instance-priority\"> Instance type priority</a> in the Amazon EC2 User Guide.</p>",
+          "locationName": "priority"
+        }
+      },
+      "documentation": "<p>Information about a Capacity Reservation in a Capacity Reservation Fleet.</p>"
+    },
+    "FleetCapacityReservationSet": {
+      "type": "list",
+      "member": {
+        "shape": "FleetCapacityReservation",
+        "locationName": "item"
+      }
+    },
+    "FleetCapacityReservationTenancy": {
+      "type": "string",
+      "enum": [
+        "default"
       ]
     },
     "FleetCapacityReservationUsageStrategy": {
@@ -24272,6 +24769,12 @@
       "member": {
         "shape": "FleetId"
       }
+    },
+    "FleetInstanceMatchCriteria": {
+      "type": "string",
+      "enum": [
+        "open"
+      ]
     },
     "FleetLaunchTemplateConfig": {
       "type": "structure",
@@ -28933,7 +29436,7 @@
           "queryName": "Ipv6Addresses"
         },
         "NetworkInterfaceId": {
-          "shape": "String",
+          "shape": "NetworkInterfaceId",
           "documentation": "<p>The ID of the network interface.</p> <p>If you are creating a Spot Fleet, omit this parameter because you can’t specify a network interface ID in a launch specification.</p>",
           "locationName": "networkInterfaceId"
         },
@@ -29906,6 +30409,10 @@
     },
     "Integer": {
       "type": "integer"
+    },
+    "IntegerWithConstraints": {
+      "type": "integer",
+      "min": 0
     },
     "IntegrateServices": {
       "type": "structure",
@@ -31382,7 +31889,7 @@
           "locationName": "spotPrice"
         },
         "SubnetId": {
-          "shape": "String",
+          "shape": "SubnetId",
           "documentation": "<p>The ID of the subnet in which to launch the instances.</p>",
           "locationName": "subnetId"
         },
@@ -32449,6 +32956,44 @@
         "opted-in",
         "not-opted-in"
       ]
+    },
+    "ModifyCapacityReservationFleetRequest": {
+      "type": "structure",
+      "required": [
+        "CapacityReservationFleetId"
+      ],
+      "members": {
+        "CapacityReservationFleetId": {
+          "shape": "CapacityReservationFleetId",
+          "documentation": "<p>The ID of the Capacity Reservation Fleet to modify.</p>"
+        },
+        "TotalTargetCapacity": {
+          "shape": "Integer",
+          "documentation": "<p>The total number of capacity units to be reserved by the Capacity Reservation Fleet. This value, together with the instance type weights that you assign to each instance type used by the Fleet determine the number of instances for which the Fleet reserves capacity. Both values are based on units that make sense for your workload. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/crfleet-concepts.html#target-capacity\">Total target capacity</a> in the Amazon EC2 User Guide.</p>"
+        },
+        "EndDate": {
+          "shape": "MillisecondDateTime",
+          "documentation": "<p>The date and time at which the Capacity Reservation Fleet expires. When the Capacity Reservation Fleet expires, its state changes to <code>expired</code> and all of the Capacity Reservations in the Fleet expire.</p> <p>The Capacity Reservation Fleet expires within an hour after the specified time. For example, if you specify <code>5/31/2019</code>, <code>13:30:55</code>, the Capacity Reservation Fleet is guaranteed to expire between <code>13:30:55</code> and <code>14:30:55</code> on <code>5/31/2019</code>.</p> <p>You can't specify <b>EndDate</b> and <b> RemoveEndDate</b> in the same request.</p>"
+        },
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        },
+        "RemoveEndDate": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether to remove the end date from the Capacity Reservation Fleet. If you remove the end date, the Capacity Reservation Fleet does not expire and it remains active until you explicitly cancel it using the <b>CancelCapacityReservationFleet</b> action.</p> <p>You can't specify <b>RemoveEndDate</b> and <b> EndDate</b> in the same request.</p>"
+        }
+      }
+    },
+    "ModifyCapacityReservationFleetResult": {
+      "type": "structure",
+      "members": {
+        "Return": {
+          "shape": "Boolean",
+          "documentation": "<p>Returns <code>true</code> if the request succeeds; otherwise, it returns an error.</p>",
+          "locationName": "return"
+        }
+      }
     },
     "ModifyCapacityReservationRequest": {
       "type": "structure",
@@ -38417,6 +38962,46 @@
         }
       },
       "documentation": "<p>Describes a launch request for one or more instances, and includes owner, requester, and security group information that applies to all instances in the launch request.</p>"
+    },
+    "ReservationFleetInstanceSpecification": {
+      "type": "structure",
+      "members": {
+        "InstanceType": {
+          "shape": "InstanceType",
+          "documentation": "<p>The instance type for which the Capacity Reservation Fleet reserves capacity.</p>"
+        },
+        "InstancePlatform": {
+          "shape": "CapacityReservationInstancePlatform",
+          "documentation": "<p>The type of operating system for which the Capacity Reservation Fleet reserves capacity.</p>"
+        },
+        "Weight": {
+          "shape": "DoubleWithConstraints",
+          "documentation": "<p>The number of capacity units provided by the specified instance type. This value, together with the total target capacity that you specify for the Fleet determine the number of instances for which the Fleet reserves capacity. Both values are based on units that make sense for your workload. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/crfleet-concepts.html#target-capacity\">Total target capacity</a> in the Amazon EC2 User Guide.</p>"
+        },
+        "AvailabilityZone": {
+          "shape": "String",
+          "documentation": "<p>The Availability Zone in which the Capacity Reservation Fleet reserves the capacity. A Capacity Reservation Fleet can't span Availability Zones. All instance type specifications that you specify for the Fleet must use the same Availability Zone.</p>"
+        },
+        "AvailabilityZoneId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the Availability Zone in which the Capacity Reservation Fleet reserves the capacity. A Capacity Reservation Fleet can't span Availability Zones. All instance type specifications that you specify for the Fleet must use the same Availability Zone.</p>"
+        },
+        "EbsOptimized": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether the Capacity Reservation Fleet supports EBS-optimized instances types. This optimization provides dedicated throughput to Amazon EBS and an optimized configuration stack to provide optimal I/O performance. This optimization isn't available with all instance types. Additional usage charges apply when using EBS-optimized instance types.</p>"
+        },
+        "Priority": {
+          "shape": "IntegerWithConstraints",
+          "documentation": "<p>The priority to assign to the instance type. This value is used to determine which of the instance types specified for the Fleet should be prioritized for use. A lower value indicates a high priority. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/crfleet-concepts.html#instance-priority\">Instance type priority</a> in the Amazon EC2 User Guide.</p>"
+        }
+      },
+      "documentation": "<p>Information about an instance type to use in a Capacity Reservation Fleet.</p>"
+    },
+    "ReservationFleetInstanceSpecificationList": {
+      "type": "list",
+      "member": {
+        "shape": "ReservationFleetInstanceSpecification"
+      }
     },
     "ReservationId": {
       "type": "string"

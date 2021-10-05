@@ -180,6 +180,14 @@ declare class WorkMail extends Service {
    */
   describeGroup(callback?: (err: AWSError, data: WorkMail.Types.DescribeGroupResponse) => void): Request<WorkMail.Types.DescribeGroupResponse, AWSError>;
   /**
+   * Lists the settings in a DMARC policy for a specified organization.
+   */
+  describeInboundDmarcSettings(params: WorkMail.Types.DescribeInboundDmarcSettingsRequest, callback?: (err: AWSError, data: WorkMail.Types.DescribeInboundDmarcSettingsResponse) => void): Request<WorkMail.Types.DescribeInboundDmarcSettingsResponse, AWSError>;
+  /**
+   * Lists the settings in a DMARC policy for a specified organization.
+   */
+  describeInboundDmarcSettings(callback?: (err: AWSError, data: WorkMail.Types.DescribeInboundDmarcSettingsResponse) => void): Request<WorkMail.Types.DescribeInboundDmarcSettingsResponse, AWSError>;
+  /**
    * Describes the current status of a mailbox export job.
    */
   describeMailboxExportJob(params: WorkMail.Types.DescribeMailboxExportJobRequest, callback?: (err: AWSError, data: WorkMail.Types.DescribeMailboxExportJobResponse) => void): Request<WorkMail.Types.DescribeMailboxExportJobResponse, AWSError>;
@@ -380,6 +388,14 @@ declare class WorkMail extends Service {
    */
   putAccessControlRule(callback?: (err: AWSError, data: WorkMail.Types.PutAccessControlRuleResponse) => void): Request<WorkMail.Types.PutAccessControlRuleResponse, AWSError>;
   /**
+   * Enables or disables a DMARC policy for a given organization.
+   */
+  putInboundDmarcSettings(params: WorkMail.Types.PutInboundDmarcSettingsRequest, callback?: (err: AWSError, data: WorkMail.Types.PutInboundDmarcSettingsResponse) => void): Request<WorkMail.Types.PutInboundDmarcSettingsResponse, AWSError>;
+  /**
+   * Enables or disables a DMARC policy for a given organization.
+   */
+  putInboundDmarcSettings(callback?: (err: AWSError, data: WorkMail.Types.PutInboundDmarcSettingsResponse) => void): Request<WorkMail.Types.PutInboundDmarcSettingsResponse, AWSError>;
+  /**
    * Sets permissions for a user, group, or resource. This replaces any pre-existing permissions.
    */
   putMailboxPermissions(params: WorkMail.Types.PutMailboxPermissionsRequest, callback?: (err: AWSError, data: WorkMail.Types.PutMailboxPermissionsResponse) => void): Request<WorkMail.Types.PutMailboxPermissionsResponse, AWSError>;
@@ -579,6 +595,7 @@ declare namespace WorkMail {
     AutoDeclineConflictingRequests?: Boolean;
   }
   export type Boolean = boolean;
+  export type BooleanObject = boolean;
   export interface CancelMailboxExportJobRequest {
     /**
      * The idempotency token for the client request.
@@ -964,6 +981,18 @@ declare namespace WorkMail {
      * The date and time when a user was deregistered from WorkMail, in UNIX epoch time format.
      */
     DisabledDate?: Timestamp;
+  }
+  export interface DescribeInboundDmarcSettingsRequest {
+    /**
+     * Lists the ID of the given organization.
+     */
+    OrganizationId: OrganizationId;
+  }
+  export interface DescribeInboundDmarcSettingsResponse {
+    /**
+     * Lists the enforcement setting of the applied policy.
+     */
+    Enforced?: Boolean;
   }
   export interface DescribeMailboxExportJobRequest {
     /**
@@ -1968,6 +1997,18 @@ declare namespace WorkMail {
     OrganizationId: OrganizationId;
   }
   export interface PutAccessControlRuleResponse {
+  }
+  export interface PutInboundDmarcSettingsRequest {
+    /**
+     * The ID of the organization that you are applying the DMARC policy to. 
+     */
+    OrganizationId: OrganizationId;
+    /**
+     * Enforces or suspends a policy after it's applied.
+     */
+    Enforced: BooleanObject;
+  }
+  export interface PutInboundDmarcSettingsResponse {
   }
   export interface PutMailboxPermissionsRequest {
     /**

@@ -293,6 +293,14 @@ declare class EC2 extends Service {
    */
   cancelCapacityReservation(callback?: (err: AWSError, data: EC2.Types.CancelCapacityReservationResult) => void): Request<EC2.Types.CancelCapacityReservationResult, AWSError>;
   /**
+   * Cancels one or more Capacity Reservation Fleets. When you cancel a Capacity Reservation Fleet, the following happens:   The Capacity Reservation Fleet's status changes to cancelled.   The individual Capacity Reservations in the Fleet are cancelled. Instances running in the Capacity Reservations at the time of cancelling the Fleet continue to run in shared capacity.   The Fleet stops creating new Capacity Reservations.  
+   */
+  cancelCapacityReservationFleets(params: EC2.Types.CancelCapacityReservationFleetsRequest, callback?: (err: AWSError, data: EC2.Types.CancelCapacityReservationFleetsResult) => void): Request<EC2.Types.CancelCapacityReservationFleetsResult, AWSError>;
+  /**
+   * Cancels one or more Capacity Reservation Fleets. When you cancel a Capacity Reservation Fleet, the following happens:   The Capacity Reservation Fleet's status changes to cancelled.   The individual Capacity Reservations in the Fleet are cancelled. Instances running in the Capacity Reservations at the time of cancelling the Fleet continue to run in shared capacity.   The Fleet stops creating new Capacity Reservations.  
+   */
+  cancelCapacityReservationFleets(callback?: (err: AWSError, data: EC2.Types.CancelCapacityReservationFleetsResult) => void): Request<EC2.Types.CancelCapacityReservationFleetsResult, AWSError>;
+  /**
    * Cancels an active conversion task. The task can be the import of an instance or volume. The action removes all artifacts of the conversion, including a partially uploaded volume or instance. If the conversion is complete or is in the process of transferring the final disk image, the command fails and returns an exception. For more information, see Importing a Virtual Machine Using the Amazon EC2 CLI.
    */
   cancelConversionTask(params: EC2.Types.CancelConversionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -380,6 +388,14 @@ declare class EC2 extends Service {
    * Creates a new Capacity Reservation with the specified attributes. Capacity Reservations enable you to reserve capacity for your Amazon EC2 instances in a specific Availability Zone for any duration. This gives you the flexibility to selectively add capacity reservations and still get the Regional RI discounts for that usage. By creating Capacity Reservations, you ensure that you always have access to Amazon EC2 capacity when you need it, for as long as you need it. For more information, see Capacity Reservations in the Amazon EC2 User Guide. Your request to create a Capacity Reservation could fail if Amazon EC2 does not have sufficient capacity to fulfill the request. If your request fails due to Amazon EC2 capacity constraints, either try again at a later time, try in a different Availability Zone, or request a smaller capacity reservation. If your application is flexible across instance types and sizes, try to create a Capacity Reservation with different instance attributes. Your request could also fail if the requested quantity exceeds your On-Demand Instance limit for the selected instance type. If your request fails due to limit constraints, increase your On-Demand Instance limit for the required instance type and try again. For more information about increasing your instance limits, see Amazon EC2 Service Quotas in the Amazon EC2 User Guide.
    */
   createCapacityReservation(callback?: (err: AWSError, data: EC2.Types.CreateCapacityReservationResult) => void): Request<EC2.Types.CreateCapacityReservationResult, AWSError>;
+  /**
+   * Creates a Capacity Reservation Fleet. For more information, see Create a Capacity Reservation Fleet in the Amazon EC2 User Guide.
+   */
+  createCapacityReservationFleet(params: EC2.Types.CreateCapacityReservationFleetRequest, callback?: (err: AWSError, data: EC2.Types.CreateCapacityReservationFleetResult) => void): Request<EC2.Types.CreateCapacityReservationFleetResult, AWSError>;
+  /**
+   * Creates a Capacity Reservation Fleet. For more information, see Create a Capacity Reservation Fleet in the Amazon EC2 User Guide.
+   */
+  createCapacityReservationFleet(callback?: (err: AWSError, data: EC2.Types.CreateCapacityReservationFleetResult) => void): Request<EC2.Types.CreateCapacityReservationFleetResult, AWSError>;
   /**
    * Creates a carrier gateway. For more information about carrier gateways, see Carrier gateways in the Amazon Web Services Wavelength Developer Guide.
    */
@@ -1428,6 +1444,14 @@ declare class EC2 extends Service {
    * Describes the IP address ranges that were specified in calls to ProvisionByoipCidr. To describe the address pools that were created when you provisioned the address ranges, use DescribePublicIpv4Pools or DescribeIpv6Pools.
    */
   describeByoipCidrs(callback?: (err: AWSError, data: EC2.Types.DescribeByoipCidrsResult) => void): Request<EC2.Types.DescribeByoipCidrsResult, AWSError>;
+  /**
+   * Describes one or more Capacity Reservation Fleets.
+   */
+  describeCapacityReservationFleets(params: EC2.Types.DescribeCapacityReservationFleetsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeCapacityReservationFleetsResult) => void): Request<EC2.Types.DescribeCapacityReservationFleetsResult, AWSError>;
+  /**
+   * Describes one or more Capacity Reservation Fleets.
+   */
+  describeCapacityReservationFleets(callback?: (err: AWSError, data: EC2.Types.DescribeCapacityReservationFleetsResult) => void): Request<EC2.Types.DescribeCapacityReservationFleetsResult, AWSError>;
   /**
    * Describes one or more of your Capacity Reservations. The results describe only the Capacity Reservations in the Amazon Web Services Region that you're currently using.
    */
@@ -2948,6 +2972,14 @@ declare class EC2 extends Service {
    * Modifies a Capacity Reservation's capacity and the conditions under which it is to be released. You cannot change a Capacity Reservation's instance type, EBS optimization, instance store settings, platform, Availability Zone, or instance eligibility. If you need to modify any of these attributes, we recommend that you cancel the Capacity Reservation, and then create a new one with the required attributes.
    */
   modifyCapacityReservation(callback?: (err: AWSError, data: EC2.Types.ModifyCapacityReservationResult) => void): Request<EC2.Types.ModifyCapacityReservationResult, AWSError>;
+  /**
+   * Modifies a Capacity Reservation Fleet. When you modify the total target capacity of a Capacity Reservation Fleet, the Fleet automatically creates new Capacity Reservations, or modifies or cancels existing Capacity Reservations in the Fleet to meet the new total target capacity. When you modify the end date for the Fleet, the end dates for all of the individual Capacity Reservations in the Fleet are updated accordingly.
+   */
+  modifyCapacityReservationFleet(params: EC2.Types.ModifyCapacityReservationFleetRequest, callback?: (err: AWSError, data: EC2.Types.ModifyCapacityReservationFleetResult) => void): Request<EC2.Types.ModifyCapacityReservationFleetResult, AWSError>;
+  /**
+   * Modifies a Capacity Reservation Fleet. When you modify the total target capacity of a Capacity Reservation Fleet, the Fleet automatically creates new Capacity Reservations, or modifies or cancels existing Capacity Reservations in the Fleet to meet the new total target capacity. When you modify the end date for the Fleet, the end dates for all of the individual Capacity Reservations in the Fleet are updated accordingly.
+   */
+  modifyCapacityReservationFleet(callback?: (err: AWSError, data: EC2.Types.ModifyCapacityReservationFleetResult) => void): Request<EC2.Types.ModifyCapacityReservationFleetResult, AWSError>;
   /**
    * Modifies the specified Client VPN endpoint. Modifying the DNS server resets existing client connections.
    */
@@ -5540,6 +5572,38 @@ declare namespace EC2 {
      */
     BundleTask?: BundleTask;
   }
+  export interface CancelCapacityReservationFleetError {
+    /**
+     * The error code.
+     */
+    Code?: CancelCapacityReservationFleetErrorCode;
+    /**
+     * The error message.
+     */
+    Message?: CancelCapacityReservationFleetErrorMessage;
+  }
+  export type CancelCapacityReservationFleetErrorCode = string;
+  export type CancelCapacityReservationFleetErrorMessage = string;
+  export interface CancelCapacityReservationFleetsRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The IDs of the Capacity Reservation Fleets to cancel.
+     */
+    CapacityReservationFleetIds: CapacityReservationFleetIdSet;
+  }
+  export interface CancelCapacityReservationFleetsResult {
+    /**
+     * Information about the Capacity Reservation Fleets that were successfully cancelled.
+     */
+    SuccessfulFleetCancellations?: CapacityReservationFleetCancellationStateSet;
+    /**
+     * Information about the Capacity Reservation Fleets that could not be cancelled.
+     */
+    FailedFleetCancellations?: FailedCapacityReservationFleetCancellationResultSet;
+  }
   export interface CancelCapacityReservationRequest {
     /**
      * The ID of the Capacity Reservation to be cancelled.
@@ -5785,7 +5849,80 @@ declare namespace EC2 {
      * The Amazon Resource Name (ARN) of the Outpost on which the Capacity Reservation was created.
      */
     OutpostArn?: OutpostArn;
+    /**
+     * The ID of the Capacity Reservation Fleet to which the Capacity Reservation belongs. Only valid for Capacity Reservations that were created by a Capacity Reservation Fleet.
+     */
+    CapacityReservationFleetId?: String;
   }
+  export interface CapacityReservationFleet {
+    /**
+     * The ID of the Capacity Reservation Fleet.
+     */
+    CapacityReservationFleetId?: CapacityReservationFleetId;
+    /**
+     * The ARN of the Capacity Reservation Fleet.
+     */
+    CapacityReservationFleetArn?: String;
+    /**
+     * The state of the Capacity Reservation Fleet. Possible states include:    submitted - The Capacity Reservation Fleet request has been submitted and Amazon Elastic Compute Cloud is preparing to create the Capacity Reservations.    modifying - The Capacity Reservation Fleet is being modified. The Fleet remains in this state until the modification is complete.    active - The Capacity Reservation Fleet has fulfilled its total target capacity and it is attempting to maintain this capacity. The Fleet remains in this state until it is modified or deleted.    partially_fulfilled - The Capacity Reservation Fleet has partially fulfilled its total target capacity. There is insufficient Amazon EC2 to fulfill the total target capacity. The Fleet is attempting to asynchronously fulfill its total target capacity.    expiring - The Capacity Reservation Fleet has reach its end date and it is in the process of expiring. One or more of its Capacity reservations might still be active.    expired - The Capacity Reservation Fleet has reach its end date. The Fleet and its Capacity Reservations are expired. The Fleet can't create new Capacity Reservations.    cancelling - The Capacity Reservation Fleet is in the process of being cancelled. One or more of its Capacity reservations might still be active.    cancelled - The Capacity Reservation Fleet has been manually cancelled. The Fleet and its Capacity Reservations are cancelled and the Fleet can't create new Capacity Reservations.    failed - The Capacity Reservation Fleet failed to reserve capacity for the specified instance types.  
+     */
+    State?: CapacityReservationFleetState;
+    /**
+     * The total number of capacity units for which the Capacity Reservation Fleet reserves capacity. For more information, see Total target capacity in the Amazon EC2 User Guide.
+     */
+    TotalTargetCapacity?: Integer;
+    /**
+     * The capacity units that have been fulfilled.
+     */
+    TotalFulfilledCapacity?: Double;
+    /**
+     * The tenancy of the Capacity Reservation Fleet. Tenancies include:    default - The Capacity Reservation Fleet is created on hardware that is shared with other Amazon Web Services accounts.    dedicated - The Capacity Reservation Fleet is created on single-tenant hardware that is dedicated to a single Amazon Web Services account.  
+     */
+    Tenancy?: FleetCapacityReservationTenancy;
+    /**
+     * The date and time at which the Capacity Reservation Fleet expires.
+     */
+    EndDate?: MillisecondDateTime;
+    /**
+     * The date and time at which the Capacity Reservation Fleet was created.
+     */
+    CreateTime?: MillisecondDateTime;
+    /**
+     * Indicates the type of instance launches that the Capacity Reservation Fleet accepts. All Capacity Reservations in the Fleet inherit this instance matching criteria. Currently, Capacity Reservation Fleets support open instance matching criteria only. This means that instances that have matching attributes (instance type, platform, and Availability Zone) run in the Capacity Reservations automatically. Instances do not need to explicitly target a Capacity Reservation Fleet to use its reserved capacity.
+     */
+    InstanceMatchCriteria?: FleetInstanceMatchCriteria;
+    /**
+     * The strategy used by the Capacity Reservation Fleet to determine which of the specified instance types to use. For more information, see For more information, see  Allocation strategy in the Amazon EC2 User Guide.
+     */
+    AllocationStrategy?: String;
+    /**
+     * Information about the instance types for which to reserve the capacity.
+     */
+    InstanceTypeSpecifications?: FleetCapacityReservationSet;
+    /**
+     * The tags assigned to the Capacity Reservation Fleet.
+     */
+    Tags?: TagList;
+  }
+  export interface CapacityReservationFleetCancellationState {
+    /**
+     * The current state of the Capacity Reservation Fleet.
+     */
+    CurrentFleetState?: CapacityReservationFleetState;
+    /**
+     * The previous state of the Capacity Reservation Fleet.
+     */
+    PreviousFleetState?: CapacityReservationFleetState;
+    /**
+     * The ID of the Capacity Reservation Fleet that was successfully cancelled.
+     */
+    CapacityReservationFleetId?: CapacityReservationFleetId;
+  }
+  export type CapacityReservationFleetCancellationStateSet = CapacityReservationFleetCancellationState[];
+  export type CapacityReservationFleetId = string;
+  export type CapacityReservationFleetIdSet = CapacityReservationFleetId[];
+  export type CapacityReservationFleetSet = CapacityReservationFleet[];
+  export type CapacityReservationFleetState = "submitted"|"modifying"|"active"|"partially_fulfilled"|"expiring"|"expired"|"cancelling"|"cancelled"|"failed"|string;
   export interface CapacityReservationGroup {
     /**
      * The ARN of the resource group.
@@ -6599,6 +6736,90 @@ declare namespace EC2 {
      * The number of threads per CPU core. To disable multithreading for the instance, specify a value of 1. Otherwise, specify the default value of 2.
      */
     ThreadsPerCore?: Integer;
+  }
+  export interface CreateCapacityReservationFleetRequest {
+    /**
+     * The strategy used by the Capacity Reservation Fleet to determine which of the specified instance types to use. Currently, only the prioritized allocation strategy is supported. For more information, see  Allocation strategy in the Amazon EC2 User Guide. Valid values: prioritized 
+     */
+    AllocationStrategy?: String;
+    /**
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see Ensure Idempotency.
+     */
+    ClientToken?: String;
+    /**
+     * Information about the instance types for which to reserve the capacity.
+     */
+    InstanceTypeSpecifications: ReservationFleetInstanceSpecificationList;
+    /**
+     * Indicates the tenancy of the Capacity Reservation Fleet. All Capacity Reservations in the Fleet inherit this tenancy. The Capacity Reservation Fleet can have one of the following tenancy settings:    default - The Capacity Reservation Fleet is created on hardware that is shared with other Amazon Web Services accounts.    dedicated - The Capacity Reservations are created on single-tenant hardware that is dedicated to a single Amazon Web Services account.  
+     */
+    Tenancy?: FleetCapacityReservationTenancy;
+    /**
+     * The total number of capacity units to be reserved by the Capacity Reservation Fleet. This value, together with the instance type weights that you assign to each instance type used by the Fleet determine the number of instances for which the Fleet reserves capacity. Both values are based on units that make sense for your workload. For more information, see  Total target capacity in the Amazon EC2 User Guide.
+     */
+    TotalTargetCapacity: Integer;
+    /**
+     * The date and time at which the Capacity Reservation Fleet expires. When the Capacity Reservation Fleet expires, its state changes to expired and all of the Capacity Reservations in the Fleet expire. The Capacity Reservation Fleet expires within an hour after the specified time. For example, if you specify 5/31/2019, 13:30:55, the Capacity Reservation Fleet is guaranteed to expire between 13:30:55 and 14:30:55 on 5/31/2019. 
+     */
+    EndDate?: MillisecondDateTime;
+    /**
+     * Indicates the type of instance launches that the Capacity Reservation Fleet accepts. All Capacity Reservations in the Fleet inherit this instance matching criteria. Currently, Capacity Reservation Fleets support open instance matching criteria only. This means that instances that have matching attributes (instance type, platform, and Availability Zone) run in the Capacity Reservations automatically. Instances do not need to explicitly target a Capacity Reservation Fleet to use its reserved capacity.
+     */
+    InstanceMatchCriteria?: FleetInstanceMatchCriteria;
+    /**
+     * The tags to assign to the Capacity Reservation Fleet. The tags are automatically assigned to the Capacity Reservations in the Fleet.
+     */
+    TagSpecifications?: TagSpecificationList;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface CreateCapacityReservationFleetResult {
+    /**
+     * The ID of the Capacity Reservation Fleet.
+     */
+    CapacityReservationFleetId?: CapacityReservationFleetId;
+    /**
+     * The status of the Capacity Reservation Fleet.
+     */
+    State?: CapacityReservationFleetState;
+    /**
+     * The total number of capacity units for which the Capacity Reservation Fleet reserves capacity.
+     */
+    TotalTargetCapacity?: Integer;
+    /**
+     * The requested capacity units that have been successfully reserved.
+     */
+    TotalFulfilledCapacity?: Double;
+    /**
+     * The instance matching criteria for the Capacity Reservation Fleet.
+     */
+    InstanceMatchCriteria?: FleetInstanceMatchCriteria;
+    /**
+     * The allocation strategy used by the Capacity Reservation Fleet.
+     */
+    AllocationStrategy?: String;
+    /**
+     * The date and time at which the Capacity Reservation Fleet was created.
+     */
+    CreateTime?: MillisecondDateTime;
+    /**
+     * The date and time at which the Capacity Reservation Fleet expires.
+     */
+    EndDate?: MillisecondDateTime;
+    /**
+     * Indicates the tenancy of Capacity Reservation Fleet.
+     */
+    Tenancy?: FleetCapacityReservationTenancy;
+    /**
+     * Information about the individual Capacity Reservations in the Capacity Reservation Fleet.
+     */
+    FleetCapacityReservations?: FleetCapacityReservationSet;
+    /**
+     * The tags assigned to the Capacity Reservation Fleet.
+     */
+    Tags?: TagList;
   }
   export interface CreateCapacityReservationRequest {
     /**
@@ -10148,6 +10369,39 @@ declare namespace EC2 {
      * Information about your address ranges.
      */
     ByoipCidrs?: ByoipCidrSet;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: String;
+  }
+  export type DescribeCapacityReservationFleetsMaxResults = number;
+  export interface DescribeCapacityReservationFleetsRequest {
+    /**
+     * The IDs of the Capacity Reservation Fleets to describe.
+     */
+    CapacityReservationFleetIds?: CapacityReservationFleetIdSet;
+    /**
+     * The token to use to retrieve the next page of results.
+     */
+    NextToken?: String;
+    /**
+     * The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the returned nextToken value. This value can be between 5 and 500. If maxResults is given a larger value than 500, you receive an error.
+     */
+    MaxResults?: DescribeCapacityReservationFleetsMaxResults;
+    /**
+     * One or more filters.    state - The state of the Fleet (submitted | modifying | active | partially_fulfilled | expiring | expired | cancelling | cancelled | failed).    instance-match-criteria - The instance matching criteria for the Fleet. Only open is supported.    tenancy - The tenancy of the Fleet (default | dedicated).    allocation-strategy - The allocation strategy used by the Fleet. Only prioritized is supported.  
+     */
+    Filters?: FilterList;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface DescribeCapacityReservationFleetsResult {
+    /**
+     * Information about the Capacity Reservation Fleets.
+     */
+    CapacityReservationFleets?: CapacityReservationFleetSet;
     /**
      * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
      */
@@ -14547,6 +14801,7 @@ declare namespace EC2 {
   export type DnsSupportValue = "enable"|"disable"|string;
   export type DomainType = "vpc"|"standard"|string;
   export type Double = number;
+  export type DoubleWithConstraints = number;
   export interface EbsBlockDevice {
     /**
      * Indicates whether the EBS volume is deleted on instance termination. For more information, see Preserving Amazon EBS volumes on instance termination in the Amazon EC2 User Guide.
@@ -15494,6 +15749,17 @@ declare namespace EC2 {
     S3Location?: String;
   }
   export type ExportVmTaskId = string;
+  export interface FailedCapacityReservationFleetCancellationResult {
+    /**
+     * The ID of the Capacity Reservation Fleet that could not be cancelled.
+     */
+    CapacityReservationFleetId?: CapacityReservationFleetId;
+    /**
+     * Information about the Capacity Reservation Fleet cancellation error.
+     */
+    CancelCapacityReservationFleetError?: CancelCapacityReservationFleetError;
+  }
+  export type FailedCapacityReservationFleetCancellationResultSet = FailedCapacityReservationFleetCancellationResult[];
   export interface FailedQueuedPurchaseDeletion {
     /**
      * The error.
@@ -15538,6 +15804,54 @@ declare namespace EC2 {
   }
   export type FilterList = Filter[];
   export type FleetActivityStatus = "error"|"pending_fulfillment"|"pending_termination"|"fulfilled"|string;
+  export interface FleetCapacityReservation {
+    /**
+     * The ID of the Capacity Reservation.
+     */
+    CapacityReservationId?: CapacityReservationId;
+    /**
+     * The ID of the Availability Zone in which the Capacity Reservation reserves capacity.
+     */
+    AvailabilityZoneId?: String;
+    /**
+     * The instance type for which the Capacity Reservation reserves capacity.
+     */
+    InstanceType?: InstanceType;
+    /**
+     * The type of operating system for which the Capacity Reservation reserves capacity.
+     */
+    InstancePlatform?: CapacityReservationInstancePlatform;
+    /**
+     * The Availability Zone in which the Capacity Reservation reserves capacity.
+     */
+    AvailabilityZone?: String;
+    /**
+     * The total number of instances for which the Capacity Reservation reserves capacity.
+     */
+    TotalInstanceCount?: Integer;
+    /**
+     * The number of capacity units fulfilled by the Capacity Reservation. For more information, see  Total target capacity in the Amazon EC2 User Guide.
+     */
+    FulfilledCapacity?: Double;
+    /**
+     * Indicates whether the Capacity Reservation reserves capacity for EBS-optimized instance types.
+     */
+    EbsOptimized?: Boolean;
+    /**
+     * The date and time at which the Capacity Reservation was created.
+     */
+    CreateDate?: MillisecondDateTime;
+    /**
+     * The weight of the instance type in the Capacity Reservation Fleet. For more information, see  Instance type weight in the Amazon EC2 User Guide.
+     */
+    Weight?: DoubleWithConstraints;
+    /**
+     * The priority of the instance type in the Capacity Reservation Fleet. For more information, see  Instance type priority in the Amazon EC2 User Guide.
+     */
+    Priority?: IntegerWithConstraints;
+  }
+  export type FleetCapacityReservationSet = FleetCapacityReservation[];
+  export type FleetCapacityReservationTenancy = "default"|string;
   export type FleetCapacityReservationUsageStrategy = "use-capacity-reservations-first"|string;
   export interface FleetData {
     /**
@@ -15629,6 +15943,7 @@ declare namespace EC2 {
   export type FleetExcessCapacityTerminationPolicy = "no-termination"|"termination"|string;
   export type FleetId = string;
   export type FleetIdSet = FleetId[];
+  export type FleetInstanceMatchCriteria = "open"|string;
   export interface FleetLaunchTemplateConfig {
     /**
      * The launch template.
@@ -18562,7 +18877,7 @@ declare namespace EC2 {
     /**
      * The ID of the network interface. If you are creating a Spot Fleet, omit this parameter because you can’t specify a network interface ID in a launch specification.
      */
-    NetworkInterfaceId?: String;
+    NetworkInterfaceId?: NetworkInterfaceId;
     /**
      * The private IPv4 address of the network interface. Applies only if creating a network interface when launching an instance. You cannot specify this option if you're launching more than one instance in a RunInstances request.
      */
@@ -18902,6 +19217,7 @@ declare namespace EC2 {
   }
   export type InstanceUsageSet = InstanceUsage[];
   export type Integer = number;
+  export type IntegerWithConstraints = number;
   export interface IntegrateServices {
     /**
      * Information about the integration with Amazon Athena.
@@ -19746,7 +20062,7 @@ declare namespace EC2 {
     /**
      * The ID of the subnet in which to launch the instances.
      */
-    SubnetId?: String;
+    SubnetId?: SubnetId;
     /**
      * The Availability Zone in which to launch the instances.
      */
@@ -20354,6 +20670,34 @@ declare namespace EC2 {
     Return?: Boolean;
   }
   export type ModifyAvailabilityZoneOptInStatus = "opted-in"|"not-opted-in"|string;
+  export interface ModifyCapacityReservationFleetRequest {
+    /**
+     * The ID of the Capacity Reservation Fleet to modify.
+     */
+    CapacityReservationFleetId: CapacityReservationFleetId;
+    /**
+     * The total number of capacity units to be reserved by the Capacity Reservation Fleet. This value, together with the instance type weights that you assign to each instance type used by the Fleet determine the number of instances for which the Fleet reserves capacity. Both values are based on units that make sense for your workload. For more information, see Total target capacity in the Amazon EC2 User Guide.
+     */
+    TotalTargetCapacity?: Integer;
+    /**
+     * The date and time at which the Capacity Reservation Fleet expires. When the Capacity Reservation Fleet expires, its state changes to expired and all of the Capacity Reservations in the Fleet expire. The Capacity Reservation Fleet expires within an hour after the specified time. For example, if you specify 5/31/2019, 13:30:55, the Capacity Reservation Fleet is guaranteed to expire between 13:30:55 and 14:30:55 on 5/31/2019. You can't specify EndDate and  RemoveEndDate in the same request.
+     */
+    EndDate?: MillisecondDateTime;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * Indicates whether to remove the end date from the Capacity Reservation Fleet. If you remove the end date, the Capacity Reservation Fleet does not expire and it remains active until you explicitly cancel it using the CancelCapacityReservationFleet action. You can't specify RemoveEndDate and  EndDate in the same request.
+     */
+    RemoveEndDate?: Boolean;
+  }
+  export interface ModifyCapacityReservationFleetResult {
+    /**
+     * Returns true if the request succeeds; otherwise, it returns an error.
+     */
+    Return?: Boolean;
+  }
   export interface ModifyCapacityReservationRequest {
     /**
      * The ID of the Capacity Reservation.
@@ -24093,6 +24437,37 @@ declare namespace EC2 {
      */
     ReservationId?: String;
   }
+  export interface ReservationFleetInstanceSpecification {
+    /**
+     * The instance type for which the Capacity Reservation Fleet reserves capacity.
+     */
+    InstanceType?: InstanceType;
+    /**
+     * The type of operating system for which the Capacity Reservation Fleet reserves capacity.
+     */
+    InstancePlatform?: CapacityReservationInstancePlatform;
+    /**
+     * The number of capacity units provided by the specified instance type. This value, together with the total target capacity that you specify for the Fleet determine the number of instances for which the Fleet reserves capacity. Both values are based on units that make sense for your workload. For more information, see Total target capacity in the Amazon EC2 User Guide.
+     */
+    Weight?: DoubleWithConstraints;
+    /**
+     * The Availability Zone in which the Capacity Reservation Fleet reserves the capacity. A Capacity Reservation Fleet can't span Availability Zones. All instance type specifications that you specify for the Fleet must use the same Availability Zone.
+     */
+    AvailabilityZone?: String;
+    /**
+     * The ID of the Availability Zone in which the Capacity Reservation Fleet reserves the capacity. A Capacity Reservation Fleet can't span Availability Zones. All instance type specifications that you specify for the Fleet must use the same Availability Zone.
+     */
+    AvailabilityZoneId?: String;
+    /**
+     * Indicates whether the Capacity Reservation Fleet supports EBS-optimized instances types. This optimization provides dedicated throughput to Amazon EBS and an optimized configuration stack to provide optimal I/O performance. This optimization isn't available with all instance types. Additional usage charges apply when using EBS-optimized instance types.
+     */
+    EbsOptimized?: Boolean;
+    /**
+     * The priority to assign to the instance type. This value is used to determine which of the instance types specified for the Fleet should be prioritized for use. A lower value indicates a high priority. For more information, see Instance type priority in the Amazon EC2 User Guide.
+     */
+    Priority?: IntegerWithConstraints;
+  }
+  export type ReservationFleetInstanceSpecificationList = ReservationFleetInstanceSpecification[];
   export type ReservationId = string;
   export type ReservationList = Reservation[];
   export type ReservationState = "payment-pending"|"payment-failed"|"active"|"retired"|string;

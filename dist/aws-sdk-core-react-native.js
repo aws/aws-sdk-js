@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.1000.0',
+	  VERSION: '2.1001.0',
 
 	  /**
 	   * @api private
@@ -6644,7 +6644,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	        operation.httpChecksumRequired &&
 	        req.service.config.computeChecksums &&
 	        isNonStreamingPayload &&
-	        req.service.getSignerClass(req) === AWS.Signers.V4 &&
 	        !headers['Content-MD5']
 	      ) {
 	        var md5 = AWS.util.crypto.md5(body, 'base64');

@@ -1,6 +1,15 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1000.0-->
+<!--LATEST=2.1001.0-->
 <!--ENTRYINSERT-->
+
+## 2.1001.0
+* bugfix: Signer: Fix the bug that httpChecksumRequired trait is not honored in SigV2
+* feature: ApplicationAutoScaling: With this release, Application Auto Scaling adds support for Amazon Neptune. Customers can now automatically add or remove Read Replicas of their Neptune clusters to keep the average CPU Utilization at the target value specified by the customers.
+* feature: Backup: AWS Backup Audit Manager framework report.
+* feature: EC2: Released Capacity Reservation Fleet, a feature of Amazon EC2 Capacity Reservations, which provides a way to manage reserved capacity across instance types. For more information: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/cr-fleets.html
+* feature: Glue: This release adds tag as an input of CreateConnection
+* feature: Location: Add support for PositionFiltering.
+* feature: WorkMail: This release allows customers to change their inbound DMARC settings in Amazon WorkMail.
 
 ## 2.1000.0
 * feature: CodeBuild: CodeBuild now allows you to select how batch build statuses are sent to the source provider for a project.

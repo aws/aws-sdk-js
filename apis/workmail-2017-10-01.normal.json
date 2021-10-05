@@ -698,6 +698,29 @@
       "documentation": "<p>Returns the data available for the group.</p>",
       "idempotent": true
     },
+    "DescribeInboundDmarcSettings": {
+      "name": "DescribeInboundDmarcSettings",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeInboundDmarcSettingsRequest"
+      },
+      "output": {
+        "shape": "DescribeInboundDmarcSettingsResponse"
+      },
+      "errors": [
+        {
+          "shape": "OrganizationNotFoundException"
+        },
+        {
+          "shape": "OrganizationStateException"
+        }
+      ],
+      "documentation": "<p>Lists the settings in a DMARC policy for a specified organization.</p>",
+      "idempotent": true
+    },
     "DescribeMailboxExportJob": {
       "name": "DescribeMailboxExportJob",
       "http": {
@@ -1397,6 +1420,29 @@
       ],
       "documentation": "<p>Adds a new access control rule for the specified organization. The rule allows or denies access to the organization for the specified IPv4 addresses, access protocol actions, and user IDs. Adding a new rule with the same name as an existing rule replaces the older rule.</p>"
     },
+    "PutInboundDmarcSettings": {
+      "name": "PutInboundDmarcSettings",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "PutInboundDmarcSettingsRequest"
+      },
+      "output": {
+        "shape": "PutInboundDmarcSettingsResponse"
+      },
+      "errors": [
+        {
+          "shape": "OrganizationNotFoundException"
+        },
+        {
+          "shape": "OrganizationStateException"
+        }
+      ],
+      "documentation": "<p>Enables or disables a DMARC policy for a given organization.</p>",
+      "idempotent": true
+    },
     "PutMailboxPermissions": {
       "name": "PutMailboxPermissions",
       "http": {
@@ -2004,6 +2050,9 @@
     "Boolean": {
       "type": "boolean"
     },
+    "BooleanObject": {
+      "type": "boolean"
+    },
     "CancelMailboxExportJobRequest": {
       "type": "structure",
       "required": [
@@ -2585,6 +2634,27 @@
         "DisabledDate": {
           "shape": "Timestamp",
           "documentation": "<p>The date and time when a user was deregistered from WorkMail, in UNIX epoch time format.</p>"
+        }
+      }
+    },
+    "DescribeInboundDmarcSettingsRequest": {
+      "type": "structure",
+      "required": [
+        "OrganizationId"
+      ],
+      "members": {
+        "OrganizationId": {
+          "shape": "OrganizationId",
+          "documentation": "<p>Lists the ID of the given organization.</p>"
+        }
+      }
+    },
+    "DescribeInboundDmarcSettingsResponse": {
+      "type": "structure",
+      "members": {
+        "Enforced": {
+          "shape": "Boolean",
+          "documentation": "<p>Lists the enforcement setting of the applied policy.</p>"
         }
       }
     },
@@ -4162,6 +4232,27 @@
       }
     },
     "PutAccessControlRuleResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "PutInboundDmarcSettingsRequest": {
+      "type": "structure",
+      "required": [
+        "OrganizationId",
+        "Enforced"
+      ],
+      "members": {
+        "OrganizationId": {
+          "shape": "OrganizationId",
+          "documentation": "<p>The ID of the organization that you are applying the DMARC policy to. </p>"
+        },
+        "Enforced": {
+          "shape": "BooleanObject",
+          "documentation": "<p>Enforces or suspends a policy after it's applied.</p>"
+        }
+      }
+    },
+    "PutInboundDmarcSettingsResponse": {
       "type": "structure",
       "members": {}
     },
