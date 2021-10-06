@@ -1,5 +1,6 @@
 # Contributing to the AWS SDK for JavaScript
 
+
 We work hard to provide a high-quality and useful SDK, and we greatly value
 feedback and contributions from our community. Whether it's a bug report,
 new feature, correction, or additional documentation, we welcome your issues
@@ -75,7 +76,8 @@ brew cask install phantomjs
 
 Then, to run all tests:
 
-```
+```[Untitled document.docx](https://github.com/aws/aws-sdk-js/files/7294799/Untitled.document.docx)
+
 npm test
 ```
 
@@ -133,3 +135,6 @@ See the [add-change cli notes](./scripts/changelog/README.md) for more informati
 [cla]: http://en.wikipedia.org/wiki/Contributor_License_Agreement
 [homebrew]: http://brew.sh/
 [releasenotes]: https://aws.amazon.com/releasenotes/JavaScript
+
+Twitter: @omarioffline 
+Instagram: o.mxri
