@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1001.0-->
+<!--LATEST=2.1002.0-->
 <!--ENTRYINSERT-->
+
+## 2.1002.0
+* feature: AmplifyBackend: Adding a new field 'AmplifyFeatureFlags' to the response of the GetBackend operation. It will return a stringified version of the cli.json file for the given Amplify project.
+* feature: FSx: This release adds support for Lustre 2.12 to FSx for Lustre.
+* feature: Kendra: Amazon Kendra now supports integration with AWS SSO
+* feature: SageMaker: This release adds a new TrainingInputMode FastFile for SageMaker Training APIs.
 
 ## 2.1001.0
 * bugfix: Signer: Fix the bug that httpChecksumRequired trait is not honored in SigV2

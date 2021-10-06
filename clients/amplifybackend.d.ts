@@ -1045,6 +1045,10 @@ declare namespace AmplifyBackend {
   }
   export interface GetBackendResponse {
     /**
+     * A stringified version of the cli.json file for your Amplify project.
+     */
+    AmplifyFeatureFlags?: __string;
+    /**
      * A stringified version of the current configs for your Amplify project.
      */
     AmplifyMetaConfig?: __string;

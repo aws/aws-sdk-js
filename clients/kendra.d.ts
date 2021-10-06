@@ -44,11 +44,11 @@ declare class Kendra extends Service {
    */
   clearQuerySuggestions(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Creates a data source that you use to with an Amazon Kendra index.  You specify a name, data source connector type and description for your data source. You also specify configuration information such as document metadata (author, source URI, and so on) and user context information.  CreateDataSource is a synchronous operation. The operation returns 200 if the data source was successfully created. Otherwise, an exception is raised.
+   * Creates a data source that you want to use with an Amazon Kendra index.  You specify a name, data source connector type and description for your data source. You also specify configuration information for the data source connector.  CreateDataSource is a synchronous operation. The operation returns 200 if the data source was successfully created. Otherwise, an exception is raised.
    */
   createDataSource(params: Kendra.Types.CreateDataSourceRequest, callback?: (err: AWSError, data: Kendra.Types.CreateDataSourceResponse) => void): Request<Kendra.Types.CreateDataSourceResponse, AWSError>;
   /**
-   * Creates a data source that you use to with an Amazon Kendra index.  You specify a name, data source connector type and description for your data source. You also specify configuration information such as document metadata (author, source URI, and so on) and user context information.  CreateDataSource is a synchronous operation. The operation returns 200 if the data source was successfully created. Otherwise, an exception is raised.
+   * Creates a data source that you want to use with an Amazon Kendra index.  You specify a name, data source connector type and description for your data source. You also specify configuration information for the data source connector.  CreateDataSource is a synchronous operation. The operation returns 200 if the data source was successfully created. Otherwise, an exception is raised.
    */
   createDataSource(callback?: (err: AWSError, data: Kendra.Types.CreateDataSourceResponse) => void): Request<Kendra.Types.CreateDataSourceResponse, AWSError>;
   /**
@@ -260,11 +260,11 @@ declare class Kendra extends Service {
    */
   listThesauri(callback?: (err: AWSError, data: Kendra.Types.ListThesauriResponse) => void): Request<Kendra.Types.ListThesauriResponse, AWSError>;
   /**
-   * Maps users to their groups. You can also map sub groups to groups. For example, the group "Company Intellectual Property Teams" includes sub groups "Research" and "Engineering". These sub groups include their own list of users or people who work in these teams. Only users who work in research and engineering, and therefore belong in the intellectual property group, can see top-secret company documents in their search results.  You map users to their groups when you want to filter search results for different users based on their group’s access to documents. For more information on filtering search results for different users, see Filtering on user context. If more than five PUT actions for a group are currently processing, a validation exception is thrown.
+   * Maps users to their groups so that you only need to provide the user ID when you issue the query. You can also map sub groups to groups. For example, the group "Company Intellectual Property Teams" includes sub groups "Research" and "Engineering". These sub groups include their own list of users or people who work in these teams. Only users who work in research and engineering, and therefore belong in the intellectual property group, can see top-secret company documents in their search results. You map users to their groups when you want to filter search results for different users based on their group’s access to documents. For more information on filtering search results for different users, see Filtering on user context. If more than five PUT actions for a group are currently processing, a validation exception is thrown.
    */
   putPrincipalMapping(params: Kendra.Types.PutPrincipalMappingRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Maps users to their groups. You can also map sub groups to groups. For example, the group "Company Intellectual Property Teams" includes sub groups "Research" and "Engineering". These sub groups include their own list of users or people who work in these teams. Only users who work in research and engineering, and therefore belong in the intellectual property group, can see top-secret company documents in their search results.  You map users to their groups when you want to filter search results for different users based on their group’s access to documents. For more information on filtering search results for different users, see Filtering on user context. If more than five PUT actions for a group are currently processing, a validation exception is thrown.
+   * Maps users to their groups so that you only need to provide the user ID when you issue the query. You can also map sub groups to groups. For example, the group "Company Intellectual Property Teams" includes sub groups "Research" and "Engineering". These sub groups include their own list of users or people who work in these teams. Only users who work in research and engineering, and therefore belong in the intellectual property group, can see top-secret company documents in their search results. You map users to their groups when you want to filter search results for different users based on their group’s access to documents. For more information on filtering search results for different users, see Filtering on user context. If more than five PUT actions for a group are currently processing, a validation exception is thrown.
    */
   putPrincipalMapping(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -418,19 +418,19 @@ declare namespace Kendra {
      */
     ContainsAny?: DocumentAttribute;
     /**
-     * Performs a greater than operation on two document attributes. Use with a document attribute of type Integer or Long.
+     * Performs a greater than operation on two document attributes. Use with a document attribute of type Date or Long.
      */
     GreaterThan?: DocumentAttribute;
     /**
-     * Performs a greater or equals than operation on two document attributes. Use with a document attribute of type Integer or Long.
+     * Performs a greater or equals than operation on two document attributes. Use with a document attribute of type Date or Long.
      */
     GreaterThanOrEquals?: DocumentAttribute;
     /**
-     * Performs a less than operation on two document attributes. Use with a document attribute of type Integer or Long.
+     * Performs a less than operation on two document attributes. Use with a document attribute of type Date or Long.
      */
     LessThan?: DocumentAttribute;
     /**
-     * Performs a less than or equals operation on two document attributes. Use with a document attribute of type Integer or Long.
+     * Performs a less than or equals operation on two document attributes. Use with a document attribute of type Date or Long.
      */
     LessThanOrEquals?: DocumentAttribute;
   }
@@ -908,9 +908,13 @@ declare namespace Kendra {
      */
     UserTokenConfigurations?: UserTokenConfigurationList;
     /**
-     * The user context policy.  ATTRIBUTE_FILTER  All indexed content is searchable and displayable for all users. If there is an access control list, it is ignored. You can filter on user and group attributes.   USER_TOKEN  Enables SSO and token-based user access control. All documents with no access control and all documents accessible to the user will be searchable and displayable.   
+     * The user context policy.  ATTRIBUTE_FILTER  All indexed content is searchable and displayable for all users. If you want to filter search results on user context, you can use the attribute filters of _user_id and _group_ids or you can provide user and group information in UserContext.   USER_TOKEN  Enables token-based user access control to filter search results on user context. All documents with no access control and all documents accessible to the user will be searchable and displayable.   
      */
     UserContextPolicy?: UserContextPolicy;
+    /**
+     * Enables fetching access levels of groups and users from an AWS Single Sign-On identity source. To configure this, see UserGroupResolutionConfiguration.
+     */
+    UserGroupResolutionConfiguration?: UserGroupResolutionConfiguration;
   }
   export interface CreateIndexResponse {
     /**
@@ -980,7 +984,7 @@ declare namespace Kendra {
      */
     SourceS3Path: S3Path;
     /**
-     * A token that you provide to identify the request to create a thesaurus. Multiple calls to the CreateThesaurus operation with the same client token will create only one index. 
+     * A token that you provide to identify the request to create a thesaurus. Multiple calls to the CreateThesaurus operation with the same client token will create only one thesaurus. 
      */
     ClientToken?: ClientTokenName;
   }
@@ -1440,6 +1444,10 @@ declare namespace Kendra {
      * The user context policy for the Amazon Kendra index.
      */
     UserContextPolicy?: UserContextPolicy;
+    /**
+     * Shows whether you have enabled the configuration for fetching access levels of groups and users from an AWS Single Sign-On identity source.
+     */
+    UserGroupResolutionConfiguration?: UserGroupResolutionConfiguration;
   }
   export interface DescribePrincipalMappingRequest {
     /**
@@ -1509,7 +1517,7 @@ declare namespace Kendra {
      */
     ErrorMessage?: ErrorMessage;
     /**
-     * Shows the date-time a block list for query suggestions was last created.
+     * Shows the date-time a block list for query suggestions was created.
      */
     CreatedAt?: Timestamp;
     /**
@@ -1899,7 +1907,7 @@ declare namespace Kendra {
      */
     MemberUsers?: MemberUsers;
     /**
-     * If you have more than 1000 users and/or sub groups for a single group, you need to provide the path to the S3 file that lists your users and sub groups for a group. Your sub groups can contain more than 1000 users, but the list of sub groups that belong to a group (and/or users) must be no more than 1000.
+     * If you have more than 1000 users and/or sub groups for a single group, you need to provide the path to the S3 file that lists your users and sub groups for a group. Your sub groups can contain more than 1000 users, but the list of sub groups that belong to a group (and/or users) must be no more than 1000. You can download this example S3 file that uses the correct format for listing group members. Note, dataSourceId is optional. The value of type for a group is always GROUP and for a user it is always USER.
      */
     S3PathforGroupMembers?: S3Path;
   }
@@ -2065,7 +2073,7 @@ declare namespace Kendra {
      */
     IndexId: IndexId;
     /**
-     * If the result of the previous request to GetDataSourceSyncJobHistory was truncated, include the NextToken to fetch the next set of jobs.
+     * If the previous response was incomplete (because there is more data to retrieve), Amazon Kendra returns a pagination token in the response. You can use this pagination token to retrieve the next set of jobs.
      */
     NextToken?: NextToken;
     /**
@@ -2087,7 +2095,7 @@ declare namespace Kendra {
      */
     History?: DataSourceSyncJobHistoryList;
     /**
-     * The GetDataSourceSyncJobHistory operation returns a page of vocabularies at a time. The maximum size of the page is set by the MaxResults parameter. If there are more jobs in the list than the page size, Amazon Kendra returns the NextPage token. Include the token in the next request to the GetDataSourceSyncJobHistory operation to return in the next page of jobs.
+     * If the response is truncated, Amazon Kendra returns this token that you can use in the subsequent request to retrieve the next set of jobs.
      */
     NextToken?: NextToken;
   }
@@ -2121,7 +2129,7 @@ declare namespace Kendra {
      */
     IndexId: IndexId;
     /**
-     * If the result of the previous request to ListFaqs was truncated, include the NextToken to fetch the next set of FAQs.
+     * If the previous response was incomplete (because there is more data to retrieve), Amazon Kendra returns a pagination token in the response. You can use this pagination token to retrieve the next set of FAQs.
      */
     NextToken?: NextToken;
     /**
@@ -2131,7 +2139,7 @@ declare namespace Kendra {
   }
   export interface ListFaqsResponse {
     /**
-     * The ListFaqs operation returns a page of FAQs at a time. The maximum size of the page is set by the MaxResults parameter. If there are more jobs in the list than the page size, Amazon Kendra returns the NextPage token. Include the token in the next request to the ListFaqs operation to return the next page of FAQs.
+     * If the response is truncated, Amazon Kendra returns this token that you can use in the subsequent request to retrieve the next set of FAQs.
      */
     NextToken?: NextToken;
     /**
@@ -2153,11 +2161,11 @@ declare namespace Kendra {
      */
     OrderingId: PrincipalOrderingId;
     /**
-     *  The next items in the list of groups that go beyond the maximum. 
+     *  If the previous response was incomplete (because there is more data to retrieve), Amazon Kendra returns a pagination token in the response. You can use this pagination token to retrieve the next set of groups that are mapped to users before a given ordering or timestamp identifier. 
      */
     NextToken?: NextToken;
     /**
-     *  The maximum results shown for a list of groups that are mapped to users before a given ordering or timestamp identifier. 
+     *  The maximum number of returned groups that are mapped to users before a given ordering or timestamp identifier. 
      */
     MaxResults?: MaxResultsIntegerForListPrincipalsRequest;
   }
@@ -2167,7 +2175,7 @@ declare namespace Kendra {
      */
     GroupsSummaries?: ListOfGroupSummaries;
     /**
-     *  The next items in the list of groups that go beyond the maximum. 
+     *  If the response is truncated, Amazon Kendra returns this token that you can use in the subsequent request to retrieve the next set of groups that are mapped to users before a given ordering or timestamp identifier. 
      */
     NextToken?: NextToken;
   }
@@ -2248,7 +2256,7 @@ declare namespace Kendra {
      */
     NextToken?: NextToken;
     /**
-     * An array of summary information for one or more thesauruses.
+     * An array of summary information for a thesaurus or multiple thesauri.
      */
     ThesaurusSummaryItems?: ThesaurusSummaryItems;
   }
@@ -2441,7 +2449,7 @@ declare namespace Kendra {
      */
     SortingConfiguration?: SortingConfiguration;
     /**
-     * The user context token.
+     * The user context token or user and group information.
      */
     UserContext?: UserContext;
     /**
@@ -3219,9 +3227,13 @@ declare namespace Kendra {
      */
     UserTokenConfigurations?: UserTokenConfigurationList;
     /**
-     * The user user token context policy.
+     * The user context policy.
      */
     UserContextPolicy?: UserContextPolicy;
+    /**
+     * Enables fetching access levels of groups and users from an AWS Single Sign-On identity source. To configure this, see UserGroupResolutionConfiguration.
+     */
+    UserGroupResolutionConfiguration?: UserGroupResolutionConfiguration;
   }
   export interface UpdateQuerySuggestionsBlockListRequest {
     /**
@@ -3329,6 +3341,13 @@ declare namespace Kendra {
     DataSourceGroups?: DataSourceGroups;
   }
   export type UserContextPolicy = "ATTRIBUTE_FILTER"|"USER_TOKEN"|string;
+  export interface UserGroupResolutionConfiguration {
+    /**
+     * The identity store provider (mode) you want to use to fetch access levels of groups and users. AWS Single Sign-On is currently the only available mode. Your users and groups must exist in an AWS SSO identity source in order to use this mode.
+     */
+    UserGroupResolutionMode: UserGroupResolutionMode;
+  }
+  export type UserGroupResolutionMode = "AWS_SSO"|"NONE"|string;
   export type UserId = string;
   export type UserNameAttributeField = string;
   export interface UserTokenConfiguration {
@@ -3348,7 +3367,7 @@ declare namespace Kendra {
   export type VpcSecurityGroupId = string;
   export interface WebCrawlerConfiguration {
     /**
-     * Specifies the seed or starting point URLs of the websites or the sitemap URLs of the websites you want to crawl. You can include website subdomains. You can list up to 100 seed URLs and up to three sitemap URLs.  When selecting websites to index, you must adhere to the Amazon Acceptable Use Policy and all other Amazon terms. Remember that you must only use the Amazon Kendra web crawler to index your own webpages, or webpages that you have authorization to index. 
+     * Specifies the seed or starting point URLs of the websites or the sitemap URLs of the websites you want to crawl. You can include website subdomains. You can list up to 100 seed URLs and up to three sitemap URLs. You can only crawl websites that use the secure communication protocol, Hypertext Transfer Protocol Secure (HTTPS). If you receive an error when crawling a website, it could be that the website is blocked from crawling.  When selecting websites to index, you must adhere to the Amazon Acceptable Use Policy and all other Amazon terms. Remember that you must only use the Amazon Kendra web crawler to index your own webpages, or webpages that you have authorization to index. 
      */
     Urls: Urls;
     /**

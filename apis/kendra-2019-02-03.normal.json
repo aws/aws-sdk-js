@@ -188,7 +188,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p>Creates a data source that you use to with an Amazon Kendra index. </p> <p>You specify a name, data source connector type and description for your data source. You also specify configuration information such as document metadata (author, source URI, and so on) and user context information.</p> <p> <code>CreateDataSource</code> is a synchronous operation. The operation returns 200 if the data source was successfully created. Otherwise, an exception is raised.</p>"
+      "documentation": "<p>Creates a data source that you want to use with an Amazon Kendra index. </p> <p>You specify a name, data source connector type and description for your data source. You also specify configuration information for the data source connector.</p> <p> <code>CreateDataSource</code> is a synchronous operation. The operation returns 200 if the data source was successfully created. Otherwise, an exception is raised.</p>"
     },
     "CreateFaq": {
       "name": "CreateFaq",
@@ -1061,7 +1061,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p>Maps users to their groups. You can also map sub groups to groups. For example, the group \"Company Intellectual Property Teams\" includes sub groups \"Research\" and \"Engineering\". These sub groups include their own list of users or people who work in these teams. Only users who work in research and engineering, and therefore belong in the intellectual property group, can see top-secret company documents in their search results. </p> <p>You map users to their groups when you want to filter search results for different users based on their group’s access to documents. For more information on filtering search results for different users, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/user-context-filter.html\">Filtering on user context</a>.</p> <p>If more than five <code>PUT</code> actions for a group are currently processing, a validation exception is thrown.</p>"
+      "documentation": "<p>Maps users to their groups so that you only need to provide the user ID when you issue the query.</p> <p>You can also map sub groups to groups. For example, the group \"Company Intellectual Property Teams\" includes sub groups \"Research\" and \"Engineering\". These sub groups include their own list of users or people who work in these teams. Only users who work in research and engineering, and therefore belong in the intellectual property group, can see top-secret company documents in their search results.</p> <p>You map users to their groups when you want to filter search results for different users based on their group’s access to documents. For more information on filtering search results for different users, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/user-context-filter.html\">Filtering on user context</a>.</p> <p>If more than five <code>PUT</code> actions for a group are currently processing, a validation exception is thrown.</p>"
     },
     "Query": {
       "name": "Query",
@@ -1520,22 +1520,22 @@
         },
         "GreaterThan": {
           "shape": "DocumentAttribute",
-          "documentation": "<p>Performs a greater than operation on two document attributes. Use with a document attribute of type <code>Integer</code> or <code>Long</code>.</p>"
+          "documentation": "<p>Performs a greater than operation on two document attributes. Use with a document attribute of type <code>Date</code> or <code>Long</code>.</p>"
         },
         "GreaterThanOrEquals": {
           "shape": "DocumentAttribute",
-          "documentation": "<p>Performs a greater or equals than operation on two document attributes. Use with a document attribute of type <code>Integer</code> or <code>Long</code>.</p>"
+          "documentation": "<p>Performs a greater or equals than operation on two document attributes. Use with a document attribute of type <code>Date</code> or <code>Long</code>.</p>"
         },
         "LessThan": {
           "shape": "DocumentAttribute",
-          "documentation": "<p>Performs a less than operation on two document attributes. Use with a document attribute of type <code>Integer</code> or <code>Long</code>.</p>"
+          "documentation": "<p>Performs a less than operation on two document attributes. Use with a document attribute of type <code>Date</code> or <code>Long</code>.</p>"
         },
         "LessThanOrEquals": {
           "shape": "DocumentAttribute",
-          "documentation": "<p>Performs a less than or equals operation on two document attributes. Use with a document attribute of type <code>Integer</code> or <code>Long</code>.</p>"
+          "documentation": "<p>Performs a less than or equals operation on two document attributes. Use with a document attribute of type <code>Date</code> or <code>Long</code>.</p>"
         }
       },
-      "documentation": "<p>Provides filtering the query results based on document attributes.</p> <p>When you use the <code>AndAllFilters</code> or <code>OrAllFilters</code>, filters you can use 2 layers under the first attribute filter. For example, you can use:</p> <p> <code>&lt;AndAllFilters&gt;</code> </p> <ol> <li> <p> <code> &lt;OrAllFilters&gt;</code> </p> </li> <li> <p> <code> &lt;EqualTo&gt;</code> </p> </li> </ol> <p>If you use more than 2 layers, you receive a <code>ValidationException</code> exception with the message \"<code>AttributeFilter</code> cannot have a depth of more than 2.\"</p> <p>If you use more than 10 attribute filters, you receive a <code>ValidationException</code> exception with the message \"<code>AttributeFilter</code> cannot have a length of more than 10\".</p>"
+      "documentation": "<p>Provides filtering the query results based on document attributes.</p> <p>When you use the <code>AndAllFilters</code> or <code>OrAllFilters</code>, filters you can use 2 layers under the first attribute filter. For example, you can use:</p> <p> <code>&lt;AndAllFilters&gt;</code> </p> <ol> <li> <p> <code> &lt;OrAllFilters&gt;</code> </p> </li> <li> <p> <code> &lt;EqualTo&gt;</code> </p> </li> </ol> <p>If you use more than 2 layers, you receive a <code>ValidationException</code> exception with the message \"<code>AttributeFilter</code> cannot have a depth of more than 2.\"</p> <p>If you use more than 10 attribute filters in a given list for <code>AndAllFilters</code> or <code>OrAllFilters</code>, you receive a <code>ValidationException</code> with the message \"<code>AttributeFilter</code> cannot have a length of more than 10\".</p>"
     },
     "AttributeFilterList": {
       "type": "list",
@@ -2354,7 +2354,11 @@
         },
         "UserContextPolicy": {
           "shape": "UserContextPolicy",
-          "documentation": "<p>The user context policy.</p> <dl> <dt>ATTRIBUTE_FILTER</dt> <dd> <p>All indexed content is searchable and displayable for all users. If there is an access control list, it is ignored. You can filter on user and group attributes. </p> </dd> <dt>USER_TOKEN</dt> <dd> <p>Enables SSO and token-based user access control. All documents with no access control and all documents accessible to the user will be searchable and displayable. </p> </dd> </dl>"
+          "documentation": "<p>The user context policy.</p> <dl> <dt>ATTRIBUTE_FILTER</dt> <dd> <p>All indexed content is searchable and displayable for all users. If you want to filter search results on user context, you can use the attribute filters of <code>_user_id</code> and <code>_group_ids</code> or you can provide user and group information in <code>UserContext</code>. </p> </dd> <dt>USER_TOKEN</dt> <dd> <p>Enables token-based user access control to filter search results on user context. All documents with no access control and all documents accessible to the user will be searchable and displayable. </p> </dd> </dl>"
+        },
+        "UserGroupResolutionConfiguration": {
+          "shape": "UserGroupResolutionConfiguration",
+          "documentation": "<p>Enables fetching access levels of groups and users from an AWS Single Sign-On identity source. To configure this, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_UserGroupResolutionConfiguration.html\">UserGroupResolutionConfiguration</a>.</p>"
         }
       }
     },
@@ -2451,7 +2455,7 @@
         },
         "ClientToken": {
           "shape": "ClientTokenName",
-          "documentation": "<p>A token that you provide to identify the request to create a thesaurus. Multiple calls to the <code>CreateThesaurus</code> operation with the same client token will create only one index. </p>",
+          "documentation": "<p>A token that you provide to identify the request to create a thesaurus. Multiple calls to the <code>CreateThesaurus</code> operation with the same client token will create only one thesaurus. </p>",
           "idempotencyToken": true
         }
       }
@@ -3161,6 +3165,10 @@
         "UserContextPolicy": {
           "shape": "UserContextPolicy",
           "documentation": "<p>The user context policy for the Amazon Kendra index.</p>"
+        },
+        "UserGroupResolutionConfiguration": {
+          "shape": "UserGroupResolutionConfiguration",
+          "documentation": "<p>Shows whether you have enabled the configuration for fetching access levels of groups and users from an AWS Single Sign-On identity source.</p>"
         }
       }
     },
@@ -3252,7 +3260,7 @@
         },
         "CreatedAt": {
           "shape": "Timestamp",
-          "documentation": "<p>Shows the date-time a block list for query suggestions was last created.</p>"
+          "documentation": "<p>Shows the date-time a block list for query suggestions was created.</p>"
         },
         "UpdatedAt": {
           "shape": "Timestamp",
@@ -3958,7 +3966,7 @@
         },
         "S3PathforGroupMembers": {
           "shape": "S3Path",
-          "documentation": "<p>If you have more than 1000 users and/or sub groups for a single group, you need to provide the path to the S3 file that lists your users and sub groups for a group. Your sub groups can contain more than 1000 users, but the list of sub groups that belong to a group (and/or users) must be no more than 1000.</p>"
+          "documentation": "<p>If you have more than 1000 users and/or sub groups for a single group, you need to provide the path to the S3 file that lists your users and sub groups for a group. Your sub groups can contain more than 1000 users, but the list of sub groups that belong to a group (and/or users) must be no more than 1000.</p> <p>You can download this <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/samples/group_members.zip\">example S3 file</a> that uses the correct format for listing group members. Note, <code>dataSourceId</code> is optional. The value of <code>type</code> for a group is always <code>GROUP</code> and for a user it is always <code>USER</code>.</p>"
         }
       },
       "documentation": "<p>A list of users or sub groups that belong to a group. Users and groups are useful for filtering search results to different users based on their group's access to documents.</p>"
@@ -4291,7 +4299,7 @@
         },
         "NextToken": {
           "shape": "NextToken",
-          "documentation": "<p>If the result of the previous request to <code>GetDataSourceSyncJobHistory</code> was truncated, include the <code>NextToken</code> to fetch the next set of jobs.</p>"
+          "documentation": "<p>If the previous response was incomplete (because there is more data to retrieve), Amazon Kendra returns a pagination token in the response. You can use this pagination token to retrieve the next set of jobs.</p>"
         },
         "MaxResults": {
           "shape": "MaxResultsIntegerForListDataSourceSyncJobsRequest",
@@ -4316,7 +4324,7 @@
         },
         "NextToken": {
           "shape": "NextToken",
-          "documentation": "<p>The <code>GetDataSourceSyncJobHistory</code> operation returns a page of vocabularies at a time. The maximum size of the page is set by the <code>MaxResults</code> parameter. If there are more jobs in the list than the page size, Amazon Kendra returns the NextPage token. Include the token in the next request to the <code>GetDataSourceSyncJobHistory</code> operation to return in the next page of jobs.</p>"
+          "documentation": "<p>If the response is truncated, Amazon Kendra returns this token that you can use in the subsequent request to retrieve the next set of jobs.</p>"
         }
       }
     },
@@ -4365,7 +4373,7 @@
         },
         "NextToken": {
           "shape": "NextToken",
-          "documentation": "<p>If the result of the previous request to <code>ListFaqs</code> was truncated, include the <code>NextToken</code> to fetch the next set of FAQs.</p>"
+          "documentation": "<p>If the previous response was incomplete (because there is more data to retrieve), Amazon Kendra returns a pagination token in the response. You can use this pagination token to retrieve the next set of FAQs.</p>"
         },
         "MaxResults": {
           "shape": "MaxResultsIntegerForListFaqsRequest",
@@ -4378,7 +4386,7 @@
       "members": {
         "NextToken": {
           "shape": "NextToken",
-          "documentation": "<p>The <code>ListFaqs</code> operation returns a page of FAQs at a time. The maximum size of the page is set by the <code>MaxResults</code> parameter. If there are more jobs in the list than the page size, Amazon Kendra returns the <code>NextPage</code> token. Include the token in the next request to the <code>ListFaqs</code> operation to return the next page of FAQs.</p>"
+          "documentation": "<p>If the response is truncated, Amazon Kendra returns this token that you can use in the subsequent request to retrieve the next set of FAQs.</p>"
         },
         "FaqSummaryItems": {
           "shape": "FaqSummaryItems",
@@ -4407,11 +4415,11 @@
         },
         "NextToken": {
           "shape": "NextToken",
-          "documentation": "<p> The next items in the list of groups that go beyond the maximum. </p>"
+          "documentation": "<p> If the previous response was incomplete (because there is more data to retrieve), Amazon Kendra returns a pagination token in the response. You can use this pagination token to retrieve the next set of groups that are mapped to users before a given ordering or timestamp identifier. </p>"
         },
         "MaxResults": {
           "shape": "MaxResultsIntegerForListPrincipalsRequest",
-          "documentation": "<p> The maximum results shown for a list of groups that are mapped to users before a given ordering or timestamp identifier. </p>"
+          "documentation": "<p> The maximum number of returned groups that are mapped to users before a given ordering or timestamp identifier. </p>"
         }
       }
     },
@@ -4424,7 +4432,7 @@
         },
         "NextToken": {
           "shape": "NextToken",
-          "documentation": "<p> The next items in the list of groups that go beyond the maximum. </p>"
+          "documentation": "<p> If the response is truncated, Amazon Kendra returns this token that you can use in the subsequent request to retrieve the next set of groups that are mapped to users before a given ordering or timestamp identifier. </p>"
         }
       }
     },
@@ -4543,7 +4551,7 @@
         },
         "ThesaurusSummaryItems": {
           "shape": "ThesaurusSummaryItems",
-          "documentation": "<p>An array of summary information for one or more thesauruses.</p>"
+          "documentation": "<p>An array of summary information for a thesaurus or multiple thesauri.</p>"
         }
       }
     },
@@ -4949,7 +4957,7 @@
         },
         "UserContext": {
           "shape": "UserContext",
-          "documentation": "<p>The user context token.</p>"
+          "documentation": "<p>The user context token or user and group information.</p>"
         },
         "VisitorId": {
           "shape": "VisitorId",
@@ -6214,7 +6222,7 @@
           "documentation": "<p>The Unix datetime that the thesaurus was last updated.</p>"
         }
       },
-      "documentation": "<p>An array of summary information for one or more thesauruses.</p>"
+      "documentation": "<p>An array of summary information for a thesaurus or multiple thesauri.</p>"
     },
     "ThesaurusSummaryItems": {
       "type": "list",
@@ -6341,7 +6349,11 @@
         },
         "UserContextPolicy": {
           "shape": "UserContextPolicy",
-          "documentation": "<p>The user user token context policy.</p>"
+          "documentation": "<p>The user context policy.</p>"
+        },
+        "UserGroupResolutionConfiguration": {
+          "shape": "UserGroupResolutionConfiguration",
+          "documentation": "<p>Enables fetching access levels of groups and users from an AWS Single Sign-On identity source. To configure this, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_UserGroupResolutionConfiguration.html\">UserGroupResolutionConfiguration</a>.</p>"
         }
       }
     },
@@ -6460,7 +6472,7 @@
           "documentation": "<p>Provides the configuration of the sitemap URLs of the websites you want to crawl.</p> <p>Only URLs belonging to the same website host names are crawled. You can list up to three sitemap URLs.</p>"
         }
       },
-      "documentation": "<p>Provides the configuration information of the URLs to crawl.</p> <p> <i>When selecting websites to index, you must adhere to the <a href=\"https://aws.amazon.com/aup/\">Amazon Acceptable Use Policy</a> and all other Amazon terms. Remember that you must only use the Amazon Kendra web crawler to index your own webpages, or webpages that you have authorization to index.</i> </p>"
+      "documentation": "<p>Provides the configuration information of the URLs to crawl.</p> <p>You can only crawl websites that use the secure communication protocol, Hypertext Transfer Protocol Secure (HTTPS). If you receive an error when crawling a website, it could be that the website is blocked from crawling.</p> <p> <i>When selecting websites to index, you must adhere to the <a href=\"https://aws.amazon.com/aup/\">Amazon Acceptable Use Policy</a> and all other Amazon terms. Remember that you must only use the Amazon Kendra web crawler to index your own webpages, or webpages that you have authorization to index.</i> </p>"
     },
     "UserAccount": {
       "type": "string",
@@ -6488,13 +6500,33 @@
           "documentation": "<p>The list of data source groups you want to filter search results based on groups' access to documents in that data source.</p>"
         }
       },
-      "documentation": "<p>Provides information about the user context for a Amazon Kendra index.</p> <p>This is used for filtering search results for different users based on their access to documents.</p> <p>You provide one of the following:</p> <ul> <li> <p>User token</p> </li> <li> <p>User ID, the groups the user belongs to, and the data sources the groups can access</p> </li> </ul> <p>If you provide both, an exception is thrown.</p>"
+      "documentation": "<p>Provides information about the user context for an Amazon Kendra index.</p> <p>This is used for filtering search results for different users based on their access to documents.</p> <p>You provide one of the following:</p> <ul> <li> <p>User token</p> </li> <li> <p>User ID, the groups the user belongs to, and any data sources the groups can access.</p> </li> </ul> <p>If you provide both, an exception is thrown.</p>"
     },
     "UserContextPolicy": {
       "type": "string",
       "enum": [
         "ATTRIBUTE_FILTER",
         "USER_TOKEN"
+      ]
+    },
+    "UserGroupResolutionConfiguration": {
+      "type": "structure",
+      "required": [
+        "UserGroupResolutionMode"
+      ],
+      "members": {
+        "UserGroupResolutionMode": {
+          "shape": "UserGroupResolutionMode",
+          "documentation": "<p>The identity store provider (mode) you want to use to fetch access levels of groups and users. AWS Single Sign-On is currently the only available mode. Your users and groups must exist in an AWS SSO identity source in order to use this mode.</p>"
+        }
+      },
+      "documentation": "<p>Provides the configuration information to fetch access levels of groups and users from an AWS Single Sign-On identity source. This is useful for setting up user context filtering, where Amazon Kendra filters search results for different users based on their group's access to documents. You can also map your users to their groups for user context filtering using the <a href=\"https://docs.aws.amazon.com/latest/dg/API_PutPrincipalMapping.html\">PutPrincipalMapping operation</a>.</p> <p>To set up an AWS SSO identity source in the console to use with Amazon Kendra, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/getting-started-aws-sso.html\">Getting started with an AWS SSO identity source</a>. You must also grant the required permissions to use AWS SSO with Amazon Kendra. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html#iam-roles-aws-sso\">IAM roles for AWS Single Sign-On</a>.</p>"
+    },
+    "UserGroupResolutionMode": {
+      "type": "string",
+      "enum": [
+        "AWS_SSO",
+        "NONE"
       ]
     },
     "UserId": {
@@ -6564,7 +6596,7 @@
       "members": {
         "Urls": {
           "shape": "Urls",
-          "documentation": "<p>Specifies the seed or starting point URLs of the websites or the sitemap URLs of the websites you want to crawl.</p> <p>You can include website subdomains. You can list up to 100 seed URLs and up to three sitemap URLs.</p> <p> <i>When selecting websites to index, you must adhere to the <a href=\"https://aws.amazon.com/aup/\">Amazon Acceptable Use Policy</a> and all other Amazon terms. Remember that you must only use the Amazon Kendra web crawler to index your own webpages, or webpages that you have authorization to index.</i> </p>"
+          "documentation": "<p>Specifies the seed or starting point URLs of the websites or the sitemap URLs of the websites you want to crawl.</p> <p>You can include website subdomains. You can list up to 100 seed URLs and up to three sitemap URLs.</p> <p>You can only crawl websites that use the secure communication protocol, Hypertext Transfer Protocol Secure (HTTPS). If you receive an error when crawling a website, it could be that the website is blocked from crawling.</p> <p> <i>When selecting websites to index, you must adhere to the <a href=\"https://aws.amazon.com/aup/\">Amazon Acceptable Use Policy</a> and all other Amazon terms. Remember that you must only use the Amazon Kendra web crawler to index your own webpages, or webpages that you have authorization to index.</i> </p>"
         },
         "CrawlDepth": {
           "shape": "CrawlDepth",

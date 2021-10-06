@@ -502,6 +502,10 @@ declare namespace FSx {
      */
     StorageType?: StorageType;
     KmsKeyId?: KmsKeyId;
+    /**
+     * Sets the version for the Amazon FSx for Lustre file system you're creating from a backup. Valid values are 2.10 and 2.12. You don't need to specify FileSystemTypeVersion because it will be applied using the backup's FileSystemTypeVersion setting. If you choose to specify FileSystemTypeVersion when creating from backup, the value must match the backup's FileSystemTypeVersion setting.
+     */
+    FileSystemTypeVersion?: FileSystemTypeVersion;
   }
   export interface CreateFileSystemFromBackupResponse {
     /**
@@ -616,6 +620,10 @@ declare namespace FSx {
     WindowsConfiguration?: CreateFileSystemWindowsConfiguration;
     LustreConfiguration?: CreateFileSystemLustreConfiguration;
     OntapConfiguration?: CreateFileSystemOntapConfiguration;
+    /**
+     * Sets the version of the Amazon FSx for Lustre file system you're creating. Valid values are 2.10 and 2.12.   Set the value to 2.10 to create a Lustre 2.10 file system.   Set the value to 2.12 to create a Lustre 2.12 file system.   Default value is 2.10.
+     */
+    FileSystemTypeVersion?: FileSystemTypeVersion;
   }
   export interface CreateFileSystemResponse {
     /**
@@ -1252,6 +1260,10 @@ declare namespace FSx {
      * The configuration for this FSx for NetApp ONTAP file system.
      */
     OntapConfiguration?: OntapFileSystemConfiguration;
+    /**
+     * The version of your Amazon FSx for Lustre file system, either 2.10 or 2.12.
+     */
+    FileSystemTypeVersion?: FileSystemTypeVersion;
   }
   export type FileSystemAdministratorsGroupName = string;
   export interface FileSystemEndpoint {
@@ -1283,6 +1295,7 @@ declare namespace FSx {
   export type FileSystemMaintenanceOperation = "PATCHING"|"BACKING_UP"|string;
   export type FileSystemMaintenanceOperations = FileSystemMaintenanceOperation[];
   export type FileSystemType = "WINDOWS"|"LUSTRE"|"ONTAP"|string;
+  export type FileSystemTypeVersion = string;
   export type FileSystems = FileSystem[];
   export interface Filter {
     /**
@@ -1480,7 +1493,7 @@ declare namespace FSx {
      */
     UserName?: DirectoryUserName;
     /**
-     * A list of up to two IP addresses of DNS servers or domain controllers in the self-managed AD directory.
+     * A list of up to three IP addresses of DNS servers or domain controllers in the self-managed AD directory.
      */
     DnsIps?: DnsIps;
   }
@@ -1506,7 +1519,7 @@ declare namespace FSx {
      */
     Password: DirectoryPassword;
     /**
-     * A list of up to two IP addresses of DNS servers or domain controllers in the self-managed AD directory. 
+     * A list of up to three IP addresses of DNS servers or domain controllers in the self-managed AD directory. 
      */
     DnsIps: DnsIps;
   }
@@ -1520,7 +1533,7 @@ declare namespace FSx {
      */
     Password?: DirectoryPassword;
     /**
-     * A list of up to two IP addresses of DNS servers or domain controllers in the self-managed AD directory.
+     * A list of up to three IP addresses of DNS servers or domain controllers in the self-managed AD directory.
      */
     DnsIps?: DnsIps;
   }

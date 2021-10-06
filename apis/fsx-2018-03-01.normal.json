@@ -1446,6 +1446,10 @@
         },
         "KmsKeyId": {
           "shape": "KmsKeyId"
+        },
+        "FileSystemTypeVersion": {
+          "shape": "FileSystemTypeVersion",
+          "documentation": "<p>Sets the version for the Amazon FSx for Lustre file system you're creating from a backup. Valid values are <code>2.10</code> and <code>2.12</code>.</p> <p>You don't need to specify <code>FileSystemTypeVersion</code> because it will be applied using the backup's <code>FileSystemTypeVersion</code> setting. If you choose to specify <code>FileSystemTypeVersion</code> when creating from backup, the value must match the backup's <code>FileSystemTypeVersion</code> setting.</p>"
         }
       },
       "documentation": "<p>The request object for the <code>CreateFileSystemFromBackup</code> operation.</p>"
@@ -1606,6 +1610,10 @@
         },
         "OntapConfiguration": {
           "shape": "CreateFileSystemOntapConfiguration"
+        },
+        "FileSystemTypeVersion": {
+          "shape": "FileSystemTypeVersion",
+          "documentation": "<p>Sets the version of the Amazon FSx for Lustre file system you're creating. Valid values are <code>2.10</code> and <code>2.12</code>.</p> <ul> <li> <p>Set the value to <code>2.10</code> to create a Lustre 2.10 file system.</p> </li> <li> <p>Set the value to <code>2.12</code> to create a Lustre 2.12 file system.</p> </li> </ul> <p>Default value is <code>2.10</code>.</p>"
         }
       },
       "documentation": "<p>The request object used to create a new Amazon FSx file system.</p>"
@@ -2680,6 +2688,10 @@
         "OntapConfiguration": {
           "shape": "OntapFileSystemConfiguration",
           "documentation": "<p>The configuration for this FSx for NetApp ONTAP file system.</p>"
+        },
+        "FileSystemTypeVersion": {
+          "shape": "FileSystemTypeVersion",
+          "documentation": "<p>The version of your Amazon FSx for Lustre file system, either <code>2.10</code> or <code>2.12</code>.</p>"
         }
       },
       "documentation": "<p>A description of a specific Amazon FSx file system.</p>"
@@ -2778,6 +2790,12 @@
         "LUSTRE",
         "ONTAP"
       ]
+    },
+    "FileSystemTypeVersion": {
+      "type": "string",
+      "max": 20,
+      "min": 1,
+      "pattern": "^[0-9](\\.[0-9]*)*$"
     },
     "FileSystems": {
       "type": "list",
@@ -3248,7 +3266,7 @@
         },
         "DnsIps": {
           "shape": "DnsIps",
-          "documentation": "<p>A list of up to two IP addresses of DNS servers or domain controllers in the self-managed AD directory.</p>"
+          "documentation": "<p>A list of up to three IP addresses of DNS servers or domain controllers in the self-managed AD directory.</p>"
         }
       },
       "documentation": "<p>The configuration of the self-managed Microsoft Active Directory (AD) directory to which the Windows File Server or ONTAP storage virtual machine (SVM) instance is joined.</p>"
@@ -3284,10 +3302,10 @@
         },
         "DnsIps": {
           "shape": "DnsIps",
-          "documentation": "<p>A list of up to two IP addresses of DNS servers or domain controllers in the self-managed AD directory. </p>"
+          "documentation": "<p>A list of up to three IP addresses of DNS servers or domain controllers in the self-managed AD directory. </p>"
         }
       },
-      "documentation": "<p>The configuration that Amazon FSx uses to join a Amazon FSx for Windows File Server file system or an ONTAP storage virtual machine (SVM) to a self-managed (including on-premises) Microsoft Active Directory (AD) directory. For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/self-managed-AD.html\"> Using Amazon FSx with your self-managed Microsoft Active Directory</a> or <a href=\"https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-svms.html\">Managing SVMs</a>.</p>"
+      "documentation": "<p>The configuration that Amazon FSx uses to join a FSx for Windows File Server file system or an ONTAP storage virtual machine (SVM) to a self-managed (including on-premises) Microsoft Active Directory (AD) directory. For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/self-managed-AD.html\"> Using Amazon FSx with your self-managed Microsoft Active Directory</a> or <a href=\"https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-svms.html\">Managing SVMs</a>.</p>"
     },
     "SelfManagedActiveDirectoryConfigurationUpdates": {
       "type": "structure",
@@ -3302,7 +3320,7 @@
         },
         "DnsIps": {
           "shape": "DnsIps",
-          "documentation": "<p>A list of up to two IP addresses of DNS servers or domain controllers in the self-managed AD directory.</p>"
+          "documentation": "<p>A list of up to three IP addresses of DNS servers or domain controllers in the self-managed AD directory.</p>"
         }
       },
       "documentation": "<p>The configuration that Amazon FSx uses to join the Windows File Server instance to a self-managed Microsoft Active Directory (AD) directory.</p>"
