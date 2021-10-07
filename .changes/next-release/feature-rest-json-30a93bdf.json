@@ -1,0 +1,5 @@
+{
+  "type": "feature",
+  "category": "rest-json",
+  "description": "Update serialization of Rest-JSON API input and Content-Type"
+}
