@@ -125,9 +125,11 @@
     expectedData = formatData(_case.result, svc.api.operations[_case.op].output);
     resultData = formatData(req.response.data, svc.api.operations[_case.op].output);
     results = [];
-    for (k in expectedData) {
-      v = expectedData[k];
-      results.push(expect(resultData[k]).to.eql(v));
+    if (resultData) {
+      for (k in expectedData) {
+        v = expectedData[k];
+        results.push(expect(resultData[k]).to.eql(v));
+      }
     }
     return results;
   };
