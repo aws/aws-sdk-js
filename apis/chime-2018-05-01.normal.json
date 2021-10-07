@@ -6825,6 +6825,9 @@
           "shape": "ThrottledClientException"
         },
         {
+          "shape": "ConflictException"
+        },
+        {
           "shape": "ServiceUnavailableException"
         },
         {
@@ -7568,6 +7571,36 @@
       "pattern": "^arn[\\/\\:\\-\\_\\.a-zA-Z0-9]+$",
       "sensitive": true
     },
+    "ArtifactsConfiguration": {
+      "type": "structure",
+      "required": [
+        "Audio",
+        "Video",
+        "Content"
+      ],
+      "members": {
+        "Audio": {
+          "shape": "AudioArtifactsConfiguration",
+          "documentation": "<p>The configuration for the audio artifacts.</p>"
+        },
+        "Video": {
+          "shape": "VideoArtifactsConfiguration",
+          "documentation": "<p>The configuration for the video artifacts.</p>"
+        },
+        "Content": {
+          "shape": "ContentArtifactsConfiguration",
+          "documentation": "<p>The configuration for the content artifacts.</p>"
+        }
+      },
+      "documentation": "<p>The configuration for the artifacts.</p>"
+    },
+    "ArtifactsState": {
+      "type": "string",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ]
+    },
     "AssociatePhoneNumberWithUserRequest": {
       "type": "structure",
       "required": [
@@ -7703,6 +7736,13 @@
       },
       "documentation": "<p> An Amazon Chime SDK meeting attendee. Includes a unique <code>AttendeeId</code> and <code>JoinToken</code> . The <code>JoinToken</code> allows a client to authenticate and join as the specified attendee. The <code>JoinToken</code> expires when the meeting ends or when <a>DeleteAttendee</a> is called. After that, the attendee is unable to join the meeting. </p> <p>We recommend securely transferring each <code>JoinToken</code> from your server application to the client so that no other client has access to the token except for the one authorized to represent the attendee.</p>"
     },
+    "AttendeeIdList": {
+      "type": "list",
+      "member": {
+        "shape": "GuidString"
+      },
+      "min": 1
+    },
     "AttendeeList": {
       "type": "list",
       "member": {
@@ -7724,6 +7764,26 @@
       },
       "max": 10,
       "min": 1
+    },
+    "AudioArtifactsConfiguration": {
+      "type": "structure",
+      "required": [
+        "MuxType"
+      ],
+      "members": {
+        "MuxType": {
+          "shape": "AudioMuxType",
+          "documentation": "<p>The MUX type of the audio artifact configuration object.</p>"
+        }
+      },
+      "documentation": "<p>The audio artifact configuration object.</p>"
+    },
+    "AudioMuxType": {
+      "type": "string",
+      "enum": [
+        "AudioOnly",
+        "AudioWithActiveSpeakerVideo"
+      ]
     },
     "BatchChannelMemberships": {
       "type": "structure",
@@ -8499,6 +8559,20 @@
       "min": 5,
       "pattern": "arn:[a-z0-9-\\.]{1,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[^/].{0,1023}"
     },
+    "ChimeSdkMeetingConfiguration": {
+      "type": "structure",
+      "members": {
+        "SourceConfiguration": {
+          "shape": "SourceConfiguration",
+          "documentation": "<p>The source configuration for a specified media capture pipline.</p>"
+        },
+        "ArtifactsConfiguration": {
+          "shape": "ArtifactsConfiguration",
+          "documentation": "<p>The configuration for the artifacts in an Amazon Chime SDK meeting.</p>"
+        }
+      },
+      "documentation": "<p>The configuration object of the Amazon Chime SDK meeting for a specified media capture pipeline. <code>SourceType</code> must be <code>ChimeSdkMeeting</code>.</p>"
+    },
     "ClientRequestToken": {
       "type": "string",
       "max": 64,
@@ -8512,6 +8586,29 @@
       "min": 0,
       "pattern": "[\\s\\S]*",
       "sensitive": true
+    },
+    "ContentArtifactsConfiguration": {
+      "type": "structure",
+      "required": [
+        "State"
+      ],
+      "members": {
+        "State": {
+          "shape": "ArtifactsState",
+          "documentation": "<p>Indicates whether the content artifact is enabled or disabled.</p>"
+        },
+        "MuxType": {
+          "shape": "ContentMuxType",
+          "documentation": "<p>The MUX type of the artifact configuration.</p>"
+        }
+      },
+      "documentation": "<p>The content artifact object.</p>"
+    },
+    "ContentMuxType": {
+      "type": "string",
+      "enum": [
+        "ContentOnly"
+      ]
     },
     "ConversationRetentionSettings": {
       "type": "structure",
@@ -8979,6 +9076,10 @@
           "shape": "ClientRequestToken",
           "documentation": "<p>The token assigned to the client making the pipeline request.</p>",
           "idempotencyToken": true
+        },
+        "ChimeSdkMeetingConfiguration": {
+          "shape": "ChimeSdkMeetingConfiguration",
+          "documentation": "<p>The configuration for a specified media capture pipeline. <code>SourceType</code> must be <code>ChimeSdkMeeting</code>.</p>"
         }
       }
     },
@@ -10565,6 +10666,13 @@
       "max": 64,
       "min": 2,
       "sensitive": true
+    },
+    "ExternalUserIdList": {
+      "type": "list",
+      "member": {
+        "shape": "ExternalUserIdType"
+      },
+      "min": 1
     },
     "ExternalUserIdType": {
       "type": "string",
@@ -12738,9 +12846,13 @@
         "UpdatedTimestamp": {
           "shape": "Iso8601Timestamp",
           "documentation": "<p>The time at which the capture pipeline was updated, in ISO 8601 format.</p>"
+        },
+        "ChimeSdkMeetingConfiguration": {
+          "shape": "ChimeSdkMeetingConfiguration",
+          "documentation": "<p>The configuration for a specified media capture pipeline. <code>SourceType</code> must be <code>ChimeSdkMeeting</code>.</p>"
         }
       },
-      "documentation": "<p>A media capture pipeline object. A string consisting of an ID, source type, a source ARN, a sink type, and a sink ARN.</p>"
+      "documentation": "<p>A media capture pipeline object consisting of an ID, source type, source ARN, a sink type, a sink ARN, and a configuration object.</p>"
     },
     "MediaCapturePipelineList": {
       "type": "list",
@@ -12803,7 +12915,7 @@
         },
         "EventIngestionUrl": {
           "shape": "UriType",
-          "documentation": "<p>The URL of the S3 bucket used to store the captured media.</p>"
+          "documentation": "<p>The event ingestion URL.</p>"
         }
       },
       "documentation": "<p>A set of endpoints used by clients to connect to the media service group for an Amazon Chime SDK meeting.</p>"
@@ -14272,6 +14384,20 @@
         }
       }
     },
+    "SelectedVideoStreams": {
+      "type": "structure",
+      "members": {
+        "AttendeeIds": {
+          "shape": "AttendeeIdList",
+          "documentation": "<p>The attendee IDs of the streams selected for a media capture pipeline. </p>"
+        },
+        "ExternalUserIds": {
+          "shape": "ExternalUserIdList",
+          "documentation": "<p>The external user IDs of the streams selected for a media capture pipeline.</p>"
+        }
+      },
+      "documentation": "<p>The video streams to capture for a specified media capture pipeline. The total number of video streams can't exceed 25.</p>"
+    },
     "SendChannelMessageRequest": {
       "type": "structure",
       "required": [
@@ -14538,6 +14664,16 @@
         "ASCENDING",
         "DESCENDING"
       ]
+    },
+    "SourceConfiguration": {
+      "type": "structure",
+      "members": {
+        "SelectedVideoStreams": {
+          "shape": "SelectedVideoStreams",
+          "documentation": "<p>The selected video streams to capture for a specified media capture pipeline. The number of video streams can't exceed 25.</p>"
+        }
+      },
+      "documentation": "<p>Source configuration for a specified media capture pipeline.</p>"
     },
     "StartMeetingTranscriptionRequest": {
       "type": "structure",
@@ -15243,10 +15379,6 @@
     },
     "UpdateGlobalSettingsRequest": {
       "type": "structure",
-      "required": [
-        "BusinessCalling",
-        "VoiceConnector"
-      ],
       "members": {
         "BusinessCalling": {
           "shape": "BusinessCallingSettings",
@@ -15854,6 +15986,29 @@
       "enum": [
         "PrivateUser",
         "SharedDevice"
+      ]
+    },
+    "VideoArtifactsConfiguration": {
+      "type": "structure",
+      "required": [
+        "State"
+      ],
+      "members": {
+        "State": {
+          "shape": "ArtifactsState",
+          "documentation": "<p>Indicates whether the video artifact is enabled or disabled.</p>"
+        },
+        "MuxType": {
+          "shape": "VideoMuxType",
+          "documentation": "<p>The MUX type of the video artifact configuration object.</p>"
+        }
+      },
+      "documentation": "<p>The video artifact configuration object.</p>"
+    },
+    "VideoMuxType": {
+      "type": "string",
+      "enum": [
+        "VideoOnly"
       ]
     },
     "VoiceConnector": {

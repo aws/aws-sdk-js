@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1002.0-->
+<!--LATEST=2.1003.0-->
 <!--ENTRYINSERT-->
+
+## 2.1003.0
+* feature: Backup: Launch of AWS Backup Vault Lock, which protects your backups from malicious and accidental actions, works with existing backup policies, and helps you meet compliance requirements.
+* feature: Chime: This release enables customers to configure Chime MediaCapturePipeline via API.
+* feature: Firehose: Allow support for Amazon Opensearch Service(successor to Amazon Elasticsearch Service) as a Kinesis Data Firehose delivery destination.
+* feature: Grafana: Initial release of the SDK for Amazon Managed Grafana API.
+* feature: Kendra: Amazon Kendra now supports indexing and querying documents in different languages.
+* feature: Schemas: Removing unused request/response objects.
 
 ## 2.1002.0
 * feature: AmplifyBackend: Adding a new field 'AmplifyFeatureFlags' to the response of the GetBackend operation. It will return a stringified version of the cli.json file for the given Amplify project.

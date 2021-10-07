@@ -827,6 +827,10 @@ declare namespace Kendra {
      * A token that you provide to identify the request to create a data source. Multiple calls to the CreateDataSource operation with the same client token will create only one data source.
      */
     ClientToken?: ClientTokenName;
+    /**
+     * The code for a language. This allows you to support a language for all documents when creating the data source. English is supported by default. For more information on supported languages, including their codes, see Adding documents in languages other than English.
+     */
+    LanguageCode?: LanguageCode;
   }
   export interface CreateDataSourceResponse {
     /**
@@ -867,6 +871,10 @@ declare namespace Kendra {
      * A token that you provide to identify the request to create a FAQ. Multiple calls to the CreateFaqRequest operation with the same client token will create only one FAQ. 
      */
     ClientToken?: ClientTokenName;
+    /**
+     * The code for a language. This allows you to support a language for the FAQ document. English is supported by default. For more information on supported languages, including their codes, see Adding documents in languages other than English.
+     */
+    LanguageCode?: LanguageCode;
   }
   export interface CreateFaqResponse {
     /**
@@ -1076,6 +1084,10 @@ declare namespace Kendra {
      * The status of the data source. When the status is ACTIVE the data source is ready to use.
      */
     Status?: DataSourceStatus;
+    /**
+     * The code for a language. This shows a supported language for all documents in the data source. English is supported by default. For more information on supported languages, including their codes, see Adding documents in languages other than English.
+     */
+    LanguageCode?: LanguageCode;
   }
   export type DataSourceSummaryList = DataSourceSummary[];
   export interface DataSourceSyncJob {
@@ -1323,6 +1335,10 @@ declare namespace Kendra {
      * When the Status field value is FAILED, the ErrorMessage field contains a description of the error that caused the data source to fail.
      */
     ErrorMessage?: ErrorMessage;
+    /**
+     * The code for a language. This shows a supported language for all documents in the data source. English is supported by default. For more information on supported languages, including their codes, see Adding documents in languages other than English.
+     */
+    LanguageCode?: LanguageCode;
   }
   export interface DescribeFaqRequest {
     /**
@@ -1376,6 +1392,10 @@ declare namespace Kendra {
      * The file format used by the input files for the FAQ.
      */
     FileFormat?: FaqFileFormat;
+    /**
+     * The code for a language. This shows a supported language for the FAQ document. English is supported by default. For more information on supported languages, including their codes, see Adding documents in languages other than English.
+     */
+    LanguageCode?: LanguageCode;
   }
   export interface DescribeIndexRequest {
     /**
@@ -1838,6 +1858,10 @@ declare namespace Kendra {
      * The file type used to create the FAQ. 
      */
     FileFormat?: FaqFileFormat;
+    /**
+     * The code for a language. This shows a supported language for the FAQ document as part of the summary information for FAQs. English is supported by default. For more information on supported languages, including their codes, see Adding documents in languages other than English.
+     */
+    LanguageCode?: LanguageCode;
   }
   export type FaqSummaryItems = FaqSummary[];
   export type FeedbackToken = string;
@@ -2063,6 +2087,7 @@ declare namespace Kendra {
   }
   export type KeyLocation = "URL"|"SECRET_MANAGER"|string;
   export type KmsKeyId = string;
+  export type LanguageCode = string;
   export interface ListDataSourceSyncJobsRequest {
     /**
      * The identifier of the data source.
@@ -2769,7 +2794,7 @@ declare namespace Kendra {
      */
     ScoreConfidence?: ScoreConfidence;
   }
-  export type ScoreConfidence = "VERY_HIGH"|"HIGH"|"MEDIUM"|"LOW"|string;
+  export type ScoreConfidence = "VERY_HIGH"|"HIGH"|"MEDIUM"|"LOW"|"NOT_AVAILABLE"|string;
   export interface Search {
     /**
      * Indicates that the field can be used to create search facets, a count of results for each value in the field. The default is false .
@@ -3196,6 +3221,10 @@ declare namespace Kendra {
      * The Amazon Resource Name (ARN) of the new role to use when the data source is accessing resources on your behalf.
      */
     RoleArn?: RoleArn;
+    /**
+     * The code for a language. This allows you to support a language for all documents when updating the data source. English is supported by default. For more information on supported languages, including their codes, see Adding documents in languages other than English.
+     */
+    LanguageCode?: LanguageCode;
   }
   export interface UpdateIndexRequest {
     /**

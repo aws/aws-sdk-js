@@ -1087,5 +1087,8 @@
   },
   "cloudcontrol": {
     "name": "CloudControl"
+  },
+  "grafana": {
+    "name": "Grafana"
   }
 }

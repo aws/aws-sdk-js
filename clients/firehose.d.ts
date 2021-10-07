@@ -110,6 +110,65 @@ declare class Firehose extends Service {
 }
 declare namespace Firehose {
   export type AWSKMSKeyARN = string;
+  export interface AmazonopensearchserviceBufferingHints {
+    IntervalInSeconds?: AmazonopensearchserviceBufferingIntervalInSeconds;
+    SizeInMBs?: AmazonopensearchserviceBufferingSizeInMBs;
+  }
+  export type AmazonopensearchserviceBufferingIntervalInSeconds = number;
+  export type AmazonopensearchserviceBufferingSizeInMBs = number;
+  export type AmazonopensearchserviceClusterEndpoint = string;
+  export interface AmazonopensearchserviceDestinationConfiguration {
+    RoleARN: RoleARN;
+    DomainARN?: AmazonopensearchserviceDomainARN;
+    ClusterEndpoint?: AmazonopensearchserviceClusterEndpoint;
+    IndexName: AmazonopensearchserviceIndexName;
+    TypeName?: AmazonopensearchserviceTypeName;
+    IndexRotationPeriod?: AmazonopensearchserviceIndexRotationPeriod;
+    BufferingHints?: AmazonopensearchserviceBufferingHints;
+    RetryOptions?: AmazonopensearchserviceRetryOptions;
+    S3BackupMode?: AmazonopensearchserviceS3BackupMode;
+    S3Configuration: S3DestinationConfiguration;
+    ProcessingConfiguration?: ProcessingConfiguration;
+    CloudWatchLoggingOptions?: CloudWatchLoggingOptions;
+    VpcConfiguration?: VpcConfiguration;
+  }
+  export interface AmazonopensearchserviceDestinationDescription {
+    RoleARN?: RoleARN;
+    DomainARN?: AmazonopensearchserviceDomainARN;
+    ClusterEndpoint?: AmazonopensearchserviceClusterEndpoint;
+    IndexName?: AmazonopensearchserviceIndexName;
+    TypeName?: AmazonopensearchserviceTypeName;
+    IndexRotationPeriod?: AmazonopensearchserviceIndexRotationPeriod;
+    BufferingHints?: AmazonopensearchserviceBufferingHints;
+    RetryOptions?: AmazonopensearchserviceRetryOptions;
+    S3BackupMode?: AmazonopensearchserviceS3BackupMode;
+    S3DestinationDescription?: S3DestinationDescription;
+    ProcessingConfiguration?: ProcessingConfiguration;
+    CloudWatchLoggingOptions?: CloudWatchLoggingOptions;
+    VpcConfigurationDescription?: VpcConfigurationDescription;
+  }
+  export interface AmazonopensearchserviceDestinationUpdate {
+    RoleARN?: RoleARN;
+    DomainARN?: AmazonopensearchserviceDomainARN;
+    ClusterEndpoint?: AmazonopensearchserviceClusterEndpoint;
+    IndexName?: AmazonopensearchserviceIndexName;
+    TypeName?: AmazonopensearchserviceTypeName;
+    IndexRotationPeriod?: AmazonopensearchserviceIndexRotationPeriod;
+    BufferingHints?: AmazonopensearchserviceBufferingHints;
+    RetryOptions?: AmazonopensearchserviceRetryOptions;
+    S3Update?: S3DestinationUpdate;
+    ProcessingConfiguration?: ProcessingConfiguration;
+    CloudWatchLoggingOptions?: CloudWatchLoggingOptions;
+  }
+  export type AmazonopensearchserviceDomainARN = string;
+  export type AmazonopensearchserviceIndexName = string;
+  export type AmazonopensearchserviceIndexRotationPeriod = "NoRotation"|"OneHour"|"OneDay"|"OneWeek"|"OneMonth"|string;
+  export type AmazonopensearchserviceRetryDurationInSeconds = number;
+  export interface AmazonopensearchserviceRetryOptions {
+    DurationInSeconds?: AmazonopensearchserviceRetryDurationInSeconds;
+  }
+  export type AmazonopensearchserviceS3BackupMode = "FailedDocumentsOnly"|"AllDocuments"|string;
+  export type AmazonopensearchserviceTypeName = string;
   export type BlockSizeBytes = number;
   export type BooleanObject = boolean;
   export type BucketARN = string;
@@ -189,6 +248,7 @@ declare namespace Firehose {
      * The destination in Amazon ES. You can specify only one destination.
      */
     ElasticsearchDestinationConfiguration?: ElasticsearchDestinationConfiguration;
+    AmazonopensearchserviceDestinationConfiguration?: AmazonopensearchserviceDestinationConfiguration;
     /**
      * The destination in Splunk. You can specify only one destination.
      */
@@ -380,6 +440,7 @@ declare namespace Firehose {
      * The destination in Amazon ES.
      */
     ElasticsearchDestinationDescription?: ElasticsearchDestinationDescription;
+    AmazonopensearchserviceDestinationDescription?: AmazonopensearchserviceDestinationDescription;
     /**
      * The destination in Splunk.
      */
@@ -1738,6 +1799,7 @@ declare namespace Firehose {
      * Describes an update for a destination in Amazon ES.
      */
     ElasticsearchDestinationUpdate?: ElasticsearchDestinationUpdate;
+    AmazonopensearchserviceDestinationUpdate?: AmazonopensearchserviceDestinationUpdate;
     /**
      * Describes an update for a destination in Splunk.
      */

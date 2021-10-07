@@ -2244,6 +2244,10 @@
           "shape": "ClientTokenName",
           "documentation": "<p>A token that you provide to identify the request to create a data source. Multiple calls to the <code>CreateDataSource</code> operation with the same client token will create only one data source.</p>",
           "idempotencyToken": true
+        },
+        "LanguageCode": {
+          "shape": "LanguageCode",
+          "documentation": "<p>The code for a language. This allows you to support a language for all documents when creating the data source. English is supported by default. For more information on supported languages, including their codes, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html\">Adding documents in languages other than English</a>.</p>"
         }
       }
     },
@@ -2300,6 +2304,10 @@
           "shape": "ClientTokenName",
           "documentation": "<p>A token that you provide to identify the request to create a FAQ. Multiple calls to the <code>CreateFaqRequest</code> operation with the same client token will create only one FAQ. </p>",
           "idempotencyToken": true
+        },
+        "LanguageCode": {
+          "shape": "LanguageCode",
+          "documentation": "<p>The code for a language. This allows you to support a language for the FAQ document. English is supported by default. For more information on supported languages, including their codes, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html\">Adding documents in languages other than English</a>.</p>"
         }
       }
     },
@@ -2613,6 +2621,10 @@
         "Status": {
           "shape": "DataSourceStatus",
           "documentation": "<p>The status of the data source. When the status is <code>ACTIVE</code> the data source is ready to use.</p>"
+        },
+        "LanguageCode": {
+          "shape": "LanguageCode",
+          "documentation": "<p>The code for a language. This shows a supported language for all documents in the data source. English is supported by default. For more information on supported languages, including their codes, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html\">Adding documents in languages other than English</a>.</p>"
         }
       },
       "documentation": "<p>Summary information for a Amazon Kendra data source. Returned in a call to the <code>DescribeDataSource</code> operation.</p>"
@@ -3023,6 +3035,10 @@
         "ErrorMessage": {
           "shape": "ErrorMessage",
           "documentation": "<p>When the <code>Status</code> field value is <code>FAILED</code>, the <code>ErrorMessage</code> field contains a description of the error that caused the data source to fail.</p>"
+        },
+        "LanguageCode": {
+          "shape": "LanguageCode",
+          "documentation": "<p>The code for a language. This shows a supported language for all documents in the data source. English is supported by default. For more information on supported languages, including their codes, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html\">Adding documents in languages other than English</a>.</p>"
         }
       }
     },
@@ -3088,6 +3104,10 @@
         "FileFormat": {
           "shape": "FaqFileFormat",
           "documentation": "<p>The file format used by the input files for the FAQ.</p>"
+        },
+        "LanguageCode": {
+          "shape": "LanguageCode",
+          "documentation": "<p>The code for a language. This shows a supported language for the FAQ document. English is supported by default. For more information on supported languages, including their codes, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html\">Adding documents in languages other than English</a>.</p>"
         }
       }
     },
@@ -3854,6 +3874,10 @@
         "FileFormat": {
           "shape": "FaqFileFormat",
           "documentation": "<p>The file type used to create the FAQ. </p>"
+        },
+        "LanguageCode": {
+          "shape": "LanguageCode",
+          "documentation": "<p>The code for a language. This shows a supported language for the FAQ document as part of the summary information for FAQs. English is supported by default. For more information on supported languages, including their codes, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html\">Adding documents in languages other than English</a>.</p>"
         }
       },
       "documentation": "<p>Provides information about a frequently asked questions and answer contained in an index.</p>"
@@ -4281,6 +4305,13 @@
       "max": 2048,
       "min": 1,
       "sensitive": true
+    },
+    "LanguageCode": {
+      "type": "string",
+      "documentation": "<p>The code for a language. The default language is English. For more information on supported languages, including their codes, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html\">Adding documents in languages other than English</a>.</p>",
+      "max": 10,
+      "min": 2,
+      "pattern": "[a-zA-Z-]*"
     },
     "ListDataSourceSyncJobsRequest": {
       "type": "structure",
@@ -5533,7 +5564,8 @@
         "VERY_HIGH",
         "HIGH",
         "MEDIUM",
-        "LOW"
+        "LOW",
+        "NOT_AVAILABLE"
       ]
     },
     "Search": {
@@ -6310,6 +6342,10 @@
         "RoleArn": {
           "shape": "RoleArn",
           "documentation": "<p>The Amazon Resource Name (ARN) of the new role to use when the data source is accessing resources on your behalf.</p>"
+        },
+        "LanguageCode": {
+          "shape": "LanguageCode",
+          "documentation": "<p>The code for a language. This allows you to support a language for all documents when updating the data source. English is supported by default. For more information on supported languages, including their codes, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html\">Adding documents in languages other than English</a>.</p>"
         }
       }
     },

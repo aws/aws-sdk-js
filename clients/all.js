@@ -283,5 +283,6 @@ module.exports = {
   VoiceID: require('./voiceid'),
   Wisdom: require('./wisdom'),
   Account: require('./account'),
-  CloudControl: require('./cloudcontrol')
+  CloudControl: require('./cloudcontrol'),
+  Grafana: require('./grafana')
 };

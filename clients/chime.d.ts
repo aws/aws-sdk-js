@@ -1713,6 +1713,21 @@ declare namespace Chime {
   }
   export type AreaCode = string;
   export type Arn = string;
+  export interface ArtifactsConfiguration {
+    /**
+     * The configuration for the audio artifacts.
+     */
+    Audio: AudioArtifactsConfiguration;
+    /**
+     * The configuration for the video artifacts.
+     */
+    Video: VideoArtifactsConfiguration;
+    /**
+     * The configuration for the content artifacts.
+     */
+    Content: ContentArtifactsConfiguration;
+  }
+  export type ArtifactsState = "Enabled"|"Disabled"|string;
   export interface AssociatePhoneNumberWithUserRequest {
     /**
      * The Amazon Chime account ID.
@@ -1795,9 +1810,17 @@ declare namespace Chime {
      */
     JoinToken?: JoinTokenString;
   }
+  export type AttendeeIdList = GuidString[];
   export type AttendeeList = Attendee[];
   export type AttendeeTagKeyList = TagKey[];
   export type AttendeeTagList = Tag[];
+  export interface AudioArtifactsConfiguration {
+    /**
+     * The MUX type of the audio artifact configuration object.
+     */
+    MuxType: AudioMuxType;
+  }
+  export type AudioMuxType = "AudioOnly"|"AudioWithActiveSpeakerVideo"|string;
   export interface BatchChannelMemberships {
     /**
      * The identifier of the member who invited another member.
@@ -2282,8 +2305,29 @@ declare namespace Chime {
   }
   export type ChannelSummaryList = ChannelSummary[];
   export type ChimeArn = string;
+  export interface ChimeSdkMeetingConfiguration {
+    /**
+     * The source configuration for a specified media capture pipline.
+     */
+    SourceConfiguration?: SourceConfiguration;
+    /**
+     * The configuration for the artifacts in an Amazon Chime SDK meeting.
+     */
+    ArtifactsConfiguration?: ArtifactsConfiguration;
+  }
   export type ClientRequestToken = string;
   export type Content = string;
+  export interface ContentArtifactsConfiguration {
+    /**
+     * Indicates whether the content artifact is enabled or disabled.
+     */
+    State: ArtifactsState;
+    /**
+     * The MUX type of the artifact configuration.
+     */
+    MuxType?: ContentMuxType;
+  }
+  export type ContentMuxType = "ContentOnly"|string;
   export interface ConversationRetentionSettings {
     /**
      * The number of days for which to retain conversation messages.
@@ -2583,6 +2627,10 @@ declare namespace Chime {
      * The token assigned to the client making the pipeline request.
      */
     ClientRequestToken?: ClientRequestToken;
+    /**
+     * The configuration for a specified media capture pipeline. SourceType must be ChimeSdkMeeting.
+     */
+    ChimeSdkMeetingConfiguration?: ChimeSdkMeetingConfiguration;
   }
   export interface CreateMediaCapturePipelineResponse {
     /**
@@ -3461,6 +3509,7 @@ declare namespace Chime {
     LambdaFunctionArn?: SensitiveString;
   }
   export type ExternalMeetingIdType = string;
+  export type ExternalUserIdList = ExternalUserIdType[];
   export type ExternalUserIdType = string;
   export type FunctionArn = string;
   export type GeoMatchLevel = "Country"|"AreaCode"|string;
@@ -4746,6 +4795,10 @@ declare namespace Chime {
      * The time at which the capture pipeline was updated, in ISO 8601 format.
      */
     UpdatedTimestamp?: Iso8601Timestamp;
+    /**
+     * The configuration for a specified media capture pipeline. SourceType must be ChimeSdkMeeting.
+     */
+    ChimeSdkMeetingConfiguration?: ChimeSdkMeetingConfiguration;
   }
   export type MediaCapturePipelineList = MediaCapturePipeline[];
   export type MediaPipelineSinkType = "S3Bucket"|string;
@@ -4781,7 +4834,7 @@ declare namespace Chime {
      */
     TurnControlUrl?: UriType;
     /**
-     * The URL of the S3 bucket used to store the captured media.
+     * The event ingestion URL.
      */
     EventIngestionUrl?: UriType;
   }
@@ -5598,6 +5651,16 @@ declare namespace Chime {
      */
     NextToken?: String;
   }
+  export interface SelectedVideoStreams {
+    /**
+     * The attendee IDs of the streams selected for a media capture pipeline. 
+     */
+    AttendeeIds?: AttendeeIdList;
+    /**
+     * The external user IDs of the streams selected for a media capture pipeline.
+     */
+    ExternalUserIds?: ExternalUserIdList;
+  }
   export interface SendChannelMessageRequest {
     /**
      * The ARN of the channel.
@@ -5749,6 +5812,12 @@ declare namespace Chime {
   export type SipRuleTargetApplicationList = SipRuleTargetApplication[];
   export type SipRuleTriggerType = "ToPhoneNumber"|"RequestUriHostname"|string;
   export type SortOrder = "ASCENDING"|"DESCENDING"|string;
+  export interface SourceConfiguration {
+    /**
+     * The selected video streams to capture for a specified media capture pipeline. The number of video streams can't exceed 25.
+     */
+    SelectedVideoStreams?: SelectedVideoStreams;
+  }
   export interface StartMeetingTranscriptionRequest {
     /**
      * The unique ID of the meeting being transcribed.
@@ -6112,11 +6181,11 @@ declare namespace Chime {
     /**
      * The Amazon Chime Business Calling settings.
      */
-    BusinessCalling: BusinessCallingSettings;
+    BusinessCalling?: BusinessCallingSettings;
     /**
      * The Amazon Chime Voice Connector settings.
      */
-    VoiceConnector: VoiceConnectorSettings;
+    VoiceConnector?: VoiceConnectorSettings;
   }
   export interface UpdatePhoneNumberRequest {
     /**
@@ -6472,6 +6541,17 @@ declare namespace Chime {
     Telephony: TelephonySettings;
   }
   export type UserType = "PrivateUser"|"SharedDevice"|string;
+  export interface VideoArtifactsConfiguration {
+    /**
+     * Indicates whether the video artifact is enabled or disabled.
+     */
+    State: ArtifactsState;
+    /**
+     * The MUX type of the video artifact configuration object.
+     */
+    MuxType?: VideoMuxType;
+  }
+  export type VideoMuxType = "VideoOnly"|string;
   export interface VoiceConnector {
     /**
      * The Amazon Chime Voice Connector ID.
