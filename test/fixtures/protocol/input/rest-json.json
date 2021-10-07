@@ -1620,5 +1620,148 @@
         }
       }
     ]
+  },
+  {
+    "description": "Union trait",
+    "metadata": {
+      "protocol": "rest-json",
+      "apiVersion": "2014-01-01"
+    },
+    "shapes": {
+      "InputShape": {
+        "type": "structure",
+        "members": {
+          "OneOf": {"shape": "MyUnion"}
+        }
+      },
+      "MyUnion": {
+        "type": "structure",
+        "union": true,
+        "members": {
+          "a": {"shape": "StringType"},
+          "b": {"shape": "StringType"},
+          "c": {"shape": "Struct"},
+          "d": {"shape": "Struct"},
+          "e": {"shape": "ComplexList"}
+        }
+      },
+      "StringType": {
+        "type": "string"
+      },
+      "Struct": {
+        "type": "structure",
+        "members": {
+          "hello": {"shape": "StringType"}
+        }
+      },
+      "ComplexList": {
+        "type": "list",
+        "member": {"shape": "Struct"}
+      }
+    },
+    "cases": [
+      {
+        "given": {
+          "input": {
+            "shape": "InputShape"
+          },
+          "http": {
+            "method": "POST"
+          },
+          "name": "OperationName"
+        },
+        "params": {
+          "OneOf": {"a": "hi"}
+        },
+        "serialized": {
+          "uri": "/",
+          "body": "{\"OneOf\": {\"a\": \"hi\"}}"
+        }
+      },
+      {
+        "given": {
+          "input": {
+            "shape": "InputShape"
+          },
+          "http": {
+            "method": "POST"
+          },
+          "name": "OperationName"
+        },
+        "params": {
+          "OneOf": {"b": "hi"}
+        },
+        "serialized": {
+          "uri": "/",
+          "body": "{\"OneOf\": {\"b\": \"hi\"}}"
+        }
+      },
+      {
+        "given": {
+          "input": {
+            "shape": "InputShape"
+          },
+          "http": {
+            "method": "POST"
+          },
+          "name": "OperationName"
+        },
+        "params": {
+          "OneOf": {
+            "c": {
+              "hello": "hi"
+            }
+          }
+        },
+        "serialized": {
+          "uri": "/",
+          "body": "{\"OneOf\": {\"c\": {\"hello\": \"hi\"}}}"
+        }
+      },
+      {
+        "given": {
+          "input": {
+            "shape": "InputShape"
+          },
+          "http": {
+            "method": "POST"
+          },
+          "name": "OperationName"
+        },
+        "params": {
+          "OneOf": {
+            "d": {
+              "hello": "hi"
+            }
+          }
+        },
+        "serialized": {
+          "uri": "/",
+          "body": "{\"OneOf\": {\"d\": {\"hello\": \"hi\"}}}"
+        }
+      },
+      {
+        "given": {
+          "input": {
+            "shape": "InputShape"
+          },
+          "http": {
+            "method": "POST"
+          },
+          "name": "OperationName"
+        },
+        "params": {
+          "OneOf": {
+            "e": [
+              {"hello": "hi"}
+            ]
+          }
+        },
+        "serialized": {
+          "uri": "/",
+          "body": "{\"OneOf\": {\"e\": [{\"hello\": \"hi\"}]}}"
+        }
+      }
+    ]
   }
 ]
