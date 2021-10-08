@@ -1063,7 +1063,7 @@ declare namespace LexModelsV2 {
      */
     description?: Description;
     /**
-     * Determines the threshold where Amazon Lex will insert the AMAZON.FallbackIntent, AMAZON.KendraSearchIntent, or both when returning alternative intents. AMAZON.FallbackIntent and AMAZON.KendraSearchIntent are only inserted if they are configured for the bot. For example, suppose a bot is configured with the confidence threshold of 0.80 and the AMAZON.FallbackIntent. Amazon Lex returns three alternative intents with the following confidence scores: IntentA (0.70), IntentB (0.60), IntentC (0.50). The response from the PostText operation would be:   AMAZON.FallbackIntent   IntentA   IntentB   IntentC  
+     * Determines the threshold where Amazon Lex will insert the AMAZON.FallbackIntent, AMAZON.KendraSearchIntent, or both when returning alternative intents. AMAZON.FallbackIntent and AMAZON.KendraSearchIntent are only inserted if they are configured for the bot. For example, suppose a bot is configured with the confidence threshold of 0.80 and the AMAZON.FallbackIntent. Amazon Lex returns three alternative intents with the following confidence scores: IntentA (0.70), IntentB (0.60), IntentC (0.50). The response from the RecognizeText operation would be:   AMAZON.FallbackIntent   IntentA   IntentB   IntentC  
      */
     nluIntentConfidenceThreshold: ConfidenceThreshold;
     /**
@@ -2197,7 +2197,7 @@ declare namespace LexModelsV2 {
      */
     importStatus?: ImportStatus;
     /**
-     * If the importStatus field is Failed, this provides one or more reasons for the failture.
+     * If the importStatus field is Failed, this provides one or more reasons for the failure.
      */
     failureReasons?: FailureReasons;
     /**
@@ -2476,7 +2476,7 @@ declare namespace LexModelsV2 {
      */
     name: ExportFilterName;
     /**
-     * The values to use to fileter the response.
+     * The values to use to filter the response.
      */
     values: FilterValues;
     /**
@@ -2545,6 +2545,63 @@ declare namespace LexModelsV2 {
      * Indicates whether a Lambda function should be invoked to fulfill a specific intent.
      */
     enabled: Boolean;
+    /**
+     * Provides settings for messages sent to the user for after the Lambda fulfillment function completes. Post-fulfillment messages can be sent for both streaming and non-streaming conversations.
+     */
+    postFulfillmentStatusSpecification?: PostFulfillmentStatusSpecification;
+    /**
+     * Provides settings for update messages sent to the user for long-running Lambda fulfillment functions. Fulfillment updates can be used only with streaming conversations.
+     */
+    fulfillmentUpdatesSpecification?: FulfillmentUpdatesSpecification;
+  }
+  export type FulfillmentStartResponseDelay = number;
+  export interface FulfillmentStartResponseSpecification {
+    /**
+     * The delay between when the Lambda fulfillment function starts running and the start message is played. If the Lambda function returns before the delay is over, the start message isn't played.
+     */
+    delayInSeconds: FulfillmentStartResponseDelay;
+    /**
+     * One to 5 message groups that contain start messages. Amazon Lex chooses one of the messages to play to the user.
+     */
+    messageGroups: MessageGroupsList;
+    /**
+     * Determines whether the user can interrupt the start message while it is playing.
+     */
+    allowInterrupt?: BoxedBoolean;
+  }
+  export type FulfillmentTimeout = number;
+  export type FulfillmentUpdateResponseFrequency = number;
+  export interface FulfillmentUpdateResponseSpecification {
+    /**
+     * The frequency that a message is sent to the user. When the period ends, Amazon Lex chooses a message from the message groups and plays it to the user. If the fulfillment Lambda returns before the first period ends, an update message is not played to the user.
+     */
+    frequencyInSeconds: FulfillmentUpdateResponseFrequency;
+    /**
+     * One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.
+     */
+    messageGroups: MessageGroupsList;
+    /**
+     * Determines whether the user can interrupt an update message while it is playing.
+     */
+    allowInterrupt?: BoxedBoolean;
+  }
+  export interface FulfillmentUpdatesSpecification {
+    /**
+     * Determines whether fulfillment updates are sent to the user. When this field is true, updates are sent. If the active field is set to true, the startResponse, updateResponse, and timeoutInSeconds fields are required.
+     */
+    active: BoxedBoolean;
+    /**
+     * Provides configuration information for the message sent to users when the fulfillment Lambda functions starts running.
+     */
+    startResponse?: FulfillmentStartResponseSpecification;
+    /**
+     * Provides configuration information for messages sent periodically to the user while the fulfillment Lambda function is running.
+     */
+    updateResponse?: FulfillmentUpdateResponseSpecification;
+    /**
+     * The length of time that the fulfillment Lambda function should run before it times out.
+     */
+    timeoutInSeconds?: FulfillmentTimeout;
   }
   export type HitCount = number;
   export type Id = string;
@@ -2652,7 +2709,7 @@ declare namespace LexModelsV2 {
      */
     closingResponse: ResponseSpecification;
     /**
-     * Specifies whether an intent's closing response is used. When this field is false, the closing response isn't sent to the user and no closing input from the user is used. If the active field isn't specified, the default is true.
+     * Specifies whether an intent's closing response is used. When this field is false, the closing response isn't sent to the user. If the active field isn't specified, the default is true.
      */
     active?: BoxedBoolean;
   }
@@ -2666,7 +2723,7 @@ declare namespace LexModelsV2 {
      */
     declinationResponse: ResponseSpecification;
     /**
-     * Specifies whether the intent's confirmation is sent to the user. When this field is false, confirmation and declination responses aren't sent and processing continues as if the responses aren't present. If the active field isn't specified, the default is true.
+     * Specifies whether the intent's confirmation is sent to the user. When this field is false, confirmation and declination responses aren't sent. If the active field isn't specified, the default is true.
      */
     active?: BoxedBoolean;
   }
@@ -3055,7 +3112,7 @@ declare namespace LexModelsV2 {
      */
     maxResults?: MaxResults;
     /**
-     * If the response from the ListExports operation contans more results that specified in the maxResults parameter, a token is returned in the response. Use that token in the nextToken parameter to return the next page of results.
+     * If the response from the ListExports operation contains more results that specified in the maxResults parameter, a token is returned in the response. Use that token in the nextToken parameter to return the next page of results.
      */
     nextToken?: NextToken;
   }
@@ -3374,6 +3431,11 @@ declare namespace LexModelsV2 {
   }
   export type PlainTextMessageValue = string;
   export type Policy = string;
+  export interface PostFulfillmentStatusSpecification {
+    successResponse?: ResponseSpecification;
+    failureResponse?: ResponseSpecification;
+    timeoutResponse?: ResponseSpecification;
+  }
   export type PresignedS3Url = string;
   export interface Principal {
     /**
@@ -3395,7 +3457,7 @@ declare namespace LexModelsV2 {
      */
     messageGroups: MessageGroupsList;
     /**
-     * The maximum number of times the bot tries to elicit a resonse from the user using this prompt.
+     * The maximum number of times the bot tries to elicit a response from the user using this prompt.
      */
     maxRetries: PromptMaxRetries;
     /**
@@ -3616,14 +3678,14 @@ declare namespace LexModelsV2 {
      */
     sampleValue?: SampleValue;
     /**
-     * Additional values releated to the slot type entry.
+     * Additional values related to the slot type entry.
      */
     synonyms?: SynonymList;
   }
   export type SlotTypeValues = SlotTypeValue[];
   export interface SlotValueElicitationSetting {
     /**
-     * A list of default values for a slot. Default values are used when Amazon Lex hasn't determined a value for a slot. You can specify default values from context variables, sesion attributes, and defined values.
+     * A list of default values for a slot. Default values are used when Amazon Lex hasn't determined a value for a slot. You can specify default values from context variables, session attributes, and defined values.
      */
     defaultValueSpecification?: SlotDefaultValueSpecification;
     /**
@@ -4387,7 +4449,7 @@ declare namespace LexModelsV2 {
      */
     stillWaitingResponse?: StillWaitingResponseSpecification;
     /**
-     * Specifies whether the bot will wait for a user to respond. When this field is false, wait and continue responses for a slot aren't used and the bot expects an appropriate response within the configured timeout. If the active field isn't specified, the default is true.
+     * Specifies whether the bot will wait for a user to respond. When this field is false, wait and continue responses for a slot aren't used. If the active field isn't specified, the default is true.
      */
     active?: BoxedBoolean;
   }

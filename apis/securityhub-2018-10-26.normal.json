@@ -279,7 +279,7 @@
           "shape": "ResourceConflictException"
         }
       ],
-      "documentation": "<p>Creates a member association in Security Hub between the specified accounts and the account used to make the request, which is the administrator account. If you are integrated with Organizations, then the administrator account is designated by the organization management account.</p> <p> <code>CreateMembers</code> is always used to add accounts that are not organization members.</p> <p>For accounts that are managed using Organizations, <code>CreateMembers</code> is only used in the following cases:</p> <ul> <li> <p>Security Hub is not configured to automatically add new organization accounts.</p> </li> <li> <p>The account was disassociated or deleted in Security Hub.</p> </li> </ul> <p>This action can only be used by an account that has Security Hub enabled. To enable Security Hub, you can use the <code>EnableSecurityHub</code> operation.</p> <p>For accounts that are not organization members, you create the account association and then send an invitation to the member account. To send the invitation, you use the <code>InviteMembers</code> operation. If the account owner accepts the invitation, the account becomes a member account in Security Hub.</p> <p>Accounts that are managed using Organizations do not receive an invitation. They automatically become a member account in Security Hub, and Security Hub is automatically enabled for those accounts. Note that Security Hub cannot be enabled automatically for the organization management account. The organization management account must enable Security Hub before the administrator account enables it as a member account.</p> <p>A permissions policy is added that permits the administrator account to view the findings generated in the member account. When Security Hub is enabled in a member account, the member account findings are also visible to the administrator account. </p> <p>To remove the association between the administrator and member accounts, use the <code>DisassociateFromMasterAccount</code> or <code>DisassociateMembers</code> operation.</p>"
+      "documentation": "<p>Creates a member association in Security Hub between the specified accounts and the account used to make the request, which is the administrator account. If you are integrated with Organizations, then the administrator account is designated by the organization management account.</p> <p> <code>CreateMembers</code> is always used to add accounts that are not organization members.</p> <p>For accounts that are managed using Organizations, <code>CreateMembers</code> is only used in the following cases:</p> <ul> <li> <p>Security Hub is not configured to automatically add new organization accounts.</p> </li> <li> <p>The account was disassociated or deleted in Security Hub.</p> </li> </ul> <p>This action can only be used by an account that has Security Hub enabled. To enable Security Hub, you can use the <code>EnableSecurityHub</code> operation.</p> <p>For accounts that are not organization members, you create the account association and then send an invitation to the member account. To send the invitation, you use the <code>InviteMembers</code> operation. If the account owner accepts the invitation, the account becomes a member account in Security Hub.</p> <p>Accounts that are managed using Organizations do not receive an invitation. They automatically become a member account in Security Hub.</p> <ul> <li> <p>If the organization account does not have Security Hub enabled, then Security Hub and the default standards are automatically enabled. Note that Security Hub cannot be enabled automatically for the organization management account. The organization management account must enable Security Hub before the administrator account enables it as a member account.</p> </li> <li> <p>For organization accounts that already have Security Hub enabled, Security Hub does not make any other changes to those accounts. It does not change their enabled standards or controls.</p> </li> </ul> <p>A permissions policy is added that permits the administrator account to view the findings generated in the member account.</p> <p>To remove the association between the administrator and member accounts, use the <code>DisassociateFromMasterAccount</code> or <code>DisassociateMembers</code> operation.</p>"
     },
     "DeclineInvitations": {
       "name": "DeclineInvitations",
@@ -2642,6 +2642,10 @@
           "shape": "AwsCloudFrontDistributionOriginGroups",
           "documentation": "<p>Provides information about the origin groups in the distribution.</p>"
         },
+        "ViewerCertificate": {
+          "shape": "AwsCloudFrontDistributionViewerCertificate",
+          "documentation": "<p>Provides information about the TLS/SSL configuration that the distribution uses to communicate with viewers.</p>"
+        },
         "Status": {
           "shape": "NonEmptyString",
           "documentation": "<p>Indicates the current status of the distribution.</p>"
@@ -2779,6 +2783,40 @@
       },
       "documentation": "<p>A complex type that contains information about origins and origin groups for this distribution.</p>"
     },
+    "AwsCloudFrontDistributionViewerCertificate": {
+      "type": "structure",
+      "members": {
+        "AcmCertificateArn": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The ARN of the ACM certificate. Used if the certificate is stored in ACM. If you provide an ACM certificate ARN, you must also provide <code>MinimumCertificateVersion</code> and <code>SslSupportMethod</code>.</p>"
+        },
+        "Certificate": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The identifier of the certificate. Note that in CloudFront, this attribute is deprecated.</p>"
+        },
+        "CertificateSource": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The source of the certificate identified by <code>Certificate</code>. Note that in CloudFront, this attribute is deprecated.</p>"
+        },
+        "CloudFrontDefaultCertificate": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether the distribution uses the CloudFront domain name. If set to <code>false</code>, then you provide either <code>AcmCertificateArn</code> or <code>IamCertificateId</code>.</p>"
+        },
+        "IamCertificateId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The identifier of the IAM certificate. Used if the certificate is stored in IAM. If you provide <code>IamCertificateId</code>, then you also must provide <code>MinimumProtocolVersion</code> and <code>SslSupportMethod</code>.</p>"
+        },
+        "MinimumProtocolVersion": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The security policy that CloudFront uses for HTTPS connections with viewers. If <code>SslSupportMethod</code> is <code>sni-only</code>, then <code>MinimumProtocolVersion</code> must be <code>TLSv1</code> or higher.</p>"
+        },
+        "SslSupportMethod": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The viewers that the distribution accepts HTTPS connections from.</p>"
+        }
+      },
+      "documentation": "<p>Provides information about the TLS/SSL configuration that the distribution uses to communicate with viewers.</p>"
+    },
     "AwsCloudTrailTrailDetails": {
       "type": "structure",
       "members": {
@@ -2845,12 +2883,64 @@
       },
       "documentation": "<p>Provides details about a CloudTrail trail.</p>"
     },
+    "AwsCodeBuildProjectArtifactsDetails": {
+      "type": "structure",
+      "members": {
+        "ArtifactIdentifier": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>An identifier for the artifact definition.</p>"
+        },
+        "EncryptionDisabled": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether to disable encryption on the artifact. Only valid when <code>Type</code> is <code>S3</code>.</p>"
+        },
+        "Location": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>Only used when <code>Type</code> is <code>S3</code>. The name of the S3 bucket where the artifact is located.</p>"
+        },
+        "Name": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>Only used when Type is S3. The name of the artifact. Used with <code>NamepaceType</code> and <code>Path</code> to determine the pattern for storing the artifact.</p>"
+        },
+        "NamespaceType": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>Only used when <code>Type</code> is <code>S3</code>. The value to use for the namespace. Used with <code>Name</code> and <code>Path</code> to determine the pattern for storing the artifact.</p>"
+        },
+        "OverrideArtifactName": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether the name specified in the buildspec file overrides the artifact name.</p>"
+        },
+        "Packaging": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>Only used when <code>Type</code> is <code>S3</code>. The type of output artifact to create.</p>"
+        },
+        "Path": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>Only used when <code>Type</code> is <code>S3</code>. The path to the artifact. Used with <code>Name</code> and <code>NamespaceType</code> to determine the pattern for storing the artifact.</p>"
+        },
+        "Type": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The type of build artifact.</p>"
+        }
+      },
+      "documentation": "<p>Information about the build artifacts for the CodeBuild project.</p>"
+    },
+    "AwsCodeBuildProjectArtifactsList": {
+      "type": "list",
+      "member": {
+        "shape": "AwsCodeBuildProjectArtifactsDetails"
+      }
+    },
     "AwsCodeBuildProjectDetails": {
       "type": "structure",
       "members": {
         "EncryptionKey": {
           "shape": "NonEmptyString",
           "documentation": "<p>The KMS key used to encrypt the build output artifacts.</p> <p>You can specify either the ARN of the KMS key or, if available, the KMS key alias (using the format alias/alias-name). </p>"
+        },
+        "Artifacts": {
+          "shape": "AwsCodeBuildProjectArtifactsList",
+          "documentation": "<p>Information about the build artifacts for the CodeBuild project.</p>"
         },
         "Environment": {
           "shape": "AwsCodeBuildProjectEnvironment",
@@ -2868,6 +2958,10 @@
           "shape": "NonEmptyString",
           "documentation": "<p>The ARN of the IAM role that enables CodeBuild to interact with dependent Amazon Web Services services on behalf of the Amazon Web Services account.</p>"
         },
+        "LogsConfig": {
+          "shape": "AwsCodeBuildProjectLogsConfigDetails",
+          "documentation": "<p>Information about logs for the build project.</p>"
+        },
         "VpcConfig": {
           "shape": "AwsCodeBuildProjectVpcConfig",
           "documentation": "<p>Information about the VPC configuration that CodeBuild accesses.</p>"
@@ -2881,6 +2975,14 @@
         "Certificate": {
           "shape": "NonEmptyString",
           "documentation": "<p>The certificate to use with this build project.</p>"
+        },
+        "EnvironmentVariables": {
+          "shape": "AwsCodeBuildProjectEnvironmentEnvironmentVariablesList",
+          "documentation": "<p>A set of environment variables to make available to builds for the build project.</p>"
+        },
+        "PrivilegedMode": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether to allow the Docker daemon to run inside a Docker container. Set to <code>true</code> if the build project is used to build Docker images.</p>"
         },
         "ImagePullCredentialsType": {
           "shape": "NonEmptyString",
@@ -2897,6 +2999,30 @@
       },
       "documentation": "<p>Information about the build environment for this build project.</p>"
     },
+    "AwsCodeBuildProjectEnvironmentEnvironmentVariablesDetails": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the environment variable.</p>"
+        },
+        "Type": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The type of environment variable.</p>"
+        },
+        "Value": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The value of the environment variable.</p>"
+        }
+      },
+      "documentation": "<p>Information about an environment variable that is available to builds for the build project.</p>"
+    },
+    "AwsCodeBuildProjectEnvironmentEnvironmentVariablesList": {
+      "type": "list",
+      "member": {
+        "shape": "AwsCodeBuildProjectEnvironmentEnvironmentVariablesDetails"
+      }
+    },
     "AwsCodeBuildProjectEnvironmentRegistryCredential": {
       "type": "structure",
       "members": {
@@ -2910,6 +3036,56 @@
         }
       },
       "documentation": "<p>The credentials for access to a private registry.</p>"
+    },
+    "AwsCodeBuildProjectLogsConfigCloudWatchLogsDetails": {
+      "type": "structure",
+      "members": {
+        "GroupName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The group name of the logs in CloudWatch Logs.</p>"
+        },
+        "Status": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The current status of the logs in CloudWatch Logs for a build project.</p>"
+        },
+        "StreamName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The prefix of the stream name of the CloudWatch Logs.</p>"
+        }
+      },
+      "documentation": "<p>Information about CloudWatch Logs for the build project.</p>"
+    },
+    "AwsCodeBuildProjectLogsConfigDetails": {
+      "type": "structure",
+      "members": {
+        "CloudWatchLogs": {
+          "shape": "AwsCodeBuildProjectLogsConfigCloudWatchLogsDetails",
+          "documentation": "<p>Information about CloudWatch Logs for the build project.</p>"
+        },
+        "S3Logs": {
+          "shape": "AwsCodeBuildProjectLogsConfigS3LogsDetails",
+          "documentation": "<p>Information about logs built to an S3 bucket for a build project.</p>"
+        }
+      },
+      "documentation": "<p>Information about logs for the build project.</p>"
+    },
+    "AwsCodeBuildProjectLogsConfigS3LogsDetails": {
+      "type": "structure",
+      "members": {
+        "EncryptionDisabled": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether to disable encryption of the S3 build log output.</p>"
+        },
+        "Location": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The ARN of the S3 bucket and the path prefix for S3 logs.</p>"
+        },
+        "Status": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The current status of the S3 build logs.</p>"
+        }
+      },
+      "documentation": "<p>Information about logs built to an S3 bucket for a build project.</p>"
     },
     "AwsCodeBuildProjectSource": {
       "type": "structure",
@@ -3987,6 +4163,72 @@
       },
       "documentation": "<p>Details about an EC2 VPC.</p>"
     },
+    "AwsEc2VpcEndpointServiceDetails": {
+      "type": "structure",
+      "members": {
+        "AcceptanceRequired": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether requests from other Amazon Web Services accounts to create an endpoint to the service must first be accepted.</p>"
+        },
+        "AvailabilityZones": {
+          "shape": "NonEmptyStringList",
+          "documentation": "<p>The Availability Zones where the service is available.</p>"
+        },
+        "BaseEndpointDnsNames": {
+          "shape": "NonEmptyStringList",
+          "documentation": "<p>The DNS names for the service.</p>"
+        },
+        "ManagesVpcEndpoints": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether the service manages its VPC endpoints.</p>"
+        },
+        "GatewayLoadBalancerArns": {
+          "shape": "NonEmptyStringList",
+          "documentation": "<p>The ARNs of the Gateway Load Balancers for the service.</p>"
+        },
+        "NetworkLoadBalancerArns": {
+          "shape": "NonEmptyStringList",
+          "documentation": "<p>The ARNs of the Network Load Balancers for the service.</p>"
+        },
+        "PrivateDnsName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The private DNS name for the service.</p>"
+        },
+        "ServiceId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The identifier of the service.</p>"
+        },
+        "ServiceName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the service.</p>"
+        },
+        "ServiceState": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The current state of the service.</p>"
+        },
+        "ServiceType": {
+          "shape": "AwsEc2VpcEndpointServiceServiceTypeList",
+          "documentation": "<p>The types for the service.</p>"
+        }
+      },
+      "documentation": "<p>Contains details about the service configuration for a VPC endpoint service.</p>"
+    },
+    "AwsEc2VpcEndpointServiceServiceTypeDetails": {
+      "type": "structure",
+      "members": {
+        "ServiceType": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The type of service.</p>"
+        }
+      },
+      "documentation": "<p>The service type information for a VPC endpoint service.</p>"
+    },
+    "AwsEc2VpcEndpointServiceServiceTypeList": {
+      "type": "list",
+      "member": {
+        "shape": "AwsEc2VpcEndpointServiceServiceTypeDetails"
+      }
+    },
     "AwsEc2VpnConnectionDetails": {
       "type": "structure",
       "members": {
@@ -4212,6 +4454,60 @@
         }
       },
       "documentation": "<p>Information about an Amazon ECR image.</p>"
+    },
+    "AwsEcrRepositoryDetails": {
+      "type": "structure",
+      "members": {
+        "Arn": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The ARN of the repository.</p>"
+        },
+        "ImageScanningConfiguration": {
+          "shape": "AwsEcrRepositoryImageScanningConfigurationDetails",
+          "documentation": "<p>The image scanning configuration for a repository.</p>"
+        },
+        "ImageTagMutability": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The tag mutability setting for the repository.</p>"
+        },
+        "LifecyclePolicy": {
+          "shape": "AwsEcrRepositoryLifecyclePolicyDetails",
+          "documentation": "<p>Information about the lifecycle policy for the repository.</p>"
+        },
+        "RepositoryName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the repository.</p>"
+        },
+        "RepositoryPolicyText": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The text of the repository policy.</p>"
+        }
+      },
+      "documentation": "<p>Provides information about an Amazon Elastic Container Registry repository.</p>"
+    },
+    "AwsEcrRepositoryImageScanningConfigurationDetails": {
+      "type": "structure",
+      "members": {
+        "ScanOnPush": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether to scan images after they are pushed to a repository.</p>"
+        }
+      },
+      "documentation": "<p>The image scanning configuration for a repository.</p>"
+    },
+    "AwsEcrRepositoryLifecyclePolicyDetails": {
+      "type": "structure",
+      "members": {
+        "LifecyclePolicyText": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The text of the lifecycle policy.</p>"
+        },
+        "RegistryId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The Amazon Web Services account identifier that is associated with the registry that contains the repository.</p>"
+        }
+      },
+      "documentation": "<p>Information about the lifecycle policy for the repository.</p>"
     },
     "AwsEcsClusterClusterSettingsDetails": {
       "type": "structure",
@@ -5445,6 +5741,92 @@
         "shape": "AwsEcsTaskDefinitionVolumesDetails"
       }
     },
+    "AwsEksClusterDetails": {
+      "type": "structure",
+      "members": {
+        "Arn": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The ARN of the cluster.</p>"
+        },
+        "CertificateAuthorityData": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The certificate authority data for the cluster.</p>"
+        },
+        "ClusterStatus": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The status of the cluster.</p>"
+        },
+        "Endpoint": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The endpoint for the Amazon EKS API server.</p>"
+        },
+        "Name": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the cluster.</p>"
+        },
+        "ResourcesVpcConfig": {
+          "shape": "AwsEksClusterResourcesVpcConfigDetails",
+          "documentation": "<p>The VPC configuration used by the cluster control plane.</p>"
+        },
+        "RoleArn": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The ARN of the IAM role that provides permissions for the Amazon EKS control plane to make calls to Amazon Web Services API operations on your behalf.</p>"
+        },
+        "Version": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The Amazon EKS server version for the cluster.</p>"
+        },
+        "Logging": {
+          "shape": "AwsEksClusterLoggingDetails",
+          "documentation": "<p>The logging configuration for the cluster.</p>"
+        }
+      },
+      "documentation": "<p>Provides details about an Amazon EKS cluster.</p>"
+    },
+    "AwsEksClusterLoggingClusterLoggingDetails": {
+      "type": "structure",
+      "members": {
+        "Enabled": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether the logging types that are listed in <code>Types</code> are enabled.</p>"
+        },
+        "Types": {
+          "shape": "NonEmptyStringList",
+          "documentation": "<p>A list of logging types.</p>"
+        }
+      },
+      "documentation": "<p>Details for a cluster logging configuration.</p>"
+    },
+    "AwsEksClusterLoggingClusterLoggingList": {
+      "type": "list",
+      "member": {
+        "shape": "AwsEksClusterLoggingClusterLoggingDetails"
+      }
+    },
+    "AwsEksClusterLoggingDetails": {
+      "type": "structure",
+      "members": {
+        "ClusterLogging": {
+          "shape": "AwsEksClusterLoggingClusterLoggingList",
+          "documentation": "<p>Cluster logging configurations.</p>"
+        }
+      },
+      "documentation": "<p>The logging configuration for an Amazon EKS cluster.</p>"
+    },
+    "AwsEksClusterResourcesVpcConfigDetails": {
+      "type": "structure",
+      "members": {
+        "SecurityGroupIds": {
+          "shape": "NonEmptyStringList",
+          "documentation": "<p>The security groups that are associated with the cross-account elastic network interfaces that are used to allow communication between your nodes and the Amazon EKS control plane.</p>"
+        },
+        "SubnetIds": {
+          "shape": "NonEmptyStringList",
+          "documentation": "<p>The subnets that are associated with the cluster.</p>"
+        }
+      },
+      "documentation": "<p>Information about the VPC configuration used by the cluster control plane.</p>"
+    },
     "AwsElasticBeanstalkEnvironmentDetails": {
       "type": "structure",
       "members": {
@@ -5610,11 +5992,11 @@
         },
         "ElasticsearchVersion": {
           "shape": "NonEmptyString",
-          "documentation": "<p>Elasticsearch version.</p>"
+          "documentation": "<p>OpenSearch version.</p>"
         },
         "ElasticsearchClusterConfig": {
           "shape": "AwsElasticsearchDomainElasticsearchClusterConfigDetails",
-          "documentation": "<p>Information about an Elasticsearch cluster configuration.</p>"
+          "documentation": "<p>Information about an OpenSearch cluster configuration.</p>"
         },
         "EncryptionAtRestOptions": {
           "shape": "AwsElasticsearchDomainEncryptionAtRestOptions",
@@ -5634,10 +6016,10 @@
         },
         "VPCOptions": {
           "shape": "AwsElasticsearchDomainVPCOptions",
-          "documentation": "<p>Information that Elasticsearch derives based on <code>VPCOptions</code> for the domain.</p>"
+          "documentation": "<p>Information that OpenSearch derives based on <code>VPCOptions</code> for the domain.</p>"
         }
       },
-      "documentation": "<p>Information about an Amazon Elasticsearch Service domain.</p>"
+      "documentation": "<p>Information about an Elasticsearch domain.</p>"
     },
     "AwsElasticsearchDomainDomainEndpointOptions": {
       "type": "structure",
@@ -5648,7 +6030,7 @@
         },
         "TLSSecurityPolicy": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The TLS security policy to apply to the HTTPS endpoint of the Elasticsearch domain.</p> <p>Valid values:</p> <ul> <li> <p> <code>Policy-Min-TLS-1-0-2019-07</code>, which supports TLSv1.0 and higher</p> </li> <li> <p> <code>Policy-Min-TLS-1-2-2019-07</code>, which only supports TLSv1.2</p> </li> </ul>"
+          "documentation": "<p>The TLS security policy to apply to the HTTPS endpoint of the OpenSearch domain.</p> <p>Valid values:</p> <ul> <li> <p> <code>Policy-Min-TLS-1-0-2019-07</code>, which supports TLSv1.0 and higher</p> </li> <li> <p> <code>Policy-Min-TLS-1-2-2019-07</code>, which only supports TLSv1.2</p> </li> </ul>"
         }
       },
       "documentation": "<p>Additional options for the domain endpoint, such as whether to require HTTPS for all traffic.</p>"
@@ -5682,10 +6064,10 @@
         },
         "ZoneAwarenessEnabled": {
           "shape": "Boolean",
-          "documentation": "<p>Whether to enable zone awareness for the Elasticsearch domain. When zone awareness is enabled, Elasticsearch allocates the cluster's nodes and replica index shards across Availability Zones in the same Region. This prevents data loss and minimizes downtime if a node or data center fails.</p>"
+          "documentation": "<p>Whether to enable zone awareness for the Elasticsearch domain. When zone awareness is enabled, OpenSearch allocates the cluster's nodes and replica index shards across Availability Zones in the same Region. This prevents data loss and minimizes downtime if a node or data center fails.</p>"
         }
       },
-      "documentation": "<p>details about the configuration of an Elasticsearch cluster.</p>"
+      "documentation": "<p>details about the configuration of an OpenSearch cluster.</p>"
     },
     "AwsElasticsearchDomainElasticsearchClusterConfigZoneAwarenessConfigDetails": {
       "type": "structure",
@@ -5716,11 +6098,11 @@
       "members": {
         "IndexSlowLogs": {
           "shape": "AwsElasticsearchDomainLogPublishingOptionsLogConfig",
-          "documentation": "<p>Configures the Elasticsearch index logs publishing.</p>"
+          "documentation": "<p>Configures the OpenSearch index logs publishing.</p>"
         },
         "SearchSlowLogs": {
           "shape": "AwsElasticsearchDomainLogPublishingOptionsLogConfig",
-          "documentation": "<p>Configures the Elasticsearch search slow log publishing.</p>"
+          "documentation": "<p>Configures the OpenSearch search slow log publishing.</p>"
         },
         "AuditLogs": {
           "shape": "AwsElasticsearchDomainLogPublishingOptionsLogConfig"
@@ -5757,7 +6139,7 @@
       "members": {
         "AutomatedUpdateDate": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The epoch time when the deployment window closes for required updates. After this time, Amazon Elasticsearch Service schedules the software upgrade automatically.</p>"
+          "documentation": "<p>The epoch time when the deployment window closes for required updates. After this time, Amazon OpenSearch Service schedules the software upgrade automatically.</p>"
         },
         "Cancellable": {
           "shape": "Boolean",
@@ -5806,7 +6188,7 @@
           "documentation": "<p>ID for the VPC.</p>"
         }
       },
-      "documentation": "<p>Information that Elasticsearch derives based on <code>VPCOptions</code> for the domain.</p>"
+      "documentation": "<p>Information that OpenSearch derives based on <code>VPCOptions</code> for the domain.</p>"
     },
     "AwsElbAppCookieStickinessPolicies": {
       "type": "list",
@@ -6140,6 +6522,26 @@
       },
       "documentation": "<p>Contains information about the security group for the load balancer.</p>"
     },
+    "AwsElbv2LoadBalancerAttribute": {
+      "type": "structure",
+      "members": {
+        "Key": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the load balancer attribute.</p>"
+        },
+        "Value": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The value of the load balancer attribute.</p>"
+        }
+      },
+      "documentation": "<p>A load balancer attribute.</p>"
+    },
+    "AwsElbv2LoadBalancerAttributes": {
+      "type": "list",
+      "member": {
+        "shape": "AwsElbv2LoadBalancerAttribute"
+      }
+    },
     "AwsElbv2LoadBalancerDetails": {
       "type": "structure",
       "members": {
@@ -6182,6 +6584,10 @@
         "VpcId": {
           "shape": "NonEmptyString",
           "documentation": "<p>The ID of the VPC for the load balancer.</p>"
+        },
+        "LoadBalancerAttributes": {
+          "shape": "AwsElbv2LoadBalancerAttributes",
+          "documentation": "<p>Attributes of the load balancer.</p>"
         }
       },
       "documentation": "<p>Information about a load balancer.</p>"
@@ -6882,6 +7288,258 @@
     },
     "AwsLambdaLayerVersionNumber": {
       "type": "long"
+    },
+    "AwsOpenSearchServiceDomainClusterConfigDetails": {
+      "type": "structure",
+      "members": {
+        "InstanceCount": {
+          "shape": "Integer",
+          "documentation": "<p>The number of data nodes to use in the OpenSearch domain.</p>"
+        },
+        "WarmEnabled": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether UltraWarm is enabled.</p>"
+        },
+        "WarmCount": {
+          "shape": "Integer",
+          "documentation": "<p>The number of UltraWarm instances.</p>"
+        },
+        "DedicatedMasterEnabled": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether to use a dedicated master node for the OpenSearch domain. A dedicated master node performs cluster management tasks, but does not hold data or respond to data upload requests.</p>"
+        },
+        "ZoneAwarenessConfig": {
+          "shape": "AwsOpenSearchServiceDomainClusterConfigZoneAwarenessConfigDetails",
+          "documentation": "<p>Configuration options for zone awareness. Provided if <code>ZoneAwarenessEnabled</code> is <code>true</code>.</p>"
+        },
+        "DedicatedMasterCount": {
+          "shape": "Integer",
+          "documentation": "<p>The number of instances to use for the master node. If this attribute is specified, then <code>DedicatedMasterEnabled</code> must be <code>true</code>.</p>"
+        },
+        "InstanceType": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The instance type for your data nodes. </p>"
+        },
+        "WarmType": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The type of UltraWarm instance.</p>"
+        },
+        "ZoneAwarenessEnabled": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether to enable zone awareness for the OpenSearch domain. When zone awareness is enabled, OpenSearch Service allocates the cluster's nodes and replica index shards across Availability Zones (AZs) in the same Region. This prevents data loss and minimizes downtime if a node or data center fails.</p>"
+        },
+        "DedicatedMasterType": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The hardware configuration of the computer that hosts the dedicated master node.</p> <p>If this attribute is specified, then <code>DedicatedMasterEnabled</code> must be <code>true</code>. </p>"
+        }
+      },
+      "documentation": "<p>Details about the configuration of an OpenSearch cluster.</p>"
+    },
+    "AwsOpenSearchServiceDomainClusterConfigZoneAwarenessConfigDetails": {
+      "type": "structure",
+      "members": {
+        "AvailabilityZoneCount": {
+          "shape": "Integer",
+          "documentation": "<p>The number of Availability Zones that the domain uses. Valid values are 2 and 3. The default is 2.</p>"
+        }
+      },
+      "documentation": "<p>Configuration options for zone awareness.</p>"
+    },
+    "AwsOpenSearchServiceDomainDetails": {
+      "type": "structure",
+      "members": {
+        "Arn": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The ARN of the OpenSearch Service domain.</p>"
+        },
+        "AccessPolicies": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>IAM policy document that specifies the access policies for the OpenSearch Service domain.</p>"
+        },
+        "DomainName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the endpoint.</p>"
+        },
+        "Id": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The identifier of the domain.</p>"
+        },
+        "DomainEndpoint": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The domain endpoint.</p>"
+        },
+        "EngineVersion": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The version of the domain engine.</p>"
+        },
+        "EncryptionAtRestOptions": {
+          "shape": "AwsOpenSearchServiceDomainEncryptionAtRestOptionsDetails",
+          "documentation": "<p>Details about the configuration for encryption at rest.</p>"
+        },
+        "NodeToNodeEncryptionOptions": {
+          "shape": "AwsOpenSearchServiceDomainNodeToNodeEncryptionOptionsDetails",
+          "documentation": "<p>Details about the configuration for node-to-node encryption.</p>"
+        },
+        "ServiceSoftwareOptions": {
+          "shape": "AwsOpenSearchServiceDomainServiceSoftwareOptionsDetails",
+          "documentation": "<p>Information about the status of a domain relative to the latest service software.</p>"
+        },
+        "ClusterConfig": {
+          "shape": "AwsOpenSearchServiceDomainClusterConfigDetails",
+          "documentation": "<p>Details about the configuration of an OpenSearch cluster.</p>"
+        },
+        "DomainEndpointOptions": {
+          "shape": "AwsOpenSearchServiceDomainDomainEndpointOptionsDetails",
+          "documentation": "<p>Additional options for the domain endpoint.</p>"
+        },
+        "VpcOptions": {
+          "shape": "AwsOpenSearchServiceDomainVpcOptionsDetails",
+          "documentation": "<p>Information that OpenSearch Service derives based on <code>VPCOptions</code> for the domain.</p>"
+        },
+        "LogPublishingOptions": {
+          "shape": "AwsOpenSearchServiceDomainLogPublishingOptionsDetails",
+          "documentation": "<p>Configures the CloudWatch Logs to publish for the OpenSearch domain.</p>"
+        },
+        "DomainEndpoints": {
+          "shape": "FieldMap",
+          "documentation": "<p>The domain endpoints. Used if the OpenSearch domain resides in a VPC.</p> <p>This is a map of key-value pairs. The key is always <code>vpc</code>. The value is the endpoint.</p>"
+        }
+      },
+      "documentation": "<p>Information about an Amazon OpenSearch Service domain.</p>"
+    },
+    "AwsOpenSearchServiceDomainDomainEndpointOptionsDetails": {
+      "type": "structure",
+      "members": {
+        "CustomEndpointCertificateArn": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The ARN for the security certificate. The certificate is managed in ACM.</p>"
+        },
+        "CustomEndpointEnabled": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether to enable a custom endpoint for the domain.</p>"
+        },
+        "EnforceHTTPS": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether to require that all traffic to the domain arrive over HTTPS.</p>"
+        },
+        "CustomEndpoint": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The fully qualified URL for the custom endpoint.</p>"
+        },
+        "TLSSecurityPolicy": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The TLS security policy to apply to the HTTPS endpoint of the OpenSearch domain.</p>"
+        }
+      },
+      "documentation": "<p>Information about additional options for the domain endpoint.</p>"
+    },
+    "AwsOpenSearchServiceDomainEncryptionAtRestOptionsDetails": {
+      "type": "structure",
+      "members": {
+        "Enabled": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether encryption at rest is enabled.</p>"
+        },
+        "KmsKeyId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The KMS key ID.</p>"
+        }
+      },
+      "documentation": "<p>Details about the configuration for encryption at rest for the OpenSearch domain.</p>"
+    },
+    "AwsOpenSearchServiceDomainLogPublishingOption": {
+      "type": "structure",
+      "members": {
+        "CloudWatchLogsLogGroupArn": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The ARN of the CloudWatch Logs group to publish the logs to.</p>"
+        },
+        "Enabled": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether the log publishing is enabled.</p>"
+        }
+      },
+      "documentation": "<p>Configuration details for a log publishing option.</p>"
+    },
+    "AwsOpenSearchServiceDomainLogPublishingOptionsDetails": {
+      "type": "structure",
+      "members": {
+        "IndexSlowLogs": {
+          "shape": "AwsOpenSearchServiceDomainLogPublishingOption",
+          "documentation": "<p>Configures the OpenSearch index logs publishing.</p>"
+        },
+        "SearchSlowLogs": {
+          "shape": "AwsOpenSearchServiceDomainLogPublishingOption",
+          "documentation": "<p>Configures the OpenSearch search slow log publishing.</p>"
+        },
+        "AuditLogs": {
+          "shape": "AwsOpenSearchServiceDomainLogPublishingOption",
+          "documentation": "<p>Configures the OpenSearch audit logs publishing.</p>"
+        }
+      },
+      "documentation": "<p>Configures the CloudWatch Logs to publish for the OpenSearch domain.</p>"
+    },
+    "AwsOpenSearchServiceDomainNodeToNodeEncryptionOptionsDetails": {
+      "type": "structure",
+      "members": {
+        "Enabled": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether node-to-node encryption is enabled.</p>"
+        }
+      },
+      "documentation": "<p>Provides details about the configuration for node-to-node encryption.</p>"
+    },
+    "AwsOpenSearchServiceDomainServiceSoftwareOptionsDetails": {
+      "type": "structure",
+      "members": {
+        "AutomatedUpdateDate": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The epoch time when the deployment window closes for required updates. After this time, OpenSearch Service schedules the software upgrade automatically.</p>"
+        },
+        "Cancellable": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether a request to update the domain can be canceled.</p>"
+        },
+        "CurrentVersion": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The version of the service software that is currently installed on the domain.</p>"
+        },
+        "Description": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>A more detailed description of the service software status.</p>"
+        },
+        "NewVersion": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The most recent version of the service software.</p>"
+        },
+        "UpdateAvailable": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether a service software update is available for the domain.</p>"
+        },
+        "UpdateStatus": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The status of the service software update.</p>"
+        },
+        "OptionalDeployment": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether the service software update is optional.</p>"
+        }
+      },
+      "documentation": "<p>Provides information about the state of the domain relative to the latest service software.</p>"
+    },
+    "AwsOpenSearchServiceDomainVpcOptionsDetails": {
+      "type": "structure",
+      "members": {
+        "SecurityGroupIds": {
+          "shape": "NonEmptyStringList",
+          "documentation": "<p>The list of security group IDs that are associated with the VPC endpoints for the domain.</p>"
+        },
+        "SubnetIds": {
+          "shape": "NonEmptyStringList",
+          "documentation": "<p>A list of subnet IDs that are associated with the VPC endpoints for the domain.</p>"
+        }
+      },
+      "documentation": "<p>Contains information that OpenSearch Service derives based on the <code>VPCOptions</code> for the domain.</p>"
     },
     "AwsRdsDbClusterAssociatedRole": {
       "type": "structure",
@@ -8631,6 +9289,10 @@
           "shape": "NonEmptyString",
           "documentation": "<p>The display name of the owner of the S3 bucket.</p>"
         },
+        "OwnerAccountId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The Amazon Web Services account identifier of the account that owns the S3 bucket.</p>"
+        },
         "CreatedAt": {
           "shape": "NonEmptyString",
           "documentation": "<p>Indicates when the S3 bucket was created.</p> <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>"
@@ -9741,6 +10403,114 @@
       },
       "documentation": "<p>Provides information about the state of a patch on an instance based on the patch baseline that was used to patch the instance.</p>"
     },
+    "AwsWafRateBasedRuleDetails": {
+      "type": "structure",
+      "members": {
+        "MetricName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the metrics for the rate-based rule.</p>"
+        },
+        "Name": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the rate-based rule.</p>"
+        },
+        "RateKey": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The field that WAF uses to determine whether requests are likely arriving from single source and are subject to rate monitoring.</p>"
+        },
+        "RateLimit": {
+          "shape": "Long",
+          "documentation": "<p>The maximum number of requests that have an identical value for the field specified in <code>RateKey</code> that are allowed within a five-minute period. If the number of requests exceeds <code>RateLimit</code> and the other predicates specified in the rule are met, WAF triggers the action for the rule.</p>"
+        },
+        "RuleId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The unique identifier for the rate-based rule.</p>"
+        },
+        "MatchPredicates": {
+          "shape": "AwsWafRateBasedRuleMatchPredicateList",
+          "documentation": "<p>The predicates to include in the rate-based rule.</p>"
+        }
+      },
+      "documentation": "<p>Details about a rate-based rule for global resources. A rate-based rule provides settings to indicate when to allow, block, or count a request. Rate-based rules include the number of requests that arrive over a specified period of time.</p>"
+    },
+    "AwsWafRateBasedRuleMatchPredicate": {
+      "type": "structure",
+      "members": {
+        "DataId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The unique identifier for the predicate.</p>"
+        },
+        "Negated": {
+          "shape": "Boolean",
+          "documentation": "<p>If set to <code>true</code>, then the rule actions are performed on requests that match the predicate settings.</p> <p>If set to <code>false</code>, then the rule actions are performed on all requests except those that match the predicate settings. </p>"
+        },
+        "Type": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The type of predicate.</p>"
+        }
+      },
+      "documentation": "<p>A match predicate. A predicate might look for characteristics such as specific IP addresses, geographic locations, or sizes.</p>"
+    },
+    "AwsWafRateBasedRuleMatchPredicateList": {
+      "type": "list",
+      "member": {
+        "shape": "AwsWafRateBasedRuleMatchPredicate"
+      }
+    },
+    "AwsWafRegionalRateBasedRuleDetails": {
+      "type": "structure",
+      "members": {
+        "MetricName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the metrics for the rate-based rule.</p>"
+        },
+        "Name": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the rate-based rule.</p>"
+        },
+        "RateKey": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The field that WAF uses to determine whether requests are likely arriving from single source and are subject to rate monitoring.</p>"
+        },
+        "RateLimit": {
+          "shape": "Long",
+          "documentation": "<p>The maximum number of requests that have an identical value for the field specified in <code>RateKey</code> that are allowed within a five-minute period. If the number of requests exceeds <code>RateLimit</code> and the other predicates specified in the rule are met, WAF triggers the action for the rule.</p>"
+        },
+        "RuleId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The unique identifier for the rate-based rule.</p>"
+        },
+        "MatchPredicates": {
+          "shape": "AwsWafRegionalRateBasedRuleMatchPredicateList",
+          "documentation": "<p>The predicates to include in the rate-based rule.</p>"
+        }
+      },
+      "documentation": "<p>contains details about a rate-based rule for Regional resources. A rate-based rule provides settings to indicate when to allow, block, or count a request. Rate-based rules include the number of requests that arrive over a specified period of time.</p>"
+    },
+    "AwsWafRegionalRateBasedRuleMatchPredicate": {
+      "type": "structure",
+      "members": {
+        "DataId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The unique identifier for the predicate.</p>"
+        },
+        "Negated": {
+          "shape": "Boolean",
+          "documentation": "<p>If set to <code>true</code>, then the rule actions are performed on requests that match the predicate settings.</p> <p>If set to <code>false</code>, then the rule actions are performed on all requests except those that match the predicate settings.</p>"
+        },
+        "Type": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The type of predicate.</p>"
+        }
+      },
+      "documentation": "<p>Details for a match predicate. A predicate might look for characteristics such as specific IP addresses, geographic locations, or sizes.</p>"
+    },
+    "AwsWafRegionalRateBasedRuleMatchPredicateList": {
+      "type": "list",
+      "member": {
+        "shape": "AwsWafRegionalRateBasedRuleMatchPredicate"
+      }
+    },
     "AwsWafWebAclDetails": {
       "type": "structure",
       "members": {
@@ -9798,6 +10568,24 @@
       "member": {
         "shape": "AwsWafWebAclRule"
       }
+    },
+    "AwsXrayEncryptionConfigDetails": {
+      "type": "structure",
+      "members": {
+        "KeyId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The identifier of the KMS key that is used for encryption. Provided if <code>Type</code> is <code>KMS</code>.</p>"
+        },
+        "Status": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The current status of the encryption configuration. When <code>Status</code> is <code>UPDATING</code>, X-Ray might use both the old and new encryption.</p>"
+        },
+        "Type": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The type of encryption. <code>KMS</code> indicates that the encryption uses KMS keys. <code>NONE</code> indicates to use the default encryption.</p>"
+        }
+      },
+      "documentation": "<p>Information about the encryption configuration for X-Ray.</p>"
     },
     "BatchDisableStandardsRequest": {
       "type": "structure",
@@ -12529,7 +13317,35 @@
         },
         "AwsEcrContainerImage": {
           "shape": "AwsEcrContainerImageDetails",
-          "documentation": "<p>information about an Amazon ECR image.</p>"
+          "documentation": "<p>Information about an Amazon ECR image.</p>"
+        },
+        "AwsOpenSearchServiceDomain": {
+          "shape": "AwsOpenSearchServiceDomainDetails",
+          "documentation": "<p>Details about an Amazon OpenSearch Service domain.</p>"
+        },
+        "AwsEc2VpcEndpointService": {
+          "shape": "AwsEc2VpcEndpointServiceDetails",
+          "documentation": "<p>Details about the service configuration for a VPC endpoint service.</p>"
+        },
+        "AwsXrayEncryptionConfig": {
+          "shape": "AwsXrayEncryptionConfigDetails",
+          "documentation": "<p>Information about the encryption configuration for X-Ray.</p>"
+        },
+        "AwsWafRateBasedRule": {
+          "shape": "AwsWafRateBasedRuleDetails",
+          "documentation": "<p>Details about a rate-based rule for global resources.</p>"
+        },
+        "AwsWafRegionalRateBasedRule": {
+          "shape": "AwsWafRegionalRateBasedRuleDetails",
+          "documentation": "<p>Details about a rate-based rule for Regional resources.</p>"
+        },
+        "AwsEcrRepository": {
+          "shape": "AwsEcrRepositoryDetails",
+          "documentation": "<p>Information about an Amazon Elastic Container Registry repository.</p>"
+        },
+        "AwsEksCluster": {
+          "shape": "AwsEksClusterDetails",
+          "documentation": "<p>Details about an Amazon EKS cluster.</p>"
         }
       },
       "documentation": "<p>Additional details about a resource related to a finding.</p> <p>To provide the details, use the object that corresponds to the resource type. For example, if the resource type is <code>AwsEc2Instance</code>, then you use the <code>AwsEc2Instance</code> object to provide the details.</p> <p>If the type-specific object does not contain all of the fields you want to populate, then you use the <code>Other</code> object to populate those additional fields.</p> <p>You also use the <code>Other</code> object to populate the details when the selected type does not have a corresponding object.</p>"

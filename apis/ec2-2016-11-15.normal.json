@@ -12194,13 +12194,13 @@
           "shape": "LocalGatewayRoutetableId",
           "documentation": "<p>The ID of the local gateway route table.</p>"
         },
-        "DryRun": {
-          "shape": "Boolean",
-          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
-        },
         "LocalGatewayVirtualInterfaceGroupId": {
           "shape": "LocalGatewayVirtualInterfaceGroupId",
           "documentation": "<p>The ID of the virtual interface group.</p>"
+        },
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
         }
       }
     },
@@ -13168,8 +13168,8 @@
     "CreateSubnetRequest": {
       "type": "structure",
       "required": [
-        "VpcId",
-        "CidrBlock"
+        "CidrBlock",
+        "VpcId"
       ],
       "members": {
         "TagSpecifications": {
@@ -13184,6 +13184,10 @@
         "AvailabilityZoneId": {
           "shape": "String",
           "documentation": "<p>The AZ ID or the Local Zone ID of the subnet.</p>"
+        },
+        "CidrBlock": {
+          "shape": "String",
+          "documentation": "<p>The IPv4 network range for the subnet, in CIDR notation. For example, <code>10.0.0.0/24</code>. We modify the specified CIDR block to its canonical form; for example, if you specify <code>100.68.0.18/18</code>, we modify it to <code>100.68.0.0/18</code>.</p>"
         },
         "Ipv6CidrBlock": {
           "shape": "String",
@@ -13201,10 +13205,6 @@
           "shape": "Boolean",
           "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>",
           "locationName": "dryRun"
-        },
-        "CidrBlock": {
-          "shape": "String",
-          "documentation": "<p>The IPv4 network range for the subnet, in CIDR notation. For example, <code>10.0.0.0/24</code>. We modify the specified CIDR block to its canonical form; for example, if you specify <code>100.68.0.18/18</code>, we modify it to <code>100.68.0.0/18</code>.</p>"
         }
       }
     },
@@ -41261,13 +41261,17 @@
     "SearchLocalGatewayRoutesRequest": {
       "type": "structure",
       "required": [
-        "LocalGatewayRouteTableId",
-        "Filters"
+        "LocalGatewayRouteTableId"
       ],
       "members": {
         "LocalGatewayRouteTableId": {
           "shape": "LocalGatewayRoutetableId",
           "documentation": "<p>The ID of the local gateway route table.</p>"
+        },
+        "Filters": {
+          "shape": "FilterList",
+          "documentation": "<p>One or more filters.</p>",
+          "locationName": "Filter"
         },
         "MaxResults": {
           "shape": "MaxResults",
@@ -41280,11 +41284,6 @@
         "DryRun": {
           "shape": "Boolean",
           "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
-        },
-        "Filters": {
-          "shape": "FilterList",
-          "documentation": "<p>One or more filters.</p>",
-          "locationName": "Filter"
         }
       }
     },

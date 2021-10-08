@@ -7567,13 +7567,13 @@ declare namespace EC2 {
      */
     LocalGatewayRouteTableId: LocalGatewayRoutetableId;
     /**
-     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
-     */
-    DryRun?: Boolean;
-    /**
      * The ID of the virtual interface group.
      */
     LocalGatewayVirtualInterfaceGroupId: LocalGatewayVirtualInterfaceGroupId;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
   }
   export interface CreateLocalGatewayRouteResult {
     /**
@@ -8256,6 +8256,10 @@ declare namespace EC2 {
      */
     AvailabilityZoneId?: String;
     /**
+     * The IPv4 network range for the subnet, in CIDR notation. For example, 10.0.0.0/24. We modify the specified CIDR block to its canonical form; for example, if you specify 100.68.0.18/18, we modify it to 100.68.0.0/18.
+     */
+    CidrBlock: String;
+    /**
      * The IPv6 network range for the subnet, in CIDR notation. The subnet size must use a /64 prefix length.
      */
     Ipv6CidrBlock?: String;
@@ -8271,10 +8275,6 @@ declare namespace EC2 {
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
     DryRun?: Boolean;
-    /**
-     * The IPv4 network range for the subnet, in CIDR notation. For example, 10.0.0.0/24. We modify the specified CIDR block to its canonical form; for example, if you specify 100.68.0.18/18, we modify it to 100.68.0.0/18.
-     */
-    CidrBlock: String;
   }
   export interface CreateSubnetResult {
     /**
@@ -25919,6 +25919,10 @@ declare namespace EC2 {
      */
     LocalGatewayRouteTableId: LocalGatewayRoutetableId;
     /**
+     * One or more filters.
+     */
+    Filters?: FilterList;
+    /**
      * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
      */
     MaxResults?: MaxResults;
@@ -25930,10 +25934,6 @@ declare namespace EC2 {
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
     DryRun?: Boolean;
-    /**
-     * One or more filters.
-     */
-    Filters: FilterList;
   }
   export interface SearchLocalGatewayRoutesResult {
     /**

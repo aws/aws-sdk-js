@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1003.0-->
+<!--LATEST=2.1004.0-->
 <!--ENTRYINSERT-->
+
+## 2.1004.0
+* feature: EC2: This release removes a requirement for filters on SearchLocalGatewayRoutes operations.
+* feature: LexModelsV2: Added configuration support for an Amazon Lex bot to provide fulfillment progress updates to users while their requests are being processed. See documentation for more details: https://docs.aws.amazon.com/lexv2/latest/dg/streaming-progress.html
+* feature: LexRuntimeV2: Updates API to latest version.
+* feature: MediaConvert: AWS Elemental MediaConvert has added the ability to set account policies which control access restrictions for HTTP, HTTPS, and S3 content sources.
+* feature: SecurityHub: Added new resource details objects to ASFF, including resources for WAF rate-based rules, EC2 VPC endpoints, ECR repositories, EKS clusters, X-Ray encryption, and OpenSearch domains. Added additional details for CloudFront distributions, CodeBuild projects, ELB V2 load balancers, and S3 buckets.
+* feature: protocol: Update protocol tests
 
 ## 2.1003.0
 * feature: Backup: Launch of AWS Backup Vault Lock, which protects your backups from malicious and accidental actions, works with existing backup policies, and helps you meet compliance requirements.

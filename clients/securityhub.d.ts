@@ -76,11 +76,11 @@ declare class SecurityHub extends Service {
    */
   createInsight(callback?: (err: AWSError, data: SecurityHub.Types.CreateInsightResponse) => void): Request<SecurityHub.Types.CreateInsightResponse, AWSError>;
   /**
-   * Creates a member association in Security Hub between the specified accounts and the account used to make the request, which is the administrator account. If you are integrated with Organizations, then the administrator account is designated by the organization management account.  CreateMembers is always used to add accounts that are not organization members. For accounts that are managed using Organizations, CreateMembers is only used in the following cases:   Security Hub is not configured to automatically add new organization accounts.   The account was disassociated or deleted in Security Hub.   This action can only be used by an account that has Security Hub enabled. To enable Security Hub, you can use the EnableSecurityHub operation. For accounts that are not organization members, you create the account association and then send an invitation to the member account. To send the invitation, you use the InviteMembers operation. If the account owner accepts the invitation, the account becomes a member account in Security Hub. Accounts that are managed using Organizations do not receive an invitation. They automatically become a member account in Security Hub, and Security Hub is automatically enabled for those accounts. Note that Security Hub cannot be enabled automatically for the organization management account. The organization management account must enable Security Hub before the administrator account enables it as a member account. A permissions policy is added that permits the administrator account to view the findings generated in the member account. When Security Hub is enabled in a member account, the member account findings are also visible to the administrator account.  To remove the association between the administrator and member accounts, use the DisassociateFromMasterAccount or DisassociateMembers operation.
+   * Creates a member association in Security Hub between the specified accounts and the account used to make the request, which is the administrator account. If you are integrated with Organizations, then the administrator account is designated by the organization management account.  CreateMembers is always used to add accounts that are not organization members. For accounts that are managed using Organizations, CreateMembers is only used in the following cases:   Security Hub is not configured to automatically add new organization accounts.   The account was disassociated or deleted in Security Hub.   This action can only be used by an account that has Security Hub enabled. To enable Security Hub, you can use the EnableSecurityHub operation. For accounts that are not organization members, you create the account association and then send an invitation to the member account. To send the invitation, you use the InviteMembers operation. If the account owner accepts the invitation, the account becomes a member account in Security Hub. Accounts that are managed using Organizations do not receive an invitation. They automatically become a member account in Security Hub.   If the organization account does not have Security Hub enabled, then Security Hub and the default standards are automatically enabled. Note that Security Hub cannot be enabled automatically for the organization management account. The organization management account must enable Security Hub before the administrator account enables it as a member account.   For organization accounts that already have Security Hub enabled, Security Hub does not make any other changes to those accounts. It does not change their enabled standards or controls.   A permissions policy is added that permits the administrator account to view the findings generated in the member account. To remove the association between the administrator and member accounts, use the DisassociateFromMasterAccount or DisassociateMembers operation.
    */
   createMembers(params: SecurityHub.Types.CreateMembersRequest, callback?: (err: AWSError, data: SecurityHub.Types.CreateMembersResponse) => void): Request<SecurityHub.Types.CreateMembersResponse, AWSError>;
   /**
-   * Creates a member association in Security Hub between the specified accounts and the account used to make the request, which is the administrator account. If you are integrated with Organizations, then the administrator account is designated by the organization management account.  CreateMembers is always used to add accounts that are not organization members. For accounts that are managed using Organizations, CreateMembers is only used in the following cases:   Security Hub is not configured to automatically add new organization accounts.   The account was disassociated or deleted in Security Hub.   This action can only be used by an account that has Security Hub enabled. To enable Security Hub, you can use the EnableSecurityHub operation. For accounts that are not organization members, you create the account association and then send an invitation to the member account. To send the invitation, you use the InviteMembers operation. If the account owner accepts the invitation, the account becomes a member account in Security Hub. Accounts that are managed using Organizations do not receive an invitation. They automatically become a member account in Security Hub, and Security Hub is automatically enabled for those accounts. Note that Security Hub cannot be enabled automatically for the organization management account. The organization management account must enable Security Hub before the administrator account enables it as a member account. A permissions policy is added that permits the administrator account to view the findings generated in the member account. When Security Hub is enabled in a member account, the member account findings are also visible to the administrator account.  To remove the association between the administrator and member accounts, use the DisassociateFromMasterAccount or DisassociateMembers operation.
+   * Creates a member association in Security Hub between the specified accounts and the account used to make the request, which is the administrator account. If you are integrated with Organizations, then the administrator account is designated by the organization management account.  CreateMembers is always used to add accounts that are not organization members. For accounts that are managed using Organizations, CreateMembers is only used in the following cases:   Security Hub is not configured to automatically add new organization accounts.   The account was disassociated or deleted in Security Hub.   This action can only be used by an account that has Security Hub enabled. To enable Security Hub, you can use the EnableSecurityHub operation. For accounts that are not organization members, you create the account association and then send an invitation to the member account. To send the invitation, you use the InviteMembers operation. If the account owner accepts the invitation, the account becomes a member account in Security Hub. Accounts that are managed using Organizations do not receive an invitation. They automatically become a member account in Security Hub.   If the organization account does not have Security Hub enabled, then Security Hub and the default standards are automatically enabled. Note that Security Hub cannot be enabled automatically for the organization management account. The organization management account must enable Security Hub before the administrator account enables it as a member account.   For organization accounts that already have Security Hub enabled, Security Hub does not make any other changes to those accounts. It does not change their enabled standards or controls.   A permissions policy is added that permits the administrator account to view the findings generated in the member account. To remove the association between the administrator and member accounts, use the DisassociateFromMasterAccount or DisassociateMembers operation.
    */
   createMembers(callback?: (err: AWSError, data: SecurityHub.Types.CreateMembersResponse) => void): Request<SecurityHub.Types.CreateMembersResponse, AWSError>;
   /**
@@ -1307,6 +1307,10 @@ declare namespace SecurityHub {
      */
     OriginGroups?: AwsCloudFrontDistributionOriginGroups;
     /**
+     * Provides information about the TLS/SSL configuration that the distribution uses to communicate with viewers.
+     */
+    ViewerCertificate?: AwsCloudFrontDistributionViewerCertificate;
+    /**
      * Indicates the current status of the distribution.
      */
     Status?: NonEmptyString;
@@ -1394,6 +1398,36 @@ declare namespace SecurityHub {
      */
     Items?: AwsCloudFrontDistributionOriginItemList;
   }
+  export interface AwsCloudFrontDistributionViewerCertificate {
+    /**
+     * The ARN of the ACM certificate. Used if the certificate is stored in ACM. If you provide an ACM certificate ARN, you must also provide MinimumCertificateVersion and SslSupportMethod.
+     */
+    AcmCertificateArn?: NonEmptyString;
+    /**
+     * The identifier of the certificate. Note that in CloudFront, this attribute is deprecated.
+     */
+    Certificate?: NonEmptyString;
+    /**
+     * The source of the certificate identified by Certificate. Note that in CloudFront, this attribute is deprecated.
+     */
+    CertificateSource?: NonEmptyString;
+    /**
+     * Whether the distribution uses the CloudFront domain name. If set to false, then you provide either AcmCertificateArn or IamCertificateId.
+     */
+    CloudFrontDefaultCertificate?: Boolean;
+    /**
+     * The identifier of the IAM certificate. Used if the certificate is stored in IAM. If you provide IamCertificateId, then you also must provide MinimumProtocolVersion and SslSupportMethod.
+     */
+    IamCertificateId?: NonEmptyString;
+    /**
+     * The security policy that CloudFront uses for HTTPS connections with viewers. If SslSupportMethod is sni-only, then MinimumProtocolVersion must be TLSv1 or higher.
+     */
+    MinimumProtocolVersion?: NonEmptyString;
+    /**
+     * The viewers that the distribution accepts HTTPS connections from.
+     */
+    SslSupportMethod?: NonEmptyString;
+  }
   export interface AwsCloudTrailTrailDetails {
     /**
      * The ARN of the log group that CloudTrail logs are delivered to.
@@ -1456,11 +1490,54 @@ declare namespace SecurityHub {
      */
     TrailArn?: NonEmptyString;
   }
+  export interface AwsCodeBuildProjectArtifactsDetails {
+    /**
+     * An identifier for the artifact definition.
+     */
+    ArtifactIdentifier?: NonEmptyString;
+    /**
+     * Indicates whether to disable encryption on the artifact. Only valid when Type is S3.
+     */
+    EncryptionDisabled?: Boolean;
+    /**
+     * Only used when Type is S3. The name of the S3 bucket where the artifact is located.
+     */
+    Location?: NonEmptyString;
+    /**
+     * Only used when Type is S3. The name of the artifact. Used with NamepaceType and Path to determine the pattern for storing the artifact.
+     */
+    Name?: NonEmptyString;
+    /**
+     * Only used when Type is S3. The value to use for the namespace. Used with Name and Path to determine the pattern for storing the artifact.
+     */
+    NamespaceType?: NonEmptyString;
+    /**
+     * Whether the name specified in the buildspec file overrides the artifact name.
+     */
+    OverrideArtifactName?: Boolean;
+    /**
+     * Only used when Type is S3. The type of output artifact to create.
+     */
+    Packaging?: NonEmptyString;
+    /**
+     * Only used when Type is S3. The path to the artifact. Used with Name and NamespaceType to determine the pattern for storing the artifact.
+     */
+    Path?: NonEmptyString;
+    /**
+     * The type of build artifact.
+     */
+    Type?: NonEmptyString;
+  }
+  export type AwsCodeBuildProjectArtifactsList = AwsCodeBuildProjectArtifactsDetails[];
   export interface AwsCodeBuildProjectDetails {
     /**
      * The KMS key used to encrypt the build output artifacts. You can specify either the ARN of the KMS key or, if available, the KMS key alias (using the format alias/alias-name). 
      */
     EncryptionKey?: NonEmptyString;
+    /**
+     * Information about the build artifacts for the CodeBuild project.
+     */
+    Artifacts?: AwsCodeBuildProjectArtifactsList;
     /**
      * Information about the build environment for this build project.
      */
@@ -1478,6 +1555,10 @@ declare namespace SecurityHub {
      */
     ServiceRole?: NonEmptyString;
     /**
+     * Information about logs for the build project.
+     */
+    LogsConfig?: AwsCodeBuildProjectLogsConfigDetails;
+    /**
      * Information about the VPC configuration that CodeBuild accesses.
      */
     VpcConfig?: AwsCodeBuildProjectVpcConfig;
@@ -1487,6 +1568,14 @@ declare namespace SecurityHub {
      * The certificate to use with this build project.
      */
     Certificate?: NonEmptyString;
+    /**
+     * A set of environment variables to make available to builds for the build project.
+     */
+    EnvironmentVariables?: AwsCodeBuildProjectEnvironmentEnvironmentVariablesList;
+    /**
+     * Whether to allow the Docker daemon to run inside a Docker container. Set to true if the build project is used to build Docker images.
+     */
+    PrivilegedMode?: Boolean;
     /**
      * The type of credentials CodeBuild uses to pull images in your build. Valid values:    CODEBUILD specifies that CodeBuild uses its own credentials. This requires that you modify your ECR repository policy to trust the CodeBuild service principal.    SERVICE_ROLE specifies that CodeBuild uses your build project's service role.   When you use a cross-account or private registry image, you must use SERVICE_ROLE credentials. When you use an CodeBuild curated image, you must use CODEBUILD credentials.
      */
@@ -1500,6 +1589,21 @@ declare namespace SecurityHub {
      */
     Type?: NonEmptyString;
   }
+  export interface AwsCodeBuildProjectEnvironmentEnvironmentVariablesDetails {
+    /**
+     * The name of the environment variable.
+     */
+    Name?: NonEmptyString;
+    /**
+     * The type of environment variable.
+     */
+    Type?: NonEmptyString;
+    /**
+     * The value of the environment variable.
+     */
+    Value?: NonEmptyString;
+  }
+  export type AwsCodeBuildProjectEnvironmentEnvironmentVariablesList = AwsCodeBuildProjectEnvironmentEnvironmentVariablesDetails[];
   export interface AwsCodeBuildProjectEnvironmentRegistryCredential {
     /**
      * The ARN or name of credentials created using Secrets Manager.  The credential can use the name of the credentials only if they exist in your current Amazon Web Services Region.  
@@ -1509,6 +1613,44 @@ declare namespace SecurityHub {
      * The service that created the credentials to access a private Docker registry. The valid value, SECRETS_MANAGER, is for Secrets Manager.
      */
     CredentialProvider?: NonEmptyString;
+  }
+  export interface AwsCodeBuildProjectLogsConfigCloudWatchLogsDetails {
+    /**
+     * The group name of the logs in CloudWatch Logs.
+     */
+    GroupName?: NonEmptyString;
+    /**
+     * The current status of the logs in CloudWatch Logs for a build project.
+     */
+    Status?: NonEmptyString;
+    /**
+     * The prefix of the stream name of the CloudWatch Logs.
+     */
+    StreamName?: NonEmptyString;
+  }
+  export interface AwsCodeBuildProjectLogsConfigDetails {
+    /**
+     * Information about CloudWatch Logs for the build project.
+     */
+    CloudWatchLogs?: AwsCodeBuildProjectLogsConfigCloudWatchLogsDetails;
+    /**
+     * Information about logs built to an S3 bucket for a build project.
+     */
+    S3Logs?: AwsCodeBuildProjectLogsConfigS3LogsDetails;
+  }
+  export interface AwsCodeBuildProjectLogsConfigS3LogsDetails {
+    /**
+     * Whether to disable encryption of the S3 build log output.
+     */
+    EncryptionDisabled?: Boolean;
+    /**
+     * The ARN of the S3 bucket and the path prefix for S3 logs.
+     */
+    Location?: NonEmptyString;
+    /**
+     * The current status of the S3 build logs.
+     */
+    Status?: NonEmptyString;
   }
   export interface AwsCodeBuildProjectSource {
     /**
@@ -2344,6 +2486,59 @@ declare namespace SecurityHub {
      */
     State?: NonEmptyString;
   }
+  export interface AwsEc2VpcEndpointServiceDetails {
+    /**
+     * Whether requests from other Amazon Web Services accounts to create an endpoint to the service must first be accepted.
+     */
+    AcceptanceRequired?: Boolean;
+    /**
+     * The Availability Zones where the service is available.
+     */
+    AvailabilityZones?: NonEmptyStringList;
+    /**
+     * The DNS names for the service.
+     */
+    BaseEndpointDnsNames?: NonEmptyStringList;
+    /**
+     * Whether the service manages its VPC endpoints.
+     */
+    ManagesVpcEndpoints?: Boolean;
+    /**
+     * The ARNs of the Gateway Load Balancers for the service.
+     */
+    GatewayLoadBalancerArns?: NonEmptyStringList;
+    /**
+     * The ARNs of the Network Load Balancers for the service.
+     */
+    NetworkLoadBalancerArns?: NonEmptyStringList;
+    /**
+     * The private DNS name for the service.
+     */
+    PrivateDnsName?: NonEmptyString;
+    /**
+     * The identifier of the service.
+     */
+    ServiceId?: NonEmptyString;
+    /**
+     * The name of the service.
+     */
+    ServiceName?: NonEmptyString;
+    /**
+     * The current state of the service.
+     */
+    ServiceState?: NonEmptyString;
+    /**
+     * The types for the service.
+     */
+    ServiceType?: AwsEc2VpcEndpointServiceServiceTypeList;
+  }
+  export interface AwsEc2VpcEndpointServiceServiceTypeDetails {
+    /**
+     * The type of service.
+     */
+    ServiceType?: NonEmptyString;
+  }
+  export type AwsEc2VpcEndpointServiceServiceTypeList = AwsEc2VpcEndpointServiceServiceTypeDetails[];
   export interface AwsEc2VpnConnectionDetails {
     /**
      * The identifier of the VPN connection.
@@ -2530,6 +2725,48 @@ declare namespace SecurityHub {
      * The date and time when the image was pushed to the repository. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
      */
     ImagePublishedAt?: NonEmptyString;
+  }
+  export interface AwsEcrRepositoryDetails {
+    /**
+     * The ARN of the repository.
+     */
+    Arn?: NonEmptyString;
+    /**
+     * The image scanning configuration for a repository.
+     */
+    ImageScanningConfiguration?: AwsEcrRepositoryImageScanningConfigurationDetails;
+    /**
+     * The tag mutability setting for the repository.
+     */
+    ImageTagMutability?: NonEmptyString;
+    /**
+     * Information about the lifecycle policy for the repository.
+     */
+    LifecyclePolicy?: AwsEcrRepositoryLifecyclePolicyDetails;
+    /**
+     * The name of the repository.
+     */
+    RepositoryName?: NonEmptyString;
+    /**
+     * The text of the repository policy.
+     */
+    RepositoryPolicyText?: NonEmptyString;
+  }
+  export interface AwsEcrRepositoryImageScanningConfigurationDetails {
+    /**
+     * Whether to scan images after they are pushed to a repository.
+     */
+    ScanOnPush?: Boolean;
+  }
+  export interface AwsEcrRepositoryLifecyclePolicyDetails {
+    /**
+     * The text of the lifecycle policy.
+     */
+    LifecyclePolicyText?: NonEmptyString;
+    /**
+     * The Amazon Web Services account identifier that is associated with the registry that contains the repository.
+     */
+    RegistryId?: NonEmptyString;
   }
   export interface AwsEcsClusterClusterSettingsDetails {
     /**
@@ -3441,6 +3678,71 @@ declare namespace SecurityHub {
     SourcePath?: NonEmptyString;
   }
   export type AwsEcsTaskDefinitionVolumesList = AwsEcsTaskDefinitionVolumesDetails[];
+  export interface AwsEksClusterDetails {
+    /**
+     * The ARN of the cluster.
+     */
+    Arn?: NonEmptyString;
+    /**
+     * The certificate authority data for the cluster.
+     */
+    CertificateAuthorityData?: NonEmptyString;
+    /**
+     * The status of the cluster.
+     */
+    ClusterStatus?: NonEmptyString;
+    /**
+     * The endpoint for the Amazon EKS API server.
+     */
+    Endpoint?: NonEmptyString;
+    /**
+     * The name of the cluster.
+     */
+    Name?: NonEmptyString;
+    /**
+     * The VPC configuration used by the cluster control plane.
+     */
+    ResourcesVpcConfig?: AwsEksClusterResourcesVpcConfigDetails;
+    /**
+     * The ARN of the IAM role that provides permissions for the Amazon EKS control plane to make calls to Amazon Web Services API operations on your behalf.
+     */
+    RoleArn?: NonEmptyString;
+    /**
+     * The Amazon EKS server version for the cluster.
+     */
+    Version?: NonEmptyString;
+    /**
+     * The logging configuration for the cluster.
+     */
+    Logging?: AwsEksClusterLoggingDetails;
+  }
+  export interface AwsEksClusterLoggingClusterLoggingDetails {
+    /**
+     * Whether the logging types that are listed in Types are enabled.
+     */
+    Enabled?: Boolean;
+    /**
+     * A list of logging types.
+     */
+    Types?: NonEmptyStringList;
+  }
+  export type AwsEksClusterLoggingClusterLoggingList = AwsEksClusterLoggingClusterLoggingDetails[];
+  export interface AwsEksClusterLoggingDetails {
+    /**
+     * Cluster logging configurations.
+     */
+    ClusterLogging?: AwsEksClusterLoggingClusterLoggingList;
+  }
+  export interface AwsEksClusterResourcesVpcConfigDetails {
+    /**
+     * The security groups that are associated with the cross-account elastic network interfaces that are used to allow communication between your nodes and the Amazon EKS control plane.
+     */
+    SecurityGroupIds?: NonEmptyStringList;
+    /**
+     * The subnets that are associated with the cluster.
+     */
+    SubnetIds?: NonEmptyStringList;
+  }
   export interface AwsElasticBeanstalkEnvironmentDetails {
     /**
      * The name of the application that is associated with the environment.
@@ -3577,11 +3879,11 @@ declare namespace SecurityHub {
      */
     Endpoints?: FieldMap;
     /**
-     * Elasticsearch version.
+     * OpenSearch version.
      */
     ElasticsearchVersion?: NonEmptyString;
     /**
-     * Information about an Elasticsearch cluster configuration.
+     * Information about an OpenSearch cluster configuration.
      */
     ElasticsearchClusterConfig?: AwsElasticsearchDomainElasticsearchClusterConfigDetails;
     /**
@@ -3601,7 +3903,7 @@ declare namespace SecurityHub {
      */
     ServiceSoftwareOptions?: AwsElasticsearchDomainServiceSoftwareOptions;
     /**
-     * Information that Elasticsearch derives based on VPCOptions for the domain.
+     * Information that OpenSearch derives based on VPCOptions for the domain.
      */
     VPCOptions?: AwsElasticsearchDomainVPCOptions;
   }
@@ -3611,7 +3913,7 @@ declare namespace SecurityHub {
      */
     EnforceHTTPS?: Boolean;
     /**
-     * The TLS security policy to apply to the HTTPS endpoint of the Elasticsearch domain. Valid values:    Policy-Min-TLS-1-0-2019-07, which supports TLSv1.0 and higher    Policy-Min-TLS-1-2-2019-07, which only supports TLSv1.2  
+     * The TLS security policy to apply to the HTTPS endpoint of the OpenSearch domain. Valid values:    Policy-Min-TLS-1-0-2019-07, which supports TLSv1.0 and higher    Policy-Min-TLS-1-2-2019-07, which only supports TLSv1.2  
      */
     TLSSecurityPolicy?: NonEmptyString;
   }
@@ -3641,7 +3943,7 @@ declare namespace SecurityHub {
      */
     ZoneAwarenessConfig?: AwsElasticsearchDomainElasticsearchClusterConfigZoneAwarenessConfigDetails;
     /**
-     * Whether to enable zone awareness for the Elasticsearch domain. When zone awareness is enabled, Elasticsearch allocates the cluster's nodes and replica index shards across Availability Zones in the same Region. This prevents data loss and minimizes downtime if a node or data center fails.
+     * Whether to enable zone awareness for the Elasticsearch domain. When zone awareness is enabled, OpenSearch allocates the cluster's nodes and replica index shards across Availability Zones in the same Region. This prevents data loss and minimizes downtime if a node or data center fails.
      */
     ZoneAwarenessEnabled?: Boolean;
   }
@@ -3663,11 +3965,11 @@ declare namespace SecurityHub {
   }
   export interface AwsElasticsearchDomainLogPublishingOptions {
     /**
-     * Configures the Elasticsearch index logs publishing.
+     * Configures the OpenSearch index logs publishing.
      */
     IndexSlowLogs?: AwsElasticsearchDomainLogPublishingOptionsLogConfig;
     /**
-     * Configures the Elasticsearch search slow log publishing.
+     * Configures the OpenSearch search slow log publishing.
      */
     SearchSlowLogs?: AwsElasticsearchDomainLogPublishingOptionsLogConfig;
     AuditLogs?: AwsElasticsearchDomainLogPublishingOptionsLogConfig;
@@ -3690,7 +3992,7 @@ declare namespace SecurityHub {
   }
   export interface AwsElasticsearchDomainServiceSoftwareOptions {
     /**
-     * The epoch time when the deployment window closes for required updates. After this time, Amazon Elasticsearch Service schedules the software upgrade automatically.
+     * The epoch time when the deployment window closes for required updates. After this time, Amazon OpenSearch Service schedules the software upgrade automatically.
      */
     AutomatedUpdateDate?: NonEmptyString;
     /**
@@ -3983,6 +4285,17 @@ declare namespace SecurityHub {
      */
     OwnerAlias?: NonEmptyString;
   }
+  export interface AwsElbv2LoadBalancerAttribute {
+    /**
+     * The name of the load balancer attribute.
+     */
+    Key?: NonEmptyString;
+    /**
+     * The value of the load balancer attribute.
+     */
+    Value?: NonEmptyString;
+  }
+  export type AwsElbv2LoadBalancerAttributes = AwsElbv2LoadBalancerAttribute[];
   export interface AwsElbv2LoadBalancerDetails {
     /**
      * The Availability Zones for the load balancer.
@@ -4024,6 +4337,10 @@ declare namespace SecurityHub {
      * The ID of the VPC for the load balancer.
      */
     VpcId?: NonEmptyString;
+    /**
+     * Attributes of the load balancer.
+     */
+    LoadBalancerAttributes?: AwsElbv2LoadBalancerAttributes;
   }
   export interface AwsIamAccessKeyDetails {
     /**
@@ -4561,6 +4878,218 @@ declare namespace SecurityHub {
     CreatedDate?: NonEmptyString;
   }
   export type AwsLambdaLayerVersionNumber = number;
+  export interface AwsOpenSearchServiceDomainClusterConfigDetails {
+    /**
+     * The number of data nodes to use in the OpenSearch domain.
+     */
+    InstanceCount?: Integer;
+    /**
+     * Whether UltraWarm is enabled.
+     */
+    WarmEnabled?: Boolean;
+    /**
+     * The number of UltraWarm instances.
+     */
+    WarmCount?: Integer;
+    /**
+     * Whether to use a dedicated master node for the OpenSearch domain. A dedicated master node performs cluster management tasks, but does not hold data or respond to data upload requests.
+     */
+    DedicatedMasterEnabled?: Boolean;
+    /**
+     * Configuration options for zone awareness. Provided if ZoneAwarenessEnabled is true.
+     */
+    ZoneAwarenessConfig?: AwsOpenSearchServiceDomainClusterConfigZoneAwarenessConfigDetails;
+    /**
+     * The number of instances to use for the master node. If this attribute is specified, then DedicatedMasterEnabled must be true.
+     */
+    DedicatedMasterCount?: Integer;
+    /**
+     * The instance type for your data nodes. 
+     */
+    InstanceType?: NonEmptyString;
+    /**
+     * The type of UltraWarm instance.
+     */
+    WarmType?: NonEmptyString;
+    /**
+     * Whether to enable zone awareness for the OpenSearch domain. When zone awareness is enabled, OpenSearch Service allocates the cluster's nodes and replica index shards across Availability Zones (AZs) in the same Region. This prevents data loss and minimizes downtime if a node or data center fails.
+     */
+    ZoneAwarenessEnabled?: Boolean;
+    /**
+     * The hardware configuration of the computer that hosts the dedicated master node. If this attribute is specified, then DedicatedMasterEnabled must be true. 
+     */
+    DedicatedMasterType?: NonEmptyString;
+  }
+  export interface AwsOpenSearchServiceDomainClusterConfigZoneAwarenessConfigDetails {
+    /**
+     * The number of Availability Zones that the domain uses. Valid values are 2 and 3. The default is 2.
+     */
+    AvailabilityZoneCount?: Integer;
+  }
+  export interface AwsOpenSearchServiceDomainDetails {
+    /**
+     * The ARN of the OpenSearch Service domain.
+     */
+    Arn?: NonEmptyString;
+    /**
+     * IAM policy document that specifies the access policies for the OpenSearch Service domain.
+     */
+    AccessPolicies?: NonEmptyString;
+    /**
+     * The name of the endpoint.
+     */
+    DomainName?: NonEmptyString;
+    /**
+     * The identifier of the domain.
+     */
+    Id?: NonEmptyString;
+    /**
+     * The domain endpoint.
+     */
+    DomainEndpoint?: NonEmptyString;
+    /**
+     * The version of the domain engine.
+     */
+    EngineVersion?: NonEmptyString;
+    /**
+     * Details about the configuration for encryption at rest.
+     */
+    EncryptionAtRestOptions?: AwsOpenSearchServiceDomainEncryptionAtRestOptionsDetails;
+    /**
+     * Details about the configuration for node-to-node encryption.
+     */
+    NodeToNodeEncryptionOptions?: AwsOpenSearchServiceDomainNodeToNodeEncryptionOptionsDetails;
+    /**
+     * Information about the status of a domain relative to the latest service software.
+     */
+    ServiceSoftwareOptions?: AwsOpenSearchServiceDomainServiceSoftwareOptionsDetails;
+    /**
+     * Details about the configuration of an OpenSearch cluster.
+     */
+    ClusterConfig?: AwsOpenSearchServiceDomainClusterConfigDetails;
+    /**
+     * Additional options for the domain endpoint.
+     */
+    DomainEndpointOptions?: AwsOpenSearchServiceDomainDomainEndpointOptionsDetails;
+    /**
+     * Information that OpenSearch Service derives based on VPCOptions for the domain.
+     */
+    VpcOptions?: AwsOpenSearchServiceDomainVpcOptionsDetails;
+    /**
+     * Configures the CloudWatch Logs to publish for the OpenSearch domain.
+     */
+    LogPublishingOptions?: AwsOpenSearchServiceDomainLogPublishingOptionsDetails;
+    /**
+     * The domain endpoints. Used if the OpenSearch domain resides in a VPC. This is a map of key-value pairs. The key is always vpc. The value is the endpoint.
+     */
+    DomainEndpoints?: FieldMap;
+  }
+  export interface AwsOpenSearchServiceDomainDomainEndpointOptionsDetails {
+    /**
+     * The ARN for the security certificate. The certificate is managed in ACM.
+     */
+    CustomEndpointCertificateArn?: NonEmptyString;
+    /**
+     * Whether to enable a custom endpoint for the domain.
+     */
+    CustomEndpointEnabled?: Boolean;
+    /**
+     * Whether to require that all traffic to the domain arrive over HTTPS.
+     */
+    EnforceHTTPS?: Boolean;
+    /**
+     * The fully qualified URL for the custom endpoint.
+     */
+    CustomEndpoint?: NonEmptyString;
+    /**
+     * The TLS security policy to apply to the HTTPS endpoint of the OpenSearch domain.
+     */
+    TLSSecurityPolicy?: NonEmptyString;
+  }
+  export interface AwsOpenSearchServiceDomainEncryptionAtRestOptionsDetails {
+    /**
+     * Whether encryption at rest is enabled.
+     */
+    Enabled?: Boolean;
+    /**
+     * The KMS key ID.
+     */
+    KmsKeyId?: NonEmptyString;
+  }
+  export interface AwsOpenSearchServiceDomainLogPublishingOption {
+    /**
+     * The ARN of the CloudWatch Logs group to publish the logs to.
+     */
+    CloudWatchLogsLogGroupArn?: NonEmptyString;
+    /**
+     * Whether the log publishing is enabled.
+     */
+    Enabled?: Boolean;
+  }
+  export interface AwsOpenSearchServiceDomainLogPublishingOptionsDetails {
+    /**
+     * Configures the OpenSearch index logs publishing.
+     */
+    IndexSlowLogs?: AwsOpenSearchServiceDomainLogPublishingOption;
+    /**
+     * Configures the OpenSearch search slow log publishing.
+     */
+    SearchSlowLogs?: AwsOpenSearchServiceDomainLogPublishingOption;
+    /**
+     * Configures the OpenSearch audit logs publishing.
+     */
+    AuditLogs?: AwsOpenSearchServiceDomainLogPublishingOption;
+  }
+  export interface AwsOpenSearchServiceDomainNodeToNodeEncryptionOptionsDetails {
+    /**
+     * Whether node-to-node encryption is enabled.
+     */
+    Enabled?: Boolean;
+  }
+  export interface AwsOpenSearchServiceDomainServiceSoftwareOptionsDetails {
+    /**
+     * The epoch time when the deployment window closes for required updates. After this time, OpenSearch Service schedules the software upgrade automatically.
+     */
+    AutomatedUpdateDate?: NonEmptyString;
+    /**
+     * Whether a request to update the domain can be canceled.
+     */
+    Cancellable?: Boolean;
+    /**
+     * The version of the service software that is currently installed on the domain.
+     */
+    CurrentVersion?: NonEmptyString;
+    /**
+     * A more detailed description of the service software status.
+     */
+    Description?: NonEmptyString;
+    /**
+     * The most recent version of the service software.
+     */
+    NewVersion?: NonEmptyString;
+    /**
+     * Whether a service software update is available for the domain.
+     */
+    UpdateAvailable?: Boolean;
+    /**
+     * The status of the service software update.
+     */
+    UpdateStatus?: NonEmptyString;
+    /**
+     * Whether the service software update is optional.
+     */
+    OptionalDeployment?: Boolean;
+  }
+  export interface AwsOpenSearchServiceDomainVpcOptionsDetails {
+    /**
+     * The list of security group IDs that are associated with the VPC endpoints for the domain.
+     */
+    SecurityGroupIds?: NonEmptyStringList;
+    /**
+     * A list of subnet IDs that are associated with the VPC endpoints for the domain.
+     */
+    SubnetIds?: NonEmptyStringList;
+  }
   export interface AwsRdsDbClusterAssociatedRole {
     /**
      * The ARN of the IAM role.
@@ -6008,6 +6537,10 @@ declare namespace SecurityHub {
      */
     OwnerName?: NonEmptyString;
     /**
+     * The Amazon Web Services account identifier of the account that owns the S3 bucket.
+     */
+    OwnerAccountId?: NonEmptyString;
+    /**
      * Indicates when the S3 bucket was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
      */
     CreatedAt?: NonEmptyString;
@@ -6941,6 +7474,88 @@ declare namespace SecurityHub {
      */
     Patch?: AwsSsmPatch;
   }
+  export interface AwsWafRateBasedRuleDetails {
+    /**
+     * The name of the metrics for the rate-based rule.
+     */
+    MetricName?: NonEmptyString;
+    /**
+     * The name of the rate-based rule.
+     */
+    Name?: NonEmptyString;
+    /**
+     * The field that WAF uses to determine whether requests are likely arriving from single source and are subject to rate monitoring.
+     */
+    RateKey?: NonEmptyString;
+    /**
+     * The maximum number of requests that have an identical value for the field specified in RateKey that are allowed within a five-minute period. If the number of requests exceeds RateLimit and the other predicates specified in the rule are met, WAF triggers the action for the rule.
+     */
+    RateLimit?: Long;
+    /**
+     * The unique identifier for the rate-based rule.
+     */
+    RuleId?: NonEmptyString;
+    /**
+     * The predicates to include in the rate-based rule.
+     */
+    MatchPredicates?: AwsWafRateBasedRuleMatchPredicateList;
+  }
+  export interface AwsWafRateBasedRuleMatchPredicate {
+    /**
+     * The unique identifier for the predicate.
+     */
+    DataId?: NonEmptyString;
+    /**
+     * If set to true, then the rule actions are performed on requests that match the predicate settings. If set to false, then the rule actions are performed on all requests except those that match the predicate settings. 
+     */
+    Negated?: Boolean;
+    /**
+     * The type of predicate.
+     */
+    Type?: NonEmptyString;
+  }
+  export type AwsWafRateBasedRuleMatchPredicateList = AwsWafRateBasedRuleMatchPredicate[];
+  export interface AwsWafRegionalRateBasedRuleDetails {
+    /**
+     * The name of the metrics for the rate-based rule.
+     */
+    MetricName?: NonEmptyString;
+    /**
+     * The name of the rate-based rule.
+     */
+    Name?: NonEmptyString;
+    /**
+     * The field that WAF uses to determine whether requests are likely arriving from single source and are subject to rate monitoring.
+     */
+    RateKey?: NonEmptyString;
+    /**
+     * The maximum number of requests that have an identical value for the field specified in RateKey that are allowed within a five-minute period. If the number of requests exceeds RateLimit and the other predicates specified in the rule are met, WAF triggers the action for the rule.
+     */
+    RateLimit?: Long;
+    /**
+     * The unique identifier for the rate-based rule.
+     */
+    RuleId?: NonEmptyString;
+    /**
+     * The predicates to include in the rate-based rule.
+     */
+    MatchPredicates?: AwsWafRegionalRateBasedRuleMatchPredicateList;
+  }
+  export interface AwsWafRegionalRateBasedRuleMatchPredicate {
+    /**
+     * The unique identifier for the predicate.
+     */
+    DataId?: NonEmptyString;
+    /**
+     * If set to true, then the rule actions are performed on requests that match the predicate settings. If set to false, then the rule actions are performed on all requests except those that match the predicate settings.
+     */
+    Negated?: Boolean;
+    /**
+     * The type of predicate.
+     */
+    Type?: NonEmptyString;
+  }
+  export type AwsWafRegionalRateBasedRuleMatchPredicateList = AwsWafRegionalRateBasedRuleMatchPredicate[];
   export interface AwsWafWebAclDetails {
     /**
      * A friendly name or description of the WebACL. You can't change the name of a WebACL after you create it.
@@ -6986,6 +7601,20 @@ declare namespace SecurityHub {
     Type?: NonEmptyString;
   }
   export type AwsWafWebAclRuleList = AwsWafWebAclRule[];
+  export interface AwsXrayEncryptionConfigDetails {
+    /**
+     * The identifier of the KMS key that is used for encryption. Provided if Type is KMS.
+     */
+    KeyId?: NonEmptyString;
+    /**
+     * The current status of the encryption configuration. When Status is UPDATING, X-Ray might use both the old and new encryption.
+     */
+    Status?: NonEmptyString;
+    /**
+     * The type of encryption. KMS indicates that the encryption uses KMS keys. NONE indicates to use the default encryption.
+     */
+    Type?: NonEmptyString;
+  }
   export interface BatchDisableStandardsRequest {
     /**
      * The ARNs of the standards subscriptions to disable.
@@ -8775,9 +9404,37 @@ declare namespace SecurityHub {
      */
     AwsEc2VpnConnection?: AwsEc2VpnConnectionDetails;
     /**
-     * information about an Amazon ECR image.
+     * Information about an Amazon ECR image.
      */
     AwsEcrContainerImage?: AwsEcrContainerImageDetails;
+    /**
+     * Details about an Amazon OpenSearch Service domain.
+     */
+    AwsOpenSearchServiceDomain?: AwsOpenSearchServiceDomainDetails;
+    /**
+     * Details about the service configuration for a VPC endpoint service.
+     */
+    AwsEc2VpcEndpointService?: AwsEc2VpcEndpointServiceDetails;
+    /**
+     * Information about the encryption configuration for X-Ray.
+     */
+    AwsXrayEncryptionConfig?: AwsXrayEncryptionConfigDetails;
+    /**
+     * Details about a rate-based rule for global resources.
+     */
+    AwsWafRateBasedRule?: AwsWafRateBasedRuleDetails;
+    /**
+     * Details about a rate-based rule for Regional resources.
+     */
+    AwsWafRegionalRateBasedRule?: AwsWafRegionalRateBasedRuleDetails;
+    /**
+     * Information about an Amazon Elastic Container Registry repository.
+     */
+    AwsEcrRepository?: AwsEcrRepositoryDetails;
+    /**
+     * Details about an Amazon EKS cluster.
+     */
+    AwsEksCluster?: AwsEksClusterDetails;
   }
   export type ResourceList = Resource[];
   export interface Result {

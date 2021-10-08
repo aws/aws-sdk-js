@@ -68,6 +68,14 @@ declare class MediaConvert extends Service {
    */
   deleteJobTemplate(callback?: (err: AWSError, data: MediaConvert.Types.DeleteJobTemplateResponse) => void): Request<MediaConvert.Types.DeleteJobTemplateResponse, AWSError>;
   /**
+   * Permanently delete a policy that you created.
+   */
+  deletePolicy(params: MediaConvert.Types.DeletePolicyRequest, callback?: (err: AWSError, data: MediaConvert.Types.DeletePolicyResponse) => void): Request<MediaConvert.Types.DeletePolicyResponse, AWSError>;
+  /**
+   * Permanently delete a policy that you created.
+   */
+  deletePolicy(callback?: (err: AWSError, data: MediaConvert.Types.DeletePolicyResponse) => void): Request<MediaConvert.Types.DeletePolicyResponse, AWSError>;
+  /**
    * Permanently delete a preset you have created.
    */
   deletePreset(params: MediaConvert.Types.DeletePresetRequest, callback?: (err: AWSError, data: MediaConvert.Types.DeletePresetResponse) => void): Request<MediaConvert.Types.DeletePresetResponse, AWSError>;
@@ -115,6 +123,14 @@ declare class MediaConvert extends Service {
    * Retrieve the JSON for a specific job template.
    */
   getJobTemplate(callback?: (err: AWSError, data: MediaConvert.Types.GetJobTemplateResponse) => void): Request<MediaConvert.Types.GetJobTemplateResponse, AWSError>;
+  /**
+   * Retrieve the JSON for your policy.
+   */
+  getPolicy(params: MediaConvert.Types.GetPolicyRequest, callback?: (err: AWSError, data: MediaConvert.Types.GetPolicyResponse) => void): Request<MediaConvert.Types.GetPolicyResponse, AWSError>;
+  /**
+   * Retrieve the JSON for your policy.
+   */
+  getPolicy(callback?: (err: AWSError, data: MediaConvert.Types.GetPolicyResponse) => void): Request<MediaConvert.Types.GetPolicyResponse, AWSError>;
   /**
    * Retrieve the JSON for a specific preset.
    */
@@ -171,6 +187,14 @@ declare class MediaConvert extends Service {
    * Retrieve the tags for a MediaConvert resource.
    */
   listTagsForResource(callback?: (err: AWSError, data: MediaConvert.Types.ListTagsForResourceResponse) => void): Request<MediaConvert.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Create or change your policy. For more information about policies, see the user guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
+   */
+  putPolicy(params: MediaConvert.Types.PutPolicyRequest, callback?: (err: AWSError, data: MediaConvert.Types.PutPolicyResponse) => void): Request<MediaConvert.Types.PutPolicyResponse, AWSError>;
+  /**
+   * Create or change your policy. For more information about policies, see the user guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
+   */
+  putPolicy(callback?: (err: AWSError, data: MediaConvert.Types.PutPolicyResponse) => void): Request<MediaConvert.Types.PutPolicyResponse, AWSError>;
   /**
    * Add tags to a MediaConvert queue, preset, or job template. For information about tagging, see the User Guide at https://docs.aws.amazon.com/mediaconvert/latest/ug/tagging-resources.html
    */
@@ -1562,6 +1586,10 @@ All burn-in and DVB-Sub font settings must match.
   }
   export interface DeleteJobTemplateResponse {
   }
+  export interface DeletePolicyRequest {
+  }
+  export interface DeletePolicyResponse {
+  }
   export interface DeletePresetRequest {
     /**
      * The name of the preset to be deleted.
@@ -2143,6 +2171,14 @@ All burn-in and DVB-Sub font settings must match.
      * A job template is a pre-made set of encoding instructions that you can use to quickly create a job.
      */
     JobTemplate?: JobTemplate;
+  }
+  export interface GetPolicyRequest {
+  }
+  export interface GetPolicyResponse {
+    /**
+     * A policy configures behavior that you allow or disallow for your account. For information about MediaConvert policies, see the user guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
+     */
+    Policy?: Policy;
   }
   export interface GetPresetRequest {
     /**
@@ -3054,6 +3090,7 @@ All burn-in and DVB-Sub font settings must match.
   }
   export type InputDenoiseFilter = "ENABLED"|"DISABLED"|string;
   export type InputFilterEnable = "AUTO"|"DISABLE"|"FORCE"|string;
+  export type InputPolicy = "ALLOWED"|"DISALLOWED"|string;
   export type InputPsiControl = "IGNORE_PSI"|"USE_PSI"|string;
   export type InputRotate = "DEGREE_0"|"DEGREES_90"|"DEGREES_180"|"DEGREES_270"|"AUTO"|string;
   export type InputSampleRange = "FOLLOW"|"FULL_RANGE"|"LIMITED_RANGE"|string;
@@ -4561,6 +4598,20 @@ All burn-in and DVB-Sub font settings must match.
      */
     NexguardFileMarkerSettings?: NexGuardFileMarkerSettings;
   }
+  export interface Policy {
+    /**
+     * Allow or disallow jobs that specify HTTP inputs.
+     */
+    HttpInputs?: InputPolicy;
+    /**
+     * Allow or disallow jobs that specify HTTPS inputs.
+     */
+    HttpsInputs?: InputPolicy;
+    /**
+     * Allow or disallow jobs that specify Amazon S3 inputs.
+     */
+    S3Inputs?: InputPolicy;
+  }
   export interface Preset {
     /**
      * An identifier for this resource that is unique within all of AWS.
@@ -4678,6 +4729,18 @@ All burn-in and DVB-Sub font settings must match.
   }
   export type ProresSlowPal = "DISABLED"|"ENABLED"|string;
   export type ProresTelecine = "NONE"|"HARD"|string;
+  export interface PutPolicyRequest {
+    /**
+     * A policy configures behavior that you allow or disallow for your account. For information about MediaConvert policies, see the user guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
+     */
+    Policy: Policy;
+  }
+  export interface PutPolicyResponse {
+    /**
+     * A policy configures behavior that you allow or disallow for your account. For information about MediaConvert policies, see the user guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
+     */
+    Policy?: Policy;
+  }
   export interface Queue {
     /**
      * An identifier for this resource that is unique within all of AWS.
