@@ -320,6 +320,56 @@
       ],
       "documentation": "Cancel an input device transfer that you have requested."
     },
+    "ClaimDevice": {
+      "name": "ClaimDevice",
+      "http": {
+        "method": "POST",
+        "requestUri": "/prod/claimDevice",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ClaimDeviceRequest"
+      },
+      "output": {
+        "shape": "ClaimDeviceResponse",
+        "documentation": "Your request to claim this device has succeeded."
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "This request was invalid."
+        },
+        {
+          "shape": "UnprocessableEntityException",
+          "documentation": "Claim operation failed, device id could not be validated."
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "Unexpected internal service error."
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "You don't have the IAM access permissions to claim this device. You must have permission for the WriteClaim operation."
+        },
+        {
+          "shape": "BadGatewayException",
+          "documentation": "Bad gateway error."
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "Device not found or you called an unsupported region."
+        },
+        {
+          "shape": "GatewayTimeoutException",
+          "documentation": "Bad gateway error. Try again."
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "Request limit exceeded. Your have sent this request too many times. There might be a bug in your API client."
+        }
+      ],
+      "documentation": "Send a request to claim an AWS Elemental device that you have purchased from a third-party vendor. After the request succeeds, you will own the device."
+    },
     "CreateChannel": {
       "name": "CreateChannel",
       "http": {
@@ -3038,6 +3088,11 @@
           "locationName": "audioTypeControl",
           "documentation": "Determines how audio type is determined.\n  followInput: If the input contains an ISO 639 audioType, then that value is passed through to the output. If the input contains no ISO 639 audioType, the value in Audio Type is included in the output.\n  useConfigured: The value in Audio Type is included in the output.\nNote that this field and audioType are both ignored if inputType is broadcasterMixedAd."
         },
+        "AudioWatermarkingSettings": {
+          "shape": "AudioWatermarkSettings",
+          "locationName": "audioWatermarkingSettings",
+          "documentation": "Settings to configure one or more solutions that insert audio watermarks in the audio encode"
+        },
         "CodecSettings": {
           "shape": "AudioCodecSettings",
           "locationName": "codecSettings",
@@ -3329,6 +3384,17 @@
         "UNDEFINED",
         "VISUAL_IMPAIRED_COMMENTARY"
       ]
+    },
+    "AudioWatermarkSettings": {
+      "type": "structure",
+      "members": {
+        "NielsenWatermarksSettings": {
+          "shape": "NielsenWatermarksSettings",
+          "locationName": "nielsenWatermarksSettings",
+          "documentation": "Settings to configure Nielsen Watermarks in the audio encode"
+        }
+      },
+      "documentation": "Audio Watermark Settings"
     },
     "AuthenticationScheme": {
       "type": "string",
@@ -4313,10 +4379,26 @@
         "Vpc": {
           "shape": "VpcOutputSettingsDescription",
           "locationName": "vpc",
-          "documentation": "Settings for VPC output"
+          "documentation": "Settings for any VPC outputs."
         }
       },
       "documentation": "Placeholder documentation for ChannelSummary"
+    },
+    "ClaimDeviceRequest": {
+      "type": "structure",
+      "members": {
+        "Id": {
+          "shape": "__string",
+          "locationName": "id",
+          "documentation": "The id of the device you want to claim."
+        }
+      },
+      "documentation": "A request to claim an AWS Elemental device that you have purchased from a third-party vendor."
+    },
+    "ClaimDeviceResponse": {
+      "type": "structure",
+      "members": {},
+      "documentation": "Placeholder documentation for ClaimDeviceResponse"
     },
     "ColorSpacePassthroughSettings": {
       "type": "structure",
@@ -4389,7 +4471,7 @@
         "Vpc": {
           "shape": "VpcOutputSettings",
           "locationName": "vpc",
-          "documentation": "Settings for VPC output"
+          "documentation": "Settings for the VPC outputs"
         }
       },
       "documentation": "A request to create a channel"
@@ -5367,7 +5449,7 @@
         "InputSourceType": {
           "shape": "InputSourceType",
           "locationName": "inputSourceType",
-          "documentation": "Certain pull input sources can be dynamic, meaning that they can have their URL's dynamically changes\nduring input switch actions. Presently, this functionality only works with MP4_FILE inputs.\n"
+          "documentation": "Certain pull input sources can be dynamic, meaning that they can have their URL's dynamically changes\nduring input switch actions. Presently, this functionality only works with MP4_FILE and TS_FILE inputs.\n"
         },
         "MediaConnectFlows": {
           "shape": "__listOfMediaConnectFlow",
@@ -8325,7 +8407,7 @@
         "InputSourceType": {
           "shape": "InputSourceType",
           "locationName": "inputSourceType",
-          "documentation": "Certain pull input sources can be dynamic, meaning that they can have their URL's dynamically changes\nduring input switch actions. Presently, this functionality only works with MP4_FILE inputs.\n"
+          "documentation": "Certain pull input sources can be dynamic, meaning that they can have their URL's dynamically changes\nduring input switch actions. Presently, this functionality only works with MP4_FILE and TS_FILE inputs.\n"
         },
         "MediaConnectFlows": {
           "shape": "__listOfMediaConnectFlow",
@@ -9131,7 +9213,7 @@
     },
     "InputSourceType": {
       "type": "string",
-      "documentation": "There are two types of input sources, static and dynamic. If an input source is dynamic you can\nchange the source url of the input dynamically using an input switch action. However, the only input type\nto support a dynamic url at this time is MP4_FILE. By default all input sources are static.\n",
+      "documentation": "There are two types of input sources, static and dynamic. If an input source is dynamic you can\nchange the source url of the input dynamically using an input switch action. Currently, two input types\nsupport a dynamic url at this time, MP4_FILE and TS_FILE. By default all input sources are static.\n",
       "enum": [
         "STATIC",
         "DYNAMIC"
@@ -9203,6 +9285,7 @@
     },
     "InputType": {
       "type": "string",
+      "documentation": "The different types of inputs that AWS Elemental MediaLive supports.",
       "enum": [
         "UDP_PUSH",
         "RTP_PUSH",
@@ -9212,9 +9295,9 @@
         "MP4_FILE",
         "MEDIACONNECT",
         "INPUT_DEVICE",
-        "AWS_CDI"
-      ],
-      "documentation": "Placeholder documentation for InputType"
+        "AWS_CDI",
+        "TS_FILE"
+      ]
     },
     "InputVpcRequest": {
       "type": "structure",
@@ -11142,6 +11225,32 @@
       },
       "documentation": "Network source to transcode. Must be accessible to the Elemental Live node that is running the live event through a network connection."
     },
+    "NielsenCBET": {
+      "type": "structure",
+      "members": {
+        "CbetCheckDigitString": {
+          "shape": "__stringMin2Max2",
+          "locationName": "cbetCheckDigitString",
+          "documentation": "Enter the CBET check digits to use in the watermark."
+        },
+        "CbetStepaside": {
+          "shape": "NielsenWatermarksCbetStepaside",
+          "locationName": "cbetStepaside",
+          "documentation": "Determines the method of CBET insertion mode when prior encoding is detected on the same layer."
+        },
+        "Csid": {
+          "shape": "__stringMin1Max7",
+          "locationName": "csid",
+          "documentation": "Enter the CBET Source ID (CSID) to use in the watermark"
+        }
+      },
+      "documentation": "Nielsen CBET",
+      "required": [
+        "CbetCheckDigitString",
+        "CbetStepaside",
+        "Csid"
+      ]
+    },
     "NielsenConfiguration": {
       "type": "structure",
       "members": {
@@ -11158,6 +11267,26 @@
       },
       "documentation": "Nielsen Configuration"
     },
+    "NielsenNaesIiNw": {
+      "type": "structure",
+      "members": {
+        "CheckDigitString": {
+          "shape": "__stringMin2Max2",
+          "locationName": "checkDigitString",
+          "documentation": "Enter the check digit string for the watermark"
+        },
+        "Sid": {
+          "shape": "__doubleMin1Max65535",
+          "locationName": "sid",
+          "documentation": "Enter the Nielsen Source ID (SID) to include in the watermark"
+        }
+      },
+      "documentation": "Nielsen Naes Ii Nw",
+      "required": [
+        "CheckDigitString",
+        "Sid"
+      ]
+    },
     "NielsenPcmToId3TaggingState": {
       "type": "string",
       "documentation": "State of Nielsen PCM to ID3 tagging",
@@ -11165,6 +11294,43 @@
         "DISABLED",
         "ENABLED"
       ]
+    },
+    "NielsenWatermarksCbetStepaside": {
+      "type": "string",
+      "documentation": "Nielsen Watermarks Cbet Stepaside",
+      "enum": [
+        "DISABLED",
+        "ENABLED"
+      ]
+    },
+    "NielsenWatermarksDistributionTypes": {
+      "type": "string",
+      "documentation": "Nielsen Watermarks Distribution Types",
+      "enum": [
+        "FINAL_DISTRIBUTOR",
+        "PROGRAM_CONTENT"
+      ]
+    },
+    "NielsenWatermarksSettings": {
+      "type": "structure",
+      "members": {
+        "NielsenCbetSettings": {
+          "shape": "NielsenCBET",
+          "locationName": "nielsenCbetSettings",
+          "documentation": "Complete these fields only if you want to insert watermarks of type Nielsen CBET"
+        },
+        "NielsenDistributionType": {
+          "shape": "NielsenWatermarksDistributionTypes",
+          "locationName": "nielsenDistributionType",
+          "documentation": "Choose the distribution types that you want to assign to the watermarks:\n- PROGRAM_CONTENT\n- FINAL_DISTRIBUTOR"
+        },
+        "NielsenNaesIiNwSettings": {
+          "shape": "NielsenNaesIiNw",
+          "locationName": "nielsenNaesIiNwSettings",
+          "documentation": "Complete these fields only if you want to insert watermarks of type Nielsen NAES II (N2) and Nielsen NAES VI (NW)."
+        }
+      },
+      "documentation": "Nielsen Watermarks Settings"
     },
     "Offering": {
       "type": "structure",
@@ -13953,6 +14119,10 @@
       "type": "double",
       "documentation": "Placeholder documentation for __doubleMin1"
     },
+    "__doubleMin1Max65535": {
+      "type": "double",
+      "documentation": "Placeholder documentation for __doubleMin1Max65535"
+    },
     "__doubleMinNegative59Max0": {
       "type": "double",
       "documentation": "Placeholder documentation for __doubleMinNegative59Max0"
@@ -14660,6 +14830,18 @@
       "min": 1,
       "max": 35,
       "documentation": "Placeholder documentation for __stringMin1Max35"
+    },
+    "__stringMin1Max7": {
+      "type": "string",
+      "min": 1,
+      "max": 7,
+      "documentation": "Placeholder documentation for __stringMin1Max7"
+    },
+    "__stringMin2Max2": {
+      "type": "string",
+      "min": 2,
+      "max": 2,
+      "documentation": "Placeholder documentation for __stringMin2Max2"
     },
     "__stringMin32Max32": {
       "type": "string",

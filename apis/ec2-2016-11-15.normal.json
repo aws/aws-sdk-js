@@ -824,7 +824,7 @@
       "output": {
         "shape": "CreateFpgaImageResult"
       },
-      "documentation": "<p>Creates an Amazon FPGA Image (AFI) from the specified design checkpoint (DCP).</p> <p>The create operation is asynchronous. To verify that the AFI is ready for use, check the output logs.</p> <p>An AFI contains the FPGA bitstream that is ready to download to an FPGA. You can securely deploy an AFI on multiple FPGA-accelerated instances. For more information, see the <a href=\"https://github.com/aws/aws-fpga/\">AWS FPGA Hardware Development Kit</a>.</p>"
+      "documentation": "<p>Creates an Amazon FPGA Image (AFI) from the specified design checkpoint (DCP).</p> <p>The create operation is asynchronous. To verify that the AFI is ready for use, check the output logs.</p> <p>An AFI contains the FPGA bitstream that is ready to download to an FPGA. You can securely deploy an AFI on multiple FPGA-accelerated instances. For more information, see the <a href=\"https://github.com/aws/aws-fpga/\">Amazon Web Services FPGA Hardware Development Kit</a>.</p>"
     },
     "CreateImage": {
       "name": "CreateImage",
@@ -908,7 +908,7 @@
       "output": {
         "shape": "CreateLaunchTemplateResult"
       },
-      "documentation": "<p>Creates a launch template. A launch template contains the parameters to launch an instance. When you launch an instance using <a>RunInstances</a>, you can specify a launch template instead of providing the launch parameters in the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html\">Launching an instance from a launch template</a>in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+      "documentation": "<p>Creates a launch template. A launch template contains the parameters to launch an instance. When you launch an instance using <a>RunInstances</a>, you can specify a launch template instead of providing the launch parameters in the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html\">Launching an instance from a launch template</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "CreateLaunchTemplateVersion": {
       "name": "CreateLaunchTemplateVersion",
@@ -1266,7 +1266,7 @@
       "output": {
         "shape": "CreateTrafficMirrorFilterRuleResult"
       },
-      "documentation": "<p>Creates a Traffic Mirror filter rule. </p> <p>A Traffic Mirror rule defines the Traffic Mirror source traffic to mirror.</p> <p>You need the Traffic Mirror filter ID when you create the rule.</p>"
+      "documentation": "<p>Creates a Traffic Mirror filter rule.</p> <p>A Traffic Mirror rule defines the Traffic Mirror source traffic to mirror.</p> <p>You need the Traffic Mirror filter ID when you create the rule.</p>"
     },
     "CreateTrafficMirrorSession": {
       "name": "CreateTrafficMirrorSession",
@@ -1462,7 +1462,7 @@
       "output": {
         "shape": "CreateVpcEndpointResult"
       },
-      "documentation": "<p>Creates a VPC endpoint for a specified service. An endpoint enables you to create a private connection between your VPC and the service. The service may be provided by AWS, an AWS Marketplace Partner, or another AWS account. For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints.html\">VPC Endpoints</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p> <p>A <code>gateway</code> endpoint serves as a target for a route in your route table for traffic destined for the AWS service. You can specify an endpoint policy to attach to the endpoint, which will control access to the service from your VPC. You can also specify the VPC route tables that use the endpoint.</p> <p>An <code>interface</code> endpoint is a network interface in your subnet that serves as an endpoint for communicating with the specified service. You can specify the subnets in which to create an endpoint, and the security groups to associate with the endpoint network interface.</p> <p>A <code>GatewayLoadBalancer</code> endpoint is a network interface in your subnet that serves an endpoint for communicating with a Gateway Load Balancer that you've configured as a VPC endpoint service.</p> <p>Use <a>DescribeVpcEndpointServices</a> to get a list of supported services.</p>"
+      "documentation": "<p>Creates a VPC endpoint for a specified service. An endpoint enables you to create a private connection between your VPC and the service. The service may be provided by Amazon Web Services, an Amazon Web Services Marketplace Partner, or another Amazon Web Services account. For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints.html\">VPC Endpoints</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p> <p>A <code>gateway</code> endpoint serves as a target for a route in your route table for traffic destined for the Amazon Web Service. You can specify an endpoint policy to attach to the endpoint, which will control access to the service from your VPC. You can also specify the VPC route tables that use the endpoint.</p> <p>An <code>interface</code> endpoint is a network interface in your subnet that serves as an endpoint for communicating with the specified service. You can specify the subnets in which to create an endpoint, and the security groups to associate with the endpoint network interface.</p> <p>A <code>GatewayLoadBalancer</code> endpoint is a network interface in your subnet that serves an endpoint for communicating with a Gateway Load Balancer that you've configured as a VPC endpoint service.</p> <p>Use <a>DescribeVpcEndpointServices</a> to get a list of supported services.</p>"
     },
     "CreateVpcEndpointConnectionNotification": {
       "name": "CreateVpcEndpointConnectionNotification",
@@ -1490,7 +1490,7 @@
       "output": {
         "shape": "CreateVpcEndpointServiceConfigurationResult"
       },
-      "documentation": "<p>Creates a VPC endpoint service configuration to which service consumers (AWS accounts, IAM users, and IAM roles) can connect.</p> <p>To create an endpoint service configuration, you must first create one of the following for your service:</p> <ul> <li> <p>A <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/network/introduction.html\">Network Load Balancer</a>. Service consumers connect to your service using an interface endpoint.</p> </li> <li> <p>A <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/gateway/introduction.html\">Gateway Load Balancer</a>. Service consumers connect to your service using a Gateway Load Balancer endpoint.</p> </li> </ul> <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-service.html\">VPC Endpoint Services</a> in the <i>Amazon Virtual Private Cloud User Guide</i>. </p> <p>If you set the private DNS name, you must prove that you own the private DNS domain name. For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-services-dns-validation.html\">VPC Endpoint Service Private DNS Name Verification</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
+      "documentation": "<p>Creates a VPC endpoint service configuration to which service consumers (Amazon Web Services accounts, IAM users, and IAM roles) can connect.</p> <p>To create an endpoint service configuration, you must first create one of the following for your service:</p> <ul> <li> <p>A <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/network/introduction.html\">Network Load Balancer</a>. Service consumers connect to your service using an interface endpoint.</p> </li> <li> <p>A <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/gateway/introduction.html\">Gateway Load Balancer</a>. Service consumers connect to your service using a Gateway Load Balancer endpoint.</p> </li> </ul> <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-service.html\">VPC Endpoint Services</a> in the <i>Amazon Virtual Private Cloud User Guide</i>. </p> <p>If you set the private DNS name, you must prove that you own the private DNS domain name. For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-services-dns-validation.html\">VPC Endpoint Service Private DNS Name Verification</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
     },
     "CreateVpcPeeringConnection": {
       "name": "CreateVpcPeeringConnection",
@@ -2404,7 +2404,7 @@
       "output": {
         "shape": "DescribeAvailabilityZonesResult"
       },
-      "documentation": "<p>Describes the Availability Zones, Local Zones, and Wavelength Zones that are available to you. If there is an event impacting a zone, you can use this request to view the state and any provided messages for that zone.</p> <p>For more information about Availability Zones, Local Zones, and Wavelength Zones, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html\">Regions, Zones and Outposts</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+      "documentation": "<p>Describes the Availability Zones, Local Zones, and Wavelength Zones that are available to you. If there is an event impacting a zone, you can use this request to view the state and any provided messages for that zone.</p> <p>For more information about Availability Zones, Local Zones, and Wavelength Zones, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html\">Regions and zones</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "DescribeBundleTasks": {
       "name": "DescribeBundleTasks",
@@ -2698,7 +2698,7 @@
       "output": {
         "shape": "DescribeFleetHistoryResult"
       },
-      "documentation": "<p>Describes the events for the specified EC2 Fleet during the specified time.</p> <p>EC2 Fleet events are delayed by up to 30 seconds before they can be described. This ensures that you can query by the last evaluated time and not miss a recorded event. EC2 Fleet events are available for 48 hours.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet.html#monitor-ec2-fleet\">Monitoring your EC2 Fleet</a> in the <i>Amazon EC2 User Guide</i>.</p>"
+      "documentation": "<p>Describes the events for the specified EC2 Fleet during the specified time.</p> <p>EC2 Fleet events are delayed by up to 30 seconds before they can be described. This ensures that you can query by the last evaluated time and not miss a recorded event. EC2 Fleet events are available for 48 hours.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/fleet-monitor.html\">Monitor fleet events using Amazon EventBridge</a> in the <i>Amazon EC2 User Guide</i>.</p>"
     },
     "DescribeFleetInstances": {
       "name": "DescribeFleetInstances",
@@ -2768,7 +2768,7 @@
       "output": {
         "shape": "DescribeFpgaImagesResult"
       },
-      "documentation": "<p>Describes the Amazon FPGA Images (AFIs) available to you. These include public AFIs, private AFIs that you own, and AFIs owned by other AWS accounts for which you have load permissions.</p>"
+      "documentation": "<p>Describes the Amazon FPGA Images (AFIs) available to you. These include public AFIs, private AFIs that you own, and AFIs owned by other Amazon Web Services accounts for which you have load permissions.</p>"
     },
     "DescribeHostReservationOfferings": {
       "name": "DescribeHostReservationOfferings",
@@ -2838,7 +2838,7 @@
       "output": {
         "shape": "DescribeIdFormatResult"
       },
-      "documentation": "<p>Describes the ID format settings for your resources on a per-Region basis, for example, to view which resource types are enabled for longer IDs. This request only returns information about resource types whose ID formats can be modified; it does not return information about other resource types.</p> <p>The following resource types support longer IDs: <code>bundle</code> | <code>conversion-task</code> | <code>customer-gateway</code> | <code>dhcp-options</code> | <code>elastic-ip-allocation</code> | <code>elastic-ip-association</code> | <code>export-task</code> | <code>flow-log</code> | <code>image</code> | <code>import-task</code> | <code>instance</code> | <code>internet-gateway</code> | <code>network-acl</code> | <code>network-acl-association</code> | <code>network-interface</code> | <code>network-interface-attachment</code> | <code>prefix-list</code> | <code>reservation</code> | <code>route-table</code> | <code>route-table-association</code> | <code>security-group</code> | <code>snapshot</code> | <code>subnet</code> | <code>subnet-cidr-block-association</code> | <code>volume</code> | <code>vpc</code> | <code>vpc-cidr-block-association</code> | <code>vpc-endpoint</code> | <code>vpc-peering-connection</code> | <code>vpn-connection</code> | <code>vpn-gateway</code>. </p> <p>These settings apply to the IAM user who makes the request; they do not apply to the entire AWS account. By default, an IAM user defaults to the same settings as the root user, unless they explicitly override the settings by running the <a>ModifyIdFormat</a> command. Resources created with longer IDs are visible to all IAM users, regardless of these settings and provided that they have permission to use the relevant <code>Describe</code> command for the resource type.</p>"
+      "documentation": "<p>Describes the ID format settings for your resources on a per-Region basis, for example, to view which resource types are enabled for longer IDs. This request only returns information about resource types whose ID formats can be modified; it does not return information about other resource types.</p> <p>The following resource types support longer IDs: <code>bundle</code> | <code>conversion-task</code> | <code>customer-gateway</code> | <code>dhcp-options</code> | <code>elastic-ip-allocation</code> | <code>elastic-ip-association</code> | <code>export-task</code> | <code>flow-log</code> | <code>image</code> | <code>import-task</code> | <code>instance</code> | <code>internet-gateway</code> | <code>network-acl</code> | <code>network-acl-association</code> | <code>network-interface</code> | <code>network-interface-attachment</code> | <code>prefix-list</code> | <code>reservation</code> | <code>route-table</code> | <code>route-table-association</code> | <code>security-group</code> | <code>snapshot</code> | <code>subnet</code> | <code>subnet-cidr-block-association</code> | <code>volume</code> | <code>vpc</code> | <code>vpc-cidr-block-association</code> | <code>vpc-endpoint</code> | <code>vpc-peering-connection</code> | <code>vpn-connection</code> | <code>vpn-gateway</code>. </p> <p>These settings apply to the IAM user who makes the request; they do not apply to the entire Amazon Web Services account. By default, an IAM user defaults to the same settings as the root user, unless they explicitly override the settings by running the <a>ModifyIdFormat</a> command. Resources created with longer IDs are visible to all IAM users, regardless of these settings and provided that they have permission to use the relevant <code>Describe</code> command for the resource type.</p>"
     },
     "DescribeIdentityIdFormat": {
       "name": "DescribeIdentityIdFormat",
@@ -3370,7 +3370,7 @@
       "output": {
         "shape": "DescribeRegionsResult"
       },
-      "documentation": "<p>Describes the Regions that are enabled for your account, or all Regions.</p> <p>For a list of the Regions supported by Amazon EC2, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/rande.html#ec2_region\"> Regions and Endpoints</a>.</p> <p>For information about enabling and disabling Regions for your account, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/rande-manage.html\">Managing AWS Regions</a> in the <i>AWS General Reference</i>.</p>"
+      "documentation": "<p>Describes the Regions that are enabled for your account, or all Regions.</p> <p>For a list of the Regions supported by Amazon EC2, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/ec2-service.html\"> Amazon Elastic Compute Cloud endpoints and quotas</a>.</p> <p>For information about enabling and disabling Regions for your account, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/rande-manage.html\">Managing Amazon Web Services Regions</a> in the <i>Amazon Web Services General Reference</i>.</p>"
     },
     "DescribeReplaceRootVolumeTasks": {
       "name": "DescribeReplaceRootVolumeTasks",
@@ -3594,7 +3594,7 @@
       "output": {
         "shape": "DescribeSpotFleetRequestHistoryResponse"
       },
-      "documentation": "<p>Describes the events for the specified Spot Fleet request during the specified time.</p> <p>Spot Fleet events are delayed by up to 30 seconds before they can be described. This ensures that you can query by the last evaluated time and not miss a recorded event. Spot Fleet events are available for 48 hours.</p>"
+      "documentation": "<p>Describes the events for the specified Spot Fleet request during the specified time.</p> <p>Spot Fleet events are delayed by up to 30 seconds before they can be described. This ensures that you can query by the last evaluated time and not miss a recorded event. Spot Fleet events are available for 48 hours.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/fleet-monitor.html\">Monitor fleet events using Amazon EventBridge</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.</p>"
     },
     "DescribeSpotFleetRequests": {
       "name": "DescribeSpotFleetRequests",
@@ -4942,7 +4942,7 @@
       "output": {
         "shape": "GetVpnConnectionDeviceSampleConfigurationResult"
       },
-      "documentation": "<p>Download an AWS-provided sample configuration file to be used with the customer gateway device specified for your Site-to-Site VPN connection.</p>"
+      "documentation": "<p>Download an Amazon Web Services-provided sample configuration file to be used with the customer gateway device specified for your Site-to-Site VPN connection.</p>"
     },
     "GetVpnConnectionDeviceTypes": {
       "name": "GetVpnConnectionDeviceTypes",
@@ -5191,7 +5191,7 @@
       "input": {
         "shape": "ModifyIdFormatRequest"
       },
-      "documentation": "<p>Modifies the ID format for the specified resource on a per-Region basis. You can specify that resources should receive longer IDs (17-character IDs) when they are created.</p> <p>This request can only be used to modify longer ID settings for resource types that are within the opt-in period. Resources currently in their opt-in period include: <code>bundle</code> | <code>conversion-task</code> | <code>customer-gateway</code> | <code>dhcp-options</code> | <code>elastic-ip-allocation</code> | <code>elastic-ip-association</code> | <code>export-task</code> | <code>flow-log</code> | <code>image</code> | <code>import-task</code> | <code>internet-gateway</code> | <code>network-acl</code> | <code>network-acl-association</code> | <code>network-interface</code> | <code>network-interface-attachment</code> | <code>prefix-list</code> | <code>route-table</code> | <code>route-table-association</code> | <code>security-group</code> | <code>subnet</code> | <code>subnet-cidr-block-association</code> | <code>vpc</code> | <code>vpc-cidr-block-association</code> | <code>vpc-endpoint</code> | <code>vpc-peering-connection</code> | <code>vpn-connection</code> | <code>vpn-gateway</code>.</p> <p>This setting applies to the IAM user who makes the request; it does not apply to the entire AWS account. By default, an IAM user defaults to the same settings as the root user. If you're using this action as the root user, then these settings apply to the entire account, unless an IAM user explicitly overrides these settings for themselves. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/resource-ids.html\">Resource IDs</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>Resources created with longer IDs are visible to all IAM roles and users, regardless of these settings and provided that they have permission to use the relevant <code>Describe</code> command for the resource type.</p>"
+      "documentation": "<p>Modifies the ID format for the specified resource on a per-Region basis. You can specify that resources should receive longer IDs (17-character IDs) when they are created.</p> <p>This request can only be used to modify longer ID settings for resource types that are within the opt-in period. Resources currently in their opt-in period include: <code>bundle</code> | <code>conversion-task</code> | <code>customer-gateway</code> | <code>dhcp-options</code> | <code>elastic-ip-allocation</code> | <code>elastic-ip-association</code> | <code>export-task</code> | <code>flow-log</code> | <code>image</code> | <code>import-task</code> | <code>internet-gateway</code> | <code>network-acl</code> | <code>network-acl-association</code> | <code>network-interface</code> | <code>network-interface-attachment</code> | <code>prefix-list</code> | <code>route-table</code> | <code>route-table-association</code> | <code>security-group</code> | <code>subnet</code> | <code>subnet-cidr-block-association</code> | <code>vpc</code> | <code>vpc-cidr-block-association</code> | <code>vpc-endpoint</code> | <code>vpc-peering-connection</code> | <code>vpn-connection</code> | <code>vpn-gateway</code>.</p> <p>This setting applies to the IAM user who makes the request; it does not apply to the entire Amazon Web Services account. By default, an IAM user defaults to the same settings as the root user. If you're using this action as the root user, then these settings apply to the entire account, unless an IAM user explicitly overrides these settings for themselves. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/resource-ids.html\">Resource IDs</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>Resources created with longer IDs are visible to all IAM roles and users, regardless of these settings and provided that they have permission to use the relevant <code>Describe</code> command for the resource type.</p>"
     },
     "ModifyIdentityIdFormat": {
       "name": "ModifyIdentityIdFormat",
@@ -5425,7 +5425,7 @@
       "output": {
         "shape": "ModifyTrafficMirrorFilterNetworkServicesResult"
       },
-      "documentation": "<p>Allows or restricts mirroring network services.</p> <p> By default, Amazon DNS network services are not eligible for Traffic Mirror. Use <code>AddNetworkServices</code> to add network services to a Traffic Mirror filter. When a network service is added to the Traffic Mirror filter, all traffic related to that network service will be mirrored. When you no longer want to mirror network services, use <code>RemoveNetworkServices</code> to remove the network services from the Traffic Mirror filter. </p> <p>For information about filter rule properties, see <a href=\"https://docs.aws.amazon.com/vpc/latest/mirroring/traffic-mirroring-considerations.html\">Network Services</a> in the <i>Traffic Mirroring User Guide </i>.</p>"
+      "documentation": "<p>Allows or restricts mirroring network services.</p> <p> By default, Amazon DNS network services are not eligible for Traffic Mirror. Use <code>AddNetworkServices</code> to add network services to a Traffic Mirror filter. When a network service is added to the Traffic Mirror filter, all traffic related to that network service will be mirrored. When you no longer want to mirror network services, use <code>RemoveNetworkServices</code> to remove the network services from the Traffic Mirror filter. </p>"
     },
     "ModifyTrafficMirrorFilterRule": {
       "name": "ModifyTrafficMirrorFilterRule",
@@ -5587,7 +5587,7 @@
       "output": {
         "shape": "ModifyVpcEndpointServicePermissionsResult"
       },
-      "documentation": "<p>Modifies the permissions for your <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-service.html\">VPC endpoint service</a>. You can add or remove permissions for service consumers (IAM users, IAM roles, and AWS accounts) to connect to your endpoint service.</p> <p>If you grant permissions to all principals, the service is public. Any users who know the name of a public service can send a request to attach an endpoint. If the service does not require manual approval, attachments are automatically approved.</p>"
+      "documentation": "<p>Modifies the permissions for your <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-service.html\">VPC endpoint service</a>. You can add or remove permissions for service consumers (IAM users, IAM roles, and Amazon Web Services accounts) to connect to your endpoint service.</p> <p>If you grant permissions to all principals, the service is public. Any users who know the name of a public service can send a request to attach an endpoint. If the service does not require manual approval, attachments are automatically approved.</p>"
     },
     "ModifyVpcPeeringConnectionOptions": {
       "name": "ModifyVpcPeeringConnectionOptions",
@@ -6790,7 +6790,7 @@
         },
         "NetworkBorderGroup": {
           "shape": "String",
-          "documentation": "<p>The name of the unique set of Availability Zones, Local Zones, or Wavelength Zones from which AWS advertises IP addresses. </p>",
+          "documentation": "<p>The name of the unique set of Availability Zones, Local Zones, or Wavelength Zones from which Amazon Web Services advertises IP addresses.</p>",
           "locationName": "networkBorderGroup"
         },
         "CustomerOwnedIp": {
@@ -6912,7 +6912,7 @@
         },
         "NetworkBorderGroup": {
           "shape": "String",
-          "documentation": "<p> A unique set of Availability Zones, Local Zones, or Wavelength Zones from which AWS advertises IP addresses. Use this parameter to limit the IP address to this location. IP addresses cannot move between network border groups.</p> <p>Use <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeAvailabilityZones.html\">DescribeAvailabilityZones</a> to view the network border groups.</p> <note> <p>You cannot use a network border group with EC2 Classic. If you attempt this operation on EC2 classic, you will receive an <code>InvalidParameterCombination</code> error. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html\">Error Codes</a>.</p> </note>"
+          "documentation": "<p> A unique set of Availability Zones, Local Zones, or Wavelength Zones from which Amazon Web Services advertises IP addresses. Use this parameter to limit the IP address to this location. IP addresses cannot move between network border groups.</p> <p>Use <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeAvailabilityZones.html\">DescribeAvailabilityZones</a> to view the network border groups.</p> <p>You cannot use a network border group with EC2 Classic. If you attempt this operation on EC2 Classic, you receive an <code>InvalidParameterCombination</code> error.</p>"
         },
         "CustomerOwnedIpv4Pool": {
           "shape": "String",
@@ -6950,7 +6950,7 @@
         },
         "NetworkBorderGroup": {
           "shape": "String",
-          "documentation": "<p>The set of Availability Zones, Local Zones, or Wavelength Zones from which AWS advertises IP addresses.</p>",
+          "documentation": "<p>The set of Availability Zones, Local Zones, or Wavelength Zones from which Amazon Web Services advertises IP addresses.</p>",
           "locationName": "networkBorderGroup"
         },
         "Domain": {
@@ -10551,12 +10551,12 @@
         },
         "AwsAccountId": {
           "shape": "String",
-          "documentation": "<p>The AWS account ID.</p>",
+          "documentation": "<p>The Amazon Web Services account ID.</p>",
           "locationName": "awsAccountId"
         },
         "AwsService": {
           "shape": "String",
-          "documentation": "<p>The AWS service.</p>",
+          "documentation": "<p>The Amazon Web Services service.</p>",
           "locationName": "awsService"
         },
         "CoIp": {
@@ -10873,7 +10873,7 @@
         },
         "ClientToken": {
           "shape": "String",
-          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html\">Ensuring Idempotency</a>.</p>"
+          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>"
         }
       }
     },
@@ -11806,7 +11806,7 @@
         },
         "LogFormat": {
           "shape": "String",
-          "documentation": "<p>The fields to include in the flow log record, in the order in which they should appear. For a list of available fields, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html#flow-log-records\">Flow log records</a>. If you omit this parameter, the flow log is created using the default format. If you specify this parameter, you must specify at least one field.</p> <p>Specify the fields using the <code>${field-id}</code> format, separated by spaces. For the CLI, use single quotation marks (' ') to surround the parameter value.</p>"
+          "documentation": "<p>The fields to include in the flow log record, in the order in which they should appear. For a list of available fields, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html#flow-log-records\">Flow log records</a>. If you omit this parameter, the flow log is created using the default format. If you specify this parameter, you must specify at least one field.</p> <p>Specify the fields using the <code>${field-id}</code> format, separated by spaces. For the CLI, surround this parameter value with single quotes on Linux or double quotes on Windows.</p>"
         },
         "TagSpecifications": {
           "shape": "TagSpecificationList",
@@ -13260,7 +13260,7 @@
         },
         "ClientToken": {
           "shape": "String",
-          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">How to Ensure Idempotency</a>.</p>",
+          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">How to ensure idempotency</a>.</p>",
           "idempotencyToken": true
         }
       }
@@ -13275,7 +13275,7 @@
         },
         "ClientToken": {
           "shape": "String",
-          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">How to Ensure Idempotency</a>.</p>",
+          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">How to ensure idempotency</a>.</p>",
           "locationName": "clientToken"
         }
       }
@@ -13297,7 +13297,7 @@
         },
         "TrafficDirection": {
           "shape": "TrafficDirection",
-          "documentation": "<p>The type of traffic (<code>ingress</code> | <code>egress</code>).</p>"
+          "documentation": "<p>The type of traffic.</p>"
         },
         "RuleNumber": {
           "shape": "Integer",
@@ -13305,7 +13305,7 @@
         },
         "RuleAction": {
           "shape": "TrafficMirrorRuleAction",
-          "documentation": "<p>The action to take (<code>accept</code> | <code>reject</code>) on the filtered traffic.</p>"
+          "documentation": "<p>The action to take on the filtered traffic.</p>"
         },
         "DestinationPortRange": {
           "shape": "TrafficMirrorPortRangeRequest",
@@ -13337,7 +13337,7 @@
         },
         "ClientToken": {
           "shape": "String",
-          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">How to Ensure Idempotency</a>.</p>",
+          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">How to ensure idempotency</a>.</p>",
           "idempotencyToken": true
         }
       }
@@ -13352,7 +13352,7 @@
         },
         "ClientToken": {
           "shape": "String",
-          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">How to Ensure Idempotency</a>.</p>",
+          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">How to ensure idempotency</a>.</p>",
           "locationName": "clientToken"
         }
       }
@@ -13405,7 +13405,7 @@
         },
         "ClientToken": {
           "shape": "String",
-          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">How to Ensure Idempotency</a>.</p>",
+          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">How to ensure idempotency</a>.</p>",
           "idempotencyToken": true
         }
       }
@@ -13420,7 +13420,7 @@
         },
         "ClientToken": {
           "shape": "String",
-          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">How to Ensure Idempotency</a>.</p>",
+          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">How to ensure idempotency</a>.</p>",
           "locationName": "clientToken"
         }
       }
@@ -13451,7 +13451,7 @@
         },
         "ClientToken": {
           "shape": "String",
-          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">How to Ensure Idempotency</a>.</p>",
+          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">How to ensure idempotency</a>.</p>",
           "idempotencyToken": true
         }
       }
@@ -13466,7 +13466,7 @@
         },
         "ClientToken": {
           "shape": "String",
-          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">How to Ensure Idempotency</a>.</p>",
+          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">How to ensure idempotency</a>.</p>",
           "locationName": "clientToken"
         }
       }
@@ -14000,7 +14000,7 @@
         },
         "ClientToken": {
           "shape": "String",
-          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">How to Ensure Idempotency</a>.</p>"
+          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">How to ensure idempotency</a>.</p>"
         }
       }
     },
@@ -14063,7 +14063,7 @@
         },
         "ClientToken": {
           "shape": "String",
-          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">How to Ensure Idempotency</a>.</p>"
+          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">How to ensure idempotency</a>.</p>"
         },
         "PrivateDnsEnabled": {
           "shape": "Boolean",
@@ -14120,7 +14120,7 @@
         },
         "ClientToken": {
           "shape": "String",
-          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html\">How to Ensure Idempotency</a>.</p>"
+          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html\">How to ensure idempotency</a>.</p>"
         },
         "TagSpecifications": {
           "shape": "TagSpecificationList",
@@ -17632,12 +17632,12 @@
         },
         "Owners": {
           "shape": "OwnerStringList",
-          "documentation": "<p>Filters the AFI by owner. Specify an AWS account ID, <code>self</code> (owner is the sender of the request), or an AWS owner alias (valid values are <code>amazon</code> | <code>aws-marketplace</code>).</p>",
+          "documentation": "<p>Filters the AFI by owner. Specify an Amazon Web Services account ID, <code>self</code> (owner is the sender of the request), or an Amazon Web Services owner alias (valid values are <code>amazon</code> | <code>aws-marketplace</code>).</p>",
           "locationName": "Owner"
         },
         "Filters": {
           "shape": "FilterList",
-          "documentation": "<p>The filters.</p> <ul> <li> <p> <code>create-time</code> - The creation time of the AFI.</p> </li> <li> <p> <code>fpga-image-id</code> - The FPGA image identifier (AFI ID).</p> </li> <li> <p> <code>fpga-image-global-id</code> - The global FPGA image identifier (AGFI ID).</p> </li> <li> <p> <code>name</code> - The name of the AFI.</p> </li> <li> <p> <code>owner-id</code> - The AWS account ID of the AFI owner.</p> </li> <li> <p> <code>product-code</code> - The product code.</p> </li> <li> <p> <code>shell-version</code> - The version of the AWS Shell that was used to create the bitstream.</p> </li> <li> <p> <code>state</code> - The state of the AFI (<code>pending</code> | <code>failed</code> | <code>available</code> | <code>unavailable</code>).</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> <li> <p> <code>update-time</code> - The time of the most recent update.</p> </li> </ul>",
+          "documentation": "<p>The filters.</p> <ul> <li> <p> <code>create-time</code> - The creation time of the AFI.</p> </li> <li> <p> <code>fpga-image-id</code> - The FPGA image identifier (AFI ID).</p> </li> <li> <p> <code>fpga-image-global-id</code> - The global FPGA image identifier (AGFI ID).</p> </li> <li> <p> <code>name</code> - The name of the AFI.</p> </li> <li> <p> <code>owner-id</code> - The Amazon Web Services account ID of the AFI owner.</p> </li> <li> <p> <code>product-code</code> - The product code.</p> </li> <li> <p> <code>shell-version</code> - The version of the Amazon Web Services Shell that was used to create the bitstream.</p> </li> <li> <p> <code>state</code> - The state of the AFI (<code>pending</code> | <code>failed</code> | <code>available</code> | <code>unavailable</code>).</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> <li> <p> <code>update-time</code> - The time of the most recent update.</p> </li> </ul>",
           "locationName": "Filter"
         },
         "NextToken": {
@@ -21406,7 +21406,7 @@
         },
         "Filters": {
           "shape": "FilterList",
-          "documentation": "<p>One or more filters.</p> <ul> <li> <p> <code>service-id</code> - The ID of the service.</p> </li> <li> <p> <code>vpc-endpoint-owner</code> - The AWS account number of the owner of the endpoint.</p> </li> <li> <p> <code>vpc-endpoint-state</code> - The state of the endpoint (<code>pendingAcceptance</code> | <code>pending</code> | <code>available</code> | <code>deleting</code> | <code>deleted</code> | <code>rejected</code> | <code>failed</code>).</p> </li> <li> <p> <code>vpc-endpoint-id</code> - The ID of the endpoint.</p> </li> </ul>",
+          "documentation": "<p>One or more filters.</p> <ul> <li> <p> <code>service-id</code> - The ID of the service.</p> </li> <li> <p> <code>vpc-endpoint-owner</code> - The ID of the Amazon Web Services account ID that owns the endpoint.</p> </li> <li> <p> <code>vpc-endpoint-state</code> - The state of the endpoint (<code>pendingAcceptance</code> | <code>pending</code> | <code>available</code> | <code>deleting</code> | <code>deleted</code> | <code>rejected</code> | <code>failed</code>).</p> </li> <li> <p> <code>vpc-endpoint-id</code> - The ID of the endpoint.</p> </li> </ul>",
           "locationName": "Filter"
         },
         "MaxResults": {
@@ -23748,7 +23748,7 @@
         },
         "EventSubType": {
           "shape": "String",
-          "documentation": "<p>The event.</p> <p>The following are the <code>error</code> events:</p> <ul> <li> <p> <code>iamFleetRoleInvalid</code> - The EC2 Fleet or Spot Fleet did not have the required permissions either to launch or terminate an instance.</p> </li> <li> <p> <code>spotFleetRequestConfigurationInvalid</code> - The configuration is not valid. For more information, see the description of the event.</p> </li> <li> <p> <code>spotInstanceCountLimitExceeded</code> - You've reached the limit on the number of Spot Instances that you can launch.</p> </li> </ul> <p>The following are the <code>fleetRequestChange</code> events:</p> <ul> <li> <p> <code>active</code> - The EC2 Fleet or Spot Fleet request has been validated and Amazon EC2 is attempting to maintain the target number of running Spot Instances.</p> </li> <li> <p> <code>cancelled</code> - The EC2 Fleet or Spot Fleet request is canceled and has no running Spot Instances. The EC2 Fleet or Spot Fleet will be deleted two days after its instances were terminated.</p> </li> <li> <p> <code>cancelled_running</code> - The EC2 Fleet or Spot Fleet request is canceled and does not launch additional Spot Instances. Existing Spot Instances continue to run until they are interrupted or terminated.</p> </li> <li> <p> <code>cancelled_terminating</code> - The EC2 Fleet or Spot Fleet request is canceled and its Spot Instances are terminating.</p> </li> <li> <p> <code>expired</code> - The EC2 Fleet or Spot Fleet request has expired. A subsequent event indicates that the instances were terminated, if the request was created with <code>TerminateInstancesWithExpiration</code> set.</p> </li> <li> <p> <code>modify_in_progress</code> - A request to modify the EC2 Fleet or Spot Fleet request was accepted and is in progress.</p> </li> <li> <p> <code>modify_succeeded</code> - The EC2 Fleet or Spot Fleet request was modified.</p> </li> <li> <p> <code>submitted</code> - The EC2 Fleet or Spot Fleet request is being evaluated and Amazon EC2 is preparing to launch the target number of Spot Instances.</p> </li> </ul> <p>The following are the <code>instanceChange</code> events:</p> <ul> <li> <p> <code>launched</code> - A request was fulfilled and a new instance was launched.</p> </li> <li> <p> <code>terminated</code> - An instance was terminated by the user.</p> </li> </ul> <p>The following are the <code>Information</code> events:</p> <ul> <li> <p> <code>launchSpecTemporarilyBlacklisted</code> - The configuration is not valid and several attempts to launch instances have failed. For more information, see the description of the event.</p> </li> <li> <p> <code>launchSpecUnusable</code> - The price in a launch specification is not valid because it is below the Spot price or the Spot price is above the On-Demand price.</p> </li> <li> <p> <code>fleetProgressHalted</code> - The price in every launch specification is not valid. A launch specification might become valid if the Spot price changes.</p> </li> </ul>",
+          "documentation": "<p>The event.</p> <p> <code>error</code> events:</p> <ul> <li> <p> <code>iamFleetRoleInvalid</code> - The EC2 Fleet or Spot Fleet does not have the required permissions either to launch or terminate an instance.</p> </li> <li> <p> <code>allLaunchSpecsTemporarilyBlacklisted</code> - None of the configurations are valid, and several attempts to launch instances have failed. For more information, see the description of the event.</p> </li> <li> <p> <code>spotInstanceCountLimitExceeded</code> - You've reached the limit on the number of Spot Instances that you can launch.</p> </li> <li> <p> <code>spotFleetRequestConfigurationInvalid</code> - The configuration is not valid. For more information, see the description of the event.</p> </li> </ul> <p> <code>fleetRequestChange</code> events:</p> <ul> <li> <p> <code>active</code> - The EC2 Fleet or Spot Fleet request has been validated and Amazon EC2 is attempting to maintain the target number of running instances.</p> </li> <li> <p> <code>cancelled</code> - The EC2 Fleet or Spot Fleet request is canceled and has no running instances. The EC2 Fleet or Spot Fleet will be deleted two days after its instances are terminated.</p> </li> <li> <p> <code>cancelled_running</code> - The EC2 Fleet or Spot Fleet request is canceled and does not launch additional instances. Its existing instances continue to run until they are interrupted or terminated. The request remains in this state until all instances are interrupted or terminated.</p> </li> <li> <p> <code>cancelled_terminating</code> - The EC2 Fleet or Spot Fleet request is canceled and its instances are terminating. The request remains in this state until all instances are terminated.</p> </li> <li> <p> <code>expired</code> - The EC2 Fleet or Spot Fleet request has expired. If the request was created with <code>TerminateInstancesWithExpiration</code> set, a subsequent <code>terminated</code> event indicates that the instances are terminated.</p> </li> <li> <p> <code>modify_in_progress</code> - The EC2 Fleet or Spot Fleet request is being modified. The request remains in this state until the modification is fully processed.</p> </li> <li> <p> <code>modify_succeeded</code> - The EC2 Fleet or Spot Fleet request was modified.</p> </li> <li> <p> <code>submitted</code> - The EC2 Fleet or Spot Fleet request is being evaluated and Amazon EC2 is preparing to launch the target number of instances.</p> </li> <li> <p> <code>progress</code> - The EC2 Fleet or Spot Fleet request is in the process of being fulfilled.</p> </li> </ul> <p> <code>instanceChange</code> events:</p> <ul> <li> <p> <code>launched</code> - A new instance was launched.</p> </li> <li> <p> <code>terminated</code> - An instance was terminated by the user.</p> </li> <li> <p> <code>termination_notified</code> - An instance termination notification was sent when a Spot Instance was terminated by Amazon EC2 during scale-down, when the target capacity of the fleet was modified down, for example, from a target capacity of 4 to a target capacity of 3.</p> </li> </ul> <p> <code>Information</code> events:</p> <ul> <li> <p> <code>fleetProgressHalted</code> - The price in every launch specification is not valid because it is below the Spot price (all the launch specifications have produced <code>launchSpecUnusable</code> events). A launch specification might become valid if the Spot price changes.</p> </li> <li> <p> <code>launchSpecTemporarilyBlacklisted</code> - The configuration is not valid and several attempts to launch instances have failed. For more information, see the description of the event.</p> </li> <li> <p> <code>launchSpecUnusable</code> - The price in a launch specification is not valid because it is below the Spot price.</p> </li> <li> <p> <code>registerWithLoadBalancersFailed</code> - An attempt to register instances with load balancers failed. For more information, see the description of the event.</p> </li> </ul>",
           "locationName": "eventSubType"
         },
         "InstanceId": {
@@ -25224,7 +25224,7 @@
         },
         "ShellVersion": {
           "shape": "String",
-          "documentation": "<p>The version of the AWS Shell that was used to create the bitstream.</p>",
+          "documentation": "<p>The version of the Amazon Web Services Shell that was used to create the bitstream.</p>",
           "locationName": "shellVersion"
         },
         "PciId": {
@@ -25249,7 +25249,7 @@
         },
         "OwnerId": {
           "shape": "String",
-          "documentation": "<p>The AWS account ID of the AFI owner.</p>",
+          "documentation": "<p>The ID of the Amazon Web Services account that owns the AFI.</p>",
           "locationName": "ownerId"
         },
         "OwnerAlias": {
@@ -27537,7 +27537,7 @@
         },
         "UsageOperation": {
           "shape": "String",
-          "documentation": "<p>The usage operation value. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/billing-info-fields.html\">AMI billing information fields</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+          "documentation": "<p>The usage operation value. For more information, see <a href=\"https://docs.aws.amazon.com/vm-import/latest/userguide/vmie_prereqs.html#prerequisites\">Licensing options</a> in the <i>VM Import/Export User Guide</i>.</p>"
         },
         "BootMode": {
           "shape": "BootModeValues",
@@ -29154,7 +29154,7 @@
         },
         "HttpEndpoint": {
           "shape": "InstanceMetadataEndpointState",
-          "documentation": "<p>This parameter enables or disables the HTTP metadata endpoint on your instances. If the parameter is not specified, the default state is <code>enabled</code>.</p> <note> <p>If you specify a value of <code>disabled</code>, you will not be able to access your instance metadata.</p> </note>"
+          "documentation": "<p>Enables or disables the HTTP metadata endpoint on your instances. If the parameter is not specified, the default state is <code>enabled</code>.</p> <p>If you specify a value of <code>disabled</code>, you will not be able to access your instance metadata.</p>"
         },
         "HttpProtocolIpv6": {
           "shape": "InstanceMetadataProtocolState",
@@ -29183,12 +29183,12 @@
         },
         "HttpEndpoint": {
           "shape": "InstanceMetadataEndpointState",
-          "documentation": "<p>This parameter enables or disables the HTTP metadata endpoint on your instances. If the parameter is not specified, the default state is <code>enabled</code>.</p> <note> <p>If you specify a value of <code>disabled</code>, you will not be able to access your instance metadata.</p> </note>",
+          "documentation": "<p>Indicates whether the HTTP metadata endpoint on your instances is enabled or disabled.</p>",
           "locationName": "httpEndpoint"
         },
         "HttpProtocolIpv6": {
           "shape": "InstanceMetadataProtocolState",
-          "documentation": "<p>Whether or not the IPv6 endpoint for the instance metadata service is enabled or disabled.</p>",
+          "documentation": "<p>Indicates whether the IPv6 endpoint for the instance metadata service is enabled or disabled.</p>",
           "locationName": "httpProtocolIpv6"
         }
       },
@@ -32277,7 +32277,7 @@
       "members": {
         "UserId": {
           "shape": "String",
-          "documentation": "<p>The AWS account ID.</p>",
+          "documentation": "<p>The Amazon Web Services account ID.</p>",
           "locationName": "userId"
         },
         "Group": {
@@ -32325,7 +32325,7 @@
         },
         "UserId": {
           "shape": "String",
-          "documentation": "<p>The AWS account ID.</p>"
+          "documentation": "<p>The Amazon Web Services account ID.</p>"
         }
       },
       "documentation": "<p>Describes a load permission.</p>"
@@ -32345,7 +32345,7 @@
         },
         "OwnerId": {
           "shape": "String",
-          "documentation": "<p>The AWS account ID that owns the local gateway.</p>",
+          "documentation": "<p>The ID of the Amazon Web Services account that owns the local gateway.</p>",
           "locationName": "ownerId"
         },
         "State": {
@@ -32411,7 +32411,7 @@
         },
         "OwnerId": {
           "shape": "String",
-          "documentation": "<p>The AWS account ID that owns the local gateway route.</p>",
+          "documentation": "<p>The ID of the Amazon Web Services account that owns the local gateway route.</p>",
           "locationName": "ownerId"
         }
       },
@@ -32459,7 +32459,7 @@
         },
         "OwnerId": {
           "shape": "String",
-          "documentation": "<p>The AWS account ID that owns the local gateway route table.</p>",
+          "documentation": "<p>The ID of the Amazon Web Services account that owns the local gateway route table.</p>",
           "locationName": "ownerId"
         },
         "State": {
@@ -32519,7 +32519,7 @@
         },
         "OwnerId": {
           "shape": "String",
-          "documentation": "<p>The AWS account ID that owns the local gateway virtual interface group association.</p>",
+          "documentation": "<p>The ID of the Amazon Web Services account that owns the local gateway virtual interface group association.</p>",
           "locationName": "ownerId"
         },
         "State": {
@@ -32582,7 +32582,7 @@
         },
         "OwnerId": {
           "shape": "String",
-          "documentation": "<p>The AWS account ID that owns the local gateway route table for the association.</p>",
+          "documentation": "<p>The ID of the Amazon Web Services account that owns the local gateway route table for the association.</p>",
           "locationName": "ownerId"
         },
         "State": {
@@ -32672,7 +32672,7 @@
         },
         "OwnerId": {
           "shape": "String",
-          "documentation": "<p>The AWS account ID that owns the local gateway virtual interface.</p>",
+          "documentation": "<p>The ID of the Amazon Web Services account that owns the local gateway virtual interface.</p>",
           "locationName": "ownerId"
         },
         "Tags": {
@@ -32703,7 +32703,7 @@
         },
         "OwnerId": {
           "shape": "String",
-          "documentation": "<p>The AWS account ID that owns the local gateway virtual interface group.</p>",
+          "documentation": "<p>The ID of the Amazon Web Services account that owns the local gateway virtual interface group.</p>",
           "locationName": "ownerId"
         },
         "Tags": {
@@ -32932,7 +32932,7 @@
         },
         "OptInStatus": {
           "shape": "ModifyAvailabilityZoneOptInStatus",
-          "documentation": "<p>Indicates whether you are opted in to the Local Zone group or Wavelength Zone group. The only valid value is <code>opted-in</code>. You must contact <a href=\"https://console.aws.amazon.com/support/home#/case/create%3FissueType=customer-service%26serviceCode=general-info%26getting-started%26categoryCode=using-aws%26services\">AWS Support</a> to opt out of a Local Zone group, or Wavelength Zone group.</p>"
+          "documentation": "<p>Indicates whether you are opted in to the Local Zone group or Wavelength Zone group. The only valid value is <code>opted-in</code>. You must contact <a href=\"https://console.aws.amazon.com/support/home#/case/create%3FissueType=customer-service%26serviceCode=general-info%26getting-started%26categoryCode=using-aws%26services\">Amazon Web Services Support</a> to opt out of a Local Zone or Wavelength Zone group.</p>"
         },
         "DryRun": {
           "shape": "Boolean",
@@ -33228,7 +33228,7 @@
         },
         "UserIds": {
           "shape": "UserIdStringList",
-          "documentation": "<p>The AWS account IDs. This parameter is valid only when modifying the <code>loadPermission</code> attribute.</p>",
+          "documentation": "<p>The Amazon Web Services account IDs. This parameter is valid only when modifying the <code>loadPermission</code> attribute.</p>",
           "locationName": "UserId"
         },
         "UserGroups": {
@@ -34085,7 +34085,7 @@
         },
         "TrafficDirection": {
           "shape": "TrafficDirection",
-          "documentation": "<p>The type of traffic (<code>ingress</code> | <code>egress</code>) to assign to the rule.</p>"
+          "documentation": "<p>The type of traffic to assign to the rule.</p>"
         },
         "RuleNumber": {
           "shape": "Integer",
@@ -38100,7 +38100,7 @@
         },
         "NetworkBorderGroup": {
           "shape": "String",
-          "documentation": "<p>The set of Availability Zones, Local Zones, or Wavelength Zones from which AWS advertises IP addresses.</p> <p>If you provide an incorrect network border group, you will receive an <code>InvalidAddress.NotFound</code> error. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html\">Error Codes</a>.</p> <note> <p>You cannot use a network border group with EC2 Classic. If you attempt this operation on EC2 classic, you will receive an <code>InvalidParameterCombination</code> error. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html\">Error Codes</a>.</p> </note>"
+          "documentation": "<p>The set of Availability Zones, Local Zones, or Wavelength Zones from which Amazon Web Services advertises IP addresses.</p> <p>If you provide an incorrect network border group, you receive an <code>InvalidAddress.NotFound</code> error.</p> <p>You cannot use a network border group with EC2 Classic. If you attempt this operation on EC2 classic, you receive an <code>InvalidParameterCombination</code> error.</p>"
         },
         "DryRun": {
           "shape": "Boolean",
@@ -41726,7 +41726,7 @@
         },
         "AcceptanceRequired": {
           "shape": "Boolean",
-          "documentation": "<p>Indicates whether requests from other AWS accounts to create an endpoint to the service must first be accepted.</p>",
+          "documentation": "<p>Indicates whether requests from other Amazon Web Services accounts to create an endpoint to the service must first be accepted.</p>",
           "locationName": "acceptanceRequired"
         },
         "ManagesVpcEndpoints": {
@@ -41799,7 +41799,7 @@
         },
         "Owner": {
           "shape": "String",
-          "documentation": "<p>The AWS account ID of the service owner.</p>",
+          "documentation": "<p>The Amazon Web Services account ID of the service owner.</p>",
           "locationName": "owner"
         },
         "BaseEndpointDnsNames": {
@@ -43709,7 +43709,7 @@
       "members": {
         "ResourceType": {
           "shape": "ResourceType",
-          "documentation": "<p>The type of resource to tag on creation. The possible values are: <code>capacity-reservation</code> | <code>carrier-gateway</code> | <code>client-vpn-endpoint</code> | <code>customer-gateway</code> | <code>dedicated-host</code> | <code>dhcp-options</code> | <code>egress-only-internet-gateway</code> | <code>elastic-gpu</code> | <code>elastic-ip</code> | <code>export-image-task</code> | <code>export-instance-task</code> | <code>fleet</code> | <code>fpga-image</code> | <code>host-reservation</code> | <code>image</code> | <code>import-image-task</code> | <code>import-snapshot-task</code> | <code>instance</code> | <code>instance-event-window</code> | <code>internet-gateway</code> | <code>ipv4pool-ec2</code> | <code>ipv6pool-ec2</code> | <code>key-pair</code> | <code>launch-template</code> | <code>local-gateway-route-table-vpc-association</code> | <code>natgateway</code> | <code>network-acl</code> | <code>network-insights-analysis</code> | <code>network-insights-path</code> | <code>network-interface</code> | <code>placement-group</code> | <code>prefix-list</code> | <code>reserved-instances</code> | <code>route-table</code> | <code>security-group</code> | <code>security-group-rule</code> | <code>snapshot</code> | <code>spot-fleet-request</code> | <code>spot-instances-request</code> | <code>subnet</code> | <code>traffic-mirror-filter</code> | <code>traffic-mirror-session</code> | <code>traffic-mirror-target</code> | <code>transit-gateway</code> | <code>transit-gateway-attachment</code> | <code>transit-gateway-multicast-domain</code> | <code>transit-gateway-route-table</code> | <code>volume</code> | <code>vpc</code> | <code>vpc-endpoint</code> | <code>vpc-endpoint-service</code> | <code>vpc-flow-log</code> | <code>vpc-peering-connection</code> | <code>vpn-connection</code> | <code>vpn-gateway</code>.</p> <p>To tag a resource after it has been created, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html\">CreateTags</a>.</p>",
+          "documentation": "<p>The type of resource to tag on creation.</p>",
           "locationName": "resourceType"
         },
         "Tags": {
@@ -47241,7 +47241,7 @@
         },
         "OwnerId": {
           "shape": "String",
-          "documentation": "<p>The ID of the AWS account that owns the VPC endpoint.</p>",
+          "documentation": "<p>The ID of the Amazon Web Services account that owns the VPC endpoint.</p>",
           "locationName": "ownerId"
         },
         "LastError": {
@@ -47267,7 +47267,7 @@
         },
         "VpcEndpointOwner": {
           "shape": "String",
-          "documentation": "<p>The AWS account ID of the owner of the VPC endpoint.</p>",
+          "documentation": "<p>The ID of the Amazon Web Services account that owns the VPC endpoint.</p>",
           "locationName": "vpcEndpointOwner"
         },
         "VpcEndpointState": {
@@ -47394,7 +47394,7 @@
         },
         "NetworkBorderGroup": {
           "shape": "String",
-          "documentation": "<p>The name of the unique set of Availability Zones, Local Zones, or Wavelength Zones from which AWS advertises IP addresses, for example, <code>us-east-1-wl1-bos-wlz-1</code>.</p>",
+          "documentation": "<p>The name of the unique set of Availability Zones, Local Zones, or Wavelength Zones from which Amazon Web Services advertises IP addresses, for example, <code>us-east-1-wl1-bos-wlz-1</code>.</p>",
           "locationName": "networkBorderGroup"
         },
         "Ipv6Pool": {

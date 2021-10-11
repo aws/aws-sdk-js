@@ -62,6 +62,14 @@ declare class MediaLive extends Service {
    */
   cancelInputDeviceTransfer(callback?: (err: AWSError, data: MediaLive.Types.CancelInputDeviceTransferResponse) => void): Request<MediaLive.Types.CancelInputDeviceTransferResponse, AWSError>;
   /**
+   * Send a request to claim an AWS Elemental device that you have purchased from a third-party vendor. After the request succeeds, you will own the device.
+   */
+  claimDevice(params: MediaLive.Types.ClaimDeviceRequest, callback?: (err: AWSError, data: MediaLive.Types.ClaimDeviceResponse) => void): Request<MediaLive.Types.ClaimDeviceResponse, AWSError>;
+  /**
+   * Send a request to claim an AWS Elemental device that you have purchased from a third-party vendor. After the request succeeds, you will own the device.
+   */
+  claimDevice(callback?: (err: AWSError, data: MediaLive.Types.ClaimDeviceResponse) => void): Request<MediaLive.Types.ClaimDeviceResponse, AWSError>;
+  /**
    * Creates a new channel
    */
   createChannel(params: MediaLive.Types.CreateChannelRequest, callback?: (err: AWSError, data: MediaLive.Types.CreateChannelResponse) => void): Request<MediaLive.Types.CreateChannelResponse, AWSError>;
@@ -732,6 +740,10 @@ Note that this field and audioType are both ignored if inputType is broadcasterM
      */
     AudioTypeControl?: AudioDescriptionAudioTypeControl;
     /**
+     * Settings to configure one or more solutions that insert audio watermarks in the audio encode
+     */
+    AudioWatermarkingSettings?: AudioWatermarkSettings;
+    /**
      * Audio codec settings.
      */
     CodecSettings?: AudioCodecSettings;
@@ -874,6 +886,12 @@ Alternate rendition that the client will not try to play back by default. Repres
     Tracks: __listOfAudioTrack;
   }
   export type AudioType = "CLEAN_EFFECTS"|"HEARING_IMPAIRED"|"UNDEFINED"|"VISUAL_IMPAIRED_COMMENTARY"|string;
+  export interface AudioWatermarkSettings {
+    /**
+     * Settings to configure Nielsen Watermarks in the audio encode
+     */
+    NielsenWatermarksSettings?: NielsenWatermarksSettings;
+  }
   export type AuthenticationScheme = "AKAMAI"|"COMMON"|string;
   export interface AutomaticInputFailoverSettings {
     /**
@@ -1411,9 +1429,17 @@ one destination per packager.
      */
     Tags?: Tags;
     /**
-     * Settings for VPC output
+     * Settings for any VPC outputs.
      */
     Vpc?: VpcOutputSettingsDescription;
+  }
+  export interface ClaimDeviceRequest {
+    /**
+     * The id of the device you want to claim.
+     */
+    Id?: __string;
+  }
+  export interface ClaimDeviceResponse {
   }
   export interface ColorSpacePassthroughSettings {
   }
@@ -1463,7 +1489,7 @@ creating multiple resources.
      */
     Tags?: Tags;
     /**
-     * Settings for VPC output
+     * Settings for the VPC outputs
      */
     Vpc?: VpcOutputSettings;
   }
@@ -2077,7 +2103,7 @@ SINGLE_PIPELINE - You can connect only one source to this input. If the ChannelC
     InputPartnerIds?: __listOf__string;
     /**
      * Certain pull input sources can be dynamic, meaning that they can have their URL's dynamically changes
-during input switch actions. Presently, this functionality only works with MP4_FILE inputs.
+during input switch actions. Presently, this functionality only works with MP4_FILE and TS_FILE inputs.
 
      */
     InputSourceType?: InputSourceType;
@@ -3666,7 +3692,7 @@ SINGLE_PIPELINE - You can connect only one source to this input. If the ChannelC
     InputPartnerIds?: __listOf__string;
     /**
      * Certain pull input sources can be dynamic, meaning that they can have their URL's dynamically changes
-during input switch actions. Presently, this functionality only works with MP4_FILE inputs.
+during input switch actions. Presently, this functionality only works with MP4_FILE and TS_FILE inputs.
 
      */
     InputSourceType?: InputSourceType;
@@ -4155,7 +4181,7 @@ pulled from.
     UrlPath?: __listOf__string;
   }
   export type InputTimecodeSource = "ZEROBASED"|"EMBEDDED"|string;
-  export type InputType = "UDP_PUSH"|"RTP_PUSH"|"RTMP_PUSH"|"RTMP_PULL"|"URL_PULL"|"MP4_FILE"|"MEDIACONNECT"|"INPUT_DEVICE"|"AWS_CDI"|string;
+  export type InputType = "UDP_PUSH"|"RTP_PUSH"|"RTMP_PUSH"|"RTMP_PULL"|"URL_PULL"|"MP4_FILE"|"MEDIACONNECT"|"INPUT_DEVICE"|"AWS_CDI"|"TS_FILE"|string;
   export interface InputVpcRequest {
     /**
      * A list of up to 5 EC2 VPC security group IDs to attach to the Input VPC network interfaces.
@@ -5212,6 +5238,20 @@ When this field is defined, ConstantBitrate must be undefined.
      */
     ServerValidation?: NetworkInputServerValidation;
   }
+  export interface NielsenCBET {
+    /**
+     * Enter the CBET check digits to use in the watermark.
+     */
+    CbetCheckDigitString: __stringMin2Max2;
+    /**
+     * Determines the method of CBET insertion mode when prior encoding is detected on the same layer.
+     */
+    CbetStepaside: NielsenWatermarksCbetStepaside;
+    /**
+     * Enter the CBET Source ID (CSID) to use in the watermark
+     */
+    Csid: __stringMin1Max7;
+  }
   export interface NielsenConfiguration {
     /**
      * Enter the Distributor ID assigned to your organization by Nielsen.
@@ -5222,7 +5262,35 @@ When this field is defined, ConstantBitrate must be undefined.
      */
     NielsenPcmToId3Tagging?: NielsenPcmToId3TaggingState;
   }
+  export interface NielsenNaesIiNw {
+    /**
+     * Enter the check digit string for the watermark
+     */
+    CheckDigitString: __stringMin2Max2;
+    /**
+     * Enter the Nielsen Source ID (SID) to include in the watermark
+     */
+    Sid: __doubleMin1Max65535;
+  }
   export type NielsenPcmToId3TaggingState = "DISABLED"|"ENABLED"|string;
+  export type NielsenWatermarksCbetStepaside = "DISABLED"|"ENABLED"|string;
+  export type NielsenWatermarksDistributionTypes = "FINAL_DISTRIBUTOR"|"PROGRAM_CONTENT"|string;
+  export interface NielsenWatermarksSettings {
+    /**
+     * Complete these fields only if you want to insert watermarks of type Nielsen CBET
+     */
+    NielsenCbetSettings?: NielsenCBET;
+    /**
+     * Choose the distribution types that you want to assign to the watermarks:
+- PROGRAM_CONTENT
+- FINAL_DISTRIBUTOR
+     */
+    NielsenDistributionType?: NielsenWatermarksDistributionTypes;
+    /**
+     * Complete these fields only if you want to insert watermarks of type Nielsen NAES II (N2) and Nielsen NAES VI (NW).
+     */
+    NielsenNaesIiNwSettings?: NielsenNaesIiNw;
+  }
   export interface Offering {
     /**
      * Unique offering ARN, e.g. 'arn:aws:medialive:us-west-2:123456789012:offering:87654321'
@@ -6729,6 +6797,7 @@ If STANDARD channel, subnet IDs must be mapped to two unique availability zones 
   export type __doubleMin0Max1 = number;
   export type __doubleMin0Max100 = number;
   export type __doubleMin1 = number;
+  export type __doubleMin1Max65535 = number;
   export type __doubleMinNegative59Max0 = number;
   export type __integer = number;
   export type __integerMin0 = number;
@@ -6842,6 +6911,8 @@ If STANDARD channel, subnet IDs must be mapped to two unique availability zones 
   export type __stringMin1Max255 = string;
   export type __stringMin1Max256 = string;
   export type __stringMin1Max35 = string;
+  export type __stringMin1Max7 = string;
+  export type __stringMin2Max2 = string;
   export type __stringMin32Max32 = string;
   export type __stringMin34Max34 = string;
   export type __stringMin3Max3 = string;

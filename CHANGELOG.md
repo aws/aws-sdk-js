@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1004.0-->
+<!--LATEST=2.1005.0-->
 <!--ENTRYINSERT-->
+
+## 2.1005.0
+* feature: ELBv2: Enable support for ALB IPv6 Target Groups (IP Address Type)
+* feature: FraudDetector: New model type: Transaction Fraud Insights, which is optimized for online transaction fraud. Stored Events, which allows customers to send and store data directly within Amazon Fraud Detector. Batch Import, which allows customers to upload a CSV file of historic event data for processing and storage
+* feature: MediaLive: This release adds support for Transport Stream files as an input type to MediaLive encoders.
 
 ## 2.1004.0
 * feature: EC2: This release removes a requirement for filters on SearchLocalGatewayRoutes operations.

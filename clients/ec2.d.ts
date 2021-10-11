@@ -477,11 +477,11 @@ declare class EC2 extends Service {
    */
   createFlowLogs(callback?: (err: AWSError, data: EC2.Types.CreateFlowLogsResult) => void): Request<EC2.Types.CreateFlowLogsResult, AWSError>;
   /**
-   * Creates an Amazon FPGA Image (AFI) from the specified design checkpoint (DCP). The create operation is asynchronous. To verify that the AFI is ready for use, check the output logs. An AFI contains the FPGA bitstream that is ready to download to an FPGA. You can securely deploy an AFI on multiple FPGA-accelerated instances. For more information, see the AWS FPGA Hardware Development Kit.
+   * Creates an Amazon FPGA Image (AFI) from the specified design checkpoint (DCP). The create operation is asynchronous. To verify that the AFI is ready for use, check the output logs. An AFI contains the FPGA bitstream that is ready to download to an FPGA. You can securely deploy an AFI on multiple FPGA-accelerated instances. For more information, see the Amazon Web Services FPGA Hardware Development Kit.
    */
   createFpgaImage(params: EC2.Types.CreateFpgaImageRequest, callback?: (err: AWSError, data: EC2.Types.CreateFpgaImageResult) => void): Request<EC2.Types.CreateFpgaImageResult, AWSError>;
   /**
-   * Creates an Amazon FPGA Image (AFI) from the specified design checkpoint (DCP). The create operation is asynchronous. To verify that the AFI is ready for use, check the output logs. An AFI contains the FPGA bitstream that is ready to download to an FPGA. You can securely deploy an AFI on multiple FPGA-accelerated instances. For more information, see the AWS FPGA Hardware Development Kit.
+   * Creates an Amazon FPGA Image (AFI) from the specified design checkpoint (DCP). The create operation is asynchronous. To verify that the AFI is ready for use, check the output logs. An AFI contains the FPGA bitstream that is ready to download to an FPGA. You can securely deploy an AFI on multiple FPGA-accelerated instances. For more information, see the Amazon Web Services FPGA Hardware Development Kit.
    */
   createFpgaImage(callback?: (err: AWSError, data: EC2.Types.CreateFpgaImageResult) => void): Request<EC2.Types.CreateFpgaImageResult, AWSError>;
   /**
@@ -525,11 +525,11 @@ declare class EC2 extends Service {
    */
   createKeyPair(callback?: (err: AWSError, data: EC2.Types.KeyPair) => void): Request<EC2.Types.KeyPair, AWSError>;
   /**
-   * Creates a launch template. A launch template contains the parameters to launch an instance. When you launch an instance using RunInstances, you can specify a launch template instead of providing the launch parameters in the request. For more information, see Launching an instance from a launch templatein the Amazon Elastic Compute Cloud User Guide.
+   * Creates a launch template. A launch template contains the parameters to launch an instance. When you launch an instance using RunInstances, you can specify a launch template instead of providing the launch parameters in the request. For more information, see Launching an instance from a launch template in the Amazon Elastic Compute Cloud User Guide.
    */
   createLaunchTemplate(params: EC2.Types.CreateLaunchTemplateRequest, callback?: (err: AWSError, data: EC2.Types.CreateLaunchTemplateResult) => void): Request<EC2.Types.CreateLaunchTemplateResult, AWSError>;
   /**
-   * Creates a launch template. A launch template contains the parameters to launch an instance. When you launch an instance using RunInstances, you can specify a launch template instead of providing the launch parameters in the request. For more information, see Launching an instance from a launch templatein the Amazon Elastic Compute Cloud User Guide.
+   * Creates a launch template. A launch template contains the parameters to launch an instance. When you launch an instance using RunInstances, you can specify a launch template instead of providing the launch parameters in the request. For more information, see Launching an instance from a launch template in the Amazon Elastic Compute Cloud User Guide.
    */
   createLaunchTemplate(callback?: (err: AWSError, data: EC2.Types.CreateLaunchTemplateResult) => void): Request<EC2.Types.CreateLaunchTemplateResult, AWSError>;
   /**
@@ -733,11 +733,11 @@ declare class EC2 extends Service {
    */
   createTrafficMirrorFilter(callback?: (err: AWSError, data: EC2.Types.CreateTrafficMirrorFilterResult) => void): Request<EC2.Types.CreateTrafficMirrorFilterResult, AWSError>;
   /**
-   * Creates a Traffic Mirror filter rule.  A Traffic Mirror rule defines the Traffic Mirror source traffic to mirror. You need the Traffic Mirror filter ID when you create the rule.
+   * Creates a Traffic Mirror filter rule. A Traffic Mirror rule defines the Traffic Mirror source traffic to mirror. You need the Traffic Mirror filter ID when you create the rule.
    */
   createTrafficMirrorFilterRule(params: EC2.Types.CreateTrafficMirrorFilterRuleRequest, callback?: (err: AWSError, data: EC2.Types.CreateTrafficMirrorFilterRuleResult) => void): Request<EC2.Types.CreateTrafficMirrorFilterRuleResult, AWSError>;
   /**
-   * Creates a Traffic Mirror filter rule.  A Traffic Mirror rule defines the Traffic Mirror source traffic to mirror. You need the Traffic Mirror filter ID when you create the rule.
+   * Creates a Traffic Mirror filter rule. A Traffic Mirror rule defines the Traffic Mirror source traffic to mirror. You need the Traffic Mirror filter ID when you create the rule.
    */
   createTrafficMirrorFilterRule(callback?: (err: AWSError, data: EC2.Types.CreateTrafficMirrorFilterRuleResult) => void): Request<EC2.Types.CreateTrafficMirrorFilterRuleResult, AWSError>;
   /**
@@ -845,11 +845,11 @@ declare class EC2 extends Service {
    */
   createVpc(callback?: (err: AWSError, data: EC2.Types.CreateVpcResult) => void): Request<EC2.Types.CreateVpcResult, AWSError>;
   /**
-   * Creates a VPC endpoint for a specified service. An endpoint enables you to create a private connection between your VPC and the service. The service may be provided by AWS, an AWS Marketplace Partner, or another AWS account. For more information, see VPC Endpoints in the Amazon Virtual Private Cloud User Guide. A gateway endpoint serves as a target for a route in your route table for traffic destined for the AWS service. You can specify an endpoint policy to attach to the endpoint, which will control access to the service from your VPC. You can also specify the VPC route tables that use the endpoint. An interface endpoint is a network interface in your subnet that serves as an endpoint for communicating with the specified service. You can specify the subnets in which to create an endpoint, and the security groups to associate with the endpoint network interface. A GatewayLoadBalancer endpoint is a network interface in your subnet that serves an endpoint for communicating with a Gateway Load Balancer that you've configured as a VPC endpoint service. Use DescribeVpcEndpointServices to get a list of supported services.
+   * Creates a VPC endpoint for a specified service. An endpoint enables you to create a private connection between your VPC and the service. The service may be provided by Amazon Web Services, an Amazon Web Services Marketplace Partner, or another Amazon Web Services account. For more information, see VPC Endpoints in the Amazon Virtual Private Cloud User Guide. A gateway endpoint serves as a target for a route in your route table for traffic destined for the Amazon Web Service. You can specify an endpoint policy to attach to the endpoint, which will control access to the service from your VPC. You can also specify the VPC route tables that use the endpoint. An interface endpoint is a network interface in your subnet that serves as an endpoint for communicating with the specified service. You can specify the subnets in which to create an endpoint, and the security groups to associate with the endpoint network interface. A GatewayLoadBalancer endpoint is a network interface in your subnet that serves an endpoint for communicating with a Gateway Load Balancer that you've configured as a VPC endpoint service. Use DescribeVpcEndpointServices to get a list of supported services.
    */
   createVpcEndpoint(params: EC2.Types.CreateVpcEndpointRequest, callback?: (err: AWSError, data: EC2.Types.CreateVpcEndpointResult) => void): Request<EC2.Types.CreateVpcEndpointResult, AWSError>;
   /**
-   * Creates a VPC endpoint for a specified service. An endpoint enables you to create a private connection between your VPC and the service. The service may be provided by AWS, an AWS Marketplace Partner, or another AWS account. For more information, see VPC Endpoints in the Amazon Virtual Private Cloud User Guide. A gateway endpoint serves as a target for a route in your route table for traffic destined for the AWS service. You can specify an endpoint policy to attach to the endpoint, which will control access to the service from your VPC. You can also specify the VPC route tables that use the endpoint. An interface endpoint is a network interface in your subnet that serves as an endpoint for communicating with the specified service. You can specify the subnets in which to create an endpoint, and the security groups to associate with the endpoint network interface. A GatewayLoadBalancer endpoint is a network interface in your subnet that serves an endpoint for communicating with a Gateway Load Balancer that you've configured as a VPC endpoint service. Use DescribeVpcEndpointServices to get a list of supported services.
+   * Creates a VPC endpoint for a specified service. An endpoint enables you to create a private connection between your VPC and the service. The service may be provided by Amazon Web Services, an Amazon Web Services Marketplace Partner, or another Amazon Web Services account. For more information, see VPC Endpoints in the Amazon Virtual Private Cloud User Guide. A gateway endpoint serves as a target for a route in your route table for traffic destined for the Amazon Web Service. You can specify an endpoint policy to attach to the endpoint, which will control access to the service from your VPC. You can also specify the VPC route tables that use the endpoint. An interface endpoint is a network interface in your subnet that serves as an endpoint for communicating with the specified service. You can specify the subnets in which to create an endpoint, and the security groups to associate with the endpoint network interface. A GatewayLoadBalancer endpoint is a network interface in your subnet that serves an endpoint for communicating with a Gateway Load Balancer that you've configured as a VPC endpoint service. Use DescribeVpcEndpointServices to get a list of supported services.
    */
   createVpcEndpoint(callback?: (err: AWSError, data: EC2.Types.CreateVpcEndpointResult) => void): Request<EC2.Types.CreateVpcEndpointResult, AWSError>;
   /**
@@ -861,11 +861,11 @@ declare class EC2 extends Service {
    */
   createVpcEndpointConnectionNotification(callback?: (err: AWSError, data: EC2.Types.CreateVpcEndpointConnectionNotificationResult) => void): Request<EC2.Types.CreateVpcEndpointConnectionNotificationResult, AWSError>;
   /**
-   * Creates a VPC endpoint service configuration to which service consumers (AWS accounts, IAM users, and IAM roles) can connect. To create an endpoint service configuration, you must first create one of the following for your service:   A Network Load Balancer. Service consumers connect to your service using an interface endpoint.   A Gateway Load Balancer. Service consumers connect to your service using a Gateway Load Balancer endpoint.   For more information, see VPC Endpoint Services in the Amazon Virtual Private Cloud User Guide.  If you set the private DNS name, you must prove that you own the private DNS domain name. For more information, see VPC Endpoint Service Private DNS Name Verification in the Amazon Virtual Private Cloud User Guide.
+   * Creates a VPC endpoint service configuration to which service consumers (Amazon Web Services accounts, IAM users, and IAM roles) can connect. To create an endpoint service configuration, you must first create one of the following for your service:   A Network Load Balancer. Service consumers connect to your service using an interface endpoint.   A Gateway Load Balancer. Service consumers connect to your service using a Gateway Load Balancer endpoint.   For more information, see VPC Endpoint Services in the Amazon Virtual Private Cloud User Guide.  If you set the private DNS name, you must prove that you own the private DNS domain name. For more information, see VPC Endpoint Service Private DNS Name Verification in the Amazon Virtual Private Cloud User Guide.
    */
   createVpcEndpointServiceConfiguration(params: EC2.Types.CreateVpcEndpointServiceConfigurationRequest, callback?: (err: AWSError, data: EC2.Types.CreateVpcEndpointServiceConfigurationResult) => void): Request<EC2.Types.CreateVpcEndpointServiceConfigurationResult, AWSError>;
   /**
-   * Creates a VPC endpoint service configuration to which service consumers (AWS accounts, IAM users, and IAM roles) can connect. To create an endpoint service configuration, you must first create one of the following for your service:   A Network Load Balancer. Service consumers connect to your service using an interface endpoint.   A Gateway Load Balancer. Service consumers connect to your service using a Gateway Load Balancer endpoint.   For more information, see VPC Endpoint Services in the Amazon Virtual Private Cloud User Guide.  If you set the private DNS name, you must prove that you own the private DNS domain name. For more information, see VPC Endpoint Service Private DNS Name Verification in the Amazon Virtual Private Cloud User Guide.
+   * Creates a VPC endpoint service configuration to which service consumers (Amazon Web Services accounts, IAM users, and IAM roles) can connect. To create an endpoint service configuration, you must first create one of the following for your service:   A Network Load Balancer. Service consumers connect to your service using an interface endpoint.   A Gateway Load Balancer. Service consumers connect to your service using a Gateway Load Balancer endpoint.   For more information, see VPC Endpoint Services in the Amazon Virtual Private Cloud User Guide.  If you set the private DNS name, you must prove that you own the private DNS domain name. For more information, see VPC Endpoint Service Private DNS Name Verification in the Amazon Virtual Private Cloud User Guide.
    */
   createVpcEndpointServiceConfiguration(callback?: (err: AWSError, data: EC2.Types.CreateVpcEndpointServiceConfigurationResult) => void): Request<EC2.Types.CreateVpcEndpointServiceConfigurationResult, AWSError>;
   /**
@@ -1421,11 +1421,11 @@ declare class EC2 extends Service {
    */
   describeAggregateIdFormat(callback?: (err: AWSError, data: EC2.Types.DescribeAggregateIdFormatResult) => void): Request<EC2.Types.DescribeAggregateIdFormatResult, AWSError>;
   /**
-   * Describes the Availability Zones, Local Zones, and Wavelength Zones that are available to you. If there is an event impacting a zone, you can use this request to view the state and any provided messages for that zone. For more information about Availability Zones, Local Zones, and Wavelength Zones, see Regions, Zones and Outposts in the Amazon Elastic Compute Cloud User Guide.
+   * Describes the Availability Zones, Local Zones, and Wavelength Zones that are available to you. If there is an event impacting a zone, you can use this request to view the state and any provided messages for that zone. For more information about Availability Zones, Local Zones, and Wavelength Zones, see Regions and zones in the Amazon Elastic Compute Cloud User Guide.
    */
   describeAvailabilityZones(params: EC2.Types.DescribeAvailabilityZonesRequest, callback?: (err: AWSError, data: EC2.Types.DescribeAvailabilityZonesResult) => void): Request<EC2.Types.DescribeAvailabilityZonesResult, AWSError>;
   /**
-   * Describes the Availability Zones, Local Zones, and Wavelength Zones that are available to you. If there is an event impacting a zone, you can use this request to view the state and any provided messages for that zone. For more information about Availability Zones, Local Zones, and Wavelength Zones, see Regions, Zones and Outposts in the Amazon Elastic Compute Cloud User Guide.
+   * Describes the Availability Zones, Local Zones, and Wavelength Zones that are available to you. If there is an event impacting a zone, you can use this request to view the state and any provided messages for that zone. For more information about Availability Zones, Local Zones, and Wavelength Zones, see Regions and zones in the Amazon Elastic Compute Cloud User Guide.
    */
   describeAvailabilityZones(callback?: (err: AWSError, data: EC2.Types.DescribeAvailabilityZonesResult) => void): Request<EC2.Types.DescribeAvailabilityZonesResult, AWSError>;
   /**
@@ -1589,11 +1589,11 @@ declare class EC2 extends Service {
    */
   describeFastSnapshotRestores(callback?: (err: AWSError, data: EC2.Types.DescribeFastSnapshotRestoresResult) => void): Request<EC2.Types.DescribeFastSnapshotRestoresResult, AWSError>;
   /**
-   * Describes the events for the specified EC2 Fleet during the specified time. EC2 Fleet events are delayed by up to 30 seconds before they can be described. This ensures that you can query by the last evaluated time and not miss a recorded event. EC2 Fleet events are available for 48 hours. For more information, see Monitoring your EC2 Fleet in the Amazon EC2 User Guide.
+   * Describes the events for the specified EC2 Fleet during the specified time. EC2 Fleet events are delayed by up to 30 seconds before they can be described. This ensures that you can query by the last evaluated time and not miss a recorded event. EC2 Fleet events are available for 48 hours. For more information, see Monitor fleet events using Amazon EventBridge in the Amazon EC2 User Guide.
    */
   describeFleetHistory(params: EC2.Types.DescribeFleetHistoryRequest, callback?: (err: AWSError, data: EC2.Types.DescribeFleetHistoryResult) => void): Request<EC2.Types.DescribeFleetHistoryResult, AWSError>;
   /**
-   * Describes the events for the specified EC2 Fleet during the specified time. EC2 Fleet events are delayed by up to 30 seconds before they can be described. This ensures that you can query by the last evaluated time and not miss a recorded event. EC2 Fleet events are available for 48 hours. For more information, see Monitoring your EC2 Fleet in the Amazon EC2 User Guide.
+   * Describes the events for the specified EC2 Fleet during the specified time. EC2 Fleet events are delayed by up to 30 seconds before they can be described. This ensures that you can query by the last evaluated time and not miss a recorded event. EC2 Fleet events are available for 48 hours. For more information, see Monitor fleet events using Amazon EventBridge in the Amazon EC2 User Guide.
    */
   describeFleetHistory(callback?: (err: AWSError, data: EC2.Types.DescribeFleetHistoryResult) => void): Request<EC2.Types.DescribeFleetHistoryResult, AWSError>;
   /**
@@ -1629,11 +1629,11 @@ declare class EC2 extends Service {
    */
   describeFpgaImageAttribute(callback?: (err: AWSError, data: EC2.Types.DescribeFpgaImageAttributeResult) => void): Request<EC2.Types.DescribeFpgaImageAttributeResult, AWSError>;
   /**
-   * Describes the Amazon FPGA Images (AFIs) available to you. These include public AFIs, private AFIs that you own, and AFIs owned by other AWS accounts for which you have load permissions.
+   * Describes the Amazon FPGA Images (AFIs) available to you. These include public AFIs, private AFIs that you own, and AFIs owned by other Amazon Web Services accounts for which you have load permissions.
    */
   describeFpgaImages(params: EC2.Types.DescribeFpgaImagesRequest, callback?: (err: AWSError, data: EC2.Types.DescribeFpgaImagesResult) => void): Request<EC2.Types.DescribeFpgaImagesResult, AWSError>;
   /**
-   * Describes the Amazon FPGA Images (AFIs) available to you. These include public AFIs, private AFIs that you own, and AFIs owned by other AWS accounts for which you have load permissions.
+   * Describes the Amazon FPGA Images (AFIs) available to you. These include public AFIs, private AFIs that you own, and AFIs owned by other Amazon Web Services accounts for which you have load permissions.
    */
   describeFpgaImages(callback?: (err: AWSError, data: EC2.Types.DescribeFpgaImagesResult) => void): Request<EC2.Types.DescribeFpgaImagesResult, AWSError>;
   /**
@@ -1669,11 +1669,11 @@ declare class EC2 extends Service {
    */
   describeIamInstanceProfileAssociations(callback?: (err: AWSError, data: EC2.Types.DescribeIamInstanceProfileAssociationsResult) => void): Request<EC2.Types.DescribeIamInstanceProfileAssociationsResult, AWSError>;
   /**
-   * Describes the ID format settings for your resources on a per-Region basis, for example, to view which resource types are enabled for longer IDs. This request only returns information about resource types whose ID formats can be modified; it does not return information about other resource types. The following resource types support longer IDs: bundle | conversion-task | customer-gateway | dhcp-options | elastic-ip-allocation | elastic-ip-association | export-task | flow-log | image | import-task | instance | internet-gateway | network-acl | network-acl-association | network-interface | network-interface-attachment | prefix-list | reservation | route-table | route-table-association | security-group | snapshot | subnet | subnet-cidr-block-association | volume | vpc | vpc-cidr-block-association | vpc-endpoint | vpc-peering-connection | vpn-connection | vpn-gateway.  These settings apply to the IAM user who makes the request; they do not apply to the entire AWS account. By default, an IAM user defaults to the same settings as the root user, unless they explicitly override the settings by running the ModifyIdFormat command. Resources created with longer IDs are visible to all IAM users, regardless of these settings and provided that they have permission to use the relevant Describe command for the resource type.
+   * Describes the ID format settings for your resources on a per-Region basis, for example, to view which resource types are enabled for longer IDs. This request only returns information about resource types whose ID formats can be modified; it does not return information about other resource types. The following resource types support longer IDs: bundle | conversion-task | customer-gateway | dhcp-options | elastic-ip-allocation | elastic-ip-association | export-task | flow-log | image | import-task | instance | internet-gateway | network-acl | network-acl-association | network-interface | network-interface-attachment | prefix-list | reservation | route-table | route-table-association | security-group | snapshot | subnet | subnet-cidr-block-association | volume | vpc | vpc-cidr-block-association | vpc-endpoint | vpc-peering-connection | vpn-connection | vpn-gateway.  These settings apply to the IAM user who makes the request; they do not apply to the entire Amazon Web Services account. By default, an IAM user defaults to the same settings as the root user, unless they explicitly override the settings by running the ModifyIdFormat command. Resources created with longer IDs are visible to all IAM users, regardless of these settings and provided that they have permission to use the relevant Describe command for the resource type.
    */
   describeIdFormat(params: EC2.Types.DescribeIdFormatRequest, callback?: (err: AWSError, data: EC2.Types.DescribeIdFormatResult) => void): Request<EC2.Types.DescribeIdFormatResult, AWSError>;
   /**
-   * Describes the ID format settings for your resources on a per-Region basis, for example, to view which resource types are enabled for longer IDs. This request only returns information about resource types whose ID formats can be modified; it does not return information about other resource types. The following resource types support longer IDs: bundle | conversion-task | customer-gateway | dhcp-options | elastic-ip-allocation | elastic-ip-association | export-task | flow-log | image | import-task | instance | internet-gateway | network-acl | network-acl-association | network-interface | network-interface-attachment | prefix-list | reservation | route-table | route-table-association | security-group | snapshot | subnet | subnet-cidr-block-association | volume | vpc | vpc-cidr-block-association | vpc-endpoint | vpc-peering-connection | vpn-connection | vpn-gateway.  These settings apply to the IAM user who makes the request; they do not apply to the entire AWS account. By default, an IAM user defaults to the same settings as the root user, unless they explicitly override the settings by running the ModifyIdFormat command. Resources created with longer IDs are visible to all IAM users, regardless of these settings and provided that they have permission to use the relevant Describe command for the resource type.
+   * Describes the ID format settings for your resources on a per-Region basis, for example, to view which resource types are enabled for longer IDs. This request only returns information about resource types whose ID formats can be modified; it does not return information about other resource types. The following resource types support longer IDs: bundle | conversion-task | customer-gateway | dhcp-options | elastic-ip-allocation | elastic-ip-association | export-task | flow-log | image | import-task | instance | internet-gateway | network-acl | network-acl-association | network-interface | network-interface-attachment | prefix-list | reservation | route-table | route-table-association | security-group | snapshot | subnet | subnet-cidr-block-association | volume | vpc | vpc-cidr-block-association | vpc-endpoint | vpc-peering-connection | vpn-connection | vpn-gateway.  These settings apply to the IAM user who makes the request; they do not apply to the entire Amazon Web Services account. By default, an IAM user defaults to the same settings as the root user, unless they explicitly override the settings by running the ModifyIdFormat command. Resources created with longer IDs are visible to all IAM users, regardless of these settings and provided that they have permission to use the relevant Describe command for the resource type.
    */
   describeIdFormat(callback?: (err: AWSError, data: EC2.Types.DescribeIdFormatResult) => void): Request<EC2.Types.DescribeIdFormatResult, AWSError>;
   /**
@@ -1973,11 +1973,11 @@ declare class EC2 extends Service {
    */
   describePublicIpv4Pools(callback?: (err: AWSError, data: EC2.Types.DescribePublicIpv4PoolsResult) => void): Request<EC2.Types.DescribePublicIpv4PoolsResult, AWSError>;
   /**
-   * Describes the Regions that are enabled for your account, or all Regions. For a list of the Regions supported by Amazon EC2, see  Regions and Endpoints. For information about enabling and disabling Regions for your account, see Managing AWS Regions in the AWS General Reference.
+   * Describes the Regions that are enabled for your account, or all Regions. For a list of the Regions supported by Amazon EC2, see  Amazon Elastic Compute Cloud endpoints and quotas. For information about enabling and disabling Regions for your account, see Managing Amazon Web Services Regions in the Amazon Web Services General Reference.
    */
   describeRegions(params: EC2.Types.DescribeRegionsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeRegionsResult) => void): Request<EC2.Types.DescribeRegionsResult, AWSError>;
   /**
-   * Describes the Regions that are enabled for your account, or all Regions. For a list of the Regions supported by Amazon EC2, see  Regions and Endpoints. For information about enabling and disabling Regions for your account, see Managing AWS Regions in the AWS General Reference.
+   * Describes the Regions that are enabled for your account, or all Regions. For a list of the Regions supported by Amazon EC2, see  Amazon Elastic Compute Cloud endpoints and quotas. For information about enabling and disabling Regions for your account, see Managing Amazon Web Services Regions in the Amazon Web Services General Reference.
    */
   describeRegions(callback?: (err: AWSError, data: EC2.Types.DescribeRegionsResult) => void): Request<EC2.Types.DescribeRegionsResult, AWSError>;
   /**
@@ -2101,11 +2101,11 @@ declare class EC2 extends Service {
    */
   describeSpotFleetInstances(callback?: (err: AWSError, data: EC2.Types.DescribeSpotFleetInstancesResponse) => void): Request<EC2.Types.DescribeSpotFleetInstancesResponse, AWSError>;
   /**
-   * Describes the events for the specified Spot Fleet request during the specified time. Spot Fleet events are delayed by up to 30 seconds before they can be described. This ensures that you can query by the last evaluated time and not miss a recorded event. Spot Fleet events are available for 48 hours.
+   * Describes the events for the specified Spot Fleet request during the specified time. Spot Fleet events are delayed by up to 30 seconds before they can be described. This ensures that you can query by the last evaluated time and not miss a recorded event. Spot Fleet events are available for 48 hours. For more information, see Monitor fleet events using Amazon EventBridge in the Amazon EC2 User Guide for Linux Instances.
    */
   describeSpotFleetRequestHistory(params: EC2.Types.DescribeSpotFleetRequestHistoryRequest, callback?: (err: AWSError, data: EC2.Types.DescribeSpotFleetRequestHistoryResponse) => void): Request<EC2.Types.DescribeSpotFleetRequestHistoryResponse, AWSError>;
   /**
-   * Describes the events for the specified Spot Fleet request during the specified time. Spot Fleet events are delayed by up to 30 seconds before they can be described. This ensures that you can query by the last evaluated time and not miss a recorded event. Spot Fleet events are available for 48 hours.
+   * Describes the events for the specified Spot Fleet request during the specified time. Spot Fleet events are delayed by up to 30 seconds before they can be described. This ensures that you can query by the last evaluated time and not miss a recorded event. Spot Fleet events are available for 48 hours. For more information, see Monitor fleet events using Amazon EventBridge in the Amazon EC2 User Guide for Linux Instances.
    */
   describeSpotFleetRequestHistory(callback?: (err: AWSError, data: EC2.Types.DescribeSpotFleetRequestHistoryResponse) => void): Request<EC2.Types.DescribeSpotFleetRequestHistoryResponse, AWSError>;
   /**
@@ -2885,11 +2885,11 @@ declare class EC2 extends Service {
    */
   getTransitGatewayRouteTablePropagations(callback?: (err: AWSError, data: EC2.Types.GetTransitGatewayRouteTablePropagationsResult) => void): Request<EC2.Types.GetTransitGatewayRouteTablePropagationsResult, AWSError>;
   /**
-   * Download an AWS-provided sample configuration file to be used with the customer gateway device specified for your Site-to-Site VPN connection.
+   * Download an Amazon Web Services-provided sample configuration file to be used with the customer gateway device specified for your Site-to-Site VPN connection.
    */
   getVpnConnectionDeviceSampleConfiguration(params: EC2.Types.GetVpnConnectionDeviceSampleConfigurationRequest, callback?: (err: AWSError, data: EC2.Types.GetVpnConnectionDeviceSampleConfigurationResult) => void): Request<EC2.Types.GetVpnConnectionDeviceSampleConfigurationResult, AWSError>;
   /**
-   * Download an AWS-provided sample configuration file to be used with the customer gateway device specified for your Site-to-Site VPN connection.
+   * Download an Amazon Web Services-provided sample configuration file to be used with the customer gateway device specified for your Site-to-Site VPN connection.
    */
   getVpnConnectionDeviceSampleConfiguration(callback?: (err: AWSError, data: EC2.Types.GetVpnConnectionDeviceSampleConfigurationResult) => void): Request<EC2.Types.GetVpnConnectionDeviceSampleConfigurationResult, AWSError>;
   /**
@@ -3029,11 +3029,11 @@ declare class EC2 extends Service {
    */
   modifyHosts(callback?: (err: AWSError, data: EC2.Types.ModifyHostsResult) => void): Request<EC2.Types.ModifyHostsResult, AWSError>;
   /**
-   * Modifies the ID format for the specified resource on a per-Region basis. You can specify that resources should receive longer IDs (17-character IDs) when they are created. This request can only be used to modify longer ID settings for resource types that are within the opt-in period. Resources currently in their opt-in period include: bundle | conversion-task | customer-gateway | dhcp-options | elastic-ip-allocation | elastic-ip-association | export-task | flow-log | image | import-task | internet-gateway | network-acl | network-acl-association | network-interface | network-interface-attachment | prefix-list | route-table | route-table-association | security-group | subnet | subnet-cidr-block-association | vpc | vpc-cidr-block-association | vpc-endpoint | vpc-peering-connection | vpn-connection | vpn-gateway. This setting applies to the IAM user who makes the request; it does not apply to the entire AWS account. By default, an IAM user defaults to the same settings as the root user. If you're using this action as the root user, then these settings apply to the entire account, unless an IAM user explicitly overrides these settings for themselves. For more information, see Resource IDs in the Amazon Elastic Compute Cloud User Guide. Resources created with longer IDs are visible to all IAM roles and users, regardless of these settings and provided that they have permission to use the relevant Describe command for the resource type.
+   * Modifies the ID format for the specified resource on a per-Region basis. You can specify that resources should receive longer IDs (17-character IDs) when they are created. This request can only be used to modify longer ID settings for resource types that are within the opt-in period. Resources currently in their opt-in period include: bundle | conversion-task | customer-gateway | dhcp-options | elastic-ip-allocation | elastic-ip-association | export-task | flow-log | image | import-task | internet-gateway | network-acl | network-acl-association | network-interface | network-interface-attachment | prefix-list | route-table | route-table-association | security-group | subnet | subnet-cidr-block-association | vpc | vpc-cidr-block-association | vpc-endpoint | vpc-peering-connection | vpn-connection | vpn-gateway. This setting applies to the IAM user who makes the request; it does not apply to the entire Amazon Web Services account. By default, an IAM user defaults to the same settings as the root user. If you're using this action as the root user, then these settings apply to the entire account, unless an IAM user explicitly overrides these settings for themselves. For more information, see Resource IDs in the Amazon Elastic Compute Cloud User Guide. Resources created with longer IDs are visible to all IAM roles and users, regardless of these settings and provided that they have permission to use the relevant Describe command for the resource type.
    */
   modifyIdFormat(params: EC2.Types.ModifyIdFormatRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Modifies the ID format for the specified resource on a per-Region basis. You can specify that resources should receive longer IDs (17-character IDs) when they are created. This request can only be used to modify longer ID settings for resource types that are within the opt-in period. Resources currently in their opt-in period include: bundle | conversion-task | customer-gateway | dhcp-options | elastic-ip-allocation | elastic-ip-association | export-task | flow-log | image | import-task | internet-gateway | network-acl | network-acl-association | network-interface | network-interface-attachment | prefix-list | route-table | route-table-association | security-group | subnet | subnet-cidr-block-association | vpc | vpc-cidr-block-association | vpc-endpoint | vpc-peering-connection | vpn-connection | vpn-gateway. This setting applies to the IAM user who makes the request; it does not apply to the entire AWS account. By default, an IAM user defaults to the same settings as the root user. If you're using this action as the root user, then these settings apply to the entire account, unless an IAM user explicitly overrides these settings for themselves. For more information, see Resource IDs in the Amazon Elastic Compute Cloud User Guide. Resources created with longer IDs are visible to all IAM roles and users, regardless of these settings and provided that they have permission to use the relevant Describe command for the resource type.
+   * Modifies the ID format for the specified resource on a per-Region basis. You can specify that resources should receive longer IDs (17-character IDs) when they are created. This request can only be used to modify longer ID settings for resource types that are within the opt-in period. Resources currently in their opt-in period include: bundle | conversion-task | customer-gateway | dhcp-options | elastic-ip-allocation | elastic-ip-association | export-task | flow-log | image | import-task | internet-gateway | network-acl | network-acl-association | network-interface | network-interface-attachment | prefix-list | route-table | route-table-association | security-group | subnet | subnet-cidr-block-association | vpc | vpc-cidr-block-association | vpc-endpoint | vpc-peering-connection | vpn-connection | vpn-gateway. This setting applies to the IAM user who makes the request; it does not apply to the entire Amazon Web Services account. By default, an IAM user defaults to the same settings as the root user. If you're using this action as the root user, then these settings apply to the entire account, unless an IAM user explicitly overrides these settings for themselves. For more information, see Resource IDs in the Amazon Elastic Compute Cloud User Guide. Resources created with longer IDs are visible to all IAM roles and users, regardless of these settings and provided that they have permission to use the relevant Describe command for the resource type.
    */
   modifyIdFormat(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -3173,11 +3173,11 @@ declare class EC2 extends Service {
    */
   modifySubnetAttribute(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Allows or restricts mirroring network services.  By default, Amazon DNS network services are not eligible for Traffic Mirror. Use AddNetworkServices to add network services to a Traffic Mirror filter. When a network service is added to the Traffic Mirror filter, all traffic related to that network service will be mirrored. When you no longer want to mirror network services, use RemoveNetworkServices to remove the network services from the Traffic Mirror filter.  For information about filter rule properties, see Network Services in the Traffic Mirroring User Guide .
+   * Allows or restricts mirroring network services.  By default, Amazon DNS network services are not eligible for Traffic Mirror. Use AddNetworkServices to add network services to a Traffic Mirror filter. When a network service is added to the Traffic Mirror filter, all traffic related to that network service will be mirrored. When you no longer want to mirror network services, use RemoveNetworkServices to remove the network services from the Traffic Mirror filter. 
    */
   modifyTrafficMirrorFilterNetworkServices(params: EC2.Types.ModifyTrafficMirrorFilterNetworkServicesRequest, callback?: (err: AWSError, data: EC2.Types.ModifyTrafficMirrorFilterNetworkServicesResult) => void): Request<EC2.Types.ModifyTrafficMirrorFilterNetworkServicesResult, AWSError>;
   /**
-   * Allows or restricts mirroring network services.  By default, Amazon DNS network services are not eligible for Traffic Mirror. Use AddNetworkServices to add network services to a Traffic Mirror filter. When a network service is added to the Traffic Mirror filter, all traffic related to that network service will be mirrored. When you no longer want to mirror network services, use RemoveNetworkServices to remove the network services from the Traffic Mirror filter.  For information about filter rule properties, see Network Services in the Traffic Mirroring User Guide .
+   * Allows or restricts mirroring network services.  By default, Amazon DNS network services are not eligible for Traffic Mirror. Use AddNetworkServices to add network services to a Traffic Mirror filter. When a network service is added to the Traffic Mirror filter, all traffic related to that network service will be mirrored. When you no longer want to mirror network services, use RemoveNetworkServices to remove the network services from the Traffic Mirror filter. 
    */
   modifyTrafficMirrorFilterNetworkServices(callback?: (err: AWSError, data: EC2.Types.ModifyTrafficMirrorFilterNetworkServicesResult) => void): Request<EC2.Types.ModifyTrafficMirrorFilterNetworkServicesResult, AWSError>;
   /**
@@ -3269,11 +3269,11 @@ declare class EC2 extends Service {
    */
   modifyVpcEndpointServiceConfiguration(callback?: (err: AWSError, data: EC2.Types.ModifyVpcEndpointServiceConfigurationResult) => void): Request<EC2.Types.ModifyVpcEndpointServiceConfigurationResult, AWSError>;
   /**
-   * Modifies the permissions for your VPC endpoint service. You can add or remove permissions for service consumers (IAM users, IAM roles, and AWS accounts) to connect to your endpoint service. If you grant permissions to all principals, the service is public. Any users who know the name of a public service can send a request to attach an endpoint. If the service does not require manual approval, attachments are automatically approved.
+   * Modifies the permissions for your VPC endpoint service. You can add or remove permissions for service consumers (IAM users, IAM roles, and Amazon Web Services accounts) to connect to your endpoint service. If you grant permissions to all principals, the service is public. Any users who know the name of a public service can send a request to attach an endpoint. If the service does not require manual approval, attachments are automatically approved.
    */
   modifyVpcEndpointServicePermissions(params: EC2.Types.ModifyVpcEndpointServicePermissionsRequest, callback?: (err: AWSError, data: EC2.Types.ModifyVpcEndpointServicePermissionsResult) => void): Request<EC2.Types.ModifyVpcEndpointServicePermissionsResult, AWSError>;
   /**
-   * Modifies the permissions for your VPC endpoint service. You can add or remove permissions for service consumers (IAM users, IAM roles, and AWS accounts) to connect to your endpoint service. If you grant permissions to all principals, the service is public. Any users who know the name of a public service can send a request to attach an endpoint. If the service does not require manual approval, attachments are automatically approved.
+   * Modifies the permissions for your VPC endpoint service. You can add or remove permissions for service consumers (IAM users, IAM roles, and Amazon Web Services accounts) to connect to your endpoint service. If you grant permissions to all principals, the service is public. Any users who know the name of a public service can send a request to attach an endpoint. If the service does not require manual approval, attachments are automatically approved.
    */
   modifyVpcEndpointServicePermissions(callback?: (err: AWSError, data: EC2.Types.ModifyVpcEndpointServicePermissionsResult) => void): Request<EC2.Types.ModifyVpcEndpointServicePermissionsResult, AWSError>;
   /**
@@ -4240,7 +4240,7 @@ declare namespace EC2 {
      */
     PublicIpv4Pool?: String;
     /**
-     * The name of the unique set of Availability Zones, Local Zones, or Wavelength Zones from which AWS advertises IP addresses. 
+     * The name of the unique set of Availability Zones, Local Zones, or Wavelength Zones from which Amazon Web Services advertises IP addresses.
      */
     NetworkBorderGroup?: String;
     /**
@@ -4309,7 +4309,7 @@ declare namespace EC2 {
      */
     PublicIpv4Pool?: Ipv4PoolEc2Id;
     /**
-     *  A unique set of Availability Zones, Local Zones, or Wavelength Zones from which AWS advertises IP addresses. Use this parameter to limit the IP address to this location. IP addresses cannot move between network border groups. Use DescribeAvailabilityZones to view the network border groups.  You cannot use a network border group with EC2 Classic. If you attempt this operation on EC2 classic, you will receive an InvalidParameterCombination error. For more information, see Error Codes. 
+     *  A unique set of Availability Zones, Local Zones, or Wavelength Zones from which Amazon Web Services advertises IP addresses. Use this parameter to limit the IP address to this location. IP addresses cannot move between network border groups. Use DescribeAvailabilityZones to view the network border groups. You cannot use a network border group with EC2 Classic. If you attempt this operation on EC2 Classic, you receive an InvalidParameterCombination error.
      */
     NetworkBorderGroup?: String;
     /**
@@ -4339,7 +4339,7 @@ declare namespace EC2 {
      */
     PublicIpv4Pool?: String;
     /**
-     * The set of Availability Zones, Local Zones, or Wavelength Zones from which AWS advertises IP addresses.
+     * The set of Availability Zones, Local Zones, or Wavelength Zones from which Amazon Web Services advertises IP addresses.
      */
     NetworkBorderGroup?: String;
     /**
@@ -6425,11 +6425,11 @@ declare namespace EC2 {
      */
     AllocationId?: String;
     /**
-     * The AWS account ID.
+     * The Amazon Web Services account ID.
      */
     AwsAccountId?: String;
     /**
-     * The AWS service.
+     * The Amazon Web Services service.
      */
     AwsService?: String;
     /**
@@ -6608,7 +6608,7 @@ declare namespace EC2 {
      */
     SourceRegion: String;
     /**
-     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see Ensuring Idempotency.
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see Ensuring idempotency.
      */
     ClientToken?: String;
   }
@@ -7289,7 +7289,7 @@ declare namespace EC2 {
      */
     LogDestination?: String;
     /**
-     * The fields to include in the flow log record, in the order in which they should appear. For a list of available fields, see Flow log records. If you omit this parameter, the flow log is created using the default format. If you specify this parameter, you must specify at least one field. Specify the fields using the ${field-id} format, separated by spaces. For the CLI, use single quotation marks (' ') to surround the parameter value.
+     * The fields to include in the flow log record, in the order in which they should appear. For a list of available fields, see Flow log records. If you omit this parameter, the flow log is created using the default format. If you specify this parameter, you must specify at least one field. Specify the fields using the ${field-id} format, separated by spaces. For the CLI, surround this parameter value with single quotes on Linux or double quotes on Windows.
      */
     LogFormat?: String;
     /**
@@ -8310,7 +8310,7 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to Ensure Idempotency.
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to ensure idempotency.
      */
     ClientToken?: String;
   }
@@ -8320,7 +8320,7 @@ declare namespace EC2 {
      */
     TrafficMirrorFilter?: TrafficMirrorFilter;
     /**
-     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to Ensure Idempotency.
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to ensure idempotency.
      */
     ClientToken?: String;
   }
@@ -8330,7 +8330,7 @@ declare namespace EC2 {
      */
     TrafficMirrorFilterId: TrafficMirrorFilterId;
     /**
-     * The type of traffic (ingress | egress).
+     * The type of traffic.
      */
     TrafficDirection: TrafficDirection;
     /**
@@ -8338,7 +8338,7 @@ declare namespace EC2 {
      */
     RuleNumber: Integer;
     /**
-     * The action to take (accept | reject) on the filtered traffic.
+     * The action to take on the filtered traffic.
      */
     RuleAction: TrafficMirrorRuleAction;
     /**
@@ -8370,7 +8370,7 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to Ensure Idempotency.
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to ensure idempotency.
      */
     ClientToken?: String;
   }
@@ -8380,7 +8380,7 @@ declare namespace EC2 {
      */
     TrafficMirrorFilterRule?: TrafficMirrorFilterRule;
     /**
-     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to Ensure Idempotency.
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to ensure idempotency.
      */
     ClientToken?: String;
   }
@@ -8422,7 +8422,7 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to Ensure Idempotency.
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to ensure idempotency.
      */
     ClientToken?: String;
   }
@@ -8432,7 +8432,7 @@ declare namespace EC2 {
      */
     TrafficMirrorSession?: TrafficMirrorSession;
     /**
-     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to Ensure Idempotency.
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to ensure idempotency.
      */
     ClientToken?: String;
   }
@@ -8458,7 +8458,7 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to Ensure Idempotency.
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to ensure idempotency.
      */
     ClientToken?: String;
   }
@@ -8468,7 +8468,7 @@ declare namespace EC2 {
      */
     TrafficMirrorTarget?: TrafficMirrorTarget;
     /**
-     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to Ensure Idempotency.
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to ensure idempotency.
      */
     ClientToken?: String;
   }
@@ -8851,7 +8851,7 @@ declare namespace EC2 {
      */
     ConnectionEvents: ValueStringList;
     /**
-     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to Ensure Idempotency.
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to ensure idempotency.
      */
     ClientToken?: String;
   }
@@ -8899,7 +8899,7 @@ declare namespace EC2 {
      */
     SecurityGroupIds?: VpcEndpointSecurityGroupIdList;
     /**
-     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to Ensure Idempotency.
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to ensure idempotency.
      */
     ClientToken?: String;
     /**
@@ -8943,7 +8943,7 @@ declare namespace EC2 {
      */
     GatewayLoadBalancerArns?: ValueStringList;
     /**
-     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to Ensure Idempotency.
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to ensure idempotency.
      */
     ClientToken?: String;
     /**
@@ -11192,11 +11192,11 @@ declare namespace EC2 {
      */
     FpgaImageIds?: FpgaImageIdList;
     /**
-     * Filters the AFI by owner. Specify an AWS account ID, self (owner is the sender of the request), or an AWS owner alias (valid values are amazon | aws-marketplace).
+     * Filters the AFI by owner. Specify an Amazon Web Services account ID, self (owner is the sender of the request), or an Amazon Web Services owner alias (valid values are amazon | aws-marketplace).
      */
     Owners?: OwnerStringList;
     /**
-     * The filters.    create-time - The creation time of the AFI.    fpga-image-id - The FPGA image identifier (AFI ID).    fpga-image-global-id - The global FPGA image identifier (AGFI ID).    name - The name of the AFI.    owner-id - The AWS account ID of the AFI owner.    product-code - The product code.    shell-version - The version of the AWS Shell that was used to create the bitstream.    state - The state of the AFI (pending | failed | available | unavailable).    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.    update-time - The time of the most recent update.  
+     * The filters.    create-time - The creation time of the AFI.    fpga-image-id - The FPGA image identifier (AFI ID).    fpga-image-global-id - The global FPGA image identifier (AGFI ID).    name - The name of the AFI.    owner-id - The Amazon Web Services account ID of the AFI owner.    product-code - The product code.    shell-version - The version of the Amazon Web Services Shell that was used to create the bitstream.    state - The state of the AFI (pending | failed | available | unavailable).    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.    update-time - The time of the most recent update.  
      */
     Filters?: FilterList;
     /**
@@ -13901,7 +13901,7 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * One or more filters.    service-id - The ID of the service.    vpc-endpoint-owner - The AWS account number of the owner of the endpoint.    vpc-endpoint-state - The state of the endpoint (pendingAcceptance | pending | available | deleting | deleted | rejected | failed).    vpc-endpoint-id - The ID of the endpoint.  
+     * One or more filters.    service-id - The ID of the service.    vpc-endpoint-owner - The ID of the Amazon Web Services account ID that owns the endpoint.    vpc-endpoint-state - The state of the endpoint (pendingAcceptance | pending | available | deleting | deleted | rejected | failed).    vpc-endpoint-id - The ID of the endpoint.  
      */
     Filters?: FilterList;
     /**
@@ -15290,7 +15290,7 @@ declare namespace EC2 {
      */
     EventDescription?: String;
     /**
-     * The event. The following are the error events:    iamFleetRoleInvalid - The EC2 Fleet or Spot Fleet did not have the required permissions either to launch or terminate an instance.    spotFleetRequestConfigurationInvalid - The configuration is not valid. For more information, see the description of the event.    spotInstanceCountLimitExceeded - You've reached the limit on the number of Spot Instances that you can launch.   The following are the fleetRequestChange events:    active - The EC2 Fleet or Spot Fleet request has been validated and Amazon EC2 is attempting to maintain the target number of running Spot Instances.    cancelled - The EC2 Fleet or Spot Fleet request is canceled and has no running Spot Instances. The EC2 Fleet or Spot Fleet will be deleted two days after its instances were terminated.    cancelled_running - The EC2 Fleet or Spot Fleet request is canceled and does not launch additional Spot Instances. Existing Spot Instances continue to run until they are interrupted or terminated.    cancelled_terminating - The EC2 Fleet or Spot Fleet request is canceled and its Spot Instances are terminating.    expired - The EC2 Fleet or Spot Fleet request has expired. A subsequent event indicates that the instances were terminated, if the request was created with TerminateInstancesWithExpiration set.    modify_in_progress - A request to modify the EC2 Fleet or Spot Fleet request was accepted and is in progress.    modify_succeeded - The EC2 Fleet or Spot Fleet request was modified.    submitted - The EC2 Fleet or Spot Fleet request is being evaluated and Amazon EC2 is preparing to launch the target number of Spot Instances.   The following are the instanceChange events:    launched - A request was fulfilled and a new instance was launched.    terminated - An instance was terminated by the user.   The following are the Information events:    launchSpecTemporarilyBlacklisted - The configuration is not valid and several attempts to launch instances have failed. For more information, see the description of the event.    launchSpecUnusable - The price in a launch specification is not valid because it is below the Spot price or the Spot price is above the On-Demand price.    fleetProgressHalted - The price in every launch specification is not valid. A launch specification might become valid if the Spot price changes.  
+     * The event.  error events:    iamFleetRoleInvalid - The EC2 Fleet or Spot Fleet does not have the required permissions either to launch or terminate an instance.    allLaunchSpecsTemporarilyBlacklisted - None of the configurations are valid, and several attempts to launch instances have failed. For more information, see the description of the event.    spotInstanceCountLimitExceeded - You've reached the limit on the number of Spot Instances that you can launch.    spotFleetRequestConfigurationInvalid - The configuration is not valid. For more information, see the description of the event.    fleetRequestChange events:    active - The EC2 Fleet or Spot Fleet request has been validated and Amazon EC2 is attempting to maintain the target number of running instances.    cancelled - The EC2 Fleet or Spot Fleet request is canceled and has no running instances. The EC2 Fleet or Spot Fleet will be deleted two days after its instances are terminated.    cancelled_running - The EC2 Fleet or Spot Fleet request is canceled and does not launch additional instances. Its existing instances continue to run until they are interrupted or terminated. The request remains in this state until all instances are interrupted or terminated.    cancelled_terminating - The EC2 Fleet or Spot Fleet request is canceled and its instances are terminating. The request remains in this state until all instances are terminated.    expired - The EC2 Fleet or Spot Fleet request has expired. If the request was created with TerminateInstancesWithExpiration set, a subsequent terminated event indicates that the instances are terminated.    modify_in_progress - The EC2 Fleet or Spot Fleet request is being modified. The request remains in this state until the modification is fully processed.    modify_succeeded - The EC2 Fleet or Spot Fleet request was modified.    submitted - The EC2 Fleet or Spot Fleet request is being evaluated and Amazon EC2 is preparing to launch the target number of instances.    progress - The EC2 Fleet or Spot Fleet request is in the process of being fulfilled.    instanceChange events:    launched - A new instance was launched.    terminated - An instance was terminated by the user.    termination_notified - An instance termination notification was sent when a Spot Instance was terminated by Amazon EC2 during scale-down, when the target capacity of the fleet was modified down, for example, from a target capacity of 4 to a target capacity of 3.    Information events:    fleetProgressHalted - The price in every launch specification is not valid because it is below the Spot price (all the launch specifications have produced launchSpecUnusable events). A launch specification might become valid if the Spot price changes.    launchSpecTemporarilyBlacklisted - The configuration is not valid and several attempts to launch instances have failed. For more information, see the description of the event.    launchSpecUnusable - The price in a launch specification is not valid because it is below the Spot price.    registerWithLoadBalancersFailed - An attempt to register instances with load balancers failed. For more information, see the description of the event.  
      */
     EventSubType?: String;
     /**
@@ -16196,7 +16196,7 @@ declare namespace EC2 {
      */
     Description?: String;
     /**
-     * The version of the AWS Shell that was used to create the bitstream.
+     * The version of the Amazon Web Services Shell that was used to create the bitstream.
      */
     ShellVersion?: String;
     /**
@@ -16216,7 +16216,7 @@ declare namespace EC2 {
      */
     UpdateTime?: DateTime;
     /**
-     * The AWS account ID of the AFI owner.
+     * The ID of the Amazon Web Services account that owns the AFI.
      */
     OwnerId?: String;
     /**
@@ -17664,7 +17664,7 @@ declare namespace EC2 {
      */
     TagSpecifications?: TagSpecificationList;
     /**
-     * The usage operation value. For more information, see AMI billing information fields in the Amazon Elastic Compute Cloud User Guide.
+     * The usage operation value. For more information, see Licensing options in the VM Import/Export User Guide.
      */
     UsageOperation?: String;
     /**
@@ -18683,7 +18683,7 @@ declare namespace EC2 {
      */
     HttpPutResponseHopLimit?: Integer;
     /**
-     * This parameter enables or disables the HTTP metadata endpoint on your instances. If the parameter is not specified, the default state is enabled.  If you specify a value of disabled, you will not be able to access your instance metadata. 
+     * Enables or disables the HTTP metadata endpoint on your instances. If the parameter is not specified, the default state is enabled. If you specify a value of disabled, you will not be able to access your instance metadata.
      */
     HttpEndpoint?: InstanceMetadataEndpointState;
     /**
@@ -18705,11 +18705,11 @@ declare namespace EC2 {
      */
     HttpPutResponseHopLimit?: Integer;
     /**
-     * This parameter enables or disables the HTTP metadata endpoint on your instances. If the parameter is not specified, the default state is enabled.  If you specify a value of disabled, you will not be able to access your instance metadata. 
+     * Indicates whether the HTTP metadata endpoint on your instances is enabled or disabled.
      */
     HttpEndpoint?: InstanceMetadataEndpointState;
     /**
-     * Whether or not the IPv6 endpoint for the instance metadata service is enabled or disabled.
+     * Indicates whether the IPv6 endpoint for the instance metadata service is enabled or disabled.
      */
     HttpProtocolIpv6?: InstanceMetadataProtocolState;
   }
@@ -20301,7 +20301,7 @@ declare namespace EC2 {
   }
   export interface LoadPermission {
     /**
-     * The AWS account ID.
+     * The Amazon Web Services account ID.
      */
     UserId?: String;
     /**
@@ -20327,7 +20327,7 @@ declare namespace EC2 {
      */
     Group?: PermissionGroup;
     /**
-     * The AWS account ID.
+     * The Amazon Web Services account ID.
      */
     UserId?: String;
   }
@@ -20341,7 +20341,7 @@ declare namespace EC2 {
      */
     OutpostArn?: String;
     /**
-     * The AWS account ID that owns the local gateway.
+     * The ID of the Amazon Web Services account that owns the local gateway.
      */
     OwnerId?: String;
     /**
@@ -20382,7 +20382,7 @@ declare namespace EC2 {
      */
     LocalGatewayRouteTableArn?: ResourceArn;
     /**
-     * The AWS account ID that owns the local gateway route.
+     * The ID of the Amazon Web Services account that owns the local gateway route.
      */
     OwnerId?: String;
   }
@@ -20406,7 +20406,7 @@ declare namespace EC2 {
      */
     OutpostArn?: String;
     /**
-     * The AWS account ID that owns the local gateway route table.
+     * The ID of the Amazon Web Services account that owns the local gateway route table.
      */
     OwnerId?: String;
     /**
@@ -20442,7 +20442,7 @@ declare namespace EC2 {
      */
     LocalGatewayRouteTableArn?: ResourceArn;
     /**
-     * The AWS account ID that owns the local gateway virtual interface group association.
+     * The ID of the Amazon Web Services account that owns the local gateway virtual interface group association.
      */
     OwnerId?: String;
     /**
@@ -20479,7 +20479,7 @@ declare namespace EC2 {
      */
     VpcId?: String;
     /**
-     * The AWS account ID that owns the local gateway route table for the association.
+     * The ID of the Amazon Web Services account that owns the local gateway route table for the association.
      */
     OwnerId?: String;
     /**
@@ -20527,7 +20527,7 @@ declare namespace EC2 {
      */
     PeerBgpAsn?: Integer;
     /**
-     * The AWS account ID that owns the local gateway virtual interface.
+     * The ID of the Amazon Web Services account that owns the local gateway virtual interface.
      */
     OwnerId?: String;
     /**
@@ -20549,7 +20549,7 @@ declare namespace EC2 {
      */
     LocalGatewayId?: String;
     /**
-     * The AWS account ID that owns the local gateway virtual interface group.
+     * The ID of the Amazon Web Services account that owns the local gateway virtual interface group.
      */
     OwnerId?: String;
     /**
@@ -20655,7 +20655,7 @@ declare namespace EC2 {
      */
     GroupName: String;
     /**
-     * Indicates whether you are opted in to the Local Zone group or Wavelength Zone group. The only valid value is opted-in. You must contact AWS Support to opt out of a Local Zone group, or Wavelength Zone group.
+     * Indicates whether you are opted in to the Local Zone group or Wavelength Zone group. The only valid value is opted-in. You must contact Amazon Web Services Support to opt out of a Local Zone or Wavelength Zone group.
      */
     OptInStatus: ModifyAvailabilityZoneOptInStatus;
     /**
@@ -20872,7 +20872,7 @@ declare namespace EC2 {
      */
     OperationType?: OperationType;
     /**
-     * The AWS account IDs. This parameter is valid only when modifying the loadPermission attribute.
+     * The Amazon Web Services account IDs. This parameter is valid only when modifying the loadPermission attribute.
      */
     UserIds?: UserIdStringList;
     /**
@@ -21475,7 +21475,7 @@ declare namespace EC2 {
      */
     TrafficMirrorFilterRuleId: TrafficMirrorFilterRuleId;
     /**
-     * The type of traffic (ingress | egress) to assign to the rule.
+     * The type of traffic to assign to the rule.
      */
     TrafficDirection?: TrafficDirection;
     /**
@@ -23868,7 +23868,7 @@ declare namespace EC2 {
      */
     PublicIp?: String;
     /**
-     * The set of Availability Zones, Local Zones, or Wavelength Zones from which AWS advertises IP addresses. If you provide an incorrect network border group, you will receive an InvalidAddress.NotFound error. For more information, see Error Codes.  You cannot use a network border group with EC2 Classic. If you attempt this operation on EC2 classic, you will receive an InvalidParameterCombination error. For more information, see Error Codes. 
+     * The set of Availability Zones, Local Zones, or Wavelength Zones from which Amazon Web Services advertises IP addresses. If you provide an incorrect network border group, you receive an InvalidAddress.NotFound error. You cannot use a network border group with EC2 Classic. If you attempt this operation on EC2 classic, you receive an InvalidParameterCombination error.
      */
     NetworkBorderGroup?: String;
     /**
@@ -26216,7 +26216,7 @@ declare namespace EC2 {
      */
     AvailabilityZones?: ValueStringList;
     /**
-     * Indicates whether requests from other AWS accounts to create an endpoint to the service must first be accepted.
+     * Indicates whether requests from other Amazon Web Services accounts to create an endpoint to the service must first be accepted.
      */
     AcceptanceRequired?: Boolean;
     /**
@@ -26267,7 +26267,7 @@ declare namespace EC2 {
      */
     AvailabilityZones?: ValueStringList;
     /**
-     * The AWS account ID of the service owner.
+     * The Amazon Web Services account ID of the service owner.
      */
     Owner?: String;
     /**
@@ -27445,7 +27445,7 @@ declare namespace EC2 {
   export type TagList = Tag[];
   export interface TagSpecification {
     /**
-     * The type of resource to tag on creation. The possible values are: capacity-reservation | carrier-gateway | client-vpn-endpoint | customer-gateway | dedicated-host | dhcp-options | egress-only-internet-gateway | elastic-gpu | elastic-ip | export-image-task | export-instance-task | fleet | fpga-image | host-reservation | image | import-image-task | import-snapshot-task | instance | instance-event-window | internet-gateway | ipv4pool-ec2 | ipv6pool-ec2 | key-pair | launch-template | local-gateway-route-table-vpc-association | natgateway | network-acl | network-insights-analysis | network-insights-path | network-interface | placement-group | prefix-list | reserved-instances | route-table | security-group | security-group-rule | snapshot | spot-fleet-request | spot-instances-request | subnet | traffic-mirror-filter | traffic-mirror-session | traffic-mirror-target | transit-gateway | transit-gateway-attachment | transit-gateway-multicast-domain | transit-gateway-route-table | volume | vpc | vpc-endpoint | vpc-endpoint-service | vpc-flow-log | vpc-peering-connection | vpn-connection | vpn-gateway. To tag a resource after it has been created, see CreateTags.
+     * The type of resource to tag on creation.
      */
     ResourceType?: ResourceType;
     /**
@@ -29460,7 +29460,7 @@ declare namespace EC2 {
      */
     Tags?: TagList;
     /**
-     * The ID of the AWS account that owns the VPC endpoint.
+     * The ID of the Amazon Web Services account that owns the VPC endpoint.
      */
     OwnerId?: String;
     /**
@@ -29478,7 +29478,7 @@ declare namespace EC2 {
      */
     VpcEndpointId?: String;
     /**
-     * The AWS account ID of the owner of the VPC endpoint.
+     * The ID of the Amazon Web Services account that owns the VPC endpoint.
      */
     VpcEndpointOwner?: String;
     /**
@@ -29529,7 +29529,7 @@ declare namespace EC2 {
      */
     Ipv6CidrBlockState?: VpcCidrBlockState;
     /**
-     * The name of the unique set of Availability Zones, Local Zones, or Wavelength Zones from which AWS advertises IP addresses, for example, us-east-1-wl1-bos-wlz-1.
+     * The name of the unique set of Availability Zones, Local Zones, or Wavelength Zones from which Amazon Web Services advertises IP addresses, for example, us-east-1-wl1-bos-wlz-1.
      */
     NetworkBorderGroup?: String;
     /**
