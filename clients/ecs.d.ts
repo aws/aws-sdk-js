@@ -1209,7 +1209,7 @@ declare namespace ECS {
      */
     enableECSManagedTags?: Boolean;
     /**
-     * Specifies whether to propagate the tags from the task definition or the service to the tasks in the service. If no value is specified, the tags are not propagated. Tags can only be propagated to the tasks within the service during service creation. To add tags to a task after service creation, use the TagResource API action.
+     * Specifies whether to propagate the tags from the task definition or the service to the tasks in the service. If no value is specified, the tags are not propagated. Tags can only be propagated to the tasks within the service during service creation. To add tags to a task after service creation or task creation, use the TagResource API action.
      */
     propagateTags?: PropagateTags;
     /**
@@ -2856,7 +2856,7 @@ declare namespace ECS {
      */
     tags?: Tags;
     /**
-     * The family and revision (family:revision) or full ARN of the task definition to run. If a revision is not specified, the latest ACTIVE revision is used.
+     * The family and revision (family:revision) or full ARN of the task definition to run. If a revision is not specified, the latest ACTIVE revision is used. The full ARN value must match the value that you specified ias the Resource of the IAM principal's permissions policy. For example, if the Resource is arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName:*, the taskDefinition ARN value must be arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName.
      */
     taskDefinition: String;
   }
@@ -3580,7 +3580,7 @@ declare namespace ECS {
      */
     inferenceAcceleratorOverrides?: InferenceAcceleratorOverrides;
     /**
-     * The Amazon Resource Name (ARN) of the task execution IAM role override for the task.
+     * The Amazon Resource Name (ARN) of the task execution IAM role override for the task. For more information, see Amazon ECS task execution IAM role in the Amazon Elastic Container Service Developer Guide.
      */
     executionRoleArn?: String;
     /**
@@ -3588,7 +3588,7 @@ declare namespace ECS {
      */
     memory?: String;
     /**
-     * The Amazon Resource Name (ARN) of the IAM role that containers in this task can assume. All containers in this task are granted the permissions that are specified in this role.
+     * The Amazon Resource Name (ARN) of the IAM role that containers in this task can assume. All containers in this task are granted the permissions that are specified in this role. For more information, see IAM Role for Tasks in the Amazon Elastic Container Service Developer Guide.
      */
     taskRoleArn?: String;
     /**

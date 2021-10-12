@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1005.0-->
+<!--LATEST=2.1006.0-->
 <!--ENTRYINSERT-->
+
+## 2.1006.0
+* feature: CloudSearch: Adds an additional validation exception for Amazon CloudSearch configuration APIs for better error handling.
+* feature: EC2: EncryptionSupport for InstanceStorageInfo added to DescribeInstanceTypes API
+* feature: MediaTailor: MediaTailor now supports ad prefetching.
 
 ## 2.1005.0
 * feature: ELBv2: Enable support for ALB IPv6 Target Groups (IP Address Type)

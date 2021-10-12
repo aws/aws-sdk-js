@@ -28,6 +28,14 @@ declare class MediaTailor extends Service {
    */
   createChannel(callback?: (err: AWSError, data: MediaTailor.Types.CreateChannelResponse) => void): Request<MediaTailor.Types.CreateChannelResponse, AWSError>;
   /**
+   * Creates a new prefetch schedule for the specified playback configuration.
+   */
+  createPrefetchSchedule(params: MediaTailor.Types.CreatePrefetchScheduleRequest, callback?: (err: AWSError, data: MediaTailor.Types.CreatePrefetchScheduleResponse) => void): Request<MediaTailor.Types.CreatePrefetchScheduleResponse, AWSError>;
+  /**
+   * Creates a new prefetch schedule for the specified playback configuration.
+   */
+  createPrefetchSchedule(callback?: (err: AWSError, data: MediaTailor.Types.CreatePrefetchScheduleResponse) => void): Request<MediaTailor.Types.CreatePrefetchScheduleResponse, AWSError>;
+  /**
    * Creates a program.
    */
   createProgram(params: MediaTailor.Types.CreateProgramRequest, callback?: (err: AWSError, data: MediaTailor.Types.CreateProgramResponse) => void): Request<MediaTailor.Types.CreateProgramResponse, AWSError>;
@@ -75,6 +83,14 @@ declare class MediaTailor extends Service {
    * Deletes the playback configuration for the specified name.  
    */
   deletePlaybackConfiguration(callback?: (err: AWSError, data: MediaTailor.Types.DeletePlaybackConfigurationResponse) => void): Request<MediaTailor.Types.DeletePlaybackConfigurationResponse, AWSError>;
+  /**
+   * Deletes a prefetch schedule for a specific playback configuration. If you call DeletePrefetchSchedule on an expired prefetch schedule, MediaTailor returns an HTTP 404 status code.
+   */
+  deletePrefetchSchedule(params: MediaTailor.Types.DeletePrefetchScheduleRequest, callback?: (err: AWSError, data: MediaTailor.Types.DeletePrefetchScheduleResponse) => void): Request<MediaTailor.Types.DeletePrefetchScheduleResponse, AWSError>;
+  /**
+   * Deletes a prefetch schedule for a specific playback configuration. If you call DeletePrefetchSchedule on an expired prefetch schedule, MediaTailor returns an HTTP 404 status code.
+   */
+  deletePrefetchSchedule(callback?: (err: AWSError, data: MediaTailor.Types.DeletePrefetchScheduleResponse) => void): Request<MediaTailor.Types.DeletePrefetchScheduleResponse, AWSError>;
   /**
    * Deletes a specific program on a specific channel.
    */
@@ -156,6 +172,14 @@ declare class MediaTailor extends Service {
    */
   getPlaybackConfiguration(callback?: (err: AWSError, data: MediaTailor.Types.GetPlaybackConfigurationResponse) => void): Request<MediaTailor.Types.GetPlaybackConfigurationResponse, AWSError>;
   /**
+   * Returns information about the prefetch schedule for a specific playback configuration. If you call GetPrefetchSchedule on an expired prefetch schedule, MediaTailor returns an HTTP 404 status code.
+   */
+  getPrefetchSchedule(params: MediaTailor.Types.GetPrefetchScheduleRequest, callback?: (err: AWSError, data: MediaTailor.Types.GetPrefetchScheduleResponse) => void): Request<MediaTailor.Types.GetPrefetchScheduleResponse, AWSError>;
+  /**
+   * Returns information about the prefetch schedule for a specific playback configuration. If you call GetPrefetchSchedule on an expired prefetch schedule, MediaTailor returns an HTTP 404 status code.
+   */
+  getPrefetchSchedule(callback?: (err: AWSError, data: MediaTailor.Types.GetPrefetchScheduleResponse) => void): Request<MediaTailor.Types.GetPrefetchScheduleResponse, AWSError>;
+  /**
    * Returns a list of alerts for the given resource.
    */
   listAlerts(params: MediaTailor.Types.ListAlertsRequest, callback?: (err: AWSError, data: MediaTailor.Types.ListAlertsResponse) => void): Request<MediaTailor.Types.ListAlertsResponse, AWSError>;
@@ -179,6 +203,14 @@ declare class MediaTailor extends Service {
    * Returns a list of the playback configurations defined in AWS Elemental MediaTailor. You can specify a maximum number of configurations to return at a time. The default maximum is 50. Results are returned in pagefuls. If MediaTailor has more configurations than the specified maximum, it provides parameters in the response that you can use to retrieve the next pageful.  
    */
   listPlaybackConfigurations(callback?: (err: AWSError, data: MediaTailor.Types.ListPlaybackConfigurationsResponse) => void): Request<MediaTailor.Types.ListPlaybackConfigurationsResponse, AWSError>;
+  /**
+   * Creates a new prefetch schedule.
+   */
+  listPrefetchSchedules(params: MediaTailor.Types.ListPrefetchSchedulesRequest, callback?: (err: AWSError, data: MediaTailor.Types.ListPrefetchSchedulesResponse) => void): Request<MediaTailor.Types.ListPrefetchSchedulesResponse, AWSError>;
+  /**
+   * Creates a new prefetch schedule.
+   */
+  listPrefetchSchedules(callback?: (err: AWSError, data: MediaTailor.Types.ListPrefetchSchedulesResponse) => void): Request<MediaTailor.Types.ListPrefetchSchedulesResponse, AWSError>;
   /**
    * Retrieves a list of source locations.
    */
@@ -334,6 +366,16 @@ declare namespace MediaTailor {
      */
     ResourceArn: __string;
   }
+  export interface AvailMatchingCriteria {
+    /**
+     * The dynamic variable(s) that MediaTailor should use as avail matching criteria. MediaTailor only places the prefetched ads into the avail if the avail matches the criteria defined by the dynamic variable. For information about dynamic variables, see Using dynamic ad variables in the MediaTailor User Guide. You can include up to 100 dynamic variables.
+     */
+    DynamicVariable: __string;
+    /**
+     * For the DynamicVariable specified in AvailMatchingCriteria, the Operator that is used for the comparison.
+     */
+    Operator: Operator;
+  }
   export interface AvailSuppression {
     /**
      * Sets the ad suppression mode. By default, ad suppression is off and all ad breaks are filled with ads or slate. When Mode is set to BEHIND_LIVE_EDGE, ad suppression is active and MediaTailor won't fill ad breaks on or behind the ad suppression Value time in the manifest lookback window.
@@ -484,6 +526,54 @@ declare namespace MediaTailor {
      * The tags assigned to the channel.
      */
     Tags?: __mapOf__string;
+  }
+  export interface CreatePrefetchScheduleRequest {
+    /**
+     * The configuration settings for MediaTailor's consumption of the prefetched ads from the ad decision server. Each consumption configuration contains an end time and an optional start time that define the consumption window. Prefetch schedules automatically expire no earlier than seven days after the end time.
+     */
+    Consumption: PrefetchConsumption;
+    /**
+     * The identifier for the playback configuration.
+     */
+    Name: __string;
+    /**
+     * The name of the playback configuration.
+     */
+    PlaybackConfigurationName: __string;
+    /**
+     * The configuration settings for retrieval of prefetched ads from the ad decision server. Only one set of prefetched ads will be retrieved and subsequently consumed for each ad break.
+     */
+    Retrieval: PrefetchRetrieval;
+    /**
+     * An optional stream identifier that MediaTailor uses to prefetch ads for multiple streams that use the same playback configuration. If StreamId is specified, MediaTailor returns all of the prefetch schedules with an exact match on StreamId. If not specified, MediaTailor returns all of the prefetch schedules for the playback configuration, regardless of StreamId.
+     */
+    StreamId?: __string;
+  }
+  export interface CreatePrefetchScheduleResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the prefetch schedule.
+     */
+    Arn?: __string;
+    /**
+     * Consumption settings determine how, and when, MediaTailor places the prefetched ads into ad breaks. Ad consumption occurs within a span of time that you define, called a consumption window. You can designate which ad breaks that MediaTailor fills with prefetch ads by setting avail matching criteria.
+     */
+    Consumption?: PrefetchConsumption;
+    /**
+     * The name of the prefetch schedule. The name must be unique among all prefetch schedules that are associated with the specified playback configuration.
+     */
+    Name?: __string;
+    /**
+     * The name of the playback configuration to create the prefetch schedule for.
+     */
+    PlaybackConfigurationName?: __string;
+    /**
+     * A complex type that contains settings for prefetch retrieval from the ad decision server (ADS).
+     */
+    Retrieval?: PrefetchRetrieval;
+    /**
+     * An optional stream identifier that you can specify in order to prefetch for multiple streams that use the same playback configuration.
+     */
+    StreamId?: __string;
   }
   export interface CreateProgramRequest {
     /**
@@ -720,6 +810,18 @@ declare namespace MediaTailor {
     Name: __string;
   }
   export interface DeletePlaybackConfigurationResponse {
+  }
+  export interface DeletePrefetchScheduleRequest {
+    /**
+     * The identifier for the playback configuration.
+     */
+    Name: __string;
+    /**
+     * The name of the playback configuration.
+     */
+    PlaybackConfigurationName: __string;
+  }
+  export interface DeletePrefetchScheduleResponse {
   }
   export interface DeleteProgramRequest {
     /**
@@ -1045,6 +1147,42 @@ declare namespace MediaTailor {
      */
     VideoContentSourceUrl?: __string;
   }
+  export interface GetPrefetchScheduleRequest {
+    /**
+     * The identifier for the playback configuration.
+     */
+    Name: __string;
+    /**
+     * The name of the playback configuration.
+     */
+    PlaybackConfigurationName: __string;
+  }
+  export interface GetPrefetchScheduleResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the prefetch schedule.
+     */
+    Arn?: __string;
+    /**
+     * Consumption settings determine how, and when, MediaTailor places the prefetched ads into ad breaks. Ad consumption occurs within a span of time that you define, called a consumption window. You can designate which ad breaks that MediaTailor fills with prefetch ads by setting avail matching criteria.
+     */
+    Consumption?: PrefetchConsumption;
+    /**
+     * The name of the prefetch schedule. The name must be unique among all prefetch schedules that are associated with the specified playback configuration.
+     */
+    Name?: __string;
+    /**
+     * The name of the playback configuration to create the prefetch schedule for.
+     */
+    PlaybackConfigurationName?: __string;
+    /**
+     * A complex type that contains settings for prefetch retrieval from the ad decision server (ADS).
+     */
+    Retrieval?: PrefetchRetrieval;
+    /**
+     * An optional stream identifier that you can specify in order to prefetch for multiple streams that use the same playback configuration.
+     */
+    StreamId?: __string;
+  }
   export interface HlsConfiguration {
     /**
      * The URL that is used to initiate a playback session for devices that support Apple HLS. The session uses server-side reporting.
@@ -1142,6 +1280,34 @@ declare namespace MediaTailor {
      */
     NextToken?: __string;
   }
+  export interface ListPrefetchSchedulesRequest {
+    /**
+     * The maximum number of prefetch schedules that you want MediaTailor to return in response to the current request. If the playback configuration has more than MaxResults prefetch schedules, use the value of NextToken in the response to get the next page of results.
+     */
+    MaxResults?: __integerMin1Max100;
+    /**
+     * (Optional) If the playback configuration has more than MaxResults prefetch schedules, use NextToken to get the second and subsequent pages of results. For the first ListPrefetchSchedulesRequest request, omit this value. For the second and subsequent requests, get the value of NextToken from the previous response and specify that value for NextToken in the request. If the previous response didn't include a NextToken element, there are no more prefetch schedules to get.
+     */
+    NextToken?: __string;
+    /**
+     * The name of the playback configuration.
+     */
+    PlaybackConfigurationName: __string;
+    /**
+     * An optional filtering parameter whereby MediaTailor filters the prefetch schedules to include only specific streams.
+     */
+    StreamId?: __string;
+  }
+  export interface ListPrefetchSchedulesResponse {
+    /**
+     * Lists the prefetch schedules. An empty Items list doesn't mean there aren't more items to fetch, just that that page was empty.
+     */
+    Items?: __listOfPrefetchSchedule;
+    /**
+     * The value that you will use forNextToken in the next ListPrefetchSchedulesRequest request.
+     */
+    NextToken?: __string;
+  }
   export interface ListSourceLocationsRequest {
     /**
      * Upper bound on number of records to return. The maximum number of results is 100.
@@ -1223,6 +1389,7 @@ declare namespace MediaTailor {
   export type MaxResults = number;
   export type MessageType = "SPLICE_INSERT"|string;
   export type Mode = "OFF"|"BEHIND_LIVE_EDGE"|string;
+  export type Operator = "EQUALS"|string;
   export type OriginManifestType = "SINGLE_PERIOD"|"MULTI_PERIOD"|string;
   export interface PlaybackConfiguration {
     /**
@@ -1303,6 +1470,60 @@ declare namespace MediaTailor {
     VideoContentSourceUrl?: __string;
   }
   export type PlaybackMode = "LOOP"|"LINEAR"|string;
+  export interface PrefetchConsumption {
+    /**
+     * If you only want MediaTailor to insert prefetched ads into avails (ad breaks) that match specific dynamic variables, such as scte.event_id, set the avail matching criteria.
+     */
+    AvailMatchingCriteria?: __listOfAvailMatchingCriteria;
+    /**
+     * The time when MediaTailor no longer considers the prefetched ads for use in an ad break. MediaTailor automatically deletes prefetch schedules no less than seven days after the end time. If you'd like to manually delete the prefetch schedule, you can call DeletePrefetchSchedule.
+     */
+    EndTime: __timestampUnix;
+    /**
+     * The time when prefetched ads are considered for use in an ad break. If you don't specify StartTime, the prefetched ads are available after MediaTailor retrives them from the ad decision server.
+     */
+    StartTime?: __timestampUnix;
+  }
+  export interface PrefetchRetrieval {
+    /**
+     * The dynamic variables to use for substitution during prefetch requests to the ad decision server (ADS). You intially configure dynamic variables for the ADS URL when you set up your playback configuration. When you specify DynamicVariables for prefetch retrieval, MediaTailor includes the dynamic variables in the request to the ADS.
+     */
+    DynamicVariables?: __mapOf__string;
+    /**
+     * The time when prefetch retrieval ends for the ad break. Prefetching will be attempted for manifest requests that occur at or before this time.
+     */
+    EndTime: __timestampUnix;
+    /**
+     * The time when prefetch retrievals can start for this break. Ad prefetching will be attempted for manifest requests that occur at or after this time. Defaults to the current time. If not specified, the prefetch retrieval starts as soon as possible.
+     */
+    StartTime?: __timestampUnix;
+  }
+  export interface PrefetchSchedule {
+    /**
+     * The Amazon Resource Name (ARN) of the prefetch schedule.
+     */
+    Arn: __string;
+    /**
+     * Consumption settings determine how, and when, MediaTailor places the prefetched ads into ad breaks. Ad consumption occurs within a span of time that you define, called a consumption window. You can designate which ad breaks that MediaTailor fills with prefetch ads by setting avail matching criteria.
+     */
+    Consumption: PrefetchConsumption;
+    /**
+     * The name of the prefetch schedule. The name must be unique among all prefetch schedules that are associated with the specified playback configuration.
+     */
+    Name: __string;
+    /**
+     * The name of the playback configuration to create the prefetch schedule for.
+     */
+    PlaybackConfigurationName: __string;
+    /**
+     * A complex type that contains settings for prefetch retrieval from the ad decision server (ADS).
+     */
+    Retrieval: PrefetchRetrieval;
+    /**
+     * An optional stream identifier that you can specify in order to prefetch for multiple streams that use the same playback configuration.
+     */
+    StreamId?: __string;
+  }
   export interface PutChannelPolicyRequest {
     /**
      * The identifier for the channel you are working on.
@@ -1865,10 +2086,13 @@ declare namespace MediaTailor {
   export type __boolean = boolean;
   export type __integer = number;
   export type __integerMin1 = number;
+  export type __integerMin1Max100 = number;
   export type __listOfAdBreak = AdBreak[];
   export type __listOfAlert = Alert[];
+  export type __listOfAvailMatchingCriteria = AvailMatchingCriteria[];
   export type __listOfChannel = Channel[];
   export type __listOfPlaybackConfiguration = PlaybackConfiguration[];
+  export type __listOfPrefetchSchedule = PrefetchSchedule[];
   export type __listOfScheduleAdBreak = ScheduleAdBreak[];
   export type __listOfScheduleEntry = ScheduleEntry[];
   export type __listOfSourceLocation = SourceLocation[];
