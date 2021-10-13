@@ -32,7 +32,7 @@
           "shape": "InternalServerError"
         }
       ],
-      "documentation": "<p>Activates the gateway you previously deployed on your host. In the activation process, you specify information such as the Region that you want to use for storing snapshots or tapes, the time zone for scheduled snapshots the gateway snapshot schedule window, an activation key, and a name for your gateway. The activation process also associates your gateway with your account. For more information, see <a>UpdateGatewayInformation</a>.</p> <note> <p>You must turn on the gateway VM before you can activate your gateway.</p> </note>"
+      "documentation": "<p>Activates the gateway you previously deployed on your host. In the activation process, you specify information such as the Amazon Web Services Region that you want to use for storing snapshots or tapes, the time zone for scheduled snapshots the gateway snapshot schedule window, an activation key, and a name for your gateway. The activation process also associates your gateway with your account. For more information, see <a>UpdateGatewayInformation</a>.</p> <note> <p>You must turn on the gateway VM before you can activate your gateway.</p> </note>"
     },
     "AddCache": {
       "name": "AddCache",
@@ -274,7 +274,7 @@
           "shape": "InternalServerError"
         }
       ],
-      "documentation": "<p>Creates a Network File System (NFS) file share on an existing S3 File Gateway. In Storage Gateway, a file share is a file system mount point backed by Amazon S3 cloud storage. Storage Gateway exposes file shares using an NFS interface. This operation is only supported for S3 File Gateways.</p> <important> <p>S3 File gateway requires Security Token Service (STS) to be activated to enable you to create a file share. Make sure STS is activated in the Region you are creating your S3 File Gateway in. If STS is not activated in the Region, activate it. For information about how to activate STS, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html\">Activating and deactivating STS in an Region</a> in the <i>Identity and Access Management User Guide</i>.</p> <p>S3 File Gateways do not support creating hard or symbolic links on a file share.</p> </important>"
+      "documentation": "<p>Creates a Network File System (NFS) file share on an existing S3 File Gateway. In Storage Gateway, a file share is a file system mount point backed by Amazon S3 cloud storage. Storage Gateway exposes file shares using an NFS interface. This operation is only supported for S3 File Gateways.</p> <important> <p>S3 File gateway requires Security Token Service (Amazon Web Services STS) to be activated to enable you to create a file share. Make sure Amazon Web Services STS is activated in the Amazon Web Services Region you are creating your S3 File Gateway in. If Amazon Web Services STS is not activated in the Amazon Web Services Region, activate it. For information about how to activate Amazon Web Services STS, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html\">Activating and deactivating Amazon Web Services STS in an Amazon Web Services Region</a> in the <i>Identity and Access Management User Guide</i>.</p> <p>S3 File Gateways do not support creating hard or symbolic links on a file share.</p> </important>"
     },
     "CreateSMBFileShare": {
       "name": "CreateSMBFileShare",
@@ -296,7 +296,7 @@
           "shape": "InternalServerError"
         }
       ],
-      "documentation": "<p>Creates a Server Message Block (SMB) file share on an existing S3 File Gateway. In Storage Gateway, a file share is a file system mount point backed by Amazon S3 cloud storage. Storage Gateway exposes file shares using an SMB interface. This operation is only supported for S3 File Gateways.</p> <important> <p>S3 File Gateways require Security Token Service (STS) to be activated to enable you to create a file share. Make sure that STS is activated in the Region you are creating your S3 File Gateway in. If STS is not activated in this Region, activate it. For information about how to activate STS, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html\">Activating and deactivating STS in an Region</a> in the <i>Identity and Access Management User Guide</i>.</p> <p>File gateways don't support creating hard or symbolic links on a file share.</p> </important>"
+      "documentation": "<p>Creates a Server Message Block (SMB) file share on an existing S3 File Gateway. In Storage Gateway, a file share is a file system mount point backed by Amazon S3 cloud storage. Storage Gateway exposes file shares using an SMB interface. This operation is only supported for S3 File Gateways.</p> <important> <p>S3 File Gateways require Security Token Service (Amazon Web Services STS) to be activated to enable you to create a file share. Make sure that Amazon Web Services STS is activated in the Amazon Web Services Region you are creating your S3 File Gateway in. If Amazon Web Services STS is not activated in this Amazon Web Services Region, activate it. For information about how to activate Amazon Web Services STS, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html\">Activating and deactivating Amazon Web Services STS in an Amazon Web Services Region</a> in the <i>Identity and Access Management User Guide</i>.</p> <p>File gateways don't support creating hard or symbolic links on a file share.</p> </important>"
     },
     "CreateSnapshot": {
       "name": "CreateSnapshot",
@@ -1270,7 +1270,7 @@
           "shape": "InternalServerError"
         }
       ],
-      "documentation": "<p>Lists gateways owned by an account in an Region specified in the request. The returned list is ordered by gateway Amazon Resource Name (ARN).</p> <p>By default, the operation returns a maximum of 100 gateways. This operation supports pagination that allows you to optionally reduce the number of gateways returned in a response.</p> <p>If you have more gateways than are returned in a response (that is, the response returns only a truncated list of your gateways), the response contains a marker that you can specify in your next request to fetch the next page of gateways.</p>"
+      "documentation": "<p>Lists gateways owned by an Amazon Web Services account in an Amazon Web Services Region specified in the request. The returned list is ordered by gateway Amazon Resource Name (ARN).</p> <p>By default, the operation returns a maximum of 100 gateways. This operation supports pagination that allows you to optionally reduce the number of gateways returned in a response.</p> <p>If you have more gateways than are returned in a response (that is, the response returns only a truncated list of your gateways), the response contains a marker that you can specify in your next request to fetch the next page of gateways.</p>"
     },
     "ListLocalDisks": {
       "name": "ListLocalDisks",
@@ -1886,7 +1886,7 @@
           "shape": "InternalServerError"
         }
       ],
-      "documentation": "<p>Updates a Server Message Block (SMB) file share. This operation is only supported for S3 File Gateways.</p> <note> <p>To leave a file share field unchanged, set the corresponding input field to null.</p> </note> <important> <p>File gateways require Security Token Service (STS) to be activated to enable you to create a file share. Make sure that STS is activated in the Region you are creating your file gateway in. If STS is not activated in this Region, activate it. For information about how to activate STS, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html\">Activating and deactivating STS in an Region</a> in the <i>Identity and Access Management User Guide</i>.</p> <p>File gateways don't support creating hard or symbolic links on a file share.</p> </important>"
+      "documentation": "<p>Updates a Server Message Block (SMB) file share. This operation is only supported for S3 File Gateways.</p> <note> <p>To leave a file share field unchanged, set the corresponding input field to null.</p> </note> <important> <p>File gateways require Security Token Service (Amazon Web Services STS) to be activated to enable you to create a file share. Make sure that Amazon Web Services STS is activated in the Amazon Web Services Region you are creating your file gateway in. If Amazon Web Services STS is not activated in this Amazon Web Services Region, activate it. For information about how to activate Amazon Web Services STS, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html\">Activating and deactivating Amazon Web Services STS in an Amazon Web Services Region</a> in the <i>Identity and Access Management User Guide</i>.</p> <p>File gateways don't support creating hard or symbolic links on a file share.</p> </important>"
     },
     "UpdateSMBFileShareVisibility": {
       "name": "UpdateSMBFileShareVisibility",
@@ -1909,6 +1909,28 @@
         }
       ],
       "documentation": "<p>Controls whether the shares on an S3 File Gateway are visible in a net view or browse list. The operation is only supported for S3 File Gateways.</p>"
+    },
+    "UpdateSMBLocalGroups": {
+      "name": "UpdateSMBLocalGroups",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateSMBLocalGroupsInput"
+      },
+      "output": {
+        "shape": "UpdateSMBLocalGroupsOutput"
+      },
+      "errors": [
+        {
+          "shape": "InvalidGatewayRequestException"
+        },
+        {
+          "shape": "InternalServerError"
+        }
+      ],
+      "documentation": "<p>Updates the list of Active Directory users and groups that have special permissions for SMB file shares on the gateway.</p>"
     },
     "UpdateSMBSecurityStrategy": {
       "name": "UpdateSMBSecurityStrategy",
@@ -2001,7 +2023,7 @@
         },
         "GatewayRegion": {
           "shape": "RegionId",
-          "documentation": "<p>A value that indicates the Region where you want to store your data. The gateway Region specified must be the same Region as the Region in your <code>Host</code> header in the request. For more information about available Regions and endpoints for Storage Gateway, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/sg.html\"> Storage Gateway endpoints and quotas</a> in the <i>Amazon Web Services General Reference</i>.</p> <p>Valid Values: See <a href=\"https://docs.aws.amazon.com/general/latest/gr/sg.html\"> Storage Gateway endpoints and quotas</a> in the <i>Amazon Web Services General Reference</i>. </p>"
+          "documentation": "<p>A value that indicates the Amazon Web Services Region where you want to store your data. The gateway Amazon Web Services Region specified must be the same Amazon Web Services Region as the Amazon Web Services Region in your <code>Host</code> header in the request. For more information about available Amazon Web Services Regions and endpoints for Storage Gateway, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/sg.html\"> Storage Gateway endpoints and quotas</a> in the <i>Amazon Web Services General Reference</i>.</p> <p>Valid Values: See <a href=\"https://docs.aws.amazon.com/general/latest/gr/sg.html\"> Storage Gateway endpoints and quotas</a> in the <i>Amazon Web Services General Reference</i>. </p>"
         },
         "GatewayType": {
           "shape": "GatewayType",
@@ -2029,7 +2051,7 @@
           "shape": "GatewayARN"
         }
       },
-      "documentation": "<p>Storage Gateway returns the Amazon Resource Name (ARN) of the activated gateway. It is a string made of information such as your account, gateway name, and Region. This ARN is used to reference the gateway in other API operations as well as resource-based authorization.</p> <note> <p>For gateways activated prior to September 02, 2015, the gateway ARN contains the gateway name rather than the gateway ID. Changing the name of the gateway has no effect on the gateway ARN.</p> </note>"
+      "documentation": "<p>Storage Gateway returns the Amazon Resource Name (ARN) of the activated gateway. It is a string made of information such as your account, gateway name, and Amazon Web Services Region. This ARN is used to reference the gateway in other API operations as well as resource-based authorization.</p> <note> <p>For gateways activated prior to September 02, 2015, the gateway ARN contains the gateway name rather than the gateway ID. Changing the name of the gateway has no effect on the gateway ARN.</p> </note>"
     },
     "ActivationKey": {
       "type": "string",
@@ -2701,7 +2723,7 @@
         },
         "LocationARN": {
           "shape": "LocationARN",
-          "documentation": "<p>The ARN of the backend storage used for storing file data. A prefix name can be added to the S3 bucket name. It must end with a \"/\".</p> <note> <p>You can specify a bucket attached to an access point using a complete ARN that includes the bucket region as shown:</p> <p> <code>arn:aws:s3:<i>region</i>:<i>account-id</i>:accesspoint/<i>access-point-name</i> </code> </p> <p>If you specify a bucket attached to an access point, the bucket policy must be configured to delegate access control to the access point. For information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-policies.html#access-points-delegating-control\">Delegating access control to access points</a> in the <i>Amazon S3 User Guide</i>.</p> </note>"
+          "documentation": "<p>A custom ARN for the backend storage used for storing data for file shares. It includes a resource ARN with an optional prefix concatenation. The prefix must end with a forward slash (/).</p> <note> <p>You can specify LocationARN as a bucket ARN, access point ARN or access point alias, as shown in the following examples.</p> <p>Bucket ARN:</p> <p> <code>arn:aws:s3:::my-bucket/prefix/</code> </p> <p>Access point ARN:</p> <p> <code>arn:aws:s3:region:account-id:accesspoint/access-point-name/prefix/</code> </p> <p>If you specify an access point, the bucket policy must be configured to delegate access control to the access point. For information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-policies.html#access-points-delegating-control\">Delegating access control to access points</a> in the <i>Amazon S3 User Guide</i>.</p> <p>Access point alias:</p> <p> <code>test-ap-ab123cdef4gehijklmn5opqrstuvuse1a-s3alias</code> </p> </note>"
         },
         "DefaultStorageClass": {
           "shape": "StorageClass",
@@ -2737,7 +2759,7 @@
         },
         "FileShareName": {
           "shape": "FileShareName",
-          "documentation": "<p>The name of the file share. Optional.</p> <note> <p> <code>FileShareName</code> must be set if an S3 prefix name is set in <code>LocationARN</code>.</p> </note>"
+          "documentation": "<p>The name of the file share. Optional.</p> <note> <p> <code>FileShareName</code> must be set if an S3 prefix name is set in <code>LocationARN</code>, or if an access point or access point alias is used.</p> </note>"
         },
         "CacheAttributes": {
           "shape": "CacheAttributes",
@@ -2754,6 +2776,10 @@
         "BucketRegion": {
           "shape": "RegionId",
           "documentation": "<p>Specifies the Region of the S3 bucket where the NFS file share stores files.</p> <note> <p>This parameter is required for NFS file shares that connect to Amazon S3 through a VPC endpoint, a VPC access point, or an access point alias that points to a VPC access point.</p> </note>"
+        },
+        "AuditDestinationARN": {
+          "shape": "AuditDestinationARN",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the storage used for audit logs.</p>"
         }
       },
       "documentation": "<p>CreateNFSFileShareInput</p>"
@@ -2799,7 +2825,7 @@
         },
         "LocationARN": {
           "shape": "LocationARN",
-          "documentation": "<p>The ARN of the backend storage used for storing file data. A prefix name can be added to the S3 bucket name. It must end with a \"/\".</p> <note> <p>You can specify a bucket attached to an access point using a complete ARN that includes the bucket region as shown:</p> <p> <code>arn:aws:s3:<i>region</i>:<i>account-id</i>:accesspoint/<i>access-point-name</i> </code> </p> <p>If you specify a bucket attached to an access point, the bucket policy must be configured to delegate access control to the access point. For information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-policies.html#access-points-delegating-control\">Delegating access control to access points</a> in the <i>Amazon S3 User Guide</i>.</p> </note>"
+          "documentation": "<p>A custom ARN for the backend storage used for storing data for file shares. It includes a resource ARN with an optional prefix concatenation. The prefix must end with a forward slash (/).</p> <note> <p>You can specify LocationARN as a bucket ARN, access point ARN or access point alias, as shown in the following examples.</p> <p>Bucket ARN:</p> <p> <code>arn:aws:s3:::my-bucket/prefix/</code> </p> <p>Access point ARN:</p> <p> <code>arn:aws:s3:region:account-id:accesspoint/access-point-name/prefix/</code> </p> <p>If you specify an access point, the bucket policy must be configured to delegate access control to the access point. For information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-policies.html#access-points-delegating-control\">Delegating access control to access points</a> in the <i>Amazon S3 User Guide</i>.</p> <p>Access point alias:</p> <p> <code>test-ap-ab123cdef4gehijklmn5opqrstuvuse1a-s3alias</code> </p> </note>"
         },
         "DefaultStorageClass": {
           "shape": "StorageClass",
@@ -2859,7 +2885,7 @@
         },
         "FileShareName": {
           "shape": "FileShareName",
-          "documentation": "<p>The name of the file share. Optional.</p> <note> <p> <code>FileShareName</code> must be set if an S3 prefix name is set in <code>LocationARN</code>.</p> </note>"
+          "documentation": "<p>The name of the file share. Optional.</p> <note> <p> <code>FileShareName</code> must be set if an S3 prefix name is set in <code>LocationARN</code>, or if an access point or access point alias is used.</p> </note>"
         },
         "CacheAttributes": {
           "shape": "CacheAttributes",
@@ -3051,7 +3077,7 @@
         },
         "RetentionLockType": {
           "shape": "RetentionLockType",
-          "documentation": "<p>Tape retention lock can be configured in two modes. When configured in governance mode, accounts with specific IAM permissions are authorized to remove the tape retention lock from archived virtual tapes. When configured in compliance mode, the tape retention lock cannot be removed by any user, including the root account.</p>"
+          "documentation": "<p>Tape retention lock can be configured in two modes. When configured in governance mode, Amazon Web Services accounts with specific IAM permissions are authorized to remove the tape retention lock from archived virtual tapes. When configured in compliance mode, the tape retention lock cannot be removed by any user, including the root Amazon Web Services account.</p>"
         },
         "RetentionLockTimeInDays": {
           "shape": "RetentionLockTimeInDays",
@@ -3068,7 +3094,7 @@
       "members": {
         "PoolARN": {
           "shape": "PoolARN",
-          "documentation": "<p>The unique Amazon Resource Name (ARN) that represents the custom tape pool. Use the <a>ListTapePools</a> operation to return a list of tape pools for your account and Region.</p>"
+          "documentation": "<p>The unique Amazon Resource Name (ARN) that represents the custom tape pool. Use the <a>ListTapePools</a> operation to return a list of tape pools for your account and Amazon Web Services Region.</p>"
         }
       }
     },
@@ -3082,7 +3108,7 @@
       "members": {
         "GatewayARN": {
           "shape": "GatewayARN",
-          "documentation": "<p>The unique Amazon Resource Name (ARN) that represents the gateway to associate the virtual tape with. Use the <a>ListGateways</a> operation to return a list of gateways for your account and Region.</p>"
+          "documentation": "<p>The unique Amazon Resource Name (ARN) that represents the gateway to associate the virtual tape with. Use the <a>ListGateways</a> operation to return a list of gateways for your account and Amazon Web Services Region.</p>"
         },
         "TapeSizeInBytes": {
           "shape": "TapeSize",
@@ -3137,7 +3163,7 @@
       "members": {
         "GatewayARN": {
           "shape": "GatewayARN",
-          "documentation": "<p>The unique Amazon Resource Name (ARN) that represents the gateway to associate the virtual tapes with. Use the <a>ListGateways</a> operation to return a list of gateways for your account and Region.</p>"
+          "documentation": "<p>The unique Amazon Resource Name (ARN) that represents the gateway to associate the virtual tapes with. Use the <a>ListGateways</a> operation to return a list of gateways for your account and Amazon Web Services Region.</p>"
         },
         "TapeSizeInBytes": {
           "shape": "TapeSize",
@@ -3397,7 +3423,7 @@
       "members": {
         "GatewayARN": {
           "shape": "GatewayARN",
-          "documentation": "<p>The unique Amazon Resource Name (ARN) of the gateway that the virtual tape to delete is associated with. Use the <a>ListGateways</a> operation to return a list of gateways for your account and Region.</p>"
+          "documentation": "<p>The unique Amazon Resource Name (ARN) of the gateway that the virtual tape to delete is associated with. Use the <a>ListGateways</a> operation to return a list of gateways for your account and Amazon Web Services Region.</p>"
         },
         "TapeARN": {
           "shape": "TapeARN",
@@ -3713,7 +3739,7 @@
         },
         "Ec2InstanceRegion": {
           "shape": "Ec2InstanceRegion",
-          "documentation": "<p>The Region where the Amazon EC2 instance is located.</p>"
+          "documentation": "<p>The Amazon Web Services Region where the Amazon EC2 instance is located.</p>"
         },
         "Tags": {
           "shape": "Tags",
@@ -3877,6 +3903,10 @@
         "FileSharesVisible": {
           "shape": "Boolean",
           "documentation": "<p>The shares on this gateway appear when listing shares. Only supported for S3 File Gateways. </p>"
+        },
+        "SMBLocalGroups": {
+          "shape": "SMBLocalGroups",
+          "documentation": "<p>A list of Active Directory users and groups that have special permissions for SMB file shares on the gateway.</p>"
         }
       }
     },
@@ -4339,7 +4369,7 @@
       "type": "string",
       "max": 1024,
       "min": 1,
-      "pattern": "^([a-z0-9]+(-[a-z0-9]+)*\\.)+[a-z]{2,}$"
+      "pattern": "^([a-zA-Z0-9]+[\\\\.-])+([a-zA-Z0-9])+$"
     },
     "DomainUserName": {
       "type": "string",
@@ -4503,6 +4533,10 @@
         "EndpointNetworkConfiguration": {
           "shape": "EndpointNetworkConfiguration",
           "documentation": "<p>Specifies network configuration information for the gateway associated with the Amazon FSx file system.</p> <note> <p>If multiple file systems are associated with this gateway, this parameter's <code>IpAddresses</code> field is required.</p> </note>"
+        },
+        "FileSystemAssociationStatusDetails": {
+          "shape": "FileSystemAssociationStatusDetails",
+          "documentation": "<p>An array containing the FileSystemAssociationStatusDetail data type, which provides detailed information on file system association status.</p>"
         }
       },
       "documentation": "<p>Describes the object returned by <code>DescribeFileSystemAssociations</code> that describes a created file system association.</p>"
@@ -4517,6 +4551,22 @@
       "type": "string",
       "max": 50,
       "min": 3
+    },
+    "FileSystemAssociationStatusDetail": {
+      "type": "structure",
+      "members": {
+        "ErrorCode": {
+          "shape": "FileSystemAssociationSyncErrorCode",
+          "documentation": "<p>The error code for a given file system association status.</p>"
+        }
+      },
+      "documentation": "<p>Detailed information on file system association status.</p>"
+    },
+    "FileSystemAssociationStatusDetails": {
+      "type": "list",
+      "member": {
+        "shape": "FileSystemAssociationStatusDetail"
+      }
     },
     "FileSystemAssociationSummary": {
       "type": "structure",
@@ -4545,6 +4595,9 @@
         "shape": "FileSystemAssociationSummary"
       }
     },
+    "FileSystemAssociationSyncErrorCode": {
+      "type": "string"
+    },
     "FileSystemLocationARN": {
       "type": "string",
       "max": 512,
@@ -4565,7 +4618,7 @@
     },
     "GatewayARN": {
       "type": "string",
-      "documentation": "<p>The Amazon Resource Name (ARN) of the gateway. Use the <a>ListGateways</a> operation to return a list of gateways for your account and Region.</p>",
+      "documentation": "<p>The Amazon Resource Name (ARN) of the gateway. Use the <a>ListGateways</a> operation to return a list of gateways for your account and Amazon Web Services Region.</p>",
       "max": 500,
       "min": 50
     },
@@ -4591,7 +4644,7 @@
         },
         "GatewayARN": {
           "shape": "GatewayARN",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the gateway. Use the <a>ListGateways</a> operation to return a list of gateways for your account and Region.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the gateway. Use the <a>ListGateways</a> operation to return a list of gateways for your account and Amazon Web Services Region.</p>"
         },
         "GatewayType": {
           "shape": "GatewayType",
@@ -4611,7 +4664,7 @@
         },
         "Ec2InstanceRegion": {
           "shape": "Ec2InstanceRegion",
-          "documentation": "<p>The Region where the Amazon EC2 instance is located.</p>"
+          "documentation": "<p>The Amazon Web Services Region where the Amazon EC2 instance is located.</p>"
         }
       },
       "documentation": "<p>Describes a gateway object.</p>"
@@ -4728,7 +4781,7 @@
       "members": {
         "GatewayARN": {
           "shape": "GatewayARN",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the gateway. Use the <code>ListGateways</code> operation to return a list of gateways for your account and Region.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the gateway. Use the <code>ListGateways</code> operation to return a list of gateways for your account and Amazon Web Services Region.</p>"
         },
         "DomainName": {
           "shape": "DomainName",
@@ -5108,7 +5161,7 @@
     },
     "LocationARN": {
       "type": "string",
-      "documentation": "<p>The ARN of the backend storage used for storing file data. A prefix name can be added to the S3 bucket name. It must end with a \"/\".</p>",
+      "documentation": "<p>A custom ARN for the backend storage used for storing data for file shares. It includes a resource ARN with an optional prefix concatenation. The prefix must end with a forward slash (/).</p> <note> <p>You can specify LocationARN as a bucket ARN, access point ARN or access point alias, as shown in the following examples.</p> <p>Bucket ARN:</p> <p> <code>arn:aws:s3:::my-bucket/prefix/</code> </p> <p>Access point ARN:</p> <p> <code>arn:aws:s3:region:account-id:accesspoint/access-point-name/prefix/</code> </p> <p>If you specify an access point, the bucket policy must be configured to delegate access control to the access point. For information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-policies.html#access-points-delegating-control\">Delegating access control to access points</a> in the <i>Amazon S3 User Guide</i>.</p> <p>Access point alias:</p> <p> <code>test-ap-ab123cdef4gehijklmn5opqrstuvuse1a-s3alias</code> </p> </note>",
       "max": 1400,
       "min": 16
     },
@@ -5219,7 +5272,7 @@
         },
         "FileShareName": {
           "shape": "FileShareName",
-          "documentation": "<p>The name of the file share. Optional.</p> <note> <p> <code>FileShareName</code> must be set if an S3 prefix name is set in <code>LocationARN</code>.</p> </note>"
+          "documentation": "<p>The name of the file share. Optional.</p> <note> <p> <code>FileShareName</code> must be set if an S3 prefix name is set in <code>LocationARN</code>, or if an access point or access point alias is used.</p> </note>"
         },
         "CacheAttributes": {
           "shape": "CacheAttributes",
@@ -5236,6 +5289,10 @@
         "BucketRegion": {
           "shape": "RegionId",
           "documentation": "<p>Specifies the Region of the S3 bucket where the NFS file share stores files.</p> <note> <p>This parameter is required for NFS file shares that connect to Amazon S3 through a VPC endpoint, a VPC access point, or an access point alias that points to a VPC access point.</p> </note>"
+        },
+        "AuditDestinationARN": {
+          "shape": "AuditDestinationARN",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the storage used for audit logs.</p>"
         }
       },
       "documentation": "<p>The Unix file permissions and ownership information assigned, by default, to native S3 objects when an S3 File Gateway discovers them in S3 buckets. This operation is only supported in S3 File Gateways.</p>"
@@ -5366,7 +5423,7 @@
       "members": {
         "PoolARN": {
           "shape": "PoolARN",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the custom tape pool. Use the <a>ListTapePools</a> operation to return a list of custom tape pools for your account and Region.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the custom tape pool. Use the <a>ListTapePools</a> operation to return a list of custom tape pools for your account and Amazon Web Services Region.</p>"
         },
         "PoolName": {
           "shape": "PoolName",
@@ -5378,7 +5435,7 @@
         },
         "RetentionLockType": {
           "shape": "RetentionLockType",
-          "documentation": "<p>Tape retention lock type, which can be configured in two modes. When configured in governance mode, accounts with specific IAM permissions are authorized to remove the tape retention lock from archived virtual tapes. When configured in compliance mode, the tape retention lock cannot be removed by any user, including the root account.</p>"
+          "documentation": "<p>Tape retention lock type, which can be configured in two modes. When configured in governance mode, Amazon Web Services accounts with specific IAM permissions are authorized to remove the tape retention lock from archived virtual tapes. When configured in compliance mode, the tape retention lock cannot be removed by any user, including the root Amazon Web Services account.</p>"
         },
         "RetentionLockTimeInDays": {
           "shape": "RetentionLockTimeInDays",
@@ -5535,7 +5592,7 @@
         },
         "GatewayARN": {
           "shape": "GatewayARN",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the gateway you want to retrieve the virtual tape to. Use the <a>ListGateways</a> operation to return a list of gateways for your account and Region.</p> <p>You retrieve archived virtual tapes to only one gateway and the gateway must be a tape gateway.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the gateway you want to retrieve the virtual tape to. Use the <a>ListGateways</a> operation to return a list of gateways for your account and Amazon Web Services Region.</p> <p>You retrieve archived virtual tapes to only one gateway and the gateway must be a tape gateway.</p>"
         }
       },
       "documentation": "<p>RetrieveTapeArchiveInput</p>"
@@ -5672,7 +5729,7 @@
         },
         "FileShareName": {
           "shape": "FileShareName",
-          "documentation": "<p>The name of the file share. Optional.</p> <note> <p> <code>FileShareName</code> must be set if an S3 prefix name is set in <code>LocationARN</code>.</p> </note>"
+          "documentation": "<p>The name of the file share. Optional.</p> <note> <p> <code>FileShareName</code> must be set if an S3 prefix name is set in <code>LocationARN</code>, or if an access point or access point alias is used.</p> </note>"
         },
         "CacheAttributes": {
           "shape": "CacheAttributes",
@@ -5709,6 +5766,16 @@
       "min": 6,
       "pattern": "^[ -~]+$",
       "sensitive": true
+    },
+    "SMBLocalGroups": {
+      "type": "structure",
+      "members": {
+        "GatewayAdmins": {
+          "shape": "UserList",
+          "documentation": "<p>A list of Active Directory users and groups that have local Gateway Admin permissions. Acceptable formats include: <code>DOMAIN\\User1</code>, <code>user1</code>, <code>DOMAIN\\group1</code>, and <code>group1</code>.</p> <p>Gateway Admins can use the Shared Folders Microsoft Management Console snap-in to force-close files that are open and locked.</p>"
+        }
+      },
+      "documentation": "<p>A list of Active Directory users and groups that have special permissions for SMB file shares on the gateway.</p>"
     },
     "SMBSecurityStrategy": {
       "type": "string",
@@ -6147,7 +6214,7 @@
         },
         "GatewayARN": {
           "shape": "GatewayARN",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the gateway. Use the <a>ListGateways</a> operation to return a list of gateways for your account and Region.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the gateway. Use the <a>ListGateways</a> operation to return a list of gateways for your account and Amazon Web Services Region.</p>"
         },
         "PoolId": {
           "shape": "PoolId",
@@ -6548,15 +6615,19 @@
         },
         "FileShareName": {
           "shape": "FileShareName",
-          "documentation": "<p>The name of the file share. Optional.</p> <note> <p> <code>FileShareName</code> must be set if an S3 prefix name is set in <code>LocationARN</code>.</p> </note>"
+          "documentation": "<p>The name of the file share. Optional.</p> <note> <p> <code>FileShareName</code> must be set if an S3 prefix name is set in <code>LocationARN</code>, or if an access point or access point alias is used.</p> </note>"
         },
         "CacheAttributes": {
           "shape": "CacheAttributes",
-          "documentation": "<p>specifies refresh cache information for the file share.</p>"
+          "documentation": "<p>Specifies refresh cache information for the file share.</p>"
         },
         "NotificationPolicy": {
           "shape": "NotificationPolicy",
           "documentation": "<p>The notification policy of the file share. <code>SettlingTimeInSeconds</code> controls the number of seconds to wait after the last point in time a client wrote to a file before generating an <code>ObjectUploaded</code> notification. Because clients can make many small writes to files, it's best to set this parameter for as long as possible to avoid generating multiple notifications for the same file in a small time period.</p> <note> <p> <code>SettlingTimeInSeconds</code> has no effect on the timing of the object uploading to Amazon S3, only the timing of the notification.</p> </note> <p>The following example sets <code>NotificationPolicy</code> on with <code>SettlingTimeInSeconds</code> set to 60.</p> <p> <code>{\\\"Upload\\\": {\\\"SettlingTimeInSeconds\\\": 60}}</code> </p> <p>The following example sets <code>NotificationPolicy</code> off.</p> <p> <code>{}</code> </p>"
+        },
+        "AuditDestinationARN": {
+          "shape": "AuditDestinationARN",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the storage used for audit logs.</p>"
         }
       },
       "documentation": "<p>UpdateNFSFileShareInput</p>"
@@ -6639,7 +6710,7 @@
         },
         "FileShareName": {
           "shape": "FileShareName",
-          "documentation": "<p>The name of the file share. Optional.</p> <note> <p> <code>FileShareName</code> must be set if an S3 prefix name is set in <code>LocationARN</code>.</p> </note>"
+          "documentation": "<p>The name of the file share. Optional.</p> <note> <p> <code>FileShareName</code> must be set if an S3 prefix name is set in <code>LocationARN</code>, or if an access point or access point alias is used.</p> </note>"
         },
         "CacheAttributes": {
           "shape": "CacheAttributes",
@@ -6683,6 +6754,30 @@
       }
     },
     "UpdateSMBFileShareVisibilityOutput": {
+      "type": "structure",
+      "members": {
+        "GatewayARN": {
+          "shape": "GatewayARN"
+        }
+      }
+    },
+    "UpdateSMBLocalGroupsInput": {
+      "type": "structure",
+      "required": [
+        "GatewayARN",
+        "SMBLocalGroups"
+      ],
+      "members": {
+        "GatewayARN": {
+          "shape": "GatewayARN"
+        },
+        "SMBLocalGroups": {
+          "shape": "SMBLocalGroups",
+          "documentation": "<p>A list of Active Directory users and groups that you want to grant special permissions for SMB file shares on the gateway.</p>"
+        }
+      }
+    },
+    "UpdateSMBLocalGroupsOutput": {
       "type": "structure",
       "members": {
         "GatewayARN": {
@@ -6990,5 +7085,5 @@
       "type": "string"
     }
   },
-  "documentation": "<fullname>Storage Gateway Service</fullname> <p>Storage Gateway is the service that connects an on-premises software appliance with cloud-based storage to provide seamless and secure integration between an organization's on-premises IT environment and the Amazon Web Services storage infrastructure. The service enables you to securely upload data to the Cloud for cost effective backup and rapid disaster recovery.</p> <p>Use the following links to get started using the <i>Storage Gateway Service API Reference</i>:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayAPI.html#AWSStorageGatewayHTTPRequestsHeaders\">Storage Gateway required request headers</a>: Describes the required headers that you must send with every POST request to Storage Gateway.</p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayAPI.html#AWSStorageGatewaySigningRequests\">Signing requests</a>: Storage Gateway requires that you authenticate every request you send; this topic describes how sign such a request.</p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayAPI.html#APIErrorResponses\">Error responses</a>: Provides reference information about Storage Gateway errors.</p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/storagegateway/latest/APIReference/API_Operations.html\">Operations in Storage Gateway</a>: Contains detailed descriptions of all Storage Gateway operations, their request parameters, response elements, possible errors, and examples of requests and responses.</p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/general/latest/gr/sg.html\">Storage Gateway endpoints and quotas</a>: Provides a list of each Region and the endpoints available for use with Storage Gateway.</p> </li> </ul> <note> <p>Storage Gateway resource IDs are in uppercase. When you use these resource IDs with the Amazon EC2 API, EC2 expects resource IDs in lowercase. You must change your resource ID to lowercase to use it with the EC2 API. For example, in Storage Gateway the ID for a volume might be <code>vol-AA22BB012345DAF670</code>. When you use this ID with the EC2 API, you must change it to <code>vol-aa22bb012345daf670</code>. Otherwise, the EC2 API might not behave as expected.</p> </note> <important> <p>IDs for Storage Gateway volumes and Amazon EBS snapshots created from gateway volumes are changing to a longer format. Starting in December 2016, all new volumes and snapshots will be created with a 17-character string. Starting in April 2016, you will be able to use these longer IDs so you can test your systems with the new format. For more information, see <a href=\"http://aws.amazon.com/ec2/faqs/#longer-ids\">Longer EC2 and EBS resource IDs</a>.</p> <p>For example, a volume Amazon Resource Name (ARN) with the longer volume ID format looks like the following:</p> <p> <code>arn:aws:storagegateway:us-west-2:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABBCCDDEEFFG</code>.</p> <p>A snapshot ID with the longer ID format looks like the following: <code>snap-78e226633445566ee</code>.</p> <p>For more information, see <a href=\"http://forums.aws.amazon.com/ann.jspa?annID=3557\">Announcement: Heads-up – Longer Storage Gateway volume and snapshot IDs coming in 2016</a>.</p> </important>"
+  "documentation": "<fullname>Storage Gateway Service</fullname> <p>Storage Gateway is the service that connects an on-premises software appliance with cloud-based storage to provide seamless and secure integration between an organization's on-premises IT environment and the Amazon Web Services storage infrastructure. The service enables you to securely upload data to the Amazon Web Services Cloud for cost effective backup and rapid disaster recovery.</p> <p>Use the following links to get started using the <i>Storage Gateway Service API Reference</i>:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayAPI.html#AWSStorageGatewayHTTPRequestsHeaders\">Storage Gateway required request headers</a>: Describes the required headers that you must send with every POST request to Storage Gateway.</p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayAPI.html#AWSStorageGatewaySigningRequests\">Signing requests</a>: Storage Gateway requires that you authenticate every request you send; this topic describes how sign such a request.</p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayAPI.html#APIErrorResponses\">Error responses</a>: Provides reference information about Storage Gateway errors.</p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/storagegateway/latest/APIReference/API_Operations.html\">Operations in Storage Gateway</a>: Contains detailed descriptions of all Storage Gateway operations, their request parameters, response elements, possible errors, and examples of requests and responses.</p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/general/latest/gr/sg.html\">Storage Gateway endpoints and quotas</a>: Provides a list of each Amazon Web Services Region and the endpoints available for use with Storage Gateway.</p> </li> </ul> <note> <p>Storage Gateway resource IDs are in uppercase. When you use these resource IDs with the Amazon EC2 API, EC2 expects resource IDs in lowercase. You must change your resource ID to lowercase to use it with the EC2 API. For example, in Storage Gateway the ID for a volume might be <code>vol-AA22BB012345DAF670</code>. When you use this ID with the EC2 API, you must change it to <code>vol-aa22bb012345daf670</code>. Otherwise, the EC2 API might not behave as expected.</p> </note> <important> <p>IDs for Storage Gateway volumes and Amazon EBS snapshots created from gateway volumes are changing to a longer format. Starting in December 2016, all new volumes and snapshots will be created with a 17-character string. Starting in April 2016, you will be able to use these longer IDs so you can test your systems with the new format. For more information, see <a href=\"http://aws.amazon.com/ec2/faqs/#longer-ids\">Longer EC2 and EBS resource IDs</a>.</p> <p>For example, a volume Amazon Resource Name (ARN) with the longer volume ID format looks like the following:</p> <p> <code>arn:aws:storagegateway:us-west-2:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABBCCDDEEFFG</code>.</p> <p>A snapshot ID with the longer ID format looks like the following: <code>snap-78e226633445566ee</code>.</p> <p>For more information, see <a href=\"http://forums.aws.amazon.com/ann.jspa?annID=3557\">Announcement: Heads-up – Longer Storage Gateway volume and snapshot IDs coming in 2016</a>.</p> </important>"
 }

@@ -28,19 +28,19 @@ declare class KinesisAnalyticsV2 extends Service {
    */
   addApplicationInput(callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.AddApplicationInputResponse) => void): Request<KinesisAnalyticsV2.Types.AddApplicationInputResponse, AWSError>;
   /**
-   * Adds an InputProcessingConfiguration to a SQL-based Kinesis Data Analytics application. An input processor pre-processes records on the input stream before the application's SQL code executes. Currently, the only input processor available is AWS Lambda.
+   * Adds an InputProcessingConfiguration to a SQL-based Kinesis Data Analytics application. An input processor pre-processes records on the input stream before the application's SQL code executes. Currently, the only input processor available is Amazon Lambda.
    */
   addApplicationInputProcessingConfiguration(params: KinesisAnalyticsV2.Types.AddApplicationInputProcessingConfigurationRequest, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.AddApplicationInputProcessingConfigurationResponse) => void): Request<KinesisAnalyticsV2.Types.AddApplicationInputProcessingConfigurationResponse, AWSError>;
   /**
-   * Adds an InputProcessingConfiguration to a SQL-based Kinesis Data Analytics application. An input processor pre-processes records on the input stream before the application's SQL code executes. Currently, the only input processor available is AWS Lambda.
+   * Adds an InputProcessingConfiguration to a SQL-based Kinesis Data Analytics application. An input processor pre-processes records on the input stream before the application's SQL code executes. Currently, the only input processor available is Amazon Lambda.
    */
   addApplicationInputProcessingConfiguration(callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.AddApplicationInputProcessingConfigurationResponse) => void): Request<KinesisAnalyticsV2.Types.AddApplicationInputProcessingConfigurationResponse, AWSError>;
   /**
-   * Adds an external destination to your SQL-based Kinesis Data Analytics application. If you want Kinesis Data Analytics to deliver data from an in-application stream within your application to an external destination (such as an Kinesis data stream, a Kinesis Data Firehose delivery stream, or an AWS Lambda function), you add the relevant configuration to your application using this operation. You can configure one or more outputs for your application. Each output configuration maps an in-application stream and an external destination.  You can use one of the output configurations to deliver data from your in-application error stream to an external destination so that you can analyze the errors.   Any configuration update, including adding a streaming source using this operation, results in a new version of the application. You can use the DescribeApplication operation to find the current application version.
+   * Adds an external destination to your SQL-based Kinesis Data Analytics application. If you want Kinesis Data Analytics to deliver data from an in-application stream within your application to an external destination (such as an Kinesis data stream, a Kinesis Data Firehose delivery stream, or an Amazon Lambda function), you add the relevant configuration to your application using this operation. You can configure one or more outputs for your application. Each output configuration maps an in-application stream and an external destination.  You can use one of the output configurations to deliver data from your in-application error stream to an external destination so that you can analyze the errors.   Any configuration update, including adding a streaming source using this operation, results in a new version of the application. You can use the DescribeApplication operation to find the current application version.
    */
   addApplicationOutput(params: KinesisAnalyticsV2.Types.AddApplicationOutputRequest, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.AddApplicationOutputResponse) => void): Request<KinesisAnalyticsV2.Types.AddApplicationOutputResponse, AWSError>;
   /**
-   * Adds an external destination to your SQL-based Kinesis Data Analytics application. If you want Kinesis Data Analytics to deliver data from an in-application stream within your application to an external destination (such as an Kinesis data stream, a Kinesis Data Firehose delivery stream, or an AWS Lambda function), you add the relevant configuration to your application using this operation. You can configure one or more outputs for your application. Each output configuration maps an in-application stream and an external destination.  You can use one of the output configurations to deliver data from your in-application error stream to an external destination so that you can analyze the errors.   Any configuration update, including adding a streaming source using this operation, results in a new version of the application. You can use the DescribeApplication operation to find the current application version.
+   * Adds an external destination to your SQL-based Kinesis Data Analytics application. If you want Kinesis Data Analytics to deliver data from an in-application stream within your application to an external destination (such as an Kinesis data stream, a Kinesis Data Firehose delivery stream, or an Amazon Lambda function), you add the relevant configuration to your application using this operation. You can configure one or more outputs for your application. Each output configuration maps an in-application stream and an external destination.  You can use one of the output configurations to deliver data from your in-application error stream to an external destination so that you can analyze the errors.   Any configuration update, including adding a streaming source using this operation, results in a new version of the application. You can use the DescribeApplication operation to find the current application version.
    */
   addApplicationOutput(callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.AddApplicationOutputResponse) => void): Request<KinesisAnalyticsV2.Types.AddApplicationOutputResponse, AWSError>;
   /**
@@ -367,7 +367,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     CurrentApplicationVersionId: ApplicationVersionId;
     /**
-     * An array of objects, each describing one output configuration. In the output configuration, you specify the name of an in-application stream, a destination (that is, a Kinesis data stream, a Kinesis Data Firehose delivery stream, or an AWS Lambda function), and record the formation to use when writing to the destination.
+     * An array of objects, each describing one output configuration. In the output configuration, you specify the name of an in-application stream, a destination (that is, a Kinesis data stream, a Kinesis Data Firehose delivery stream, or an Amazon Lambda function), and record the formation to use when writing to the destination.
      */
     Output: Output;
   }
@@ -689,7 +689,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     SnapshotsEnabledUpdate: BooleanObject;
   }
-  export type ApplicationStatus = "DELETING"|"STARTING"|"STOPPING"|"READY"|"RUNNING"|"UPDATING"|"AUTOSCALING"|"FORCE_STOPPING"|"MAINTENANCE"|"ROLLING_BACK"|"ROLLED_BACK"|string;
+  export type ApplicationStatus = "DELETING"|"STARTING"|"STOPPING"|"READY"|"RUNNING"|"UPDATING"|"AUTOSCALING"|"FORCE_STOPPING"|"ROLLING_BACK"|"MAINTENANCE"|"ROLLED_BACK"|string;
   export type ApplicationSummaries = ApplicationSummary[];
   export interface ApplicationSummary {
     /**
@@ -746,19 +746,19 @@ declare namespace KinesisAnalyticsV2 {
   }
   export interface CatalogConfiguration {
     /**
-     * The configuration parameters for the default AWS Glue database. You use this database for Apache Flink SQL queries and table API transforms that you write in a Kinesis Data Analytics Studio notebook.
+     * The configuration parameters for the default Amazon Glue database. You use this database for Apache Flink SQL queries and table API transforms that you write in a Kinesis Data Analytics Studio notebook.
      */
     GlueDataCatalogConfiguration: GlueDataCatalogConfiguration;
   }
   export interface CatalogConfigurationDescription {
     /**
-     * The configuration parameters for the default AWS Glue database. You use this database for SQL queries that you write in a Kinesis Data Analytics Studio notebook.
+     * The configuration parameters for the default Amazon Glue database. You use this database for SQL queries that you write in a Kinesis Data Analytics Studio notebook.
      */
     GlueDataCatalogConfigurationDescription: GlueDataCatalogConfigurationDescription;
   }
   export interface CatalogConfigurationUpdate {
     /**
-     * Updates to the configuration parameters for the default AWS Glue database. You use this database for SQL queries that you write in a Kinesis Data Analytics Studio notebook.
+     * Updates to the configuration parameters for the default Amazon Glue database. You use this database for SQL queries that you write in a Kinesis Data Analytics Studio notebook.
      */
     GlueDataCatalogConfigurationUpdate: GlueDataCatalogConfigurationUpdate;
   }
@@ -1174,7 +1174,7 @@ declare namespace KinesisAnalyticsV2 {
     /**
      * Updates to the location that holds the data required to specify an Amazon Data Analytics application.
      */
-    S3ContentLocationUpdate: S3ContentBaseLocationUpdate;
+    S3ContentLocationUpdate?: S3ContentBaseLocationUpdate;
   }
   export interface DescribeApplicationRequest {
     /**
@@ -1354,7 +1354,7 @@ declare namespace KinesisAnalyticsV2 {
     /**
      * The updated Amazon Resource Name (ARN) of the database.
      */
-    DatabaseARNUpdate?: DatabaseARN;
+    DatabaseARNUpdate: DatabaseARN;
   }
   export type Id = string;
   export type InAppStreamName = string;
@@ -1427,23 +1427,23 @@ declare namespace KinesisAnalyticsV2 {
   export type InputDescriptions = InputDescription[];
   export interface InputLambdaProcessor {
     /**
-     * The ARN of the AWS Lambda function that operates on records in the stream.  To specify an earlier version of the Lambda function than the latest, include the Lambda function version in the Lambda function ARN. For more information about Lambda ARNs, see Example ARNs: AWS Lambda  
+     * The ARN of the Amazon Lambda function that operates on records in the stream.  To specify an earlier version of the Lambda function than the latest, include the Lambda function version in the Lambda function ARN. For more information about Lambda ARNs, see Example ARNs: Amazon Lambda  
      */
     ResourceARN: ResourceARN;
   }
   export interface InputLambdaProcessorDescription {
     /**
-     * The ARN of the AWS Lambda function that is used to preprocess the records in the stream.  To specify an earlier version of the Lambda function than the latest, include the Lambda function version in the Lambda function ARN. For more information about Lambda ARNs, see Example ARNs: AWS Lambda  
+     * The ARN of the Amazon Lambda function that is used to preprocess the records in the stream.  To specify an earlier version of the Lambda function than the latest, include the Lambda function version in the Lambda function ARN. For more information about Lambda ARNs, see Example ARNs: Amazon Lambda  
      */
     ResourceARN: ResourceARN;
     /**
-     * The ARN of the IAM role that is used to access the AWS Lambda function.  Provided for backward compatibility. Applications that are created with the current API version have an application-level service execution role rather than a resource-level role. 
+     * The ARN of the IAM role that is used to access the Amazon Lambda function.  Provided for backward compatibility. Applications that are created with the current API version have an application-level service execution role rather than a resource-level role. 
      */
     RoleARN?: RoleARN;
   }
   export interface InputLambdaProcessorUpdate {
     /**
-     * The Amazon Resource Name (ARN) of the new AWS Lambda function that is used to preprocess the records in the stream.  To specify an earlier version of the Lambda function than the latest, include the Lambda function version in the Lambda function ARN. For more information about Lambda ARNs, see Example ARNs: AWS Lambda  
+     * The Amazon Resource Name (ARN) of the new Amazon Lambda function that is used to preprocess the records in the stream.  To specify an earlier version of the Lambda function than the latest, include the Lambda function version in the Lambda function ARN. For more information about Lambda ARNs, see Example ARNs: Amazon Lambda  
      */
     ResourceARNUpdate: ResourceARN;
   }
@@ -1629,7 +1629,7 @@ declare namespace KinesisAnalyticsV2 {
   }
   export interface LambdaOutput {
     /**
-     * The Amazon Resource Name (ARN) of the destination Lambda function to write to.  To specify an earlier version of the Lambda function than the latest, include the Lambda function version in the Lambda function ARN. For more information about Lambda ARNs, see Example ARNs: AWS Lambda  
+     * The Amazon Resource Name (ARN) of the destination Lambda function to write to.  To specify an earlier version of the Lambda function than the latest, include the Lambda function version in the Lambda function ARN. For more information about Lambda ARNs, see Example ARNs: Amazon Lambda  
      */
     ResourceARN: ResourceARN;
   }
@@ -1645,7 +1645,7 @@ declare namespace KinesisAnalyticsV2 {
   }
   export interface LambdaOutputUpdate {
     /**
-     * The Amazon Resource Name (ARN) of the destination AWS Lambda function.  To specify an earlier version of the Lambda function than the latest, include the Lambda function version in the Lambda function ARN. For more information about Lambda ARNs, see Example ARNs: AWS Lambda  
+     * The Amazon Resource Name (ARN) of the destination Amazon Lambda function.  To specify an earlier version of the Lambda function than the latest, include the Lambda function version in the Lambda function ARN. For more information about Lambda ARNs, see Example ARNs: Amazon Lambda  
      */
     ResourceARNUpdate: ResourceARN;
   }
@@ -1684,7 +1684,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     Limit?: ListApplicationVersionsInputLimit;
     /**
-     * If a previous invocation of this operation returned a pagination token, pass it into this value to retrieve the next set of results. For more information about pagination, see Using the AWS Command Line Interface's Pagination Options.
+     * If a previous invocation of this operation returned a pagination token, pass it into this value to retrieve the next set of results. For more information about pagination, see Using the Amazon Command Line Interface's Pagination Options.
      */
     NextToken?: NextToken;
   }
@@ -1694,7 +1694,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     ApplicationVersionSummaries?: ApplicationVersionSummaries;
     /**
-     * The pagination token for the next set of results, or null if there are no additional results. To retrieve the next set of items, pass this token into a subsequent invocation of this operation. For more information about pagination, see Using the AWS Command Line Interface's Pagination Options.
+     * The pagination token for the next set of results, or null if there are no additional results. To retrieve the next set of items, pass this token into a subsequent invocation of this operation. For more information about pagination, see Using the Amazon Command Line Interface's Pagination Options.
      */
     NextToken?: NextToken;
   }
@@ -1705,7 +1705,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     Limit?: ListApplicationsInputLimit;
     /**
-     * If a previous command returned a pagination token, pass it into this value to retrieve the next set of results. For more information about pagination, see Using the AWS Command Line Interface's Pagination Options.
+     * If a previous command returned a pagination token, pass it into this value to retrieve the next set of results. For more information about pagination, see Using the Amazon Command Line Interface's Pagination Options.
      */
     NextToken?: ApplicationName;
   }
@@ -1715,7 +1715,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     ApplicationSummaries: ApplicationSummaries;
     /**
-     * The pagination token for the next set of results, or null if there are no additional results. Pass this token into a subsequent command to retrieve the next set of items For more information about pagination, see Using the AWS Command Line Interface's Pagination Options.
+     * The pagination token for the next set of results, or null if there are no additional results. Pass this token into a subsequent command to retrieve the next set of items For more information about pagination, see Using the Amazon Command Line Interface's Pagination Options.
      */
     NextToken?: ApplicationName;
   }
@@ -1821,7 +1821,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     KinesisFirehoseOutput?: KinesisFirehoseOutput;
     /**
-     * Identifies an AWS Lambda function as the destination.
+     * Identifies an Amazon Lambda function as the destination.
      */
     LambdaOutput?: LambdaOutput;
     /**
@@ -1874,7 +1874,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     KinesisFirehoseOutputUpdate?: KinesisFirehoseOutputUpdate;
     /**
-     * Describes an AWS Lambda function as the destination for the output.
+     * Describes an Amazon Lambda function as the destination for the output.
      */
     LambdaOutputUpdate?: LambdaOutputUpdate;
     /**
@@ -2097,7 +2097,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     ApplicationRestoreConfiguration?: ApplicationRestoreConfiguration;
   }
-  export type RuntimeEnvironment = "SQL-1_0"|"FLINK-1_6"|"FLINK-1_8"|"FLINK-1_11"|"ZEPPELIN-FLINK-1_0"|string;
+  export type RuntimeEnvironment = "SQL-1_0"|"FLINK-1_6"|"FLINK-1_8"|"ZEPPELIN-FLINK-1_0"|"FLINK-1_11"|"FLINK-1_13"|"ZEPPELIN-FLINK-2_0"|string;
   export interface S3ApplicationCodeLocationDescription {
     /**
      * The Amazon Resource Name (ARN) for the S3 bucket containing the application code.
@@ -2146,7 +2146,7 @@ declare namespace KinesisAnalyticsV2 {
     /**
      * The updated Amazon Resource Name (ARN) of the S3 bucket.
      */
-    BucketARNUpdate: BucketARN;
+    BucketARNUpdate?: BucketARN;
     /**
      * The updated S3 bucket path.
      */
@@ -2480,11 +2480,11 @@ declare namespace KinesisAnalyticsV2 {
      */
     MonitoringConfiguration?: ZeppelinMonitoringConfiguration;
     /**
-     * The AWS Glue Data Catalog that you use in queries in a Kinesis Data Analytics Studio notebook.
+     * The Amazon Glue Data Catalog that you use in queries in a Kinesis Data Analytics Studio notebook.
      */
     CatalogConfiguration?: CatalogConfiguration;
     /**
-     * The information required to deploy a Kinesis Data Analytics Studio notebook as an application with durable state..
+     * The information required to deploy a Kinesis Data Analytics Studio notebook as an application with durable state.
      */
     DeployAsApplicationConfiguration?: DeployAsApplicationConfiguration;
     /**
@@ -2498,11 +2498,11 @@ declare namespace KinesisAnalyticsV2 {
      */
     MonitoringConfigurationDescription: ZeppelinMonitoringConfigurationDescription;
     /**
-     * The AWS Glue Data Catalog that is associated with the Kinesis Data Analytics Studio notebook.
+     * The Amazon Glue Data Catalog that is associated with the Kinesis Data Analytics Studio notebook.
      */
     CatalogConfigurationDescription?: CatalogConfigurationDescription;
     /**
-     * The parameters required to deploy a Kinesis Data Analytics Studio notebook as an application with durable state..
+     * The parameters required to deploy a Kinesis Data Analytics Studio notebook as an application with durable state.
      */
     DeployAsApplicationConfigurationDescription?: DeployAsApplicationConfigurationDescription;
     /**
@@ -2516,7 +2516,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     MonitoringConfigurationUpdate?: ZeppelinMonitoringConfigurationUpdate;
     /**
-     * Updates to the configuration of the AWS Glue Data Catalog that is associated with the Kinesis Data Analytics Studio notebook.
+     * Updates to the configuration of the Amazon Glue Data Catalog that is associated with the Kinesis Data Analytics Studio notebook.
      */
     CatalogConfigurationUpdate?: CatalogConfigurationUpdate;
     DeployAsApplicationConfigurationUpdate?: DeployAsApplicationConfigurationUpdate;

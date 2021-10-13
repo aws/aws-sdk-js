@@ -361,7 +361,7 @@
           "shape": "OrganizationStateException"
         }
       ],
-      "documentation": "<p>Deletes an access control rule for the specified WorkMail organization.</p>"
+      "documentation": "<p>Deletes an access control rule for the specified WorkMail organization.</p> <note> <p>Deleting already deleted and non-existing rules does not produce an error. In those cases, the service sends back an HTTP 200 response with an empty HTTP body.</p> </note>"
     },
     "DeleteAlias": {
       "name": "DeleteAlias",
@@ -491,7 +491,7 @@
           "shape": "EntityNotFoundException"
         }
       ],
-      "documentation": "<p>Deletes the mobile device access override for the given WorkMail organization, user, and device.</p>"
+      "documentation": "<p>Deletes the mobile device access override for the given WorkMail organization, user, and device.</p> <note> <p>Deleting already deleted and non-existing overrides does not produce an error. In those cases, the service sends back an HTTP 200 response with an empty HTTP body.</p> </note>"
     },
     "DeleteMobileDeviceAccessRule": {
       "name": "DeleteMobileDeviceAccessRule",
@@ -516,7 +516,7 @@
           "shape": "OrganizationStateException"
         }
       ],
-      "documentation": "<p>Deletes a mobile device access rule for the specified Amazon WorkMail organization.</p>"
+      "documentation": "<p>Deletes a mobile device access rule for the specified Amazon WorkMail organization.</p> <note> <p>Deleting already deleted and non-existing rules does not produce an error. In those cases, the service sends back an HTTP 200 response with an empty HTTP body.</p> </note>"
     },
     "DeleteOrganization": {
       "name": "DeleteOrganization",
@@ -667,6 +667,38 @@
         }
       ],
       "documentation": "<p>Mark a user, group, or resource as no longer used in Amazon WorkMail. This action disassociates the mailbox and schedules it for clean-up. WorkMail keeps mailboxes for 30 days before they are permanently removed. The functionality in the console is <i>Disable</i>.</p>",
+      "idempotent": true
+    },
+    "DeregisterMailDomain": {
+      "name": "DeregisterMailDomain",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeregisterMailDomainRequest"
+      },
+      "output": {
+        "shape": "DeregisterMailDomainResponse"
+      },
+      "errors": [
+        {
+          "shape": "MailDomainInUseException"
+        },
+        {
+          "shape": "OrganizationNotFoundException"
+        },
+        {
+          "shape": "OrganizationStateException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "InvalidCustomSesConfigurationException"
+        }
+      ],
+      "documentation": "<p>Removes a domain from Amazon WorkMail, stops email routing to WorkMail, and removes the authorization allowing WorkMail use. SES keeps the domain because other applications may use it. You must first remove any email address used by WorkMail entities before you remove the domain.</p>",
       "idempotent": true
     },
     "DescribeGroup": {
@@ -961,6 +993,35 @@
       "documentation": "<p>Gets the default retention policy details for the specified organization.</p>",
       "idempotent": true
     },
+    "GetMailDomain": {
+      "name": "GetMailDomain",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetMailDomainRequest"
+      },
+      "output": {
+        "shape": "GetMailDomainResponse"
+      },
+      "errors": [
+        {
+          "shape": "MailDomainNotFoundException"
+        },
+        {
+          "shape": "OrganizationNotFoundException"
+        },
+        {
+          "shape": "OrganizationStateException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        }
+      ],
+      "documentation": "<p>Gets details for a mail domain, including domain records required to configure your domain with recommended security.</p>",
+      "idempotent": true
+    },
     "GetMailboxDetails": {
       "name": "GetMailboxDetails",
       "http": {
@@ -1156,6 +1217,32 @@
         }
       ],
       "documentation": "<p>Returns summaries of the organization's groups.</p>",
+      "idempotent": true
+    },
+    "ListMailDomains": {
+      "name": "ListMailDomains",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListMailDomainsRequest"
+      },
+      "output": {
+        "shape": "ListMailDomainsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "OrganizationNotFoundException"
+        },
+        {
+          "shape": "OrganizationStateException"
+        }
+      ],
+      "documentation": "<p>Lists the mail domains in a given Amazon WorkMail organization.</p>",
       "idempotent": true
     },
     "ListMailboxExportJobs": {
@@ -1535,6 +1622,38 @@
       "documentation": "<p>Puts a retention policy to the specified organization.</p>",
       "idempotent": true
     },
+    "RegisterMailDomain": {
+      "name": "RegisterMailDomain",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "RegisterMailDomainRequest"
+      },
+      "output": {
+        "shape": "RegisterMailDomainResponse"
+      },
+      "errors": [
+        {
+          "shape": "MailDomainInUseException"
+        },
+        {
+          "shape": "OrganizationNotFoundException"
+        },
+        {
+          "shape": "OrganizationStateException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        }
+      ],
+      "documentation": "<p>Registers a new domain in Amazon WorkMail and SES, and configures it for use by WorkMail. Emails received by SES for this domain are routed to the specified WorkMail organization, and WorkMail has permanent permission to use the specified domain for sending your users' emails.</p>",
+      "idempotent": true
+    },
     "RegisterToWorkMail": {
       "name": "RegisterToWorkMail",
       "http": {
@@ -1704,6 +1823,38 @@
         }
       ],
       "documentation": "<p>Untags the specified tags from the specified Amazon WorkMail organization resource.</p>"
+    },
+    "UpdateDefaultMailDomain": {
+      "name": "UpdateDefaultMailDomain",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateDefaultMailDomainRequest"
+      },
+      "output": {
+        "shape": "UpdateDefaultMailDomainResponse"
+      },
+      "errors": [
+        {
+          "shape": "MailDomainNotFoundException"
+        },
+        {
+          "shape": "MailDomainStateException"
+        },
+        {
+          "shape": "OrganizationNotFoundException"
+        },
+        {
+          "shape": "OrganizationStateException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        }
+      ],
+      "documentation": "<p>Updates the default mail domain for an organization. The default mail domain is used by the WorkMail AWS Console to suggest an email address when enabling a mail user. You can only have one default domain.</p>",
+      "idempotent": true
     },
     "UpdateMailboxQuota": {
       "name": "UpdateMailboxQuota",
@@ -2591,6 +2742,27 @@
       "type": "structure",
       "members": {}
     },
+    "DeregisterMailDomainRequest": {
+      "type": "structure",
+      "required": [
+        "OrganizationId",
+        "DomainName"
+      ],
+      "members": {
+        "OrganizationId": {
+          "shape": "OrganizationId",
+          "documentation": "<p>The Amazon WorkMail organization for which the domain will be deregistered.</p>"
+        },
+        "DomainName": {
+          "shape": "WorkMailDomainName",
+          "documentation": "<p>The domain to deregister in WorkMail and SES. </p>"
+        }
+      }
+    },
+    "DeregisterMailDomainResponse": {
+      "type": "structure",
+      "members": {}
+    },
     "DescribeGroupRequest": {
       "type": "structure",
       "required": [
@@ -3015,6 +3187,38 @@
       "type": "structure",
       "members": {}
     },
+    "DnsRecord": {
+      "type": "structure",
+      "members": {
+        "Type": {
+          "shape": "String",
+          "documentation": "<p>The RFC 1035 record type. Possible values: <code>CNAME</code>, <code>A</code>, <code>MX</code>.</p>"
+        },
+        "Hostname": {
+          "shape": "String",
+          "documentation": "<p>The DNS hostname.- For example, <code>domain.example.com</code>.</p>"
+        },
+        "Value": {
+          "shape": "String",
+          "documentation": "<p>The value returned by the DNS for a query to that hostname and record type.</p>"
+        }
+      },
+      "documentation": "<p>A DNS record uploaded to your DNS provider.</p>"
+    },
+    "DnsRecordVerificationStatus": {
+      "type": "string",
+      "enum": [
+        "PENDING",
+        "VERIFIED",
+        "FAILED"
+      ]
+    },
+    "DnsRecords": {
+      "type": "list",
+      "member": {
+        "shape": "DnsRecord"
+      }
+    },
     "Domain": {
       "type": "structure",
       "members": {
@@ -3080,7 +3284,7 @@
         },
         "Period": {
           "shape": "RetentionPeriod",
-          "documentation": "<p>The period of time at which the folder configuration action is applied.</p>"
+          "documentation": "<p>The number of days for which the folder-configuration action applies.</p>"
         }
       },
       "documentation": "<p>The configuration applied to an organization's folders by its retention policy.</p>"
@@ -3171,6 +3375,48 @@
         "FolderConfigurations": {
           "shape": "FolderConfigurations",
           "documentation": "<p>The retention policy folder configurations.</p>"
+        }
+      }
+    },
+    "GetMailDomainRequest": {
+      "type": "structure",
+      "required": [
+        "OrganizationId",
+        "DomainName"
+      ],
+      "members": {
+        "OrganizationId": {
+          "shape": "OrganizationId",
+          "documentation": "<p>The Amazon WorkMail organization for which the domain is retrieved.</p>"
+        },
+        "DomainName": {
+          "shape": "WorkMailDomainName",
+          "documentation": "<p>The domain from which you want to retrieve details.</p>"
+        }
+      }
+    },
+    "GetMailDomainResponse": {
+      "type": "structure",
+      "members": {
+        "Records": {
+          "shape": "DnsRecords",
+          "documentation": "<p>A list of the DNS records that Amazon WorkMail recommends adding in your DNS provider for the best user experience. The records configure your domain with DMARC, SPF, DKIM, and direct incoming email traffic to SES. See admin guide for more details.</p>"
+        },
+        "IsTestDomain": {
+          "shape": "Boolean",
+          "documentation": "<p>Specifies whether the domain is a test domain provided by WorkMail, or a custom domain.</p>"
+        },
+        "IsDefault": {
+          "shape": "Boolean",
+          "documentation": "<p>Specifies whether the domain is the default domain for your organization.</p>"
+        },
+        "OwnershipVerificationStatus": {
+          "shape": "DnsRecordVerificationStatus",
+          "documentation": "<p> Indicates the status of the domain ownership verification.</p>"
+        },
+        "DkimVerificationStatus": {
+          "shape": "DnsRecordVerificationStatus",
+          "documentation": "<p>Indicates the status of a DKIM verification.</p>"
         }
       }
     },
@@ -3512,6 +3758,39 @@
         }
       }
     },
+    "ListMailDomainsRequest": {
+      "type": "structure",
+      "required": [
+        "OrganizationId"
+      ],
+      "members": {
+        "OrganizationId": {
+          "shape": "OrganizationId",
+          "documentation": "<p>The Amazon WorkMail organization for which to list domains.</p>"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of results to return in a single call.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token to use to retrieve the next page of results. The first call does not require a token.</p>"
+        }
+      }
+    },
+    "ListMailDomainsResponse": {
+      "type": "structure",
+      "members": {
+        "MailDomains": {
+          "shape": "MailDomains",
+          "documentation": "<p>The list of mail domain summaries, specifying domains that exist in the specified Amazon WorkMail organization, along with the information about whether the domain is or isn't the default.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token to use to retrieve the next page of results. The value becomes <code>null</code> when there are no more results to return.</p>"
+        }
+      }
+    },
     "ListMailboxExportJobsRequest": {
       "type": "structure",
       "required": [
@@ -3794,6 +4073,26 @@
           "shape": "NextToken",
           "documentation": "<p> The token to use to retrieve the next page of results. This value is `null` when there are no more results to return.</p>"
         }
+      }
+    },
+    "MailDomainSummary": {
+      "type": "structure",
+      "members": {
+        "DomainName": {
+          "shape": "DomainName",
+          "documentation": "<p>The domain name.</p>"
+        },
+        "DefaultDomain": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether the domain is default or not.</p>"
+        }
+      },
+      "documentation": "<p>The data for a given domain.</p>"
+    },
+    "MailDomains": {
+      "type": "list",
+      "member": {
+        "shape": "MailDomainSummary"
       }
     },
     "MailboxExportErrorInfo": {
@@ -4356,6 +4655,32 @@
       "type": "structure",
       "members": {}
     },
+    "RegisterMailDomainRequest": {
+      "type": "structure",
+      "required": [
+        "OrganizationId",
+        "DomainName"
+      ],
+      "members": {
+        "ClientToken": {
+          "shape": "IdempotencyClientToken",
+          "documentation": "<p>Idempotency token used when retrying requests.</p>",
+          "idempotencyToken": true
+        },
+        "OrganizationId": {
+          "shape": "OrganizationId",
+          "documentation": "<p>The Amazon WorkMail organization under which you're creating the domain.</p>"
+        },
+        "DomainName": {
+          "shape": "WorkMailDomainName",
+          "documentation": "<p>The name of the mail domain to create in Amazon WorkMail and SES.</p>"
+        }
+      }
+    },
+    "RegisterMailDomainResponse": {
+      "type": "structure",
+      "members": {}
+    },
     "RegisterToWorkMailRequest": {
       "type": "structure",
       "required": [
@@ -4659,6 +4984,27 @@
       "type": "structure",
       "members": {}
     },
+    "UpdateDefaultMailDomainRequest": {
+      "type": "structure",
+      "required": [
+        "OrganizationId",
+        "DomainName"
+      ],
+      "members": {
+        "OrganizationId": {
+          "shape": "OrganizationId",
+          "documentation": "<p>The Amazon WorkMail organization for which to list domains.</p>"
+        },
+        "DomainName": {
+          "shape": "WorkMailDomainName",
+          "documentation": "<p>The domain name that will become the default domain.</p>"
+        }
+      }
+    },
+    "UpdateDefaultMailDomainResponse": {
+      "type": "structure",
+      "members": {}
+    },
     "UpdateMailboxQuotaRequest": {
       "type": "structure",
       "required": [
@@ -4872,6 +5218,12 @@
       "member": {
         "shape": "User"
       }
+    },
+    "WorkMailDomainName": {
+      "type": "string",
+      "max": 209,
+      "min": 3,
+      "pattern": "[a-zA-Z0-9.-]+\\.[a-zA-Z-]{2,}"
     },
     "WorkMailIdentifier": {
       "type": "string",

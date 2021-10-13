@@ -12,11 +12,11 @@ declare class StorageGateway extends Service {
   constructor(options?: StorageGateway.Types.ClientConfiguration)
   config: Config & StorageGateway.Types.ClientConfiguration;
   /**
-   * Activates the gateway you previously deployed on your host. In the activation process, you specify information such as the Region that you want to use for storing snapshots or tapes, the time zone for scheduled snapshots the gateway snapshot schedule window, an activation key, and a name for your gateway. The activation process also associates your gateway with your account. For more information, see UpdateGatewayInformation.  You must turn on the gateway VM before you can activate your gateway. 
+   * Activates the gateway you previously deployed on your host. In the activation process, you specify information such as the Amazon Web Services Region that you want to use for storing snapshots or tapes, the time zone for scheduled snapshots the gateway snapshot schedule window, an activation key, and a name for your gateway. The activation process also associates your gateway with your account. For more information, see UpdateGatewayInformation.  You must turn on the gateway VM before you can activate your gateway. 
    */
   activateGateway(params: StorageGateway.Types.ActivateGatewayInput, callback?: (err: AWSError, data: StorageGateway.Types.ActivateGatewayOutput) => void): Request<StorageGateway.Types.ActivateGatewayOutput, AWSError>;
   /**
-   * Activates the gateway you previously deployed on your host. In the activation process, you specify information such as the Region that you want to use for storing snapshots or tapes, the time zone for scheduled snapshots the gateway snapshot schedule window, an activation key, and a name for your gateway. The activation process also associates your gateway with your account. For more information, see UpdateGatewayInformation.  You must turn on the gateway VM before you can activate your gateway. 
+   * Activates the gateway you previously deployed on your host. In the activation process, you specify information such as the Amazon Web Services Region that you want to use for storing snapshots or tapes, the time zone for scheduled snapshots the gateway snapshot schedule window, an activation key, and a name for your gateway. The activation process also associates your gateway with your account. For more information, see UpdateGatewayInformation.  You must turn on the gateway VM before you can activate your gateway. 
    */
   activateGateway(callback?: (err: AWSError, data: StorageGateway.Types.ActivateGatewayOutput) => void): Request<StorageGateway.Types.ActivateGatewayOutput, AWSError>;
   /**
@@ -100,19 +100,19 @@ declare class StorageGateway extends Service {
    */
   createCachediSCSIVolume(callback?: (err: AWSError, data: StorageGateway.Types.CreateCachediSCSIVolumeOutput) => void): Request<StorageGateway.Types.CreateCachediSCSIVolumeOutput, AWSError>;
   /**
-   * Creates a Network File System (NFS) file share on an existing S3 File Gateway. In Storage Gateway, a file share is a file system mount point backed by Amazon S3 cloud storage. Storage Gateway exposes file shares using an NFS interface. This operation is only supported for S3 File Gateways.  S3 File gateway requires Security Token Service (STS) to be activated to enable you to create a file share. Make sure STS is activated in the Region you are creating your S3 File Gateway in. If STS is not activated in the Region, activate it. For information about how to activate STS, see Activating and deactivating STS in an Region in the Identity and Access Management User Guide. S3 File Gateways do not support creating hard or symbolic links on a file share. 
+   * Creates a Network File System (NFS) file share on an existing S3 File Gateway. In Storage Gateway, a file share is a file system mount point backed by Amazon S3 cloud storage. Storage Gateway exposes file shares using an NFS interface. This operation is only supported for S3 File Gateways.  S3 File gateway requires Security Token Service (Amazon Web Services STS) to be activated to enable you to create a file share. Make sure Amazon Web Services STS is activated in the Amazon Web Services Region you are creating your S3 File Gateway in. If Amazon Web Services STS is not activated in the Amazon Web Services Region, activate it. For information about how to activate Amazon Web Services STS, see Activating and deactivating Amazon Web Services STS in an Amazon Web Services Region in the Identity and Access Management User Guide. S3 File Gateways do not support creating hard or symbolic links on a file share. 
    */
   createNFSFileShare(params: StorageGateway.Types.CreateNFSFileShareInput, callback?: (err: AWSError, data: StorageGateway.Types.CreateNFSFileShareOutput) => void): Request<StorageGateway.Types.CreateNFSFileShareOutput, AWSError>;
   /**
-   * Creates a Network File System (NFS) file share on an existing S3 File Gateway. In Storage Gateway, a file share is a file system mount point backed by Amazon S3 cloud storage. Storage Gateway exposes file shares using an NFS interface. This operation is only supported for S3 File Gateways.  S3 File gateway requires Security Token Service (STS) to be activated to enable you to create a file share. Make sure STS is activated in the Region you are creating your S3 File Gateway in. If STS is not activated in the Region, activate it. For information about how to activate STS, see Activating and deactivating STS in an Region in the Identity and Access Management User Guide. S3 File Gateways do not support creating hard or symbolic links on a file share. 
+   * Creates a Network File System (NFS) file share on an existing S3 File Gateway. In Storage Gateway, a file share is a file system mount point backed by Amazon S3 cloud storage. Storage Gateway exposes file shares using an NFS interface. This operation is only supported for S3 File Gateways.  S3 File gateway requires Security Token Service (Amazon Web Services STS) to be activated to enable you to create a file share. Make sure Amazon Web Services STS is activated in the Amazon Web Services Region you are creating your S3 File Gateway in. If Amazon Web Services STS is not activated in the Amazon Web Services Region, activate it. For information about how to activate Amazon Web Services STS, see Activating and deactivating Amazon Web Services STS in an Amazon Web Services Region in the Identity and Access Management User Guide. S3 File Gateways do not support creating hard or symbolic links on a file share. 
    */
   createNFSFileShare(callback?: (err: AWSError, data: StorageGateway.Types.CreateNFSFileShareOutput) => void): Request<StorageGateway.Types.CreateNFSFileShareOutput, AWSError>;
   /**
-   * Creates a Server Message Block (SMB) file share on an existing S3 File Gateway. In Storage Gateway, a file share is a file system mount point backed by Amazon S3 cloud storage. Storage Gateway exposes file shares using an SMB interface. This operation is only supported for S3 File Gateways.  S3 File Gateways require Security Token Service (STS) to be activated to enable you to create a file share. Make sure that STS is activated in the Region you are creating your S3 File Gateway in. If STS is not activated in this Region, activate it. For information about how to activate STS, see Activating and deactivating STS in an Region in the Identity and Access Management User Guide. File gateways don't support creating hard or symbolic links on a file share. 
+   * Creates a Server Message Block (SMB) file share on an existing S3 File Gateway. In Storage Gateway, a file share is a file system mount point backed by Amazon S3 cloud storage. Storage Gateway exposes file shares using an SMB interface. This operation is only supported for S3 File Gateways.  S3 File Gateways require Security Token Service (Amazon Web Services STS) to be activated to enable you to create a file share. Make sure that Amazon Web Services STS is activated in the Amazon Web Services Region you are creating your S3 File Gateway in. If Amazon Web Services STS is not activated in this Amazon Web Services Region, activate it. For information about how to activate Amazon Web Services STS, see Activating and deactivating Amazon Web Services STS in an Amazon Web Services Region in the Identity and Access Management User Guide. File gateways don't support creating hard or symbolic links on a file share. 
    */
   createSMBFileShare(params: StorageGateway.Types.CreateSMBFileShareInput, callback?: (err: AWSError, data: StorageGateway.Types.CreateSMBFileShareOutput) => void): Request<StorageGateway.Types.CreateSMBFileShareOutput, AWSError>;
   /**
-   * Creates a Server Message Block (SMB) file share on an existing S3 File Gateway. In Storage Gateway, a file share is a file system mount point backed by Amazon S3 cloud storage. Storage Gateway exposes file shares using an SMB interface. This operation is only supported for S3 File Gateways.  S3 File Gateways require Security Token Service (STS) to be activated to enable you to create a file share. Make sure that STS is activated in the Region you are creating your S3 File Gateway in. If STS is not activated in this Region, activate it. For information about how to activate STS, see Activating and deactivating STS in an Region in the Identity and Access Management User Guide. File gateways don't support creating hard or symbolic links on a file share. 
+   * Creates a Server Message Block (SMB) file share on an existing S3 File Gateway. In Storage Gateway, a file share is a file system mount point backed by Amazon S3 cloud storage. Storage Gateway exposes file shares using an SMB interface. This operation is only supported for S3 File Gateways.  S3 File Gateways require Security Token Service (Amazon Web Services STS) to be activated to enable you to create a file share. Make sure that Amazon Web Services STS is activated in the Amazon Web Services Region you are creating your S3 File Gateway in. If Amazon Web Services STS is not activated in this Amazon Web Services Region, activate it. For information about how to activate Amazon Web Services STS, see Activating and deactivating Amazon Web Services STS in an Amazon Web Services Region in the Identity and Access Management User Guide. File gateways don't support creating hard or symbolic links on a file share. 
    */
   createSMBFileShare(callback?: (err: AWSError, data: StorageGateway.Types.CreateSMBFileShareOutput) => void): Request<StorageGateway.Types.CreateSMBFileShareOutput, AWSError>;
   /**
@@ -460,11 +460,11 @@ declare class StorageGateway extends Service {
    */
   listFileSystemAssociations(callback?: (err: AWSError, data: StorageGateway.Types.ListFileSystemAssociationsOutput) => void): Request<StorageGateway.Types.ListFileSystemAssociationsOutput, AWSError>;
   /**
-   * Lists gateways owned by an account in an Region specified in the request. The returned list is ordered by gateway Amazon Resource Name (ARN). By default, the operation returns a maximum of 100 gateways. This operation supports pagination that allows you to optionally reduce the number of gateways returned in a response. If you have more gateways than are returned in a response (that is, the response returns only a truncated list of your gateways), the response contains a marker that you can specify in your next request to fetch the next page of gateways.
+   * Lists gateways owned by an Amazon Web Services account in an Amazon Web Services Region specified in the request. The returned list is ordered by gateway Amazon Resource Name (ARN). By default, the operation returns a maximum of 100 gateways. This operation supports pagination that allows you to optionally reduce the number of gateways returned in a response. If you have more gateways than are returned in a response (that is, the response returns only a truncated list of your gateways), the response contains a marker that you can specify in your next request to fetch the next page of gateways.
    */
   listGateways(params: StorageGateway.Types.ListGatewaysInput, callback?: (err: AWSError, data: StorageGateway.Types.ListGatewaysOutput) => void): Request<StorageGateway.Types.ListGatewaysOutput, AWSError>;
   /**
-   * Lists gateways owned by an account in an Region specified in the request. The returned list is ordered by gateway Amazon Resource Name (ARN). By default, the operation returns a maximum of 100 gateways. This operation supports pagination that allows you to optionally reduce the number of gateways returned in a response. If you have more gateways than are returned in a response (that is, the response returns only a truncated list of your gateways), the response contains a marker that you can specify in your next request to fetch the next page of gateways.
+   * Lists gateways owned by an Amazon Web Services account in an Amazon Web Services Region specified in the request. The returned list is ordered by gateway Amazon Resource Name (ARN). By default, the operation returns a maximum of 100 gateways. This operation supports pagination that allows you to optionally reduce the number of gateways returned in a response. If you have more gateways than are returned in a response (that is, the response returns only a truncated list of your gateways), the response contains a marker that you can specify in your next request to fetch the next page of gateways.
    */
   listGateways(callback?: (err: AWSError, data: StorageGateway.Types.ListGatewaysOutput) => void): Request<StorageGateway.Types.ListGatewaysOutput, AWSError>;
   /**
@@ -684,11 +684,11 @@ declare class StorageGateway extends Service {
    */
   updateNFSFileShare(callback?: (err: AWSError, data: StorageGateway.Types.UpdateNFSFileShareOutput) => void): Request<StorageGateway.Types.UpdateNFSFileShareOutput, AWSError>;
   /**
-   * Updates a Server Message Block (SMB) file share. This operation is only supported for S3 File Gateways.  To leave a file share field unchanged, set the corresponding input field to null.   File gateways require Security Token Service (STS) to be activated to enable you to create a file share. Make sure that STS is activated in the Region you are creating your file gateway in. If STS is not activated in this Region, activate it. For information about how to activate STS, see Activating and deactivating STS in an Region in the Identity and Access Management User Guide. File gateways don't support creating hard or symbolic links on a file share. 
+   * Updates a Server Message Block (SMB) file share. This operation is only supported for S3 File Gateways.  To leave a file share field unchanged, set the corresponding input field to null.   File gateways require Security Token Service (Amazon Web Services STS) to be activated to enable you to create a file share. Make sure that Amazon Web Services STS is activated in the Amazon Web Services Region you are creating your file gateway in. If Amazon Web Services STS is not activated in this Amazon Web Services Region, activate it. For information about how to activate Amazon Web Services STS, see Activating and deactivating Amazon Web Services STS in an Amazon Web Services Region in the Identity and Access Management User Guide. File gateways don't support creating hard or symbolic links on a file share. 
    */
   updateSMBFileShare(params: StorageGateway.Types.UpdateSMBFileShareInput, callback?: (err: AWSError, data: StorageGateway.Types.UpdateSMBFileShareOutput) => void): Request<StorageGateway.Types.UpdateSMBFileShareOutput, AWSError>;
   /**
-   * Updates a Server Message Block (SMB) file share. This operation is only supported for S3 File Gateways.  To leave a file share field unchanged, set the corresponding input field to null.   File gateways require Security Token Service (STS) to be activated to enable you to create a file share. Make sure that STS is activated in the Region you are creating your file gateway in. If STS is not activated in this Region, activate it. For information about how to activate STS, see Activating and deactivating STS in an Region in the Identity and Access Management User Guide. File gateways don't support creating hard or symbolic links on a file share. 
+   * Updates a Server Message Block (SMB) file share. This operation is only supported for S3 File Gateways.  To leave a file share field unchanged, set the corresponding input field to null.   File gateways require Security Token Service (Amazon Web Services STS) to be activated to enable you to create a file share. Make sure that Amazon Web Services STS is activated in the Amazon Web Services Region you are creating your file gateway in. If Amazon Web Services STS is not activated in this Amazon Web Services Region, activate it. For information about how to activate Amazon Web Services STS, see Activating and deactivating Amazon Web Services STS in an Amazon Web Services Region in the Identity and Access Management User Guide. File gateways don't support creating hard or symbolic links on a file share. 
    */
   updateSMBFileShare(callback?: (err: AWSError, data: StorageGateway.Types.UpdateSMBFileShareOutput) => void): Request<StorageGateway.Types.UpdateSMBFileShareOutput, AWSError>;
   /**
@@ -699,6 +699,14 @@ declare class StorageGateway extends Service {
    * Controls whether the shares on an S3 File Gateway are visible in a net view or browse list. The operation is only supported for S3 File Gateways.
    */
   updateSMBFileShareVisibility(callback?: (err: AWSError, data: StorageGateway.Types.UpdateSMBFileShareVisibilityOutput) => void): Request<StorageGateway.Types.UpdateSMBFileShareVisibilityOutput, AWSError>;
+  /**
+   * Updates the list of Active Directory users and groups that have special permissions for SMB file shares on the gateway.
+   */
+  updateSMBLocalGroups(params: StorageGateway.Types.UpdateSMBLocalGroupsInput, callback?: (err: AWSError, data: StorageGateway.Types.UpdateSMBLocalGroupsOutput) => void): Request<StorageGateway.Types.UpdateSMBLocalGroupsOutput, AWSError>;
+  /**
+   * Updates the list of Active Directory users and groups that have special permissions for SMB file shares on the gateway.
+   */
+  updateSMBLocalGroups(callback?: (err: AWSError, data: StorageGateway.Types.UpdateSMBLocalGroupsOutput) => void): Request<StorageGateway.Types.UpdateSMBLocalGroupsOutput, AWSError>;
   /**
    * Updates the SMB security strategy on a file gateway. This action is only supported in file gateways.  This API is called Security level in the User Guide. A higher security level can affect performance of the gateway. 
    */
@@ -739,7 +747,7 @@ declare namespace StorageGateway {
      */
     GatewayTimezone: GatewayTimezone;
     /**
-     * A value that indicates the Region where you want to store your data. The gateway Region specified must be the same Region as the Region in your Host header in the request. For more information about available Regions and endpoints for Storage Gateway, see  Storage Gateway endpoints and quotas in the Amazon Web Services General Reference. Valid Values: See  Storage Gateway endpoints and quotas in the Amazon Web Services General Reference. 
+     * A value that indicates the Amazon Web Services Region where you want to store your data. The gateway Amazon Web Services Region specified must be the same Amazon Web Services Region as the Amazon Web Services Region in your Host header in the request. For more information about available Amazon Web Services Regions and endpoints for Storage Gateway, see  Storage Gateway endpoints and quotas in the Amazon Web Services General Reference. Valid Values: See  Storage Gateway endpoints and quotas in the Amazon Web Services General Reference. 
      */
     GatewayRegion: RegionId;
     /**
@@ -1152,7 +1160,7 @@ declare namespace StorageGateway {
      */
     Role: Role;
     /**
-     * The ARN of the backend storage used for storing file data. A prefix name can be added to the S3 bucket name. It must end with a "/".  You can specify a bucket attached to an access point using a complete ARN that includes the bucket region as shown:  arn:aws:s3:region:account-id:accesspoint/access-point-name   If you specify a bucket attached to an access point, the bucket policy must be configured to delegate access control to the access point. For information, see Delegating access control to access points in the Amazon S3 User Guide. 
+     * A custom ARN for the backend storage used for storing data for file shares. It includes a resource ARN with an optional prefix concatenation. The prefix must end with a forward slash (/).  You can specify LocationARN as a bucket ARN, access point ARN or access point alias, as shown in the following examples. Bucket ARN:  arn:aws:s3:::my-bucket/prefix/  Access point ARN:  arn:aws:s3:region:account-id:accesspoint/access-point-name/prefix/  If you specify an access point, the bucket policy must be configured to delegate access control to the access point. For information, see Delegating access control to access points in the Amazon S3 User Guide. Access point alias:  test-ap-ab123cdef4gehijklmn5opqrstuvuse1a-s3alias  
      */
     LocationARN: LocationARN;
     /**
@@ -1188,7 +1196,7 @@ declare namespace StorageGateway {
      */
     Tags?: Tags;
     /**
-     * The name of the file share. Optional.   FileShareName must be set if an S3 prefix name is set in LocationARN. 
+     * The name of the file share. Optional.   FileShareName must be set if an S3 prefix name is set in LocationARN, or if an access point or access point alias is used. 
      */
     FileShareName?: FileShareName;
     /**
@@ -1207,6 +1215,10 @@ declare namespace StorageGateway {
      * Specifies the Region of the S3 bucket where the NFS file share stores files.  This parameter is required for NFS file shares that connect to Amazon S3 through a VPC endpoint, a VPC access point, or an access point alias that points to a VPC access point. 
      */
     BucketRegion?: RegionId;
+    /**
+     * The Amazon Resource Name (ARN) of the storage used for audit logs.
+     */
+    AuditDestinationARN?: AuditDestinationARN;
   }
   export interface CreateNFSFileShareOutput {
     /**
@@ -1236,7 +1248,7 @@ declare namespace StorageGateway {
      */
     Role: Role;
     /**
-     * The ARN of the backend storage used for storing file data. A prefix name can be added to the S3 bucket name. It must end with a "/".  You can specify a bucket attached to an access point using a complete ARN that includes the bucket region as shown:  arn:aws:s3:region:account-id:accesspoint/access-point-name   If you specify a bucket attached to an access point, the bucket policy must be configured to delegate access control to the access point. For information, see Delegating access control to access points in the Amazon S3 User Guide. 
+     * A custom ARN for the backend storage used for storing data for file shares. It includes a resource ARN with an optional prefix concatenation. The prefix must end with a forward slash (/).  You can specify LocationARN as a bucket ARN, access point ARN or access point alias, as shown in the following examples. Bucket ARN:  arn:aws:s3:::my-bucket/prefix/  Access point ARN:  arn:aws:s3:region:account-id:accesspoint/access-point-name/prefix/  If you specify an access point, the bucket policy must be configured to delegate access control to the access point. For information, see Delegating access control to access points in the Amazon S3 User Guide. Access point alias:  test-ap-ab123cdef4gehijklmn5opqrstuvuse1a-s3alias  
      */
     LocationARN: LocationARN;
     /**
@@ -1296,7 +1308,7 @@ declare namespace StorageGateway {
      */
     Tags?: Tags;
     /**
-     * The name of the file share. Optional.   FileShareName must be set if an S3 prefix name is set in LocationARN. 
+     * The name of the file share. Optional.   FileShareName must be set if an S3 prefix name is set in LocationARN, or if an access point or access point alias is used. 
      */
     FileShareName?: FileShareName;
     /**
@@ -1437,7 +1449,7 @@ declare namespace StorageGateway {
      */
     StorageClass: TapeStorageClass;
     /**
-     * Tape retention lock can be configured in two modes. When configured in governance mode, accounts with specific IAM permissions are authorized to remove the tape retention lock from archived virtual tapes. When configured in compliance mode, the tape retention lock cannot be removed by any user, including the root account.
+     * Tape retention lock can be configured in two modes. When configured in governance mode, Amazon Web Services accounts with specific IAM permissions are authorized to remove the tape retention lock from archived virtual tapes. When configured in compliance mode, the tape retention lock cannot be removed by any user, including the root Amazon Web Services account.
      */
     RetentionLockType?: RetentionLockType;
     /**
@@ -1451,13 +1463,13 @@ declare namespace StorageGateway {
   }
   export interface CreateTapePoolOutput {
     /**
-     * The unique Amazon Resource Name (ARN) that represents the custom tape pool. Use the ListTapePools operation to return a list of tape pools for your account and Region.
+     * The unique Amazon Resource Name (ARN) that represents the custom tape pool. Use the ListTapePools operation to return a list of tape pools for your account and Amazon Web Services Region.
      */
     PoolARN?: PoolARN;
   }
   export interface CreateTapeWithBarcodeInput {
     /**
-     * The unique Amazon Resource Name (ARN) that represents the gateway to associate the virtual tape with. Use the ListGateways operation to return a list of gateways for your account and Region.
+     * The unique Amazon Resource Name (ARN) that represents the gateway to associate the virtual tape with. Use the ListGateways operation to return a list of gateways for your account and Amazon Web Services Region.
      */
     GatewayARN: GatewayARN;
     /**
@@ -1497,7 +1509,7 @@ declare namespace StorageGateway {
   }
   export interface CreateTapesInput {
     /**
-     * The unique Amazon Resource Name (ARN) that represents the gateway to associate the virtual tapes with. Use the ListGateways operation to return a list of gateways for your account and Region.
+     * The unique Amazon Resource Name (ARN) that represents the gateway to associate the virtual tapes with. Use the ListGateways operation to return a list of gateways for your account and Amazon Web Services Region.
      */
     GatewayARN: GatewayARN;
     /**
@@ -1636,7 +1648,7 @@ declare namespace StorageGateway {
   }
   export interface DeleteTapeInput {
     /**
-     * The unique Amazon Resource Name (ARN) of the gateway that the virtual tape to delete is associated with. Use the ListGateways operation to return a list of gateways for your account and Region.
+     * The unique Amazon Resource Name (ARN) of the gateway that the virtual tape to delete is associated with. Use the ListGateways operation to return a list of gateways for your account and Amazon Web Services Region.
      */
     GatewayARN: GatewayARN;
     /**
@@ -1825,7 +1837,7 @@ declare namespace StorageGateway {
      */
     Ec2InstanceId?: Ec2InstanceId;
     /**
-     * The Region where the Amazon EC2 instance is located.
+     * The Amazon Web Services Region where the Amazon EC2 instance is located.
      */
     Ec2InstanceRegion?: Ec2InstanceRegion;
     /**
@@ -1940,6 +1952,10 @@ declare namespace StorageGateway {
      * The shares on this gateway appear when listing shares. Only supported for S3 File Gateways. 
      */
     FileSharesVisible?: Boolean;
+    /**
+     * A list of Active Directory users and groups that have special permissions for SMB file shares on the gateway.
+     */
+    SMBLocalGroups?: SMBLocalGroups;
   }
   export interface DescribeSnapshotScheduleInput {
     /**
@@ -2271,9 +2287,20 @@ declare namespace StorageGateway {
      * Specifies network configuration information for the gateway associated with the Amazon FSx file system.  If multiple file systems are associated with this gateway, this parameter's IpAddresses field is required. 
      */
     EndpointNetworkConfiguration?: EndpointNetworkConfiguration;
+    /**
+     * An array containing the FileSystemAssociationStatusDetail data type, which provides detailed information on file system association status.
+     */
+    FileSystemAssociationStatusDetails?: FileSystemAssociationStatusDetails;
   }
   export type FileSystemAssociationInfoList = FileSystemAssociationInfo[];
   export type FileSystemAssociationStatus = string;
+  export interface FileSystemAssociationStatusDetail {
+    /**
+     * The error code for a given file system association status.
+     */
+    ErrorCode?: FileSystemAssociationSyncErrorCode;
+  }
+  export type FileSystemAssociationStatusDetails = FileSystemAssociationStatusDetail[];
   export interface FileSystemAssociationSummary {
     /**
      * The ID of the file system association.
@@ -2290,6 +2317,7 @@ declare namespace StorageGateway {
     GatewayARN?: GatewayARN;
   }
   export type FileSystemAssociationSummaryList = FileSystemAssociationSummary[];
+  export type FileSystemAssociationSyncErrorCode = string;
   export type FileSystemLocationARN = string;
   export type Folder = string;
   export type FolderList = Folder[];
@@ -2302,7 +2330,7 @@ declare namespace StorageGateway {
      */
     GatewayId?: GatewayId;
     /**
-     * The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a list of gateways for your account and Region.
+     * The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a list of gateways for your account and Amazon Web Services Region.
      */
     GatewayARN?: GatewayARN;
     /**
@@ -2322,7 +2350,7 @@ declare namespace StorageGateway {
      */
     Ec2InstanceId?: Ec2InstanceId;
     /**
-     * The Region where the Amazon EC2 instance is located.
+     * The Amazon Web Services Region where the Amazon EC2 instance is located.
      */
     Ec2InstanceRegion?: Ec2InstanceRegion;
   }
@@ -2345,7 +2373,7 @@ declare namespace StorageGateway {
   export type IqnName = string;
   export interface JoinDomainInput {
     /**
-     * The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a list of gateways for your account and Region.
+     * The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a list of gateways for your account and Amazon Web Services Region.
      */
     GatewayARN: GatewayARN;
     /**
@@ -2653,7 +2681,7 @@ declare namespace StorageGateway {
      */
     Tags?: Tags;
     /**
-     * The name of the file share. Optional.   FileShareName must be set if an S3 prefix name is set in LocationARN. 
+     * The name of the file share. Optional.   FileShareName must be set if an S3 prefix name is set in LocationARN, or if an access point or access point alias is used. 
      */
     FileShareName?: FileShareName;
     /**
@@ -2672,6 +2700,10 @@ declare namespace StorageGateway {
      * Specifies the Region of the S3 bucket where the NFS file share stores files.  This parameter is required for NFS file shares that connect to Amazon S3 through a VPC endpoint, a VPC access point, or an access point alias that points to a VPC access point. 
      */
     BucketRegion?: RegionId;
+    /**
+     * The Amazon Resource Name (ARN) of the storage used for audit logs.
+     */
+    AuditDestinationARN?: AuditDestinationARN;
   }
   export type NFSFileShareInfoList = NFSFileShareInfo[];
   export interface NetworkInterface {
@@ -2710,7 +2742,7 @@ declare namespace StorageGateway {
   export type PoolId = string;
   export interface PoolInfo {
     /**
-     * The Amazon Resource Name (ARN) of the custom tape pool. Use the ListTapePools operation to return a list of custom tape pools for your account and Region.
+     * The Amazon Resource Name (ARN) of the custom tape pool. Use the ListTapePools operation to return a list of custom tape pools for your account and Amazon Web Services Region.
      */
     PoolARN?: PoolARN;
     /**
@@ -2722,7 +2754,7 @@ declare namespace StorageGateway {
      */
     StorageClass?: TapeStorageClass;
     /**
-     * Tape retention lock type, which can be configured in two modes. When configured in governance mode, accounts with specific IAM permissions are authorized to remove the tape retention lock from archived virtual tapes. When configured in compliance mode, the tape retention lock cannot be removed by any user, including the root account.
+     * Tape retention lock type, which can be configured in two modes. When configured in governance mode, Amazon Web Services accounts with specific IAM permissions are authorized to remove the tape retention lock from archived virtual tapes. When configured in compliance mode, the tape retention lock cannot be removed by any user, including the root Amazon Web Services account.
      */
     RetentionLockType?: RetentionLockType;
     /**
@@ -2789,7 +2821,7 @@ declare namespace StorageGateway {
      */
     TapeARN: TapeARN;
     /**
-     * The Amazon Resource Name (ARN) of the gateway you want to retrieve the virtual tape to. Use the ListGateways operation to return a list of gateways for your account and Region. You retrieve archived virtual tapes to only one gateway and the gateway must be a tape gateway.
+     * The Amazon Resource Name (ARN) of the gateway you want to retrieve the virtual tape to. Use the ListGateways operation to return a list of gateways for your account and Amazon Web Services Region. You retrieve archived virtual tapes to only one gateway and the gateway must be a tape gateway.
      */
     GatewayARN: GatewayARN;
   }
@@ -2880,7 +2912,7 @@ declare namespace StorageGateway {
      */
     Tags?: Tags;
     /**
-     * The name of the file share. Optional.   FileShareName must be set if an S3 prefix name is set in LocationARN. 
+     * The name of the file share. Optional.   FileShareName must be set if an S3 prefix name is set in LocationARN, or if an access point or access point alias is used. 
      */
     FileShareName?: FileShareName;
     /**
@@ -2906,6 +2938,12 @@ declare namespace StorageGateway {
   }
   export type SMBFileShareInfoList = SMBFileShareInfo[];
   export type SMBGuestPassword = string;
+  export interface SMBLocalGroups {
+    /**
+     * A list of Active Directory users and groups that have local Gateway Admin permissions. Acceptable formats include: DOMAIN\User1, user1, DOMAIN\group1, and group1. Gateway Admins can use the Shared Folders Microsoft Management Console snap-in to force-close files that are open and locked.
+     */
+    GatewayAdmins?: UserList;
+  }
   export type SMBSecurityStrategy = "ClientSpecified"|"MandatorySigning"|"MandatoryEncryption"|string;
   export interface SetLocalConsolePasswordInput {
     GatewayARN: GatewayARN;
@@ -3155,7 +3193,7 @@ declare namespace StorageGateway {
      */
     TapeStatus?: TapeStatus;
     /**
-     * The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a list of gateways for your account and Region.
+     * The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a list of gateways for your account and Amazon Web Services Region.
      */
     GatewayARN?: GatewayARN;
     /**
@@ -3385,17 +3423,21 @@ declare namespace StorageGateway {
      */
     RequesterPays?: Boolean;
     /**
-     * The name of the file share. Optional.   FileShareName must be set if an S3 prefix name is set in LocationARN. 
+     * The name of the file share. Optional.   FileShareName must be set if an S3 prefix name is set in LocationARN, or if an access point or access point alias is used. 
      */
     FileShareName?: FileShareName;
     /**
-     * specifies refresh cache information for the file share.
+     * Specifies refresh cache information for the file share.
      */
     CacheAttributes?: CacheAttributes;
     /**
      * The notification policy of the file share. SettlingTimeInSeconds controls the number of seconds to wait after the last point in time a client wrote to a file before generating an ObjectUploaded notification. Because clients can make many small writes to files, it's best to set this parameter for as long as possible to avoid generating multiple notifications for the same file in a small time period.   SettlingTimeInSeconds has no effect on the timing of the object uploading to Amazon S3, only the timing of the notification.  The following example sets NotificationPolicy on with SettlingTimeInSeconds set to 60.  {\"Upload\": {\"SettlingTimeInSeconds\": 60}}  The following example sets NotificationPolicy off.  {} 
      */
     NotificationPolicy?: NotificationPolicy;
+    /**
+     * The Amazon Resource Name (ARN) of the storage used for audit logs.
+     */
+    AuditDestinationARN?: AuditDestinationARN;
   }
   export interface UpdateNFSFileShareOutput {
     /**
@@ -3465,7 +3507,7 @@ declare namespace StorageGateway {
      */
     CaseSensitivity?: CaseSensitivity;
     /**
-     * The name of the file share. Optional.   FileShareName must be set if an S3 prefix name is set in LocationARN. 
+     * The name of the file share. Optional.   FileShareName must be set if an S3 prefix name is set in LocationARN, or if an access point or access point alias is used. 
      */
     FileShareName?: FileShareName;
     /**
@@ -3495,6 +3537,16 @@ declare namespace StorageGateway {
     FileSharesVisible: Boolean;
   }
   export interface UpdateSMBFileShareVisibilityOutput {
+    GatewayARN?: GatewayARN;
+  }
+  export interface UpdateSMBLocalGroupsInput {
+    GatewayARN: GatewayARN;
+    /**
+     * A list of Active Directory users and groups that you want to grant special permissions for SMB file shares on the gateway.
+     */
+    SMBLocalGroups: SMBLocalGroups;
+  }
+  export interface UpdateSMBLocalGroupsOutput {
     GatewayARN?: GatewayARN;
   }
   export interface UpdateSMBSecurityStrategyInput {

@@ -84,11 +84,11 @@ declare class WorkMail extends Service {
    */
   createUser(callback?: (err: AWSError, data: WorkMail.Types.CreateUserResponse) => void): Request<WorkMail.Types.CreateUserResponse, AWSError>;
   /**
-   * Deletes an access control rule for the specified WorkMail organization.
+   * Deletes an access control rule for the specified WorkMail organization.  Deleting already deleted and non-existing rules does not produce an error. In those cases, the service sends back an HTTP 200 response with an empty HTTP body. 
    */
   deleteAccessControlRule(params: WorkMail.Types.DeleteAccessControlRuleRequest, callback?: (err: AWSError, data: WorkMail.Types.DeleteAccessControlRuleResponse) => void): Request<WorkMail.Types.DeleteAccessControlRuleResponse, AWSError>;
   /**
-   * Deletes an access control rule for the specified WorkMail organization.
+   * Deletes an access control rule for the specified WorkMail organization.  Deleting already deleted and non-existing rules does not produce an error. In those cases, the service sends back an HTTP 200 response with an empty HTTP body. 
    */
   deleteAccessControlRule(callback?: (err: AWSError, data: WorkMail.Types.DeleteAccessControlRuleResponse) => void): Request<WorkMail.Types.DeleteAccessControlRuleResponse, AWSError>;
   /**
@@ -116,19 +116,19 @@ declare class WorkMail extends Service {
    */
   deleteMailboxPermissions(callback?: (err: AWSError, data: WorkMail.Types.DeleteMailboxPermissionsResponse) => void): Request<WorkMail.Types.DeleteMailboxPermissionsResponse, AWSError>;
   /**
-   * Deletes the mobile device access override for the given WorkMail organization, user, and device.
+   * Deletes the mobile device access override for the given WorkMail organization, user, and device.  Deleting already deleted and non-existing overrides does not produce an error. In those cases, the service sends back an HTTP 200 response with an empty HTTP body. 
    */
   deleteMobileDeviceAccessOverride(params: WorkMail.Types.DeleteMobileDeviceAccessOverrideRequest, callback?: (err: AWSError, data: WorkMail.Types.DeleteMobileDeviceAccessOverrideResponse) => void): Request<WorkMail.Types.DeleteMobileDeviceAccessOverrideResponse, AWSError>;
   /**
-   * Deletes the mobile device access override for the given WorkMail organization, user, and device.
+   * Deletes the mobile device access override for the given WorkMail organization, user, and device.  Deleting already deleted and non-existing overrides does not produce an error. In those cases, the service sends back an HTTP 200 response with an empty HTTP body. 
    */
   deleteMobileDeviceAccessOverride(callback?: (err: AWSError, data: WorkMail.Types.DeleteMobileDeviceAccessOverrideResponse) => void): Request<WorkMail.Types.DeleteMobileDeviceAccessOverrideResponse, AWSError>;
   /**
-   * Deletes a mobile device access rule for the specified Amazon WorkMail organization.
+   * Deletes a mobile device access rule for the specified Amazon WorkMail organization.  Deleting already deleted and non-existing rules does not produce an error. In those cases, the service sends back an HTTP 200 response with an empty HTTP body. 
    */
   deleteMobileDeviceAccessRule(params: WorkMail.Types.DeleteMobileDeviceAccessRuleRequest, callback?: (err: AWSError, data: WorkMail.Types.DeleteMobileDeviceAccessRuleResponse) => void): Request<WorkMail.Types.DeleteMobileDeviceAccessRuleResponse, AWSError>;
   /**
-   * Deletes a mobile device access rule for the specified Amazon WorkMail organization.
+   * Deletes a mobile device access rule for the specified Amazon WorkMail organization.  Deleting already deleted and non-existing rules does not produce an error. In those cases, the service sends back an HTTP 200 response with an empty HTTP body. 
    */
   deleteMobileDeviceAccessRule(callback?: (err: AWSError, data: WorkMail.Types.DeleteMobileDeviceAccessRuleResponse) => void): Request<WorkMail.Types.DeleteMobileDeviceAccessRuleResponse, AWSError>;
   /**
@@ -171,6 +171,14 @@ declare class WorkMail extends Service {
    * Mark a user, group, or resource as no longer used in Amazon WorkMail. This action disassociates the mailbox and schedules it for clean-up. WorkMail keeps mailboxes for 30 days before they are permanently removed. The functionality in the console is Disable.
    */
   deregisterFromWorkMail(callback?: (err: AWSError, data: WorkMail.Types.DeregisterFromWorkMailResponse) => void): Request<WorkMail.Types.DeregisterFromWorkMailResponse, AWSError>;
+  /**
+   * Removes a domain from Amazon WorkMail, stops email routing to WorkMail, and removes the authorization allowing WorkMail use. SES keeps the domain because other applications may use it. You must first remove any email address used by WorkMail entities before you remove the domain.
+   */
+  deregisterMailDomain(params: WorkMail.Types.DeregisterMailDomainRequest, callback?: (err: AWSError, data: WorkMail.Types.DeregisterMailDomainResponse) => void): Request<WorkMail.Types.DeregisterMailDomainResponse, AWSError>;
+  /**
+   * Removes a domain from Amazon WorkMail, stops email routing to WorkMail, and removes the authorization allowing WorkMail use. SES keeps the domain because other applications may use it. You must first remove any email address used by WorkMail entities before you remove the domain.
+   */
+  deregisterMailDomain(callback?: (err: AWSError, data: WorkMail.Types.DeregisterMailDomainResponse) => void): Request<WorkMail.Types.DeregisterMailDomainResponse, AWSError>;
   /**
    * Returns the data available for the group.
    */
@@ -252,6 +260,14 @@ declare class WorkMail extends Service {
    */
   getDefaultRetentionPolicy(callback?: (err: AWSError, data: WorkMail.Types.GetDefaultRetentionPolicyResponse) => void): Request<WorkMail.Types.GetDefaultRetentionPolicyResponse, AWSError>;
   /**
+   * Gets details for a mail domain, including domain records required to configure your domain with recommended security.
+   */
+  getMailDomain(params: WorkMail.Types.GetMailDomainRequest, callback?: (err: AWSError, data: WorkMail.Types.GetMailDomainResponse) => void): Request<WorkMail.Types.GetMailDomainResponse, AWSError>;
+  /**
+   * Gets details for a mail domain, including domain records required to configure your domain with recommended security.
+   */
+  getMailDomain(callback?: (err: AWSError, data: WorkMail.Types.GetMailDomainResponse) => void): Request<WorkMail.Types.GetMailDomainResponse, AWSError>;
+  /**
    * Requests a user's mailbox details for a specified organization and user.
    */
   getMailboxDetails(params: WorkMail.Types.GetMailboxDetailsRequest, callback?: (err: AWSError, data: WorkMail.Types.GetMailboxDetailsResponse) => void): Request<WorkMail.Types.GetMailboxDetailsResponse, AWSError>;
@@ -307,6 +323,14 @@ declare class WorkMail extends Service {
    * Returns summaries of the organization's groups.
    */
   listGroups(callback?: (err: AWSError, data: WorkMail.Types.ListGroupsResponse) => void): Request<WorkMail.Types.ListGroupsResponse, AWSError>;
+  /**
+   * Lists the mail domains in a given Amazon WorkMail organization.
+   */
+  listMailDomains(params: WorkMail.Types.ListMailDomainsRequest, callback?: (err: AWSError, data: WorkMail.Types.ListMailDomainsResponse) => void): Request<WorkMail.Types.ListMailDomainsResponse, AWSError>;
+  /**
+   * Lists the mail domains in a given Amazon WorkMail organization.
+   */
+  listMailDomains(callback?: (err: AWSError, data: WorkMail.Types.ListMailDomainsResponse) => void): Request<WorkMail.Types.ListMailDomainsResponse, AWSError>;
   /**
    * Lists the mailbox export jobs started for the specified organization within the last seven days.
    */
@@ -420,6 +444,14 @@ declare class WorkMail extends Service {
    */
   putRetentionPolicy(callback?: (err: AWSError, data: WorkMail.Types.PutRetentionPolicyResponse) => void): Request<WorkMail.Types.PutRetentionPolicyResponse, AWSError>;
   /**
+   * Registers a new domain in Amazon WorkMail and SES, and configures it for use by WorkMail. Emails received by SES for this domain are routed to the specified WorkMail organization, and WorkMail has permanent permission to use the specified domain for sending your users' emails.
+   */
+  registerMailDomain(params: WorkMail.Types.RegisterMailDomainRequest, callback?: (err: AWSError, data: WorkMail.Types.RegisterMailDomainResponse) => void): Request<WorkMail.Types.RegisterMailDomainResponse, AWSError>;
+  /**
+   * Registers a new domain in Amazon WorkMail and SES, and configures it for use by WorkMail. Emails received by SES for this domain are routed to the specified WorkMail organization, and WorkMail has permanent permission to use the specified domain for sending your users' emails.
+   */
+  registerMailDomain(callback?: (err: AWSError, data: WorkMail.Types.RegisterMailDomainResponse) => void): Request<WorkMail.Types.RegisterMailDomainResponse, AWSError>;
+  /**
    * Registers an existing and disabled user, group, or resource for Amazon WorkMail use by associating a mailbox and calendaring capabilities. It performs no change if the user, group, or resource is enabled and fails if the user, group, or resource is deleted. This operation results in the accumulation of costs. For more information, see Pricing. The equivalent console functionality for this operation is Enable.  Users can either be created by calling the CreateUser API operation or they can be synchronized from your directory. For more information, see DeregisterFromWorkMail.
    */
   registerToWorkMail(params: WorkMail.Types.RegisterToWorkMailRequest, callback?: (err: AWSError, data: WorkMail.Types.RegisterToWorkMailResponse) => void): Request<WorkMail.Types.RegisterToWorkMailResponse, AWSError>;
@@ -459,6 +491,14 @@ declare class WorkMail extends Service {
    * Untags the specified tags from the specified Amazon WorkMail organization resource.
    */
   untagResource(callback?: (err: AWSError, data: WorkMail.Types.UntagResourceResponse) => void): Request<WorkMail.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Updates the default mail domain for an organization. The default mail domain is used by the WorkMail AWS Console to suggest an email address when enabling a mail user. You can only have one default domain.
+   */
+  updateDefaultMailDomain(params: WorkMail.Types.UpdateDefaultMailDomainRequest, callback?: (err: AWSError, data: WorkMail.Types.UpdateDefaultMailDomainResponse) => void): Request<WorkMail.Types.UpdateDefaultMailDomainResponse, AWSError>;
+  /**
+   * Updates the default mail domain for an organization. The default mail domain is used by the WorkMail AWS Console to suggest an email address when enabling a mail user. You can only have one default domain.
+   */
+  updateDefaultMailDomain(callback?: (err: AWSError, data: WorkMail.Types.UpdateDefaultMailDomainResponse) => void): Request<WorkMail.Types.UpdateDefaultMailDomainResponse, AWSError>;
   /**
    * Updates a user's current mailbox quota for a specified organization and user.
    */
@@ -946,6 +986,18 @@ declare namespace WorkMail {
   }
   export interface DeregisterFromWorkMailResponse {
   }
+  export interface DeregisterMailDomainRequest {
+    /**
+     * The Amazon WorkMail organization for which the domain will be deregistered.
+     */
+    OrganizationId: OrganizationId;
+    /**
+     * The domain to deregister in WorkMail and SES. 
+     */
+    DomainName: WorkMailDomainName;
+  }
+  export interface DeregisterMailDomainResponse {
+  }
   export interface DescribeGroupRequest {
     /**
      * The identifier for the organization under which the group exists.
@@ -1229,6 +1281,22 @@ declare namespace WorkMail {
   }
   export interface DisassociateMemberFromGroupResponse {
   }
+  export interface DnsRecord {
+    /**
+     * The RFC 1035 record type. Possible values: CNAME, A, MX.
+     */
+    Type?: String;
+    /**
+     * The DNS hostname.- For example, domain.example.com.
+     */
+    Hostname?: String;
+    /**
+     * The value returned by the DNS for a query to that hostname and record type.
+     */
+    Value?: String;
+  }
+  export type DnsRecordVerificationStatus = "PENDING"|"VERIFIED"|"FAILED"|string;
+  export type DnsRecords = DnsRecord[];
   export interface Domain {
     /**
      * The fully qualified domain name.
@@ -1254,7 +1322,7 @@ declare namespace WorkMail {
      */
     Action: RetentionAction;
     /**
-     * The period of time at which the folder configuration action is applied.
+     * The number of days for which the folder-configuration action applies.
      */
     Period?: RetentionPeriod;
   }
@@ -1311,6 +1379,38 @@ declare namespace WorkMail {
      * The retention policy folder configurations.
      */
     FolderConfigurations?: FolderConfigurations;
+  }
+  export interface GetMailDomainRequest {
+    /**
+     * The Amazon WorkMail organization for which the domain is retrieved.
+     */
+    OrganizationId: OrganizationId;
+    /**
+     * The domain from which you want to retrieve details.
+     */
+    DomainName: WorkMailDomainName;
+  }
+  export interface GetMailDomainResponse {
+    /**
+     * A list of the DNS records that Amazon WorkMail recommends adding in your DNS provider for the best user experience. The records configure your domain with DMARC, SPF, DKIM, and direct incoming email traffic to SES. See admin guide for more details.
+     */
+    Records?: DnsRecords;
+    /**
+     * Specifies whether the domain is a test domain provided by WorkMail, or a custom domain.
+     */
+    IsTestDomain?: Boolean;
+    /**
+     * Specifies whether the domain is the default domain for your organization.
+     */
+    IsDefault?: Boolean;
+    /**
+     *  Indicates the status of the domain ownership verification.
+     */
+    OwnershipVerificationStatus?: DnsRecordVerificationStatus;
+    /**
+     * Indicates the status of a DKIM verification.
+     */
+    DkimVerificationStatus?: DnsRecordVerificationStatus;
   }
   export interface GetMailboxDetailsRequest {
     /**
@@ -1531,6 +1631,30 @@ declare namespace WorkMail {
      */
     NextToken?: NextToken;
   }
+  export interface ListMailDomainsRequest {
+    /**
+     * The Amazon WorkMail organization for which to list domains.
+     */
+    OrganizationId: OrganizationId;
+    /**
+     * The maximum number of results to return in a single call.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The token to use to retrieve the next page of results. The first call does not require a token.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListMailDomainsResponse {
+    /**
+     * The list of mail domain summaries, specifying domains that exist in the specified Amazon WorkMail organization, along with the information about whether the domain is or isn't the default.
+     */
+    MailDomains?: MailDomains;
+    /**
+     * The token to use to retrieve the next page of results. The value becomes null when there are no more results to return.
+     */
+    NextToken?: NextToken;
+  }
   export interface ListMailboxExportJobsRequest {
     /**
      * The organization ID.
@@ -1735,6 +1859,17 @@ declare namespace WorkMail {
      */
     NextToken?: NextToken;
   }
+  export interface MailDomainSummary {
+    /**
+     * The domain name.
+     */
+    DomainName?: DomainName;
+    /**
+     * Whether the domain is default or not.
+     */
+    DefaultDomain?: Boolean;
+  }
+  export type MailDomains = MailDomainSummary[];
   export type MailboxExportErrorInfo = string;
   export interface MailboxExportJob {
     /**
@@ -2078,6 +2213,22 @@ declare namespace WorkMail {
   }
   export interface PutRetentionPolicyResponse {
   }
+  export interface RegisterMailDomainRequest {
+    /**
+     * Idempotency token used when retrying requests.
+     */
+    ClientToken?: IdempotencyClientToken;
+    /**
+     * The Amazon WorkMail organization under which you're creating the domain.
+     */
+    OrganizationId: OrganizationId;
+    /**
+     * The name of the mail domain to create in Amazon WorkMail and SES.
+     */
+    DomainName: WorkMailDomainName;
+  }
+  export interface RegisterMailDomainResponse {
+  }
   export interface RegisterToWorkMailRequest {
     /**
      * The identifier for the organization under which the user, group, or resource exists.
@@ -2231,6 +2382,18 @@ declare namespace WorkMail {
   }
   export interface UntagResourceResponse {
   }
+  export interface UpdateDefaultMailDomainRequest {
+    /**
+     * The Amazon WorkMail organization for which to list domains.
+     */
+    OrganizationId: OrganizationId;
+    /**
+     * The domain name that will become the default domain.
+     */
+    DomainName: WorkMailDomainName;
+  }
+  export interface UpdateDefaultMailDomainResponse {
+  }
   export interface UpdateMailboxQuotaRequest {
     /**
      * The identifier for the organization that contains the user for whom to update the mailbox quota.
@@ -2377,6 +2540,7 @@ declare namespace WorkMail {
   export type UserName = string;
   export type UserRole = "USER"|"RESOURCE"|"SYSTEM_USER"|string;
   export type Users = User[];
+  export type WorkMailDomainName = string;
   export type WorkMailIdentifier = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

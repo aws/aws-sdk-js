@@ -11799,11 +11799,11 @@
         },
         "LogDestinationType": {
           "shape": "LogDestinationType",
-          "documentation": "<p>Specifies the type of destination to which the flow log data is to be published. Flow log data can be published to CloudWatch Logs or Amazon S3. To publish flow log data to CloudWatch Logs, specify <code>cloud-watch-logs</code>. To publish flow log data to Amazon S3, specify <code>s3</code>.</p> <p>If you specify <code>LogDestinationType</code> as <code>s3</code>, do not specify <code>DeliverLogsPermissionArn</code> or <code>LogGroupName</code>.</p> <p>Default: <code>cloud-watch-logs</code> </p>"
+          "documentation": "<p>The type of destination to which the flow log data is to be published. Flow log data can be published to CloudWatch Logs or Amazon S3. To publish flow log data to CloudWatch Logs, specify <code>cloud-watch-logs</code>. To publish flow log data to Amazon S3, specify <code>s3</code>.</p> <p>If you specify <code>LogDestinationType</code> as <code>s3</code>, do not specify <code>DeliverLogsPermissionArn</code> or <code>LogGroupName</code>.</p> <p>Default: <code>cloud-watch-logs</code> </p>"
         },
         "LogDestination": {
           "shape": "String",
-          "documentation": "<p>Specifies the destination to which the flow log data is to be published. Flow log data can be published to a CloudWatch Logs log group or an Amazon S3 bucket. The value specified for this parameter depends on the value specified for <code>LogDestinationType</code>.</p> <p>If <code>LogDestinationType</code> is not specified or <code>cloud-watch-logs</code>, specify the Amazon Resource Name (ARN) of the CloudWatch Logs log group. For example, to publish to a log group called <code>my-logs</code>, specify <code>arn:aws:logs:us-east-1:123456789012:log-group:my-logs</code>. Alternatively, use <code>LogGroupName</code> instead.</p> <p>If LogDestinationType is <code>s3</code>, specify the ARN of the Amazon S3 bucket. You can also specify a subfolder in the bucket. To specify a subfolder in the bucket, use the following ARN format: <code>bucket_ARN/subfolder_name/</code>. For example, to specify a subfolder named <code>my-logs</code> in a bucket named <code>my-bucket</code>, use the following ARN: <code>arn:aws:s3:::my-bucket/my-logs/</code>. You cannot use <code>AWSLogs</code> as a subfolder name. This is a reserved term.</p>"
+          "documentation": "<p>The destination to which the flow log data is to be published. Flow log data can be published to a CloudWatch Logs log group or an Amazon S3 bucket. The value specified for this parameter depends on the value specified for <code>LogDestinationType</code>.</p> <p>If <code>LogDestinationType</code> is not specified or <code>cloud-watch-logs</code>, specify the Amazon Resource Name (ARN) of the CloudWatch Logs log group. For example, to publish to a log group called <code>my-logs</code>, specify <code>arn:aws:logs:us-east-1:123456789012:log-group:my-logs</code>. Alternatively, use <code>LogGroupName</code> instead.</p> <p>If LogDestinationType is <code>s3</code>, specify the ARN of the Amazon S3 bucket. You can also specify a subfolder in the bucket. To specify a subfolder in the bucket, use the following ARN format: <code>bucket_ARN/subfolder_name/</code>. For example, to specify a subfolder named <code>my-logs</code> in a bucket named <code>my-bucket</code>, use the following ARN: <code>arn:aws:s3:::my-bucket/my-logs/</code>. You cannot use <code>AWSLogs</code> as a subfolder name. This is a reserved term.</p>"
         },
         "LogFormat": {
           "shape": "String",
@@ -11817,6 +11817,10 @@
         "MaxAggregationInterval": {
           "shape": "Integer",
           "documentation": "<p>The maximum interval of time during which a flow of packets is captured and aggregated into a flow log record. You can specify 60 seconds (1 minute) or 600 seconds (10 minutes).</p> <p>When a network interface is attached to a <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances\">Nitro-based instance</a>, the aggregation interval is always 60 seconds or less, regardless of the value that you specify.</p> <p>Default: 600</p>"
+        },
+        "DestinationOptions": {
+          "shape": "DestinationOptionsRequest",
+          "documentation": "<p>The destination options.</p>"
         }
       }
     },
@@ -21774,6 +21778,52 @@
       },
       "documentation": "<p>Contains the output of DescribeVpnGateways.</p>"
     },
+    "DestinationFileFormat": {
+      "type": "string",
+      "enum": [
+        "plain-text",
+        "parquet"
+      ]
+    },
+    "DestinationOptionsRequest": {
+      "type": "structure",
+      "members": {
+        "FileFormat": {
+          "shape": "DestinationFileFormat",
+          "documentation": "<p>The format for the flow log. The default is <code>plain-text</code>.</p>"
+        },
+        "HiveCompatiblePartitions": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether to use Hive-compatible prefixes for flow logs stored in Amazon S3. The default is <code>false</code>.</p>"
+        },
+        "PerHourPartition": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether to partition the flow log per hour. This reduces the cost and response time for queries. The default is <code>false</code>.</p>"
+        }
+      },
+      "documentation": "<p>Describes the destination options for a flow log.</p>"
+    },
+    "DestinationOptionsResponse": {
+      "type": "structure",
+      "members": {
+        "FileFormat": {
+          "shape": "DestinationFileFormat",
+          "documentation": "<p>The format for the flow log.</p>",
+          "locationName": "fileFormat"
+        },
+        "HiveCompatiblePartitions": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether to use Hive-compatible prefixes for flow logs stored in Amazon S3.</p>",
+          "locationName": "hiveCompatiblePartitions"
+        },
+        "PerHourPartition": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether to partition the flow log per hour.</p>",
+          "locationName": "perHourPartition"
+        }
+      },
+      "documentation": "<p>Describes the destination options for a flow log.</p>"
+    },
     "DetachClassicLinkVpcRequest": {
       "type": "structure",
       "required": [
@@ -25086,12 +25136,12 @@
         },
         "LogDestinationType": {
           "shape": "LogDestinationType",
-          "documentation": "<p>Specifies the type of destination to which the flow log data is published. Flow log data can be published to CloudWatch Logs or Amazon S3.</p>",
+          "documentation": "<p>The type of destination to which the flow log data is published. Flow log data can be published to CloudWatch Logs or Amazon S3.</p>",
           "locationName": "logDestinationType"
         },
         "LogDestination": {
           "shape": "String",
-          "documentation": "<p>Specifies the destination to which the flow log data is published. Flow log data can be published to an CloudWatch Logs log group or an Amazon S3 bucket. If the flow log publishes to CloudWatch Logs, this element indicates the Amazon Resource Name (ARN) of the CloudWatch Logs log group to which the data is published. If the flow log publishes to Amazon S3, this element indicates the ARN of the Amazon S3 bucket to which the data is published.</p>",
+          "documentation": "<p>The destination to which the flow log data is published. Flow log data can be published to an CloudWatch Logs log group or an Amazon S3 bucket. If the flow log publishes to CloudWatch Logs, this element indicates the Amazon Resource Name (ARN) of the CloudWatch Logs log group to which the data is published. If the flow log publishes to Amazon S3, this element indicates the ARN of the Amazon S3 bucket to which the data is published.</p>",
           "locationName": "logDestination"
         },
         "LogFormat": {
@@ -25108,6 +25158,11 @@
           "shape": "Integer",
           "documentation": "<p>The maximum interval of time, in seconds, during which a flow of packets is captured and aggregated into a flow log record.</p> <p>When a network interface is attached to a <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances\">Nitro-based instance</a>, the aggregation interval is always 60 seconds (1 minute) or less, regardless of the specified value.</p> <p>Valid Values: <code>60</code> | <code>600</code> </p>",
           "locationName": "maxAggregationInterval"
+        },
+        "DestinationOptions": {
+          "shape": "DestinationOptionsResponse",
+          "documentation": "<p>The destination options.</p>",
+          "locationName": "destinationOptions"
         }
       },
       "documentation": "<p>Describes a flow log.</p>"
