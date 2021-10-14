@@ -1833,12 +1833,26 @@
       "min": 1,
       "pattern": "[a-zA-Z0-9_.\\-]*"
     },
+    "CommandList": {
+      "type": "list",
+      "member": {
+        "shape": "NonEmptyString"
+      }
+    },
     "Compute": {
       "type": "structure",
       "members": {
         "simulationUnitLimit": {
           "shape": "SimulationUnit",
-          "documentation": "<p>The simulation unit limit. Your simulation is allocated CPU and memory proportional to the supplied simulation unit limit. A simulation unit is 1 vcpu and 2GB of memory. You are only billed for the SU utilization you consume up to the maximim value provided. The default is 15. </p>"
+          "documentation": "<p>The simulation unit limit. Your simulation is allocated CPU and memory proportional to the supplied simulation unit limit. A simulation unit is 1 vcpu and 2GB of memory. You are only billed for the SU utilization you consume up to the maximum value provided. The default is 15. </p>"
+        },
+        "computeType": {
+          "shape": "ComputeType",
+          "documentation": "<p>Compute type information for the simulation job.</p>"
+        },
+        "gpuUnitLimit": {
+          "shape": "GPUUnit",
+          "documentation": "<p>Compute GPU unit limit for the simulation job. It is the same as the number of GPUs allocated to the SimulationJob.</p>"
         }
       },
       "documentation": "<p>Compute information for the simulation job.</p>"
@@ -1848,10 +1862,25 @@
       "members": {
         "simulationUnitLimit": {
           "shape": "SimulationUnit",
-          "documentation": "<p>The simulation unit limit. Your simulation is allocated CPU and memory proportional to the supplied simulation unit limit. A simulation unit is 1 vcpu and 2GB of memory. You are only billed for the SU utilization you consume up to the maximim value provided. The default is 15. </p>"
+          "documentation": "<p>The simulation unit limit. Your simulation is allocated CPU and memory proportional to the supplied simulation unit limit. A simulation unit is 1 vcpu and 2GB of memory. You are only billed for the SU utilization you consume up to the maximum value provided. The default is 15. </p>"
+        },
+        "computeType": {
+          "shape": "ComputeType",
+          "documentation": "<p>Compute type response information for the simulation job.</p>"
+        },
+        "gpuUnitLimit": {
+          "shape": "GPUUnit",
+          "documentation": "<p>Compute GPU unit limit for the simulation job. It is the same as the number of GPUs allocated to the SimulationJob.</p>"
         }
       },
       "documentation": "<p>Compute information for the simulation job</p>"
+    },
+    "ComputeType": {
+      "type": "string",
+      "enum": [
+        "CPU",
+        "GPU_AND_CPU"
+      ]
     },
     "CreateDeploymentJobRequest": {
       "type": "structure",
@@ -2651,6 +2680,14 @@
         "s3Keys": {
           "shape": "S3KeyOutputs",
           "documentation": "<p>The list of S3 keys identifying the data source files.</p>"
+        },
+        "type": {
+          "shape": "DataSourceType",
+          "documentation": "<p>The data type for the data source that you're using for your container image or simulation job. You can use this field to specify whether your data source is an Archive, an Amazon S3 prefix, or a file.</p> <p>If you don't specify a field, the default value is <code>File</code>.</p>"
+        },
+        "destination": {
+          "shape": "Path",
+          "documentation": "<p>The location where your files are mounted in the container image.</p> <p>If you've specified the <code>type</code> of the data source as an <code>Archive</code>, you must provide an Amazon S3 object key to your archive. The object key must point to either a <code>.zip</code> or <code>.tar.gz</code> file.</p> <p>If you've specified the <code>type</code> of the data source as a <code>Prefix</code>, you provide the Amazon S3 prefix that points to the files that you are using for your data source.</p> <p>If you've specified the <code>type</code> of the data source as a <code>File</code>, you provide the Amazon S3 path to the file that you're using as your data source.</p>"
         }
       },
       "documentation": "<p>Information about a data source.</p>"
@@ -2672,8 +2709,16 @@
           "documentation": "<p>The S3 bucket where the data files are located.</p>"
         },
         "s3Keys": {
-          "shape": "S3Keys",
+          "shape": "S3KeysOrPrefixes",
           "documentation": "<p>The list of S3 keys identifying the data source files.</p>"
+        },
+        "type": {
+          "shape": "DataSourceType",
+          "documentation": "<p>The data type for the data source that you're using for your container image or simulation job. You can use this field to specify whether your data source is an Archive, an Amazon S3 prefix, or a file.</p> <p>If you don't specify a field, the default value is <code>File</code>.</p>"
+        },
+        "destination": {
+          "shape": "Path",
+          "documentation": "<p>The location where your files are mounted in the container image.</p> <p>If you've specified the <code>type</code> of the data source as an <code>Archive</code>, you must provide an Amazon S3 object key to your archive. The object key must point to either a <code>.zip</code> or <code>.tar.gz</code> file.</p> <p>If you've specified the <code>type</code> of the data source as a <code>Prefix</code>, you provide the Amazon S3 prefix that points to the files that you are using for your data source.</p> <p>If you've specified the <code>type</code> of the data source as a <code>File</code>, you provide the Amazon S3 path to the file that you're using as your data source.</p>"
         }
       },
       "documentation": "<p>Information about a data source.</p>"
@@ -2691,6 +2736,14 @@
       "member": {
         "shape": "Name"
       }
+    },
+    "DataSourceType": {
+      "type": "string",
+      "enum": [
+        "Prefix",
+        "Archive",
+        "File"
+      ]
     },
     "DataSources": {
       "type": "list",
@@ -3837,6 +3890,11 @@
     "FloorplanCount": {
       "type": "integer"
     },
+    "GPUUnit": {
+      "type": "integer",
+      "max": 1,
+      "min": 0
+    },
     "GenericInteger": {
       "type": "integer"
     },
@@ -3909,10 +3967,6 @@
     },
     "LaunchConfig": {
       "type": "structure",
-      "required": [
-        "packageName",
-        "launchFile"
-      ],
       "members": {
         "packageName": {
           "shape": "Command",
@@ -3933,6 +3987,10 @@
         "streamUI": {
           "shape": "Boolean",
           "documentation": "<p>Boolean indicating whether a streaming session will be configured for the application. If <code>True</code>, AWS RoboMaker will configure a connection so you can interact with your application as it is running in the simulation. You must configure and launch the component. It must have a graphical user interface. </p>"
+        },
+        "command": {
+          "shape": "CommandList",
+          "documentation": "<p>If you've specified <code>General</code> as the value for your <code>RobotSoftwareSuite</code>, you can use this field to specify a list of commands for your container image.</p> <p>If you've specified <code>SimulationRuntime</code> as the value for your <code>SimulationSoftwareSuite</code>, you can use this field to specify a list of commands for your container image.</p>"
         }
       },
       "documentation": "<p>Information about a launch configuration.</p>"
@@ -4742,7 +4800,8 @@
       "type": "string",
       "enum": [
         "ROS",
-        "ROS2"
+        "ROS2",
+        "General"
       ]
     },
     "RobotSoftwareSuiteVersionType": {
@@ -4795,11 +4854,17 @@
       "min": 1,
       "pattern": ".*"
     },
+    "S3KeyOrPrefix": {
+      "type": "string",
+      "max": 1024,
+      "min": 0,
+      "pattern": ".*"
+    },
     "S3KeyOutput": {
       "type": "structure",
       "members": {
         "s3Key": {
-          "shape": "S3Key",
+          "shape": "S3KeyOrPrefix",
           "documentation": "<p>The S3 key.</p>"
         },
         "etag": {
@@ -4815,10 +4880,10 @@
         "shape": "S3KeyOutput"
       }
     },
-    "S3Keys": {
+    "S3KeysOrPrefixes": {
       "type": "list",
       "member": {
-        "shape": "S3Key"
+        "shape": "S3KeyOrPrefix"
       },
       "max": 100,
       "min": 1
@@ -5240,6 +5305,10 @@
         "dataSourceNames": {
           "shape": "DataSourceNames",
           "documentation": "<p>The names of the data sources.</p>"
+        },
+        "computeType": {
+          "shape": "ComputeType",
+          "documentation": "<p>The compute type for the simulation job summary.</p>"
         }
       },
       "documentation": "<p>Summary information for a simulation job.</p>"
@@ -5268,7 +5337,8 @@
       "type": "string",
       "enum": [
         "Gazebo",
-        "RosbagPlay"
+        "RosbagPlay",
+        "SimulationRuntime"
       ]
     },
     "SimulationSoftwareSuiteVersionType": {

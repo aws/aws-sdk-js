@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1007.0-->
+<!--LATEST=2.1008.0-->
 <!--ENTRYINSERT-->
+
+## 2.1008.0
+* feature: AutoScaling: Amazon EC2 Auto Scaling now supports filtering describe Auto Scaling groups API using tags
+* feature: ELBv2: Adds new option to filter by availability on each type of load balancer when describing ssl policies.
+* feature: RoboMaker: Adding support to GPU simulation jobs as well as non-ROS simulation jobs.
+* feature: SageMaker: This release updates the provisioning artifact ID to an optional parameter in CreateProject API. The provisioning artifact ID defaults to the latest provisioning artifact ID of the product if you don't provide one.
 
 ## 2.1007.0
 * feature: ConfigService: Adding Config support for AWS::OpenSearch::Domain

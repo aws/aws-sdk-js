@@ -937,6 +937,10 @@ declare namespace ELBv2 {
      * The maximum number of results to return with this call.
      */
     PageSize?: PageSize;
+    /**
+     *  The type of load balancer. The default lists the SSL policies for all load balancers.
+     */
+    LoadBalancerType?: LoadBalancerTypeEnum;
   }
   export interface DescribeSSLPoliciesOutput {
     /**
@@ -1650,6 +1654,10 @@ declare namespace ELBv2 {
      * The name of the policy.
      */
     Name?: SslPolicyName;
+    /**
+     *  The supported load balancers. 
+     */
+    SupportedLoadBalancerTypes?: ListOfString;
   }
   export type SslPolicyName = string;
   export type SslPolicyNames = SslPolicyName[];

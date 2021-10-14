@@ -4385,7 +4385,7 @@ declare namespace SageMaker {
      */
     ProjectDescription?: EntityDescription;
     /**
-     * The product ID and provisioning artifact ID to provision a service catalog. For information, see What is Amazon Web Services Service Catalog.
+     * The product ID and provisioning artifact ID to provision a service catalog. The provisioning artifact ID will default to the latest provisioning artifact ID of the product, if you don't provide the provisioning artifact ID. For more information, see What is Amazon Web Services Service Catalog.
      */
     ServiceCatalogProvisioningDetails: ServiceCatalogProvisioningDetails;
     /**
@@ -14259,7 +14259,7 @@ declare namespace SageMaker {
     /**
      * The ID of the provisioning artifact.
      */
-    ProvisioningArtifactId: ServiceCatalogEntityId;
+    ProvisioningArtifactId?: ServiceCatalogEntityId;
     /**
      * The path identifier of the product. This value is optional if the product has a default path, and required if the product has more than one path. 
      */

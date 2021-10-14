@@ -555,18 +555,36 @@ declare namespace RoboMaker {
   }
   export type ClientRequestToken = string;
   export type Command = string;
+  export type CommandList = NonEmptyString[];
   export interface Compute {
     /**
-     * The simulation unit limit. Your simulation is allocated CPU and memory proportional to the supplied simulation unit limit. A simulation unit is 1 vcpu and 2GB of memory. You are only billed for the SU utilization you consume up to the maximim value provided. The default is 15. 
+     * The simulation unit limit. Your simulation is allocated CPU and memory proportional to the supplied simulation unit limit. A simulation unit is 1 vcpu and 2GB of memory. You are only billed for the SU utilization you consume up to the maximum value provided. The default is 15. 
      */
     simulationUnitLimit?: SimulationUnit;
+    /**
+     * Compute type information for the simulation job.
+     */
+    computeType?: ComputeType;
+    /**
+     * Compute GPU unit limit for the simulation job. It is the same as the number of GPUs allocated to the SimulationJob.
+     */
+    gpuUnitLimit?: GPUUnit;
   }
   export interface ComputeResponse {
     /**
-     * The simulation unit limit. Your simulation is allocated CPU and memory proportional to the supplied simulation unit limit. A simulation unit is 1 vcpu and 2GB of memory. You are only billed for the SU utilization you consume up to the maximim value provided. The default is 15. 
+     * The simulation unit limit. Your simulation is allocated CPU and memory proportional to the supplied simulation unit limit. A simulation unit is 1 vcpu and 2GB of memory. You are only billed for the SU utilization you consume up to the maximum value provided. The default is 15. 
      */
     simulationUnitLimit?: SimulationUnit;
+    /**
+     * Compute type response information for the simulation job.
+     */
+    computeType?: ComputeType;
+    /**
+     * Compute GPU unit limit for the simulation job. It is the same as the number of GPUs allocated to the SimulationJob.
+     */
+    gpuUnitLimit?: GPUUnit;
   }
+  export type ComputeType = "CPU"|"GPU_AND_CPU"|string;
   export interface CreateDeploymentJobRequest {
     /**
      * The requested deployment configuration.
@@ -1240,6 +1258,14 @@ declare namespace RoboMaker {
      * The list of S3 keys identifying the data source files.
      */
     s3Keys?: S3KeyOutputs;
+    /**
+     * The data type for the data source that you're using for your container image or simulation job. You can use this field to specify whether your data source is an Archive, an Amazon S3 prefix, or a file. If you don't specify a field, the default value is File.
+     */
+    type?: DataSourceType;
+    /**
+     * The location where your files are mounted in the container image. If you've specified the type of the data source as an Archive, you must provide an Amazon S3 object key to your archive. The object key must point to either a .zip or .tar.gz file. If you've specified the type of the data source as a Prefix, you provide the Amazon S3 prefix that points to the files that you are using for your data source. If you've specified the type of the data source as a File, you provide the Amazon S3 path to the file that you're using as your data source.
+     */
+    destination?: Path;
   }
   export interface DataSourceConfig {
     /**
@@ -1253,10 +1279,19 @@ declare namespace RoboMaker {
     /**
      * The list of S3 keys identifying the data source files.
      */
-    s3Keys: S3Keys;
+    s3Keys: S3KeysOrPrefixes;
+    /**
+     * The data type for the data source that you're using for your container image or simulation job. You can use this field to specify whether your data source is an Archive, an Amazon S3 prefix, or a file. If you don't specify a field, the default value is File.
+     */
+    type?: DataSourceType;
+    /**
+     * The location where your files are mounted in the container image. If you've specified the type of the data source as an Archive, you must provide an Amazon S3 object key to your archive. The object key must point to either a .zip or .tar.gz file. If you've specified the type of the data source as a Prefix, you provide the Amazon S3 prefix that points to the files that you are using for your data source. If you've specified the type of the data source as a File, you provide the Amazon S3 path to the file that you're using as your data source.
+     */
+    destination?: Path;
   }
   export type DataSourceConfigs = DataSourceConfig[];
   export type DataSourceNames = Name[];
+  export type DataSourceType = "Prefix"|"Archive"|"File"|string;
   export type DataSources = DataSource[];
   export interface DeleteFleetRequest {
     /**
@@ -2076,6 +2111,7 @@ declare namespace RoboMaker {
   }
   export type Fleets = Fleet[];
   export type FloorplanCount = number;
+  export type GPUUnit = number;
   export type GenericInteger = number;
   export type GenericString = string;
   export interface GetWorldTemplateBodyRequest {
@@ -2107,11 +2143,11 @@ declare namespace RoboMaker {
     /**
      * The package name.
      */
-    packageName: Command;
+    packageName?: Command;
     /**
      * The launch file name.
      */
-    launchFile: Command;
+    launchFile?: Command;
     /**
      * The environment variables for the application launch.
      */
@@ -2124,6 +2160,10 @@ declare namespace RoboMaker {
      * Boolean indicating whether a streaming session will be configured for the application. If True, AWS RoboMaker will configure a connection so you can interact with your application as it is running in the simulation. You must configure and launch the component. It must have a graphical user interface. 
      */
     streamUI?: Boolean;
+    /**
+     * If you've specified General as the value for your RobotSoftwareSuite, you can use this field to specify a list of commands for your container image. If you've specified SimulationRuntime as the value for your SimulationSoftwareSuite, you can use this field to specify a list of commands for your container image.
+     */
+    command?: CommandList;
   }
   export interface ListDeploymentJobsRequest {
     /**
@@ -2661,7 +2701,7 @@ declare namespace RoboMaker {
      */
     version?: RobotSoftwareSuiteVersionType;
   }
-  export type RobotSoftwareSuiteType = "ROS"|"ROS2"|string;
+  export type RobotSoftwareSuiteType = "ROS"|"ROS2"|"General"|string;
   export type RobotSoftwareSuiteVersionType = "Kinetic"|"Melodic"|"Dashing"|"Foxy"|string;
   export type RobotStatus = "Available"|"Registered"|"PendingNewDeployment"|"Deploying"|"Failed"|"InSync"|"NoResponse"|string;
   export type Robots = Robot[];
@@ -2669,18 +2709,19 @@ declare namespace RoboMaker {
   export type S3Etag = string;
   export type S3Etags = S3Etag[];
   export type S3Key = string;
+  export type S3KeyOrPrefix = string;
   export interface S3KeyOutput {
     /**
      * The S3 key.
      */
-    s3Key?: S3Key;
+    s3Key?: S3KeyOrPrefix;
     /**
      * The etag for the object.
      */
     etag?: S3Etag;
   }
   export type S3KeyOutputs = S3KeyOutput[];
-  export type S3Keys = S3Key[];
+  export type S3KeysOrPrefixes = S3KeyOrPrefix[];
   export interface S3Object {
     /**
      * The bucket containing the object.
@@ -2951,6 +2992,10 @@ declare namespace RoboMaker {
      * The names of the data sources.
      */
     dataSourceNames?: DataSourceNames;
+    /**
+     * The compute type for the simulation job summary.
+     */
+    computeType?: ComputeType;
   }
   export type SimulationJobs = SimulationJob[];
   export interface SimulationSoftwareSuite {
@@ -2963,7 +3008,7 @@ declare namespace RoboMaker {
      */
     version?: SimulationSoftwareSuiteVersionType;
   }
-  export type SimulationSoftwareSuiteType = "Gazebo"|"RosbagPlay"|string;
+  export type SimulationSoftwareSuiteType = "Gazebo"|"RosbagPlay"|"SimulationRuntime"|string;
   export type SimulationSoftwareSuiteVersionType = string;
   export type SimulationTimeMillis = number;
   export type SimulationUnit = number;
