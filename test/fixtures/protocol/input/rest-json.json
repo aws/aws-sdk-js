@@ -1,3 +1,4 @@
+
 [
   {
     "description": "No parameters",
@@ -1893,6 +1894,27 @@
           "body": "{\"testConfig\": {\"timeout\": 10}}",
           "headers": {
             "x-amz-test-id": "t-12345",
+            "Content-Type": "application/json"
+          },
+          "host": "rest-test.amazonaws.com"
+        }
+      },
+      {
+        "given": {
+          "name": "TestBodyNoParams",
+          "input": {
+            "shape": "TestBodyRequest"
+          },
+          "http": {
+            "method": "POST",
+            "requestUri": "/body"
+          }
+        },
+        "params": {},
+        "serialized": {
+          "uri": "/body",
+          "body": "{}",
+          "headers": {
             "Content-Type": "application/json"
           },
           "host": "rest-test.amazonaws.com"
