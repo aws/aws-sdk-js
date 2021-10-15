@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1008.0-->
+<!--LATEST=2.1009.0-->
 <!--ENTRYINSERT-->
+
+## 2.1009.0
+* feature: Glue: Enable S3 event base crawler API.
 
 ## 2.1008.0
 * feature: AutoScaling: Amazon EC2 Auto Scaling now supports filtering describe Auto Scaling groups API using tags

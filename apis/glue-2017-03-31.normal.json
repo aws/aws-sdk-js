@@ -8910,6 +8910,9 @@
       },
       "documentation": "<p>Batch condition that must be met (specified number of events received or batch time window expired) before EventBridge event trigger fires.</p>"
     },
+    "EventQueueArn": {
+      "type": "string"
+    },
     "ExecutionProperty": {
       "type": "structure",
       "members": {
@@ -13066,7 +13069,8 @@
       "type": "string",
       "enum": [
         "CRAWL_EVERYTHING",
-        "CRAWL_NEW_FOLDERS_ONLY"
+        "CRAWL_NEW_FOLDERS_ONLY",
+        "CRAWL_EVENT_MODE"
       ]
     },
     "RecrawlPolicy": {
@@ -13074,7 +13078,7 @@
       "members": {
         "RecrawlBehavior": {
           "shape": "RecrawlBehavior",
-          "documentation": "<p>Specifies whether to crawl the entire dataset again or to crawl only folders that were added since the last crawler run.</p> <p>A value of <code>CRAWL_EVERYTHING</code> specifies crawling the entire dataset again.</p> <p>A value of <code>CRAWL_NEW_FOLDERS_ONLY</code> specifies crawling only folders that were added since the last crawler run.</p>"
+          "documentation": "<p>Specifies whether to crawl the entire dataset again or to crawl only folders that were added since the last crawler run.</p> <p>A value of <code>CRAWL_EVERYTHING</code> specifies crawling the entire dataset again.</p> <p>A value of <code>CRAWL_NEW_FOLDERS_ONLY</code> specifies crawling only folders that were added since the last crawler run.</p> <p>A value of <code>CRAWL_EVENT_MODE</code> specifies crawling only the changes identified by Amazon S3 events.</p>"
         }
       },
       "documentation": "<p>When crawling an Amazon S3 data source after the first crawl is complete, specifies whether to crawl the entire dataset again or to crawl only folders that were added since the last crawler run. For more information, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/incremental-crawls.html\">Incremental Crawls in Glue</a> in the developer guide.</p>"
@@ -13393,6 +13397,14 @@
         "SampleSize": {
           "shape": "NullableInteger",
           "documentation": "<p>Sets the number of files in each leaf folder to be crawled when crawling sample files in a dataset. If not set, all the files are crawled. A valid value is an integer between 1 and 249.</p>"
+        },
+        "EventQueueArn": {
+          "shape": "EventQueueArn",
+          "documentation": "<p>A valid Amazon SQS ARN. For example, <code>arn:aws:sqs:region:account:sqs</code>.</p>"
+        },
+        "DlqEventQueueArn": {
+          "shape": "EventQueueArn",
+          "documentation": "<p>A valid Amazon dead-letter SQS ARN. For example, <code>arn:aws:sqs:region:account:deadLetterQueue</code>.</p>"
         }
       },
       "documentation": "<p>Specifies a data store in Amazon Simple Storage Service (Amazon S3).</p>"

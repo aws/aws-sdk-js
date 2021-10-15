@@ -3990,6 +3990,7 @@ declare namespace Glue {
      */
     BatchWindow?: BatchWindow;
   }
+  export type EventQueueArn = string;
   export interface ExecutionProperty {
     /**
      * The maximum number of concurrent runs allowed for the job. The default is 1. An error is returned when this threshold is reached. The maximum value you can specify is controlled by a service limit.
@@ -6827,10 +6828,10 @@ declare namespace Glue {
     NextToken?: SchemaRegistryTokenString;
   }
   export type RecordsCount = number;
-  export type RecrawlBehavior = "CRAWL_EVERYTHING"|"CRAWL_NEW_FOLDERS_ONLY"|string;
+  export type RecrawlBehavior = "CRAWL_EVERYTHING"|"CRAWL_NEW_FOLDERS_ONLY"|"CRAWL_EVENT_MODE"|string;
   export interface RecrawlPolicy {
     /**
-     * Specifies whether to crawl the entire dataset again or to crawl only folders that were added since the last crawler run. A value of CRAWL_EVERYTHING specifies crawling the entire dataset again. A value of CRAWL_NEW_FOLDERS_ONLY specifies crawling only folders that were added since the last crawler run.
+     * Specifies whether to crawl the entire dataset again or to crawl only folders that were added since the last crawler run. A value of CRAWL_EVERYTHING specifies crawling the entire dataset again. A value of CRAWL_NEW_FOLDERS_ONLY specifies crawling only folders that were added since the last crawler run. A value of CRAWL_EVENT_MODE specifies crawling only the changes identified by Amazon S3 events.
      */
     RecrawlBehavior?: RecrawlBehavior;
   }
@@ -7036,6 +7037,14 @@ declare namespace Glue {
      * Sets the number of files in each leaf folder to be crawled when crawling sample files in a dataset. If not set, all the files are crawled. A valid value is an integer between 1 and 249.
      */
     SampleSize?: NullableInteger;
+    /**
+     * A valid Amazon SQS ARN. For example, arn:aws:sqs:region:account:sqs.
+     */
+    EventQueueArn?: EventQueueArn;
+    /**
+     * A valid Amazon dead-letter SQS ARN. For example, arn:aws:sqs:region:account:deadLetterQueue.
+     */
+    DlqEventQueueArn?: EventQueueArn;
   }
   export type S3TargetList = S3Target[];
   export type ScalaCode = string;
