@@ -93,6 +93,7 @@
       expect(sortQS(req.httpRequest.body)).to.equal(sortQS(data.body));
     } else if (svc.api.protocol.match(/(rest-json)/)) {
       if (data.body) {
+        expect(req.httpRequest.headers['Content-Length']).to.equal(req.httpRequest.body.length);
         expect(req.httpRequest.body.replace(/\s+/g, '')).to.equal(data.body.replace(/\s+/g, ''));
       }
       if (data.headers) {
