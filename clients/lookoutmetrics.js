@@ -5,7 +5,6 @@ var apiLoader = AWS.apiLoader;
 
 apiLoader.services['lookoutmetrics'] = {};
 AWS.LookoutMetrics = Service.defineService('lookoutmetrics', ['2017-07-25']);
-require('../lib/services/lookoutmetrics');
 Object.defineProperty(apiLoader.services['lookoutmetrics'], '2017-07-25', {
   get: function get() {
     var model = require('../apis/lookoutmetrics-2017-07-25.min.json');
