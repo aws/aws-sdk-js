@@ -95,6 +95,11 @@
       if (data.body) {
         expect(req.httpRequest.body.replace(/\s+/g, '')).to.equal(data.body.replace(/\s+/g, ''));
       }
+      if (data.headers) {
+        Object.keys(data.headers).forEach((key) => {
+          expect(req.httpRequest.headers[key]).to.equal(data.headers[key]);
+        });
+      }
     } else if (svc.api.protocol.match(/(json|xml)/)) {
       if (req.httpRequest.body === '{}') {
         req.httpRequest.body = '';
