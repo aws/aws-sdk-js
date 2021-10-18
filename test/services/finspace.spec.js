@@ -9,7 +9,7 @@ describe('AWS.Finspace', function() {
 
   it('should set Content-Type header to application/x-amz-json-1.1', function () {
     helpers.mockHttpResponse(200, {}, '');
-    req = finspace.listEnvironments();
+    req = finspace.createEnvironment();
     req.build();
     return expect(req.httpRequest.headers['Content-Type']).to.equal('application/x-amz-json-1.1');
   });
