@@ -20,11 +20,11 @@ declare class QuickSight extends Service {
    */
   cancelIngestion(callback?: (err: AWSError, data: QuickSight.Types.CancelIngestionResponse) => void): Request<QuickSight.Types.CancelIngestionResponse, AWSError>;
   /**
-   * Creates Amazon QuickSight customizations the current Amazon Web Services Region;. Currently, you can add a custom default theme by using the CreateAccountCustomization or UpdateAccountCustomization API operation. To further customize Amazon QuickSight by removing Amazon QuickSight sample assets and videos for all new users, see Customizing Amazon QuickSight in the Amazon QuickSight User Guide.  You can create customizations for your Amazon Web Services account or, if you specify a namespace, for a Amazon QuickSight namespace instead. Customizations that apply to a namespace always override customizations that apply to an Amazon Web Services account. To find out which customizations apply, use the DescribeAccountCustomization API operation. Before you use the CreateAccountCustomization API operation to add a theme as the namespace default, make sure that you first share the theme with the namespace. If you don't share it with the namespace, the theme isn't visible to your users even if you make it the default theme. To check if the theme is shared, view the current permissions by using the  DescribeThemePermissions  API operation. To share the theme, grant permissions by using the  UpdateThemePermissions  API operation. 
+   * Creates Amazon QuickSight customizations the current Amazon Web Services Region. Currently, you can add a custom default theme by using the CreateAccountCustomization or UpdateAccountCustomization API operation. To further customize Amazon QuickSight by removing Amazon QuickSight sample assets and videos for all new users, see Customizing Amazon QuickSight in the Amazon QuickSight User Guide.  You can create customizations for your Amazon Web Services account or, if you specify a namespace, for a Amazon QuickSight namespace instead. Customizations that apply to a namespace always override customizations that apply to an Amazon Web Services account. To find out which customizations apply, use the DescribeAccountCustomization API operation. Before you use the CreateAccountCustomization API operation to add a theme as the namespace default, make sure that you first share the theme with the namespace. If you don't share it with the namespace, the theme isn't visible to your users even if you make it the default theme. To check if the theme is shared, view the current permissions by using the  DescribeThemePermissions  API operation. To share the theme, grant permissions by using the  UpdateThemePermissions  API operation. 
    */
   createAccountCustomization(params: QuickSight.Types.CreateAccountCustomizationRequest, callback?: (err: AWSError, data: QuickSight.Types.CreateAccountCustomizationResponse) => void): Request<QuickSight.Types.CreateAccountCustomizationResponse, AWSError>;
   /**
-   * Creates Amazon QuickSight customizations the current Amazon Web Services Region;. Currently, you can add a custom default theme by using the CreateAccountCustomization or UpdateAccountCustomization API operation. To further customize Amazon QuickSight by removing Amazon QuickSight sample assets and videos for all new users, see Customizing Amazon QuickSight in the Amazon QuickSight User Guide.  You can create customizations for your Amazon Web Services account or, if you specify a namespace, for a Amazon QuickSight namespace instead. Customizations that apply to a namespace always override customizations that apply to an Amazon Web Services account. To find out which customizations apply, use the DescribeAccountCustomization API operation. Before you use the CreateAccountCustomization API operation to add a theme as the namespace default, make sure that you first share the theme with the namespace. If you don't share it with the namespace, the theme isn't visible to your users even if you make it the default theme. To check if the theme is shared, view the current permissions by using the  DescribeThemePermissions  API operation. To share the theme, grant permissions by using the  UpdateThemePermissions  API operation. 
+   * Creates Amazon QuickSight customizations the current Amazon Web Services Region. Currently, you can add a custom default theme by using the CreateAccountCustomization or UpdateAccountCustomization API operation. To further customize Amazon QuickSight by removing Amazon QuickSight sample assets and videos for all new users, see Customizing Amazon QuickSight in the Amazon QuickSight User Guide.  You can create customizations for your Amazon Web Services account or, if you specify a namespace, for a Amazon QuickSight namespace instead. Customizations that apply to a namespace always override customizations that apply to an Amazon Web Services account. To find out which customizations apply, use the DescribeAccountCustomization API operation. Before you use the CreateAccountCustomization API operation to add a theme as the namespace default, make sure that you first share the theme with the namespace. If you don't share it with the namespace, the theme isn't visible to your users even if you make it the default theme. To check if the theme is shared, view the current permissions by using the  DescribeThemePermissions  API operation. To share the theme, grant permissions by using the  UpdateThemePermissions  API operation. 
    */
   createAccountCustomization(callback?: (err: AWSError, data: QuickSight.Types.CreateAccountCustomizationResponse) => void): Request<QuickSight.Types.CreateAccountCustomizationResponse, AWSError>;
   /**
@@ -148,11 +148,11 @@ declare class QuickSight extends Service {
    */
   createThemeAlias(callback?: (err: AWSError, data: QuickSight.Types.CreateThemeAliasResponse) => void): Request<QuickSight.Types.CreateThemeAliasResponse, AWSError>;
   /**
-   * Deletes all Amazon QuickSight customizations in this Amazon Web Services Region; for the specified Amazon Web Services account and Amazon QuickSight namespace.
+   * Deletes all Amazon QuickSight customizations in this Amazon Web Services Region for the specified Amazon Web Services account and Amazon QuickSight namespace.
    */
   deleteAccountCustomization(params: QuickSight.Types.DeleteAccountCustomizationRequest, callback?: (err: AWSError, data: QuickSight.Types.DeleteAccountCustomizationResponse) => void): Request<QuickSight.Types.DeleteAccountCustomizationResponse, AWSError>;
   /**
-   * Deletes all Amazon QuickSight customizations in this Amazon Web Services Region; for the specified Amazon Web Services account and Amazon QuickSight namespace.
+   * Deletes all Amazon QuickSight customizations in this Amazon Web Services Region for the specified Amazon Web Services account and Amazon QuickSight namespace.
    */
   deleteAccountCustomization(callback?: (err: AWSError, data: QuickSight.Types.DeleteAccountCustomizationResponse) => void): Request<QuickSight.Types.DeleteAccountCustomizationResponse, AWSError>;
   /**
@@ -284,11 +284,11 @@ declare class QuickSight extends Service {
    */
   deleteUserByPrincipalId(callback?: (err: AWSError, data: QuickSight.Types.DeleteUserByPrincipalIdResponse) => void): Request<QuickSight.Types.DeleteUserByPrincipalIdResponse, AWSError>;
   /**
-   * Describes the customizations associated with the provided Amazon Web Services account and Amazon Amazon QuickSight namespace in an Amazon Web Services Region;. The Amazon QuickSight console evaluates which customizations to apply by running this API operation with the Resolved flag included.  To determine what customizations display when you run this command, it can help to visualize the relationship of the entities involved.     Amazon Web Services account - The Amazon Web Services account exists at the top of the hierarchy. It has the potential to use all of the Amazon Web Services Regions; and AWS Services. When you subscribe to Amazon QuickSight, you choose one Amazon Web Services Region; to use as your home Region. That's where your free SPICE capacity is located. You can use Amazon QuickSight in any supported Amazon Web Services Region;.     Amazon Web Services Region; - In each Amazon Web Services Region; where you sign in to Amazon QuickSight at least once, Amazon QuickSight acts as a separate instance of the same service. If you have a user directory, it resides in us-east-1, which is the US East (N. Virginia). Generally speaking, these users have access to Amazon QuickSight in any Amazon Web Services Region;, unless they are constrained to a namespace.  To run the command in a different Amazon Web Services Region;, you change your Region settings. If you're using the AWS CLI, you can use one of the following options:   Use command line options.    Use named profiles.    Run aws configure to change your default Amazon Web Services Region;. Use Enter to key the same settings for your keys. For more information, see Configuring the AWS CLI.      Namespace - A Amazon QuickSight namespace is a partition that contains users and assets (data sources, datasets, dashboards, and so on). To access assets that are in a specific namespace, users and groups must also be part of the same namespace. People who share a namespace are completely isolated from users and assets in other namespaces, even if they are in the same Amazon Web Services account and Amazon Web Services Region;.    Applied customizations - Within an Amazon Web Services Region;, a set of Amazon QuickSight customizations can apply to an Amazon Web Services account or to a namespace. Settings that you apply to a namespace override settings that you apply to an Amazon Web Services account. All settings are isolated to a single Amazon Web Services Region;. To apply them in other Amazon Web Services Regions;, run the CreateAccountCustomization command in each Amazon Web Services Region; where you want to apply the same customizations.   
+   * Describes the customizations associated with the provided Amazon Web Services account and Amazon Amazon QuickSight namespace in an Amazon Web Services Region. The Amazon QuickSight console evaluates which customizations to apply by running this API operation with the Resolved flag included.  To determine what customizations display when you run this command, it can help to visualize the relationship of the entities involved.     Amazon Web Services account - The Amazon Web Services account exists at the top of the hierarchy. It has the potential to use all of the Amazon Web Services Regions and AWS Services. When you subscribe to Amazon QuickSight, you choose one Amazon Web Services Region to use as your home Region. That's where your free SPICE capacity is located. You can use Amazon QuickSight in any supported Amazon Web Services Region.     Amazon Web Services Region - In each Amazon Web Services Region where you sign in to Amazon QuickSight at least once, Amazon QuickSight acts as a separate instance of the same service. If you have a user directory, it resides in us-east-1, which is the US East (N. Virginia). Generally speaking, these users have access to Amazon QuickSight in any Amazon Web Services Region, unless they are constrained to a namespace.  To run the command in a different Amazon Web Services Region, you change your Region settings. If you're using the AWS CLI, you can use one of the following options:   Use command line options.    Use named profiles.    Run aws configure to change your default Amazon Web Services Region. Use Enter to key the same settings for your keys. For more information, see Configuring the AWS CLI.      Namespace - A Amazon QuickSight namespace is a partition that contains users and assets (data sources, datasets, dashboards, and so on). To access assets that are in a specific namespace, users and groups must also be part of the same namespace. People who share a namespace are completely isolated from users and assets in other namespaces, even if they are in the same Amazon Web Services account and Amazon Web Services Region.    Applied customizations - Within an Amazon Web Services Region, a set of Amazon QuickSight customizations can apply to an Amazon Web Services account or to a namespace. Settings that you apply to a namespace override settings that you apply to an Amazon Web Services account. All settings are isolated to a single Amazon Web Services Region. To apply them in other Amazon Web Services Regions, run the CreateAccountCustomization command in each Amazon Web Services Region where you want to apply the same customizations.   
    */
   describeAccountCustomization(params: QuickSight.Types.DescribeAccountCustomizationRequest, callback?: (err: AWSError, data: QuickSight.Types.DescribeAccountCustomizationResponse) => void): Request<QuickSight.Types.DescribeAccountCustomizationResponse, AWSError>;
   /**
-   * Describes the customizations associated with the provided Amazon Web Services account and Amazon Amazon QuickSight namespace in an Amazon Web Services Region;. The Amazon QuickSight console evaluates which customizations to apply by running this API operation with the Resolved flag included.  To determine what customizations display when you run this command, it can help to visualize the relationship of the entities involved.     Amazon Web Services account - The Amazon Web Services account exists at the top of the hierarchy. It has the potential to use all of the Amazon Web Services Regions; and AWS Services. When you subscribe to Amazon QuickSight, you choose one Amazon Web Services Region; to use as your home Region. That's where your free SPICE capacity is located. You can use Amazon QuickSight in any supported Amazon Web Services Region;.     Amazon Web Services Region; - In each Amazon Web Services Region; where you sign in to Amazon QuickSight at least once, Amazon QuickSight acts as a separate instance of the same service. If you have a user directory, it resides in us-east-1, which is the US East (N. Virginia). Generally speaking, these users have access to Amazon QuickSight in any Amazon Web Services Region;, unless they are constrained to a namespace.  To run the command in a different Amazon Web Services Region;, you change your Region settings. If you're using the AWS CLI, you can use one of the following options:   Use command line options.    Use named profiles.    Run aws configure to change your default Amazon Web Services Region;. Use Enter to key the same settings for your keys. For more information, see Configuring the AWS CLI.      Namespace - A Amazon QuickSight namespace is a partition that contains users and assets (data sources, datasets, dashboards, and so on). To access assets that are in a specific namespace, users and groups must also be part of the same namespace. People who share a namespace are completely isolated from users and assets in other namespaces, even if they are in the same Amazon Web Services account and Amazon Web Services Region;.    Applied customizations - Within an Amazon Web Services Region;, a set of Amazon QuickSight customizations can apply to an Amazon Web Services account or to a namespace. Settings that you apply to a namespace override settings that you apply to an Amazon Web Services account. All settings are isolated to a single Amazon Web Services Region;. To apply them in other Amazon Web Services Regions;, run the CreateAccountCustomization command in each Amazon Web Services Region; where you want to apply the same customizations.   
+   * Describes the customizations associated with the provided Amazon Web Services account and Amazon Amazon QuickSight namespace in an Amazon Web Services Region. The Amazon QuickSight console evaluates which customizations to apply by running this API operation with the Resolved flag included.  To determine what customizations display when you run this command, it can help to visualize the relationship of the entities involved.     Amazon Web Services account - The Amazon Web Services account exists at the top of the hierarchy. It has the potential to use all of the Amazon Web Services Regions and AWS Services. When you subscribe to Amazon QuickSight, you choose one Amazon Web Services Region to use as your home Region. That's where your free SPICE capacity is located. You can use Amazon QuickSight in any supported Amazon Web Services Region.     Amazon Web Services Region - In each Amazon Web Services Region where you sign in to Amazon QuickSight at least once, Amazon QuickSight acts as a separate instance of the same service. If you have a user directory, it resides in us-east-1, which is the US East (N. Virginia). Generally speaking, these users have access to Amazon QuickSight in any Amazon Web Services Region, unless they are constrained to a namespace.  To run the command in a different Amazon Web Services Region, you change your Region settings. If you're using the AWS CLI, you can use one of the following options:   Use command line options.    Use named profiles.    Run aws configure to change your default Amazon Web Services Region. Use Enter to key the same settings for your keys. For more information, see Configuring the AWS CLI.      Namespace - A Amazon QuickSight namespace is a partition that contains users and assets (data sources, datasets, dashboards, and so on). To access assets that are in a specific namespace, users and groups must also be part of the same namespace. People who share a namespace are completely isolated from users and assets in other namespaces, even if they are in the same Amazon Web Services account and Amazon Web Services Region.    Applied customizations - Within an Amazon Web Services Region, a set of Amazon QuickSight customizations can apply to an Amazon Web Services account or to a namespace. Settings that you apply to a namespace override settings that you apply to an Amazon Web Services account. All settings are isolated to a single Amazon Web Services Region. To apply them in other Amazon Web Services Regions, run the CreateAccountCustomization command in each Amazon Web Services Region where you want to apply the same customizations.   
    */
   describeAccountCustomization(callback?: (err: AWSError, data: QuickSight.Types.DescribeAccountCustomizationResponse) => void): Request<QuickSight.Types.DescribeAccountCustomizationResponse, AWSError>;
   /**
@@ -412,6 +412,14 @@ declare class QuickSight extends Service {
    */
   describeIngestion(callback?: (err: AWSError, data: QuickSight.Types.DescribeIngestionResponse) => void): Request<QuickSight.Types.DescribeIngestionResponse, AWSError>;
   /**
+   * Provides a summary and status of IP Rules.
+   */
+  describeIpRestriction(params: QuickSight.Types.DescribeIpRestrictionRequest, callback?: (err: AWSError, data: QuickSight.Types.DescribeIpRestrictionResponse) => void): Request<QuickSight.Types.DescribeIpRestrictionResponse, AWSError>;
+  /**
+   * Provides a summary and status of IP Rules.
+   */
+  describeIpRestriction(callback?: (err: AWSError, data: QuickSight.Types.DescribeIpRestrictionResponse) => void): Request<QuickSight.Types.DescribeIpRestrictionResponse, AWSError>;
+  /**
    * Describes the current namespace.
    */
   describeNamespace(params: QuickSight.Types.DescribeNamespaceRequest, callback?: (err: AWSError, data: QuickSight.Types.DescribeNamespaceResponse) => void): Request<QuickSight.Types.DescribeNamespaceResponse, AWSError>;
@@ -532,19 +540,19 @@ declare class QuickSight extends Service {
    */
   listDashboards(callback?: (err: AWSError, data: QuickSight.Types.ListDashboardsResponse) => void): Request<QuickSight.Types.ListDashboardsResponse, AWSError>;
   /**
-   * Lists all of the datasets belonging to the current Amazon Web Services account in an Amazon Web Services Region;. The permissions resource is arn:aws:quicksight:region:aws-account-id:dataset/*.
+   * Lists all of the datasets belonging to the current Amazon Web Services account in an Amazon Web Services Region. The permissions resource is arn:aws:quicksight:region:aws-account-id:dataset/*.
    */
   listDataSets(params: QuickSight.Types.ListDataSetsRequest, callback?: (err: AWSError, data: QuickSight.Types.ListDataSetsResponse) => void): Request<QuickSight.Types.ListDataSetsResponse, AWSError>;
   /**
-   * Lists all of the datasets belonging to the current Amazon Web Services account in an Amazon Web Services Region;. The permissions resource is arn:aws:quicksight:region:aws-account-id:dataset/*.
+   * Lists all of the datasets belonging to the current Amazon Web Services account in an Amazon Web Services Region. The permissions resource is arn:aws:quicksight:region:aws-account-id:dataset/*.
    */
   listDataSets(callback?: (err: AWSError, data: QuickSight.Types.ListDataSetsResponse) => void): Request<QuickSight.Types.ListDataSetsResponse, AWSError>;
   /**
-   * Lists data sources in current Amazon Web Services Region; that belong to this Amazon Web Services account.
+   * Lists data sources in current Amazon Web Services Region that belong to this Amazon Web Services account.
    */
   listDataSources(params: QuickSight.Types.ListDataSourcesRequest, callback?: (err: AWSError, data: QuickSight.Types.ListDataSourcesResponse) => void): Request<QuickSight.Types.ListDataSourcesResponse, AWSError>;
   /**
-   * Lists data sources in current Amazon Web Services Region; that belong to this Amazon Web Services account.
+   * Lists data sources in current Amazon Web Services Region that belong to this Amazon Web Services account.
    */
   listDataSources(callback?: (err: AWSError, data: QuickSight.Types.ListDataSourcesResponse) => void): Request<QuickSight.Types.ListDataSourcesResponse, AWSError>;
   /**
@@ -740,11 +748,11 @@ declare class QuickSight extends Service {
    */
   untagResource(callback?: (err: AWSError, data: QuickSight.Types.UntagResourceResponse) => void): Request<QuickSight.Types.UntagResourceResponse, AWSError>;
   /**
-   * Updates Amazon QuickSight customizations the current Amazon Web Services Region;. Currently, the only customization you can use is a theme. You can use customizations for your Amazon Web Services account or, if you specify a namespace, for a Amazon QuickSight namespace instead. Customizations that apply to a namespace override customizations that apply to an Amazon Web Services account. To find out which customizations apply, use the DescribeAccountCustomization API operation. 
+   * Updates Amazon QuickSight customizations the current Amazon Web Services Region. Currently, the only customization you can use is a theme. You can use customizations for your Amazon Web Services account or, if you specify a namespace, for a Amazon QuickSight namespace instead. Customizations that apply to a namespace override customizations that apply to an Amazon Web Services account. To find out which customizations apply, use the DescribeAccountCustomization API operation. 
    */
   updateAccountCustomization(params: QuickSight.Types.UpdateAccountCustomizationRequest, callback?: (err: AWSError, data: QuickSight.Types.UpdateAccountCustomizationResponse) => void): Request<QuickSight.Types.UpdateAccountCustomizationResponse, AWSError>;
   /**
-   * Updates Amazon QuickSight customizations the current Amazon Web Services Region;. Currently, the only customization you can use is a theme. You can use customizations for your Amazon Web Services account or, if you specify a namespace, for a Amazon QuickSight namespace instead. Customizations that apply to a namespace override customizations that apply to an Amazon Web Services account. To find out which customizations apply, use the DescribeAccountCustomization API operation. 
+   * Updates Amazon QuickSight customizations the current Amazon Web Services Region. Currently, the only customization you can use is a theme. You can use customizations for your Amazon Web Services account or, if you specify a namespace, for a Amazon QuickSight namespace instead. Customizations that apply to a namespace override customizations that apply to an Amazon Web Services account. To find out which customizations apply, use the DescribeAccountCustomization API operation. 
    */
   updateAccountCustomization(callback?: (err: AWSError, data: QuickSight.Types.UpdateAccountCustomizationResponse) => void): Request<QuickSight.Types.UpdateAccountCustomizationResponse, AWSError>;
   /**
@@ -860,6 +868,14 @@ declare class QuickSight extends Service {
    */
   updateIAMPolicyAssignment(callback?: (err: AWSError, data: QuickSight.Types.UpdateIAMPolicyAssignmentResponse) => void): Request<QuickSight.Types.UpdateIAMPolicyAssignmentResponse, AWSError>;
   /**
+   * Updates content and status of IP Rules.
+   */
+  updateIpRestriction(params: QuickSight.Types.UpdateIpRestrictionRequest, callback?: (err: AWSError, data: QuickSight.Types.UpdateIpRestrictionResponse) => void): Request<QuickSight.Types.UpdateIpRestrictionResponse, AWSError>;
+  /**
+   * Updates content and status of IP Rules.
+   */
+  updateIpRestriction(callback?: (err: AWSError, data: QuickSight.Types.UpdateIpRestrictionResponse) => void): Request<QuickSight.Types.UpdateIpRestrictionResponse, AWSError>;
+  /**
    * Updates a template from an existing Amazon QuickSight analysis or another template.
    */
   updateTemplate(params: QuickSight.Types.UpdateTemplateRequest, callback?: (err: AWSError, data: QuickSight.Types.UpdateTemplateResponse) => void): Request<QuickSight.Types.UpdateTemplateResponse, AWSError>;
@@ -963,7 +979,7 @@ declare namespace QuickSight {
   export type AliasName = string;
   export interface AmazonElasticsearchParameters {
     /**
-     * The Elasticsearch domain.
+     * The OpenSearch domain.
      */
     Domain: Domain;
   }
@@ -1148,6 +1164,7 @@ declare namespace QuickSight {
      */
     Show?: boolean;
   }
+  export type CIDR = string;
   export interface CalculatedColumn {
     /**
      * Column name.
@@ -1171,7 +1188,7 @@ declare namespace QuickSight {
     /**
      * The ID of the dataset used in the ingestion.
      */
-    DataSetId: string;
+    DataSetId: String;
     /**
      * An ID for the ingestion.
      */
@@ -1189,7 +1206,7 @@ declare namespace QuickSight {
     /**
      * The Amazon Web Services request ID for this operation.
      */
-    RequestId?: string;
+    RequestId?: String;
     /**
      * The HTTP status of the request.
      */
@@ -1300,7 +1317,7 @@ declare namespace QuickSight {
      */
     Namespace?: Namespace;
     /**
-     * The Amazon QuickSight customizations you're adding in the current Amazon Web Services Region;. You can add these to an Amazon Web Services account and a Amazon QuickSight namespace.  For example, you can add a default theme by setting AccountCustomization to the midnight theme: "AccountCustomization": { "DefaultTheme": "arn:aws:quicksight::aws:theme/MIDNIGHT" }. Or, you can add a custom theme by specifying "AccountCustomization": { "DefaultTheme": "arn:aws:quicksight:us-west-2:111122223333:theme/bdb844d0-0fe9-4d9d-b520-0fe602d93639" }. 
+     * The Amazon QuickSight customizations you're adding in the current Amazon Web Services Region. You can add these to an Amazon Web Services account and a Amazon QuickSight namespace.  For example, you can add a default theme by setting AccountCustomization to the midnight theme: "AccountCustomization": { "DefaultTheme": "arn:aws:quicksight::aws:theme/MIDNIGHT" }. Or, you can add a custom theme by specifying "AccountCustomization": { "DefaultTheme": "arn:aws:quicksight:us-west-2:111122223333:theme/bdb844d0-0fe9-4d9d-b520-0fe602d93639" }. 
      */
     AccountCustomization: AccountCustomization;
     /**
@@ -1322,7 +1339,7 @@ declare namespace QuickSight {
      */
     Namespace?: Namespace;
     /**
-     * The Amazon QuickSight customizations you're adding in the current Amazon Web Services Region;. 
+     * The Amazon QuickSight customizations you're adding in the current Amazon Web Services Region. 
      */
     AccountCustomization?: AccountCustomization;
     /**
@@ -1418,7 +1435,7 @@ declare namespace QuickSight {
      */
     Permissions?: ResourcePermissionList;
     /**
-     * The entity that you are using as a source when you create the dashboard. In SourceEntity, you specify the type of object you're using as source. You can only create a dashboard from a template, so you use a SourceTemplate entity. If you need to create a dashboard from an analysis, first convert the analysis to a template by using the CreateTemplate API operation. For SourceTemplate, specify the Amazon Resource Name (ARN) of the source template. The SourceTemplateARN can contain any Amazon Web Services account and any Amazon QuickSight-supported Amazon Web Services Region;.  Use the DataSetReferences entity within SourceTemplate to list the replacement datasets for the placeholders listed in the original. The schema in each dataset must match its placeholder. 
+     * The entity that you are using as a source when you create the dashboard. In SourceEntity, you specify the type of object you're using as source. You can only create a dashboard from a template, so you use a SourceTemplate entity. If you need to create a dashboard from an analysis, first convert the analysis to a template by using the CreateTemplate API operation. For SourceTemplate, specify the Amazon Resource Name (ARN) of the source template. The SourceTemplateARN can contain any Amazon Web Services account and any Amazon QuickSight-supported Amazon Web Services Region.  Use the DataSetReferences entity within SourceTemplate to list the replacement datasets for the placeholders listed in the original. The schema in each dataset must match its placeholder. 
      */
     SourceEntity: DashboardSourceEntity;
     /**
@@ -1470,7 +1487,7 @@ declare namespace QuickSight {
      */
     AwsAccountId: AwsAccountId;
     /**
-     * An ID for the dataset that you want to create. This ID is unique per Amazon Web Services Region; for each Amazon Web Services account.
+     * An ID for the dataset that you want to create. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.
      */
     DataSetId: ResourceId;
     /**
@@ -1525,7 +1542,7 @@ declare namespace QuickSight {
      */
     Arn?: Arn;
     /**
-     * The ID for the dataset that you want to create. This ID is unique per Amazon Web Services Region; for each Amazon Web Services account.
+     * The ID for the dataset that you want to create. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.
      */
     DataSetId?: ResourceId;
     /**
@@ -1551,7 +1568,7 @@ declare namespace QuickSight {
      */
     AwsAccountId: AwsAccountId;
     /**
-     * An ID for the data source. This ID is unique per Amazon Web Services Region; for each Amazon Web Services account. 
+     * An ID for the data source. This ID is unique per Amazon Web Services Region for each Amazon Web Services account. 
      */
     DataSourceId: ResourceId;
     /**
@@ -1559,7 +1576,7 @@ declare namespace QuickSight {
      */
     Name: ResourceName;
     /**
-     * The type of the data source. To return a list of all data sources, use ListDataSources. Use AMAZON_ELASTICSEARCH for Amazon Elasticsearch Service.
+     * The type of the data source. To return a list of all data sources, use ListDataSources. Use AMAZON_ELASTICSEARCH for Amazon OpenSearch Service.
      */
     Type: DataSourceType;
     /**
@@ -1593,7 +1610,7 @@ declare namespace QuickSight {
      */
     Arn?: Arn;
     /**
-     * The ID of the data source. This ID is unique per Amazon Web Services Region; for each Amazon Web Services account.
+     * The ID of the data source. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.
      */
     DataSourceId?: ResourceId;
     /**
@@ -1813,7 +1830,7 @@ declare namespace QuickSight {
     /**
      * The ID of the dataset used in the ingestion.
      */
-    DataSetId: string;
+    DataSetId: String;
     /**
      * An ID for the ingestion.
      */
@@ -1822,6 +1839,10 @@ declare namespace QuickSight {
      * The Amazon Web Services account ID.
      */
     AwsAccountId: AwsAccountId;
+    /**
+     * The type of ingestion that you want to create.
+     */
+    IngestionType?: IngestionType;
   }
   export interface CreateIngestionResponse {
     /**
@@ -1839,7 +1860,7 @@ declare namespace QuickSight {
     /**
      * The Amazon Web Services request ID for this operation.
      */
-    RequestId?: string;
+    RequestId?: String;
     /**
      * The HTTP status of the request.
      */
@@ -1943,7 +1964,7 @@ declare namespace QuickSight {
      */
     Permissions?: ResourcePermissionList;
     /**
-     * The entity that you are using as a source when you create the template. In SourceEntity, you specify the type of object you're using as source: SourceTemplate for a template or SourceAnalysis for an analysis. Both of these require an Amazon Resource Name (ARN). For SourceTemplate, specify the ARN of the source template. For SourceAnalysis, specify the ARN of the source analysis. The SourceTemplate ARN can contain any Amazon Web Services account and any Amazon QuickSight-supported Amazon Web Services Region;.  Use the DataSetReferences entity within SourceTemplate or SourceAnalysis to list the replacement datasets for the placeholders listed in the original. The schema in each dataset must match its placeholder. 
+     * The entity that you are using as a source when you create the template. In SourceEntity, you specify the type of object you're using as source: SourceTemplate for a template or SourceAnalysis for an analysis. Both of these require an Amazon Resource Name (ARN). For SourceTemplate, specify the ARN of the source template. For SourceAnalysis, specify the ARN of the source analysis. The SourceTemplate ARN can contain any Amazon Web Services account and any Amazon QuickSight-supported Amazon Web Services Region.  Use the DataSetReferences entity within SourceTemplate or SourceAnalysis to list the replacement datasets for the placeholders listed in the original. The schema in each dataset must match its placeholder. 
      */
     SourceEntity: TemplateSourceEntity;
     /**
@@ -2467,7 +2488,7 @@ declare namespace QuickSight {
      */
     Arn?: Arn;
     /**
-     * The ID of the data source. This ID is unique per Amazon Web Services Region; for each Amazon Web Services account.
+     * The ID of the data source. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.
      */
     DataSourceId?: ResourceId;
     /**
@@ -2535,7 +2556,7 @@ declare namespace QuickSight {
   export type DataSourceList = DataSource[];
   export interface DataSourceParameters {
     /**
-     * The parameters for Elasticsearch.
+     * The parameters for OpenSearch.
      */
     AmazonElasticsearchParameters?: AmazonElasticsearchParameters;
     /**
@@ -2643,7 +2664,7 @@ declare namespace QuickSight {
   export type DecimalParameterList = DecimalParameter[];
   export interface DeleteAccountCustomizationRequest {
     /**
-     * The ID for the Amazon Web Services account that you want to delete Amazon QuickSight customizations from in this Amazon Web Services Region;.
+     * The ID for the Amazon Web Services account that you want to delete Amazon QuickSight customizations from in this Amazon Web Services Region.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -2739,7 +2760,7 @@ declare namespace QuickSight {
      */
     AwsAccountId: AwsAccountId;
     /**
-     * The ID for the dataset that you want to create. This ID is unique per Amazon Web Services Region; for each Amazon Web Services account.
+     * The ID for the dataset that you want to create. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.
      */
     DataSetId: ResourceId;
   }
@@ -2749,7 +2770,7 @@ declare namespace QuickSight {
      */
     Arn?: Arn;
     /**
-     * The ID for the dataset that you want to create. This ID is unique per Amazon Web Services Region; for each Amazon Web Services account.
+     * The ID for the dataset that you want to create. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.
      */
     DataSetId?: ResourceId;
     /**
@@ -2767,7 +2788,7 @@ declare namespace QuickSight {
      */
     AwsAccountId: AwsAccountId;
     /**
-     * The ID of the data source. This ID is unique per Amazon Web Services Region; for each Amazon Web Services account.
+     * The ID of the data source. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.
      */
     DataSourceId: ResourceId;
   }
@@ -2777,7 +2798,7 @@ declare namespace QuickSight {
      */
     Arn?: Arn;
     /**
-     * The ID of the data source. This ID is unique per Amazon Web Services Region; for each Amazon Web Services account.
+     * The ID of the data source. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.
      */
     DataSourceId?: ResourceId;
     /**
@@ -3158,7 +3179,7 @@ declare namespace QuickSight {
      */
     Namespace?: Namespace;
     /**
-     * The Amazon QuickSight customizations that exist in the current Amazon Web Services Region;. 
+     * The Amazon QuickSight customizations that exist in the current Amazon Web Services Region. 
      */
     AccountCustomization?: AccountCustomization;
     /**
@@ -3178,7 +3199,7 @@ declare namespace QuickSight {
   }
   export interface DescribeAccountSettingsResponse {
     /**
-     * The Amazon QuickSight settings for this Amazon Web Services account. This information includes the edition of Amazon Amazon QuickSight that you subscribed to (Standard or Enterprise) and the notification email for the Amazon QuickSight subscription. In the Amazon QuickSight console, the Amazon QuickSight subscription is sometimes referred to as a Amazon QuickSight "account" even though it's technically not an account by itself. Instead, it's a subscription to the Amazon QuickSight service for your Amazon Web Services account. The edition that you subscribe to applies to Amazon QuickSight in every Amazon Web Services Region; where you use it.
+     * The Amazon QuickSight settings for this Amazon Web Services account. This information includes the edition of Amazon Amazon QuickSight that you subscribed to (Standard or Enterprise) and the notification email for the Amazon QuickSight subscription. In the Amazon QuickSight console, the Amazon QuickSight subscription is sometimes referred to as a Amazon QuickSight "account" even though it's technically not an account by itself. Instead, it's a subscription to the Amazon QuickSight service for your Amazon Web Services account. The edition that you subscribe to applies to Amazon QuickSight in every Amazon Web Services Region where you use it.
      */
     AccountSettings?: AccountSettings;
     /**
@@ -3316,7 +3337,7 @@ declare namespace QuickSight {
      */
     AwsAccountId: AwsAccountId;
     /**
-     * The ID for the dataset that you want to create. This ID is unique per Amazon Web Services Region; for each Amazon Web Services account.
+     * The ID for the dataset that you want to create. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.
      */
     DataSetId: ResourceId;
   }
@@ -3326,7 +3347,7 @@ declare namespace QuickSight {
      */
     DataSetArn?: Arn;
     /**
-     * The ID for the dataset that you want to create. This ID is unique per Amazon Web Services Region; for each Amazon Web Services account.
+     * The ID for the dataset that you want to create. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.
      */
     DataSetId?: ResourceId;
     /**
@@ -3348,7 +3369,7 @@ declare namespace QuickSight {
      */
     AwsAccountId: AwsAccountId;
     /**
-     * The ID for the dataset that you want to create. This ID is unique per Amazon Web Services Region; for each Amazon Web Services account.
+     * The ID for the dataset that you want to create. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.
      */
     DataSetId: ResourceId;
   }
@@ -3372,7 +3393,7 @@ declare namespace QuickSight {
      */
     AwsAccountId: AwsAccountId;
     /**
-     * The ID of the data source. This ID is unique per Amazon Web Services Region; for each Amazon Web Services account.
+     * The ID of the data source. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.
      */
     DataSourceId: ResourceId;
   }
@@ -3382,7 +3403,7 @@ declare namespace QuickSight {
      */
     DataSourceArn?: Arn;
     /**
-     * The ID of the data source. This ID is unique per Amazon Web Services Region; for each Amazon Web Services account.
+     * The ID of the data source. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.
      */
     DataSourceId?: ResourceId;
     /**
@@ -3404,7 +3425,7 @@ declare namespace QuickSight {
      */
     AwsAccountId: AwsAccountId;
     /**
-     * The ID of the data source. This ID is unique per Amazon Web Services Region; for each Amazon Web Services account.
+     * The ID of the data source. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.
      */
     DataSourceId: ResourceId;
   }
@@ -3574,7 +3595,7 @@ declare namespace QuickSight {
     /**
      * The ID of the dataset used in the ingestion.
      */
-    DataSetId: string;
+    DataSetId: String;
     /**
      * An ID for the ingestion.
      */
@@ -3588,9 +3609,37 @@ declare namespace QuickSight {
     /**
      * The Amazon Web Services request ID for this operation.
      */
-    RequestId?: string;
+    RequestId?: String;
     /**
      * The HTTP status of the request.
+     */
+    Status?: StatusCode;
+  }
+  export interface DescribeIpRestrictionRequest {
+    /**
+     * Your AWS account ID.
+     */
+    AwsAccountId: AwsAccountId;
+  }
+  export interface DescribeIpRestrictionResponse {
+    /**
+     * Your AWS account ID.
+     */
+    AwsAccountId?: AwsAccountId;
+    /**
+     * Describes the IP rules with CIDR range and description.
+     */
+    IpRestrictionRuleMap?: IpRestrictionRuleMap;
+    /**
+     * Whether or not IP rules are enabled.
+     */
+    Enabled?: NullableBoolean;
+    /**
+     * The ID of the describe request.
+     */
+    RequestId?: String;
+    /**
+     * The status of a set of IP restrictions. A successful request returns a 200 status code.
      */
     Status?: StatusCode;
   }
@@ -3606,7 +3655,7 @@ declare namespace QuickSight {
   }
   export interface DescribeNamespaceResponse {
     /**
-     * The information about the namespace that you're describing. The response includes the namespace ARN, name, Amazon Web Services Region;, creation status, and identity store. DescribeNamespace also works for namespaces that are in the process of being created. For incomplete namespaces, this API operation lists the namespace error types and messages associated with the creation process.
+     * The information about the namespace that you're describing. The response includes the namespace ARN, name, Amazon Web Services Region, creation status, and identity store. DescribeNamespace also works for namespaces that are in the process of being created. For incomplete namespaces, this API operation lists the namespace error types and messages associated with the creation process.
      */
     Namespace?: NamespaceInfoV2;
     /**
@@ -3846,7 +3895,7 @@ declare namespace QuickSight {
     /**
      * Error message.
      */
-    Message?: string;
+    Message?: String;
   }
   export interface ExportToCSVOption {
     /**
@@ -4245,15 +4294,15 @@ declare namespace QuickSight {
     /**
      * The time that this ingestion started.
      */
-    CreatedTime: timestamp;
+    CreatedTime: Timestamp;
     /**
      * The time that this ingestion took, measured in seconds.
      */
-    IngestionTimeInSeconds?: long;
+    IngestionTimeInSeconds?: Long;
     /**
      * The size of the data ingested, in bytes.
      */
-    IngestionSizeInBytes?: long;
+    IngestionSizeInBytes?: Long;
     /**
      * Event source for this ingestion.
      */
@@ -4263,12 +4312,13 @@ declare namespace QuickSight {
      */
     RequestType?: IngestionRequestType;
   }
-  export type IngestionErrorType = "FAILURE_TO_ASSUME_ROLE"|"INGESTION_SUPERSEDED"|"INGESTION_CANCELED"|"DATA_SET_DELETED"|"DATA_SET_NOT_SPICE"|"S3_UPLOADED_FILE_DELETED"|"S3_MANIFEST_ERROR"|"DATA_TOLERANCE_EXCEPTION"|"SPICE_TABLE_NOT_FOUND"|"DATA_SET_SIZE_LIMIT_EXCEEDED"|"ROW_SIZE_LIMIT_EXCEEDED"|"ACCOUNT_CAPACITY_LIMIT_EXCEEDED"|"CUSTOMER_ERROR"|"DATA_SOURCE_NOT_FOUND"|"IAM_ROLE_NOT_AVAILABLE"|"CONNECTION_FAILURE"|"SQL_TABLE_NOT_FOUND"|"PERMISSION_DENIED"|"SSL_CERTIFICATE_VALIDATION_FAILURE"|"OAUTH_TOKEN_FAILURE"|"SOURCE_API_LIMIT_EXCEEDED_FAILURE"|"PASSWORD_AUTHENTICATION_FAILURE"|"SQL_SCHEMA_MISMATCH_ERROR"|"INVALID_DATE_FORMAT"|"INVALID_DATAPREP_SYNTAX"|"SOURCE_RESOURCE_LIMIT_EXCEEDED"|"SQL_INVALID_PARAMETER_VALUE"|"QUERY_TIMEOUT"|"SQL_NUMERIC_OVERFLOW"|"UNRESOLVABLE_HOST"|"UNROUTABLE_HOST"|"SQL_EXCEPTION"|"S3_FILE_INACCESSIBLE"|"IOT_FILE_NOT_FOUND"|"IOT_DATA_SET_FILE_EMPTY"|"INVALID_DATA_SOURCE_CONFIG"|"DATA_SOURCE_AUTH_FAILED"|"DATA_SOURCE_CONNECTION_FAILED"|"FAILURE_TO_PROCESS_JSON_FILE"|"INTERNAL_SERVICE_ERROR"|string;
+  export type IngestionErrorType = "FAILURE_TO_ASSUME_ROLE"|"INGESTION_SUPERSEDED"|"INGESTION_CANCELED"|"DATA_SET_DELETED"|"DATA_SET_NOT_SPICE"|"S3_UPLOADED_FILE_DELETED"|"S3_MANIFEST_ERROR"|"DATA_TOLERANCE_EXCEPTION"|"SPICE_TABLE_NOT_FOUND"|"DATA_SET_SIZE_LIMIT_EXCEEDED"|"ROW_SIZE_LIMIT_EXCEEDED"|"ACCOUNT_CAPACITY_LIMIT_EXCEEDED"|"CUSTOMER_ERROR"|"DATA_SOURCE_NOT_FOUND"|"IAM_ROLE_NOT_AVAILABLE"|"CONNECTION_FAILURE"|"SQL_TABLE_NOT_FOUND"|"PERMISSION_DENIED"|"SSL_CERTIFICATE_VALIDATION_FAILURE"|"OAUTH_TOKEN_FAILURE"|"SOURCE_API_LIMIT_EXCEEDED_FAILURE"|"PASSWORD_AUTHENTICATION_FAILURE"|"SQL_SCHEMA_MISMATCH_ERROR"|"INVALID_DATE_FORMAT"|"INVALID_DATAPREP_SYNTAX"|"SOURCE_RESOURCE_LIMIT_EXCEEDED"|"SQL_INVALID_PARAMETER_VALUE"|"QUERY_TIMEOUT"|"SQL_NUMERIC_OVERFLOW"|"UNRESOLVABLE_HOST"|"UNROUTABLE_HOST"|"SQL_EXCEPTION"|"S3_FILE_INACCESSIBLE"|"IOT_FILE_NOT_FOUND"|"IOT_DATA_SET_FILE_EMPTY"|"INVALID_DATA_SOURCE_CONFIG"|"DATA_SOURCE_AUTH_FAILED"|"DATA_SOURCE_CONNECTION_FAILED"|"FAILURE_TO_PROCESS_JSON_FILE"|"INTERNAL_SERVICE_ERROR"|"REFRESH_SUPPRESSED_BY_EDIT"|"PERMISSION_NOT_FOUND"|"ELASTICSEARCH_CURSOR_NOT_ENABLED"|"CURSOR_NOT_ENABLED"|string;
   export type IngestionId = string;
   export type IngestionMaxResults = number;
   export type IngestionRequestSource = "MANUAL"|"SCHEDULED"|string;
   export type IngestionRequestType = "INITIAL_INGESTION"|"EDIT"|"INCREMENTAL_REFRESH"|"FULL_REFRESH"|string;
   export type IngestionStatus = "INITIALIZED"|"QUEUED"|"RUNNING"|"FAILED"|"COMPLETED"|"CANCELLED"|string;
+  export type IngestionType = "INCREMENTAL_REFRESH"|"FULL_REFRESH"|string;
   export type Ingestions = Ingestion[];
   export interface InputColumn {
     /**
@@ -4294,6 +4344,8 @@ declare namespace QuickSight {
     Values: LongList;
   }
   export type IntegerParameterList = IntegerParameter[];
+  export type IpRestrictionRuleDescription = string;
+  export type IpRestrictionRuleMap = {[key: string]: IpRestrictionRuleDescription};
   export interface JiraParameters {
     /**
      * The base URL of the Jira site.
@@ -4725,11 +4777,11 @@ declare namespace QuickSight {
     /**
      * The ID of the dataset used in the ingestion.
      */
-    DataSetId: string;
+    DataSetId: String;
     /**
      * The token for the next set of results, or null if there are no more results.
      */
-    NextToken?: string;
+    NextToken?: String;
     /**
      * The Amazon Web Services account ID.
      */
@@ -4747,11 +4799,11 @@ declare namespace QuickSight {
     /**
      * The token for the next set of results, or null if there are no more results.
      */
-    NextToken?: string;
+    NextToken?: String;
     /**
      * The Amazon Web Services request ID for this operation.
      */
-    RequestId?: string;
+    RequestId?: String;
     /**
      * The HTTP status of the request.
      */
@@ -4773,7 +4825,7 @@ declare namespace QuickSight {
   }
   export interface ListNamespacesResponse {
     /**
-     * The information about the namespaces in this Amazon Web Services account. The response includes the namespace ARN, name, Amazon Web Services Region;, notification email address, creation status, and identity store.
+     * The information about the namespaces in this Amazon Web Services account. The response includes the namespace ARN, name, Amazon Web Services Region, notification email address, creation status, and identity store.
      */
     Namespaces?: Namespaces;
     /**
@@ -5208,7 +5260,7 @@ declare namespace QuickSight {
      */
     Arn?: Arn;
     /**
-     * The namespace Amazon Web Services Region;.
+     * The namespace Amazon Web Services Region.
      */
     CapacityRegion?: String;
     /**
@@ -5227,6 +5279,7 @@ declare namespace QuickSight {
   export type NamespaceStatus = "CREATED"|"CREATING"|"DELETING"|"RETRYABLE_FAILURE"|"NON_RETRYABLE_FAILURE"|string;
   export type Namespaces = NamespaceInfoV2[];
   export type NonEmptyString = string;
+  export type NullableBoolean = boolean;
   export type OnClause = string;
   export type OptionalPort = number;
   export interface OracleParameters {
@@ -5338,11 +5391,11 @@ declare namespace QuickSight {
     /**
      * The ID of the queued ingestion.
      */
-    WaitingOnIngestion: string;
+    WaitingOnIngestion: String;
     /**
      * The ID of the ongoing ingestion. The queued ingestion is waiting for the ongoing ingestion to complete.
      */
-    QueuedIngestion: string;
+    QueuedIngestion: String;
   }
   export interface RdsParameters {
     /**
@@ -5547,11 +5600,15 @@ declare namespace QuickSight {
     /**
      * The number of rows that were ingested.
      */
-    RowsIngested?: long;
+    RowsIngested?: Long;
     /**
      * The number of rows that were not ingested.
      */
-    RowsDropped?: long;
+    RowsDropped?: Long;
+    /**
+     * The total number of rows in the dataset.
+     */
+    TotalRowsInDataset?: Long;
   }
   export interface RowLevelPermissionDataSet {
     /**
@@ -5903,7 +5960,7 @@ declare namespace QuickSight {
      */
     Version?: TemplateVersion;
     /**
-     * The ID for the template. This is unique per Amazon Web Services Region; for each Amazon Web Services account.
+     * The ID for the template. This is unique per Amazon Web Services Region for each Amazon Web Services account.
      */
     TemplateId?: RestrictiveResourceId;
     /**
@@ -5975,7 +6032,7 @@ declare namespace QuickSight {
      */
     Arn?: Arn;
     /**
-     * The ID of the template. This ID is unique per Amazon Web Services Region; for each Amazon Web Services account.
+     * The ID of the template. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.
      */
     TemplateId?: RestrictiveResourceId;
     /**
@@ -6151,7 +6208,7 @@ declare namespace QuickSight {
      */
     Name?: ThemeName;
     /**
-     * The ID of the theme. This ID is unique per Amazon Web Services Region; for each Amazon Web Services account.
+     * The ID of the theme. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.
      */
     ThemeId?: RestrictiveResourceId;
     /**
@@ -6389,7 +6446,7 @@ declare namespace QuickSight {
      */
     Namespace?: Namespace;
     /**
-     * The Amazon QuickSight customizations you're updating in the current Amazon Web Services Region;. 
+     * The Amazon QuickSight customizations you're updating in the current Amazon Web Services Region. 
      */
     AccountCustomization: AccountCustomization;
   }
@@ -6407,7 +6464,7 @@ declare namespace QuickSight {
      */
     Namespace?: Namespace;
     /**
-     * The Amazon QuickSight customizations you're updating in the current Amazon Web Services Region;. 
+     * The Amazon QuickSight customizations you're updating in the current Amazon Web Services Region. 
      */
     AccountCustomization?: AccountCustomization;
     /**
@@ -6617,7 +6674,7 @@ declare namespace QuickSight {
      */
     Name: DashboardName;
     /**
-     * The entity that you are using as a source when you update the dashboard. In SourceEntity, you specify the type of object you're using as source. You can only update a dashboard from a template, so you use a SourceTemplate entity. If you need to update a dashboard from an analysis, first convert the analysis to a template by using the CreateTemplate API operation. For SourceTemplate, specify the Amazon Resource Name (ARN) of the source template. The SourceTemplate ARN can contain any Amazon Web Services account and any Amazon QuickSight-supported Amazon Web Services Region;.  Use the DataSetReferences entity within SourceTemplate to list the replacement datasets for the placeholders listed in the original. The schema in each dataset must match its placeholder. 
+     * The entity that you are using as a source when you update the dashboard. In SourceEntity, you specify the type of object you're using as source. You can only update a dashboard from a template, so you use a SourceTemplate entity. If you need to update a dashboard from an analysis, first convert the analysis to a template by using the CreateTemplate API operation. For SourceTemplate, specify the Amazon Resource Name (ARN) of the source template. The SourceTemplate ARN can contain any Amazon Web Services account and any Amazon QuickSight-supported Amazon Web Services Region.  Use the DataSetReferences entity within SourceTemplate to list the replacement datasets for the placeholders listed in the original. The schema in each dataset must match its placeholder. 
      */
     SourceEntity: DashboardSourceEntity;
     /**
@@ -6669,7 +6726,7 @@ declare namespace QuickSight {
      */
     AwsAccountId: AwsAccountId;
     /**
-     * The ID for the dataset whose permissions you want to update. This ID is unique per Amazon Web Services Region; for each Amazon Web Services account.
+     * The ID for the dataset whose permissions you want to update. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.
      */
     DataSetId: ResourceId;
     /**
@@ -6687,7 +6744,7 @@ declare namespace QuickSight {
      */
     DataSetArn?: Arn;
     /**
-     * The ID for the dataset whose permissions you want to update. This ID is unique per Amazon Web Services Region; for each Amazon Web Services account.
+     * The ID for the dataset whose permissions you want to update. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.
      */
     DataSetId?: ResourceId;
     /**
@@ -6705,7 +6762,7 @@ declare namespace QuickSight {
      */
     AwsAccountId: AwsAccountId;
     /**
-     * The ID for the dataset that you want to update. This ID is unique per Amazon Web Services Region; for each Amazon Web Services account.
+     * The ID for the dataset that you want to update. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.
      */
     DataSetId: ResourceId;
     /**
@@ -6752,7 +6809,7 @@ declare namespace QuickSight {
      */
     Arn?: Arn;
     /**
-     * The ID for the dataset that you want to create. This ID is unique per Amazon Web Services Region; for each Amazon Web Services account.
+     * The ID for the dataset that you want to create. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.
      */
     DataSetId?: ResourceId;
     /**
@@ -6778,7 +6835,7 @@ declare namespace QuickSight {
      */
     AwsAccountId: AwsAccountId;
     /**
-     * The ID of the data source. This ID is unique per Amazon Web Services Region; for each Amazon Web Services account. 
+     * The ID of the data source. This ID is unique per Amazon Web Services Region for each Amazon Web Services account. 
      */
     DataSourceId: ResourceId;
     /**
@@ -6796,7 +6853,7 @@ declare namespace QuickSight {
      */
     DataSourceArn?: Arn;
     /**
-     * The ID of the data source. This ID is unique per Amazon Web Services Region; for each Amazon Web Services account.
+     * The ID of the data source. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.
      */
     DataSourceId?: ResourceId;
     /**
@@ -6814,7 +6871,7 @@ declare namespace QuickSight {
      */
     AwsAccountId: AwsAccountId;
     /**
-     * The ID of the data source. This ID is unique per Amazon Web Services Region; for each Amazon Web Services account. 
+     * The ID of the data source. This ID is unique per Amazon Web Services Region for each Amazon Web Services account. 
      */
     DataSourceId: ResourceId;
     /**
@@ -6844,7 +6901,7 @@ declare namespace QuickSight {
      */
     Arn?: Arn;
     /**
-     * The ID of the data source. This ID is unique per Amazon Web Services Region; for each Amazon Web Services account.
+     * The ID of the data source. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.
      */
     DataSourceId?: ResourceId;
     /**
@@ -7017,6 +7074,34 @@ declare namespace QuickSight {
     RequestId?: String;
     /**
      * The HTTP status of the request.
+     */
+    Status?: StatusCode;
+  }
+  export interface UpdateIpRestrictionRequest {
+    /**
+     * Your AWS account ID.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * Describes updated IP rules.
+     */
+    IpRestrictionRuleMap?: IpRestrictionRuleMap;
+    /**
+     * Whether or not IP rules are enabled.
+     */
+    Enabled?: NullableBoolean;
+  }
+  export interface UpdateIpRestrictionResponse {
+    /**
+     * Your AWS account ID.
+     */
+    AwsAccountId?: AwsAccountId;
+    /**
+     * The ID of the update request.
+     */
+    RequestId?: String;
+    /**
+     * The status of the updated IP rules. A successful request returns a 200 code.
      */
     Status?: StatusCode;
   }
@@ -7403,8 +7488,6 @@ declare namespace QuickSight {
   }
   export type Warehouse = string;
   export type WorkGroup = string;
-  export type long = number;
-  export type timestamp = Date;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

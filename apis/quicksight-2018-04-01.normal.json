@@ -80,7 +80,7 @@
           "shape": "ResourceUnavailableException"
         }
       ],
-      "documentation": "<p>Creates Amazon QuickSight customizations the current Amazon Web Services Region;. Currently, you can add a custom default theme by using the <code>CreateAccountCustomization</code> or <code>UpdateAccountCustomization</code> API operation. To further customize Amazon QuickSight by removing Amazon QuickSight sample assets and videos for all new users, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/customizing-quicksight.html\">Customizing Amazon QuickSight</a> in the <i>Amazon QuickSight User Guide.</i> </p> <p>You can create customizations for your Amazon Web Services account or, if you specify a namespace, for a Amazon QuickSight namespace instead. Customizations that apply to a namespace always override customizations that apply to an Amazon Web Services account. To find out which customizations apply, use the <code>DescribeAccountCustomization</code> API operation.</p> <p>Before you use the <code>CreateAccountCustomization</code> API operation to add a theme as the namespace default, make sure that you first share the theme with the namespace. If you don't share it with the namespace, the theme isn't visible to your users even if you make it the default theme. To check if the theme is shared, view the current permissions by using the <code> <a>DescribeThemePermissions</a> </code> API operation. To share the theme, grant permissions by using the <code> <a>UpdateThemePermissions</a> </code> API operation. </p>"
+      "documentation": "<p>Creates Amazon QuickSight customizations the current Amazon Web Services Region. Currently, you can add a custom default theme by using the <code>CreateAccountCustomization</code> or <code>UpdateAccountCustomization</code> API operation. To further customize Amazon QuickSight by removing Amazon QuickSight sample assets and videos for all new users, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/customizing-quicksight.html\">Customizing Amazon QuickSight</a> in the <i>Amazon QuickSight User Guide.</i> </p> <p>You can create customizations for your Amazon Web Services account or, if you specify a namespace, for a Amazon QuickSight namespace instead. Customizations that apply to a namespace always override customizations that apply to an Amazon Web Services account. To find out which customizations apply, use the <code>DescribeAccountCustomization</code> API operation.</p> <p>Before you use the <code>CreateAccountCustomization</code> API operation to add a theme as the namespace default, make sure that you first share the theme with the namespace. If you don't share it with the namespace, the theme isn't visible to your users even if you make it the default theme. To check if the theme is shared, view the current permissions by using the <code> <a>DescribeThemePermissions</a> </code> API operation. To share the theme, grant permissions by using the <code> <a>UpdateThemePermissions</a> </code> API operation. </p>"
     },
     "CreateAnalysis": {
       "name": "CreateAnalysis",
@@ -717,7 +717,7 @@
           "shape": "ResourceUnavailableException"
         }
       ],
-      "documentation": "<p>Deletes all Amazon QuickSight customizations in this Amazon Web Services Region; for the specified Amazon Web Services account and Amazon QuickSight namespace.</p>"
+      "documentation": "<p>Deletes all Amazon QuickSight customizations in this Amazon Web Services Region for the specified Amazon Web Services account and Amazon QuickSight namespace.</p>"
     },
     "DeleteAnalysis": {
       "name": "DeleteAnalysis",
@@ -1316,7 +1316,7 @@
           "shape": "ResourceUnavailableException"
         }
       ],
-      "documentation": "<p>Describes the customizations associated with the provided Amazon Web Services account and Amazon Amazon QuickSight namespace in an Amazon Web Services Region;. The Amazon QuickSight console evaluates which customizations to apply by running this API operation with the <code>Resolved</code> flag included. </p> <p>To determine what customizations display when you run this command, it can help to visualize the relationship of the entities involved. </p> <ul> <li> <p> <code>Amazon Web Services account</code> - The Amazon Web Services account exists at the top of the hierarchy. It has the potential to use all of the Amazon Web Services Regions; and AWS Services. When you subscribe to Amazon QuickSight, you choose one Amazon Web Services Region; to use as your home Region. That's where your free SPICE capacity is located. You can use Amazon QuickSight in any supported Amazon Web Services Region;. </p> </li> <li> <p> <code>Amazon Web Services Region;</code> - In each Amazon Web Services Region; where you sign in to Amazon QuickSight at least once, Amazon QuickSight acts as a separate instance of the same service. If you have a user directory, it resides in us-east-1, which is the US East (N. Virginia). Generally speaking, these users have access to Amazon QuickSight in any Amazon Web Services Region;, unless they are constrained to a namespace. </p> <p>To run the command in a different Amazon Web Services Region;, you change your Region settings. If you're using the AWS CLI, you can use one of the following options:</p> <ul> <li> <p>Use <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-options.html\">command line options</a>. </p> </li> <li> <p>Use <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html\">named profiles</a>. </p> </li> <li> <p>Run <code>aws configure</code> to change your default Amazon Web Services Region;. Use Enter to key the same settings for your keys. For more information, see <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html\">Configuring the AWS CLI</a>.</p> </li> </ul> </li> <li> <p> <code>Namespace</code> - A Amazon QuickSight namespace is a partition that contains users and assets (data sources, datasets, dashboards, and so on). To access assets that are in a specific namespace, users and groups must also be part of the same namespace. People who share a namespace are completely isolated from users and assets in other namespaces, even if they are in the same Amazon Web Services account and Amazon Web Services Region;.</p> </li> <li> <p> <code>Applied customizations</code> - Within an Amazon Web Services Region;, a set of Amazon QuickSight customizations can apply to an Amazon Web Services account or to a namespace. Settings that you apply to a namespace override settings that you apply to an Amazon Web Services account. All settings are isolated to a single Amazon Web Services Region;. To apply them in other Amazon Web Services Regions;, run the <code>CreateAccountCustomization</code> command in each Amazon Web Services Region; where you want to apply the same customizations. </p> </li> </ul>"
+      "documentation": "<p>Describes the customizations associated with the provided Amazon Web Services account and Amazon Amazon QuickSight namespace in an Amazon Web Services Region. The Amazon QuickSight console evaluates which customizations to apply by running this API operation with the <code>Resolved</code> flag included. </p> <p>To determine what customizations display when you run this command, it can help to visualize the relationship of the entities involved. </p> <ul> <li> <p> <code>Amazon Web Services account</code> - The Amazon Web Services account exists at the top of the hierarchy. It has the potential to use all of the Amazon Web Services Regions and AWS Services. When you subscribe to Amazon QuickSight, you choose one Amazon Web Services Region to use as your home Region. That's where your free SPICE capacity is located. You can use Amazon QuickSight in any supported Amazon Web Services Region. </p> </li> <li> <p> <code>Amazon Web Services Region</code> - In each Amazon Web Services Region where you sign in to Amazon QuickSight at least once, Amazon QuickSight acts as a separate instance of the same service. If you have a user directory, it resides in us-east-1, which is the US East (N. Virginia). Generally speaking, these users have access to Amazon QuickSight in any Amazon Web Services Region, unless they are constrained to a namespace. </p> <p>To run the command in a different Amazon Web Services Region, you change your Region settings. If you're using the AWS CLI, you can use one of the following options:</p> <ul> <li> <p>Use <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-options.html\">command line options</a>. </p> </li> <li> <p>Use <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html\">named profiles</a>. </p> </li> <li> <p>Run <code>aws configure</code> to change your default Amazon Web Services Region. Use Enter to key the same settings for your keys. For more information, see <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html\">Configuring the AWS CLI</a>.</p> </li> </ul> </li> <li> <p> <code>Namespace</code> - A Amazon QuickSight namespace is a partition that contains users and assets (data sources, datasets, dashboards, and so on). To access assets that are in a specific namespace, users and groups must also be part of the same namespace. People who share a namespace are completely isolated from users and assets in other namespaces, even if they are in the same Amazon Web Services account and Amazon Web Services Region.</p> </li> <li> <p> <code>Applied customizations</code> - Within an Amazon Web Services Region, a set of Amazon QuickSight customizations can apply to an Amazon Web Services account or to a namespace. Settings that you apply to a namespace override settings that you apply to an Amazon Web Services account. All settings are isolated to a single Amazon Web Services Region. To apply them in other Amazon Web Services Regions, run the <code>CreateAccountCustomization</code> command in each Amazon Web Services Region where you want to apply the same customizations. </p> </li> </ul>"
     },
     "DescribeAccountSettings": {
       "name": "DescribeAccountSettings",
@@ -1812,6 +1812,37 @@
         }
       ],
       "documentation": "<p>Describes a SPICE ingestion.</p>"
+    },
+    "DescribeIpRestriction": {
+      "name": "DescribeIpRestriction",
+      "http": {
+        "method": "GET",
+        "requestUri": "/accounts/{AwsAccountId}/ip-restriction"
+      },
+      "input": {
+        "shape": "DescribeIpRestrictionRequest"
+      },
+      "output": {
+        "shape": "DescribeIpRestrictionResponse"
+      },
+      "errors": [
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalFailureException"
+        }
+      ],
+      "documentation": "<p>Provides a summary and status of IP Rules.</p>"
     },
     "DescribeNamespace": {
       "name": "DescribeNamespace",
@@ -2388,7 +2419,7 @@
           "shape": "InternalFailureException"
         }
       ],
-      "documentation": "<p>Lists all of the datasets belonging to the current Amazon Web Services account in an Amazon Web Services Region;.</p> <p>The permissions resource is <code>arn:aws:quicksight:region:aws-account-id:dataset/*</code>.</p>"
+      "documentation": "<p>Lists all of the datasets belonging to the current Amazon Web Services account in an Amazon Web Services Region.</p> <p>The permissions resource is <code>arn:aws:quicksight:region:aws-account-id:dataset/*</code>.</p>"
     },
     "ListDataSources": {
       "name": "ListDataSources",
@@ -2419,7 +2450,7 @@
           "shape": "InternalFailureException"
         }
       ],
-      "documentation": "<p>Lists data sources in current Amazon Web Services Region; that belong to this Amazon Web Services account.</p>"
+      "documentation": "<p>Lists data sources in current Amazon Web Services Region that belong to this Amazon Web Services account.</p>"
     },
     "ListFolderMembers": {
       "name": "ListFolderMembers",
@@ -3320,7 +3351,7 @@
           "shape": "ResourceUnavailableException"
         }
       ],
-      "documentation": "<p>Updates Amazon QuickSight customizations the current Amazon Web Services Region;. Currently, the only customization you can use is a theme.</p> <p>You can use customizations for your Amazon Web Services account or, if you specify a namespace, for a Amazon QuickSight namespace instead. Customizations that apply to a namespace override customizations that apply to an Amazon Web Services account. To find out which customizations apply, use the <code>DescribeAccountCustomization</code> API operation. </p>"
+      "documentation": "<p>Updates Amazon QuickSight customizations the current Amazon Web Services Region. Currently, the only customization you can use is a theme.</p> <p>You can use customizations for your Amazon Web Services account or, if you specify a namespace, for a Amazon QuickSight namespace instead. Customizations that apply to a namespace override customizations that apply to an Amazon Web Services account. To find out which customizations apply, use the <code>DescribeAccountCustomization</code> API operation. </p>"
     },
     "UpdateAccountSettings": {
       "name": "UpdateAccountSettings",
@@ -3825,6 +3856,40 @@
       ],
       "documentation": "<p>Updates an existing IAMpolicy assignment. This operation updates only the optional parameter or parameters that are specified in the request. This overwrites all of the users included in <code>Identities</code>. </p>"
     },
+    "UpdateIpRestriction": {
+      "name": "UpdateIpRestriction",
+      "http": {
+        "method": "POST",
+        "requestUri": "/accounts/{AwsAccountId}/ip-restriction"
+      },
+      "input": {
+        "shape": "UpdateIpRestrictionRequest"
+      },
+      "output": {
+        "shape": "UpdateIpRestrictionResponse"
+      },
+      "errors": [
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalFailureException"
+        }
+      ],
+      "documentation": "<p>Updates content and status of IP Rules.</p>"
+    },
     "UpdateTemplate": {
       "name": "UpdateTemplate",
       "http": {
@@ -4091,7 +4156,7 @@
           "documentation": "<p>The default theme for this Amazon QuickSight subscription.</p>"
         }
       },
-      "documentation": "<p>The Amazon QuickSight customizations associated with your Amazon Web Services account or a Amazon QuickSight namespace in a specific Amazon Web Services Region;.</p>"
+      "documentation": "<p>The Amazon QuickSight customizations associated with your Amazon Web Services account or a Amazon QuickSight namespace in a specific Amazon Web Services Region.</p>"
     },
     "AccountSettings": {
       "type": "structure",
@@ -4175,10 +4240,10 @@
       "members": {
         "Domain": {
           "shape": "Domain",
-          "documentation": "<p>The Elasticsearch domain.</p>"
+          "documentation": "<p>The OpenSearch domain.</p>"
         }
       },
-      "documentation": "<p>The parameters for Elasticsearch.</p>"
+      "documentation": "<p>The parameters for OpenSearch.</p>"
     },
     "AmazonOpenSearchParameters": {
       "type": "structure",
@@ -4508,6 +4573,10 @@
       },
       "documentation": "<p>The display options for tile borders for visuals.</p>"
     },
+    "CIDR": {
+      "type": "string",
+      "pattern": "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\\/(3[0-2]|[1-2][0-9]|[1-9]))$"
+    },
     "CalculatedColumn": {
       "type": "structure",
       "required": [
@@ -4554,7 +4623,7 @@
           "locationName": "AwsAccountId"
         },
         "DataSetId": {
-          "shape": "string",
+          "shape": "String",
           "documentation": "<p>The ID of the dataset used in the ingestion.</p>",
           "location": "uri",
           "locationName": "DataSetId"
@@ -4579,7 +4648,7 @@
           "documentation": "<p>An ID for the ingestion.</p>"
         },
         "RequestId": {
-          "shape": "string",
+          "shape": "String",
           "documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
         },
         "Status": {
@@ -4843,7 +4912,7 @@
         },
         "AccountCustomization": {
           "shape": "AccountCustomization",
-          "documentation": "<p>The Amazon QuickSight customizations you're adding in the current Amazon Web Services Region;. You can add these to an Amazon Web Services account and a Amazon QuickSight namespace. </p> <p>For example, you can add a default theme by setting <code>AccountCustomization</code> to the midnight theme: <code>\"AccountCustomization\": { \"DefaultTheme\": \"arn:aws:quicksight::aws:theme/MIDNIGHT\" }</code>. Or, you can add a custom theme by specifying <code>\"AccountCustomization\": { \"DefaultTheme\": \"arn:aws:quicksight:us-west-2:111122223333:theme/bdb844d0-0fe9-4d9d-b520-0fe602d93639\" }</code>. </p>"
+          "documentation": "<p>The Amazon QuickSight customizations you're adding in the current Amazon Web Services Region. You can add these to an Amazon Web Services account and a Amazon QuickSight namespace. </p> <p>For example, you can add a default theme by setting <code>AccountCustomization</code> to the midnight theme: <code>\"AccountCustomization\": { \"DefaultTheme\": \"arn:aws:quicksight::aws:theme/MIDNIGHT\" }</code>. Or, you can add a custom theme by specifying <code>\"AccountCustomization\": { \"DefaultTheme\": \"arn:aws:quicksight:us-west-2:111122223333:theme/bdb844d0-0fe9-4d9d-b520-0fe602d93639\" }</code>. </p>"
         },
         "Tags": {
           "shape": "TagList",
@@ -4868,7 +4937,7 @@
         },
         "AccountCustomization": {
           "shape": "AccountCustomization",
-          "documentation": "<p>The Amazon QuickSight customizations you're adding in the current Amazon Web Services Region;. </p>"
+          "documentation": "<p>The Amazon QuickSight customizations you're adding in the current Amazon Web Services Region. </p>"
         },
         "RequestId": {
           "shape": "String",
@@ -5002,7 +5071,7 @@
         },
         "SourceEntity": {
           "shape": "DashboardSourceEntity",
-          "documentation": "<p>The entity that you are using as a source when you create the dashboard. In <code>SourceEntity</code>, you specify the type of object you're using as source. You can only create a dashboard from a template, so you use a <code>SourceTemplate</code> entity. If you need to create a dashboard from an analysis, first convert the analysis to a template by using the <a>CreateTemplate</a> API operation. For <code>SourceTemplate</code>, specify the Amazon Resource Name (ARN) of the source template. The <code>SourceTemplate</code>ARN can contain any Amazon Web Services account and any Amazon QuickSight-supported Amazon Web Services Region;. </p> <p>Use the <code>DataSetReferences</code> entity within <code>SourceTemplate</code> to list the replacement datasets for the placeholders listed in the original. The schema in each dataset must match its placeholder. </p>"
+          "documentation": "<p>The entity that you are using as a source when you create the dashboard. In <code>SourceEntity</code>, you specify the type of object you're using as source. You can only create a dashboard from a template, so you use a <code>SourceTemplate</code> entity. If you need to create a dashboard from an analysis, first convert the analysis to a template by using the <a>CreateTemplate</a> API operation. For <code>SourceTemplate</code>, specify the Amazon Resource Name (ARN) of the source template. The <code>SourceTemplate</code>ARN can contain any Amazon Web Services account and any Amazon QuickSight-supported Amazon Web Services Region. </p> <p>Use the <code>DataSetReferences</code> entity within <code>SourceTemplate</code> to list the replacement datasets for the placeholders listed in the original. The schema in each dataset must match its placeholder. </p>"
         },
         "Tags": {
           "shape": "TagList",
@@ -5070,7 +5139,7 @@
         },
         "DataSetId": {
           "shape": "ResourceId",
-          "documentation": "<p>An ID for the dataset that you want to create. This ID is unique per Amazon Web Services Region; for each Amazon Web Services account.</p>"
+          "documentation": "<p>An ID for the dataset that you want to create. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>"
         },
         "Name": {
           "shape": "ResourceName",
@@ -5130,7 +5199,7 @@
         },
         "DataSetId": {
           "shape": "ResourceId",
-          "documentation": "<p>The ID for the dataset that you want to create. This ID is unique per Amazon Web Services Region; for each Amazon Web Services account.</p>"
+          "documentation": "<p>The ID for the dataset that you want to create. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>"
         },
         "IngestionArn": {
           "shape": "Arn",
@@ -5168,7 +5237,7 @@
         },
         "DataSourceId": {
           "shape": "ResourceId",
-          "documentation": "<p>An ID for the data source. This ID is unique per Amazon Web Services Region; for each Amazon Web Services account. </p>"
+          "documentation": "<p>An ID for the data source. This ID is unique per Amazon Web Services Region for each Amazon Web Services account. </p>"
         },
         "Name": {
           "shape": "ResourceName",
@@ -5176,7 +5245,7 @@
         },
         "Type": {
           "shape": "DataSourceType",
-          "documentation": "<p>The type of the data source. To return a list of all data sources, use <code>ListDataSources</code>.</p> <p>Use <code>AMAZON_ELASTICSEARCH</code> for Amazon Elasticsearch Service.</p>"
+          "documentation": "<p>The type of the data source. To return a list of all data sources, use <code>ListDataSources</code>.</p> <p>Use <code>AMAZON_ELASTICSEARCH</code> for Amazon OpenSearch Service.</p>"
         },
         "DataSourceParameters": {
           "shape": "DataSourceParameters",
@@ -5213,7 +5282,7 @@
         },
         "DataSourceId": {
           "shape": "ResourceId",
-          "documentation": "<p>The ID of the data source. This ID is unique per Amazon Web Services Region; for each Amazon Web Services account.</p>"
+          "documentation": "<p>The ID of the data source. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>"
         },
         "CreationStatus": {
           "shape": "ResourceStatus",
@@ -5530,7 +5599,7 @@
       ],
       "members": {
         "DataSetId": {
-          "shape": "string",
+          "shape": "String",
           "documentation": "<p>The ID of the dataset used in the ingestion.</p>",
           "location": "uri",
           "locationName": "DataSetId"
@@ -5546,6 +5615,10 @@
           "documentation": "<p>The Amazon Web Services account ID.</p>",
           "location": "uri",
           "locationName": "AwsAccountId"
+        },
+        "IngestionType": {
+          "shape": "IngestionType",
+          "documentation": "<p>The type of ingestion that you want to create.</p>"
         }
       }
     },
@@ -5565,7 +5638,7 @@
           "documentation": "<p>The ingestion status.</p>"
         },
         "RequestId": {
-          "shape": "string",
+          "shape": "String",
           "documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
         },
         "Status": {
@@ -5718,7 +5791,7 @@
         },
         "SourceEntity": {
           "shape": "TemplateSourceEntity",
-          "documentation": "<p>The entity that you are using as a source when you create the template. In <code>SourceEntity</code>, you specify the type of object you're using as source: <code>SourceTemplate</code> for a template or <code>SourceAnalysis</code> for an analysis. Both of these require an Amazon Resource Name (ARN). For <code>SourceTemplate</code>, specify the ARN of the source template. For <code>SourceAnalysis</code>, specify the ARN of the source analysis. The <code>SourceTemplate</code> ARN can contain any Amazon Web Services account and any Amazon QuickSight-supported Amazon Web Services Region;. </p> <p>Use the <code>DataSetReferences</code> entity within <code>SourceTemplate</code> or <code>SourceAnalysis</code> to list the replacement datasets for the placeholders listed in the original. The schema in each dataset must match its placeholder. </p>"
+          "documentation": "<p>The entity that you are using as a source when you create the template. In <code>SourceEntity</code>, you specify the type of object you're using as source: <code>SourceTemplate</code> for a template or <code>SourceAnalysis</code> for an analysis. Both of these require an Amazon Resource Name (ARN). For <code>SourceTemplate</code>, specify the ARN of the source template. For <code>SourceAnalysis</code>, specify the ARN of the source analysis. The <code>SourceTemplate</code> ARN can contain any Amazon Web Services account and any Amazon QuickSight-supported Amazon Web Services Region. </p> <p>Use the <code>DataSetReferences</code> entity within <code>SourceTemplate</code> or <code>SourceAnalysis</code> to list the replacement datasets for the placeholders listed in the original. The schema in each dataset must match its placeholder. </p>"
         },
         "Tags": {
           "shape": "TagList",
@@ -6475,7 +6548,7 @@
         },
         "DataSourceId": {
           "shape": "ResourceId",
-          "documentation": "<p>The ID of the data source. This ID is unique per Amazon Web Services Region; for each Amazon Web Services account.</p>"
+          "documentation": "<p>The ID of the data source. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>"
         },
         "Name": {
           "shape": "ResourceName",
@@ -6573,7 +6646,7 @@
       "members": {
         "AmazonElasticsearchParameters": {
           "shape": "AmazonElasticsearchParameters",
-          "documentation": "<p>The parameters for Elasticsearch.</p>"
+          "documentation": "<p>The parameters for OpenSearch.</p>"
         },
         "AthenaParameters": {
           "shape": "AthenaParameters",
@@ -6757,7 +6830,7 @@
       "members": {
         "AwsAccountId": {
           "shape": "AwsAccountId",
-          "documentation": "<p>The ID for the Amazon Web Services account that you want to delete Amazon QuickSight customizations from in this Amazon Web Services Region;.</p>",
+          "documentation": "<p>The ID for the Amazon Web Services account that you want to delete Amazon QuickSight customizations from in this Amazon Web Services Region.</p>",
           "location": "uri",
           "locationName": "AwsAccountId"
         },
@@ -6906,7 +6979,7 @@
         },
         "DataSetId": {
           "shape": "ResourceId",
-          "documentation": "<p>The ID for the dataset that you want to create. This ID is unique per Amazon Web Services Region; for each Amazon Web Services account.</p>",
+          "documentation": "<p>The ID for the dataset that you want to create. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>",
           "location": "uri",
           "locationName": "DataSetId"
         }
@@ -6921,7 +6994,7 @@
         },
         "DataSetId": {
           "shape": "ResourceId",
-          "documentation": "<p>The ID for the dataset that you want to create. This ID is unique per Amazon Web Services Region; for each Amazon Web Services account.</p>"
+          "documentation": "<p>The ID for the dataset that you want to create. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>"
         },
         "RequestId": {
           "shape": "String",
@@ -6949,7 +7022,7 @@
         },
         "DataSourceId": {
           "shape": "ResourceId",
-          "documentation": "<p>The ID of the data source. This ID is unique per Amazon Web Services Region; for each Amazon Web Services account.</p>",
+          "documentation": "<p>The ID of the data source. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>",
           "location": "uri",
           "locationName": "DataSourceId"
         }
@@ -6964,7 +7037,7 @@
         },
         "DataSourceId": {
           "shape": "ResourceId",
-          "documentation": "<p>The ID of the data source. This ID is unique per Amazon Web Services Region; for each Amazon Web Services account.</p>"
+          "documentation": "<p>The ID of the data source. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>"
         },
         "RequestId": {
           "shape": "String",
@@ -7579,7 +7652,7 @@
         },
         "AccountCustomization": {
           "shape": "AccountCustomization",
-          "documentation": "<p>The Amazon QuickSight customizations that exist in the current Amazon Web Services Region;. </p>"
+          "documentation": "<p>The Amazon QuickSight customizations that exist in the current Amazon Web Services Region. </p>"
         },
         "RequestId": {
           "shape": "String",
@@ -7611,7 +7684,7 @@
       "members": {
         "AccountSettings": {
           "shape": "AccountSettings",
-          "documentation": "<p>The Amazon QuickSight settings for this Amazon Web Services account. This information includes the edition of Amazon Amazon QuickSight that you subscribed to (Standard or Enterprise) and the notification email for the Amazon QuickSight subscription. In the Amazon QuickSight console, the Amazon QuickSight subscription is sometimes referred to as a Amazon QuickSight \"account\" even though it's technically not an account by itself. Instead, it's a subscription to the Amazon QuickSight service for your Amazon Web Services account. The edition that you subscribe to applies to Amazon QuickSight in every Amazon Web Services Region; where you use it.</p>"
+          "documentation": "<p>The Amazon QuickSight settings for this Amazon Web Services account. This information includes the edition of Amazon Amazon QuickSight that you subscribed to (Standard or Enterprise) and the notification email for the Amazon QuickSight subscription. In the Amazon QuickSight console, the Amazon QuickSight subscription is sometimes referred to as a Amazon QuickSight \"account\" even though it's technically not an account by itself. Instead, it's a subscription to the Amazon QuickSight service for your Amazon Web Services account. The edition that you subscribe to applies to Amazon QuickSight in every Amazon Web Services Region where you use it.</p>"
         },
         "RequestId": {
           "shape": "String",
@@ -7823,7 +7896,7 @@
         },
         "DataSetId": {
           "shape": "ResourceId",
-          "documentation": "<p>The ID for the dataset that you want to create. This ID is unique per Amazon Web Services Region; for each Amazon Web Services account.</p>",
+          "documentation": "<p>The ID for the dataset that you want to create. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>",
           "location": "uri",
           "locationName": "DataSetId"
         }
@@ -7838,7 +7911,7 @@
         },
         "DataSetId": {
           "shape": "ResourceId",
-          "documentation": "<p>The ID for the dataset that you want to create. This ID is unique per Amazon Web Services Region; for each Amazon Web Services account.</p>"
+          "documentation": "<p>The ID for the dataset that you want to create. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>"
         },
         "Permissions": {
           "shape": "ResourcePermissionList",
@@ -7870,7 +7943,7 @@
         },
         "DataSetId": {
           "shape": "ResourceId",
-          "documentation": "<p>The ID for the dataset that you want to create. This ID is unique per Amazon Web Services Region; for each Amazon Web Services account.</p>",
+          "documentation": "<p>The ID for the dataset that you want to create. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>",
           "location": "uri",
           "locationName": "DataSetId"
         }
@@ -7909,7 +7982,7 @@
         },
         "DataSourceId": {
           "shape": "ResourceId",
-          "documentation": "<p>The ID of the data source. This ID is unique per Amazon Web Services Region; for each Amazon Web Services account.</p>",
+          "documentation": "<p>The ID of the data source. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>",
           "location": "uri",
           "locationName": "DataSourceId"
         }
@@ -7924,7 +7997,7 @@
         },
         "DataSourceId": {
           "shape": "ResourceId",
-          "documentation": "<p>The ID of the data source. This ID is unique per Amazon Web Services Region; for each Amazon Web Services account.</p>"
+          "documentation": "<p>The ID of the data source. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>"
         },
         "Permissions": {
           "shape": "ResourcePermissionList",
@@ -7956,7 +8029,7 @@
         },
         "DataSourceId": {
           "shape": "ResourceId",
-          "documentation": "<p>The ID of the data source. This ID is unique per Amazon Web Services Region; for each Amazon Web Services account.</p>",
+          "documentation": "<p>The ID of the data source. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>",
           "location": "uri",
           "locationName": "DataSourceId"
         }
@@ -8220,7 +8293,7 @@
           "locationName": "AwsAccountId"
         },
         "DataSetId": {
-          "shape": "string",
+          "shape": "String",
           "documentation": "<p>The ID of the dataset used in the ingestion.</p>",
           "location": "uri",
           "locationName": "DataSetId"
@@ -8241,12 +8314,52 @@
           "documentation": "<p>Information about the ingestion.</p>"
         },
         "RequestId": {
-          "shape": "string",
+          "shape": "String",
           "documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
         },
         "Status": {
           "shape": "StatusCode",
           "documentation": "<p>The HTTP status of the request.</p>",
+          "location": "statusCode"
+        }
+      }
+    },
+    "DescribeIpRestrictionRequest": {
+      "type": "structure",
+      "required": [
+        "AwsAccountId"
+      ],
+      "members": {
+        "AwsAccountId": {
+          "shape": "AwsAccountId",
+          "documentation": "<p>Your AWS account ID.</p>",
+          "location": "uri",
+          "locationName": "AwsAccountId"
+        }
+      }
+    },
+    "DescribeIpRestrictionResponse": {
+      "type": "structure",
+      "members": {
+        "AwsAccountId": {
+          "shape": "AwsAccountId",
+          "documentation": "<p>Your AWS account ID.</p>"
+        },
+        "IpRestrictionRuleMap": {
+          "shape": "IpRestrictionRuleMap",
+          "documentation": "<p>Describes the IP rules with CIDR range and description.</p>"
+        },
+        "Enabled": {
+          "shape": "NullableBoolean",
+          "documentation": "<p>Whether or not IP rules are enabled.</p>"
+        },
+        "RequestId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the describe request.</p>"
+        },
+        "Status": {
+          "shape": "StatusCode",
+          "documentation": "<p>The status of a set of IP restrictions. A successful request returns a 200 status code.</p>",
           "location": "statusCode"
         }
       }
@@ -8277,7 +8390,7 @@
       "members": {
         "Namespace": {
           "shape": "NamespaceInfoV2",
-          "documentation": "<p>The information about the namespace that you're describing. The response includes the namespace ARN, name, Amazon Web Services Region;, creation status, and identity store. <code>DescribeNamespace</code> also works for namespaces that are in the process of being created. For incomplete namespaces, this API operation lists the namespace error types and messages associated with the creation process.</p>"
+          "documentation": "<p>The information about the namespace that you're describing. The response includes the namespace ARN, name, Amazon Web Services Region, creation status, and identity store. <code>DescribeNamespace</code> also works for namespaces that are in the process of being created. For incomplete namespaces, this API operation lists the namespace error types and messages associated with the creation process.</p>"
         },
         "RequestId": {
           "shape": "String",
@@ -8675,7 +8788,7 @@
           "documentation": "<p>Error type.</p>"
         },
         "Message": {
-          "shape": "string",
+          "shape": "String",
           "documentation": "<p>Error message.</p>"
         }
       },
@@ -9393,16 +9506,16 @@
           "shape": "QueueInfo"
         },
         "CreatedTime": {
-          "shape": "timestamp",
+          "shape": "Timestamp",
           "documentation": "<p>The time that this ingestion started.</p>"
         },
         "IngestionTimeInSeconds": {
-          "shape": "long",
+          "shape": "Long",
           "documentation": "<p>The time that this ingestion took, measured in seconds.</p>",
           "box": true
         },
         "IngestionSizeInBytes": {
-          "shape": "long",
+          "shape": "Long",
           "documentation": "<p>The size of the data ingested, in bytes.</p>",
           "box": true
         },
@@ -9459,7 +9572,11 @@
         "DATA_SOURCE_AUTH_FAILED",
         "DATA_SOURCE_CONNECTION_FAILED",
         "FAILURE_TO_PROCESS_JSON_FILE",
-        "INTERNAL_SERVICE_ERROR"
+        "INTERNAL_SERVICE_ERROR",
+        "REFRESH_SUPPRESSED_BY_EDIT",
+        "PERMISSION_NOT_FOUND",
+        "ELASTICSEARCH_CURSOR_NOT_ENABLED",
+        "CURSOR_NOT_ENABLED"
       ]
     },
     "IngestionId": {
@@ -9482,6 +9599,7 @@
     },
     "IngestionRequestType": {
       "type": "string",
+      "documentation": "This defines the type of ingestion request. This is returned as part of create ingestion response.",
       "enum": [
         "INITIAL_INGESTION",
         "EDIT",
@@ -9498,6 +9616,14 @@
         "FAILED",
         "COMPLETED",
         "CANCELLED"
+      ]
+    },
+    "IngestionType": {
+      "type": "string",
+      "documentation": "This defines the type of ingestion user wants to trigger. This is part of create ingestion request.",
+      "enum": [
+        "INCREMENTAL_REFRESH",
+        "FULL_REFRESH"
       ]
     },
     "Ingestions": {
@@ -9573,6 +9699,20 @@
         "shape": "IntegerParameter"
       },
       "max": 100
+    },
+    "IpRestrictionRuleDescription": {
+      "type": "string",
+      "max": 150,
+      "min": 0
+    },
+    "IpRestrictionRuleMap": {
+      "type": "map",
+      "key": {
+        "shape": "CIDR"
+      },
+      "value": {
+        "shape": "IpRestrictionRuleDescription"
+      }
     },
     "JiraParameters": {
       "type": "structure",
@@ -10250,13 +10390,13 @@
       ],
       "members": {
         "DataSetId": {
-          "shape": "string",
+          "shape": "String",
           "documentation": "<p>The ID of the dataset used in the ingestion.</p>",
           "location": "uri",
           "locationName": "DataSetId"
         },
         "NextToken": {
-          "shape": "string",
+          "shape": "String",
           "documentation": "<p>The token for the next set of results, or null if there are no more results.</p>",
           "location": "querystring",
           "locationName": "next-token"
@@ -10284,11 +10424,11 @@
           "documentation": "<p>A list of the ingestions.</p>"
         },
         "NextToken": {
-          "shape": "string",
+          "shape": "String",
           "documentation": "<p>The token for the next set of results, or null if there are no more results.</p>"
         },
         "RequestId": {
-          "shape": "string",
+          "shape": "String",
           "documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
         },
         "Status": {
@@ -10330,7 +10470,7 @@
       "members": {
         "Namespaces": {
           "shape": "Namespaces",
-          "documentation": "<p>The information about the namespaces in this Amazon Web Services account. The response includes the namespace ARN, name, Amazon Web Services Region;, notification email address, creation status, and identity store.</p>"
+          "documentation": "<p>The information about the namespaces in this Amazon Web Services account. The response includes the namespace ARN, name, Amazon Web Services Region, notification email address, creation status, and identity store.</p>"
         },
         "NextToken": {
           "shape": "String",
@@ -11038,7 +11178,7 @@
         },
         "CapacityRegion": {
           "shape": "String",
-          "documentation": "<p>The namespace Amazon Web Services Region;.</p>"
+          "documentation": "<p>The namespace Amazon Web Services Region.</p>"
         },
         "CreationStatus": {
           "shape": "NamespaceStatus",
@@ -11074,6 +11214,9 @@
     "NonEmptyString": {
       "type": "string",
       "pattern": ".*\\S.*"
+    },
+    "NullableBoolean": {
+      "type": "boolean"
     },
     "OnClause": {
       "type": "string",
@@ -11304,11 +11447,11 @@
       ],
       "members": {
         "WaitingOnIngestion": {
-          "shape": "string",
+          "shape": "String",
           "documentation": "<p>The ID of the queued ingestion.</p>"
         },
         "QueuedIngestion": {
-          "shape": "string",
+          "shape": "String",
           "documentation": "<p>The ID of the ongoing ingestion. The queued ingestion is waiting for the ongoing ingestion to complete.</p>"
         }
       },
@@ -11658,13 +11801,18 @@
       "type": "structure",
       "members": {
         "RowsIngested": {
-          "shape": "long",
+          "shape": "Long",
           "documentation": "<p>The number of rows that were ingested.</p>",
           "box": true
         },
         "RowsDropped": {
-          "shape": "long",
+          "shape": "Long",
           "documentation": "<p>The number of rows that were not ingested.</p>",
+          "box": true
+        },
+        "TotalRowsInDataset": {
+          "shape": "Long",
+          "documentation": "<p>The total number of rows in the dataset.</p>",
           "box": true
         }
       },
@@ -12304,7 +12452,7 @@
         },
         "TemplateId": {
           "shape": "RestrictiveResourceId",
-          "documentation": "<p>The ID for the template. This is unique per Amazon Web Services Region; for each Amazon Web Services account.</p>"
+          "documentation": "<p>The ID for the template. This is unique per Amazon Web Services Region for each Amazon Web Services account.</p>"
         },
         "LastUpdatedTime": {
           "shape": "Timestamp",
@@ -12431,7 +12579,7 @@
         },
         "TemplateId": {
           "shape": "RestrictiveResourceId",
-          "documentation": "<p>The ID of the template. This ID is unique per Amazon Web Services Region; for each Amazon Web Services account.</p>"
+          "documentation": "<p>The ID of the template. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>"
         },
         "Name": {
           "shape": "TemplateName",
@@ -12685,7 +12833,7 @@
         },
         "ThemeId": {
           "shape": "RestrictiveResourceId",
-          "documentation": "<p>The ID of the theme. This ID is unique per Amazon Web Services Region; for each Amazon Web Services account.</p>"
+          "documentation": "<p>The ID of the theme. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>"
         },
         "LatestVersionNumber": {
           "shape": "VersionNumber",
@@ -13028,7 +13176,7 @@
         },
         "AccountCustomization": {
           "shape": "AccountCustomization",
-          "documentation": "<p>The Amazon QuickSight customizations you're updating in the current Amazon Web Services Region;. </p>"
+          "documentation": "<p>The Amazon QuickSight customizations you're updating in the current Amazon Web Services Region. </p>"
         }
       }
     },
@@ -13049,7 +13197,7 @@
         },
         "AccountCustomization": {
           "shape": "AccountCustomization",
-          "documentation": "<p>The Amazon QuickSight customizations you're updating in the current Amazon Web Services Region;. </p>"
+          "documentation": "<p>The Amazon QuickSight customizations you're updating in the current Amazon Web Services Region. </p>"
         },
         "RequestId": {
           "shape": "String",
@@ -13351,7 +13499,7 @@
         },
         "SourceEntity": {
           "shape": "DashboardSourceEntity",
-          "documentation": "<p>The entity that you are using as a source when you update the dashboard. In <code>SourceEntity</code>, you specify the type of object you're using as source. You can only update a dashboard from a template, so you use a <code>SourceTemplate</code> entity. If you need to update a dashboard from an analysis, first convert the analysis to a template by using the <a>CreateTemplate</a> API operation. For <code>SourceTemplate</code>, specify the Amazon Resource Name (ARN) of the source template. The <code>SourceTemplate</code> ARN can contain any Amazon Web Services account and any Amazon QuickSight-supported Amazon Web Services Region;. </p> <p>Use the <code>DataSetReferences</code> entity within <code>SourceTemplate</code> to list the replacement datasets for the placeholders listed in the original. The schema in each dataset must match its placeholder. </p>"
+          "documentation": "<p>The entity that you are using as a source when you update the dashboard. In <code>SourceEntity</code>, you specify the type of object you're using as source. You can only update a dashboard from a template, so you use a <code>SourceTemplate</code> entity. If you need to update a dashboard from an analysis, first convert the analysis to a template by using the <a>CreateTemplate</a> API operation. For <code>SourceTemplate</code>, specify the Amazon Resource Name (ARN) of the source template. The <code>SourceTemplate</code> ARN can contain any Amazon Web Services account and any Amazon QuickSight-supported Amazon Web Services Region. </p> <p>Use the <code>DataSetReferences</code> entity within <code>SourceTemplate</code> to list the replacement datasets for the placeholders listed in the original. The schema in each dataset must match its placeholder. </p>"
         },
         "Parameters": {
           "shape": "Parameters",
@@ -13415,7 +13563,7 @@
         },
         "DataSetId": {
           "shape": "ResourceId",
-          "documentation": "<p>The ID for the dataset whose permissions you want to update. This ID is unique per Amazon Web Services Region; for each Amazon Web Services account.</p>",
+          "documentation": "<p>The ID for the dataset whose permissions you want to update. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>",
           "location": "uri",
           "locationName": "DataSetId"
         },
@@ -13438,7 +13586,7 @@
         },
         "DataSetId": {
           "shape": "ResourceId",
-          "documentation": "<p>The ID for the dataset whose permissions you want to update. This ID is unique per Amazon Web Services Region; for each Amazon Web Services account.</p>"
+          "documentation": "<p>The ID for the dataset whose permissions you want to update. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>"
         },
         "RequestId": {
           "shape": "String",
@@ -13469,7 +13617,7 @@
         },
         "DataSetId": {
           "shape": "ResourceId",
-          "documentation": "<p>The ID for the dataset that you want to update. This ID is unique per Amazon Web Services Region; for each Amazon Web Services account.</p>",
+          "documentation": "<p>The ID for the dataset that you want to update. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>",
           "location": "uri",
           "locationName": "DataSetId"
         },
@@ -13523,7 +13671,7 @@
         },
         "DataSetId": {
           "shape": "ResourceId",
-          "documentation": "<p>The ID for the dataset that you want to create. This ID is unique per Amazon Web Services Region; for each Amazon Web Services account.</p>"
+          "documentation": "<p>The ID for the dataset that you want to create. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>"
         },
         "IngestionArn": {
           "shape": "Arn",
@@ -13559,7 +13707,7 @@
         },
         "DataSourceId": {
           "shape": "ResourceId",
-          "documentation": "<p>The ID of the data source. This ID is unique per Amazon Web Services Region; for each Amazon Web Services account. </p>",
+          "documentation": "<p>The ID of the data source. This ID is unique per Amazon Web Services Region for each Amazon Web Services account. </p>",
           "location": "uri",
           "locationName": "DataSourceId"
         },
@@ -13582,7 +13730,7 @@
         },
         "DataSourceId": {
           "shape": "ResourceId",
-          "documentation": "<p>The ID of the data source. This ID is unique per Amazon Web Services Region; for each Amazon Web Services account.</p>"
+          "documentation": "<p>The ID of the data source. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>"
         },
         "RequestId": {
           "shape": "String",
@@ -13611,7 +13759,7 @@
         },
         "DataSourceId": {
           "shape": "ResourceId",
-          "documentation": "<p>The ID of the data source. This ID is unique per Amazon Web Services Region; for each Amazon Web Services account. </p>",
+          "documentation": "<p>The ID of the data source. This ID is unique per Amazon Web Services Region for each Amazon Web Services account. </p>",
           "location": "uri",
           "locationName": "DataSourceId"
         },
@@ -13646,7 +13794,7 @@
         },
         "DataSourceId": {
           "shape": "ResourceId",
-          "documentation": "<p>The ID of the data source. This ID is unique per Amazon Web Services Region; for each Amazon Web Services account.</p>"
+          "documentation": "<p>The ID of the data source. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>"
         },
         "UpdateStatus": {
           "shape": "ResourceStatus",
@@ -13885,6 +14033,46 @@
         "Status": {
           "shape": "StatusCode",
           "documentation": "<p>The HTTP status of the request.</p>",
+          "location": "statusCode"
+        }
+      }
+    },
+    "UpdateIpRestrictionRequest": {
+      "type": "structure",
+      "required": [
+        "AwsAccountId"
+      ],
+      "members": {
+        "AwsAccountId": {
+          "shape": "AwsAccountId",
+          "documentation": "<p>Your AWS account ID.</p>",
+          "location": "uri",
+          "locationName": "AwsAccountId"
+        },
+        "IpRestrictionRuleMap": {
+          "shape": "IpRestrictionRuleMap",
+          "documentation": "<p>Describes updated IP rules.</p>"
+        },
+        "Enabled": {
+          "shape": "NullableBoolean",
+          "documentation": "<p>Whether or not IP rules are enabled.</p>"
+        }
+      }
+    },
+    "UpdateIpRestrictionResponse": {
+      "type": "structure",
+      "members": {
+        "AwsAccountId": {
+          "shape": "AwsAccountId",
+          "documentation": "<p>Your AWS account ID.</p>"
+        },
+        "RequestId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the update request.</p>"
+        },
+        "Status": {
+          "shape": "StatusCode",
+          "documentation": "<p>The status of the updated IP rules. A successful request returns a 200 code.</p>",
           "location": "statusCode"
         }
       }
@@ -14453,15 +14641,6 @@
     },
     "boolean": {
       "type": "boolean"
-    },
-    "long": {
-      "type": "long"
-    },
-    "string": {
-      "type": "string"
-    },
-    "timestamp": {
-      "type": "timestamp"
     }
   },
   "documentation": "<fullname>Amazon QuickSight API Reference</fullname> <p>Amazon QuickSight is a fully managed, serverless business intelligence service for the Amazon Web Services Cloud that makes it easy to extend data and insights to every user in your organization. This API reference contains documentation for a programming interface that you can use to manage Amazon QuickSight. </p>"

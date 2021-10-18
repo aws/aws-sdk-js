@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1009.0-->
+<!--LATEST=2.1010.0-->
 <!--ENTRYINSERT-->
+
+## 2.1010.0
+* feature: IVS: Bug fix: remove unsupported maxResults and nextToken pagination parameters from ListTagsForResource
+* feature: QuickSight: AWS QuickSight Service  Features    - Add IP Restriction UI and public APIs support.
 
 ## 2.1009.0
 * feature: Glue: Enable S3 event base crawler API.
