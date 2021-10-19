@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1010.0-->
+<!--LATEST=2.1011.0-->
 <!--ENTRYINSERT-->
+
+## 2.1011.0
+* feature: ChimeSDKMessaging: The Amazon Chime SDK now allows developers to execute business logic on in-flight messages before they are delivered to members of a messaging channel with channel flows.
+* feature: DataExchange: This release adds support for our public preview of AWS Data Exchange for Amazon Redshift. This enables data providers to list products including AWS Data Exchange datashares for Amazon Redshift, giving subscribers read-only access to provider data in Amazon Redshift.
 
 ## 2.1010.0
 * feature: IVS: Bug fix: remove unsupported maxResults and nextToken pagination parameters from ListTagsForResource

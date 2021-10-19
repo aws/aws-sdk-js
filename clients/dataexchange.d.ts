@@ -230,6 +230,9 @@ declare class DataExchange extends Service {
 }
 declare namespace DataExchange {
   export interface Action {
+    /**
+     * Details for the export revision to Amazon S3 action.
+     */
     ExportRevisionToS3?: AutoExportRevisionToS3RequestDetails;
   }
   export type Arn = string;
@@ -248,7 +251,14 @@ declare namespace DataExchange {
     Key?: __string;
   }
   export interface AssetDetails {
+    /**
+     * The S3 object that is the asset.
+     */
     S3SnapshotAsset?: S3SnapshotAsset;
+    /**
+     * The Amazon Redshift datashare that is the asset.
+     */
+    RedshiftDataShareAsset?: RedshiftDataShareAsset;
   }
   export interface AssetEntry {
     /**
@@ -256,11 +266,11 @@ declare namespace DataExchange {
      */
     Arn: Arn;
     /**
-     * Information about the asset, including its size.
+     * Information about the asset.
      */
     AssetDetails: AssetDetails;
     /**
-     * The type of file your data is stored in. Currently, the supported asset type is S3_SNAPSHOT.
+     * The type of asset that is added to a data set.
      */
     AssetType: AssetType;
     /**
@@ -303,7 +313,7 @@ declare namespace DataExchange {
      */
     Key: __string;
   }
-  export type AssetType = "S3_SNAPSHOT"|string;
+  export type AssetType = "S3_SNAPSHOT"|"REDSHIFT_DATA_SHARE"|string;
   export interface AutoExportRevisionDestinationEntry {
     /**
      * The S3 bucket that is the destination for the event action.
@@ -315,7 +325,13 @@ declare namespace DataExchange {
     KeyPattern?: __string;
   }
   export interface AutoExportRevisionToS3RequestDetails {
+    /**
+     * Encryption configuration for the auto export job.
+     */
     Encryption?: ExportServerSideEncryption;
+    /**
+     * A revision destination is the Amazon S3 bucket folder destination to where the export will be sent.
+     */
     RevisionDestination: AutoExportRevisionDestinationEntry;
   }
   export interface CancelJobRequest {
@@ -327,7 +343,7 @@ declare namespace DataExchange {
   export type Code = "ACCESS_DENIED_EXCEPTION"|"INTERNAL_SERVER_EXCEPTION"|"MALWARE_DETECTED"|"RESOURCE_NOT_FOUND_EXCEPTION"|"SERVICE_QUOTA_EXCEEDED_EXCEPTION"|"VALIDATION_EXCEPTION"|"MALWARE_SCAN_ENCRYPTED_FILE"|string;
   export interface CreateDataSetRequest {
     /**
-     * The type of file your data is stored in. Currently, the supported asset type is S3_SNAPSHOT.
+     * The type of asset that is added to a data set.
      */
     AssetType: AssetType;
     /**
@@ -349,7 +365,7 @@ declare namespace DataExchange {
      */
     Arn?: Arn;
     /**
-     * The type of file your data is stored in. Currently, the supported asset type is S3_SNAPSHOT.
+     * The type of asset that is added to a data set.
      */
     AssetType?: AssetType;
     /**
@@ -485,7 +501,7 @@ declare namespace DataExchange {
   }
   export interface CreateRevisionResponse {
     /**
-     * The ARN for the revision
+     * The ARN for the revision.
      */
     Arn?: Arn;
     /**
@@ -527,7 +543,7 @@ declare namespace DataExchange {
      */
     Arn: Arn;
     /**
-     * The type of file your data is stored in. Currently, the supported asset type is S3_SNAPSHOT.
+     * The type of asset that is added to a data set.
      */
     AssetType: AssetType;
     /**
@@ -601,10 +617,19 @@ declare namespace DataExchange {
   }
   export type Description = string;
   export interface Details {
+    /**
+     * Information about the job error.
+     */
     ImportAssetFromSignedUrlJobErrorDetails?: ImportAssetFromSignedUrlJobErrorDetails;
+    /**
+     * Information about the job error.
+     */
     ImportAssetsFromS3JobErrorDetails?: ListOfAssetSourceEntry;
   }
   export interface Event {
+    /**
+     * What occurs to start the revision publish action.
+     */
     RevisionPublished?: RevisionPublished;
   }
   export interface EventActionEntry {
@@ -613,7 +638,7 @@ declare namespace DataExchange {
      */
     Action: Action;
     /**
-     * The ARN for the event action.
+     * The Amazon Resource Name (ARN) for the event action.
      */
     Arn: Arn;
     /**
@@ -732,6 +757,10 @@ declare namespace DataExchange {
      * The destination in Amazon S3 where the revision is exported.
      */
     RevisionDestinations: ListOfRevisionDestinationEntry;
+    /**
+     * The Amazon Resource Name (ARN) of the event action.
+     */
+    EventActionArn?: __string;
   }
   export interface ExportServerSideEncryption {
     /**
@@ -763,11 +792,11 @@ declare namespace DataExchange {
      */
     Arn?: Arn;
     /**
-     * Information about the asset, including its size.
+     * Information about the asset.
      */
     AssetDetails?: AssetDetails;
     /**
-     * The type of file your data is stored in. Currently, the supported asset type is S3_SNAPSHOT.
+     * The type of asset that is added to a data set.
      */
     AssetType?: AssetType;
     /**
@@ -783,7 +812,7 @@ declare namespace DataExchange {
      */
     Id?: Id;
     /**
-     * The name of the asset When importing from Amazon S3, the S3 object key is used as the asset name. When exporting to Amazon S3, the asset name is used as default target S3 object key.
+     * The name of the asset. When importing from Amazon S3, the S3 object key is used as the asset name. When exporting to Amazon S3, the asset name is used as default target S3 object key.
      */
     Name?: AssetName;
     /**
@@ -811,7 +840,7 @@ declare namespace DataExchange {
      */
     Arn?: Arn;
     /**
-     * The type of file your data is stored in. Currently, the supported asset type is S3_SNAPSHOT.
+     * The type of asset that is added to a data set.
      */
     AssetType?: AssetType;
     /**
@@ -935,7 +964,7 @@ declare namespace DataExchange {
   }
   export interface GetRevisionResponse {
     /**
-     * The ARN for the revision
+     * The ARN for the revision.
      */
     Arn?: Arn;
     /**
@@ -973,6 +1002,9 @@ declare namespace DataExchange {
   }
   export type Id = string;
   export interface ImportAssetFromSignedUrlJobErrorDetails {
+    /**
+     * Information about the job error.
+     */
     AssetName: AssetName;
   }
   export interface ImportAssetFromSignedUrlRequestDetails {
@@ -995,7 +1027,7 @@ declare namespace DataExchange {
   }
   export interface ImportAssetFromSignedUrlResponseDetails {
     /**
-     * The name for the asset associated with this import response.
+     * The name for the asset associated with this import job.
      */
     AssetName: AssetName;
     /**
@@ -1018,6 +1050,34 @@ declare namespace DataExchange {
      * The time and date at which the signed URL expires, in ISO 8601 format.
      */
     SignedUrlExpiresAt?: Timestamp;
+  }
+  export interface ImportAssetsFromRedshiftDataSharesRequestDetails {
+    /**
+     * A list of Amazon Redshift datashare assets.
+     */
+    AssetSources: ListOfRedshiftDataShareAssetSourceEntry;
+    /**
+     * The unique identifier for the data set associated with this import job.
+     */
+    DataSetId: Id;
+    /**
+     * The unique identifier for the revision associated with this import job.
+     */
+    RevisionId: Id;
+  }
+  export interface ImportAssetsFromRedshiftDataSharesResponseDetails {
+    /**
+     * A list of Amazon Redshift datashare asset sources.
+     */
+    AssetSources: ListOfRedshiftDataShareAssetSourceEntry;
+    /**
+     * The unique identifier for the data set associated with this import job.
+     */
+    DataSetId: Id;
+    /**
+     * The unique identifier for the revision associated with this import job.
+     */
+    RevisionId: Id;
   }
   export interface ImportAssetsFromS3RequestDetails {
     /**
@@ -1086,6 +1146,9 @@ declare namespace DataExchange {
      * The code for the job error.
      */
     Code: Code;
+    /**
+     * The details about the job error.
+     */
     Details?: Details;
     /**
      * The name of the limit that was reached.
@@ -1108,7 +1171,7 @@ declare namespace DataExchange {
      */
     ResourceType?: JobErrorResourceTypes;
   }
-  export type JobErrorLimitName = "Assets per revision"|"Asset size in GB"|string;
+  export type JobErrorLimitName = "Assets per revision"|"Asset size in GB"|"Amazon Redshift datashare assets per revision"|string;
   export type JobErrorResourceTypes = "REVISION"|"ASSET"|"DATA_SET"|string;
   export interface ListDataSetRevisionsRequest {
     /**
@@ -1212,6 +1275,7 @@ declare namespace DataExchange {
   }
   export type ListOfAssetDestinationEntry = AssetDestinationEntry[];
   export type ListOfAssetSourceEntry = AssetSourceEntry[];
+  export type ListOfRedshiftDataShareAssetSourceEntry = RedshiftDataShareAssetSourceEntry[];
   export type ListOfRevisionDestinationEntry = RevisionDestinationEntry[];
   export interface ListRevisionAssetsRequest {
     /**
@@ -1258,7 +1322,22 @@ declare namespace DataExchange {
   export type NextToken = string;
   export type Origin = "OWNED"|"ENTITLED"|string;
   export interface OriginDetails {
+    /**
+     * The product ID of the origin of the data set.
+     */
     ProductId: __string;
+  }
+  export interface RedshiftDataShareAsset {
+    /**
+     * The Amazon Resource Name (ARN) of the datashare asset.
+     */
+    Arn: __string;
+  }
+  export interface RedshiftDataShareAssetSourceEntry {
+    /**
+     * The Amazon Resource Name (ARN) of the datashare asset.
+     */
+    DataShareArn: __string;
   }
   export interface RequestDetails {
     /**
@@ -1281,6 +1360,10 @@ declare namespace DataExchange {
      * Details about the import from Amazon S3 request.
      */
     ImportAssetsFromS3?: ImportAssetsFromS3RequestDetails;
+    /**
+     * Details from an import from Amazon Redshift datashare request.
+     */
+    ImportAssetsFromRedshiftDataShares?: ImportAssetsFromRedshiftDataSharesRequestDetails;
   }
   export interface ResponseDetails {
     /**
@@ -1303,6 +1386,10 @@ declare namespace DataExchange {
      * Details for the import from Amazon S3 response.
      */
     ImportAssetsFromS3?: ImportAssetsFromS3ResponseDetails;
+    /**
+     * Details from an import from Amazon Redshift datashare response.
+     */
+    ImportAssetsFromRedshiftDataShares?: ImportAssetsFromRedshiftDataSharesResponseDetails;
   }
   export interface RevisionDestinationEntry {
     /**
@@ -1353,6 +1440,9 @@ declare namespace DataExchange {
     UpdatedAt: Timestamp;
   }
   export interface RevisionPublished {
+    /**
+     * The data set ID of the published revision.
+     */
     DataSetId: Id;
   }
   export interface S3SnapshotAsset {
@@ -1382,7 +1472,7 @@ declare namespace DataExchange {
     Tags: MapOf__string;
   }
   export type Timestamp = Date;
-  export type Type = "IMPORT_ASSETS_FROM_S3"|"IMPORT_ASSET_FROM_SIGNED_URL"|"EXPORT_ASSETS_TO_S3"|"EXPORT_ASSET_TO_SIGNED_URL"|"EXPORT_REVISIONS_TO_S3"|string;
+  export type Type = "IMPORT_ASSETS_FROM_S3"|"IMPORT_ASSET_FROM_SIGNED_URL"|"EXPORT_ASSETS_TO_S3"|"EXPORT_ASSET_TO_SIGNED_URL"|"EXPORT_REVISIONS_TO_S3"|"IMPORT_ASSETS_FROM_REDSHIFT_DATA_SHARES"|string;
   export interface UntagResourceRequest {
     /**
      * An Amazon Resource Name (ARN) that uniquely identifies an AWS resource.
@@ -1417,11 +1507,11 @@ declare namespace DataExchange {
      */
     Arn?: Arn;
     /**
-     * Information about the asset, including its size.
+     * Information about the asset.
      */
     AssetDetails?: AssetDetails;
     /**
-     * The type of file your data is stored in. Currently, the supported asset type is S3_SNAPSHOT.
+     * The type of asset that is added to a data set.
      */
     AssetType?: AssetType;
     /**
@@ -1437,7 +1527,7 @@ declare namespace DataExchange {
      */
     Id?: Id;
     /**
-     * The name of the asset When importing from Amazon S3, the S3 object key is used as the asset name. When exporting to Amazon S3, the asset name is used as default target S3 object key.
+     * The name of the asset. When importing from Amazon S3, the S3 object key is used as the asset name. When exporting to Amazon S3, the asset name is used as default target S3 object key.
      */
     Name?: AssetName;
     /**
@@ -1473,7 +1563,7 @@ declare namespace DataExchange {
      */
     Arn?: Arn;
     /**
-     * The type of file your data is stored in. Currently, the supported asset type is S3_SNAPSHOT.
+     * The type of asset that is added to a data set.
      */
     AssetType?: AssetType;
     /**

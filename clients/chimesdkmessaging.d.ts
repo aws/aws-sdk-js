@@ -12,6 +12,14 @@ declare class ChimeSDKMessaging extends Service {
   constructor(options?: ChimeSDKMessaging.Types.ClientConfiguration)
   config: Config & ChimeSDKMessaging.Types.ClientConfiguration;
   /**
+   * Associates a channel flow with a channel. Once associated, all messages to that channel go through channel flow processors. To stop processing, use the DisassociateChannelFlow API.  Only administrators or channel moderators can associate a channel flow. The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   */
+  associateChannelFlow(params: ChimeSDKMessaging.Types.AssociateChannelFlowRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Associates a channel flow with a channel. Once associated, all messages to that channel go through channel flow processors. To stop processing, use the DisassociateChannelFlow API.  Only administrators or channel moderators can associate a channel flow. The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   */
+  associateChannelFlow(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Adds a specified number of users to a channel. 
    */
   batchCreateChannelMembership(params: ChimeSDKMessaging.Types.BatchCreateChannelMembershipRequest, callback?: (err: AWSError, data: ChimeSDKMessaging.Types.BatchCreateChannelMembershipResponse) => void): Request<ChimeSDKMessaging.Types.BatchCreateChannelMembershipResponse, AWSError>;
@@ -19,6 +27,14 @@ declare class ChimeSDKMessaging extends Service {
    * Adds a specified number of users to a channel. 
    */
   batchCreateChannelMembership(callback?: (err: AWSError, data: ChimeSDKMessaging.Types.BatchCreateChannelMembershipResponse) => void): Request<ChimeSDKMessaging.Types.BatchCreateChannelMembershipResponse, AWSError>;
+  /**
+   * Calls back Chime SDK Messaging with a processing response message. This should be invoked from the processor Lambda. This is a developer API. You can return one of the following processing responses:   Update message content or metadata   Deny a message   Make no changes to the message  
+   */
+  channelFlowCallback(params: ChimeSDKMessaging.Types.ChannelFlowCallbackRequest, callback?: (err: AWSError, data: ChimeSDKMessaging.Types.ChannelFlowCallbackResponse) => void): Request<ChimeSDKMessaging.Types.ChannelFlowCallbackResponse, AWSError>;
+  /**
+   * Calls back Chime SDK Messaging with a processing response message. This should be invoked from the processor Lambda. This is a developer API. You can return one of the following processing responses:   Update message content or metadata   Deny a message   Make no changes to the message  
+   */
+  channelFlowCallback(callback?: (err: AWSError, data: ChimeSDKMessaging.Types.ChannelFlowCallbackResponse) => void): Request<ChimeSDKMessaging.Types.ChannelFlowCallbackResponse, AWSError>;
   /**
    * Creates a channel to which you can add users and send messages.  Restriction: You can't change a channel's privacy.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
    */
@@ -35,6 +51,14 @@ declare class ChimeSDKMessaging extends Service {
    * Permanently bans a member from a channel. Moderators can't add banned members to a channel. To undo a ban, you first have to DeleteChannelBan, and then CreateChannelMembership. Bans are cleaned up when you delete users or channels. If you ban a user who is already part of a channel, that user is automatically kicked from the channel.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
    */
   createChannelBan(callback?: (err: AWSError, data: ChimeSDKMessaging.Types.CreateChannelBanResponse) => void): Request<ChimeSDKMessaging.Types.CreateChannelBanResponse, AWSError>;
+  /**
+   * Creates a channel flow, a container for processors. Processors are AWS Lambda functions that perform actions on chat messages, such as stripping out profanity. You can associate channel flows with channels, and the processors in the channel flow then take action on all messages sent to that channel. This is a developer API. Channel flows process the following items:   New and updated messages   Persistent and non-persistent messages   The Standard message type    Channel flows don't process Control or System messages. For more information about the message types provided by Chime SDK Messaging, refer to Message types in the Amazon Chime developer guide. 
+   */
+  createChannelFlow(params: ChimeSDKMessaging.Types.CreateChannelFlowRequest, callback?: (err: AWSError, data: ChimeSDKMessaging.Types.CreateChannelFlowResponse) => void): Request<ChimeSDKMessaging.Types.CreateChannelFlowResponse, AWSError>;
+  /**
+   * Creates a channel flow, a container for processors. Processors are AWS Lambda functions that perform actions on chat messages, such as stripping out profanity. You can associate channel flows with channels, and the processors in the channel flow then take action on all messages sent to that channel. This is a developer API. Channel flows process the following items:   New and updated messages   Persistent and non-persistent messages   The Standard message type    Channel flows don't process Control or System messages. For more information about the message types provided by Chime SDK Messaging, refer to Message types in the Amazon Chime developer guide. 
+   */
+  createChannelFlow(callback?: (err: AWSError, data: ChimeSDKMessaging.Types.CreateChannelFlowResponse) => void): Request<ChimeSDKMessaging.Types.CreateChannelFlowResponse, AWSError>;
   /**
    * Adds a user to a channel. The InvitedBy response field is derived from the request header. A channel member can:   List messages   Send messages   Receive messages   Edit their own messages   Leave the channel   Privacy settings impact this action as follows:   Public Channels: You do not need to be a member to list messages, but you must be a member to send messages.   Private Channels: You must be a member to list or send messages.    The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
    */
@@ -67,6 +91,14 @@ declare class ChimeSDKMessaging extends Service {
    * Removes a user from a channel's ban list.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
    */
   deleteChannelBan(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a channel flow, an irreversible process. This is a developer API.   This API works only when the channel flow is not associated with any channel. To get a list of all channels that a channel flow is associated with, use the ListChannelsAssociatedWithChannelFlow API. Use the DisassociateChannelFlow API to disassociate a channel flow from all channels.  
+   */
+  deleteChannelFlow(params: ChimeSDKMessaging.Types.DeleteChannelFlowRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a channel flow, an irreversible process. This is a developer API.   This API works only when the channel flow is not associated with any channel. To get a list of all channels that a channel flow is associated with, use the ListChannelsAssociatedWithChannelFlow API. Use the DisassociateChannelFlow API to disassociate a channel flow from all channels.  
+   */
+  deleteChannelFlow(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Removes a member from a channel.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
    */
@@ -108,6 +140,14 @@ declare class ChimeSDKMessaging extends Service {
    */
   describeChannelBan(callback?: (err: AWSError, data: ChimeSDKMessaging.Types.DescribeChannelBanResponse) => void): Request<ChimeSDKMessaging.Types.DescribeChannelBanResponse, AWSError>;
   /**
+   * Returns the full details of a channel flow in an Amazon Chime AppInstance. This is a developer API.
+   */
+  describeChannelFlow(params: ChimeSDKMessaging.Types.DescribeChannelFlowRequest, callback?: (err: AWSError, data: ChimeSDKMessaging.Types.DescribeChannelFlowResponse) => void): Request<ChimeSDKMessaging.Types.DescribeChannelFlowResponse, AWSError>;
+  /**
+   * Returns the full details of a channel flow in an Amazon Chime AppInstance. This is a developer API.
+   */
+  describeChannelFlow(callback?: (err: AWSError, data: ChimeSDKMessaging.Types.DescribeChannelFlowResponse) => void): Request<ChimeSDKMessaging.Types.DescribeChannelFlowResponse, AWSError>;
+  /**
    * Returns the full details of a user's channel membership.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
    */
   describeChannelMembership(params: ChimeSDKMessaging.Types.DescribeChannelMembershipRequest, callback?: (err: AWSError, data: ChimeSDKMessaging.Types.DescribeChannelMembershipResponse) => void): Request<ChimeSDKMessaging.Types.DescribeChannelMembershipResponse, AWSError>;
@@ -140,6 +180,14 @@ declare class ChimeSDKMessaging extends Service {
    */
   describeChannelModerator(callback?: (err: AWSError, data: ChimeSDKMessaging.Types.DescribeChannelModeratorResponse) => void): Request<ChimeSDKMessaging.Types.DescribeChannelModeratorResponse, AWSError>;
   /**
+   * Disassociates a channel flow from all its channels. Once disassociated, all messages to that channel stop going through the channel flow processor.  Only administrators or channel moderators can disassociate a channel flow. The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   */
+  disassociateChannelFlow(params: ChimeSDKMessaging.Types.DisassociateChannelFlowRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Disassociates a channel flow from all its channels. Once disassociated, all messages to that channel stop going through the channel flow processor.  Only administrators or channel moderators can disassociate a channel flow. The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   */
+  disassociateChannelFlow(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Gets the full details of a channel message.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
    */
   getChannelMessage(params: ChimeSDKMessaging.Types.GetChannelMessageRequest, callback?: (err: AWSError, data: ChimeSDKMessaging.Types.GetChannelMessageResponse) => void): Request<ChimeSDKMessaging.Types.GetChannelMessageResponse, AWSError>;
@@ -147,6 +195,14 @@ declare class ChimeSDKMessaging extends Service {
    * Gets the full details of a channel message.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
    */
   getChannelMessage(callback?: (err: AWSError, data: ChimeSDKMessaging.Types.GetChannelMessageResponse) => void): Request<ChimeSDKMessaging.Types.GetChannelMessageResponse, AWSError>;
+  /**
+   * Gets message status for a specified messageId. Use this API to determine the intermediate status of messages going through channel flow processing. The API provides an alternative to retrieving message status if the event was not received because a client wasn't connected to a websocket.  Messages can have any one of these statuses.  SENT  Message processed successfully  PENDING  Ongoing processing  FAILED  Processing failed  DENIED  Messasge denied by the processor      This API does not return statuses for denied messages, because we don't store them once the processor denies them.    Only the message sender can invoke this API.   The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header   
+   */
+  getChannelMessageStatus(params: ChimeSDKMessaging.Types.GetChannelMessageStatusRequest, callback?: (err: AWSError, data: ChimeSDKMessaging.Types.GetChannelMessageStatusResponse) => void): Request<ChimeSDKMessaging.Types.GetChannelMessageStatusResponse, AWSError>;
+  /**
+   * Gets message status for a specified messageId. Use this API to determine the intermediate status of messages going through channel flow processing. The API provides an alternative to retrieving message status if the event was not received because a client wasn't connected to a websocket.  Messages can have any one of these statuses.  SENT  Message processed successfully  PENDING  Ongoing processing  FAILED  Processing failed  DENIED  Messasge denied by the processor      This API does not return statuses for denied messages, because we don't store them once the processor denies them.    Only the message sender can invoke this API.   The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header   
+   */
+  getChannelMessageStatus(callback?: (err: AWSError, data: ChimeSDKMessaging.Types.GetChannelMessageStatusResponse) => void): Request<ChimeSDKMessaging.Types.GetChannelMessageStatusResponse, AWSError>;
   /**
    * The details of the endpoint for the messaging session.
    */
@@ -163,6 +219,14 @@ declare class ChimeSDKMessaging extends Service {
    * Lists all the users banned from a particular channel.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
    */
   listChannelBans(callback?: (err: AWSError, data: ChimeSDKMessaging.Types.ListChannelBansResponse) => void): Request<ChimeSDKMessaging.Types.ListChannelBansResponse, AWSError>;
+  /**
+   * Returns a paginated lists of all the channel flows created under a single Chime. This is a developer API.
+   */
+  listChannelFlows(params: ChimeSDKMessaging.Types.ListChannelFlowsRequest, callback?: (err: AWSError, data: ChimeSDKMessaging.Types.ListChannelFlowsResponse) => void): Request<ChimeSDKMessaging.Types.ListChannelFlowsResponse, AWSError>;
+  /**
+   * Returns a paginated lists of all the channel flows created under a single Chime. This is a developer API.
+   */
+  listChannelFlows(callback?: (err: AWSError, data: ChimeSDKMessaging.Types.ListChannelFlowsResponse) => void): Request<ChimeSDKMessaging.Types.ListChannelFlowsResponse, AWSError>;
   /**
    * Lists all channel memberships in a channel.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
    */
@@ -204,6 +268,14 @@ declare class ChimeSDKMessaging extends Service {
    */
   listChannels(callback?: (err: AWSError, data: ChimeSDKMessaging.Types.ListChannelsResponse) => void): Request<ChimeSDKMessaging.Types.ListChannelsResponse, AWSError>;
   /**
+   * Lists all channels associated with a specified channel flow. You can associate a channel flow with multiple channels, but you can only associate a channel with one channel flow. This is a developer API.
+   */
+  listChannelsAssociatedWithChannelFlow(params: ChimeSDKMessaging.Types.ListChannelsAssociatedWithChannelFlowRequest, callback?: (err: AWSError, data: ChimeSDKMessaging.Types.ListChannelsAssociatedWithChannelFlowResponse) => void): Request<ChimeSDKMessaging.Types.ListChannelsAssociatedWithChannelFlowResponse, AWSError>;
+  /**
+   * Lists all channels associated with a specified channel flow. You can associate a channel flow with multiple channels, but you can only associate a channel with one channel flow. This is a developer API.
+   */
+  listChannelsAssociatedWithChannelFlow(callback?: (err: AWSError, data: ChimeSDKMessaging.Types.ListChannelsAssociatedWithChannelFlowResponse) => void): Request<ChimeSDKMessaging.Types.ListChannelsAssociatedWithChannelFlowResponse, AWSError>;
+  /**
    * A list of the channels moderated by an AppInstanceUser.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
    */
   listChannelsModeratedByAppInstanceUser(params: ChimeSDKMessaging.Types.ListChannelsModeratedByAppInstanceUserRequest, callback?: (err: AWSError, data: ChimeSDKMessaging.Types.ListChannelsModeratedByAppInstanceUserResponse) => void): Request<ChimeSDKMessaging.Types.ListChannelsModeratedByAppInstanceUserResponse, AWSError>;
@@ -211,6 +283,14 @@ declare class ChimeSDKMessaging extends Service {
    * A list of the channels moderated by an AppInstanceUser.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
    */
   listChannelsModeratedByAppInstanceUser(callback?: (err: AWSError, data: ChimeSDKMessaging.Types.ListChannelsModeratedByAppInstanceUserResponse) => void): Request<ChimeSDKMessaging.Types.ListChannelsModeratedByAppInstanceUserResponse, AWSError>;
+  /**
+   * Lists the tags applied to an Amazon Chime SDK messaging resource.
+   */
+  listTagsForResource(params: ChimeSDKMessaging.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: ChimeSDKMessaging.Types.ListTagsForResourceResponse) => void): Request<ChimeSDKMessaging.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Lists the tags applied to an Amazon Chime SDK messaging resource.
+   */
+  listTagsForResource(callback?: (err: AWSError, data: ChimeSDKMessaging.Types.ListTagsForResourceResponse) => void): Request<ChimeSDKMessaging.Types.ListTagsForResourceResponse, AWSError>;
   /**
    * Redacts message content, but not metadata. The message exists in the back end, but the action returns null content, and the state shows as redacted.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
    */
@@ -228,6 +308,22 @@ declare class ChimeSDKMessaging extends Service {
    */
   sendChannelMessage(callback?: (err: AWSError, data: ChimeSDKMessaging.Types.SendChannelMessageResponse) => void): Request<ChimeSDKMessaging.Types.SendChannelMessageResponse, AWSError>;
   /**
+   * Applies the specified tags to the specified Amazon Chime SDK messaging resource.
+   */
+  tagResource(params: ChimeSDKMessaging.Types.TagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Applies the specified tags to the specified Amazon Chime SDK messaging resource.
+   */
+  tagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Removes the specified tags from the specified Amazon Chime SDK messaging resource.
+   */
+  untagResource(params: ChimeSDKMessaging.Types.UntagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Removes the specified tags from the specified Amazon Chime SDK messaging resource.
+   */
+  untagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Update a channel's attributes.  Restriction: You can't change a channel's privacy.   The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
    */
   updateChannel(params: ChimeSDKMessaging.Types.UpdateChannelRequest, callback?: (err: AWSError, data: ChimeSDKMessaging.Types.UpdateChannelResponse) => void): Request<ChimeSDKMessaging.Types.UpdateChannelResponse, AWSError>;
@@ -235,6 +331,14 @@ declare class ChimeSDKMessaging extends Service {
    * Update a channel's attributes.  Restriction: You can't change a channel's privacy.   The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
    */
   updateChannel(callback?: (err: AWSError, data: ChimeSDKMessaging.Types.UpdateChannelResponse) => void): Request<ChimeSDKMessaging.Types.UpdateChannelResponse, AWSError>;
+  /**
+   * Updates channel flow attributes. This is a developer API.
+   */
+  updateChannelFlow(params: ChimeSDKMessaging.Types.UpdateChannelFlowRequest, callback?: (err: AWSError, data: ChimeSDKMessaging.Types.UpdateChannelFlowResponse) => void): Request<ChimeSDKMessaging.Types.UpdateChannelFlowResponse, AWSError>;
+  /**
+   * Updates channel flow attributes. This is a developer API.
+   */
+  updateChannelFlow(callback?: (err: AWSError, data: ChimeSDKMessaging.Types.UpdateChannelFlowResponse) => void): Request<ChimeSDKMessaging.Types.UpdateChannelFlowResponse, AWSError>;
   /**
    * Updates the content of a message.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
    */
@@ -262,6 +366,20 @@ declare namespace ChimeSDKMessaging {
      * The time at which a message was last read.
      */
     ReadMarkerTimestamp?: Timestamp;
+  }
+  export interface AssociateChannelFlowRequest {
+    /**
+     * The ARN of the channel.
+     */
+    ChannelArn: ChimeArn;
+    /**
+     * The ARN of the channel flow.
+     */
+    ChannelFlowArn: ChimeArn;
+    /**
+     * The AppInstanceUserArn of the user making the API call.
+     */
+    ChimeBearer: ChimeArn;
   }
   export interface BatchChannelMemberships {
     /**
@@ -324,6 +442,7 @@ declare namespace ChimeSDKMessaging {
      */
     Errors?: BatchCreateChannelMembershipErrors;
   }
+  export type CallbackIdType = string;
   export interface Channel {
     /**
      * The name of a channel.
@@ -361,7 +480,34 @@ declare namespace ChimeSDKMessaging {
      * The time at which a channel was last updated.
      */
     LastUpdatedTimestamp?: Timestamp;
+    /**
+     * The ARN of the channel flow.
+     */
+    ChannelFlowArn?: ChimeArn;
   }
+  export interface ChannelAssociatedWithFlowSummary {
+    /**
+     * The name of the channel flow.
+     */
+    Name?: NonEmptyResourceName;
+    /**
+     * The ARN of the channel.
+     */
+    ChannelArn?: ChimeArn;
+    /**
+     * The mode of the channel.
+     */
+    Mode?: ChannelMode;
+    /**
+     * The channel's privacy setting.
+     */
+    Privacy?: ChannelPrivacy;
+    /**
+     * The channel's metadata.
+     */
+    Metadata?: Metadata;
+  }
+  export type ChannelAssociatedWithFlowSummaryList = ChannelAssociatedWithFlowSummary[];
   export interface ChannelBan {
     /**
      * The member being banned from the channel.
@@ -387,6 +533,72 @@ declare namespace ChimeSDKMessaging {
     Member?: Identity;
   }
   export type ChannelBanSummaryList = ChannelBanSummary[];
+  export interface ChannelFlow {
+    /**
+     * The ARN of the channel flow.
+     */
+    ChannelFlowArn?: ChimeArn;
+    /**
+     * Information about the processor Lambda functions.
+     */
+    Processors?: ProcessorList;
+    /**
+     * The name of the channel flow.
+     */
+    Name?: NonEmptyResourceName;
+    /**
+     * The time at which the channel flow was created.
+     */
+    CreatedTimestamp?: Timestamp;
+    /**
+     * The time at which a channel flow was updated.
+     */
+    LastUpdatedTimestamp?: Timestamp;
+  }
+  export interface ChannelFlowCallbackRequest {
+    /**
+     * The identifier passed to the processor by the service when invoked. Use the identifier to call back the service.
+     */
+    CallbackId: CallbackIdType;
+    /**
+     * The ARN of the channel.
+     */
+    ChannelArn: ChimeArn;
+    /**
+     * When a processor determines that a message needs to be DENIED, pass this parameter with a value of true.
+     */
+    DeleteResource?: NonNullableBoolean;
+    /**
+     * Stores information about the processed message.
+     */
+    ChannelMessage: ChannelMessageCallback;
+  }
+  export interface ChannelFlowCallbackResponse {
+    /**
+     * The ARN of the channel.
+     */
+    ChannelArn?: ChimeArn;
+    /**
+     * The call back ID passed in the request.
+     */
+    CallbackId?: CallbackIdType;
+  }
+  export type ChannelFlowExecutionOrder = number;
+  export interface ChannelFlowSummary {
+    /**
+     * The ARN of the channel flow.
+     */
+    ChannelFlowArn?: ChimeArn;
+    /**
+     * The name of the channel flow.
+     */
+    Name?: NonEmptyResourceName;
+    /**
+     * Information about the processor Lambda functions.
+     */
+    Processors?: ProcessorList;
+  }
+  export type ChannelFlowSummaryList = ChannelFlowSummary[];
   export interface ChannelMembership {
     /**
      * The identifier of the member who invited another member.
@@ -477,8 +689,37 @@ declare namespace ChimeSDKMessaging {
      * The persistence setting for a channel message.
      */
     Persistence?: ChannelMessagePersistenceType;
+    /**
+     * The status of the channel message.
+     */
+    Status?: ChannelMessageStatusStructure;
+  }
+  export interface ChannelMessageCallback {
+    /**
+     * The message ID.
+     */
+    MessageId: MessageId;
+    /**
+     * The message content.
+     */
+    Content?: NonEmptyContent;
+    /**
+     * The message metadata.
+     */
+    Metadata?: Metadata;
   }
   export type ChannelMessagePersistenceType = "PERSISTENT"|"NON_PERSISTENT"|string;
+  export type ChannelMessageStatus = "SENT"|"PENDING"|"FAILED"|"DENIED"|string;
+  export interface ChannelMessageStatusStructure {
+    /**
+     * The message status value.
+     */
+    Value?: ChannelMessageStatus;
+    /**
+     * Contains more details about the messasge status.
+     */
+    Detail?: StatusDetail;
+  }
   export interface ChannelMessageSummary {
     /**
      * The ID of the message.
@@ -516,6 +757,10 @@ declare namespace ChimeSDKMessaging {
      * Indicates whether a message was redacted.
      */
     Redacted?: NonNullableBoolean;
+    /**
+     * The message status. The status value is SENT for messages sent to a channel without a channel flow. For channels associated with channel flow, the value determines the processing stage.
+     */
+    Status?: ChannelMessageStatusStructure;
   }
   export type ChannelMessageSummaryList = ChannelMessageSummary[];
   export type ChannelMessageType = "STANDARD"|"CONTROL"|string;
@@ -606,6 +851,34 @@ declare namespace ChimeSDKMessaging {
      * The ChannelArn and BannedIdentity of the member in the ban response.
      */
     Member?: Identity;
+  }
+  export interface CreateChannelFlowRequest {
+    /**
+     * The ARN of the channel flow request.
+     */
+    AppInstanceArn: ChimeArn;
+    /**
+     * Information about the processor Lambda functions.
+     */
+    Processors: ProcessorList;
+    /**
+     * The name of the channel flow.
+     */
+    Name: NonEmptyResourceName;
+    /**
+     * The tags for the creation request.
+     */
+    Tags?: TagList;
+    /**
+     * The client token for the request. An Idempotency token.
+     */
+    ClientRequestToken: ClientRequestToken;
+  }
+  export interface CreateChannelFlowResponse {
+    /**
+     * The ARN of the channel flow.
+     */
+    ChannelFlowArn?: ChimeArn;
   }
   export interface CreateChannelMembershipRequest {
     /**
@@ -713,6 +986,12 @@ declare namespace ChimeSDKMessaging {
      */
     ChimeBearer: ChimeArn;
   }
+  export interface DeleteChannelFlowRequest {
+    /**
+     * The ARN of the channel flow.
+     */
+    ChannelFlowArn: ChimeArn;
+  }
   export interface DeleteChannelMembershipRequest {
     /**
      * The ARN of the channel from which you want to remove the user.
@@ -784,6 +1063,18 @@ declare namespace ChimeSDKMessaging {
      * The details of the ban.
      */
     ChannelBan?: ChannelBan;
+  }
+  export interface DescribeChannelFlowRequest {
+    /**
+     * The ARN of the channel flow.
+     */
+    ChannelFlowArn: ChimeArn;
+  }
+  export interface DescribeChannelFlowResponse {
+    /**
+     * The channel flow details.
+     */
+    ChannelFlow?: ChannelFlow;
   }
   export interface DescribeChannelMembershipForAppInstanceUserRequest {
     /**
@@ -881,7 +1172,22 @@ declare namespace ChimeSDKMessaging {
      */
     Channel?: Channel;
   }
+  export interface DisassociateChannelFlowRequest {
+    /**
+     * The ARN of the channel.
+     */
+    ChannelArn: ChimeArn;
+    /**
+     * The ARN of the channel flow.
+     */
+    ChannelFlowArn: ChimeArn;
+    /**
+     * The AppInstanceUserArn of the user making the API call.
+     */
+    ChimeBearer: ChimeArn;
+  }
   export type ErrorCode = "BadRequest"|"Conflict"|"Forbidden"|"NotFound"|"PreconditionFailed"|"ResourceLimitExceeded"|"ServiceFailure"|"AccessDenied"|"ServiceUnavailable"|"Throttled"|"Throttling"|"Unauthorized"|"Unprocessable"|"VoiceConnectorGroupAssociationsExist"|"PhoneNumberAssociationsExist"|string;
+  export type FallbackAction = "CONTINUE"|"ABORT"|string;
   export interface GetChannelMessageRequest {
     /**
      * The ARN of the channel.
@@ -902,6 +1208,26 @@ declare namespace ChimeSDKMessaging {
      */
     ChannelMessage?: ChannelMessage;
   }
+  export interface GetChannelMessageStatusRequest {
+    /**
+     * The ARN of the channel
+     */
+    ChannelArn: ChimeArn;
+    /**
+     * The ID of the message.
+     */
+    MessageId: MessageId;
+    /**
+     * The AppInstanceUserArn of the user making the API call.
+     */
+    ChimeBearer: ChimeArn;
+  }
+  export interface GetChannelMessageStatusResponse {
+    /**
+     * The message status and details.
+     */
+    Status?: ChannelMessageStatusStructure;
+  }
   export interface GetMessagingSessionEndpointRequest {
   }
   export interface GetMessagingSessionEndpointResponse {
@@ -920,6 +1246,18 @@ declare namespace ChimeSDKMessaging {
      */
     Name?: ResourceName;
   }
+  export type InvocationType = "ASYNC"|string;
+  export interface LambdaConfiguration {
+    /**
+     * The ARN of the Lambda message processing function.
+     */
+    ResourceArn: LambdaFunctionArn;
+    /**
+     * Controls how the Lambda function is invoked.
+     */
+    InvocationType: InvocationType;
+  }
+  export type LambdaFunctionArn = string;
   export interface ListChannelBansRequest {
     /**
      * The ARN of the channel.
@@ -951,6 +1289,30 @@ declare namespace ChimeSDKMessaging {
      * The information for each requested ban.
      */
     ChannelBans?: ChannelBanSummaryList;
+  }
+  export interface ListChannelFlowsRequest {
+    /**
+     * The ARN of the app instance.
+     */
+    AppInstanceArn: ChimeArn;
+    /**
+     * The maximum number of channel flows that you want to return.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The token passed by previous API calls until all requested channel flows are returned.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListChannelFlowsResponse {
+    /**
+     * The information about each channel flow.
+     */
+    ChannelFlows?: ChannelFlowSummaryList;
+    /**
+     * The token passed by previous API calls until all requested channels are returned.
+     */
+    NextToken?: NextToken;
   }
   export interface ListChannelMembershipsForAppInstanceUserRequest {
     /**
@@ -1092,6 +1454,30 @@ declare namespace ChimeSDKMessaging {
      */
     ChannelModerators?: ChannelModeratorSummaryList;
   }
+  export interface ListChannelsAssociatedWithChannelFlowRequest {
+    /**
+     * The ARN of the channel flow.
+     */
+    ChannelFlowArn: ChimeArn;
+    /**
+     * The maximum number of channels that you want to return.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The token passed by previous API calls until all requested channels are returned.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListChannelsAssociatedWithChannelFlowResponse {
+    /**
+     * The information about each channel.
+     */
+    Channels?: ChannelAssociatedWithFlowSummaryList;
+    /**
+     * The token passed by previous API calls until all requested channels are returned.
+     */
+    NextToken?: NextToken;
+  }
   export interface ListChannelsModeratedByAppInstanceUserRequest {
     /**
      * The ARN of the user in the moderated channel.
@@ -1152,6 +1538,18 @@ declare namespace ChimeSDKMessaging {
      */
     NextToken?: NextToken;
   }
+  export interface ListTagsForResourceRequest {
+    /**
+     * The ARN of the resource.
+     */
+    ResourceARN: ChimeArn;
+  }
+  export interface ListTagsForResourceResponse {
+    /**
+     * The tag key-value pairs.
+     */
+    Tags?: TagList;
+  }
   export type MaxResults = number;
   export type MemberArns = ChimeArn[];
   export type Members = Identity[];
@@ -1167,6 +1565,31 @@ declare namespace ChimeSDKMessaging {
   export type NonEmptyContent = string;
   export type NonEmptyResourceName = string;
   export type NonNullableBoolean = boolean;
+  export interface Processor {
+    /**
+     * The name of the channel flow.
+     */
+    Name: NonEmptyResourceName;
+    /**
+     * The information about the type of processor and its identifier.
+     */
+    Configuration: ProcessorConfiguration;
+    /**
+     * The sequence in which processors run. If you have multiple processors in a channel flow, message processing goes through each processor in the sequence. The value determines the sequence. At this point, we support only 1 processor within a flow.
+     */
+    ExecutionOrder: ChannelFlowExecutionOrder;
+    /**
+     * Determines whether to continue or stop processing if communication with processor fails. If the last processor in a channel flow sequence has a fallback action of CONTINUE, and communication with the processor fails, the message is considered processed and sent to the recipients in the channel.
+     */
+    FallbackAction: FallbackAction;
+  }
+  export interface ProcessorConfiguration {
+    /**
+     * Indicates that the processor is of type Lambda.
+     */
+    Lambda: LambdaConfiguration;
+  }
+  export type ProcessorList = Processor[];
   export interface RedactChannelMessageRequest {
     /**
      * The ARN of the channel containing the messages that you want to redact.
@@ -1231,23 +1654,69 @@ declare namespace ChimeSDKMessaging {
      * The ID string assigned to each message.
      */
     MessageId?: MessageId;
+    /**
+     * The status of the channel message.
+     */
+    Status?: ChannelMessageStatusStructure;
   }
   export type SortOrder = "ASCENDING"|"DESCENDING"|string;
+  export type StatusDetail = string;
   export type String = string;
   export interface Tag {
     /**
-     * The key of the tag.
+     * The key in a tag.
      */
     Key: TagKey;
     /**
-     * The value of the tag.
+     * The value in a tag.
      */
     Value: TagValue;
   }
   export type TagKey = string;
+  export type TagKeyList = TagKey[];
   export type TagList = Tag[];
+  export interface TagResourceRequest {
+    /**
+     * The resource ARN.
+     */
+    ResourceARN: ChimeArn;
+    /**
+     * The tag key-value pairs.
+     */
+    Tags: TagList;
+  }
   export type TagValue = string;
   export type Timestamp = Date;
+  export interface UntagResourceRequest {
+    /**
+     * The resource ARN.
+     */
+    ResourceARN: ChimeArn;
+    /**
+     * The tag keys.
+     */
+    TagKeys: TagKeyList;
+  }
+  export interface UpdateChannelFlowRequest {
+    /**
+     * The ARN of the channel flow.
+     */
+    ChannelFlowArn: ChimeArn;
+    /**
+     * Information about the processor Lambda functions 
+     */
+    Processors: ProcessorList;
+    /**
+     * The name of the channel flow.
+     */
+    Name: NonEmptyResourceName;
+  }
+  export interface UpdateChannelFlowResponse {
+    /**
+     * The ARN of the channel flow.
+     */
+    ChannelFlowArn?: ChimeArn;
+  }
   export interface UpdateChannelMessageRequest {
     /**
      * The ARN of the channel.
@@ -1279,6 +1748,10 @@ declare namespace ChimeSDKMessaging {
      * The ID string of the message being updated.
      */
     MessageId?: MessageId;
+    /**
+     * The status of the message update.
+     */
+    Status?: ChannelMessageStatusStructure;
   }
   export interface UpdateChannelReadMarkerRequest {
     /**
