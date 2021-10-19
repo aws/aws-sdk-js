@@ -9,7 +9,9 @@ describe('AWS.Finspacedata', function() {
 
   it('should set Content-Type header to application/x-amz-json-1.1', function () {
     helpers.mockHttpResponse(200, {}, '');
-    req = finspace.createChangeset();
+    req = finspace.getWorkingLocation({
+      locationType: 'INGESTION'
+    });
     req.build();
     return expect(req.httpRequest.headers['Content-Type']).to.equal('application/x-amz-json-1.1');
   });
