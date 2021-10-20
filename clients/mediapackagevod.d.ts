@@ -602,6 +602,10 @@ it will be passed through to HLS output.
      */
     HlsManifests: __listOfHlsManifest;
     /**
+     * When enabled, MediaPackage passes through digital video broadcasting (DVB) subtitles into the output.
+     */
+    IncludeDvbSubtitles?: __boolean;
+    /**
      * Duration (in seconds) of each fragment. Actual fragments will be
 rounded to the nearest multiple of the source fragment duration.
 

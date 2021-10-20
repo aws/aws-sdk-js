@@ -284,5 +284,6 @@ module.exports = {
   Wisdom: require('./wisdom'),
   Account: require('./account'),
   CloudControl: require('./cloudcontrol'),
-  Grafana: require('./grafana')
+  Grafana: require('./grafana'),
+  Panorama: require('./panorama')
 };

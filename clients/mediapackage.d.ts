@@ -914,6 +914,10 @@ that is greater than 0.
     AdsOnDeliveryRestrictions?: AdsOnDeliveryRestrictions;
     Encryption?: HlsEncryption;
     /**
+     * When enabled, MediaPackage passes through digital video broadcasting (DVB) subtitles into the output.
+     */
+    IncludeDvbSubtitles?: __boolean;
+    /**
      * When enabled, an I-Frame only stream will be included in the output.
      */
     IncludeIframeOnlyStream?: __boolean;

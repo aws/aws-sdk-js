@@ -1561,6 +1561,13 @@ declare namespace Appflow {
     bucketPrefix?: BucketPrefix;
     s3OutputFormatConfig?: S3OutputFormatConfig;
   }
+  export type S3InputFileType = "CSV"|"JSON"|string;
+  export interface S3InputFormatConfig {
+    /**
+     *  The file type that Amazon AppFlow gets from your Amazon S3 bucket. 
+     */
+    s3InputFileType?: S3InputFileType;
+  }
   export interface S3Metadata {
   }
   export interface S3OutputFormatConfig {
@@ -1583,6 +1590,7 @@ declare namespace Appflow {
      *  The object key for the Amazon S3 bucket in which the source files are stored. 
      */
     bucketPrefix?: BucketPrefix;
+    s3InputFormatConfig?: S3InputFormatConfig;
   }
   export type SAPODataConnectorOperator = "PROJECTION"|"LESS_THAN"|"CONTAINS"|"GREATER_THAN"|"BETWEEN"|"LESS_THAN_OR_EQUAL_TO"|"GREATER_THAN_OR_EQUAL_TO"|"EQUAL_TO"|"NOT_EQUAL_TO"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string;
   export interface SAPODataConnectorProfileCredentials {

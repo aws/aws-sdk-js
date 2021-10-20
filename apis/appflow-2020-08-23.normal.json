@@ -2977,6 +2977,23 @@
       },
       "documentation": "<p> The properties that are applied when Amazon S3 is used as a destination. </p>"
     },
+    "S3InputFileType": {
+      "type": "string",
+      "enum": [
+        "CSV",
+        "JSON"
+      ]
+    },
+    "S3InputFormatConfig": {
+      "type": "structure",
+      "members": {
+        "s3InputFileType": {
+          "shape": "S3InputFileType",
+          "documentation": "<p> The file type that Amazon AppFlow gets from your Amazon S3 bucket. </p>"
+        }
+      },
+      "documentation": "<p> When you use Amazon S3 as the source, the configuration format that you provide the flow input data. </p>"
+    },
     "S3Metadata": {
       "type": "structure",
       "members": {},
@@ -3012,6 +3029,9 @@
         "bucketPrefix": {
           "shape": "BucketPrefix",
           "documentation": "<p> The object key for the Amazon S3 bucket in which the source files are stored. </p>"
+        },
+        "s3InputFormatConfig": {
+          "shape": "S3InputFormatConfig"
         }
       },
       "documentation": "<p> The properties that are applied when Amazon S3 is being used as the flow source. </p>"

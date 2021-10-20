@@ -1090,5 +1090,8 @@
   },
   "grafana": {
     "name": "Grafana"
+  },
+  "panorama": {
+    "name": "Panorama"
   }
 }

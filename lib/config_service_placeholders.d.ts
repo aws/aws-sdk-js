@@ -285,6 +285,7 @@ export abstract class ConfigurationServicePlaceholders {
   account?: AWS.Account.Types.ClientConfiguration;
   cloudcontrol?: AWS.CloudControl.Types.ClientConfiguration;
   grafana?: AWS.Grafana.Types.ClientConfiguration;
+  panorama?: AWS.Panorama.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -572,4 +573,5 @@ export interface ConfigurationServiceApiVersions {
   account?: AWS.Account.Types.apiVersion;
   cloudcontrol?: AWS.CloudControl.Types.apiVersion;
   grafana?: AWS.Grafana.Types.apiVersion;
+  panorama?: AWS.Panorama.Types.apiVersion;
 }

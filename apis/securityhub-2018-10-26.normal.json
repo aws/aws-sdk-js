@@ -219,6 +219,37 @@
       ],
       "documentation": "<p>Creates a custom action target in Security Hub.</p> <p>You can use custom actions on findings and insights in Security Hub to trigger target actions in Amazon CloudWatch Events.</p>"
     },
+    "CreateFindingAggregator": {
+      "name": "CreateFindingAggregator",
+      "http": {
+        "method": "POST",
+        "requestUri": "/findingAggregator/create"
+      },
+      "input": {
+        "shape": "CreateFindingAggregatorRequest"
+      },
+      "output": {
+        "shape": "CreateFindingAggregatorResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "InvalidAccessException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InvalidInputException"
+        }
+      ],
+      "documentation": "<p>Used to enable finding aggregation. Must be called from the aggregation Region.</p> <p>For more details about cross-Region replication, see <a href=\"securityhub/latest/userguide/finding-aggregation.html\">Configuring finding aggregation</a> in the <i>Security Hub User Guide</i>. </p>"
+    },
     "CreateInsight": {
       "name": "CreateInsight",
       "http": {
@@ -336,6 +367,40 @@
         }
       ],
       "documentation": "<p>Deletes a custom action target from Security Hub.</p> <p>Deleting a custom action target does not affect any findings or insights that were already sent to Amazon CloudWatch Events using the custom action.</p>"
+    },
+    "DeleteFindingAggregator": {
+      "name": "DeleteFindingAggregator",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/findingAggregator/delete/{FindingAggregatorArn+}"
+      },
+      "input": {
+        "shape": "DeleteFindingAggregatorRequest"
+      },
+      "output": {
+        "shape": "DeleteFindingAggregatorResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "InvalidAccessException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p>Deletes a finding aggregator. When you delete the finding aggregator, you stop finding aggregation.</p> <p>When you stop finding aggregation, findings that were already aggregated to the aggregation Region are still visible from the aggregation Region. New findings and finding updates are not aggregated. </p>"
     },
     "DeleteInsight": {
       "name": "DeleteInsight",
@@ -929,6 +994,40 @@
       ],
       "documentation": "<p>Returns a list of the standards that are currently enabled.</p>"
     },
+    "GetFindingAggregator": {
+      "name": "GetFindingAggregator",
+      "http": {
+        "method": "GET",
+        "requestUri": "/findingAggregator/get/{FindingAggregatorArn+}"
+      },
+      "input": {
+        "shape": "GetFindingAggregatorRequest"
+      },
+      "output": {
+        "shape": "GetFindingAggregatorResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "InvalidAccessException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p>Returns the current finding aggregation configuration.</p>"
+    },
     "GetFindings": {
       "name": "GetFindings",
       "http": {
@@ -955,7 +1054,7 @@
           "shape": "LimitExceededException"
         }
       ],
-      "documentation": "<p>Returns a list of findings that match the specified criteria.</p>"
+      "documentation": "<p>Returns a list of findings that match the specified criteria.</p> <p>If finding aggregation is enabled, then when you call <code>GetFindings</code> from the aggregation Region, the results include all of the matching findings from both the aggregation Region and the linked Regions.</p>"
     },
     "GetInsightResults": {
       "name": "GetInsightResults",
@@ -1167,6 +1266,37 @@
       ],
       "documentation": "<p>Lists all findings-generating solutions (products) that you are subscribed to receive findings from in Security Hub.</p>"
     },
+    "ListFindingAggregators": {
+      "name": "ListFindingAggregators",
+      "http": {
+        "method": "GET",
+        "requestUri": "/findingAggregator/list"
+      },
+      "input": {
+        "shape": "ListFindingAggregatorsRequest"
+      },
+      "output": {
+        "shape": "ListFindingAggregatorsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "InvalidAccessException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InvalidInputException"
+        }
+      ],
+      "documentation": "<p>If finding aggregation is enabled, then <code>ListFindingAggregators</code> returns the ARN of the finding aggregator. You can run this operation from any Region.</p>"
+    },
     "ListInvitations": {
       "name": "ListInvitations",
       "http": {
@@ -1356,6 +1486,40 @@
         }
       ],
       "documentation": "<p>Updates the name and description of a custom action target in Security Hub.</p>"
+    },
+    "UpdateFindingAggregator": {
+      "name": "UpdateFindingAggregator",
+      "http": {
+        "method": "PATCH",
+        "requestUri": "/findingAggregator/update"
+      },
+      "input": {
+        "shape": "UpdateFindingAggregatorRequest"
+      },
+      "output": {
+        "shape": "UpdateFindingAggregatorResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "InvalidAccessException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p>Updates the finding aggregation configuration. Used to update the Region linking mode and the list of included or excluded Regions. You cannot use <code>UpdateFindingAggregator</code> to change the aggregation Region.</p> <p>You must run <code>UpdateFindingAggregator</code> from the current aggregation Region. </p>"
     },
     "UpdateFindings": {
       "name": "UpdateFindings",
@@ -10982,6 +11146,43 @@
         }
       }
     },
+    "CreateFindingAggregatorRequest": {
+      "type": "structure",
+      "required": [
+        "RegionLinkingMode"
+      ],
+      "members": {
+        "RegionLinkingMode": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>Indicates whether to aggregate findings from all of the available Regions in the current partition. Also determines whether to automatically aggregate findings from new Regions as Security Hub supports them and you opt into them.</p> <p>The selected option also determines how to use the Regions provided in the Regions list.</p> <p>The options are as follows:</p> <ul> <li> <p> <code>ALL_REGIONS</code> - Indicates to aggregate findings from all of the Regions where Security Hub is enabled. When you choose this option, Security Hub also automatically aggregates findings from new Regions as Security Hub supports them and you opt into them. </p> </li> <li> <p> <code>ALL_REGIONS_EXCEPT_SPECIFIED</code> - Indicates to aggregate findings from all of the Regions where Security Hub is enabled, except for the Regions listed in the <code>Regions</code> parameter. When you choose this option, Security Hub also automatically aggregates findings from new Regions as Security Hub supports them and you opt into them. </p> </li> <li> <p> <code>SPECIFIED_REGIONS</code> - Indicates to aggregate findings only from the Regions listed in the <code>Regions</code> parameter. Security Hub does not automatically aggregate findings from new Regions. </p> </li> </ul>"
+        },
+        "Regions": {
+          "shape": "StringList",
+          "documentation": "<p>If <code>RegionLinkingMode</code> is <code>ALL_REGIONS_EXCEPT_SPECIFIED</code>, then this is a comma-separated list of Regions that do not aggregate findings to the aggregation Region.</p> <p>If <code>RegionLinkingMode</code> is <code>SPECIFIED_REGIONS</code>, then this is a comma-separated list of Regions that do aggregate findings to the aggregation Region. </p>"
+        }
+      }
+    },
+    "CreateFindingAggregatorResponse": {
+      "type": "structure",
+      "members": {
+        "FindingAggregatorArn": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The ARN of the finding aggregator. You use the finding aggregator ARN to retrieve details for, update, and stop finding aggregation.</p>"
+        },
+        "FindingAggregationRegion": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The aggregation Region.</p>"
+        },
+        "RegionLinkingMode": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>Indicates whether to link all Regions, all Regions except for a list of excluded Regions, or a list of included Regions.</p>"
+        },
+        "Regions": {
+          "shape": "StringList",
+          "documentation": "<p>The list of excluded Regions or included Regions.</p>"
+        }
+      }
+    },
     "CreateInsightRequest": {
       "type": "structure",
       "required": [
@@ -11220,6 +11421,24 @@
           "documentation": "<p>The ARN of the custom action target that was deleted.</p>"
         }
       }
+    },
+    "DeleteFindingAggregatorRequest": {
+      "type": "structure",
+      "required": [
+        "FindingAggregatorArn"
+      ],
+      "members": {
+        "FindingAggregatorArn": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The ARN of the finding aggregator to delete. To obtain the ARN, use <code>ListFindingAggregators</code>.</p>",
+          "location": "uri",
+          "locationName": "FindingAggregatorArn"
+        }
+      }
+    },
+    "DeleteFindingAggregatorResponse": {
+      "type": "structure",
+      "members": {}
     },
     "DeleteInsightRequest": {
       "type": "structure",
@@ -11633,6 +11852,22 @@
         "shape": "NonEmptyString"
       }
     },
+    "FindingAggregator": {
+      "type": "structure",
+      "members": {
+        "FindingAggregatorArn": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The ARN of the finding aggregator. You use the finding aggregator ARN to retrieve details for, update, and delete the finding aggregator.</p>"
+        }
+      },
+      "documentation": "<p>A finding aggregator. A finding aggregator contains the configuration for finding aggregation.</p>"
+    },
+    "FindingAggregatorList": {
+      "type": "list",
+      "member": {
+        "shape": "FindingAggregator"
+      }
+    },
     "FindingProviderFields": {
       "type": "structure",
       "members": {
@@ -11726,6 +11961,41 @@
         "NextToken": {
           "shape": "NextToken",
           "documentation": "<p>The pagination token to use to request the next page of results.</p>"
+        }
+      }
+    },
+    "GetFindingAggregatorRequest": {
+      "type": "structure",
+      "required": [
+        "FindingAggregatorArn"
+      ],
+      "members": {
+        "FindingAggregatorArn": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The ARN of the finding aggregator to return details for. To obtain the ARN, use <code>ListFindingAggregators</code>.</p>",
+          "location": "uri",
+          "locationName": "FindingAggregatorArn"
+        }
+      }
+    },
+    "GetFindingAggregatorResponse": {
+      "type": "structure",
+      "members": {
+        "FindingAggregatorArn": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The ARN of the finding aggregator.</p>"
+        },
+        "FindingAggregationRegion": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The aggregation Region.</p>"
+        },
+        "RegionLinkingMode": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>Indicates whether to link all Regions, all Regions except for a list of excluded Regions, or a list of included Regions.</p>"
+        },
+        "Regions": {
+          "shape": "StringList",
+          "documentation": "<p>The list of excluded Regions or included Regions.</p>"
         }
       }
     },
@@ -12177,6 +12447,36 @@
         "NextToken": {
           "shape": "NextToken",
           "documentation": "<p>The pagination token to use to request the next page of results.</p>"
+        }
+      }
+    },
+    "ListFindingAggregatorsRequest": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token returned with the previous set of results. Identifies the next set of results to return.</p>",
+          "location": "querystring",
+          "locationName": "NextToken"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of results to return. This operation currently only returns a single result.</p>",
+          "location": "querystring",
+          "locationName": "MaxResults"
+        }
+      }
+    },
+    "ListFindingAggregatorsResponse": {
+      "type": "structure",
+      "members": {
+        "FindingAggregators": {
+          "shape": "FindingAggregatorList",
+          "documentation": "<p>The list of finding aggregators. This operation currently only returns a single result.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>If there are more results, this is the token to provide in the next call to <code>ListFindingAggregators</code>.</p> <p>This operation currently only returns a single result. </p>"
         }
       }
     },
@@ -13958,6 +14258,48 @@
     "UpdateActionTargetResponse": {
       "type": "structure",
       "members": {}
+    },
+    "UpdateFindingAggregatorRequest": {
+      "type": "structure",
+      "required": [
+        "FindingAggregatorArn",
+        "RegionLinkingMode"
+      ],
+      "members": {
+        "FindingAggregatorArn": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The ARN of the finding aggregator. To obtain the ARN, use <code>ListFindingAggregators</code>.</p>"
+        },
+        "RegionLinkingMode": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>Indicates whether to aggregate findings from all of the available Regions in the current partition. Also determines whether to automatically aggregate findings from new Regions as Security Hub supports them and you opt into them.</p> <p>The selected option also determines how to use the Regions provided in the Regions list.</p> <p>The options are as follows:</p> <ul> <li> <p> <code>ALL_REGIONS</code> - Indicates to aggregate findings from all of the Regions where Security Hub is enabled. When you choose this option, Security Hub also automatically aggregates findings from new Regions as Security Hub supports them and you opt into them. </p> </li> <li> <p> <code>ALL_REGIONS_EXCEPT_SPECIFIED</code> - Indicates to aggregate findings from all of the Regions where Security Hub is enabled, except for the Regions listed in the <code>Regions</code> parameter. When you choose this option, Security Hub also automatically aggregates findings from new Regions as Security Hub supports them and you opt into them. </p> </li> <li> <p> <code>SPECIFIED_REGIONS</code> - Indicates to aggregate findings only from the Regions listed in the <code>Regions</code> parameter. Security Hub does not automatically aggregate findings from new Regions. </p> </li> </ul>"
+        },
+        "Regions": {
+          "shape": "StringList",
+          "documentation": "<p>If <code>RegionLinkingMode</code> is <code>ALL_REGIONS_EXCEPT_SPECIFIED</code>, then this is a comma-separated list of Regions that do not aggregate findings to the aggregation Region.</p> <p>If <code>RegionLinkingMode</code> is <code>SPECIFIED_REGIONS</code>, then this is a comma-separated list of Regions that do aggregate findings to the aggregation Region.</p>"
+        }
+      }
+    },
+    "UpdateFindingAggregatorResponse": {
+      "type": "structure",
+      "members": {
+        "FindingAggregatorArn": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The ARN of the finding aggregator.</p>"
+        },
+        "FindingAggregationRegion": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The aggregation Region.</p>"
+        },
+        "RegionLinkingMode": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>Indicates whether to link all Regions, all Regions except for a list of excluded Regions, or a list of included Regions.</p>"
+        },
+        "Regions": {
+          "shape": "StringList",
+          "documentation": "<p>The list of excluded Regions or included Regions.</p>"
+        }
+      }
     },
     "UpdateFindingsRequest": {
       "type": "structure",

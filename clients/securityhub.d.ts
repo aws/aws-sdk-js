@@ -68,6 +68,14 @@ declare class SecurityHub extends Service {
    */
   createActionTarget(callback?: (err: AWSError, data: SecurityHub.Types.CreateActionTargetResponse) => void): Request<SecurityHub.Types.CreateActionTargetResponse, AWSError>;
   /**
+   * Used to enable finding aggregation. Must be called from the aggregation Region. For more details about cross-Region replication, see Configuring finding aggregation in the Security Hub User Guide. 
+   */
+  createFindingAggregator(params: SecurityHub.Types.CreateFindingAggregatorRequest, callback?: (err: AWSError, data: SecurityHub.Types.CreateFindingAggregatorResponse) => void): Request<SecurityHub.Types.CreateFindingAggregatorResponse, AWSError>;
+  /**
+   * Used to enable finding aggregation. Must be called from the aggregation Region. For more details about cross-Region replication, see Configuring finding aggregation in the Security Hub User Guide. 
+   */
+  createFindingAggregator(callback?: (err: AWSError, data: SecurityHub.Types.CreateFindingAggregatorResponse) => void): Request<SecurityHub.Types.CreateFindingAggregatorResponse, AWSError>;
+  /**
    * Creates a custom insight in Security Hub. An insight is a consolidation of findings that relate to a security issue that requires attention or remediation. To group the related findings in the insight, use the GroupByAttribute.
    */
   createInsight(params: SecurityHub.Types.CreateInsightRequest, callback?: (err: AWSError, data: SecurityHub.Types.CreateInsightResponse) => void): Request<SecurityHub.Types.CreateInsightResponse, AWSError>;
@@ -99,6 +107,14 @@ declare class SecurityHub extends Service {
    * Deletes a custom action target from Security Hub. Deleting a custom action target does not affect any findings or insights that were already sent to Amazon CloudWatch Events using the custom action.
    */
   deleteActionTarget(callback?: (err: AWSError, data: SecurityHub.Types.DeleteActionTargetResponse) => void): Request<SecurityHub.Types.DeleteActionTargetResponse, AWSError>;
+  /**
+   * Deletes a finding aggregator. When you delete the finding aggregator, you stop finding aggregation. When you stop finding aggregation, findings that were already aggregated to the aggregation Region are still visible from the aggregation Region. New findings and finding updates are not aggregated. 
+   */
+  deleteFindingAggregator(params: SecurityHub.Types.DeleteFindingAggregatorRequest, callback?: (err: AWSError, data: SecurityHub.Types.DeleteFindingAggregatorResponse) => void): Request<SecurityHub.Types.DeleteFindingAggregatorResponse, AWSError>;
+  /**
+   * Deletes a finding aggregator. When you delete the finding aggregator, you stop finding aggregation. When you stop finding aggregation, findings that were already aggregated to the aggregation Region are still visible from the aggregation Region. New findings and finding updates are not aggregated. 
+   */
+  deleteFindingAggregator(callback?: (err: AWSError, data: SecurityHub.Types.DeleteFindingAggregatorResponse) => void): Request<SecurityHub.Types.DeleteFindingAggregatorResponse, AWSError>;
   /**
    * Deletes the insight specified by the InsightArn.
    */
@@ -260,11 +276,19 @@ declare class SecurityHub extends Service {
    */
   getEnabledStandards(callback?: (err: AWSError, data: SecurityHub.Types.GetEnabledStandardsResponse) => void): Request<SecurityHub.Types.GetEnabledStandardsResponse, AWSError>;
   /**
-   * Returns a list of findings that match the specified criteria.
+   * Returns the current finding aggregation configuration.
+   */
+  getFindingAggregator(params: SecurityHub.Types.GetFindingAggregatorRequest, callback?: (err: AWSError, data: SecurityHub.Types.GetFindingAggregatorResponse) => void): Request<SecurityHub.Types.GetFindingAggregatorResponse, AWSError>;
+  /**
+   * Returns the current finding aggregation configuration.
+   */
+  getFindingAggregator(callback?: (err: AWSError, data: SecurityHub.Types.GetFindingAggregatorResponse) => void): Request<SecurityHub.Types.GetFindingAggregatorResponse, AWSError>;
+  /**
+   * Returns a list of findings that match the specified criteria. If finding aggregation is enabled, then when you call GetFindings from the aggregation Region, the results include all of the matching findings from both the aggregation Region and the linked Regions.
    */
   getFindings(params: SecurityHub.Types.GetFindingsRequest, callback?: (err: AWSError, data: SecurityHub.Types.GetFindingsResponse) => void): Request<SecurityHub.Types.GetFindingsResponse, AWSError>;
   /**
-   * Returns a list of findings that match the specified criteria.
+   * Returns a list of findings that match the specified criteria. If finding aggregation is enabled, then when you call GetFindings from the aggregation Region, the results include all of the matching findings from both the aggregation Region and the linked Regions.
    */
   getFindings(callback?: (err: AWSError, data: SecurityHub.Types.GetFindingsResponse) => void): Request<SecurityHub.Types.GetFindingsResponse, AWSError>;
   /**
@@ -324,6 +348,14 @@ declare class SecurityHub extends Service {
    */
   listEnabledProductsForImport(callback?: (err: AWSError, data: SecurityHub.Types.ListEnabledProductsForImportResponse) => void): Request<SecurityHub.Types.ListEnabledProductsForImportResponse, AWSError>;
   /**
+   * If finding aggregation is enabled, then ListFindingAggregators returns the ARN of the finding aggregator. You can run this operation from any Region.
+   */
+  listFindingAggregators(params: SecurityHub.Types.ListFindingAggregatorsRequest, callback?: (err: AWSError, data: SecurityHub.Types.ListFindingAggregatorsResponse) => void): Request<SecurityHub.Types.ListFindingAggregatorsResponse, AWSError>;
+  /**
+   * If finding aggregation is enabled, then ListFindingAggregators returns the ARN of the finding aggregator. You can run this operation from any Region.
+   */
+  listFindingAggregators(callback?: (err: AWSError, data: SecurityHub.Types.ListFindingAggregatorsResponse) => void): Request<SecurityHub.Types.ListFindingAggregatorsResponse, AWSError>;
+  /**
    * Lists all Security Hub membership invitations that were sent to the current Amazon Web Services account. This operation is only used by accounts that are managed by invitation. Accounts that are managed using the integration with Organizations do not receive invitations.
    */
   listInvitations(params: SecurityHub.Types.ListInvitationsRequest, callback?: (err: AWSError, data: SecurityHub.Types.ListInvitationsResponse) => void): Request<SecurityHub.Types.ListInvitationsResponse, AWSError>;
@@ -379,6 +411,14 @@ declare class SecurityHub extends Service {
    * Updates the name and description of a custom action target in Security Hub.
    */
   updateActionTarget(callback?: (err: AWSError, data: SecurityHub.Types.UpdateActionTargetResponse) => void): Request<SecurityHub.Types.UpdateActionTargetResponse, AWSError>;
+  /**
+   * Updates the finding aggregation configuration. Used to update the Region linking mode and the list of included or excluded Regions. You cannot use UpdateFindingAggregator to change the aggregation Region. You must run UpdateFindingAggregator from the current aggregation Region. 
+   */
+  updateFindingAggregator(params: SecurityHub.Types.UpdateFindingAggregatorRequest, callback?: (err: AWSError, data: SecurityHub.Types.UpdateFindingAggregatorResponse) => void): Request<SecurityHub.Types.UpdateFindingAggregatorResponse, AWSError>;
+  /**
+   * Updates the finding aggregation configuration. Used to update the Region linking mode and the list of included or excluded Regions. You cannot use UpdateFindingAggregator to change the aggregation Region. You must run UpdateFindingAggregator from the current aggregation Region. 
+   */
+  updateFindingAggregator(callback?: (err: AWSError, data: SecurityHub.Types.UpdateFindingAggregatorResponse) => void): Request<SecurityHub.Types.UpdateFindingAggregatorResponse, AWSError>;
   /**
    *  UpdateFindings is deprecated. Instead of UpdateFindings, use BatchUpdateFindings. Updates the Note and RecordState of the Security Hub-aggregated findings that the filter attributes specify. Any member account that can view the finding also sees the update to the finding.
    */
@@ -7866,6 +7906,34 @@ declare namespace SecurityHub {
      */
     ActionTargetArn: NonEmptyString;
   }
+  export interface CreateFindingAggregatorRequest {
+    /**
+     * Indicates whether to aggregate findings from all of the available Regions in the current partition. Also determines whether to automatically aggregate findings from new Regions as Security Hub supports them and you opt into them. The selected option also determines how to use the Regions provided in the Regions list. The options are as follows:    ALL_REGIONS - Indicates to aggregate findings from all of the Regions where Security Hub is enabled. When you choose this option, Security Hub also automatically aggregates findings from new Regions as Security Hub supports them and you opt into them.     ALL_REGIONS_EXCEPT_SPECIFIED - Indicates to aggregate findings from all of the Regions where Security Hub is enabled, except for the Regions listed in the Regions parameter. When you choose this option, Security Hub also automatically aggregates findings from new Regions as Security Hub supports them and you opt into them.     SPECIFIED_REGIONS - Indicates to aggregate findings only from the Regions listed in the Regions parameter. Security Hub does not automatically aggregate findings from new Regions.   
+     */
+    RegionLinkingMode: NonEmptyString;
+    /**
+     * If RegionLinkingMode is ALL_REGIONS_EXCEPT_SPECIFIED, then this is a comma-separated list of Regions that do not aggregate findings to the aggregation Region. If RegionLinkingMode is SPECIFIED_REGIONS, then this is a comma-separated list of Regions that do aggregate findings to the aggregation Region. 
+     */
+    Regions?: StringList;
+  }
+  export interface CreateFindingAggregatorResponse {
+    /**
+     * The ARN of the finding aggregator. You use the finding aggregator ARN to retrieve details for, update, and stop finding aggregation.
+     */
+    FindingAggregatorArn?: NonEmptyString;
+    /**
+     * The aggregation Region.
+     */
+    FindingAggregationRegion?: NonEmptyString;
+    /**
+     * Indicates whether to link all Regions, all Regions except for a list of excluded Regions, or a list of included Regions.
+     */
+    RegionLinkingMode?: NonEmptyString;
+    /**
+     * The list of excluded Regions or included Regions.
+     */
+    Regions?: StringList;
+  }
   export interface CreateInsightRequest {
     /**
      * The name of the custom insight to create.
@@ -8010,6 +8078,14 @@ declare namespace SecurityHub {
      * The ARN of the custom action target that was deleted.
      */
     ActionTargetArn: NonEmptyString;
+  }
+  export interface DeleteFindingAggregatorRequest {
+    /**
+     * The ARN of the finding aggregator to delete. To obtain the ARN, use ListFindingAggregators.
+     */
+    FindingAggregatorArn: NonEmptyString;
+  }
+  export interface DeleteFindingAggregatorResponse {
   }
   export interface DeleteInsightRequest {
     /**
@@ -8255,6 +8331,13 @@ declare namespace SecurityHub {
   export interface EnableSecurityHubResponse {
   }
   export type FieldMap = {[key: string]: NonEmptyString};
+  export interface FindingAggregator {
+    /**
+     * The ARN of the finding aggregator. You use the finding aggregator ARN to retrieve details for, update, and delete the finding aggregator.
+     */
+    FindingAggregatorArn?: NonEmptyString;
+  }
+  export type FindingAggregatorList = FindingAggregator[];
   export interface FindingProviderFields {
     /**
      * A finding's confidence. Confidence is defined as the likelihood that a finding accurately identifies the behavior or issue that it was intended to identify. Confidence is scored on a 0-100 basis using a ratio scale, where 0 means zero percent confidence and 100 means 100 percent confidence.
@@ -8325,6 +8408,30 @@ declare namespace SecurityHub {
      * The pagination token to use to request the next page of results.
      */
     NextToken?: NextToken;
+  }
+  export interface GetFindingAggregatorRequest {
+    /**
+     * The ARN of the finding aggregator to return details for. To obtain the ARN, use ListFindingAggregators.
+     */
+    FindingAggregatorArn: NonEmptyString;
+  }
+  export interface GetFindingAggregatorResponse {
+    /**
+     * The ARN of the finding aggregator.
+     */
+    FindingAggregatorArn?: NonEmptyString;
+    /**
+     * The aggregation Region.
+     */
+    FindingAggregationRegion?: NonEmptyString;
+    /**
+     * Indicates whether to link all Regions, all Regions except for a list of excluded Regions, or a list of included Regions.
+     */
+    RegionLinkingMode?: NonEmptyString;
+    /**
+     * The list of excluded Regions or included Regions.
+     */
+    Regions?: StringList;
   }
   export interface GetFindingsRequest {
     /**
@@ -8590,6 +8697,26 @@ declare namespace SecurityHub {
     ProductSubscriptions?: ProductSubscriptionArnList;
     /**
      * The pagination token to use to request the next page of results.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListFindingAggregatorsRequest {
+    /**
+     * The token returned with the previous set of results. Identifies the next set of results to return.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of results to return. This operation currently only returns a single result.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListFindingAggregatorsResponse {
+    /**
+     * The list of finding aggregators. This operation currently only returns a single result.
+     */
+    FindingAggregators?: FindingAggregatorList;
+    /**
+     * If there are more results, this is the token to provide in the next call to ListFindingAggregators. This operation currently only returns a single result. 
      */
     NextToken?: NextToken;
   }
@@ -9750,6 +9877,38 @@ declare namespace SecurityHub {
     Description?: NonEmptyString;
   }
   export interface UpdateActionTargetResponse {
+  }
+  export interface UpdateFindingAggregatorRequest {
+    /**
+     * The ARN of the finding aggregator. To obtain the ARN, use ListFindingAggregators.
+     */
+    FindingAggregatorArn: NonEmptyString;
+    /**
+     * Indicates whether to aggregate findings from all of the available Regions in the current partition. Also determines whether to automatically aggregate findings from new Regions as Security Hub supports them and you opt into them. The selected option also determines how to use the Regions provided in the Regions list. The options are as follows:    ALL_REGIONS - Indicates to aggregate findings from all of the Regions where Security Hub is enabled. When you choose this option, Security Hub also automatically aggregates findings from new Regions as Security Hub supports them and you opt into them.     ALL_REGIONS_EXCEPT_SPECIFIED - Indicates to aggregate findings from all of the Regions where Security Hub is enabled, except for the Regions listed in the Regions parameter. When you choose this option, Security Hub also automatically aggregates findings from new Regions as Security Hub supports them and you opt into them.     SPECIFIED_REGIONS - Indicates to aggregate findings only from the Regions listed in the Regions parameter. Security Hub does not automatically aggregate findings from new Regions.   
+     */
+    RegionLinkingMode: NonEmptyString;
+    /**
+     * If RegionLinkingMode is ALL_REGIONS_EXCEPT_SPECIFIED, then this is a comma-separated list of Regions that do not aggregate findings to the aggregation Region. If RegionLinkingMode is SPECIFIED_REGIONS, then this is a comma-separated list of Regions that do aggregate findings to the aggregation Region.
+     */
+    Regions?: StringList;
+  }
+  export interface UpdateFindingAggregatorResponse {
+    /**
+     * The ARN of the finding aggregator.
+     */
+    FindingAggregatorArn?: NonEmptyString;
+    /**
+     * The aggregation Region.
+     */
+    FindingAggregationRegion?: NonEmptyString;
+    /**
+     * Indicates whether to link all Regions, all Regions except for a list of excluded Regions, or a list of included Regions.
+     */
+    RegionLinkingMode?: NonEmptyString;
+    /**
+     * The list of excluded Regions or included Regions.
+     */
+    Regions?: StringList;
   }
   export interface UpdateFindingsRequest {
     /**

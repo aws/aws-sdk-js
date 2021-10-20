@@ -1,6 +1,15 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1011.0-->
+<!--LATEST=2.1012.0-->
 <!--ENTRYINSERT-->
+
+## 2.1012.0
+* feature: Appflow: Feature to add support for  JSON-L format for S3 as a source.
+* feature: DirectConnect: This release adds 4 new APIS, which needs to be public able
+* feature: MediaConvert: AWS Elemental MediaConvert SDK has added support for specifying caption time delta in milliseconds and the ability to apply color range legalization to source content other than AVC video.
+* feature: MediaPackage: When enabled, MediaPackage passes through digital video broadcasting (DVB) subtitles into the output.
+* feature: MediaPackageVod: MediaPackage passes through digital video broadcasting (DVB) subtitles into the output.
+* feature: Panorama: General availability for AWS Panorama. AWS SDK for Panorama includes APIs to manage your devices and nodes, and deploy computer vision applications to the edge. For more information, see the AWS Panorama documentation at http://docs.aws.amazon.com/panorama
+* feature: SecurityHub: Added support for cross-Region finding aggregation, which replicates findings from linked Regions to a single aggregation Region. Added operations to view, enable, update, and delete the finding aggregation.
 
 ## 2.1011.0
 * feature: ChimeSDKMessaging: The Amazon Chime SDK now allows developers to execute business logic on in-flight messages before they are delivered to members of a messaging channel with channel flows.

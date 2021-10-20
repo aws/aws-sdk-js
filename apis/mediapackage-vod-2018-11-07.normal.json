@@ -1367,6 +1367,11 @@
           "locationName": "hlsManifests",
           "shape": "__listOfHlsManifest"
         },
+        "IncludeDvbSubtitles": {
+          "documentation": "When enabled, MediaPackage passes through digital video broadcasting (DVB) subtitles into the output.",
+          "locationName": "includeDvbSubtitles",
+          "shape": "__boolean"
+        },
         "SegmentDurationSeconds": {
           "documentation": "Duration (in seconds) of each fragment. Actual fragments will be\nrounded to the nearest multiple of the source fragment duration.\n",
           "locationName": "segmentDurationSeconds",
