@@ -48,6 +48,9 @@
     "fips-*/api.ecr": {
       "endpoint": "ecr-fips.{region}.amazonaws.com"
     },
+    "fips-*/streams.dynamodb": {
+      "endpoint": "dynamodb-fips.{region}.amazonaws.com"
+    },
     "us-gov-west-1/s3": "s3signature",
     "us-west-1/s3": "s3signature",
     "us-west-2/s3": "s3signature",
