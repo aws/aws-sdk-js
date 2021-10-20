@@ -3,12 +3,8 @@
     "*/*": {
       "endpoint": "{service}.{region}.amazonaws.com"
     },
-    "fips-*/*": {
-      "endpoint": "{service}-fips.{region}.amazonaws.com"
-    },
-    "*-fips/*": {
-      "endpoint": "{service}-fips.{region}.amazonaws.com"
-    },
+    "fips-*/*": "fips",
+    "*-fips/*": "fips",
     "cn-*/*": {
       "endpoint": "{service}.{region}.amazonaws.com.cn"
     },
@@ -80,6 +76,9 @@
       "endpoint": "{service}.us-gov.amazonaws.com",
       "globalEndpoint": true,
       "signingRegion": "us-gov-west-1"
+    },
+    "fips": {
+      "endpoint": "{service}-fips.{region}.amazonaws.com"
     },
     "s3signature": {
       "endpoint": "{service}.{region}.amazonaws.com",
