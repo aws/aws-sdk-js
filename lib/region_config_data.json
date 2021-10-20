@@ -3,6 +3,12 @@
     "*/*": {
       "endpoint": "{service}.{region}.amazonaws.com"
     },
+    "fips-*/*": {
+      "endpoint": "{service}-fips.{region}.amazonaws.com"
+    },
+    "*-fips/*": {
+      "endpoint": "{service}-fips.{region}.amazonaws.com"
+    },
     "cn-*/*": {
       "endpoint": "{service}.{region}.amazonaws.com.cn"
     },
