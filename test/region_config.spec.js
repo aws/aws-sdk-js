@@ -139,6 +139,26 @@ describe('region_config.js', function() {
     });
   });
 
+  describe('sets signingRegion if FIPS', function() {
+    const cases = [
+      ['fips-aws-global', 'us-east-1'],
+      ['aws-fips', 'us-east-1'],
+      ['fips-aws-us-gov-global', 'us-gov-west-1'],
+      ['fips-us-east-1', 'us-east-1'],
+      ['us-east-1-fips', 'us-east-1'],
+      ['fips-dkr-us-east-1', 'us-east-1'],
+      ['fips-prod-us-east-1', 'us-east-1'],
+    ];
+    for (const [input, output] of cases) {
+      it(`sets signingRegion to ${output} for region ${input}`, function() {
+        const service = new MockService({
+          region: input
+        });
+        expect(service.signingRegion).to.equal(output);
+      });
+    }
+  });
+
   describe('getRealRegion', function() {
     describe('returns real region if fips', function() {
       describe('special cases', function() {
