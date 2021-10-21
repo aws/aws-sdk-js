@@ -47,6 +47,12 @@ async function testApiCall(input) {
 };
 
 describe('endpoints.fips', function() {
+  beforeEach(function () {
+    helpers.mockResponse({
+      data: {}
+    });
+  });
+
   for (const test_case of test_cases) {
     it(`testing ${test_case.clientName} with region: ${test_case.region}`, async function() {
       await testApiCall(test_case);
