@@ -148,6 +148,7 @@ describe('region_config.js', function() {
       ['us-east-1-fips', 'us-east-1'],
       ['fips-dkr-us-east-1', 'us-east-1'],
       ['fips-prod-us-east-1', 'us-east-1'],
+      ['fips-cn-north-1', 'cn-north-1'],
     ];
     for (const [input, output] of cases) {
       it(`sets signingRegion to ${output} for region ${input}`, function() {
@@ -180,6 +181,7 @@ describe('region_config.js', function() {
           ['us-east-1-fips', 'us-east-1'],
           ['fips-dkr-us-east-1', 'us-east-1'],
           ['fips-prod-us-east-1', 'us-east-1'],
+          ['fips-cn-north-1', 'cn-north-1'],
         ];
         for (const [input, output] of cases) {
           it(`returns "${output}" for "${input}"`, function() {
