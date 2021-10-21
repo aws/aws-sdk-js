@@ -27,7 +27,11 @@ var allowlist = {
         110,
         112
     ],
+    '/region_config.js': [
+        117
+    ],
     '/request.js': [
+        318,
         319
     ],
     '/services/s3.js': [

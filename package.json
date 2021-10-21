@@ -8,7 +8,7 @@
     "url": "https://aws.amazon.com/"
   },
   "config": {
-    "test_args": "test test/json test/model test/protocol test/query test/services test/signers test/xml test/s3 test/cloudfront test/dynamodb test/polly test/rds test/publisher test/event-stream"
+    "test_args": "test test/json test/model test/protocol test/query test/services test/signers test/xml test/s3 test/cloudfront test/dynamodb test/polly test/rds test/publisher test/event-stream test/endpoint"
   },
   "homepage": "https://github.com/aws/aws-sdk-js",
   "contributors": [
