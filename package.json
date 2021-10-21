@@ -48,7 +48,7 @@
     "querystring": "0.2.0",
     "sax": "1.2.1",
     "url": "0.10.3",
-    "uuid": "3.3.2",
+    "uuid": "8.3.2",
     "xml2js": "0.4.19"
   },
   "main": "lib/aws.js",
