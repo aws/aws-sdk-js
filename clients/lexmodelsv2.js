@@ -5,7 +5,6 @@ var apiLoader = AWS.apiLoader;
 
 apiLoader.services['lexmodelsv2'] = {};
 AWS.LexModelsV2 = Service.defineService('lexmodelsv2', ['2020-08-07']);
-require('../lib/services/lexmodelsv2');
 Object.defineProperty(apiLoader.services['lexmodelsv2'], '2020-08-07', {
   get: function get() {
     var model = require('../apis/models.lex.v2-2020-08-07.min.json');
