@@ -28,7 +28,6 @@ async function testApiCall(input) {
         new AWS.IotData({ region, endpoint: 'endpoint' })
       : new AWS[clientName]({ region });
 
-
   const functionName = getFunctionName(client);
   if (!functionName) {
     throw new Error(
