@@ -2,19 +2,6 @@ const test_cases = require('./test_cases.json');
 const helpers = require('../../helpers');
 const AWS = helpers.AWS;
 
-function getFunctionName (client) {
-  const funcPrefixes = ['list', 'describe', 'query', 'get', 'invoke', 'send'];
-  const properties = Object.getOwnPropertyNames(Object.getPrototypeOf(client));
-  for (const funcPrefix of funcPrefixes) {
-    function startsWith(property) {
-      return property.startsWith(funcPrefix);
-    }
-    if (properties.some(startsWith)) {
-      return properties.find(startsWith);
-    }
-  }
-};
-
 async function testApiCall(input) {
   const { clientName, region, signingRegion, hostname } = input;
 
@@ -28,14 +15,7 @@ async function testApiCall(input) {
         new AWS.IotData({ region, endpoint: 'endpoint' })
       : new AWS[clientName]({ region });
 
-  const functionName = getFunctionName(client);
-  if (!functionName) {
-    throw new Error(
-      `Function starting with list/describe does not exist for ${clientName}`
-    );
-  }
-
-  const req = client[getFunctionName(client)]();
+  const req = client[Object.keys(client.api.operations)[0]]();
   req.on('complete', () => {
     expect(region).to.equal(client.config.region);
     expect(signingRegion).to.equal(req.httpRequest.region);
