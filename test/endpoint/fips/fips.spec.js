@@ -17,15 +17,17 @@ function getFunctionName (client) {
 
 async function testApiCall(input) {
   const { clientName, region, signingRegion, hostname } = input;
-  if (clientName === 'IotData') {
-    // requires an explicit `endpoint' configuration option.
-    return;
-  }
+
   if (!AWS[clientName]) {
     throw new Error(`${clientName} does not exist`);
   }
 
-  const client = new AWS[clientName]({ region });
+  const client =
+    clientName === 'IotData'
+      ? // requires an explicit `endpoint' configuration option.
+        new AWS.IotData({ region, endpoint: 'endpoint' })
+      : new AWS[clientName]({ region });
+
 
   const functionName = getFunctionName(client);
   if (!functionName) {
