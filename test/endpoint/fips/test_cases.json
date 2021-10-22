@@ -2436,13 +2436,6 @@
     "hostname": "servicecatalog-appregistry-fips.us-west-2.amazonaws.com"
   },
   {
-    "endpointPrefix": "servicediscovery",
-    "clientName": "ServiceDiscovery",
-    "region": "servicediscovery-fips",
-    "signingRegion": "ca-central-1",
-    "hostname": "servicediscovery-fips.ca-central-1.amazonaws.com"
-  },
-  {
     "endpointPrefix": "session.qldb",
     "clientName": "QLDBSession",
     "region": "fips-us-east-1",
@@ -3869,13 +3862,6 @@
     "region": "fips-us-gov-west-1",
     "signingRegion": "us-gov-west-1",
     "hostname": "servicecatalog-appregistry.us-gov-west-1.amazonaws.com"
-  },
-  {
-    "endpointPrefix": "servicediscovery",
-    "clientName": "ServiceDiscovery",
-    "region": "servicediscovery-fips",
-    "signingRegion": "us-gov-west-1",
-    "hostname": "servicediscovery-fips.us-gov-west-1.amazonaws.com"
   },
   {
     "endpointPrefix": "servicequotas",

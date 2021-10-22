@@ -125,5 +125,19 @@
     "region": "fips-accesspoint-us-west-2",
     "signingRegion": "us-west-2",
     "hostname": "s3-accesspoint-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "servicediscovery",
+    "clientName": "ServiceDiscovery",
+    "region": "servicediscovery-fips",
+    "signingRegion": "ca-central-1",
+    "hostname": "servicediscovery-fips.ca-central-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "servicediscovery",
+    "clientName": "ServiceDiscovery",
+    "region": "servicediscovery-fips",
+    "signingRegion": "us-gov-west-1",
+    "hostname": "servicediscovery-fips.us-gov-west-1.amazonaws.com"
   }
 ]
