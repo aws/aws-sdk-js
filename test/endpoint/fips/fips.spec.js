@@ -9,11 +9,7 @@ function testApiCall(input, done) {
     throw new Error(`${clientName} does not exist`);
   }
 
-  const client =
-    clientName === 'IotData'
-      ? // requires an explicit `endpoint' configuration option.
-        new AWS.IotData({ region, endpoint: 'endpoint' })
-      : new AWS[clientName]({ region });
+  const client = new AWS[clientName]({ region });
 
   const req = client[Object.keys(client.api.operations)[0]]();
   req.on('complete', function() {
