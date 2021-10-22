@@ -75,12 +75,8 @@
     "fips-*/api.sagemaker": {
       "endpoint": "api-fips.sagemaker.{region}.amazonaws.com"
     },
-    "fips-*/batch": {
-      "endpoint": "fips.batch.{region}.amazonaws.com"
-    },
-    "fips-*/eks": {
-      "endpoint": "fips.eks.{region}.amazonaws.com"
-    },
+    "fips-*/batch": "fipsDotPrefix",
+    "fips-*/eks": "fipsDotPrefix",
     "fips-*/models.lex": {
       "endpoint": "models-fips.lex.{region}.amazonaws.com"
     },
@@ -96,9 +92,7 @@
     "fips-*/route53": {
       "endpoint": "route53-fips.amazonaws.com"
     },
-    "fips-*/transcribe": {
-      "endpoint": "fips.transcribe.{region}.amazonaws.com"
-    },
+    "fips-*/transcribe": "fipsDotPrefix",
     "fips-*/waf": {
       "endpoint": "waf-fips.amazonaws.com"
     },
@@ -241,6 +235,9 @@
     "s3signature": {
       "endpoint": "{service}.{region}.amazonaws.com",
       "signatureVersion": "s3"
+    },
+    "fipsDotPrefix": {
+      "endpoint": "fips.{service}.{region}.amazonaws.com"
     }
   }
 }
