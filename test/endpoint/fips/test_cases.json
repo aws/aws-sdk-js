@@ -3775,20 +3775,6 @@
   {
     "endpointPrefix": "s3",
     "clientName": "S3",
-    "region": "fips-accesspoint-us-gov-east-1",
-    "signingRegion": "us-gov-east-1",
-    "hostname": "s3-accesspoint-fips.us-gov-east-1.amazonaws.com"
-  },
-  {
-    "endpointPrefix": "s3",
-    "clientName": "S3",
-    "region": "fips-accesspoint-us-gov-west-1",
-    "signingRegion": "us-gov-west-1",
-    "hostname": "s3-accesspoint-fips.us-gov-west-1.amazonaws.com"
-  },
-  {
-    "endpointPrefix": "s3",
-    "clientName": "S3",
     "region": "fips-us-gov-west-1",
     "signingRegion": "us-gov-west-1",
     "hostname": "s3-fips.us-gov-west-1.amazonaws.com"
