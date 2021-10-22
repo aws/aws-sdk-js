@@ -89,13 +89,9 @@
     "fips-*/streams.dynamodb": {
       "endpoint": "dynamodb-fips.{region}.amazonaws.com"
     },
-    "fips-*/route53": {
-      "endpoint": "route53-fips.amazonaws.com"
-    },
+    "fips-*/route53": "fipsWithoutRegion",
     "fips-*/transcribe": "fipsDotPrefix",
-    "fips-*/waf": {
-      "endpoint": "waf-fips.amazonaws.com"
-    },
+    "fips-*/waf": "fipsWithoutRegion",
     "fips-accesspoint-*/*": {
       "endpoint": "{service}-accesspoint-fips.{region}.amazonaws.com"
     },
@@ -238,6 +234,9 @@
     },
     "fipsDotPrefix": {
       "endpoint": "fips.{service}.{region}.amazonaws.com"
+    },
+    "fipsWithoutRegion": {
+      "endpoint": "{service}-fips.amazonaws.com"
     }
   }
 }
