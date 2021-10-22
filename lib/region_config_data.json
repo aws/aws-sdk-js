@@ -78,6 +78,18 @@
     "fips-*/batch": {
       "endpoint": "fips.batch.{region}.amazonaws.com"
     },
+    "fips-*/eks": {
+      "endpoint": "fips.eks.{region}.amazonaws.com"
+    },
+    "fips-*/models.lex": {
+      "endpoint": "models-fips.lex.{region}.amazonaws.com"
+    },
+    "fips-*/runtime.lex": {
+      "endpoint": "runtime-fips.lex.{region}.amazonaws.com"
+    },
+    "fips-*/runtime.sagemaker": {
+      "endpoint": "runtime-fips.sagemaker.{region}.amazonaws.com"
+    },
     "fips-*/streams.dynamodb": {
       "endpoint": "dynamodb-fips.{region}.amazonaws.com"
     },
