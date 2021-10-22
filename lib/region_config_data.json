@@ -6,6 +6,9 @@
     "fips-*/*": {
       "endpoint": "{service}-fips.{region}.amazonaws.com"
     },
+    "fips-us-gov-*/*": {
+      "endpoint": "{service}-fips.{region}.amazonaws.com"
+    },
     "fips-cn-*/*": {
       "endpoint": "{service}-fips.{region}.amazonaws.com.cn"
     },
@@ -72,7 +75,13 @@
     "fips-*/api.ecr": {
       "endpoint": "ecr-fips.{region}.amazonaws.com"
     },
+    "fips-us-gov-*/api.ecr": {
+      "endpoint": "ecr-fips.{region}.amazonaws.com"
+    },
     "fips-*/api.sagemaker": {
+      "endpoint": "api-fips.sagemaker.{region}.amazonaws.com"
+    },
+    "fips-us-gov-*/api.sagemaker": {
       "endpoint": "api-fips.sagemaker.{region}.amazonaws.com"
     },
     "fips-*/batch": "fipsDotPrefix",
@@ -80,7 +89,13 @@
     "fips-*/models.lex": {
       "endpoint": "models-fips.lex.{region}.amazonaws.com"
     },
+    "fips-us-gov-*/models.lex": {
+      "endpoint": "models-fips.lex.{region}.amazonaws.com"
+    },
     "fips-*/runtime.lex": {
+      "endpoint": "runtime-fips.lex.{region}.amazonaws.com"
+    },
+    "fips-us-gov-*/runtime.lex": {
       "endpoint": "runtime-fips.lex.{region}.amazonaws.com"
     },
     "fips-*/runtime.sagemaker": {
@@ -91,6 +106,7 @@
     },
     "fips-*/route53": "fipsWithoutRegion",
     "fips-*/transcribe": "fipsDotPrefix",
+    "fips-us-gov-*/transcribe": "fipsDotPrefix",
     "fips-*/waf": "fipsWithoutRegion",
     "fips-accesspoint-*/*": {
       "endpoint": "{service}-accesspoint-fips.{region}.amazonaws.com"
