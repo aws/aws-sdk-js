@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "endpoint",
+  "description": "Update fips endpoint heuristics test to use callback"
+}

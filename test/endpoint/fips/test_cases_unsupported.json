@@ -1,0 +1,108 @@
+[
+  {
+    "endpointPrefix": "dms",
+    "clientName": "DMS",
+    "region": "dms-fips",
+    "signingRegion": "us-west-1",
+    "hostname": "dms-fips.us-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "iam",
+    "clientName": "IAM",
+    "region": "iam-fips",
+    "signingRegion": "us-east-1",
+    "hostname": "iam-fips.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "dms",
+    "clientName": "DMS",
+    "region": "dms-fips",
+    "signingRegion": "us-gov-west-1",
+    "hostname": "dms.us-gov-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "iam",
+    "clientName": "IAM",
+    "region": "iam-govcloud-fips",
+    "signingRegion": "us-gov-west-1",
+    "hostname": "iam.us-gov.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "dms",
+    "clientName": "DMS",
+    "region": "dms-fips",
+    "signingRegion": "us-iso-east-1",
+    "hostname": "dms.us-iso-east-1.c2s.ic.gov"
+  },
+  {
+    "endpointPrefix": "dms",
+    "clientName": "DMS",
+    "region": "dms-fips",
+    "signingRegion": "us-isob-east-1",
+    "hostname": "dms.us-isob-east-1.sc2s.sgov.gov"
+  },
+  {
+    "endpointPrefix": "data.iot",
+    "clientName": "IotData",
+    "region": "fips-us-gov-east-1",
+    "signingRegion": "us-gov-east-1",
+    "hostname": "data.iot-fips.us-gov-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "data.iot",
+    "clientName": "IotData",
+    "region": "fips-us-gov-west-1",
+    "signingRegion": "us-gov-west-1",
+    "hostname": "data.iot-fips.us-gov-west-1.amazonaws.com"
+  },
+
+  {
+    "endpointPrefix": "data.iot",
+    "clientName": "IotData",
+    "region": "fips-ca-central-1",
+    "signingRegion": "ca-central-1",
+    "hostname": "data.iot-fips.ca-central-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "data.iot",
+    "clientName": "IotData",
+    "region": "fips-us-east-1",
+    "signingRegion": "us-east-1",
+    "hostname": "data.iot-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "data.iot",
+    "clientName": "IotData",
+    "region": "fips-us-east-2",
+    "signingRegion": "us-east-2",
+    "hostname": "data.iot-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "data.iot",
+    "clientName": "IotData",
+    "region": "fips-us-west-1",
+    "signingRegion": "us-west-1",
+    "hostname": "data.iot-fips.us-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "data.iot",
+    "clientName": "IotData",
+    "region": "fips-us-west-2",
+    "signingRegion": "us-west-2",
+    "hostname": "data.iot-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "servicediscovery",
+    "clientName": "ServiceDiscovery",
+    "region": "servicediscovery-fips",
+    "signingRegion": "ca-central-1",
+    "hostname": "servicediscovery-fips.ca-central-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "servicediscovery",
+    "clientName": "ServiceDiscovery",
+    "region": "servicediscovery-fips",
+    "signingRegion": "us-gov-west-1",
+    "hostname": "servicediscovery-fips.us-gov-west-1.amazonaws.com"
+  }
+]

@@ -602,41 +602,6 @@
     "hostname": "config-fips.us-west-2.amazonaws.com"
   },
   {
-    "endpointPrefix": "data.iot",
-    "clientName": "IotData",
-    "region": "fips-ca-central-1",
-    "signingRegion": "ca-central-1",
-    "hostname": "data.iot-fips.ca-central-1.amazonaws.com"
-  },
-  {
-    "endpointPrefix": "data.iot",
-    "clientName": "IotData",
-    "region": "fips-us-east-1",
-    "signingRegion": "us-east-1",
-    "hostname": "data.iot-fips.us-east-1.amazonaws.com"
-  },
-  {
-    "endpointPrefix": "data.iot",
-    "clientName": "IotData",
-    "region": "fips-us-east-2",
-    "signingRegion": "us-east-2",
-    "hostname": "data.iot-fips.us-east-2.amazonaws.com"
-  },
-  {
-    "endpointPrefix": "data.iot",
-    "clientName": "IotData",
-    "region": "fips-us-west-1",
-    "signingRegion": "us-west-1",
-    "hostname": "data.iot-fips.us-west-1.amazonaws.com"
-  },
-  {
-    "endpointPrefix": "data.iot",
-    "clientName": "IotData",
-    "region": "fips-us-west-2",
-    "signingRegion": "us-west-2",
-    "hostname": "data.iot-fips.us-west-2.amazonaws.com"
-  },
-  {
     "endpointPrefix": "data.jobs.iot",
     "clientName": "IoTJobsDataPlane",
     "region": "fips-ca-central-1",
@@ -2506,13 +2471,6 @@
     "hostname": "servicecatalog-appregistry-fips.us-west-2.amazonaws.com"
   },
   {
-    "endpointPrefix": "servicediscovery",
-    "clientName": "ServiceDiscovery",
-    "region": "servicediscovery-fips",
-    "signingRegion": "ca-central-1",
-    "hostname": "servicediscovery-fips.ca-central-1.amazonaws.com"
-  },
-  {
     "endpointPrefix": "session.qldb",
     "clientName": "QLDBSession",
     "region": "fips-us-east-1",
@@ -3444,20 +3402,6 @@
     "hostname": "config.us-gov-west-1.amazonaws.com"
   },
   {
-    "endpointPrefix": "data.iot",
-    "clientName": "IotData",
-    "region": "fips-us-gov-east-1",
-    "signingRegion": "us-gov-east-1",
-    "hostname": "data.iot-fips.us-gov-east-1.amazonaws.com"
-  },
-  {
-    "endpointPrefix": "data.iot",
-    "clientName": "IotData",
-    "region": "fips-us-gov-west-1",
-    "signingRegion": "us-gov-west-1",
-    "hostname": "data.iot-fips.us-gov-west-1.amazonaws.com"
-  },
-  {
     "endpointPrefix": "data.jobs.iot",
     "clientName": "IoTJobsDataPlane",
     "region": "fips-us-gov-east-1",
@@ -3953,13 +3897,6 @@
     "region": "fips-us-gov-west-1",
     "signingRegion": "us-gov-west-1",
     "hostname": "servicecatalog-appregistry.us-gov-west-1.amazonaws.com"
-  },
-  {
-    "endpointPrefix": "servicediscovery",
-    "clientName": "ServiceDiscovery",
-    "region": "servicediscovery-fips",
-    "signingRegion": "us-gov-west-1",
-    "hostname": "servicediscovery-fips.us-gov-west-1.amazonaws.com"
   },
   {
     "endpointPrefix": "servicequotas",

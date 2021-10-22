@@ -78,6 +78,18 @@
     "fips-*/batch": {
       "endpoint": "fips.batch.{region}.amazonaws.com"
     },
+    "fips-*/eks": {
+      "endpoint": "fips.eks.{region}.amazonaws.com"
+    },
+    "fips-*/models.lex": {
+      "endpoint": "models-fips.lex.{region}.amazonaws.com"
+    },
+    "fips-*/runtime.lex": {
+      "endpoint": "runtime-fips.lex.{region}.amazonaws.com"
+    },
+    "fips-*/runtime.sagemaker": {
+      "endpoint": "runtime-fips.sagemaker.{region}.amazonaws.com"
+    },
     "fips-*/streams.dynamodb": {
       "endpoint": "dynamodb-fips.{region}.amazonaws.com"
     },
@@ -90,6 +102,9 @@
     "fips-*/waf": {
       "endpoint": "waf-fips.amazonaws.com"
     },
+    "fips-accesspoint-*/*": {
+      "endpoint": "{service}-accesspoint-fips.{region}.amazonaws.com"
+    },
     "fips-us-gov-east-1/acm-pca": {
       "endpoint": "acm-pca.{region}.amazonaws.com"
     },
@@ -101,6 +116,30 @@
     },
     "fips-us-gov-west-1/batch": {
       "endpoint": "batch.{region}.amazonaws.com"
+    },
+    "fips-us-gov-east-1/config": {
+      "endpoint": "config.{region}.amazonaws.com"
+    },
+    "fips-us-gov-west-1/config": {
+      "endpoint": "config.{region}.amazonaws.com"
+    },
+    "fips-us-gov-east-1/eks": {
+      "endpoint": "eks.{region}.amazonaws.com"
+    },
+    "fips-us-gov-west-1/eks": {
+      "endpoint": "eks.{region}.amazonaws.com"
+    },
+    "fips-us-gov-east-1/elasticmapreduce": {
+      "endpoint": "elasticmapreduce.{region}.amazonaws.com"
+    },
+    "fips-us-gov-west-1/elasticmapreduce": {
+      "endpoint": "elasticmapreduce.{region}.amazonaws.com"
+    },
+    "fips-us-gov-east-1/identitystore": {
+      "endpoint": "identitystore.{region}.amazonaws.com"
+    },
+    "fips-us-gov-west-1/identitystore": {
+      "endpoint": "identitystore.{region}.amazonaws.com"
     },
     "us-gov-east-1-fips/dynamodb": {
       "endpoint": "dynamodb.{region}.amazonaws.com"
@@ -138,20 +177,53 @@
     "fips-aws-us-gov-global/route53": {
       "endpoint": "route53.us-gov.amazonaws.com"
     },
+    "us-gov-east-1-fips/runtime.sagemaker": {
+      "endpoint": "runtime.sagemaker.{region}.amazonaws.com"
+    },
+    "us-gov-west-1-fips/runtime.sagemaker": {
+      "endpoint": "runtime.sagemaker.{region}.amazonaws.com"
+    },
     "fips-us-gov-east-1/servicecatalog-appregistry": {
       "endpoint": "servicecatalog-appregistry.{region}.amazonaws.com"
     },
     "fips-us-gov-west-1/servicecatalog-appregistry": {
       "endpoint": "servicecatalog-appregistry.{region}.amazonaws.com"
     },
+    "fips-us-gov-east-1/servicequotas": {
+      "endpoint": "servicequotas.{region}.amazonaws.com"
+    },
+    "fips-us-gov-west-1/servicequotas": {
+      "endpoint": "servicequotas.{region}.amazonaws.com"
+    },
+    "fips-us-gov-east-1/ssm": {
+      "endpoint": "ssm.{region}.amazonaws.com"
+    },
+    "fips-us-gov-west-1/ssm": {
+      "endpoint": "ssm.{region}.amazonaws.com"
+    },
+    "us-gov-east-1-fips/sts": {
+      "endpoint": "sts.{region}.amazonaws.com"
+    },
+    "us-gov-west-1-fips/sts": {
+      "endpoint": "sts.{region}.amazonaws.com"
+    },
     "fips-us-gov-west-1/states": {
       "endpoint": "states.{region}.amazonaws.com"
+    },
+    "fips-us-gov-east-1/support": {
+      "endpoint": "support.{region}.amazonaws.com"
+    },
+    "fips-us-gov-west-1/support": {
+      "endpoint": "support.{region}.amazonaws.com"
     },
     "us-gov-east-1-fips/streams.dynamodb": {
       "endpoint": "dynamodb.{region}.amazonaws.com"
     },
     "us-gov-west-1-fips/streams.dynamodb": {
       "endpoint": "dynamodb.{region}.amazonaws.com"
+    },
+    "fips-us-iso-east-1/elasticfilesystem": {
+      "endpoint": "elasticfilesystem-fips.{region}.c2s.ic.gov"
     }
   },
 
