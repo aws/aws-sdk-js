@@ -95,117 +95,28 @@
     "fips-accesspoint-*/*": {
       "endpoint": "{service}-accesspoint-fips.{region}.amazonaws.com"
     },
-    "fips-us-gov-east-1/acm-pca": {
-      "endpoint": "acm-pca.{region}.amazonaws.com"
-    },
-    "fips-us-gov-west-1/acm-pca": {
-      "endpoint": "acm-pca.{region}.amazonaws.com"
-    },
-    "fips-us-gov-east-1/batch": {
-      "endpoint": "batch.{region}.amazonaws.com"
-    },
-    "fips-us-gov-west-1/batch": {
-      "endpoint": "batch.{region}.amazonaws.com"
-    },
-    "fips-us-gov-east-1/config": {
-      "endpoint": "config.{region}.amazonaws.com"
-    },
-    "fips-us-gov-west-1/config": {
-      "endpoint": "config.{region}.amazonaws.com"
-    },
-    "fips-us-gov-east-1/eks": {
-      "endpoint": "eks.{region}.amazonaws.com"
-    },
-    "fips-us-gov-west-1/eks": {
-      "endpoint": "eks.{region}.amazonaws.com"
-    },
-    "fips-us-gov-east-1/elasticmapreduce": {
-      "endpoint": "elasticmapreduce.{region}.amazonaws.com"
-    },
-    "fips-us-gov-west-1/elasticmapreduce": {
-      "endpoint": "elasticmapreduce.{region}.amazonaws.com"
-    },
-    "fips-us-gov-east-1/identitystore": {
-      "endpoint": "identitystore.{region}.amazonaws.com"
-    },
-    "fips-us-gov-west-1/identitystore": {
-      "endpoint": "identitystore.{region}.amazonaws.com"
-    },
-    "us-gov-east-1-fips/dynamodb": {
-      "endpoint": "dynamodb.{region}.amazonaws.com"
-    },
-    "us-gov-west-1-fips/dynamodb": {
-      "endpoint": "dynamodb.{region}.amazonaws.com"
-    },
-    "fips-us-gov-east-1/elasticloadbalancing": {
-      "endpoint": "elasticloadbalancing.{region}.amazonaws.com"
-    },
-    "fips-us-gov-west-1/elasticloadbalancing": {
-      "endpoint": "elasticloadbalancing.{region}.amazonaws.com"
-    },
-    "us-gov-east-1-fips/guardduty": {
-      "endpoint": "guardduty.{region}.amazonaws.com"
-    },
-    "us-gov-west-1-fips/guardduty": {
-      "endpoint": "guardduty.{region}.amazonaws.com"
-    },
-    "fips-us-gov-east-1/monitoring": {
-      "endpoint": "monitoring.{region}.amazonaws.com"
-    },
-    "fips-us-gov-west-1/monitoring": {
-      "endpoint": "monitoring.{region}.amazonaws.com"
-    },
-    "fips-aws-us-gov-global/organizations": {
-      "endpoint": "organizations.{region}.amazonaws.com"
-    },
-    "fips-us-gov-east-1/resource-groups": {
-      "endpoint": "resource-groups.{region}.amazonaws.com"
-    },
-    "fips-us-gov-west-1/resource-groups": {
-      "endpoint": "resource-groups.{region}.amazonaws.com"
-    },
+    "fips-us-gov-*/acm-pca": "fipsWithServiceOnly",
+    "fips-us-gov-*/batch": "fipsWithServiceOnly",
+    "fips-us-gov-*/config": "fipsWithServiceOnly",
+    "fips-us-gov-*/eks": "fipsWithServiceOnly",
+    "fips-us-gov-*/elasticmapreduce": "fipsWithServiceOnly",
+    "fips-us-gov-*/identitystore": "fipsWithServiceOnly",
+    "fips-us-gov-*/dynamodb": "fipsWithServiceOnly",
+    "fips-us-gov-*/elasticloadbalancing": "fipsWithServiceOnly",
+    "fips-us-gov-*/guardduty": "fipsWithServiceOnly",
+    "fips-us-gov-*/monitoring": "fipsWithServiceOnly",
+    "fips-aws-us-gov-global/organizations": "fipsWithServiceOnly",
+    "fips-us-gov-*/resource-groups": "fipsWithServiceOnly",
     "fips-aws-us-gov-global/route53": {
       "endpoint": "route53.us-gov.amazonaws.com"
     },
-    "us-gov-east-1-fips/runtime.sagemaker": {
-      "endpoint": "runtime.sagemaker.{region}.amazonaws.com"
-    },
-    "us-gov-west-1-fips/runtime.sagemaker": {
-      "endpoint": "runtime.sagemaker.{region}.amazonaws.com"
-    },
-    "fips-us-gov-east-1/servicecatalog-appregistry": {
-      "endpoint": "servicecatalog-appregistry.{region}.amazonaws.com"
-    },
-    "fips-us-gov-west-1/servicecatalog-appregistry": {
-      "endpoint": "servicecatalog-appregistry.{region}.amazonaws.com"
-    },
-    "fips-us-gov-east-1/servicequotas": {
-      "endpoint": "servicequotas.{region}.amazonaws.com"
-    },
-    "fips-us-gov-west-1/servicequotas": {
-      "endpoint": "servicequotas.{region}.amazonaws.com"
-    },
-    "fips-us-gov-east-1/ssm": {
-      "endpoint": "ssm.{region}.amazonaws.com"
-    },
-    "fips-us-gov-west-1/ssm": {
-      "endpoint": "ssm.{region}.amazonaws.com"
-    },
-    "us-gov-east-1-fips/sts": {
-      "endpoint": "sts.{region}.amazonaws.com"
-    },
-    "us-gov-west-1-fips/sts": {
-      "endpoint": "sts.{region}.amazonaws.com"
-    },
-    "fips-us-gov-west-1/states": {
-      "endpoint": "states.{region}.amazonaws.com"
-    },
-    "fips-us-gov-east-1/support": {
-      "endpoint": "support.{region}.amazonaws.com"
-    },
-    "fips-us-gov-west-1/support": {
-      "endpoint": "support.{region}.amazonaws.com"
-    },
+    "fips-us-gov-*/runtime.sagemaker": "fipsWithServiceOnly",
+    "fips-us-gov-*/servicecatalog-appregistry": "fipsWithServiceOnly",
+    "fips-us-gov-*/servicequotas": "fipsWithServiceOnly",
+    "fips-us-gov-*/ssm": "fipsWithServiceOnly",
+    "fips-us-gov-*/sts": "fipsWithServiceOnly",
+    "fips-us-gov-west-1/states": "fipsWithServiceOnly",
+    "fips-us-gov-*/support": "fipsWithServiceOnly",
     "us-gov-east-1-fips/streams.dynamodb": {
       "endpoint": "dynamodb.{region}.amazonaws.com"
     },
@@ -249,6 +160,9 @@
     },
     "fips.runtime.lex": {
       "endpoint": "runtime-fips.lex.{region}.amazonaws.com"
+    },
+    "fipsWithServiceOnly": {
+      "endpoint": "{service}.{region}.amazonaws.com"
     }
   }
 }
