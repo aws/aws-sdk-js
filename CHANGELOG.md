@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1012.0-->
+<!--LATEST=2.1013.0-->
 <!--ENTRYINSERT-->
+
+## 2.1013.0
+* bugfix: endpoint: Support FIPS in endpoint heuristics
+* feature: AuditManager: This release introduces character restrictions for ControlSet names. We updated regex patterns for the following attributes: ControlSet, CreateAssessmentFrameworkControlSet, and UpdateAssessmentFrameworkControlSet.
+* feature: Chime: Chime VoiceConnector and VoiceConnectorGroup APIs will now return an ARN.
+* feature: QuickSight: Added QSearchBar option for GenerateEmbedUrlForRegisteredUser ExperienceConfiguration to support Q search bar embedding
+* feature: rest-json: Update serialization of Rest-JSON API input and Content-Type
 
 ## 2.1012.0
 * feature: Appflow: Feature to add support for  JSON-L format for S3 as a source.

@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.1012.0',
+	  VERSION: '2.1013.0',
 
 	  /**
 	   * @api private
@@ -3077,30 +3077,24 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var params = {};
 	    var payloadShape = input.members[input.payload];
 	    params = req.params[input.payload];
-	    if (params === undefined) return;
 
 	    if (payloadShape.type === 'structure') {
-	      req.httpRequest.body = builder.build(params, payloadShape);
+	      req.httpRequest.body = builder.build(params || {}, payloadShape);
 	      applyContentTypeHeader(req);
-	    } else { // non-JSON payload
+	    } else if (params !== undefined) {
+	      // non-JSON payload
 	      req.httpRequest.body = params;
 	      if (payloadShape.type === 'binary' || payloadShape.isStreaming) {
 	        applyContentTypeHeader(req, true);
 	      }
 	    }
 	  } else {
-	    var body = builder.build(req.params, input);
-	    if (body !== '{}' || req.httpRequest.method !== 'GET') { //don't send empty body for GET method
-	      req.httpRequest.body = body;
-	    }
+	    req.httpRequest.body = builder.build(req.params, input);
 	    applyContentTypeHeader(req);
 	  }
 	}
 
 	function applyContentTypeHeader(req, isBinary) {
-	  var operation = req.service.api.operations[req.operation];
-	  var input = operation.input;
-
 	  if (!req.httpRequest.headers['Content-Type']) {
 	    var type = isBinary ? 'binary/octet-stream' : 'application/json';
 	    req.httpRequest.headers['Content-Type'] = type;
@@ -3110,8 +3104,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	function buildRequest(req) {
 	  Rest.buildRequest(req);
 
-	  // never send body payload on HEAD/DELETE
-	  if (['HEAD', 'DELETE'].indexOf(req.httpRequest.method) < 0) {
+	  // never send body payload on GET/HEAD/DELETE
+	  if (['GET', 'HEAD', 'DELETE'].indexOf(req.httpRequest.method) < 0) {
 	    populateBody(req);
 	  }
 	}
@@ -4877,7 +4871,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    var e = endpoint;
 	    e = e.replace(/\{service\}/g, this.api.endpointPrefix);
-	    e = e.replace(/\{region\}/g, this.config.region);
+	    e = e.replace(/\{region\}/g, regionConfig.getRealRegion(this.config.region));
 	    e = e.replace(/\{scheme\}/g, this.config.sslEnabled ? 'https' : 'http');
 	    return e;
 	  },
@@ -5084,6 +5078,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function generateRegionPrefix(region) {
 	  if (!region) return null;
+	  if (isFipsRegion(region)) {
+	    if (isFipsCnRegion(region)) return 'fips-cn-*';
+	    return 'fips-*';
+	  }
 
 	  var parts = region.split('-');
 	  if (parts.length < 3) return null;
@@ -5137,6 +5135,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	        );
 	      }
 
+	      // set FIPS signingRegion and endpoint.
+	      if (isFipsRegion(service.config.region)) {
+	        config = util.copy(config);
+	        service.signingRegion = getRealRegion(service.config.region);
+	      }
+
 	      // set global endpoint
 	      service.isGlobalEndpoint = !!config.globalEndpoint;
 	      if (config.signingRegion) {
@@ -5171,12 +5175,35 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return defaultSuffix;
 	}
 
+	function isFipsRegion(region) {
+	  return region && (region.startsWith('fips-') || region.endsWith('-fips'));
+	}
+
+	function isFipsCnRegion(region) {
+	  return (
+	    region &&
+	    region.startsWith('fips-cn-') ||
+	    (region.startsWith('cn-') && region.endsWith('-fips'))
+	  );
+	}
+
+	function getRealRegion(region) {
+	  return isFipsRegion(region)
+	    ? ['fips-aws-global', 'aws-fips'].includes(region)
+	      ? 'us-east-1'
+	      : region === 'fips-aws-us-gov-global'
+	      ? 'us-gov-west-1'
+	      : region.replace(/fips-(dkr-|prod-)?|-fips/, '')
+	    : region;
+	}
+
 	/**
 	 * @api private
 	 */
 	module.exports = {
 	  configureEndpoint: configureEndpoint,
-	  getEndpointSuffix: getEndpointSuffix
+	  getEndpointSuffix: getEndpointSuffix,
+	  getRealRegion: getRealRegion,
 	};
 
 
@@ -5184,7 +5211,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 39 */
 /***/ (function(module, exports) {
 
-	module.exports = {"rules":{"*/*":{"endpoint":"{service}.{region}.amazonaws.com"},"cn-*/*":{"endpoint":"{service}.{region}.amazonaws.com.cn"},"us-iso-*/*":{"endpoint":"{service}.{region}.c2s.ic.gov"},"us-isob-*/*":{"endpoint":"{service}.{region}.sc2s.sgov.gov"},"*/budgets":"globalSSL","*/cloudfront":"globalSSL","*/sts":"globalSSL","*/importexport":{"endpoint":"{service}.amazonaws.com","signatureVersion":"v2","globalEndpoint":true},"*/route53":"globalSSL","cn-*/route53":{"endpoint":"{service}.amazonaws.com.cn","globalEndpoint":true,"signingRegion":"cn-northwest-1"},"us-gov-*/route53":"globalGovCloud","*/waf":"globalSSL","*/iam":"globalSSL","cn-*/iam":{"endpoint":"{service}.cn-north-1.amazonaws.com.cn","globalEndpoint":true,"signingRegion":"cn-north-1"},"us-gov-*/iam":"globalGovCloud","us-gov-*/sts":{"endpoint":"{service}.{region}.amazonaws.com"},"us-gov-west-1/s3":"s3signature","us-west-1/s3":"s3signature","us-west-2/s3":"s3signature","eu-west-1/s3":"s3signature","ap-southeast-1/s3":"s3signature","ap-southeast-2/s3":"s3signature","ap-northeast-1/s3":"s3signature","sa-east-1/s3":"s3signature","us-east-1/s3":{"endpoint":"{service}.amazonaws.com","signatureVersion":"s3"},"us-east-1/sdb":{"endpoint":"{service}.amazonaws.com","signatureVersion":"v2"},"*/sdb":{"endpoint":"{service}.{region}.amazonaws.com","signatureVersion":"v2"}},"patterns":{"globalSSL":{"endpoint":"https://{service}.amazonaws.com","globalEndpoint":true,"signingRegion":"us-east-1"},"globalGovCloud":{"endpoint":"{service}.us-gov.amazonaws.com","globalEndpoint":true,"signingRegion":"us-gov-west-1"},"s3signature":{"endpoint":"{service}.{region}.amazonaws.com","signatureVersion":"s3"}}}
+	module.exports = {"rules":{"*/*":{"endpoint":"{service}.{region}.amazonaws.com"},"fips-*/*":{"endpoint":"{service}-fips.{region}.amazonaws.com"},"fips-cn-*/*":{"endpoint":"{service}-fips.{region}.amazonaws.com.cn"},"cn-*/*":{"endpoint":"{service}.{region}.amazonaws.com.cn"},"us-iso-*/*":{"endpoint":"{service}.{region}.c2s.ic.gov"},"us-isob-*/*":{"endpoint":"{service}.{region}.sc2s.sgov.gov"},"*/budgets":"globalSSL","*/cloudfront":"globalSSL","*/sts":"globalSSL","*/importexport":{"endpoint":"{service}.amazonaws.com","signatureVersion":"v2","globalEndpoint":true},"*/route53":"globalSSL","cn-*/route53":{"endpoint":"{service}.amazonaws.com.cn","globalEndpoint":true,"signingRegion":"cn-northwest-1"},"us-gov-*/route53":"globalGovCloud","*/waf":"globalSSL","*/iam":"globalSSL","cn-*/iam":{"endpoint":"{service}.cn-north-1.amazonaws.com.cn","globalEndpoint":true,"signingRegion":"cn-north-1"},"us-gov-*/iam":"globalGovCloud","us-gov-*/sts":{"endpoint":"{service}.{region}.amazonaws.com"},"us-gov-west-1/s3":"s3signature","us-west-1/s3":"s3signature","us-west-2/s3":"s3signature","eu-west-1/s3":"s3signature","ap-southeast-1/s3":"s3signature","ap-southeast-2/s3":"s3signature","ap-northeast-1/s3":"s3signature","sa-east-1/s3":"s3signature","us-east-1/s3":{"endpoint":"{service}.amazonaws.com","signatureVersion":"s3"},"us-east-1/sdb":{"endpoint":"{service}.amazonaws.com","signatureVersion":"v2"},"*/sdb":{"endpoint":"{service}.{region}.amazonaws.com","signatureVersion":"v2"},"fips-*/api.ecr":{"endpoint":"ecr-fips.{region}.amazonaws.com"},"fips-*/api.sagemaker":{"endpoint":"api-fips.sagemaker.{region}.amazonaws.com"},"fips-*/batch":{"endpoint":"fips.batch.{region}.amazonaws.com"},"fips-*/streams.dynamodb":{"endpoint":"dynamodb-fips.{region}.amazonaws.com"},"fips-*/route53":{"endpoint":"route53-fips.amazonaws.com"},"fips-*/transcribe":{"endpoint":"fips.transcribe.{region}.amazonaws.com"},"fips-*/waf":{"endpoint":"waf-fips.amazonaws.com"},"fips-us-gov-east-1/acm-pca":{"endpoint":"acm-pca.{region}.amazonaws.com"},"fips-us-gov-west-1/acm-pca":{"endpoint":"acm-pca.{region}.amazonaws.com"},"fips-us-gov-east-1/batch":{"endpoint":"batch.{region}.amazonaws.com"},"fips-us-gov-west-1/batch":{"endpoint":"batch.{region}.amazonaws.com"},"us-gov-east-1-fips/dynamodb":{"endpoint":"dynamodb.{region}.amazonaws.com"},"us-gov-west-1-fips/dynamodb":{"endpoint":"dynamodb.{region}.amazonaws.com"},"fips-us-gov-east-1/elasticloadbalancing":{"endpoint":"elasticloadbalancing.{region}.amazonaws.com"},"fips-us-gov-west-1/elasticloadbalancing":{"endpoint":"elasticloadbalancing.{region}.amazonaws.com"},"us-gov-east-1-fips/guardduty":{"endpoint":"guardduty.{region}.amazonaws.com"},"us-gov-west-1-fips/guardduty":{"endpoint":"guardduty.{region}.amazonaws.com"},"fips-us-gov-east-1/monitoring":{"endpoint":"monitoring.{region}.amazonaws.com"},"fips-us-gov-west-1/monitoring":{"endpoint":"monitoring.{region}.amazonaws.com"},"fips-aws-us-gov-global/organizations":{"endpoint":"organizations.{region}.amazonaws.com"},"fips-us-gov-east-1/resource-groups":{"endpoint":"resource-groups.{region}.amazonaws.com"},"fips-us-gov-west-1/resource-groups":{"endpoint":"resource-groups.{region}.amazonaws.com"},"fips-aws-us-gov-global/route53":{"endpoint":"route53.us-gov.amazonaws.com"},"fips-us-gov-east-1/servicecatalog-appregistry":{"endpoint":"servicecatalog-appregistry.{region}.amazonaws.com"},"fips-us-gov-west-1/servicecatalog-appregistry":{"endpoint":"servicecatalog-appregistry.{region}.amazonaws.com"},"fips-us-gov-west-1/states":{"endpoint":"states.{region}.amazonaws.com"},"us-gov-east-1-fips/streams.dynamodb":{"endpoint":"dynamodb.{region}.amazonaws.com"},"us-gov-west-1-fips/streams.dynamodb":{"endpoint":"dynamodb.{region}.amazonaws.com"}},"patterns":{"globalSSL":{"endpoint":"https://{service}.amazonaws.com","globalEndpoint":true,"signingRegion":"us-east-1"},"globalGovCloud":{"endpoint":"{service}.us-gov.amazonaws.com","globalEndpoint":true,"signingRegion":"us-gov-west-1"},"s3signature":{"endpoint":"{service}.{region}.amazonaws.com","signatureVersion":"s3"}}}
 
 /***/ }),
 /* 40 */
@@ -8482,12 +8509,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var region = service.config.region;
 	    var customUserAgent = service.config.customUserAgent;
 
-	    if (service.isGlobalEndpoint) {
-	      if (service.signingRegion) {
-	        region = service.signingRegion;
-	      } else {
-	        region = 'us-east-1';
-	      }
+	    if (service.signingRegion) {
+	      region = service.signingRegion;
+	    } else if (service.isGlobalEndpoint) {
+	      region = 'us-east-1';
 	    }
 
 	    this.domain = domain && domain.active;

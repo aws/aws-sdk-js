@@ -6581,6 +6581,10 @@ declare namespace Chime {
      * The updated Amazon Chime Voice Connector timestamp, in ISO 8601 format.
      */
     UpdatedTimestamp?: Iso8601Timestamp;
+    /**
+     * The ARN of the specified Amazon Chime Voice Connector.
+     */
+    VoiceConnectorArn?: NonEmptyString;
   }
   export type VoiceConnectorAwsRegion = "us-east-1"|"us-west-2"|string;
   export interface VoiceConnectorGroup {
@@ -6604,6 +6608,10 @@ declare namespace Chime {
      * The updated Amazon Chime Voice Connector group time stamp, in ISO 8601 format.
      */
     UpdatedTimestamp?: Iso8601Timestamp;
+    /**
+     * The ARN of the specified Amazon Chime Voice Connector group.
+     */
+    VoiceConnectorGroupArn?: NonEmptyString;
   }
   export type VoiceConnectorGroupList = VoiceConnectorGroup[];
   export type VoiceConnectorGroupName = string;

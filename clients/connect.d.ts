@@ -92,11 +92,11 @@ declare class Connect extends Service {
    */
   createContactFlow(callback?: (err: AWSError, data: Connect.Types.CreateContactFlowResponse) => void): Request<Connect.Types.CreateContactFlowResponse, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and is subject to change. Creates hours of operation. 
+   * Creates hours of operation. 
    */
   createHoursOfOperation(params: Connect.Types.CreateHoursOfOperationRequest, callback?: (err: AWSError, data: Connect.Types.CreateHoursOfOperationResponse) => void): Request<Connect.Types.CreateHoursOfOperationResponse, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and is subject to change. Creates hours of operation. 
+   * Creates hours of operation. 
    */
   createHoursOfOperation(callback?: (err: AWSError, data: Connect.Types.CreateHoursOfOperationResponse) => void): Request<Connect.Types.CreateHoursOfOperationResponse, AWSError>;
   /**
@@ -164,11 +164,11 @@ declare class Connect extends Service {
    */
   createUserHierarchyGroup(callback?: (err: AWSError, data: Connect.Types.CreateUserHierarchyGroupResponse) => void): Request<Connect.Types.CreateUserHierarchyGroupResponse, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and is subject to change. Deletes an hours of operation.
+   * Deletes an hours of operation.
    */
   deleteHoursOfOperation(params: Connect.Types.DeleteHoursOfOperationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and is subject to change. Deletes an hours of operation.
+   * Deletes an hours of operation.
    */
   deleteHoursOfOperation(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -236,11 +236,11 @@ declare class Connect extends Service {
    */
   describeContactFlow(callback?: (err: AWSError, data: Connect.Types.DescribeContactFlowResponse) => void): Request<Connect.Types.DescribeContactFlowResponse, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and is subject to change. Describes the hours of operation.
+   * Describes the hours of operation.
    */
   describeHoursOfOperation(params: Connect.Types.DescribeHoursOfOperationRequest, callback?: (err: AWSError, data: Connect.Types.DescribeHoursOfOperationResponse) => void): Request<Connect.Types.DescribeHoursOfOperationResponse, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and is subject to change. Describes the hours of operation.
+   * Describes the hours of operation.
    */
   describeHoursOfOperation(callback?: (err: AWSError, data: Connect.Types.DescribeHoursOfOperationResponse) => void): Request<Connect.Types.DescribeHoursOfOperationResponse, AWSError>;
   /**
@@ -716,11 +716,11 @@ declare class Connect extends Service {
    */
   updateContactFlowName(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and is subject to change. Updates the hours of operation.
+   * Updates the hours of operation.
    */
   updateHoursOfOperation(params: Connect.Types.UpdateHoursOfOperationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and is subject to change. Updates the hours of operation.
+   * Updates the hours of operation.
    */
   updateHoursOfOperation(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -2334,11 +2334,11 @@ declare namespace Connect {
      */
     Day: HoursOfOperationDays;
     /**
-     * The start time that your contact center is open.
+     * The start time that your contact center opens.
      */
     StartTime: HoursOfOperationTimeSlice;
     /**
-     * The end time that your contact center is closes.
+     * The end time that your contact center closes.
      */
     EndTime: HoursOfOperationTimeSlice;
   }
@@ -2849,7 +2849,7 @@ declare namespace Connect {
      */
     NextToken?: NextToken;
     /**
-     * The maximum number of results to return per page.
+     * The maximum number of results to return per page. If no value is specified, the default is 10. 
      */
     MaxResults?: MaxResult25;
   }

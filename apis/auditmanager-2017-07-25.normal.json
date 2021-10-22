@@ -458,7 +458,7 @@
           "shape": "ResourceNotFoundException"
         }
       ],
-      "documentation": "<p>Removes the specified member account as a delegated administrator for Audit Manager. </p> <important> <p>When you remove a delegated administrator from your Audit Manager settings, or when you deregister a delegated administrator from Organizations, you continue to have access to the evidence that you previously collected under that account. However, Audit Manager will stop collecting and attaching evidence to that delegated administrator account moving forward.</p> </important>"
+      "documentation": "<p>Removes the specified member Amazon Web Services account as a delegated administrator for Audit Manager. </p> <important> <p>When you remove a delegated administrator from your Audit Manager settings, or when you deregister a delegated administrator from Organizations, you continue to have access to the evidence that you previously collected under that account. However, Audit Manager will stop collecting and attaching evidence to that delegated administrator account moving forward.</p> </important>"
     },
     "DisassociateAssessmentReportEvidenceFolder": {
       "name": "DisassociateAssessmentReportEvidenceFolder",
@@ -885,7 +885,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p> Returns the settings for the specified account. </p>"
+      "documentation": "<p> Returns the settings for the specified Amazon Web Services account. </p>"
     },
     "ListAssessmentFrameworks": {
       "name": "ListAssessmentFrameworks",
@@ -1088,7 +1088,7 @@
           "shape": "ResourceNotFoundException"
         }
       ],
-      "documentation": "<p> Enables Audit Manager for the specified account. </p>"
+      "documentation": "<p> Enables Audit Manager for the specified Amazon Web Services account. </p>"
     },
     "RegisterOrganizationAdminAccount": {
       "name": "RegisterOrganizationAdminAccount",
@@ -1116,7 +1116,7 @@
           "shape": "ResourceNotFoundException"
         }
       ],
-      "documentation": "<p> Enables an account within the organization as the delegated administrator for Audit Manager. </p>"
+      "documentation": "<p> Enables an Amazon Web Services account within the organization as the delegated administrator for Audit Manager. </p>"
     },
     "TagResource": {
       "name": "TagResource",
@@ -1396,18 +1396,18 @@
       "members": {
         "id": {
           "shape": "AccountId",
-          "documentation": "<p> The identifier for the specified account. </p>"
+          "documentation": "<p> The identifier for the specified Amazon Web Services account. </p>"
         },
         "emailAddress": {
           "shape": "EmailAddress",
-          "documentation": "<p> The email address associated with the specified account. </p>"
+          "documentation": "<p> The email address associated with the specified Amazon Web Services account. </p>"
         },
         "name": {
           "shape": "AccountName",
-          "documentation": "<p> The name of the specified account. </p>"
+          "documentation": "<p> The name of the specified Amazon Web Services account. </p>"
         }
       },
-      "documentation": "<p> The wrapper of account details, such as account ID, email address, and so on. </p>"
+      "documentation": "<p> The wrapper of Amazon Web Services account details, such as account ID, email address, and so on. </p>"
     },
     "AWSAccounts": {
       "type": "list",
@@ -1489,7 +1489,7 @@
         },
         "awsAccount": {
           "shape": "AWSAccount",
-          "documentation": "<p> The account associated with the assessment. </p>"
+          "documentation": "<p> The Amazon Web Services account associated with the assessment. </p>"
         },
         "metadata": {
           "shape": "AssessmentMetadata",
@@ -1799,7 +1799,7 @@
         },
         "scope": {
           "shape": "Scope",
-          "documentation": "<p> The wrapper of accounts and services in scope for the assessment. </p>"
+          "documentation": "<p> The wrapper of Amazon Web Services accounts and services in scope for the assessment. </p>"
         },
         "roles": {
           "shape": "Roles",
@@ -1881,7 +1881,7 @@
         },
         "awsAccountId": {
           "shape": "AccountId",
-          "documentation": "<p> The identifier for the specified account. </p>"
+          "documentation": "<p> The identifier for the specified Amazon Web Services account. </p>"
         },
         "assessmentId": {
           "shape": "UUID",
@@ -2560,7 +2560,7 @@
       "type": "string",
       "max": 300,
       "min": 1,
-      "pattern": "^[^\\_]*$"
+      "pattern": "^[^\\\\\\_]*$"
     },
     "ControlSetStatus": {
       "type": "string",
@@ -3167,7 +3167,7 @@
         },
         "evidenceAwsAccountId": {
           "shape": "AccountId",
-          "documentation": "<p> The identifier for the specified account. </p>"
+          "documentation": "<p> The identifier for the specified Amazon Web Services account. </p>"
         },
         "time": {
           "shape": "Timestamp",
@@ -3203,11 +3203,11 @@
         },
         "awsOrganization": {
           "shape": "String",
-          "documentation": "<p> The account from which the evidence is collected, and its organization path. </p>"
+          "documentation": "<p> The Amazon Web Services account from which the evidence is collected, and its organization path. </p>"
         },
         "awsAccountId": {
           "shape": "AccountId",
-          "documentation": "<p> The identifier for the specified account. </p>"
+          "documentation": "<p> The identifier for the specified Amazon Web Services account. </p>"
         },
         "evidenceFolderId": {
           "shape": "UUID",
@@ -3393,7 +3393,7 @@
       "members": {
         "status": {
           "shape": "AccountStatus",
-          "documentation": "<p> The status of the specified account. </p>"
+          "documentation": "<p> The status of the specified Amazon Web Services account. </p>"
         }
       }
     },
@@ -4333,14 +4333,14 @@
       "members": {
         "awsAccounts": {
           "shape": "AWSAccounts",
-          "documentation": "<p> The accounts included in the scope of the assessment. </p>"
+          "documentation": "<p> The Amazon Web Services accounts included in the scope of the assessment. </p>"
         },
         "awsServices": {
           "shape": "AWSServices",
           "documentation": "<p> The Amazon Web Services services included in the scope of the assessment. </p>"
         }
       },
-      "documentation": "<p> The wrapper that contains the accounts and services in scope for the assessment. </p>"
+      "documentation": "<p> The wrapper that contains the Amazon Web Services accounts and services in scope for the assessment. </p>"
     },
     "ServiceMetadata": {
       "type": "structure",

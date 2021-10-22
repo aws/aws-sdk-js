@@ -132,11 +132,11 @@ declare class AuditManager extends Service {
    */
   deregisterAccount(callback?: (err: AWSError, data: AuditManager.Types.DeregisterAccountResponse) => void): Request<AuditManager.Types.DeregisterAccountResponse, AWSError>;
   /**
-   * Removes the specified member account as a delegated administrator for Audit Manager.   When you remove a delegated administrator from your Audit Manager settings, or when you deregister a delegated administrator from Organizations, you continue to have access to the evidence that you previously collected under that account. However, Audit Manager will stop collecting and attaching evidence to that delegated administrator account moving forward. 
+   * Removes the specified member Amazon Web Services account as a delegated administrator for Audit Manager.   When you remove a delegated administrator from your Audit Manager settings, or when you deregister a delegated administrator from Organizations, you continue to have access to the evidence that you previously collected under that account. However, Audit Manager will stop collecting and attaching evidence to that delegated administrator account moving forward. 
    */
   deregisterOrganizationAdminAccount(params: AuditManager.Types.DeregisterOrganizationAdminAccountRequest, callback?: (err: AWSError, data: AuditManager.Types.DeregisterOrganizationAdminAccountResponse) => void): Request<AuditManager.Types.DeregisterOrganizationAdminAccountResponse, AWSError>;
   /**
-   * Removes the specified member account as a delegated administrator for Audit Manager.   When you remove a delegated administrator from your Audit Manager settings, or when you deregister a delegated administrator from Organizations, you continue to have access to the evidence that you previously collected under that account. However, Audit Manager will stop collecting and attaching evidence to that delegated administrator account moving forward. 
+   * Removes the specified member Amazon Web Services account as a delegated administrator for Audit Manager.   When you remove a delegated administrator from your Audit Manager settings, or when you deregister a delegated administrator from Organizations, you continue to have access to the evidence that you previously collected under that account. However, Audit Manager will stop collecting and attaching evidence to that delegated administrator account moving forward. 
    */
   deregisterOrganizationAdminAccount(callback?: (err: AWSError, data: AuditManager.Types.DeregisterOrganizationAdminAccountResponse) => void): Request<AuditManager.Types.DeregisterOrganizationAdminAccountResponse, AWSError>;
   /**
@@ -260,11 +260,11 @@ declare class AuditManager extends Service {
    */
   getServicesInScope(callback?: (err: AWSError, data: AuditManager.Types.GetServicesInScopeResponse) => void): Request<AuditManager.Types.GetServicesInScopeResponse, AWSError>;
   /**
-   *  Returns the settings for the specified account. 
+   *  Returns the settings for the specified Amazon Web Services account. 
    */
   getSettings(params: AuditManager.Types.GetSettingsRequest, callback?: (err: AWSError, data: AuditManager.Types.GetSettingsResponse) => void): Request<AuditManager.Types.GetSettingsResponse, AWSError>;
   /**
-   *  Returns the settings for the specified account. 
+   *  Returns the settings for the specified Amazon Web Services account. 
    */
   getSettings(callback?: (err: AWSError, data: AuditManager.Types.GetSettingsResponse) => void): Request<AuditManager.Types.GetSettingsResponse, AWSError>;
   /**
@@ -324,19 +324,19 @@ declare class AuditManager extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: AuditManager.Types.ListTagsForResourceResponse) => void): Request<AuditManager.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   *  Enables Audit Manager for the specified account. 
+   *  Enables Audit Manager for the specified Amazon Web Services account. 
    */
   registerAccount(params: AuditManager.Types.RegisterAccountRequest, callback?: (err: AWSError, data: AuditManager.Types.RegisterAccountResponse) => void): Request<AuditManager.Types.RegisterAccountResponse, AWSError>;
   /**
-   *  Enables Audit Manager for the specified account. 
+   *  Enables Audit Manager for the specified Amazon Web Services account. 
    */
   registerAccount(callback?: (err: AWSError, data: AuditManager.Types.RegisterAccountResponse) => void): Request<AuditManager.Types.RegisterAccountResponse, AWSError>;
   /**
-   *  Enables an account within the organization as the delegated administrator for Audit Manager. 
+   *  Enables an Amazon Web Services account within the organization as the delegated administrator for Audit Manager. 
    */
   registerOrganizationAdminAccount(params: AuditManager.Types.RegisterOrganizationAdminAccountRequest, callback?: (err: AWSError, data: AuditManager.Types.RegisterOrganizationAdminAccountResponse) => void): Request<AuditManager.Types.RegisterOrganizationAdminAccountResponse, AWSError>;
   /**
-   *  Enables an account within the organization as the delegated administrator for Audit Manager. 
+   *  Enables an Amazon Web Services account within the organization as the delegated administrator for Audit Manager. 
    */
   registerOrganizationAdminAccount(callback?: (err: AWSError, data: AuditManager.Types.RegisterOrganizationAdminAccountResponse) => void): Request<AuditManager.Types.RegisterOrganizationAdminAccountResponse, AWSError>;
   /**
@@ -423,15 +423,15 @@ declare class AuditManager extends Service {
 declare namespace AuditManager {
   export interface AWSAccount {
     /**
-     *  The identifier for the specified account. 
+     *  The identifier for the specified Amazon Web Services account. 
      */
     id?: AccountId;
     /**
-     *  The email address associated with the specified account. 
+     *  The email address associated with the specified Amazon Web Services account. 
      */
     emailAddress?: EmailAddress;
     /**
-     *  The name of the specified account. 
+     *  The name of the specified Amazon Web Services account. 
      */
     name?: AccountName;
   }
@@ -456,7 +456,7 @@ declare namespace AuditManager {
      */
     arn?: AuditManagerArn;
     /**
-     *  The account associated with the assessment. 
+     *  The Amazon Web Services account associated with the assessment. 
      */
     awsAccount?: AWSAccount;
     /**
@@ -711,7 +711,7 @@ declare namespace AuditManager {
      */
     assessmentReportsDestination?: AssessmentReportsDestination;
     /**
-     *  The wrapper of accounts and services in scope for the assessment. 
+     *  The wrapper of Amazon Web Services accounts and services in scope for the assessment. 
      */
     scope?: Scope;
     /**
@@ -780,7 +780,7 @@ declare namespace AuditManager {
      */
     description?: AssessmentReportDescription;
     /**
-     *  The identifier for the specified account. 
+     *  The identifier for the specified Amazon Web Services account. 
      */
     awsAccountId?: AccountId;
     /**
@@ -1559,7 +1559,7 @@ declare namespace AuditManager {
      */
     dataSource?: String;
     /**
-     *  The identifier for the specified account. 
+     *  The identifier for the specified Amazon Web Services account. 
      */
     evidenceAwsAccountId?: AccountId;
     /**
@@ -1595,11 +1595,11 @@ declare namespace AuditManager {
      */
     complianceCheck?: String;
     /**
-     *  The account from which the evidence is collected, and its organization path. 
+     *  The Amazon Web Services account from which the evidence is collected, and its organization path. 
      */
     awsOrganization?: String;
     /**
-     *  The identifier for the specified account. 
+     *  The identifier for the specified Amazon Web Services account. 
      */
     awsAccountId?: AccountId;
     /**
@@ -1707,7 +1707,7 @@ declare namespace AuditManager {
   }
   export interface GetAccountStatusResponse {
     /**
-     *  The status of the specified account. 
+     *  The status of the specified Amazon Web Services account. 
      */
     status?: AccountStatus;
   }
@@ -2231,7 +2231,7 @@ declare namespace AuditManager {
   export type SNSTopic = string;
   export interface Scope {
     /**
-     *  The accounts included in the scope of the assessment. 
+     *  The Amazon Web Services accounts included in the scope of the assessment. 
      */
     awsAccounts?: AWSAccounts;
     /**

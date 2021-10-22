@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "endpoint",
-  "description": "Support FIPS in endpoint heuristics"
-}
