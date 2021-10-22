@@ -3,12 +3,8 @@
     "*/*": {
       "endpoint": "{service}.{region}.amazonaws.com"
     },
-    "fips-*/*": {
-      "endpoint": "{service}-fips.{region}.amazonaws.com"
-    },
-    "fips-us-gov-*/*": {
-      "endpoint": "{service}-fips.{region}.amazonaws.com"
-    },
+    "fips-*/*": "fipsStandard",
+    "fips-us-gov-*/*": "fipsStandard",
     "fips-cn-*/*": {
       "endpoint": "{service}-fips.{region}.amazonaws.com.cn"
     },
@@ -139,6 +135,9 @@
     "s3signature": {
       "endpoint": "{service}.{region}.amazonaws.com",
       "signatureVersion": "s3"
+    },
+    "fipsStandard": {
+      "endpoint": "{service}-fips.{region}.amazonaws.com"
     },
     "fipsDotPrefix": {
       "endpoint": "fips.{service}.{region}.amazonaws.com"
