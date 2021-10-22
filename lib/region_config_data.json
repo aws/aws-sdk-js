@@ -117,10 +117,7 @@
     "fips-us-gov-*/sts": "fipsWithServiceOnly",
     "fips-us-gov-west-1/states": "fipsWithServiceOnly",
     "fips-us-gov-*/support": "fipsWithServiceOnly",
-    "us-gov-east-1-fips/streams.dynamodb": {
-      "endpoint": "dynamodb.{region}.amazonaws.com"
-    },
-    "us-gov-west-1-fips/streams.dynamodb": {
+    "fips-us-gov-*/streams.dynamodb": {
       "endpoint": "dynamodb.{region}.amazonaws.com"
     },
     "fips-us-iso-east-1/elasticfilesystem": {
