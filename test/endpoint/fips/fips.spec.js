@@ -1,4 +1,4 @@
-const test_cases = require('./test_cases.json');
+const test_cases = require('./test_cases_supported.json');
 const helpers = require('../../helpers');
 const AWS = helpers.AWS;
 
