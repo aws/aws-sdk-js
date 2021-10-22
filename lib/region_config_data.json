@@ -102,6 +102,9 @@
     "fips-*/waf": {
       "endpoint": "waf-fips.amazonaws.com"
     },
+    "fips-accesspoint-*/*": {
+      "endpoint": "{service}-accesspoint-fips.{region}.amazonaws.com"
+    },
     "fips-us-gov-east-1/acm-pca": {
       "endpoint": "acm-pca.{region}.amazonaws.com"
     },
