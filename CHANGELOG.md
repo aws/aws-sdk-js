@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1013.0-->
+<!--LATEST=2.1014.0-->
 <!--ENTRYINSERT-->
+
+## 2.1014.0
+* bugfix: endpoint: Update fips endpoint heuristics test to use callback
+* feature: AuditManager: This release introduces a new feature for Audit Manager: Custom framework sharing. You can now share your custom frameworks with another AWS account, or replicate them into another AWS Region under your own account.
+* feature: EC2: This release adds support to create a VPN Connection that is not attached to a Gateway at the time of creation. Use this to create VPNs associated with Core Networks, or modify your VPN and attach a gateway using the modify API after creation.
+* feature: RDS: This release adds support for Amazon RDS Custom, which is a new RDS management type that gives you full access to your database and operating system. For more information, see https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-custom.html
+* feature: Route53Resolver: New API for ResolverConfig, which allows autodefined rules for reverse DNS resolution to be disabled for a VPC
 
 ## 2.1013.0
 * bugfix: endpoint: Support FIPS in endpoint heuristics

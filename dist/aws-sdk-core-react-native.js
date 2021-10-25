@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.1013.0',
+	  VERSION: '2.1014.0',
 
 	  /**
 	   * @api private
@@ -5080,6 +5080,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  if (!region) return null;
 	  if (isFipsRegion(region)) {
 	    if (isFipsCnRegion(region)) return 'fips-cn-*';
+	    if (isFipsUsGovRegion(region)) return 'fips-us-gov-*';
+	    if (region.startsWith('fips-accesspoint-')) return 'fips-accesspoint-*';
 	    return 'fips-*';
 	  }
 
@@ -5179,6 +5181,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return region && (region.startsWith('fips-') || region.endsWith('-fips'));
 	}
 
+	function isFipsUsGovRegion(region) {
+	  return (
+	    region &&
+	    region.startsWith('fips-us-gov-') ||
+	    (region.startsWith('us-gov-') && region.endsWith('-fips'))
+	  );
+	}
+
 	function isFipsCnRegion(region) {
 	  return (
 	    region &&
@@ -5193,7 +5203,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      ? 'us-east-1'
 	      : region === 'fips-aws-us-gov-global'
 	      ? 'us-gov-west-1'
-	      : region.replace(/fips-(dkr-|prod-)?|-fips/, '')
+	      : region.replace(/fips-(dkr-|prod-|accesspoint-)?|-fips/, '')
 	    : region;
 	}
 
@@ -5211,7 +5221,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 39 */
 /***/ (function(module, exports) {
 
-	module.exports = {"rules":{"*/*":{"endpoint":"{service}.{region}.amazonaws.com"},"fips-*/*":{"endpoint":"{service}-fips.{region}.amazonaws.com"},"fips-cn-*/*":{"endpoint":"{service}-fips.{region}.amazonaws.com.cn"},"cn-*/*":{"endpoint":"{service}.{region}.amazonaws.com.cn"},"us-iso-*/*":{"endpoint":"{service}.{region}.c2s.ic.gov"},"us-isob-*/*":{"endpoint":"{service}.{region}.sc2s.sgov.gov"},"*/budgets":"globalSSL","*/cloudfront":"globalSSL","*/sts":"globalSSL","*/importexport":{"endpoint":"{service}.amazonaws.com","signatureVersion":"v2","globalEndpoint":true},"*/route53":"globalSSL","cn-*/route53":{"endpoint":"{service}.amazonaws.com.cn","globalEndpoint":true,"signingRegion":"cn-northwest-1"},"us-gov-*/route53":"globalGovCloud","*/waf":"globalSSL","*/iam":"globalSSL","cn-*/iam":{"endpoint":"{service}.cn-north-1.amazonaws.com.cn","globalEndpoint":true,"signingRegion":"cn-north-1"},"us-gov-*/iam":"globalGovCloud","us-gov-*/sts":{"endpoint":"{service}.{region}.amazonaws.com"},"us-gov-west-1/s3":"s3signature","us-west-1/s3":"s3signature","us-west-2/s3":"s3signature","eu-west-1/s3":"s3signature","ap-southeast-1/s3":"s3signature","ap-southeast-2/s3":"s3signature","ap-northeast-1/s3":"s3signature","sa-east-1/s3":"s3signature","us-east-1/s3":{"endpoint":"{service}.amazonaws.com","signatureVersion":"s3"},"us-east-1/sdb":{"endpoint":"{service}.amazonaws.com","signatureVersion":"v2"},"*/sdb":{"endpoint":"{service}.{region}.amazonaws.com","signatureVersion":"v2"},"fips-*/api.ecr":{"endpoint":"ecr-fips.{region}.amazonaws.com"},"fips-*/api.sagemaker":{"endpoint":"api-fips.sagemaker.{region}.amazonaws.com"},"fips-*/batch":{"endpoint":"fips.batch.{region}.amazonaws.com"},"fips-*/streams.dynamodb":{"endpoint":"dynamodb-fips.{region}.amazonaws.com"},"fips-*/route53":{"endpoint":"route53-fips.amazonaws.com"},"fips-*/transcribe":{"endpoint":"fips.transcribe.{region}.amazonaws.com"},"fips-*/waf":{"endpoint":"waf-fips.amazonaws.com"},"fips-us-gov-east-1/acm-pca":{"endpoint":"acm-pca.{region}.amazonaws.com"},"fips-us-gov-west-1/acm-pca":{"endpoint":"acm-pca.{region}.amazonaws.com"},"fips-us-gov-east-1/batch":{"endpoint":"batch.{region}.amazonaws.com"},"fips-us-gov-west-1/batch":{"endpoint":"batch.{region}.amazonaws.com"},"us-gov-east-1-fips/dynamodb":{"endpoint":"dynamodb.{region}.amazonaws.com"},"us-gov-west-1-fips/dynamodb":{"endpoint":"dynamodb.{region}.amazonaws.com"},"fips-us-gov-east-1/elasticloadbalancing":{"endpoint":"elasticloadbalancing.{region}.amazonaws.com"},"fips-us-gov-west-1/elasticloadbalancing":{"endpoint":"elasticloadbalancing.{region}.amazonaws.com"},"us-gov-east-1-fips/guardduty":{"endpoint":"guardduty.{region}.amazonaws.com"},"us-gov-west-1-fips/guardduty":{"endpoint":"guardduty.{region}.amazonaws.com"},"fips-us-gov-east-1/monitoring":{"endpoint":"monitoring.{region}.amazonaws.com"},"fips-us-gov-west-1/monitoring":{"endpoint":"monitoring.{region}.amazonaws.com"},"fips-aws-us-gov-global/organizations":{"endpoint":"organizations.{region}.amazonaws.com"},"fips-us-gov-east-1/resource-groups":{"endpoint":"resource-groups.{region}.amazonaws.com"},"fips-us-gov-west-1/resource-groups":{"endpoint":"resource-groups.{region}.amazonaws.com"},"fips-aws-us-gov-global/route53":{"endpoint":"route53.us-gov.amazonaws.com"},"fips-us-gov-east-1/servicecatalog-appregistry":{"endpoint":"servicecatalog-appregistry.{region}.amazonaws.com"},"fips-us-gov-west-1/servicecatalog-appregistry":{"endpoint":"servicecatalog-appregistry.{region}.amazonaws.com"},"fips-us-gov-west-1/states":{"endpoint":"states.{region}.amazonaws.com"},"us-gov-east-1-fips/streams.dynamodb":{"endpoint":"dynamodb.{region}.amazonaws.com"},"us-gov-west-1-fips/streams.dynamodb":{"endpoint":"dynamodb.{region}.amazonaws.com"}},"patterns":{"globalSSL":{"endpoint":"https://{service}.amazonaws.com","globalEndpoint":true,"signingRegion":"us-east-1"},"globalGovCloud":{"endpoint":"{service}.us-gov.amazonaws.com","globalEndpoint":true,"signingRegion":"us-gov-west-1"},"s3signature":{"endpoint":"{service}.{region}.amazonaws.com","signatureVersion":"s3"}}}
+	module.exports = {"rules":{"*/*":{"endpoint":"{service}.{region}.amazonaws.com"},"fips-*/*":"fipsStandard","fips-us-gov-*/*":"fipsStandard","fips-cn-*/*":{"endpoint":"{service}-fips.{region}.amazonaws.com.cn"},"cn-*/*":{"endpoint":"{service}.{region}.amazonaws.com.cn"},"us-iso-*/*":{"endpoint":"{service}.{region}.c2s.ic.gov"},"us-isob-*/*":{"endpoint":"{service}.{region}.sc2s.sgov.gov"},"*/budgets":"globalSSL","*/cloudfront":"globalSSL","*/sts":"globalSSL","*/importexport":{"endpoint":"{service}.amazonaws.com","signatureVersion":"v2","globalEndpoint":true},"*/route53":"globalSSL","cn-*/route53":{"endpoint":"{service}.amazonaws.com.cn","globalEndpoint":true,"signingRegion":"cn-northwest-1"},"us-gov-*/route53":"globalGovCloud","*/waf":"globalSSL","*/iam":"globalSSL","cn-*/iam":{"endpoint":"{service}.cn-north-1.amazonaws.com.cn","globalEndpoint":true,"signingRegion":"cn-north-1"},"us-gov-*/iam":"globalGovCloud","us-gov-*/sts":{"endpoint":"{service}.{region}.amazonaws.com"},"us-gov-west-1/s3":"s3signature","us-west-1/s3":"s3signature","us-west-2/s3":"s3signature","eu-west-1/s3":"s3signature","ap-southeast-1/s3":"s3signature","ap-southeast-2/s3":"s3signature","ap-northeast-1/s3":"s3signature","sa-east-1/s3":"s3signature","us-east-1/s3":{"endpoint":"{service}.amazonaws.com","signatureVersion":"s3"},"us-east-1/sdb":{"endpoint":"{service}.amazonaws.com","signatureVersion":"v2"},"*/sdb":{"endpoint":"{service}.{region}.amazonaws.com","signatureVersion":"v2"},"fips-*/api.ecr":"fips.api.ecr","fips-us-gov-*/api.ecr":"fips.api.ecr","fips-*/api.sagemaker":"fips.api.sagemaker","fips-us-gov-*/api.sagemaker":"fips.api.sagemaker","fips-*/batch":"fipsDotPrefix","fips-*/eks":"fipsDotPrefix","fips-*/models.lex":"fips.models.lex","fips-us-gov-*/models.lex":"fips.models.lex","fips-*/runtime.lex":"fips.runtime.lex","fips-us-gov-*/runtime.lex":"fips.runtime.lex","fips-*/runtime.sagemaker":{"endpoint":"runtime-fips.sagemaker.{region}.amazonaws.com"},"fips-*/streams.dynamodb":{"endpoint":"dynamodb-fips.{region}.amazonaws.com"},"fips-*/route53":"fipsWithoutRegion","fips-*/transcribe":"fipsDotPrefix","fips-us-gov-*/transcribe":"fipsDotPrefix","fips-*/waf":"fipsWithoutRegion","fips-accesspoint-*/*":{"endpoint":"{service}-accesspoint-fips.{region}.amazonaws.com"},"fips-us-gov-*/acm-pca":"fipsWithServiceOnly","fips-us-gov-*/batch":"fipsWithServiceOnly","fips-us-gov-*/config":"fipsWithServiceOnly","fips-us-gov-*/eks":"fipsWithServiceOnly","fips-us-gov-*/elasticmapreduce":"fipsWithServiceOnly","fips-us-gov-*/identitystore":"fipsWithServiceOnly","fips-us-gov-*/dynamodb":"fipsWithServiceOnly","fips-us-gov-*/elasticloadbalancing":"fipsWithServiceOnly","fips-us-gov-*/guardduty":"fipsWithServiceOnly","fips-us-gov-*/monitoring":"fipsWithServiceOnly","fips-aws-us-gov-global/organizations":"fipsWithServiceOnly","fips-us-gov-*/resource-groups":"fipsWithServiceOnly","fips-aws-us-gov-global/route53":{"endpoint":"route53.us-gov.amazonaws.com"},"fips-us-gov-*/runtime.sagemaker":"fipsWithServiceOnly","fips-us-gov-*/servicecatalog-appregistry":"fipsWithServiceOnly","fips-us-gov-*/servicequotas":"fipsWithServiceOnly","fips-us-gov-*/ssm":"fipsWithServiceOnly","fips-us-gov-*/sts":"fipsWithServiceOnly","fips-us-gov-west-1/states":"fipsWithServiceOnly","fips-us-gov-*/support":"fipsWithServiceOnly","fips-us-gov-*/streams.dynamodb":{"endpoint":"dynamodb.{region}.amazonaws.com"},"fips-us-iso-east-1/elasticfilesystem":{"endpoint":"elasticfilesystem-fips.{region}.c2s.ic.gov"}},"patterns":{"globalSSL":{"endpoint":"https://{service}.amazonaws.com","globalEndpoint":true,"signingRegion":"us-east-1"},"globalGovCloud":{"endpoint":"{service}.us-gov.amazonaws.com","globalEndpoint":true,"signingRegion":"us-gov-west-1"},"s3signature":{"endpoint":"{service}.{region}.amazonaws.com","signatureVersion":"s3"},"fipsStandard":{"endpoint":"{service}-fips.{region}.amazonaws.com"},"fipsDotPrefix":{"endpoint":"fips.{service}.{region}.amazonaws.com"},"fipsWithoutRegion":{"endpoint":"{service}-fips.amazonaws.com"},"fips.api.ecr":{"endpoint":"ecr-fips.{region}.amazonaws.com"},"fips.api.sagemaker":{"endpoint":"api-fips.sagemaker.{region}.amazonaws.com"},"fips.models.lex":{"endpoint":"models-fips.lex.{region}.amazonaws.com"},"fips.runtime.lex":{"endpoint":"runtime-fips.lex.{region}.amazonaws.com"},"fipsWithServiceOnly":{"endpoint":"{service}.{region}.amazonaws.com"}}}
 
 /***/ }),
 /* 40 */

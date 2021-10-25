@@ -212,6 +212,14 @@ declare class Route53Resolver extends Service {
    */
   getFirewallRuleGroupPolicy(callback?: (err: AWSError, data: Route53Resolver.Types.GetFirewallRuleGroupPolicyResponse) => void): Request<Route53Resolver.Types.GetFirewallRuleGroupPolicyResponse, AWSError>;
   /**
+   * Retrieves the behavior configuration of Route 53 Resolver behavior for a single VPC from Amazon Virtual Private Cloud.
+   */
+  getResolverConfig(params: Route53Resolver.Types.GetResolverConfigRequest, callback?: (err: AWSError, data: Route53Resolver.Types.GetResolverConfigResponse) => void): Request<Route53Resolver.Types.GetResolverConfigResponse, AWSError>;
+  /**
+   * Retrieves the behavior configuration of Route 53 Resolver behavior for a single VPC from Amazon Virtual Private Cloud.
+   */
+  getResolverConfig(callback?: (err: AWSError, data: Route53Resolver.Types.GetResolverConfigResponse) => void): Request<Route53Resolver.Types.GetResolverConfigResponse, AWSError>;
+  /**
    * Gets DNSSEC validation information for a specified resource.
    */
   getResolverDnssecConfig(params: Route53Resolver.Types.GetResolverDnssecConfigRequest, callback?: (err: AWSError, data: Route53Resolver.Types.GetResolverDnssecConfigResponse) => void): Request<Route53Resolver.Types.GetResolverDnssecConfigResponse, AWSError>;
@@ -331,6 +339,14 @@ declare class Route53Resolver extends Service {
    * Retrieves the firewall rules that you have defined for the specified firewall rule group. DNS Firewall uses the rules in a rule group to filter DNS network traffic for a VPC.  A single call might return only a partial list of the rules. For information, see MaxResults. 
    */
   listFirewallRules(callback?: (err: AWSError, data: Route53Resolver.Types.ListFirewallRulesResponse) => void): Request<Route53Resolver.Types.ListFirewallRulesResponse, AWSError>;
+  /**
+   * Retrieves the Resolver configurations that you have defined. Route 53 Resolver uses the configurations to manage DNS resolution behavior for your VPCs.
+   */
+  listResolverConfigs(params: Route53Resolver.Types.ListResolverConfigsRequest, callback?: (err: AWSError, data: Route53Resolver.Types.ListResolverConfigsResponse) => void): Request<Route53Resolver.Types.ListResolverConfigsResponse, AWSError>;
+  /**
+   * Retrieves the Resolver configurations that you have defined. Route 53 Resolver uses the configurations to manage DNS resolution behavior for your VPCs.
+   */
+  listResolverConfigs(callback?: (err: AWSError, data: Route53Resolver.Types.ListResolverConfigsResponse) => void): Request<Route53Resolver.Types.ListResolverConfigsResponse, AWSError>;
   /**
    * Lists the configurations for DNSSEC validation that are associated with the current Amazon Web Services account.
    */
@@ -468,6 +484,14 @@ declare class Route53Resolver extends Service {
    */
   updateFirewallRuleGroupAssociation(callback?: (err: AWSError, data: Route53Resolver.Types.UpdateFirewallRuleGroupAssociationResponse) => void): Request<Route53Resolver.Types.UpdateFirewallRuleGroupAssociationResponse, AWSError>;
   /**
+   * Updates the behavior configuration of Route 53 Resolver behavior for a single VPC from Amazon Virtual Private Cloud.
+   */
+  updateResolverConfig(params: Route53Resolver.Types.UpdateResolverConfigRequest, callback?: (err: AWSError, data: Route53Resolver.Types.UpdateResolverConfigResponse) => void): Request<Route53Resolver.Types.UpdateResolverConfigResponse, AWSError>;
+  /**
+   * Updates the behavior configuration of Route 53 Resolver behavior for a single VPC from Amazon Virtual Private Cloud.
+   */
+  updateResolverConfig(callback?: (err: AWSError, data: Route53Resolver.Types.UpdateResolverConfigResponse) => void): Request<Route53Resolver.Types.UpdateResolverConfigResponse, AWSError>;
+  /**
    * Updates an existing DNSSEC validation configuration. If there is no existing DNSSEC validation configuration, one is created.
    */
   updateResolverDnssecConfig(params: Route53Resolver.Types.UpdateResolverDnssecConfigRequest, callback?: (err: AWSError, data: Route53Resolver.Types.UpdateResolverDnssecConfigResponse) => void): Request<Route53Resolver.Types.UpdateResolverDnssecConfigResponse, AWSError>;
@@ -584,6 +608,7 @@ declare namespace Route53Resolver {
      */
     ResolverRuleAssociation?: ResolverRuleAssociation;
   }
+  export type AutodefinedReverseFlag = "ENABLE"|"DISABLE"|string;
   export type BlockOverrideDnsType = "CNAME"|string;
   export type BlockOverrideDomain = string;
   export type BlockOverrideTtl = number;
@@ -1256,6 +1281,18 @@ declare namespace Route53Resolver {
      */
     FirewallRuleGroup?: FirewallRuleGroup;
   }
+  export interface GetResolverConfigRequest {
+    /**
+     * Resource ID of the Amazon VPC that you want to get information about.
+     */
+    ResourceId: ResourceId;
+  }
+  export interface GetResolverConfigResponse {
+    /**
+     * Information about the behavior configuration of Route 53 Resolver behavior for the VPC you specified in the GetResolverConfig request.
+     */
+    ResolverConfig?: ResolverConfig;
+  }
   export interface GetResolverDnssecConfigRequest {
     /**
      * The ID of the virtual private cloud (VPC) for the DNSSEC validation status.
@@ -1597,6 +1634,27 @@ declare namespace Route53Resolver {
      */
     FirewallRules?: FirewallRules;
   }
+  export type ListResolverConfigsMaxResult = number;
+  export interface ListResolverConfigsRequest {
+    /**
+     * The maximum number of Resolver configurations that you want to return in the response to a ListResolverConfigs request. If you don't specify a value for MaxResults, up to 100 Resolver configurations are returned.
+     */
+    MaxResults?: ListResolverConfigsMaxResult;
+    /**
+     * (Optional) If the current Amazon Web Services account has more than MaxResults Resolver configurations, use NextToken to get the second and subsequent pages of results. For the first ListResolverConfigs request, omit this value. For the second and subsequent requests, get the value of NextToken from the previous response and specify that value for NextToken in the request.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListResolverConfigsResponse {
+    /**
+     * If a response includes the last of the Resolver configurations that are associated with the current Amazon Web Services account, NextToken doesn't appear in the response. If a response doesn't include the last of the configurations, you can get more configurations by submitting another ListResolverConfigs request. Get the value of NextToken that Amazon Route 53 returned in the previous response and include it in NextToken in the next request.
+     */
+    NextToken?: NextToken;
+    /**
+     * An array that contains one ResolverConfigs element for each Resolver configuration that is associated with the current Amazon Web Services account.
+     */
+    ResolverConfigs?: ResolverConfigList;
+  }
   export interface ListResolverDnssecConfigsRequest {
     /**
      *  Optional: An integer that specifies the maximum number of DNSSEC configuration results that you want Amazon Route 53 to return. If you don't specify a value for MaxResults, Route 53 returns up to 100 configuration per page.
@@ -1891,6 +1949,26 @@ declare namespace Route53Resolver {
      */
     ReturnValue?: Boolean;
   }
+  export type ResolverAutodefinedReverseStatus = "ENABLING"|"ENABLED"|"DISABLING"|"DISABLED"|string;
+  export interface ResolverConfig {
+    /**
+     * ID for the Resolver configuration.
+     */
+    Id?: ResourceId;
+    /**
+     * The ID of the Amazon Virtual Private Cloud VPC that you're configuring Resolver for.
+     */
+    ResourceId?: ResourceId;
+    /**
+     * The owner account ID of the Amazon Virtual Private Cloud VPC.
+     */
+    OwnerId?: AccountId;
+    /**
+     *  The status of whether or not the Resolver will create autodefined rules for reverse DNS lookups. This is enabled by default. The status can be one of following:  Status of the rules generated by VPCs based on CIDR/Region for reverse DNS resolution. The status can be one of following:    ENABLING: Autodefined rules for reverse DNS lookups are being enabled but are not complete.    ENABLED: Autodefined rules for reverse DNS lookups are enabled.    DISABLING: Autodefined rules for reverse DNS lookups are being disabled but are not complete.    DISABLED: Autodefined rules for reverse DNS lookups are disabled.  
+     */
+    AutodefinedReverse?: ResolverAutodefinedReverseStatus;
+  }
+  export type ResolverConfigList = ResolverConfig[];
   export type ResolverDNSSECValidationStatus = "ENABLING"|"ENABLED"|"DISABLING"|"DISABLED"|string;
   export interface ResolverDnssecConfig {
     /**
@@ -2322,6 +2400,22 @@ declare namespace Route53Resolver {
      * The firewall rule that you just updated. 
      */
     FirewallRule?: FirewallRule;
+  }
+  export interface UpdateResolverConfigRequest {
+    /**
+     * Resource ID of the Amazon VPC that you want to update the Resolver configuration for.
+     */
+    ResourceId: ResourceId;
+    /**
+     * Indicates whether or not the Resolver will create autodefined rules for reverse DNS lookups. This is enabled by default. Disabling this option will also affect EC2-Classic instances using ClassicLink. For more information, see ClassicLink in the Amazon EC2 guide.  It can take some time for the status change to be completed.  
+     */
+    AutodefinedReverseFlag: AutodefinedReverseFlag;
+  }
+  export interface UpdateResolverConfigResponse {
+    /**
+     * An array that contains settings for the specified Resolver configuration.
+     */
+    ResolverConfig?: ResolverConfig;
   }
   export interface UpdateResolverDnssecConfigRequest {
     /**

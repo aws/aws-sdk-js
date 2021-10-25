@@ -29701,6 +29701,18 @@ declare namespace EC2 {
      */
     TransitGatewayId?: String;
     /**
+     * The ARN of the core network.
+     */
+    CoreNetworkArn?: String;
+    /**
+     * The ARN of the core network attachment.
+     */
+    CoreNetworkAttachmentArn?: String;
+    /**
+     * The current state of the gateway association.
+     */
+    GatewayAssociationState?: String;
+    /**
      * The VPN connection options.
      */
     Options?: VpnConnectionOptions;
