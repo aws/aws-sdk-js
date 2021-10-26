@@ -60,11 +60,11 @@ declare class ChimeSDKMessaging extends Service {
    */
   createChannelFlow(callback?: (err: AWSError, data: ChimeSDKMessaging.Types.CreateChannelFlowResponse) => void): Request<ChimeSDKMessaging.Types.CreateChannelFlowResponse, AWSError>;
   /**
-   * Adds a user to a channel. The InvitedBy response field is derived from the request header. A channel member can:   List messages   Send messages   Receive messages   Edit their own messages   Leave the channel   Privacy settings impact this action as follows:   Public Channels: You do not need to be a member to list messages, but you must be a member to send messages.   Private Channels: You must be a member to list or send messages.    The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Adds a user to a channel. The InvitedBy field in ChannelMembership is derived from the request header. A channel member can:   List messages   Send messages   Receive messages   Edit their own messages   Leave the channel   Privacy settings impact this action as follows:   Public Channels: You do not need to be a member to list messages, but you must be a member to send messages.   Private Channels: You must be a member to list or send messages.    The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
    */
   createChannelMembership(params: ChimeSDKMessaging.Types.CreateChannelMembershipRequest, callback?: (err: AWSError, data: ChimeSDKMessaging.Types.CreateChannelMembershipResponse) => void): Request<ChimeSDKMessaging.Types.CreateChannelMembershipResponse, AWSError>;
   /**
-   * Adds a user to a channel. The InvitedBy response field is derived from the request header. A channel member can:   List messages   Send messages   Receive messages   Edit their own messages   Leave the channel   Privacy settings impact this action as follows:   Public Channels: You do not need to be a member to list messages, but you must be a member to send messages.   Private Channels: You must be a member to list or send messages.    The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Adds a user to a channel. The InvitedBy field in ChannelMembership is derived from the request header. A channel member can:   List messages   Send messages   Receive messages   Edit their own messages   Leave the channel   Privacy settings impact this action as follows:   Public Channels: You do not need to be a member to list messages, but you must be a member to send messages.   Private Channels: You must be a member to list or send messages.    The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
    */
   createChannelMembership(callback?: (err: AWSError, data: ChimeSDKMessaging.Types.CreateChannelMembershipResponse) => void): Request<ChimeSDKMessaging.Types.CreateChannelMembershipResponse, AWSError>;
   /**
@@ -188,6 +188,14 @@ declare class ChimeSDKMessaging extends Service {
    */
   disassociateChannelFlow(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Gets the membership preferences of an AppInstanceUser for the specified channel. The AppInstanceUser must be a member of the channel. Only the AppInstanceUser who owns the membership can retrieve preferences. Users in the AppInstanceAdmin and channel moderator roles can't retrieve preferences for other users. Banned users can't retrieve membership preferences for the channel from which they are banned.
+   */
+  getChannelMembershipPreferences(params: ChimeSDKMessaging.Types.GetChannelMembershipPreferencesRequest, callback?: (err: AWSError, data: ChimeSDKMessaging.Types.GetChannelMembershipPreferencesResponse) => void): Request<ChimeSDKMessaging.Types.GetChannelMembershipPreferencesResponse, AWSError>;
+  /**
+   * Gets the membership preferences of an AppInstanceUser for the specified channel. The AppInstanceUser must be a member of the channel. Only the AppInstanceUser who owns the membership can retrieve preferences. Users in the AppInstanceAdmin and channel moderator roles can't retrieve preferences for other users. Banned users can't retrieve membership preferences for the channel from which they are banned.
+   */
+  getChannelMembershipPreferences(callback?: (err: AWSError, data: ChimeSDKMessaging.Types.GetChannelMembershipPreferencesResponse) => void): Request<ChimeSDKMessaging.Types.GetChannelMembershipPreferencesResponse, AWSError>;
+  /**
    * Gets the full details of a channel message.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
    */
   getChannelMessage(params: ChimeSDKMessaging.Types.GetChannelMessageRequest, callback?: (err: AWSError, data: ChimeSDKMessaging.Types.GetChannelMessageResponse) => void): Request<ChimeSDKMessaging.Types.GetChannelMessageResponse, AWSError>;
@@ -228,11 +236,11 @@ declare class ChimeSDKMessaging extends Service {
    */
   listChannelFlows(callback?: (err: AWSError, data: ChimeSDKMessaging.Types.ListChannelFlowsResponse) => void): Request<ChimeSDKMessaging.Types.ListChannelFlowsResponse, AWSError>;
   /**
-   * Lists all channel memberships in a channel.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Lists all channel memberships in a channel.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header.  If you want to list the channels to which a specific app instance user belongs, see the ListChannelMembershipsForAppInstanceUser API.
    */
   listChannelMemberships(params: ChimeSDKMessaging.Types.ListChannelMembershipsRequest, callback?: (err: AWSError, data: ChimeSDKMessaging.Types.ListChannelMembershipsResponse) => void): Request<ChimeSDKMessaging.Types.ListChannelMembershipsResponse, AWSError>;
   /**
-   * Lists all channel memberships in a channel.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Lists all channel memberships in a channel.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header.  If you want to list the channels to which a specific app instance user belongs, see the ListChannelMembershipsForAppInstanceUser API.
    */
   listChannelMemberships(callback?: (err: AWSError, data: ChimeSDKMessaging.Types.ListChannelMembershipsResponse) => void): Request<ChimeSDKMessaging.Types.ListChannelMembershipsResponse, AWSError>;
   /**
@@ -291,6 +299,14 @@ declare class ChimeSDKMessaging extends Service {
    * Lists the tags applied to an Amazon Chime SDK messaging resource.
    */
   listTagsForResource(callback?: (err: AWSError, data: ChimeSDKMessaging.Types.ListTagsForResourceResponse) => void): Request<ChimeSDKMessaging.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Sets the membership preferences of an AppInstanceUser for the specified channel. The AppInstanceUser must be a member of the channel. Only the AppInstanceUser who owns the membership can set preferences. Users in the AppInstanceAdmin and channel moderator roles can't set preferences for other users. Banned users can't set membership preferences for the channel from which they are banned.
+   */
+  putChannelMembershipPreferences(params: ChimeSDKMessaging.Types.PutChannelMembershipPreferencesRequest, callback?: (err: AWSError, data: ChimeSDKMessaging.Types.PutChannelMembershipPreferencesResponse) => void): Request<ChimeSDKMessaging.Types.PutChannelMembershipPreferencesResponse, AWSError>;
+  /**
+   * Sets the membership preferences of an AppInstanceUser for the specified channel. The AppInstanceUser must be a member of the channel. Only the AppInstanceUser who owns the membership can set preferences. Users in the AppInstanceAdmin and channel moderator roles can't set preferences for other users. Banned users can't set membership preferences for the channel from which they are banned.
+   */
+  putChannelMembershipPreferences(callback?: (err: AWSError, data: ChimeSDKMessaging.Types.PutChannelMembershipPreferencesResponse) => void): Request<ChimeSDKMessaging.Types.PutChannelMembershipPreferencesResponse, AWSError>;
   /**
    * Redacts message content, but not metadata. The message exists in the back end, but the action returns null content, and the state shows as redacted.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
    */
@@ -357,6 +373,7 @@ declare class ChimeSDKMessaging extends Service {
   updateChannelReadMarker(callback?: (err: AWSError, data: ChimeSDKMessaging.Types.UpdateChannelReadMarkerResponse) => void): Request<ChimeSDKMessaging.Types.UpdateChannelReadMarkerResponse, AWSError>;
 }
 declare namespace ChimeSDKMessaging {
+  export type AllowNotifications = "ALL"|"NONE"|"FILTERED"|string;
   export interface AppInstanceUserMembershipSummary {
     /**
      * The type of ChannelMembership.
@@ -401,7 +418,7 @@ declare namespace ChimeSDKMessaging {
   }
   export interface BatchCreateChannelMembershipError {
     /**
-     * The ARN of the member that the service couldn't add.
+     * The AppInstanceUserArn of the member that the service couldn't add.
      */
     MemberArn?: ChimeArn;
     /**
@@ -424,7 +441,7 @@ declare namespace ChimeSDKMessaging {
      */
     Type?: ChannelMembershipType;
     /**
-     * The ARNs of the members you want to add to the channel.
+     * The AppInstanceUserArns of the members you want to add to the channel.
      */
     MemberArns: MemberArns;
     /**
@@ -636,6 +653,12 @@ declare namespace ChimeSDKMessaging {
     AppInstanceUserMembershipSummary?: AppInstanceUserMembershipSummary;
   }
   export type ChannelMembershipForAppInstanceUserSummaryList = ChannelMembershipForAppInstanceUserSummary[];
+  export interface ChannelMembershipPreferences {
+    /**
+     * The push notification configuration of a message.
+     */
+    PushNotifications?: PushNotificationPreferences;
+  }
   export interface ChannelMembershipSummary {
     /**
      * A member's summary data.
@@ -693,6 +716,10 @@ declare namespace ChimeSDKMessaging {
      * The status of the channel message.
      */
     Status?: ChannelMessageStatusStructure;
+    /**
+     * The attributes for the message, used for message filtering along with a FilterRule defined in the PushNotificationPreferences.
+     */
+    MessageAttributes?: MessageAttributeMap;
   }
   export interface ChannelMessageCallback {
     /**
@@ -761,6 +788,10 @@ declare namespace ChimeSDKMessaging {
      * The message status. The status value is SENT for messages sent to a channel without a channel flow. For channels associated with channel flow, the value determines the processing stage.
      */
     Status?: ChannelMessageStatusStructure;
+    /**
+     * The message attribues listed in a the summary of a channel message.
+     */
+    MessageAttributes?: MessageAttributeMap;
   }
   export type ChannelMessageSummaryList = ChannelMessageSummary[];
   export type ChannelMessageType = "STANDARD"|"CONTROL"|string;
@@ -834,7 +865,7 @@ declare namespace ChimeSDKMessaging {
      */
     ChannelArn: ChimeArn;
     /**
-     * The ARN of the member being banned.
+     * The AppInstanceUserArn of the member being banned.
      */
     MemberArn: ChimeArn;
     /**
@@ -886,7 +917,7 @@ declare namespace ChimeSDKMessaging {
      */
     ChannelArn: ChimeArn;
     /**
-     * The ARN of the member you want to add to the channel.
+     * The AppInstanceUserArn of the member you want to add to the channel.
      */
     MemberArn: ChimeArn;
     /**
@@ -914,7 +945,7 @@ declare namespace ChimeSDKMessaging {
      */
     ChannelArn: ChimeArn;
     /**
-     * The ARN of the moderator.
+     * The AppInstanceUserArn of the moderator.
      */
     ChannelModeratorArn: ChimeArn;
     /**
@@ -998,7 +1029,7 @@ declare namespace ChimeSDKMessaging {
      */
     ChannelArn: ChimeArn;
     /**
-     * The ARN of the member that you're removing from the channel.
+     * The AppInstanceUserArn of the member that you're removing from the channel.
      */
     MemberArn: ChimeArn;
     /**
@@ -1026,7 +1057,7 @@ declare namespace ChimeSDKMessaging {
      */
     ChannelArn: ChimeArn;
     /**
-     * The ARN of the moderator being deleted.
+     * The AppInstanceUserArn of the moderator being deleted.
      */
     ChannelModeratorArn: ChimeArn;
     /**
@@ -1050,7 +1081,7 @@ declare namespace ChimeSDKMessaging {
      */
     ChannelArn: ChimeArn;
     /**
-     * The ARN of the member being banned.
+     * The AppInstanceUserArn of the member being banned.
      */
     MemberArn: ChimeArn;
     /**
@@ -1102,7 +1133,7 @@ declare namespace ChimeSDKMessaging {
      */
     ChannelArn: ChimeArn;
     /**
-     * The ARN of the member.
+     * The AppInstanceUserArn of the member.
      */
     MemberArn: ChimeArn;
     /**
@@ -1142,7 +1173,7 @@ declare namespace ChimeSDKMessaging {
      */
     ChannelArn: ChimeArn;
     /**
-     * The ARN of the channel moderator.
+     * The AppInstanceUserArn of the channel moderator.
      */
     ChannelModeratorArn: ChimeArn;
     /**
@@ -1188,6 +1219,32 @@ declare namespace ChimeSDKMessaging {
   }
   export type ErrorCode = "BadRequest"|"Conflict"|"Forbidden"|"NotFound"|"PreconditionFailed"|"ResourceLimitExceeded"|"ServiceFailure"|"AccessDenied"|"ServiceUnavailable"|"Throttled"|"Throttling"|"Unauthorized"|"Unprocessable"|"VoiceConnectorGroupAssociationsExist"|"PhoneNumberAssociationsExist"|string;
   export type FallbackAction = "CONTINUE"|"ABORT"|string;
+  export type FilterRule = string;
+  export interface GetChannelMembershipPreferencesRequest {
+    /**
+     * The ARN of the channel.
+     */
+    ChannelArn: ChimeArn;
+    /**
+     * The AppInstanceUserArn of the member retrieving the preferences.
+     */
+    MemberArn: ChimeArn;
+    /**
+     * The AppInstanceUserARN of the user making the API call.
+     */
+    ChimeBearer: ChimeArn;
+  }
+  export interface GetChannelMembershipPreferencesResponse {
+    /**
+     * The ARN of the channel.
+     */
+    ChannelArn?: ChimeArn;
+    Member?: Identity;
+    /**
+     * The channel membership preferences for an AppInstanceUser .
+     */
+    Preferences?: ChannelMembershipPreferences;
+  }
   export interface GetChannelMessageRequest {
     /**
      * The ARN of the channel.
@@ -1553,6 +1610,16 @@ declare namespace ChimeSDKMessaging {
   export type MaxResults = number;
   export type MemberArns = ChimeArn[];
   export type Members = Identity[];
+  export type MessageAttributeMap = {[key: string]: MessageAttributeValue};
+  export type MessageAttributeName = string;
+  export type MessageAttributeStringValue = string;
+  export type MessageAttributeStringValues = MessageAttributeStringValue[];
+  export interface MessageAttributeValue {
+    /**
+     * The strings in a message attribute value.
+     */
+    StringValues?: MessageAttributeStringValues;
+  }
   export type MessageId = string;
   export interface MessagingSessionEndpoint {
     /**
@@ -1579,7 +1646,7 @@ declare namespace ChimeSDKMessaging {
      */
     ExecutionOrder: ChannelFlowExecutionOrder;
     /**
-     * Determines whether to continue or stop processing if communication with processor fails. If the last processor in a channel flow sequence has a fallback action of CONTINUE, and communication with the processor fails, the message is considered processed and sent to the recipients in the channel.
+     * Determines whether to continue with message processing or stop it in cases where communication with a processor fails. If a processor has a fallback action of ABORT and communication with it fails, the processor sets the message status to FAILED and does not send the message to any recipients. Note that if the last processor in the channel flow sequence has a fallback action of CONTINUE and communication with the processor fails, then the message is considered processed and sent to recipients of the channel.
      */
     FallbackAction: FallbackAction;
   }
@@ -1590,6 +1657,62 @@ declare namespace ChimeSDKMessaging {
     Lambda: LambdaConfiguration;
   }
   export type ProcessorList = Processor[];
+  export type PushNotificationBody = string;
+  export interface PushNotificationConfiguration {
+    /**
+     * The title of the push notification.
+     */
+    Title: PushNotificationTitle;
+    /**
+     * The body of the push notification.
+     */
+    Body: PushNotificationBody;
+    /**
+     * Enum value that indicates the type of the push notification for a message. DEFAULT: Normal mobile push notification. VOIP: VOIP mobile push notification.
+     */
+    Type: PushNotificationType;
+  }
+  export interface PushNotificationPreferences {
+    /**
+     * Enum value that indicates which push notifications to send to the requested member of a channel. ALL sends all push notifications, NONE sends no push notifications, FILTERED sends only filtered push notifications. 
+     */
+    AllowNotifications: AllowNotifications;
+    /**
+     * The simple JSON object used to send a subset of a push notification to the requsted member.
+     */
+    FilterRule?: FilterRule;
+  }
+  export type PushNotificationTitle = string;
+  export type PushNotificationType = "DEFAULT"|"VOIP"|string;
+  export interface PutChannelMembershipPreferencesRequest {
+    /**
+     * The ARN of the channel.
+     */
+    ChannelArn: ChimeArn;
+    /**
+     * The AppInstanceUserArn of the member setting the preferences.
+     */
+    MemberArn: ChimeArn;
+    /**
+     * The AppInstanceUserARN of the user making the API call.
+     */
+    ChimeBearer: ChimeArn;
+    /**
+     * The channel membership preferences of an AppInstanceUser .
+     */
+    Preferences: ChannelMembershipPreferences;
+  }
+  export interface PutChannelMembershipPreferencesResponse {
+    /**
+     * The ARN of the channel.
+     */
+    ChannelArn?: ChimeArn;
+    Member?: Identity;
+    /**
+     * The ARN and metadata of the member being added.
+     */
+    Preferences?: ChannelMembershipPreferences;
+  }
   export interface RedactChannelMessageRequest {
     /**
      * The ARN of the channel containing the messages that you want to redact.
@@ -1644,6 +1767,14 @@ declare namespace ChimeSDKMessaging {
      * The AppInstanceUserArn of the user that makes the API call.
      */
     ChimeBearer: ChimeArn;
+    /**
+     * The push notification configuration of the message.
+     */
+    PushNotification?: PushNotificationConfiguration;
+    /**
+     * The attributes for the message, used for message filtering along with a FilterRule defined in the PushNotificationPreferences.
+     */
+    MessageAttributes?: MessageAttributeMap;
   }
   export interface SendChannelMessageResponse {
     /**

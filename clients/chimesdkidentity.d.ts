@@ -60,6 +60,14 @@ declare class ChimeSDKIdentity extends Service {
    */
   deleteAppInstanceUser(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Deregisters an AppInstanceUserEndpoint.
+   */
+  deregisterAppInstanceUserEndpoint(params: ChimeSDKIdentity.Types.DeregisterAppInstanceUserEndpointRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deregisters an AppInstanceUserEndpoint.
+   */
+  deregisterAppInstanceUserEndpoint(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Returns the full details of an AppInstance.
    */
   describeAppInstance(params: ChimeSDKIdentity.Types.DescribeAppInstanceRequest, callback?: (err: AWSError, data: ChimeSDKIdentity.Types.DescribeAppInstanceResponse) => void): Request<ChimeSDKIdentity.Types.DescribeAppInstanceResponse, AWSError>;
@@ -84,6 +92,14 @@ declare class ChimeSDKIdentity extends Service {
    */
   describeAppInstanceUser(callback?: (err: AWSError, data: ChimeSDKIdentity.Types.DescribeAppInstanceUserResponse) => void): Request<ChimeSDKIdentity.Types.DescribeAppInstanceUserResponse, AWSError>;
   /**
+   * Returns the full details of an AppInstanceUserEndpoint.
+   */
+  describeAppInstanceUserEndpoint(params: ChimeSDKIdentity.Types.DescribeAppInstanceUserEndpointRequest, callback?: (err: AWSError, data: ChimeSDKIdentity.Types.DescribeAppInstanceUserEndpointResponse) => void): Request<ChimeSDKIdentity.Types.DescribeAppInstanceUserEndpointResponse, AWSError>;
+  /**
+   * Returns the full details of an AppInstanceUserEndpoint.
+   */
+  describeAppInstanceUserEndpoint(callback?: (err: AWSError, data: ChimeSDKIdentity.Types.DescribeAppInstanceUserEndpointResponse) => void): Request<ChimeSDKIdentity.Types.DescribeAppInstanceUserEndpointResponse, AWSError>;
+  /**
    * Gets the retention settings for an AppInstance.
    */
   getAppInstanceRetentionSettings(params: ChimeSDKIdentity.Types.GetAppInstanceRetentionSettingsRequest, callback?: (err: AWSError, data: ChimeSDKIdentity.Types.GetAppInstanceRetentionSettingsResponse) => void): Request<ChimeSDKIdentity.Types.GetAppInstanceRetentionSettingsResponse, AWSError>;
@@ -99,6 +115,14 @@ declare class ChimeSDKIdentity extends Service {
    * Returns a list of the administrators in the AppInstance.
    */
   listAppInstanceAdmins(callback?: (err: AWSError, data: ChimeSDKIdentity.Types.ListAppInstanceAdminsResponse) => void): Request<ChimeSDKIdentity.Types.ListAppInstanceAdminsResponse, AWSError>;
+  /**
+   * Lists all the AppInstanceUserEndpoints created under a single AppInstanceUser.
+   */
+  listAppInstanceUserEndpoints(params: ChimeSDKIdentity.Types.ListAppInstanceUserEndpointsRequest, callback?: (err: AWSError, data: ChimeSDKIdentity.Types.ListAppInstanceUserEndpointsResponse) => void): Request<ChimeSDKIdentity.Types.ListAppInstanceUserEndpointsResponse, AWSError>;
+  /**
+   * Lists all the AppInstanceUserEndpoints created under a single AppInstanceUser.
+   */
+  listAppInstanceUserEndpoints(callback?: (err: AWSError, data: ChimeSDKIdentity.Types.ListAppInstanceUserEndpointsResponse) => void): Request<ChimeSDKIdentity.Types.ListAppInstanceUserEndpointsResponse, AWSError>;
   /**
    * List all AppInstanceUsers created under a single AppInstance.
    */
@@ -116,6 +140,14 @@ declare class ChimeSDKIdentity extends Service {
    */
   listAppInstances(callback?: (err: AWSError, data: ChimeSDKIdentity.Types.ListAppInstancesResponse) => void): Request<ChimeSDKIdentity.Types.ListAppInstancesResponse, AWSError>;
   /**
+   * Lists the tags applied to an Amazon Chime SDK identity resource.
+   */
+  listTagsForResource(params: ChimeSDKIdentity.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: ChimeSDKIdentity.Types.ListTagsForResourceResponse) => void): Request<ChimeSDKIdentity.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Lists the tags applied to an Amazon Chime SDK identity resource.
+   */
+  listTagsForResource(callback?: (err: AWSError, data: ChimeSDKIdentity.Types.ListTagsForResourceResponse) => void): Request<ChimeSDKIdentity.Types.ListTagsForResourceResponse, AWSError>;
+  /**
    * Sets the amount of time in days that a given AppInstance retains data.
    */
   putAppInstanceRetentionSettings(params: ChimeSDKIdentity.Types.PutAppInstanceRetentionSettingsRequest, callback?: (err: AWSError, data: ChimeSDKIdentity.Types.PutAppInstanceRetentionSettingsResponse) => void): Request<ChimeSDKIdentity.Types.PutAppInstanceRetentionSettingsResponse, AWSError>;
@@ -123,6 +155,30 @@ declare class ChimeSDKIdentity extends Service {
    * Sets the amount of time in days that a given AppInstance retains data.
    */
   putAppInstanceRetentionSettings(callback?: (err: AWSError, data: ChimeSDKIdentity.Types.PutAppInstanceRetentionSettingsResponse) => void): Request<ChimeSDKIdentity.Types.PutAppInstanceRetentionSettingsResponse, AWSError>;
+  /**
+   * Registers an endpoint under an Amazon Chime AppInstanceUser. The endpoint receives messages for a user. For push notifications, the endpoint is a mobile device used to receive mobile push notifications for a user.
+   */
+  registerAppInstanceUserEndpoint(params: ChimeSDKIdentity.Types.RegisterAppInstanceUserEndpointRequest, callback?: (err: AWSError, data: ChimeSDKIdentity.Types.RegisterAppInstanceUserEndpointResponse) => void): Request<ChimeSDKIdentity.Types.RegisterAppInstanceUserEndpointResponse, AWSError>;
+  /**
+   * Registers an endpoint under an Amazon Chime AppInstanceUser. The endpoint receives messages for a user. For push notifications, the endpoint is a mobile device used to receive mobile push notifications for a user.
+   */
+  registerAppInstanceUserEndpoint(callback?: (err: AWSError, data: ChimeSDKIdentity.Types.RegisterAppInstanceUserEndpointResponse) => void): Request<ChimeSDKIdentity.Types.RegisterAppInstanceUserEndpointResponse, AWSError>;
+  /**
+   * Applies the specified tags to the specified Amazon Chime SDK identity resource.
+   */
+  tagResource(params: ChimeSDKIdentity.Types.TagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Applies the specified tags to the specified Amazon Chime SDK identity resource.
+   */
+  tagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Removes the specified tags from the specified Amazon Chime SDK identity resource.
+   */
+  untagResource(params: ChimeSDKIdentity.Types.UntagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Removes the specified tags from the specified Amazon Chime SDK identity resource.
+   */
+  untagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Updates AppInstance metadata.
    */
@@ -139,8 +195,17 @@ declare class ChimeSDKIdentity extends Service {
    * Updates the details of an AppInstanceUser. You can update names and metadata.
    */
   updateAppInstanceUser(callback?: (err: AWSError, data: ChimeSDKIdentity.Types.UpdateAppInstanceUserResponse) => void): Request<ChimeSDKIdentity.Types.UpdateAppInstanceUserResponse, AWSError>;
+  /**
+   * Updates the details of an AppInstanceUserEndpoint. You can update the name and AllowMessage values.
+   */
+  updateAppInstanceUserEndpoint(params: ChimeSDKIdentity.Types.UpdateAppInstanceUserEndpointRequest, callback?: (err: AWSError, data: ChimeSDKIdentity.Types.UpdateAppInstanceUserEndpointResponse) => void): Request<ChimeSDKIdentity.Types.UpdateAppInstanceUserEndpointResponse, AWSError>;
+  /**
+   * Updates the details of an AppInstanceUserEndpoint. You can update the name and AllowMessage values.
+   */
+  updateAppInstanceUserEndpoint(callback?: (err: AWSError, data: ChimeSDKIdentity.Types.UpdateAppInstanceUserEndpointResponse) => void): Request<ChimeSDKIdentity.Types.UpdateAppInstanceUserEndpointResponse, AWSError>;
 }
 declare namespace ChimeSDKIdentity {
+  export type AllowMessages = "ALL"|"NONE"|string;
   export interface AppInstance {
     /**
      * The ARN of the messaging instance.
@@ -227,6 +292,76 @@ declare namespace ChimeSDKIdentity {
      */
     LastUpdatedTimestamp?: Timestamp;
   }
+  export interface AppInstanceUserEndpoint {
+    /**
+     * The ARN of the AppInstanceUser.
+     */
+    AppInstanceUserArn?: SensitiveChimeArn;
+    /**
+     * The unique identifier of the AppInstanceUserEndpoint.
+     */
+    EndpointId?: SensitiveString64;
+    /**
+     * The name of the AppInstanceUserEndpoint.
+     */
+    Name?: SensitiveString1600;
+    /**
+     * The type of the AppInstanceUserEndpoint.
+     */
+    Type?: AppInstanceUserEndpointType;
+    /**
+     * The ARN of the resource to which the endpoint belongs.
+     */
+    ResourceArn?: SensitiveChimeArn;
+    /**
+     * The attributes of an Endpoint.
+     */
+    EndpointAttributes?: EndpointAttributes;
+    /**
+     * The time at which an AppInstanceUserEndpoint was created.
+     */
+    CreatedTimestamp?: Timestamp;
+    /**
+     * The time at which an AppInstanceUserEndpoint was last updated.
+     */
+    LastUpdatedTimestamp?: Timestamp;
+    /**
+     * Boolean that controls whether the AppInstanceUserEndpoint is opted in to receive messages. ALL indicates the endpoint will receive all messages. NONE indicates the endpoint will receive no messages.
+     */
+    AllowMessages?: AllowMessages;
+    /**
+     * A read-only field that represents the state of an AppInstanceUserEndpoint. Supported values:    ACTIVE: The AppInstanceUserEndpoint is active and able to receive messages. When ACTIVE, the EndpointStatusReason remains empty.    INACTIVE: The AppInstanceUserEndpoint is inactive and can't receive message. When INACTIVE, the corresponding reason will be conveyed through EndpointStatusReason.    INVALID_DEVICE_TOKEN indicates that an AppInstanceUserEndpoint is INACTIVE due to invalid device token    INVALID_PINPOINT_ARN indicates that an AppInstanceUserEndpoint is INACTIVE due to an invalid pinpoint ARN that was input through the ResourceArn field.  
+     */
+    EndpointState?: EndpointState;
+  }
+  export interface AppInstanceUserEndpointSummary {
+    /**
+     * The ARN of the AppInstanceUser.
+     */
+    AppInstanceUserArn?: SensitiveChimeArn;
+    /**
+     * The unique identifier of the AppInstanceUserEndpoint.
+     */
+    EndpointId?: SensitiveString64;
+    /**
+     * The name of the AppInstanceUserEndpoint.
+     */
+    Name?: SensitiveString1600;
+    /**
+     * The type of the AppInstanceUserEndpoint.
+     */
+    Type?: AppInstanceUserEndpointType;
+    /**
+     * BBoolean that controls whether the AppInstanceUserEndpoint is opted in to receive messages. ALL indicates the endpoint will receive all messages. NONE indicates the endpoint will receive no messages.
+     */
+    AllowMessages?: AllowMessages;
+    /**
+     * A read-only field that represent the state of an AppInstanceUserEndpoint.
+     */
+    EndpointState?: EndpointState;
+  }
+  export type AppInstanceUserEndpointSummaryList = AppInstanceUserEndpointSummary[];
+  export type AppInstanceUserEndpointType = "APNS"|"APNS_SANDBOX"|"GCM"|string;
   export type AppInstanceUserList = AppInstanceUserSummary[];
   export interface AppInstanceUserSummary {
     /**
@@ -348,6 +483,16 @@ declare namespace ChimeSDKIdentity {
      */
     AppInstanceUserArn: ChimeArn;
   }
+  export interface DeregisterAppInstanceUserEndpointRequest {
+    /**
+     * The ARN of the AppInstanceUser.
+     */
+    AppInstanceUserArn: SensitiveChimeArn;
+    /**
+     * The unique identifier of the AppInstanceUserEndpoint.
+     */
+    EndpointId: SensitiveString64;
+  }
   export interface DescribeAppInstanceAdminRequest {
     /**
      * The ARN of the AppInstanceAdmin.
@@ -376,6 +521,22 @@ declare namespace ChimeSDKIdentity {
      */
     AppInstance?: AppInstance;
   }
+  export interface DescribeAppInstanceUserEndpointRequest {
+    /**
+     * The ARN of the AppInstanceUser.
+     */
+    AppInstanceUserArn: SensitiveString1600;
+    /**
+     * The unique identifier of the AppInstanceUserEndpoint.
+     */
+    EndpointId: SensitiveString64;
+  }
+  export interface DescribeAppInstanceUserEndpointResponse {
+    /**
+     * The full details of an AppInstanceUserEndpoint: the AppInstanceUserArn, ID, name, type, resource ARN, attributes, allow messages, state, and created and last updated timestamps. All timestamps use epoch milliseconds.
+     */
+    AppInstanceUserEndpoint?: AppInstanceUserEndpoint;
+  }
   export interface DescribeAppInstanceUserRequest {
     /**
      * The ARN of the AppInstanceUser.
@@ -388,6 +549,28 @@ declare namespace ChimeSDKIdentity {
      */
     AppInstanceUser?: AppInstanceUser;
   }
+  export interface EndpointAttributes {
+    /**
+     * The device token for the GCM, APNS, and APNS_SANDBOX endpoint types.
+     */
+    DeviceToken: NonEmptySensitiveString1600;
+    /**
+     * The VOIP device token for the APNS and APNS_SANDBOX endpoint types.
+     */
+    VoipDeviceToken?: NonEmptySensitiveString1600;
+  }
+  export interface EndpointState {
+    /**
+     * Enum that indicates the Status of an AppInstanceUserEndpoint.
+     */
+    Status: EndpointStatus;
+    /**
+     * The reason for the EndpointStatus.
+     */
+    StatusReason?: EndpointStatusReason;
+  }
+  export type EndpointStatus = "ACTIVE"|"INACTIVE"|string;
+  export type EndpointStatusReason = "INVALID_DEVICE_TOKEN"|"INVALID_PINPOINT_ARN"|string;
   export interface GetAppInstanceRetentionSettingsRequest {
     /**
      * The ARN of the AppInstance.
@@ -442,6 +625,30 @@ declare namespace ChimeSDKIdentity {
      */
     NextToken?: NextToken;
   }
+  export interface ListAppInstanceUserEndpointsRequest {
+    /**
+     * The ARN of the AppInstanceUser.
+     */
+    AppInstanceUserArn: SensitiveChimeArn;
+    /**
+     * The maximum number of endpoints that you want to return.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The token passed by previous API calls until all requested endpoints are returned.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListAppInstanceUserEndpointsResponse {
+    /**
+     * The information for each requested AppInstanceUserEndpoint.
+     */
+    AppInstanceUserEndpoints?: AppInstanceUserEndpointSummaryList;
+    /**
+     * The token passed by previous API calls until all requested endpoints are returned.
+     */
+    NextToken?: NextToken;
+  }
   export interface ListAppInstanceUsersRequest {
     /**
      * The ARN of the AppInstance.
@@ -490,10 +697,23 @@ declare namespace ChimeSDKIdentity {
      */
     NextToken?: NextToken;
   }
+  export interface ListTagsForResourceRequest {
+    /**
+     * The ARN of the resource.
+     */
+    ResourceARN: ChimeArn;
+  }
+  export interface ListTagsForResourceResponse {
+    /**
+     * The tag key-value pairs.
+     */
+    Tags?: TagList;
+  }
   export type MaxResults = number;
   export type Metadata = string;
   export type NextToken = string;
   export type NonEmptyResourceName = string;
+  export type NonEmptySensitiveString1600 = string;
   export interface PutAppInstanceRetentionSettingsRequest {
     /**
      * The ARN of the AppInstance.
@@ -514,22 +734,86 @@ declare namespace ChimeSDKIdentity {
      */
     InitiateDeletionTimestamp?: Timestamp;
   }
+  export interface RegisterAppInstanceUserEndpointRequest {
+    /**
+     * The ARN of the AppInstanceUser.
+     */
+    AppInstanceUserArn: SensitiveChimeArn;
+    /**
+     * The name of the AppInstanceUserEndpoint.
+     */
+    Name?: SensitiveString1600;
+    /**
+     * The type of the AppInstanceUserEndpoint. Supported types:    APNS: The mobile notification service for an Apple device.    APNS_SANDBOX: The sandbox environment of the mobile notification service for an Apple device.    GCM: The mobile notification service for an Android device.   Populate the ResourceArn value of each type as PinpointAppArn.
+     */
+    Type: AppInstanceUserEndpointType;
+    /**
+     * The ARN of the resource to which the endpoint belongs.
+     */
+    ResourceArn: SensitiveChimeArn;
+    /**
+     * The attributes of an Endpoint.
+     */
+    EndpointAttributes: EndpointAttributes;
+    /**
+     * The idempotency token for each client request. 
+     */
+    ClientRequestToken: ClientRequestToken;
+    /**
+     * Boolean that controls whether the AppInstanceUserEndpoint is opted in to receive messages. ALL indicates the endpoint receives all messages. NONE indicates the endpoint receives no messages.
+     */
+    AllowMessages?: AllowMessages;
+  }
+  export interface RegisterAppInstanceUserEndpointResponse {
+    /**
+     * The ARN of the AppInstanceUser.
+     */
+    AppInstanceUserArn?: SensitiveChimeArn;
+    /**
+     * The unique identifier of the AppInstanceUserEndpoint.
+     */
+    EndpointId?: SensitiveString64;
+  }
   export type ResourceName = string;
   export type RetentionDays = number;
+  export type SensitiveChimeArn = string;
+  export type SensitiveString1600 = string;
+  export type SensitiveString64 = string;
   export interface Tag {
     /**
-     * The key of the tag.
+     * The key in a tag.
      */
     Key: TagKey;
     /**
-     * The value of the tag.
+     * The value in a tag.
      */
     Value: TagValue;
   }
   export type TagKey = string;
+  export type TagKeyList = TagKey[];
   export type TagList = Tag[];
+  export interface TagResourceRequest {
+    /**
+     * The resource ARN.
+     */
+    ResourceARN: ChimeArn;
+    /**
+     * The tag key-value pairs.
+     */
+    Tags: TagList;
+  }
   export type TagValue = string;
   export type Timestamp = Date;
+  export interface UntagResourceRequest {
+    /**
+     * The resource ARN.
+     */
+    ResourceARN: ChimeArn;
+    /**
+     * The tag keys.
+     */
+    TagKeys: TagKeyList;
+  }
   export interface UpdateAppInstanceRequest {
     /**
      * The ARN of the AppInstance.
@@ -549,6 +833,34 @@ declare namespace ChimeSDKIdentity {
      * The ARN of the AppInstance.
      */
     AppInstanceArn?: ChimeArn;
+  }
+  export interface UpdateAppInstanceUserEndpointRequest {
+    /**
+     * The ARN of the AppInstanceUser.
+     */
+    AppInstanceUserArn: SensitiveChimeArn;
+    /**
+     * The unique identifier of the AppInstanceUserEndpoint.
+     */
+    EndpointId: SensitiveString64;
+    /**
+     * The name of the AppInstanceUserEndpoint.
+     */
+    Name?: SensitiveString1600;
+    /**
+     * Boolean that controls whether the AppInstanceUserEndpoint is opted in to receive messages. ALL indicates the endpoint will receive all messages. NONE indicates the endpoint will receive no messages.
+     */
+    AllowMessages?: AllowMessages;
+  }
+  export interface UpdateAppInstanceUserEndpointResponse {
+    /**
+     * The ARN of the AppInstanceUser.
+     */
+    AppInstanceUserArn?: SensitiveChimeArn;
+    /**
+     * The unique identifier of the AppInstanceUserEndpoint.
+     */
+    EndpointId?: SensitiveString64;
   }
   export interface UpdateAppInstanceUserRequest {
     /**

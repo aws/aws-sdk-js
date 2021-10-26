@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "ChimeSDKIdentity",
+        "description": "The Amazon Chime SDK now supports push notifications through Amazon Pinpoint"
+    },
+    {
+        "type": "feature",
+        "category": "ChimeSDKMessaging",
+        "description": "The Amazon Chime SDK now supports push notifications through Amazon Pinpoint"
+    },
+    {
+        "type": "feature",
+        "category": "EMRcontainers",
+        "description": "This feature enables auto-generation of certificate  to secure the managed-endpoint and removes the need for customer provided certificate-arn during managed-endpoint setup."
+    }
+]

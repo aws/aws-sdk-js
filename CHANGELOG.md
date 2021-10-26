@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1014.0-->
+<!--LATEST=2.1015.0-->
 <!--ENTRYINSERT-->
+
+## 2.1015.0
+* feature: ChimeSDKIdentity: The Amazon Chime SDK now supports push notifications through Amazon Pinpoint
+* feature: ChimeSDKMessaging: The Amazon Chime SDK now supports push notifications through Amazon Pinpoint
+* feature: EMRcontainers: This feature enables auto-generation of certificate  to secure the managed-endpoint and removes the need for customer provided certificate-arn during managed-endpoint setup.
 
 ## 2.1014.0
 * bugfix: endpoint: Update fips endpoint heuristics test to use callback
