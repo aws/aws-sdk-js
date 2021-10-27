@@ -37,6 +37,14 @@ declare class SageMaker extends Service {
    */
   associateTrialComponent(callback?: (err: AWSError, data: SageMaker.Types.AssociateTrialComponentResponse) => void): Request<SageMaker.Types.AssociateTrialComponentResponse, AWSError>;
   /**
+   * This action batch describes a list of versioned model packages
+   */
+  batchDescribeModelPackage(params: SageMaker.Types.BatchDescribeModelPackageInput, callback?: (err: AWSError, data: SageMaker.Types.BatchDescribeModelPackageOutput) => void): Request<SageMaker.Types.BatchDescribeModelPackageOutput, AWSError>;
+  /**
+   * This action batch describes a list of versioned model packages
+   */
+  batchDescribeModelPackage(callback?: (err: AWSError, data: SageMaker.Types.BatchDescribeModelPackageOutput) => void): Request<SageMaker.Types.BatchDescribeModelPackageOutput, AWSError>;
+  /**
    * Creates an action. An action is a lineage tracking entity that represents an action or activity. For example, a model deployment or an HPO job. Generally, an action involves at least one input or output artifact. For more information, see Amazon SageMaker ML Lineage Tracking.
    */
   createAction(params: SageMaker.Types.CreateActionRequest, callback?: (err: AWSError, data: SageMaker.Types.CreateActionResponse) => void): Request<SageMaker.Types.CreateActionResponse, AWSError>;
@@ -925,11 +933,11 @@ declare class SageMaker extends Service {
    */
   describeModelExplainabilityJobDefinition(callback?: (err: AWSError, data: SageMaker.Types.DescribeModelExplainabilityJobDefinitionResponse) => void): Request<SageMaker.Types.DescribeModelExplainabilityJobDefinitionResponse, AWSError>;
   /**
-   * Returns a description of the specified model package, which is used to create Amazon SageMaker models or list them on Amazon Web Services Marketplace. To create models in Amazon SageMaker, buyers can subscribe to model packages listed on Amazon Web Services Marketplace.
+   * Returns a description of the specified model package, which is used to create SageMaker models or list them on Amazon Web Services Marketplace. To create models in SageMaker, buyers can subscribe to model packages listed on Amazon Web Services Marketplace.
    */
   describeModelPackage(params: SageMaker.Types.DescribeModelPackageInput, callback?: (err: AWSError, data: SageMaker.Types.DescribeModelPackageOutput) => void): Request<SageMaker.Types.DescribeModelPackageOutput, AWSError>;
   /**
-   * Returns a description of the specified model package, which is used to create Amazon SageMaker models or list them on Amazon Web Services Marketplace. To create models in Amazon SageMaker, buyers can subscribe to model packages listed on Amazon Web Services Marketplace.
+   * Returns a description of the specified model package, which is used to create SageMaker models or list them on Amazon Web Services Marketplace. To create models in SageMaker, buyers can subscribe to model packages listed on Amazon Web Services Marketplace.
    */
   describeModelPackage(callback?: (err: AWSError, data: SageMaker.Types.DescribeModelPackageOutput) => void): Request<SageMaker.Types.DescribeModelPackageOutput, AWSError>;
   /**
@@ -1885,6 +1893,14 @@ declare class SageMaker extends Service {
    */
   updatePipelineExecution(callback?: (err: AWSError, data: SageMaker.Types.UpdatePipelineExecutionResponse) => void): Request<SageMaker.Types.UpdatePipelineExecutionResponse, AWSError>;
   /**
+   * Updates a machine learning (ML) project that is created from a template that sets up an ML pipeline from training to deploying an approved model.  You must not update a project that is in use. If you update the ServiceCatalogProvisioningUpdateDetails of a project that is active or being created, or updated, you may lose resources already created by the project. 
+   */
+  updateProject(params: SageMaker.Types.UpdateProjectInput, callback?: (err: AWSError, data: SageMaker.Types.UpdateProjectOutput) => void): Request<SageMaker.Types.UpdateProjectOutput, AWSError>;
+  /**
+   * Updates a machine learning (ML) project that is created from a template that sets up an ML pipeline from training to deploying an approved model.  You must not update a project that is in use. If you update the ServiceCatalogProvisioningUpdateDetails of a project that is active or being created, or updated, you may lose resources already created by the project. 
+   */
+  updateProject(callback?: (err: AWSError, data: SageMaker.Types.UpdateProjectOutput) => void): Request<SageMaker.Types.UpdateProjectOutput, AWSError>;
+  /**
    * Update a model training job to request a new Debugger profiling configuration.
    */
   updateTrainingJob(params: SageMaker.Types.UpdateTrainingJobRequest, callback?: (err: AWSError, data: SageMaker.Types.UpdateTrainingJobResponse) => void): Request<SageMaker.Types.UpdateTrainingJobResponse, AWSError>;
@@ -2735,6 +2751,64 @@ declare namespace SageMaker {
     Alarms?: AlarmList;
   }
   export type AwsManagedHumanLoopRequestSource = "AWS/Rekognition/DetectModerationLabels/Image/V3"|"AWS/Textract/AnalyzeDocument/Forms/V1"|string;
+  export interface BatchDescribeModelPackageError {
+    /**
+     * 
+     */
+    ErrorCode: String;
+    /**
+     * 
+     */
+    ErrorResponse: String;
+  }
+  export type BatchDescribeModelPackageErrorMap = {[key: string]: BatchDescribeModelPackageError};
+  export interface BatchDescribeModelPackageInput {
+    /**
+     * The list of Amazon Resource Name (ARN) of the model package groups.
+     */
+    ModelPackageArnList: ModelPackageArnList;
+  }
+  export interface BatchDescribeModelPackageOutput {
+    /**
+     * The summaries for the model package versions
+     */
+    ModelPackageSummaries?: ModelPackageSummaries;
+    /**
+     * A map of the resource and BatchDescribeModelPackageError objects reporting the error associated with describing the model package.
+     */
+    BatchDescribeModelPackageErrorMap?: BatchDescribeModelPackageErrorMap;
+  }
+  export interface BatchDescribeModelPackageSummary {
+    /**
+     * The group name for the model package
+     */
+    ModelPackageGroupName: EntityName;
+    /**
+     * The version number of a versioned model.
+     */
+    ModelPackageVersion?: ModelPackageVersion;
+    /**
+     * The Amazon Resource Name (ARN) of the model package.
+     */
+    ModelPackageArn: ModelPackageArn;
+    /**
+     * The description of the model package.
+     */
+    ModelPackageDescription?: EntityDescription;
+    /**
+     * The creation time of the mortgage package summary.
+     */
+    CreationTime: CreationTime;
+    InferenceSpecification: InferenceSpecification;
+    /**
+     * The status of the mortgage package.
+     */
+    ModelPackageStatus: ModelPackageStatus;
+    /**
+     * The approval status of the model.
+     */
+    ModelApprovalStatus?: ModelApprovalStatus;
+  }
   export type BatchStrategy = "MultiRecord"|"SingleRecord"|string;
   export interface Bias {
     /**
@@ -4056,9 +4130,9 @@ declare namespace SageMaker {
      */
     ModelPackageName?: EntityName;
     /**
-     * The name of the model group that this model version belongs to. This parameter is required for versioned models, and does not apply to unversioned models.
+     * The name or Amazon Resource Name (ARN) of the model package group that this model version belongs to. This parameter is required for versioned models, and does not apply to unversioned models.
      */
-    ModelPackageGroupName?: EntityName;
+    ModelPackageGroupName?: ArnOrName;
     /**
      * A description of the model package.
      */
@@ -4096,6 +4170,10 @@ declare namespace SageMaker {
      * A unique token that guarantees that the call to this API is idempotent.
      */
     ClientToken?: ClientToken;
+    /**
+     * The metadata properties associated with the model package versions.
+     */
+    CustomerMetadataProperties?: CustomerMetadataMap;
   }
   export interface CreateModelPackageOutput {
     /**
@@ -4745,6 +4823,10 @@ declare namespace SageMaker {
     AppImageConfigName: AppImageConfigName;
   }
   export type CustomImages = CustomImage[];
+  export type CustomerMetadataKey = string;
+  export type CustomerMetadataKeyList = CustomerMetadataKey[];
+  export type CustomerMetadataMap = {[key: string]: CustomerMetadataValue};
+  export type CustomerMetadataValue = string;
   export interface DataCaptureConfig {
     /**
      * 
@@ -6788,7 +6870,7 @@ declare namespace SageMaker {
      */
     SourceAlgorithmSpecification?: SourceAlgorithmSpecification;
     /**
-     * Configurations for one or more transform jobs that Amazon SageMaker runs to test the model package.
+     * Configurations for one or more transform jobs that SageMaker runs to test the model package.
      */
     ValidationSpecification?: ModelPackageValidationSpecification;
     /**
@@ -6822,6 +6904,10 @@ declare namespace SageMaker {
      * A description provided for the model approval.
      */
     ApprovalDescription?: ApprovalDescription;
+    /**
+     * The metadata properties associated with the model package versions.
+     */
+    CustomerMetadataProperties?: CustomerMetadataMap;
   }
   export interface DescribeModelQualityJobDefinitionRequest {
     /**
@@ -7279,6 +7365,11 @@ declare namespace SageMaker {
      * The time when the project was created.
      */
     CreationTime: Timestamp;
+    /**
+     * The timestamp when project was last modified.
+     */
+    LastModifiedTime?: Timestamp;
+    LastModifiedBy?: UserContext;
   }
   export interface DescribeStudioLifecycleConfigRequest {
     /**
@@ -12117,8 +12208,13 @@ declare namespace SageMaker {
      * A list of the tags associated with the model package. For more information, see Tagging Amazon Web Services resources in the Amazon Web Services General Reference Guide.
      */
     Tags?: TagList;
+    /**
+     * The metadata properties for the model package. 
+     */
+    CustomerMetadataProperties?: CustomerMetadataMap;
   }
   export type ModelPackageArn = string;
+  export type ModelPackageArnList = ModelPackageArn[];
   export interface ModelPackageContainerDefinition {
     /**
      * The DNS host name for the Docker container.
@@ -12226,6 +12322,7 @@ declare namespace SageMaker {
     FailureReason?: String;
   }
   export type ModelPackageStatusItemList = ModelPackageStatusItem[];
+  export type ModelPackageSummaries = {[key: string]: BatchDescribeModelPackageSummary};
   export interface ModelPackageSummary {
     /**
      * The name of the model package.
@@ -13767,13 +13864,18 @@ declare namespace SageMaker {
      * An array of key-value pairs. You can use tags to categorize your Amazon Web Services resources in different ways, for example, by purpose, owner, or environment. For more information, see Tagging Amazon Web Services Resources.
      */
     Tags?: TagList;
+    /**
+     * A timestamp container for when the project was last modified.
+     */
+    LastModifiedTime?: Timestamp;
+    LastModifiedBy?: UserContext;
   }
   export type ProjectArn = string;
   export type ProjectEntityName = string;
   export type ProjectId = string;
   export type ProjectSortBy = "Name"|"CreationTime"|string;
   export type ProjectSortOrder = "Ascending"|"Descending"|string;
-  export type ProjectStatus = "Pending"|"CreateInProgress"|"CreateCompleted"|"CreateFailed"|"DeleteInProgress"|"DeleteFailed"|"DeleteCompleted"|string;
+  export type ProjectStatus = "Pending"|"CreateInProgress"|"CreateCompleted"|"CreateFailed"|"DeleteInProgress"|"DeleteFailed"|"DeleteCompleted"|"UpdateInProgress"|"UpdateCompleted"|"UpdateFailed"|string;
   export interface ProjectSummary {
     /**
      * The name of the project.
@@ -14264,6 +14366,16 @@ declare namespace SageMaker {
      * The path identifier of the product. This value is optional if the product has a default path, and required if the product has more than one path. 
      */
     PathId?: ServiceCatalogEntityId;
+    /**
+     * A list of key value pairs that you specify when you provision a product.
+     */
+    ProvisioningParameters?: ProvisioningParameters;
+  }
+  export interface ServiceCatalogProvisioningUpdateDetails {
+    /**
+     * The ID of the provisioning artifact.
+     */
+    ProvisioningArtifactId?: ServiceCatalogEntityId;
     /**
      * A list of key value pairs that you specify when you provision a product.
      */
@@ -15696,17 +15808,25 @@ declare namespace SageMaker {
   }
   export interface UpdateModelPackageInput {
     /**
-     * The Amazon Resource Name (ARN) of the model.
+     * The Amazon Resource Name (ARN) of the model package.
      */
     ModelPackageArn: ModelPackageArn;
     /**
      * The approval status of the model.
      */
-    ModelApprovalStatus: ModelApprovalStatus;
+    ModelApprovalStatus?: ModelApprovalStatus;
     /**
      * A description for the approval status of the model.
      */
     ApprovalDescription?: ApprovalDescription;
+    /**
+     * The metadata properties associated with the model package versions.
+     */
+    CustomerMetadataProperties?: CustomerMetadataMap;
+    /**
+     * The metadata properties associated with the model package versions to remove.
+     */
+    CustomerMetadataPropertiesToRemove?: CustomerMetadataKeyList;
   }
   export interface UpdateModelPackageOutput {
     /**
@@ -15849,6 +15969,30 @@ declare namespace SageMaker {
      * The Amazon Resource Name (ARN) of the updated pipeline.
      */
     PipelineArn?: PipelineArn;
+  }
+  export interface UpdateProjectInput {
+    /**
+     * The name of the project.
+     */
+    ProjectName: ProjectEntityName;
+    /**
+     * The description for the project.
+     */
+    ProjectDescription?: EntityDescription;
+    /**
+     * The product ID and provisioning artifact ID to provision a service catalog. The provisioning artifact ID will default to the latest provisioning artifact ID of the product, if you don't provide the provisioning artifact ID. For more information, see What is AWS Service Catalog. 
+     */
+    ServiceCatalogProvisioningUpdateDetails?: ServiceCatalogProvisioningUpdateDetails;
+    /**
+     * An array of key-value pairs. You can use tags to categorize your AWS resources in different ways, for example, by purpose, owner, or environment. For more information, see Tagging AWS Resources.
+     */
+    Tags?: TagList;
+  }
+  export interface UpdateProjectOutput {
+    /**
+     * The Amazon Resource Name (ARN) of the project.
+     */
+    ProjectArn: ProjectArn;
   }
   export interface UpdateTrainingJobRequest {
     /**

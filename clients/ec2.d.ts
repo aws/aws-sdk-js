@@ -2789,6 +2789,14 @@ declare class EC2 extends Service {
    */
   getHostReservationPurchasePreview(callback?: (err: AWSError, data: EC2.Types.GetHostReservationPurchasePreviewResult) => void): Request<EC2.Types.GetHostReservationPurchasePreviewResult, AWSError>;
   /**
+   * Returns a list of instance types with the specified instance attributes. You can use the response to preview the instance types without launching instances. Note that the response does not consider capacity. When you specify multiple parameters, you get instance types that satisfy all of the specified parameters. If you specify multiple values for a parameter, you get instance types that satisfy any of the specified values. For more information, see Preview instance types with specified attributes, Attribute-based instance type selection for EC2 Fleet, Attribute-based instance type selection for Spot Fleet, and Spot placement score in the Amazon EC2 User Guide, and Creating an Auto Scaling group using attribute-based instance type selection in the Amazon EC2 Auto Scaling User Guide.
+   */
+  getInstanceTypesFromInstanceRequirements(params: EC2.Types.GetInstanceTypesFromInstanceRequirementsRequest, callback?: (err: AWSError, data: EC2.Types.GetInstanceTypesFromInstanceRequirementsResult) => void): Request<EC2.Types.GetInstanceTypesFromInstanceRequirementsResult, AWSError>;
+  /**
+   * Returns a list of instance types with the specified instance attributes. You can use the response to preview the instance types without launching instances. Note that the response does not consider capacity. When you specify multiple parameters, you get instance types that satisfy all of the specified parameters. If you specify multiple values for a parameter, you get instance types that satisfy any of the specified values. For more information, see Preview instance types with specified attributes, Attribute-based instance type selection for EC2 Fleet, Attribute-based instance type selection for Spot Fleet, and Spot placement score in the Amazon EC2 User Guide, and Creating an Auto Scaling group using attribute-based instance type selection in the Amazon EC2 Auto Scaling User Guide.
+   */
+  getInstanceTypesFromInstanceRequirements(callback?: (err: AWSError, data: EC2.Types.GetInstanceTypesFromInstanceRequirementsResult) => void): Request<EC2.Types.GetInstanceTypesFromInstanceRequirementsResult, AWSError>;
+  /**
    * Retrieves the configuration data of the specified instance. You can use this data to create a launch template.  This action calls on other describe actions to get instance information. Depending on your instance configuration, you may need to allow the following actions in your IAM policy: DescribeSpotInstanceRequests, DescribeInstanceCreditSpecifications, DescribeVolumes, DescribeInstanceAttribute, and DescribeElasticGpus. Or, you can allow describe* depending on your instance requirements.
    */
   getLaunchTemplateData(params: EC2.Types.GetLaunchTemplateDataRequest, callback?: (err: AWSError, data: EC2.Types.GetLaunchTemplateDataResult) => void): Request<EC2.Types.GetLaunchTemplateDataResult, AWSError>;
@@ -2836,6 +2844,14 @@ declare class EC2 extends Service {
    * Retrieves the access status of your account to the EC2 serial console of all instances. By default, access to the EC2 serial console is disabled for your account. For more information, see Manage account access to the EC2 serial console in the Amazon EC2 User Guide.
    */
   getSerialConsoleAccessStatus(callback?: (err: AWSError, data: EC2.Types.GetSerialConsoleAccessStatusResult) => void): Request<EC2.Types.GetSerialConsoleAccessStatusResult, AWSError>;
+  /**
+   * Calculates the Spot placement score for a Region or Availability Zone based on the specified target capacity and compute requirements. You can specify your compute requirements either by using InstanceRequirementsWithMetadata and letting Amazon EC2 choose the optimal instance types to fulfill your Spot request, or you can specify the instance types by using InstanceTypes. For more information, see Spot placement score in the Amazon EC2 User Guide.
+   */
+  getSpotPlacementScores(params: EC2.Types.GetSpotPlacementScoresRequest, callback?: (err: AWSError, data: EC2.Types.GetSpotPlacementScoresResult) => void): Request<EC2.Types.GetSpotPlacementScoresResult, AWSError>;
+  /**
+   * Calculates the Spot placement score for a Region or Availability Zone based on the specified target capacity and compute requirements. You can specify your compute requirements either by using InstanceRequirementsWithMetadata and letting Amazon EC2 choose the optimal instance types to fulfill your Spot request, or you can specify the instance types by using InstanceTypes. For more information, see Spot placement score in the Amazon EC2 User Guide.
+   */
+  getSpotPlacementScores(callback?: (err: AWSError, data: EC2.Types.GetSpotPlacementScoresResult) => void): Request<EC2.Types.GetSpotPlacementScoresResult, AWSError>;
   /**
    * Gets information about the subnet CIDR reservations.
    */
@@ -4038,6 +4054,52 @@ declare class EC2 extends Service {
   waitFor(state: "vpcPeeringConnectionDeleted", callback?: (err: AWSError, data: EC2.Types.DescribeVpcPeeringConnectionsResult) => void): Request<EC2.Types.DescribeVpcPeeringConnectionsResult, AWSError>;
 }
 declare namespace EC2 {
+  export interface AcceleratorCount {
+    /**
+     * The minimum number of accelerators. If this parameter is not specified, there is no minimum limit.
+     */
+    Min?: Integer;
+    /**
+     * The maximum number of accelerators. If this parameter is not specified, there is no maximum limit.
+     */
+    Max?: Integer;
+  }
+  export interface AcceleratorCountRequest {
+    /**
+     * The minimum number of accelerators. To specify no minimum limit, omit this parameter.
+     */
+    Min?: Integer;
+    /**
+     * The maximum number of accelerators. To specify no maximum limit, omit this parameter. To exclude accelerator-enabled instance types, set Max to 0.
+     */
+    Max?: Integer;
+  }
+  export type AcceleratorManufacturer = "nvidia"|"amd"|"amazon-web-services"|"xilinx"|string;
+  export type AcceleratorManufacturerSet = AcceleratorManufacturer[];
+  export type AcceleratorName = "a100"|"v100"|"k80"|"t4"|"m60"|"radeon-pro-v520"|"vu9p"|string;
+  export type AcceleratorNameSet = AcceleratorName[];
+  export interface AcceleratorTotalMemoryMiB {
+    /**
+     * The minimum amount of accelerator memory, in MiB. If this parameter is not specified, there is no minimum limit.
+     */
+    Min?: Integer;
+    /**
+     * The maximum amount of accelerator memory, in MiB. If this parameter is not specified, there is no maximum limit.
+     */
+    Max?: Integer;
+  }
+  export interface AcceleratorTotalMemoryMiBRequest {
+    /**
+     * The minimum amount of accelerator memory, in MiB. To specify no minimum limit, omit this parameter.
+     */
+    Min?: Integer;
+    /**
+     * The maximum amount of accelerator memory, in MiB. To specify no maximum limit, omit this parameter.
+     */
+    Max?: Integer;
+  }
+  export type AcceleratorType = "gpu"|"fpga"|"inference"|string;
+  export type AcceleratorTypeSet = AcceleratorType[];
   export interface AcceptReservedInstancesExchangeQuoteRequest {
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
@@ -4610,6 +4672,7 @@ declare namespace EC2 {
   }
   export type ArchitectureType = "i386"|"x86_64"|"arm64"|"x86_64_mac"|string;
   export type ArchitectureTypeList = ArchitectureType[];
+  export type ArchitectureTypeSet = ArchitectureType[];
   export type ArchitectureValues = "i386"|"x86_64"|"arm64"|"x86_64_mac"|string;
   export type ArnList = ResourceArn[];
   export interface AssignIpv6AddressesRequest {
@@ -5431,8 +5494,29 @@ declare namespace EC2 {
     AvailableVCpus?: Integer;
   }
   export type AvailableInstanceCapacityList = InstanceCapacity[];
+  export type BareMetal = "included"|"required"|"excluded"|string;
   export type BareMetalFlag = boolean;
   export type BaselineBandwidthInMbps = number;
+  export interface BaselineEbsBandwidthMbps {
+    /**
+     * The minimum baseline bandwidth, in Mbps. If this parameter is not specified, there is no minimum limit.
+     */
+    Min?: Integer;
+    /**
+     * The maximum baseline bandwidth, in Mbps. If this parameter is not specified, there is no maximum limit.
+     */
+    Max?: Integer;
+  }
+  export interface BaselineEbsBandwidthMbpsRequest {
+    /**
+     * The minimum baseline bandwidth, in Mbps. To specify no minimum limit, omit this parameter.
+     */
+    Min?: Integer;
+    /**
+     * The maximum baseline bandwidth, in Mbps. To specify no maximum limit, omit this parameter.
+     */
+    Max?: Integer;
+  }
   export type BaselineIops = number;
   export type BaselineThroughputInMBps = number;
   export type BatchState = "submitted"|"active"|"cancelled"|"failed"|"cancelled_running"|"cancelled_terminating"|"modifying"|string;
@@ -5534,6 +5618,7 @@ declare namespace EC2 {
   }
   export type BundleTaskList = BundleTask[];
   export type BundleTaskState = "pending"|"waiting-for-shutdown"|"bundling"|"storing"|"cancelling"|"complete"|"failed"|string;
+  export type BurstablePerformance = "included"|"required"|"excluded"|string;
   export type BurstablePerformanceFlag = boolean;
   export interface ByoipCidr {
     /**
@@ -6717,6 +6802,8 @@ declare namespace EC2 {
   export type CopyTagsFromSource = "volume"|string;
   export type CoreCount = number;
   export type CoreCountList = CoreCount[];
+  export type CpuManufacturer = "intel"|"amd"|"amazon-web-services"|string;
+  export type CpuManufacturerSet = CpuManufacturer[];
   export interface CpuOptions {
     /**
      * The number of CPU cores for the instance.
@@ -11675,7 +11762,7 @@ declare namespace EC2 {
   }
   export interface DescribeInstancesRequest {
     /**
-     * The filters.    affinity - The affinity setting for an instance running on a Dedicated Host (default | host).    architecture - The instance architecture (i386 | x86_64 | arm64).    availability-zone - The Availability Zone of the instance.    block-device-mapping.attach-time - The attach time for an EBS volume mapped to the instance, for example, 2010-09-15T17:15:20.000Z.    block-device-mapping.delete-on-termination - A Boolean that indicates whether the EBS volume is deleted on instance termination.    block-device-mapping.device-name - The device name specified in the block device mapping (for example, /dev/sdh or xvdh).    block-device-mapping.status - The status for the EBS volume (attaching | attached | detaching | detached).    block-device-mapping.volume-id - The volume ID of the EBS volume.    client-token - The idempotency token you provided when you launched the instance.    dns-name - The public DNS name of the instance.    group-id - The ID of the security group for the instance. EC2-Classic only.    group-name - The name of the security group for the instance. EC2-Classic only.    hibernation-options.configured - A Boolean that indicates whether the instance is enabled for hibernation. A value of true means that the instance is enabled for hibernation.     host-id - The ID of the Dedicated Host on which the instance is running, if applicable.    hypervisor - The hypervisor type of the instance (ovm | xen). The value xen is used for both Xen and Nitro hypervisors.    iam-instance-profile.arn - The instance profile associated with the instance. Specified as an ARN.    image-id - The ID of the image used to launch the instance.    instance-id - The ID of the instance.    instance-lifecycle - Indicates whether this is a Spot Instance or a Scheduled Instance (spot | scheduled).    instance-state-code - The state of the instance, as a 16-bit unsigned integer. The high byte is used for internal purposes and should be ignored. The low byte is set based on the state represented. The valid values are: 0 (pending), 16 (running), 32 (shutting-down), 48 (terminated), 64 (stopping), and 80 (stopped).    instance-state-name - The state of the instance (pending | running | shutting-down | terminated | stopping | stopped).    instance-type - The type of instance (for example, t2.micro).    instance.group-id - The ID of the security group for the instance.     instance.group-name - The name of the security group for the instance.     ip-address - The public IPv4 address of the instance.    kernel-id - The kernel ID.    key-name - The name of the key pair used when the instance was launched.    launch-index - When launching multiple instances, this is the index for the instance in the launch group (for example, 0, 1, 2, and so on).     launch-time - The time when the instance was launched.    metadata-options.http-tokens - The metadata request authorization state (optional | required)    metadata-options.http-put-response-hop-limit - The http metadata request put response hop limit (integer, possible values 1 to 64)    metadata-options.http-endpoint - Enable or disable metadata access on http endpoint (enabled | disabled)    monitoring-state - Indicates whether detailed monitoring is enabled (disabled | enabled).    network-interface.addresses.private-ip-address - The private IPv4 address associated with the network interface.    network-interface.addresses.primary - Specifies whether the IPv4 address of the network interface is the primary private IPv4 address.    network-interface.addresses.association.public-ip - The ID of the association of an Elastic IP address (IPv4) with a network interface.    network-interface.addresses.association.ip-owner-id - The owner ID of the private IPv4 address associated with the network interface.    network-interface.association.public-ip - The address of the Elastic IP address (IPv4) bound to the network interface.    network-interface.association.ip-owner-id - The owner of the Elastic IP address (IPv4) associated with the network interface.    network-interface.association.allocation-id - The allocation ID returned when you allocated the Elastic IP address (IPv4) for your network interface.    network-interface.association.association-id - The association ID returned when the network interface was associated with an IPv4 address.    network-interface.attachment.attachment-id - The ID of the interface attachment.    network-interface.attachment.instance-id - The ID of the instance to which the network interface is attached.    network-interface.attachment.instance-owner-id - The owner ID of the instance to which the network interface is attached.    network-interface.attachment.device-index - The device index to which the network interface is attached.    network-interface.attachment.status - The status of the attachment (attaching | attached | detaching | detached).    network-interface.attachment.attach-time - The time that the network interface was attached to an instance.    network-interface.attachment.delete-on-termination - Specifies whether the attachment is deleted when an instance is terminated.    network-interface.availability-zone - The Availability Zone for the network interface.    network-interface.description - The description of the network interface.    network-interface.group-id - The ID of a security group associated with the network interface.    network-interface.group-name - The name of a security group associated with the network interface.    network-interface.ipv6-addresses.ipv6-address - The IPv6 address associated with the network interface.    network-interface.mac-address - The MAC address of the network interface.    network-interface.network-interface-id - The ID of the network interface.    network-interface.owner-id - The ID of the owner of the network interface.    network-interface.private-dns-name - The private DNS name of the network interface.    network-interface.requester-id - The requester ID for the network interface.    network-interface.requester-managed - Indicates whether the network interface is being managed by Amazon Web Services.    network-interface.status - The status of the network interface (available) | in-use).    network-interface.source-dest-check - Whether the network interface performs source/destination checking. A value of true means that checking is enabled, and false means that checking is disabled. The value must be false for the network interface to perform network address translation (NAT) in your VPC.    network-interface.subnet-id - The ID of the subnet for the network interface.    network-interface.vpc-id - The ID of the VPC for the network interface.    outpost-arn - The Amazon Resource Name (ARN) of the Outpost.    owner-id - The Amazon Web Services account ID of the instance owner.    placement-group-name - The name of the placement group for the instance.    placement-partition-number - The partition in which the instance is located.    platform - The platform. To list only Windows instances, use windows.    private-dns-name - The private IPv4 DNS name of the instance.    private-ip-address - The private IPv4 address of the instance.    product-code - The product code associated with the AMI used to launch the instance.    product-code.type - The type of product code (devpay | marketplace).    ramdisk-id - The RAM disk ID.    reason - The reason for the current state of the instance (for example, shows "User Initiated [date]" when you stop or terminate the instance). Similar to the state-reason-code filter.    requester-id - The ID of the entity that launched the instance on your behalf (for example, Amazon Web Services Management Console, Auto Scaling, and so on).    reservation-id - The ID of the instance's reservation. A reservation ID is created any time you launch an instance. A reservation ID has a one-to-one relationship with an instance launch request, but can be associated with more than one instance if you launch multiple instances using the same launch request. For example, if you launch one instance, you get one reservation ID. If you launch ten instances using the same launch request, you also get one reservation ID.    root-device-name - The device name of the root device volume (for example, /dev/sda1).    root-device-type - The type of the root device volume (ebs | instance-store).    source-dest-check - Indicates whether the instance performs source/destination checking. A value of true means that checking is enabled, and false means that checking is disabled. The value must be false for the instance to perform network address translation (NAT) in your VPC.     spot-instance-request-id - The ID of the Spot Instance request.    state-reason-code - The reason code for the state change.    state-reason-message - A message that describes the state change.    subnet-id - The ID of the subnet for the instance.    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources that have a tag with a specific key, regardless of the tag value.    tenancy - The tenancy of an instance (dedicated | default | host).    virtualization-type - The virtualization type of the instance (paravirtual | hvm).    vpc-id - The ID of the VPC that the instance is running in.  
+     * The filters.    affinity - The affinity setting for an instance running on a Dedicated Host (default | host).    architecture - The instance architecture (i386 | x86_64 | arm64).    availability-zone - The Availability Zone of the instance.    block-device-mapping.attach-time - The attach time for an EBS volume mapped to the instance, for example, 2010-09-15T17:15:20.000Z.    block-device-mapping.delete-on-termination - A Boolean that indicates whether the EBS volume is deleted on instance termination.    block-device-mapping.device-name - The device name specified in the block device mapping (for example, /dev/sdh or xvdh).    block-device-mapping.status - The status for the EBS volume (attaching | attached | detaching | detached).    block-device-mapping.volume-id - The volume ID of the EBS volume.    client-token - The idempotency token you provided when you launched the instance.    dns-name - The public DNS name of the instance.    group-id - The ID of the security group for the instance. EC2-Classic only.    group-name - The name of the security group for the instance. EC2-Classic only.    hibernation-options.configured - A Boolean that indicates whether the instance is enabled for hibernation. A value of true means that the instance is enabled for hibernation.     host-id - The ID of the Dedicated Host on which the instance is running, if applicable.    hypervisor - The hypervisor type of the instance (ovm | xen). The value xen is used for both Xen and Nitro hypervisors.    iam-instance-profile.arn - The instance profile associated with the instance. Specified as an ARN.    image-id - The ID of the image used to launch the instance.    instance-id - The ID of the instance.    instance-lifecycle - Indicates whether this is a Spot Instance or a Scheduled Instance (spot | scheduled).    instance-state-code - The state of the instance, as a 16-bit unsigned integer. The high byte is used for internal purposes and should be ignored. The low byte is set based on the state represented. The valid values are: 0 (pending), 16 (running), 32 (shutting-down), 48 (terminated), 64 (stopping), and 80 (stopped).    instance-state-name - The state of the instance (pending | running | shutting-down | terminated | stopping | stopped).    instance-type - The type of instance (for example, t2.micro).    instance.group-id - The ID of the security group for the instance.     instance.group-name - The name of the security group for the instance.     ip-address - The public IPv4 address of the instance.    kernel-id - The kernel ID.    key-name - The name of the key pair used when the instance was launched.    launch-index - When launching multiple instances, this is the index for the instance in the launch group (for example, 0, 1, 2, and so on).     launch-time - The time when the instance was launched, in the ISO 8601 format in the UTC time zone (YYYY-MM-DDThh:mm:ss.sssZ), for example, 2021-09-29T11:04:43.305Z. You can use a wildcard (*), for example, 2021-09-29T*, which matches an entire day.    metadata-options.http-tokens - The metadata request authorization state (optional | required)    metadata-options.http-put-response-hop-limit - The http metadata request put response hop limit (integer, possible values 1 to 64)    metadata-options.http-endpoint - Enable or disable metadata access on http endpoint (enabled | disabled)    monitoring-state - Indicates whether detailed monitoring is enabled (disabled | enabled).    network-interface.addresses.private-ip-address - The private IPv4 address associated with the network interface.    network-interface.addresses.primary - Specifies whether the IPv4 address of the network interface is the primary private IPv4 address.    network-interface.addresses.association.public-ip - The ID of the association of an Elastic IP address (IPv4) with a network interface.    network-interface.addresses.association.ip-owner-id - The owner ID of the private IPv4 address associated with the network interface.    network-interface.association.public-ip - The address of the Elastic IP address (IPv4) bound to the network interface.    network-interface.association.ip-owner-id - The owner of the Elastic IP address (IPv4) associated with the network interface.    network-interface.association.allocation-id - The allocation ID returned when you allocated the Elastic IP address (IPv4) for your network interface.    network-interface.association.association-id - The association ID returned when the network interface was associated with an IPv4 address.    network-interface.attachment.attachment-id - The ID of the interface attachment.    network-interface.attachment.instance-id - The ID of the instance to which the network interface is attached.    network-interface.attachment.instance-owner-id - The owner ID of the instance to which the network interface is attached.    network-interface.attachment.device-index - The device index to which the network interface is attached.    network-interface.attachment.status - The status of the attachment (attaching | attached | detaching | detached).    network-interface.attachment.attach-time - The time that the network interface was attached to an instance.    network-interface.attachment.delete-on-termination - Specifies whether the attachment is deleted when an instance is terminated.    network-interface.availability-zone - The Availability Zone for the network interface.    network-interface.description - The description of the network interface.    network-interface.group-id - The ID of a security group associated with the network interface.    network-interface.group-name - The name of a security group associated with the network interface.    network-interface.ipv6-addresses.ipv6-address - The IPv6 address associated with the network interface.    network-interface.mac-address - The MAC address of the network interface.    network-interface.network-interface-id - The ID of the network interface.    network-interface.owner-id - The ID of the owner of the network interface.    network-interface.private-dns-name - The private DNS name of the network interface.    network-interface.requester-id - The requester ID for the network interface.    network-interface.requester-managed - Indicates whether the network interface is being managed by Amazon Web Services.    network-interface.status - The status of the network interface (available) | in-use).    network-interface.source-dest-check - Whether the network interface performs source/destination checking. A value of true means that checking is enabled, and false means that checking is disabled. The value must be false for the network interface to perform network address translation (NAT) in your VPC.    network-interface.subnet-id - The ID of the subnet for the network interface.    network-interface.vpc-id - The ID of the VPC for the network interface.    outpost-arn - The Amazon Resource Name (ARN) of the Outpost.    owner-id - The Amazon Web Services account ID of the instance owner.    placement-group-name - The name of the placement group for the instance.    placement-partition-number - The partition in which the instance is located.    platform - The platform. To list only Windows instances, use windows.    private-dns-name - The private IPv4 DNS name of the instance.    private-ip-address - The private IPv4 address of the instance.    product-code - The product code associated with the AMI used to launch the instance.    product-code.type - The type of product code (devpay | marketplace).    ramdisk-id - The RAM disk ID.    reason - The reason for the current state of the instance (for example, shows "User Initiated [date]" when you stop or terminate the instance). Similar to the state-reason-code filter.    requester-id - The ID of the entity that launched the instance on your behalf (for example, Amazon Web Services Management Console, Auto Scaling, and so on).    reservation-id - The ID of the instance's reservation. A reservation ID is created any time you launch an instance. A reservation ID has a one-to-one relationship with an instance launch request, but can be associated with more than one instance if you launch multiple instances using the same launch request. For example, if you launch one instance, you get one reservation ID. If you launch ten instances using the same launch request, you also get one reservation ID.    root-device-name - The device name of the root device volume (for example, /dev/sda1).    root-device-type - The type of the root device volume (ebs | instance-store).    source-dest-check - Indicates whether the instance performs source/destination checking. A value of true means that checking is enabled, and false means that checking is disabled. The value must be false for the instance to perform network address translation (NAT) in your VPC.     spot-instance-request-id - The ID of the Spot Instance request.    state-reason-code - The reason code for the state change.    state-reason-message - A message that describes the state change.    subnet-id - The ID of the subnet for the instance.    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources that have a tag with a specific key, regardless of the tag value.    tenancy - The tenancy of an instance (dedicated | default | host).    virtualization-type - The virtualization type of the instance (paravirtual | hvm).    vpc-id - The ID of the VPC that the instance is running in.  
      */
     Filters?: FilterList;
     /**
@@ -15333,6 +15420,8 @@ declare namespace EC2 {
   }
   export type EventType = "instanceChange"|"fleetRequestChange"|"error"|"information"|string;
   export type ExcessCapacityTerminationPolicy = "noTermination"|"default"|string;
+  export type ExcludedInstanceType = string;
+  export type ExcludedInstanceTypeSet = ExcludedInstanceType[];
   export type ExecutableByStringList = String[];
   export interface Explanation {
     /**
@@ -16001,7 +16090,7 @@ declare namespace EC2 {
   }
   export interface FleetLaunchTemplateOverrides {
     /**
-     * The instance type.
+     * The instance type.  If you specify InstanceTypes, you can't specify InstanceRequirements. 
      */
     InstanceType?: InstanceType;
     /**
@@ -16028,12 +16117,16 @@ declare namespace EC2 {
      * The location where the instance launched, if applicable.
      */
     Placement?: PlacementResponse;
+    /**
+     * The attributes for the instance types. When you specify instance attributes, Amazon EC2 will identify instance types with those attributes.  If you specify InstanceRequirements, you can't specify InstanceTypes. 
+     */
+    InstanceRequirements?: InstanceRequirements;
   }
   export type FleetLaunchTemplateOverridesList = FleetLaunchTemplateOverrides[];
   export type FleetLaunchTemplateOverridesListRequest = FleetLaunchTemplateOverridesRequest[];
   export interface FleetLaunchTemplateOverridesRequest {
     /**
-     * The instance type.
+     * The instance type.  If you specify InstanceTypes, you can't specify InstanceRequirements. 
      */
     InstanceType?: InstanceType;
     /**
@@ -16060,6 +16153,10 @@ declare namespace EC2 {
      * The location where the instance launched, if applicable.
      */
     Placement?: Placement;
+    /**
+     * The attributes for the instance types. When you specify instance attributes, Amazon EC2 will identify instance types with those attributes.  If you specify InstanceRequirements, you can't specify InstanceTypes. 
+     */
+    InstanceRequirements?: InstanceRequirementsRequest;
   }
   export interface FleetLaunchTemplateSpecification {
     /**
@@ -16629,6 +16726,42 @@ declare namespace EC2 {
      */
     TotalUpfrontPrice?: String;
   }
+  export interface GetInstanceTypesFromInstanceRequirementsRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The processor architecture type.
+     */
+    ArchitectureTypes: ArchitectureTypeSet;
+    /**
+     * The virtualization type.
+     */
+    VirtualizationTypes: VirtualizationTypeSet;
+    /**
+     * The attributes required for the instance types.
+     */
+    InstanceRequirements: InstanceRequirementsRequest;
+    /**
+     * The maximum number of results to return in a single call. Specify a value between 1 and&#x2028; 1000. The default value is 1000. To retrieve the remaining results, make another call with&#x2028; the returned NextToken value.
+     */
+    MaxResults?: Integer;
+    /**
+     * The token for the next set of results.
+     */
+    NextToken?: String;
+  }
+  export interface GetInstanceTypesFromInstanceRequirementsResult {
+    /**
+     * The instance types with the specified instance attributes.
+     */
+    InstanceTypes?: InstanceTypeInfoFromInstanceRequirementsSet;
+    /**
+     * The token for the next set of results.
+     */
+    NextToken?: String;
+  }
   export interface GetLaunchTemplateDataRequest {
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
@@ -16793,6 +16926,54 @@ declare namespace EC2 {
      * If true, access to the EC2 serial console of all instances is enabled for your account. If false, access to the EC2 serial console of all instances is disabled for your account.
      */
     SerialConsoleAccessEnabled?: Boolean;
+  }
+  export interface GetSpotPlacementScoresRequest {
+    /**
+     * The instance types. We recommend that you specify at least three instance types. If you specify one or two instance types, or specify variations of a single instance type (for example, an m3.xlarge with and without instance storage), the returned placement score will always be low.  If you specify InstanceTypes, you can't specify InstanceRequirementsWithMetadata.
+     */
+    InstanceTypes?: InstanceTypes;
+    /**
+     * The target capacity.
+     */
+    TargetCapacity: SpotPlacementScoresTargetCapacity;
+    /**
+     * The unit for the target capacity. Default: units (translates to number of instances)
+     */
+    TargetCapacityUnitType?: TargetCapacityUnitType;
+    /**
+     * Specify true so that the response returns a list of scored Availability Zones. Otherwise, the response returns a list of scored Regions. A list of scored Availability Zones is useful if you want to launch all of your Spot capacity into a single Availability Zone.
+     */
+    SingleAvailabilityZone?: Boolean;
+    /**
+     * The Regions used to narrow down the list of Regions to be scored. Enter the Region code, for example, us-east-1.
+     */
+    RegionNames?: RegionNames;
+    /**
+     * The attributes for the instance types. When you specify instance attributes, Amazon EC2 will identify instance types with those attributes. If you specify InstanceRequirementsWithMetadata, you can't specify InstanceTypes.
+     */
+    InstanceRequirementsWithMetadata?: InstanceRequirementsWithMetadataRequest;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The maximum number of results to return in a single call. Specify a value between 1 and&#x2028; 1000. The default value is 1000. To retrieve the remaining results, make another call with&#x2028; the returned NextToken value.
+     */
+    MaxResults?: SpotPlacementScoresMaxResults;
+    /**
+     * The token for the next set of results.
+     */
+    NextToken?: String;
+  }
+  export interface GetSpotPlacementScoresResult {
+    /**
+     * The Spot placement score for the top 10 Regions or Availability Zones, scored on a scale from 1 to 10. Each score&#x2028; reflects how likely it is that each Region or Availability Zone will succeed at fulfilling the specified target capacity&#x2028; at the time of the Spot placement score request. A score of 10 means that your Spot capacity request is highly likely to succeed in that Region or Availability Zone.  If you request a Spot placement score for Regions, a high score assumes that your fleet request will be configured to use all Availability Zones and the capacity-optimized allocation strategy. If you request a Spot placement score for Availability Zones, a high score assumes that your fleet request will be configured to use a single Availability Zone and the capacity-optimized allocation strategy. Different&#x2028; Regions or Availability Zones might return the same score.  The Spot placement score serves as a recommendation only. No score guarantees that your Spot request will be fully or partially fulfilled. 
+     */
+    SpotPlacementScores?: SpotPlacementScores;
+    /**
+     * The token for the next set of results.
+     */
+    NextToken?: String;
   }
   export type GetSubnetCidrReservationsMaxResults = number;
   export interface GetSubnetCidrReservationsRequest {
@@ -18660,6 +18841,8 @@ declare namespace EC2 {
      */
     CpuCredits?: String;
   }
+  export type InstanceGeneration = "current"|"previous"|string;
+  export type InstanceGenerationSet = InstanceGeneration[];
   export type InstanceHealthStatus = "healthy"|"unhealthy"|string;
   export type InstanceId = string;
   export type InstanceIdList = InstanceId[];
@@ -18980,6 +19163,192 @@ declare namespace EC2 {
     PrivateIpAddress?: String;
   }
   export type InstancePrivateIpAddressList = InstancePrivateIpAddress[];
+  export interface InstanceRequirements {
+    /**
+     * The minimum and maximum number of vCPUs.
+     */
+    VCpuCount?: VCpuCountRange;
+    /**
+     * The minimum and maximum amount of memory, in MiB.
+     */
+    MemoryMiB?: MemoryMiB;
+    /**
+     * The CPU manufacturers to include.   For instance types with Intel CPUs, specify intel.   For instance types with AMD CPUs, specify amd.   For instance types with Amazon Web Services CPUs, specify amazon-web-services.    Don't confuse the CPU manufacturer with the CPU architecture. Instances will be launched with a compatible CPU architecture based on the Amazon Machine Image (AMI) that you specify in your launch template.  Default: Any manufacturer
+     */
+    CpuManufacturers?: CpuManufacturerSet;
+    /**
+     * The minimum and maximum amount of memory per vCPU, in GiB. Default: No minimum or maximum limits
+     */
+    MemoryGiBPerVCpu?: MemoryGiBPerVCpu;
+    /**
+     * The instance types to exclude. You can use strings with one or more wild cards, represented by an asterisk (*), to exclude an instance type, size, or generation. The following are examples: m5.8xlarge, c5*.*, m5a.*, r*, *3*. For example, if you specify c5*.*, Amazon EC2 will exclude the entire C5 instance family (all C5a and C5n instance types). If you specify c5a.*, Amazon EC2 excludes all the C5a instance types, but does not exclude the C5n instance types. Default: No excluded instance types
+     */
+    ExcludedInstanceTypes?: ExcludedInstanceTypeSet;
+    /**
+     * Indicates whether current or previous generation instance types are included. The current generation instance types are recommended for use. Current generation instance types are typically the latest two to three generations in each instance family. For more information, see Instance types in the Amazon EC2 User Guide. For current generation instance types, specify current. For previous generation instance types, specify previous. Default: Current and previous generation instance types
+     */
+    InstanceGenerations?: InstanceGenerationSet;
+    /**
+     * The price protection threshold for Spot Instances. This is the maximum you’ll pay for a Spot Instance, expressed as a percentage above the cheapest M, C, or R instance type with your specified attributes. When Amazon EC2 selects instance types with your attributes, it excludes instance types priced above your threshold. The parameter accepts an integer, which Amazon EC2 interprets as a percentage. To turn off price protection, specify a high value, such as 999999. This parameter is not supported for GetSpotPlacementScores and GetInstanceTypesFromInstanceRequirements. Default: 100 
+     */
+    SpotMaxPricePercentageOverLowestPrice?: Integer;
+    /**
+     * The price protection threshold for On-Demand Instances. This is the maximum you’ll pay for an On-Demand Instance, expressed as a percentage above the cheapest M, C, or R instance type with your specified attributes. When Amazon EC2 selects instance types with your attributes, it excludes instance types priced above your threshold. The parameter accepts an integer, which Amazon EC2 interprets as a percentage. To turn off price protection, specify a high value, such as 999999. This parameter is not supported for GetSpotPlacementScores and GetInstanceTypesFromInstanceRequirements. Default: 20 
+     */
+    OnDemandMaxPricePercentageOverLowestPrice?: Integer;
+    /**
+     * Indicates whether bare metal instance types must be included, excluded, or required.   To include bare metal instance types, specify included.   To require only bare metal instance types, specify required.   To exclude bare metal instance types, specify excluded.   Default: excluded 
+     */
+    BareMetal?: BareMetal;
+    /**
+     * Indicates whether burstable performance T instance types are included, excluded, or required. For more information, see Burstable performance instances.   To include burstable performance instance types, specify included.   To require only burstable performance instance types, specify required.   To exclude burstable performance instance types, specify excluded.   Default: excluded 
+     */
+    BurstablePerformance?: BurstablePerformance;
+    /**
+     * Indicates whether instance types must support hibernation for On-Demand Instances. This parameter is not supported for GetSpotPlacementScores. Default: false 
+     */
+    RequireHibernateSupport?: Boolean;
+    /**
+     * The minimum and maximum number of network interfaces. Default: No minimum or maximum limits
+     */
+    NetworkInterfaceCount?: NetworkInterfaceCount;
+    /**
+     * Indicates whether instance types with instance store volumes are included, excluded, or required. For more information, Amazon EC2 instance store in the Amazon EC2 User Guide.   To include instance types with instance store volumes, specify included.   To require only instance types with instance store volumes, specify required.   To exclude instance types with instance store volumes, specify excluded.   Default: included 
+     */
+    LocalStorage?: LocalStorage;
+    /**
+     * The type of local storage that is required.   For instance types with hard disk drive (HDD) storage, specify hdd.   For instance types with solid state drive (SDD) storage, specify sdd.   Default: hdd and sdd 
+     */
+    LocalStorageTypes?: LocalStorageTypeSet;
+    /**
+     * The minimum and maximum amount of total local storage, in GB. Default: No minimum or maximum limits
+     */
+    TotalLocalStorageGB?: TotalLocalStorageGB;
+    /**
+     * The minimum and maximum baseline bandwidth to Amazon EBS, in Mbps. For more information, see Amazon EBS–optimized instances in the Amazon EC2 User Guide. Default: No minimum or maximum limits
+     */
+    BaselineEbsBandwidthMbps?: BaselineEbsBandwidthMbps;
+    /**
+     * The accelerator types that must be on the instance type.   For instance types with GPU accelerators, specify gpu.   For instance types with FPGA accelerators, specify fpga.   For instance types with inference accelerators, specify inference.   Default: Any accelerator type
+     */
+    AcceleratorTypes?: AcceleratorTypeSet;
+    /**
+     * The minimum and maximum number of accelerators (GPUs, FPGAs, or Amazon Web Services Inferentia chips) on an instance. To exclude accelerator-enabled instance types, set Max to 0. Default: No minimum or maximum limits
+     */
+    AcceleratorCount?: AcceleratorCount;
+    /**
+     * Indicates whether instance types must have accelerators by specific manufacturers.   For instance types with NVIDIA devices, specify nvidia.   For instance types with AMD devices, specify amd.   For instance types with Amazon Web Services devices, specify amazon-web-services.   For instance types with Xilinx devices, specify xilinx.   Default: Any manufacturer
+     */
+    AcceleratorManufacturers?: AcceleratorManufacturerSet;
+    /**
+     * The accelerators that must be on the instance type.   For instance types with NVIDIA A100 GPUs, specify a100.   For instance types with NVIDIA V100 GPUs, specify v100.   For instance types with NVIDIA K80 GPUs, specify k80.   For instance types with NVIDIA T4 GPUs, specify t4.   For instance types with NVIDIA M60 GPUs, specify m60.   For instance types with AMD Radeon Pro V520 GPUs, specify radeon-pro-v520.   For instance types with Xilinx VU9P FPGAs, specify vu9p.   Default: Any accelerator
+     */
+    AcceleratorNames?: AcceleratorNameSet;
+    /**
+     * The minimum and maximum amount of total accelerator memory, in MiB. Default: No minimum or maximum limits
+     */
+    AcceleratorTotalMemoryMiB?: AcceleratorTotalMemoryMiB;
+  }
+  export interface InstanceRequirementsRequest {
+    /**
+     * The minimum and maximum number of vCPUs.
+     */
+    VCpuCount: VCpuCountRangeRequest;
+    /**
+     * The minimum and maximum amount of memory, in MiB.
+     */
+    MemoryMiB: MemoryMiBRequest;
+    /**
+     * The CPU manufacturers to include.   For instance types with Intel CPUs, specify intel.   For instance types with AMD CPUs, specify amd.   For instance types with Amazon Web Services CPUs, specify amazon-web-services.    Don't confuse the CPU manufacturer with the CPU architecture. Instances will be launched with a compatible CPU architecture based on the Amazon Machine Image (AMI) that you specify in your launch template.  Default: Any manufacturer
+     */
+    CpuManufacturers?: CpuManufacturerSet;
+    /**
+     * The minimum and maximum amount of memory per vCPU, in GiB. Default: No minimum or maximum limits
+     */
+    MemoryGiBPerVCpu?: MemoryGiBPerVCpuRequest;
+    /**
+     * The instance types to exclude. You can use strings with one or more wild cards, represented by an asterisk (*), to exclude an instance family, type, size, or generation. The following are examples: m5.8xlarge, c5*.*, m5a.*, r*, *3*. For example, if you specify c5*.*, Amazon EC2 will exclude the entire C5 instance family (all C5a and C5n instance types). If you specify c5a.*, Amazon EC2 excludes all the C5a instance types, but does not exclude the C5n instance types. Default: No excluded instance types
+     */
+    ExcludedInstanceTypes?: ExcludedInstanceTypeSet;
+    /**
+     * Indicates whether current or previous generation instance types are included. The current generation instance types are recommended for use. Current generation instance types are typically the latest two to three generations in each instance family. For more information, see Instance types in the Amazon EC2 User Guide. For current generation instance types, specify current. For previous generation instance types, specify previous. Default: Current and previous generation instance types
+     */
+    InstanceGenerations?: InstanceGenerationSet;
+    /**
+     * The price protection threshold for Spot Instance. This is the maximum you’ll pay for an Spot Instance, expressed as a percentage above the cheapest M, C, or R instance type with your specified attributes. When Amazon EC2 selects instance types with your attributes, it excludes instance types priced above your threshold. The parameter accepts an integer, which Amazon EC2 interprets as a percentage. To turn off price protection, specify a high value, such as 999999. This parameter is not supported for GetSpotPlacementScores and GetInstanceTypesFromInstanceRequirements. Default: 100 
+     */
+    SpotMaxPricePercentageOverLowestPrice?: Integer;
+    /**
+     * The price protection threshold for On-Demand Instances. This is the maximum you’ll pay for an On-Demand Instance, expressed as a percentage above the cheapest M, C, or R instance type with your specified attributes. When Amazon EC2 selects instance types with your attributes, it excludes instance types priced above your threshold. The parameter accepts an integer, which Amazon EC2 interprets as a percentage. To turn off price protection, specify a high value, such as 999999. This parameter is not supported for GetSpotPlacementScores and GetInstanceTypesFromInstanceRequirements. Default: 20 
+     */
+    OnDemandMaxPricePercentageOverLowestPrice?: Integer;
+    /**
+     * Indicates whether bare metal instance types must be included, excluded, or required.   To include bare metal instance types, specify included.   To require only bare metal instance types, specify required.   To exclude bare metal instance types, specify excluded.   Default: excluded 
+     */
+    BareMetal?: BareMetal;
+    /**
+     * Indicates whether burstable performance T instance types are included, excluded, or required. For more information, see Burstable performance instances.   To include burstable performance instance types, specify included.   To require only burstable performance instance types, specify required.   To exclude burstable performance instance types, specify excluded.   Default: excluded 
+     */
+    BurstablePerformance?: BurstablePerformance;
+    /**
+     * Indicates whether instance types must support hibernation for On-Demand Instances. This parameter is not supported for GetSpotPlacementScores. Default: false 
+     */
+    RequireHibernateSupport?: Boolean;
+    /**
+     * The minimum and maximum number of network interfaces. Default: No minimum or maximum limits
+     */
+    NetworkInterfaceCount?: NetworkInterfaceCountRequest;
+    /**
+     * Indicates whether instance types with instance store volumes are included, excluded, or required. For more information, Amazon EC2 instance store in the Amazon EC2 User Guide.   To include instance types with instance store volumes, specify included.   To require only instance types with instance store volumes, specify required.   To exclude instance types with instance store volumes, specify excluded.   Default: included 
+     */
+    LocalStorage?: LocalStorage;
+    /**
+     * The type of local storage that is required.   For instance types with hard disk drive (HDD) storage, specify hdd.   For instance types with solid state drive (SDD) storage, specify sdd.   Default: hdd and sdd 
+     */
+    LocalStorageTypes?: LocalStorageTypeSet;
+    /**
+     * The minimum and maximum amount of total local storage, in GB. Default: No minimum or maximum limits
+     */
+    TotalLocalStorageGB?: TotalLocalStorageGBRequest;
+    /**
+     * The minimum and maximum baseline bandwidth to Amazon EBS, in Mbps. For more information, see Amazon EBS–optimized instances in the Amazon EC2 User Guide. Default: No minimum or maximum limits
+     */
+    BaselineEbsBandwidthMbps?: BaselineEbsBandwidthMbpsRequest;
+    /**
+     * The accelerator types that must be on the instance type.   To include instance types with GPU hardware, specify gpu.   To include instance types with FPGA hardware, specify fpga.   To include instance types with inference hardware, specify inference.   Default: Any accelerator type
+     */
+    AcceleratorTypes?: AcceleratorTypeSet;
+    /**
+     * The minimum and maximum number of accelerators (GPUs, FPGAs, or Amazon Web Services Inferentia chips) on an instance. To exclude accelerator-enabled instance types, set Max to 0. Default: No minimum or maximum limits
+     */
+    AcceleratorCount?: AcceleratorCountRequest;
+    /**
+     * Indicates whether instance types must have accelerators by specific manufacturers.   For instance types with NVIDIA devices, specify nvidia.   For instance types with AMD devices, specify amd.   For instance types with Amazon Web Services devices, specify amazon-web-services.   For instance types with Xilinx devices, specify xilinx.   Default: Any manufacturer
+     */
+    AcceleratorManufacturers?: AcceleratorManufacturerSet;
+    /**
+     * The accelerators that must be on the instance type.   For instance types with NVIDIA A100 GPUs, specify a100.   For instance types with NVIDIA V100 GPUs, specify v100.   For instance types with NVIDIA K80 GPUs, specify k80.   For instance types with NVIDIA T4 GPUs, specify t4.   For instance types with NVIDIA M60 GPUs, specify m60.   For instance types with AMD Radeon Pro V520 GPUs, specify radeon-pro-v520.   For instance types with Xilinx VU9P FPGAs, specify  vu9p.   Default: Any accelerator
+     */
+    AcceleratorNames?: AcceleratorNameSet;
+    /**
+     * The minimum and maximum amount of total accelerator memory, in MiB. Default: No minimum or maximum limits
+     */
+    AcceleratorTotalMemoryMiB?: AcceleratorTotalMemoryMiBRequest;
+  }
+  export interface InstanceRequirementsWithMetadataRequest {
+    /**
+     * The architecture type.
+     */
+    ArchitectureTypes?: ArchitectureTypeSet;
+    /**
+     * The virtualization type.
+     */
+    VirtualizationTypes?: VirtualizationTypeSet;
+    /**
+     * The attributes for the instance types. When you specify instance attributes, Amazon EC2 will identify instance types with those attributes.
+     */
+    InstanceRequirements?: InstanceRequirementsRequest;
+  }
   export interface InstanceSpecification {
     /**
      * The instance to specify which volumes should be snapshotted.
@@ -19230,6 +19599,13 @@ declare namespace EC2 {
      */
     SupportedBootModes?: BootModeTypeList;
   }
+  export interface InstanceTypeInfoFromInstanceRequirements {
+    /**
+     * The matching instance type.
+     */
+    InstanceType?: String;
+  }
+  export type InstanceTypeInfoFromInstanceRequirementsSet = InstanceTypeInfoFromInstanceRequirements[];
   export type InstanceTypeInfoList = InstanceTypeInfo[];
   export type InstanceTypeList = InstanceType[];
   export interface InstanceTypeOffering {
@@ -19247,6 +19623,7 @@ declare namespace EC2 {
     Location?: Location;
   }
   export type InstanceTypeOfferingsList = InstanceTypeOffering[];
+  export type InstanceTypes = String[];
   export interface InstanceUsage {
     /**
      * The ID of the Amazon Web Services account that is making use of the Capacity Reservation.
@@ -20117,6 +20494,10 @@ declare namespace EC2 {
      * The priority for the launch template override. The highest priority is launched first. If OnDemandAllocationStrategy is set to prioritized, Spot Fleet uses priority to determine which launch template override to use first in fulfilling On-Demand capacity. If the Spot AllocationStrategy is set to capacityOptimizedPrioritized, Spot Fleet uses priority on a best-effort basis to determine which launch template override to use in fulfilling Spot capacity, but optimizes for capacity first. Valid values are whole numbers starting at 0. The lower the number, the higher the priority. If no number is set, the launch template override has the lowest priority. You can set the same priority for different launch template overrides.
      */
     Priority?: Double;
+    /**
+     * The instance requirements. When you specify instance requirements, Amazon EC2 will identify instance types with the provided requirements, and then use your On-Demand and Spot allocation strategies to launch instances from these instance types, in the same way as when you specify a list of instance types.  If you specify InstanceRequirements, you can't specify InstanceTypes. 
+     */
+    InstanceRequirements?: InstanceRequirements;
   }
   export type LaunchTemplateOverridesList = LaunchTemplateOverrides[];
   export interface LaunchTemplatePlacement {
@@ -20605,6 +20986,9 @@ declare namespace EC2 {
   export type LocalGatewayVirtualInterfaceId = string;
   export type LocalGatewayVirtualInterfaceIdSet = LocalGatewayVirtualInterfaceId[];
   export type LocalGatewayVirtualInterfaceSet = LocalGatewayVirtualInterface[];
+  export type LocalStorage = "included"|"required"|"excluded"|string;
+  export type LocalStorageType = "hdd"|"ssd"|string;
+  export type LocalStorageTypeSet = LocalStorageType[];
   export type Location = string;
   export type LocationType = "region"|"availability-zone"|"availability-zone-id"|string;
   export type LogDestinationType = "cloud-watch-logs"|"s3"|string;
@@ -20663,11 +21047,51 @@ declare namespace EC2 {
   export type MaximumNetworkCards = number;
   export type MaximumThroughputInMBps = number;
   export type MembershipType = "static"|"igmp"|string;
+  export interface MemoryGiBPerVCpu {
+    /**
+     * The minimum amount of memory per vCPU, in GiB. If this parameter is not specified, there is no minimum limit.
+     */
+    Min?: Double;
+    /**
+     * The maximum amount of memory per vCPU, in GiB. If this parameter is not specified, there is no maximum limit.
+     */
+    Max?: Double;
+  }
+  export interface MemoryGiBPerVCpuRequest {
+    /**
+     * The minimum amount of memory per vCPU, in GiB. To specify no minimum limit, omit this parameter.
+     */
+    Min?: Double;
+    /**
+     * The maximum amount of memory per vCPU, in GiB. To specify no maximum limit, omit this parameter.
+     */
+    Max?: Double;
+  }
   export interface MemoryInfo {
     /**
      * The size of the memory, in MiB.
      */
     SizeInMiB?: MemorySize;
+  }
+  export interface MemoryMiB {
+    /**
+     * The minimum amount of memory, in MiB. If this parameter is not specified, there is no minimum limit.
+     */
+    Min?: Integer;
+    /**
+     * The maximum amount of memory, in MiB. If this parameter is not specified, there is no maximum limit.
+     */
+    Max?: Integer;
+  }
+  export interface MemoryMiBRequest {
+    /**
+     * The minimum amount of memory, in MiB. To specify no minimum limit, specify 0.
+     */
+    Min: Integer;
+    /**
+     * The maximum amount of memory, in MiB. To specify no maximum limit, omit this parameter.
+     */
+    Max?: Integer;
   }
   export type MemorySize = number;
   export type MillisecondDateTime = Date;
@@ -20765,6 +21189,10 @@ declare namespace EC2 {
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
     DryRun?: Boolean;
+    /**
+     * Reserved for future use.
+     */
+    AdditionalInfo?: String;
   }
   export interface ModifyCapacityReservationResult {
     /**
@@ -22714,6 +23142,26 @@ declare namespace EC2 {
   }
   export type NetworkInterfaceAttachmentId = string;
   export type NetworkInterfaceAttribute = "description"|"groupSet"|"sourceDestCheck"|"attachment"|string;
+  export interface NetworkInterfaceCount {
+    /**
+     * The minimum number of network interfaces. If this parameter is not specified, there is no minimum limit.
+     */
+    Min?: Integer;
+    /**
+     * The maximum number of network interfaces. If this parameter is not specified, there is no maximum limit.
+     */
+    Max?: Integer;
+  }
+  export interface NetworkInterfaceCountRequest {
+    /**
+     * The minimum number of network interfaces. To specify no minimum limit, omit this parameter.
+     */
+    Min?: Integer;
+    /**
+     * The maximum number of network interfaces. To specify no maximum limit, omit this parameter.
+     */
+    Max?: Integer;
+  }
   export type NetworkInterfaceCreationType = "efa"|"branch"|"trunk"|string;
   export type NetworkInterfaceId = string;
   export type NetworkInterfaceIdList = NetworkInterfaceId[];
@@ -23673,6 +24121,7 @@ declare namespace EC2 {
   }
   export type RegionList = Region[];
   export type RegionNameStringList = String[];
+  export type RegionNames = String[];
   export interface RegisterImageRequest {
     /**
      * The full path to your AMI manifest in Amazon S3 storage. The specified bucket must have the aws-exec-read canned access control list (ACL) to ensure that it can be accessed by Amazon EC2. For more information, see Canned ACLs in the Amazon S3 Service Developer Guide.
@@ -24229,7 +24678,7 @@ declare namespace EC2 {
      */
     ImageId?: ImageId;
     /**
-     * The instance type. For more information, see Instance Types in the Amazon Elastic Compute Cloud User Guide.
+     * The instance type. For more information, see Instance Types in the Amazon Elastic Compute Cloud User Guide. If you specify InstanceTypes, you can't specify InstanceRequirements.
      */
     InstanceType?: InstanceType;
     /**
@@ -24312,6 +24761,10 @@ declare namespace EC2 {
      * Indicates whether the instance is enabled for Amazon Web Services Nitro Enclaves. For more information, see  What is Amazon Web Services Nitro Enclaves? in the Amazon Web Services Nitro Enclaves User Guide. You can't enable Amazon Web Services Nitro Enclaves and hibernation on the same instance.
      */
     EnclaveOptions?: LaunchTemplateEnclaveOptionsRequest;
+    /**
+     * The attributes for the instance types. When you specify instance attributes, Amazon EC2 will identify instance types with these attributes. If you specify InstanceRequirements, you can't specify InstanceTypes.
+     */
+    InstanceRequirements?: InstanceRequirementsRequest;
   }
   export interface RequestSpotFleetRequest {
     /**
@@ -25052,6 +25505,10 @@ declare namespace EC2 {
      * Indicates whether the instance is enabled for Amazon Web Services Nitro Enclaves.
      */
     EnclaveOptions?: LaunchTemplateEnclaveOptions;
+    /**
+     * The attributes for the instance types. When you specify instance attributes, Amazon EC2 will identify instance types with these attributes. If you specify InstanceRequirements, you can't specify InstanceTypes.
+     */
+    InstanceRequirements?: InstanceRequirements;
   }
   export type RestorableByStringList = String[];
   export interface RestoreAddressToClassicRequest {
@@ -26699,6 +27156,10 @@ declare namespace EC2 {
      * The tags to apply during creation.
      */
     TagSpecifications?: SpotFleetTagSpecificationList;
+    /**
+     * The attributes for the instance types. When you specify instance attributes, Amazon EC2 will identify instance types with those attributes.  If you specify InstanceRequirements, you can't specify InstanceTypes. 
+     */
+    InstanceRequirements?: InstanceRequirements;
   }
   export interface SpotFleetMonitoring {
     /**
@@ -26829,6 +27290,10 @@ declare namespace EC2 {
      * Reserved.
      */
     Context?: String;
+    /**
+     * The unit for the target capacity. Default: units (translates to number of instances)
+     */
+    TargetCapacityUnitType?: TargetCapacityUnitType;
     /**
      * The key-value pair for tagging the Spot Fleet request on creation. The value for ResourceType must be spot-fleet-request, otherwise the Spot Fleet request fails. To tag instances at launch, specify the tags in the launch template (valid only if you use LaunchTemplateConfigs) or in the  SpotFleetTagSpecification  (valid only if you use LaunchSpecifications). For information about tagging after launch, see Tagging Your Resources.
      */
@@ -27066,6 +27531,23 @@ declare namespace EC2 {
      */
     Tenancy?: Tenancy;
   }
+  export interface SpotPlacementScore {
+    /**
+     * The Region.
+     */
+    Region?: String;
+    /**
+     * The Availability Zone.
+     */
+    AvailabilityZoneId?: String;
+    /**
+     * The placement score, on a scale from 1 to 10. A score of 10 indicates that your Spot request is highly likely to succeed in this Region or Availability Zone. A score of 1 indicates that your Spot request is not likely to succeed. 
+     */
+    Score?: Integer;
+  }
+  export type SpotPlacementScores = SpotPlacementScore[];
+  export type SpotPlacementScoresMaxResults = number;
+  export type SpotPlacementScoresTargetCapacity = number;
   export interface SpotPrice {
     /**
      * The Availability Zone.
@@ -27514,6 +27996,10 @@ declare namespace EC2 {
      * The default TotalTargetCapacity, which is either Spot or On-Demand.
      */
     DefaultTargetCapacityType?: DefaultTargetCapacityType;
+    /**
+     * The unit for the target capacity. Default: units (translates to number of instances)
+     */
+    TargetCapacityUnitType?: TargetCapacityUnitType;
   }
   export interface TargetCapacitySpecificationRequest {
     /**
@@ -27532,7 +28018,12 @@ declare namespace EC2 {
      * The default TotalTargetCapacity, which is either Spot or On-Demand.
      */
     DefaultTargetCapacityType?: DefaultTargetCapacityType;
+    /**
+     * The unit for the target capacity. Default: units (translates to number of instances)
+     */
+    TargetCapacityUnitType?: TargetCapacityUnitType;
   }
+  export type TargetCapacityUnitType = "vcpu"|"memory-mib"|"units"|string;
   export interface TargetConfiguration {
     /**
      * The number of instances the Convertible Reserved Instance offering can be applied to. This parameter is reserved and cannot be specified in a request
@@ -27672,6 +28163,26 @@ declare namespace EC2 {
   }
   export type ThreadsPerCore = number;
   export type ThreadsPerCoreList = ThreadsPerCore[];
+  export interface TotalLocalStorageGB {
+    /**
+     * The minimum amount of total local storage, in GB. If this parameter is not specified, there is no minimum limit.
+     */
+    Min?: Double;
+    /**
+     * The maximum amount of total local storage, in GB. If this parameter is not specified, there is no maximum limit.
+     */
+    Max?: Double;
+  }
+  export interface TotalLocalStorageGBRequest {
+    /**
+     * The minimum amount of total local storage, in GB. To specify no minimum limit, omit this parameter.
+     */
+    Min?: Double;
+    /**
+     * The maximum amount of total local storage, in GB. To specify no maximum limit, omit this parameter.
+     */
+    Max?: Double;
+  }
   export type TrafficDirection = "ingress"|"egress"|string;
   export interface TrafficMirrorFilter {
     /**
@@ -28988,6 +29499,26 @@ declare namespace EC2 {
   export type UserIdGroupPairSet = UserIdGroupPair[];
   export type UserIdStringList = String[];
   export type VCpuCount = number;
+  export interface VCpuCountRange {
+    /**
+     * The minimum number of vCPUs. If the value is 0, there is no minimum limit.
+     */
+    Min?: Integer;
+    /**
+     * The maximum number of vCPUs. If this parameter is not specified, there is no maximum limit.
+     */
+    Max?: Integer;
+  }
+  export interface VCpuCountRangeRequest {
+    /**
+     * The minimum number of vCPUs. To specify no minimum limit, specify 0.
+     */
+    Min: Integer;
+    /**
+     * The maximum number of vCPUs. To specify no maximum limit, omit this parameter.
+     */
+    Max?: Integer;
+  }
   export interface VCpuInfo {
     /**
      * The default number of vCPUs for the instance type.
@@ -29058,6 +29589,7 @@ declare namespace EC2 {
   export type VgwTelemetryList = VgwTelemetry[];
   export type VirtualizationType = "hvm"|"paravirtual"|string;
   export type VirtualizationTypeList = VirtualizationType[];
+  export type VirtualizationTypeSet = VirtualizationType[];
   export interface Volume {
     /**
      * Information about the volume attachments.

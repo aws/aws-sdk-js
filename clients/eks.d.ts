@@ -350,7 +350,7 @@ declare class EKS extends Service {
   waitFor(state: "fargateProfileDeleted", callback?: (err: AWSError, data: EKS.Types.DescribeFargateProfileResponse) => void): Request<EKS.Types.DescribeFargateProfileResponse, AWSError>;
 }
 declare namespace EKS {
-  export type AMITypes = "AL2_x86_64"|"AL2_x86_64_GPU"|"AL2_ARM_64"|"CUSTOM"|string;
+  export type AMITypes = "AL2_x86_64"|"AL2_x86_64_GPU"|"AL2_ARM_64"|"CUSTOM"|"BOTTLEROCKET_ARM_64"|"BOTTLEROCKET_x86_64"|string;
   export interface Addon {
     /**
      * The name of the add-on.

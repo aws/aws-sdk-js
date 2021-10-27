@@ -473,6 +473,32 @@ declare class AutoScaling extends Service {
   updateAutoScalingGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
 }
 declare namespace AutoScaling {
+  export interface AcceleratorCountRequest {
+    /**
+     * The minimum value.
+     */
+    Min?: NullablePositiveInteger;
+    /**
+     * The maximum value.
+     */
+    Max?: NullablePositiveInteger;
+  }
+  export type AcceleratorManufacturer = "nvidia"|"amd"|"amazon-web-services"|"xilinx"|string;
+  export type AcceleratorManufacturers = AcceleratorManufacturer[];
+  export type AcceleratorName = "a100"|"v100"|"k80"|"t4"|"m60"|"radeon-pro-v520"|"vu9p"|string;
+  export type AcceleratorNames = AcceleratorName[];
+  export interface AcceleratorTotalMemoryMiBRequest {
+    /**
+     * The memory minimum in MiB.
+     */
+    Min?: NullablePositiveInteger;
+    /**
+     * The memory maximum in MiB.
+     */
+    Max?: NullablePositiveInteger;
+  }
+  export type AcceleratorType = "gpu"|"fpga"|"inference"|string;
+  export type AcceleratorTypes = AcceleratorType[];
   export type Activities = Activity[];
   export interface ActivitiesType {
     /**
@@ -720,6 +746,10 @@ declare namespace AutoScaling {
      * Reserved.
      */
     Context?: Context;
+    /**
+     * The unit of measurement for the value specified for desired capacity. Amazon EC2 Auto Scaling supports DesiredCapacityType for attribute-based instance type selection only. For more information, see Creating an Auto Scaling group using attribute-based instance type selection in the Amazon EC2 Auto Scaling User Guide. By default, Amazon EC2 Auto Scaling specifies units, which translates into number of instances. Valid values: units | vcpu | memory-mib 
+     */
+    DesiredCapacityType?: XmlStringMaxLen255;
   }
   export type AutoScalingGroupDesiredCapacity = number;
   export type AutoScalingGroupMaxSize = number;
@@ -811,6 +841,17 @@ declare namespace AutoScaling {
   }
   export type AutoScalingNotificationTypes = XmlStringMaxLen255[];
   export type AvailabilityZones = XmlStringMaxLen255[];
+  export type BareMetal = "included"|"excluded"|"required"|string;
+  export interface BaselineEbsBandwidthMbpsRequest {
+    /**
+     * The minimum value in Mbps.
+     */
+    Min?: NullablePositiveInteger;
+    /**
+     * The maximum value in Mbps.
+     */
+    Max?: NullablePositiveInteger;
+  }
   export interface BatchDeleteScheduledActionAnswer {
     /**
      * The names of the scheduled actions that could not be deleted, including an error message.
@@ -868,6 +909,7 @@ declare namespace AutoScaling {
     NoDevice?: NoDevice;
   }
   export type BlockDeviceMappings = BlockDeviceMapping[];
+  export type BurstablePerformance = "included"|"excluded"|"required"|string;
   export interface CancelInstanceRefreshAnswer {
     /**
      * The instance refresh ID.
@@ -920,6 +962,8 @@ declare namespace AutoScaling {
   }
   export type Context = string;
   export type Cooldown = number;
+  export type CpuManufacturer = "intel"|"amd"|"amazon-web-services"|string;
+  export type CpuManufacturers = CpuManufacturer[];
   export interface CreateAutoScalingGroupType {
     /**
      * The name of the Auto Scaling group. This name must be unique per Region per account.
@@ -934,7 +978,7 @@ declare namespace AutoScaling {
      */
     LaunchTemplate?: LaunchTemplateSpecification;
     /**
-     * An embedded object that specifies a mixed instances policy. The required properties must be specified. If optional properties are unspecified, their default values are used. The policy includes properties that not only define the distribution of On-Demand Instances and Spot Instances, the maximum price to pay for Spot Instances, and how the Auto Scaling group allocates instance types to fulfill On-Demand and Spot capacities, but also the properties that specify the instance configuration information—the launch template and instance types. The policy can also include a weight for each instance type and different launch templates for individual instance types. For more information, see Auto Scaling groups with multiple instance types and purchase options in the Amazon EC2 Auto Scaling User Guide.
+     * An embedded object that specifies a mixed instances policy. For more information, see Auto Scaling groups with multiple instance types and purchase options in the Amazon EC2 Auto Scaling User Guide.
      */
     MixedInstancesPolicy?: MixedInstancesPolicy;
     /**
@@ -1017,6 +1061,10 @@ declare namespace AutoScaling {
      * Reserved.
      */
     Context?: Context;
+    /**
+     * The unit of measurement for the value specified for desired capacity. Amazon EC2 Auto Scaling supports DesiredCapacityType for attribute-based instance type selection only. For more information, see Creating an Auto Scaling group using attribute-based instance type selection in the Amazon EC2 Auto Scaling User Guide. By default, Amazon EC2 Auto Scaling specifies units, which translates into number of instances. Valid values: units | vcpu | memory-mib 
+     */
+    DesiredCapacityType?: XmlStringMaxLen255;
   }
   export interface CreateLaunchConfigurationType {
     /**
@@ -1624,6 +1672,8 @@ declare namespace AutoScaling {
     ShouldDecrementDesiredCapacity: ShouldDecrementDesiredCapacity;
   }
   export type EstimatedInstanceWarmup = number;
+  export type ExcludedInstance = string;
+  export type ExcludedInstanceTypes = ExcludedInstance[];
   export interface ExecutePolicyType {
     /**
      * The name of the Auto Scaling group.
@@ -1679,11 +1729,11 @@ declare namespace AutoScaling {
   export type FailedScheduledUpdateGroupActionRequests = FailedScheduledUpdateGroupActionRequest[];
   export interface Filter {
     /**
-     * The name of the filter. The valid values for Name depend on the API operation that you are including the filter in, DescribeAutoScalingGroups or DescribeTags.  DescribeAutoScalingGroups  Valid values for Name include the following:     tag-key - Accepts tag keys. The results will only include information about the Auto Scaling groups associated with these tag keys.     tag-value - Accepts tag values. The results will only include information about the Auto Scaling groups associated with these tag values.     tag:&lt;key&gt; - Accepts the key/value combination of the tag. Use the tag key in the filter name and the tag value as the filter value. The results will only include information about the Auto Scaling groups associated with the specified key/value combination.     DescribeTags  Valid values for Name include the following:     auto-scaling-group - Accepts the names of Auto Scaling groups. The results will only include information about the tags associated with these Auto Scaling groups.     key - Accepts tag keys. The results will only include information about the tags associated with these tag keys.     value - Accepts tag values. The results will only include information about the tags associated with these tag values.     propagate-at-launch - Accepts a boolean value, which specifies whether tags propagate to instances at launch. The results will only include information about the tags associated with the specified boolean value.   
+     * The name of the filter. The valid values for Name depend on which API operation you're using with the filter (DescribeAutoScalingGroups or DescribeTags).  DescribeAutoScalingGroups  Valid values for Name include the following:     tag-key - Accepts tag keys. The results only include information about the Auto Scaling groups associated with these tag keys.     tag-value - Accepts tag values. The results only include information about the Auto Scaling groups associated with these tag values.     tag:&lt;key&gt; - Accepts the key/value combination of the tag. Use the tag key in the filter name and the tag value as the filter value. The results only include information about the Auto Scaling groups associated with the specified key/value combination.     DescribeTags  Valid values for Name include the following:     auto-scaling-group - Accepts the names of Auto Scaling groups. The results only include information about the tags associated with these Auto Scaling groups.     key - Accepts tag keys. The results only include information about the tags associated with these tag keys.     value - Accepts tag values. The results only include information about the tags associated with these tag values.     propagate-at-launch - Accepts a Boolean value, which specifies whether tags propagate to instances at launch. The results only include information about the tags associated with the specified Boolean value.   
      */
     Name?: XmlString;
     /**
-     * One or more filter values. Filter values are case-sensitive.  If you specify multiple values for a filter, the values are joined with an OR, and the request returns all results that match any of the specified values. For example, specify "tag:environment" for the filter name and "production,development" for the filter values to find Auto Scaling groups with the tag "environment=production" or "environment=development".
+     * One or more filter values. Filter values are case-sensitive.  If you specify multiple values for a filter, the values are automatically logically joined with an OR, and the request returns all results that match any of the specified values. For example, specify "tag:environment" for the filter name and "production,development" for the filter values to find Auto Scaling groups with the tag "environment=production" or "environment=development".
      */
     Values?: Values;
   }
@@ -1764,6 +1814,8 @@ declare namespace AutoScaling {
      */
     WeightedCapacity?: XmlStringMaxLen32;
   }
+  export type InstanceGeneration = "current"|"previous"|string;
+  export type InstanceGenerations = InstanceGeneration[];
   export type InstanceIds = XmlStringMaxLen19[];
   export type InstanceMetadataEndpointState = "disabled"|"enabled"|string;
   export type InstanceMetadataHttpPutResponseHopLimit = number;
@@ -1865,30 +1917,116 @@ declare namespace AutoScaling {
     InstancesToUpdate?: InstancesToUpdate;
   }
   export type InstanceRefreshes = InstanceRefresh[];
+  export interface InstanceRequirements {
+    /**
+     * The minimum and maximum number of vCPUs for an instance type.
+     */
+    VCpuCount: VCpuCountRequest;
+    /**
+     * The minimum and maximum instance memory size for an instance type, in MiB.
+     */
+    MemoryMiB: MemoryMiBRequest;
+    /**
+     * Lists which specific CPU manufacturers to include.   For instance types with Intel CPUs, specify intel.   For instance types with AMD CPUs, specify amd.   For instance types with Amazon Web Services CPUs, specify amazon-web-services.    Don't confuse the CPU hardware manufacturer with the CPU hardware architecture. Instances will be launched with a compatible CPU architecture based on the Amazon Machine Image (AMI) that you specify in your launch template.   Default: Any manufacturer
+     */
+    CpuManufacturers?: CpuManufacturers;
+    /**
+     * The minimum and maximum amount of memory per vCPU for an instance type, in GiB. Default: No minimum or maximum
+     */
+    MemoryGiBPerVCpu?: MemoryGiBPerVCpuRequest;
+    /**
+     * Lists which instance types to exclude. You can use strings with one or more wild cards, represented by an asterisk (*). The following are examples: c5*, m5a.*, r*, *3*.  For example, if you specify c5*, you are excluding the entire C5 instance family, which includes all C5a and C5n instance types. If you specify m5a.*, you are excluding all the M5a instance types, but not the M5n instance types. Default: No excluded instance types
+     */
+    ExcludedInstanceTypes?: ExcludedInstanceTypes;
+    /**
+     * Indicates whether current or previous generation instance types are included.   For current generation instance types, specify current. The current generation includes EC2 instance types currently recommended for use. This typically includes the latest two to three generations in each instance family. For more information, see Instance types in the Amazon EC2 User Guide for Linux Instances.   For previous generation instance types, specify previous.   Default: Any current or previous generation
+     */
+    InstanceGenerations?: InstanceGenerations;
+    /**
+     * The price protection threshold for Spot Instances. This is the maximum you’ll pay for a Spot Instance, expressed as a percentage higher than the cheapest M, C, or R instance type with your specified attributes. When Amazon EC2 Auto Scaling selects instance types with your attributes, we will exclude instance types whose price is higher than your threshold. The parameter accepts an integer, which Amazon EC2 Auto Scaling interprets as a percentage. To turn off price protection, specify a high value, such as 999999.  Default: 100 
+     */
+    SpotMaxPricePercentageOverLowestPrice?: NullablePositiveInteger;
+    /**
+     * The price protection threshold for On-Demand Instances. This is the maximum you’ll pay for an On-Demand Instance, expressed as a percentage higher than the cheapest M, C, or R instance type with your specified attributes. When Amazon EC2 Auto Scaling selects instance types with your attributes, we will exclude instance types whose price is higher than your threshold. The parameter accepts an integer, which Amazon EC2 Auto Scaling interprets as a percentage. To turn off price protection, specify a high value, such as 999999.  Default: 20 
+     */
+    OnDemandMaxPricePercentageOverLowestPrice?: NullablePositiveInteger;
+    /**
+     * Indicates whether bare metal instance types are included, excluded, or required. Default: excluded 
+     */
+    BareMetal?: BareMetal;
+    /**
+     * Indicates whether burstable performance instance types are included, excluded, or required. For more information, see Burstable performance instances in the Amazon EC2 User Guide for Linux Instances. Default: excluded 
+     */
+    BurstablePerformance?: BurstablePerformance;
+    /**
+     * Indicates whether instance types must provide On-Demand Instance hibernation support. Default: false 
+     */
+    RequireHibernateSupport?: NullableBoolean;
+    /**
+     * The minimum and maximum number of network interfaces for an instance type. Default: No minimum or maximum
+     */
+    NetworkInterfaceCount?: NetworkInterfaceCountRequest;
+    /**
+     * Indicates whether instance types with instance store volumes are included, excluded, or required. For more information, see Amazon EC2 instance store in the Amazon EC2 User Guide for Linux Instances. Default: included 
+     */
+    LocalStorage?: LocalStorage;
+    /**
+     * Indicates the type of local storage that is required.   For instance types with hard disk drive (HDD) storage, specify hdd.   For instance types with solid state drive (SSD) storage, specify sdd.   Default: Any local storage type
+     */
+    LocalStorageTypes?: LocalStorageTypes;
+    /**
+     * The minimum and maximum total local storage size for an instance type, in GB. Default: No minimum or maximum
+     */
+    TotalLocalStorageGB?: TotalLocalStorageGBRequest;
+    /**
+     * The minimum and maximum baseline bandwidth performance for an instance type, in Mbps. For more information, see Amazon EBS–optimized instances in the Amazon EC2 User Guide for Linux Instances. Default: No minimum or maximum
+     */
+    BaselineEbsBandwidthMbps?: BaselineEbsBandwidthMbpsRequest;
+    /**
+     * Lists the accelerator types that must be on an instance type.   For instance types with GPU accelerators, specify gpu.   For instance types with FPGA accelerators, specify fpga.   For instance types with inference accelerators, specify inference.   Default: Any accelerator type
+     */
+    AcceleratorTypes?: AcceleratorTypes;
+    /**
+     * The minimum and maximum number of accelerators (GPUs, FPGAs, or Amazon Web Services Inferentia chips) for an instance type. To exclude accelerator-enabled instance types, set Max to 0. Default: No minimum or maximum
+     */
+    AcceleratorCount?: AcceleratorCountRequest;
+    /**
+     * Indicates whether instance types must have accelerators by specific manufacturers.   For instance types with NVIDIA devices, specify nvidia.   For instance types with AMD devices, specify amd.   For instance types with Amazon Web Services devices, specify amazon-web-services.   For instance types with Xilinx devices, specify xilinx.   Default: Any manufacturer
+     */
+    AcceleratorManufacturers?: AcceleratorManufacturers;
+    /**
+     * Lists the accelerators that must be on an instance type.   For instance types with NVIDIA A100 GPUs, specify a100.   For instance types with NVIDIA V100 GPUs, specify v100.   For instance types with NVIDIA K80 GPUs, specify k80.   For instance types with NVIDIA T4 GPUs, specify t4.   For instance types with NVIDIA M60 GPUs, specify m60.   For instance types with AMD Radeon Pro V520 GPUs, specify radeon-pro-v520.   For instance types with Xilinx VU9P FPGAs, specify vu9p.   Default: Any accelerator
+     */
+    AcceleratorNames?: AcceleratorNames;
+    /**
+     * The minimum and maximum total memory size for the accelerators on an instance type, in MiB. Default: No minimum or maximum
+     */
+    AcceleratorTotalMemoryMiB?: AcceleratorTotalMemoryMiBRequest;
+  }
   export type Instances = Instance[];
   export interface InstancesDistribution {
     /**
-     * Indicates how to allocate instance types to fulfill On-Demand capacity. The only valid value is prioritized, which is also the default value. This strategy uses the order of instance types in the LaunchTemplateOverrides to define the launch priority of each instance type. The first instance type in the array is prioritized higher than the last. If all your On-Demand capacity cannot be fulfilled using your highest priority instance, then the Auto Scaling groups launches the remaining capacity using the second priority instance type, and so on.
+     * The order of the launch template overrides to use in fulfilling On-Demand capacity.  If you specify lowest-price, Amazon EC2 Auto Scaling uses price to determine the order, launching the lowest price first.  If you specify prioritized, Amazon EC2 Auto Scaling uses the priority that you assigned to each launch template override, launching the highest priority first. If all your On-Demand capacity cannot be fulfilled using your highest priority instance, then Amazon EC2 Auto Scaling launches the remaining capacity using the second priority instance type, and so on. Default: lowest-price for Auto Scaling groups that specify InstanceRequirements in the overrides and prioritized for Auto Scaling groups that don't.
      */
     OnDemandAllocationStrategy?: XmlString;
     /**
-     * The minimum amount of the Auto Scaling group's capacity that must be fulfilled by On-Demand Instances. This base portion is provisioned first as your group scales. Defaults to 0 if not specified. If you specify weights for the instance types in the overrides, set the value of OnDemandBaseCapacity in terms of the number of capacity units, and not the number of instances.
+     * The minimum amount of the Auto Scaling group's capacity that must be fulfilled by On-Demand Instances. This base portion is launched first as your group scales. If you specify weights for the instance types in the overrides, the base capacity is measured in the same unit of measurement as the instance types. If you specify InstanceRequirements in the overrides, the base capacity is measured in the same unit of measurement as your group's desired capacity. Default: 0 
      */
     OnDemandBaseCapacity?: OnDemandBaseCapacity;
     /**
-     * Controls the percentages of On-Demand Instances and Spot Instances for your additional capacity beyond OnDemandBaseCapacity. Expressed as a number (for example, 20 specifies 20% On-Demand Instances, 80% Spot Instances). Defaults to 100 if not specified. If set to 100, only On-Demand Instances are provisioned.
+     * Controls the percentages of On-Demand Instances and Spot Instances for your additional capacity beyond OnDemandBaseCapacity. Expressed as a number (for example, 20 specifies 20% On-Demand Instances, 80% Spot Instances). If set to 100, only On-Demand Instances are used. Default: 100 
      */
     OnDemandPercentageAboveBaseCapacity?: OnDemandPercentageAboveBaseCapacity;
     /**
-     * Indicates how to allocate instances across Spot Instance pools.  If the allocation strategy is lowest-price, the Auto Scaling group launches instances using the Spot pools with the lowest price, and evenly allocates your instances across the number of Spot pools that you specify. Defaults to lowest-price if not specified. If the allocation strategy is capacity-optimized (recommended), the Auto Scaling group launches instances using Spot pools that are optimally chosen based on the available Spot capacity. Alternatively, you can use capacity-optimized-prioritized and set the order of instance types in the list of launch template overrides from highest to lowest priority (from first to last in the list). Amazon EC2 Auto Scaling honors the instance type priorities on a best-effort basis but optimizes for capacity first. 
+     * Indicates how to allocate instances across Spot Instance pools.  If the allocation strategy is lowest-price, the Auto Scaling group launches instances using the Spot pools with the lowest price, and evenly allocates your instances across the number of Spot pools that you specify.  If the allocation strategy is capacity-optimized (recommended), the Auto Scaling group launches instances using Spot pools that are optimally chosen based on the available Spot capacity. Alternatively, you can use capacity-optimized-prioritized and set the order of instance types in the list of launch template overrides from highest to lowest priority (from first to last in the list). Amazon EC2 Auto Scaling honors the instance type priorities on a best-effort basis but optimizes for capacity first.  Default: lowest-price 
      */
     SpotAllocationStrategy?: XmlString;
     /**
-     * The number of Spot Instance pools across which to allocate your Spot Instances. The Spot pools are determined from the different instance types in the overrides. Valid only when the Spot allocation strategy is lowest-price. Value must be in the range of 1 to 20. Defaults to 2 if not specified.
+     * The number of Spot Instance pools across which to allocate your Spot Instances. The Spot pools are determined from the different instance types in the overrides. Valid only when the Spot allocation strategy is lowest-price. Value must be in the range of 1–20. Default: 2 
      */
     SpotInstancePools?: SpotInstancePools;
     /**
-     * The maximum price per unit hour that you are willing to pay for a Spot Instance. If you leave the value at its default (empty), Amazon EC2 Auto Scaling uses the On-Demand price as the maximum Spot price. To remove a value that you previously set, include the property but specify an empty string ("") for the value.
+     * The maximum price per unit hour that you are willing to pay for a Spot Instance. If you keep the value at its default (unspecified), Amazon EC2 Auto Scaling uses the On-Demand price as the maximum Spot price. To remove a value that you previously set, include the property but specify an empty string ("") for the value.
      */
     SpotMaxPrice?: MixedInstanceSpotPrice;
   }
@@ -2014,7 +2152,7 @@ declare namespace AutoScaling {
      */
     LaunchTemplateSpecification?: LaunchTemplateSpecification;
     /**
-     * Any properties that you specify override the same properties in the launch template. If not provided, Amazon EC2 Auto Scaling uses the instance type specified in the launch template when it launches an instance. 
+     * Any properties that you specify override the same properties in the launch template. If not provided, Amazon EC2 Auto Scaling uses the instance type or instance type requirements specified in the launch template when it launches an instance. The overrides can include either one or more instance types or a set of instance requirements, but not both.
      */
     Overrides?: Overrides;
   }
@@ -2025,13 +2163,17 @@ declare namespace AutoScaling {
      */
     InstanceType?: XmlStringMaxLen255;
     /**
-     * The number of capacity units provided by the specified instance type in terms of virtual CPUs, memory, storage, throughput, or other relative performance characteristic. When a Spot or On-Demand Instance is provisioned, the capacity units count toward the desired capacity. Amazon EC2 Auto Scaling provisions instances until the desired capacity is totally fulfilled, even if this results in an overage. For example, if there are 2 units remaining to fulfill capacity, and Amazon EC2 Auto Scaling can only provision an instance with a WeightedCapacity of 5 units, the instance is provisioned, and the desired capacity is exceeded by 3 units. For more information, see Instance weighting for Amazon EC2 Auto Scaling in the Amazon EC2 Auto Scaling User Guide. Value must be in the range of 1 to 999.
+     * The number of capacity units provided by the instance type specified in InstanceType in terms of virtual CPUs, memory, storage, throughput, or other relative performance characteristic. When a Spot or On-Demand Instance is launched, the capacity units count toward the desired capacity. Amazon EC2 Auto Scaling launches instances until the desired capacity is totally fulfilled, even if this results in an overage. For example, if there are two units remaining to fulfill capacity, and Amazon EC2 Auto Scaling can only launch an instance with a WeightedCapacity of five units, the instance is launched, and the desired capacity is exceeded by three units. For more information, see Instance weighting for Amazon EC2 Auto Scaling in the Amazon EC2 Auto Scaling User Guide. Value must be in the range of 1–999.
      */
     WeightedCapacity?: XmlStringMaxLen32;
     /**
-     * Provides the launch template to be used when launching the instance type. For example, some instance types might require a launch template with a different AMI. If not provided, Amazon EC2 Auto Scaling uses the launch template that's defined for your mixed instances policy. For more information, see Specifying a different launch template for an instance type in the Amazon EC2 Auto Scaling User Guide. 
+     * Provides the launch template to be used when launching the instance type specified in InstanceType. For example, some instance types might require a launch template with a different AMI. If not provided, Amazon EC2 Auto Scaling uses the launch template that's defined for your mixed instances policy. For more information, see Specifying a different launch template for an instance type in the Amazon EC2 Auto Scaling User Guide. 
      */
     LaunchTemplateSpecification?: LaunchTemplateSpecification;
+    /**
+     * The instance requirements. When you specify instance requirements, Amazon EC2 Auto Scaling finds instance types that satisfy your requirements, and then uses your On-Demand and Spot allocation strategies to launch instances from these instance types, in the same way as when you specify a list of specific instance types. 
+     */
+    InstanceRequirements?: InstanceRequirements;
   }
   export interface LaunchTemplateSpecification {
     /**
@@ -2160,11 +2302,34 @@ declare namespace AutoScaling {
     MetricSpecification: PredictiveScalingMetricSpecification;
   }
   export type LoadForecasts = LoadForecast[];
+  export type LocalStorage = "included"|"excluded"|"required"|string;
+  export type LocalStorageType = "hdd"|"ssd"|string;
+  export type LocalStorageTypes = LocalStorageType[];
   export type MaxGroupPreparedCapacity = number;
   export type MaxInstanceLifetime = number;
   export type MaxNumberOfAutoScalingGroups = number;
   export type MaxNumberOfLaunchConfigurations = number;
   export type MaxRecords = number;
+  export interface MemoryGiBPerVCpuRequest {
+    /**
+     * The memory minimum in GiB.
+     */
+    Min?: NullablePositiveDouble;
+    /**
+     * The memory maximum in GiB.
+     */
+    Max?: NullablePositiveDouble;
+  }
+  export interface MemoryMiBRequest {
+    /**
+     * The memory minimum in MiB.
+     */
+    Min: NullablePositiveInteger;
+    /**
+     * The memory maximum in MiB.
+     */
+    Max?: NullablePositiveInteger;
+  }
   export interface MetricCollectionType {
     /**
      * One of the following metrics:    GroupMinSize     GroupMaxSize     GroupDesiredCapacity     GroupInServiceInstances     GroupPendingInstances     GroupStandbyInstances     GroupTerminatingInstances     GroupTotalInstances     GroupInServiceCapacity     GroupPendingCapacity     GroupStandbyCapacity     GroupTerminatingCapacity     GroupTotalCapacity     WarmPoolDesiredCapacity     WarmPoolWarmedCapacity     WarmPoolPendingCapacity     WarmPoolTerminatingCapacity     WarmPoolTotalCapacity     GroupAndWarmPoolDesiredCapacity     GroupAndWarmPoolTotalCapacity   
@@ -2204,15 +2369,25 @@ declare namespace AutoScaling {
   export type MixedInstanceSpotPrice = string;
   export interface MixedInstancesPolicy {
     /**
-     * Specifies the launch template to use and the instance types (overrides) that are used to provision EC2 instances to fulfill On-Demand and Spot capacities. Required when creating a mixed instances policy.
+     * Specifies the launch template to use and the instance types (overrides) that are used to launch EC2 instances to fulfill On-Demand and Spot capacities. Required when creating a mixed instances policy.
      */
     LaunchTemplate?: LaunchTemplate;
     /**
-     * Specifies the instances distribution. If not provided, the value for each property in InstancesDistribution uses a default value.
+     * Specifies the instances distribution.
      */
     InstancesDistribution?: InstancesDistribution;
   }
   export type MonitoringEnabled = boolean;
+  export interface NetworkInterfaceCountRequest {
+    /**
+     * The minimum number of network interfaces.
+     */
+    Min?: NullablePositiveInteger;
+    /**
+     * The maximum number of network interfaces.
+     */
+    Max?: NullablePositiveInteger;
+  }
   export type NoDevice = boolean;
   export type NonZeroIntPercent = number;
   export interface NotificationConfiguration {
@@ -2231,6 +2406,9 @@ declare namespace AutoScaling {
   }
   export type NotificationConfigurations = NotificationConfiguration[];
   export type NotificationTargetResourceName = string;
+  export type NullableBoolean = boolean;
+  export type NullablePositiveDouble = number;
+  export type NullablePositiveInteger = number;
   export type NumberOfAutoScalingGroups = number;
   export type NumberOfLaunchConfigurations = number;
   export type OnDemandBaseCapacity = number;
@@ -2942,6 +3120,16 @@ declare namespace AutoScaling {
   }
   export type TerminationPolicies = XmlStringMaxLen1600[];
   export type TimestampType = Date;
+  export interface TotalLocalStorageGBRequest {
+    /**
+     * The storage minimum in GB.
+     */
+    Min?: NullablePositiveDouble;
+    /**
+     * The storage maximum in GB.
+     */
+    Max?: NullablePositiveDouble;
+  }
   export interface UpdateAutoScalingGroupType {
     /**
      * The name of the Auto Scaling group.
@@ -2956,7 +3144,7 @@ declare namespace AutoScaling {
      */
     LaunchTemplate?: LaunchTemplateSpecification;
     /**
-     * An embedded object that specifies a mixed instances policy. When you make changes to an existing policy, all optional properties are left unchanged if not specified. For more information, see Auto Scaling groups with multiple instance types and purchase options in the Amazon EC2 Auto Scaling User Guide.
+     * An embedded object that specifies a mixed instances policy. For more information, see Auto Scaling groups with multiple instance types and purchase options in the Amazon EC2 Auto Scaling User Guide.
      */
     MixedInstancesPolicy?: MixedInstancesPolicy;
     /**
@@ -3019,6 +3207,20 @@ declare namespace AutoScaling {
      * Reserved.
      */
     Context?: Context;
+    /**
+     * The unit of measurement for the value specified for desired capacity. Amazon EC2 Auto Scaling supports DesiredCapacityType for attribute-based instance type selection only. For more information, see Creating an Auto Scaling group using attribute-based instance type selection in the Amazon EC2 Auto Scaling User Guide. By default, Amazon EC2 Auto Scaling specifies units, which translates into number of instances. Valid values: units | vcpu | memory-mib 
+     */
+    DesiredCapacityType?: XmlStringMaxLen255;
+  }
+  export interface VCpuCountRequest {
+    /**
+     * The minimum number of vCPUs.
+     */
+    Min: NullablePositiveInteger;
+    /**
+     * The maximum number of vCPUs.
+     */
+    Max?: NullablePositiveInteger;
   }
   export type Values = XmlString[];
   export interface WarmPoolConfiguration {

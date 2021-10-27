@@ -72,6 +72,20 @@
       ],
       "documentation": "<p>Associates a trial component with a trial. A trial component can be associated with multiple trials. To disassociate a trial component from a trial, call the <a>DisassociateTrialComponent</a> API.</p>"
     },
+    "BatchDescribeModelPackage": {
+      "name": "BatchDescribeModelPackage",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "BatchDescribeModelPackageInput"
+      },
+      "output": {
+        "shape": "BatchDescribeModelPackageOutput"
+      },
+      "documentation": "<p>This action batch describes a list of versioned model packages</p>"
+    },
     "CreateAction": {
       "name": "CreateAction",
       "http": {
@@ -2123,7 +2137,7 @@
       "output": {
         "shape": "DescribeModelPackageOutput"
       },
-      "documentation": "<p>Returns a description of the specified model package, which is used to create Amazon SageMaker models or list them on Amazon Web Services Marketplace.</p> <p>To create models in Amazon SageMaker, buyers can subscribe to model packages listed on Amazon Web Services Marketplace.</p>"
+      "documentation": "<p>Returns a description of the specified model package, which is used to create SageMaker models or list them on Amazon Web Services Marketplace.</p> <p>To create models in SageMaker, buyers can subscribe to model packages listed on Amazon Web Services Marketplace.</p>"
     },
     "DescribeModelPackageGroup": {
       "name": "DescribeModelPackageGroup",
@@ -4080,6 +4094,20 @@
       ],
       "documentation": "<p>Updates a pipeline execution.</p>"
     },
+    "UpdateProject": {
+      "name": "UpdateProject",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateProjectInput"
+      },
+      "output": {
+        "shape": "UpdateProjectOutput"
+      },
+      "documentation": "<p>Updates a machine learning (ML) project that is created from a template that sets up an ML pipeline from training to deploying an approved model.</p> <note> <p>You must not update a project that is in use. If you update the <code>ServiceCatalogProvisioningUpdateDetails</code> of a project that is active or being created, or updated, you may lose resources already created by the project.</p> </note>"
+    },
     "UpdateTrainingJob": {
       "name": "UpdateTrainingJob",
       "http": {
@@ -5637,6 +5665,102 @@
         "AWS/Rekognition/DetectModerationLabels/Image/V3",
         "AWS/Textract/AnalyzeDocument/Forms/V1"
       ]
+    },
+    "BatchDescribeModelPackageError": {
+      "type": "structure",
+      "required": [
+        "ErrorCode",
+        "ErrorResponse"
+      ],
+      "members": {
+        "ErrorCode": {
+          "shape": "String",
+          "documentation": "<p/>"
+        },
+        "ErrorResponse": {
+          "shape": "String",
+          "documentation": "<p/>"
+        }
+      },
+      "documentation": "<p>The error code and error description associated with the resource.</p>"
+    },
+    "BatchDescribeModelPackageErrorMap": {
+      "type": "map",
+      "key": {
+        "shape": "ModelPackageArn"
+      },
+      "value": {
+        "shape": "BatchDescribeModelPackageError"
+      }
+    },
+    "BatchDescribeModelPackageInput": {
+      "type": "structure",
+      "required": [
+        "ModelPackageArnList"
+      ],
+      "members": {
+        "ModelPackageArnList": {
+          "shape": "ModelPackageArnList",
+          "documentation": "<p>The list of Amazon Resource Name (ARN) of the model package groups.</p>"
+        }
+      }
+    },
+    "BatchDescribeModelPackageOutput": {
+      "type": "structure",
+      "members": {
+        "ModelPackageSummaries": {
+          "shape": "ModelPackageSummaries",
+          "documentation": "<p>The summaries for the model package versions</p>"
+        },
+        "BatchDescribeModelPackageErrorMap": {
+          "shape": "BatchDescribeModelPackageErrorMap",
+          "documentation": "<p>A map of the resource and BatchDescribeModelPackageError objects reporting the error associated with describing the model package.</p>"
+        }
+      }
+    },
+    "BatchDescribeModelPackageSummary": {
+      "type": "structure",
+      "required": [
+        "ModelPackageGroupName",
+        "ModelPackageArn",
+        "CreationTime",
+        "InferenceSpecification",
+        "ModelPackageStatus"
+      ],
+      "members": {
+        "ModelPackageGroupName": {
+          "shape": "EntityName",
+          "documentation": "<p>The group name for the model package</p>"
+        },
+        "ModelPackageVersion": {
+          "shape": "ModelPackageVersion",
+          "documentation": "<p>The version number of a versioned model.</p>"
+        },
+        "ModelPackageArn": {
+          "shape": "ModelPackageArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the model package.</p>"
+        },
+        "ModelPackageDescription": {
+          "shape": "EntityDescription",
+          "documentation": "<p>The description of the model package.</p>"
+        },
+        "CreationTime": {
+          "shape": "CreationTime",
+          "documentation": "<p>The creation time of the mortgage package summary.</p>"
+        },
+        "InferenceSpecification": {
+          "shape": "InferenceSpecification"
+        },
+        "ModelPackageStatus": {
+          "shape": "ModelPackageStatus",
+          "documentation": "<p>The status of the mortgage package.</p>"
+        },
+        "ModelApprovalStatus": {
+          "shape": "ModelApprovalStatus",
+          "documentation": "<p>The approval status of the model.</p>"
+        }
+      },
+      "documentation": "<p>Provides summary information about the model package.</p>"
     },
     "BatchStrategy": {
       "type": "string",
@@ -7860,8 +7984,8 @@
           "documentation": "<p>The name of the model package. The name must have 1 to 63 characters. Valid characters are a-z, A-Z, 0-9, and - (hyphen).</p> <p>This parameter is required for unversioned models. It is not applicable to versioned models.</p>"
         },
         "ModelPackageGroupName": {
-          "shape": "EntityName",
-          "documentation": "<p>The name of the model group that this model version belongs to.</p> <p>This parameter is required for versioned models, and does not apply to unversioned models.</p>"
+          "shape": "ArnOrName",
+          "documentation": "<p>The name or Amazon Resource Name (ARN) of the model package group that this model version belongs to.</p> <p>This parameter is required for versioned models, and does not apply to unversioned models.</p>"
         },
         "ModelPackageDescription": {
           "shape": "EntityDescription",
@@ -7902,6 +8026,10 @@
           "shape": "ClientToken",
           "documentation": "<p>A unique token that guarantees that the call to this API is idempotent.</p>",
           "idempotencyToken": true
+        },
+        "CustomerMetadataProperties": {
+          "shape": "CustomerMetadataMap",
+          "documentation": "<p>The metadata properties associated with the model package versions.</p>"
         }
       }
     },
@@ -8818,6 +8946,35 @@
         "shape": "CustomImage"
       },
       "max": 30
+    },
+    "CustomerMetadataKey": {
+      "type": "string",
+      "max": 128,
+      "min": 1,
+      "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@]*)${1,128}"
+    },
+    "CustomerMetadataKeyList": {
+      "type": "list",
+      "member": {
+        "shape": "CustomerMetadataKey"
+      }
+    },
+    "CustomerMetadataMap": {
+      "type": "map",
+      "key": {
+        "shape": "CustomerMetadataKey"
+      },
+      "value": {
+        "shape": "CustomerMetadataValue"
+      },
+      "max": 50,
+      "min": 1
+    },
+    "CustomerMetadataValue": {
+      "type": "string",
+      "max": 256,
+      "min": 1,
+      "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@]*)${1,256}"
     },
     "DataCaptureConfig": {
       "type": "structure",
@@ -11764,7 +11921,7 @@
         },
         "ValidationSpecification": {
           "shape": "ModelPackageValidationSpecification",
-          "documentation": "<p>Configurations for one or more transform jobs that Amazon SageMaker runs to test the model package.</p>"
+          "documentation": "<p>Configurations for one or more transform jobs that SageMaker runs to test the model package.</p>"
         },
         "ModelPackageStatus": {
           "shape": "ModelPackageStatus",
@@ -11802,6 +11959,10 @@
         "ApprovalDescription": {
           "shape": "ApprovalDescription",
           "documentation": "<p>A description provided for the model approval.</p>"
+        },
+        "CustomerMetadataProperties": {
+          "shape": "CustomerMetadataMap",
+          "documentation": "<p>The metadata properties associated with the model package versions.</p>"
         }
       }
     },
@@ -12392,6 +12553,13 @@
         "CreationTime": {
           "shape": "Timestamp",
           "documentation": "<p>The time when the project was created.</p>"
+        },
+        "LastModifiedTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The timestamp when project was last modified.</p>"
+        },
+        "LastModifiedBy": {
+          "shape": "UserContext"
         }
       }
     },
@@ -19761,6 +19929,10 @@
         "Tags": {
           "shape": "TagList",
           "documentation": "<p>A list of the tags associated with the model package. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services resources</a> in the <i>Amazon Web Services General Reference Guide</i>.</p>"
+        },
+        "CustomerMetadataProperties": {
+          "shape": "CustomerMetadataMap",
+          "documentation": "<p>The metadata properties for the model package. </p>"
         }
       },
       "documentation": "<p>A versioned model that can be deployed for SageMaker inference.</p>"
@@ -19770,6 +19942,14 @@
       "max": 2048,
       "min": 1,
       "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:model-package/.*"
+    },
+    "ModelPackageArnList": {
+      "type": "list",
+      "member": {
+        "shape": "ModelPackageArn"
+      },
+      "max": 100,
+      "min": 1
     },
     "ModelPackageContainerDefinition": {
       "type": "structure",
@@ -19967,6 +20147,15 @@
       "type": "list",
       "member": {
         "shape": "ModelPackageStatusItem"
+      }
+    },
+    "ModelPackageSummaries": {
+      "type": "map",
+      "key": {
+        "shape": "ModelPackageArn"
+      },
+      "value": {
+        "shape": "BatchDescribeModelPackageSummary"
       }
     },
     "ModelPackageSummary": {
@@ -22837,6 +23026,13 @@
         "Tags": {
           "shape": "TagList",
           "documentation": "<p>An array of key-value pairs. You can use tags to categorize your Amazon Web Services resources in different ways, for example, by purpose, owner, or environment. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services Resources</a>.</p>"
+        },
+        "LastModifiedTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>A timestamp container for when the project was last modified.</p>"
+        },
+        "LastModifiedBy": {
+          "shape": "UserContext"
         }
       },
       "documentation": "<p>The properties of a project as returned by the Search API.</p>"
@@ -22882,7 +23078,10 @@
         "CreateFailed",
         "DeleteInProgress",
         "DeleteFailed",
-        "DeleteCompleted"
+        "DeleteCompleted",
+        "UpdateInProgress",
+        "UpdateCompleted",
+        "UpdateFailed"
       ]
     },
     "ProjectSummary": {
@@ -23918,6 +24117,20 @@
         }
       },
       "documentation": "<p>Details that you specify to provision a service catalog product. For information about service catalog, see <a href=\"https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html\">What is Amazon Web Services Service Catalog</a>.</p>"
+    },
+    "ServiceCatalogProvisioningUpdateDetails": {
+      "type": "structure",
+      "members": {
+        "ProvisioningArtifactId": {
+          "shape": "ServiceCatalogEntityId",
+          "documentation": "<p>The ID of the provisioning artifact.</p>"
+        },
+        "ProvisioningParameters": {
+          "shape": "ProvisioningParameters",
+          "documentation": "<p>A list of key value pairs that you specify when you provision a product.</p>"
+        }
+      },
+      "documentation": "<p>Details that you specify to provision a service catalog product. For information about service catalog, see <a href=\"https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html\">What is AWS Service Catalog</a>. </p>"
     },
     "SessionExpirationDurationInSeconds": {
       "type": "integer",
@@ -26514,13 +26727,12 @@
     "UpdateModelPackageInput": {
       "type": "structure",
       "required": [
-        "ModelPackageArn",
-        "ModelApprovalStatus"
+        "ModelPackageArn"
       ],
       "members": {
         "ModelPackageArn": {
           "shape": "ModelPackageArn",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the model.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the model package.</p>"
         },
         "ModelApprovalStatus": {
           "shape": "ModelApprovalStatus",
@@ -26529,6 +26741,14 @@
         "ApprovalDescription": {
           "shape": "ApprovalDescription",
           "documentation": "<p>A description for the approval status of the model.</p>"
+        },
+        "CustomerMetadataProperties": {
+          "shape": "CustomerMetadataMap",
+          "documentation": "<p>The metadata properties associated with the model package versions.</p>"
+        },
+        "CustomerMetadataPropertiesToRemove": {
+          "shape": "CustomerMetadataKeyList",
+          "documentation": "<p>The metadata properties associated with the model package versions to remove.</p>"
         }
       }
     },
@@ -26724,6 +26944,42 @@
         "PipelineArn": {
           "shape": "PipelineArn",
           "documentation": "<p>The Amazon Resource Name (ARN) of the updated pipeline.</p>"
+        }
+      }
+    },
+    "UpdateProjectInput": {
+      "type": "structure",
+      "required": [
+        "ProjectName"
+      ],
+      "members": {
+        "ProjectName": {
+          "shape": "ProjectEntityName",
+          "documentation": "<p>The name of the project.</p>"
+        },
+        "ProjectDescription": {
+          "shape": "EntityDescription",
+          "documentation": "<p>The description for the project.</p>"
+        },
+        "ServiceCatalogProvisioningUpdateDetails": {
+          "shape": "ServiceCatalogProvisioningUpdateDetails",
+          "documentation": "<p>The product ID and provisioning artifact ID to provision a service catalog. The provisioning artifact ID will default to the latest provisioning artifact ID of the product, if you don't provide the provisioning artifact ID. For more information, see <a href=\"https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html\">What is AWS Service Catalog</a>. </p>"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>An array of key-value pairs. You can use tags to categorize your AWS resources in different ways, for example, by purpose, owner, or environment. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging AWS Resources</a>.</p>"
+        }
+      }
+    },
+    "UpdateProjectOutput": {
+      "type": "structure",
+      "required": [
+        "ProjectArn"
+      ],
+      "members": {
+        "ProjectArn": {
+          "shape": "ProjectArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the project.</p>"
         }
       }
     },
