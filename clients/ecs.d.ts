@@ -555,6 +555,7 @@ declare namespace ECS {
   export type Boolean = boolean;
   export type BoxedBoolean = boolean;
   export type BoxedInteger = number;
+  export type CPUArchitecture = "X86_64"|"ARM64"|string;
   export interface CapacityProvider {
     /**
      * The Amazon Resource Name (ARN) that identifies the capacity provider.
@@ -834,15 +835,15 @@ declare namespace ECS {
      */
     secrets?: SecretList;
     /**
-     * The dependencies defined for container startup and shutdown. A container can contain multiple dependencies. When a dependency is defined for container startup, for container shutdown it is reversed. For tasks using the EC2 launch type, the container instances require at least version 1.26.0 of the container agent to enable container dependencies. However, we recommend using the latest container agent version. For information about checking your agent version and updating to the latest version, see Updating the Amazon ECS Container Agent in the Amazon Elastic Container Service Developer Guide. If you are using an Amazon ECS-optimized Linux AMI, your instance needs at least version 1.26.0-1 of the ecs-init package. If your container instances are launched from version 20190301 or later, then they contain the required versions of the container agent and ecs-init. For more information, see Amazon ECS-optimized Linux AMI in the Amazon Elastic Container Service Developer Guide. For tasks using the Fargate launch type, the task or service requires platform version 1.3.0 or later.
+     * The dependencies defined for container startup and shutdown. A container can contain multiple dependencies. When a dependency is defined for container startup, for container shutdown it is reversed. For tasks using the EC2 launch type, the container instances require at least version 1.26.0 of the container agent to enable container dependencies. However, we recommend using the latest container agent version. For information about checking your agent version and updating to the latest version, see Updating the Amazon ECS Container Agent in the Amazon Elastic Container Service Developer Guide. If you are using an Amazon ECS-optimized Linux AMI, your instance needs at least version 1.26.0-1 of the ecs-init package. If your container instances are launched from version 20190301 or later, then they contain the required versions of the container agent and ecs-init. For more information, see Amazon ECS-optimized Linux AMI in the Amazon Elastic Container Service Developer Guide. For tasks using the Fargate launch type, the task or service requires the followiwng platforms:   Linux platform version 1.3.0 or later.   Windows platform version 1.0.0 or later.  
      */
     dependsOn?: ContainerDependencies;
     /**
-     * Time duration (in seconds) to wait before giving up on resolving dependencies for a container. For example, you specify two containers in a task definition with containerA having a dependency on containerB reaching a COMPLETE, SUCCESS, or HEALTHY status. If a startTimeout value is specified for containerB and it does not reach the desired status within that time then containerA will give up and not start. This results in the task transitioning to a STOPPED state.  When the ECS_CONTAINER_START_TIMEOUT container agent configuration variable is used, it is enforced indendently from this start timeout value.  For tasks using the Fargate launch type, this parameter requires that the task or service uses platform version 1.3.0 or later. For tasks using the EC2 launch type, your container instances require at least version 1.26.0 of the container agent to enable a container start timeout value. However, we recommend using the latest container agent version. For information about checking your agent version and updating to the latest version, see Updating the Amazon ECS Container Agent in the Amazon Elastic Container Service Developer Guide. If you are using an Amazon ECS-optimized Linux AMI, your instance needs at least version 1.26.0-1 of the ecs-init package. If your container instances are launched from version 20190301 or later, then they contain the required versions of the container agent and ecs-init. For more information, see Amazon ECS-optimized Linux AMI in the Amazon Elastic Container Service Developer Guide.
+     * Time duration (in seconds) to wait before giving up on resolving dependencies for a container. For example, you specify two containers in a task definition with containerA having a dependency on containerB reaching a COMPLETE, SUCCESS, or HEALTHY status. If a startTimeout value is specified for containerB and it does not reach the desired status within that time then containerA will give up and not start. This results in the task transitioning to a STOPPED state.  When the ECS_CONTAINER_START_TIMEOUT container agent configuration variable is used, it is enforced indendently from this start timeout value.  For tasks using the Fargate launch type, the task or service requires the followiwng platforms:   Linux platform version 1.3.0 or later.   Windows platform version 1.0.0 or later.   For tasks using the EC2 launch type, your container instances require at least version 1.26.0 of the container agent to enable a container start timeout value. However, we recommend using the latest container agent version. For information about checking your agent version and updating to the latest version, see Updating the Amazon ECS Container Agent in the Amazon Elastic Container Service Developer Guide. If you are using an Amazon ECS-optimized Linux AMI, your instance needs at least version 1.26.0-1 of the ecs-init package. If your container instances are launched from version 20190301 or later, then they contain the required versions of the container agent and ecs-init. For more information, see Amazon ECS-optimized Linux AMI in the Amazon Elastic Container Service Developer Guide.
      */
     startTimeout?: BoxedInteger;
     /**
-     * Time duration (in seconds) to wait before the container is forcefully killed if it doesn't exit normally on its own. For tasks using the Fargate launch type, the task or service requires platform version 1.3.0 or later. The max stop timeout value is 120 seconds and if the parameter is not specified, the default value of 30 seconds is used. For tasks using the EC2 launch type, if the stopTimeout parameter is not specified, the value set for the Amazon ECS container agent configuration variable ECS_CONTAINER_STOP_TIMEOUT is used by default. If neither the stopTimeout parameter or the ECS_CONTAINER_STOP_TIMEOUT agent configuration variable are set, then the default values of 30 seconds for Linux containers and 30 seconds on Windows containers are used. Your container instances require at least version 1.26.0 of the container agent to enable a container stop timeout value. However, we recommend using the latest container agent version. For information about checking your agent version and updating to the latest version, see Updating the Amazon ECS Container Agent in the Amazon Elastic Container Service Developer Guide. If you are using an Amazon ECS-optimized Linux AMI, your instance needs at least version 1.26.0-1 of the ecs-init package. If your container instances are launched from version 20190301 or later, then they contain the required versions of the container agent and ecs-init. For more information, see Amazon ECS-optimized Linux AMI in the Amazon Elastic Container Service Developer Guide.
+     * Time duration (in seconds) to wait before the container is forcefully killed if it doesn't exit normally on its own. For tasks using the Fargate launch type, the task or service requires the followiwng platforms:   Linux platform version 1.3.0 or later.   Windows platform version 1.0.0 or later.   The max stop timeout value is 120 seconds and if the parameter is not specified, the default value of 30 seconds is used. For tasks using the EC2 launch type, if the stopTimeout parameter is not specified, the value set for the Amazon ECS container agent configuration variable ECS_CONTAINER_STOP_TIMEOUT is used by default. If neither the stopTimeout parameter or the ECS_CONTAINER_STOP_TIMEOUT agent configuration variable are set, then the default values of 30 seconds for Linux containers and 30 seconds on Windows containers are used. Your container instances require at least version 1.26.0 of the container agent to enable a container stop timeout value. However, we recommend using the latest container agent version. For information about checking your agent version and updating to the latest version, see Updating the Amazon ECS Container Agent in the Amazon Elastic Container Service Developer Guide. If you are using an Amazon ECS-optimized Linux AMI, your instance needs at least version 1.26.0-1 of the ecs-init package. If your container instances are launched from version 20190301 or later, then they contain the required versions of the container agent and ecs-init. For more information, see Amazon ECS-optimized Linux AMI in the Amazon Elastic Container Service Developer Guide.
      */
     stopTimeout?: BoxedInteger;
     /**
@@ -1433,6 +1434,10 @@ declare namespace ECS {
      */
     platformVersion?: String;
     /**
+     * The operating system that your tasks in the service, or tasks are running on. A platform family is specified only for tasks using the Fargate launch type.   All tasks that run as part of this service must use the same platformFamily value as the service, for example,  LINUX..
+     */
+    platformFamily?: String;
+    /**
      * The VPC subnet and security group configuration for tasks that receive their own elastic network interface by using the awsvpc networking mode.
      */
     networkConfiguration?: NetworkConfiguration;
@@ -1825,7 +1830,7 @@ declare namespace ECS {
      */
     s3BucketName?: String;
     /**
-     * Whether or not to enable encryption on the CloudWatch logs. If not specified, encryption will be disabled.
+     * Whether or not to use encryption on the S3 logs. If not specified, encryption is not used.
      */
     s3EncryptionEnabled?: Boolean;
     /**
@@ -2483,6 +2488,7 @@ declare namespace ECS {
   }
   export type NetworkInterfaces = NetworkInterface[];
   export type NetworkMode = "bridge"|"host"|"awsvpc"|"none"|string;
+  export type OSFamily = "WINDOWS_SERVER_2019_FULL"|"WINDOWS_SERVER_2019_CORE"|"WINDOWS_SERVER_2016_FULL"|"WINDOWS_SERVER_2004_CORE"|"WINDOWS_SERVER_2022_CORE"|"WINDOWS_SERVER_2022_FULL"|"WINDOWS_SERVER_20H2_CORE"|"LINUX"|string;
   export type PidMode = "host"|"task"|string;
   export interface PlacementConstraint {
     /**
@@ -2730,9 +2736,13 @@ declare namespace ECS {
      */
     inferenceAccelerators?: InferenceAccelerators;
     /**
-     * The amount of ephemeral storage to allocate for the task. This parameter is used to expand the total amount of ephemeral storage available, beyond the default amount, for tasks hosted on Fargate. For more information, see Fargate task storage in the Amazon ECS User Guide for Fargate.  This parameter is only supported for tasks hosted on Fargate using platform version 1.4.0 or later. 
+     * The amount of ephemeral storage to allocate for the task. This parameter is used to expand the total amount of ephemeral storage available, beyond the default amount, for tasks hosted on Fargate. For more information, see Fargate task storage in the Amazon ECS User Guide for Fargate.  This parameter is only supported for tasks hosted on Fargate using the following platform versions:   Linux platform version 1.4.0 or later.   Windows platform version 1.0.0 or later.   
      */
     ephemeralStorage?: EphemeralStorage;
+    /**
+     * The operating system that your tasks definitions run on. A platform family is specified only for tasks using the Fargate launch type.  When you specify a task definition in a service, this value must match the runtimePlatform value of the service.
+     */
+    runtimePlatform?: RuntimePlatform;
   }
   export interface RegisterTaskDefinitionResponse {
     /**
@@ -2870,6 +2880,16 @@ declare namespace ECS {
      */
     failures?: Failures;
   }
+  export interface RuntimePlatform {
+    /**
+     * The CPU architecture.
+     */
+    cpuArchitecture?: CPUArchitecture;
+    /**
+     * The operating system.
+     */
+    operatingSystemFamily?: OSFamily;
+  }
   export interface Scale {
     /**
      * The value, specified as a percent total of a service's desiredCount, to scale the task set. Accepted values are numbers between 0 and 100.
@@ -2944,6 +2964,10 @@ declare namespace ECS {
      * The platform version on which to run your service. A platform version is only specified for tasks hosted on Fargate. If one is not specified, the LATEST platform version is used by default. For more information, see Fargate Platform Versions in the Amazon Elastic Container Service Developer Guide.
      */
     platformVersion?: String;
+    /**
+     * The operating system that your tasks in the service are running on. A platform family is specified only for tasks using the Fargate launch type.   All tasks that run as part of this service must use the same platformFamily value as the service, for example, LINUX.
+     */
+    platformFamily?: String;
     /**
      * The task definition to use for tasks in the service. This value is specified when the service is created with CreateService, and it can be modified with UpdateService.
      */
@@ -3402,6 +3426,10 @@ declare namespace ECS {
      */
     platformVersion?: String;
     /**
+     * The operating system that your tasks are running on. A platform family is specified only for tasks using the Fargate launch type.   All tasks that run as part of this service must use the same platformFamily value as the service, for example, LINUX..
+     */
+    platformFamily?: String;
+    /**
      * The Unix timestamp for when the container image pull began.
      */
     pullStartedAt?: Timestamp;
@@ -3504,6 +3532,10 @@ declare namespace ECS {
      */
     compatibilities?: CompatibilityList;
     /**
+     * The operating system that your task definitions are running on. A platform family is specified only for tasks using the Fargate launch type.  When you specify a task in a service, this value must match the runtimePlatform value of the service.
+     */
+    runtimePlatform?: RuntimePlatform;
+    /**
      * The task launch types the task definition was validated against. To determine which task launch types the task definition is validated for, see the TaskDefinition$compatibilities parameter.
      */
     requiresCompatibilities?: CompatibilityList;
@@ -3592,7 +3624,7 @@ declare namespace ECS {
      */
     taskRoleArn?: String;
     /**
-     * The ephemeral storage setting override for the task.  This parameter is only supported for tasks hosted on Fargate using platform version 1.4.0 or later. 
+     * The ephemeral storage setting override for the task.  This parameter is only supported for tasks hosted on Fargate using the following platform versions:   Linux platform version 1.4.0 or later.   Windows platform version 1.0.0 or later.   
      */
     ephemeralStorage?: EphemeralStorage;
   }
@@ -3661,6 +3693,10 @@ declare namespace ECS {
      * The Fargate platform version on which the tasks in the task set are running. A platform version is only specified for tasks run on Fargate. For more information, see Fargate platform versions in the Amazon Elastic Container Service Developer Guide.
      */
     platformVersion?: String;
+    /**
+     * The operating system that your tasks in the set are running on. A platform family is specified only for tasks using the Fargate launch type.   All tasks in the set must have the same value.
+     */
+    platformFamily?: String;
     /**
      * The network configuration for the task set.
      */

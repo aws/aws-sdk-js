@@ -2323,6 +2323,7 @@ declare namespace SageMaker {
   export type AppManaged = boolean;
   export type AppName = string;
   export type AppNetworkAccessType = "PublicInternetOnly"|"VpcOnly"|string;
+  export type AppSecurityGroupManagement = "Service"|"Customer"|string;
   export type AppSortKey = "CreationTime"|string;
   export interface AppSpecification {
     /**
@@ -2339,7 +2340,7 @@ declare namespace SageMaker {
     ContainerArguments?: ContainerArguments;
   }
   export type AppStatus = "Deleted"|"Deleting"|"Failed"|"InService"|"Pending"|string;
-  export type AppType = "JupyterServer"|"KernelGateway"|"TensorBoard"|string;
+  export type AppType = "JupyterServer"|"KernelGateway"|"TensorBoard"|"RStudioServerPro"|"RSessionGateway"|string;
   export type ApprovalDescription = string;
   export type ArnOrName = string;
   export type ArtifactArn = string;
@@ -3643,6 +3644,14 @@ declare namespace SageMaker {
      * SageMaker uses Amazon Web Services KMS to encrypt the EFS volume attached to the domain with an Amazon Web Services managed key by default. For more control, specify a customer managed key.
      */
     KmsKeyId?: KmsKeyId;
+    /**
+     * The entity that creates and manages the required security groups for inter-app communication in VPCOnly mode. Required when CreateDomain.AppNetworkAccessType is VPCOnly and DomainSettings.RStudioServerProDomainSettings.DomainExecutionRoleArn is provided.
+     */
+    AppSecurityGroupManagement?: AppSecurityGroupManagement;
+    /**
+     * A collection of Domain settings.
+     */
+    DomainSettings?: DomainSettings;
   }
   export interface CreateDomainResponse {
     /**
@@ -6095,6 +6104,18 @@ declare namespace SageMaker {
      * The Amazon Web Services KMS customer managed key used to encrypt the EFS volume attached to the domain.
      */
     KmsKeyId?: KmsKeyId;
+    /**
+     * A collection of Domain settings.
+     */
+    DomainSettings?: DomainSettings;
+    /**
+     * The entity that creates and manages the required security groups for inter-app communication in VPCOnly mode. Required when CreateDomain.AppNetworkAccessType is VPCOnly and DomainSettings.RStudioServerProDomainSettings.DomainExecutionRoleArn is provided.
+     */
+    AppSecurityGroupManagement?: AppSecurityGroupManagement;
+    /**
+     * The ID of the security group that authorizes traffic between the RSessionGateway apps and the RStudioServerPro app.
+     */
+    SecurityGroupIdForDomainBoundary?: SecurityGroupId;
   }
   export interface DescribeEdgePackagingJobRequest {
     /**
@@ -8014,6 +8035,23 @@ declare namespace SageMaker {
   export type DomainId = string;
   export type DomainList = DomainDetails[];
   export type DomainName = string;
+  export type DomainSecurityGroupIds = SecurityGroupId[];
+  export interface DomainSettings {
+    /**
+     * The security groups for the Amazon Virtual Private Cloud that the Domain uses for communication between Domain-level apps and user apps.
+     */
+    SecurityGroupIds?: DomainSecurityGroupIds;
+    /**
+     * A collection of settings that configure the RStudioServerPro Domain-level app.
+     */
+    RStudioServerProDomainSettings?: RStudioServerProDomainSettings;
+  }
+  export interface DomainSettingsForUpdate {
+    /**
+     * A collection of RStudioServerPro Domain-level app settings to update.
+     */
+    RStudioServerProDomainSettingsForUpdate?: RStudioServerProDomainSettingsForUpdate;
+  }
   export type DomainStatus = "Deleting"|"Failed"|"InService"|"Pending"|"Updating"|"Update_Failed"|"Delete_Failed"|string;
   export type DoubleParameterValue = number;
   export interface EdgeModel {
@@ -13953,6 +13991,42 @@ declare namespace SageMaker {
      */
     ModelPackageGroupArn: ModelPackageGroupArn;
   }
+  export interface RSessionAppSettings {
+  }
+  export type RStudioServerProAccessStatus = "ENABLED"|"DISABLED"|string;
+  export interface RStudioServerProAppSettings {
+    /**
+     * Indicates whether the current user has access to the RStudioServerPro app.
+     */
+    AccessStatus?: RStudioServerProAccessStatus;
+    /**
+     * The level of permissions that the user has within the RStudioServerPro app. This value defaults to `User`. The `Admin` value allows the user access to the RStudio Administrative Dashboard.
+     */
+    UserGroup?: RStudioServerProUserGroup;
+  }
+  export interface RStudioServerProDomainSettings {
+    /**
+     * The ARN of the execution role for the RStudioServerPro Domain-level app.
+     */
+    DomainExecutionRoleArn: RoleArn;
+    /**
+     * A URL pointing to an RStudio Connect server.
+     */
+    RStudioConnectUrl?: String;
+    /**
+     * A URL pointing to an RStudio Package Manager server.
+     */
+    RStudioPackageManagerUrl?: String;
+    DefaultResourceSpec?: ResourceSpec;
+  }
+  export interface RStudioServerProDomainSettingsForUpdate {
+    /**
+     * The execution role for the RStudioServerPro Domain-level app.
+     */
+    DomainExecutionRoleArn: RoleArn;
+    DefaultResourceSpec?: ResourceSpec;
+  }
+  export type RStudioServerProUserGroup = "R_STUDIO_ADMIN"|"R_STUDIO_USER"|string;
   export type RealtimeInferenceInstanceTypes = ProductionVariantInstanceType[];
   export type RecordWrapper = "None"|"RecordIO"|string;
   export type RedshiftClusterId = string;
@@ -15707,6 +15781,10 @@ declare namespace SageMaker {
      * A collection of settings.
      */
     DefaultUserSettings?: UserSettings;
+    /**
+     * A collection of DomainSettings configuration values to update.
+     */
+    DomainSettingsForUpdate?: DomainSettingsForUpdate;
   }
   export interface UpdateDomainResponse {
     /**
@@ -15980,11 +16058,11 @@ declare namespace SageMaker {
      */
     ProjectDescription?: EntityDescription;
     /**
-     * The product ID and provisioning artifact ID to provision a service catalog. The provisioning artifact ID will default to the latest provisioning artifact ID of the product, if you don't provide the provisioning artifact ID. For more information, see What is AWS Service Catalog. 
+     * The product ID and provisioning artifact ID to provision a service catalog. The provisioning artifact ID will default to the latest provisioning artifact ID of the product, if you don't provide the provisioning artifact ID. For more information, see What is Amazon Web Services Service Catalog. 
      */
     ServiceCatalogProvisioningUpdateDetails?: ServiceCatalogProvisioningUpdateDetails;
     /**
-     * An array of key-value pairs. You can use tags to categorize your AWS resources in different ways, for example, by purpose, owner, or environment. For more information, see Tagging AWS Resources.
+     * An array of key-value pairs. You can use tags to categorize your Amazon Web Services resources in different ways, for example, by purpose, owner, or environment. For more information, see Tagging Amazon Web Services Resources.
      */
     Tags?: TagList;
   }
@@ -16213,6 +16291,14 @@ declare namespace SageMaker {
      * The TensorBoard app settings.
      */
     TensorBoardAppSettings?: TensorBoardAppSettings;
+    /**
+     * A collection of settings that configure user interaction with the RStudioServerPro app.
+     */
+    RStudioServerProAppSettings?: RStudioServerProAppSettings;
+    /**
+     * A collection of settings that configure the RSessionGateway app.
+     */
+    RSessionAppSettings?: RSessionAppSettings;
   }
   export type VariantName = string;
   export interface VariantProperty {

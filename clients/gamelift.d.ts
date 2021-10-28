@@ -1009,11 +1009,11 @@ declare namespace GameLift {
     /**
      *  This parameter is no longer used. Specify a server launch path using the RuntimeConfiguration parameter. Requests that use this parameter instead continue to be valid.
      */
-    ServerLaunchPath?: NonZeroAndMaxString;
+    ServerLaunchPath?: LaunchPathStringModel;
     /**
      *  This parameter is no longer used. Specify server launch parameters using the RuntimeConfiguration parameter. Requests that use this parameter instead continue to be valid.
      */
-    ServerLaunchParameters?: NonZeroAndMaxString;
+    ServerLaunchParameters?: LaunchParametersStringModel;
     /**
      *  This parameter is no longer used. To specify where GameLift should store log files once a server process shuts down, use the GameLift server API ProcessReady() and specify one or more directory paths in logParameters. See more information in the Server API Reference. 
      */
@@ -2351,11 +2351,11 @@ declare namespace GameLift {
     /**
      *  This parameter is no longer used. Server launch paths are now defined using the fleet's RuntimeConfiguration parameter. Requests that use this parameter instead continue to be valid.
      */
-    ServerLaunchPath?: NonZeroAndMaxString;
+    ServerLaunchPath?: LaunchPathStringModel;
     /**
      *  This parameter is no longer used. Server launch parameters are now defined using the fleet's RuntimeConfiguration parameter. Requests that use this parameter instead continue to be valid.
      */
-    ServerLaunchParameters?: NonZeroAndMaxString;
+    ServerLaunchParameters?: LaunchParametersStringModel;
     /**
      *  This parameter is no longer used. Game session log paths are now defined using the GameLift server API ProcessReady() logParameters. See more information in the Server API Reference. 
      */
@@ -2579,7 +2579,7 @@ declare namespace GameLift {
     TargetTrackingConfiguration: TargetTrackingConfiguration;
   }
   export type GameServerGroupDeleteOption = "SAFE_DELETE"|"FORCE_DELETE"|"RETAIN"|string;
-  export type GameServerGroupInstanceType = "c4.large"|"c4.xlarge"|"c4.2xlarge"|"c4.4xlarge"|"c4.8xlarge"|"c5.large"|"c5.xlarge"|"c5.2xlarge"|"c5.4xlarge"|"c5.9xlarge"|"c5.12xlarge"|"c5.18xlarge"|"c5.24xlarge"|"c5a.large"|"c5a.xlarge"|"c5a.2xlarge"|"c5a.4xlarge"|"c5a.8xlarge"|"c5a.12xlarge"|"c5a.16xlarge"|"c5a.24xlarge"|"r4.large"|"r4.xlarge"|"r4.2xlarge"|"r4.4xlarge"|"r4.8xlarge"|"r4.16xlarge"|"r5.large"|"r5.xlarge"|"r5.2xlarge"|"r5.4xlarge"|"r5.8xlarge"|"r5.12xlarge"|"r5.16xlarge"|"r5.24xlarge"|"r5a.large"|"r5a.xlarge"|"r5a.2xlarge"|"r5a.4xlarge"|"r5a.8xlarge"|"r5a.12xlarge"|"r5a.16xlarge"|"r5a.24xlarge"|"m4.large"|"m4.xlarge"|"m4.2xlarge"|"m4.4xlarge"|"m4.10xlarge"|"m5.large"|"m5.xlarge"|"m5.2xlarge"|"m5.4xlarge"|"m5.8xlarge"|"m5.12xlarge"|"m5.16xlarge"|"m5.24xlarge"|"m5a.large"|"m5a.xlarge"|"m5a.2xlarge"|"m5a.4xlarge"|"m5a.8xlarge"|"m5a.12xlarge"|"m5a.16xlarge"|"m5a.24xlarge"|string;
+  export type GameServerGroupInstanceType = "c4.large"|"c4.xlarge"|"c4.2xlarge"|"c4.4xlarge"|"c4.8xlarge"|"c5.large"|"c5.xlarge"|"c5.2xlarge"|"c5.4xlarge"|"c5.9xlarge"|"c5.12xlarge"|"c5.18xlarge"|"c5.24xlarge"|"c5a.large"|"c5a.xlarge"|"c5a.2xlarge"|"c5a.4xlarge"|"c5a.8xlarge"|"c5a.12xlarge"|"c5a.16xlarge"|"c5a.24xlarge"|"c6g.medium"|"c6g.large"|"c6g.xlarge"|"c6g.2xlarge"|"c6g.4xlarge"|"c6g.8xlarge"|"c6g.12xlarge"|"c6g.16xlarge"|"r4.large"|"r4.xlarge"|"r4.2xlarge"|"r4.4xlarge"|"r4.8xlarge"|"r4.16xlarge"|"r5.large"|"r5.xlarge"|"r5.2xlarge"|"r5.4xlarge"|"r5.8xlarge"|"r5.12xlarge"|"r5.16xlarge"|"r5.24xlarge"|"r5a.large"|"r5a.xlarge"|"r5a.2xlarge"|"r5a.4xlarge"|"r5a.8xlarge"|"r5a.12xlarge"|"r5a.16xlarge"|"r5a.24xlarge"|"r6g.medium"|"r6g.large"|"r6g.xlarge"|"r6g.2xlarge"|"r6g.4xlarge"|"r6g.8xlarge"|"r6g.12xlarge"|"r6g.16xlarge"|"m4.large"|"m4.xlarge"|"m4.2xlarge"|"m4.4xlarge"|"m4.10xlarge"|"m5.large"|"m5.xlarge"|"m5.2xlarge"|"m5.4xlarge"|"m5.8xlarge"|"m5.12xlarge"|"m5.16xlarge"|"m5.24xlarge"|"m5a.large"|"m5a.xlarge"|"m5a.2xlarge"|"m5a.4xlarge"|"m5a.8xlarge"|"m5a.12xlarge"|"m5a.16xlarge"|"m5a.24xlarge"|"m6g.medium"|"m6g.large"|"m6g.xlarge"|"m6g.2xlarge"|"m6g.4xlarge"|"m6g.8xlarge"|"m6g.12xlarge"|"m6g.16xlarge"|string;
   export type GameServerGroupName = string;
   export type GameServerGroupNameOrArn = string;
   export type GameServerGroupStatus = "NEW"|"ACTIVATING"|"ACTIVE"|"DELETE_SCHEDULED"|"DELETING"|"DELETED"|"ERROR"|string;
@@ -2994,6 +2994,8 @@ declare namespace GameLift {
   export type IpProtocol = "TCP"|"UDP"|string;
   export type LargeGameSessionData = string;
   export type LatencyMap = {[key: string]: PositiveInteger};
+  export type LaunchParametersStringModel = string;
+  export type LaunchPathStringModel = string;
   export type LaunchTemplateId = string;
   export type LaunchTemplateName = string;
   export interface LaunchTemplateSpecification {
@@ -3830,11 +3832,11 @@ declare namespace GameLift {
     /**
      * The location of a game build executable or the Realtime script file that contains the Init() function. Game builds and Realtime scripts are installed on instances at the root:    Windows (custom game builds only): C:\game. Example: "C:\game\MyGame\server.exe"    Linux: /local/game. Examples: "/local/game/MyGame/server.exe" or "/local/game/MyRealtimeScript.js"  
      */
-    LaunchPath: NonZeroAndMaxString;
+    LaunchPath: LaunchPathStringModel;
     /**
      * An optional list of parameters to pass to the server executable or Realtime script on launch.
      */
-    Parameters?: NonZeroAndMaxString;
+    Parameters?: LaunchParametersStringModel;
     /**
      * The number of server processes using this configuration that run concurrently on each instance.
      */

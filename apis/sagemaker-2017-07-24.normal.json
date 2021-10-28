@@ -4789,6 +4789,13 @@
         "VpcOnly"
       ]
     },
+    "AppSecurityGroupManagement": {
+      "type": "string",
+      "enum": [
+        "Service",
+        "Customer"
+      ]
+    },
     "AppSortKey": {
       "type": "string",
       "enum": [
@@ -4831,7 +4838,9 @@
       "enum": [
         "JupyterServer",
         "KernelGateway",
-        "TensorBoard"
+        "TensorBoard",
+        "RStudioServerPro",
+        "RSessionGateway"
       ]
     },
     "ApprovalDescription": {
@@ -7274,6 +7283,14 @@
         "KmsKeyId": {
           "shape": "KmsKeyId",
           "documentation": "<p>SageMaker uses Amazon Web Services KMS to encrypt the EFS volume attached to the domain with an Amazon Web Services managed key by default. For more control, specify a customer managed key.</p>"
+        },
+        "AppSecurityGroupManagement": {
+          "shape": "AppSecurityGroupManagement",
+          "documentation": "<p>The entity that creates and manages the required security groups for inter-app communication in <code>VPCOnly</code> mode. Required when <code>CreateDomain.AppNetworkAccessType</code> is <code>VPCOnly</code> and <code>DomainSettings.RStudioServerProDomainSettings.DomainExecutionRoleArn</code> is provided.</p>"
+        },
+        "DomainSettings": {
+          "shape": "DomainSettings",
+          "documentation": "<p>A collection of <code>Domain</code> settings.</p>"
         }
       }
     },
@@ -10875,6 +10892,18 @@
         "KmsKeyId": {
           "shape": "KmsKeyId",
           "documentation": "<p>The Amazon Web Services KMS customer managed key used to encrypt the EFS volume attached to the domain.</p>"
+        },
+        "DomainSettings": {
+          "shape": "DomainSettings",
+          "documentation": "<p>A collection of <code>Domain</code> settings.</p>"
+        },
+        "AppSecurityGroupManagement": {
+          "shape": "AppSecurityGroupManagement",
+          "documentation": "<p>The entity that creates and manages the required security groups for inter-app communication in <code>VPCOnly</code> mode. Required when <code>CreateDomain.AppNetworkAccessType</code> is <code>VPCOnly</code> and <code>DomainSettings.RStudioServerProDomainSettings.DomainExecutionRoleArn</code> is provided.</p>"
+        },
+        "SecurityGroupIdForDomainBoundary": {
+          "shape": "SecurityGroupId",
+          "documentation": "<p>The ID of the security group that authorizes traffic between the <code>RSessionGateway</code> apps and the <code>RStudioServerPro</code> app.</p>"
         }
       }
     },
@@ -13502,6 +13531,37 @@
       "type": "string",
       "max": 63,
       "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}"
+    },
+    "DomainSecurityGroupIds": {
+      "type": "list",
+      "member": {
+        "shape": "SecurityGroupId"
+      },
+      "max": 3
+    },
+    "DomainSettings": {
+      "type": "structure",
+      "members": {
+        "SecurityGroupIds": {
+          "shape": "DomainSecurityGroupIds",
+          "documentation": "<p>The security groups for the Amazon Virtual Private Cloud that the <code>Domain</code> uses for communication between Domain-level apps and user apps.</p>"
+        },
+        "RStudioServerProDomainSettings": {
+          "shape": "RStudioServerProDomainSettings",
+          "documentation": "<p>A collection of settings that configure the <code>RStudioServerPro</code> Domain-level app.</p>"
+        }
+      },
+      "documentation": "<p>A collection of settings that apply to the <code>SageMaker Domain</code>. These settings are specified through the <code>CreateDomain</code> API call.</p>"
+    },
+    "DomainSettingsForUpdate": {
+      "type": "structure",
+      "members": {
+        "RStudioServerProDomainSettingsForUpdate": {
+          "shape": "RStudioServerProDomainSettingsForUpdate",
+          "documentation": "<p>A collection of <code>RStudioServerPro</code> Domain-level app settings to update.</p>"
+        }
+      },
+      "documentation": "<p>A collection of <code>Domain</code> configuration settings to update.</p>"
     },
     "DomainStatus": {
       "type": "string",
@@ -23236,6 +23296,79 @@
         }
       }
     },
+    "RSessionAppSettings": {
+      "type": "structure",
+      "members": {},
+      "documentation": "<p>A collection of settings that apply to an <code>RSessionGateway</code> app.</p>"
+    },
+    "RStudioServerProAccessStatus": {
+      "type": "string",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
+      ]
+    },
+    "RStudioServerProAppSettings": {
+      "type": "structure",
+      "members": {
+        "AccessStatus": {
+          "shape": "RStudioServerProAccessStatus",
+          "documentation": "<p>Indicates whether the current user has access to the <code>RStudioServerPro</code> app.</p>"
+        },
+        "UserGroup": {
+          "shape": "RStudioServerProUserGroup",
+          "documentation": "<p>The level of permissions that the user has within the <code>RStudioServerPro</code> app. This value defaults to `User`. The `Admin` value allows the user access to the RStudio Administrative Dashboard.</p>"
+        }
+      },
+      "documentation": "<p>A collection of settings that configure user interaction with the <code>RStudioServerPro</code> app. <code>RStudioServerProAppSettings</code> cannot be updated. The <code>RStudioServerPro</code> app must be deleted and a new one created to make any changes.</p>"
+    },
+    "RStudioServerProDomainSettings": {
+      "type": "structure",
+      "required": [
+        "DomainExecutionRoleArn"
+      ],
+      "members": {
+        "DomainExecutionRoleArn": {
+          "shape": "RoleArn",
+          "documentation": "<p>The ARN of the execution role for the <code>RStudioServerPro</code> Domain-level app.</p>"
+        },
+        "RStudioConnectUrl": {
+          "shape": "String",
+          "documentation": "<p>A URL pointing to an RStudio Connect server.</p>"
+        },
+        "RStudioPackageManagerUrl": {
+          "shape": "String",
+          "documentation": "<p>A URL pointing to an RStudio Package Manager server.</p>"
+        },
+        "DefaultResourceSpec": {
+          "shape": "ResourceSpec"
+        }
+      },
+      "documentation": "<p>A collection of settings that configure the <code>RStudioServerPro</code> Domain-level app.</p>"
+    },
+    "RStudioServerProDomainSettingsForUpdate": {
+      "type": "structure",
+      "required": [
+        "DomainExecutionRoleArn"
+      ],
+      "members": {
+        "DomainExecutionRoleArn": {
+          "shape": "RoleArn",
+          "documentation": "<p>The execution role for the <code>RStudioServerPro</code> Domain-level app.</p>"
+        },
+        "DefaultResourceSpec": {
+          "shape": "ResourceSpec"
+        }
+      },
+      "documentation": "<p>A collection of settings that update the current configuration for the <code>RStudioServerPro</code> Domain-level app.</p>"
+    },
+    "RStudioServerProUserGroup": {
+      "type": "string",
+      "enum": [
+        "R_STUDIO_ADMIN",
+        "R_STUDIO_USER"
+      ]
+    },
     "RealtimeInferenceInstanceTypes": {
       "type": "list",
       "member": {
@@ -24130,7 +24263,7 @@
           "documentation": "<p>A list of key value pairs that you specify when you provision a product.</p>"
         }
       },
-      "documentation": "<p>Details that you specify to provision a service catalog product. For information about service catalog, see <a href=\"https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html\">What is AWS Service Catalog</a>. </p>"
+      "documentation": "<p>Details that you specify to provision a service catalog product. For information about service catalog, see <a href=\"https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html\">What is Amazon Web Services Service Catalog</a>. </p>"
     },
     "SessionExpirationDurationInSeconds": {
       "type": "integer",
@@ -26576,6 +26709,10 @@
         "DefaultUserSettings": {
           "shape": "UserSettings",
           "documentation": "<p>A collection of settings.</p>"
+        },
+        "DomainSettingsForUpdate": {
+          "shape": "DomainSettingsForUpdate",
+          "documentation": "<p>A collection of <code>DomainSettings</code> configuration values to update.</p>"
         }
       }
     },
@@ -26963,11 +27100,11 @@
         },
         "ServiceCatalogProvisioningUpdateDetails": {
           "shape": "ServiceCatalogProvisioningUpdateDetails",
-          "documentation": "<p>The product ID and provisioning artifact ID to provision a service catalog. The provisioning artifact ID will default to the latest provisioning artifact ID of the product, if you don't provide the provisioning artifact ID. For more information, see <a href=\"https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html\">What is AWS Service Catalog</a>. </p>"
+          "documentation": "<p>The product ID and provisioning artifact ID to provision a service catalog. The provisioning artifact ID will default to the latest provisioning artifact ID of the product, if you don't provide the provisioning artifact ID. For more information, see <a href=\"https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html\">What is Amazon Web Services Service Catalog</a>. </p>"
         },
         "Tags": {
           "shape": "TagList",
-          "documentation": "<p>An array of key-value pairs. You can use tags to categorize your AWS resources in different ways, for example, by purpose, owner, or environment. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging AWS Resources</a>.</p>"
+          "documentation": "<p>An array of key-value pairs. You can use tags to categorize your Amazon Web Services resources in different ways, for example, by purpose, owner, or environment. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services Resources</a>.</p>"
         }
       }
     },
@@ -27309,6 +27446,14 @@
         "TensorBoardAppSettings": {
           "shape": "TensorBoardAppSettings",
           "documentation": "<p>The TensorBoard app settings.</p>"
+        },
+        "RStudioServerProAppSettings": {
+          "shape": "RStudioServerProAppSettings",
+          "documentation": "<p>A collection of settings that configure user interaction with the <code>RStudioServerPro</code> app.</p>"
+        },
+        "RSessionAppSettings": {
+          "shape": "RSessionAppSettings",
+          "documentation": "<p>A collection of settings that configure the <code>RSessionGateway</code> app.</p>"
         }
       },
       "documentation": "<p>A collection of settings that apply to users of Amazon SageMaker Studio. These settings are specified when the <code>CreateUserProfile</code> API is called, and as <code>DefaultUserSettings</code> when the <code>CreateDomain</code> API is called.</p> <p> <code>SecurityGroups</code> is aggregated when specified in both calls. For all other settings in <code>UserSettings</code>, the values specified in <code>CreateUserProfile</code> take precedence over those specified in <code>CreateDomain</code>.</p>"

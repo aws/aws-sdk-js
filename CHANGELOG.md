@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1016.0-->
+<!--LATEST=2.1017.0-->
 <!--ENTRYINSERT-->
+
+## 2.1017.0
+* feature: ConnectParticipant: This release adds a new boolean attribute - Connect Participant - to the CreateParticipantConnection API, which can be used to mark the participant as connected.
+* feature: EC2: Added new read-only DenyAllIGWTraffic network interface attribute. Added support for DL1 24xlarge instances powered by Habana Gaudi Accelerators for deep learning model training workloads
+* feature: ECS: Amazon ECS now supports running Fargate tasks on Windows Operating Systems Families which includes Windows Server 2019 Core and Windows Server 2019 Full.
+* feature: GameLift: Added support for Arm-based AWS Graviton2 instances, such as M6g, C6g, and R6g.
+* feature: SSMIncidents: Updating documentation, adding new field to ConflictException to indicate earliest retry timestamp for some operations, increase maximum length of nextToken fields
+* feature: SageMaker: This release adds support for RStudio on SageMaker.
 
 ## 2.1016.0
 * feature: AutoScaling: This release adds support for attribute-based instance type selection, a new EC2 Auto Scaling feature that lets customers express their instance requirements as a set of attributes, such as vCPU, memory, and storage.
