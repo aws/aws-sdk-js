@@ -11475,7 +11475,7 @@ declare namespace EC2 {
   }
   export interface DescribeImagesRequest {
     /**
-     * Scopes the images by users with explicit launch permissions. Specify an Amazon Web Services account ID, self (the sender of the request), or all (public AMIs).
+     * Scopes the images by users with explicit launch permissions. Specify an Amazon Web Services account ID, self (the sender of the request), or all (public AMIs).   If you specify an Amazon Web Services account ID that is not your own, only AMIs shared with that specific Amazon Web Services account ID are returned. However, AMIs that are shared with the account’s organization or organizational unit (OU) are not returned.   If you specify self or your own Amazon Web Services account ID, AMIs shared with your account are returned. In addition, AMIs that are shared with the organization or OU of which you are member are also returned.    If you specify all, all public AMIs are returned.  
      */
     ExecutableUsers?: ExecutableByStringList;
     /**
@@ -19181,7 +19181,7 @@ declare namespace EC2 {
      */
     MemoryGiBPerVCpu?: MemoryGiBPerVCpu;
     /**
-     * The instance types to exclude. You can use strings with one or more wild cards, represented by an asterisk (*), to exclude an instance type, size, or generation. The following are examples: m5.8xlarge, c5*.*, m5a.*, r*, *3*. For example, if you specify c5*.*, Amazon EC2 will exclude the entire C5 instance family (all C5a and C5n instance types). If you specify c5a.*, Amazon EC2 excludes all the C5a instance types, but does not exclude the C5n instance types. Default: No excluded instance types
+     * The instance types to exclude. You can use strings with one or more wild cards, represented by an asterisk (*), to exclude an instance type, size, or generation. The following are examples: m5.8xlarge, c5*.*, m5a.*, r*, *3*. For example, if you specify c5*,Amazon EC2 will exclude the entire C5 instance family, which includes all C5a and C5n instance types. If you specify m5a.*, Amazon EC2 will exclude all the M5a instance types, but not the M5n instance types. Default: No excluded instance types
      */
     ExcludedInstanceTypes?: ExcludedInstanceTypeSet;
     /**
@@ -19267,7 +19267,7 @@ declare namespace EC2 {
      */
     MemoryGiBPerVCpu?: MemoryGiBPerVCpuRequest;
     /**
-     * The instance types to exclude. You can use strings with one or more wild cards, represented by an asterisk (*), to exclude an instance family, type, size, or generation. The following are examples: m5.8xlarge, c5*.*, m5a.*, r*, *3*. For example, if you specify c5*.*, Amazon EC2 will exclude the entire C5 instance family (all C5a and C5n instance types). If you specify c5a.*, Amazon EC2 excludes all the C5a instance types, but does not exclude the C5n instance types. Default: No excluded instance types
+     * The instance types to exclude. You can use strings with one or more wild cards, represented by an asterisk (*), to exclude an instance family, type, size, or generation. The following are examples: m5.8xlarge, c5*.*, m5a.*, r*, *3*. For example, if you specify c5*,Amazon EC2 will exclude the entire C5 instance family, which includes all C5a and C5n instance types. If you specify m5a.*, Amazon EC2 will exclude all the M5a instance types, but not the M5n instance types. Default: No excluded instance types
      */
     ExcludedInstanceTypes?: ExcludedInstanceTypeSet;
     /**
@@ -19892,6 +19892,14 @@ declare namespace EC2 {
      * The Amazon Web Services account ID. Constraints: Up to 10 000 account IDs can be specified in a single request.
      */
     UserId?: String;
+    /**
+     * The Amazon Resource Name (ARN) of an organization.
+     */
+    OrganizationArn?: String;
+    /**
+     * The Amazon Resource Name (ARN) of an organizational unit (OU).
+     */
+    OrganizationalUnitArn?: String;
   }
   export type LaunchPermissionList = LaunchPermission[];
   export interface LaunchPermissionModifications {
@@ -21430,7 +21438,7 @@ declare namespace EC2 {
   }
   export interface ModifyImageAttributeRequest {
     /**
-     * The name of the attribute to modify. The valid values are description and launchPermission.
+     * The name of the attribute to modify. Valid values: description | launchPermission 
      */
     Attribute?: String;
     /**
@@ -21469,6 +21477,14 @@ declare namespace EC2 {
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
     DryRun?: Boolean;
+    /**
+     * The Amazon Resource Name (ARN) of an organization. This parameter can be used only when the Attribute parameter is launchPermission.
+     */
+    OrganizationArns?: OrganizationArnStringList;
+    /**
+     * The Amazon Resource Name (ARN) of an organizational unit (OU). This parameter can be used only when the Attribute parameter is launchPermission.
+     */
+    OrganizationalUnitArns?: OrganizationalUnitArnStringList;
   }
   export interface ModifyInstanceAttributeRequest {
     /**
@@ -23304,6 +23320,8 @@ declare namespace EC2 {
     MaxTotalPrice?: String;
   }
   export type OperationType = "add"|"remove"|string;
+  export type OrganizationArnStringList = String[];
+  export type OrganizationalUnitArnStringList = String[];
   export type OutpostArn = string;
   export type OwnerStringList = String[];
   export type PartitionLoadFrequency = "none"|"daily"|"weekly"|"monthly"|string;

@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1017.0-->
+<!--LATEST=2.1018.0-->
 <!--ENTRYINSERT-->
+
+## 2.1018.0
+* feature: ApplicationInsights: Added Monitoring support for SQL Server Failover Cluster Instance. Additionally, added a new API to allow one-click monitoring of containers resources.
+* feature: Connect: Amazon Connect Chat now supports real-time message streaming.
+* feature: EC2: Support added for AMI sharing with organizations and organizational units in ModifyImageAttribute API
+* feature: Rekognition: This release added new attributes to Rekognition Video GetCelebrityRecognition API operations.
+* feature: TranscribeService: Transcribe and Transcribe Call Analytics now support automatic language identification along with custom vocabulary, vocabulary filter, custom language model and PII redaction.
 
 ## 2.1017.0
 * feature: ConnectParticipant: This release adds a new boolean attribute - Connect Participant - to the CreateParticipantConnection API, which can be used to mark the participant as connected.

@@ -628,6 +628,14 @@ declare class Connect extends Service {
    */
   startContactRecording(callback?: (err: AWSError, data: Connect.Types.StartContactRecordingResponse) => void): Request<Connect.Types.StartContactRecordingResponse, AWSError>;
   /**
+   *  Initiates real-time message streaming for a new chat contact.  For more information about message streaming, see Enable real-time chat message streaming in the Amazon Connect Administrator Guide.
+   */
+  startContactStreaming(params: Connect.Types.StartContactStreamingRequest, callback?: (err: AWSError, data: Connect.Types.StartContactStreamingResponse) => void): Request<Connect.Types.StartContactStreamingResponse, AWSError>;
+  /**
+   *  Initiates real-time message streaming for a new chat contact.  For more information about message streaming, see Enable real-time chat message streaming in the Amazon Connect Administrator Guide.
+   */
+  startContactStreaming(callback?: (err: AWSError, data: Connect.Types.StartContactStreamingResponse) => void): Request<Connect.Types.StartContactStreamingResponse, AWSError>;
+  /**
    * Places an outbound call to a contact, and then initiates the contact flow. It performs the actions in the contact flow that's specified (in ContactFlowId). Agents do not initiate the outbound API, which means that they do not dial the contact. If the contact flow places an outbound call to a contact, and then puts the contact in queue, the call is then routed to the agent, like any other inbound case. There is a 60-second dialing timeout for this operation. If the call is not connected after 60 seconds, it fails.  UK numbers with a 447 prefix are not allowed by default. Before you can dial these UK mobile numbers, you must submit a service quota increase request. For more information, see Amazon Connect Service Quotas in the Amazon Connect Administrator Guide.    Campaign calls are not allowed by default. Before you can make a call with TrafficType = CAMPAIGN, you must submit a service quota increase request. For more information, see Amazon Connect Service Quotas in the Amazon Connect Administrator Guide.  
    */
   startOutboundVoiceContact(params: Connect.Types.StartOutboundVoiceContactRequest, callback?: (err: AWSError, data: Connect.Types.StartOutboundVoiceContactResponse) => void): Request<Connect.Types.StartOutboundVoiceContactResponse, AWSError>;
@@ -659,6 +667,14 @@ declare class Connect extends Service {
    * Stops recording a call when a contact is being recorded. StopContactRecording is a one-time action. If you use StopContactRecording to stop recording an ongoing call, you can't use StartContactRecording to restart it. For scenarios where the recording has started and you want to suspend it for sensitive information (for example, to collect a credit card number), and then restart it, use SuspendContactRecording and ResumeContactRecording. Only voice recordings are supported at this time.
    */
   stopContactRecording(callback?: (err: AWSError, data: Connect.Types.StopContactRecordingResponse) => void): Request<Connect.Types.StopContactRecordingResponse, AWSError>;
+  /**
+   *  Ends message streaming on a specified contact. To restart message streaming on that contact, call the StartContactStreaming API. 
+   */
+  stopContactStreaming(params: Connect.Types.StopContactStreamingRequest, callback?: (err: AWSError, data: Connect.Types.StopContactStreamingResponse) => void): Request<Connect.Types.StopContactStreamingResponse, AWSError>;
+  /**
+   *  Ends message streaming on a specified contact. To restart message streaming on that contact, call the StartContactStreaming API. 
+   */
+  stopContactStreaming(callback?: (err: AWSError, data: Connect.Types.StopContactStreamingResponse) => void): Request<Connect.Types.StopContactStreamingResponse, AWSError>;
   /**
    * When a contact is being recorded, this API suspends recording the call. For example, you might suspend the call recording while collecting sensitive information, such as a credit card number. Then use ResumeContactRecording to restart recording.  The period of time that the recording is suspended is filled with silence in the final recording.  Only voice recordings are supported at this time.
    */
@@ -1094,12 +1110,19 @@ declare namespace Connect {
     /**
      * The type of the content. Supported types are text and plain.
      */
-    ContentType: ChatContentType;
+    ContentType?: ChatContentType;
     /**
      * The content of the chat message.
      */
-    Content: ChatContent;
+    Content?: ChatContent;
   }
+  export interface ChatStreamingConfiguration {
+    /**
+     * The Amazon Resource Name (ARN) of the standard Amazon SNS topic. The Amazon Resource Name (ARN) of the streaming endpoint that is used to publish real-time message streaming for chat conversations.
+     */
+    StreamingEndpointArn: ChatStreamingEndpointARN;
+  }
+  export type ChatStreamingEndpointARN = string;
   export type ClientToken = string;
   export type CommonNameLength127 = string;
   export type Comparison = "LT"|string;
@@ -1886,6 +1909,14 @@ declare namespace Connect {
      * The channel used for grouping and filters.
      */
     Channel?: Channel;
+    /**
+     * The routing profile.
+     */
+    RoutingProfile?: RoutingProfileReference;
+    /**
+     * The instance reference.
+     */
+    InstanceReference?: InstanceReference;
   }
   export type DirectoryAlias = string;
   export type DirectoryId = string;
@@ -2007,6 +2038,10 @@ declare namespace Connect {
      */
     Queues?: Queues;
     /**
+     * The filters used to sort routing profiles. 
+     */
+    RoutingProfiles?: RoutingProfiles;
+    /**
      * The channel to use to filter the metrics.
      */
     Channels?: Channels;
@@ -2125,7 +2160,7 @@ declare namespace Connect {
      */
     MetricResults?: HistoricalMetricResults;
   }
-  export type Grouping = "QUEUE"|"CHANNEL"|string;
+  export type Grouping = "QUEUE"|"CHANNEL"|"ROUTING_PROFILE"|"INSTANCE"|string;
   export type Groupings = Grouping[];
   export interface HierarchyGroup {
     /**
@@ -2283,7 +2318,7 @@ declare namespace Connect {
     Value?: Value;
   }
   export type HistoricalMetricDataCollections = HistoricalMetricData[];
-  export type HistoricalMetricName = "CONTACTS_QUEUED"|"CONTACTS_HANDLED"|"CONTACTS_ABANDONED"|"CONTACTS_CONSULTED"|"CONTACTS_AGENT_HUNG_UP_FIRST"|"CONTACTS_HANDLED_INCOMING"|"CONTACTS_HANDLED_OUTBOUND"|"CONTACTS_HOLD_ABANDONS"|"CONTACTS_TRANSFERRED_IN"|"CONTACTS_TRANSFERRED_OUT"|"CONTACTS_TRANSFERRED_IN_FROM_QUEUE"|"CONTACTS_TRANSFERRED_OUT_FROM_QUEUE"|"CONTACTS_MISSED"|"CALLBACK_CONTACTS_HANDLED"|"API_CONTACTS_HANDLED"|"OCCUPANCY"|"HANDLE_TIME"|"AFTER_CONTACT_WORK_TIME"|"QUEUED_TIME"|"ABANDON_TIME"|"QUEUE_ANSWER_TIME"|"HOLD_TIME"|"INTERACTION_TIME"|"INTERACTION_AND_HOLD_TIME"|"SERVICE_LEVEL"|string;
+  export type HistoricalMetricName = "CONTACTS_QUEUED"|"CONTACTS_HANDLED"|"CONTACTS_ABANDONED"|"CONTACTS_CONSULTED"|"CONTACTS_AGENT_HUNG_UP_FIRST"|"CONTACTS_HANDLED_INCOMING"|"CONTACTS_HANDLED_OUTBOUND"|"CONTACTS_HOLD_ABANDONS"|"CONTACTS_TRANSFERRED_IN"|"CONTACTS_TRANSFERRED_OUT"|"CONTACTS_TRANSFERRED_IN_FROM_QUEUE"|"CONTACTS_TRANSFERRED_OUT_FROM_QUEUE"|"CONTACTS_TRANSFERRED_IN_BY_AGENT"|"CONTACTS_TRANSFERRED_OUT_BY_AGENT"|"CONTACTS_MISSED"|"CALLBACK_CONTACTS_HANDLED"|"API_CONTACTS_HANDLED"|"OCCUPANCY"|"HANDLE_TIME"|"AFTER_CONTACT_WORK_TIME"|"QUEUED_TIME"|"ABANDON_TIME"|"QUEUE_ANSWER_TIME"|"HOLD_TIME"|"INTERACTION_TIME"|"INTERACTION_AND_HOLD_TIME"|"SERVICE_LEVEL"|string;
   export interface HistoricalMetricResult {
     /**
      * The dimension for the metrics.
@@ -2418,6 +2453,16 @@ declare namespace Connect {
   export type InstanceAttributeType = "INBOUND_CALLS"|"OUTBOUND_CALLS"|"CONTACTFLOW_LOGS"|"CONTACT_LENS"|"AUTO_RESOLVE_BEST_VOICES"|"USE_CUSTOM_TTS_VOICES"|"EARLY_MEDIA"|string;
   export type InstanceAttributeValue = string;
   export type InstanceId = string;
+  export interface InstanceReference {
+    /**
+     * The identifier of the instance reference.
+     */
+    Id?: InstanceId;
+    /**
+     * The Amazon Resource Name (ARN) of the instance reference.
+     */
+    Arn?: ARN;
+  }
   export type InstanceStatus = "CREATION_IN_PROGRESS"|"ACTIVE"|"CREATION_FAILED"|string;
   export interface InstanceStatusReason {
     /**
@@ -3355,6 +3400,10 @@ declare namespace Connect {
      * The Amazon Resource Name (ARN) of the queue.
      */
     Arn?: ARN;
+    /**
+     * The type of queue.
+     */
+    QueueType?: QueueType;
   }
   export type QueueStatus = "ENABLED"|"DISABLED"|string;
   export interface QueueSummary {
@@ -3459,7 +3508,7 @@ declare namespace Connect {
     Type: ReferenceType;
   }
   export type ReferenceKey = string;
-  export type ReferenceType = "URL"|string;
+  export type ReferenceType = "URL"|"ATTACHMENT"|"NUMBER"|"STRING"|"DATE"|"EMAIL"|string;
   export type ReferenceValue = string;
   export interface ResumeContactRecordingRequest {
     /**
@@ -3567,6 +3616,16 @@ declare namespace Connect {
     Channel: Channel;
   }
   export type RoutingProfileQueueReferenceList = RoutingProfileQueueReference[];
+  export interface RoutingProfileReference {
+    /**
+     * The identifier of the routing profile reference.
+     */
+    Id?: RoutingProfileId;
+    /**
+     * The Amazon Resource Name (ARN) of the routing profile reference.
+     */
+    Arn?: ARN;
+  }
   export interface RoutingProfileSummary {
     /**
      * The identifier of the routing profile.
@@ -3582,6 +3641,7 @@ declare namespace Connect {
     Name?: RoutingProfileName;
   }
   export type RoutingProfileSummaryList = RoutingProfileSummary[];
+  export type RoutingProfiles = RoutingProfileId[];
   export interface S3Config {
     /**
      * The S3 bucket name.
@@ -3691,6 +3751,30 @@ declare namespace Connect {
     VoiceRecordingConfiguration: VoiceRecordingConfiguration;
   }
   export interface StartContactRecordingResponse {
+  }
+  export interface StartContactStreamingRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The identifier of the contact. This is the identifier of the contact associated with the first interaction with the contact center.
+     */
+    ContactId: ContactId;
+    /**
+     * The streaming configuration, such as the Amazon SNS streaming endpoint.
+     */
+    ChatStreamingConfiguration: ChatStreamingConfiguration;
+    /**
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+     */
+    ClientToken: ClientToken;
+  }
+  export interface StartContactStreamingResponse {
+    /**
+     * The identifier of the streaming configuration enabled. 
+     */
+    StreamingId: StreamingId;
   }
   export interface StartOutboundVoiceContactRequest {
     /**
@@ -3809,7 +3893,24 @@ declare namespace Connect {
   }
   export interface StopContactResponse {
   }
+  export interface StopContactStreamingRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The identifier of the contact. This is the identifier of the contact that is associated with the first interaction with the contact center.
+     */
+    ContactId: ContactId;
+    /**
+     * The identifier of the streaming configuration enabled. 
+     */
+    StreamingId: StreamingId;
+  }
+  export interface StopContactStreamingResponse {
+  }
   export type StorageType = "S3"|"KINESIS_VIDEO_STREAM"|"KINESIS_STREAM"|"KINESIS_FIREHOSE"|string;
+  export type StreamingId = string;
   export type String = string;
   export interface SuspendContactRecordingRequest {
     /**
@@ -3856,7 +3957,7 @@ declare namespace Connect {
   export type Timestamp = Date;
   export type TrafficType = "GENERAL"|"CAMPAIGN"|string;
   export type URI = string;
-  export type Unit = "SECONDS"|"COUNT"|"PERCENT"|string;
+  export type Unit = "SECONDS"|"MILLISECONDS"|"COUNT"|"PERCENT"|string;
   export interface UntagResourceRequest {
     /**
      * The Amazon Resource Name (ARN) of the resource.

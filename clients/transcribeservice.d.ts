@@ -276,11 +276,11 @@ declare class TranscribeService extends Service {
    */
   startTranscriptionJob(callback?: (err: AWSError, data: TranscribeService.Types.StartTranscriptionJobResponse) => void): Request<TranscribeService.Types.StartTranscriptionJobResponse, AWSError>;
   /**
-   * Tags a Amazon Transcribe resource with the given list of tags.
+   * Tags an Amazon Transcribe resource with the given list of tags.
    */
   tagResource(params: TranscribeService.Types.TagResourceRequest, callback?: (err: AWSError, data: TranscribeService.Types.TagResourceResponse) => void): Request<TranscribeService.Types.TagResourceResponse, AWSError>;
   /**
-   * Tags a Amazon Transcribe resource with the given list of tags.
+   * Tags an Amazon Transcribe resource with the given list of tags.
    */
   tagResource(callback?: (err: AWSError, data: TranscribeService.Types.TagResourceResponse) => void): Request<TranscribeService.Types.TagResourceResponse, AWSError>;
   /**
@@ -386,7 +386,7 @@ declare namespace TranscribeService {
      */
     FailureReason?: FailureReason;
     /**
-     * The Amazon Resource Number (ARN) that you use to get access to the analytics job.
+     * The Amazon Resource Number (ARN) that you use to access the analytics job. ARNs have the format arn:partition:service:region:account-id:resource-type/resource-id.
      */
     DataAccessRoleArn?: DataAccessRoleArn;
     /**
@@ -425,6 +425,10 @@ declare namespace TranscribeService {
      * When you run a call analytics job, you can specify the language spoken in the audio, or you can have Amazon Transcribe identify the language for you. To specify a language, specify an array with one language code. If you don't know the language, you can leave this field blank and Amazon Transcribe will use machine learning to identify the language for you. To improve the ability of Amazon Transcribe to correctly identify the language, you can provide an array of the languages that can be present in the audio. Refer to Supported languages and language-specific features for additional information.
      */
     LanguageOptions?: LanguageOptions;
+    /**
+     * The language identification settings associated with your call analytics job. These settings include VocabularyName, VocabularyFilterName, and LanguageModelName.
+     */
+    LanguageIdSettings?: LanguageIdSettingsMap;
   }
   export type CallAnalyticsJobStatus = "QUEUED"|"IN_PROGRESS"|"FAILED"|"COMPLETED"|string;
   export type CallAnalyticsJobSummaries = CallAnalyticsJobSummary[];
@@ -894,7 +898,7 @@ declare namespace TranscribeService {
      */
     TuningDataS3Uri?: Uri;
     /**
-     * The Amazon Resource Name (ARN) that uniquely identifies the permissions you've given Amazon Transcribe to access your Amazon S3 buckets containing your media files or text data.
+     * The Amazon Resource Name (ARN) that uniquely identifies the permissions you've given Amazon Transcribe to access your Amazon S3 buckets containing your media files or text data. ARNs have the format arn:partition:service:region:account-id:resource-type/resource-id.
      */
     DataAccessRoleArn: DataAccessRoleArn;
   }
@@ -926,13 +930,28 @@ declare namespace TranscribeService {
      */
     AllowDeferredExecution?: Boolean;
     /**
-     * The Amazon Resource Name (ARN) of a role that has access to the S3 bucket that contains the input files. Amazon Transcribe assumes this role to read queued media files. If you have specified an output S3 bucket for the transcription results, this role should have access to the output bucket as well. If you specify the AllowDeferredExecution field, you must specify the DataAccessRoleArn field.
+     * The Amazon Resource Name (ARN), in the form arn:partition:service:region:account-id:resource-type/resource-id, of a role that has access to the S3 bucket that contains the input files. Amazon Transcribe assumes this role to read queued media files. If you have specified an output S3 bucket for the transcription results, this role should have access to the output bucket as well. If you specify the AllowDeferredExecution field, you must specify the DataAccessRoleArn field.
      */
     DataAccessRoleArn?: DataAccessRoleArn;
   }
   export type KMSEncryptionContextMap = {[key: string]: NonEmptyString};
   export type KMSKeyId = string;
   export type LanguageCode = "af-ZA"|"ar-AE"|"ar-SA"|"cy-GB"|"da-DK"|"de-CH"|"de-DE"|"en-AB"|"en-AU"|"en-GB"|"en-IE"|"en-IN"|"en-US"|"en-WL"|"es-ES"|"es-US"|"fa-IR"|"fr-CA"|"fr-FR"|"ga-IE"|"gd-GB"|"he-IL"|"hi-IN"|"id-ID"|"it-IT"|"ja-JP"|"ko-KR"|"ms-MY"|"nl-NL"|"pt-BR"|"pt-PT"|"ru-RU"|"ta-IN"|"te-IN"|"tr-TR"|"zh-CN"|"zh-TW"|"th-TH"|"en-ZA"|"en-NZ"|string;
+  export interface LanguageIdSettings {
+    /**
+     * The name of the vocabulary you want to use when processing your transcription job. The vocabulary you specify must have the same language code as the transcription job; if the languages don't match, the vocabulary won't be applied.
+     */
+    VocabularyName?: VocabularyName;
+    /**
+     * The name of the vocabulary filter you want to use when transcribing your audio. The filter you specify must have the same language code as the transcription job; if the languages don't match, the vocabulary filter won't be applied.
+     */
+    VocabularyFilterName?: VocabularyFilterName;
+    /**
+     * The name of the language model you want to use when transcribing your audio. The model you specify must have the same language code as the transcription job; if the languages don't match, the language model won't be applied.
+     */
+    LanguageModelName?: ModelName;
+  }
+  export type LanguageIdSettingsMap = {[key: string]: LanguageIdSettings};
   export interface LanguageModel {
     /**
      * The name of the custom language model.
@@ -1118,13 +1137,13 @@ declare namespace TranscribeService {
   }
   export interface ListTagsForResourceRequest {
     /**
-     * Lists all tags associated with a given Amazon Resource Name (ARN).
+     * Lists all tags associated with a given Amazon Resource Name (ARN). ARNs have the format arn:partition:service:region:account-id:resource-type/resource-id (for example, arn:aws:transcribe:us-east-1:account-id:transcription-job/your-job-name). Valid values for resource-type are: transcription-job, medical-transcription-job, vocabulary, medical-vocabulary, vocabulary-filter, and language-model.
      */
     ResourceArn: TranscribeArn;
   }
   export interface ListTagsForResourceResponse {
     /**
-     * Lists all tags associated with the given Amazon Resource Name (ARN).
+     * Lists all tags associated with the given Amazon Resource Name (ARN). 
      */
     ResourceArn?: TranscribeArn;
     /**
@@ -1572,7 +1591,7 @@ declare namespace TranscribeService {
      */
     OutputKey?: OutputKey;
     /**
-     * The Amazon Resource Name (ARN) of the Amazon Web Services Key Management Service (KMS) key used to encrypt the output of the transcription job. The user calling the StartMedicalTranscriptionJob operation must have permission to use the specified KMS key. You use either of the following to identify a KMS key in the current account:   KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"   KMS Key Alias: "alias/ExampleAlias"   You can use either of the following to identify a KMS key in the current account or another account:   Amazon Resource Name (ARN) of a KMS key in the current account or another account: "arn:aws:kms:region:account ID:key/1234abcd-12ab-34cd-56ef-1234567890ab"   ARN of a KMS Key Alias: "arn:aws:kms:region:account ID:alias/ExampleAlias"   If you don't specify an encryption key, the output of the medical transcription job is encrypted with the default Amazon S3 key (SSE-S3). If you specify a KMS key to encrypt your output, you must also specify an output location in the OutputBucketName parameter.
+     * The Amazon Resource Name (ARN) of the Amazon Web Services Key Management Service (KMS) key used to encrypt the output of the transcription job. The user calling the StartMedicalTranscriptionJob operation must have permission to use the specified KMS key. You use either of the following to identify a KMS key in the current account:   KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"   KMS Key Alias: "alias/ExampleAlias"   You can use either of the following to identify a KMS key in the current account or another account:   Amazon Resource Name (ARN) of a KMS key in the current account or another account: "arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab"   ARN of a KMS Key Alias: "arn:aws:kms:region:account ID:alias/ExampleAlias"   If you don't specify an encryption key, the output of the medical transcription job is encrypted with the default Amazon S3 key (SSE-S3). If you specify a KMS key to encrypt your output, you must also specify an output location in the OutputBucketName parameter.
      */
     OutputEncryptionKMSKeyId?: KMSKeyId;
     /**
@@ -1636,7 +1655,7 @@ declare namespace TranscribeService {
      */
     OutputKey?: OutputKey;
     /**
-     * The Amazon Resource Name (ARN) of the Amazon Web Services Key Management Service (KMS) key used to encrypt the output of the transcription job. The user calling the StartTranscriptionJob operation must have permission to use the specified KMS key. You can use either of the following to identify a KMS key in the current account:   KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"   KMS Key Alias: "alias/ExampleAlias"   You can use either of the following to identify a KMS key in the current account or another account:   Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:region:account ID:key/1234abcd-12ab-34cd-56ef-1234567890ab"   ARN of a KMS Key Alias: "arn:aws:kms:region:account ID:alias/ExampleAlias"   If you don't specify an encryption key, the output of the transcription job is encrypted with the default Amazon S3 key (SSE-S3). If you specify a KMS key to encrypt your output, you must also specify an output location in the OutputBucketName parameter.
+     * The Amazon Resource Name (ARN) of the Amazon Web Services Key Management Service (KMS) key used to encrypt the output of the transcription job. The user calling the StartTranscriptionJob operation must have permission to use the specified KMS key. You can use either of the following to identify a KMS key in the current account:   KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"   KMS Key Alias: "alias/ExampleAlias"   You can use either of the following to identify a KMS key in the current account or another account:   Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:region:account ID:key/1234abcd-12ab-34cd-56ef-1234567890ab"   ARN of a KMS Key Alias: "arn:aws:kms:region:account-ID:alias/ExampleAlias"   If you don't specify an encryption key, the output of the transcription job is encrypted with the default Amazon S3 key (SSE-S3). If you specify a KMS key to encrypt your output, you must also specify an output location in the OutputBucketName parameter.
      */
     OutputEncryptionKMSKeyId?: KMSKeyId;
     /**
@@ -1675,6 +1694,10 @@ declare namespace TranscribeService {
      * Add tags to an Amazon Transcribe transcription job.
      */
     Tags?: TagList;
+    /**
+     * The language identification settings associated with your transcription job. These settings include VocabularyName, VocabularyFilterName, and LanguageModelName.
+     */
+    LanguageIdSettings?: LanguageIdSettingsMap;
   }
   export interface StartTranscriptionJobResponse {
     /**
@@ -1717,7 +1740,7 @@ declare namespace TranscribeService {
   export type TagList = Tag[];
   export interface TagResourceRequest {
     /**
-     * The Amazon Resource Name (ARN) of the Amazon Transcribe resource you want to tag.
+     * The Amazon Resource Name (ARN) of the Amazon Transcribe resource you want to tag. ARNs have the format arn:partition:service:region:account-id:resource-type/resource-id (for example, arn:aws:transcribe:us-east-1:account-id:transcription-job/your-job-name). Valid values for resource-type are: transcription-job, medical-transcription-job, vocabulary, medical-vocabulary, vocabulary-filter, and language-model.
      */
     ResourceArn: TranscribeArn;
     /**
@@ -1848,6 +1871,10 @@ declare namespace TranscribeService {
      * Generate subtitles for your batch transcription job.
      */
     Subtitles?: SubtitlesOutput;
+    /**
+     * Language-specific settings that can be specified when language identification is enabled for your transcription job. These settings include VocabularyName, VocabularyFilterName, and LanguageModelNameLanguageModelName.
+     */
+    LanguageIdSettings?: LanguageIdSettingsMap;
   }
   export type TranscriptionJobName = string;
   export type TranscriptionJobStatus = "QUEUED"|"IN_PROGRESS"|"FAILED"|"COMPLETED"|string;
@@ -1902,7 +1929,7 @@ declare namespace TranscribeService {
   export type Type = "CONVERSATION"|"DICTATION"|string;
   export interface UntagResourceRequest {
     /**
-     * The Amazon Resource Name (ARN) of the Amazon Transcribe resource you want to remove tags from.
+     * The Amazon Resource Name (ARN) of the Amazon Transcribe resource you want to remove tags from. ARNs have the format arn:partition:service:region:account-id:resource-type/resource-id (for example, arn:aws:transcribe:us-east-1:account-id:transcription-job/your-job-name). Valid values for resource-type are: transcription-job, medical-transcription-job, vocabulary, medical-vocabulary, vocabulary-filter, and language-model.
      */
     ResourceArn: TranscribeArn;
     /**
