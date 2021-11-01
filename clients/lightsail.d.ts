@@ -1660,7 +1660,26 @@ declare namespace Lightsail {
      * An object that describes the state of the bucket.
      */
     state?: BucketState;
+    /**
+     * An object that describes the access log configuration for the bucket.
+     */
+    accessLogConfig?: BucketAccessLogConfig;
   }
+  export interface BucketAccessLogConfig {
+    /**
+     * A Boolean value that indicates whether bucket access logging is enabled for the bucket.
+     */
+    enabled: boolean;
+    /**
+     * The name of the bucket where the access is saved. The destination can be a Lightsail bucket in the same account, and in the same AWS Region as the source bucket.  This parameter is required when enabling the access log for a bucket, and should be omitted when disabling the access log. 
+     */
+    destination?: BucketName;
+    /**
+     * The optional object prefix for the bucket access log. The prefix is an optional addition to the object key that organizes your access log files in the destination bucket. For example, if you specify a logs/ prefix, then each log object will begin with the logs/ prefix in its key (for example, logs/2021-11-01-21-32-16-E568B2907131C0C0).  This parameter can be optionally specified when enabling the access log for a bucket, and should be omitted when disabling the access log. 
+     */
+    prefix?: BucketAccessLogPrefix;
+  }
+  export type BucketAccessLogPrefix = string;
   export interface BucketBundle {
     /**
      * The ID of the bundle.
@@ -2021,7 +2040,7 @@ declare namespace Lightsail {
   export type ContactProtocolsList = ContactProtocol[];
   export interface Container {
     /**
-     * The name of the image used for the container. Container images sourced from your Lightsail container service, that are registered and stored on your service, start with a colon (:). For example, :container-service-1.mystaticwebsite.1. Container images sourced from a public registry like Docker Hub don't start with a colon. For example, nginx:latest or nginx.
+     * The name of the image used for the container. Container images sourced from your Lightsail container service, that are registered and stored on your service, start with a colon (:). For example, if your container service name is container-service-1, the container image label is mystaticsite, and you want to use the third (3) version of the registered container image, then you should specify :container-service-1.mystaticsite.3. To use the latest version of a container image, specify latest instead of a version number (for example, :container-service-1.mystaticsite.latest). Lightsail will automatically use the highest numbered version of the registered container image. Container images sourced from a public registry like Docker Hub don't start with a colon. For example, nginx:latest or nginx.
      */
     image?: string;
     /**
@@ -2471,7 +2490,7 @@ declare namespace Lightsail {
      */
     scale: ContainerServiceScale;
     /**
-     * The tag keys and optional values to add to the certificate during create. Use the TagResource action to tag a resource after it's created. For more information about tags in Lightsail, see the Amazon Lightsail Developer Guide.
+     * The tag keys and optional values to add to the container service during create. Use the TagResource action to tag a resource after it's created. For more information about tags in Lightsail, see the Amazon Lightsail Developer Guide.
      */
     tags?: TagList;
     /**
@@ -6764,6 +6783,10 @@ declare namespace Lightsail {
      * An array of strings to specify the AWS account IDs that can access the bucket. You can give a maximum of 10 AWS accounts access to a bucket.
      */
     readonlyAccessAccounts?: PartnerIdList;
+    /**
+     * An object that describes the access log configuration for the bucket.
+     */
+    accessLogConfig?: BucketAccessLogConfig;
   }
   export interface UpdateBucketResult {
     /**

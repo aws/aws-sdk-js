@@ -196,6 +196,54 @@ declare class NetworkManager extends Service {
    */
   getLinks(callback?: (err: AWSError, data: NetworkManager.Types.GetLinksResponse) => void): Request<NetworkManager.Types.GetLinksResponse, AWSError>;
   /**
+   * Gets the count of network resources, by resource type, for the specified global network.
+   */
+  getNetworkResourceCounts(params: NetworkManager.Types.GetNetworkResourceCountsRequest, callback?: (err: AWSError, data: NetworkManager.Types.GetNetworkResourceCountsResponse) => void): Request<NetworkManager.Types.GetNetworkResourceCountsResponse, AWSError>;
+  /**
+   * Gets the count of network resources, by resource type, for the specified global network.
+   */
+  getNetworkResourceCounts(callback?: (err: AWSError, data: NetworkManager.Types.GetNetworkResourceCountsResponse) => void): Request<NetworkManager.Types.GetNetworkResourceCountsResponse, AWSError>;
+  /**
+   * Gets the network resource relationships for the specified global network.
+   */
+  getNetworkResourceRelationships(params: NetworkManager.Types.GetNetworkResourceRelationshipsRequest, callback?: (err: AWSError, data: NetworkManager.Types.GetNetworkResourceRelationshipsResponse) => void): Request<NetworkManager.Types.GetNetworkResourceRelationshipsResponse, AWSError>;
+  /**
+   * Gets the network resource relationships for the specified global network.
+   */
+  getNetworkResourceRelationships(callback?: (err: AWSError, data: NetworkManager.Types.GetNetworkResourceRelationshipsResponse) => void): Request<NetworkManager.Types.GetNetworkResourceRelationshipsResponse, AWSError>;
+  /**
+   * Describes the network resources for the specified global network. The results include information from the corresponding Describe call for the resource, minus any sensitive information such as pre-shared keys.
+   */
+  getNetworkResources(params: NetworkManager.Types.GetNetworkResourcesRequest, callback?: (err: AWSError, data: NetworkManager.Types.GetNetworkResourcesResponse) => void): Request<NetworkManager.Types.GetNetworkResourcesResponse, AWSError>;
+  /**
+   * Describes the network resources for the specified global network. The results include information from the corresponding Describe call for the resource, minus any sensitive information such as pre-shared keys.
+   */
+  getNetworkResources(callback?: (err: AWSError, data: NetworkManager.Types.GetNetworkResourcesResponse) => void): Request<NetworkManager.Types.GetNetworkResourcesResponse, AWSError>;
+  /**
+   * Gets the network routes of the specified global network.
+   */
+  getNetworkRoutes(params: NetworkManager.Types.GetNetworkRoutesRequest, callback?: (err: AWSError, data: NetworkManager.Types.GetNetworkRoutesResponse) => void): Request<NetworkManager.Types.GetNetworkRoutesResponse, AWSError>;
+  /**
+   * Gets the network routes of the specified global network.
+   */
+  getNetworkRoutes(callback?: (err: AWSError, data: NetworkManager.Types.GetNetworkRoutesResponse) => void): Request<NetworkManager.Types.GetNetworkRoutesResponse, AWSError>;
+  /**
+   * Gets the network telemetry of the specified global network.
+   */
+  getNetworkTelemetry(params: NetworkManager.Types.GetNetworkTelemetryRequest, callback?: (err: AWSError, data: NetworkManager.Types.GetNetworkTelemetryResponse) => void): Request<NetworkManager.Types.GetNetworkTelemetryResponse, AWSError>;
+  /**
+   * Gets the network telemetry of the specified global network.
+   */
+  getNetworkTelemetry(callback?: (err: AWSError, data: NetworkManager.Types.GetNetworkTelemetryResponse) => void): Request<NetworkManager.Types.GetNetworkTelemetryResponse, AWSError>;
+  /**
+   * Gets information about the specified route analysis.
+   */
+  getRouteAnalysis(params: NetworkManager.Types.GetRouteAnalysisRequest, callback?: (err: AWSError, data: NetworkManager.Types.GetRouteAnalysisResponse) => void): Request<NetworkManager.Types.GetRouteAnalysisResponse, AWSError>;
+  /**
+   * Gets information about the specified route analysis.
+   */
+  getRouteAnalysis(callback?: (err: AWSError, data: NetworkManager.Types.GetRouteAnalysisResponse) => void): Request<NetworkManager.Types.GetRouteAnalysisResponse, AWSError>;
+  /**
    * Gets information about one or more of your sites in a global network.
    */
   getSites(params: NetworkManager.Types.GetSitesRequest, callback?: (err: AWSError, data: NetworkManager.Types.GetSitesResponse) => void): Request<NetworkManager.Types.GetSitesResponse, AWSError>;
@@ -228,13 +276,21 @@ declare class NetworkManager extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: NetworkManager.Types.ListTagsForResourceResponse) => void): Request<NetworkManager.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Registers a transit gateway in your global network. The transit gateway can be in any AWS Region, but it must be owned by the same AWS account that owns the global network. You cannot register a transit gateway in more than one global network.
+   * Registers a transit gateway in your global network. The transit gateway can be in any Amazon Web Services Region, but it must be owned by the same Amazon Web Services account that owns the global network. You cannot register a transit gateway in more than one global network.
    */
   registerTransitGateway(params: NetworkManager.Types.RegisterTransitGatewayRequest, callback?: (err: AWSError, data: NetworkManager.Types.RegisterTransitGatewayResponse) => void): Request<NetworkManager.Types.RegisterTransitGatewayResponse, AWSError>;
   /**
-   * Registers a transit gateway in your global network. The transit gateway can be in any AWS Region, but it must be owned by the same AWS account that owns the global network. You cannot register a transit gateway in more than one global network.
+   * Registers a transit gateway in your global network. The transit gateway can be in any Amazon Web Services Region, but it must be owned by the same Amazon Web Services account that owns the global network. You cannot register a transit gateway in more than one global network.
    */
   registerTransitGateway(callback?: (err: AWSError, data: NetworkManager.Types.RegisterTransitGatewayResponse) => void): Request<NetworkManager.Types.RegisterTransitGatewayResponse, AWSError>;
+  /**
+   * Starts analyzing the routing path between the specified source and destination. For more information, see Route Analyzer.
+   */
+  startRouteAnalysis(params: NetworkManager.Types.StartRouteAnalysisRequest, callback?: (err: AWSError, data: NetworkManager.Types.StartRouteAnalysisResponse) => void): Request<NetworkManager.Types.StartRouteAnalysisResponse, AWSError>;
+  /**
+   * Starts analyzing the routing path between the specified source and destination. For more information, see Route Analyzer.
+   */
+  startRouteAnalysis(callback?: (err: AWSError, data: NetworkManager.Types.StartRouteAnalysisResponse) => void): Request<NetworkManager.Types.StartRouteAnalysisResponse, AWSError>;
   /**
    * Tags a specified resource.
    */
@@ -284,6 +340,14 @@ declare class NetworkManager extends Service {
    */
   updateLink(callback?: (err: AWSError, data: NetworkManager.Types.UpdateLinkResponse) => void): Request<NetworkManager.Types.UpdateLinkResponse, AWSError>;
   /**
+   * Updates the resource metadata for the specified global network.
+   */
+  updateNetworkResourceMetadata(params: NetworkManager.Types.UpdateNetworkResourceMetadataRequest, callback?: (err: AWSError, data: NetworkManager.Types.UpdateNetworkResourceMetadataResponse) => void): Request<NetworkManager.Types.UpdateNetworkResourceMetadataResponse, AWSError>;
+  /**
+   * Updates the resource metadata for the specified global network.
+   */
+  updateNetworkResourceMetadata(callback?: (err: AWSError, data: NetworkManager.Types.UpdateNetworkResourceMetadataResponse) => void): Request<NetworkManager.Types.UpdateNetworkResourceMetadataResponse, AWSError>;
+  /**
    * Updates the information for an existing site. To remove information for any of the parameters, specify an empty string.
    */
   updateSite(params: NetworkManager.Types.UpdateSiteRequest, callback?: (err: AWSError, data: NetworkManager.Types.UpdateSiteResponse) => void): Request<NetworkManager.Types.UpdateSiteResponse, AWSError>;
@@ -295,17 +359,17 @@ declare class NetworkManager extends Service {
 declare namespace NetworkManager {
   export interface AWSLocation {
     /**
-     * The Zone the device is located in. This can be the ID of an Availability Zone, Local Zone, Wavelength Zone, or an Outpost.
+     * The Zone that the device is located in. Specify the ID of an Availability Zone, Local Zone, Wavelength Zone, or an Outpost.
      */
     Zone?: String;
     /**
-     * The Amazon Resource Name (ARN) of the subnet the device is located in.
+     * The Amazon Resource Name (ARN) of the subnet that the device is located in.
      */
     SubnetArn?: String;
   }
   export interface AssociateCustomerGatewayRequest {
     /**
-     * The Amazon Resource Name (ARN) of the customer gateway. For more information, see Resources Defined by Amazon EC2.
+     * The Amazon Resource Name (ARN) of the customer gateway.
      */
     CustomerGatewayArn: String;
     /**
@@ -381,6 +445,7 @@ declare namespace NetworkManager {
      */
     DownloadSpeed?: Integer;
   }
+  export type Boolean = boolean;
   export interface Connection {
     /**
      * The ID of the connection.
@@ -427,8 +492,24 @@ declare namespace NetworkManager {
      */
     Tags?: TagList;
   }
+  export interface ConnectionHealth {
+    /**
+     * The connection type.
+     */
+    Type?: ConnectionType;
+    /**
+     * The connection status.
+     */
+    Status?: ConnectionStatus;
+    /**
+     * The time the status was last updated.
+     */
+    Timestamp?: DateTime;
+  }
   export type ConnectionList = Connection[];
   export type ConnectionState = "PENDING"|"AVAILABLE"|"DELETING"|"UPDATING"|string;
+  export type ConnectionStatus = "UP"|"DOWN"|string;
+  export type ConnectionType = "BGP"|"IPSEC"|string;
   export interface CreateConnectionRequest {
     /**
      * The ID of the global network.
@@ -471,11 +552,11 @@ declare namespace NetworkManager {
      */
     GlobalNetworkId: String;
     /**
-     * The AWS location of the device.
+     * The Amazon Web Services location of the device, if applicable. For an on-premises device, you can omit this parameter.
      */
     AWSLocation?: AWSLocation;
     /**
-     * A description of the device. Length Constraints: Maximum length of 256 characters.
+     * A description of the device. Constraints: Maximum length of 256 characters.
      */
     Description?: String;
     /**
@@ -483,15 +564,15 @@ declare namespace NetworkManager {
      */
     Type?: String;
     /**
-     * The vendor of the device. Length Constraints: Maximum length of 128 characters.
+     * The vendor of the device. Constraints: Maximum length of 128 characters.
      */
     Vendor?: String;
     /**
-     * The model of the device. Length Constraints: Maximum length of 128 characters.
+     * The model of the device. Constraints: Maximum length of 128 characters.
      */
     Model?: String;
     /**
-     * The serial number of the device. Length Constraints: Maximum length of 128 characters.
+     * The serial number of the device. Constraints: Maximum length of 128 characters.
      */
     SerialNumber?: String;
     /**
@@ -515,7 +596,7 @@ declare namespace NetworkManager {
   }
   export interface CreateGlobalNetworkRequest {
     /**
-     * A description of the global network. Length Constraints: Maximum length of 256 characters.
+     * A description of the global network. Constraints: Maximum length of 256 characters.
      */
     Description?: String;
     /**
@@ -535,11 +616,11 @@ declare namespace NetworkManager {
      */
     GlobalNetworkId: String;
     /**
-     * A description of the link. Length Constraints: Maximum length of 256 characters.
+     * A description of the link. Constraints: Maximum length of 256 characters.
      */
     Description?: String;
     /**
-     * The type of the link. Constraints: Cannot include the following characters: | \ ^ Length Constraints: Maximum length of 128 characters.
+     * The type of the link. Constraints: Maximum length of 128 characters. Cannot include the following characters: | \ ^
      */
     Type?: String;
     /**
@@ -547,7 +628,7 @@ declare namespace NetworkManager {
      */
     Bandwidth: Bandwidth;
     /**
-     * The provider of the link. Constraints: Cannot include the following characters: | \ ^ Length Constraints: Maximum length of 128 characters.
+     * The provider of the link. Constraints: Maximum length of 128 characters. Cannot include the following characters: | \ ^
      */
     Provider?: String;
     /**
@@ -571,7 +652,7 @@ declare namespace NetworkManager {
      */
     GlobalNetworkId: String;
     /**
-     * A description of your site. Length Constraints: Maximum length of 256 characters.
+     * A description of your site. Constraints: Maximum length of 256 characters.
      */
     Description?: String;
     /**
@@ -744,7 +825,7 @@ declare namespace NetworkManager {
      */
     GlobalNetworkId?: String;
     /**
-     * The AWS location of the device.
+     * The Amazon Web Services location of the device.
      */
     AWSLocation?: AWSLocation;
     /**
@@ -796,7 +877,7 @@ declare namespace NetworkManager {
      */
     GlobalNetworkId: String;
     /**
-     * The Amazon Resource Name (ARN) of the customer gateway. For more information, see Resources Defined by Amazon EC2.
+     * The Amazon Resource Name (ARN) of the customer gateway.
      */
     CustomerGatewayArn: String;
   }
@@ -842,6 +923,10 @@ declare namespace NetworkManager {
      */
     TransitGatewayConnectPeerAssociation?: TransitGatewayConnectPeerAssociation;
   }
+  export type FilterMap = {[key: string]: FilterValues};
+  export type FilterName = string;
+  export type FilterValue = string;
+  export type FilterValues = FilterValue[];
   export interface GetConnectionsRequest {
     /**
      * The ID of the global network.
@@ -880,7 +965,7 @@ declare namespace NetworkManager {
      */
     GlobalNetworkId: String;
     /**
-     * One or more customer gateway Amazon Resource Names (ARNs). For more information, see Resources Defined by Amazon EC2. The maximum is 10.
+     * One or more customer gateway Amazon Resource Names (ARNs). The maximum is 10.
      */
     CustomerGatewayArns?: StringList;
     /**
@@ -1005,6 +1090,242 @@ declare namespace NetworkManager {
      * The token for the next page of results.
      */
     NextToken?: String;
+  }
+  export interface GetNetworkResourceCountsRequest {
+    /**
+     * The ID of the global network.
+     */
+    GlobalNetworkId: String;
+    /**
+     * The resource type. The following are the supported resource types for Direct Connect:    dxcon     dx-gateway     dx-vif    The following are the supported resource types for Network Manager:    connection     device     link     site    The following are the supported resource types for Amazon VPC:    customer-gateway     transit-gateway     transit-gateway-attachment     transit-gateway-connect-peer     transit-gateway-route-table     vpn-connection   
+     */
+    ResourceType?: String;
+    /**
+     * The maximum number of results to return.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: String;
+  }
+  export interface GetNetworkResourceCountsResponse {
+    /**
+     * The count of resources.
+     */
+    NetworkResourceCounts?: NetworkResourceCountList;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: String;
+  }
+  export interface GetNetworkResourceRelationshipsRequest {
+    /**
+     * The ID of the global network.
+     */
+    GlobalNetworkId: String;
+    /**
+     * The ARN of the registered gateway.
+     */
+    RegisteredGatewayArn?: String;
+    /**
+     * The Amazon Web Services Region.
+     */
+    AwsRegion?: String;
+    /**
+     * The Amazon Web Services account ID.
+     */
+    AccountId?: String;
+    /**
+     * The resource type. The following are the supported resource types for Direct Connect:    dxcon     dx-gateway     dx-vif    The following are the supported resource types for Network Manager:    connection     device     link     site    The following are the supported resource types for Amazon VPC:    customer-gateway     transit-gateway     transit-gateway-attachment     transit-gateway-connect-peer     transit-gateway-route-table     vpn-connection   
+     */
+    ResourceType?: String;
+    /**
+     * The ARN of the gateway.
+     */
+    ResourceArn?: String;
+    /**
+     * The maximum number of results to return.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: String;
+  }
+  export interface GetNetworkResourceRelationshipsResponse {
+    /**
+     * The resource relationships.
+     */
+    Relationships?: RelationshipList;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: String;
+  }
+  export interface GetNetworkResourcesRequest {
+    /**
+     * The ID of the global network.
+     */
+    GlobalNetworkId: String;
+    /**
+     * The ARN of the gateway.
+     */
+    RegisteredGatewayArn?: String;
+    /**
+     * The Amazon Web Services Region.
+     */
+    AwsRegion?: String;
+    /**
+     * The Amazon Web Services account ID.
+     */
+    AccountId?: String;
+    /**
+     * The resource type. The following are the supported resource types for Direct Connect:    dxcon - The definition model is Connection.    dx-gateway - The definition model is DirectConnectGateway.    dx-vif - The definition model is VirtualInterface.   The following are the supported resource types for Network Manager:    connection - The definition model is Connection.    device - The definition model is Device.    link - The definition model is Link.    site - The definition model is Site.   The following are the supported resource types for Amazon VPC:    customer-gateway - The definition model is CustomerGateway.    transit-gateway - The definition model is TransitGateway.    transit-gateway-attachment - The definition model is TransitGatewayAttachment.    transit-gateway-connect-peer - The definition model is TransitGatewayConnectPeer.    transit-gateway-route-table - The definition model is TransitGatewayRouteTable.    vpn-connection - The definition model is VpnConnection.  
+     */
+    ResourceType?: String;
+    /**
+     * The ARN of the resource.
+     */
+    ResourceArn?: String;
+    /**
+     * The maximum number of results to return.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: String;
+  }
+  export interface GetNetworkResourcesResponse {
+    /**
+     * The network resources.
+     */
+    NetworkResources?: NetworkResourceList;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: String;
+  }
+  export interface GetNetworkRoutesRequest {
+    /**
+     * The ID of the global network.
+     */
+    GlobalNetworkId: String;
+    /**
+     * The ID of the route table.
+     */
+    RouteTableIdentifier: RouteTableIdentifier;
+    /**
+     * An exact CIDR block.
+     */
+    ExactCidrMatches?: StringList;
+    /**
+     * The most specific route that matches the traffic (longest prefix match).
+     */
+    LongestPrefixMatches?: StringList;
+    /**
+     * The routes with a subnet that match the specified CIDR filter.
+     */
+    SubnetOfMatches?: StringList;
+    /**
+     * The routes with a CIDR that encompasses the CIDR filter. Example: If you specify 10.0.1.0/30, then the result returns 10.0.1.0/29.
+     */
+    SupernetOfMatches?: StringList;
+    /**
+     * The IDs of the prefix lists.
+     */
+    PrefixListIds?: StringList;
+    /**
+     * The route states.
+     */
+    States?: RouteStateList;
+    /**
+     * The route types.
+     */
+    Types?: RouteTypeList;
+    /**
+     * Filter by route table destination. Possible Values: TRANSIT_GATEWAY_ATTACHMENT_ID, RESOURCE_ID, or RESOURCE_TYPE.
+     */
+    DestinationFilters?: FilterMap;
+  }
+  export interface GetNetworkRoutesResponse {
+    /**
+     * The ARN of the route table.
+     */
+    RouteTableArn?: String;
+    /**
+     * The route table type.
+     */
+    RouteTableType?: RouteTableType;
+    /**
+     * The route table creation time.
+     */
+    RouteTableTimestamp?: DateTime;
+    /**
+     * The network routes.
+     */
+    NetworkRoutes?: NetworkRouteList;
+  }
+  export interface GetNetworkTelemetryRequest {
+    /**
+     * The ID of the global network.
+     */
+    GlobalNetworkId: String;
+    /**
+     * The ARN of the gateway.
+     */
+    RegisteredGatewayArn?: String;
+    /**
+     * The Amazon Web Services Region.
+     */
+    AwsRegion?: String;
+    /**
+     * The Amazon Web Services account ID.
+     */
+    AccountId?: String;
+    /**
+     * The resource type. The following are the supported resource types for Direct Connect:    dxcon     dx-gateway     dx-vif    The following are the supported resource types for Network Manager:    connection     device     link     site    The following are the supported resource types for Amazon VPC:    customer-gateway     transit-gateway     transit-gateway-attachment     transit-gateway-connect-peer     transit-gateway-route-table     vpn-connection   
+     */
+    ResourceType?: String;
+    /**
+     * The ARN of the resource.
+     */
+    ResourceArn?: String;
+    /**
+     * The maximum number of results to return.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: String;
+  }
+  export interface GetNetworkTelemetryResponse {
+    /**
+     * The network telemetry.
+     */
+    NetworkTelemetry?: NetworkTelemetryList;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: String;
+  }
+  export interface GetRouteAnalysisRequest {
+    /**
+     * The ID of the global network.
+     */
+    GlobalNetworkId: String;
+    /**
+     * The ID of the route analysis.
+     */
+    RouteAnalysisId: String;
+  }
+  export interface GetRouteAnalysisResponse {
+    /**
+     * The route analysis.
+     */
+    RouteAnalysis?: RouteAnalysis;
   }
   export interface GetSitesRequest {
     /**
@@ -1214,13 +1535,187 @@ declare namespace NetworkManager {
     Longitude?: String;
   }
   export type MaxResults = number;
+  export interface NetworkResource {
+    /**
+     * The ARN of the gateway.
+     */
+    RegisteredGatewayArn?: String;
+    /**
+     * The Amazon Web Services Region.
+     */
+    AwsRegion?: String;
+    /**
+     * The Amazon Web Services account ID.
+     */
+    AccountId?: String;
+    /**
+     * The resource type. The following are the supported resource types for Direct Connect:    dxcon     dx-gateway     dx-vif    The following are the supported resource types for Network Manager:    connection     device     link     site    The following are the supported resource types for Amazon VPC:    customer-gateway     transit-gateway     transit-gateway-attachment     transit-gateway-connect-peer     transit-gateway-route-table     vpn-connection   
+     */
+    ResourceType?: String;
+    /**
+     * The ID of the resource.
+     */
+    ResourceId?: String;
+    /**
+     * The ARN of the resource.
+     */
+    ResourceArn?: String;
+    /**
+     * Information about the resource, in JSON format. Network Manager gets this information by describing the resource using its Describe API call.
+     */
+    Definition?: String;
+    /**
+     * The time that the resource definition was retrieved.
+     */
+    DefinitionTimestamp?: DateTime;
+    /**
+     * The tags.
+     */
+    Tags?: TagList;
+    /**
+     * The resource metadata.
+     */
+    Metadata?: NetworkResourceMetadataMap;
+  }
+  export interface NetworkResourceCount {
+    /**
+     * The resource type.
+     */
+    ResourceType?: String;
+    /**
+     * The resource count.
+     */
+    Count?: Integer;
+  }
+  export type NetworkResourceCountList = NetworkResourceCount[];
+  export type NetworkResourceList = NetworkResource[];
+  export type NetworkResourceMetadataKey = string;
+  export type NetworkResourceMetadataMap = {[key: string]: NetworkResourceMetadataValue};
+  export type NetworkResourceMetadataValue = string;
+  export interface NetworkResourceSummary {
+    /**
+     * The ARN of the gateway.
+     */
+    RegisteredGatewayArn?: String;
+    /**
+     * The ARN of the resource.
+     */
+    ResourceArn?: String;
+    /**
+     * The resource type.
+     */
+    ResourceType?: String;
+    /**
+     * Information about the resource, in JSON format. Network Manager gets this information by describing the resource using its Describe API call.
+     */
+    Definition?: String;
+    /**
+     * The value for the Name tag.
+     */
+    NameTag?: String;
+    /**
+     * Indicates whether this is a middlebox appliance.
+     */
+    IsMiddlebox?: Boolean;
+  }
+  export interface NetworkRoute {
+    /**
+     * A unique identifier for the route, such as a CIDR block.
+     */
+    DestinationCidrBlock?: String;
+    /**
+     * The destinations.
+     */
+    Destinations?: NetworkRouteDestinationList;
+    /**
+     * The ID of the prefix list.
+     */
+    PrefixListId?: String;
+    /**
+     * The route state. The possible values are active and blackhole.
+     */
+    State?: RouteState;
+    /**
+     * The route type. The possible values are propagated and static.
+     */
+    Type?: RouteType;
+  }
+  export interface NetworkRouteDestination {
+    /**
+     * The ID of the transit gateway attachment.
+     */
+    TransitGatewayAttachmentId?: String;
+    /**
+     * The resource type.
+     */
+    ResourceType?: String;
+    /**
+     * The ID of the resource.
+     */
+    ResourceId?: String;
+  }
+  export type NetworkRouteDestinationList = NetworkRouteDestination[];
+  export type NetworkRouteList = NetworkRoute[];
+  export interface NetworkTelemetry {
+    /**
+     * The ARN of the gateway.
+     */
+    RegisteredGatewayArn?: String;
+    /**
+     * The Amazon Web Services Region.
+     */
+    AwsRegion?: String;
+    /**
+     * The Amazon Web Services account ID.
+     */
+    AccountId?: String;
+    /**
+     * The resource type.
+     */
+    ResourceType?: String;
+    /**
+     * The ID of the resource.
+     */
+    ResourceId?: String;
+    /**
+     * The ARN of the resource.
+     */
+    ResourceArn?: String;
+    /**
+     * The address.
+     */
+    Address?: String;
+    /**
+     * The connection health.
+     */
+    Health?: ConnectionHealth;
+  }
+  export type NetworkTelemetryList = NetworkTelemetry[];
+  export interface PathComponent {
+    /**
+     * The sequence number in the path. The destination is 0.
+     */
+    Sequence?: Integer;
+    /**
+     * The resource.
+     */
+    Resource?: NetworkResourceSummary;
+    /**
+     * The destination CIDR block in the route table.
+     */
+    DestinationCidrBlock?: String;
+  }
+  export type PathComponentList = PathComponent[];
+  export type ReasonContextKey = string;
+  export type ReasonContextMap = {[key: string]: ReasonContextValue};
+  export type ReasonContextValue = string;
   export interface RegisterTransitGatewayRequest {
     /**
      * The ID of the global network.
      */
     GlobalNetworkId: String;
     /**
-     * The Amazon Resource Name (ARN) of the transit gateway. For more information, see Resources Defined by Amazon EC2.
+     * The Amazon Resource Name (ARN) of the transit gateway.
      */
     TransitGatewayArn: String;
   }
@@ -1230,7 +1725,126 @@ declare namespace NetworkManager {
      */
     TransitGatewayRegistration?: TransitGatewayRegistration;
   }
+  export interface Relationship {
+    /**
+     * The ARN of the resource.
+     */
+    From?: String;
+    /**
+     * The ARN of the resource.
+     */
+    To?: String;
+  }
+  export type RelationshipList = Relationship[];
   export type ResourceARN = string;
+  export interface RouteAnalysis {
+    /**
+     * The ID of the global network.
+     */
+    GlobalNetworkId?: String;
+    /**
+     * The ID of the AWS account that created the route analysis.
+     */
+    OwnerAccountId?: String;
+    /**
+     * The ID of the route analysis.
+     */
+    RouteAnalysisId?: String;
+    /**
+     * The time that the analysis started.
+     */
+    StartTimestamp?: DateTime;
+    /**
+     * The status of the route analysis.
+     */
+    Status?: RouteAnalysisStatus;
+    /**
+     * The source.
+     */
+    Source?: RouteAnalysisEndpointOptions;
+    /**
+     * The destination.
+     */
+    Destination?: RouteAnalysisEndpointOptions;
+    /**
+     * Indicates whether to analyze the return path. The return path is not analyzed if the forward path analysis does not succeed.
+     */
+    IncludeReturnPath?: Boolean;
+    /**
+     * Indicates whether to include the location of middlebox appliances in the route analysis.
+     */
+    UseMiddleboxes?: Boolean;
+    /**
+     * The forward path.
+     */
+    ForwardPath?: RouteAnalysisPath;
+    /**
+     * The return path.
+     */
+    ReturnPath?: RouteAnalysisPath;
+  }
+  export interface RouteAnalysisCompletion {
+    /**
+     * The result of the analysis. If the status is NOT_CONNECTED, check the reason code.
+     */
+    ResultCode?: RouteAnalysisCompletionResultCode;
+    /**
+     * The reason code. Available only if a connection is not found.    BLACKHOLE_ROUTE_FOR_DESTINATION_FOUND - Found a black hole route with the destination CIDR block.    CYCLIC_PATH_DETECTED - Found the same resource multiple times while traversing the path.    INACTIVE_ROUTE_FOR_DESTINATION_FOUND - Found an inactive route with the destination CIDR block.    MAX_HOPS_EXCEEDED - Analysis exceeded 64 hops without finding the destination.    ROUTE_NOT_FOUND - Cannot find a route table with the destination CIDR block.    TGW_ATTACH_ARN_NO_MATCH - Found an attachment, but not with the correct destination ARN.    TGW_ATTACH_NOT_FOUND - Cannot find an attachment.    TGW_ATTACH_NOT_IN_TGW - Found an attachment, but not to the correct transit gateway.    TGW_ATTACH_STABLE_ROUTE_TABLE_NOT_FOUND - The state of the route table association is not associated.  
+     */
+    ReasonCode?: RouteAnalysisCompletionReasonCode;
+    /**
+     * Additional information about the path. Available only if a connection is not found.
+     */
+    ReasonContext?: ReasonContextMap;
+  }
+  export type RouteAnalysisCompletionReasonCode = "TRANSIT_GATEWAY_ATTACHMENT_NOT_FOUND"|"TRANSIT_GATEWAY_ATTACHMENT_NOT_IN_TRANSIT_GATEWAY"|"CYCLIC_PATH_DETECTED"|"TRANSIT_GATEWAY_ATTACHMENT_STABLE_ROUTE_TABLE_NOT_FOUND"|"ROUTE_NOT_FOUND"|"BLACKHOLE_ROUTE_FOR_DESTINATION_FOUND"|"INACTIVE_ROUTE_FOR_DESTINATION_FOUND"|"TRANSIT_GATEWAY_ATTACHMENT_ATTACH_ARN_NO_MATCH"|"MAX_HOPS_EXCEEDED"|"POSSIBLE_MIDDLEBOX"|"NO_DESTINATION_ARN_PROVIDED"|string;
+  export type RouteAnalysisCompletionResultCode = "CONNECTED"|"NOT_CONNECTED"|string;
+  export interface RouteAnalysisEndpointOptions {
+    /**
+     * The ARN of the transit gateway attachment.
+     */
+    TransitGatewayAttachmentArn?: String;
+    /**
+     * The ARN of the transit gateway.
+     */
+    TransitGatewayArn?: String;
+    /**
+     * The IP address.
+     */
+    IpAddress?: String;
+  }
+  export interface RouteAnalysisEndpointOptionsSpecification {
+    /**
+     * The ARN of the transit gateway attachment.
+     */
+    TransitGatewayAttachmentArn?: String;
+    /**
+     * The IP address.
+     */
+    IpAddress?: String;
+  }
+  export interface RouteAnalysisPath {
+    /**
+     * The status of the analysis at completion.
+     */
+    CompletionStatus?: RouteAnalysisCompletion;
+    /**
+     * The route analysis path.
+     */
+    Path?: PathComponentList;
+  }
+  export type RouteAnalysisStatus = "RUNNING"|"COMPLETED"|"FAILED"|string;
+  export type RouteState = "ACTIVE"|"BLACKHOLE"|string;
+  export type RouteStateList = RouteState[];
+  export interface RouteTableIdentifier {
+    /**
+     * The ARN of the transit gateway route table.
+     */
+    TransitGatewayRouteTableArn?: String;
+  }
+  export type RouteTableType = "TRANSIT_GATEWAY_ROUTE_TABLE"|string;
+  export type RouteType = "PROPAGATED"|"STATIC"|string;
+  export type RouteTypeList = RouteType[];
   export interface Site {
     /**
      * The ID of the site.
@@ -1267,15 +1881,43 @@ declare namespace NetworkManager {
   }
   export type SiteList = Site[];
   export type SiteState = "PENDING"|"AVAILABLE"|"DELETING"|"UPDATING"|string;
+  export interface StartRouteAnalysisRequest {
+    /**
+     * The ID of the global network.
+     */
+    GlobalNetworkId: String;
+    /**
+     * The source from which traffic originates.
+     */
+    Source: RouteAnalysisEndpointOptionsSpecification;
+    /**
+     * The destination.
+     */
+    Destination: RouteAnalysisEndpointOptionsSpecification;
+    /**
+     * Indicates whether to analyze the return path. The default is false.
+     */
+    IncludeReturnPath?: Boolean;
+    /**
+     * Indicates whether to include the location of middlebox appliances in the route analysis. The default is false.
+     */
+    UseMiddleboxes?: Boolean;
+  }
+  export interface StartRouteAnalysisResponse {
+    /**
+     * The route analysis.
+     */
+    RouteAnalysis?: RouteAnalysis;
+  }
   export type String = string;
   export type StringList = String[];
   export interface Tag {
     /**
-     * The tag key. Length Constraints: Maximum length of 128 characters.
+     * The tag key. Constraints: Maximum length of 128 characters.
      */
     Key?: TagKey;
     /**
-     * The tag value. Length Constraints: Maximum length of 256 characters.
+     * The tag value. Constraints: Maximum length of 256 characters.
      */
     Value?: TagValue;
   }
@@ -1395,11 +2037,11 @@ declare namespace NetworkManager {
      */
     DeviceId: String;
     /**
-     * The AWS location of the device.
+     * The Amazon Web Services location of the device, if applicable. For an on-premises device, you can omit this parameter.
      */
     AWSLocation?: AWSLocation;
     /**
-     * A description of the device. Length Constraints: Maximum length of 256 characters.
+     * A description of the device. Constraints: Maximum length of 256 characters.
      */
     Description?: String;
     /**
@@ -1407,15 +2049,15 @@ declare namespace NetworkManager {
      */
     Type?: String;
     /**
-     * The vendor of the device. Length Constraints: Maximum length of 128 characters.
+     * The vendor of the device. Constraints: Maximum length of 128 characters.
      */
     Vendor?: String;
     /**
-     * The model of the device. Length Constraints: Maximum length of 128 characters.
+     * The model of the device. Constraints: Maximum length of 128 characters.
      */
     Model?: String;
     /**
-     * The serial number of the device. Length Constraints: Maximum length of 128 characters.
+     * The serial number of the device. Constraints: Maximum length of 128 characters.
      */
     SerialNumber?: String;
     Location?: Location;
@@ -1436,7 +2078,7 @@ declare namespace NetworkManager {
      */
     GlobalNetworkId: String;
     /**
-     * A description of the global network. Length Constraints: Maximum length of 256 characters.
+     * A description of the global network. Constraints: Maximum length of 256 characters.
      */
     Description?: String;
   }
@@ -1456,11 +2098,11 @@ declare namespace NetworkManager {
      */
     LinkId: String;
     /**
-     * A description of the link. Length Constraints: Maximum length of 256 characters.
+     * A description of the link. Constraints: Maximum length of 256 characters.
      */
     Description?: String;
     /**
-     * The type of the link. Length Constraints: Maximum length of 128 characters.
+     * The type of the link. Constraints: Maximum length of 128 characters.
      */
     Type?: String;
     /**
@@ -1468,7 +2110,7 @@ declare namespace NetworkManager {
      */
     Bandwidth?: Bandwidth;
     /**
-     * The provider of the link. Length Constraints: Maximum length of 128 characters.
+     * The provider of the link. Constraints: Maximum length of 128 characters.
      */
     Provider?: String;
   }
@@ -1477,6 +2119,30 @@ declare namespace NetworkManager {
      * Information about the link.
      */
     Link?: Link;
+  }
+  export interface UpdateNetworkResourceMetadataRequest {
+    /**
+     * The ID of the global network.
+     */
+    GlobalNetworkId: String;
+    /**
+     * The ARN of the resource.
+     */
+    ResourceArn: String;
+    /**
+     * The resource metadata.
+     */
+    Metadata: NetworkResourceMetadataMap;
+  }
+  export interface UpdateNetworkResourceMetadataResponse {
+    /**
+     * The ARN of the resource.
+     */
+    ResourceArn?: String;
+    /**
+     * The updated resource metadata.
+     */
+    Metadata?: NetworkResourceMetadataMap;
   }
   export interface UpdateSiteRequest {
     /**
@@ -1488,7 +2154,7 @@ declare namespace NetworkManager {
      */
     SiteId: String;
     /**
-     * A description of your site. Length Constraints: Maximum length of 256 characters.
+     * A description of your site. Constraints: Maximum length of 256 characters.
      */
     Description?: String;
     /**

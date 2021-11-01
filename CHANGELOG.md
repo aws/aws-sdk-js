@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1018.0-->
+<!--LATEST=2.1019.0-->
 <!--ENTRYINSERT-->
+
+## 2.1019.0
+* feature: Lightsail: This release adds support to enable access logging for buckets in the Lightsail object storage service.
+* feature: Neptune: Adds support for major version upgrades to ModifyDbCluster API
+* feature: NetworkManager: This release adds API support to aggregate resources, routes, and telemetry data across a Global Network.
+* feature: Node.js: Remove postinstall script warning end-of-support for Node.js <10.x
+* feature: Node.js: Update engines field to support node >= 10.0.0
+* feature: Rekognition: This Amazon Rekognition Custom Labels release introduces the management of datasets with  projects
 
 ## 2.1018.0
 * feature: ApplicationInsights: Added Monitoring support for SQL Server Failover Cluster Instance. Additionally, added a new API to allow one-click monitoring of containers resources.
