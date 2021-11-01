@@ -1,0 +1,5 @@
+{
+  "type": "feature",
+  "category": "Node.js",
+  "description": "Update engines field to support node >= 10.0.0"
+}

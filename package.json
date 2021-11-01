@@ -74,7 +74,7 @@
   "types": "index.d.ts",
   "typings": "index.d.ts",
   "engines": {
-    "node": ">= 0.8.0"
+    "node": ">= 10.0.0"
   },
   "repository": {
     "type": "git",
