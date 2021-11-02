@@ -28,7 +28,7 @@ var allowlist = {
         112
     ],
     '/region_config.js': [
-        127
+        126
     ],
     '/request.js': [
         318,
