@@ -1,0 +1,5 @@
+{
+  "type": "feature",
+  "category": "endpoint",
+  "description": "Remove unsupported accesspoint pseudo regions"
+}
