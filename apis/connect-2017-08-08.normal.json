@@ -3790,7 +3790,7 @@
       "member": {
         "shape": "Channel"
       },
-      "max": 3
+      "max": 1
     },
     "ChatContent": {
       "type": "string",
@@ -3804,6 +3804,10 @@
     },
     "ChatMessage": {
       "type": "structure",
+      "required": [
+        "ContentType",
+        "Content"
+      ],
       "members": {
         "ContentType": {
           "shape": "ChatContentType",
@@ -5141,14 +5145,6 @@
         "Channel": {
           "shape": "Channel",
           "documentation": "<p>The channel used for grouping and filters.</p>"
-        },
-        "RoutingProfile": {
-          "shape": "RoutingProfileReference",
-          "documentation": "<p>The routing profile.</p>"
-        },
-        "InstanceReference": {
-          "shape": "InstanceReference",
-          "documentation": "<p>The instance reference.</p>"
         }
       },
       "documentation": "<p>Contains information about the dimensions for a set of metrics.</p>"
@@ -5408,10 +5404,6 @@
           "shape": "Queues",
           "documentation": "<p>The queues to use to filter the metrics. You can specify up to 100 queues per request.</p>"
         },
-        "RoutingProfiles": {
-          "shape": "RoutingProfiles",
-          "documentation": "<p>The filters used to sort routing profiles. </p>"
-        },
         "Channels": {
           "shape": "Channels",
           "documentation": "<p>The channel to use to filter the metrics.</p>"
@@ -5601,9 +5593,7 @@
       "type": "string",
       "enum": [
         "QUEUE",
-        "CHANNEL",
-        "ROUTING_PROFILE",
-        "INSTANCE"
+        "CHANNEL"
       ]
     },
     "Groupings": {
@@ -5844,8 +5834,6 @@
         "CONTACTS_TRANSFERRED_OUT",
         "CONTACTS_TRANSFERRED_IN_FROM_QUEUE",
         "CONTACTS_TRANSFERRED_OUT_FROM_QUEUE",
-        "CONTACTS_TRANSFERRED_IN_BY_AGENT",
-        "CONTACTS_TRANSFERRED_OUT_BY_AGENT",
         "CONTACTS_MISSED",
         "CALLBACK_CONTACTS_HANDLED",
         "API_CONTACTS_HANDLED",
@@ -6097,22 +6085,8 @@
     },
     "InstanceId": {
       "type": "string",
-      "max": 256,
+      "max": 100,
       "min": 1
-    },
-    "InstanceReference": {
-      "type": "structure",
-      "members": {
-        "Id": {
-          "shape": "InstanceId",
-          "documentation": "<p>The identifier of the instance reference.</p>"
-        },
-        "Arn": {
-          "shape": "ARN",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the instance reference.</p>"
-        }
-      },
-      "documentation": "<p>The instance reference.</p>"
     },
     "InstanceStatus": {
       "type": "string",
@@ -7544,8 +7518,7 @@
     },
     "Password": {
       "type": "string",
-      "pattern": "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d\\S]{8,64}$/",
-      "sensitive": true
+      "pattern": "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d\\S]{8,64}$/"
     },
     "PhoneNumber": {
       "type": "string"
@@ -8000,10 +7973,6 @@
         "Arn": {
           "shape": "ARN",
           "documentation": "<p>The Amazon Resource Name (ARN) of the queue.</p>"
-        },
-        "QueueType": {
-          "shape": "QueueType",
-          "documentation": "<p>The type of queue.</p>"
         }
       },
       "documentation": "<p>Contains information about a queue resource for which metrics are returned.</p>"
@@ -8210,12 +8179,7 @@
     "ReferenceType": {
       "type": "string",
       "enum": [
-        "URL",
-        "ATTACHMENT",
-        "NUMBER",
-        "STRING",
-        "DATE",
-        "EMAIL"
+        "URL"
       ]
     },
     "ReferenceValue": {
@@ -8401,20 +8365,6 @@
         "shape": "RoutingProfileQueueReference"
       }
     },
-    "RoutingProfileReference": {
-      "type": "structure",
-      "members": {
-        "Id": {
-          "shape": "RoutingProfileId",
-          "documentation": "<p>The identifier of the routing profile reference.</p>"
-        },
-        "Arn": {
-          "shape": "ARN",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the routing profile reference.</p>"
-        }
-      },
-      "documentation": "<p>The routing profile reference.</p>"
-    },
     "RoutingProfileSummary": {
       "type": "structure",
       "members": {
@@ -8438,14 +8388,6 @@
       "member": {
         "shape": "RoutingProfileSummary"
       }
-    },
-    "RoutingProfiles": {
-      "type": "list",
-      "member": {
-        "shape": "RoutingProfileId"
-      },
-      "max": 100,
-      "min": 1
     },
     "S3Config": {
       "type": "structure",
@@ -8995,7 +8937,6 @@
       "type": "string",
       "enum": [
         "SECONDS",
-        "MILLISECONDS",
         "COUNT",
         "PERCENT"
       ]

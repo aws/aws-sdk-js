@@ -1110,11 +1110,11 @@ declare namespace Connect {
     /**
      * The type of the content. Supported types are text and plain.
      */
-    ContentType?: ChatContentType;
+    ContentType: ChatContentType;
     /**
      * The content of the chat message.
      */
-    Content?: ChatContent;
+    Content: ChatContent;
   }
   export interface ChatStreamingConfiguration {
     /**
@@ -1909,14 +1909,6 @@ declare namespace Connect {
      * The channel used for grouping and filters.
      */
     Channel?: Channel;
-    /**
-     * The routing profile.
-     */
-    RoutingProfile?: RoutingProfileReference;
-    /**
-     * The instance reference.
-     */
-    InstanceReference?: InstanceReference;
   }
   export type DirectoryAlias = string;
   export type DirectoryId = string;
@@ -2038,10 +2030,6 @@ declare namespace Connect {
      */
     Queues?: Queues;
     /**
-     * The filters used to sort routing profiles. 
-     */
-    RoutingProfiles?: RoutingProfiles;
-    /**
      * The channel to use to filter the metrics.
      */
     Channels?: Channels;
@@ -2160,7 +2148,7 @@ declare namespace Connect {
      */
     MetricResults?: HistoricalMetricResults;
   }
-  export type Grouping = "QUEUE"|"CHANNEL"|"ROUTING_PROFILE"|"INSTANCE"|string;
+  export type Grouping = "QUEUE"|"CHANNEL"|string;
   export type Groupings = Grouping[];
   export interface HierarchyGroup {
     /**
@@ -2318,7 +2306,7 @@ declare namespace Connect {
     Value?: Value;
   }
   export type HistoricalMetricDataCollections = HistoricalMetricData[];
-  export type HistoricalMetricName = "CONTACTS_QUEUED"|"CONTACTS_HANDLED"|"CONTACTS_ABANDONED"|"CONTACTS_CONSULTED"|"CONTACTS_AGENT_HUNG_UP_FIRST"|"CONTACTS_HANDLED_INCOMING"|"CONTACTS_HANDLED_OUTBOUND"|"CONTACTS_HOLD_ABANDONS"|"CONTACTS_TRANSFERRED_IN"|"CONTACTS_TRANSFERRED_OUT"|"CONTACTS_TRANSFERRED_IN_FROM_QUEUE"|"CONTACTS_TRANSFERRED_OUT_FROM_QUEUE"|"CONTACTS_TRANSFERRED_IN_BY_AGENT"|"CONTACTS_TRANSFERRED_OUT_BY_AGENT"|"CONTACTS_MISSED"|"CALLBACK_CONTACTS_HANDLED"|"API_CONTACTS_HANDLED"|"OCCUPANCY"|"HANDLE_TIME"|"AFTER_CONTACT_WORK_TIME"|"QUEUED_TIME"|"ABANDON_TIME"|"QUEUE_ANSWER_TIME"|"HOLD_TIME"|"INTERACTION_TIME"|"INTERACTION_AND_HOLD_TIME"|"SERVICE_LEVEL"|string;
+  export type HistoricalMetricName = "CONTACTS_QUEUED"|"CONTACTS_HANDLED"|"CONTACTS_ABANDONED"|"CONTACTS_CONSULTED"|"CONTACTS_AGENT_HUNG_UP_FIRST"|"CONTACTS_HANDLED_INCOMING"|"CONTACTS_HANDLED_OUTBOUND"|"CONTACTS_HOLD_ABANDONS"|"CONTACTS_TRANSFERRED_IN"|"CONTACTS_TRANSFERRED_OUT"|"CONTACTS_TRANSFERRED_IN_FROM_QUEUE"|"CONTACTS_TRANSFERRED_OUT_FROM_QUEUE"|"CONTACTS_MISSED"|"CALLBACK_CONTACTS_HANDLED"|"API_CONTACTS_HANDLED"|"OCCUPANCY"|"HANDLE_TIME"|"AFTER_CONTACT_WORK_TIME"|"QUEUED_TIME"|"ABANDON_TIME"|"QUEUE_ANSWER_TIME"|"HOLD_TIME"|"INTERACTION_TIME"|"INTERACTION_AND_HOLD_TIME"|"SERVICE_LEVEL"|string;
   export interface HistoricalMetricResult {
     /**
      * The dimension for the metrics.
@@ -2453,16 +2441,6 @@ declare namespace Connect {
   export type InstanceAttributeType = "INBOUND_CALLS"|"OUTBOUND_CALLS"|"CONTACTFLOW_LOGS"|"CONTACT_LENS"|"AUTO_RESOLVE_BEST_VOICES"|"USE_CUSTOM_TTS_VOICES"|"EARLY_MEDIA"|string;
   export type InstanceAttributeValue = string;
   export type InstanceId = string;
-  export interface InstanceReference {
-    /**
-     * The identifier of the instance reference.
-     */
-    Id?: InstanceId;
-    /**
-     * The Amazon Resource Name (ARN) of the instance reference.
-     */
-    Arn?: ARN;
-  }
   export type InstanceStatus = "CREATION_IN_PROGRESS"|"ACTIVE"|"CREATION_FAILED"|string;
   export interface InstanceStatusReason {
     /**
@@ -3400,10 +3378,6 @@ declare namespace Connect {
      * The Amazon Resource Name (ARN) of the queue.
      */
     Arn?: ARN;
-    /**
-     * The type of queue.
-     */
-    QueueType?: QueueType;
   }
   export type QueueStatus = "ENABLED"|"DISABLED"|string;
   export interface QueueSummary {
@@ -3508,7 +3482,7 @@ declare namespace Connect {
     Type: ReferenceType;
   }
   export type ReferenceKey = string;
-  export type ReferenceType = "URL"|"ATTACHMENT"|"NUMBER"|"STRING"|"DATE"|"EMAIL"|string;
+  export type ReferenceType = "URL"|string;
   export type ReferenceValue = string;
   export interface ResumeContactRecordingRequest {
     /**
@@ -3616,16 +3590,6 @@ declare namespace Connect {
     Channel: Channel;
   }
   export type RoutingProfileQueueReferenceList = RoutingProfileQueueReference[];
-  export interface RoutingProfileReference {
-    /**
-     * The identifier of the routing profile reference.
-     */
-    Id?: RoutingProfileId;
-    /**
-     * The Amazon Resource Name (ARN) of the routing profile reference.
-     */
-    Arn?: ARN;
-  }
   export interface RoutingProfileSummary {
     /**
      * The identifier of the routing profile.
@@ -3641,7 +3605,6 @@ declare namespace Connect {
     Name?: RoutingProfileName;
   }
   export type RoutingProfileSummaryList = RoutingProfileSummary[];
-  export type RoutingProfiles = RoutingProfileId[];
   export interface S3Config {
     /**
      * The S3 bucket name.
@@ -3957,7 +3920,7 @@ declare namespace Connect {
   export type Timestamp = Date;
   export type TrafficType = "GENERAL"|"CAMPAIGN"|string;
   export type URI = string;
-  export type Unit = "SECONDS"|"MILLISECONDS"|"COUNT"|"PERCENT"|string;
+  export type Unit = "SECONDS"|"COUNT"|"PERCENT"|string;
   export interface UntagResourceRequest {
     /**
      * The Amazon Resource Name (ARN) of the resource.

@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1019.0-->
+<!--LATEST=2.1020.0-->
 <!--ENTRYINSERT-->
+
+## 2.1020.0
+* feature: CloudFront: CloudFront now supports response headers policies to add HTTP headers to the responses that CloudFront sends to viewers. You can use these policies to add CORS headers, control browser caching, and more, without modifying your origin or writing any code.
+* feature: Connect: Amazon Connect Chat now supports real-time message streaming.
+* feature: Nimble: Amazon Nimble Studio adds support for users to stop and start streaming sessions.
 
 ## 2.1019.0
 * feature: Lightsail: This release adds support to enable access logging for buckets in the Lightsail object storage service.
