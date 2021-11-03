@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1020.0-->
+<!--LATEST=2.1021.0-->
 <!--ENTRYINSERT-->
+
+## 2.1021.0
+* feature: ConnectParticipant: This release adds a new boolean attribute - Connect Participant - to the CreateParticipantConnection API, which can be used to mark the participant as connected.
+* feature: DataSync: AWS DataSync now supports Hadoop Distributed File System (HDFS) Locations
+* feature: Finspace: Adds superuser and data-bundle parameters to CreateEnvironment API
+* feature: Macie2: This release adds support for specifying the severity of findings that a custom data identifier produces, based on the number of occurrences of text that matches the detection criteria.
 
 ## 2.1020.0
 * feature: CloudFront: CloudFront now supports response headers policies to add HTTP headers to the responses that CloudFront sends to viewers. You can use these policies to add CORS headers, control browser caching, and more, without modifying your origin or writing any code.

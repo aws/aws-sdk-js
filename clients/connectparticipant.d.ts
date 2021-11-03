@@ -105,7 +105,7 @@ declare namespace ConnectParticipant {
   export type ChatContent = string;
   export type ChatContentType = string;
   export type ChatItemId = string;
-  export type ChatItemType = "TYPING"|"PARTICIPANT_JOINED"|"PARTICIPANT_LEFT"|"CHAT_ENDED"|"TRANSFER_SUCCEEDED"|"TRANSFER_FAILED"|"MESSAGE"|"EVENT"|"ATTACHMENT"|"CONNECTION_ACK"|"PARTICIPANT_ACTIVE"|"PARTICIPANT_INACTIVE"|"PARTICIPANT_ENGAGED"|"PARTICIPANT_DISENGAGED"|string;
+  export type ChatItemType = "TYPING"|"PARTICIPANT_JOINED"|"PARTICIPANT_LEFT"|"CHAT_ENDED"|"TRANSFER_SUCCEEDED"|"TRANSFER_FAILED"|"MESSAGE"|"EVENT"|"ATTACHMENT"|"CONNECTION_ACK"|string;
   export type ClientToken = string;
   export interface CompleteAttachmentUploadRequest {
     /**
