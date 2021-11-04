@@ -6028,6 +6028,10 @@ declare namespace SageMaker {
      * The response from the last list when returning a list large enough to need tokening.
      */
     NextToken?: NextToken;
+    /**
+     * Edge Manager agent version.
+     */
+    AgentVersion?: EdgeVersion;
   }
   export interface DescribeDomainRequest {
     /**
@@ -7967,6 +7971,10 @@ declare namespace SageMaker {
      * Models on the device.
      */
     Models?: EdgeModelSummaries;
+    /**
+     * Edge Manager agent version.
+     */
+    AgentVersion?: EdgeVersion;
   }
   export type Devices = Device[];
   export type DirectInternetAccess = "Enabled"|"Disabled"|string;

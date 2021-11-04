@@ -1093,5 +1093,9 @@
   },
   "panorama": {
     "name": "Panorama"
+  },
+  "chimesdkmeetings": {
+    "prefix": "chime-sdk-meetings",
+    "name": "ChimeSDKMeetings"
   }
 }

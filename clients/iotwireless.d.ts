@@ -20,6 +20,30 @@ declare class IoTWireless extends Service {
    */
   associateAwsAccountWithPartnerAccount(callback?: (err: AWSError, data: IoTWireless.Types.AssociateAwsAccountWithPartnerAccountResponse) => void): Request<IoTWireless.Types.AssociateAwsAccountWithPartnerAccountResponse, AWSError>;
   /**
+   * Associate a multicast group with a FUOTA task.
+   */
+  associateMulticastGroupWithFuotaTask(params: IoTWireless.Types.AssociateMulticastGroupWithFuotaTaskRequest, callback?: (err: AWSError, data: IoTWireless.Types.AssociateMulticastGroupWithFuotaTaskResponse) => void): Request<IoTWireless.Types.AssociateMulticastGroupWithFuotaTaskResponse, AWSError>;
+  /**
+   * Associate a multicast group with a FUOTA task.
+   */
+  associateMulticastGroupWithFuotaTask(callback?: (err: AWSError, data: IoTWireless.Types.AssociateMulticastGroupWithFuotaTaskResponse) => void): Request<IoTWireless.Types.AssociateMulticastGroupWithFuotaTaskResponse, AWSError>;
+  /**
+   * Associate a wireless device with a FUOTA task.
+   */
+  associateWirelessDeviceWithFuotaTask(params: IoTWireless.Types.AssociateWirelessDeviceWithFuotaTaskRequest, callback?: (err: AWSError, data: IoTWireless.Types.AssociateWirelessDeviceWithFuotaTaskResponse) => void): Request<IoTWireless.Types.AssociateWirelessDeviceWithFuotaTaskResponse, AWSError>;
+  /**
+   * Associate a wireless device with a FUOTA task.
+   */
+  associateWirelessDeviceWithFuotaTask(callback?: (err: AWSError, data: IoTWireless.Types.AssociateWirelessDeviceWithFuotaTaskResponse) => void): Request<IoTWireless.Types.AssociateWirelessDeviceWithFuotaTaskResponse, AWSError>;
+  /**
+   * Associates a wireless device with a multicast group.
+   */
+  associateWirelessDeviceWithMulticastGroup(params: IoTWireless.Types.AssociateWirelessDeviceWithMulticastGroupRequest, callback?: (err: AWSError, data: IoTWireless.Types.AssociateWirelessDeviceWithMulticastGroupResponse) => void): Request<IoTWireless.Types.AssociateWirelessDeviceWithMulticastGroupResponse, AWSError>;
+  /**
+   * Associates a wireless device with a multicast group.
+   */
+  associateWirelessDeviceWithMulticastGroup(callback?: (err: AWSError, data: IoTWireless.Types.AssociateWirelessDeviceWithMulticastGroupResponse) => void): Request<IoTWireless.Types.AssociateWirelessDeviceWithMulticastGroupResponse, AWSError>;
+  /**
    * Associates a wireless device with a thing.
    */
   associateWirelessDeviceWithThing(params: IoTWireless.Types.AssociateWirelessDeviceWithThingRequest, callback?: (err: AWSError, data: IoTWireless.Types.AssociateWirelessDeviceWithThingResponse) => void): Request<IoTWireless.Types.AssociateWirelessDeviceWithThingResponse, AWSError>;
@@ -44,6 +68,14 @@ declare class IoTWireless extends Service {
    */
   associateWirelessGatewayWithThing(callback?: (err: AWSError, data: IoTWireless.Types.AssociateWirelessGatewayWithThingResponse) => void): Request<IoTWireless.Types.AssociateWirelessGatewayWithThingResponse, AWSError>;
   /**
+   * Cancels an existing multicast group session.
+   */
+  cancelMulticastGroupSession(params: IoTWireless.Types.CancelMulticastGroupSessionRequest, callback?: (err: AWSError, data: IoTWireless.Types.CancelMulticastGroupSessionResponse) => void): Request<IoTWireless.Types.CancelMulticastGroupSessionResponse, AWSError>;
+  /**
+   * Cancels an existing multicast group session.
+   */
+  cancelMulticastGroupSession(callback?: (err: AWSError, data: IoTWireless.Types.CancelMulticastGroupSessionResponse) => void): Request<IoTWireless.Types.CancelMulticastGroupSessionResponse, AWSError>;
+  /**
    * Creates a new destination that maps a device message to an AWS IoT rule.
    */
   createDestination(params: IoTWireless.Types.CreateDestinationRequest, callback?: (err: AWSError, data: IoTWireless.Types.CreateDestinationResponse) => void): Request<IoTWireless.Types.CreateDestinationResponse, AWSError>;
@@ -59,6 +91,22 @@ declare class IoTWireless extends Service {
    * Creates a new device profile.
    */
   createDeviceProfile(callback?: (err: AWSError, data: IoTWireless.Types.CreateDeviceProfileResponse) => void): Request<IoTWireless.Types.CreateDeviceProfileResponse, AWSError>;
+  /**
+   * Creates a FUOTA task.
+   */
+  createFuotaTask(params: IoTWireless.Types.CreateFuotaTaskRequest, callback?: (err: AWSError, data: IoTWireless.Types.CreateFuotaTaskResponse) => void): Request<IoTWireless.Types.CreateFuotaTaskResponse, AWSError>;
+  /**
+   * Creates a FUOTA task.
+   */
+  createFuotaTask(callback?: (err: AWSError, data: IoTWireless.Types.CreateFuotaTaskResponse) => void): Request<IoTWireless.Types.CreateFuotaTaskResponse, AWSError>;
+  /**
+   * Creates a multicast group.
+   */
+  createMulticastGroup(params: IoTWireless.Types.CreateMulticastGroupRequest, callback?: (err: AWSError, data: IoTWireless.Types.CreateMulticastGroupResponse) => void): Request<IoTWireless.Types.CreateMulticastGroupResponse, AWSError>;
+  /**
+   * Creates a multicast group.
+   */
+  createMulticastGroup(callback?: (err: AWSError, data: IoTWireless.Types.CreateMulticastGroupResponse) => void): Request<IoTWireless.Types.CreateMulticastGroupResponse, AWSError>;
   /**
    * Creates a new service profile.
    */
@@ -116,6 +164,22 @@ declare class IoTWireless extends Service {
    */
   deleteDeviceProfile(callback?: (err: AWSError, data: IoTWireless.Types.DeleteDeviceProfileResponse) => void): Request<IoTWireless.Types.DeleteDeviceProfileResponse, AWSError>;
   /**
+   * Deletes a FUOTA task.
+   */
+  deleteFuotaTask(params: IoTWireless.Types.DeleteFuotaTaskRequest, callback?: (err: AWSError, data: IoTWireless.Types.DeleteFuotaTaskResponse) => void): Request<IoTWireless.Types.DeleteFuotaTaskResponse, AWSError>;
+  /**
+   * Deletes a FUOTA task.
+   */
+  deleteFuotaTask(callback?: (err: AWSError, data: IoTWireless.Types.DeleteFuotaTaskResponse) => void): Request<IoTWireless.Types.DeleteFuotaTaskResponse, AWSError>;
+  /**
+   * Deletes a multicast group if it is not in use by a fuota task.
+   */
+  deleteMulticastGroup(params: IoTWireless.Types.DeleteMulticastGroupRequest, callback?: (err: AWSError, data: IoTWireless.Types.DeleteMulticastGroupResponse) => void): Request<IoTWireless.Types.DeleteMulticastGroupResponse, AWSError>;
+  /**
+   * Deletes a multicast group if it is not in use by a fuota task.
+   */
+  deleteMulticastGroup(callback?: (err: AWSError, data: IoTWireless.Types.DeleteMulticastGroupResponse) => void): Request<IoTWireless.Types.DeleteMulticastGroupResponse, AWSError>;
+  /**
    * Deletes a service profile.
    */
   deleteServiceProfile(params: IoTWireless.Types.DeleteServiceProfileRequest, callback?: (err: AWSError, data: IoTWireless.Types.DeleteServiceProfileResponse) => void): Request<IoTWireless.Types.DeleteServiceProfileResponse, AWSError>;
@@ -164,6 +228,30 @@ declare class IoTWireless extends Service {
    */
   disassociateAwsAccountFromPartnerAccount(callback?: (err: AWSError, data: IoTWireless.Types.DisassociateAwsAccountFromPartnerAccountResponse) => void): Request<IoTWireless.Types.DisassociateAwsAccountFromPartnerAccountResponse, AWSError>;
   /**
+   * Disassociates a multicast group from a fuota task.
+   */
+  disassociateMulticastGroupFromFuotaTask(params: IoTWireless.Types.DisassociateMulticastGroupFromFuotaTaskRequest, callback?: (err: AWSError, data: IoTWireless.Types.DisassociateMulticastGroupFromFuotaTaskResponse) => void): Request<IoTWireless.Types.DisassociateMulticastGroupFromFuotaTaskResponse, AWSError>;
+  /**
+   * Disassociates a multicast group from a fuota task.
+   */
+  disassociateMulticastGroupFromFuotaTask(callback?: (err: AWSError, data: IoTWireless.Types.DisassociateMulticastGroupFromFuotaTaskResponse) => void): Request<IoTWireless.Types.DisassociateMulticastGroupFromFuotaTaskResponse, AWSError>;
+  /**
+   * Disassociates a wireless device from a FUOTA task.
+   */
+  disassociateWirelessDeviceFromFuotaTask(params: IoTWireless.Types.DisassociateWirelessDeviceFromFuotaTaskRequest, callback?: (err: AWSError, data: IoTWireless.Types.DisassociateWirelessDeviceFromFuotaTaskResponse) => void): Request<IoTWireless.Types.DisassociateWirelessDeviceFromFuotaTaskResponse, AWSError>;
+  /**
+   * Disassociates a wireless device from a FUOTA task.
+   */
+  disassociateWirelessDeviceFromFuotaTask(callback?: (err: AWSError, data: IoTWireless.Types.DisassociateWirelessDeviceFromFuotaTaskResponse) => void): Request<IoTWireless.Types.DisassociateWirelessDeviceFromFuotaTaskResponse, AWSError>;
+  /**
+   * Disassociates a wireless device from a multicast group.
+   */
+  disassociateWirelessDeviceFromMulticastGroup(params: IoTWireless.Types.DisassociateWirelessDeviceFromMulticastGroupRequest, callback?: (err: AWSError, data: IoTWireless.Types.DisassociateWirelessDeviceFromMulticastGroupResponse) => void): Request<IoTWireless.Types.DisassociateWirelessDeviceFromMulticastGroupResponse, AWSError>;
+  /**
+   * Disassociates a wireless device from a multicast group.
+   */
+  disassociateWirelessDeviceFromMulticastGroup(callback?: (err: AWSError, data: IoTWireless.Types.DisassociateWirelessDeviceFromMulticastGroupResponse) => void): Request<IoTWireless.Types.DisassociateWirelessDeviceFromMulticastGroupResponse, AWSError>;
+  /**
    * Disassociates a wireless device from its currently associated thing.
    */
   disassociateWirelessDeviceFromThing(params: IoTWireless.Types.DisassociateWirelessDeviceFromThingRequest, callback?: (err: AWSError, data: IoTWireless.Types.DisassociateWirelessDeviceFromThingResponse) => void): Request<IoTWireless.Types.DisassociateWirelessDeviceFromThingResponse, AWSError>;
@@ -204,6 +292,14 @@ declare class IoTWireless extends Service {
    */
   getDeviceProfile(callback?: (err: AWSError, data: IoTWireless.Types.GetDeviceProfileResponse) => void): Request<IoTWireless.Types.GetDeviceProfileResponse, AWSError>;
   /**
+   * Gets information about a FUOTA task.
+   */
+  getFuotaTask(params: IoTWireless.Types.GetFuotaTaskRequest, callback?: (err: AWSError, data: IoTWireless.Types.GetFuotaTaskResponse) => void): Request<IoTWireless.Types.GetFuotaTaskResponse, AWSError>;
+  /**
+   * Gets information about a FUOTA task.
+   */
+  getFuotaTask(callback?: (err: AWSError, data: IoTWireless.Types.GetFuotaTaskResponse) => void): Request<IoTWireless.Types.GetFuotaTaskResponse, AWSError>;
+  /**
    * Returns current default log levels or log levels by resource types. Based on resource types, log levels can be for wireless device log options or wireless gateway log options.
    */
   getLogLevelsByResourceTypes(params: IoTWireless.Types.GetLogLevelsByResourceTypesRequest, callback?: (err: AWSError, data: IoTWireless.Types.GetLogLevelsByResourceTypesResponse) => void): Request<IoTWireless.Types.GetLogLevelsByResourceTypesResponse, AWSError>;
@@ -212,6 +308,22 @@ declare class IoTWireless extends Service {
    */
   getLogLevelsByResourceTypes(callback?: (err: AWSError, data: IoTWireless.Types.GetLogLevelsByResourceTypesResponse) => void): Request<IoTWireless.Types.GetLogLevelsByResourceTypesResponse, AWSError>;
   /**
+   * Gets information about a multicast group.
+   */
+  getMulticastGroup(params: IoTWireless.Types.GetMulticastGroupRequest, callback?: (err: AWSError, data: IoTWireless.Types.GetMulticastGroupResponse) => void): Request<IoTWireless.Types.GetMulticastGroupResponse, AWSError>;
+  /**
+   * Gets information about a multicast group.
+   */
+  getMulticastGroup(callback?: (err: AWSError, data: IoTWireless.Types.GetMulticastGroupResponse) => void): Request<IoTWireless.Types.GetMulticastGroupResponse, AWSError>;
+  /**
+   * Gets information about a multicast group session.
+   */
+  getMulticastGroupSession(params: IoTWireless.Types.GetMulticastGroupSessionRequest, callback?: (err: AWSError, data: IoTWireless.Types.GetMulticastGroupSessionResponse) => void): Request<IoTWireless.Types.GetMulticastGroupSessionResponse, AWSError>;
+  /**
+   * Gets information about a multicast group session.
+   */
+  getMulticastGroupSession(callback?: (err: AWSError, data: IoTWireless.Types.GetMulticastGroupSessionResponse) => void): Request<IoTWireless.Types.GetMulticastGroupSessionResponse, AWSError>;
+  /**
    * Gets information about a partner account. If PartnerAccountId and PartnerType are null, returns all partner accounts.
    */
   getPartnerAccount(params: IoTWireless.Types.GetPartnerAccountRequest, callback?: (err: AWSError, data: IoTWireless.Types.GetPartnerAccountResponse) => void): Request<IoTWireless.Types.GetPartnerAccountResponse, AWSError>;
@@ -219,6 +331,14 @@ declare class IoTWireless extends Service {
    * Gets information about a partner account. If PartnerAccountId and PartnerType are null, returns all partner accounts.
    */
   getPartnerAccount(callback?: (err: AWSError, data: IoTWireless.Types.GetPartnerAccountResponse) => void): Request<IoTWireless.Types.GetPartnerAccountResponse, AWSError>;
+  /**
+   * Get the event configuration for a particular resource identifier.
+   */
+  getResourceEventConfiguration(params: IoTWireless.Types.GetResourceEventConfigurationRequest, callback?: (err: AWSError, data: IoTWireless.Types.GetResourceEventConfigurationResponse) => void): Request<IoTWireless.Types.GetResourceEventConfigurationResponse, AWSError>;
+  /**
+   * Get the event configuration for a particular resource identifier.
+   */
+  getResourceEventConfiguration(callback?: (err: AWSError, data: IoTWireless.Types.GetResourceEventConfigurationResponse) => void): Request<IoTWireless.Types.GetResourceEventConfigurationResponse, AWSError>;
   /**
    * Fetches the log-level override, if any, for a given resource-ID and resource-type. It can be used for a wireless device or a wireless gateway.
    */
@@ -324,6 +444,30 @@ declare class IoTWireless extends Service {
    */
   listDeviceProfiles(callback?: (err: AWSError, data: IoTWireless.Types.ListDeviceProfilesResponse) => void): Request<IoTWireless.Types.ListDeviceProfilesResponse, AWSError>;
   /**
+   * Lists the FUOTA tasks registered to your AWS account.
+   */
+  listFuotaTasks(params: IoTWireless.Types.ListFuotaTasksRequest, callback?: (err: AWSError, data: IoTWireless.Types.ListFuotaTasksResponse) => void): Request<IoTWireless.Types.ListFuotaTasksResponse, AWSError>;
+  /**
+   * Lists the FUOTA tasks registered to your AWS account.
+   */
+  listFuotaTasks(callback?: (err: AWSError, data: IoTWireless.Types.ListFuotaTasksResponse) => void): Request<IoTWireless.Types.ListFuotaTasksResponse, AWSError>;
+  /**
+   * Lists the multicast groups registered to your AWS account.
+   */
+  listMulticastGroups(params: IoTWireless.Types.ListMulticastGroupsRequest, callback?: (err: AWSError, data: IoTWireless.Types.ListMulticastGroupsResponse) => void): Request<IoTWireless.Types.ListMulticastGroupsResponse, AWSError>;
+  /**
+   * Lists the multicast groups registered to your AWS account.
+   */
+  listMulticastGroups(callback?: (err: AWSError, data: IoTWireless.Types.ListMulticastGroupsResponse) => void): Request<IoTWireless.Types.ListMulticastGroupsResponse, AWSError>;
+  /**
+   * List all multicast groups associated with a fuota task.
+   */
+  listMulticastGroupsByFuotaTask(params: IoTWireless.Types.ListMulticastGroupsByFuotaTaskRequest, callback?: (err: AWSError, data: IoTWireless.Types.ListMulticastGroupsByFuotaTaskResponse) => void): Request<IoTWireless.Types.ListMulticastGroupsByFuotaTaskResponse, AWSError>;
+  /**
+   * List all multicast groups associated with a fuota task.
+   */
+  listMulticastGroupsByFuotaTask(callback?: (err: AWSError, data: IoTWireless.Types.ListMulticastGroupsByFuotaTaskResponse) => void): Request<IoTWireless.Types.ListMulticastGroupsByFuotaTaskResponse, AWSError>;
+  /**
    * Lists the partner accounts associated with your AWS account.
    */
   listPartnerAccounts(params: IoTWireless.Types.ListPartnerAccountsRequest, callback?: (err: AWSError, data: IoTWireless.Types.ListPartnerAccountsResponse) => void): Request<IoTWireless.Types.ListPartnerAccountsResponse, AWSError>;
@@ -396,6 +540,14 @@ declare class IoTWireless extends Service {
    */
   resetResourceLogLevel(callback?: (err: AWSError, data: IoTWireless.Types.ResetResourceLogLevelResponse) => void): Request<IoTWireless.Types.ResetResourceLogLevelResponse, AWSError>;
   /**
+   * Sends the specified data to a multicast group.
+   */
+  sendDataToMulticastGroup(params: IoTWireless.Types.SendDataToMulticastGroupRequest, callback?: (err: AWSError, data: IoTWireless.Types.SendDataToMulticastGroupResponse) => void): Request<IoTWireless.Types.SendDataToMulticastGroupResponse, AWSError>;
+  /**
+   * Sends the specified data to a multicast group.
+   */
+  sendDataToMulticastGroup(callback?: (err: AWSError, data: IoTWireless.Types.SendDataToMulticastGroupResponse) => void): Request<IoTWireless.Types.SendDataToMulticastGroupResponse, AWSError>;
+  /**
    * Sends a decrypted application data frame to a device.
    */
   sendDataToWirelessDevice(params: IoTWireless.Types.SendDataToWirelessDeviceRequest, callback?: (err: AWSError, data: IoTWireless.Types.SendDataToWirelessDeviceResponse) => void): Request<IoTWireless.Types.SendDataToWirelessDeviceResponse, AWSError>;
@@ -403,6 +555,38 @@ declare class IoTWireless extends Service {
    * Sends a decrypted application data frame to a device.
    */
   sendDataToWirelessDevice(callback?: (err: AWSError, data: IoTWireless.Types.SendDataToWirelessDeviceResponse) => void): Request<IoTWireless.Types.SendDataToWirelessDeviceResponse, AWSError>;
+  /**
+   * Starts a bulk association of all qualifying wireless devices with a multicast group.
+   */
+  startBulkAssociateWirelessDeviceWithMulticastGroup(params: IoTWireless.Types.StartBulkAssociateWirelessDeviceWithMulticastGroupRequest, callback?: (err: AWSError, data: IoTWireless.Types.StartBulkAssociateWirelessDeviceWithMulticastGroupResponse) => void): Request<IoTWireless.Types.StartBulkAssociateWirelessDeviceWithMulticastGroupResponse, AWSError>;
+  /**
+   * Starts a bulk association of all qualifying wireless devices with a multicast group.
+   */
+  startBulkAssociateWirelessDeviceWithMulticastGroup(callback?: (err: AWSError, data: IoTWireless.Types.StartBulkAssociateWirelessDeviceWithMulticastGroupResponse) => void): Request<IoTWireless.Types.StartBulkAssociateWirelessDeviceWithMulticastGroupResponse, AWSError>;
+  /**
+   * Starts a bulk disassociatin of all qualifying wireless devices from a multicast group.
+   */
+  startBulkDisassociateWirelessDeviceFromMulticastGroup(params: IoTWireless.Types.StartBulkDisassociateWirelessDeviceFromMulticastGroupRequest, callback?: (err: AWSError, data: IoTWireless.Types.StartBulkDisassociateWirelessDeviceFromMulticastGroupResponse) => void): Request<IoTWireless.Types.StartBulkDisassociateWirelessDeviceFromMulticastGroupResponse, AWSError>;
+  /**
+   * Starts a bulk disassociatin of all qualifying wireless devices from a multicast group.
+   */
+  startBulkDisassociateWirelessDeviceFromMulticastGroup(callback?: (err: AWSError, data: IoTWireless.Types.StartBulkDisassociateWirelessDeviceFromMulticastGroupResponse) => void): Request<IoTWireless.Types.StartBulkDisassociateWirelessDeviceFromMulticastGroupResponse, AWSError>;
+  /**
+   * Starts a FUOTA task.
+   */
+  startFuotaTask(params: IoTWireless.Types.StartFuotaTaskRequest, callback?: (err: AWSError, data: IoTWireless.Types.StartFuotaTaskResponse) => void): Request<IoTWireless.Types.StartFuotaTaskResponse, AWSError>;
+  /**
+   * Starts a FUOTA task.
+   */
+  startFuotaTask(callback?: (err: AWSError, data: IoTWireless.Types.StartFuotaTaskResponse) => void): Request<IoTWireless.Types.StartFuotaTaskResponse, AWSError>;
+  /**
+   * Starts a multicast group session.
+   */
+  startMulticastGroupSession(params: IoTWireless.Types.StartMulticastGroupSessionRequest, callback?: (err: AWSError, data: IoTWireless.Types.StartMulticastGroupSessionResponse) => void): Request<IoTWireless.Types.StartMulticastGroupSessionResponse, AWSError>;
+  /**
+   * Starts a multicast group session.
+   */
+  startMulticastGroupSession(callback?: (err: AWSError, data: IoTWireless.Types.StartMulticastGroupSessionResponse) => void): Request<IoTWireless.Types.StartMulticastGroupSessionResponse, AWSError>;
   /**
    * Adds a tag to a resource.
    */
@@ -436,6 +620,14 @@ declare class IoTWireless extends Service {
    */
   updateDestination(callback?: (err: AWSError, data: IoTWireless.Types.UpdateDestinationResponse) => void): Request<IoTWireless.Types.UpdateDestinationResponse, AWSError>;
   /**
+   * Updates properties of a FUOTA task.
+   */
+  updateFuotaTask(params: IoTWireless.Types.UpdateFuotaTaskRequest, callback?: (err: AWSError, data: IoTWireless.Types.UpdateFuotaTaskResponse) => void): Request<IoTWireless.Types.UpdateFuotaTaskResponse, AWSError>;
+  /**
+   * Updates properties of a FUOTA task.
+   */
+  updateFuotaTask(callback?: (err: AWSError, data: IoTWireless.Types.UpdateFuotaTaskResponse) => void): Request<IoTWireless.Types.UpdateFuotaTaskResponse, AWSError>;
+  /**
    * Set default log level, or log levels by resource types. This can be for wireless device log options or wireless gateways log options and is used to control the log messages that'll be displayed in CloudWatch.
    */
   updateLogLevelsByResourceTypes(params: IoTWireless.Types.UpdateLogLevelsByResourceTypesRequest, callback?: (err: AWSError, data: IoTWireless.Types.UpdateLogLevelsByResourceTypesResponse) => void): Request<IoTWireless.Types.UpdateLogLevelsByResourceTypesResponse, AWSError>;
@@ -444,6 +636,14 @@ declare class IoTWireless extends Service {
    */
   updateLogLevelsByResourceTypes(callback?: (err: AWSError, data: IoTWireless.Types.UpdateLogLevelsByResourceTypesResponse) => void): Request<IoTWireless.Types.UpdateLogLevelsByResourceTypesResponse, AWSError>;
   /**
+   * Updates properties of a multicast group session.
+   */
+  updateMulticastGroup(params: IoTWireless.Types.UpdateMulticastGroupRequest, callback?: (err: AWSError, data: IoTWireless.Types.UpdateMulticastGroupResponse) => void): Request<IoTWireless.Types.UpdateMulticastGroupResponse, AWSError>;
+  /**
+   * Updates properties of a multicast group session.
+   */
+  updateMulticastGroup(callback?: (err: AWSError, data: IoTWireless.Types.UpdateMulticastGroupResponse) => void): Request<IoTWireless.Types.UpdateMulticastGroupResponse, AWSError>;
+  /**
    * Updates properties of a partner account.
    */
   updatePartnerAccount(params: IoTWireless.Types.UpdatePartnerAccountRequest, callback?: (err: AWSError, data: IoTWireless.Types.UpdatePartnerAccountResponse) => void): Request<IoTWireless.Types.UpdatePartnerAccountResponse, AWSError>;
@@ -451,6 +651,14 @@ declare class IoTWireless extends Service {
    * Updates properties of a partner account.
    */
   updatePartnerAccount(callback?: (err: AWSError, data: IoTWireless.Types.UpdatePartnerAccountResponse) => void): Request<IoTWireless.Types.UpdatePartnerAccountResponse, AWSError>;
+  /**
+   * Update the event configuration for a particular resource identifier.
+   */
+  updateResourceEventConfiguration(params: IoTWireless.Types.UpdateResourceEventConfigurationRequest, callback?: (err: AWSError, data: IoTWireless.Types.UpdateResourceEventConfigurationResponse) => void): Request<IoTWireless.Types.UpdateResourceEventConfigurationResponse, AWSError>;
+  /**
+   * Update the event configuration for a particular resource identifier.
+   */
+  updateResourceEventConfiguration(callback?: (err: AWSError, data: IoTWireless.Types.UpdateResourceEventConfigurationResponse) => void): Request<IoTWireless.Types.UpdateResourceEventConfigurationResponse, AWSError>;
   /**
    * Updates properties of a wireless device.
    */
@@ -521,6 +729,24 @@ declare namespace IoTWireless {
      */
     Arn?: PartnerAccountArn;
   }
+  export interface AssociateMulticastGroupWithFuotaTaskRequest {
+    Id: FuotaTaskId;
+    MulticastGroupId: MulticastGroupId;
+  }
+  export interface AssociateMulticastGroupWithFuotaTaskResponse {
+  }
+  export interface AssociateWirelessDeviceWithFuotaTaskRequest {
+    Id: FuotaTaskId;
+    WirelessDeviceId: WirelessDeviceId;
+  }
+  export interface AssociateWirelessDeviceWithFuotaTaskResponse {
+  }
+  export interface AssociateWirelessDeviceWithMulticastGroupRequest {
+    Id: MulticastGroupId;
+    WirelessDeviceId: WirelessDeviceId;
+  }
+  export interface AssociateWirelessDeviceWithMulticastGroupResponse {
+  }
   export interface AssociateWirelessDeviceWithThingRequest {
     /**
      * The ID of the resource to update.
@@ -563,6 +789,11 @@ declare namespace IoTWireless {
   }
   export type AutoCreateTasks = boolean;
   export type BatteryLevel = "normal"|"low"|"critical"|string;
+  export interface CancelMulticastGroupSessionRequest {
+    Id: MulticastGroupId;
+  }
+  export interface CancelMulticastGroupSessionResponse {
+  }
   export interface CertificateList {
     /**
      * The certificate chain algorithm provided by sidewalk.
@@ -648,6 +879,36 @@ declare namespace IoTWireless {
      * The ID of the new device profile.
      */
     Id?: DeviceProfileId;
+  }
+  export interface CreateFuotaTaskRequest {
+    Name?: FuotaTaskName;
+    Description?: Description;
+    ClientRequestToken?: ClientRequestToken;
+    LoRaWAN?: LoRaWANFuotaTask;
+    FirmwareUpdateImage: FirmwareUpdateImage;
+    FirmwareUpdateRole: FirmwareUpdateRole;
+    Tags?: TagList;
+  }
+  export interface CreateFuotaTaskResponse {
+    Arn?: FuotaTaskArn;
+    Id?: FuotaTaskId;
+  }
+  export interface CreateMulticastGroupRequest {
+    Name?: MulticastGroupName;
+    /**
+     * The description of the multicast group.
+     */
+    Description?: Description;
+    /**
+     * Each resource must have a unique client request token. If you try to create a new resource with the same token as a resource that already exists, an exception occurs. If you omit this value, AWS SDKs will automatically generate a unique client request. 
+     */
+    ClientRequestToken?: ClientRequestToken;
+    LoRaWAN: LoRaWANMulticast;
+    Tags?: TagList;
+  }
+  export interface CreateMulticastGroupResponse {
+    Arn?: MulticastGroupArn;
+    Id?: MulticastGroupId;
   }
   export interface CreateServiceProfileRequest {
     /**
@@ -801,6 +1062,7 @@ declare namespace IoTWireless {
      */
     Status?: WirelessGatewayTaskStatus;
   }
+  export type CreatedAt = Date;
   export interface DeleteDestinationRequest {
     /**
      * The name of the resource to delete.
@@ -816,6 +1078,16 @@ declare namespace IoTWireless {
     Id: DeviceProfileId;
   }
   export interface DeleteDeviceProfileResponse {
+  }
+  export interface DeleteFuotaTaskRequest {
+    Id: FuotaTaskId;
+  }
+  export interface DeleteFuotaTaskResponse {
+  }
+  export interface DeleteMulticastGroupRequest {
+    Id: MulticastGroupId;
+  }
+  export interface DeleteMulticastGroupResponse {
   }
   export interface DeleteServiceProfileRequest {
     /**
@@ -909,6 +1181,12 @@ declare namespace IoTWireless {
   export type DeviceProfileId = string;
   export type DeviceProfileList = DeviceProfile[];
   export type DeviceProfileName = string;
+  export interface DeviceRegistrationStateEventConfiguration {
+    /**
+     * Device registration state event configuration object for enabling or disabling Sidewalk related event topics.
+     */
+    Sidewalk?: SidewalkEventNotificationConfigurations;
+  }
   export type DeviceState = "Provisioned"|"RegisteredNotSeen"|"RegisteredReachable"|"RegisteredUnreachable"|string;
   export interface DisassociateAwsAccountFromPartnerAccountRequest {
     /**
@@ -921,6 +1199,24 @@ declare namespace IoTWireless {
     PartnerType: PartnerType;
   }
   export interface DisassociateAwsAccountFromPartnerAccountResponse {
+  }
+  export interface DisassociateMulticastGroupFromFuotaTaskRequest {
+    Id: FuotaTaskId;
+    MulticastGroupId: MulticastGroupId;
+  }
+  export interface DisassociateMulticastGroupFromFuotaTaskResponse {
+  }
+  export interface DisassociateWirelessDeviceFromFuotaTaskRequest {
+    Id: FuotaTaskId;
+    WirelessDeviceId: WirelessDeviceId;
+  }
+  export interface DisassociateWirelessDeviceFromFuotaTaskResponse {
+  }
+  export interface DisassociateWirelessDeviceFromMulticastGroupRequest {
+    Id: MulticastGroupId;
+    WirelessDeviceId: WirelessDeviceId;
+  }
+  export interface DisassociateWirelessDeviceFromMulticastGroupResponse {
   }
   export interface DisassociateWirelessDeviceFromThingRequest {
     /**
@@ -947,6 +1243,9 @@ declare namespace IoTWireless {
   export interface DisassociateWirelessGatewayFromThingResponse {
   }
   export type DlBucketSize = number;
+  export type DlClass = "ClassB"|"ClassC"|string;
+  export type DlDr = number;
+  export type DlFreq = number;
   export type DlRate = number;
   export type DlRatePolicy = string;
   export type Double = number;
@@ -954,13 +1253,34 @@ declare namespace IoTWireless {
   export type DrMin = number;
   export type EndPoint = string;
   export type Event = "discovered"|"lost"|"ack"|"nack"|"passthrough"|string;
+  export type EventNotificationPartnerType = "Sidewalk"|string;
+  export type EventNotificationTopicStatus = "Enabled"|"Disabled"|string;
   export type Expression = string;
   export type ExpressionType = "RuleName"|"MqttTopic"|string;
   export type FNwkSIntKey = string;
   export type FPort = number;
+  export interface FPorts {
+    Fuota?: FPort;
+    Multicast?: FPort;
+    ClockSync?: FPort;
+  }
   export type FactoryPresetFreqsList = PresetFreq[];
   export type Fingerprint = string;
+  export type FirmwareUpdateImage = string;
+  export type FirmwareUpdateRole = string;
+  export type FuotaDeviceStatus = "Initial"|"Package_Not_Supported"|"FragAlgo_unsupported"|"Not_enough_memory"|"FragIndex_unsupported"|"Wrong_descriptor"|"SessionCnt_replay"|"MissingFrag"|"MemoryError"|"MICError"|"Successful"|string;
+  export interface FuotaTask {
+    Id?: FuotaTaskId;
+    Arn?: FuotaTaskArn;
+    Name?: FuotaTaskName;
+  }
+  export type FuotaTaskArn = string;
+  export type FuotaTaskId = string;
+  export type FuotaTaskList = FuotaTask[];
+  export type FuotaTaskName = string;
+  export type FuotaTaskStatus = "Pending"|"FuotaSession_Waiting"|"In_FuotaSession"|"FuotaDone"|"Delete_Waiting"|string;
   export type GatewayEui = string;
+  export type GenAppKey = string;
   export interface GetDestinationRequest {
     /**
      * The name of the resource to get.
@@ -1017,12 +1337,44 @@ declare namespace IoTWireless {
      */
     LoRaWAN?: LoRaWANDeviceProfile;
   }
+  export interface GetFuotaTaskRequest {
+    Id: FuotaTaskId;
+  }
+  export interface GetFuotaTaskResponse {
+    Arn?: FuotaTaskArn;
+    Id?: FuotaTaskId;
+    Status?: FuotaTaskStatus;
+    Name?: FuotaTaskName;
+    Description?: Description;
+    LoRaWAN?: LoRaWANFuotaTaskGetInfo;
+    FirmwareUpdateImage?: FirmwareUpdateImage;
+    FirmwareUpdateRole?: FirmwareUpdateRole;
+    CreatedAt?: CreatedAt;
+  }
   export interface GetLogLevelsByResourceTypesRequest {
   }
   export interface GetLogLevelsByResourceTypesResponse {
     DefaultLogLevel?: LogLevel;
     WirelessGatewayLogOptions?: WirelessGatewayLogOptionList;
     WirelessDeviceLogOptions?: WirelessDeviceLogOptionList;
+  }
+  export interface GetMulticastGroupRequest {
+    Id: MulticastGroupId;
+  }
+  export interface GetMulticastGroupResponse {
+    Arn?: MulticastGroupArn;
+    Id?: MulticastGroupId;
+    Name?: MulticastGroupName;
+    Description?: Description;
+    Status?: MulticastGroupStatus;
+    LoRaWAN?: LoRaWANMulticastGet;
+    CreatedAt?: CreatedAt;
+  }
+  export interface GetMulticastGroupSessionRequest {
+    Id: MulticastGroupId;
+  }
+  export interface GetMulticastGroupSessionResponse {
+    LoRaWAN?: LoRaWANMulticastSession;
   }
   export interface GetPartnerAccountRequest {
     /**
@@ -1043,6 +1395,30 @@ declare namespace IoTWireless {
      * Whether the partner account is linked to the AWS account.
      */
     AccountLinked?: AccountLinked;
+  }
+  export interface GetResourceEventConfigurationRequest {
+    /**
+     * Resource identifier to opt in for event messaging.
+     */
+    Identifier: Identifier;
+    /**
+     * Identifier type of the particular resource identifier for event configuration.
+     */
+    IdentifierType: IdentifierType;
+    /**
+     * Partner type of the resource if the identifier type is PartnerAccountId.
+     */
+    PartnerType?: EventNotificationPartnerType;
+  }
+  export interface GetResourceEventConfigurationResponse {
+    /**
+     * Event configuration for the device registration state event
+     */
+    DeviceRegistrationState?: DeviceRegistrationStateEventConfiguration;
+    /**
+     * Event configuration for the Proximity event
+     */
+    Proximity?: ProximityEventConfiguration;
   }
   export interface GetResourceLogLevelRequest {
     ResourceIdentifier: ResourceIdentifier;
@@ -1317,6 +1693,7 @@ declare namespace IoTWireless {
   export type HrAllowed = boolean;
   export type ISODateTimeString = string;
   export type Identifier = string;
+  export type IdentifierType = "PartnerAccountId"|string;
   export type Integer = number;
   export type IotCertificateId = string;
   export type JoinEui = string;
@@ -1361,6 +1738,49 @@ declare namespace IoTWireless {
      * The list of device profiles.
      */
     DeviceProfileList?: DeviceProfileList;
+  }
+  export interface ListFuotaTasksRequest {
+    /**
+     * To retrieve the next set of results, the nextToken value from a previous response; otherwise null to receive the first set of results.
+     */
+    NextToken?: NextToken;
+    MaxResults?: MaxResults;
+  }
+  export interface ListFuotaTasksResponse {
+    /**
+     * To retrieve the next set of results, the nextToken value from a previous response; otherwise null to receive the first set of results.
+     */
+    NextToken?: NextToken;
+    FuotaTaskList?: FuotaTaskList;
+  }
+  export interface ListMulticastGroupsByFuotaTaskRequest {
+    Id: FuotaTaskId;
+    /**
+     * To retrieve the next set of results, the nextToken value from a previous response; otherwise null to receive the first set of results.
+     */
+    NextToken?: NextToken;
+    MaxResults?: MaxResults;
+  }
+  export interface ListMulticastGroupsByFuotaTaskResponse {
+    /**
+     * To retrieve the next set of results, the nextToken value from a previous response; otherwise null to receive the first set of results.
+     */
+    NextToken?: NextToken;
+    MulticastGroupList?: MulticastGroupListByFuotaTask;
+  }
+  export interface ListMulticastGroupsRequest {
+    /**
+     * To retrieve the next set of results, the nextToken value from a previous response; otherwise null to receive the first set of results.
+     */
+    NextToken?: NextToken;
+    MaxResults?: MaxResults;
+  }
+  export interface ListMulticastGroupsResponse {
+    /**
+     * To retrieve the next set of results, the nextToken value from a previous response; otherwise null to receive the first set of results.
+     */
+    NextToken?: NextToken;
+    MulticastGroupList?: MulticastGroupList;
   }
   export interface ListPartnerAccountsRequest {
     /**
@@ -1439,6 +1859,8 @@ declare namespace IoTWireless {
      * A filter to list only the wireless devices that use this wireless device type.
      */
     WirelessDeviceType?: WirelessDeviceType;
+    FuotaTaskId?: FuotaTaskId;
+    MulticastGroupId?: MulticastGroupId;
   }
   export interface ListWirelessDevicesResponse {
     /**
@@ -1523,6 +1945,7 @@ declare namespace IoTWireless {
      * LoRaWAN object for create APIs
      */
     AbpV1_0_x?: AbpV1_0_x;
+    FPorts?: FPorts;
   }
   export interface LoRaWANDeviceMetadata {
     /**
@@ -1627,6 +2050,13 @@ declare namespace IoTWireless {
      * The Supports32BitFCnt value.
      */
     Supports32BitFCnt?: Supports32BitFCnt;
+  }
+  export interface LoRaWANFuotaTask {
+    RfRegion?: SupportedRfRegion;
+  }
+  export interface LoRaWANFuotaTaskGetInfo {
+    RfRegion?: RfRegion;
+    StartTime?: StartTime;
   }
   export interface LoRaWANGateway {
     /**
@@ -1760,10 +2190,26 @@ declare namespace IoTWireless {
      */
     DevEui?: DevEui;
   }
+  export interface LoRaWANMulticast {
+    RfRegion?: SupportedRfRegion;
+    DlClass?: DlClass;
+  }
+  export interface LoRaWANMulticastGet {
+    RfRegion?: SupportedRfRegion;
+    DlClass?: DlClass;
+    NumberOfDevicesRequested?: NumberOfDevicesRequested;
+    NumberOfDevicesInGroup?: NumberOfDevicesInGroup;
+  }
+  export interface LoRaWANMulticastMetadata {
+    FPort?: FPort;
+  }
+  export interface LoRaWANMulticastSession {
+    DlDr?: DlDr;
+    DlFreq?: DlFreq;
+    SessionStartTime?: SessionStartTimeTimestamp;
+    SessionTimeout?: SessionTimeout;
+  }
   export interface LoRaWANSendDataToDevice {
-    /**
-     * The Fport value.
-     */
     FPort?: FPort;
   }
   export interface LoRaWANServiceProfile {
@@ -1771,6 +2217,9 @@ declare namespace IoTWireless {
      * The AddGWMetaData value.
      */
     AddGwMetadata?: AddGwMetadata;
+  }
+  export interface LoRaWANStartFuotaTask {
+    StartTime?: StartTime;
   }
   export interface LoRaWANUpdateDevice {
     /**
@@ -1815,13 +2264,35 @@ declare namespace IoTWireless {
   export type MaxDutyCycle = number;
   export type MaxEirp = number;
   export type MaxResults = number;
+  export type McGroupId = number;
   export type MessageId = string;
   export type MessageType = "CUSTOM_COMMAND_ID_NOTIFY"|"CUSTOM_COMMAND_ID_GET"|"CUSTOM_COMMAND_ID_SET"|"CUSTOM_COMMAND_ID_RESP"|string;
   export type MinGwDiversity = number;
   export type Model = string;
+  export type MulticastDeviceStatus = string;
+  export interface MulticastGroup {
+    Id?: MulticastGroupId;
+    Arn?: MulticastGroupArn;
+    Name?: MulticastGroupName;
+  }
+  export type MulticastGroupArn = string;
+  export interface MulticastGroupByFuotaTask {
+    Id?: MulticastGroupId;
+  }
+  export type MulticastGroupId = string;
+  export type MulticastGroupList = MulticastGroup[];
+  export type MulticastGroupListByFuotaTask = MulticastGroupByFuotaTask[];
+  export type MulticastGroupMessageId = string;
+  export type MulticastGroupName = string;
+  export type MulticastGroupStatus = string;
+  export interface MulticastWirelessMetadata {
+    LoRaWAN?: LoRaWANMulticastMetadata;
+  }
   export type NetId = string;
   export type NetIdFilters = NetId[];
   export type NextToken = string;
+  export type NumberOfDevicesInGroup = number;
+  export type NumberOfDevicesRequested = number;
   export type NwkGeoLoc = boolean;
   export type NwkKey = string;
   export type NwkSEncKey = string;
@@ -1835,6 +2306,10 @@ declare namespace IoTWireless {
      * The AppEUI value.
      */
     AppEui?: AppEui;
+    /**
+     * The GenAppKey value.
+     */
+    GenAppKey?: GenAppKey;
   }
   export interface OtaaV1_1 {
     /**
@@ -1860,6 +2335,12 @@ declare namespace IoTWireless {
   export type PingSlotPeriod = number;
   export type PrAllowed = boolean;
   export type PresetFreq = number;
+  export interface ProximityEventConfiguration {
+    /**
+     * Proximity event configuration object for enabling or disabling Sidewalk related event topics.
+     */
+    Sidewalk?: SidewalkEventNotificationConfigurations;
+  }
   export interface PutResourceLogLevelRequest {
     ResourceIdentifier: ResourceIdentifier;
     /**
@@ -1870,6 +2351,7 @@ declare namespace IoTWireless {
   }
   export interface PutResourceLogLevelResponse {
   }
+  export type QueryString = string;
   export type RaAllowed = boolean;
   export type RegParamsRevision = string;
   export type ReportDevStatusBattery = boolean;
@@ -1897,6 +2379,14 @@ declare namespace IoTWireless {
   export type RxDrOffset1 = number;
   export type RxFreq2 = number;
   export type SNwkSIntKey = string;
+  export interface SendDataToMulticastGroupRequest {
+    Id: MulticastGroupId;
+    PayloadData: PayloadData;
+    WirelessMetadata: MulticastWirelessMetadata;
+  }
+  export interface SendDataToMulticastGroupResponse {
+    MessageId?: MulticastGroupMessageId;
+  }
   export interface SendDataToWirelessDeviceRequest {
     /**
      * The ID of the wireless device to receive the data.
@@ -1906,9 +2396,6 @@ declare namespace IoTWireless {
      * The transmit mode to use to send data to the wireless device. Can be: 0 for UM (unacknowledge mode) or 1 for AM (acknowledge mode).
      */
     TransmitMode: TransmitMode;
-    /**
-     * The binary to be sent to the end device, encoded in base64.
-     */
     PayloadData: PayloadData;
     /**
      * Metadata about the message request.
@@ -1968,6 +2455,8 @@ declare namespace IoTWireless {
      */
     AppSKey?: AppSKey;
   }
+  export type SessionStartTimeTimestamp = Date;
+  export type SessionTimeout = number;
   export interface SidewalkAccountInfo {
     /**
      * The Sidewalk Amazon ID.
@@ -2026,6 +2515,12 @@ declare namespace IoTWireless {
      */
     DeviceState?: DeviceState;
   }
+  export interface SidewalkEventNotificationConfigurations {
+    /**
+     * Enum to denote whether amazon id event topic is enabled or disabled.
+     */
+    AmazonIdEventTopic?: EventNotificationTopicStatus;
+  }
   export type SidewalkId = string;
   export interface SidewalkListDevice {
     /**
@@ -2060,9 +2555,37 @@ declare namespace IoTWireless {
     AppServerPrivateKey?: AppServerPrivateKey;
   }
   export type SigningAlg = "Ed25519"|"P256r1"|string;
+  export interface StartBulkAssociateWirelessDeviceWithMulticastGroupRequest {
+    Id: MulticastGroupId;
+    QueryString?: QueryString;
+    Tags?: TagList;
+  }
+  export interface StartBulkAssociateWirelessDeviceWithMulticastGroupResponse {
+  }
+  export interface StartBulkDisassociateWirelessDeviceFromMulticastGroupRequest {
+    Id: MulticastGroupId;
+    QueryString?: QueryString;
+    Tags?: TagList;
+  }
+  export interface StartBulkDisassociateWirelessDeviceFromMulticastGroupResponse {
+  }
+  export interface StartFuotaTaskRequest {
+    Id: FuotaTaskId;
+    LoRaWAN?: LoRaWANStartFuotaTask;
+  }
+  export interface StartFuotaTaskResponse {
+  }
+  export interface StartMulticastGroupSessionRequest {
+    Id: MulticastGroupId;
+    LoRaWAN: LoRaWANMulticastSession;
+  }
+  export interface StartMulticastGroupSessionResponse {
+  }
+  export type StartTime = Date;
   export type Station = string;
   export type SubBand = number;
   export type SubBands = SubBand[];
+  export type SupportedRfRegion = "EU868"|"US915"|"AU915"|"AS923-1"|string;
   export type Supports32BitFCnt = boolean;
   export type SupportsClassB = boolean;
   export type SupportsClassC = boolean;
@@ -2149,12 +2672,30 @@ declare namespace IoTWireless {
   }
   export interface UpdateDestinationResponse {
   }
+  export interface UpdateFuotaTaskRequest {
+    Id: FuotaTaskId;
+    Name?: FuotaTaskName;
+    Description?: Description;
+    LoRaWAN?: LoRaWANFuotaTask;
+    FirmwareUpdateImage?: FirmwareUpdateImage;
+    FirmwareUpdateRole?: FirmwareUpdateRole;
+  }
+  export interface UpdateFuotaTaskResponse {
+  }
   export interface UpdateLogLevelsByResourceTypesRequest {
     DefaultLogLevel?: LogLevel;
     WirelessDeviceLogOptions?: WirelessDeviceLogOptionList;
     WirelessGatewayLogOptions?: WirelessGatewayLogOptionList;
   }
   export interface UpdateLogLevelsByResourceTypesResponse {
+  }
+  export interface UpdateMulticastGroupRequest {
+    Id: MulticastGroupId;
+    Name?: MulticastGroupName;
+    Description?: Description;
+    LoRaWAN?: LoRaWANMulticast;
+  }
+  export interface UpdateMulticastGroupResponse {
   }
   export interface UpdatePartnerAccountRequest {
     /**
@@ -2171,6 +2712,30 @@ declare namespace IoTWireless {
     PartnerType: PartnerType;
   }
   export interface UpdatePartnerAccountResponse {
+  }
+  export interface UpdateResourceEventConfigurationRequest {
+    /**
+     * Resource identifier to opt in for event messaging.
+     */
+    Identifier: Identifier;
+    /**
+     * Identifier type of the particular resource identifier for event configuration.
+     */
+    IdentifierType: IdentifierType;
+    /**
+     * Partner type of the resource if the identifier type is PartnerAccountId
+     */
+    PartnerType?: EventNotificationPartnerType;
+    /**
+     * Event configuration for the device registration state event
+     */
+    DeviceRegistrationState?: DeviceRegistrationStateEventConfiguration;
+    /**
+     * Event configuration for the Proximity event
+     */
+    Proximity?: ProximityEventConfiguration;
+  }
+  export interface UpdateResourceEventConfigurationResponse {
   }
   export type UpdateSignature = string;
   export interface UpdateWirelessDeviceRequest {
@@ -2295,6 +2860,12 @@ declare namespace IoTWireless {
      * The Sidewalk account credentials.
      */
     Sidewalk?: SidewalkListDevice;
+    FuotaDeviceStatus?: FuotaDeviceStatus;
+    /**
+     * The status of the wireless device in the multicast group.
+     */
+    MulticastDeviceStatus?: MulticastDeviceStatus;
+    McGroupId?: McGroupId;
   }
   export type WirelessDeviceStatisticsList = WirelessDeviceStatistics[];
   export type WirelessDeviceType = "Sidewalk"|"LoRaWAN"|string;

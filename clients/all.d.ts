@@ -284,3 +284,4 @@ export import Account = require('./account');
 export import CloudControl = require('./cloudcontrol');
 export import Grafana = require('./grafana');
 export import Panorama = require('./panorama');
+export import ChimeSDKMeetings = require('./chimesdkmeetings');

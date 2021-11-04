@@ -285,5 +285,6 @@ module.exports = {
   Account: require('./account'),
   CloudControl: require('./cloudcontrol'),
   Grafana: require('./grafana'),
-  Panorama: require('./panorama')
+  Panorama: require('./panorama'),
+  ChimeSDKMeetings: require('./chimesdkmeetings')
 };

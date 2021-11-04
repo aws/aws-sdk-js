@@ -108,11 +108,11 @@ declare class Connect extends Service {
    */
   createInstance(callback?: (err: AWSError, data: Connect.Types.CreateInstanceResponse) => void): Request<Connect.Types.CreateInstanceResponse, AWSError>;
   /**
-   * Creates an AWS resource association with an Amazon Connect instance.
+   * Creates an Amazon Web Services resource association with an Amazon Connect instance.
    */
   createIntegrationAssociation(params: Connect.Types.CreateIntegrationAssociationRequest, callback?: (err: AWSError, data: Connect.Types.CreateIntegrationAssociationResponse) => void): Request<Connect.Types.CreateIntegrationAssociationResponse, AWSError>;
   /**
-   * Creates an AWS resource association with an Amazon Connect instance.
+   * Creates an Amazon Web Services resource association with an Amazon Connect instance.
    */
   createIntegrationAssociation(callback?: (err: AWSError, data: Connect.Types.CreateIntegrationAssociationResponse) => void): Request<Connect.Types.CreateIntegrationAssociationResponse, AWSError>;
   /**
@@ -139,6 +139,14 @@ declare class Connect extends Service {
    * Creates a new routing profile.
    */
   createRoutingProfile(callback?: (err: AWSError, data: Connect.Types.CreateRoutingProfileResponse) => void): Request<Connect.Types.CreateRoutingProfileResponse, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. Creates a security profile.
+   */
+  createSecurityProfile(params: Connect.Types.CreateSecurityProfileRequest, callback?: (err: AWSError, data: Connect.Types.CreateSecurityProfileResponse) => void): Request<Connect.Types.CreateSecurityProfileResponse, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. Creates a security profile.
+   */
+  createSecurityProfile(callback?: (err: AWSError, data: Connect.Types.CreateSecurityProfileResponse) => void): Request<Connect.Types.CreateSecurityProfileResponse, AWSError>;
   /**
    * Creates a use case for an integration association.
    */
@@ -180,11 +188,11 @@ declare class Connect extends Service {
    */
   deleteInstance(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes an AWS resource association from an Amazon Connect instance. The association must not have any use cases associated with it.
+   * Deletes an Amazon Web Services resource association from an Amazon Connect instance. The association must not have any use cases associated with it.
    */
   deleteIntegrationAssociation(params: Connect.Types.DeleteIntegrationAssociationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes an AWS resource association from an Amazon Connect instance. The association must not have any use cases associated with it.
+   * Deletes an Amazon Web Services resource association from an Amazon Connect instance. The association must not have any use cases associated with it.
    */
   deleteIntegrationAssociation(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -195,6 +203,14 @@ declare class Connect extends Service {
    * Deletes a quick connect.
    */
   deleteQuickConnect(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. Deletes a security profile.
+   */
+  deleteSecurityProfile(params: Connect.Types.DeleteSecurityProfileRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. Deletes a security profile.
+   */
+  deleteSecurityProfile(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes a use case from an integration association.
    */
@@ -291,6 +307,14 @@ declare class Connect extends Service {
    * Describes the specified routing profile.
    */
   describeRoutingProfile(callback?: (err: AWSError, data: Connect.Types.DescribeRoutingProfileResponse) => void): Request<Connect.Types.DescribeRoutingProfileResponse, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. Gets basic information about the security profle.
+   */
+  describeSecurityProfile(params: Connect.Types.DescribeSecurityProfileRequest, callback?: (err: AWSError, data: Connect.Types.DescribeSecurityProfileResponse) => void): Request<Connect.Types.DescribeSecurityProfileResponse, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. Gets basic information about the security profle.
+   */
+  describeSecurityProfile(callback?: (err: AWSError, data: Connect.Types.DescribeSecurityProfileResponse) => void): Request<Connect.Types.DescribeSecurityProfileResponse, AWSError>;
   /**
    * Describes the specified user account. You can find the instance ID in the console (it’s the final part of the ARN). The console does not display the user IDs. Instead, list the users and note the IDs provided in the output.
    */
@@ -476,11 +500,11 @@ declare class Connect extends Service {
    */
   listInstances(callback?: (err: AWSError, data: Connect.Types.ListInstancesResponse) => void): Request<Connect.Types.ListInstancesResponse, AWSError>;
   /**
-   * Provides summary information about the AWS resource associations for the specified Amazon Connect instance.
+   * Provides summary information about the Amazon Web Services resource associations for the specified Amazon Connect instance.
    */
   listIntegrationAssociations(params: Connect.Types.ListIntegrationAssociationsRequest, callback?: (err: AWSError, data: Connect.Types.ListIntegrationAssociationsResponse) => void): Request<Connect.Types.ListIntegrationAssociationsResponse, AWSError>;
   /**
-   * Provides summary information about the AWS resource associations for the specified Amazon Connect instance.
+   * Provides summary information about the Amazon Web Services resource associations for the specified Amazon Connect instance.
    */
   listIntegrationAssociations(callback?: (err: AWSError, data: Connect.Types.ListIntegrationAssociationsResponse) => void): Request<Connect.Types.ListIntegrationAssociationsResponse, AWSError>;
   /**
@@ -564,11 +588,19 @@ declare class Connect extends Service {
    */
   listSecurityKeys(callback?: (err: AWSError, data: Connect.Types.ListSecurityKeysResponse) => void): Request<Connect.Types.ListSecurityKeysResponse, AWSError>;
   /**
-   * Provides summary information about the security profiles for the specified Amazon Connect instance. For more information about security profiles, see Security Profiles in the Amazon Connect Administrator Guide.
+   * This API is in preview release for Amazon Connect and is subject to change. Lists the permissions granted to a security profile.
+   */
+  listSecurityProfilePermissions(params: Connect.Types.ListSecurityProfilePermissionsRequest, callback?: (err: AWSError, data: Connect.Types.ListSecurityProfilePermissionsResponse) => void): Request<Connect.Types.ListSecurityProfilePermissionsResponse, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. Lists the permissions granted to a security profile.
+   */
+  listSecurityProfilePermissions(callback?: (err: AWSError, data: Connect.Types.ListSecurityProfilePermissionsResponse) => void): Request<Connect.Types.ListSecurityProfilePermissionsResponse, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. Provides summary information about the security profiles for the specified Amazon Connect instance. For more information about security profiles, see Security Profiles in the Amazon Connect Administrator Guide.
    */
   listSecurityProfiles(params: Connect.Types.ListSecurityProfilesRequest, callback?: (err: AWSError, data: Connect.Types.ListSecurityProfilesResponse) => void): Request<Connect.Types.ListSecurityProfilesResponse, AWSError>;
   /**
-   * Provides summary information about the security profiles for the specified Amazon Connect instance. For more information about security profiles, see Security Profiles in the Amazon Connect Administrator Guide.
+   * This API is in preview release for Amazon Connect and is subject to change. Provides summary information about the security profiles for the specified Amazon Connect instance. For more information about security profiles, see Security Profiles in the Amazon Connect Administrator Guide.
    */
   listSecurityProfiles(callback?: (err: AWSError, data: Connect.Types.ListSecurityProfilesResponse) => void): Request<Connect.Types.ListSecurityProfilesResponse, AWSError>;
   /**
@@ -844,6 +876,14 @@ declare class Connect extends Service {
    */
   updateRoutingProfileQueues(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * This API is in preview release for Amazon Connect and is subject to change. Updates a security profile.
+   */
+  updateSecurityProfile(params: Connect.Types.UpdateSecurityProfileRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. Updates a security profile.
+   */
+  updateSecurityProfile(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Assigns the specified hierarchy group to the specified user.
    */
   updateUserHierarchy(params: Connect.Types.UpdateUserHierarchyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -935,7 +975,7 @@ declare namespace Connect {
      */
     State?: AgentStatusState;
     /**
-     * One or more tags.
+     * The tags used to organize, track, or control access for this resource.
      */
     Tags?: TagMap;
   }
@@ -1206,7 +1246,7 @@ declare namespace Connect {
      */
     DisplayOrder?: AgentStatusOrderNumber;
     /**
-     * One or more tags.
+     * The tags used to organize, track, or control access for this resource.
      */
     Tags?: TagMap;
   }
@@ -1278,7 +1318,7 @@ declare namespace Connect {
      */
     Config: HoursOfOperationConfigList;
     /**
-     * One or more tags.
+     * The tags used to organize, track, or control access for this resource.
      */
     Tags?: TagMap;
   }
@@ -1354,7 +1394,7 @@ declare namespace Connect {
      */
     SourceType?: SourceType;
     /**
-     * One or more tags.
+     * The tags used to organize, track, or control access for this resource.
      */
     Tags?: TagMap;
   }
@@ -1398,7 +1438,7 @@ declare namespace Connect {
      */
     QuickConnectIds?: QuickConnectsList;
     /**
-     * One or more tags.
+     * The tags used to organize, track, or control access for this resource.
      */
     Tags?: TagMap;
   }
@@ -1430,7 +1470,7 @@ declare namespace Connect {
      */
     QuickConnectConfig: QuickConnectConfig;
     /**
-     * One or more tags.
+     * The tags used to organize, track, or control access for this resource.
      */
     Tags?: TagMap;
   }
@@ -1484,6 +1524,38 @@ declare namespace Connect {
      */
     RoutingProfileId?: RoutingProfileId;
   }
+  export interface CreateSecurityProfileRequest {
+    /**
+     * The name of the security profile.
+     */
+    SecurityProfileName: SecurityProfileName;
+    /**
+     * The description of the security profile.
+     */
+    Description?: SecurityProfileDescription;
+    /**
+     * Permissions assigned to the security profile.
+     */
+    Permissions?: PermissionsList;
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The tags used to organize, track, or control access for this resource.
+     */
+    Tags?: TagMap;
+  }
+  export interface CreateSecurityProfileResponse {
+    /**
+     * The identifier for the security profle.
+     */
+    SecurityProfileId?: SecurityProfileId;
+    /**
+     * The Amazon Resource Name (ARN) for the security profile.
+     */
+    SecurityProfileArn?: ARN;
+  }
   export interface CreateUseCaseRequest {
     /**
      * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
@@ -1498,7 +1570,7 @@ declare namespace Connect {
      */
     UseCaseType: UseCaseType;
     /**
-     * One or more tags.
+     * The tags used to organize, track, or control access for this resource.
      */
     Tags?: TagMap;
   }
@@ -1677,6 +1749,16 @@ declare namespace Connect {
      */
     QuickConnectId: QuickConnectId;
   }
+  export interface DeleteSecurityProfileRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The identifier for the security profle.
+     */
+    SecurityProfileId: SecurityProfileId;
+  }
   export interface DeleteUseCaseRequest {
     /**
      * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
@@ -1854,6 +1936,22 @@ declare namespace Connect {
      * The routing profile.
      */
     RoutingProfile?: RoutingProfile;
+  }
+  export interface DescribeSecurityProfileRequest {
+    /**
+     * The identifier for the security profle.
+     */
+    SecurityProfileId: SecurityProfileId;
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     */
+    InstanceId: InstanceId;
+  }
+  export interface DescribeSecurityProfileResponse {
+    /**
+     * The security profile.
+     */
+    SecurityProfile?: SecurityProfile;
   }
   export interface DescribeUserHierarchyGroupRequest {
     /**
@@ -2347,7 +2445,7 @@ declare namespace Connect {
      */
     Config?: HoursOfOperationConfigList;
     /**
-     * One or more tags.
+     * The tags used to organize, track, or control access for this resource.
      */
     Tags?: TagMap;
   }
@@ -2816,7 +2914,7 @@ declare namespace Connect {
      */
     InstanceId: InstanceId;
     /**
-     * 
+     * The type of integration.
      */
     IntegrationType?: IntegrationType;
     /**
@@ -2854,7 +2952,7 @@ declare namespace Connect {
   }
   export interface ListLambdaFunctionsResponse {
     /**
-     * The Lambdafunction ARNs associated with the specified instance.
+     * The Lambda function ARNs associated with the specified instance.
      */
     LambdaFunctions?: FunctionArnsList;
     /**
@@ -3102,6 +3200,34 @@ declare namespace Connect {
      */
     NextToken?: NextToken;
   }
+  export interface ListSecurityProfilePermissionsRequest {
+    /**
+     * The identifier for the security profle.
+     */
+    SecurityProfileId: SecurityProfileId;
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of results to return per page.
+     */
+    MaxResults?: MaxResult1000;
+  }
+  export interface ListSecurityProfilePermissionsResponse {
+    /**
+     * The permissions granted to the security profile.
+     */
+    Permissions?: PermissionsList;
+    /**
+     * If there are additional results, this is the token for the next set of results.
+     */
+    NextToken?: NextToken;
+  }
   export interface ListSecurityProfilesRequest {
     /**
      * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
@@ -3262,6 +3388,7 @@ declare namespace Connect {
   export type ParticipantId = string;
   export type ParticipantToken = string;
   export type Password = string;
+  export type PermissionsList = SecurityProfilePermission[];
   export type PhoneNumber = string;
   export type PhoneNumberCountryCode = "AF"|"AL"|"DZ"|"AS"|"AD"|"AO"|"AI"|"AQ"|"AG"|"AR"|"AM"|"AW"|"AU"|"AT"|"AZ"|"BS"|"BH"|"BD"|"BB"|"BY"|"BE"|"BZ"|"BJ"|"BM"|"BT"|"BO"|"BA"|"BW"|"BR"|"IO"|"VG"|"BN"|"BG"|"BF"|"BI"|"KH"|"CM"|"CA"|"CV"|"KY"|"CF"|"TD"|"CL"|"CN"|"CX"|"CC"|"CO"|"KM"|"CK"|"CR"|"HR"|"CU"|"CW"|"CY"|"CZ"|"CD"|"DK"|"DJ"|"DM"|"DO"|"TL"|"EC"|"EG"|"SV"|"GQ"|"ER"|"EE"|"ET"|"FK"|"FO"|"FJ"|"FI"|"FR"|"PF"|"GA"|"GM"|"GE"|"DE"|"GH"|"GI"|"GR"|"GL"|"GD"|"GU"|"GT"|"GG"|"GN"|"GW"|"GY"|"HT"|"HN"|"HK"|"HU"|"IS"|"IN"|"ID"|"IR"|"IQ"|"IE"|"IM"|"IL"|"IT"|"CI"|"JM"|"JP"|"JE"|"JO"|"KZ"|"KE"|"KI"|"KW"|"KG"|"LA"|"LV"|"LB"|"LS"|"LR"|"LY"|"LI"|"LT"|"LU"|"MO"|"MK"|"MG"|"MW"|"MY"|"MV"|"ML"|"MT"|"MH"|"MR"|"MU"|"YT"|"MX"|"FM"|"MD"|"MC"|"MN"|"ME"|"MS"|"MA"|"MZ"|"MM"|"NA"|"NR"|"NP"|"NL"|"AN"|"NC"|"NZ"|"NI"|"NE"|"NG"|"NU"|"KP"|"MP"|"NO"|"OM"|"PK"|"PW"|"PA"|"PG"|"PY"|"PE"|"PH"|"PN"|"PL"|"PT"|"PR"|"QA"|"CG"|"RE"|"RO"|"RU"|"RW"|"BL"|"SH"|"KN"|"LC"|"MF"|"PM"|"VC"|"WS"|"SM"|"ST"|"SA"|"SN"|"RS"|"SC"|"SL"|"SG"|"SX"|"SK"|"SI"|"SB"|"SO"|"ZA"|"KR"|"ES"|"LK"|"SD"|"SR"|"SJ"|"SZ"|"SE"|"CH"|"SY"|"TW"|"TJ"|"TZ"|"TH"|"TG"|"TK"|"TO"|"TT"|"TN"|"TR"|"TM"|"TC"|"TV"|"VI"|"UG"|"UA"|"AE"|"GB"|"US"|"UY"|"UZ"|"VU"|"VA"|"VE"|"VN"|"WF"|"EH"|"YE"|"ZM"|"ZW"|string;
   export type PhoneNumberCountryCodes = PhoneNumberCountryCode[];
@@ -3351,7 +3478,7 @@ declare namespace Connect {
      */
     Status?: QueueStatus;
     /**
-     * One or more tags.
+     * The tags used to organize, track, or control access for this resource.
      */
     Tags?: TagMap;
   }
@@ -3424,7 +3551,7 @@ declare namespace Connect {
      */
     QuickConnectConfig?: QuickConnectConfig;
     /**
-     * One or more tags.
+     * The tags used to organize, track, or control access for this resource.
      */
     Tags?: TagMap;
   }
@@ -3634,9 +3761,37 @@ declare namespace Connect {
     CreationTime?: timestamp;
   }
   export type SecurityKeysList = SecurityKey[];
+  export interface SecurityProfile {
+    /**
+     * The identifier for the security profile.
+     */
+    Id?: SecurityProfileId;
+    /**
+     * The organization resource identifier for the security profile.
+     */
+    OrganizationResourceId?: InstanceId;
+    /**
+     * The Amazon Resource Name (ARN) for the secruity profile.
+     */
+    Arn?: ARN;
+    /**
+     * The name for the security profile.
+     */
+    SecurityProfileName?: SecurityProfileName;
+    /**
+     * The description of the security profile.
+     */
+    Description?: SecurityProfileDescription;
+    /**
+     * The tags used to organize, track, or control access for this resource.
+     */
+    Tags?: TagMap;
+  }
+  export type SecurityProfileDescription = string;
   export type SecurityProfileId = string;
   export type SecurityProfileIds = SecurityProfileId[];
   export type SecurityProfileName = string;
+  export type SecurityProfilePermission = string;
   export interface SecurityProfileSummary {
     /**
      * The identifier of the security profile.
@@ -4043,7 +4198,7 @@ declare namespace Connect {
      */
     InstanceId: InstanceId;
     /**
-     * The type of attribute.  Only allowlisted customers can consume USE_CUSTOM_TTS_VOICES. To access this feature, contact AWS Support for allowlisting. 
+     * The type of attribute.  Only allowlisted customers can consume USE_CUSTOM_TTS_VOICES. To access this feature, contact Amazon Web Services Support for allowlisting. 
      */
     AttributeType: InstanceAttributeType;
     /**
@@ -4232,6 +4387,24 @@ declare namespace Connect {
      * The queues to be updated for this routing profile. Queues must first be associated to the routing profile. You can do this using AssociateRoutingProfileQueues.
      */
     QueueConfigs: RoutingProfileQueueConfigList;
+  }
+  export interface UpdateSecurityProfileRequest {
+    /**
+     * The description of the security profile.
+     */
+    Description?: SecurityProfileDescription;
+    /**
+     * The permissions granted to a security profile.
+     */
+    Permissions?: PermissionsList;
+    /**
+     * The identifier for the security profle.
+     */
+    SecurityProfileId: SecurityProfileId;
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     */
+    InstanceId: InstanceId;
   }
   export interface UpdateUserHierarchyGroupNameRequest {
     /**
