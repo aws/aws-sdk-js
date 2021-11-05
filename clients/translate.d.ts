@@ -12,11 +12,11 @@ declare class Translate extends Service {
   constructor(options?: Translate.Types.ClientConfiguration)
   config: Config & Translate.Types.ClientConfiguration;
   /**
-   * Creates a parallel data resource in Amazon Translate by importing an input file from Amazon S3. Parallel data files contain examples of source phrases and their translations from your translation memory. By adding parallel data, you can influence the style, tone, and word choice in your translation output.
+   * Creates a parallel data resource in Amazon Translate by importing an input file from Amazon S3. Parallel data files contain examples that show how you want segments of text to be translated. By adding parallel data, you can influence the style, tone, and word choice in your translation output.
    */
   createParallelData(params: Translate.Types.CreateParallelDataRequest, callback?: (err: AWSError, data: Translate.Types.CreateParallelDataResponse) => void): Request<Translate.Types.CreateParallelDataResponse, AWSError>;
   /**
-   * Creates a parallel data resource in Amazon Translate by importing an input file from Amazon S3. Parallel data files contain examples of source phrases and their translations from your translation memory. By adding parallel data, you can influence the style, tone, and word choice in your translation output.
+   * Creates a parallel data resource in Amazon Translate by importing an input file from Amazon S3. Parallel data files contain examples that show how you want segments of text to be translated. By adding parallel data, you can influence the style, tone, and word choice in your translation output.
    */
   createParallelData(callback?: (err: AWSError, data: Translate.Types.CreateParallelDataResponse) => void): Request<Translate.Types.CreateParallelDataResponse, AWSError>;
   /**
@@ -36,11 +36,11 @@ declare class Translate extends Service {
    */
   deleteTerminology(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Gets the properties associated with an asycnhronous batch translation job including name, ID, status, source and target languages, input/output S3 buckets, and so on.
+   * Gets the properties associated with an asynchronous batch translation job including name, ID, status, source and target languages, input/output S3 buckets, and so on.
    */
   describeTextTranslationJob(params: Translate.Types.DescribeTextTranslationJobRequest, callback?: (err: AWSError, data: Translate.Types.DescribeTextTranslationJobResponse) => void): Request<Translate.Types.DescribeTextTranslationJobResponse, AWSError>;
   /**
-   * Gets the properties associated with an asycnhronous batch translation job including name, ID, status, source and target languages, input/output S3 buckets, and so on.
+   * Gets the properties associated with an asynchronous batch translation job including name, ID, status, source and target languages, input/output S3 buckets, and so on.
    */
   describeTextTranslationJob(callback?: (err: AWSError, data: Translate.Types.DescribeTextTranslationJobResponse) => void): Request<Translate.Types.DescribeTextTranslationJobResponse, AWSError>;
   /**
@@ -227,7 +227,7 @@ declare namespace Translate {
      */
     ParallelDataProperties?: ParallelDataProperties;
     /**
-     * The location of the most recent parallel data input file that was successfully imported into Amazon Translate. The location is returned as a presigned URL that has a 30 minute expiration.
+     * The Amazon S3 location of the most recent parallel data input file that was successfully imported into Amazon Translate. The location is returned as a presigned URL that has a 30 minute expiration.  Amazon Translate doesn't scan parallel data input files for the risk of CSV injection attacks.  CSV injection occurs when a .csv or .tsv file is altered so that a record contains malicious code. The record begins with a special character, such as =, +, -, or @. When the file is opened in a spreadsheet program, the program might interpret the record as a formula and run the code within it. Before you download a parallel data input file from Amazon S3, ensure that you recognize the file and trust its creator. 
      */
     DataLocation?: ParallelDataDataLocation;
     /**
@@ -294,7 +294,7 @@ declare namespace Translate {
      */
     S3Uri: S3Uri;
     /**
-     * Describes the format of the data that you submit to Amazon Translate as input. You can specify one of the following multipurpose internet mail extension (MIME) types:    text/html: The input data consists of one or more HTML files. Amazon Translate translates only the text that resides in the html element in each file.    text/plain: The input data consists of one or more unformatted text files. Amazon Translate translates every character in this type of input.    application/vnd.openxmlformats-officedocument.wordprocessingml.document: The input data consists of one or more Word documents (.docx).    application/vnd.openxmlformats-officedocument.presentationml.presentation: The input data consists of one or more PowerPoint Presentation files (.pptx).    application/vnd.openxmlformats-officedocument.spreadsheetml.sheet: The input data consists of one or more Excel Workbook files (.xlsx).    If you structure your input data as HTML, ensure that you set this parameter to text/html. By doing so, you cut costs by limiting the translation to the contents of the html element in each file. Otherwise, if you set this parameter to text/plain, your costs will cover the translation of every character. 
+     * Describes the format of the data that you submit to Amazon Translate as input. You can specify one of the following multipurpose internet mail extension (MIME) types:    text/html: The input data consists of one or more HTML files. Amazon Translate translates only the text that resides in the html element in each file.    text/plain: The input data consists of one or more unformatted text files. Amazon Translate translates every character in this type of input.    application/vnd.openxmlformats-officedocument.wordprocessingml.document: The input data consists of one or more Word documents (.docx).    application/vnd.openxmlformats-officedocument.presentationml.presentation: The input data consists of one or more PowerPoint Presentation files (.pptx).    application/vnd.openxmlformats-officedocument.spreadsheetml.sheet: The input data consists of one or more Excel Workbook files (.xlsx).    application/x-xliff+xml: The input data consists of one or more XML Localization Interchange File Format (XLIFF) files (.xlf). Amazon Translate supports only XLIFF version 1.2.    If you structure your input data as HTML, ensure that you set this parameter to text/html. By doing so, you cut costs by limiting the translation to the contents of the html element in each file. Otherwise, if you set this parameter to text/plain, your costs will cover the translation of every character. 
      */
     ContentType: ContentType;
   }
@@ -378,7 +378,7 @@ declare namespace Translate {
      */
     TextTranslationJobPropertiesList?: TextTranslationJobPropertiesList;
     /**
-     * The token to use to retreive the next page of results. This value is null when there are no more results to return.
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
      */
     NextToken?: NextToken;
   }
@@ -391,6 +391,7 @@ declare namespace Translate {
      * The URI of the S3 folder that contains a translation job's output file. The folder must be in the same Region as the API endpoint that you are calling.
      */
     S3Uri: S3Uri;
+    EncryptionKey?: EncryptionKey;
   }
   export type ParallelDataArn = string;
   export interface ParallelDataConfig {
@@ -409,7 +410,7 @@ declare namespace Translate {
      */
     RepositoryType: String;
     /**
-     * The Amazon S3 location of the parallel data input file. The location is returned as a presigned URL to that has a 30 minute expiration.
+     * The Amazon S3 location of the parallel data input file. The location is returned as a presigned URL to that has a 30 minute expiration.  Amazon Translate doesn't scan parallel data input files for the risk of CSV injection attacks.  CSV injection occurs when a .csv or .tsv file is altered so that a record contains malicious code. The record begins with a special character, such as =, +, -, or @. When the file is opened in a spreadsheet program, the program might interpret the record as a formula and run the code within it. Before you download a parallel data input file from Amazon S3, ensure that you recognize the file and trust its creator. 
      */
     Location: String;
   }
@@ -500,7 +501,7 @@ declare namespace Translate {
      */
     OutputDataConfig: OutputDataConfig;
     /**
-     * The Amazon Resource Name (ARN) of an AWS Identity Access and Management (IAM) role that grants Amazon Translate read access to your input data. For more nformation, see identity-and-access-management.
+     * The Amazon Resource Name (ARN) of an AWS Identity Access and Management (IAM) role that grants Amazon Translate read access to your input data. For more information, see identity-and-access-management.
      */
     DataAccessRoleArn: IamRoleArn;
     /**
@@ -512,11 +513,11 @@ declare namespace Translate {
      */
     TargetLanguageCodes: TargetLanguageCodeStringList;
     /**
-     * The name of the terminology to use in the batch translation job. For a list of available terminologies, use the ListTerminologies operation.
+     * The name of a custom terminology resource to add to the translation job. This resource lists examples source terms and the desired translation for each term. This parameter accepts only one custom terminology resource. For a list of available custom terminology resources, use the ListTerminologies operation. For more information, see how-custom-terminology.
      */
     TerminologyNames?: ResourceNameList;
     /**
-     * The names of the parallel data resources to use in the batch translation job. For a list of available parallel data resources, use the ListParallelData operation.
+     * The name of a parallel data resource to add to the translation job. This resource consists of examples that show how you want segments of text to be translated. When you add parallel data to a translation job, you create an Active Custom Translation job.  This parameter accepts only one parallel data resource.  Active Custom Translation jobs are priced at a higher rate than other jobs that don't use parallel data. For more information, see Amazon Translate pricing.  For a list of available parallel data resources, use the ListParallelData operation. For more information, see customizing-translations-parallel-data.
      */
     ParallelDataNames?: ResourceNameList;
     /**
@@ -681,7 +682,7 @@ declare namespace Translate {
      */
     ParallelDataNames?: ResourceNameList;
     /**
-     * An explanation of any errors that may have occured during the translation job.
+     * An explanation of any errors that may have occurred during the translation job.
      */
     Message?: UnboundedLengthString;
     /**

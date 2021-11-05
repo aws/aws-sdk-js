@@ -29759,6 +29759,11 @@
           "documentation": "<p>The carrier IP address associated with the network interface.</p>",
           "locationName": "carrierIp"
         },
+        "CustomerOwnedIp": {
+          "shape": "String",
+          "documentation": "<p>The customer-owned IP address associated with the network interface.</p>",
+          "locationName": "customerOwnedIp"
+        },
         "IpOwnerId": {
           "shape": "String",
           "documentation": "<p>The ID of the owner of the Elastic IP address.</p>",

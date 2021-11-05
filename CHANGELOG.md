@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1022.0-->
+<!--LATEST=2.1023.0-->
 <!--ENTRYINSERT-->
+
+## 2.1023.0
+* feature: EC2: DescribeInstances now returns customer-owned IP addresses for instances running on an AWS Outpost.
+* feature: Translate: This release enable customers to use their own KMS keys to encrypt output files when they submit a batch transform job.
 
 ## 2.1022.0
 * feature: ChimeSDKMeetings: The Amazon Chime SDK Meetings APIs allow software developers to create meetings and attendees for interactive audio, video, screen and content sharing in custom meeting applications which use the Amazon Chime SDK.

@@ -19034,6 +19034,10 @@ declare namespace EC2 {
      */
     CarrierIp?: String;
     /**
+     * The customer-owned IP address associated with the network interface.
+     */
+    CustomerOwnedIp?: String;
+    /**
      * The ID of the owner of the Elastic IP address.
      */
     IpOwnerId?: String;
