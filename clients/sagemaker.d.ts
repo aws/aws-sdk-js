@@ -2157,7 +2157,7 @@ declare namespace SageMaker {
   export type AgentVersions = AgentVersion[];
   export interface Alarm {
     /**
-     * 
+     * The name of a CloudWatch alarm in your account.
      */
     AlarmName?: AlarmName;
   }
@@ -2747,7 +2747,7 @@ declare namespace SageMaker {
   export type AutoMLSortOrder = "Ascending"|"Descending"|string;
   export interface AutoRollbackConfig {
     /**
-     * 
+     * List of CloudWatch alarms in your account that are configured to monitor metrics on an endpoint. If any alarms are tripped during a deployment, SageMaker rolls back the deployment.
      */
     Alarms?: AlarmList;
   }
@@ -2821,15 +2821,15 @@ declare namespace SageMaker {
   export type BlockedReason = string;
   export interface BlueGreenUpdatePolicy {
     /**
-     * 
+     * Defines the traffic routing strategy to shift traffic from the old fleet to the new fleet during an endpoint deployment.
      */
     TrafficRoutingConfiguration: TrafficRoutingConfig;
     /**
-     * 
+     * Additional waiting time in seconds after the completion of an endpoint deployment before terminating the old endpoint fleet. Default is 0.
      */
     TerminationWaitInSeconds?: TerminationWaitInSeconds;
     /**
-     * 
+     * Maximum execution timeout for the deployment. Note that the timeout value should be larger than the total waiting time specified in TerminationWaitInSeconds and WaitIntervalInSeconds.
      */
     MaximumExecutionTimeoutInSeconds?: MaximumExecutionTimeoutInSeconds;
   }
@@ -2883,11 +2883,11 @@ declare namespace SageMaker {
   export type CandidateSteps = AutoMLCandidateStep[];
   export interface CapacitySize {
     /**
-     * This API is not supported.
+     * Specifies the endpoint capacity type.    INSTANCE_COUNT: The endpoint activates based on the number of instances.    CAPACITY_PERCENT: The endpoint activates based on the specified percentage of capacity.  
      */
     Type: CapacitySizeType;
     /**
-     * 
+     * Defines the capacity size, either as a number of instances or a capacity percentage.
      */
     Value: CapacitySizeValue;
   }
@@ -3735,6 +3735,7 @@ declare namespace SageMaker {
      * The name of an endpoint configuration. For more information, see CreateEndpointConfig. 
      */
     EndpointConfigName: EndpointConfigName;
+    DeploymentConfig?: DeploymentConfig;
     /**
      * An array of key-value pairs. You can use tags to categorize your Amazon Web Services resources in different ways, for example, by purpose, owner, or environment. For more information, see Tagging Amazon Web Services Resources.
      */
@@ -5408,11 +5409,11 @@ declare namespace SageMaker {
   export type DeployedImages = DeployedImage[];
   export interface DeploymentConfig {
     /**
-     * 
+     * Update policy for a blue/green deployment. If this update policy is specified, SageMaker creates a new fleet during the deployment while maintaining the old fleet. SageMaker flips traffic to the new fleet according to the specified traffic routing configuration. Only one update policy should be used in the deployment configuration. If no update policy is specified, SageMaker uses a blue/green deployment strategy with all at once traffic shifting by default.
      */
     BlueGreenUpdatePolicy: BlueGreenUpdatePolicy;
     /**
-     * 
+     * Automatic rollback configuration for handling endpoint deployment failures and recovery.
      */
     AutoRollbackConfiguration?: AutoRollbackConfig;
   }
@@ -6270,6 +6271,10 @@ declare namespace SageMaker {
      * Returns the description of an endpoint configuration created using the  CreateEndpointConfig  API.
      */
     AsyncInferenceConfig?: AsyncInferenceConfig;
+    /**
+     * Returns the summary of an in-progress deployment. This field is only returned when the endpoint is creating or updating with a new endpoint configuration.
+     */
+    PendingDeploymentSummary?: PendingDeploymentSummary;
   }
   export interface DescribeExperimentRequest {
     /**
@@ -8842,11 +8847,11 @@ declare namespace SageMaker {
      */
     NumberOfHumanWorkersPerDataObject: NumberOfHumanWorkersPerDataObject;
     /**
-     * The amount of time that a worker has to complete a task.  If you create a custom labeling job, the maximum value for this parameter is 8 hours (28,800 seconds). If you create a labeling job using a built-in task type the maximum for this parameter depends on the task type you use:   For image and text labeling jobs, the maximum is 8 hours (28,800 seconds).   For 3D point cloud and video frame labeling jobs, the maximum is 7 days (604,800 seconds). If you want to change these limits, contact Amazon Web Services Support.  
+     * The amount of time that a worker has to complete a task.  If you create a custom labeling job, the maximum value for this parameter is 8 hours (28,800 seconds). If you create a labeling job using a built-in task type the maximum for this parameter depends on the task type you use:   For image and text labeling jobs, the maximum is 8 hours (28,800 seconds).   For 3D point cloud and video frame labeling jobs, the maximum is 30 days (2952,000 seconds) for non-AL mode. For most users, the maximum is also 30 days. If you want to change these limits, contact Amazon Web Services Support.  
      */
     TaskTimeLimitInSeconds: TaskTimeLimitInSeconds;
     /**
-     * The length of time that a task remains available for labeling by human workers. The default and maximum values for this parameter depend on the type of workforce you use.   If you choose the Amazon Mechanical Turk workforce, the maximum is 12 hours (43,200 seconds). The default is 6 hours (21,600 seconds).   If you choose a private or vendor workforce, the default value is 10 days (864,000 seconds). For most users, the maximum is also 10 days. If you want to change this limit, contact Amazon Web Services Support.  
+     * The length of time that a task remains available for labeling by human workers. The default and maximum values for this parameter depend on the type of workforce you use.   If you choose the Amazon Mechanical Turk workforce, the maximum is 12 hours (43,200 seconds). The default is 6 hours (21,600 seconds).   If you choose a private or vendor workforce, the default value is 30 days (2592,000 seconds) for non-AL mode. For most users, the maximum is also 30 days. If you want to change this limit, contact Amazon Web Services Support.  
      */
     TaskAvailabilityLifetimeInSeconds?: TaskAvailabilityLifetimeInSeconds;
     /**
@@ -13223,6 +13228,59 @@ declare namespace SageMaker {
   }
   export type ParentHyperParameterTuningJobs = ParentHyperParameterTuningJob[];
   export type Parents = Parent[];
+  export interface PendingDeploymentSummary {
+    /**
+     * The name of the endpoint configuration used in the deployment. 
+     */
+    EndpointConfigName: EndpointConfigName;
+    /**
+     * List of PendingProductionVariantSummary objects.
+     */
+    ProductionVariants?: PendingProductionVariantSummaryList;
+    /**
+     * The start time of the deployment.
+     */
+    StartTime?: Timestamp;
+  }
+  export interface PendingProductionVariantSummary {
+    /**
+     * The name of the variant.
+     */
+    VariantName: VariantName;
+    /**
+     * An array of DeployedImage objects that specify the Amazon EC2 Container Registry paths of the inference images deployed on instances of this ProductionVariant.
+     */
+    DeployedImages?: DeployedImages;
+    /**
+     * The weight associated with the variant.
+     */
+    CurrentWeight?: VariantWeight;
+    /**
+     * The requested weight for the variant in this deployment, as specified in the endpoint configuration for the endpoint. The value is taken from the request to the  CreateEndpointConfig  operation.
+     */
+    DesiredWeight?: VariantWeight;
+    /**
+     * The number of instances associated with the variant.
+     */
+    CurrentInstanceCount?: TaskCount;
+    /**
+     * The number of instances requested in this deployment, as specified in the endpoint configuration for the endpoint. The value is taken from the request to the  CreateEndpointConfig  operation.
+     */
+    DesiredInstanceCount?: TaskCount;
+    /**
+     * The type of instances associated with the variant.
+     */
+    InstanceType?: ProductionVariantInstanceType;
+    /**
+     * The size of the Elastic Inference (EI) instance to use for the production variant. EI instances provide on-demand GPU computing for inference. For more information, see Using Elastic Inference in Amazon SageMaker.
+     */
+    AcceleratorType?: ProductionVariantAcceleratorType;
+    /**
+     * The endpoint variant status which describes the current deployment stage status or operational status.
+     */
+    VariantStatus?: ProductionVariantStatusList;
+  }
+  export type PendingProductionVariantSummaryList = PendingProductionVariantSummary[];
   export interface Pipeline {
     /**
      * The Amazon Resource Name (ARN) of the pipeline.
@@ -13759,6 +13817,21 @@ declare namespace SageMaker {
   }
   export type ProductionVariantInstanceType = "ml.t2.medium"|"ml.t2.large"|"ml.t2.xlarge"|"ml.t2.2xlarge"|"ml.m4.xlarge"|"ml.m4.2xlarge"|"ml.m4.4xlarge"|"ml.m4.10xlarge"|"ml.m4.16xlarge"|"ml.m5.large"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.12xlarge"|"ml.m5.24xlarge"|"ml.m5d.large"|"ml.m5d.xlarge"|"ml.m5d.2xlarge"|"ml.m5d.4xlarge"|"ml.m5d.12xlarge"|"ml.m5d.24xlarge"|"ml.c4.large"|"ml.c4.xlarge"|"ml.c4.2xlarge"|"ml.c4.4xlarge"|"ml.c4.8xlarge"|"ml.p2.xlarge"|"ml.p2.8xlarge"|"ml.p2.16xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|"ml.c5.large"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.18xlarge"|"ml.c5d.large"|"ml.c5d.xlarge"|"ml.c5d.2xlarge"|"ml.c5d.4xlarge"|"ml.c5d.9xlarge"|"ml.c5d.18xlarge"|"ml.g4dn.xlarge"|"ml.g4dn.2xlarge"|"ml.g4dn.4xlarge"|"ml.g4dn.8xlarge"|"ml.g4dn.12xlarge"|"ml.g4dn.16xlarge"|"ml.r5.large"|"ml.r5.xlarge"|"ml.r5.2xlarge"|"ml.r5.4xlarge"|"ml.r5.12xlarge"|"ml.r5.24xlarge"|"ml.r5d.large"|"ml.r5d.xlarge"|"ml.r5d.2xlarge"|"ml.r5d.4xlarge"|"ml.r5d.12xlarge"|"ml.r5d.24xlarge"|"ml.inf1.xlarge"|"ml.inf1.2xlarge"|"ml.inf1.6xlarge"|"ml.inf1.24xlarge"|string;
   export type ProductionVariantList = ProductionVariant[];
+  export interface ProductionVariantStatus {
+    /**
+     * The endpoint variant status which describes the current deployment stage status or operational status.    Creating: Creating inference resources for the production variant.    Deleting: Terminating inference resources for the production variant.    Updating: Updating capacity for the production variant.    ActivatingTraffic: Turning on traffic for the production variant.    Baking: Waiting period to monitor the CloudWatch alarms in the automatic rollback configuration.  
+     */
+    Status: VariantStatus;
+    /**
+     * A message that describes the status of the production variant.
+     */
+    StatusMessage?: VariantStatusMessage;
+    /**
+     * The start time of the current status change.
+     */
+    StartTime?: Timestamp;
+  }
+  export type ProductionVariantStatusList = ProductionVariantStatus[];
   export interface ProductionVariantSummary {
     /**
      * The name of the variant.
@@ -13784,6 +13857,10 @@ declare namespace SageMaker {
      * The number of instances requested in the UpdateEndpointWeightsAndCapacities request. 
      */
     DesiredInstanceCount?: TaskCount;
+    /**
+     * The endpoint variant status which describes the current deployment stage status or operational status.
+     */
+    VariantStatus?: ProductionVariantStatusList;
   }
   export type ProductionVariantSummaryList = ProductionVariantSummary[];
   export interface ProfilerConfig {
@@ -14788,19 +14865,23 @@ declare namespace SageMaker {
   export type Timestamp = Date;
   export interface TrafficRoutingConfig {
     /**
-     * 
+     * Traffic routing strategy type.    ALL_AT_ONCE: Endpoint traffic shifts to the new fleet in a single step.     CANARY: Endpoint traffic shifts to the new fleet in two steps. The first step is the canary, which is a small portion of the traffic. The second step is the remainder of the traffic.     LINEAR: Endpoint traffic shifts to the new fleet in n steps of a configurable size.   
      */
     Type: TrafficRoutingConfigType;
     /**
-     * 
+     * The waiting time (in seconds) between incremental steps to turn on traffic on the new endpoint fleet.
      */
     WaitIntervalInSeconds: WaitIntervalInSeconds;
     /**
-     * 
+     * Batch size for the first step to turn on traffic on the new endpoint fleet. Value must be less than or equal to 50% of the variant's total instance count.
      */
     CanarySize?: CapacitySize;
+    /**
+     * Batch size for each step to turn on traffic on the new endpoint fleet. Value must be 10-50% of the variant's total instance count.
+     */
+    LinearStepSize?: CapacitySize;
   }
-  export type TrafficRoutingConfigType = "ALL_AT_ONCE"|"CANARY"|string;
+  export type TrafficRoutingConfigType = "ALL_AT_ONCE"|"CANARY"|"LINEAR"|string;
   export type TrainingEnvironmentKey = string;
   export type TrainingEnvironmentMap = {[key: string]: TrainingEnvironmentValue};
   export type TrainingEnvironmentValue = string;
@@ -15818,9 +15899,13 @@ declare namespace SageMaker {
      */
     ExcludeRetainedVariantProperties?: VariantPropertyList;
     /**
-     * The deployment configuration for the endpoint to be updated.
+     * The deployment configuration for an endpoint, which contains the desired deployment strategy and rollback configurations.
      */
     DeploymentConfig?: DeploymentConfig;
+    /**
+     * Specifies whether to reuse the last deployment configuration. The default value is false (the configuration is not reused).
+     */
+    RetainDeploymentConfig?: Boolean;
   }
   export interface UpdateEndpointOutput {
     /**
@@ -16317,6 +16402,8 @@ declare namespace SageMaker {
   }
   export type VariantPropertyList = VariantProperty[];
   export type VariantPropertyType = "DesiredInstanceCount"|"DesiredWeight"|"DataCaptureConfig"|string;
+  export type VariantStatus = "Creating"|"Updating"|"Deleting"|"ActivatingTraffic"|"Baking"|string;
+  export type VariantStatusMessage = string;
   export type VariantWeight = number;
   export type VersionedArnOrName = string;
   export type VolumeSizeInGB = number;

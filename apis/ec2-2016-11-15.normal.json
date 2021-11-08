@@ -25684,6 +25684,15 @@
       "max": 1000,
       "min": 200
     },
+    "GatewayAssociationState": {
+      "type": "string",
+      "enum": [
+        "associated",
+        "not-associated",
+        "associating",
+        "disassociating"
+      ]
+    },
     "GatewayType": {
       "type": "string",
       "enum": [
@@ -48654,7 +48663,7 @@
           "locationName": "coreNetworkAttachmentArn"
         },
         "GatewayAssociationState": {
-          "shape": "String",
+          "shape": "GatewayAssociationState",
           "documentation": "<p>The current state of the gateway association.</p>",
           "locationName": "gatewayAssociationState"
         },

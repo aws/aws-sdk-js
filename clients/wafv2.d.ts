@@ -380,7 +380,7 @@ declare namespace WAFV2 {
      */
     Action: ActionValue;
   }
-  export type ActionValue = "ALLOW"|"BLOCK"|"COUNT"|string;
+  export type ActionValue = "ALLOW"|"BLOCK"|"COUNT"|"CAPTCHA"|"EXCLUDED_AS_COUNT"|string;
   export interface All {
   }
   export interface AllQueryArguments {
@@ -438,6 +438,32 @@ declare namespace WAFV2 {
     PositionalConstraint: PositionalConstraint;
   }
   export type CapacityUnit = number;
+  export interface CaptchaAction {
+    /**
+     * Defines custom handling for the web request. For information about customizing web requests and responses, see Customizing web requests and responses in WAF in the WAF Developer Guide. 
+     */
+    CustomRequestHandling?: CustomRequestHandling;
+  }
+  export interface CaptchaConfig {
+    /**
+     * Determines how long a CAPTCHA token remains valid after the client successfully solves a CAPTCHA puzzle. 
+     */
+    ImmunityTimeProperty?: ImmunityTimeProperty;
+  }
+  export interface CaptchaResponse {
+    /**
+     * The HTTP response code indicating the status of the CAPTCHA token in the web request. If the token is missing, invalid, or expired, this code is 405 Method Not Allowed.
+     */
+    ResponseCode?: ResponseCode;
+    /**
+     * The time that the CAPTCHA puzzle was solved for the supplied token. 
+     */
+    SolveTimestamp?: SolveTimestamp;
+    /**
+     * The reason for failure, populated when the evaluation of the token fails.
+     */
+    FailureReason?: FailureReason;
+  }
   export interface CheckCapacityRequest {
     /**
      * Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, or an AppSync GraphQL API.  To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows:    CLI - Specify the Region when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.    API and SDKs - For all calls, use the Region endpoint us-east-1.   
@@ -609,6 +635,10 @@ declare namespace WAFV2 {
      * A map of custom response keys and content bodies. When you create a rule with a block action, you can send a custom response to the web request. You define these for the web ACL, and then use them in the rules and default actions that you define in the web ACL.  For information about customizing web requests and responses, see Customizing web requests and responses in WAF in the WAF Developer Guide.  For information about the limits on count and size for custom request and response settings, see WAF quotas in the WAF Developer Guide. 
      */
     CustomResponseBodies?: CustomResponseBodies;
+    /**
+     * Specifies how WAF should handle CAPTCHA evaluations for rules that don't have their own CaptchaConfig settings. If you don't specify this, WAF uses its default settings for CaptchaConfig. 
+     */
+    CaptchaConfig?: CaptchaConfig;
   }
   export interface CreateWebACLResponse {
     /**
@@ -843,11 +873,12 @@ declare namespace WAFV2 {
   export type EntityName = string;
   export interface ExcludedRule {
     /**
-     * The name of the rule to exclude.
+     * The name of the rule whose action you want to override to Count.
      */
     Name: EntityName;
   }
   export type ExcludedRules = ExcludedRule[];
+  export type FailureReason = "TOKEN_MISSING"|"TOKEN_EXPIRED"|string;
   export type FallbackBehavior = "MATCH"|"NO_MATCH"|string;
   export interface FieldToMatch {
     /**
@@ -915,7 +946,7 @@ declare namespace WAFV2 {
      */
     FirewallManagerStatement: FirewallManagerStatement;
     /**
-     * The override action to apply to the rules in a rule group. Used only for rule statements that reference a rule group, like RuleGroupReferenceStatement and ManagedRuleGroupStatement.  Set the override action to none to leave the rule actions in effect. Set it to count to only count matches, regardless of the rule action settings.  In a Rule, you must specify either this OverrideAction setting or the rule Action setting, but not both:   If the rule statement references a rule group, use this override action setting and not the action setting.    If the rule statement does not reference a rule group, use the rule action setting and not this rule override action setting.   
+     * The action to use in the place of the action that results from the rule group evaluation. Set the override action to none to leave the result of the rule group alone. Set it to count to override the result to count only.  You can only use this for rule statements that reference a rule group, like RuleGroupReferenceStatement and ManagedRuleGroupStatement.   This option is usually set to none. It does not affect how the rules in the rule group are evaluated. If you want the rules in the rule group to only count matches, do not use this and instead exclude those rules in your rule group reference statement settings.  
      */
     OverrideAction: OverrideAction;
     /**
@@ -1302,6 +1333,12 @@ declare namespace WAFV2 {
     ARN?: ResourceArn;
   }
   export type IPString = string;
+  export interface ImmunityTimeProperty {
+    /**
+     * The amount of time, in seconds, that a CAPTCHA token is valid. The default setting is 300.
+     */
+    ImmunityTime: TimeWindowSecond;
+  }
   export interface JsonBody {
     /**
      * The patterns to look for in the JSON body. WAF inspects the results of these pattern matches against the rule inspection criteria. 
@@ -1446,7 +1483,7 @@ declare namespace WAFV2 {
     /**
      * Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, or an AppSync GraphQL API.  To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows:    CLI - Specify the Region when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.    API and SDKs - For all calls, use the Region endpoint us-east-1.   
      */
-    Scope?: Scope;
+    Scope: Scope;
     /**
      * When you request a list of objects with a Limit setting, if the number of objects that are still available for retrieval exceeds the limit, WAF returns a NextMarker value in the response. To retrieve the next batch of objects, provide the marker from the prior call in your next request.
      */
@@ -1652,7 +1689,7 @@ declare namespace WAFV2 {
      */
     Version?: VersionKeyString;
     /**
-     * The rules whose actions are set to COUNT by the web ACL, regardless of the action that is set on the rule. This effectively excludes the rule from acting on web requests. 
+     * The rules in the referenced rule group whose actions are set to Count. When you exclude a rule, WAF evaluates it exactly as it would if the rule action setting were Count. This is a useful option for testing the rules in a rule group without modifying how they handle your web traffic.
      */
     ExcludedRules?: ExcludedRules;
     /**
@@ -1789,11 +1826,11 @@ declare namespace WAFV2 {
   }
   export interface OverrideAction {
     /**
-     * Override the rule action setting to count.
+     * Override the rule group evaluation result to count only.   This option is usually set to none. It does not affect how the rules in the rule group are evaluated. If you want the rules in the rule group to only count matches, do not use this and instead exclude those rules in your rule group reference statement settings.  
      */
     Count?: CountAction;
     /**
-     * Don't override the rule action setting.
+     * Don't override the rule group evaluation result. This is the most common setting.
      */
     None?: NoneAction;
   }
@@ -1975,6 +2012,7 @@ declare namespace WAFV2 {
   export type ResourceArn = string;
   export type ResourceArns = ResourceArn[];
   export type ResourceType = "APPLICATION_LOAD_BALANCER"|"API_GATEWAY"|"APPSYNC"|string;
+  export type ResponseCode = number;
   export type ResponseContent = string;
   export type ResponseContentType = "TEXT_PLAIN"|"TEXT_HTML"|"APPLICATION_JSON"|string;
   export type ResponseStatusCode = number;
@@ -1996,7 +2034,7 @@ declare namespace WAFV2 {
      */
     Action?: RuleAction;
     /**
-     * The override action to apply to the rules in a rule group. Used only for rule statements that reference a rule group, like RuleGroupReferenceStatement and ManagedRuleGroupStatement.  Set the override action to none to leave the rule actions in effect. Set it to count to only count matches, regardless of the rule action settings.  In a Rule, you must specify either this OverrideAction setting or the rule Action setting, but not both:   If the rule statement references a rule group, use this override action setting and not the action setting.    If the rule statement does not reference a rule group, use the rule action setting and not this rule override action setting.   
+     * The action to use in the place of the action that results from the rule group evaluation. Set the override action to none to leave the result of the rule group alone. Set it to count to override the result to count only.  You can only use this for rule statements that reference a rule group, like RuleGroupReferenceStatement and ManagedRuleGroupStatement.   This option is usually set to none. It does not affect how the rules in the rule group are evaluated. If you want the rules in the rule group to only count matches, do not use this and instead exclude those rules in your rule group reference statement settings.  
      */
     OverrideAction?: OverrideAction;
     /**
@@ -2007,6 +2045,10 @@ declare namespace WAFV2 {
      * Defines and enables Amazon CloudWatch metrics and web request sample collection. 
      */
     VisibilityConfig: VisibilityConfig;
+    /**
+     * Specifies how WAF should handle CAPTCHA evaluations. If you don't specify this, WAF uses the CAPTCHA configuration that's defined for the web ACL. 
+     */
+    CaptchaConfig?: CaptchaConfig;
   }
   export interface RuleAction {
     /**
@@ -2021,6 +2063,10 @@ declare namespace WAFV2 {
      * Instructs WAF to count the web request and allow it.
      */
     Count?: CountAction;
+    /**
+     * Instructs WAF to run a CAPTCHA check against the web request.
+     */
+    Captcha?: CaptchaAction;
   }
   export interface RuleGroup {
     /**
@@ -2074,7 +2120,7 @@ declare namespace WAFV2 {
      */
     ARN: ResourceArn;
     /**
-     * The names of rules that are in the referenced rule group, but that you want WAF to exclude from processing for this rule statement. 
+     * The rules in the referenced rule group whose actions are set to Count. When you exclude a rule, WAF evaluates it exactly as it would if the rule action setting were Count. This is a useful option for testing the rules in a rule group without modifying how they handle your web traffic.
      */
     ExcludedRules?: ExcludedRules;
   }
@@ -2129,7 +2175,7 @@ declare namespace WAFV2 {
      */
     Timestamp?: Timestamp;
     /**
-     * The action for the Rule that the request matched: ALLOW, BLOCK, or COUNT.
+     * The action for the Rule that the request matched: Allow, Block, or Count.
      */
     Action?: Action;
     /**
@@ -2148,6 +2194,10 @@ declare namespace WAFV2 {
      * Labels applied to the web request by matching rules. WAF applies fully qualified labels to matching web requests. A fully qualified label is the concatenation of a label namespace and a rule label. The rule's rule group or web ACL defines the label namespace.  For example, awswaf:111122223333:myRuleGroup:testRules:testNS1:testNS2:labelNameA or awswaf:managed:aws:managed-rule-set:header:encoding:utf8. 
      */
     Labels?: Labels;
+    /**
+     * The CAPTCHA response for the request.
+     */
+    CaptchaResponse?: CaptchaResponse;
   }
   export type SampledHTTPRequests = SampledHTTPRequest[];
   export type Scope = "CLOUDFRONT"|"REGIONAL"|string;
@@ -2183,6 +2233,7 @@ declare namespace WAFV2 {
      */
     TextTransformations: TextTransformations;
   }
+  export type SolveTimestamp = number;
   export interface SqliMatchStatement {
     /**
      * The part of a web request that you want WAF to inspect. For more information, see FieldToMatch. 
@@ -2316,6 +2367,7 @@ declare namespace WAFV2 {
     EndTime: Timestamp;
   }
   export type TimeWindowDay = number;
+  export type TimeWindowSecond = number;
   export type Timestamp = Date;
   export type URIString = string;
   export interface UntagResourceRequest {
@@ -2511,6 +2563,10 @@ declare namespace WAFV2 {
      * A map of custom response keys and content bodies. When you create a rule with a block action, you can send a custom response to the web request. You define these for the web ACL, and then use them in the rules and default actions that you define in the web ACL.  For information about customizing web requests and responses, see Customizing web requests and responses in WAF in the WAF Developer Guide.  For information about the limits on count and size for custom request and response settings, see WAF quotas in the WAF Developer Guide. 
      */
     CustomResponseBodies?: CustomResponseBodies;
+    /**
+     * Specifies how WAF should handle CAPTCHA evaluations for rules that don't have their own CaptchaConfig settings. If you don't specify this, WAF uses its default settings for CaptchaConfig. 
+     */
+    CaptchaConfig?: CaptchaConfig;
   }
   export interface UpdateWebACLResponse {
     /**
@@ -2600,6 +2656,10 @@ declare namespace WAFV2 {
      * A map of custom response keys and content bodies. When you create a rule with a block action, you can send a custom response to the web request. You define these for the web ACL, and then use them in the rules and default actions that you define in the web ACL.  For information about customizing web requests and responses, see Customizing web requests and responses in WAF in the WAF Developer Guide.  For information about the limits on count and size for custom request and response settings, see WAF quotas in the WAF Developer Guide. 
      */
     CustomResponseBodies?: CustomResponseBodies;
+    /**
+     * Specifies how WAF should handle CAPTCHA evaluations for rules that don't have their own CaptchaConfig settings. If you don't specify this, WAF uses its default settings for CaptchaConfig. 
+     */
+    CaptchaConfig?: CaptchaConfig;
   }
   export type WebACLSummaries = WebACLSummary[];
   export interface WebACLSummary {

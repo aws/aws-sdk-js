@@ -110,7 +110,7 @@ declare namespace ChimeSDKMeetings {
     /**
      * The Amazon Chime SDK attendee ID.
      */
-    AttendeeId?: String;
+    AttendeeId?: GuidString;
     /**
      * The join token used by the Amazon Chime SDK attendee.
      */
@@ -122,7 +122,7 @@ declare namespace ChimeSDKMeetings {
     /**
      * The Amazon Chime SDK ID of the meeting to which you're adding attendees.
      */
-    MeetingId: String;
+    MeetingId: GuidString;
     /**
      * The attendee information, including attendees' IDs and join tokens.
      */
@@ -157,7 +157,7 @@ declare namespace ChimeSDKMeetings {
     /**
      * The unique ID of the meeting.
      */
-    MeetingId: String;
+    MeetingId: GuidString;
     /**
      * The Amazon Chime SDK external user ID. An idempotency token. Links the attendee to an identity managed by a builder application.
      */
@@ -182,9 +182,9 @@ declare namespace ChimeSDKMeetings {
      */
     ClientRequestToken: ClientRequestToken;
     /**
-     * The Region in which to create the meeting. Default: us-east-1.  Available values: af-south-1 , ap-northeast-1 , ap-northeast-2 , ap-south-1 , ap-southeast-1 , ap-southeast-2 , ca-central-1 , eu-central-1 , eu-north-1 , eu-south-1 , eu-west-1 , eu-west-2 , eu-west-3 , sa-east-1 , us-east-1 , us-east-2 , us-west-1 , us-west-2 . 
+     * The Region in which to create the meeting.  Available values: af-south-1 , ap-northeast-1 , ap-northeast-2 , ap-south-1 , ap-southeast-1 , ap-southeast-2 , ca-central-1 , eu-central-1 , eu-north-1 , eu-south-1 , eu-west-1 , eu-west-2 , eu-west-3 , sa-east-1 , us-east-1 , us-east-2 , us-west-1 , us-west-2 . 
      */
-    MediaRegion: String;
+    MediaRegion: MediaRegion;
     /**
      * Reserved.
      */
@@ -210,9 +210,9 @@ declare namespace ChimeSDKMeetings {
      */
     ClientRequestToken: ClientRequestToken;
     /**
-     * The Region in which to create the meeting. Default: us-east-1.
+     * The Region in which to create the meeting.
      */
-    MediaRegion: String;
+    MediaRegion: MediaRegion;
     /**
      * Reserved.
      */
@@ -249,17 +249,17 @@ declare namespace ChimeSDKMeetings {
     /**
      * The Amazon Chime SDK meeting ID.
      */
-    MeetingId: String;
+    MeetingId: GuidString;
     /**
      * The Amazon Chime SDK attendee ID.
      */
-    AttendeeId: String;
+    AttendeeId: GuidString;
   }
   export interface DeleteMeetingRequest {
     /**
      * The Amazon Chime SDK meeting ID.
      */
-    MeetingId: String;
+    MeetingId: GuidString;
   }
   export interface EngineTranscribeMedicalSettings {
     /**
@@ -311,11 +311,11 @@ declare namespace ChimeSDKMeetings {
     /**
      * The Amazon Chime SDK meeting ID.
      */
-    MeetingId: String;
+    MeetingId: GuidString;
     /**
      * The Amazon Chime SDK attendee ID.
      */
-    AttendeeId: String;
+    AttendeeId: GuidString;
   }
   export interface GetAttendeeResponse {
     /**
@@ -327,7 +327,7 @@ declare namespace ChimeSDKMeetings {
     /**
      * The Amazon Chime SDK meeting ID.
      */
-    MeetingId: String;
+    MeetingId: GuidString;
   }
   export interface GetMeetingResponse {
     /**
@@ -341,7 +341,7 @@ declare namespace ChimeSDKMeetings {
     /**
      * The Amazon Chime SDK meeting ID.
      */
-    MeetingId: String;
+    MeetingId: GuidString;
     /**
      * The token to use to retrieve the next page of results.
      */
@@ -395,6 +395,7 @@ declare namespace ChimeSDKMeetings {
      */
     EventIngestionUrl?: String;
   }
+  export type MediaRegion = string;
   export interface Meeting {
     /**
      * The Amazon Chime SDK meeting ID.
@@ -411,7 +412,7 @@ declare namespace ChimeSDKMeetings {
     /**
      * The Region in which you create the meeting. Available values: af-south-1, ap-northeast-1, ap-northeast-2, ap-south-1, ap-southeast-1, ap-southeast-2, ca-central-1, eu-central-1, eu-north-1, eu-south-1, eu-west-1, eu-west-2, eu-west-3, sa-east-1, us-east-1, us-east-2, us-west-1, us-west-2.
      */
-    MediaRegion?: String;
+    MediaRegion?: MediaRegion;
     /**
      * The media placement for the meeting.
      */
@@ -436,7 +437,7 @@ declare namespace ChimeSDKMeetings {
     /**
      * The unique ID of the meeting being transcribed.
      */
-    MeetingId: String;
+    MeetingId: GuidString;
     /**
      * The configuration for the current transcription operation. Must contain EngineTranscribeSettings or EngineTranscribeMedicalSettings.
      */
@@ -446,7 +447,7 @@ declare namespace ChimeSDKMeetings {
     /**
      * The unique ID of the meeting for which you stop transcription.
      */
-    MeetingId: String;
+    MeetingId: GuidString;
   }
   export type String = string;
   export type TranscribeLanguageCode = "en-US"|"en-GB"|"es-US"|"fr-CA"|"fr-FR"|"en-AU"|"it-IT"|"de-DE"|"pt-BR"|"ja-JP"|"ko-KR"|"zh-CN"|string;

@@ -16431,6 +16431,7 @@ declare namespace EC2 {
   }
   export type FreeTierEligibleFlag = boolean;
   export type GVCDMaxResults = number;
+  export type GatewayAssociationState = "associated"|"not-associated"|"associating"|"disassociating"|string;
   export type GatewayType = "ipsec.1"|string;
   export interface GetAssociatedEnclaveCertificateIamRolesRequest {
     /**
@@ -30281,7 +30282,7 @@ declare namespace EC2 {
     /**
      * The current state of the gateway association.
      */
-    GatewayAssociationState?: String;
+    GatewayAssociationState?: GatewayAssociationState;
     /**
      * The VPN connection options.
      */

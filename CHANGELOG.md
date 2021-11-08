@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1023.0-->
+<!--LATEST=2.1024.0-->
 <!--ENTRYINSERT-->
+
+## 2.1024.0
+* feature: ChimeSDKMeetings: Updated format validation for ids and regions.
+* feature: EC2: This release adds internal validation on the GatewayAssociationState field
+* feature: SageMaker: SageMaker CreateEndpoint and UpdateEndpoint APIs now support additional deployment configuration to manage traffic shifting options and automatic rollback monitoring. DescribeEndpoint now shows new in-progress deployment details with stage status.
+* feature: WAFV2: You can now configure rules to run a CAPTCHA check against web requests and, as needed, send a CAPTCHA challenge to the client.
 
 ## 2.1023.0
 * feature: EC2: DescribeInstances now returns customer-owned IP addresses for instances running on an AWS Outpost.
