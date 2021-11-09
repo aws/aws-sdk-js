@@ -81,8 +81,10 @@
     },
 
     "dualstack-*/s3": "dualstackLegacy",
+    "dualstack-cn-*/s3": "dualstackLegacyCn",
     "dualstack-fips-*/s3": "dualstackFipsLegacy",
     "dualstack-*/s3-control": "dualstackLegacy",
+    "dualstack-cn-*/s3-control": "dualstackLegacyCn",
     "dualstack-fips-*/s3-control": "dualstackFipsLegacy",
 
     "fips-*/api.ecr": "fips.api.ecr",
@@ -182,6 +184,9 @@
     },
     "dualstackLegacy": {
       "endpoint": "{service}.dualstack.{region}.amazonaws.com"
+    },
+    "dualstackLegacyCn": {
+      "endpoint": "{service}.dualstack.{region}.amazonaws.com.cn"
     },
     "dualstackFipsLegacy": {
       "endpoint": "{service}-fips.dualstack.{region}.amazonaws.com"
