@@ -145,11 +145,6 @@
       "globalEndpoint": true,
       "signingRegion": "us-east-1"
     },
-    "globalSSLFips": {
-      "endpoint": "https://{service}-fips.amazonaws.com",
-      "globalEndpoint": true,
-      "signingRegion": "us-east-1"
-    },
     "globalGovCloud": {
       "endpoint": "{service}.us-gov.amazonaws.com",
       "globalEndpoint": true,
