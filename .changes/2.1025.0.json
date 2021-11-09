@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "Batch",
+        "description": "Adds support for scheduling policy APIs."
+    },
+    {
+        "type": "feature",
+        "category": "GreengrassV2",
+        "description": "This release adds support for Greengrass core devices running Windows. You can now specify name of a Windows user to run a component."
+    }
+]

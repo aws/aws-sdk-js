@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1024.0-->
+<!--LATEST=2.1025.0-->
 <!--ENTRYINSERT-->
+
+## 2.1025.0
+* feature: Batch: Adds support for scheduling policy APIs.
+* feature: GreengrassV2: This release adds support for Greengrass core devices running Windows. You can now specify name of a Windows user to run a component.
 
 ## 2.1024.0
 * feature: ChimeSDKMeetings: Updated format validation for ids and regions.

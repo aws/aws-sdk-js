@@ -36,6 +36,14 @@ declare class Batch extends Service {
    */
   createJobQueue(callback?: (err: AWSError, data: Batch.Types.CreateJobQueueResponse) => void): Request<Batch.Types.CreateJobQueueResponse, AWSError>;
   /**
+   * Creates an Batch scheduling policy.
+   */
+  createSchedulingPolicy(params: Batch.Types.CreateSchedulingPolicyRequest, callback?: (err: AWSError, data: Batch.Types.CreateSchedulingPolicyResponse) => void): Request<Batch.Types.CreateSchedulingPolicyResponse, AWSError>;
+  /**
+   * Creates an Batch scheduling policy.
+   */
+  createSchedulingPolicy(callback?: (err: AWSError, data: Batch.Types.CreateSchedulingPolicyResponse) => void): Request<Batch.Types.CreateSchedulingPolicyResponse, AWSError>;
+  /**
    * Deletes an Batch compute environment. Before you can delete a compute environment, you must set its state to DISABLED with the UpdateComputeEnvironment API operation and disassociate it from any job queues with the UpdateJobQueue API operation. Compute environments that use Fargate resources must terminate all active jobs on that compute environment before deleting the compute environment. If this isn't done, the compute environment enters an invalid state.
    */
   deleteComputeEnvironment(params: Batch.Types.DeleteComputeEnvironmentRequest, callback?: (err: AWSError, data: Batch.Types.DeleteComputeEnvironmentResponse) => void): Request<Batch.Types.DeleteComputeEnvironmentResponse, AWSError>;
@@ -51,6 +59,14 @@ declare class Batch extends Service {
    * Deletes the specified job queue. You must first disable submissions for a queue with the UpdateJobQueue operation. All jobs in the queue are eventually terminated when you delete a job queue. The jobs are terminated at a rate of about 16 jobs each second. It's not necessary to disassociate compute environments from a queue before submitting a DeleteJobQueue request.
    */
   deleteJobQueue(callback?: (err: AWSError, data: Batch.Types.DeleteJobQueueResponse) => void): Request<Batch.Types.DeleteJobQueueResponse, AWSError>;
+  /**
+   * Deletes the specified scheduling policy. You can't delete a scheduling policy that is used in any job queues.
+   */
+  deleteSchedulingPolicy(params: Batch.Types.DeleteSchedulingPolicyRequest, callback?: (err: AWSError, data: Batch.Types.DeleteSchedulingPolicyResponse) => void): Request<Batch.Types.DeleteSchedulingPolicyResponse, AWSError>;
+  /**
+   * Deletes the specified scheduling policy. You can't delete a scheduling policy that is used in any job queues.
+   */
+  deleteSchedulingPolicy(callback?: (err: AWSError, data: Batch.Types.DeleteSchedulingPolicyResponse) => void): Request<Batch.Types.DeleteSchedulingPolicyResponse, AWSError>;
   /**
    * Deregisters an Batch job definition. Job definitions are permanently deleted after 180 days.
    */
@@ -92,6 +108,14 @@ declare class Batch extends Service {
    */
   describeJobs(callback?: (err: AWSError, data: Batch.Types.DescribeJobsResponse) => void): Request<Batch.Types.DescribeJobsResponse, AWSError>;
   /**
+   * Describes one or more of your scheduling policies.
+   */
+  describeSchedulingPolicies(params: Batch.Types.DescribeSchedulingPoliciesRequest, callback?: (err: AWSError, data: Batch.Types.DescribeSchedulingPoliciesResponse) => void): Request<Batch.Types.DescribeSchedulingPoliciesResponse, AWSError>;
+  /**
+   * Describes one or more of your scheduling policies.
+   */
+  describeSchedulingPolicies(callback?: (err: AWSError, data: Batch.Types.DescribeSchedulingPoliciesResponse) => void): Request<Batch.Types.DescribeSchedulingPoliciesResponse, AWSError>;
+  /**
    * Returns a list of Batch jobs. You must specify only one of the following items:   A job queue ID to return a list of jobs in that job queue   A multi-node parallel job ID to return a list of nodes for that job   An array job ID to return a list of the children for that job   You can filter the results by job status with the jobStatus parameter. If you don't specify a status, only RUNNING jobs are returned.
    */
   listJobs(params: Batch.Types.ListJobsRequest, callback?: (err: AWSError, data: Batch.Types.ListJobsResponse) => void): Request<Batch.Types.ListJobsResponse, AWSError>;
@@ -100,11 +124,19 @@ declare class Batch extends Service {
    */
   listJobs(callback?: (err: AWSError, data: Batch.Types.ListJobsResponse) => void): Request<Batch.Types.ListJobsResponse, AWSError>;
   /**
-   * Lists the tags for an Batch resource. Batch resources that support tags are compute environments, jobs, job definitions, and job queues. ARNs for child jobs of array and multi-node parallel (MNP) jobs are not supported.
+   * Returns a list of Batch scheduling policies.
+   */
+  listSchedulingPolicies(params: Batch.Types.ListSchedulingPoliciesRequest, callback?: (err: AWSError, data: Batch.Types.ListSchedulingPoliciesResponse) => void): Request<Batch.Types.ListSchedulingPoliciesResponse, AWSError>;
+  /**
+   * Returns a list of Batch scheduling policies.
+   */
+  listSchedulingPolicies(callback?: (err: AWSError, data: Batch.Types.ListSchedulingPoliciesResponse) => void): Request<Batch.Types.ListSchedulingPoliciesResponse, AWSError>;
+  /**
+   * Lists the tags for an Batch resource. Batch resources that support tags are compute environments, jobs, job definitions, job queues, and scheduling policies. ARNs for child jobs of array and multi-node parallel (MNP) jobs are not supported.
    */
   listTagsForResource(params: Batch.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: Batch.Types.ListTagsForResourceResponse) => void): Request<Batch.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Lists the tags for an Batch resource. Batch resources that support tags are compute environments, jobs, job definitions, and job queues. ARNs for child jobs of array and multi-node parallel (MNP) jobs are not supported.
+   * Lists the tags for an Batch resource. Batch resources that support tags are compute environments, jobs, job definitions, job queues, and scheduling policies. ARNs for child jobs of array and multi-node parallel (MNP) jobs are not supported.
    */
   listTagsForResource(callback?: (err: AWSError, data: Batch.Types.ListTagsForResourceResponse) => void): Request<Batch.Types.ListTagsForResourceResponse, AWSError>;
   /**
@@ -116,19 +148,19 @@ declare class Batch extends Service {
    */
   registerJobDefinition(callback?: (err: AWSError, data: Batch.Types.RegisterJobDefinitionResponse) => void): Request<Batch.Types.RegisterJobDefinitionResponse, AWSError>;
   /**
-   * Submits an Batch job from a job definition. Parameters that are specified during SubmitJob override parameters defined in the job definition. vCPU and memory requirements that are specified in the ResourceRequirements objects in the job definition are the exception. They can't be overridden this way using the memory and vcpus parameters. Rather, you must specify updates to job definition parameters in a ResourceRequirements object that's included in the containerOverrides parameter.  Jobs that run on Fargate resources can't be guaranteed to run for more than 14 days. This is because, after 14 days, Fargate resources might become unavailable and job might be terminated. 
+   * Submits an Batch job from a job definition. Parameters that are specified during SubmitJob override parameters defined in the job definition. vCPU and memory requirements that are specified in the resourceRequirements objects in the job definition are the exception. They can't be overridden this way using the memory and vcpus parameters. Rather, you must specify updates to job definition parameters in a ResourceRequirements object that's included in the containerOverrides parameter.  Job queues with a scheduling policy are limited to 500 active fair share identifiers at a time.    Jobs that run on Fargate resources can't be guaranteed to run for more than 14 days. This is because, after 14 days, Fargate resources might become unavailable and job might be terminated. 
    */
   submitJob(params: Batch.Types.SubmitJobRequest, callback?: (err: AWSError, data: Batch.Types.SubmitJobResponse) => void): Request<Batch.Types.SubmitJobResponse, AWSError>;
   /**
-   * Submits an Batch job from a job definition. Parameters that are specified during SubmitJob override parameters defined in the job definition. vCPU and memory requirements that are specified in the ResourceRequirements objects in the job definition are the exception. They can't be overridden this way using the memory and vcpus parameters. Rather, you must specify updates to job definition parameters in a ResourceRequirements object that's included in the containerOverrides parameter.  Jobs that run on Fargate resources can't be guaranteed to run for more than 14 days. This is because, after 14 days, Fargate resources might become unavailable and job might be terminated. 
+   * Submits an Batch job from a job definition. Parameters that are specified during SubmitJob override parameters defined in the job definition. vCPU and memory requirements that are specified in the resourceRequirements objects in the job definition are the exception. They can't be overridden this way using the memory and vcpus parameters. Rather, you must specify updates to job definition parameters in a ResourceRequirements object that's included in the containerOverrides parameter.  Job queues with a scheduling policy are limited to 500 active fair share identifiers at a time.    Jobs that run on Fargate resources can't be guaranteed to run for more than 14 days. This is because, after 14 days, Fargate resources might become unavailable and job might be terminated. 
    */
   submitJob(callback?: (err: AWSError, data: Batch.Types.SubmitJobResponse) => void): Request<Batch.Types.SubmitJobResponse, AWSError>;
   /**
-   * Associates the specified tags to a resource with the specified resourceArn. If existing tags on a resource aren't specified in the request parameters, they aren't changed. When a resource is deleted, the tags that are associated with that resource are deleted as well. Batch resources that support tags are compute environments, jobs, job definitions, and job queues. ARNs for child jobs of array and multi-node parallel (MNP) jobs are not supported.
+   * Associates the specified tags to a resource with the specified resourceArn. If existing tags on a resource aren't specified in the request parameters, they aren't changed. When a resource is deleted, the tags that are associated with that resource are deleted as well. Batch resources that support tags are compute environments, jobs, job definitions, job queues, and scheduling policies. ARNs for child jobs of array and multi-node parallel (MNP) jobs are not supported.
    */
   tagResource(params: Batch.Types.TagResourceRequest, callback?: (err: AWSError, data: Batch.Types.TagResourceResponse) => void): Request<Batch.Types.TagResourceResponse, AWSError>;
   /**
-   * Associates the specified tags to a resource with the specified resourceArn. If existing tags on a resource aren't specified in the request parameters, they aren't changed. When a resource is deleted, the tags that are associated with that resource are deleted as well. Batch resources that support tags are compute environments, jobs, job definitions, and job queues. ARNs for child jobs of array and multi-node parallel (MNP) jobs are not supported.
+   * Associates the specified tags to a resource with the specified resourceArn. If existing tags on a resource aren't specified in the request parameters, they aren't changed. When a resource is deleted, the tags that are associated with that resource are deleted as well. Batch resources that support tags are compute environments, jobs, job definitions, job queues, and scheduling policies. ARNs for child jobs of array and multi-node parallel (MNP) jobs are not supported.
    */
   tagResource(callback?: (err: AWSError, data: Batch.Types.TagResourceResponse) => void): Request<Batch.Types.TagResourceResponse, AWSError>;
   /**
@@ -163,6 +195,14 @@ declare class Batch extends Service {
    * Updates a job queue.
    */
   updateJobQueue(callback?: (err: AWSError, data: Batch.Types.UpdateJobQueueResponse) => void): Request<Batch.Types.UpdateJobQueueResponse, AWSError>;
+  /**
+   * Updates a scheduling policy.
+   */
+  updateSchedulingPolicy(params: Batch.Types.UpdateSchedulingPolicyRequest, callback?: (err: AWSError, data: Batch.Types.UpdateSchedulingPolicyResponse) => void): Request<Batch.Types.UpdateSchedulingPolicyResponse, AWSError>;
+  /**
+   * Updates a scheduling policy.
+   */
+  updateSchedulingPolicy(callback?: (err: AWSError, data: Batch.Types.UpdateSchedulingPolicyResponse) => void): Request<Batch.Types.UpdateSchedulingPolicyResponse, AWSError>;
 }
 declare namespace Batch {
   export type ArrayJobDependency = "N_TO_N"|"SEQUENTIAL"|string;
@@ -271,6 +311,10 @@ declare namespace Batch {
      */
     computeEnvironmentArn: String;
     /**
+     * The maximum number of VCPUs expected to be used for an unmanaged compute environment.
+     */
+    unmanagedvCpus?: Integer;
+    /**
      * The Amazon Resource Name (ARN) of the underlying Amazon ECS cluster used by the compute environment.
      */
     ecsClusterArn: String;
@@ -361,7 +405,7 @@ declare namespace Batch {
      */
     instanceRole?: String;
     /**
-     * Key-value pair tags to be applied to EC2 resources that are launched in the compute environment. For Batch, these take the form of "String1": "String2", where String1 is the tag key and String2 is the tag value−for example, { "Name": "Batch Instance - C4OnDemand" }. This is helpful for recognizing your Batch instances in the Amazon EC2 console. These tags can't be updated or removed after the compute environment is created.Aany changes to these tags require that you create a new compute environment and remove the old compute environment. These tags aren't seen when using the Batch ListTagsForResource API operation.  This parameter isn't applicable to jobs that are running on Fargate resources, and shouldn't be specified. 
+     * Key-value pair tags to be applied to EC2 resources that are launched in the compute environment. For Batch, these take the form of "String1": "String2", where String1 is the tag key and String2 is the tag value−for example, { "Name": "Batch Instance - C4OnDemand" }. This is helpful for recognizing your Batch instances in the Amazon EC2 console. These tags can't be updated or removed after the compute environment is created. Any changes to these tags require that you create a new compute environment and remove the old compute environment. These tags aren't seen when using the Batch ListTagsForResource API operation.  This parameter isn't applicable to jobs that are running on Fargate resources, and shouldn't be specified. 
      */
     tags?: TagsMap;
     /**
@@ -381,7 +425,7 @@ declare namespace Batch {
      */
     launchTemplate?: LaunchTemplateSpecification;
     /**
-     * Provides information used to select Amazon Machine Images (AMIs) for EC2 instances in the compute environment. If Ec2Configuration isn't specified, the default is ECS_AL1.  This parameter isn't applicable to jobs that are running on Fargate resources, and shouldn't be specified. 
+     * Provides information used to select Amazon Machine Images (AMIs) for EC2 instances in the compute environment. If Ec2Configuration isn't specified, the default is ECS_AL2. One or two values can be provided.  This parameter isn't applicable to jobs that are running on Fargate resources, and shouldn't be specified. 
      */
     ec2Configuration?: Ec2ConfigurationList;
   }
@@ -413,11 +457,11 @@ declare namespace Batch {
      */
     image?: String;
     /**
-     * The number of vCPUs reserved for the container. For jobs that run on EC2 resources, you can specify the vCPU requirement for the job using resourceRequirements, but you can't specify the vCPU requirements in both the vcpus and resourceRequirement object. This parameter maps to CpuShares in the Create a container section of the Docker Remote API and the --cpu-shares option to docker run. Each vCPU is equivalent to 1,024 CPU shares. You must specify at least one vCPU. This is required but can be specified in several places. It must be specified for each node at least once.  This parameter isn't applicable to jobs that run on Fargate resources. For jobs that run on Fargate resources, you must specify the vCPU requirement for the job using resourceRequirements. 
+     * The number of vCPUs reserved for the container. For jobs that run on EC2 resources, you can specify the vCPU requirement for the job using resourceRequirements, but you can't specify the vCPU requirements in both the vcpus and resourceRequirements object. This parameter maps to CpuShares in the Create a container section of the Docker Remote API and the --cpu-shares option to docker run. Each vCPU is equivalent to 1,024 CPU shares. You must specify at least one vCPU. This is required but can be specified in several places. It must be specified for each node at least once.  This parameter isn't applicable to jobs that run on Fargate resources. For jobs that run on Fargate resources, you must specify the vCPU requirement for the job using resourceRequirements. 
      */
     vcpus?: Integer;
     /**
-     * For jobs run on EC2 resources that didn't specify memory requirements using ResourceRequirement, the number of MiB of memory reserved for the job. For other jobs, including all run on Fargate resources, see resourceRequirements.
+     * For jobs run on EC2 resources that didn't specify memory requirements using resourceRequirements, the number of MiB of memory reserved for the job. For other jobs, including all run on Fargate resources, see resourceRequirements.
      */
     memory?: Integer;
     /**
@@ -515,11 +559,11 @@ declare namespace Batch {
   }
   export interface ContainerOverrides {
     /**
-     * This parameter indicates the number of vCPUs reserved for the container.It overrides the vcpus parameter that's set in the job definition, but doesn't override any vCPU requirement specified in the resourceRequirement structure in the job definition. To override vCPU requirements that are specified in the ResourceRequirement structure in the job definition, ResourceRequirement must be specified in the SubmitJob request, with type set to VCPU and value set to the new value. This parameter maps to CpuShares in the Create a container section of the Docker Remote API and the --cpu-shares option to docker run. Each vCPU is equivalent to 1,024 CPU shares. You must specify at least one vCPU.  This parameter is supported for jobs that run on EC2 resources, but isn't supported for jobs that run on Fargate resources. For Fargate resources, you can only use resourceRequirement. For EC2 resources, you can use either this parameter or resourceRequirement but not both. 
+     * This parameter is deprecated, use resourceRequirements to override the vcpus parameter that's set in the job definition. It's not supported for jobs that run on Fargate resources. For jobs run on EC2 resources, it overrides the vcpus parameter set in the job definition, but doesn't override any vCPU requirement specified in the resourceRequirements structure in the job definition. To override vCPU requirements that are specified in the resourceRequirements structure in the job definition, resourceRequirements must be specified in the SubmitJob request, with type set to VCPU and value set to the new value. For more information, see Can't override job definition resource requirements in the Batch User Guide.
      */
     vcpus?: Integer;
     /**
-     * This parameter indicates the amount of memory (in MiB) that's reserved for the job. It overrides the memory parameter set in the job definition, but doesn't override any memory requirement specified in the ResourceRequirement structure in the job definition. To override memory requirements that are specified in the ResourceRequirement structure in the job definition, ResourceRequirement must be specified in the SubmitJob request, with type set to MEMORY and value set to the new value. This parameter is supported for jobs that run on EC2 resources, but isn't supported for jobs that run on Fargate resources. For these resources, use resourceRequirement instead.
+     * This parameter is deprecated, use resourceRequirements to override the memory requirements specified in the job definition. It's not supported for jobs that run on Fargate resources. For jobs run on EC2 resources, it overrides the memory parameter set in the job definition, but doesn't override any memory requirement specified in the resourceRequirements structure in the job definition. To override memory requirements that are specified in the resourceRequirements structure in the job definition, resourceRequirements must be specified in the SubmitJob request, with type set to MEMORY and value set to the new value. For more information, see Can't override job definition resource requirements in the Batch User Guide.
      */
     memory?: Integer;
     /**
@@ -545,11 +589,11 @@ declare namespace Batch {
      */
     image?: String;
     /**
-     * The number of vCPUs reserved for the job. Each vCPU is equivalent to 1,024 CPU shares. This parameter maps to CpuShares in the Create a container section of the Docker Remote API and the --cpu-shares option to docker run. The number of vCPUs must be specified but can be specified in several places. You must specify it at least once for each node. This parameter is supported on EC2 resources but isn't supported for jobs that run on Fargate resources. For these resources, use resourceRequirement instead. You can use this parameter or resourceRequirements structure but not both.  This parameter isn't applicable to jobs that are running on Fargate resources and shouldn't be provided. For jobs that run on Fargate resources, you must specify the vCPU requirement for the job using resourceRequirements. 
+     * This parameter is deprecated, use resourceRequirements to specify the vCPU requirements for the job definition. It's not supported for jobs that run on Fargate resources. For jobs run on EC2 resources, it specifies the number of vCPUs reserved for the job. Each vCPU is equivalent to 1,024 CPU shares. This parameter maps to CpuShares in the Create a container section of the Docker Remote API and the --cpu-shares option to docker run. The number of vCPUs must be specified but can be specified in several places. You must specify it at least once for each node.
      */
     vcpus?: Integer;
     /**
-     * This parameter indicates the memory hard limit (in MiB) for a container. If your container attempts to exceed the specified number, it's terminated. You must specify at least 4 MiB of memory for a job using this parameter. The memory hard limit can be specified in several places. It must be specified for each node at least once. This parameter maps to Memory in the Create a container section of the Docker Remote API and the --memory option to docker run. This parameter is supported on EC2 resources but isn't supported on Fargate resources. For Fargate resources, you should specify the memory requirement using resourceRequirement. You can also do this for EC2 resources.  If you're trying to maximize your resource utilization by providing your jobs as much memory as possible for a particular instance type, see Memory Management in the Batch User Guide. 
+     * This parameter is deprecated, use resourceRequirements to specify the memory requirements for the job definition. It's not supported for jobs that run on Fargate resources. For jobs run on EC2 resources, it specifies the memory hard limit (in MiB) for a container. If your container attempts to exceed the specified number, it's terminated. You must specify at least 4 MiB of memory for a job using this parameter. The memory hard limit can be specified in several places. It must be specified for each node at least once.
      */
     memory?: Integer;
     /**
@@ -645,6 +689,10 @@ declare namespace Batch {
      */
     state?: CEState;
     /**
+     * The maximum number of vCPUs for an unmanaged compute environment. This parameter is only used for fair share scheduling to reserve vCPU capacity for new share identifiers. If this parameter is not provided for a fair share job queue, no vCPU capacity will be reserved.  This parameter is only supported when the type parameter is set to UNMANAGED/ 
+     */
+    unmanagedvCpus?: Integer;
+    /**
      * Details about the compute resources managed by the compute environment. This parameter is required for managed compute environments. For more information, see Compute Environments in the Batch User Guide.
      */
     computeResources?: ComputeResource;
@@ -677,6 +725,10 @@ declare namespace Batch {
      */
     state?: JQState;
     /**
+     * Amazon Resource Name (ARN) of the fair share scheduling policy. If this parameter is specified, the job queue will use a fair share scheduling policy. If this parameter is not specified, the job queue will use a first in, first out (FIFO) scheduling policy. Once a job queue is created, the fair share scheduling policy can be replaced but not removed. The format is aws:Partition:batch:Region:Account:scheduling-policy/Name . For example, aws:aws:batch:us-west-2:012345678910:scheduling-policy/MySchedulingPolicy.
+     */
+    schedulingPolicyArn?: String;
+    /**
      * The priority of the job queue. Job queues with a higher priority (or a higher integer value for the priority parameter) are evaluated first when associated with the same compute environment. Priority is determined in descending order. For example, a job queue with a priority value of 10 is given scheduling preference over a job queue with a priority value of 1. All of the compute environments must be either EC2 (EC2 or SPOT) or Fargate (FARGATE or FARGATE_SPOT); EC2 and Fargate compute environments can't be mixed.
      */
     priority: Integer;
@@ -699,6 +751,30 @@ declare namespace Batch {
      */
     jobQueueArn: String;
   }
+  export interface CreateSchedulingPolicyRequest {
+    /**
+     * The name of the scheduling policy. Up to 128 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed.
+     */
+    name: String;
+    /**
+     * The fair share policy of the scheduling policy.
+     */
+    fairsharePolicy?: FairsharePolicy;
+    /**
+     * The tags that you apply to the scheduling policy to help you categorize and organize your resources. Each tag consists of a key and an optional value. For more information, see Tagging Amazon Web Services Resources in Amazon Web Services General Reference. These tags can be updated or removed using the TagResource and UntagResource API operations.
+     */
+    tags?: TagrisTagsMap;
+  }
+  export interface CreateSchedulingPolicyResponse {
+    /**
+     * The name of the scheduling policy.
+     */
+    name: String;
+    /**
+     * The Amazon Resource Name (ARN) of the scheduling policy. The format is aws:Partition:batch:Region:Account:scheduling-policy/Name . For example, aws:aws:batch:us-west-2:012345678910:scheduling-policy/MySchedulingPolicy.
+     */
+    arn: String;
+  }
   export interface DeleteComputeEnvironmentRequest {
     /**
      * The name or Amazon Resource Name (ARN) of the compute environment to delete.
@@ -714,6 +790,14 @@ declare namespace Batch {
     jobQueue: String;
   }
   export interface DeleteJobQueueResponse {
+  }
+  export interface DeleteSchedulingPolicyRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the scheduling policy to delete.
+     */
+    arn: String;
+  }
+  export interface DeleteSchedulingPolicyResponse {
   }
   export interface DeregisterJobDefinitionRequest {
     /**
@@ -743,7 +827,7 @@ declare namespace Batch {
      */
     computeEnvironments?: ComputeEnvironmentDetailList;
     /**
-     * The nextToken value to include in a future DescribeComputeEnvironments request. When the results of a DescribeJobDefinitions request exceed maxResults, this value can be used to retrieve the next page of results. This value is null when there are no more results to return.
+     * The nextToken value to include in a future DescribeComputeEnvironments request. When the results of a DescribeComputeEnvironments request exceed maxResults, this value can be used to retrieve the next page of results. This value is null when there are no more results to return.
      */
     nextToken?: String;
   }
@@ -815,6 +899,18 @@ declare namespace Batch {
      */
     jobs?: JobDetailList;
   }
+  export interface DescribeSchedulingPoliciesRequest {
+    /**
+     * A list of up to 100 scheduling policy Amazon Resource Name (ARN) entries.
+     */
+    arns: StringList;
+  }
+  export interface DescribeSchedulingPoliciesResponse {
+    /**
+     * The list of scheduling policies.
+     */
+    schedulingPolicies?: SchedulingPolicyDetailList;
+  }
   export interface Device {
     /**
      * The path for the device on the host container instance.
@@ -868,7 +964,7 @@ declare namespace Batch {
   }
   export interface Ec2Configuration {
     /**
-     * The image type to match with the instance type to select an AMI. If the imageIdOverride parameter isn't specified, then a recent Amazon ECS-optimized AMI (ECS_AL1) is used. Starting on March 31, 2021, this default will be changing to ECS_AL2 (Amazon Linux 2).  ECS_AL2   Amazon Linux 2− Default for all Amazon Web Services Graviton-based instance families (for example, C6g, M6g, R6g, and T4g) and can be used for all non-GPU instance types.  ECS_AL2_NVIDIA   Amazon Linux 2 (GPU)−Default for all GPU instance families (for example P4 and G4) and can be used for all non Amazon Web Services Graviton-based instance types.  ECS_AL1   Amazon Linux−Default for all non-GPU, non Amazon Web Services Graviton instance families. Amazon Linux is reaching the end-of-life of standard support. For more information, see Amazon Linux AMI.  
+     * The image type to match with the instance type to select an AMI. If the imageIdOverride parameter isn't specified, then a recent Amazon ECS-optimized Amazon Linux 2 AMI (ECS_AL2) is used.  ECS_AL2   Amazon Linux 2− Default for all non-GPU instance families.  ECS_AL2_NVIDIA   Amazon Linux 2 (GPU)−Default for all GPU instance families (for example P4 and G4) and can be used for all non Amazon Web Services Graviton-based instance types.  ECS_AL1   Amazon Linux. Amazon Linux is reaching the end-of-life of standard support. For more information, see Amazon Linux AMI.  
      */
     imageType: ImageType;
     /**
@@ -880,15 +976,15 @@ declare namespace Batch {
   export type EnvironmentVariables = KeyValuePair[];
   export interface EvaluateOnExit {
     /**
-     * Contains a glob pattern to match against the StatusReason returned for a job. The pattern can be up to 512 characters in length. It can contain letters, numbers, periods (.), colons (:), and white space (including spaces or tabs). It can optionally end with an asterisk (*) so that only the start of the string needs to be an exact match.
+     * Contains a glob pattern to match against the StatusReason returned for a job. The pattern can be up to 512 characters in length. It can contain letters, numbers, periods (.), colons (:), and white space (including spaces or tabs). It can optionally end with an asterisk (*) so that only the start of the string needs to be an exact match. The string can be between 1 and 512 characters in length.
      */
     onStatusReason?: String;
     /**
-     * Contains a glob pattern to match against the Reason returned for a job. The pattern can be up to 512 characters in length. It can contain letters, numbers, periods (.), colons (:), and white space (including spaces and tabs). It can optionally end with an asterisk (*) so that only the start of the string needs to be an exact match.
+     * Contains a glob pattern to match against the Reason returned for a job. The pattern can be up to 512 characters in length. It can contain letters, numbers, periods (.), colons (:), and white space (including spaces and tabs). It can optionally end with an asterisk (*) so that only the start of the string needs to be an exact match. The string can be between 1 and 512 characters in length.
      */
     onReason?: String;
     /**
-     * Contains a glob pattern to match against the decimal representation of the ExitCode returned for a job. The pattern can be up to 512 characters in length. It can contain only numbers, and can optionally end with an asterisk (*) so that only the start of the string needs to be an exact match.
+     * Contains a glob pattern to match against the decimal representation of the ExitCode returned for a job. The pattern can be up to 512 characters in length. It can contain only numbers, and can optionally end with an asterisk (*) so that only the start of the string needs to be an exact match. The string can be between 1 and 512 characters in length.
      */
     onExitCode?: String;
     /**
@@ -897,12 +993,27 @@ declare namespace Batch {
     action: RetryAction;
   }
   export type EvaluateOnExitList = EvaluateOnExit[];
+  export interface FairsharePolicy {
+    /**
+     * The time period to use to calculate a fair share percentage for each fair share identifier in use, in seconds. A value of zero (0) indicates that only current usage should be measured; if there are four evenly weighted fair share identifiers then each can only use up to 25% of the available CPU resources, even if some of the fair share identifiers have no currently running jobs. The decay allows for more recently run jobs to have more weight than jobs that ran earlier. The maximum supported value is 604800 (1 week).
+     */
+    shareDecaySeconds?: Integer;
+    /**
+     * A value used to reserve some of the available maximum vCPU for fair share identifiers that have not yet been used. The reserved ratio is (computeReservation/100)^ActiveFairShares  where  ActiveFairShares  is the number of active fair share identifiers. For example, a computeReservation value of 50 indicates that Batch should reserve 50% of the maximum available vCPU if there is only one fair share identifier, 25% if there are two fair share identifiers, and 12.5% if there are three fair share identifiers. A computeReservation value of 25 indicates that Batch should reserve 25% of the maximum available vCPU if there is only one fair share identifier, 6.25% if there are two fair share identifiers, and 1.56% if there are three fair share identifiers. The minimum value is 0 and the maximum value is 99.
+     */
+    computeReservation?: Integer;
+    /**
+     * Array of SharedIdentifier objects that contain the weights for the fair share identifiers for the fair share policy. Fair share identifiers that are not included have a default weight of 1.0.
+     */
+    shareDistribution?: ShareAttributesList;
+  }
   export interface FargatePlatformConfiguration {
     /**
      * The Fargate platform version where the jobs are running. A platform version is specified only for jobs that are running on Fargate resources. If one isn't specified, the LATEST platform version is used by default. This uses a recent, approved version of the Fargate platform for compute resources. For more information, see Fargate platform versions in the Amazon Elastic Container Service Developer Guide.
      */
     platformVersion?: String;
   }
+  export type Float = number;
   export interface Host {
     /**
      * The path on the host container instance that's presented to the container. If this parameter is empty, then the Docker daemon has assigned a host path for you. If this parameter contains a file location, then the data volume persists at the specified location on the host container instance until you delete it manually. If the source path location doesn't exist on the host container instance, the Docker daemon creates it. If the location does exist, the contents of the source path folder are exported.  This parameter isn't applicable to jobs that run on Fargate resources and shouldn't be provided. 
@@ -932,9 +1043,13 @@ declare namespace Batch {
      */
     status?: String;
     /**
-     * The type of job definition. If the job is run on Fargate resources, then multinode isn't supported. For more information about multi-node parallel jobs, see Creating a multi-node parallel job definition in the Batch User Guide.
+     * The type of job definition, either container or multinode. If the job is run on Fargate resources, then multinode isn't supported. For more information about multi-node parallel jobs, see Creating a multi-node parallel job definition in the Batch User Guide.
      */
     type: String;
+    /**
+     * The scheduling priority of the job definition. This will only affect jobs in job queues with a fair share policy. Jobs with a higher scheduling priority will be scheduled before jobs with a lower scheduling priority.
+     */
+    schedulingPriority?: Integer;
     /**
      * Default parameters or parameter substitution placeholders that are set in the job definition. Parameters are specified as a key-value pair mapping. Parameters in a SubmitJob request override any corresponding parameter defaults from the job definition. For more information about specifying parameters, see Job Definition Parameters in the Batch User Guide.
      */
@@ -1002,6 +1117,14 @@ declare namespace Batch {
      * The current status for the job.  If your jobs don't progress to STARTING, see Jobs Stuck in RUNNABLE Status in the troubleshooting section of the Batch User Guide. 
      */
     status: JobStatus;
+    /**
+     * The share identifier for the job.
+     */
+    shareIdentifier?: String;
+    /**
+     * The scheduling policy of the job definition. This will only affect jobs in job queues with a fair share policy. Jobs with a higher scheduling priority will be scheduled before jobs with a lower scheduling priority.
+     */
+    schedulingPriority?: Integer;
     /**
      * A list of job attempts associated with this job.
      */
@@ -1085,6 +1208,10 @@ declare namespace Batch {
      * Describes the ability of the queue to accept new jobs. If the job queue state is ENABLED, it's able to accept jobs. If the job queue state is DISABLED, new jobs can't be added to the queue, but jobs already in the queue can finish.
      */
     state: JQState;
+    /**
+     * Amazon Resource Name (ARN) of the scheduling policy. The format is aws:Partition:batch:Region:Account:scheduling-policy/Name . For example, aws:aws:batch:us-west-2:012345678910:scheduling-policy/MySchedulingPolicy.
+     */
+    schedulingPolicyArn?: String;
     /**
      * The status of the job queue (for example, CREATING or VALID).
      */
@@ -1266,9 +1393,29 @@ declare namespace Batch {
      */
     nextToken?: String;
   }
+  export interface ListSchedulingPoliciesRequest {
+    /**
+     * The maximum number of results returned by ListSchedulingPolicies in paginated output. When this parameter is used, ListSchedulingPolicies only returns maxResults results in a single page and a nextToken response element. The remaining results of the initial request can be seen by sending another ListSchedulingPolicies request with the returned nextToken value. This value can be between 1 and 100. If this parameter isn't used, then ListSchedulingPolicies returns up to 100 results and a nextToken value if applicable.
+     */
+    maxResults?: Integer;
+    /**
+     * The nextToken value returned from a previous paginated ListSchedulingPolicies request where maxResults was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the nextToken value. This value is null when there are no more results to return.  This token should be treated as an opaque identifier that's only used to retrieve the next items in a list and not for other programmatic purposes. 
+     */
+    nextToken?: String;
+  }
+  export interface ListSchedulingPoliciesResponse {
+    /**
+     * A list of scheduling policies that match the request.
+     */
+    schedulingPolicies?: SchedulingPolicyListingDetailList;
+    /**
+     * The nextToken value to include in a future ListSchedulingPolicies request. When the results of a ListSchedulingPolicies request exceed maxResults, this value can be used to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    nextToken?: String;
+  }
   export interface ListTagsForResourceRequest {
     /**
-     * The Amazon Resource Name (ARN) that identifies the resource that tags are listed for. Batch resources that support tags are compute environments, jobs, job definitions, and job queues. ARNs for child jobs of array and multi-node parallel (MNP) jobs are not supported.
+     * The Amazon Resource Name (ARN) that identifies the resource that tags are listed for. Batch resources that support tags are compute environments, jobs, job definitions, job queues, and scheduling policies. ARNs for child jobs of array and multi-node parallel (MNP) jobs are not supported.
      */
     resourceArn: String;
   }
@@ -1418,6 +1565,10 @@ declare namespace Batch {
      */
     parameters?: ParametersMap;
     /**
+     * The scheduling priority for jobs that are submitted with this job definition. This will only affect jobs in job queues with a fair share policy. Jobs with a higher scheduling priority will be scheduled before jobs with a lower scheduling priority. The minimum supported value is 0 and the maximum supported value is 9999.
+     */
+    schedulingPriority?: Integer;
+    /**
      * An object with various properties specific to single-node container-based jobs. If the job definition's type parameter is container, then you must specify either containerProperties or nodeProperties.  If the job runs on Fargate resources, then you must not specify nodeProperties; use only containerProperties. 
      */
     containerProperties?: ContainerProperties;
@@ -1483,6 +1634,32 @@ declare namespace Batch {
      */
     evaluateOnExit?: EvaluateOnExitList;
   }
+  export interface SchedulingPolicyDetail {
+    /**
+     * The name of the scheduling policy.
+     */
+    name: String;
+    /**
+     * Amazon Resource Name (ARN) of the scheduling policy. An example would be arn:aws:batch:us-east-1:123456789012:scheduling-policy/HighPriority  
+     */
+    arn: String;
+    /**
+     * The fair share policy for the scheduling policy.
+     */
+    fairsharePolicy?: FairsharePolicy;
+    /**
+     * The tags that you apply to the scheduling policy to help you categorize and organize your resources. Each tag consists of a key and an optional value. For more information, see Tagging Amazon Web Services Resources in Amazon Web Services General Reference.
+     */
+    tags?: TagrisTagsMap;
+  }
+  export type SchedulingPolicyDetailList = SchedulingPolicyDetail[];
+  export interface SchedulingPolicyListingDetail {
+    /**
+     * Amazon Resource Name (ARN) of the scheduling policy.
+     */
+    arn: String;
+  }
+  export type SchedulingPolicyListingDetailList = SchedulingPolicyListingDetail[];
   export interface Secret {
     /**
      * The name of the secret.
@@ -1494,6 +1671,17 @@ declare namespace Batch {
     valueFrom: String;
   }
   export type SecretList = Secret[];
+  export interface ShareAttributes {
+    /**
+     * A fair share identifier or fair share identifier prefix. If the string ends with '*' then this entry specifies the weight factor to use for fair share identifiers that begin with that prefix. The list of fair share identifiers in a fair share policy cannot overlap. For example you cannot have one that specifies a shareIdentifier of UserA* and another that specifies a shareIdentifier of UserA-1. There can be no more than 500 fair share identifiers active in a job queue. The string is limited to 255 alphanumeric characters, optionally followed by '*'.
+     */
+    shareIdentifier: String;
+    /**
+     * The weight factor for the fair share identifier. The default value is 1.0. A lower value has a higher priority for compute resources. For example, jobs using a share identifier with a weight factor of 0.125 (1/8) will get 8 times the compute resources of jobs using a share identifier with a weight factor of 1. The smallest supported value is 0.0001 and the largest supported value is 999.9999.
+     */
+    weightFactor?: Float;
+  }
+  export type ShareAttributesList = ShareAttributes[];
   export type String = string;
   export type StringList = String[];
   export interface SubmitJobRequest {
@@ -1505,6 +1693,14 @@ declare namespace Batch {
      * The job queue where the job is submitted. You can specify either the name or the Amazon Resource Name (ARN) of the queue.
      */
     jobQueue: String;
+    /**
+     * The share identifier for the job.
+     */
+    shareIdentifier?: String;
+    /**
+     * The scheduling priority for the job. This will only affect jobs in job queues with a fair share policy. Jobs with a higher scheduling priority will be scheduled before jobs with a lower scheduling priority. This will override any scheduling priority in the job definition. The minimum supported value is 0 and the maximum supported value is 9999.
+     */
+    schedulingPriorityOverride?: Integer;
     /**
      * The array properties for the submitted job, such as the size of the array. The array size can be between 2 and 10,000. If you specify array properties for a job, it becomes an array job. For more information, see Array Jobs in the Batch User Guide.
      */
@@ -1564,7 +1760,7 @@ declare namespace Batch {
   export type TagKeysList = TagKey[];
   export interface TagResourceRequest {
     /**
-     * The Amazon Resource Name (ARN) of the resource that tags are added to. Batch resources that support tags are compute environments, jobs, job definitions, and job queues. ARNs for child jobs of array and multi-node parallel (MNP) jobs are not supported.
+     * The Amazon Resource Name (ARN) of the resource that tags are added to. Batch resources that support tags are compute environments, jobs, job definitions, job queues, and scheduling policies. ARNs for child jobs of array and multi-node parallel (MNP) jobs are not supported.
      */
     resourceArn: String;
     /**
@@ -1621,7 +1817,7 @@ declare namespace Batch {
   export type Ulimits = Ulimit[];
   export interface UntagResourceRequest {
     /**
-     * The Amazon Resource Name (ARN) of the resource from which to delete tags. Batch resources that support tags are compute environments, jobs, job definitions, and job queues. ARNs for child jobs of array and multi-node parallel (MNP) jobs are not supported.
+     * The Amazon Resource Name (ARN) of the resource from which to delete tags. Batch resources that support tags are compute environments, jobs, job definitions, job queues, and scheduling policies. ARNs for child jobs of array and multi-node parallel (MNP) jobs are not supported.
      */
     resourceArn: String;
     /**
@@ -1640,6 +1836,10 @@ declare namespace Batch {
      * The state of the compute environment. Compute environments in the ENABLED state can accept jobs from a queue and scale in or out automatically based on the workload demand of its associated queues. If the state is ENABLED, then the Batch scheduler can attempt to place jobs from an associated job queue on the compute resources within the environment. If the compute environment is managed, then it can scale its instances out or in automatically, based on the job queue demand. If the state is DISABLED, then the Batch scheduler doesn't attempt to place jobs within the environment. Jobs in a STARTING or RUNNING state continue to progress normally. Managed compute environments in the DISABLED state don't scale out. However, they scale in to minvCpus value after instances become idle.
      */
     state?: CEState;
+    /**
+     * The maximum number of vCPUs expected to be used for an unmanaged compute environment. This parameter should not be specified for a managed compute environment. This parameter is only used for fair share scheduling to reserve vCPU capacity for new share identifiers. If this parameter is not provided for a fair share job queue, no vCPU capacity will be reserved.
+     */
+    unmanagedvCpus?: Integer;
     /**
      * Details of the compute resources managed by the compute environment. Required for a managed compute environment. For more information, see Compute Environments in the Batch User Guide.
      */
@@ -1669,6 +1869,10 @@ declare namespace Batch {
      */
     state?: JQState;
     /**
+     * Amazon Resource Name (ARN) of the fair share scheduling policy. Once a job queue is created, the fair share scheduling policy can be replaced but not removed. The format is aws:Partition:batch:Region:Account:scheduling-policy/Name . For example, aws:aws:batch:us-west-2:012345678910:scheduling-policy/MySchedulingPolicy.
+     */
+    schedulingPolicyArn?: String;
+    /**
      * The priority of the job queue. Job queues with a higher priority (or a higher integer value for the priority parameter) are evaluated first when associated with the same compute environment. Priority is determined in descending order, for example, a job queue with a priority value of 10 is given scheduling preference over a job queue with a priority value of 1. All of the compute environments must be either EC2 (EC2 or SPOT) or Fargate (FARGATE or FARGATE_SPOT). EC2 and Fargate compute environments can't be mixed.
      */
     priority?: Integer;
@@ -1686,6 +1890,18 @@ declare namespace Batch {
      * The Amazon Resource Name (ARN) of the job queue.
      */
     jobQueueArn?: String;
+  }
+  export interface UpdateSchedulingPolicyRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the scheduling policy to update.
+     */
+    arn: String;
+    /**
+     * The fair share policy.
+     */
+    fairsharePolicy?: FairsharePolicy;
+  }
+  export interface UpdateSchedulingPolicyResponse {
   }
   export interface Volume {
     /**
