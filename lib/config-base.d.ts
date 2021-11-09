@@ -267,4 +267,12 @@ export abstract class ConfigurationOptions {
      * regional endpoints. 
      */
     stsRegionalEndpoints?: "legacy"|"regional";
+    /**
+     * Enables IPv6/IPv4 dualstack endpoint.
+     */
+    useDualstackEndpoint?: boolean;
+    /**
+     * Enables FIPS compatible endpoints.
+     */
+    useFipsEndpoint?: boolean;
 }
