@@ -1856,46 +1856,6 @@
     "hostname": "cur-fips.us-east-1.api.aws"
   },
   {
-    "endpointPrefix": "data.iot",
-    "clientName": "IotData",
-    "region": "ap-east-1",
-    "useFipsEndpoint": false,
-    "useDualstackEndpoint": false,
-    "hostname": "data.iot.ap-east-1.amazonaws.com"
-  },
-  {
-    "endpointPrefix": "data.iot",
-    "clientName": "IotData",
-    "region": "ap-east-1",
-    "useFipsEndpoint": false,
-    "useDualstackEndpoint": true,
-    "hostname": "data.iot.ap-east-1.api.aws"
-  },
-  {
-    "endpointPrefix": "data.iot",
-    "clientName": "IotData",
-    "region": "ap-east-1",
-    "useFipsEndpoint": true,
-    "useDualstackEndpoint": false,
-    "hostname": "data.iot-fips.ap-east-1.amazonaws.com"
-  },
-  {
-    "endpointPrefix": "data.iot",
-    "clientName": "IotData",
-    "region": "ca-central-1",
-    "useFipsEndpoint": true,
-    "useDualstackEndpoint": false,
-    "hostname": "data.iot-fips.ca-central-1.amazonaws.com"
-  },
-  {
-    "endpointPrefix": "data.iot",
-    "clientName": "IotData",
-    "region": "ap-east-1",
-    "useFipsEndpoint": true,
-    "useDualstackEndpoint": true,
-    "hostname": "data.iot-fips.ap-east-1.api.aws"
-  },
-  {
     "endpointPrefix": "data.jobs.iot",
     "clientName": "IoTJobsDataPlane",
     "region": "ap-east-1",
