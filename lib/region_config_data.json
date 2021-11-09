@@ -80,6 +80,11 @@
       "signatureVersion": "v2"
     },
 
+    "dualstack-*/s3": "dualstackLegacy",
+    "dualstack-fips-*/s3": "dualstackFipsLegacy",
+    "dualstack-*/s3-control": "dualstackLegacy",
+    "dualstack-fips-*/s3-control": "dualstackFipsLegacy",
+
     "fips-*/api.ecr": "fips.api.ecr",
     "fips-us-gov-*/api.ecr": "fips.api.ecr",
     "fips-*/api.sagemaker": "fips.api.sagemaker",
@@ -171,6 +176,12 @@
     },
     "fipsWithServiceOnly": {
       "endpoint": "{service}.{region}.amazonaws.com"
+    },
+    "dualstackLegacy": {
+      "endpoint": "{service}.dualstack.{region}.amazonaws.com"
+    },
+    "dualstackFipsLegacy": {
+      "endpoint": "{service}-fips.dualstack.{region}.amazonaws.com"
     }
   }
 }
