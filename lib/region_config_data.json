@@ -23,12 +23,16 @@
     "cn-*/*": {
       "endpoint": "{service}.{region}.amazonaws.com.cn"
     },
-    "us-iso-*/*": {
-      "endpoint": "{service}.{region}.c2s.ic.gov"
+    "us-iso-*/*": "usIso",
+    "fips-us-iso-*/*": {
+      "endpoint": "{service}-fips.{region}.c2s.ic.gov"
     },
-    "us-isob-*/*": {
-      "endpoint": "{service}.{region}.sc2s.sgov.gov"
+    "fips-us-iso-*/dms": "usIso",
+    "us-isob-*/*": "usIsob",
+    "fips-us-isob-*/*": {
+      "endpoint": "{service}-fips.{region}.sc2s.sgov.gov"
     },
+    "fips-us-isob-*/dms": "usIsob",
     "*/budgets": "globalSSL",
     "*/cloudfront": "globalSSL",
     "*/sts": "globalSSL",
@@ -154,6 +158,12 @@
     "s3signature": {
       "endpoint": "{service}.{region}.amazonaws.com",
       "signatureVersion": "s3"
+    },
+    "usIso": {
+      "endpoint": "{service}.{region}.c2s.ic.gov"
+    },
+    "usIsob": {
+      "endpoint": "{service}.{region}.sc2s.sgov.gov"
     },
     "fipsStandard": {
       "endpoint": "{service}-fips.{region}.amazonaws.com"
