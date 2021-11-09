@@ -40,6 +40,47 @@
     "useDualstackEndpoint": true,
     "hostname": "data.iot-fips.ap-east-1.api.aws"
   },
+
+  {
+    "endpointPrefix": "data.iot",
+    "clientName": "IotData",
+    "region": "cn-north-1",
+    "useFipsEndpoint": false,
+    "useDualstackEndpoint": false,
+    "hostname": "data.iot.cn-north-1.amazonaws.com.cn"
+  },
+  {
+    "endpointPrefix": "data.iot",
+    "clientName": "IotData",
+    "region": "cn-north-1",
+    "useFipsEndpoint": false,
+    "useDualstackEndpoint": true,
+    "hostname": "data.iot.cn-north-1.api.amazonwebservices.com.cn"
+  },
+  {
+    "endpointPrefix": "data.iot",
+    "clientName": "IotData",
+    "region": "cn-north-1",
+    "useFipsEndpoint": true,
+    "useDualstackEndpoint": false,
+    "hostname": "data.iot-fips.cn-north-1.amazonaws.com.cn"
+  },
+  {
+    "endpointPrefix": "data.iot",
+    "clientName": "IotData",
+    "region": "cn-north-1",
+    "useFipsEndpoint": true,
+    "useDualstackEndpoint": true,
+    "hostname": "data.iot-fips.cn-north-1.api.amazonwebservices.com.cn"
+  },
+  {
+    "endpointPrefix": "data.iot",
+    "clientName": "IotData",
+    "region": "us-gov-east-1",
+    "useFipsEndpoint": true,
+    "useDualstackEndpoint": false,
+    "hostname": "data.iot-fips.us-gov-east-1.amazonaws.com"
+  },
   {
     "endpointPrefix": "ec2",
     "clientName": "EC2",

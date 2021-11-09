@@ -7624,38 +7624,6 @@
     "hostname": "cur-fips.cn-northwest-1.api.amazonwebservices.com.cn"
   },
   {
-    "endpointPrefix": "data.iot",
-    "clientName": "IotData",
-    "region": "cn-north-1",
-    "useFipsEndpoint": false,
-    "useDualstackEndpoint": false,
-    "hostname": "data.iot.cn-north-1.amazonaws.com.cn"
-  },
-  {
-    "endpointPrefix": "data.iot",
-    "clientName": "IotData",
-    "region": "cn-north-1",
-    "useFipsEndpoint": false,
-    "useDualstackEndpoint": true,
-    "hostname": "data.iot.cn-north-1.api.amazonwebservices.com.cn"
-  },
-  {
-    "endpointPrefix": "data.iot",
-    "clientName": "IotData",
-    "region": "cn-north-1",
-    "useFipsEndpoint": true,
-    "useDualstackEndpoint": false,
-    "hostname": "data.iot-fips.cn-north-1.amazonaws.com.cn"
-  },
-  {
-    "endpointPrefix": "data.iot",
-    "clientName": "IotData",
-    "region": "cn-north-1",
-    "useFipsEndpoint": true,
-    "useDualstackEndpoint": true,
-    "hostname": "data.iot-fips.cn-north-1.api.amazonwebservices.com.cn"
-  },
-  {
     "endpointPrefix": "data.jobs.iot",
     "clientName": "IoTJobsDataPlane",
     "region": "cn-north-1",
@@ -10338,14 +10306,6 @@
     "useFipsEndpoint": true,
     "useDualstackEndpoint": true,
     "hostname": "connect-fips.us-gov-west-1.api.aws"
-  },
-  {
-    "endpointPrefix": "data.iot",
-    "clientName": "IotData",
-    "region": "us-gov-east-1",
-    "useFipsEndpoint": true,
-    "useDualstackEndpoint": false,
-    "hostname": "data.iot-fips.us-gov-east-1.amazonaws.com"
   },
   {
     "endpointPrefix": "data.jobs.iot",
