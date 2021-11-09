@@ -183,5 +183,37 @@
     "useFipsEndpoint": true,
     "useDualstackEndpoint": false,
     "hostname": "iam.us-gov.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "organizations",
+    "clientName": "Organizations",
+    "region": "aws-us-gov-global",
+    "useFipsEndpoint": true,
+    "useDualstackEndpoint": false,
+    "hostname": "organizations.us-gov-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "rds",
+    "clientName": "RDS",
+    "region": "us-gov-east-1",
+    "useFipsEndpoint": true,
+    "useDualstackEndpoint": false,
+    "hostname": "rds.us-gov-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "route53",
+    "clientName": "Route53",
+    "region": "aws-us-gov-global",
+    "useFipsEndpoint": false,
+    "useDualstackEndpoint": false,
+    "hostname": "route53.us-gov.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "route53",
+    "clientName": "Route53",
+    "region": "aws-us-gov-global",
+    "useFipsEndpoint": true,
+    "useDualstackEndpoint": false,
+    "hostname": "route53.us-gov.amazonaws.com"
   }
 ]
