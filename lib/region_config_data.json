@@ -3,6 +3,9 @@
     "*/*": {
       "endpoint": "{service}.{region}.amazonaws.com"
     },
+    "dualstack-*/*": {
+      "endpoint": "{service}.{region}.api.aws"
+    },
     "fips-*/*": "fipsStandard",
     "fips-us-gov-*/*": "fipsStandard",
     "fips-cn-*/*": {
