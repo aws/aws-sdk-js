@@ -24,8 +24,11 @@
       "endpoint": "{service}.{region}.sc2s.sgov.gov"
     },
     "*/budgets": "globalSSL",
+    "fips-*/budgets": "globalSSLFips",
     "*/cloudfront": "globalSSL",
+    "fips-*/cloudfront": "globalSSLFips",
     "*/sts": "globalSSL",
+    "fips-*/sts": "globalSSLFips",
     "*/importexport": {
       "endpoint": "{service}.amazonaws.com",
       "signatureVersion": "v2",
@@ -33,6 +36,7 @@
     },
 
     "*/route53": "globalSSL",
+    "fips-*/route53": "globalSSLFips",
     "cn-*/route53": {
       "endpoint": "{service}.amazonaws.com.cn",
       "globalEndpoint": true,
@@ -41,8 +45,10 @@
     "us-gov-*/route53": "globalGovCloud",
 
     "*/waf": "globalSSL",
+    "fips-*/waf": "globalSSLFips",
 
     "*/iam": "globalSSL",
+    "fips-*/iam": "globalSSLFips",
     "cn-*/iam": {
       "endpoint": "{service}.cn-north-1.amazonaws.com.cn",
       "globalEndpoint": true,
@@ -90,10 +96,8 @@
     "fips-*/streams.dynamodb": {
       "endpoint": "dynamodb-fips.{region}.amazonaws.com"
     },
-    "fips-*/route53": "fipsWithoutRegion",
     "fips-*/transcribe": "fipsDotPrefix",
     "fips-us-gov-*/transcribe": "fipsDotPrefix",
-    "fips-*/waf": "fipsWithoutRegion",
     "fips-accesspoint-*/*": {
       "endpoint": "{service}-accesspoint-fips.{region}.amazonaws.com"
     },
@@ -133,6 +137,11 @@
       "globalEndpoint": true,
       "signingRegion": "us-east-1"
     },
+    "globalSSLFips": {
+      "endpoint": "https://{service}-fips.amazonaws.com",
+      "globalEndpoint": true,
+      "signingRegion": "us-east-1"
+    },
     "globalGovCloud": {
       "endpoint": "{service}.us-gov.amazonaws.com",
       "globalEndpoint": true,
@@ -147,9 +156,6 @@
     },
     "fipsDotPrefix": {
       "endpoint": "fips.{service}.{region}.amazonaws.com"
-    },
-    "fipsWithoutRegion": {
-      "endpoint": "{service}-fips.amazonaws.com"
     },
     "fips.api.ecr": {
       "endpoint": "ecr-fips.{region}.amazonaws.com"
