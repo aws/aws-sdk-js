@@ -12,6 +12,9 @@
     "dualstack-fips-*/*": {
       "endpoint": "{service}-fips.{region}.api.aws"
     },
+    "dualstack-fips-cn-*/*": {
+      "endpoint": "{service}-fips.{region}.api.amazonwebservices.com.cn"
+    },
     "fips-*/*": "fipsStandard",
     "fips-us-gov-*/*": "fipsStandard",
     "fips-cn-*/*": {
