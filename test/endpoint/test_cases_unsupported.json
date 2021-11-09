@@ -143,5 +143,45 @@
     "useFipsEndpoint": true,
     "useDualstackEndpoint": false,
     "hostname": "api.tunneling.iot-fips.ca-central-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "dms",
+    "clientName": "DMS",
+    "region": "us-gov-east-1",
+    "useFipsEndpoint": true,
+    "useDualstackEndpoint": false,
+    "hostname": "dms.us-gov-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "elasticache",
+    "clientName": "ElastiCache",
+    "region": "us-gov-east-1",
+    "useFipsEndpoint": true,
+    "useDualstackEndpoint": false,
+    "hostname": "elasticache.us-gov-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "elasticache",
+    "clientName": "ElastiCache",
+    "region": "us-gov-west-1",
+    "useFipsEndpoint": true,
+    "useDualstackEndpoint": false,
+    "hostname": "elasticache.us-gov-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "iam",
+    "clientName": "IAM",
+    "region": "aws-us-gov-global",
+    "useFipsEndpoint": false,
+    "useDualstackEndpoint": false,
+    "hostname": "iam.us-gov.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "iam",
+    "clientName": "IAM",
+    "region": "aws-us-gov-global",
+    "useFipsEndpoint": true,
+    "useDualstackEndpoint": false,
+    "hostname": "iam.us-gov.amazonaws.com"
   }
 ]
