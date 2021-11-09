@@ -2873,7 +2873,7 @@
   },
   {
     "endpointPrefix": "finspace-api",
-    "clientName": "Finspace",
+    "clientName": "Finspacedata",
     "region": "ca-central-1",
     "useFipsEndpoint": false,
     "useDualstackEndpoint": false,
@@ -2881,7 +2881,7 @@
   },
   {
     "endpointPrefix": "finspace-api",
-    "clientName": "Finspace",
+    "clientName": "Finspacedata",
     "region": "ca-central-1",
     "useFipsEndpoint": false,
     "useDualstackEndpoint": true,
@@ -2889,7 +2889,7 @@
   },
   {
     "endpointPrefix": "finspace-api",
-    "clientName": "Finspace",
+    "clientName": "Finspacedata",
     "region": "ca-central-1",
     "useFipsEndpoint": true,
     "useDualstackEndpoint": false,
@@ -2897,7 +2897,7 @@
   },
   {
     "endpointPrefix": "finspace-api",
-    "clientName": "Finspace",
+    "clientName": "Finspacedata",
     "region": "ca-central-1",
     "useFipsEndpoint": true,
     "useDualstackEndpoint": true,
