@@ -268,7 +268,7 @@ export abstract class ConfigurationOptions {
      */
     stsRegionalEndpoints?: "legacy"|"regional";
     /**
-     * Enables IPv6/IPv4 dualstack endpoint.
+     * Enables IPv6 dualstack endpoint.
      */
     useDualstackEndpoint?: boolean;
     /**
