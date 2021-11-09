@@ -6624,34 +6624,6 @@
     "hostname": "fips.transcribe.us-east-1.amazonaws.com"
   },
   {
-    "endpointPrefix": "transcribestreaming",
-    "region": "ap-northeast-1",
-    "useFipsEndpoint": false,
-    "useDualstackEndpoint": false,
-    "hostname": "transcribestreaming.ap-northeast-1.amazonaws.com"
-  },
-  {
-    "endpointPrefix": "transcribestreaming",
-    "region": "ap-northeast-1",
-    "useFipsEndpoint": false,
-    "useDualstackEndpoint": true,
-    "hostname": "transcribestreaming.ap-northeast-1.api.aws"
-  },
-  {
-    "endpointPrefix": "transcribestreaming",
-    "region": "ap-northeast-1",
-    "useFipsEndpoint": true,
-    "useDualstackEndpoint": false,
-    "hostname": "transcribestreaming-fips.ap-northeast-1.amazonaws.com"
-  },
-  {
-    "endpointPrefix": "transcribestreaming",
-    "region": "ap-northeast-1",
-    "useFipsEndpoint": true,
-    "useDualstackEndpoint": true,
-    "hostname": "transcribestreaming-fips.ap-northeast-1.api.aws"
-  },
-  {
     "endpointPrefix": "transfer",
     "clientName": "Transfer",
     "region": "af-south-1",
