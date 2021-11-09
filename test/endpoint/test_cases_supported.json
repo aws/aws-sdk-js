@@ -9696,34 +9696,6 @@
     "hostname": "tagging-fips.cn-north-1.api.amazonwebservices.com.cn"
   },
   {
-    "endpointPrefix": "transcribestreaming",
-    "region": "cn-north-1",
-    "useFipsEndpoint": false,
-    "useDualstackEndpoint": false,
-    "hostname": "transcribestreaming.cn-north-1.amazonaws.com.cn"
-  },
-  {
-    "endpointPrefix": "transcribestreaming",
-    "region": "cn-north-1",
-    "useFipsEndpoint": false,
-    "useDualstackEndpoint": true,
-    "hostname": "transcribestreaming.cn-north-1.api.amazonwebservices.com.cn"
-  },
-  {
-    "endpointPrefix": "transcribestreaming",
-    "region": "cn-north-1",
-    "useFipsEndpoint": true,
-    "useDualstackEndpoint": false,
-    "hostname": "transcribestreaming-fips.cn-north-1.amazonaws.com.cn"
-  },
-  {
-    "endpointPrefix": "transcribestreaming",
-    "region": "cn-north-1",
-    "useFipsEndpoint": true,
-    "useDualstackEndpoint": true,
-    "hostname": "transcribestreaming-fips.cn-north-1.api.amazonwebservices.com.cn"
-  },
-  {
     "endpointPrefix": "transfer",
     "clientName": "Transfer",
     "region": "cn-north-1",
@@ -11594,13 +11566,6 @@
     "useFipsEndpoint": false,
     "useDualstackEndpoint": false,
     "hostname": "transcribe.us-iso-east-1.c2s.ic.gov"
-  },
-  {
-    "endpointPrefix": "transcribestreaming",
-    "region": "us-iso-east-1",
-    "useFipsEndpoint": false,
-    "useDualstackEndpoint": false,
-    "hostname": "transcribestreaming.us-iso-east-1.c2s.ic.gov"
   },
   {
     "endpointPrefix": "translate",
