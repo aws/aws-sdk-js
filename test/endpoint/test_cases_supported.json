@@ -3624,22 +3624,6 @@
     "hostname": "iotevents-fips.ap-northeast-1.api.aws"
   },
   {
-    "endpointPrefix": "iotsecuredtunneling",
-    "clientName": "IoTSecureTunneling",
-    "region": "ap-east-1",
-    "useFipsEndpoint": true,
-    "useDualstackEndpoint": false,
-    "hostname": "api.tunneling.iot-fips.ap-east-1.amazonaws.com"
-  },
-  {
-    "endpointPrefix": "iotsecuredtunneling",
-    "clientName": "IoTSecureTunneling",
-    "region": "ca-central-1",
-    "useFipsEndpoint": true,
-    "useDualstackEndpoint": false,
-    "hostname": "api.tunneling.iot-fips.ca-central-1.amazonaws.com"
-  },
-  {
     "endpointPrefix": "iotsitewise",
     "clientName": "IoTSiteWise",
     "region": "ap-northeast-1",
@@ -8592,38 +8576,6 @@
     "hostname": "iotevents-fips.cn-north-1.api.amazonwebservices.com.cn"
   },
   {
-    "endpointPrefix": "iotsecuredtunneling",
-    "clientName": "IoTSecureTunneling",
-    "region": "cn-north-1",
-    "useFipsEndpoint": false,
-    "useDualstackEndpoint": false,
-    "hostname": "iotsecuredtunneling.cn-north-1.amazonaws.com.cn"
-  },
-  {
-    "endpointPrefix": "iotsecuredtunneling",
-    "clientName": "IoTSecureTunneling",
-    "region": "cn-north-1",
-    "useFipsEndpoint": false,
-    "useDualstackEndpoint": true,
-    "hostname": "iotsecuredtunneling.cn-north-1.api.amazonwebservices.com.cn"
-  },
-  {
-    "endpointPrefix": "iotsecuredtunneling",
-    "clientName": "IoTSecureTunneling",
-    "region": "cn-north-1",
-    "useFipsEndpoint": true,
-    "useDualstackEndpoint": false,
-    "hostname": "iotsecuredtunneling-fips.cn-north-1.amazonaws.com.cn"
-  },
-  {
-    "endpointPrefix": "iotsecuredtunneling",
-    "clientName": "IoTSecureTunneling",
-    "region": "cn-north-1",
-    "useFipsEndpoint": true,
-    "useDualstackEndpoint": true,
-    "hostname": "iotsecuredtunneling-fips.cn-north-1.api.amazonwebservices.com.cn"
-  },
-  {
     "endpointPrefix": "iotsitewise",
     "clientName": "IoTSiteWise",
     "region": "cn-north-1",
@@ -10610,14 +10562,6 @@
     "useFipsEndpoint": true,
     "useDualstackEndpoint": true,
     "hostname": "iotevents-fips.us-gov-west-1.api.aws"
-  },
-  {
-    "endpointPrefix": "iotsecuredtunneling",
-    "clientName": "IoTSecureTunneling",
-    "region": "us-gov-east-1",
-    "useFipsEndpoint": true,
-    "useDualstackEndpoint": false,
-    "hostname": "api.tunneling.iot-fips.us-gov-east-1.amazonaws.com"
   },
   {
     "endpointPrefix": "iotsitewise",
