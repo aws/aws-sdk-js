@@ -21,7 +21,12 @@ describe('endpoints', () => {
         throw new Error(`${clientName} does not exist`);
       }
 
-      const client = new AWS[clientName]({ region, useFipsEndpoint, useDualstackEndpoint });
+      const client = new AWS[clientName]({
+        region,
+        useFipsEndpoint,
+        useDualstackEndpoint,
+        hostPrefixEnabled: false
+      });
 
       const req = client[Object.keys(client.api.operations)[0]]();
 
