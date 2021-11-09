@@ -98,9 +98,6 @@
     "fips-*/runtime.sagemaker": {
       "endpoint": "runtime-fips.sagemaker.{region}.amazonaws.com"
     },
-    "fips-*/streams.dynamodb": {
-      "endpoint": "dynamodb-fips.{region}.amazonaws.com"
-    },
     "fips-*/transcribe": "fipsDotPrefix",
     "fips-us-gov-*/transcribe": "fipsDotPrefix",
     "fips-accesspoint-*/*": {
