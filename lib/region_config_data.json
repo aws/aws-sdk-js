@@ -6,6 +6,9 @@
     "dualstack-*/*": {
       "endpoint": "{service}.{region}.api.aws"
     },
+    "dualstack-cn-*/*": {
+      "endpoint": "{service}.{region}.api.amazonwebservices.com.cn"
+    },
     "dualstack-fips-*/*": {
       "endpoint": "{service}-fips.{region}.api.aws"
     },
