@@ -1,5 +1,5 @@
 const testCases = require('./test_cases_supported.json');
-const helpers = require('../../helpers');
+const helpers = require('../helpers');
 const AWS = helpers.AWS;
 
 describe('endpoints', () => {
@@ -16,12 +16,12 @@ describe('endpoints', () => {
     useDualstackEndpoint,
     hostname,
   } of testCases) {
-    it(`testing "${clientName}" with region: ${region}`, async () => {
+    it(`testing "${clientName}" with region: ${region}`, (done) => {
       if (!AWS[clientName]) {
         throw new Error(`${clientName} does not exist`);
       }
 
-      const client = new AWS[clientName]({ region });
+      const client = new AWS[clientName]({ region, useFipsEndpoint, useDualstackEndpoint });
 
       const req = client[Object.keys(client.api.operations)[0]]();
 
