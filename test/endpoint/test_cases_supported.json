@@ -1,5 +1,61 @@
 [
   {
+    "endpointPrefix": "iotsecuredtunneling",
+    "clientName": "IoTSecureTunneling",
+    "region": "cn-north-1",
+    "useFipsEndpoint": false,
+    "useDualstackEndpoint": false,
+    "hostname": "api.tunneling.iot.cn-north-1.amazonaws.com.cn"
+  },
+  {
+    "endpointPrefix": "iotsecuredtunneling",
+    "clientName": "IoTSecureTunneling",
+    "region": "cn-north-1",
+    "useFipsEndpoint": false,
+    "useDualstackEndpoint": true,
+    "hostname": "api.tunneling.iot.cn-north-1.api.amazonwebservices.com.cn"
+  },
+  {
+    "endpointPrefix": "iotsecuredtunneling",
+    "clientName": "IoTSecureTunneling",
+    "region": "cn-north-1",
+    "useFipsEndpoint": true,
+    "useDualstackEndpoint": false,
+    "hostname": "api.tunneling.iot-fips.cn-north-1.amazonaws.com.cn"
+  },
+  {
+    "endpointPrefix": "iotsecuredtunneling",
+    "clientName": "IoTSecureTunneling",
+    "region": "cn-north-1",
+    "useFipsEndpoint": true,
+    "useDualstackEndpoint": true,
+    "hostname": "api.tunneling.iot-fips.cn-north-1.api.amazonwebservices.com.cn"
+  },
+  {
+    "endpointPrefix": "iotsecuredtunneling",
+    "clientName": "IoTSecureTunneling",
+    "region": "us-gov-east-1",
+    "useFipsEndpoint": true,
+    "useDualstackEndpoint": false,
+    "hostname": "api.tunneling.iot-fips.us-gov-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "iotsecuredtunneling",
+    "clientName": "IoTSecureTunneling",
+    "region": "ap-east-1",
+    "useFipsEndpoint": true,
+    "useDualstackEndpoint": false,
+    "hostname": "api.tunneling.iot-fips.ap-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "iotsecuredtunneling",
+    "clientName": "IoTSecureTunneling",
+    "region": "ca-central-1",
+    "useFipsEndpoint": true,
+    "useDualstackEndpoint": false,
+    "hostname": "api.tunneling.iot-fips.ca-central-1.amazonaws.com"
+  },
+  {
     "endpointPrefix": "a4b",
     "clientName": "AlexaForBusiness",
     "region": "us-east-1",
