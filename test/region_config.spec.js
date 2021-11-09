@@ -118,7 +118,7 @@ describe('region_config.js', function() {
         region: 'us-west-2',
         useDualstack: true
       });
-      expect(service.config.endpoint).to.equal('mockservice.dualstack.us-west-2.amazonaws.com');
+      expect(service.config.endpoint).to.equal('mockservice.us-west-2.api.aws');
     });
 
     it('does not use dualstack endpoint if useDualstack flag not set to true', function() {
