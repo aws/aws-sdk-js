@@ -6461,7 +6461,7 @@
     "region": "af-south-1",
     "useFipsEndpoint": false,
     "useDualstackEndpoint": false,
-    "hostname": "sts.af-south-1.amazonaws.com"
+    "hostname": "sts.amazonaws.com"
   },
   {
     "endpointPrefix": "sts",
