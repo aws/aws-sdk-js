@@ -39,5 +39,13 @@
     "useFipsEndpoint": true,
     "useDualstackEndpoint": true,
     "hostname": "data.iot-fips.ap-east-1.api.aws"
-  }
+  },
+  {
+    "endpointPrefix": "ec2",
+    "clientName": "EC2",
+    "region": "ap-south-1",
+    "useFipsEndpoint": false,
+    "useDualstackEndpoint": true,
+    "hostname": "api.ec2.ap-south-1.aws"
+  },
 ]
