@@ -3,11 +3,6 @@
     "*/*": {
       "endpoint": "{service}.{region}.amazonaws.com"
     },
-    "fips-*/*": "fipsStandard",
-    "fips-us-gov-*/*": "fipsStandard",
-    "fips-cn-*/*": {
-      "endpoint": "{service}-fips.{region}.amazonaws.com.cn"
-    },
     "cn-*/*": {
       "endpoint": "{service}.{region}.amazonaws.com.cn"
     },
@@ -66,49 +61,57 @@
     "*/sdb": {
       "endpoint": "{service}.{region}.amazonaws.com",
       "signatureVersion": "v2"
-    },
+    }
+  },
 
-    "fips-*/api.ecr": "fips.api.ecr",
-    "fips-us-gov-*/api.ecr": "fips.api.ecr",
-    "fips-*/api.sagemaker": "fips.api.sagemaker",
-    "fips-us-gov-*/api.sagemaker": "fips.api.sagemaker",
-    "fips-*/batch": "fipsDotPrefix",
-    "fips-*/eks": "fipsDotPrefix",
-    "fips-*/models.lex": "fips.models.lex",
-    "fips-us-gov-*/models.lex": "fips.models.lex",
-    "fips-*/runtime.lex": "fips.runtime.lex",
-    "fips-us-gov-*/runtime.lex": "fips.runtime.lex",
-    "fips-*/runtime.sagemaker": {
+  "fipsRules": {
+    "*/*": "fipsStandard",
+    "us-gov-*/*": "fipsStandard",
+    "cn-*/*": {
+      "endpoint": "{service}-fips.{region}.amazonaws.com.cn"
+    },
+    "*/api.ecr": "fips.api.ecr",
+    "*/api.sagemaker": "fips.api.sagemaker",
+    "*/batch": "fipsDotPrefix",
+    "*/eks": "fipsDotPrefix",
+    "*/models.lex": "fips.models.lex",
+    "*/runtime.lex": "fips.runtime.lex",
+    "*/runtime.sagemaker": {
       "endpoint": "runtime-fips.sagemaker.{region}.amazonaws.com"
     },
-    "fips-*/route53": "fipsWithoutRegion",
-    "fips-*/transcribe": "fipsDotPrefix",
-    "fips-us-gov-*/transcribe": "fipsDotPrefix",
-    "fips-*/waf": "fipsWithoutRegion",
-    "fips-us-gov-*/acm-pca": "fipsWithServiceOnly",
-    "fips-us-gov-*/batch": "fipsWithServiceOnly",
-    "fips-us-gov-*/config": "fipsWithServiceOnly",
-    "fips-us-gov-*/eks": "fipsWithServiceOnly",
-    "fips-us-gov-*/elasticmapreduce": "fipsWithServiceOnly",
-    "fips-us-gov-*/identitystore": "fipsWithServiceOnly",
-    "fips-us-gov-*/dynamodb": "fipsWithServiceOnly",
-    "fips-us-gov-*/elasticloadbalancing": "fipsWithServiceOnly",
-    "fips-us-gov-*/guardduty": "fipsWithServiceOnly",
-    "fips-us-gov-*/monitoring": "fipsWithServiceOnly",
-    "fips-aws-us-gov-global/organizations": "fipsWithServiceOnly",
-    "fips-us-gov-*/resource-groups": "fipsWithServiceOnly",
-    "fips-aws-us-gov-global/route53": {
-      "endpoint": "route53.us-gov.amazonaws.com"
-    },
-    "fips-us-gov-*/runtime.sagemaker": "fipsWithServiceOnly",
-    "fips-us-gov-*/servicecatalog-appregistry": "fipsWithServiceOnly",
-    "fips-us-gov-*/servicequotas": "fipsWithServiceOnly",
-    "fips-us-gov-*/ssm": "fipsWithServiceOnly",
-    "fips-us-gov-*/sts": "fipsWithServiceOnly",
+    "*/route53": "fipsWithoutRegion",
+    "*/transcribe": "fipsDotPrefix",
+    "*/waf": "fipsWithoutRegion",
+
+    "us-gov-*/transcribe": "fipsDotPrefix",
+    "us-gov-*/api.ecr": "fips.api.ecr",
+    "us-gov-*/api.sagemaker": "fips.api.sagemaker",
+    "us-gov-*/models.lex": "fips.models.lex",
+    "us-gov-*/runtime.lex": "fips.runtime.lex",
+    "us-gov-*/acm-pca": "fipsWithServiceOnly",
+    "us-gov-*/batch": "fipsWithServiceOnly",
+    "us-gov-*/config": "fipsWithServiceOnly",
+    "us-gov-*/eks": "fipsWithServiceOnly",
+    "us-gov-*/elasticmapreduce": "fipsWithServiceOnly",
+    "us-gov-*/identitystore": "fipsWithServiceOnly",
+    "us-gov-*/dynamodb": "fipsWithServiceOnly",
+    "us-gov-*/elasticloadbalancing": "fipsWithServiceOnly",
+    "us-gov-*/guardduty": "fipsWithServiceOnly",
+    "us-gov-*/monitoring": "fipsWithServiceOnly",
+    "us-gov-*/resource-groups": "fipsWithServiceOnly",
+    "us-gov-*/runtime.sagemaker": "fipsWithServiceOnly",
+    "us-gov-*/servicecatalog-appregistry": "fipsWithServiceOnly",
+    "us-gov-*/servicequotas": "fipsWithServiceOnly",
+    "us-gov-*/ssm": "fipsWithServiceOnly",
+    "us-gov-*/sts": "fipsWithServiceOnly",
+    "us-gov-*/support": "fipsWithServiceOnly",
     "fips-us-gov-west-1/states": "fipsWithServiceOnly",
-    "fips-us-gov-*/support": "fipsWithServiceOnly",
     "fips-us-iso-east-1/elasticfilesystem": {
       "endpoint": "elasticfilesystem-fips.{region}.c2s.ic.gov"
+    },
+    "fips-aws-us-gov-global/organizations": "fipsWithServiceOnly",
+    "fips-aws-us-gov-global/route53": {
+      "endpoint": "route53.us-gov.amazonaws.com"
     }
   },
 
