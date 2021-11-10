@@ -267,4 +267,8 @@ export abstract class ConfigurationOptions {
      * regional endpoints. 
      */
     stsRegionalEndpoints?: "legacy"|"regional";
+    /**
+     * Enables FIPS compatible endpoints.
+     */
+    useFipsEndpoint?: boolean;
 }
