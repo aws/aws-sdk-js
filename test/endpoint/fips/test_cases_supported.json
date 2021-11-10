@@ -2727,35 +2727,35 @@
     "clientName": "DynamoDBStreams",
     "region": "ca-central-1-fips",
     "signingRegion": "ca-central-1",
-    "hostname": "dynamodb-fips.ca-central-1.amazonaws.com"
+    "hostname": "streams.dynamodb-fips.ca-central-1.amazonaws.com"
   },
   {
     "endpointPrefix": "streams.dynamodb",
     "clientName": "DynamoDBStreams",
     "region": "us-east-1-fips",
     "signingRegion": "us-east-1",
-    "hostname": "dynamodb-fips.us-east-1.amazonaws.com"
+    "hostname": "streams.dynamodb-fips.us-east-1.amazonaws.com"
   },
   {
     "endpointPrefix": "streams.dynamodb",
     "clientName": "DynamoDBStreams",
     "region": "us-east-2-fips",
     "signingRegion": "us-east-2",
-    "hostname": "dynamodb-fips.us-east-2.amazonaws.com"
+    "hostname": "streams.dynamodb-fips.us-east-2.amazonaws.com"
   },
   {
     "endpointPrefix": "streams.dynamodb",
     "clientName": "DynamoDBStreams",
     "region": "us-west-1-fips",
     "signingRegion": "us-west-1",
-    "hostname": "dynamodb-fips.us-west-1.amazonaws.com"
+    "hostname": "streams.dynamodb-fips.us-west-1.amazonaws.com"
   },
   {
     "endpointPrefix": "streams.dynamodb",
     "clientName": "DynamoDBStreams",
     "region": "us-west-2-fips",
     "signingRegion": "us-west-2",
-    "hostname": "dynamodb-fips.us-west-2.amazonaws.com"
+    "hostname": "streams.dynamodb-fips.us-west-2.amazonaws.com"
   },
   {
     "endpointPrefix": "sts",
@@ -3924,14 +3924,14 @@
     "clientName": "DynamoDBStreams",
     "region": "us-gov-east-1-fips",
     "signingRegion": "us-gov-east-1",
-    "hostname": "dynamodb.us-gov-east-1.amazonaws.com"
+    "hostname": "streams.dynamodb-fips.us-gov-east-1.amazonaws.com"
   },
   {
     "endpointPrefix": "streams.dynamodb",
     "clientName": "DynamoDBStreams",
     "region": "us-gov-west-1-fips",
     "signingRegion": "us-gov-west-1",
-    "hostname": "dynamodb.us-gov-west-1.amazonaws.com"
+    "hostname": "streams.dynamodb-fips.us-gov-west-1.amazonaws.com"
   },
   {
     "endpointPrefix": "sts",
