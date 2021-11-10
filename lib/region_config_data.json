@@ -81,9 +81,6 @@
     "fips-*/runtime.sagemaker": {
       "endpoint": "runtime-fips.sagemaker.{region}.amazonaws.com"
     },
-    "fips-*/streams.dynamodb": {
-      "endpoint": "dynamodb-fips.{region}.amazonaws.com"
-    },
     "fips-*/route53": "fipsWithoutRegion",
     "fips-*/transcribe": "fipsDotPrefix",
     "fips-us-gov-*/transcribe": "fipsDotPrefix",
@@ -113,9 +110,6 @@
     "fips-us-gov-*/sts": "fipsWithServiceOnly",
     "fips-us-gov-west-1/states": "fipsWithServiceOnly",
     "fips-us-gov-*/support": "fipsWithServiceOnly",
-    "fips-us-gov-*/streams.dynamodb": {
-      "endpoint": "dynamodb.{region}.amazonaws.com"
-    },
     "fips-us-iso-east-1/elasticfilesystem": {
       "endpoint": "elasticfilesystem-fips.{region}.c2s.ic.gov"
     }
