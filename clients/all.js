@@ -286,5 +286,6 @@ module.exports = {
   CloudControl: require('./cloudcontrol'),
   Grafana: require('./grafana'),
   Panorama: require('./panorama'),
-  ChimeSDKMeetings: require('./chimesdkmeetings')
+  ChimeSDKMeetings: require('./chimesdkmeetings'),
+  Resiliencehub: require('./resiliencehub')
 };

@@ -817,6 +817,8 @@ declare namespace Backup {
      * An array of conditions used to specify a set of resources to assign to a backup plan; for example, "StringEquals": {"ec2:ResourceTag/Department": "accounting". Assigns the backup plan to every resource with at least one matching tag.
      */
     ListOfTags?: ListOfTags;
+    NotResources?: ResourceArns;
+    Conditions?: Conditions;
   }
   export type BackupSelectionName = string;
   export type BackupSelectionsList = BackupSelectionsListMember[];
@@ -919,8 +921,19 @@ declare namespace Backup {
     ConditionValue: ConditionValue;
   }
   export type ConditionKey = string;
+  export interface ConditionParameter {
+    ConditionKey?: ConditionKey;
+    ConditionValue?: ConditionValue;
+  }
+  export type ConditionParameters = ConditionParameter[];
   export type ConditionType = "STRINGEQUALS"|string;
   export type ConditionValue = string;
+  export interface Conditions {
+    StringEquals?: ConditionParameters;
+    StringNotEquals?: ConditionParameters;
+    StringLike?: ConditionParameters;
+    StringNotLike?: ConditionParameters;
+  }
   export interface ControlInputParameter {
     /**
      * The name of a parameter, for example, BackupPlanFrequency.

@@ -1097,5 +1097,8 @@
   "chimesdkmeetings": {
     "prefix": "chime-sdk-meetings",
     "name": "ChimeSDKMeetings"
+  },
+  "resiliencehub": {
+    "name": "Resiliencehub"
   }
 }
