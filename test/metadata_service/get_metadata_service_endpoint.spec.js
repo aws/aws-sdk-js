@@ -2,7 +2,7 @@ var helpers = require('./../helpers');
 var getMetadataServiceEndpoint = require('../../lib/metadata_service/get_metadata_service_endpoint');
 
 var Endpoint = require('../../lib/metadata_service/get_endpoint')();
-var EndpointMode = require('../../lib/metadata_service/endpoint_mode');
+var EndpointMode = require('../../lib/metadata_service/get_endpoint_mode')();
 var ENDPOINT_CONFIG_OPTIONS = require('../../lib/metadata_service/endpoint_config_options').ENDPOINT_CONFIG_OPTIONS;
 
 var AWS = helpers.AWS;
