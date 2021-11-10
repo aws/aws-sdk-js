@@ -88,9 +88,6 @@
     "fips-*/transcribe": "fipsDotPrefix",
     "fips-us-gov-*/transcribe": "fipsDotPrefix",
     "fips-*/waf": "fipsWithoutRegion",
-    "fips-accesspoint-*/*": {
-      "endpoint": "{service}-accesspoint-fips.{region}.amazonaws.com"
-    },
     "fips-us-gov-*/acm-pca": "fipsWithServiceOnly",
     "fips-us-gov-*/batch": "fipsWithServiceOnly",
     "fips-us-gov-*/config": "fipsWithServiceOnly",
