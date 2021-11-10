@@ -1,0 +1,5 @@
+{
+  "type": "feature",
+  "category": "endpoint",
+  "description": "Move FIPS rules in a separate section in region_config"
+}
