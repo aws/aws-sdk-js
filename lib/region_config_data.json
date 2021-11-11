@@ -83,6 +83,7 @@
     "*/runtime.sagemaker": {
       "endpoint": "runtime-fips.sagemaker.{region}.amazonaws.com"
     },
+    "*/iam": "fipsWithoutRegion",
     "*/route53": "fipsWithoutRegion",
     "*/transcribe": "fipsDotPrefix",
     "*/waf": "fipsWithoutRegion",
