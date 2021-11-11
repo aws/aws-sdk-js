@@ -216,7 +216,7 @@ describe('AWS.S3Control', function() {
           built.httpRequest.endpoint.hostname
         ).to.equal('s3-outposts.s3-external-1.amazonaws.com');
 
-        client = new AWS.S3Control({region: 'us-east-1-fips'});
+        client = new AWS.S3Control({region: 'us-east-1', useFipsEndpoint: true});
         helpers.mockHttpResponse(200, {}, '');
         request = client.getBucket({
           Bucket: 'arn:aws:s3-outposts:s3-external-1:123456789012:outpost/op-01234567890123456/bucket/mybucket'

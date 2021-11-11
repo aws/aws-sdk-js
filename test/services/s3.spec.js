@@ -3485,7 +3485,7 @@ describe('AWS.S3', function() {
           built.httpRequest.endpoint.hostname
         ).to.equal('myendpoint-123456789012.s3-accesspoint.s3-external-1.amazonaws.com');
 
-        s3 = new AWS.S3({region: 'us-east-1-fips'});
+        s3 = new AWS.S3({region: 'us-east-1', useFipsEndpoint: true});
         helpers.mockHttpResponse(200, {}, '');
         request = s3.getObject({
           Bucket: 'arn:aws:s3:us-east-1:123456789012:accesspoint/myendpoint',
