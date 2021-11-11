@@ -98,6 +98,28 @@
         return delete AWS.config.s3;
       });
 
+      it('sets useFipsEndpoint to true if region is fips', function() {
+        var s3 = new AWS.S3({
+          region: 'fips-eu-west-1'
+        });
+        expect(s3.config.region).to.equal('eu-west-1');
+        return expect(s3.config.useFipsEndpoint).to.equal(true);
+      });
+
+      it('sets region to "us-east-1" if region is global', function() {
+        var s3 = new AWS.S3({
+          region: 'aws-global'
+        });
+        return expect(s3.config.region).to.equal('us-east-1');
+      });
+
+      it('sets region to "us-gov-west-1" if region is us-gov-global', function() {
+        var s3 = new AWS.S3({
+          region: 'aws-us-gov-global'
+        });
+        return expect(s3.config.region).to.equal('us-gov-west-1');
+      });
+
       it('merges credential data into config', function() {
         service = new AWS.Service({
           accessKeyId: 'foo',
