@@ -720,18 +720,22 @@
     describe('getServiceName', function() {
       it('should return api.signingName if provided', function(done) {
         service = new AWS.Lambda();
+        var originalSigningName = service.api.signingName;
         service.api.signingName = 'SIGNING_NAME';
         expect(service.getSigningName()).to.equal(
           service.api.signingName
         );
+        service.api.signingName = originalSigningName;
         done();
       });
       it('should return api.endpointPrefix if signingName is not provided', function(done) {
         service = new AWS.Lambda();
+        var originalEndpointPrefix = service.api.endpointPrefix;
         service.api.endpointPrefix = 'SIGNING_NAME';
         expect(service.getSigningName()).to.equal(
           service.api.endpointPrefix
         );
+        service.api.endpointPrefix = originalEndpointPrefix;
         done();
       });
     });
