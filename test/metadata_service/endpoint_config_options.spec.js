@@ -1,10 +1,9 @@
 var helpers = require('./../helpers');
-var options = require('../../lib/metadata_service/endpoint_config_options');
+var ENDPOINT_CONFIG_OPTIONS = require('../../lib/metadata_service/get_endpoint_config_options')();
 
 var AWS = helpers.AWS;
-var ENDPOINT_CONFIG_OPTIONS = options.ENDPOINT_CONFIG_OPTIONS;
-var ENV_ENDPOINT_NAME = options.ENV_ENDPOINT_NAME;
-var CONFIG_ENDPOINT_NAME = options.CONFIG_ENDPOINT_NAME;
+var ENV_ENDPOINT_NAME = 'AWS_EC2_METADATA_SERVICE_ENDPOINT';
+var CONFIG_ENDPOINT_NAME = 'ec2_metadata_service_endpoint';
 
 if (AWS.util.isNode()) {
   describe('endpointConfigOptions', function() {
