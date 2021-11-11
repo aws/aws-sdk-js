@@ -6802,6 +6802,7 @@ declare namespace EC2 {
   export type CopyTagsFromSource = "volume"|string;
   export type CoreCount = number;
   export type CoreCountList = CoreCount[];
+  export type CoreNetworkArn = string;
   export type CpuManufacturer = "intel"|"amd"|"amazon-web-services"|string;
   export type CpuManufacturerSet = CpuManufacturer[];
   export interface CpuOptions {
@@ -8144,6 +8145,7 @@ declare namespace EC2 {
      * The ID of a VPC peering connection.
      */
     VpcPeeringConnectionId?: VpcPeeringConnectionId;
+    CoreNetworkArn?: CoreNetworkArn;
   }
   export interface CreateRouteResult {
     /**
@@ -24598,6 +24600,7 @@ declare namespace EC2 {
      * The ID of a VPC peering connection.
      */
     VpcPeeringConnectionId?: VpcPeeringConnectionId;
+    CoreNetworkArn?: CoreNetworkArn;
   }
   export interface ReplaceRouteTableAssociationRequest {
     /**
@@ -25790,6 +25793,7 @@ declare namespace EC2 {
      * The ID of a VPC peering connection.
      */
     VpcPeeringConnectionId?: String;
+    CoreNetworkArn?: CoreNetworkArn;
   }
   export type RouteGatewayId = string;
   export type RouteList = Route[];

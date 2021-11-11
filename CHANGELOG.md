@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1026.0-->
+<!--LATEST=2.1027.0-->
 <!--ENTRYINSERT-->
+
+## 2.1027.0
+* feature: EC2: This release provides an additional route target for the VPC route table.
+* feature: Translate: This release enables customers to import Multi-Directional Custom Terminology and use Multi-Directional Custom Terminology in both real-time translation and asynchronous batch translation.
+* feature: endpoint: Add useFipsEndpoint configuration
 
 ## 2.1026.0
 * feature: Backup: AWS Backup SDK provides new options when scheduling backups: select supported services and resources that are assigned to a particular tag, linked to a combination of tags, or can be identified by a partial tag value, and exclude resources from their assignments.

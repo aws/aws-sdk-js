@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.1026.0',
+	  VERSION: '2.1027.0',
 
 	  /**
 	   * @api private
@@ -140,14 +140,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	__webpack_require__(36);
 	__webpack_require__(37);
-	__webpack_require__(40);
-	__webpack_require__(43);
+	__webpack_require__(41);
 	__webpack_require__(44);
-	__webpack_require__(49);
-	__webpack_require__(52);
+	__webpack_require__(45);
+	__webpack_require__(50);
 	__webpack_require__(53);
 	__webpack_require__(54);
-	__webpack_require__(62);
+	__webpack_require__(55);
+	__webpack_require__(63);
 
 	/**
 	 * @readonly
@@ -4239,6 +4239,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var inherit = AWS.util.inherit;
 	var clientCount = 0;
+	var region_utils = __webpack_require__(40);
 
 	/**
 	 * The service class representing an AWS service.
@@ -4260,6 +4261,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	      throw AWS.util.error(new Error(),
 	        'Service must be constructed with `new\' operator');
 	    }
+
+	    if (config && config.region) {
+	      var region = config.region;
+	      if (region_utils.isFipsRegion(region)) {
+	        config.region = region_utils.getRealRegion(region);
+	        config.useFipsEndpoint = true;
+	      }
+	      if (region_utils.isGlobalRegion(region)) {
+	        config.region = region_utils.getRealRegion(region);
+	      }
+	    }
+
 	    var ServiceClass = this.loadServiceClass(config || {});
 	    if (ServiceClass) {
 	      var originalConfig = AWS.util.copy(config);
@@ -4871,7 +4884,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    var e = endpoint;
 	    e = e.replace(/\{service\}/g, this.api.endpointPrefix);
-	    e = e.replace(/\{region\}/g, regionConfig.getRealRegion(this.config.region));
+	    e = e.replace(/\{region\}/g, this.config.region);
 	    e = e.replace(/\{scheme\}/g, this.config.sslEnabled ? 'https' : 'http');
 	    return e;
 	  },
@@ -5078,10 +5091,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function generateRegionPrefix(region) {
 	  if (!region) return null;
-	  if (isFipsRegion(region)) {
-	    region = getRealRegion(region);
-	  }
-
 	  var parts = region.split('-');
 	  if (parts.length < 3) return null;
 	  return parts.slice(0, parts.length - 2).join('-') + '-*';
@@ -5115,12 +5124,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function configureEndpoint(service) {
 	  var keys = derivedKeys(service);
-	  var region = service.config.region;
+	  var useFipsEndpoint = service.config.useFipsEndpoint;
 	  for (var i = 0; i < keys.length; i++) {
 	    var key = keys[i];
 	    if (!key) continue;
 
-	    var rules = isFipsRegion(region) ? regionConfig.fipsRules : regionConfig.rules;
+	    var rules = useFipsEndpoint ? regionConfig.fipsRules : regionConfig.rules;
 	    if (Object.prototype.hasOwnProperty.call(rules, key)) {
 	      var config = rules[key];
 	      if (typeof config === 'string') {
@@ -5134,12 +5143,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	          /{service}\.({region}\.)?/,
 	          '{service}.dualstack.{region}.'
 	        );
-	      }
-
-	      // set FIPS signingRegion and endpoint.
-	      if (isFipsRegion(service.config.region)) {
-	        config = util.copy(config);
-	        service.signingRegion = getRealRegion(service.config.region);
 	      }
 
 	      // set global endpoint
@@ -5176,27 +5179,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return defaultSuffix;
 	}
 
-	function isFipsRegion(region) {
-	  return region && (region.startsWith('fips-') || region.endsWith('-fips'));
-	}
-
-	function getRealRegion(region) {
-	  return isFipsRegion(region)
-	    ? ['fips-aws-global', 'aws-fips'].includes(region)
-	      ? 'us-east-1'
-	      : region === 'fips-aws-us-gov-global'
-	      ? 'us-gov-west-1'
-	      : region.replace(/fips-(dkr-|prod-)?|-fips/, '')
-	    : region;
-	}
-
 	/**
 	 * @api private
 	 */
 	module.exports = {
 	  configureEndpoint: configureEndpoint,
 	  getEndpointSuffix: getEndpointSuffix,
-	  getRealRegion: getRealRegion,
 	};
 
 
@@ -5204,15 +5192,42 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 39 */
 /***/ (function(module, exports) {
 
-	module.exports = {"rules":{"*/*":{"endpoint":"{service}.{region}.amazonaws.com"},"cn-*/*":{"endpoint":"{service}.{region}.amazonaws.com.cn"},"us-iso-*/*":{"endpoint":"{service}.{region}.c2s.ic.gov"},"us-isob-*/*":{"endpoint":"{service}.{region}.sc2s.sgov.gov"},"*/budgets":"globalSSL","*/cloudfront":"globalSSL","*/sts":"globalSSL","*/importexport":{"endpoint":"{service}.amazonaws.com","signatureVersion":"v2","globalEndpoint":true},"*/route53":"globalSSL","cn-*/route53":{"endpoint":"{service}.amazonaws.com.cn","globalEndpoint":true,"signingRegion":"cn-northwest-1"},"us-gov-*/route53":"globalGovCloud","*/waf":"globalSSL","*/iam":"globalSSL","cn-*/iam":{"endpoint":"{service}.cn-north-1.amazonaws.com.cn","globalEndpoint":true,"signingRegion":"cn-north-1"},"us-gov-*/iam":"globalGovCloud","us-gov-*/sts":{"endpoint":"{service}.{region}.amazonaws.com"},"us-gov-west-1/s3":"s3signature","us-west-1/s3":"s3signature","us-west-2/s3":"s3signature","eu-west-1/s3":"s3signature","ap-southeast-1/s3":"s3signature","ap-southeast-2/s3":"s3signature","ap-northeast-1/s3":"s3signature","sa-east-1/s3":"s3signature","us-east-1/s3":{"endpoint":"{service}.amazonaws.com","signatureVersion":"s3"},"us-east-1/sdb":{"endpoint":"{service}.amazonaws.com","signatureVersion":"v2"},"*/sdb":{"endpoint":"{service}.{region}.amazonaws.com","signatureVersion":"v2"}},"fipsRules":{"*/*":"fipsStandard","us-gov-*/*":"fipsStandard","cn-*/*":{"endpoint":"{service}-fips.{region}.amazonaws.com.cn"},"*/api.ecr":"fips.api.ecr","*/api.sagemaker":"fips.api.sagemaker","*/batch":"fipsDotPrefix","*/eks":"fipsDotPrefix","*/models.lex":"fips.models.lex","*/runtime.lex":"fips.runtime.lex","*/runtime.sagemaker":{"endpoint":"runtime-fips.sagemaker.{region}.amazonaws.com"},"*/route53":"fipsWithoutRegion","*/transcribe":"fipsDotPrefix","*/waf":"fipsWithoutRegion","us-gov-*/transcribe":"fipsDotPrefix","us-gov-*/api.ecr":"fips.api.ecr","us-gov-*/api.sagemaker":"fips.api.sagemaker","us-gov-*/models.lex":"fips.models.lex","us-gov-*/runtime.lex":"fips.runtime.lex","us-gov-*/acm-pca":"fipsWithServiceOnly","us-gov-*/batch":"fipsWithServiceOnly","us-gov-*/config":"fipsWithServiceOnly","us-gov-*/eks":"fipsWithServiceOnly","us-gov-*/elasticmapreduce":"fipsWithServiceOnly","us-gov-*/identitystore":"fipsWithServiceOnly","us-gov-*/dynamodb":"fipsWithServiceOnly","us-gov-*/elasticloadbalancing":"fipsWithServiceOnly","us-gov-*/guardduty":"fipsWithServiceOnly","us-gov-*/monitoring":"fipsWithServiceOnly","us-gov-*/resource-groups":"fipsWithServiceOnly","us-gov-*/runtime.sagemaker":"fipsWithServiceOnly","us-gov-*/servicecatalog-appregistry":"fipsWithServiceOnly","us-gov-*/servicequotas":"fipsWithServiceOnly","us-gov-*/ssm":"fipsWithServiceOnly","us-gov-*/sts":"fipsWithServiceOnly","us-gov-*/support":"fipsWithServiceOnly","fips-us-gov-west-1/states":"fipsWithServiceOnly","fips-us-iso-east-1/elasticfilesystem":{"endpoint":"elasticfilesystem-fips.{region}.c2s.ic.gov"},"fips-aws-us-gov-global/organizations":"fipsWithServiceOnly","fips-aws-us-gov-global/route53":{"endpoint":"route53.us-gov.amazonaws.com"}},"patterns":{"globalSSL":{"endpoint":"https://{service}.amazonaws.com","globalEndpoint":true,"signingRegion":"us-east-1"},"globalGovCloud":{"endpoint":"{service}.us-gov.amazonaws.com","globalEndpoint":true,"signingRegion":"us-gov-west-1"},"s3signature":{"endpoint":"{service}.{region}.amazonaws.com","signatureVersion":"s3"},"fipsStandard":{"endpoint":"{service}-fips.{region}.amazonaws.com"},"fipsDotPrefix":{"endpoint":"fips.{service}.{region}.amazonaws.com"},"fipsWithoutRegion":{"endpoint":"{service}-fips.amazonaws.com"},"fips.api.ecr":{"endpoint":"ecr-fips.{region}.amazonaws.com"},"fips.api.sagemaker":{"endpoint":"api-fips.sagemaker.{region}.amazonaws.com"},"fips.models.lex":{"endpoint":"models-fips.lex.{region}.amazonaws.com"},"fips.runtime.lex":{"endpoint":"runtime-fips.lex.{region}.amazonaws.com"},"fipsWithServiceOnly":{"endpoint":"{service}.{region}.amazonaws.com"}}}
+	module.exports = {"rules":{"*/*":{"endpoint":"{service}.{region}.amazonaws.com"},"cn-*/*":{"endpoint":"{service}.{region}.amazonaws.com.cn"},"us-iso-*/*":"usIso","us-isob-*/*":"usIsob","*/budgets":"globalSSL","*/cloudfront":"globalSSL","*/sts":"globalSSL","*/importexport":{"endpoint":"{service}.amazonaws.com","signatureVersion":"v2","globalEndpoint":true},"*/route53":"globalSSL","cn-*/route53":{"endpoint":"{service}.amazonaws.com.cn","globalEndpoint":true,"signingRegion":"cn-northwest-1"},"us-gov-*/route53":"globalGovCloud","*/waf":"globalSSL","*/iam":"globalSSL","cn-*/iam":{"endpoint":"{service}.cn-north-1.amazonaws.com.cn","globalEndpoint":true,"signingRegion":"cn-north-1"},"us-gov-*/iam":"globalGovCloud","us-gov-*/sts":{"endpoint":"{service}.{region}.amazonaws.com"},"us-gov-west-1/s3":"s3signature","us-west-1/s3":"s3signature","us-west-2/s3":"s3signature","eu-west-1/s3":"s3signature","ap-southeast-1/s3":"s3signature","ap-southeast-2/s3":"s3signature","ap-northeast-1/s3":"s3signature","sa-east-1/s3":"s3signature","us-east-1/s3":{"endpoint":"{service}.amazonaws.com","signatureVersion":"s3"},"us-east-1/sdb":{"endpoint":"{service}.amazonaws.com","signatureVersion":"v2"},"*/sdb":{"endpoint":"{service}.{region}.amazonaws.com","signatureVersion":"v2"}},"fipsRules":{"*/*":"fipsStandard","us-gov-*/*":"fipsStandard","us-iso-*/*":{"endpoint":"{service}-fips.{region}.c2s.ic.gov"},"us-iso-*/dms":"usIso","us-isob-*/*":{"endpoint":"{service}-fips.{region}.sc2s.sgov.gov"},"us-isob-*/dms":"usIsob","cn-*/*":{"endpoint":"{service}-fips.{region}.amazonaws.com.cn"},"*/api.ecr":"fips.api.ecr","*/api.sagemaker":"fips.api.sagemaker","*/batch":"fipsDotPrefix","*/eks":"fipsDotPrefix","*/models.lex":"fips.models.lex","*/runtime.lex":"fips.runtime.lex","*/runtime.sagemaker":{"endpoint":"runtime-fips.sagemaker.{region}.amazonaws.com"},"*/iam":"fipsWithoutRegion","*/route53":"fipsWithoutRegion","*/transcribe":"fipsDotPrefix","*/waf":"fipsWithoutRegion","us-gov-*/transcribe":"fipsDotPrefix","us-gov-*/api.ecr":"fips.api.ecr","us-gov-*/api.sagemaker":"fips.api.sagemaker","us-gov-*/models.lex":"fips.models.lex","us-gov-*/runtime.lex":"fips.runtime.lex","us-gov-*/acm-pca":"fipsWithServiceOnly","us-gov-*/batch":"fipsWithServiceOnly","us-gov-*/config":"fipsWithServiceOnly","us-gov-*/eks":"fipsWithServiceOnly","us-gov-*/elasticmapreduce":"fipsWithServiceOnly","us-gov-*/identitystore":"fipsWithServiceOnly","us-gov-*/dynamodb":"fipsWithServiceOnly","us-gov-*/elasticloadbalancing":"fipsWithServiceOnly","us-gov-*/guardduty":"fipsWithServiceOnly","us-gov-*/monitoring":"fipsWithServiceOnly","us-gov-*/resource-groups":"fipsWithServiceOnly","us-gov-*/runtime.sagemaker":"fipsWithServiceOnly","us-gov-*/servicecatalog-appregistry":"fipsWithServiceOnly","us-gov-*/servicequotas":"fipsWithServiceOnly","us-gov-*/ssm":"fipsWithServiceOnly","us-gov-*/sts":"fipsWithServiceOnly","us-gov-*/support":"fipsWithServiceOnly","us-gov-west-1/states":"fipsWithServiceOnly","us-iso-east-1/elasticfilesystem":{"endpoint":"elasticfilesystem-fips.{region}.c2s.ic.gov"},"us-gov-west-1/organizations":"fipsWithServiceOnly","us-gov-west-1/route53":{"endpoint":"route53.us-gov.amazonaws.com"}},"patterns":{"globalSSL":{"endpoint":"https://{service}.amazonaws.com","globalEndpoint":true,"signingRegion":"us-east-1"},"globalGovCloud":{"endpoint":"{service}.us-gov.amazonaws.com","globalEndpoint":true,"signingRegion":"us-gov-west-1"},"s3signature":{"endpoint":"{service}.{region}.amazonaws.com","signatureVersion":"s3"},"usIso":{"endpoint":"{service}.{region}.c2s.ic.gov"},"usIsob":{"endpoint":"{service}.{region}.sc2s.sgov.gov"},"fipsStandard":{"endpoint":"{service}-fips.{region}.amazonaws.com"},"fipsDotPrefix":{"endpoint":"fips.{service}.{region}.amazonaws.com"},"fipsWithoutRegion":{"endpoint":"{service}-fips.amazonaws.com"},"fips.api.ecr":{"endpoint":"ecr-fips.{region}.amazonaws.com"},"fips.api.sagemaker":{"endpoint":"api-fips.sagemaker.{region}.amazonaws.com"},"fips.models.lex":{"endpoint":"models-fips.lex.{region}.amazonaws.com"},"fips.runtime.lex":{"endpoint":"runtime-fips.lex.{region}.amazonaws.com"},"fipsWithServiceOnly":{"endpoint":"{service}.{region}.amazonaws.com"}}}
 
 /***/ }),
 /* 40 */
+/***/ (function(module, exports) {
+
+	function isFipsRegion(region) {
+	  return typeof region === 'string' && (region.startsWith('fips-') || region.endsWith('-fips'));
+	}
+
+	function isGlobalRegion(region) {
+	  return typeof region === 'string' && ['aws-global', 'aws-us-gov-global'].includes(region);
+	}
+
+	function getRealRegion(region) {
+	  return ['fips-aws-global', 'aws-fips', 'aws-global'].includes(region)
+	      ? 'us-east-1'
+	      : ['fips-aws-us-gov-global', 'aws-us-gov-global'].includes(region)
+	      ? 'us-gov-west-1'
+	      : region.replace(/fips-(dkr-|prod-)?|-fips/, '');
+	}
+
+	module.exports = {
+	  isFipsRegion: isFipsRegion,
+	  isGlobalRegion: isGlobalRegion,
+	  getRealRegion: getRealRegion
+	};
+
+
+/***/ }),
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AWS = __webpack_require__(1);
-	__webpack_require__(41);
 	__webpack_require__(42);
+	__webpack_require__(43);
 	var PromisesDependency;
 
 	/**
@@ -5397,7 +5412,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @!attribute stsRegionalEndpoints
 	 *   @return ['legacy'|'regional'] whether to send sts request to global endpoints or
 	 *     regional endpoints.
-	 *     Defaults to 'legacy'
+	 *     Defaults to 'legacy'.
+	 *
+	 * @!attribute useFipsEndpoint
+	 *   @return [Boolean] Enables FIPS compatible endpoints. Defaults to `false`.
 	 */
 	AWS.Config = AWS.util.inherit({
 	  /**
@@ -5552,6 +5570,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @option options stsRegionalEndpoints ['legacy'|'regional'] whether to send sts request
 	   *   to global endpoints or regional endpoints.
 	   *   Defaults to 'legacy'.
+	   * @option options useFipsEndpoint [Boolean] Enables FIPS compatible endpoints.
+	   *   Defaults to `false`.
 	   */
 	  constructor: function Config(options) {
 	    if (options === undefined) options = {};
@@ -5775,7 +5795,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    endpointDiscoveryEnabled: undefined,
 	    endpointCacheSize: 1000,
 	    hostPrefixEnabled: true,
-	    stsRegionalEndpoints: 'legacy'
+	    stsRegionalEndpoints: 'legacy',
+	    useFipsEndpoint: false
 	  },
 
 	  /**
@@ -5831,7 +5852,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 41 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AWS = __webpack_require__(1);
@@ -6083,7 +6104,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 42 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AWS = __webpack_require__(1);
@@ -6268,7 +6289,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 43 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AWS = __webpack_require__(1);
@@ -6512,12 +6533,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 44 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AWS = __webpack_require__(1);
 	var SequentialExecutor = __webpack_require__(36);
-	var DISCOVER_ENDPOINT = __webpack_require__(45).discoverEndpoint;
+	var DISCOVER_ENDPOINT = __webpack_require__(46).discoverEndpoint;
 	/**
 	 * The namespace used to register global event listeners for request building
 	 * and sending.
@@ -7108,7 +7129,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          var inputShape = req.service.api.operations[req.operation].input;
 	          censoredParams = filterSensitiveLog(inputShape, req.params);
 	        }
-	        var params = __webpack_require__(46).inspect(censoredParams, true, null);
+	        var params = __webpack_require__(47).inspect(censoredParams, true, null);
 	        var message = '';
 	        if (ansi) message += '\x1B[33m';
 	        message += '[AWS ' + req.service.serviceIdentifier + ' ' + status;
@@ -7167,7 +7188,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 45 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {var AWS = __webpack_require__(1);
@@ -7551,7 +7572,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ }),
-/* 46 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global, process) {// Copyright Joyent, Inc. and other Node contributors.
@@ -8079,7 +8100,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 	exports.isPrimitive = isPrimitive;
 
-	exports.isBuffer = __webpack_require__(47);
+	exports.isBuffer = __webpack_require__(48);
 
 	function objectToString(o) {
 	  return Object.prototype.toString.call(o);
@@ -8123,7 +8144,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *     prototype.
 	 * @param {function} superCtor Constructor function to inherit prototype from.
 	 */
-	exports.inherits = __webpack_require__(48);
+	exports.inherits = __webpack_require__(49);
 
 	exports._extend = function(origin, add) {
 	  // Don't do anything if add isn't an object
@@ -8144,7 +8165,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(3)))
 
 /***/ }),
-/* 47 */
+/* 48 */
 /***/ (function(module, exports) {
 
 	module.exports = function isBuffer(arg) {
@@ -8155,7 +8176,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 /***/ }),
-/* 48 */
+/* 49 */
 /***/ (function(module, exports) {
 
 	if (typeof Object.create === 'function') {
@@ -8184,14 +8205,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 49 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {var AWS = __webpack_require__(1);
-	var AcceptorStateMachine = __webpack_require__(50);
+	var AcceptorStateMachine = __webpack_require__(51);
 	var inherit = AWS.util.inherit;
 	var domain = AWS.util.domain;
-	var jmespath = __webpack_require__(51);
+	var jmespath = __webpack_require__(52);
 
 	/**
 	 * @api private
@@ -9000,7 +9021,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ }),
-/* 50 */
+/* 51 */
 /***/ (function(module, exports) {
 
 	function AcceptorStateMachine(states, state) {
@@ -9051,7 +9072,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 51 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	(function(exports) {
@@ -10724,12 +10745,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 52 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AWS = __webpack_require__(1);
 	var inherit = AWS.util.inherit;
-	var jmespath = __webpack_require__(51);
+	var jmespath = __webpack_require__(52);
 
 	/**
 	 * This class encapsulates the response information
@@ -10931,7 +10952,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 53 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/**
@@ -10951,7 +10972,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var AWS = __webpack_require__(1);
 	var inherit = AWS.util.inherit;
-	var jmespath = __webpack_require__(51);
+	var jmespath = __webpack_require__(52);
 
 	/**
 	 * @api private
@@ -11141,7 +11162,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 54 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AWS = __webpack_require__(1);
@@ -11177,16 +11198,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	  throw new Error('Unknown signing version ' + version);
 	};
 
-	__webpack_require__(55);
 	__webpack_require__(56);
 	__webpack_require__(57);
 	__webpack_require__(58);
-	__webpack_require__(60);
+	__webpack_require__(59);
 	__webpack_require__(61);
+	__webpack_require__(62);
 
 
 /***/ }),
-/* 55 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AWS = __webpack_require__(1);
@@ -11240,7 +11261,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 56 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AWS = __webpack_require__(1);
@@ -11323,13 +11344,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 57 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AWS = __webpack_require__(1);
 	var inherit = AWS.util.inherit;
 
-	__webpack_require__(56);
+	__webpack_require__(57);
 
 	/**
 	 * @api private
@@ -11354,11 +11375,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 58 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AWS = __webpack_require__(1);
-	var v4Credentials = __webpack_require__(59);
+	var v4Credentials = __webpack_require__(60);
 	var inherit = AWS.util.inherit;
 
 	/**
@@ -11575,7 +11596,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 59 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AWS = __webpack_require__(1);
@@ -11681,7 +11702,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 60 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AWS = __webpack_require__(1);
@@ -11862,7 +11883,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 61 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AWS = __webpack_require__(1);
@@ -11987,7 +12008,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 62 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AWS = __webpack_require__(1);

@@ -203,6 +203,7 @@ declare namespace Translate {
     TextTranslationJobProperties?: TextTranslationJobProperties;
   }
   export type Description = string;
+  export type Directionality = "UNI"|"MULTI"|string;
   export interface EncryptionKey {
     /**
      * The type of encryption key used by Amazon Translate to encrypt custom terminologies.
@@ -245,9 +246,9 @@ declare namespace Translate {
      */
     Name: ResourceName;
     /**
-     * The data format of the custom terminology being retrieved, either CSV or TMX.
+     * The data format of the custom terminology being retrieved. If you don't specify this parameter, Amazon Translate returns a file that has the same format as the file that was imported to create the terminology.  If you specify this parameter when you retrieve a multi-directional terminology resource, you must specify the same format as that of the input file that was imported to create it. Otherwise, Amazon Translate throws an error.
      */
-    TerminologyDataFormat: TerminologyDataFormat;
+    TerminologyDataFormat?: TerminologyDataFormat;
   }
   export interface GetTerminologyResponse {
     /**
@@ -258,6 +259,10 @@ declare namespace Translate {
      * The data location of the custom terminology being retrieved. The custom terminology file is returned in a presigned url that has a 30 minute expiration.
      */
     TerminologyDataLocation?: TerminologyDataLocation;
+    /**
+     * The Amazon S3 location of a file that provides any errors or warnings that were produced by your input file. This file was created when Amazon Translate attempted to create a terminology resource. The location is returned as a presigned URL to that has a 30 minute expiration.
+     */
+    AuxiliaryDataLocation?: TerminologyDataLocation;
   }
   export type IamRoleArn = string;
   export interface ImportTerminologyRequest {
@@ -287,6 +292,10 @@ declare namespace Translate {
      * The properties of the custom terminology being imported.
      */
     TerminologyProperties?: TerminologyProperties;
+    /**
+     * The Amazon S3 location of a file that provides any errors or warnings that were produced by your input file. This file was created when Amazon Translate attempted to create a terminology resource. The location is returned as a presigned URL to that has a 30 minute expiration.
+     */
+    AuxiliaryDataLocation?: TerminologyDataLocation;
   }
   export interface InputDataConfig {
     /**
@@ -571,11 +580,15 @@ declare namespace Translate {
      */
     File: TerminologyFile;
     /**
-     * The data format of the custom terminology. Either CSV or TMX.
+     * The data format of the custom terminology.
      */
     Format: TerminologyDataFormat;
+    /**
+     * The directionality of your terminology resource indicates whether it has one source language (uni-directional) or multiple (multi-directional).  UNI  The terminology resource has one source language (for example, the first column in a CSV file), and all of its other languages are target languages.   MULTI  Any language in the terminology resource can be the source language or a target language. A single multi-directional terminology resource can be used for jobs that translate different language pairs. For example, if the terminology contains terms in English and Spanish, then it can be used for jobs that translate English to Spanish and jobs that translate Spanish to English.   When you create a custom terminology resource without specifying the directionality, it behaves as uni-directional terminology, although this parameter will have a null value.
+     */
+    Directionality?: Directionality;
   }
-  export type TerminologyDataFormat = "CSV"|"TMX"|string;
+  export type TerminologyDataFormat = "CSV"|"TMX"|"TSV"|string;
   export interface TerminologyDataLocation {
     /**
      * The repository type for the custom terminology data.
@@ -605,7 +618,7 @@ declare namespace Translate {
      */
     SourceLanguageCode?: LanguageCodeString;
     /**
-     * The language codes for the target languages available with the custom terminology file. All possible target languages are returned in array.
+     * The language codes for the target languages available with the custom terminology resource. All possible target languages are returned in array.
      */
     TargetLanguageCodes?: LanguageCodeStringList;
     /**
@@ -628,6 +641,22 @@ declare namespace Translate {
      * The time at which the custom terminology was last update, based on the timestamp.
      */
     LastUpdatedAt?: Timestamp;
+    /**
+     * The directionality of your terminology resource indicates whether it has one source language (uni-directional) or multiple (multi-directional).   UNI  The terminology resource has one source language (the first column in a CSV file), and all of its other languages are target languages.  MULTI  Any language in the terminology resource can be the source language.  
+     */
+    Directionality?: Directionality;
+    /**
+     * Additional information from Amazon Translate about the terminology resource.
+     */
+    Message?: UnboundedLengthString;
+    /**
+     * The number of terms in the input file that Amazon Translate skipped when you created or updated the terminology resource.
+     */
+    SkippedTermCount?: Integer;
+    /**
+     * The format of the custom terminology input file.
+     */
+    Format?: TerminologyDataFormat;
   }
   export type TerminologyPropertiesList = TerminologyProperties[];
   export interface TextTranslationJobFilter {

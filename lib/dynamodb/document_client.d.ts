@@ -130,7 +130,7 @@ export namespace DocumentClient {
      */
     ArchivalDateTime?: _Date;
     /**
-     * The reason DynamoDB archived the table. Currently, the only possible value is:    INACCESSIBLE_ENCRYPTION_CREDENTIALS - The table was archived due to the table's AWS KMS key being inaccessible for more than seven days. An On-Demand backup was created at the archival time.  
+     * The reason DynamoDB archived the table. Currently, the only possible value is:    INACCESSIBLE_ENCRYPTION_CREDENTIALS - The table was archived due to the table's KMS key being inaccessible for more than seven days. An On-Demand backup was created at the archival time.  
      */
     ArchivalReason?: ArchivalReason;
     /**
@@ -307,7 +307,7 @@ export namespace DocumentClient {
      */
     BackupStatus: BackupStatus;
     /**
-     * BackupType:    USER - You create and manage these using the on-demand backup feature.    SYSTEM - If you delete a table with point-in-time recovery enabled, a SYSTEM backup is automatically created and is retained for 35 days (at no additional cost). System backups allow you to restore the deleted table to the state it was in just before the point of deletion.     AWS_BACKUP - On-demand backup created by you from AWS Backup service.  
+     * BackupType:    USER - You create and manage these using the on-demand backup feature.    SYSTEM - If you delete a table with point-in-time recovery enabled, a SYSTEM backup is automatically created and is retained for 35 days (at no additional cost). System backups allow you to restore the deleted table to the state it was in just before the point of deletion.     AWS_BACKUP - On-demand backup created by you from Backup service.  
      */
     BackupType: BackupType;
     /**
@@ -357,7 +357,7 @@ export namespace DocumentClient {
      */
     BackupStatus?: BackupStatus;
     /**
-     * BackupType:    USER - You create and manage these using the on-demand backup feature.    SYSTEM - If you delete a table with point-in-time recovery enabled, a SYSTEM backup is automatically created and is retained for 35 days (at no additional cost). System backups allow you to restore the deleted table to the state it was in just before the point of deletion.     AWS_BACKUP - On-demand backup created by you from AWS Backup service.  
+     * BackupType:    USER - You create and manage these using the on-demand backup feature.    SYSTEM - If you delete a table with point-in-time recovery enabled, a SYSTEM backup is automatically created and is retained for 35 days (at no additional cost). System backups allow you to restore the deleted table to the state it was in just before the point of deletion.     AWS_BACKUP - On-demand backup created by you from Backup service.  
      */
     BackupType?: BackupType;
     /**
@@ -370,13 +370,13 @@ export namespace DocumentClient {
   export type BackupsInputLimit = number;
   export interface BatchExecuteStatementInput {
     /**
-     *  The list of PartiQL statements representing the batch to run. 
+     * The list of PartiQL statements representing the batch to run.
      */
     Statements: PartiQLBatchRequest;
   }
   export interface BatchExecuteStatementOutput {
     /**
-     *  The response to each PartiQL statement in the batch. 
+     * The response to each PartiQL statement in the batch.
      */
     Responses?: PartiQLBatchResponse;
   }
@@ -664,7 +664,7 @@ export namespace DocumentClient {
      */
     RegionName: RegionName;
     /**
-     * The AWS KMS customer master key (CMK) that should be used for AWS KMS encryption in the new replica. To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. Note that you should only provide this parameter if the key is different from the default DynamoDB KMS master key alias/aws/dynamodb.
+     * The KMS key that should be used for KMS encryption in the new replica. To specify a key, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. Note that you should only provide this parameter if the key is different from the default DynamoDB KMS key alias/aws/dynamodb.
      */
     KMSMasterKeyId?: KMSMasterKeyId;
     /**
@@ -896,11 +896,11 @@ export namespace DocumentClient {
      */
     IndexName?: IndexName;
     /**
-     * List of names of the associated Alpine rules.
+     * List of names of the associated contributor insights rules.
      */
     ContributorInsightsRuleList?: ContributorInsightsRuleList;
     /**
-     * Current Status contributor insights.
+     * Current status of contributor insights.
      */
     ContributorInsightsStatus?: ContributorInsightsStatus;
     /**
@@ -908,7 +908,7 @@ export namespace DocumentClient {
      */
     LastUpdateDateTime?: LastUpdateDateTime;
     /**
-     * Returns information about the last failure that encountered. The most common exceptions for a FAILED status are:   LimitExceededException - Per-account Amazon CloudWatch Contributor Insights rule limit reached. Please disable Contributor Insights for other tables/indexes OR disable Contributor Insights rules before retrying.   AccessDeniedException - Amazon CloudWatch Contributor Insights rules cannot be modified due to insufficient permissions.   AccessDeniedException - Failed to create service-linked role for Contributor Insights due to insufficient permissions.   InternalServerError - Failed to create Amazon CloudWatch Contributor Insights rules. Please retry request.  
+     * Returns information about the last failure that was encountered. The most common exceptions for a FAILED status are:   LimitExceededException - Per-account Amazon CloudWatch Contributor Insights rule limit reached. Please disable Contributor Insights for other tables/indexes OR disable Contributor Insights rules before retrying.   AccessDeniedException - Amazon CloudWatch Contributor Insights rules cannot be modified due to insufficient permissions.   AccessDeniedException - Failed to create service-linked role for Contributor Insights due to insufficient permissions.   InternalServerError - Failed to create Amazon CloudWatch Contributor Insights rules. Please retry request.  
      */
     FailureException?: FailureException;
   }
@@ -1049,45 +1049,45 @@ export namespace DocumentClient {
   export type ExceptionName = string;
   export interface ExecuteStatementInput {
     /**
-     *  The PartiQL statement representing the operation to run. 
+     * The PartiQL statement representing the operation to run.
      */
     Statement: PartiQLStatement;
     /**
-     *  The parameters for the PartiQL statement, if any. 
+     * The parameters for the PartiQL statement, if any.
      */
     Parameters?: PreparedStatementParameters;
     /**
-     *  The consistency of a read operation. If set to true, then a strongly consistent read is used; otherwise, an eventually consistent read is used. 
+     * The consistency of a read operation. If set to true, then a strongly consistent read is used; otherwise, an eventually consistent read is used.
      */
     ConsistentRead?: ConsistentRead;
     /**
-     *  Set this value to get remaining results, if NextToken was returned in the statement response. 
+     * Set this value to get remaining results, if NextToken was returned in the statement response.
      */
     NextToken?: PartiQLNextToken;
   }
   export interface ExecuteStatementOutput {
     /**
-     *  If a read operation was used, this property will contain the result of the reade operation; a map of attribute names and their values. For the write operations this value will be empty. 
+     * If a read operation was used, this property will contain the result of the read operation; a map of attribute names and their values. For the write operations this value will be empty.
      */
     Items?: ItemList;
     /**
-     *  If the response of a read request exceeds the response payload limit DynamoDB will set this value in the response. If set, you can use that this value in the subsequent request to get the remaining results. 
+     * If the response of a read request exceeds the response payload limit DynamoDB will set this value in the response. If set, you can use that this value in the subsequent request to get the remaining results.
      */
     NextToken?: PartiQLNextToken;
   }
   export interface ExecuteTransactionInput {
     /**
-     *  The list of PartiQL statements representing the transaction to run. 
+     * The list of PartiQL statements representing the transaction to run.
      */
     TransactStatements: ParameterizedStatements;
     /**
-     *  Set this value to get remaining results, if NextToken was returned in the statement response. 
+     * Set this value to get remaining results, if NextToken was returned in the statement response.
      */
     ClientRequestToken?: ClientRequestToken;
   }
   export interface ExecuteTransactionOutput {
     /**
-     *  The response to a PartiQL transaction. 
+     * The response to a PartiQL transaction.
      */
     Responses?: ItemResponseList;
   }
@@ -1153,7 +1153,7 @@ export namespace DocumentClient {
      */
     S3Bucket?: S3Bucket;
     /**
-     * The ID of the AWS account that owns the bucket containing the export.
+     * The ID of the Amazon Web Services account that owns the bucket containing the export.
      */
     S3BucketOwner?: S3BucketOwner;
     /**
@@ -1161,11 +1161,11 @@ export namespace DocumentClient {
      */
     S3Prefix?: S3Prefix;
     /**
-     * Type of encryption used on the bucket where export data is stored. Valid values for S3SseAlgorithm are:    AES256 - server-side encryption with Amazon S3 managed keys    KMS - server-side encryption with AWS KMS managed keys  
+     * Type of encryption used on the bucket where export data is stored. Valid values for S3SseAlgorithm are:    AES256 - server-side encryption with Amazon S3 managed keys    KMS - server-side encryption with KMS managed keys  
      */
     S3SseAlgorithm?: S3SseAlgorithm;
     /**
-     * The ID of the AWS KMS managed key used to encrypt the S3 bucket where export data is stored (if applicable).
+     * The ID of the KMS managed key used to encrypt the S3 bucket where export data is stored (if applicable).
      */
     S3SseKmsKeyId?: S3SseKmsKeyId;
     /**
@@ -1224,7 +1224,7 @@ export namespace DocumentClient {
      */
     S3Bucket: S3Bucket;
     /**
-     * The ID of the AWS account that owns the bucket the export will be stored in.
+     * The ID of the Amazon Web Services account that owns the bucket the export will be stored in.
      */
     S3BucketOwner?: S3BucketOwner;
     /**
@@ -1232,11 +1232,11 @@ export namespace DocumentClient {
      */
     S3Prefix?: S3Prefix;
     /**
-     * Type of encryption used on the bucket where export data will be stored. Valid values for S3SseAlgorithm are:    AES256 - server-side encryption with Amazon S3 managed keys    KMS - server-side encryption with AWS KMS managed keys  
+     * Type of encryption used on the bucket where export data will be stored. Valid values for S3SseAlgorithm are:    AES256 - server-side encryption with Amazon S3 managed keys    KMS - server-side encryption with KMS managed keys  
      */
     S3SseAlgorithm?: S3SseAlgorithm;
     /**
-     * The ID of the AWS KMS managed key used to encrypt the S3 bucket where export data will be stored (if applicable).
+     * The ID of the KMS managed key used to encrypt the S3 bucket where export data will be stored (if applicable).
      */
     S3SseKmsKeyId?: S3SseKmsKeyId;
     /**
@@ -1929,7 +1929,7 @@ export namespace DocumentClient {
      */
     Expected?: ExpectedAttributeMap;
     /**
-     * Use ReturnValues if you want to get the item attributes as they appeared before they were updated with the PutItem request. For PutItem, the valid values are:    NONE - If ReturnValues is not specified, or if its value is NONE, then nothing is returned. (This setting is the default for ReturnValues.)    ALL_OLD - If PutItem overwrote an attribute name-value pair, then the content of the old item is returned.    The ReturnValues parameter is used by several DynamoDB operations; however, PutItem does not recognize any values other than NONE or ALL_OLD. 
+     * Use ReturnValues if you want to get the item attributes as they appeared before they were updated with the PutItem request. For PutItem, the valid values are:    NONE - If ReturnValues is not specified, or if its value is NONE, then nothing is returned. (This setting is the default for ReturnValues.)    ALL_OLD - If PutItem overwrote an attribute name-value pair, then the content of the old item is returned.   The values returned are strongly consistent.  The ReturnValues parameter is used by several DynamoDB operations; however, PutItem does not recognize any values other than NONE or ALL_OLD. 
      */
     ReturnValues?: ReturnValue;
     ReturnConsumedCapacity?: ReturnConsumedCapacity;
@@ -2106,7 +2106,7 @@ export namespace DocumentClient {
      */
     RegionName?: RegionName;
     /**
-     * The current state of the replica:    CREATING - The replica is being created.    UPDATING - The replica is being updated.    DELETING - The replica is being deleted.    ACTIVE - The replica is ready for use.    REGION_DISABLED - The replica is inaccessible because the AWS Region has been disabled.  If the AWS Region remains inaccessible for more than 20 hours, DynamoDB will remove this replica from the replication group. The replica will not be deleted and replication will stop from and to this region.     INACCESSIBLE_ENCRYPTION_CREDENTIALS  - The AWS KMS key used to encrypt the table is inaccessible.  If the AWS KMS key remains inaccessible for more than 20 hours, DynamoDB will remove this replica from the replication group. The replica will not be deleted and replication will stop from and to this region.   
+     * The current state of the replica:    CREATING - The replica is being created.    UPDATING - The replica is being updated.    DELETING - The replica is being deleted.    ACTIVE - The replica is ready for use.    REGION_DISABLED - The replica is inaccessible because the Amazon Web Services Region has been disabled.  If the Amazon Web Services Region remains inaccessible for more than 20 hours, DynamoDB will remove this replica from the replication group. The replica will not be deleted and replication will stop from and to this region.     INACCESSIBLE_ENCRYPTION_CREDENTIALS  - The KMS key used to encrypt the table is inaccessible.  If the KMS key remains inaccessible for more than 20 hours, DynamoDB will remove this replica from the replication group. The replica will not be deleted and replication will stop from and to this region.   
      */
     ReplicaStatus?: ReplicaStatus;
     /**
@@ -2118,7 +2118,7 @@ export namespace DocumentClient {
      */
     ReplicaStatusPercentProgress?: ReplicaStatusPercentProgress;
     /**
-     * The AWS KMS customer master key (CMK) of the replica that will be used for AWS KMS encryption.
+     * The KMS key of the replica that will be used for KMS encryption.
      */
     KMSMasterKeyId?: KMSMasterKeyId;
     /**
@@ -2423,30 +2423,30 @@ export namespace DocumentClient {
      */
     Status?: SSEStatus;
     /**
-     * Server-side encryption type. The only supported value is:    KMS - Server-side encryption that uses AWS Key Management Service. The key is stored in your account and is managed by AWS KMS (AWS KMS charges apply).  
+     * Server-side encryption type. The only supported value is:    KMS - Server-side encryption that uses Key Management Service. The key is stored in your account and is managed by KMS (KMS charges apply).  
      */
     SSEType?: SSEType;
     /**
-     * The AWS KMS customer master key (CMK) ARN used for the AWS KMS encryption.
+     * The KMS key ARN used for the KMS encryption.
      */
     KMSMasterKeyArn?: KMSMasterKeyArn;
     /**
-     * Indicates the time, in UNIX epoch date format, when DynamoDB detected that the table's AWS KMS key was inaccessible. This attribute will automatically be cleared when DynamoDB detects that the table's AWS KMS key is accessible again. DynamoDB will initiate the table archival process when table's AWS KMS key remains inaccessible for more than seven days from this date.
+     * Indicates the time, in UNIX epoch date format, when DynamoDB detected that the table's KMS key was inaccessible. This attribute will automatically be cleared when DynamoDB detects that the table's KMS key is accessible again. DynamoDB will initiate the table archival process when table's KMS key remains inaccessible for more than seven days from this date.
      */
     InaccessibleEncryptionDateTime?: _Date;
   }
   export type SSEEnabled = boolean;
   export interface SSESpecification {
     /**
-     * Indicates whether server-side encryption is done using an AWS managed CMK or an AWS owned CMK. If enabled (true), server-side encryption type is set to KMS and an AWS managed CMK is used (AWS KMS charges apply). If disabled (false) or not specified, server-side encryption is set to AWS owned CMK.
+     * Indicates whether server-side encryption is done using an Amazon Web Services managed key or an Amazon Web Services owned key. If enabled (true), server-side encryption type is set to KMS and an Amazon Web Services managed key is used (KMS charges apply). If disabled (false) or not specified, server-side encryption is set to Amazon Web Services owned key.
      */
     Enabled?: SSEEnabled;
     /**
-     * Server-side encryption type. The only supported value is:    KMS - Server-side encryption that uses AWS Key Management Service. The key is stored in your account and is managed by AWS KMS (AWS KMS charges apply).  
+     * Server-side encryption type. The only supported value is:    KMS - Server-side encryption that uses Key Management Service. The key is stored in your account and is managed by KMS (KMS charges apply).  
      */
     SSEType?: SSEType;
     /**
-     * The AWS KMS customer master key (CMK) that should be used for the AWS KMS encryption. To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. Note that you should only provide this parameter if the key is different from the default DynamoDB customer master key alias/aws/dynamodb.
+     * The KMS key that should be used for the KMS encryption. To specify a key, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. Note that you should only provide this parameter if the key is different from the default DynamoDB key alias/aws/dynamodb.
      */
     KMSMasterKeyId?: KMSMasterKeyId;
   }
@@ -2648,7 +2648,7 @@ export namespace DocumentClient {
      */
     KeySchema?: KeySchema;
     /**
-     * The current state of the table:    CREATING - The table is being created.    UPDATING - The table is being updated.    DELETING - The table is being deleted.    ACTIVE - The table is ready for use.    INACCESSIBLE_ENCRYPTION_CREDENTIALS - The AWS KMS key used to encrypt the table in inaccessible. Table operations may fail due to failure to use the AWS KMS key. DynamoDB will initiate the table archival process when a table's AWS KMS key remains inaccessible for more than seven days.     ARCHIVING - The table is being archived. Operations are not allowed until archival is complete.     ARCHIVED - The table has been archived. See the ArchivalReason for more information.   
+     * The current state of the table:    CREATING - The table is being created.    UPDATING - The table is being updated.    DELETING - The table is being deleted.    ACTIVE - The table is ready for use.    INACCESSIBLE_ENCRYPTION_CREDENTIALS - The KMS key used to encrypt the table in inaccessible. Table operations may fail due to failure to use the KMS key. DynamoDB will initiate the table archival process when a table's KMS key remains inaccessible for more than seven days.     ARCHIVING - The table is being archived. Operations are not allowed until archival is complete.     ARCHIVED - The table has been archived. See the ArchivalReason for more information.   
      */
     TableStatus?: TableStatus;
     /**
@@ -2692,7 +2692,7 @@ export namespace DocumentClient {
      */
     StreamSpecification?: StreamSpecification;
     /**
-     * A timestamp, in ISO 8601 format, for this stream. Note that LatestStreamLabel is not a unique identifier for the stream, because it is possible that a stream from another table might have the same timestamp. However, the combination of the following three elements is guaranteed to be unique:   AWS customer ID   Table name    StreamLabel   
+     * A timestamp, in ISO 8601 format, for this stream. Note that LatestStreamLabel is not a unique identifier for the stream, because it is possible that a stream from another table might have the same timestamp. However, the combination of the following three elements is guaranteed to be unique:   Amazon Web Services customer ID   Table name    StreamLabel   
      */
     LatestStreamLabel?: String;
     /**
@@ -2700,7 +2700,7 @@ export namespace DocumentClient {
      */
     LatestStreamArn?: StreamArn;
     /**
-     * Represents the version of global tables in use, if the table is replicated across AWS Regions.
+     * Represents the version of global tables in use, if the table is replicated across Amazon Web Services Regions.
      */
     GlobalTableVersion?: String;
     /**
@@ -2726,7 +2726,7 @@ export namespace DocumentClient {
   export type TableStatus = "CREATING"|"UPDATING"|"DELETING"|"ACTIVE"|"INACCESSIBLE_ENCRYPTION_CREDENTIALS"|"ARCHIVING"|"ARCHIVED"|string;
   export interface Tag {
     /**
-     * The key of the tag. Tag keys are case sensitive. Each DynamoDB table can only have up to one tag with the same key. If you try to add an existing tag (same key), the existing tag value will be updated to the new value. 
+     * The key of the tag. Tag keys are case sensitive. Each DynamoDB table can only have up to one tag with the same key. If you try to add an existing tag (same key), the existing tag value will be updated to the new value.
      */
     Key: TagKeyString;
     /**
@@ -2821,7 +2821,7 @@ export namespace DocumentClient {
   export type TransactWriteItemList = TransactWriteItem[];
   export interface TransactWriteItemsInput {
     /**
-     * An ordered array of up to 25 TransactWriteItem objects, each of which contains a ConditionCheck, Put, Update, or Delete object. These can operate on items in different tables, but the tables must reside in the same AWS account and Region, and no two of them can operate on the same item. 
+     * An ordered array of up to 25 TransactWriteItem objects, each of which contains a ConditionCheck, Put, Update, or Delete object. These can operate on items in different tables, but the tables must reside in the same Amazon Web Services account and Region, and no two of them can operate on the same item. 
      */
     TransactItems: TransactWriteItemList;
     ReturnConsumedCapacity?: ReturnConsumedCapacity;
@@ -3058,7 +3058,7 @@ export namespace DocumentClient {
      */
     RegionName: RegionName;
     /**
-     * The AWS KMS customer master key (CMK) of the replica that should be used for AWS KMS encryption. To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. Note that you should only provide this parameter if the key is different from the default DynamoDB KMS master key alias/aws/dynamodb.
+     * The KMS key of the replica that should be used for KMS encryption. To specify a key, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. Note that you should only provide this parameter if the key is different from the default DynamoDB KMS key alias/aws/dynamodb.
      */
     KMSMasterKeyId?: KMSMasterKeyId;
     /**
