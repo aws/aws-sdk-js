@@ -120,6 +120,32 @@
     }
   },
 
+  "dualstackRules": {
+    "*/*": {
+      "endpoint": "{service}.{region}.api.aws"
+    },
+    "cn-*/*": {
+      "endpoint": "{service}.{region}.api.amazonwebservices.com.cn"
+    },
+    "*/s3": "dualstackLegacy",
+    "cn-*/s3": "dualstackLegacyCn",
+    "*/s3-control": "dualstackLegacy",
+    "cn-*/s3-control": "dualstackLegacyCn"
+  },
+
+  "dualstackFipsRules": {
+    "*/*": {
+      "endpoint": "{service}-fips.{region}.api.aws"
+    },
+    "cn-*/*": {
+      "endpoint": "{service}-fips.{region}.api.amazonwebservices.com.cn"
+    },
+    "*/s3": "dualstackFipsLegacy",
+    "cn-*/s3": "dualstackFipsLegacyCn",
+    "*/s3-control": "dualstackFipsLegacy",
+    "cn-*/s3-control": "dualstackFipsLegacyCn"
+  },
+
   "patterns": {
     "globalSSL": {
       "endpoint": "https://{service}.amazonaws.com",
@@ -164,6 +190,18 @@
     },
     "fipsWithServiceOnly": {
       "endpoint": "{service}.{region}.amazonaws.com"
+    },
+    "dualstackLegacy": {
+      "endpoint": "{service}.dualstack.{region}.amazonaws.com"
+    },
+    "dualstackLegacyCn": {
+      "endpoint": "{service}.dualstack.{region}.amazonaws.com.cn"
+    },
+    "dualstackFipsLegacy": {
+      "endpoint": "{service}-fips.dualstack.{region}.amazonaws.com"
+    },
+    "dualstackFipsLegacyCn": {
+      "endpoint": "{service}-fips.dualstack.{region}.amazonaws.com.cn"
     }
   }
 }
