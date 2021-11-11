@@ -4,9 +4,9 @@ var allowlist = {
         25,
         85,
         86,
-        201,
-        255,
-        256
+        204,
+        258,
+        259
     ],
     '/credentials/cognito_identity_credentials.js': [
         78,
@@ -27,8 +27,8 @@ var allowlist = {
         110,
         112
     ],
-    '/region_config.js': [
-        110
+    '/region/utils.js': [
+        10
     ],
     '/request.js': [
         318,

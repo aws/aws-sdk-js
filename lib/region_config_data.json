@@ -6,12 +6,8 @@
     "cn-*/*": {
       "endpoint": "{service}.{region}.amazonaws.com.cn"
     },
-    "us-iso-*/*": {
-      "endpoint": "{service}.{region}.c2s.ic.gov"
-    },
-    "us-isob-*/*": {
-      "endpoint": "{service}.{region}.sc2s.sgov.gov"
-    },
+    "us-iso-*/*": "usIso",
+    "us-isob-*/*": "usIsob",
     "*/budgets": "globalSSL",
     "*/cloudfront": "globalSSL",
     "*/sts": "globalSSL",
@@ -67,6 +63,14 @@
   "fipsRules": {
     "*/*": "fipsStandard",
     "us-gov-*/*": "fipsStandard",
+    "us-iso-*/*": {
+      "endpoint": "{service}-fips.{region}.c2s.ic.gov"
+    },
+    "us-iso-*/dms": "usIso",
+    "us-isob-*/*": {
+      "endpoint": "{service}-fips.{region}.sc2s.sgov.gov"
+    },
+    "us-isob-*/dms": "usIsob",
     "cn-*/*": {
       "endpoint": "{service}-fips.{region}.amazonaws.com.cn"
     },
@@ -79,6 +83,7 @@
     "*/runtime.sagemaker": {
       "endpoint": "runtime-fips.sagemaker.{region}.amazonaws.com"
     },
+    "*/iam": "fipsWithoutRegion",
     "*/route53": "fipsWithoutRegion",
     "*/transcribe": "fipsDotPrefix",
     "*/waf": "fipsWithoutRegion",
@@ -105,12 +110,12 @@
     "us-gov-*/ssm": "fipsWithServiceOnly",
     "us-gov-*/sts": "fipsWithServiceOnly",
     "us-gov-*/support": "fipsWithServiceOnly",
-    "fips-us-gov-west-1/states": "fipsWithServiceOnly",
-    "fips-us-iso-east-1/elasticfilesystem": {
+    "us-gov-west-1/states": "fipsWithServiceOnly",
+    "us-iso-east-1/elasticfilesystem": {
       "endpoint": "elasticfilesystem-fips.{region}.c2s.ic.gov"
     },
-    "fips-aws-us-gov-global/organizations": "fipsWithServiceOnly",
-    "fips-aws-us-gov-global/route53": {
+    "us-gov-west-1/organizations": "fipsWithServiceOnly",
+    "us-gov-west-1/route53": {
       "endpoint": "route53.us-gov.amazonaws.com"
     }
   },
@@ -129,6 +134,12 @@
     "s3signature": {
       "endpoint": "{service}.{region}.amazonaws.com",
       "signatureVersion": "s3"
+    },
+    "usIso": {
+      "endpoint": "{service}.{region}.c2s.ic.gov"
+    },
+    "usIsob": {
+      "endpoint": "{service}.{region}.sc2s.sgov.gov"
     },
     "fipsStandard": {
       "endpoint": "{service}-fips.{region}.amazonaws.com"

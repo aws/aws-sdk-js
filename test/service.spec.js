@@ -98,6 +98,31 @@
         return delete AWS.config.s3;
       });
 
+      it('sets useFipsEndpoint to true if region is fips', function() {
+        var s3 = new AWS.S3({
+          region: 'fips-eu-west-1'
+        });
+        expect(s3.config.region).to.equal('eu-west-1');
+        expect(s3.config.useFipsEndpoint).to.equal(true);
+        return delete AWS.config.s3;
+      });
+
+      it('sets region to "us-east-1" if region is global', function() {
+        var s3 = new AWS.S3({
+          region: 'aws-global'
+        });
+        expect(s3.config.region).to.equal('us-east-1');
+        return delete AWS.config.s3;
+      });
+
+      it('sets region to "us-gov-west-1" if region is us-gov-global', function() {
+        var s3 = new AWS.S3({
+          region: 'aws-us-gov-global'
+        });
+        expect(s3.config.region).to.equal('us-gov-west-1');
+        return delete AWS.config.s3;
+      });
+
       it('merges credential data into config', function() {
         service = new AWS.Service({
           accessKeyId: 'foo',
@@ -720,18 +745,22 @@
     describe('getServiceName', function() {
       it('should return api.signingName if provided', function(done) {
         service = new AWS.Lambda();
+        var originalSigningName = service.api.signingName;
         service.api.signingName = 'SIGNING_NAME';
         expect(service.getSigningName()).to.equal(
           service.api.signingName
         );
+        service.api.signingName = originalSigningName;
         done();
       });
       it('should return api.endpointPrefix if signingName is not provided', function(done) {
         service = new AWS.Lambda();
+        var originalEndpointPrefix = service.api.endpointPrefix;
         service.api.endpointPrefix = 'SIGNING_NAME';
         expect(service.getSigningName()).to.equal(
           service.api.endpointPrefix
         );
+        service.api.endpointPrefix = originalEndpointPrefix;
         done();
       });
     });

@@ -3485,18 +3485,22 @@ describe('AWS.S3', function() {
           built.httpRequest.endpoint.hostname
         ).to.equal('myendpoint-123456789012.s3-accesspoint.s3-external-1.amazonaws.com');
 
-        s3 = new AWS.S3({region: 'us-east-1-fips'});
-        helpers.mockHttpResponse(200, {}, '');
-        request = s3.getObject({
-          Bucket: 'arn:aws:s3:us-east-1:123456789012:accesspoint/myendpoint',
-          Key: 'key'
-        });
-        var error;
-        request.build(function(err) {
-          error = err;
-        });
-        expect(error.name).to.equal('InvalidConfiguration');
-        expect(error.message).to.equal('ARN endpoint is not compatible with FIPS region');
+        var testFipsError = (s3) => {
+          helpers.mockHttpResponse(200, {}, '');
+          request = s3.getObject({
+            Bucket: 'arn:aws:s3:us-east-1:123456789012:accesspoint/myendpoint',
+            Key: 'key'
+          });
+          var error;
+          request.build(function(err) {
+            error = err;
+          });
+          expect(error.name).to.equal('InvalidConfiguration');
+          expect(error.message).to.equal('ARN endpoint is not compatible with FIPS region');
+        };
+        testFipsError(new AWS.S3({region: 'fips-us-east-1'}));
+        testFipsError(new AWS.S3({region: 'us-east-1-fips'}));
+        testFipsError(new AWS.S3({region: 'us-east-1', useFipsEndpoint: true}));
       });
 
       it('should use regions from ARN if s3UseArnRegion config is set to false', function(done) {
