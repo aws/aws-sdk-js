@@ -1,7 +1,6 @@
 const helpers = require('./helpers');
 const AWS = helpers.AWS;
 const MockService = helpers.MockService;
-const { getRealRegion } = require('../lib/region_config');
 
 describe('region_config.js', function() {
   it('sets endpoint configuration option for default regions', function() {
@@ -158,45 +157,6 @@ describe('region_config.js', function() {
         expect(service.signingRegion).to.equal(output);
       });
     }
-  });
-
-  describe('getRealRegion', function() {
-    describe('returns real region if fips', function() {
-      describe('special cases', function() {
-        const cases = [
-          ['fips-aws-global', 'us-east-1'],
-          ['aws-fips', 'us-east-1'],
-          ['fips-aws-us-gov-global', 'us-gov-west-1'],
-        ];
-        for (const [input, output] of cases) {
-          it(`returns "${output}" for "${input}"`, function() {
-            expect(getRealRegion(input)).to.equal(output);
-          });
-        }
-      });
-
-      describe('removes fips and optional dkr/prod from provided region', function() {
-        const cases = [
-          ['fips-us-east-1', 'us-east-1'],
-          ['us-east-1-fips', 'us-east-1'],
-          ['fips-dkr-us-east-1', 'us-east-1'],
-          ['fips-prod-us-east-1', 'us-east-1'],
-          ['fips-cn-north-1', 'cn-north-1'],
-        ];
-        for (const [input, output] of cases) {
-          it(`returns "${output}" for "${input}"`, function() {
-            expect(getRealRegion(input)).to.equal(output);
-          });
-        }
-      });
-    });
-
-    it('returns passed region if not fips', function() {
-      const cases = ['us-east-1', 'sa-east-1', 'me-south-1', 'eu-central-1', 'cn-north-1'];
-      for (const region of cases) {
-        expect(getRealRegion(region)).to.equal(region);
-      }
-    });
   });
 });
 
