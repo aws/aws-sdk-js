@@ -3,7 +3,7 @@ const helpers = require('../../helpers');
 const AWS = helpers.AWS;
 
 function testApiCall(input, done) {
-  const { clientName, region, signingRegion, hostname } = input;
+  const { clientName, region, hostname } = input;
 
   if (!AWS[clientName]) {
     throw new Error(`${clientName} does not exist`);
@@ -13,8 +13,6 @@ function testApiCall(input, done) {
 
   const req = client[Object.keys(client.api.operations)[0]]();
   req.on('complete', function() {
-    expect(region).to.equal(client.config.region);
-    expect(signingRegion).to.equal(req.httpRequest.region);
     expect(hostname).to.equal(req.httpRequest.endpoint.host);
     done();
   });
