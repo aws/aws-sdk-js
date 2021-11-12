@@ -1285,7 +1285,7 @@ declare namespace SSM {
      */
     DocumentVersion?: DocumentVersion;
     /**
-     * Specify the target for the association. This target is required for associations that use an Automation runbook and target resources by using rate controls. Automation is a capability of Amazon Web Services Systems Manager.
+     * Choose the parameter that will define how your automation will branch out. This target is required for associations that use an Automation runbook and target resources by using rate controls. Automation is a capability of Amazon Web Services Systems Manager.
      */
     AutomationTargetParameterName?: AutomationTargetParameterName;
     /**
@@ -2511,7 +2511,7 @@ declare namespace SSM {
      */
     AssociationName?: AssociationName;
     /**
-     * Specify the target for the association. This target is required for associations that use an Automation runbook and target resources by using rate controls. Automation is a capability of Amazon Web Services Systems Manager.
+     * Choose the parameter that will define how your automation will branch out. This target is required for associations that use an Automation runbook and target resources by using rate controls. Automation is a capability of Amazon Web Services Systems Manager.
      */
     AutomationTargetParameterName?: AutomationTargetParameterName;
     /**
@@ -6805,7 +6805,7 @@ declare namespace SSM {
   export type NotificationEvent = "All"|"InProgress"|"Success"|"TimedOut"|"Cancelled"|"Failed"|string;
   export type NotificationEventList = NotificationEvent[];
   export type NotificationType = "Command"|"Invocation"|string;
-  export type OperatingSystem = "WINDOWS"|"AMAZON_LINUX"|"AMAZON_LINUX_2"|"UBUNTU"|"REDHAT_ENTERPRISE_LINUX"|"SUSE"|"CENTOS"|"ORACLE_LINUX"|"DEBIAN"|"MACOS"|string;
+  export type OperatingSystem = "WINDOWS"|"AMAZON_LINUX"|"AMAZON_LINUX_2"|"UBUNTU"|"REDHAT_ENTERPRISE_LINUX"|"SUSE"|"CENTOS"|"ORACLE_LINUX"|"DEBIAN"|"MACOS"|"RASPBIAN"|string;
   export interface OpsAggregator {
     /**
      * Either a Range or Count aggregator for limiting an OpsData summary.
@@ -9049,7 +9049,7 @@ declare namespace SSM {
      */
     AssociationVersion?: AssociationVersion;
     /**
-     * Specify the target for the association. This target is required for associations that use an Automation runbook and target resources by using rate controls. Automation is a capability of Amazon Web Services Systems Manager.
+     * Choose the parameter that will define how your automation will branch out. This target is required for associations that use an Automation runbook and target resources by using rate controls. Automation is a capability of Amazon Web Services Systems Manager.
      */
     AutomationTargetParameterName?: AutomationTargetParameterName;
     /**

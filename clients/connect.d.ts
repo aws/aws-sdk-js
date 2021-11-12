@@ -108,11 +108,11 @@ declare class Connect extends Service {
    */
   createInstance(callback?: (err: AWSError, data: Connect.Types.CreateInstanceResponse) => void): Request<Connect.Types.CreateInstanceResponse, AWSError>;
   /**
-   * Creates an Amazon Web Services resource association with an Amazon Connect instance.
+   * Creates an AWS resource association with an Amazon Connect instance.
    */
   createIntegrationAssociation(params: Connect.Types.CreateIntegrationAssociationRequest, callback?: (err: AWSError, data: Connect.Types.CreateIntegrationAssociationResponse) => void): Request<Connect.Types.CreateIntegrationAssociationResponse, AWSError>;
   /**
-   * Creates an Amazon Web Services resource association with an Amazon Connect instance.
+   * Creates an AWS resource association with an Amazon Connect instance.
    */
   createIntegrationAssociation(callback?: (err: AWSError, data: Connect.Types.CreateIntegrationAssociationResponse) => void): Request<Connect.Types.CreateIntegrationAssociationResponse, AWSError>;
   /**
@@ -188,11 +188,11 @@ declare class Connect extends Service {
    */
   deleteInstance(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes an Amazon Web Services resource association from an Amazon Connect instance. The association must not have any use cases associated with it.
+   * Deletes an AWS resource association from an Amazon Connect instance. The association must not have any use cases associated with it.
    */
   deleteIntegrationAssociation(params: Connect.Types.DeleteIntegrationAssociationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes an Amazon Web Services resource association from an Amazon Connect instance. The association must not have any use cases associated with it.
+   * Deletes an AWS resource association from an Amazon Connect instance. The association must not have any use cases associated with it.
    */
   deleteIntegrationAssociation(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -243,6 +243,14 @@ declare class Connect extends Service {
    * This API is in preview release for Amazon Connect and is subject to change. Describes an agent status.
    */
   describeAgentStatus(callback?: (err: AWSError, data: Connect.Types.DescribeAgentStatusResponse) => void): Request<Connect.Types.DescribeAgentStatusResponse, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. Describes the specified contact.   Contact information is available in Amazon Connect for 24 months, and then it is deleted. 
+   */
+  describeContact(params: Connect.Types.DescribeContactRequest, callback?: (err: AWSError, data: Connect.Types.DescribeContactResponse) => void): Request<Connect.Types.DescribeContactResponse, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. Describes the specified contact.   Contact information is available in Amazon Connect for 24 months, and then it is deleted. 
+   */
+  describeContact(callback?: (err: AWSError, data: Connect.Types.DescribeContactResponse) => void): Request<Connect.Types.DescribeContactResponse, AWSError>;
   /**
    * Describes the specified contact flow. You can also create and update contact flows using the Amazon Connect Flow language.
    */
@@ -468,6 +476,14 @@ declare class Connect extends Service {
    */
   listContactFlows(callback?: (err: AWSError, data: Connect.Types.ListContactFlowsResponse) => void): Request<Connect.Types.ListContactFlowsResponse, AWSError>;
   /**
+   * This API is in preview release for Amazon Connect and is subject to change. For the specified referenceTypes, returns a list of references associated with the contact. 
+   */
+  listContactReferences(params: Connect.Types.ListContactReferencesRequest, callback?: (err: AWSError, data: Connect.Types.ListContactReferencesResponse) => void): Request<Connect.Types.ListContactReferencesResponse, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. For the specified referenceTypes, returns a list of references associated with the contact. 
+   */
+  listContactReferences(callback?: (err: AWSError, data: Connect.Types.ListContactReferencesResponse) => void): Request<Connect.Types.ListContactReferencesResponse, AWSError>;
+  /**
    * Provides information about the hours of operation for the specified Amazon Connect instance. For more information about hours of operation, see Set the Hours of Operation for a Queue in the Amazon Connect Administrator Guide.
    */
   listHoursOfOperations(params: Connect.Types.ListHoursOfOperationsRequest, callback?: (err: AWSError, data: Connect.Types.ListHoursOfOperationsResponse) => void): Request<Connect.Types.ListHoursOfOperationsResponse, AWSError>;
@@ -500,11 +516,11 @@ declare class Connect extends Service {
    */
   listInstances(callback?: (err: AWSError, data: Connect.Types.ListInstancesResponse) => void): Request<Connect.Types.ListInstancesResponse, AWSError>;
   /**
-   * Provides summary information about the Amazon Web Services resource associations for the specified Amazon Connect instance.
+   * Provides summary information about the AWS resource associations for the specified Amazon Connect instance.
    */
   listIntegrationAssociations(params: Connect.Types.ListIntegrationAssociationsRequest, callback?: (err: AWSError, data: Connect.Types.ListIntegrationAssociationsResponse) => void): Request<Connect.Types.ListIntegrationAssociationsResponse, AWSError>;
   /**
-   * Provides summary information about the Amazon Web Services resource associations for the specified Amazon Connect instance.
+   * Provides summary information about the AWS resource associations for the specified Amazon Connect instance.
    */
   listIntegrationAssociations(callback?: (err: AWSError, data: Connect.Types.ListIntegrationAssociationsResponse) => void): Request<Connect.Types.ListIntegrationAssociationsResponse, AWSError>;
   /**
@@ -596,11 +612,11 @@ declare class Connect extends Service {
    */
   listSecurityProfilePermissions(callback?: (err: AWSError, data: Connect.Types.ListSecurityProfilePermissionsResponse) => void): Request<Connect.Types.ListSecurityProfilePermissionsResponse, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and is subject to change. Provides summary information about the security profiles for the specified Amazon Connect instance. For more information about security profiles, see Security Profiles in the Amazon Connect Administrator Guide.
+   * Provides summary information about the security profiles for the specified Amazon Connect instance. For more information about security profiles, see Security Profiles in the Amazon Connect Administrator Guide.
    */
   listSecurityProfiles(params: Connect.Types.ListSecurityProfilesRequest, callback?: (err: AWSError, data: Connect.Types.ListSecurityProfilesResponse) => void): Request<Connect.Types.ListSecurityProfilesResponse, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and is subject to change. Provides summary information about the security profiles for the specified Amazon Connect instance. For more information about security profiles, see Security Profiles in the Amazon Connect Administrator Guide.
+   * Provides summary information about the security profiles for the specified Amazon Connect instance. For more information about security profiles, see Security Profiles in the Amazon Connect Administrator Guide.
    */
   listSecurityProfiles(callback?: (err: AWSError, data: Connect.Types.ListSecurityProfilesResponse) => void): Request<Connect.Types.ListSecurityProfilesResponse, AWSError>;
   /**
@@ -676,11 +692,11 @@ declare class Connect extends Service {
    */
   startOutboundVoiceContact(callback?: (err: AWSError, data: Connect.Types.StartOutboundVoiceContactResponse) => void): Request<Connect.Types.StartOutboundVoiceContactResponse, AWSError>;
   /**
-   * Initiates a contact flow to start a new task.
+   * Initiates a contact flow to start a new task immediately or at a future date and time.
    */
   startTaskContact(params: Connect.Types.StartTaskContactRequest, callback?: (err: AWSError, data: Connect.Types.StartTaskContactResponse) => void): Request<Connect.Types.StartTaskContactResponse, AWSError>;
   /**
-   * Initiates a contact flow to start a new task.
+   * Initiates a contact flow to start a new task immediately or at a future date and time.
    */
   startTaskContact(callback?: (err: AWSError, data: Connect.Types.StartTaskContactResponse) => void): Request<Connect.Types.StartTaskContactResponse, AWSError>;
   /**
@@ -740,6 +756,14 @@ declare class Connect extends Service {
    */
   updateAgentStatus(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * This API is in preview release for Amazon Connect and is subject to change. Adds or updates user defined contact information associated with the specified contact. At least one field to be updated must be present in the request.  You can add or update user-defined contact information for both ongoing and completed contacts. 
+   */
+  updateContact(params: Connect.Types.UpdateContactRequest, callback?: (err: AWSError, data: Connect.Types.UpdateContactResponse) => void): Request<Connect.Types.UpdateContactResponse, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. Adds or updates user defined contact information associated with the specified contact. At least one field to be updated must be present in the request.  You can add or update user-defined contact information for both ongoing and completed contacts. 
+   */
+  updateContact(callback?: (err: AWSError, data: Connect.Types.UpdateContactResponse) => void): Request<Connect.Types.UpdateContactResponse, AWSError>;
+  /**
    * Creates or updates user-defined contact attributes associated with the specified contact. You can create or update user-defined attributes for both ongoing and completed contacts. For example, while the call is active, you can update the customer's name or the reason the customer called. You can add notes about steps that the agent took during the call that display to the next agent that takes the call. You can also update attributes for a contact using data from your CRM application and save the data with the contact in Amazon Connect. You could also flag calls for additional analysis, such as legal review or to identify abusive callers. Contact attributes are available in Amazon Connect for 24 months, and are then deleted. For information about CTR retention and the maximum size of the CTR attributes section, see Feature specifications in the Amazon Connect Administrator Guide.   Important: You cannot use the operation to update attributes for contacts that occurred prior to the release of the API, which was September 12, 2018. You can update attributes only for contacts that started after the release of the API. If you attempt to update attributes for a contact that occurred prior to the release of the API, a 400 error is returned. This applies also to queued callbacks that were initiated prior to the release of the API but are still active in your instance.
    */
   updateContactAttributes(params: Connect.Types.UpdateContactAttributesRequest, callback?: (err: AWSError, data: Connect.Types.UpdateContactAttributesResponse) => void): Request<Connect.Types.UpdateContactAttributesResponse, AWSError>;
@@ -763,6 +787,14 @@ declare class Connect extends Service {
    * The name of the contact flow. You can also create and update contact flows using the Amazon Connect Flow language.
    */
   updateContactFlowName(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Updates the scheduled time of a task contact that is already scheduled.
+   */
+  updateContactSchedule(params: Connect.Types.UpdateContactScheduleRequest, callback?: (err: AWSError, data: Connect.Types.UpdateContactScheduleResponse) => void): Request<Connect.Types.UpdateContactScheduleResponse, AWSError>;
+  /**
+   * Updates the scheduled time of a task contact that is already scheduled.
+   */
+  updateContactSchedule(callback?: (err: AWSError, data: Connect.Types.UpdateContactScheduleResponse) => void): Request<Connect.Types.UpdateContactScheduleResponse, AWSError>;
   /**
    * Updates the hours of operation.
    */
@@ -944,7 +976,18 @@ declare namespace Connect {
   export type ARN = string;
   export type AfterContactWorkTimeLimit = number;
   export type AgentFirstName = string;
+  export interface AgentInfo {
+    /**
+     * The identifier of the agent who accepted the contact.
+     */
+    Id?: AgentResourceId;
+    /**
+     * The timestamp when the contact was connected to the agent.
+     */
+    ConnectedToAgentTimestamp?: timestamp;
+  }
   export type AgentLastName = string;
+  export type AgentResourceId = string;
   export interface AgentStatus {
     /**
      * The Amazon Resource Name (ARN) of the agent status.
@@ -975,7 +1018,7 @@ declare namespace Connect {
      */
     State?: AgentStatusState;
     /**
-     * The tags used to organize, track, or control access for this resource.
+     * One or more tags.
      */
     Tags?: TagMap;
   }
@@ -1123,6 +1166,20 @@ declare namespace Connect {
     AssociationId?: AssociationId;
   }
   export type AssociationId = string;
+  export interface AttachmentReference {
+    /**
+     * Identifier of the attachment reference.
+     */
+    Name?: ReferenceKey;
+    /**
+     * Contains the location path of the attachment reference.
+     */
+    Value?: ReferenceValue;
+    /**
+     * Status of an attachment reference type.
+     */
+    Status?: ReferenceStatus;
+  }
   export interface Attribute {
     /**
      * The type of attribute.
@@ -1167,6 +1224,64 @@ declare namespace Connect {
   export type CommonNameLength127 = string;
   export type Comparison = "LT"|string;
   export type Concurrency = number;
+  export interface Contact {
+    /**
+     * The Amazon Resource Name (ARN) for the contact.
+     */
+    Arn?: ARN;
+    /**
+     * The identifier for the contact.
+     */
+    Id?: ContactId;
+    /**
+     * If this contact is related to other contacts, this is the ID of the initial contact.
+     */
+    InitialContactId?: ContactId;
+    /**
+     * If this contact is not the first contact, this is the ID of the previous contact.
+     */
+    PreviousContactId?: ContactId;
+    /**
+     * Indicates how the contact was initiated.
+     */
+    InitiationMethod?: ContactInitiationMethod;
+    /**
+     * The name of the contact.
+     */
+    Name?: Name;
+    /**
+     * The description of the contact.
+     */
+    Description?: Description;
+    /**
+     * How the contact reached your contact center.
+     */
+    Channel?: Channel;
+    /**
+     * If this contact was queued, this contains information about the queue. 
+     */
+    QueueInfo?: QueueInfo;
+    /**
+     * Information about the agent who accepted the contact.
+     */
+    AgentInfo?: AgentInfo;
+    /**
+     * The date and time this contact was initiated, in UTC time. For INBOUND, this is when the contact arrived. For OUTBOUND, this is when the agent began dialing. For CALLBACK, this is when the callback contact was created. For TRANSFER and QUEUE_TRANSFER, this is when the transfer was initiated. For API, this is when the request arrived.
+     */
+    InitiationTimestamp?: timestamp;
+    /**
+     * The timestamp when the customer endpoint disconnected from Amazon Connect.
+     */
+    DisconnectTimestamp?: timestamp;
+    /**
+     * The timestamp when contact was last updated.
+     */
+    LastUpdateTimestamp?: timestamp;
+    /**
+     * The timestamp, in Unix epoch time format, at which to start running the inbound flow. 
+     */
+    ScheduledTimestamp?: timestamp;
+  }
   export interface ContactFlow {
     /**
      * The Amazon Resource Name (ARN) of the contact flow.
@@ -1223,6 +1338,7 @@ declare namespace Connect {
   export type ContactFlowType = "CONTACT_FLOW"|"CUSTOMER_QUEUE"|"CUSTOMER_HOLD"|"CUSTOMER_WHISPER"|"AGENT_HOLD"|"AGENT_WHISPER"|"OUTBOUND_WHISPER"|"AGENT_TRANSFER"|"QUEUE_TRANSFER"|string;
   export type ContactFlowTypes = ContactFlowType[];
   export type ContactId = string;
+  export type ContactInitiationMethod = "INBOUND"|"OUTBOUND"|"TRANSFER"|"QUEUE_TRANSFER"|"CALLBACK"|"API"|string;
   export type ContactReferences = {[key: string]: Reference};
   export interface CreateAgentStatusRequest {
     /**
@@ -1246,7 +1362,7 @@ declare namespace Connect {
      */
     DisplayOrder?: AgentStatusOrderNumber;
     /**
-     * The tags used to organize, track, or control access for this resource.
+     * One or more tags.
      */
     Tags?: TagMap;
   }
@@ -1318,7 +1434,7 @@ declare namespace Connect {
      */
     Config: HoursOfOperationConfigList;
     /**
-     * The tags used to organize, track, or control access for this resource.
+     * One or more tags.
      */
     Tags?: TagMap;
   }
@@ -1394,7 +1510,7 @@ declare namespace Connect {
      */
     SourceType?: SourceType;
     /**
-     * The tags used to organize, track, or control access for this resource.
+     * One or more tags.
      */
     Tags?: TagMap;
   }
@@ -1438,7 +1554,7 @@ declare namespace Connect {
      */
     QuickConnectIds?: QuickConnectsList;
     /**
-     * The tags used to organize, track, or control access for this resource.
+     * One or more tags.
      */
     Tags?: TagMap;
   }
@@ -1470,7 +1586,7 @@ declare namespace Connect {
      */
     QuickConnectConfig: QuickConnectConfig;
     /**
-     * The tags used to organize, track, or control access for this resource.
+     * One or more tags.
      */
     Tags?: TagMap;
   }
@@ -1542,7 +1658,7 @@ declare namespace Connect {
      */
     InstanceId: InstanceId;
     /**
-     * The tags used to organize, track, or control access for this resource.
+     * One or more tags.
      */
     Tags?: TagMap;
   }
@@ -1570,7 +1686,7 @@ declare namespace Connect {
      */
     UseCaseType: UseCaseType;
     /**
-     * The tags used to organize, track, or control access for this resource.
+     * One or more tags.
      */
     Tags?: TagMap;
   }
@@ -1824,6 +1940,22 @@ declare namespace Connect {
      * Information about the contact flow.
      */
     ContactFlow?: ContactFlow;
+  }
+  export interface DescribeContactRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The identifier of the initial contact.
+     */
+    ContactId: ContactId;
+  }
+  export interface DescribeContactResponse {
+    /**
+     * Information about the contact.
+     */
+    Contact?: Contact;
   }
   export interface DescribeHoursOfOperationRequest {
     /**
@@ -2445,7 +2577,7 @@ declare namespace Connect {
      */
     Config?: HoursOfOperationConfigList;
     /**
-     * The tags used to organize, track, or control access for this resource.
+     * One or more tags.
      */
     Tags?: TagMap;
   }
@@ -2812,6 +2944,34 @@ declare namespace Connect {
      */
     NextToken?: NextToken;
   }
+  export interface ListContactReferencesRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The identifier of the initial contact.
+     */
+    ContactId: ContactId;
+    /**
+     * The type of reference.
+     */
+    ReferenceTypes: ReferenceTypes;
+    /**
+     * The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.  This is not expected to be set since the value returned in the previous response is always null. 
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListContactReferencesResponse {
+    /**
+     * Information about the contact flows.
+     */
+    ReferenceSummaryList?: ReferenceSummaryList;
+    /**
+     * If there are additional results, this is the token for the next set of results.  This is always returned as null in the response. 
+     */
+    NextToken?: NextToken;
+  }
   export interface ListHoursOfOperationsRequest {
     /**
      * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
@@ -2914,7 +3074,7 @@ declare namespace Connect {
      */
     InstanceId: InstanceId;
     /**
-     * The type of integration.
+     * 
      */
     IntegrationType?: IntegrationType;
     /**
@@ -2952,7 +3112,7 @@ declare namespace Connect {
   }
   export interface ListLambdaFunctionsResponse {
     /**
-     * The Lambda function ARNs associated with the specified instance.
+     * The Lambdafunction ARNs associated with the specified instance.
      */
     LambdaFunctions?: FunctionArnsList;
     /**
@@ -3478,12 +3638,22 @@ declare namespace Connect {
      */
     Status?: QueueStatus;
     /**
-     * The tags used to organize, track, or control access for this resource.
+     * One or more tags.
      */
     Tags?: TagMap;
   }
   export type QueueDescription = string;
   export type QueueId = string;
+  export interface QueueInfo {
+    /**
+     * The identifier of the agent who accepted the contact.
+     */
+    Id?: QueueId;
+    /**
+     * The timestamp when the contact was added to the queue.
+     */
+    EnqueueTimestamp?: timestamp;
+  }
   export type QueueMaxContacts = number;
   export type QueueName = string;
   export interface QueueQuickConnectConfig {
@@ -3551,7 +3721,7 @@ declare namespace Connect {
      */
     QuickConnectConfig?: QuickConnectConfig;
     /**
-     * The tags used to organize, track, or control access for this resource.
+     * One or more tags.
      */
     Tags?: TagMap;
   }
@@ -3600,16 +3770,29 @@ declare namespace Connect {
   export type QuickConnectsList = QuickConnectId[];
   export interface Reference {
     /**
-     * A formatted URL that displays to an agent in the Contact Control Panel (CCP)
+     * A valid value for the reference. For example, for a URL reference, a formatted URL that is displayed to an agent in the Contact Control Panel (CCP).
      */
     Value: ReferenceValue;
     /**
-     * A valid URL.
+     * The type of the reference. Only URL type can be added or updated on a contact.
      */
     Type: ReferenceType;
   }
   export type ReferenceKey = string;
-  export type ReferenceType = "URL"|string;
+  export type ReferenceStatus = "APPROVED"|"REJECTED"|string;
+  export interface ReferenceSummary {
+    /**
+     * Information about Url reference if the referenceType is URL. Otherwise, null.
+     */
+    Url?: UrlReference;
+    /**
+     * Information about the attachment reference if the referenceType is ATTACHMENT. Otherwise, null.
+     */
+    Attachment?: AttachmentReference;
+  }
+  export type ReferenceSummaryList = ReferenceSummary[];
+  export type ReferenceType = "URL"|"ATTACHMENT"|string;
+  export type ReferenceTypes = ReferenceType[];
   export type ReferenceValue = string;
   export interface ResumeContactRecordingRequest {
     /**
@@ -3783,7 +3966,7 @@ declare namespace Connect {
      */
     Description?: SecurityProfileDescription;
     /**
-     * The tags used to organize, track, or control access for this resource.
+     * One or more tags.
      */
     Tags?: TagMap;
   }
@@ -3975,6 +4158,10 @@ declare namespace Connect {
      * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
      */
     ClientToken?: ClientToken;
+    /**
+     * The timestamp, in Unix Epoch seconds format, at which to start running the inbound contact flow. The scheduled time cannot be in the past. It must be within up to 6 days in future. 
+     */
+    ScheduledTime?: Timestamp;
   }
   export interface StartTaskContactResponse {
     /**
@@ -4165,6 +4352,46 @@ declare namespace Connect {
      */
     Description?: ContactFlowDescription;
   }
+  export interface UpdateContactRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The identifier of the contact. This is the identifier of the contact associated with the first interaction with your contact center.
+     */
+    ContactId: ContactId;
+    /**
+     * The name of the contact.
+     */
+    Name?: Name;
+    /**
+     * The description of the contact.
+     */
+    Description?: Description;
+    /**
+     * A formatted URL that is shown to an agent in the Contact Control Panel (CCP).
+     */
+    References?: ContactReferences;
+  }
+  export interface UpdateContactResponse {
+  }
+  export interface UpdateContactScheduleRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The identifier of the contact.
+     */
+    ContactId: ContactId;
+    /**
+     * The timestamp, in Unix Epoch seconds format, at which to start running the inbound contact flow. The scheduled time cannot be in the past. It must be within up to 6 days in future. 
+     */
+    ScheduledTime: Timestamp;
+  }
+  export interface UpdateContactScheduleResponse {
+  }
   export type UpdateHoursOfOperationDescription = string;
   export interface UpdateHoursOfOperationRequest {
     /**
@@ -4198,7 +4425,7 @@ declare namespace Connect {
      */
     InstanceId: InstanceId;
     /**
-     * The type of attribute.  Only allowlisted customers can consume USE_CUSTOM_TTS_VOICES. To access this feature, contact Amazon Web Services Support for allowlisting. 
+     * The type of attribute.  Only allowlisted customers can consume USE_CUSTOM_TTS_VOICES. To access this feature, contact AWS Support for allowlisting. 
      */
     AttributeType: InstanceAttributeType;
     /**
@@ -4499,6 +4726,16 @@ declare namespace Connect {
      * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
+  }
+  export interface UrlReference {
+    /**
+     * Identifier of the URL reference.
+     */
+    Name?: ReferenceKey;
+    /**
+     * A valid URL.
+     */
+    Value?: ReferenceValue;
   }
   export interface UseCase {
     /**
