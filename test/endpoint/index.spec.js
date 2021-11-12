@@ -13,6 +13,7 @@ describe('endpoints', () => {
     clientName,
     region,
     useFipsEndpoint,
+    useDualstackEndpoint,
     hostname,
   } of testCases) {
     it(`testing "${clientName}" with region: ${region}`, (done) => {
@@ -23,6 +24,7 @@ describe('endpoints', () => {
       const client = new AWS[clientName]({
         region,
         useFipsEndpoint,
+        useDualstackEndpoint,
         hostPrefixEnabled: false
       });
 

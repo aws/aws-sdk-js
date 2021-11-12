@@ -4,13 +4,23 @@
     "clientName": "IotData",
     "region": "ap-east-1",
     "useFipsEndpoint": false,
+    "useDualstackEndpoint": false,
     "hostname": "data.iot.ap-east-1.amazonaws.com"
   },
   {
     "endpointPrefix": "data.iot",
     "clientName": "IotData",
     "region": "ap-east-1",
+    "useFipsEndpoint": false,
+    "useDualstackEndpoint": true,
+    "hostname": "data.iot.ap-east-1.api.aws"
+  },
+  {
+    "endpointPrefix": "data.iot",
+    "clientName": "IotData",
+    "region": "ap-east-1",
     "useFipsEndpoint": true,
+    "useDualstackEndpoint": false,
     "hostname": "data.iot-fips.ap-east-1.amazonaws.com"
   },
   {
@@ -18,34 +28,72 @@
     "clientName": "IotData",
     "region": "ca-central-1",
     "useFipsEndpoint": true,
+    "useDualstackEndpoint": false,
     "hostname": "data.iot-fips.ca-central-1.amazonaws.com"
   },
   {
     "endpointPrefix": "data.iot",
     "clientName": "IotData",
+    "region": "ap-east-1",
+    "useFipsEndpoint": true,
+    "useDualstackEndpoint": true,
+    "hostname": "data.iot-fips.ap-east-1.api.aws"
+  },
+
+  {
+    "endpointPrefix": "data.iot",
+    "clientName": "IotData",
     "region": "cn-north-1",
     "useFipsEndpoint": false,
+    "useDualstackEndpoint": false,
     "hostname": "data.iot.cn-north-1.amazonaws.com.cn"
   },
   {
     "endpointPrefix": "data.iot",
     "clientName": "IotData",
     "region": "cn-north-1",
+    "useFipsEndpoint": false,
+    "useDualstackEndpoint": true,
+    "hostname": "data.iot.cn-north-1.api.amazonwebservices.com.cn"
+  },
+  {
+    "endpointPrefix": "data.iot",
+    "clientName": "IotData",
+    "region": "cn-north-1",
     "useFipsEndpoint": true,
+    "useDualstackEndpoint": false,
     "hostname": "data.iot-fips.cn-north-1.amazonaws.com.cn"
+  },
+  {
+    "endpointPrefix": "data.iot",
+    "clientName": "IotData",
+    "region": "cn-north-1",
+    "useFipsEndpoint": true,
+    "useDualstackEndpoint": true,
+    "hostname": "data.iot-fips.cn-north-1.api.amazonwebservices.com.cn"
   },
   {
     "endpointPrefix": "data.iot",
     "clientName": "IotData",
     "region": "us-gov-east-1",
     "useFipsEndpoint": true,
+    "useDualstackEndpoint": false,
     "hostname": "data.iot-fips.us-gov-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "ec2",
+    "clientName": "EC2",
+    "region": "ap-south-1",
+    "useFipsEndpoint": false,
+    "useDualstackEndpoint": true,
+    "hostname": "api.ec2.ap-south-1.aws"
   },
   {
     "endpointPrefix": "dms",
     "clientName": "DMS",
     "region": "us-gov-east-1",
     "useFipsEndpoint": true,
+    "useDualstackEndpoint": false,
     "hostname": "dms.us-gov-east-1.amazonaws.com"
   },
   {
@@ -53,6 +101,7 @@
     "clientName": "ElastiCache",
     "region": "us-gov-east-1",
     "useFipsEndpoint": true,
+    "useDualstackEndpoint": false,
     "hostname": "elasticache.us-gov-east-1.amazonaws.com"
   },
   {
@@ -60,6 +109,7 @@
     "clientName": "ElastiCache",
     "region": "us-gov-west-1",
     "useFipsEndpoint": true,
+    "useDualstackEndpoint": false,
     "hostname": "elasticache.us-gov-west-1.amazonaws.com"
   },
   {
@@ -67,6 +117,7 @@
     "clientName": "IAM",
     "region": "aws-us-gov-global",
     "useFipsEndpoint": false,
+    "useDualstackEndpoint": false,
     "hostname": "iam.us-gov.amazonaws.com"
   },
   {
@@ -74,6 +125,7 @@
     "clientName": "IAM",
     "region": "aws-us-gov-global",
     "useFipsEndpoint": true,
+    "useDualstackEndpoint": false,
     "hostname": "iam.us-gov.amazonaws.com"
   },
   {
@@ -81,6 +133,7 @@
     "clientName": "Organizations",
     "region": "aws-us-gov-global",
     "useFipsEndpoint": true,
+    "useDualstackEndpoint": false,
     "hostname": "organizations.us-gov-west-1.amazonaws.com"
   },
   {
@@ -88,6 +141,7 @@
     "clientName": "RDS",
     "region": "us-gov-east-1",
     "useFipsEndpoint": true,
+    "useDualstackEndpoint": false,
     "hostname": "rds.us-gov-east-1.amazonaws.com"
   },
   {
@@ -95,6 +149,7 @@
     "clientName": "Route53",
     "region": "aws-us-gov-global",
     "useFipsEndpoint": false,
+    "useDualstackEndpoint": false,
     "hostname": "route53.us-gov.amazonaws.com"
   },
   {
@@ -102,6 +157,7 @@
     "clientName": "Route53",
     "region": "aws-us-gov-global",
     "useFipsEndpoint": true,
+    "useDualstackEndpoint": false,
     "hostname": "route53.us-gov.amazonaws.com"
   }
 ]

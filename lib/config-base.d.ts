@@ -271,4 +271,8 @@ export abstract class ConfigurationOptions {
      * Enables FIPS compatible endpoints.
      */
     useFipsEndpoint?: boolean;
+    /**
+     * Enables IPv6 dualstack endpoint.
+     */
+    useDualstackEndpoint?: boolean;
 }

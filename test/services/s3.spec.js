@@ -92,18 +92,6 @@ describe('AWS.S3', function() {
         useDualstack: true
       });
       expect(s3.endpoint.hostname).to.equal('s3.dualstack.cn-north-1.amazonaws.com.cn');
-
-      s3 = new AWS.S3({
-        region: 'us-iso-east-1',
-        useDualstack: true
-      });
-      expect(s3.endpoint.hostname).to.equal('s3.dualstack.us-iso-east-1.c2s.ic.gov');
-
-      s3 = new AWS.S3({
-        region: 'us-isob-east-1',
-        useDualstack: true
-      });
-      expect(s3.endpoint.hostname).to.equal('s3.dualstack.us-isob-east-1.sc2s.sgov.gov');
     });
   });
 
