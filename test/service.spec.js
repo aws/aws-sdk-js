@@ -123,6 +123,19 @@
         return delete AWS.config.s3;
       });
 
+      it('sets undefined useDualstackEndpoint to value in useDualstack', function() {
+        [true, false].forEach((useDualstack) => {
+          var s3 = new AWS.S3({ useDualstack });
+          expect(s3.config.useDualstackEndpoint).to.equal(useDualstack);
+        });
+        [true, false].forEach((useDualstack) => {
+          var useDualstackEndpoint = !useDualstack;
+          var s3 = new AWS.S3({ useDualstack, useDualstackEndpoint });
+          expect(s3.config.useDualstackEndpoint).to.equal(useDualstackEndpoint);
+        });
+        return delete AWS.config.s3;
+      });
+
       it('merges credential data into config', function() {
         service = new AWS.Service({
           accessKeyId: 'foo',
