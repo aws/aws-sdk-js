@@ -287,5 +287,6 @@ module.exports = {
   Grafana: require('./grafana'),
   Panorama: require('./panorama'),
   ChimeSDKMeetings: require('./chimesdkmeetings'),
-  Resiliencehub: require('./resiliencehub')
+  Resiliencehub: require('./resiliencehub'),
+  MigrationHubStrategy: require('./migrationhubstrategy')
 };

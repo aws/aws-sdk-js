@@ -1100,5 +1100,8 @@
   },
   "resiliencehub": {
     "name": "Resiliencehub"
+  },
+  "migrationhubstrategy": {
+    "name": "MigrationHubStrategy"
   }
 }

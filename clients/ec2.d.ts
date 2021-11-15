@@ -21945,6 +21945,10 @@ declare namespace EC2 {
      * The customer-owned IPv4 address pool associated with the subnet. You must set this value when you specify true for MapCustomerOwnedIpOnLaunch.
      */
     CustomerOwnedIpv4Pool?: CoipPoolId;
+    /**
+     * Indicates whether DNS queries made to the Amazon-provided DNS Resolver in this subnet should return synthetic IPv6 addresses for IPv4-only destinations.
+     */
+    EnableDns64?: AttributeBooleanValue;
   }
   export interface ModifyTrafficMirrorFilterNetworkServicesRequest {
     /**
@@ -27889,6 +27893,10 @@ declare namespace EC2 {
      * The Amazon Resource Name (ARN) of the Outpost.
      */
     OutpostArn?: String;
+    /**
+     * Indicates whether DNS queries made to the Amazon-provided DNS Resolver in this subnet should return synthetic IPv6 addresses for IPv4-only destinations.
+     */
+    EnableDns64?: Boolean;
   }
   export interface SubnetAssociation {
     /**

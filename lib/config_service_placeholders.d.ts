@@ -288,6 +288,7 @@ export abstract class ConfigurationServicePlaceholders {
   panorama?: AWS.Panorama.Types.ClientConfiguration;
   chimesdkmeetings?: AWS.ChimeSDKMeetings.Types.ClientConfiguration;
   resiliencehub?: AWS.Resiliencehub.Types.ClientConfiguration;
+  migrationhubstrategy?: AWS.MigrationHubStrategy.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -578,4 +579,5 @@ export interface ConfigurationServiceApiVersions {
   panorama?: AWS.Panorama.Types.apiVersion;
   chimesdkmeetings?: AWS.ChimeSDKMeetings.Types.apiVersion;
   resiliencehub?: AWS.Resiliencehub.Types.apiVersion;
+  migrationhubstrategy?: AWS.MigrationHubStrategy.Types.apiVersion;
 }

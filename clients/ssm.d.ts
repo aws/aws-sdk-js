@@ -6741,6 +6741,7 @@ declare namespace SSM {
   export type MaxErrors = string;
   export type MaxResults = number;
   export type MaxResultsEC2Compatible = number;
+  export type MaxSessionDuration = string;
   export type MetadataKey = string;
   export type MetadataKeysToDeleteList = MetadataKey[];
   export type MetadataMap = {[key: string]: MetadataValue};
@@ -7436,7 +7437,7 @@ declare namespace SSM {
   export type ParameterPolicyList = ParameterInlinePolicy[];
   export interface ParameterStringFilter {
     /**
-     * The name of the filter. The ParameterStringFilter object is used by the DescribeParameters and GetParametersByPath API operations. However, not all of the pattern values listed for Key can be used with both operations. For DescribeActions, all of the listed patterns are valid except Label. For GetParametersByPath, the following patterns listed for Key aren't valid: tag, DataType, Name, Path, and Tier. For examples of Amazon Web Services CLI commands demonstrating valid parameter filter constructions, see Searching for Systems Manager parameters in the Amazon Web Services Systems Manager User Guide.
+     * The name of the filter. The ParameterStringFilter object is used by the DescribeParameters and GetParametersByPath API operations. However, not all of the pattern values listed for Key can be used with both operations. For DescribeParameters, all of the listed patterns are valid except Label. For GetParametersByPath, the following patterns listed for Key aren't valid: tag, DataType, Name, Path, and Tier. For examples of Amazon Web Services CLI commands demonstrating valid parameter filter constructions, see Searching for Systems Manager parameters in the Amazon Web Services Systems Manager User Guide.
      */
     Key: ParameterStringFilterKey;
     /**
@@ -8566,6 +8567,10 @@ declare namespace SSM {
      */
     Owner?: SessionOwner;
     /**
+     * The reason for connecting to the instance.
+     */
+    Reason?: SessionReason;
+    /**
      * Reserved for future use.
      */
     Details?: SessionDetails;
@@ -8573,6 +8578,10 @@ declare namespace SSM {
      * Reserved for future use.
      */
     OutputUrl?: SessionManagerOutputUrl;
+    /**
+     * The maximum duration of a session before it terminates.
+     */
+    MaxSessionDuration?: MaxSessionDuration;
   }
   export type SessionDetails = string;
   export interface SessionFilter {
@@ -8608,6 +8617,7 @@ declare namespace SSM {
   export type SessionManagerS3OutputUrl = string;
   export type SessionMaxResults = number;
   export type SessionOwner = string;
+  export type SessionReason = string;
   export type SessionState = "Active"|"History"|string;
   export type SessionStatus = "Connected"|"Connecting"|"Disconnected"|"Terminated"|"Terminating"|"Failed"|string;
   export type SessionTarget = string;
@@ -8768,6 +8778,10 @@ declare namespace SSM {
      * The name of the SSM document to define the parameters and plugin settings for the session. For example, SSM-SessionManagerRunShell. You can call the GetDocument API to verify the document exists before attempting to start a session. If no document name is provided, a shell to the instance is launched by default.
      */
     DocumentName?: DocumentARN;
+    /**
+     * The reason for connecting to the instance. This value is included in the details for the Amazon CloudWatch Events event created when you start the session.
+     */
+    Reason?: SessionReason;
     /**
      * Reserved for future use.
      */

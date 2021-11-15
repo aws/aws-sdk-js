@@ -823,6 +823,9 @@
         },
         {
           "shape": "InvalidParameterCombinationException"
+        },
+        {
+          "shape": "OperationNotPermittedException"
         }
       ],
       "documentation": "<p>Retrieves a list that describes one or more specified users in the user pool.</p>"
@@ -3255,7 +3258,8 @@
       "enum": [
         "WINDOWS",
         "WINDOWS_SERVER_2016",
-        "WINDOWS_SERVER_2019"
+        "WINDOWS_SERVER_2019",
+        "AMAZON_LINUX2"
       ]
     },
     "RedirectURL": {

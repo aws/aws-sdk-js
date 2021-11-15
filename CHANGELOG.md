@@ -1,6 +1,16 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1028.0-->
+<!--LATEST=2.1029.0-->
 <!--ENTRYINSERT-->
+
+## 2.1029.0
+* feature: AppStream: This release includes support for images of AmazonLinux2 platform type.
+* feature: DMS: Add Settings in JSON format for the source GCP MySQL endpoint
+* feature: EC2: Adds a new VPC Subnet attribute "EnableDns64." When enabled on IPv6 Subnets, the Amazon-Provided DNS Resolver returns synthetic IPv6 addresses for IPv4-only destinations.
+* feature: EKS: Adding Tags support to Cluster Registrations.
+* feature: MigrationHubStrategy: AWS SDK for Migration Hub Strategy Recommendations. It includes APIs to start the portfolio assessment, import portfolio data for assessment, and to retrieve recommendations. For more information, see the AWS Migration Hub documentation at https://docs.aws.amazon.com/migrationhub/index.html
+* feature: SSM: Adds support for Session Reason and Max Session Duration for Systems Manager Session Manager.
+* feature: Transfer: AWS Transfer Family now supports integrating a custom identity provider using AWS Lambda
+* feature: WAFV2: Your options for logging web ACL traffic now include Amazon CloudWatch Logs log groups and Amazon S3 buckets.
 
 ## 2.1028.0
 * feature: Connect: This release adds APIs for creating and managing scheduled tasks. Additionally, adds APIs to describe and update a contact and list associated references.

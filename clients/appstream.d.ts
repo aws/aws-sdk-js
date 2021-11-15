@@ -1690,7 +1690,7 @@ declare namespace AppStream {
   export type OrganizationalUnitDistinguishedName = string;
   export type OrganizationalUnitDistinguishedNamesList = OrganizationalUnitDistinguishedName[];
   export type Permission = "ENABLED"|"DISABLED"|string;
-  export type PlatformType = "WINDOWS"|"WINDOWS_SERVER_2016"|"WINDOWS_SERVER_2019"|string;
+  export type PlatformType = "WINDOWS"|"WINDOWS_SERVER_2016"|"WINDOWS_SERVER_2019"|"AMAZON_LINUX2"|string;
   export type RedirectURL = string;
   export type RegionName = string;
   export interface ResourceError {
