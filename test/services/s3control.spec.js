@@ -240,7 +240,7 @@ describe('AWS.S3Control', function() {
           error = err;
         });
         expect(error.name).to.equal('InvalidConfiguration');
-          expect(error.message).to.equal('FIPS region not allowed in ARN');
+        expect(error.message).to.equal('FIPS region not allowed in ARN');
       });
 
       it('should use regions from ARN if s3UseArnRegion config is set to false', function(done) {
