@@ -1,5 +1,0 @@
-{
-  "type": "feature",
-  "category": "S3Control",
-  "description": "Support FIPS for S3 Outposts"
-}

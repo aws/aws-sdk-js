@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1029.0-->
+<!--LATEST=2.1030.0-->
 <!--ENTRYINSERT-->
+
+## 2.1030.0
+* feature: CloudTrail: CloudTrail Insights now supports ApiErrorRateInsight, which enables customers to identify unusual activity in their AWS account based on API error codes and their rate.
+* feature: Location: This release adds the support for Relevance, Distance, Time Zone, Language and Interpolated Address for Geocoding and Reverse Geocoding.
+* feature: S3Control: Support FIPS for S3 Outposts
+* feature: s3util: Add allowFipsEndpoint option in validateArnRegion
 
 ## 2.1029.0
 * feature: AppStream: This release includes support for images of AmazonLinux2 platform type.

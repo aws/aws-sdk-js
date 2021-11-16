@@ -68,11 +68,11 @@ declare class Location extends Service {
    */
   batchUpdateDevicePosition(callback?: (err: AWSError, data: Location.Types.BatchUpdateDevicePositionResponse) => void): Request<Location.Types.BatchUpdateDevicePositionResponse, AWSError>;
   /**
-   *  Calculates a route given the following required parameters: DeparturePostiton and DestinationPosition. Requires that you first create a route calculator resource  By default, a request that doesn't specify a departure time uses the best time of day to travel with the best traffic conditions when calculating the route. Additional options include:    Specifying a departure time using either DepartureTime or DepartureNow. This calculates a route based on predictive traffic data at the given time.   You can't specify both DepartureTime and DepartureNow in a single request. Specifying both parameters returns an error message.     Specifying a travel mode using TravelMode. This lets you specify an additional route preference such as CarModeOptions if traveling by Car, or TruckModeOptions if traveling by Truck.    
+   *  Calculates a route given the following required parameters: DeparturePostiton and DestinationPosition. Requires that you first create a route calculator resource. By default, a request that doesn't specify a departure time uses the best time of day to travel with the best traffic conditions when calculating the route. Additional options include:    Specifying a departure time using either DepartureTime or DepartureNow. This calculates a route based on predictive traffic data at the given time.   You can't specify both DepartureTime and DepartureNow in a single request. Specifying both parameters returns a validation error.     Specifying a travel mode using TravelMode. This lets you specify an additional route preference such as CarModeOptions if traveling by Car, or TruckModeOptions if traveling by Truck.    
    */
   calculateRoute(params: Location.Types.CalculateRouteRequest, callback?: (err: AWSError, data: Location.Types.CalculateRouteResponse) => void): Request<Location.Types.CalculateRouteResponse, AWSError>;
   /**
-   *  Calculates a route given the following required parameters: DeparturePostiton and DestinationPosition. Requires that you first create a route calculator resource  By default, a request that doesn't specify a departure time uses the best time of day to travel with the best traffic conditions when calculating the route. Additional options include:    Specifying a departure time using either DepartureTime or DepartureNow. This calculates a route based on predictive traffic data at the given time.   You can't specify both DepartureTime and DepartureNow in a single request. Specifying both parameters returns an error message.     Specifying a travel mode using TravelMode. This lets you specify an additional route preference such as CarModeOptions if traveling by Car, or TruckModeOptions if traveling by Truck.    
+   *  Calculates a route given the following required parameters: DeparturePostiton and DestinationPosition. Requires that you first create a route calculator resource. By default, a request that doesn't specify a departure time uses the best time of day to travel with the best traffic conditions when calculating the route. Additional options include:    Specifying a departure time using either DepartureTime or DepartureNow. This calculates a route based on predictive traffic data at the given time.   You can't specify both DepartureTime and DepartureNow in a single request. Specifying both parameters returns a validation error.     Specifying a travel mode using TravelMode. This lets you specify an additional route preference such as CarModeOptions if traveling by Car, or TruckModeOptions if traveling by Truck.    
    */
   calculateRoute(callback?: (err: AWSError, data: Location.Types.CalculateRouteResponse) => void): Request<Location.Types.CalculateRouteResponse, AWSError>;
   /**
@@ -92,11 +92,11 @@ declare class Location extends Service {
    */
   createMap(callback?: (err: AWSError, data: Location.Types.CreateMapResponse) => void): Request<Location.Types.CreateMapResponse, AWSError>;
   /**
-   * Creates a place index resource in your AWS account, which supports functions with geospatial data sourced from your chosen data provider.
+   * Creates a place index resource in your AWS account. Use a place index resource to geocode addresses and other text queries by using the SearchPlaceIndexForText operation, and reverse geocode coordinates by using the SearchPlaceIndexForPosition operation.
    */
   createPlaceIndex(params: Location.Types.CreatePlaceIndexRequest, callback?: (err: AWSError, data: Location.Types.CreatePlaceIndexResponse) => void): Request<Location.Types.CreatePlaceIndexResponse, AWSError>;
   /**
-   * Creates a place index resource in your AWS account, which supports functions with geospatial data sourced from your chosen data provider.
+   * Creates a place index resource in your AWS account. Use a place index resource to geocode addresses and other text queries by using the SearchPlaceIndexForText operation, and reverse geocode coordinates by using the SearchPlaceIndexForPosition operation.
    */
   createPlaceIndex(callback?: (err: AWSError, data: Location.Types.CreatePlaceIndexResponse) => void): Request<Location.Types.CreatePlaceIndexResponse, AWSError>;
   /**
@@ -348,11 +348,11 @@ declare class Location extends Service {
    */
   searchPlaceIndexForPosition(callback?: (err: AWSError, data: Location.Types.SearchPlaceIndexForPositionResponse) => void): Request<Location.Types.SearchPlaceIndexForPositionResponse, AWSError>;
   /**
-   * Geocodes free-form text, such as an address, name, city, or region to allow you to search for Places or points of interest.  Includes the option to apply additional parameters to narrow your list of results.  You can search for places near a given position using BiasPosition, or filter results within a bounding box using FilterBBox. Providing both parameters simultaneously returns an error. 
+   * Geocodes free-form text, such as an address, name, city, or region to allow you to search for Places or points of interest.  Optional parameters let you narrow your search results by bounding box or country, or bias your search toward a specific position on the globe.  You can search for places near a given position using BiasPosition, or filter results within a bounding box using FilterBBox. Providing both parameters simultaneously returns an error.  Search results are returned in order of highest to lowest relevance.
    */
   searchPlaceIndexForText(params: Location.Types.SearchPlaceIndexForTextRequest, callback?: (err: AWSError, data: Location.Types.SearchPlaceIndexForTextResponse) => void): Request<Location.Types.SearchPlaceIndexForTextResponse, AWSError>;
   /**
-   * Geocodes free-form text, such as an address, name, city, or region to allow you to search for Places or points of interest.  Includes the option to apply additional parameters to narrow your list of results.  You can search for places near a given position using BiasPosition, or filter results within a bounding box using FilterBBox. Providing both parameters simultaneously returns an error. 
+   * Geocodes free-form text, such as an address, name, city, or region to allow you to search for Places or points of interest.  Optional parameters let you narrow your search results by bounding box or country, or bias your search toward a specific position on the globe.  You can search for places near a given position using BiasPosition, or filter results within a bounding box using FilterBBox. Providing both parameters simultaneously returns an error.  Search results are returned in order of highest to lowest relevance.
    */
   searchPlaceIndexForText(callback?: (err: AWSError, data: Location.Types.SearchPlaceIndexForTextResponse) => void): Request<Location.Types.SearchPlaceIndexForTextResponse, AWSError>;
   /**
@@ -660,7 +660,7 @@ declare namespace Location {
   }
   export interface CalculateRouteRequest {
     /**
-     * The name of the route calculator resource that you want to use to calculate a route. 
+     * The name of the route calculator resource that you want to use to calculate the route. 
      */
     CalculatorName: ResourceName;
     /**
@@ -676,7 +676,7 @@ declare namespace Location {
      */
     DeparturePosition: Position;
     /**
-     * Specifies the desired time of departure. Uses the given time to calculate a route. Otherwise, the best time of day to travel with the best traffic conditions is used to calculate the route.  Setting a departure time in the past returns a 400 ValidationException error.    In ISO 8601 format: YYYY-MM-DDThh:mm:ss.sssZ. For example, 2020–07-2T12:15:20.000Z+01:00   
+     * Specifies the desired time of departure. Uses the given time to calculate the route. Otherwise, the best time of day to travel with the best traffic conditions is used to calculate the route.  Setting a departure time in the past returns a 400 ValidationException error.    In ISO 8601 format: YYYY-MM-DDThh:mm:ss.sssZ. For example, 2020–07-2T12:15:20.000Z+01:00   
      */
     DepartureTime?: Timestamp;
     /**
@@ -725,7 +725,7 @@ declare namespace Location {
      */
     Distance: CalculateRouteSummaryDistanceDouble;
     /**
-     * The unit of measurement for the distance.
+     * The unit of measurement for route distances.
      */
     DistanceUnit: DistanceUnit;
     /**
@@ -781,7 +781,7 @@ declare namespace Location {
      */
     PricingPlanDataSource?: String;
     /**
-     * Applies one or more tags to the geofence collection. A tag is a key-value pair helps manage, identify, search, and filter your resources by labelling them. Format: "key" : "value"  Restrictions:   Maximum 50 tags per resource   Each resource tag must be unique with a maximum of one value.   Maximum key length: 128 Unicode characters in UTF-8   Maximum value length: 256 Unicode characters in UTF-8   Can use alphanumeric characters (A–Z, a–z, 0–9), and the following characters: + - = . _ : / @.   
+     * Applies one or more tags to the geofence collection. A tag is a key-value pair helps manage, identify, search, and filter your resources by labelling them. Format: "key" : "value"  Restrictions:   Maximum 50 tags per resource   Each resource tag must be unique with a maximum of one value.   Maximum key length: 128 Unicode characters in UTF-8   Maximum value length: 256 Unicode characters in UTF-8   Can use alphanumeric characters (A–Z, a–z, 0–9), and the following characters: + - = . _ : / @.    Cannot use "aws:" as a prefix for a key.  
      */
     Tags?: TagMap;
   }
@@ -817,7 +817,7 @@ declare namespace Location {
      */
     PricingPlan: PricingPlan;
     /**
-     * Applies one or more tags to the map resource. A tag is a key-value pair helps manage, identify, search, and filter your resources by labelling them. Format: "key" : "value"  Restrictions:   Maximum 50 tags per resource   Each resource tag must be unique with a maximum of one value.   Maximum key length: 128 Unicode characters in UTF-8   Maximum value length: 256 Unicode characters in UTF-8   Can use alphanumeric characters (A–Z, a–z, 0–9), and the following characters: + - = . _ : / @.   
+     * Applies one or more tags to the map resource. A tag is a key-value pair helps manage, identify, search, and filter your resources by labelling them. Format: "key" : "value"  Restrictions:   Maximum 50 tags per resource   Each resource tag must be unique with a maximum of one value.   Maximum key length: 128 Unicode characters in UTF-8   Maximum value length: 256 Unicode characters in UTF-8   Can use alphanumeric characters (A–Z, a–z, 0–9), and the following characters: + - = . _ : / @.    Cannot use "aws:" as a prefix for a key.  
      */
     Tags?: TagMap;
   }
@@ -837,7 +837,7 @@ declare namespace Location {
   }
   export interface CreatePlaceIndexRequest {
     /**
-     * Specifies the data provider of geospatial data.  This field is case-sensitive. Enter the valid values as shown. For example, entering HERE returns an error.  Valid values include:    Esri – For additional information about Esri's coverage in your region of interest, see Esri details on geocoding coverage.    Here – For additional information about HERE Technologies' coverage in your region of interest, see HERE details on goecoding coverage.  Place index resources using HERE Technologies as a data provider can't store results for locations in Japan. For more information, see the AWS Service Terms for Amazon Location Service.    For additional information , see Data providers on the Amazon Location Service Developer Guide.
+     * Specifies the geospatial data provider for the new place index.  This field is case-sensitive. Enter the valid values as shown. For example, entering HERE returns an error.  Valid values include:    Esri – For additional information about Esri's coverage in your region of interest, see Esri details on geocoding coverage.    Here – For additional information about HERE Technologies' coverage in your region of interest, see HERE details on goecoding coverage.  If you specify HERE Technologies (Here) as the data provider, you may not store results for locations in Japan. For more information, see the AWS Service Terms for Amazon Location Service.    For additional information , see Data providers on the Amazon Location Service Developer Guide.
      */
     DataSource: String;
     /**
@@ -857,7 +857,7 @@ declare namespace Location {
      */
     PricingPlan: PricingPlan;
     /**
-     * Applies one or more tags to the place index resource. A tag is a key-value pair helps manage, identify, search, and filter your resources by labelling them. Format: "key" : "value"  Restrictions:   Maximum 50 tags per resource   Each resource tag must be unique with a maximum of one value.   Maximum key length: 128 Unicode characters in UTF-8   Maximum value length: 256 Unicode characters in UTF-8   Can use alphanumeric characters (A–Z, a–z, 0–9), and the following characters: + - = . _ : / @.   
+     * Applies one or more tags to the place index resource. A tag is a key-value pair that helps you manage, identify, search, and filter your resources. Format: "key" : "value"  Restrictions:   Maximum 50 tags per resource.   Each tag key must be unique and must have exactly one associated value.   Maximum key length: 128 Unicode characters in UTF-8.   Maximum value length: 256 Unicode characters in UTF-8.   Can use alphanumeric characters (A–Z, a–z, 0–9), and the following characters: + - = . _ : / @   Cannot use "aws:" as a prefix for a key.  
      */
     Tags?: TagMap;
   }
@@ -893,7 +893,7 @@ declare namespace Location {
      */
     PricingPlan: PricingPlan;
     /**
-     * Applies one or more tags to the route calculator resource. A tag is a key-value pair helps manage, identify, search, and filter your resources by labelling them.   For example: { "tag1" : "value1", "tag2" : "value2"}   Format: "key" : "value"  Restrictions:   Maximum 50 tags per resource   Each resource tag must be unique with a maximum of one value.   Maximum key length: 128 Unicode characters in UTF-8   Maximum value length: 256 Unicode characters in UTF-8   Can use alphanumeric characters (A–Z, a–z, 0–9), and the following characters: + - = . _ : / @.   
+     * Applies one or more tags to the route calculator resource. A tag is a key-value pair helps manage, identify, search, and filter your resources by labelling them.   For example: { "tag1" : "value1", "tag2" : "value2"}   Format: "key" : "value"  Restrictions:   Maximum 50 tags per resource   Each resource tag must be unique with a maximum of one value.   Maximum key length: 128 Unicode characters in UTF-8   Maximum value length: 256 Unicode characters in UTF-8   Can use alphanumeric characters (A–Z, a–z, 0–9), and the following characters: + - = . _ : / @.    Cannot use "aws:" as a prefix for a key.  
      */
     Tags?: TagMap;
   }
@@ -921,7 +921,7 @@ declare namespace Location {
      */
     KmsKeyId?: KmsKeyId;
     /**
-     * Specifies the position filtering for the tracker resource. Valid values:    TimeBased - Location updates are evaluated against linked geofence collections, but not every location update is stored. If your update frequency is more often than 30 seconds, only one update per 30 seconds is stored for each unique device ID.     DistanceBased - If the device has moved less than 30 m (98.4 ft), location updates are ignored. Location updates within this distance are neither evaluated against linked geofence collections, nor stored. This helps control costs by reducing the number of geofence evaluations and device positions to retrieve. Distance-based filtering can also reduce the jitter effect when displaying device trajectory on a map.    This field is optional. If not specified, the default value is TimeBased.
+     * Specifies the position filtering for the tracker resource. Valid values:    TimeBased - Location updates are evaluated against linked geofence collections, but not every location update is stored. If your update frequency is more often than 30 seconds, only one update per 30 seconds is stored for each unique device ID.     DistanceBased - If the device has moved less than 30 m (98.4 ft), location updates are ignored. Location updates within this area are neither evaluated against linked geofence collections, nor stored. This helps control costs by reducing the number of geofence evaluations and historical device positions to paginate through. Distance-based filtering can also reduce the effects of GPS noise when displaying device trajectories on a map.    This field is optional. If not specified, the default value is TimeBased.
      */
     PositionFiltering?: PositionFiltering;
     /**
@@ -933,7 +933,7 @@ declare namespace Location {
      */
     PricingPlanDataSource?: String;
     /**
-     * Applies one or more tags to the tracker resource. A tag is a key-value pair helps manage, identify, search, and filter your resources by labelling them. Format: "key" : "value"  Restrictions:   Maximum 50 tags per resource   Each resource tag must be unique with a maximum of one value.   Maximum key length: 128 Unicode characters in UTF-8   Maximum value length: 256 Unicode characters in UTF-8   Can use alphanumeric characters (A–Z, a–z, 0–9), and the following characters: + - = . _ : / @.   
+     * Applies one or more tags to the tracker resource. A tag is a key-value pair helps manage, identify, search, and filter your resources by labelling them. Format: "key" : "value"  Restrictions:   Maximum 50 tags per resource   Each resource tag must be unique with a maximum of one value.   Maximum key length: 128 Unicode characters in UTF-8   Maximum value length: 256 Unicode characters in UTF-8   Can use alphanumeric characters (A–Z, a–z, 0–9), and the following characters: + - = . _ : / @.    Cannot use "aws:" as a prefix for a key.  
      */
     Tags?: TagMap;
     /**
@@ -1101,7 +1101,7 @@ declare namespace Location {
      */
     CreateTime: Timestamp;
     /**
-     * The data provider of geospatial data. Indicates one of the available providers:    Esri     Here    For additional details on data providers, see Amazon Location Service data providers.
+     * The data provider of geospatial data. Values can be one of the following:    Esri     Here    For more information about data providers, see Amazon Location Service data providers.
      */
     DataSource: String;
     /**
@@ -1461,8 +1461,10 @@ declare namespace Location {
     ContentType?: String;
   }
   export type Id = string;
+  export type Integer = number;
   export type IntendedUse = "SingleUse"|"Storage"|string;
   export type KmsKeyId = string;
+  export type LanguageTag = string;
   export interface Leg {
     /**
      * The distance between the leg's StartPosition and EndPosition along a calculated route.    The default measurement is Kilometers unless the request specifies a DistanceUnit of Miles.  
@@ -1697,7 +1699,7 @@ declare namespace Location {
      */
     Entries: ListPlaceIndexesResponseEntryList;
     /**
-     * A pagination token indicating there are additional pages available. You can use the token in a following request to fetch the next set of results.
+     * A pagination token indicating that there are additional pages available. You can use the token in a new request to fetch the next page of results.
      */
     NextToken?: Token;
   }
@@ -1707,7 +1709,7 @@ declare namespace Location {
      */
     CreateTime: Timestamp;
     /**
-     * The data provider of geospatial data. Indicates one of the available providers:    Esri     Here    For additional details on data providers, see Amazon Location Service data providers.
+     * The data provider of geospatial data. Values can be one of the following:    Esri     Here    For more information about data providers, see Amazon Location Service data providers.
      */
     DataSource: String;
     /**
@@ -1879,6 +1881,10 @@ declare namespace Location {
     Country?: String;
     Geometry: PlaceGeometry;
     /**
+     *  True if the result is interpolated from other known places.  False if the Place is a known place. Not returned when the partner does not provide the information. For example, returns False for an address location that is found in the partner data, but returns True if an address does not exist in the partner data and its location is calculated by interpolating between other known addresses. 
+     */
+    Interpolated?: Boolean;
+    /**
      * The full name and address of the point of interest such as a city, region, or country. For example, 123 Any Street, Any Town, USA.
      */
     Label?: String;
@@ -1903,9 +1909,13 @@ declare namespace Location {
      */
     Street?: String;
     /**
-     * A country, or an area that's part of a larger region . For example, Metro Vancouver.
+     * A country, or an area that's part of a larger region. For example, Metro Vancouver.
      */
     SubRegion?: String;
+    /**
+     * The time zone in which the Place is located. Returned only when using Here as the selected partner.
+     */
+    TimeZone?: TimeZone;
   }
   export interface PlaceGeometry {
     /**
@@ -1915,7 +1925,7 @@ declare namespace Location {
   }
   export type PlaceIndexSearchResultLimit = number;
   export type Position = Double[];
-  export type PositionFiltering = "TimeBased"|"DistanceBased"|string;
+  export type PositionFiltering = "TimeBased"|"DistanceBased"|"AccuracyBased"|string;
   export type PricingPlan = "RequestBasedUsage"|"MobileAssetTracking"|"MobileAssetManagement"|string;
   export interface PutGeofenceRequest {
     /**
@@ -1949,29 +1959,48 @@ declare namespace Location {
   export type ResourceName = string;
   export interface SearchForPositionResult {
     /**
-     * Contains details about the relevant point of interest.
+     * The distance in meters of a great-circle arc between the query position and the result.  A great-circle arc is the shortest path on a sphere, in this case the Earth. This returns the shortest distance between two locations. 
+     */
+    Distance: SearchForPositionResultDistanceDouble;
+    /**
+     * Details about the search result, such as its address and position.
      */
     Place: Place;
   }
+  export type SearchForPositionResultDistanceDouble = number;
   export type SearchForPositionResultList = SearchForPositionResult[];
   export interface SearchForTextResult {
     /**
-     * Contains details about the relevant point of interest.
+     * The distance in meters of a great-circle arc between the bias position specified and the result. Distance will be returned only if a bias position was specified in the query.  A great-circle arc is the shortest path on a sphere, in this case the Earth. This returns the shortest distance between two locations. 
+     */
+    Distance?: SearchForTextResultDistanceDouble;
+    /**
+     * Details about the search result, such as its address and position.
      */
     Place: Place;
+    /**
+     * The relative confidence in the match for a result among the results returned. For example, if more fields for an address match (including house number, street, city, country/region, and postal code), the relevance score is closer to 1. Returned only when the partner selected is Esri.
+     */
+    Relevance?: SearchForTextResultRelevanceDouble;
   }
+  export type SearchForTextResultDistanceDouble = number;
   export type SearchForTextResultList = SearchForTextResult[];
+  export type SearchForTextResultRelevanceDouble = number;
   export interface SearchPlaceIndexForPositionRequest {
     /**
      * The name of the place index resource you want to use for the search.
      */
     IndexName: ResourceName;
     /**
-     * An optional paramer. The maximum number of results returned per request.  Default value: 50 
+     * The preferred language used to return results. The value must be a valid BCP 47 language tag, for example, en for English. This setting affects the languages used in the results. It does not change which results are returned. If the language is not specified, or not supported for a particular result, the partner automatically chooses a language for the result.
+     */
+    Language?: LanguageTag;
+    /**
+     * An optional parameter. The maximum number of results returned per request. Default value: 50 
      */
     MaxResults?: PlaceIndexSearchResultLimit;
     /**
-     * Specifies a coordinate for the query defined by a longitude, and latitude.   The first position is the X coordinate, or longitude.   The second position is the Y coordinate, or latitude.    For example, position=xLongitude&amp;position=yLatitude .
+     * Specifies the longitude and latitude of the position to query.  This parameter must contain a pair of numbers. The first number represents the X coordinate, or longitude; the second number represents the Y coordinate, or latitude. For example, [-123.1174, 49.2847] represents a position with longitude -123.1174 and latitude 49.2847.
      */
     Position: Position;
   }
@@ -1981,35 +2010,39 @@ declare namespace Location {
      */
     Results: SearchForPositionResultList;
     /**
-     * Contains a summary of the request.
+     * Contains a summary of the request. Echoes the input values for Position, Language, MaxResults, and the DataSource of the place index. 
      */
     Summary: SearchPlaceIndexForPositionSummary;
   }
   export interface SearchPlaceIndexForPositionSummary {
     /**
-     * The data provider of geospatial data. Indicates one of the available providers:   Esri   HERE   For additional details on data providers, see Amazon Location Service data providers.
+     * The geospatial data provider attached to the place index resource specified in the request. Values can be one of the following:   Esri   Here   For more information about data providers, see Amazon Location Service data providers.
      */
     DataSource: String;
     /**
-     * An optional parameter. The maximum number of results returned per request.  Default value: 50 
+     * The preferred language used to return results. Matches the language in the request. The value is a valid BCP 47 language tag, for example, en for English.
+     */
+    Language?: LanguageTag;
+    /**
+     * Contains the optional result count limit that is specified in the request. Default value: 50 
      */
     MaxResults?: PlaceIndexSearchResultLimit;
     /**
-     * The position given in the reverse geocoding request.
+     * The position specified in the request.
      */
     Position: Position;
   }
   export interface SearchPlaceIndexForTextRequest {
     /**
-     * Searches for results closest to the given position. An optional parameter defined by longitude, and latitude.   The first bias position is the X coordinate, or longitude.   The second bias position is the Y coordinate, or latitude.    For example, bias=xLongitude&amp;bias=yLatitude.
+     * An optional parameter that indicates a preference for places that are closer to a specified position.  If provided, this parameter must contain a pair of numbers. The first number represents the X coordinate, or longitude; the second number represents the Y coordinate, or latitude. For example, [-123.1174, 49.2847] represents the position with longitude -123.1174 and latitude 49.2847.   BiasPosition and FilterBBox are mutually exclusive. Specifying both options results in an error.  
      */
     BiasPosition?: Position;
     /**
-     * Filters the results by returning only Places within the provided bounding box. An optional parameter. The first 2 bbox parameters describe the lower southwest corner:   The first bbox position is the X coordinate or longitude of the lower southwest corner.   The second bbox position is the Y coordinate or latitude of the lower southwest corner.   For example, bbox=xLongitudeSW&amp;bbox=yLatitudeSW. The next bbox parameters describe the upper northeast corner:   The third bbox position is the X coordinate, or longitude of the upper northeast corner.   The fourth bbox position is the Y coordinate, or longitude of the upper northeast corner.   For example, bbox=xLongitudeNE&amp;bbox=yLatitudeNE 
+     * An optional parameter that limits the search results by returning only places that are within the provided bounding box.  If provided, this parameter must contain a total of four consecutive numbers in two pairs. The first pair of numbers represents the X and Y coordinates (longitude and latitude, respectively) of the southwest corner of the bounding box; the second pair of numbers represents the X and Y coordinates (longitude and latitude, respectively) of the northeast corner of the bounding box. For example, [-12.7935, -37.4835, -12.0684, -36.9542] represents a bounding box where the southwest corner has longitude -12.7935 and latitude -37.4835, and the northeast corner has longitude -12.0684 and latitude -36.9542.   FilterBBox and BiasPosition are mutually exclusive. Specifying both options results in an error.  
      */
     FilterBBox?: BoundingBox;
     /**
-     * Limits the search to the given a list of countries/regions. An optional parameter.   Use the ISO 3166 3-digit country code. For example, Australia uses three upper-case characters: AUS.  
+     * An optional parameter that limits the search results by returning only places that are in a specified list of countries.   Valid values include ISO 3166 3-digit country codes. For example, Australia uses three upper-case characters: AUS.  
      */
     FilterCountries?: CountryCodeList;
     /**
@@ -2017,51 +2050,59 @@ declare namespace Location {
      */
     IndexName: ResourceName;
     /**
+     * The preferred language used to return results. The value must be a valid BCP 47 language tag, for example, en for English. This setting affects the languages used in the results. It does not change which results are returned. If the language is not specified, or not supported for a particular result, the partner automatically chooses a language for the result.
+     */
+    Language?: LanguageTag;
+    /**
      * An optional parameter. The maximum number of results returned per request.  The default: 50 
      */
     MaxResults?: PlaceIndexSearchResultLimit;
     /**
-     * The address, name, city, or region to be used in the search. In free-form text format. For example, 123 Any Street.
+     * The address, name, city, or region to be used in the search in free-form text format. For example, 123 Any Street.
      */
     Text: SyntheticSearchPlaceIndexForTextRequestString;
   }
   export interface SearchPlaceIndexForTextResponse {
     /**
-     * A list of Places closest to the specified position. Each result contains additional information about the specific point of interest. 
+     * A list of Places matching the input text. Each result contains additional information about the specific point of interest. 
      */
     Results: SearchForTextResultList;
     /**
-     * Contains a summary of the request. Contains the BiasPosition, DataSource, FilterBBox, FilterCountries, MaxResults, ResultBBox, and Text.
+     * Contains a summary of the request. Echoes the input values for BiasPosition, FilterBBox, FilterCountries, Language, MaxResults, and Text. Also includes the DataSource of the place index and the bounding box, ResultBBox, which surrounds the search results. 
      */
     Summary: SearchPlaceIndexForTextSummary;
   }
   export interface SearchPlaceIndexForTextSummary {
     /**
-     * Contains the coordinates for the bias position entered in the geocoding request.
+     * Contains the coordinates for the optional bias position specified in the request.
      */
     BiasPosition?: Position;
     /**
-     * The data provider of geospatial data. Indicates one of the available providers:   Esri   HERE   For additional details on data providers, see Amazon Location Service data providers.
+     * The geospatial data provider attached to the place index resource specified in the request. Values can be one of the following:   Esri   Here   For more information about data providers, see Amazon Location Service data providers.
      */
     DataSource: String;
     /**
-     * Contains the coordinates for the optional bounding box coordinated entered in the geocoding request.
+     * Contains the coordinates for the optional bounding box specified in the request.
      */
     FilterBBox?: BoundingBox;
     /**
-     * Contains the country filter entered in the geocoding request.
+     * Contains the optional country filter specified in the request.
      */
     FilterCountries?: CountryCodeList;
     /**
-     * Contains the maximum number of results indicated for the request.
+     * The preferred language used to return results. Matches the language in the request. The value is a valid BCP 47 language tag, for example, en for English.
+     */
+    Language?: LanguageTag;
+    /**
+     * Contains the optional result count limit specified in the request.
      */
     MaxResults?: PlaceIndexSearchResultLimit;
     /**
-     * A bounding box that contains the search results within the specified area indicated by FilterBBox. A subset of bounding box specified using FilterBBox.
+     * The bounding box that fully contains all search results.  If you specified the optional FilterBBox parameter in the request, ResultBBox is contained within FilterBBox. 
      */
     ResultBBox?: BoundingBox;
     /**
-     * The address, name, city or region to be used in the geocoding request. In free-form text format. For example, Vancouver.
+     * The search text specified in the request.
      */
     Text: SyntheticSearchPlaceIndexForTextSummaryString;
   }
@@ -2103,13 +2144,23 @@ declare namespace Location {
      */
     ResourceArn: Arn;
     /**
-     * Tags that have been applied to the specified resource. Tags are mapped from the tag key to the tag value: "TagKey" : "TagValue".   Format example: {"tag1" : "value1", "tag2" : "value2"}    
+     * Applies one or more tags to specific resource. A tag is a key-value pair that helps you manage, identify, search, and filter your resources. Format: "key" : "value"  Restrictions:   Maximum 50 tags per resource.   Each tag key must be unique and must have exactly one associated value.   Maximum key length: 128 Unicode characters in UTF-8.   Maximum value length: 256 Unicode characters in UTF-8.   Can use alphanumeric characters (A–Z, a–z, 0–9), and the following characters: + - = . _ : / @   Cannot use "aws:" as a prefix for a key.  
      */
     Tags: TagMap;
   }
   export interface TagResourceResponse {
   }
   export type TagValue = string;
+  export interface TimeZone {
+    /**
+     * The name of the time zone, following the  IANA time zone standard. For example, America/Los_Angeles.
+     */
+    Name: String;
+    /**
+     * The time zone's offset, in seconds, from UTC.
+     */
+    Offset?: Integer;
+  }
   export type Timestamp = Date;
   export type Token = string;
   export type TravelMode = "Car"|"Truck"|"Walking"|string;
