@@ -1,0 +1,5 @@
+{
+  "type": "feature",
+  "category": "s3util",
+  "description": "Add allowFipsEndpoint option in validateArnRegion"
+}
