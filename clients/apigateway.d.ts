@@ -2941,7 +2941,7 @@ declare namespace APIGateway {
      */
     loggingLevel?: String;
     /**
-     * Specifies whether data trace logging is enabled for this method, which affects the log entries pushed to Amazon CloudWatch Logs. The PATCH path for this setting is /{method_setting_key}/logging/dataTrace, and the value is a Boolean.
+     * Specifies whether full requests and responses are logged for this method, which affects the log entries pushed to Amazon CloudWatch Logs. This can be useful to troubleshoot APIs, but can result in logging sensitive data. We recommend that you don't enable this option for production APIs. The PATCH path for this setting is /{method_setting_key}/logging/dataTrace, and the value is a Boolean.
      */
     dataTraceEnabled?: Boolean;
     /**

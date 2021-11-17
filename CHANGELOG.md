@@ -1,6 +1,15 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1030.0-->
+<!--LATEST=2.1031.0-->
 <!--ENTRYINSERT-->
+
+## 2.1031.0
+* bugfix: S3: Support FIPS for S3 Accesspoint & Object Lambda
+* feature: AmplifyBackend: New APIs to support the Amplify Storage category. Add and manage file storage in your Amplify app backend.
+* feature: AppConfigData: AWS AppConfig Data is a new service that allows you to retrieve configuration deployed by AWS AppConfig. See the AppConfig user guide for more details on getting started. https://docs.aws.amazon.com/appconfig/latest/userguide/what-is-appconfig.html
+* feature: DevOpsGuru: Add paginator for DescribeResourceCollectionHealth
+* feature: Drs: Introducing AWS Elastic Disaster Recovery (AWS DRS), a new service that minimizes downtime and data loss with fast, reliable recovery of on-premises and cloud-based applications using affordable storage, minimal compute, and point-in-time recovery.
+* feature: RedshiftData: Data API now supports serverless requests.
+* feature: SNS: Amazon SNS introduces the PublishBatch API, which enables customers to publish up to 10 messages per API request. The new API is valid for Standard and FIFO topics.
 
 ## 2.1030.0
 * feature: CloudTrail: CloudTrail Insights now supports ApiErrorRateInsight, which enables customers to identify unusual activity in their AWS account based on API error codes and their rate.

@@ -289,6 +289,8 @@ export abstract class ConfigurationServicePlaceholders {
   chimesdkmeetings?: AWS.ChimeSDKMeetings.Types.ClientConfiguration;
   resiliencehub?: AWS.Resiliencehub.Types.ClientConfiguration;
   migrationhubstrategy?: AWS.MigrationHubStrategy.Types.ClientConfiguration;
+  appconfigdata?: AWS.AppConfigData.Types.ClientConfiguration;
+  drs?: AWS.Drs.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -580,4 +582,6 @@ export interface ConfigurationServiceApiVersions {
   chimesdkmeetings?: AWS.ChimeSDKMeetings.Types.apiVersion;
   resiliencehub?: AWS.Resiliencehub.Types.apiVersion;
   migrationhubstrategy?: AWS.MigrationHubStrategy.Types.apiVersion;
+  appconfigdata?: AWS.AppConfigData.Types.apiVersion;
+  drs?: AWS.Drs.Types.apiVersion;
 }

@@ -1103,5 +1103,11 @@
   },
   "migrationhubstrategy": {
     "name": "MigrationHubStrategy"
+  },
+  "appconfigdata": {
+    "name": "AppConfigData"
+  },
+  "drs": {
+    "name": "Drs"
   }
 }

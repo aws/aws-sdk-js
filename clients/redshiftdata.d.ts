@@ -12,11 +12,11 @@ declare class RedshiftData extends Service {
   constructor(options?: RedshiftData.Types.ClientConfiguration)
   config: Config & RedshiftData.Types.ClientConfiguration;
   /**
-   * Runs one or more SQL statements, which can be data manipulation language (DML) or data definition language (DDL). Depending on the authorization method, use one of the following combinations of request parameters:    Secrets Manager - specify the Amazon Resource Name (ARN) of the secret, the database name, and the cluster identifier that matches the cluster in the secret.    Temporary credentials - specify the cluster identifier, the database name, and the database user name. Permission to call the redshift:GetClusterCredentials operation is required to use this method.   
+   * Runs one or more SQL statements, which can be data manipulation language (DML) or data definition language (DDL). Depending on the authorization method, use one of the following combinations of request parameters:    Secrets Manager - when connecting to a cluster, specify the Amazon Resource Name (ARN) of the secret, the database name, and the cluster identifier that matches the cluster in the secret. When connecting to a serverless endpoint, specify the Amazon Resource Name (ARN) of the secret and the database name.    Temporary credentials - when connecting to a cluster, specify the cluster identifier, the database name, and the database user name. Also, permission to call the redshift:GetClusterCredentials operation is required. When connecting to a serverless endpoint, specify the database name.   
    */
   batchExecuteStatement(params: RedshiftData.Types.BatchExecuteStatementInput, callback?: (err: AWSError, data: RedshiftData.Types.BatchExecuteStatementOutput) => void): Request<RedshiftData.Types.BatchExecuteStatementOutput, AWSError>;
   /**
-   * Runs one or more SQL statements, which can be data manipulation language (DML) or data definition language (DDL). Depending on the authorization method, use one of the following combinations of request parameters:    Secrets Manager - specify the Amazon Resource Name (ARN) of the secret, the database name, and the cluster identifier that matches the cluster in the secret.    Temporary credentials - specify the cluster identifier, the database name, and the database user name. Permission to call the redshift:GetClusterCredentials operation is required to use this method.   
+   * Runs one or more SQL statements, which can be data manipulation language (DML) or data definition language (DDL). Depending on the authorization method, use one of the following combinations of request parameters:    Secrets Manager - when connecting to a cluster, specify the Amazon Resource Name (ARN) of the secret, the database name, and the cluster identifier that matches the cluster in the secret. When connecting to a serverless endpoint, specify the Amazon Resource Name (ARN) of the secret and the database name.    Temporary credentials - when connecting to a cluster, specify the cluster identifier, the database name, and the database user name. Also, permission to call the redshift:GetClusterCredentials operation is required. When connecting to a serverless endpoint, specify the database name.   
    */
   batchExecuteStatement(callback?: (err: AWSError, data: RedshiftData.Types.BatchExecuteStatementOutput) => void): Request<RedshiftData.Types.BatchExecuteStatementOutput, AWSError>;
   /**
@@ -36,19 +36,19 @@ declare class RedshiftData extends Service {
    */
   describeStatement(callback?: (err: AWSError, data: RedshiftData.Types.DescribeStatementResponse) => void): Request<RedshiftData.Types.DescribeStatementResponse, AWSError>;
   /**
-   * Describes the detailed information about a table from metadata in the cluster. The information includes its columns. A token is returned to page through the column list. Depending on the authorization method, use one of the following combinations of request parameters:    Secrets Manager - specify the Amazon Resource Name (ARN) of the secret, the database name, and the cluster identifier that matches the cluster in the secret.    Temporary credentials - specify the cluster identifier, the database name, and the database user name. Permission to call the redshift:GetClusterCredentials operation is required to use this method.   
+   * Describes the detailed information about a table from metadata in the cluster. The information includes its columns. A token is returned to page through the column list. Depending on the authorization method, use one of the following combinations of request parameters:    Secrets Manager - when connecting to a cluster, specify the Amazon Resource Name (ARN) of the secret, the database name, and the cluster identifier that matches the cluster in the secret. When connecting to a serverless endpoint, specify the Amazon Resource Name (ARN) of the secret and the database name.    Temporary credentials - when connecting to a cluster, specify the cluster identifier, the database name, and the database user name. Also, permission to call the redshift:GetClusterCredentials operation is required. When connecting to a serverless endpoint, specify the database name.   
    */
   describeTable(params: RedshiftData.Types.DescribeTableRequest, callback?: (err: AWSError, data: RedshiftData.Types.DescribeTableResponse) => void): Request<RedshiftData.Types.DescribeTableResponse, AWSError>;
   /**
-   * Describes the detailed information about a table from metadata in the cluster. The information includes its columns. A token is returned to page through the column list. Depending on the authorization method, use one of the following combinations of request parameters:    Secrets Manager - specify the Amazon Resource Name (ARN) of the secret, the database name, and the cluster identifier that matches the cluster in the secret.    Temporary credentials - specify the cluster identifier, the database name, and the database user name. Permission to call the redshift:GetClusterCredentials operation is required to use this method.   
+   * Describes the detailed information about a table from metadata in the cluster. The information includes its columns. A token is returned to page through the column list. Depending on the authorization method, use one of the following combinations of request parameters:    Secrets Manager - when connecting to a cluster, specify the Amazon Resource Name (ARN) of the secret, the database name, and the cluster identifier that matches the cluster in the secret. When connecting to a serverless endpoint, specify the Amazon Resource Name (ARN) of the secret and the database name.    Temporary credentials - when connecting to a cluster, specify the cluster identifier, the database name, and the database user name. Also, permission to call the redshift:GetClusterCredentials operation is required. When connecting to a serverless endpoint, specify the database name.   
    */
   describeTable(callback?: (err: AWSError, data: RedshiftData.Types.DescribeTableResponse) => void): Request<RedshiftData.Types.DescribeTableResponse, AWSError>;
   /**
-   * Runs an SQL statement, which can be data manipulation language (DML) or data definition language (DDL). This statement must be a single SQL statement. Depending on the authorization method, use one of the following combinations of request parameters:    Secrets Manager - specify the Amazon Resource Name (ARN) of the secret, the database name, and the cluster identifier that matches the cluster in the secret.    Temporary credentials - specify the cluster identifier, the database name, and the database user name. Permission to call the redshift:GetClusterCredentials operation is required to use this method.   
+   * Runs an SQL statement, which can be data manipulation language (DML) or data definition language (DDL). This statement must be a single SQL statement. Depending on the authorization method, use one of the following combinations of request parameters:    Secrets Manager - when connecting to a cluster, specify the Amazon Resource Name (ARN) of the secret, the database name, and the cluster identifier that matches the cluster in the secret. When connecting to a serverless endpoint, specify the Amazon Resource Name (ARN) of the secret and the database name.    Temporary credentials - when connecting to a cluster, specify the cluster identifier, the database name, and the database user name. Also, permission to call the redshift:GetClusterCredentials operation is required. When connecting to a serverless endpoint, specify the database name.   
    */
   executeStatement(params: RedshiftData.Types.ExecuteStatementInput, callback?: (err: AWSError, data: RedshiftData.Types.ExecuteStatementOutput) => void): Request<RedshiftData.Types.ExecuteStatementOutput, AWSError>;
   /**
-   * Runs an SQL statement, which can be data manipulation language (DML) or data definition language (DDL). This statement must be a single SQL statement. Depending on the authorization method, use one of the following combinations of request parameters:    Secrets Manager - specify the Amazon Resource Name (ARN) of the secret, the database name, and the cluster identifier that matches the cluster in the secret.    Temporary credentials - specify the cluster identifier, the database name, and the database user name. Permission to call the redshift:GetClusterCredentials operation is required to use this method.   
+   * Runs an SQL statement, which can be data manipulation language (DML) or data definition language (DDL). This statement must be a single SQL statement. Depending on the authorization method, use one of the following combinations of request parameters:    Secrets Manager - when connecting to a cluster, specify the Amazon Resource Name (ARN) of the secret, the database name, and the cluster identifier that matches the cluster in the secret. When connecting to a serverless endpoint, specify the Amazon Resource Name (ARN) of the secret and the database name.    Temporary credentials - when connecting to a cluster, specify the cluster identifier, the database name, and the database user name. Also, permission to call the redshift:GetClusterCredentials operation is required. When connecting to a serverless endpoint, specify the database name.   
    */
   executeStatement(callback?: (err: AWSError, data: RedshiftData.Types.ExecuteStatementOutput) => void): Request<RedshiftData.Types.ExecuteStatementOutput, AWSError>;
   /**
@@ -60,19 +60,19 @@ declare class RedshiftData extends Service {
    */
   getStatementResult(callback?: (err: AWSError, data: RedshiftData.Types.GetStatementResultResponse) => void): Request<RedshiftData.Types.GetStatementResultResponse, AWSError>;
   /**
-   * List the databases in a cluster. A token is returned to page through the database list. Depending on the authorization method, use one of the following combinations of request parameters:    Secrets Manager - specify the Amazon Resource Name (ARN) of the secret, the database name, and the cluster identifier that matches the cluster in the secret.    Temporary credentials - specify the cluster identifier, the database name, and the database user name. Permission to call the redshift:GetClusterCredentials operation is required to use this method.   
+   * List the databases in a cluster. A token is returned to page through the database list. Depending on the authorization method, use one of the following combinations of request parameters:    Secrets Manager - when connecting to a cluster, specify the Amazon Resource Name (ARN) of the secret, the database name, and the cluster identifier that matches the cluster in the secret. When connecting to a serverless endpoint, specify the Amazon Resource Name (ARN) of the secret and the database name.    Temporary credentials - when connecting to a cluster, specify the cluster identifier, the database name, and the database user name. Also, permission to call the redshift:GetClusterCredentials operation is required. When connecting to a serverless endpoint, specify the database name.   
    */
   listDatabases(params: RedshiftData.Types.ListDatabasesRequest, callback?: (err: AWSError, data: RedshiftData.Types.ListDatabasesResponse) => void): Request<RedshiftData.Types.ListDatabasesResponse, AWSError>;
   /**
-   * List the databases in a cluster. A token is returned to page through the database list. Depending on the authorization method, use one of the following combinations of request parameters:    Secrets Manager - specify the Amazon Resource Name (ARN) of the secret, the database name, and the cluster identifier that matches the cluster in the secret.    Temporary credentials - specify the cluster identifier, the database name, and the database user name. Permission to call the redshift:GetClusterCredentials operation is required to use this method.   
+   * List the databases in a cluster. A token is returned to page through the database list. Depending on the authorization method, use one of the following combinations of request parameters:    Secrets Manager - when connecting to a cluster, specify the Amazon Resource Name (ARN) of the secret, the database name, and the cluster identifier that matches the cluster in the secret. When connecting to a serverless endpoint, specify the Amazon Resource Name (ARN) of the secret and the database name.    Temporary credentials - when connecting to a cluster, specify the cluster identifier, the database name, and the database user name. Also, permission to call the redshift:GetClusterCredentials operation is required. When connecting to a serverless endpoint, specify the database name.   
    */
   listDatabases(callback?: (err: AWSError, data: RedshiftData.Types.ListDatabasesResponse) => void): Request<RedshiftData.Types.ListDatabasesResponse, AWSError>;
   /**
-   * Lists the schemas in a database. A token is returned to page through the schema list. Depending on the authorization method, use one of the following combinations of request parameters:    Secrets Manager - specify the Amazon Resource Name (ARN) of the secret, the database name, and the cluster identifier that matches the cluster in the secret.    Temporary credentials - specify the cluster identifier, the database name, and the database user name. Permission to call the redshift:GetClusterCredentials operation is required to use this method.   
+   * Lists the schemas in a database. A token is returned to page through the schema list. Depending on the authorization method, use one of the following combinations of request parameters:    Secrets Manager - when connecting to a cluster, specify the Amazon Resource Name (ARN) of the secret, the database name, and the cluster identifier that matches the cluster in the secret. When connecting to a serverless endpoint, specify the Amazon Resource Name (ARN) of the secret and the database name.    Temporary credentials - when connecting to a cluster, specify the cluster identifier, the database name, and the database user name. Also, permission to call the redshift:GetClusterCredentials operation is required. When connecting to a serverless endpoint, specify the database name.   
    */
   listSchemas(params: RedshiftData.Types.ListSchemasRequest, callback?: (err: AWSError, data: RedshiftData.Types.ListSchemasResponse) => void): Request<RedshiftData.Types.ListSchemasResponse, AWSError>;
   /**
-   * Lists the schemas in a database. A token is returned to page through the schema list. Depending on the authorization method, use one of the following combinations of request parameters:    Secrets Manager - specify the Amazon Resource Name (ARN) of the secret, the database name, and the cluster identifier that matches the cluster in the secret.    Temporary credentials - specify the cluster identifier, the database name, and the database user name. Permission to call the redshift:GetClusterCredentials operation is required to use this method.   
+   * Lists the schemas in a database. A token is returned to page through the schema list. Depending on the authorization method, use one of the following combinations of request parameters:    Secrets Manager - when connecting to a cluster, specify the Amazon Resource Name (ARN) of the secret, the database name, and the cluster identifier that matches the cluster in the secret. When connecting to a serverless endpoint, specify the Amazon Resource Name (ARN) of the secret and the database name.    Temporary credentials - when connecting to a cluster, specify the cluster identifier, the database name, and the database user name. Also, permission to call the redshift:GetClusterCredentials operation is required. When connecting to a serverless endpoint, specify the database name.   
    */
   listSchemas(callback?: (err: AWSError, data: RedshiftData.Types.ListSchemasResponse) => void): Request<RedshiftData.Types.ListSchemasResponse, AWSError>;
   /**
@@ -84,26 +84,26 @@ declare class RedshiftData extends Service {
    */
   listStatements(callback?: (err: AWSError, data: RedshiftData.Types.ListStatementsResponse) => void): Request<RedshiftData.Types.ListStatementsResponse, AWSError>;
   /**
-   * List the tables in a database. If neither SchemaPattern nor TablePattern are specified, then all tables in the database are returned. A token is returned to page through the table list. Depending on the authorization method, use one of the following combinations of request parameters:    Secrets Manager - specify the Amazon Resource Name (ARN) of the secret, the database name, and the cluster identifier that matches the cluster in the secret.    Temporary credentials - specify the cluster identifier, the database name, and the database user name. Permission to call the redshift:GetClusterCredentials operation is required to use this method.   
+   * List the tables in a database. If neither SchemaPattern nor TablePattern are specified, then all tables in the database are returned. A token is returned to page through the table list. Depending on the authorization method, use one of the following combinations of request parameters:    Secrets Manager - when connecting to a cluster, specify the Amazon Resource Name (ARN) of the secret, the database name, and the cluster identifier that matches the cluster in the secret. When connecting to a serverless endpoint, specify the Amazon Resource Name (ARN) of the secret and the database name.    Temporary credentials - when connecting to a cluster, specify the cluster identifier, the database name, and the database user name. Also, permission to call the redshift:GetClusterCredentials operation is required. When connecting to a serverless endpoint, specify the database name.   
    */
   listTables(params: RedshiftData.Types.ListTablesRequest, callback?: (err: AWSError, data: RedshiftData.Types.ListTablesResponse) => void): Request<RedshiftData.Types.ListTablesResponse, AWSError>;
   /**
-   * List the tables in a database. If neither SchemaPattern nor TablePattern are specified, then all tables in the database are returned. A token is returned to page through the table list. Depending on the authorization method, use one of the following combinations of request parameters:    Secrets Manager - specify the Amazon Resource Name (ARN) of the secret, the database name, and the cluster identifier that matches the cluster in the secret.    Temporary credentials - specify the cluster identifier, the database name, and the database user name. Permission to call the redshift:GetClusterCredentials operation is required to use this method.   
+   * List the tables in a database. If neither SchemaPattern nor TablePattern are specified, then all tables in the database are returned. A token is returned to page through the table list. Depending on the authorization method, use one of the following combinations of request parameters:    Secrets Manager - when connecting to a cluster, specify the Amazon Resource Name (ARN) of the secret, the database name, and the cluster identifier that matches the cluster in the secret. When connecting to a serverless endpoint, specify the Amazon Resource Name (ARN) of the secret and the database name.    Temporary credentials - when connecting to a cluster, specify the cluster identifier, the database name, and the database user name. Also, permission to call the redshift:GetClusterCredentials operation is required. When connecting to a serverless endpoint, specify the database name.   
    */
   listTables(callback?: (err: AWSError, data: RedshiftData.Types.ListTablesResponse) => void): Request<RedshiftData.Types.ListTablesResponse, AWSError>;
 }
 declare namespace RedshiftData {
   export interface BatchExecuteStatementInput {
     /**
-     * The cluster identifier. This parameter is required when authenticating using either Secrets Manager or temporary credentials. 
+     * The cluster identifier. This parameter is required when connecting to a cluster and authenticating using either Secrets Manager or temporary credentials. 
      */
-    ClusterIdentifier: Location;
+    ClusterIdentifier?: Location;
     /**
      * The name of the database. This parameter is required when authenticating using either Secrets Manager or temporary credentials. 
      */
     Database: String;
     /**
-     * The database user name. This parameter is required when authenticating using temporary credentials. 
+     * The database user name. This parameter is required when connecting to a cluster and authenticating using temporary credentials. 
      */
     DbUser?: String;
     /**
@@ -125,7 +125,7 @@ declare namespace RedshiftData {
   }
   export interface BatchExecuteStatementOutput {
     /**
-     * The cluster identifier. 
+     * The cluster identifier. This parameter is not returned when connecting to a serverless endpoint. 
      */
     ClusterIdentifier?: Location;
     /**
@@ -255,7 +255,7 @@ declare namespace RedshiftData {
      */
     Error?: String;
     /**
-     * A value that indicates whether the statement has a result set. The result set can be empty. 
+     * A value that indicates whether the statement has a result set. The result set can be empty. The value is true for an empty result set. The value is true if any substatement returns a result set.
      */
     HasResultSet?: Boolean;
     /**
@@ -305,9 +305,9 @@ declare namespace RedshiftData {
   }
   export interface DescribeTableRequest {
     /**
-     * The cluster identifier. This parameter is required when authenticating using either Secrets Manager or temporary credentials. 
+     * The cluster identifier. This parameter is required when connecting to a cluster and authenticating using either Secrets Manager or temporary credentials. 
      */
-    ClusterIdentifier: Location;
+    ClusterIdentifier?: Location;
     /**
      * A database name. The connected database is specified when you connect with your authentication credentials. 
      */
@@ -317,7 +317,7 @@ declare namespace RedshiftData {
      */
     Database: String;
     /**
-     * The database user name. This parameter is required when authenticating using temporary credentials. 
+     * The database user name. This parameter is required when connecting to a cluster and authenticating using temporary credentials. 
      */
     DbUser?: String;
     /**
@@ -357,15 +357,15 @@ declare namespace RedshiftData {
   }
   export interface ExecuteStatementInput {
     /**
-     * The cluster identifier. This parameter is required when authenticating using either Secrets Manager or temporary credentials. 
+     * The cluster identifier. This parameter is required when connecting to a cluster and authenticating using either Secrets Manager or temporary credentials. 
      */
-    ClusterIdentifier: Location;
+    ClusterIdentifier?: Location;
     /**
      * The name of the database. This parameter is required when authenticating using either Secrets Manager or temporary credentials. 
      */
     Database: String;
     /**
-     * The database user name. This parameter is required when authenticating using temporary credentials. 
+     * The database user name. This parameter is required when connecting to a cluster and authenticating using temporary credentials. 
      */
     DbUser?: String;
     /**
@@ -391,7 +391,7 @@ declare namespace RedshiftData {
   }
   export interface ExecuteStatementOutput {
     /**
-     * The cluster identifier. 
+     * The cluster identifier. This parameter is not returned when connecting to a serverless endpoint. 
      */
     ClusterIdentifier?: Location;
     /**
@@ -473,15 +473,15 @@ declare namespace RedshiftData {
   export type Integer = number;
   export interface ListDatabasesRequest {
     /**
-     * The cluster identifier. This parameter is required when authenticating using either Secrets Manager or temporary credentials. 
+     * The cluster identifier. This parameter is required when connecting to a cluster and authenticating using either Secrets Manager or temporary credentials. 
      */
-    ClusterIdentifier: Location;
+    ClusterIdentifier?: Location;
     /**
      * The name of the database. This parameter is required when authenticating using either Secrets Manager or temporary credentials. 
      */
     Database: String;
     /**
-     * The database user name. This parameter is required when authenticating using temporary credentials. 
+     * The database user name. This parameter is required when connecting to a cluster and authenticating using temporary credentials. 
      */
     DbUser?: String;
     /**
@@ -509,9 +509,9 @@ declare namespace RedshiftData {
   }
   export interface ListSchemasRequest {
     /**
-     * The cluster identifier. This parameter is required when authenticating using either Secrets Manager or temporary credentials. 
+     * The cluster identifier. This parameter is required when connecting to a cluster and authenticating using either Secrets Manager or temporary credentials. 
      */
-    ClusterIdentifier: Location;
+    ClusterIdentifier?: Location;
     /**
      * A database name. The connected database is specified when you connect with your authentication credentials. 
      */
@@ -521,7 +521,7 @@ declare namespace RedshiftData {
      */
     Database: String;
     /**
-     * The database user name. This parameter is required when authenticating using temporary credentials. 
+     * The database user name. This parameter is required when connecting to a cluster and authenticating using temporary credentials. 
      */
     DbUser?: String;
     /**
@@ -586,9 +586,9 @@ declare namespace RedshiftData {
   }
   export interface ListTablesRequest {
     /**
-     * The cluster identifier. This parameter is required when authenticating using either Secrets Manager or temporary credentials. 
+     * The cluster identifier. This parameter is required when connecting to a cluster and authenticating using either Secrets Manager or temporary credentials. 
      */
-    ClusterIdentifier: Location;
+    ClusterIdentifier?: Location;
     /**
      * A database name. The connected database is specified when you connect with your authentication credentials. 
      */
@@ -598,7 +598,7 @@ declare namespace RedshiftData {
      */
     Database: String;
     /**
-     * The database user name. This parameter is required when authenticating using temporary credentials. 
+     * The database user name. This parameter is required when connecting to a cluster and authenticating using temporary credentials. 
      */
     DbUser?: String;
     /**
@@ -716,7 +716,7 @@ declare namespace RedshiftData {
      */
     Error?: String;
     /**
-     * A value that indicates whether the statement has a result set. The result set can be empty.
+     * A value that indicates whether the statement has a result set. The result set can be empty. The value is true for an empty result set.
      */
     HasResultSet?: Boolean;
     /**

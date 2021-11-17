@@ -287,3 +287,5 @@ export import Panorama = require('./panorama');
 export import ChimeSDKMeetings = require('./chimesdkmeetings');
 export import Resiliencehub = require('./resiliencehub');
 export import MigrationHubStrategy = require('./migrationhubstrategy');
+export import AppConfigData = require('./appconfigdata');
+export import Drs = require('./drs');

@@ -288,5 +288,7 @@ module.exports = {
   Panorama: require('./panorama'),
   ChimeSDKMeetings: require('./chimesdkmeetings'),
   Resiliencehub: require('./resiliencehub'),
-  MigrationHubStrategy: require('./migrationhubstrategy')
+  MigrationHubStrategy: require('./migrationhubstrategy'),
+  AppConfigData: require('./appconfigdata'),
+  Drs: require('./drs')
 };

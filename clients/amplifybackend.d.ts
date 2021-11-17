@@ -52,6 +52,14 @@ declare class AmplifyBackend extends Service {
    */
   createBackendConfig(callback?: (err: AWSError, data: AmplifyBackend.Types.CreateBackendConfigResponse) => void): Request<AmplifyBackend.Types.CreateBackendConfigResponse, AWSError>;
   /**
+   * Creates a backend storage resource.
+   */
+  createBackendStorage(params: AmplifyBackend.Types.CreateBackendStorageRequest, callback?: (err: AWSError, data: AmplifyBackend.Types.CreateBackendStorageResponse) => void): Request<AmplifyBackend.Types.CreateBackendStorageResponse, AWSError>;
+  /**
+   * Creates a backend storage resource.
+   */
+  createBackendStorage(callback?: (err: AWSError, data: AmplifyBackend.Types.CreateBackendStorageResponse) => void): Request<AmplifyBackend.Types.CreateBackendStorageResponse, AWSError>;
+  /**
    * Generates a one-time challenge code to authenticate a user into your Amplify Admin UI.
    */
   createToken(params: AmplifyBackend.Types.CreateTokenRequest, callback?: (err: AWSError, data: AmplifyBackend.Types.CreateTokenResponse) => void): Request<AmplifyBackend.Types.CreateTokenResponse, AWSError>;
@@ -83,6 +91,14 @@ declare class AmplifyBackend extends Service {
    * Deletes an existing backend authentication resource.
    */
   deleteBackendAuth(callback?: (err: AWSError, data: AmplifyBackend.Types.DeleteBackendAuthResponse) => void): Request<AmplifyBackend.Types.DeleteBackendAuthResponse, AWSError>;
+  /**
+   * Removes the specified backend storage resource.
+   */
+  deleteBackendStorage(params: AmplifyBackend.Types.DeleteBackendStorageRequest, callback?: (err: AWSError, data: AmplifyBackend.Types.DeleteBackendStorageResponse) => void): Request<AmplifyBackend.Types.DeleteBackendStorageResponse, AWSError>;
+  /**
+   * Removes the specified backend storage resource.
+   */
+  deleteBackendStorage(callback?: (err: AWSError, data: AmplifyBackend.Types.DeleteBackendStorageResponse) => void): Request<AmplifyBackend.Types.DeleteBackendStorageResponse, AWSError>;
   /**
    * Deletes the challenge token based on the given appId and sessionId.
    */
@@ -140,6 +156,14 @@ declare class AmplifyBackend extends Service {
    */
   getBackendJob(callback?: (err: AWSError, data: AmplifyBackend.Types.GetBackendJobResponse) => void): Request<AmplifyBackend.Types.GetBackendJobResponse, AWSError>;
   /**
+   * Gets details for a backend storage resource.
+   */
+  getBackendStorage(params: AmplifyBackend.Types.GetBackendStorageRequest, callback?: (err: AWSError, data: AmplifyBackend.Types.GetBackendStorageResponse) => void): Request<AmplifyBackend.Types.GetBackendStorageResponse, AWSError>;
+  /**
+   * Gets details for a backend storage resource.
+   */
+  getBackendStorage(callback?: (err: AWSError, data: AmplifyBackend.Types.GetBackendStorageResponse) => void): Request<AmplifyBackend.Types.GetBackendStorageResponse, AWSError>;
+  /**
    * Gets the challenge token based on the given appId and sessionId.
    */
   getToken(params: AmplifyBackend.Types.GetTokenRequest, callback?: (err: AWSError, data: AmplifyBackend.Types.GetTokenResponse) => void): Request<AmplifyBackend.Types.GetTokenResponse, AWSError>;
@@ -156,6 +180,14 @@ declare class AmplifyBackend extends Service {
    */
   importBackendAuth(callback?: (err: AWSError, data: AmplifyBackend.Types.ImportBackendAuthResponse) => void): Request<AmplifyBackend.Types.ImportBackendAuthResponse, AWSError>;
   /**
+   * Imports an existing backend storage resource.
+   */
+  importBackendStorage(params: AmplifyBackend.Types.ImportBackendStorageRequest, callback?: (err: AWSError, data: AmplifyBackend.Types.ImportBackendStorageResponse) => void): Request<AmplifyBackend.Types.ImportBackendStorageResponse, AWSError>;
+  /**
+   * Imports an existing backend storage resource.
+   */
+  importBackendStorage(callback?: (err: AWSError, data: AmplifyBackend.Types.ImportBackendStorageResponse) => void): Request<AmplifyBackend.Types.ImportBackendStorageResponse, AWSError>;
+  /**
    * Lists the jobs for the backend of an Amplify app.
    */
   listBackendJobs(params: AmplifyBackend.Types.ListBackendJobsRequest, callback?: (err: AWSError, data: AmplifyBackend.Types.ListBackendJobsResponse) => void): Request<AmplifyBackend.Types.ListBackendJobsResponse, AWSError>;
@@ -163,6 +195,14 @@ declare class AmplifyBackend extends Service {
    * Lists the jobs for the backend of an Amplify app.
    */
   listBackendJobs(callback?: (err: AWSError, data: AmplifyBackend.Types.ListBackendJobsResponse) => void): Request<AmplifyBackend.Types.ListBackendJobsResponse, AWSError>;
+  /**
+   * The list of S3 buckets in your account.
+   */
+  listS3Buckets(params: AmplifyBackend.Types.ListS3BucketsRequest, callback?: (err: AWSError, data: AmplifyBackend.Types.ListS3BucketsResponse) => void): Request<AmplifyBackend.Types.ListS3BucketsResponse, AWSError>;
+  /**
+   * The list of S3 buckets in your account.
+   */
+  listS3Buckets(callback?: (err: AWSError, data: AmplifyBackend.Types.ListS3BucketsResponse) => void): Request<AmplifyBackend.Types.ListS3BucketsResponse, AWSError>;
   /**
    * Removes all backend environments from your Amplify project.
    */
@@ -211,6 +251,14 @@ declare class AmplifyBackend extends Service {
    * Updates a specific job.
    */
   updateBackendJob(callback?: (err: AWSError, data: AmplifyBackend.Types.UpdateBackendJobResponse) => void): Request<AmplifyBackend.Types.UpdateBackendJobResponse, AWSError>;
+  /**
+   * Updates an existing backend storage resource.
+   */
+  updateBackendStorage(params: AmplifyBackend.Types.UpdateBackendStorageRequest, callback?: (err: AWSError, data: AmplifyBackend.Types.UpdateBackendStorageResponse) => void): Request<AmplifyBackend.Types.UpdateBackendStorageResponse, AWSError>;
+  /**
+   * Updates an existing backend storage resource.
+   */
+  updateBackendStorage(callback?: (err: AWSError, data: AmplifyBackend.Types.UpdateBackendStorageResponse) => void): Request<AmplifyBackend.Types.UpdateBackendStorageResponse, AWSError>;
 }
 declare namespace AmplifyBackend {
   export type AuthResources = "USER_POOL_ONLY"|"IDENTITY_POOL_AND_USER_POOL"|string;
@@ -351,6 +399,16 @@ declare namespace AmplifyBackend {
      * The time when the job was last updated.
      */
     UpdateTime?: __string;
+  }
+  export interface BackendStoragePermissions {
+    /**
+     * Lists all authenticated user read, write, and delete permissions for your S3 bucket.
+     */
+    Authenticated: ListOfAuthenticatedElement;
+    /**
+     * Lists all unauthenticated user read, write, and delete permissions for your S3 bucket.
+     */
+    UnAuthenticated?: ListOfUnAuthenticatedElement;
   }
   export interface CloneBackendRequest {
     /**
@@ -640,7 +698,7 @@ declare namespace AmplifyBackend {
      */
     BackendEnvironmentName: __string;
     /**
-     * The resource configuration for the create backend request.
+     * The resource configuration for creating backend storage.
      */
     ResourceConfig?: ResourceConfig;
     /**
@@ -669,6 +727,56 @@ declare namespace AmplifyBackend {
      * The name of the operation.
      */
     Operation?: __string;
+    /**
+     * The current status of the request.
+     */
+    Status?: __string;
+  }
+  export interface CreateBackendStorageRequest {
+    /**
+     * The app ID.
+     */
+    AppId: __string;
+    /**
+     * The name of the backend environment.
+     */
+    BackendEnvironmentName: __string;
+    /**
+     * The resource configuration for creating backend storage.
+     */
+    ResourceConfig: CreateBackendStorageResourceConfig;
+    /**
+     * The name of the storage resource.
+     */
+    ResourceName: __string;
+  }
+  export interface CreateBackendStorageResourceConfig {
+    /**
+     * The name of the S3 bucket.
+     */
+    BucketName?: __string;
+    /**
+     * The authorization configuration for the storage S3 bucket.
+     */
+    Permissions: BackendStoragePermissions;
+    /**
+     * The name of the storage service.
+     */
+    ServiceName: ServiceName;
+  }
+  export interface CreateBackendStorageResponse {
+    /**
+     * The app ID.
+     */
+    AppId?: __string;
+    /**
+     * The name of the backend environment.
+     */
+    BackendEnvironmentName?: __string;
+    /**
+     * The ID for the job.
+     */
+    JobId?: __string;
     /**
      * The current status of the request.
      */
@@ -813,6 +921,42 @@ declare namespace AmplifyBackend {
      * The name of the operation.
      */
     Operation?: __string;
+    /**
+     * The current status of the request.
+     */
+    Status?: __string;
+  }
+  export interface DeleteBackendStorageRequest {
+    /**
+     * The app ID.
+     */
+    AppId: __string;
+    /**
+     * The name of the backend environment.
+     */
+    BackendEnvironmentName: __string;
+    /**
+     * The name of the storage resource.
+     */
+    ResourceName: __string;
+    /**
+     * The name of the storage service.
+     */
+    ServiceName: ServiceName;
+  }
+  export interface DeleteBackendStorageResponse {
+    /**
+     * The app ID.
+     */
+    AppId?: __string;
+    /**
+     * The name of the backend environment.
+     */
+    BackendEnvironmentName?: __string;
+    /**
+     * The ID for the job.
+     */
+    JobId?: __string;
     /**
      * The current status of the request.
      */
@@ -1073,6 +1217,56 @@ declare namespace AmplifyBackend {
      */
     Error?: __string;
   }
+  export interface GetBackendStorageRequest {
+    /**
+     * The app ID.
+     */
+    AppId: __string;
+    /**
+     * The name of the backend environment.
+     */
+    BackendEnvironmentName: __string;
+    /**
+     * The name of the storage resource.
+     */
+    ResourceName: __string;
+  }
+  export interface GetBackendStorageResourceConfig {
+    /**
+     * The name of the S3 bucket.
+     */
+    BucketName?: __string;
+    /**
+     * Returns True if the storage resource has been imported.
+     */
+    Imported: __boolean;
+    /**
+     * The authorization configuration for the storage S3 bucket.
+     */
+    Permissions?: BackendStoragePermissions;
+    /**
+     * The name of the storage service.
+     */
+    ServiceName: ServiceName;
+  }
+  export interface GetBackendStorageResponse {
+    /**
+     * The app ID.
+     */
+    AppId?: __string;
+    /**
+     * The name of the backend environment.
+     */
+    BackendEnvironmentName?: __string;
+    /**
+     * The resource configuration for the backend storage resource.
+     */
+    ResourceConfig?: GetBackendStorageResourceConfig;
+    /**
+     * The name of the storage resource.
+     */
+    ResourceName?: __string;
+  }
   export interface GetTokenRequest {
     /**
      * The app ID.
@@ -1153,6 +1347,42 @@ declare namespace AmplifyBackend {
      */
     Status?: __string;
   }
+  export interface ImportBackendStorageRequest {
+    /**
+     * The app ID.
+     */
+    AppId: __string;
+    /**
+     * The name of the backend environment.
+     */
+    BackendEnvironmentName: __string;
+    /**
+     * The name of the S3 bucket.
+     */
+    BucketName?: __string;
+    /**
+     * The name of the storage service.
+     */
+    ServiceName: ServiceName;
+  }
+  export interface ImportBackendStorageResponse {
+    /**
+     * The app ID.
+     */
+    AppId?: __string;
+    /**
+     * The name of the backend environment.
+     */
+    BackendEnvironmentName?: __string;
+    /**
+     * The ID for the job.
+     */
+    JobId?: __string;
+    /**
+     * The current status of the request.
+     */
+    Status?: __string;
+  }
   export interface ListBackendJobsRequest {
     /**
      * The app ID.
@@ -1190,6 +1420,22 @@ declare namespace AmplifyBackend {
     Jobs?: ListOfBackendJobRespObj;
     /**
      * The token for the next set of results.
+     */
+    NextToken?: __string;
+  }
+  export interface ListS3BucketsRequest {
+    /**
+     * Reserved for future use.
+     */
+    NextToken?: __string;
+  }
+  export interface ListS3BucketsResponse {
+    /**
+     * The list of S3 buckets.
+     */
+    Buckets?: ListOfS3BucketInfo;
+    /**
+     * Reserved for future use.
      */
     NextToken?: __string;
   }
@@ -1261,7 +1507,18 @@ declare namespace AmplifyBackend {
   export type ResolutionStrategy = "OPTIMISTIC_CONCURRENCY"|"LAMBDA"|"AUTOMERGE"|"NONE"|string;
   export interface ResourceConfig {
   }
+  export interface S3BucketInfo {
+    /**
+     * The creation date of the S3 bucket.
+     */
+    CreationDate?: __string;
+    /**
+     * The name of the S3 bucket.
+     */
+    Name?: __string;
+  }
   export type Service = "COGNITO"|string;
+  export type ServiceName = "S3"|string;
   export interface Settings {
     /**
      * The supported MFA types.
@@ -1560,19 +1817,70 @@ declare namespace AmplifyBackend {
      */
     UpdateTime?: __string;
   }
+  export interface UpdateBackendStorageRequest {
+    /**
+     * The app ID.
+     */
+    AppId: __string;
+    /**
+     * The name of the backend environment.
+     */
+    BackendEnvironmentName: __string;
+    /**
+     * The resource configuration for updating backend storage.
+     */
+    ResourceConfig: UpdateBackendStorageResourceConfig;
+    /**
+     * The name of the storage resource.
+     */
+    ResourceName: __string;
+  }
+  export interface UpdateBackendStorageResourceConfig {
+    /**
+     * The authorization configuration for the storage S3 bucket.
+     */
+    Permissions: BackendStoragePermissions;
+    /**
+     * The name of the storage service.
+     */
+    ServiceName: ServiceName;
+  }
+  export interface UpdateBackendStorageResponse {
+    /**
+     * The app ID.
+     */
+    AppId?: __string;
+    /**
+     * The name of the backend environment.
+     */
+    BackendEnvironmentName?: __string;
+    /**
+     * The ID for the job.
+     */
+    JobId?: __string;
+    /**
+     * The current status of the request.
+     */
+    Status?: __string;
+  }
   export type AdditionalConstraintsElement = "REQUIRE_DIGIT"|"REQUIRE_LOWERCASE"|"REQUIRE_SYMBOL"|"REQUIRE_UPPERCASE"|string;
+  export type AuthenticatedElement = "READ"|"CREATE_AND_UPDATE"|"DELETE"|string;
   export type MfaTypesElement = "SMS"|"TOTP"|string;
   export type OAuthScopesElement = "PHONE"|"EMAIL"|"OPENID"|"PROFILE"|"AWS_COGNITO_SIGNIN_USER_ADMIN"|string;
   export type RequiredSignUpAttributesElement = "ADDRESS"|"BIRTHDATE"|"EMAIL"|"FAMILY_NAME"|"GENDER"|"GIVEN_NAME"|"LOCALE"|"MIDDLE_NAME"|"NAME"|"NICKNAME"|"PHONE_NUMBER"|"PICTURE"|"PREFERRED_USERNAME"|"PROFILE"|"UPDATED_AT"|"WEBSITE"|"ZONE_INFO"|string;
+  export type UnAuthenticatedElement = "READ"|"CREATE_AND_UPDATE"|"DELETE"|string;
   export type __boolean = boolean;
   export type __double = number;
   export type __integerMin1Max25 = number;
   export type ListOfBackendAPIAuthType = BackendAPIAuthType[];
   export type ListOfBackendJobRespObj = BackendJobRespObj[];
+  export type ListOfS3BucketInfo = S3BucketInfo[];
   export type ListOfAdditionalConstraintsElement = AdditionalConstraintsElement[];
+  export type ListOfAuthenticatedElement = AuthenticatedElement[];
   export type ListOfMfaTypesElement = MfaTypesElement[];
   export type ListOfOAuthScopesElement = OAuthScopesElement[];
   export type ListOfRequiredSignUpAttributesElement = RequiredSignUpAttributesElement[];
+  export type ListOfUnAuthenticatedElement = UnAuthenticatedElement[];
   export type ListOf__string = __string[];
   export type __string = string;
   /**
