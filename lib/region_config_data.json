@@ -127,10 +127,18 @@
     "cn-*/*": {
       "endpoint": "{service}.{region}.api.amazonwebservices.com.cn"
     },
+
     "*/s3": "dualstackLegacy",
     "cn-*/s3": "dualstackLegacyCn",
     "*/s3-control": "dualstackLegacy",
-    "cn-*/s3-control": "dualstackLegacyCn"
+    "cn-*/s3-control": "dualstackLegacyCn",
+
+    "ap-south-1/ec2": "dualstackLegacyEc2",
+    "eu-west-1/ec2": "dualstackLegacyEc2",
+    "sa-east-1/ec2": "dualstackLegacyEc2",
+    "us-east-1/ec2": "dualstackLegacyEc2",
+    "us-east-2/ec2": "dualstackLegacyEc2",
+    "us-west-2/ec2": "dualstackLegacyEc2"
   },
 
   "dualstackFipsRules": {
@@ -202,6 +210,9 @@
     },
     "dualstackFipsLegacyCn": {
       "endpoint": "{service}-fips.dualstack.{region}.amazonaws.com.cn"
+    },
+    "dualstackLegacyEc2": {
+      "endpoint": "api.ec2.{region}.aws"
     }
   }
 }
