@@ -350,8 +350,8 @@ describe('AWS.S3Control', function() {
         });
       });
 
-      it('should throw if useDualstack it set to true for outposts Arn', function(done) {
-        var client = new AWS.S3Control({region: 'us-west-2', useDualstack: true});
+      it('should throw if useDualstackEndpoint it set to true for outposts Arn', function(done) {
+        var client = new AWS.S3Control({region: 'us-west-2', useDualstackEndpoint: true});
         helpers.mockHttpResponse(200, {}, '');
         var request = client.getBucket({
           Bucket: 'arn:aws:s3-outposts:us-west-2:123456789012:outpost/op-01234567890123456/accesspoint/myendpoint'

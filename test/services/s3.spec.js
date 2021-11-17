@@ -77,19 +77,19 @@ describe('AWS.S3', function() {
     it('sets a region-specific dualstack endpoint when dualstack enabled', function() {
       s3 = new AWS.S3({
         region: 'us-west-1',
-        useDualstack: true
+        useDualstackEndpoint: true
       });
       expect(s3.endpoint.hostname).to.equal('s3.dualstack.us-west-1.amazonaws.com');
 
       s3 = new AWS.S3({
         region: 'us-east-1',
-        useDualstack: true
+        useDualstackEndpoint: true
       });
       expect(s3.endpoint.hostname).to.equal('s3.dualstack.us-east-1.amazonaws.com');
 
       s3 = new AWS.S3({
         region: 'cn-north-1',
-        useDualstack: true
+        useDualstackEndpoint: true
       });
       expect(s3.endpoint.hostname).to.equal('s3.dualstack.cn-north-1.amazonaws.com.cn');
     });
@@ -680,7 +680,7 @@ describe('AWS.S3', function() {
       beforeEach(function() {
         s3 = new AWS.S3({
           useAccelerateEndpoint: true,
-          useDualstack: true
+          useDualstackEndpoint: true
         });
       });
 
@@ -696,7 +696,7 @@ describe('AWS.S3', function() {
         var req;
         s3 = new AWS.S3({
           useAccelerateEndpoint: true,
-          useDualstack: true,
+          useDualstackEndpoint: true,
           s3BucketEndpoint: true,
           endpoint: 'foo.region.amazonaws.com'
         });
@@ -1043,7 +1043,7 @@ describe('AWS.S3', function() {
           s3 = new AWS.S3({
             sslEnabled: true,
             region: void 0,
-            useDualstack: true
+            useDualstackEndpoint: true
           });
         });
 
@@ -1078,7 +1078,7 @@ describe('AWS.S3', function() {
             sslEnabled: true,
             s3ForcePathStyle: true,
             region: void 0,
-            useDualstack: true
+            useDualstackEndpoint: true
           });
           var req = build('listObjects', {
             Bucket: 'bucket-name'
@@ -1101,7 +1101,7 @@ describe('AWS.S3', function() {
           s3 = new AWS.S3({
             sslEnabled: false,
             region: void 0,
-            useDualstack: true
+            useDualstackEndpoint: true
           });
         });
 
@@ -1796,7 +1796,7 @@ describe('AWS.S3', function() {
             region: 'eu-west-1'
           };
           s3 = new AWS.S3({
-            useDualstack: true
+            useDualstackEndpoint: true
           });
           var req = request('putObject', {
             Bucket: 'test',
@@ -1817,7 +1817,7 @@ describe('AWS.S3', function() {
             region: 'eu-west-1'
           };
           s3 = new AWS.S3({
-            useDualstack: true
+            useDualstackEndpoint: true
           });
           var req = request('putObject', {
             Bucket: 'foo',
@@ -1841,7 +1841,7 @@ describe('AWS.S3', function() {
           };
           s3 = new AWS.S3({
             useAccelerateEndpoint: true,
-            useDualstack: true
+            useDualstackEndpoint: true
           });
           var req = request('putObject', {
             Bucket: 'test',
@@ -1863,7 +1863,7 @@ describe('AWS.S3', function() {
           };
           s3 = new AWS.S3({
             useAccelerateEndpoint: true,
-            useDualstack: true
+            useDualstackEndpoint: true
           });
           var req = request('putObject', {
             Bucket: 'foo',
@@ -1945,7 +1945,7 @@ describe('AWS.S3', function() {
         region: 'eu-west-1'
       };
       s3 = new AWS.S3({
-        useDualstack: true
+        useDualstackEndpoint: true
       });
       var req = request('operation', {
         Bucket: 'name'
@@ -3613,8 +3613,8 @@ describe('AWS.S3', function() {
         });
       });
 
-      it('should throw if useDualstack it set to true for outposts Arn', function(done) {
-        s3 = new AWS.S3({region: 'us-west-2', useDualstack: true});
+      it('should throw if useDualstackEndpoint it set to true for outposts Arn', function(done) {
+        s3 = new AWS.S3({region: 'us-west-2', useDualstackEndpoint: true});
         helpers.mockHttpResponse(200, {}, '');
         var request = s3.getObject({
           Bucket: 'arn:aws:s3-outposts:us-west-2:123456789012:outpost/op-01234567890123456/accesspoint/myendpoint',
@@ -3909,7 +3909,7 @@ describe('AWS.S3', function() {
     });
 
     it('should correctly generate dualstack endpoint from access point arn', function(done) {
-      s3 = new AWS.S3({region: 'us-west-2', useDualstack: true});
+      s3 = new AWS.S3({region: 'us-west-2', useDualstackEndpoint: true});
       helpers.mockHttpResponse(200, {}, '');
       var request = s3.getObject({
         Bucket: 'arn:aws:s3:us-west-2:123456789012:accesspoint/myendpoint',
