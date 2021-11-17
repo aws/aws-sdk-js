@@ -3623,7 +3623,7 @@ describe('AWS.S3', function() {
         request.send(function(err, data) {
           expect(err).to.exist;
           expect(err.name).to.equal('InvalidConfiguration');
-          expect(err.message).to.equal('useDualstack config is not supported with outposts access point ARN');
+          expect(err.message).to.equal('Dualstack is not supported with outposts access point ARN');
           done();
         });
       });
