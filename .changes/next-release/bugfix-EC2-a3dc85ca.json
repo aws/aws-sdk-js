@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "EC2",
+  "description": "Add customization for EC2 legacy dualstack endpoints"
+}
