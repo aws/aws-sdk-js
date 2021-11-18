@@ -81,14 +81,6 @@
     "hostname": "data.iot-fips.us-gov-east-1.amazonaws.com"
   },
   {
-    "endpointPrefix": "ec2",
-    "clientName": "EC2",
-    "region": "ap-south-1",
-    "useFipsEndpoint": false,
-    "useDualstackEndpoint": true,
-    "hostname": "api.ec2.ap-south-1.aws"
-  },
-  {
     "endpointPrefix": "dms",
     "clientName": "DMS",
     "region": "us-gov-east-1",
