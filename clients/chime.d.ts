@@ -3470,6 +3470,10 @@ declare namespace Chime {
      * The AWS Region passed to Amazon Transcribe Medical. If you don't specify a Region, Amazon Chime uses the meeting's Region.
      */
     Region?: TranscribeMedicalRegion;
+    /**
+     * Set this field to PHI to identify personal health information in the transcription output.
+     */
+    ContentIdentificationType?: TranscribeMedicalContentIdentificationType;
   }
   export interface EngineTranscribeSettings {
     /**
@@ -3492,6 +3496,30 @@ declare namespace Chime {
      * The AWS Region passed to Amazon Transcribe. If you don't specify a Region, Amazon Chime uses the meeting's Region.
      */
     Region?: TranscribeRegion;
+    /**
+     * Generates partial transcription results that are less likely to change as meeting attendees speak. It does so by only allowing the last few words from the partial results to change.
+     */
+    EnablePartialResultsStabilization?: Boolean;
+    /**
+     * The stabity level of a partial results transcription. Determines how stable you want the transcription results to be. A higher level means the transcription results are less likely to change.
+     */
+    PartialResultsStability?: TranscribePartialResultsStability;
+    /**
+     * Set this field to PII to identify personal health information in the transcription output.
+     */
+    ContentIdentificationType?: TranscribeContentIdentificationType;
+    /**
+     * Set this field to PII to redact personally identifiable information in the transcription output. Content redaction is performed only upon complete transcription of the audio segments.
+     */
+    ContentRedactionType?: TranscribeContentRedactionType;
+    /**
+     * Lists the PII entity types you want to identify or redact. To specify entity types, you must enable ContentIdentificationType or ContentRedactionType.  PIIEntityTypes must be comma-separated. The available values are: BANK_ACCOUNT_NUMBER, BANK_ROUTING, CREDIT_DEBIT_NUMBER, CREDIT_DEBIT_CVV, CREDIT_DEBIT_EXPIRY, PIN, EMAIL, ADDRESS, NAME, PHONE, SSN, and ALL.  PiiEntityTypes is an optional parameter with a default value of ALL.
+     */
+    PiiEntityTypes?: TranscribePiiEntityTypes;
+    /**
+     * The name of the language model used during transcription.
+     */
+    LanguageModelName?: TranscribeLanguageModelName;
   }
   export type ErrorCode = "BadRequest"|"Conflict"|"Forbidden"|"NotFound"|"PreconditionFailed"|"ResourceLimitExceeded"|"ServiceFailure"|"AccessDenied"|"ServiceUnavailable"|"Throttled"|"Throttling"|"Unauthorized"|"Unprocessable"|"VoiceConnectorGroupAssociationsExist"|"PhoneNumberAssociationsExist"|string;
   export interface EventsConfiguration {
@@ -5958,11 +5986,17 @@ declare namespace Chime {
   }
   export type Timestamp = Date;
   export type TollFreePrefix = string;
+  export type TranscribeContentIdentificationType = "PII"|string;
+  export type TranscribeContentRedactionType = "PII"|string;
   export type TranscribeLanguageCode = "en-US"|"en-GB"|"es-US"|"fr-CA"|"fr-FR"|"en-AU"|"it-IT"|"de-DE"|"pt-BR"|"ja-JP"|"ko-KR"|"zh-CN"|string;
+  export type TranscribeLanguageModelName = string;
+  export type TranscribeMedicalContentIdentificationType = "PHI"|string;
   export type TranscribeMedicalLanguageCode = "en-US"|string;
   export type TranscribeMedicalRegion = "us-east-1"|"us-east-2"|"us-west-2"|"ap-southeast-2"|"ca-central-1"|"eu-west-1"|"auto"|string;
   export type TranscribeMedicalSpecialty = "PRIMARYCARE"|"CARDIOLOGY"|"NEUROLOGY"|"ONCOLOGY"|"RADIOLOGY"|"UROLOGY"|string;
   export type TranscribeMedicalType = "CONVERSATION"|"DICTATION"|string;
+  export type TranscribePartialResultsStability = "low"|"medium"|"high"|string;
+  export type TranscribePiiEntityTypes = string;
   export type TranscribeRegion = "us-east-2"|"us-east-1"|"us-west-2"|"ap-northeast-2"|"ap-southeast-2"|"ap-northeast-1"|"ca-central-1"|"eu-central-1"|"eu-west-1"|"eu-west-2"|"sa-east-1"|"auto"|string;
   export type TranscribeVocabularyFilterMethod = "remove"|"mask"|"tag"|string;
   export interface TranscriptionConfiguration {

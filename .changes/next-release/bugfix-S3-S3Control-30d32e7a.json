@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "S3/S3Control",
-  "description": "Check for config.useDualstackEndpoint in customizations"
-}

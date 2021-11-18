@@ -12,6 +12,14 @@ declare class ForecastService extends Service {
   constructor(options?: ForecastService.Types.ClientConfiguration)
   config: Config & ForecastService.Types.ClientConfiguration;
   /**
+   * Creates an Amazon Forecast predictor. Amazon Forecast creates predictors with AutoPredictor, which involves applying the optimal combination of algorithms to each time series in your datasets. You can use CreateAutoPredictor to create new predictors or upgrade/retrain existing predictors.  Creating new predictors  The following parameters are required when creating a new predictor:    PredictorName - A unique name for the predictor.    DatasetGroupArn - The ARN of the dataset group used to train the predictor.    ForecastFrequency - The granularity of your forecasts (hourly, daily, weekly, etc).    ForecastHorizon - The number of time steps being forecasted.   When creating a new predictor, do not specify a value for ReferencePredictorArn.  Upgrading and retraining predictors  The following parameters are required when retraining or upgrading a predictor:    PredictorName - A unique name for the predictor.    ReferencePredictorArn - The ARN of the predictor to retrain or upgrade.   When upgrading or retraining a predictor, only specify values for the ReferencePredictorArn and PredictorName. 
+   */
+  createAutoPredictor(params: ForecastService.Types.CreateAutoPredictorRequest, callback?: (err: AWSError, data: ForecastService.Types.CreateAutoPredictorResponse) => void): Request<ForecastService.Types.CreateAutoPredictorResponse, AWSError>;
+  /**
+   * Creates an Amazon Forecast predictor. Amazon Forecast creates predictors with AutoPredictor, which involves applying the optimal combination of algorithms to each time series in your datasets. You can use CreateAutoPredictor to create new predictors or upgrade/retrain existing predictors.  Creating new predictors  The following parameters are required when creating a new predictor:    PredictorName - A unique name for the predictor.    DatasetGroupArn - The ARN of the dataset group used to train the predictor.    ForecastFrequency - The granularity of your forecasts (hourly, daily, weekly, etc).    ForecastHorizon - The number of time steps being forecasted.   When creating a new predictor, do not specify a value for ReferencePredictorArn.  Upgrading and retraining predictors  The following parameters are required when retraining or upgrading a predictor:    PredictorName - A unique name for the predictor.    ReferencePredictorArn - The ARN of the predictor to retrain or upgrade.   When upgrading or retraining a predictor, only specify values for the ReferencePredictorArn and PredictorName. 
+   */
+  createAutoPredictor(callback?: (err: AWSError, data: ForecastService.Types.CreateAutoPredictorResponse) => void): Request<ForecastService.Types.CreateAutoPredictorResponse, AWSError>;
+  /**
    * Creates an Amazon Forecast dataset. The information about the dataset that you provide helps Forecast understand how to consume the data for model training. This includes the following:     DataFrequency  - How frequently your historical time-series data is collected.     Domain  and  DatasetType  - Each dataset has an associated dataset domain and a type within the domain. Amazon Forecast provides a list of predefined domains and types within each domain. For each unique dataset domain and type within the domain, Amazon Forecast requires your data to include a minimum set of predefined fields.     Schema  - A schema specifies the fields in the dataset, including the field name and data type.   After creating a dataset, you import your training data into it and add the dataset to a dataset group. You use the dataset group to create a predictor. For more information, see howitworks-datasets-groups. To get a list of all your datasets, use the ListDatasets operation. For example Forecast datasets, see the Amazon Forecast Sample GitHub repository.  The Status of a dataset must be ACTIVE before you can import training data. Use the DescribeDataset operation to get the status. 
    */
   createDataset(params: ForecastService.Types.CreateDatasetRequest, callback?: (err: AWSError, data: ForecastService.Types.CreateDatasetResponse) => void): Request<ForecastService.Types.CreateDatasetResponse, AWSError>;
@@ -36,6 +44,22 @@ declare class ForecastService extends Service {
    */
   createDatasetImportJob(callback?: (err: AWSError, data: ForecastService.Types.CreateDatasetImportJobResponse) => void): Request<ForecastService.Types.CreateDatasetImportJobResponse, AWSError>;
   /**
+   *  Explainability is only available for Forecasts and Predictors generated from an AutoPredictor (CreateAutoPredictor)  Creates an Amazon Forecast Explainability. Explainability helps you better understand how the attributes in your datasets impact forecast. Amazon Forecast uses a metric called Impact scores to quantify the relative impact of each attribute and determine whether they increase or decrease forecast values. To enable Forecast Explainability, your predictor must include at least one of the following: related time series, item metadata, or additional datasets like Holidays and the Weather Index. CreateExplainability accepts either a Predictor ARN or Forecast ARN. To receive aggregated Impact scores for all time series and time points in your datasets, provide a Predictor ARN. To receive Impact scores for specific time series and time points, provide a Forecast ARN.  CreateExplainability with a Predictor ARN   You can only have one Explainability resource per predictor. If you already enabled ExplainPredictor in CreateAutoPredictor, that predictor already has an Explainability resource.  The following parameters are required when providing a Predictor ARN:    ExplainabilityName - A unique name for the Explainability.    ResourceArn - The Arn of the predictor.    TimePointGranularity - Must be set to “ALL”.    TimeSeriesGranularity - Must be set to “ALL”.   Do not specify a value for the following parameters:    DataSource - Only valid when TimeSeriesGranularity is “SPECIFIC”.    Schema - Only valid when TimeSeriesGranularity is “SPECIFIC”.    StartDateTime - Only valid when TimePointGranularity is “SPECIFIC”.    EndDateTime - Only valid when TimePointGranularity is “SPECIFIC”.    CreateExplainability with a Forecast ARN   You can specify a maximum of 50 time series and 1500 time points.  The following parameters are required when providing a Predictor ARN:    ExplainabilityName - A unique name for the Explainability.    ResourceArn - The Arn of the forecast.    TimePointGranularity - Either “ALL” or “SPECIFIC”.    TimeSeriesGranularity - Either “ALL” or “SPECIFIC”.   If you set TimeSeriesGranularity to “SPECIFIC”, you must also provide the following:    DataSource - The S3 location of the CSV file specifying your time series.    Schema - The Schema defines the attributes and attribute types listed in the Data Source.   If you set TimePointGranularity to “SPECIFIC”, you must also provide the following:    StartDateTime - The first timestamp in the range of time points.    EndDateTime - The last timestamp in the range of time points.  
+   */
+  createExplainability(params: ForecastService.Types.CreateExplainabilityRequest, callback?: (err: AWSError, data: ForecastService.Types.CreateExplainabilityResponse) => void): Request<ForecastService.Types.CreateExplainabilityResponse, AWSError>;
+  /**
+   *  Explainability is only available for Forecasts and Predictors generated from an AutoPredictor (CreateAutoPredictor)  Creates an Amazon Forecast Explainability. Explainability helps you better understand how the attributes in your datasets impact forecast. Amazon Forecast uses a metric called Impact scores to quantify the relative impact of each attribute and determine whether they increase or decrease forecast values. To enable Forecast Explainability, your predictor must include at least one of the following: related time series, item metadata, or additional datasets like Holidays and the Weather Index. CreateExplainability accepts either a Predictor ARN or Forecast ARN. To receive aggregated Impact scores for all time series and time points in your datasets, provide a Predictor ARN. To receive Impact scores for specific time series and time points, provide a Forecast ARN.  CreateExplainability with a Predictor ARN   You can only have one Explainability resource per predictor. If you already enabled ExplainPredictor in CreateAutoPredictor, that predictor already has an Explainability resource.  The following parameters are required when providing a Predictor ARN:    ExplainabilityName - A unique name for the Explainability.    ResourceArn - The Arn of the predictor.    TimePointGranularity - Must be set to “ALL”.    TimeSeriesGranularity - Must be set to “ALL”.   Do not specify a value for the following parameters:    DataSource - Only valid when TimeSeriesGranularity is “SPECIFIC”.    Schema - Only valid when TimeSeriesGranularity is “SPECIFIC”.    StartDateTime - Only valid when TimePointGranularity is “SPECIFIC”.    EndDateTime - Only valid when TimePointGranularity is “SPECIFIC”.    CreateExplainability with a Forecast ARN   You can specify a maximum of 50 time series and 1500 time points.  The following parameters are required when providing a Predictor ARN:    ExplainabilityName - A unique name for the Explainability.    ResourceArn - The Arn of the forecast.    TimePointGranularity - Either “ALL” or “SPECIFIC”.    TimeSeriesGranularity - Either “ALL” or “SPECIFIC”.   If you set TimeSeriesGranularity to “SPECIFIC”, you must also provide the following:    DataSource - The S3 location of the CSV file specifying your time series.    Schema - The Schema defines the attributes and attribute types listed in the Data Source.   If you set TimePointGranularity to “SPECIFIC”, you must also provide the following:    StartDateTime - The first timestamp in the range of time points.    EndDateTime - The last timestamp in the range of time points.  
+   */
+  createExplainability(callback?: (err: AWSError, data: ForecastService.Types.CreateExplainabilityResponse) => void): Request<ForecastService.Types.CreateExplainabilityResponse, AWSError>;
+  /**
+   * Exports an Explainability resource created by the CreateExplainability operation. Exported files are exported to an Amazon Simple Storage Service (Amazon S3) bucket. You must specify a DataDestination object that includes an Amazon S3 bucket and an AWS Identity and Access Management (IAM) role that Amazon Forecast can assume to access the Amazon S3 bucket. For more information, see aws-forecast-iam-roles.  The Status of the export job must be ACTIVE before you can access the export in your Amazon S3 bucket. To get the status, use the DescribeExplainabilityExport operation. 
+   */
+  createExplainabilityExport(params: ForecastService.Types.CreateExplainabilityExportRequest, callback?: (err: AWSError, data: ForecastService.Types.CreateExplainabilityExportResponse) => void): Request<ForecastService.Types.CreateExplainabilityExportResponse, AWSError>;
+  /**
+   * Exports an Explainability resource created by the CreateExplainability operation. Exported files are exported to an Amazon Simple Storage Service (Amazon S3) bucket. You must specify a DataDestination object that includes an Amazon S3 bucket and an AWS Identity and Access Management (IAM) role that Amazon Forecast can assume to access the Amazon S3 bucket. For more information, see aws-forecast-iam-roles.  The Status of the export job must be ACTIVE before you can access the export in your Amazon S3 bucket. To get the status, use the DescribeExplainabilityExport operation. 
+   */
+  createExplainabilityExport(callback?: (err: AWSError, data: ForecastService.Types.CreateExplainabilityExportResponse) => void): Request<ForecastService.Types.CreateExplainabilityExportResponse, AWSError>;
+  /**
    * Creates a forecast for each item in the TARGET_TIME_SERIES dataset that was used to train the predictor. This is known as inference. To retrieve the forecast for a single item at low latency, use the operation. To export the complete forecast into your Amazon Simple Storage Service (Amazon S3) bucket, use the CreateForecastExportJob operation. The range of the forecast is determined by the ForecastHorizon value, which you specify in the CreatePredictor request. When you query a forecast, you can request a specific date range within the forecast. To get a list of all your forecasts, use the ListForecasts operation.  The forecasts generated by Amazon Forecast are in the same time zone as the dataset that was used to create the predictor.  For more information, see howitworks-forecast.  The Status of the forecast must be ACTIVE before you can query or export the forecast. Use the DescribeForecast operation to get the status. 
    */
   createForecast(params: ForecastService.Types.CreateForecastRequest, callback?: (err: AWSError, data: ForecastService.Types.CreateForecastResponse) => void): Request<ForecastService.Types.CreateForecastResponse, AWSError>;
@@ -52,11 +76,11 @@ declare class ForecastService extends Service {
    */
   createForecastExportJob(callback?: (err: AWSError, data: ForecastService.Types.CreateForecastExportJobResponse) => void): Request<ForecastService.Types.CreateForecastExportJobResponse, AWSError>;
   /**
-   * Creates an Amazon Forecast predictor. In the request, provide a dataset group and either specify an algorithm or let Amazon Forecast choose an algorithm for you using AutoML. If you specify an algorithm, you also can override algorithm-specific hyperparameters. Amazon Forecast uses the algorithm to train a predictor using the latest version of the datasets in the specified dataset group. You can then generate a forecast using the CreateForecast operation.  To see the evaluation metrics, use the GetAccuracyMetrics operation.  You can specify a featurization configuration to fill and aggregate the data fields in the TARGET_TIME_SERIES dataset to improve model training. For more information, see FeaturizationConfig. For RELATED_TIME_SERIES datasets, CreatePredictor verifies that the DataFrequency specified when the dataset was created matches the ForecastFrequency. TARGET_TIME_SERIES datasets don't have this restriction. Amazon Forecast also verifies the delimiter and timestamp format. For more information, see howitworks-datasets-groups. By default, predictors are trained and evaluated at the 0.1 (P10), 0.5 (P50), and 0.9 (P90) quantiles. You can choose custom forecast types to train and evaluate your predictor by setting the ForecastTypes.   AutoML  If you want Amazon Forecast to evaluate each algorithm and choose the one that minimizes the objective function, set PerformAutoML to true. The objective function is defined as the mean of the weighted losses over the forecast types. By default, these are the p10, p50, and p90 quantile losses. For more information, see EvaluationResult. When AutoML is enabled, the following properties are disallowed:    AlgorithmArn     HPOConfig     PerformHPO     TrainingParameters    To get a list of all of your predictors, use the ListPredictors operation.  Before you can use the predictor to create a forecast, the Status of the predictor must be ACTIVE, signifying that training has completed. To get the status, use the DescribePredictor operation. 
+   *   This operation creates a legacy predictor that does not include all the predictor functionalities provided by Amazon Forecast. To create a predictor that is compatible with all aspects of Forecast, use CreateAutoPredictor.  Creates an Amazon Forecast predictor. In the request, provide a dataset group and either specify an algorithm or let Amazon Forecast choose an algorithm for you using AutoML. If you specify an algorithm, you also can override algorithm-specific hyperparameters. Amazon Forecast uses the algorithm to train a predictor using the latest version of the datasets in the specified dataset group. You can then generate a forecast using the CreateForecast operation.  To see the evaluation metrics, use the GetAccuracyMetrics operation.  You can specify a featurization configuration to fill and aggregate the data fields in the TARGET_TIME_SERIES dataset to improve model training. For more information, see FeaturizationConfig. For RELATED_TIME_SERIES datasets, CreatePredictor verifies that the DataFrequency specified when the dataset was created matches the ForecastFrequency. TARGET_TIME_SERIES datasets don't have this restriction. Amazon Forecast also verifies the delimiter and timestamp format. For more information, see howitworks-datasets-groups. By default, predictors are trained and evaluated at the 0.1 (P10), 0.5 (P50), and 0.9 (P90) quantiles. You can choose custom forecast types to train and evaluate your predictor by setting the ForecastTypes.   AutoML  If you want Amazon Forecast to evaluate each algorithm and choose the one that minimizes the objective function, set PerformAutoML to true. The objective function is defined as the mean of the weighted losses over the forecast types. By default, these are the p10, p50, and p90 quantile losses. For more information, see EvaluationResult. When AutoML is enabled, the following properties are disallowed:    AlgorithmArn     HPOConfig     PerformHPO     TrainingParameters    To get a list of all of your predictors, use the ListPredictors operation.  Before you can use the predictor to create a forecast, the Status of the predictor must be ACTIVE, signifying that training has completed. To get the status, use the DescribePredictor operation. 
    */
   createPredictor(params: ForecastService.Types.CreatePredictorRequest, callback?: (err: AWSError, data: ForecastService.Types.CreatePredictorResponse) => void): Request<ForecastService.Types.CreatePredictorResponse, AWSError>;
   /**
-   * Creates an Amazon Forecast predictor. In the request, provide a dataset group and either specify an algorithm or let Amazon Forecast choose an algorithm for you using AutoML. If you specify an algorithm, you also can override algorithm-specific hyperparameters. Amazon Forecast uses the algorithm to train a predictor using the latest version of the datasets in the specified dataset group. You can then generate a forecast using the CreateForecast operation.  To see the evaluation metrics, use the GetAccuracyMetrics operation.  You can specify a featurization configuration to fill and aggregate the data fields in the TARGET_TIME_SERIES dataset to improve model training. For more information, see FeaturizationConfig. For RELATED_TIME_SERIES datasets, CreatePredictor verifies that the DataFrequency specified when the dataset was created matches the ForecastFrequency. TARGET_TIME_SERIES datasets don't have this restriction. Amazon Forecast also verifies the delimiter and timestamp format. For more information, see howitworks-datasets-groups. By default, predictors are trained and evaluated at the 0.1 (P10), 0.5 (P50), and 0.9 (P90) quantiles. You can choose custom forecast types to train and evaluate your predictor by setting the ForecastTypes.   AutoML  If you want Amazon Forecast to evaluate each algorithm and choose the one that minimizes the objective function, set PerformAutoML to true. The objective function is defined as the mean of the weighted losses over the forecast types. By default, these are the p10, p50, and p90 quantile losses. For more information, see EvaluationResult. When AutoML is enabled, the following properties are disallowed:    AlgorithmArn     HPOConfig     PerformHPO     TrainingParameters    To get a list of all of your predictors, use the ListPredictors operation.  Before you can use the predictor to create a forecast, the Status of the predictor must be ACTIVE, signifying that training has completed. To get the status, use the DescribePredictor operation. 
+   *   This operation creates a legacy predictor that does not include all the predictor functionalities provided by Amazon Forecast. To create a predictor that is compatible with all aspects of Forecast, use CreateAutoPredictor.  Creates an Amazon Forecast predictor. In the request, provide a dataset group and either specify an algorithm or let Amazon Forecast choose an algorithm for you using AutoML. If you specify an algorithm, you also can override algorithm-specific hyperparameters. Amazon Forecast uses the algorithm to train a predictor using the latest version of the datasets in the specified dataset group. You can then generate a forecast using the CreateForecast operation.  To see the evaluation metrics, use the GetAccuracyMetrics operation.  You can specify a featurization configuration to fill and aggregate the data fields in the TARGET_TIME_SERIES dataset to improve model training. For more information, see FeaturizationConfig. For RELATED_TIME_SERIES datasets, CreatePredictor verifies that the DataFrequency specified when the dataset was created matches the ForecastFrequency. TARGET_TIME_SERIES datasets don't have this restriction. Amazon Forecast also verifies the delimiter and timestamp format. For more information, see howitworks-datasets-groups. By default, predictors are trained and evaluated at the 0.1 (P10), 0.5 (P50), and 0.9 (P90) quantiles. You can choose custom forecast types to train and evaluate your predictor by setting the ForecastTypes.   AutoML  If you want Amazon Forecast to evaluate each algorithm and choose the one that minimizes the objective function, set PerformAutoML to true. The objective function is defined as the mean of the weighted losses over the forecast types. By default, these are the p10, p50, and p90 quantile losses. For more information, see EvaluationResult. When AutoML is enabled, the following properties are disallowed:    AlgorithmArn     HPOConfig     PerformHPO     TrainingParameters    To get a list of all of your predictors, use the ListPredictors operation.  Before you can use the predictor to create a forecast, the Status of the predictor must be ACTIVE, signifying that training has completed. To get the status, use the DescribePredictor operation. 
    */
   createPredictor(callback?: (err: AWSError, data: ForecastService.Types.CreatePredictorResponse) => void): Request<ForecastService.Types.CreatePredictorResponse, AWSError>;
   /**
@@ -91,6 +115,22 @@ declare class ForecastService extends Service {
    * Deletes a dataset import job created using the CreateDatasetImportJob operation. You can delete only dataset import jobs that have a status of ACTIVE or CREATE_FAILED. To get the status, use the DescribeDatasetImportJob operation.
    */
   deleteDatasetImportJob(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes an Explainability resource. You can delete only predictor that have a status of ACTIVE or CREATE_FAILED. To get the status, use the DescribeExplainability operation.
+   */
+  deleteExplainability(params: ForecastService.Types.DeleteExplainabilityRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes an Explainability resource. You can delete only predictor that have a status of ACTIVE or CREATE_FAILED. To get the status, use the DescribeExplainability operation.
+   */
+  deleteExplainability(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes an Explainability export job.
+   */
+  deleteExplainabilityExport(params: ForecastService.Types.DeleteExplainabilityExportRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes an Explainability export job.
+   */
+  deleteExplainabilityExport(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes a forecast created using the CreateForecast operation. You can delete only forecasts that have a status of ACTIVE or CREATE_FAILED. To get the status, use the DescribeForecast operation. You can't delete a forecast while it is being exported. After a forecast is deleted, you can no longer query the forecast.
    */
@@ -132,6 +172,14 @@ declare class ForecastService extends Service {
    */
   deleteResourceTree(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Describes a predictor created using the CreateAutoPredictor operation.
+   */
+  describeAutoPredictor(params: ForecastService.Types.DescribeAutoPredictorRequest, callback?: (err: AWSError, data: ForecastService.Types.DescribeAutoPredictorResponse) => void): Request<ForecastService.Types.DescribeAutoPredictorResponse, AWSError>;
+  /**
+   * Describes a predictor created using the CreateAutoPredictor operation.
+   */
+  describeAutoPredictor(callback?: (err: AWSError, data: ForecastService.Types.DescribeAutoPredictorResponse) => void): Request<ForecastService.Types.DescribeAutoPredictorResponse, AWSError>;
+  /**
    * Describes an Amazon Forecast dataset created using the CreateDataset operation. In addition to listing the parameters specified in the CreateDataset request, this operation includes the following dataset properties:    CreationTime     LastModificationTime     Status   
    */
   describeDataset(params: ForecastService.Types.DescribeDatasetRequest, callback?: (err: AWSError, data: ForecastService.Types.DescribeDatasetResponse) => void): Request<ForecastService.Types.DescribeDatasetResponse, AWSError>;
@@ -156,6 +204,22 @@ declare class ForecastService extends Service {
    */
   describeDatasetImportJob(callback?: (err: AWSError, data: ForecastService.Types.DescribeDatasetImportJobResponse) => void): Request<ForecastService.Types.DescribeDatasetImportJobResponse, AWSError>;
   /**
+   * Describes an Explainability resource created using the CreateExplainability operation.
+   */
+  describeExplainability(params: ForecastService.Types.DescribeExplainabilityRequest, callback?: (err: AWSError, data: ForecastService.Types.DescribeExplainabilityResponse) => void): Request<ForecastService.Types.DescribeExplainabilityResponse, AWSError>;
+  /**
+   * Describes an Explainability resource created using the CreateExplainability operation.
+   */
+  describeExplainability(callback?: (err: AWSError, data: ForecastService.Types.DescribeExplainabilityResponse) => void): Request<ForecastService.Types.DescribeExplainabilityResponse, AWSError>;
+  /**
+   * Describes an Explainability export created using the CreateExplainabilityExport operation.
+   */
+  describeExplainabilityExport(params: ForecastService.Types.DescribeExplainabilityExportRequest, callback?: (err: AWSError, data: ForecastService.Types.DescribeExplainabilityExportResponse) => void): Request<ForecastService.Types.DescribeExplainabilityExportResponse, AWSError>;
+  /**
+   * Describes an Explainability export created using the CreateExplainabilityExport operation.
+   */
+  describeExplainabilityExport(callback?: (err: AWSError, data: ForecastService.Types.DescribeExplainabilityExportResponse) => void): Request<ForecastService.Types.DescribeExplainabilityExportResponse, AWSError>;
+  /**
    * Describes a forecast created using the CreateForecast operation. In addition to listing the properties provided in the CreateForecast request, this operation lists the following properties:    DatasetGroupArn - The dataset group that provided the training data.    CreationTime     LastModificationTime     Status     Message - If an error occurred, information about the error.  
    */
   describeForecast(params: ForecastService.Types.DescribeForecastRequest, callback?: (err: AWSError, data: ForecastService.Types.DescribeForecastResponse) => void): Request<ForecastService.Types.DescribeForecastResponse, AWSError>;
@@ -172,11 +236,11 @@ declare class ForecastService extends Service {
    */
   describeForecastExportJob(callback?: (err: AWSError, data: ForecastService.Types.DescribeForecastExportJobResponse) => void): Request<ForecastService.Types.DescribeForecastExportJobResponse, AWSError>;
   /**
-   * Describes a predictor created using the CreatePredictor operation. In addition to listing the properties provided in the CreatePredictor request, this operation lists the following properties:    DatasetImportJobArns - The dataset import jobs used to import training data.    AutoMLAlgorithmArns - If AutoML is performed, the algorithms that were evaluated.    CreationTime     LastModificationTime     Status     Message - If an error occurred, information about the error.  
+   *   This operation is only valid for legacy predictors created with CreatePredictor. If you are not using a legacy predictor, use DescribeAutoPredictor. To upgrade a legacy predictor to AutoPredictor, see Upgrading to AutoPredictor.  Describes a predictor created using the CreatePredictor operation. In addition to listing the properties provided in the CreatePredictor request, this operation lists the following properties:    DatasetImportJobArns - The dataset import jobs used to import training data.    AutoMLAlgorithmArns - If AutoML is performed, the algorithms that were evaluated.    CreationTime     LastModificationTime     Status     Message - If an error occurred, information about the error.  
    */
   describePredictor(params: ForecastService.Types.DescribePredictorRequest, callback?: (err: AWSError, data: ForecastService.Types.DescribePredictorResponse) => void): Request<ForecastService.Types.DescribePredictorResponse, AWSError>;
   /**
-   * Describes a predictor created using the CreatePredictor operation. In addition to listing the properties provided in the CreatePredictor request, this operation lists the following properties:    DatasetImportJobArns - The dataset import jobs used to import training data.    AutoMLAlgorithmArns - If AutoML is performed, the algorithms that were evaluated.    CreationTime     LastModificationTime     Status     Message - If an error occurred, information about the error.  
+   *   This operation is only valid for legacy predictors created with CreatePredictor. If you are not using a legacy predictor, use DescribeAutoPredictor. To upgrade a legacy predictor to AutoPredictor, see Upgrading to AutoPredictor.  Describes a predictor created using the CreatePredictor operation. In addition to listing the properties provided in the CreatePredictor request, this operation lists the following properties:    DatasetImportJobArns - The dataset import jobs used to import training data.    AutoMLAlgorithmArns - If AutoML is performed, the algorithms that were evaluated.    CreationTime     LastModificationTime     Status     Message - If an error occurred, information about the error.  
    */
   describePredictor(callback?: (err: AWSError, data: ForecastService.Types.DescribePredictorResponse) => void): Request<ForecastService.Types.DescribePredictorResponse, AWSError>;
   /**
@@ -219,6 +283,22 @@ declare class ForecastService extends Service {
    * Returns a list of datasets created using the CreateDataset operation. For each dataset, a summary of its properties, including its Amazon Resource Name (ARN), is returned. To retrieve the complete set of properties, use the ARN with the DescribeDataset operation.
    */
   listDatasets(callback?: (err: AWSError, data: ForecastService.Types.ListDatasetsResponse) => void): Request<ForecastService.Types.ListDatasetsResponse, AWSError>;
+  /**
+   * Returns a list of Explainability resources created using the CreateExplainability operation. This operation returns a summary for each Explainability. You can filter the list using an array of Filter objects. To retrieve the complete set of properties for a particular Explainability resource, use the ARN with the DescribeExplainability operation.
+   */
+  listExplainabilities(params: ForecastService.Types.ListExplainabilitiesRequest, callback?: (err: AWSError, data: ForecastService.Types.ListExplainabilitiesResponse) => void): Request<ForecastService.Types.ListExplainabilitiesResponse, AWSError>;
+  /**
+   * Returns a list of Explainability resources created using the CreateExplainability operation. This operation returns a summary for each Explainability. You can filter the list using an array of Filter objects. To retrieve the complete set of properties for a particular Explainability resource, use the ARN with the DescribeExplainability operation.
+   */
+  listExplainabilities(callback?: (err: AWSError, data: ForecastService.Types.ListExplainabilitiesResponse) => void): Request<ForecastService.Types.ListExplainabilitiesResponse, AWSError>;
+  /**
+   * Returns a list of Explainability exports created using the CreateExplainabilityExport operation. This operation returns a summary for each Explainability export. You can filter the list using an array of Filter objects. To retrieve the complete set of properties for a particular Explainability export, use the ARN with the DescribeExplainability operation.
+   */
+  listExplainabilityExports(params: ForecastService.Types.ListExplainabilityExportsRequest, callback?: (err: AWSError, data: ForecastService.Types.ListExplainabilityExportsResponse) => void): Request<ForecastService.Types.ListExplainabilityExportsResponse, AWSError>;
+  /**
+   * Returns a list of Explainability exports created using the CreateExplainabilityExport operation. This operation returns a summary for each Explainability export. You can filter the list using an array of Filter objects. To retrieve the complete set of properties for a particular Explainability export, use the ARN with the DescribeExplainability operation.
+   */
+  listExplainabilityExports(callback?: (err: AWSError, data: ForecastService.Types.ListExplainabilityExportsResponse) => void): Request<ForecastService.Types.ListExplainabilityExportsResponse, AWSError>;
   /**
    * Returns a list of forecast export jobs created using the CreateForecastExportJob operation. For each forecast export job, this operation returns a summary of its properties, including its Amazon Resource Name (ARN). To retrieve the complete set of properties, use the ARN with the DescribeForecastExportJob operation. You can filter the list using an array of Filter objects.
    */
@@ -293,10 +373,32 @@ declare class ForecastService extends Service {
   updateDatasetGroup(callback?: (err: AWSError, data: ForecastService.Types.UpdateDatasetGroupResponse) => void): Request<ForecastService.Types.UpdateDatasetGroupResponse, AWSError>;
 }
 declare namespace ForecastService {
+  export interface AdditionalDataset {
+    /**
+     * The name of the additional dataset. Valid names: "holiday" and "weather".
+     */
+    Name: Name;
+    /**
+     *  Weather Index  To enable the Weather Index, do not specify a value for Configuration.  Holidays  To enable Holidays, specify a country with one of the following two-letter country codes:   "AL" - ALBANIA   "AR" - ARGENTINA   "AT" - AUSTRIA   "AU" - AUSTRALIA   "BA" - BOSNIA HERZEGOVINA   "BE" - BELGIUM   "BG" - BULGARIA   "BO" - BOLIVIA   "BR" - BRAZIL   "BY" - BELARUS   "CA" - CANADA   "CL" - CHILE   "CO" - COLOMBIA   "CR" - COSTA RICA   "HR" - CROATIA   "CZ" - CZECH REPUBLIC   "DK" - DENMARK   "EC" - ECUADOR   "EE" - ESTONIA   "ET" - ETHIOPIA   "FI" - FINLAND   "FR" - FRANCE   "DE" - GERMANY   "GR" - GREECE   "HU" - HUNGARY   "IS" - ICELAND   "IN" - INDIA   "IE" - IRELAND   "IT" - ITALY   "JP" - JAPAN   "KZ" - KAZAKHSTAN   "KR" - KOREA   "LV" - LATVIA   "LI" - LIECHTENSTEIN   "LT" - LITHUANIA   "LU" - LUXEMBOURG   "MK" - MACEDONIA   "MT" - MALTA   "MX" - MEXICO   "MD" - MOLDOVA   "ME" - MONTENEGRO   "NL" - NETHERLANDS   "NZ" - NEW ZEALAND   "NI" - NICARAGUA   "NG" - NIGERIA   "NO" - NORWAY   "PA" - PANAMA   "PY" - PARAGUAY   "PE" - PERU   "PL" - POLAND   "PT" - PORTUGAL   "RO" - ROMANIA   "RU" - RUSSIA   "RS" - SERBIA   "SK" - SLOVAKIA   "SI" - SLOVENIA   "ZA" - SOUTH AFRICA   "ES" - SPAIN   "SE" - SWEDEN   "CH" - SWITZERLAND   "UA" - UKRAINE   "AE" - UNITED ARAB EMIRATES   "US" - UNITED STATES   "UK" - UNITED KINGDOM   "UY" - URUGUAY   "VE" - VENEZUELA  
+     */
+    Configuration?: Configuration;
+  }
+  export type AdditionalDatasets = AdditionalDataset[];
   export type Arn = string;
   export type ArnList = Arn[];
+  export interface AttributeConfig {
+    /**
+     * The name of the attribute as specified in the schema. Amazon Forecast supports the target field of the target time series and the related time series datasets. For example, for the RETAIL domain, the target is demand.
+     */
+    AttributeName: Name;
+    /**
+     * The method parameters (key-value pairs), which are a map of override parameters. Specify these parameters to override the default values. Related Time Series attributes do not accept aggregation parameters. The following list shows the parameters and their valid values for the "filling" featurization method for a Target Time Series dataset. Default values are bolded.    aggregation: sum, avg, first, min, max     frontfill: none     middlefill: zero, nan (not a number), value, median, mean, min, max     backfill: zero, nan, value, median, mean, min, max    The following list shows the parameters and their valid values for a Related Time Series featurization method (there are no defaults):    middlefill: zero, value, median, mean, min, max     backfill: zero, value, median, mean, min, max     futurefill: zero, value, median, mean, min, max    To set a filling method to a specific value, set the fill parameter to value and define the value in a corresponding _value parameter. For example, to set backfilling to a value of 2, include the following: "backfill": "value" and "backfill_value":"2". 
+     */
+    Transformations: Transformations;
+  }
+  export type AttributeConfigs = AttributeConfig[];
   export type AttributeType = "string"|"integer"|"float"|"timestamp"|"geolocation"|string;
-  export type AutoMLOverrideStrategy = "LatencyOptimized"|string;
+  export type AutoMLOverrideStrategy = "LatencyOptimized"|"AccuracyOptimized"|string;
   export type Boolean = boolean;
   export interface CategoricalParameterRange {
     /**
@@ -309,6 +411,7 @@ declare namespace ForecastService {
     Values: Values;
   }
   export type CategoricalParameterRanges = CategoricalParameterRange[];
+  export type Configuration = {[key: string]: Values};
   export interface ContinuousParameterRange {
     /**
      * The name of the hyperparameter to tune.
@@ -328,6 +431,52 @@ declare namespace ForecastService {
     ScalingType?: ScalingType;
   }
   export type ContinuousParameterRanges = ContinuousParameterRange[];
+  export interface CreateAutoPredictorRequest {
+    /**
+     * A unique name for the predictor
+     */
+    PredictorName: Name;
+    /**
+     * The number of time-steps that the model predicts. The forecast horizon is also called the prediction length.
+     */
+    ForecastHorizon?: Integer;
+    /**
+     * The forecast types used to train a predictor. You can specify up to five forecast types. Forecast types can be quantiles from 0.01 to 0.99, by increments of 0.01 or higher. You can also specify the mean forecast with mean.
+     */
+    ForecastTypes?: ForecastTypes;
+    /**
+     * An array of dimension (field) names that specify how to group the generated forecast. For example, if you are generating forecasts for item sales across all your stores, and your dataset contains a store_id field, you would specify store_id as a dimension to group sales forecasts for each store.
+     */
+    ForecastDimensions?: ForecastDimensions;
+    /**
+     * The frequency of predictions in a forecast. Valid intervals are Y (Year), M (Month), W (Week), D (Day), H (Hour), 30min (30 minutes), 15min (15 minutes), 10min (10 minutes), 5min (5 minutes), and 1min (1 minute). For example, "Y" indicates every year and "5min" indicates every five minutes. The frequency must be greater than or equal to the TARGET_TIME_SERIES dataset frequency. When a RELATED_TIME_SERIES dataset is provided, the frequency must be equal to the RELATED_TIME_SERIES dataset frequency.
+     */
+    ForecastFrequency?: Frequency;
+    /**
+     * The data configuration for your dataset group and any additional datasets.
+     */
+    DataConfig?: DataConfig;
+    EncryptionConfig?: EncryptionConfig;
+    /**
+     * The ARN of the predictor to retrain or upgrade. This parameter is only used when retraining or upgrading a predictor. When creating a new predictor, do not specify a value for this parameter. When upgrading or retraining a predictor, only specify values for the ReferencePredictorArn and PredictorName. The value for PredictorName must be a unique predictor name.
+     */
+    ReferencePredictorArn?: Arn;
+    /**
+     * The accuracy metric used to optimize the predictor.
+     */
+    OptimizationMetric?: OptimizationMetric;
+    ExplainPredictor?: Boolean;
+    /**
+     * Optional metadata to help you categorize and organize your predictors. Each tag consists of a key and an optional value, both of which you define. Tag keys and values are case sensitive. The following restrictions apply to tags:   For each resource, each tag key must be unique and each tag key must have one value.   Maximum number of tags per resource: 50.   Maximum key length: 128 Unicode characters in UTF-8.   Maximum value length: 256 Unicode characters in UTF-8.   Accepted characters: all letters and numbers, spaces representable in UTF-8, and + - = . _ : / @. If your tagging schema is used across other services and resources, the character restrictions of those services also apply.    Key prefixes cannot include any upper or lowercase combination of aws: or AWS:. Values can have this prefix. If a tag value has aws as its prefix but the key does not, Forecast considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit. You cannot edit or delete tag keys with this prefix.  
+     */
+    Tags?: Tags;
+  }
+  export interface CreateAutoPredictorResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the predictor.
+     */
+    PredictorArn?: Arn;
+  }
   export interface CreateDatasetGroupRequest {
     /**
      * A name for the dataset group.
@@ -427,6 +576,65 @@ declare namespace ForecastService {
      * The Amazon Resource Name (ARN) of the dataset.
      */
     DatasetArn?: Arn;
+  }
+  export interface CreateExplainabilityExportRequest {
+    /**
+     * A unique name for the Explainability export.
+     */
+    ExplainabilityExportName: Name;
+    /**
+     * The Amazon Resource Name (ARN) of the Explainability to export.
+     */
+    ExplainabilityArn: Arn;
+    Destination: DataDestination;
+    /**
+     * Optional metadata to help you categorize and organize your resources. Each tag consists of a key and an optional value, both of which you define. Tag keys and values are case sensitive. The following restrictions apply to tags:   For each resource, each tag key must be unique and each tag key must have one value.   Maximum number of tags per resource: 50.   Maximum key length: 128 Unicode characters in UTF-8.   Maximum value length: 256 Unicode characters in UTF-8.   Accepted characters: all letters and numbers, spaces representable in UTF-8, and + - = . _ : / @. If your tagging schema is used across other services and resources, the character restrictions of those services also apply.    Key prefixes cannot include any upper or lowercase combination of aws: or AWS:. Values can have this prefix. If a tag value has aws as its prefix but the key does not, Forecast considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit. You cannot edit or delete tag keys with this prefix.  
+     */
+    Tags?: Tags;
+  }
+  export interface CreateExplainabilityExportResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the export.
+     */
+    ExplainabilityExportArn?: Arn;
+  }
+  export interface CreateExplainabilityRequest {
+    /**
+     * A unique name for the Explainability.
+     */
+    ExplainabilityName: Name;
+    /**
+     * The Amazon Resource Name (ARN) of the Predictor or Forecast used to create the Explainability.
+     */
+    ResourceArn: Arn;
+    /**
+     * The configuration settings that define the granularity of time series and time points for the Explainability.
+     */
+    ExplainabilityConfig: ExplainabilityConfig;
+    DataSource?: DataSource;
+    Schema?: Schema;
+    /**
+     * Create an Expainability visualization that is viewable within the AWS console.
+     */
+    EnableVisualization?: Boolean;
+    /**
+     * If TimePointGranularity is set to SPECIFIC, define the first point for the Explainability.
+     */
+    StartDateTime?: LocalDateTime;
+    /**
+     * If TimePointGranularity is set to SPECIFIC, define the last time point for the Explainability.
+     */
+    EndDateTime?: LocalDateTime;
+    /**
+     * Optional metadata to help you categorize and organize your resources. Each tag consists of a key and an optional value, both of which you define. Tag keys and values are case sensitive. The following restrictions apply to tags:   For each resource, each tag key must be unique and each tag key must have one value.   Maximum number of tags per resource: 50.   Maximum key length: 128 Unicode characters in UTF-8.   Maximum value length: 256 Unicode characters in UTF-8.   Accepted characters: all letters and numbers, spaces representable in UTF-8, and + - = . _ : / @. If your tagging schema is used across other services and resources, the character restrictions of those services also apply.    Key prefixes cannot include any upper or lowercase combination of aws: or AWS:. Values can have this prefix. If a tag value has aws as its prefix but the key does not, Forecast considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit. You cannot edit or delete tag keys with this prefix.  
+     */
+    Tags?: Tags;
+  }
+  export interface CreateExplainabilityResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the Explainability.
+     */
+    ExplainabilityArn?: Arn;
   }
   export interface CreateForecastExportJobRequest {
     /**
@@ -565,6 +773,20 @@ declare namespace ForecastService {
      */
     PredictorArn?: Arn;
   }
+  export interface DataConfig {
+    /**
+     * The ARN of the dataset group used to train the predictor.
+     */
+    DatasetGroupArn: Arn;
+    /**
+     * Aggregation and filling options for attributes in your dataset group.
+     */
+    AttributeConfigs?: AttributeConfigs;
+    /**
+     * Additional built-in datasets like Holidays and the Weather Index.
+     */
+    AdditionalDatasets?: AdditionalDatasets;
+  }
   export interface DataDestination {
     /**
      * The path to an Amazon Simple Storage Service (Amazon S3) bucket along with the credentials to access the bucket.
@@ -673,6 +895,18 @@ declare namespace ForecastService {
      */
     DatasetArn: Arn;
   }
+  export interface DeleteExplainabilityExportRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the Explainability export to delete. 
+     */
+    ExplainabilityExportArn: Arn;
+  }
+  export interface DeleteExplainabilityRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the Explainability resource to delete.
+     */
+    ExplainabilityArn: Arn;
+  }
   export interface DeleteForecastExportJobRequest {
     /**
      * The Amazon Resource Name (ARN) of the forecast export job to delete.
@@ -702,6 +936,72 @@ declare namespace ForecastService {
      * The Amazon Resource Name (ARN) of the parent resource to delete. All child resources of the parent resource will also be deleted.
      */
     ResourceArn: Arn;
+  }
+  export interface DescribeAutoPredictorRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the predictor.
+     */
+    PredictorArn: Arn;
+  }
+  export interface DescribeAutoPredictorResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the predictor
+     */
+    PredictorArn?: Arn;
+    /**
+     * The name of the predictor.
+     */
+    PredictorName?: Name;
+    /**
+     * The number of time-steps that the model predicts. The forecast horizon is also called the prediction length.
+     */
+    ForecastHorizon?: Integer;
+    /**
+     * The forecast types used during predictor training. Default value is ["0.1","0.5","0.9"].
+     */
+    ForecastTypes?: ForecastTypes;
+    /**
+     * The frequency of predictions in a forecast. Valid intervals are Y (Year), M (Month), W (Week), D (Day), H (Hour), 30min (30 minutes), 15min (15 minutes), 10min (10 minutes), 5min (5 minutes), and 1min (1 minute). For example, "Y" indicates every year and "5min" indicates every five minutes.
+     */
+    ForecastFrequency?: Frequency;
+    /**
+     * An array of the ARNs of the dataset import jobs used to import training data for the predictor.
+     */
+    DatasetImportJobArns?: ArnList;
+    /**
+     * The data configuration for your dataset group and any additional datasets.
+     */
+    DataConfig?: DataConfig;
+    EncryptionConfig?: EncryptionConfig;
+    /**
+     * The ARN and state of the reference predictor. This parameter is only valid for retrained or upgraded predictors.
+     */
+    ReferencePredictorSummary?: ReferencePredictorSummary;
+    /**
+     * The estimated time remaining in minutes for the predictor training job to complete.
+     */
+    EstimatedTimeRemainingInMinutes?: Long;
+    /**
+     * The status of the predictor. States include:     ACTIVE     CREATE_PENDING, CREATE_IN_PROGRESS, CREATE_FAILED     CREATE_STOPPING, CREATE_STOPPED     DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED   
+     */
+    Status?: Status;
+    /**
+     * In the event of an error, a message detailing the cause of the error.
+     */
+    Message?: Message;
+    /**
+     * The timestamp of the CreateAutoPredictor request.
+     */
+    CreationTime?: Timestamp;
+    /**
+     * The last time the resource was modified. The timestamp depends on the status of the job:    CREATE_PENDING - The CreationTime.    CREATE_IN_PROGRESS - The current timestamp.    CREATE_STOPPING - The current timestamp.    CREATE_STOPPED - When the job stopped.    ACTIVE or CREATE_FAILED - When the job finished or failed.  
+     */
+    LastModificationTime?: Timestamp;
+    /**
+     * The accuracy metric used to optimize the predictor.
+     */
+    OptimizationMetric?: OptimizationMetric;
+    ExplainabilityInfo?: ExplainabilityInfo;
   }
   export interface DescribeDatasetGroupRequest {
     /**
@@ -855,6 +1155,101 @@ declare namespace ForecastService {
      */
     LastModificationTime?: Timestamp;
   }
+  export interface DescribeExplainabilityExportRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the Explainability export.
+     */
+    ExplainabilityExportArn: Arn;
+  }
+  export interface DescribeExplainabilityExportResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the Explainability export.
+     */
+    ExplainabilityExportArn?: Arn;
+    /**
+     * The name of the Explainability export.
+     */
+    ExplainabilityExportName?: Name;
+    /**
+     * The Amazon Resource Name (ARN) of the Explainability.
+     */
+    ExplainabilityArn?: Arn;
+    Destination?: DataDestination;
+    /**
+     * Information about any errors that occurred during the export.
+     */
+    Message?: Message;
+    /**
+     * The status of the Explainability export. States include:     ACTIVE     CREATE_PENDING, CREATE_IN_PROGRESS, CREATE_FAILED     CREATE_STOPPING, CREATE_STOPPED     DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED   
+     */
+    Status?: Status;
+    /**
+     * When the Explainability export was created.
+     */
+    CreationTime?: Timestamp;
+    /**
+     * The last time the resource was modified. The timestamp depends on the status of the job:    CREATE_PENDING - The CreationTime.    CREATE_IN_PROGRESS - The current timestamp.    CREATE_STOPPING - The current timestamp.    CREATE_STOPPED - When the job stopped.    ACTIVE or CREATE_FAILED - When the job finished or failed.  
+     */
+    LastModificationTime?: Timestamp;
+  }
+  export interface DescribeExplainabilityRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the Explaianability to describe.
+     */
+    ExplainabilityArn: Arn;
+  }
+  export interface DescribeExplainabilityResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the Explainability.
+     */
+    ExplainabilityArn?: Arn;
+    /**
+     * The name of the Explainability.
+     */
+    ExplainabilityName?: Name;
+    /**
+     * The Amazon Resource Name (ARN) of the Predictor or Forecast used to create the Explainability resource.
+     */
+    ResourceArn?: Arn;
+    /**
+     * The configuration settings that define the granularity of time series and time points for the Explainability.
+     */
+    ExplainabilityConfig?: ExplainabilityConfig;
+    /**
+     * Whether the visualization was enabled for the Explainability resource.
+     */
+    EnableVisualization?: Boolean;
+    DataSource?: DataSource;
+    Schema?: Schema;
+    /**
+     * If TimePointGranularity is set to SPECIFIC, the first time point in the Explainability.
+     */
+    StartDateTime?: LocalDateTime;
+    /**
+     * If TimePointGranularity is set to SPECIFIC, the last time point in the Explainability.
+     */
+    EndDateTime?: LocalDateTime;
+    /**
+     * The estimated time remaining in minutes for the CreateExplainability job to complete.
+     */
+    EstimatedTimeRemainingInMinutes?: Long;
+    /**
+     * If an error occurred, a message about the error.
+     */
+    Message?: Message;
+    /**
+     * The status of the Explainability resource. States include:     ACTIVE     CREATE_PENDING, CREATE_IN_PROGRESS, CREATE_FAILED     CREATE_STOPPING, CREATE_STOPPED     DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED   
+     */
+    Status?: Status;
+    /**
+     * When the Explainability resource was created.
+     */
+    CreationTime?: Timestamp;
+    /**
+     * The last time the resource was modified. The timestamp depends on the status of the job:    CREATE_PENDING - The CreationTime.    CREATE_IN_PROGRESS - The current timestamp.    CREATE_STOPPING - The current timestamp.    CREATE_STOPPED - When the job stopped.    ACTIVE or CREATE_FAILED - When the job finished or failed.  
+     */
+    LastModificationTime?: Timestamp;
+  }
   export interface DescribeForecastExportJobRequest {
     /**
      * The Amazon Resource Name (ARN) of the forecast export job.
@@ -1000,6 +1395,10 @@ declare namespace ForecastService {
      */
     AlgorithmArn?: Arn;
     /**
+     * When PerformAutoML is specified, the ARN of the chosen algorithm.
+     */
+    AutoMLAlgorithmArns?: ArnList;
+    /**
      * The number of time-steps of the forecast. The forecast horizon is also called the prediction length.
      */
     ForecastHorizon?: Integer;
@@ -1052,13 +1451,13 @@ declare namespace ForecastService {
      */
     EstimatedTimeRemainingInMinutes?: Long;
     /**
+     * Whether the predictor was created with CreateAutoPredictor.
+     */
+    IsAutoPredictor?: Boolean;
+    /**
      * An array of the ARNs of the dataset import jobs used to import training data for the predictor.
      */
     DatasetImportJobArns?: ArnList;
-    /**
-     * When PerformAutoML is specified, the ARN of the chosen algorithm.
-     */
-    AutoMLAlgorithmArns?: ArnList;
     /**
      * The status of the predictor. States include:    ACTIVE     CREATE_PENDING, CREATE_IN_PROGRESS, CREATE_FAILED     DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED     CREATE_STOPPING, CREATE_STOPPED     The Status of the predictor must be ACTIVE before you can use the predictor to create a forecast. 
      */
@@ -1137,6 +1536,83 @@ declare namespace ForecastService {
     TestWindows?: TestWindows;
   }
   export type EvaluationType = "SUMMARY"|"COMPUTED"|string;
+  export type Explainabilities = ExplainabilitySummary[];
+  export interface ExplainabilityConfig {
+    /**
+     * To create an Explainability for all time series in your datasets, use ALL. To create an Explainability for specific time series in your datasets, use SPECIFIC. Specify time series by uploading a CSV file to an Amazon S3 bucket and set the location within the DataDestination data type.
+     */
+    TimeSeriesGranularity: TimeSeriesGranularity;
+    /**
+     * To create an Explainability for all time points in your forecast horizon, use ALL. To create an Explainability for specific time points in your forecast horizon, use SPECIFIC. Specify time points with the StartDateTime and EndDateTime parameters within the CreateExplainability operation.
+     */
+    TimePointGranularity: TimePointGranularity;
+  }
+  export interface ExplainabilityExportSummary {
+    /**
+     * The Amazon Resource Name (ARN) of the Explainability export.
+     */
+    ExplainabilityExportArn?: Arn;
+    /**
+     * The name of the Explainability export
+     */
+    ExplainabilityExportName?: Name;
+    Destination?: DataDestination;
+    /**
+     * The status of the Explainability export. States include:     ACTIVE     CREATE_PENDING, CREATE_IN_PROGRESS, CREATE_FAILED     CREATE_STOPPING, CREATE_STOPPED     DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED   
+     */
+    Status?: Status;
+    /**
+     * Information about any errors that may have occurred during the Explainability export.
+     */
+    Message?: ErrorMessage;
+    /**
+     * When the Explainability was created.
+     */
+    CreationTime?: Timestamp;
+    /**
+     * The last time the resource was modified. The timestamp depends on the status of the job:    CREATE_PENDING - The CreationTime.    CREATE_IN_PROGRESS - The current timestamp.    CREATE_STOPPING - The current timestamp.    CREATE_STOPPED - When the job stopped.    ACTIVE or CREATE_FAILED - When the job finished or failed.  
+     */
+    LastModificationTime?: Timestamp;
+  }
+  export type ExplainabilityExports = ExplainabilityExportSummary[];
+  export interface ExplainabilityInfo {
+    ExplainabilityArn?: Arn;
+    Status?: Status;
+  }
+  export interface ExplainabilitySummary {
+    /**
+     * The Amazon Resource Name (ARN) of the Explainability.
+     */
+    ExplainabilityArn?: Arn;
+    /**
+     * The name of the Explainability.
+     */
+    ExplainabilityName?: Name;
+    /**
+     * The Amazon Resource Name (ARN) of the Predictor or Forecast used to create the Explainability.
+     */
+    ResourceArn?: Arn;
+    /**
+     * The configuration settings that define the granularity of time series and time points for the Explainability.
+     */
+    ExplainabilityConfig?: ExplainabilityConfig;
+    /**
+     * The status of the Explainability. States include:     ACTIVE     CREATE_PENDING, CREATE_IN_PROGRESS, CREATE_FAILED     CREATE_STOPPING, CREATE_STOPPED     DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED   
+     */
+    Status?: Status;
+    /**
+     * Information about any errors that may have occurred during the Explainability creation process.
+     */
+    Message?: Message;
+    /**
+     * When the Explainability was created.
+     */
+    CreationTime?: Timestamp;
+    /**
+     * The last time the resource was modified. The timestamp depends on the status of the job:    CREATE_PENDING - The CreationTime.    CREATE_IN_PROGRESS - The current timestamp.    CREATE_STOPPING - The current timestamp.    CREATE_STOPPED - When the job stopped.    ACTIVE or CREATE_FAILED - When the job finished or failed.  
+     */
+    LastModificationTime?: Timestamp;
+  }
   export interface Featurization {
     /**
      * The name of the schema attribute that specifies the data field to be featurized. Amazon Forecast supports the target field of the TARGET_TIME_SERIES and the RELATED_TIME_SERIES datasets. For example, for the RETAIL domain, the target is demand, and for the CUSTOM domain, the target is target_value. For more information, see howitworks-missing-values.
@@ -1237,6 +1713,7 @@ declare namespace ForecastService {
      * The ARN of the predictor used to generate the forecast.
      */
     PredictorArn?: String;
+    CreatedUsingAutoPredictor?: Boolean;
     /**
      * The Amazon Resource Name (ARN) of the dataset group that provided the data used to train the predictor.
      */
@@ -1274,6 +1751,10 @@ declare namespace ForecastService {
      * An array of results from evaluating the predictor.
      */
     PredictorEvaluationResults?: PredictorEvaluationResults;
+    /**
+     * Whether the predictor was created with CreateAutoPredictor.
+     */
+    IsAutoPredictor?: Boolean;
     /**
      *   The LatencyOptimized AutoML override strategy is only available in private beta. Contact AWS Support or your account manager to learn more about access privileges.   The AutoML strategy used to train the predictor. Unless LatencyOptimized is specified, the AutoML strategy optimizes predictor accuracy. This parameter is only valid for predictors trained using AutoML.
      */
@@ -1381,6 +1862,54 @@ declare namespace ForecastService {
     Datasets?: Datasets;
     /**
      * If the response is truncated, Amazon Forecast returns this token. To retrieve the next set of results, use the token in the next request.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListExplainabilitiesRequest {
+    /**
+     * If the result of the previous request was truncated, the response includes a NextToken. To retrieve the next set of results, use the token in the next request. Tokens expire after 24 hours.
+     */
+    NextToken?: NextToken;
+    /**
+     * The number of items returned in the response.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * An array of filters. For each filter, provide a condition and a match statement. The condition is either IS or IS_NOT, which specifies whether to include or exclude the resources that match the statement from the list. The match statement consists of a key and a value.  Filter properties     Condition - The condition to apply. Valid values are IS and IS_NOT.    Key - The name of the parameter to filter on. Valid values are PredictorArn and Status.    Value - The value to match.  
+     */
+    Filters?: Filters;
+  }
+  export interface ListExplainabilitiesResponse {
+    /**
+     * An array of objects that summarize the properties of each Explainability resource.
+     */
+    Explainabilities?: Explainabilities;
+    /**
+     * Returns this token if the response is truncated. To retrieve the next set of results, use the token in the next request.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListExplainabilityExportsRequest {
+    /**
+     * If the result of the previous request was truncated, the response includes a NextToken. To retrieve the next set of results, use the token in the next request. Tokens expire after 24 hours.
+     */
+    NextToken?: NextToken;
+    /**
+     * The number of items to return in the response.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * An array of filters. For each filter, provide a condition and a match statement. The condition is either IS or IS_NOT, which specifies whether to include or exclude resources that match the statement from the list. The match statement consists of a key and a value.  Filter properties     Condition - The condition to apply. Valid values are IS and IS_NOT.    Key - The name of the parameter to filter on. Valid values are PredictorArn and Status.    Value - The value to match.  
+     */
+    Filters?: Filters;
+  }
+  export interface ListExplainabilityExportsResponse {
+    /**
+     * An array of objects that summarize the properties of each Explainability export.
+     */
+    ExplainabilityExports?: ExplainabilityExports;
+    /**
+     * Returns this token if the response is truncated. To retrieve the next set of results, use the token in the next request.
      */
     NextToken?: NextToken;
   }
@@ -1492,6 +2021,7 @@ declare namespace ForecastService {
      */
     Tags?: Tags;
   }
+  export type LocalDateTime = string;
   export type Long = number;
   export type MaxResults = number;
   export type Message = string;
@@ -1592,6 +2122,14 @@ declare namespace ForecastService {
      */
     DatasetGroupArn?: Arn;
     /**
+     * Whether AutoPredictor was used to create the predictor.
+     */
+    IsAutoPredictor?: Boolean;
+    /**
+     * A summary of the reference predictor used if the predictor was retrained or upgraded.
+     */
+    ReferencePredictorSummary?: ReferencePredictorSummary;
+    /**
      * The status of the predictor. States include:    ACTIVE     CREATE_PENDING, CREATE_IN_PROGRESS, CREATE_FAILED     DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED     CREATE_STOPPING, CREATE_STOPPED     The Status of the predictor must be ACTIVE before you can use the predictor to create a forecast. 
      */
     Status?: Status;
@@ -1609,6 +2147,16 @@ declare namespace ForecastService {
     LastModificationTime?: Timestamp;
   }
   export type Predictors = PredictorSummary[];
+  export interface ReferencePredictorSummary {
+    /**
+     * The ARN of the reference predictor.
+     */
+    Arn?: Arn;
+    /**
+     * Whether the reference predictor is Active or Deleted.
+     */
+    State?: State;
+  }
   export interface S3Config {
     /**
      * The path to an Amazon Simple Storage Service (Amazon S3) bucket or file(s) in an Amazon S3 bucket.
@@ -1642,6 +2190,7 @@ declare namespace ForecastService {
     AttributeType?: AttributeType;
   }
   export type SchemaAttributes = SchemaAttribute[];
+  export type State = "Active"|"Deleted"|string;
   export interface Statistics {
     /**
      * The number of values in the field. If the response value is -1, refer to CountLong.
@@ -1757,10 +2306,13 @@ declare namespace ForecastService {
     Message?: ErrorMessage;
   }
   export type TestWindows = WindowSummary[];
+  export type TimePointGranularity = "ALL"|"SPECIFIC"|string;
+  export type TimeSeriesGranularity = "ALL"|"SPECIFIC"|string;
   export type TimeZone = string;
   export type Timestamp = Date;
   export type TimestampFormat = string;
   export type TrainingParameters = {[key: string]: ParameterValue};
+  export type Transformations = {[key: string]: Value};
   export interface UntagResourceRequest {
     /**
      * The Amazon Resource Name (ARN) that identifies the resource for which to list the tags. Currently, the supported resources are Forecast dataset groups, datasets, dataset import jobs, predictors, forecasts, and forecast exports.

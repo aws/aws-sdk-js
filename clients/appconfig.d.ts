@@ -12,147 +12,147 @@ declare class AppConfig extends Service {
   constructor(options?: AppConfig.Types.ClientConfiguration)
   config: Config & AppConfig.Types.ClientConfiguration;
   /**
-   * An application in AppConfig is a logical unit of code that provides capabilities for your customers. For example, an application can be a microservice that runs on Amazon EC2 instances, a mobile application installed by your users, a serverless application using Amazon API Gateway and AWS Lambda, or any system you run on behalf of others.
+   * Creates an application. An application in AppConfig is a logical unit of code that provides capabilities for your customers. For example, an application can be a microservice that runs on Amazon EC2 instances, a mobile application installed by your users, a serverless application using Amazon API Gateway and Lambda, or any system you run on behalf of others.
    */
   createApplication(params: AppConfig.Types.CreateApplicationRequest, callback?: (err: AWSError, data: AppConfig.Types.Application) => void): Request<AppConfig.Types.Application, AWSError>;
   /**
-   * An application in AppConfig is a logical unit of code that provides capabilities for your customers. For example, an application can be a microservice that runs on Amazon EC2 instances, a mobile application installed by your users, a serverless application using Amazon API Gateway and AWS Lambda, or any system you run on behalf of others.
+   * Creates an application. An application in AppConfig is a logical unit of code that provides capabilities for your customers. For example, an application can be a microservice that runs on Amazon EC2 instances, a mobile application installed by your users, a serverless application using Amazon API Gateway and Lambda, or any system you run on behalf of others.
    */
   createApplication(callback?: (err: AWSError, data: AppConfig.Types.Application) => void): Request<AppConfig.Types.Application, AWSError>;
   /**
-   * Information that enables AppConfig to access the configuration source. Valid configuration sources include Systems Manager (SSM) documents, SSM Parameter Store parameters, and Amazon S3 objects. A configuration profile includes the following information.   The Uri location of the configuration data.   The AWS Identity and Access Management (IAM) role that provides access to the configuration data.   A validator for the configuration data. Available validators include either a JSON Schema or an AWS Lambda function.   For more information, see Create a Configuration and a Configuration Profile in the AWS AppConfig User Guide.
+   * Creates a configuration profile, which is information that enables AppConfig to access the configuration source. Valid configuration sources include the AppConfig hosted configuration store, Amazon Web Services Systems Manager (SSM) documents, SSM Parameter Store parameters, Amazon S3 objects, or any integration source action supported by CodePipeline. A configuration profile includes the following information:   The URI location of the configuration data.   The Identity and Access Management (IAM) role that provides access to the configuration data.   A validator for the configuration data. Available validators include either a JSON Schema or an Lambda function.   For more information, see Create a Configuration and a Configuration Profile in the AppConfig User Guide.
    */
   createConfigurationProfile(params: AppConfig.Types.CreateConfigurationProfileRequest, callback?: (err: AWSError, data: AppConfig.Types.ConfigurationProfile) => void): Request<AppConfig.Types.ConfigurationProfile, AWSError>;
   /**
-   * Information that enables AppConfig to access the configuration source. Valid configuration sources include Systems Manager (SSM) documents, SSM Parameter Store parameters, and Amazon S3 objects. A configuration profile includes the following information.   The Uri location of the configuration data.   The AWS Identity and Access Management (IAM) role that provides access to the configuration data.   A validator for the configuration data. Available validators include either a JSON Schema or an AWS Lambda function.   For more information, see Create a Configuration and a Configuration Profile in the AWS AppConfig User Guide.
+   * Creates a configuration profile, which is information that enables AppConfig to access the configuration source. Valid configuration sources include the AppConfig hosted configuration store, Amazon Web Services Systems Manager (SSM) documents, SSM Parameter Store parameters, Amazon S3 objects, or any integration source action supported by CodePipeline. A configuration profile includes the following information:   The URI location of the configuration data.   The Identity and Access Management (IAM) role that provides access to the configuration data.   A validator for the configuration data. Available validators include either a JSON Schema or an Lambda function.   For more information, see Create a Configuration and a Configuration Profile in the AppConfig User Guide.
    */
   createConfigurationProfile(callback?: (err: AWSError, data: AppConfig.Types.ConfigurationProfile) => void): Request<AppConfig.Types.ConfigurationProfile, AWSError>;
   /**
-   * A deployment strategy defines important criteria for rolling out your configuration to the designated targets. A deployment strategy includes: the overall duration required, a percentage of targets to receive the deployment during each interval, an algorithm that defines how percentage grows, and bake time.
+   * Creates a deployment strategy that defines important criteria for rolling out your configuration to the designated targets. A deployment strategy includes the overall duration required, a percentage of targets to receive the deployment during each interval, an algorithm that defines how percentage grows, and bake time.
    */
   createDeploymentStrategy(params: AppConfig.Types.CreateDeploymentStrategyRequest, callback?: (err: AWSError, data: AppConfig.Types.DeploymentStrategy) => void): Request<AppConfig.Types.DeploymentStrategy, AWSError>;
   /**
-   * A deployment strategy defines important criteria for rolling out your configuration to the designated targets. A deployment strategy includes: the overall duration required, a percentage of targets to receive the deployment during each interval, an algorithm that defines how percentage grows, and bake time.
+   * Creates a deployment strategy that defines important criteria for rolling out your configuration to the designated targets. A deployment strategy includes the overall duration required, a percentage of targets to receive the deployment during each interval, an algorithm that defines how percentage grows, and bake time.
    */
   createDeploymentStrategy(callback?: (err: AWSError, data: AppConfig.Types.DeploymentStrategy) => void): Request<AppConfig.Types.DeploymentStrategy, AWSError>;
   /**
-   * For each application, you define one or more environments. An environment is a logical deployment group of AppConfig targets, such as applications in a Beta or Production environment. You can also define environments for application subcomponents such as the Web, Mobile and Back-end components for your application. You can configure Amazon CloudWatch alarms for each environment. The system monitors alarms during a configuration deployment. If an alarm is triggered, the system rolls back the configuration.
+   * Creates an environment. For each application, you define one or more environments. An environment is a logical deployment group of AppConfig targets, such as applications in a Beta or Production environment. You can also define environments for application subcomponents such as the Web, Mobile and Back-end components for your application. You can configure Amazon CloudWatch alarms for each environment. The system monitors alarms during a configuration deployment. If an alarm is triggered, the system rolls back the configuration.
    */
   createEnvironment(params: AppConfig.Types.CreateEnvironmentRequest, callback?: (err: AWSError, data: AppConfig.Types.Environment) => void): Request<AppConfig.Types.Environment, AWSError>;
   /**
-   * For each application, you define one or more environments. An environment is a logical deployment group of AppConfig targets, such as applications in a Beta or Production environment. You can also define environments for application subcomponents such as the Web, Mobile and Back-end components for your application. You can configure Amazon CloudWatch alarms for each environment. The system monitors alarms during a configuration deployment. If an alarm is triggered, the system rolls back the configuration.
+   * Creates an environment. For each application, you define one or more environments. An environment is a logical deployment group of AppConfig targets, such as applications in a Beta or Production environment. You can also define environments for application subcomponents such as the Web, Mobile and Back-end components for your application. You can configure Amazon CloudWatch alarms for each environment. The system monitors alarms during a configuration deployment. If an alarm is triggered, the system rolls back the configuration.
    */
   createEnvironment(callback?: (err: AWSError, data: AppConfig.Types.Environment) => void): Request<AppConfig.Types.Environment, AWSError>;
   /**
-   * Create a new configuration in the AppConfig configuration store.
+   * Creates a new configuration in the AppConfig hosted configuration store.
    */
   createHostedConfigurationVersion(params: AppConfig.Types.CreateHostedConfigurationVersionRequest, callback?: (err: AWSError, data: AppConfig.Types.HostedConfigurationVersion) => void): Request<AppConfig.Types.HostedConfigurationVersion, AWSError>;
   /**
-   * Create a new configuration in the AppConfig configuration store.
+   * Creates a new configuration in the AppConfig hosted configuration store.
    */
   createHostedConfigurationVersion(callback?: (err: AWSError, data: AppConfig.Types.HostedConfigurationVersion) => void): Request<AppConfig.Types.HostedConfigurationVersion, AWSError>;
   /**
-   * Delete an application. Deleting an application does not delete a configuration from a host.
+   * Deletes an application. Deleting an application does not delete a configuration from a host.
    */
   deleteApplication(params: AppConfig.Types.DeleteApplicationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Delete an application. Deleting an application does not delete a configuration from a host.
+   * Deletes an application. Deleting an application does not delete a configuration from a host.
    */
   deleteApplication(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Delete a configuration profile. Deleting a configuration profile does not delete a configuration from a host.
+   * Deletes a configuration profile. Deleting a configuration profile does not delete a configuration from a host.
    */
   deleteConfigurationProfile(params: AppConfig.Types.DeleteConfigurationProfileRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Delete a configuration profile. Deleting a configuration profile does not delete a configuration from a host.
+   * Deletes a configuration profile. Deleting a configuration profile does not delete a configuration from a host.
    */
   deleteConfigurationProfile(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Delete a deployment strategy. Deleting a deployment strategy does not delete a configuration from a host.
+   * Deletes a deployment strategy. Deleting a deployment strategy does not delete a configuration from a host.
    */
   deleteDeploymentStrategy(params: AppConfig.Types.DeleteDeploymentStrategyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Delete a deployment strategy. Deleting a deployment strategy does not delete a configuration from a host.
+   * Deletes a deployment strategy. Deleting a deployment strategy does not delete a configuration from a host.
    */
   deleteDeploymentStrategy(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Delete an environment. Deleting an environment does not delete a configuration from a host.
+   * Deletes an environment. Deleting an environment does not delete a configuration from a host.
    */
   deleteEnvironment(params: AppConfig.Types.DeleteEnvironmentRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Delete an environment. Deleting an environment does not delete a configuration from a host.
+   * Deletes an environment. Deleting an environment does not delete a configuration from a host.
    */
   deleteEnvironment(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Delete a version of a configuration from the AppConfig configuration store.
+   * Deletes a version of a configuration from the AppConfig hosted configuration store.
    */
   deleteHostedConfigurationVersion(params: AppConfig.Types.DeleteHostedConfigurationVersionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Delete a version of a configuration from the AppConfig configuration store.
+   * Deletes a version of a configuration from the AppConfig hosted configuration store.
    */
   deleteHostedConfigurationVersion(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Retrieve information about an application.
+   * Retrieves information about an application.
    */
   getApplication(params: AppConfig.Types.GetApplicationRequest, callback?: (err: AWSError, data: AppConfig.Types.Application) => void): Request<AppConfig.Types.Application, AWSError>;
   /**
-   * Retrieve information about an application.
+   * Retrieves information about an application.
    */
   getApplication(callback?: (err: AWSError, data: AppConfig.Types.Application) => void): Request<AppConfig.Types.Application, AWSError>;
   /**
-   * Receive information about a configuration.  AWS AppConfig uses the value of the ClientConfigurationVersion parameter to identify the configuration version on your clients. If you don’t send ClientConfigurationVersion with each call to GetConfiguration, your clients receive the current configuration. You are charged each time your clients receive a configuration. To avoid excess charges, we recommend that you include the ClientConfigurationVersion value with every call to GetConfiguration. This value must be saved on your client. Subsequent calls to GetConfiguration must pass this value by using the ClientConfigurationVersion parameter.  
+   * Retrieves information about a configuration.  AppConfig uses the value of the ClientConfigurationVersion parameter to identify the configuration version on your clients. If you don’t send ClientConfigurationVersion with each call to GetConfiguration, your clients receive the current configuration. You are charged each time your clients receive a configuration. To avoid excess charges, we recommend that you include the ClientConfigurationVersion value with every call to GetConfiguration. This value must be saved on your client. Subsequent calls to GetConfiguration must pass this value by using the ClientConfigurationVersion parameter.  
    */
   getConfiguration(params: AppConfig.Types.GetConfigurationRequest, callback?: (err: AWSError, data: AppConfig.Types.Configuration) => void): Request<AppConfig.Types.Configuration, AWSError>;
   /**
-   * Receive information about a configuration.  AWS AppConfig uses the value of the ClientConfigurationVersion parameter to identify the configuration version on your clients. If you don’t send ClientConfigurationVersion with each call to GetConfiguration, your clients receive the current configuration. You are charged each time your clients receive a configuration. To avoid excess charges, we recommend that you include the ClientConfigurationVersion value with every call to GetConfiguration. This value must be saved on your client. Subsequent calls to GetConfiguration must pass this value by using the ClientConfigurationVersion parameter.  
+   * Retrieves information about a configuration.  AppConfig uses the value of the ClientConfigurationVersion parameter to identify the configuration version on your clients. If you don’t send ClientConfigurationVersion with each call to GetConfiguration, your clients receive the current configuration. You are charged each time your clients receive a configuration. To avoid excess charges, we recommend that you include the ClientConfigurationVersion value with every call to GetConfiguration. This value must be saved on your client. Subsequent calls to GetConfiguration must pass this value by using the ClientConfigurationVersion parameter.  
    */
   getConfiguration(callback?: (err: AWSError, data: AppConfig.Types.Configuration) => void): Request<AppConfig.Types.Configuration, AWSError>;
   /**
-   * Retrieve information about a configuration profile.
+   * Retrieves information about a configuration profile.
    */
   getConfigurationProfile(params: AppConfig.Types.GetConfigurationProfileRequest, callback?: (err: AWSError, data: AppConfig.Types.ConfigurationProfile) => void): Request<AppConfig.Types.ConfigurationProfile, AWSError>;
   /**
-   * Retrieve information about a configuration profile.
+   * Retrieves information about a configuration profile.
    */
   getConfigurationProfile(callback?: (err: AWSError, data: AppConfig.Types.ConfigurationProfile) => void): Request<AppConfig.Types.ConfigurationProfile, AWSError>;
   /**
-   * Retrieve information about a configuration deployment.
+   * Retrieves information about a configuration deployment.
    */
   getDeployment(params: AppConfig.Types.GetDeploymentRequest, callback?: (err: AWSError, data: AppConfig.Types.Deployment) => void): Request<AppConfig.Types.Deployment, AWSError>;
   /**
-   * Retrieve information about a configuration deployment.
+   * Retrieves information about a configuration deployment.
    */
   getDeployment(callback?: (err: AWSError, data: AppConfig.Types.Deployment) => void): Request<AppConfig.Types.Deployment, AWSError>;
   /**
-   * Retrieve information about a deployment strategy. A deployment strategy defines important criteria for rolling out your configuration to the designated targets. A deployment strategy includes: the overall duration required, a percentage of targets to receive the deployment during each interval, an algorithm that defines how percentage grows, and bake time.
+   * Retrieves information about a deployment strategy. A deployment strategy defines important criteria for rolling out your configuration to the designated targets. A deployment strategy includes the overall duration required, a percentage of targets to receive the deployment during each interval, an algorithm that defines how percentage grows, and bake time.
    */
   getDeploymentStrategy(params: AppConfig.Types.GetDeploymentStrategyRequest, callback?: (err: AWSError, data: AppConfig.Types.DeploymentStrategy) => void): Request<AppConfig.Types.DeploymentStrategy, AWSError>;
   /**
-   * Retrieve information about a deployment strategy. A deployment strategy defines important criteria for rolling out your configuration to the designated targets. A deployment strategy includes: the overall duration required, a percentage of targets to receive the deployment during each interval, an algorithm that defines how percentage grows, and bake time.
+   * Retrieves information about a deployment strategy. A deployment strategy defines important criteria for rolling out your configuration to the designated targets. A deployment strategy includes the overall duration required, a percentage of targets to receive the deployment during each interval, an algorithm that defines how percentage grows, and bake time.
    */
   getDeploymentStrategy(callback?: (err: AWSError, data: AppConfig.Types.DeploymentStrategy) => void): Request<AppConfig.Types.DeploymentStrategy, AWSError>;
   /**
-   * Retrieve information about an environment. An environment is a logical deployment group of AppConfig applications, such as applications in a Production environment or in an EU_Region environment. Each configuration deployment targets an environment. You can enable one or more Amazon CloudWatch alarms for an environment. If an alarm is triggered during a deployment, AppConfig roles back the configuration.
+   * Retrieves information about an environment. An environment is a logical deployment group of AppConfig applications, such as applications in a Production environment or in an EU_Region environment. Each configuration deployment targets an environment. You can enable one or more Amazon CloudWatch alarms for an environment. If an alarm is triggered during a deployment, AppConfig roles back the configuration.
    */
   getEnvironment(params: AppConfig.Types.GetEnvironmentRequest, callback?: (err: AWSError, data: AppConfig.Types.Environment) => void): Request<AppConfig.Types.Environment, AWSError>;
   /**
-   * Retrieve information about an environment. An environment is a logical deployment group of AppConfig applications, such as applications in a Production environment or in an EU_Region environment. Each configuration deployment targets an environment. You can enable one or more Amazon CloudWatch alarms for an environment. If an alarm is triggered during a deployment, AppConfig roles back the configuration.
+   * Retrieves information about an environment. An environment is a logical deployment group of AppConfig applications, such as applications in a Production environment or in an EU_Region environment. Each configuration deployment targets an environment. You can enable one or more Amazon CloudWatch alarms for an environment. If an alarm is triggered during a deployment, AppConfig roles back the configuration.
    */
   getEnvironment(callback?: (err: AWSError, data: AppConfig.Types.Environment) => void): Request<AppConfig.Types.Environment, AWSError>;
   /**
-   * Get information about a specific configuration version.
+   * Retrieves information about a specific configuration version.
    */
   getHostedConfigurationVersion(params: AppConfig.Types.GetHostedConfigurationVersionRequest, callback?: (err: AWSError, data: AppConfig.Types.HostedConfigurationVersion) => void): Request<AppConfig.Types.HostedConfigurationVersion, AWSError>;
   /**
-   * Get information about a specific configuration version.
+   * Retrieves information about a specific configuration version.
    */
   getHostedConfigurationVersion(callback?: (err: AWSError, data: AppConfig.Types.HostedConfigurationVersion) => void): Request<AppConfig.Types.HostedConfigurationVersion, AWSError>;
   /**
-   * List all applications in your AWS account.
+   * Lists all applications in your Amazon Web Services account.
    */
   listApplications(params: AppConfig.Types.ListApplicationsRequest, callback?: (err: AWSError, data: AppConfig.Types.Applications) => void): Request<AppConfig.Types.Applications, AWSError>;
   /**
-   * List all applications in your AWS account.
+   * Lists all applications in your Amazon Web Services account.
    */
   listApplications(callback?: (err: AWSError, data: AppConfig.Types.Applications) => void): Request<AppConfig.Types.Applications, AWSError>;
   /**
@@ -164,11 +164,11 @@ declare class AppConfig extends Service {
    */
   listConfigurationProfiles(callback?: (err: AWSError, data: AppConfig.Types.ConfigurationProfiles) => void): Request<AppConfig.Types.ConfigurationProfiles, AWSError>;
   /**
-   * List deployment strategies.
+   * Lists deployment strategies.
    */
   listDeploymentStrategies(params: AppConfig.Types.ListDeploymentStrategiesRequest, callback?: (err: AWSError, data: AppConfig.Types.DeploymentStrategies) => void): Request<AppConfig.Types.DeploymentStrategies, AWSError>;
   /**
-   * List deployment strategies.
+   * Lists deployment strategies.
    */
   listDeploymentStrategies(callback?: (err: AWSError, data: AppConfig.Types.DeploymentStrategies) => void): Request<AppConfig.Types.DeploymentStrategies, AWSError>;
   /**
@@ -180,19 +180,19 @@ declare class AppConfig extends Service {
    */
   listDeployments(callback?: (err: AWSError, data: AppConfig.Types.Deployments) => void): Request<AppConfig.Types.Deployments, AWSError>;
   /**
-   * List the environments for an application.
+   * Lists the environments for an application.
    */
   listEnvironments(params: AppConfig.Types.ListEnvironmentsRequest, callback?: (err: AWSError, data: AppConfig.Types.Environments) => void): Request<AppConfig.Types.Environments, AWSError>;
   /**
-   * List the environments for an application.
+   * Lists the environments for an application.
    */
   listEnvironments(callback?: (err: AWSError, data: AppConfig.Types.Environments) => void): Request<AppConfig.Types.Environments, AWSError>;
   /**
-   * View a list of configurations stored in the AppConfig configuration store by version.
+   * Lists configurations stored in the AppConfig hosted configuration store by version.
    */
   listHostedConfigurationVersions(params: AppConfig.Types.ListHostedConfigurationVersionsRequest, callback?: (err: AWSError, data: AppConfig.Types.HostedConfigurationVersions) => void): Request<AppConfig.Types.HostedConfigurationVersions, AWSError>;
   /**
-   * View a list of configurations stored in the AppConfig configuration store by version.
+   * Lists configurations stored in the AppConfig hosted configuration store by version.
    */
   listHostedConfigurationVersions(callback?: (err: AWSError, data: AppConfig.Types.HostedConfigurationVersions) => void): Request<AppConfig.Types.HostedConfigurationVersions, AWSError>;
   /**
@@ -220,11 +220,11 @@ declare class AppConfig extends Service {
    */
   stopDeployment(callback?: (err: AWSError, data: AppConfig.Types.Deployment) => void): Request<AppConfig.Types.Deployment, AWSError>;
   /**
-   * Metadata to assign to an AppConfig resource. Tags help organize and categorize your AppConfig resources. Each tag consists of a key and an optional value, both of which you define. You can specify a maximum of 50 tags for a resource.
+   * Assigns metadata to an AppConfig resource. Tags help organize and categorize your AppConfig resources. Each tag consists of a key and an optional value, both of which you define. You can specify a maximum of 50 tags for a resource.
    */
   tagResource(params: AppConfig.Types.TagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Metadata to assign to an AppConfig resource. Tags help organize and categorize your AppConfig resources. Each tag consists of a key and an optional value, both of which you define. You can specify a maximum of 50 tags for a resource.
+   * Assigns metadata to an AppConfig resource. Tags help organize and categorize your AppConfig resources. Each tag consists of a key and an optional value, both of which you define. You can specify a maximum of 50 tags for a resource.
    */
   tagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -306,7 +306,7 @@ declare namespace AppConfig {
   export type _Blob = Buffer|Uint8Array|Blob|string;
   export interface Configuration {
     /**
-     * The content of the configuration or the configuration data.
+     * The content of the configuration or the configuration data.  Compare the configuration version numbers of the configuration cached locally on your machine and the configuration number in the the header. If the configuration numbers are the same, the content can be ignored. The Content section only appears if the system finds new or updated configuration data. If the system doesn't find new or updated configuration data, then the Content section is not returned. 
      */
     Content?: _Blob;
     /**
@@ -347,6 +347,10 @@ declare namespace AppConfig {
      * A list of methods for validating the configuration.
      */
     Validators?: ValidatorList;
+    /**
+     * The type of configurations that the configuration profile contains. A configuration can be a feature flag used for enabling or disabling new features or a free-form configuration used for distributing configurations to your application. 
+     */
+    Type?: ConfigurationProfileType;
   }
   export interface ConfigurationProfileSummary {
     /**
@@ -369,8 +373,13 @@ declare namespace AppConfig {
      * The types of validators in the configuration profile.
      */
     ValidatorTypes?: ValidatorTypeList;
+    /**
+     * The type of configurations that the configuration profile contains. A configuration can be a feature flag used for enabling or disabling new features or a free-form configuration used to introduce changes to your application.
+     */
+    Type?: ConfigurationProfileType;
   }
   export type ConfigurationProfileSummaryList = ConfigurationProfileSummary[];
+  export type ConfigurationProfileType = string;
   export interface ConfigurationProfiles {
     /**
      * The elements from this collection.
@@ -409,11 +418,11 @@ declare namespace AppConfig {
      */
     Description?: Description;
     /**
-     * A URI to locate the configuration. You can specify a Systems Manager (SSM) document, an SSM Parameter Store parameter, or an Amazon S3 object. For an SSM document, specify either the document name in the format ssm-document://&lt;Document_name&gt; or the Amazon Resource Name (ARN). For a parameter, specify either the parameter name in the format ssm-parameter://&lt;Parameter_name&gt; or the ARN. For an Amazon S3 object, specify the URI in the following format: s3://&lt;bucket&gt;/&lt;objectKey&gt; . Here is an example: s3://my-bucket/my-app/us-east-1/my-config.json
+     * A URI to locate the configuration. You can specify the AppConfig hosted configuration store, Systems Manager (SSM) document, an SSM Parameter Store parameter, or an Amazon S3 object. For the hosted configuration store and for feature flags, specify hosted. For an SSM document, specify either the document name in the format ssm-document://&lt;Document_name&gt; or the Amazon Resource Name (ARN). For a parameter, specify either the parameter name in the format ssm-parameter://&lt;Parameter_name&gt; or the ARN. For an Amazon S3 object, specify the URI in the following format: s3://&lt;bucket&gt;/&lt;objectKey&gt; . Here is an example: s3://my-bucket/my-app/us-east-1/my-config.json 
      */
     LocationUri: Uri;
     /**
-     * The ARN of an IAM role with permission to access the configuration at the specified LocationUri.
+     * The ARN of an IAM role with permission to access the configuration at the specified LocationUri.  A retrieval role ARN is not required for configurations stored in the AppConfig hosted configuration store. It is required for all other sources that store your configuration.  
      */
     RetrievalRoleArn?: RoleArn;
     /**
@@ -424,6 +433,10 @@ declare namespace AppConfig {
      * Metadata to assign to the configuration profile. Tags help organize and categorize your AppConfig resources. Each tag consists of a key and an optional value, both of which you define.
      */
     Tags?: TagMap;
+    /**
+     * The type of configurations that the configuration profile contains. A configuration can be a feature flag used for enabling or disabling new features or a free-form configuration used for distributing configurations to your application.
+     */
+    Type?: ConfigurationProfileType;
   }
   export interface CreateDeploymentStrategyRequest {
     /**
@@ -447,7 +460,7 @@ declare namespace AppConfig {
      */
     GrowthFactor: GrowthFactor;
     /**
-     * The algorithm used to define how percentage grows over time. AWS AppConfig supports the following growth types:  Linear: For this type, AppConfig processes the deployment by dividing the total number of targets by the value specified for Step percentage. For example, a linear deployment that uses a Step percentage of 10 deploys the configuration to 10 percent of the hosts. After those deployments are complete, the system deploys the configuration to the next 10 percent. This continues until 100% of the targets have successfully received the configuration.  Exponential: For this type, AppConfig processes the deployment exponentially using the following formula: G*(2^N). In this formula, G is the growth factor specified by the user and N is the number of steps until the configuration is deployed to all targets. For example, if you specify a growth factor of 2, then the system rolls out the configuration as follows:  2*(2^0)   2*(2^1)   2*(2^2)  Expressed numerically, the deployment rolls out as follows: 2% of the targets, 4% of the targets, 8% of the targets, and continues until the configuration has been deployed to all targets.
+     * The algorithm used to define how percentage grows over time. AppConfig supports the following growth types:  Linear: For this type, AppConfig processes the deployment by dividing the total number of targets by the value specified for Step percentage. For example, a linear deployment that uses a Step percentage of 10 deploys the configuration to 10 percent of the hosts. After those deployments are complete, the system deploys the configuration to the next 10 percent. This continues until 100% of the targets have successfully received the configuration.  Exponential: For this type, AppConfig processes the deployment exponentially using the following formula: G*(2^N). In this formula, G is the growth factor specified by the user and N is the number of steps until the configuration is deployed to all targets. For example, if you specify a growth factor of 2, then the system rolls out the configuration as follows:  2*(2^0)   2*(2^1)   2*(2^2)  Expressed numerically, the deployment rolls out as follows: 2% of the targets, 4% of the targets, 8% of the targets, and continues until the configuration has been deployed to all targets.
      */
     GrowthType?: GrowthType;
     /**
@@ -503,7 +516,7 @@ declare namespace AppConfig {
      */
     ContentType: StringWithLengthBetween1And255;
     /**
-     * An optional locking token used to prevent race conditions from overwriting configuration updates when creating a new version. To ensure your data is not overwritten when creating multiple hosted configuration versions in rapid succession, specify the version of the latest hosted configuration version.
+     * An optional locking token used to prevent race conditions from overwriting configuration updates when creating a new version. To ensure your data is not overwritten when creating multiple hosted configuration versions in rapid succession, specify the version number of the latest hosted configuration version.
      */
     LatestVersionNumber?: Integer;
   }
@@ -531,11 +544,11 @@ declare namespace AppConfig {
   }
   export interface DeleteEnvironmentRequest {
     /**
-     * The application ID that includes the environment you want to delete.
+     * The application ID that includes the environment that you want to delete.
      */
     ApplicationId: Id;
     /**
-     * The ID of the environment you want to delete.
+     * The ID of the environment that you want to delete.
      */
     EnvironmentId: Id;
   }
@@ -603,7 +616,7 @@ declare namespace AppConfig {
      */
     GrowthFactor?: Percentage;
     /**
-     * The amount of time AppConfig monitored for alarms before considering the deployment to be complete and no longer eligible for automatic roll back.
+     * The amount of time that AppConfig monitored for alarms before considering the deployment to be complete and no longer eligible for automatic rollback.
      */
     FinalBakeTimeInMinutes?: MinutesBetween0And24Hours;
     /**
@@ -629,15 +642,15 @@ declare namespace AppConfig {
   }
   export interface DeploymentEvent {
     /**
-     * The type of deployment event. Deployment event types include the start, stop, or completion of a deployment; a percentage update; the start or stop of a bake period; the start or completion of a rollback.
+     * The type of deployment event. Deployment event types include the start, stop, or completion of a deployment; a percentage update; the start or stop of a bake period; and the start or completion of a rollback.
      */
     EventType?: DeploymentEventType;
     /**
-     * The entity that triggered the deployment event. Events can be triggered by a user, AWS AppConfig, an Amazon CloudWatch alarm, or an internal error.
+     * The entity that triggered the deployment event. Events can be triggered by a user, AppConfig, an Amazon CloudWatch alarm, or an internal error.
      */
     TriggeredBy?: TriggeredBy;
     /**
-     * A description of the deployment event. Descriptions include, but are not limited to, the user account or the CloudWatch alarm ARN that initiated a rollback, the percentage of hosts that received the deployment, or in the case of an internal error, a recommendation to attempt a new deployment.
+     * A description of the deployment event. Descriptions include, but are not limited to, the user account or the Amazon CloudWatch alarm ARN that initiated a rollback, the percentage of hosts that received the deployment, or in the case of an internal error, a recommendation to attempt a new deployment.
      */
     Description?: Description;
     /**
@@ -685,7 +698,7 @@ declare namespace AppConfig {
      */
     GrowthFactor?: Percentage;
     /**
-     * The amount of time AppConfig monitored for alarms before considering the deployment to be complete and no longer eligible for automatic roll back.
+     * The amount of time that AppConfig monitored for alarms before considering the deployment to be complete and no longer eligible for automatic rollback.
      */
     FinalBakeTimeInMinutes?: MinutesBetween0And24Hours;
     /**
@@ -721,7 +734,7 @@ declare namespace AppConfig {
      */
     GrowthFactor?: Percentage;
     /**
-     * The amount of time AppConfig monitors for alarms before considering the deployment to be complete and no longer eligible for automatic roll back.
+     * The amount of time that AppConfig monitors for alarms before considering the deployment to be complete and no longer eligible for automatic rollback.
      */
     FinalBakeTimeInMinutes?: MinutesBetween0And24Hours;
     /**
@@ -802,7 +815,7 @@ declare namespace AppConfig {
      */
     ApplicationId: Id;
     /**
-     * The ID of the configuration profile you want to get.
+     * The ID of the configuration profile that you want to get.
      */
     ConfigurationProfileId: Id;
   }
@@ -820,11 +833,11 @@ declare namespace AppConfig {
      */
     Configuration: StringWithLengthBetween1And64;
     /**
-     * A unique ID to identify the client for the configuration. This ID enables AppConfig to deploy the configuration in intervals, as defined in the deployment strategy.
+     * The clientId parameter in the following command is a unique, user-specified ID to identify the client for the configuration. This ID enables AppConfig to deploy the configuration in intervals, as defined in the deployment strategy. 
      */
     ClientId: StringWithLengthBetween1And64;
     /**
-     * The configuration version returned in the most recent GetConfiguration response.  AWS AppConfig uses the value of the ClientConfigurationVersion parameter to identify the configuration version on your clients. If you don’t send ClientConfigurationVersion with each call to GetConfiguration, your clients receive the current configuration. You are charged each time your clients receive a configuration. To avoid excess charges, we recommend that you include the ClientConfigurationVersion value with every call to GetConfiguration. This value must be saved on your client. Subsequent calls to GetConfiguration must pass this value by using the ClientConfigurationVersion parameter.   For more information about working with configurations, see Retrieving the Configuration in the AWS AppConfig User Guide.
+     * The configuration version returned in the most recent GetConfiguration response.  AppConfig uses the value of the ClientConfigurationVersion parameter to identify the configuration version on your clients. If you don’t send ClientConfigurationVersion with each call to GetConfiguration, your clients receive the current configuration. You are charged each time your clients receive a configuration. To avoid excess charges, we recommend that you include the ClientConfigurationVersion value with every call to GetConfiguration. This value must be saved on your client. Subsequent calls to GetConfiguration must pass this value by using the ClientConfigurationVersion parameter.   For more information about working with configurations, see Retrieving the Configuration in the AppConfig User Guide.
      */
     ClientConfigurationVersion?: Version;
   }
@@ -854,7 +867,7 @@ declare namespace AppConfig {
      */
     ApplicationId: Id;
     /**
-     * The ID of the environment you wnat to get.
+     * The ID of the environment that you want to get.
      */
     EnvironmentId: Id;
   }
@@ -942,7 +955,7 @@ declare namespace AppConfig {
      */
     MaxResults?: MaxResults;
     /**
-     * A token to start the list. Use this token to get the next set of results.
+     * A token to start the list. Next token is a pagination token generated by AppConfig to describe what page the previous List call ended on. For the first List request, the nextToken should not be set. On subsequent calls, the nextToken parameter should be set to the previous responses nextToken value. Use this token to get the next set of results. 
      */
     NextToken?: NextToken;
   }
@@ -959,6 +972,10 @@ declare namespace AppConfig {
      * A token to start the list. Use this token to get the next set of results.
      */
     NextToken?: NextToken;
+    /**
+     * A filter based on the type of configurations that the configuration profile contains. A configuration can be a feature flag or a free-form configuration.
+     */
+    Type?: ConfigurationProfileType;
   }
   export interface ListDeploymentStrategiesRequest {
     /**
@@ -1030,11 +1047,11 @@ declare namespace AppConfig {
   export type MinutesBetween0And24Hours = number;
   export interface Monitor {
     /**
-     * ARN of the Amazon CloudWatch alarm.
+     * Amazon Resource Name (ARN) of the Amazon CloudWatch alarm.
      */
-    AlarmArn?: Arn;
+    AlarmArn: StringWithLengthBetween1And2048;
     /**
-     * ARN of an IAM role for AppConfig to monitor AlarmArn.
+     * ARN of an Identity and Access Management (IAM) role for AppConfig to monitor AlarmArn.
      */
     AlarmRoleArn?: RoleArn;
   }
@@ -1096,6 +1113,7 @@ declare namespace AppConfig {
   }
   export type String = string;
   export type StringWithLengthBetween0And32768 = string;
+  export type StringWithLengthBetween1And2048 = string;
   export type StringWithLengthBetween1And255 = string;
   export type StringWithLengthBetween1And64 = string;
   export type TagKey = string;
@@ -1177,7 +1195,7 @@ declare namespace AppConfig {
      */
     DeploymentDurationInMinutes?: MinutesBetween0And24Hours;
     /**
-     * The amount of time AppConfig monitors for alarms before considering the deployment to be complete and no longer eligible for automatic roll back.
+     * The amount of time that AppConfig monitors for alarms before considering the deployment to be complete and no longer eligible for automatic rollback.
      */
     FinalBakeTimeInMinutes?: MinutesBetween0And24Hours;
     /**
@@ -1185,7 +1203,7 @@ declare namespace AppConfig {
      */
     GrowthFactor?: GrowthFactor;
     /**
-     * The algorithm used to define how percentage grows over time. AWS AppConfig supports the following growth types:  Linear: For this type, AppConfig processes the deployment by increments of the growth factor evenly distributed over the deployment time. For example, a linear deployment that uses a growth factor of 20 initially makes the configuration available to 20 percent of the targets. After 1/5th of the deployment time has passed, the system updates the percentage to 40 percent. This continues until 100% of the targets are set to receive the deployed configuration.  Exponential: For this type, AppConfig processes the deployment exponentially using the following formula: G*(2^N). In this formula, G is the growth factor specified by the user and N is the number of steps until the configuration is deployed to all targets. For example, if you specify a growth factor of 2, then the system rolls out the configuration as follows:  2*(2^0)   2*(2^1)   2*(2^2)  Expressed numerically, the deployment rolls out as follows: 2% of the targets, 4% of the targets, 8% of the targets, and continues until the configuration has been deployed to all targets.
+     * The algorithm used to define how percentage grows over time. AppConfig supports the following growth types:  Linear: For this type, AppConfig processes the deployment by increments of the growth factor evenly distributed over the deployment time. For example, a linear deployment that uses a growth factor of 20 initially makes the configuration available to 20 percent of the targets. After 1/5th of the deployment time has passed, the system updates the percentage to 40 percent. This continues until 100% of the targets are set to receive the deployed configuration.  Exponential: For this type, AppConfig processes the deployment exponentially using the following formula: G*(2^N). In this formula, G is the growth factor specified by the user and N is the number of steps until the configuration is deployed to all targets. For example, if you specify a growth factor of 2, then the system rolls out the configuration as follows:  2*(2^0)   2*(2^1)   2*(2^2)  Expressed numerically, the deployment rolls out as follows: 2% of the targets, 4% of the targets, 8% of the targets, and continues until the configuration has been deployed to all targets.
      */
     GrowthType?: GrowthType;
   }
@@ -1232,7 +1250,7 @@ declare namespace AppConfig {
      */
     Type: ValidatorType;
     /**
-     * Either the JSON Schema content or the Amazon Resource Name (ARN) of an AWS Lambda function.
+     * Either the JSON Schema content or the Amazon Resource Name (ARN) of an Lambda function.
      */
     Content: StringWithLengthBetween0And32768;
   }

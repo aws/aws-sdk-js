@@ -124,6 +124,14 @@ declare class IVS extends Service {
    */
   getStreamKey(callback?: (err: AWSError, data: IVS.Types.GetStreamKeyResponse) => void): Request<IVS.Types.GetStreamKeyResponse, AWSError>;
   /**
+   * Gets metadata on a specified stream.
+   */
+  getStreamSession(params: IVS.Types.GetStreamSessionRequest, callback?: (err: AWSError, data: IVS.Types.GetStreamSessionResponse) => void): Request<IVS.Types.GetStreamSessionResponse, AWSError>;
+  /**
+   * Gets metadata on a specified stream.
+   */
+  getStreamSession(callback?: (err: AWSError, data: IVS.Types.GetStreamSessionResponse) => void): Request<IVS.Types.GetStreamSessionResponse, AWSError>;
+  /**
    * Imports the public portion of a new key pair and returns its arn and fingerprint. The privateKey can then be used to generate viewer authorization tokens, to grant viewers access to private channels. For more information, see Setting Up Private Channels in the Amazon IVS User Guide.
    */
   importPlaybackKeyPair(params: IVS.Types.ImportPlaybackKeyPairRequest, callback?: (err: AWSError, data: IVS.Types.ImportPlaybackKeyPairResponse) => void): Request<IVS.Types.ImportPlaybackKeyPairResponse, AWSError>;
@@ -163,6 +171,14 @@ declare class IVS extends Service {
    * Gets summary information about stream keys for the specified channel.
    */
   listStreamKeys(callback?: (err: AWSError, data: IVS.Types.ListStreamKeysResponse) => void): Request<IVS.Types.ListStreamKeysResponse, AWSError>;
+  /**
+   * Gets a summary of current and previous streams for a specified channel in your account, in the AWS region where the API request is processed.
+   */
+  listStreamSessions(params: IVS.Types.ListStreamSessionsRequest, callback?: (err: AWSError, data: IVS.Types.ListStreamSessionsResponse) => void): Request<IVS.Types.ListStreamSessionsResponse, AWSError>;
+  /**
+   * Gets a summary of current and previous streams for a specified channel in your account, in the AWS region where the API request is processed.
+   */
+  listStreamSessions(callback?: (err: AWSError, data: IVS.Types.ListStreamSessionsResponse) => void): Request<IVS.Types.ListStreamSessionsResponse, AWSError>;
   /**
    * Gets summary information about live streams in your account, in the Amazon Web Services region where the API request is processed.
    */
@@ -221,6 +237,24 @@ declare class IVS extends Service {
   updateChannel(callback?: (err: AWSError, data: IVS.Types.UpdateChannelResponse) => void): Request<IVS.Types.UpdateChannelResponse, AWSError>;
 }
 declare namespace IVS {
+  export interface AudioConfiguration {
+    /**
+     * Number of audio channels.
+     */
+    channels?: Integer;
+    /**
+     * Codec used for the audio encoding.
+     */
+    codec?: String;
+    /**
+     * Number of audio samples recorded per second.
+     */
+    sampleRate?: Integer;
+    /**
+     * The expected ingest bitrate (bits per second). This is configured in the encoder.
+     */
+    targetBitrate?: Integer;
+  }
   export interface BatchError {
     /**
      * Channel ARN.
@@ -505,6 +539,22 @@ declare namespace IVS {
      */
     stream?: Stream;
   }
+  export interface GetStreamSessionRequest {
+    /**
+     * ARN of the channel resource
+     */
+    channelArn: ChannelArn;
+    /**
+     * Unique identifier for a live or previously live stream in the specified channel. If no streamId is provided, this returns the most recent stream session for the channel, if it exists.
+     */
+    streamId?: StreamId;
+  }
+  export interface GetStreamSessionResponse {
+    /**
+     * List of stream details.
+     */
+    streamSession?: StreamSession;
+  }
   export interface ImportPlaybackKeyPairRequest {
     /**
      * Playback-key-pair name. The value does not need to be unique.
@@ -525,7 +575,18 @@ declare namespace IVS {
      */
     keyPair?: PlaybackKeyPair;
   }
+  export interface IngestConfiguration {
+    /**
+     * Encoder settings for audio.
+     */
+    audio?: AudioConfiguration;
+    /**
+     * Encoder settings for video.
+     */
+    video?: VideoConfiguration;
+  }
   export type IngestEndpoint = string;
+  export type Integer = number;
   export type IsAuthorized = boolean;
   export interface ListChannelsRequest {
     /**
@@ -619,7 +680,35 @@ declare namespace IVS {
      */
     streamKeys: StreamKeyList;
   }
+  export interface ListStreamSessionsRequest {
+    /**
+     * Channel ARN used to filter the list.
+     */
+    channelArn: ChannelArn;
+    /**
+     * Maximum number of streams to return. Default: 50.
+     */
+    maxResults?: MaxStreamResults;
+    /**
+     * The first stream to retrieve. This is used for pagination; see the nextToken response field.
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface ListStreamSessionsResponse {
+    /**
+     * If there are more streams than maxResults, use nextToken in the request to get the next set.
+     */
+    nextToken?: PaginationToken;
+    /**
+     * 
+     */
+    streamSessions: StreamSessionList;
+  }
   export interface ListStreamsRequest {
+    /**
+     * Filters the stream list to match the specified criterion.
+     */
+    filterBy?: StreamFilters;
     /**
      * Maximum number of streams to return. Default: 50.
      */
@@ -791,11 +880,37 @@ declare namespace IVS {
      */
     state?: StreamState;
     /**
+     * Unique identifier for a live or previously live stream in the specified channel.
+     */
+    streamId?: StreamId;
+    /**
      * A count of concurrent views of the stream. Typically, a new view appears in viewerCount within 15 seconds of when video playback starts and a view is removed from viewerCount within 1 minute of when video playback ends. A value of -1 indicates that the request timed out; in this case, retry.
      */
     viewerCount?: StreamViewerCount;
   }
+  export interface StreamEvent {
+    /**
+     * UTC ISO-8601 formatted timestamp of when the event occurred.
+     */
+    eventTime?: Time;
+    /**
+     * Name that identifies the stream event within a type.
+     */
+    name?: String;
+    /**
+     * Logical group for certain events.
+     */
+    type?: String;
+  }
+  export type StreamEvents = StreamEvent[];
+  export interface StreamFilters {
+    /**
+     * The stream’s health.
+     */
+    health?: StreamHealth;
+  }
   export type StreamHealth = "HEALTHY"|"STARVING"|"UNKNOWN"|string;
+  export type StreamId = string;
   export interface StreamKey {
     /**
      * Stream-key ARN.
@@ -835,6 +950,55 @@ declare namespace IVS {
   export type StreamKeys = StreamKey[];
   export type StreamList = StreamSummary[];
   export type StreamMetadata = string;
+  export interface StreamSession {
+    /**
+     * The properties of the channel at the time of going live.
+     */
+    channel?: Channel;
+    /**
+     * UTC ISO-8601 formatted timestamp of when the channel went offline. For live streams, this is NULL.
+     */
+    endTime?: Time;
+    /**
+     * The properties of the incoming RTMP stream for the stream.
+     */
+    ingestConfiguration?: IngestConfiguration;
+    /**
+     * The properties of recording the live stream.
+     */
+    recordingConfiguration?: RecordingConfiguration;
+    /**
+     * UTC ISO-8601 formatted timestamp of when the channel went live.
+     */
+    startTime?: Time;
+    /**
+     * Unique identifier for a live or previously live stream in the specified channel.
+     */
+    streamId?: StreamId;
+    /**
+     * List of Amazon IVS events that the stream encountered. The list is sorted by most recent events and contains up to 500 events. For Amazon IVS events, see Using Amazon EventBridge with Amazon IVS.
+     */
+    truncatedEvents?: StreamEvents;
+  }
+  export type StreamSessionList = StreamSessionSummary[];
+  export interface StreamSessionSummary {
+    /**
+     * UTC ISO-8601 formatted timestamp of when the channel went offline. For live streams, this is NULL.
+     */
+    endTime?: Time;
+    /**
+     * If true, this stream encountered a quota breach or failure.
+     */
+    hasErrorEvent?: Boolean;
+    /**
+     * UTC ISO-8601 formatted timestamp of when the channel went live.
+     */
+    startTime?: Time;
+    /**
+     * Unique identifier for a live or previously live stream in the specified channel.
+     */
+    streamId?: StreamId;
+  }
   export type StreamStartTime = Date;
   export type StreamState = "LIVE"|"OFFLINE"|string;
   export interface StreamSummary {
@@ -855,11 +1019,16 @@ declare namespace IVS {
      */
     state?: StreamState;
     /**
+     * Unique identifier for a live or previously live stream in the specified channel.
+     */
+    streamId?: StreamId;
+    /**
      * A count of concurrent views of the stream. Typically, a new view appears in viewerCount within 15 seconds of when video playback starts and a view is removed from viewerCount within 1 minute of when video playback ends. A value of -1 indicates that the request timed out; in this case, retry.
      */
     viewerCount?: StreamViewerCount;
   }
   export type StreamViewerCount = number;
+  export type String = string;
   export type TagKey = string;
   export type TagKeyList = TagKey[];
   export interface TagResourceRequest {
@@ -876,6 +1045,7 @@ declare namespace IVS {
   }
   export type TagValue = string;
   export type Tags = {[key: string]: TagValue};
+  export type Time = Date;
   export interface UntagResourceRequest {
     /**
      * ARN of the resource for which tags are to be removed.
@@ -916,6 +1086,40 @@ declare namespace IVS {
   }
   export interface UpdateChannelResponse {
     channel?: Channel;
+  }
+  export interface VideoConfiguration {
+    /**
+     * Indicates the degree of required decoder performance for a profile. Normally this is set automatically by the encoder. For details, see the H.264 specification.
+     */
+    avcLevel?: String;
+    /**
+     * Indicates to the decoder the requirements for decoding the stream. For definitions of the valid values, see the H.264 specification.
+     */
+    avcProfile?: String;
+    /**
+     * Codec used for the video encoding.
+     */
+    codec?: String;
+    /**
+     * Software or hardware used to encode the video.
+     */
+    encoder?: String;
+    /**
+     * The expected ingest bitrate (bits per second). This is configured in the encoder.
+     */
+    targetBitrate?: Integer;
+    /**
+     * The expected ingest framerate. This is configured in the encoder.
+     */
+    targetFramerate?: Integer;
+    /**
+     * Video-resolution height in pixels.
+     */
+    videoHeight?: Integer;
+    /**
+     * Video-resolution width in pixels.
+     */
+    videoWidth?: Integer;
   }
   export type errorCode = string;
   export type errorMessage = string;

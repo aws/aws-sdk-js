@@ -205,13 +205,13 @@ declare class Kafka extends Service {
   listConfigurations(callback?: (err: AWSError, data: Kafka.Types.ListConfigurationsResponse) => void): Request<Kafka.Types.ListConfigurationsResponse, AWSError>;
   /**
    * 
-            Returns a list of Kafka versions.
+            Returns a list of Apache Kafka versions.
          
    */
   listKafkaVersions(params: Kafka.Types.ListKafkaVersionsRequest, callback?: (err: AWSError, data: Kafka.Types.ListKafkaVersionsResponse) => void): Request<Kafka.Types.ListKafkaVersionsResponse, AWSError>;
   /**
    * 
-            Returns a list of Kafka versions.
+            Returns a list of Apache Kafka versions.
          
    */
   listKafkaVersions(callback?: (err: AWSError, data: Kafka.Types.ListKafkaVersionsResponse) => void): Request<Kafka.Types.ListKafkaVersionsResponse, AWSError>;
@@ -333,6 +333,18 @@ declare class Kafka extends Service {
   updateConfiguration(callback?: (err: AWSError, data: Kafka.Types.UpdateConfigurationResponse) => void): Request<Kafka.Types.UpdateConfigurationResponse, AWSError>;
   /**
    * 
+            Updates the cluster's connectivity configuration.
+         
+   */
+  updateConnectivity(params: Kafka.Types.UpdateConnectivityRequest, callback?: (err: AWSError, data: Kafka.Types.UpdateConnectivityResponse) => void): Request<Kafka.Types.UpdateConnectivityResponse, AWSError>;
+  /**
+   * 
+            Updates the cluster's connectivity configuration.
+         
+   */
+  updateConnectivity(callback?: (err: AWSError, data: Kafka.Types.UpdateConnectivityResponse) => void): Request<Kafka.Types.UpdateConnectivityResponse, AWSError>;
+  /**
+   * 
             Updates the cluster with the configuration that is specified in the request body.
          
    */
@@ -445,7 +457,7 @@ declare namespace Kafka {
     ClientSubnets: __listOf__string;
     /**
      * 
-            The type of Amazon EC2 instances to use for Kafka brokers. The following instance types are allowed: kafka.m5.large, kafka.m5.xlarge, kafka.m5.2xlarge,
+            The type of Amazon EC2 instances to use for Apache Kafka brokers. The following instance types are allowed: kafka.m5.large, kafka.m5.xlarge, kafka.m5.2xlarge,
 kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
          
      */
@@ -462,6 +474,12 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
          
      */
     StorageInfo?: StorageInfo;
+    /**
+     * 
+            Information about the broker access configuration.
+         
+     */
+    ConnectivityInfo?: ConnectivityInfo;
   }
   export interface BrokerNodeInfo {
     /**
@@ -490,7 +508,7 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
     ClientVpcIpAddress?: __string;
     /**
      * 
-            Information about the version of software currently deployed on the Kafka brokers in the cluster.
+            Information about the version of software currently deployed on the Apache Kafka brokers in the cluster.
          
      */
     CurrentBrokerSoftwareInfo?: BrokerSoftwareInfo;
@@ -585,7 +603,7 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
     CreationTime?: __timestampIso8601;
     /**
      * 
-            Information about the version of software currently deployed on the Kafka brokers in the cluster.
+            Information about the version of software currently deployed on the Apache Kafka brokers in the cluster.
          
      */
     CurrentBrokerSoftwareInfo?: BrokerSoftwareInfo;
@@ -740,13 +758,13 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
   export interface CompatibleKafkaVersion {
     /**
      * 
-            A Kafka version.
+            An Apache Kafka version.
             
      */
     SourceVersion?: __string;
     /**
      * 
-            A list of Kafka versions.
+            A list of Apache Kafka versions.
             
      */
     TargetVersions?: __listOf__string;
@@ -830,6 +848,14 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
     Revision: __long;
   }
   export type ConfigurationState = "ACTIVE"|"DELETING"|"DELETE_FAILED"|string;
+  export interface ConnectivityInfo {
+    /**
+     * 
+            Public access control for brokers.
+         
+     */
+    PublicAccess?: PublicAccess;
+  }
   export interface CreateClusterRequest {
     /**
      * 
@@ -1285,6 +1311,24 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
          
      */
     BootstrapBrokerStringSaslIam?: __string;
+    /**
+     * 
+            A string containing one or more DNS names (or IP) and TLS port pairs.
+         
+     */
+    BootstrapBrokerStringPublicTls?: __string;
+    /**
+     * 
+            A string containing one or more DNS names (or IP) and Sasl Scram port pairs.
+         
+     */
+    BootstrapBrokerStringPublicSaslScram?: __string;
+    /**
+     * 
+            A string that contains one or more DNS names (or IP addresses) and SASL IAM port pairs.
+         
+     */
+    BootstrapBrokerStringPublicSaslIam?: __string;
   }
   export interface GetCompatibleKafkaVersionsRequest {
     /**
@@ -1582,7 +1626,7 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
     OpenMonitoring?: OpenMonitoring;
     /**
      * 
-            The Kafka version.
+            The Apache Kafka version.
             
      */
     KafkaVersion?: __string;
@@ -1610,11 +1654,17 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
          
      */
     EncryptionInfo?: EncryptionInfo;
+    /**
+     * 
+            Information about the broker access configuration.
+         
+     */
+    ConnectivityInfo?: ConnectivityInfo;
   }
   export interface NodeExporter {
     /**
      * 
-            Indicates whether you want to enable or disable the Node Exporter.
+            Indicates whether you want to turn on or turn off the Node Exporter.
          
      */
     EnabledInBroker: __boolean;
@@ -1622,7 +1672,7 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
   export interface NodeExporterInfo {
     /**
      * 
-            Indicates whether you want to enable or disable the Node Exporter.
+            Indicates whether you want to turn on or turn off the Node Exporter.
          
      */
     EnabledInBroker: __boolean;
@@ -1630,7 +1680,7 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
   export interface JmxExporter {
     /**
      * 
-            Indicates whether you want to enable or disable the JMX Exporter.
+            Indicates whether you want to turn on or turn off the JMX Exporter.
          
      */
     EnabledInBroker: __boolean;
@@ -1638,7 +1688,7 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
   export interface JmxExporterInfo {
     /**
      * 
-            Indicates whether you want to enable or disable the JMX Exporter.
+            Indicates whether you want to turn on or turn off the JMX Exporter.
          
      */
     EnabledInBroker: __boolean;
@@ -1662,13 +1712,13 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
   export interface Prometheus {
     /**
      * 
-            Indicates whether you want to enable or disable the JMX Exporter.
+            Indicates whether you want to turn on or turn off the JMX Exporter.
          
      */
     JmxExporter?: JmxExporter;
     /**
      * 
-            Indicates whether you want to enable or disable the Node Exporter.
+            Indicates whether you want to turn on or turn off the Node Exporter.
          
      */
     NodeExporter?: NodeExporter;
@@ -1676,16 +1726,24 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
   export interface PrometheusInfo {
     /**
      * 
-            Indicates whether you want to enable or disable the JMX Exporter.
+            Indicates whether you want to turn on or turn off the JMX Exporter.
          
      */
     JmxExporter?: JmxExporterInfo;
     /**
      * 
-            Indicates whether you want to enable or disable the Node Exporter.
+            Indicates whether you want to turn on or turn off the Node Exporter.
          
      */
     NodeExporter?: NodeExporterInfo;
+  }
+  export interface PublicAccess {
+    /**
+     * 
+            The value DISABLED indicates that public access is turned off. SERVICE_PROVIDED_EIPS indicates that public access is turned on.
+         
+     */
+    Type?: __string;
   }
   export interface RebootBrokerRequest {
     /**
@@ -1824,7 +1882,7 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
     CertificateAuthorityArnList?: __listOf__string;
     /**
      * 
-            Specifies whether you want to enable or disable TLS authentication.
+            Specifies whether you want to turn on or turn off TLS authentication.
          
      */
     Enabled?: __boolean;
@@ -1832,7 +1890,7 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
   export interface Unauthenticated {
     /**
      * 
-            Specifies whether you want to enable or disable unauthenticated traffic to your cluster.
+            Specifies whether you want to turn on or turn off unauthenticated traffic to your cluster.
          
      */
     Enabled?: __boolean;
@@ -2181,6 +2239,40 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
          
      */
     LatestRevision?: ConfigurationRevision;
+  }
+  export interface UpdateConnectivityRequest {
+    /**
+     * 
+            The Amazon Resource Name (ARN) of the configuration.
+         
+     */
+    ClusterArn: __string;
+    /**
+     * 
+            Information about the broker access configuration.
+         
+     */
+    ConnectivityInfo: ConnectivityInfo;
+    /**
+     * 
+            The version of the MSK cluster to update. Cluster versions aren't simple numbers. You can describe an MSK cluster to find its version. When this update operation is successful, it generates a new cluster version.
+         
+     */
+    CurrentVersion: __string;
+  }
+  export interface UpdateConnectivityResponse {
+    /**
+     * 
+            The Amazon Resource Name (ARN) of the cluster.
+         
+     */
+    ClusterArn?: __string;
+    /**
+     * 
+            The Amazon Resource Name (ARN) of the cluster operation.
+         
+     */
+    ClusterOperationArn?: __string;
   }
   export interface ZookeeperNodeInfo {
     /**

@@ -196,11 +196,11 @@ declare class LexModelsV2 extends Service {
    */
   deleteSlotType(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes stored utterances. Amazon Lex stores the utterances that users send to your bot. Utterances are stored for 15 days for use with the operation, and then stored indefinitely for use in improving the ability of your bot to respond to user input.. Use the DeleteUtterances operation to manually delete utterances for a specific session. When you use the DeleteUtterances operation, utterances stored for improving your bot's ability to respond to user input are deleted immediately. Utterances stored for use with the ListAggregatedUtterances operation are deleted after 15 days.
+   * Deletes stored utterances. Amazon Lex stores the utterances that users send to your bot. Utterances are stored for 15 days for use with the ListAggregatedUtterances operation, and then stored indefinitely for use in improving the ability of your bot to respond to user input.. Use the DeleteUtterances operation to manually delete utterances for a specific session. When you use the DeleteUtterances operation, utterances stored for improving your bot's ability to respond to user input are deleted immediately. Utterances stored for use with the ListAggregatedUtterances operation are deleted after 15 days.
    */
   deleteUtterances(params: LexModelsV2.Types.DeleteUtterancesRequest, callback?: (err: AWSError, data: LexModelsV2.Types.DeleteUtterancesResponse) => void): Request<LexModelsV2.Types.DeleteUtterancesResponse, AWSError>;
   /**
-   * Deletes stored utterances. Amazon Lex stores the utterances that users send to your bot. Utterances are stored for 15 days for use with the operation, and then stored indefinitely for use in improving the ability of your bot to respond to user input.. Use the DeleteUtterances operation to manually delete utterances for a specific session. When you use the DeleteUtterances operation, utterances stored for improving your bot's ability to respond to user input are deleted immediately. Utterances stored for use with the ListAggregatedUtterances operation are deleted after 15 days.
+   * Deletes stored utterances. Amazon Lex stores the utterances that users send to your bot. Utterances are stored for 15 days for use with the ListAggregatedUtterances operation, and then stored indefinitely for use in improving the ability of your bot to respond to user input.. Use the DeleteUtterances operation to manually delete utterances for a specific session. When you use the DeleteUtterances operation, utterances stored for improving your bot's ability to respond to user input are deleted immediately. Utterances stored for use with the ListAggregatedUtterances operation are deleted after 15 days.
    */
   deleteUtterances(callback?: (err: AWSError, data: LexModelsV2.Types.DeleteUtterancesResponse) => void): Request<LexModelsV2.Types.DeleteUtterancesResponse, AWSError>;
   /**
@@ -436,11 +436,11 @@ declare class LexModelsV2 extends Service {
    */
   updateBotLocale(callback?: (err: AWSError, data: LexModelsV2.Types.UpdateBotLocaleResponse) => void): Request<LexModelsV2.Types.UpdateBotLocaleResponse, AWSError>;
   /**
-   * Updates the password used to protect an export zip archive. The password is not required. If you don't supply a password, Amazon Lex generates a zip file that is not protected by a password. This is the archive that is available at the pre-signed S3 URL provided by the operation.
+   * Updates the password used to protect an export zip archive. The password is not required. If you don't supply a password, Amazon Lex generates a zip file that is not protected by a password. This is the archive that is available at the pre-signed S3 URL provided by the DescribeExport operation.
    */
   updateExport(params: LexModelsV2.Types.UpdateExportRequest, callback?: (err: AWSError, data: LexModelsV2.Types.UpdateExportResponse) => void): Request<LexModelsV2.Types.UpdateExportResponse, AWSError>;
   /**
-   * Updates the password used to protect an export zip archive. The password is not required. If you don't supply a password, Amazon Lex generates a zip file that is not protected by a password. This is the archive that is available at the pre-signed S3 URL provided by the operation.
+   * Updates the password used to protect an export zip archive. The password is not required. If you don't supply a password, Amazon Lex generates a zip file that is not protected by a password. This is the archive that is available at the pre-signed S3 URL provided by the DescribeExport operation.
    */
   updateExport(callback?: (err: AWSError, data: LexModelsV2.Types.UpdateExportResponse) => void): Request<LexModelsV2.Types.UpdateExportResponse, AWSError>;
   /**
@@ -844,7 +844,7 @@ declare namespace LexModelsV2 {
   export type BoxedBoolean = boolean;
   export interface BuildBotLocaleRequest {
     /**
-     * The identifier of the bot to build. The identifier is returned in the response from the operation.
+     * The identifier of the bot to build. The identifier is returned in the response from the CreateBot operation.
      */
     botId: Id;
     /**
@@ -981,7 +981,7 @@ declare namespace LexModelsV2 {
      */
     description?: Description;
     /**
-     * The version of the bot that this alias points to. You can use the operation to change the bot version associated with the alias.
+     * The version of the bot that this alias points to. You can use the UpdateBotAlias operation to change the bot version associated with the alias.
      */
     botVersion?: NumericalBotVersion;
     /**
@@ -1249,7 +1249,7 @@ declare namespace LexModelsV2 {
      */
     fileFormat?: ImportExportFileFormat;
     /**
-     * The status of the export. When the status is Completed, you can use the operation to get the pre-signed S3 URL link to your exported bot or bot locale.
+     * The status of the export. When the status is Completed, you can use the DescribeExport operation to get the pre-signed S3 URL link to your exported bot or bot locale.
      */
     exportStatus?: ExportStatus;
     /**
@@ -1613,7 +1613,7 @@ declare namespace LexModelsV2 {
   }
   export interface CreateUploadUrlResponse {
     /**
-     * An identifier for a unique import job. Use it when you call the operation.
+     * An identifier for a unique import job. Use it when you call the StartImport operation.
      */
     importId?: Id;
     /**
@@ -1754,7 +1754,7 @@ declare namespace LexModelsV2 {
      */
     exportId?: Id;
     /**
-     * The current status of the deletion. When the deletion is complete, the export will no longer be returned by the operation and calls to the with the export identifier will fail.
+     * The current status of the deletion. When the deletion is complete, the export will no longer be returned by the ListExports operation and calls to the  DescribeExport operation with the export identifier will fail.
      */
     exportStatus?: ExportStatus;
   }
@@ -1770,7 +1770,7 @@ declare namespace LexModelsV2 {
      */
     importId?: Id;
     /**
-     * The current status of the deletion. When the deletion is complete, the import will no longer be returned by the operation and calls to the with the import identifier will fail.
+     * The current status of the deletion. When the deletion is complete, the import will no longer be returned by the ListImports operation and calls to the DescribeImport operation with the import identifier will fail.
      */
     importStatus?: ImportStatus;
   }
@@ -1890,7 +1890,7 @@ declare namespace LexModelsV2 {
      */
     localeId?: LocaleId;
     /**
-     * The unique identifier of the session with the user. The ID is returned in the response from the and operations.
+     * The unique identifier of the session with the user. The ID is returned in the response from the RecognizeText and RecognizeUtterance operations.
      */
     sessionId?: SessionId;
   }
@@ -3722,7 +3722,7 @@ declare namespace LexModelsV2 {
   export type SortOrder = "Ascending"|"Descending"|string;
   export interface StartImportRequest {
     /**
-     * The unique identifier for the import. It is included in the response from the operation.
+     * The unique identifier for the import. It is included in the response from the CreateUploadUrl operation.
      */
     importId: Id;
     /**
@@ -4428,12 +4428,17 @@ declare namespace LexModelsV2 {
     relativeAggregationDuration: RelativeAggregationDuration;
   }
   export type Value = string;
+  export type VoiceEngine = "standard"|"neural"|string;
   export type VoiceId = string;
   export interface VoiceSettings {
     /**
      * The identifier of the Amazon Polly voice to use.
      */
     voiceId: VoiceId;
+    /**
+     * Indicates the type of Amazon Polly voice that Amazon Lex should use for voice interaction with the user. For more information, see Voices in Amazon Polly.
+     */
+    engine?: VoiceEngine;
   }
   export interface WaitAndContinueSpecification {
     /**

@@ -164,19 +164,19 @@ declare class AuditManager extends Service {
    */
   getAccountStatus(callback?: (err: AWSError, data: AuditManager.Types.GetAccountStatusResponse) => void): Request<AuditManager.Types.GetAccountStatusResponse, AWSError>;
   /**
-   *  Returns an assessment from Audit Manager. 
+   * Returns an assessment from Audit Manager. 
    */
   getAssessment(params: AuditManager.Types.GetAssessmentRequest, callback?: (err: AWSError, data: AuditManager.Types.GetAssessmentResponse) => void): Request<AuditManager.Types.GetAssessmentResponse, AWSError>;
   /**
-   *  Returns an assessment from Audit Manager. 
+   * Returns an assessment from Audit Manager. 
    */
   getAssessment(callback?: (err: AWSError, data: AuditManager.Types.GetAssessmentResponse) => void): Request<AuditManager.Types.GetAssessmentResponse, AWSError>;
   /**
-   *  Returns a framework from Audit Manager. 
+   * Returns a framework from Audit Manager. 
    */
   getAssessmentFramework(params: AuditManager.Types.GetAssessmentFrameworkRequest, callback?: (err: AWSError, data: AuditManager.Types.GetAssessmentFrameworkResponse) => void): Request<AuditManager.Types.GetAssessmentFrameworkResponse, AWSError>;
   /**
-   *  Returns a framework from Audit Manager. 
+   * Returns a framework from Audit Manager. 
    */
   getAssessmentFramework(callback?: (err: AWSError, data: AuditManager.Types.GetAssessmentFrameworkResponse) => void): Request<AuditManager.Types.GetAssessmentFrameworkResponse, AWSError>;
   /**
@@ -252,6 +252,22 @@ declare class AuditManager extends Service {
    */
   getEvidenceFoldersByAssessmentControl(callback?: (err: AWSError, data: AuditManager.Types.GetEvidenceFoldersByAssessmentControlResponse) => void): Request<AuditManager.Types.GetEvidenceFoldersByAssessmentControlResponse, AWSError>;
   /**
+   * Gets the latest analytics data for all your current active assessments. 
+   */
+  getInsights(params: AuditManager.Types.GetInsightsRequest, callback?: (err: AWSError, data: AuditManager.Types.GetInsightsResponse) => void): Request<AuditManager.Types.GetInsightsResponse, AWSError>;
+  /**
+   * Gets the latest analytics data for all your current active assessments. 
+   */
+  getInsights(callback?: (err: AWSError, data: AuditManager.Types.GetInsightsResponse) => void): Request<AuditManager.Types.GetInsightsResponse, AWSError>;
+  /**
+   * Gets the latest analytics data for a specific active assessment. 
+   */
+  getInsightsByAssessment(params: AuditManager.Types.GetInsightsByAssessmentRequest, callback?: (err: AWSError, data: AuditManager.Types.GetInsightsByAssessmentResponse) => void): Request<AuditManager.Types.GetInsightsByAssessmentResponse, AWSError>;
+  /**
+   * Gets the latest analytics data for a specific active assessment. 
+   */
+  getInsightsByAssessment(callback?: (err: AWSError, data: AuditManager.Types.GetInsightsByAssessmentResponse) => void): Request<AuditManager.Types.GetInsightsByAssessmentResponse, AWSError>;
+  /**
    *  Returns the name of the delegated Amazon Web Services administrator account for the organization. 
    */
   getOrganizationAdminAccount(params: AuditManager.Types.GetOrganizationAdminAccountRequest, callback?: (err: AWSError, data: AuditManager.Types.GetOrganizationAdminAccountResponse) => void): Request<AuditManager.Types.GetOrganizationAdminAccountResponse, AWSError>;
@@ -275,6 +291,14 @@ declare class AuditManager extends Service {
    *  Returns the settings for the specified Amazon Web Services account. 
    */
   getSettings(callback?: (err: AWSError, data: AuditManager.Types.GetSettingsResponse) => void): Request<AuditManager.Types.GetSettingsResponse, AWSError>;
+  /**
+   * Lists the latest analytics data for controls within a specific control domain and a specific active assessment.  Control insights are listed only if the control belongs to the control domain and assessment that was specified. Moreover, the control must have collected evidence on the lastUpdated date of controlInsightsByAssessment. If neither of these conditions are met, no data is listed for that control.  
+   */
+  listAssessmentControlInsightsByControlDomain(params: AuditManager.Types.ListAssessmentControlInsightsByControlDomainRequest, callback?: (err: AWSError, data: AuditManager.Types.ListAssessmentControlInsightsByControlDomainResponse) => void): Request<AuditManager.Types.ListAssessmentControlInsightsByControlDomainResponse, AWSError>;
+  /**
+   * Lists the latest analytics data for controls within a specific control domain and a specific active assessment.  Control insights are listed only if the control belongs to the control domain and assessment that was specified. Moreover, the control must have collected evidence on the lastUpdated date of controlInsightsByAssessment. If neither of these conditions are met, no data is listed for that control.  
+   */
+  listAssessmentControlInsightsByControlDomain(callback?: (err: AWSError, data: AuditManager.Types.ListAssessmentControlInsightsByControlDomainResponse) => void): Request<AuditManager.Types.ListAssessmentControlInsightsByControlDomainResponse, AWSError>;
   /**
    *  Returns a list of sent or received share requests for custom frameworks in Audit Manager. 
    */
@@ -307,6 +331,30 @@ declare class AuditManager extends Service {
    *  Returns a list of current and past assessments from Audit Manager. 
    */
   listAssessments(callback?: (err: AWSError, data: AuditManager.Types.ListAssessmentsResponse) => void): Request<AuditManager.Types.ListAssessmentsResponse, AWSError>;
+  /**
+   * Lists the latest analytics data for control domains across all of your active assessments.   A control domain is listed only if at least one of the controls within that domain collected evidence on the lastUpdated date of controlDomainInsights. If this condition isn’t met, no data is listed for that control domain. 
+   */
+  listControlDomainInsights(params: AuditManager.Types.ListControlDomainInsightsRequest, callback?: (err: AWSError, data: AuditManager.Types.ListControlDomainInsightsResponse) => void): Request<AuditManager.Types.ListControlDomainInsightsResponse, AWSError>;
+  /**
+   * Lists the latest analytics data for control domains across all of your active assessments.   A control domain is listed only if at least one of the controls within that domain collected evidence on the lastUpdated date of controlDomainInsights. If this condition isn’t met, no data is listed for that control domain. 
+   */
+  listControlDomainInsights(callback?: (err: AWSError, data: AuditManager.Types.ListControlDomainInsightsResponse) => void): Request<AuditManager.Types.ListControlDomainInsightsResponse, AWSError>;
+  /**
+   * Lists analytics data for control domains within a specified active assessment.  A control domain is listed only if at least one of the controls within that domain collected evidence on the lastUpdated date of controlDomainInsights. If this condition isn’t met, no data is listed for that domain. 
+   */
+  listControlDomainInsightsByAssessment(params: AuditManager.Types.ListControlDomainInsightsByAssessmentRequest, callback?: (err: AWSError, data: AuditManager.Types.ListControlDomainInsightsByAssessmentResponse) => void): Request<AuditManager.Types.ListControlDomainInsightsByAssessmentResponse, AWSError>;
+  /**
+   * Lists analytics data for control domains within a specified active assessment.  A control domain is listed only if at least one of the controls within that domain collected evidence on the lastUpdated date of controlDomainInsights. If this condition isn’t met, no data is listed for that domain. 
+   */
+  listControlDomainInsightsByAssessment(callback?: (err: AWSError, data: AuditManager.Types.ListControlDomainInsightsByAssessmentResponse) => void): Request<AuditManager.Types.ListControlDomainInsightsByAssessmentResponse, AWSError>;
+  /**
+   * Lists the latest analytics data for controls within a specific control domain across all active assessments.  Control insights are listed only if the control belongs to the control domain that was specified and the control collected evidence on the lastUpdated date of controlInsightsMetadata. If neither of these conditions are met, no data is listed for that control.  
+   */
+  listControlInsightsByControlDomain(params: AuditManager.Types.ListControlInsightsByControlDomainRequest, callback?: (err: AWSError, data: AuditManager.Types.ListControlInsightsByControlDomainResponse) => void): Request<AuditManager.Types.ListControlInsightsByControlDomainResponse, AWSError>;
+  /**
+   * Lists the latest analytics data for controls within a specific control domain across all active assessments.  Control insights are listed only if the control belongs to the control domain that was specified and the control collected evidence on the lastUpdated date of controlInsightsMetadata. If neither of these conditions are met, no data is listed for that control.  
+   */
+  listControlInsightsByControlDomain(callback?: (err: AWSError, data: AuditManager.Types.ListControlInsightsByControlDomainResponse) => void): Request<AuditManager.Types.ListControlInsightsByControlDomainResponse, AWSError>;
   /**
    *  Returns a list of controls from Audit Manager. 
    */
@@ -1234,6 +1282,75 @@ declare namespace AuditManager {
   export type ControlCommentBody = string;
   export type ControlComments = ControlComment[];
   export type ControlDescription = string;
+  export interface ControlDomainInsights {
+    /**
+     * The name of the control domain. 
+     */
+    name?: NonEmptyString;
+    /**
+     * The unique identifier for the control domain. 
+     */
+    id?: UUID;
+    /**
+     * The number of controls in the control domain that collected non-compliant evidence on the lastUpdated date. 
+     */
+    controlsCountByNoncompliantEvidence?: NullableInteger;
+    /**
+     * The total number of controls in the control domain. 
+     */
+    totalControlsCount?: NullableInteger;
+    /**
+     * A breakdown of the compliance check status for the evidence that’s associated with the control domain. 
+     */
+    evidenceInsights?: EvidenceInsights;
+    /**
+     * The time when the control domain insights were last updated. 
+     */
+    lastUpdated?: Timestamp;
+  }
+  export type ControlDomainInsightsList = ControlDomainInsights[];
+  export type ControlInsightsMetadata = ControlInsightsMetadataItem[];
+  export type ControlInsightsMetadataByAssessment = ControlInsightsMetadataByAssessmentItem[];
+  export interface ControlInsightsMetadataByAssessmentItem {
+    /**
+     * The name of the assessment control. 
+     */
+    name?: NonEmptyString;
+    /**
+     * The unique identifier for the assessment control. 
+     */
+    id?: UUID;
+    /**
+     * A breakdown of the compliance check status for the evidence that’s associated with the assessment control. 
+     */
+    evidenceInsights?: EvidenceInsights;
+    /**
+     * The name of the control set that the assessment control belongs to. 
+     */
+    controlSetName?: NonEmptyString;
+    /**
+     * The time when the assessment control insights were last updated. 
+     */
+    lastUpdated?: Timestamp;
+  }
+  export interface ControlInsightsMetadataItem {
+    /**
+     * The name of the control. 
+     */
+    name?: NonEmptyString;
+    /**
+     * The unique identifier for the control. 
+     */
+    id?: UUID;
+    /**
+     * A breakdown of the compliance check status for the evidence that’s associated with the control. 
+     */
+    evidenceInsights?: EvidenceInsights;
+    /**
+     * The time when the control insights were last updated. 
+     */
+    lastUpdated?: Timestamp;
+  }
   export interface ControlMappingSource {
     /**
      *  The unique identifier for the source. 
@@ -1582,7 +1699,7 @@ declare namespace AuditManager {
   export type Delegations = Delegation[];
   export interface DeleteAssessmentFrameworkRequest {
     /**
-     *  The identifier for the framework. 
+     *  The identifier for the custom framework. 
      */
     frameworkId: UUID;
   }
@@ -1602,7 +1719,7 @@ declare namespace AuditManager {
   }
   export interface DeleteAssessmentReportRequest {
     /**
-     *  The identifier for the assessment. 
+     *  The unique identifier for the assessment. 
      */
     assessmentId: UUID;
     /**
@@ -1622,7 +1739,7 @@ declare namespace AuditManager {
   }
   export interface DeleteControlRequest {
     /**
-     *  The identifier for the control. 
+     *  The unique identifier for the control. 
      */
     controlId: UUID;
   }
@@ -1646,11 +1763,11 @@ declare namespace AuditManager {
   }
   export interface DisassociateAssessmentReportEvidenceFolderRequest {
     /**
-     *  The identifier for the assessment. 
+     *  The unique identifier for the assessment. 
      */
     assessmentId: UUID;
     /**
-     *  The identifier for the folder in which evidence is stored. 
+     *  The unique identifier for the folder that the evidence is stored in. 
      */
     evidenceFolderId: UUID;
   }
@@ -1726,6 +1843,20 @@ declare namespace AuditManager {
   export type EvidenceAttributeValue = string;
   export type EvidenceAttributes = {[key: string]: EvidenceAttributeValue};
   export type EvidenceIds = UUID[];
+  export interface EvidenceInsights {
+    /**
+     * The number of compliance check evidence that Audit Manager classified as non-compliant. This includes evidence that was collected from Security Hub with a Fail ruling, or collected from Config with a Non-compliant ruling. 
+     */
+    noncompliantEvidenceCount?: NullableInteger;
+    /**
+     * The number of compliance check evidence that Audit Manager classified as compliant. This includes evidence that was collected from Security Hub with a Pass ruling, or collected from Config with a Compliant ruling. 
+     */
+    compliantEvidenceCount?: NullableInteger;
+    /**
+     * The number of evidence that a compliance check ruling isn't available for. Evidence is inconclusive when the associated control uses Security Hub or Config as a data source but you didn't enable those services. This is also the case when a control uses a data source that doesn’t support compliance checks (for example, manual evidence, API calls, or CloudTrail).   If evidence has a compliance check status of not applicable in the console, it's classified as inconclusive in EvidenceInsights data. 
+     */
+    inconclusiveEvidenceCount?: NullableInteger;
+  }
   export type EvidenceList = Evidence[];
   export type EvidenceSources = NonEmptyString[];
   export type Filename = string;
@@ -1832,11 +1963,11 @@ declare namespace AuditManager {
   }
   export interface GetAssessmentReportUrlRequest {
     /**
-     *  The identifier for the assessment report. 
+     *  The unique identifier for the assessment report. 
      */
     assessmentReportId: UUID;
     /**
-     *  The identifier for the assessment. 
+     *  The unique identifier for the assessment. 
      */
     assessmentId: UUID;
   }
@@ -1845,7 +1976,7 @@ declare namespace AuditManager {
   }
   export interface GetAssessmentRequest {
     /**
-     *  The identifier for the assessment. 
+     * The unique identifier for the assessment. 
      */
     assessmentId: UUID;
   }
@@ -1855,15 +1986,15 @@ declare namespace AuditManager {
   }
   export interface GetChangeLogsRequest {
     /**
-     *  The identifier for the assessment. 
+     * The unique identifier for the assessment. 
      */
     assessmentId: UUID;
     /**
-     *  The identifier for the control set. 
+     *  The unique identifier for the control set. 
      */
     controlSetId?: ControlSetId;
     /**
-     *  The identifier for the control. 
+     *  The unique identifier for the control. 
      */
     controlId?: UUID;
     /**
@@ -1871,17 +2002,17 @@ declare namespace AuditManager {
      */
     nextToken?: Token;
     /**
-     *  Represents the maximum number of results on a page or for an API request call. 
+     * Represents the maximum number of results on a page or for an API request call. 
      */
     maxResults?: MaxResults;
   }
   export interface GetChangeLogsResponse {
     /**
-     *  The list of user activity for the control. 
+     * The list of user activity for the control. 
      */
     changeLogs?: ChangeLogs;
     /**
-     *  The pagination token that's used to fetch the next set of results. 
+     * The pagination token that's used to fetch the next set of results. 
      */
     nextToken?: Token;
   }
@@ -1951,15 +2082,15 @@ declare namespace AuditManager {
   }
   export interface GetEvidenceFolderRequest {
     /**
-     *  The identifier for the assessment. 
+     *  The unique identifier for the assessment. 
      */
     assessmentId: UUID;
     /**
-     *  The identifier for the control set. 
+     *  The unique identifier for the control set. 
      */
     controlSetId: ControlSetId;
     /**
-     *  The identifier for the folder that the evidence is stored in. 
+     *  The unique identifier for the folder that the evidence is stored in. 
      */
     evidenceFolderId: UUID;
   }
@@ -2003,7 +2134,7 @@ declare namespace AuditManager {
   }
   export interface GetEvidenceFoldersByAssessmentRequest {
     /**
-     *  The identifier for the assessment. 
+     *  The unique identifier for the assessment. 
      */
     assessmentId: UUID;
     /**
@@ -2027,19 +2158,19 @@ declare namespace AuditManager {
   }
   export interface GetEvidenceRequest {
     /**
-     *  The identifier for the assessment. 
+     *  The unique identifier for the assessment. 
      */
     assessmentId: UUID;
     /**
-     *  The identifier for the control set. 
+     *  The unique identifier for the control set. 
      */
     controlSetId: ControlSetId;
     /**
-     *  The identifier for the folder that the evidence is stored in. 
+     *  The unique identifier for the folder that the evidence is stored in. 
      */
     evidenceFolderId: UUID;
     /**
-     *  The identifier for the evidence. 
+     *  The unique identifier for the evidence. 
      */
     evidenceId: UUID;
   }
@@ -2048,6 +2179,26 @@ declare namespace AuditManager {
      *  The evidence that the GetEvidenceResponse API returned. 
      */
     evidence?: Evidence;
+  }
+  export interface GetInsightsByAssessmentRequest {
+    /**
+     * The unique identifier for the assessment. 
+     */
+    assessmentId: UUID;
+  }
+  export interface GetInsightsByAssessmentResponse {
+    /**
+     *  The assessment analytics data that the GetInsightsByAssessment API returned. 
+     */
+    insights?: InsightsByAssessment;
+  }
+  export interface GetInsightsRequest {
+  }
+  export interface GetInsightsResponse {
+    /**
+     * The analytics data that the GetInsights API returned. 
+     */
+    insights?: Insights;
   }
   export interface GetOrganizationAdminAccountRequest {
   }
@@ -2083,12 +2234,96 @@ declare namespace AuditManager {
   }
   export type HyperlinkName = string;
   export type IamArn = string;
+  export interface Insights {
+    /**
+     * The number of active assessments in Audit Manager. 
+     */
+    activeAssessmentsCount?: NullableInteger;
+    /**
+     * The number of compliance check evidence that Audit Manager classified as non-compliant on the lastUpdated date. This includes evidence that was collected from Security Hub with a Fail ruling, or collected from Config with a Non-compliant ruling. 
+     */
+    noncompliantEvidenceCount?: NullableInteger;
+    /**
+     * The number of compliance check evidence that Audit Manager classified as compliant on the lastUpdated date. This includes evidence that was collected from Security Hub with a Pass ruling, or collected from Config with a Compliant ruling. 
+     */
+    compliantEvidenceCount?: NullableInteger;
+    /**
+     * The number of evidence without a compliance check ruling. Evidence is inconclusive when the associated control uses Security Hub or Config as a data source but you didn't enable those services. This is also the case when a control uses a data source that doesn’t support compliance checks (for example: manual evidence, API calls, or CloudTrail).   If evidence has a compliance check status of not applicable, it's classed as inconclusive in Insights data. 
+     */
+    inconclusiveEvidenceCount?: NullableInteger;
+    /**
+     * The number of assessment controls that collected non-compliant evidence on the lastUpdated date. 
+     */
+    assessmentControlsCountByNoncompliantEvidence?: NullableInteger;
+    /**
+     * The total number of controls across all active assessments. 
+     */
+    totalAssessmentControlsCount?: NullableInteger;
+    /**
+     * The time when the cross-assessment insights were last updated. 
+     */
+    lastUpdated?: Timestamp;
+  }
+  export interface InsightsByAssessment {
+    /**
+     * The number of compliance check evidence that Audit Manager classified as non-compliant. This includes evidence that was collected from Security Hub with a Fail ruling, or collected from Config with a Non-compliant ruling. 
+     */
+    noncompliantEvidenceCount?: NullableInteger;
+    /**
+     * The number of compliance check evidence that Audit Manager classified as compliant. This includes evidence that was collected from Security Hub with a Pass ruling, or collected from Config with a Compliant ruling. 
+     */
+    compliantEvidenceCount?: NullableInteger;
+    /**
+     * The amount of evidence without a compliance check ruling. Evidence is inconclusive if the associated control uses Security Hub or Config as a data source and you didn't enable those services. This is also the case if a control uses a data source that doesn’t support compliance checks (for example, manual evidence, API calls, or CloudTrail).   If evidence has a compliance check status of not applicable, it's classified as inconclusive in InsightsByAssessment data. 
+     */
+    inconclusiveEvidenceCount?: NullableInteger;
+    /**
+     * The number of assessment controls that collected non-compliant evidence on the lastUpdated date. 
+     */
+    assessmentControlsCountByNoncompliantEvidence?: NullableInteger;
+    /**
+     * The total number of controls in the assessment. 
+     */
+    totalAssessmentControlsCount?: NullableInteger;
+    /**
+     * The time when the assessment insights were last updated.
+     */
+    lastUpdated?: Timestamp;
+  }
   export type Integer = number;
   export type KeywordInputType = "SELECT_FROM_LIST"|string;
   export type KeywordValue = string;
   export type Keywords = KeywordValue[];
   export type KmsKey = string;
   export type LastUpdatedBy = string;
+  export interface ListAssessmentControlInsightsByControlDomainRequest {
+    /**
+     * The unique identifier for the control domain. 
+     */
+    controlDomainId: UUID;
+    /**
+     * The unique identifier for the active assessment. 
+     */
+    assessmentId: UUID;
+    /**
+     * The pagination token that's used to fetch the next set of results. 
+     */
+    nextToken?: Token;
+    /**
+     * Represents the maximum number of results on a page or for an API request call. 
+     */
+    maxResults?: MaxResults;
+  }
+  export interface ListAssessmentControlInsightsByControlDomainResponse {
+    /**
+     * The assessment control analytics data that the ListAssessmentControlInsightsByControlDomain API returned. 
+     */
+    controlInsightsByAssessment?: ControlInsightsMetadataByAssessment;
+    /**
+     * The pagination token that's used to fetch the next set of results. 
+     */
+    nextToken?: Token;
+  }
   export interface ListAssessmentFrameworkShareRequestsRequest {
     /**
      *  Specifies whether the share request is a sent request or a received request.
@@ -2160,6 +2395,10 @@ declare namespace AuditManager {
   }
   export interface ListAssessmentsRequest {
     /**
+     *  The current status of the assessment.
+     */
+    status?: AssessmentStatus;
+    /**
      *  The pagination token that's used to fetch the next set of results. 
      */
     nextToken?: Token;
@@ -2175,6 +2414,74 @@ declare namespace AuditManager {
     assessmentMetadata?: ListAssessmentMetadata;
     /**
      *  The pagination token that's used to fetch the next set of results. 
+     */
+    nextToken?: Token;
+  }
+  export interface ListControlDomainInsightsByAssessmentRequest {
+    /**
+     * The unique identifier for the active assessment. 
+     */
+    assessmentId: UUID;
+    /**
+     * The pagination token that's used to fetch the next set of results. 
+     */
+    nextToken?: Token;
+    /**
+     * Represents the maximum number of results on a page or for an API request call. 
+     */
+    maxResults?: MaxResults;
+  }
+  export interface ListControlDomainInsightsByAssessmentResponse {
+    /**
+     * The control domain analytics data that the ListControlDomainInsightsByAssessment API returned. 
+     */
+    controlDomainInsights?: ControlDomainInsightsList;
+    /**
+     * The pagination token that's used to fetch the next set of results. 
+     */
+    nextToken?: Token;
+  }
+  export interface ListControlDomainInsightsRequest {
+    /**
+     * The pagination token that's used to fetch the next set of results. 
+     */
+    nextToken?: Token;
+    /**
+     * Represents the maximum number of results on a page or for an API request call. 
+     */
+    maxResults?: MaxResults;
+  }
+  export interface ListControlDomainInsightsResponse {
+    /**
+     * The control domain analytics data that the ListControlDomainInsights API returned. 
+     */
+    controlDomainInsights?: ControlDomainInsightsList;
+    /**
+     * The pagination token that's used to fetch the next set of results. 
+     */
+    nextToken?: Token;
+  }
+  export interface ListControlInsightsByControlDomainRequest {
+    /**
+     * The unique identifier for the control domain. 
+     */
+    controlDomainId: UUID;
+    /**
+     * The pagination token that's used to fetch the next set of results. 
+     */
+    nextToken?: Token;
+    /**
+     * Represents the maximum number of results on a page or for an API request call. 
+     */
+    maxResults?: MaxResults;
+  }
+  export interface ListControlInsightsByControlDomainResponse {
+    /**
+     * The control analytics data that the ListControlInsightsByControlDomain API returned. 
+     */
+    controlInsightsMetadata?: ControlInsightsMetadata;
+    /**
+     * The pagination token that's used to fetch the next set of results. 
      */
     nextToken?: Token;
   }
@@ -2505,15 +2812,15 @@ declare namespace AuditManager {
   }
   export interface UpdateAssessmentControlRequest {
     /**
-     *  The identifier for the assessment. 
+     *  The unique identifier for the assessment. 
      */
     assessmentId: UUID;
     /**
-     *  The identifier for the control set. 
+     *  The unique identifier for the control set. 
      */
     controlSetId: ControlSetId;
     /**
-     *  The identifier for the control. 
+     *  The unique identifier for the control. 
      */
     controlId: UUID;
     /**
@@ -2533,11 +2840,11 @@ declare namespace AuditManager {
   }
   export interface UpdateAssessmentControlSetStatusRequest {
     /**
-     *  The identifier for the assessment. 
+     *  The unique identifier for the assessment. 
      */
     assessmentId: UUID;
     /**
-     *  The identifier for the control set. 
+     *  The unique identifier for the control set. 
      */
     controlSetId: String;
     /**
@@ -2572,7 +2879,7 @@ declare namespace AuditManager {
   export type UpdateAssessmentFrameworkControlSets = UpdateAssessmentFrameworkControlSet[];
   export interface UpdateAssessmentFrameworkRequest {
     /**
-     *  The identifier for the framework. 
+     *  The unique identifier for the framework. 
      */
     frameworkId: UUID;
     /**
@@ -2620,7 +2927,7 @@ declare namespace AuditManager {
   }
   export interface UpdateAssessmentRequest {
     /**
-     *  The identifier for the assessment. 
+     *  The unique identifier for the assessment. 
      */
     assessmentId: UUID;
     /**
@@ -2652,7 +2959,7 @@ declare namespace AuditManager {
   }
   export interface UpdateAssessmentStatusRequest {
     /**
-     *  The identifier for the assessment. 
+     *  The unique identifier for the assessment. 
      */
     assessmentId: UUID;
     /**
