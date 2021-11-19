@@ -4103,6 +4103,10 @@ to.
      */
     NetworkInputSettings?: NetworkInputSettings;
     /**
+     * PID from which to read SCTE-35 messages. If left undefined, EML will select the first SCTE-35 PID found in the input.
+     */
+    Scte35Pid?: __integerMin32Max8191;
+    /**
      * Specifies whether to extract applicable ancillary data from a SMPTE-2038 source in this input. Applicable data types are captions, timecode, AFD, and SCTE-104 messages.
 - PREFER: Extract from SMPTE-2038 if present in this input, otherwise extract from another source (if any).
 - IGNORE: Never extract any ancillary data from SMPTE-2038.
@@ -6843,6 +6847,7 @@ If STANDARD channel, subnet IDs must be mapped to two unique availability zones 
   export type __integerMin25Max2000 = number;
   export type __integerMin3 = number;
   export type __integerMin30 = number;
+  export type __integerMin32Max8191 = number;
   export type __integerMin4Max20 = number;
   export type __integerMin800Max3000 = number;
   export type __integerMin96Max600 = number;

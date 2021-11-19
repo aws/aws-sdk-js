@@ -153,6 +153,10 @@ declare namespace LexRuntimeV2 {
      * The name of the slot that should be elicited from the user.
      */
     slotToElicit?: NonEmptyString;
+    /**
+     * Configures the slot to use spell-by-letter or spell-by-word style. When you use a style on a slot, users can spell out their input to make it clear to your bot.   Spell by letter - "b" "o" "b"   Spell by word - "b as in boy" "o as in oscar" "b as in boy"   For more information, see  Using spelling to enter slot values .
+     */
+    slotElicitationStyle?: StyleType;
   }
   export type DialogActionType = "Close"|"ConfirmIntent"|"Delegate"|"ElicitIntent"|"ElicitSlot"|"None"|string;
   export type Double = number;
@@ -517,6 +521,7 @@ declare namespace LexRuntimeV2 {
   export type String = string;
   export type StringList = NonEmptyString[];
   export type StringMap = {[key: string]: String};
+  export type StyleType = "Default"|"SpellByLetter"|"SpellByWord"|string;
   export type Text = string;
   export interface Value {
     /**

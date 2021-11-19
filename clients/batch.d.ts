@@ -60,11 +60,11 @@ declare class Batch extends Service {
    */
   deleteJobQueue(callback?: (err: AWSError, data: Batch.Types.DeleteJobQueueResponse) => void): Request<Batch.Types.DeleteJobQueueResponse, AWSError>;
   /**
-   * Deletes the specified scheduling policy. You can't delete a scheduling policy that is used in any job queues.
+   * Deletes the specified scheduling policy. You can't delete a scheduling policy that's used in any job queues.
    */
   deleteSchedulingPolicy(params: Batch.Types.DeleteSchedulingPolicyRequest, callback?: (err: AWSError, data: Batch.Types.DeleteSchedulingPolicyResponse) => void): Request<Batch.Types.DeleteSchedulingPolicyResponse, AWSError>;
   /**
-   * Deletes the specified scheduling policy. You can't delete a scheduling policy that is used in any job queues.
+   * Deletes the specified scheduling policy. You can't delete a scheduling policy that's used in any job queues.
    */
   deleteSchedulingPolicy(callback?: (err: AWSError, data: Batch.Types.DeleteSchedulingPolicyResponse) => void): Request<Batch.Types.DeleteSchedulingPolicyResponse, AWSError>;
   /**
@@ -303,7 +303,7 @@ declare namespace Batch {
   }
   export interface ComputeEnvironmentDetail {
     /**
-     * The name of the compute environment. Up to 128 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed.
+     * The name of the compute environment. It can be up to 128 letters long. It can contain uppercase and lowercase letters, numbers, hyphens (-), and underscores (_).
      */
     computeEnvironmentName: String;
     /**
@@ -677,7 +677,7 @@ declare namespace Batch {
   }
   export interface CreateComputeEnvironmentRequest {
     /**
-     * The name for your compute environment. Up to 128 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed.
+     * The name for your compute environment. It can be up to 128 letters long. It can contain uppercase and lowercase letters, numbers, hyphens (-), and underscores (_).
      */
     computeEnvironmentName: String;
     /**
@@ -689,7 +689,7 @@ declare namespace Batch {
      */
     state?: CEState;
     /**
-     * The maximum number of vCPUs for an unmanaged compute environment. This parameter is only used for fair share scheduling to reserve vCPU capacity for new share identifiers. If this parameter is not provided for a fair share job queue, no vCPU capacity will be reserved.  This parameter is only supported when the type parameter is set to UNMANAGED/ 
+     * The maximum number of vCPUs for an unmanaged compute environment. This parameter is only used for fair share scheduling to reserve vCPU capacity for new share identifiers. If this parameter isn't provided for a fair share job queue, no vCPU capacity is reserved.  This parameter is only supported when the type parameter is set to UNMANAGED/ 
      */
     unmanagedvCpus?: Integer;
     /**
@@ -707,7 +707,7 @@ declare namespace Batch {
   }
   export interface CreateComputeEnvironmentResponse {
     /**
-     * The name of the compute environment. Up to 128 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed.
+     * The name of the compute environment. It can be up to 128 letters long. It can contain uppercase and lowercase letters, numbers, hyphens (-), and underscores (_).
      */
     computeEnvironmentName?: String;
     /**
@@ -717,7 +717,7 @@ declare namespace Batch {
   }
   export interface CreateJobQueueRequest {
     /**
-     * The name of the job queue. Up to 128 letters (uppercase and lowercase), numbers, and underscores are allowed.
+     * The name of the job queue. It can be up to 128 letters long. It can contain uppercase and lowercase letters, numbers, hyphens (-), and underscores (_).
      */
     jobQueueName: String;
     /**
@@ -725,7 +725,7 @@ declare namespace Batch {
      */
     state?: JQState;
     /**
-     * Amazon Resource Name (ARN) of the fair share scheduling policy. If this parameter is specified, the job queue will use a fair share scheduling policy. If this parameter is not specified, the job queue will use a first in, first out (FIFO) scheduling policy. Once a job queue is created, the fair share scheduling policy can be replaced but not removed. The format is aws:Partition:batch:Region:Account:scheduling-policy/Name . For example, aws:aws:batch:us-west-2:012345678910:scheduling-policy/MySchedulingPolicy.
+     * The Amazon Resource Name (ARN) of the fair share scheduling policy. If this parameter is specified, the job queue uses a fair share scheduling policy. If this parameter isn't specified, the job queue uses a first in, first out (FIFO) scheduling policy. After a job queue is created, you can replace but can't remove the fair share scheduling policy. The format is aws:Partition:batch:Region:Account:scheduling-policy/Name . An example is aws:aws:batch:us-west-2:012345678910:scheduling-policy/MySchedulingPolicy.
      */
     schedulingPolicyArn?: String;
     /**
@@ -753,7 +753,7 @@ declare namespace Batch {
   }
   export interface CreateSchedulingPolicyRequest {
     /**
-     * The name of the scheduling policy. Up to 128 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed.
+     * The name of the scheduling policy. It can be up to 128 letters long. It can contain uppercase and lowercase letters, numbers, hyphens (-), and underscores (_).
      */
     name: String;
     /**
@@ -833,7 +833,7 @@ declare namespace Batch {
   }
   export interface DescribeJobDefinitionsRequest {
     /**
-     * A list of up to 100 job definitions. Each entry in the list can either be an ARN of the form arn:aws:batch:${Region}:${Account}:job-definition/${JobDefinitionName}:${Revision} or a short version using the form ${JobDefinitionName}:${Revision}.
+     * A list of up to 100 job definitions. Each entry in the list can either be an ARN in the format arn:aws:batch:${Region}:${Account}:job-definition/${JobDefinitionName}:${Revision} or a short version using the form ${JobDefinitionName}:${Revision}.
      */
     jobDefinitions?: StringList;
     /**
@@ -995,7 +995,7 @@ declare namespace Batch {
   export type EvaluateOnExitList = EvaluateOnExit[];
   export interface FairsharePolicy {
     /**
-     * The time period to use to calculate a fair share percentage for each fair share identifier in use, in seconds. A value of zero (0) indicates that only current usage should be measured; if there are four evenly weighted fair share identifiers then each can only use up to 25% of the available CPU resources, even if some of the fair share identifiers have no currently running jobs. The decay allows for more recently run jobs to have more weight than jobs that ran earlier. The maximum supported value is 604800 (1 week).
+     * The time period to use to calculate a fair share percentage for each fair share identifier in use, in seconds. A value of zero (0) indicates that only current usage should be measured. The decay allows for more recently run jobs to have more weight than jobs that ran earlier. The maximum supported value is 604800 (1 week).
      */
     shareDecaySeconds?: Integer;
     /**
@@ -1003,7 +1003,7 @@ declare namespace Batch {
      */
     computeReservation?: Integer;
     /**
-     * Array of SharedIdentifier objects that contain the weights for the fair share identifiers for the fair share policy. Fair share identifiers that are not included have a default weight of 1.0.
+     * An array of SharedIdentifier objects that contain the weights for the fair share identifiers for the fair share policy. Fair share identifiers that aren't included have a default weight of 1.0.
      */
     shareDistribution?: ShareAttributesList;
   }
@@ -1047,7 +1047,7 @@ declare namespace Batch {
      */
     type: String;
     /**
-     * The scheduling priority of the job definition. This will only affect jobs in job queues with a fair share policy. Jobs with a higher scheduling priority will be scheduled before jobs with a lower scheduling priority.
+     * The scheduling priority of the job definition. This only affects jobs in job queues with a fair share policy. Jobs with a higher scheduling priority are scheduled before jobs with a lower scheduling priority.
      */
     schedulingPriority?: Integer;
     /**
@@ -1122,7 +1122,7 @@ declare namespace Batch {
      */
     shareIdentifier?: String;
     /**
-     * The scheduling policy of the job definition. This will only affect jobs in job queues with a fair share policy. Jobs with a higher scheduling priority will be scheduled before jobs with a lower scheduling priority.
+     * The scheduling policy of the job definition. This only affects jobs in job queues with a fair share policy. Jobs with a higher scheduling priority are scheduled before jobs with a lower scheduling priority.
      */
     schedulingPriority?: Integer;
     /**
@@ -1209,7 +1209,7 @@ declare namespace Batch {
      */
     state: JQState;
     /**
-     * Amazon Resource Name (ARN) of the scheduling policy. The format is aws:Partition:batch:Region:Account:scheduling-policy/Name . For example, aws:aws:batch:us-west-2:012345678910:scheduling-policy/MySchedulingPolicy.
+     * The Amazon Resource Name (ARN) of the scheduling policy. The format is aws:Partition:batch:Region:Account:scheduling-policy/Name . For example, aws:aws:batch:us-west-2:012345678910:scheduling-policy/MySchedulingPolicy.
      */
     schedulingPolicyArn?: String;
     /**
@@ -1249,7 +1249,7 @@ declare namespace Batch {
      */
     jobName: String;
     /**
-     * The Unix timestamp for when the job was created. For non-array jobs and parent array jobs, this is when the job entered the SUBMITTED state (at the time SubmitJob was called). For array child jobs, this is when the child job was spawned by its parent and entered the PENDING state.
+     * The Unix timestamp (in milliseconds) for when the job was created. For non-array jobs and parent array jobs, this is when the job entered the SUBMITTED state (at the time SubmitJob was called). For array child jobs, this is when the child job was spawned by its parent and entered the PENDING state.
      */
     createdAt?: Long;
     /**
@@ -1379,7 +1379,7 @@ declare namespace Batch {
      */
     nextToken?: String;
     /**
-     * The filter to apply to the query. Only one filter can be used at a time. When the filter is used, jobStatus is ignored. The filter doesn't apply to child jobs in an array or multi-node parallel (MNP) jobs. The results are sorted by the createdAt field, with the most recent jobs being first.  JOB_NAME  The value of the filter is a case-insensitive match for the job name. If the value ends with an asterisk (*), the filter will match any job name that begins with the string before the '*'. This corresponds to the jobName value. For example, test1 matches both Test1 and test1, and test1* matches both test1 and Test10. When the JOB_NAME filter is used, the results are grouped by the job name and version.  JOB_DEFINITION  The value for the filter is the name or Amazon Resource Name (ARN) of the job definition. This corresponds to the jobDefinition value. The value is case sensitive. When the value for the filter is the job definition name, the results include all the jobs that used any revision of that job definition name. If the value ends with an asterisk (*), the filter will match any job definition name that begins with the string before the '*'. For example, jd1 matches only jd1, and jd1* matches both jd1 and jd1A. The version of the job definition that's used doesn't affect the sort order. When the JOB_DEFINITION filter is used and the ARN is used (which is in the form arn:${Partition}:batch:${Region}:${Account}:job-definition/${JobDefinitionName}:${Revision}), the results include jobs that used the specified revision of the job definition. Asterisk (*) is not supported when the ARN is used.  BEFORE_CREATED_AT  The value for the filter is the time that's before the job was created. This corresponds to the createdAt value. The value is a string representation of the number of seconds since 00:00:00 UTC (midnight) on January 1, 1970.  AFTER_CREATED_AT  The value for the filter is the time that's after the job was created. This corresponds to the createdAt value. The value is a string representation of the number of seconds since 00:00:00 UTC (midnight) on January 1, 1970.  
+     * The filter to apply to the query. Only one filter can be used at a time. When the filter is used, jobStatus is ignored. The filter doesn't apply to child jobs in an array or multi-node parallel (MNP) jobs. The results are sorted by the createdAt field, with the most recent jobs being first.  JOB_NAME  The value of the filter is a case-insensitive match for the job name. If the value ends with an asterisk (*), the filter will match any job name that begins with the string before the '*'. This corresponds to the jobName value. For example, test1 matches both Test1 and test1, and test1* matches both test1 and Test10. When the JOB_NAME filter is used, the results are grouped by the job name and version.  JOB_DEFINITION  The value for the filter is the name or Amazon Resource Name (ARN) of the job definition. This corresponds to the jobDefinition value. The value is case sensitive. When the value for the filter is the job definition name, the results include all the jobs that used any revision of that job definition name. If the value ends with an asterisk (*), the filter will match any job definition name that begins with the string before the '*'. For example, jd1 matches only jd1, and jd1* matches both jd1 and jd1A. The version of the job definition that's used doesn't affect the sort order. When the JOB_DEFINITION filter is used and the ARN is used (which is in the form arn:${Partition}:batch:${Region}:${Account}:job-definition/${JobDefinitionName}:${Revision}), the results include jobs that used the specified revision of the job definition. Asterisk (*) is not supported when the ARN is used.  BEFORE_CREATED_AT  The value for the filter is the time that's before the job was created. This corresponds to the createdAt value. The value is a string representation of the number of milliseconds since 00:00:00 UTC (midnight) on January 1, 1970.  AFTER_CREATED_AT  The value for the filter is the time that's after the job was created. This corresponds to the createdAt value. The value is a string representation of the number of milliseconds since 00:00:00 UTC (midnight) on January 1, 1970.  
      */
     filters?: ListJobsFilterList;
   }
@@ -1395,11 +1395,11 @@ declare namespace Batch {
   }
   export interface ListSchedulingPoliciesRequest {
     /**
-     * The maximum number of results returned by ListSchedulingPolicies in paginated output. When this parameter is used, ListSchedulingPolicies only returns maxResults results in a single page and a nextToken response element. The remaining results of the initial request can be seen by sending another ListSchedulingPolicies request with the returned nextToken value. This value can be between 1 and 100. If this parameter isn't used, then ListSchedulingPolicies returns up to 100 results and a nextToken value if applicable.
+     * The maximum number of results that's returned by ListSchedulingPolicies in paginated output. When this parameter is used, ListSchedulingPolicies only returns maxResults results in a single page and a nextToken response element. You can see the remaining results of the initial request by sending another ListSchedulingPolicies request with the returned nextToken value. This value can be between 1 and 100. If this parameter isn't used, ListSchedulingPolicies returns up to 100 results and a nextToken value if applicable.
      */
     maxResults?: Integer;
     /**
-     * The nextToken value returned from a previous paginated ListSchedulingPolicies request where maxResults was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the nextToken value. This value is null when there are no more results to return.  This token should be treated as an opaque identifier that's only used to retrieve the next items in a list and not for other programmatic purposes. 
+     * The nextToken value that's returned from a previous paginated ListSchedulingPolicies request where maxResults was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the nextToken value. This value is null when there are no more results to return.  This token should be treated as an opaque identifier that's only used to retrieve the next items in a list and not for other programmatic purposes. 
      */
     nextToken?: String;
   }
@@ -1553,7 +1553,7 @@ declare namespace Batch {
   export type PlatformCapabilityList = PlatformCapability[];
   export interface RegisterJobDefinitionRequest {
     /**
-     * The name of the job definition to register. Up to 128 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed.
+     * The name of the job definition to register. It can be up to 128 letters long. It can contain uppercase and lowercase letters, numbers, hyphens (-), and underscores (_).
      */
     jobDefinitionName: String;
     /**
@@ -1640,7 +1640,7 @@ declare namespace Batch {
      */
     name: String;
     /**
-     * Amazon Resource Name (ARN) of the scheduling policy. An example would be arn:aws:batch:us-east-1:123456789012:scheduling-policy/HighPriority  
+     * The Amazon Resource Name (ARN) of the scheduling policy. An example is arn:aws:batch:us-east-1:123456789012:scheduling-policy/HighPriority .
      */
     arn: String;
     /**
@@ -1648,7 +1648,7 @@ declare namespace Batch {
      */
     fairsharePolicy?: FairsharePolicy;
     /**
-     * The tags that you apply to the scheduling policy to help you categorize and organize your resources. Each tag consists of a key and an optional value. For more information, see Tagging Amazon Web Services Resources in Amazon Web Services General Reference.
+     * The tags that you apply to the scheduling policy to categorize and organize your resources. Each tag consists of a key and an optional value. For more information, see Tagging Amazon Web Services Resources in Amazon Web Services General Reference.
      */
     tags?: TagrisTagsMap;
   }
@@ -1673,11 +1673,11 @@ declare namespace Batch {
   export type SecretList = Secret[];
   export interface ShareAttributes {
     /**
-     * A fair share identifier or fair share identifier prefix. If the string ends with '*' then this entry specifies the weight factor to use for fair share identifiers that begin with that prefix. The list of fair share identifiers in a fair share policy cannot overlap. For example you cannot have one that specifies a shareIdentifier of UserA* and another that specifies a shareIdentifier of UserA-1. There can be no more than 500 fair share identifiers active in a job queue. The string is limited to 255 alphanumeric characters, optionally followed by '*'.
+     * A fair share identifier or fair share identifier prefix. If the string ends with an asterisk (*), this entry specifies the weight factor to use for fair share identifiers that start with that prefix. The list of fair share identifiers in a fair share policy cannot overlap. For example, you can't have one that specifies a shareIdentifier of UserA* and another that specifies a shareIdentifier of UserA-1. There can be no more than 500 fair share identifiers active in a job queue. The string is limited to 255 alphanumeric characters, optionally followed by an asterisk (*).
      */
     shareIdentifier: String;
     /**
-     * The weight factor for the fair share identifier. The default value is 1.0. A lower value has a higher priority for compute resources. For example, jobs using a share identifier with a weight factor of 0.125 (1/8) will get 8 times the compute resources of jobs using a share identifier with a weight factor of 1. The smallest supported value is 0.0001 and the largest supported value is 999.9999.
+     * The weight factor for the fair share identifier. The default value is 1.0. A lower value has a higher priority for compute resources. For example, jobs that use a share identifier with a weight factor of 0.125 (1/8) get 8 times the compute resources of jobs that use a share identifier with a weight factor of 1. The smallest supported value is 0.0001, and the largest supported value is 999.9999.
      */
     weightFactor?: Float;
   }
@@ -1686,7 +1686,7 @@ declare namespace Batch {
   export type StringList = String[];
   export interface SubmitJobRequest {
     /**
-     * The name of the job. The first character must be alphanumeric, and up to 128 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed.
+     * The name of the job. It can be up to 128 letters long. The first character must be alphanumeric, can contain uppercase and lowercase letters, numbers, hyphens (-), and underscores (_).
      */
     jobName: String;
     /**
@@ -1851,7 +1851,7 @@ declare namespace Batch {
   }
   export interface UpdateComputeEnvironmentResponse {
     /**
-     * The name of the compute environment. Up to 128 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed.
+     * The name of the compute environment. It can be up to 128 letters long. It can contain uppercase and lowercase letters, numbers, hyphens (-), and underscores (_).
      */
     computeEnvironmentName?: String;
     /**
@@ -1909,7 +1909,7 @@ declare namespace Batch {
      */
     host?: Host;
     /**
-     * The name of the volume. Up to 255 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed. This name is referenced in the sourceVolume parameter of container definition mountPoints.
+     * The name of the volume. It can be up to 255 letters long. It can contain uppercase and lowercase letters, numbers, hyphens (-), and underscores (_). This name is referenced in the sourceVolume parameter of container definition mountPoints.
      */
     name?: String;
     /**

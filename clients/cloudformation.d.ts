@@ -1083,6 +1083,10 @@ declare namespace CloudFormation {
      * A unique identifier for this CreateStackSet request. Specify this token if you plan to retry requests so that CloudFormation knows that you're not attempting to create another stack set with the same name. You might retry CreateStackSet requests to ensure that CloudFormation successfully received them. If you don't specify an operation ID, the SDK generates one automatically.
      */
     ClientRequestToken?: ClientRequestToken;
+    /**
+     * Describes whether StackSets performs non-conflicting operations concurrently and queues conflicting operations.
+     */
+    ManagedExecution?: ManagedExecution;
   }
   export interface CreateStackSetOutput {
     /**
@@ -2293,7 +2297,7 @@ declare namespace CloudFormation {
      */
     Type?: RegistryType;
     /**
-     * Filter criteria to use in determining which extensions to return. If you specify a filter, CloudFormation ignores any specified Visibility value when returning the list of types.
+     * Filter criteria to use in determining which extensions to return. Filters must be compatible with Visibility to return valid results. For example, specifying AWS_TYPES for Category and PRIVATE for Visibility returns an empty list of types, but specifying PUBLIC for Visibility returns the desired list.
      */
     Filters?: TypeFilters;
     /**
@@ -2330,6 +2334,13 @@ declare namespace CloudFormation {
   export type LogicalResourceId = string;
   export type LogicalResourceIds = LogicalResourceId[];
   export type MajorVersion = number;
+  export interface ManagedExecution {
+    /**
+     * When true, StackSets performs non-conflicting operations concurrently and queues conflicting operations. After conflicting operations finish, StackSets starts queued operations in request order.  If there are already running or queued operations, StackSets queues all incoming operations even if they are non-conflicting. You can't modify your stack set's execution configuration while there are running or queued operations for that stack set.  When false (default), StackSets performs one operation at a time in request order.
+     */
+    Active?: ManagedExecutionNullable;
+  }
+  export type ManagedExecutionNullable = boolean;
   export type MaxConcurrentCount = number;
   export type MaxConcurrentPercentage = number;
   export type MaxResults = number;
@@ -2483,7 +2494,7 @@ declare namespace CloudFormation {
      */
     TypeName?: TypeName;
     /**
-     * The version number to assign to this version of the extension. Use the following format, and adhere to semantic versioning when assigning a version number to your extension:   MAJOR.MINOR.PATCH  For more information, see Semantic Versioning 2.0.0. If you do not specify a version number, CloudFormation increments the version number by one minor version release. The first time you publish a type, CloudFormation sets the version number to 1.0.0, regardless of the value you specify.
+     * The version number to assign to this version of the extension. Use the following format, and adhere to semantic versioning when assigning a version number to your extension:   MAJOR.MINOR.PATCH  For more information, see Semantic Versioning 2.0.0. If you do not specify a version number, CloudFormation increments the version number by one minor version release. You cannot specify a version number the first time you publish a type. CloudFormation automatically sets the first version number to be 1.0.0.
      */
     PublicVersionNumber?: PublicVersionNumber;
   }
@@ -3394,6 +3405,10 @@ declare namespace CloudFormation {
      * [Service-managed permissions] The organization root ID or organizational unit (OU) IDs that you specified for DeploymentTargets.
      */
     OrganizationalUnitIds?: OrganizationalUnitIdList;
+    /**
+     * Describes whether StackSets performs non-conflicting operations concurrently and queues conflicting operations.
+     */
+    ManagedExecution?: ManagedExecution;
   }
   export type StackSetARN = string;
   export interface StackSetDriftDetectionDetails {
@@ -3599,6 +3614,10 @@ declare namespace CloudFormation {
      * Most recent time when CloudFormation performed a drift detection operation on the stack set. This value will be NULL for any stack set on which drift detection has not yet been performed.
      */
     LastDriftCheckTimestamp?: Timestamp;
+    /**
+     * Describes whether StackSets performs non-conflicting operations concurrently and queues conflicting operations.
+     */
+    ManagedExecution?: ManagedExecution;
   }
   export type StackStatus = "CREATE_IN_PROGRESS"|"CREATE_FAILED"|"CREATE_COMPLETE"|"ROLLBACK_IN_PROGRESS"|"ROLLBACK_FAILED"|"ROLLBACK_COMPLETE"|"DELETE_IN_PROGRESS"|"DELETE_FAILED"|"DELETE_COMPLETE"|"UPDATE_IN_PROGRESS"|"UPDATE_COMPLETE_CLEANUP_IN_PROGRESS"|"UPDATE_COMPLETE"|"UPDATE_FAILED"|"UPDATE_ROLLBACK_IN_PROGRESS"|"UPDATE_ROLLBACK_FAILED"|"UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS"|"UPDATE_ROLLBACK_COMPLETE"|"REVIEW_IN_PROGRESS"|"IMPORT_IN_PROGRESS"|"IMPORT_COMPLETE"|"IMPORT_ROLLBACK_IN_PROGRESS"|"IMPORT_ROLLBACK_FAILED"|"IMPORT_ROLLBACK_COMPLETE"|string;
   export type StackStatusFilter = StackStatus[];
@@ -4102,6 +4121,10 @@ declare namespace CloudFormation {
      * [Service-managed permissions] Specifies whether you are acting as an account administrator in the organization's management account or as a delegated administrator in a member account. By default, SELF is specified. Use SELF for stack sets with self-managed permissions.   If you are signed in to the management account, specify SELF.   If you are signed in to a delegated administrator account, specify DELEGATED_ADMIN. Your Amazon Web Services account must be registered as a delegated administrator in the management account. For more information, see Register a delegated administrator in the CloudFormation User Guide.  
      */
     CallAs?: CallAs;
+    /**
+     * Describes whether StackSets performs non-conflicting operations concurrently and queues conflicting operations.
+     */
+    ManagedExecution?: ManagedExecution;
   }
   export interface UpdateStackSetOutput {
     /**

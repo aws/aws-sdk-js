@@ -3442,7 +3442,7 @@
         },
         "ConsumerIdentifier": {
           "shape": "String",
-          "documentation": "<p>The identifier of the data consumer that is authorized to access the datashare. This identifier is an AWS account ID.</p>"
+          "documentation": "<p>The identifier of the data consumer that is authorized to access the datashare. This identifier is an Amazon Web Services account ID.</p>"
         }
       }
     },
@@ -3810,6 +3810,10 @@
         "AquaConfiguration": {
           "shape": "AquaConfiguration",
           "documentation": "<p>The AQUA (Advanced Query Accelerator) configuration of the cluster.</p>"
+        },
+        "DefaultIamRoleArn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) for the IAM role set as default for the cluster.</p>"
         }
       },
       "documentation": "<p>Describes a cluster.</p>",
@@ -4458,6 +4462,10 @@
         "AquaConfigurationStatus": {
           "shape": "AquaConfigurationStatus",
           "documentation": "<p>The value represents how the cluster is configured to use AQUA (Advanced Query Accelerator) when it is created. Possible values include the following.</p> <ul> <li> <p>enabled - Use AQUA if it is available for the current Amazon Web Services Region and Amazon Redshift node type.</p> </li> <li> <p>disabled - Don't use AQUA. </p> </li> <li> <p>auto - Amazon Redshift determines whether to use AQUA.</p> </li> </ul>"
+        },
+        "DefaultIamRoleArn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) for the IAM role that was set as default for the cluster when the cluster was created. </p>"
         }
       },
       "documentation": "<p/>"
@@ -5062,7 +5070,7 @@
         },
         "ConsumerIdentifier": {
           "shape": "String",
-          "documentation": "<p>The identifier of the data consumer that is to have authorization removed from the datashare. This identifier is an AWS account ID.</p>"
+          "documentation": "<p>The identifier of the data consumer that is to have authorization removed from the datashare. This identifier is an Amazon Web Services account ID.</p>"
         }
       }
     },
@@ -5636,7 +5644,7 @@
         },
         "Marker": {
           "shape": "String",
-          "documentation": "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeDataSharesForConsumer</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p>"
+          "documentation": "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeDataSharesForConsumer</a> request exceed the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p>"
         }
       }
     },
@@ -5649,7 +5657,7 @@
         },
         "Marker": {
           "shape": "String",
-          "documentation": "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeDataSharesForConsumer</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p>"
+          "documentation": "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeDataSharesForConsumer</a> request exceed the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p>"
         }
       }
     },
@@ -5670,7 +5678,7 @@
         },
         "Marker": {
           "shape": "String",
-          "documentation": "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeDataSharesForProducer</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p>"
+          "documentation": "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeDataSharesForProducer</a> request exceed the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p>"
         }
       }
     },
@@ -5683,7 +5691,7 @@
         },
         "Marker": {
           "shape": "String",
-          "documentation": "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeDataSharesForProducer</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p>"
+          "documentation": "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeDataSharesForProducer</a> request exceed the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p>"
         }
       }
     },
@@ -5700,7 +5708,7 @@
         },
         "Marker": {
           "shape": "String",
-          "documentation": "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeDataShares</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p>"
+          "documentation": "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeDataShares</a> request exceed the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p>"
         }
       }
     },
@@ -5713,7 +5721,7 @@
         },
         "Marker": {
           "shape": "String",
-          "documentation": "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeDataShares</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p>"
+          "documentation": "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeDataShares</a> request exceed the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p>"
         }
       }
     },
@@ -7164,6 +7172,10 @@
         "RemoveIamRoles": {
           "shape": "IamRoleArnList",
           "documentation": "<p>Zero or more IAM roles in ARN format to disassociate from the cluster. You can disassociate up to 10 IAM roles from a single cluster in a single request.</p>"
+        },
+        "DefaultIamRoleArn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) for the IAM role that was set as default for the cluster when the cluster was last modified.</p>"
         }
       },
       "documentation": "<p/>"
@@ -8509,6 +8521,10 @@
         "AquaConfigurationStatus": {
           "shape": "AquaConfigurationStatus",
           "documentation": "<p>The value represents how the cluster is configured to use AQUA (Advanced Query Accelerator) after the cluster is restored. Possible values include the following.</p> <ul> <li> <p>enabled - Use AQUA if it is available for the current Amazon Web Services Region and Amazon Redshift node type.</p> </li> <li> <p>disabled - Don't use AQUA. </p> </li> <li> <p>auto - Amazon Redshift determines whether to use AQUA.</p> </li> </ul>"
+        },
+        "DefaultIamRoleArn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) for the IAM role that was set as default for the cluster when the cluster was last modified while it was restored from a snapshot.</p>"
         }
       },
       "documentation": "<p/>"

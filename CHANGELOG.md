@@ -1,6 +1,15 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1032.0-->
+<!--LATEST=2.1033.0-->
 <!--ENTRYINSERT-->
+
+## 2.1033.0
+* feature: AppStream: Includes APIs for managing resources for Elastic fleets: applications, app blocks, and application-fleet associations.
+* feature: ApplicationInsights: Application Insights now supports monitoring for HANA
+* feature: CloudFormation: The StackSets ManagedExecution feature will allow concurrency for non-conflicting StackSet operations and queuing the StackSet operations that conflict at a given time for later execution.
+* feature: Lambda: Add support for Lambda Function URLs. Customers can use Function URLs to create built-in HTTPS endpoints on their functions.
+* feature: LexRuntimeV2: Updates API to latest version.
+* feature: MediaLive: This release adds support for specifying a SCTE-35 PID on input. MediaLive now supports SCTE-35 PID selection on inputs containing one or more active SCTE-35 PIDs.
+* feature: Redshift: Added support of default IAM role for CreateCluster, RestoreFromClusterSnapshot and ModifyClusterIamRoles APIs
 
 ## 2.1032.0
 * bugfix: EC2: Add customization for EC2 legacy dualstack endpoints

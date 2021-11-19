@@ -62,6 +62,14 @@ declare class Lambda extends Service {
    */
   createFunction(callback?: (err: AWSError, data: Lambda.Types.FunctionConfiguration) => void): Request<Lambda.Types.FunctionConfiguration, AWSError>;
   /**
+   * 
+   */
+  createFunctionUrlConfig(params: Lambda.Types.CreateFunctionUrlConfigRequest, callback?: (err: AWSError, data: Lambda.Types.CreateFunctionUrlConfigResponse) => void): Request<Lambda.Types.CreateFunctionUrlConfigResponse, AWSError>;
+  /**
+   * 
+   */
+  createFunctionUrlConfig(callback?: (err: AWSError, data: Lambda.Types.CreateFunctionUrlConfigResponse) => void): Request<Lambda.Types.CreateFunctionUrlConfigResponse, AWSError>;
+  /**
    * Deletes a Lambda function alias.
    */
   deleteAlias(params: Lambda.Types.DeleteAliasRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -117,6 +125,14 @@ declare class Lambda extends Service {
    * Deletes the configuration for asynchronous invocation for a function, version, or alias. To configure options for asynchronous invocation, use PutFunctionEventInvokeConfig.
    */
   deleteFunctionEventInvokeConfig(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * 
+   */
+  deleteFunctionUrlConfig(params: Lambda.Types.DeleteFunctionUrlConfigRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * 
+   */
+  deleteFunctionUrlConfig(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes a version of an Lambda layer. Deleted versions can no longer be viewed or added to functions. To avoid breaking functions, a copy of the version remains in Lambda until no functions refer to it.
    */
@@ -206,6 +222,14 @@ declare class Lambda extends Service {
    */
   getFunctionEventInvokeConfig(callback?: (err: AWSError, data: Lambda.Types.FunctionEventInvokeConfig) => void): Request<Lambda.Types.FunctionEventInvokeConfig, AWSError>;
   /**
+   * 
+   */
+  getFunctionUrlConfig(params: Lambda.Types.GetFunctionUrlConfigRequest, callback?: (err: AWSError, data: Lambda.Types.GetFunctionUrlConfigResponse) => void): Request<Lambda.Types.GetFunctionUrlConfigResponse, AWSError>;
+  /**
+   * 
+   */
+  getFunctionUrlConfig(callback?: (err: AWSError, data: Lambda.Types.GetFunctionUrlConfigResponse) => void): Request<Lambda.Types.GetFunctionUrlConfigResponse, AWSError>;
+  /**
    * Returns information about a version of an Lambda layer, with a link to download the layer archive that's valid for 10 minutes.
    */
   getLayerVersion(params: Lambda.Types.GetLayerVersionRequest, callback?: (err: AWSError, data: Lambda.Types.GetLayerVersionResponse) => void): Request<Lambda.Types.GetLayerVersionResponse, AWSError>;
@@ -293,6 +317,14 @@ declare class Lambda extends Service {
    * Retrieves a list of configurations for asynchronous invocation for a function. To configure options for asynchronous invocation, use PutFunctionEventInvokeConfig.
    */
   listFunctionEventInvokeConfigs(callback?: (err: AWSError, data: Lambda.Types.ListFunctionEventInvokeConfigsResponse) => void): Request<Lambda.Types.ListFunctionEventInvokeConfigsResponse, AWSError>;
+  /**
+   * 
+   */
+  listFunctionUrlConfigs(params: Lambda.Types.ListFunctionUrlConfigsRequest, callback?: (err: AWSError, data: Lambda.Types.ListFunctionUrlConfigsResponse) => void): Request<Lambda.Types.ListFunctionUrlConfigsResponse, AWSError>;
+  /**
+   * 
+   */
+  listFunctionUrlConfigs(callback?: (err: AWSError, data: Lambda.Types.ListFunctionUrlConfigsResponse) => void): Request<Lambda.Types.ListFunctionUrlConfigsResponse, AWSError>;
   /**
    * Returns a list of Lambda functions, with the version-specific configuration of each. Lambda returns up to 50 functions per call. Set FunctionVersion to ALL to include all published versions of each function in addition to the unpublished version.   The ListFunctions action returns a subset of the FunctionConfiguration fields. To get the additional fields (State, StateReasonCode, StateReason, LastUpdateStatus, LastUpdateStatusReason, LastUpdateStatusReasonCode) for a function or version, use GetFunction. 
    */
@@ -478,6 +510,14 @@ declare class Lambda extends Service {
    */
   updateFunctionEventInvokeConfig(callback?: (err: AWSError, data: Lambda.Types.FunctionEventInvokeConfig) => void): Request<Lambda.Types.FunctionEventInvokeConfig, AWSError>;
   /**
+   * 
+   */
+  updateFunctionUrlConfig(params: Lambda.Types.UpdateFunctionUrlConfigRequest, callback?: (err: AWSError, data: Lambda.Types.UpdateFunctionUrlConfigResponse) => void): Request<Lambda.Types.UpdateFunctionUrlConfigResponse, AWSError>;
+  /**
+   * 
+   */
+  updateFunctionUrlConfig(callback?: (err: AWSError, data: Lambda.Types.UpdateFunctionUrlConfigResponse) => void): Request<Lambda.Types.UpdateFunctionUrlConfigResponse, AWSError>;
+  /**
    * Waits for the functionExists state by periodically calling the underlying Lambda.getFunctionoperation every 1 seconds (at most 20 times).
    */
   waitFor(state: "functionExists", params: Lambda.Types.GetFunctionRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: Lambda.Types.GetFunctionResponse) => void): Request<Lambda.Types.GetFunctionResponse, AWSError>;
@@ -656,6 +696,9 @@ declare namespace Lambda {
      */
     AdditionalVersionWeights?: AdditionalVersionWeights;
   }
+  export type AllowCredentials = boolean;
+  export type AllowMethodsList = Method[];
+  export type AllowOriginsList = Origin[];
   export interface AllowedPublishers {
     /**
      * The Amazon Resource Name (ARN) for each of the signing profiles. A signing profile defines a trusted user who can sign a code package. 
@@ -665,6 +708,7 @@ declare namespace Lambda {
   export type Architecture = "x86_64"|"arm64"|string;
   export type ArchitecturesList = Architecture[];
   export type Arn = string;
+  export type AuthorizationType = "NONE"|"AWS_IAM"|string;
   export type BatchSize = number;
   export type BisectBatchOnFunctionError = boolean;
   export type _Blob = Buffer|Uint8Array|Blob|string;
@@ -713,6 +757,14 @@ declare namespace Lambda {
      * The number of concurrent executions that are reserved for this function. For more information, see Managing Concurrency.
      */
     ReservedConcurrentExecutions?: ReservedConcurrentExecutions;
+  }
+  export interface Cors {
+    AllowCredentials?: AllowCredentials;
+    AllowHeaders?: HeadersList;
+    AllowMethods?: AllowMethodsList;
+    AllowOrigins?: AllowOriginsList;
+    ExposeHeaders?: HeadersList;
+    MaxAge?: MaxAge;
   }
   export interface CreateAliasRequest {
     /**
@@ -770,7 +822,7 @@ declare namespace Lambda {
      */
     Enabled?: Enabled;
     /**
-     * The maximum number of records in each batch that Lambda pulls from your stream or queue and sends to your function. Lambda passes all of the records in the batch to the function in a single call, up to the payload limit for synchronous invocation (6 MB).    Amazon Kinesis - Default 100. Max 10,000.    Amazon DynamoDB Streams - Default 100. Max 1,000.    Amazon Simple Queue Service - Default 10. For standard queues the max is 10,000. For FIFO queues the max is 10.    Amazon Managed Streaming for Apache Kafka - Default 100. Max 10,000.    Self-Managed Apache Kafka - Default 100. Max 10,000.    Amazon MQ (ActiveMQ and RabbitMQ) - Default 100. Max 10,000.  
+     * The maximum number of records in each batch that Lambda pulls from your stream or queue and sends to your function. Lambda passes all of the records in the batch to the function in a single call, up to the payload limit for synchronous invocation (6 MB).    Amazon Kinesis - Default 100. Max 10,000.    Amazon DynamoDB Streams - Default 100. Max 1,000.    Amazon Simple Queue Service - Default 10. For standard queues the max is 10,000. For FIFO queues the max is 10.    Amazon Managed Streaming for Apache Kafka - Default 100. Max 10,000.    Self-Managed Apache Kafka - Default 100. Max 10,000.  
      */
     BatchSize?: BatchSize;
     /**
@@ -912,9 +964,22 @@ declare namespace Lambda {
      */
     CodeSigningConfigArn?: CodeSigningConfigArn;
     /**
-     * The instruction set architecture that the function supports. Enter a string array with one of the valid values (arm64 or x86_64). The default value is x86_64.
+     * The instruction set architecture that the function supports. Enter a string array with one of the valid values. The default value is x86_64.
      */
     Architectures?: ArchitecturesList;
+  }
+  export interface CreateFunctionUrlConfigRequest {
+    FunctionName: FunctionName;
+    Qualifier?: FunctionUrlQualifier;
+    AuthorizationType: AuthorizationType;
+    Cors?: Cors;
+  }
+  export interface CreateFunctionUrlConfigResponse {
+    FunctionUrl: FunctionUrl;
+    FunctionArn: FunctionArn;
+    AuthorizationType: AuthorizationType;
+    Cors?: Cors;
+    CreationTime: Timestamp;
   }
   export type _Date = Date;
   export interface DeadLetterConfig {
@@ -978,6 +1043,10 @@ declare namespace Lambda {
      * Specify a version to delete. You can't delete a version that's referenced by an alias.
      */
     Qualifier?: Qualifier;
+  }
+  export interface DeleteFunctionUrlConfigRequest {
+    FunctionName: FunctionName;
+    Qualifier?: FunctionUrlQualifier;
   }
   export interface DeleteLayerVersionRequest {
     /**
@@ -1349,6 +1418,17 @@ declare namespace Lambda {
   export type FunctionName = string;
   export type FunctionResponseType = "ReportBatchItemFailures"|string;
   export type FunctionResponseTypeList = FunctionResponseType[];
+  export type FunctionUrl = string;
+  export interface FunctionUrlConfig {
+    FunctionUrl: FunctionUrl;
+    FunctionArn: FunctionArn;
+    CreationTime: Timestamp;
+    LastModifiedTime: Timestamp;
+    Cors?: Cors;
+    AuthorizationType: AuthorizationType;
+  }
+  export type FunctionUrlConfigList = FunctionUrlConfig[];
+  export type FunctionUrlQualifier = string;
   export type FunctionVersion = "ALL"|string;
   export interface GetAccountSettingsRequest {
   }
@@ -1465,6 +1545,18 @@ declare namespace Lambda {
      * The function's reserved concurrency.
      */
     Concurrency?: Concurrency;
+  }
+  export interface GetFunctionUrlConfigRequest {
+    FunctionName: FunctionName;
+    Qualifier?: FunctionUrlQualifier;
+  }
+  export interface GetFunctionUrlConfigResponse {
+    FunctionUrl: FunctionUrl;
+    FunctionArn: FunctionArn;
+    AuthorizationType: AuthorizationType;
+    Cors?: Cors;
+    CreationTime: Timestamp;
+    LastModifiedTime: Timestamp;
   }
   export interface GetLayerVersionByArnRequest {
     /**
@@ -1597,6 +1689,8 @@ declare namespace Lambda {
     LastModified?: Timestamp;
   }
   export type Handler = string;
+  export type Header = string;
+  export type HeadersList = Header[];
   export type HttpStatus = number;
   export interface ImageConfig {
     /**
@@ -1651,7 +1745,7 @@ declare namespace Lambda {
      */
     ClientContext?: String;
     /**
-     * The JSON that you want to provide to your Lambda function as input. You can enter the JSON directly. For example, --payload '{ "key": "value" }'. You can also specify a file path. For example, --payload file://payload.json. 
+     * The JSON that you want to provide to your Lambda function as input.
      */
     Payload?: _Blob;
     /**
@@ -1915,6 +2009,15 @@ declare namespace Lambda {
      */
     NextMarker?: String;
   }
+  export interface ListFunctionUrlConfigsRequest {
+    FunctionName: FunctionName;
+    Marker?: String;
+    MaxItems?: MaxItems;
+  }
+  export interface ListFunctionUrlConfigsResponse {
+    FunctionUrlConfigs: FunctionUrlConfigList;
+    NextMarker?: String;
+  }
   export interface ListFunctionsByCodeSigningConfigRequest {
     /**
      * The The Amazon Resource Name (ARN) of the code signing configuration.
@@ -2091,7 +2194,9 @@ declare namespace Lambda {
   export type LogType = "None"|"Tail"|string;
   export type Long = number;
   export type MasterRegion = string;
+  export type MaxAge = number;
   export type MaxFunctionEventInvokeConfigListItems = number;
+  export type MaxItems = number;
   export type MaxLayerListItems = number;
   export type MaxListItems = number;
   export type MaxProvisionedConcurrencyConfigListItems = number;
@@ -2101,6 +2206,7 @@ declare namespace Lambda {
   export type MaximumRetryAttempts = number;
   export type MaximumRetryAttemptsEventSourceMapping = number;
   export type MemorySize = number;
+  export type Method = string;
   export type NameSpacedFunctionArn = string;
   export type NamespacedFunctionName = string;
   export type NamespacedStatementId = string;
@@ -2118,6 +2224,7 @@ declare namespace Lambda {
     Destination?: DestinationArn;
   }
   export type OrganizationId = string;
+  export type Origin = string;
   export type PackageType = "Zip"|"Image"|string;
   export type ParallelizationFactor = number;
   export type PositiveInteger = number;
@@ -2386,7 +2493,7 @@ declare namespace Lambda {
   export type SigningProfileVersionArns = Arn[];
   export interface SourceAccessConfiguration {
     /**
-     * The type of authentication protocol, VPC components, or virtual host for your event source. For example: "Type":"SASL_SCRAM_512_AUTH".    BASIC_AUTH - (Amazon MQ) The Secrets Manager secret that stores your broker credentials.    BASIC_AUTH - (Self-managed Apache Kafka) The Secrets Manager ARN of your secret key used for SASL/PLAIN authentication of your Apache Kafka brokers.    VPC_SUBNET - The subnets associated with your VPC. Lambda connects to these subnets to fetch data from your self-managed Apache Kafka cluster.    VPC_SECURITY_GROUP - The VPC security group used to manage access to your self-managed Apache Kafka brokers.    SASL_SCRAM_256_AUTH - The Secrets Manager ARN of your secret key used for SASL SCRAM-256 authentication of your self-managed Apache Kafka brokers.    SASL_SCRAM_512_AUTH - The Secrets Manager ARN of your secret key used for SASL SCRAM-512 authentication of your self-managed Apache Kafka brokers.    VIRTUAL_HOST - (Amazon MQ) The name of the virtual host in your RabbitMQ broker. Lambda uses this RabbitMQ host as the event source. This property cannot be specified in an UpdateEventSourceMapping API call.    CLIENT_CERTIFICATE_TLS_AUTH - (Amazon MSK, Self-managed Apache Kafka) The Secrets Manager ARN of your secret key containing the certificate chain (X.509 PEM), private key (PKCS#8 PEM), and private key password (optional) used for mutual TLS authentication of your MSK/Apache Kafka brokers.    SERVER_ROOT_CA_CERTIFICATE - (Self-managed Apache Kafka) The Secrets Manager ARN of your secret key containing the root CA certificate (X.509 PEM) used for TLS encryption of your Apache Kafka brokers.   
+     * The type of authentication protocol, VPC components, or virtual host for your event source. For example: "Type":"SASL_SCRAM_512_AUTH".    BASIC_AUTH - (Amazon MQ) The Secrets Manager secret that stores your broker credentials.    BASIC_AUTH - (Self-managed Apache Kafka) The Secrets Manager ARN of your secret key used for SASL/PLAIN authentication of your Apache Kafka brokers.    VPC_SUBNET - The subnets associated with your VPC. Lambda connects to these subnets to fetch data from your self-managed Apache Kafka cluster.    VPC_SECURITY_GROUP - The VPC security group used to manage access to your self-managed Apache Kafka brokers.    SASL_SCRAM_256_AUTH - The Secrets Manager ARN of your secret key used for SASL SCRAM-256 authentication of your self-managed Apache Kafka brokers.    SASL_SCRAM_512_AUTH - The Secrets Manager ARN of your secret key used for SASL SCRAM-512 authentication of your self-managed Apache Kafka brokers.    VIRTUAL_HOST - (Amazon MQ) The name of the virtual host in your RabbitMQ broker. Lambda uses this RabbitMQ host as the event source.  
      */
     Type?: SourceAccessType;
     /**
@@ -2513,7 +2620,7 @@ declare namespace Lambda {
      */
     Enabled?: Enabled;
     /**
-     * The maximum number of records in each batch that Lambda pulls from your stream or queue and sends to your function. Lambda passes all of the records in the batch to the function in a single call, up to the payload limit for synchronous invocation (6 MB).    Amazon Kinesis - Default 100. Max 10,000.    Amazon DynamoDB Streams - Default 100. Max 1,000.    Amazon Simple Queue Service - Default 10. For standard queues the max is 10,000. For FIFO queues the max is 10.    Amazon Managed Streaming for Apache Kafka - Default 100. Max 10,000.    Self-Managed Apache Kafka - Default 100. Max 10,000.    Amazon MQ (ActiveMQ and RabbitMQ) - Default 100. Max 10,000.  
+     * The maximum number of records in each batch that Lambda pulls from your stream or queue and sends to your function. Lambda passes all of the records in the batch to the function in a single call, up to the payload limit for synchronous invocation (6 MB).    Amazon Kinesis - Default 100. Max 10,000.    Amazon DynamoDB Streams - Default 100. Max 1,000.    Amazon Simple Queue Service - Default 10. For standard queues the max is 10,000. For FIFO queues the max is 10.    Amazon Managed Streaming for Apache Kafka - Default 100. Max 10,000.    Self-Managed Apache Kafka - Default 100. Max 10,000.  
      */
     BatchSize?: BatchSize;
     /**
@@ -2591,7 +2698,7 @@ declare namespace Lambda {
      */
     RevisionId?: String;
     /**
-     * The instruction set architecture that the function supports. Enter a string array with one of the valid values (arm64 or x86_64). The default value is x86_64.
+     * The instruction set architecture that the function supports. Enter a string array with one of the valid values. The default value is x86_64.
      */
     Architectures?: ArchitecturesList;
   }
@@ -2682,6 +2789,20 @@ declare namespace Lambda {
      * A destination for events after they have been sent to a function for processing.  Destinations     Function - The Amazon Resource Name (ARN) of a Lambda function.    Queue - The ARN of an SQS queue.    Topic - The ARN of an SNS topic.    Event Bus - The ARN of an Amazon EventBridge event bus.  
      */
     DestinationConfig?: DestinationConfig;
+  }
+  export interface UpdateFunctionUrlConfigRequest {
+    FunctionName: FunctionName;
+    Qualifier?: FunctionUrlQualifier;
+    AuthorizationType?: AuthorizationType;
+    Cors?: Cors;
+  }
+  export interface UpdateFunctionUrlConfigResponse {
+    FunctionUrl: FunctionUrl;
+    FunctionArn: FunctionArn;
+    AuthorizationType: AuthorizationType;
+    Cors?: Cors;
+    CreationTime: Timestamp;
+    LastModifiedTime: Timestamp;
   }
   export type Version = string;
   export interface VpcConfig {

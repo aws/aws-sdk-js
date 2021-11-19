@@ -1090,7 +1090,7 @@ declare namespace Redshift {
      */
     DataShareArn: String;
     /**
-     * The identifier of the data consumer that is authorized to access the datashare. This identifier is an AWS account ID.
+     * The identifier of the data consumer that is authorized to access the datashare. This identifier is an Amazon Web Services account ID.
      */
     ConsumerIdentifier: String;
   }
@@ -1387,6 +1387,10 @@ declare namespace Redshift {
      * The AQUA (Advanced Query Accelerator) configuration of the cluster.
      */
     AquaConfiguration?: AquaConfiguration;
+    /**
+     * The Amazon Resource Name (ARN) for the IAM role set as default for the cluster.
+     */
+    DefaultIamRoleArn?: String;
   }
   export interface ClusterAssociatedToSchedule {
     /**
@@ -1851,6 +1855,10 @@ declare namespace Redshift {
      * The value represents how the cluster is configured to use AQUA (Advanced Query Accelerator) when it is created. Possible values include the following.   enabled - Use AQUA if it is available for the current Amazon Web Services Region and Amazon Redshift node type.   disabled - Don't use AQUA.    auto - Amazon Redshift determines whether to use AQUA.  
      */
     AquaConfigurationStatus?: AquaConfigurationStatus;
+    /**
+     * The Amazon Resource Name (ARN) for the IAM role that was set as default for the cluster when the cluster was created. 
+     */
+    DefaultIamRoleArn?: String;
   }
   export interface CreateClusterParameterGroupMessage {
     /**
@@ -2241,7 +2249,7 @@ declare namespace Redshift {
      */
     DataShareArn: String;
     /**
-     * The identifier of the data consumer that is to have authorization removed from the datashare. This identifier is an AWS account ID.
+     * The identifier of the data consumer that is to have authorization removed from the datashare. This identifier is an Amazon Web Services account ID.
      */
     ConsumerIdentifier: String;
   }
@@ -2631,7 +2639,7 @@ declare namespace Redshift {
      */
     MaxRecords?: IntegerOptional;
     /**
-     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeDataSharesForConsumer request exceed the value specified in MaxRecords, AWS returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request. 
+     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeDataSharesForConsumer request exceed the value specified in MaxRecords, Amazon Web Services returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request. 
      */
     Marker?: String;
   }
@@ -2641,7 +2649,7 @@ declare namespace Redshift {
      */
     DataShares?: DataShareList;
     /**
-     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeDataSharesForConsumer request exceed the value specified in MaxRecords, AWS returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request. 
+     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeDataSharesForConsumer request exceed the value specified in MaxRecords, Amazon Web Services returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request. 
      */
     Marker?: String;
   }
@@ -2659,7 +2667,7 @@ declare namespace Redshift {
      */
     MaxRecords?: IntegerOptional;
     /**
-     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeDataSharesForProducer request exceed the value specified in MaxRecords, AWS returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request. 
+     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeDataSharesForProducer request exceed the value specified in MaxRecords, Amazon Web Services returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request. 
      */
     Marker?: String;
   }
@@ -2669,7 +2677,7 @@ declare namespace Redshift {
      */
     DataShares?: DataShareList;
     /**
-     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeDataSharesForProducer request exceed the value specified in MaxRecords, AWS returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request. 
+     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeDataSharesForProducer request exceed the value specified in MaxRecords, Amazon Web Services returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request. 
      */
     Marker?: String;
   }
@@ -2683,7 +2691,7 @@ declare namespace Redshift {
      */
     MaxRecords?: IntegerOptional;
     /**
-     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeDataShares request exceed the value specified in MaxRecords, AWS returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request. 
+     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeDataShares request exceed the value specified in MaxRecords, Amazon Web Services returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request. 
      */
     Marker?: String;
   }
@@ -2693,7 +2701,7 @@ declare namespace Redshift {
      */
     DataShares?: DataShareList;
     /**
-     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeDataShares request exceed the value specified in MaxRecords, AWS returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request. 
+     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeDataShares request exceed the value specified in MaxRecords, Amazon Web Services returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request. 
      */
     Marker?: String;
   }
@@ -3738,6 +3746,10 @@ declare namespace Redshift {
      * Zero or more IAM roles in ARN format to disassociate from the cluster. You can disassociate up to 10 IAM roles from a single cluster in a single request.
      */
     RemoveIamRoles?: IamRoleArnList;
+    /**
+     * The Amazon Resource Name (ARN) for the IAM role that was set as default for the cluster when the cluster was last modified.
+     */
+    DefaultIamRoleArn?: String;
   }
   export interface ModifyClusterIamRolesResult {
     Cluster?: Cluster;
@@ -4687,6 +4699,10 @@ declare namespace Redshift {
      * The value represents how the cluster is configured to use AQUA (Advanced Query Accelerator) after the cluster is restored. Possible values include the following.   enabled - Use AQUA if it is available for the current Amazon Web Services Region and Amazon Redshift node type.   disabled - Don't use AQUA.    auto - Amazon Redshift determines whether to use AQUA.  
      */
     AquaConfigurationStatus?: AquaConfigurationStatus;
+    /**
+     * The Amazon Resource Name (ARN) for the IAM role that was set as default for the cluster when the cluster was last modified while it was restored from a snapshot.
+     */
+    DefaultIamRoleArn?: String;
   }
   export interface RestoreFromClusterSnapshotResult {
     Cluster?: Cluster;

@@ -2125,6 +2125,10 @@
           "shape": "ClientRequestToken",
           "documentation": "<p>A unique identifier for this <code>CreateStackSet</code> request. Specify this token if you plan to retry requests so that CloudFormation knows that you're not attempting to create another stack set with the same name. You might retry <code>CreateStackSet</code> requests to ensure that CloudFormation successfully received them.</p> <p>If you don't specify an operation ID, the SDK generates one automatically.</p>",
           "idempotencyToken": true
+        },
+        "ManagedExecution": {
+          "shape": "ManagedExecution",
+          "documentation": "<p>Describes whether StackSets performs non-conflicting operations concurrently and queues conflicting operations.</p>"
         }
       }
     },
@@ -3848,7 +3852,7 @@
         },
         "Filters": {
           "shape": "TypeFilters",
-          "documentation": "<p>Filter criteria to use in determining which extensions to return.</p> <p>If you specify a filter, CloudFormation ignores any specified <code>Visibility</code> value when returning the list of types.</p>"
+          "documentation": "<p>Filter criteria to use in determining which extensions to return.</p> <p>Filters must be compatible with <code>Visibility</code> to return valid results. For example, specifying <code>AWS_TYPES</code> for <code>Category</code> and <code>PRIVATE</code> for <code>Visibility</code> returns an empty list of types, but specifying <code>PUBLIC</code> for <code>Visibility</code> returns the desired list.</p>"
         },
         "MaxResults": {
           "shape": "MaxResults",
@@ -3915,6 +3919,19 @@
       "type": "long",
       "max": 100000,
       "min": 1
+    },
+    "ManagedExecution": {
+      "type": "structure",
+      "members": {
+        "Active": {
+          "shape": "ManagedExecutionNullable",
+          "documentation": "<p>When <code>true</code>, StackSets performs non-conflicting operations concurrently and queues conflicting operations. After conflicting operations finish, StackSets starts queued operations in request order.</p> <note> <p>If there are already running or queued operations, StackSets queues all incoming operations even if they are non-conflicting.</p> <p>You can't modify your stack set's execution configuration while there are running or queued operations for that stack set.</p> </note> <p>When <code>false</code> (default), StackSets performs one operation at a time in request order.</p>"
+        }
+      },
+      "documentation": "<p>Describes whether StackSets performs non-conflicting operations concurrently and queues conflicting operations.</p>"
+    },
+    "ManagedExecutionNullable": {
+      "type": "boolean"
     },
     "MaxConcurrentCount": {
       "type": "integer",
@@ -4234,7 +4251,7 @@
         },
         "PublicVersionNumber": {
           "shape": "PublicVersionNumber",
-          "documentation": "<p>The version number to assign to this version of the extension.</p> <p>Use the following format, and adhere to semantic versioning when assigning a version number to your extension: </p> <p> <code>MAJOR.MINOR.PATCH</code> </p> <p>For more information, see <a href=\"https://semver.org/\">Semantic Versioning 2.0.0</a>.</p> <p>If you do not specify a version number, CloudFormation increments the version number by one minor version release.</p> <p>The first time you publish a type, CloudFormation sets the version number to <code>1.0.0</code>, regardless of the value you specify.</p>"
+          "documentation": "<p>The version number to assign to this version of the extension.</p> <p>Use the following format, and adhere to semantic versioning when assigning a version number to your extension: </p> <p> <code>MAJOR.MINOR.PATCH</code> </p> <p>For more information, see <a href=\"https://semver.org/\">Semantic Versioning 2.0.0</a>.</p> <p>If you do not specify a version number, CloudFormation increments the version number by one minor version release.</p> <p>You cannot specify a version number the first time you publish a type. CloudFormation automatically sets the first version number to be <code>1.0.0</code>.</p>"
         }
       }
     },
@@ -5714,6 +5731,10 @@
         "OrganizationalUnitIds": {
           "shape": "OrganizationalUnitIdList",
           "documentation": "<p>[Service-managed permissions] The organization root ID or organizational unit (OU) IDs that you specified for <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DeploymentTargets.html\">DeploymentTargets</a>.</p>"
+        },
+        "ManagedExecution": {
+          "shape": "ManagedExecution",
+          "documentation": "<p>Describes whether StackSets performs non-conflicting operations concurrently and queues conflicting operations.</p>"
         }
       },
       "documentation": "<p>A structure that contains information about a stack set. A stack set enables you to provision stacks into Amazon Web Services accounts and across Regions by using a single CloudFormation template. In the stack set, you specify the template to use, as well as any parameters and capabilities that the template requires. </p>"
@@ -6016,6 +6037,10 @@
         "LastDriftCheckTimestamp": {
           "shape": "Timestamp",
           "documentation": "<p>Most recent time when CloudFormation performed a drift detection operation on the stack set. This value will be <code>NULL</code> for any stack set on which drift detection has not yet been performed.</p>"
+        },
+        "ManagedExecution": {
+          "shape": "ManagedExecution",
+          "documentation": "<p>Describes whether StackSets performs non-conflicting operations concurrently and queues conflicting operations.</p>"
         }
       },
       "documentation": "<p>The structures that contain summary information about the specified stack set.</p>"
@@ -6805,6 +6830,10 @@
         "CallAs": {
           "shape": "CallAs",
           "documentation": "<p>[Service-managed permissions] Specifies whether you are acting as an account administrator in the organization's management account or as a delegated administrator in a member account.</p> <p>By default, <code>SELF</code> is specified. Use <code>SELF</code> for stack sets with self-managed permissions.</p> <ul> <li> <p>If you are signed in to the management account, specify <code>SELF</code>.</p> </li> <li> <p>If you are signed in to a delegated administrator account, specify <code>DELEGATED_ADMIN</code>.</p> <p>Your Amazon Web Services account must be registered as a delegated administrator in the management account. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html\">Register a delegated administrator</a> in the <i>CloudFormation User Guide</i>.</p> </li> </ul>"
+        },
+        "ManagedExecution": {
+          "shape": "ManagedExecution",
+          "documentation": "<p>Describes whether StackSets performs non-conflicting operations concurrently and queues conflicting operations.</p>"
         }
       }
     },
