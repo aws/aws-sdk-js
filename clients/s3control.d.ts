@@ -621,6 +621,12 @@ declare namespace S3Control {
   export type BucketLocationConstraint = "EU"|"eu-west-1"|"us-west-1"|"us-west-2"|"ap-south-1"|"ap-southeast-1"|"ap-southeast-2"|"ap-northeast-1"|"sa-east-1"|"cn-north-1"|"eu-central-1"|string;
   export type BucketName = string;
   export type Buckets = S3BucketArnString[];
+  export interface CloudWatchMetrics {
+    /**
+     * A container that indicates whether CloudWatch publishing for S3 Storage Lens metrics is enabled. A value of true indicates that CloudWatch publishing for S3 Storage Lens metrics is enabled.
+     */
+    IsEnabled: IsEnabled;
+  }
   export type ConfigId = string;
   export type ConfirmRemoveSelfBucketAccess = boolean;
   export type ConfirmationRequired = boolean;
@@ -2605,7 +2611,11 @@ declare namespace S3Control {
     /**
      * A container for the bucket where the S3 Storage Lens metrics export will be located.  This bucket must be located in the same Region as the storage lens configuration.  
      */
-    S3BucketDestination: S3BucketDestination;
+    S3BucketDestination?: S3BucketDestination;
+    /**
+     * A container for enabling Amazon CloudWatch publishing for S3 Storage Lens metrics.
+     */
+    CloudWatchMetrics?: CloudWatchMetrics;
   }
   export interface StorageLensDataExportEncryption {
     /**

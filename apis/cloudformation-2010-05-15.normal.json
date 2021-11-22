@@ -797,7 +797,7 @@
           "shape": "StaleRequestException"
         }
       ],
-      "documentation": "<p>Import existing stacks into a new stack sets. Use the stack import operation to import up to 10 stacks into a new stack set in the same account as the source stack or in a different administrator account and Region, by specifying the stack ID of the stack you intend to import.</p> <note> <p> <code>ImportStacksToStackSet</code> is only supported by self-managed permissions.</p> </note>"
+      "documentation": "<p>Use the stack import operations for self-managed or service-managed StackSets. For self-managed StackSets, the import operation can import stacks in the administrator account or in different target accounts and Amazon Web Services Regions. For service-managed StackSets, the import operation can import any stack in the same AWS Organizations as the management account. The import operation can import up to 10 stacks using inline stack IDs or up to 10,000 stacks using an Amazon S3 object.</p>"
     },
     "ListChangeSets": {
       "name": "ListChangeSets",
@@ -3367,8 +3367,7 @@
     "ImportStacksToStackSetInput": {
       "type": "structure",
       "required": [
-        "StackSetName",
-        "StackIds"
+        "StackSetName"
       ],
       "members": {
         "StackSetName": {
@@ -3377,7 +3376,15 @@
         },
         "StackIds": {
           "shape": "StackIdList",
-          "documentation": "<p>The IDs of the stacks you are importing into a stack set. You import up to 10 stacks per stack set at a time.</p>"
+          "documentation": "<p>The IDs of the stacks you are importing into a stack set. You import up to 10 stacks per stack set at a time.</p> <p>Specify either <code>StackIds</code> or <code>StackIdsUrl</code>.</p>"
+        },
+        "StackIdsUrl": {
+          "shape": "StackIdsUrl",
+          "documentation": "<p>The Amazon S3 URL which contains list of stack ids to be inputted.</p> <p>Specify either <code>StackIds</code> or <code>StackIdsUrl</code>.</p>"
+        },
+        "OrganizationalUnitIds": {
+          "shape": "OrganizationalUnitIdList",
+          "documentation": "<p>The list of OU ID’s to which the stacks being imported has to be mapped as deployment target.</p>"
         },
         "OperationPreferences": {
           "shape": "StackSetOperationPreferences"
@@ -4069,7 +4076,7 @@
         },
         "ResolvedValue": {
           "shape": "ParameterValue",
-          "documentation": "<p>Read-only. The value that corresponds to a Systems Manager parameter key. This field is returned only for <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/parameters-section-structure.html#aws-ssm-parameter-types\"> <code>SSM</code> parameter types</a> in the template.</p>"
+          "documentation": "<p>Read-only. Read-only. The value that corresponds to a SSM parameter key. This field is returned only for <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/parameters-section-structure.html#aws-ssm-parameter-types\"> <code>SSM</code> </a> parameter types in the template.</p>"
         }
       },
       "documentation": "<p>The Parameter data type.</p>"
@@ -4823,7 +4830,7 @@
         },
         "Type": {
           "shape": "Type",
-          "documentation": "<p>The resource type of the rollback trigger. Currently, <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cw-alarm.html\">AWS::CloudWatch::Alarm</a> is the only supported resource type.</p>"
+          "documentation": "<p>The resource type of the rollback trigger. Specify either <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cw-alarm.html\">AWS::CloudWatch::Alarm</a> or <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudwatch-compositealarm.html\">AWS::CloudWatch::CompositeAlarm</a> resource types.</p>"
         }
       },
       "documentation": "<p>A rollback trigger CloudFormation monitors during creation and updating of stacks. If any of the alarms you specify goes to ALARM state during the stack operation or within the specified monitoring period afterwards, CloudFormation rolls back the entire stack operation. </p>"
@@ -5191,6 +5198,12 @@
       "member": {
         "shape": "StackId"
       }
+    },
+    "StackIdsUrl": {
+      "type": "string",
+      "max": 5120,
+      "min": 1,
+      "pattern": "(s3://|http(s?)://).+"
     },
     "StackInstance": {
       "type": "structure",
@@ -6446,11 +6459,11 @@
       "members": {
         "Category": {
           "shape": "Category",
-          "documentation": "<p>The category of extensions to return.</p> <ul> <li> <p> <code>REGISTERED</code>: Private extensions that have been registered for this account and region.</p> </li> <li> <p> <code>ACTIVATED</code>: Public extensions that have been activated for this account and region.</p> </li> <li> <p> <code>THIRD-PARTY</code>: Extensions available for use from publishers other than Amazon. This includes:</p> <ul> <li> <p>Private extensions registered in the account.</p> </li> <li> <p>Public extensions from publishers other than Amazon, whether activated or not.</p> </li> </ul> </li> <li> <p> <code>AWS-TYPES</code>: Extensions available for use from Amazon.</p> </li> </ul>"
+          "documentation": "<p>The category of extensions to return.</p> <ul> <li> <p> <code>REGISTERED</code>: Private extensions that have been registered for this account and region.</p> </li> <li> <p> <code>ACTIVATED</code>: Public extensions that have been activated for this account and region.</p> </li> <li> <p> <code>THIRD_PARTY</code>: Extensions available for use from publishers other than Amazon. This includes:</p> <ul> <li> <p>Private extensions registered in the account.</p> </li> <li> <p>Public extensions from publishers other than Amazon, whether activated or not.</p> </li> </ul> </li> <li> <p> <code>AWS_TYPES</code>: Extensions available for use from Amazon.</p> </li> </ul>"
         },
         "PublisherId": {
           "shape": "PublisherId",
-          "documentation": "<p>The id of the publisher of the extension. </p> <p>Extensions published by Amazon are not assigned a publisher ID. Use the <code>AWS-TYPES</code> category to specify a list of types published by Amazon.</p>"
+          "documentation": "<p>The id of the publisher of the extension. </p> <p>Extensions published by Amazon are not assigned a publisher ID. Use the <code>AWS_TYPE</code> category to specify a list of types published by Amazon.</p>"
         },
         "TypeNamePrefix": {
           "shape": "TypeNamePrefix",

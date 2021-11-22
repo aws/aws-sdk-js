@@ -1,6 +1,20 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1033.0-->
+<!--LATEST=2.1034.0-->
 <!--ENTRYINSERT-->
+
+## 2.1034.0
+* feature: Braket: This release adds support for Amazon Braket Hybrid Jobs.
+* feature: ChimeSDKMeetings: Added new APIs for enabling Echo Reduction with Voice Focus.
+* feature: CloudFormation: This release include SDK changes for the feature launch of Stack Import to Service Managed StackSet.
+* feature: Connect: This release adds support for UpdateContactFlowMetadata, DeleteContactFlow and module APIs. For details, see the Release Notes in the Amazon Connect Administrator Guide.
+* feature: DMS: Added new S3 endpoint settings to allow to convert the current UTC time into a specified time zone when a date partition folder is created. Using with 'DatePartitionedEnabled'.
+* feature: EKS: Adding missing exceptions to RegisterCluster operation
+* feature: ES: This release adds an optional parameter dry-run for the UpdateElasticsearchDomainConfig API to perform basic validation checks, and detect the deployment type that will be required for the configuration change, without actually applying the change.
+* feature: Finspacedata: Add new APIs for managing Datasets, Changesets, and Dataviews.
+* feature: QuickSight: Add support for Exasol data source, 1 click enterprise embedding and email customization.
+* feature: RDS: Adds local backup support to Amazon RDS on AWS Outposts.
+* feature: S3Control: Added Amazon CloudWatch publishing option for S3 Storage Lens metrics.
+* feature: SSM: Adds new parameter to CreateActivation API . This parameter is for "internal use only".
 
 ## 2.1033.0
 * feature: AppStream: Includes APIs for managing resources for Elastic fleets: applications, app blocks, and application-fleet associations.

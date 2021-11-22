@@ -117,6 +117,12 @@ declare namespace ChimeSDKMeetings {
     JoinToken?: JoinTokenString;
   }
   export type AttendeeList = Attendee[];
+  export interface AudioFeatures {
+    /**
+     * Makes echo reduction available to clients who connect to the meeting.
+     */
+    EchoReduction?: MeetingFeatureStatus;
+  }
   export type BatchCreateAttendeeErrorList = CreateAttendeeError[];
   export interface BatchCreateAttendeeRequest {
     /**
@@ -198,6 +204,10 @@ declare namespace ChimeSDKMeetings {
      * The configuration for resource targets to receive notifications when meeting and attendee events occur.
      */
     NotificationsConfiguration?: NotificationsConfiguration;
+    /**
+     * Lists the audio and video features enabled for a meeting, such as echo reduction.
+     */
+    MeetingFeatures?: MeetingFeaturesConfiguration;
   }
   export interface CreateMeetingResponse {
     /**
@@ -222,6 +232,10 @@ declare namespace ChimeSDKMeetings {
      * The external meeting ID.
      */
     ExternalMeetingId: ExternalMeetingId;
+    /**
+     * Lists the audio and video features enabled for a meeting, such as echo reduction.
+     */
+    MeetingFeatures?: MeetingFeaturesConfiguration;
     /**
      * The configuration for resource targets to receive notifications when meeting and attendee events occur.
      */
@@ -318,15 +332,15 @@ declare namespace ChimeSDKMeetings {
      */
     PartialResultsStability?: TranscribePartialResultsStability;
     /**
-     * Set this field to PII to identify personal health information in the transcription output.
+     * Set this field to PII to identify personally identifiable information in the transcription output.
      */
     ContentIdentificationType?: TranscribeContentIdentificationType;
     /**
-     * Set this field to PII to redact personally identifiable information in the transcription output. Content redaction is performed only upon complete transcription of the audio segments. You can’t set both ContentRedactionType and ContentIdentificationType in the same request. If you set both, your request returns a BadRequestException.
+     * Set this field to PII to redact personally identifiable information in the transcription output. Content redaction is performed only upon complete transcription of the audio segments. You can’t set ContentRedactionType and ContentIdentificationType in the same request. If you set both, your request returns a BadRequestException.
      */
     ContentRedactionType?: TranscribeContentRedactionType;
     /**
-     * Lists the PII entity types you want to identify or redact. To specify entity types, you must enable ContentIdentificationType or ContentRedactionType.  PIIEntityTypes must be comma-separated. The available values are: BANK_ACCOUNT_NUMBER, BANK_ROUTING, CREDIT_DEBIT_NUMBER, CREDIT_DEBIT_CVV, CREDIT_DEBIT_EXPIRY, PIN, EMAIL, ADDRESS, NAME, PHONE, SSN, and ALL.  PiiEntityTypes is an optional parameter with a default value of ALL.
+     * Lists the PII entity types you want to identify or redact. To specify entity types, you must enable ContentIdentificationType or ContentRedactionType. PIIEntityTypes must be comma-separated. The available values are: BANK_ACCOUNT_NUMBER, BANK_ROUTING, CREDIT_DEBIT_NUMBER, CREDIT_DEBIT_CVV, CREDIT_DEBIT_EXPIRY, PIN, EMAIL, ADDRESS, NAME, PHONE, SSN, and ALL.  PiiEntityTypes is an optional parameter with a default value of ALL.
      */
     PiiEntityTypes?: TranscribePiiEntityTypes;
     /**
@@ -446,6 +460,17 @@ declare namespace ChimeSDKMeetings {
      * The media placement for the meeting.
      */
     MediaPlacement?: MediaPlacement;
+    /**
+     * The features available to a meeting, such as Amazon Voice Focus.
+     */
+    MeetingFeatures?: MeetingFeaturesConfiguration;
+  }
+  export type MeetingFeatureStatus = "AVAILABLE"|"UNAVAILABLE"|string;
+  export interface MeetingFeaturesConfiguration {
+    /**
+     * The configuration settings for the audio features available to a meeting. 
+     */
+    Audio?: AudioFeatures;
   }
   export interface NotificationsConfiguration {
     /**

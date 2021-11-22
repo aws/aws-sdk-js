@@ -301,11 +301,11 @@ declare class CloudFormation extends Service {
    */
   getTemplateSummary(callback?: (err: AWSError, data: CloudFormation.Types.GetTemplateSummaryOutput) => void): Request<CloudFormation.Types.GetTemplateSummaryOutput, AWSError>;
   /**
-   * Import existing stacks into a new stack sets. Use the stack import operation to import up to 10 stacks into a new stack set in the same account as the source stack or in a different administrator account and Region, by specifying the stack ID of the stack you intend to import.   ImportStacksToStackSet is only supported by self-managed permissions. 
+   * Use the stack import operations for self-managed or service-managed StackSets. For self-managed StackSets, the import operation can import stacks in the administrator account or in different target accounts and Amazon Web Services Regions. For service-managed StackSets, the import operation can import any stack in the same AWS Organizations as the management account. The import operation can import up to 10 stacks using inline stack IDs or up to 10,000 stacks using an Amazon S3 object.
    */
   importStacksToStackSet(params: CloudFormation.Types.ImportStacksToStackSetInput, callback?: (err: AWSError, data: CloudFormation.Types.ImportStacksToStackSetOutput) => void): Request<CloudFormation.Types.ImportStacksToStackSetOutput, AWSError>;
   /**
-   * Import existing stacks into a new stack sets. Use the stack import operation to import up to 10 stacks into a new stack set in the same account as the source stack or in a different administrator account and Region, by specifying the stack ID of the stack you intend to import.   ImportStacksToStackSet is only supported by self-managed permissions. 
+   * Use the stack import operations for self-managed or service-managed StackSets. For self-managed StackSets, the import operation can import stacks in the administrator account or in different target accounts and Amazon Web Services Regions. For service-managed StackSets, the import operation can import any stack in the same AWS Organizations as the management account. The import operation can import up to 10 stacks using inline stack IDs or up to 10,000 stacks using an Amazon S3 object.
    */
   importStacksToStackSet(callback?: (err: AWSError, data: CloudFormation.Types.ImportStacksToStackSetOutput) => void): Request<CloudFormation.Types.ImportStacksToStackSetOutput, AWSError>;
   /**
@@ -1949,9 +1949,17 @@ declare namespace CloudFormation {
      */
     StackSetName: StackSetNameOrId;
     /**
-     * The IDs of the stacks you are importing into a stack set. You import up to 10 stacks per stack set at a time.
+     * The IDs of the stacks you are importing into a stack set. You import up to 10 stacks per stack set at a time. Specify either StackIds or StackIdsUrl.
      */
-    StackIds: StackIdList;
+    StackIds?: StackIdList;
+    /**
+     * The Amazon S3 URL which contains list of stack ids to be inputted. Specify either StackIds or StackIdsUrl.
+     */
+    StackIdsUrl?: StackIdsUrl;
+    /**
+     * The list of OU ID’s to which the stacks being imported has to be mapped as deployment target.
+     */
+    OrganizationalUnitIds?: OrganizationalUnitIdList;
     OperationPreferences?: StackSetOperationPreferences;
     /**
      * A unique, user defined, identifier for the stack set operation.
@@ -2400,7 +2408,7 @@ declare namespace CloudFormation {
      */
     UsePreviousValue?: UsePreviousValue;
     /**
-     * Read-only. The value that corresponds to a Systems Manager parameter key. This field is returned only for  SSM parameter types in the template.
+     * Read-only. Read-only. The value that corresponds to a SSM parameter key. This field is returned only for  SSM  parameter types in the template.
      */
     ResolvedValue?: ParameterValue;
   }
@@ -2776,7 +2784,7 @@ declare namespace CloudFormation {
      */
     Arn: Arn;
     /**
-     * The resource type of the rollback trigger. Currently, AWS::CloudWatch::Alarm is the only supported resource type.
+     * The resource type of the rollback trigger. Specify either AWS::CloudWatch::Alarm or AWS::CloudWatch::CompositeAlarm resource types.
      */
     Type: Type;
   }
@@ -3027,6 +3035,7 @@ declare namespace CloudFormation {
   export type StackEvents = StackEvent[];
   export type StackId = string;
   export type StackIdList = StackId[];
+  export type StackIdsUrl = string;
   export interface StackInstance {
     /**
      * The name or unique ID of the stack set that the stack instance is associated with.
@@ -3822,11 +3831,11 @@ declare namespace CloudFormation {
   export type TypeConfigurationIdentifiers = TypeConfigurationIdentifier[];
   export interface TypeFilters {
     /**
-     * The category of extensions to return.    REGISTERED: Private extensions that have been registered for this account and region.    ACTIVATED: Public extensions that have been activated for this account and region.    THIRD-PARTY: Extensions available for use from publishers other than Amazon. This includes:   Private extensions registered in the account.   Public extensions from publishers other than Amazon, whether activated or not.      AWS-TYPES: Extensions available for use from Amazon.  
+     * The category of extensions to return.    REGISTERED: Private extensions that have been registered for this account and region.    ACTIVATED: Public extensions that have been activated for this account and region.    THIRD_PARTY: Extensions available for use from publishers other than Amazon. This includes:   Private extensions registered in the account.   Public extensions from publishers other than Amazon, whether activated or not.      AWS_TYPES: Extensions available for use from Amazon.  
      */
     Category?: Category;
     /**
-     * The id of the publisher of the extension.  Extensions published by Amazon are not assigned a publisher ID. Use the AWS-TYPES category to specify a list of types published by Amazon.
+     * The id of the publisher of the extension.  Extensions published by Amazon are not assigned a publisher ID. Use the AWS_TYPE category to specify a list of types published by Amazon.
      */
     PublisherId?: PublisherId;
     /**

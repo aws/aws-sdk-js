@@ -789,6 +789,7 @@ declare namespace ES {
   }
   export type DeploymentCloseDateTimeStamp = Date;
   export type DeploymentStatus = "PENDING_UPDATE"|"IN_PROGRESS"|"COMPLETED"|"NOT_ELIGIBLE"|"ELIGIBLE"|string;
+  export type DeploymentType = string;
   export interface DescribeDomainAutoTunesRequest {
     /**
      * Specifies the domain name for which you want Auto-Tune action details.
@@ -1103,6 +1104,17 @@ declare namespace ES {
   export type DomainPackageDetailsList = DomainPackageDetails[];
   export type DomainPackageStatus = "ASSOCIATING"|"ASSOCIATION_FAILED"|"ACTIVE"|"DISSOCIATING"|"DISSOCIATION_FAILED"|string;
   export type Double = number;
+  export type DryRun = boolean;
+  export interface DryRunResults {
+    /**
+     *  Specifies the deployment mechanism through which the update shall be applied on the domain. Possible responses are Blue/Green (The update will require a blue/green deployment.) DynamicUpdate (The update can be applied in-place without a Blue/Green deployment required.) Undetermined (The domain is undergoing an update which needs to complete before the deployment type can be predicted.) None (The configuration change matches the current configuration and will not result in any update.) 
+     */
+    DeploymentType?: DeploymentType;
+    /**
+     * Contains an optional message associated with the DryRunResults.
+     */
+    Message?: Message;
+  }
   export interface Duration {
     /**
      *  Integer to specify the value of a maintenance schedule duration. See the Developer Guide for more information.
@@ -1674,6 +1686,7 @@ declare namespace ES {
   }
   export type MaxResults = number;
   export type MaximumInstanceCount = number;
+  export type Message = string;
   export type MinimumInstanceCount = number;
   export type NextToken = string;
   export interface NodeToNodeEncryptionOptions {
@@ -2219,12 +2232,20 @@ declare namespace ES {
      * Specifies Auto-Tune options.
      */
     AutoTuneOptions?: AutoTuneOptions;
+    /**
+     *  This flag, when set to True, specifies whether the UpdateElasticsearchDomain request should return the results of validation checks without actually applying the change. This flag, when set to True, specifies the deployment mechanism through which the update shall be applied on the domain. This will not actually perform the Update. 
+     */
+    DryRun?: DryRun;
   }
   export interface UpdateElasticsearchDomainConfigResponse {
     /**
      * The status of the updated Elasticsearch domain. 
      */
     DomainConfig: ElasticsearchDomainConfig;
+    /**
+     * Contains result of DryRun. 
+     */
+    DryRunResults?: DryRunResults;
   }
   export interface UpdatePackageRequest {
     /**
