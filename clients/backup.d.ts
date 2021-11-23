@@ -20,11 +20,11 @@ declare class Backup extends Service {
    */
   createBackupPlan(callback?: (err: AWSError, data: Backup.Types.CreateBackupPlanOutput) => void): Request<Backup.Types.CreateBackupPlanOutput, AWSError>;
   /**
-   * Creates a JSON document that specifies a set of resources to assign to a backup plan. Resources can be included by specifying patterns for a ListOfTags and selected Resources.  For example, consider the following patterns:    Resources: "arn:aws:ec2:region:account-id:volume/volume-id"     ConditionKey:"department"   ConditionValue:"finance"   ConditionType:"StringEquals"     ConditionKey:"importance"   ConditionValue:"critical"   ConditionType:"StringEquals"    Using these patterns would back up all Amazon Elastic Block Store (Amazon EBS) volumes that are tagged as "department=finance", "importance=critical", in addition to an EBS volume with the specified volume ID. Resources and conditions are additive in that all resources that match the pattern are selected. This shouldn't be confused with a logical AND, where all conditions must match. The matching patterns are logically put together using the OR operator. In other words, all patterns that match are selected for backup.
+   * Creates a JSON document that specifies a set of resources to assign to a backup plan. For examples, see Assigning resources programmatically. 
    */
   createBackupSelection(params: Backup.Types.CreateBackupSelectionInput, callback?: (err: AWSError, data: Backup.Types.CreateBackupSelectionOutput) => void): Request<Backup.Types.CreateBackupSelectionOutput, AWSError>;
   /**
-   * Creates a JSON document that specifies a set of resources to assign to a backup plan. Resources can be included by specifying patterns for a ListOfTags and selected Resources.  For example, consider the following patterns:    Resources: "arn:aws:ec2:region:account-id:volume/volume-id"     ConditionKey:"department"   ConditionValue:"finance"   ConditionType:"StringEquals"     ConditionKey:"importance"   ConditionValue:"critical"   ConditionType:"StringEquals"    Using these patterns would back up all Amazon Elastic Block Store (Amazon EBS) volumes that are tagged as "department=finance", "importance=critical", in addition to an EBS volume with the specified volume ID. Resources and conditions are additive in that all resources that match the pattern are selected. This shouldn't be confused with a logical AND, where all conditions must match. The matching patterns are logically put together using the OR operator. In other words, all patterns that match are selected for backup.
+   * Creates a JSON document that specifies a set of resources to assign to a backup plan. For examples, see Assigning resources programmatically. 
    */
   createBackupSelection(callback?: (err: AWSError, data: Backup.Types.CreateBackupSelectionOutput) => void): Request<Backup.Types.CreateBackupSelectionOutput, AWSError>;
   /**
@@ -416,11 +416,11 @@ declare class Backup extends Service {
    */
   putBackupVaultAccessPolicy(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Applies Backup Vault Lock to a backup vault, preventing attempts to delete any recovery point stored in or created in a backup vault. Vault Lock also prevents attempts to update the lifecycle policy that controls the retention period of any recovery point currently stored in a backup vault. If specified, Vault Lock enforces a minimum and maximum retention period for future backup and copy jobs that target a backup vault.
+   * Applies Backup Vault Lock to a backup vault, preventing attempts to delete any recovery point stored in or created in a backup vault. Vault Lock also prevents attempts to update the lifecycle policy that controls the retention period of any recovery point currently stored in a backup vault. If specified, Vault Lock enforces a minimum and maximum retention period for future backup and copy jobs that target a backup vault.  Backup Vault Lock has yet to receive a third-party assessment for SEC 17a-4(f) and CFTC. 
    */
   putBackupVaultLockConfiguration(params: Backup.Types.PutBackupVaultLockConfigurationInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Applies Backup Vault Lock to a backup vault, preventing attempts to delete any recovery point stored in or created in a backup vault. Vault Lock also prevents attempts to update the lifecycle policy that controls the retention period of any recovery point currently stored in a backup vault. If specified, Vault Lock enforces a minimum and maximum retention period for future backup and copy jobs that target a backup vault.
+   * Applies Backup Vault Lock to a backup vault, preventing attempts to delete any recovery point stored in or created in a backup vault. Vault Lock also prevents attempts to update the lifecycle policy that controls the retention period of any recovery point currently stored in a backup vault. If specified, Vault Lock enforces a minimum and maximum retention period for future backup and copy jobs that target a backup vault.  Backup Vault Lock has yet to receive a third-party assessment for SEC 17a-4(f) and CFTC. 
    */
   putBackupVaultLockConfiguration(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -639,7 +639,7 @@ declare namespace Backup {
   export type BackupOptions = {[key: string]: BackupOptionValue};
   export interface BackupPlan {
     /**
-     * The display name of a backup plan.
+     * The display name of a backup plan. Must contain 1 to 50 alphanumeric or '-_.' characters.
      */
     BackupPlanName: BackupPlanName;
     /**
@@ -653,7 +653,7 @@ declare namespace Backup {
   }
   export interface BackupPlanInput {
     /**
-     * The optional display name of a backup plan.
+     * The display name of a backup plan. Must contain 1 to 50 alphanumeric or '-_.' characters.
      */
     BackupPlanName: BackupPlanName;
     /**
@@ -705,7 +705,7 @@ declare namespace Backup {
      */
     BackupPlanName?: BackupPlanName;
     /**
-     * A unique string that identifies the request and allows failed requests to be retried without the risk of running the operation twice.
+     * A unique string that identifies the request and allows failed requests to be retried without the risk of running the operation twice. This parameter is optional. If used, this parameter must contain 1 to 50 alphanumeric or '-_.' characters.
      */
     CreatorRequestId?: string;
     /**
@@ -719,7 +719,7 @@ declare namespace Backup {
   }
   export interface BackupRule {
     /**
-     * An optional display name for a backup rule.
+     * A display name for a backup rule. Must contain 1 to 50 alphanumeric or '-_.' characters.
      */
     RuleName: BackupRuleName;
     /**
@@ -727,7 +727,7 @@ declare namespace Backup {
      */
     TargetBackupVaultName: BackupVaultName;
     /**
-     * A cron expression in UTC specifying when Backup initiates a backup job. For more information about cron expressions, see Schedule Expressions for Rules in the Amazon CloudWatch Events User Guide.. Prior to specifying a value for this parameter, we recommend testing your cron expression using one of the many available cron generator and testing tools.
+     * A cron expression in UTC specifying when Backup initiates a backup job. For more information about Amazon Web Services cron expressions, see Schedule Expressions for Rules in the Amazon CloudWatch Events User Guide.. Two examples of Amazon Web Services cron expressions are  15 * ? * * * (take a backup every hour at 15 minutes past the hour) and 0 12 * * ? * (take a backup every day at 12 noon UTC). For a table of examples, click the preceding link and scroll down the page.
      */
     ScheduleExpression?: CronExpression;
     /**
@@ -761,7 +761,7 @@ declare namespace Backup {
   }
   export interface BackupRuleInput {
     /**
-     * An optional display name for a backup rule.
+     * A display name for a backup rule. Must contain 1 to 50 alphanumeric or '-_.' characters.
      */
     RuleName: BackupRuleName;
     /**
@@ -802,7 +802,7 @@ declare namespace Backup {
   export type BackupRulesInput = BackupRuleInput[];
   export interface BackupSelection {
     /**
-     * The display name of a resource selection document.
+     * The display name of a resource selection document. Must contain 1 to 50 alphanumeric or '-_.' characters.
      */
     SelectionName: BackupSelectionName;
     /**
@@ -810,14 +810,20 @@ declare namespace Backup {
      */
     IamRoleArn: IAMRoleArn;
     /**
-     * An array of strings that contain Amazon Resource Names (ARNs) of resources to assign to a backup plan.
+     * A list of Amazon Resource Names (ARNs) to assign to a backup plan. The maximum number of ARNs is 500 without wildcards, or 30 ARNs with wildcards. If you need to assign many resources to a backup plan, consider a different resource selection strategy, such as assigning all resources of a resource type or refining your resource selection using tags.
      */
     Resources?: ResourceArns;
     /**
-     * An array of conditions used to specify a set of resources to assign to a backup plan; for example, "StringEquals": {"ec2:ResourceTag/Department": "accounting". Assigns the backup plan to every resource with at least one matching tag.
+     * A list of conditions that you define to assign resources to your backup plans using tags. For example, "StringEquals": {"Department": "accounting". Condition operators are case sensitive.  ListOfTags differs from Conditions as follows:   When you specify more than one condition, you assign all resources that match AT LEAST ONE condition (using OR logic).    ListOfTags only supports StringEquals. Conditions supports StringEquals, StringLike, StringNotEquals, and StringNotLike.   
      */
     ListOfTags?: ListOfTags;
+    /**
+     * A list of Amazon Resource Names (ARNs) to exclude from a backup plan. The maximum number of ARNs is 500 without wildcards, or 30 ARNs with wildcards. If you need to exclude many resources from a backup plan, consider a different resource selection strategy, such as assigning only one or a few resource types or refining your resource selection using tags.
+     */
     NotResources?: ResourceArns;
+    /**
+     * A list of conditions that you define to assign resources to your backup plans using tags. For example, "StringEquals": {"Department": "accounting". Condition operators are case sensitive.  Conditions differs from ListOfTags as follows:   When you specify more than one condition, you only assign the resources that match ALL conditions (using AND logic).    Conditions supports StringEquals, StringLike, StringNotEquals, and StringNotLike. ListOfTags only supports StringEquals.  
+     */
     Conditions?: Conditions;
   }
   export type BackupSelectionName = string;
@@ -840,7 +846,7 @@ declare namespace Backup {
      */
     CreationDate?: timestamp;
     /**
-     * A unique string that identifies the request and allows failed requests to be retried without the risk of running the operation twice.
+     * A unique string that identifies the request and allows failed requests to be retried without the risk of running the operation twice. This parameter is optional. If used, this parameter must contain 1 to 50 alphanumeric or '-_.' characters.
      */
     CreatorRequestId?: string;
     /**
@@ -869,7 +875,7 @@ declare namespace Backup {
      */
     EncryptionKeyArn?: ARN;
     /**
-     * A unique string that identifies the request and allows failed requests to be retried without the risk of running the operation twice.
+     * A unique string that identifies the request and allows failed requests to be retried without the risk of running the operation twice. This parameter is optional. If used, this parameter must contain 1 to 50 alphanumeric or '-_.' characters.
      */
     CreatorRequestId?: string;
     /**
@@ -908,30 +914,48 @@ declare namespace Backup {
   export type ComplianceResourceIdList = string[];
   export interface Condition {
     /**
-     * An operation, such as StringEquals, that is applied to a key-value pair used to filter resources in a selection.
+     * An operation applied to a key-value pair used to assign resources to your backup plan. Condition only supports StringEquals. For more flexible assignment options, incluidng StringLike and the ability to exclude resources from your backup plan, use Conditions (with an "s" on the end) for your  BackupSelection .
      */
     ConditionType: ConditionType;
     /**
-     * The key in a key-value pair. For example, in "ec2:ResourceTag/Department": "accounting", "ec2:ResourceTag/Department" is the key.
+     * The key in a key-value pair. For example, in the tag Department: Accounting, Department is the key.
      */
     ConditionKey: ConditionKey;
     /**
-     * The value in a key-value pair. For example, in "ec2:ResourceTag/Department": "accounting", "accounting" is the value.
+     * The value in a key-value pair. For example, in the tag Department: Accounting, Accounting is the value.
      */
     ConditionValue: ConditionValue;
   }
   export type ConditionKey = string;
   export interface ConditionParameter {
+    /**
+     * The key in a key-value pair. For example, in the tag Department: Accounting, Department is the key.
+     */
     ConditionKey?: ConditionKey;
+    /**
+     * The value in a key-value pair. For example, in the tag Department: Accounting, Accounting is the value.
+     */
     ConditionValue?: ConditionValue;
   }
   export type ConditionParameters = ConditionParameter[];
   export type ConditionType = "STRINGEQUALS"|string;
   export type ConditionValue = string;
   export interface Conditions {
+    /**
+     * Filters the values of your tagged resources for only those resources that you tagged with the same value. Also called "exact matching."
+     */
     StringEquals?: ConditionParameters;
+    /**
+     * Filters the values of your tagged resources for only those resources that you tagged that do not have the same value. Also called "negated matching."
+     */
     StringNotEquals?: ConditionParameters;
+    /**
+     * Filters the values of your tagged resources for matching tag values with the use of a wildcard character (*) anywhere in the string. For example, "prod*" or "*rod*" matches the tag value "production".
+     */
     StringLike?: ConditionParameters;
+    /**
+     * Filters the values of your tagged resources for non-matching tag values with the use of a wildcard character (*) anywhere in the string.
+     */
     StringNotLike?: ConditionParameters;
   }
   export interface ControlInputParameter {
@@ -956,7 +980,7 @@ declare namespace Backup {
      */
     ComplianceResourceTypes?: ResourceTypeList;
     /**
-     * Describes whether the control scope includes resources with one or more tags. Each tag is a key-value pair.
+     * The tag key-value pair applied to those Amazon Web Services resources that you want to trigger an evaluation for a rule. A maximum of one key-value pair can be provided. The tag value is optional, but it cannot be an empty string. The structure to assign a tag is: [{"Key":"string","Value":"string"}].
      */
     Tags?: stringMap;
   }
@@ -1039,7 +1063,7 @@ declare namespace Backup {
      */
     BackupPlanTags?: Tags;
     /**
-     * Identifies the request and allows failed requests to be retried without the risk of running the operation twice. If the request includes a CreatorRequestId that matches an existing backup plan, that plan is returned. This parameter is optional.
+     * Identifies the request and allows failed requests to be retried without the risk of running the operation twice. If the request includes a CreatorRequestId that matches an existing backup plan, that plan is returned. This parameter is optional. If used, this parameter must contain 1 to 50 alphanumeric or '-_.' characters.
      */
     CreatorRequestId?: string;
   }
@@ -1075,7 +1099,7 @@ declare namespace Backup {
      */
     BackupSelection: BackupSelection;
     /**
-     * A unique string that identifies the request and allows failed requests to be retried without the risk of running the operation twice.
+     * A unique string that identifies the request and allows failed requests to be retried without the risk of running the operation twice. This parameter is optional. If used, this parameter must contain 1 to 50 alphanumeric or '-_.' characters.
      */
     CreatorRequestId?: string;
   }
@@ -1107,7 +1131,7 @@ declare namespace Backup {
      */
     EncryptionKeyArn?: ARN;
     /**
-     * A unique string that identifies the request and allows failed requests to be retried without the risk of running the operation twice.
+     * A unique string that identifies the request and allows failed requests to be retried without the risk of running the operation twice. This parameter is optional. If used, this parameter must contain 1 to 50 alphanumeric or '-_.' characters.
      */
     CreatorRequestId?: string;
   }
@@ -1593,6 +1617,10 @@ declare namespace Backup {
      * Returns a list of all services along with the opt-in preferences in the Region.
      */
     ResourceTypeOptInPreference?: ResourceTypeOptInPreference;
+    /**
+     * Returns whether a DynamoDB recovery point was taken using  Backup's advanced DynamoDB backup features. 
+     */
+    ResourceTypeManagementPreference?: ResourceTypeManagementPreference;
   }
   export interface DescribeReportJobInput {
     /**
@@ -2433,7 +2461,7 @@ declare namespace Backup {
      */
     SNSTopicArn: ARN;
     /**
-     * An array of events that indicate the status of jobs to back up resources to the backup vault.  The following events are supported:  BACKUP_JOB_STARTED, BACKUP_JOB_COMPLETED,  COPY_JOB_STARTED, COPY_JOB_SUCCESSFUL, COPY_JOB_FAILED,  RESTORE_JOB_STARTED, RESTORE_JOB_COMPLETED, and RECOVERY_POINT_MODIFIED. To find failed backup jobs, use BACKUP_JOB_COMPLETED and filter using event metadata. Other events in the following list are deprecated. 
+     * An array of events that indicate the status of jobs to back up resources to the backup vault. For common use cases and code samples, see Using Amazon SNS to track Backup events. The following events are supported:    BACKUP_JOB_STARTED | BACKUP_JOB_COMPLETED     COPY_JOB_STARTED | COPY_JOB_SUCCESSFUL | COPY_JOB_FAILED     RESTORE_JOB_STARTED | RESTORE_JOB_COMPLETED | RECOVERY_POINT_MODIFIED     Ignore the list below because it includes deprecated events. Refer to the list above. 
      */
     BackupVaultEvents: BackupVaultEvents;
   }
@@ -2680,6 +2708,7 @@ declare namespace Backup {
   export type ResourceArns = ARN[];
   export type ResourceType = string;
   export type ResourceTypeList = ARN[];
+  export type ResourceTypeManagementPreference = {[key: string]: IsEnabled};
   export type ResourceTypeOptInPreference = {[key: string]: IsEnabled};
   export type ResourceTypes = ResourceType[];
   export type RestoreJobId = string;
@@ -2883,7 +2912,7 @@ declare namespace Backup {
      */
     ResourceArn: ARN;
     /**
-     * Key-value pairs that are used to help organize your resources. You can assign your own metadata to the resources you create.
+     * Key-value pairs that are used to help organize your resources. You can assign your own metadata to the resources you create. For clarity, this is the structure to assign tags: [{"Key":"string","Value":"string"}].
      */
     Tags: Tags;
   }
@@ -3006,6 +3035,10 @@ declare namespace Backup {
      * Updates the list of services along with the opt-in preferences for the Region.
      */
     ResourceTypeOptInPreference?: ResourceTypeOptInPreference;
+    /**
+     * Enables or disables  Backup's advanced DynamoDB backup features for the Region.
+     */
+    ResourceTypeManagementPreference?: ResourceTypeManagementPreference;
   }
   export interface UpdateReportPlanInput {
     /**

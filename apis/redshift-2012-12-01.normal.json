@@ -1805,6 +1805,32 @@
       ],
       "documentation": "<p>Returns information about the partner integrations defined for a cluster.</p>"
     },
+    "DescribeReservedNodeExchangeStatus": {
+      "name": "DescribeReservedNodeExchangeStatus",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeReservedNodeExchangeStatusInputMessage"
+      },
+      "output": {
+        "shape": "DescribeReservedNodeExchangeStatusOutputMessage",
+        "resultWrapper": "DescribeReservedNodeExchangeStatusResult"
+      },
+      "errors": [
+        {
+          "shape": "ReservedNodeNotFoundFault"
+        },
+        {
+          "shape": "ReservedNodeExchangeNotFoundFault"
+        },
+        {
+          "shape": "UnsupportedOperationFault"
+        }
+      ],
+      "documentation": "<p>Returns exchange status details and associated metadata for a reserved-node exchange. Statuses include such values as in progress and requested.</p>"
+    },
     "DescribeReservedNodeOfferings": {
       "name": "DescribeReservedNodeOfferings",
       "http": {
@@ -2201,6 +2227,47 @@
         }
       ],
       "documentation": "<p>Returns a database user name and temporary password with temporary authorization to log on to an Amazon Redshift database. The action returns the database user name prefixed with <code>IAM:</code> if <code>AutoCreate</code> is <code>False</code> or <code>IAMA:</code> if <code>AutoCreate</code> is <code>True</code>. You can optionally specify one or more database user groups that the user will join at log on. By default, the temporary credentials expire in 900 seconds. You can optionally specify a duration between 900 seconds (15 minutes) and 3600 seconds (60 minutes). For more information, see <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/generating-user-credentials.html\">Using IAM Authentication to Generate Database User Credentials</a> in the Amazon Redshift Cluster Management Guide.</p> <p>The Identity and Access Management (IAM) user or role that runs GetClusterCredentials must have an IAM policy attached that allows access to all necessary actions and resources. For more information about permissions, see <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html#redshift-policy-resources.getclustercredentials-resources\">Resource Policies for GetClusterCredentials</a> in the Amazon Redshift Cluster Management Guide.</p> <p>If the <code>DbGroups</code> parameter is specified, the IAM policy must allow the <code>redshift:JoinGroup</code> action with access to the listed <code>dbgroups</code>. </p> <p>In addition, if the <code>AutoCreate</code> parameter is set to <code>True</code>, then the policy must include the <code>redshift:CreateClusterUser</code> privilege.</p> <p>If the <code>DbName</code> parameter is specified, the IAM policy must allow access to the resource <code>dbname</code> for the specified database name. </p>"
+    },
+    "GetReservedNodeExchangeConfigurationOptions": {
+      "name": "GetReservedNodeExchangeConfigurationOptions",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetReservedNodeExchangeConfigurationOptionsInputMessage"
+      },
+      "output": {
+        "shape": "GetReservedNodeExchangeConfigurationOptionsOutputMessage",
+        "resultWrapper": "GetReservedNodeExchangeConfigurationOptionsResult"
+      },
+      "errors": [
+        {
+          "shape": "ReservedNodeNotFoundFault"
+        },
+        {
+          "shape": "InvalidReservedNodeStateFault"
+        },
+        {
+          "shape": "ReservedNodeAlreadyMigratedFault"
+        },
+        {
+          "shape": "ReservedNodeOfferingNotFoundFault"
+        },
+        {
+          "shape": "UnsupportedOperationFault"
+        },
+        {
+          "shape": "DependentServiceUnavailableFault"
+        },
+        {
+          "shape": "ClusterNotFoundFault"
+        },
+        {
+          "shape": "ClusterSnapshotNotFoundFault"
+        }
+      ],
+      "documentation": "<p>Gets the configuration options for the reserved-node exchange. These options include information about the source reserved node and target reserved node offering. Details include the node type, the price, the node count, and the offering type.</p>"
     },
     "GetReservedNodeExchangeOfferings": {
       "name": "GetReservedNodeExchangeOfferings",
@@ -2894,6 +2961,24 @@
         },
         {
           "shape": "LimitExceededFault"
+        },
+        {
+          "shape": "ReservedNodeNotFoundFault"
+        },
+        {
+          "shape": "InvalidReservedNodeStateFault"
+        },
+        {
+          "shape": "ReservedNodeAlreadyMigratedFault"
+        },
+        {
+          "shape": "ReservedNodeOfferingNotFoundFault"
+        },
+        {
+          "shape": "DependentServiceUnavailableFault"
+        },
+        {
+          "shape": "ReservedNodeAlreadyExistsFault"
         }
       ],
       "documentation": "<p>Changes the size of the cluster. You can change the cluster's type, or change the number or type of nodes. The default behavior is to use the elastic resize method. With an elastic resize, your cluster is available for read and write operations more quickly than with the classic resize method. </p> <p>Elastic resize operations have the following restrictions:</p> <ul> <li> <p>You can only resize clusters of the following types:</p> <ul> <li> <p>dc1.large (if your cluster is in a VPC)</p> </li> <li> <p>dc1.8xlarge (if your cluster is in a VPC)</p> </li> <li> <p>dc2.large</p> </li> <li> <p>dc2.8xlarge</p> </li> <li> <p>ds2.xlarge</p> </li> <li> <p>ds2.8xlarge</p> </li> <li> <p>ra3.xlplus</p> </li> <li> <p>ra3.4xlarge</p> </li> <li> <p>ra3.16xlarge</p> </li> </ul> </li> <li> <p>The type of nodes that you add must match the node type for the cluster.</p> </li> </ul>"
@@ -2986,6 +3071,27 @@
         },
         {
           "shape": "InvalidTagFault"
+        },
+        {
+          "shape": "ReservedNodeNotFoundFault"
+        },
+        {
+          "shape": "InvalidReservedNodeStateFault"
+        },
+        {
+          "shape": "ReservedNodeAlreadyMigratedFault"
+        },
+        {
+          "shape": "ReservedNodeOfferingNotFoundFault"
+        },
+        {
+          "shape": "DependentServiceUnavailableFault"
+        },
+        {
+          "shape": "ReservedNodeAlreadyExistsFault"
+        },
+        {
+          "shape": "UnsupportedOperationFault"
         }
       ],
       "documentation": "<p>Creates a new cluster from a snapshot. By default, Amazon Redshift creates the resulting cluster with the same configuration as the original cluster from which the snapshot was created, except that the new cluster is created with the default cluster security and parameter groups. After Amazon Redshift creates the cluster, you can use the <a>ModifyCluster</a> API to associate a different security group and different parameter group with the restored cluster. If you are using a DS node type, you can also choose to change to another DS node type of the same size during restore.</p> <p>If you restore a cluster into a VPC, you must provide a cluster subnet group where you want the cluster restored.</p> <p> For more information about working with snapshots, go to <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html\">Amazon Redshift Snapshots</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>"
@@ -3814,6 +3920,10 @@
         "DefaultIamRoleArn": {
           "shape": "String",
           "documentation": "<p>The Amazon Resource Name (ARN) for the IAM role set as default for the cluster.</p>"
+        },
+        "ReservedNodeExchangeStatus": {
+          "shape": "ReservedNodeExchangeStatus",
+          "documentation": "<p>The status of the reserved-node exchange request. Statuses include in-progress and requested.</p>"
         }
       },
       "documentation": "<p>Describes a cluster.</p>",
@@ -6036,6 +6146,40 @@
         }
       }
     },
+    "DescribeReservedNodeExchangeStatusInputMessage": {
+      "type": "structure",
+      "members": {
+        "ReservedNodeId": {
+          "shape": "String",
+          "documentation": "<p>The identifier of the source reserved node in a reserved-node exchange request.</p>"
+        },
+        "ReservedNodeExchangeRequestId": {
+          "shape": "String",
+          "documentation": "<p>The identifier of the reserved-node exchange request.</p>"
+        },
+        "MaxRecords": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>The maximum number of response records to return in each call. If the number of remaining response records exceeds the specified <code>MaxRecords</code> value, a value is returned in a <code>Marker</code> field of the response. You can retrieve the next set of records by retrying the command with the returned marker value.</p>"
+        },
+        "Marker": {
+          "shape": "String",
+          "documentation": "<p>An optional pagination token provided by a previous <code>DescribeReservedNodeExchangeStatus</code> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by the <code>MaxRecords</code> parameter. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request.</p>"
+        }
+      }
+    },
+    "DescribeReservedNodeExchangeStatusOutputMessage": {
+      "type": "structure",
+      "members": {
+        "ReservedNodeExchangeStatusDetails": {
+          "shape": "ReservedNodeExchangeStatusList",
+          "documentation": "<p>The details of the reserved-node exchange request, including the status, request time, source reserved-node identifier, and additional details.</p>"
+        },
+        "Marker": {
+          "shape": "String",
+          "documentation": "<p>A pagination token provided by a previous <code>DescribeReservedNodeExchangeStatus</code> request.</p>"
+        }
+      }
+    },
     "DescribeReservedNodeOfferingsMessage": {
       "type": "structure",
       "members": {
@@ -6817,6 +6961,47 @@
         }
       },
       "documentation": "<p>The request parameters to get cluster credentials.</p>"
+    },
+    "GetReservedNodeExchangeConfigurationOptionsInputMessage": {
+      "type": "structure",
+      "required": [
+        "ActionType"
+      ],
+      "members": {
+        "ActionType": {
+          "shape": "ReservedNodeExchangeActionType",
+          "documentation": "<p>The action type of the reserved-node configuration. The action type can be an exchange initiated from either a snapshot or a resize.</p>"
+        },
+        "ClusterIdentifier": {
+          "shape": "String",
+          "documentation": "<p>The identifier for the cluster that is the source for a reserved-node exchange.</p>"
+        },
+        "SnapshotIdentifier": {
+          "shape": "String",
+          "documentation": "<p>The identifier for the snapshot that is the source for the reserved-node exchange.</p>"
+        },
+        "MaxRecords": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>The maximum number of response records to return in each call. If the number of remaining response records exceeds the specified <code>MaxRecords</code> value, a value is returned in a <code>Marker</code> field of the response. You can retrieve the next set of records by retrying the command with the returned marker value.</p>"
+        },
+        "Marker": {
+          "shape": "String",
+          "documentation": "<p>An optional pagination token provided by a previous <code>GetReservedNodeExchangeConfigurationOptions</code> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by the <code>MaxRecords</code> parameter. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request.</p>"
+        }
+      }
+    },
+    "GetReservedNodeExchangeConfigurationOptionsOutputMessage": {
+      "type": "structure",
+      "members": {
+        "Marker": {
+          "shape": "String",
+          "documentation": "<p>A pagination token provided by a previous <code>GetReservedNodeExchangeConfigurationOptions</code> request.</p>"
+        },
+        "ReservedNodeConfigurationOptionList": {
+          "shape": "ReservedNodeConfigurationOptionList",
+          "documentation": "<p>the configuration options for the reserved-node exchange. These options include information about the source reserved node and target reserved node. Details include the node type, the price, the node count, and the offering type.</p>"
+        }
+      }
     },
     "GetReservedNodeExchangeOfferingsInputMessage": {
       "type": "structure",
@@ -8162,6 +8347,98 @@
       "documentation": "<p>Describes a reserved node. You can call the <a>DescribeReservedNodeOfferings</a> API to obtain the available reserved node offerings. </p>",
       "wrapper": true
     },
+    "ReservedNodeConfigurationOption": {
+      "type": "structure",
+      "members": {
+        "SourceReservedNode": {
+          "shape": "ReservedNode"
+        },
+        "TargetReservedNodeCount": {
+          "shape": "Integer",
+          "documentation": "<p>The target reserved-node count.</p>"
+        },
+        "TargetReservedNodeOffering": {
+          "shape": "ReservedNodeOffering"
+        }
+      },
+      "documentation": "<p>Details for a reserved-node exchange. Examples include the node type for a reserved node, the price for a node, the node's state, and other details.</p>",
+      "wrapper": true
+    },
+    "ReservedNodeConfigurationOptionList": {
+      "type": "list",
+      "member": {
+        "shape": "ReservedNodeConfigurationOption",
+        "locationName": "ReservedNodeConfigurationOption"
+      }
+    },
+    "ReservedNodeExchangeActionType": {
+      "type": "string",
+      "enum": [
+        "restore-cluster",
+        "resize-cluster"
+      ]
+    },
+    "ReservedNodeExchangeStatus": {
+      "type": "structure",
+      "members": {
+        "ReservedNodeExchangeRequestId": {
+          "shape": "String",
+          "documentation": "<p>The identifier of the reserved-node exchange request.</p>"
+        },
+        "Status": {
+          "shape": "ReservedNodeExchangeStatusType",
+          "documentation": "<p>The status of the reserved-node exchange request. Statuses include in-progress and requested.</p>"
+        },
+        "RequestTime": {
+          "shape": "TStamp",
+          "documentation": "<p>A date and time that indicate when the reserved-node exchange was requested.</p>"
+        },
+        "SourceReservedNodeId": {
+          "shape": "String",
+          "documentation": "<p>The identifier of the source reserved node.</p>"
+        },
+        "SourceReservedNodeType": {
+          "shape": "String",
+          "documentation": "<p>The source reserved-node type, for example ds2.xlarge.</p>"
+        },
+        "SourceReservedNodeCount": {
+          "shape": "Integer",
+          "documentation": "<p>The source reserved-node count in the cluster.</p>"
+        },
+        "TargetReservedNodeOfferingId": {
+          "shape": "String",
+          "documentation": "<p>The identifier of the target reserved node offering.</p>"
+        },
+        "TargetReservedNodeType": {
+          "shape": "String",
+          "documentation": "<p>The node type of the target reserved node, for example ra3.4xlarge.</p>"
+        },
+        "TargetReservedNodeCount": {
+          "shape": "Integer",
+          "documentation": "<p>The count of target reserved nodes in the cluster.</p>"
+        }
+      },
+      "documentation": "<p>Reserved-node status details, such as the source reserved-node identifier, the target reserved-node identifier, the node type, the node count, and other details.</p>",
+      "wrapper": true
+    },
+    "ReservedNodeExchangeStatusList": {
+      "type": "list",
+      "member": {
+        "shape": "ReservedNodeExchangeStatus",
+        "locationName": "ReservedNodeExchangeStatus"
+      }
+    },
+    "ReservedNodeExchangeStatusType": {
+      "type": "string",
+      "enum": [
+        "REQUESTED",
+        "PENDING",
+        "IN_PROGRESS",
+        "RETRYING",
+        "SUCCEEDED",
+        "FAILED"
+      ]
+    },
     "ReservedNodeList": {
       "type": "list",
       "member": {
@@ -8300,6 +8577,14 @@
         "Classic": {
           "shape": "BooleanOptional",
           "documentation": "<p>A boolean value indicating whether the resize operation is using the classic resize process. If you don't provide this parameter or set the value to <code>false</code>, the resize type is elastic. </p>"
+        },
+        "ReservedNodeId": {
+          "shape": "String",
+          "documentation": "<p>The identifier of the reserved node.</p>"
+        },
+        "TargetReservedNodeOfferingId": {
+          "shape": "String",
+          "documentation": "<p>The identifier of the target reserved node offering.</p>"
         }
       },
       "documentation": "<p>Describes a resize cluster operation. For example, a scheduled action to run the <code>ResizeCluster</code> API operation. </p>"
@@ -8525,6 +8810,14 @@
         "DefaultIamRoleArn": {
           "shape": "String",
           "documentation": "<p>The Amazon Resource Name (ARN) for the IAM role that was set as default for the cluster when the cluster was last modified while it was restored from a snapshot.</p>"
+        },
+        "ReservedNodeId": {
+          "shape": "String",
+          "documentation": "<p>The identifier of the target reserved node offering.</p>"
+        },
+        "TargetReservedNodeOfferingId": {
+          "shape": "String",
+          "documentation": "<p>The identifier of the target reserved node offering.</p>"
         }
       },
       "documentation": "<p/>"

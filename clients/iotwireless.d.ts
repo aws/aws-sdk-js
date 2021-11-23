@@ -324,6 +324,14 @@ declare class IoTWireless extends Service {
    */
   getMulticastGroupSession(callback?: (err: AWSError, data: IoTWireless.Types.GetMulticastGroupSessionResponse) => void): Request<IoTWireless.Types.GetMulticastGroupSessionResponse, AWSError>;
   /**
+   * Get NetworkAnalyzer configuration.
+   */
+  getNetworkAnalyzerConfiguration(params: IoTWireless.Types.GetNetworkAnalyzerConfigurationRequest, callback?: (err: AWSError, data: IoTWireless.Types.GetNetworkAnalyzerConfigurationResponse) => void): Request<IoTWireless.Types.GetNetworkAnalyzerConfigurationResponse, AWSError>;
+  /**
+   * Get NetworkAnalyzer configuration.
+   */
+  getNetworkAnalyzerConfiguration(callback?: (err: AWSError, data: IoTWireless.Types.GetNetworkAnalyzerConfigurationResponse) => void): Request<IoTWireless.Types.GetNetworkAnalyzerConfigurationResponse, AWSError>;
+  /**
    * Gets information about a partner account. If PartnerAccountId and PartnerType are null, returns all partner accounts.
    */
   getPartnerAccount(params: IoTWireless.Types.GetPartnerAccountRequest, callback?: (err: AWSError, data: IoTWireless.Types.GetPartnerAccountResponse) => void): Request<IoTWireless.Types.GetPartnerAccountResponse, AWSError>;
@@ -643,6 +651,14 @@ declare class IoTWireless extends Service {
    * Updates properties of a multicast group session.
    */
   updateMulticastGroup(callback?: (err: AWSError, data: IoTWireless.Types.UpdateMulticastGroupResponse) => void): Request<IoTWireless.Types.UpdateMulticastGroupResponse, AWSError>;
+  /**
+   * Update NetworkAnalyzer configuration.
+   */
+  updateNetworkAnalyzerConfiguration(params: IoTWireless.Types.UpdateNetworkAnalyzerConfigurationRequest, callback?: (err: AWSError, data: IoTWireless.Types.UpdateNetworkAnalyzerConfigurationResponse) => void): Request<IoTWireless.Types.UpdateNetworkAnalyzerConfigurationResponse, AWSError>;
+  /**
+   * Update NetworkAnalyzer configuration.
+   */
+  updateNetworkAnalyzerConfiguration(callback?: (err: AWSError, data: IoTWireless.Types.UpdateNetworkAnalyzerConfigurationResponse) => void): Request<IoTWireless.Types.UpdateNetworkAnalyzerConfigurationResponse, AWSError>;
   /**
    * Updates properties of a partner account.
    */
@@ -1375,6 +1391,20 @@ declare namespace IoTWireless {
   }
   export interface GetMulticastGroupSessionResponse {
     LoRaWAN?: LoRaWANMulticastSession;
+  }
+  export interface GetNetworkAnalyzerConfigurationRequest {
+    ConfigurationName: NetworkAnalyzerConfigurationName;
+  }
+  export interface GetNetworkAnalyzerConfigurationResponse {
+    TraceContent?: TraceContent;
+    /**
+     * List of WirelessDevices in the NetworkAnalyzerConfiguration.
+     */
+    WirelessDevices?: WirelessDeviceList;
+    /**
+     * List of WirelessGateways in the NetworkAnalyzerConfiguration.
+     */
+    WirelessGateways?: WirelessGatewayList;
   }
   export interface GetPartnerAccountRequest {
     /**
@@ -2290,6 +2320,7 @@ declare namespace IoTWireless {
   }
   export type NetId = string;
   export type NetIdFilters = NetId[];
+  export type NetworkAnalyzerConfigurationName = string;
   export type NextToken = string;
   export type NumberOfDevicesInGroup = number;
   export type NumberOfDevicesRequested = number;
@@ -2631,6 +2662,10 @@ declare namespace IoTWireless {
   }
   export type ThingArn = string;
   export type ThingName = string;
+  export interface TraceContent {
+    WirelessDeviceFrameInfo?: WirelessDeviceFrameInfo;
+    LogLevel?: LogLevel;
+  }
   export type TransmitMode = number;
   export type UlBucketSize = number;
   export type UlRate = number;
@@ -2696,6 +2731,28 @@ declare namespace IoTWireless {
     LoRaWAN?: LoRaWANMulticast;
   }
   export interface UpdateMulticastGroupResponse {
+  }
+  export interface UpdateNetworkAnalyzerConfigurationRequest {
+    ConfigurationName: NetworkAnalyzerConfigurationName;
+    TraceContent?: TraceContent;
+    /**
+     * WirelessDevices to add into NetworkAnalyzerConfiguration.
+     */
+    WirelessDevicesToAdd?: WirelessDeviceList;
+    /**
+     * WirelessDevices to remove from NetworkAnalyzerConfiguration.
+     */
+    WirelessDevicesToRemove?: WirelessDeviceList;
+    /**
+     * WirelessGateways to add into NetworkAnalyzerConfiguration.
+     */
+    WirelessGatewaysToAdd?: WirelessGatewayList;
+    /**
+     * WirelessGateways to remove from NetworkAnalyzerConfiguration.
+     */
+    WirelessGatewaysToRemove?: WirelessGatewayList;
+  }
+  export interface UpdateNetworkAnalyzerConfigurationResponse {
   }
   export interface UpdatePartnerAccountRequest {
     /**
@@ -2815,8 +2872,10 @@ declare namespace IoTWireless {
     LogLevel: LogLevel;
   }
   export type WirelessDeviceEventLogOptionList = WirelessDeviceEventLogOption[];
+  export type WirelessDeviceFrameInfo = "ENABLED"|"DISABLED"|string;
   export type WirelessDeviceId = string;
   export type WirelessDeviceIdType = "WirelessDeviceId"|"DevEui"|"ThingName"|"SidewalkManufacturingSn"|string;
+  export type WirelessDeviceList = WirelessDeviceId[];
   export interface WirelessDeviceLogOption {
     /**
      * The wireless device type.
@@ -2878,6 +2937,7 @@ declare namespace IoTWireless {
   export type WirelessGatewayEventLogOptionList = WirelessGatewayEventLogOption[];
   export type WirelessGatewayId = string;
   export type WirelessGatewayIdType = "GatewayEui"|"WirelessGatewayId"|"ThingName"|string;
+  export type WirelessGatewayList = WirelessGatewayId[];
   export interface WirelessGatewayLogOption {
     Type: WirelessGatewayType;
     LogLevel: LogLevel;

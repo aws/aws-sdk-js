@@ -1312,6 +1312,38 @@
       ],
       "documentation": "<p>Gets information about a multicast group session.</p>"
     },
+    "GetNetworkAnalyzerConfiguration": {
+      "name": "GetNetworkAnalyzerConfiguration",
+      "http": {
+        "method": "GET",
+        "requestUri": "/network-analyzer-configurations/{ConfigurationName}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "GetNetworkAnalyzerConfigurationRequest"
+      },
+      "output": {
+        "shape": "GetNetworkAnalyzerConfigurationResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Get NetworkAnalyzer configuration.</p>"
+    },
     "GetPartnerAccount": {
       "name": "GetPartnerAccount",
       "http": {
@@ -2552,6 +2584,38 @@
         }
       ],
       "documentation": "<p>Updates properties of a multicast group session.</p>"
+    },
+    "UpdateNetworkAnalyzerConfiguration": {
+      "name": "UpdateNetworkAnalyzerConfiguration",
+      "http": {
+        "method": "PATCH",
+        "requestUri": "/network-analyzer-configurations/{ConfigurationName}",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "UpdateNetworkAnalyzerConfigurationRequest"
+      },
+      "output": {
+        "shape": "UpdateNetworkAnalyzerConfigurationResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Update NetworkAnalyzer configuration.</p>"
     },
     "UpdatePartnerAccount": {
       "name": "UpdatePartnerAccount",
@@ -4228,6 +4292,35 @@
         }
       }
     },
+    "GetNetworkAnalyzerConfigurationRequest": {
+      "type": "structure",
+      "required": [
+        "ConfigurationName"
+      ],
+      "members": {
+        "ConfigurationName": {
+          "shape": "NetworkAnalyzerConfigurationName",
+          "location": "uri",
+          "locationName": "ConfigurationName"
+        }
+      }
+    },
+    "GetNetworkAnalyzerConfigurationResponse": {
+      "type": "structure",
+      "members": {
+        "TraceContent": {
+          "shape": "TraceContent"
+        },
+        "WirelessDevices": {
+          "shape": "WirelessDeviceList",
+          "documentation": "<p>List of WirelessDevices in the NetworkAnalyzerConfiguration.</p>"
+        },
+        "WirelessGateways": {
+          "shape": "WirelessGatewayList",
+          "documentation": "<p>List of WirelessGateways in the NetworkAnalyzerConfiguration.</p>"
+        }
+      }
+    },
     "GetPartnerAccountRequest": {
       "type": "structure",
       "required": [
@@ -5735,6 +5828,13 @@
       "max": 10,
       "min": 0
     },
+    "NetworkAnalyzerConfigurationName": {
+      "type": "string",
+      "documentation": "<p>NetworkAnalyzer configuration name.</p>",
+      "max": 1024,
+      "min": 1,
+      "pattern": "NetworkAnalyzerConfig_Default"
+    },
     "NextToken": {
       "type": "string",
       "max": 4096
@@ -6520,6 +6620,18 @@
     "ThingName": {
       "type": "string"
     },
+    "TraceContent": {
+      "type": "structure",
+      "members": {
+        "WirelessDeviceFrameInfo": {
+          "shape": "WirelessDeviceFrameInfo"
+        },
+        "LogLevel": {
+          "shape": "LogLevel"
+        }
+      },
+      "documentation": "<p>Trace Content for resources.</p>"
+    },
     "TransmitMode": {
       "type": "integer",
       "max": 1,
@@ -6676,6 +6788,42 @@
       }
     },
     "UpdateMulticastGroupResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "UpdateNetworkAnalyzerConfigurationRequest": {
+      "type": "structure",
+      "required": [
+        "ConfigurationName"
+      ],
+      "members": {
+        "ConfigurationName": {
+          "shape": "NetworkAnalyzerConfigurationName",
+          "location": "uri",
+          "locationName": "ConfigurationName"
+        },
+        "TraceContent": {
+          "shape": "TraceContent"
+        },
+        "WirelessDevicesToAdd": {
+          "shape": "WirelessDeviceList",
+          "documentation": "<p>WirelessDevices to add into NetworkAnalyzerConfiguration.</p>"
+        },
+        "WirelessDevicesToRemove": {
+          "shape": "WirelessDeviceList",
+          "documentation": "<p>WirelessDevices to remove from NetworkAnalyzerConfiguration.</p>"
+        },
+        "WirelessGatewaysToAdd": {
+          "shape": "WirelessGatewayList",
+          "documentation": "<p>WirelessGateways to add into NetworkAnalyzerConfiguration.</p>"
+        },
+        "WirelessGatewaysToRemove": {
+          "shape": "WirelessGatewayList",
+          "documentation": "<p>WirelessGateways to remove from NetworkAnalyzerConfiguration.</p>"
+        }
+      }
+    },
+    "UpdateNetworkAnalyzerConfigurationResponse": {
       "type": "structure",
       "members": {}
     },
@@ -6892,6 +7040,14 @@
       },
       "documentation": "<p>The list of wireless device event log options.</p>"
     },
+    "WirelessDeviceFrameInfo": {
+      "type": "string",
+      "documentation": "<p>WirelessDevice FrameInfo for trace content.</p>",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
+      ]
+    },
     "WirelessDeviceId": {
       "type": "string",
       "documentation": "<p>The ID of the wireless device.</p>",
@@ -6905,6 +7061,14 @@
         "ThingName",
         "SidewalkManufacturingSn"
       ]
+    },
+    "WirelessDeviceList": {
+      "type": "list",
+      "member": {
+        "shape": "WirelessDeviceId"
+      },
+      "max": 250,
+      "min": 0
     },
     "WirelessDeviceLogOption": {
       "type": "structure",
@@ -7043,6 +7207,12 @@
         "WirelessGatewayId",
         "ThingName"
       ]
+    },
+    "WirelessGatewayList": {
+      "type": "list",
+      "member": {
+        "shape": "WirelessGatewayId"
+      }
     },
     "WirelessGatewayLogOption": {
       "type": "structure",

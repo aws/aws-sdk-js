@@ -229,7 +229,7 @@ declare namespace Finspacedata {
      */
     sourceParams: SourceParams;
     /**
-     * Options that define the structure of the source file(s) including the format type (formatType), header row (withHeader), data separation character (separator) and the type of compression (compression).   formatType is a required attribute and can have the following values:     PARQUET - Parquet source file format.    CSV - CSV source file format.    JSON - JSON source file format.    XML - XML source file format.    For example, you could specify the following for formatParams:
+     * Options that define the structure of the source file(s) including the format type (formatType), header row (withHeader), data separation character (separator) and the type of compression (compression).   formatType is a required attribute and can have the following values:     PARQUET - Parquet source file format.    CSV - CSV source file format.    JSON - JSON source file format.    XML - XML source file format.    For example, you could specify the following for formatParams:  "formatParams": { "formatType": "CSV", "withHeader": "true", "separator": ",", "compression":"None" }  
      */
     formatParams: FormatParams;
   }

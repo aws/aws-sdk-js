@@ -724,12 +724,17 @@ declare namespace DynamoDB {
      * The list of PartiQL statements representing the batch to run.
      */
     Statements: PartiQLBatchRequest;
+    ReturnConsumedCapacity?: ReturnConsumedCapacity;
   }
   export interface BatchExecuteStatementOutput {
     /**
      * The response to each PartiQL statement in the batch.
      */
     Responses?: PartiQLBatchResponse;
+    /**
+     * The capacity units consumed by the entire operation. The values of the list are ordered according to the ordering of the statements.
+     */
+    ConsumedCapacity?: ConsumedCapacityMultiple;
   }
   export interface BatchGetItemInput {
     /**
@@ -1415,6 +1420,7 @@ declare namespace DynamoDB {
      * Set this value to get remaining results, if NextToken was returned in the statement response.
      */
     NextToken?: PartiQLNextToken;
+    ReturnConsumedCapacity?: ReturnConsumedCapacity;
   }
   export interface ExecuteStatementOutput {
     /**
@@ -1425,6 +1431,7 @@ declare namespace DynamoDB {
      * If the response of a read request exceeds the response payload limit DynamoDB will set this value in the response. If set, you can use that this value in the subsequent request to get the remaining results.
      */
     NextToken?: PartiQLNextToken;
+    ConsumedCapacity?: ConsumedCapacity;
   }
   export interface ExecuteTransactionInput {
     /**
@@ -1435,12 +1442,20 @@ declare namespace DynamoDB {
      * Set this value to get remaining results, if NextToken was returned in the statement response.
      */
     ClientRequestToken?: ClientRequestToken;
+    /**
+     * Determines the level of detail about either provisioned or on-demand throughput consumption that is returned in the response. For more information, see TransactGetItems and TransactWriteItems.
+     */
+    ReturnConsumedCapacity?: ReturnConsumedCapacity;
   }
   export interface ExecuteTransactionOutput {
     /**
      * The response to a PartiQL transaction.
      */
     Responses?: ItemResponseList;
+    /**
+     * The capacity units consumed by the entire operation. The values of the list are ordered according to the ordering of the statements.
+     */
+    ConsumedCapacity?: ConsumedCapacityMultiple;
   }
   export type ExpectedAttributeMap = {[key: string]: ExpectedAttributeValue};
   export interface ExpectedAttributeValue {

@@ -565,6 +565,14 @@ declare class Redshift extends Service {
    */
   describePartners(callback?: (err: AWSError, data: Redshift.Types.DescribePartnersOutputMessage) => void): Request<Redshift.Types.DescribePartnersOutputMessage, AWSError>;
   /**
+   * Returns exchange status details and associated metadata for a reserved-node exchange. Statuses include such values as in progress and requested.
+   */
+  describeReservedNodeExchangeStatus(params: Redshift.Types.DescribeReservedNodeExchangeStatusInputMessage, callback?: (err: AWSError, data: Redshift.Types.DescribeReservedNodeExchangeStatusOutputMessage) => void): Request<Redshift.Types.DescribeReservedNodeExchangeStatusOutputMessage, AWSError>;
+  /**
+   * Returns exchange status details and associated metadata for a reserved-node exchange. Statuses include such values as in progress and requested.
+   */
+  describeReservedNodeExchangeStatus(callback?: (err: AWSError, data: Redshift.Types.DescribeReservedNodeExchangeStatusOutputMessage) => void): Request<Redshift.Types.DescribeReservedNodeExchangeStatusOutputMessage, AWSError>;
+  /**
    * Returns a list of the available reserved node offerings by Amazon Redshift with their descriptions including the node type, the fixed and recurring costs of reserving the node and duration the node will be reserved for you. These descriptions help you determine which reserve node offering you want to purchase. You then use the unique offering ID in you call to PurchaseReservedNodeOffering to reserve one or more nodes for your Amazon Redshift cluster.   For more information about reserved node offerings, go to Purchasing Reserved Nodes in the Amazon Redshift Cluster Management Guide.
    */
   describeReservedNodeOfferings(params: Redshift.Types.DescribeReservedNodeOfferingsMessage, callback?: (err: AWSError, data: Redshift.Types.ReservedNodeOfferingsMessage) => void): Request<Redshift.Types.ReservedNodeOfferingsMessage, AWSError>;
@@ -688,6 +696,14 @@ declare class Redshift extends Service {
    * Returns a database user name and temporary password with temporary authorization to log on to an Amazon Redshift database. The action returns the database user name prefixed with IAM: if AutoCreate is False or IAMA: if AutoCreate is True. You can optionally specify one or more database user groups that the user will join at log on. By default, the temporary credentials expire in 900 seconds. You can optionally specify a duration between 900 seconds (15 minutes) and 3600 seconds (60 minutes). For more information, see Using IAM Authentication to Generate Database User Credentials in the Amazon Redshift Cluster Management Guide. The Identity and Access Management (IAM) user or role that runs GetClusterCredentials must have an IAM policy attached that allows access to all necessary actions and resources. For more information about permissions, see Resource Policies for GetClusterCredentials in the Amazon Redshift Cluster Management Guide. If the DbGroups parameter is specified, the IAM policy must allow the redshift:JoinGroup action with access to the listed dbgroups.  In addition, if the AutoCreate parameter is set to True, then the policy must include the redshift:CreateClusterUser privilege. If the DbName parameter is specified, the IAM policy must allow access to the resource dbname for the specified database name. 
    */
   getClusterCredentials(callback?: (err: AWSError, data: Redshift.Types.ClusterCredentials) => void): Request<Redshift.Types.ClusterCredentials, AWSError>;
+  /**
+   * Gets the configuration options for the reserved-node exchange. These options include information about the source reserved node and target reserved node offering. Details include the node type, the price, the node count, and the offering type.
+   */
+  getReservedNodeExchangeConfigurationOptions(params: Redshift.Types.GetReservedNodeExchangeConfigurationOptionsInputMessage, callback?: (err: AWSError, data: Redshift.Types.GetReservedNodeExchangeConfigurationOptionsOutputMessage) => void): Request<Redshift.Types.GetReservedNodeExchangeConfigurationOptionsOutputMessage, AWSError>;
+  /**
+   * Gets the configuration options for the reserved-node exchange. These options include information about the source reserved node and target reserved node offering. Details include the node type, the price, the node count, and the offering type.
+   */
+  getReservedNodeExchangeConfigurationOptions(callback?: (err: AWSError, data: Redshift.Types.GetReservedNodeExchangeConfigurationOptionsOutputMessage) => void): Request<Redshift.Types.GetReservedNodeExchangeConfigurationOptionsOutputMessage, AWSError>;
   /**
    * Returns an array of DC2 ReservedNodeOfferings that matches the payment type, term, and usage price of the given DC1 reserved node.
    */
@@ -1391,6 +1407,10 @@ declare namespace Redshift {
      * The Amazon Resource Name (ARN) for the IAM role set as default for the cluster.
      */
     DefaultIamRoleArn?: String;
+    /**
+     * The status of the reserved-node exchange request. Statuses include in-progress and requested.
+     */
+    ReservedNodeExchangeStatus?: ReservedNodeExchangeStatus;
   }
   export interface ClusterAssociatedToSchedule {
     /**
@@ -2950,6 +2970,34 @@ declare namespace Redshift {
      */
     PartnerIntegrationInfoList?: PartnerIntegrationInfoList;
   }
+  export interface DescribeReservedNodeExchangeStatusInputMessage {
+    /**
+     * The identifier of the source reserved node in a reserved-node exchange request.
+     */
+    ReservedNodeId?: String;
+    /**
+     * The identifier of the reserved-node exchange request.
+     */
+    ReservedNodeExchangeRequestId?: String;
+    /**
+     * The maximum number of response records to return in each call. If the number of remaining response records exceeds the specified MaxRecords value, a value is returned in a Marker field of the response. You can retrieve the next set of records by retrying the command with the returned marker value.
+     */
+    MaxRecords?: IntegerOptional;
+    /**
+     * An optional pagination token provided by a previous DescribeReservedNodeExchangeStatus request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by the MaxRecords parameter. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request.
+     */
+    Marker?: String;
+  }
+  export interface DescribeReservedNodeExchangeStatusOutputMessage {
+    /**
+     * The details of the reserved-node exchange request, including the status, request time, source reserved-node identifier, and additional details.
+     */
+    ReservedNodeExchangeStatusDetails?: ReservedNodeExchangeStatusList;
+    /**
+     * A pagination token provided by a previous DescribeReservedNodeExchangeStatus request.
+     */
+    Marker?: String;
+  }
   export interface DescribeReservedNodeOfferingsMessage {
     /**
      * The unique identifier for the offering.
@@ -3523,6 +3571,38 @@ declare namespace Redshift {
      * A list of the names of existing database groups that the user named in DbUser will join for the current session, in addition to any group memberships for an existing user. If not specified, a new user is added only to PUBLIC. Database group name constraints   Must be 1 to 64 alphanumeric characters or hyphens   Must contain only lowercase letters, numbers, underscore, plus sign, period (dot), at symbol (@), or hyphen.   First character must be a letter.   Must not contain a colon ( : ) or slash ( / ).    Cannot be a reserved word. A list of reserved words can be found in Reserved Words in the Amazon Redshift Database Developer Guide.  
      */
     DbGroups?: DbGroupList;
+  }
+  export interface GetReservedNodeExchangeConfigurationOptionsInputMessage {
+    /**
+     * The action type of the reserved-node configuration. The action type can be an exchange initiated from either a snapshot or a resize.
+     */
+    ActionType: ReservedNodeExchangeActionType;
+    /**
+     * The identifier for the cluster that is the source for a reserved-node exchange.
+     */
+    ClusterIdentifier?: String;
+    /**
+     * The identifier for the snapshot that is the source for the reserved-node exchange.
+     */
+    SnapshotIdentifier?: String;
+    /**
+     * The maximum number of response records to return in each call. If the number of remaining response records exceeds the specified MaxRecords value, a value is returned in a Marker field of the response. You can retrieve the next set of records by retrying the command with the returned marker value.
+     */
+    MaxRecords?: IntegerOptional;
+    /**
+     * An optional pagination token provided by a previous GetReservedNodeExchangeConfigurationOptions request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by the MaxRecords parameter. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request.
+     */
+    Marker?: String;
+  }
+  export interface GetReservedNodeExchangeConfigurationOptionsOutputMessage {
+    /**
+     * A pagination token provided by a previous GetReservedNodeExchangeConfigurationOptions request.
+     */
+    Marker?: String;
+    /**
+     * the configuration options for the reserved-node exchange. These options include information about the source reserved node and target reserved node. Details include the node type, the price, the node count, and the offering type.
+     */
+    ReservedNodeConfigurationOptionList?: ReservedNodeConfigurationOptionList;
   }
   export interface GetReservedNodeExchangeOfferingsInputMessage {
     /**
@@ -4409,6 +4489,56 @@ declare namespace Redshift {
      */
     ReservedNodeOfferingType?: ReservedNodeOfferingType;
   }
+  export interface ReservedNodeConfigurationOption {
+    SourceReservedNode?: ReservedNode;
+    /**
+     * The target reserved-node count.
+     */
+    TargetReservedNodeCount?: Integer;
+    TargetReservedNodeOffering?: ReservedNodeOffering;
+  }
+  export type ReservedNodeConfigurationOptionList = ReservedNodeConfigurationOption[];
+  export type ReservedNodeExchangeActionType = "restore-cluster"|"resize-cluster"|string;
+  export interface ReservedNodeExchangeStatus {
+    /**
+     * The identifier of the reserved-node exchange request.
+     */
+    ReservedNodeExchangeRequestId?: String;
+    /**
+     * The status of the reserved-node exchange request. Statuses include in-progress and requested.
+     */
+    Status?: ReservedNodeExchangeStatusType;
+    /**
+     * A date and time that indicate when the reserved-node exchange was requested.
+     */
+    RequestTime?: TStamp;
+    /**
+     * The identifier of the source reserved node.
+     */
+    SourceReservedNodeId?: String;
+    /**
+     * The source reserved-node type, for example ds2.xlarge.
+     */
+    SourceReservedNodeType?: String;
+    /**
+     * The source reserved-node count in the cluster.
+     */
+    SourceReservedNodeCount?: Integer;
+    /**
+     * The identifier of the target reserved node offering.
+     */
+    TargetReservedNodeOfferingId?: String;
+    /**
+     * The node type of the target reserved node, for example ra3.4xlarge.
+     */
+    TargetReservedNodeType?: String;
+    /**
+     * The count of target reserved nodes in the cluster.
+     */
+    TargetReservedNodeCount?: Integer;
+  }
+  export type ReservedNodeExchangeStatusList = ReservedNodeExchangeStatus[];
+  export type ReservedNodeExchangeStatusType = "REQUESTED"|"PENDING"|"IN_PROGRESS"|"RETRYING"|"SUCCEEDED"|"FAILED"|string;
   export type ReservedNodeList = ReservedNode[];
   export interface ReservedNodeOffering {
     /**
@@ -4505,6 +4635,14 @@ declare namespace Redshift {
      * A boolean value indicating whether the resize operation is using the classic resize process. If you don't provide this parameter or set the value to false, the resize type is elastic. 
      */
     Classic?: BooleanOptional;
+    /**
+     * The identifier of the reserved node.
+     */
+    ReservedNodeId?: String;
+    /**
+     * The identifier of the target reserved node offering.
+     */
+    TargetReservedNodeOfferingId?: String;
   }
   export interface ResizeClusterResult {
     Cluster?: Cluster;
@@ -4703,6 +4841,14 @@ declare namespace Redshift {
      * The Amazon Resource Name (ARN) for the IAM role that was set as default for the cluster when the cluster was last modified while it was restored from a snapshot.
      */
     DefaultIamRoleArn?: String;
+    /**
+     * The identifier of the target reserved node offering.
+     */
+    ReservedNodeId?: String;
+    /**
+     * The identifier of the target reserved node offering.
+     */
+    TargetReservedNodeOfferingId?: String;
   }
   export interface RestoreFromClusterSnapshotResult {
     Cluster?: Cluster;

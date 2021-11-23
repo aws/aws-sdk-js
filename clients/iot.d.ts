@@ -164,11 +164,11 @@ declare class Iot extends Service {
    */
   createBillingGroup(callback?: (err: AWSError, data: Iot.Types.CreateBillingGroupResponse) => void): Request<Iot.Types.CreateBillingGroupResponse, AWSError>;
   /**
-   * Creates an X.509 certificate using the specified certificate signing request.  Note: The CSR must include a public key that is either an RSA key with a length of at least 2048 bits or an ECC key from NIST P-256 or NIST P-384 curves.   Note: Reusing the same certificate signing request (CSR) results in a distinct certificate. Requires permission to access the CreateCertificateFromCsr action. You can create multiple certificates in a batch by creating a directory, copying multiple .csr files into that directory, and then specifying that directory on the command line. The following commands show how to create a batch of certificates given a batch of CSRs. Assuming a set of CSRs are located inside of the directory my-csr-directory: On Linux and OS X, the command is: $ ls my-csr-directory/ | xargs -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{} This command lists all of the CSRs in my-csr-directory and pipes each CSR file name to the aws iot create-certificate-from-csr Amazon Web Services CLI command to create a certificate for the corresponding CSR. The aws iot create-certificate-from-csr part of the command can also be run in parallel to speed up the certificate creation process: $ ls my-csr-directory/ | xargs -P 10 -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{} On Windows PowerShell, the command to create certificates for all CSRs in my-csr-directory is: &gt; ls -Name my-csr-directory | %{aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/$_} On a Windows command prompt, the command to create certificates for all CSRs in my-csr-directory is: &gt; forfiles /p my-csr-directory /c "cmd /c aws iot create-certificate-from-csr --certificate-signing-request file://@path"
+   * Creates an X.509 certificate using the specified certificate signing request.  Note: The CSR must include a public key that is either an RSA key with a length of at least 2048 bits or an ECC key from NIST P-256, NIST P-384, or NIST P-512 curves. For supported certificates, consult  Certificate signing algorithms supported by IoT.  Note: Reusing the same certificate signing request (CSR) results in a distinct certificate. Requires permission to access the CreateCertificateFromCsr action. You can create multiple certificates in a batch by creating a directory, copying multiple .csr files into that directory, and then specifying that directory on the command line. The following commands show how to create a batch of certificates given a batch of CSRs. Assuming a set of CSRs are located inside of the directory my-csr-directory: On Linux and OS X, the command is: $ ls my-csr-directory/ | xargs -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{} This command lists all of the CSRs in my-csr-directory and pipes each CSR file name to the aws iot create-certificate-from-csr Amazon Web Services CLI command to create a certificate for the corresponding CSR. The aws iot create-certificate-from-csr part of the command can also be run in parallel to speed up the certificate creation process: $ ls my-csr-directory/ | xargs -P 10 -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{} On Windows PowerShell, the command to create certificates for all CSRs in my-csr-directory is: &gt; ls -Name my-csr-directory | %{aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/$_} On a Windows command prompt, the command to create certificates for all CSRs in my-csr-directory is: &gt; forfiles /p my-csr-directory /c "cmd /c aws iot create-certificate-from-csr --certificate-signing-request file://@path"
    */
   createCertificateFromCsr(params: Iot.Types.CreateCertificateFromCsrRequest, callback?: (err: AWSError, data: Iot.Types.CreateCertificateFromCsrResponse) => void): Request<Iot.Types.CreateCertificateFromCsrResponse, AWSError>;
   /**
-   * Creates an X.509 certificate using the specified certificate signing request.  Note: The CSR must include a public key that is either an RSA key with a length of at least 2048 bits or an ECC key from NIST P-256 or NIST P-384 curves.   Note: Reusing the same certificate signing request (CSR) results in a distinct certificate. Requires permission to access the CreateCertificateFromCsr action. You can create multiple certificates in a batch by creating a directory, copying multiple .csr files into that directory, and then specifying that directory on the command line. The following commands show how to create a batch of certificates given a batch of CSRs. Assuming a set of CSRs are located inside of the directory my-csr-directory: On Linux and OS X, the command is: $ ls my-csr-directory/ | xargs -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{} This command lists all of the CSRs in my-csr-directory and pipes each CSR file name to the aws iot create-certificate-from-csr Amazon Web Services CLI command to create a certificate for the corresponding CSR. The aws iot create-certificate-from-csr part of the command can also be run in parallel to speed up the certificate creation process: $ ls my-csr-directory/ | xargs -P 10 -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{} On Windows PowerShell, the command to create certificates for all CSRs in my-csr-directory is: &gt; ls -Name my-csr-directory | %{aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/$_} On a Windows command prompt, the command to create certificates for all CSRs in my-csr-directory is: &gt; forfiles /p my-csr-directory /c "cmd /c aws iot create-certificate-from-csr --certificate-signing-request file://@path"
+   * Creates an X.509 certificate using the specified certificate signing request.  Note: The CSR must include a public key that is either an RSA key with a length of at least 2048 bits or an ECC key from NIST P-256, NIST P-384, or NIST P-512 curves. For supported certificates, consult  Certificate signing algorithms supported by IoT.  Note: Reusing the same certificate signing request (CSR) results in a distinct certificate. Requires permission to access the CreateCertificateFromCsr action. You can create multiple certificates in a batch by creating a directory, copying multiple .csr files into that directory, and then specifying that directory on the command line. The following commands show how to create a batch of certificates given a batch of CSRs. Assuming a set of CSRs are located inside of the directory my-csr-directory: On Linux and OS X, the command is: $ ls my-csr-directory/ | xargs -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{} This command lists all of the CSRs in my-csr-directory and pipes each CSR file name to the aws iot create-certificate-from-csr Amazon Web Services CLI command to create a certificate for the corresponding CSR. The aws iot create-certificate-from-csr part of the command can also be run in parallel to speed up the certificate creation process: $ ls my-csr-directory/ | xargs -P 10 -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{} On Windows PowerShell, the command to create certificates for all CSRs in my-csr-directory is: &gt; ls -Name my-csr-directory | %{aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/$_} On a Windows command prompt, the command to create certificates for all CSRs in my-csr-directory is: &gt; forfiles /p my-csr-directory /c "cmd /c aws iot create-certificate-from-csr --certificate-signing-request file://@path"
    */
   createCertificateFromCsr(callback?: (err: AWSError, data: Iot.Types.CreateCertificateFromCsrResponse) => void): Request<Iot.Types.CreateCertificateFromCsrResponse, AWSError>;
   /**
@@ -788,6 +788,14 @@ declare class Iot extends Service {
    */
   describeJobTemplate(callback?: (err: AWSError, data: Iot.Types.DescribeJobTemplateResponse) => void): Request<Iot.Types.DescribeJobTemplateResponse, AWSError>;
   /**
+   * View details of a managed job template.
+   */
+  describeManagedJobTemplate(params: Iot.Types.DescribeManagedJobTemplateRequest, callback?: (err: AWSError, data: Iot.Types.DescribeManagedJobTemplateResponse) => void): Request<Iot.Types.DescribeManagedJobTemplateResponse, AWSError>;
+  /**
+   * View details of a managed job template.
+   */
+  describeManagedJobTemplate(callback?: (err: AWSError, data: Iot.Types.DescribeManagedJobTemplateResponse) => void): Request<Iot.Types.DescribeManagedJobTemplateResponse, AWSError>;
+  /**
    * Gets information about a mitigation action. Requires permission to access the DescribeMitigationAction action.
    */
   describeMitigationAction(params: Iot.Types.DescribeMitigationActionRequest, callback?: (err: AWSError, data: Iot.Types.DescribeMitigationActionResponse) => void): Request<Iot.Types.DescribeMitigationActionResponse, AWSError>;
@@ -1236,6 +1244,14 @@ declare class Iot extends Service {
    */
   listJobs(callback?: (err: AWSError, data: Iot.Types.ListJobsResponse) => void): Request<Iot.Types.ListJobsResponse, AWSError>;
   /**
+   * Returns a list of managed job templates.
+   */
+  listManagedJobTemplates(params: Iot.Types.ListManagedJobTemplatesRequest, callback?: (err: AWSError, data: Iot.Types.ListManagedJobTemplatesResponse) => void): Request<Iot.Types.ListManagedJobTemplatesResponse, AWSError>;
+  /**
+   * Returns a list of managed job templates.
+   */
+  listManagedJobTemplates(callback?: (err: AWSError, data: Iot.Types.ListManagedJobTemplatesResponse) => void): Request<Iot.Types.ListManagedJobTemplatesResponse, AWSError>;
+  /**
    * Gets a list of all mitigation actions that match the specified filter criteria. Requires permission to access the ListMitigationActions action.
    */
   listMitigationActions(params: Iot.Types.ListMitigationActionsRequest, callback?: (err: AWSError, data: Iot.Types.ListMitigationActionsResponse) => void): Request<Iot.Types.ListMitigationActionsResponse, AWSError>;
@@ -1508,11 +1524,11 @@ declare class Iot extends Service {
    */
   registerCertificate(callback?: (err: AWSError, data: Iot.Types.RegisterCertificateResponse) => void): Request<Iot.Types.RegisterCertificateResponse, AWSError>;
   /**
-   * Register a certificate that does not have a certificate authority (CA).
+   * Register a certificate that does not have a certificate authority (CA). For supported certificates, consult  Certificate signing algorithms supported by IoT. 
    */
   registerCertificateWithoutCA(params: Iot.Types.RegisterCertificateWithoutCARequest, callback?: (err: AWSError, data: Iot.Types.RegisterCertificateWithoutCAResponse) => void): Request<Iot.Types.RegisterCertificateWithoutCAResponse, AWSError>;
   /**
-   * Register a certificate that does not have a certificate authority (CA).
+   * Register a certificate that does not have a certificate authority (CA). For supported certificates, consult  Certificate signing algorithms supported by IoT. 
    */
   registerCertificateWithoutCA(callback?: (err: AWSError, data: Iot.Types.RegisterCertificateWithoutCAResponse) => void): Request<Iot.Types.RegisterCertificateWithoutCAResponse, AWSError>;
   /**
@@ -1532,11 +1548,11 @@ declare class Iot extends Service {
    */
   rejectCertificateTransfer(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Removes the given thing from the billing group. Requires permission to access the RemoveThingFromBillingGroup action.
+   * Removes the given thing from the billing group. Requires permission to access the RemoveThingFromBillingGroup action.  This call is asynchronous. It might take several seconds for the detachment to propagate. 
    */
   removeThingFromBillingGroup(params: Iot.Types.RemoveThingFromBillingGroupRequest, callback?: (err: AWSError, data: Iot.Types.RemoveThingFromBillingGroupResponse) => void): Request<Iot.Types.RemoveThingFromBillingGroupResponse, AWSError>;
   /**
-   * Removes the given thing from the billing group. Requires permission to access the RemoveThingFromBillingGroup action.
+   * Removes the given thing from the billing group. Requires permission to access the RemoveThingFromBillingGroup action.  This call is asynchronous. It might take several seconds for the detachment to propagate. 
    */
   removeThingFromBillingGroup(callback?: (err: AWSError, data: Iot.Types.RemoveThingFromBillingGroupResponse) => void): Request<Iot.Types.RemoveThingFromBillingGroupResponse, AWSError>;
   /**
@@ -2060,7 +2076,7 @@ declare namespace Iot {
   export type ActiveViolations = ActiveViolation[];
   export interface AddThingToBillingGroupRequest {
     /**
-     * The name of the billing group.
+     * The name of the billing group.  This call is asynchronous. It might take several seconds for the detachment to propagate. 
      */
     billingGroupName?: BillingGroupName;
     /**
@@ -3208,7 +3224,7 @@ declare namespace Iot {
      */
     description?: AuditDescription;
     /**
-     *  Each audit supression must have a unique client request token. If you try to create a new audit suppression with the same token as one that already exists, an exception occurs. If you omit this value, Amazon Web Services SDKs will automatically generate a unique client request. 
+     *  Each audit supression must have a unique client request token. If you try to create a new audit suppression with the same token as one that already exists, an exception occurs. If you omit this value, Amazon Web Services SDKs will automatically generate a unique client request.
      */
     clientRequestToken: ClientRequestToken;
   }
@@ -3567,6 +3583,10 @@ declare namespace Iot {
      * The ARN of the job template used to create the job.
      */
     jobTemplateArn?: JobTemplateArn;
+    /**
+     * Parameters of a managed template that you can specify to create the job document.
+     */
+    documentParameters?: ParameterMap;
   }
   export interface CreateJobResponse {
     /**
@@ -4028,7 +4048,7 @@ declare namespace Iot {
      */
     files: StreamFiles;
     /**
-     * An IAM role that allows the IoT service principal assumes to access your S3 files.
+     * An IAM role that allows the IoT service principal to access your S3 files.
      */
     roleArn: RoleArn;
     /**
@@ -5019,6 +5039,46 @@ declare namespace Iot {
     abortConfig?: AbortConfig;
     timeoutConfig?: TimeoutConfig;
   }
+  export interface DescribeManagedJobTemplateRequest {
+    /**
+     * The unique name of a managed job template, which is required.
+     */
+    templateName: ManagedJobTemplateName;
+    /**
+     * An optional parameter to specify version of a managed template. If not specified, the pre-defined default version is returned.
+     */
+    templateVersion?: ManagedTemplateVersion;
+  }
+  export interface DescribeManagedJobTemplateResponse {
+    /**
+     * The unique name of a managed template, such as AWS-Reboot.
+     */
+    templateName?: ManagedJobTemplateName;
+    /**
+     * The unique Amazon Resource Name (ARN) of the managed template.
+     */
+    templateArn?: JobTemplateArn;
+    /**
+     * The unique description of a managed template.
+     */
+    description?: JobDescription;
+    /**
+     * The version for a managed template.
+     */
+    templateVersion?: ManagedTemplateVersion;
+    /**
+     * A list of environments that are supported with the managed job template.
+     */
+    environments?: Environments;
+    /**
+     * A map of key-value pairs that you can use as guidance to specify the inputs for creating a job from a managed template.
+     */
+    documentParameters?: DocumentParameters;
+    /**
+     * The document schema for a managed job template.
+     */
+    document?: JobDocument;
+  }
   export interface DescribeMitigationActionRequest {
     /**
      * The friendly name that uniquely identifies the mitigation action.
@@ -5596,6 +5656,29 @@ declare namespace Iot {
     ruleName: RuleName;
   }
   export type DisconnectReason = string;
+  export interface DocumentParameter {
+    /**
+     * Key of the map field containing the patterns that need to be replaced in a managed template job document schema.
+     */
+    key?: ParameterKey;
+    /**
+     * Description of the map field containing the patterns that need to be replaced in a managed template job document schema.
+     */
+    description?: JobDescription;
+    /**
+     * A regular expression of the patterns that need to be replaced in a managed template job document schema.
+     */
+    regex?: Regex;
+    /**
+     * An example illustrating a pattern that need to be replaced in a managed template job document schema.
+     */
+    example?: Example;
+    /**
+     * Specifies whether a pattern that needs to be replaced in a managed template job document schema is optional or required.
+     */
+    optional?: Optional;
+  }
+  export type DocumentParameters = DocumentParameter[];
   export type DomainConfigurationArn = string;
   export type DomainConfigurationName = string;
   export type DomainConfigurationStatus = "ENABLED"|"DISABLED"|string;
@@ -5732,6 +5815,8 @@ declare namespace Iot {
   export type Enabled = boolean;
   export type EndpointAddress = string;
   export type EndpointType = string;
+  export type Environment = string;
+  export type Environments = Environment[];
   export type ErrorCode = string;
   export interface ErrorInfo {
     /**
@@ -5747,6 +5832,7 @@ declare namespace Iot {
   export type EvaluationStatistic = string;
   export type EventConfigurations = {[key: string]: Configuration};
   export type EventType = "THING"|"THING_GROUP"|"THING_TYPE"|"THING_GROUP_MEMBERSHIP"|"THING_GROUP_HIERARCHY"|"THING_TYPE_ASSOCIATION"|"JOB"|"JOB_EXECUTION"|"POLICY"|"CERTIFICATE"|"CA_CERTIFICATE"|string;
+  export type Example = string;
   export type ExecutionNamePrefix = string;
   export type ExecutionNumber = number;
   export type ExpectedVersion = number;
@@ -5894,7 +5980,7 @@ declare namespace Iot {
   }
   export interface GetBucketsAggregationResponse {
     /**
-     * The total number of documents that fit the query string criteria and contain a value for the Aggregation field targeted in the request.
+     * The total number of things that fit the query string criteria.
      */
     totalCount?: Count;
     /**
@@ -6403,6 +6489,10 @@ declare namespace Iot {
      * The ARN of the job template used to create the job.
      */
     jobTemplateArn?: JobTemplateArn;
+    /**
+     * A key-value map that pairs the patterns that need to be replaced in a managed template job document schema. You can use the description of each key as a guidance to specify the inputs during runtime when creating a job.
+     */
+    documentParameters?: ParameterMap;
   }
   export type JobArn = string;
   export type JobDescription = string;
@@ -7338,6 +7428,30 @@ declare namespace Iot {
      */
     nextToken?: NextToken;
   }
+  export interface ListManagedJobTemplatesRequest {
+    /**
+     * An optional parameter for template name. If specified, only the versions of the managed job templates that have the specified template name will be returned.
+     */
+    templateName?: ManagedJobTemplateName;
+    /**
+     * Maximum number of entries that can be returned.
+     */
+    maxResults?: LaserMaxResults;
+    /**
+     * The token to retrieve the next set of results.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListManagedJobTemplatesResponse {
+    /**
+     * A list of managed job templates that are returned.
+     */
+    managedJobTemplates?: ManagedJobTemplatesSummaryList;
+    /**
+     * The token to retrieve the next set of results.
+     */
+    nextToken?: NextToken;
+  }
   export interface ListMitigationActionsRequest {
     /**
      * Specify a value to limit the result to mitigation actions with a specific action type.
@@ -8173,6 +8287,31 @@ declare namespace Iot {
      */
     confidenceLevel: ConfidenceLevel;
   }
+  export type ManagedJobTemplateName = string;
+  export interface ManagedJobTemplateSummary {
+    /**
+     * The Amazon Resource Name (ARN) for a managed template.
+     */
+    templateArn?: JobTemplateArn;
+    /**
+     * The unique Name for a managed template.
+     */
+    templateName?: ManagedJobTemplateName;
+    /**
+     * The description for a managed template.
+     */
+    description?: JobDescription;
+    /**
+     * A list of environments that are supported with the managed job template.
+     */
+    environments?: Environments;
+    /**
+     * The version for a managed template.
+     */
+    templateVersion?: ManagedTemplateVersion;
+  }
+  export type ManagedJobTemplatesSummaryList = ManagedJobTemplateSummary[];
+  export type ManagedTemplateVersion = string;
   export type Marker = string;
   export type MaxBuckets = number;
   export type MaxJobExecutionsPerMin = number;
@@ -8476,6 +8615,7 @@ declare namespace Iot {
      */
     id: ElasticsearchId;
   }
+  export type Optional = boolean;
   export type OptionalVersion = number;
   export interface OutgoingCertificate {
     /**
@@ -8507,6 +8647,9 @@ declare namespace Iot {
   export type OverrideDynamicGroups = boolean;
   export type PageSize = number;
   export type Parameter = string;
+  export type ParameterKey = string;
+  export type ParameterMap = {[key: string]: ParameterValue};
+  export type ParameterValue = string;
   export type Parameters = {[key: string]: Value};
   export type PartitionKey = string;
   export type PayloadField = string;
@@ -8724,6 +8867,7 @@ declare namespace Iot {
   export type ReasonForNonComplianceCodes = ReasonForNonComplianceCode[];
   export type Recursive = boolean;
   export type RecursiveWithoutDefault = boolean;
+  export type Regex = string;
   export interface RegisterCACertificateRequest {
     /**
      * The CA certificate.
@@ -9445,7 +9589,7 @@ declare namespace Iot {
   }
   export interface Statistics {
     /**
-     * The count of things that match the query.
+     * The count of things that match the query string criteria and contain a valid aggregation field value.
      */
     count?: Count;
     /**

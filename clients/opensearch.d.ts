@@ -846,6 +846,7 @@ declare namespace OpenSearch {
   }
   export type DeploymentCloseDateTimeStamp = Date;
   export type DeploymentStatus = "PENDING_UPDATE"|"IN_PROGRESS"|"COMPLETED"|"NOT_ELIGIBLE"|"ELIGIBLE"|string;
+  export type DeploymentType = string;
   export interface DescribeDomainAutoTunesRequest {
     /**
      * The domain name for which you want Auto-Tune action details.
@@ -1312,6 +1313,17 @@ declare namespace OpenSearch {
   }
   export type DomainStatusList = DomainStatus[];
   export type Double = number;
+  export type DryRun = boolean;
+  export interface DryRunResults {
+    /**
+     *  Specifies the way in which Amazon OpenSearch Service applies the update. Possible responses are Blue/Green (the update requires a blue/green deployment), DynamicUpdate (no blue/green required), Undetermined (the domain is undergoing an update and can't predict the deployment type; try again after the update is complete), and None (the request doesn't include any configuration changes). 
+     */
+    DeploymentType?: DeploymentType;
+    /**
+     * Contains an optional message associated with the DryRunResults.
+     */
+    Message?: Message;
+  }
   export interface Duration {
     /**
      * Integer to specify the value of a maintenance schedule duration. See  Auto-Tune for Amazon OpenSearch Service  for more information. 
@@ -1652,6 +1664,7 @@ declare namespace OpenSearch {
   }
   export type MaxResults = number;
   export type MaximumInstanceCount = number;
+  export type Message = string;
   export type MinimumInstanceCount = number;
   export type NextToken = string;
   export interface NodeToNodeEncryptionOptions {
@@ -2200,12 +2213,20 @@ declare namespace OpenSearch {
      * Specifies Auto-Tune options.
      */
     AutoTuneOptions?: AutoTuneOptions;
+    /**
+     * This flag, when set to True, specifies whether the UpdateDomain request should return the results of validation checks (DryRunResults) without actually applying the change.
+     */
+    DryRun?: DryRun;
   }
   export interface UpdateDomainConfigResponse {
     /**
      * The status of the updated domain.
      */
     DomainConfig: DomainConfig;
+    /**
+     * Contains result of DryRun. 
+     */
+    DryRunResults?: DryRunResults;
   }
   export interface UpdatePackageRequest {
     /**

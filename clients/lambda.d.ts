@@ -822,9 +822,13 @@ declare namespace Lambda {
      */
     Enabled?: Enabled;
     /**
-     * The maximum number of records in each batch that Lambda pulls from your stream or queue and sends to your function. Lambda passes all of the records in the batch to the function in a single call, up to the payload limit for synchronous invocation (6 MB).    Amazon Kinesis - Default 100. Max 10,000.    Amazon DynamoDB Streams - Default 100. Max 1,000.    Amazon Simple Queue Service - Default 10. For standard queues the max is 10,000. For FIFO queues the max is 10.    Amazon Managed Streaming for Apache Kafka - Default 100. Max 10,000.    Self-Managed Apache Kafka - Default 100. Max 10,000.  
+     * The maximum number of records in each batch that Lambda pulls from your stream or queue and sends to your function. Lambda passes all of the records in the batch to the function in a single call, up to the payload limit for synchronous invocation (6 MB).    Amazon Kinesis - Default 100. Max 10,000.    Amazon DynamoDB Streams - Default 100. Max 1,000.    Amazon Simple Queue Service - Default 10. For standard queues the max is 10,000. For FIFO queues the max is 10.    Amazon Managed Streaming for Apache Kafka - Default 100. Max 10,000.    Self-Managed Apache Kafka - Default 100. Max 10,000.    Amazon MQ (ActiveMQ and RabbitMQ) - Default 100. Max 10,000.  
      */
     BatchSize?: BatchSize;
+    /**
+     * (Streams and Amazon SQS) A object that defines the filter criteria used to determine whether Lambda should process an event. For more information, see Lambda event filtering.
+     */
+    FilterCriteria?: FilterCriteria;
     /**
      * (Streams and Amazon SQS standard queues) The maximum amount of time, in seconds, that Lambda spends gathering records before invoking the function. Default: 0 Related setting: When you set BatchSize to a value greater than 10, you must set MaximumBatchingWindowInSeconds to at least 1.
      */
@@ -964,7 +968,7 @@ declare namespace Lambda {
      */
     CodeSigningConfigArn?: CodeSigningConfigArn;
     /**
-     * The instruction set architecture that the function supports. Enter a string array with one of the valid values. The default value is x86_64.
+     * The instruction set architecture that the function supports. Enter a string array with one of the valid values (arm64 or x86_64). The default value is x86_64.
      */
     Architectures?: ArchitecturesList;
   }
@@ -1144,6 +1148,10 @@ declare namespace Lambda {
      */
     EventSourceArn?: Arn;
     /**
+     * (Streams and Amazon SQS) A object that defines the filter criteria used to determine whether Lambda should process an event. For more information, see Event filtering.
+     */
+    FilterCriteria?: FilterCriteria;
+    /**
      * The ARN of the Lambda function.
      */
     FunctionArn?: FunctionArn;
@@ -1219,6 +1227,19 @@ declare namespace Lambda {
     LocalMountPath: LocalMountPath;
   }
   export type FileSystemConfigList = FileSystemConfig[];
+  export interface Filter {
+    /**
+     *  A filter pattern. For more information on the syntax of a filter pattern, see  Filter criteria syntax. 
+     */
+    Pattern?: Pattern;
+  }
+  export interface FilterCriteria {
+    /**
+     *  A list of filters. 
+     */
+    Filters?: FilterList;
+  }
+  export type FilterList = Filter[];
   export type FunctionArn = string;
   export type FunctionArnList = FunctionArn[];
   export interface FunctionCode {
@@ -1745,7 +1766,7 @@ declare namespace Lambda {
      */
     ClientContext?: String;
     /**
-     * The JSON that you want to provide to your Lambda function as input.
+     * The JSON that you want to provide to your Lambda function as input. You can enter the JSON directly. For example, --payload '{ "key": "value" }'. You can also specify a file path. For example, --payload file://payload.json. 
      */
     Payload?: _Blob;
     /**
@@ -2227,6 +2248,7 @@ declare namespace Lambda {
   export type Origin = string;
   export type PackageType = "Zip"|"Image"|string;
   export type ParallelizationFactor = number;
+  export type Pattern = string;
   export type PositiveInteger = number;
   export type Principal = string;
   export type ProvisionedConcurrencyConfigList = ProvisionedConcurrencyConfigListItem[];
@@ -2493,7 +2515,7 @@ declare namespace Lambda {
   export type SigningProfileVersionArns = Arn[];
   export interface SourceAccessConfiguration {
     /**
-     * The type of authentication protocol, VPC components, or virtual host for your event source. For example: "Type":"SASL_SCRAM_512_AUTH".    BASIC_AUTH - (Amazon MQ) The Secrets Manager secret that stores your broker credentials.    BASIC_AUTH - (Self-managed Apache Kafka) The Secrets Manager ARN of your secret key used for SASL/PLAIN authentication of your Apache Kafka brokers.    VPC_SUBNET - The subnets associated with your VPC. Lambda connects to these subnets to fetch data from your self-managed Apache Kafka cluster.    VPC_SECURITY_GROUP - The VPC security group used to manage access to your self-managed Apache Kafka brokers.    SASL_SCRAM_256_AUTH - The Secrets Manager ARN of your secret key used for SASL SCRAM-256 authentication of your self-managed Apache Kafka brokers.    SASL_SCRAM_512_AUTH - The Secrets Manager ARN of your secret key used for SASL SCRAM-512 authentication of your self-managed Apache Kafka brokers.    VIRTUAL_HOST - (Amazon MQ) The name of the virtual host in your RabbitMQ broker. Lambda uses this RabbitMQ host as the event source.  
+     * The type of authentication protocol, VPC components, or virtual host for your event source. For example: "Type":"SASL_SCRAM_512_AUTH".    BASIC_AUTH - (Amazon MQ) The Secrets Manager secret that stores your broker credentials.    BASIC_AUTH - (Self-managed Apache Kafka) The Secrets Manager ARN of your secret key used for SASL/PLAIN authentication of your Apache Kafka brokers.    VPC_SUBNET - The subnets associated with your VPC. Lambda connects to these subnets to fetch data from your self-managed Apache Kafka cluster.    VPC_SECURITY_GROUP - The VPC security group used to manage access to your self-managed Apache Kafka brokers.    SASL_SCRAM_256_AUTH - The Secrets Manager ARN of your secret key used for SASL SCRAM-256 authentication of your self-managed Apache Kafka brokers.    SASL_SCRAM_512_AUTH - The Secrets Manager ARN of your secret key used for SASL SCRAM-512 authentication of your self-managed Apache Kafka brokers.    VIRTUAL_HOST - (Amazon MQ) The name of the virtual host in your RabbitMQ broker. Lambda uses this RabbitMQ host as the event source. This property cannot be specified in an UpdateEventSourceMapping API call.  
      */
     Type?: SourceAccessType;
     /**
@@ -2620,9 +2642,13 @@ declare namespace Lambda {
      */
     Enabled?: Enabled;
     /**
-     * The maximum number of records in each batch that Lambda pulls from your stream or queue and sends to your function. Lambda passes all of the records in the batch to the function in a single call, up to the payload limit for synchronous invocation (6 MB).    Amazon Kinesis - Default 100. Max 10,000.    Amazon DynamoDB Streams - Default 100. Max 1,000.    Amazon Simple Queue Service - Default 10. For standard queues the max is 10,000. For FIFO queues the max is 10.    Amazon Managed Streaming for Apache Kafka - Default 100. Max 10,000.    Self-Managed Apache Kafka - Default 100. Max 10,000.  
+     * The maximum number of records in each batch that Lambda pulls from your stream or queue and sends to your function. Lambda passes all of the records in the batch to the function in a single call, up to the payload limit for synchronous invocation (6 MB).    Amazon Kinesis - Default 100. Max 10,000.    Amazon DynamoDB Streams - Default 100. Max 1,000.    Amazon Simple Queue Service - Default 10. For standard queues the max is 10,000. For FIFO queues the max is 10.    Amazon Managed Streaming for Apache Kafka - Default 100. Max 10,000.    Self-Managed Apache Kafka - Default 100. Max 10,000.    Amazon MQ (ActiveMQ and RabbitMQ) - Default 100. Max 10,000.  
      */
     BatchSize?: BatchSize;
+    /**
+     * (Streams and Amazon SQS) A object that defines the filter criteria used to determine whether Lambda should process an event. For more information, see Lambda event filtering.
+     */
+    FilterCriteria?: FilterCriteria;
     /**
      * (Streams and Amazon SQS standard queues) The maximum amount of time, in seconds, that Lambda spends gathering records before invoking the function. Default: 0 Related setting: When you set BatchSize to a value greater than 10, you must set MaximumBatchingWindowInSeconds to at least 1.
      */
@@ -2698,7 +2724,7 @@ declare namespace Lambda {
      */
     RevisionId?: String;
     /**
-     * The instruction set architecture that the function supports. Enter a string array with one of the valid values. The default value is x86_64.
+     * The instruction set architecture that the function supports. Enter a string array with one of the valid values (arm64 or x86_64). The default value is x86_64.
      */
     Architectures?: ArchitecturesList;
   }

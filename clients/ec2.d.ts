@@ -1749,11 +1749,11 @@ declare class EC2 extends Service {
    */
   describeInstanceEventWindows(callback?: (err: AWSError, data: EC2.Types.DescribeInstanceEventWindowsResult) => void): Request<EC2.Types.DescribeInstanceEventWindowsResult, AWSError>;
   /**
-   * Describes the status of the specified instances or all of your instances. By default, only running instances are described, unless you specifically indicate to return the status of all instances. Instance status includes the following components:    Status checks - Amazon EC2 performs status checks on running EC2 instances to identify hardware and software issues. For more information, see Status checks for your instances and Troubleshooting instances with failed status checks in the Amazon EC2 User Guide.    Scheduled events - Amazon EC2 can schedule events (such as reboot, stop, or terminate) for your instances related to hardware issues, software updates, or system maintenance. For more information, see Scheduled events for your instances in the Amazon EC2 User Guide.    Instance state - You can manage your instances from the moment you launch them through their termination. For more information, see Instance lifecycle in the Amazon EC2 User Guide.  
+   * Describes the status of the specified instances or all of your instances. By default, only running instances are described, unless you specifically indicate to return the status of all instances. Instance status includes the following components:    Status checks - Amazon EC2 performs status checks on running EC2 instances to identify hardware and software issues. For more information, see Status checks for your instances and Troubleshoot instances with failed status checks in the Amazon EC2 User Guide.    Scheduled events - Amazon EC2 can schedule events (such as reboot, stop, or terminate) for your instances related to hardware issues, software updates, or system maintenance. For more information, see Scheduled events for your instances in the Amazon EC2 User Guide.    Instance state - You can manage your instances from the moment you launch them through their termination. For more information, see Instance lifecycle in the Amazon EC2 User Guide.  
    */
   describeInstanceStatus(params: EC2.Types.DescribeInstanceStatusRequest, callback?: (err: AWSError, data: EC2.Types.DescribeInstanceStatusResult) => void): Request<EC2.Types.DescribeInstanceStatusResult, AWSError>;
   /**
-   * Describes the status of the specified instances or all of your instances. By default, only running instances are described, unless you specifically indicate to return the status of all instances. Instance status includes the following components:    Status checks - Amazon EC2 performs status checks on running EC2 instances to identify hardware and software issues. For more information, see Status checks for your instances and Troubleshooting instances with failed status checks in the Amazon EC2 User Guide.    Scheduled events - Amazon EC2 can schedule events (such as reboot, stop, or terminate) for your instances related to hardware issues, software updates, or system maintenance. For more information, see Scheduled events for your instances in the Amazon EC2 User Guide.    Instance state - You can manage your instances from the moment you launch them through their termination. For more information, see Instance lifecycle in the Amazon EC2 User Guide.  
+   * Describes the status of the specified instances or all of your instances. By default, only running instances are described, unless you specifically indicate to return the status of all instances. Instance status includes the following components:    Status checks - Amazon EC2 performs status checks on running EC2 instances to identify hardware and software issues. For more information, see Status checks for your instances and Troubleshoot instances with failed status checks in the Amazon EC2 User Guide.    Scheduled events - Amazon EC2 can schedule events (such as reboot, stop, or terminate) for your instances related to hardware issues, software updates, or system maintenance. For more information, see Scheduled events for your instances in the Amazon EC2 User Guide.    Instance state - You can manage your instances from the moment you launch them through their termination. For more information, see Instance lifecycle in the Amazon EC2 User Guide.  
    */
   describeInstanceStatus(callback?: (err: AWSError, data: EC2.Types.DescribeInstanceStatusResult) => void): Request<EC2.Types.DescribeInstanceStatusResult, AWSError>;
   /**
@@ -3069,11 +3069,11 @@ declare class EC2 extends Service {
    */
   modifyImageAttribute(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Modifies the specified attribute of the specified instance. You can specify only one attribute at a time.  Note: Using this action to change the security groups associated with an elastic network interface (ENI) attached to an instance in a VPC can result in an error if the instance has more than one ENI. To change the security groups associated with an ENI attached to an instance that has multiple ENIs, we recommend that you use the ModifyNetworkInterfaceAttribute action. To modify some attributes, the instance must be stopped. For more information, see Modifying attributes of a stopped instance in the Amazon EC2 User Guide.
+   * Modifies the specified attribute of the specified instance. You can specify only one attribute at a time.  Note: Using this action to change the security groups associated with an elastic network interface (ENI) attached to an instance in a VPC can result in an error if the instance has more than one ENI. To change the security groups associated with an ENI attached to an instance that has multiple ENIs, we recommend that you use the ModifyNetworkInterfaceAttribute action. To modify some attributes, the instance must be stopped. For more information, see Modify a stopped instance in the Amazon EC2 User Guide.
    */
   modifyInstanceAttribute(params: EC2.Types.ModifyInstanceAttributeRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Modifies the specified attribute of the specified instance. You can specify only one attribute at a time.  Note: Using this action to change the security groups associated with an elastic network interface (ENI) attached to an instance in a VPC can result in an error if the instance has more than one ENI. To change the security groups associated with an ENI attached to an instance that has multiple ENIs, we recommend that you use the ModifyNetworkInterfaceAttribute action. To modify some attributes, the instance must be stopped. For more information, see Modifying attributes of a stopped instance in the Amazon EC2 User Guide.
+   * Modifies the specified attribute of the specified instance. You can specify only one attribute at a time.  Note: Using this action to change the security groups associated with an elastic network interface (ENI) attached to an instance in a VPC can result in an error if the instance has more than one ENI. To change the security groups associated with an ENI attached to an instance that has multiple ENIs, we recommend that you use the ModifyNetworkInterfaceAttribute action. To modify some attributes, the instance must be stopped. For more information, see Modify a stopped instance in the Amazon EC2 User Guide.
    */
   modifyInstanceAttribute(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -3148,6 +3148,14 @@ declare class EC2 extends Service {
    * Modifies the specified network interface attribute. You can specify only one attribute at a time. You can use this action to attach and detach security groups from an existing EC2 instance.
    */
   modifyNetworkInterfaceAttribute(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Modifies the options for instance hostnames for the specified instance.
+   */
+  modifyPrivateDnsNameOptions(params: EC2.Types.ModifyPrivateDnsNameOptionsRequest, callback?: (err: AWSError, data: EC2.Types.ModifyPrivateDnsNameOptionsResult) => void): Request<EC2.Types.ModifyPrivateDnsNameOptionsResult, AWSError>;
+  /**
+   * Modifies the options for instance hostnames for the specified instance.
+   */
+  modifyPrivateDnsNameOptions(callback?: (err: AWSError, data: EC2.Types.ModifyPrivateDnsNameOptionsResult) => void): Request<EC2.Types.ModifyPrivateDnsNameOptionsResult, AWSError>;
   /**
    * Modifies the Availability Zone, instance count, instance type, or network platform (EC2-Classic or EC2-VPC) of your Reserved Instances. The Reserved Instances to be modified must be identical, except for Availability Zone, network platform, and instance type. For more information, see Modifying Reserved Instances in the Amazon EC2 User Guide.
    */
@@ -3341,11 +3349,11 @@ declare class EC2 extends Service {
    */
   modifyVpnTunnelOptions(callback?: (err: AWSError, data: EC2.Types.ModifyVpnTunnelOptionsResult) => void): Request<EC2.Types.ModifyVpnTunnelOptionsResult, AWSError>;
   /**
-   * Enables detailed monitoring for a running instance. Otherwise, basic monitoring is enabled. For more information, see Monitoring your instances and volumes in the Amazon EC2 User Guide. To disable detailed monitoring, see .
+   * Enables detailed monitoring for a running instance. Otherwise, basic monitoring is enabled. For more information, see Monitor your instances using CloudWatch in the Amazon EC2 User Guide. To disable detailed monitoring, see .
    */
   monitorInstances(params: EC2.Types.MonitorInstancesRequest, callback?: (err: AWSError, data: EC2.Types.MonitorInstancesResult) => void): Request<EC2.Types.MonitorInstancesResult, AWSError>;
   /**
-   * Enables detailed monitoring for a running instance. Otherwise, basic monitoring is enabled. For more information, see Monitoring your instances and volumes in the Amazon EC2 User Guide. To disable detailed monitoring, see .
+   * Enables detailed monitoring for a running instance. Otherwise, basic monitoring is enabled. For more information, see Monitor your instances using CloudWatch in the Amazon EC2 User Guide. To disable detailed monitoring, see .
    */
   monitorInstances(callback?: (err: AWSError, data: EC2.Types.MonitorInstancesResult) => void): Request<EC2.Types.MonitorInstancesResult, AWSError>;
   /**
@@ -3389,11 +3397,11 @@ declare class EC2 extends Service {
    */
   purchaseScheduledInstances(callback?: (err: AWSError, data: EC2.Types.PurchaseScheduledInstancesResult) => void): Request<EC2.Types.PurchaseScheduledInstancesResult, AWSError>;
   /**
-   * Requests a reboot of the specified instances. This operation is asynchronous; it only queues a request to reboot the specified instances. The operation succeeds if the instances are valid and belong to you. Requests to reboot terminated instances are ignored. If an instance does not cleanly shut down within a few minutes, Amazon EC2 performs a hard reboot. For more information about troubleshooting, see Getting console output and rebooting instances in the Amazon EC2 User Guide.
+   * Requests a reboot of the specified instances. This operation is asynchronous; it only queues a request to reboot the specified instances. The operation succeeds if the instances are valid and belong to you. Requests to reboot terminated instances are ignored. If an instance does not cleanly shut down within a few minutes, Amazon EC2 performs a hard reboot. For more information about troubleshooting, see Troubleshoot an unreachable instance in the Amazon EC2 User Guide.
    */
   rebootInstances(params: EC2.Types.RebootInstancesRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Requests a reboot of the specified instances. This operation is asynchronous; it only queues a request to reboot the specified instances. The operation succeeds if the instances are valid and belong to you. Requests to reboot terminated instances are ignored. If an instance does not cleanly shut down within a few minutes, Amazon EC2 performs a hard reboot. For more information about troubleshooting, see Getting console output and rebooting instances in the Amazon EC2 User Guide.
+   * Requests a reboot of the specified instances. This operation is asynchronous; it only queues a request to reboot the specified instances. The operation succeeds if the instances are valid and belong to you. Requests to reboot terminated instances are ignored. If an instance does not cleanly shut down within a few minutes, Amazon EC2 performs a hard reboot. For more information about troubleshooting, see Troubleshoot an unreachable instance in the Amazon EC2 User Guide.
    */
   rebootInstances(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -3693,19 +3701,19 @@ declare class EC2 extends Service {
    */
   searchTransitGatewayRoutes(callback?: (err: AWSError, data: EC2.Types.SearchTransitGatewayRoutesResult) => void): Request<EC2.Types.SearchTransitGatewayRoutesResult, AWSError>;
   /**
-   * Sends a diagnostic interrupt to the specified Amazon EC2 instance to trigger a kernel panic (on Linux instances), or a blue screen/stop error (on Windows instances). For instances based on Intel and AMD processors, the interrupt is received as a non-maskable interrupt (NMI). In general, the operating system crashes and reboots when a kernel panic or stop error is triggered. The operating system can also be configured to perform diagnostic tasks, such as generating a memory dump file, loading a secondary kernel, or obtaining a call trace. Before sending a diagnostic interrupt to your instance, ensure that its operating system is configured to perform the required diagnostic tasks. For more information about configuring your operating system to generate a crash dump when a kernel panic or stop error occurs, see Send a diagnostic interrupt (Linux instances) or Send a Diagnostic Interrupt (Windows instances).
+   * Sends a diagnostic interrupt to the specified Amazon EC2 instance to trigger a kernel panic (on Linux instances), or a blue screen/stop error (on Windows instances). For instances based on Intel and AMD processors, the interrupt is received as a non-maskable interrupt (NMI). In general, the operating system crashes and reboots when a kernel panic or stop error is triggered. The operating system can also be configured to perform diagnostic tasks, such as generating a memory dump file, loading a secondary kernel, or obtaining a call trace. Before sending a diagnostic interrupt to your instance, ensure that its operating system is configured to perform the required diagnostic tasks. For more information about configuring your operating system to generate a crash dump when a kernel panic or stop error occurs, see Send a diagnostic interrupt (for advanced users) (Linux instances) or Send a diagnostic interrupt (for advanced users) (Windows instances).
    */
   sendDiagnosticInterrupt(params: EC2.Types.SendDiagnosticInterruptRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Sends a diagnostic interrupt to the specified Amazon EC2 instance to trigger a kernel panic (on Linux instances), or a blue screen/stop error (on Windows instances). For instances based on Intel and AMD processors, the interrupt is received as a non-maskable interrupt (NMI). In general, the operating system crashes and reboots when a kernel panic or stop error is triggered. The operating system can also be configured to perform diagnostic tasks, such as generating a memory dump file, loading a secondary kernel, or obtaining a call trace. Before sending a diagnostic interrupt to your instance, ensure that its operating system is configured to perform the required diagnostic tasks. For more information about configuring your operating system to generate a crash dump when a kernel panic or stop error occurs, see Send a diagnostic interrupt (Linux instances) or Send a Diagnostic Interrupt (Windows instances).
+   * Sends a diagnostic interrupt to the specified Amazon EC2 instance to trigger a kernel panic (on Linux instances), or a blue screen/stop error (on Windows instances). For instances based on Intel and AMD processors, the interrupt is received as a non-maskable interrupt (NMI). In general, the operating system crashes and reboots when a kernel panic or stop error is triggered. The operating system can also be configured to perform diagnostic tasks, such as generating a memory dump file, loading a secondary kernel, or obtaining a call trace. Before sending a diagnostic interrupt to your instance, ensure that its operating system is configured to perform the required diagnostic tasks. For more information about configuring your operating system to generate a crash dump when a kernel panic or stop error occurs, see Send a diagnostic interrupt (for advanced users) (Linux instances) or Send a diagnostic interrupt (for advanced users) (Windows instances).
    */
   sendDiagnosticInterrupt(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Starts an Amazon EBS-backed instance that you've previously stopped. Instances that use Amazon EBS volumes as their root devices can be quickly stopped and started. When an instance is stopped, the compute resources are released and you are not billed for instance usage. However, your root partition Amazon EBS volume remains and continues to persist your data, and you are charged for Amazon EBS volume usage. You can restart your instance at any time. Every time you start your instance, Amazon EC2 charges a one-minute minimum for instance usage, and thereafter charges per second for instance usage. Before stopping an instance, make sure it is in a state from which it can be restarted. Stopping an instance does not preserve data stored in RAM. Performing this operation on an instance that uses an instance store as its root device returns an error. If you attempt to start a T3 instance with host tenancy and the unlimted CPU credit option, the request fails. The unlimited CPU credit option is not supported on Dedicated Hosts. Before you start the instance, either change its CPU credit option to standard, or change its tenancy to default or dedicated. For more information, see Stopping instances in the Amazon EC2 User Guide.
+   * Starts an Amazon EBS-backed instance that you've previously stopped. Instances that use Amazon EBS volumes as their root devices can be quickly stopped and started. When an instance is stopped, the compute resources are released and you are not billed for instance usage. However, your root partition Amazon EBS volume remains and continues to persist your data, and you are charged for Amazon EBS volume usage. You can restart your instance at any time. Every time you start your instance, Amazon EC2 charges a one-minute minimum for instance usage, and thereafter charges per second for instance usage. Before stopping an instance, make sure it is in a state from which it can be restarted. Stopping an instance does not preserve data stored in RAM. Performing this operation on an instance that uses an instance store as its root device returns an error. If you attempt to start a T3 instance with host tenancy and the unlimted CPU credit option, the request fails. The unlimited CPU credit option is not supported on Dedicated Hosts. Before you start the instance, either change its CPU credit option to standard, or change its tenancy to default or dedicated. For more information, see Stop and start your instance in the Amazon EC2 User Guide.
    */
   startInstances(params: EC2.Types.StartInstancesRequest, callback?: (err: AWSError, data: EC2.Types.StartInstancesResult) => void): Request<EC2.Types.StartInstancesResult, AWSError>;
   /**
-   * Starts an Amazon EBS-backed instance that you've previously stopped. Instances that use Amazon EBS volumes as their root devices can be quickly stopped and started. When an instance is stopped, the compute resources are released and you are not billed for instance usage. However, your root partition Amazon EBS volume remains and continues to persist your data, and you are charged for Amazon EBS volume usage. You can restart your instance at any time. Every time you start your instance, Amazon EC2 charges a one-minute minimum for instance usage, and thereafter charges per second for instance usage. Before stopping an instance, make sure it is in a state from which it can be restarted. Stopping an instance does not preserve data stored in RAM. Performing this operation on an instance that uses an instance store as its root device returns an error. If you attempt to start a T3 instance with host tenancy and the unlimted CPU credit option, the request fails. The unlimited CPU credit option is not supported on Dedicated Hosts. Before you start the instance, either change its CPU credit option to standard, or change its tenancy to default or dedicated. For more information, see Stopping instances in the Amazon EC2 User Guide.
+   * Starts an Amazon EBS-backed instance that you've previously stopped. Instances that use Amazon EBS volumes as their root devices can be quickly stopped and started. When an instance is stopped, the compute resources are released and you are not billed for instance usage. However, your root partition Amazon EBS volume remains and continues to persist your data, and you are charged for Amazon EBS volume usage. You can restart your instance at any time. Every time you start your instance, Amazon EC2 charges a one-minute minimum for instance usage, and thereafter charges per second for instance usage. Before stopping an instance, make sure it is in a state from which it can be restarted. Stopping an instance does not preserve data stored in RAM. Performing this operation on an instance that uses an instance store as its root device returns an error. If you attempt to start a T3 instance with host tenancy and the unlimted CPU credit option, the request fails. The unlimited CPU credit option is not supported on Dedicated Hosts. Before you start the instance, either change its CPU credit option to standard, or change its tenancy to default or dedicated. For more information, see Stop and start your instance in the Amazon EC2 User Guide.
    */
   startInstances(callback?: (err: AWSError, data: EC2.Types.StartInstancesResult) => void): Request<EC2.Types.StartInstancesResult, AWSError>;
   /**
@@ -3725,11 +3733,11 @@ declare class EC2 extends Service {
    */
   startVpcEndpointServicePrivateDnsVerification(callback?: (err: AWSError, data: EC2.Types.StartVpcEndpointServicePrivateDnsVerificationResult) => void): Request<EC2.Types.StartVpcEndpointServicePrivateDnsVerificationResult, AWSError>;
   /**
-   * Stops an Amazon EBS-backed instance. You can use the Stop action to hibernate an instance if the instance is enabled for hibernation and it meets the hibernation prerequisites. For more information, see Hibernate your instance in the Amazon EC2 User Guide. We don't charge usage for a stopped instance, or data transfer fees; however, your root partition Amazon EBS volume remains and continues to persist your data, and you are charged for Amazon EBS volume usage. Every time you start your instance, Amazon EC2 charges a one-minute minimum for instance usage, and thereafter charges per second for instance usage. You can't stop or hibernate instance store-backed instances. You can't use the Stop action to hibernate Spot Instances, but you can specify that Amazon EC2 should hibernate Spot Instances when they are interrupted. For more information, see Hibernating interrupted Spot Instances in the Amazon EC2 User Guide. When you stop or hibernate an instance, we shut it down. You can restart your instance at any time. Before stopping or hibernating an instance, make sure it is in a state from which it can be restarted. Stopping an instance does not preserve data stored in RAM, but hibernating an instance does preserve data stored in RAM. If an instance cannot hibernate successfully, a normal shutdown occurs. Stopping and hibernating an instance is different to rebooting or terminating it. For example, when you stop or hibernate an instance, the root device and any other devices attached to the instance persist. When you terminate an instance, the root device and any other devices attached during the instance launch are automatically deleted. For more information about the differences between rebooting, stopping, hibernating, and terminating instances, see Instance lifecycle in the Amazon EC2 User Guide. When you stop an instance, we attempt to shut it down forcibly after a short while. If your instance appears stuck in the stopping state after a period of time, there may be an issue with the underlying host computer. For more information, see Troubleshooting stopping your instance in the Amazon EC2 User Guide.
+   * Stops an Amazon EBS-backed instance. You can use the Stop action to hibernate an instance if the instance is enabled for hibernation and it meets the hibernation prerequisites. For more information, see Hibernate your instance in the Amazon EC2 User Guide. We don't charge usage for a stopped instance, or data transfer fees; however, your root partition Amazon EBS volume remains and continues to persist your data, and you are charged for Amazon EBS volume usage. Every time you start your instance, Amazon EC2 charges a one-minute minimum for instance usage, and thereafter charges per second for instance usage. You can't stop or hibernate instance store-backed instances. You can't use the Stop action to hibernate Spot Instances, but you can specify that Amazon EC2 should hibernate Spot Instances when they are interrupted. For more information, see Hibernating interrupted Spot Instances in the Amazon EC2 User Guide. When you stop or hibernate an instance, we shut it down. You can restart your instance at any time. Before stopping or hibernating an instance, make sure it is in a state from which it can be restarted. Stopping an instance does not preserve data stored in RAM, but hibernating an instance does preserve data stored in RAM. If an instance cannot hibernate successfully, a normal shutdown occurs. Stopping and hibernating an instance is different to rebooting or terminating it. For example, when you stop or hibernate an instance, the root device and any other devices attached to the instance persist. When you terminate an instance, the root device and any other devices attached during the instance launch are automatically deleted. For more information about the differences between rebooting, stopping, hibernating, and terminating instances, see Instance lifecycle in the Amazon EC2 User Guide. When you stop an instance, we attempt to shut it down forcibly after a short while. If your instance appears stuck in the stopping state after a period of time, there may be an issue with the underlying host computer. For more information, see Troubleshoot stopping your instance in the Amazon EC2 User Guide.
    */
   stopInstances(params: EC2.Types.StopInstancesRequest, callback?: (err: AWSError, data: EC2.Types.StopInstancesResult) => void): Request<EC2.Types.StopInstancesResult, AWSError>;
   /**
-   * Stops an Amazon EBS-backed instance. You can use the Stop action to hibernate an instance if the instance is enabled for hibernation and it meets the hibernation prerequisites. For more information, see Hibernate your instance in the Amazon EC2 User Guide. We don't charge usage for a stopped instance, or data transfer fees; however, your root partition Amazon EBS volume remains and continues to persist your data, and you are charged for Amazon EBS volume usage. Every time you start your instance, Amazon EC2 charges a one-minute minimum for instance usage, and thereafter charges per second for instance usage. You can't stop or hibernate instance store-backed instances. You can't use the Stop action to hibernate Spot Instances, but you can specify that Amazon EC2 should hibernate Spot Instances when they are interrupted. For more information, see Hibernating interrupted Spot Instances in the Amazon EC2 User Guide. When you stop or hibernate an instance, we shut it down. You can restart your instance at any time. Before stopping or hibernating an instance, make sure it is in a state from which it can be restarted. Stopping an instance does not preserve data stored in RAM, but hibernating an instance does preserve data stored in RAM. If an instance cannot hibernate successfully, a normal shutdown occurs. Stopping and hibernating an instance is different to rebooting or terminating it. For example, when you stop or hibernate an instance, the root device and any other devices attached to the instance persist. When you terminate an instance, the root device and any other devices attached during the instance launch are automatically deleted. For more information about the differences between rebooting, stopping, hibernating, and terminating instances, see Instance lifecycle in the Amazon EC2 User Guide. When you stop an instance, we attempt to shut it down forcibly after a short while. If your instance appears stuck in the stopping state after a period of time, there may be an issue with the underlying host computer. For more information, see Troubleshooting stopping your instance in the Amazon EC2 User Guide.
+   * Stops an Amazon EBS-backed instance. You can use the Stop action to hibernate an instance if the instance is enabled for hibernation and it meets the hibernation prerequisites. For more information, see Hibernate your instance in the Amazon EC2 User Guide. We don't charge usage for a stopped instance, or data transfer fees; however, your root partition Amazon EBS volume remains and continues to persist your data, and you are charged for Amazon EBS volume usage. Every time you start your instance, Amazon EC2 charges a one-minute minimum for instance usage, and thereafter charges per second for instance usage. You can't stop or hibernate instance store-backed instances. You can't use the Stop action to hibernate Spot Instances, but you can specify that Amazon EC2 should hibernate Spot Instances when they are interrupted. For more information, see Hibernating interrupted Spot Instances in the Amazon EC2 User Guide. When you stop or hibernate an instance, we shut it down. You can restart your instance at any time. Before stopping or hibernating an instance, make sure it is in a state from which it can be restarted. Stopping an instance does not preserve data stored in RAM, but hibernating an instance does preserve data stored in RAM. If an instance cannot hibernate successfully, a normal shutdown occurs. Stopping and hibernating an instance is different to rebooting or terminating it. For example, when you stop or hibernate an instance, the root device and any other devices attached to the instance persist. When you terminate an instance, the root device and any other devices attached during the instance launch are automatically deleted. For more information about the differences between rebooting, stopping, hibernating, and terminating instances, see Instance lifecycle in the Amazon EC2 User Guide. When you stop an instance, we attempt to shut it down forcibly after a short while. If your instance appears stuck in the stopping state after a period of time, there may be an issue with the underlying host computer. For more information, see Troubleshoot stopping your instance in the Amazon EC2 User Guide.
    */
   stopInstances(callback?: (err: AWSError, data: EC2.Types.StopInstancesResult) => void): Request<EC2.Types.StopInstancesResult, AWSError>;
   /**
@@ -4940,7 +4948,7 @@ declare namespace EC2 {
   }
   export interface AssociateSubnetCidrBlockResult {
     /**
-     * Information about the IPv6 CIDR block association.
+     * Information about the IPv6 association.
      */
     Ipv6CidrBlockAssociation?: SubnetIpv6CidrBlockAssociation;
     /**
@@ -7158,6 +7166,10 @@ declare namespace EC2 {
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
     DryRun?: Boolean;
+    /**
+     * Indicates whether to create an IPv6 only subnet. If you already have a default subnet for this Availability Zone, you must delete it before you can create an IPv6 only subnet.
+     */
+    Ipv6Native?: Boolean;
   }
   export interface CreateDefaultSubnetResult {
     /**
@@ -8349,11 +8361,11 @@ declare namespace EC2 {
      */
     AvailabilityZoneId?: String;
     /**
-     * The IPv4 network range for the subnet, in CIDR notation. For example, 10.0.0.0/24. We modify the specified CIDR block to its canonical form; for example, if you specify 100.68.0.18/18, we modify it to 100.68.0.0/18.
+     * The IPv4 network range for the subnet, in CIDR notation. For example, 10.0.0.0/24. We modify the specified CIDR block to its canonical form; for example, if you specify 100.68.0.18/18, we modify it to 100.68.0.0/18. This parameter is not supported for an IPv6 only subnet.
      */
-    CidrBlock: String;
+    CidrBlock?: String;
     /**
-     * The IPv6 network range for the subnet, in CIDR notation. The subnet size must use a /64 prefix length.
+     * The IPv6 network range for the subnet, in CIDR notation. The subnet size must use a /64 prefix length. This parameter is required for an IPv6 only subnet.
      */
     Ipv6CidrBlock?: String;
     /**
@@ -8368,6 +8380,10 @@ declare namespace EC2 {
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
     DryRun?: Boolean;
+    /**
+     * Indicates whether to create an IPv6 only subnet.
+     */
+    Ipv6Native?: Boolean;
   }
   export interface CreateSubnetResult {
     /**
@@ -13315,7 +13331,7 @@ declare namespace EC2 {
   export type DescribeSubnetsMaxResults = number;
   export interface DescribeSubnetsRequest {
     /**
-     * One or more filters.    availability-zone - The Availability Zone for the subnet. You can also use availabilityZone as the filter name.    availability-zone-id - The ID of the Availability Zone for the subnet. You can also use availabilityZoneId as the filter name.    available-ip-address-count - The number of IPv4 addresses in the subnet that are available.    cidr-block - The IPv4 CIDR block of the subnet. The CIDR block you specify must exactly match the subnet's CIDR block for information to be returned for the subnet. You can also use cidr or cidrBlock as the filter names.    default-for-az - Indicates whether this is the default subnet for the Availability Zone. You can also use defaultForAz as the filter name.    ipv6-cidr-block-association.ipv6-cidr-block - An IPv6 CIDR block associated with the subnet.    ipv6-cidr-block-association.association-id - An association ID for an IPv6 CIDR block associated with the subnet.    ipv6-cidr-block-association.state - The state of an IPv6 CIDR block associated with the subnet.    outpost-arn - The Amazon Resource Name (ARN) of the Outpost.    owner-id - The ID of the Amazon Web Services account that owns the subnet.    state - The state of the subnet (pending | available).    subnet-arn - The Amazon Resource Name (ARN) of the subnet.    subnet-id - The ID of the subnet.    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.    vpc-id - The ID of the VPC for the subnet.  
+     * One or more filters.    availability-zone - The Availability Zone for the subnet. You can also use availabilityZone as the filter name.    availability-zone-id - The ID of the Availability Zone for the subnet. You can also use availabilityZoneId as the filter name.    available-ip-address-count - The number of IPv4 addresses in the subnet that are available.    cidr-block - The IPv4 CIDR block of the subnet. The CIDR block you specify must exactly match the subnet's CIDR block for information to be returned for the subnet. You can also use cidr or cidrBlock as the filter names.    default-for-az - Indicates whether this is the default subnet for the Availability Zone (true | false). You can also use defaultForAz as the filter name.    ipv6-cidr-block-association.ipv6-cidr-block - An IPv6 CIDR block associated with the subnet.    ipv6-cidr-block-association.association-id - An association ID for an IPv6 CIDR block associated with the subnet.    ipv6-cidr-block-association.state - The state of an IPv6 CIDR block associated with the subnet.    ipv6-native - Indicates whether this is an IPv6 only subnet (true | false).    outpost-arn - The Amazon Resource Name (ARN) of the Outpost.    owner-id - The ID of the Amazon Web Services account that owns the subnet.    state - The state of the subnet (pending | available).    subnet-arn - The Amazon Resource Name (ARN) of the subnet.    subnet-id - The ID of the subnet.    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.    vpc-id - The ID of the VPC for the subnet.  
      */
     Filters?: FilterList;
     /**
@@ -16197,7 +16213,7 @@ declare namespace EC2 {
      */
     ReplacementStrategy?: FleetReplacementStrategy;
     /**
-     * The amount of time (in seconds) that Amazon EC2 waits before terminating the old Spot Instance after launching a new replacement Spot Instance.
+     * The amount of time (in seconds) that Amazon EC2 waits before terminating the old Spot Instance after launching a new replacement Spot Instance. Valid only when replacementStrategy is set to launch-before-terminate. Valid values: Minimum value of 120 seconds. Maximum value of 7200 seconds.
      */
     TerminationDelay?: Integer;
   }
@@ -16207,7 +16223,7 @@ declare namespace EC2 {
      */
     ReplacementStrategy?: FleetReplacementStrategy;
     /**
-     * The amount of time (in seconds) that Amazon EC2 waits before terminating the old Spot Instance after launching a new replacement Spot Instance.
+     * The amount of time (in seconds) that Amazon EC2 waits before terminating the old Spot Instance after launching a new replacement Spot Instance. Valid only when ReplacementStrategy is set to launch-before-terminate. Valid values: Minimum value of 120 seconds. Maximum value of 7200 seconds.
      */
     TerminationDelay?: Integer;
   }
@@ -17530,6 +17546,7 @@ declare namespace EC2 {
   export type HostReservationIdSet = HostReservationId[];
   export type HostReservationSet = HostReservation[];
   export type HostTenancy = "dedicated"|"host"|string;
+  export type HostnameType = "ip-name"|"resource-name"|string;
   export type Hour = number;
   export type HttpTokensState = "optional"|"required"|string;
   export type HypervisorType = "ovm"|"xen"|string;
@@ -18561,6 +18578,14 @@ declare namespace EC2 {
      * The time that the usage operation was last updated.
      */
     UsageOperationUpdateTime?: MillisecondDateTime;
+    /**
+     * The options for the instance hostname.
+     */
+    PrivateDnsNameOptions?: PrivateDnsNameOptionsResponse;
+    /**
+     * The IPv6 address assigned to the instance.
+     */
+    Ipv6Address?: String;
   }
   export interface InstanceAttribute {
     /**
@@ -20591,6 +20616,34 @@ declare namespace EC2 {
      */
     PartitionNumber?: Integer;
   }
+  export interface LaunchTemplatePrivateDnsNameOptions {
+    /**
+     * The type of hostname to assign to an instance.
+     */
+    HostnameType?: HostnameType;
+    /**
+     * Indicates whether to respond to DNS queries for instance hostnames with DNS A records.
+     */
+    EnableResourceNameDnsARecord?: Boolean;
+    /**
+     * Indicates whether to respond to DNS queries for instance hostnames with DNS AAAA records.
+     */
+    EnableResourceNameDnsAAAARecord?: Boolean;
+  }
+  export interface LaunchTemplatePrivateDnsNameOptionsRequest {
+    /**
+     * The type of hostname for Amazon EC2 instances. For IPv4 only subnets, an instance DNS name must be based on the instance IPv4 address. For IPv6 native subnets, an instance DNS name must be based on the instance ID. For dual-stack subnets, you can specify whether DNS names use the instance IPv4 address or the instance ID.
+     */
+    HostnameType?: HostnameType;
+    /**
+     * Indicates whether to respond to DNS queries for instance hostnames with DNS A records.
+     */
+    EnableResourceNameDnsARecord?: Boolean;
+    /**
+     * Indicates whether to respond to DNS queries for instance hostnames with DNS AAAA records.
+     */
+    EnableResourceNameDnsAAAARecord?: Boolean;
+  }
   export type LaunchTemplateSet = LaunchTemplate[];
   export interface LaunchTemplateSpecification {
     /**
@@ -21511,7 +21564,7 @@ declare namespace EC2 {
      */
     Attribute?: InstanceAttributeName;
     /**
-     * Modifies the DeleteOnTermination attribute for volumes that are currently attached. The volume must be owned by the caller. If no value is specified for DeleteOnTermination, the default is true and the volume is deleted when the instance is terminated. To add instance store volumes to an Amazon EBS-backed instance, you must add them when you launch the instance. For more information, see Updating the block device mapping when launching an instance in the Amazon EC2 User Guide.
+     * Modifies the DeleteOnTermination attribute for volumes that are currently attached. The volume must be owned by the caller. If no value is specified for DeleteOnTermination, the default is true and the volume is deleted when the instance is terminated. To add instance store volumes to an Amazon EBS-backed instance, you must add them when you launch the instance. For more information, see Update the block device mapping when launching an instance in the Amazon EC2 User Guide.
      */
     BlockDeviceMappings?: InstanceBlockDeviceMappingSpecificationList;
     /**
@@ -21674,7 +21727,7 @@ declare namespace EC2 {
      */
     HttpPutResponseHopLimit?: Integer;
     /**
-     * This parameter enables or disables the HTTP metadata endpoint on your instances. If the parameter is not specified, the existing state is maintained.  If you specify a value of disabled, you will not be able to access your instance metadata. 
+     * Enables or disables the HTTP metadata endpoint on your instances. If the parameter is not specified, the existing state is maintained. If you specify a value of disabled, you cannot access your instance metadata.
      */
     HttpEndpoint?: InstanceMetadataEndpointState;
     /**
@@ -21682,7 +21735,7 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * Enables or disables the IPv6 endpoint for the instance metadata service.
+     * Enables or disables the IPv6 endpoint for the instance metadata service. This setting applies only if you have enabled the HTTP metadata endpoint.
      */
     HttpProtocolIpv6?: InstanceMetadataProtocolState;
   }
@@ -21718,7 +21771,7 @@ declare namespace EC2 {
      */
     Tenancy?: HostTenancy;
     /**
-     * Reserved for future use.
+     * The number of the partition in which to place the instance. Valid only if the placement group strategy is set to partition.
      */
     PartitionNumber?: Integer;
     /**
@@ -21821,6 +21874,34 @@ declare namespace EC2 {
      * Enable or disable source/destination checks, which ensure that the instance is either the source or the destination of any traffic that it receives. If the value is true, source/destination checks are enabled; otherwise, they are disabled. The default value is true. You must disable source/destination checks if the instance runs services such as network address translation, routing, or firewalls.
      */
     SourceDestCheck?: AttributeBooleanValue;
+  }
+  export interface ModifyPrivateDnsNameOptionsRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The ID of the instance.
+     */
+    InstanceId?: InstanceId;
+    /**
+     * The type of hostname for EC2 instances. For IPv4 only subnets, an instance DNS name must be based on the instance IPv4 address. For IPv6 only subnets, an instance DNS name must be based on the instance ID. For dual-stack subnets, you can specify whether DNS names use the instance IPv4 address or the instance ID.
+     */
+    PrivateDnsHostnameType?: HostnameType;
+    /**
+     * Indicates whether to respond to DNS queries for instance hostnames with DNS A records.
+     */
+    EnableResourceNameDnsARecord?: Boolean;
+    /**
+     * Indicates whether to respond to DNS queries for instance hostnames with DNS AAAA records.
+     */
+    EnableResourceNameDnsAAAARecord?: Boolean;
+  }
+  export interface ModifyPrivateDnsNameOptionsResult {
+    /**
+     * Returns true if the request succeeds; otherwise, it returns an error.
+     */
+    Return?: Boolean;
   }
   export interface ModifyReservedInstancesRequest {
     /**
@@ -21949,6 +22030,18 @@ declare namespace EC2 {
      * Indicates whether DNS queries made to the Amazon-provided DNS Resolver in this subnet should return synthetic IPv6 addresses for IPv4-only destinations.
      */
     EnableDns64?: AttributeBooleanValue;
+    /**
+     * The type of hostnames to assign to instances in the subnet at launch. For IPv4 only subnets, an instance DNS name must be based on the instance IPv4 address. For IPv6 only subnets, an instance DNS name must be based on the instance ID. For dual-stack subnets, you can specify whether DNS names use the instance IPv4 address or the instance ID.
+     */
+    PrivateDnsHostnameTypeOnLaunch?: HostnameType;
+    /**
+     * Indicates whether to respond to DNS queries for instance hostnames with DNS A records.
+     */
+    EnableResourceNameDnsARecordOnLaunch?: AttributeBooleanValue;
+    /**
+     * Indicates whether to respond to DNS queries for instance hostnames with DNS AAAA records.
+     */
+    EnableResourceNameDnsAAAARecordOnLaunch?: AttributeBooleanValue;
   }
   export interface ModifyTrafficMirrorFilterNetworkServicesRequest {
     /**
@@ -23104,6 +23197,14 @@ declare namespace EC2 {
      * Indicates whether a network interface with an IPv6 address is unreachable from the public internet. If the value is true, inbound traffic from the internet is dropped and you cannot assign an elastic IP address to the network interface. The network interface is reachable from peered VPCs and resources connected through a transit gateway, including on-premises networks.
      */
     DenyAllIgwTraffic?: Boolean;
+    /**
+     * Indicates whether this is an IPv6 only network interface.
+     */
+    Ipv6Native?: Boolean;
+    /**
+     * The IPv6 globally unique address associated with the network interface.
+     */
+    Ipv6Address?: String;
   }
   export interface NetworkInterfaceAssociation {
     /**
@@ -23288,7 +23389,7 @@ declare namespace EC2 {
   export type OnDemandAllocationStrategy = "lowestPrice"|"prioritized"|string;
   export interface OnDemandOptions {
     /**
-     * The order of the launch template overrides to use in fulfilling On-Demand capacity. If you specify lowest-price, EC2 Fleet uses price to determine the order, launching the lowest price first. If you specify prioritized, EC2 Fleet uses the priority that you assigned to each launch template override, launching the highest priority first. If you do not specify a value, EC2 Fleet defaults to lowest-price.
+     * The strategy that determines the order of the launch template overrides to use in fulfilling On-Demand capacity.  lowest-price - EC2 Fleet uses price to determine the order, launching the lowest price first.  prioritized - EC2 Fleet uses the priority that you assigned to each launch template override, launching the highest priority first. Default: lowest-price 
      */
     AllocationStrategy?: FleetOnDemandAllocationStrategy;
     /**
@@ -23304,7 +23405,7 @@ declare namespace EC2 {
      */
     SingleAvailabilityZone?: Boolean;
     /**
-     * The minimum target capacity for On-Demand Instances in the fleet. If the minimum target capacity is not reached, the fleet launches no instances.
+     * The minimum target capacity for On-Demand Instances in the fleet. If the minimum target capacity is not reached, the fleet launches no instances. Supported only for fleets of type instant. At least one of the following must be specified: SingleAvailabilityZone | SingleInstanceType 
      */
     MinTargetCapacity?: Integer;
     /**
@@ -23314,7 +23415,7 @@ declare namespace EC2 {
   }
   export interface OnDemandOptionsRequest {
     /**
-     * The order of the launch template overrides to use in fulfilling On-Demand capacity. If you specify lowest-price, EC2 Fleet uses price to determine the order, launching the lowest price first. If you specify prioritized, EC2 Fleet uses the priority that you assigned to each launch template override, launching the highest priority first. If you do not specify a value, EC2 Fleet defaults to lowest-price.
+     * The strategy that determines the order of the launch template overrides to use in fulfilling On-Demand capacity.  lowest-price - EC2 Fleet uses price to determine the order, launching the lowest price first.  prioritized - EC2 Fleet uses the priority that you assigned to each launch template override, launching the highest priority first. Default: lowest-price 
      */
     AllocationStrategy?: FleetOnDemandAllocationStrategy;
     /**
@@ -23330,7 +23431,7 @@ declare namespace EC2 {
      */
     SingleAvailabilityZone?: Boolean;
     /**
-     * The minimum target capacity for On-Demand Instances in the fleet. If the minimum target capacity is not reached, the fleet launches no instances.
+     * The minimum target capacity for On-Demand Instances in the fleet. If the minimum target capacity is not reached, the fleet launches no instances. Supported only for fleets of type instant. At least one of the following must be specified: SingleAvailabilityZone | SingleInstanceType 
      */
     MinTargetCapacity?: Integer;
     /**
@@ -23561,7 +23662,7 @@ declare namespace EC2 {
      */
     GroupName?: PlacementGroupName;
     /**
-     * The number of the partition the instance is in. Valid only if the placement group strategy is set to partition. This parameter is not supported by CreateFleet.
+     * The number of the partition that the instance is in. Valid only if the placement group strategy is set to partition. This parameter is not supported by CreateFleet.
      */
     PartitionNumber?: Integer;
     /**
@@ -23783,6 +23884,48 @@ declare namespace EC2 {
      * The name of the record subdomain the service provider needs to create. The service provider adds the value text to the name.
      */
     Name?: String;
+  }
+  export interface PrivateDnsNameOptionsOnLaunch {
+    /**
+     * The type of hostname for EC2 instances. For IPv4 only subnets, an instance DNS name must be based on the instance IPv4 address. For IPv6 only subnets, an instance DNS name must be based on the instance ID. For dual-stack subnets, you can specify whether DNS names use the instance IPv4 address or the instance ID.
+     */
+    HostnameType?: HostnameType;
+    /**
+     * Indicates whether to respond to DNS queries for instance hostnames with DNS A records.
+     */
+    EnableResourceNameDnsARecord?: Boolean;
+    /**
+     * Indicates whether to respond to DNS queries for instance hostname with DNS AAAA records.
+     */
+    EnableResourceNameDnsAAAARecord?: Boolean;
+  }
+  export interface PrivateDnsNameOptionsRequest {
+    /**
+     * The type of hostname for EC2 instances. For IPv4 only subnets, an instance DNS name must be based on the instance IPv4 address. For IPv6 only subnets, an instance DNS name must be based on the instance ID. For dual-stack subnets, you can specify whether DNS names use the instance IPv4 address or the instance ID.
+     */
+    HostnameType?: HostnameType;
+    /**
+     * Indicates whether to respond to DNS queries for instance hostnames with DNS A records.
+     */
+    EnableResourceNameDnsARecord?: Boolean;
+    /**
+     * Indicates whether to respond to DNS queries for instance hostnames with DNS AAAA records.
+     */
+    EnableResourceNameDnsAAAARecord?: Boolean;
+  }
+  export interface PrivateDnsNameOptionsResponse {
+    /**
+     * The type of hostname to assign to an instance.
+     */
+    HostnameType?: HostnameType;
+    /**
+     * Indicates whether to respond to DNS queries for instance hostnames with DNS A records.
+     */
+    EnableResourceNameDnsARecord?: Boolean;
+    /**
+     * Indicates whether to respond to DNS queries for instance hostnames with DNS AAAA records.
+     */
+    EnableResourceNameDnsAAAARecord?: Boolean;
   }
   export type PrivateIpAddressConfigSet = ScheduledInstancesPrivateIpAddressConfig[];
   export interface PrivateIpAddressSpecification {
@@ -24807,6 +24950,10 @@ declare namespace EC2 {
      * The attributes for the instance types. When you specify instance attributes, Amazon EC2 will identify instance types with these attributes. If you specify InstanceRequirements, you can't specify InstanceTypes.
      */
     InstanceRequirements?: InstanceRequirementsRequest;
+    /**
+     * The options for the instance hostname. The default values are inherited from the subnet.
+     */
+    PrivateDnsNameOptions?: LaunchTemplatePrivateDnsNameOptionsRequest;
   }
   export interface RequestSpotFleetRequest {
     /**
@@ -25551,6 +25698,10 @@ declare namespace EC2 {
      * The attributes for the instance types. When you specify instance attributes, Amazon EC2 will identify instance types with these attributes. If you specify InstanceRequirements, you can't specify InstanceTypes.
      */
     InstanceRequirements?: InstanceRequirements;
+    /**
+     * The options for the instance hostname.
+     */
+    PrivateDnsNameOptions?: LaunchTemplatePrivateDnsNameOptions;
   }
   export type RestorableByStringList = String[];
   export interface RestoreAddressToClassicRequest {
@@ -25944,7 +26095,7 @@ declare namespace EC2 {
      */
     SubnetId?: SubnetId;
     /**
-     * The user data to make available to the instance. For more information, see Running commands on your Linux instance at launch (Linux) and Adding User Data (Windows). If you are using a command line tool, base64-encoding is performed for you, and you can load the text from a file. Otherwise, you must provide base64-encoded text. User data is limited to 16 KB.
+     * The user data to make available to the instance. For more information, see Run commands on your Linux instance at launch and Run commands on your Windows instance at launch. If you are using a command line tool, base64-encoding is performed for you, and you can load the text from a file. Otherwise, you must provide base64-encoded text. User data is limited to 16 KB.
      */
     UserData?: String;
     /**
@@ -26008,7 +26159,7 @@ declare namespace EC2 {
      */
     CreditSpecification?: CreditSpecificationRequest;
     /**
-     * The CPU options for the instance. For more information, see Optimizing CPU options in the Amazon EC2 User Guide.
+     * The CPU options for the instance. For more information, see Optimize CPU options in the Amazon EC2 User Guide.
      */
     CpuOptions?: CpuOptionsRequest;
     /**
@@ -26031,6 +26182,10 @@ declare namespace EC2 {
      * Indicates whether the instance is enabled for Amazon Web Services Nitro Enclaves. For more information, see  What is Amazon Web Services Nitro Enclaves? in the Amazon Web Services Nitro Enclaves User Guide. You can't enable Amazon Web Services Nitro Enclaves and hibernation on the same instance.
      */
     EnclaveOptions?: EnclaveOptionsRequest;
+    /**
+     * The options for the instance hostname. The default values are inherited from the subnet.
+     */
+    PrivateDnsNameOptions?: PrivateDnsNameOptionsRequest;
   }
   export interface RunScheduledInstancesRequest {
     /**
@@ -27104,7 +27259,7 @@ declare namespace EC2 {
      */
     ReplacementStrategy?: ReplacementStrategy;
     /**
-     * The amount of time (in seconds) that Amazon EC2 waits before terminating the old Spot Instance after launching a new replacement Spot Instance.
+     * The amount of time (in seconds) that Amazon EC2 waits before terminating the old Spot Instance after launching a new replacement Spot Instance. Valid only when ReplacementStrategy is set to launch-before-terminate. Valid values: Minimum value of 120 seconds. Maximum value of 7200 seconds.
      */
     TerminationDelay?: Integer;
   }
@@ -27498,7 +27653,7 @@ declare namespace EC2 {
   }
   export interface SpotOptions {
     /**
-     * Indicates how to allocate the target Spot Instance capacity across the Spot Instance pools specified by the EC2 Fleet. If the allocation strategy is lowest-price, EC2 Fleet launches instances from the Spot Instance pools with the lowest price. This is the default allocation strategy. If the allocation strategy is diversified, EC2 Fleet launches instances from all of the Spot Instance pools that you specify. If the allocation strategy is capacity-optimized (recommended), EC2 Fleet launches instances from Spot Instance pools with optimal capacity for the number of instances that are launching. To give certain instance types a higher chance of launching first, use capacity-optimized-prioritized. Set a priority for each instance type by using the Priority parameter for LaunchTemplateOverrides. You can assign the same priority to different LaunchTemplateOverrides. EC2 implements the priorities on a best-effort basis, but optimizes for capacity first. capacity-optimized-prioritized is supported only if your fleet uses a launch template. Note that if the On-Demand AllocationStrategy is set to prioritized, the same priority is applied when fulfilling On-Demand capacity.
+     * The strategy that determines how to allocate the target Spot Instance capacity across the Spot Instance pools specified by the EC2 Fleet.  lowest-price - EC2 Fleet launches instances from the Spot Instance pools with the lowest price.  diversified - EC2 Fleet launches instances from all of the Spot Instance pools that you specify.  capacity-optimized (recommended) - EC2 Fleet launches instances from Spot Instance pools with optimal capacity for the number of instances that are launching. To give certain instance types a higher chance of launching first, use capacity-optimized-prioritized. Set a priority for each instance type by using the Priority parameter for LaunchTemplateOverrides. You can assign the same priority to different LaunchTemplateOverrides. EC2 implements the priorities on a best-effort basis, but optimizes for capacity first. capacity-optimized-prioritized is supported only if your fleet uses a launch template. Note that if the On-Demand AllocationStrategy is set to prioritized, the same priority is applied when fulfilling On-Demand capacity. Default: lowest-price 
      */
     AllocationStrategy?: SpotAllocationStrategy;
     /**
@@ -27506,11 +27661,11 @@ declare namespace EC2 {
      */
     MaintenanceStrategies?: FleetSpotMaintenanceStrategies;
     /**
-     * The behavior when a Spot Instance is interrupted. The default is terminate.
+     * The behavior when a Spot Instance is interrupted. Default: terminate 
      */
     InstanceInterruptionBehavior?: SpotInstanceInterruptionBehavior;
     /**
-     * The number of Spot pools across which to allocate your target Spot capacity. Valid only when AllocationStrategy is set to lowest-price. EC2 Fleet selects the cheapest Spot pools and evenly allocates your target Spot capacity across the number of Spot pools that you specify. Note that EC2 Fleet attempts to draw Spot Instances from the number of pools that you specify on a best effort basis. If a pool runs out of Spot capacity before fulfilling your target capacity, EC2 Fleet will continue to fulfill your request by drawing from the next cheapest pool. To ensure that your target capacity is met, you might receive Spot Instances from more than the number of pools that you specified. Similarly, if most of the pools have no Spot capacity, you might receive your full target capacity from fewer than the number of pools that you specified.
+     * The number of Spot pools across which to allocate your target Spot capacity. Supported only when AllocationStrategy is set to lowest-price. EC2 Fleet selects the cheapest Spot pools and evenly allocates your target Spot capacity across the number of Spot pools that you specify. Note that EC2 Fleet attempts to draw Spot Instances from the number of pools that you specify on a best effort basis. If a pool runs out of Spot capacity before fulfilling your target capacity, EC2 Fleet will continue to fulfill your request by drawing from the next cheapest pool. To ensure that your target capacity is met, you might receive Spot Instances from more than the number of pools that you specified. Similarly, if most of the pools have no Spot capacity, you might receive your full target capacity from fewer than the number of pools that you specified.
      */
     InstancePoolsToUseCount?: Integer;
     /**
@@ -27522,7 +27677,7 @@ declare namespace EC2 {
      */
     SingleAvailabilityZone?: Boolean;
     /**
-     * The minimum target capacity for Spot Instances in the fleet. If the minimum target capacity is not reached, the fleet launches no instances.
+     * The minimum target capacity for Spot Instances in the fleet. If the minimum target capacity is not reached, the fleet launches no instances. Supported only for fleets of type instant. At least one of the following must be specified: SingleAvailabilityZone | SingleInstanceType 
      */
     MinTargetCapacity?: Integer;
     /**
@@ -27532,7 +27687,7 @@ declare namespace EC2 {
   }
   export interface SpotOptionsRequest {
     /**
-     * Indicates how to allocate the target Spot Instance capacity across the Spot Instance pools specified by the EC2 Fleet. If the allocation strategy is lowest-price, EC2 Fleet launches instances from the Spot Instance pools with the lowest price. This is the default allocation strategy. If the allocation strategy is diversified, EC2 Fleet launches instances from all of the Spot Instance pools that you specify. If the allocation strategy is capacity-optimized (recommended), EC2 Fleet launches instances from Spot Instance pools with optimal capacity for the number of instances that are launching. To give certain instance types a higher chance of launching first, use capacity-optimized-prioritized. Set a priority for each instance type by using the Priority parameter for LaunchTemplateOverrides. You can assign the same priority to different LaunchTemplateOverrides. EC2 implements the priorities on a best-effort basis, but optimizes for capacity first. capacity-optimized-prioritized is supported only if your fleet uses a launch template. Note that if the On-Demand AllocationStrategy is set to prioritized, the same priority is applied when fulfilling On-Demand capacity.
+     * The strategy that determines how to allocate the target Spot Instance capacity across the Spot Instance pools specified by the EC2 Fleet.  lowest-price - EC2 Fleet launches instances from the Spot Instance pools with the lowest price.  diversified - EC2 Fleet launches instances from all of the Spot Instance pools that you specify.  capacity-optimized (recommended) - EC2 Fleet launches instances from Spot Instance pools with optimal capacity for the number of instances that are launching. To give certain instance types a higher chance of launching first, use capacity-optimized-prioritized. Set a priority for each instance type by using the Priority parameter for LaunchTemplateOverrides. You can assign the same priority to different LaunchTemplateOverrides. EC2 implements the priorities on a best-effort basis, but optimizes for capacity first. capacity-optimized-prioritized is supported only if your fleet uses a launch template. Note that if the On-Demand AllocationStrategy is set to prioritized, the same priority is applied when fulfilling On-Demand capacity. Default: lowest-price 
      */
     AllocationStrategy?: SpotAllocationStrategy;
     /**
@@ -27540,11 +27695,11 @@ declare namespace EC2 {
      */
     MaintenanceStrategies?: FleetSpotMaintenanceStrategiesRequest;
     /**
-     * The behavior when a Spot Instance is interrupted. The default is terminate.
+     * The behavior when a Spot Instance is interrupted. Default: terminate 
      */
     InstanceInterruptionBehavior?: SpotInstanceInterruptionBehavior;
     /**
-     * The number of Spot pools across which to allocate your target Spot capacity. Valid only when Spot AllocationStrategy is set to lowest-price. EC2 Fleet selects the cheapest Spot pools and evenly allocates your target Spot capacity across the number of Spot pools that you specify. Note that EC2 Fleet attempts to draw Spot Instances from the number of pools that you specify on a best effort basis. If a pool runs out of Spot capacity before fulfilling your target capacity, EC2 Fleet will continue to fulfill your request by drawing from the next cheapest pool. To ensure that your target capacity is met, you might receive Spot Instances from more than the number of pools that you specified. Similarly, if most of the pools have no Spot capacity, you might receive your full target capacity from fewer than the number of pools that you specified.
+     * The number of Spot pools across which to allocate your target Spot capacity. Supported only when Spot AllocationStrategy is set to lowest-price. EC2 Fleet selects the cheapest Spot pools and evenly allocates your target Spot capacity across the number of Spot pools that you specify. Note that EC2 Fleet attempts to draw Spot Instances from the number of pools that you specify on a best effort basis. If a pool runs out of Spot capacity before fulfilling your target capacity, EC2 Fleet will continue to fulfill your request by drawing from the next cheapest pool. To ensure that your target capacity is met, you might receive Spot Instances from more than the number of pools that you specified. Similarly, if most of the pools have no Spot capacity, you might receive your full target capacity from fewer than the number of pools that you specified.
      */
     InstancePoolsToUseCount?: Integer;
     /**
@@ -27556,7 +27711,7 @@ declare namespace EC2 {
      */
     SingleAvailabilityZone?: Boolean;
     /**
-     * The minimum target capacity for Spot Instances in the fleet. If the minimum target capacity is not reached, the fleet launches no instances.
+     * The minimum target capacity for Spot Instances in the fleet. If the minimum target capacity is not reached, the fleet launches no instances. Supported only for fleets of type instant. At least one of the following must be specified: SingleAvailabilityZone | SingleInstanceType 
      */
     MinTargetCapacity?: Integer;
     /**
@@ -27897,6 +28052,14 @@ declare namespace EC2 {
      * Indicates whether DNS queries made to the Amazon-provided DNS Resolver in this subnet should return synthetic IPv6 addresses for IPv4-only destinations.
      */
     EnableDns64?: Boolean;
+    /**
+     * Indicates whether this is an IPv6 only subnet.
+     */
+    Ipv6Native?: Boolean;
+    /**
+     * The type of hostnames to assign to instances in the subnet at launch. An instance hostname is based on the IPv4 address or ID of the instance.
+     */
+    PrivateDnsNameOptionsOnLaunch?: PrivateDnsNameOptionsOnLaunch;
   }
   export interface SubnetAssociation {
     /**
@@ -27958,7 +28121,7 @@ declare namespace EC2 {
   export type SubnetIdStringList = SubnetId[];
   export interface SubnetIpv6CidrBlockAssociation {
     /**
-     * The association ID for the CIDR block.
+     * The ID of the association.
      */
     AssociationId?: SubnetCidrAssociationId;
     /**
@@ -27966,7 +28129,7 @@ declare namespace EC2 {
      */
     Ipv6CidrBlock?: String;
     /**
-     * Information about the state of the CIDR block.
+     * The state of the CIDR block.
      */
     Ipv6CidrBlockState?: SubnetCidrBlockState;
   }

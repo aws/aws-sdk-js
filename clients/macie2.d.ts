@@ -132,27 +132,27 @@ declare class Macie2 extends Service {
    */
   describeClassificationJob(callback?: (err: AWSError, data: Macie2.Types.DescribeClassificationJobResponse) => void): Request<Macie2.Types.DescribeClassificationJobResponse, AWSError>;
   /**
-   * Retrieves the Amazon Macie configuration settings for an Amazon Web Services organization.
+   * Retrieves the Amazon Macie configuration settings for an organization in Organizations.
    */
   describeOrganizationConfiguration(params: Macie2.Types.DescribeOrganizationConfigurationRequest, callback?: (err: AWSError, data: Macie2.Types.DescribeOrganizationConfigurationResponse) => void): Request<Macie2.Types.DescribeOrganizationConfigurationResponse, AWSError>;
   /**
-   * Retrieves the Amazon Macie configuration settings for an Amazon Web Services organization.
+   * Retrieves the Amazon Macie configuration settings for an organization in Organizations.
    */
   describeOrganizationConfiguration(callback?: (err: AWSError, data: Macie2.Types.DescribeOrganizationConfigurationResponse) => void): Request<Macie2.Types.DescribeOrganizationConfigurationResponse, AWSError>;
   /**
-   * Disables an Amazon Macie account and deletes Macie resources for the account.
+   * Disables Amazon Macie and deletes all settings and resources for a Macie account.
    */
   disableMacie(params: Macie2.Types.DisableMacieRequest, callback?: (err: AWSError, data: Macie2.Types.DisableMacieResponse) => void): Request<Macie2.Types.DisableMacieResponse, AWSError>;
   /**
-   * Disables an Amazon Macie account and deletes Macie resources for the account.
+   * Disables Amazon Macie and deletes all settings and resources for a Macie account.
    */
   disableMacie(callback?: (err: AWSError, data: Macie2.Types.DisableMacieResponse) => void): Request<Macie2.Types.DisableMacieResponse, AWSError>;
   /**
-   * Disables an account as the delegated Amazon Macie administrator account for an Amazon Web Services organization.
+   * Disables an account as the delegated Amazon Macie administrator account for an organization in Organizations.
    */
   disableOrganizationAdminAccount(params: Macie2.Types.DisableOrganizationAdminAccountRequest, callback?: (err: AWSError, data: Macie2.Types.DisableOrganizationAdminAccountResponse) => void): Request<Macie2.Types.DisableOrganizationAdminAccountResponse, AWSError>;
   /**
-   * Disables an account as the delegated Amazon Macie administrator account for an Amazon Web Services organization.
+   * Disables an account as the delegated Amazon Macie administrator account for an organization in Organizations.
    */
   disableOrganizationAdminAccount(callback?: (err: AWSError, data: Macie2.Types.DisableOrganizationAdminAccountResponse) => void): Request<Macie2.Types.DisableOrganizationAdminAccountResponse, AWSError>;
   /**
@@ -188,11 +188,11 @@ declare class Macie2 extends Service {
    */
   enableMacie(callback?: (err: AWSError, data: Macie2.Types.EnableMacieResponse) => void): Request<Macie2.Types.EnableMacieResponse, AWSError>;
   /**
-   * Designates an account as the delegated Amazon Macie administrator account for an Amazon Web Services organization.
+   * Designates an account as the delegated Amazon Macie administrator account for an organization in Organizations.
    */
   enableOrganizationAdminAccount(params: Macie2.Types.EnableOrganizationAdminAccountRequest, callback?: (err: AWSError, data: Macie2.Types.EnableOrganizationAdminAccountResponse) => void): Request<Macie2.Types.EnableOrganizationAdminAccountResponse, AWSError>;
   /**
-   * Designates an account as the delegated Amazon Macie administrator account for an Amazon Web Services organization.
+   * Designates an account as the delegated Amazon Macie administrator account for an organization in Organizations.
    */
   enableOrganizationAdminAccount(callback?: (err: AWSError, data: Macie2.Types.EnableOrganizationAdminAccountResponse) => void): Request<Macie2.Types.EnableOrganizationAdminAccountResponse, AWSError>;
   /**
@@ -204,11 +204,11 @@ declare class Macie2 extends Service {
    */
   getAdministratorAccount(callback?: (err: AWSError, data: Macie2.Types.GetAdministratorAccountResponse) => void): Request<Macie2.Types.GetAdministratorAccountResponse, AWSError>;
   /**
-   *  Retrieves (queries) aggregated statistical data for all the S3 buckets that Amazon Macie monitors and analyzes.
+   * Retrieves (queries) aggregated statistical data about S3 buckets that Amazon Macie monitors and analyzes.
    */
   getBucketStatistics(params: Macie2.Types.GetBucketStatisticsRequest, callback?: (err: AWSError, data: Macie2.Types.GetBucketStatisticsResponse) => void): Request<Macie2.Types.GetBucketStatisticsResponse, AWSError>;
   /**
-   *  Retrieves (queries) aggregated statistical data for all the S3 buckets that Amazon Macie monitors and analyzes.
+   * Retrieves (queries) aggregated statistical data about S3 buckets that Amazon Macie monitors and analyzes.
    */
   getBucketStatistics(callback?: (err: AWSError, data: Macie2.Types.GetBucketStatisticsResponse) => void): Request<Macie2.Types.GetBucketStatisticsResponse, AWSError>;
   /**
@@ -364,11 +364,11 @@ declare class Macie2 extends Service {
    */
   listMembers(callback?: (err: AWSError, data: Macie2.Types.ListMembersResponse) => void): Request<Macie2.Types.ListMembersResponse, AWSError>;
   /**
-   * Retrieves information about the delegated Amazon Macie administrator account for an Amazon Web Services organization.
+   * Retrieves information about the delegated Amazon Macie administrator account for an organization in Organizations.
    */
   listOrganizationAdminAccounts(params: Macie2.Types.ListOrganizationAdminAccountsRequest, callback?: (err: AWSError, data: Macie2.Types.ListOrganizationAdminAccountsResponse) => void): Request<Macie2.Types.ListOrganizationAdminAccountsResponse, AWSError>;
   /**
-   * Retrieves information about the delegated Amazon Macie administrator account for an Amazon Web Services organization.
+   * Retrieves information about the delegated Amazon Macie administrator account for an organization in Organizations.
    */
   listOrganizationAdminAccounts(callback?: (err: AWSError, data: Macie2.Types.ListOrganizationAdminAccountsResponse) => void): Request<Macie2.Types.ListOrganizationAdminAccountsResponse, AWSError>;
   /**
@@ -444,11 +444,11 @@ declare class Macie2 extends Service {
    */
   updateFindingsFilter(callback?: (err: AWSError, data: Macie2.Types.UpdateFindingsFilterResponse) => void): Request<Macie2.Types.UpdateFindingsFilterResponse, AWSError>;
   /**
-   * Suspends or re-enables an Amazon Macie account, or updates the configuration settings for a Macie account.
+   * Suspends or re-enables Amazon Macie, or updates the configuration settings for a Macie account.
    */
   updateMacieSession(params: Macie2.Types.UpdateMacieSessionRequest, callback?: (err: AWSError, data: Macie2.Types.UpdateMacieSessionResponse) => void): Request<Macie2.Types.UpdateMacieSessionResponse, AWSError>;
   /**
-   * Suspends or re-enables an Amazon Macie account, or updates the configuration settings for a Macie account.
+   * Suspends or re-enables Amazon Macie, or updates the configuration settings for a Macie account.
    */
   updateMacieSession(callback?: (err: AWSError, data: Macie2.Types.UpdateMacieSessionResponse) => void): Request<Macie2.Types.UpdateMacieSessionResponse, AWSError>;
   /**
@@ -460,11 +460,11 @@ declare class Macie2 extends Service {
    */
   updateMemberSession(callback?: (err: AWSError, data: Macie2.Types.UpdateMemberSessionResponse) => void): Request<Macie2.Types.UpdateMemberSessionResponse, AWSError>;
   /**
-   * Updates the Amazon Macie configuration settings for an Amazon Web Services organization.
+   * Updates the Amazon Macie configuration settings for an organization in Organizations.
    */
   updateOrganizationConfiguration(params: Macie2.Types.UpdateOrganizationConfigurationRequest, callback?: (err: AWSError, data: Macie2.Types.UpdateOrganizationConfigurationResponse) => void): Request<Macie2.Types.UpdateOrganizationConfigurationResponse, AWSError>;
   /**
-   * Updates the Amazon Macie configuration settings for an Amazon Web Services organization.
+   * Updates the Amazon Macie configuration settings for an organization in Organizations.
    */
   updateOrganizationConfiguration(callback?: (err: AWSError, data: Macie2.Types.UpdateOrganizationConfigurationResponse) => void): Request<Macie2.Types.UpdateOrganizationConfigurationResponse, AWSError>;
 }
@@ -517,7 +517,7 @@ declare namespace Macie2 {
      */
     accountId?: __string;
     /**
-     * The current status of the account as the delegated administrator of Amazon Macie for the organization.
+     * The current status of the account as the delegated Amazon Macie administrator account for the organization.
      */
     status?: AdminStatus;
   }
@@ -1046,7 +1046,7 @@ declare namespace Macie2 {
      */
     clientToken?: __string;
     /**
-     * A custom description of the custom data identifier. The description can contain as many as 512 characters. We strongly recommend that you avoid including any sensitive data in the description of a custom data identifier. Other users of your account might be able to see the identifier's description, depending on the actions that they're allowed to perform in Amazon Macie.
+     * A custom description of the custom data identifier. The description can contain as many as 512 characters. We strongly recommend that you avoid including any sensitive data in the description of a custom data identifier. Other users of your account might be able to see this description, depending on the actions that they're allowed to perform in Amazon Macie.
      */
     description?: __string;
     /**
@@ -1062,7 +1062,7 @@ declare namespace Macie2 {
      */
     maximumMatchDistance?: __integer;
     /**
-     * A custom name for the custom data identifier. The name can contain as many as 128 characters. We strongly recommend that you avoid including any sensitive data in the name of a custom data identifier. Other users of your account might be able to see the identifier's name, depending on the actions that they're allowed to perform in Amazon Macie.
+     * A custom name for the custom data identifier. The name can contain as many as 128 characters. We strongly recommend that you avoid including any sensitive data in the name of a custom data identifier. Other users of your account might be able to see this name, depending on the actions that they're allowed to perform in Amazon Macie.
      */
     name?: __string;
     /**
@@ -1094,7 +1094,7 @@ declare namespace Macie2 {
      */
     clientToken?: __string;
     /**
-     * A custom description of the filter. The description can contain as many as 512 characters. We strongly recommend that you avoid including any sensitive data in the description of a filter. Other users of your account might be able to see the filter's description, depending on the actions that they're allowed to perform in Amazon Macie.
+     * A custom description of the filter. The description can contain as many as 512 characters. We strongly recommend that you avoid including any sensitive data in the description of a filter. Other users of your account might be able to see this description, depending on the actions that they're allowed to perform in Amazon Macie.
      */
     description?: __string;
     /**
@@ -1102,7 +1102,7 @@ declare namespace Macie2 {
      */
     findingCriteria: FindingCriteria;
     /**
-     * A custom name for the filter. The name must contain at least 3 characters and can contain as many as 64 characters. We strongly recommend that you avoid including any sensitive data in the name of a filter. Other users of your account might be able to see the filter's name, depending on the actions that they're allowed to perform in Amazon Macie.
+     * A custom name for the filter. The name must contain at least 3 characters and can contain as many as 64 characters. We strongly recommend that you avoid including any sensitive data in the name of a filter. Other users of your account might be able to see this name, depending on the actions that they're allowed to perform in Amazon Macie.
      */
     name: __string;
     /**
@@ -1130,11 +1130,11 @@ declare namespace Macie2 {
      */
     accountIds: __listOf__string;
     /**
-     * Specifies whether to send an email notification to the root user of each account that the invitation will be sent to. This notification is in addition to an alert that the root user receives in Personal Health Dashboard. To send an email notification to the root user of each account, set this value to true.
+     * Specifies whether to send the invitation as an email message. If this value is false, Amazon Macie sends the invitation (as an email message) to the email address that you specified for the recipient's account when you associated the account with your account. The default value is false.
      */
     disableEmailNotification?: __boolean;
     /**
-     * A custom message to include in the invitation. Amazon Macie adds this message to the standard content that it sends for an invitation.
+     * Custom text to include in the email message that contains the invitation. The text can contain as many as 80 alphanumeric characters.
      */
     message?: __string;
   }
@@ -1454,11 +1454,11 @@ declare namespace Macie2 {
   }
   export interface DescribeOrganizationConfigurationResponse {
     /**
-     * Specifies whether Amazon Macie is enabled automatically for accounts that are added to the Amazon Web Services organization.
+     * Specifies whether Amazon Macie is enabled automatically for accounts that are added to the organization.
      */
     autoEnable?: __boolean;
     /**
-     * Specifies whether the maximum number of Amazon Macie member accounts are part of the Amazon Web Services organization.
+     * Specifies whether the maximum number of Amazon Macie member accounts are part of the organization.
      */
     maxAccountLimitReached?: __boolean;
   }
@@ -1695,7 +1695,7 @@ declare namespace Macie2 {
   }
   export interface GetAdministratorAccountResponse {
     /**
-     * The Amazon Web Services account ID for the administrator account. If the accounts are associated by a Macie membership invitation, this object also provides details about the invitation that was sent to establish the relationship between the accounts.
+     * The Amazon Web Services account ID for the administrator account. If the accounts are associated by an Amazon Macie membership invitation, this object also provides details about the invitation that was sent to establish the relationship between the accounts.
      */
     administrator?: Invitation;
   }
@@ -1927,19 +1927,19 @@ declare namespace Macie2 {
      */
     createdAt?: __timestampIso8601;
     /**
-     * The frequency with which Macie publishes updates to policy findings for the account. This includes publishing updates to Security Hub and Amazon EventBridge (formerly called Amazon CloudWatch Events).
+     * The frequency with which Amazon Macie publishes updates to policy findings for the account. This includes publishing updates to Security Hub and Amazon EventBridge (formerly called Amazon CloudWatch Events).
      */
     findingPublishingFrequency?: FindingPublishingFrequency;
     /**
-     * The Amazon Resource Name (ARN) of the service-linked role that allows Macie to monitor and analyze data in Amazon Web Services resources for the account.
+     * The Amazon Resource Name (ARN) of the service-linked role that allows Amazon Macie to monitor and analyze data in Amazon Web Services resources for the account.
      */
     serviceRole?: __string;
     /**
-     * The current status of the Macie account. Possible values are: PAUSED, the account is enabled but all Macie activities are suspended (paused) for the account; and, ENABLED, the account is enabled and all Macie activities are enabled for the account.
+     * The current status of the Amazon Macie account. Possible values are: PAUSED, the account is enabled but all Macie activities are suspended (paused) for the account; and, ENABLED, the account is enabled and all Macie activities are enabled for the account.
      */
     status?: MacieStatus;
     /**
-     * The date and time, in UTC and extended ISO 8601 format, of the most recent change to the status of the Macie account.
+     * The date and time, in UTC and extended ISO 8601 format, of the most recent change to the status of the Amazon Macie account.
      */
     updatedAt?: __timestampIso8601;
   }
@@ -1975,7 +1975,7 @@ declare namespace Macie2 {
      */
     email?: __string;
     /**
-     * The date and time, in UTC and extended ISO 8601 format, when an Amazon Macie membership invitation was last sent to the account. This value is null if a Macie invitation hasn't been sent to the account.
+     * The date and time, in UTC and extended ISO 8601 format, when an Amazon Macie membership invitation was last sent to the account. This value is null if an invitation hasn't been sent to the account.
      */
     invitedAt?: __timestampIso8601;
     /**
@@ -2082,7 +2082,7 @@ declare namespace Macie2 {
      */
     accountId?: __string;
     /**
-     * The unique identifier for the invitation. Amazon Macie uses this identifier to validate the inviter account with the invitee account.
+     * The unique identifier for the invitation.
      */
     invitationId?: __string;
     /**
@@ -2090,7 +2090,7 @@ declare namespace Macie2 {
      */
     invitedAt?: __timestampIso8601;
     /**
-     * The status of the relationship between the account that sent the invitation (inviter account) and the account that received the invitation (invitee account).
+     * The status of the relationship between the account that sent the invitation and the account that received the invitation.
      */
     relationshipStatus?: RelationshipStatus;
   }
@@ -2453,7 +2453,7 @@ declare namespace Macie2 {
   }
   export interface ListMembersResponse {
     /**
-     * An array of objects, one for each account that's associated with the administrator account and meets the criteria specified by the onlyAssociated request parameter.
+     * An array of objects, one for each account that's associated with the administrator account and meets the criteria specified in the request.
      */
     members?: __listOfMember;
     /**
@@ -2584,7 +2584,7 @@ declare namespace Macie2 {
      */
     email?: __string;
     /**
-     * The date and time, in UTC and extended ISO 8601 format, when an Amazon Macie membership invitation was last sent to the account. This value is null if a Macie invitation hasn't been sent to the account.
+     * The date and time, in UTC and extended ISO 8601 format, when an Amazon Macie membership invitation was last sent to the account. This value is null if an invitation hasn't been sent to the account.
      */
     invitedAt?: __timestampIso8601;
     /**
@@ -3132,7 +3132,7 @@ declare namespace Macie2 {
      */
     occurrencesThreshold: __long;
     /**
-     * The severity to assign to a finding if the number of occurrences is greater than or equal to the specified threshold (occurrencesThreshold) and, if applicable, is less than the threshold for the next consecutive severity level for the custom data identifier.
+     * The severity to assign to a finding: if the number of occurrences is greater than or equal to the specified threshold (occurrencesThreshold); and, if applicable, the number of occurrences is less than the threshold for the next consecutive severity level for the custom data identifier, moving from LOW to HIGH.
      */
     severity: DataIdentifierSeverity;
   }
@@ -3325,7 +3325,7 @@ declare namespace Macie2 {
      */
     action?: FindingsFilterAction;
     /**
-     * A custom description of the filter. The description can contain as many as 512 characters. We strongly recommend that you avoid including any sensitive data in the description of a filter. Other users might be able to see the filter's description, depending on the actions that they're allowed to perform in Amazon Macie.
+     * A custom description of the filter. The description can contain as many as 512 characters. We strongly recommend that you avoid including any sensitive data in the description of a filter. Other users might be able to see this description, depending on the actions that they're allowed to perform in Amazon Macie.
      */
     description?: __string;
     /**
@@ -3337,7 +3337,7 @@ declare namespace Macie2 {
      */
     id: __string;
     /**
-     * A custom name for the filter. The name must contain at least 3 characters and can contain as many as 64 characters. We strongly recommend that you avoid including any sensitive data in the name of a filter. Other users might be able to see the filter's name, depending on the actions that they're allowed to perform in Amazon Macie.
+     * A custom name for the filter. The name must contain at least 3 characters and can contain as many as 64 characters. We strongly recommend that you avoid including any sensitive data in the name of a filter. Other users might be able to see this name, depending on the actions that they're allowed to perform in Amazon Macie.
      */
     name?: __string;
     /**
@@ -3385,7 +3385,7 @@ declare namespace Macie2 {
   }
   export interface UpdateOrganizationConfigurationRequest {
     /**
-     * Specifies whether to enable Amazon Macie automatically for each account, when the account is added to the Amazon Web Services organization.
+     * Specifies whether to enable Amazon Macie automatically for an account when the account is added to the organization in Organizations.
      */
     autoEnable: __boolean;
   }
