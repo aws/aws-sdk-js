@@ -2037,7 +2037,7 @@
       "members": {
         "Timestamps": {
           "shape": "PredictiveScalingForecastTimestamps",
-          "documentation": "<p>The time stamps for the data points, in UTC format.</p>"
+          "documentation": "<p>The timestamps for the data points, in UTC format.</p>"
         },
         "Values": {
           "shape": "PredictiveScalingForecastValues",
@@ -4024,7 +4024,7 @@
       "members": {
         "Timestamps": {
           "shape": "PredictiveScalingForecastTimestamps",
-          "documentation": "<p>The time stamps for the data points, in UTC format.</p>"
+          "documentation": "<p>The timestamps for the data points, in UTC format.</p>"
         },
         "Values": {
           "shape": "PredictiveScalingForecastValues",
@@ -4111,6 +4111,28 @@
       },
       "documentation": "<p>Specifies the minimum and maximum for the <code>MemoryMiB</code> object when you specify <a>InstanceRequirements</a> for an Auto Scaling group.</p>"
     },
+    "Metric": {
+      "type": "structure",
+      "required": [
+        "Namespace",
+        "MetricName"
+      ],
+      "members": {
+        "Namespace": {
+          "shape": "MetricNamespace",
+          "documentation": "<p>The namespace of the metric. For more information, see the table in <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/aws-services-cloudwatch-metrics.html\">Amazon Web Services services that publish CloudWatch metrics </a> in the <i>Amazon CloudWatch User Guide</i>.</p>"
+        },
+        "MetricName": {
+          "shape": "MetricName",
+          "documentation": "<p>The name of the metric.</p>"
+        },
+        "Dimensions": {
+          "shape": "MetricDimensions",
+          "documentation": "<p>The dimensions for the metric. For the list of available dimensions, see the Amazon Web Services documentation available from the table in <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/aws-services-cloudwatch-metrics.html\">Amazon Web Services services that publish CloudWatch metrics </a> in the <i>Amazon CloudWatch User Guide</i>. </p> <p>Conditional: If you published your metric with dimensions, you must specify the same dimensions in your scaling policy.</p>"
+        }
+      },
+      "documentation": "<p>Represents a specific metric. </p>"
+    },
     "MetricCollectionType": {
       "type": "structure",
       "members": {
@@ -4126,6 +4148,41 @@
       "member": {
         "shape": "MetricCollectionType"
       }
+    },
+    "MetricDataQueries": {
+      "type": "list",
+      "member": {
+        "shape": "MetricDataQuery"
+      }
+    },
+    "MetricDataQuery": {
+      "type": "structure",
+      "required": [
+        "Id"
+      ],
+      "members": {
+        "Id": {
+          "shape": "XmlStringMaxLen255",
+          "documentation": "<p>A short name that identifies the object's results in the response. This name must be unique among all <code>MetricDataQuery</code> objects specified for a single scaling policy. If you are performing math expressions on this set of data, this name represents that data and can serve as a variable in the mathematical expression. The valid characters are letters, numbers, and underscores. The first character must be a lowercase letter. </p>"
+        },
+        "Expression": {
+          "shape": "XmlStringMaxLen1023",
+          "documentation": "<p>The math expression to perform on the returned data, if this object is performing a math expression. This expression can use the <code>Id</code> of the other metrics to refer to those metrics, and can also use the <code>Id</code> of other expressions to use the result of those expressions. </p> <p>For example, to use search expressions, use the SEARCH() function in your metric math expression to combine multiple metrics from Auto Scaling groups that use a specific name prefix.</p> <p>Conditional: Within each <code>MetricDataQuery</code> object, you must specify either <code>Expression</code> or <code>MetricStat</code>, but not both.</p>"
+        },
+        "MetricStat": {
+          "shape": "MetricStat",
+          "documentation": "<p>Information about the metric data to return.</p> <p>Conditional: Within each <code>MetricDataQuery</code> object, you must specify either <code>Expression</code> or <code>MetricStat</code>, but not both.</p>"
+        },
+        "Label": {
+          "shape": "XmlStringMetricLabel",
+          "documentation": "<p>A human-readable label for this metric or expression. This is especially useful if this is a math expression, so that you know what the value represents.</p>"
+        },
+        "ReturnData": {
+          "shape": "ReturnData",
+          "documentation": "<p>Indicates whether to return the timestamps and raw data values of this metric. </p> <p>If you use any math expressions, specify <code>True</code> for this value for only the final math expression that the metric specification is based on. You must specify <code>False</code> for <code>ReturnData</code> for all the other metrics and expressions used in the metric specification.</p> <p>If you are only retrieving metrics and not performing any math expressions, do not specify anything for <code>ReturnData</code>. This sets it to its default (<code>True</code>).</p>"
+        }
+      },
+      "documentation": "<p>The metric data to return. Also defines whether this call is returning data for one metric only, or whether it is performing a math expression on the values of returned metric statistics to create a new time series. A time series is a series of data points, each of which is associated with a timestamp.</p> <p>For more information and examples, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/predictive-scaling-customized-metric-specification.html\">Advanced predictive scaling policy configurations using customized metrics</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
     },
     "MetricDimension": {
       "type": "structure",
@@ -4181,6 +4238,28 @@
     },
     "MetricScale": {
       "type": "double"
+    },
+    "MetricStat": {
+      "type": "structure",
+      "required": [
+        "Metric",
+        "Stat"
+      ],
+      "members": {
+        "Metric": {
+          "shape": "Metric",
+          "documentation": "<p>The CloudWatch metric to return, including the metric name, namespace, and dimensions. To get the exact metric name, namespace, and dimensions, inspect the <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_Metric.html\">Metric</a> object that is returned by a call to <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_ListMetrics.html\">ListMetrics</a>.</p>"
+        },
+        "Stat": {
+          "shape": "XmlStringMetricStat",
+          "documentation": "<p>The statistic to return. It can include any CloudWatch statistic or extended statistic. For a list of valid values, see the table in <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Statistic\">Statistics</a> in the <i>Amazon CloudWatch User Guide</i>.</p> <p>The most commonly used metrics for predictive scaling are <code>Average</code> and <code>Sum</code>.</p>"
+        },
+        "Unit": {
+          "shape": "MetricUnit",
+          "documentation": "<p>The unit to use for the returned data points. For a complete list of the units that CloudWatch supports, see the <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html\">MetricDatum</a> data type in the <i>Amazon CloudWatch API Reference</i>. </p>"
+        }
+      },
+      "documentation": "<p>This structure defines the CloudWatch metric to return, along with the statistic, period, and unit.</p> <p>For more information about the CloudWatch terminology below, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html\">Amazon CloudWatch concepts</a> in the <i>Amazon CloudWatch User Guide</i>.</p>"
     },
     "MetricStatistic": {
       "type": "string",
@@ -4435,6 +4514,45 @@
       },
       "documentation": "<p>Represents a predictive scaling policy configuration to use with Amazon EC2 Auto Scaling.</p>"
     },
+    "PredictiveScalingCustomizedCapacityMetric": {
+      "type": "structure",
+      "required": [
+        "MetricDataQueries"
+      ],
+      "members": {
+        "MetricDataQueries": {
+          "shape": "MetricDataQueries",
+          "documentation": "<p>One or more metric data queries to provide the data points for a capacity metric. Use multiple metric data queries only if you are performing a math expression on returned data. </p>"
+        }
+      },
+      "documentation": "<p>Describes a customized capacity metric for a predictive scaling policy.</p>"
+    },
+    "PredictiveScalingCustomizedLoadMetric": {
+      "type": "structure",
+      "required": [
+        "MetricDataQueries"
+      ],
+      "members": {
+        "MetricDataQueries": {
+          "shape": "MetricDataQueries",
+          "documentation": "<p>One or more metric data queries to provide the data points for a load metric. Use multiple metric data queries only if you are performing a math expression on returned data. </p>"
+        }
+      },
+      "documentation": "<p>Describes a customized load metric for a predictive scaling policy.</p>"
+    },
+    "PredictiveScalingCustomizedScalingMetric": {
+      "type": "structure",
+      "required": [
+        "MetricDataQueries"
+      ],
+      "members": {
+        "MetricDataQueries": {
+          "shape": "MetricDataQueries",
+          "documentation": "<p>One or more metric data queries to provide the data points for a scaling metric. Use multiple metric data queries only if you are performing a math expression on returned data. </p>"
+        }
+      },
+      "documentation": "<p>Describes a customized scaling metric for a predictive scaling policy.</p>"
+    },
     "PredictiveScalingForecastTimestamps": {
       "type": "list",
       "member": {
@@ -4467,22 +4585,34 @@
       "members": {
         "TargetValue": {
           "shape": "MetricScale",
-          "documentation": "<p>Specifies the target utilization.</p>"
+          "documentation": "<p>Specifies the target utilization.</p> <note> <p>Some metrics are based on a count instead of a percentage, such as the request count for an Application Load Balancer or the number of messages in an SQS queue. If the scaling policy specifies one of these metrics, specify the target utilization as the optimal average request or message count per instance during any one-minute interval. </p> </note>"
         },
         "PredefinedMetricPairSpecification": {
           "shape": "PredictiveScalingPredefinedMetricPair",
-          "documentation": "<p>The metric pair specification from which Amazon EC2 Auto Scaling determines the appropriate scaling metric and load metric to use.</p>"
+          "documentation": "<p>The predefined metric pair specification from which Amazon EC2 Auto Scaling determines the appropriate scaling metric and load metric to use.</p>"
         },
         "PredefinedScalingMetricSpecification": {
           "shape": "PredictiveScalingPredefinedScalingMetric",
-          "documentation": "<p>The scaling metric specification.</p>"
+          "documentation": "<p>The predefined scaling metric specification.</p>"
         },
         "PredefinedLoadMetricSpecification": {
           "shape": "PredictiveScalingPredefinedLoadMetric",
-          "documentation": "<p>The load metric specification.</p>"
+          "documentation": "<p>The predefined load metric specification.</p>"
+        },
+        "CustomizedScalingMetricSpecification": {
+          "shape": "PredictiveScalingCustomizedScalingMetric",
+          "documentation": "<p>The customized scaling metric specification.</p>"
+        },
+        "CustomizedLoadMetricSpecification": {
+          "shape": "PredictiveScalingCustomizedLoadMetric",
+          "documentation": "<p>The customized load metric specification.</p>"
+        },
+        "CustomizedCapacityMetricSpecification": {
+          "shape": "PredictiveScalingCustomizedCapacityMetric",
+          "documentation": "<p>The customized capacity metric specification.</p>"
         }
       },
-      "documentation": "<p>This structure specifies the metrics and target utilization settings for a predictive scaling policy. </p> <p>You must specify either a metric pair, or a load metric and a scaling metric individually. Specifying a metric pair instead of individual metrics provides a simpler way to configure metrics for a scaling policy. You choose the metric pair, and the policy automatically knows the correct sum and average statistics to use for the load metric and the scaling metric.</p> <p>Example</p> <ul> <li> <p>You create a predictive scaling policy and specify <code>ALBRequestCount</code> as the value for the metric pair and <code>1000.0</code> as the target value. For this type of metric, you must provide the metric dimension for the corresponding target group, so you also provide a resource label for the Application Load Balancer target group that is attached to your Auto Scaling group.</p> </li> <li> <p>The number of requests the target group receives per minute provides the load metric, and the request count averaged between the members of the target group provides the scaling metric. In CloudWatch, this refers to the <code>RequestCount</code> and <code>RequestCountPerTarget</code> metrics, respectively.</p> </li> <li> <p>For optimal use of predictive scaling, you adhere to the best practice of using a dynamic scaling policy to automatically scale between the minimum capacity and maximum capacity in response to real-time changes in resource utilization.</p> </li> <li> <p>Amazon EC2 Auto Scaling consumes data points for the load metric over the last 14 days and creates an hourly load forecast for predictive scaling. (A minimum of 24 hours of data is required.)</p> </li> <li> <p>After creating the load forecast, Amazon EC2 Auto Scaling determines when to reduce or increase the capacity of your Auto Scaling group in each hour of the forecast period so that the average number of requests received by each instance is as close to 1000 requests per minute as possible at all times.</p> </li> </ul>"
+      "documentation": "<p>This structure specifies the metrics and target utilization settings for a predictive scaling policy. </p> <p>You must specify either a metric pair, or a load metric and a scaling metric individually. Specifying a metric pair instead of individual metrics provides a simpler way to configure metrics for a scaling policy. You choose the metric pair, and the policy automatically knows the correct sum and average statistics to use for the load metric and the scaling metric.</p> <p>Example</p> <ul> <li> <p>You create a predictive scaling policy and specify <code>ALBRequestCount</code> as the value for the metric pair and <code>1000.0</code> as the target value. For this type of metric, you must provide the metric dimension for the corresponding target group, so you also provide a resource label for the Application Load Balancer target group that is attached to your Auto Scaling group.</p> </li> <li> <p>The number of requests the target group receives per minute provides the load metric, and the request count averaged between the members of the target group provides the scaling metric. In CloudWatch, this refers to the <code>RequestCount</code> and <code>RequestCountPerTarget</code> metrics, respectively.</p> </li> <li> <p>For optimal use of predictive scaling, you adhere to the best practice of using a dynamic scaling policy to automatically scale between the minimum capacity and maximum capacity in response to real-time changes in resource utilization.</p> </li> <li> <p>Amazon EC2 Auto Scaling consumes data points for the load metric over the last 14 days and creates an hourly load forecast for predictive scaling. (A minimum of 24 hours of data is required.)</p> </li> <li> <p>After creating the load forecast, Amazon EC2 Auto Scaling determines when to reduce or increase the capacity of your Auto Scaling group in each hour of the forecast period so that the average number of requests received by each instance is as close to 1000 requests per minute as possible at all times.</p> </li> </ul> <p>For information about using customized metrics with predictive scaling, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/predictive-scaling-customized-metric-specification.html\">Advanced predictive scaling policy configurations using customized metrics</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
     },
     "PredictiveScalingMetricSpecifications": {
       "type": "list",
@@ -4874,6 +5004,9 @@
       "max": 1600,
       "min": 1,
       "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+    },
+    "ReturnData": {
+      "type": "boolean"
     },
     "ScalingActivityStatusCode": {
       "type": "string",
@@ -5645,6 +5778,17 @@
     "XmlStringMaxLen64": {
       "type": "string",
       "max": 64,
+      "min": 1,
+      "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+    },
+    "XmlStringMetricLabel": {
+      "type": "string",
+      "max": 2047,
+      "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+    },
+    "XmlStringMetricStat": {
+      "type": "string",
+      "max": 100,
       "min": 1,
       "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
     },

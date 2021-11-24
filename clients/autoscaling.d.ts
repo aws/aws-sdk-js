@@ -924,7 +924,7 @@ declare namespace AutoScaling {
   }
   export interface CapacityForecast {
     /**
-     * The time stamps for the data points, in UTC format.
+     * The timestamps for the data points, in UTC format.
      */
     Timestamps: PredictiveScalingForecastTimestamps;
     /**
@@ -2289,7 +2289,7 @@ declare namespace AutoScaling {
   export type LoadBalancerTargetGroupStates = LoadBalancerTargetGroupState[];
   export interface LoadForecast {
     /**
-     * The time stamps for the data points, in UTC format.
+     * The timestamps for the data points, in UTC format.
      */
     Timestamps: PredictiveScalingForecastTimestamps;
     /**
@@ -2330,6 +2330,20 @@ declare namespace AutoScaling {
      */
     Max?: NullablePositiveInteger;
   }
+  export interface Metric {
+    /**
+     * The namespace of the metric. For more information, see the table in Amazon Web Services services that publish CloudWatch metrics  in the Amazon CloudWatch User Guide.
+     */
+    Namespace: MetricNamespace;
+    /**
+     * The name of the metric.
+     */
+    MetricName: MetricName;
+    /**
+     * The dimensions for the metric. For the list of available dimensions, see the Amazon Web Services documentation available from the table in Amazon Web Services services that publish CloudWatch metrics  in the Amazon CloudWatch User Guide.  Conditional: If you published your metric with dimensions, you must specify the same dimensions in your scaling policy.
+     */
+    Dimensions?: MetricDimensions;
+  }
   export interface MetricCollectionType {
     /**
      * One of the following metrics:    GroupMinSize     GroupMaxSize     GroupDesiredCapacity     GroupInServiceInstances     GroupPendingInstances     GroupStandbyInstances     GroupTerminatingInstances     GroupTotalInstances     GroupInServiceCapacity     GroupPendingCapacity     GroupStandbyCapacity     GroupTerminatingCapacity     GroupTotalCapacity     WarmPoolDesiredCapacity     WarmPoolWarmedCapacity     WarmPoolPendingCapacity     WarmPoolTerminatingCapacity     WarmPoolTotalCapacity     GroupAndWarmPoolDesiredCapacity     GroupAndWarmPoolTotalCapacity   
@@ -2337,6 +2351,29 @@ declare namespace AutoScaling {
     Metric?: XmlStringMaxLen255;
   }
   export type MetricCollectionTypes = MetricCollectionType[];
+  export type MetricDataQueries = MetricDataQuery[];
+  export interface MetricDataQuery {
+    /**
+     * A short name that identifies the object's results in the response. This name must be unique among all MetricDataQuery objects specified for a single scaling policy. If you are performing math expressions on this set of data, this name represents that data and can serve as a variable in the mathematical expression. The valid characters are letters, numbers, and underscores. The first character must be a lowercase letter. 
+     */
+    Id: XmlStringMaxLen255;
+    /**
+     * The math expression to perform on the returned data, if this object is performing a math expression. This expression can use the Id of the other metrics to refer to those metrics, and can also use the Id of other expressions to use the result of those expressions.  For example, to use search expressions, use the SEARCH() function in your metric math expression to combine multiple metrics from Auto Scaling groups that use a specific name prefix. Conditional: Within each MetricDataQuery object, you must specify either Expression or MetricStat, but not both.
+     */
+    Expression?: XmlStringMaxLen1023;
+    /**
+     * Information about the metric data to return. Conditional: Within each MetricDataQuery object, you must specify either Expression or MetricStat, but not both.
+     */
+    MetricStat?: MetricStat;
+    /**
+     * A human-readable label for this metric or expression. This is especially useful if this is a math expression, so that you know what the value represents.
+     */
+    Label?: XmlStringMetricLabel;
+    /**
+     * Indicates whether to return the timestamps and raw data values of this metric.  If you use any math expressions, specify True for this value for only the final math expression that the metric specification is based on. You must specify False for ReturnData for all the other metrics and expressions used in the metric specification. If you are only retrieving metrics and not performing any math expressions, do not specify anything for ReturnData. This sets it to its default (True).
+     */
+    ReturnData?: ReturnData;
+  }
   export interface MetricDimension {
     /**
      * The name of the dimension.
@@ -2360,6 +2397,20 @@ declare namespace AutoScaling {
   export type MetricName = string;
   export type MetricNamespace = string;
   export type MetricScale = number;
+  export interface MetricStat {
+    /**
+     * The CloudWatch metric to return, including the metric name, namespace, and dimensions. To get the exact metric name, namespace, and dimensions, inspect the Metric object that is returned by a call to ListMetrics.
+     */
+    Metric: Metric;
+    /**
+     * The statistic to return. It can include any CloudWatch statistic or extended statistic. For a list of valid values, see the table in Statistics in the Amazon CloudWatch User Guide. The most commonly used metrics for predictive scaling are Average and Sum.
+     */
+    Stat: XmlStringMetricStat;
+    /**
+     * The unit to use for the returned data points. For a complete list of the units that CloudWatch supports, see the MetricDatum data type in the Amazon CloudWatch API Reference. 
+     */
+    Unit?: MetricUnit;
+  }
   export type MetricStatistic = "Average"|"Minimum"|"Maximum"|"SampleCount"|"Sum"|string;
   export type MetricType = "ASGAverageCPUUtilization"|"ASGAverageNetworkIn"|"ASGAverageNetworkOut"|"ALBRequestCountPerTarget"|string;
   export type MetricUnit = string;
@@ -2472,27 +2523,57 @@ declare namespace AutoScaling {
      */
     MaxCapacityBuffer?: PredictiveScalingMaxCapacityBuffer;
   }
+  export interface PredictiveScalingCustomizedCapacityMetric {
+    /**
+     * One or more metric data queries to provide the data points for a capacity metric. Use multiple metric data queries only if you are performing a math expression on returned data. 
+     */
+    MetricDataQueries: MetricDataQueries;
+  }
+  export interface PredictiveScalingCustomizedLoadMetric {
+    /**
+     * One or more metric data queries to provide the data points for a load metric. Use multiple metric data queries only if you are performing a math expression on returned data. 
+     */
+    MetricDataQueries: MetricDataQueries;
+  }
+  export interface PredictiveScalingCustomizedScalingMetric {
+    /**
+     * One or more metric data queries to provide the data points for a scaling metric. Use multiple metric data queries only if you are performing a math expression on returned data. 
+     */
+    MetricDataQueries: MetricDataQueries;
+  }
   export type PredictiveScalingForecastTimestamps = TimestampType[];
   export type PredictiveScalingForecastValues = MetricScale[];
   export type PredictiveScalingMaxCapacityBreachBehavior = "HonorMaxCapacity"|"IncreaseMaxCapacity"|string;
   export type PredictiveScalingMaxCapacityBuffer = number;
   export interface PredictiveScalingMetricSpecification {
     /**
-     * Specifies the target utilization.
+     * Specifies the target utilization.  Some metrics are based on a count instead of a percentage, such as the request count for an Application Load Balancer or the number of messages in an SQS queue. If the scaling policy specifies one of these metrics, specify the target utilization as the optimal average request or message count per instance during any one-minute interval.  
      */
     TargetValue: MetricScale;
     /**
-     * The metric pair specification from which Amazon EC2 Auto Scaling determines the appropriate scaling metric and load metric to use.
+     * The predefined metric pair specification from which Amazon EC2 Auto Scaling determines the appropriate scaling metric and load metric to use.
      */
     PredefinedMetricPairSpecification?: PredictiveScalingPredefinedMetricPair;
     /**
-     * The scaling metric specification.
+     * The predefined scaling metric specification.
      */
     PredefinedScalingMetricSpecification?: PredictiveScalingPredefinedScalingMetric;
     /**
-     * The load metric specification.
+     * The predefined load metric specification.
      */
     PredefinedLoadMetricSpecification?: PredictiveScalingPredefinedLoadMetric;
+    /**
+     * The customized scaling metric specification.
+     */
+    CustomizedScalingMetricSpecification?: PredictiveScalingCustomizedScalingMetric;
+    /**
+     * The customized load metric specification.
+     */
+    CustomizedLoadMetricSpecification?: PredictiveScalingCustomizedLoadMetric;
+    /**
+     * The customized capacity metric specification.
+     */
+    CustomizedCapacityMetricSpecification?: PredictiveScalingCustomizedCapacityMetric;
   }
   export type PredictiveScalingMetricSpecifications = PredictiveScalingMetricSpecification[];
   export type PredictiveScalingMode = "ForecastAndScale"|"ForecastOnly"|string;
@@ -2759,6 +2840,7 @@ declare namespace AutoScaling {
   }
   export type RefreshStrategy = "Rolling"|string;
   export type ResourceName = string;
+  export type ReturnData = boolean;
   export type ScalingActivityStatusCode = "PendingSpotBidPlacement"|"WaitingForSpotInstanceRequestId"|"WaitingForSpotInstanceId"|"WaitingForInstanceId"|"PreInService"|"InProgress"|"WaitingForELBConnectionDraining"|"MidLifecycleAction"|"WaitingForInstanceWarmup"|"Successful"|"Failed"|"Cancelled"|string;
   export type ScalingPolicies = ScalingPolicy[];
   export interface ScalingPolicy {
@@ -3254,6 +3336,8 @@ declare namespace AutoScaling {
   export type XmlStringMaxLen32 = string;
   export type XmlStringMaxLen511 = string;
   export type XmlStringMaxLen64 = string;
+  export type XmlStringMetricLabel = string;
+  export type XmlStringMetricStat = string;
   export type XmlStringUserData = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

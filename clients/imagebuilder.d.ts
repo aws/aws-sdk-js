@@ -332,11 +332,11 @@ declare class Imagebuilder extends Service {
    */
   putComponentPolicy(callback?: (err: AWSError, data: Imagebuilder.Types.PutComponentPolicyResponse) => void): Request<Imagebuilder.Types.PutComponentPolicyResponse, AWSError>;
   /**
-   * Applies a policy to a container image. We recommend that you call the RAM API CreateResourceShare (https://docs.aws.amazon.com/ram/latest/APIReference/API_CreateResourceShare.html) to share resources. If you call the Image Builder API PutContainerImagePolicy, you must also call the RAM API PromoteResourceShareCreatedFromPolicy (https://docs.aws.amazon.com/ram/latest/APIReference/API_PromoteResourceShareCreatedFromPolicy.html) in order for the resource to be visible to all principals with whom the resource is shared.
+   * Applies a policy to a container image. We recommend that you call the RAM API CreateResourceShare (https://docs.aws.amazon.com//ram/latest/APIReference/API_CreateResourceShare.html) to share resources. If you call the Image Builder API PutContainerImagePolicy, you must also call the RAM API PromoteResourceShareCreatedFromPolicy (https://docs.aws.amazon.com//ram/latest/APIReference/API_PromoteResourceShareCreatedFromPolicy.html) in order for the resource to be visible to all principals with whom the resource is shared.
    */
   putContainerRecipePolicy(params: Imagebuilder.Types.PutContainerRecipePolicyRequest, callback?: (err: AWSError, data: Imagebuilder.Types.PutContainerRecipePolicyResponse) => void): Request<Imagebuilder.Types.PutContainerRecipePolicyResponse, AWSError>;
   /**
-   * Applies a policy to a container image. We recommend that you call the RAM API CreateResourceShare (https://docs.aws.amazon.com/ram/latest/APIReference/API_CreateResourceShare.html) to share resources. If you call the Image Builder API PutContainerImagePolicy, you must also call the RAM API PromoteResourceShareCreatedFromPolicy (https://docs.aws.amazon.com/ram/latest/APIReference/API_PromoteResourceShareCreatedFromPolicy.html) in order for the resource to be visible to all principals with whom the resource is shared.
+   * Applies a policy to a container image. We recommend that you call the RAM API CreateResourceShare (https://docs.aws.amazon.com//ram/latest/APIReference/API_CreateResourceShare.html) to share resources. If you call the Image Builder API PutContainerImagePolicy, you must also call the RAM API PromoteResourceShareCreatedFromPolicy (https://docs.aws.amazon.com//ram/latest/APIReference/API_PromoteResourceShareCreatedFromPolicy.html) in order for the resource to be visible to all principals with whom the resource is shared.
    */
   putContainerRecipePolicy(callback?: (err: AWSError, data: Imagebuilder.Types.PutContainerRecipePolicyResponse) => void): Request<Imagebuilder.Types.PutContainerRecipePolicyResponse, AWSError>;
   /**
@@ -446,7 +446,7 @@ declare namespace Imagebuilder {
      */
     name?: AmiNameString;
     /**
-     * The description of the distribution configuration. Minimum and maximum length are in characters.
+     * The description of the AMI distribution configuration. Minimum and maximum length are in characters.
      */
     description?: NonEmptyString;
     /**
@@ -2277,6 +2277,14 @@ declare namespace Imagebuilder {
      * The name of the group.
      */
     userGroups?: StringList;
+    /**
+     * The ARN for an Amazon Web Services Organization that you want to share your AMI with. For more information, see What is Organizations?.
+     */
+    organizationArns?: OrganizationArnList;
+    /**
+     * The ARN for an Organizations organizational unit (OU) that you want to share your AMI with. For more information about key concepts for Organizations, see Organizations terminology and concepts.
+     */
+    organizationalUnitArns?: OrganizationalUnitArnList;
   }
   export interface LaunchTemplateConfiguration {
     /**
@@ -2660,6 +2668,10 @@ declare namespace Imagebuilder {
   }
   export type NonEmptyString = string;
   export type NullableBoolean = boolean;
+  export type OrganizationArn = string;
+  export type OrganizationArnList = OrganizationArn[];
+  export type OrganizationalUnitArn = string;
+  export type OrganizationalUnitArnList = OrganizationalUnitArn[];
   export type OsVersion = string;
   export type OsVersionList = OsVersion[];
   export interface OutputResources {
