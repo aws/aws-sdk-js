@@ -732,6 +732,14 @@ declare class Pinpoint extends Service {
    */
   sendMessages(callback?: (err: AWSError, data: Pinpoint.Types.SendMessagesResponse) => void): Request<Pinpoint.Types.SendMessagesResponse, AWSError>;
   /**
+   * Send an OTP message
+   */
+  sendOTPMessage(params: Pinpoint.Types.SendOTPMessageRequest, callback?: (err: AWSError, data: Pinpoint.Types.SendOTPMessageResponse) => void): Request<Pinpoint.Types.SendOTPMessageResponse, AWSError>;
+  /**
+   * Send an OTP message
+   */
+  sendOTPMessage(callback?: (err: AWSError, data: Pinpoint.Types.SendOTPMessageResponse) => void): Request<Pinpoint.Types.SendOTPMessageResponse, AWSError>;
+  /**
    * Creates and sends a message to a list of users.
    */
   sendUsersMessages(params: Pinpoint.Types.SendUsersMessagesRequest, callback?: (err: AWSError, data: Pinpoint.Types.SendUsersMessagesResponse) => void): Request<Pinpoint.Types.SendUsersMessagesResponse, AWSError>;
@@ -947,6 +955,14 @@ declare class Pinpoint extends Service {
    * Updates an existing message template for messages that are sent through the voice channel.
    */
   updateVoiceTemplate(callback?: (err: AWSError, data: Pinpoint.Types.UpdateVoiceTemplateResponse) => void): Request<Pinpoint.Types.UpdateVoiceTemplateResponse, AWSError>;
+  /**
+   * Verify an OTP
+   */
+  verifyOTPMessage(params: Pinpoint.Types.VerifyOTPMessageRequest, callback?: (err: AWSError, data: Pinpoint.Types.VerifyOTPMessageResponse) => void): Request<Pinpoint.Types.VerifyOTPMessageResponse, AWSError>;
+  /**
+   * Verify an OTP
+   */
+  verifyOTPMessage(callback?: (err: AWSError, data: Pinpoint.Types.VerifyOTPMessageResponse) => void): Request<Pinpoint.Types.VerifyOTPMessageResponse, AWSError>;
 }
 declare namespace Pinpoint {
   export interface ADMChannelRequest {
@@ -6154,6 +6170,62 @@ declare namespace Pinpoint {
   export interface SendMessagesResponse {
     MessageResponse: MessageResponse;
   }
+  export interface SendOTPMessageRequest {
+    /**
+     * The unique ID of your Amazon Pinpoint application.
+     */
+    ApplicationId: __string;
+    SendOTPMessageRequestParameters: SendOTPMessageRequestParameters;
+  }
+  export interface SendOTPMessageRequestParameters {
+    /**
+     * The attempts allowed to validate an OTP.
+     */
+    AllowedAttempts?: __integer;
+    /**
+     * The brand name that will be substituted into the OTP message body. Should be owned by calling AWS account.
+     */
+    BrandName: __string;
+    /**
+     * Channel type for the OTP message. Supported values: [SMS].
+     */
+    Channel: __string;
+    /**
+     * The number of characters in the generated OTP.
+     */
+    CodeLength?: __integer;
+    /**
+     * The destination identity to send OTP to.
+     */
+    DestinationIdentity: __string;
+    /**
+     * A unique Entity ID received from DLT after entity registration is approved.
+     */
+    EntityId?: __string;
+    /**
+     * The language to be used for the outgoing message body containing the OTP.
+     */
+    Language?: __string;
+    /**
+     * The origination identity used to send OTP from.
+     */
+    OriginationIdentity: __string;
+    /**
+     * Developer-specified reference identifier. Required to match during OTP verification.
+     */
+    ReferenceId: __string;
+    /**
+     * A unique Template ID received from DLT after entity registration is approved.
+     */
+    TemplateId?: __string;
+    /**
+     * The time in minutes before the OTP is no longer valid.
+     */
+    ValidityPeriod?: __integer;
+  }
+  export interface SendOTPMessageResponse {
+    MessageResponse: MessageResponse;
+  }
   export interface SendUsersMessageRequest {
     /**
      * A map of custom attribute-value pairs. For a push notification, Amazon Pinpoint adds these attributes to the data.pinpoint object in the body of the notification payload. Amazon Pinpoint also provides these attributes in the events that it generates for users-messages deliveries.
@@ -6833,6 +6905,36 @@ declare namespace Pinpoint {
   }
   export interface UpdateVoiceTemplateResponse {
     MessageBody: MessageBody;
+  }
+  export interface VerificationResponse {
+    /**
+     * Specifies whether the OTP is valid or not.
+     */
+    Valid?: __boolean;
+  }
+  export interface VerifyOTPMessageRequest {
+    /**
+     * The unique ID of your Amazon Pinpoint application.
+     */
+    ApplicationId: __string;
+    VerifyOTPMessageRequestParameters: VerifyOTPMessageRequestParameters;
+  }
+  export interface VerifyOTPMessageRequestParameters {
+    /**
+     * The destination identity to send OTP to.
+     */
+    DestinationIdentity: __string;
+    /**
+     * The OTP the end user provided for verification.
+     */
+    Otp: __string;
+    /**
+     * The reference identifier provided when the OTP was previously sent.
+     */
+    ReferenceId: __string;
+  }
+  export interface VerifyOTPMessageResponse {
+    VerificationResponse: VerificationResponse;
   }
   export interface VoiceChannelRequest {
     /**

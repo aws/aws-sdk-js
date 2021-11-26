@@ -52,6 +52,14 @@ declare class Mgn extends Service {
    */
   deleteSourceServer(callback?: (err: AWSError, data: Mgn.Types.DeleteSourceServerResponse) => void): Request<Mgn.Types.DeleteSourceServerResponse, AWSError>;
   /**
+   * Deletes a single vCenter client by ID.
+   */
+  deleteVcenterClient(params: Mgn.Types.DeleteVcenterClientRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a single vCenter client by ID.
+   */
+  deleteVcenterClient(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Retrieves detailed Job log with paging.
    */
   describeJobLogItems(params: Mgn.Types.DescribeJobLogItemsRequest, callback?: (err: AWSError, data: Mgn.Types.DescribeJobLogItemsResponse) => void): Request<Mgn.Types.DescribeJobLogItemsResponse, AWSError>;
@@ -83,6 +91,14 @@ declare class Mgn extends Service {
    * Retrieves all SourceServers or multiple SourceServers by ID.
    */
   describeSourceServers(callback?: (err: AWSError, data: Mgn.Types.DescribeSourceServersResponse) => void): Request<Mgn.Types.DescribeSourceServersResponse, AWSError>;
+  /**
+   * Lists all vCenter clients.
+   */
+  describeVcenterClients(params: Mgn.Types.DescribeVcenterClientsRequest, callback?: (err: AWSError, data: Mgn.Types.DescribeVcenterClientsResponse) => void): Request<Mgn.Types.DescribeVcenterClientsResponse, AWSError>;
+  /**
+   * Lists all vCenter clients.
+   */
+  describeVcenterClients(callback?: (err: AWSError, data: Mgn.Types.DescribeVcenterClientsResponse) => void): Request<Mgn.Types.DescribeVcenterClientsResponse, AWSError>;
   /**
    * Disconnects specific Source Servers from Application Migration Service. Data replication is stopped immediately. All AWS resources created by Application Migration Service for enabling the replication of these source servers will be terminated / deleted within 90 minutes. Launched Test or Cutover instances will NOT be terminated. If the agent on the source server has not been prevented from communciating with the Application Migration Service service, then it will receive a command to uninstall itself (within approximately 10 minutes). The following properties of the SourceServer will be changed immediately: dataReplicationInfo.dataReplicationState will be set to DISCONNECTED; The totalStorageBytes property for each of dataReplicationInfo.replicatedDisks will be set to zero; dataReplicationInfo.lagDuration and dataReplicationInfo.lagDurationwill be nullified.
    */
@@ -156,6 +172,14 @@ declare class Mgn extends Service {
    */
   startCutover(callback?: (err: AWSError, data: Mgn.Types.StartCutoverResponse) => void): Request<Mgn.Types.StartCutoverResponse, AWSError>;
   /**
+   * Starts replication on source server by ID.
+   */
+  startReplication(params: Mgn.Types.StartReplicationRequest, callback?: (err: AWSError, data: Mgn.Types.SourceServer) => void): Request<Mgn.Types.SourceServer, AWSError>;
+  /**
+   * Starts replication on source server by ID.
+   */
+  startReplication(callback?: (err: AWSError, data: Mgn.Types.SourceServer) => void): Request<Mgn.Types.SourceServer, AWSError>;
+  /**
    * Lauches a Test Instance for specific Source Servers. This command starts a LAUNCH job whose initiatedBy property is StartTest and changes the SourceServer.lifeCycle.state property to TESTING.
    */
   startTest(params: Mgn.Types.StartTestRequest, callback?: (err: AWSError, data: Mgn.Types.StartTestResponse) => void): Request<Mgn.Types.StartTestResponse, AWSError>;
@@ -211,6 +235,14 @@ declare class Mgn extends Service {
    * Updates multiple ReplicationConfigurationTemplates by ID.
    */
   updateReplicationConfigurationTemplate(callback?: (err: AWSError, data: Mgn.Types.ReplicationConfigurationTemplate) => void): Request<Mgn.Types.ReplicationConfigurationTemplate, AWSError>;
+  /**
+   * Updates source server Replication Type by ID.
+   */
+  updateSourceServerReplicationType(params: Mgn.Types.UpdateSourceServerReplicationTypeRequest, callback?: (err: AWSError, data: Mgn.Types.SourceServer) => void): Request<Mgn.Types.SourceServer, AWSError>;
+  /**
+   * Updates source server Replication Type by ID.
+   */
+  updateSourceServerReplicationType(callback?: (err: AWSError, data: Mgn.Types.SourceServer) => void): Request<Mgn.Types.SourceServer, AWSError>;
 }
 declare namespace Mgn {
   export type ARN = string;
@@ -308,7 +340,7 @@ declare namespace Mgn {
      */
     rawError?: LargeBoundedString;
   }
-  export type DataReplicationErrorString = "AGENT_NOT_SEEN"|"SNAPSHOTS_FAILURE"|"NOT_CONVERGING"|"UNSTABLE_NETWORK"|"FAILED_TO_CREATE_SECURITY_GROUP"|"FAILED_TO_LAUNCH_REPLICATION_SERVER"|"FAILED_TO_BOOT_REPLICATION_SERVER"|"FAILED_TO_AUTHENTICATE_WITH_SERVICE"|"FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE"|"FAILED_TO_CREATE_STAGING_DISKS"|"FAILED_TO_ATTACH_STAGING_DISKS"|"FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT"|"FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER"|"FAILED_TO_START_DATA_TRANSFER"|string;
+  export type DataReplicationErrorString = "AGENT_NOT_SEEN"|"SNAPSHOTS_FAILURE"|"NOT_CONVERGING"|"UNSTABLE_NETWORK"|"FAILED_TO_CREATE_SECURITY_GROUP"|"FAILED_TO_LAUNCH_REPLICATION_SERVER"|"FAILED_TO_BOOT_REPLICATION_SERVER"|"FAILED_TO_AUTHENTICATE_WITH_SERVICE"|"FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE"|"FAILED_TO_CREATE_STAGING_DISKS"|"FAILED_TO_ATTACH_STAGING_DISKS"|"FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT"|"FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER"|"FAILED_TO_START_DATA_TRANSFER"|"UNSUPPORTED_VM_CONFIGURATION"|"LAST_SNAPSHOT_JOB_FAILED"|string;
   export interface DataReplicationInfo {
     /**
      * Error in obtaining data replication info.
@@ -330,6 +362,10 @@ declare namespace Mgn {
      * Request to query data replication lag durating.
      */
     lagDuration?: ISO8601DatetimeString;
+    /**
+     * Request to query data replication last snapshot time.
+     */
+    lastSnapshotDateTime?: ISO8601DatetimeString;
     /**
      * Request to query disks replicated.
      */
@@ -385,7 +421,7 @@ declare namespace Mgn {
   export type DataReplicationInitiationStepName = "WAIT"|"CREATE_SECURITY_GROUP"|"LAUNCH_REPLICATION_SERVER"|"BOOT_REPLICATION_SERVER"|"AUTHENTICATE_WITH_SERVICE"|"DOWNLOAD_REPLICATION_SOFTWARE"|"CREATE_STAGING_DISKS"|"ATTACH_STAGING_DISKS"|"PAIR_REPLICATION_SERVER_WITH_AGENT"|"CONNECT_AGENT_TO_REPLICATION_SERVER"|"START_DATA_TRANSFER"|string;
   export type DataReplicationInitiationStepStatus = "NOT_STARTED"|"IN_PROGRESS"|"SUCCEEDED"|"FAILED"|"SKIPPED"|string;
   export type DataReplicationInitiationSteps = DataReplicationInitiationStep[];
-  export type DataReplicationState = "STOPPED"|"INITIATING"|"INITIAL_SYNC"|"BACKLOG"|"CREATING_SNAPSHOT"|"CONTINUOUS"|"PAUSED"|"RESCAN"|"STALLED"|"DISCONNECTED"|string;
+  export type DataReplicationState = "STOPPED"|"INITIATING"|"INITIAL_SYNC"|"BACKLOG"|"CREATING_SNAPSHOT"|"CONTINUOUS"|"PAUSED"|"RESCAN"|"STALLED"|"DISCONNECTED"|"PENDING_SNAPSHOT_SHIPPING"|"SHIPPING_SNAPSHOT"|string;
   export interface DeleteJobRequest {
     /**
      * Request to delete Job from service by Job ID.
@@ -409,6 +445,12 @@ declare namespace Mgn {
     sourceServerID: SourceServerID;
   }
   export interface DeleteSourceServerResponse {
+  }
+  export interface DeleteVcenterClientRequest {
+    /**
+     * ID of resource to be deleted.
+     */
+    vcenterClientID: VcenterClientID;
   }
   export interface DescribeJobLogItemsRequest {
     /**
@@ -517,6 +559,14 @@ declare namespace Mgn {
      */
     isArchived?: Boolean;
     /**
+     * Request to filter Source Servers list by life cycle states.
+     */
+    lifeCycleStates?: LifeCycleStates;
+    /**
+     * Request to filter Source Servers list by replication type.
+     */
+    replicationTypes?: ReplicationTypes;
+    /**
      * Request to filter Source Servers list by Source Server ID.
      */
     sourceServerIDs?: DescribeSourceServersRequestFiltersIDs;
@@ -529,6 +579,26 @@ declare namespace Mgn {
     items?: SourceServersList;
     /**
      * Request to filter Source Servers next token.
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface DescribeVcenterClientsRequest {
+    /**
+     * Maximum results to be returned in DescribeVcenterClients.
+     */
+    maxResults?: StrictlyPositiveInteger;
+    /**
+     * Next pagination token to be provided for DescribeVcenterClients.
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface DescribeVcenterClientsResponse {
+    /**
+     * List of items returned by DescribeVcenterClients.
+     */
+    items?: VcenterClientList;
+    /**
+     * Next pagination token returned from DescribeVcenterClients.
      */
     nextToken?: PaginationToken;
   }
@@ -585,6 +655,10 @@ declare namespace Mgn {
      * Hostname identification hint.
      */
     hostname?: BoundedString;
+    /**
+     * vCenter VM path identification hint.
+     */
+    vmPath?: BoundedString;
     /**
      * vmWare UUID identification hint.
      */
@@ -830,7 +904,8 @@ declare namespace Mgn {
      */
     apiCallDateTime?: ISO8601DatetimeString;
   }
-  export type LifeCycleState = "STOPPED"|"NOT_READY"|"READY_FOR_TEST"|"TESTING"|"READY_FOR_CUTOVER"|"CUTTING_OVER"|"CUTOVER"|"DISCONNECTED"|string;
+  export type LifeCycleState = "STOPPED"|"NOT_READY"|"READY_FOR_TEST"|"TESTING"|"READY_FOR_CUTOVER"|"CUTTING_OVER"|"CUTOVER"|"DISCONNECTED"|"DISCOVERED"|string;
+  export type LifeCycleStates = LifeCycleState[];
   export interface ListTagsForResourceRequest {
     /**
      * List tags for resource request by ARN.
@@ -1034,6 +1109,8 @@ declare namespace Mgn {
   export type ReplicationConfigurationTemplateIDs = ReplicationConfigurationTemplateID[];
   export type ReplicationConfigurationTemplates = ReplicationConfigurationTemplate[];
   export type ReplicationServersSecurityGroupsIDs = SecurityGroupID[];
+  export type ReplicationType = "AGENT_BASED"|"SNAPSHOT_SHIPPING"|string;
+  export type ReplicationTypes = ReplicationType[];
   export interface RetryDataReplicationRequest {
     /**
      * Retry data replication for Source Server ID.
@@ -1098,6 +1175,10 @@ declare namespace Mgn {
      */
     lifeCycle?: LifeCycle;
     /**
+     * Source server replication type.
+     */
+    replicationType?: ReplicationType;
+    /**
      * Source server properties.
      */
     sourceProperties?: SourceProperties;
@@ -1109,6 +1190,10 @@ declare namespace Mgn {
      * Source server Tags.
      */
     tags?: TagsMap;
+    /**
+     * Source server vCenter client id.
+     */
+    vcenterClientID?: VcenterClientID;
   }
   export type SourceServerID = string;
   export type SourceServersList = SourceServer[];
@@ -1128,6 +1213,12 @@ declare namespace Mgn {
      * Start Cutover Job response.
      */
     job?: Job;
+  }
+  export interface StartReplicationRequest {
+    /**
+     * ID of source server on which to start replication.
+     */
+    sourceServerID: SourceServerID;
   }
   export interface StartTestRequest {
     /**
@@ -1340,6 +1431,52 @@ declare namespace Mgn {
      */
     useDedicatedReplicationServer?: Boolean;
   }
+  export interface UpdateSourceServerReplicationTypeRequest {
+    /**
+     * Replication type to which to update source server.
+     */
+    replicationType: ReplicationType;
+    /**
+     * ID of source server on which to update replication type.
+     */
+    sourceServerID: SourceServerID;
+  }
+  export interface VcenterClient {
+    /**
+     * Arn of vCenter client.
+     */
+    arn?: ARN;
+    /**
+     * Datacenter name of vCenter client.
+     */
+    datacenterName?: BoundedString;
+    /**
+     * Hostname of vCenter client .
+     */
+    hostname?: BoundedString;
+    /**
+     * Last seen time of vCenter client.
+     */
+    lastSeenDatetime?: ISO8601DatetimeString;
+    /**
+     * Tags for Source Server of vCenter client.
+     */
+    sourceServerTags?: TagsMap;
+    /**
+     * Tags for vCenter client.
+     */
+    tags?: TagsMap;
+    /**
+     * ID of vCenter client.
+     */
+    vcenterClientID?: VcenterClientID;
+    /**
+     * Vcenter UUID of vCenter client.
+     */
+    vcenterUUID?: BoundedString;
+  }
+  export type VcenterClientID = string;
+  export type VcenterClientList = VcenterClient[];
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1036.0-->
+<!--LATEST=2.1037.0-->
 <!--ENTRYINSERT-->
+
+## 2.1037.0
+* feature: EC2: Documentation updates for EC2.
+* feature: Mgn: Application Migration Service now supports an additional replication method that does not require agent installation on each source server. This option is available for source servers running on VMware vCenter versions 6.7 and 7.0.
+* feature: Outposts: This release adds new APIs for working with Outpost sites and orders.
+* feature: Pinpoint: Added a One-Time Password (OTP) management feature. You can use the Amazon Pinpoint API to generate OTP codes and send them to your users as SMS messages. Your apps can then call the API to verify the OTP codes that your users input
 
 ## 2.1036.0
 * feature: AutoScaling: Customers can now configure predictive scaling policies to proactively scale EC2 Auto Scaling groups based on any CloudWatch metrics that more accurately represent the load on the group than the four predefined metrics. They can also use math expressions to further customize the metrics.

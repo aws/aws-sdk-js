@@ -149,6 +149,30 @@
       "documentation": "<p>Deletes a single source server by ID.</p>",
       "idempotent": true
     },
+    "DeleteVcenterClient": {
+      "name": "DeleteVcenterClient",
+      "http": {
+        "method": "POST",
+        "requestUri": "/DeleteVcenterClient",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "DeleteVcenterClientRequest"
+      },
+      "errors": [
+        {
+          "shape": "UninitializedAccountException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ValidationException"
+        }
+      ],
+      "documentation": "<p>Deletes a single vCenter client by ID.</p>",
+      "idempotent": true
+    },
     "DescribeJobLogItems": {
       "name": "DescribeJobLogItems",
       "http": {
@@ -243,6 +267,32 @@
         }
       ],
       "documentation": "<p>Retrieves all SourceServers or multiple SourceServers by ID.</p>"
+    },
+    "DescribeVcenterClients": {
+      "name": "DescribeVcenterClients",
+      "http": {
+        "method": "GET",
+        "requestUri": "/DescribeVcenterClients",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "DescribeVcenterClientsRequest"
+      },
+      "output": {
+        "shape": "DescribeVcenterClientsResponse"
+      },
+      "errors": [
+        {
+          "shape": "UninitializedAccountException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ValidationException"
+        }
+      ],
+      "documentation": "<p>Lists all vCenter clients.</p>"
     },
     "DisconnectFromService": {
       "name": "DisconnectFromService",
@@ -478,6 +528,38 @@
       ],
       "documentation": "<p>Launches a Cutover Instance for specific Source Servers. This command starts a LAUNCH job whose initiatedBy property is StartCutover and changes the SourceServer.lifeCycle.state property to CUTTING_OVER.</p>"
     },
+    "StartReplication": {
+      "name": "StartReplication",
+      "http": {
+        "method": "POST",
+        "requestUri": "/StartReplication",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "StartReplicationRequest"
+      },
+      "output": {
+        "shape": "SourceServer"
+      },
+      "errors": [
+        {
+          "shape": "UninitializedAccountException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ServiceQuotaExceededException"
+        },
+        {
+          "shape": "ConflictException"
+        }
+      ],
+      "documentation": "<p>Starts replication on source server by ID.</p>"
+    },
     "StartTest": {
       "name": "StartTest",
       "http": {
@@ -681,6 +763,35 @@
         }
       ],
       "documentation": "<p>Updates multiple ReplicationConfigurationTemplates by ID.</p>"
+    },
+    "UpdateSourceServerReplicationType": {
+      "name": "UpdateSourceServerReplicationType",
+      "http": {
+        "method": "POST",
+        "requestUri": "/UpdateSourceServerReplicationType",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "UpdateSourceServerReplicationTypeRequest"
+      },
+      "output": {
+        "shape": "SourceServer"
+      },
+      "errors": [
+        {
+          "shape": "UninitializedAccountException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ConflictException"
+        }
+      ],
+      "documentation": "<p>Updates source server Replication Type by ID.</p>"
     }
   },
   "shapes": {
@@ -858,7 +969,9 @@
         "FAILED_TO_ATTACH_STAGING_DISKS",
         "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT",
         "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER",
-        "FAILED_TO_START_DATA_TRANSFER"
+        "FAILED_TO_START_DATA_TRANSFER",
+        "UNSUPPORTED_VM_CONFIGURATION",
+        "LAST_SNAPSHOT_JOB_FAILED"
       ]
     },
     "DataReplicationInfo": {
@@ -883,6 +996,10 @@
         "lagDuration": {
           "shape": "ISO8601DatetimeString",
           "documentation": "<p>Request to query data replication lag durating.</p>"
+        },
+        "lastSnapshotDateTime": {
+          "shape": "ISO8601DatetimeString",
+          "documentation": "<p>Request to query data replication last snapshot time.</p>"
         },
         "replicatedDisks": {
           "shape": "DataReplicationInfoReplicatedDisks",
@@ -1001,7 +1118,9 @@
         "PAUSED",
         "RESCAN",
         "STALLED",
-        "DISCONNECTED"
+        "DISCONNECTED",
+        "PENDING_SNAPSHOT_SHIPPING",
+        "SHIPPING_SNAPSHOT"
       ]
     },
     "DeleteJobRequest": {
@@ -1051,6 +1170,18 @@
     "DeleteSourceServerResponse": {
       "type": "structure",
       "members": {}
+    },
+    "DeleteVcenterClientRequest": {
+      "type": "structure",
+      "required": [
+        "vcenterClientID"
+      ],
+      "members": {
+        "vcenterClientID": {
+          "shape": "VcenterClientID",
+          "documentation": "<p>ID of resource to be deleted.</p>"
+        }
+      }
     },
     "DescribeJobLogItemsRequest": {
       "type": "structure",
@@ -1204,6 +1335,14 @@
           "shape": "Boolean",
           "documentation": "<p>Request to filter Source Servers list by archived.</p>"
         },
+        "lifeCycleStates": {
+          "shape": "LifeCycleStates",
+          "documentation": "<p>Request to filter Source Servers list by life cycle states.</p>"
+        },
+        "replicationTypes": {
+          "shape": "ReplicationTypes",
+          "documentation": "<p>Request to filter Source Servers list by replication type.</p>"
+        },
         "sourceServerIDs": {
           "shape": "DescribeSourceServersRequestFiltersIDs",
           "documentation": "<p>Request to filter Source Servers list by Source Server ID.</p>"
@@ -1229,6 +1368,36 @@
         "nextToken": {
           "shape": "PaginationToken",
           "documentation": "<p>Request to filter Source Servers next token.</p>"
+        }
+      }
+    },
+    "DescribeVcenterClientsRequest": {
+      "type": "structure",
+      "members": {
+        "maxResults": {
+          "shape": "StrictlyPositiveInteger",
+          "documentation": "<p>Maximum results to be returned in DescribeVcenterClients.</p>",
+          "location": "querystring",
+          "locationName": "maxResults"
+        },
+        "nextToken": {
+          "shape": "PaginationToken",
+          "documentation": "<p>Next pagination token to be provided for DescribeVcenterClients.</p>",
+          "location": "querystring",
+          "locationName": "nextToken"
+        }
+      }
+    },
+    "DescribeVcenterClientsResponse": {
+      "type": "structure",
+      "members": {
+        "items": {
+          "shape": "VcenterClientList",
+          "documentation": "<p>List of items returned by DescribeVcenterClients.</p>"
+        },
+        "nextToken": {
+          "shape": "PaginationToken",
+          "documentation": "<p>Next pagination token returned from DescribeVcenterClients.</p>"
         }
       }
     },
@@ -1348,6 +1517,10 @@
         "hostname": {
           "shape": "BoundedString",
           "documentation": "<p>Hostname identification hint.</p>"
+        },
+        "vmPath": {
+          "shape": "BoundedString",
+          "documentation": "<p>vCenter VM path identification hint.</p>"
         },
         "vmWareUuid": {
           "shape": "BoundedString",
@@ -1747,8 +1920,17 @@
         "READY_FOR_CUTOVER",
         "CUTTING_OVER",
         "CUTOVER",
-        "DISCONNECTED"
+        "DISCONNECTED",
+        "DISCOVERED"
       ]
+    },
+    "LifeCycleStates": {
+      "type": "list",
+      "member": {
+        "shape": "LifeCycleState"
+      },
+      "max": 10,
+      "min": 0
     },
     "ListTagsForResourceRequest": {
       "type": "structure",
@@ -2073,6 +2255,21 @@
       "max": 32,
       "min": 0
     },
+    "ReplicationType": {
+      "type": "string",
+      "enum": [
+        "AGENT_BASED",
+        "SNAPSHOT_SHIPPING"
+      ]
+    },
+    "ReplicationTypes": {
+      "type": "list",
+      "member": {
+        "shape": "ReplicationType"
+      },
+      "max": 2,
+      "min": 0
+    },
     "RetryDataReplicationRequest": {
       "type": "structure",
       "required": [
@@ -2157,6 +2354,10 @@
           "shape": "LifeCycle",
           "documentation": "<p>Source server lifecycle state.</p>"
         },
+        "replicationType": {
+          "shape": "ReplicationType",
+          "documentation": "<p>Source server replication type.</p>"
+        },
         "sourceProperties": {
           "shape": "SourceProperties",
           "documentation": "<p>Source server properties.</p>"
@@ -2168,6 +2369,10 @@
         "tags": {
           "shape": "TagsMap",
           "documentation": "<p>Source server Tags.</p>"
+        },
+        "vcenterClientID": {
+          "shape": "VcenterClientID",
+          "documentation": "<p>Source server vCenter client id.</p>"
         }
       }
     },
@@ -2213,6 +2418,18 @@
         "job": {
           "shape": "Job",
           "documentation": "<p>Start Cutover Job response.</p>"
+        }
+      }
+    },
+    "StartReplicationRequest": {
+      "type": "structure",
+      "required": [
+        "sourceServerID"
+      ],
+      "members": {
+        "sourceServerID": {
+          "shape": "SourceServerID",
+          "documentation": "<p>ID of source server on which to start replication.</p>"
         }
       }
     },
@@ -2532,6 +2749,73 @@
           "shape": "Boolean",
           "documentation": "<p>Update replication configuration template use dedicated Replication Server request.</p>"
         }
+      }
+    },
+    "UpdateSourceServerReplicationTypeRequest": {
+      "type": "structure",
+      "required": [
+        "replicationType",
+        "sourceServerID"
+      ],
+      "members": {
+        "replicationType": {
+          "shape": "ReplicationType",
+          "documentation": "<p>Replication type to which to update source server.</p>"
+        },
+        "sourceServerID": {
+          "shape": "SourceServerID",
+          "documentation": "<p>ID of source server on which to update replication type.</p>"
+        }
+      }
+    },
+    "VcenterClient": {
+      "type": "structure",
+      "members": {
+        "arn": {
+          "shape": "ARN",
+          "documentation": "<p>Arn of vCenter client.</p>"
+        },
+        "datacenterName": {
+          "shape": "BoundedString",
+          "documentation": "<p>Datacenter name of vCenter client.</p>"
+        },
+        "hostname": {
+          "shape": "BoundedString",
+          "documentation": "<p>Hostname of vCenter client .</p>"
+        },
+        "lastSeenDatetime": {
+          "shape": "ISO8601DatetimeString",
+          "documentation": "<p>Last seen time of vCenter client.</p>"
+        },
+        "sourceServerTags": {
+          "shape": "TagsMap",
+          "documentation": "<p>Tags for Source Server of vCenter client.</p>"
+        },
+        "tags": {
+          "shape": "TagsMap",
+          "documentation": "<p>Tags for vCenter client.</p>"
+        },
+        "vcenterClientID": {
+          "shape": "VcenterClientID",
+          "documentation": "<p>ID of vCenter client.</p>"
+        },
+        "vcenterUUID": {
+          "shape": "BoundedString",
+          "documentation": "<p>Vcenter UUID of vCenter client.</p>"
+        }
+      },
+      "documentation": "<p>vCenter client.</p>"
+    },
+    "VcenterClientID": {
+      "type": "string",
+      "max": 21,
+      "min": 21,
+      "pattern": "^vcc-[0-9a-zA-Z]{17}$"
+    },
+    "VcenterClientList": {
+      "type": "list",
+      "member": {
+        "shape": "VcenterClient"
       }
     }
   },

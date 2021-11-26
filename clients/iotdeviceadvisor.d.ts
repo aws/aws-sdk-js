@@ -28,11 +28,11 @@ declare class IotDeviceAdvisor extends Service {
    */
   deleteSuiteDefinition(callback?: (err: AWSError, data: IotDeviceAdvisor.Types.DeleteSuiteDefinitionResponse) => void): Request<IotDeviceAdvisor.Types.DeleteSuiteDefinitionResponse, AWSError>;
   /**
-   * 
+   * Gets information about an Device Advisor endpoint.
    */
   getEndpoint(params: IotDeviceAdvisor.Types.GetEndpointRequest, callback?: (err: AWSError, data: IotDeviceAdvisor.Types.GetEndpointResponse) => void): Request<IotDeviceAdvisor.Types.GetEndpointResponse, AWSError>;
   /**
-   * 
+   * Gets information about an Device Advisor endpoint.
    */
   getEndpoint(callback?: (err: AWSError, data: IotDeviceAdvisor.Types.GetEndpointResponse) => void): Request<IotDeviceAdvisor.Types.GetEndpointResponse, AWSError>;
   /**
@@ -68,11 +68,11 @@ declare class IotDeviceAdvisor extends Service {
    */
   listSuiteDefinitions(callback?: (err: AWSError, data: IotDeviceAdvisor.Types.ListSuiteDefinitionsResponse) => void): Request<IotDeviceAdvisor.Types.ListSuiteDefinitionsResponse, AWSError>;
   /**
-   * Lists the runs of the specified Device Advisor test suite. You can list all runs of the test suite, or the runs of a specific version of the test suite. Requires permission to access the ListSuiteRuns action.
+   * Lists runs of the specified Device Advisor test suite. You can list all runs of the test suite, or the runs of a specific version of the test suite. Requires permission to access the ListSuiteRuns action.
    */
   listSuiteRuns(params: IotDeviceAdvisor.Types.ListSuiteRunsRequest, callback?: (err: AWSError, data: IotDeviceAdvisor.Types.ListSuiteRunsResponse) => void): Request<IotDeviceAdvisor.Types.ListSuiteRunsResponse, AWSError>;
   /**
-   * Lists the runs of the specified Device Advisor test suite. You can list all runs of the test suite, or the runs of a specific version of the test suite. Requires permission to access the ListSuiteRuns action.
+   * Lists runs of the specified Device Advisor test suite. You can list all runs of the test suite, or the runs of a specific version of the test suite. Requires permission to access the ListSuiteRuns action.
    */
   listSuiteRuns(callback?: (err: AWSError, data: IotDeviceAdvisor.Types.ListSuiteRunsResponse) => void): Request<IotDeviceAdvisor.Types.ListSuiteRunsResponse, AWSError>;
   /**
@@ -177,10 +177,19 @@ declare namespace IotDeviceAdvisor {
   export type ErrorReason = string;
   export type Failure = string;
   export interface GetEndpointRequest {
+    /**
+     * The thing ARN of the device. This is an optional parameter.
+     */
     thingArn?: AmazonResourceName;
+    /**
+     * The certificate ARN of the device. This is an optional parameter.
+     */
     certificateArn?: AmazonResourceName;
   }
   export interface GetEndpointResponse {
+    /**
+     * The response of an Device Advisor endpoint.
+     */
     endpoint?: Endpoint;
   }
   export interface GetSuiteDefinitionRequest {
@@ -279,7 +288,7 @@ declare namespace IotDeviceAdvisor {
      */
     testResult?: TestResult;
     /**
-     * Date (in Unix epoch time) when the test suite run was started.
+     * Date (in Unix epoch time) when the test suite run started.
      */
     startTime?: Timestamp;
     /**
@@ -447,7 +456,7 @@ declare namespace IotDeviceAdvisor {
      */
     rootGroup?: RootGroup;
     /**
-     * Gets device permission ARN.
+     * Gets the device permission ARN.
      */
     devicePermissionRoleArn?: AmazonResourceName;
   }
@@ -461,7 +470,7 @@ declare namespace IotDeviceAdvisor {
      */
     suiteDefinitionName?: SuiteDefinitionName;
     /**
-     * Specifies the devices under test for the test suite.
+     * Specifies the devices that are under test for the test suite.
      */
     defaultDevices?: DeviceUnderTestList;
     /**
@@ -485,6 +494,9 @@ declare namespace IotDeviceAdvisor {
      * Gets test case list.
      */
     selectedTestList?: SelectedTestList;
+    /**
+     * TRUE if multiple test suites run in parallel.
+     */
     parallelRun?: ParallelRun;
   }
   export interface SuiteRunInformation {
@@ -549,19 +561,19 @@ declare namespace IotDeviceAdvisor {
   export type TestCaseDefinitionName = string;
   export interface TestCaseRun {
     /**
-     * Provides test case run ID.
+     * Provides the test case run ID.
      */
     testCaseRunId?: UUID;
     /**
-     * Provides test case run definition ID.
+     * Provides the test case run definition ID.
      */
     testCaseDefinitionId?: UUID;
     /**
-     * Provides test case run definition Name.
+     * Provides the test case run definition name.
      */
     testCaseDefinitionName?: TestCaseDefinitionName;
     /**
-     * Provides test case run status.    PASS: Test passed.    FAIL: Test failed.    PENDING: Test has not started running but is scheduled.    RUNNING: Test is running    STOPPING: Test is performing cleanup steps. You will see this status only if you stop a suite run.    STOPPED Test is stopped. You will see this status only if you stop a suite run.    PASS_WITH_WARNINGS: Test passed with warnings.    ERORR: Test faced an error when running due to an internal issue.  
+     * Provides the test case run status. Status is one of the following:    PASS: Test passed.    FAIL: Test failed.    PENDING: Test has not started running but is scheduled.    RUNNING: Test is running.    STOPPING: Test is performing cleanup steps. You will see this status only if you stop a suite run.    STOPPED Test is stopped. You will see this status only if you stop a suite run.    PASS_WITH_WARNINGS: Test passed with warnings.    ERORR: Test faced an error when running due to an internal issue.  
      */
     status?: Status;
     /**
@@ -573,7 +585,7 @@ declare namespace IotDeviceAdvisor {
      */
     endTime?: Timestamp;
     /**
-     * Provides test case run log Url.
+     * Provides test case run log URL.
      */
     logUrl?: LogUrl;
     /**

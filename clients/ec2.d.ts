@@ -253,11 +253,11 @@ declare class EC2 extends Service {
    */
   authorizeClientVpnIngress(callback?: (err: AWSError, data: EC2.Types.AuthorizeClientVpnIngressResult) => void): Request<EC2.Types.AuthorizeClientVpnIngressResult, AWSError>;
   /**
-   * [VPC only] Adds the specified outbound (egress) rules to a security group for use with a VPC. An outbound rule permits instances to send traffic to the specified IPv4 or IPv6 CIDR address ranges, or to the instances that are associated with the specified destination security groups. You specify a protocol for each rule (for example, TCP). For the TCP and UDP protocols, you must also specify the destination port or port range. For the ICMP protocol, you must also specify the ICMP type and code. You can use -1 for the type or code to mean all types or all codes. Rule changes are propagated to affected instances as quickly as possible. However, a small delay might occur. For information about VPC security group quotas, see Amazon VPC quotas.
+   * [VPC only] Adds the specified outbound (egress) rules to a security group for use with a VPC. An outbound rule permits instances to send traffic to the specified IPv4 or IPv6 CIDR address ranges, or to the instances that are associated with the specified source security groups. You specify a protocol for each rule (for example, TCP). For the TCP and UDP protocols, you must also specify the destination port or port range. For the ICMP protocol, you must also specify the ICMP type and code. You can use -1 for the type or code to mean all types or all codes. Rule changes are propagated to affected instances as quickly as possible. However, a small delay might occur. For information about VPC security group quotas, see Amazon VPC quotas.
    */
   authorizeSecurityGroupEgress(params: EC2.Types.AuthorizeSecurityGroupEgressRequest, callback?: (err: AWSError, data: EC2.Types.AuthorizeSecurityGroupEgressResult) => void): Request<EC2.Types.AuthorizeSecurityGroupEgressResult, AWSError>;
   /**
-   * [VPC only] Adds the specified outbound (egress) rules to a security group for use with a VPC. An outbound rule permits instances to send traffic to the specified IPv4 or IPv6 CIDR address ranges, or to the instances that are associated with the specified destination security groups. You specify a protocol for each rule (for example, TCP). For the TCP and UDP protocols, you must also specify the destination port or port range. For the ICMP protocol, you must also specify the ICMP type and code. You can use -1 for the type or code to mean all types or all codes. Rule changes are propagated to affected instances as quickly as possible. However, a small delay might occur. For information about VPC security group quotas, see Amazon VPC quotas.
+   * [VPC only] Adds the specified outbound (egress) rules to a security group for use with a VPC. An outbound rule permits instances to send traffic to the specified IPv4 or IPv6 CIDR address ranges, or to the instances that are associated with the specified source security groups. You specify a protocol for each rule (for example, TCP). For the TCP and UDP protocols, you must also specify the destination port or port range. For the ICMP protocol, you must also specify the ICMP type and code. You can use -1 for the type or code to mean all types or all codes. Rule changes are propagated to affected instances as quickly as possible. However, a small delay might occur. For information about VPC security group quotas, see Amazon VPC quotas.
    */
   authorizeSecurityGroupEgress(callback?: (err: AWSError, data: EC2.Types.AuthorizeSecurityGroupEgressResult) => void): Request<EC2.Types.AuthorizeSecurityGroupEgressResult, AWSError>;
   /**
@@ -8157,6 +8157,9 @@ declare namespace EC2 {
      * The ID of a VPC peering connection.
      */
     VpcPeeringConnectionId?: VpcPeeringConnectionId;
+    /**
+     * The Amazon Resource Name (ARN) of the core network.
+     */
     CoreNetworkArn?: CoreNetworkArn;
   }
   export interface CreateRouteResult {
@@ -9888,7 +9891,7 @@ declare namespace EC2 {
      */
     Resources: ResourceIdList;
     /**
-     * The tags to delete. Specify a tag key and an optional tag value to delete specific tags. If you specify a tag key without a tag value, we delete any tag with this key regardless of its value. If you specify a tag key with an empty string as the tag value, we delete the tag only if its value is an empty string. If you omit this parameter, we delete all user-defined tags for the specified resources. We do not delete Amazon Web Services-generated tags (tags that have the aws: prefix).
+     * The tags to delete. Specify a tag key and an optional tag value to delete specific tags. If you specify a tag key without a tag value, we delete any tag with this key regardless of its value. If you specify a tag key with an empty string as the tag value, we delete the tag only if its value is an empty string. If you omit this parameter, we delete all user-defined tags for the specified resources. We do not delete Amazon Web Services-generated tags (tags that have the aws: prefix). Constraints: Up to 1000 tags.
      */
     Tags?: TagList;
   }
@@ -24747,6 +24750,9 @@ declare namespace EC2 {
      * The ID of a VPC peering connection.
      */
     VpcPeeringConnectionId?: VpcPeeringConnectionId;
+    /**
+     * The Amazon Resource Name (ARN) of the core network.
+     */
     CoreNetworkArn?: CoreNetworkArn;
   }
   export interface ReplaceRouteTableAssociationRequest {
@@ -25948,6 +25954,9 @@ declare namespace EC2 {
      * The ID of a VPC peering connection.
      */
     VpcPeeringConnectionId?: String;
+    /**
+     * The Amazon Resource Name (ARN) of the core network.
+     */
     CoreNetworkArn?: CoreNetworkArn;
   }
   export type RouteGatewayId = string;
