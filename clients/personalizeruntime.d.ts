@@ -20,11 +20,11 @@ declare class PersonalizeRuntime extends Service {
    */
   getPersonalizedRanking(callback?: (err: AWSError, data: PersonalizeRuntime.Types.GetPersonalizedRankingResponse) => void): Request<PersonalizeRuntime.Types.GetPersonalizedRankingResponse, AWSError>;
   /**
-   * Returns a list of recommended items. The required input depends on the recipe type used to create the solution backing the campaign, as follows:   RELATED_ITEMS - itemId required, userId not used   USER_PERSONALIZATION - itemId optional, userId required    Campaigns that are backed by a solution created using a recipe of type PERSONALIZED_RANKING use the API. 
+   * Returns a list of recommended items. For campaigns, the campaign's Amazon Resource Name (ARN) is required and the required user and item input depends on the recipe type used to create the solution backing the campaign as follows:   USER_PERSONALIZATION - userId required, itemId not used   RELATED_ITEMS - itemId required, userId not used    Campaigns that are backed by a solution created using a recipe of type PERSONALIZED_RANKING use the API.   For recommenders, the recommender's ARN is required and the required item and user input depends on the use case (domain-based recipe) backing the recommender. For information on use case requirements see Choosing recommender use cases. 
    */
   getRecommendations(params: PersonalizeRuntime.Types.GetRecommendationsRequest, callback?: (err: AWSError, data: PersonalizeRuntime.Types.GetRecommendationsResponse) => void): Request<PersonalizeRuntime.Types.GetRecommendationsResponse, AWSError>;
   /**
-   * Returns a list of recommended items. The required input depends on the recipe type used to create the solution backing the campaign, as follows:   RELATED_ITEMS - itemId required, userId not used   USER_PERSONALIZATION - itemId optional, userId required    Campaigns that are backed by a solution created using a recipe of type PERSONALIZED_RANKING use the API. 
+   * Returns a list of recommended items. For campaigns, the campaign's Amazon Resource Name (ARN) is required and the required user and item input depends on the recipe type used to create the solution backing the campaign as follows:   USER_PERSONALIZATION - userId required, itemId not used   RELATED_ITEMS - itemId required, userId not used    Campaigns that are backed by a solution created using a recipe of type PERSONALIZED_RANKING use the API.   For recommenders, the recommender's ARN is required and the required item and user input depends on the use case (domain-based recipe) backing the recommender. For information on use case requirements see Choosing recommender use cases. 
    */
   getRecommendations(callback?: (err: AWSError, data: PersonalizeRuntime.Types.GetRecommendationsResponse) => void): Request<PersonalizeRuntime.Types.GetRecommendationsResponse, AWSError>;
 }
@@ -76,7 +76,7 @@ declare namespace PersonalizeRuntime {
     /**
      * The Amazon Resource Name (ARN) of the campaign to use for getting recommendations.
      */
-    campaignArn: Arn;
+    campaignArn?: Arn;
     /**
      * The item ID to provide recommendations for. Required for RELATED_ITEMS recipe type.
      */
@@ -101,10 +101,14 @@ declare namespace PersonalizeRuntime {
      * The values to use when filtering recommendations. For each placeholder parameter in your filter expression, provide the parameter name (in matching case) as a key and the filter value(s) as the corresponding value. Separate multiple values for one parameter with a comma.  For filter expressions that use an INCLUDE element to include items, you must provide values for all parameters that are defined in the expression. For filters with expressions that use an EXCLUDE element to exclude items, you can omit the filter-values.In this case, Amazon Personalize doesn't use that portion of the expression to filter recommendations. For more information, see Filtering Recommendations.
      */
     filterValues?: FilterValues;
+    /**
+     * The Amazon Resource Name (ARN) of the recommender to use to get recommendations. Provide a recommender ARN if you created a Domain dataset group with a recommender for a domain use case.
+     */
+    recommenderArn?: Arn;
   }
   export interface GetRecommendationsResponse {
     /**
-     * A list of recommendations sorted in ascending order by prediction score. There can be a maximum of 500 items in the list.
+     * A list of recommendations sorted in descending order by prediction score. There can be a maximum of 500 items in the list.
      */
     itemList?: ItemList;
     /**

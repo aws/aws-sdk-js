@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1037.0-->
+<!--LATEST=2.1038.0-->
 <!--ENTRYINSERT-->
+
+## 2.1038.0
+* feature: MigrationHubRefactorSpaces: This is the initial SDK release for AWS Migration Hub Refactor Spaces
+* feature: Personalize: This release adds API support for Recommenders and BatchSegmentJobs.
+* feature: PersonalizeRuntime: This release adds inference support for Recommenders.
+* feature: Textract: This release adds support for synchronously analyzing identity documents through a new API: AnalyzeID
 
 ## 2.1037.0
 * feature: EC2: Documentation updates for EC2.

@@ -20,13 +20,21 @@ declare class Textract extends Service {
    */
   analyzeDocument(callback?: (err: AWSError, data: Textract.Types.AnalyzeDocumentResponse) => void): Request<Textract.Types.AnalyzeDocumentResponse, AWSError>;
   /**
-   * Analyzes an input document for financially related relationships between text. Information is returned as ExpenseDocuments and seperated as follows.    LineItemGroups- A data set containing LineItems which store information about the lines of text, such as an item purchased and its price on a receipt.    SummaryFields- Contains all other information a receipt, such as header information or the vendors name.  
+   *  AnalyzeExpense synchronously analyzes an input document for financially related relationships between text. Information is returned as ExpenseDocuments and seperated as follows.    LineItemGroups- A data set containing LineItems which store information about the lines of text, such as an item purchased and its price on a receipt.    SummaryFields- Contains all other information a receipt, such as header information or the vendors name.  
    */
   analyzeExpense(params: Textract.Types.AnalyzeExpenseRequest, callback?: (err: AWSError, data: Textract.Types.AnalyzeExpenseResponse) => void): Request<Textract.Types.AnalyzeExpenseResponse, AWSError>;
   /**
-   * Analyzes an input document for financially related relationships between text. Information is returned as ExpenseDocuments and seperated as follows.    LineItemGroups- A data set containing LineItems which store information about the lines of text, such as an item purchased and its price on a receipt.    SummaryFields- Contains all other information a receipt, such as header information or the vendors name.  
+   *  AnalyzeExpense synchronously analyzes an input document for financially related relationships between text. Information is returned as ExpenseDocuments and seperated as follows.    LineItemGroups- A data set containing LineItems which store information about the lines of text, such as an item purchased and its price on a receipt.    SummaryFields- Contains all other information a receipt, such as header information or the vendors name.  
    */
   analyzeExpense(callback?: (err: AWSError, data: Textract.Types.AnalyzeExpenseResponse) => void): Request<Textract.Types.AnalyzeExpenseResponse, AWSError>;
+  /**
+   * Analyzes identity documents for relevant information. This information is extracted and returned as IdentityDocumentFields, which records both the normalized field and value of the extracted text.
+   */
+  analyzeID(params: Textract.Types.AnalyzeIDRequest, callback?: (err: AWSError, data: Textract.Types.AnalyzeIDResponse) => void): Request<Textract.Types.AnalyzeIDResponse, AWSError>;
+  /**
+   * Analyzes identity documents for relevant information. This information is extracted and returned as IdentityDocumentFields, which records both the normalized field and value of the extracted text.
+   */
+  analyzeID(callback?: (err: AWSError, data: Textract.Types.AnalyzeIDResponse) => void): Request<Textract.Types.AnalyzeIDResponse, AWSError>;
   /**
    * Detects text in the input document. Amazon Textract can detect lines of text and the words that make up a line of text. The input document must be an image in JPEG or PNG format. DetectDocumentText returns the detected text in an array of Block objects.  Each document page has as an associated Block of type PAGE. Each PAGE Block object is the parent of LINE Block objects that represent the lines of detected text on a page. A LINE Block object is a parent for each word that makes up the line. Words are represented by Block objects of type WORD.  DetectDocumentText is a synchronous operation. To analyze documents asynchronously, use StartDocumentTextDetection. For more information, see Document Text Detection.
    */
@@ -126,6 +134,37 @@ declare namespace Textract {
      * The expenses detected by Amazon Textract.
      */
     ExpenseDocuments?: ExpenseDocumentList;
+  }
+  export interface AnalyzeIDDetections {
+    /**
+     * Text of either the normalized field or value associated with it.
+     */
+    Text: String;
+    /**
+     * Only returned for dates, returns the type of value detected and the date written in a more machine readable way.
+     */
+    NormalizedValue?: NormalizedValue;
+    /**
+     * The confidence score of the detected text.
+     */
+    Confidence?: Percent;
+  }
+  export interface AnalyzeIDRequest {
+    /**
+     * The document being passed to AnalyzeID.
+     */
+    DocumentPages: DocumentPages;
+  }
+  export interface AnalyzeIDResponse {
+    /**
+     * The list of documents processed by AnalyzeID. Includes a number denoting their place in the list and the response structure for the document.
+     */
+    IdentityDocuments?: IdentityDocumentList;
+    DocumentMetadata?: DocumentMetadata;
+    /**
+     * The version of the AnalyzeIdentity API being used to process documents.
+     */
+    AnalyzeIDModelVersion?: String;
   }
   export interface Block {
     /**
@@ -250,6 +289,7 @@ declare namespace Textract {
      */
     Pages?: UInteger;
   }
+  export type DocumentPages = Document[];
   export type EntityType = "KEY"|"VALUE"|string;
   export type EntityTypes = EntityType[];
   export type ErrorCode = string;
@@ -494,6 +534,22 @@ declare namespace Textract {
   }
   export type HumanLoopName = string;
   export type IdList = NonEmptyString[];
+  export interface IdentityDocument {
+    /**
+     * Denotes the placement of a document in the IdentityDocument list. The first document is marked 1, the second 2 and so on.
+     */
+    DocumentIndex?: UInteger;
+    /**
+     * The structure used to record information extracted from identity documents. Contains both normalized field and value of the extracted text.
+     */
+    IdentityDocumentFields?: IdentityDocumentFieldList;
+  }
+  export interface IdentityDocumentField {
+    Type?: AnalyzeIDDetections;
+    ValueDetection?: AnalyzeIDDetections;
+  }
+  export type IdentityDocumentFieldList = IdentityDocumentField[];
+  export type IdentityDocumentList = IdentityDocument[];
   export type ImageBlob = Buffer|Uint8Array|Blob|string;
   export type JobId = string;
   export type JobStatus = "IN_PROGRESS"|"SUCCEEDED"|"FAILED"|"PARTIAL_SUCCESS"|string;
@@ -519,6 +575,16 @@ declare namespace Textract {
   export type LineItemList = LineItemFields[];
   export type MaxResults = number;
   export type NonEmptyString = string;
+  export interface NormalizedValue {
+    /**
+     * The value of the date, written as Year-Month-DayTHour:Minute:Second.
+     */
+    Value?: String;
+    /**
+     * The normalized type of the value detected. In this case, DATE.
+     */
+    ValueType?: ValueType;
+  }
   export interface NotificationChannel {
     /**
      * The Amazon SNS topic that Amazon Textract posts the completion status to.
@@ -689,6 +755,7 @@ declare namespace Textract {
   export type String = string;
   export type TextType = "HANDWRITING"|"PRINTED"|string;
   export type UInteger = number;
+  export type ValueType = "DATE"|string;
   export interface Warning {
     /**
      * The error code for the warning.

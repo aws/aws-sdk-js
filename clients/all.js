@@ -290,5 +290,6 @@ module.exports = {
   Resiliencehub: require('./resiliencehub'),
   MigrationHubStrategy: require('./migrationhubstrategy'),
   AppConfigData: require('./appconfigdata'),
-  Drs: require('./drs')
+  Drs: require('./drs'),
+  MigrationHubRefactorSpaces: require('./migrationhubrefactorspaces')
 };

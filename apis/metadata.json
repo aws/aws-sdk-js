@@ -1109,5 +1109,9 @@
   },
   "drs": {
     "name": "Drs"
+  },
+  "migrationhubrefactorspaces": {
+    "prefix": "migration-hub-refactor-spaces",
+    "name": "MigrationHubRefactorSpaces"
   }
 }
