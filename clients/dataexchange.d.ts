@@ -172,6 +172,14 @@ declare class DataExchange extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: DataExchange.Types.ListTagsForResourceResponse) => void): Request<DataExchange.Types.ListTagsForResourceResponse, AWSError>;
   /**
+   * This operation invokes an API Gateway API asset. The request is proxied to the provider’s API Gateway API.
+   */
+  sendApiAsset(params: DataExchange.Types.SendApiAssetRequest, callback?: (err: AWSError, data: DataExchange.Types.SendApiAssetResponse) => void): Request<DataExchange.Types.SendApiAssetResponse, AWSError>;
+  /**
+   * This operation invokes an API Gateway API asset. The request is proxied to the provider’s API Gateway API.
+   */
+  sendApiAsset(callback?: (err: AWSError, data: DataExchange.Types.SendApiAssetResponse) => void): Request<DataExchange.Types.SendApiAssetResponse, AWSError>;
+  /**
    * This operation starts a job.
    */
   startJob(params: DataExchange.Types.StartJobRequest, callback?: (err: AWSError, data: DataExchange.Types.StartJobResponse) => void): Request<DataExchange.Types.StartJobResponse, AWSError>;
@@ -235,6 +243,45 @@ declare namespace DataExchange {
      */
     ExportRevisionToS3?: AutoExportRevisionToS3RequestDetails;
   }
+  export type ApiDescription = string;
+  export interface ApiGatewayApiAsset {
+    /**
+     * The API description of the API asset.
+     */
+    ApiDescription?: ApiDescription;
+    /**
+     * The API endpoint of the API asset.
+     */
+    ApiEndpoint?: __string;
+    /**
+     * The unique identifier of the API asset.
+     */
+    ApiId?: __string;
+    /**
+     * The API key of the API asset.
+     */
+    ApiKey?: __string;
+    /**
+     * The API name of the API asset.
+     */
+    ApiName?: __string;
+    /**
+     * The download URL of the API specification of the API asset.
+     */
+    ApiSpecificationDownloadUrl?: __string;
+    /**
+     * The date and time that the upload URL expires, in ISO 8601 format.
+     */
+    ApiSpecificationDownloadUrlExpiresAt?: Timestamp;
+    /**
+     * The protocol type of the API asset.
+     */
+    ProtocolType?: ProtocolType;
+    /**
+     * The stage of the API asset.
+     */
+    Stage?: __string;
+  }
   export type Arn = string;
   export interface AssetDestinationEntry {
     /**
@@ -259,6 +306,10 @@ declare namespace DataExchange {
      * The Amazon Redshift datashare that is the asset.
      */
     RedshiftDataShareAsset?: RedshiftDataShareAsset;
+    /**
+     * Information about the API Gateway API asset.
+     */
+    ApiGatewayApiAsset?: ApiGatewayApiAsset;
   }
   export interface AssetEntry {
     /**
@@ -286,7 +337,7 @@ declare namespace DataExchange {
      */
     Id: Id;
     /**
-     * The name of the asset. When importing from Amazon S3, the S3 object key is used as the asset name. When exporting to Amazon S3, the asset name is used as default target S3 object key.
+     * The name of the asset. When importing from Amazon S3, the S3 object key is used as the asset name. When exporting to Amazon S3, the asset name is used as default target S3 object key. When importing from Amazon API Gateway API, the API name is used as the asset name. When importing from Amazon Redshift, the datashare name is used as the asset name.
      */
     Name: AssetName;
     /**
@@ -313,7 +364,7 @@ declare namespace DataExchange {
      */
     Key: __string;
   }
-  export type AssetType = "S3_SNAPSHOT"|"REDSHIFT_DATA_SHARE"|string;
+  export type AssetType = "S3_SNAPSHOT"|"REDSHIFT_DATA_SHARE"|"API_GATEWAY_API"|string;
   export interface AutoExportRevisionDestinationEntry {
     /**
      * The S3 bucket that is the destination for the event action.
@@ -812,7 +863,7 @@ declare namespace DataExchange {
      */
     Id?: Id;
     /**
-     * The name of the asset. When importing from Amazon S3, the S3 object key is used as the asset name. When exporting to Amazon S3, the asset name is used as default target S3 object key.
+     * The name of the asset. When importing from Amazon S3, the S3 object key is used as the asset name. When exporting to Amazon S3, the asset name is used as default target S3 object key. When importing from Amazon API Gateway API, the API name is used as the asset name. When importing from Amazon Redshift, the datashare name is used as the asset name.
      */
     Name?: AssetName;
     /**
@@ -1001,6 +1052,90 @@ declare namespace DataExchange {
     UpdatedAt?: Timestamp;
   }
   export type Id = string;
+  export interface ImportAssetFromApiGatewayApiRequestDetails {
+    /**
+     * The API description. Markdown supported.
+     */
+    ApiDescription?: ApiDescription;
+    /**
+     * The API Gateway API ID.
+     */
+    ApiId: __string;
+    /**
+     * The API Gateway API key.
+     */
+    ApiKey?: __string;
+    /**
+     * The API name.
+     */
+    ApiName: __string;
+    /**
+     * The Base64-encoded MD5 hash of the OpenAPI 3.0 JSON API specification file. It is used to ensure the integrity of the file.
+     */
+    ApiSpecificationMd5Hash: __stringMin24Max24PatternAZaZ094AZaZ092AZaZ093;
+    /**
+     * The data set ID.
+     */
+    DataSetId: Id;
+    /**
+     * The protocol type.
+     */
+    ProtocolType: ProtocolType;
+    /**
+     * The revision ID.
+     */
+    RevisionId: Id;
+    /**
+     * The API stage.
+     */
+    Stage: __string;
+  }
+  export interface ImportAssetFromApiGatewayApiResponseDetails {
+    /**
+     * The API description.
+     */
+    ApiDescription?: ApiDescription;
+    /**
+     * The API ID.
+     */
+    ApiId: __string;
+    /**
+     * The API key.
+     */
+    ApiKey?: __string;
+    /**
+     * The API name.
+     */
+    ApiName: __string;
+    /**
+     * The Base64-encoded Md5 hash for the API asset, used to ensure the integrity of the API at that location.
+     */
+    ApiSpecificationMd5Hash: __stringMin24Max24PatternAZaZ094AZaZ092AZaZ093;
+    /**
+     * The upload URL of the API specification.
+     */
+    ApiSpecificationUploadUrl: __string;
+    /**
+     * The date and time that the upload URL expires, in ISO 8601 format.
+     */
+    ApiSpecificationUploadUrlExpiresAt: Timestamp;
+    /**
+     * The data set ID.
+     */
+    DataSetId: Id;
+    /**
+     * The protocol type.
+     */
+    ProtocolType: ProtocolType;
+    /**
+     * The revision ID.
+     */
+    RevisionId: Id;
+    /**
+     * The API stage.
+     */
+    Stage: __string;
+  }
   export interface ImportAssetFromSignedUrlJobErrorDetails {
     /**
      * Information about the job error.
@@ -1327,6 +1462,7 @@ declare namespace DataExchange {
      */
     ProductId: __string;
   }
+  export type ProtocolType = "REST"|string;
   export interface RedshiftDataShareAsset {
     /**
      * The Amazon Resource Name (ARN) of the datashare asset.
@@ -1364,6 +1500,10 @@ declare namespace DataExchange {
      * Details from an import from Amazon Redshift datashare request.
      */
     ImportAssetsFromRedshiftDataShares?: ImportAssetsFromRedshiftDataSharesRequestDetails;
+    /**
+     * Information about the import asset from API Gateway API request.
+     */
+    ImportAssetFromApiGatewayApi?: ImportAssetFromApiGatewayApiRequestDetails;
   }
   export interface ResponseDetails {
     /**
@@ -1390,6 +1530,10 @@ declare namespace DataExchange {
      * Details from an import from Amazon Redshift datashare response.
      */
     ImportAssetsFromRedshiftDataShares?: ImportAssetsFromRedshiftDataSharesResponseDetails;
+    /**
+     * The response details.
+     */
+    ImportAssetFromApiGatewayApi?: ImportAssetFromApiGatewayApiResponseDetails;
   }
   export interface RevisionDestinationEntry {
     /**
@@ -1451,6 +1595,50 @@ declare namespace DataExchange {
      */
     Size: __doubleMin0;
   }
+  export interface SendApiAssetRequest {
+    /**
+     * The request body.
+     */
+    Body?: __string;
+    /**
+     * Attach query string parameters to the end of the URI (for example, /v1/examplePath?exampleParam=exampleValue).
+     */
+    QueryStringParameters?: MapOf__string;
+    /**
+     * Asset ID value for the API request.
+     */
+    AssetId: __string;
+    /**
+     * Data set ID value for the API request.
+     */
+    DataSetId: __string;
+    /**
+     * Any header value prefixed with x-amzn-dataexchange-header- will have that stripped before sending the Asset API request. Use this when you want to override a header that AWS Data Exchange uses. Alternatively, you can use the header without a prefix to the HTTP request.
+     */
+    RequestHeaders?: MapOf__string;
+    /**
+     * HTTP method value for the API request. Alternatively, you can use the appropriate verb in your request.
+     */
+    Method?: __string;
+    /**
+     * URI path value for the API request. Alternatively, you can set the URI path directly by invoking /v1/{pathValue}
+     */
+    Path?: __string;
+    /**
+     * Revision ID value for the API request.
+     */
+    RevisionId: __string;
+  }
+  export interface SendApiAssetResponse {
+    /**
+     * The response body from the underlying API tracked by the API asset.
+     */
+    Body?: __string;
+    /**
+     * The response headers from the underlying API tracked by the API asset.
+     */
+    ResponseHeaders?: MapOf__string;
+  }
   export type ServerSideEncryptionTypes = "aws:kms"|"AES256"|string;
   export interface StartJobRequest {
     /**
@@ -1472,7 +1660,7 @@ declare namespace DataExchange {
     Tags: MapOf__string;
   }
   export type Timestamp = Date;
-  export type Type = "IMPORT_ASSETS_FROM_S3"|"IMPORT_ASSET_FROM_SIGNED_URL"|"EXPORT_ASSETS_TO_S3"|"EXPORT_ASSET_TO_SIGNED_URL"|"EXPORT_REVISIONS_TO_S3"|"IMPORT_ASSETS_FROM_REDSHIFT_DATA_SHARES"|string;
+  export type Type = "IMPORT_ASSETS_FROM_S3"|"IMPORT_ASSET_FROM_SIGNED_URL"|"EXPORT_ASSETS_TO_S3"|"EXPORT_ASSET_TO_SIGNED_URL"|"EXPORT_REVISIONS_TO_S3"|"IMPORT_ASSETS_FROM_REDSHIFT_DATA_SHARES"|"IMPORT_ASSET_FROM_API_GATEWAY_API"|string;
   export interface UntagResourceRequest {
     /**
      * An Amazon Resource Name (ARN) that uniquely identifies an AWS resource.
@@ -1493,7 +1681,7 @@ declare namespace DataExchange {
      */
     DataSetId: __string;
     /**
-     * The name of the asset. When importing from Amazon S3, the S3 object key is used as the asset name. When exporting to Amazon S3, the asset name is used as default target S3 object key.
+     * The name of the asset. When importing from Amazon S3, the S3 object key is used as the asset name. When exporting to Amazon S3, the asset name is used as default target S3 object key. When importing from Amazon API Gateway API, the API name is used as the asset name. When importing from Amazon Redshift, the datashare name is used as the asset name.
      */
     Name: AssetName;
     /**
@@ -1527,7 +1715,7 @@ declare namespace DataExchange {
      */
     Id?: Id;
     /**
-     * The name of the asset. When importing from Amazon S3, the S3 object key is used as the asset name. When exporting to Amazon S3, the asset name is used as default target S3 object key.
+     * The name of the asset. When importing from Amazon S3, the S3 object key is used as the asset name. When exporting to Amazon S3, the asset name is used as default target S3 object key. When importing from Amazon API Gateway API, the API name is used as the asset name. When importing from Amazon Redshift, the datashare name is used as the asset name.
      */
     Name?: AssetName;
     /**

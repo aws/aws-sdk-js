@@ -12,6 +12,14 @@ declare class ComputeOptimizer extends Service {
   constructor(options?: ComputeOptimizer.Types.ClientConfiguration)
   config: Config & ComputeOptimizer.Types.ClientConfiguration;
   /**
+   * Deletes a recommendation preference, such as enhanced infrastructure metrics. For more information, see Activating enhanced infrastructure metrics in the Compute Optimizer User Guide.
+   */
+  deleteRecommendationPreferences(params: ComputeOptimizer.Types.DeleteRecommendationPreferencesRequest, callback?: (err: AWSError, data: ComputeOptimizer.Types.DeleteRecommendationPreferencesResponse) => void): Request<ComputeOptimizer.Types.DeleteRecommendationPreferencesResponse, AWSError>;
+  /**
+   * Deletes a recommendation preference, such as enhanced infrastructure metrics. For more information, see Activating enhanced infrastructure metrics in the Compute Optimizer User Guide.
+   */
+  deleteRecommendationPreferences(callback?: (err: AWSError, data: ComputeOptimizer.Types.DeleteRecommendationPreferencesResponse) => void): Request<ComputeOptimizer.Types.DeleteRecommendationPreferencesResponse, AWSError>;
+  /**
    * Describes recommendation export jobs created in the last seven days. Use the ExportAutoScalingGroupRecommendations or ExportEC2InstanceRecommendations actions to request an export of your recommendations. Then use the DescribeRecommendationExportJobs action to view your export jobs.
    */
   describeRecommendationExportJobs(params: ComputeOptimizer.Types.DescribeRecommendationExportJobsRequest, callback?: (err: AWSError, data: ComputeOptimizer.Types.DescribeRecommendationExportJobsResponse) => void): Request<ComputeOptimizer.Types.DescribeRecommendationExportJobsResponse, AWSError>;
@@ -84,6 +92,14 @@ declare class ComputeOptimizer extends Service {
    */
   getEC2RecommendationProjectedMetrics(callback?: (err: AWSError, data: ComputeOptimizer.Types.GetEC2RecommendationProjectedMetricsResponse) => void): Request<ComputeOptimizer.Types.GetEC2RecommendationProjectedMetricsResponse, AWSError>;
   /**
+   * Returns the recommendation preferences that are in effect for a given resource, such as enhanced infrastructure metrics. Considers all applicable preferences that you might have set at the resource, account, and organization level. When you create a recommendation preference, you can set its status to Active or Inactive. Use this action to view the recommendation preferences that are in effect, or Active.
+   */
+  getEffectiveRecommendationPreferences(params: ComputeOptimizer.Types.GetEffectiveRecommendationPreferencesRequest, callback?: (err: AWSError, data: ComputeOptimizer.Types.GetEffectiveRecommendationPreferencesResponse) => void): Request<ComputeOptimizer.Types.GetEffectiveRecommendationPreferencesResponse, AWSError>;
+  /**
+   * Returns the recommendation preferences that are in effect for a given resource, such as enhanced infrastructure metrics. Considers all applicable preferences that you might have set at the resource, account, and organization level. When you create a recommendation preference, you can set its status to Active or Inactive. Use this action to view the recommendation preferences that are in effect, or Active.
+   */
+  getEffectiveRecommendationPreferences(callback?: (err: AWSError, data: ComputeOptimizer.Types.GetEffectiveRecommendationPreferencesResponse) => void): Request<ComputeOptimizer.Types.GetEffectiveRecommendationPreferencesResponse, AWSError>;
+  /**
    * Returns the enrollment (opt in) status of an account to the Compute Optimizer service. If the account is the management account of an organization, this action also confirms the enrollment status of member accounts of the organization. Use the GetEnrollmentStatusesForOrganization action to get detailed information about the enrollment status of member accounts of an organization.
    */
   getEnrollmentStatus(params: ComputeOptimizer.Types.GetEnrollmentStatusRequest, callback?: (err: AWSError, data: ComputeOptimizer.Types.GetEnrollmentStatusResponse) => void): Request<ComputeOptimizer.Types.GetEnrollmentStatusResponse, AWSError>;
@@ -108,6 +124,14 @@ declare class ComputeOptimizer extends Service {
    */
   getLambdaFunctionRecommendations(callback?: (err: AWSError, data: ComputeOptimizer.Types.GetLambdaFunctionRecommendationsResponse) => void): Request<ComputeOptimizer.Types.GetLambdaFunctionRecommendationsResponse, AWSError>;
   /**
+   * Returns existing recommendation preferences, such as enhanced infrastructure metrics. Use the scope parameter to specify which preferences to return. You can specify to return preferences for an organization, a specific account ID, or a specific EC2 instance or Auto Scaling group Amazon Resource Name (ARN). For more information, see Activating enhanced infrastructure metrics in the Compute Optimizer User Guide.
+   */
+  getRecommendationPreferences(params: ComputeOptimizer.Types.GetRecommendationPreferencesRequest, callback?: (err: AWSError, data: ComputeOptimizer.Types.GetRecommendationPreferencesResponse) => void): Request<ComputeOptimizer.Types.GetRecommendationPreferencesResponse, AWSError>;
+  /**
+   * Returns existing recommendation preferences, such as enhanced infrastructure metrics. Use the scope parameter to specify which preferences to return. You can specify to return preferences for an organization, a specific account ID, or a specific EC2 instance or Auto Scaling group Amazon Resource Name (ARN). For more information, see Activating enhanced infrastructure metrics in the Compute Optimizer User Guide.
+   */
+  getRecommendationPreferences(callback?: (err: AWSError, data: ComputeOptimizer.Types.GetRecommendationPreferencesResponse) => void): Request<ComputeOptimizer.Types.GetRecommendationPreferencesResponse, AWSError>;
+  /**
    * Returns the optimization findings for an account. It returns the number of:   Amazon EC2 instances in an account that are Underprovisioned, Overprovisioned, or Optimized.   Auto Scaling groups in an account that are NotOptimized, or Optimized.   Amazon EBS volumes in an account that are NotOptimized, or Optimized.   Lambda functions in an account that are NotOptimized, or Optimized.  
    */
   getRecommendationSummaries(params: ComputeOptimizer.Types.GetRecommendationSummariesRequest, callback?: (err: AWSError, data: ComputeOptimizer.Types.GetRecommendationSummariesResponse) => void): Request<ComputeOptimizer.Types.GetRecommendationSummariesResponse, AWSError>;
@@ -115,6 +139,14 @@ declare class ComputeOptimizer extends Service {
    * Returns the optimization findings for an account. It returns the number of:   Amazon EC2 instances in an account that are Underprovisioned, Overprovisioned, or Optimized.   Auto Scaling groups in an account that are NotOptimized, or Optimized.   Amazon EBS volumes in an account that are NotOptimized, or Optimized.   Lambda functions in an account that are NotOptimized, or Optimized.  
    */
   getRecommendationSummaries(callback?: (err: AWSError, data: ComputeOptimizer.Types.GetRecommendationSummariesResponse) => void): Request<ComputeOptimizer.Types.GetRecommendationSummariesResponse, AWSError>;
+  /**
+   * Creates a new recommendation preference or updates an existing recommendation preference, such as enhanced infrastructure metrics. For more information, see Activating enhanced infrastructure metrics in the Compute Optimizer User Guide.
+   */
+  putRecommendationPreferences(params: ComputeOptimizer.Types.PutRecommendationPreferencesRequest, callback?: (err: AWSError, data: ComputeOptimizer.Types.PutRecommendationPreferencesResponse) => void): Request<ComputeOptimizer.Types.PutRecommendationPreferencesResponse, AWSError>;
+  /**
+   * Creates a new recommendation preference or updates an existing recommendation preference, such as enhanced infrastructure metrics. For more information, see Activating enhanced infrastructure metrics in the Compute Optimizer User Guide.
+   */
+  putRecommendationPreferences(callback?: (err: AWSError, data: ComputeOptimizer.Types.PutRecommendationPreferencesResponse) => void): Request<ComputeOptimizer.Types.PutRecommendationPreferencesResponse, AWSError>;
   /**
    * Updates the enrollment (opt in and opt out) status of an account to the Compute Optimizer service. If the account is a management account of an organization, this action can also be used to enroll member accounts of the organization. You must have the appropriate permissions to opt in to Compute Optimizer, to view its recommendations, and to opt out. For more information, see Controlling access with Amazon Web Services Identity and Access Management in the Compute Optimizer User Guide. When you opt in, Compute Optimizer automatically creates a service-linked role in your account to access its data. For more information, see Using Service-Linked Roles for Compute Optimizer in the Compute Optimizer User Guide.
    */
@@ -201,9 +233,17 @@ declare namespace ComputeOptimizer {
      */
     recommendationOptions?: AutoScalingGroupRecommendationOptions;
     /**
-     * The timestamp of when the Auto Scaling group recommendation was last refreshed.
+     * The timestamp of when the Auto Scaling group recommendation was last generated.
      */
     lastRefreshTimestamp?: LastRefreshTimestamp;
+    /**
+     * The risk of the current Auto Scaling group not meeting the performance needs of its workloads. The higher the risk, the more likely the current Auto Scaling group configuration has insufficient capacity and cannot meet workload requirements.
+     */
+    currentPerformanceRisk?: CurrentPerformanceRisk;
+    /**
+     * An object that describes the effective recommendation preferences for the Auto Scaling group.
+     */
+    effectiveRecommendationPreferences?: EffectiveRecommendationPreferences;
   }
   export interface AutoScalingGroupRecommendationOption {
     /**
@@ -222,6 +262,10 @@ declare namespace ComputeOptimizer {
      * The rank of the Auto Scaling group recommendation option. The top recommendation option is ranked as 1.
      */
     rank?: Rank;
+    /**
+     * An object that describes the savings opportunity for the Auto Scaling group recommendation option. Savings opportunity includes the estimated monthly savings amount and percentage.
+     */
+    savingsOpportunity?: SavingsOpportunity;
   }
   export type AutoScalingGroupRecommendationOptions = AutoScalingGroupRecommendationOption[];
   export type AutoScalingGroupRecommendations = AutoScalingGroupRecommendation[];
@@ -229,7 +273,43 @@ declare namespace ComputeOptimizer {
   export type CpuVendorArchitecture = "AWS_ARM64"|"CURRENT"|string;
   export type CpuVendorArchitectures = CpuVendorArchitecture[];
   export type CreationTimestamp = Date;
+  export type Currency = "USD"|"CNY"|string;
   export type CurrentInstanceType = string;
+  export type CurrentPerformanceRisk = "VeryLow"|"Low"|"Medium"|"High"|string;
+  export interface CurrentPerformanceRiskRatings {
+    /**
+     * A count of the applicable resource types with a high performance risk rating.
+     */
+    high?: High;
+    /**
+     * A count of the applicable resource types with a medium performance risk rating.
+     */
+    medium?: Medium;
+    /**
+     * A count of the applicable resource types with a low performance risk rating.
+     */
+    low?: Low;
+    /**
+     * A count of the applicable resource types with a very low performance risk rating.
+     */
+    veryLow?: VeryLow;
+  }
+  export interface DeleteRecommendationPreferencesRequest {
+    /**
+     * The target resource type of the recommendation preference to delete. The Ec2Instance option encompasses standalone instances and instances that are part of Auto Scaling groups. The AutoScalingGroup option encompasses only instances that are part of an Auto Scaling group.
+     */
+    resourceType: ResourceType;
+    /**
+     * An object that describes the scope of the recommendation preference to delete. You can delete recommendation preferences that are created at the organization level (for management accounts of an organization only), account level, and resource level. For more information, see Activating enhanced infrastructure metrics in the Compute Optimizer User Guide.
+     */
+    scope?: Scope;
+    /**
+     * The name of the recommendation preference to delete. Enhanced infrastructure metrics (EnhancedInfrastructureMetrics) is the only feature that can be activated through preferences. Therefore, it is also the only recommendation preference that can be deleted.
+     */
+    recommendationPreferenceNames: RecommendationPreferenceNames;
+  }
+  export interface DeleteRecommendationPreferencesResponse {
+  }
   export interface DescribeRecommendationExportJobsRequest {
     /**
      * The identification numbers of the export jobs to return. An export job ID is returned when you create an export using the ExportAutoScalingGroupRecommendations or ExportEC2InstanceRecommendations actions. All export jobs created in the last seven days are returned if this parameter is omitted.
@@ -291,6 +371,17 @@ declare namespace ComputeOptimizer {
     value?: MetricValue;
   }
   export type EBSUtilizationMetrics = EBSUtilizationMetric[];
+  export interface EffectiveRecommendationPreferences {
+    /**
+     * Describes the CPU vendor and architecture for an instance or Auto Scaling group recommendations. For example, when you specify AWS_ARM64 with:   A GetEC2InstanceRecommendations or GetAutoScalingGroupRecommendations request, Compute Optimizer returns recommendations that consist of Graviton2 instance types only.   A GetEC2RecommendationProjectedMetrics request, Compute Optimizer returns projected utilization metrics for Graviton2 instance type recommendations only.   A ExportEC2InstanceRecommendations or ExportAutoScalingGroupRecommendations request, Compute Optimizer exports recommendations that consist of Graviton2 instance types only.  
+     */
+    cpuVendorArchitectures?: CpuVendorArchitectures;
+    /**
+     * Describes the activation status of the enhanced infrastructure metrics preference. A status of Active confirms that the preference is applied in the latest recommendation refresh, and a status of Inactive confirms that it's not yet applied.
+     */
+    enhancedInfrastructureMetrics?: EnhancedInfrastructureMetrics;
+  }
+  export type EnhancedInfrastructureMetrics = "Active"|"Inactive"|string;
   export interface EnrollmentFilter {
     /**
      * The name of the filter. Specify Status to return accounts with a specific enrollment status (for example, Active).
@@ -303,6 +394,16 @@ declare namespace ComputeOptimizer {
   }
   export type EnrollmentFilterName = "Status"|string;
   export type EnrollmentFilters = EnrollmentFilter[];
+  export interface EstimatedMonthlySavings {
+    /**
+     * The currency of the estimated monthly savings.
+     */
+    currency?: Currency;
+    /**
+     * The value of the estimated monthly savings.
+     */
+    value?: Value;
+  }
   export interface ExportAutoScalingGroupRecommendationsRequest {
     /**
      * The IDs of the Amazon Web Services accounts for which to export Auto Scaling group recommendations. If your account is the management account of an organization, use this parameter to specify the member account for which you want to export recommendations. This parameter cannot be specified together with the include member accounts parameter. The parameters are mutually exclusive. Recommendations for member accounts are not included in the export if this parameter, or the include member accounts parameter, is omitted. You can specify multiple account IDs per request.
@@ -393,7 +494,7 @@ declare namespace ComputeOptimizer {
      */
     fieldsToExport?: ExportableInstanceFields;
     /**
-     * An object to specify the destination Amazon Simple Storage Service (Amazon S3) bucket name and key prefix for the export job. You must create the destination Amazon S3 bucket for your recommendations export before you create the export job. Compute Optimizer does not create the S3 bucket for you. After you create the S3 bucket, ensure that it has the required permissions policy policy to allow Compute Optimizer to write the export file to it. If you plan to specify an object prefix when you create the export job, you must include the object prefix in the that you add to the S3 bucket. For more information, see Amazon S3 Bucket Policy for Compute Optimizer in the Compute Optimizer User Guide.
+     * An object to specify the destination Amazon Simple Storage Service (Amazon S3) bucket name and key prefix for the export job. You must create the destination Amazon S3 bucket for your recommendations export before you create the export job. Compute Optimizer does not create the S3 bucket for you. After you create the S3 bucket, ensure that it has the required permissions policy to allow Compute Optimizer to write the export file to it. If you plan to specify an object prefix when you create the export job, you must include the object prefix in the policy that you add to the S3 bucket. For more information, see Amazon S3 Bucket Policy for Compute Optimizer in the Compute Optimizer User Guide.
      */
     s3DestinationConfig: S3DestinationConfig;
     /**
@@ -449,13 +550,13 @@ declare namespace ComputeOptimizer {
     jobId?: JobId;
     s3Destination?: S3Destination;
   }
-  export type ExportableAutoScalingGroupField = "AccountId"|"AutoScalingGroupArn"|"AutoScalingGroupName"|"Finding"|"UtilizationMetricsCpuMaximum"|"UtilizationMetricsMemoryMaximum"|"UtilizationMetricsEbsReadOpsPerSecondMaximum"|"UtilizationMetricsEbsWriteOpsPerSecondMaximum"|"UtilizationMetricsEbsReadBytesPerSecondMaximum"|"UtilizationMetricsEbsWriteBytesPerSecondMaximum"|"UtilizationMetricsDiskReadOpsPerSecondMaximum"|"UtilizationMetricsDiskWriteOpsPerSecondMaximum"|"UtilizationMetricsDiskReadBytesPerSecondMaximum"|"UtilizationMetricsDiskWriteBytesPerSecondMaximum"|"UtilizationMetricsNetworkInBytesPerSecondMaximum"|"UtilizationMetricsNetworkOutBytesPerSecondMaximum"|"UtilizationMetricsNetworkPacketsInPerSecondMaximum"|"UtilizationMetricsNetworkPacketsOutPerSecondMaximum"|"LookbackPeriodInDays"|"CurrentConfigurationInstanceType"|"CurrentConfigurationDesiredCapacity"|"CurrentConfigurationMinSize"|"CurrentConfigurationMaxSize"|"CurrentOnDemandPrice"|"CurrentStandardOneYearNoUpfrontReservedPrice"|"CurrentStandardThreeYearNoUpfrontReservedPrice"|"CurrentVCpus"|"CurrentMemory"|"CurrentStorage"|"CurrentNetwork"|"RecommendationOptionsConfigurationInstanceType"|"RecommendationOptionsConfigurationDesiredCapacity"|"RecommendationOptionsConfigurationMinSize"|"RecommendationOptionsConfigurationMaxSize"|"RecommendationOptionsProjectedUtilizationMetricsCpuMaximum"|"RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum"|"RecommendationOptionsPerformanceRisk"|"RecommendationOptionsOnDemandPrice"|"RecommendationOptionsStandardOneYearNoUpfrontReservedPrice"|"RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice"|"RecommendationOptionsVcpus"|"RecommendationOptionsMemory"|"RecommendationOptionsStorage"|"RecommendationOptionsNetwork"|"LastRefreshTimestamp"|string;
+  export type ExportableAutoScalingGroupField = "AccountId"|"AutoScalingGroupArn"|"AutoScalingGroupName"|"Finding"|"UtilizationMetricsCpuMaximum"|"UtilizationMetricsMemoryMaximum"|"UtilizationMetricsEbsReadOpsPerSecondMaximum"|"UtilizationMetricsEbsWriteOpsPerSecondMaximum"|"UtilizationMetricsEbsReadBytesPerSecondMaximum"|"UtilizationMetricsEbsWriteBytesPerSecondMaximum"|"UtilizationMetricsDiskReadOpsPerSecondMaximum"|"UtilizationMetricsDiskWriteOpsPerSecondMaximum"|"UtilizationMetricsDiskReadBytesPerSecondMaximum"|"UtilizationMetricsDiskWriteBytesPerSecondMaximum"|"UtilizationMetricsNetworkInBytesPerSecondMaximum"|"UtilizationMetricsNetworkOutBytesPerSecondMaximum"|"UtilizationMetricsNetworkPacketsInPerSecondMaximum"|"UtilizationMetricsNetworkPacketsOutPerSecondMaximum"|"LookbackPeriodInDays"|"CurrentConfigurationInstanceType"|"CurrentConfigurationDesiredCapacity"|"CurrentConfigurationMinSize"|"CurrentConfigurationMaxSize"|"CurrentOnDemandPrice"|"CurrentStandardOneYearNoUpfrontReservedPrice"|"CurrentStandardThreeYearNoUpfrontReservedPrice"|"CurrentVCpus"|"CurrentMemory"|"CurrentStorage"|"CurrentNetwork"|"RecommendationOptionsConfigurationInstanceType"|"RecommendationOptionsConfigurationDesiredCapacity"|"RecommendationOptionsConfigurationMinSize"|"RecommendationOptionsConfigurationMaxSize"|"RecommendationOptionsProjectedUtilizationMetricsCpuMaximum"|"RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum"|"RecommendationOptionsPerformanceRisk"|"RecommendationOptionsOnDemandPrice"|"RecommendationOptionsStandardOneYearNoUpfrontReservedPrice"|"RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice"|"RecommendationOptionsVcpus"|"RecommendationOptionsMemory"|"RecommendationOptionsStorage"|"RecommendationOptionsNetwork"|"LastRefreshTimestamp"|"CurrentPerformanceRisk"|"RecommendationOptionsSavingsOpportunityPercentage"|"RecommendationOptionsEstimatedMonthlySavingsCurrency"|"RecommendationOptionsEstimatedMonthlySavingsValue"|"EffectiveRecommendationPreferencesCpuVendorArchitectures"|"EffectiveRecommendationPreferencesEnhancedInfrastructureMetrics"|string;
   export type ExportableAutoScalingGroupFields = ExportableAutoScalingGroupField[];
-  export type ExportableInstanceField = "AccountId"|"InstanceArn"|"InstanceName"|"Finding"|"FindingReasonCodes"|"LookbackPeriodInDays"|"CurrentInstanceType"|"UtilizationMetricsCpuMaximum"|"UtilizationMetricsMemoryMaximum"|"UtilizationMetricsEbsReadOpsPerSecondMaximum"|"UtilizationMetricsEbsWriteOpsPerSecondMaximum"|"UtilizationMetricsEbsReadBytesPerSecondMaximum"|"UtilizationMetricsEbsWriteBytesPerSecondMaximum"|"UtilizationMetricsDiskReadOpsPerSecondMaximum"|"UtilizationMetricsDiskWriteOpsPerSecondMaximum"|"UtilizationMetricsDiskReadBytesPerSecondMaximum"|"UtilizationMetricsDiskWriteBytesPerSecondMaximum"|"UtilizationMetricsNetworkInBytesPerSecondMaximum"|"UtilizationMetricsNetworkOutBytesPerSecondMaximum"|"UtilizationMetricsNetworkPacketsInPerSecondMaximum"|"UtilizationMetricsNetworkPacketsOutPerSecondMaximum"|"CurrentOnDemandPrice"|"CurrentStandardOneYearNoUpfrontReservedPrice"|"CurrentStandardThreeYearNoUpfrontReservedPrice"|"CurrentVCpus"|"CurrentMemory"|"CurrentStorage"|"CurrentNetwork"|"RecommendationOptionsInstanceType"|"RecommendationOptionsProjectedUtilizationMetricsCpuMaximum"|"RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum"|"RecommendationOptionsPlatformDifferences"|"RecommendationOptionsPerformanceRisk"|"RecommendationOptionsVcpus"|"RecommendationOptionsMemory"|"RecommendationOptionsStorage"|"RecommendationOptionsNetwork"|"RecommendationOptionsOnDemandPrice"|"RecommendationOptionsStandardOneYearNoUpfrontReservedPrice"|"RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice"|"RecommendationsSourcesRecommendationSourceArn"|"RecommendationsSourcesRecommendationSourceType"|"LastRefreshTimestamp"|string;
+  export type ExportableInstanceField = "AccountId"|"InstanceArn"|"InstanceName"|"Finding"|"FindingReasonCodes"|"LookbackPeriodInDays"|"CurrentInstanceType"|"UtilizationMetricsCpuMaximum"|"UtilizationMetricsMemoryMaximum"|"UtilizationMetricsEbsReadOpsPerSecondMaximum"|"UtilizationMetricsEbsWriteOpsPerSecondMaximum"|"UtilizationMetricsEbsReadBytesPerSecondMaximum"|"UtilizationMetricsEbsWriteBytesPerSecondMaximum"|"UtilizationMetricsDiskReadOpsPerSecondMaximum"|"UtilizationMetricsDiskWriteOpsPerSecondMaximum"|"UtilizationMetricsDiskReadBytesPerSecondMaximum"|"UtilizationMetricsDiskWriteBytesPerSecondMaximum"|"UtilizationMetricsNetworkInBytesPerSecondMaximum"|"UtilizationMetricsNetworkOutBytesPerSecondMaximum"|"UtilizationMetricsNetworkPacketsInPerSecondMaximum"|"UtilizationMetricsNetworkPacketsOutPerSecondMaximum"|"CurrentOnDemandPrice"|"CurrentStandardOneYearNoUpfrontReservedPrice"|"CurrentStandardThreeYearNoUpfrontReservedPrice"|"CurrentVCpus"|"CurrentMemory"|"CurrentStorage"|"CurrentNetwork"|"RecommendationOptionsInstanceType"|"RecommendationOptionsProjectedUtilizationMetricsCpuMaximum"|"RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum"|"RecommendationOptionsPlatformDifferences"|"RecommendationOptionsPerformanceRisk"|"RecommendationOptionsVcpus"|"RecommendationOptionsMemory"|"RecommendationOptionsStorage"|"RecommendationOptionsNetwork"|"RecommendationOptionsOnDemandPrice"|"RecommendationOptionsStandardOneYearNoUpfrontReservedPrice"|"RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice"|"RecommendationsSourcesRecommendationSourceArn"|"RecommendationsSourcesRecommendationSourceType"|"LastRefreshTimestamp"|"CurrentPerformanceRisk"|"RecommendationOptionsSavingsOpportunityPercentage"|"RecommendationOptionsEstimatedMonthlySavingsCurrency"|"RecommendationOptionsEstimatedMonthlySavingsValue"|"EffectiveRecommendationPreferencesCpuVendorArchitectures"|"EffectiveRecommendationPreferencesEnhancedInfrastructureMetrics"|string;
   export type ExportableInstanceFields = ExportableInstanceField[];
-  export type ExportableLambdaFunctionField = "AccountId"|"FunctionArn"|"FunctionVersion"|"Finding"|"FindingReasonCodes"|"NumberOfInvocations"|"UtilizationMetricsDurationMaximum"|"UtilizationMetricsDurationAverage"|"UtilizationMetricsMemoryMaximum"|"UtilizationMetricsMemoryAverage"|"LookbackPeriodInDays"|"CurrentConfigurationMemorySize"|"CurrentConfigurationTimeout"|"CurrentCostTotal"|"CurrentCostAverage"|"RecommendationOptionsConfigurationMemorySize"|"RecommendationOptionsCostLow"|"RecommendationOptionsCostHigh"|"RecommendationOptionsProjectedUtilizationMetricsDurationLowerBound"|"RecommendationOptionsProjectedUtilizationMetricsDurationUpperBound"|"RecommendationOptionsProjectedUtilizationMetricsDurationExpected"|"LastRefreshTimestamp"|string;
+  export type ExportableLambdaFunctionField = "AccountId"|"FunctionArn"|"FunctionVersion"|"Finding"|"FindingReasonCodes"|"NumberOfInvocations"|"UtilizationMetricsDurationMaximum"|"UtilizationMetricsDurationAverage"|"UtilizationMetricsMemoryMaximum"|"UtilizationMetricsMemoryAverage"|"LookbackPeriodInDays"|"CurrentConfigurationMemorySize"|"CurrentConfigurationTimeout"|"CurrentCostTotal"|"CurrentCostAverage"|"RecommendationOptionsConfigurationMemorySize"|"RecommendationOptionsCostLow"|"RecommendationOptionsCostHigh"|"RecommendationOptionsProjectedUtilizationMetricsDurationLowerBound"|"RecommendationOptionsProjectedUtilizationMetricsDurationUpperBound"|"RecommendationOptionsProjectedUtilizationMetricsDurationExpected"|"LastRefreshTimestamp"|"CurrentPerformanceRisk"|"RecommendationOptionsSavingsOpportunityPercentage"|"RecommendationOptionsEstimatedMonthlySavingsCurrency"|"RecommendationOptionsEstimatedMonthlySavingsValue"|string;
   export type ExportableLambdaFunctionFields = ExportableLambdaFunctionField[];
-  export type ExportableVolumeField = "AccountId"|"VolumeArn"|"Finding"|"UtilizationMetricsVolumeReadOpsPerSecondMaximum"|"UtilizationMetricsVolumeWriteOpsPerSecondMaximum"|"UtilizationMetricsVolumeReadBytesPerSecondMaximum"|"UtilizationMetricsVolumeWriteBytesPerSecondMaximum"|"LookbackPeriodInDays"|"CurrentConfigurationVolumeType"|"CurrentConfigurationVolumeBaselineIOPS"|"CurrentConfigurationVolumeBaselineThroughput"|"CurrentConfigurationVolumeBurstIOPS"|"CurrentConfigurationVolumeBurstThroughput"|"CurrentConfigurationVolumeSize"|"CurrentMonthlyPrice"|"RecommendationOptionsConfigurationVolumeType"|"RecommendationOptionsConfigurationVolumeBaselineIOPS"|"RecommendationOptionsConfigurationVolumeBaselineThroughput"|"RecommendationOptionsConfigurationVolumeBurstIOPS"|"RecommendationOptionsConfigurationVolumeBurstThroughput"|"RecommendationOptionsConfigurationVolumeSize"|"RecommendationOptionsMonthlyPrice"|"RecommendationOptionsPerformanceRisk"|"LastRefreshTimestamp"|string;
+  export type ExportableVolumeField = "AccountId"|"VolumeArn"|"Finding"|"UtilizationMetricsVolumeReadOpsPerSecondMaximum"|"UtilizationMetricsVolumeWriteOpsPerSecondMaximum"|"UtilizationMetricsVolumeReadBytesPerSecondMaximum"|"UtilizationMetricsVolumeWriteBytesPerSecondMaximum"|"LookbackPeriodInDays"|"CurrentConfigurationVolumeType"|"CurrentConfigurationVolumeBaselineIOPS"|"CurrentConfigurationVolumeBaselineThroughput"|"CurrentConfigurationVolumeBurstIOPS"|"CurrentConfigurationVolumeBurstThroughput"|"CurrentConfigurationVolumeSize"|"CurrentMonthlyPrice"|"RecommendationOptionsConfigurationVolumeType"|"RecommendationOptionsConfigurationVolumeBaselineIOPS"|"RecommendationOptionsConfigurationVolumeBaselineThroughput"|"RecommendationOptionsConfigurationVolumeBurstIOPS"|"RecommendationOptionsConfigurationVolumeBurstThroughput"|"RecommendationOptionsConfigurationVolumeSize"|"RecommendationOptionsMonthlyPrice"|"RecommendationOptionsPerformanceRisk"|"LastRefreshTimestamp"|"CurrentPerformanceRisk"|"RecommendationOptionsSavingsOpportunityPercentage"|"RecommendationOptionsEstimatedMonthlySavingsCurrency"|"RecommendationOptionsEstimatedMonthlySavingsValue"|string;
   export type ExportableVolumeFields = ExportableVolumeField[];
   export type FailureReason = string;
   export type FileFormat = "Csv"|string;
@@ -626,6 +727,18 @@ declare namespace ComputeOptimizer {
      */
     recommendedOptionProjectedMetrics?: RecommendedOptionProjectedMetrics;
   }
+  export interface GetEffectiveRecommendationPreferencesRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource for which to confirm effective recommendation preferences. Only EC2 instance and Auto Scaling group ARNs are currently supported.
+     */
+    resourceArn: ResourceArn;
+  }
+  export interface GetEffectiveRecommendationPreferencesResponse {
+    /**
+     * The status of the enhanced infrastructure metrics recommendation preference. Considers all applicable preferences that you might have set at the resource, account, and organization level. A status of Active confirms that the preference is applied in the latest recommendation refresh, and a status of Inactive confirms that it's not yet applied. To validate whether the preference is applied to your last generated set of recommendations, review the effectiveRecommendationPreferences value in the response of the GetAutoScalingGroupRecommendations and GetEC2InstanceRecommendations actions.
+     */
+    enhancedInfrastructureMetrics?: EnhancedInfrastructureMetrics;
+  }
   export interface GetEnrollmentStatusRequest {
   }
   export interface GetEnrollmentStatusResponse {
@@ -721,6 +834,34 @@ declare namespace ComputeOptimizer {
     message?: Message;
   }
   export type GetRecommendationErrors = GetRecommendationError[];
+  export interface GetRecommendationPreferencesRequest {
+    /**
+     * The target resource type of the recommendation preference for which to return preferences. The Ec2Instance option encompasses standalone instances and instances that are part of Auto Scaling groups. The AutoScalingGroup option encompasses only instances that are part of an Auto Scaling group.
+     */
+    resourceType: ResourceType;
+    /**
+     * An object that describes the scope of the recommendation preference to return. You can return recommendation preferences that are created at the organization level (for management accounts of an organization only), account level, and resource level. For more information, see Activating enhanced infrastructure metrics in the Compute Optimizer User Guide.
+     */
+    scope?: Scope;
+    /**
+     * The token to advance to the next page of recommendation preferences.
+     */
+    nextToken?: NextToken;
+    /**
+     * The maximum number of recommendation preferences to return with a single request. To retrieve the remaining results, make another request with the returned nextToken value.
+     */
+    maxResults?: MaxResults;
+  }
+  export interface GetRecommendationPreferencesResponse {
+    /**
+     * The token to use to advance to the next page of recommendation preferences. This value is null when there are no more pages of recommendation preferences to return.
+     */
+    nextToken?: NextToken;
+    /**
+     * An array of objects that describe recommendation preferences.
+     */
+    recommendationPreferencesDetails?: RecommendationPreferencesDetails;
+  }
   export interface GetRecommendationSummariesRequest {
     /**
      * The ID of the Amazon Web Services account for which to return recommendation summaries. If your account is the management account of an organization, use this parameter to specify the member account for which you want to return recommendation summaries. Only one account ID can be specified per request.
@@ -745,6 +886,7 @@ declare namespace ComputeOptimizer {
      */
     recommendationSummaries?: RecommendationSummaries;
   }
+  export type High = number;
   export type Identifier = string;
   export type IncludeMemberAccounts = boolean;
   export type InstanceArn = string;
@@ -792,9 +934,17 @@ declare namespace ComputeOptimizer {
      */
     recommendationSources?: RecommendationSources;
     /**
-     * The timestamp of when the instance recommendation was last refreshed.
+     * The timestamp of when the instance recommendation was last generated.
      */
     lastRefreshTimestamp?: LastRefreshTimestamp;
+    /**
+     * The risk of the current instance not meeting the performance needs of its workloads. The higher the risk, the more likely the current Lambda function requires more memory.
+     */
+    currentPerformanceRisk?: CurrentPerformanceRisk;
+    /**
+     * An object that describes the effective recommendation preferences for the instance.
+     */
+    effectiveRecommendationPreferences?: EffectiveRecommendationPreferences;
   }
   export type InstanceRecommendationFindingReasonCode = "CPUOverprovisioned"|"CPUUnderprovisioned"|"MemoryOverprovisioned"|"MemoryUnderprovisioned"|"EBSThroughputOverprovisioned"|"EBSThroughputUnderprovisioned"|"EBSIOPSOverprovisioned"|"EBSIOPSUnderprovisioned"|"NetworkBandwidthOverprovisioned"|"NetworkBandwidthUnderprovisioned"|"NetworkPPSOverprovisioned"|"NetworkPPSUnderprovisioned"|"DiskIOPSOverprovisioned"|"DiskIOPSUnderprovisioned"|"DiskThroughputOverprovisioned"|"DiskThroughputUnderprovisioned"|string;
   export type InstanceRecommendationFindingReasonCodes = InstanceRecommendationFindingReasonCode[];
@@ -819,6 +969,10 @@ declare namespace ComputeOptimizer {
      * The rank of the instance recommendation option. The top recommendation option is ranked as 1.
      */
     rank?: Rank;
+    /**
+     * An object that describes the savings opportunity for the instance recommendation option. Savings opportunity includes the estimated monthly savings amount and percentage.
+     */
+    savingsOpportunity?: SavingsOpportunity;
   }
   export type InstanceRecommendations = InstanceRecommendation[];
   export type InstanceType = string;
@@ -867,6 +1021,10 @@ declare namespace ComputeOptimizer {
      * An array of objects that describe the projected utilization metrics of the function recommendation option.
      */
     projectedUtilizationMetrics?: LambdaFunctionMemoryProjectedMetrics;
+    /**
+     * An object that describes the savings opportunity for the Lambda function recommendation option. Savings opportunity includes the estimated monthly savings amount and percentage.
+     */
+    savingsOpportunity?: SavingsOpportunity;
   }
   export type LambdaFunctionMemoryRecommendationOptions = LambdaFunctionMemoryRecommendationOption[];
   export type LambdaFunctionMetricName = "Duration"|"Memory"|string;
@@ -901,7 +1059,7 @@ declare namespace ComputeOptimizer {
      */
     lookbackPeriodInDays?: LookBackPeriodInDays;
     /**
-     * The timestamp of when the function recommendation was last refreshed.
+     * The timestamp of when the function recommendation was last generated.
      */
     lastRefreshTimestamp?: LastRefreshTimestamp;
     /**
@@ -916,6 +1074,10 @@ declare namespace ComputeOptimizer {
      * An array of objects that describe the memory configuration recommendation options for the function.
      */
     memorySizeRecommendationOptions?: LambdaFunctionMemoryRecommendationOptions;
+    /**
+     * The risk of the current Lambda function not meeting the performance needs of its workloads. The higher the risk, the more likely the current Lambda function configuration is underperforming in its workload.
+     */
+    currentPerformanceRisk?: CurrentPerformanceRisk;
   }
   export interface LambdaFunctionRecommendationFilter {
     /**
@@ -951,8 +1113,10 @@ declare namespace ComputeOptimizer {
   export type LastRefreshTimestamp = Date;
   export type LastUpdatedTimestamp = Date;
   export type LookBackPeriodInDays = number;
+  export type Low = number;
   export type MaxResults = number;
   export type MaxSize = number;
+  export type Medium = number;
   export type MemberAccountsEnrolled = boolean;
   export type MemorySize = number;
   export type Message = string;
@@ -985,6 +1149,22 @@ declare namespace ComputeOptimizer {
   }
   export type ProjectedMetrics = ProjectedMetric[];
   export type ProjectedUtilizationMetrics = UtilizationMetric[];
+  export interface PutRecommendationPreferencesRequest {
+    /**
+     * The target resource type of the recommendation preference to create. The Ec2Instance option encompasses standalone instances and instances that are part of Auto Scaling groups. The AutoScalingGroup option encompasses only instances that are part of an Auto Scaling group.
+     */
+    resourceType: ResourceType;
+    /**
+     * An object that describes the scope of the recommendation preference to create. You can create recommendation preferences at the organization level (for management accounts of an organization only), account level, and resource level. For more information, see Activating enhanced infrastructure metrics in the Compute Optimizer User Guide.  You cannot create recommendation preferences for Auto Scaling groups at the organization and account levels. You can create recommendation preferences for Auto Scaling groups only at the resource level by specifying a scope name of ResourceArn and a scope value of the Auto Scaling group Amazon Resource Name (ARN). This will configure the preference for all instances that are part of the specified the Auto Scaling group. 
+     */
+    scope?: Scope;
+    /**
+     * The status of the enhanced infrastructure metrics recommendation preference to create or update. A status of Active confirms that the preference is applied in the latest recommendation refresh, and a status of Inactive confirms that it's not yet applied.
+     */
+    enhancedInfrastructureMetrics?: EnhancedInfrastructureMetrics;
+  }
+  export interface PutRecommendationPreferencesResponse {
+  }
   export type Rank = number;
   export type ReasonCodeSummaries = ReasonCodeSummary[];
   export interface ReasonCodeSummary {
@@ -1029,12 +1209,29 @@ declare namespace ComputeOptimizer {
   }
   export type RecommendationExportJobs = RecommendationExportJob[];
   export type RecommendationOptions = InstanceRecommendationOption[];
+  export type RecommendationPreferenceName = "EnhancedInfrastructureMetrics"|string;
+  export type RecommendationPreferenceNames = RecommendationPreferenceName[];
   export interface RecommendationPreferences {
     /**
      * Specifies the CPU vendor and architecture for Amazon EC2 instance and Auto Scaling group recommendations. For example, when you specify AWS_ARM64 with:   A GetEC2InstanceRecommendations or GetAutoScalingGroupRecommendations request, Compute Optimizer returns recommendations that consist of Graviton2 instance types only.   A GetEC2RecommendationProjectedMetrics request, Compute Optimizer returns projected utilization metrics for Graviton2 instance type recommendations only.   A ExportEC2InstanceRecommendations or ExportAutoScalingGroupRecommendations request, Compute Optimizer exports recommendations that consist of Graviton2 instance types only.  
      */
     cpuVendorArchitectures?: CpuVendorArchitectures;
   }
+  export interface RecommendationPreferencesDetail {
+    /**
+     * An object that describes the scope of the recommendation preference. Recommendation preferences can be created at the organization level (for management accounts of an organization only), account level, and resource level. For more information, see Activating enhanced infrastructure metrics in the Compute Optimizer User Guide.
+     */
+    scope?: Scope;
+    /**
+     * The target resource type of the recommendation preference to create. The Ec2Instance option encompasses standalone instances and instances that are part of Auto Scaling groups. The AutoScalingGroup option encompasses only instances that are part of an Auto Scaling group.
+     */
+    resourceType?: ResourceType;
+    /**
+     * The status of the enhanced infrastructure metrics recommendation preference. A status of Active confirms that the preference is applied in the latest recommendation refresh, and a status of Inactive confirms that it's not yet applied.
+     */
+    enhancedInfrastructureMetrics?: EnhancedInfrastructureMetrics;
+  }
+  export type RecommendationPreferencesDetails = RecommendationPreferencesDetail[];
   export interface RecommendationSource {
     /**
      * The Amazon Resource Name (ARN) of the recommendation source.
@@ -1055,13 +1252,21 @@ declare namespace ComputeOptimizer {
      */
     summaries?: Summaries;
     /**
-     * The resource type of the recommendation.
+     * The resource type that the recommendation summary applies to.
      */
     recommendationResourceType?: RecommendationSourceType;
     /**
      * The Amazon Web Services account ID of the recommendation summary.
      */
     accountId?: AccountId;
+    /**
+     * An object that describes the savings opportunity for a given resource type. Savings opportunity includes the estimated monthly savings amount and percentage.
+     */
+    savingsOpportunity?: SavingsOpportunity;
+    /**
+     * An object that describes the performance risk ratings for a given resource type.
+     */
+    currentPerformanceRiskRatings?: CurrentPerformanceRiskRatings;
   }
   export type RecommendedInstanceType = string;
   export interface RecommendedOptionProjectedMetric {
@@ -1079,6 +1284,7 @@ declare namespace ComputeOptimizer {
     projectedMetrics?: ProjectedMetrics;
   }
   export type RecommendedOptionProjectedMetrics = RecommendedOptionProjectedMetric[];
+  export type ResourceArn = string;
   export type ResourceType = "Ec2Instance"|"AutoScalingGroup"|"EbsVolume"|"LambdaFunction"|string;
   export interface S3Destination {
     /**
@@ -1104,6 +1310,29 @@ declare namespace ComputeOptimizer {
      */
     keyPrefix?: DestinationKeyPrefix;
   }
+  export interface SavingsOpportunity {
+    /**
+     * The estimated monthly savings possible as a percentage of monthly cost.
+     */
+    savingsOpportunityPercentage?: SavingsOpportunityPercentage;
+    /**
+     * An object that describes the estimated monthly savings amount possible based on On-Demand instance pricing.
+     */
+    estimatedMonthlySavings?: EstimatedMonthlySavings;
+  }
+  export type SavingsOpportunityPercentage = number;
+  export interface Scope {
+    /**
+     * The name of the scope. The following scopes are possible:    Organization - Specifies that the recommendation preference applies at the organization level, for all member accounts of an organization.    AccountId - Specifies that the recommendation preference applies at the account level, for all resources of a given resource type in an account.    ResourceArn - Specifies that the recommendation preference applies at the individual resource level.  
+     */
+    name?: ScopeName;
+    /**
+     * The value of the scope. If you specified the name of the scope as:    Organization - The value must be ALL_ACCOUNTS.    AccountId - The value must be a 12-digit Amazon Web Services account ID.    ResourceArn - The value must be the Amazon Resource Name (ARN) of an EC2 instance or an Auto Scaling group.   Only EC2 instance and Auto Scaling group ARNs are currently supported.
+     */
+    value?: ScopeValue;
+  }
+  export type ScopeName = "Organization"|"AccountId"|"ResourceArn"|string;
+  export type ScopeValue = string;
   export type Status = "Active"|"Inactive"|"Pending"|"Failed"|string;
   export type StatusReason = string;
   export type Summaries = Summary[];
@@ -1159,6 +1388,8 @@ declare namespace ComputeOptimizer {
     value?: MetricValue;
   }
   export type UtilizationMetrics = UtilizationMetric[];
+  export type Value = number;
+  export type VeryLow = number;
   export type VolumeArn = string;
   export type VolumeArns = VolumeArn[];
   export type VolumeBaselineIOPS = number;
@@ -1221,9 +1452,13 @@ declare namespace ComputeOptimizer {
      */
     volumeRecommendationOptions?: VolumeRecommendationOptions;
     /**
-     * The timestamp of when the volume recommendation was last refreshed.
+     * The timestamp of when the volume recommendation was last generated.
      */
     lastRefreshTimestamp?: LastRefreshTimestamp;
+    /**
+     * The risk of the current EBS volume not meeting the performance needs of its workloads. The higher the risk, the more likely the current EBS volume doesn't have sufficient capacity.
+     */
+    currentPerformanceRisk?: CurrentPerformanceRisk;
   }
   export interface VolumeRecommendationOption {
     /**
@@ -1238,6 +1473,10 @@ declare namespace ComputeOptimizer {
      * The rank of the volume recommendation option. The top recommendation option is ranked as 1.
      */
     rank?: Rank;
+    /**
+     * An object that describes the savings opportunity for the EBS volume recommendation option. Savings opportunity includes the estimated monthly savings amount and percentage.
+     */
+    savingsOpportunity?: SavingsOpportunity;
   }
   export type VolumeRecommendationOptions = VolumeRecommendationOption[];
   export type VolumeRecommendations = VolumeRecommendation[];

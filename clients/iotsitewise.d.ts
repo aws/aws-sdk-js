@@ -1379,7 +1379,7 @@ declare namespace IoTSiteWise {
      */
     tags?: TagMap;
     /**
-     * The service to use to authenticate users to the portal. Choose from the following options:    SSO – The portal uses Amazon Web Services Single Sign On to authenticate users and manage user permissions. Before you can create a portal that uses Amazon Web Services SSO, you must enable Amazon Web Services SSO. For more information, see Enabling Amazon Web Services SSO in the IoT SiteWise User Guide. This option is only available in Amazon Web Services Regions other than the China Regions.    IAM – The portal uses Identity and Access Management to authenticate users and manage user permissions. This option is only available in the China Regions.   You can't change this value after you create a portal. Default: SSO 
+     * The service to use to authenticate users to the portal. Choose from the following options:    SSO – The portal uses Amazon Web Services Single Sign On to authenticate users and manage user permissions. Before you can create a portal that uses Amazon Web Services SSO, you must enable Amazon Web Services SSO. For more information, see Enabling Amazon Web Services SSO in the IoT SiteWise User Guide. This option is only available in Amazon Web Services Regions other than the China Regions.    IAM – The portal uses Identity and Access Management to authenticate users and manage user permissions.   You can't change this value after you create a portal. Default: SSO 
      */
     portalAuthMode?: AuthMode;
     /**
@@ -1988,7 +1988,7 @@ declare namespace IoTSiteWise {
   }
   export interface DescribeStorageConfigurationResponse {
     /**
-     * The type of storage that you specified for your data. The storage type can be one of the following values:    SITEWISE_DEFAULT_STORAGE – IoT SiteWise replicates your data into a service managed database.    MULTI_LAYER_STORAGE – IoT SiteWise replicates your data into a service managed database and saves a copy of your raw data and metadata in an Amazon S3 object that you specified.  
+     * The storage tier that you specified for your data. The storageType parameter can be one of the following values:    SITEWISE_DEFAULT_STORAGE – IoT SiteWise saves your data into the hot tier. The hot tier is a service-managed database.    MULTI_LAYER_STORAGE – IoT SiteWise saves your data in both the cold tier and the cold tier. The cold tier is a customer-managed Amazon S3 bucket.  
      */
     storageType: StorageType;
     /**
@@ -1999,6 +1999,10 @@ declare namespace IoTSiteWise {
      * Contains the storage configuration for time series (data streams) that aren't associated with asset properties. The disassociatedDataStorage can be one of the following values:    ENABLED – IoT SiteWise accepts time series that aren't associated with asset properties.  After the disassociatedDataStorage is enabled, you can't disable it.     DISABLED – IoT SiteWise doesn't accept time series (data streams) that aren't associated with asset properties.   For more information, see Data streams in the IoT SiteWise User Guide.
      */
     disassociatedDataStorage?: DisassociatedDataStorageState;
+    /**
+     * How many days your data is kept in the hot tier. By default, your data is kept indefinitely in the hot tier.
+     */
+    retentionPeriod?: RetentionPeriod;
     configurationStatus: ConfigurationStatus;
     /**
      * The date the storage configuration was last updated, in Unix epoch time.
@@ -2844,6 +2848,7 @@ declare namespace IoTSiteWise {
   }
   export type Name = string;
   export type NextToken = string;
+  export type NumberOfDays = number;
   export type Offset = string;
   export type OffsetInNanos = number;
   export type Permission = "ADMINISTRATOR"|"VIEWER"|string;
@@ -3050,7 +3055,7 @@ declare namespace IoTSiteWise {
   }
   export interface PutStorageConfigurationRequest {
     /**
-     * The type of storage that you specified for your data. The storage type can be one of the following values:    SITEWISE_DEFAULT_STORAGE – IoT SiteWise replicates your data into a service managed database.    MULTI_LAYER_STORAGE – IoT SiteWise replicates your data into a service managed database and saves a copy of your raw data and metadata in an Amazon S3 object that you specified.  
+     * The storage tier that you specified for your data. The storageType parameter can be one of the following values:    SITEWISE_DEFAULT_STORAGE – IoT SiteWise saves your data into the hot tier. The hot tier is a service-managed database.    MULTI_LAYER_STORAGE – IoT SiteWise saves your data in both the cold tier and the cold tier. The cold tier is a customer-managed Amazon S3 bucket.  
      */
     storageType: StorageType;
     /**
@@ -3061,10 +3066,11 @@ declare namespace IoTSiteWise {
      * Contains the storage configuration for time series (data streams) that aren't associated with asset properties. The disassociatedDataStorage can be one of the following values:    ENABLED – IoT SiteWise accepts time series that aren't associated with asset properties.  After the disassociatedDataStorage is enabled, you can't disable it.     DISABLED – IoT SiteWise doesn't accept time series (data streams) that aren't associated with asset properties.   For more information, see Data streams in the IoT SiteWise User Guide.
      */
     disassociatedDataStorage?: DisassociatedDataStorageState;
+    retentionPeriod?: RetentionPeriod;
   }
   export interface PutStorageConfigurationResponse {
     /**
-     * The type of storage that you specified for your data. The storage type can be one of the following values:    SITEWISE_DEFAULT_STORAGE – IoT SiteWise replicates your data into a service managed database.    MULTI_LAYER_STORAGE – IoT SiteWise replicates your data into a service managed database and saves a copy of your raw data and metadata in an Amazon S3 object that you specified.  
+     * The storage tier that you specified for your data. The storageType parameter can be one of the following values:    SITEWISE_DEFAULT_STORAGE – IoT SiteWise saves your data into the hot tier. The hot tier is a service-managed database.    MULTI_LAYER_STORAGE – IoT SiteWise saves your data in both the cold tier and the cold tier. The cold tier is a customer-managed Amazon S3 bucket.  
      */
     storageType: StorageType;
     /**
@@ -3075,6 +3081,7 @@ declare namespace IoTSiteWise {
      * Contains the storage configuration for time series (data streams) that aren't associated with asset properties. The disassociatedDataStorage can be one of the following values:    ENABLED – IoT SiteWise accepts time series that aren't associated with asset properties.  After the disassociatedDataStorage is enabled, you can't disable it.     DISABLED – IoT SiteWise doesn't accept time series (data streams) that aren't associated with asset properties.   For more information, see Data streams in the IoT SiteWise User Guide.
      */
     disassociatedDataStorage?: DisassociatedDataStorageState;
+    retentionPeriod?: RetentionPeriod;
     configurationStatus: ConfigurationStatus;
   }
   export type Qualities = Quality[];
@@ -3091,6 +3098,16 @@ declare namespace IoTSiteWise {
     project?: ProjectResource;
   }
   export type ResourceType = "PORTAL"|"PROJECT"|string;
+  export interface RetentionPeriod {
+    /**
+     * The number of days that your data is kept.  If you specified a value for this parameter, the unlimited parameter must be false. 
+     */
+    numberOfDays?: NumberOfDays;
+    /**
+     * If true, your data is kept indefinitely.  If configured to true, you must not specify a value for the numberOfDays parameter. 
+     */
+    unlimited?: Unlimited;
+  }
   export type SSOApplicationId = string;
   export type StorageType = "SITEWISE_DEFAULT_STORAGE"|"MULTI_LAYER_STORAGE"|string;
   export type TagKey = string;
@@ -3192,6 +3209,7 @@ declare namespace IoTSiteWise {
      */
     offset?: Offset;
   }
+  export type Unlimited = boolean;
   export interface UntagResourceRequest {
     /**
      * The ARN of the resource to untag.

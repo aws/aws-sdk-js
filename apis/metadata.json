@@ -1113,5 +1113,17 @@
   "migrationhubrefactorspaces": {
     "prefix": "migration-hub-refactor-spaces",
     "name": "MigrationHubRefactorSpaces"
+  },
+  "evidently": {
+    "name": "Evidently"
+  },
+  "inspector2": {
+    "name": "Inspector2"
+  },
+  "rbin": {
+    "name": "Rbin"
+  },
+  "rum": {
+    "name": "RUM"
   }
 }

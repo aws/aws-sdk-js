@@ -13,11 +13,11 @@ declare class SSM extends Service {
   constructor(options?: SSM.Types.ClientConfiguration)
   config: Config & SSM.Types.ClientConfiguration;
   /**
-   * Adds or overwrites one or more tags for the specified resource. Tags are metadata that you can assign to your documents, managed instances, maintenance windows, Parameter Store parameters, and patch baselines. Tags enable you to categorize your resources in different ways, for example, by purpose, owner, or environment. Each tag consists of a key and an optional value, both of which you define. For example, you could define a set of tags for your account's managed instances that helps you track each instance's owner and stack level. For example:    Key=Owner,Value=DbAdmin     Key=Owner,Value=SysAdmin     Key=Owner,Value=Dev     Key=Stack,Value=Production     Key=Stack,Value=Pre-Production     Key=Stack,Value=Test    Each resource can have a maximum of 50 tags. We recommend that you devise a set of tag keys that meets your needs for each resource type. Using a consistent set of tag keys makes it easier for you to manage your resources. You can search and filter the resources based on the tags you add. Tags don't have any semantic meaning to and are interpreted strictly as a string of characters.  For more information about using tags with Amazon Elastic Compute Cloud (Amazon EC2) instances, see Tagging your Amazon EC2 resources in the Amazon EC2 User Guide.
+   * Adds or overwrites one or more tags for the specified resource. Tags are metadata that you can assign to your documents, managed nodes, maintenance windows, Parameter Store parameters, and patch baselines. Tags enable you to categorize your resources in different ways, for example, by purpose, owner, or environment. Each tag consists of a key and an optional value, both of which you define. For example, you could define a set of tags for your account's managed nodes that helps you track each node's owner and stack level. For example:    Key=Owner,Value=DbAdmin     Key=Owner,Value=SysAdmin     Key=Owner,Value=Dev     Key=Stack,Value=Production     Key=Stack,Value=Pre-Production     Key=Stack,Value=Test    Each resource can have a maximum of 50 tags. We recommend that you devise a set of tag keys that meets your needs for each resource type. Using a consistent set of tag keys makes it easier for you to manage your resources. You can search and filter the resources based on the tags you add. Tags don't have any semantic meaning to and are interpreted strictly as a string of characters.  For more information about using tags with Amazon Elastic Compute Cloud (Amazon EC2) instances, see Tagging your Amazon EC2 resources in the Amazon EC2 User Guide.
    */
   addTagsToResource(params: SSM.Types.AddTagsToResourceRequest, callback?: (err: AWSError, data: SSM.Types.AddTagsToResourceResult) => void): Request<SSM.Types.AddTagsToResourceResult, AWSError>;
   /**
-   * Adds or overwrites one or more tags for the specified resource. Tags are metadata that you can assign to your documents, managed instances, maintenance windows, Parameter Store parameters, and patch baselines. Tags enable you to categorize your resources in different ways, for example, by purpose, owner, or environment. Each tag consists of a key and an optional value, both of which you define. For example, you could define a set of tags for your account's managed instances that helps you track each instance's owner and stack level. For example:    Key=Owner,Value=DbAdmin     Key=Owner,Value=SysAdmin     Key=Owner,Value=Dev     Key=Stack,Value=Production     Key=Stack,Value=Pre-Production     Key=Stack,Value=Test    Each resource can have a maximum of 50 tags. We recommend that you devise a set of tag keys that meets your needs for each resource type. Using a consistent set of tag keys makes it easier for you to manage your resources. You can search and filter the resources based on the tags you add. Tags don't have any semantic meaning to and are interpreted strictly as a string of characters.  For more information about using tags with Amazon Elastic Compute Cloud (Amazon EC2) instances, see Tagging your Amazon EC2 resources in the Amazon EC2 User Guide.
+   * Adds or overwrites one or more tags for the specified resource. Tags are metadata that you can assign to your documents, managed nodes, maintenance windows, Parameter Store parameters, and patch baselines. Tags enable you to categorize your resources in different ways, for example, by purpose, owner, or environment. Each tag consists of a key and an optional value, both of which you define. For example, you could define a set of tags for your account's managed nodes that helps you track each node's owner and stack level. For example:    Key=Owner,Value=DbAdmin     Key=Owner,Value=SysAdmin     Key=Owner,Value=Dev     Key=Stack,Value=Production     Key=Stack,Value=Pre-Production     Key=Stack,Value=Test    Each resource can have a maximum of 50 tags. We recommend that you devise a set of tag keys that meets your needs for each resource type. Using a consistent set of tag keys makes it easier for you to manage your resources. You can search and filter the resources based on the tags you add. Tags don't have any semantic meaning to and are interpreted strictly as a string of characters.  For more information about using tags with Amazon Elastic Compute Cloud (Amazon EC2) instances, see Tagging your Amazon EC2 resources in the Amazon EC2 User Guide.
    */
   addTagsToResource(callback?: (err: AWSError, data: SSM.Types.AddTagsToResourceResult) => void): Request<SSM.Types.AddTagsToResourceResult, AWSError>;
   /**
@@ -45,35 +45,35 @@ declare class SSM extends Service {
    */
   cancelMaintenanceWindowExecution(callback?: (err: AWSError, data: SSM.Types.CancelMaintenanceWindowExecutionResult) => void): Request<SSM.Types.CancelMaintenanceWindowExecutionResult, AWSError>;
   /**
-   * Generates an activation code and activation ID you can use to register your on-premises server or virtual machine (VM) with Amazon Web Services Systems Manager. Registering these machines with Systems Manager makes it possible to manage them using Systems Manager capabilities. You use the activation code and ID when installing SSM Agent on machines in your hybrid environment. For more information about requirements for managing on-premises instances and VMs using Systems Manager, see Setting up Amazon Web Services Systems Manager for hybrid environments in the Amazon Web Services Systems Manager User Guide.   On-premises servers or VMs that are registered with Systems Manager and Amazon Elastic Compute Cloud (Amazon EC2) instances that you manage with Systems Manager are all called managed instances. 
+   * Generates an activation code and activation ID you can use to register your on-premises servers, edge devices, or virtual machine (VM) with Amazon Web Services Systems Manager. Registering these machines with Systems Manager makes it possible to manage them using Systems Manager capabilities. You use the activation code and ID when installing SSM Agent on machines in your hybrid environment. For more information about requirements for managing on-premises machines using Systems Manager, see Setting up Amazon Web Services Systems Manager for hybrid environments in the Amazon Web Services Systems Manager User Guide.   Amazon Elastic Compute Cloud (Amazon EC2) instances, edge devices, and on-premises servers and VMs that are configured for Systems Manager are all called managed nodes. 
    */
   createActivation(params: SSM.Types.CreateActivationRequest, callback?: (err: AWSError, data: SSM.Types.CreateActivationResult) => void): Request<SSM.Types.CreateActivationResult, AWSError>;
   /**
-   * Generates an activation code and activation ID you can use to register your on-premises server or virtual machine (VM) with Amazon Web Services Systems Manager. Registering these machines with Systems Manager makes it possible to manage them using Systems Manager capabilities. You use the activation code and ID when installing SSM Agent on machines in your hybrid environment. For more information about requirements for managing on-premises instances and VMs using Systems Manager, see Setting up Amazon Web Services Systems Manager for hybrid environments in the Amazon Web Services Systems Manager User Guide.   On-premises servers or VMs that are registered with Systems Manager and Amazon Elastic Compute Cloud (Amazon EC2) instances that you manage with Systems Manager are all called managed instances. 
+   * Generates an activation code and activation ID you can use to register your on-premises servers, edge devices, or virtual machine (VM) with Amazon Web Services Systems Manager. Registering these machines with Systems Manager makes it possible to manage them using Systems Manager capabilities. You use the activation code and ID when installing SSM Agent on machines in your hybrid environment. For more information about requirements for managing on-premises machines using Systems Manager, see Setting up Amazon Web Services Systems Manager for hybrid environments in the Amazon Web Services Systems Manager User Guide.   Amazon Elastic Compute Cloud (Amazon EC2) instances, edge devices, and on-premises servers and VMs that are configured for Systems Manager are all called managed nodes. 
    */
   createActivation(callback?: (err: AWSError, data: SSM.Types.CreateActivationResult) => void): Request<SSM.Types.CreateActivationResult, AWSError>;
   /**
-   * A State Manager association defines the state that you want to maintain on your instances. For example, an association can specify that anti-virus software must be installed and running on your instances, or that certain ports must be closed. For static targets, the association specifies a schedule for when the configuration is reapplied. For dynamic targets, such as an Amazon Web Services resource group or an Amazon Web Services autoscaling group, State Manager, a capability of Amazon Web Services Systems Manager applies the configuration when new instances are added to the group. The association also specifies actions to take when applying the configuration. For example, an association for anti-virus software might run once a day. If the software isn't installed, then State Manager installs it. If the software is installed, but the service isn't running, then the association might instruct State Manager to start the service. 
+   * A State Manager association defines the state that you want to maintain on your managed nodes. For example, an association can specify that anti-virus software must be installed and running on your managed nodes, or that certain ports must be closed. For static targets, the association specifies a schedule for when the configuration is reapplied. For dynamic targets, such as an Amazon Web Services resource group or an Amazon Web Services autoscaling group, State Manager, a capability of Amazon Web Services Systems Manager applies the configuration when new managed nodes are added to the group. The association also specifies actions to take when applying the configuration. For example, an association for anti-virus software might run once a day. If the software isn't installed, then State Manager installs it. If the software is installed, but the service isn't running, then the association might instruct State Manager to start the service. 
    */
   createAssociation(params: SSM.Types.CreateAssociationRequest, callback?: (err: AWSError, data: SSM.Types.CreateAssociationResult) => void): Request<SSM.Types.CreateAssociationResult, AWSError>;
   /**
-   * A State Manager association defines the state that you want to maintain on your instances. For example, an association can specify that anti-virus software must be installed and running on your instances, or that certain ports must be closed. For static targets, the association specifies a schedule for when the configuration is reapplied. For dynamic targets, such as an Amazon Web Services resource group or an Amazon Web Services autoscaling group, State Manager, a capability of Amazon Web Services Systems Manager applies the configuration when new instances are added to the group. The association also specifies actions to take when applying the configuration. For example, an association for anti-virus software might run once a day. If the software isn't installed, then State Manager installs it. If the software is installed, but the service isn't running, then the association might instruct State Manager to start the service. 
+   * A State Manager association defines the state that you want to maintain on your managed nodes. For example, an association can specify that anti-virus software must be installed and running on your managed nodes, or that certain ports must be closed. For static targets, the association specifies a schedule for when the configuration is reapplied. For dynamic targets, such as an Amazon Web Services resource group or an Amazon Web Services autoscaling group, State Manager, a capability of Amazon Web Services Systems Manager applies the configuration when new managed nodes are added to the group. The association also specifies actions to take when applying the configuration. For example, an association for anti-virus software might run once a day. If the software isn't installed, then State Manager installs it. If the software is installed, but the service isn't running, then the association might instruct State Manager to start the service. 
    */
   createAssociation(callback?: (err: AWSError, data: SSM.Types.CreateAssociationResult) => void): Request<SSM.Types.CreateAssociationResult, AWSError>;
   /**
-   * Associates the specified Amazon Web Services Systems Manager document (SSM document) with the specified instances or targets. When you associate a document with one or more instances using instance IDs or tags, Amazon Web Services Systems Manager Agent (SSM Agent) running on the instance processes the document and configures the instance as specified. If you associate a document with an instance that already has an associated document, the system returns the AssociationAlreadyExists exception.
+   * Associates the specified Amazon Web Services Systems Manager document (SSM document) with the specified managed nodes or targets. When you associate a document with one or more managed nodes using IDs or tags, Amazon Web Services Systems Manager Agent (SSM Agent) running on the managed node processes the document and configures the node as specified. If you associate a document with a managed node that already has an associated document, the system returns the AssociationAlreadyExists exception.
    */
   createAssociationBatch(params: SSM.Types.CreateAssociationBatchRequest, callback?: (err: AWSError, data: SSM.Types.CreateAssociationBatchResult) => void): Request<SSM.Types.CreateAssociationBatchResult, AWSError>;
   /**
-   * Associates the specified Amazon Web Services Systems Manager document (SSM document) with the specified instances or targets. When you associate a document with one or more instances using instance IDs or tags, Amazon Web Services Systems Manager Agent (SSM Agent) running on the instance processes the document and configures the instance as specified. If you associate a document with an instance that already has an associated document, the system returns the AssociationAlreadyExists exception.
+   * Associates the specified Amazon Web Services Systems Manager document (SSM document) with the specified managed nodes or targets. When you associate a document with one or more managed nodes using IDs or tags, Amazon Web Services Systems Manager Agent (SSM Agent) running on the managed node processes the document and configures the node as specified. If you associate a document with a managed node that already has an associated document, the system returns the AssociationAlreadyExists exception.
    */
   createAssociationBatch(callback?: (err: AWSError, data: SSM.Types.CreateAssociationBatchResult) => void): Request<SSM.Types.CreateAssociationBatchResult, AWSError>;
   /**
-   * Creates a Amazon Web Services Systems Manager (SSM document). An SSM document defines the actions that Systems Manager performs on your managed instances. For more information about SSM documents, including information about supported schemas, features, and syntax, see Amazon Web Services Systems Manager Documents in the Amazon Web Services Systems Manager User Guide.
+   * Creates a Amazon Web Services Systems Manager (SSM document). An SSM document defines the actions that Systems Manager performs on your managed nodes. For more information about SSM documents, including information about supported schemas, features, and syntax, see Amazon Web Services Systems Manager Documents in the Amazon Web Services Systems Manager User Guide.
    */
   createDocument(params: SSM.Types.CreateDocumentRequest, callback?: (err: AWSError, data: SSM.Types.CreateDocumentResult) => void): Request<SSM.Types.CreateDocumentResult, AWSError>;
   /**
-   * Creates a Amazon Web Services Systems Manager (SSM document). An SSM document defines the actions that Systems Manager performs on your managed instances. For more information about SSM documents, including information about supported schemas, features, and syntax, see Amazon Web Services Systems Manager Documents in the Amazon Web Services Systems Manager User Guide.
+   * Creates a Amazon Web Services Systems Manager (SSM document). An SSM document defines the actions that Systems Manager performs on your managed nodes. For more information about SSM documents, including information about supported schemas, features, and syntax, see Amazon Web Services Systems Manager Documents in the Amazon Web Services Systems Manager User Guide.
    */
   createDocument(callback?: (err: AWSError, data: SSM.Types.CreateDocumentResult) => void): Request<SSM.Types.CreateDocumentResult, AWSError>;
   /**
@@ -117,27 +117,27 @@ declare class SSM extends Service {
    */
   createResourceDataSync(callback?: (err: AWSError, data: SSM.Types.CreateResourceDataSyncResult) => void): Request<SSM.Types.CreateResourceDataSyncResult, AWSError>;
   /**
-   * Deletes an activation. You aren't required to delete an activation. If you delete an activation, you can no longer use it to register additional managed instances. Deleting an activation doesn't de-register managed instances. You must manually de-register managed instances.
+   * Deletes an activation. You aren't required to delete an activation. If you delete an activation, you can no longer use it to register additional managed nodes. Deleting an activation doesn't de-register managed nodes. You must manually de-register managed nodes.
    */
   deleteActivation(params: SSM.Types.DeleteActivationRequest, callback?: (err: AWSError, data: SSM.Types.DeleteActivationResult) => void): Request<SSM.Types.DeleteActivationResult, AWSError>;
   /**
-   * Deletes an activation. You aren't required to delete an activation. If you delete an activation, you can no longer use it to register additional managed instances. Deleting an activation doesn't de-register managed instances. You must manually de-register managed instances.
+   * Deletes an activation. You aren't required to delete an activation. If you delete an activation, you can no longer use it to register additional managed nodes. Deleting an activation doesn't de-register managed nodes. You must manually de-register managed nodes.
    */
   deleteActivation(callback?: (err: AWSError, data: SSM.Types.DeleteActivationResult) => void): Request<SSM.Types.DeleteActivationResult, AWSError>;
   /**
-   * Disassociates the specified Amazon Web Services Systems Manager document (SSM document) from the specified instance. If you created the association by using the Targets parameter, then you must delete the association by using the association ID. When you disassociate a document from an instance, it doesn't change the configuration of the instance. To change the configuration state of an instance after you disassociate a document, you must create a new document with the desired configuration and associate it with the instance.
+   * Disassociates the specified Amazon Web Services Systems Manager document (SSM document) from the specified managed node. If you created the association by using the Targets parameter, then you must delete the association by using the association ID. When you disassociate a document from a managed node, it doesn't change the configuration of the node. To change the configuration state of a managed node after you disassociate a document, you must create a new document with the desired configuration and associate it with the node.
    */
   deleteAssociation(params: SSM.Types.DeleteAssociationRequest, callback?: (err: AWSError, data: SSM.Types.DeleteAssociationResult) => void): Request<SSM.Types.DeleteAssociationResult, AWSError>;
   /**
-   * Disassociates the specified Amazon Web Services Systems Manager document (SSM document) from the specified instance. If you created the association by using the Targets parameter, then you must delete the association by using the association ID. When you disassociate a document from an instance, it doesn't change the configuration of the instance. To change the configuration state of an instance after you disassociate a document, you must create a new document with the desired configuration and associate it with the instance.
+   * Disassociates the specified Amazon Web Services Systems Manager document (SSM document) from the specified managed node. If you created the association by using the Targets parameter, then you must delete the association by using the association ID. When you disassociate a document from a managed node, it doesn't change the configuration of the node. To change the configuration state of a managed node after you disassociate a document, you must create a new document with the desired configuration and associate it with the node.
    */
   deleteAssociation(callback?: (err: AWSError, data: SSM.Types.DeleteAssociationResult) => void): Request<SSM.Types.DeleteAssociationResult, AWSError>;
   /**
-   * Deletes the Amazon Web Services Systems Manager document (SSM document) and all instance associations to the document. Before you delete the document, we recommend that you use DeleteAssociation to disassociate all instances that are associated with the document.
+   * Deletes the Amazon Web Services Systems Manager document (SSM document) and all managed node associations to the document. Before you delete the document, we recommend that you use DeleteAssociation to disassociate all managed nodes that are associated with the document.
    */
   deleteDocument(params: SSM.Types.DeleteDocumentRequest, callback?: (err: AWSError, data: SSM.Types.DeleteDocumentResult) => void): Request<SSM.Types.DeleteDocumentResult, AWSError>;
   /**
-   * Deletes the Amazon Web Services Systems Manager document (SSM document) and all instance associations to the document. Before you delete the document, we recommend that you use DeleteAssociation to disassociate all instances that are associated with the document.
+   * Deletes the Amazon Web Services Systems Manager document (SSM document) and all managed node associations to the document. Before you delete the document, we recommend that you use DeleteAssociation to disassociate all managed nodes that are associated with the document.
    */
   deleteDocument(callback?: (err: AWSError, data: SSM.Types.DeleteDocumentResult) => void): Request<SSM.Types.DeleteDocumentResult, AWSError>;
   /**
@@ -189,19 +189,19 @@ declare class SSM extends Service {
    */
   deletePatchBaseline(callback?: (err: AWSError, data: SSM.Types.DeletePatchBaselineResult) => void): Request<SSM.Types.DeletePatchBaselineResult, AWSError>;
   /**
-   * Deletes a resource data sync configuration. After the configuration is deleted, changes to data on managed instances are no longer synced to or from the target. Deleting a sync configuration doesn't delete data.
+   * Deletes a resource data sync configuration. After the configuration is deleted, changes to data on managed nodes are no longer synced to or from the target. Deleting a sync configuration doesn't delete data.
    */
   deleteResourceDataSync(params: SSM.Types.DeleteResourceDataSyncRequest, callback?: (err: AWSError, data: SSM.Types.DeleteResourceDataSyncResult) => void): Request<SSM.Types.DeleteResourceDataSyncResult, AWSError>;
   /**
-   * Deletes a resource data sync configuration. After the configuration is deleted, changes to data on managed instances are no longer synced to or from the target. Deleting a sync configuration doesn't delete data.
+   * Deletes a resource data sync configuration. After the configuration is deleted, changes to data on managed nodes are no longer synced to or from the target. Deleting a sync configuration doesn't delete data.
    */
   deleteResourceDataSync(callback?: (err: AWSError, data: SSM.Types.DeleteResourceDataSyncResult) => void): Request<SSM.Types.DeleteResourceDataSyncResult, AWSError>;
   /**
-   * Removes the server or virtual machine from the list of registered servers. You can reregister the instance again at any time. If you don't plan to use Run Command on the server, we suggest uninstalling SSM Agent first.
+   * Removes the server or virtual machine from the list of registered servers. You can reregister the node again at any time. If you don't plan to use Run Command on the server, we suggest uninstalling SSM Agent first.
    */
   deregisterManagedInstance(params: SSM.Types.DeregisterManagedInstanceRequest, callback?: (err: AWSError, data: SSM.Types.DeregisterManagedInstanceResult) => void): Request<SSM.Types.DeregisterManagedInstanceResult, AWSError>;
   /**
-   * Removes the server or virtual machine from the list of registered servers. You can reregister the instance again at any time. If you don't plan to use Run Command on the server, we suggest uninstalling SSM Agent first.
+   * Removes the server or virtual machine from the list of registered servers. You can reregister the node again at any time. If you don't plan to use Run Command on the server, we suggest uninstalling SSM Agent first.
    */
   deregisterManagedInstance(callback?: (err: AWSError, data: SSM.Types.DeregisterManagedInstanceResult) => void): Request<SSM.Types.DeregisterManagedInstanceResult, AWSError>;
   /**
@@ -229,19 +229,19 @@ declare class SSM extends Service {
    */
   deregisterTaskFromMaintenanceWindow(callback?: (err: AWSError, data: SSM.Types.DeregisterTaskFromMaintenanceWindowResult) => void): Request<SSM.Types.DeregisterTaskFromMaintenanceWindowResult, AWSError>;
   /**
-   * Describes details about the activation, such as the date and time the activation was created, its expiration date, the Identity and Access Management (IAM) role assigned to the instances in the activation, and the number of instances registered by using this activation.
+   * Describes details about the activation, such as the date and time the activation was created, its expiration date, the Identity and Access Management (IAM) role assigned to the managed nodes in the activation, and the number of nodes registered by using this activation.
    */
   describeActivations(params: SSM.Types.DescribeActivationsRequest, callback?: (err: AWSError, data: SSM.Types.DescribeActivationsResult) => void): Request<SSM.Types.DescribeActivationsResult, AWSError>;
   /**
-   * Describes details about the activation, such as the date and time the activation was created, its expiration date, the Identity and Access Management (IAM) role assigned to the instances in the activation, and the number of instances registered by using this activation.
+   * Describes details about the activation, such as the date and time the activation was created, its expiration date, the Identity and Access Management (IAM) role assigned to the managed nodes in the activation, and the number of nodes registered by using this activation.
    */
   describeActivations(callback?: (err: AWSError, data: SSM.Types.DescribeActivationsResult) => void): Request<SSM.Types.DescribeActivationsResult, AWSError>;
   /**
-   * Describes the association for the specified target or instance. If you created the association by using the Targets parameter, then you must retrieve the association by using the association ID.
+   * Describes the association for the specified target or managed node. If you created the association by using the Targets parameter, then you must retrieve the association by using the association ID.
    */
   describeAssociation(params: SSM.Types.DescribeAssociationRequest, callback?: (err: AWSError, data: SSM.Types.DescribeAssociationResult) => void): Request<SSM.Types.DescribeAssociationResult, AWSError>;
   /**
-   * Describes the association for the specified target or instance. If you created the association by using the Targets parameter, then you must retrieve the association by using the association ID.
+   * Describes the association for the specified target or managed node. If you created the association by using the Targets parameter, then you must retrieve the association by using the association ID.
    */
   describeAssociation(callback?: (err: AWSError, data: SSM.Types.DescribeAssociationResult) => void): Request<SSM.Types.DescribeAssociationResult, AWSError>;
   /**
@@ -301,11 +301,11 @@ declare class SSM extends Service {
    */
   describeDocumentPermission(callback?: (err: AWSError, data: SSM.Types.DescribeDocumentPermissionResponse) => void): Request<SSM.Types.DescribeDocumentPermissionResponse, AWSError>;
   /**
-   * All associations for the instance(s).
+   * All associations for the managed node(s).
    */
   describeEffectiveInstanceAssociations(params: SSM.Types.DescribeEffectiveInstanceAssociationsRequest, callback?: (err: AWSError, data: SSM.Types.DescribeEffectiveInstanceAssociationsResult) => void): Request<SSM.Types.DescribeEffectiveInstanceAssociationsResult, AWSError>;
   /**
-   * All associations for the instance(s).
+   * All associations for the managed node(s).
    */
   describeEffectiveInstanceAssociations(callback?: (err: AWSError, data: SSM.Types.DescribeEffectiveInstanceAssociationsResult) => void): Request<SSM.Types.DescribeEffectiveInstanceAssociationsResult, AWSError>;
   /**
@@ -317,43 +317,43 @@ declare class SSM extends Service {
    */
   describeEffectivePatchesForPatchBaseline(callback?: (err: AWSError, data: SSM.Types.DescribeEffectivePatchesForPatchBaselineResult) => void): Request<SSM.Types.DescribeEffectivePatchesForPatchBaselineResult, AWSError>;
   /**
-   * The status of the associations for the instance(s).
+   * The status of the associations for the managed node(s).
    */
   describeInstanceAssociationsStatus(params: SSM.Types.DescribeInstanceAssociationsStatusRequest, callback?: (err: AWSError, data: SSM.Types.DescribeInstanceAssociationsStatusResult) => void): Request<SSM.Types.DescribeInstanceAssociationsStatusResult, AWSError>;
   /**
-   * The status of the associations for the instance(s).
+   * The status of the associations for the managed node(s).
    */
   describeInstanceAssociationsStatus(callback?: (err: AWSError, data: SSM.Types.DescribeInstanceAssociationsStatusResult) => void): Request<SSM.Types.DescribeInstanceAssociationsStatusResult, AWSError>;
   /**
-   * Describes one or more of your instances, including information about the operating system platform, the version of SSM Agent installed on the instance, instance status, and so on. If you specify one or more instance IDs, it returns information for those instances. If you don't specify instance IDs, it returns information for all your instances. If you specify an instance ID that isn't valid or an instance that you don't own, you receive an error.  The IamRole field for this API operation is the Identity and Access Management (IAM) role assigned to on-premises instances. This call doesn't return the IAM role for EC2 instances. 
+   * Describes one or more of your managed nodes, including information about the operating system platform, the version of SSM Agent installed on the managed node, node status, and so on. If you specify one or more managed node IDs, it returns information for those managed nodes. If you don't specify node IDs, it returns information for all your managed nodes. If you specify a node ID that isn't valid or a node that you don't own, you receive an error.  The IamRole field for this API operation is the Identity and Access Management (IAM) role assigned to on-premises managed nodes. This call doesn't return the IAM role for EC2 instances. 
    */
   describeInstanceInformation(params: SSM.Types.DescribeInstanceInformationRequest, callback?: (err: AWSError, data: SSM.Types.DescribeInstanceInformationResult) => void): Request<SSM.Types.DescribeInstanceInformationResult, AWSError>;
   /**
-   * Describes one or more of your instances, including information about the operating system platform, the version of SSM Agent installed on the instance, instance status, and so on. If you specify one or more instance IDs, it returns information for those instances. If you don't specify instance IDs, it returns information for all your instances. If you specify an instance ID that isn't valid or an instance that you don't own, you receive an error.  The IamRole field for this API operation is the Identity and Access Management (IAM) role assigned to on-premises instances. This call doesn't return the IAM role for EC2 instances. 
+   * Describes one or more of your managed nodes, including information about the operating system platform, the version of SSM Agent installed on the managed node, node status, and so on. If you specify one or more managed node IDs, it returns information for those managed nodes. If you don't specify node IDs, it returns information for all your managed nodes. If you specify a node ID that isn't valid or a node that you don't own, you receive an error.  The IamRole field for this API operation is the Identity and Access Management (IAM) role assigned to on-premises managed nodes. This call doesn't return the IAM role for EC2 instances. 
    */
   describeInstanceInformation(callback?: (err: AWSError, data: SSM.Types.DescribeInstanceInformationResult) => void): Request<SSM.Types.DescribeInstanceInformationResult, AWSError>;
   /**
-   * Retrieves the high-level patch state of one or more instances.
+   * Retrieves the high-level patch state of one or more managed nodes.
    */
   describeInstancePatchStates(params: SSM.Types.DescribeInstancePatchStatesRequest, callback?: (err: AWSError, data: SSM.Types.DescribeInstancePatchStatesResult) => void): Request<SSM.Types.DescribeInstancePatchStatesResult, AWSError>;
   /**
-   * Retrieves the high-level patch state of one or more instances.
+   * Retrieves the high-level patch state of one or more managed nodes.
    */
   describeInstancePatchStates(callback?: (err: AWSError, data: SSM.Types.DescribeInstancePatchStatesResult) => void): Request<SSM.Types.DescribeInstancePatchStatesResult, AWSError>;
   /**
-   * Retrieves the high-level patch state for the instances in the specified patch group.
+   * Retrieves the high-level patch state for the managed nodes in the specified patch group.
    */
   describeInstancePatchStatesForPatchGroup(params: SSM.Types.DescribeInstancePatchStatesForPatchGroupRequest, callback?: (err: AWSError, data: SSM.Types.DescribeInstancePatchStatesForPatchGroupResult) => void): Request<SSM.Types.DescribeInstancePatchStatesForPatchGroupResult, AWSError>;
   /**
-   * Retrieves the high-level patch state for the instances in the specified patch group.
+   * Retrieves the high-level patch state for the managed nodes in the specified patch group.
    */
   describeInstancePatchStatesForPatchGroup(callback?: (err: AWSError, data: SSM.Types.DescribeInstancePatchStatesForPatchGroupResult) => void): Request<SSM.Types.DescribeInstancePatchStatesForPatchGroupResult, AWSError>;
   /**
-   * Retrieves information about the patches on the specified instance and their state relative to the patch baseline being used for the instance.
+   * Retrieves information about the patches on the specified managed node and their state relative to the patch baseline being used for the node.
    */
   describeInstancePatches(params: SSM.Types.DescribeInstancePatchesRequest, callback?: (err: AWSError, data: SSM.Types.DescribeInstancePatchesResult) => void): Request<SSM.Types.DescribeInstancePatchesResult, AWSError>;
   /**
-   * Retrieves information about the patches on the specified instance and their state relative to the patch baseline being used for the instance.
+   * Retrieves information about the patches on the specified managed node and their state relative to the patch baseline being used for the node.
    */
   describeInstancePatches(callback?: (err: AWSError, data: SSM.Types.DescribeInstancePatchesResult) => void): Request<SSM.Types.DescribeInstancePatchesResult, AWSError>;
   /**
@@ -421,11 +421,11 @@ declare class SSM extends Service {
    */
   describeMaintenanceWindows(callback?: (err: AWSError, data: SSM.Types.DescribeMaintenanceWindowsResult) => void): Request<SSM.Types.DescribeMaintenanceWindowsResult, AWSError>;
   /**
-   * Retrieves information about the maintenance window targets or tasks that an instance is associated with.
+   * Retrieves information about the maintenance window targets or tasks that a managed node is associated with.
    */
   describeMaintenanceWindowsForTarget(params: SSM.Types.DescribeMaintenanceWindowsForTargetRequest, callback?: (err: AWSError, data: SSM.Types.DescribeMaintenanceWindowsForTargetResult) => void): Request<SSM.Types.DescribeMaintenanceWindowsForTargetResult, AWSError>;
   /**
-   * Retrieves information about the maintenance window targets or tasks that an instance is associated with.
+   * Retrieves information about the maintenance window targets or tasks that a managed node is associated with.
    */
   describeMaintenanceWindowsForTarget(callback?: (err: AWSError, data: SSM.Types.DescribeMaintenanceWindowsForTargetResult) => void): Request<SSM.Types.DescribeMaintenanceWindowsForTargetResult, AWSError>;
   /**
@@ -509,19 +509,19 @@ declare class SSM extends Service {
    */
   getCalendarState(callback?: (err: AWSError, data: SSM.Types.GetCalendarStateResponse) => void): Request<SSM.Types.GetCalendarStateResponse, AWSError>;
   /**
-   * Returns detailed information about command execution for an invocation or plugin.  GetCommandInvocation only gives the execution status of a plugin in a document. To get the command execution status on a specific instance, use ListCommandInvocations. To get the command execution status across instances, use ListCommands.
+   * Returns detailed information about command execution for an invocation or plugin.  GetCommandInvocation only gives the execution status of a plugin in a document. To get the command execution status on a specific managed node, use ListCommandInvocations. To get the command execution status across managed nodes, use ListCommands.
    */
   getCommandInvocation(params: SSM.Types.GetCommandInvocationRequest, callback?: (err: AWSError, data: SSM.Types.GetCommandInvocationResult) => void): Request<SSM.Types.GetCommandInvocationResult, AWSError>;
   /**
-   * Returns detailed information about command execution for an invocation or plugin.  GetCommandInvocation only gives the execution status of a plugin in a document. To get the command execution status on a specific instance, use ListCommandInvocations. To get the command execution status across instances, use ListCommands.
+   * Returns detailed information about command execution for an invocation or plugin.  GetCommandInvocation only gives the execution status of a plugin in a document. To get the command execution status on a specific managed node, use ListCommandInvocations. To get the command execution status across managed nodes, use ListCommands.
    */
   getCommandInvocation(callback?: (err: AWSError, data: SSM.Types.GetCommandInvocationResult) => void): Request<SSM.Types.GetCommandInvocationResult, AWSError>;
   /**
-   * Retrieves the Session Manager connection status for an instance to determine whether it is running and ready to receive Session Manager connections.
+   * Retrieves the Session Manager connection status for a managed node to determine whether it is running and ready to receive Session Manager connections.
    */
   getConnectionStatus(params: SSM.Types.GetConnectionStatusRequest, callback?: (err: AWSError, data: SSM.Types.GetConnectionStatusResponse) => void): Request<SSM.Types.GetConnectionStatusResponse, AWSError>;
   /**
-   * Retrieves the Session Manager connection status for an instance to determine whether it is running and ready to receive Session Manager connections.
+   * Retrieves the Session Manager connection status for a managed node to determine whether it is running and ready to receive Session Manager connections.
    */
   getConnectionStatus(callback?: (err: AWSError, data: SSM.Types.GetConnectionStatusResponse) => void): Request<SSM.Types.GetConnectionStatusResponse, AWSError>;
   /**
@@ -533,11 +533,11 @@ declare class SSM extends Service {
    */
   getDefaultPatchBaseline(callback?: (err: AWSError, data: SSM.Types.GetDefaultPatchBaselineResult) => void): Request<SSM.Types.GetDefaultPatchBaselineResult, AWSError>;
   /**
-   * Retrieves the current snapshot for the patch baseline the instance uses. This API is primarily used by the AWS-RunPatchBaseline Systems Manager document (SSM document).  If you run the command locally, such as with the Command Line Interface (CLI), the system attempts to use your local Amazon Web Services credentials and the operation fails. To avoid this, you can run the command in the Amazon Web Services Systems Manager console. Use Run Command, a capability of Amazon Web Services Systems Manager, with an SSM document that enables you to target an instance with a script or command. For example, run the command using the AWS-RunShellScript document or the AWS-RunPowerShellScript document. 
+   * Retrieves the current snapshot for the patch baseline the managed node uses. This API is primarily used by the AWS-RunPatchBaseline Systems Manager document (SSM document).  If you run the command locally, such as with the Command Line Interface (CLI), the system attempts to use your local Amazon Web Services credentials and the operation fails. To avoid this, you can run the command in the Amazon Web Services Systems Manager console. Use Run Command, a capability of Amazon Web Services Systems Manager, with an SSM document that enables you to target a managed node with a script or command. For example, run the command using the AWS-RunShellScript document or the AWS-RunPowerShellScript document. 
    */
   getDeployablePatchSnapshotForInstance(params: SSM.Types.GetDeployablePatchSnapshotForInstanceRequest, callback?: (err: AWSError, data: SSM.Types.GetDeployablePatchSnapshotForInstanceResult) => void): Request<SSM.Types.GetDeployablePatchSnapshotForInstanceResult, AWSError>;
   /**
-   * Retrieves the current snapshot for the patch baseline the instance uses. This API is primarily used by the AWS-RunPatchBaseline Systems Manager document (SSM document).  If you run the command locally, such as with the Command Line Interface (CLI), the system attempts to use your local Amazon Web Services credentials and the operation fails. To avoid this, you can run the command in the Amazon Web Services Systems Manager console. Use Run Command, a capability of Amazon Web Services Systems Manager, with an SSM document that enables you to target an instance with a script or command. For example, run the command using the AWS-RunShellScript document or the AWS-RunPowerShellScript document. 
+   * Retrieves the current snapshot for the patch baseline the managed node uses. This API is primarily used by the AWS-RunPatchBaseline Systems Manager document (SSM document).  If you run the command locally, such as with the Command Line Interface (CLI), the system attempts to use your local Amazon Web Services credentials and the operation fails. To avoid this, you can run the command in the Amazon Web Services Systems Manager console. Use Run Command, a capability of Amazon Web Services Systems Manager, with an SSM document that enables you to target a managed node with a script or command. For example, run the command using the AWS-RunShellScript document or the AWS-RunPowerShellScript document. 
    */
   getDeployablePatchSnapshotForInstance(callback?: (err: AWSError, data: SSM.Types.GetDeployablePatchSnapshotForInstanceResult) => void): Request<SSM.Types.GetDeployablePatchSnapshotForInstanceResult, AWSError>;
   /**
@@ -549,11 +549,11 @@ declare class SSM extends Service {
    */
   getDocument(callback?: (err: AWSError, data: SSM.Types.GetDocumentResult) => void): Request<SSM.Types.GetDocumentResult, AWSError>;
   /**
-   * Query inventory information. This includes instance status, such as Stopped or Terminated.
+   * Query inventory information. This includes managed node status, such as Stopped or Terminated.
    */
   getInventory(params: SSM.Types.GetInventoryRequest, callback?: (err: AWSError, data: SSM.Types.GetInventoryResult) => void): Request<SSM.Types.GetInventoryResult, AWSError>;
   /**
-   * Query inventory information. This includes instance status, such as Stopped or Terminated.
+   * Query inventory information. This includes managed node status, such as Stopped or Terminated.
    */
   getInventory(callback?: (err: AWSError, data: SSM.Types.GetInventoryResult) => void): Request<SSM.Types.GetInventoryResult, AWSError>;
   /**
@@ -701,19 +701,19 @@ declare class SSM extends Service {
    */
   listAssociationVersions(callback?: (err: AWSError, data: SSM.Types.ListAssociationVersionsResult) => void): Request<SSM.Types.ListAssociationVersionsResult, AWSError>;
   /**
-   * Returns all State Manager associations in the current Amazon Web Services account and Amazon Web Services Region. You can limit the results to a specific State Manager association document or instance by specifying a filter. State Manager is a capability of Amazon Web Services Systems Manager.
+   * Returns all State Manager associations in the current Amazon Web Services account and Amazon Web Services Region. You can limit the results to a specific State Manager association document or managed node by specifying a filter. State Manager is a capability of Amazon Web Services Systems Manager.
    */
   listAssociations(params: SSM.Types.ListAssociationsRequest, callback?: (err: AWSError, data: SSM.Types.ListAssociationsResult) => void): Request<SSM.Types.ListAssociationsResult, AWSError>;
   /**
-   * Returns all State Manager associations in the current Amazon Web Services account and Amazon Web Services Region. You can limit the results to a specific State Manager association document or instance by specifying a filter. State Manager is a capability of Amazon Web Services Systems Manager.
+   * Returns all State Manager associations in the current Amazon Web Services account and Amazon Web Services Region. You can limit the results to a specific State Manager association document or managed node by specifying a filter. State Manager is a capability of Amazon Web Services Systems Manager.
    */
   listAssociations(callback?: (err: AWSError, data: SSM.Types.ListAssociationsResult) => void): Request<SSM.Types.ListAssociationsResult, AWSError>;
   /**
-   * An invocation is copy of a command sent to a specific instance. A command can apply to one or more instances. A command invocation applies to one instance. For example, if a user runs SendCommand against three instances, then a command invocation is created for each requested instance ID. ListCommandInvocations provide status about command execution.
+   * An invocation is copy of a command sent to a specific managed node. A command can apply to one or more managed nodes. A command invocation applies to one managed node. For example, if a user runs SendCommand against three managed nodes, then a command invocation is created for each requested managed node ID. ListCommandInvocations provide status about command execution.
    */
   listCommandInvocations(params: SSM.Types.ListCommandInvocationsRequest, callback?: (err: AWSError, data: SSM.Types.ListCommandInvocationsResult) => void): Request<SSM.Types.ListCommandInvocationsResult, AWSError>;
   /**
-   * An invocation is copy of a command sent to a specific instance. A command can apply to one or more instances. A command invocation applies to one instance. For example, if a user runs SendCommand against three instances, then a command invocation is created for each requested instance ID. ListCommandInvocations provide status about command execution.
+   * An invocation is copy of a command sent to a specific managed node. A command can apply to one or more managed nodes. A command invocation applies to one managed node. For example, if a user runs SendCommand against three managed nodes, then a command invocation is created for each requested managed node ID. ListCommandInvocations provide status about command execution.
    */
   listCommandInvocations(callback?: (err: AWSError, data: SSM.Types.ListCommandInvocationsResult) => void): Request<SSM.Types.ListCommandInvocationsResult, AWSError>;
   /**
@@ -829,19 +829,19 @@ declare class SSM extends Service {
    */
   modifyDocumentPermission(callback?: (err: AWSError, data: SSM.Types.ModifyDocumentPermissionResponse) => void): Request<SSM.Types.ModifyDocumentPermissionResponse, AWSError>;
   /**
-   * Registers a compliance type and other compliance details on a designated resource. This operation lets you register custom compliance details with a resource. This call overwrites existing compliance information on the resource, so you must provide a full list of compliance items each time that you send the request. ComplianceType can be one of the following:   ExecutionId: The execution ID when the patch, association, or custom compliance item was applied.   ExecutionType: Specify patch, association, or Custom:string.   ExecutionTime. The time the patch, association, or custom compliance item was applied to the instance.   Id: The patch, association, or custom compliance ID.   Title: A title.   Status: The status of the compliance item. For example, approved for patches, or Failed for associations.   Severity: A patch severity. For example, critical.   DocumentName: An SSM document name. For example, AWS-RunPatchBaseline.   DocumentVersion: An SSM document version number. For example, 4.   Classification: A patch classification. For example, security updates.   PatchBaselineId: A patch baseline ID.   PatchSeverity: A patch severity. For example, Critical.   PatchState: A patch state. For example, InstancesWithFailedPatches.   PatchGroup: The name of a patch group.   InstalledTime: The time the association, patch, or custom compliance item was applied to the resource. Specify the time by using the following format: yyyy-MM-dd'T'HH:mm:ss'Z'  
+   * Registers a compliance type and other compliance details on a designated resource. This operation lets you register custom compliance details with a resource. This call overwrites existing compliance information on the resource, so you must provide a full list of compliance items each time that you send the request. ComplianceType can be one of the following:   ExecutionId: The execution ID when the patch, association, or custom compliance item was applied.   ExecutionType: Specify patch, association, or Custom:string.   ExecutionTime. The time the patch, association, or custom compliance item was applied to the managed node.   Id: The patch, association, or custom compliance ID.   Title: A title.   Status: The status of the compliance item. For example, approved for patches, or Failed for associations.   Severity: A patch severity. For example, critical.   DocumentName: An SSM document name. For example, AWS-RunPatchBaseline.   DocumentVersion: An SSM document version number. For example, 4.   Classification: A patch classification. For example, security updates.   PatchBaselineId: A patch baseline ID.   PatchSeverity: A patch severity. For example, Critical.   PatchState: A patch state. For example, InstancesWithFailedPatches.   PatchGroup: The name of a patch group.   InstalledTime: The time the association, patch, or custom compliance item was applied to the resource. Specify the time by using the following format: yyyy-MM-dd'T'HH:mm:ss'Z'  
    */
   putComplianceItems(params: SSM.Types.PutComplianceItemsRequest, callback?: (err: AWSError, data: SSM.Types.PutComplianceItemsResult) => void): Request<SSM.Types.PutComplianceItemsResult, AWSError>;
   /**
-   * Registers a compliance type and other compliance details on a designated resource. This operation lets you register custom compliance details with a resource. This call overwrites existing compliance information on the resource, so you must provide a full list of compliance items each time that you send the request. ComplianceType can be one of the following:   ExecutionId: The execution ID when the patch, association, or custom compliance item was applied.   ExecutionType: Specify patch, association, or Custom:string.   ExecutionTime. The time the patch, association, or custom compliance item was applied to the instance.   Id: The patch, association, or custom compliance ID.   Title: A title.   Status: The status of the compliance item. For example, approved for patches, or Failed for associations.   Severity: A patch severity. For example, critical.   DocumentName: An SSM document name. For example, AWS-RunPatchBaseline.   DocumentVersion: An SSM document version number. For example, 4.   Classification: A patch classification. For example, security updates.   PatchBaselineId: A patch baseline ID.   PatchSeverity: A patch severity. For example, Critical.   PatchState: A patch state. For example, InstancesWithFailedPatches.   PatchGroup: The name of a patch group.   InstalledTime: The time the association, patch, or custom compliance item was applied to the resource. Specify the time by using the following format: yyyy-MM-dd'T'HH:mm:ss'Z'  
+   * Registers a compliance type and other compliance details on a designated resource. This operation lets you register custom compliance details with a resource. This call overwrites existing compliance information on the resource, so you must provide a full list of compliance items each time that you send the request. ComplianceType can be one of the following:   ExecutionId: The execution ID when the patch, association, or custom compliance item was applied.   ExecutionType: Specify patch, association, or Custom:string.   ExecutionTime. The time the patch, association, or custom compliance item was applied to the managed node.   Id: The patch, association, or custom compliance ID.   Title: A title.   Status: The status of the compliance item. For example, approved for patches, or Failed for associations.   Severity: A patch severity. For example, critical.   DocumentName: An SSM document name. For example, AWS-RunPatchBaseline.   DocumentVersion: An SSM document version number. For example, 4.   Classification: A patch classification. For example, security updates.   PatchBaselineId: A patch baseline ID.   PatchSeverity: A patch severity. For example, Critical.   PatchState: A patch state. For example, InstancesWithFailedPatches.   PatchGroup: The name of a patch group.   InstalledTime: The time the association, patch, or custom compliance item was applied to the resource. Specify the time by using the following format: yyyy-MM-dd'T'HH:mm:ss'Z'  
    */
   putComplianceItems(callback?: (err: AWSError, data: SSM.Types.PutComplianceItemsResult) => void): Request<SSM.Types.PutComplianceItemsResult, AWSError>;
   /**
-   * Bulk update custom inventory items on one more instance. The request adds an inventory item, if it doesn't already exist, or updates an inventory item, if it does exist.
+   * Bulk update custom inventory items on one or more managed nodes. The request adds an inventory item, if it doesn't already exist, or updates an inventory item, if it does exist.
    */
   putInventory(params: SSM.Types.PutInventoryRequest, callback?: (err: AWSError, data: SSM.Types.PutInventoryResult) => void): Request<SSM.Types.PutInventoryResult, AWSError>;
   /**
-   * Bulk update custom inventory items on one more instance. The request adds an inventory item, if it doesn't already exist, or updates an inventory item, if it does exist.
+   * Bulk update custom inventory items on one or more managed nodes. The request adds an inventory item, if it doesn't already exist, or updates an inventory item, if it does exist.
    */
   putInventory(callback?: (err: AWSError, data: SSM.Types.PutInventoryResult) => void): Request<SSM.Types.PutInventoryResult, AWSError>;
   /**
@@ -901,11 +901,11 @@ declare class SSM extends Service {
    */
   resetServiceSetting(callback?: (err: AWSError, data: SSM.Types.ResetServiceSettingResult) => void): Request<SSM.Types.ResetServiceSettingResult, AWSError>;
   /**
-   * Reconnects a session to an instance after it has been disconnected. Connections can be resumed for disconnected sessions, but not terminated sessions.  This command is primarily for use by client machines to automatically reconnect during intermittent network issues. It isn't intended for any other use. 
+   * Reconnects a session to a managed node after it has been disconnected. Connections can be resumed for disconnected sessions, but not terminated sessions.  This command is primarily for use by client machines to automatically reconnect during intermittent network issues. It isn't intended for any other use. 
    */
   resumeSession(params: SSM.Types.ResumeSessionRequest, callback?: (err: AWSError, data: SSM.Types.ResumeSessionResponse) => void): Request<SSM.Types.ResumeSessionResponse, AWSError>;
   /**
-   * Reconnects a session to an instance after it has been disconnected. Connections can be resumed for disconnected sessions, but not terminated sessions.  This command is primarily for use by client machines to automatically reconnect during intermittent network issues. It isn't intended for any other use. 
+   * Reconnects a session to a managed node after it has been disconnected. Connections can be resumed for disconnected sessions, but not terminated sessions.  This command is primarily for use by client machines to automatically reconnect during intermittent network issues. It isn't intended for any other use. 
    */
   resumeSession(callback?: (err: AWSError, data: SSM.Types.ResumeSessionResponse) => void): Request<SSM.Types.ResumeSessionResponse, AWSError>;
   /**
@@ -917,11 +917,11 @@ declare class SSM extends Service {
    */
   sendAutomationSignal(callback?: (err: AWSError, data: SSM.Types.SendAutomationSignalResult) => void): Request<SSM.Types.SendAutomationSignalResult, AWSError>;
   /**
-   * Runs commands on one or more managed instances.
+   * Runs commands on one or more managed nodes.
    */
   sendCommand(params: SSM.Types.SendCommandRequest, callback?: (err: AWSError, data: SSM.Types.SendCommandResult) => void): Request<SSM.Types.SendCommandResult, AWSError>;
   /**
-   * Runs commands on one or more managed instances.
+   * Runs commands on one or more managed nodes.
    */
   sendCommand(callback?: (err: AWSError, data: SSM.Types.SendCommandResult) => void): Request<SSM.Types.SendCommandResult, AWSError>;
   /**
@@ -949,11 +949,11 @@ declare class SSM extends Service {
    */
   startChangeRequestExecution(callback?: (err: AWSError, data: SSM.Types.StartChangeRequestExecutionResult) => void): Request<SSM.Types.StartChangeRequestExecutionResult, AWSError>;
   /**
-   * Initiates a connection to a target (for example, an instance) for a Session Manager session. Returns a URL and token that can be used to open a WebSocket connection for sending input and receiving outputs.  Amazon Web Services CLI usage: start-session is an interactive command that requires the Session Manager plugin to be installed on the client machine making the call. For information, see Install the Session Manager plugin for the Amazon Web Services CLI in the Amazon Web Services Systems Manager User Guide. Amazon Web Services Tools for PowerShell usage: Start-SSMSession isn't currently supported by Amazon Web Services Tools for PowerShell on Windows local machines. 
+   * Initiates a connection to a target (for example, a managed node) for a Session Manager session. Returns a URL and token that can be used to open a WebSocket connection for sending input and receiving outputs.  Amazon Web Services CLI usage: start-session is an interactive command that requires the Session Manager plugin to be installed on the client machine making the call. For information, see Install the Session Manager plugin for the Amazon Web Services CLI in the Amazon Web Services Systems Manager User Guide. Amazon Web Services Tools for PowerShell usage: Start-SSMSession isn't currently supported by Amazon Web Services Tools for PowerShell on Windows local machines. 
    */
   startSession(params: SSM.Types.StartSessionRequest, callback?: (err: AWSError, data: SSM.Types.StartSessionResponse) => void): Request<SSM.Types.StartSessionResponse, AWSError>;
   /**
-   * Initiates a connection to a target (for example, an instance) for a Session Manager session. Returns a URL and token that can be used to open a WebSocket connection for sending input and receiving outputs.  Amazon Web Services CLI usage: start-session is an interactive command that requires the Session Manager plugin to be installed on the client machine making the call. For information, see Install the Session Manager plugin for the Amazon Web Services CLI in the Amazon Web Services Systems Manager User Guide. Amazon Web Services Tools for PowerShell usage: Start-SSMSession isn't currently supported by Amazon Web Services Tools for PowerShell on Windows local machines. 
+   * Initiates a connection to a target (for example, a managed node) for a Session Manager session. Returns a URL and token that can be used to open a WebSocket connection for sending input and receiving outputs.  Amazon Web Services CLI usage: start-session is an interactive command that requires the Session Manager plugin to be installed on the client machine making the call. For information, see Install the Session Manager plugin for the Amazon Web Services CLI in the Amazon Web Services Systems Manager User Guide. Amazon Web Services Tools for PowerShell usage: Start-SSMSession isn't currently supported by Amazon Web Services Tools for PowerShell on Windows local machines. 
    */
   startSession(callback?: (err: AWSError, data: SSM.Types.StartSessionResponse) => void): Request<SSM.Types.StartSessionResponse, AWSError>;
   /**
@@ -965,11 +965,11 @@ declare class SSM extends Service {
    */
   stopAutomationExecution(callback?: (err: AWSError, data: SSM.Types.StopAutomationExecutionResult) => void): Request<SSM.Types.StopAutomationExecutionResult, AWSError>;
   /**
-   * Permanently ends a session and closes the data connection between the Session Manager client and SSM Agent on the instance. A terminated session isn't be resumed.
+   * Permanently ends a session and closes the data connection between the Session Manager client and SSM Agent on the managed node. A terminated session isn't be resumed.
    */
   terminateSession(params: SSM.Types.TerminateSessionRequest, callback?: (err: AWSError, data: SSM.Types.TerminateSessionResponse) => void): Request<SSM.Types.TerminateSessionResponse, AWSError>;
   /**
-   * Permanently ends a session and closes the data connection between the Session Manager client and SSM Agent on the instance. A terminated session isn't be resumed.
+   * Permanently ends a session and closes the data connection between the Session Manager client and SSM Agent on the managed node. A terminated session isn't be resumed.
    */
   terminateSession(callback?: (err: AWSError, data: SSM.Types.TerminateSessionResponse) => void): Request<SSM.Types.TerminateSessionResponse, AWSError>;
   /**
@@ -989,11 +989,11 @@ declare class SSM extends Service {
    */
   updateAssociation(callback?: (err: AWSError, data: SSM.Types.UpdateAssociationResult) => void): Request<SSM.Types.UpdateAssociationResult, AWSError>;
   /**
-   * Updates the status of the Amazon Web Services Systems Manager document (SSM document) associated with the specified instance.  UpdateAssociationStatus is primarily used by the Amazon Web Services Systems Manager Agent (SSM Agent) to report status updates about your associations and is only used for associations created with the InstanceId legacy parameter.
+   * Updates the status of the Amazon Web Services Systems Manager document (SSM document) associated with the specified managed node.  UpdateAssociationStatus is primarily used by the Amazon Web Services Systems Manager Agent (SSM Agent) to report status updates about your associations and is only used for associations created with the InstanceId legacy parameter.
    */
   updateAssociationStatus(params: SSM.Types.UpdateAssociationStatusRequest, callback?: (err: AWSError, data: SSM.Types.UpdateAssociationStatusResult) => void): Request<SSM.Types.UpdateAssociationStatusResult, AWSError>;
   /**
-   * Updates the status of the Amazon Web Services Systems Manager document (SSM document) associated with the specified instance.  UpdateAssociationStatus is primarily used by the Amazon Web Services Systems Manager Agent (SSM Agent) to report status updates about your associations and is only used for associations created with the InstanceId legacy parameter.
+   * Updates the status of the Amazon Web Services Systems Manager document (SSM document) associated with the specified managed node.  UpdateAssociationStatus is primarily used by the Amazon Web Services Systems Manager Agent (SSM Agent) to report status updates about your associations and is only used for associations created with the InstanceId legacy parameter.
    */
   updateAssociationStatus(callback?: (err: AWSError, data: SSM.Types.UpdateAssociationStatusResult) => void): Request<SSM.Types.UpdateAssociationStatusResult, AWSError>;
   /**
@@ -1045,11 +1045,11 @@ declare class SSM extends Service {
    */
   updateMaintenanceWindowTask(callback?: (err: AWSError, data: SSM.Types.UpdateMaintenanceWindowTaskResult) => void): Request<SSM.Types.UpdateMaintenanceWindowTaskResult, AWSError>;
   /**
-   * Changes the Identity and Access Management (IAM) role that is assigned to the on-premises instance or virtual machines (VM). IAM roles are first assigned to these hybrid instances during the activation process. For more information, see CreateActivation.
+   * Changes the Identity and Access Management (IAM) role that is assigned to the on-premises server, edge device, or virtual machines (VM). IAM roles are first assigned to these hybrid nodes during the activation process. For more information, see CreateActivation.
    */
   updateManagedInstanceRole(params: SSM.Types.UpdateManagedInstanceRoleRequest, callback?: (err: AWSError, data: SSM.Types.UpdateManagedInstanceRoleResult) => void): Request<SSM.Types.UpdateManagedInstanceRoleResult, AWSError>;
   /**
-   * Changes the Identity and Access Management (IAM) role that is assigned to the on-premises instance or virtual machines (VM). IAM roles are first assigned to these hybrid instances during the activation process. For more information, see CreateActivation.
+   * Changes the Identity and Access Management (IAM) role that is assigned to the on-premises server, edge device, or virtual machines (VM). IAM roles are first assigned to these hybrid nodes during the activation process. For more information, see CreateActivation.
    */
   updateManagedInstanceRole(callback?: (err: AWSError, data: SSM.Types.UpdateManagedInstanceRoleResult) => void): Request<SSM.Types.UpdateManagedInstanceRoleResult, AWSError>;
   /**
@@ -1127,23 +1127,23 @@ declare namespace SSM {
      */
     Description?: ActivationDescription;
     /**
-     * A name for the managed instance when it is created.
+     * A name for the managed node when it is created.
      */
     DefaultInstanceName?: DefaultInstanceName;
     /**
-     * The Identity and Access Management (IAM) role to assign to the managed instance.
+     * The Identity and Access Management (IAM) role to assign to the managed node.
      */
     IamRole?: IamRole;
     /**
-     * The maximum number of managed instances that can be registered using this activation.
+     * The maximum number of managed nodes that can be registered using this activation.
      */
     RegistrationLimit?: RegistrationLimit;
     /**
-     * The number of managed instances already registered with this activation.
+     * The number of managed nodes already registered with this activation.
      */
     RegistrationsCount?: RegistrationsCount;
     /**
-     * The date when this activation can no longer be used to register managed instances.
+     * The date when this activation can no longer be used to register managed nodes.
      */
     ExpirationDate?: ExpirationDate;
     /**
@@ -1165,11 +1165,11 @@ declare namespace SSM {
   export type ActivationList = Activation[];
   export interface AddTagsToResourceRequest {
     /**
-     * Specifies the type of resource you are tagging.  The ManagedInstance type for this API operation is for on-premises managed instances. You must specify the name of the managed instance in the following format: mi-ID_number . For example, mi-1a2b3c4d5e6f. 
+     * Specifies the type of resource you are tagging.  The ManagedInstance type for this API operation is for on-premises managed nodes. You must specify the name of the managed node in the following format: mi-ID_number . For example, mi-1a2b3c4d5e6f. 
      */
     ResourceType: ResourceTypeForTagging;
     /**
-     * The resource ID you want to tag. Use the ID of the resource. Here are some examples:  MaintenanceWindow: mw-012345abcde   PatchBaseline: pb-012345abcde   OpsMetadata object: ResourceID for tagging is created from the Amazon Resource Name (ARN) for the object. Specifically, ResourceID is created from the strings that come after the word opsmetadata in the ARN. For example, an OpsMetadata object with an ARN of arn:aws:ssm:us-east-2:1234567890:opsmetadata/aws/ssm/MyGroup/appmanager has a ResourceID of either aws/ssm/MyGroup/appmanager or /aws/ssm/MyGroup/appmanager. For the Document and Parameter values, use the name of the resource.  ManagedInstance: mi-012345abcde   The ManagedInstance type for this API operation is only for on-premises managed instances. You must specify the name of the managed instance in the following format: mi-ID_number . For example, mi-1a2b3c4d5e6f. 
+     * The resource ID you want to tag. Use the ID of the resource. Here are some examples:  MaintenanceWindow: mw-012345abcde   PatchBaseline: pb-012345abcde   OpsMetadata object: ResourceID for tagging is created from the Amazon Resource Name (ARN) for the object. Specifically, ResourceID is created from the strings that come after the word opsmetadata in the ARN. For example, an OpsMetadata object with an ARN of arn:aws:ssm:us-east-2:1234567890:opsmetadata/aws/ssm/MyGroup/appmanager has a ResourceID of either aws/ssm/MyGroup/appmanager or /aws/ssm/MyGroup/appmanager. For the Document and Parameter values, use the name of the resource.  ManagedInstance: mi-012345abcde   The ManagedInstance type for this API operation is only for on-premises managed nodes. You must specify the name of the managed node in the following format: mi-ID_number . For example, mi-1a2b3c4d5e6f. 
      */
     ResourceId: ResourceId;
     /**
@@ -1214,7 +1214,7 @@ declare namespace SSM {
      */
     Name?: DocumentARN;
     /**
-     * The instance ID.
+     * The managed node ID.
      */
     InstanceId?: InstanceId;
     /**
@@ -1230,7 +1230,7 @@ declare namespace SSM {
      */
     DocumentVersion?: DocumentVersion;
     /**
-     * The instances targeted by the request to create an association. You can target all instances in an Amazon Web Services account by specifying the InstanceIds key with a value of *.
+     * The managed nodes targeted by the request to create an association. You can target all managed nodes in an Amazon Web Services account by specifying the InstanceIds key with a value of *.
      */
     Targets?: Targets;
     /**
@@ -1257,7 +1257,7 @@ declare namespace SSM {
      */
     Name?: DocumentARN;
     /**
-     * The instance ID.
+     * The managed node ID.
      */
     InstanceId?: InstanceId;
     /**
@@ -1297,7 +1297,7 @@ declare namespace SSM {
      */
     AssociationId?: AssociationId;
     /**
-     * The instances targeted by the request. 
+     * The managed nodes targeted by the request. 
      */
     Targets?: Targets;
     /**
@@ -1321,11 +1321,11 @@ declare namespace SSM {
      */
     AssociationName?: AssociationName;
     /**
-     * The number of errors that are allowed before the system stops sending requests to run the association on additional targets. You can specify either an absolute number of errors, for example 10, or a percentage of the target set, for example 10%. If you specify 3, for example, the system stops sending requests when the fourth error is received. If you specify 0, then the system stops sending requests after the first error is returned. If you run an association on 50 instances and set MaxError to 10%, then the system stops sending the request when the sixth error is received. Executions that are already running an association when MaxErrors is reached are allowed to complete, but some of these executions may fail as well. If you need to ensure that there won't be more than max-errors failed executions, set MaxConcurrency to 1 so that executions proceed one at a time.
+     * The number of errors that are allowed before the system stops sending requests to run the association on additional targets. You can specify either an absolute number of errors, for example 10, or a percentage of the target set, for example 10%. If you specify 3, for example, the system stops sending requests when the fourth error is received. If you specify 0, then the system stops sending requests after the first error is returned. If you run an association on 50 managed nodes and set MaxError to 10%, then the system stops sending the request when the sixth error is received. Executions that are already running an association when MaxErrors is reached are allowed to complete, but some of these executions may fail as well. If you need to ensure that there won't be more than max-errors failed executions, set MaxConcurrency to 1 so that executions proceed one at a time.
      */
     MaxErrors?: MaxErrors;
     /**
-     * The maximum number of targets allowed to run the association at the same time. You can specify a number, for example 10, or a percentage of the target set, for example 10%. The default value is 100%, which means all targets run the association at the same time. If a new instance starts and attempts to run an association while Systems Manager is running MaxConcurrency associations, the association is allowed to run. During the next association interval, the new instance will process its association within the limit specified for MaxConcurrency.
+     * The maximum number of targets allowed to run the association at the same time. You can specify a number, for example 10, or a percentage of the target set, for example 10%. The default value is 100%, which means all targets run the association at the same time. If a new managed node starts and attempts to run an association while Systems Manager is running MaxConcurrency associations, the association is allowed to run. During the next association interval, the new managed node will process its association within the limit specified for MaxConcurrency.
      */
     MaxConcurrency?: MaxConcurrency;
     /**
@@ -1416,11 +1416,11 @@ declare namespace SSM {
      */
     ExecutionId?: AssociationExecutionId;
     /**
-     * The resource ID, for example, the instance ID where the association ran.
+     * The resource ID, for example, the managed node ID where the association ran.
      */
     ResourceId?: AssociationResourceId;
     /**
-     * The resource type, for example, instance.
+     * The resource type, for example, EC2.
      */
     ResourceType?: AssociationResourceType;
     /**
@@ -1483,7 +1483,7 @@ declare namespace SSM {
      */
     DetailedStatus?: StatusName;
     /**
-     * Returns the number of targets for the association status. For example, if you created an association with two instances, and one of them was successful, this would return the count of instances by status.
+     * Returns the number of targets for the association status. For example, if you created an association with two managed nodes, and one of them was successful, this would return the count of managed nodes by status.
      */
     AssociationStatusAggregatedCount?: AssociationStatusAggregatedCount;
   }
@@ -1553,11 +1553,11 @@ declare namespace SSM {
      */
     AssociationName?: AssociationName;
     /**
-     * The number of errors that are allowed before the system stops sending requests to run the association on additional targets. You can specify either an absolute number of errors, for example 10, or a percentage of the target set, for example 10%. If you specify 3, for example, the system stops sending requests when the fourth error is received. If you specify 0, then the system stops sending requests after the first error is returned. If you run an association on 50 instances and set MaxError to 10%, then the system stops sending the request when the sixth error is received. Executions that are already running an association when MaxErrors is reached are allowed to complete, but some of these executions may fail as well. If you need to ensure that there won't be more than max-errors failed executions, set MaxConcurrency to 1 so that executions proceed one at a time.
+     * The number of errors that are allowed before the system stops sending requests to run the association on additional targets. You can specify either an absolute number of errors, for example 10, or a percentage of the target set, for example 10%. If you specify 3, for example, the system stops sending requests when the fourth error is received. If you specify 0, then the system stops sending requests after the first error is returned. If you run an association on 50 managed nodes and set MaxError to 10%, then the system stops sending the request when the sixth error is received. Executions that are already running an association when MaxErrors is reached are allowed to complete, but some of these executions may fail as well. If you need to ensure that there won't be more than max-errors failed executions, set MaxConcurrency to 1 so that executions proceed one at a time.
      */
     MaxErrors?: MaxErrors;
     /**
-     * The maximum number of targets allowed to run the association at the same time. You can specify a number, for example 10, or a percentage of the target set, for example 10%. The default value is 100%, which means all targets run the association at the same time. If a new instance starts and attempts to run an association while Systems Manager is running MaxConcurrency associations, the association is allowed to run. During the next association interval, the new instance will process its association within the limit specified for MaxConcurrency.
+     * The maximum number of targets allowed to run the association at the same time. You can specify a number, for example 10, or a percentage of the target set, for example 10%. The default value is 100%, which means all targets run the association at the same time. If a new managed node starts and attempts to run an association while Systems Manager is running MaxConcurrency associations, the association is allowed to run. During the next association interval, the new managed node will process its association within the limit specified for MaxConcurrency.
      */
     MaxConcurrency?: MaxConcurrency;
     /**
@@ -1929,11 +1929,11 @@ declare namespace SSM {
      */
     RejectedPatchesAction?: PatchAction;
     /**
-     * Indicates whether the list of approved patches includes non-security updates that should be applied to the instances. The default value is false. Applies to Linux instances only.
+     * Indicates whether the list of approved patches includes non-security updates that should be applied to the managed nodes. The default value is false. Applies to Linux managed nodes only.
      */
     ApprovedPatchesEnableNonSecurity?: Boolean;
     /**
-     * Information about the patches to use to update the instances, including target operating systems and source repositories. Applies to Linux instances only.
+     * Information about the patches to use to update the managed nodes, including target operating systems and source repositories. Applies to Linux managed nodes only.
      */
     Sources?: PatchSourceList;
   }
@@ -1948,7 +1948,7 @@ declare namespace SSM {
      */
     CommandId: CommandId;
     /**
-     * (Optional) A list of instance IDs on which you want to cancel the command. If not provided, the command is canceled on every instance on which it was requested.
+     * (Optional) A list of managed node IDs on which you want to cancel the command. If not provided, the command is canceled on every node on which it was requested.
      */
     InstanceIds?: InstanceIdList;
   }
@@ -2007,11 +2007,11 @@ declare namespace SSM {
      */
     Parameters?: Parameters;
     /**
-     * The instance IDs against which this command was requested.
+     * The managed node IDs against which this command was requested.
      */
     InstanceIds?: InstanceIdList;
     /**
-     * An array of search criteria that targets instances using a Key,Value combination that you specify. Targets is required if you don't provide one or more instance IDs in the call.
+     * An array of search criteria that targets managed nodes using a Key,Value combination that you specify. Targets is required if you don't provide one or more managed node IDs in the call.
      */
     Targets?: Targets;
     /**
@@ -2023,7 +2023,7 @@ declare namespace SSM {
      */
     Status?: CommandStatus;
     /**
-     * A detailed status of the command execution. StatusDetails includes more information than Status because it includes states resulting from error and concurrency control parameters. StatusDetails can show different results than Status. For more information about these statuses, see Understanding command statuses in the Amazon Web Services Systems Manager User Guide. StatusDetails can be one of the following values:   Pending: The command hasn't been sent to any instances.   In Progress: The command has been sent to at least one instance but hasn't reached a final state on all instances.   Success: The command successfully ran on all invocations. This is a terminal state.   Delivery Timed Out: The value of MaxErrors or more command invocations shows a status of Delivery Timed Out. This is a terminal state.   Execution Timed Out: The value of MaxErrors or more command invocations shows a status of Execution Timed Out. This is a terminal state.   Failed: The value of MaxErrors or more command invocations shows a status of Failed. This is a terminal state.   Incomplete: The command was attempted on all instances and one or more invocations doesn't have a value of Success but not enough invocations failed for the status to be Failed. This is a terminal state.   Canceled: The command was terminated before it was completed. This is a terminal state.   Rate Exceeded: The number of instances targeted by the command exceeded the account limit for pending invocations. The system has canceled the command before running it on any instance. This is a terminal state.  
+     * A detailed status of the command execution. StatusDetails includes more information than Status because it includes states resulting from error and concurrency control parameters. StatusDetails can show different results than Status. For more information about these statuses, see Understanding command statuses in the Amazon Web Services Systems Manager User Guide. StatusDetails can be one of the following values:   Pending: The command hasn't been sent to any managed nodes.   In Progress: The command has been sent to at least one managed node but hasn't reached a final state on all managed nodes.   Success: The command successfully ran on all invocations. This is a terminal state.   Delivery Timed Out: The value of MaxErrors or more command invocations shows a status of Delivery Timed Out. This is a terminal state.   Execution Timed Out: The value of MaxErrors or more command invocations shows a status of Execution Timed Out. This is a terminal state.   Failed: The value of MaxErrors or more command invocations shows a status of Failed. This is a terminal state.   Incomplete: The command was attempted on all managed nodes and one or more invocations doesn't have a value of Success but not enough invocations failed for the status to be Failed. This is a terminal state.   Canceled: The command was terminated before it was completed. This is a terminal state.   Rate Exceeded: The number of managed nodes targeted by the command exceeded the account limit for pending invocations. The system has canceled the command before running it on any managed node. This is a terminal state.  
      */
     StatusDetails?: StatusDetails;
     /**
@@ -2039,7 +2039,7 @@ declare namespace SSM {
      */
     OutputS3KeyPrefix?: S3KeyPrefix;
     /**
-     * The maximum number of instances that are allowed to run the command at the same time. You can specify a number of instances, such as 10, or a percentage of instances, such as 10%. The default value is 50. For more information about how to use MaxConcurrency, see Running commands using Systems Manager Run Command in the Amazon Web Services Systems Manager User Guide.
+     * The maximum number of managed nodes that are allowed to run the command at the same time. You can specify a number of managed nodes, such as 10, or a percentage of nodes, such as 10%. The default value is 50. For more information about how to use MaxConcurrency, see Running commands using Systems Manager Run Command in the Amazon Web Services Systems Manager User Guide.
      */
     MaxConcurrency?: MaxConcurrency;
     /**
@@ -2085,7 +2085,7 @@ declare namespace SSM {
      */
     key: CommandFilterKey;
     /**
-     * The filter value. Valid values for each filter key are as follows:    InvokedAfter: Specify a timestamp to limit your results. For example, specify 2021-07-07T00:00:00Z to see a list of command executions occurring July 7, 2021, and later.    InvokedBefore: Specify a timestamp to limit your results. For example, specify 2021-07-07T00:00:00Z to see a list of command executions from before July 7, 2021.    Status: Specify a valid command status to see a list of all command executions with that status. The status choices depend on the API you call. The status values you can specify for ListCommands are:    Pending     InProgress     Success     Cancelled     Failed     TimedOut (this includes both Delivery and Execution time outs)     AccessDenied     DeliveryTimedOut     ExecutionTimedOut     Incomplete     NoInstancesInTag     LimitExceeded    The status values you can specify for ListCommandInvocations are:    Pending     InProgress     Delayed     Success     Cancelled     Failed     TimedOut (this includes both Delivery and Execution time outs)     AccessDenied     DeliveryTimedOut     ExecutionTimedOut     Undeliverable     InvalidPlatform     Terminated       DocumentName: Specify name of the Amazon Web Services Systems Manager document (SSM document) for which you want to see command execution results. For example, specify AWS-RunPatchBaseline to see command executions that used this SSM document to perform security patching operations on instances.     ExecutionStage: Specify one of the following values (ListCommands operations only):    Executing: Returns a list of command executions that are currently still running.    Complete: Returns a list of command executions that have already completed.     
+     * The filter value. Valid values for each filter key are as follows:    InvokedAfter: Specify a timestamp to limit your results. For example, specify 2021-07-07T00:00:00Z to see a list of command executions occurring July 7, 2021, and later.    InvokedBefore: Specify a timestamp to limit your results. For example, specify 2021-07-07T00:00:00Z to see a list of command executions from before July 7, 2021.    Status: Specify a valid command status to see a list of all command executions with that status. The status choices depend on the API you call. The status values you can specify for ListCommands are:    Pending     InProgress     Success     Cancelled     Failed     TimedOut (this includes both Delivery and Execution time outs)     AccessDenied     DeliveryTimedOut     ExecutionTimedOut     Incomplete     NoInstancesInTag     LimitExceeded    The status values you can specify for ListCommandInvocations are:    Pending     InProgress     Delayed     Success     Cancelled     Failed     TimedOut (this includes both Delivery and Execution time outs)     AccessDenied     DeliveryTimedOut     ExecutionTimedOut     Undeliverable     InvalidPlatform     Terminated       DocumentName: Specify name of the Amazon Web Services Systems Manager document (SSM document) for which you want to see command execution results. For example, specify AWS-RunPatchBaseline to see command executions that used this SSM document to perform security patching operations on managed nodes.     ExecutionStage: Specify one of the following values (ListCommands operations only):    Executing: Returns a list of command executions that are currently still running.    Complete: Returns a list of command executions that have already completed.     
      */
     value: CommandFilterValue;
   }
@@ -2099,11 +2099,11 @@ declare namespace SSM {
      */
     CommandId?: CommandId;
     /**
-     * The instance ID in which this invocation was requested.
+     * The managed node ID in which this invocation was requested.
      */
     InstanceId?: InstanceId;
     /**
-     * The fully qualified host name of the managed instance.
+     * The fully qualified host name of the managed node.
      */
     InstanceName?: InstanceTagName;
     /**
@@ -2119,7 +2119,7 @@ declare namespace SSM {
      */
     DocumentVersion?: DocumentVersion;
     /**
-     * The time and date the request was sent to this instance.
+     * The time and date the request was sent to this managed node.
      */
     RequestedDateTime?: DateTime;
     /**
@@ -2127,7 +2127,7 @@ declare namespace SSM {
      */
     Status?: CommandInvocationStatus;
     /**
-     * A detailed status of the command execution for each invocation (each instance targeted by the command). StatusDetails includes more information than Status because it includes states resulting from error and concurrency control parameters. StatusDetails can show different results than Status. For more information about these statuses, see Understanding command statuses in the Amazon Web Services Systems Manager User Guide. StatusDetails can be one of the following values:   Pending: The command hasn't been sent to the instance.   In Progress: The command has been sent to the instance but hasn't reached a terminal state.   Success: The execution of the command or plugin was successfully completed. This is a terminal state.   Delivery Timed Out: The command wasn't delivered to the instance before the delivery timeout expired. Delivery timeouts don't count against the parent command's MaxErrors limit, but they do contribute to whether the parent command status is Success or Incomplete. This is a terminal state.   Execution Timed Out: Command execution started on the instance, but the execution wasn't complete before the execution timeout expired. Execution timeouts count against the MaxErrors limit of the parent command. This is a terminal state.   Failed: The command wasn't successful on the instance. For a plugin, this indicates that the result code wasn't zero. For a command invocation, this indicates that the result code for one or more plugins wasn't zero. Invocation failures count against the MaxErrors limit of the parent command. This is a terminal state.   Canceled: The command was terminated before it was completed. This is a terminal state.   Undeliverable: The command can't be delivered to the instance. The instance might not exist or might not be responding. Undeliverable invocations don't count against the parent command's MaxErrors limit and don't contribute to whether the parent command status is Success or Incomplete. This is a terminal state.   Terminated: The parent command exceeded its MaxErrors limit and subsequent command invocations were canceled by the system. This is a terminal state.  
+     * A detailed status of the command execution for each invocation (each managed node targeted by the command). StatusDetails includes more information than Status because it includes states resulting from error and concurrency control parameters. StatusDetails can show different results than Status. For more information about these statuses, see Understanding command statuses in the Amazon Web Services Systems Manager User Guide. StatusDetails can be one of the following values:   Pending: The command hasn't been sent to the managed node.   In Progress: The command has been sent to the managed node but hasn't reached a terminal state.   Success: The execution of the command or plugin was successfully completed. This is a terminal state.   Delivery Timed Out: The command wasn't delivered to the managed node before the delivery timeout expired. Delivery timeouts don't count against the parent command's MaxErrors limit, but they do contribute to whether the parent command status is Success or Incomplete. This is a terminal state.   Execution Timed Out: Command execution started on the managed node, but the execution wasn't complete before the execution timeout expired. Execution timeouts count against the MaxErrors limit of the parent command. This is a terminal state.   Failed: The command wasn't successful on the managed node. For a plugin, this indicates that the result code wasn't zero. For a command invocation, this indicates that the result code for one or more plugins wasn't zero. Invocation failures count against the MaxErrors limit of the parent command. This is a terminal state.   Canceled: The command was terminated before it was completed. This is a terminal state.   Undeliverable: The command can't be delivered to the managed node. The managed node might not exist or might not be responding. Undeliverable invocations don't count against the parent command's MaxErrors limit and don't contribute to whether the parent command status is Success or Incomplete. This is a terminal state.   Terminated: The parent command exceeded its MaxErrors limit and subsequent command invocations were canceled by the system. This is a terminal state.  
      */
     StatusDetails?: StatusDetails;
     /**
@@ -2147,11 +2147,11 @@ declare namespace SSM {
      */
     CommandPlugins?: CommandPluginList;
     /**
-     * The Identity and Access Management (IAM) service role that Run Command, a capability of Amazon Web Services Systems Manager, uses to act on your behalf when sending notifications about command status changes on a per instance basis.
+     * The Identity and Access Management (IAM) service role that Run Command, a capability of Amazon Web Services Systems Manager, uses to act on your behalf when sending notifications about command status changes on a per managed node basis.
      */
     ServiceRole?: ServiceRole;
     /**
-     * Configurations for sending notifications about command status changes on a per instance basis.
+     * Configurations for sending notifications about command status changes on a per managed node basis.
      */
     NotificationConfig?: NotificationConfig;
     /**
@@ -2173,7 +2173,7 @@ declare namespace SSM {
      */
     Status?: CommandPluginStatus;
     /**
-     * A detailed status of the plugin execution. StatusDetails includes more information than Status because it includes states resulting from error and concurrency control parameters. StatusDetails can show different results than Status. For more information about these statuses, see Understanding command statuses in the Amazon Web Services Systems Manager User Guide. StatusDetails can be one of the following values:   Pending: The command hasn't been sent to the instance.   In Progress: The command has been sent to the instance but hasn't reached a terminal state.   Success: The execution of the command or plugin was successfully completed. This is a terminal state.   Delivery Timed Out: The command wasn't delivered to the instance before the delivery timeout expired. Delivery timeouts don't count against the parent command's MaxErrors limit, but they do contribute to whether the parent command status is Success or Incomplete. This is a terminal state.   Execution Timed Out: Command execution started on the instance, but the execution wasn't complete before the execution timeout expired. Execution timeouts count against the MaxErrors limit of the parent command. This is a terminal state.   Failed: The command wasn't successful on the instance. For a plugin, this indicates that the result code wasn't zero. For a command invocation, this indicates that the result code for one or more plugins wasn't zero. Invocation failures count against the MaxErrors limit of the parent command. This is a terminal state.   Canceled: The command was terminated before it was completed. This is a terminal state.   Undeliverable: The command can't be delivered to the instance. The instance might not exist, or it might not be responding. Undeliverable invocations don't count against the parent command's MaxErrors limit, and they don't contribute to whether the parent command status is Success or Incomplete. This is a terminal state.   Terminated: The parent command exceeded its MaxErrors limit and subsequent command invocations were canceled by the system. This is a terminal state.  
+     * A detailed status of the plugin execution. StatusDetails includes more information than Status because it includes states resulting from error and concurrency control parameters. StatusDetails can show different results than Status. For more information about these statuses, see Understanding command statuses in the Amazon Web Services Systems Manager User Guide. StatusDetails can be one of the following values:   Pending: The command hasn't been sent to the managed node.   In Progress: The command has been sent to the managed node but hasn't reached a terminal state.   Success: The execution of the command or plugin was successfully completed. This is a terminal state.   Delivery Timed Out: The command wasn't delivered to the managed node before the delivery timeout expired. Delivery timeouts don't count against the parent command's MaxErrors limit, but they do contribute to whether the parent command status is Success or Incomplete. This is a terminal state.   Execution Timed Out: Command execution started on the managed node, but the execution wasn't complete before the execution timeout expired. Execution timeouts count against the MaxErrors limit of the parent command. This is a terminal state.   Failed: The command wasn't successful on the managed node. For a plugin, this indicates that the result code wasn't zero. For a command invocation, this indicates that the result code for one or more plugins wasn't zero. Invocation failures count against the MaxErrors limit of the parent command. This is a terminal state.   Canceled: The command was terminated before it was completed. This is a terminal state.   Undeliverable: The command can't be delivered to the managed node. The managed node might not exist, or it might not be responding. Undeliverable invocations don't count against the parent command's MaxErrors limit, and they don't contribute to whether the parent command status is Success or Incomplete. This is a terminal state.   Terminated: The parent command exceeded its MaxErrors limit and subsequent command invocations were canceled by the system. This is a terminal state.  
      */
     StatusDetails?: StatusDetails;
     /**
@@ -2205,11 +2205,11 @@ declare namespace SSM {
      */
     OutputS3Region?: S3Region;
     /**
-     * The S3 bucket where the responses to the command executions should be stored. This was requested when issuing the command. For example, in the following response:  doc-example-bucket/ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix/i-02573cafcfEXAMPLE/awsrunShellScript   doc-example-bucket is the name of the S3 bucket;  ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix is the name of the S3 prefix;  i-02573cafcfEXAMPLE is the instance ID;  awsrunShellScript is the name of the plugin.
+     * The S3 bucket where the responses to the command executions should be stored. This was requested when issuing the command. For example, in the following response:  doc-example-bucket/ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix/i-02573cafcfEXAMPLE/awsrunShellScript   doc-example-bucket is the name of the S3 bucket;  ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix is the name of the S3 prefix;  i-02573cafcfEXAMPLE is the managed node ID;  awsrunShellScript is the name of the plugin.
      */
     OutputS3BucketName?: S3BucketName;
     /**
-     * The S3 directory path inside the bucket where the responses to the command executions should be stored. This was requested when issuing the command. For example, in the following response:  doc-example-bucket/ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix/i-02573cafcfEXAMPLE/awsrunShellScript   doc-example-bucket is the name of the S3 bucket;  ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix is the name of the S3 prefix;  i-02573cafcfEXAMPLE is the instance ID;  awsrunShellScript is the name of the plugin.
+     * The S3 directory path inside the bucket where the responses to the command executions should be stored. This was requested when issuing the command. For example, in the following response:  doc-example-bucket/ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix/i-02573cafcfEXAMPLE/awsrunShellScript   doc-example-bucket is the name of the S3 bucket;  ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix is the name of the S3 prefix;  i-02573cafcfEXAMPLE is the managed node ID;  awsrunShellScript is the name of the plugin.
      */
     OutputS3KeyPrefix?: S3KeyPrefix;
   }
@@ -2247,7 +2247,7 @@ declare namespace SSM {
      */
     ResourceType?: ComplianceResourceType;
     /**
-     * An ID for the resource. For a managed instance, this is the instance ID.
+     * An ID for the resource. For a managed node, this is the node ID.
      */
     ResourceId?: ComplianceResourceId;
     /**
@@ -2364,15 +2364,15 @@ declare namespace SSM {
      */
     Description?: ActivationDescription;
     /**
-     * The name of the registered, managed instance as it will appear in the Amazon Web Services Systems Manager console or when you use the Amazon Web Services command line tools to list Systems Manager resources.  Don't enter personally identifiable information in this field. 
+     * The name of the registered, managed node as it will appear in the Amazon Web Services Systems Manager console or when you use the Amazon Web Services command line tools to list Systems Manager resources.  Don't enter personally identifiable information in this field. 
      */
     DefaultInstanceName?: DefaultInstanceName;
     /**
-     * The name of the Identity and Access Management (IAM) role that you want to assign to the managed instance. This IAM role must provide AssumeRole permissions for the Amazon Web Services Systems Manager service principal ssm.amazonaws.com. For more information, see Create an IAM service role for a hybrid environment in the Amazon Web Services Systems Manager User Guide.
+     * The name of the Identity and Access Management (IAM) role that you want to assign to the managed node. This IAM role must provide AssumeRole permissions for the Amazon Web Services Systems Manager service principal ssm.amazonaws.com. For more information, see Create an IAM service role for a hybrid environment in the Amazon Web Services Systems Manager User Guide.
      */
     IamRole: IamRole;
     /**
-     * Specify the maximum number of managed instances you want to register. The default value is 1.
+     * Specify the maximum number of managed nodes you want to register. The default value is 1.
      */
     RegistrationLimit?: RegistrationLimit;
     /**
@@ -2380,7 +2380,7 @@ declare namespace SSM {
      */
     ExpirationDate?: ExpirationDate;
     /**
-     * Optional metadata that you assign to a resource. Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment. For example, you might want to tag an activation to identify which servers or virtual machines (VMs) in your on-premises environment you intend to activate. In this case, you could specify the following key-value pairs:    Key=OS,Value=Windows     Key=Environment,Value=Production     When you install SSM Agent on your on-premises servers and VMs, you specify an activation ID and code. When you specify the activation ID and code, tags assigned to the activation are automatically applied to the on-premises servers or VMs.  You can't add tags to or delete tags from an existing activation. You can tag your on-premises servers and VMs after they connect to Systems Manager for the first time and are assigned a managed instance ID. This means they are listed in the Amazon Web Services Systems Manager console with an ID that is prefixed with "mi-". For information about how to add tags to your managed instances, see AddTagsToResource. For information about how to remove tags from your managed instances, see RemoveTagsFromResource.
+     * Optional metadata that you assign to a resource. Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment. For example, you might want to tag an activation to identify which servers or virtual machines (VMs) in your on-premises environment you intend to activate. In this case, you could specify the following key-value pairs:    Key=OS,Value=Windows     Key=Environment,Value=Production     When you install SSM Agent on your on-premises servers and VMs, you specify an activation ID and code. When you specify the activation ID and code, tags assigned to the activation are automatically applied to the on-premises servers or VMs.  You can't add tags to or delete tags from an existing activation. You can tag your on-premises servers, edge devices, and VMs after they connect to Systems Manager for the first time and are assigned a managed node ID. This means they are listed in the Amazon Web Services Systems Manager console with an ID that is prefixed with "mi-". For information about how to add tags to your managed nodes, see AddTagsToResource. For information about how to remove tags from your managed nodes, see RemoveTagsFromResource.
      */
     Tags?: TagList;
     /**
@@ -2407,11 +2407,11 @@ declare namespace SSM {
   export type CreateAssociationBatchRequestEntries = CreateAssociationBatchRequestEntry[];
   export interface CreateAssociationBatchRequestEntry {
     /**
-     * The name of the SSM document that contains the configuration information for the instance. You can specify Command or Automation runbooks. You can specify Amazon Web Services-predefined documents, documents you created, or a document that is shared with you from another account. For SSM documents that are shared with you from other Amazon Web Services accounts, you must specify the complete SSM document ARN, in the following format:  arn:aws:ssm:region:account-id:document/document-name   For example:  arn:aws:ssm:us-east-2:12345678912:document/My-Shared-Document  For Amazon Web Services-predefined documents and SSM documents you created in your account, you only need to specify the document name. For example, AWS-ApplyPatchBaseline or My-Document.
+     * The name of the SSM document that contains the configuration information for the managed node. You can specify Command or Automation runbooks. You can specify Amazon Web Services-predefined documents, documents you created, or a document that is shared with you from another account. For SSM documents that are shared with you from other Amazon Web Services accounts, you must specify the complete SSM document ARN, in the following format:  arn:aws:ssm:region:account-id:document/document-name   For example:  arn:aws:ssm:us-east-2:12345678912:document/My-Shared-Document  For Amazon Web Services-predefined documents and SSM documents you created in your account, you only need to specify the document name. For example, AWS-ApplyPatchBaseline or My-Document.
      */
     Name: DocumentARN;
     /**
-     * The instance ID.   InstanceId has been deprecated. To specify an instance ID for an association, use the Targets parameter. Requests that include the parameter InstanceID with Systems Manager documents (SSM documents) that use schema version 2.0 or later will fail. In addition, if you use the parameter InstanceId, you can't use the parameters AssociationName, DocumentVersion, MaxErrors, MaxConcurrency, OutputLocation, or ScheduleExpression. To use these parameters, you must use the Targets parameter. 
+     * The managed node ID.   InstanceId has been deprecated. To specify a managed node ID for an association, use the Targets parameter. Requests that include the parameter InstanceID with Systems Manager documents (SSM documents) that use schema version 2.0 or later will fail. In addition, if you use the parameter InstanceId, you can't use the parameters AssociationName, DocumentVersion, MaxErrors, MaxConcurrency, OutputLocation, or ScheduleExpression. To use these parameters, you must use the Targets parameter. 
      */
     InstanceId?: InstanceId;
     /**
@@ -2427,7 +2427,7 @@ declare namespace SSM {
      */
     DocumentVersion?: DocumentVersion;
     /**
-     * The instances targeted by the request.
+     * The managed nodes targeted by the request.
      */
     Targets?: Targets;
     /**
@@ -2443,11 +2443,11 @@ declare namespace SSM {
      */
     AssociationName?: AssociationName;
     /**
-     * The number of errors that are allowed before the system stops sending requests to run the association on additional targets. You can specify either an absolute number of errors, for example 10, or a percentage of the target set, for example 10%. If you specify 3, for example, the system stops sending requests when the fourth error is received. If you specify 0, then the system stops sending requests after the first error is returned. If you run an association on 50 instances and set MaxError to 10%, then the system stops sending the request when the sixth error is received. Executions that are already running an association when MaxErrors is reached are allowed to complete, but some of these executions may fail as well. If you need to ensure that there won't be more than max-errors failed executions, set MaxConcurrency to 1 so that executions proceed one at a time.
+     * The number of errors that are allowed before the system stops sending requests to run the association on additional targets. You can specify either an absolute number of errors, for example 10, or a percentage of the target set, for example 10%. If you specify 3, for example, the system stops sending requests when the fourth error is received. If you specify 0, then the system stops sending requests after the first error is returned. If you run an association on 50 managed nodes and set MaxError to 10%, then the system stops sending the request when the sixth error is received. Executions that are already running an association when MaxErrors is reached are allowed to complete, but some of these executions may fail as well. If you need to ensure that there won't be more than max-errors failed executions, set MaxConcurrency to 1 so that executions proceed one at a time.
      */
     MaxErrors?: MaxErrors;
     /**
-     * The maximum number of targets allowed to run the association at the same time. You can specify a number, for example 10, or a percentage of the target set, for example 10%. The default value is 100%, which means all targets run the association at the same time. If a new instance starts and attempts to run an association while Systems Manager is running MaxConcurrency associations, the association is allowed to run. During the next association interval, the new instance will process its association within the limit specified for MaxConcurrency.
+     * The maximum number of targets allowed to run the association at the same time. You can specify a number, for example 10, or a percentage of the target set, for example 10%. The default value is 100%, which means all targets run the association at the same time. If a new managed node starts and attempts to run an association while Systems Manager is running MaxConcurrency associations, the association is allowed to run. During the next association interval, the new managed node will process its association within the limit specified for MaxConcurrency.
      */
     MaxConcurrency?: MaxConcurrency;
     /**
@@ -2483,7 +2483,7 @@ declare namespace SSM {
   }
   export interface CreateAssociationRequest {
     /**
-     * The name of the SSM Command document or Automation runbook that contains the configuration information for the instance. You can specify Amazon Web Services-predefined documents, documents you created, or a document that is shared with you from another account. For Systems Manager documents (SSM documents) that are shared with you from other Amazon Web Services accounts, you must specify the complete SSM document ARN, in the following format:  arn:partition:ssm:region:account-id:document/document-name   For example:  arn:aws:ssm:us-east-2:12345678912:document/My-Shared-Document  For Amazon Web Services-predefined documents and SSM documents you created in your account, you only need to specify the document name. For example, AWS-ApplyPatchBaseline or My-Document.
+     * The name of the SSM Command document or Automation runbook that contains the configuration information for the managed node. You can specify Amazon Web Services-predefined documents, documents you created, or a document that is shared with you from another account. For Systems Manager documents (SSM documents) that are shared with you from other Amazon Web Services accounts, you must specify the complete SSM document ARN, in the following format:  arn:partition:ssm:region:account-id:document/document-name   For example:  arn:aws:ssm:us-east-2:12345678912:document/My-Shared-Document  For Amazon Web Services-predefined documents and SSM documents you created in your account, you only need to specify the document name. For example, AWS-ApplyPatchBaseline or My-Document.
      */
     Name: DocumentARN;
     /**
@@ -2491,7 +2491,7 @@ declare namespace SSM {
      */
     DocumentVersion?: DocumentVersion;
     /**
-     * The instance ID.   InstanceId has been deprecated. To specify an instance ID for an association, use the Targets parameter. Requests that include the parameter InstanceID with Systems Manager documents (SSM documents) that use schema version 2.0 or later will fail. In addition, if you use the parameter InstanceId, you can't use the parameters AssociationName, DocumentVersion, MaxErrors, MaxConcurrency, OutputLocation, or ScheduleExpression. To use these parameters, you must use the Targets parameter. 
+     * The managed node ID.   InstanceId has been deprecated. To specify a managed node ID for an association, use the Targets parameter. Requests that include the parameter InstanceID with Systems Manager documents (SSM documents) that use schema version 2.0 or later will fail. In addition, if you use the parameter InstanceId, you can't use the parameters AssociationName, DocumentVersion, MaxErrors, MaxConcurrency, OutputLocation, or ScheduleExpression. To use these parameters, you must use the Targets parameter. 
      */
     InstanceId?: InstanceId;
     /**
@@ -2499,7 +2499,7 @@ declare namespace SSM {
      */
     Parameters?: Parameters;
     /**
-     * The targets for the association. You can target instances by using tags, Amazon Web Services resource groups, all instances in an Amazon Web Services account, or individual instance IDs. You can target all instances in an Amazon Web Services account by specifying the InstanceIds key with a value of *. For more information about choosing targets for an association, see Using targets and rate controls with State Manager associations in the Amazon Web Services Systems Manager User Guide.
+     * The targets for the association. You can target managed nodes by using tags, Amazon Web Services resource groups, all managed nodes in an Amazon Web Services account, or individual managed node IDs. You can target all managed nodes in an Amazon Web Services account by specifying the InstanceIds key with a value of *. For more information about choosing targets for an association, see Using targets and rate controls with State Manager associations in the Amazon Web Services Systems Manager User Guide.
      */
     Targets?: Targets;
     /**
@@ -2519,11 +2519,11 @@ declare namespace SSM {
      */
     AutomationTargetParameterName?: AutomationTargetParameterName;
     /**
-     * The number of errors that are allowed before the system stops sending requests to run the association on additional targets. You can specify either an absolute number of errors, for example 10, or a percentage of the target set, for example 10%. If you specify 3, for example, the system stops sending requests when the fourth error is received. If you specify 0, then the system stops sending requests after the first error is returned. If you run an association on 50 instances and set MaxError to 10%, then the system stops sending the request when the sixth error is received. Executions that are already running an association when MaxErrors is reached are allowed to complete, but some of these executions may fail as well. If you need to ensure that there won't be more than max-errors failed executions, set MaxConcurrency to 1 so that executions proceed one at a time.
+     * The number of errors that are allowed before the system stops sending requests to run the association on additional targets. You can specify either an absolute number of errors, for example 10, or a percentage of the target set, for example 10%. If you specify 3, for example, the system stops sending requests when the fourth error is received. If you specify 0, then the system stops sending requests after the first error is returned. If you run an association on 50 managed nodes and set MaxError to 10%, then the system stops sending the request when the sixth error is received. Executions that are already running an association when MaxErrors is reached are allowed to complete, but some of these executions may fail as well. If you need to ensure that there won't be more than max-errors failed executions, set MaxConcurrency to 1 so that executions proceed one at a time.
      */
     MaxErrors?: MaxErrors;
     /**
-     * The maximum number of targets allowed to run the association at the same time. You can specify a number, for example 10, or a percentage of the target set, for example 10%. The default value is 100%, which means all targets run the association at the same time. If a new instance starts and attempts to run an association while Systems Manager is running MaxConcurrency associations, the association is allowed to run. During the next association interval, the new instance will process its association within the limit specified for MaxConcurrency.
+     * The maximum number of targets allowed to run the association at the same time. You can specify a number, for example 10, or a percentage of the target set, for example 10%. The default value is 100%, which means all targets run the association at the same time. If a new managed node starts and attempts to run an association while Systems Manager is running MaxConcurrency associations, the association is allowed to run. During the next association interval, the new managed node will process its association within the limit specified for MaxConcurrency.
      */
     MaxConcurrency?: MaxConcurrency;
     /**
@@ -2639,7 +2639,7 @@ declare namespace SSM {
      */
     Cutoff: MaintenanceWindowCutoff;
     /**
-     * Enables a maintenance window task to run on managed instances, even if you haven't registered those instances as targets. If enabled, then you must specify the unregistered instances (by instance ID) when you register a task with the maintenance window. If you don't enable this option, then you must specify previously-registered targets when you register a task with the maintenance window.
+     * Enables a maintenance window task to run on managed nodes, even if you haven't registered those nodes as targets. If enabled, then you must specify the unregistered managed nodes (by node ID) when you register a task with the maintenance window. If you don't enable this option, then you must specify previously-registered targets when you register a task with the maintenance window.
      */
     AllowUnassociatedTargets: MaintenanceWindowAllowUnassociatedTargets;
     /**
@@ -2771,7 +2771,7 @@ declare namespace SSM {
      */
     ApprovedPatchesComplianceLevel?: PatchComplianceLevel;
     /**
-     * Indicates whether the list of approved patches includes non-security updates that should be applied to the instances. The default value is false. Applies to Linux instances only.
+     * Indicates whether the list of approved patches includes non-security updates that should be applied to the managed nodes. The default value is false. Applies to Linux managed nodes only.
      */
     ApprovedPatchesEnableNonSecurity?: Boolean;
     /**
@@ -2787,7 +2787,7 @@ declare namespace SSM {
      */
     Description?: BaselineDescription;
     /**
-     * Information about the patches to use to update the instances, including target operating systems and source repositories. Applies to Linux instances only.
+     * Information about the patches to use to update the managed nodes, including target operating systems and source repositories. Applies to Linux managed nodes only.
      */
     Sources?: PatchSourceList;
     /**
@@ -2843,7 +2843,7 @@ declare namespace SSM {
      */
     Name?: DocumentARN;
     /**
-     * The instance ID.   InstanceId has been deprecated. To specify an instance ID for an association, use the Targets parameter. Requests that include the parameter InstanceID with Systems Manager documents (SSM documents) that use schema version 2.0 or later will fail. In addition, if you use the parameter InstanceId, you can't use the parameters AssociationName, DocumentVersion, MaxErrors, MaxConcurrency, OutputLocation, or ScheduleExpression. To use these parameters, you must use the Targets parameter. 
+     * The managed node ID.   InstanceId has been deprecated. To specify a managed node ID for an association, use the Targets parameter. Requests that include the parameter InstanceID with Systems Manager documents (SSM documents) that use schema version 2.0 or later will fail. In addition, if you use the parameter InstanceId, you can't use the parameters AssociationName, DocumentVersion, MaxErrors, MaxConcurrency, OutputLocation, or ScheduleExpression. To use these parameters, you must use the Targets parameter. 
      */
     InstanceId?: InstanceId;
     /**
@@ -2976,7 +2976,7 @@ declare namespace SSM {
   export type DeliveryTimedOutCount = number;
   export interface DeregisterManagedInstanceRequest {
     /**
-     * The ID assigned to the managed instance when you registered it using the activation process. 
+     * The ID assigned to the managed node when you registered it using the activation process. 
      */
     InstanceId: ManagedInstanceId;
   }
@@ -3148,7 +3148,7 @@ declare namespace SSM {
      */
     Name?: DocumentARN;
     /**
-     * The instance ID.
+     * The managed node ID.
      */
     InstanceId?: InstanceId;
     /**
@@ -3156,7 +3156,7 @@ declare namespace SSM {
      */
     AssociationId?: AssociationId;
     /**
-     * Specify the association version to retrieve. To view the latest version, either specify $LATEST for this parameter, or omit this parameter. To view a list of all associations for an instance, use ListAssociations. To get a list of versions for a specific association, use ListAssociationVersions. 
+     * Specify the association version to retrieve. To view the latest version, either specify $LATEST for this parameter, or omit this parameter. To view a list of all associations for a managed node, use ListAssociations. To get a list of versions for a specific association, use ListAssociationVersions. 
      */
     AssociationVersion?: AssociationVersion;
   }
@@ -3224,7 +3224,7 @@ declare namespace SSM {
   }
   export interface DescribeAvailablePatchesRequest {
     /**
-     * Each element in the array is a structure containing a key-value pair.  Windows Server  Supported keys for Windows Server instance patches include the following:     PATCH_SET   Sample values: OS | APPLICATION      PRODUCT   Sample values: WindowsServer2012 | Office 2010 | MicrosoftDefenderAntivirus      PRODUCT_FAMILY   Sample values: Windows | Office      MSRC_SEVERITY   Sample values: ServicePacks | Important | Moderate      CLASSIFICATION   Sample values: ServicePacks | SecurityUpdates | DefinitionUpdates      PATCH_ID   Sample values: KB123456 | KB4516046     Linux   When specifying filters for Linux patches, you must specify a key-pair for PRODUCT. For example, using the Command Line Interface (CLI), the following command fails:  aws ssm describe-available-patches --filters Key=CVE_ID,Values=CVE-2018-3615  However, the following command succeeds:  aws ssm describe-available-patches --filters Key=PRODUCT,Values=AmazonLinux2018.03 Key=CVE_ID,Values=CVE-2018-3615   Supported keys for Linux instance patches include the following:     PRODUCT   Sample values: AmazonLinux2018.03 | AmazonLinux2.0      NAME   Sample values: kernel-headers | samba-python | php      SEVERITY   Sample values: Critical | Important | Medium | Low      EPOCH   Sample values: 0 | 1      VERSION   Sample values: 78.6.1 | 4.10.16      RELEASE   Sample values: 9.56.amzn1 | 1.amzn2      ARCH   Sample values: i686 | x86_64      REPOSITORY   Sample values: Core | Updates      ADVISORY_ID   Sample values: ALAS-2018-1058 | ALAS2-2021-1594      CVE_ID   Sample values: CVE-2018-3615 | CVE-2020-1472      BUGZILLA_ID   Sample values: 1463241   
+     * Each element in the array is a structure containing a key-value pair.  Windows Server  Supported keys for Windows Server managed node patches include the following:     PATCH_SET   Sample values: OS | APPLICATION      PRODUCT   Sample values: WindowsServer2012 | Office 2010 | MicrosoftDefenderAntivirus      PRODUCT_FAMILY   Sample values: Windows | Office      MSRC_SEVERITY   Sample values: ServicePacks | Important | Moderate      CLASSIFICATION   Sample values: ServicePacks | SecurityUpdates | DefinitionUpdates      PATCH_ID   Sample values: KB123456 | KB4516046     Linux   When specifying filters for Linux patches, you must specify a key-pair for PRODUCT. For example, using the Command Line Interface (CLI), the following command fails:  aws ssm describe-available-patches --filters Key=CVE_ID,Values=CVE-2018-3615  However, the following command succeeds:  aws ssm describe-available-patches --filters Key=PRODUCT,Values=AmazonLinux2018.03 Key=CVE_ID,Values=CVE-2018-3615   Supported keys for Linux managed node patches include the following:     PRODUCT   Sample values: AmazonLinux2018.03 | AmazonLinux2.0      NAME   Sample values: kernel-headers | samba-python | php      SEVERITY   Sample values: Critical | Important | Medium | Low      EPOCH   Sample values: 0 | 1      VERSION   Sample values: 78.6.1 | 4.10.16      RELEASE   Sample values: 9.56.amzn1 | 1.amzn2      ARCH   Sample values: i686 | x86_64      REPOSITORY   Sample values: Core | Updates      ADVISORY_ID   Sample values: ALAS-2018-1058 | ALAS2-2021-1594      CVE_ID   Sample values: CVE-2018-3615 | CVE-2020-1472      BUGZILLA_ID   Sample values: 1463241   
      */
     Filters?: PatchOrchestratorFilterList;
     /**
@@ -3300,7 +3300,7 @@ declare namespace SSM {
   }
   export interface DescribeEffectiveInstanceAssociationsRequest {
     /**
-     * The instance ID for which you want to view all associations.
+     * The managed node ID for which you want to view all associations.
      */
     InstanceId: InstanceId;
     /**
@@ -3314,7 +3314,7 @@ declare namespace SSM {
   }
   export interface DescribeEffectiveInstanceAssociationsResult {
     /**
-     * The associations for the requested instance.
+     * The associations for the requested managed node.
      */
     Associations?: InstanceAssociationList;
     /**
@@ -3348,7 +3348,7 @@ declare namespace SSM {
   }
   export interface DescribeInstanceAssociationsStatusRequest {
     /**
-     * The instance IDs for which you want association status information.
+     * The managed node IDs for which you want association status information.
      */
     InstanceId: InstanceId;
     /**
@@ -3372,11 +3372,11 @@ declare namespace SSM {
   }
   export interface DescribeInstanceInformationRequest {
     /**
-     * This is a legacy method. We recommend that you don't use this method. Instead, use the Filters data type. Filters enables you to return instance information by filtering based on tags applied to managed instances.  Attempting to use InstanceInformationFilterList and Filters leads to an exception error.  
+     * This is a legacy method. We recommend that you don't use this method. Instead, use the Filters data type. Filters enables you to return node information by filtering based on tags applied to managed nodes.  Attempting to use InstanceInformationFilterList and Filters leads to an exception error.  
      */
     InstanceInformationFilterList?: InstanceInformationFilterList;
     /**
-     * One or more filters. Use a filter to return a more specific list of instances. You can filter based on tags applied to EC2 instances. Use this Filters data type instead of InstanceInformationFilterList, which is deprecated.
+     * One or more filters. Use a filter to return a more specific list of managed nodes. You can filter based on tags applied to EC2 instances. Use this Filters data type instead of InstanceInformationFilterList, which is deprecated.
      */
     Filters?: InstanceInformationStringFilterList;
     /**
@@ -3390,7 +3390,7 @@ declare namespace SSM {
   }
   export interface DescribeInstanceInformationResult {
     /**
-     * The instance information list.
+     * The managed node information list.
      */
     InstanceInformationList?: InstanceInformationList;
     /**
@@ -3418,7 +3418,7 @@ declare namespace SSM {
   }
   export interface DescribeInstancePatchStatesForPatchGroupResult {
     /**
-     * The high-level patch state for the requested instances. 
+     * The high-level patch state for the requested managed nodes. 
      */
     InstancePatchStates?: InstancePatchStatesList;
     /**
@@ -3428,7 +3428,7 @@ declare namespace SSM {
   }
   export interface DescribeInstancePatchStatesRequest {
     /**
-     * The ID of the instance for which patch state information should be retrieved.
+     * The ID of the managed node for which patch state information should be retrieved.
      */
     InstanceIds: InstanceIdList;
     /**
@@ -3436,13 +3436,13 @@ declare namespace SSM {
      */
     NextToken?: NextToken;
     /**
-     * The maximum number of instances to return (per page).
+     * The maximum number of managed nodes to return (per page).
      */
     MaxResults?: PatchComplianceMaxResults;
   }
   export interface DescribeInstancePatchStatesResult {
     /**
-     * The high-level patch state for the requested instances.
+     * The high-level patch state for the requested managed nodes.
      */
     InstancePatchStates?: InstancePatchStateList;
     /**
@@ -3452,7 +3452,7 @@ declare namespace SSM {
   }
   export interface DescribeInstancePatchesRequest {
     /**
-     * The ID of the instance whose patch state information should be retrieved.
+     * The ID of the managed node whose patch state information should be retrieved.
      */
     InstanceId: InstanceId;
     /**
@@ -3596,7 +3596,7 @@ declare namespace SSM {
      */
     WindowId?: MaintenanceWindowId;
     /**
-     * The instance ID or key-value pair to retrieve information about.
+     * The managed node ID or key-value pair to retrieve information about.
      */
     Targets?: Targets;
     /**
@@ -3684,7 +3684,7 @@ declare namespace SSM {
   }
   export interface DescribeMaintenanceWindowsForTargetRequest {
     /**
-     * The instance ID or key-value pair to retrieve information about.
+     * The managed node ID or key-value pair to retrieve information about.
      */
     Targets: Targets;
     /**
@@ -3702,7 +3702,7 @@ declare namespace SSM {
   }
   export interface DescribeMaintenanceWindowsForTargetResult {
     /**
-     * Information about the maintenance window targets and tasks an instance is associated with.
+     * Information about the maintenance window targets and tasks a managed node is associated with.
      */
     WindowIdentities?: MaintenanceWindowsForTargetList;
     /**
@@ -3818,51 +3818,51 @@ declare namespace SSM {
   }
   export interface DescribePatchGroupStateResult {
     /**
-     * The number of instances in the patch group.
+     * The number of managed nodes in the patch group.
      */
     Instances?: Integer;
     /**
-     * The number of instances with installed patches.
+     * The number of managed nodes with installed patches.
      */
     InstancesWithInstalledPatches?: Integer;
     /**
-     * The number of instances with patches installed that aren't defined in the patch baseline.
+     * The number of managed nodes with patches installed that aren't defined in the patch baseline.
      */
     InstancesWithInstalledOtherPatches?: Integer;
     /**
-     * The number of instances with patches installed by Patch Manager that haven't been rebooted after the patch installation. The status of these instances is NON_COMPLIANT.
+     * The number of managed nodes with patches installed by Patch Manager that haven't been rebooted after the patch installation. The status of these managed nodes is NON_COMPLIANT.
      */
     InstancesWithInstalledPendingRebootPatches?: InstancesCount;
     /**
-     * The number of instances with patches installed that are specified in a RejectedPatches list. Patches with a status of INSTALLED_REJECTED were typically installed before they were added to a RejectedPatches list.  If ALLOW_AS_DEPENDENCY is the specified option for RejectedPatchesAction, the value of InstancesWithInstalledRejectedPatches will always be 0 (zero). 
+     * The number of managed nodes with patches installed that are specified in a RejectedPatches list. Patches with a status of INSTALLED_REJECTED were typically installed before they were added to a RejectedPatches list.  If ALLOW_AS_DEPENDENCY is the specified option for RejectedPatchesAction, the value of InstancesWithInstalledRejectedPatches will always be 0 (zero). 
      */
     InstancesWithInstalledRejectedPatches?: InstancesCount;
     /**
-     * The number of instances with missing patches from the patch baseline.
+     * The number of managed nodes with missing patches from the patch baseline.
      */
     InstancesWithMissingPatches?: Integer;
     /**
-     * The number of instances with patches from the patch baseline that failed to install.
+     * The number of managed nodes with patches from the patch baseline that failed to install.
      */
     InstancesWithFailedPatches?: Integer;
     /**
-     * The number of instances with patches that aren't applicable.
+     * The number of managed nodes with patches that aren't applicable.
      */
     InstancesWithNotApplicablePatches?: Integer;
     /**
-     * The number of instances with NotApplicable patches beyond the supported limit, which aren't reported by name to Inventory. Inventory is a capability of Amazon Web Services Systems Manager.
+     * The number of managed nodes with NotApplicable patches beyond the supported limit, which aren't reported by name to Inventory. Inventory is a capability of Amazon Web Services Systems Manager.
      */
     InstancesWithUnreportedNotApplicablePatches?: Integer;
     /**
-     * The number of instances where patches that are specified as Critical for compliance reporting in the patch baseline aren't installed. These patches might be missing, have failed installation, were rejected, or were installed but awaiting a required instance reboot. The status of these instances is NON_COMPLIANT.
+     * The number of managed nodes where patches that are specified as Critical for compliance reporting in the patch baseline aren't installed. These patches might be missing, have failed installation, were rejected, or were installed but awaiting a required managed node reboot. The status of these managed nodes is NON_COMPLIANT.
      */
     InstancesWithCriticalNonCompliantPatches?: InstancesCount;
     /**
-     * The number of instances where patches that are specified as Security in a patch advisory aren't installed. These patches might be missing, have failed installation, were rejected, or were installed but awaiting a required instance reboot. The status of these instances is NON_COMPLIANT.
+     * The number of managed nodes where patches that are specified as Security in a patch advisory aren't installed. These patches might be missing, have failed installation, were rejected, or were installed but awaiting a required managed node reboot. The status of these managed nodes is NON_COMPLIANT.
      */
     InstancesWithSecurityNonCompliantPatches?: InstancesCount;
     /**
-     * The number of instances with patches installed that are specified as other than Critical or Security but aren't compliant with the patch baseline. The status of these instances is NON_COMPLIANT.
+     * The number of managed nodes with patches installed that are specified as other than Critical or Security but aren't compliant with the patch baseline. The status of these managed nodes is NON_COMPLIANT.
      */
     InstancesWithOtherNonCompliantPatches?: InstancesCount;
   }
@@ -4420,7 +4420,7 @@ declare namespace SSM {
      */
     CommandId: CommandId;
     /**
-     * (Required) The ID of the managed instance targeted by the command. A managed instance can be an Amazon Elastic Compute Cloud (Amazon EC2) instance or an instance in your hybrid environment that is configured for Amazon Web Services Systems Manager.
+     * (Required) The ID of the managed node targeted by the command. A managed node can be an Amazon Elastic Compute Cloud (Amazon EC2) instance, edge device, and on-premises server or VM in your hybrid environment that is configured for Amazon Web Services Systems Manager.
      */
     InstanceId: InstanceId;
     /**
@@ -4434,7 +4434,7 @@ declare namespace SSM {
      */
     CommandId?: CommandId;
     /**
-     * The ID of the managed instance targeted by the command. A managed instance can be an EC2 instance or an instance in your hybrid environment that is configured for Systems Manager.
+     * The ID of the managed node targeted by the command. A managed node can be an Amazon Elastic Compute Cloud (Amazon EC2) instance, edge device, or on-premises server or VM in your hybrid environment that is configured for Amazon Web Services Systems Manager.
      */
     InstanceId?: InstanceId;
     /**
@@ -4454,7 +4454,7 @@ declare namespace SSM {
      */
     PluginName?: CommandPluginName;
     /**
-     * The error level response code for the plugin script. If the response code is -1, then the command hasn't started running on the instance, or it wasn't received by the instance.
+     * The error level response code for the plugin script. If the response code is -1, then the command hasn't started running on the managed node, or it wasn't received by the node.
      */
     ResponseCode?: ResponseCode;
     /**
@@ -4474,7 +4474,7 @@ declare namespace SSM {
      */
     Status?: CommandInvocationStatus;
     /**
-     * A detailed status of the command execution for an invocation. StatusDetails includes more information than Status because it includes states resulting from error and concurrency control parameters. StatusDetails can show different results than Status. For more information about these statuses, see Understanding command statuses in the Amazon Web Services Systems Manager User Guide. StatusDetails can be one of the following values:   Pending: The command hasn't been sent to the instance.   In Progress: The command has been sent to the instance but hasn't reached a terminal state.   Delayed: The system attempted to send the command to the target, but the target wasn't available. The instance might not be available because of network issues, because the instance was stopped, or for similar reasons. The system will try to send the command again.   Success: The command or plugin ran successfully. This is a terminal state.   Delivery Timed Out: The command wasn't delivered to the instance before the delivery timeout expired. Delivery timeouts don't count against the parent command's MaxErrors limit, but they do contribute to whether the parent command status is Success or Incomplete. This is a terminal state.   Execution Timed Out: The command started to run on the instance, but the execution wasn't complete before the timeout expired. Execution timeouts count against the MaxErrors limit of the parent command. This is a terminal state.   Failed: The command wasn't run successfully on the instance. For a plugin, this indicates that the result code wasn't zero. For a command invocation, this indicates that the result code for one or more plugins wasn't zero. Invocation failures count against the MaxErrors limit of the parent command. This is a terminal state.   Canceled: The command was terminated before it was completed. This is a terminal state.   Undeliverable: The command can't be delivered to the instance. The instance might not exist or might not be responding. Undeliverable invocations don't count against the parent command's MaxErrors limit and don't contribute to whether the parent command status is Success or Incomplete. This is a terminal state.   Terminated: The parent command exceeded its MaxErrors limit and subsequent command invocations were canceled by the system. This is a terminal state.  
+     * A detailed status of the command execution for an invocation. StatusDetails includes more information than Status because it includes states resulting from error and concurrency control parameters. StatusDetails can show different results than Status. For more information about these statuses, see Understanding command statuses in the Amazon Web Services Systems Manager User Guide. StatusDetails can be one of the following values:   Pending: The command hasn't been sent to the managed node.   In Progress: The command has been sent to the managed node but hasn't reached a terminal state.   Delayed: The system attempted to send the command to the target, but the target wasn't available. The managed node might not be available because of network issues, because the node was stopped, or for similar reasons. The system will try to send the command again.   Success: The command or plugin ran successfully. This is a terminal state.   Delivery Timed Out: The command wasn't delivered to the managed node before the delivery timeout expired. Delivery timeouts don't count against the parent command's MaxErrors limit, but they do contribute to whether the parent command status is Success or Incomplete. This is a terminal state.   Execution Timed Out: The command started to run on the managed node, but the execution wasn't complete before the timeout expired. Execution timeouts count against the MaxErrors limit of the parent command. This is a terminal state.   Failed: The command wasn't run successfully on the managed node. For a plugin, this indicates that the result code wasn't zero. For a command invocation, this indicates that the result code for one or more plugins wasn't zero. Invocation failures count against the MaxErrors limit of the parent command. This is a terminal state.   Canceled: The command was terminated before it was completed. This is a terminal state.   Undeliverable: The command can't be delivered to the managed node. The node might not exist or might not be responding. Undeliverable invocations don't count against the parent command's MaxErrors limit and don't contribute to whether the parent command status is Success or Incomplete. This is a terminal state.   Terminated: The parent command exceeded its MaxErrors limit and subsequent command invocations were canceled by the system. This is a terminal state.  
      */
     StatusDetails?: StatusDetails;
     /**
@@ -4500,17 +4500,17 @@ declare namespace SSM {
   }
   export interface GetConnectionStatusRequest {
     /**
-     * The instance ID.
+     * The managed node ID.
      */
     Target: SessionTarget;
   }
   export interface GetConnectionStatusResponse {
     /**
-     * The ID of the instance to check connection status. 
+     * The ID of the managed node to check connection status. 
      */
     Target?: SessionTarget;
     /**
-     * The status of the connection to the instance. For example, 'Connected' or 'Not Connected'.
+     * The status of the connection to the managed node. For example, 'Connected' or 'Not Connected'.
      */
     Status?: ConnectionStatus;
   }
@@ -4532,7 +4532,7 @@ declare namespace SSM {
   }
   export interface GetDeployablePatchSnapshotForInstanceRequest {
     /**
-     * The ID of the instance for which the appropriate patch snapshot should be retrieved.
+     * The ID of the managed node for which the appropriate patch snapshot should be retrieved.
      */
     InstanceId: InstanceId;
     /**
@@ -4546,7 +4546,7 @@ declare namespace SSM {
   }
   export interface GetDeployablePatchSnapshotForInstanceResult {
     /**
-     * The instance ID.
+     * The managed node ID.
      */
     InstanceId?: InstanceId;
     /**
@@ -4558,7 +4558,7 @@ declare namespace SSM {
      */
     SnapshotDownloadUrl?: SnapshotDownloadUrl;
     /**
-     * Returns the specific operating system (for example Windows Server 2012 or Amazon Linux 2015.09) on the instance for the specified patch snapshot.
+     * Returns the specific operating system (for example Windows Server 2012 or Amazon Linux 2015.09) on the managed node for the specified patch snapshot.
      */
     Product?: Product;
   }
@@ -4640,7 +4640,7 @@ declare namespace SSM {
      */
     Filters?: InventoryFilterList;
     /**
-     * Returns counts of inventory types based on one or more expressions. For example, if you aggregate by using an expression that uses the AWS:InstanceInformation.PlatformType type, you can see a count of how many Windows and Linux instances exist in your inventoried fleet.
+     * Returns counts of inventory types based on one or more expressions. For example, if you aggregate by using an expression that uses the AWS:InstanceInformation.PlatformType type, you can see a count of how many Windows and Linux managed nodes exist in your inventoried fleet.
      */
     Aggregators?: InventoryAggregatorList;
     /**
@@ -4658,7 +4658,7 @@ declare namespace SSM {
   }
   export interface GetInventoryResult {
     /**
-     * Collection of inventory entities such as a collection of instance inventory. 
+     * Collection of inventory entities such as a collection of managed node inventory. 
      */
     Entities?: InventoryResultEntityList;
     /**
@@ -5237,7 +5237,7 @@ declare namespace SSM {
      */
     ApprovedPatchesComplianceLevel?: PatchComplianceLevel;
     /**
-     * Indicates whether the list of approved patches includes non-security updates that should be applied to the instances. The default value is false. Applies to Linux instances only.
+     * Indicates whether the list of approved patches includes non-security updates that should be applied to the managed nodes. The default value is false. Applies to Linux managed nodes only.
      */
     ApprovedPatchesEnableNonSecurity?: Boolean;
     /**
@@ -5265,7 +5265,7 @@ declare namespace SSM {
      */
     Description?: BaselineDescription;
     /**
-     * Information about the patches to use to update the instances, including target operating systems and source repositories. Applies to Linux instances only.
+     * Information about the patches to use to update the managed nodes, including target operating systems and source repositories. Applies to Linux managed nodes only.
      */
     Sources?: PatchSourceList;
   }
@@ -5292,7 +5292,7 @@ declare namespace SSM {
      */
     DetailedStatus?: StatusName;
     /**
-     * The number of associations for the instance(s).
+     * The number of associations for the managed node(s).
      */
     InstanceAssociationStatusAggregatedCount?: InstanceAssociationStatusAggregatedCount;
   }
@@ -5302,15 +5302,15 @@ declare namespace SSM {
      */
     AssociationId?: AssociationId;
     /**
-     * The instance ID.
+     * The managed node ID.
      */
     InstanceId?: InstanceId;
     /**
-     * The content of the association document for the instance(s).
+     * The content of the association document for the managed node(s).
      */
     Content?: DocumentContent;
     /**
-     * Version information for the association on the instance.
+     * Version information for the association on the managed node.
      */
     AssociationVersion?: AssociationVersion;
   }
@@ -5343,23 +5343,23 @@ declare namespace SSM {
      */
     DocumentVersion?: DocumentVersion;
     /**
-     * The version of the association applied to the instance.
+     * The version of the association applied to the managed node.
      */
     AssociationVersion?: AssociationVersion;
     /**
-     * The instance ID where the association was created.
+     * The managed node ID where the association was created.
      */
     InstanceId?: InstanceId;
     /**
-     * The date the instance association ran. 
+     * The date the association ran. 
      */
     ExecutionDate?: DateTime;
     /**
-     * Status information about the instance association.
+     * Status information about the association.
      */
     Status?: StatusName;
     /**
-     * Detailed status information about the instance association.
+     * Detailed status information about the association.
      */
     DetailedStatus?: StatusName;
     /**
@@ -5375,7 +5375,7 @@ declare namespace SSM {
      */
     OutputUrl?: InstanceAssociationOutputUrl;
     /**
-     * The name of the association applied to the instance.
+     * The name of the association applied to the managed node.
      */
     AssociationName?: AssociationName;
   }
@@ -5385,7 +5385,7 @@ declare namespace SSM {
   export type InstanceIdList = InstanceId[];
   export interface InstanceInformation {
     /**
-     * The instance ID. 
+     * The managed node ID. 
      */
     InstanceId?: InstanceId;
     /**
@@ -5397,11 +5397,11 @@ declare namespace SSM {
      */
     LastPingDateTime?: DateTime;
     /**
-     * The version of SSM Agent running on your Linux instance. 
+     * The version of SSM Agent running on your Linux managed node. 
      */
     AgentVersion?: Version;
     /**
-     * Indicates whether the latest version of SSM Agent is running on your Linux Managed Instance. This field doesn't indicate whether or not the latest version is installed on Windows managed instances, because some older versions of Windows Server use the EC2Config service to process Systems Manager requests.
+     * Indicates whether the latest version of SSM Agent is running on your Linux managed node. This field doesn't indicate whether or not the latest version is installed on Windows managed nodes, because some older versions of Windows Server use the EC2Config service to process Systems Manager requests.
      */
     IsLatestVersion?: Boolean;
     /**
@@ -5409,11 +5409,11 @@ declare namespace SSM {
      */
     PlatformType?: PlatformType;
     /**
-     * The name of the operating system platform running on your instance. 
+     * The name of the operating system platform running on your managed node. 
      */
     PlatformName?: String;
     /**
-     * The version of the OS platform running on your instance. 
+     * The version of the OS platform running on your managed node. 
      */
     PlatformVersion?: String;
     /**
@@ -5421,11 +5421,11 @@ declare namespace SSM {
      */
     ActivationId?: ActivationId;
     /**
-     * The Identity and Access Management (IAM) role assigned to the on-premises Systems Manager managed instance. This call doesn't return the IAM role for Amazon Elastic Compute Cloud (Amazon EC2) instances. To retrieve the IAM role for an EC2 instance, use the Amazon EC2 DescribeInstances operation. For information, see DescribeInstances in the Amazon EC2 API Reference or describe-instances in the Amazon Web Services CLI Command Reference.
+     * The Identity and Access Management (IAM) role assigned to the on-premises Systems Manager managed node. This call doesn't return the IAM role for Amazon Elastic Compute Cloud (Amazon EC2) instances. To retrieve the IAM role for an EC2 instance, use the Amazon EC2 DescribeInstances operation. For information, see DescribeInstances in the Amazon EC2 API Reference or describe-instances in the Amazon Web Services CLI Command Reference.
      */
     IamRole?: IamRole;
     /**
-     * The date the server or VM was registered with Amazon Web Services as a managed instance.
+     * The date the server or VM was registered with Amazon Web Services as a managed node.
      */
     RegistrationDate?: DateTime;
     /**
@@ -5433,15 +5433,15 @@ declare namespace SSM {
      */
     ResourceType?: ResourceType;
     /**
-     * The name assigned to an on-premises server or virtual machine (VM) when it is activated as a Systems Manager managed instance. The name is specified as the DefaultInstanceName property using the CreateActivation command. It is applied to the managed instance by specifying the Activation Code and Activation ID when you install SSM Agent on the instance, as explained in Install SSM Agent for a hybrid environment (Linux) and Install SSM Agent for a hybrid environment (Windows). To retrieve the Name tag of an EC2 instance, use the Amazon EC2 DescribeInstances operation. For information, see DescribeInstances in the Amazon EC2 API Reference or describe-instances in the Amazon Web Services CLI Command Reference.
+     * The name assigned to an on-premises server, edge device, or virtual machine (VM) when it is activated as a Systems Manager managed node. The name is specified as the DefaultInstanceName property using the CreateActivation command. It is applied to the managed node by specifying the Activation Code and Activation ID when you install SSM Agent on the node, as explained in Install SSM Agent for a hybrid environment (Linux) and Install SSM Agent for a hybrid environment (Windows). To retrieve the Name tag of an EC2 instance, use the Amazon EC2 DescribeInstances operation. For information, see DescribeInstances in the Amazon EC2 API Reference or describe-instances in the Amazon Web Services CLI Command Reference.
      */
     Name?: String;
     /**
-     * The IP address of the managed instance.
+     * The IP address of the managed node.
      */
     IPAddress?: IPAddress;
     /**
-     * The fully qualified host name of the managed instance.
+     * The fully qualified host name of the managed node.
      */
     ComputerName?: ComputerName;
     /**
@@ -5460,6 +5460,14 @@ declare namespace SSM {
      * Information about the association.
      */
     AssociationOverview?: InstanceAggregatedAssociationOverview;
+    /**
+     * The ID of the source resource. For IoT Greengrass devices, SourceId is the Thing name. 
+     */
+    SourceId?: SourceId;
+    /**
+     * The type of the source resource. For IoT Greengrass devices, SourceType is AWS::IoT::Thing. 
+     */
+    SourceType?: SourceType;
   }
   export interface InstanceInformationFilter {
     /**
@@ -5478,7 +5486,7 @@ declare namespace SSM {
   export type InstanceInformationList = InstanceInformation[];
   export interface InstanceInformationStringFilter {
     /**
-     * The filter key name to describe your instances. For example: "InstanceIds"|"AgentVersion"|"PingStatus"|"PlatformTypes"|"ActivationIds"|"IamRole"|"ResourceType"|"AssociationStatus"|"Tag Key"   Tag key isn't a valid filter. You must specify either tag-key or tag:keyname and a string. Here are some valid examples: tag-key, tag:123, tag:al!, tag:Windows. Here are some invalid examples: tag-keys, Tag Key, tag:, tagKey, abc:keyname. 
+     * The filter key name to describe your managed nodes. For example: "InstanceIds"|"AgentVersion"|"PingStatus"|"PlatformTypes"|"ActivationIds"|"IamRole"|"ResourceType"|"AssociationStatus"|"Tag Key"   Tag key isn't a valid filter. You must specify either tag-key or tag:keyname and a string. Here are some valid examples: tag-key, tag:123, tag:al!, tag:Windows. Here are some invalid examples: tag-keys, Tag Key, tag:, tagKey, abc:keyname. 
      */
     Key: InstanceInformationStringFilterKey;
     /**
@@ -5490,15 +5498,15 @@ declare namespace SSM {
   export type InstanceInformationStringFilterList = InstanceInformationStringFilter[];
   export interface InstancePatchState {
     /**
-     * The ID of the managed instance the high-level patch compliance information was collected for.
+     * The ID of the managed node the high-level patch compliance information was collected for.
      */
     InstanceId: InstanceId;
     /**
-     * The name of the patch group the managed instance belongs to.
+     * The name of the patch group the managed node belongs to.
      */
     PatchGroup: PatchGroup;
     /**
-     * The ID of the patch baseline used to patch the instance.
+     * The ID of the patch baseline used to patch the managed node.
      */
     BaselineId: BaselineId;
     /**
@@ -5514,23 +5522,23 @@ declare namespace SSM {
      */
     OwnerInformation?: OwnerInformation;
     /**
-     * The number of patches from the patch baseline that are installed on the instance.
+     * The number of patches from the patch baseline that are installed on the managed node.
      */
     InstalledCount?: PatchInstalledCount;
     /**
-     * The number of patches not specified in the patch baseline that are installed on the instance.
+     * The number of patches not specified in the patch baseline that are installed on the managed node.
      */
     InstalledOtherCount?: PatchInstalledOtherCount;
     /**
-     * The number of patches installed by Patch Manager since the last time the instance was rebooted.
+     * The number of patches installed by Patch Manager since the last time the managed node was rebooted.
      */
     InstalledPendingRebootCount?: PatchInstalledPendingRebootCount;
     /**
-     * The number of patches installed on an instance that are specified in a RejectedPatches list. Patches with a status of InstalledRejected were typically installed before they were added to a RejectedPatches list.  If ALLOW_AS_DEPENDENCY is the specified option for RejectedPatchesAction, the value of InstalledRejectedCount will always be 0 (zero). 
+     * The number of patches installed on a managed node that are specified in a RejectedPatches list. Patches with a status of InstalledRejected were typically installed before they were added to a RejectedPatches list.  If ALLOW_AS_DEPENDENCY is the specified option for RejectedPatchesAction, the value of InstalledRejectedCount will always be 0 (zero). 
      */
     InstalledRejectedCount?: PatchInstalledRejectedCount;
     /**
-     * The number of patches from the patch baseline that are applicable for the instance but aren't currently installed.
+     * The number of patches from the patch baseline that are applicable for the managed node but aren't currently installed.
      */
     MissingCount?: PatchMissingCount;
     /**
@@ -5542,15 +5550,15 @@ declare namespace SSM {
      */
     UnreportedNotApplicableCount?: PatchUnreportedNotApplicableCount;
     /**
-     * The number of patches from the patch baseline that aren't applicable for the instance and therefore aren't installed on the instance. This number may be truncated if the list of patch names is very large. The number of patches beyond this limit are reported in UnreportedNotApplicableCount.
+     * The number of patches from the patch baseline that aren't applicable for the managed node and therefore aren't installed on the node. This number may be truncated if the list of patch names is very large. The number of patches beyond this limit are reported in UnreportedNotApplicableCount.
      */
     NotApplicableCount?: PatchNotApplicableCount;
     /**
-     * The time the most recent patching operation was started on the instance.
+     * The time the most recent patching operation was started on the managed node.
      */
     OperationStartTime: DateTime;
     /**
-     * The time the most recent patching operation completed on the instance.
+     * The time the most recent patching operation completed on the managed node.
      */
     OperationEndTime: DateTime;
     /**
@@ -5558,23 +5566,23 @@ declare namespace SSM {
      */
     Operation: PatchOperationType;
     /**
-     * The time of the last attempt to patch the instance with NoReboot specified as the reboot option.
+     * The time of the last attempt to patch the managed node with NoReboot specified as the reboot option.
      */
     LastNoRebootInstallOperationTime?: DateTime;
     /**
-     * Indicates the reboot option specified in the patch baseline.  Reboot options apply to Install operations only. Reboots aren't attempted for Patch Manager Scan operations.     RebootIfNeeded: Patch Manager tries to reboot the instance if it installed any patches, or if any patches are detected with a status of InstalledPendingReboot.    NoReboot: Patch Manager attempts to install missing packages without trying to reboot the system. Patches installed with this option are assigned a status of InstalledPendingReboot. These patches might not be in effect until a reboot is performed.  
+     * Indicates the reboot option specified in the patch baseline.  Reboot options apply to Install operations only. Reboots aren't attempted for Patch Manager Scan operations.     RebootIfNeeded: Patch Manager tries to reboot the managed node if it installed any patches, or if any patches are detected with a status of InstalledPendingReboot.    NoReboot: Patch Manager attempts to install missing packages without trying to reboot the system. Patches installed with this option are assigned a status of InstalledPendingReboot. These patches might not be in effect until a reboot is performed.  
      */
     RebootOption?: RebootOption;
     /**
-     * The number of instances where patches that are specified as Critical for compliance reporting in the patch baseline aren't installed. These patches might be missing, have failed installation, were rejected, or were installed but awaiting a required instance reboot. The status of these instances is NON_COMPLIANT.
+     * The number of managed nodes where patches that are specified as Critical for compliance reporting in the patch baseline aren't installed. These patches might be missing, have failed installation, were rejected, or were installed but awaiting a required managed node reboot. The status of these managed nodes is NON_COMPLIANT.
      */
     CriticalNonCompliantCount?: PatchCriticalNonCompliantCount;
     /**
-     * The number of instances where patches that are specified as Security in a patch advisory aren't installed. These patches might be missing, have failed installation, were rejected, or were installed but awaiting a required instance reboot. The status of these instances is NON_COMPLIANT.
+     * The number of managed nodes where patches that are specified as Security in a patch advisory aren't installed. These patches might be missing, have failed installation, were rejected, or were installed but awaiting a required managed node reboot. The status of these managed nodes is NON_COMPLIANT.
      */
     SecurityNonCompliantCount?: PatchSecurityNonCompliantCount;
     /**
-     * The number of instances with patches installed that are specified as other than Critical or Security but aren't compliant with the patch baseline. The status of these instances is NON_COMPLIANT.
+     * The number of managed nodes with patches installed that are specified as other than Critical or Security but aren't compliant with the patch baseline. The status of these managed nodes is NON_COMPLIANT.
      */
     OtherNonCompliantCount?: PatchOtherNonCompliantCount;
   }
@@ -5689,7 +5697,7 @@ declare namespace SSM {
      */
     Key: InventoryFilterKey;
     /**
-     * Inventory filter values. Example: inventory filter where instance IDs are specified as values Key=AWS:InstanceInformation.InstanceId,Values= i-a12b3c4d5e6g, i-1a2b3c4d5e6,Type=Equal. 
+     * Inventory filter values. Example: inventory filter where managed node IDs are specified as values Key=AWS:InstanceInformation.InstanceId,Values= i-a12b3c4d5e6g, i-1a2b3c4d5e6,Type=Equal. 
      */
     Values: InventoryFilterValueList;
     /**
@@ -5782,7 +5790,7 @@ declare namespace SSM {
   export type InventoryQueryOperatorType = "Equal"|"NotEqual"|"BeginWith"|"LessThan"|"GreaterThan"|"Exists"|string;
   export interface InventoryResultEntity {
     /**
-     * ID of the inventory result entity. For example, for managed instance inventory the result will be the managed instance ID. For EC2 instance inventory, the result will be the instance ID. 
+     * ID of the inventory result entity. For example, for managed node inventory the result will be the managed node ID. For EC2 instance inventory, the result will be the instance ID. 
      */
     Id?: InventoryResultEntityId;
     /**
@@ -5875,7 +5883,7 @@ declare namespace SSM {
   }
   export interface ListAssociationsRequest {
     /**
-     * One or more filters. Use a filter to return a more specific list of results.  Filtering associations using the InstanceID attribute only returns legacy associations created using the InstanceID attribute. Associations targeting the instance that are part of the Target Attributes ResourceGroup or Tags aren't returned. 
+     * One or more filters. Use a filter to return a more specific list of results.  Filtering associations using the InstanceID attribute only returns legacy associations created using the InstanceID attribute. Associations targeting the managed node that are part of the Target Attributes ResourceGroup or Tags aren't returned. 
      */
     AssociationFilterList?: AssociationFilterList;
     /**
@@ -5903,7 +5911,7 @@ declare namespace SSM {
      */
     CommandId?: CommandId;
     /**
-     * (Optional) The command execution details for a specific instance ID.
+     * (Optional) The command execution details for a specific managed node ID.
      */
     InstanceId?: InstanceId;
     /**
@@ -5939,7 +5947,7 @@ declare namespace SSM {
      */
     CommandId?: CommandId;
     /**
-     * (Optional) Lists commands issued against this instance ID.  You can't specify an instance ID in the same command that you specify Status = Pending. This is because the command hasn't reached the instance yet. 
+     * (Optional) Lists commands issued against this managed node ID.  You can't specify a managed node ID in the same command that you specify Status = Pending. This is because the command hasn't reached the managed node yet. 
      */
     InstanceId?: InstanceId;
     /**
@@ -6119,7 +6127,7 @@ declare namespace SSM {
   }
   export interface ListInventoryEntriesRequest {
     /**
-     * The instance ID for which you want inventory information.
+     * The managed node ID for which you want inventory information.
      */
     InstanceId: InstanceId;
     /**
@@ -6145,19 +6153,19 @@ declare namespace SSM {
      */
     TypeName?: InventoryItemTypeName;
     /**
-     * The instance ID targeted by the request to query inventory information.
+     * The managed node ID targeted by the request to query inventory information.
      */
     InstanceId?: InstanceId;
     /**
-     * The inventory schema version used by the instance(s).
+     * The inventory schema version used by the managed node(s).
      */
     SchemaVersion?: InventoryItemSchemaVersion;
     /**
-     * The time that inventory information was collected for the instance(s).
+     * The time that inventory information was collected for the managed node(s).
      */
     CaptureTime?: InventoryItemCaptureTime;
     /**
-     * A list of inventory items on the instance(s).
+     * A list of inventory items on the managed node(s).
      */
     Entries?: InventoryItemEntryList;
     /**
@@ -6258,7 +6266,7 @@ declare namespace SSM {
   }
   export interface ListResourceComplianceSummariesResult {
     /**
-     * A summary count for specified or targeted managed instances. Summary count includes information about compliant and non-compliant State Manager associations, patch status, or custom items according to the filter criteria that you specify. 
+     * A summary count for specified or targeted managed nodes. Summary count includes information about compliant and non-compliant State Manager associations, patch status, or custom items according to the filter criteria that you specify. 
      */
     ResourceComplianceSummaryItems?: ResourceComplianceSummaryItemList;
     /**
@@ -6573,7 +6581,7 @@ declare namespace SSM {
      */
     DocumentVersion?: DocumentVersion;
     /**
-     * Configurations for sending notifications about command status changes on a per-instance basis.
+     * Configurations for sending notifications about command status changes on a per-managed node basis.
      */
     NotificationConfig?: NotificationConfig;
     /**
@@ -6626,7 +6634,7 @@ declare namespace SSM {
      */
     ResourceType?: MaintenanceWindowResourceType;
     /**
-     * The targets, either instances or tags. Specify instances using the following format:  Key=instanceids,Values=&lt;instanceid1&gt;,&lt;instanceid2&gt;  Tags are specified using the following format:  Key=&lt;tag name&gt;,Values=&lt;tag value&gt;.
+     * The targets, either managed nodes or tags. Specify managed nodes using the following format:  Key=instanceids,Values=&lt;instanceid1&gt;,&lt;instanceid2&gt;  Tags are specified using the following format:  Key=&lt;tag name&gt;,Values=&lt;tag value&gt;.
      */
     Targets?: Targets;
     /**
@@ -6662,7 +6670,7 @@ declare namespace SSM {
      */
     Type?: MaintenanceWindowTaskType;
     /**
-     * The targets (either instances or tags). Instances are specified using Key=instanceids,Values=&lt;instanceid1&gt;,&lt;instanceid2&gt;. Tags are specified using Key=&lt;tag name&gt;,Values=&lt;tag value&gt;.
+     * The targets (either managed nodes or tags). Managed nodes are specified using Key=instanceids,Values=&lt;instanceid1&gt;,&lt;instanceid2&gt;. Tags are specified using Key=&lt;tag name&gt;,Values=&lt;tag value&gt;.
      */
     Targets?: Targets;
     /**
@@ -6803,7 +6811,7 @@ declare namespace SSM {
      */
     NotificationEvents?: NotificationEventList;
     /**
-     * The type of notification.    Command: Receive notification when the status of a command changes.    Invocation: For commands sent to multiple instances, receive notification on a per-instance basis when the status of a command changes.   
+     * The type of notification.    Command: Receive notification when the status of a command changes.    Invocation: For commands sent to multiple managed nodes, receive notification on a per-node basis when the status of a command changes.   
      */
     NotificationType?: NotificationType;
   }
@@ -7531,35 +7539,35 @@ declare namespace SSM {
      */
     Language?: PatchLanguage;
     /**
-     * The Advisory ID of the patch. For example, RHSA-2020:3779. Applies to Linux-based instances only.
+     * The Advisory ID of the patch. For example, RHSA-2020:3779. Applies to Linux-based managed nodes only.
      */
     AdvisoryIds?: PatchAdvisoryIdList;
     /**
-     * The Bugzilla ID of the patch. For example, 1600646. Applies to Linux-based instances only.
+     * The Bugzilla ID of the patch. For example, 1600646. Applies to Linux-based managed nodes only.
      */
     BugzillaIds?: PatchBugzillaIdList;
     /**
-     * The Common Vulnerabilities and Exposures (CVE) ID of the patch. For example, CVE-2011-3192. Applies to Linux-based instances only.
+     * The Common Vulnerabilities and Exposures (CVE) ID of the patch. For example, CVE-2011-3192. Applies to Linux-based managed nodes only.
      */
     CVEIds?: PatchCVEIdList;
     /**
-     * The name of the patch. Applies to Linux-based instances only.
+     * The name of the patch. Applies to Linux-based managed nodes only.
      */
     Name?: PatchName;
     /**
-     * The epoch of the patch. For example in pkg-example-EE-20180914-2.2.amzn1.noarch, the epoch value is 20180914-2. Applies to Linux-based instances only.
+     * The epoch of the patch. For example in pkg-example-EE-20180914-2.2.amzn1.noarch, the epoch value is 20180914-2. Applies to Linux-based managed nodes only.
      */
     Epoch?: PatchEpoch;
     /**
-     * The version number of the patch. For example, in example-pkg-1.710.10-2.7.abcd.x86_64, the version number is indicated by -1. Applies to Linux-based instances only.
+     * The version number of the patch. For example, in example-pkg-1.710.10-2.7.abcd.x86_64, the version number is indicated by -1. Applies to Linux-based managed nodes only.
      */
     Version?: PatchVersion;
     /**
-     * The particular release of a patch. For example, in pkg-example-EE-20180914-2.2.amzn1.noarch, the release is 2.amaz1. Applies to Linux-based instances only.
+     * The particular release of a patch. For example, in pkg-example-EE-20180914-2.2.amzn1.noarch, the release is 2.amaz1. Applies to Linux-based managed nodes only.
      */
     Release?: PatchRelease;
     /**
-     * The architecture of the patch. For example, in example-pkg-0.710.10-2.7.abcd.x86_64, the architecture is indicated by x86_64. Applies to Linux-based instances only.
+     * The architecture of the patch. For example, in example-pkg-0.710.10-2.7.abcd.x86_64, the architecture is indicated by x86_64. Applies to Linux-based managed nodes only.
      */
     Arch?: PatchArch;
     /**
@@ -7567,7 +7575,7 @@ declare namespace SSM {
      */
     Severity?: PatchSeverity;
     /**
-     * The source patch repository for the operating system and version, such as trusty-security for Ubuntu Server 14.04 LTE and focal-security for Ubuntu Server 20.04 LTE. Applies to Linux-based instances only.
+     * The source patch repository for the operating system and version, such as trusty-security for Ubuntu Server 14.04 LTE and focal-security for Ubuntu Server 20.04 LTE. Applies to Linux-based managed nodes only.
      */
     Repository?: PatchRepository;
   }
@@ -7623,11 +7631,11 @@ declare namespace SSM {
      */
     Severity: PatchSeverity;
     /**
-     * The state of the patch on the instance, such as INSTALLED or FAILED. For descriptions of each patch state, see About patch compliance in the Amazon Web Services Systems Manager User Guide.
+     * The state of the patch on the managed node, such as INSTALLED or FAILED. For descriptions of each patch state, see About patch compliance in the Amazon Web Services Systems Manager User Guide.
      */
     State: PatchComplianceDataState;
     /**
-     * The date/time the patch was installed on the instance. Not all operating systems provide this level of information.
+     * The date/time the patch was installed on the managed node. Not all operating systems provide this level of information.
      */
     InstalledTime: DateTime;
     /**
@@ -7733,7 +7741,7 @@ declare namespace SSM {
      */
     ApproveUntilDate?: PatchStringDateTime;
     /**
-     * For instances identified by the approval rule filters, enables a patch baseline to apply non-security updates available in the specified repository. The default value is false. Applies to Linux instances only.
+     * For managed nodes identified by the approval rule filters, enables a patch baseline to apply non-security updates available in the specified repository. The default value is false. Applies to Linux managed nodes only.
      */
     EnableNonSecurity?: Boolean;
   }
@@ -7786,7 +7794,7 @@ declare namespace SSM {
   export type PatchVendor = string;
   export type PatchVersion = string;
   export type PingStatus = "Online"|"ConnectionLost"|"Inactive"|string;
-  export type PlatformType = "Windows"|"Linux"|string;
+  export type PlatformType = "Windows"|"Linux"|"MacOS"|string;
   export type PlatformTypeList = PlatformType[];
   export type Product = string;
   export interface ProgressCounters {
@@ -7813,7 +7821,7 @@ declare namespace SSM {
   }
   export interface PutComplianceItemsRequest {
     /**
-     * Specify an ID for this resource. For a managed instance, this is the instance ID.
+     * Specify an ID for this resource. For a managed node, this is the node ID.
      */
     ResourceId: ComplianceResourceId;
     /**
@@ -7846,11 +7854,11 @@ declare namespace SSM {
   export type PutInventoryMessage = string;
   export interface PutInventoryRequest {
     /**
-     * An instance ID where you want to add or update inventory items.
+     * An managed node ID where you want to add or update inventory items.
      */
     InstanceId: InstanceId;
     /**
-     * The inventory items that you want to add or update on instances.
+     * The inventory items that you want to add or update on managed nodes.
      */
     Items: InventoryItemList;
   }
@@ -7961,7 +7969,7 @@ declare namespace SSM {
      */
     ResourceType: MaintenanceWindowResourceType;
     /**
-     * The targets to register with the maintenance window. In other words, the instances to run commands on when the maintenance window runs.  If a single maintenance window task is registered with multiple targets, its task invocations occur sequentially and not in parallel. If your task must run on multiple targets at the same time, register a task for each target individually and assign each task the same priority level.  You can specify targets using instance IDs, resource group names, or tags that have been applied to instances.  Example 1: Specify instance IDs  Key=InstanceIds,Values=instance-id-1,instance-id-2,instance-id-3    Example 2: Use tag key-pairs applied to instances  Key=tag:my-tag-key,Values=my-tag-value-1,my-tag-value-2    Example 3: Use tag-keys applied to instances  Key=tag-key,Values=my-tag-key-1,my-tag-key-2    Example 4: Use resource group names  Key=resource-groups:Name,Values=resource-group-name    Example 5: Use filters for resource group types  Key=resource-groups:ResourceTypeFilters,Values=resource-type-1,resource-type-2    For Key=resource-groups:ResourceTypeFilters, specify resource types in the following format  Key=resource-groups:ResourceTypeFilters,Values=AWS::EC2::INSTANCE,AWS::EC2::VPC    For more information about these examples formats, including the best use case for each one, see Examples: Register targets with a maintenance window in the Amazon Web Services Systems Manager User Guide.
+     * The targets to register with the maintenance window. In other words, the managed nodes to run commands on when the maintenance window runs.  If a single maintenance window task is registered with multiple targets, its task invocations occur sequentially and not in parallel. If your task must run on multiple targets at the same time, register a task for each target individually and assign each task the same priority level.  You can specify targets using managed node IDs, resource group names, or tags that have been applied to managed nodes.  Example 1: Specify managed node IDs  Key=InstanceIds,Values=&lt;instance-id-1&gt;,&lt;instance-id-2&gt;,&lt;instance-id-3&gt;   Example 2: Use tag key-pairs applied to managed nodes  Key=tag:&lt;my-tag-key&gt;,Values=&lt;my-tag-value-1&gt;,&lt;my-tag-value-2&gt;   Example 3: Use tag-keys applied to managed nodes  Key=tag-key,Values=&lt;my-tag-key-1&gt;,&lt;my-tag-key-2&gt;   Example 4: Use resource group names  Key=resource-groups:Name,Values=&lt;resource-group-name&gt;   Example 5: Use filters for resource group types  Key=resource-groups:ResourceTypeFilters,Values=&lt;resource-type-1&gt;,&lt;resource-type-2&gt;   For Key=resource-groups:ResourceTypeFilters, specify resource types in the following format  Key=resource-groups:ResourceTypeFilters,Values=AWS::EC2::INSTANCE,AWS::EC2::VPC   For more information about these examples formats, including the best use case for each one, see Examples: Register targets with a maintenance window in the Amazon Web Services Systems Manager User Guide.
      */
     Targets: Targets;
     /**
@@ -7993,7 +8001,7 @@ declare namespace SSM {
      */
     WindowId: MaintenanceWindowId;
     /**
-     * The targets (either instances or maintenance window targets).  One or more targets must be specified for maintenance window Run Command-type tasks. Depending on the task, targets are optional for other maintenance window task types (Automation, Lambda, and Step Functions). For more information about running tasks that don't specify targets, see Registering maintenance window tasks without targets in the Amazon Web Services Systems Manager User Guide.  Specify instances using the following format:   Key=InstanceIds,Values=&lt;instance-id-1&gt;,&lt;instance-id-2&gt;  Specify maintenance window targets using the following format:  Key=WindowTargetIds,Values=&lt;window-target-id-1&gt;,&lt;window-target-id-2&gt; 
+     * The targets (either managed nodes or maintenance window targets).  One or more targets must be specified for maintenance window Run Command-type tasks. Depending on the task, targets are optional for other maintenance window task types (Automation, Lambda, and Step Functions). For more information about running tasks that don't specify targets, see Registering maintenance window tasks without targets in the Amazon Web Services Systems Manager User Guide.  Specify managed nodes using the following format:   Key=InstanceIds,Values=&lt;instance-id-1&gt;,&lt;instance-id-2&gt;  Specify maintenance window targets using the following format:  Key=WindowTargetIds,Values=&lt;window-target-id-1&gt;,&lt;window-target-id-2&gt; 
      */
     Targets?: Targets;
     /**
@@ -8029,7 +8037,7 @@ declare namespace SSM {
      */
     MaxErrors?: MaxErrors;
     /**
-     * A structure containing information about an Amazon Simple Storage Service (Amazon S3) bucket to write instance-level logs to.    LoggingInfo has been deprecated. To specify an Amazon Simple Storage Service (Amazon S3) bucket to contain logs, instead use the OutputS3BucketName and OutputS3KeyPrefix options in the TaskInvocationParameters structure. For information about how Amazon Web Services Systems Manager handles these options for the supported maintenance window task types, see MaintenanceWindowTaskInvocationParameters. 
+     * A structure containing information about an Amazon Simple Storage Service (Amazon S3) bucket to write managed node-level logs to.    LoggingInfo has been deprecated. To specify an Amazon Simple Storage Service (Amazon S3) bucket to contain logs, instead use the OutputS3BucketName and OutputS3KeyPrefix options in the TaskInvocationParameters structure. For information about how Amazon Web Services Systems Manager handles these options for the supported maintenance window task types, see MaintenanceWindowTaskInvocationParameters. 
      */
     LoggingInfo?: LoggingInfo;
     /**
@@ -8080,11 +8088,11 @@ declare namespace SSM {
   export type RemainingCount = number;
   export interface RemoveTagsFromResourceRequest {
     /**
-     * The type of resource from which you want to remove a tag.  The ManagedInstance type for this API operation is only for on-premises managed instances. Specify the name of the managed instance in the following format: mi-ID_number . For example, mi-1a2b3c4d5e6f. 
+     * The type of resource from which you want to remove a tag.  The ManagedInstance type for this API operation is only for on-premises managed nodes. Specify the name of the managed node in the following format: mi-ID_number . For example, mi-1a2b3c4d5e6f. 
      */
     ResourceType: ResourceTypeForTagging;
     /**
-     * The ID of the resource from which you want to remove tags. For example: ManagedInstance: mi-012345abcde MaintenanceWindow: mw-012345abcde PatchBaseline: pb-012345abcde OpsMetadata object: ResourceID for tagging is created from the Amazon Resource Name (ARN) for the object. Specifically, ResourceID is created from the strings that come after the word opsmetadata in the ARN. For example, an OpsMetadata object with an ARN of arn:aws:ssm:us-east-2:1234567890:opsmetadata/aws/ssm/MyGroup/appmanager has a ResourceID of either aws/ssm/MyGroup/appmanager or /aws/ssm/MyGroup/appmanager. For the Document and Parameter values, use the name of the resource.  The ManagedInstance type for this API operation is only for on-premises managed instances. Specify the name of the managed instance in the following format: mi-ID_number. For example, mi-1a2b3c4d5e6f. 
+     * The ID of the resource from which you want to remove tags. For example: ManagedInstance: mi-012345abcde MaintenanceWindow: mw-012345abcde PatchBaseline: pb-012345abcde OpsMetadata object: ResourceID for tagging is created from the Amazon Resource Name (ARN) for the object. Specifically, ResourceID is created from the strings that come after the word opsmetadata in the ARN. For example, an OpsMetadata object with an ARN of arn:aws:ssm:us-east-2:1234567890:opsmetadata/aws/ssm/MyGroup/appmanager has a ResourceID of either aws/ssm/MyGroup/appmanager or /aws/ssm/MyGroup/appmanager. For the Document and Parameter values, use the name of the resource.  The ManagedInstance type for this API operation is only for on-premises managed nodes. Specify the name of the managed node in the following format: mi-ID_number. For example, mi-1a2b3c4d5e6f. 
      */
     ResourceId: ResourceId;
     /**
@@ -8334,11 +8342,11 @@ declare namespace SSM {
      */
     SessionId?: SessionId;
     /**
-     * An encrypted token value containing session and caller information. Used to authenticate the connection to the instance.
+     * An encrypted token value containing session and caller information. Used to authenticate the connection to the managed node.
      */
     TokenValue?: TokenValue;
     /**
-     * A URL back to SSM Agent on the instance that the Session Manager client uses to send commands and receive output from the instance. Format: wss://ssmmessages.region.amazonaws.com/v1/data-channel/session-id?stream=(input|output).  region represents the Region identifier for an Amazon Web Services Region supported by Amazon Web Services Systems Manager, such as us-east-2 for the US East (Ohio) Region. For a list of supported region values, see the Region column in Systems Manager service endpoints in the Amazon Web Services General Reference.  session-id represents the ID of a Session Manager session, such as 1a2b3c4dEXAMPLE.
+     * A URL back to SSM Agent on the managed node that the Session Manager client uses to send commands and receive output from the managed node. Format: wss://ssmmessages.region.amazonaws.com/v1/data-channel/session-id?stream=(input|output).  region represents the Region identifier for an Amazon Web Services Region supported by Amazon Web Services Systems Manager, such as us-east-2 for the US East (Ohio) Region. For a list of supported region values, see the Region column in Systems Manager service endpoints in the Amazon Web Services General Reference.  session-id represents the ID of a Session Manager session, such as 1a2b3c4dEXAMPLE.
      */
     StreamUrl?: StreamUrl;
   }
@@ -8451,11 +8459,11 @@ declare namespace SSM {
   }
   export interface SendCommandRequest {
     /**
-     * The IDs of the instances where the command should run. Specifying instance IDs is most useful when you are targeting a limited number of instances, though you can specify up to 50 IDs. To target a larger number of instances, or if you prefer not to list individual instance IDs, we recommend using the Targets option instead. Using Targets, which accepts tag key-value pairs to identify the instances to send commands to, you can a send command to tens, hundreds, or thousands of instances at once. For more information about how to use targets, see Using targets and rate controls to send commands to a fleet in the Amazon Web Services Systems Manager User Guide.
+     * The IDs of the managed nodes where the command should run. Specifying managed node IDs is most useful when you are targeting a limited number of managed nodes, though you can specify up to 50 IDs. To target a larger number of managed nodes, or if you prefer not to list individual node IDs, we recommend using the Targets option instead. Using Targets, which accepts tag key-value pairs to identify the managed nodes to send commands to, you can a send command to tens, hundreds, or thousands of nodes at once. For more information about how to use targets, see Using targets and rate controls to send commands to a fleet in the Amazon Web Services Systems Manager User Guide.
      */
     InstanceIds?: InstanceIdList;
     /**
-     * An array of search criteria that targets instances using a Key,Value combination that you specify. Specifying targets is most useful when you want to send a command to a large number of instances at once. Using Targets, which accepts tag key-value pairs to identify instances, you can send a command to tens, hundreds, or thousands of instances at once. To send a command to a smaller number of instances, you can use the InstanceIds option instead. For more information about how to use targets, see Sending commands to a fleet in the Amazon Web Services Systems Manager User Guide.
+     * An array of search criteria that targets managed nodes using a Key,Value combination that you specify. Specifying targets is most useful when you want to send a command to a large number of managed nodes at once. Using Targets, which accepts tag key-value pairs to identify managed nodes, you can send a command to tens, hundreds, or thousands of nodes at once. To send a command to a smaller number of managed nodes, you can use the InstanceIds option instead. For more information about how to use targets, see Sending commands to a fleet in the Amazon Web Services Systems Manager User Guide.
      */
     Targets?: Targets;
     /**
@@ -8499,7 +8507,7 @@ declare namespace SSM {
      */
     OutputS3KeyPrefix?: S3KeyPrefix;
     /**
-     * (Optional) The maximum number of instances that are allowed to run the command at the same time. You can specify a number such as 10 or a percentage such as 10%. The default value is 50. For more information about how to use MaxConcurrency, see Using concurrency controls in the Amazon Web Services Systems Manager User Guide.
+     * (Optional) The maximum number of managed nodes that are allowed to run the command at the same time. You can specify a number such as 10 or a percentage such as 10%. The default value is 50. For more information about how to use MaxConcurrency, see Using concurrency controls in the Amazon Web Services Systems Manager User Guide.
      */
     MaxConcurrency?: MaxConcurrency;
     /**
@@ -8560,7 +8568,7 @@ declare namespace SSM {
      */
     SessionId?: SessionId;
     /**
-     * The instance that the Session Manager session connected to.
+     * The managed node that the Session Manager session connected to.
      */
     Target?: SessionTarget;
     /**
@@ -8607,7 +8615,7 @@ declare namespace SSM {
      */
     key: SessionFilterKey;
     /**
-     * The filter value. Valid values for each filter key are as follows:   InvokedAfter: Specify a timestamp to limit your results. For example, specify 2018-08-29T00:00:00Z to see sessions that started August 29, 2018, and later.   InvokedBefore: Specify a timestamp to limit your results. For example, specify 2018-08-29T00:00:00Z to see sessions that started before August 29, 2018.   Target: Specify an instance to which session connections have been made.   Owner: Specify an Amazon Web Services user account to see a list of sessions started by that user.   Status: Specify a valid session status to see a list of all sessions with that status. Status values you can specify include:   Connected   Connecting   Disconnected   Terminated   Terminating   Failed     SessionId: Specify a session ID to return details about the session.  
+     * The filter value. Valid values for each filter key are as follows:   InvokedAfter: Specify a timestamp to limit your results. For example, specify 2018-08-29T00:00:00Z to see sessions that started August 29, 2018, and later.   InvokedBefore: Specify a timestamp to limit your results. For example, specify 2018-08-29T00:00:00Z to see sessions that started before August 29, 2018.   Target: Specify a managed node to which session connections have been made.   Owner: Specify an Amazon Web Services user account to see a list of sessions started by that user.   Status: Specify a valid session status to see a list of all sessions with that status. Status values you can specify include:   Connected   Connecting   Disconnected   Terminated   Terminating   Failed     SessionId: Specify a session ID to return details about the session.  
      */
     value: SessionFilterValue;
   }
@@ -8668,6 +8676,8 @@ declare namespace SSM {
   export type SignalType = "Approve"|"Reject"|"StartStep"|"StopStep"|"Resume"|string;
   export type SnapshotDownloadUrl = string;
   export type SnapshotId = string;
+  export type SourceId = string;
+  export type SourceType = "AWS::EC2::Instance"|"AWS::IoT::Thing"|"AWS::SSM::ManagedInstance"|string;
   export type StandardErrorContent = string;
   export type StandardOutputContent = string;
   export interface StartAssociationsOnceRequest {
@@ -8788,11 +8798,11 @@ declare namespace SSM {
   }
   export interface StartSessionRequest {
     /**
-     * The instance to connect to for the session.
+     * The managed node to connect to for the session.
      */
     Target: SessionTarget;
     /**
-     * The name of the SSM document to define the parameters and plugin settings for the session. For example, SSM-SessionManagerRunShell. You can call the GetDocument API to verify the document exists before attempting to start a session. If no document name is provided, a shell to the instance is launched by default.
+     * The name of the SSM document to define the parameters and plugin settings for the session. For example, SSM-SessionManagerRunShell. You can call the GetDocument API to verify the document exists before attempting to start a session. If no document name is provided, a shell to the managed node is launched by default.
      */
     DocumentName?: DocumentARN;
     /**
@@ -8810,11 +8820,11 @@ declare namespace SSM {
      */
     SessionId?: SessionId;
     /**
-     * An encrypted token value containing session and caller information. Used to authenticate the connection to the instance.
+     * An encrypted token value containing session and caller information. Used to authenticate the connection to the managed node.
      */
     TokenValue?: TokenValue;
     /**
-     * A URL back to SSM Agent on the instance that the Session Manager client uses to send commands and receive output from the instance. Format: wss://ssmmessages.region.amazonaws.com/v1/data-channel/session-id?stream=(input|output)   region represents the Region identifier for an Amazon Web Services Region supported by Amazon Web Services Systems Manager, such as us-east-2 for the US East (Ohio) Region. For a list of supported region values, see the Region column in Systems Manager service endpoints in the Amazon Web Services General Reference.  session-id represents the ID of a Session Manager session, such as 1a2b3c4dEXAMPLE.
+     * A URL back to SSM Agent on the managed node that the Session Manager client uses to send commands and receive output from the node. Format: wss://ssmmessages.region.amazonaws.com/v1/data-channel/session-id?stream=(input|output)   region represents the Region identifier for an Amazon Web Services Region supported by Amazon Web Services Systems Manager, such as us-east-2 for the US East (Ohio) Region. For a list of supported region values, see the Region column in Systems Manager service endpoints in the Amazon Web Services General Reference.  session-id represents the ID of a Session Manager session, such as 1a2b3c4dEXAMPLE.
      */
     StreamUrl?: StreamUrl;
   }
@@ -8959,7 +8969,7 @@ declare namespace SSM {
   export type TagValue = string;
   export interface Target {
     /**
-     * User-defined criteria for sending commands that target instances that meet the criteria.
+     * User-defined criteria for sending commands that target managed nodes that meet the criteria.
      */
     Key?: TargetKey;
     /**
@@ -9064,7 +9074,7 @@ declare namespace SSM {
      */
     OutputLocation?: InstanceAssociationOutputLocation;
     /**
-     * The name of the SSM Command document or Automation runbook that contains the configuration information for the instance. You can specify Amazon Web Services-predefined documents, documents you created, or a document that is shared with you from another account. For Systems Manager document (SSM document) that are shared with you from other Amazon Web Services accounts, you must specify the complete SSM document ARN, in the following format:  arn:aws:ssm:region:account-id:document/document-name   For example:  arn:aws:ssm:us-east-2:12345678912:document/My-Shared-Document  For Amazon Web Services-predefined documents and SSM documents you created in your account, you only need to specify the document name. For example, AWS-ApplyPatchBaseline or My-Document.
+     * The name of the SSM Command document or Automation runbook that contains the configuration information for the managed node. You can specify Amazon Web Services-predefined documents, documents you created, or a document that is shared with you from another account. For Systems Manager document (SSM document) that are shared with you from other Amazon Web Services accounts, you must specify the complete SSM document ARN, in the following format:  arn:aws:ssm:region:account-id:document/document-name   For example:  arn:aws:ssm:us-east-2:12345678912:document/My-Shared-Document  For Amazon Web Services-predefined documents and SSM documents you created in your account, you only need to specify the document name. For example, AWS-ApplyPatchBaseline or My-Document.
      */
     Name?: DocumentARN;
     /**
@@ -9084,11 +9094,11 @@ declare namespace SSM {
      */
     AutomationTargetParameterName?: AutomationTargetParameterName;
     /**
-     * The number of errors that are allowed before the system stops sending requests to run the association on additional targets. You can specify either an absolute number of errors, for example 10, or a percentage of the target set, for example 10%. If you specify 3, for example, the system stops sending requests when the fourth error is received. If you specify 0, then the system stops sending requests after the first error is returned. If you run an association on 50 instances and set MaxError to 10%, then the system stops sending the request when the sixth error is received. Executions that are already running an association when MaxErrors is reached are allowed to complete, but some of these executions may fail as well. If you need to ensure that there won't be more than max-errors failed executions, set MaxConcurrency to 1 so that executions proceed one at a time.
+     * The number of errors that are allowed before the system stops sending requests to run the association on additional targets. You can specify either an absolute number of errors, for example 10, or a percentage of the target set, for example 10%. If you specify 3, for example, the system stops sending requests when the fourth error is received. If you specify 0, then the system stops sending requests after the first error is returned. If you run an association on 50 managed nodes and set MaxError to 10%, then the system stops sending the request when the sixth error is received. Executions that are already running an association when MaxErrors is reached are allowed to complete, but some of these executions may fail as well. If you need to ensure that there won't be more than max-errors failed executions, set MaxConcurrency to 1 so that executions proceed one at a time.
      */
     MaxErrors?: MaxErrors;
     /**
-     * The maximum number of targets allowed to run the association at the same time. You can specify a number, for example 10, or a percentage of the target set, for example 10%. The default value is 100%, which means all targets run the association at the same time. If a new instance starts and attempts to run an association while Systems Manager is running MaxConcurrency associations, the association is allowed to run. During the next association interval, the new instance will process its association within the limit specified for MaxConcurrency.
+     * The maximum number of targets allowed to run the association at the same time. You can specify a number, for example 10, or a percentage of the target set, for example 10%. The default value is 100%, which means all targets run the association at the same time. If a new managed node starts and attempts to run an association while Systems Manager is running MaxConcurrency associations, the association is allowed to run. During the next association interval, the new managed node will process its association within the limit specified for MaxConcurrency.
      */
     MaxConcurrency?: MaxConcurrency;
     /**
@@ -9124,7 +9134,7 @@ declare namespace SSM {
      */
     Name: DocumentARN;
     /**
-     * The instance ID.
+     * The managed node ID.
      */
     InstanceId: InstanceId;
     /**
@@ -9380,7 +9390,7 @@ declare namespace SSM {
      */
     WindowTaskId: MaintenanceWindowTaskId;
     /**
-     * The targets (either instances or tags) to modify. Instances are specified using the format Key=instanceids,Values=instanceID_1,instanceID_2. Tags are specified using the format  Key=tag_name,Values=tag_value.   One or more targets must be specified for maintenance window Run Command-type tasks. Depending on the task, targets are optional for other maintenance window task types (Automation, Lambda, and Step Functions). For more information about running tasks that don't specify targets, see Registering maintenance window tasks without targets in the Amazon Web Services Systems Manager User Guide. 
+     * The targets (either managed nodes or tags) to modify. Managed nodes are specified using the format Key=instanceids,Values=instanceID_1,instanceID_2. Tags are specified using the format  Key=tag_name,Values=tag_value.   One or more targets must be specified for maintenance window Run Command-type tasks. Depending on the task, targets are optional for other maintenance window task types (Automation, Lambda, and Step Functions). For more information about running tasks that don't specify targets, see Registering maintenance window tasks without targets in the Amazon Web Services Systems Manager User Guide. 
      */
     Targets?: Targets;
     /**
@@ -9492,7 +9502,7 @@ declare namespace SSM {
   }
   export interface UpdateManagedInstanceRoleRequest {
     /**
-     * The ID of the managed instance where you want to update the role.
+     * The ID of the managed node where you want to update the role.
      */
     InstanceId: ManagedInstanceId;
     /**
@@ -9612,7 +9622,7 @@ declare namespace SSM {
      */
     ApprovedPatchesComplianceLevel?: PatchComplianceLevel;
     /**
-     * Indicates whether the list of approved patches includes non-security updates that should be applied to the instances. The default value is false. Applies to Linux instances only.
+     * Indicates whether the list of approved patches includes non-security updates that should be applied to the managed nodes. The default value is false. Applies to Linux managed nodes only.
      */
     ApprovedPatchesEnableNonSecurity?: Boolean;
     /**
@@ -9628,7 +9638,7 @@ declare namespace SSM {
      */
     Description?: BaselineDescription;
     /**
-     * Information about the patches to use to update the instances, including target operating systems and source repositories. Applies to Linux instances only.
+     * Information about the patches to use to update the managed nodes, including target operating systems and source repositories. Applies to Linux managed nodes only.
      */
     Sources?: PatchSourceList;
     /**
@@ -9666,7 +9676,7 @@ declare namespace SSM {
      */
     ApprovedPatchesComplianceLevel?: PatchComplianceLevel;
     /**
-     * Indicates whether the list of approved patches includes non-security updates that should be applied to the instances. The default value is false. Applies to Linux instances only.
+     * Indicates whether the list of approved patches includes non-security updates that should be applied to the managed nodes. The default value is false. Applies to Linux managed nodes only.
      */
     ApprovedPatchesEnableNonSecurity?: Boolean;
     /**
@@ -9690,7 +9700,7 @@ declare namespace SSM {
      */
     Description?: BaselineDescription;
     /**
-     * Information about the patches to use to update the instances, including target operating systems and source repositories. Applies to Linux instances only.
+     * Information about the patches to use to update the managed nodes, including target operating systems and source repositories. Applies to Linux managed nodes only.
      */
     Sources?: PatchSourceList;
   }

@@ -2050,7 +2050,9 @@ declare namespace S3 {
   }
   export type ErrorMessage = string;
   export type Errors = Error[];
-  export type Event = "s3:ReducedRedundancyLostObject"|"s3:ObjectCreated:*"|"s3:ObjectCreated:Put"|"s3:ObjectCreated:Post"|"s3:ObjectCreated:Copy"|"s3:ObjectCreated:CompleteMultipartUpload"|"s3:ObjectRemoved:*"|"s3:ObjectRemoved:Delete"|"s3:ObjectRemoved:DeleteMarkerCreated"|"s3:ObjectRestore:*"|"s3:ObjectRestore:Post"|"s3:ObjectRestore:Completed"|"s3:Replication:*"|"s3:Replication:OperationFailedReplication"|"s3:Replication:OperationNotTracked"|"s3:Replication:OperationMissedThreshold"|"s3:Replication:OperationReplicatedAfterThreshold"|string;
+  export type Event = "s3:ReducedRedundancyLostObject"|"s3:ObjectCreated:*"|"s3:ObjectCreated:Put"|"s3:ObjectCreated:Post"|"s3:ObjectCreated:Copy"|"s3:ObjectCreated:CompleteMultipartUpload"|"s3:ObjectRemoved:*"|"s3:ObjectRemoved:Delete"|"s3:ObjectRemoved:DeleteMarkerCreated"|"s3:ObjectRestore:*"|"s3:ObjectRestore:Post"|"s3:ObjectRestore:Completed"|"s3:Replication:*"|"s3:Replication:OperationFailedReplication"|"s3:Replication:OperationNotTracked"|"s3:Replication:OperationMissedThreshold"|"s3:Replication:OperationReplicatedAfterThreshold"|"s3:ObjectRestore:Delete"|"s3:LifecycleTransition"|"s3:IntelligentTiering"|"s3:ObjectAcl:Put"|"s3:LifecycleExpiration:*"|"s3:LifecycleExpiration:Delete"|"s3:LifecycleExpiration:DeleteMarkerCreated"|"s3:ObjectTagging:*"|"s3:ObjectTagging:Put"|"s3:ObjectTagging:Delete"|string;
+  export interface EventBridgeConfiguration {
+  }
   export type EventList = Event[];
   export interface ExistingObjectReplication {
     /**
@@ -4049,6 +4051,10 @@ declare namespace S3 {
      * Describes the Lambda functions to invoke and the events for which to invoke them.
      */
     LambdaFunctionConfigurations?: LambdaFunctionConfigurationList;
+    /**
+     * Enables delivery of events to Amazon EventBridge.
+     */
+    EventBridgeConfiguration?: EventBridgeConfiguration;
   }
   export interface NotificationConfigurationDeprecated {
     /**
@@ -4516,6 +4522,10 @@ declare namespace S3 {
      * The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP 403 (Access Denied) error.
      */
     ExpectedBucketOwner?: AccountId;
+    /**
+     * Skips validation of Amazon SQS, Amazon SNS, and Lambda destinations. True or false value.
+     */
+    SkipDestinationValidation?: SkipValidation;
   }
   export interface PutBucketNotificationRequest {
     /**
@@ -5479,6 +5489,7 @@ declare namespace S3 {
   export type ServerSideEncryptionRules = ServerSideEncryptionRule[];
   export type Setting = boolean;
   export type Size = number;
+  export type SkipValidation = boolean;
   export interface SourceSelectionCriteria {
     /**
      *  A container for filter information for the selection of Amazon S3 objects encrypted with Amazon Web Services KMS. If you include SourceSelectionCriteria in the replication configuration, this element is required. 

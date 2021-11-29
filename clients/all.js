@@ -291,5 +291,9 @@ module.exports = {
   MigrationHubStrategy: require('./migrationhubstrategy'),
   AppConfigData: require('./appconfigdata'),
   Drs: require('./drs'),
-  MigrationHubRefactorSpaces: require('./migrationhubrefactorspaces')
+  MigrationHubRefactorSpaces: require('./migrationhubrefactorspaces'),
+  Evidently: require('./evidently'),
+  Inspector2: require('./inspector2'),
+  Rbin: require('./rbin'),
+  RUM: require('./rum')
 };

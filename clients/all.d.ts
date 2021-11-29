@@ -290,3 +290,7 @@ export import MigrationHubStrategy = require('./migrationhubstrategy');
 export import AppConfigData = require('./appconfigdata');
 export import Drs = require('./drs');
 export import MigrationHubRefactorSpaces = require('./migrationhubrefactorspaces');
+export import Evidently = require('./evidently');
+export import Inspector2 = require('./inspector2');
+export import Rbin = require('./rbin');
+export import RUM = require('./rum');

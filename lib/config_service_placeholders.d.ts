@@ -292,6 +292,10 @@ export abstract class ConfigurationServicePlaceholders {
   appconfigdata?: AWS.AppConfigData.Types.ClientConfiguration;
   drs?: AWS.Drs.Types.ClientConfiguration;
   migrationhubrefactorspaces?: AWS.MigrationHubRefactorSpaces.Types.ClientConfiguration;
+  evidently?: AWS.Evidently.Types.ClientConfiguration;
+  inspector2?: AWS.Inspector2.Types.ClientConfiguration;
+  rbin?: AWS.Rbin.Types.ClientConfiguration;
+  rum?: AWS.RUM.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -586,4 +590,8 @@ export interface ConfigurationServiceApiVersions {
   appconfigdata?: AWS.AppConfigData.Types.apiVersion;
   drs?: AWS.Drs.Types.apiVersion;
   migrationhubrefactorspaces?: AWS.MigrationHubRefactorSpaces.Types.apiVersion;
+  evidently?: AWS.Evidently.Types.apiVersion;
+  inspector2?: AWS.Inspector2.Types.apiVersion;
+  rbin?: AWS.Rbin.Types.apiVersion;
+  rum?: AWS.RUM.Types.apiVersion;
 }
