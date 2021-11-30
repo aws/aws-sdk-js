@@ -296,6 +296,9 @@ export abstract class ConfigurationServicePlaceholders {
   inspector2?: AWS.Inspector2.Types.ClientConfiguration;
   rbin?: AWS.Rbin.Types.ClientConfiguration;
   rum?: AWS.RUM.Types.ClientConfiguration;
+  backupgateway?: AWS.BackupGateway.Types.ClientConfiguration;
+  iottwinmaker?: AWS.IoTTwinMaker.Types.ClientConfiguration;
+  workspacesweb?: AWS.WorkSpacesWeb.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -594,4 +597,7 @@ export interface ConfigurationServiceApiVersions {
   inspector2?: AWS.Inspector2.Types.apiVersion;
   rbin?: AWS.Rbin.Types.apiVersion;
   rum?: AWS.RUM.Types.apiVersion;
+  backupgateway?: AWS.BackupGateway.Types.apiVersion;
+  iottwinmaker?: AWS.IoTTwinMaker.Types.apiVersion;
+  workspacesweb?: AWS.WorkSpacesWeb.Types.apiVersion;
 }

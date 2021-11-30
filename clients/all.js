@@ -295,5 +295,8 @@ module.exports = {
   Evidently: require('./evidently'),
   Inspector2: require('./inspector2'),
   Rbin: require('./rbin'),
-  RUM: require('./rum')
+  RUM: require('./rum'),
+  BackupGateway: require('./backupgateway'),
+  IoTTwinMaker: require('./iottwinmaker'),
+  WorkSpacesWeb: require('./workspacesweb')
 };

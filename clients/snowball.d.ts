@@ -44,27 +44,27 @@ declare class Snowball extends Service {
    */
   createCluster(callback?: (err: AWSError, data: Snowball.Types.CreateClusterResult) => void): Request<Snowball.Types.CreateClusterResult, AWSError>;
   /**
-   * Creates a job to import or export data between Amazon S3 and your on-premises data center. Your AWS account must have the right trust policies and permissions in place to create a job for a Snow device. If you're creating a job for a node in a cluster, you only need to provide the clusterId value; the other job attributes are inherited from the cluster.   Only the Snowball; Edge device type is supported when ordering clustered jobs. The device capacity is optional. Availability of device types differ by AWS Region. For more information about Region availability, see AWS Regional Services.    AWS Snow Family device types and their capacities.    Snow Family device type: SNC1_SSD    Capacity: T14   Description: Snowcone       Snow Family device type: SNC1_HDD    Capacity: T8   Description: Snowcone       Device type: EDGE_S    Capacity: T98   Description: Snowball Edge Storage Optimized for data transfer only       Device type: EDGE_CG    Capacity: T42   Description: Snowball Edge Compute Optimized with GPU      Device type: EDGE_C    Capacity: T42   Description: Snowball Edge Compute Optimized without GPU      Device type: EDGE    Capacity: T100   Description: Snowball Edge Storage Optimized with EC2 Compute      Device type: STANDARD    Capacity: T50   Description: Original Snowball device  This device is only available in the Ningxia, Beijing, and Singapore AWS Regions.        Device type: STANDARD    Capacity: T80   Description: Original Snowball device  This device is only available in the Ningxia, Beijing, and Singapore AWS Regions.       
+   * Creates a job to import or export data between Amazon S3 and your on-premises data center. Your Amazon Web Services account must have the right trust policies and permissions in place to create a job for a Snow device. If you're creating a job for a node in a cluster, you only need to provide the clusterId value; the other job attributes are inherited from the cluster.   Only the Snowball; Edge device type is supported when ordering clustered jobs. The device capacity is optional. Availability of device types differ by Amazon Web Services Region. For more information about Region availability, see Amazon Web Services Regional Services.    Snow Family Devices and their capacities.    Snow Family device type: SNC1_SSD    Capacity: T14   Description: Snowcone       Snow Family device type: SNC1_HDD    Capacity: T8   Description: Snowcone       Device type: EDGE_S    Capacity: T98   Description: Snowball Edge Storage Optimized for data transfer only       Device type: EDGE_CG    Capacity: T42   Description: Snowball Edge Compute Optimized with GPU      Device type: EDGE_C    Capacity: T42   Description: Snowball Edge Compute Optimized without GPU      Device type: EDGE    Capacity: T100   Description: Snowball Edge Storage Optimized with EC2 Compute      Device type: STANDARD    Capacity: T50   Description: Original Snowball device  This device is only available in the Ningxia, Beijing, and Singapore Amazon Web Services Region        Device type: STANDARD    Capacity: T80   Description: Original Snowball device  This device is only available in the Ningxia, Beijing, and Singapore Amazon Web Services Region.       
    */
   createJob(params: Snowball.Types.CreateJobRequest, callback?: (err: AWSError, data: Snowball.Types.CreateJobResult) => void): Request<Snowball.Types.CreateJobResult, AWSError>;
   /**
-   * Creates a job to import or export data between Amazon S3 and your on-premises data center. Your AWS account must have the right trust policies and permissions in place to create a job for a Snow device. If you're creating a job for a node in a cluster, you only need to provide the clusterId value; the other job attributes are inherited from the cluster.   Only the Snowball; Edge device type is supported when ordering clustered jobs. The device capacity is optional. Availability of device types differ by AWS Region. For more information about Region availability, see AWS Regional Services.    AWS Snow Family device types and their capacities.    Snow Family device type: SNC1_SSD    Capacity: T14   Description: Snowcone       Snow Family device type: SNC1_HDD    Capacity: T8   Description: Snowcone       Device type: EDGE_S    Capacity: T98   Description: Snowball Edge Storage Optimized for data transfer only       Device type: EDGE_CG    Capacity: T42   Description: Snowball Edge Compute Optimized with GPU      Device type: EDGE_C    Capacity: T42   Description: Snowball Edge Compute Optimized without GPU      Device type: EDGE    Capacity: T100   Description: Snowball Edge Storage Optimized with EC2 Compute      Device type: STANDARD    Capacity: T50   Description: Original Snowball device  This device is only available in the Ningxia, Beijing, and Singapore AWS Regions.        Device type: STANDARD    Capacity: T80   Description: Original Snowball device  This device is only available in the Ningxia, Beijing, and Singapore AWS Regions.       
+   * Creates a job to import or export data between Amazon S3 and your on-premises data center. Your Amazon Web Services account must have the right trust policies and permissions in place to create a job for a Snow device. If you're creating a job for a node in a cluster, you only need to provide the clusterId value; the other job attributes are inherited from the cluster.   Only the Snowball; Edge device type is supported when ordering clustered jobs. The device capacity is optional. Availability of device types differ by Amazon Web Services Region. For more information about Region availability, see Amazon Web Services Regional Services.    Snow Family Devices and their capacities.    Snow Family device type: SNC1_SSD    Capacity: T14   Description: Snowcone       Snow Family device type: SNC1_HDD    Capacity: T8   Description: Snowcone       Device type: EDGE_S    Capacity: T98   Description: Snowball Edge Storage Optimized for data transfer only       Device type: EDGE_CG    Capacity: T42   Description: Snowball Edge Compute Optimized with GPU      Device type: EDGE_C    Capacity: T42   Description: Snowball Edge Compute Optimized without GPU      Device type: EDGE    Capacity: T100   Description: Snowball Edge Storage Optimized with EC2 Compute      Device type: STANDARD    Capacity: T50   Description: Original Snowball device  This device is only available in the Ningxia, Beijing, and Singapore Amazon Web Services Region        Device type: STANDARD    Capacity: T80   Description: Original Snowball device  This device is only available in the Ningxia, Beijing, and Singapore Amazon Web Services Region.       
    */
   createJob(callback?: (err: AWSError, data: Snowball.Types.CreateJobResult) => void): Request<Snowball.Types.CreateJobResult, AWSError>;
   /**
-   * Creates a job with the long-term usage option for a device. The long-term usage is a 1-year or 3-year long-term pricing type for the device. You are billed upfront, and AWS provides discounts for long-term pricing. 
+   * Creates a job with the long-term usage option for a device. The long-term usage is a 1-year or 3-year long-term pricing type for the device. You are billed upfront, and Amazon Web Services provides discounts for long-term pricing. 
    */
   createLongTermPricing(params: Snowball.Types.CreateLongTermPricingRequest, callback?: (err: AWSError, data: Snowball.Types.CreateLongTermPricingResult) => void): Request<Snowball.Types.CreateLongTermPricingResult, AWSError>;
   /**
-   * Creates a job with the long-term usage option for a device. The long-term usage is a 1-year or 3-year long-term pricing type for the device. You are billed upfront, and AWS provides discounts for long-term pricing. 
+   * Creates a job with the long-term usage option for a device. The long-term usage is a 1-year or 3-year long-term pricing type for the device. You are billed upfront, and Amazon Web Services provides discounts for long-term pricing. 
    */
   createLongTermPricing(callback?: (err: AWSError, data: Snowball.Types.CreateLongTermPricingResult) => void): Request<Snowball.Types.CreateLongTermPricingResult, AWSError>;
   /**
-   * Creates a shipping label that will be used to return the Snow device to AWS.
+   * Creates a shipping label that will be used to return the Snow device to Amazon Web Services.
    */
   createReturnShippingLabel(params: Snowball.Types.CreateReturnShippingLabelRequest, callback?: (err: AWSError, data: Snowball.Types.CreateReturnShippingLabelResult) => void): Request<Snowball.Types.CreateReturnShippingLabelResult, AWSError>;
   /**
-   * Creates a shipping label that will be used to return the Snow device to AWS.
+   * Creates a shipping label that will be used to return the Snow device to Amazon Web Services.
    */
   createReturnShippingLabel(callback?: (err: AWSError, data: Snowball.Types.CreateReturnShippingLabelResult) => void): Request<Snowball.Types.CreateReturnShippingLabelResult, AWSError>;
   /**
@@ -100,11 +100,11 @@ declare class Snowball extends Service {
    */
   describeJob(callback?: (err: AWSError, data: Snowball.Types.DescribeJobResult) => void): Request<Snowball.Types.DescribeJobResult, AWSError>;
   /**
-   * Information on the shipping label of a Snow device that is being returned to AWS.
+   * Information on the shipping label of a Snow device that is being returned to Amazon Web Services.
    */
   describeReturnShippingLabel(params: Snowball.Types.DescribeReturnShippingLabelRequest, callback?: (err: AWSError, data: Snowball.Types.DescribeReturnShippingLabelResult) => void): Request<Snowball.Types.DescribeReturnShippingLabelResult, AWSError>;
   /**
-   * Information on the shipping label of a Snow device that is being returned to AWS.
+   * Information on the shipping label of a Snow device that is being returned to Amazon Web Services.
    */
   describeReturnShippingLabel(callback?: (err: AWSError, data: Snowball.Types.DescribeReturnShippingLabelResult) => void): Request<Snowball.Types.DescribeReturnShippingLabelResult, AWSError>;
   /**
@@ -124,11 +124,11 @@ declare class Snowball extends Service {
    */
   getJobUnlockCode(callback?: (err: AWSError, data: Snowball.Types.GetJobUnlockCodeResult) => void): Request<Snowball.Types.GetJobUnlockCodeResult, AWSError>;
   /**
-   * Returns information about the Snow Family service limit for your account, and also the number of Snow devices your account has in use. The default service limit for the number of Snow devices that you can have at one time is 1. If you want to increase your service limit, contact AWS Support.
+   * Returns information about the Snow Family service limit for your account, and also the number of Snow devices your account has in use. The default service limit for the number of Snow devices that you can have at one time is 1. If you want to increase your service limit, contact Amazon Web Services Support.
    */
   getSnowballUsage(params: Snowball.Types.GetSnowballUsageRequest, callback?: (err: AWSError, data: Snowball.Types.GetSnowballUsageResult) => void): Request<Snowball.Types.GetSnowballUsageResult, AWSError>;
   /**
-   * Returns information about the Snow Family service limit for your account, and also the number of Snow devices your account has in use. The default service limit for the number of Snow devices that you can have at one time is 1. If you want to increase your service limit, contact AWS Support.
+   * Returns information about the Snow Family service limit for your account, and also the number of Snow devices your account has in use. The default service limit for the number of Snow devices that you can have at one time is 1. If you want to increase your service limit, contact Amazon Web Services Support.
    */
   getSnowballUsage(callback?: (err: AWSError, data: Snowball.Types.GetSnowballUsageResult) => void): Request<Snowball.Types.GetSnowballUsageResult, AWSError>;
   /**
@@ -156,11 +156,11 @@ declare class Snowball extends Service {
    */
   listClusters(callback?: (err: AWSError, data: Snowball.Types.ListClustersResult) => void): Request<Snowball.Types.ListClustersResult, AWSError>;
   /**
-   * This action returns a list of the different Amazon EC2 Amazon Machine Images (AMIs) that are owned by your AWS account that would be supported for use on a Snow device. Currently, supported AMIs are based on the CentOS 7 (x86_64) - with Updates HVM, Ubuntu Server 14.04 LTS (HVM), and Ubuntu 16.04 LTS - Xenial (HVM) images, available on the AWS Marketplace.
+   * This action returns a list of the different Amazon EC2 Amazon Machine Images (AMIs) that are owned by your Amazon Web Services accountthat would be supported for use on a Snow device. Currently, supported AMIs are based on the CentOS 7 (x86_64) - with Updates HVM, Ubuntu Server 14.04 LTS (HVM), and Ubuntu 16.04 LTS - Xenial (HVM) images, available on the Amazon Web Services Marketplace.
    */
   listCompatibleImages(params: Snowball.Types.ListCompatibleImagesRequest, callback?: (err: AWSError, data: Snowball.Types.ListCompatibleImagesResult) => void): Request<Snowball.Types.ListCompatibleImagesResult, AWSError>;
   /**
-   * This action returns a list of the different Amazon EC2 Amazon Machine Images (AMIs) that are owned by your AWS account that would be supported for use on a Snow device. Currently, supported AMIs are based on the CentOS 7 (x86_64) - with Updates HVM, Ubuntu Server 14.04 LTS (HVM), and Ubuntu 16.04 LTS - Xenial (HVM) images, available on the AWS Marketplace.
+   * This action returns a list of the different Amazon EC2 Amazon Machine Images (AMIs) that are owned by your Amazon Web Services accountthat would be supported for use on a Snow device. Currently, supported AMIs are based on the CentOS 7 (x86_64) - with Updates HVM, Ubuntu Server 14.04 LTS (HVM), and Ubuntu 16.04 LTS - Xenial (HVM) images, available on the Amazon Web Services Marketplace.
    */
   listCompatibleImages(callback?: (err: AWSError, data: Snowball.Types.ListCompatibleImagesResult) => void): Request<Snowball.Types.ListCompatibleImagesResult, AWSError>;
   /**
@@ -321,11 +321,11 @@ declare namespace Snowball {
      */
     Description?: String;
     /**
-     * The KmsKeyARN Amazon Resource Name (ARN) associated with this cluster. This ARN was created using the CreateKey API action in AWS Key Management Service (AWS KMS).
+     * The KmsKeyARN Amazon Resource Name (ARN) associated with this cluster. This ARN was created using the CreateKey API action in Key Management Service (KMS.
      */
     KmsKeyARN?: KmsKeyARN;
     /**
-     * The role ARN associated with this cluster. This ARN was created using the CreateRole API action in AWS Identity and Access Management (IAM).
+     * The role ARN associated with this cluster. This ARN was created using the CreateRole API action in Identity and Access Management (IAM).
      */
     RoleARN?: RoleARN;
     /**
@@ -337,7 +337,7 @@ declare namespace Snowball {
      */
     JobType?: JobType;
     /**
-     * The type of AWS Snow device to use for this cluster.   For cluster jobs, AWS Snow Family currently supports only the EDGE device type. 
+     * The type of Snowcone device to use for this cluster.   For cluster jobs, Amazon Web Services Snow Family currently supports only the EDGE device type. 
      */
     SnowballType?: SnowballType;
     /**
@@ -365,11 +365,11 @@ declare namespace Snowball {
      */
     ForwardingAddressId?: AddressId;
     /**
-     * The tax documents required in your AWS Region.
+     * The tax documents required in your Amazon Web Services Region.
      */
     TaxDocuments?: TaxDocuments;
     /**
-     * Represents metadata and configuration settings for services on an AWS Snow Family device.
+     * Represents metadata and configuration settings for services on an Amazon Web Services Snow Family device.
      */
     OnDeviceServiceConfiguration?: OnDeviceServiceConfiguration;
   }
@@ -403,11 +403,11 @@ declare namespace Snowball {
      */
     JobType: JobType;
     /**
-     * The resources associated with the cluster job. These resources include Amazon S3 buckets and optional AWS Lambda functions written in the Python language. 
+     * The resources associated with the cluster job. These resources include Amazon S3 buckets and optional Lambda functions written in the Python language. 
      */
     Resources: JobResource;
     /**
-     * Specifies the service or services on the Snow Family device that your transferred data will be exported from or imported into. AWS Snow Family supports Amazon S3 and NFS (Network File System).
+     * Specifies the service or services on the Snow Family device that your transferred data will be exported from or imported into. Amazon Web Services Snow Family device clusters support Amazon S3 and NFS (Network File System).
      */
     OnDeviceServiceConfiguration?: OnDeviceServiceConfiguration;
     /**
@@ -419,15 +419,15 @@ declare namespace Snowball {
      */
     AddressId: AddressId;
     /**
-     * The KmsKeyARN value that you want to associate with this cluster. KmsKeyARN values are created by using the CreateKey API action in AWS Key Management Service (AWS KMS). 
+     * The KmsKeyARN value that you want to associate with this cluster. KmsKeyARN values are created by using the CreateKey API action in Key Management Service (KMS). 
      */
     KmsKeyARN?: KmsKeyARN;
     /**
-     * The RoleARN that you want to associate with this cluster. RoleArn values are created by using the CreateRole API action in AWS Identity and Access Management (IAM).
+     * The RoleARN that you want to associate with this cluster. RoleArn values are created by using the CreateRole API action in Identity and Access Management (IAM).
      */
     RoleARN: RoleARN;
     /**
-     * The type of AWS Snow Family device to use for this cluster.   For cluster jobs, AWS Snow Family currently supports only the EDGE device type.  For more information, see "https://docs.aws.amazon.com/snowball/latest/snowcone-guide/snow-device-types.html" (Snow Family Devices and Capacity) in the Snowcone User Guide or "https://docs.aws.amazon.com/snowball/latest/developer-guide/snow-device-types.html" (Snow Family Devices and Capacity) in the Snowcone User Guide.
+     * The type of Snow Family Devices to use for this cluster.   For cluster jobs, Amazon Web Services Snow Family currently supports only the EDGE device type.  For more information, see "https://docs.aws.amazon.com/snowball/latest/snowcone-guide/snow-device-types.html" (Snow Family Devices and Capacity) in the Snowcone User Guide or "https://docs.aws.amazon.com/snowball/latest/developer-guide/snow-device-types.html" (Snow Family Devices and Capacity) in the Snowcone User Guide.
      */
     SnowballType: SnowballType;
     /**
@@ -443,7 +443,7 @@ declare namespace Snowball {
      */
     ForwardingAddressId?: AddressId;
     /**
-     * The tax documents required in your AWS Region.
+     * The tax documents required in your Amazon Web Services Region.
      */
     TaxDocuments?: TaxDocuments;
     /**
@@ -467,7 +467,7 @@ declare namespace Snowball {
      */
     Resources?: JobResource;
     /**
-     * Specifies the service or services on the Snow Family device that your transferred data will be exported from or imported into. AWS Snow Family supports Amazon S3 and NFS (Network File System).
+     * Specifies the service or services on the Snow Family device that your transferred data will be exported from or imported into. Amazon Web Services Snow Family supports Amazon S3 and NFS (Network File System) and the Amazon Web Services Storage Gateway service Tape Gateway type.
      */
     OnDeviceServiceConfiguration?: OnDeviceServiceConfiguration;
     /**
@@ -479,11 +479,11 @@ declare namespace Snowball {
      */
     AddressId?: AddressId;
     /**
-     * The KmsKeyARN that you want to associate with this job. KmsKeyARNs are created using the CreateKey AWS Key Management Service (KMS) API action.
+     * The KmsKeyARN that you want to associate with this job. KmsKeyARNs are created using the CreateKey Key Management Service (KMS) API action.
      */
     KmsKeyARN?: KmsKeyARN;
     /**
-     * The RoleARN that you want to associate with this job. RoleArns are created using the CreateRole AWS Identity and Access Management (IAM) API action.
+     * The RoleARN that you want to associate with this job. RoleArns are created using the CreateRole Identity and Access Management (IAM) API action.
      */
     RoleARN?: RoleARN;
     /**
@@ -503,7 +503,7 @@ declare namespace Snowball {
      */
     ClusterId?: ClusterId;
     /**
-     * The type of AWS Snow Family device to use for this job.   For cluster jobs, AWS Snow Family currently supports only the EDGE device type.  The type of AWS Snow device to use for this job. Currently, the only supported device type for cluster jobs is EDGE. For more information, see Snowball Edge Device Options in the Snowball Edge Developer Guide. For more information, see "https://docs.aws.amazon.com/snowball/latest/snowcone-guide/snow-device-types.html" (Snow Family Devices and Capacity) in the Snowcone User Guide or "https://docs.aws.amazon.com/snowball/latest/developer-guide/snow-device-types.html" (Snow Family Devices and Capacity) in the Snowcone User Guide.
+     * The type of Snow Family Devices to use for this job.   For cluster jobs, Amazon Web Services Snow Family currently supports only the EDGE device type.  The type of Amazon Web Services Snow device to use for this job. Currently, the only supported device type for cluster jobs is EDGE. For more information, see Snowball Edge Device Options in the Snowball Edge Developer Guide. For more information, see "https://docs.aws.amazon.com/snowball/latest/snowcone-guide/snow-device-types.html" (Snow Family Devices and Capacity) in the Snowcone User Guide or "https://docs.aws.amazon.com/snowball/latest/developer-guide/snow-device-types.html" (Snow Family Devices and Capacity) in the Snowcone User Guide.
      */
     SnowballType?: SnowballType;
     /**
@@ -511,11 +511,11 @@ declare namespace Snowball {
      */
     ForwardingAddressId?: AddressId;
     /**
-     * The tax documents required in your AWS Region.
+     * The tax documents required in your Amazon Web Services Region.
      */
     TaxDocuments?: TaxDocuments;
     /**
-     * Defines the device configuration for an AWS Snowcone job. For more information, see "https://docs.aws.amazon.com/snowball/latest/snowcone-guide/snow-device-types.html" (Snow Family Devices and Capacity) in the Snowcone User Guide or "https://docs.aws.amazon.com/snowball/latest/developer-guide/snow-device-types.html" (Snow Family Devices and Capacity) in the Snowcone User Guide.
+     * Defines the device configuration for an Snowcone job. For more information, see "https://docs.aws.amazon.com/snowball/latest/snowcone-guide/snow-device-types.html" (Snow Family Devices and Capacity) in the Snowcone User Guide or "https://docs.aws.amazon.com/snowball/latest/developer-guide/snow-device-types.html" (Snow Family Devices and Capacity) in the Snowcone User Guide.
      */
     DeviceConfiguration?: DeviceConfiguration;
     /**
@@ -543,7 +543,7 @@ declare namespace Snowball {
      */
     IsLongTermPricingAutoRenew?: JavaBoolean;
     /**
-     * The type of AWS Snow Family device to use for the long-term pricing job.
+     * The type of Snow Family Devices to use for the long-term pricing job.
      */
     SnowballType?: SnowballType;
   }
@@ -559,13 +559,13 @@ declare namespace Snowball {
      */
     JobId: JobId;
     /**
-     * The shipping speed for a particular job. This speed doesn't dictate how soon the device is returned to AWS. This speed represents how quickly it moves to its destination while in transit. Regional shipping speeds are as follows:
+     * The shipping speed for a particular job. This speed doesn't dictate how soon the device is returned to Amazon Web Services. This speed represents how quickly it moves to its destination while in transit. Regional shipping speeds are as follows:
      */
     ShippingOption?: ShippingOption;
   }
   export interface CreateReturnShippingLabelResult {
     /**
-     * The status information of the task on a Snow device that is being returned to AWS.
+     * The status information of the task on a Snow device that is being returned to Amazon Web Services.
      */
     Status?: ShippingLabelStatus;
   }
@@ -655,17 +655,21 @@ declare namespace Snowball {
   }
   export interface DescribeReturnShippingLabelResult {
     /**
-     * The status information of the task on a Snow device that is being returned to AWS.
+     * The status information of the task on a Snow device that is being returned to Amazon Web Services.
      */
     Status?: ShippingLabelStatus;
     /**
      * The expiration date of the current return shipping label.
      */
     ExpirationDate?: Timestamp;
+    /**
+     * The pre-signed Amazon S3 URI used to download the return shipping label.
+     */
+    ReturnShippingLabelURI?: String;
   }
   export interface DeviceConfiguration {
     /**
-     * Returns information about the device configuration for an AWS Snowcone job.
+     * Returns information about the device configuration for an Snowcone job.
      */
     SnowconeDeviceConfiguration?: SnowconeDeviceConfiguration;
   }
@@ -683,7 +687,7 @@ declare namespace Snowball {
   export type Ec2AmiResourceList = Ec2AmiResource[];
   export interface EventTriggerDefinition {
     /**
-     * The Amazon Resource Name (ARN) for any local Amazon S3 resource that is an AWS Lambda function's event trigger associated with this job.
+     * The Amazon Resource Name (ARN) for any local Amazon S3 resource that is an Lambda function's event trigger associated with this job.
      */
     EventResourceARN?: ResourceARN;
   }
@@ -739,7 +743,7 @@ declare namespace Snowball {
   }
   export interface INDTaxDocuments {
     /**
-     * The Goods and Services Tax (GST) documents required in AWS Regions in India.
+     * The Goods and Services Tax (GST) documents required in Amazon Web Services Region in India.
      */
     GSTIN?: GSTIN;
   }
@@ -821,11 +825,11 @@ declare namespace Snowball {
      */
     Description?: String;
     /**
-     * The Amazon Resource Name (ARN) for the AWS Key Management Service (AWS KMS) key associated with this job. This ARN was created using the CreateKey API action in AWS KMS.
+     * The Amazon Resource Name (ARN) for the Key Management Service (KMS) key associated with this job. This ARN was created using the CreateKey API action in KMS.
      */
     KmsKeyARN?: KmsKeyARN;
     /**
-     * The role ARN associated with this job. This ARN was created using the CreateRole API action in AWS Identity and Access Management (IAM).
+     * The role ARN associated with this job. This ARN was created using the CreateRole API action in Identity and Access Management.
      */
     RoleARN?: RoleARN;
     /**
@@ -845,7 +849,7 @@ declare namespace Snowball {
      */
     Notification?: Notification;
     /**
-     * A value that defines the real-time status of a Snow device's data transfer while the device is at AWS. This data is only available while a job has a JobState value of InProgress, for both import and export jobs.
+     * A value that defines the real-time status of a Snow device's data transfer while the device is at Amazon Web Services. This data is only available while a job has a JobState value of InProgress, for both import and export jobs.
      */
     DataTransferProgress?: DataTransfer;
     /**
@@ -861,7 +865,7 @@ declare namespace Snowball {
      */
     ForwardingAddressId?: AddressId;
     /**
-     * The metadata associated with the tax documents required in your AWS Region.
+     * The metadata associated with the tax documents required in your Amazon Web Services Region.
      */
     TaxDocuments?: TaxDocuments;
     DeviceConfiguration?: DeviceConfiguration;
@@ -874,7 +878,7 @@ declare namespace Snowball {
      */
     LongTermPricingId?: LongTermPricingId;
     /**
-     * Represents metadata and configuration settings for services on an AWS Snow Family device.
+     * Represents metadata and configuration settings for services on an Amazon Web Services Snow Family device.
      */
     OnDeviceServiceConfiguration?: OnDeviceServiceConfiguration;
   }
@@ -909,7 +913,7 @@ declare namespace Snowball {
   export type KmsKeyARN = string;
   export interface LambdaResource {
     /**
-     * An Amazon Resource Name (ARN) that represents an AWS Lambda function to be triggered by PUT object actions on the associated local Amazon S3 resource.
+     * An Amazon Resource Name (ARN) that represents an Lambda function to be triggered by PUT object actions on the associated local Amazon S3 resource.
      */
     LambdaArn?: ResourceARN;
     /**
@@ -1061,7 +1065,7 @@ declare namespace Snowball {
      */
     LongTermPricingStatus?: String;
     /**
-     * The type of AWS Snow Family device associated with this long-term pricing job.
+     * The type of Snow Family Devices associated with this long-term pricing job.
      */
     SnowballType?: SnowballType;
     /**
@@ -1072,7 +1076,7 @@ declare namespace Snowball {
   export type LongTermPricingType = "OneYear"|"ThreeYear"|string;
   export interface NFSOnDeviceServiceConfiguration {
     /**
-     * The maximum NFS storage for one Snowball Family device.
+     * The maximum NFS storage for one Snow Family device.
      */
     StorageLimit?: StorageLimit;
     /**
@@ -1082,7 +1086,7 @@ declare namespace Snowball {
   }
   export interface Notification {
     /**
-     * The new SNS TopicArn that you want to associate with this job. You can create Amazon Resource Names (ARNs) for topics by using the CreateTopic Amazon SNS API action. You can subscribe email addresses to an Amazon SNS topic through the AWS Management Console, or by using the Subscribe Amazon Simple Notification Service (Amazon SNS) API action.
+     * The new SNS TopicArn that you want to associate with this job. You can create Amazon Resource Names (ARNs) for topics by using the CreateTopic Amazon SNS API action. You can subscribe email addresses to an Amazon SNS topic through the Amazon Web Services Management Console, or by using the Subscribe Amazon Simple Notification Service (Amazon SNS) API action.
      */
     SnsTopicARN?: SnsTopicARN;
     /**
@@ -1096,9 +1100,13 @@ declare namespace Snowball {
   }
   export interface OnDeviceServiceConfiguration {
     /**
-     * Represents the NFS service on a Snow Family device.
+     * Represents the NFS (Network File System) service on a Snow Family device.
      */
     NFSOnDeviceService?: NFSOnDeviceServiceConfiguration;
+    /**
+     * Represents the Storage Gateway service Tape Gateway type on a Snow Family device.
+     */
+    TGWOnDeviceService?: TGWOnDeviceServiceConfiguration;
   }
   export type RemoteManagement = "INSTALLED_ONLY"|"INSTALLED_AUTOSTART"|string;
   export type ResourceARN = string;
@@ -1113,7 +1121,7 @@ declare namespace Snowball {
      */
     KeyRange?: KeyRange;
     /**
-     * Specifies the service or services on the Snow Family device that your transferred data will be exported from or imported into. AWS Snow Family supports Amazon S3 and NFS (Network File System).
+     * Specifies the service or services on the Snow Family device that your transferred data will be exported from or imported into. Amazon Web Services Snow Family supports Amazon S3 and NFS (Network File System).
      */
     TargetOnDeviceServices?: TargetOnDeviceServiceList;
   }
@@ -1135,7 +1143,7 @@ declare namespace Snowball {
      */
     ShippingOption?: ShippingOption;
     /**
-     * The Status and TrackingNumber values for a Snow device being returned to AWS for a particular job.
+     * The Status and TrackingNumber values for a Snow device being returned to Amazon Web Services for a particular job.
      */
     InboundShipment?: Shipment;
     /**
@@ -1149,7 +1157,7 @@ declare namespace Snowball {
   export type SnowballType = "STANDARD"|"EDGE"|"EDGE_C"|"EDGE_CG"|"EDGE_S"|"SNC1_HDD"|"SNC1_SSD"|string;
   export interface SnowconeDeviceConfiguration {
     /**
-     * Configures the wireless connection for the AWS Snowcone device.
+     * Configures the wireless connection for the Snowcone device.
      */
     WirelessConnection?: WirelessConnection;
   }
@@ -1157,6 +1165,16 @@ declare namespace Snowball {
   export type StorageLimit = number;
   export type StorageUnit = "TB"|string;
   export type String = string;
+  export interface TGWOnDeviceServiceConfiguration {
+    /**
+     * The maximum number of virtual tapes to store on one Snow Family device. Due to physical resource limitations, this value must be set to 80 for Snowball Edge.
+     */
+    StorageLimit?: StorageLimit;
+    /**
+     * The scale unit of the virtual tapes on the device.
+     */
+    StorageUnit?: StorageUnit;
+  }
   export interface TargetOnDeviceService {
     /**
      * Specifies the name of the service on the Snow Family device that your transferred data will be exported from or imported into.
@@ -1179,7 +1197,7 @@ declare namespace Snowball {
      */
     ClusterId: ClusterId;
     /**
-     * The new role Amazon Resource Name (ARN) that you want to associate with this cluster. To create a role ARN, use the CreateRole API action in AWS Identity and Access Management (IAM).
+     * The new role Amazon Resource Name (ARN) that you want to associate with this cluster. To create a role ARN, use the CreateRole API action in Identity and Access Management (IAM).
      */
     RoleARN?: RoleARN;
     /**
@@ -1191,7 +1209,7 @@ declare namespace Snowball {
      */
     Resources?: JobResource;
     /**
-     * Specifies the service or services on the Snow Family device that your transferred data will be exported from or imported into. AWS Snow Family supports Amazon S3 and NFS (Network File System).
+     * Specifies the service or services on the Snow Family device that your transferred data will be exported from or imported into. Amazon Web Services Snow Family device clusters support Amazon S3 and NFS (Network File System).
      */
     OnDeviceServiceConfiguration?: OnDeviceServiceConfiguration;
     /**
@@ -1219,7 +1237,7 @@ declare namespace Snowball {
      */
     JobId: JobId;
     /**
-     * The new role Amazon Resource Name (ARN) that you want to associate with this job. To create a role ARN, use the CreateRoleAWS Identity and Access Management (IAM) API action.
+     * The new role Amazon Resource Name (ARN) that you want to associate with this job. To create a role ARN, use the CreateRoleIdentity and Access Management (IAM) API action.
      */
     RoleARN?: RoleARN;
     /**
@@ -1231,7 +1249,7 @@ declare namespace Snowball {
      */
     Resources?: JobResource;
     /**
-     * Specifies the service or services on the Snow Family device that your transferred data will be exported from or imported into. AWS Snow Family supports Amazon S3 and NFS (Network File System).
+     * Specifies the service or services on the Snow Family device that your transferred data will be exported from or imported into. Amazon Web Services Snow Family supports Amazon S3 and NFS (Network File System) and the Amazon Web Services Storage Gateway service Tape Gateway type.
      */
     OnDeviceServiceConfiguration?: OnDeviceServiceConfiguration;
     /**
@@ -1263,7 +1281,7 @@ declare namespace Snowball {
      */
     JobId: JobId;
     /**
-     * The state of a device when it is being shipped.  Set to RECEIVED when the device arrives at your location. Set to RETURNED when you have returned the device to AWS.
+     * The state of a device when it is being shipped.  Set to RECEIVED when the device arrives at your location. Set to RETURNED when you have returned the device to Amazon Web Services.
      */
     ShipmentState: ShipmentState;
   }
@@ -1287,7 +1305,7 @@ declare namespace Snowball {
   }
   export interface WirelessConnection {
     /**
-     * Enables the Wi-Fi adapter on an AWS Snowcone device.
+     * Enables the Wi-Fi adapter on an Snowcone device.
      */
     IsWifiEnabled?: Boolean;
   }

@@ -327,6 +327,10 @@ declare namespace Outposts {
      * The tags to apply to the Outpost.
      */
     Tags?: TagMap;
+    /**
+     *  The type of hardware for this Outpost. 
+     */
+    SupportedHardwareType?: SupportedHardwareType;
   }
   export interface CreateOutpostOutput {
     Outpost?: Outpost;
@@ -668,6 +672,10 @@ declare namespace Outposts {
      */
     Tags?: TagMap;
     SiteArn?: SiteArn;
+    /**
+     *  The hardware type. 
+     */
+    SupportedHardwareType?: SupportedHardwareType;
   }
   export type OutpostArn = string;
   export type OutpostDescription = string;
@@ -760,6 +768,7 @@ declare namespace Outposts {
   export type SiteNotes = string;
   export type SkuCode = string;
   export type StateOrRegion = string;
+  export type SupportedHardwareType = "RACK"|"SERVER"|string;
   export type SupportedStorageEnum = "EBS"|"S3"|string;
   export type SupportedStorageList = SupportedStorageEnum[];
   export type SupportedUplinkGbps = number;

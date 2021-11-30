@@ -37,6 +37,18 @@ declare class Kafka extends Service {
   createCluster(callback?: (err: AWSError, data: Kafka.Types.CreateClusterResponse) => void): Request<Kafka.Types.CreateClusterResponse, AWSError>;
   /**
    * 
+            Creates a new MSK cluster.
+         
+   */
+  createClusterV2(params: Kafka.Types.CreateClusterV2Request, callback?: (err: AWSError, data: Kafka.Types.CreateClusterV2Response) => void): Request<Kafka.Types.CreateClusterV2Response, AWSError>;
+  /**
+   * 
+            Creates a new MSK cluster.
+         
+   */
+  createClusterV2(callback?: (err: AWSError, data: Kafka.Types.CreateClusterV2Response) => void): Request<Kafka.Types.CreateClusterV2Response, AWSError>;
+  /**
+   * 
             Creates a new MSK configuration.
          
    */
@@ -83,6 +95,18 @@ declare class Kafka extends Service {
          
    */
   describeCluster(callback?: (err: AWSError, data: Kafka.Types.DescribeClusterResponse) => void): Request<Kafka.Types.DescribeClusterResponse, AWSError>;
+  /**
+   * 
+            Returns a description of the MSK cluster whose Amazon Resource Name (ARN) is specified in the request.
+         
+   */
+  describeClusterV2(params: Kafka.Types.DescribeClusterV2Request, callback?: (err: AWSError, data: Kafka.Types.DescribeClusterV2Response) => void): Request<Kafka.Types.DescribeClusterV2Response, AWSError>;
+  /**
+   * 
+            Returns a description of the MSK cluster whose Amazon Resource Name (ARN) is specified in the request.
+         
+   */
+  describeClusterV2(callback?: (err: AWSError, data: Kafka.Types.DescribeClusterV2Response) => void): Request<Kafka.Types.DescribeClusterV2Response, AWSError>;
   /**
    * 
             Returns a description of the cluster operation specified by the ARN.
@@ -179,6 +203,18 @@ declare class Kafka extends Service {
          
    */
   listClusters(callback?: (err: AWSError, data: Kafka.Types.ListClustersResponse) => void): Request<Kafka.Types.ListClustersResponse, AWSError>;
+  /**
+   * 
+            Returns a list of all the MSK clusters in the current Region.
+         
+   */
+  listClustersV2(params: Kafka.Types.ListClustersV2Request, callback?: (err: AWSError, data: Kafka.Types.ListClustersV2Response) => void): Request<Kafka.Types.ListClustersV2Response, AWSError>;
+  /**
+   * 
+            Returns a list of all the MSK clusters in the current Region.
+         
+   */
+  listClustersV2(callback?: (err: AWSError, data: Kafka.Types.ListClustersV2Response) => void): Request<Kafka.Types.ListClustersV2Response, AWSError>;
   /**
    * 
             Returns a list of all the MSK configurations in this Region.
@@ -559,6 +595,14 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
      */
     Unauthenticated?: Unauthenticated;
   }
+  export interface ServerlessClientAuthentication {
+    /**
+     * 
+            Details for ClientAuthentication using SASL.
+         
+     */
+    Sasl?: ServerlessSasl;
+  }
   export type ClientBroker = "TLS"|"TLS_PLAINTEXT"|"PLAINTEXT"|string;
   export interface CloudWatchLogs {
     Enabled: __boolean;
@@ -664,6 +708,74 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
      */
     ZookeeperConnectStringTls?: __string;
   }
+  export interface Cluster {
+    /**
+     * 
+            The Amazon Resource Name (ARN) that uniquely identifies a cluster operation.
+         
+     */
+    ActiveOperationArn?: __string;
+    /**
+     * 
+            Cluster Type.
+         
+     */
+    ClusterType?: ClusterType;
+    /**
+     * 
+            The Amazon Resource Name (ARN) that uniquely identifies the cluster.
+         
+     */
+    ClusterArn?: __string;
+    /**
+     * 
+            The name of the cluster.
+         
+     */
+    ClusterName?: __string;
+    /**
+     * 
+            The time when the cluster was created.
+         
+     */
+    CreationTime?: __timestampIso8601;
+    /**
+     * 
+            The current version of the MSK cluster.
+         
+     */
+    CurrentVersion?: __string;
+    /**
+     * 
+            The state of the cluster. The possible states are ACTIVE, CREATING, DELETING, FAILED, HEALING, MAINTENANCE, REBOOTING_BROKER, and UPDATING.
+         
+     */
+    State?: ClusterState;
+    /**
+     * 
+            State Info for the Amazon MSK cluster.
+         
+     */
+    StateInfo?: StateInfo;
+    /**
+     * 
+            Tags attached to the cluster.
+         
+     */
+    Tags?: __mapOf__string;
+    /**
+     * 
+            Information about the provisioned cluster.
+         
+     */
+    Provisioned?: Provisioned;
+    /**
+     * 
+            Information about the serverless cluster.
+         
+     */
+    Serverless?: Serverless;
+  }
   export interface ClusterOperationInfo {
     /**
      * 
@@ -755,6 +867,167 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
     StepStatus?: __string;
   }
   export type ClusterState = "ACTIVE"|"CREATING"|"DELETING"|"FAILED"|"HEALING"|"MAINTENANCE"|"REBOOTING_BROKER"|"UPDATING"|string;
+  export type ClusterType = "PROVISIONED"|"SERVERLESS"|string;
+  export interface ProvisionedRequest {
+    /**
+     * 
+            Information about the brokers.
+         
+     */
+    BrokerNodeGroupInfo: BrokerNodeGroupInfo;
+    /**
+     * 
+            Includes all client authentication information.
+         
+     */
+    ClientAuthentication?: ClientAuthentication;
+    /**
+     * 
+            Represents the configuration that you want Amazon MSK to use for the brokers in a cluster.
+         
+     */
+    ConfigurationInfo?: ConfigurationInfo;
+    /**
+     * 
+            Includes all encryption-related information.
+         
+     */
+    EncryptionInfo?: EncryptionInfo;
+    /**
+     * 
+            Specifies the level of monitoring for the MSK cluster. The possible values are DEFAULT, PER_BROKER, PER_TOPIC_PER_BROKER, and PER_TOPIC_PER_PARTITION.
+         
+     */
+    EnhancedMonitoring?: EnhancedMonitoring;
+    /**
+     * 
+            The settings for open monitoring.
+         
+     */
+    OpenMonitoring?: OpenMonitoringInfo;
+    /**
+     * 
+            The Apache Kafka version that you want for the cluster.
+         
+     */
+    KafkaVersion: __stringMin1Max128;
+    /**
+     * 
+            Log delivery information for the cluster.
+         
+     */
+    LoggingInfo?: LoggingInfo;
+    /**
+     * 
+            The number of broker nodes in the cluster.
+         
+     */
+    NumberOfBrokerNodes: __integerMin1Max15;
+  }
+  export interface Provisioned {
+    /**
+     * 
+            Information about the brokers.
+         
+     */
+    BrokerNodeGroupInfo: BrokerNodeGroupInfo;
+    /**
+     * 
+            Information about the Apache Kafka version deployed on the brokers.
+         
+     */
+    CurrentBrokerSoftwareInfo?: BrokerSoftwareInfo;
+    /**
+     * 
+            Includes all client authentication information.
+         
+     */
+    ClientAuthentication?: ClientAuthentication;
+    /**
+     * 
+            Includes all encryption-related information.
+         
+     */
+    EncryptionInfo?: EncryptionInfo;
+    /**
+     * 
+            Specifies the level of monitoring for the MSK cluster. The possible values are DEFAULT, PER_BROKER, PER_TOPIC_PER_BROKER, and PER_TOPIC_PER_PARTITION.
+         
+     */
+    EnhancedMonitoring?: EnhancedMonitoring;
+    /**
+     * 
+            The settings for open monitoring.
+         
+     */
+    OpenMonitoring?: OpenMonitoringInfo;
+    /**
+     * 
+            Log delivery information for the cluster.
+         
+     */
+    LoggingInfo?: LoggingInfo;
+    /**
+     * 
+            The number of broker nodes in the cluster.
+         
+     */
+    NumberOfBrokerNodes: __integerMin1Max15;
+    /**
+     * 
+            The connection string to use to connect to the Apache ZooKeeper cluster.
+         
+     */
+    ZookeeperConnectString?: __string;
+    /**
+     * 
+            The connection string to use to connect to the Apache ZooKeeper cluster on a TLS port.
+         
+     */
+    ZookeeperConnectStringTls?: __string;
+  }
+  export interface VpcConfig {
+    /**
+     * 
+            The IDs of the subnets associated with the cluster.
+         
+     */
+    SubnetIds: __listOf__string;
+    /**
+     * 
+            The IDs of the security groups associated with the cluster.
+         
+     */
+    SecurityGroupIds?: __listOf__string;
+  }
+  export interface ServerlessRequest {
+    /**
+     * 
+            The configuration of the Amazon VPCs for the cluster.
+         
+     */
+    VpcConfigs: __listOfVpcConfig;
+    /**
+     * 
+            Includes all client authentication information.
+         
+     */
+    ClientAuthentication?: ServerlessClientAuthentication;
+  }
+  export interface Serverless {
+    /**
+     * 
+            The configuration of the Amazon VPCs for the cluster.
+         
+     */
+    VpcConfigs: __listOfVpcConfig;
+    /**
+     * 
+            Includes all client authentication information.
+         
+     */
+    ClientAuthentication?: ServerlessClientAuthentication;
+  }
   export interface CompatibleKafkaVersion {
     /**
      * 
@@ -856,6 +1129,32 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
      */
     PublicAccess?: PublicAccess;
   }
+  export interface CreateClusterV2Request {
+    /**
+     * 
+            The name of the cluster.
+         
+     */
+    ClusterName: __stringMin1Max64;
+    /**
+     * 
+            A map of tags that you want the cluster to have.
+         
+     */
+    Tags?: __mapOf__string;
+    /**
+     * 
+            Information about the provisioned cluster.
+         
+     */
+    Provisioned?: ProvisionedRequest;
+    /**
+     * 
+            Information about the serverless cluster.
+         
+     */
+    Serverless?: ServerlessRequest;
+  }
   export interface CreateClusterRequest {
     /**
      * 
@@ -938,6 +1237,32 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
          
      */
     State?: ClusterState;
+  }
+  export interface CreateClusterV2Response {
+    /**
+     * 
+            The Amazon Resource Name (ARN) of the cluster.
+         
+     */
+    ClusterArn?: __string;
+    /**
+     * 
+            The name of the MSK cluster.
+         
+     */
+    ClusterName?: __string;
+    /**
+     * 
+            The state of the cluster. The possible states are ACTIVE, CREATING, DELETING, FAILED, HEALING, MAINTENANCE, REBOOTING_BROKER, and UPDATING.
+         
+     */
+    State?: ClusterState;
+    /**
+     * 
+            The type of the cluster. The possible states are PROVISIONED or SERVERLESS.
+         
+     */
+    ClusterType?: ClusterType;
   }
   export interface CreateConfigurationRequest {
     /**
@@ -1072,6 +1397,14 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
      */
     ClusterArn: __string;
   }
+  export interface DescribeClusterV2Request {
+    /**
+     * 
+            The Amazon Resource Name (ARN) that uniquely identifies the cluster.
+         
+     */
+    ClusterArn: __string;
+  }
   export interface DescribeClusterResponse {
     /**
      * 
@@ -1079,6 +1412,14 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
          
      */
     ClusterInfo?: ClusterInfo;
+  }
+  export interface DescribeClusterV2Response {
+    /**
+     * 
+            The cluster information.
+         
+     */
+    ClusterInfo?: Cluster;
   }
   export interface DescribeConfigurationRequest {
     /**
@@ -1407,6 +1748,33 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
      */
     NextToken?: __string;
   }
+  export interface ListClustersV2Request {
+    /**
+     * 
+            Specify a prefix of the names of the clusters that you want to list. The service lists all the clusters whose names start with this prefix.
+         
+     */
+    ClusterNameFilter?: __string;
+    /**
+     * 
+            Specify either PROVISIONED or SERVERLESS.
+         
+     */
+    ClusterTypeFilter?: __string;
+    /**
+     * 
+            The maximum number of results to return in the response. If there are more results, the response includes a NextToken parameter.
+         
+     */
+    MaxResults?: MaxResults;
+    /**
+     * 
+            The paginated results marker. When the result of the operation is truncated, the call returns NextToken in the response. 
+            To get the next batch, provide this token in your next request.
+         
+     */
+    NextToken?: __string;
+  }
   export interface ListClustersResponse {
     /**
      * 
@@ -1414,6 +1782,21 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
          
      */
     ClusterInfoList?: __listOfClusterInfo;
+    /**
+     * 
+            The paginated results marker. When the result of a ListClusters operation is truncated, the call returns NextToken in the response. 
+               To get another batch of clusters, provide this token in your next request.
+         
+     */
+    NextToken?: __string;
+  }
+  export interface ListClustersV2Response {
+    /**
+     * 
+            Information on each of the MSK clusters in the response.
+         
+     */
+    ClusterInfoList?: __listOfCluster;
     /**
      * 
             The paginated results marker. When the result of a ListClusters operation is truncated, the call returns NextToken in the response. 
@@ -1777,6 +2160,14 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
     Bucket?: __string;
     Enabled: __boolean;
     Prefix?: __string;
+  }
+  export interface ServerlessSasl {
+    /**
+     * 
+            Indicates whether IAM access control is enabled.
+         
+     */
+    Iam?: Iam;
   }
   export interface Sasl {
     /**
@@ -2314,9 +2705,11 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
   export type __integerMin1Max16384 = number;
   export type __listOfBrokerEBSVolumeInfo = BrokerEBSVolumeInfo[];
   export type __listOfClusterInfo = ClusterInfo[];
+  export type __listOfCluster = Cluster[];
   export type __listOfClusterOperationInfo = ClusterOperationInfo[];
   export type __listOfClusterOperationStep = ClusterOperationStep[];
   export type __listOfCompatibleKafkaVersion = CompatibleKafkaVersion[];
+  export type __listOfVpcConfig = VpcConfig[];
   export type __listOfConfiguration = Configuration[];
   export type __listOfConfigurationRevision = ConfigurationRevision[];
   export type __listOfKafkaVersion = KafkaVersion[];

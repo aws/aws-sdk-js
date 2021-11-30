@@ -1125,5 +1125,16 @@
   },
   "rum": {
     "name": "RUM"
+  },
+  "backupgateway": {
+    "prefix": "backup-gateway",
+    "name": "BackupGateway"
+  },
+  "iottwinmaker": {
+    "name": "IoTTwinMaker"
+  },
+  "workspacesweb": {
+    "prefix": "workspaces-web",
+    "name": "WorkSpacesWeb"
   }
 }

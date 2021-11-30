@@ -4963,7 +4963,7 @@ declare namespace Iot {
      */
     indexStatus?: IndexStatus;
     /**
-     * Contains a value that specifies the type of indexing performed. Valid values are:   REGISTRY – Your thing index contains only registry data.   REGISTRY_AND_SHADOW - Your thing index contains registry data and shadow data.   REGISTRY_AND_CONNECTIVITY_STATUS - Your thing index contains registry data and thing connectivity status data.   REGISTRY_AND_SHADOW_AND_CONNECTIVITY_STATUS - Your thing index contains registry data, shadow data, and thing connectivity status data.  
+     * Contains a value that specifies the type of indexing performed. Valid values are:   REGISTRY – Your thing index contains only registry data.   REGISTRY_AND_SHADOW - Your thing index contains registry data and shadow data.   REGISTRY_AND_CONNECTIVITY_STATUS - Your thing index contains registry data and thing connectivity status data.   REGISTRY_AND_SHADOW_AND_CONNECTIVITY_STATUS - Your thing index contains registry data, shadow data, and thing connectivity status data.   MULTI_INDEXING_MODE - Your thing index contains multiple data sources. For more information, see GetIndexingConfiguration.  
      */
     schema?: IndexSchema;
   }
@@ -5640,6 +5640,7 @@ declare namespace Iot {
   }
   export type DetectMitigationActionsToExecuteList = MitigationActionName[];
   export type DeviceCertificateUpdateAction = "DEACTIVATE"|string;
+  export type DeviceDefenderIndexingMode = "OFF"|"VIOLATIONS"|string;
   export type DeviceDefenderThingName = string;
   export type DimensionArn = string;
   export type DimensionName = string;
@@ -8457,6 +8458,7 @@ declare namespace Iot {
   }
   export type MqttPassword = Buffer|Uint8Array|Blob|string;
   export type MqttUsername = string;
+  export type NamedShadowIndexingMode = "OFF"|"ON"|string;
   export type NamespaceId = string;
   export type NextToken = string;
   export type NonCompliantChecksCount = number;
@@ -9975,9 +9977,13 @@ declare namespace Iot {
      */
     attributes?: Attributes;
     /**
-     * The shadow.
+     * The unnamed shadow and named shadow. For more information about shadows, see IoT Device Shadow service. 
      */
     shadow?: JsonDocument;
+    /**
+     * Contains Device Defender data. For more information about Device Defender, see Device Defender. 
+     */
+    deviceDefender?: JsonDocument;
     /**
      * Indicates whether the thing is connected to the Amazon Web Services IoT Core service.
      */
@@ -10064,6 +10070,14 @@ declare namespace Iot {
      * Thing connectivity indexing mode. Valid values are:    STATUS – Your thing index contains connectivity status. To enable thing connectivity indexing, thingIndexMode must not be set to OFF.   OFF - Thing connectivity status indexing is disabled.  
      */
     thingConnectivityIndexingMode?: ThingConnectivityIndexingMode;
+    /**
+     * Device Defender indexing mode. Valid values are:   VIOLATIONS – Your thing index contains Device Defender violations. To enable Device Defender indexing, deviceDefenderIndexingMode must not be set to OFF.   OFF - Device Defender indexing is disabled.   For more information about Device Defender violations, see Device Defender Detect. 
+     */
+    deviceDefenderIndexingMode?: DeviceDefenderIndexingMode;
+    /**
+     * Named shadow indexing mode. Valid values are:   ON – Your thing index contains named shadow. To enable thing named shadow indexing, namedShadowIndexingMode must not be set to OFF.   OFF - Named shadow indexing is disabled.   For more information about Shadows, see IoT Device Shadow service. 
+     */
+    namedShadowIndexingMode?: NamedShadowIndexingMode;
     /**
      * Contains fields that are indexed and whose types are already known by the Fleet Indexing service.
      */

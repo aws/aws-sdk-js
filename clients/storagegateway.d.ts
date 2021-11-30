@@ -751,7 +751,7 @@ declare namespace StorageGateway {
      */
     GatewayRegion: RegionId;
     /**
-     * A value that defines the type of gateway to activate. The type specified is critical to all later functions of the gateway and cannot be changed after activation. The default value is CACHED. Valid Values: STORED | CACHED | VTL | FILE_S3 | FILE_FSX_SMB| 
+     * A value that defines the type of gateway to activate. The type specified is critical to all later functions of the gateway and cannot be changed after activation. The default value is CACHED. Valid Values: STORED | CACHED | VTL | VTL_SNOW | FILE_S3 | FILE_FSX_SMB 
      */
     GatewayType?: GatewayType;
     /**
@@ -1853,7 +1853,7 @@ declare namespace StorageGateway {
      */
     CloudWatchLogGroupARN?: CloudWatchLogGroupARN;
     /**
-     * The type of hypervisor environment used by the host.
+     * The type of hardware or software platform on which the gateway is running.
      */
     HostEnvironment?: HostEnvironment;
     /**
@@ -1876,6 +1876,10 @@ declare namespace StorageGateway {
      * A list of the metadata cache sizes that the gateway can support based on its current hardware specifications.
      */
     SupportedGatewayCapacities?: SupportedGatewayCapacities;
+    /**
+     * A unique identifier for the specific instance of the host platform running the gateway. This value is only available for certain host environments, and its format depends on the host environment type.
+     */
+    HostEnvironmentId?: HostEnvironmentId;
   }
   export interface DescribeMaintenanceStartTimeInput {
     GatewayARN: GatewayARN;
@@ -2353,6 +2357,14 @@ declare namespace StorageGateway {
      * The Amazon Web Services Region where the Amazon EC2 instance is located.
      */
     Ec2InstanceRegion?: Ec2InstanceRegion;
+    /**
+     * The type of hardware or software platform on which the gateway is running.
+     */
+    HostEnvironment?: HostEnvironment;
+    /**
+     * A unique identifier for the specific instance of the host platform running the gateway. This value is only available for certain host environments, and its format depends on the host environment type.
+     */
+    HostEnvironmentId?: HostEnvironmentId;
   }
   export type GatewayName = string;
   export type GatewayNetworkInterfaces = NetworkInterface[];
@@ -2362,7 +2374,8 @@ declare namespace StorageGateway {
   export type GatewayType = string;
   export type Gateways = GatewayInfo[];
   export type Host = string;
-  export type HostEnvironment = "VMWARE"|"HYPER-V"|"EC2"|"KVM"|"OTHER"|string;
+  export type HostEnvironment = "VMWARE"|"HYPER-V"|"EC2"|"KVM"|"OTHER"|"SNOWBALL"|string;
+  export type HostEnvironmentId = string;
   export type Hosts = Host[];
   export type HourOfDay = number;
   export type IPV4Address = string;

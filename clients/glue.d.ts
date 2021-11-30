@@ -1466,6 +1466,10 @@ declare namespace Glue {
      * A list of the table to delete.
      */
     TablesToDelete: BatchDeleteTableNameList;
+    /**
+     * The transaction ID at which to delete the table contents.
+     */
+    TransactionId?: TransactionIdString;
   }
   export interface BatchDeleteTableResponse {
     /**
@@ -3141,6 +3145,10 @@ declare namespace Glue {
      * A list of partition indexes, PartitionIndex structures, to create in the table.
      */
     PartitionIndexes?: PartitionIndexList;
+    /**
+     * The ID of the transaction.
+     */
+    TransactionId?: TransactionIdString;
   }
   export interface CreateTableResponse {
   }
@@ -3696,6 +3704,10 @@ declare namespace Glue {
      * The name of the table to be deleted. For Hive compatibility, this name is entirely lowercase.
      */
     Name: NameString;
+    /**
+     * The transaction ID at which to delete the table contents.
+     */
+    TransactionId?: TransactionIdString;
   }
   export interface DeleteTableResponse {
   }
@@ -4850,6 +4862,14 @@ declare namespace Glue {
      * When true, specifies not returning the partition column schema. Useful when you are interested only in other partition attributes such as partition values or location. This approach avoids the problem of a large response by not returning duplicate data.
      */
     ExcludeColumnSchema?: BooleanNullable;
+    /**
+     * The transaction ID at which to read the partition contents.
+     */
+    TransactionId?: TransactionIdString;
+    /**
+     * The time as of when to read the partition contents. If not set, the most recent transaction commit time will be used. Cannot be specified along with TransactionId.
+     */
+    QueryAsOfTime?: Timestamp;
   }
   export interface GetPartitionsResponse {
     /**
@@ -5179,6 +5199,14 @@ declare namespace Glue {
      * The name of the table for which to retrieve the definition. For Hive compatibility, this name is entirely lowercase.
      */
     Name: NameString;
+    /**
+     * The transaction ID at which to read the table contents. 
+     */
+    TransactionId?: TransactionIdString;
+    /**
+     * The time as of when to read the table contents. If not set, the most recent transaction commit time will be used. Cannot be specified along with TransactionId.
+     */
+    QueryAsOfTime?: Timestamp;
   }
   export interface GetTableResponse {
     /**
@@ -5264,6 +5292,14 @@ declare namespace Glue {
      * The maximum number of tables to return in a single response.
      */
     MaxResults?: CatalogGetterPageSize;
+    /**
+     * The transaction ID at which to read the table contents.
+     */
+    TransactionId?: TransactionIdString;
+    /**
+     * The time as of when to read the table contents. If not set, the most recent transaction commit time will be used. Cannot be specified along with TransactionId.
+     */
+    QueryAsOfTime?: Timestamp;
   }
   export interface GetTablesResponse {
     /**
@@ -7900,6 +7936,7 @@ declare namespace Glue {
   export type TimestampValue = Date;
   export type Token = string;
   export type TotalSegmentsInteger = number;
+  export type TransactionIdString = string;
   export interface TransformEncryption {
     /**
      * An MLUserDataEncryption object containing the encryption mode and customer-provided KMS key ID.
@@ -8515,6 +8552,10 @@ declare namespace Glue {
      * By default, UpdateTable always creates an archived version of the table before updating it. However, if skipArchive is set to true, UpdateTable does not create the archived version.
      */
     SkipArchive?: BooleanNullable;
+    /**
+     * The transaction ID at which to update the table contents. 
+     */
+    TransactionId?: TransactionIdString;
   }
   export interface UpdateTableResponse {
   }

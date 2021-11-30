@@ -294,3 +294,6 @@ export import Evidently = require('./evidently');
 export import Inspector2 = require('./inspector2');
 export import Rbin = require('./rbin');
 export import RUM = require('./rum');
+export import BackupGateway = require('./backupgateway');
+export import IoTTwinMaker = require('./iottwinmaker');
+export import WorkSpacesWeb = require('./workspacesweb');
