@@ -221,6 +221,14 @@ declare class SageMaker extends Service {
    */
   createImageVersion(callback?: (err: AWSError, data: SageMaker.Types.CreateImageVersionResponse) => void): Request<SageMaker.Types.CreateImageVersionResponse, AWSError>;
   /**
+   * Starts a recommendation job. You can create either an instance recommendation or load test job.
+   */
+  createInferenceRecommendationsJob(params: SageMaker.Types.CreateInferenceRecommendationsJobRequest, callback?: (err: AWSError, data: SageMaker.Types.CreateInferenceRecommendationsJobResponse) => void): Request<SageMaker.Types.CreateInferenceRecommendationsJobResponse, AWSError>;
+  /**
+   * Starts a recommendation job. You can create either an instance recommendation or load test job.
+   */
+  createInferenceRecommendationsJob(callback?: (err: AWSError, data: SageMaker.Types.CreateInferenceRecommendationsJobResponse) => void): Request<SageMaker.Types.CreateInferenceRecommendationsJobResponse, AWSError>;
+  /**
    * Creates a job that uses workers to label the data objects in your input dataset. You can use the labeled data to train machine learning models.  You can select your workforce from one of three providers:   A private workforce that you create. It can include employees, contractors, and outside experts. Use a private workforce when want the data to stay within your organization or when a specific set of skills is required.   One or more vendors that you select from the Amazon Web Services Marketplace. Vendors provide expertise in specific areas.    The Amazon Mechanical Turk workforce. This is the largest workforce, but it should only be used for public data or data that has been stripped of any personally identifiable information.   You can also use automated data labeling to reduce the number of data objects that need to be labeled by a human. Automated data labeling uses active learning to determine if a data object can be labeled by machine or if it needs to be sent to a human worker. For more information, see Using Automated Data Labeling. The data objects to be labeled are contained in an Amazon S3 bucket. You create a manifest file that describes the location of each object. For more information, see Using Input and Output Data. The output can be used as the manifest file for another labeling job or as training data for your machine learning models. You can use this operation to create a static labeling job or a streaming labeling job. A static labeling job stops if all data objects in the input manifest file identified in ManifestS3Uri have been labeled. A streaming labeling job runs perpetually until it is manually stopped, or remains idle for 10 days. You can send new data objects to an active (InProgress) streaming labeling job in real time. To learn how to create a static labeling job, see Create a Labeling Job (API)  in the Amazon SageMaker Developer Guide. To learn how to create a streaming labeling job, see Create a Streaming Labeling Job.
    */
   createLabelingJob(params: SageMaker.Types.CreateLabelingJobRequest, callback?: (err: AWSError, data: SageMaker.Types.CreateLabelingJobResponse) => void): Request<SageMaker.Types.CreateLabelingJobResponse, AWSError>;
@@ -901,6 +909,14 @@ declare class SageMaker extends Service {
    */
   describeImageVersion(callback?: (err: AWSError, data: SageMaker.Types.DescribeImageVersionResponse) => void): Request<SageMaker.Types.DescribeImageVersionResponse, AWSError>;
   /**
+   * Provides the results of the Inference Recommender job. One or more recommendation jobs are returned.
+   */
+  describeInferenceRecommendationsJob(params: SageMaker.Types.DescribeInferenceRecommendationsJobRequest, callback?: (err: AWSError, data: SageMaker.Types.DescribeInferenceRecommendationsJobResponse) => void): Request<SageMaker.Types.DescribeInferenceRecommendationsJobResponse, AWSError>;
+  /**
+   * Provides the results of the Inference Recommender job. One or more recommendation jobs are returned.
+   */
+  describeInferenceRecommendationsJob(callback?: (err: AWSError, data: SageMaker.Types.DescribeInferenceRecommendationsJobResponse) => void): Request<SageMaker.Types.DescribeInferenceRecommendationsJobResponse, AWSError>;
+  /**
    * Gets information about a labeling job.
    */
   describeLabelingJob(params: SageMaker.Types.DescribeLabelingJobRequest, callback?: (err: AWSError, data: SageMaker.Types.DescribeLabelingJobResponse) => void): Request<SageMaker.Types.DescribeLabelingJobResponse, AWSError>;
@@ -908,6 +924,14 @@ declare class SageMaker extends Service {
    * Gets information about a labeling job.
    */
   describeLabelingJob(callback?: (err: AWSError, data: SageMaker.Types.DescribeLabelingJobResponse) => void): Request<SageMaker.Types.DescribeLabelingJobResponse, AWSError>;
+  /**
+   * Provides a list of properties for the requested lineage group. For more information, see  Cross-Account Lineage Tracking  in the Amazon SageMaker Developer Guide.
+   */
+  describeLineageGroup(params: SageMaker.Types.DescribeLineageGroupRequest, callback?: (err: AWSError, data: SageMaker.Types.DescribeLineageGroupResponse) => void): Request<SageMaker.Types.DescribeLineageGroupResponse, AWSError>;
+  /**
+   * Provides a list of properties for the requested lineage group. For more information, see  Cross-Account Lineage Tracking  in the Amazon SageMaker Developer Guide.
+   */
+  describeLineageGroup(callback?: (err: AWSError, data: SageMaker.Types.DescribeLineageGroupResponse) => void): Request<SageMaker.Types.DescribeLineageGroupResponse, AWSError>;
   /**
    * Describes a model that you created using the CreateModel API.
    */
@@ -1124,6 +1148,14 @@ declare class SageMaker extends Service {
    * Describes a fleet.
    */
   getDeviceFleetReport(callback?: (err: AWSError, data: SageMaker.Types.GetDeviceFleetReportResponse) => void): Request<SageMaker.Types.GetDeviceFleetReportResponse, AWSError>;
+  /**
+   * The resource policy for the lineage group.
+   */
+  getLineageGroupPolicy(params: SageMaker.Types.GetLineageGroupPolicyRequest, callback?: (err: AWSError, data: SageMaker.Types.GetLineageGroupPolicyResponse) => void): Request<SageMaker.Types.GetLineageGroupPolicyResponse, AWSError>;
+  /**
+   * The resource policy for the lineage group.
+   */
+  getLineageGroupPolicy(callback?: (err: AWSError, data: SageMaker.Types.GetLineageGroupPolicyResponse) => void): Request<SageMaker.Types.GetLineageGroupPolicyResponse, AWSError>;
   /**
    * Gets a resource policy that manages access for a model group. For information about resource policies, see Identity-based policies and resource-based policies in the Amazon Web Services Identity and Access Management User Guide..
    */
@@ -1349,6 +1381,14 @@ declare class SageMaker extends Service {
    */
   listImages(callback?: (err: AWSError, data: SageMaker.Types.ListImagesResponse) => void): Request<SageMaker.Types.ListImagesResponse, AWSError>;
   /**
+   * Lists recommendation jobs that satisfy various filters.
+   */
+  listInferenceRecommendationsJobs(params: SageMaker.Types.ListInferenceRecommendationsJobsRequest, callback?: (err: AWSError, data: SageMaker.Types.ListInferenceRecommendationsJobsResponse) => void): Request<SageMaker.Types.ListInferenceRecommendationsJobsResponse, AWSError>;
+  /**
+   * Lists recommendation jobs that satisfy various filters.
+   */
+  listInferenceRecommendationsJobs(callback?: (err: AWSError, data: SageMaker.Types.ListInferenceRecommendationsJobsResponse) => void): Request<SageMaker.Types.ListInferenceRecommendationsJobsResponse, AWSError>;
+  /**
    * Gets a list of labeling jobs.
    */
   listLabelingJobs(params: SageMaker.Types.ListLabelingJobsRequest, callback?: (err: AWSError, data: SageMaker.Types.ListLabelingJobsResponse) => void): Request<SageMaker.Types.ListLabelingJobsResponse, AWSError>;
@@ -1365,6 +1405,14 @@ declare class SageMaker extends Service {
    */
   listLabelingJobsForWorkteam(callback?: (err: AWSError, data: SageMaker.Types.ListLabelingJobsForWorkteamResponse) => void): Request<SageMaker.Types.ListLabelingJobsForWorkteamResponse, AWSError>;
   /**
+   * A list of lineage groups shared with your Amazon Web Services account. For more information, see  Cross-Account Lineage Tracking  in the Amazon SageMaker Developer Guide.
+   */
+  listLineageGroups(params: SageMaker.Types.ListLineageGroupsRequest, callback?: (err: AWSError, data: SageMaker.Types.ListLineageGroupsResponse) => void): Request<SageMaker.Types.ListLineageGroupsResponse, AWSError>;
+  /**
+   * A list of lineage groups shared with your Amazon Web Services account. For more information, see  Cross-Account Lineage Tracking  in the Amazon SageMaker Developer Guide.
+   */
+  listLineageGroups(callback?: (err: AWSError, data: SageMaker.Types.ListLineageGroupsResponse) => void): Request<SageMaker.Types.ListLineageGroupsResponse, AWSError>;
+  /**
    * Lists model bias jobs definitions that satisfy various filters.
    */
   listModelBiasJobDefinitions(params: SageMaker.Types.ListModelBiasJobDefinitionsRequest, callback?: (err: AWSError, data: SageMaker.Types.ListModelBiasJobDefinitionsResponse) => void): Request<SageMaker.Types.ListModelBiasJobDefinitionsResponse, AWSError>;
@@ -1380,6 +1428,14 @@ declare class SageMaker extends Service {
    * Lists model explainability job definitions that satisfy various filters.
    */
   listModelExplainabilityJobDefinitions(callback?: (err: AWSError, data: SageMaker.Types.ListModelExplainabilityJobDefinitionsResponse) => void): Request<SageMaker.Types.ListModelExplainabilityJobDefinitionsResponse, AWSError>;
+  /**
+   * Lists the domain, framework, task, and model name of standard machine learning models found in common model zoos.
+   */
+  listModelMetadata(params: SageMaker.Types.ListModelMetadataRequest, callback?: (err: AWSError, data: SageMaker.Types.ListModelMetadataResponse) => void): Request<SageMaker.Types.ListModelMetadataResponse, AWSError>;
+  /**
+   * Lists the domain, framework, task, and model name of standard machine learning models found in common model zoos.
+   */
+  listModelMetadata(callback?: (err: AWSError, data: SageMaker.Types.ListModelMetadataResponse) => void): Request<SageMaker.Types.ListModelMetadataResponse, AWSError>;
   /**
    * Gets a list of the model groups in your Amazon Web Services account.
    */
@@ -1589,6 +1645,14 @@ declare class SageMaker extends Service {
    */
   putModelPackageGroupPolicy(callback?: (err: AWSError, data: SageMaker.Types.PutModelPackageGroupPolicyOutput) => void): Request<SageMaker.Types.PutModelPackageGroupPolicyOutput, AWSError>;
   /**
+   * Use this action to inspect your lineage and discover relationships between entities. For more information, see  Querying Lineage Entities in the Amazon SageMaker Developer Guide.
+   */
+  queryLineage(params: SageMaker.Types.QueryLineageRequest, callback?: (err: AWSError, data: SageMaker.Types.QueryLineageResponse) => void): Request<SageMaker.Types.QueryLineageResponse, AWSError>;
+  /**
+   * Use this action to inspect your lineage and discover relationships between entities. For more information, see  Querying Lineage Entities in the Amazon SageMaker Developer Guide.
+   */
+  queryLineage(callback?: (err: AWSError, data: SageMaker.Types.QueryLineageResponse) => void): Request<SageMaker.Types.QueryLineageResponse, AWSError>;
+  /**
    * Register devices.
    */
   registerDevices(params: SageMaker.Types.RegisterDevicesRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -1692,6 +1756,14 @@ declare class SageMaker extends Service {
    * Stops a running hyperparameter tuning job and all running training jobs that the tuning job launched. All model artifacts output from the training jobs are stored in Amazon Simple Storage Service (Amazon S3). All data that the training jobs write to Amazon CloudWatch Logs are still available in CloudWatch. After the tuning job moves to the Stopped state, it releases all reserved resources for the tuning job.
    */
   stopHyperParameterTuningJob(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Stops an Inference Recommender job.
+   */
+  stopInferenceRecommendationsJob(params: SageMaker.Types.StopInferenceRecommendationsJobRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Stops an Inference Recommender job.
+   */
+  stopInferenceRecommendationsJob(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Stops a running labeling job. A job that is stopped cannot be restarted. Any results obtained before the job is stopped are placed in the Amazon S3 output bucket.
    */
@@ -2144,6 +2216,37 @@ declare namespace SageMaker {
     Tags?: TagList;
   }
   export type AdditionalCodeRepositoryNamesOrUrls = CodeRepositoryNameOrUrl[];
+  export interface AdditionalInferenceSpecificationDefinition {
+    /**
+     * A unique name to identify the additional inference specification. The name must be unique within the list of your additional inference specifications for a particular model package.
+     */
+    Name: EntityName;
+    /**
+     * A description of the additional Inference specification
+     */
+    Description?: EntityDescription;
+    /**
+     * The Amazon ECR registry path of the Docker image that contains the inference code.
+     */
+    Containers: ModelPackageContainerDefinitionList;
+    /**
+     * A list of the instance types on which a transformation job can be run or on which an endpoint can be deployed.
+     */
+    SupportedTransformInstanceTypes?: TransformInstanceTypes;
+    /**
+     * A list of the instance types that are used to generate inferences in real-time.
+     */
+    SupportedRealtimeInferenceInstanceTypes?: RealtimeInferenceInstanceTypes;
+    /**
+     * The supported MIME types for the input data.
+     */
+    SupportedContentTypes?: ContentTypes;
+    /**
+     * The supported MIME types for the output data.
+     */
+    SupportedResponseMIMETypes?: ResponseMIMETypes;
+  }
+  export type AdditionalInferenceSpecifications = AdditionalInferenceSpecificationDefinition[];
   export interface AgentVersion {
     /**
      * Version of the agent.
@@ -2816,6 +2919,8 @@ declare namespace SageMaker {
      * The bias report for a model
      */
     Report?: MetricsSource;
+    PreTrainingReport?: MetricsSource;
+    PostTrainingReport?: MetricsSource;
   }
   export type BillableTimeInSeconds = number;
   export type BlockedReason = string;
@@ -2913,6 +3018,16 @@ declare namespace SageMaker {
   export type CaptureOptionList = CaptureOption[];
   export type CaptureStatus = "Started"|"Stopped"|string;
   export type Catalog = string;
+  export interface CategoricalParameter {
+    /**
+     * The Name of the environment variable.
+     */
+    Name: String64;
+    /**
+     * The list of values you can pass.
+     */
+    Value: CategoricalParameterRangeValues;
+  }
   export interface CategoricalParameterRange {
     /**
      * The name of the categorical hyperparameter to tune.
@@ -2929,7 +3044,9 @@ declare namespace SageMaker {
      */
     Values: ParameterValues;
   }
+  export type CategoricalParameterRangeValues = String128[];
   export type CategoricalParameterRanges = CategoricalParameterRange[];
+  export type CategoricalParameters = CategoricalParameter[];
   export type Cents = number;
   export type CertifyForMarketplace = boolean;
   export interface Channel {
@@ -3002,6 +3119,40 @@ declare namespace SageMaker {
   }
   export type Cidr = string;
   export type Cidrs = Cidr[];
+  export interface ClarifyCheckStepMetadata {
+    /**
+     * The type of the Clarify Check step
+     */
+    CheckType?: String256;
+    /**
+     * The Amazon S3 URI of baseline constraints file to be used for the drift check.
+     */
+    BaselineUsedForDriftCheckConstraints?: String1024;
+    /**
+     * The Amazon S3 URI of the newly calculated baseline constraints file.
+     */
+    CalculatedBaselineConstraints?: String1024;
+    /**
+     * The model package group name.
+     */
+    ModelPackageGroupName?: String256;
+    /**
+     * The Amazon S3 URI of the violation report if violations are detected.
+     */
+    ViolationReport?: String1024;
+    /**
+     * The Amazon Resource Name (ARN) of the check processing job that was run by this step's execution.
+     */
+    CheckJobArn?: String256;
+    /**
+     * This flag indicates if the drift check against the previous baseline will be skipped or not. If it is set to False, the previous baseline of the configured check type must be available.
+     */
+    SkipCheck?: Boolean;
+    /**
+     * This flag indicates if a newly calculated baseline can be accessed through step properties BaselineUsedForDriftCheckConstraints and BaselineUsedForDriftCheckStatistics. If it is set to False, the previous baseline of the configured check type must also be available. These can be accessed through the BaselineUsedForDriftCheckConstraints property. 
+     */
+    RegisterNewBaseline?: Boolean;
+  }
   export type ClientId = string;
   export type ClientSecret = string;
   export type ClientToken = string;
@@ -3165,6 +3316,10 @@ declare namespace SageMaker {
      * The name or Amazon Resource Name (ARN) of the model package to use to create the model.
      */
     ModelPackageName?: VersionedArnOrName;
+    /**
+     * The inference specification name in the model package version.
+     */
+    InferenceSpecificationName?: InferenceSpecificationName;
     /**
      * Specifies additional configuration for multi-model endpoints.
      */
@@ -3484,9 +3639,13 @@ declare namespace SageMaker {
      */
     RoleArn: RoleArn;
     /**
+     * The Amazon Resource Name (ARN) of a versioned model package. Provide either a ModelPackageVersionArn or an InputConfig object in the request syntax. The presence of both objects in the CreateCompilationJob request will return an exception.
+     */
+    ModelPackageVersionArn?: ModelPackageArn;
+    /**
      * Provides information about the location of input model artifacts, the name and shape of the expected data inputs, and the framework in which the model was trained.
      */
-    InputConfig: InputConfig;
+    InputConfig?: InputConfig;
     /**
      * Provides information about the output location for the compiled model and the target device the model runs on.
      */
@@ -3948,6 +4107,42 @@ declare namespace SageMaker {
      */
     ImageVersionArn?: ImageVersionArn;
   }
+  export interface CreateInferenceRecommendationsJobRequest {
+    /**
+     * A name for the recommendation job. The name must be unique within the Amazon Web Services Region and within your Amazon Web Services account.
+     */
+    JobName: RecommendationJobName;
+    /**
+     * Defines the type of recommendation job. Specify Default to initiate an instance recommendation and Advanced to initiate a load test. If left unspecified, Amazon SageMaker Inference Recommender will run an instance recommendation (DEFAULT) job.
+     */
+    JobType: RecommendationJobType;
+    /**
+     * The Amazon Resource Name (ARN) of an IAM role that enables Amazon SageMaker to perform tasks on your behalf.
+     */
+    RoleArn: RoleArn;
+    /**
+     * Provides information about the versioned model package Amazon Resource Name (ARN), the traffic pattern, and endpoint configurations.
+     */
+    InputConfig: RecommendationJobInputConfig;
+    /**
+     * Description of the recommendation job.
+     */
+    JobDescription?: RecommendationJobDescription;
+    /**
+     * A set of conditions for stopping a recommendation job. If any of the conditions are met, the job is automatically stopped.
+     */
+    StoppingConditions?: RecommendationJobStoppingConditions;
+    /**
+     * The metadata that you apply to Amazon Web Services resources to help you categorize and organize them. Each tag consists of a key and a value, both of which you define. For more information, see Tagging Amazon Web Services Resources in the Amazon Web Services General Reference.
+     */
+    Tags?: TagList;
+  }
+  export interface CreateInferenceRecommendationsJobResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the recommendation job.
+     */
+    JobArn: RecommendationJobArn;
+  }
   export interface CreateLabelingJobRequest {
     /**
      * The name of the labeling job. This name is used to identify the job in a list of labeling jobs. Labeling job names must be unique within an Amazon Web Services account and region. LabelingJobName is not case sensitive. For example, Example-job and example-job are considered the same labeling job name by Ground Truth.
@@ -4184,6 +4379,26 @@ declare namespace SageMaker {
      * The metadata properties associated with the model package versions.
      */
     CustomerMetadataProperties?: CustomerMetadataMap;
+    /**
+     * Represents the drift check baselines that can be used when the model monitor is set using the model package. For more information, see the topic on Drift Detection against Previous Baselines in SageMaker Pipelines in the Amazon SageMaker Developer Guide. 
+     */
+    DriftCheckBaselines?: DriftCheckBaselines;
+    /**
+     * The machine learning domain of your model package and its components. Common machine learning domains include computer vision and natural language processing.
+     */
+    Domain?: String;
+    /**
+     * The machine learning task your model package accomplishes. Common machine learning tasks include object detection and image classification.
+     */
+    Task?: String;
+    /**
+     * The Amazon Simple Storage Service (Amazon S3) path where the sample payload are stored. This path must point to a single gzip compressed tar archive (.tar.gz suffix).
+     */
+    SamplePayloadUrl?: S3Uri;
+    /**
+     * An array of additional Inference Specification objects. Each additional Inference Specification specifies artifacts based on this model package that can be used on inference endpoints. Generally used with SageMaker Neo to store the compiled artifacts. 
+     */
+    AdditionalInferenceSpecifications?: AdditionalInferenceSpecifications;
   }
   export interface CreateModelPackageOutput {
     /**
@@ -5437,7 +5652,7 @@ declare namespace SageMaker {
     /**
      * The name of the action.
      */
-    ActionName?: ExperimentEntityName;
+    ActionName?: ExperimentEntityNameOrArn;
     /**
      * The Amazon Resource Name (ARN) of the action.
      */
@@ -5473,6 +5688,10 @@ declare namespace SageMaker {
     LastModifiedTime?: Timestamp;
     LastModifiedBy?: UserContext;
     MetadataProperties?: MetadataProperties;
+    /**
+     * The Amazon Resource Name (ARN) of the lineage group.
+     */
+    LineageGroupArn?: LineageGroupArn;
   }
   export interface DescribeAlgorithmInput {
     /**
@@ -5628,7 +5847,7 @@ declare namespace SageMaker {
     /**
      * The name of the artifact.
      */
-    ArtifactName?: ExperimentEntityName;
+    ArtifactName?: ExperimentEntityNameOrArn;
     /**
      * The Amazon Resource Name (ARN) of the artifact.
      */
@@ -5656,6 +5875,10 @@ declare namespace SageMaker {
     LastModifiedTime?: Timestamp;
     LastModifiedBy?: UserContext;
     MetadataProperties?: MetadataProperties;
+    /**
+     * The Amazon Resource Name (ARN) of the lineage group.
+     */
+    LineageGroupArn?: LineageGroupArn;
   }
   export interface DescribeAutoMLJobRequest {
     /**
@@ -5813,6 +6036,10 @@ declare namespace SageMaker {
      */
     InferenceImage?: InferenceImage;
     /**
+     * The Amazon Resource Name (ARN) of the versioned model package that was provided to SageMaker Neo when you initiated a compilation job.
+     */
+    ModelPackageVersionArn?: ModelPackageArn;
+    /**
      * The time that the model compilation job was created.
      */
     CreationTime: CreationTime;
@@ -5853,7 +6080,7 @@ declare namespace SageMaker {
     /**
      * The name of the context to describe.
      */
-    ContextName: ExperimentEntityName;
+    ContextName: ExperimentEntityNameOrArn;
   }
   export interface DescribeContextResponse {
     /**
@@ -5890,6 +6117,10 @@ declare namespace SageMaker {
      */
     LastModifiedTime?: Timestamp;
     LastModifiedBy?: UserContext;
+    /**
+     * The Amazon Resource Name (ARN) of the lineage group.
+     */
+    LineageGroupArn?: LineageGroupArn;
   }
   export interface DescribeDataQualityJobDefinitionRequest {
     /**
@@ -6621,6 +6852,66 @@ declare namespace SageMaker {
      */
     Version?: ImageVersionNumber;
   }
+  export interface DescribeInferenceRecommendationsJobRequest {
+    /**
+     * The name of the job. The name must be unique within an Amazon Web Services Region in the Amazon Web Services account.
+     */
+    JobName: RecommendationJobName;
+  }
+  export interface DescribeInferenceRecommendationsJobResponse {
+    /**
+     * The name of the job. The name must be unique within an Amazon Web Services Region in the Amazon Web Services account.
+     */
+    JobName: RecommendationJobName;
+    /**
+     * The job description that you provided when you initiated the job.
+     */
+    JobDescription?: RecommendationJobDescription;
+    /**
+     * The job type that you provided when you initiated the job.
+     */
+    JobType: RecommendationJobType;
+    /**
+     * The Amazon Resource Name (ARN) of the job.
+     */
+    JobArn: RecommendationJobArn;
+    /**
+     * The Amazon Resource Name (ARN) of the Amazon Web Services Identity and Access Management (IAM) role you provided when you initiated the job.
+     */
+    RoleArn: RoleArn;
+    /**
+     * The status of the job.
+     */
+    Status: RecommendationJobStatus;
+    /**
+     * A timestamp that shows when the job was created.
+     */
+    CreationTime: CreationTime;
+    /**
+     * A timestamp that shows when the job completed.
+     */
+    CompletionTime?: Timestamp;
+    /**
+     * A timestamp that shows when the job was last modified.
+     */
+    LastModifiedTime: LastModifiedTime;
+    /**
+     * If the job fails, provides information why the job failed.
+     */
+    FailureReason?: FailureReason;
+    /**
+     * Returns information about the versioned model package Amazon Resource Name (ARN), the traffic pattern, and endpoint configurations you provided when you initiated the job.
+     */
+    InputConfig: RecommendationJobInputConfig;
+    /**
+     * The stopping conditions that you provided when you initiated the job.
+     */
+    StoppingConditions?: RecommendationJobStoppingConditions;
+    /**
+     * The recommendations made by Inference Recommender.
+     */
+    InferenceRecommendations?: InferenceRecommendations;
+  }
   export interface DescribeLabelingJobRequest {
     /**
      * The name of the labeling job to return information for.
@@ -6700,6 +6991,40 @@ declare namespace SageMaker {
      * The location of the output produced by the labeling job.
      */
     LabelingJobOutput?: LabelingJobOutput;
+  }
+  export interface DescribeLineageGroupRequest {
+    /**
+     * The name of the lineage group.
+     */
+    LineageGroupName: ExperimentEntityName;
+  }
+  export interface DescribeLineageGroupResponse {
+    /**
+     * The name of the lineage group.
+     */
+    LineageGroupName?: ExperimentEntityName;
+    /**
+     * The Amazon Resource Name (ARN) of the lineage group.
+     */
+    LineageGroupArn?: LineageGroupArn;
+    /**
+     * The display name of the lineage group.
+     */
+    DisplayName?: ExperimentEntityName;
+    /**
+     * The description of the lineage group.
+     */
+    Description?: ExperimentDescription;
+    /**
+     * The creation time of lineage group.
+     */
+    CreationTime?: Timestamp;
+    CreatedBy?: UserContext;
+    /**
+     * The last modified time of the lineage group.
+     */
+    LastModifiedTime?: Timestamp;
+    LastModifiedBy?: UserContext;
   }
   export interface DescribeModelBiasJobDefinitionRequest {
     /**
@@ -6938,6 +7263,26 @@ declare namespace SageMaker {
      * The metadata properties associated with the model package versions.
      */
     CustomerMetadataProperties?: CustomerMetadataMap;
+    /**
+     * Represents the drift check baselines that can be used when the model monitor is set using the model package. For more information, see the topic on Drift Detection against Previous Baselines in SageMaker Pipelines in the Amazon SageMaker Developer Guide. 
+     */
+    DriftCheckBaselines?: DriftCheckBaselines;
+    /**
+     * The machine learning domain of the model package you specified. Common machine learning domains include computer vision and natural language processing.
+     */
+    Domain?: String;
+    /**
+     * The machine learning task you specified that your model package accomplishes. Common machine learning tasks include object detection and image classification.
+     */
+    Task?: String;
+    /**
+     * The Amazon Simple Storage Service (Amazon S3) path where the sample payload are stored. This path points to a single gzip compressed tar archive (.tar.gz suffix).
+     */
+    SamplePayloadUrl?: String;
+    /**
+     * An array of additional Inference Specification objects. Each additional Inference Specification specifies artifacts based on this model package that can be used on inference endpoints. Generally used with SageMaker Neo to store the compiled artifacts.
+     */
+    AdditionalInferenceSpecifications?: AdditionalInferenceSpecifications;
   }
   export interface DescribeModelQualityJobDefinitionRequest {
     /**
@@ -7684,7 +8029,7 @@ declare namespace SageMaker {
     /**
      * The name of the trial component to describe.
      */
-    TrialComponentName: ExperimentEntityName;
+    TrialComponentName: ExperimentEntityNameOrArn;
   }
   export interface DescribeTrialComponentResponse {
     /**
@@ -7748,6 +8093,10 @@ declare namespace SageMaker {
      * The metrics for the component.
      */
     Metrics?: TrialComponentMetricSummaries;
+    /**
+     * The Amazon Resource Name (ARN) of the lineage group.
+     */
+    LineageGroupArn?: LineageGroupArn;
   }
   export interface DescribeTrialRequest {
     /**
@@ -7983,6 +8332,7 @@ declare namespace SageMaker {
   }
   export type Devices = Device[];
   export type DirectInternetAccess = "Enabled"|"Disabled"|string;
+  export type Direction = "Both"|"Ascendants"|"Descendants"|string;
   export type DirectoryPath = string;
   export type DisableProfiler = boolean;
   export interface DisableSagemakerServicecatalogPortfolioInput {
@@ -8067,6 +8417,61 @@ declare namespace SageMaker {
   }
   export type DomainStatus = "Deleting"|"Failed"|"InService"|"Pending"|"Updating"|"Update_Failed"|"Delete_Failed"|string;
   export type DoubleParameterValue = number;
+  export interface DriftCheckBaselines {
+    /**
+     * Represents the drift check bias baselines that can be used when the model monitor is set using the model package. 
+     */
+    Bias?: DriftCheckBias;
+    /**
+     * Represents the drift check explainability baselines that can be used when the model monitor is set using the model package. 
+     */
+    Explainability?: DriftCheckExplainability;
+    /**
+     * Represents the drift check model quality baselines that can be used when the model monitor is set using the model package.
+     */
+    ModelQuality?: DriftCheckModelQuality;
+    /**
+     * Represents the drift check model data quality baselines that can be used when the model monitor is set using the model package.
+     */
+    ModelDataQuality?: DriftCheckModelDataQuality;
+  }
+  export interface DriftCheckBias {
+    /**
+     * The bias config file for a model.
+     */
+    ConfigFile?: FileSource;
+    PreTrainingConstraints?: MetricsSource;
+    PostTrainingConstraints?: MetricsSource;
+  }
+  export interface DriftCheckExplainability {
+    Constraints?: MetricsSource;
+    /**
+     * The explainability config file for the model.
+     */
+    ConfigFile?: FileSource;
+  }
+  export interface DriftCheckModelDataQuality {
+    Statistics?: MetricsSource;
+    Constraints?: MetricsSource;
+  }
+  export interface DriftCheckModelQuality {
+    Statistics?: MetricsSource;
+    Constraints?: MetricsSource;
+  }
+  export interface Edge {
+    /**
+     * The Amazon Resource Name (ARN) of the source lineage entity of the directed edge.
+     */
+    SourceArn?: AssociationEntityArn;
+    /**
+     * The Amazon Resource Name (ARN) of the destination lineage entity of the directed edge.
+     */
+    DestinationArn?: AssociationEntityArn;
+    /**
+     * The type of the Association(Edge) between the source and destination. For example ContributedTo, Produced, or DerivedFrom.
+     */
+    AssociationType?: AssociationEdgeType;
+  }
   export interface EdgeModel {
     /**
      * The name of the model.
@@ -8201,6 +8606,7 @@ declare namespace SageMaker {
   export type EdgePresetDeploymentStatus = "COMPLETED"|"FAILED"|string;
   export type EdgePresetDeploymentType = "GreengrassV2Component"|string;
   export type EdgeVersion = string;
+  export type Edges = Edge[];
   export type EfsUid = string;
   export type EnableCapture = boolean;
   export type EnableIotRoleAlias = boolean;
@@ -8313,8 +8719,41 @@ declare namespace SageMaker {
      */
     EndTimeOffset?: MonitoringTimeOffsetString;
   }
+  export interface EndpointInputConfiguration {
+    /**
+     * The instance types to use for the load test.
+     */
+    InstanceType: ProductionVariantInstanceType;
+    /**
+     * The inference specification name in the model package version.
+     */
+    InferenceSpecificationName?: InferenceSpecificationName;
+    /**
+     *  The parameter you want to benchmark against.
+     */
+    EnvironmentParameterRanges?: EnvironmentParameterRanges;
+  }
+  export type EndpointInputConfigurations = EndpointInputConfiguration[];
   export type EndpointName = string;
   export type EndpointNameContains = string;
+  export interface EndpointOutputConfiguration {
+    /**
+     * The name of the endpoint made during a recommendation job.
+     */
+    EndpointName: String;
+    /**
+     * The name of the production variant (deployed model) made during a recommendation job.
+     */
+    VariantName: String;
+    /**
+     * The instance type recommended by Amazon SageMaker Inference Recommender.
+     */
+    InstanceType: ProductionVariantInstanceType;
+    /**
+     * The number of instances recommended to launch initially.
+     */
+    InitialInstanceCount: Integer;
+  }
   export type EndpointSortKey = "Name"|"CreationTime"|"Status"|string;
   export type EndpointStatus = "OutOfService"|"Creating"|"Updating"|"SystemUpdating"|"RollingBack"|"InService"|"Deleting"|"Failed"|string;
   export interface EndpointSummary {
@@ -8344,6 +8783,27 @@ declare namespace SageMaker {
   export type EntityName = string;
   export type EnvironmentKey = string;
   export type EnvironmentMap = {[key: string]: EnvironmentValue};
+  export interface EnvironmentParameter {
+    /**
+     * The environment key suggested by the Amazon SageMaker Inference Recommender.
+     */
+    Key: String;
+    /**
+     * The value type suggested by the Amazon SageMaker Inference Recommender.
+     */
+    ValueType: String;
+    /**
+     * The value suggested by the Amazon SageMaker Inference Recommender.
+     */
+    Value: String;
+  }
+  export interface EnvironmentParameterRanges {
+    /**
+     * Specified a list of parameters for each category.
+     */
+    CategoricalParameterRanges?: CategoricalParameters;
+  }
+  export type EnvironmentParameters = EnvironmentParameter[];
   export type EnvironmentValue = string;
   export type ExecutionStatus = "Pending"|"Completed"|"CompletedWithViolations"|"InProgress"|"Failed"|"Stopping"|"Stopped"|string;
   export type ExitMessage = string;
@@ -8400,6 +8860,7 @@ declare namespace SageMaker {
   }
   export type ExperimentDescription = string;
   export type ExperimentEntityName = string;
+  export type ExperimentEntityNameOrArn = string;
   export interface ExperimentSource {
     /**
      * The Amazon Resource Name (ARN) of the source.
@@ -8536,6 +8997,20 @@ declare namespace SageMaker {
   }
   export type FeatureName = string;
   export type FeatureType = "Integral"|"Fractional"|"String"|string;
+  export interface FileSource {
+    /**
+     * The type of content stored in the file source.
+     */
+    ContentType?: ContentType;
+    /**
+     * The digest of the file source.
+     */
+    ContentDigest?: ContentDigest;
+    /**
+     * The Amazon S3 URI for the file source.
+     */
+    S3Uri: S3Uri;
+  }
   export type FileSystemAccessMode = "rw"|"ro"|string;
   export interface FileSystemConfig {
     /**
@@ -8703,6 +9178,22 @@ declare namespace SageMaker {
      */
     ModelStats?: EdgeModelStats;
   }
+  export interface GetLineageGroupPolicyRequest {
+    /**
+     * The name or Amazon Resource Name (ARN) of the lineage group.
+     */
+    LineageGroupName: LineageGroupNameOrArn;
+  }
+  export interface GetLineageGroupPolicyResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the lineage group.
+     */
+    LineageGroupArn?: LineageGroupArn;
+    /**
+     * The resource policy that gives access to the lineage group in another account.
+     */
+    ResourcePolicy?: ResourcePolicyString;
+  }
   export interface GetModelPackageGroupPolicyInput {
     /**
      * The name of the model group for which to get the resource policy.
@@ -8847,11 +9338,11 @@ declare namespace SageMaker {
      */
     NumberOfHumanWorkersPerDataObject: NumberOfHumanWorkersPerDataObject;
     /**
-     * The amount of time that a worker has to complete a task.  If you create a custom labeling job, the maximum value for this parameter is 8 hours (28,800 seconds). If you create a labeling job using a built-in task type the maximum for this parameter depends on the task type you use:   For image and text labeling jobs, the maximum is 8 hours (28,800 seconds).   For 3D point cloud and video frame labeling jobs, the maximum is 30 days (2952,000 seconds) for non-AL mode. For most users, the maximum is also 30 days. If you want to change these limits, contact Amazon Web Services Support.  
+     * The amount of time that a worker has to complete a task.  If you create a custom labeling job, the maximum value for this parameter is 8 hours (28,800 seconds). If you create a labeling job using a built-in task type the maximum for this parameter depends on the task type you use:   For image and text labeling jobs, the maximum is 8 hours (28,800 seconds).   For 3D point cloud and video frame labeling jobs, the maximum is 30 days (2952,000 seconds) for non-AL mode. For most users, the maximum is also 30 days.  
      */
     TaskTimeLimitInSeconds: TaskTimeLimitInSeconds;
     /**
-     * The length of time that a task remains available for labeling by human workers. The default and maximum values for this parameter depend on the type of workforce you use.   If you choose the Amazon Mechanical Turk workforce, the maximum is 12 hours (43,200 seconds). The default is 6 hours (21,600 seconds).   If you choose a private or vendor workforce, the default value is 30 days (2592,000 seconds) for non-AL mode. For most users, the maximum is also 30 days. If you want to change this limit, contact Amazon Web Services Support.  
+     * The length of time that a task remains available for labeling by human workers. The default and maximum values for this parameter depend on the type of workforce you use.   If you choose the Amazon Mechanical Turk workforce, the maximum is 12 hours (43,200 seconds). The default is 6 hours (21,600 seconds).   If you choose a private or vendor workforce, the default value is 30 days (2592,000 seconds) for non-AL mode. For most users, the maximum is also 30 days.  
      */
     TaskAvailabilityLifetimeInSeconds?: TaskAvailabilityLifetimeInSeconds;
     /**
@@ -9246,6 +9737,64 @@ declare namespace SageMaker {
   }
   export type InferenceExecutionMode = "Serial"|"Direct"|string;
   export type InferenceImage = string;
+  export interface InferenceRecommendation {
+    /**
+     * The metrics used to decide what recommendation to make.
+     */
+    Metrics: RecommendationMetrics;
+    /**
+     * Defines the endpoint configuration parameters.
+     */
+    EndpointConfiguration: EndpointOutputConfiguration;
+    /**
+     * Defines the model configuration.
+     */
+    ModelConfiguration: ModelConfiguration;
+  }
+  export type InferenceRecommendations = InferenceRecommendation[];
+  export interface InferenceRecommendationsJob {
+    /**
+     * The name of the job.
+     */
+    JobName: RecommendationJobName;
+    /**
+     * The job description.
+     */
+    JobDescription: RecommendationJobDescription;
+    /**
+     * The recommendation job type.
+     */
+    JobType: RecommendationJobType;
+    /**
+     * The Amazon Resource Name (ARN) of the recommendation job.
+     */
+    JobArn: RecommendationJobArn;
+    /**
+     * The status of the job.
+     */
+    Status: RecommendationJobStatus;
+    /**
+     * A timestamp that shows when the job was created.
+     */
+    CreationTime: CreationTime;
+    /**
+     * A timestamp that shows when the job completed.
+     */
+    CompletionTime?: Timestamp;
+    /**
+     * The Amazon Resource Name (ARN) of an IAM role that enables Amazon SageMaker to perform tasks on your behalf.
+     */
+    RoleArn: RoleArn;
+    /**
+     * A timestamp that shows when the job was last modified.
+     */
+    LastModifiedTime: LastModifiedTime;
+    /**
+     * If the job fails, provides information why the job failed.
+     */
+    FailureReason?: FailureReason;
+  }
+  export type InferenceRecommendationsJobs = InferenceRecommendationsJob[];
   export interface InferenceSpecification {
     /**
      * The Amazon ECR registry path of the Docker image that contains the inference code.
@@ -9268,6 +9817,8 @@ declare namespace SageMaker {
      */
     SupportedResponseMIMETypes: ResponseMIMETypes;
   }
+  export type InferenceSpecificationName = string;
+  export type InitialNumberOfUsers = number;
   export type InitialTaskCount = number;
   export interface InputConfig {
     /**
@@ -9324,6 +9875,7 @@ declare namespace SageMaker {
   export type InvocationsMaxRetries = number;
   export type InvocationsTimeoutInSeconds = number;
   export type IotRoleAlias = string;
+  export type JobDurationInSeconds = number;
   export type JobReferenceCode = string;
   export type JobReferenceCodeContains = string;
   export type JoinSource = "Input"|"None"|string;
@@ -9604,6 +10156,32 @@ declare namespace SageMaker {
   export type LastModifiedTime = Date;
   export type LifecycleConfigArns = StudioLifecycleConfigArn[];
   export type LineageEntityParameters = {[key: string]: StringParameterValue};
+  export type LineageGroupArn = string;
+  export type LineageGroupNameOrArn = string;
+  export type LineageGroupSummaries = LineageGroupSummary[];
+  export interface LineageGroupSummary {
+    /**
+     * The Amazon Resource Name (ARN) of the lineage group resource.
+     */
+    LineageGroupArn?: LineageGroupArn;
+    /**
+     * The name or Amazon Resource Name (ARN) of the lineage group.
+     */
+    LineageGroupName?: ExperimentEntityName;
+    /**
+     * The display name of the lineage group summary.
+     */
+    DisplayName?: ExperimentEntityName;
+    /**
+     * The creation time of the lineage group summary.
+     */
+    CreationTime?: Timestamp;
+    /**
+     * The last modified time of the lineage group summary.
+     */
+    LastModifiedTime?: Timestamp;
+  }
+  export type LineageType = "TrialComponent"|"Artifact"|"Context"|"Action"|string;
   export interface ListActionsRequest {
     /**
      * A filter that returns only actions with the specified source URI.
@@ -10699,6 +11277,59 @@ declare namespace SageMaker {
      */
     NextToken?: NextToken;
   }
+  export interface ListInferenceRecommendationsJobsRequest {
+    /**
+     * A filter that returns only jobs created after the specified time (timestamp).
+     */
+    CreationTimeAfter?: CreationTime;
+    /**
+     * A filter that returns only jobs created before the specified time (timestamp).
+     */
+    CreationTimeBefore?: CreationTime;
+    /**
+     * A filter that returns only jobs that were last modified after the specified time (timestamp).
+     */
+    LastModifiedTimeAfter?: LastModifiedTime;
+    /**
+     * A filter that returns only jobs that were last modified before the specified time (timestamp).
+     */
+    LastModifiedTimeBefore?: LastModifiedTime;
+    /**
+     * A string in the job name. This filter returns only recommendations whose name contains the specified string.
+     */
+    NameContains?: NameContains;
+    /**
+     * A filter that retrieves only inference recommendations jobs with a specific status.
+     */
+    StatusEquals?: RecommendationJobStatus;
+    /**
+     * The parameter by which to sort the results.
+     */
+    SortBy?: ListInferenceRecommendationsJobsSortBy;
+    /**
+     * The sort order for the results.
+     */
+    SortOrder?: SortOrder;
+    /**
+     * If the response to a previous ListInferenceRecommendationsJobsRequest request was truncated, the response includes a NextToken. To retrieve the next set of recommendations, use the token in the next request.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of recommendations to return in the response.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListInferenceRecommendationsJobsResponse {
+    /**
+     * The recommendations created from the Amazon SageMaker Inference Recommender job.
+     */
+    InferenceRecommendationsJobs: InferenceRecommendationsJobs;
+    /**
+     * A token for getting the next set of recommendations, if there are any.
+     */
+    NextToken?: NextToken;
+  }
+  export type ListInferenceRecommendationsJobsSortBy = "Name"|"CreationTime"|"Status"|string;
   export interface ListLabelingJobsForWorkteamRequest {
     /**
      * The Amazon Resource Name (ARN) of the work team for which you want to see labeling jobs for.
@@ -10797,6 +11428,42 @@ declare namespace SageMaker {
     NextToken?: NextToken;
   }
   export type ListLineageEntityParameterKey = StringParameterValue[];
+  export interface ListLineageGroupsRequest {
+    /**
+     * A timestamp to filter against lineage groups created after a certain point in time.
+     */
+    CreatedAfter?: Timestamp;
+    /**
+     * A timestamp to filter against lineage groups created before a certain point in time.
+     */
+    CreatedBefore?: Timestamp;
+    /**
+     * The parameter by which to sort the results. The default is CreationTime.
+     */
+    SortBy?: SortLineageGroupsBy;
+    /**
+     * The sort order for the results. The default is Ascending.
+     */
+    SortOrder?: SortOrder;
+    /**
+     * If the response is truncated, SageMaker returns this token. To retrieve the next set of algorithms, use it in the subsequent request.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of endpoints to return in the response. This value defaults to 10.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListLineageGroupsResponse {
+    /**
+     * A list of lineage groups and their properties.
+     */
+    LineageGroupSummaries?: LineageGroupSummaries;
+    /**
+     * If the response is truncated, SageMaker returns this token. To retrieve the next set of algorithms, use it in the subsequent request.
+     */
+    NextToken?: NextToken;
+  }
   export type ListMaxResults = number;
   export interface ListModelBiasJobDefinitionsRequest {
     /**
@@ -10883,6 +11550,30 @@ declare namespace SageMaker {
     JobDefinitionSummaries: MonitoringJobDefinitionSummaryList;
     /**
      * If the response is truncated, Amazon SageMaker returns this token. To retrieve the next set of jobs, use it in the subsequent request.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListModelMetadataRequest {
+    /**
+     * One or more filters that searches for the specified resource or resources in a search. All resource objects that satisfy the expression's condition are included in the search results. Specify the Framework, FrameworkVersion, Domain or Task to filter supported. Filter names and values are case-sensitive.
+     */
+    SearchExpression?: ModelMetadataSearchExpression;
+    /**
+     * If the response to a previous ListModelMetadataResponse request was truncated, the response includes a NextToken. To retrieve the next set of model metadata, use the token in the next request.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of models to return in the response.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListModelMetadataResponse {
+    /**
+     * A structure that holds model metadata.
+     */
+    ModelMetadataSummaries: ModelMetadataSummaries;
+    /**
+     * A token for getting the next set of recommendations, if there are any.
      */
     NextToken?: NextToken;
   }
@@ -11977,7 +12668,9 @@ declare namespace SageMaker {
   export type MaxConcurrentTaskCount = number;
   export type MaxConcurrentTransforms = number;
   export type MaxHumanLabeledObjectCount = number;
+  export type MaxNumberOfTests = number;
   export type MaxNumberOfTrainingJobs = number;
+  export type MaxParallelOfTests = number;
   export type MaxParallelTrainingJobs = number;
   export type MaxPayloadInMB = number;
   export type MaxPercentageOfInputDatasetLabeled = number;
@@ -12123,6 +12816,16 @@ declare namespace SageMaker {
      */
     InvocationsMaxRetries?: InvocationsMaxRetries;
   }
+  export interface ModelConfiguration {
+    /**
+     * The inference specification name in the model package version.
+     */
+    InferenceSpecificationName?: InferenceSpecificationName;
+    /**
+     * Defines the environment parameters that includes key, value types, and values.
+     */
+    EnvironmentParameters?: EnvironmentParameters;
+  }
   export interface ModelDataQuality {
     /**
      * Data quality statistics for a model.
@@ -12178,6 +12881,64 @@ declare namespace SageMaker {
   }
   export interface ModelExplainabilityJobInput {
     EndpointInput: EndpointInput;
+  }
+  export interface ModelInput {
+    /**
+     * The input configuration object for the model.
+     */
+    DataInputConfig: DataInputConfig;
+  }
+  export interface ModelLatencyThreshold {
+    /**
+     * The model latency percentile threshold.
+     */
+    Percentile?: String64;
+    /**
+     * The model latency percentile value in milliseconds.
+     */
+    ValueInMilliseconds?: Integer;
+  }
+  export type ModelLatencyThresholds = ModelLatencyThreshold[];
+  export interface ModelMetadataFilter {
+    /**
+     * The name of the of the model to filter by.
+     */
+    Name: ModelMetadataFilterType;
+    /**
+     * The value to filter the model metadata.
+     */
+    Value: String256;
+  }
+  export type ModelMetadataFilterType = "Domain"|"Framework"|"Task"|"FrameworkVersion"|string;
+  export type ModelMetadataFilters = ModelMetadataFilter[];
+  export interface ModelMetadataSearchExpression {
+    /**
+     * A list of filter objects.
+     */
+    Filters?: ModelMetadataFilters;
+  }
+  export type ModelMetadataSummaries = ModelMetadataSummary[];
+  export interface ModelMetadataSummary {
+    /**
+     * The machine learning domain of the model.
+     */
+    Domain: String;
+    /**
+     * The machine learning framework of the model.
+     */
+    Framework: String;
+    /**
+     * The machine learning task of the model.
+     */
+    Task: String;
+    /**
+     * The name of the model.
+     */
+    Model: String;
+    /**
+     * The framework version of the model.
+     */
+    FrameworkVersion: String;
   }
   export interface ModelMetrics {
     /**
@@ -12256,6 +13017,22 @@ declare namespace SageMaker {
      */
     ApprovalDescription?: ApprovalDescription;
     /**
+     * The machine learning domain of your model package and its components. Common machine learning domains include computer vision and natural language processing.
+     */
+    Domain?: String;
+    /**
+     * The machine learning task your model package accomplishes. Common machine learning tasks include object detection and image classification.
+     */
+    Task?: String;
+    /**
+     * The Amazon Simple Storage Service path where the sample payload are stored. This path must point to a single gzip compressed tar archive (.tar.gz suffix).
+     */
+    SamplePayloadUrl?: String;
+    /**
+     * An array of additional Inference Specification objects.
+     */
+    AdditionalInferenceSpecifications?: AdditionalInferenceSpecifications;
+    /**
      * A list of the tags associated with the model package. For more information, see Tagging Amazon Web Services resources in the Amazon Web Services General Reference Guide.
      */
     Tags?: TagList;
@@ -12263,6 +13040,10 @@ declare namespace SageMaker {
      * The metadata properties for the model package. 
      */
     CustomerMetadataProperties?: CustomerMetadataMap;
+    /**
+     * Represents the drift check baselines that can be used when the model monitor is set using the model package.
+     */
+    DriftCheckBaselines?: DriftCheckBaselines;
   }
   export type ModelPackageArn = string;
   export type ModelPackageArnList = ModelPackageArn[];
@@ -12291,6 +13072,22 @@ declare namespace SageMaker {
      * The environment variables to set in the Docker container. Each key and value in the Environment string to string map can have length of up to 1024. We support up to 16 entries in the map.
      */
     Environment?: EnvironmentMap;
+    /**
+     * A structure with Model Input details.
+     */
+    ModelInput?: ModelInput;
+    /**
+     * The machine learning framework of the model package container image.
+     */
+    Framework?: String;
+    /**
+     * The framework version of the Model Package Container Image.
+     */
+    FrameworkVersion?: FrameworkVersion;
+    /**
+     * The name of a pre-trained machine learning benchmarked by Amazon SageMaker Inference Recommender model that matches your model. You can find a list of benchmarked models by calling ListModelMetadata.
+     */
+    NearestModelName?: String;
   }
   export type ModelPackageContainerDefinitionList = ModelPackageContainerDefinition[];
   export interface ModelPackageGroup {
@@ -13279,8 +14076,31 @@ declare namespace SageMaker {
      * The endpoint variant status which describes the current deployment stage status or operational status.
      */
     VariantStatus?: ProductionVariantStatusList;
+    /**
+     * The serverless configuration for the endpoint.  Serverless Inference is in preview release for Amazon SageMaker and is subject to change. We do not recommend using this feature in production environments. 
+     */
+    CurrentServerlessConfig?: ProductionVariantServerlessConfig;
+    /**
+     * The serverless configuration requested for this deployment, as specified in the endpoint configuration for the endpoint.  Serverless Inference is in preview release for Amazon SageMaker and is subject to change. We do not recommend using this feature in production environments. 
+     */
+    DesiredServerlessConfig?: ProductionVariantServerlessConfig;
   }
   export type PendingProductionVariantSummaryList = PendingProductionVariantSummary[];
+  export interface Phase {
+    /**
+     * Specifies how many concurrent users to start with.
+     */
+    InitialNumberOfUsers?: InitialNumberOfUsers;
+    /**
+     * Specified how many new users to spawn in a minute.
+     */
+    SpawnRate?: SpawnRate;
+    /**
+     * Specifies how long traffic phase should be.
+     */
+    DurationInSeconds?: TrafficDurationInSeconds;
+  }
+  export type Phases = Phase[];
   export interface Pipeline {
     /**
      * The Amazon Resource Name (ARN) of the pipeline.
@@ -13442,6 +14262,14 @@ declare namespace SageMaker {
      * The Amazon Resource Name (ARN) of the Lambda function that was run by this step execution and a list of output parameters.
      */
     Lambda?: LambdaStepMetadata;
+    /**
+     * The configurations and outcomes of the check step execution. This includes:    The type of the check conducted,   The Amazon S3 URIs of baseline constraints and statistics files to be used for the drift check.   The Amazon S3 URIs of newly calculated baseline constraints and statistics.   The model package group name provided.   The Amazon S3 URI of the violation report if violations detected.   The Amazon Resource Name (ARN) of check processing job initiated by the step execution.   The boolean flags indicating if the drift check is skipped.   If step property BaselineUsedForDriftCheck is set the same as CalculatedBaseline.  
+     */
+    QualityCheck?: QualityCheckStepMetadata;
+    /**
+     * Container for the metadata for a Clarify check step. The configurations and outcomes of the check step execution. This includes:    The type of the check conducted,   The Amazon S3 URIs of baseline constraints and statistics files to be used for the drift check.   The Amazon S3 URIs of newly calculated baseline constraints and statistics.   The model package group name provided.   The Amazon S3 URI of the violation report if violations detected.   The Amazon Resource Name (ARN) of check processing job initiated by the step execution.   The boolean flags indicating if the drift check is skipped.   If step property BaselineUsedForDriftCheck is set the same as CalculatedBaseline.  
+     */
+    ClarifyCheck?: ClarifyCheckStepMetadata;
   }
   export interface PipelineExecutionSummary {
     /**
@@ -13786,11 +14614,11 @@ declare namespace SageMaker {
     /**
      * Number of instances to launch initially.
      */
-    InitialInstanceCount: InitialTaskCount;
+    InitialInstanceCount?: InitialTaskCount;
     /**
      * The ML compute instance type.
      */
-    InstanceType: ProductionVariantInstanceType;
+    InstanceType?: ProductionVariantInstanceType;
     /**
      * Determines initial traffic distribution among all of the models that you specify in the endpoint configuration. The traffic to a production variant is determined by the ratio of the VariantWeight to the sum of all VariantWeight values across all ProductionVariants. If unspecified, it defaults to 1.0. 
      */
@@ -13803,6 +14631,10 @@ declare namespace SageMaker {
      * Specifies configuration for a core dump from the model container when the process crashes.
      */
     CoreDumpConfig?: ProductionVariantCoreDumpConfig;
+    /**
+     * The serverless configuration for an endpoint. Specifies a serverless endpoint configuration instead of an instance-based endpoint configuration.  Serverless Inference is in preview release for Amazon SageMaker and is subject to change. We do not recommend using this feature in production environments. 
+     */
+    ServerlessConfig?: ProductionVariantServerlessConfig;
   }
   export type ProductionVariantAcceleratorType = "ml.eia1.medium"|"ml.eia1.large"|"ml.eia1.xlarge"|"ml.eia2.medium"|"ml.eia2.large"|"ml.eia2.xlarge"|string;
   export interface ProductionVariantCoreDumpConfig {
@@ -13817,6 +14649,16 @@ declare namespace SageMaker {
   }
   export type ProductionVariantInstanceType = "ml.t2.medium"|"ml.t2.large"|"ml.t2.xlarge"|"ml.t2.2xlarge"|"ml.m4.xlarge"|"ml.m4.2xlarge"|"ml.m4.4xlarge"|"ml.m4.10xlarge"|"ml.m4.16xlarge"|"ml.m5.large"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.12xlarge"|"ml.m5.24xlarge"|"ml.m5d.large"|"ml.m5d.xlarge"|"ml.m5d.2xlarge"|"ml.m5d.4xlarge"|"ml.m5d.12xlarge"|"ml.m5d.24xlarge"|"ml.c4.large"|"ml.c4.xlarge"|"ml.c4.2xlarge"|"ml.c4.4xlarge"|"ml.c4.8xlarge"|"ml.p2.xlarge"|"ml.p2.8xlarge"|"ml.p2.16xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|"ml.c5.large"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.18xlarge"|"ml.c5d.large"|"ml.c5d.xlarge"|"ml.c5d.2xlarge"|"ml.c5d.4xlarge"|"ml.c5d.9xlarge"|"ml.c5d.18xlarge"|"ml.g4dn.xlarge"|"ml.g4dn.2xlarge"|"ml.g4dn.4xlarge"|"ml.g4dn.8xlarge"|"ml.g4dn.12xlarge"|"ml.g4dn.16xlarge"|"ml.r5.large"|"ml.r5.xlarge"|"ml.r5.2xlarge"|"ml.r5.4xlarge"|"ml.r5.12xlarge"|"ml.r5.24xlarge"|"ml.r5d.large"|"ml.r5d.xlarge"|"ml.r5d.2xlarge"|"ml.r5d.4xlarge"|"ml.r5d.12xlarge"|"ml.r5d.24xlarge"|"ml.inf1.xlarge"|"ml.inf1.2xlarge"|"ml.inf1.6xlarge"|"ml.inf1.24xlarge"|string;
   export type ProductionVariantList = ProductionVariant[];
+  export interface ProductionVariantServerlessConfig {
+    /**
+     * The memory size of your serverless endpoint. Valid values are in 1 GB increments: 1024 MB, 2048 MB, 3072 MB, 4096 MB, 5120 MB, or 6144 MB.
+     */
+    MemorySizeInMB: ServerlessMemorySizeInMB;
+    /**
+     * The maximum number of concurrent invocations your serverless endpoint can process.
+     */
+    MaxConcurrency: ServerlessMaxConcurrency;
+  }
   export interface ProductionVariantStatus {
     /**
      * The endpoint variant status which describes the current deployment stage status or operational status.    Creating: Creating inference resources for the production variant.    Deleting: Terminating inference resources for the production variant.    Updating: Updating capacity for the production variant.    ActivatingTraffic: Turning on traffic for the production variant.    Baking: Waiting period to monitor the CloudWatch alarms in the automatic rollback configuration.  
@@ -13861,6 +14703,14 @@ declare namespace SageMaker {
      * The endpoint variant status which describes the current deployment stage status or operational status.
      */
     VariantStatus?: ProductionVariantStatusList;
+    /**
+     * The serverless configuration for the endpoint.  Serverless Inference is in preview release for Amazon SageMaker and is subject to change. We do not recommend using this feature in production environments. 
+     */
+    CurrentServerlessConfig?: ProductionVariantServerlessConfig;
+    /**
+     * The serverless configuration requested for the endpoint update.  Serverless Inference is in preview release for Amazon SageMaker and is subject to change. We do not recommend using this feature in production environments. 
+     */
+    DesiredServerlessConfig?: ProductionVariantServerlessConfig;
   }
   export type ProductionVariantSummaryList = ProductionVariantSummary[];
   export interface ProfilerConfig {
@@ -14076,6 +14926,128 @@ declare namespace SageMaker {
      */
     ModelPackageGroupArn: ModelPackageGroupArn;
   }
+  export interface QualityCheckStepMetadata {
+    /**
+     * The type of the Quality check step.
+     */
+    CheckType?: String256;
+    /**
+     * The Amazon S3 URI of the baseline statistics file used for the drift check.
+     */
+    BaselineUsedForDriftCheckStatistics?: String1024;
+    /**
+     * The Amazon S3 URI of the baseline constraints file used for the drift check.
+     */
+    BaselineUsedForDriftCheckConstraints?: String1024;
+    /**
+     * The Amazon S3 URI of the newly calculated baseline statistics file.
+     */
+    CalculatedBaselineStatistics?: String1024;
+    /**
+     * The Amazon S3 URI of the newly calculated baseline constraints file.
+     */
+    CalculatedBaselineConstraints?: String1024;
+    /**
+     * The model package group name.
+     */
+    ModelPackageGroupName?: String256;
+    /**
+     * The Amazon S3 URI of violation report if violations are detected.
+     */
+    ViolationReport?: String1024;
+    /**
+     * The Amazon Resource Name (ARN) of the Quality check processing job that was run by this step execution.
+     */
+    CheckJobArn?: String256;
+    /**
+     * This flag indicates if the drift check against the previous baseline will be skipped or not. If it is set to False, the previous baseline of the configured check type must be available.
+     */
+    SkipCheck?: Boolean;
+    /**
+     * This flag indicates if a newly calculated baseline can be accessed through step properties BaselineUsedForDriftCheckConstraints and BaselineUsedForDriftCheckStatistics. If it is set to False, the previous baseline of the configured check type must also be available. These can be accessed through the BaselineUsedForDriftCheckConstraints and  BaselineUsedForDriftCheckStatistics properties. 
+     */
+    RegisterNewBaseline?: Boolean;
+  }
+  export interface QueryFilters {
+    /**
+     * Filter the lineage entities connected to the StartArn by type. For example: DataSet, Model, Endpoint, or ModelDeployment.
+     */
+    Types?: QueryTypes;
+    /**
+     * Filter the lineage entities connected to the StartArn(s) by the type of the lineage entity.
+     */
+    LineageTypes?: QueryLineageTypes;
+    /**
+     * Filter the lineage entities connected to the StartArn(s) by created date.
+     */
+    CreatedBefore?: Timestamp;
+    /**
+     * Filter the lineage entities connected to the StartArn(s) after the create date.
+     */
+    CreatedAfter?: Timestamp;
+    /**
+     * Filter the lineage entities connected to the StartArn(s) before the last modified date.
+     */
+    ModifiedBefore?: Timestamp;
+    /**
+     * Filter the lineage entities connected to the StartArn(s) after the last modified date.
+     */
+    ModifiedAfter?: Timestamp;
+    /**
+     * Filter the lineage entities connected to the StartArn(s) by a set if property key value pairs. If multiple pairs are provided, an entity will be included in the results if it matches any of the provided pairs.
+     */
+    Properties?: QueryProperties;
+  }
+  export type QueryLineageMaxDepth = number;
+  export type QueryLineageMaxResults = number;
+  export interface QueryLineageRequest {
+    /**
+     * A list of resource Amazon Resource Name (ARN) that represent the starting point for your lineage query.
+     */
+    StartArns: QueryLineageStartArns;
+    /**
+     * Associations between lineage entities are directed. This parameter determines the direction from the StartArn(s) the query will look.
+     */
+    Direction?: Direction;
+    /**
+     *  Setting this value to True will retrieve not only the entities of interest but also the Associations and lineage entities on the path. Set to False to only return lineage entities that match your query.
+     */
+    IncludeEdges?: Boolean;
+    /**
+     * A set of filtering parameters that allow you to specify which entities should be returned.   Properties - Key-value pairs to match on the lineage entities' properties.   LineageTypes - A set of lineage entity types to match on. For example: TrialComponent, Artifact, or Context.   CreatedBefore - Filter entities created before this date.   ModifiedBefore - Filter entities modified before this date.   ModifiedAfter - Filter entities modified after this date.  
+     */
+    Filters?: QueryFilters;
+    /**
+     * The maximum depth in lineage relationships from the StartArns that will be traversed. Depth is a measure of the number of Associations from the StartArn entity to the matched results.
+     */
+    MaxDepth?: QueryLineageMaxDepth;
+    /**
+     * Limits the number of vertices in the results. Use the NextToken in a response to to retrieve the next page of results.
+     */
+    MaxResults?: QueryLineageMaxResults;
+    /**
+     * Limits the number of vertices in the request. Use the NextToken in a response to to retrieve the next page of results.
+     */
+    NextToken?: String8192;
+  }
+  export interface QueryLineageResponse {
+    /**
+     * A list of vertices connected to the start entity(ies) in the lineage graph.
+     */
+    Vertices?: Vertices;
+    /**
+     * A list of edges that connect vertices in the response.
+     */
+    Edges?: Edges;
+    /**
+     * Limits the number of vertices in the response. Use the NextToken in a response to to retrieve the next page of results.
+     */
+    NextToken?: String8192;
+  }
+  export type QueryLineageStartArns = AssociationEntityArn[];
+  export type QueryLineageTypes = LineageType[];
+  export type QueryProperties = {[key: string]: String256};
+  export type QueryTypes = String40[];
   export interface RSessionAppSettings {
   }
   export type RStudioServerProAccessStatus = "ENABLED"|"DISABLED"|string;
@@ -14113,6 +15085,71 @@ declare namespace SageMaker {
   }
   export type RStudioServerProUserGroup = "R_STUDIO_ADMIN"|"R_STUDIO_USER"|string;
   export type RealtimeInferenceInstanceTypes = ProductionVariantInstanceType[];
+  export type RecommendationJobArn = string;
+  export type RecommendationJobDescription = string;
+  export interface RecommendationJobInputConfig {
+    /**
+     * The Amazon Resource Name (ARN) of a versioned model package.
+     */
+    ModelPackageVersionArn: ModelPackageArn;
+    /**
+     * Specifies the maximum duration of the job, in seconds.&gt;
+     */
+    JobDurationInSeconds?: JobDurationInSeconds;
+    /**
+     * Specifies the traffic pattern of the job.
+     */
+    TrafficPattern?: TrafficPattern;
+    /**
+     * Defines the resource limit of the job.
+     */
+    ResourceLimit?: RecommendationJobResourceLimit;
+    /**
+     * Specifies the endpoint configuration to use for a job.
+     */
+    EndpointConfigurations?: EndpointInputConfigurations;
+  }
+  export type RecommendationJobName = string;
+  export interface RecommendationJobResourceLimit {
+    /**
+     * Defines the maximum number of load tests.
+     */
+    MaxNumberOfTests?: MaxNumberOfTests;
+    /**
+     * Defines the maximum number of parallel load tests.
+     */
+    MaxParallelOfTests?: MaxParallelOfTests;
+  }
+  export type RecommendationJobStatus = "PENDING"|"IN_PROGRESS"|"COMPLETED"|"FAILED"|"STOPPING"|"STOPPED"|string;
+  export interface RecommendationJobStoppingConditions {
+    /**
+     * The maximum number of requests per minute expected for the endpoint.
+     */
+    MaxInvocations?: Integer;
+    /**
+     * The interval of time taken by a model to respond as viewed from SageMaker. The interval includes the local communication time taken to send the request and to fetch the response from the container of a model and the time taken to complete the inference in the container.
+     */
+    ModelLatencyThresholds?: ModelLatencyThresholds;
+  }
+  export type RecommendationJobType = "Default"|"Advanced"|string;
+  export interface RecommendationMetrics {
+    /**
+     * Defines the cost per hour for the instance. 
+     */
+    CostPerHour: Float;
+    /**
+     * Defines the cost per inference for the instance .
+     */
+    CostPerInference: Float;
+    /**
+     * The expected maximum number of requests per minute for the instance.
+     */
+    MaxInvocations: Integer;
+    /**
+     * The expected model latency at maximum invocation per minute for the instance.
+     */
+    ModelLatency: Integer;
+  }
   export type RecordWrapper = "None"|"RecordIO"|string;
   export type RedshiftClusterId = string;
   export type RedshiftDatabase = string;
@@ -14251,6 +15288,7 @@ declare namespace SageMaker {
      */
     MaxParallelTrainingJobs: MaxParallelTrainingJobs;
   }
+  export type ResourcePolicyString = string;
   export type ResourcePropertyName = string;
   export interface ResourceSpec {
     /**
@@ -14501,6 +15539,8 @@ declare namespace SageMaker {
      */
     PipelineExecutionArn?: PipelineExecutionArn;
   }
+  export type ServerlessMaxConcurrency = number;
+  export type ServerlessMemorySizeInMB = number;
   export type ServiceCatalogEntityId = string;
   export interface ServiceCatalogProvisionedProductDetails {
     /**
@@ -14569,6 +15609,7 @@ declare namespace SageMaker {
   export type SortBy = "Name"|"CreationTime"|"Status"|string;
   export type SortContextsBy = "Name"|"CreationTime"|string;
   export type SortExperimentsBy = "Name"|"CreationTime"|string;
+  export type SortLineageGroupsBy = "Name"|"CreationTime"|string;
   export type SortOrder = "Ascending"|"Descending"|string;
   export type SortPipelineExecutionsBy = "CreationTime"|"PipelineExecutionArn"|string;
   export type SortPipelinesBy = "Name"|"CreationTime"|string;
@@ -14599,6 +15640,7 @@ declare namespace SageMaker {
   }
   export type SourceType = string;
   export type SourceUri = string;
+  export type SpawnRate = number;
   export type SplitType = "None"|"Line"|"RecordIO"|"TFRecord"|string;
   export interface StartMonitoringScheduleRequest {
     /**
@@ -14668,6 +15710,12 @@ declare namespace SageMaker {
      */
     HyperParameterTuningJobName: HyperParameterTuningJobName;
   }
+  export interface StopInferenceRecommendationsJobRequest {
+    /**
+     * The name of the job you want to stop.
+     */
+    JobName: RecommendationJobName;
+  }
   export interface StopLabelingJobRequest {
     /**
      * The name of the labeling job to stop.
@@ -14732,10 +15780,13 @@ declare namespace SageMaker {
   }
   export type String = string;
   export type String1024 = string;
+  export type String128 = string;
   export type String200 = string;
   export type String2048 = string;
   export type String256 = string;
+  export type String40 = string;
   export type String64 = string;
+  export type String8192 = string;
   export type StringParameterValue = string;
   export type StudioLifecycleConfigAppType = "JupyterServer"|"KernelGateway"|string;
   export type StudioLifecycleConfigArn = string;
@@ -14863,6 +15914,17 @@ declare namespace SageMaker {
   export type TerminationWaitInSeconds = number;
   export type ThingName = string;
   export type Timestamp = Date;
+  export type TrafficDurationInSeconds = number;
+  export interface TrafficPattern {
+    /**
+     * Defines the traffic patterns.
+     */
+    TrafficType?: TrafficType;
+    /**
+     * Defines the phases traffic specification.
+     */
+    Phases?: Phases;
+  }
   export interface TrafficRoutingConfig {
     /**
      * Traffic routing strategy type.    ALL_AT_ONCE: Endpoint traffic shifts to the new fleet in a single step.     CANARY: Endpoint traffic shifts to the new fleet in two steps. The first step is the canary, which is a small portion of the traffic. The second step is the remainder of the traffic.     LINEAR: Endpoint traffic shifts to the new fleet in n steps of a configurable size.   
@@ -14882,6 +15944,7 @@ declare namespace SageMaker {
     LinearStepSize?: CapacitySize;
   }
   export type TrafficRoutingConfigType = "ALL_AT_ONCE"|"CANARY"|"LINEAR"|string;
+  export type TrafficType = "PHASES"|string;
   export type TrainingEnvironmentKey = string;
   export type TrainingEnvironmentMap = {[key: string]: TrainingEnvironmentValue};
   export type TrainingEnvironmentValue = string;
@@ -15459,6 +16522,10 @@ declare namespace SageMaker {
      */
     SourceDetail?: TrialComponentSourceDetail;
     /**
+     * The Amazon Resource Name (ARN) of the lineage group resource.
+     */
+    LineageGroupArn?: LineageGroupArn;
+    /**
      * The list of tags that are associated with the component. You can use Search API to search on the tags.
      */
     Tags?: TagList;
@@ -15998,6 +17065,10 @@ declare namespace SageMaker {
      * The metadata properties associated with the model package versions to remove.
      */
     CustomerMetadataPropertiesToRemove?: CustomerMetadataKeyList;
+    /**
+     * An array of additional Inference Specification objects to be added to the existing array additional Inference Specification. Total number of additional Inference Specifications can not exceed 15. Each additional Inference Specification specifies artifacts based on this model package that can be used on inference endpoints. Generally used with SageMaker Neo to store the compiled artifacts.
+     */
+    AdditionalInferenceSpecificationsToAdd?: AdditionalInferenceSpecifications;
   }
   export interface UpdateModelPackageOutput {
     /**
@@ -16406,6 +17477,21 @@ declare namespace SageMaker {
   export type VariantStatusMessage = string;
   export type VariantWeight = number;
   export type VersionedArnOrName = string;
+  export interface Vertex {
+    /**
+     * The Amazon Resource Name (ARN) of the lineage entity resource.
+     */
+    Arn?: AssociationEntityArn;
+    /**
+     * The type of the lineage entity resource. For example: DataSet, Model, Endpoint, etc...
+     */
+    Type?: String40;
+    /**
+     * The type of resource of the lineage entity.
+     */
+    LineageType?: LineageType;
+  }
+  export type Vertices = Vertex[];
   export type VolumeSizeInGB = number;
   export interface VpcConfig {
     /**

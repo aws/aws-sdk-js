@@ -85,6 +85,14 @@ declare class EC2 extends Service {
    */
   allocateHosts(callback?: (err: AWSError, data: EC2.Types.AllocateHostsResult) => void): Request<EC2.Types.AllocateHostsResult, AWSError>;
   /**
+   * Allocate a CIDR from an IPAM pool. In IPAM, an allocation is a CIDR assignment from an IPAM pool to another resource or IPAM pool. For more information, see Allocate CIDRs in the Amazon VPC IPAM User Guide. 
+   */
+  allocateIpamPoolCidr(params: EC2.Types.AllocateIpamPoolCidrRequest, callback?: (err: AWSError, data: EC2.Types.AllocateIpamPoolCidrResult) => void): Request<EC2.Types.AllocateIpamPoolCidrResult, AWSError>;
+  /**
+   * Allocate a CIDR from an IPAM pool. In IPAM, an allocation is a CIDR assignment from an IPAM pool to another resource or IPAM pool. For more information, see Allocate CIDRs in the Amazon VPC IPAM User Guide. 
+   */
+  allocateIpamPoolCidr(callback?: (err: AWSError, data: EC2.Types.AllocateIpamPoolCidrResult) => void): Request<EC2.Types.AllocateIpamPoolCidrResult, AWSError>;
+  /**
    * Applies a security group to the association between the target network and the Client VPN endpoint. This action replaces the existing security groups with the specified security groups.
    */
   applySecurityGroupsToClientVpnTargetNetwork(params: EC2.Types.ApplySecurityGroupsToClientVpnTargetNetworkRequest, callback?: (err: AWSError, data: EC2.Types.ApplySecurityGroupsToClientVpnTargetNetworkResult) => void): Request<EC2.Types.ApplySecurityGroupsToClientVpnTargetNetworkResult, AWSError>;
@@ -517,6 +525,30 @@ declare class EC2 extends Service {
    */
   createInternetGateway(callback?: (err: AWSError, data: EC2.Types.CreateInternetGatewayResult) => void): Request<EC2.Types.CreateInternetGatewayResult, AWSError>;
   /**
+   * Create an IPAM. Amazon VCP IP Address Manager (IPAM) is a VPC feature that you can use to automate your IP address management workflows including assigning, tracking, troubleshooting, and auditing IP addresses across Amazon Web Services Regions and accounts throughout your Amazon Web Services Organization. For more information, see Create an IPAM in the Amazon VPC IPAM User Guide. 
+   */
+  createIpam(params: EC2.Types.CreateIpamRequest, callback?: (err: AWSError, data: EC2.Types.CreateIpamResult) => void): Request<EC2.Types.CreateIpamResult, AWSError>;
+  /**
+   * Create an IPAM. Amazon VCP IP Address Manager (IPAM) is a VPC feature that you can use to automate your IP address management workflows including assigning, tracking, troubleshooting, and auditing IP addresses across Amazon Web Services Regions and accounts throughout your Amazon Web Services Organization. For more information, see Create an IPAM in the Amazon VPC IPAM User Guide. 
+   */
+  createIpam(callback?: (err: AWSError, data: EC2.Types.CreateIpamResult) => void): Request<EC2.Types.CreateIpamResult, AWSError>;
+  /**
+   * Create an IP address pool for Amazon VPC IP Address Manager (IPAM). In IPAM, a pool is a collection of contiguous IP addresses CIDRs. Pools enable you to organize your IP addresses according to your routing and security needs. For example, if you have separate routing and security needs for development and production applications, you can create a pool for each. For more information, see Create a top-level pool in the Amazon VPC IPAM User Guide. 
+   */
+  createIpamPool(params: EC2.Types.CreateIpamPoolRequest, callback?: (err: AWSError, data: EC2.Types.CreateIpamPoolResult) => void): Request<EC2.Types.CreateIpamPoolResult, AWSError>;
+  /**
+   * Create an IP address pool for Amazon VPC IP Address Manager (IPAM). In IPAM, a pool is a collection of contiguous IP addresses CIDRs. Pools enable you to organize your IP addresses according to your routing and security needs. For example, if you have separate routing and security needs for development and production applications, you can create a pool for each. For more information, see Create a top-level pool in the Amazon VPC IPAM User Guide. 
+   */
+  createIpamPool(callback?: (err: AWSError, data: EC2.Types.CreateIpamPoolResult) => void): Request<EC2.Types.CreateIpamPoolResult, AWSError>;
+  /**
+   * Create an IPAM scope. In IPAM, a scope is the highest-level container within IPAM. An IPAM contains two default scopes. Each scope represents the IP space for a single network. The private scope is intended for all private IP address space. The public scope is intended for all public IP address space. Scopes enable you to reuse IP addresses across multiple unconnected networks without causing IP address overlap or conflict. For more information, see Add a scope in the Amazon VPC IPAM User Guide.
+   */
+  createIpamScope(params: EC2.Types.CreateIpamScopeRequest, callback?: (err: AWSError, data: EC2.Types.CreateIpamScopeResult) => void): Request<EC2.Types.CreateIpamScopeResult, AWSError>;
+  /**
+   * Create an IPAM scope. In IPAM, a scope is the highest-level container within IPAM. An IPAM contains two default scopes. Each scope represents the IP space for a single network. The private scope is intended for all private IP address space. The public scope is intended for all public IP address space. Scopes enable you to reuse IP addresses across multiple unconnected networks without causing IP address overlap or conflict. For more information, see Add a scope in the Amazon VPC IPAM User Guide.
+   */
+  createIpamScope(callback?: (err: AWSError, data: EC2.Types.CreateIpamScopeResult) => void): Request<EC2.Types.CreateIpamScopeResult, AWSError>;
+  /**
    * Creates an ED25519 or 2048-bit RSA key pair with the specified name. Amazon EC2 stores the public key and displays the private key for you to save to a file. The private key is returned as an unencrypted PEM encoded PKCS#1 private key. If a key with the specified name already exists, Amazon EC2 returns an error. The key pair returned to you is available only in the Amazon Web Services Region in which you create it. If you prefer, you can create your own key pair using a third-party tool and upload it to any Region using ImportKeyPair. You can have up to 5,000 key pairs per Amazon Web Services Region. For more information, see Amazon EC2 key pairs in the Amazon Elastic Compute Cloud User Guide.
    */
   createKeyPair(params: EC2.Types.CreateKeyPairRequest, callback?: (err: AWSError, data: EC2.Types.KeyPair) => void): Request<EC2.Types.KeyPair, AWSError>;
@@ -589,6 +621,14 @@ declare class EC2 extends Service {
    */
   createNetworkAclEntry(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Creates a Network Access Scope. Amazon Web Services Network Access Analyzer enables cloud networking and cloud operations teams to verify that their networks on Amazon Web Services conform to their network security and governance objectives. For more information, see the Amazon Web Services Network Access Analyzer Guide.
+   */
+  createNetworkInsightsAccessScope(params: EC2.Types.CreateNetworkInsightsAccessScopeRequest, callback?: (err: AWSError, data: EC2.Types.CreateNetworkInsightsAccessScopeResult) => void): Request<EC2.Types.CreateNetworkInsightsAccessScopeResult, AWSError>;
+  /**
+   * Creates a Network Access Scope. Amazon Web Services Network Access Analyzer enables cloud networking and cloud operations teams to verify that their networks on Amazon Web Services conform to their network security and governance objectives. For more information, see the Amazon Web Services Network Access Analyzer Guide.
+   */
+  createNetworkInsightsAccessScope(callback?: (err: AWSError, data: EC2.Types.CreateNetworkInsightsAccessScopeResult) => void): Request<EC2.Types.CreateNetworkInsightsAccessScopeResult, AWSError>;
+  /**
    * Creates a path to analyze for reachability. Reachability Analyzer enables you to analyze and debug network reachability between two resources in your virtual private cloud (VPC). For more information, see What is Reachability Analyzer.
    */
   createNetworkInsightsPath(params: EC2.Types.CreateNetworkInsightsPathRequest, callback?: (err: AWSError, data: EC2.Types.CreateNetworkInsightsPathResult) => void): Request<EC2.Types.CreateNetworkInsightsPathResult, AWSError>;
@@ -620,6 +660,14 @@ declare class EC2 extends Service {
    * Creates a placement group in which to launch instances. The strategy of the placement group determines how the instances are organized within the group.  A cluster placement group is a logical grouping of instances within a single Availability Zone that benefit from low network latency, high network throughput. A spread placement group places instances on distinct hardware. A partition placement group places groups of instances in different partitions, where instances in one partition do not share the same hardware with instances in another partition. For more information, see Placement groups in the Amazon EC2 User Guide.
    */
   createPlacementGroup(callback?: (err: AWSError, data: EC2.Types.CreatePlacementGroupResult) => void): Request<EC2.Types.CreatePlacementGroupResult, AWSError>;
+  /**
+   * Creates a public IPv4 address pool. A public IPv4 pool is an EC2 IP address pool required for the public IPv4 CIDRs that you own and bring to Amazon Web Services to manage with IPAM. IPv6 addresses you bring to Amazon Web Services, however, use IPAM pools only. To monitor the status of pool creation, use DescribePublicIpv4Pools.
+   */
+  createPublicIpv4Pool(params: EC2.Types.CreatePublicIpv4PoolRequest, callback?: (err: AWSError, data: EC2.Types.CreatePublicIpv4PoolResult) => void): Request<EC2.Types.CreatePublicIpv4PoolResult, AWSError>;
+  /**
+   * Creates a public IPv4 address pool. A public IPv4 pool is an EC2 IP address pool required for the public IPv4 CIDRs that you own and bring to Amazon Web Services to manage with IPAM. IPv6 addresses you bring to Amazon Web Services, however, use IPAM pools only. To monitor the status of pool creation, use DescribePublicIpv4Pools.
+   */
+  createPublicIpv4Pool(callback?: (err: AWSError, data: EC2.Types.CreatePublicIpv4PoolResult) => void): Request<EC2.Types.CreatePublicIpv4PoolResult, AWSError>;
   /**
    * Creates a root volume replacement task for an Amazon EC2 instance. The root volume can either be restored to its initial launch state, or it can be restored using a specific snapshot. For more information, see Replace a root volume in the Amazon Elastic Compute Cloud User Guide.
    */
@@ -989,6 +1037,30 @@ declare class EC2 extends Service {
    */
   deleteInternetGateway(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Delete an IPAM. Deleting an IPAM removes all monitored data associated with the IPAM including the historical data for CIDRs.  You cannot delete an IPAM if there are CIDRs provisioned to pools or if there are allocations in the pools within the IPAM. To deprovision pool CIDRs, see DeprovisionIpamPoolCidr. To release allocations, see ReleaseIpamPoolAllocation.   For more information, see Delete an IPAM in the Amazon VPC IPAM User Guide. 
+   */
+  deleteIpam(params: EC2.Types.DeleteIpamRequest, callback?: (err: AWSError, data: EC2.Types.DeleteIpamResult) => void): Request<EC2.Types.DeleteIpamResult, AWSError>;
+  /**
+   * Delete an IPAM. Deleting an IPAM removes all monitored data associated with the IPAM including the historical data for CIDRs.  You cannot delete an IPAM if there are CIDRs provisioned to pools or if there are allocations in the pools within the IPAM. To deprovision pool CIDRs, see DeprovisionIpamPoolCidr. To release allocations, see ReleaseIpamPoolAllocation.   For more information, see Delete an IPAM in the Amazon VPC IPAM User Guide. 
+   */
+  deleteIpam(callback?: (err: AWSError, data: EC2.Types.DeleteIpamResult) => void): Request<EC2.Types.DeleteIpamResult, AWSError>;
+  /**
+   * Delete an IPAM pool.  You cannot delete an IPAM pool if there are allocations in it or CIDRs provisioned to it. To release allocations, see ReleaseIpamPoolAllocation. To deprovision pool CIDRs, see DeprovisionIpamPoolCidr.  For more information, see Delete a pool in the Amazon VPC IPAM User Guide. 
+   */
+  deleteIpamPool(params: EC2.Types.DeleteIpamPoolRequest, callback?: (err: AWSError, data: EC2.Types.DeleteIpamPoolResult) => void): Request<EC2.Types.DeleteIpamPoolResult, AWSError>;
+  /**
+   * Delete an IPAM pool.  You cannot delete an IPAM pool if there are allocations in it or CIDRs provisioned to it. To release allocations, see ReleaseIpamPoolAllocation. To deprovision pool CIDRs, see DeprovisionIpamPoolCidr.  For more information, see Delete a pool in the Amazon VPC IPAM User Guide. 
+   */
+  deleteIpamPool(callback?: (err: AWSError, data: EC2.Types.DeleteIpamPoolResult) => void): Request<EC2.Types.DeleteIpamPoolResult, AWSError>;
+  /**
+   * Delete the scope for an IPAM. You cannot delete the default scopes. For more information, see Delete a scope in the Amazon VPC IPAM User Guide. 
+   */
+  deleteIpamScope(params: EC2.Types.DeleteIpamScopeRequest, callback?: (err: AWSError, data: EC2.Types.DeleteIpamScopeResult) => void): Request<EC2.Types.DeleteIpamScopeResult, AWSError>;
+  /**
+   * Delete the scope for an IPAM. You cannot delete the default scopes. For more information, see Delete a scope in the Amazon VPC IPAM User Guide. 
+   */
+  deleteIpamScope(callback?: (err: AWSError, data: EC2.Types.DeleteIpamScopeResult) => void): Request<EC2.Types.DeleteIpamScopeResult, AWSError>;
+  /**
    * Deletes the specified key pair, by removing the public key from Amazon EC2.
    */
   deleteKeyPair(params: EC2.Types.DeleteKeyPairRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -1061,6 +1133,22 @@ declare class EC2 extends Service {
    */
   deleteNetworkAclEntry(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Deletes the specified Network Access Scope.
+   */
+  deleteNetworkInsightsAccessScope(params: EC2.Types.DeleteNetworkInsightsAccessScopeRequest, callback?: (err: AWSError, data: EC2.Types.DeleteNetworkInsightsAccessScopeResult) => void): Request<EC2.Types.DeleteNetworkInsightsAccessScopeResult, AWSError>;
+  /**
+   * Deletes the specified Network Access Scope.
+   */
+  deleteNetworkInsightsAccessScope(callback?: (err: AWSError, data: EC2.Types.DeleteNetworkInsightsAccessScopeResult) => void): Request<EC2.Types.DeleteNetworkInsightsAccessScopeResult, AWSError>;
+  /**
+   * Deletes the specified Network Access Scope analysis.
+   */
+  deleteNetworkInsightsAccessScopeAnalysis(params: EC2.Types.DeleteNetworkInsightsAccessScopeAnalysisRequest, callback?: (err: AWSError, data: EC2.Types.DeleteNetworkInsightsAccessScopeAnalysisResult) => void): Request<EC2.Types.DeleteNetworkInsightsAccessScopeAnalysisResult, AWSError>;
+  /**
+   * Deletes the specified Network Access Scope analysis.
+   */
+  deleteNetworkInsightsAccessScopeAnalysis(callback?: (err: AWSError, data: EC2.Types.DeleteNetworkInsightsAccessScopeAnalysisResult) => void): Request<EC2.Types.DeleteNetworkInsightsAccessScopeAnalysisResult, AWSError>;
+  /**
    * Deletes the specified network insights analysis.
    */
   deleteNetworkInsightsAnalysis(params: EC2.Types.DeleteNetworkInsightsAnalysisRequest, callback?: (err: AWSError, data: EC2.Types.DeleteNetworkInsightsAnalysisResult) => void): Request<EC2.Types.DeleteNetworkInsightsAnalysisResult, AWSError>;
@@ -1100,6 +1188,14 @@ declare class EC2 extends Service {
    * Deletes the specified placement group. You must terminate all instances in the placement group before you can delete the placement group. For more information, see Placement groups in the Amazon EC2 User Guide.
    */
   deletePlacementGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Delete a public IPv4 pool. A public IPv4 pool is an EC2 IP address pool required for the public IPv4 CIDRs that you own and bring to Amazon Web Services to manage with IPAM. IPv6 addresses you bring to Amazon Web Services, however, use IPAM pools only.
+   */
+  deletePublicIpv4Pool(params: EC2.Types.DeletePublicIpv4PoolRequest, callback?: (err: AWSError, data: EC2.Types.DeletePublicIpv4PoolResult) => void): Request<EC2.Types.DeletePublicIpv4PoolResult, AWSError>;
+  /**
+   * Delete a public IPv4 pool. A public IPv4 pool is an EC2 IP address pool required for the public IPv4 CIDRs that you own and bring to Amazon Web Services to manage with IPAM. IPv6 addresses you bring to Amazon Web Services, however, use IPAM pools only.
+   */
+  deletePublicIpv4Pool(callback?: (err: AWSError, data: EC2.Types.DeletePublicIpv4PoolResult) => void): Request<EC2.Types.DeletePublicIpv4PoolResult, AWSError>;
   /**
    * Deletes the queued purchases for the specified Reserved Instances.
    */
@@ -1356,6 +1452,22 @@ declare class EC2 extends Service {
    * Releases the specified address range that you provisioned for use with your Amazon Web Services resources through bring your own IP addresses (BYOIP) and deletes the corresponding address pool. Before you can release an address range, you must stop advertising it using WithdrawByoipCidr and you must not have any IP addresses allocated from its address range.
    */
   deprovisionByoipCidr(callback?: (err: AWSError, data: EC2.Types.DeprovisionByoipCidrResult) => void): Request<EC2.Types.DeprovisionByoipCidrResult, AWSError>;
+  /**
+   * Deprovision a CIDR provisioned from an IPAM pool. If you deprovision a CIDR from a pool that has a source pool, the CIDR is recycled back into the source pool. For more information, see Deprovision pool CIDRs in the Amazon VPC IPAM User Guide.
+   */
+  deprovisionIpamPoolCidr(params: EC2.Types.DeprovisionIpamPoolCidrRequest, callback?: (err: AWSError, data: EC2.Types.DeprovisionIpamPoolCidrResult) => void): Request<EC2.Types.DeprovisionIpamPoolCidrResult, AWSError>;
+  /**
+   * Deprovision a CIDR provisioned from an IPAM pool. If you deprovision a CIDR from a pool that has a source pool, the CIDR is recycled back into the source pool. For more information, see Deprovision pool CIDRs in the Amazon VPC IPAM User Guide.
+   */
+  deprovisionIpamPoolCidr(callback?: (err: AWSError, data: EC2.Types.DeprovisionIpamPoolCidrResult) => void): Request<EC2.Types.DeprovisionIpamPoolCidrResult, AWSError>;
+  /**
+   * Deprovision a CIDR from a public IPv4 pool.
+   */
+  deprovisionPublicIpv4PoolCidr(params: EC2.Types.DeprovisionPublicIpv4PoolCidrRequest, callback?: (err: AWSError, data: EC2.Types.DeprovisionPublicIpv4PoolCidrResult) => void): Request<EC2.Types.DeprovisionPublicIpv4PoolCidrResult, AWSError>;
+  /**
+   * Deprovision a CIDR from a public IPv4 pool.
+   */
+  deprovisionPublicIpv4PoolCidr(callback?: (err: AWSError, data: EC2.Types.DeprovisionPublicIpv4PoolCidrResult) => void): Request<EC2.Types.DeprovisionPublicIpv4PoolCidrResult, AWSError>;
   /**
    * Deregisters the specified AMI. After you deregister an AMI, it can't be used to launch new instances; however, it doesn't affect any instances that you've already launched from the AMI. You'll continue to incur usage costs for those instances until you terminate them. When you deregister an Amazon EBS-backed AMI, it doesn't affect the snapshot that was created for the root volume of the instance during the AMI creation process. When you deregister an instance store-backed AMI, it doesn't affect the files that you uploaded to Amazon S3 when you created the AMI.
    */
@@ -1789,6 +1901,30 @@ declare class EC2 extends Service {
    */
   describeInternetGateways(callback?: (err: AWSError, data: EC2.Types.DescribeInternetGatewaysResult) => void): Request<EC2.Types.DescribeInternetGatewaysResult, AWSError>;
   /**
+   * Get information about your IPAM pools.
+   */
+  describeIpamPools(params: EC2.Types.DescribeIpamPoolsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeIpamPoolsResult) => void): Request<EC2.Types.DescribeIpamPoolsResult, AWSError>;
+  /**
+   * Get information about your IPAM pools.
+   */
+  describeIpamPools(callback?: (err: AWSError, data: EC2.Types.DescribeIpamPoolsResult) => void): Request<EC2.Types.DescribeIpamPoolsResult, AWSError>;
+  /**
+   * Get information about your IPAM scopes.
+   */
+  describeIpamScopes(params: EC2.Types.DescribeIpamScopesRequest, callback?: (err: AWSError, data: EC2.Types.DescribeIpamScopesResult) => void): Request<EC2.Types.DescribeIpamScopesResult, AWSError>;
+  /**
+   * Get information about your IPAM scopes.
+   */
+  describeIpamScopes(callback?: (err: AWSError, data: EC2.Types.DescribeIpamScopesResult) => void): Request<EC2.Types.DescribeIpamScopesResult, AWSError>;
+  /**
+   * Get information about your IPAM pools. For more information, see What is IPAM? in the Amazon VPC IPAM User Guide. 
+   */
+  describeIpams(params: EC2.Types.DescribeIpamsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeIpamsResult) => void): Request<EC2.Types.DescribeIpamsResult, AWSError>;
+  /**
+   * Get information about your IPAM pools. For more information, see What is IPAM? in the Amazon VPC IPAM User Guide. 
+   */
+  describeIpams(callback?: (err: AWSError, data: EC2.Types.DescribeIpamsResult) => void): Request<EC2.Types.DescribeIpamsResult, AWSError>;
+  /**
    * Describes your IPv6 address pools.
    */
   describeIpv6Pools(params: EC2.Types.DescribeIpv6PoolsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeIpv6PoolsResult) => void): Request<EC2.Types.DescribeIpv6PoolsResult, AWSError>;
@@ -1900,6 +2036,22 @@ declare class EC2 extends Service {
    * Describes one or more of your network ACLs. For more information, see Network ACLs in the Amazon Virtual Private Cloud User Guide.
    */
   describeNetworkAcls(callback?: (err: AWSError, data: EC2.Types.DescribeNetworkAclsResult) => void): Request<EC2.Types.DescribeNetworkAclsResult, AWSError>;
+  /**
+   * Describes the specified Network Access Scope analyses.
+   */
+  describeNetworkInsightsAccessScopeAnalyses(params: EC2.Types.DescribeNetworkInsightsAccessScopeAnalysesRequest, callback?: (err: AWSError, data: EC2.Types.DescribeNetworkInsightsAccessScopeAnalysesResult) => void): Request<EC2.Types.DescribeNetworkInsightsAccessScopeAnalysesResult, AWSError>;
+  /**
+   * Describes the specified Network Access Scope analyses.
+   */
+  describeNetworkInsightsAccessScopeAnalyses(callback?: (err: AWSError, data: EC2.Types.DescribeNetworkInsightsAccessScopeAnalysesResult) => void): Request<EC2.Types.DescribeNetworkInsightsAccessScopeAnalysesResult, AWSError>;
+  /**
+   * Describes the specified Network Access Scopes.
+   */
+  describeNetworkInsightsAccessScopes(params: EC2.Types.DescribeNetworkInsightsAccessScopesRequest, callback?: (err: AWSError, data: EC2.Types.DescribeNetworkInsightsAccessScopesResult) => void): Request<EC2.Types.DescribeNetworkInsightsAccessScopesResult, AWSError>;
+  /**
+   * Describes the specified Network Access Scopes.
+   */
+  describeNetworkInsightsAccessScopes(callback?: (err: AWSError, data: EC2.Types.DescribeNetworkInsightsAccessScopesResult) => void): Request<EC2.Types.DescribeNetworkInsightsAccessScopesResult, AWSError>;
   /**
    * Describes one or more of your network insights analyses.
    */
@@ -2469,6 +2621,14 @@ declare class EC2 extends Service {
    */
   disableImageDeprecation(callback?: (err: AWSError, data: EC2.Types.DisableImageDeprecationResult) => void): Request<EC2.Types.DisableImageDeprecationResult, AWSError>;
   /**
+   * Disable the IPAM account. For more information, see Enable integration with Organizations in the Amazon VPC IPAM User Guide. 
+   */
+  disableIpamOrganizationAdminAccount(params: EC2.Types.DisableIpamOrganizationAdminAccountRequest, callback?: (err: AWSError, data: EC2.Types.DisableIpamOrganizationAdminAccountResult) => void): Request<EC2.Types.DisableIpamOrganizationAdminAccountResult, AWSError>;
+  /**
+   * Disable the IPAM account. For more information, see Enable integration with Organizations in the Amazon VPC IPAM User Guide. 
+   */
+  disableIpamOrganizationAdminAccount(callback?: (err: AWSError, data: EC2.Types.DisableIpamOrganizationAdminAccountResult) => void): Request<EC2.Types.DisableIpamOrganizationAdminAccountResult, AWSError>;
+  /**
    * Disables access to the EC2 serial console of all instances for your account. By default, access to the EC2 serial console is disabled for your account. For more information, see Manage account access to the EC2 serial console in the Amazon EC2 User Guide.
    */
   disableSerialConsoleAccess(params: EC2.Types.DisableSerialConsoleAccessRequest, callback?: (err: AWSError, data: EC2.Types.DisableSerialConsoleAccessResult) => void): Request<EC2.Types.DisableSerialConsoleAccessResult, AWSError>;
@@ -2620,6 +2780,14 @@ declare class EC2 extends Service {
    * Enables deprecation of the specified AMI at the specified date and time. For more information, see Deprecate an AMI in the Amazon Elastic Compute Cloud User Guide.
    */
   enableImageDeprecation(callback?: (err: AWSError, data: EC2.Types.EnableImageDeprecationResult) => void): Request<EC2.Types.EnableImageDeprecationResult, AWSError>;
+  /**
+   * Enable an Organizations member account as the IPAM admin account. You cannot select the Organizations management account as the IPAM admin account. For more information, see Enable integration with Organizations in the Amazon VPC IPAM User Guide. 
+   */
+  enableIpamOrganizationAdminAccount(params: EC2.Types.EnableIpamOrganizationAdminAccountRequest, callback?: (err: AWSError, data: EC2.Types.EnableIpamOrganizationAdminAccountResult) => void): Request<EC2.Types.EnableIpamOrganizationAdminAccountResult, AWSError>;
+  /**
+   * Enable an Organizations member account as the IPAM admin account. You cannot select the Organizations management account as the IPAM admin account. For more information, see Enable integration with Organizations in the Amazon VPC IPAM User Guide. 
+   */
+  enableIpamOrganizationAdminAccount(callback?: (err: AWSError, data: EC2.Types.EnableIpamOrganizationAdminAccountResult) => void): Request<EC2.Types.EnableIpamOrganizationAdminAccountResult, AWSError>;
   /**
    * Enables access to the EC2 serial console of all instances for your account. By default, access to the EC2 serial console is disabled for your account. For more information, see Manage account access to the EC2 serial console in the Amazon EC2 User Guide.
    */
@@ -2805,6 +2973,38 @@ declare class EC2 extends Service {
    */
   getInstanceTypesFromInstanceRequirements(callback?: (err: AWSError, data: EC2.Types.GetInstanceTypesFromInstanceRequirementsResult) => void): Request<EC2.Types.GetInstanceTypesFromInstanceRequirementsResult, AWSError>;
   /**
+   * Retrieve historical information about a CIDR within an IPAM scope. For more information, see View the history of IP addresses in the Amazon VPC IPAM User Guide.
+   */
+  getIpamAddressHistory(params: EC2.Types.GetIpamAddressHistoryRequest, callback?: (err: AWSError, data: EC2.Types.GetIpamAddressHistoryResult) => void): Request<EC2.Types.GetIpamAddressHistoryResult, AWSError>;
+  /**
+   * Retrieve historical information about a CIDR within an IPAM scope. For more information, see View the history of IP addresses in the Amazon VPC IPAM User Guide.
+   */
+  getIpamAddressHistory(callback?: (err: AWSError, data: EC2.Types.GetIpamAddressHistoryResult) => void): Request<EC2.Types.GetIpamAddressHistoryResult, AWSError>;
+  /**
+   * Get a list of all the CIDR allocations in an IPAM pool.
+   */
+  getIpamPoolAllocations(params: EC2.Types.GetIpamPoolAllocationsRequest, callback?: (err: AWSError, data: EC2.Types.GetIpamPoolAllocationsResult) => void): Request<EC2.Types.GetIpamPoolAllocationsResult, AWSError>;
+  /**
+   * Get a list of all the CIDR allocations in an IPAM pool.
+   */
+  getIpamPoolAllocations(callback?: (err: AWSError, data: EC2.Types.GetIpamPoolAllocationsResult) => void): Request<EC2.Types.GetIpamPoolAllocationsResult, AWSError>;
+  /**
+   * Get the CIDRs provisioned to an IPAM pool.
+   */
+  getIpamPoolCidrs(params: EC2.Types.GetIpamPoolCidrsRequest, callback?: (err: AWSError, data: EC2.Types.GetIpamPoolCidrsResult) => void): Request<EC2.Types.GetIpamPoolCidrsResult, AWSError>;
+  /**
+   * Get the CIDRs provisioned to an IPAM pool.
+   */
+  getIpamPoolCidrs(callback?: (err: AWSError, data: EC2.Types.GetIpamPoolCidrsResult) => void): Request<EC2.Types.GetIpamPoolCidrsResult, AWSError>;
+  /**
+   * Get information about the resources in a scope.
+   */
+  getIpamResourceCidrs(params: EC2.Types.GetIpamResourceCidrsRequest, callback?: (err: AWSError, data: EC2.Types.GetIpamResourceCidrsResult) => void): Request<EC2.Types.GetIpamResourceCidrsResult, AWSError>;
+  /**
+   * Get information about the resources in a scope.
+   */
+  getIpamResourceCidrs(callback?: (err: AWSError, data: EC2.Types.GetIpamResourceCidrsResult) => void): Request<EC2.Types.GetIpamResourceCidrsResult, AWSError>;
+  /**
    * Retrieves the configuration data of the specified instance. You can use this data to create a launch template.  This action calls on other describe actions to get instance information. Depending on your instance configuration, you may need to allow the following actions in your IAM policy: DescribeSpotInstanceRequests, DescribeInstanceCreditSpecifications, DescribeVolumes, DescribeInstanceAttribute, and DescribeElasticGpus. Or, you can allow describe* depending on your instance requirements.
    */
   getLaunchTemplateData(params: EC2.Types.GetLaunchTemplateDataRequest, callback?: (err: AWSError, data: EC2.Types.GetLaunchTemplateDataResult) => void): Request<EC2.Types.GetLaunchTemplateDataResult, AWSError>;
@@ -2828,6 +3028,22 @@ declare class EC2 extends Service {
    * Gets information about the entries for a specified managed prefix list.
    */
   getManagedPrefixListEntries(callback?: (err: AWSError, data: EC2.Types.GetManagedPrefixListEntriesResult) => void): Request<EC2.Types.GetManagedPrefixListEntriesResult, AWSError>;
+  /**
+   * Gets the findings for the specified Network Access Scope analysis.
+   */
+  getNetworkInsightsAccessScopeAnalysisFindings(params: EC2.Types.GetNetworkInsightsAccessScopeAnalysisFindingsRequest, callback?: (err: AWSError, data: EC2.Types.GetNetworkInsightsAccessScopeAnalysisFindingsResult) => void): Request<EC2.Types.GetNetworkInsightsAccessScopeAnalysisFindingsResult, AWSError>;
+  /**
+   * Gets the findings for the specified Network Access Scope analysis.
+   */
+  getNetworkInsightsAccessScopeAnalysisFindings(callback?: (err: AWSError, data: EC2.Types.GetNetworkInsightsAccessScopeAnalysisFindingsResult) => void): Request<EC2.Types.GetNetworkInsightsAccessScopeAnalysisFindingsResult, AWSError>;
+  /**
+   * Gets the content for the specified Network Access Scope.
+   */
+  getNetworkInsightsAccessScopeContent(params: EC2.Types.GetNetworkInsightsAccessScopeContentRequest, callback?: (err: AWSError, data: EC2.Types.GetNetworkInsightsAccessScopeContentResult) => void): Request<EC2.Types.GetNetworkInsightsAccessScopeContentResult, AWSError>;
+  /**
+   * Gets the content for the specified Network Access Scope.
+   */
+  getNetworkInsightsAccessScopeContent(callback?: (err: AWSError, data: EC2.Types.GetNetworkInsightsAccessScopeContentResult) => void): Request<EC2.Types.GetNetworkInsightsAccessScopeContentResult, AWSError>;
   /**
    * Retrieves the encrypted administrator password for a running Windows instance. The Windows password is generated at boot by the EC2Config service or EC2Launch scripts (Windows Server 2016 and later). This usually only happens the first time an instance is launched. For more information, see EC2Config and EC2Launch in the Amazon EC2 User Guide. For the EC2Config service, the password is not generated for rebundled AMIs unless Ec2SetPassword is enabled before bundling. The password is encrypted using the key pair that you specified when you launched the instance. You must provide the corresponding key pair file. When you launch an instance, password generation and encryption may take a few minutes. If you try to retrieve the password before it's available, the output returns an empty string. We recommend that you wait up to 15 minutes after launching an instance before trying to retrieve the generated password.
    */
@@ -3141,6 +3357,38 @@ declare class EC2 extends Service {
    */
   modifyInstancePlacement(callback?: (err: AWSError, data: EC2.Types.ModifyInstancePlacementResult) => void): Request<EC2.Types.ModifyInstancePlacementResult, AWSError>;
   /**
+   * Modify the configurations of an IPAM. 
+   */
+  modifyIpam(params: EC2.Types.ModifyIpamRequest, callback?: (err: AWSError, data: EC2.Types.ModifyIpamResult) => void): Request<EC2.Types.ModifyIpamResult, AWSError>;
+  /**
+   * Modify the configurations of an IPAM. 
+   */
+  modifyIpam(callback?: (err: AWSError, data: EC2.Types.ModifyIpamResult) => void): Request<EC2.Types.ModifyIpamResult, AWSError>;
+  /**
+   * Modify the configurations of an IPAM pool. For more information, see Modify a pool in the Amazon VPC IPAM User Guide. 
+   */
+  modifyIpamPool(params: EC2.Types.ModifyIpamPoolRequest, callback?: (err: AWSError, data: EC2.Types.ModifyIpamPoolResult) => void): Request<EC2.Types.ModifyIpamPoolResult, AWSError>;
+  /**
+   * Modify the configurations of an IPAM pool. For more information, see Modify a pool in the Amazon VPC IPAM User Guide. 
+   */
+  modifyIpamPool(callback?: (err: AWSError, data: EC2.Types.ModifyIpamPoolResult) => void): Request<EC2.Types.ModifyIpamPoolResult, AWSError>;
+  /**
+   * Modify a resource CIDR. You can use this action to transfer resource CIDRs between scopes and ignore resource CIDRs that you do not want to manage. If set to false, the resource will not be tracked for overlap, it cannot be auto-imported into a pool, and it will be removed from any pool it has an allocation in. For more information, see Move resource CIDRs between scopes and Change the monitoring state of resource CIDRs in the Amazon VPC IPAM User Guide.
+   */
+  modifyIpamResourceCidr(params: EC2.Types.ModifyIpamResourceCidrRequest, callback?: (err: AWSError, data: EC2.Types.ModifyIpamResourceCidrResult) => void): Request<EC2.Types.ModifyIpamResourceCidrResult, AWSError>;
+  /**
+   * Modify a resource CIDR. You can use this action to transfer resource CIDRs between scopes and ignore resource CIDRs that you do not want to manage. If set to false, the resource will not be tracked for overlap, it cannot be auto-imported into a pool, and it will be removed from any pool it has an allocation in. For more information, see Move resource CIDRs between scopes and Change the monitoring state of resource CIDRs in the Amazon VPC IPAM User Guide.
+   */
+  modifyIpamResourceCidr(callback?: (err: AWSError, data: EC2.Types.ModifyIpamResourceCidrResult) => void): Request<EC2.Types.ModifyIpamResourceCidrResult, AWSError>;
+  /**
+   * Modify an IPAM scope.
+   */
+  modifyIpamScope(params: EC2.Types.ModifyIpamScopeRequest, callback?: (err: AWSError, data: EC2.Types.ModifyIpamScopeResult) => void): Request<EC2.Types.ModifyIpamScopeResult, AWSError>;
+  /**
+   * Modify an IPAM scope.
+   */
+  modifyIpamScope(callback?: (err: AWSError, data: EC2.Types.ModifyIpamScopeResult) => void): Request<EC2.Types.ModifyIpamScopeResult, AWSError>;
+  /**
    * Modifies a launch template. You can specify which version of the launch template to set as the default version. When launching an instance, the default version applies when a launch template version is not specified.
    */
   modifyLaunchTemplate(params: EC2.Types.ModifyLaunchTemplateRequest, callback?: (err: AWSError, data: EC2.Types.ModifyLaunchTemplateResult) => void): Request<EC2.Types.ModifyLaunchTemplateResult, AWSError>;
@@ -3389,6 +3637,14 @@ declare class EC2 extends Service {
    */
   moveAddressToVpc(callback?: (err: AWSError, data: EC2.Types.MoveAddressToVpcResult) => void): Request<EC2.Types.MoveAddressToVpcResult, AWSError>;
   /**
+   * Move an BYOIP IPv4 CIDR to IPAM from a public IPv4 pool.
+   */
+  moveByoipCidrToIpam(params: EC2.Types.MoveByoipCidrToIpamRequest, callback?: (err: AWSError, data: EC2.Types.MoveByoipCidrToIpamResult) => void): Request<EC2.Types.MoveByoipCidrToIpamResult, AWSError>;
+  /**
+   * Move an BYOIP IPv4 CIDR to IPAM from a public IPv4 pool.
+   */
+  moveByoipCidrToIpam(callback?: (err: AWSError, data: EC2.Types.MoveByoipCidrToIpamResult) => void): Request<EC2.Types.MoveByoipCidrToIpamResult, AWSError>;
+  /**
    * Provisions an IPv4 or IPv6 address range for use with your Amazon Web Services resources through bring your own IP addresses (BYOIP) and creates a corresponding address pool. After the address range is provisioned, it is ready to be advertised using AdvertiseByoipCidr. Amazon Web Services verifies that you own the address range and are authorized to advertise it. You must ensure that the address range is registered to you and that you created an RPKI ROA to authorize Amazon ASNs 16509 and 14618 to advertise the address range. For more information, see Bring your own IP addresses (BYOIP) in the Amazon Elastic Compute Cloud User Guide. Provisioning an address range is an asynchronous operation, so the call returns immediately, but the address range is not ready to use until its status changes from pending-provision to provisioned. To monitor the status of an address range, use DescribeByoipCidrs. To allocate an Elastic IP address from your IPv4 address pool, use AllocateAddress with either the specific address from the address pool or the ID of the address pool.
    */
   provisionByoipCidr(params: EC2.Types.ProvisionByoipCidrRequest, callback?: (err: AWSError, data: EC2.Types.ProvisionByoipCidrResult) => void): Request<EC2.Types.ProvisionByoipCidrResult, AWSError>;
@@ -3396,6 +3652,22 @@ declare class EC2 extends Service {
    * Provisions an IPv4 or IPv6 address range for use with your Amazon Web Services resources through bring your own IP addresses (BYOIP) and creates a corresponding address pool. After the address range is provisioned, it is ready to be advertised using AdvertiseByoipCidr. Amazon Web Services verifies that you own the address range and are authorized to advertise it. You must ensure that the address range is registered to you and that you created an RPKI ROA to authorize Amazon ASNs 16509 and 14618 to advertise the address range. For more information, see Bring your own IP addresses (BYOIP) in the Amazon Elastic Compute Cloud User Guide. Provisioning an address range is an asynchronous operation, so the call returns immediately, but the address range is not ready to use until its status changes from pending-provision to provisioned. To monitor the status of an address range, use DescribeByoipCidrs. To allocate an Elastic IP address from your IPv4 address pool, use AllocateAddress with either the specific address from the address pool or the ID of the address pool.
    */
   provisionByoipCidr(callback?: (err: AWSError, data: EC2.Types.ProvisionByoipCidrResult) => void): Request<EC2.Types.ProvisionByoipCidrResult, AWSError>;
+  /**
+   * Provision a CIDR to an IPAM pool. You can use thsi action to provision new CIDRs to a top-level pool or to transfer a CIDR from a top-level pool to a pool within it. For more information, see Provision CIDRs to pools in the Amazon VPC IPAM User Guide. 
+   */
+  provisionIpamPoolCidr(params: EC2.Types.ProvisionIpamPoolCidrRequest, callback?: (err: AWSError, data: EC2.Types.ProvisionIpamPoolCidrResult) => void): Request<EC2.Types.ProvisionIpamPoolCidrResult, AWSError>;
+  /**
+   * Provision a CIDR to an IPAM pool. You can use thsi action to provision new CIDRs to a top-level pool or to transfer a CIDR from a top-level pool to a pool within it. For more information, see Provision CIDRs to pools in the Amazon VPC IPAM User Guide. 
+   */
+  provisionIpamPoolCidr(callback?: (err: AWSError, data: EC2.Types.ProvisionIpamPoolCidrResult) => void): Request<EC2.Types.ProvisionIpamPoolCidrResult, AWSError>;
+  /**
+   * Provision a CIDR to a public IPv4 pool. For more information about IPAM, see What is IPAM? in the Amazon VPC IPAM User Guide. 
+   */
+  provisionPublicIpv4PoolCidr(params: EC2.Types.ProvisionPublicIpv4PoolCidrRequest, callback?: (err: AWSError, data: EC2.Types.ProvisionPublicIpv4PoolCidrResult) => void): Request<EC2.Types.ProvisionPublicIpv4PoolCidrResult, AWSError>;
+  /**
+   * Provision a CIDR to a public IPv4 pool. For more information about IPAM, see What is IPAM? in the Amazon VPC IPAM User Guide. 
+   */
+  provisionPublicIpv4PoolCidr(callback?: (err: AWSError, data: EC2.Types.ProvisionPublicIpv4PoolCidrResult) => void): Request<EC2.Types.ProvisionPublicIpv4PoolCidrResult, AWSError>;
   /**
    * Purchase a reservation with configurations that match those of your Dedicated Host. You must have active Dedicated Hosts in your account before you purchase a reservation. This action results in the specified reservation being purchased and charged to your account.
    */
@@ -3516,6 +3788,14 @@ declare class EC2 extends Service {
    * When you no longer want to use an On-Demand Dedicated Host it can be released. On-Demand billing is stopped and the host goes into released state. The host ID of Dedicated Hosts that have been released can no longer be specified in another request, for example, to modify the host. You must stop or terminate all instances on a host before it can be released. When Dedicated Hosts are released, it may take some time for them to stop counting toward your limit and you may receive capacity errors when trying to allocate new Dedicated Hosts. Wait a few minutes and then try again. Released hosts still appear in a DescribeHosts response.
    */
   releaseHosts(callback?: (err: AWSError, data: EC2.Types.ReleaseHostsResult) => void): Request<EC2.Types.ReleaseHostsResult, AWSError>;
+  /**
+   * Release an allocation within an IPAM pool. You can only use this action to release manual allocations. To remove an allocation for a resource without deleting the resource, set its monitored state to false using ModifyIpamResourceCidr. For more information, see Release an allocation in the Amazon VPC IPAM User Guide. 
+   */
+  releaseIpamPoolAllocation(params: EC2.Types.ReleaseIpamPoolAllocationRequest, callback?: (err: AWSError, data: EC2.Types.ReleaseIpamPoolAllocationResult) => void): Request<EC2.Types.ReleaseIpamPoolAllocationResult, AWSError>;
+  /**
+   * Release an allocation within an IPAM pool. You can only use this action to release manual allocations. To remove an allocation for a resource without deleting the resource, set its monitored state to false using ModifyIpamResourceCidr. For more information, see Release an allocation in the Amazon VPC IPAM User Guide. 
+   */
+  releaseIpamPoolAllocation(callback?: (err: AWSError, data: EC2.Types.ReleaseIpamPoolAllocationResult) => void): Request<EC2.Types.ReleaseIpamPoolAllocationResult, AWSError>;
   /**
    * Replaces an IAM instance profile for the specified running instance. You can use this action to change the IAM instance profile that's associated with an instance without having to disassociate the existing IAM instance profile first. Use DescribeIamInstanceProfileAssociations to get the association ID.
    */
@@ -3756,6 +4036,14 @@ declare class EC2 extends Service {
    * Starts an Amazon EBS-backed instance that you've previously stopped. Instances that use Amazon EBS volumes as their root devices can be quickly stopped and started. When an instance is stopped, the compute resources are released and you are not billed for instance usage. However, your root partition Amazon EBS volume remains and continues to persist your data, and you are charged for Amazon EBS volume usage. You can restart your instance at any time. Every time you start your instance, Amazon EC2 charges a one-minute minimum for instance usage, and thereafter charges per second for instance usage. Before stopping an instance, make sure it is in a state from which it can be restarted. Stopping an instance does not preserve data stored in RAM. Performing this operation on an instance that uses an instance store as its root device returns an error. If you attempt to start a T3 instance with host tenancy and the unlimted CPU credit option, the request fails. The unlimited CPU credit option is not supported on Dedicated Hosts. Before you start the instance, either change its CPU credit option to standard, or change its tenancy to default or dedicated. For more information, see Stop and start your instance in the Amazon EC2 User Guide.
    */
   startInstances(callback?: (err: AWSError, data: EC2.Types.StartInstancesResult) => void): Request<EC2.Types.StartInstancesResult, AWSError>;
+  /**
+   * Starts analyzing the specified Network Access Scope.
+   */
+  startNetworkInsightsAccessScopeAnalysis(params: EC2.Types.StartNetworkInsightsAccessScopeAnalysisRequest, callback?: (err: AWSError, data: EC2.Types.StartNetworkInsightsAccessScopeAnalysisResult) => void): Request<EC2.Types.StartNetworkInsightsAccessScopeAnalysisResult, AWSError>;
+  /**
+   * Starts analyzing the specified Network Access Scope.
+   */
+  startNetworkInsightsAccessScopeAnalysis(callback?: (err: AWSError, data: EC2.Types.StartNetworkInsightsAccessScopeAnalysisResult) => void): Request<EC2.Types.StartNetworkInsightsAccessScopeAnalysisResult, AWSError>;
   /**
    * Starts analyzing the specified path. If the path is reachable, the operation returns the shortest feasible path.
    */
@@ -4257,6 +4545,55 @@ declare namespace EC2 {
      */
     VpcPeeringConnection?: VpcPeeringConnection;
   }
+  export interface AccessScopeAnalysisFinding {
+    /**
+     * The ID of the Network Access Scope analysis.
+     */
+    NetworkInsightsAccessScopeAnalysisId?: NetworkInsightsAccessScopeAnalysisId;
+    /**
+     * The ID of the Network Access Scope.
+     */
+    NetworkInsightsAccessScopeId?: NetworkInsightsAccessScopeId;
+    /**
+     * The ID of the finding.
+     */
+    FindingId?: String;
+    /**
+     * The finding components.
+     */
+    FindingComponents?: PathComponentList;
+  }
+  export type AccessScopeAnalysisFindingList = AccessScopeAnalysisFinding[];
+  export interface AccessScopePath {
+    /**
+     * The source.
+     */
+    Source?: PathStatement;
+    /**
+     * The destination.
+     */
+    Destination?: PathStatement;
+    /**
+     * The through resources.
+     */
+    ThroughResources?: ThroughResourcesStatementList;
+  }
+  export type AccessScopePathList = AccessScopePath[];
+  export type AccessScopePathListRequest = AccessScopePathRequest[];
+  export interface AccessScopePathRequest {
+    /**
+     * The source.
+     */
+    Source?: PathStatementRequest;
+    /**
+     * The destination.
+     */
+    Destination?: PathStatementRequest;
+    /**
+     * The through resources.
+     */
+    ThroughResources?: ThroughResourcesStatementRequestList;
+  }
   export interface AccountAttribute {
     /**
      * The name of the account attribute.
@@ -4297,6 +4634,13 @@ declare namespace EC2 {
   }
   export type ActiveInstanceSet = ActiveInstance[];
   export type ActivityStatus = "error"|"pending_fulfillment"|"pending_termination"|"fulfilled"|string;
+  export interface AddIpamOperatingRegion {
+    /**
+     * The name of the operating Region.
+     */
+    RegionName?: String;
+  }
+  export type AddIpamOperatingRegionSet = AddIpamOperatingRegion[];
   export type AddPrefixListEntries = AddPrefixListEntry[];
   export interface AddPrefixListEntry {
     /**
@@ -4385,6 +4729,7 @@ declare namespace EC2 {
     PtrRecordUpdate?: PtrUpdateStatus;
   }
   export type AddressAttributeName = "domain-name"|string;
+  export type AddressFamily = "ipv4"|"ipv6"|string;
   export type AddressList = Address[];
   export type AddressMaxResults = number;
   export type AddressSet = AddressAttribute[];
@@ -4509,6 +4854,46 @@ declare namespace EC2 {
      */
     HostIds?: ResponseHostIdList;
   }
+  export interface AllocateIpamPoolCidrRequest {
+    /**
+     * A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The ID of the IPAM pool from which you would like to allocate a CIDR.
+     */
+    IpamPoolId: IpamPoolId;
+    /**
+     * The CIDR you would like to allocate from the IPAM pool. Note the following:   If there is no DefaultNetmaskLength allocation rule set on the pool, you must specify either the NetmaskLength or the CIDR.   If the DefaultNetmaskLength allocation rule is set on the pool, you can specify either the NetmaskLength or the CIDR and the DefaultNetmaskLength allocation rule will be ignored.   Possible values: Any available IPv4 or IPv6 CIDR.
+     */
+    Cidr?: String;
+    /**
+     * The netmask length of the CIDR you would like to allocate from the IPAM pool. Note the following:   If there is no DefaultNetmaskLength allocation rule set on the pool, you must specify either the NetmaskLength or the CIDR.   If the DefaultNetmaskLength allocation rule is set on the pool, you can specify either the NetmaskLength or the CIDR and the DefaultNetmaskLength allocation rule will be ignored.   Possible netmask lengths for IPv4 addresses are 0 - 32. Possible netmask lengths for IPv6 addresses are 0 - 128.
+     */
+    NetmaskLength?: Integer;
+    /**
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see Ensuring Idempotency.
+     */
+    ClientToken?: String;
+    /**
+     * A description for the allocation.
+     */
+    Description?: String;
+    /**
+     * A preview of the next available CIDR in a pool.
+     */
+    PreviewNextCidr?: Boolean;
+    /**
+     * Exclude a particular CIDR range from being returned by the pool.
+     */
+    DisallowedCidrs?: IpamPoolAllocationDisallowedCidrs;
+  }
+  export interface AllocateIpamPoolCidrResult {
+    /**
+     * Information about the allocation created.
+     */
+    IpamPoolAllocation?: IpamPoolAllocation;
+  }
   export type AllocationId = string;
   export type AllocationIdList = AllocationId[];
   export type AllocationIds = AllocationId[];
@@ -4572,6 +4957,10 @@ declare namespace EC2 {
      * The Amazon Resource Name (ARN) of the component.
      */
     Arn?: String;
+    /**
+     * The name of the analysis component.
+     */
+    Name?: String;
   }
   export type AnalysisComponentList = AnalysisComponent[];
   export interface AnalysisLoadBalancerListener {
@@ -5101,6 +5490,22 @@ declare namespace EC2 {
      * An IPv6 CIDR block from the IPv6 address pool. You must also specify Ipv6Pool in the request. To let Amazon choose the IPv6 CIDR block for you, omit this parameter.
      */
     Ipv6CidrBlock?: String;
+    /**
+     * Associate a CIDR allocated from an IPv4 IPAM pool to a VPC. For more information about Amazon VPC IP Address Manager (IPAM), see What is IPAM? in the Amazon VPC IPAM User Guide.
+     */
+    Ipv4IpamPoolId?: IpamPoolId;
+    /**
+     * The netmask length of the IPv4 CIDR you would like to associate from an Amazon VPC IP Address Manager (IPAM) pool. For more information about IPAM, see What is IPAM? in the Amazon VPC IPAM User Guide. 
+     */
+    Ipv4NetmaskLength?: NetmaskLength;
+    /**
+     * Associates a CIDR allocated from an IPv6 IPAM pool to a VPC. For more information about Amazon VPC IP Address Manager (IPAM), see What is IPAM? in the Amazon VPC IPAM User Guide.
+     */
+    Ipv6IpamPoolId?: IpamPoolId;
+    /**
+     * The netmask length of the IPv6 CIDR you would like to associate from an Amazon VPC IP Address Manager (IPAM) pool. For more information about IPAM, see What is IPAM? in the Amazon VPC IPAM User Guide. 
+     */
+    Ipv6NetmaskLength?: NetmaskLength;
   }
   export interface AssociateVpcCidrBlockResult {
     /**
@@ -5598,6 +6003,7 @@ declare namespace EC2 {
   export type BootModeType = "legacy-bios"|"uefi"|string;
   export type BootModeTypeList = BootModeType[];
   export type BootModeValues = "legacy-bios"|"uefi"|string;
+  export type BoxedDouble = number;
   export type BundleId = string;
   export type BundleIdStringList = BundleId[];
   export interface BundleInstanceRequest {
@@ -7607,6 +8013,130 @@ declare namespace EC2 {
      */
     InternetGateway?: InternetGateway;
   }
+  export interface CreateIpamPoolRequest {
+    /**
+     * A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The ID of the scope in which you would like to create the IPAM pool.
+     */
+    IpamScopeId: IpamScopeId;
+    /**
+     * In IPAM, the locale is the Amazon Web Services Region where you want to make an IPAM pool available for allocations. Only resources in the same Region as the locale of the pool can get IP address allocations from the pool. You can only allocate a CIDR for a VPC, for example, from an IPAM pool that shares a locale with the VPC’s Region. Note that once you choose a Locale for a pool, you cannot modify it. If you do not choose a locale, resources in Regions others than the IPAM's home region cannot use CIDRs from this pool. Possible values: Any Amazon Web Services Region, such as us-east-1.
+     */
+    Locale?: String;
+    /**
+     * The ID of the source IPAM pool. Use this option to create a pool within an existing pool. Note that the CIDR you provision for the pool within the source pool must be available in the source pool's CIDR range.
+     */
+    SourceIpamPoolId?: IpamPoolId;
+    /**
+     * A description for the IPAM pool.
+     */
+    Description?: String;
+    /**
+     * The IP protocol assigned to this IPAM pool. You must choose either IPv4 or IPv6 protocol for a pool.
+     */
+    AddressFamily?: AddressFamily;
+    /**
+     * If selected, IPAM will continuously look for resources within the CIDR range of this pool and automatically import them as allocations into your IPAM. The CIDRs that will be allocated for these resources must not already be allocated to other resources in order for the import to succeed. IPAM will import a CIDR regardless of its compliance with the pool's allocation rules, so a resource might be imported and subsequently marked as noncompliant. If IPAM discovers multiple CIDRs that overlap, IPAM will import the largest CIDR only. If IPAM discovers multiple CIDRs with matching CIDRs, IPAM will randomly import one of them only.  A locale must be set on the pool for this feature to work.
+     */
+    AutoImport?: Boolean;
+    /**
+     * Determines if the pool is publicly advertisable. This option is not available for pools with AddressFamily set to ipv4.
+     */
+    PubliclyAdvertisable?: Boolean;
+    /**
+     * The minimum netmask length required for CIDR allocations in this IPAM pool to be compliant. The minimum netmask length must be less than the maximum netmask length. Possible netmask lengths for IPv4 addresses are 0 - 32. Possible netmask lengths for IPv6 addresses are 0 - 128.
+     */
+    AllocationMinNetmaskLength?: IpamNetmaskLength;
+    /**
+     * The maximum netmask length possible for CIDR allocations in this IPAM pool to be compliant. The maximum netmask length must be greater than the minimum netmask length. Possible netmask lengths for IPv4 addresses are 0 - 32. Possible netmask lengths for IPv6 addresses are 0 - 128.
+     */
+    AllocationMaxNetmaskLength?: IpamNetmaskLength;
+    /**
+     * The default netmask length for allocations added to this pool. If, for example, the CIDR assigned to this pool is 10.0.0.0/8 and you enter 16 here, new allocations will default to 10.0.0.0/16.
+     */
+    AllocationDefaultNetmaskLength?: IpamNetmaskLength;
+    /**
+     * Tags that are required for resources that use CIDRs from this IPAM pool. Resources that do not have these tags will not be allowed to allocate space from the pool. If the resources have their tags changed after they have allocated space or if the allocation tagging requirements are changed on the pool, the resource may be marked as noncompliant.
+     */
+    AllocationResourceTags?: RequestIpamResourceTagList;
+    /**
+     * The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.
+     */
+    TagSpecifications?: TagSpecificationList;
+    /**
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see Ensuring Idempotency.
+     */
+    ClientToken?: String;
+    /**
+     * Limits which service in Amazon Web Services that the pool can be used in. "ec2", for example, allows users to use space for Elastic IP addresses and VPCs.
+     */
+    AwsService?: IpamPoolAwsService;
+  }
+  export interface CreateIpamPoolResult {
+    /**
+     * Information about the IPAM pool created.
+     */
+    IpamPool?: IpamPool;
+  }
+  export interface CreateIpamRequest {
+    /**
+     * A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * A description for the IPAM.
+     */
+    Description?: String;
+    /**
+     * The operating Regions for the IPAM. Operating Regions are Amazon Web Services Regions where the IPAM is allowed to manage IP address CIDRs. IPAM only discovers and monitors resources in the Amazon Web Services Regions you select as operating Regions. For more information about operating Regions, see Create an IPAM in the Amazon VPC IPAM User Guide. 
+     */
+    OperatingRegions?: AddIpamOperatingRegionSet;
+    /**
+     * The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.
+     */
+    TagSpecifications?: TagSpecificationList;
+    /**
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see Ensuring Idempotency.
+     */
+    ClientToken?: String;
+  }
+  export interface CreateIpamResult {
+    /**
+     * Information about the IPAM created.
+     */
+    Ipam?: Ipam;
+  }
+  export interface CreateIpamScopeRequest {
+    /**
+     * A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The ID of the IPAM for which you're creating this scope.
+     */
+    IpamId: IpamId;
+    /**
+     * A description for the scope you're creating.
+     */
+    Description?: String;
+    /**
+     * The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.
+     */
+    TagSpecifications?: TagSpecificationList;
+    /**
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see Ensuring Idempotency.
+     */
+    ClientToken?: String;
+  }
+  export interface CreateIpamScopeResult {
+    /**
+     * Information about the created scope.
+     */
+    IpamScope?: IpamScope;
+  }
   export interface CreateKeyPairRequest {
     /**
      * A unique name for the key pair. Constraints: Up to 255 ASCII characters
@@ -7883,6 +8413,38 @@ declare namespace EC2 {
      */
     NetworkAcl?: NetworkAcl;
   }
+  export interface CreateNetworkInsightsAccessScopeRequest {
+    /**
+     * The paths to match.
+     */
+    MatchPaths?: AccessScopePathListRequest;
+    /**
+     * The paths to exclude.
+     */
+    ExcludePaths?: AccessScopePathListRequest;
+    /**
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to ensure idempotency.
+     */
+    ClientToken: String;
+    /**
+     * The tags to apply.
+     */
+    TagSpecifications?: TagSpecificationList;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface CreateNetworkInsightsAccessScopeResult {
+    /**
+     * The Network Access Scope.
+     */
+    NetworkInsightsAccessScope?: NetworkInsightsAccessScope;
+    /**
+     * The Network Access Scope content.
+     */
+    NetworkInsightsAccessScopeContent?: NetworkInsightsAccessScopeContent;
+  }
   export interface CreateNetworkInsightsPathRequest {
     /**
      * The IP address of the Amazon Web Services resource that is the source of the path.
@@ -8055,6 +8617,22 @@ declare namespace EC2 {
   }
   export interface CreatePlacementGroupResult {
     PlacementGroup?: PlacementGroup;
+  }
+  export interface CreatePublicIpv4PoolRequest {
+    /**
+     * A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.
+     */
+    TagSpecifications?: TagSpecificationList;
+  }
+  export interface CreatePublicIpv4PoolResult {
+    /**
+     * The ID of the public IPv4 pool.
+     */
+    PoolId?: Ipv4PoolEc2Id;
   }
   export interface CreateReplaceRootVolumeTaskRequest {
     /**
@@ -9149,7 +9727,7 @@ declare namespace EC2 {
     /**
      * The IPv4 network range for the VPC, in CIDR notation. For example, 10.0.0.0/16. We modify the specified CIDR block to its canonical form; for example, if you specify 100.68.0.18/18, we modify it to 100.68.0.0/18.
      */
-    CidrBlock: String;
+    CidrBlock?: String;
     /**
      * Requests an Amazon-provided IPv6 CIDR block with a /56 prefix length for the VPC. You cannot specify the range of IP addresses, or the size of the CIDR block.
      */
@@ -9162,6 +9740,22 @@ declare namespace EC2 {
      * The IPv6 CIDR block from the IPv6 address pool. You must also specify Ipv6Pool in the request. To let Amazon choose the IPv6 CIDR block for you, omit this parameter.
      */
     Ipv6CidrBlock?: String;
+    /**
+     * The ID of an IPv4 IPAM pool you want to use for allocating this VPC's CIDR. For more information, see What is IPAM? in the Amazon VPC IPAM User Guide. 
+     */
+    Ipv4IpamPoolId?: IpamPoolId;
+    /**
+     * The netmask length of the IPv4 CIDR you want to allocate to this VPC from an Amazon VPC IP Address Manager (IPAM) pool. For more information about IPAM, see What is IPAM? in the Amazon VPC IPAM User Guide.
+     */
+    Ipv4NetmaskLength?: NetmaskLength;
+    /**
+     * The ID of an IPv6 IPAM pool which will be used to allocate this VPC an IPv6 CIDR. IPAM is a VPC feature that you can use to automate your IP address management workflows including assigning, tracking, troubleshooting, and auditing IP addresses across Amazon Web Services Regions and accounts throughout your Amazon Web Services Organization. For more information, see What is IPAM? in the Amazon VPC IPAM User Guide.
+     */
+    Ipv6IpamPoolId?: IpamPoolId;
+    /**
+     * The netmask length of the IPv6 CIDR you want to allocate to this VPC from an Amazon VPC IP Address Manager (IPAM) pool. For more information about IPAM, see What is IPAM? in the Amazon VPC IPAM User Guide.
+     */
+    Ipv6NetmaskLength?: NetmaskLength;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -9537,6 +10131,54 @@ declare namespace EC2 {
      */
     InternetGatewayId: InternetGatewayId;
   }
+  export interface DeleteIpamPoolRequest {
+    /**
+     * A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The ID of the pool to delete.
+     */
+    IpamPoolId: IpamPoolId;
+  }
+  export interface DeleteIpamPoolResult {
+    /**
+     * Information about the results of the deletion.
+     */
+    IpamPool?: IpamPool;
+  }
+  export interface DeleteIpamRequest {
+    /**
+     * A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The ID of the IPAM to delete.
+     */
+    IpamId: IpamId;
+  }
+  export interface DeleteIpamResult {
+    /**
+     * Information about the results of the deletion.
+     */
+    Ipam?: Ipam;
+  }
+  export interface DeleteIpamScopeRequest {
+    /**
+     * A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The ID of the scope to delete.
+     */
+    IpamScopeId: IpamScopeId;
+  }
+  export interface DeleteIpamScopeResult {
+    /**
+     * Information about the results of the deletion.
+     */
+    IpamScope?: IpamScope;
+  }
   export interface DeleteKeyPairRequest {
     /**
      * The name of the key pair.
@@ -9729,6 +10371,38 @@ declare namespace EC2 {
      */
     NetworkAclId: NetworkAclId;
   }
+  export interface DeleteNetworkInsightsAccessScopeAnalysisRequest {
+    /**
+     * The ID of the Network Access Scope analysis.
+     */
+    NetworkInsightsAccessScopeAnalysisId: NetworkInsightsAccessScopeAnalysisId;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface DeleteNetworkInsightsAccessScopeAnalysisResult {
+    /**
+     * The ID of the Network Access Scope analysis.
+     */
+    NetworkInsightsAccessScopeAnalysisId?: NetworkInsightsAccessScopeAnalysisId;
+  }
+  export interface DeleteNetworkInsightsAccessScopeRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The ID of the Network Access Scope.
+     */
+    NetworkInsightsAccessScopeId: NetworkInsightsAccessScopeId;
+  }
+  export interface DeleteNetworkInsightsAccessScopeResult {
+    /**
+     * The ID of the Network Access Scope.
+     */
+    NetworkInsightsAccessScopeId?: NetworkInsightsAccessScopeId;
+  }
   export interface DeleteNetworkInsightsAnalysisRequest {
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
@@ -9800,6 +10474,22 @@ declare namespace EC2 {
      * The name of the placement group.
      */
     GroupName: PlacementGroupName;
+  }
+  export interface DeletePublicIpv4PoolRequest {
+    /**
+     * A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The ID of the public IPv4 pool you want to delete.
+     */
+    PoolId: Ipv4PoolEc2Id;
+  }
+  export interface DeletePublicIpv4PoolResult {
+    /**
+     * Information about the result of deleting the public IPv4 pool.
+     */
+    ReturnValue?: Boolean;
   }
   export interface DeleteQueuedReservedInstancesError {
     /**
@@ -10281,6 +10971,51 @@ declare namespace EC2 {
      */
     ByoipCidr?: ByoipCidr;
   }
+  export interface DeprovisionIpamPoolCidrRequest {
+    /**
+     * A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The ID of the pool that has the CIDR you want to deprovision.
+     */
+    IpamPoolId: IpamPoolId;
+    /**
+     * The CIDR which you want to deprovision from the pool.
+     */
+    Cidr?: String;
+  }
+  export interface DeprovisionIpamPoolCidrResult {
+    /**
+     * The deprovisioned pool CIDR.
+     */
+    IpamPoolCidr?: IpamPoolCidr;
+  }
+  export interface DeprovisionPublicIpv4PoolCidrRequest {
+    /**
+     * A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The ID of the pool that you want to deprovision the CIDR from.
+     */
+    PoolId: Ipv4PoolEc2Id;
+    /**
+     * The CIDR you want to deprovision from the pool.
+     */
+    Cidr: String;
+  }
+  export interface DeprovisionPublicIpv4PoolCidrResult {
+    /**
+     * The ID of the pool that you deprovisioned the CIDR from.
+     */
+    PoolId?: Ipv4PoolEc2Id;
+    /**
+     * The deprovisioned CIDRs.
+     */
+    DeprovisionedAddresses?: DeprovisionedAddressSet;
+  }
+  export type DeprovisionedAddressSet = String[];
   export interface DeregisterImageRequest {
     /**
      * The ID of the AMI.
@@ -11886,6 +12621,102 @@ declare namespace EC2 {
      */
     NextToken?: String;
   }
+  export interface DescribeIpamPoolsRequest {
+    /**
+     * A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * One or more filters for the request. For more information about filtering, see Filtering CLI output.
+     */
+    Filters?: FilterList;
+    /**
+     * The maximum number of results to return in the request.
+     */
+    MaxResults?: IpamMaxResults;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: NextToken;
+    /**
+     * The IDs of the IPAM pools you would like information on.
+     */
+    IpamPoolIds?: ValueStringList;
+  }
+  export interface DescribeIpamPoolsResult {
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: NextToken;
+    /**
+     * Information about the IPAM pools.
+     */
+    IpamPools?: IpamPoolSet;
+  }
+  export interface DescribeIpamScopesRequest {
+    /**
+     * A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * One or more filters for the request. For more information about filtering, see Filtering CLI output.
+     */
+    Filters?: FilterList;
+    /**
+     * The maximum number of results to return in the request.
+     */
+    MaxResults?: IpamMaxResults;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: NextToken;
+    /**
+     * The IDs of the scopes you want information on.
+     */
+    IpamScopeIds?: ValueStringList;
+  }
+  export interface DescribeIpamScopesResult {
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: NextToken;
+    /**
+     * The scopes you want information on.
+     */
+    IpamScopes?: IpamScopeSet;
+  }
+  export interface DescribeIpamsRequest {
+    /**
+     * A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * One or more filters for the request. For more information about filtering, see Filtering CLI output.
+     */
+    Filters?: FilterList;
+    /**
+     * The maximum number of results to return in the request.
+     */
+    MaxResults?: IpamMaxResults;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: NextToken;
+    /**
+     * The IDs of the IPAMs you want information on.
+     */
+    IpamIds?: ValueStringList;
+  }
+  export interface DescribeIpamsResult {
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: NextToken;
+    /**
+     * Information about the IPAMs.
+     */
+    Ipams?: IpamSet;
+  }
   export interface DescribeIpv6PoolsRequest {
     /**
      * The IDs of the IPv6 address pools.
@@ -12345,6 +13176,82 @@ declare namespace EC2 {
      * Information about one or more network ACLs.
      */
     NetworkAcls?: NetworkAclList;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: String;
+  }
+  export interface DescribeNetworkInsightsAccessScopeAnalysesRequest {
+    /**
+     * The IDs of the Network Access Scope analyses.
+     */
+    NetworkInsightsAccessScopeAnalysisIds?: NetworkInsightsAccessScopeAnalysisIdList;
+    /**
+     * The ID of the Network Access Scope.
+     */
+    NetworkInsightsAccessScopeId?: NetworkInsightsAccessScopeId;
+    /**
+     * Filters the results based on the start time. The analysis must have started on or after this time.
+     */
+    AnalysisStartTimeBegin?: MillisecondDateTime;
+    /**
+     * Filters the results based on the start time. The analysis must have started on or before this time.
+     */
+    AnalysisStartTimeEnd?: MillisecondDateTime;
+    /**
+     * There are no supported filters.
+     */
+    Filters?: FilterList;
+    /**
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
+     */
+    MaxResults?: NetworkInsightsMaxResults;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: NextToken;
+  }
+  export interface DescribeNetworkInsightsAccessScopeAnalysesResult {
+    /**
+     * The Network Access Scope analyses.
+     */
+    NetworkInsightsAccessScopeAnalyses?: NetworkInsightsAccessScopeAnalysisList;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: String;
+  }
+  export interface DescribeNetworkInsightsAccessScopesRequest {
+    /**
+     * The IDs of the Network Access Scopes.
+     */
+    NetworkInsightsAccessScopeIds?: NetworkInsightsAccessScopeIdList;
+    /**
+     * There are no supported filters.
+     */
+    Filters?: FilterList;
+    /**
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
+     */
+    MaxResults?: NetworkInsightsMaxResults;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: NextToken;
+  }
+  export interface DescribeNetworkInsightsAccessScopesResult {
+    /**
+     * The Network Access Scopes.
+     */
+    NetworkInsightsAccessScopes?: NetworkInsightsAccessScopeList;
     /**
      * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
      */
@@ -14632,6 +15539,22 @@ declare namespace EC2 {
      */
     Return?: Boolean;
   }
+  export interface DisableIpamOrganizationAdminAccountRequest {
+    /**
+     * A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The Organizations member account ID that you want to disable as IPAM account.
+     */
+    DelegatedAdminAccountId: String;
+  }
+  export interface DisableIpamOrganizationAdminAccountResult {
+    /**
+     * The result of disabling the IPAM account.
+     */
+    Success?: Boolean;
+  }
   export interface DisableSerialConsoleAccessRequest {
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
@@ -15392,6 +16315,22 @@ declare namespace EC2 {
      */
     Return?: Boolean;
   }
+  export interface EnableIpamOrganizationAdminAccountRequest {
+    /**
+     * A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The Organizations member account ID that you want to enable as the IPAM account.
+     */
+    DelegatedAdminAccountId: String;
+  }
+  export interface EnableIpamOrganizationAdminAccountResult {
+    /**
+     * The result of enabling the IPAM account.
+     */
+    Success?: Boolean;
+  }
   export interface EnableSerialConsoleAccessRequest {
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
@@ -16015,6 +16954,7 @@ declare namespace EC2 {
     Values?: ValueStringList;
   }
   export type FilterList = Filter[];
+  export type FindingsFound = "true"|"false"|"unknown"|string;
   export type FleetActivityStatus = "error"|"pending_fulfillment"|"pending_termination"|"fulfilled"|string;
   export interface FleetCapacityReservation {
     /**
@@ -16861,6 +17801,168 @@ declare namespace EC2 {
      */
     NextToken?: String;
   }
+  export interface GetIpamAddressHistoryRequest {
+    /**
+     * A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The CIDR you want the history of. The CIDR can be an IPv4 or IPv6 IP address range. If you enter a /16 IPv4 CIDR, you will get records that match it exactly. You will not get records for any subnets within the /16 CIDR.
+     */
+    Cidr: String;
+    /**
+     * The ID of the IPAM scope that the CIDR is in.
+     */
+    IpamScopeId: IpamScopeId;
+    /**
+     * The ID of the VPC you want your history records filtered by.
+     */
+    VpcId?: String;
+    /**
+     * The start of the time period for which you are looking for history. If you omit this option, it will default to the value of EndTime.
+     */
+    StartTime?: MillisecondDateTime;
+    /**
+     * The end of the time period for which you are looking for history. If you omit this option, it will default to the current time.
+     */
+    EndTime?: MillisecondDateTime;
+    /**
+     * The maximum number of historical results you would like returned per page. Defaults to 100.
+     */
+    MaxResults?: IpamAddressHistoryMaxResults;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: NextToken;
+  }
+  export interface GetIpamAddressHistoryResult {
+    /**
+     * A historical record for a CIDR within an IPAM scope. If the CIDR is associated with an EC2 instance, you will see an object in the response for the instance and one for the network interface.
+     */
+    HistoryRecords?: IpamAddressHistoryRecordSet;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: NextToken;
+  }
+  export type GetIpamPoolAllocationsMaxResults = number;
+  export interface GetIpamPoolAllocationsRequest {
+    /**
+     * A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The ID of the IPAM pool you want to see the allocations for.
+     */
+    IpamPoolId: IpamPoolId;
+    /**
+     * The ID of the allocation.
+     */
+    IpamPoolAllocationId?: IpamPoolAllocationId;
+    /**
+     * One or more filters for the request. For more information about filtering, see Filtering CLI output.
+     */
+    Filters?: FilterList;
+    /**
+     * The maximum number of results you would like returned per page.
+     */
+    MaxResults?: GetIpamPoolAllocationsMaxResults;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: NextToken;
+  }
+  export interface GetIpamPoolAllocationsResult {
+    /**
+     * The IPAM pool allocations you want information on.
+     */
+    IpamPoolAllocations?: IpamPoolAllocationSet;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: NextToken;
+  }
+  export interface GetIpamPoolCidrsRequest {
+    /**
+     * A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The ID of the IPAM pool you want the CIDR for.
+     */
+    IpamPoolId: IpamPoolId;
+    /**
+     * One or more filters for the request. For more information about filtering, see Filtering CLI output.
+     */
+    Filters?: FilterList;
+    /**
+     * The maximum number of results to return in the request.
+     */
+    MaxResults?: IpamMaxResults;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: NextToken;
+  }
+  export interface GetIpamPoolCidrsResult {
+    /**
+     * Information about the CIDRs provisioned to an IPAM pool.
+     */
+    IpamPoolCidrs?: IpamPoolCidrSet;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: NextToken;
+  }
+  export interface GetIpamResourceCidrsRequest {
+    /**
+     * A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * One or more filters for the request. For more information about filtering, see Filtering CLI output.
+     */
+    Filters?: FilterList;
+    /**
+     * The maximum number of results to return in the request.
+     */
+    MaxResults?: IpamMaxResults;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: NextToken;
+    /**
+     * The ID of the scope that the resource is in.
+     */
+    IpamScopeId: IpamScopeId;
+    /**
+     * The ID of the IPAM pool that the resource is in.
+     */
+    IpamPoolId?: IpamPoolId;
+    /**
+     * The ID of the resource.
+     */
+    ResourceId?: String;
+    /**
+     * The resource type.
+     */
+    ResourceType?: IpamResourceType;
+    ResourceTag?: RequestIpamResourceTag;
+    /**
+     * The ID of the Amazon Web Services account that owns the resource.
+     */
+    ResourceOwner?: String;
+  }
+  export interface GetIpamResourceCidrsResult {
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: NextToken;
+    /**
+     * The resource CIDRs.
+     */
+    IpamResourceCidrs?: IpamResourceCidrSet;
+  }
   export interface GetLaunchTemplateDataRequest {
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
@@ -16937,6 +18039,58 @@ declare namespace EC2 {
      * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
      */
     NextToken?: NextToken;
+  }
+  export interface GetNetworkInsightsAccessScopeAnalysisFindingsRequest {
+    /**
+     * The ID of the Network Access Scope analysis.
+     */
+    NetworkInsightsAccessScopeAnalysisId: NetworkInsightsAccessScopeAnalysisId;
+    /**
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
+     */
+    MaxResults?: NetworkInsightsMaxResults;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: NextToken;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface GetNetworkInsightsAccessScopeAnalysisFindingsResult {
+    /**
+     * The ID of the Network Access Scope analysis.
+     */
+    NetworkInsightsAccessScopeAnalysisId?: NetworkInsightsAccessScopeAnalysisId;
+    /**
+     * The status of Network Access Scope Analysis.
+     */
+    AnalysisStatus?: AnalysisStatus;
+    /**
+     * The findings associated with Network Access Scope Analysis.
+     */
+    AnalysisFindings?: AccessScopeAnalysisFindingList;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: String;
+  }
+  export interface GetNetworkInsightsAccessScopeContentRequest {
+    /**
+     * The ID of the Network Access Scope.
+     */
+    NetworkInsightsAccessScopeId: NetworkInsightsAccessScopeId;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface GetNetworkInsightsAccessScopeContentResult {
+    /**
+     * The Network Access Scope content.
+     */
+    NetworkInsightsAccessScopeContent?: NetworkInsightsAccessScopeContent;
   }
   export interface GetPasswordDataRequest {
     /**
@@ -19835,6 +20989,406 @@ declare namespace EC2 {
   }
   export type IpRangeList = IpRange[];
   export type IpRanges = String[];
+  export interface Ipam {
+    /**
+     * The Amazon Web Services account ID of the owner of the IPAM.
+     */
+    OwnerId?: String;
+    /**
+     * The ID of the IPAM.
+     */
+    IpamId?: IpamId;
+    /**
+     * The ARN of the IPAM.
+     */
+    IpamArn?: ResourceArn;
+    /**
+     * The Amazon Web Services Region of the IPAM.
+     */
+    IpamRegion?: String;
+    /**
+     * The ID of the IPAM's default public scope.
+     */
+    PublicDefaultScopeId?: IpamScopeId;
+    /**
+     * The ID of the IPAM's default private scope.
+     */
+    PrivateDefaultScopeId?: IpamScopeId;
+    /**
+     * The number of scopes in the IPAM. The scope quota is 5. For more information on quotas, see Quotas in IPAM in the Amazon VPC IPAM User Guide. 
+     */
+    ScopeCount?: Integer;
+    /**
+     * The description for the IPAM.
+     */
+    Description?: String;
+    /**
+     * The operating Regions for an IPAM. Operating Regions are Amazon Web Services Regions where the IPAM is allowed to manage IP address CIDRs. IPAM only discovers and monitors resources in the Amazon Web Services Regions you select as operating Regions. For more information about operating Regions, see Create an IPAM in the Amazon VPC IPAM User Guide.
+     */
+    OperatingRegions?: IpamOperatingRegionSet;
+    /**
+     * The state of the IPAM.
+     */
+    State?: IpamState;
+    /**
+     * The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.
+     */
+    Tags?: TagList;
+  }
+  export type IpamAddressHistoryMaxResults = number;
+  export interface IpamAddressHistoryRecord {
+    /**
+     * The ID of the resource owner.
+     */
+    ResourceOwnerId?: String;
+    /**
+     * The Amazon Web Services Region of the resource.
+     */
+    ResourceRegion?: String;
+    /**
+     * The type of the resource.
+     */
+    ResourceType?: IpamAddressHistoryResourceType;
+    /**
+     * The ID of the resource.
+     */
+    ResourceId?: String;
+    /**
+     * The CIDR of the resource.
+     */
+    ResourceCidr?: String;
+    /**
+     * The name of the resource.
+     */
+    ResourceName?: String;
+    /**
+     * The compliance status of a resource. For more information on compliance statuses, see Monitor CIDR usage by resource in the Amazon VPC IPAM User Guide.
+     */
+    ResourceComplianceStatus?: IpamComplianceStatus;
+    /**
+     * The overlap status of an IPAM resource. The overlap status tells you if the CIDR for a resource overlaps with another CIDR in the scope. For more information on overlap statuses, see Monitor CIDR usage by resource in the Amazon VPC IPAM User Guide.
+     */
+    ResourceOverlapStatus?: IpamOverlapStatus;
+    /**
+     * The VPC ID of the resource.
+     */
+    VpcId?: String;
+    /**
+     * Sampled start time of the resource-to-CIDR association within the IPAM scope. Changes are picked up in periodic snapshots, so the start time may have occurred before this specific time.
+     */
+    SampledStartTime?: MillisecondDateTime;
+    /**
+     * Sampled end time of the resource-to-CIDR association within the IPAM scope. Changes are picked up in periodic snapshots, so the end time may have occurred before this specific time.
+     */
+    SampledEndTime?: MillisecondDateTime;
+  }
+  export type IpamAddressHistoryRecordSet = IpamAddressHistoryRecord[];
+  export type IpamAddressHistoryResourceType = "eip"|"vpc"|"subnet"|"network-interface"|"instance"|string;
+  export interface IpamCidrAuthorizationContext {
+    /**
+     * The plain-text authorization message for the prefix and account.
+     */
+    Message?: String;
+    /**
+     * The signed authorization message for the prefix and account.
+     */
+    Signature?: String;
+  }
+  export type IpamComplianceStatus = "compliant"|"noncompliant"|"unmanaged"|"ignored"|string;
+  export type IpamId = string;
+  export type IpamManagementState = "managed"|"unmanaged"|"ignored"|string;
+  export type IpamMaxResults = number;
+  export type IpamNetmaskLength = number;
+  export interface IpamOperatingRegion {
+    /**
+     * The name of the operating Region.
+     */
+    RegionName?: String;
+  }
+  export type IpamOperatingRegionSet = IpamOperatingRegion[];
+  export type IpamOverlapStatus = "overlapping"|"nonoverlapping"|"ignored"|string;
+  export interface IpamPool {
+    /**
+     * The Amazon Web Services account ID of the owner of the IPAM pool.
+     */
+    OwnerId?: String;
+    /**
+     * The ID of the IPAM pool.
+     */
+    IpamPoolId?: IpamPoolId;
+    /**
+     * The ID of the source IPAM pool. You can use this option to create an IPAM pool within an existing source pool.
+     */
+    SourceIpamPoolId?: IpamPoolId;
+    /**
+     * The ARN of the IPAM pool.
+     */
+    IpamPoolArn?: ResourceArn;
+    /**
+     * The ARN of the scope of the IPAM pool.
+     */
+    IpamScopeArn?: ResourceArn;
+    /**
+     * In IPAM, a scope is the highest-level container within IPAM. An IPAM contains two default scopes. Each scope represents the IP space for a single network. The private scope is intended for all private IP address space. The public scope is intended for all public IP address space. Scopes enable you to reuse IP addresses across multiple unconnected networks without causing IP address overlap or conflict.
+     */
+    IpamScopeType?: IpamScopeType;
+    /**
+     * The ARN of the IPAM.
+     */
+    IpamArn?: ResourceArn;
+    /**
+     * The Amazon Web Services Region of the IPAM pool.
+     */
+    IpamRegion?: String;
+    /**
+     * The locale of the IPAM pool. In IPAM, the locale is the Amazon Web Services Region where you want to make an IPAM pool available for allocations. Only resources in the same Region as the locale of the pool can get IP address allocations from the pool. You can only allocate a CIDR for a VPC, for example, from an IPAM pool that shares a locale with the VPC’s Region. Note that once you choose a Locale for a pool, you cannot modify it. If you choose an Amazon Web Services Region for locale that has not been configured as an operating Region for the IPAM, you'll get an error.
+     */
+    Locale?: String;
+    /**
+     * The depth of pools in your IPAM pool. The pool depth quota is 10. For more information, see Quotas in IPAM in the Amazon VPC IPAM User Guide. 
+     */
+    PoolDepth?: Integer;
+    /**
+     * The state of the IPAM pool.
+     */
+    State?: IpamPoolState;
+    /**
+     * A message related to the failed creation of an IPAM pool.
+     */
+    StateMessage?: String;
+    /**
+     * The description of the IPAM pool.
+     */
+    Description?: String;
+    /**
+     * If selected, IPAM will continuously look for resources within the CIDR range of this pool and automatically import them as allocations into your IPAM. The CIDRs that will be allocated for these resources must not already be allocated to other resources in order for the import to succeed. IPAM will import a CIDR regardless of its compliance with the pool's allocation rules, so a resource might be imported and subsequently marked as noncompliant. If IPAM discovers multiple CIDRs that overlap, IPAM will import the largest CIDR only. If IPAM discovers multiple CIDRs with matching CIDRs, IPAM will randomly import one of them only.  A locale must be set on the pool for this feature to work.
+     */
+    AutoImport?: Boolean;
+    /**
+     * Determines if a pool is publicly advertisable. This option is not available for pools with AddressFamily set to ipv4.
+     */
+    PubliclyAdvertisable?: Boolean;
+    /**
+     * The address family of the pool.
+     */
+    AddressFamily?: AddressFamily;
+    /**
+     * The minimum netmask length required for CIDR allocations in this IPAM pool to be compliant. The minimum netmask length must be less than the maximum netmask length. Possible netmask lengths for IPv4 addresses are 0 - 32. Possible netmask lengths for IPv6 addresses are 0 - 128.
+     */
+    AllocationMinNetmaskLength?: IpamNetmaskLength;
+    /**
+     * The maximum netmask length possible for CIDR allocations in this IPAM pool to be compliant. The maximum netmask length must be greater than the minimum netmask length. Possible netmask lengths for IPv4 addresses are 0 - 32. Possible netmask lengths for IPv6 addresses are 0 - 128.
+     */
+    AllocationMaxNetmaskLength?: IpamNetmaskLength;
+    /**
+     * The default netmask length for allocations added to this pool. If, for example, the CIDR assigned to this pool is 10.0.0.0/8 and you enter 16 here, new allocations will default to 10.0.0.0/16.
+     */
+    AllocationDefaultNetmaskLength?: IpamNetmaskLength;
+    /**
+     * Tags that are required for resources that use CIDRs from this IPAM pool. Resources that do not have these tags will not be allowed to allocate space from the pool. If the resources have their tags changed after they have allocated space or if the allocation tagging requirements are changed on the pool, the resource may be marked as noncompliant.
+     */
+    AllocationResourceTags?: IpamResourceTagList;
+    /**
+     * The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.
+     */
+    Tags?: TagList;
+    /**
+     * Limits which service in Amazon Web Services that the pool can be used in. "ec2", for example, allows users to use space for Elastic IP addresses and VPCs.
+     */
+    AwsService?: IpamPoolAwsService;
+  }
+  export interface IpamPoolAllocation {
+    /**
+     * The CIDR for the allocation. A CIDR is a representation of an IP address and its associated network mask (or netmask) and refers to a range of IP addresses. An IPv4 CIDR example is 10.24.34.0/23. An IPv6 CIDR example is 2001:DB8::/32.
+     */
+    Cidr?: String;
+    /**
+     * The ID of an allocation.
+     */
+    IpamPoolAllocationId?: IpamPoolAllocationId;
+    /**
+     * A description of the pool allocation.
+     */
+    Description?: String;
+    /**
+     * The ID of the resource.
+     */
+    ResourceId?: String;
+    /**
+     * The type of the resource.
+     */
+    ResourceType?: IpamPoolAllocationResourceType;
+    /**
+     * The Amazon Web Services Region of the resource.
+     */
+    ResourceRegion?: String;
+    /**
+     * The owner of the resource.
+     */
+    ResourceOwner?: String;
+  }
+  export type IpamPoolAllocationDisallowedCidrs = String[];
+  export type IpamPoolAllocationId = string;
+  export type IpamPoolAllocationResourceType = "ipam-pool"|"vpc"|"ec2-public-ipv4-pool"|"custom"|string;
+  export type IpamPoolAllocationSet = IpamPoolAllocation[];
+  export type IpamPoolAwsService = "ec2"|string;
+  export interface IpamPoolCidr {
+    /**
+     * The CIDR provisioned to the IPAM pool. A CIDR is a representation of an IP address and its associated network mask (or netmask) and refers to a range of IP addresses. An IPv4 CIDR example is 10.24.34.0/23. An IPv6 CIDR example is 2001:DB8::/32.
+     */
+    Cidr?: String;
+    /**
+     * The state of the CIDR.
+     */
+    State?: IpamPoolCidrState;
+    /**
+     * Details related to why an IPAM pool CIDR failed to be provisioned.
+     */
+    FailureReason?: IpamPoolCidrFailureReason;
+  }
+  export type IpamPoolCidrFailureCode = "cidr-not-available"|string;
+  export interface IpamPoolCidrFailureReason {
+    /**
+     * An error code related to why an IPAM pool CIDR failed to be provisioned.
+     */
+    Code?: IpamPoolCidrFailureCode;
+    /**
+     * A message related to why an IPAM pool CIDR failed to be provisioned.
+     */
+    Message?: String;
+  }
+  export type IpamPoolCidrSet = IpamPoolCidr[];
+  export type IpamPoolCidrState = "pending-provision"|"provisioned"|"failed-provision"|"pending-deprovision"|"deprovisioned"|"failed-deprovision"|"pending-import"|"failed-import"|string;
+  export type IpamPoolId = string;
+  export type IpamPoolSet = IpamPool[];
+  export type IpamPoolState = "create-in-progress"|"create-complete"|"create-failed"|"modify-in-progress"|"modify-complete"|"modify-failed"|"delete-in-progress"|"delete-complete"|"delete-failed"|string;
+  export interface IpamResourceCidr {
+    /**
+     * The IPAM ID for an IPAM resource.
+     */
+    IpamId?: IpamId;
+    /**
+     * The scope ID for an IPAM resource.
+     */
+    IpamScopeId?: IpamScopeId;
+    /**
+     * The pool ID for an IPAM resource.
+     */
+    IpamPoolId?: IpamPoolId;
+    /**
+     * The Amazon Web Services Region for an IPAM resource.
+     */
+    ResourceRegion?: String;
+    /**
+     * The Amazon Web Services account number of the owner of an IPAM resource.
+     */
+    ResourceOwnerId?: String;
+    /**
+     * The ID of an IPAM resource.
+     */
+    ResourceId?: String;
+    /**
+     * The name of an IPAM resource.
+     */
+    ResourceName?: String;
+    /**
+     * The CIDR for an IPAM resource.
+     */
+    ResourceCidr?: String;
+    /**
+     * The type of IPAM resource.
+     */
+    ResourceType?: IpamResourceType;
+    /**
+     * The tags for an IPAM resource.
+     */
+    ResourceTags?: IpamResourceTagList;
+    /**
+     * The IP address space in the IPAM pool that is allocated to this resource. To convert the decimal to a percentage, multiply the decimal by 100.
+     */
+    IpUsage?: BoxedDouble;
+    /**
+     * The compliance status of the IPAM resource. For more information on compliance statuses, see Monitor CIDR usage by resource in the Amazon VPC IPAM User Guide.
+     */
+    ComplianceStatus?: IpamComplianceStatus;
+    /**
+     * The management state of the resource. For more information about management states, see Monitor CIDR usage by resource in the Amazon VPC IPAM User Guide.
+     */
+    ManagementState?: IpamManagementState;
+    /**
+     * The overlap status of an IPAM resource. The overlap status tells you if the CIDR for a resource overlaps with another CIDR in the scope. For more information on overlap statuses, see Monitor CIDR usage by resource in the Amazon VPC IPAM User Guide.
+     */
+    OverlapStatus?: IpamOverlapStatus;
+    /**
+     * The ID of a VPC.
+     */
+    VpcId?: String;
+  }
+  export type IpamResourceCidrSet = IpamResourceCidr[];
+  export interface IpamResourceTag {
+    /**
+     * The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.
+     */
+    Key?: String;
+    /**
+     * The value of the tag.
+     */
+    Value?: String;
+  }
+  export type IpamResourceTagList = IpamResourceTag[];
+  export type IpamResourceType = "vpc"|"subnet"|"eip"|"public-ipv4-pool"|"ipv6-pool"|string;
+  export interface IpamScope {
+    /**
+     * The Amazon Web Services account ID of the owner of the scope.
+     */
+    OwnerId?: String;
+    /**
+     * The ID of the scope.
+     */
+    IpamScopeId?: IpamScopeId;
+    /**
+     * The ARN of the scope.
+     */
+    IpamScopeArn?: ResourceArn;
+    /**
+     * The ARN of the IPAM.
+     */
+    IpamArn?: ResourceArn;
+    /**
+     * The Amazon Web Services Region of the IPAM scope.
+     */
+    IpamRegion?: String;
+    /**
+     * The type of the scope.
+     */
+    IpamScopeType?: IpamScopeType;
+    /**
+     * Defines if the scope is the default scope or not.
+     */
+    IsDefault?: Boolean;
+    /**
+     * The description of the scope.
+     */
+    Description?: String;
+    /**
+     * The number of pools in the scope.
+     */
+    PoolCount?: Integer;
+    /**
+     * The state of the IPAM scope.
+     */
+    State?: IpamScopeState;
+    /**
+     * The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.
+     */
+    Tags?: TagList;
+  }
+  export type IpamScopeId = string;
+  export type IpamScopeSet = IpamScope[];
+  export type IpamScopeState = "create-in-progress"|"create-complete"|"create-failed"|"modify-in-progress"|"modify-complete"|"modify-failed"|"delete-in-progress"|"delete-complete"|"delete-failed"|string;
+  export type IpamScopeType = "public"|"private"|string;
+  export type IpamSet = Ipam[];
+  export type IpamState = "create-in-progress"|"create-complete"|"create-failed"|"modify-in-progress"|"modify-complete"|"modify-failed"|"delete-in-progress"|"delete-complete"|"delete-failed"|string;
   export type Ipv4PoolEc2Id = string;
   export type Ipv4PrefixList = Ipv4PrefixSpecificationRequest[];
   export type Ipv4PrefixListResponse = Ipv4PrefixSpecificationResponse[];
@@ -21886,6 +23440,135 @@ declare namespace EC2 {
      */
     Return?: Boolean;
   }
+  export interface ModifyIpamPoolRequest {
+    /**
+     * A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The ID of the IPAM pool you want to modify.
+     */
+    IpamPoolId: IpamPoolId;
+    /**
+     * The description of the IPAM pool you want to modify.
+     */
+    Description?: String;
+    /**
+     * If true, IPAM will continuously look for resources within the CIDR range of this pool and automatically import them as allocations into your IPAM. The CIDRs that will be allocated for these resources must not already be allocated to other resources in order for the import to succeed. IPAM will import a CIDR regardless of its compliance with the pool's allocation rules, so a resource might be imported and subsequently marked as noncompliant. If IPAM discovers multiple CIDRs that overlap, IPAM will import the largest CIDR only. If IPAM discovers multiple CIDRs with matching CIDRs, IPAM will randomly import one of them only.  A locale must be set on the pool for this feature to work.
+     */
+    AutoImport?: Boolean;
+    /**
+     * The minimum netmask length required for CIDR allocations in this IPAM pool to be compliant. Possible netmask lengths for IPv4 addresses are 0 - 32. Possible netmask lengths for IPv6 addresses are 0 - 128. The minimum netmask length must be less than the maximum netmask length.
+     */
+    AllocationMinNetmaskLength?: IpamNetmaskLength;
+    /**
+     * The maximum netmask length possible for CIDR allocations in this IPAM pool to be compliant. Possible netmask lengths for IPv4 addresses are 0 - 32. Possible netmask lengths for IPv6 addresses are 0 - 128.The maximum netmask length must be greater than the minimum netmask length.
+     */
+    AllocationMaxNetmaskLength?: IpamNetmaskLength;
+    /**
+     * The default netmask length for allocations added to this pool. If, for example, the CIDR assigned to this pool is 10.0.0.0/8 and you enter 16 here, new allocations will default to 10.0.0.0/16.
+     */
+    AllocationDefaultNetmaskLength?: IpamNetmaskLength;
+    /**
+     * Clear the default netmask length allocation rule for this pool.
+     */
+    ClearAllocationDefaultNetmaskLength?: Boolean;
+    /**
+     * Add tag allocation rules to a pool. For more information about allocation rules, see Create a top-level pool in the Amazon VPC IPAM User Guide.
+     */
+    AddAllocationResourceTags?: RequestIpamResourceTagList;
+    /**
+     * Remove tag allocation rules from a pool.
+     */
+    RemoveAllocationResourceTags?: RequestIpamResourceTagList;
+  }
+  export interface ModifyIpamPoolResult {
+    /**
+     * The results of the modification.
+     */
+    IpamPool?: IpamPool;
+  }
+  export interface ModifyIpamRequest {
+    /**
+     * A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The ID of the IPAM you want to modify.
+     */
+    IpamId: IpamId;
+    /**
+     * The description of the IPAM you want to modify.
+     */
+    Description?: String;
+    /**
+     * Choose the operating Regions for the IPAM. Operating Regions are Amazon Web Services Regions where the IPAM is allowed to manage IP address CIDRs. IPAM only discovers and monitors resources in the Amazon Web Services Regions you select as operating Regions. For more information about operating Regions, see Create an IPAM in the Amazon VPC IPAM User Guide.
+     */
+    AddOperatingRegions?: AddIpamOperatingRegionSet;
+    /**
+     * The operating Regions to remove.
+     */
+    RemoveOperatingRegions?: RemoveIpamOperatingRegionSet;
+  }
+  export interface ModifyIpamResourceCidrRequest {
+    /**
+     * A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The ID of the resource you want to modify.
+     */
+    ResourceId: String;
+    /**
+     * The CIDR of the resource you want to modify.
+     */
+    ResourceCidr: String;
+    /**
+     * The Amazon Web Services Region of the resource you want to modify.
+     */
+    ResourceRegion: String;
+    /**
+     * The ID of the current scope that the resource CIDR is in.
+     */
+    CurrentIpamScopeId: IpamScopeId;
+    /**
+     * The ID of the scope you want to transfer the resource CIDR to.
+     */
+    DestinationIpamScopeId?: IpamScopeId;
+    /**
+     * Determines if the resource is monitored by IPAM. If a resource is monitored, the resource is discovered by IPAM and you can view details about the resource’s CIDR.
+     */
+    Monitored: Boolean;
+  }
+  export interface ModifyIpamResourceCidrResult {
+    IpamResourceCidr?: IpamResourceCidr;
+  }
+  export interface ModifyIpamResult {
+    /**
+     * The results of the modification.
+     */
+    Ipam?: Ipam;
+  }
+  export interface ModifyIpamScopeRequest {
+    /**
+     * A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The ID of the scope you want to modify.
+     */
+    IpamScopeId: IpamScopeId;
+    /**
+     * The description of the scope you want to modify.
+     */
+    Description?: String;
+  }
+  export interface ModifyIpamScopeResult {
+    /**
+     * The results of the modification.
+     */
+    IpamScope?: IpamScope;
+  }
   export interface ModifyLaunchTemplateRequest {
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
@@ -22894,6 +24577,27 @@ declare namespace EC2 {
      */
     Status?: Status;
   }
+  export interface MoveByoipCidrToIpamRequest {
+    /**
+     * A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The BYOIP CIDR.
+     */
+    Cidr?: String;
+    /**
+     * The IPAM pool ID.
+     */
+    IpamPoolId?: IpamPoolId;
+    /**
+     * The Amazon Web Services account ID of the owner of the IPAM pool.
+     */
+    IpamPoolOwner?: String;
+  }
+  export interface MoveByoipCidrToIpamResult {
+    ByoipCidr?: ByoipCidr;
+  }
   export type MoveStatus = "movingToVpc"|"restoringToClassic"|string;
   export interface MovingAddressStatus {
     /**
@@ -22980,6 +24684,7 @@ declare namespace EC2 {
   export type NatGatewayIdStringList = NatGatewayId[];
   export type NatGatewayList = NatGateway[];
   export type NatGatewayState = "pending"|"failed"|"available"|"deleting"|"deleted"|string;
+  export type NetmaskLength = number;
   export interface NetworkAcl {
     /**
      * Any associations between the network ACL and one or more subnets
@@ -23130,6 +24835,94 @@ declare namespace EC2 {
      */
     EncryptionInTransitSupported?: EncryptionInTransitSupported;
   }
+  export interface NetworkInsightsAccessScope {
+    /**
+     * The ID of the Network Access Scope.
+     */
+    NetworkInsightsAccessScopeId?: NetworkInsightsAccessScopeId;
+    /**
+     * The Amazon Resource Name (ARN) of the Network Access Scope.
+     */
+    NetworkInsightsAccessScopeArn?: ResourceArn;
+    /**
+     * The creation date.
+     */
+    CreatedDate?: MillisecondDateTime;
+    /**
+     * The last updated date.
+     */
+    UpdatedDate?: MillisecondDateTime;
+    /**
+     * The tags.
+     */
+    Tags?: TagList;
+  }
+  export interface NetworkInsightsAccessScopeAnalysis {
+    /**
+     * The ID of the Network Access Scope analysis.
+     */
+    NetworkInsightsAccessScopeAnalysisId?: NetworkInsightsAccessScopeAnalysisId;
+    /**
+     * The Amazon Resource Name (ARN) of the Network Access Scope analysis.
+     */
+    NetworkInsightsAccessScopeAnalysisArn?: ResourceArn;
+    /**
+     * The ID of the Network Access Scope.
+     */
+    NetworkInsightsAccessScopeId?: NetworkInsightsAccessScopeId;
+    /**
+     * The status.
+     */
+    Status?: AnalysisStatus;
+    /**
+     * The status message.
+     */
+    StatusMessage?: String;
+    /**
+     * The warning message.
+     */
+    WarningMessage?: String;
+    /**
+     * The analysis start date.
+     */
+    StartDate?: MillisecondDateTime;
+    /**
+     * The analysis end date.
+     */
+    EndDate?: MillisecondDateTime;
+    /**
+     * Indicates whether there are findings.
+     */
+    FindingsFound?: FindingsFound;
+    /**
+     * The number of network interfaces analyzed.
+     */
+    AnalyzedEniCount?: Integer;
+    /**
+     * The tags.
+     */
+    Tags?: TagList;
+  }
+  export type NetworkInsightsAccessScopeAnalysisId = string;
+  export type NetworkInsightsAccessScopeAnalysisIdList = NetworkInsightsAccessScopeAnalysisId[];
+  export type NetworkInsightsAccessScopeAnalysisList = NetworkInsightsAccessScopeAnalysis[];
+  export interface NetworkInsightsAccessScopeContent {
+    /**
+     * The ID of the Network Access Scope.
+     */
+    NetworkInsightsAccessScopeId?: NetworkInsightsAccessScopeId;
+    /**
+     * The paths to match.
+     */
+    MatchPaths?: AccessScopePathList;
+    /**
+     * The paths to exclude.
+     */
+    ExcludePaths?: AccessScopePathList;
+  }
+  export type NetworkInsightsAccessScopeId = string;
+  export type NetworkInsightsAccessScopeIdList = NetworkInsightsAccessScopeId[];
+  export type NetworkInsightsAccessScopeList = NetworkInsightsAccessScope[];
   export interface NetworkInsightsAnalysis {
     /**
      * The ID of the network insights analysis.
@@ -23159,6 +24952,10 @@ declare namespace EC2 {
      * The status message, if the status is failed.
      */
     StatusMessage?: String;
+    /**
+     * The warning message.
+     */
+    WarningMessage?: String;
     /**
      * Indicates whether the destination is reachable from the source.
      */
@@ -23577,6 +25374,66 @@ declare namespace EC2 {
   export type OrganizationalUnitArnStringList = String[];
   export type OutpostArn = string;
   export type OwnerStringList = String[];
+  export interface PacketHeaderStatement {
+    /**
+     * The source addresses.
+     */
+    SourceAddresses?: ValueStringList;
+    /**
+     * The destination addresses.
+     */
+    DestinationAddresses?: ValueStringList;
+    /**
+     * The source ports.
+     */
+    SourcePorts?: ValueStringList;
+    /**
+     * The destination ports.
+     */
+    DestinationPorts?: ValueStringList;
+    /**
+     * The source prefix lists.
+     */
+    SourcePrefixLists?: ValueStringList;
+    /**
+     * The destination prefix lists.
+     */
+    DestinationPrefixLists?: ValueStringList;
+    /**
+     * The protocols.
+     */
+    Protocols?: ProtocolList;
+  }
+  export interface PacketHeaderStatementRequest {
+    /**
+     * The source addresses.
+     */
+    SourceAddresses?: ValueStringList;
+    /**
+     * The destination addresses.
+     */
+    DestinationAddresses?: ValueStringList;
+    /**
+     * The source ports.
+     */
+    SourcePorts?: ValueStringList;
+    /**
+     * The destination ports.
+     */
+    DestinationPorts?: ValueStringList;
+    /**
+     * The source prefix lists.
+     */
+    SourcePrefixLists?: ValueStringList;
+    /**
+     * The destination prefix lists.
+     */
+    DestinationPrefixLists?: ValueStringList;
+    /**
+     * The protocols.
+     */
+    Protocols?: ProtocolList;
+  }
   export type PartitionLoadFrequency = "none"|"daily"|"weekly"|"monthly"|string;
   export interface PathComponent {
     /**
@@ -23587,6 +25444,10 @@ declare namespace EC2 {
      * The network ACL rule.
      */
     AclRule?: AnalysisAclRule;
+    /**
+     * The resource to which the path component is attached.
+     */
+    AttachedTo?: AnalysisComponent;
     /**
      * The component.
      */
@@ -23625,6 +25486,26 @@ declare namespace EC2 {
     Vpc?: AnalysisComponent;
   }
   export type PathComponentList = PathComponent[];
+  export interface PathStatement {
+    /**
+     * The packet header statement.
+     */
+    PacketHeaderStatement?: PacketHeaderStatement;
+    /**
+     * The resource statement.
+     */
+    ResourceStatement?: ResourceStatement;
+  }
+  export interface PathStatementRequest {
+    /**
+     * The packet header statement.
+     */
+    PacketHeaderStatement?: PacketHeaderStatementRequest;
+    /**
+     * The resource statement.
+     */
+    ResourceStatement?: ResourceStatementRequest;
+  }
   export type PaymentOption = "AllUpfront"|"PartialUpfront"|"NoUpfront"|string;
   export interface PciId {
     /**
@@ -24106,6 +25987,7 @@ declare namespace EC2 {
   }
   export type PropagatingVgwList = PropagatingVgw[];
   export type Protocol = "tcp"|"udp"|string;
+  export type ProtocolList = Protocol[];
   export type ProtocolValue = "gre"|string;
   export interface ProvisionByoipCidrRequest {
     /**
@@ -24142,6 +26024,55 @@ declare namespace EC2 {
      * Information about the address range.
      */
     ByoipCidr?: ByoipCidr;
+  }
+  export interface ProvisionIpamPoolCidrRequest {
+    /**
+     * A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The ID of the IPAM pool to which you want to assign a CIDR.
+     */
+    IpamPoolId: IpamPoolId;
+    /**
+     * The CIDR you want to assign to the IPAM pool.
+     */
+    Cidr?: String;
+    /**
+     * A signed document that proves that you are authorized to bring a specified IP address range to Amazon using BYOIP. This option applies to public pools only.
+     */
+    CidrAuthorizationContext?: IpamCidrAuthorizationContext;
+  }
+  export interface ProvisionIpamPoolCidrResult {
+    /**
+     * Information about the provisioned CIDR.
+     */
+    IpamPoolCidr?: IpamPoolCidr;
+  }
+  export interface ProvisionPublicIpv4PoolCidrRequest {
+    /**
+     * A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The ID of the IPAM pool you would like to use to allocate this CIDR.
+     */
+    IpamPoolId: IpamPoolId;
+    /**
+     * The ID of the public IPv4 pool you would like to use for this CIDR.
+     */
+    PoolId: Ipv4PoolEc2Id;
+    /**
+     * The netmask length of the CIDR you would like to allocate to the public IPv4 pool.
+     */
+    NetmaskLength: Integer;
+  }
+  export interface ProvisionPublicIpv4PoolCidrResult {
+    /**
+     * The ID of the pool that you want to provision the CIDR to.
+     */
+    PoolId?: Ipv4PoolEc2Id;
+    PoolAddressRange?: PublicIpv4PoolRange;
   }
   export interface ProvisionedBandwidth {
     /**
@@ -24700,6 +26631,37 @@ declare namespace EC2 {
      */
     Unsuccessful?: UnsuccessfulItemList;
   }
+  export interface ReleaseIpamPoolAllocationRequest {
+    /**
+     * A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The ID of the IPAM pool which contains the allocation you want to release.
+     */
+    IpamPoolId: IpamPoolId;
+    /**
+     * The CIDR of the allocation you want to release.
+     */
+    Cidr: String;
+    /**
+     * The ID of the allocation.
+     */
+    IpamPoolAllocationId?: IpamPoolAllocationId;
+  }
+  export interface ReleaseIpamPoolAllocationResult {
+    /**
+     * Indicates if the release was successful.
+     */
+    Success?: Boolean;
+  }
+  export interface RemoveIpamOperatingRegion {
+    /**
+     * The name of the operating Region you want to remove.
+     */
+    RegionName?: String;
+  }
+  export type RemoveIpamOperatingRegionSet = RemoveIpamOperatingRegion[];
   export type RemovePrefixListEntries = RemovePrefixListEntry[];
   export interface RemovePrefixListEntry {
     /**
@@ -24973,6 +26935,17 @@ declare namespace EC2 {
   export type RequestHostIdList = DedicatedHostId[];
   export type RequestHostIdSet = DedicatedHostId[];
   export type RequestInstanceTypeList = InstanceType[];
+  export interface RequestIpamResourceTag {
+    /**
+     * The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.
+     */
+    Key?: String;
+    /**
+     * The value for the tag.
+     */
+    Value?: String;
+  }
+  export type RequestIpamResourceTagList = RequestIpamResourceTag[];
   export interface RequestLaunchTemplateData {
     /**
      * The ID of the kernel.  We recommend that you use PV-GRUB instead of kernels and RAM disks. For more information, see User Provided Kernels in the Amazon Elastic Compute Cloud User Guide. 
@@ -25708,7 +27681,27 @@ declare namespace EC2 {
   export type ResourceArn = string;
   export type ResourceIdList = TaggableResourceId[];
   export type ResourceList = String[];
-  export type ResourceType = "capacity-reservation"|"client-vpn-endpoint"|"customer-gateway"|"carrier-gateway"|"dedicated-host"|"dhcp-options"|"egress-only-internet-gateway"|"elastic-ip"|"elastic-gpu"|"export-image-task"|"export-instance-task"|"fleet"|"fpga-image"|"host-reservation"|"image"|"import-image-task"|"import-snapshot-task"|"instance"|"instance-event-window"|"internet-gateway"|"ipv4pool-ec2"|"ipv6pool-ec2"|"key-pair"|"launch-template"|"local-gateway"|"local-gateway-route-table"|"local-gateway-virtual-interface"|"local-gateway-virtual-interface-group"|"local-gateway-route-table-vpc-association"|"local-gateway-route-table-virtual-interface-group-association"|"natgateway"|"network-acl"|"network-interface"|"network-insights-analysis"|"network-insights-path"|"placement-group"|"prefix-list"|"replace-root-volume-task"|"reserved-instances"|"route-table"|"security-group"|"security-group-rule"|"snapshot"|"spot-fleet-request"|"spot-instances-request"|"subnet"|"traffic-mirror-filter"|"traffic-mirror-session"|"traffic-mirror-target"|"transit-gateway"|"transit-gateway-attachment"|"transit-gateway-connect-peer"|"transit-gateway-multicast-domain"|"transit-gateway-route-table"|"volume"|"vpc"|"vpc-endpoint"|"vpc-endpoint-service"|"vpc-peering-connection"|"vpn-connection"|"vpn-gateway"|"vpc-flow-log"|string;
+  export interface ResourceStatement {
+    /**
+     * The resources.
+     */
+    Resources?: ValueStringList;
+    /**
+     * The resource types.
+     */
+    ResourceTypes?: ValueStringList;
+  }
+  export interface ResourceStatementRequest {
+    /**
+     * The resources.
+     */
+    Resources?: ValueStringList;
+    /**
+     * The resource types.
+     */
+    ResourceTypes?: ValueStringList;
+  }
+  export type ResourceType = "capacity-reservation"|"client-vpn-endpoint"|"customer-gateway"|"carrier-gateway"|"dedicated-host"|"dhcp-options"|"egress-only-internet-gateway"|"elastic-ip"|"elastic-gpu"|"export-image-task"|"export-instance-task"|"fleet"|"fpga-image"|"host-reservation"|"image"|"import-image-task"|"import-snapshot-task"|"instance"|"instance-event-window"|"internet-gateway"|"ipam"|"ipam-pool"|"ipam-scope"|"ipv4pool-ec2"|"ipv6pool-ec2"|"key-pair"|"launch-template"|"local-gateway"|"local-gateway-route-table"|"local-gateway-virtual-interface"|"local-gateway-virtual-interface-group"|"local-gateway-route-table-vpc-association"|"local-gateway-route-table-virtual-interface-group-association"|"natgateway"|"network-acl"|"network-interface"|"network-insights-analysis"|"network-insights-path"|"network-insights-access-scope"|"network-insights-access-scope-analysis"|"placement-group"|"prefix-list"|"replace-root-volume-task"|"reserved-instances"|"route-table"|"security-group"|"security-group-rule"|"snapshot"|"spot-fleet-request"|"spot-instances-request"|"subnet"|"traffic-mirror-filter"|"traffic-mirror-session"|"traffic-mirror-target"|"transit-gateway"|"transit-gateway-attachment"|"transit-gateway-connect-peer"|"transit-gateway-multicast-domain"|"transit-gateway-route-table"|"volume"|"vpc"|"vpc-endpoint"|"vpc-endpoint-service"|"vpc-peering-connection"|"vpn-connection"|"vpn-gateway"|"vpc-flow-log"|string;
   export interface ResponseError {
     /**
      * The error code.
@@ -28156,6 +30149,30 @@ declare namespace EC2 {
      */
     StartingInstances?: InstanceStateChangeList;
   }
+  export interface StartNetworkInsightsAccessScopeAnalysisRequest {
+    /**
+     * The ID of the Network Access Scope.
+     */
+    NetworkInsightsAccessScopeId: NetworkInsightsAccessScopeId;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The tags to apply.
+     */
+    TagSpecifications?: TagSpecificationList;
+    /**
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to ensure idempotency.
+     */
+    ClientToken: String;
+  }
+  export interface StartNetworkInsightsAccessScopeAnalysisResult {
+    /**
+     * The Network Access Scope analysis.
+     */
+    NetworkInsightsAccessScopeAnalysis?: NetworkInsightsAccessScopeAnalysis;
+  }
   export interface StartNetworkInsightsAnalysisRequest {
     /**
      * The ID of the path.
@@ -28692,6 +30709,20 @@ declare namespace EC2 {
   }
   export type ThreadsPerCore = number;
   export type ThreadsPerCoreList = ThreadsPerCore[];
+  export interface ThroughResourcesStatement {
+    /**
+     * The resource statement.
+     */
+    ResourceStatement?: ResourceStatement;
+  }
+  export type ThroughResourcesStatementList = ThroughResourcesStatement[];
+  export interface ThroughResourcesStatementRequest {
+    /**
+     * The resource statement.
+     */
+    ResourceStatement?: ResourceStatementRequest;
+  }
+  export type ThroughResourcesStatementRequestList = ThroughResourcesStatementRequest[];
   export type TieringOperationStatus = "archival-in-progress"|"archival-completed"|"archival-failed"|"temporary-restore-in-progress"|"temporary-restore-completed"|"temporary-restore-failed"|"permanent-restore-in-progress"|"permanent-restore-completed"|"permanent-restore-failed"|string;
   export interface TotalLocalStorageGB {
     /**

@@ -1031,6 +1031,10 @@ declare namespace DynamoDB {
      * Replica-specific global secondary index settings.
      */
     GlobalSecondaryIndexes?: ReplicaGlobalSecondaryIndexList;
+    /**
+     * Replica-specific table class. If not specified, uses the source table's table class.
+     */
+    TableClassOverride?: TableClass;
   }
   export interface CreateTableInput {
     /**
@@ -1073,6 +1077,10 @@ declare namespace DynamoDB {
      * A list of key-value pairs to label the table. For more information, see Tagging for DynamoDB.
      */
     Tags?: TagList;
+    /**
+     * The table class of the new table. Valid values are STANDARD and STANDARD_INFREQUENT_ACCESS.
+     */
+    TableClass?: TableClass;
   }
   export interface CreateTableOutput {
     /**
@@ -2499,6 +2507,7 @@ declare namespace DynamoDB {
      * The time at which the replica was first detected as inaccessible. To determine cause of inaccessibility check the ReplicaStatus property.
      */
     ReplicaInaccessibleDateTime?: _Date;
+    ReplicaTableClassSummary?: TableClassSummary;
   }
   export type ReplicaDescriptionList = ReplicaDescription[];
   export interface ReplicaGlobalSecondaryIndex {
@@ -2620,6 +2629,7 @@ declare namespace DynamoDB {
      * Replica global secondary index settings for the global table.
      */
     ReplicaGlobalSecondaryIndexSettings?: ReplicaGlobalSecondaryIndexSettingsDescriptionList;
+    ReplicaTableClassSummary?: TableClassSummary;
   }
   export type ReplicaSettingsDescriptionList = ReplicaSettingsDescription[];
   export interface ReplicaSettingsUpdate {
@@ -2639,6 +2649,10 @@ declare namespace DynamoDB {
      * Represents the settings of a global secondary index for a global table that will be modified.
      */
     ReplicaGlobalSecondaryIndexSettingsUpdate?: ReplicaGlobalSecondaryIndexSettingsUpdateList;
+    /**
+     * Replica-specific table class. If not specified, uses the source table's table class.
+     */
+    ReplicaTableClass?: TableClass;
   }
   export type ReplicaSettingsUpdateList = ReplicaSettingsUpdate[];
   export type ReplicaStatus = "CREATING"|"CREATION_FAILED"|"UPDATING"|"DELETING"|"ACTIVE"|"REGION_DISABLED"|"INACCESSIBLE_ENCRYPTION_CREDENTIALS"|string;
@@ -2999,6 +3013,17 @@ declare namespace DynamoDB {
      */
     Replicas?: ReplicaAutoScalingDescriptionList;
   }
+  export type TableClass = "STANDARD"|"STANDARD_INFREQUENT_ACCESS"|string;
+  export interface TableClassSummary {
+    /**
+     * The table class of the specified table. Valid values are STANDARD and STANDARD_INFREQUENT_ACCESS.
+     */
+    TableClass?: TableClass;
+    /**
+     * The date and time at which the table class was last updated.
+     */
+    LastUpdateDateTime?: _Date;
+  }
   export type TableCreationDateTime = Date;
   export interface TableDescription {
     /**
@@ -3085,6 +3110,10 @@ declare namespace DynamoDB {
      * Contains information about the table archive.
      */
     ArchivalSummary?: ArchivalSummary;
+    /**
+     * Contains details of the table class.
+     */
+    TableClassSummary?: TableClassSummary;
   }
   export type TableId = string;
   export type TableName = string;
@@ -3435,6 +3464,10 @@ declare namespace DynamoDB {
      * Replica-specific global secondary index settings.
      */
     GlobalSecondaryIndexes?: ReplicaGlobalSecondaryIndexList;
+    /**
+     * Replica-specific table class. If not specified, uses the source table's table class.
+     */
+    TableClassOverride?: TableClass;
   }
   export interface UpdateTableInput {
     /**
@@ -3469,6 +3502,10 @@ declare namespace DynamoDB {
      * A list of replica update actions (create, delete, or update) for the table.  This property only applies to Version 2019.11.21 of global tables. 
      */
     ReplicaUpdates?: ReplicationGroupUpdateList;
+    /**
+     * The table class of the table to be updated. Valid values are STANDARD and STANDARD_INFREQUENT_ACCESS.
+     */
+    TableClass?: TableClass;
   }
   export interface UpdateTableOutput {
     /**
