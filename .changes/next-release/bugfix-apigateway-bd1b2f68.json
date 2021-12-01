@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "apigateway",
+  "description": "converting getExport payload to string for openapi3 export types"
+}
