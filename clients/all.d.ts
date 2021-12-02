@@ -297,3 +297,4 @@ export import RUM = require('./rum');
 export import BackupGateway = require('./backupgateway');
 export import IoTTwinMaker = require('./iottwinmaker');
 export import WorkSpacesWeb = require('./workspacesweb');
+export import AmplifyUIBuilder = require('./amplifyuibuilder');

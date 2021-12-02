@@ -1136,5 +1136,8 @@
   "workspacesweb": {
     "prefix": "workspaces-web",
     "name": "WorkSpacesWeb"
+  },
+  "amplifyuibuilder": {
+    "name": "AmplifyUIBuilder"
   }
 }

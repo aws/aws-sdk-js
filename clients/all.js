@@ -298,5 +298,6 @@ module.exports = {
   RUM: require('./rum'),
   BackupGateway: require('./backupgateway'),
   IoTTwinMaker: require('./iottwinmaker'),
-  WorkSpacesWeb: require('./workspacesweb')
+  WorkSpacesWeb: require('./workspacesweb'),
+  AmplifyUIBuilder: require('./amplifyuibuilder')
 };

@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1041.0-->
+<!--LATEST=2.1042.0-->
 <!--ENTRYINSERT-->
+
+## 2.1042.0
+* feature: AmplifyUIBuilder: This release introduces the actions and data types for the new Amplify UI Builder API. The Amplify UI Builder API provides a programmatic interface for creating and configuring user interface (UI) component libraries and themes for use in Amplify applications.
+* feature: NetworkManager: This release adds API support for AWS Cloud WAN.
+* feature: RAM: This release adds the ability to use the new ResourceRegionScope parameter on List operations that return lists of resources or resource types. This new parameter filters the results by letting you differentiate between global or regional resource types.
 
 ## 2.1041.0
 * feature: DevOpsGuru: DevOps Guru now provides detailed, database-specific analyses of performance issues and recommends corrective actions for Amazon Aurora database instances with Performance Insights turned on. You can also use AWS tags to choose which resources to analyze and define your applications.

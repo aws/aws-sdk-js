@@ -299,6 +299,7 @@ export abstract class ConfigurationServicePlaceholders {
   backupgateway?: AWS.BackupGateway.Types.ClientConfiguration;
   iottwinmaker?: AWS.IoTTwinMaker.Types.ClientConfiguration;
   workspacesweb?: AWS.WorkSpacesWeb.Types.ClientConfiguration;
+  amplifyuibuilder?: AWS.AmplifyUIBuilder.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -600,4 +601,5 @@ export interface ConfigurationServiceApiVersions {
   backupgateway?: AWS.BackupGateway.Types.apiVersion;
   iottwinmaker?: AWS.IoTTwinMaker.Types.apiVersion;
   workspacesweb?: AWS.WorkSpacesWeb.Types.apiVersion;
+  amplifyuibuilder?: AWS.AmplifyUIBuilder.Types.apiVersion;
 }
