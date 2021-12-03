@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1042.0-->
+<!--LATEST=2.1043.0-->
 <!--ENTRYINSERT-->
+
+## 2.1043.0
+* feature: Rekognition: This release added new KnownGender types for Celebrity Recognition.
 
 ## 2.1042.0
 * feature: AmplifyUIBuilder: This release introduces the actions and data types for the new Amplify UI Builder API. The Amplify UI Builder API provides a programmatic interface for creating and configuring user interface (UI) component libraries and themes for use in Amplify applications.
