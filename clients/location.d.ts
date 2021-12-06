@@ -36,11 +36,11 @@ declare class Location extends Service {
    */
   batchDeleteGeofence(callback?: (err: AWSError, data: Location.Types.BatchDeleteGeofenceResponse) => void): Request<Location.Types.BatchDeleteGeofenceResponse, AWSError>;
   /**
-   * Evaluates device positions against the geofence geometries from a given geofence collection. This operation always returns an empty response because geofences are asynchronously evaluated. The evaluation determines if the device has entered or exited a geofenced area, and then publishes one of the following events to Amazon EventBridge:    ENTER if Amazon Location determines that the tracked device has entered a geofenced area.    EXIT if Amazon Location determines that the tracked device has exited a geofenced area.    The last geofence that a device was observed within is tracked for 30 days after the most recent device position update. 
+   * Evaluates device positions against the geofence geometries from a given geofence collection. This operation always returns an empty response because geofences are asynchronously evaluated. The evaluation determines if the device has entered or exited a geofenced area, and then publishes one of the following events to Amazon EventBridge:    ENTER if Amazon Location determines that the tracked device has entered a geofenced area.    EXIT if Amazon Location determines that the tracked device has exited a geofenced area.    The last geofence that a device was observed within is tracked for 30 days after the most recent device position update.   Geofence evaluation uses the given device position. It does not account for the optional Accuracy of a DevicePositionUpdate. 
    */
   batchEvaluateGeofences(params: Location.Types.BatchEvaluateGeofencesRequest, callback?: (err: AWSError, data: Location.Types.BatchEvaluateGeofencesResponse) => void): Request<Location.Types.BatchEvaluateGeofencesResponse, AWSError>;
   /**
-   * Evaluates device positions against the geofence geometries from a given geofence collection. This operation always returns an empty response because geofences are asynchronously evaluated. The evaluation determines if the device has entered or exited a geofenced area, and then publishes one of the following events to Amazon EventBridge:    ENTER if Amazon Location determines that the tracked device has entered a geofenced area.    EXIT if Amazon Location determines that the tracked device has exited a geofenced area.    The last geofence that a device was observed within is tracked for 30 days after the most recent device position update. 
+   * Evaluates device positions against the geofence geometries from a given geofence collection. This operation always returns an empty response because geofences are asynchronously evaluated. The evaluation determines if the device has entered or exited a geofenced area, and then publishes one of the following events to Amazon EventBridge:    ENTER if Amazon Location determines that the tracked device has entered a geofenced area.    EXIT if Amazon Location determines that the tracked device has exited a geofenced area.    The last geofence that a device was observed within is tracked for 30 days after the most recent device position update.   Geofence evaluation uses the given device position. It does not account for the optional Accuracy of a DevicePositionUpdate. 
    */
   batchEvaluateGeofences(callback?: (err: AWSError, data: Location.Types.BatchEvaluateGeofencesResponse) => void): Request<Location.Types.BatchEvaluateGeofencesResponse, AWSError>;
   /**
@@ -60,11 +60,11 @@ declare class Location extends Service {
    */
   batchPutGeofence(callback?: (err: AWSError, data: Location.Types.BatchPutGeofenceResponse) => void): Request<Location.Types.BatchPutGeofenceResponse, AWSError>;
   /**
-   * Uploads position update data for one or more devices to a tracker resource. Amazon Location uses the data when it reports the last known device position and position history. Amazon Location retains location data for 30 days.  Position updates are handled based on the PositionFiltering property of the tracker. When PositionFiltering is set to TimeBased, updates are evaluated against linked geofence collections, and location data is stored at a maximum of one position per 30 second interval. If your update frequency is more often than every 30 seconds, only one update per 30 seconds is stored for each unique device ID. When PositionFiltering is set to DistanceBased filtering, location data is stored and evaluated against linked geofence collections only if the device has moved more than 30 m (98.4 ft). 
+   * Uploads position update data for one or more devices to a tracker resource. Amazon Location uses the data when it reports the last known device position and position history. Amazon Location retains location data for 30 days.  Position updates are handled based on the PositionFiltering property of the tracker. When PositionFiltering is set to TimeBased, updates are evaluated against linked geofence collections, and location data is stored at a maximum of one position per 30 second interval. If your update frequency is more often than every 30 seconds, only one update per 30 seconds is stored for each unique device ID. When PositionFiltering is set to DistanceBased filtering, location data is stored and evaluated against linked geofence collections only if the device has moved more than 30 m (98.4 ft). When PositionFiltering is set to AccuracyBased filtering, location data is stored and evaluated against linked geofence collections only if the device has moved more than the measured accuracy. For example, if two consecutive updates from a device have a horizontal accuracy of 5 m and 10 m, the second update is neither stored or evaluated if the device has moved less than 15 m. If PositionFiltering is set to AccuracyBased filtering, Amazon Location uses the default value { "Horizontal": 0} when accuracy is not provided on a DevicePositionUpdate. 
    */
   batchUpdateDevicePosition(params: Location.Types.BatchUpdateDevicePositionRequest, callback?: (err: AWSError, data: Location.Types.BatchUpdateDevicePositionResponse) => void): Request<Location.Types.BatchUpdateDevicePositionResponse, AWSError>;
   /**
-   * Uploads position update data for one or more devices to a tracker resource. Amazon Location uses the data when it reports the last known device position and position history. Amazon Location retains location data for 30 days.  Position updates are handled based on the PositionFiltering property of the tracker. When PositionFiltering is set to TimeBased, updates are evaluated against linked geofence collections, and location data is stored at a maximum of one position per 30 second interval. If your update frequency is more often than every 30 seconds, only one update per 30 seconds is stored for each unique device ID. When PositionFiltering is set to DistanceBased filtering, location data is stored and evaluated against linked geofence collections only if the device has moved more than 30 m (98.4 ft). 
+   * Uploads position update data for one or more devices to a tracker resource. Amazon Location uses the data when it reports the last known device position and position history. Amazon Location retains location data for 30 days.  Position updates are handled based on the PositionFiltering property of the tracker. When PositionFiltering is set to TimeBased, updates are evaluated against linked geofence collections, and location data is stored at a maximum of one position per 30 second interval. If your update frequency is more often than every 30 seconds, only one update per 30 seconds is stored for each unique device ID. When PositionFiltering is set to DistanceBased filtering, location data is stored and evaluated against linked geofence collections only if the device has moved more than 30 m (98.4 ft). When PositionFiltering is set to AccuracyBased filtering, location data is stored and evaluated against linked geofence collections only if the device has moved more than the measured accuracy. For example, if two consecutive updates from a device have a horizontal accuracy of 5 m and 10 m, the second update is neither stored or evaluated if the device has moved less than 15 m. If PositionFiltering is set to AccuracyBased filtering, Amazon Location uses the default value { "Horizontal": 0} when accuracy is not provided on a DevicePositionUpdate. 
    */
   batchUpdateDevicePosition(callback?: (err: AWSError, data: Location.Types.BatchUpdateDevicePositionResponse) => void): Request<Location.Types.BatchUpdateDevicePositionResponse, AWSError>;
   /**
@@ -92,11 +92,11 @@ declare class Location extends Service {
    */
   createMap(callback?: (err: AWSError, data: Location.Types.CreateMapResponse) => void): Request<Location.Types.CreateMapResponse, AWSError>;
   /**
-   * Creates a place index resource in your AWS account. Use a place index resource to geocode addresses and other text queries by using the SearchPlaceIndexForText operation, and reverse geocode coordinates by using the SearchPlaceIndexForPosition operation.
+   * Creates a place index resource in your AWS account. Use a place index resource to geocode addresses and other text queries by using the SearchPlaceIndexForText operation, and reverse geocode coordinates by using the SearchPlaceIndexForPosition operation, and enable autosuggestions by using the SearchPlaceIndexForSuggestions operation.
    */
   createPlaceIndex(params: Location.Types.CreatePlaceIndexRequest, callback?: (err: AWSError, data: Location.Types.CreatePlaceIndexResponse) => void): Request<Location.Types.CreatePlaceIndexResponse, AWSError>;
   /**
-   * Creates a place index resource in your AWS account. Use a place index resource to geocode addresses and other text queries by using the SearchPlaceIndexForText operation, and reverse geocode coordinates by using the SearchPlaceIndexForPosition operation.
+   * Creates a place index resource in your AWS account. Use a place index resource to geocode addresses and other text queries by using the SearchPlaceIndexForText operation, and reverse geocode coordinates by using the SearchPlaceIndexForPosition operation, and enable autosuggestions by using the SearchPlaceIndexForSuggestions operation.
    */
   createPlaceIndex(callback?: (err: AWSError, data: Location.Types.CreatePlaceIndexResponse) => void): Request<Location.Types.CreatePlaceIndexResponse, AWSError>;
   /**
@@ -347,6 +347,14 @@ declare class Location extends Service {
    * Reverse geocodes a given coordinate and returns a legible address. Allows you to search for Places or points of interest near a given position.
    */
   searchPlaceIndexForPosition(callback?: (err: AWSError, data: Location.Types.SearchPlaceIndexForPositionResponse) => void): Request<Location.Types.SearchPlaceIndexForPositionResponse, AWSError>;
+  /**
+   * Generates suggestions for addresses and points of interest based on partial or misspelled free-form text. This operation is also known as autocomplete, autosuggest, or fuzzy matching. Optional parameters let you narrow your search results by bounding box or country, or bias your search toward a specific position on the globe.  You can search for suggested place names near a specified position by using BiasPosition, or filter results within a bounding box by using FilterBBox. These parameters are mutually exclusive; using both BiasPosition and FilterBBox in the same command returns an error. 
+   */
+  searchPlaceIndexForSuggestions(params: Location.Types.SearchPlaceIndexForSuggestionsRequest, callback?: (err: AWSError, data: Location.Types.SearchPlaceIndexForSuggestionsResponse) => void): Request<Location.Types.SearchPlaceIndexForSuggestionsResponse, AWSError>;
+  /**
+   * Generates suggestions for addresses and points of interest based on partial or misspelled free-form text. This operation is also known as autocomplete, autosuggest, or fuzzy matching. Optional parameters let you narrow your search results by bounding box or country, or bias your search toward a specific position on the globe.  You can search for suggested place names near a specified position by using BiasPosition, or filter results within a bounding box by using FilterBBox. These parameters are mutually exclusive; using both BiasPosition and FilterBBox in the same command returns an error. 
+   */
+  searchPlaceIndexForSuggestions(callback?: (err: AWSError, data: Location.Types.SearchPlaceIndexForSuggestionsResponse) => void): Request<Location.Types.SearchPlaceIndexForSuggestionsResponse, AWSError>;
   /**
    * Geocodes free-form text, such as an address, name, city, or region to allow you to search for Places or points of interest.  Optional parameters let you narrow your search results by bounding box or country, or bias your search toward a specific position on the globe.  You can search for places near a given position using BiasPosition, or filter results within a bounding box using FilterBBox. Providing both parameters simultaneously returns an error.  Search results are returned in order of highest to lowest relevance.
    */
@@ -921,7 +929,7 @@ declare namespace Location {
      */
     KmsKeyId?: KmsKeyId;
     /**
-     * Specifies the position filtering for the tracker resource. Valid values:    TimeBased - Location updates are evaluated against linked geofence collections, but not every location update is stored. If your update frequency is more often than 30 seconds, only one update per 30 seconds is stored for each unique device ID.     DistanceBased - If the device has moved less than 30 m (98.4 ft), location updates are ignored. Location updates within this area are neither evaluated against linked geofence collections, nor stored. This helps control costs by reducing the number of geofence evaluations and historical device positions to paginate through. Distance-based filtering can also reduce the effects of GPS noise when displaying device trajectories on a map.    This field is optional. If not specified, the default value is TimeBased.
+     * Specifies the position filtering for the tracker resource. Valid values:    TimeBased - Location updates are evaluated against linked geofence collections, but not every location update is stored. If your update frequency is more often than 30 seconds, only one update per 30 seconds is stored for each unique device ID.     DistanceBased - If the device has moved less than 30 m (98.4 ft), location updates are ignored. Location updates within this area are neither evaluated against linked geofence collections, nor stored. This helps control costs by reducing the number of geofence evaluations and historical device positions to paginate through. Distance-based filtering can also reduce the effects of GPS noise when displaying device trajectories on a map.     AccuracyBased - If the device has moved less than the measured accuracy, location updates are ignored. For example, if two consecutive updates from a device have a horizontal accuracy of 5 m and 10 m, the second update is ignored if the device has moved less than 15 m. Ignored location updates are neither evaluated against linked geofence collections, nor stored. This can reduce the effects of GPS noise when displaying device trajectories on a map, and can help control your costs by reducing the number of geofence evaluations.    This field is optional. If not specified, the default value is TimeBased.
      */
     PositionFiltering?: PositionFiltering;
     /**
@@ -1223,6 +1231,10 @@ declare namespace Location {
   }
   export interface DevicePosition {
     /**
+     * The accuracy of the device position.
+     */
+    Accuracy?: PositionalAccuracy;
+    /**
      * The device whose position you retrieved.
      */
     DeviceId?: Id;
@@ -1230,6 +1242,10 @@ declare namespace Location {
      * The last known device position.
      */
     Position: Position;
+    /**
+     * The properties associated with the position.
+     */
+    PositionProperties?: PropertyMap;
     /**
      * The timestamp for when the tracker resource received the device position in  ISO 8601 format: YYYY-MM-DDThh:mm:ss.sssZ. 
      */
@@ -1242,6 +1258,10 @@ declare namespace Location {
   export type DevicePositionList = DevicePosition[];
   export interface DevicePositionUpdate {
     /**
+     * The accuracy of the device position.
+     */
+    Accuracy?: PositionalAccuracy;
+    /**
      * The device associated to the position update.
      */
     DeviceId: Id;
@@ -1249,6 +1269,10 @@ declare namespace Location {
      * The latest device position defined in WGS 84 format: [X or longitude, Y or latitude].
      */
     Position: Position;
+    /**
+     * Associates one of more properties with the position update. A property is a key-value pair stored with the position update and added to any geofence event the update may trigger. Format: "key" : "value" 
+     */
+    PositionProperties?: PropertyMap;
     /**
      * The timestamp at which the device's position was determined. Uses ISO 8601 format: YYYY-MM-DDThh:mm:ss.sssZ 
      */
@@ -1319,6 +1343,10 @@ declare namespace Location {
   }
   export interface GetDevicePositionResponse {
     /**
+     * The accuracy of the device position.
+     */
+    Accuracy?: PositionalAccuracy;
+    /**
      * The device whose position you retrieved.
      */
     DeviceId?: Id;
@@ -1326,6 +1354,10 @@ declare namespace Location {
      * The last known device position.
      */
     Position: Position;
+    /**
+     * The properties associated with the position.
+     */
+    PositionProperties?: PropertyMap;
     /**
      * The timestamp for when the tracker resource received the device position in  ISO 8601  format: YYYY-MM-DDThh:mm:ss.sssZ. 
      */
@@ -1530,6 +1562,10 @@ declare namespace Location {
   }
   export interface ListDevicePositionsResponseEntry {
     /**
+     * The accuracy of the device position.
+     */
+    Accuracy?: PositionalAccuracy;
+    /**
      * The ID of the device for this position.
      */
     DeviceId: Id;
@@ -1537,6 +1573,10 @@ declare namespace Location {
      * The last known device position. Empty if no positions currently stored.
      */
     Position: Position;
+    /**
+     * The properties associated with the position.
+     */
+    PositionProperties?: PropertyMap;
     /**
      * The timestamp at which the device position was determined. Uses  ISO 8601 format: YYYY-MM-DDThh:mm:ss.sssZ.
      */
@@ -1926,7 +1966,17 @@ declare namespace Location {
   export type PlaceIndexSearchResultLimit = number;
   export type Position = Double[];
   export type PositionFiltering = "TimeBased"|"DistanceBased"|"AccuracyBased"|string;
+  export interface PositionalAccuracy {
+    /**
+     * Estimated maximum distance, in meters, between the measured position and the true position of a device, along the Earth's surface.
+     */
+    Horizontal: PositionalAccuracyHorizontalDouble;
+  }
+  export type PositionalAccuracyHorizontalDouble = number;
   export type PricingPlan = "RequestBasedUsage"|"MobileAssetTracking"|"MobileAssetManagement"|string;
+  export type PropertyMap = {[key: string]: PropertyMapValueString};
+  export type PropertyMapKeyString = string;
+  export type PropertyMapValueString = string;
   export interface PutGeofenceRequest {
     /**
      * The geofence collection to store the geofence in.
@@ -1969,6 +2019,13 @@ declare namespace Location {
   }
   export type SearchForPositionResultDistanceDouble = number;
   export type SearchForPositionResultList = SearchForPositionResult[];
+  export interface SearchForSuggestionsResult {
+    /**
+     * The text of the place suggestion, typically formatted as an address string.
+     */
+    Text: String;
+  }
+  export type SearchForSuggestionsResultList = SearchForSuggestionsResult[];
   export interface SearchForTextResult {
     /**
      * The distance in meters of a great-circle arc between the bias position specified and the result. Distance will be returned only if a bias position was specified in the query.  A great-circle arc is the shortest path on a sphere, in this case the Earth. This returns the shortest distance between two locations. 
@@ -2032,6 +2089,77 @@ declare namespace Location {
      */
     Position: Position;
   }
+  export interface SearchPlaceIndexForSuggestionsRequest {
+    /**
+     * An optional parameter that indicates a preference for place suggestions that are closer to a specified position.  If provided, this parameter must contain a pair of numbers. The first number represents the X coordinate, or longitude; the second number represents the Y coordinate, or latitude. For example, [-123.1174, 49.2847] represents the position with longitude -123.1174 and latitude 49.2847.   BiasPosition and FilterBBox are mutually exclusive. Specifying both options results in an error.  
+     */
+    BiasPosition?: Position;
+    /**
+     * An optional parameter that limits the search results by returning only suggestions within a specified bounding box.  If provided, this parameter must contain a total of four consecutive numbers in two pairs. The first pair of numbers represents the X and Y coordinates (longitude and latitude, respectively) of the southwest corner of the bounding box; the second pair of numbers represents the X and Y coordinates (longitude and latitude, respectively) of the northeast corner of the bounding box. For example, [-12.7935, -37.4835, -12.0684, -36.9542] represents a bounding box where the southwest corner has longitude -12.7935 and latitude -37.4835, and the northeast corner has longitude -12.0684 and latitude -36.9542.   FilterBBox and BiasPosition are mutually exclusive. Specifying both options results in an error.  
+     */
+    FilterBBox?: BoundingBox;
+    /**
+     * An optional parameter that limits the search results by returning only suggestions within the provided list of countries.   Use the ISO 3166 3-digit country code. For example, Australia uses three upper-case characters: AUS.  
+     */
+    FilterCountries?: CountryCodeList;
+    /**
+     * The name of the place index resource you want to use for the search.
+     */
+    IndexName: ResourceName;
+    /**
+     * The preferred language used to return results. The value must be a valid BCP 47 language tag, for example, en for English. This setting affects the languages used in the results. It does not change which results are returned. If the language is not specified, or not supported for a particular result, the partner automatically chooses a language for the result. Used only when the partner selected is Here.
+     */
+    Language?: LanguageTag;
+    /**
+     * An optional parameter. The maximum number of results returned per request.  The default: 5 
+     */
+    MaxResults?: SearchPlaceIndexForSuggestionsRequestMaxResultsInteger;
+    /**
+     * The free-form partial text to use to generate place suggestions. For example, eiffel tow.
+     */
+    Text: SyntheticSearchPlaceIndexForSuggestionsRequestString;
+  }
+  export type SearchPlaceIndexForSuggestionsRequestMaxResultsInteger = number;
+  export interface SearchPlaceIndexForSuggestionsResponse {
+    /**
+     * A list of place suggestions that best match the search text.
+     */
+    Results: SearchForSuggestionsResultList;
+    /**
+     * Contains a summary of the request. Echoes the input values for BiasPosition, FilterBBox, FilterCountries, Language, MaxResults, and Text. Also includes the DataSource of the place index. 
+     */
+    Summary: SearchPlaceIndexForSuggestionsSummary;
+  }
+  export interface SearchPlaceIndexForSuggestionsSummary {
+    /**
+     * Contains the coordinates for the optional bias position specified in the request. This parameter contains a pair of numbers. The first number represents the X coordinate, or longitude; the second number represents the Y coordinate, or latitude. For example, [-123.1174, 49.2847] represents the position with longitude -123.1174 and latitude 49.2847.
+     */
+    BiasPosition?: Position;
+    /**
+     * The geospatial data provider attached to the place index resource specified in the request. Values can be one of the following:   Esri   Here   For more information about data providers, see Amazon Location Service data providers.
+     */
+    DataSource: String;
+    /**
+     * Contains the coordinates for the optional bounding box specified in the request.
+     */
+    FilterBBox?: BoundingBox;
+    /**
+     * Contains the optional country filter specified in the request.
+     */
+    FilterCountries?: CountryCodeList;
+    /**
+     * The preferred language used to return results. Matches the language in the request. The value is a valid BCP 47 language tag, for example, en for English.
+     */
+    Language?: LanguageTag;
+    /**
+     * Contains the optional result count limit specified in the request.
+     */
+    MaxResults?: Integer;
+    /**
+     * The free-form partial text input specified in the request.
+     */
+    Text: SyntheticSearchPlaceIndexForSuggestionsSummaryString;
+  }
   export interface SearchPlaceIndexForTextRequest {
     /**
      * An optional parameter that indicates a preference for places that are closer to a specified position.  If provided, this parameter must contain a pair of numbers. The first number represents the X coordinate, or longitude; the second number represents the Y coordinate, or latitude. For example, [-123.1174, 49.2847] represents the position with longitude -123.1174 and latitude 49.2847.   BiasPosition and FilterBBox are mutually exclusive. Specifying both options results in an error.  
@@ -2074,7 +2202,7 @@ declare namespace Location {
   }
   export interface SearchPlaceIndexForTextSummary {
     /**
-     * Contains the coordinates for the optional bias position specified in the request.
+     * Contains the coordinates for the optional bias position specified in the request. This parameter contains a pair of numbers. The first number represents the X coordinate, or longitude; the second number represents the Y coordinate, or latitude. For example, [-123.1174, 49.2847] represents the position with longitude -123.1174 and latitude 49.2847.
      */
     BiasPosition?: Position;
     /**
@@ -2133,6 +2261,8 @@ declare namespace Location {
   export type StepGeometryOffsetInteger = number;
   export type StepList = Step[];
   export type String = string;
+  export type SyntheticSearchPlaceIndexForSuggestionsRequestString = string;
+  export type SyntheticSearchPlaceIndexForSuggestionsSummaryString = string;
   export type SyntheticSearchPlaceIndexForTextRequestString = string;
   export type SyntheticSearchPlaceIndexForTextSummaryString = string;
   export type TagKey = string;
@@ -2334,7 +2464,7 @@ declare namespace Location {
      */
     Description?: ResourceDescription;
     /**
-     * Updates the position filtering for the tracker resource. Valid values:    TimeBased - Location updates are evaluated against linked geofence collections, but not every location update is stored. If your update frequency is more often than 30 seconds, only one update per 30 seconds is stored for each unique device ID.     DistanceBased - If the device has moved less than 30 m (98.4 ft), location updates are ignored. Location updates within this distance are neither evaluated against linked geofence collections, nor stored. This helps control costs by reducing the number of geofence evaluations and device positions to retrieve. Distance-based filtering can also reduce the jitter effect when displaying device trajectory on a map.   
+     * Updates the position filtering for the tracker resource. Valid values:    TimeBased - Location updates are evaluated against linked geofence collections, but not every location update is stored. If your update frequency is more often than 30 seconds, only one update per 30 seconds is stored for each unique device ID.     DistanceBased - If the device has moved less than 30 m (98.4 ft), location updates are ignored. Location updates within this distance are neither evaluated against linked geofence collections, nor stored. This helps control costs by reducing the number of geofence evaluations and historical device positions to paginate through. Distance-based filtering can also reduce the effects of GPS noise when displaying device trajectories on a map.     AccuracyBased - If the device has moved less than the measured accuracy, location updates are ignored. For example, if two consecutive updates from a device have a horizontal accuracy of 5 m and 10 m, the second update is ignored if the device has moved less than 15 m. Ignored location updates are neither evaluated against linked geofence collections, nor stored. This helps educe the effects of GPS noise when displaying device trajectories on a map, and can help control costs by reducing the number of geofence evaluations.   
      */
     PositionFiltering?: PositionFiltering;
     /**

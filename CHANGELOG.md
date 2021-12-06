@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1043.0-->
+<!--LATEST=2.1044.0-->
 <!--ENTRYINSERT-->
+
+## 2.1044.0
+* feature: AppSync: AWS AppSync now supports custom domain names, allowing you to associate a domain name that you own with an AppSync API in your account.
+* feature: Location: This release adds support for Accuracy position filtering, position metadata and autocomplete for addresses and points of interest based on partial or misspelled free-form text.
+* feature: Route53: Add PriorRequestNotComplete exception to UpdateHostedZoneComment API
 
 ## 2.1043.0
 * feature: Rekognition: This release added new KnownGender types for Celebrity Recognition.
