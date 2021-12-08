@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1044.0-->
+<!--LATEST=2.1045.0-->
 <!--ENTRYINSERT-->
+
+## 2.1045.0
+* feature: CloudWatchLogs: This release adds AWS Organizations support as condition key in destination policy for cross account Subscriptions in CloudWatch Logs.
+* feature: ComprehendMedical: This release adds a new set of APIs (synchronous and batch) to support the SNOMED-CT ontology.
+* feature: Iot: This release allows customer to enable caching of custom authorizer on HTTP protocol for clients that use persistent or Keep-Alive connection in order to reduce the number of Lambda invocations.
+* feature: LookoutVision: This release adds new APIs for packaging an Amazon Lookout for Vision model as an AWS IoT Greengrass component.
+* feature: Outposts: This release adds the UpdateOutpost API.
+* feature: SageMaker: This release added a new Ambarella device(amba_cv2) compilation support for Sagemaker Neo.
 
 ## 2.1044.0
 * feature: AppSync: AWS AppSync now supports custom domain names, allowing you to associate a domain name that you own with an AppSync API in your account.

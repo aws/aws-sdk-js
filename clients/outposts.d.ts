@@ -164,6 +164,14 @@ declare class Outposts extends Service {
    */
   untagResource(callback?: (err: AWSError, data: Outposts.Types.UntagResourceResponse) => void): Request<Outposts.Types.UntagResourceResponse, AWSError>;
   /**
+   *  Updates an Outpost. 
+   */
+  updateOutpost(params: Outposts.Types.UpdateOutpostInput, callback?: (err: AWSError, data: Outposts.Types.UpdateOutpostOutput) => void): Request<Outposts.Types.UpdateOutpostOutput, AWSError>;
+  /**
+   *  Updates an Outpost. 
+   */
+  updateOutpost(callback?: (err: AWSError, data: Outposts.Types.UpdateOutpostOutput) => void): Request<Outposts.Types.UpdateOutpostOutput, AWSError>;
+  /**
    *  Updates the site. 
    */
   updateSite(params: Outposts.Types.UpdateSiteInput, callback?: (err: AWSError, data: Outposts.Types.UpdateSiteOutput) => void): Request<Outposts.Types.UpdateSiteOutput, AWSError>;
@@ -320,6 +328,9 @@ declare namespace Outposts {
   export interface CreateOutpostInput {
     Name: OutpostName;
     Description?: OutpostDescription;
+    /**
+     *  The ID or the Amazon Resource Name (ARN) of the site. 
+     */
     SiteId: SiteId;
     AvailabilityZone?: AvailabilityZone;
     AvailabilityZoneId?: AvailabilityZoneId;
@@ -364,13 +375,16 @@ declare namespace Outposts {
   }
   export interface DeleteOutpostInput {
     /**
-     *  The ID of the Outpost. 
+     *  The ID or the Amazon Resource Name (ARN) of the Outpost. 
      */
     OutpostId: OutpostId;
   }
   export interface DeleteOutpostOutput {
   }
   export interface DeleteSiteInput {
+    /**
+     *  The ID or the Amazon Resource Name (ARN) of the site. 
+     */
     SiteId: SiteId;
   }
   export interface DeleteSiteOutput {
@@ -417,13 +431,13 @@ declare namespace Outposts {
   }
   export interface GetOutpostInput {
     /**
-     *  The ID of the Outpost. 
+     *  The ID or the Amazon Resource Name (ARN) of the Outpost. 
      */
     OutpostId: OutpostId;
   }
   export interface GetOutpostInstanceTypesInput {
     /**
-     *  The ID of the Outpost. 
+     *  The ID or the Amazon Resource Name (ARN) of the Outpost. 
      */
     OutpostId: OutpostId;
     NextToken?: Token;
@@ -442,6 +456,9 @@ declare namespace Outposts {
     Outpost?: Outpost;
   }
   export interface GetSiteAddressInput {
+    /**
+     *  The ID or the Amazon Resource Name (ARN) of the site. 
+     */
     SiteId: SiteId;
     /**
      *  The type of the address you request. 
@@ -460,6 +477,9 @@ declare namespace Outposts {
     Address?: Address;
   }
   export interface GetSiteInput {
+    /**
+     *  The ID or the Amazon Resource Name (ARN) of the site. 
+     */
     SiteId: SiteId;
   }
   export interface GetSiteOutput {
@@ -802,7 +822,25 @@ declare namespace Outposts {
   }
   export interface UntagResourceResponse {
   }
+  export interface UpdateOutpostInput {
+    /**
+     *  The ID or the Amazon Resource Name (ARN) of the Outpost. 
+     */
+    OutpostId: OutpostId;
+    Name?: OutpostName;
+    Description?: OutpostDescription;
+    /**
+     *  The type of hardware for this Outpost. 
+     */
+    SupportedHardwareType?: SupportedHardwareType;
+  }
+  export interface UpdateOutpostOutput {
+    Outpost?: Outpost;
+  }
   export interface UpdateSiteAddressInput {
+    /**
+     *  The ID or the Amazon Resource Name (ARN) of the site. 
+     */
     SiteId: SiteId;
     /**
      *  The type of the address. 
@@ -824,6 +862,9 @@ declare namespace Outposts {
     Address?: Address;
   }
   export interface UpdateSiteInput {
+    /**
+     *  The ID or the Amazon Resource Name (ARN) of the site. 
+     */
     SiteId: SiteId;
     Name?: SiteName;
     Description?: SiteDescription;
@@ -836,6 +877,9 @@ declare namespace Outposts {
     Site?: Site;
   }
   export interface UpdateSiteRackPhysicalPropertiesInput {
+    /**
+     *  The ID or the Amazon Resource Name (ARN) of the site. 
+     */
     SiteId: SiteId;
     /**
      * Specify in kVA the power draw available at the hardware placement position for the rack.

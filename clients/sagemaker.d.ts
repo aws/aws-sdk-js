@@ -9872,6 +9872,7 @@ declare namespace SageMaker {
     MaxValue: ParameterValue;
   }
   export type IntegerParameterRanges = IntegerParameterRange[];
+  export type IntegerValue = number;
   export type InvocationsMaxRetries = number;
   export type InvocationsTimeoutInSeconds = number;
   export type IotRoleAlias = string;
@@ -14215,6 +14216,7 @@ declare namespace SageMaker {
      * If this pipeline execution step was cached, details on the cache hit.
      */
     CacheHitResult?: CacheHitResult;
+    AttemptCount?: IntegerValue;
     /**
      * The reason why the step failed execution. This is only returned if the step failed its execution.
      */
@@ -15864,7 +15866,7 @@ declare namespace SageMaker {
   export type TagList = Tag[];
   export type TagValue = string;
   export type TargetAttributeName = string;
-  export type TargetDevice = "lambda"|"ml_m4"|"ml_m5"|"ml_c4"|"ml_c5"|"ml_p2"|"ml_p3"|"ml_g4dn"|"ml_inf1"|"ml_eia2"|"jetson_tx1"|"jetson_tx2"|"jetson_nano"|"jetson_xavier"|"rasp3b"|"imx8qm"|"deeplens"|"rk3399"|"rk3288"|"aisage"|"sbe_c"|"qcs605"|"qcs603"|"sitara_am57x"|"amba_cv22"|"amba_cv25"|"x86_win32"|"x86_win64"|"coreml"|"jacinto_tda4vm"|"imx8mplus"|string;
+  export type TargetDevice = "lambda"|"ml_m4"|"ml_m5"|"ml_c4"|"ml_c5"|"ml_p2"|"ml_p3"|"ml_g4dn"|"ml_inf1"|"ml_eia2"|"jetson_tx1"|"jetson_tx2"|"jetson_nano"|"jetson_xavier"|"rasp3b"|"imx8qm"|"deeplens"|"rk3399"|"rk3288"|"aisage"|"sbe_c"|"qcs605"|"qcs603"|"sitara_am57x"|"amba_cv2"|"amba_cv22"|"amba_cv25"|"x86_win32"|"x86_win64"|"coreml"|"jacinto_tda4vm"|"imx8mplus"|string;
   export type TargetObjectiveMetricValue = number;
   export interface TargetPlatform {
     /**

@@ -2611,6 +2611,10 @@ declare namespace Iot {
      * Specifies whether IoT validates the token signature in an authorization request.
      */
     signingDisabled?: BooleanKey;
+    /**
+     * When true, the result from the authorizer’s Lambda function is cached for the time specified in refreshAfterInSeconds. The cached result is used while the device reuses the same HTTP connection.
+     */
+    enableCachingForHttp?: EnableCachingForHttp;
   }
   export type AuthorizerFunctionArn = string;
   export type AuthorizerName = string;
@@ -3259,6 +3263,10 @@ declare namespace Iot {
      * Specifies whether IoT validates the token signature in an authorization request.
      */
     signingDisabled?: BooleanKey;
+    /**
+     * When true, the result from the authorizer’s Lambda function is cached for clients that use persistent HTTP connections. The results are cached for the time specified by the Lambda function in refreshAfterInSeconds. This value does not affect authorization of clients that use MQTT connections. The default value is false.
+     */
+    enableCachingForHttp?: EnableCachingForHttp;
   }
   export interface CreateAuthorizerResponse {
     /**
@@ -5797,6 +5805,7 @@ declare namespace Iot {
   export type ElasticsearchId = string;
   export type ElasticsearchIndex = string;
   export type ElasticsearchType = string;
+  export type EnableCachingForHttp = boolean;
   export interface EnableIoTLoggingParams {
     /**
      * The Amazon Resource Name (ARN) of the IAM role used for logging.
@@ -10477,6 +10486,10 @@ declare namespace Iot {
      * The status of the update authorizer request.
      */
     status?: AuthorizerStatus;
+    /**
+     * When true, the result from the authorizer’s Lambda function is cached for the time specified in refreshAfterInSeconds. The cached result is used while the device reuses the same HTTP connection.
+     */
+    enableCachingForHttp?: EnableCachingForHttp;
   }
   export interface UpdateAuthorizerResponse {
     /**

@@ -45,11 +45,11 @@ declare class LookoutVision extends Service {
    */
   deleteDataset(callback?: (err: AWSError, data: LookoutVision.Types.DeleteDatasetResponse) => void): Request<LookoutVision.Types.DeleteDatasetResponse, AWSError>;
   /**
-   * Deletes an Amazon Lookout for Vision model. You can't delete a running model. To stop a running model, use the StopModel operation. It might take a few seconds to delete a model. To determine if a model has been deleted, call ListProjects and check if the version of the model (ModelVersion) is in the Models array.  This operation requires permissions to perform the lookoutvision:DeleteModel operation.
+   * Deletes an Amazon Lookout for Vision model. You can't delete a running model. To stop a running model, use the StopModel operation. It might take a few seconds to delete a model. To determine if a model has been deleted, call ListModels and check if the version of the model (ModelVersion) is in the Models array.   This operation requires permissions to perform the lookoutvision:DeleteModel operation.
    */
   deleteModel(params: LookoutVision.Types.DeleteModelRequest, callback?: (err: AWSError, data: LookoutVision.Types.DeleteModelResponse) => void): Request<LookoutVision.Types.DeleteModelResponse, AWSError>;
   /**
-   * Deletes an Amazon Lookout for Vision model. You can't delete a running model. To stop a running model, use the StopModel operation. It might take a few seconds to delete a model. To determine if a model has been deleted, call ListProjects and check if the version of the model (ModelVersion) is in the Models array.  This operation requires permissions to perform the lookoutvision:DeleteModel operation.
+   * Deletes an Amazon Lookout for Vision model. You can't delete a running model. To stop a running model, use the StopModel operation. It might take a few seconds to delete a model. To determine if a model has been deleted, call ListModels and check if the version of the model (ModelVersion) is in the Models array.   This operation requires permissions to perform the lookoutvision:DeleteModel operation.
    */
   deleteModel(callback?: (err: AWSError, data: LookoutVision.Types.DeleteModelResponse) => void): Request<LookoutVision.Types.DeleteModelResponse, AWSError>;
   /**
@@ -77,6 +77,14 @@ declare class LookoutVision extends Service {
    */
   describeModel(callback?: (err: AWSError, data: LookoutVision.Types.DescribeModelResponse) => void): Request<LookoutVision.Types.DescribeModelResponse, AWSError>;
   /**
+   * Describes an Amazon Lookout for Vision model packaging job.  This operation requires permissions to perform the lookoutvision:DescribeModelPackagingJob operation. For more information, see Using your Amazon Lookout for Vision model on an edge device in the Amazon Lookout for Vision Developer Guide. 
+   */
+  describeModelPackagingJob(params: LookoutVision.Types.DescribeModelPackagingJobRequest, callback?: (err: AWSError, data: LookoutVision.Types.DescribeModelPackagingJobResponse) => void): Request<LookoutVision.Types.DescribeModelPackagingJobResponse, AWSError>;
+  /**
+   * Describes an Amazon Lookout for Vision model packaging job.  This operation requires permissions to perform the lookoutvision:DescribeModelPackagingJob operation. For more information, see Using your Amazon Lookout for Vision model on an edge device in the Amazon Lookout for Vision Developer Guide. 
+   */
+  describeModelPackagingJob(callback?: (err: AWSError, data: LookoutVision.Types.DescribeModelPackagingJobResponse) => void): Request<LookoutVision.Types.DescribeModelPackagingJobResponse, AWSError>;
+  /**
    * Describes an Amazon Lookout for Vision project. This operation requires permissions to perform the lookoutvision:DescribeProject operation.
    */
   describeProject(params: LookoutVision.Types.DescribeProjectRequest, callback?: (err: AWSError, data: LookoutVision.Types.DescribeProjectResponse) => void): Request<LookoutVision.Types.DescribeProjectResponse, AWSError>;
@@ -101,19 +109,27 @@ declare class LookoutVision extends Service {
    */
   listDatasetEntries(callback?: (err: AWSError, data: LookoutVision.Types.ListDatasetEntriesResponse) => void): Request<LookoutVision.Types.ListDatasetEntriesResponse, AWSError>;
   /**
-   * Lists the versions of a model in an Amazon Lookout for Vision project. This operation requires permissions to perform the lookoutvision:ListModels operation.
+   *  Lists the model packaging jobs created for an Amazon Lookout for Vision project.  This operation requires permissions to perform the lookoutvision:ListModelPackagingJobs operation.  For more information, see Using your Amazon Lookout for Vision model on an edge device in the Amazon Lookout for Vision Developer Guide. 
+   */
+  listModelPackagingJobs(params: LookoutVision.Types.ListModelPackagingJobsRequest, callback?: (err: AWSError, data: LookoutVision.Types.ListModelPackagingJobsResponse) => void): Request<LookoutVision.Types.ListModelPackagingJobsResponse, AWSError>;
+  /**
+   *  Lists the model packaging jobs created for an Amazon Lookout for Vision project.  This operation requires permissions to perform the lookoutvision:ListModelPackagingJobs operation.  For more information, see Using your Amazon Lookout for Vision model on an edge device in the Amazon Lookout for Vision Developer Guide. 
+   */
+  listModelPackagingJobs(callback?: (err: AWSError, data: LookoutVision.Types.ListModelPackagingJobsResponse) => void): Request<LookoutVision.Types.ListModelPackagingJobsResponse, AWSError>;
+  /**
+   * Lists the versions of a model in an Amazon Lookout for Vision project. The ListModels operation is eventually consistent. Recent calls to CreateModel might take a while to appear in the response from ListProjects. This operation requires permissions to perform the lookoutvision:ListModels operation.
    */
   listModels(params: LookoutVision.Types.ListModelsRequest, callback?: (err: AWSError, data: LookoutVision.Types.ListModelsResponse) => void): Request<LookoutVision.Types.ListModelsResponse, AWSError>;
   /**
-   * Lists the versions of a model in an Amazon Lookout for Vision project. This operation requires permissions to perform the lookoutvision:ListModels operation.
+   * Lists the versions of a model in an Amazon Lookout for Vision project. The ListModels operation is eventually consistent. Recent calls to CreateModel might take a while to appear in the response from ListProjects. This operation requires permissions to perform the lookoutvision:ListModels operation.
    */
   listModels(callback?: (err: AWSError, data: LookoutVision.Types.ListModelsResponse) => void): Request<LookoutVision.Types.ListModelsResponse, AWSError>;
   /**
-   * Lists the Amazon Lookout for Vision projects in your AWS account. This operation requires permissions to perform the lookoutvision:ListProjects operation.
+   * Lists the Amazon Lookout for Vision projects in your AWS account. The ListProjects operation is eventually consistent. Recent calls to CreateProject and DeleteProject might take a while to appear in the response from ListProjects. This operation requires permissions to perform the lookoutvision:ListProjects operation.
    */
   listProjects(params: LookoutVision.Types.ListProjectsRequest, callback?: (err: AWSError, data: LookoutVision.Types.ListProjectsResponse) => void): Request<LookoutVision.Types.ListProjectsResponse, AWSError>;
   /**
-   * Lists the Amazon Lookout for Vision projects in your AWS account. This operation requires permissions to perform the lookoutvision:ListProjects operation.
+   * Lists the Amazon Lookout for Vision projects in your AWS account. The ListProjects operation is eventually consistent. Recent calls to CreateProject and DeleteProject might take a while to appear in the response from ListProjects. This operation requires permissions to perform the lookoutvision:ListProjects operation.
    */
   listProjects(callback?: (err: AWSError, data: LookoutVision.Types.ListProjectsResponse) => void): Request<LookoutVision.Types.ListProjectsResponse, AWSError>;
   /**
@@ -132,6 +148,14 @@ declare class LookoutVision extends Service {
    * Starts the running of the version of an Amazon Lookout for Vision model. Starting a model takes a while to complete. To check the current state of the model, use DescribeModel. A model is ready to use when its status is HOSTED. Once the model is running, you can detect custom labels in new images by calling DetectAnomalies.  You are charged for the amount of time that the model is running. To stop a running model, call StopModel.  This operation requires permissions to perform the lookoutvision:StartModel operation.
    */
   startModel(callback?: (err: AWSError, data: LookoutVision.Types.StartModelResponse) => void): Request<LookoutVision.Types.StartModelResponse, AWSError>;
+  /**
+   * Starts an Amazon Lookout for Vision model packaging job. A model packaging job creates an AWS IoT Greengrass component for a Lookout for Vision model. You can use the component to deploy your model to an edge device managed by Greengrass.  Use the DescribeModelPackagingJob API to determine the current status of the job. The model packaging job is complete if the value of Status is SUCCEEDED. To deploy the component to the target device, use the component name and component version with the AWS IoT Greengrass CreateDeployment API. This operation requires the following permissions:    lookoutvision:StartModelPackagingJobs     s3:PutObject     s3:GetBucketLocation     greengrass:CreateComponentVersion     greengrass:DescribeComponent    (Optional) greengrass:TagResource. Only required if you want to tag the component.   For more information, see Using your Amazon Lookout for Vision model on an edge device in the Amazon Lookout for Vision Developer Guide. 
+   */
+  startModelPackagingJob(params: LookoutVision.Types.StartModelPackagingJobRequest, callback?: (err: AWSError, data: LookoutVision.Types.StartModelPackagingJobResponse) => void): Request<LookoutVision.Types.StartModelPackagingJobResponse, AWSError>;
+  /**
+   * Starts an Amazon Lookout for Vision model packaging job. A model packaging job creates an AWS IoT Greengrass component for a Lookout for Vision model. You can use the component to deploy your model to an edge device managed by Greengrass.  Use the DescribeModelPackagingJob API to determine the current status of the job. The model packaging job is complete if the value of Status is SUCCEEDED. To deploy the component to the target device, use the component name and component version with the AWS IoT Greengrass CreateDeployment API. This operation requires the following permissions:    lookoutvision:StartModelPackagingJobs     s3:PutObject     s3:GetBucketLocation     greengrass:CreateComponentVersion     greengrass:DescribeComponent    (Optional) greengrass:TagResource. Only required if you want to tag the component.   For more information, see Using your Amazon Lookout for Vision model on an edge device in the Amazon Lookout for Vision Developer Guide. 
+   */
+  startModelPackagingJob(callback?: (err: AWSError, data: LookoutVision.Types.StartModelPackagingJobResponse) => void): Request<LookoutVision.Types.StartModelPackagingJobResponse, AWSError>;
   /**
    * Stops the hosting of a running model. The operation might take a while to complete. To check the current status, call DescribeModel.  After the model hosting stops, the Status of the model is TRAINED. This operation requires permissions to perform the lookoutvision:StopModel operation.
    */
@@ -157,11 +181,11 @@ declare class LookoutVision extends Service {
    */
   untagResource(callback?: (err: AWSError, data: LookoutVision.Types.UntagResourceResponse) => void): Request<LookoutVision.Types.UntagResourceResponse, AWSError>;
   /**
-   * Adds one or more JSON Line entries to a dataset. A JSON Line includes information about an image used for training or testing an Amazon Lookout for Vision model. The following is an example JSON Line. Updating a dataset might take a while to complete. To check the current status, call DescribeDataset and check the Status field in the response. This operation requires permissions to perform the lookoutvision:UpdateDatasetEntries operation.
+   * Adds or updates one or more JSON Line entries in a dataset. A JSON Line includes information about an image used for training or testing an Amazon Lookout for Vision model. To update an existing JSON Line, use the source-ref field to identify the JSON Line. The JSON line that you supply replaces the existing JSON line. Any existing annotations that are not in the new JSON line are removed from the dataset.  For more information, see Defining JSON lines for anomaly classification in the Amazon Lookout for Vision Developer Guide.   The images you reference in the source-ref field of a JSON line, must be in the same S3 bucket as the existing images in the dataset.   Updating a dataset might take a while to complete. To check the current status, call DescribeDataset and check the Status field in the response. This operation requires permissions to perform the lookoutvision:UpdateDatasetEntries operation.
    */
   updateDatasetEntries(params: LookoutVision.Types.UpdateDatasetEntriesRequest, callback?: (err: AWSError, data: LookoutVision.Types.UpdateDatasetEntriesResponse) => void): Request<LookoutVision.Types.UpdateDatasetEntriesResponse, AWSError>;
   /**
-   * Adds one or more JSON Line entries to a dataset. A JSON Line includes information about an image used for training or testing an Amazon Lookout for Vision model. The following is an example JSON Line. Updating a dataset might take a while to complete. To check the current status, call DescribeDataset and check the Status field in the response. This operation requires permissions to perform the lookoutvision:UpdateDatasetEntries operation.
+   * Adds or updates one or more JSON Line entries in a dataset. A JSON Line includes information about an image used for training or testing an Amazon Lookout for Vision model. To update an existing JSON Line, use the source-ref field to identify the JSON Line. The JSON line that you supply replaces the existing JSON line. Any existing annotations that are not in the new JSON line are removed from the dataset.  For more information, see Defining JSON lines for anomaly classification in the Amazon Lookout for Vision Developer Guide.   The images you reference in the source-ref field of a JSON line, must be in the same S3 bucket as the existing images in the dataset.   Updating a dataset might take a while to complete. To check the current status, call DescribeDataset and check the Status field in the response. This operation requires permissions to perform the lookoutvision:UpdateDatasetEntries operation.
    */
   updateDatasetEntries(callback?: (err: AWSError, data: LookoutVision.Types.UpdateDatasetEntriesResponse) => void): Request<LookoutVision.Types.UpdateDatasetEntriesResponse, AWSError>;
 }
@@ -169,6 +193,11 @@ declare namespace LookoutVision {
   export type AnomalyClassFilter = string;
   export type Boolean = boolean;
   export type ClientToken = string;
+  export type CompilerOptions = string;
+  export type ComponentDescription = string;
+  export type ComponentName = string;
+  export type ComponentVersion = string;
+  export type ComponentVersionArn = string;
   export type ContentType = string;
   export interface CreateDatasetRequest {
     /**
@@ -184,7 +213,7 @@ declare namespace LookoutVision {
      */
     DatasetSource?: DatasetSource;
     /**
-     * ClientToken is an idempotency token that ensures a call to CreateDataset completes only once. You choose the value to pass. For example, An issue, such as an network outage, might prevent you from getting a response from CreateDataset. In this case, safely retry your call to CreateDataset by using the same ClientToken parameter value. An error occurs if the other input parameters are not the same as in the first request. Using a different value for ClientToken is considered a new call to CreateDataset. An idempotency token is active for 8 hours. 
+     * ClientToken is an idempotency token that ensures a call to CreateDataset completes only once. You choose the value to pass. For example, An issue might prevent you from getting a response from CreateDataset. In this case, safely retry your call to CreateDataset by using the same ClientToken parameter value. If you don't supply a value for ClientToken, the AWS SDK you are using inserts a value for you. This prevents retries after a network error from making multiple dataset creation requests. You'll need to provide your own value for other use cases.  An error occurs if the other input parameters are not the same as in the first request. Using a different value for ClientToken is considered a new call to CreateDataset. An idempotency token is active for 8 hours. 
      */
     ClientToken?: ClientToken;
   }
@@ -204,7 +233,7 @@ declare namespace LookoutVision {
      */
     Description?: ModelDescriptionMessage;
     /**
-     * ClientToken is an idempotency token that ensures a call to CreateModel completes only once. You choose the value to pass. For example, An issue, such as an network outage, might prevent you from getting a response from CreateModel. In this case, safely retry your call to CreateModel by using the same ClientToken parameter value. An error occurs if the other input parameters are not the same as in the first request. Using a different value for ClientToken is considered a new call to CreateModel. An idempotency token is active for 8 hours.
+     * ClientToken is an idempotency token that ensures a call to CreateModel completes only once. You choose the value to pass. For example, An issue might prevent you from getting a response from CreateModel. In this case, safely retry your call to CreateModel by using the same ClientToken parameter value.  If you don't supply a value for ClientToken, the AWS SDK you are using inserts a value for you. This prevents retries after a network error from starting multiple training jobs. You'll need to provide your own value for other use cases.  An error occurs if the other input parameters are not the same as in the first request. Using a different value for ClientToken is considered a new call to CreateModel. An idempotency token is active for 8 hours.
      */
     ClientToken?: ClientToken;
     /**
@@ -212,7 +241,7 @@ declare namespace LookoutVision {
      */
     OutputConfig: OutputConfig;
     /**
-     * The identifier for your AWS Key Management Service (AWS KMS) customer master key (CMK). The key is used to encrypt training and test images copied into the service for model training. Your source images are unaffected. If this parameter is not specified, the copied images are encrypted by a key that AWS owns and manages.
+     * The identifier for your AWS KMS key. The key is used to encrypt training and test images copied into the service for model training. Your source images are unaffected. If this parameter is not specified, the copied images are encrypted by a key that AWS owns and manages.
      */
     KmsKeyId?: KmsKeyId;
     /**
@@ -232,7 +261,7 @@ declare namespace LookoutVision {
      */
     ProjectName: ProjectName;
     /**
-     * ClientToken is an idempotency token that ensures a call to CreateProject completes only once. You choose the value to pass. For example, An issue, such as an network outage, might prevent you from getting a response from CreateProject. In this case, safely retry your call to CreateProject by using the same ClientToken parameter value. An error occurs if the other input parameters are not the same as in the first request. Using a different value for ClientToken is considered a new call to CreateProject. An idempotency token is active for 8 hours.
+     * ClientToken is an idempotency token that ensures a call to CreateProject completes only once. You choose the value to pass. For example, An issue might prevent you from getting a response from CreateProject. In this case, safely retry your call to CreateProject by using the same ClientToken parameter value.  If you don't supply a value for ClientToken, the AWS SDK you are using inserts a value for you. This prevents retries after a network error from making multiple project creation requests. You'll need to provide your own value for other use cases.  An error occurs if the other input parameters are not the same as in the first request. Using a different value for ClientToken is considered a new call to CreateProject. An idempotency token is active for 8 hours.
      */
     ClientToken?: ClientToken;
   }
@@ -269,7 +298,7 @@ declare namespace LookoutVision {
      */
     StatusMessage?: DatasetStatusMessage;
     /**
-     * 
+     * Statistics about the images in a dataset.
      */
     ImageStats?: DatasetImageStats;
   }
@@ -338,7 +367,7 @@ declare namespace LookoutVision {
      */
     DatasetType: DatasetType;
     /**
-     * ClientToken is an idempotency token that ensures a call to DeleteDataset completes only once. You choose the value to pass. For example, An issue, such as an network outage, might prevent you from getting a response from DeleteDataset. In this case, safely retry your call to DeleteDataset by using the same ClientToken parameter value. An error occurs if the other input parameters are not the same as in the first request. Using a different value for ClientToken is considered a new call to DeleteDataset. An idempotency token is active for 8 hours.
+     * ClientToken is an idempotency token that ensures a call to DeleteDataset completes only once. You choose the value to pass. For example, An issue might prevent you from getting a response from DeleteDataset. In this case, safely retry your call to DeleteDataset by using the same ClientToken parameter value.  If you don't supply a value for ClientToken, the AWS SDK you are using inserts a value for you. This prevents retries after a network error from making multiple deletetion requests. You'll need to provide your own value for other use cases.  An error occurs if the other input parameters are not the same as in the first request. Using a different value for ClientToken is considered a new call to DeleteDataset. An idempotency token is active for 8 hours.
      */
     ClientToken?: ClientToken;
   }
@@ -352,9 +381,9 @@ declare namespace LookoutVision {
     /**
      * The version of the model that you want to delete.
      */
-    ModelVersion: ModelVersion;
+    ModelVersion: ModelVersionNoLatest;
     /**
-     * ClientToken is an idempotency token that ensures a call to DeleteModel completes only once. You choose the value to pass. For example, An issue, such as an network outage, might prevent you from getting a response from DeleteModel. In this case, safely retry your call to DeleteModel by using the same ClientToken parameter value. An error occurs if the other input parameters are not the same as in the first request. Using a different value for ClientToken is considered a new call to DeleteModel. An idempotency token is active for 8 hours.
+     * ClientToken is an idempotency token that ensures a call to DeleteModel completes only once. You choose the value to pass. For example, an issue might prevent you from getting a response from DeleteModel. In this case, safely retry your call to DeleteModel by using the same ClientToken parameter value. If you don't supply a value for ClientToken, the AWS SDK you are using inserts a value for you. This prevents retries after a network error from making multiple model deletion requests. You'll need to provide your own value for other use cases.  An error occurs if the other input parameters are not the same as in the first request. Using a different value for ClientToken is considered a new call to DeleteModel. An idempotency token is active for 8 hours.
      */
     ClientToken?: ClientToken;
   }
@@ -370,7 +399,7 @@ declare namespace LookoutVision {
      */
     ProjectName: ProjectName;
     /**
-     * ClientToken is an idempotency token that ensures a call to DeleteProject completes only once. You choose the value to pass. For example, An issue, such as an network outage, might prevent you from getting a response from DeleteProject. In this case, safely retry your call to DeleteProject by using the same ClientToken parameter value. An error occurs if the other input parameters are not the same as in the first request. Using a different value for ClientToken is considered a new call to DeleteProject. An idempotency token is active for 8 hours.
+     * ClientToken is an idempotency token that ensures a call to DeleteProject completes only once. You choose the value to pass. For example, An issue might prevent you from getting a response from DeleteProject. In this case, safely retry your call to DeleteProject by using the same ClientToken parameter value.  If you don't supply a value for ClientToken, the AWS SDK you are using inserts a value for you. This prevents retries after a network error from making multiple project deletion requests. You'll need to provide your own value for other use cases.  An error occurs if the other input parameters are not the same as in the first request. Using a different value for ClientToken is considered a new call to DeleteProject. An idempotency token is active for 8 hours.
      */
     ClientToken?: ClientToken;
   }
@@ -395,6 +424,22 @@ declare namespace LookoutVision {
      * The description of the requested dataset. 
      */
     DatasetDescription?: DatasetDescription;
+  }
+  export interface DescribeModelPackagingJobRequest {
+    /**
+     * The name of the project that contains the model packaging job that you want to describe. 
+     */
+    ProjectName: ProjectName;
+    /**
+     * The job name for the model packaging job. 
+     */
+    JobName: ModelPackagingJobName;
+  }
+  export interface DescribeModelPackagingJobResponse {
+    /**
+     * The description of the model packaging job. 
+     */
+    ModelPackagingDescription?: ModelPackagingDescription;
   }
   export interface DescribeModelRequest {
     /**
@@ -463,6 +508,54 @@ declare namespace LookoutVision {
     Confidence?: Float;
   }
   export type Float = number;
+  export interface GreengrassConfiguration {
+    /**
+     * Additional compiler options for the Greengrass component. Currently, only NVIDIA Graphics Processing Units (GPU) are supported. For more information, see Compiler options in the Amazon Lookout for Vision Developer Guide. 
+     */
+    CompilerOptions: CompilerOptions;
+    /**
+     * The target device for the model. Currently the only supported value is jetson_xavier. If you specify TargetDevice, you can't specify TargetPlatform. 
+     */
+    TargetDevice?: TargetDevice;
+    /**
+     * The target platform for the model. If you specify TargetPlatform, you can't specify TargetDevice. 
+     */
+    TargetPlatform?: TargetPlatform;
+    /**
+     *  An S3 location in which Lookout for Vision stores the component artifacts. 
+     */
+    S3OutputLocation: S3Location;
+    /**
+     *  A name for the AWS IoT Greengrass component. 
+     */
+    ComponentName: ComponentName;
+    /**
+     * A Version for the AWS IoT Greengrass component. If you don't provide a value, a default value of  Model Version.0.0 is used. 
+     */
+    ComponentVersion?: ComponentVersion;
+    /**
+     *  A description for the AWS IoT Greengrass component. 
+     */
+    ComponentDescription?: ComponentDescription;
+    /**
+     *  A set of tags (key-value pairs) that you want to attach to the AWS IoT Greengrass component. 
+     */
+    Tags?: TagList;
+  }
+  export interface GreengrassOutputDetails {
+    /**
+     *  The Amazon Resource Name (ARN) of the component. 
+     */
+    ComponentVersionArn?: ComponentVersionArn;
+    /**
+     *  The name of the component. 
+     */
+    ComponentName?: ComponentName;
+    /**
+     *  The version of the component. 
+     */
+    ComponentVersion?: ComponentVersion;
+  }
   export interface ImageSource {
     /**
      * The type of the image.
@@ -533,6 +626,30 @@ declare namespace LookoutVision {
     DatasetEntries?: DatasetEntryList;
     /**
      * If the response is truncated, Amazon Lookout for Vision returns this token that you can use in the subsequent request to retrieve the next set ofdataset entries.
+     */
+    NextToken?: PaginationToken;
+  }
+  export interface ListModelPackagingJobsRequest {
+    /**
+     *  The name of the project for which you want to list the model packaging jobs. 
+     */
+    ProjectName: ProjectName;
+    /**
+     * If the previous response was incomplete (because there is more results to retrieve), Amazon Lookout for Vision returns a pagination token in the response. You can use this pagination token to retrieve the next set of results. 
+     */
+    NextToken?: PaginationToken;
+    /**
+     * The maximum number of results to return per paginated call. The largest value you can specify is 100. If you specify a value greater than 100, a ValidationException error occurs. The default value is 100. 
+     */
+    MaxResults?: PageSize;
+  }
+  export interface ListModelPackagingJobsResponse {
+    /**
+     *  A list of the model packaging jobs created for the specified Amazon Lookout for Vision project. 
+     */
+    ModelPackagingJobs?: ModelPackagingJobsList;
+    /**
+     * If the previous response was incomplete (because there is more results to retrieve), Amazon Lookout for Vision returns a pagination token in the response. You can use this pagination token to retrieve the next set of results. 
      */
     NextToken?: PaginationToken;
   }
@@ -676,6 +793,108 @@ declare namespace LookoutVision {
     Performance?: ModelPerformance;
   }
   export type ModelMetadataList = ModelMetadata[];
+  export interface ModelPackagingConfiguration {
+    /**
+     *  Configuration information for the AWS IoT Greengrass component in a model packaging job. 
+     */
+    Greengrass: GreengrassConfiguration;
+  }
+  export interface ModelPackagingDescription {
+    /**
+     *  The name of the model packaging job. 
+     */
+    JobName?: ModelPackagingJobName;
+    /**
+     * The name of the project that's associated with a model that's in the model package. 
+     */
+    ProjectName?: ProjectName;
+    /**
+     * The version of the model used in the model packaging job. 
+     */
+    ModelVersion?: ModelVersion;
+    /**
+     *  The configuration information used in the model packaging job. 
+     */
+    ModelPackagingConfiguration?: ModelPackagingConfiguration;
+    /**
+     * The description for the model packaging job. 
+     */
+    ModelPackagingJobDescription?: ModelPackagingJobDescription;
+    /**
+     * The AWS service used to package the job. Currently Lookout for Vision can package jobs with AWS IoT Greengrass. 
+     */
+    ModelPackagingMethod?: ModelPackagingMethod;
+    /**
+     * Information about the output of the model packaging job. For more information, see DescribeModelPackagingJob. 
+     */
+    ModelPackagingOutputDetails?: ModelPackagingOutputDetails;
+    /**
+     *  The status of the model packaging job. 
+     */
+    Status?: ModelPackagingJobStatus;
+    /**
+     *  The status message for the model packaging job. 
+     */
+    StatusMessage?: ModelPackagingStatusMessage;
+    /**
+     *  The Unix timestamp for the time and date that the model packaging job was created. 
+     */
+    CreationTimestamp?: DateTime;
+    /**
+     *  The Unix timestamp for the time and date that the model packaging job was last updated. 
+     */
+    LastUpdatedTimestamp?: DateTime;
+  }
+  export type ModelPackagingJobDescription = string;
+  export interface ModelPackagingJobMetadata {
+    /**
+     *  The name of the model packaging job. 
+     */
+    JobName?: ModelPackagingJobName;
+    /**
+     *  The project that contains the model that is in the model package. 
+     */
+    ProjectName?: ProjectName;
+    /**
+     *  The version of the model that is in the model package. 
+     */
+    ModelVersion?: ModelVersion;
+    /**
+     *  The description for the model packaging job. 
+     */
+    ModelPackagingJobDescription?: ModelPackagingJobDescription;
+    /**
+     *  The AWS service used to package the job. Currently Lookout for Vision can package jobs with AWS IoT Greengrass. 
+     */
+    ModelPackagingMethod?: ModelPackagingMethod;
+    /**
+     * The status of the model packaging job. 
+     */
+    Status?: ModelPackagingJobStatus;
+    /**
+     * The status message for the model packaging job. 
+     */
+    StatusMessage?: ModelPackagingStatusMessage;
+    /**
+     * The Unix timestamp for the time and date that the model packaging job was created.
+     */
+    CreationTimestamp?: DateTime;
+    /**
+     * The Unix timestamp for the time and date that the model packaging job was last updated.
+     */
+    LastUpdatedTimestamp?: DateTime;
+  }
+  export type ModelPackagingJobName = string;
+  export type ModelPackagingJobStatus = "CREATED"|"RUNNING"|"SUCCEEDED"|"FAILED"|string;
+  export type ModelPackagingJobsList = ModelPackagingJobMetadata[];
+  export type ModelPackagingMethod = string;
+  export interface ModelPackagingOutputDetails {
+    /**
+     *  Information about the AWS IoT Greengrass component in a model packaging job. 
+     */
+    Greengrass?: GreengrassOutputDetails;
+  }
+  export type ModelPackagingStatusMessage = string;
   export interface ModelPerformance {
     /**
      * The overall F1 score metric for the trained model.
@@ -693,6 +912,7 @@ declare namespace LookoutVision {
   export type ModelStatus = "TRAINING"|"TRAINED"|"TRAINING_FAILED"|"STARTING_HOSTING"|"HOSTED"|"HOSTING_FAILED"|"STOPPING_HOSTING"|"SYSTEM_UPDATING"|"DELETING"|string;
   export type ModelStatusMessage = string;
   export type ModelVersion = string;
+  export type ModelVersionNoLatest = string;
   export interface OutputConfig {
     /**
      * The S3 location for the output.
@@ -751,16 +971,48 @@ declare namespace LookoutVision {
   export type S3KeyPrefix = string;
   export interface S3Location {
     /**
-     * The S3 bucket that contains the training output.
+     * The S3 bucket that contains the training or model packaging job output. If you are training a model, the bucket must in your AWS account. If you use an S3 bucket for a model packaging job, the S3 bucket must be in the same AWS Region and AWS account in which you use AWS IoT Greengrass.
      */
     Bucket: S3BucketName;
     /**
-     * The path of the folder, within the S3 bucket, that contains the training output.
+     * The path of the folder, within the S3 bucket, that contains the output.
      */
     Prefix?: S3KeyPrefix;
   }
   export type S3ObjectKey = string;
   export type S3ObjectVersion = string;
+  export interface StartModelPackagingJobRequest {
+    /**
+     *  The name of the project which contains the version of the model that you want to package. 
+     */
+    ProjectName: ProjectName;
+    /**
+     *  The version of the model within the project that you want to package. 
+     */
+    ModelVersion: ModelVersion;
+    /**
+     * A name for the model packaging job. If you don't supply a value, the service creates a job name for you. 
+     */
+    JobName?: ModelPackagingJobName;
+    /**
+     * The configuration for the model packaging job. 
+     */
+    Configuration: ModelPackagingConfiguration;
+    /**
+     * A description for the model packaging job. 
+     */
+    Description?: ModelPackagingJobDescription;
+    /**
+     * ClientToken is an idempotency token that ensures a call to StartModelPackagingJob completes only once. You choose the value to pass. For example, An issue might prevent you from getting a response from StartModelPackagingJob. In this case, safely retry your call to StartModelPackagingJob by using the same ClientToken parameter value. If you don't supply a value for ClientToken, the AWS SDK you are using inserts a value for you. This prevents retries after a network error from making multiple dataset creation requests. You'll need to provide your own value for other use cases.  An error occurs if the other input parameters are not the same as in the first request. Using a different value for ClientToken is considered a new call to StartModelPackagingJob. An idempotency token is active for 8 hours. 
+     */
+    ClientToken?: ClientToken;
+  }
+  export interface StartModelPackagingJobResponse {
+    /**
+     * The job name for the model packaging job. If you don't supply a job name in the JobName input parameter, the service creates a job name for you. 
+     */
+    JobName?: ModelPackagingJobName;
+  }
   export interface StartModelRequest {
     /**
      * The name of the project that contains the model that you want to start.
@@ -771,11 +1023,11 @@ declare namespace LookoutVision {
      */
     ModelVersion: ModelVersion;
     /**
-     * The minimum number of inference units to use. A single inference unit represents 1 hour of processing and can support up to 5 Transaction Pers Second (TPS). Use a higher number to increase the TPS throughput of your model. You are charged for the number of inference units that you use. 
+     * The minimum number of inference units to use. A single inference unit represents 1 hour of processing. Use a higher number to increase the TPS throughput of your model. You are charged for the number of inference units that you use. 
      */
     MinInferenceUnits: InferenceUnits;
     /**
-     * ClientToken is an idempotency token that ensures a call to StartModel completes only once. You choose the value to pass. For example, An issue, such as an network outage, might prevent you from getting a response from StartModel. In this case, safely retry your call to StartModel by using the same ClientToken parameter value. An error occurs if the other input parameters are not the same as in the first request. Using a different value for ClientToken is considered a new call to StartModel. An idempotency token is active for 8 hours. 
+     * ClientToken is an idempotency token that ensures a call to StartModel completes only once. You choose the value to pass. For example, An issue might prevent you from getting a response from StartModel. In this case, safely retry your call to StartModel by using the same ClientToken parameter value.  If you don't supply a value for ClientToken, the AWS SDK you are using inserts a value for you. This prevents retries after a network error from making multiple start requests. You'll need to provide your own value for other use cases.  An error occurs if the other input parameters are not the same as in the first request. Using a different value for ClientToken is considered a new call to StartModel. An idempotency token is active for 8 hours. 
      */
     ClientToken?: ClientToken;
   }
@@ -795,7 +1047,7 @@ declare namespace LookoutVision {
      */
     ModelVersion: ModelVersion;
     /**
-     * ClientToken is an idempotency token that ensures a call to StopModel completes only once. You choose the value to pass. For example, An issue, such as an network outage, might prevent you from getting a response from StopModel. In this case, safely retry your call to StopModel by using the same ClientToken parameter value. An error occurs if the other input parameters are not the same as in the first request. Using a different value for ClientToken is considered a new call to StopModel. An idempotency token is active for 8 hours. 
+     * ClientToken is an idempotency token that ensures a call to StopModel completes only once. You choose the value to pass. For example, An issue might prevent you from getting a response from StopModel. In this case, safely retry your call to StopModel by using the same ClientToken parameter value. If you don't supply a value for ClientToken, the AWS SDK you are using inserts a value for you. This prevents retries after a network error from making multiple stop requests. You'll need to provide your own value for other use cases.  An error occurs if the other input parameters are not the same as in the first request. Using a different value for ClientToken is considered a new call to StopModel. An idempotency token is active for 8 hours. 
      */
     ClientToken?: ClientToken;
   }
@@ -833,6 +1085,24 @@ declare namespace LookoutVision {
   export interface TagResourceResponse {
   }
   export type TagValue = string;
+  export type TargetDevice = "jetson_xavier"|string;
+  export interface TargetPlatform {
+    /**
+     * The target operating system for the model. Linux is the only operating system that is currently supported. 
+     */
+    Os: TargetPlatformOs;
+    /**
+     * The target architecture for the model. The currently supported architectures are X86_64 (64-bit version of the x86 instruction set) and ARM_64 (ARMv8 64-bit CPU). 
+     */
+    Arch: TargetPlatformArch;
+    /**
+     * The target accelerator for the model. NVIDIA (Nvidia graphics processing unit) is the only accelerator that is currently supported. You must also specify the gpu-code, trt-ver, and cuda-ver compiler options. 
+     */
+    Accelerator: TargetPlatformAccelerator;
+  }
+  export type TargetPlatformAccelerator = "NVIDIA"|string;
+  export type TargetPlatformArch = "ARM64"|"X86_64"|string;
+  export type TargetPlatformOs = "LINUX"|string;
   export interface UntagResourceRequest {
     /**
      * The Amazon Resource Name (ARN) of the model from which you want to remove tags. 
@@ -859,7 +1129,7 @@ declare namespace LookoutVision {
      */
     Changes: DatasetChanges;
     /**
-     * ClientToken is an idempotency token that ensures a call to UpdateDatasetEntries completes only once. You choose the value to pass. For example, An issue, such as an network outage, might prevent you from getting a response from UpdateDatasetEntries. In this case, safely retry your call to UpdateDatasetEntries by using the same ClientToken parameter value. An error occurs if the other input parameters are not the same as in the first request. Using a different value for ClientToken is considered a new call to UpdateDatasetEntries. An idempotency token is active for 8 hours. 
+     * ClientToken is an idempotency token that ensures a call to UpdateDatasetEntries completes only once. You choose the value to pass. For example, An issue might prevent you from getting a response from UpdateDatasetEntries. In this case, safely retry your call to UpdateDatasetEntries by using the same ClientToken parameter value. If you don't supply a value for ClientToken, the AWS SDK you are using inserts a value for you. This prevents retries after a network error from making multiple updates with the same dataset entries. You'll need to provide your own value for other use cases.  An error occurs if the other input parameters are not the same as in the first request. Using a different value for ClientToken is considered a new call to UpdateDatasetEntries. An idempotency token is active for 8 hours. 
      */
     ClientToken?: ClientToken;
   }
