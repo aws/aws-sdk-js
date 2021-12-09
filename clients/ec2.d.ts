@@ -4245,6 +4245,14 @@ declare class EC2 extends Service {
    */
   waitFor(state: "instanceTerminated", callback?: (err: AWSError, data: EC2.Types.DescribeInstancesResult) => void): Request<EC2.Types.DescribeInstancesResult, AWSError>;
   /**
+   * Waits for the internetGatewayExists state by periodically calling the underlying EC2.describeInternetGatewaysoperation every 5 seconds (at most 6 times).
+   */
+  waitFor(state: "internetGatewayExists", params: EC2.Types.DescribeInternetGatewaysRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: EC2.Types.DescribeInternetGatewaysResult) => void): Request<EC2.Types.DescribeInternetGatewaysResult, AWSError>;
+  /**
+   * Waits for the internetGatewayExists state by periodically calling the underlying EC2.describeInternetGatewaysoperation every 5 seconds (at most 6 times).
+   */
+  waitFor(state: "internetGatewayExists", callback?: (err: AWSError, data: EC2.Types.DescribeInternetGatewaysResult) => void): Request<EC2.Types.DescribeInternetGatewaysResult, AWSError>;
+  /**
    * Waits for the keyPairExists state by periodically calling the underlying EC2.describeKeyPairsoperation every 5 seconds (at most 6 times).
    */
   waitFor(state: "keyPairExists", params: EC2.Types.DescribeKeyPairsRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: EC2.Types.DescribeKeyPairsResult) => void): Request<EC2.Types.DescribeKeyPairsResult, AWSError>;
@@ -16076,7 +16084,7 @@ declare namespace EC2 {
     /**
      * The ID of the Elastic Graphics accelerator.
      */
-    ElasticGpuId?: String;
+    ElasticGpuId?: ElasticGpuId;
     /**
      * The ID of the association.
      */

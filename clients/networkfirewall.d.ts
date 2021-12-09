@@ -124,6 +124,14 @@ declare class NetworkFirewall extends Service {
    */
   describeRuleGroup(callback?: (err: AWSError, data: NetworkFirewall.Types.DescribeRuleGroupResponse) => void): Request<NetworkFirewall.Types.DescribeRuleGroupResponse, AWSError>;
   /**
+   * High-level information about a rule group, returned by operations like create and describe. You can use the information provided in the metadata to retrieve and manage a rule group. You can retrieve all objects for a rule group by calling DescribeRuleGroup. 
+   */
+  describeRuleGroupMetadata(params: NetworkFirewall.Types.DescribeRuleGroupMetadataRequest, callback?: (err: AWSError, data: NetworkFirewall.Types.DescribeRuleGroupMetadataResponse) => void): Request<NetworkFirewall.Types.DescribeRuleGroupMetadataResponse, AWSError>;
+  /**
+   * High-level information about a rule group, returned by operations like create and describe. You can use the information provided in the metadata to retrieve and manage a rule group. You can retrieve all objects for a rule group by calling DescribeRuleGroup. 
+   */
+  describeRuleGroupMetadata(callback?: (err: AWSError, data: NetworkFirewall.Types.DescribeRuleGroupMetadataResponse) => void): Request<NetworkFirewall.Types.DescribeRuleGroupMetadataResponse, AWSError>;
+  /**
    * Removes the specified subnet associations from the firewall. This removes the firewall endpoints from the subnets and removes any network filtering protections that the endpoints were providing. 
    */
   disassociateSubnets(params: NetworkFirewall.Types.DisassociateSubnetsRequest, callback?: (err: AWSError, data: NetworkFirewall.Types.DisassociateSubnetsResponse) => void): Request<NetworkFirewall.Types.DisassociateSubnetsResponse, AWSError>;
@@ -212,11 +220,11 @@ declare class NetworkFirewall extends Service {
    */
   updateFirewallPolicy(callback?: (err: AWSError, data: NetworkFirewall.Types.UpdateFirewallPolicyResponse) => void): Request<NetworkFirewall.Types.UpdateFirewallPolicyResponse, AWSError>;
   /**
-   * 
+   * Modifies the flag, ChangeProtection, which indicates whether it is possible to change the firewall. If the flag is set to TRUE, the firewall is protected from changes. This setting helps protect against accidentally changing a firewall that's in use.
    */
   updateFirewallPolicyChangeProtection(params: NetworkFirewall.Types.UpdateFirewallPolicyChangeProtectionRequest, callback?: (err: AWSError, data: NetworkFirewall.Types.UpdateFirewallPolicyChangeProtectionResponse) => void): Request<NetworkFirewall.Types.UpdateFirewallPolicyChangeProtectionResponse, AWSError>;
   /**
-   * 
+   * Modifies the flag, ChangeProtection, which indicates whether it is possible to change the firewall. If the flag is set to TRUE, the firewall is protected from changes. This setting helps protect against accidentally changing a firewall that's in use.
    */
   updateFirewallPolicyChangeProtection(callback?: (err: AWSError, data: NetworkFirewall.Types.UpdateFirewallPolicyChangeProtectionResponse) => void): Request<NetworkFirewall.Types.UpdateFirewallPolicyChangeProtectionResponse, AWSError>;
   /**
@@ -623,6 +631,43 @@ declare namespace NetworkFirewall {
      */
     Policy?: PolicyString;
   }
+  export interface DescribeRuleGroupMetadataRequest {
+    /**
+     * The descriptive name of the rule group. You can't change the name of a rule group after you create it. You must specify the ARN or the name, and you can specify both. 
+     */
+    RuleGroupName?: ResourceName;
+    /**
+     * The descriptive name of the rule group. You can't change the name of a rule group after you create it. You must specify the ARN or the name, and you can specify both. 
+     */
+    RuleGroupArn?: ResourceArn;
+    /**
+     * Indicates whether the rule group is stateless or stateful. If the rule group is stateless, it contains stateless rules. If it is stateful, it contains stateful rules.   This setting is required for requests that do not include the RuleGroupARN. 
+     */
+    Type?: RuleGroupType;
+  }
+  export interface DescribeRuleGroupMetadataResponse {
+    /**
+     * The descriptive name of the rule group. You can't change the name of a rule group after you create it. You must specify the ARN or the name, and you can specify both. 
+     */
+    RuleGroupArn: ResourceArn;
+    /**
+     * The descriptive name of the rule group. You can't change the name of a rule group after you create it. You must specify the ARN or the name, and you can specify both. 
+     */
+    RuleGroupName: ResourceName;
+    /**
+     * Returns the metadata objects for the specified rule group. 
+     */
+    Description?: Description;
+    /**
+     * Indicates whether the rule group is stateless or stateful. If the rule group is stateless, it contains stateless rules. If it is stateful, it contains stateful rules.   This setting is required for requests that do not include the RuleGroupARN. 
+     */
+    Type?: RuleGroupType;
+    /**
+     * The maximum operating resources that this rule group can use. Rule group capacity is fixed at creation. When you update a rule group, you are limited to this capacity. When you reference a rule group from a firewall policy, Network Firewall reserves this capacity for the rule group.  You can retrieve the capacity that would be required for a rule group before you create the rule group by calling CreateRuleGroup with DryRun set to TRUE. 
+     */
+    Capacity?: RuleCapacity;
+    StatefulRuleOptions?: StatefulRuleOptions;
+  }
   export interface DescribeRuleGroupRequest {
     /**
      * The descriptive name of the rule group. You can't change the name of a rule group after you create it. You must specify the ARN or the name, and you can specify both. 
@@ -777,7 +822,7 @@ declare namespace NetworkFirewall {
      */
     StatefulRuleGroupReferences?: StatefulRuleGroupReferences;
     /**
-     * The default actions to take on a packet that doesn't match any stateful rules.
+     * The default actions to take on a packet that doesn't match any stateful rules. The stateful default action is optional, and is only valid when using the strict rule order. Valid values of the stateful default action:   aws:drop_strict   aws:drop_established   aws:alert_strict   aws:alert_established   For more information, see Strict evaluation order in the AWS Network Firewall Developer Guide. 
      */
     StatefulDefaultActions?: StatefulActions;
     /**
@@ -940,6 +985,10 @@ declare namespace NetworkFirewall {
      * The maximum number of objects that you want Network Firewall to return for this request. If more objects are available, in the response, Network Firewall provides a NextToken value that you can use in a subsequent call to get the next batch of objects.
      */
     MaxResults?: PaginationMaxResults;
+    /**
+     * The scope of the request. The default setting of ACCOUNT or a setting of NULL returns all of the rule groups in your account. A setting of MANAGED returns all available managed rule groups.
+     */
+    Scope?: ResourceManagedStatus;
   }
   export interface ListRuleGroupsResponse {
     /**
@@ -1026,6 +1075,7 @@ declare namespace NetworkFirewall {
     TCPFlags?: TCPFlags;
   }
   export type NumberOfAssociations = number;
+  export type OverrideAction = "DROP_TO_ALERT"|string;
   export type PaginationMaxResults = number;
   export type PaginationToken = string;
   export interface PerObjectStatus {
@@ -1083,6 +1133,7 @@ declare namespace NetworkFirewall {
   }
   export type ResourceArn = string;
   export type ResourceId = string;
+  export type ResourceManagedStatus = "MANAGED"|"ACCOUNT"|string;
   export type ResourceName = string;
   export type ResourceStatus = "ACTIVE"|"DELETING"|string;
   export type RuleCapacity = number;
@@ -1208,7 +1259,7 @@ declare namespace NetworkFirewall {
   }
   export interface RulesSourceList {
     /**
-     * The domains that you want to inspect for in your traffic flows. To provide multiple domains, separate them with commas. Valid domain specifications are the following:   Explicit names. For example, abc.example.com matches only the domain abc.example.com.   Names that use a domain wildcard, which you indicate with an initial '.'. For example,.example.com matches example.com and matches all subdomains of example.com, such as abc.example.com and www.example.com.   
+     * The domains that you want to inspect for in your traffic flows. Valid domain specifications are the following:   Explicit names. For example, abc.example.com matches only the domain abc.example.com.   Names that use a domain wildcard, which you indicate with an initial '.'. For example,.example.com matches example.com and matches all subdomains of example.com, such as abc.example.com and www.example.com.   
      */
     Targets: RuleTargets;
     /**
@@ -1228,7 +1279,7 @@ declare namespace NetworkFirewall {
   export type StatefulActions = CollectionMember_String[];
   export interface StatefulEngineOptions {
     /**
-     * Indicates how to manage the order of stateful rule evaluation for the policy. By default, Network Firewall leaves the rule evaluation order up to the Suricata rule processing engine. If you set this to STRICT_ORDER, your rules are evaluated in the exact order that you provide them in the policy. With strict ordering, the rule groups are evaluated by order of priority, starting from the lowest number, and the rules in each rule group are processed in the order that they're defined. 
+     * Indicates how to manage the order of stateful rule evaluation for the policy. DEFAULT_ACTION_ORDER is the default behavior. Stateful rules are provided to the rule engine as Suricata compatible strings, and Suricata evaluates them based on certain settings. For more information, see Evaluation order for stateful rules in the AWS Network Firewall Developer Guide. 
      */
     RuleOrder?: RuleOrder;
   }
@@ -1247,6 +1298,12 @@ declare namespace NetworkFirewall {
     RuleOptions: RuleOptions;
   }
   export type StatefulRuleDirection = "FORWARD"|"ANY"|string;
+  export interface StatefulRuleGroupOverride {
+    /**
+     * The action that changes the rule group from DROP to ALERT. This only applies to managed rule groups.
+     */
+    Action?: OverrideAction;
+  }
   export interface StatefulRuleGroupReference {
     /**
      * The Amazon Resource Name (ARN) of the stateful rule group.
@@ -1256,11 +1313,15 @@ declare namespace NetworkFirewall {
      * An integer setting that indicates the order in which to run the stateful rule groups in a single FirewallPolicy. This setting only applies to firewall policies that specify the STRICT_ORDER rule order in the stateful engine options settings. Network Firewall evalutes each stateful rule group against a packet starting with the group that has the lowest priority setting. You must ensure that the priority settings are unique within each policy. You can change the priority settings of your rule groups at any time. To make it easier to insert rule groups later, number them so there's a wide range in between, for example use 100, 200, and so on. 
      */
     Priority?: Priority;
+    /**
+     * The action that allows the policy owner to override the behavior of the rule group within a policy.
+     */
+    Override?: StatefulRuleGroupOverride;
   }
   export type StatefulRuleGroupReferences = StatefulRuleGroupReference[];
   export interface StatefulRuleOptions {
     /**
-     * Indicates how to manage the order of the rule evaluation for the rule group. By default, Network Firewall leaves the rule evaluation order up to the Suricata rule processing engine. If you set this to STRICT_ORDER, your rules are evaluated in the exact order that they're listed in your Suricata rules string. 
+     * Indicates how to manage the order of the rule evaluation for the rule group. DEFAULT_ACTION_ORDER is the default behavior. Stateful rules are provided to the rule engine as Suricata compatible strings, and Suricata evaluates them based on certain settings. For more information, see Evaluation order for stateful rules in the AWS Network Firewall Developer Guide. 
      */
     RuleOrder?: RuleOrder;
   }
@@ -1399,7 +1460,7 @@ declare namespace NetworkFirewall {
      */
     FirewallName?: ResourceName;
     /**
-     * 
+     * A flag indicating whether it is possible to delete the firewall. A setting of TRUE indicates that the firewall is protected against deletion. Use this setting to protect against accidentally deleting a firewall that is in use. When you create a firewall, the operation initializes this flag to TRUE.
      */
     DeleteProtection?: Boolean;
     /**

@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1045.0-->
+<!--LATEST=2.1046.0-->
 <!--ENTRYINSERT-->
+
+## 2.1046.0
+* feature: EC2: Adds waiters support for internet gateways.
+* feature: LexModelsV2: Added support for grammar slot type in Amazon Lex. You can author your own grammar in the XML format per the SRGS specification to collect information in a conversation.
+* feature: NetworkFirewall: This release adds support for managed rule groups.
+* feature: Route53Domains: Amazon Route 53 domain registration APIs now support filtering and sorting in the ListDomains API, deleting a domain by using the DeleteDomain API and getting domain pricing information by using the ListPrices API.
+* feature: Route53RecoveryControlConfig: This release adds tagging supports to Route53 Recovery Control Configuration. New APIs: TagResource, UntagResource and ListTagsForResource. Updates: add optional field `tags` to support tagging while calling CreateCluster, CreateControlPanel and CreateSafetyRule.
 
 ## 2.1045.0
 * feature: CloudWatchLogs: This release adds AWS Organizations support as condition key in destination policy for cross account Subscriptions in CloudWatch Logs.

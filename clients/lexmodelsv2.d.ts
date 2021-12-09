@@ -1661,7 +1661,7 @@ declare namespace LexModelsV2 {
     /**
      * Determines the strategy that Amazon Lex uses to select a value from the list of possible values. The field can be set to one of the following values:    OriginalValue - Returns the value entered by the user, if the user value is similar to the slot value.    TopResolution - If there is a resolution list for the slot, return the first value in the resolution list. If there is no resolution list, return null.   If you don't specify the valueSelectionSetting parameter, the default is OriginalValue.
      */
-    valueSelectionSetting: SlotValueSelectionSetting;
+    valueSelectionSetting?: SlotValueSelectionSetting;
     /**
      * The built-in slot type used as a parent of this slot type. When you define a parent slot type, the new slot type has the configuration of the parent slot type. Only AMAZON.AlphaNumeric is supported.
      */
@@ -1678,6 +1678,10 @@ declare namespace LexModelsV2 {
      * The identifier of the language and locale that the slot type will be used in. The string must match one of the supported locales. All of the bots, intents, and slots used by the slot type must have the same locale. For more information, see Supported languages.
      */
     localeId: LocaleId;
+    /**
+     * Sets the type of external information used to create the slot type.
+     */
+    externalSourceSetting?: ExternalSourceSetting;
   }
   export interface CreateSlotTypeResponse {
     /**
@@ -1720,6 +1724,10 @@ declare namespace LexModelsV2 {
      * A timestamp of the date and time that the slot type was created.
      */
     creationDateTime?: Timestamp;
+    /**
+     * The type of external information used to create the slot type.
+     */
+    externalSourceSetting?: ExternalSourceSetting;
   }
   export interface CreateUploadUrlRequest {
   }
@@ -2150,6 +2158,10 @@ declare namespace LexModelsV2 {
      * History of changes, such as when a locale is used in an alias, that have taken place for the locale.
      */
     botLocaleHistoryEvents?: BotLocaleHistoryEventsList;
+    /**
+     * Recommended actions to take to resolve an error in the failureReasons field.
+     */
+    recommendedActions?: RecommendedActions;
   }
   export interface DescribeBotRecommendationRequest {
     /**
@@ -2646,6 +2658,7 @@ declare namespace LexModelsV2 {
      * A timestamp of the date and time that the slot type was last updated.
      */
     lastUpdatedDateTime?: Timestamp;
+    externalSourceSetting?: ExternalSourceSetting;
   }
   export type Description = string;
   export interface DialogCodeHookSettings {
@@ -2736,6 +2749,12 @@ declare namespace LexModelsV2 {
     lastUpdatedDateTime?: Timestamp;
   }
   export type ExportSummaryList = ExportSummary[];
+  export interface ExternalSourceSetting {
+    /**
+     * Settings required for a slot type based on a grammar that you provide.
+     */
+    grammarSlotTypeSetting?: GrammarSlotTypeSetting;
+  }
   export type FailureReason = string;
   export type FailureReasons = FailureReason[];
   export type FilePassword = string;
@@ -2803,6 +2822,26 @@ declare namespace LexModelsV2 {
      * The length of time that the fulfillment Lambda function should run before it times out.
      */
     timeoutInSeconds?: FulfillmentTimeout;
+  }
+  export interface GrammarSlotTypeSetting {
+    /**
+     * The source of the grammar used to create the slot type.
+     */
+    source?: GrammarSlotTypeSource;
+  }
+  export interface GrammarSlotTypeSource {
+    /**
+     * The name of the S3 bucket that contains the grammar source.
+     */
+    s3BucketName: S3BucketName;
+    /**
+     * The path to the grammar in the S3 bucket.
+     */
+    s3ObjectKey: S3ObjectPath;
+    /**
+     * The Amazon KMS key required to decrypt the contents of the grammar, if any.
+     */
+    kmsKeyArn?: KmsKeyArn;
   }
   export type HitCount = number;
   export type Id = string;
@@ -3784,6 +3823,8 @@ declare namespace LexModelsV2 {
     allowInterrupt?: BoxedBoolean;
   }
   export type QueryFilterString = string;
+  export type RecommendedAction = string;
+  export type RecommendedActions = RecommendedAction[];
   export interface RecommendedIntentSummary {
     /**
      * The unique identifier of a recommended intent associated with the bot recommendation.
@@ -3861,6 +3902,7 @@ declare namespace LexModelsV2 {
      */
     kmsKeyArn?: KmsKeyArn;
   }
+  export type S3ObjectPath = string;
   export interface SSMLMessage {
     /**
      * The SSML text that defines the prompt.
@@ -4042,6 +4084,7 @@ declare namespace LexModelsV2 {
     lastUpdatedDateTime?: Timestamp;
   }
   export type SlotSummaryList = SlotSummary[];
+  export type SlotTypeCategory = "Custom"|"Extended"|"ExternalGrammar"|string;
   export interface SlotTypeFilter {
     /**
      * The name of the field to use for filtering.
@@ -4056,7 +4099,7 @@ declare namespace LexModelsV2 {
      */
     operator: SlotTypeFilterOperator;
   }
-  export type SlotTypeFilterName = "SlotTypeName"|string;
+  export type SlotTypeFilterName = "SlotTypeName"|"ExternalSourceType"|string;
   export type SlotTypeFilterOperator = "CO"|"EQ"|string;
   export type SlotTypeFilters = SlotTypeFilter[];
   export type SlotTypeSignature = string;
@@ -4098,6 +4141,10 @@ declare namespace LexModelsV2 {
      * A timestamp of the date and time that the slot type was last updated.
      */
     lastUpdatedDateTime?: Timestamp;
+    /**
+     * Indicates the type of the slot type.    Custom - A slot type that you created using custom values. For more information, see Creating custom slot types.    Extended - A slot type created by extending the AMAZON.AlphaNumeric built-in slot type. For more information, see AMAZON.AlphaNumeric.    ExternalGrammar - A slot type using a custom GRXML grammar to define values. For more information, see Using a custom grammar slot type.  
+     */
+    slotTypeCategory?: SlotTypeCategory;
   }
   export type SlotTypeSummaryList = SlotTypeSummary[];
   export interface SlotTypeValue {
@@ -4469,6 +4516,10 @@ declare namespace LexModelsV2 {
      * A timestamp of the date and time that the locale was last updated.
      */
     lastUpdatedDateTime?: Timestamp;
+    /**
+     * Recommended actions to take to resolve an error in the failureReasons field.
+     */
+    recommendedActions?: RecommendedActions;
   }
   export interface UpdateBotRecommendationRequest {
     /**
@@ -4914,7 +4965,7 @@ declare namespace LexModelsV2 {
     /**
      * The strategy that Amazon Lex should use when deciding on a value from the list of slot type values.
      */
-    valueSelectionSetting: SlotValueSelectionSetting;
+    valueSelectionSetting?: SlotValueSelectionSetting;
     /**
      * The new built-in slot type that should be used as the parent of this slot type.
      */
@@ -4931,6 +4982,7 @@ declare namespace LexModelsV2 {
      * The identifier of the language and locale that contains the slot type. The string must match one of the supported locales. For more information, see Supported languages.
      */
     localeId: LocaleId;
+    externalSourceSetting?: ExternalSourceSetting;
   }
   export interface UpdateSlotTypeResponse {
     /**
@@ -4977,6 +5029,7 @@ declare namespace LexModelsV2 {
      * A timestamp of the date and time that the slot type was last updated.
      */
     lastUpdatedDateTime?: Timestamp;
+    externalSourceSetting?: ExternalSourceSetting;
   }
   export type Utterance = string;
   export interface UtteranceAggregationDuration {
@@ -4994,7 +5047,7 @@ declare namespace LexModelsV2 {
      */
     voiceId: VoiceId;
     /**
-     * Indicates the type of Amazon Polly voice that Amazon Lex should use for voice interaction with the user. For more information, see Voices in Amazon Polly.
+     * Indicates the type of Amazon Polly voice that Amazon Lex should use for voice interaction with the user. For more information, see the  engine parameter of the SynthesizeSpeech operation in the Amazon Polly developer guide. If you do not specify a value, the default is standard.
      */
     engine?: VoiceEngine;
   }
