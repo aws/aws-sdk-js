@@ -2507,8 +2507,7 @@
     "CreateGeofenceCollectionRequest": {
       "type": "structure",
       "required": [
-        "CollectionName",
-        "PricingPlan"
+        "CollectionName"
       ],
       "members": {
         "CollectionName": {
@@ -2525,7 +2524,7 @@
         },
         "PricingPlan": {
           "shape": "PricingPlan",
-          "documentation": "<p>Specifies the pricing plan for the geofence collection.</p> <p>For additional details and restrictions on each pricing plan option, see the <a href=\"https://aws.amazon.com/location/pricing/\">Amazon Location Service pricing page</a>.</p>"
+          "documentation": "<p>Optionally specifies the pricing plan for the geofence collection. Defaults to <code>RequestBasedUsage</code>.</p> <p>For additional details and restrictions on each pricing plan option, see the <a href=\"https://aws.amazon.com/location/pricing/\">Amazon Location Service pricing page</a>.</p>"
         },
         "PricingPlanDataSource": {
           "shape": "String",
@@ -2563,8 +2562,7 @@
       "type": "structure",
       "required": [
         "Configuration",
-        "MapName",
-        "PricingPlan"
+        "MapName"
       ],
       "members": {
         "Configuration": {
@@ -2581,7 +2579,7 @@
         },
         "PricingPlan": {
           "shape": "PricingPlan",
-          "documentation": "<p>Specifies the pricing plan for your map resource.</p> <p>For additional details and restrictions on each pricing plan option, see <a href=\"https://aws.amazon.com/location/pricing/\">Amazon Location Service pricing</a>.</p>"
+          "documentation": "<p>Optionally specifies the pricing plan for the map resource. Defaults to <code>RequestBasedUsage</code>.</p> <p>For additional details and restrictions on each pricing plan option, see <a href=\"https://aws.amazon.com/location/pricing/\">Amazon Location Service pricing</a>.</p>"
         },
         "Tags": {
           "shape": "TagMap",
@@ -2615,8 +2613,7 @@
       "type": "structure",
       "required": [
         "DataSource",
-        "IndexName",
-        "PricingPlan"
+        "IndexName"
       ],
       "members": {
         "DataSource": {
@@ -2637,7 +2634,7 @@
         },
         "PricingPlan": {
           "shape": "PricingPlan",
-          "documentation": "<p>Specifies the pricing plan for your place index resource.</p> <p>For additional details and restrictions on each pricing plan option, see <a href=\"https://aws.amazon.com/location/pricing/\">Amazon Location Service pricing</a>.</p>"
+          "documentation": "<p>Optionally specifies the pricing plan for the place index resource. Defaults to <code>RequestBasedUsage</code>.</p> <p>For additional details and restrictions on each pricing plan option, see <a href=\"https://aws.amazon.com/location/pricing/\">Amazon Location Service pricing</a>.</p>"
         },
         "Tags": {
           "shape": "TagMap",
@@ -2671,8 +2668,7 @@
       "type": "structure",
       "required": [
         "CalculatorName",
-        "DataSource",
-        "PricingPlan"
+        "DataSource"
       ],
       "members": {
         "CalculatorName": {
@@ -2689,7 +2685,7 @@
         },
         "PricingPlan": {
           "shape": "PricingPlan",
-          "documentation": "<p>Specifies the pricing plan for your route calculator resource.</p> <p>For additional details and restrictions on each pricing plan option, see <a href=\"https://aws.amazon.com/location/pricing/\">Amazon Location Service pricing</a>.</p>"
+          "documentation": "<p>Optionally specifies the pricing plan for the route calculator resource. Defaults to <code>RequestBasedUsage</code>.</p> <p>For additional details and restrictions on each pricing plan option, see <a href=\"https://aws.amazon.com/location/pricing/\">Amazon Location Service pricing</a>.</p>"
         },
         "Tags": {
           "shape": "TagMap",
@@ -2722,7 +2718,6 @@
     "CreateTrackerRequest": {
       "type": "structure",
       "required": [
-        "PricingPlan",
         "TrackerName"
       ],
       "members": {
@@ -2740,7 +2735,7 @@
         },
         "PricingPlan": {
           "shape": "PricingPlan",
-          "documentation": "<p>Specifies the pricing plan for the tracker resource.</p> <p>For additional details and restrictions on each pricing plan option, see <a href=\"https://aws.amazon.com/location/pricing/\">Amazon Location Service pricing</a>.</p>"
+          "documentation": "<p>Optionally specifies the pricing plan for the tracker resource. Defaults to <code>RequestBasedUsage</code>.</p> <p>For additional details and restrictions on each pricing plan option, see <a href=\"https://aws.amazon.com/location/pricing/\">Amazon Location Service pricing</a>.</p>"
         },
         "PricingPlanDataSource": {
           "shape": "String",

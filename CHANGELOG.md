@@ -1,6 +1,18 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1046.0-->
+<!--LATEST=2.1047.0-->
 <!--ENTRYINSERT-->
+
+## 2.1047.0
+* feature: CustomerProfiles: This release adds an optional parameter, ObjectTypeNames to the PutIntegration API to support multiple object types per integration option. Besides, this release introduces Standard Order Objects which contain data from third party systems and each order object belongs to a specific profile.
+* feature: DataSync: AWS DataSync now supports FSx Lustre Locations.
+* feature: DevOpsGuru: Adds Tags support to DescribeOrganizationResourceCollectionHealth
+* feature: Finspacedata: Make dataset description optional and allow s3 export for dataviews
+* feature: ForecastService: Adds ForecastDimensions field to the DescribeAutoPredictorResponse
+* feature: Imagebuilder: This release adds support for importing and exporting VM Images as part of the Image Creation workflow via EC2 VM Import/Export.
+* feature: Location: Making PricingPlan optional as part of create resource API.
+* feature: Redshift: This release adds API support for managed Redshift datashares. Customers can now interact with a Redshift datashare that is managed by a different service, such as AWS Data Exchange.
+* feature: SageMaker: This release adds a new ContentType field in AutoMLChannel for SageMaker CreateAutoMLJob InputDataConfig.
+* feature: SecurityHub: Added new resource details objects to ASFF, including resources for Firewall, and RuleGroup, FirewallPolicy Added additional details for AutoScalingGroup, LaunchConfiguration, and S3 buckets.
 
 ## 2.1046.0
 * feature: EC2: Adds waiters support for internet gateways.

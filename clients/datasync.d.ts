@@ -36,6 +36,14 @@ declare class DataSync extends Service {
    */
   createLocationEfs(callback?: (err: AWSError, data: DataSync.Types.CreateLocationEfsResponse) => void): Request<DataSync.Types.CreateLocationEfsResponse, AWSError>;
   /**
+   * Creates an endpoint for an Amazon FSx for Lustre file system.
+   */
+  createLocationFsxLustre(params: DataSync.Types.CreateLocationFsxLustreRequest, callback?: (err: AWSError, data: DataSync.Types.CreateLocationFsxLustreResponse) => void): Request<DataSync.Types.CreateLocationFsxLustreResponse, AWSError>;
+  /**
+   * Creates an endpoint for an Amazon FSx for Lustre file system.
+   */
+  createLocationFsxLustre(callback?: (err: AWSError, data: DataSync.Types.CreateLocationFsxLustreResponse) => void): Request<DataSync.Types.CreateLocationFsxLustreResponse, AWSError>;
+  /**
    * Creates an endpoint for an Amazon FSx for Windows File Server file system.
    */
   createLocationFsxWindows(params: DataSync.Types.CreateLocationFsxWindowsRequest, callback?: (err: AWSError, data: DataSync.Types.CreateLocationFsxWindowsResponse) => void): Request<DataSync.Types.CreateLocationFsxWindowsResponse, AWSError>;
@@ -131,6 +139,14 @@ declare class DataSync extends Service {
    * Returns metadata, such as the path information about an Amazon EFS location.
    */
   describeLocationEfs(callback?: (err: AWSError, data: DataSync.Types.DescribeLocationEfsResponse) => void): Request<DataSync.Types.DescribeLocationEfsResponse, AWSError>;
+  /**
+   * Returns metadata, such as the path information about an Amazon FSx for Lustre location.
+   */
+  describeLocationFsxLustre(params: DataSync.Types.DescribeLocationFsxLustreRequest, callback?: (err: AWSError, data: DataSync.Types.DescribeLocationFsxLustreResponse) => void): Request<DataSync.Types.DescribeLocationFsxLustreResponse, AWSError>;
+  /**
+   * Returns metadata, such as the path information about an Amazon FSx for Lustre location.
+   */
+  describeLocationFsxLustre(callback?: (err: AWSError, data: DataSync.Types.DescribeLocationFsxLustreResponse) => void): Request<DataSync.Types.DescribeLocationFsxLustreResponse, AWSError>;
   /**
    * Returns metadata, such as the path information about an Amazon FSx for Windows File Server location.
    */
@@ -402,9 +418,33 @@ declare namespace DataSync {
      */
     LocationArn?: LocationArn;
   }
+  export interface CreateLocationFsxLustreRequest {
+    /**
+     * The Amazon Resource Name (ARN) for the FSx for Lustre file system.
+     */
+    FsxFilesystemArn: FsxFilesystemArn;
+    /**
+     * The Amazon Resource Names (ARNs) of the security groups that are used to configure the FSx for Lustre file system.
+     */
+    SecurityGroupArns: Ec2SecurityGroupArnList;
+    /**
+     * A subdirectory in the location's path. This subdirectory in the FSx for Lustre file system is used to read data from the FSx for Lustre source location or write data to the FSx for Lustre destination.
+     */
+    Subdirectory?: FsxLustreSubdirectory;
+    /**
+     * The key-value pair that represents a tag that you want to add to the resource. The value can be an empty string. This value helps you manage, filter, and search for your resources. We recommend that you create a name tag for your location.
+     */
+    Tags?: InputTagList;
+  }
+  export interface CreateLocationFsxLustreResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the FSx for Lustre file system location that's created. 
+     */
+    LocationArn?: LocationArn;
+  }
   export interface CreateLocationFsxWindowsRequest {
     /**
-     * A subdirectory in the location’s path. This subdirectory in the Amazon FSx for Windows File Server file system is used to read data from the Amazon FSx for Windows File Server source location or write data to the FSx for Windows File Server destination.
+     * A subdirectory in the location's path. This subdirectory in the Amazon FSx for Windows File Server file system is used to read data from the Amazon FSx for Windows File Server source location or write data to the FSx for Windows File Server destination.
      */
     Subdirectory?: FsxWindowsSubdirectory;
     /**
@@ -412,7 +452,7 @@ declare namespace DataSync {
      */
     FsxFilesystemArn: FsxFilesystemArn;
     /**
-     * The Amazon Resource Names (ARNs) of the security groups that are to use to configure the FSx for Windows File Server file system.
+     * The Amazon Resource Names (ARNs) of the security groups that are used to configure the FSx for Windows File Server file system.
      */
     SecurityGroupArns: Ec2SecurityGroupArnList;
     /**
@@ -761,6 +801,30 @@ declare namespace DataSync {
     Ec2Config?: Ec2Config;
     /**
      * The time that the EFS location was created.
+     */
+    CreationTime?: Time;
+  }
+  export interface DescribeLocationFsxLustreRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the FSx for Lustre location to describe. 
+     */
+    LocationArn: LocationArn;
+  }
+  export interface DescribeLocationFsxLustreResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the FSx for Lustre location that was described.
+     */
+    LocationArn?: LocationArn;
+    /**
+     * The URI of the FSx for Lustre location that was described.
+     */
+    LocationUri?: LocationUri;
+    /**
+     * The Amazon Resource Names (ARNs) of the security groups that are configured for the FSx for Lustre file system.
+     */
+    SecurityGroupArns?: Ec2SecurityGroupArnList;
+    /**
+     * The time that the FSx for Lustre location was created.
      */
     CreationTime?: Time;
   }
@@ -1138,6 +1202,7 @@ declare namespace DataSync {
   export type FilterValue = string;
   export type FilterValues = FilterAttributeValue[];
   export type FsxFilesystemArn = string;
+  export type FsxLustreSubdirectory = string;
   export type FsxWindowsSubdirectory = string;
   export type Gid = "NONE"|"INT_VALUE"|"NAME"|"BOTH"|string;
   export type HdfsAuthenticationType = "SIMPLE"|"KERBEROS"|string;
@@ -1306,7 +1371,7 @@ declare namespace DataSync {
      */
     LocationArn?: LocationArn;
     /**
-     * Represents a list of URLs of a location. LocationUri returns an array that contains a list of locations when the ListLocations operation is called. Format: TYPE://GLOBAL_ID/SUBDIR. TYPE designates the type of location. Valid values: NFS | EFS | S3. GLOBAL_ID is the globally unique identifier of the resource that backs the location. An example for EFS is us-east-2.fs-abcd1234. An example for Amazon S3 is the bucket name, such as myBucket. An example for NFS is a valid IPv4 address or a host name compliant with Domain Name Service (DNS). SUBDIR is a valid file system path, delimited by forward slashes as is the *nix convention. For NFS and Amazon EFS, it's the export path to mount the location. For Amazon S3, it's the prefix path that you mount to and treat as the root of the location. 
+     * Represents a list of URIs of a location. LocationUri returns an array that contains a list of locations when the ListLocations operation is called. Format: TYPE://GLOBAL_ID/SUBDIR. TYPE designates the type of location. Valid values: NFS | EFS | S3. GLOBAL_ID is the globally unique identifier of the resource that backs the location. An example for EFS is us-east-2.fs-abcd1234. An example for Amazon S3 is the bucket name, such as myBucket. An example for NFS is a valid IPv4 address or a host name compliant with Domain Name Service (DNS). SUBDIR is a valid file system path, delimited by forward slashes as is the *nix convention. For NFS and Amazon EFS, it's the export path to mount the location. For Amazon S3, it's the prefix path that you mount to and treat as the root of the location. 
      */
     LocationUri?: LocationUri;
   }

@@ -182,6 +182,7 @@ declare namespace Finspacedata {
      * Time until which the Changeset is active. The value is determined as Epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
      */
     activeUntilTimestamp?: TimestampEpoch;
+    activeFromTimestamp?: TimestampEpoch;
     /**
      * The unique identifier of the Changeset that is updated.
      */
@@ -299,7 +300,7 @@ declare namespace Finspacedata {
     /**
      * Description of a Dataset.
      */
-    datasetDescription: DatasetDescription;
+    datasetDescription?: DatasetDescription;
     /**
      * Contact information for a Dataset owner.
      */
@@ -311,7 +312,7 @@ declare namespace Finspacedata {
     /**
      * The unique resource identifier for a Dataset.
      */
-    alias: AliasString;
+    alias?: AliasString;
     /**
      * Definition for a schema on a tabular Dataset.
      */
@@ -344,6 +345,8 @@ declare namespace Finspacedata {
      * Destination type for a Dataview.    GLUE_TABLE - Glue table destination type.  
      */
     destinationType: DataViewDestinationType;
+    s3DestinationExportFileFormat?: ExportFileFormat;
+    s3DestinationExportFileFormatOptions?: S3DestinationFormatOptions;
   }
   export interface DataViewErrorInfo {
     /**
@@ -490,6 +493,7 @@ declare namespace Finspacedata {
   export type Email = string;
   export type ErrorCategory = "VALIDATION"|"SERVICE_QUOTA_EXCEEDED"|"ACCESS_DENIED"|"RESOURCE_NOT_FOUND"|"THROTTLING"|"INTERNAL_SERVICE_EXCEPTION"|"CANCELLED"|"USER_RECOVERABLE"|string;
   export type ErrorMessage = string;
+  export type ExportFileFormat = "PARQUET"|"DELIMITED_TEXT"|string;
   export type FormatParams = {[key: string]: StringMapValue};
   export interface GetChangesetRequest {
     /**
@@ -542,6 +546,7 @@ declare namespace Finspacedata {
      * Time until which the Changeset is active. The value is determined as Epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
      */
     activeUntilTimestamp?: TimestampEpoch;
+    activeFromTimestamp?: TimestampEpoch;
     /**
      * The unique identifier of the Changeset that is being updated.
      */
@@ -792,6 +797,7 @@ declare namespace Finspacedata {
   }
   export type ResourcePermissionsList = ResourcePermission[];
   export type ResultLimit = number;
+  export type S3DestinationFormatOptions = {[key: string]: StringMapValue};
   export interface SchemaDefinition {
     /**
      * List of column definitions.
@@ -872,7 +878,7 @@ declare namespace Finspacedata {
     /**
      * The unique resource identifier for a Dataset.
      */
-    alias: AliasString;
+    alias?: AliasString;
     /**
      * Definition for a schema on a tabular Dataset.
      */

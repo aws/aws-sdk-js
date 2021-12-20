@@ -45,11 +45,11 @@ declare class Redshift extends Service {
    */
   authorizeClusterSecurityGroupIngress(callback?: (err: AWSError, data: Redshift.Types.AuthorizeClusterSecurityGroupIngressResult) => void): Request<Redshift.Types.AuthorizeClusterSecurityGroupIngressResult, AWSError>;
   /**
-   * From a data producer account, authorizes the sharing of a datashare with one or more consumer accounts. To authorize a datashare for a data consumer, the producer account must have the correct access privileges.
+   * From a data producer account, authorizes the sharing of a datashare with one or more consumer accounts or managing entities. To authorize a datashare for a data consumer, the producer account must have the correct access privileges.
    */
   authorizeDataShare(params: Redshift.Types.AuthorizeDataShareMessage, callback?: (err: AWSError, data: Redshift.Types.DataShare) => void): Request<Redshift.Types.DataShare, AWSError>;
   /**
-   * From a data producer account, authorizes the sharing of a datashare with one or more consumer accounts. To authorize a datashare for a data consumer, the producer account must have the correct access privileges.
+   * From a data producer account, authorizes the sharing of a datashare with one or more consumer accounts or managing entities. To authorize a datashare for a data consumer, the producer account must have the correct access privileges.
    */
   authorizeDataShare(callback?: (err: AWSError, data: Redshift.Types.DataShare) => void): Request<Redshift.Types.DataShare, AWSError>;
   /**
@@ -1106,7 +1106,7 @@ declare namespace Redshift {
      */
     DataShareArn: String;
     /**
-     * The identifier of the data consumer that is authorized to access the datashare. This identifier is an Amazon Web Services account ID.
+     * The identifier of the data consumer that is authorized to access the datashare. This identifier is an Amazon Web Services account ID or a keyword, such as ADX.
      */
     ConsumerIdentifier: String;
   }
@@ -2212,6 +2212,10 @@ declare namespace Redshift {
      * A value that specifies when the datashare has an association between a producer and data consumers.
      */
     DataShareAssociations?: DataShareAssociationList;
+    /**
+     * The identifier of a datashare to show its managing entity.
+     */
+    ManagedBy?: String;
   }
   export interface DataShareAssociation {
     /**
@@ -2269,7 +2273,7 @@ declare namespace Redshift {
      */
     DataShareArn: String;
     /**
-     * The identifier of the data consumer that is to have authorization removed from the datashare. This identifier is an Amazon Web Services account ID.
+     * The identifier of the data consumer that is to have authorization removed from the datashare. This identifier is an Amazon Web Services account ID or a keyword, such as ADX.
      */
     ConsumerIdentifier: String;
   }

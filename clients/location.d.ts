@@ -781,9 +781,9 @@ declare namespace Location {
      */
     KmsKeyId?: KmsKeyId;
     /**
-     * Specifies the pricing plan for the geofence collection. For additional details and restrictions on each pricing plan option, see the Amazon Location Service pricing page.
+     * Optionally specifies the pricing plan for the geofence collection. Defaults to RequestBasedUsage. For additional details and restrictions on each pricing plan option, see the Amazon Location Service pricing page.
      */
-    PricingPlan: PricingPlan;
+    PricingPlan?: PricingPlan;
     /**
      * Specifies the data provider for the geofence collection.   Required value for the following pricing plans: MobileAssetTracking | MobileAssetManagement    For more information about Data Providers, and Pricing plans, see the Amazon Location Service product page.  Amazon Location Service only uses PricingPlanDataSource to calculate billing for your geofence collection. Your data won't be shared with the data provider, and will remain in your AWS account or Region unless you move it.  Valid Values: Esri | Here 
      */
@@ -821,9 +821,9 @@ declare namespace Location {
      */
     MapName: ResourceName;
     /**
-     * Specifies the pricing plan for your map resource. For additional details and restrictions on each pricing plan option, see Amazon Location Service pricing.
+     * Optionally specifies the pricing plan for the map resource. Defaults to RequestBasedUsage. For additional details and restrictions on each pricing plan option, see Amazon Location Service pricing.
      */
-    PricingPlan: PricingPlan;
+    PricingPlan?: PricingPlan;
     /**
      * Applies one or more tags to the map resource. A tag is a key-value pair helps manage, identify, search, and filter your resources by labelling them. Format: "key" : "value"  Restrictions:   Maximum 50 tags per resource   Each resource tag must be unique with a maximum of one value.   Maximum key length: 128 Unicode characters in UTF-8   Maximum value length: 256 Unicode characters in UTF-8   Can use alphanumeric characters (A–Z, a–z, 0–9), and the following characters: + - = . _ : / @.    Cannot use "aws:" as a prefix for a key.  
      */
@@ -861,9 +861,9 @@ declare namespace Location {
      */
     IndexName: ResourceName;
     /**
-     * Specifies the pricing plan for your place index resource. For additional details and restrictions on each pricing plan option, see Amazon Location Service pricing.
+     * Optionally specifies the pricing plan for the place index resource. Defaults to RequestBasedUsage. For additional details and restrictions on each pricing plan option, see Amazon Location Service pricing.
      */
-    PricingPlan: PricingPlan;
+    PricingPlan?: PricingPlan;
     /**
      * Applies one or more tags to the place index resource. A tag is a key-value pair that helps you manage, identify, search, and filter your resources. Format: "key" : "value"  Restrictions:   Maximum 50 tags per resource.   Each tag key must be unique and must have exactly one associated value.   Maximum key length: 128 Unicode characters in UTF-8.   Maximum value length: 256 Unicode characters in UTF-8.   Can use alphanumeric characters (A–Z, a–z, 0–9), and the following characters: + - = . _ : / @   Cannot use "aws:" as a prefix for a key.  
      */
@@ -897,9 +897,9 @@ declare namespace Location {
      */
     Description?: ResourceDescription;
     /**
-     * Specifies the pricing plan for your route calculator resource. For additional details and restrictions on each pricing plan option, see Amazon Location Service pricing.
+     * Optionally specifies the pricing plan for the route calculator resource. Defaults to RequestBasedUsage. For additional details and restrictions on each pricing plan option, see Amazon Location Service pricing.
      */
-    PricingPlan: PricingPlan;
+    PricingPlan?: PricingPlan;
     /**
      * Applies one or more tags to the route calculator resource. A tag is a key-value pair helps manage, identify, search, and filter your resources by labelling them.   For example: { "tag1" : "value1", "tag2" : "value2"}   Format: "key" : "value"  Restrictions:   Maximum 50 tags per resource   Each resource tag must be unique with a maximum of one value.   Maximum key length: 128 Unicode characters in UTF-8   Maximum value length: 256 Unicode characters in UTF-8   Can use alphanumeric characters (A–Z, a–z, 0–9), and the following characters: + - = . _ : / @.    Cannot use "aws:" as a prefix for a key.  
      */
@@ -933,9 +933,9 @@ declare namespace Location {
      */
     PositionFiltering?: PositionFiltering;
     /**
-     * Specifies the pricing plan for the tracker resource. For additional details and restrictions on each pricing plan option, see Amazon Location Service pricing.
+     * Optionally specifies the pricing plan for the tracker resource. Defaults to RequestBasedUsage. For additional details and restrictions on each pricing plan option, see Amazon Location Service pricing.
      */
-    PricingPlan: PricingPlan;
+    PricingPlan?: PricingPlan;
     /**
      * Specifies the data provider for the tracker resource.   Required value for the following pricing plans: MobileAssetTracking | MobileAssetManagement    For more information about Data Providers, and Pricing plans, see the Amazon Location Service product page.  Amazon Location Service only uses PricingPlanDataSource to calculate billing for your tracker resource. Your data will not be shared with the data provider, and will remain in your AWS account or Region unless you move it.  Valid values: Esri | Here 
      */

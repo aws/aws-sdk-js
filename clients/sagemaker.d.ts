@@ -2693,6 +2693,10 @@ declare namespace SageMaker {
      * The name of the target variable in supervised learning, usually represented by 'y'.
      */
     TargetAttributeName: TargetAttributeName;
+    /**
+     * The content type of the data from the input source. You can use text/csv;header=present or x-application/vnd.amazon+parquet. The default value is text/csv;header=present.
+     */
+    ContentType?: ContentType;
   }
   export interface AutoMLContainerDefinition {
     /**
