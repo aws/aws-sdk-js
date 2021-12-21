@@ -1,6 +1,15 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1047.0-->
+<!--LATEST=2.1048.0-->
 <!--ENTRYINSERT-->
+
+## 2.1048.0
+* feature: ChimeSDKMessaging: The Amazon Chime SDK now supports updating message attributes via channel flows
+* feature: LookoutMetrics: This release adds support for Causal Relationships. Added new ListAnomalyGroupRelatedMetrics API operation and InterMetricImpactDetails API data type
+* feature: MediaConnect: You can now use the Fujitsu-QoS protocol for your MediaConnect sources and outputs to transport content to and from Fujitsu devices.
+* feature: Nimble: Amazon Nimble Studio adds support for users to upload files during a streaming session using NICE DCV native client or browser.
+* feature: QLDB: Amazon QLDB now supports journal exports in JSON and Ion Binary formats. This release adds an optional OutputFormat parameter to the ExportJournalToS3 API.
+* feature: Transfer: Property for Transfer Family used with the FTPS protocol. TLS Session Resumption provides a mechanism to resume or share a negotiated secret key between the control and data connection for an FTPS session.
+* feature: WorkMail: This release allows customers to change their email monitoring configuration in Amazon WorkMail.
 
 ## 2.1047.0
 * feature: CustomerProfiles: This release adds an optional parameter, ObjectTypeNames to the PutIntegration API to support multiple object types per integration option. Besides, this release introduces Standard Order Objects which contain data from third party systems and each order object belongs to a specific profile.

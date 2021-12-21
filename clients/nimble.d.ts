@@ -269,11 +269,11 @@ declare class Nimble extends Service {
    */
   listStudioComponents(callback?: (err: AWSError, data: Nimble.Types.ListStudioComponentsResponse) => void): Request<Nimble.Types.ListStudioComponentsResponse, AWSError>;
   /**
-   * Get all users in a given studio membership.
+   * Get all users in a given studio membership.   ListStudioMembers only returns admin members. 
    */
   listStudioMembers(params: Nimble.Types.ListStudioMembersRequest, callback?: (err: AWSError, data: Nimble.Types.ListStudioMembersResponse) => void): Request<Nimble.Types.ListStudioMembersResponse, AWSError>;
   /**
-   * Get all users in a given studio membership.
+   * Get all users in a given studio membership.   ListStudioMembers only returns admin members. 
    */
   listStudioMembers(callback?: (err: AWSError, data: Nimble.Types.ListStudioMembersResponse) => void): Request<Nimble.Types.ListStudioMembersResponse, AWSError>;
   /**
@@ -1549,7 +1549,7 @@ declare namespace Nimble {
   }
   export interface ListStudioMembersResponse {
     /**
-     * A list of members.
+     * A list of admin members.
      */
     members?: StudioMembershipList;
     /**
@@ -1756,6 +1756,10 @@ declare namespace Nimble {
      */
     maxStoppedSessionLengthInMinutes?: StreamConfigurationMaxStoppedSessionLengthInMinutes;
     /**
+     * (Optional) The upload storage for a streaming session.
+     */
+    sessionStorage?: StreamConfigurationSessionStorage;
+    /**
      * The streaming images that users can select from when launching a streaming session with this launch profile.
      */
     streamingImageIds: StreamingImageIdList;
@@ -1774,9 +1778,13 @@ declare namespace Nimble {
      */
     maxSessionLengthInMinutes?: StreamConfigurationMaxSessionLengthInMinutes;
     /**
-     * The length of time, in minutes, that a streaming session can be active before it is stopped or terminated. After this point, Nimble Studio automatically terminates or stops the session. The default length of time is 690 minutes, and the maximum length of time is 30 days.
+     * Integer that determines if you can start and stop your sessions and how long a session can stay in the STOPPED state. The default value is 0. The maximum value is 5760. If the value is missing or set to 0, your sessions can’t be stopped. If you then call StopStreamingSession, the session fails. If the time that a session stays in the READY state exceeds the maxSessionLengthInMinutes value, the session will automatically be terminated by AWS (instead of stopped). If the value is set to a positive number, the session can be stopped. You can call StopStreamingSession to stop sessions in the READY state. If the time that a session stays in the READY state exceeds the maxSessionLengthInMinutes value, the session will automatically be stopped by AWS (instead of terminated).
      */
     maxStoppedSessionLengthInMinutes?: StreamConfigurationMaxStoppedSessionLengthInMinutes;
+    /**
+     * (Optional) The upload storage for a streaming workstation that is created using this launch profile.
+     */
+    sessionStorage?: StreamConfigurationSessionStorage;
     /**
      * The streaming images that users can select from when launching a streaming session with this launch profile.
      */
@@ -1784,6 +1792,16 @@ declare namespace Nimble {
   }
   export type StreamConfigurationMaxSessionLengthInMinutes = number;
   export type StreamConfigurationMaxStoppedSessionLengthInMinutes = number;
+  export interface StreamConfigurationSessionStorage {
+    /**
+     * Allows artists to upload files to their workstations. The only valid option is UPLOAD.
+     */
+    mode: StreamingSessionStorageModeList;
+    /**
+     * The configuration for the upload storage root of the streaming session.
+     */
+    root?: StreamingSessionStorageRoot;
+  }
   export type StreamingClipboardMode = "ENABLED"|"DISABLED"|string;
   export interface StreamingImage {
     /**
@@ -1857,7 +1875,7 @@ declare namespace Nimble {
   export type StreamingImageOwner = string;
   export type StreamingImagePlatform = string;
   export type StreamingImageState = "CREATE_IN_PROGRESS"|"READY"|"DELETE_IN_PROGRESS"|"DELETED"|"UPDATE_IN_PROGRESS"|"UPDATE_FAILED"|"CREATE_FAILED"|"DELETE_FAILED"|string;
-  export type StreamingImageStatusCode = "STREAMING_IMAGE_CREATE_IN_PROGRESS"|"STREAMING_IMAGE_READY"|"STREAMING_IMAGE_DELETE_IN_PROGRESS"|"STREAMING_IMAGE_DELETED"|"STREAMING_IMAGE_UPDATE_IN_PROGRESS"|"INTERNAL_ERROR"|string;
+  export type StreamingImageStatusCode = "STREAMING_IMAGE_CREATE_IN_PROGRESS"|"STREAMING_IMAGE_READY"|"STREAMING_IMAGE_DELETE_IN_PROGRESS"|"STREAMING_IMAGE_DELETED"|"STREAMING_IMAGE_UPDATE_IN_PROGRESS"|"INTERNAL_ERROR"|"ACCESS_DENIED"|string;
   export type StreamingInstanceType = "g4dn.xlarge"|"g4dn.2xlarge"|"g4dn.4xlarge"|"g4dn.8xlarge"|"g4dn.12xlarge"|"g4dn.16xlarge"|string;
   export type StreamingInstanceTypeList = StreamingInstanceType[];
   export interface StreamingSession {
@@ -1946,6 +1964,20 @@ declare namespace Nimble {
   export type StreamingSessionList = StreamingSession[];
   export type StreamingSessionState = "CREATE_IN_PROGRESS"|"DELETE_IN_PROGRESS"|"READY"|"DELETED"|"CREATE_FAILED"|"DELETE_FAILED"|"STOP_IN_PROGRESS"|"START_IN_PROGRESS"|"STOPPED"|"STOP_FAILED"|"START_FAILED"|string;
   export type StreamingSessionStatusCode = "STREAMING_SESSION_READY"|"STREAMING_SESSION_DELETED"|"STREAMING_SESSION_CREATE_IN_PROGRESS"|"STREAMING_SESSION_DELETE_IN_PROGRESS"|"INTERNAL_ERROR"|"INSUFFICIENT_CAPACITY"|"ACTIVE_DIRECTORY_DOMAIN_JOIN_ERROR"|"NETWORK_CONNECTION_ERROR"|"INITIALIZATION_SCRIPT_ERROR"|"DECRYPT_STREAMING_IMAGE_ERROR"|"NETWORK_INTERFACE_ERROR"|"STREAMING_SESSION_STOPPED"|"STREAMING_SESSION_STARTED"|"STREAMING_SESSION_STOP_IN_PROGRESS"|"STREAMING_SESSION_START_IN_PROGRESS"|string;
+  export type StreamingSessionStorageMode = "UPLOAD"|string;
+  export type StreamingSessionStorageModeList = StreamingSessionStorageMode[];
+  export interface StreamingSessionStorageRoot {
+    /**
+     * The folder path in Linux workstations where files are uploaded. The default path is $HOME/Downloads.
+     */
+    linux?: StreamingSessionStorageRootPathLinux;
+    /**
+     * The folder path in Windows workstations where files are uploaded. The default path is %HOMEPATH%\Downloads.
+     */
+    windows?: StreamingSessionStorageRootPathWindows;
+  }
+  export type StreamingSessionStorageRootPathLinux = string;
+  export type StreamingSessionStorageRootPathWindows = string;
   export interface StreamingSessionStream {
     /**
      * The Unix epoch timestamp in seconds for when the resource was created.
@@ -2379,9 +2411,6 @@ declare namespace Nimble {
     studioId: String;
   }
   export interface UpdateStreamingImageResponse {
-    /**
-     * 
-     */
     streamingImage?: StreamingImage;
   }
   export interface UpdateStudioComponentRequest {

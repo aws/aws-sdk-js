@@ -1414,7 +1414,7 @@
         "MaxLatency": {
           "shape": "__integer",
           "locationName": "maxLatency",
-          "documentation": "The maximum latency in milliseconds for Zixi-based streams."
+          "documentation": "The maximum latency in milliseconds. This parameter applies only to RIST-based, Zixi-based, and Fujitsu-based streams."
         },
         "MediaStreamOutputConfigurations": {
           "shape": "__listOfMediaStreamOutputConfigurationRequest",
@@ -1445,6 +1445,11 @@
           "shape": "__string",
           "locationName": "remoteId",
           "documentation": "The remote ID for the Zixi-pull output stream."
+        },
+        "SenderControlPort": {
+          "shape": "__integer",
+          "locationName": "senderControlPort",
+          "documentation": "The port that the flow uses to send outbound requests to initiate connection with the sender."
         },
         "SmoothingLatency": {
           "shape": "__integer",
@@ -1899,7 +1904,7 @@
           "locationName": "state"
         }
       },
-      "documentation": "The settings for source failover"
+      "documentation": "The settings for source failover."
     },
     "FailoverMode": {
       "type": "string",
@@ -2823,7 +2828,8 @@
         "rist",
         "st2110-jpegxs",
         "cdi",
-        "srt-listener"
+        "srt-listener",
+        "fujitsu-qos"
       ]
     },
     "PurchaseOfferingRequest": {
@@ -3215,7 +3221,7 @@
         "MaxLatency": {
           "shape": "__integer",
           "locationName": "maxLatency",
-          "documentation": "The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams."
+          "documentation": "The maximum latency in milliseconds. This parameter applies only to RIST-based, Zixi-based, and Fujitsu-based streams."
         },
         "MaxSyncBuffer": {
           "shape": "__integer",
@@ -3241,6 +3247,16 @@
           "shape": "Protocol",
           "locationName": "protocol",
           "documentation": "The protocol that is used by the source."
+        },
+        "SenderControlPort": {
+          "shape": "__integer",
+          "locationName": "senderControlPort",
+          "documentation": "The port that the flow uses to send outbound requests to initiate connection with the sender."
+        },
+        "SenderIpAddress": {
+          "shape": "__string",
+          "locationName": "senderIpAddress",
+          "documentation": "The IP address that the flow communicates with to initiate connection with the sender."
         },
         "StreamId": {
           "shape": "__string",
@@ -3302,6 +3318,16 @@
           "shape": "__string",
           "locationName": "name",
           "documentation": "The name of the source."
+        },
+        "SenderControlPort": {
+          "shape": "__integer",
+          "locationName": "senderControlPort",
+          "documentation": "The port that the flow uses to send outbound requests to initiate connection with the sender."
+        },
+        "SenderIpAddress": {
+          "shape": "__string",
+          "locationName": "senderIpAddress",
+          "documentation": "The IP address that the flow communicates with to initiate connection with the sender."
         },
         "SourceArn": {
           "shape": "__string",
@@ -3476,7 +3502,7 @@
         "MaxLatency": {
           "shape": "__integer",
           "locationName": "maxLatency",
-          "documentation": "The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams."
+          "documentation": "The maximum latency in milliseconds. This parameter applies only to RIST-based, Zixi-based, and Fujitsu-based streams."
         },
         "MaxSyncBuffer": {
           "shape": "__integer",
@@ -3497,6 +3523,16 @@
           "shape": "__string",
           "locationName": "remoteId",
           "documentation": "The remote ID for the Zixi-pull stream."
+        },
+        "SenderControlPort": {
+          "shape": "__integer",
+          "locationName": "senderControlPort",
+          "documentation": "The port that the flow uses to send outbound requests to initiate connection with the sender."
+        },
+        "SenderIpAddress": {
+          "shape": "__string",
+          "locationName": "senderIpAddress",
+          "documentation": "The IP address that the flow communicates with to initiate connection with the sender."
         },
         "SmoothingLatency": {
           "shape": "__integer",
@@ -3609,7 +3645,7 @@
           "locationName": "state"
         }
       },
-      "documentation": "The settings for source failover"
+      "documentation": "The settings for source failover."
     },
     "UpdateFlowEntitlementRequest": {
       "type": "structure",
@@ -3763,7 +3799,7 @@
         "MaxLatency": {
           "shape": "__integer",
           "locationName": "maxLatency",
-          "documentation": "The maximum latency in milliseconds for Zixi-based streams."
+          "documentation": "The maximum latency in milliseconds. This parameter applies only to RIST-based, Zixi-based, and Fujitsu-based streams."
         },
         "MediaStreamOutputConfigurations": {
           "shape": "__listOfMediaStreamOutputConfigurationRequest",
@@ -3795,6 +3831,16 @@
           "shape": "__string",
           "locationName": "remoteId",
           "documentation": "The remote ID for the Zixi-pull stream."
+        },
+        "SenderControlPort": {
+          "shape": "__integer",
+          "locationName": "senderControlPort",
+          "documentation": "The port that the flow uses to send outbound requests to initiate connection with the sender."
+        },
+        "SenderIpAddress": {
+          "shape": "__string",
+          "locationName": "senderIpAddress",
+          "documentation": "The IP address that the flow communicates with to initiate connection with the sender."
         },
         "SmoothingLatency": {
           "shape": "__integer",
@@ -3898,7 +3944,7 @@
         "MaxLatency": {
           "shape": "__integer",
           "locationName": "maxLatency",
-          "documentation": "The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams."
+          "documentation": "The maximum latency in milliseconds. This parameter applies only to RIST-based, Zixi-based, and Fujitsu-based streams."
         },
         "MaxSyncBuffer": {
           "shape": "__integer",
@@ -3919,6 +3965,16 @@
           "shape": "Protocol",
           "locationName": "protocol",
           "documentation": "The protocol that is used by the source."
+        },
+        "SenderControlPort": {
+          "shape": "__integer",
+          "locationName": "senderControlPort",
+          "documentation": "The port that the flow uses to send outbound requests to initiate connection with the sender."
+        },
+        "SenderIpAddress": {
+          "shape": "__string",
+          "locationName": "senderIpAddress",
+          "documentation": "The IP address that the flow communicates with to initiate connection with the sender."
         },
         "SourceArn": {
           "shape": "__string",
@@ -3969,7 +4025,7 @@
         "Name": {
           "shape": "__string",
           "locationName": "name",
-          "documentation": "Immutable and has to be a unique against other VpcInterfaces in this Flow"
+          "documentation": "Immutable and has to be a unique against other VpcInterfaces in this Flow."
         },
         "NetworkInterfaceIds": {
           "shape": "__listOf__string",

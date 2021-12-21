@@ -3034,7 +3034,7 @@
         },
         "snsTopicArn": {
           "shape": "SnsTopicArn",
-          "documentation": "<p>The SNS topic on which to send image build events.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) for the SNS topic to which we send image build event notifications.</p> <note> <p>EC2 Image Builder is unable to send notifications to SNS topics that are encrypted using keys from other accounts. The key that is used to encrypt the SNS topic must reside in the account that the Image Builder service runs under.</p> </note>"
         },
         "resourceTags": {
           "shape": "ResourceTagMap",
@@ -4478,7 +4478,7 @@
         },
         "snsTopicArn": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The SNS topic Amazon Resource Name (ARN) of the infrastructure configuration.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) for the SNS topic to which we send image build event notifications.</p> <note> <p>EC2 Image Builder is unable to send notifications to SNS topics that are encrypted using keys from other accounts. The key that is used to encrypt the SNS topic must reside in the account that the Image Builder service runs under.</p> </note>"
         },
         "dateCreated": {
           "shape": "DateTime",
@@ -5797,7 +5797,7 @@
         },
         "snsTopicArn": {
           "shape": "SnsTopicArn",
-          "documentation": "<p>The SNS topic on which to send image build events.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) for the SNS topic to which we send image build event notifications.</p> <note> <p>EC2 Image Builder is unable to send notifications to SNS topics that are encrypted using keys from other accounts. The key that is used to encrypt the SNS topic must reside in the account that the Image Builder service runs under.</p> </note>"
         },
         "clientToken": {
           "shape": "ClientToken",

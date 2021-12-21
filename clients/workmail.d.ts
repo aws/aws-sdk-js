@@ -100,6 +100,14 @@ declare class WorkMail extends Service {
    */
   deleteAlias(callback?: (err: AWSError, data: WorkMail.Types.DeleteAliasResponse) => void): Request<WorkMail.Types.DeleteAliasResponse, AWSError>;
   /**
+   * Deletes the email monitoring configuration for a specified organization.
+   */
+  deleteEmailMonitoringConfiguration(params: WorkMail.Types.DeleteEmailMonitoringConfigurationRequest, callback?: (err: AWSError, data: WorkMail.Types.DeleteEmailMonitoringConfigurationResponse) => void): Request<WorkMail.Types.DeleteEmailMonitoringConfigurationResponse, AWSError>;
+  /**
+   * Deletes the email monitoring configuration for a specified organization.
+   */
+  deleteEmailMonitoringConfiguration(callback?: (err: AWSError, data: WorkMail.Types.DeleteEmailMonitoringConfigurationResponse) => void): Request<WorkMail.Types.DeleteEmailMonitoringConfigurationResponse, AWSError>;
+  /**
    * Deletes a group from Amazon WorkMail.
    */
   deleteGroup(params: WorkMail.Types.DeleteGroupRequest, callback?: (err: AWSError, data: WorkMail.Types.DeleteGroupResponse) => void): Request<WorkMail.Types.DeleteGroupResponse, AWSError>;
@@ -179,6 +187,14 @@ declare class WorkMail extends Service {
    * Removes a domain from Amazon WorkMail, stops email routing to WorkMail, and removes the authorization allowing WorkMail use. SES keeps the domain because other applications may use it. You must first remove any email address used by WorkMail entities before you remove the domain.
    */
   deregisterMailDomain(callback?: (err: AWSError, data: WorkMail.Types.DeregisterMailDomainResponse) => void): Request<WorkMail.Types.DeregisterMailDomainResponse, AWSError>;
+  /**
+   * Describes the current email monitoring configuration for a specified organization.
+   */
+  describeEmailMonitoringConfiguration(params: WorkMail.Types.DescribeEmailMonitoringConfigurationRequest, callback?: (err: AWSError, data: WorkMail.Types.DescribeEmailMonitoringConfigurationResponse) => void): Request<WorkMail.Types.DescribeEmailMonitoringConfigurationResponse, AWSError>;
+  /**
+   * Describes the current email monitoring configuration for a specified organization.
+   */
+  describeEmailMonitoringConfiguration(callback?: (err: AWSError, data: WorkMail.Types.DescribeEmailMonitoringConfigurationResponse) => void): Request<WorkMail.Types.DescribeEmailMonitoringConfigurationResponse, AWSError>;
   /**
    * Returns the data available for the group.
    */
@@ -411,6 +427,14 @@ declare class WorkMail extends Service {
    * Adds a new access control rule for the specified organization. The rule allows or denies access to the organization for the specified IPv4 addresses, access protocol actions, and user IDs. Adding a new rule with the same name as an existing rule replaces the older rule.
    */
   putAccessControlRule(callback?: (err: AWSError, data: WorkMail.Types.PutAccessControlRuleResponse) => void): Request<WorkMail.Types.PutAccessControlRuleResponse, AWSError>;
+  /**
+   * Creates or updates the email monitoring configuration for a specified organization.
+   */
+  putEmailMonitoringConfiguration(params: WorkMail.Types.PutEmailMonitoringConfigurationRequest, callback?: (err: AWSError, data: WorkMail.Types.PutEmailMonitoringConfigurationResponse) => void): Request<WorkMail.Types.PutEmailMonitoringConfigurationResponse, AWSError>;
+  /**
+   * Creates or updates the email monitoring configuration for a specified organization.
+   */
+  putEmailMonitoringConfiguration(callback?: (err: AWSError, data: WorkMail.Types.PutEmailMonitoringConfigurationResponse) => void): Request<WorkMail.Types.PutEmailMonitoringConfigurationResponse, AWSError>;
   /**
    * Enables or disables a DMARC policy for a given organization.
    */
@@ -858,6 +882,14 @@ declare namespace WorkMail {
   }
   export interface DeleteAliasResponse {
   }
+  export interface DeleteEmailMonitoringConfigurationRequest {
+    /**
+     * The ID of the organization from which the email monitoring configuration is deleted.
+     */
+    OrganizationId: OrganizationId;
+  }
+  export interface DeleteEmailMonitoringConfigurationResponse {
+  }
   export interface DeleteGroupRequest {
     /**
      * The organization that contains the group.
@@ -997,6 +1029,22 @@ declare namespace WorkMail {
     DomainName: WorkMailDomainName;
   }
   export interface DeregisterMailDomainResponse {
+  }
+  export interface DescribeEmailMonitoringConfigurationRequest {
+    /**
+     * The ID of the organization for which the email monitoring configuration is described.
+     */
+    OrganizationId: OrganizationId;
+  }
+  export interface DescribeEmailMonitoringConfigurationResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the IAM Role associated with the email monitoring configuration.
+     */
+    RoleArn?: RoleArn;
+    /**
+     * The Amazon Resource Name (ARN) of the CloudWatch Log group associated with the email monitoring configuration.
+     */
+    LogGroupArn?: LogGroupArn;
   }
   export interface DescribeGroupRequest {
     /**
@@ -1859,6 +1907,7 @@ declare namespace WorkMail {
      */
     NextToken?: NextToken;
   }
+  export type LogGroupArn = string;
   export interface MailDomainSummary {
     /**
      * The domain name.
@@ -2132,6 +2181,22 @@ declare namespace WorkMail {
     OrganizationId: OrganizationId;
   }
   export interface PutAccessControlRuleResponse {
+  }
+  export interface PutEmailMonitoringConfigurationRequest {
+    /**
+     * The ID of the organization for which the email monitoring configuration is set.
+     */
+    OrganizationId: OrganizationId;
+    /**
+     * The Amazon Resource Name (ARN) of the IAM Role associated with the email monitoring configuration.
+     */
+    RoleArn: RoleArn;
+    /**
+     * The Amazon Resource Name (ARN) of the CloudWatch Log group associated with the email monitoring configuration.
+     */
+    LogGroupArn: LogGroupArn;
+  }
+  export interface PutEmailMonitoringConfigurationResponse {
   }
   export interface PutInboundDmarcSettingsRequest {
     /**

@@ -140,6 +140,14 @@ declare class LookoutMetrics extends Service {
    */
   listAnomalyDetectors(callback?: (err: AWSError, data: LookoutMetrics.Types.ListAnomalyDetectorsResponse) => void): Request<LookoutMetrics.Types.ListAnomalyDetectorsResponse, AWSError>;
   /**
+   * Returns a list of measures that are potential causes or effects of an anomaly group.
+   */
+  listAnomalyGroupRelatedMetrics(params: LookoutMetrics.Types.ListAnomalyGroupRelatedMetricsRequest, callback?: (err: AWSError, data: LookoutMetrics.Types.ListAnomalyGroupRelatedMetricsResponse) => void): Request<LookoutMetrics.Types.ListAnomalyGroupRelatedMetricsResponse, AWSError>;
+  /**
+   * Returns a list of measures that are potential causes or effects of an anomaly group.
+   */
+  listAnomalyGroupRelatedMetrics(callback?: (err: AWSError, data: LookoutMetrics.Types.ListAnomalyGroupRelatedMetricsResponse) => void): Request<LookoutMetrics.Types.ListAnomalyGroupRelatedMetricsResponse, AWSError>;
+  /**
    * Returns a list of anomaly groups.
    */
   listAnomalyGroupSummaries(params: LookoutMetrics.Types.ListAnomalyGroupSummariesRequest, callback?: (err: AWSError, data: LookoutMetrics.Types.ListAnomalyGroupSummariesResponse) => void): Request<LookoutMetrics.Types.ListAnomalyGroupSummariesResponse, AWSError>;
@@ -919,6 +927,25 @@ declare namespace LookoutMetrics {
   export type HistoricalDataPath = string;
   export type HistoricalDataPathList = HistoricalDataPath[];
   export type Integer = number;
+  export interface InterMetricImpactDetails {
+    /**
+     * The name of the measure.
+     */
+    MetricName?: MetricName;
+    /**
+     * The ID of the anomaly group.
+     */
+    AnomalyGroupId?: UUID;
+    /**
+     * Whether a measure is a potential cause of the anomaly group (CAUSE_OF_INPUT_ANOMALY_GROUP), or whether the measure is impacted by the anomaly group (EFFECT_OF_INPUT_ANOMALY_GROUP).
+     */
+    RelationshipType?: RelationshipType;
+    /**
+     * For potential causes (CAUSE_OF_INPUT_ANOMALY_GROUP), the percentage contribution the measure has in causing the anomalies.
+     */
+    ContributionPercentage?: MetricChangePercentage;
+  }
+  export type InterMetricImpactList = InterMetricImpactDetails[];
   export interface ItemizedMetricStats {
     /**
      * The name of the measure.
@@ -993,6 +1020,38 @@ declare namespace LookoutMetrics {
     AnomalyDetectorSummaryList?: AnomalyDetectorSummaryList;
     /**
      * If the response is truncated, the service returns this token. To retrieve the next set of results, use the token in the next request.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListAnomalyGroupRelatedMetricsRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the anomaly detector.
+     */
+    AnomalyDetectorArn: Arn;
+    /**
+     * The ID of the anomaly group.
+     */
+    AnomalyGroupId: UUID;
+    /**
+     * Filter for potential causes (CAUSE_OF_INPUT_ANOMALY_GROUP) or downstream effects (EFFECT_OF_INPUT_ANOMALY_GROUP) of the anomaly group.
+     */
+    RelationshipTypeFilter?: RelationshipType;
+    /**
+     * The maximum number of results to return.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * Specify the pagination token that's returned by a previous request to retrieve the next page of results.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListAnomalyGroupRelatedMetricsResponse {
+    /**
+     * Aggregated details about the measures contributing to the anomaly group, and the measures potentially impacted by the anomaly group.
+     */
+    InterMetricImpactList?: InterMetricImpactList;
+    /**
+     * The pagination token that's included if more results are available.
      */
     NextToken?: NextToken;
   }
@@ -1123,6 +1182,7 @@ declare namespace LookoutMetrics {
      */
     Namespace?: Namespace;
   }
+  export type MetricChangePercentage = number;
   export interface MetricLevelImpact {
     /**
      * The name of the measure.
@@ -1283,6 +1343,7 @@ declare namespace LookoutMetrics {
      */
     VpcConfiguration: VpcConfiguration;
   }
+  export type RelationshipType = "CAUSE_OF_INPUT_ANOMALY_GROUP"|"EFFECT_OF_INPUT_ANOMALY_GROUP"|string;
   export interface S3SourceConfig {
     /**
      * The ARN of an IAM role that has read and write access permissions to the source S3 bucket.

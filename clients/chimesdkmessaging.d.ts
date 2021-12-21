@@ -734,6 +734,14 @@ declare namespace ChimeSDKMessaging {
      * The message metadata.
      */
     Metadata?: Metadata;
+    /**
+     * The push notification configuration of the message.
+     */
+    PushNotification?: PushNotificationConfiguration;
+    /**
+     * The attributes for the message, used for message filtering along with a FilterRule defined in the PushNotificationPreferences. 
+     */
+    MessageAttributes?: MessageAttributeMap;
   }
   export type ChannelMessagePersistenceType = "PERSISTENT"|"NON_PERSISTENT"|string;
   export type ChannelMessageStatus = "SENT"|"PENDING"|"FAILED"|"DENIED"|string;
@@ -1405,7 +1413,7 @@ declare namespace ChimeSDKMessaging {
      */
     ChannelArn: ChimeArn;
     /**
-     * The membership type of a user, DEFAULT or HIDDEN. Default members are always returned as part of ListChannelMemberships. Hidden members are only returned if the type filter in ListChannelMemberships equals HIDDEN. Otherwise hidden members are not returned.
+     * The membership type of a user, DEFAULT or HIDDEN. Default members are returned as part of ListChannelMemberships if no type is specified. Hidden members are only returned if the type filter in ListChannelMemberships equals HIDDEN.
      */
     Type?: ChannelMembershipType;
     /**
@@ -1662,15 +1670,15 @@ declare namespace ChimeSDKMessaging {
     /**
      * The title of the push notification.
      */
-    Title: PushNotificationTitle;
+    Title?: PushNotificationTitle;
     /**
      * The body of the push notification.
      */
-    Body: PushNotificationBody;
+    Body?: PushNotificationBody;
     /**
      * Enum value that indicates the type of the push notification for a message. DEFAULT: Normal mobile push notification. VOIP: VOIP mobile push notification.
      */
-    Type: PushNotificationType;
+    Type?: PushNotificationType;
   }
   export interface PushNotificationPreferences {
     /**
