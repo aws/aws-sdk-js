@@ -742,7 +742,7 @@
           "name": "OperationName"
         },
         "result": {
-          "HeaderField": {"Foo":{}}
+          "HeaderField": {}
         },
         "response": {
           "status_code": 200,
