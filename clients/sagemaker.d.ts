@@ -1789,11 +1789,11 @@ declare class SageMaker extends Service {
    */
   stopNotebookInstance(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Stops a pipeline execution.  Callback Step  A pipeline execution won't stop while a callback step is running. When you call StopPipelineExecution on a pipeline execution with a running callback step, SageMaker Pipelines sends an additional Amazon SQS message to the specified SQS queue. The body of the SQS message contains a "Status" field which is set to "Stopping". You should add logic to your Amazon SQS message consumer to take any needed action (for example, resource cleanup) upon receipt of the message followed by a call to SendPipelineExecutionStepSuccess or SendPipelineExecutionStepFailure. Only when SageMaker Pipelines receives one of these calls will it stop the pipeline execution.  Lambda Step  A pipeline execution can't be stopped while a lambda step is running because the Lambda function invoked by the lambda step can't be stopped. If you attempt to stop the execution while the Lambda function is running, the pipeline waits for the Lambda function to finish or until the timeout is hit, whichever occurs first, and then stops. If the Lambda function finishes, the pipeline execution status is Stopped. If the timeout is hit the pipeline execution status is Failed.
+   * Stops a pipeline execution.  Callback Step  A pipeline execution won't stop while a callback step is running. When you call StopPipelineExecution on a pipeline execution with a running callback step, Amazon SageMaker Pipelines sends an additional Amazon SQS message to the specified SQS queue. The body of the SQS message contains a "Status" field which is set to "Stopping". You should add logic to your Amazon SQS message consumer to take any needed action (for example, resource cleanup) upon receipt of the message followed by a call to SendPipelineExecutionStepSuccess or SendPipelineExecutionStepFailure. Only when Amazon SageMaker Pipelines receives one of these calls will it stop the pipeline execution.  Lambda Step  A pipeline execution can't be stopped while a lambda step is running because the Lambda function invoked by the lambda step can't be stopped. If you attempt to stop the execution while the Lambda function is running, the pipeline waits for the Lambda function to finish or until the timeout is hit, whichever occurs first, and then stops. If the Lambda function finishes, the pipeline execution status is Stopped. If the timeout is hit the pipeline execution status is Failed.
    */
   stopPipelineExecution(params: SageMaker.Types.StopPipelineExecutionRequest, callback?: (err: AWSError, data: SageMaker.Types.StopPipelineExecutionResponse) => void): Request<SageMaker.Types.StopPipelineExecutionResponse, AWSError>;
   /**
-   * Stops a pipeline execution.  Callback Step  A pipeline execution won't stop while a callback step is running. When you call StopPipelineExecution on a pipeline execution with a running callback step, SageMaker Pipelines sends an additional Amazon SQS message to the specified SQS queue. The body of the SQS message contains a "Status" field which is set to "Stopping". You should add logic to your Amazon SQS message consumer to take any needed action (for example, resource cleanup) upon receipt of the message followed by a call to SendPipelineExecutionStepSuccess or SendPipelineExecutionStepFailure. Only when SageMaker Pipelines receives one of these calls will it stop the pipeline execution.  Lambda Step  A pipeline execution can't be stopped while a lambda step is running because the Lambda function invoked by the lambda step can't be stopped. If you attempt to stop the execution while the Lambda function is running, the pipeline waits for the Lambda function to finish or until the timeout is hit, whichever occurs first, and then stops. If the Lambda function finishes, the pipeline execution status is Stopped. If the timeout is hit the pipeline execution status is Failed.
+   * Stops a pipeline execution.  Callback Step  A pipeline execution won't stop while a callback step is running. When you call StopPipelineExecution on a pipeline execution with a running callback step, Amazon SageMaker Pipelines sends an additional Amazon SQS message to the specified SQS queue. The body of the SQS message contains a "Status" field which is set to "Stopping". You should add logic to your Amazon SQS message consumer to take any needed action (for example, resource cleanup) upon receipt of the message followed by a call to SendPipelineExecutionStepSuccess or SendPipelineExecutionStepFailure. Only when Amazon SageMaker Pipelines receives one of these calls will it stop the pipeline execution.  Lambda Step  A pipeline execution can't be stopped while a lambda step is running because the Lambda function invoked by the lambda step can't be stopped. If you attempt to stop the execution while the Lambda function is running, the pipeline waits for the Lambda function to finish or until the timeout is hit, whichever occurs first, and then stops. If the Lambda function finishes, the pipeline execution status is Stopped. If the timeout is hit the pipeline execution status is Failed.
    */
   stopPipelineExecution(callback?: (err: AWSError, data: SageMaker.Types.StopPipelineExecutionResponse) => void): Request<SageMaker.Types.StopPipelineExecutionResponse, AWSError>;
   /**
@@ -1813,11 +1813,11 @@ declare class SageMaker extends Service {
    */
   stopTrainingJob(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Stops a transform job. When Amazon SageMaker receives a StopTransformJob request, the status of the job changes to Stopping. After Amazon SageMaker stops the job, the status is set to Stopped. When you stop a transform job before it is completed, Amazon SageMaker doesn't store the job's output in Amazon S3.
+   * Stops a batch transform job. When Amazon SageMaker receives a StopTransformJob request, the status of the job changes to Stopping. After Amazon SageMaker stops the job, the status is set to Stopped. When you stop a batch transform job before it is completed, Amazon SageMaker doesn't store the job's output in Amazon S3.
    */
   stopTransformJob(params: SageMaker.Types.StopTransformJobRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Stops a transform job. When Amazon SageMaker receives a StopTransformJob request, the status of the job changes to Stopping. After Amazon SageMaker stops the job, the status is set to Stopped. When you stop a transform job before it is completed, Amazon SageMaker doesn't store the job's output in Amazon S3.
+   * Stops a batch transform job. When Amazon SageMaker receives a StopTransformJob request, the status of the job changes to Stopping. After Amazon SageMaker stops the job, the status is set to Stopped. When you stop a batch transform job before it is completed, Amazon SageMaker doesn't store the job's output in Amazon S3.
    */
   stopTransformJob(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -2945,6 +2945,7 @@ declare namespace SageMaker {
   export type Boolean = boolean;
   export type BooleanOperator = "And"|"Or"|string;
   export type Branch = string;
+  export type BucketName = string;
   export interface CacheHitResult {
     /**
      * The Amazon Resource Name (ARN) of the pipeline execution.
@@ -3800,7 +3801,7 @@ declare namespace SageMaker {
      */
     AppNetworkAccessType?: AppNetworkAccessType;
     /**
-     * This member is deprecated and replaced with KmsKeyId.
+     * Use KmsKeyId.
      */
     HomeEfsFileSystemKmsKeyId?: KmsKeyId;
     /**
@@ -4569,7 +4570,11 @@ declare namespace SageMaker {
     /**
      * The JSON pipeline definition of the pipeline.
      */
-    PipelineDefinition: PipelineDefinition;
+    PipelineDefinition?: PipelineDefinition;
+    /**
+     * The location of the pipeline definition stored in Amazon S3. If specified, SageMaker will retrieve the pipeline definition from this location.
+     */
+    PipelineDefinitionS3Location?: PipelineDefinitionS3Location;
     /**
      * A description of the pipeline.
      */
@@ -4586,6 +4591,10 @@ declare namespace SageMaker {
      * A list of tags to apply to the created pipeline.
      */
     Tags?: TagList;
+    /**
+     * This is the configuration that controls the parallelism of the pipeline. If specified, it applies to all runs of this pipeline by default.
+     */
+    ParallelismConfiguration?: ParallelismConfiguration;
   }
   export interface CreatePipelineResponse {
     /**
@@ -6325,7 +6334,7 @@ declare namespace SageMaker {
      */
     AppNetworkAccessType?: AppNetworkAccessType;
     /**
-     * This member is deprecated and replaced with KmsKeyId.
+     * Use KmsKeyId.
      */
     HomeEfsFileSystemKmsKeyId?: KmsKeyId;
     /**
@@ -7561,6 +7570,10 @@ declare namespace SageMaker {
     LastModifiedTime?: Timestamp;
     CreatedBy?: UserContext;
     LastModifiedBy?: UserContext;
+    /**
+     * The parallelism configuration applied to the pipeline.
+     */
+    ParallelismConfiguration?: ParallelismConfiguration;
   }
   export interface DescribePipelineRequest {
     /**
@@ -7611,6 +7624,10 @@ declare namespace SageMaker {
     LastRunTime?: Timestamp;
     CreatedBy?: UserContext;
     LastModifiedBy?: UserContext;
+    /**
+     * Lists the parallelism configuration applied to the pipeline.
+     */
+    ParallelismConfiguration?: ParallelismConfiguration;
   }
   export interface DescribeProcessingJobRequest {
     /**
@@ -8461,6 +8478,24 @@ declare namespace SageMaker {
   export interface DriftCheckModelQuality {
     Statistics?: MetricsSource;
     Constraints?: MetricsSource;
+  }
+  export interface EMRStepMetadata {
+    /**
+     * The identifier of the EMR cluster.
+     */
+    ClusterId?: String256;
+    /**
+     * The identifier of the EMR cluster step.
+     */
+    StepId?: String256;
+    /**
+     * The name of the EMR cluster step.
+     */
+    StepName?: String256;
+    /**
+     * The path to the log file where the cluster step's failure root cause is recorded.
+     */
+    LogFilePath?: String1024;
   }
   export interface Edge {
     /**
@@ -9838,7 +9873,7 @@ declare namespace SageMaker {
      */
     Framework: Framework;
     /**
-     * Specifies the framework version to use. This API field is only supported for PyTorch framework versions 1.4, 1.5, and 1.6 for cloud instance target devices: ml_c4, ml_c5, ml_m4, ml_m5, ml_p2, ml_p3, and ml_g4dn.
+     * Specifies the framework version to use. This API field is only supported for the PyTorch and TensorFlow frameworks. For information about framework versions supported for cloud targets and edge devices, see Cloud Supported Instance Types and Frameworks and Edge Supported Frameworks.
      */
     FrameworkVersion?: FrameworkVersion;
   }
@@ -9934,6 +9969,7 @@ declare namespace SageMaker {
     DisplayName?: KernelDisplayName;
   }
   export type KernelSpecs = KernelSpec[];
+  export type Key = string;
   export type KmsKeyId = string;
   export type LabelAttributeName = string;
   export type LabelCounter = number;
@@ -12675,6 +12711,7 @@ declare namespace SageMaker {
   export type MaxHumanLabeledObjectCount = number;
   export type MaxNumberOfTests = number;
   export type MaxNumberOfTrainingJobs = number;
+  export type MaxParallelExecutionSteps = number;
   export type MaxParallelOfTests = number;
   export type MaxParallelTrainingJobs = number;
   export type MaxPayloadInMB = number;
@@ -13968,6 +14005,12 @@ declare namespace SageMaker {
   }
   export type OutputParameterList = OutputParameter[];
   export type PaginationToken = string;
+  export interface ParallelismConfiguration {
+    /**
+     * The max number of steps that can be executed in parallel. 
+     */
+    MaxParallelExecutionSteps: MaxParallelExecutionSteps;
+  }
   export interface Parameter {
     /**
      * The name of the parameter to assign a value to. This parameter name must match a named parameter in the pipeline definition.
@@ -14146,12 +14189,30 @@ declare namespace SageMaker {
     CreatedBy?: UserContext;
     LastModifiedBy?: UserContext;
     /**
+     * The parallelism configuration applied to the pipeline.
+     */
+    ParallelismConfiguration?: ParallelismConfiguration;
+    /**
      * A list of tags that apply to the pipeline.
      */
     Tags?: TagList;
   }
   export type PipelineArn = string;
   export type PipelineDefinition = string;
+  export interface PipelineDefinitionS3Location {
+    /**
+     * Name of the S3 bucket.
+     */
+    Bucket: BucketName;
+    /**
+     * The object key (or key name) uniquely identifies the object in an S3 bucket. 
+     */
+    ObjectKey: Key;
+    /**
+     * Version Id of the pipeline definition file. If not specified, Amazon SageMaker will retrieve the latest version.
+     */
+    VersionId?: VersionId;
+  }
   export type PipelineDescription = string;
   export interface PipelineExecution {
     /**
@@ -14190,6 +14251,10 @@ declare namespace SageMaker {
     CreatedBy?: UserContext;
     LastModifiedBy?: UserContext;
     /**
+     * The parallelism configuration applied to the pipeline execution.
+     */
+    ParallelismConfiguration?: ParallelismConfiguration;
+    /**
      * Contains a list of pipeline parameters. This list can be empty. 
      */
     PipelineParameters?: ParameterList;
@@ -14204,6 +14269,14 @@ declare namespace SageMaker {
      * The name of the step that is executed.
      */
     StepName?: StepName;
+    /**
+     * The display name of the step.
+     */
+    StepDisplayName?: StepDisplayName;
+    /**
+     * The description of the step.
+     */
+    StepDescription?: StepDescription;
     /**
      * The time that the step started executing.
      */
@@ -14220,6 +14293,9 @@ declare namespace SageMaker {
      * If this pipeline execution step was cached, details on the cache hit.
      */
     CacheHitResult?: CacheHitResult;
+    /**
+     * The current attempt of the execution step. For more information, see Retry Policy for Amazon SageMaker Pipelines steps.
+     */
     AttemptCount?: IntegerValue;
     /**
      * The reason why the step failed execution. This is only returned if the step failed its execution.
@@ -14276,6 +14352,10 @@ declare namespace SageMaker {
      * Container for the metadata for a Clarify check step. The configurations and outcomes of the check step execution. This includes:    The type of the check conducted,   The Amazon S3 URIs of baseline constraints and statistics files to be used for the drift check.   The Amazon S3 URIs of newly calculated baseline constraints and statistics.   The model package group name provided.   The Amazon S3 URI of the violation report if violations detected.   The Amazon Resource Name (ARN) of check processing job initiated by the step execution.   The boolean flags indicating if the drift check is skipped.   If step property BaselineUsedForDriftCheck is set the same as CalculatedBaseline.  
      */
     ClarifyCheck?: ClarifyCheckStepMetadata;
+    /**
+     * The configurations and outcomes of an EMR step execution.
+     */
+    EMR?: EMRStepMetadata;
   }
   export interface PipelineExecutionSummary {
     /**
@@ -15333,6 +15413,10 @@ declare namespace SageMaker {
      * A unique, case-sensitive identifier that you provide to ensure the idempotency of the operation. An idempotent operation completes no more than once.
      */
     ClientRequestToken: IdempotencyToken;
+    /**
+     * This configuration, if specified, overrides the parallelism configuration of the parent pipeline.
+     */
+    ParallelismConfiguration?: ParallelismConfiguration;
   }
   export interface RetryPipelineExecutionResponse {
     /**
@@ -15681,6 +15765,10 @@ declare namespace SageMaker {
      * A unique, case-sensitive identifier that you provide to ensure the idempotency of the operation. An idempotent operation completes no more than once.
      */
     ClientRequestToken: IdempotencyToken;
+    /**
+     * This configuration, if specified, overrides the parallelism configuration of the parent pipeline for this specific run.
+     */
+    ParallelismConfiguration?: ParallelismConfiguration;
   }
   export interface StartPipelineExecutionResponse {
     /**
@@ -15690,6 +15778,8 @@ declare namespace SageMaker {
   }
   export type StatusDetails = string;
   export type StatusMessage = string;
+  export type StepDescription = string;
+  export type StepDisplayName = string;
   export type StepName = string;
   export type StepStatus = "Starting"|"Executing"|"Stopping"|"Stopped"|"Failed"|"Succeeded"|string;
   export interface StopAutoMLJobRequest {
@@ -15770,7 +15860,7 @@ declare namespace SageMaker {
   }
   export interface StopTransformJobRequest {
     /**
-     * The name of the transform job to stop.
+     * The name of the batch transform job to stop.
      */
     TransformJobName: TransformJobName;
   }
@@ -17183,6 +17273,10 @@ declare namespace SageMaker {
      * The display name of the pipeline execution.
      */
     PipelineExecutionDisplayName?: PipelineExecutionName;
+    /**
+     * This configuration, if specified, overrides the parallelism configuration of the parent pipeline for this specific run.
+     */
+    ParallelismConfiguration?: ParallelismConfiguration;
   }
   export interface UpdatePipelineExecutionResponse {
     /**
@@ -17204,6 +17298,10 @@ declare namespace SageMaker {
      */
     PipelineDefinition?: PipelineDefinition;
     /**
+     * The location of the pipeline definition stored in Amazon S3. If specified, SageMaker will retrieve the pipeline definition from this location.
+     */
+    PipelineDefinitionS3Location?: PipelineDefinitionS3Location;
+    /**
      * The description of the pipeline.
      */
     PipelineDescription?: PipelineDescription;
@@ -17211,6 +17309,10 @@ declare namespace SageMaker {
      * The Amazon Resource Name (ARN) that the pipeline uses to execute.
      */
     RoleArn?: RoleArn;
+    /**
+     * If specified, it applies to all executions of this pipeline by default.
+     */
+    ParallelismConfiguration?: ParallelismConfiguration;
   }
   export interface UpdatePipelineResponse {
     /**
@@ -17482,6 +17584,7 @@ declare namespace SageMaker {
   export type VariantStatus = "Creating"|"Updating"|"Deleting"|"ActivatingTraffic"|"Baking"|string;
   export type VariantStatusMessage = string;
   export type VariantWeight = number;
+  export type VersionId = string;
   export type VersionedArnOrName = string;
   export interface Vertex {
     /**
