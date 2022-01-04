@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1049.0-->
+<!--LATEST=2.1050.0-->
 <!--ENTRYINSERT-->
+
+## 2.1050.0
+* feature: Rekognition: This release introduces a new field IndexFacesModelVersion, which is the version of the face detect and storage model that was used when indexing the face vector.
 
 ## 2.1049.0
 * feature: Detective: Added and updated API operations to support the Detective integration with AWS Organizations. New actions are used to manage the delegated administrator account and the integration configuration.
