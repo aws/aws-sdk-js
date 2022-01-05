@@ -1,0 +1,47 @@
+[
+    {
+        "type": "feature",
+        "category": "AppStream",
+        "description": "Includes APIs for App Entitlement management regarding entitlement and entitled application association."
+    },
+    {
+        "type": "feature",
+        "category": "CloudTrail",
+        "description": "This release adds support for CloudTrail Lake, a new feature that lets you run SQL-based queries on events that you have aggregated into event data stores. New APIs have been added for creating and managing event data stores, and creating, running, and managing queries in CloudTrail Lake."
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "This release adds a new API called ModifyVpcEndpointServicePayerResponsibility which allows VPC endpoint service owners to take payer responsibility of their VPC Endpoint connections."
+    },
+    {
+        "type": "feature",
+        "category": "EKS",
+        "description": "Amazon EKS now supports running applications using IPv6 address space"
+    },
+    {
+        "type": "feature",
+        "category": "Glue",
+        "description": "Add Delta Lake target support for Glue Crawler and 3rd Party Support for Lake Formation"
+    },
+    {
+        "type": "feature",
+        "category": "Iot",
+        "description": "This release adds an automatic retry mechanism for AWS IoT Jobs. You can now define a maximum number of retries for each Job rollout, along with the criteria to trigger the retry for FAILED/TIMED_OUT/ALL(both FAILED an TIMED_OUT) job."
+    },
+    {
+        "type": "feature",
+        "category": "LakeFormation",
+        "description": "Add new APIs for 3rd Party Support for Lake Formation"
+    },
+    {
+        "type": "feature",
+        "category": "SageMaker",
+        "description": "Amazon SageMaker now supports running training jobs on ml.g5 instance types."
+    },
+    {
+        "type": "feature",
+        "category": "Snowball",
+        "description": "Updating validation rules for interfaces used in the Snowball API to tighten security of service."
+    }
+]

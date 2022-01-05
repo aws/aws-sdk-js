@@ -21,6 +21,14 @@ declare class AppStream extends Service {
    */
   associateApplicationFleet(callback?: (err: AWSError, data: AppStream.Types.AssociateApplicationFleetResult) => void): Request<AppStream.Types.AssociateApplicationFleetResult, AWSError>;
   /**
+   * Associates an application to entitle.
+   */
+  associateApplicationToEntitlement(params: AppStream.Types.AssociateApplicationToEntitlementRequest, callback?: (err: AWSError, data: AppStream.Types.AssociateApplicationToEntitlementResult) => void): Request<AppStream.Types.AssociateApplicationToEntitlementResult, AWSError>;
+  /**
+   * Associates an application to entitle.
+   */
+  associateApplicationToEntitlement(callback?: (err: AWSError, data: AppStream.Types.AssociateApplicationToEntitlementResult) => void): Request<AppStream.Types.AssociateApplicationToEntitlementResult, AWSError>;
+  /**
    * Associates the specified fleet with the specified stack.
    */
   associateFleet(params: AppStream.Types.AssociateFleetRequest, callback?: (err: AWSError, data: AppStream.Types.AssociateFleetResult) => void): Request<AppStream.Types.AssociateFleetResult, AWSError>;
@@ -76,6 +84,14 @@ declare class AppStream extends Service {
    * Creates a Directory Config object in AppStream 2.0. This object includes the configuration information required to join fleets and image builders to Microsoft Active Directory domains.
    */
   createDirectoryConfig(callback?: (err: AWSError, data: AppStream.Types.CreateDirectoryConfigResult) => void): Request<AppStream.Types.CreateDirectoryConfigResult, AWSError>;
+  /**
+   * Creates a new entitlement. Entitlements control access to specific applications within a stack, based on user attributes. Entitlements apply to SAML 2.0 federated user identities. Amazon AppStream 2.0 user pool and streaming URL users are entitled to all applications in a stack. Entitlements don't apply to the desktop stream view application, or to applications managed by a dynamic app provider using the Dynamic Application Framework.
+   */
+  createEntitlement(params: AppStream.Types.CreateEntitlementRequest, callback?: (err: AWSError, data: AppStream.Types.CreateEntitlementResult) => void): Request<AppStream.Types.CreateEntitlementResult, AWSError>;
+  /**
+   * Creates a new entitlement. Entitlements control access to specific applications within a stack, based on user attributes. Entitlements apply to SAML 2.0 federated user identities. Amazon AppStream 2.0 user pool and streaming URL users are entitled to all applications in a stack. Entitlements don't apply to the desktop stream view application, or to applications managed by a dynamic app provider using the Dynamic Application Framework.
+   */
+  createEntitlement(callback?: (err: AWSError, data: AppStream.Types.CreateEntitlementResult) => void): Request<AppStream.Types.CreateEntitlementResult, AWSError>;
   /**
    * Creates a fleet. A fleet consists of streaming instances that run a specified image when using Always-On or On-Demand.
    */
@@ -165,6 +181,14 @@ declare class AppStream extends Service {
    */
   deleteDirectoryConfig(callback?: (err: AWSError, data: AppStream.Types.DeleteDirectoryConfigResult) => void): Request<AppStream.Types.DeleteDirectoryConfigResult, AWSError>;
   /**
+   * Deletes the specified entitlement.
+   */
+  deleteEntitlement(params: AppStream.Types.DeleteEntitlementRequest, callback?: (err: AWSError, data: AppStream.Types.DeleteEntitlementResult) => void): Request<AppStream.Types.DeleteEntitlementResult, AWSError>;
+  /**
+   * Deletes the specified entitlement.
+   */
+  deleteEntitlement(callback?: (err: AWSError, data: AppStream.Types.DeleteEntitlementResult) => void): Request<AppStream.Types.DeleteEntitlementResult, AWSError>;
+  /**
    * Deletes the specified fleet.
    */
   deleteFleet(params: AppStream.Types.DeleteFleetRequest, callback?: (err: AWSError, data: AppStream.Types.DeleteFleetResult) => void): Request<AppStream.Types.DeleteFleetResult, AWSError>;
@@ -252,6 +276,14 @@ declare class AppStream extends Service {
    * Retrieves a list that describes one or more specified Directory Config objects for AppStream 2.0, if the names for these objects are provided. Otherwise, all Directory Config objects in the account are described. These objects include the configuration information required to join fleets and image builders to Microsoft Active Directory domains.  Although the response syntax in this topic includes the account password, this password is not returned in the actual response.
    */
   describeDirectoryConfigs(callback?: (err: AWSError, data: AppStream.Types.DescribeDirectoryConfigsResult) => void): Request<AppStream.Types.DescribeDirectoryConfigsResult, AWSError>;
+  /**
+   * Retrieves a list that describes one of more entitlements.
+   */
+  describeEntitlements(params: AppStream.Types.DescribeEntitlementsRequest, callback?: (err: AWSError, data: AppStream.Types.DescribeEntitlementsResult) => void): Request<AppStream.Types.DescribeEntitlementsResult, AWSError>;
+  /**
+   * Retrieves a list that describes one of more entitlements.
+   */
+  describeEntitlements(callback?: (err: AWSError, data: AppStream.Types.DescribeEntitlementsResult) => void): Request<AppStream.Types.DescribeEntitlementsResult, AWSError>;
   /**
    * Retrieves a list that describes one or more specified fleets, if the fleet names are provided. Otherwise, all fleets in the account are described.
    */
@@ -341,6 +373,14 @@ declare class AppStream extends Service {
    */
   disassociateApplicationFleet(callback?: (err: AWSError, data: AppStream.Types.DisassociateApplicationFleetResult) => void): Request<AppStream.Types.DisassociateApplicationFleetResult, AWSError>;
   /**
+   * Deletes the specified application from the specified entitlement.
+   */
+  disassociateApplicationFromEntitlement(params: AppStream.Types.DisassociateApplicationFromEntitlementRequest, callback?: (err: AWSError, data: AppStream.Types.DisassociateApplicationFromEntitlementResult) => void): Request<AppStream.Types.DisassociateApplicationFromEntitlementResult, AWSError>;
+  /**
+   * Deletes the specified application from the specified entitlement.
+   */
+  disassociateApplicationFromEntitlement(callback?: (err: AWSError, data: AppStream.Types.DisassociateApplicationFromEntitlementResult) => void): Request<AppStream.Types.DisassociateApplicationFromEntitlementResult, AWSError>;
+  /**
    * Disassociates the specified fleet from the specified stack.
    */
   disassociateFleet(params: AppStream.Types.DisassociateFleetRequest, callback?: (err: AWSError, data: AppStream.Types.DisassociateFleetResult) => void): Request<AppStream.Types.DisassociateFleetResult, AWSError>;
@@ -380,6 +420,14 @@ declare class AppStream extends Service {
    * Retrieves the name of the stack with which the specified fleet is associated.
    */
   listAssociatedStacks(callback?: (err: AWSError, data: AppStream.Types.ListAssociatedStacksResult) => void): Request<AppStream.Types.ListAssociatedStacksResult, AWSError>;
+  /**
+   * Retrieves a list of entitled applications.
+   */
+  listEntitledApplications(params: AppStream.Types.ListEntitledApplicationsRequest, callback?: (err: AWSError, data: AppStream.Types.ListEntitledApplicationsResult) => void): Request<AppStream.Types.ListEntitledApplicationsResult, AWSError>;
+  /**
+   * Retrieves a list of entitled applications.
+   */
+  listEntitledApplications(callback?: (err: AWSError, data: AppStream.Types.ListEntitledApplicationsResult) => void): Request<AppStream.Types.ListEntitledApplicationsResult, AWSError>;
   /**
    * Retrieves a list of all tags for the specified AppStream 2.0 resource. You can tag AppStream 2.0 image builders, images, fleets, and stacks. For more information about tags, see Tagging Your Resources in the Amazon AppStream 2.0 Administration Guide.
    */
@@ -452,6 +500,14 @@ declare class AppStream extends Service {
    * Updates the specified Directory Config object in AppStream 2.0. This object includes the configuration information required to join fleets and image builders to Microsoft Active Directory domains.
    */
   updateDirectoryConfig(callback?: (err: AWSError, data: AppStream.Types.UpdateDirectoryConfigResult) => void): Request<AppStream.Types.UpdateDirectoryConfigResult, AWSError>;
+  /**
+   * Updates the specified entitlement.
+   */
+  updateEntitlement(params: AppStream.Types.UpdateEntitlementRequest, callback?: (err: AWSError, data: AppStream.Types.UpdateEntitlementResult) => void): Request<AppStream.Types.UpdateEntitlementResult, AWSError>;
+  /**
+   * Updates the specified entitlement.
+   */
+  updateEntitlement(callback?: (err: AWSError, data: AppStream.Types.UpdateEntitlementResult) => void): Request<AppStream.Types.UpdateEntitlementResult, AWSError>;
   /**
    * Updates the specified fleet. If the fleet is in the STOPPED state, you can update any attribute except the fleet name. If the fleet is in the RUNNING state, you can update the following based on the fleet type:   Always-On and On-Demand fleet types You can update the DisplayName, ComputeCapacity, ImageARN, ImageName, IdleDisconnectTimeoutInSeconds, and DisconnectTimeoutInSeconds attributes.   Elastic fleet type You can update the DisplayName, IdleDisconnectTimeoutInSeconds, DisconnectTimeoutInSeconds, MaxConcurrentSessions, and UsbDeviceFilterStrings attributes.   If the fleet is in the STARTING or STOPPED state, you can't update it.
    */
@@ -540,6 +596,7 @@ declare namespace AppStream {
     CreatedTime?: Timestamp;
   }
   export type AppBlocks = AppBlock[];
+  export type AppVisibility = "ALL"|"ASSOCIATED"|string;
   export interface Application {
     /**
      * The name of the application.
@@ -658,6 +715,22 @@ declare namespace AppStream {
      * If fleet name is specified, this returns the list of applications that are associated to it. If application ARN is specified, this returns the list of fleets to which it is associated.
      */
     ApplicationFleetAssociation?: ApplicationFleetAssociation;
+  }
+  export interface AssociateApplicationToEntitlementRequest {
+    /**
+     * The name of the stack.
+     */
+    StackName: Name;
+    /**
+     * The name of the entitlement.
+     */
+    EntitlementName: Name;
+    /**
+     * The identifier of the application.
+     */
+    ApplicationIdentifier: String;
+  }
+  export interface AssociateApplicationToEntitlementResult {
   }
   export interface AssociateFleetRequest {
     /**
@@ -848,6 +921,34 @@ declare namespace AppStream {
      * Information about the directory configuration.
      */
     DirectoryConfig?: DirectoryConfig;
+  }
+  export interface CreateEntitlementRequest {
+    /**
+     * The name of the entitlement.
+     */
+    Name: Name;
+    /**
+     * The name of the stack with which the entitlement is associated.
+     */
+    StackName: Name;
+    /**
+     * The description of the entitlement.
+     */
+    Description?: Description;
+    /**
+     * Specifies whether all or selected apps are entitled.
+     */
+    AppVisibility: AppVisibility;
+    /**
+     * The attributes of the entitlement.
+     */
+    Attributes: EntitlementAttributeList;
+  }
+  export interface CreateEntitlementResult {
+    /**
+     * The entitlement.
+     */
+    Entitlement?: Entitlement;
   }
   export interface CreateFleetRequest {
     /**
@@ -1198,6 +1299,18 @@ declare namespace AppStream {
   }
   export interface DeleteDirectoryConfigResult {
   }
+  export interface DeleteEntitlementRequest {
+    /**
+     * The name of the entitlement.
+     */
+    Name: Name;
+    /**
+     * The name of the stack with which the entitlement is associated.
+     */
+    StackName: Name;
+  }
+  export interface DeleteEntitlementResult {
+  }
   export interface DeleteFleetRequest {
     /**
      * The name of the fleet.
@@ -1363,6 +1476,34 @@ declare namespace AppStream {
     DirectoryConfigs?: DirectoryConfigList;
     /**
      * The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.
+     */
+    NextToken?: String;
+  }
+  export interface DescribeEntitlementsRequest {
+    /**
+     * The name of the entitlement.
+     */
+    Name?: Name;
+    /**
+     * The name of the stack with which the entitlement is associated.
+     */
+    StackName: Name;
+    /**
+     * The pagination token used to retrieve the next page of results for this operation.
+     */
+    NextToken?: String;
+    /**
+     * The maximum size of each page of results.
+     */
+    MaxResults?: Integer;
+  }
+  export interface DescribeEntitlementsResult {
+    /**
+     * The entitlements.
+     */
+    Entitlements?: EntitlementList;
+    /**
+     * The pagination token used to retrieve the next page of results for this operation.
      */
     NextToken?: String;
   }
@@ -1653,6 +1794,22 @@ declare namespace AppStream {
   }
   export interface DisassociateApplicationFleetResult {
   }
+  export interface DisassociateApplicationFromEntitlementRequest {
+    /**
+     * The name of the stack with which the entitlement is associated.
+     */
+    StackName: Name;
+    /**
+     * The name of the entitlement.
+     */
+    EntitlementName: Name;
+    /**
+     * The identifier of the application to remove from the entitlement.
+     */
+    ApplicationIdentifier: String;
+  }
+  export interface DisassociateApplicationFromEntitlementResult {
+  }
   export interface DisassociateFleetRequest {
     /**
      * The name of the fleet.
@@ -1692,6 +1849,55 @@ declare namespace AppStream {
   }
   export interface EnableUserResult {
   }
+  export interface EntitledApplication {
+    /**
+     * The identifier of the application.
+     */
+    ApplicationIdentifier: String;
+  }
+  export type EntitledApplicationList = EntitledApplication[];
+  export interface Entitlement {
+    /**
+     * The name of the entitlement.
+     */
+    Name: Name;
+    /**
+     * The name of the stack with which the entitlement is associated.
+     */
+    StackName: Name;
+    /**
+     * The description of the entitlement.
+     */
+    Description?: Description;
+    /**
+     * Specifies whether all or selected apps are entitled.
+     */
+    AppVisibility: AppVisibility;
+    /**
+     * The attributes of the entitlement.
+     */
+    Attributes: EntitlementAttributeList;
+    /**
+     * The time when the entitlement was created.
+     */
+    CreatedTime?: Timestamp;
+    /**
+     * The time when the entitlement was last modified.
+     */
+    LastModifiedTime?: Timestamp;
+  }
+  export interface EntitlementAttribute {
+    /**
+     * A supported AWS IAM SAML PrincipalTag attribute that is matched to the associated value when a user identity federates into an Amazon AppStream 2.0 SAML application. The following are valid values:   roles   department    organization    groups    title    costCenter    userType    
+     */
+    Name: String;
+    /**
+     * A value that is matched to a supported SAML attribute name when a user identity federates into an Amazon AppStream 2.0 SAML application. 
+     */
+    Value: String;
+  }
+  export type EntitlementAttributeList = EntitlementAttribute[];
+  export type EntitlementList = Entitlement[];
   export interface ExpireSessionRequest {
     /**
      * The identifier of the streaming session.
@@ -2038,6 +2244,34 @@ declare namespace AppStream {
     Names?: StringList;
     /**
      * The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.
+     */
+    NextToken?: String;
+  }
+  export interface ListEntitledApplicationsRequest {
+    /**
+     * The name of the stack with which the entitlement is associated.
+     */
+    StackName: Name;
+    /**
+     * The name of the entitlement.
+     */
+    EntitlementName: Name;
+    /**
+     * The pagination token used to retrieve the next page of results for this operation.
+     */
+    NextToken?: String;
+    /**
+     * The maximum size of each page of results.
+     */
+    MaxResults?: Integer;
+  }
+  export interface ListEntitledApplicationsResult {
+    /**
+     * The entitled applications.
+     */
+    EntitledApplications?: EntitledApplicationList;
+    /**
+     * The pagination token used to retrieve the next page of results for this operation.
      */
     NextToken?: String;
   }
@@ -2412,6 +2646,34 @@ declare namespace AppStream {
      * Information about the Directory Config object.
      */
     DirectoryConfig?: DirectoryConfig;
+  }
+  export interface UpdateEntitlementRequest {
+    /**
+     * The name of the entitlement.
+     */
+    Name: Name;
+    /**
+     * The name of the stack with which the entitlement is associated.
+     */
+    StackName: Name;
+    /**
+     * The description of the entitlement.
+     */
+    Description?: Description;
+    /**
+     * Specifies whether all or only selected apps are entitled.
+     */
+    AppVisibility?: AppVisibility;
+    /**
+     * The attributes of the entitlement.
+     */
+    Attributes?: EntitlementAttributeList;
+  }
+  export interface UpdateEntitlementResult {
+    /**
+     * The entitlement.
+     */
+    Entitlement?: Entitlement;
   }
   export interface UpdateFleetRequest {
     /**

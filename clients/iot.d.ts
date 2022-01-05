@@ -3572,7 +3572,7 @@ declare namespace Iot {
      */
     jobExecutionsRolloutConfig?: JobExecutionsRolloutConfig;
     /**
-     * Allows you to create criteria to abort a job.
+     * Allows you to create the criteria to abort a job.
      */
     abortConfig?: AbortConfig;
     /**
@@ -3591,6 +3591,10 @@ declare namespace Iot {
      * The ARN of the job template used to create the job.
      */
     jobTemplateArn?: JobTemplateArn;
+    /**
+     * Allows you to create the criteria to retry a job.
+     */
+    jobExecutionsRetryConfig?: JobExecutionsRetryConfig;
     /**
      * Parameters of a managed template that you can specify to create the job document.
      */
@@ -3639,6 +3643,10 @@ declare namespace Iot {
      * Metadata that can be used to manage the job template.
      */
     tags?: TagList;
+    /**
+     * Allows you to create the criteria to retry a job.
+     */
+    jobExecutionsRetryConfig?: JobExecutionsRetryConfig;
   }
   export interface CreateJobTemplateResponse {
     /**
@@ -5046,6 +5054,10 @@ declare namespace Iot {
     jobExecutionsRolloutConfig?: JobExecutionsRolloutConfig;
     abortConfig?: AbortConfig;
     timeoutConfig?: TimeoutConfig;
+    /**
+     * The configuration that determines how many retries are allowed for each failure type for a job.
+     */
+    jobExecutionsRetryConfig?: JobExecutionsRetryConfig;
   }
   export interface DescribeManagedJobTemplateRequest {
     /**
@@ -6500,6 +6512,10 @@ declare namespace Iot {
      */
     jobTemplateArn?: JobTemplateArn;
     /**
+     * The configuration for the criteria to retry the job.
+     */
+    jobExecutionsRetryConfig?: JobExecutionsRetryConfig;
+    /**
      * A key-value map that pairs the patterns that need to be replaced in a managed template job document schema. You can use the description of each key as a guidance to specify the inputs during runtime when creating a job.
      */
     documentParameters?: ParameterMap;
@@ -6583,6 +6599,10 @@ declare namespace Iot {
      * A string (consisting of the digits "0" through "9") which identifies this particular job execution on this particular device. It can be used later in commands which return or update job execution information.
      */
     executionNumber?: ExecutionNumber;
+    /**
+     * The number that indicates how many retry attempts have been completed for this job on this device.
+     */
+    retryAttempt?: RetryAttempt;
   }
   export interface JobExecutionSummaryForJob {
     /**
@@ -6606,6 +6626,12 @@ declare namespace Iot {
     jobExecutionSummary?: JobExecutionSummary;
   }
   export type JobExecutionSummaryForThingList = JobExecutionSummaryForThing[];
+  export interface JobExecutionsRetryConfig {
+    /**
+     * The list of criteria that determines how many retries are allowed for each failure type for a job.
+     */
+    criteriaList: RetryCriteriaList;
+  }
   export interface JobExecutionsRolloutConfig {
     /**
      * The maximum number of things that will be notified of a pending job, per minute. This parameter allows you to create a staged rollout.
@@ -7367,6 +7393,10 @@ declare namespace Iot {
      * The token to retrieve the next set of results.
      */
     nextToken?: NextToken;
+    /**
+     * The unique identifier you assigned to this job when it was created.
+     */
+    jobId?: JobId;
   }
   export interface ListJobExecutionsForThingResponse {
     /**
@@ -8489,6 +8519,7 @@ declare namespace Iot {
   export type NullableBoolean = boolean;
   export type Number = number;
   export type NumberList = Number[];
+  export type NumberOfRetries = number;
   export type NumberOfThings = number;
   export type OTAUpdateArn = string;
   export type OTAUpdateDescription = string;
@@ -9140,6 +9171,19 @@ declare namespace Iot {
   export type ResourceLogicalId = string;
   export type ResourceType = "DEVICE_CERTIFICATE"|"CA_CERTIFICATE"|"IOT_POLICY"|"COGNITO_IDENTITY_POOL"|"CLIENT_ID"|"ACCOUNT_SETTINGS"|"ROLE_ALIAS"|"IAM_ROLE"|string;
   export type Resources = Resource[];
+  export type RetryAttempt = number;
+  export interface RetryCriteria {
+    /**
+     * The type of job execution failures that can initiate a job retry.
+     */
+    failureType: RetryableFailureType;
+    /**
+     * The number of retries allowed for a failure type for the job.
+     */
+    numberOfRetries: NumberOfRetries;
+  }
+  export type RetryCriteriaList = RetryCriteria[];
+  export type RetryableFailureType = "FAILED"|"TIMED_OUT"|"ALL"|string;
   export type RoleAlias = string;
   export type RoleAliasArn = string;
   export interface RoleAliasDescription {
@@ -10788,6 +10832,10 @@ declare namespace Iot {
      * The namespace used to indicate that a job is a customer-managed job. When you specify a value for this parameter, Amazon Web Services IoT Core sends jobs notifications to MQTT topics that contain the value in the following format.  $aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/   The namespaceId feature is in public preview. 
      */
     namespaceId?: NamespaceId;
+    /**
+     * Allows you to create the criteria to retry a job.
+     */
+    jobExecutionsRetryConfig?: JobExecutionsRetryConfig;
   }
   export interface UpdateMitigationActionRequest {
     /**

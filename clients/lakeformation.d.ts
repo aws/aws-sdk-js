@@ -181,6 +181,22 @@ declare class LakeFormation extends Service {
    */
   getTableObjects(callback?: (err: AWSError, data: LakeFormation.Types.GetTableObjectsResponse) => void): Request<LakeFormation.Types.GetTableObjectsResponse, AWSError>;
   /**
+   * This API is identical to GetTemporaryTableCredentials except that this is used when the target Data Catalog resource is of type Partition. Lake Formation restricts the permission of the vended credentials with the same scope down policy which restricts access to a single Amazon S3 prefix.
+   */
+  getTemporaryGluePartitionCredentials(params: LakeFormation.Types.GetTemporaryGluePartitionCredentialsRequest, callback?: (err: AWSError, data: LakeFormation.Types.GetTemporaryGluePartitionCredentialsResponse) => void): Request<LakeFormation.Types.GetTemporaryGluePartitionCredentialsResponse, AWSError>;
+  /**
+   * This API is identical to GetTemporaryTableCredentials except that this is used when the target Data Catalog resource is of type Partition. Lake Formation restricts the permission of the vended credentials with the same scope down policy which restricts access to a single Amazon S3 prefix.
+   */
+  getTemporaryGluePartitionCredentials(callback?: (err: AWSError, data: LakeFormation.Types.GetTemporaryGluePartitionCredentialsResponse) => void): Request<LakeFormation.Types.GetTemporaryGluePartitionCredentialsResponse, AWSError>;
+  /**
+   * Allows a caller in a secure environment to assume a role with permission to access Amazon S3. In order to vend such credentials, Lake Formation assumes the role associated with a registered location, for example an Amazon S3 bucket, with a scope down policy which restricts the access to a single prefix.
+   */
+  getTemporaryGlueTableCredentials(params: LakeFormation.Types.GetTemporaryGlueTableCredentialsRequest, callback?: (err: AWSError, data: LakeFormation.Types.GetTemporaryGlueTableCredentialsResponse) => void): Request<LakeFormation.Types.GetTemporaryGlueTableCredentialsResponse, AWSError>;
+  /**
+   * Allows a caller in a secure environment to assume a role with permission to access Amazon S3. In order to vend such credentials, Lake Formation assumes the role associated with a registered location, for example an Amazon S3 bucket, with a scope down policy which restricts the access to a single prefix.
+   */
+  getTemporaryGlueTableCredentials(callback?: (err: AWSError, data: LakeFormation.Types.GetTemporaryGlueTableCredentialsResponse) => void): Request<LakeFormation.Types.GetTemporaryGlueTableCredentialsResponse, AWSError>;
+  /**
    * Returns the work units resulting from the query. Work units can be executed in any order and in parallel. 
    */
   getWorkUnitResults(params: LakeFormation.Types.GetWorkUnitResultsRequest, callback?: (err: AWSError, data: LakeFormation.Types.GetWorkUnitResultsResponse) => void): Request<LakeFormation.Types.GetWorkUnitResultsResponse, AWSError>;
@@ -350,6 +366,7 @@ declare class LakeFormation extends Service {
   updateTableStorageOptimizer(callback?: (err: AWSError, data: LakeFormation.Types.UpdateTableStorageOptimizerResponse) => void): Request<LakeFormation.Types.UpdateTableStorageOptimizerResponse, AWSError>;
 }
 declare namespace LakeFormation {
+  export type AccessKeyIdString = string;
   export interface AddLFTagsToResourceRequest {
     /**
      * The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your Lake Formation environment. 
@@ -390,6 +407,14 @@ declare namespace LakeFormation {
   }
   export interface AllRowsWildcard {
   }
+  export interface AuditContext {
+    /**
+     * The filter engine can populate the 'AdditionalAuditContext' information with the request ID for you to track. This information will be displayed in CloudTrail log in your account.
+     */
+    AdditionalAuditContext?: AuditContextString;
+  }
+  export type AuditContextString = string;
+  export type AuthorizedSessionTagValueList = NameString[];
   export interface BatchGrantPermissionsRequest {
     /**
      * The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your Lake Formation environment. 
@@ -523,6 +548,7 @@ declare namespace LakeFormation {
   }
   export interface CreateLFTagResponse {
   }
+  export type CredentialTimeoutDurationSecondInteger = number;
   export interface DataCellsFilter {
     /**
      * The ID of the catalog to which the table belongs.
@@ -549,7 +575,7 @@ declare namespace LakeFormation {
      */
     ColumnNames?: ColumnNames;
     /**
-     * A wildcard with exclusions.
+     * A wildcard with exclusions. You must specify either a ColumnNames list or the ColumnWildCard. 
      */
     ColumnWildcard?: ColumnWildcard;
   }
@@ -598,6 +624,18 @@ declare namespace LakeFormation {
      * A list of the resource-owning account IDs that the caller's account can use to share their user access details (user ARNs). The user ARNs can be logged in the resource owner's CloudTrail log. You may want to specify this property when you are in a high-trust boundary, such as the same team or company. 
      */
     TrustedResourceOwners?: TrustedResourceOwners;
+    /**
+     * Whether to allow Amazon EMR clusters to access data managed by Lake Formation.  If true, you allow Amazon EMR clusters to access data in Amazon S3 locations that are registered with Lake Formation. If false or null, no Amazon EMR clusters will be able to access data in Amazon S3 locations that are registered with Lake Formation. For more information, see (Optional) Allow Data Filtering on Amazon EMR.
+     */
+    AllowExternalDataFiltering?: NullableBoolean;
+    /**
+     * A list of the account IDs of Amazon Web Services accounts with Amazon EMR clusters that are to perform data filtering.&gt;
+     */
+    ExternalDataFilteringAllowList?: DataLakePrincipalList;
+    /**
+     * Lake Formation relies on a privileged process secured by Amazon EMR or the third party integrator to tag the user's role while assuming it. Lake Formation will publish the acceptable key-value pair, for example key = "LakeFormationTrustedCaller" and value = "TRUE" and the third party integrator must properly tag the temporary security credentials that will be used to call Lake Formation's administrative APIs.
+     */
+    AuthorizedSessionTagValueList?: AuthorizedSessionTagValueList;
   }
   export interface DataLocationResource {
     /**
@@ -756,6 +794,7 @@ declare namespace LakeFormation {
      */
     WorkUnitsExecutedCount?: NumberOfItems;
   }
+  export type ExpirationTimestamp = Date;
   export type Expression = LFTag[];
   export interface ExtendTransactionRequest {
     /**
@@ -954,6 +993,90 @@ declare namespace LakeFormation {
      * A continuation token indicating whether additional data is available.
      */
     NextToken?: TokenString;
+  }
+  export interface GetTemporaryGluePartitionCredentialsRequest {
+    /**
+     * The ARN of the partitions' table.
+     */
+    TableArn: ResourceArnString;
+    /**
+     * A list of partition values identifying a single partition.
+     */
+    Partition: PartitionValueList;
+    /**
+     * Filters the request based on the user having been granted a list of specified permissions on the requested resource(s).
+     */
+    Permissions?: PermissionList;
+    /**
+     * The time period, between 900 and 21,600 seconds, for the timeout of the temporary credentials.
+     */
+    DurationSeconds?: CredentialTimeoutDurationSecondInteger;
+    /**
+     * A structure representing context to access a resource (column names, query ID, etc).
+     */
+    AuditContext?: AuditContext;
+    /**
+     * A list of supported permission types for the partition. Valid values are COLUMN_PERMISSION and CELL_FILTER_PERMISSION.
+     */
+    SupportedPermissionTypes: PermissionTypeList;
+  }
+  export interface GetTemporaryGluePartitionCredentialsResponse {
+    /**
+     * The access key ID for the temporary credentials.
+     */
+    AccessKeyId?: AccessKeyIdString;
+    /**
+     * The secret key for the temporary credentials.
+     */
+    SecretAccessKey?: SecretAccessKeyString;
+    /**
+     * The session token for the temporary credentials.
+     */
+    SessionToken?: SessionTokenString;
+    /**
+     * The date and time when the temporary credentials expire.
+     */
+    Expiration?: ExpirationTimestamp;
+  }
+  export interface GetTemporaryGlueTableCredentialsRequest {
+    /**
+     * The ARN identifying a table in the Data Catalog for the temporary credentials request.
+     */
+    TableArn: ResourceArnString;
+    /**
+     * Filters the request based on the user having been granted a list of specified permissions on the requested resource(s).
+     */
+    Permissions?: PermissionList;
+    /**
+     * The time period, between 900 and 21,600 seconds, for the timeout of the temporary credentials.
+     */
+    DurationSeconds?: CredentialTimeoutDurationSecondInteger;
+    /**
+     * A structure representing context to access a resource (column names, query ID, etc).
+     */
+    AuditContext?: AuditContext;
+    /**
+     * A list of supported permission types for the table. Valid values are COLUMN_PERMISSION and CELL_FILTER_PERMISSION.
+     */
+    SupportedPermissionTypes: PermissionTypeList;
+  }
+  export interface GetTemporaryGlueTableCredentialsResponse {
+    /**
+     * The access key ID for the temporary credentials.
+     */
+    AccessKeyId?: AccessKeyIdString;
+    /**
+     * The secret key for the temporary credentials.
+     */
+    SecretAccessKey?: SecretAccessKeyString;
+    /**
+     * The session token for the temporary credentials.
+     */
+    SessionToken?: SessionTokenString;
+    /**
+     * The date and time when the temporary credentials expire.
+     */
+    Expiration?: ExpirationTimestamp;
   }
   export interface GetWorkUnitResultsRequest {
     /**
@@ -1299,11 +1422,19 @@ declare namespace LakeFormation {
      */
     Objects?: TableObjectList;
   }
+  export interface PartitionValueList {
+    /**
+     * The list of partition values.
+     */
+    Values: ValueStringList;
+  }
   export type PartitionValueString = string;
   export type PartitionValuesList = PartitionValueString[];
   export type PartitionedTableObjectsList = PartitionObjects[];
   export type Permission = "ALL"|"SELECT"|"ALTER"|"DROP"|"DELETE"|"INSERT"|"DESCRIBE"|"CREATE_DATABASE"|"CREATE_TABLE"|"DATA_LOCATION_ACCESS"|"CREATE_TAG"|"ALTER_TAG"|"DELETE_TAG"|"DESCRIBE_TAG"|"ASSOCIATE_TAG"|string;
   export type PermissionList = Permission[];
+  export type PermissionType = "COLUMN_PERMISSION"|"CELL_FILTER_PERMISSION"|string;
+  export type PermissionTypeList = PermissionType[];
   export interface PlanningStatistics {
     /**
      * An estimate of the data that was scanned in bytes.
@@ -1577,6 +1708,8 @@ declare namespace LakeFormation {
      */
     TableList?: TableLFTagsList;
   }
+  export type SecretAccessKeyString = string;
+  export type SessionTokenString = string;
   export interface StartQueryPlanningRequest {
     /**
      * A structure containing information about the query plan.
@@ -1833,6 +1966,8 @@ declare namespace LakeFormation {
      */
     Result?: Result;
   }
+  export type ValueString = string;
+  export type ValueStringList = ValueString[];
   export interface VirtualObject {
     /**
      * The path to the Amazon S3 object. Must start with s3://

@@ -3565,6 +3565,14 @@ declare class EC2 extends Service {
    */
   modifyVpcEndpointServiceConfiguration(callback?: (err: AWSError, data: EC2.Types.ModifyVpcEndpointServiceConfigurationResult) => void): Request<EC2.Types.ModifyVpcEndpointServiceConfigurationResult, AWSError>;
   /**
+   * Modifies the payer responsibility for your VPC endpoint service.
+   */
+  modifyVpcEndpointServicePayerResponsibility(params: EC2.Types.ModifyVpcEndpointServicePayerResponsibilityRequest, callback?: (err: AWSError, data: EC2.Types.ModifyVpcEndpointServicePayerResponsibilityResult) => void): Request<EC2.Types.ModifyVpcEndpointServicePayerResponsibilityResult, AWSError>;
+  /**
+   * Modifies the payer responsibility for your VPC endpoint service.
+   */
+  modifyVpcEndpointServicePayerResponsibility(callback?: (err: AWSError, data: EC2.Types.ModifyVpcEndpointServicePayerResponsibilityResult) => void): Request<EC2.Types.ModifyVpcEndpointServicePayerResponsibilityResult, AWSError>;
+  /**
    * Modifies the permissions for your VPC endpoint service. You can add or remove permissions for service consumers (IAM users, IAM roles, and Amazon Web Services accounts) to connect to your endpoint service. If you grant permissions to all principals, the service is public. Any users who know the name of a public service can send a request to attach an endpoint. If the service does not require manual approval, attachments are automatically approved.
    */
   modifyVpcEndpointServicePermissions(params: EC2.Types.ModifyVpcEndpointServicePermissionsRequest, callback?: (err: AWSError, data: EC2.Types.ModifyVpcEndpointServicePermissionsResult) => void): Request<EC2.Types.ModifyVpcEndpointServicePermissionsResult, AWSError>;
@@ -18684,7 +18692,7 @@ declare namespace EC2 {
     /**
      * The ID of the offering.
      */
-    OfferingId?: String;
+    OfferingId?: OfferingId;
     /**
      * The available payment option.
      */
@@ -18742,7 +18750,7 @@ declare namespace EC2 {
     /**
      * The ID of the reservation that specifies the associated Dedicated Hosts.
      */
-    HostReservationId?: String;
+    HostReservationId?: HostReservationId;
     /**
      * The hourly price of the reservation.
      */
@@ -18754,7 +18762,7 @@ declare namespace EC2 {
     /**
      * The ID of the reservation. This remains the same regardless of which Dedicated Hosts are associated with it.
      */
-    OfferingId?: String;
+    OfferingId?: OfferingId;
     /**
      * The payment option selected for this reservation.
      */
@@ -24304,6 +24312,26 @@ declare namespace EC2 {
      */
     Return?: Boolean;
   }
+  export interface ModifyVpcEndpointServicePayerResponsibilityRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The ID of the service.
+     */
+    ServiceId: VpcEndpointServiceId;
+    /**
+     * The entity that is responsible for the endpoint costs. The default is the endpoint owner. If you set the payer responsibility to the service owner, you cannot set it back to the endpoint owner.
+     */
+    PayerResponsibility: PayerResponsibility;
+  }
+  export interface ModifyVpcEndpointServicePayerResponsibilityResult {
+    /**
+     * Returns true if the request succeeds; otherwise, it returns an error.
+     */
+    ReturnValue?: Boolean;
+  }
   export interface ModifyVpcEndpointServicePermissionsRequest {
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
@@ -25514,6 +25542,7 @@ declare namespace EC2 {
      */
     ResourceStatement?: ResourceStatementRequest;
   }
+  export type PayerResponsibility = "ServiceOwner"|string;
   export type PaymentOption = "AllUpfront"|"PartialUpfront"|"NoUpfront"|string;
   export interface PciId {
     /**
@@ -26187,7 +26216,7 @@ declare namespace EC2 {
     /**
      * The ID of the reservation.
      */
-    HostReservationId?: String;
+    HostReservationId?: HostReservationId;
     /**
      * The hourly price of the reservation per hour.
      */
@@ -29170,6 +29199,10 @@ declare namespace EC2 {
      */
     PrivateDnsNameConfiguration?: PrivateDnsNameConfiguration;
     /**
+     * The payer responsibility.
+     */
+    PayerResponsibility?: PayerResponsibility;
+    /**
      * Any tags assigned to the service.
      */
     Tags?: TagList;
@@ -29220,6 +29253,10 @@ declare namespace EC2 {
      * Indicates whether the service manages its VPC endpoints. Management of the service VPC endpoints using the VPC endpoint API is restricted.
      */
     ManagesVpcEndpoints?: Boolean;
+    /**
+     * The payer responsibility.
+     */
+    PayerResponsibility?: PayerResponsibility;
     /**
      * Any tags assigned to the service.
      */

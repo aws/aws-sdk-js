@@ -852,6 +852,30 @@ declare class Glue extends Service {
    */
   getTriggers(callback?: (err: AWSError, data: Glue.Types.GetTriggersResponse) => void): Request<Glue.Types.GetTriggersResponse, AWSError>;
   /**
+   * 
+   */
+  getUnfilteredPartitionMetadata(params: Glue.Types.GetUnfilteredPartitionMetadataRequest, callback?: (err: AWSError, data: Glue.Types.GetUnfilteredPartitionMetadataResponse) => void): Request<Glue.Types.GetUnfilteredPartitionMetadataResponse, AWSError>;
+  /**
+   * 
+   */
+  getUnfilteredPartitionMetadata(callback?: (err: AWSError, data: Glue.Types.GetUnfilteredPartitionMetadataResponse) => void): Request<Glue.Types.GetUnfilteredPartitionMetadataResponse, AWSError>;
+  /**
+   * 
+   */
+  getUnfilteredPartitionsMetadata(params: Glue.Types.GetUnfilteredPartitionsMetadataRequest, callback?: (err: AWSError, data: Glue.Types.GetUnfilteredPartitionsMetadataResponse) => void): Request<Glue.Types.GetUnfilteredPartitionsMetadataResponse, AWSError>;
+  /**
+   * 
+   */
+  getUnfilteredPartitionsMetadata(callback?: (err: AWSError, data: Glue.Types.GetUnfilteredPartitionsMetadataResponse) => void): Request<Glue.Types.GetUnfilteredPartitionsMetadataResponse, AWSError>;
+  /**
+   * 
+   */
+  getUnfilteredTableMetadata(params: Glue.Types.GetUnfilteredTableMetadataRequest, callback?: (err: AWSError, data: Glue.Types.GetUnfilteredTableMetadataResponse) => void): Request<Glue.Types.GetUnfilteredTableMetadataResponse, AWSError>;
+  /**
+   * 
+   */
+  getUnfilteredTableMetadata(callback?: (err: AWSError, data: Glue.Types.GetUnfilteredTableMetadataResponse) => void): Request<Glue.Types.GetUnfilteredTableMetadataResponse, AWSError>;
+  /**
    * Retrieves a specified function definition from the Data Catalog.
    */
   getUserDefinedFunction(params: Glue.Types.GetUserDefinedFunctionRequest, callback?: (err: AWSError, data: Glue.Types.GetUserDefinedFunctionResponse) => void): Request<Glue.Types.GetUserDefinedFunctionResponse, AWSError>;
@@ -1341,6 +1365,7 @@ declare class Glue extends Service {
   updateWorkflow(callback?: (err: AWSError, data: Glue.Types.UpdateWorkflowResponse) => void): Request<Glue.Types.UpdateWorkflowResponse, AWSError>;
 }
 declare namespace Glue {
+  export type AccountId = string;
   export interface Action {
     /**
      * The name of a job to be run.
@@ -1370,6 +1395,10 @@ declare namespace Glue {
   export type ActionList = Action[];
   export type AdditionalPlanOptionsMap = {[key: string]: GenericString};
   export type AttemptCount = number;
+  export interface AuditContext {
+    AdditionalAuditContext?: AuditContextString;
+  }
+  export type AuditContextString = string;
   export interface BackfillError {
     /**
      * The error code for an error that occurred when registering partition indexes for an existing table.
@@ -1931,6 +1960,10 @@ declare namespace Glue {
      * A list of the tables to be synchronized.
      */
     Tables: CatalogTablesList;
+    /**
+     * The name of the connection for an Amazon S3-backed Data Catalog table to be a target of the crawl when using a Catalog connection type paired with a NETWORK Connection type.
+     */
+    ConnectionName?: ConnectionName;
   }
   export type CatalogTargetList = CatalogTarget[];
   export interface CheckSchemaVersionValidityInput {
@@ -2078,6 +2111,11 @@ declare namespace Glue {
   export type ColumnImportanceList = ColumnImportance[];
   export type ColumnList = Column[];
   export type ColumnNameString = string;
+  export interface ColumnRowFilter {
+    ColumnName?: NameString;
+    RowFilterExpression?: PredicateString;
+  }
+  export type ColumnRowFilterList = ColumnRowFilter[];
   export interface ColumnStatistics {
     /**
      * Name of column which statistics belong to.
@@ -2380,6 +2418,7 @@ declare namespace Glue {
      * The name of the SecurityConfiguration structure to be used by this crawler.
      */
     CrawlerSecurityConfiguration?: CrawlerSecurityConfiguration;
+    LakeFormationConfiguration?: LakeFormationConfiguration;
   }
   export type CrawlerConfiguration = string;
   export type CrawlerLineageSettings = "ENABLE"|"DISABLE"|string;
@@ -2449,6 +2488,10 @@ declare namespace Glue {
      * Specifies Glue Data Catalog targets.
      */
     CatalogTargets?: CatalogTargetList;
+    /**
+     * Specifies Delta data store targets.
+     */
+    DeltaTargets?: DeltaTargetList;
   }
   export interface CreateBlueprintRequest {
     /**
@@ -2555,6 +2598,7 @@ declare namespace Glue {
      * Specifies data lineage configuration settings for the crawler.
      */
     LineageConfiguration?: LineageConfiguration;
+    LakeFormationConfiguration?: LakeFormationConfiguration;
     /**
      * Crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler's behavior. For more information, see Configuring a Crawler.
      */
@@ -3771,6 +3815,21 @@ declare namespace Glue {
      */
     Name?: NameString;
   }
+  export interface DeltaTarget {
+    /**
+     * A list of the Amazon S3 paths to the Delta tables.
+     */
+    DeltaTables?: PathList;
+    /**
+     * The name of the connection to use to connect to the Delta table target.
+     */
+    ConnectionName?: ConnectionName;
+    /**
+     * Specifies whether to write the manifest files to the Delta table path.
+     */
+    WriteManifest?: NullableBoolean;
+  }
+  export type DeltaTargetList = DeltaTarget[];
   export type DescriptionString = string;
   export type DescriptionStringRemovable = string;
   export interface DevEndpoint {
@@ -5359,6 +5418,47 @@ declare namespace Glue {
      */
     NextToken?: GenericString;
   }
+  export interface GetUnfilteredPartitionMetadataRequest {
+    CatalogId: CatalogIdString;
+    DatabaseName: NameString;
+    TableName: NameString;
+    PartitionValues: ValueStringList;
+    AuditContext?: AuditContext;
+    SupportedPermissionTypes: PermissionTypeList;
+  }
+  export interface GetUnfilteredPartitionMetadataResponse {
+    Partition?: Partition;
+    AuthorizedColumns?: NameStringList;
+    IsRegisteredWithLakeFormation?: Boolean;
+  }
+  export interface GetUnfilteredPartitionsMetadataRequest {
+    CatalogId: CatalogIdString;
+    DatabaseName: NameString;
+    TableName: NameString;
+    Expression?: PredicateString;
+    AuditContext?: AuditContext;
+    SupportedPermissionTypes: PermissionTypeList;
+    NextToken?: Token;
+    Segment?: Segment;
+    MaxResults?: PageSize;
+  }
+  export interface GetUnfilteredPartitionsMetadataResponse {
+    UnfilteredPartitions?: UnfilteredPartitionList;
+    NextToken?: Token;
+  }
+  export interface GetUnfilteredTableMetadataRequest {
+    CatalogId: CatalogIdString;
+    DatabaseName: NameString;
+    Name: NameString;
+    AuditContext?: AuditContext;
+    SupportedPermissionTypes: PermissionTypeList;
+  }
+  export interface GetUnfilteredTableMetadataResponse {
+    Table?: Table;
+    AuthorizedColumns?: NameStringList;
+    IsRegisteredWithLakeFormation?: Boolean;
+    CellFilters?: ColumnRowFilterList;
+  }
   export interface GetUserDefinedFunctionRequest {
     /**
      * The ID of the Data Catalog where the function to be retrieved is located. If none is provided, the Amazon Web Services account ID is used by default.
@@ -5953,6 +6053,10 @@ declare namespace Glue {
      */
     OutputS3Path?: UriString;
   }
+  export interface LakeFormationConfiguration {
+    UseLakeFormationCredentials?: NullableBoolean;
+    AccountId?: AccountId;
+  }
   export type Language = "PYTHON"|"SCALA"|string;
   export interface LastActiveDefinition {
     /**
@@ -6270,6 +6374,7 @@ declare namespace Glue {
   }
   export type LocationMap = {[key: string]: ColumnValuesString};
   export type LocationString = string;
+  export type LocationStringList = LocationString[];
   export type LogGroup = string;
   export type LogStream = string;
   export type Logical = "AND"|"ANY"|string;
@@ -6648,6 +6753,8 @@ declare namespace Glue {
   export type PathList = Path[];
   export type Permission = "ALL"|"SELECT"|"ALTER"|"DROP"|"DELETE"|"INSERT"|"CREATE_DATABASE"|"CREATE_TABLE"|"DATA_LOCATION_ACCESS"|string;
   export type PermissionList = Permission[];
+  export type PermissionType = "COLUMN_PERMISSION"|"CELL_FILTER_PERMISSION"|string;
+  export type PermissionTypeList = PermissionType[];
   export interface PhysicalConnectionRequirements {
     /**
      * The subnet ID used by the connection.
@@ -7569,6 +7676,7 @@ declare namespace Glue {
      * The physical location of the table. By default, this takes the form of the warehouse location, followed by the database location in the warehouse, followed by the table name.
      */
     Location?: LocationString;
+    AdditionalLocations?: LocationStringList;
     /**
      * The input format: SequenceFileInputFormat (binary), or TextInputFormat, or a custom format.
      */
@@ -8091,6 +8199,12 @@ declare namespace Glue {
   }
   export type TypeString = string;
   export type URI = string;
+  export interface UnfilteredPartition {
+    Partition?: Partition;
+    AuthorizedColumns?: NameStringList;
+    IsRegisteredWithLakeFormation?: Boolean;
+  }
+  export type UnfilteredPartitionList = UnfilteredPartition[];
   export interface UntagResourceRequest {
     /**
      * The Amazon Resource Name (ARN) of the resource from which to remove the tags.
@@ -8258,6 +8372,7 @@ declare namespace Glue {
      * Specifies data lineage configuration settings for the crawler.
      */
     LineageConfiguration?: LineageConfiguration;
+    LakeFormationConfiguration?: LakeFormationConfiguration;
     /**
      * Crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler's behavior. For more information, see Configuring a Crawler.
      */

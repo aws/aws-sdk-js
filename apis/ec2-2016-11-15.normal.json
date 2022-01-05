@@ -6093,6 +6093,20 @@
       },
       "documentation": "<p>Modifies the attributes of your VPC endpoint service configuration. You can change the Network Load Balancers or Gateway Load Balancers for your service, and you can specify whether acceptance is required for requests to connect to your endpoint service through an interface VPC endpoint.</p> <p>If you set or modify the private DNS name, you must prove that you own the private DNS domain name. For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-services-dns-validation.html\">VPC Endpoint Service Private DNS Name Verification</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
     },
+    "ModifyVpcEndpointServicePayerResponsibility": {
+      "name": "ModifyVpcEndpointServicePayerResponsibility",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ModifyVpcEndpointServicePayerResponsibilityRequest"
+      },
+      "output": {
+        "shape": "ModifyVpcEndpointServicePayerResponsibilityResult"
+      },
+      "documentation": "<p>Modifies the payer responsibility for your VPC endpoint service.</p>"
+    },
     "ModifyVpcEndpointServicePermissions": {
       "name": "ModifyVpcEndpointServicePermissions",
       "http": {
@@ -29063,7 +29077,7 @@
           "locationName": "instanceFamily"
         },
         "OfferingId": {
-          "shape": "String",
+          "shape": "OfferingId",
           "documentation": "<p>The ID of the offering.</p>",
           "locationName": "offeringId"
         },
@@ -29154,7 +29168,7 @@
           "locationName": "hostIdSet"
         },
         "HostReservationId": {
-          "shape": "String",
+          "shape": "HostReservationId",
           "documentation": "<p>The ID of the reservation that specifies the associated Dedicated Hosts.</p>",
           "locationName": "hostReservationId"
         },
@@ -29169,7 +29183,7 @@
           "locationName": "instanceFamily"
         },
         "OfferingId": {
-          "shape": "String",
+          "shape": "OfferingId",
           "documentation": "<p>The ID of the reservation. This remains the same regardless of which Dedicated Hosts are associated with it.</p>",
           "locationName": "offeringId"
         },
@@ -38452,6 +38466,37 @@
         }
       }
     },
+    "ModifyVpcEndpointServicePayerResponsibilityRequest": {
+      "type": "structure",
+      "required": [
+        "ServiceId",
+        "PayerResponsibility"
+      ],
+      "members": {
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        },
+        "ServiceId": {
+          "shape": "VpcEndpointServiceId",
+          "documentation": "<p>The ID of the service.</p>"
+        },
+        "PayerResponsibility": {
+          "shape": "PayerResponsibility",
+          "documentation": "<p>The entity that is responsible for the endpoint costs. The default is the endpoint owner. If you set the payer responsibility to the service owner, you cannot set it back to the endpoint owner.</p>"
+        }
+      }
+    },
+    "ModifyVpcEndpointServicePayerResponsibilityResult": {
+      "type": "structure",
+      "members": {
+        "ReturnValue": {
+          "shape": "Boolean",
+          "documentation": "<p>Returns <code>true</code> if the request succeeds; otherwise, it returns an error.</p>",
+          "locationName": "return"
+        }
+      }
+    },
     "ModifyVpcEndpointServicePermissionsRequest": {
       "type": "structure",
       "required": [
@@ -40431,6 +40476,12 @@
       },
       "documentation": "<p>Describes a path statement.</p>"
     },
+    "PayerResponsibility": {
+      "type": "string",
+      "enum": [
+        "ServiceOwner"
+      ]
+    },
     "PaymentOption": {
       "type": "string",
       "enum": [
@@ -41757,7 +41808,7 @@
           "locationName": "hostIdSet"
         },
         "HostReservationId": {
-          "shape": "String",
+          "shape": "HostReservationId",
           "documentation": "<p>The ID of the reservation.</p>",
           "locationName": "hostReservationId"
         },
@@ -46373,6 +46424,11 @@
           "documentation": "<p>Information about the endpoint service private DNS name configuration.</p>",
           "locationName": "privateDnsNameConfiguration"
         },
+        "PayerResponsibility": {
+          "shape": "PayerResponsibility",
+          "documentation": "<p>The payer responsibility.</p>",
+          "locationName": "payerResponsibility"
+        },
         "Tags": {
           "shape": "TagList",
           "documentation": "<p>Any tags assigned to the service.</p>",
@@ -46445,6 +46501,11 @@
           "shape": "Boolean",
           "documentation": "<p>Indicates whether the service manages its VPC endpoints. Management of the service VPC endpoints using the VPC endpoint API is restricted.</p>",
           "locationName": "managesVpcEndpoints"
+        },
+        "PayerResponsibility": {
+          "shape": "PayerResponsibility",
+          "documentation": "<p>The payer responsibility.</p>",
+          "locationName": "payerResponsibility"
         },
         "Tags": {
           "shape": "TagList",

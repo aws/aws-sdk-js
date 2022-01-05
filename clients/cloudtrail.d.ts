@@ -20,6 +20,22 @@ declare class CloudTrail extends Service {
    */
   addTags(callback?: (err: AWSError, data: CloudTrail.Types.AddTagsResponse) => void): Request<CloudTrail.Types.AddTagsResponse, AWSError>;
   /**
+   * Cancels a query if the query is not in a terminated state, such as CANCELLED, FAILED or FINISHED. You must specify an ARN value for EventDataStore. The ID of the query that you want to cancel is also required. When you run CancelQuery, the query status might show as CANCELLED even if the operation is not yet finished.
+   */
+  cancelQuery(params: CloudTrail.Types.CancelQueryRequest, callback?: (err: AWSError, data: CloudTrail.Types.CancelQueryResponse) => void): Request<CloudTrail.Types.CancelQueryResponse, AWSError>;
+  /**
+   * Cancels a query if the query is not in a terminated state, such as CANCELLED, FAILED or FINISHED. You must specify an ARN value for EventDataStore. The ID of the query that you want to cancel is also required. When you run CancelQuery, the query status might show as CANCELLED even if the operation is not yet finished.
+   */
+  cancelQuery(callback?: (err: AWSError, data: CloudTrail.Types.CancelQueryResponse) => void): Request<CloudTrail.Types.CancelQueryResponse, AWSError>;
+  /**
+   * Creates a new event data store.
+   */
+  createEventDataStore(params: CloudTrail.Types.CreateEventDataStoreRequest, callback?: (err: AWSError, data: CloudTrail.Types.CreateEventDataStoreResponse) => void): Request<CloudTrail.Types.CreateEventDataStoreResponse, AWSError>;
+  /**
+   * Creates a new event data store.
+   */
+  createEventDataStore(callback?: (err: AWSError, data: CloudTrail.Types.CreateEventDataStoreResponse) => void): Request<CloudTrail.Types.CreateEventDataStoreResponse, AWSError>;
+  /**
    * Creates a trail that specifies the settings for delivery of log data to an Amazon S3 bucket. 
    */
   createTrail(params: CloudTrail.Types.CreateTrailRequest, callback?: (err: AWSError, data: CloudTrail.Types.CreateTrailResponse) => void): Request<CloudTrail.Types.CreateTrailResponse, AWSError>;
@@ -27,6 +43,14 @@ declare class CloudTrail extends Service {
    * Creates a trail that specifies the settings for delivery of log data to an Amazon S3 bucket. 
    */
   createTrail(callback?: (err: AWSError, data: CloudTrail.Types.CreateTrailResponse) => void): Request<CloudTrail.Types.CreateTrailResponse, AWSError>;
+  /**
+   * Disables the event data store specified by EventDataStore, which accepts an event data store ARN. After you run DeleteEventDataStore, the event data store is automatically deleted after a wait period of seven days. TerminationProtectionEnabled must be set to False on the event data store; this operation cannot work if TerminationProtectionEnabled is True. After you run DeleteEventDataStore on an event data store, you cannot run ListQueries, DescribeQuery, or GetQueryResults on queries that are using an event data store in a PENDING_DELETION state.
+   */
+  deleteEventDataStore(params: CloudTrail.Types.DeleteEventDataStoreRequest, callback?: (err: AWSError, data: CloudTrail.Types.DeleteEventDataStoreResponse) => void): Request<CloudTrail.Types.DeleteEventDataStoreResponse, AWSError>;
+  /**
+   * Disables the event data store specified by EventDataStore, which accepts an event data store ARN. After you run DeleteEventDataStore, the event data store is automatically deleted after a wait period of seven days. TerminationProtectionEnabled must be set to False on the event data store; this operation cannot work if TerminationProtectionEnabled is True. After you run DeleteEventDataStore on an event data store, you cannot run ListQueries, DescribeQuery, or GetQueryResults on queries that are using an event data store in a PENDING_DELETION state.
+   */
+  deleteEventDataStore(callback?: (err: AWSError, data: CloudTrail.Types.DeleteEventDataStoreResponse) => void): Request<CloudTrail.Types.DeleteEventDataStoreResponse, AWSError>;
   /**
    * Deletes a trail. This operation must be called from the region in which the trail was created. DeleteTrail cannot be called on the shadow trails (replicated trails in other regions) of a trail that is enabled in all regions.
    */
@@ -36,6 +60,14 @@ declare class CloudTrail extends Service {
    */
   deleteTrail(callback?: (err: AWSError, data: CloudTrail.Types.DeleteTrailResponse) => void): Request<CloudTrail.Types.DeleteTrailResponse, AWSError>;
   /**
+   * Returns metadata about a query, including query run time in milliseconds, number of events scanned and matched, and query status. You must specify an ARN for EventDataStore, and a value for QueryID.
+   */
+  describeQuery(params: CloudTrail.Types.DescribeQueryRequest, callback?: (err: AWSError, data: CloudTrail.Types.DescribeQueryResponse) => void): Request<CloudTrail.Types.DescribeQueryResponse, AWSError>;
+  /**
+   * Returns metadata about a query, including query run time in milliseconds, number of events scanned and matched, and query status. You must specify an ARN for EventDataStore, and a value for QueryID.
+   */
+  describeQuery(callback?: (err: AWSError, data: CloudTrail.Types.DescribeQueryResponse) => void): Request<CloudTrail.Types.DescribeQueryResponse, AWSError>;
+  /**
    * Retrieves settings for one or more trails associated with the current region for your account.
    */
   describeTrails(params: CloudTrail.Types.DescribeTrailsRequest, callback?: (err: AWSError, data: CloudTrail.Types.DescribeTrailsResponse) => void): Request<CloudTrail.Types.DescribeTrailsResponse, AWSError>;
@@ -43,6 +75,14 @@ declare class CloudTrail extends Service {
    * Retrieves settings for one or more trails associated with the current region for your account.
    */
   describeTrails(callback?: (err: AWSError, data: CloudTrail.Types.DescribeTrailsResponse) => void): Request<CloudTrail.Types.DescribeTrailsResponse, AWSError>;
+  /**
+   * Returns information about an event data store specified as either an ARN or the ID portion of the ARN.
+   */
+  getEventDataStore(params: CloudTrail.Types.GetEventDataStoreRequest, callback?: (err: AWSError, data: CloudTrail.Types.GetEventDataStoreResponse) => void): Request<CloudTrail.Types.GetEventDataStoreResponse, AWSError>;
+  /**
+   * Returns information about an event data store specified as either an ARN or the ID portion of the ARN.
+   */
+  getEventDataStore(callback?: (err: AWSError, data: CloudTrail.Types.GetEventDataStoreResponse) => void): Request<CloudTrail.Types.GetEventDataStoreResponse, AWSError>;
   /**
    * Describes the settings for the event selectors that you configured for your trail. The information returned for your event selectors includes the following:   If your event selector includes read-only events, write-only events, or all events. This applies to both management events and data events.   If your event selector includes management events.   If your event selector includes data events, the resources on which you are logging data events.   For more information, see Logging Data and Management Events for Trails  in the CloudTrail User Guide.
    */
@@ -60,6 +100,14 @@ declare class CloudTrail extends Service {
    */
   getInsightSelectors(callback?: (err: AWSError, data: CloudTrail.Types.GetInsightSelectorsResponse) => void): Request<CloudTrail.Types.GetInsightSelectorsResponse, AWSError>;
   /**
+   * Gets event data results of a query. You must specify the QueryID value returned by the StartQuery operation, and an ARN for EventDataStore.
+   */
+  getQueryResults(params: CloudTrail.Types.GetQueryResultsRequest, callback?: (err: AWSError, data: CloudTrail.Types.GetQueryResultsResponse) => void): Request<CloudTrail.Types.GetQueryResultsResponse, AWSError>;
+  /**
+   * Gets event data results of a query. You must specify the QueryID value returned by the StartQuery operation, and an ARN for EventDataStore.
+   */
+  getQueryResults(callback?: (err: AWSError, data: CloudTrail.Types.GetQueryResultsResponse) => void): Request<CloudTrail.Types.GetQueryResultsResponse, AWSError>;
+  /**
    * Returns settings information for a specified trail.
    */
   getTrail(params: CloudTrail.Types.GetTrailRequest, callback?: (err: AWSError, data: CloudTrail.Types.GetTrailResponse) => void): Request<CloudTrail.Types.GetTrailResponse, AWSError>;
@@ -76,6 +124,14 @@ declare class CloudTrail extends Service {
    */
   getTrailStatus(callback?: (err: AWSError, data: CloudTrail.Types.GetTrailStatusResponse) => void): Request<CloudTrail.Types.GetTrailStatusResponse, AWSError>;
   /**
+   * Returns information about all event data stores in the account, in the current region.
+   */
+  listEventDataStores(params: CloudTrail.Types.ListEventDataStoresRequest, callback?: (err: AWSError, data: CloudTrail.Types.ListEventDataStoresResponse) => void): Request<CloudTrail.Types.ListEventDataStoresResponse, AWSError>;
+  /**
+   * Returns information about all event data stores in the account, in the current region.
+   */
+  listEventDataStores(callback?: (err: AWSError, data: CloudTrail.Types.ListEventDataStoresResponse) => void): Request<CloudTrail.Types.ListEventDataStoresResponse, AWSError>;
+  /**
    * Returns all public keys whose private keys were used to sign the digest files within the specified time range. The public key is needed to validate digest files that were signed with its corresponding private key.  CloudTrail uses different private and public key pairs per region. Each digest file is signed with a private key unique to its region. When you validate a digest file from a specific region, you must look in the same region for its corresponding public key. 
    */
   listPublicKeys(params: CloudTrail.Types.ListPublicKeysRequest, callback?: (err: AWSError, data: CloudTrail.Types.ListPublicKeysResponse) => void): Request<CloudTrail.Types.ListPublicKeysResponse, AWSError>;
@@ -83,6 +139,14 @@ declare class CloudTrail extends Service {
    * Returns all public keys whose private keys were used to sign the digest files within the specified time range. The public key is needed to validate digest files that were signed with its corresponding private key.  CloudTrail uses different private and public key pairs per region. Each digest file is signed with a private key unique to its region. When you validate a digest file from a specific region, you must look in the same region for its corresponding public key. 
    */
   listPublicKeys(callback?: (err: AWSError, data: CloudTrail.Types.ListPublicKeysResponse) => void): Request<CloudTrail.Types.ListPublicKeysResponse, AWSError>;
+  /**
+   * Returns a list of queries and query statuses for the past seven days. You must specify an ARN value for EventDataStore. Optionally, to shorten the list of results, you can specify a time range, formatted as timestamps, by adding StartTime and EndTime parameters, and a QueryStatus value. Valid values for QueryStatus include QUEUED, RUNNING, FINISHED, FAILED, or CANCELLED.
+   */
+  listQueries(params: CloudTrail.Types.ListQueriesRequest, callback?: (err: AWSError, data: CloudTrail.Types.ListQueriesResponse) => void): Request<CloudTrail.Types.ListQueriesResponse, AWSError>;
+  /**
+   * Returns a list of queries and query statuses for the past seven days. You must specify an ARN value for EventDataStore. Optionally, to shorten the list of results, you can specify a time range, formatted as timestamps, by adding StartTime and EndTime parameters, and a QueryStatus value. Valid values for QueryStatus include QUEUED, RUNNING, FINISHED, FAILED, or CANCELLED.
+   */
+  listQueries(callback?: (err: AWSError, data: CloudTrail.Types.ListQueriesResponse) => void): Request<CloudTrail.Types.ListQueriesResponse, AWSError>;
   /**
    * Lists the tags for the trail in the current region.
    */
@@ -116,11 +180,11 @@ declare class CloudTrail extends Service {
    */
   putEventSelectors(callback?: (err: AWSError, data: CloudTrail.Types.PutEventSelectorsResponse) => void): Request<CloudTrail.Types.PutEventSelectorsResponse, AWSError>;
   /**
-   * Lets you enable Insights event logging by specifying the Insights selectors that you want to enable on an existing trail. You also use PutInsightSelectors to turn off Insights event logging, by passing an empty list of insight types. The valid Insights event type in this release is ApiCallRateInsight.
+   * Lets you enable Insights event logging by specifying the Insights selectors that you want to enable on an existing trail. You also use PutInsightSelectors to turn off Insights event logging, by passing an empty list of insight types. The valid Insights event types in this release are ApiErrorRateInsight and ApiCallRateInsight.
    */
   putInsightSelectors(params: CloudTrail.Types.PutInsightSelectorsRequest, callback?: (err: AWSError, data: CloudTrail.Types.PutInsightSelectorsResponse) => void): Request<CloudTrail.Types.PutInsightSelectorsResponse, AWSError>;
   /**
-   * Lets you enable Insights event logging by specifying the Insights selectors that you want to enable on an existing trail. You also use PutInsightSelectors to turn off Insights event logging, by passing an empty list of insight types. The valid Insights event type in this release is ApiCallRateInsight.
+   * Lets you enable Insights event logging by specifying the Insights selectors that you want to enable on an existing trail. You also use PutInsightSelectors to turn off Insights event logging, by passing an empty list of insight types. The valid Insights event types in this release are ApiErrorRateInsight and ApiCallRateInsight.
    */
   putInsightSelectors(callback?: (err: AWSError, data: CloudTrail.Types.PutInsightSelectorsResponse) => void): Request<CloudTrail.Types.PutInsightSelectorsResponse, AWSError>;
   /**
@@ -132,6 +196,14 @@ declare class CloudTrail extends Service {
    */
   removeTags(callback?: (err: AWSError, data: CloudTrail.Types.RemoveTagsResponse) => void): Request<CloudTrail.Types.RemoveTagsResponse, AWSError>;
   /**
+   * Restores a deleted event data store specified by EventDataStore, which accepts an event data store ARN. You can only restore a deleted event data store within the seven-day wait period after deletion. Restoring an event data store can take several minutes, depending on the size of the event data store.
+   */
+  restoreEventDataStore(params: CloudTrail.Types.RestoreEventDataStoreRequest, callback?: (err: AWSError, data: CloudTrail.Types.RestoreEventDataStoreResponse) => void): Request<CloudTrail.Types.RestoreEventDataStoreResponse, AWSError>;
+  /**
+   * Restores a deleted event data store specified by EventDataStore, which accepts an event data store ARN. You can only restore a deleted event data store within the seven-day wait period after deletion. Restoring an event data store can take several minutes, depending on the size of the event data store.
+   */
+  restoreEventDataStore(callback?: (err: AWSError, data: CloudTrail.Types.RestoreEventDataStoreResponse) => void): Request<CloudTrail.Types.RestoreEventDataStoreResponse, AWSError>;
+  /**
    * Starts the recording of Amazon Web Services API calls and log file delivery for a trail. For a trail that is enabled in all regions, this operation must be called from the region in which the trail was created. This operation cannot be called on the shadow trails (replicated trails in other regions) of a trail that is enabled in all regions.
    */
   startLogging(params: CloudTrail.Types.StartLoggingRequest, callback?: (err: AWSError, data: CloudTrail.Types.StartLoggingResponse) => void): Request<CloudTrail.Types.StartLoggingResponse, AWSError>;
@@ -140,6 +212,14 @@ declare class CloudTrail extends Service {
    */
   startLogging(callback?: (err: AWSError, data: CloudTrail.Types.StartLoggingResponse) => void): Request<CloudTrail.Types.StartLoggingResponse, AWSError>;
   /**
+   * Starts a CloudTrail Lake query. The required QueryStatement parameter provides your SQL query, enclosed in single quotation marks.
+   */
+  startQuery(params: CloudTrail.Types.StartQueryRequest, callback?: (err: AWSError, data: CloudTrail.Types.StartQueryResponse) => void): Request<CloudTrail.Types.StartQueryResponse, AWSError>;
+  /**
+   * Starts a CloudTrail Lake query. The required QueryStatement parameter provides your SQL query, enclosed in single quotation marks.
+   */
+  startQuery(callback?: (err: AWSError, data: CloudTrail.Types.StartQueryResponse) => void): Request<CloudTrail.Types.StartQueryResponse, AWSError>;
+  /**
    * Suspends the recording of Amazon Web Services API calls and log file delivery for the specified trail. Under most circumstances, there is no need to use this action. You can update a trail without stopping it first. This action is the only way to stop recording. For a trail enabled in all regions, this operation must be called from the region in which the trail was created, or an InvalidHomeRegionException will occur. This operation cannot be called on the shadow trails (replicated trails in other regions) of a trail enabled in all regions.
    */
   stopLogging(params: CloudTrail.Types.StopLoggingRequest, callback?: (err: AWSError, data: CloudTrail.Types.StopLoggingResponse) => void): Request<CloudTrail.Types.StopLoggingResponse, AWSError>;
@@ -147,6 +227,14 @@ declare class CloudTrail extends Service {
    * Suspends the recording of Amazon Web Services API calls and log file delivery for the specified trail. Under most circumstances, there is no need to use this action. You can update a trail without stopping it first. This action is the only way to stop recording. For a trail enabled in all regions, this operation must be called from the region in which the trail was created, or an InvalidHomeRegionException will occur. This operation cannot be called on the shadow trails (replicated trails in other regions) of a trail enabled in all regions.
    */
   stopLogging(callback?: (err: AWSError, data: CloudTrail.Types.StopLoggingResponse) => void): Request<CloudTrail.Types.StopLoggingResponse, AWSError>;
+  /**
+   * Updates an event data store. The required EventDataStore value is an ARN or the ID portion of the ARN. Other parameters are optional, but at least one optional parameter must be specified, or CloudTrail throws an error. RetentionPeriod is in days, and valid values are integers between 90 and 2555. By default, TerminationProtection is enabled. AdvancedEventSelectors includes or excludes management and data events in your event data store; for more information about AdvancedEventSelectors, see PutEventSelectorsRequest$AdvancedEventSelectors.
+   */
+  updateEventDataStore(params: CloudTrail.Types.UpdateEventDataStoreRequest, callback?: (err: AWSError, data: CloudTrail.Types.UpdateEventDataStoreResponse) => void): Request<CloudTrail.Types.UpdateEventDataStoreResponse, AWSError>;
+  /**
+   * Updates an event data store. The required EventDataStore value is an ARN or the ID portion of the ARN. Other parameters are optional, but at least one optional parameter must be specified, or CloudTrail throws an error. RetentionPeriod is in days, and valid values are integers between 90 and 2555. By default, TerminationProtection is enabled. AdvancedEventSelectors includes or excludes management and data events in your event data store; for more information about AdvancedEventSelectors, see PutEventSelectorsRequest$AdvancedEventSelectors.
+   */
+  updateEventDataStore(callback?: (err: AWSError, data: CloudTrail.Types.UpdateEventDataStoreResponse) => void): Request<CloudTrail.Types.UpdateEventDataStoreResponse, AWSError>;
   /**
    * Updates trail settings that control what events you are logging, and how to handle log files. Changes to a trail do not require stopping the CloudTrail service. Use this action to designate an existing bucket for log delivery. If the existing bucket has previously been a target for CloudTrail log files, an IAM policy exists for the bucket. UpdateTrail must be called from the region in which the trail was created; otherwise, an InvalidHomeRegionException is thrown.
    */
@@ -165,7 +253,7 @@ declare namespace CloudTrail {
     /**
      * Contains a list of tags, up to a limit of 50
      */
-    TagsList?: TagsList;
+    TagsList: TagsList;
   }
   export interface AddTagsResponse {
   }
@@ -213,6 +301,96 @@ declare namespace CloudTrail {
   export type AdvancedFieldSelectors = AdvancedFieldSelector[];
   export type Boolean = boolean;
   export type ByteBuffer = Buffer|Uint8Array|Blob|string;
+  export interface CancelQueryRequest {
+    /**
+     * The ARN (or the ID suffix of the ARN) of an event data store on which the specified query is running.
+     */
+    EventDataStore: EventDataStoreArn;
+    /**
+     * The ID of the query that you want to cancel. The QueryId comes from the response of a StartQuery operation.
+     */
+    QueryId: UUID;
+  }
+  export interface CancelQueryResponse {
+    /**
+     * The ID of the canceled query.
+     */
+    QueryId: UUID;
+    /**
+     * Shows the status of a query after a CancelQuery request. Typically, the values shown are either RUNNING or CANCELLED.
+     */
+    QueryStatus: QueryStatus;
+  }
+  export interface CreateEventDataStoreRequest {
+    /**
+     * The name of the event data store.
+     */
+    Name: EventDataStoreName;
+    /**
+     * The advanced event selectors to use to select the events for the data store. For more information about how to use advanced event selectors, see Log events by using advanced event selectors in the CloudTrail User Guide.
+     */
+    AdvancedEventSelectors?: AdvancedEventSelectors;
+    /**
+     * Specifies whether the event data store includes events from all regions, or only from the region in which the event data store is created.
+     */
+    MultiRegionEnabled?: Boolean;
+    /**
+     * Specifies whether an event data store collects events logged for an organization in Organizations.
+     */
+    OrganizationEnabled?: Boolean;
+    /**
+     * The retention period of the event data store, in days. You can set a retention period of up to 2555 days, the equivalent of seven years.
+     */
+    RetentionPeriod?: RetentionPeriod;
+    /**
+     * Specifies whether termination protection is enabled for the event data store. If termination protection is enabled, you cannot delete the event data store until termination protection is disabled.
+     */
+    TerminationProtectionEnabled?: TerminationProtectionEnabled;
+    TagsList?: TagsList;
+  }
+  export interface CreateEventDataStoreResponse {
+    /**
+     * The ARN of the event data store.
+     */
+    EventDataStoreArn?: EventDataStoreArn;
+    /**
+     * The name of the event data store.
+     */
+    Name?: EventDataStoreName;
+    /**
+     * The status of event data store creation.
+     */
+    Status?: EventDataStoreStatus;
+    /**
+     * The advanced event selectors that were used to select the events for the data store.
+     */
+    AdvancedEventSelectors?: AdvancedEventSelectors;
+    /**
+     * Indicates whether the event data store collects events from all regions, or only from the region in which it was created.
+     */
+    MultiRegionEnabled?: Boolean;
+    /**
+     * Indicates whether an event data store is collecting logged events for an organization in Organizations.
+     */
+    OrganizationEnabled?: Boolean;
+    /**
+     * The retention period of an event data store, in days.
+     */
+    RetentionPeriod?: RetentionPeriod;
+    /**
+     * Indicates whether termination protection is enabled for the event data store.
+     */
+    TerminationProtectionEnabled?: TerminationProtectionEnabled;
+    TagsList?: TagsList;
+    /**
+     * The timestamp that shows when the event data store was created.
+     */
+    CreatedTimestamp?: _Date;
+    /**
+     * The timestamp that shows when an event data store was updated, if applicable. UpdatedTimestamp is always either the same or newer than the time shown in CreatedTimestamp.
+     */
+    UpdatedTimestamp?: _Date;
+  }
   export interface CreateTrailRequest {
     /**
      * Specifies the name of the trail. The name must meet the following requirements:   Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-)   Start with a letter or number, and end with a letter or number   Be between 3 and 128 characters   Have no adjacent periods, underscores or dashes. Names like my-_namespace and my--namespace are not valid.   Not be in IP address format (for example, 192.168.5.4)  
@@ -327,6 +505,14 @@ declare namespace CloudTrail {
   export type DataResourceValues = String[];
   export type DataResources = DataResource[];
   export type _Date = Date;
+  export interface DeleteEventDataStoreRequest {
+    /**
+     * The ARN (or the ID suffix of the ARN) of the event data store to delete.
+     */
+    EventDataStore: EventDataStoreArn;
+  }
+  export interface DeleteEventDataStoreResponse {
+  }
   export interface DeleteTrailRequest {
     /**
      * Specifies the name or the CloudTrail ARN of the trail to be deleted. The following is the format of a trail ARN. arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail 
@@ -334,6 +520,38 @@ declare namespace CloudTrail {
     Name: String;
   }
   export interface DeleteTrailResponse {
+  }
+  export interface DescribeQueryRequest {
+    /**
+     * The ARN (or the ID suffix of the ARN) of an event data store on which the specified query was run.
+     */
+    EventDataStore: EventDataStoreArn;
+    /**
+     * The query ID.
+     */
+    QueryId: UUID;
+  }
+  export interface DescribeQueryResponse {
+    /**
+     * The ID of the query.
+     */
+    QueryId?: UUID;
+    /**
+     * The SQL code of a query.
+     */
+    QueryString?: QueryStatement;
+    /**
+     * The status of a query. Values for QueryStatus include QUEUED, RUNNING, FINISHED, FAILED, or CANCELLED 
+     */
+    QueryStatus?: QueryStatus;
+    /**
+     * Metadata about a query, including the number of events that were matched, the total number of events scanned, the query run time in milliseconds, and the query's creation time.
+     */
+    QueryStatistics?: QueryStatisticsForDescribeQuery;
+    /**
+     * The error message returned if a query failed.
+     */
+    ErrorMessage?: ErrorMessage;
   }
   export interface DescribeTrailsRequest {
     /**
@@ -351,6 +569,7 @@ declare namespace CloudTrail {
      */
     trailList?: TrailList;
   }
+  export type ErrorMessage = string;
   export interface Event {
     /**
      * The CloudTrail ID of the event returned.
@@ -390,6 +609,52 @@ declare namespace CloudTrail {
     CloudTrailEvent?: String;
   }
   export type EventCategory = "insight"|string;
+  export interface EventDataStore {
+    /**
+     * The ARN of the event data store.
+     */
+    EventDataStoreArn?: EventDataStoreArn;
+    /**
+     * The name of the event data store.
+     */
+    Name?: EventDataStoreName;
+    /**
+     * Indicates whether the event data store is protected from termination.
+     */
+    TerminationProtectionEnabled?: TerminationProtectionEnabled;
+    /**
+     * The status of an event data store. Values are ENABLED and PENDING_DELETION.
+     */
+    Status?: EventDataStoreStatus;
+    /**
+     * The advanced event selectors that were used to select events for the data store.
+     */
+    AdvancedEventSelectors?: AdvancedEventSelectors;
+    /**
+     * Indicates whether the event data store includes events from all regions, or only from the region in which it was created.
+     */
+    MultiRegionEnabled?: Boolean;
+    /**
+     * Indicates that an event data store is collecting logged events for an organization.
+     */
+    OrganizationEnabled?: Boolean;
+    /**
+     * The retention period, in days.
+     */
+    RetentionPeriod?: RetentionPeriod;
+    /**
+     * The timestamp of the event data store's creation.
+     */
+    CreatedTimestamp?: _Date;
+    /**
+     * The timestamp showing when an event data store was updated, if applicable. UpdatedTimestamp is always either the same or newer than the time shown in CreatedTimestamp.
+     */
+    UpdatedTimestamp?: _Date;
+  }
+  export type EventDataStoreArn = string;
+  export type EventDataStoreName = string;
+  export type EventDataStoreStatus = "CREATED"|"ENABLED"|"PENDING_DELETION"|string;
+  export type EventDataStores = EventDataStore[];
   export interface EventSelector {
     /**
      * Specify if you want your trail to log read-only events, write-only events, or all. For example, the EC2 GetConsoleOutput is a read-only API operation and RunInstances is a write-only API operation.  By default, the value is All.
@@ -411,6 +676,54 @@ declare namespace CloudTrail {
   export type EventSelectors = EventSelector[];
   export type EventsList = Event[];
   export type ExcludeManagementEventSources = String[];
+  export interface GetEventDataStoreRequest {
+    /**
+     * The ARN (or ID suffix of the ARN) of the event data store about which you want information.
+     */
+    EventDataStore: EventDataStoreArn;
+  }
+  export interface GetEventDataStoreResponse {
+    /**
+     * The event data store Amazon Resource Number (ARN).
+     */
+    EventDataStoreArn?: EventDataStoreArn;
+    /**
+     * The name of the event data store.
+     */
+    Name?: EventDataStoreName;
+    /**
+     * The status of an event data store. Values can be ENABLED and PENDING_DELETION.
+     */
+    Status?: EventDataStoreStatus;
+    /**
+     * The advanced event selectors used to select events for the data store.
+     */
+    AdvancedEventSelectors?: AdvancedEventSelectors;
+    /**
+     * Indicates whether the event data store includes events from all regions, or only from the region in which it was created.
+     */
+    MultiRegionEnabled?: Boolean;
+    /**
+     * Indicates whether an event data store is collecting logged events for an organization in Organizations.
+     */
+    OrganizationEnabled?: Boolean;
+    /**
+     * The retention period of the event data store, in days.
+     */
+    RetentionPeriod?: RetentionPeriod;
+    /**
+     * Indicates that termination protection is enabled.
+     */
+    TerminationProtectionEnabled?: TerminationProtectionEnabled;
+    /**
+     * The timestamp of the event data store's creation.
+     */
+    CreatedTimestamp?: _Date;
+    /**
+     * Shows the time that an event data store was updated, if applicable. UpdatedTimestamp is always either the same or newer than the time shown in CreatedTimestamp.
+     */
+    UpdatedTimestamp?: _Date;
+  }
   export interface GetEventSelectorsRequest {
     /**
      * Specifies the name of the trail or trail ARN. If you specify a trail name, the string must meet the following requirements:   Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-)   Start with a letter or number, and end with a letter or number   Be between 3 and 128 characters   Have no adjacent periods, underscores or dashes. Names like my-_namespace and my--namespace are not valid.   Not be in IP address format (for example, 192.168.5.4)   If you specify a trail ARN, it must be in the format:  arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail 
@@ -443,9 +756,49 @@ declare namespace CloudTrail {
      */
     TrailARN?: String;
     /**
-     * A JSON string that contains the insight types you want to log on a trail. In this release, only ApiCallRateInsight is supported as an insight type.
+     * A JSON string that contains the insight types you want to log on a trail. In this release, ApiErrorRateInsight and ApiCallRateInsight are supported as insight types.
      */
     InsightSelectors?: InsightSelectors;
+  }
+  export interface GetQueryResultsRequest {
+    /**
+     * The ARN (or ID suffix of the ARN) of the event data store against which the query was run.
+     */
+    EventDataStore: EventDataStoreArn;
+    /**
+     * The ID of the query for which you want to get results.
+     */
+    QueryId: UUID;
+    /**
+     * A token you can use to get the next page of query results.
+     */
+    NextToken?: PaginationToken;
+    /**
+     * The maximum number of query results to display on a single page.
+     */
+    MaxQueryResults?: MaxQueryResults;
+  }
+  export interface GetQueryResultsResponse {
+    /**
+     * The status of the query. Values include QUEUED, RUNNING, FINISHED, FAILED, or CANCELLED.
+     */
+    QueryStatus?: QueryStatus;
+    /**
+     * Shows the count of query results.
+     */
+    QueryStatistics?: QueryStatistics;
+    /**
+     * Contains the individual event results of the query.
+     */
+    QueryResultRows?: QueryResultRows;
+    /**
+     * A token you can use to get the next page of query results.
+     */
+    NextToken?: PaginationToken;
+    /**
+     * The error message returned if a query failed.
+     */
+    ErrorMessage?: ErrorMessage;
   }
   export interface GetTrailRequest {
     /**
@@ -534,12 +887,34 @@ declare namespace CloudTrail {
   }
   export interface InsightSelector {
     /**
-     * The type of Insights events to log on a trail. The valid Insights type in this release is ApiCallRateInsight.
+     * The type of insights to log on a trail. ApiCallRateInsight and ApiErrorRateInsight are valid insight types.
      */
     InsightType?: InsightType;
   }
   export type InsightSelectors = InsightSelector[];
   export type InsightType = "ApiCallRateInsight"|"ApiErrorRateInsight"|string;
+  export type Integer = number;
+  export type ListEventDataStoresMaxResultsCount = number;
+  export interface ListEventDataStoresRequest {
+    /**
+     * A token you can use to get the next page of event data store results.
+     */
+    NextToken?: PaginationToken;
+    /**
+     * The maximum number of event data stores to display on a single page.
+     */
+    MaxResults?: ListEventDataStoresMaxResultsCount;
+  }
+  export interface ListEventDataStoresResponse {
+    /**
+     * Contains information about event data stores in the account, in the current region.
+     */
+    EventDataStores?: EventDataStores;
+    /**
+     * A token you can use to get the next page of results.
+     */
+    NextToken?: PaginationToken;
+  }
   export interface ListPublicKeysRequest {
     /**
      * Optionally specifies, in UTC, the start of the time range to look up public keys for CloudTrail digest files. If not specified, the current time is used, and the current public key is returned.
@@ -563,6 +938,43 @@ declare namespace CloudTrail {
      * Reserved for future use.
      */
     NextToken?: String;
+  }
+  export type ListQueriesMaxResultsCount = number;
+  export interface ListQueriesRequest {
+    /**
+     * The ARN (or the ID suffix of the ARN) of an event data store on which queries were run.
+     */
+    EventDataStore: EventDataStoreArn;
+    /**
+     * A token you can use to get the next page of results.
+     */
+    NextToken?: PaginationToken;
+    /**
+     * The maximum number of queries to show on a page.
+     */
+    MaxResults?: ListQueriesMaxResultsCount;
+    /**
+     * Use with EndTime to bound a ListQueries request, and limit its results to only those queries run within a specified time period.
+     */
+    StartTime?: _Date;
+    /**
+     * Use with StartTime to bound a ListQueries request, and limit its results to only those queries run within a specified time period.
+     */
+    EndTime?: _Date;
+    /**
+     * The status of queries that you want to return in results. Valid values for QueryStatus include QUEUED, RUNNING, FINISHED, FAILED, or CANCELLED.
+     */
+    QueryStatus?: QueryStatus;
+  }
+  export interface ListQueriesResponse {
+    /**
+     * Lists matching query results, and shows query ID, status, and creation time of each query.
+     */
+    Queries?: Queries;
+    /**
+     * A token you can use to get the next page of results.
+     */
+    NextToken?: PaginationToken;
   }
   export interface ListTagsRequest {
     /**
@@ -600,6 +1012,7 @@ declare namespace CloudTrail {
      */
     NextToken?: String;
   }
+  export type Long = number;
   export interface LookupAttribute {
     /**
      * Specifies an attribute on which to filter the events returned.
@@ -648,10 +1061,12 @@ declare namespace CloudTrail {
      */
     NextToken?: NextToken;
   }
+  export type MaxQueryResults = number;
   export type MaxResults = number;
   export type NextToken = string;
   export type Operator = OperatorValue[];
   export type OperatorValue = string;
+  export type PaginationToken = string;
   export interface PublicKey {
     /**
      * The DER encoded public key value in PKCS#1 format.
@@ -705,7 +1120,7 @@ declare namespace CloudTrail {
      */
     TrailName: String;
     /**
-     * A JSON string that contains the Insights types that you want to log on a trail. The valid Insights type in this release is ApiCallRateInsight.
+     * A JSON string that contains the insight types you want to log on a trail. ApiCallRateInsight and ApiErrorRateInsight are valid insight types.
      */
     InsightSelectors: InsightSelectors;
   }
@@ -715,10 +1130,60 @@ declare namespace CloudTrail {
      */
     TrailARN?: String;
     /**
-     * A JSON string that contains the Insights event types that you want to log on a trail. The valid Insights type in this release is ApiCallRateInsight.
+     * A JSON string that contains the Insights event types that you want to log on a trail. The valid Insights types in this release are ApiErrorRateInsight and ApiCallRateInsight.
      */
     InsightSelectors?: InsightSelectors;
   }
+  export type Queries = Query[];
+  export interface Query {
+    /**
+     * The ID of a query.
+     */
+    QueryId?: UUID;
+    /**
+     * The status of the query. This can be QUEUED, RUNNING, FINISHED, FAILED, or CANCELLED.
+     */
+    QueryStatus?: QueryStatus;
+    /**
+     * The creation time of a query.
+     */
+    CreationTime?: _Date;
+  }
+  export type QueryResultColumn = {[key: string]: QueryResultValue};
+  export type QueryResultKey = string;
+  export type QueryResultRow = QueryResultColumn[];
+  export type QueryResultRows = QueryResultRow[];
+  export type QueryResultValue = string;
+  export type QueryStatement = string;
+  export interface QueryStatistics {
+    /**
+     * The number of results returned.
+     */
+    ResultsCount?: Integer;
+    /**
+     * The total number of results returned by a query.
+     */
+    TotalResultsCount?: Integer;
+  }
+  export interface QueryStatisticsForDescribeQuery {
+    /**
+     * The number of events that matched a query.
+     */
+    EventsMatched?: Long;
+    /**
+     * The number of events that the query scanned in the event data store.
+     */
+    EventsScanned?: Long;
+    /**
+     * The query's run time, in milliseconds.
+     */
+    ExecutionTimeInMillis?: Integer;
+    /**
+     * The creation time of the query.
+     */
+    CreationTime?: _Date;
+  }
+  export type QueryStatus = "QUEUED"|"RUNNING"|"FINISHED"|"FAILED"|"CANCELLED"|string;
   export type ReadWriteType = "ReadOnly"|"WriteOnly"|"All"|string;
   export interface RemoveTagsRequest {
     /**
@@ -728,7 +1193,7 @@ declare namespace CloudTrail {
     /**
      * Specifies a list of tags to be removed.
      */
-    TagsList?: TagsList;
+    TagsList: TagsList;
   }
   export interface RemoveTagsResponse {
   }
@@ -755,6 +1220,55 @@ declare namespace CloudTrail {
     TagsList?: TagsList;
   }
   export type ResourceTagList = ResourceTag[];
+  export interface RestoreEventDataStoreRequest {
+    /**
+     * The ARN (or the ID suffix of the ARN) of the event data store that you want to restore.
+     */
+    EventDataStore: EventDataStoreArn;
+  }
+  export interface RestoreEventDataStoreResponse {
+    /**
+     * The event data store ARN.
+     */
+    EventDataStoreArn?: EventDataStoreArn;
+    /**
+     * The name of the event data store.
+     */
+    Name?: EventDataStoreName;
+    /**
+     * The status of the event data store.
+     */
+    Status?: EventDataStoreStatus;
+    /**
+     * The advanced event selectors that were used to select events.
+     */
+    AdvancedEventSelectors?: AdvancedEventSelectors;
+    /**
+     * Indicates whether the event data store is collecting events from all regions, or only from the region in which the event data store was created.
+     */
+    MultiRegionEnabled?: Boolean;
+    /**
+     * Indicates whether an event data store is collecting logged events for an organization in Organizations.
+     */
+    OrganizationEnabled?: Boolean;
+    /**
+     * The retention period, in days.
+     */
+    RetentionPeriod?: RetentionPeriod;
+    /**
+     * Indicates that termination protection is enabled and the event data store cannot be automatically deleted.
+     */
+    TerminationProtectionEnabled?: TerminationProtectionEnabled;
+    /**
+     * The timestamp of an event data store's creation.
+     */
+    CreatedTimestamp?: _Date;
+    /**
+     * The timestamp that shows when an event data store was updated, if applicable. UpdatedTimestamp is always either the same or newer than the time shown in CreatedTimestamp.
+     */
+    UpdatedTimestamp?: _Date;
+  }
+  export type RetentionPeriod = number;
   export type SelectorField = string;
   export type SelectorName = string;
   export interface StartLoggingRequest {
@@ -764,6 +1278,18 @@ declare namespace CloudTrail {
     Name: String;
   }
   export interface StartLoggingResponse {
+  }
+  export interface StartQueryRequest {
+    /**
+     * The SQL code of your query.
+     */
+    QueryStatement: QueryStatement;
+  }
+  export interface StartQueryResponse {
+    /**
+     * The ID of the started query.
+     */
+    QueryId?: UUID;
   }
   export interface StopLoggingRequest {
     /**
@@ -778,13 +1304,16 @@ declare namespace CloudTrail {
     /**
      * The key in a key-value pair. The key must be must be no longer than 128 Unicode characters. The key must be unique for the resource to which it applies.
      */
-    Key: String;
+    Key: TagKey;
     /**
      * The value in a key-value pair of a tag. The value must be no longer than 256 Unicode characters.
      */
-    Value?: String;
+    Value?: TagValue;
   }
+  export type TagKey = string;
+  export type TagValue = string;
   export type TagsList = Tag[];
+  export type TerminationProtectionEnabled = boolean;
   export interface Trail {
     /**
      * Name of the trail set by calling CreateTrail. The maximum length is 128 characters.
@@ -868,6 +1397,79 @@ declare namespace CloudTrail {
   export type TrailList = Trail[];
   export type TrailNameList = String[];
   export type Trails = TrailInfo[];
+  export type UUID = string;
+  export interface UpdateEventDataStoreRequest {
+    /**
+     * The ARN (or the ID suffix of the ARN) of the event data store that you want to update.
+     */
+    EventDataStore: EventDataStoreArn;
+    /**
+     * The event data store name.
+     */
+    Name?: EventDataStoreName;
+    /**
+     * The advanced event selectors used to select events for the event data store.
+     */
+    AdvancedEventSelectors?: AdvancedEventSelectors;
+    /**
+     * Specifies whether an event data store collects events from all regions, or only from the region in which it was created.
+     */
+    MultiRegionEnabled?: Boolean;
+    /**
+     * Specifies whether an event data store collects events logged for an organization in Organizations.
+     */
+    OrganizationEnabled?: Boolean;
+    /**
+     * The retention period, in days.
+     */
+    RetentionPeriod?: RetentionPeriod;
+    /**
+     * Indicates that termination protection is enabled and the event data store cannot be automatically deleted.
+     */
+    TerminationProtectionEnabled?: TerminationProtectionEnabled;
+  }
+  export interface UpdateEventDataStoreResponse {
+    /**
+     * The ARN of the event data store.
+     */
+    EventDataStoreArn?: EventDataStoreArn;
+    /**
+     * The name of the event data store.
+     */
+    Name?: EventDataStoreName;
+    /**
+     * The status of an event data store. Values can be ENABLED and PENDING_DELETION.
+     */
+    Status?: EventDataStoreStatus;
+    /**
+     * The advanced event selectors that are applied to the event data store.
+     */
+    AdvancedEventSelectors?: AdvancedEventSelectors;
+    /**
+     * Indicates whether the event data store includes events from all regions, or only from the region in which it was created.
+     */
+    MultiRegionEnabled?: Boolean;
+    /**
+     * Indicates whether an event data store is collecting logged events for an organization in Organizations.
+     */
+    OrganizationEnabled?: Boolean;
+    /**
+     * The retention period, in days.
+     */
+    RetentionPeriod?: RetentionPeriod;
+    /**
+     * Indicates whether termination protection is enabled for the event data store.
+     */
+    TerminationProtectionEnabled?: TerminationProtectionEnabled;
+    /**
+     * The timestamp that shows when an event data store was first created.
+     */
+    CreatedTimestamp?: _Date;
+    /**
+     * The timestamp that shows when the event data store was last updated. UpdatedTimestamp is always either the same or newer than the time shown in CreatedTimestamp.
+     */
+    UpdatedTimestamp?: _Date;
+  }
   export interface UpdateTrailRequest {
     /**
      * Specifies the name of the trail or trail ARN. If Name is a trail name, the string must meet the following requirements:   Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-)   Start with a letter or number, and end with a letter or number   Be between 3 and 128 characters   Have no adjacent periods, underscores or dashes. Names like my-_namespace and my--namespace are not valid.   Not be in IP address format (for example, 192.168.5.4)   If Name is a trail ARN, it must be in the following format.  arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail 
