@@ -180,6 +180,14 @@ declare class IoTWireless extends Service {
    */
   deleteMulticastGroup(callback?: (err: AWSError, data: IoTWireless.Types.DeleteMulticastGroupResponse) => void): Request<IoTWireless.Types.DeleteMulticastGroupResponse, AWSError>;
   /**
+   *  The operation to delete queued messages. 
+   */
+  deleteQueuedMessages(params: IoTWireless.Types.DeleteQueuedMessagesRequest, callback?: (err: AWSError, data: IoTWireless.Types.DeleteQueuedMessagesResponse) => void): Request<IoTWireless.Types.DeleteQueuedMessagesResponse, AWSError>;
+  /**
+   *  The operation to delete queued messages. 
+   */
+  deleteQueuedMessages(callback?: (err: AWSError, data: IoTWireless.Types.DeleteQueuedMessagesResponse) => void): Request<IoTWireless.Types.DeleteQueuedMessagesResponse, AWSError>;
+  /**
    * Deletes a service profile.
    */
   deleteServiceProfile(params: IoTWireless.Types.DeleteServiceProfileRequest, callback?: (err: AWSError, data: IoTWireless.Types.DeleteServiceProfileResponse) => void): Request<IoTWireless.Types.DeleteServiceProfileResponse, AWSError>;
@@ -483,6 +491,14 @@ declare class IoTWireless extends Service {
    * Lists the partner accounts associated with your AWS account.
    */
   listPartnerAccounts(callback?: (err: AWSError, data: IoTWireless.Types.ListPartnerAccountsResponse) => void): Request<IoTWireless.Types.ListPartnerAccountsResponse, AWSError>;
+  /**
+   * The operation to list queued messages. 
+   */
+  listQueuedMessages(params: IoTWireless.Types.ListQueuedMessagesRequest, callback?: (err: AWSError, data: IoTWireless.Types.ListQueuedMessagesResponse) => void): Request<IoTWireless.Types.ListQueuedMessagesResponse, AWSError>;
+  /**
+   * The operation to list queued messages. 
+   */
+  listQueuedMessages(callback?: (err: AWSError, data: IoTWireless.Types.ListQueuedMessagesResponse) => void): Request<IoTWireless.Types.ListQueuedMessagesResponse, AWSError>;
   /**
    * Lists the service profiles registered to your AWS account.
    */
@@ -1105,6 +1121,22 @@ declare namespace IoTWireless {
   }
   export interface DeleteMulticastGroupResponse {
   }
+  export interface DeleteQueuedMessagesRequest {
+    /**
+     * Id of a given wireless device which messages will be deleted 
+     */
+    Id: WirelessDeviceId;
+    /**
+     * if messageID=="*", the queue for a particular wireless deviceId will be purged, otherwise, the specific message with messageId will be deleted 
+     */
+    MessageId: MessageId;
+    /**
+     * The wireless device type, it is either Sidewalk or LoRaWAN. 
+     */
+    WirelessDeviceType?: WirelessDeviceType;
+  }
+  export interface DeleteQueuedMessagesResponse {
+  }
   export interface DeleteServiceProfileRequest {
     /**
      * The ID of the resource to delete.
@@ -1265,6 +1297,22 @@ declare namespace IoTWireless {
   export type DlRate = number;
   export type DlRatePolicy = string;
   export type Double = number;
+  export interface DownlinkQueueMessage {
+    /**
+     *  The messageId allocated by IoT Wireless for tracing purpose
+     */
+    MessageId?: MessageId;
+    /**
+     * The transmit mode to use to send data to the wireless device. Can be: 0 for UM (unacknowledge mode) or 1 for AM (acknowledge mode).
+     */
+    TransmitMode?: TransmitMode;
+    /**
+     * The timestamp that Iot Wireless received the message.
+     */
+    ReceivedAt?: ISODateTimeString;
+    LoRaWAN?: LoRaWANSendDataToDevice;
+  }
+  export type DownlinkQueueMessagesList = DownlinkQueueMessage[];
   export type DrMax = number;
   export type DrMin = number;
   export type EndPoint = string;
@@ -1831,6 +1879,34 @@ declare namespace IoTWireless {
      * The Sidewalk account credentials.
      */
     Sidewalk?: SidewalkAccountList;
+  }
+  export interface ListQueuedMessagesRequest {
+    /**
+     * Id of a given wireless device which the downlink packets are targeted 
+     */
+    Id: WirelessDeviceId;
+    /**
+     * To retrieve the next set of results, the nextToken value from a previous response; otherwise null to receive the first set of results.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of results to return in this operation.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The wireless device type, it is either Sidewalk or LoRaWAN.
+     */
+    WirelessDeviceType?: WirelessDeviceType;
+  }
+  export interface ListQueuedMessagesResponse {
+    /**
+     * To retrieve the next set of results, the nextToken value from a previous response; otherwise null to receive the first set of results.
+     */
+    NextToken?: NextToken;
+    /**
+     * The messages in downlink queue.
+     */
+    DownlinkQueueMessagesList?: DownlinkQueueMessagesList;
   }
   export interface ListServiceProfilesRequest {
     /**

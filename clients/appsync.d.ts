@@ -714,6 +714,10 @@ declare namespace AppSync {
      */
     functionVersion: String;
     syncConfig?: SyncConfig;
+    /**
+     * The maximum batching size for a resolver.
+     */
+    maxBatchSize?: MaxBatchSize;
   }
   export interface CreateFunctionResponse {
     /**
@@ -806,6 +810,10 @@ declare namespace AppSync {
      * The caching configuration for the resolver.
      */
     cachingConfig?: CachingConfig;
+    /**
+     * The maximum batching size for a resolver.
+     */
+    maxBatchSize?: MaxBatchSize;
   }
   export interface CreateResolverResponse {
     /**
@@ -1092,6 +1100,10 @@ declare namespace AppSync {
      */
     functionVersion?: String;
     syncConfig?: SyncConfig;
+    /**
+     * The maximum batching size for a resolver.
+     */
+    maxBatchSize?: MaxBatchSize;
   }
   export type Functions = FunctionConfiguration[];
   export type FunctionsIds = String[];
@@ -1567,6 +1579,7 @@ declare namespace AppSync {
   export type Long = number;
   export type MapOfStringToString = {[key: string]: String};
   export type MappingTemplate = string;
+  export type MaxBatchSize = number;
   export type MaxResults = number;
   export interface OpenIDConnectConfig {
     /**
@@ -1678,6 +1691,10 @@ declare namespace AppSync {
      * The caching configuration for the resolver.
      */
     cachingConfig?: CachingConfig;
+    /**
+     * The maximum batching size for a resolver.
+     */
+    maxBatchSize?: MaxBatchSize;
   }
   export type ResolverKind = "UNIT"|"PIPELINE"|string;
   export type Resolvers = Resolver[];
@@ -1918,6 +1935,10 @@ declare namespace AppSync {
      */
     functionVersion: String;
     syncConfig?: SyncConfig;
+    /**
+     * The maximum batching size for a resolver.
+     */
+    maxBatchSize?: MaxBatchSize;
   }
   export interface UpdateFunctionResponse {
     /**
@@ -2010,6 +2031,10 @@ declare namespace AppSync {
      * The caching configuration for the resolver.
      */
     cachingConfig?: CachingConfig;
+    /**
+     * The maximum batching size for a resolver.
+     */
+    maxBatchSize?: MaxBatchSize;
   }
   export interface UpdateResolverResponse {
     /**

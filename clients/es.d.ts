@@ -397,6 +397,14 @@ declare namespace ES {
      * Describes the SAML application configured for a domain.
      */
     SAMLOptions?: SAMLOptionsOutput;
+    /**
+     * Specifies the Anonymous Auth Disable Date when Anonymous Auth is enabled.
+     */
+    AnonymousAuthDisableDate?: DisableTimestamp;
+    /**
+     * True if Anonymous auth is enabled. Anonymous auth can be enabled only when AdvancedSecurity is enabled on existing domains.
+     */
+    AnonymousAuthEnabled?: Boolean;
   }
   export interface AdvancedSecurityOptionsInput {
     /**
@@ -415,6 +423,10 @@ declare namespace ES {
      * Specifies the SAML application configuration for the domain.
      */
     SAMLOptions?: SAMLOptionsInput;
+    /**
+     * True if Anonymous auth is enabled. Anonymous auth can be enabled only when AdvancedSecurity is enabled on existing domains.
+     */
+    AnonymousAuthEnabled?: Boolean;
   }
   export interface AdvancedSecurityOptionsStatus {
     /**
@@ -998,6 +1010,7 @@ declare namespace ES {
      */
     ReservedElasticsearchInstances?: ReservedElasticsearchInstanceList;
   }
+  export type DisableTimestamp = Date;
   export interface DissociatePackageRequest {
     /**
      * Internal ID of the package that you want to associate with a domain. Use DescribePackages to find this value.

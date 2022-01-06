@@ -398,6 +398,14 @@ declare namespace OpenSearch {
      * Describes the SAML application configured for a domain.
      */
     SAMLOptions?: SAMLOptionsOutput;
+    /**
+     * Specifies the Anonymous Auth Disable Date when Anonymous Auth is enabled.
+     */
+    AnonymousAuthDisableDate?: DisableTimestamp;
+    /**
+     * True if Anonymous auth is enabled. Anonymous auth can be enabled only when AdvancedSecurity is enabled on existing domains.
+     */
+    AnonymousAuthEnabled?: Boolean;
   }
   export interface AdvancedSecurityOptionsInput {
     /**
@@ -416,6 +424,10 @@ declare namespace OpenSearch {
      * The SAML application configuration for the domain.
      */
     SAMLOptions?: SAMLOptionsInput;
+    /**
+     * True if Anonymous auth is enabled. Anonymous auth can be enabled only when AdvancedSecurity is enabled on existing domains.
+     */
+    AnonymousAuthEnabled?: Boolean;
   }
   export interface AdvancedSecurityOptionsStatus {
     /**
@@ -1055,6 +1067,7 @@ declare namespace OpenSearch {
      */
     ReservedInstances?: ReservedInstanceList;
   }
+  export type DisableTimestamp = Date;
   export interface DissociatePackageRequest {
     /**
      * The internal ID of the package to associate with a domain. Use DescribePackages to find this value. 

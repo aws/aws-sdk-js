@@ -817,7 +817,7 @@
           "shape": "__timestampUnix"
         },
         "FillerSlate": {
-          "documentation": "<p>Contains information about the slate used to fill gaps between programs in the schedule. You must configure FillerSlate if your channel uses an LINEAR PlaybackMode.</p>",
+          "documentation": "<p>The slate used to fill gaps between programs in the schedule. You must configure filler slate if your channel uses the LINEAR PlaybackMode. MediaTailor doesn't support filler slate for channels using the LOOP PlaybackMode.</p>",
           "shape": "SlateSource"
         },
         "LastModifiedTime": {
@@ -918,7 +918,7 @@
           "shape": "__string"
         },
         "FillerSlate": {
-          "documentation": "<p>The slate used to fill gaps between programs in the schedule. You must configure filler slate if your channel uses a LINEAR PlaybackMode.</p>",
+          "documentation": "<p>The slate used to fill gaps between programs in the schedule. You must configure filler slate if your channel uses the LINEAR PlaybackMode. MediaTailor doesn't support filler slate for channels using the LOOP PlaybackMode.</p>",
           "shape": "SlateSource"
         },
         "Outputs": {
@@ -1014,8 +1014,8 @@
       "required": [
         "Name",
         "PlaybackConfigurationName",
-        "Consumption",
-        "Retrieval"
+        "Retrieval",
+        "Consumption"
       ],
       "type": "structure"
     },
@@ -1083,8 +1083,8 @@
         "ChannelName",
         "ProgramName",
         "VodSourceName",
-        "ScheduleConfiguration",
-        "SourceLocationName"
+        "SourceLocationName",
+        "ScheduleConfiguration"
       ],
       "type": "structure"
     },
@@ -2758,8 +2758,8 @@
       },
       "required": [
         "VodSourceName",
-        "ChannelName",
         "SourceLocationName",
+        "ChannelName",
         "Arn",
         "ProgramName"
       ],
@@ -2987,6 +2987,10 @@
           "location": "uri",
           "locationName": "channelName",
           "shape": "__string"
+        },
+        "FillerSlate": {
+          "documentation": "<p>The slate used to fill gaps between programs in the schedule. You must configure filler slate if your channel uses the LINEAR PlaybackMode. MediaTailor doesn't support filler slate for channels using the LOOP PlaybackMode.</p>",
+          "shape": "SlateSource"
         },
         "Outputs": {
           "documentation": "<p>The channel's output properties.</p>",
