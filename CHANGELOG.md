@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1052.0-->
+<!--LATEST=2.1053.0-->
 <!--ENTRYINSERT-->
+
+## 2.1053.0
+* feature: MediaLive: This release adds support for selecting the Program Date Time (PDT) Clock source algorithm for HLS outputs.
 
 ## 2.1052.0
 * feature: AppSync: AppSync: AWS AppSync now supports configurable batching sizes for AWS Lambda resolvers, Direct AWS Lambda resolvers and pipeline functions

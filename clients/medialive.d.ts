@@ -3477,9 +3477,17 @@ SEGMENTS_ONLY: Does not generate any manifests for this output group.
      */
     OutputSelection?: HlsOutputSelection;
     /**
-     * Includes or excludes EXT-X-PROGRAM-DATE-TIME tag in .m3u8 manifest files. The value is calculated as follows: either the program date and time are initialized using the input timecode source, or the time is initialized using the input timecode source and the date is initialized using the timestampOffset.
+     * Includes or excludes EXT-X-PROGRAM-DATE-TIME tag in .m3u8 manifest files. The value is calculated using the program date time clock.
      */
     ProgramDateTime?: HlsProgramDateTime;
+    /**
+     * Specifies the algorithm used to drive the HLS EXT-X-PROGRAM-DATE-TIME clock. Options include:
+
+INITIALIZE_FROM_OUTPUT_TIMECODE: The PDT clock is initialized as a function of the first output timecode, then incremented by the EXTINF duration of each encoded segment.
+
+SYSTEM_CLOCK: The PDT clock is initialized as a function of the UTC wall clock, then incremented by the EXTINF duration of each encoded segment. If the PDT clock diverges from the wall clock by more than 500ms, it is resynchronized to the wall clock.
+     */
+    ProgramDateTimeClock?: HlsProgramDateTimeClock;
     /**
      * Period of insertion of EXT-X-PROGRAM-DATE-TIME entry, in seconds.
      */
@@ -3607,6 +3615,7 @@ Specifies whether MP4 segments should be packaged as HEV1 or HVC1.
     SegmentModifier?: __string;
   }
   export type HlsProgramDateTime = "EXCLUDE"|"INCLUDE"|string;
+  export type HlsProgramDateTimeClock = "INITIALIZE_FROM_OUTPUT_TIMECODE"|"SYSTEM_CLOCK"|string;
   export type HlsRedundantManifest = "DISABLED"|"ENABLED"|string;
   export interface HlsS3Settings {
     /**
