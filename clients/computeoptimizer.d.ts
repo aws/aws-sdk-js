@@ -244,6 +244,10 @@ declare namespace ComputeOptimizer {
      * An object that describes the effective recommendation preferences for the Auto Scaling group.
      */
     effectiveRecommendationPreferences?: EffectiveRecommendationPreferences;
+    /**
+     * The applications that might be running on the instances in the Auto Scaling group as inferred by Compute Optimizer. Compute Optimizer can infer if one of the following applications might be running on the instances:    AmazonEmr - Infers that Amazon EMR might be running on the instances.    ApacheCassandra - Infers that Apache Cassandra might be running on the instances.    ApacheHadoop - Infers that Apache Hadoop might be running on the instances.    Memcached - Infers that Memcached might be running on the instances.    NGINX - Infers that NGINX might be running on the instances.    PostgreSql - Infers that PostgreSQL might be running on the instances.    Redis - Infers that Redis might be running on the instances.  
+     */
+    inferredWorkloadTypes?: InferredWorkloadTypes;
   }
   export interface AutoScalingGroupRecommendationOption {
     /**
@@ -266,6 +270,10 @@ declare namespace ComputeOptimizer {
      * An object that describes the savings opportunity for the Auto Scaling group recommendation option. Savings opportunity includes the estimated monthly savings amount and percentage.
      */
     savingsOpportunity?: SavingsOpportunity;
+    /**
+     * The level of effort required to migrate from the current instance type to the recommended instance type. For example, the migration effort is Low if Amazon EMR is the inferred workload type and an Amazon Web Services Graviton instance type is recommended. The migration effort is Medium if a workload type couldn't be inferred but an Amazon Web Services Graviton instance type is recommended. The migration effort is VeryLow if both the current and recommended instance types are of the same CPU architecture.
+     */
+    migrationEffort?: MigrationEffort;
   }
   export type AutoScalingGroupRecommendationOptions = AutoScalingGroupRecommendationOption[];
   export type AutoScalingGroupRecommendations = AutoScalingGroupRecommendation[];
@@ -377,9 +385,13 @@ declare namespace ComputeOptimizer {
      */
     cpuVendorArchitectures?: CpuVendorArchitectures;
     /**
-     * Describes the activation status of the enhanced infrastructure metrics preference. A status of Active confirms that the preference is applied in the latest recommendation refresh, and a status of Inactive confirms that it's not yet applied.
+     * Describes the activation status of the enhanced infrastructure metrics preference. A status of Active confirms that the preference is applied in the latest recommendation refresh, and a status of Inactive confirms that it's not yet applied to recommendations. For more information, see Enhanced infrastructure metrics in the Compute Optimizer User Guide.
      */
     enhancedInfrastructureMetrics?: EnhancedInfrastructureMetrics;
+    /**
+     * Describes the activation status of the inferred workload types preference. A status of Active confirms that the preference is applied in the latest recommendation refresh. A status of Inactive confirms that it's not yet applied to recommendations.
+     */
+    inferredWorkloadTypes?: InferredWorkloadTypesPreference;
   }
   export type EnhancedInfrastructureMetrics = "Active"|"Inactive"|string;
   export interface EnrollmentFilter {
@@ -550,9 +562,9 @@ declare namespace ComputeOptimizer {
     jobId?: JobId;
     s3Destination?: S3Destination;
   }
-  export type ExportableAutoScalingGroupField = "AccountId"|"AutoScalingGroupArn"|"AutoScalingGroupName"|"Finding"|"UtilizationMetricsCpuMaximum"|"UtilizationMetricsMemoryMaximum"|"UtilizationMetricsEbsReadOpsPerSecondMaximum"|"UtilizationMetricsEbsWriteOpsPerSecondMaximum"|"UtilizationMetricsEbsReadBytesPerSecondMaximum"|"UtilizationMetricsEbsWriteBytesPerSecondMaximum"|"UtilizationMetricsDiskReadOpsPerSecondMaximum"|"UtilizationMetricsDiskWriteOpsPerSecondMaximum"|"UtilizationMetricsDiskReadBytesPerSecondMaximum"|"UtilizationMetricsDiskWriteBytesPerSecondMaximum"|"UtilizationMetricsNetworkInBytesPerSecondMaximum"|"UtilizationMetricsNetworkOutBytesPerSecondMaximum"|"UtilizationMetricsNetworkPacketsInPerSecondMaximum"|"UtilizationMetricsNetworkPacketsOutPerSecondMaximum"|"LookbackPeriodInDays"|"CurrentConfigurationInstanceType"|"CurrentConfigurationDesiredCapacity"|"CurrentConfigurationMinSize"|"CurrentConfigurationMaxSize"|"CurrentOnDemandPrice"|"CurrentStandardOneYearNoUpfrontReservedPrice"|"CurrentStandardThreeYearNoUpfrontReservedPrice"|"CurrentVCpus"|"CurrentMemory"|"CurrentStorage"|"CurrentNetwork"|"RecommendationOptionsConfigurationInstanceType"|"RecommendationOptionsConfigurationDesiredCapacity"|"RecommendationOptionsConfigurationMinSize"|"RecommendationOptionsConfigurationMaxSize"|"RecommendationOptionsProjectedUtilizationMetricsCpuMaximum"|"RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum"|"RecommendationOptionsPerformanceRisk"|"RecommendationOptionsOnDemandPrice"|"RecommendationOptionsStandardOneYearNoUpfrontReservedPrice"|"RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice"|"RecommendationOptionsVcpus"|"RecommendationOptionsMemory"|"RecommendationOptionsStorage"|"RecommendationOptionsNetwork"|"LastRefreshTimestamp"|"CurrentPerformanceRisk"|"RecommendationOptionsSavingsOpportunityPercentage"|"RecommendationOptionsEstimatedMonthlySavingsCurrency"|"RecommendationOptionsEstimatedMonthlySavingsValue"|"EffectiveRecommendationPreferencesCpuVendorArchitectures"|"EffectiveRecommendationPreferencesEnhancedInfrastructureMetrics"|string;
+  export type ExportableAutoScalingGroupField = "AccountId"|"AutoScalingGroupArn"|"AutoScalingGroupName"|"Finding"|"UtilizationMetricsCpuMaximum"|"UtilizationMetricsMemoryMaximum"|"UtilizationMetricsEbsReadOpsPerSecondMaximum"|"UtilizationMetricsEbsWriteOpsPerSecondMaximum"|"UtilizationMetricsEbsReadBytesPerSecondMaximum"|"UtilizationMetricsEbsWriteBytesPerSecondMaximum"|"UtilizationMetricsDiskReadOpsPerSecondMaximum"|"UtilizationMetricsDiskWriteOpsPerSecondMaximum"|"UtilizationMetricsDiskReadBytesPerSecondMaximum"|"UtilizationMetricsDiskWriteBytesPerSecondMaximum"|"UtilizationMetricsNetworkInBytesPerSecondMaximum"|"UtilizationMetricsNetworkOutBytesPerSecondMaximum"|"UtilizationMetricsNetworkPacketsInPerSecondMaximum"|"UtilizationMetricsNetworkPacketsOutPerSecondMaximum"|"LookbackPeriodInDays"|"CurrentConfigurationInstanceType"|"CurrentConfigurationDesiredCapacity"|"CurrentConfigurationMinSize"|"CurrentConfigurationMaxSize"|"CurrentOnDemandPrice"|"CurrentStandardOneYearNoUpfrontReservedPrice"|"CurrentStandardThreeYearNoUpfrontReservedPrice"|"CurrentVCpus"|"CurrentMemory"|"CurrentStorage"|"CurrentNetwork"|"RecommendationOptionsConfigurationInstanceType"|"RecommendationOptionsConfigurationDesiredCapacity"|"RecommendationOptionsConfigurationMinSize"|"RecommendationOptionsConfigurationMaxSize"|"RecommendationOptionsProjectedUtilizationMetricsCpuMaximum"|"RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum"|"RecommendationOptionsPerformanceRisk"|"RecommendationOptionsOnDemandPrice"|"RecommendationOptionsStandardOneYearNoUpfrontReservedPrice"|"RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice"|"RecommendationOptionsVcpus"|"RecommendationOptionsMemory"|"RecommendationOptionsStorage"|"RecommendationOptionsNetwork"|"LastRefreshTimestamp"|"CurrentPerformanceRisk"|"RecommendationOptionsSavingsOpportunityPercentage"|"RecommendationOptionsEstimatedMonthlySavingsCurrency"|"RecommendationOptionsEstimatedMonthlySavingsValue"|"EffectiveRecommendationPreferencesCpuVendorArchitectures"|"EffectiveRecommendationPreferencesEnhancedInfrastructureMetrics"|"EffectiveRecommendationPreferencesInferredWorkloadTypes"|"InferredWorkloadTypes"|"RecommendationOptionsMigrationEffort"|string;
   export type ExportableAutoScalingGroupFields = ExportableAutoScalingGroupField[];
-  export type ExportableInstanceField = "AccountId"|"InstanceArn"|"InstanceName"|"Finding"|"FindingReasonCodes"|"LookbackPeriodInDays"|"CurrentInstanceType"|"UtilizationMetricsCpuMaximum"|"UtilizationMetricsMemoryMaximum"|"UtilizationMetricsEbsReadOpsPerSecondMaximum"|"UtilizationMetricsEbsWriteOpsPerSecondMaximum"|"UtilizationMetricsEbsReadBytesPerSecondMaximum"|"UtilizationMetricsEbsWriteBytesPerSecondMaximum"|"UtilizationMetricsDiskReadOpsPerSecondMaximum"|"UtilizationMetricsDiskWriteOpsPerSecondMaximum"|"UtilizationMetricsDiskReadBytesPerSecondMaximum"|"UtilizationMetricsDiskWriteBytesPerSecondMaximum"|"UtilizationMetricsNetworkInBytesPerSecondMaximum"|"UtilizationMetricsNetworkOutBytesPerSecondMaximum"|"UtilizationMetricsNetworkPacketsInPerSecondMaximum"|"UtilizationMetricsNetworkPacketsOutPerSecondMaximum"|"CurrentOnDemandPrice"|"CurrentStandardOneYearNoUpfrontReservedPrice"|"CurrentStandardThreeYearNoUpfrontReservedPrice"|"CurrentVCpus"|"CurrentMemory"|"CurrentStorage"|"CurrentNetwork"|"RecommendationOptionsInstanceType"|"RecommendationOptionsProjectedUtilizationMetricsCpuMaximum"|"RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum"|"RecommendationOptionsPlatformDifferences"|"RecommendationOptionsPerformanceRisk"|"RecommendationOptionsVcpus"|"RecommendationOptionsMemory"|"RecommendationOptionsStorage"|"RecommendationOptionsNetwork"|"RecommendationOptionsOnDemandPrice"|"RecommendationOptionsStandardOneYearNoUpfrontReservedPrice"|"RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice"|"RecommendationsSourcesRecommendationSourceArn"|"RecommendationsSourcesRecommendationSourceType"|"LastRefreshTimestamp"|"CurrentPerformanceRisk"|"RecommendationOptionsSavingsOpportunityPercentage"|"RecommendationOptionsEstimatedMonthlySavingsCurrency"|"RecommendationOptionsEstimatedMonthlySavingsValue"|"EffectiveRecommendationPreferencesCpuVendorArchitectures"|"EffectiveRecommendationPreferencesEnhancedInfrastructureMetrics"|string;
+  export type ExportableInstanceField = "AccountId"|"InstanceArn"|"InstanceName"|"Finding"|"FindingReasonCodes"|"LookbackPeriodInDays"|"CurrentInstanceType"|"UtilizationMetricsCpuMaximum"|"UtilizationMetricsMemoryMaximum"|"UtilizationMetricsEbsReadOpsPerSecondMaximum"|"UtilizationMetricsEbsWriteOpsPerSecondMaximum"|"UtilizationMetricsEbsReadBytesPerSecondMaximum"|"UtilizationMetricsEbsWriteBytesPerSecondMaximum"|"UtilizationMetricsDiskReadOpsPerSecondMaximum"|"UtilizationMetricsDiskWriteOpsPerSecondMaximum"|"UtilizationMetricsDiskReadBytesPerSecondMaximum"|"UtilizationMetricsDiskWriteBytesPerSecondMaximum"|"UtilizationMetricsNetworkInBytesPerSecondMaximum"|"UtilizationMetricsNetworkOutBytesPerSecondMaximum"|"UtilizationMetricsNetworkPacketsInPerSecondMaximum"|"UtilizationMetricsNetworkPacketsOutPerSecondMaximum"|"CurrentOnDemandPrice"|"CurrentStandardOneYearNoUpfrontReservedPrice"|"CurrentStandardThreeYearNoUpfrontReservedPrice"|"CurrentVCpus"|"CurrentMemory"|"CurrentStorage"|"CurrentNetwork"|"RecommendationOptionsInstanceType"|"RecommendationOptionsProjectedUtilizationMetricsCpuMaximum"|"RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum"|"RecommendationOptionsPlatformDifferences"|"RecommendationOptionsPerformanceRisk"|"RecommendationOptionsVcpus"|"RecommendationOptionsMemory"|"RecommendationOptionsStorage"|"RecommendationOptionsNetwork"|"RecommendationOptionsOnDemandPrice"|"RecommendationOptionsStandardOneYearNoUpfrontReservedPrice"|"RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice"|"RecommendationsSourcesRecommendationSourceArn"|"RecommendationsSourcesRecommendationSourceType"|"LastRefreshTimestamp"|"CurrentPerformanceRisk"|"RecommendationOptionsSavingsOpportunityPercentage"|"RecommendationOptionsEstimatedMonthlySavingsCurrency"|"RecommendationOptionsEstimatedMonthlySavingsValue"|"EffectiveRecommendationPreferencesCpuVendorArchitectures"|"EffectiveRecommendationPreferencesEnhancedInfrastructureMetrics"|"EffectiveRecommendationPreferencesInferredWorkloadTypes"|"InferredWorkloadTypes"|"RecommendationOptionsMigrationEffort"|string;
   export type ExportableInstanceFields = ExportableInstanceField[];
   export type ExportableLambdaFunctionField = "AccountId"|"FunctionArn"|"FunctionVersion"|"Finding"|"FindingReasonCodes"|"NumberOfInvocations"|"UtilizationMetricsDurationMaximum"|"UtilizationMetricsDurationAverage"|"UtilizationMetricsMemoryMaximum"|"UtilizationMetricsMemoryAverage"|"LookbackPeriodInDays"|"CurrentConfigurationMemorySize"|"CurrentConfigurationTimeout"|"CurrentCostTotal"|"CurrentCostAverage"|"RecommendationOptionsConfigurationMemorySize"|"RecommendationOptionsCostLow"|"RecommendationOptionsCostHigh"|"RecommendationOptionsProjectedUtilizationMetricsDurationLowerBound"|"RecommendationOptionsProjectedUtilizationMetricsDurationUpperBound"|"RecommendationOptionsProjectedUtilizationMetricsDurationExpected"|"LastRefreshTimestamp"|"CurrentPerformanceRisk"|"RecommendationOptionsSavingsOpportunityPercentage"|"RecommendationOptionsEstimatedMonthlySavingsCurrency"|"RecommendationOptionsEstimatedMonthlySavingsValue"|string;
   export type ExportableLambdaFunctionFields = ExportableLambdaFunctionField[];
@@ -735,7 +747,7 @@ declare namespace ComputeOptimizer {
   }
   export interface GetEffectiveRecommendationPreferencesResponse {
     /**
-     * The status of the enhanced infrastructure metrics recommendation preference. Considers all applicable preferences that you might have set at the resource, account, and organization level. A status of Active confirms that the preference is applied in the latest recommendation refresh, and a status of Inactive confirms that it's not yet applied. To validate whether the preference is applied to your last generated set of recommendations, review the effectiveRecommendationPreferences value in the response of the GetAutoScalingGroupRecommendations and GetEC2InstanceRecommendations actions.
+     * The status of the enhanced infrastructure metrics recommendation preference. Considers all applicable preferences that you might have set at the resource, account, and organization level. A status of Active confirms that the preference is applied in the latest recommendation refresh, and a status of Inactive confirms that it's not yet applied to recommendations. To validate whether the preference is applied to your last generated set of recommendations, review the effectiveRecommendationPreferences value in the response of the GetAutoScalingGroupRecommendations and GetEC2InstanceRecommendations actions. For more information, see Enhanced infrastructure metrics in the Compute Optimizer User Guide.
      */
     enhancedInfrastructureMetrics?: EnhancedInfrastructureMetrics;
   }
@@ -889,6 +901,9 @@ declare namespace ComputeOptimizer {
   export type High = number;
   export type Identifier = string;
   export type IncludeMemberAccounts = boolean;
+  export type InferredWorkloadType = "AmazonEmr"|"ApacheCassandra"|"ApacheHadoop"|"Memcached"|"Nginx"|"PostgreSql"|"Redis"|string;
+  export type InferredWorkloadTypes = InferredWorkloadType[];
+  export type InferredWorkloadTypesPreference = "Active"|"Inactive"|string;
   export type InstanceArn = string;
   export type InstanceArns = InstanceArn[];
   export type InstanceName = string;
@@ -938,13 +953,17 @@ declare namespace ComputeOptimizer {
      */
     lastRefreshTimestamp?: LastRefreshTimestamp;
     /**
-     * The risk of the current instance not meeting the performance needs of its workloads. The higher the risk, the more likely the current Lambda function requires more memory.
+     * The risk of the current instance not meeting the performance needs of its workloads. The higher the risk, the more likely the current instance cannot meet the performance requirements of its workload.
      */
     currentPerformanceRisk?: CurrentPerformanceRisk;
     /**
      * An object that describes the effective recommendation preferences for the instance.
      */
     effectiveRecommendationPreferences?: EffectiveRecommendationPreferences;
+    /**
+     * The applications that might be running on the instance as inferred by Compute Optimizer. Compute Optimizer can infer if one of the following applications might be running on the instance:    AmazonEmr - Infers that Amazon EMR might be running on the instance.    ApacheCassandra - Infers that Apache Cassandra might be running on the instance.    ApacheHadoop - Infers that Apache Hadoop might be running on the instance.    Memcached - Infers that Memcached might be running on the instance.    NGINX - Infers that NGINX might be running on the instance.    PostgreSql - Infers that PostgreSQL might be running on the instance.    Redis - Infers that Redis might be running on the instance.  
+     */
+    inferredWorkloadTypes?: InferredWorkloadTypes;
   }
   export type InstanceRecommendationFindingReasonCode = "CPUOverprovisioned"|"CPUUnderprovisioned"|"MemoryOverprovisioned"|"MemoryUnderprovisioned"|"EBSThroughputOverprovisioned"|"EBSThroughputUnderprovisioned"|"EBSIOPSOverprovisioned"|"EBSIOPSUnderprovisioned"|"NetworkBandwidthOverprovisioned"|"NetworkBandwidthUnderprovisioned"|"NetworkPPSOverprovisioned"|"NetworkPPSUnderprovisioned"|"DiskIOPSOverprovisioned"|"DiskIOPSUnderprovisioned"|"DiskThroughputOverprovisioned"|"DiskThroughputUnderprovisioned"|string;
   export type InstanceRecommendationFindingReasonCodes = InstanceRecommendationFindingReasonCode[];
@@ -973,6 +992,10 @@ declare namespace ComputeOptimizer {
      * An object that describes the savings opportunity for the instance recommendation option. Savings opportunity includes the estimated monthly savings amount and percentage.
      */
     savingsOpportunity?: SavingsOpportunity;
+    /**
+     * The level of effort required to migrate from the current instance type to the recommended instance type. For example, the migration effort is Low if Amazon EMR is the inferred workload type and an Amazon Web Services Graviton instance type is recommended. The migration effort is Medium if a workload type couldn't be inferred but an Amazon Web Services Graviton instance type is recommended. The migration effort is VeryLow if both the current and recommended instance types are of the same CPU architecture.
+     */
+    migrationEffort?: MigrationEffort;
   }
   export type InstanceRecommendations = InstanceRecommendation[];
   export type InstanceType = string;
@@ -1075,7 +1098,7 @@ declare namespace ComputeOptimizer {
      */
     memorySizeRecommendationOptions?: LambdaFunctionMemoryRecommendationOptions;
     /**
-     * The risk of the current Lambda function not meeting the performance needs of its workloads. The higher the risk, the more likely the current Lambda function configuration is underperforming in its workload.
+     * The risk of the current Lambda function not meeting the performance needs of its workloads. The higher the risk, the more likely the current Lambda function requires more memory.
      */
     currentPerformanceRisk?: CurrentPerformanceRisk;
   }
@@ -1125,6 +1148,7 @@ declare namespace ComputeOptimizer {
   export type MetricStatistic = "Maximum"|"Average"|string;
   export type MetricValue = number;
   export type MetricValues = MetricValue[];
+  export type MigrationEffort = "VeryLow"|"Low"|"Medium"|"High"|string;
   export type MinSize = number;
   export type NextToken = string;
   export type NumberOfInvocations = number;
@@ -1155,13 +1179,17 @@ declare namespace ComputeOptimizer {
      */
     resourceType: ResourceType;
     /**
-     * An object that describes the scope of the recommendation preference to create. You can create recommendation preferences at the organization level (for management accounts of an organization only), account level, and resource level. For more information, see Activating enhanced infrastructure metrics in the Compute Optimizer User Guide.  You cannot create recommendation preferences for Auto Scaling groups at the organization and account levels. You can create recommendation preferences for Auto Scaling groups only at the resource level by specifying a scope name of ResourceArn and a scope value of the Auto Scaling group Amazon Resource Name (ARN). This will configure the preference for all instances that are part of the specified the Auto Scaling group. 
+     * An object that describes the scope of the recommendation preference to create. You can create recommendation preferences at the organization level (for management accounts of an organization only), account level, and resource level. For more information, see Activating enhanced infrastructure metrics in the Compute Optimizer User Guide.  You cannot create recommendation preferences for Auto Scaling groups at the organization and account levels. You can create recommendation preferences for Auto Scaling groups only at the resource level by specifying a scope name of ResourceArn and a scope value of the Auto Scaling group Amazon Resource Name (ARN). This will configure the preference for all instances that are part of the specified Auto Scaling group. You also cannot create recommendation preferences at the resource level for instances that are part of an Auto Scaling group. You can create recommendation preferences at the resource level only for standalone instances. 
      */
     scope?: Scope;
     /**
-     * The status of the enhanced infrastructure metrics recommendation preference to create or update. A status of Active confirms that the preference is applied in the latest recommendation refresh, and a status of Inactive confirms that it's not yet applied.
+     * The status of the enhanced infrastructure metrics recommendation preference to create or update. Specify the Active status to activate the preference, or specify Inactive to deactivate the preference. For more information, see Enhanced infrastructure metrics in the Compute Optimizer User Guide.
      */
     enhancedInfrastructureMetrics?: EnhancedInfrastructureMetrics;
+    /**
+     * The status of the inferred workload types recommendation preference to create or update.  The inferred workload type feature is active by default. To deactivate it, create a recommendation preference.  Specify the Inactive status to deactivate the feature, or specify Active to activate it. For more information, see Inferred workload types in the Compute Optimizer User Guide.
+     */
+    inferredWorkloadTypes?: InferredWorkloadTypesPreference;
   }
   export interface PutRecommendationPreferencesResponse {
   }
@@ -1209,7 +1237,7 @@ declare namespace ComputeOptimizer {
   }
   export type RecommendationExportJobs = RecommendationExportJob[];
   export type RecommendationOptions = InstanceRecommendationOption[];
-  export type RecommendationPreferenceName = "EnhancedInfrastructureMetrics"|string;
+  export type RecommendationPreferenceName = "EnhancedInfrastructureMetrics"|"InferredWorkloadTypes"|string;
   export type RecommendationPreferenceNames = RecommendationPreferenceName[];
   export interface RecommendationPreferences {
     /**
@@ -1227,9 +1255,13 @@ declare namespace ComputeOptimizer {
      */
     resourceType?: ResourceType;
     /**
-     * The status of the enhanced infrastructure metrics recommendation preference. A status of Active confirms that the preference is applied in the latest recommendation refresh, and a status of Inactive confirms that it's not yet applied.
+     * The status of the enhanced infrastructure metrics recommendation preference. A status of Active confirms that the preference is applied in the latest recommendation refresh, and a status of Inactive confirms that it's not yet applied to recommendations. For more information, see Enhanced infrastructure metrics in the Compute Optimizer User Guide.
      */
     enhancedInfrastructureMetrics?: EnhancedInfrastructureMetrics;
+    /**
+     * The status of the inferred workload types recommendation preference. A status of Active confirms that the preference is applied in the latest recommendation refresh. A status of Inactive confirms that it's not yet applied to recommendations.
+     */
+    inferredWorkloadTypes?: InferredWorkloadTypesPreference;
   }
   export type RecommendationPreferencesDetails = RecommendationPreferencesDetail[];
   export interface RecommendationSource {
@@ -1285,7 +1317,7 @@ declare namespace ComputeOptimizer {
   }
   export type RecommendedOptionProjectedMetrics = RecommendedOptionProjectedMetric[];
   export type ResourceArn = string;
-  export type ResourceType = "Ec2Instance"|"AutoScalingGroup"|"EbsVolume"|"LambdaFunction"|string;
+  export type ResourceType = "Ec2Instance"|"AutoScalingGroup"|"EbsVolume"|"LambdaFunction"|"NotApplicable"|string;
   export interface S3Destination {
     /**
      * The name of the Amazon S3 bucket used as the destination of an export file.
@@ -1312,11 +1344,11 @@ declare namespace ComputeOptimizer {
   }
   export interface SavingsOpportunity {
     /**
-     * The estimated monthly savings possible as a percentage of monthly cost.
+     * The estimated monthly savings possible as a percentage of monthly cost by adopting Compute Optimizer recommendations for a given resource.
      */
     savingsOpportunityPercentage?: SavingsOpportunityPercentage;
     /**
-     * An object that describes the estimated monthly savings amount possible based on On-Demand instance pricing.
+     * An object that describes the estimated monthly savings amount possible, based on On-Demand instance pricing, by adopting Compute Optimizer recommendations for a given resource.
      */
     estimatedMonthlySavings?: EstimatedMonthlySavings;
   }

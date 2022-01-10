@@ -292,11 +292,11 @@ declare class TranscribeService extends Service {
    */
   untagResource(callback?: (err: AWSError, data: TranscribeService.Types.UntagResourceResponse) => void): Request<TranscribeService.Types.UntagResourceResponse, AWSError>;
   /**
-   * Updates the call analytics category with new values. The UpdateCallAnalyticsCategory operation overwrites all of the existing information with the values that you provide in the request. 
+   * Updates the call analytics category with new values. The UpdateCallAnalyticsCategory operation overwrites all of the existing information with the values that you provide in the request.
    */
   updateCallAnalyticsCategory(params: TranscribeService.Types.UpdateCallAnalyticsCategoryRequest, callback?: (err: AWSError, data: TranscribeService.Types.UpdateCallAnalyticsCategoryResponse) => void): Request<TranscribeService.Types.UpdateCallAnalyticsCategoryResponse, AWSError>;
   /**
-   * Updates the call analytics category with new values. The UpdateCallAnalyticsCategory operation overwrites all of the existing information with the values that you provide in the request. 
+   * Updates the call analytics category with new values. The UpdateCallAnalyticsCategory operation overwrites all of the existing information with the values that you provide in the request.
    */
   updateCallAnalyticsCategory(callback?: (err: AWSError, data: TranscribeService.Types.UpdateCallAnalyticsCategoryResponse) => void): Request<TranscribeService.Types.UpdateCallAnalyticsCategoryResponse, AWSError>;
   /**
@@ -331,7 +331,7 @@ declare namespace TranscribeService {
      */
     StartTime?: TimestampMilliseconds;
     /**
-     * A value that indicates the end of the time range in milliseconds. To set absolute time range, you must specify a start time and an end time. For example, if you specify the following values:   StartTime - 10000   Endtime - 50000   The time range is set between 10,000 milliseconds and 50,000 milliseconds into the call. 
+     * A value that indicates the end of the time range in milliseconds. To set absolute time range, you must specify a start time and an end time. For example, if you specify the following values:   StartTime - 10000   Endtime - 50000   The time range is set between 10,000 milliseconds and 50,000 milliseconds into the call.
      */
     EndTime?: TimestampMilliseconds;
     /**
@@ -356,7 +356,7 @@ declare namespace TranscribeService {
      */
     CallAnalyticsJobStatus?: CallAnalyticsJobStatus;
     /**
-     * If you know the language spoken between the customer and the agent, specify a language code for this field. If you don't know the language, you can leave this field blank, and Amazon Transcribe will use machine learning to automatically identify the language. To improve the accuracy of language identification, you can provide an array containing the possible language codes for the language spoken in your audio. Refer to Supported languages and language-specific features for additional information.
+     * If you know the language spoken between the customer and the agent, specify a language code for this field. If you don't know the language, you can leave this field blank, and Amazon Transcribe will use machine learning to automatically identify the language. To improve the accuracy of language identification, you can provide an array containing the possible language codes for the language spoken in your audio. Refer to Supported languages for additional information.
      */
     LanguageCode?: LanguageCode;
     /**
@@ -364,7 +364,7 @@ declare namespace TranscribeService {
      */
     MediaSampleRateHertz?: MediaSampleRateHertz;
     /**
-     * The format of the input audio file. Note: for call analytics jobs, only the following media formats are supported: MP3, MP4, WAV, FLAC, OGG, and WebM. 
+     * The format of the input audio file. Note: for call analytics jobs, only the following media formats are supported: MP3, MP4, WAV, FLAC, OGG, and WebM.
      */
     MediaFormat?: MediaFormat;
     Media?: Media;
@@ -390,7 +390,7 @@ declare namespace TranscribeService {
      */
     DataAccessRoleArn?: DataAccessRoleArn;
     /**
-     * A value between zero and one that Amazon Transcribe assigned to the language that it identified in the source audio. This value appears only when you don't provide a single language code. Larger values indicate that Amazon Transcribe has higher confidence in the language that it identified
+     * A value between zero and one that Amazon Transcribe assigned to the language that it identified in the source audio. This value appears only when you don't provide a single language code. Larger values indicate that Amazon Transcribe has higher confidence in the language that it identified.
      */
     IdentifiedLanguageScore?: IdentifiedLanguageScore;
     /**
@@ -422,7 +422,7 @@ declare namespace TranscribeService {
     LanguageModelName?: ModelName;
     ContentRedaction?: ContentRedaction;
     /**
-     * When you run a call analytics job, you can specify the language spoken in the audio, or you can have Amazon Transcribe identify the language for you. To specify a language, specify an array with one language code. If you don't know the language, you can leave this field blank and Amazon Transcribe will use machine learning to identify the language for you. To improve the ability of Amazon Transcribe to correctly identify the language, you can provide an array of the languages that can be present in the audio. Refer to Supported languages and language-specific features for additional information.
+     * When you run a call analytics job, you can specify the language spoken in the audio, or you can have Amazon Transcribe identify the language for you. To specify a language, specify an array with one language code. If you don't know the language, you can leave this field blank and Amazon Transcribe will use machine learning to identify the language for you. To improve the ability of Amazon Transcribe to correctly identify the language, you can provide an array of the languages that can be present in the audio. Refer to Supported languages for additional information.
      */
     LanguageOptions?: LanguageOptions;
     /**
@@ -510,7 +510,7 @@ declare namespace TranscribeService {
      */
     CategoryName: CategoryName;
     /**
-     * To create a category, you must specify between 1 and 20 rules. For each rule, you specify a filter to be applied to the attributes of the call. For example, you can specify a sentiment filter to detect if the customer's sentiment was negative or neutral. 
+     * To create a category, you must specify between 1 and 20 rules. For each rule, you specify a filter to be applied to the attributes of the call. For example, you can specify a sentiment filter to detect if the customer's sentiment was negative or neutral.
      */
     Rules: RuleList;
   }
@@ -574,7 +574,7 @@ declare namespace TranscribeService {
      */
     LanguageCode: LanguageCode;
     /**
-     * The location in Amazon S3 of the text file you use to define your custom vocabulary. The URI must be in the same Amazon Web Services Region as the resource that you're calling. Enter information about your VocabularyFileUri in the following format:   https://s3.&lt;aws-region&gt;.amazonaws.com/&lt;bucket-name&gt;/&lt;keyprefix&gt;/&lt;objectkey&gt;   The following is an example URI for a vocabulary file that is stored in Amazon S3:  https://s3.us-east-1.amazonaws.com/AWSDOC-EXAMPLE-BUCKET/vocab.txt  For more information about Amazon S3 object names, see Object Keys in the Amazon S3 Developer Guide. For more information about custom vocabularies, see Medical Custom Vocabularies.
+     * The location in Amazon S3 of the text file you use to define your custom vocabulary. The URI must be in the same Amazon Web Services Region as the resource that you're calling. Enter information about your VocabularyFileUri in the following format:  https://s3.&lt;aws-region&gt;.amazonaws.com/&lt;bucket-name&gt;/&lt;keyprefix&gt;/&lt;objectkey&gt;  The following is an example URI for a vocabulary file that is stored in Amazon S3:  https://s3.us-east-1.amazonaws.com/AWSDOC-EXAMPLE-BUCKET/vocab.txt  For more information about Amazon S3 object names, see Object Keys in the Amazon S3 Developer Guide. For more information about custom vocabularies, see Medical Custom Vocabularies.
      */
     VocabularyFileUri: Uri;
     /**
@@ -646,7 +646,7 @@ declare namespace TranscribeService {
      */
     VocabularyName: VocabularyName;
     /**
-     * The language code of the vocabulary entries. For a list of languages and their corresponding language codes, see transcribe-whatis.
+     * The language code of the vocabulary entries. For a list of languages and their corresponding language codes, see table-language-matrix.
      */
     LanguageCode: LanguageCode;
     /**
@@ -654,7 +654,7 @@ declare namespace TranscribeService {
      */
     Phrases?: Phrases;
     /**
-     * The S3 location of the text file that contains the definition of the custom vocabulary. The URI must be in the same region as the API endpoint that you are calling. The general form is: For more information about S3 object names, see Object Keys in the Amazon S3 Developer Guide. For more information about custom vocabularies, see Custom vocabularies.
+     * The S3 location of the text file that contains the definition of the custom vocabulary. The URI must be in the same region as the API endpoint that you are calling. The general form is:  https://s3.&lt;Amazon Web Services-region&gt;.amazonaws.com/&lt;AWSDOC-EXAMPLE-BUCKET&gt;/&lt;keyprefix&gt;/&lt;objectkey&gt;   For example:  https://s3.us-east-1.amazonaws.com/AWSDOC-EXAMPLE-BUCKET/vocab.txt  For more information about S3 object names, see Object Keys in the Amazon S3 Developer Guide. For more information about custom vocabularies, see Custom vocabularies.
      */
     VocabularyFileUri?: Uri;
     /**
@@ -912,7 +912,7 @@ declare namespace TranscribeService {
      */
     ParticipantRole?: ParticipantRole;
     /**
-     * An object you can use to specify a time range (in milliseconds) for when you'd want to find the interruption. For example, you could search for an interruption between the 30,000 millisecond mark and the 45,000 millisecond mark. You could also specify the time period as the first 15,000 milliseconds or the last 15,000 milliseconds. 
+     * An object you can use to specify a time range (in milliseconds) for when you'd want to find the interruption. For example, you could search for an interruption between the 30,000 millisecond mark and the 45,000 millisecond mark. You could also specify the time period as the first 15,000 milliseconds or the last 15,000 milliseconds.
      */
     AbsoluteTimeRange?: AbsoluteTimeRange;
     /**
@@ -939,15 +939,15 @@ declare namespace TranscribeService {
   export type LanguageCode = "af-ZA"|"ar-AE"|"ar-SA"|"cy-GB"|"da-DK"|"de-CH"|"de-DE"|"en-AB"|"en-AU"|"en-GB"|"en-IE"|"en-IN"|"en-US"|"en-WL"|"es-ES"|"es-US"|"fa-IR"|"fr-CA"|"fr-FR"|"ga-IE"|"gd-GB"|"he-IL"|"hi-IN"|"id-ID"|"it-IT"|"ja-JP"|"ko-KR"|"ms-MY"|"nl-NL"|"pt-BR"|"pt-PT"|"ru-RU"|"ta-IN"|"te-IN"|"tr-TR"|"zh-CN"|"zh-TW"|"th-TH"|"en-ZA"|"en-NZ"|string;
   export interface LanguageIdSettings {
     /**
-     * The name of the vocabulary you want to use when processing your transcription job. The vocabulary you specify must have the same language code as the transcription job; if the languages don't match, the vocabulary won't be applied.
+     * The name of the vocabulary you want to use when processing your transcription job. The vocabulary you specify must have the same language codes as the transcription job; if the languages don't match, the vocabulary isn't applied.
      */
     VocabularyName?: VocabularyName;
     /**
-     * The name of the vocabulary filter you want to use when transcribing your audio. The filter you specify must have the same language code as the transcription job; if the languages don't match, the vocabulary filter won't be applied.
+     * The name of the vocabulary filter you want to use when transcribing your audio. The filter you specify must have the same language codes as the transcription job; if the languages don't match, the vocabulary filter isn't be applied.
      */
     VocabularyFilterName?: VocabularyFilterName;
     /**
-     * The name of the language model you want to use when transcribing your audio. The model you specify must have the same language code as the transcription job; if the languages don't match, the language model won't be applied.
+     * The name of the language model you want to use when transcribing your audio. The model you specify must have the same language codes as the transcription job; if the languages don't match, the language model isn't be applied.
      */
     LanguageModelName?: ModelName;
   }
@@ -1244,11 +1244,11 @@ declare namespace TranscribeService {
   export type MaxSpeakers = number;
   export interface Media {
     /**
-     * The S3 object location of the input media file. The URI must be in the same region as the API endpoint that you are calling. The general form is: For example: For more information about S3 object names, see Object Keys in the Amazon S3 Developer Guide.
+     * The S3 object location of the input media file. The URI must be in the same region as the API endpoint that you are calling. The general form is:   s3://&lt;AWSDOC-EXAMPLE-BUCKET&gt;/&lt;keyprefix&gt;/&lt;objectkey&gt;  For example:  s3://AWSDOC-EXAMPLE-BUCKET/example.mp4   s3://AWSDOC-EXAMPLE-BUCKET/mediadocs/example.mp4  For more information about S3 object names, see Object Keys in the Amazon S3 Developer Guide.
      */
     MediaFileUri?: Uri;
     /**
-     *  The S3 object location for your redacted output media file. This is only supported for call analytics jobs.
+     * The S3 object location for your redacted output media file. This is only supported for call analytics jobs.
      */
     RedactedMediaFileUri?: Uri;
   }
@@ -1275,7 +1275,7 @@ declare namespace TranscribeService {
      */
     LanguageCode?: LanguageCode;
     /**
-     * The sample rate, in Hertz, of the source audio containing medical information. If you don't specify the sample rate, Amazon Transcribe Medical determines it for you. If you choose to specify the sample rate, it must match the rate detected by Amazon Transcribe Medical. In most cases, you should leave the MedicalMediaSampleHertz blank and let Amazon Transcribe Medical determine the sample rate.
+     * The sample rate, in Hertz, of the source audio containing medical information. If you don't specify the sample rate, Amazon Transcribe Medical determines it for you. If you choose to specify the sample rate, it must match the rate detected by Amazon Transcribe Medical.
      */
     MediaSampleRateHertz?: MediaSampleRateHertz;
     /**
@@ -1300,7 +1300,7 @@ declare namespace TranscribeService {
      */
     CompletionTime?: DateTime;
     /**
-     * If the TranscriptionJobStatus field is FAILED, this field contains information about why the job failed. The FailureReason field contains one of the following values:    Unsupported media format- The media format specified in the MediaFormat field of the request isn't valid. See the description of the MediaFormat field for a list of valid values.    The media format provided does not match the detected media format- The media format of the audio file doesn't match the format specified in the MediaFormat field in the request. Check the media format of your media file and make sure the two values match.    Invalid sample rate for audio file- The sample rate specified in the MediaSampleRateHertz of the request isn't valid. The sample rate must be between 8,000 and 48,000 Hertz.    The sample rate provided does not match the detected sample rate- The sample rate in the audio file doesn't match the sample rate specified in the MediaSampleRateHertz field in the request. Check the sample rate of your media file and make sure that the two values match.    Invalid file size: file size too large- The size of your audio file is larger than what Amazon Transcribe Medical can process. For more information, see Guidelines and Quotas in the Amazon Transcribe Medical Guide     Invalid number of channels: number of channels too large- Your audio contains more channels than Amazon Transcribe Medical is configured to process. To request additional channels, see Amazon Transcribe Medical Endpoints and Quotas in the Amazon Web Services General Reference   
+     * If the TranscriptionJobStatus field is FAILED, this field contains information about why the job failed. The FailureReason field contains one of the following values:    Unsupported media format- The media format specified in the MediaFormat field of the request isn't valid. See the description of the MediaFormat field for a list of valid values.    The media format provided does not match the detected media format- The media format of the audio file doesn't match the format specified in the MediaFormat field in the request. Check the media format of your media file and make sure the two values match.    Invalid sample rate for audio file- The sample rate specified in the MediaSampleRateHertz of the request isn't valid. The sample rate must be between 8,000 and 48,000 Hertz.    The sample rate provided does not match the detected sample rate- The sample rate in the audio file doesn't match the sample rate specified in the MediaSampleRateHertz field in the request. Check the sample rate of your media file and make sure that the two values match.    Invalid file size: file size too large- The size of your audio file is larger than what Amazon Transcribe Medical can process. For more information, see Guidelines and Quotas in the Amazon Transcribe Medical Guide.    Invalid number of channels: number of channels too large- Your audio contains more channels than Amazon Transcribe Medical is configured to process. To request additional channels, see Amazon Transcribe Medical Endpoints and Quotas in the Amazon Web Services General Reference.  
      */
     FailureReason?: FailureReason;
     /**
@@ -1381,7 +1381,7 @@ declare namespace TranscribeService {
      */
     MaxSpeakerLabels?: MaxSpeakers;
     /**
-     * Instructs Amazon Transcribe Medical to process each audio channel separately and then merge the transcription output of each channel into a single transcription. Amazon Transcribe Medical also produces a transcription of each item detected on an audio channel, including the start time and end time of the item and alternative transcriptions of item. The alternative transcriptions also come with confidence scores provided by Amazon Transcribe Medical. You can't set both ShowSpeakerLabels and ChannelIdentification in the same request. If you set both, your request returns a BadRequestException 
+     * Instructs Amazon Transcribe Medical to process each audio channel separately and then merge the transcription output of each channel into a single transcription. Amazon Transcribe Medical also produces a transcription of each item detected on an audio channel, including the start time and end time of the item and alternative transcriptions of item. The alternative transcriptions also come with confidence scores provided by Amazon Transcribe Medical. You can't set both ShowSpeakerLabels and ChannelIdentification in the same request. If you set both, your request returns a BadRequestException.
      */
     ChannelIdentification?: Boolean;
     /**
@@ -1490,7 +1490,7 @@ declare namespace TranscribeService {
      */
     ParticipantRole?: ParticipantRole;
     /**
-     * Set to TRUE to look for sentiments that weren't specified in the request. 
+     * Set to TRUE to look for sentiments that weren't specified in the request.
      */
     Negate?: Boolean;
   }
@@ -1510,7 +1510,7 @@ declare namespace TranscribeService {
      */
     MaxSpeakerLabels?: MaxSpeakers;
     /**
-     * Instructs Amazon Transcribe to process each audio channel separately and then merge the transcription output of each channel into a single transcription.  Amazon Transcribe also produces a transcription of each item detected on an audio channel, including the start time and end time of the item and alternative transcriptions of the item including the confidence that Amazon Transcribe has in the transcription. You can't set both ShowSpeakerLabels and ChannelIdentification in the same request. If you set both, your request returns a BadRequestException.
+     * Instructs Amazon Transcribe to process each audio channel separately and then merge the transcription output of each channel into a single transcription. Amazon Transcribe also produces a transcription of each item detected on an audio channel, including the start time and end time of the item and alternative transcriptions of the item including the confidence that Amazon Transcribe has in the transcription. You can't set both ShowSpeakerLabels and ChannelIdentification in the same request. If you set both, your request returns a BadRequestException.
      */
     ChannelIdentification?: Boolean;
     /**
@@ -1538,11 +1538,11 @@ declare namespace TranscribeService {
     CallAnalyticsJobName: CallAnalyticsJobName;
     Media: Media;
     /**
-     * The Amazon S3 location where the output of the call analytics job is stored. You can provide the following location types to store the output of call analytics job:   s3://DOC-EXAMPLE-BUCKET1  If you specify a bucket, Amazon Transcribe saves the output of the analytics job as a JSON file at the root level of the bucket.   s3://DOC-EXAMPLE-BUCKET1/folder/ f you specify a path, Amazon Transcribe saves the output of the analytics job as s3://DOC-EXAMPLE-BUCKET1/folder/your-transcription-job-name.json If you specify a folder, you must provide a trailing slash.   s3://DOC-EXAMPLE-BUCKET1/folder/filename.json  If you provide a path that has the filename specified, Amazon Transcribe saves the output of the analytics job as s3://DOC-EXAMPLEBUCKET1/folder/filename.json   You can specify an Amazon Web Services Key Management Service (KMS) key to encrypt the output of our analytics job using the OutputEncryptionKMSKeyId parameter. If you don't specify a KMS key, Amazon Transcribe uses the default Amazon S3 key for server-side encryption of the analytics job output that is placed in your S3 bucket.
+     * The Amazon S3 location where the output of the call analytics job is stored. You can provide the following location types to store the output of call analytics job:   s3://DOC-EXAMPLE-BUCKET1  If you specify a bucket, Amazon Transcribe saves the output of the analytics job as a JSON file at the root level of the bucket.   s3://DOC-EXAMPLE-BUCKET1/folder/ f you specify a path, Amazon Transcribe saves the output of the analytics job as s3://DOC-EXAMPLE-BUCKET1/folder/your-transcription-job-name.json. If you specify a folder, you must provide a trailing slash.   s3://DOC-EXAMPLE-BUCKET1/folder/filename.json.  If you provide a path that has the filename specified, Amazon Transcribe saves the output of the analytics job as s3://DOC-EXAMPLEBUCKET1/folder/filename.json.   You can specify an Amazon Web Services Key Management Service (KMS) key to encrypt the output of our analytics job using the OutputEncryptionKMSKeyId parameter. If you don't specify a KMS key, Amazon Transcribe uses the default Amazon S3 key for server-side encryption of the analytics job output that is placed in your S3 bucket.
      */
     OutputLocation?: Uri;
     /**
-     * The Amazon Resource Name (ARN) of the Amazon Web Services Key Management Service key used to encrypt the output of the call analytics job. The user calling the operation must have permission to use the specified KMS key. You use either of the following to identify an Amazon Web Services KMS key in the current account:   KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"   KMS Key Alias: "alias/ExampleAlias"    You can use either of the following to identify a KMS key in the current account or another account:   Amazon Resource Name (ARN) of a KMS key in the current account or another account: "arn:aws:kms:region:account ID:key/1234abcd-12ab-34cd-56ef1234567890ab"   ARN of a KMS Key Alias: "arn:aws:kms:region:account ID:alias/ExampleAlias"   If you don't specify an encryption key, the output of the call analytics job is encrypted with the default Amazon S3 key (SSE-S3). If you specify a KMS key to encrypt your output, you must also specify an output location in the OutputLocation parameter. 
+     * The Amazon Resource Name (ARN) of the Amazon Web Services Key Management Service key used to encrypt the output of the call analytics job. The user calling the operation must have permission to use the specified KMS key. You use either of the following to identify an Amazon Web Services KMS key in the current account:   KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"   KMS Key Alias: "alias/ExampleAlias"    You can use either of the following to identify a KMS key in the current account or another account:   Amazon Resource Name (ARN) of a KMS key in the current account or another account: "arn:aws:kms:region:account ID:key/1234abcd-12ab-34cd-56ef1234567890ab"   ARN of a KMS Key Alias: "arn:aws:kms:region:accountID:alias/ExampleAlias"   If you don't specify an encryption key, the output of the call analytics job is encrypted with the default Amazon S3 key (SSE-S3). If you specify a KMS key to encrypt your output, you must also specify an output location in the OutputLocation parameter. 
      */
     OutputEncryptionKMSKeyId?: KMSKeyId;
     /**
@@ -1550,7 +1550,7 @@ declare namespace TranscribeService {
      */
     DataAccessRoleArn: DataAccessRoleArn;
     /**
-     * A Settings object that provides optional settings for a call analytics job. 
+     * A Settings object that provides optional settings for a call analytics job.
      */
     Settings?: CallAnalyticsJobSettings;
     /**
@@ -1717,7 +1717,7 @@ declare namespace TranscribeService {
   }
   export interface SubtitlesOutput {
     /**
-     * Specify the output format for your subtitle file; if you select both SRT and VTT formats, two output files are genereated.
+     * Specify the output format for your subtitle file; if you select both SRT and VTT formats, two output files are generated.
      */
     Formats?: SubtitleFormats;
     /**
@@ -1804,7 +1804,7 @@ declare namespace TranscribeService {
      */
     LanguageCode?: LanguageCode;
     /**
-     * The sample rate, in Hertz, of the audio track in the input media file. 
+     * The sample rate, in Hertz (Hz), of the audio track in the input media file.
      */
     MediaSampleRateHertz?: MediaSampleRateHertz;
     /**
@@ -1872,7 +1872,7 @@ declare namespace TranscribeService {
      */
     Subtitles?: SubtitlesOutput;
     /**
-     * Language-specific settings that can be specified when language identification is enabled for your transcription job. These settings include VocabularyName, VocabularyFilterName, and LanguageModelNameLanguageModelName.
+     * Language-specific settings that can be specified when language identification is enabled for your transcription job. These settings include VocabularyName, VocabularyFilterName, and LanguageModelName.
      */
     LanguageIdSettings?: LanguageIdSettingsMap;
   }
@@ -1945,13 +1945,13 @@ declare namespace TranscribeService {
      */
     CategoryName: CategoryName;
     /**
-     * The rules used for the updated analytics category. The rules that you provide in this field replace the ones that are currently being used. 
+     * The rules used for the updated analytics category. The rules that you provide in this field replace the ones that are currently being used.
      */
     Rules: RuleList;
   }
   export interface UpdateCallAnalyticsCategoryResponse {
     /**
-     * The attributes describing the analytics category. You can see information such as the rules that you've used to update the category and when the category was originally created. 
+     * The attributes describing the analytics category. You can see information such as the rules that you've used to update the category and when the category was originally created.
      */
     CategoryProperties?: CategoryProperties;
   }
@@ -1961,7 +1961,7 @@ declare namespace TranscribeService {
      */
     VocabularyName: VocabularyName;
     /**
-     * The language code of the language used for the entries in the updated vocabulary. US English (en-US) is the only valid language code in Amazon Transcribe Medical.
+     * The language code of the language used for the entries in the updated vocabulary. U.S. English (en-US) is the only valid language code in Amazon Transcribe Medical.
      */
     LanguageCode: LanguageCode;
     /**
@@ -2021,7 +2021,7 @@ declare namespace TranscribeService {
      */
     VocabularyName: VocabularyName;
     /**
-     * The language code of the vocabulary entries. For a list of languages and their corresponding language codes, see transcribe-whatis.
+     * The language code of the vocabulary entries. For a list of languages and their corresponding language codes, see Supported languages.
      */
     LanguageCode: LanguageCode;
     /**
@@ -2029,7 +2029,7 @@ declare namespace TranscribeService {
      */
     Phrases?: Phrases;
     /**
-     * The S3 location of the text file that contains the definition of the custom vocabulary. The URI must be in the same region as the API endpoint that you are calling. The general form is  For example: For more information about S3 object names, see Object Keys in the Amazon S3 Developer Guide. For more information about custom vocabularies, see Custom Vocabularies.
+     * The S3 location of the text file that contains the definition of the custom vocabulary. The URI must be in the same region as the API endpoint that you are calling. The general form is:  https://s3.&lt;aws-region&gt;.amazonaws.com/&lt;AWSDOC-EXAMPLE-BUCKET&gt;/&lt;keyprefix&gt;/&lt;objectkey&gt;  For example:  https://s3.us-east-1.amazonaws.com/AWSDOC-EXAMPLE-BUCKET/vocab.txt  For more information about S3 object names, see Object Keys in the Amazon S3 Developer Guide. For more information about custom vocabularies, see Custom Vocabularies.
      */
     VocabularyFileUri?: Uri;
   }

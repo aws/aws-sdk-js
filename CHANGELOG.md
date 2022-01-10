@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1053.0-->
+<!--LATEST=2.1054.0-->
 <!--ENTRYINSERT-->
+
+## 2.1054.0
+* feature: ComputeOptimizer: Adds support for new Compute Optimizer capability that makes it easier for customers to optimize their EC2 instances by leveraging multiple CPU architectures.
+* feature: DataBrew: This SDK release adds support for specifying a Bucket Owner for an S3 location.
+* feature: EC2: New feature: Updated EC2 API to support faster launching for Windows images. Optimized images are pre-provisioned, using snapshots to launch instances up to 65% faster.
+* feature: LookoutMetrics: This release adds FailureType in the response of DescribeAnomalyDetector.
 
 ## 2.1053.0
 * feature: MediaLive: This release adds support for selecting the Program Date Time (PDT) Clock source algorithm for HLS outputs.

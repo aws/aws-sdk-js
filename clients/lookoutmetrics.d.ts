@@ -340,6 +340,7 @@ declare namespace LookoutMetrics {
     AnomalyDetectorFrequency?: Frequency;
   }
   export type AnomalyDetectorDescription = string;
+  export type AnomalyDetectorFailureType = "ACTIVATION_FAILURE"|"BACK_TEST_ACTIVATION_FAILURE"|"DELETION_FAILURE"|string;
   export type AnomalyDetectorName = string;
   export type AnomalyDetectorStatus = "ACTIVE"|"ACTIVATING"|"DELETING"|"FAILED"|"INACTIVE"|"LEARNING"|"BACK_TEST_ACTIVATING"|"BACK_TEST_ACTIVE"|"BACK_TEST_COMPLETE"|string;
   export interface AnomalyDetectorSummary {
@@ -464,11 +465,11 @@ declare namespace LookoutMetrics {
     /**
      * An IAM role that gives Amazon Lookout for Metrics permission to access the flow.
      */
-    RoleArn: Arn;
+    RoleArn?: Arn;
     /**
      *  name of the flow.
      */
-    FlowName: FlowName;
+    FlowName?: FlowName;
   }
   export type Arn = string;
   export interface BackTestAnomalyDetectorRequest {
@@ -486,7 +487,7 @@ declare namespace LookoutMetrics {
     /**
      * An IAM role that gives Amazon Lookout for Metrics permission to access data in Amazon CloudWatch.
      */
-    RoleArn: Arn;
+    RoleArn?: Arn;
   }
   export type ColumnName = string;
   export interface ContributionMatrix {
@@ -730,13 +731,17 @@ declare namespace LookoutMetrics {
      */
     Status?: AnomalyDetectorStatus;
     /**
-     * The reason that the detector failed, if any.
+     * The reason that the detector failed.
      */
     FailureReason?: ErrorMessage;
     /**
      * The ARN of the KMS key to use to encrypt your data.
      */
     KmsKeyArn?: KmsKeyArn;
+    /**
+     * The process that caused the detector to fail.
+     */
+    FailureType?: AnomalyDetectorFailureType;
   }
   export interface DescribeMetricSetRequest {
     /**
@@ -1277,35 +1282,35 @@ declare namespace LookoutMetrics {
     /**
      * A string identifying the database instance.
      */
-    DBInstanceIdentifier: RDSDatabaseIdentifier;
+    DBInstanceIdentifier?: RDSDatabaseIdentifier;
     /**
      * The host name of the database.
      */
-    DatabaseHost: DatabaseHost;
+    DatabaseHost?: DatabaseHost;
     /**
      * The port number where the database can be accessed.
      */
-    DatabasePort: DatabasePort;
+    DatabasePort?: DatabasePort;
     /**
      * The Amazon Resource Name (ARN) of the AWS Secrets Manager role.
      */
-    SecretManagerArn: PoirotSecretManagerArn;
+    SecretManagerArn?: PoirotSecretManagerArn;
     /**
      * The name of the RDS database.
      */
-    DatabaseName: RDSDatabaseName;
+    DatabaseName?: RDSDatabaseName;
     /**
      * The name of the table in the database.
      */
-    TableName: TableName;
+    TableName?: TableName;
     /**
      * The Amazon Resource Name (ARN) of the role.
      */
-    RoleArn: Arn;
+    RoleArn?: Arn;
     /**
      * An object containing information about the Amazon Virtual Private Cloud (VPC) configuration.
      */
-    VpcConfiguration: VpcConfiguration;
+    VpcConfiguration?: VpcConfiguration;
   }
   export type RedshiftClusterIdentifier = string;
   export type RedshiftDatabaseName = string;
@@ -1313,42 +1318,42 @@ declare namespace LookoutMetrics {
     /**
      * A string identifying the Redshift cluster.
      */
-    ClusterIdentifier: RedshiftClusterIdentifier;
+    ClusterIdentifier?: RedshiftClusterIdentifier;
     /**
      * The name of the database host.
      */
-    DatabaseHost: DatabaseHost;
+    DatabaseHost?: DatabaseHost;
     /**
      * The port number where the database can be accessed.
      */
-    DatabasePort: DatabasePort;
+    DatabasePort?: DatabasePort;
     /**
      * The Amazon Resource Name (ARN) of the AWS Secrets Manager role.
      */
-    SecretManagerArn: PoirotSecretManagerArn;
+    SecretManagerArn?: PoirotSecretManagerArn;
     /**
      * The Redshift database name.
      */
-    DatabaseName: RedshiftDatabaseName;
+    DatabaseName?: RedshiftDatabaseName;
     /**
      * The table name of the Redshift database.
      */
-    TableName: TableName;
+    TableName?: TableName;
     /**
      * The Amazon Resource Name (ARN) of the role providing access to the database.
      */
-    RoleArn: Arn;
+    RoleArn?: Arn;
     /**
      * Contains information about the Amazon Virtual Private Cloud (VPC) configuration.
      */
-    VpcConfiguration: VpcConfiguration;
+    VpcConfiguration?: VpcConfiguration;
   }
   export type RelationshipType = "CAUSE_OF_INPUT_ANOMALY_GROUP"|"EFFECT_OF_INPUT_ANOMALY_GROUP"|string;
   export interface S3SourceConfig {
     /**
      * The ARN of an IAM role that has read and write access permissions to the source S3 bucket.
      */
-    RoleArn: Arn;
+    RoleArn?: Arn;
     /**
      * A list of templated paths to the source files.
      */

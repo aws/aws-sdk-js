@@ -399,6 +399,7 @@ declare namespace DataBrew {
     Errors?: RecipeErrorList;
   }
   export type Bucket = string;
+  export type BucketOwner = string;
   export type CatalogId = string;
   export type ClientSessionId = string;
   export type ColumnName = string;
@@ -2216,7 +2217,7 @@ declare namespace DataBrew {
      */
     Disabled?: Disabled;
     /**
-     * The expression which includes column references, condition names followed by variable references, possibly grouped and combined with other conditions. For example, (:col1 starts_with :prefix1 or :col1 starts_with :prefix2) and (:col1 ends_with :suffix1 or :col1 ends_with :suffix2). Column and value references are substitution variables that should start with the ':' symbol. Depending on the context, substitution variables' values can be either an actual value or a column name. These values are defined in the SubstitutionMap. If a CheckExpression starts with a column reference, then ColumnSelectors in the rule should be null. If ColumnSelectors has been defined, then there should be no columnn reference in the left side of a condition, for example, is_between :val1 and :val2.
+     * The expression which includes column references, condition names followed by variable references, possibly grouped and combined with other conditions. For example, (:col1 starts_with :prefix1 or :col1 starts_with :prefix2) and (:col1 ends_with :suffix1 or :col1 ends_with :suffix2). Column and value references are substitution variables that should start with the ':' symbol. Depending on the context, substitution variables' values can be either an actual value or a column name. These values are defined in the SubstitutionMap. If a CheckExpression starts with a column reference, then ColumnSelectors in the rule should be null. If ColumnSelectors has been defined, then there should be no columnn reference in the left side of a condition, for example, is_between :val1 and :val2. For more information, see Available checks 
      */
     CheckExpression: Expression;
     /**
@@ -2293,6 +2294,10 @@ declare namespace DataBrew {
      * The unique name of the object in the bucket.
      */
     Key?: Key;
+    /**
+     * The Amazon Web Services account ID of the bucket owner.
+     */
+    BucketOwner?: BucketOwner;
   }
   export interface S3TableOutputOptions {
     /**

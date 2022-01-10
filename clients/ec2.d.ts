@@ -1693,6 +1693,14 @@ declare class EC2 extends Service {
    */
   describeExportTasks(callback?: (err: AWSError, data: EC2.Types.DescribeExportTasksResult) => void): Request<EC2.Types.DescribeExportTasksResult, AWSError>;
   /**
+   * Describe details for Windows AMIs that are configured for faster launching.
+   */
+  describeFastLaunchImages(params: EC2.Types.DescribeFastLaunchImagesRequest, callback?: (err: AWSError, data: EC2.Types.DescribeFastLaunchImagesResult) => void): Request<EC2.Types.DescribeFastLaunchImagesResult, AWSError>;
+  /**
+   * Describe details for Windows AMIs that are configured for faster launching.
+   */
+  describeFastLaunchImages(callback?: (err: AWSError, data: EC2.Types.DescribeFastLaunchImagesResult) => void): Request<EC2.Types.DescribeFastLaunchImagesResult, AWSError>;
+  /**
    * Describes the state of fast snapshot restores for your snapshots.
    */
   describeFastSnapshotRestores(params: EC2.Types.DescribeFastSnapshotRestoresRequest, callback?: (err: AWSError, data: EC2.Types.DescribeFastSnapshotRestoresResult) => void): Request<EC2.Types.DescribeFastSnapshotRestoresResult, AWSError>;
@@ -2605,6 +2613,14 @@ declare class EC2 extends Service {
    */
   disableEbsEncryptionByDefault(callback?: (err: AWSError, data: EC2.Types.DisableEbsEncryptionByDefaultResult) => void): Request<EC2.Types.DisableEbsEncryptionByDefaultResult, AWSError>;
   /**
+   * Discontinue faster launching for a Windows AMI, and clean up existing pre-provisioned snapshots. When you disable faster launching, the AMI uses the standard launch process for each instance. All pre-provisioned snapshots must be removed before you can enable faster launching again.
+   */
+  disableFastLaunch(params: EC2.Types.DisableFastLaunchRequest, callback?: (err: AWSError, data: EC2.Types.DisableFastLaunchResult) => void): Request<EC2.Types.DisableFastLaunchResult, AWSError>;
+  /**
+   * Discontinue faster launching for a Windows AMI, and clean up existing pre-provisioned snapshots. When you disable faster launching, the AMI uses the standard launch process for each instance. All pre-provisioned snapshots must be removed before you can enable faster launching again.
+   */
+  disableFastLaunch(callback?: (err: AWSError, data: EC2.Types.DisableFastLaunchResult) => void): Request<EC2.Types.DisableFastLaunchResult, AWSError>;
+  /**
    * Disables fast snapshot restores for the specified snapshots in the specified Availability Zones.
    */
   disableFastSnapshotRestores(params: EC2.Types.DisableFastSnapshotRestoresRequest, callback?: (err: AWSError, data: EC2.Types.DisableFastSnapshotRestoresResult) => void): Request<EC2.Types.DisableFastSnapshotRestoresResult, AWSError>;
@@ -2764,6 +2780,14 @@ declare class EC2 extends Service {
    * Enables EBS encryption by default for your account in the current Region. After you enable encryption by default, the EBS volumes that you create are always encrypted, either using the default KMS key or the KMS key that you specified when you created each volume. For more information, see Amazon EBS encryption in the Amazon Elastic Compute Cloud User Guide. You can specify the default KMS key for encryption by default using ModifyEbsDefaultKmsKeyId or ResetEbsDefaultKmsKeyId. Enabling encryption by default has no effect on the encryption status of your existing volumes. After you enable encryption by default, you can no longer launch instances using instance types that do not support encryption. For more information, see Supported instance types.
    */
   enableEbsEncryptionByDefault(callback?: (err: AWSError, data: EC2.Types.EnableEbsEncryptionByDefaultResult) => void): Request<EC2.Types.EnableEbsEncryptionByDefaultResult, AWSError>;
+  /**
+   * When you enable faster launching for a Windows AMI, images are pre-provisioned, using snapshots to launch instances up to 65% faster. To create the optimized Windows image, Amazon EC2 launches an instance and runs through Sysprep steps, rebooting as required. Then it creates a set of reserved snapshots that are used for subsequent launches. The reserved snapshots are automatically replenished as they are used, depending on your settings for launch frequency.
+   */
+  enableFastLaunch(params: EC2.Types.EnableFastLaunchRequest, callback?: (err: AWSError, data: EC2.Types.EnableFastLaunchResult) => void): Request<EC2.Types.EnableFastLaunchResult, AWSError>;
+  /**
+   * When you enable faster launching for a Windows AMI, images are pre-provisioned, using snapshots to launch instances up to 65% faster. To create the optimized Windows image, Amazon EC2 launches an instance and runs through Sysprep steps, rebooting as required. Then it creates a set of reserved snapshots that are used for subsequent launches. The reserved snapshots are automatically replenished as they are used, depending on your settings for launch frequency.
+   */
+  enableFastLaunch(callback?: (err: AWSError, data: EC2.Types.EnableFastLaunchResult) => void): Request<EC2.Types.EnableFastLaunchResult, AWSError>;
   /**
    * Enables fast snapshot restores for the specified snapshots in the specified Availability Zones. You get the full benefit of fast snapshot restores after they enter the enabled state. To get the current state of fast snapshot restores, use DescribeFastSnapshotRestores. To disable fast snapshot restores, use DisableFastSnapshotRestores. For more information, see Amazon EBS fast snapshot restore in the Amazon Elastic Compute Cloud User Guide.
    */
@@ -8481,11 +8505,11 @@ declare namespace EC2 {
     /**
      * The Amazon Web Services resource that is the source of the path.
      */
-    Source: String;
+    Source: NetworkInsightsResourceId;
     /**
      * The Amazon Web Services resource that is the destination of the path.
      */
-    Destination: String;
+    Destination: NetworkInsightsResourceId;
     /**
      * The protocol.
      */
@@ -11806,6 +11830,78 @@ declare namespace EC2 {
      */
     ExportTasks?: ExportTaskList;
   }
+  export interface DescribeFastLaunchImagesRequest {
+    /**
+     * Details for one or more Windows AMI image IDs.
+     */
+    ImageIds?: FastLaunchImageIdList;
+    /**
+     * Use the following filters to streamline results.    resource-type - The resource type for pre-provisioning.    launch-template - The launch template that is associated with the pre-provisioned Windows AMI.    owner-id - The owner ID for the pre-provisioning resource.    state - The current state of fast launching for the Windows AMI.  
+     */
+    Filters?: FilterList;
+    /**
+     * The maximum number of results to return in a single call. To retrieve the remaining results, make another request with the returned NextToken value. If this parameter is not specified, then all results are returned.
+     */
+    MaxResults?: DescribeFastLaunchImagesRequestMaxResults;
+    /**
+     * The token for the next set of results.
+     */
+    NextToken?: NextToken;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export type DescribeFastLaunchImagesRequestMaxResults = number;
+  export interface DescribeFastLaunchImagesResult {
+    /**
+     * A collection of details about the fast-launch enabled Windows images that meet the requested criteria.
+     */
+    FastLaunchImages?: DescribeFastLaunchImagesSuccessSet;
+    /**
+     * The token to use for the next set of results. This value is null when there are no more results to return.
+     */
+    NextToken?: NextToken;
+  }
+  export interface DescribeFastLaunchImagesSuccessItem {
+    /**
+     * The image ID that identifies the fast-launch enabled Windows image.
+     */
+    ImageId?: ImageId;
+    /**
+     * The resource type that is used for pre-provisioning the Windows AMI. Supported values include: snapshot.
+     */
+    ResourceType?: FastLaunchResourceType;
+    /**
+     * A group of parameters that are used for pre-provisioning the associated Windows AMI using snapshots.
+     */
+    SnapshotConfiguration?: FastLaunchSnapshotConfigurationResponse;
+    /**
+     * The launch template that the fast-launch enabled Windows AMI uses when it launches Windows instances from pre-provisioned snapshots.
+     */
+    LaunchTemplate?: FastLaunchLaunchTemplateSpecificationResponse;
+    /**
+     * The maximum number of parallel instances that are launched for creating resources.
+     */
+    MaxParallelLaunches?: Integer;
+    /**
+     * The owner ID for the fast-launch enabled Windows AMI.
+     */
+    OwnerId?: String;
+    /**
+     * The current state of faster launching for the specified Windows AMI.
+     */
+    State?: FastLaunchStateCode;
+    /**
+     * The reason that faster launching for the Windows AMI changed to the current state.
+     */
+    StateTransitionReason?: String;
+    /**
+     * The time that faster launching for the Windows AMI changed to the current state.
+     */
+    StateTransitionTime?: MillisecondDateTime;
+  }
+  export type DescribeFastLaunchImagesSuccessSet = DescribeFastLaunchImagesSuccessItem[];
   export interface DescribeFastSnapshotRestoreSuccessItem {
     /**
      * The ID of the snapshot.
@@ -15444,6 +15540,58 @@ declare namespace EC2 {
      */
     EbsEncryptionByDefault?: Boolean;
   }
+  export interface DisableFastLaunchRequest {
+    /**
+     * The ID of the image for which you’re turning off faster launching, and removing pre-provisioned snapshots.
+     */
+    ImageId: ImageId;
+    /**
+     * Forces the image settings to turn off faster launching for your Windows AMI. This parameter overrides any errors that are encountered while cleaning up resources in your account.
+     */
+    Force?: Boolean;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface DisableFastLaunchResult {
+    /**
+     * The ID of the image for which faster-launching has been turned off.
+     */
+    ImageId?: ImageId;
+    /**
+     * The pre-provisioning resource type that must be cleaned after turning off faster launching for the Windows AMI. Supported values include: snapshot.
+     */
+    ResourceType?: FastLaunchResourceType;
+    /**
+     * Parameters that were used for faster launching for the Windows AMI before faster launching was turned off. This informs the clean-up process.
+     */
+    SnapshotConfiguration?: FastLaunchSnapshotConfigurationResponse;
+    /**
+     * The launch template that was used to launch Windows instances from pre-provisioned snapshots.
+     */
+    LaunchTemplate?: FastLaunchLaunchTemplateSpecificationResponse;
+    /**
+     * The maximum number of parallel instances to launch for creating resources.
+     */
+    MaxParallelLaunches?: Integer;
+    /**
+     * The owner of the Windows AMI for which faster launching was turned off.
+     */
+    OwnerId?: String;
+    /**
+     * The current state of faster launching for the specified Windows AMI.
+     */
+    State?: FastLaunchStateCode;
+    /**
+     * The reason that the state changed for faster launching for the Windows AMI.
+     */
+    StateTransitionReason?: String;
+    /**
+     * The time that the state changed for faster launching for the Windows AMI.
+     */
+    StateTransitionTime?: MillisecondDateTime;
+  }
   export interface DisableFastSnapshotRestoreErrorItem {
     /**
      * The ID of the snapshot.
@@ -16216,6 +16364,70 @@ declare namespace EC2 {
      */
     EbsEncryptionByDefault?: Boolean;
   }
+  export interface EnableFastLaunchRequest {
+    /**
+     * The ID of the image for which you’re enabling faster launching.
+     */
+    ImageId: ImageId;
+    /**
+     * The type of resource to use for pre-provisioning the Windows AMI for faster launching. Supported values include: snapshot, which is the default value.
+     */
+    ResourceType?: String;
+    /**
+     * Configuration settings for creating and managing the snapshots that are used for pre-provisioning the Windows AMI for faster launching. The associated ResourceType must be snapshot.
+     */
+    SnapshotConfiguration?: FastLaunchSnapshotConfigurationRequest;
+    /**
+     * The launch template to use when launching Windows instances from pre-provisioned snapshots. Launch template parameters can include either the name or ID of the launch template, but not both.
+     */
+    LaunchTemplate?: FastLaunchLaunchTemplateSpecificationRequest;
+    /**
+     * The maximum number of parallel instances to launch for creating resources.
+     */
+    MaxParallelLaunches?: Integer;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface EnableFastLaunchResult {
+    /**
+     * The image ID that identifies the Windows AMI for which faster launching was enabled.
+     */
+    ImageId?: ImageId;
+    /**
+     * The type of resource that was defined for pre-provisioning the Windows AMI for faster launching.
+     */
+    ResourceType?: FastLaunchResourceType;
+    /**
+     * The configuration settings that were defined for creating and managing the pre-provisioned snapshots for faster launching of the Windows AMI. This property is returned when the associated resourceType is snapshot.
+     */
+    SnapshotConfiguration?: FastLaunchSnapshotConfigurationResponse;
+    /**
+     * The launch template that is used when launching Windows instances from pre-provisioned snapshots.
+     */
+    LaunchTemplate?: FastLaunchLaunchTemplateSpecificationResponse;
+    /**
+     * The maximum number of parallel instances to launch for creating resources.
+     */
+    MaxParallelLaunches?: Integer;
+    /**
+     * The owner ID for the Windows AMI for which faster launching was enabled.
+     */
+    OwnerId?: String;
+    /**
+     * The current state of faster launching for the specified Windows AMI.
+     */
+    State?: FastLaunchStateCode;
+    /**
+     * The reason that the state changed for faster launching for the Windows AMI.
+     */
+    StateTransitionReason?: String;
+    /**
+     * The time that the state changed for faster launching for the Windows AMI.
+     */
+    StateTransitionTime?: MillisecondDateTime;
+  }
   export interface EnableFastSnapshotRestoreErrorItem {
     /**
      * The ID of the snapshot.
@@ -16946,6 +17158,49 @@ declare namespace EC2 {
     ReservedInstancesId?: String;
   }
   export type FailedQueuedPurchaseDeletionSet = FailedQueuedPurchaseDeletion[];
+  export type FastLaunchImageIdList = ImageId[];
+  export interface FastLaunchLaunchTemplateSpecificationRequest {
+    /**
+     * The ID of the launch template to use for faster launching for a Windows AMI.
+     */
+    LaunchTemplateId?: LaunchTemplateId;
+    /**
+     * The name of the launch template to use for faster launching for a Windows AMI.
+     */
+    LaunchTemplateName?: String;
+    /**
+     * The version of the launch template to use for faster launching for a Windows AMI.
+     */
+    Version: String;
+  }
+  export interface FastLaunchLaunchTemplateSpecificationResponse {
+    /**
+     * The ID of the launch template for faster launching of the associated Windows AMI.
+     */
+    LaunchTemplateId?: LaunchTemplateId;
+    /**
+     * The name of the launch template for faster launching of the associated Windows AMI.
+     */
+    LaunchTemplateName?: String;
+    /**
+     * The version of the launch template for faster launching of the associated Windows AMI.
+     */
+    Version?: String;
+  }
+  export type FastLaunchResourceType = "snapshot"|string;
+  export interface FastLaunchSnapshotConfigurationRequest {
+    /**
+     * The number of pre-provisioned snapshots to keep on hand for a fast-launch enabled Windows AMI.
+     */
+    TargetResourceCount?: Integer;
+  }
+  export interface FastLaunchSnapshotConfigurationResponse {
+    /**
+     * The number of pre-provisioned snapshots requested to keep on hand for a fast-launch enabled Windows AMI.
+     */
+    TargetResourceCount?: Integer;
+  }
+  export type FastLaunchStateCode = "enabling"|"enabling-failed"|"enabled"|"enabled-failed"|"disabling"|"disabling-failed"|string;
   export type FastSnapshotRestoreStateCode = "enabling"|"optimizing"|"enabled"|"disabling"|"disabled"|string;
   export interface FederatedAuthentication {
     /**
@@ -25096,6 +25351,7 @@ declare namespace EC2 {
   export type NetworkInsightsPathId = string;
   export type NetworkInsightsPathIdList = NetworkInsightsPathId[];
   export type NetworkInsightsPathList = NetworkInsightsPath[];
+  export type NetworkInsightsResourceId = string;
   export interface NetworkInterface {
     /**
      * The association information for an Elastic IP address (IPv4) associated with the network interface.
