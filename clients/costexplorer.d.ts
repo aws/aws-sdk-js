@@ -164,11 +164,11 @@ declare class CostExplorer extends Service {
    */
   getRightsizingRecommendation(callback?: (err: AWSError, data: CostExplorer.Types.GetRightsizingRecommendationResponse) => void): Request<CostExplorer.Types.GetRightsizingRecommendationResponse, AWSError>;
   /**
-   * Retrieves the Savings Plans covered for your account. This enables you to see how much of your cost is covered by a Savings Plan. An organization’s management account can see the coverage of the associated member accounts. This supports dimensions, Cost Categories, and nested expressions. For any time period, you can filter data for Savings Plans usage with the following dimensions:    LINKED_ACCOUNT     REGION     SERVICE     INSTANCE_FAMILY    To determine valid values for a dimension, use the GetDimensionValues operation.
+   * Retrieves the Savings Plans covered for your account. This enables you to see how much of your cost is covered by a Savings Plan. An organization’s management account can see the coverage of the associated member accounts. This supports dimensions, Cost Categories, and nested expressions. For any time period, you can filter data for Savings Plans usage with the following dimensions:    LINKED_ACCOUNT     REGION     SERVICE     INSTANCE_FAMILY      GetSavingsPlansCoverage doesn't support filtering by tags. GetSavingsPlansCoverage also doesn't support the OR operator between filter dimensions. For the full request syntax with supported parameters, see Examples.  To determine valid values for a dimension, use the GetDimensionValues operation.
    */
   getSavingsPlansCoverage(params: CostExplorer.Types.GetSavingsPlansCoverageRequest, callback?: (err: AWSError, data: CostExplorer.Types.GetSavingsPlansCoverageResponse) => void): Request<CostExplorer.Types.GetSavingsPlansCoverageResponse, AWSError>;
   /**
-   * Retrieves the Savings Plans covered for your account. This enables you to see how much of your cost is covered by a Savings Plan. An organization’s management account can see the coverage of the associated member accounts. This supports dimensions, Cost Categories, and nested expressions. For any time period, you can filter data for Savings Plans usage with the following dimensions:    LINKED_ACCOUNT     REGION     SERVICE     INSTANCE_FAMILY    To determine valid values for a dimension, use the GetDimensionValues operation.
+   * Retrieves the Savings Plans covered for your account. This enables you to see how much of your cost is covered by a Savings Plan. An organization’s management account can see the coverage of the associated member accounts. This supports dimensions, Cost Categories, and nested expressions. For any time period, you can filter data for Savings Plans usage with the following dimensions:    LINKED_ACCOUNT     REGION     SERVICE     INSTANCE_FAMILY      GetSavingsPlansCoverage doesn't support filtering by tags. GetSavingsPlansCoverage also doesn't support the OR operator between filter dimensions. For the full request syntax with supported parameters, see Examples.  To determine valid values for a dimension, use the GetDimensionValues operation.
    */
   getSavingsPlansCoverage(callback?: (err: AWSError, data: CostExplorer.Types.GetSavingsPlansCoverageResponse) => void): Request<CostExplorer.Types.GetSavingsPlansCoverageResponse, AWSError>;
   /**
@@ -180,19 +180,19 @@ declare class CostExplorer extends Service {
    */
   getSavingsPlansPurchaseRecommendation(callback?: (err: AWSError, data: CostExplorer.Types.GetSavingsPlansPurchaseRecommendationResponse) => void): Request<CostExplorer.Types.GetSavingsPlansPurchaseRecommendationResponse, AWSError>;
   /**
-   * Retrieves the Savings Plans utilization for your account across date ranges with daily or monthly granularity. Management account in an organization have access to member accounts. You can use GetDimensionValues in SAVINGS_PLANS to determine the possible dimension values.  You cannot group by any dimension values for GetSavingsPlansUtilization. 
+   * Retrieves the Savings Plans utilization for your account across date ranges with daily or monthly granularity. Management account in an organization have access to member accounts. You can use GetDimensionValues in SAVINGS_PLANS to determine the possible dimension values.  You cannot group by any dimension values for GetSavingsPlansUtilization.  GetSavingsPlansUtilization doesn't support filtering by tags. GetSavingsPlansUtilization also doesn't support the OR operator between filter dimensions. For the full request syntax with supported parameters, see Examples. 
    */
   getSavingsPlansUtilization(params: CostExplorer.Types.GetSavingsPlansUtilizationRequest, callback?: (err: AWSError, data: CostExplorer.Types.GetSavingsPlansUtilizationResponse) => void): Request<CostExplorer.Types.GetSavingsPlansUtilizationResponse, AWSError>;
   /**
-   * Retrieves the Savings Plans utilization for your account across date ranges with daily or monthly granularity. Management account in an organization have access to member accounts. You can use GetDimensionValues in SAVINGS_PLANS to determine the possible dimension values.  You cannot group by any dimension values for GetSavingsPlansUtilization. 
+   * Retrieves the Savings Plans utilization for your account across date ranges with daily or monthly granularity. Management account in an organization have access to member accounts. You can use GetDimensionValues in SAVINGS_PLANS to determine the possible dimension values.  You cannot group by any dimension values for GetSavingsPlansUtilization.  GetSavingsPlansUtilization doesn't support filtering by tags. GetSavingsPlansUtilization also doesn't support the OR operator between filter dimensions. For the full request syntax with supported parameters, see Examples. 
    */
   getSavingsPlansUtilization(callback?: (err: AWSError, data: CostExplorer.Types.GetSavingsPlansUtilizationResponse) => void): Request<CostExplorer.Types.GetSavingsPlansUtilizationResponse, AWSError>;
   /**
-   * Retrieves attribute data along with aggregate utilization and savings data for a given time period. This doesn't support granular or grouped data (daily/monthly) in response. You can't retrieve data by dates in a single response similar to GetSavingsPlanUtilization, but you have the option to make multiple calls to GetSavingsPlanUtilizationDetails by providing individual dates. You can use GetDimensionValues in SAVINGS_PLANS to determine the possible dimension values.   GetSavingsPlanUtilizationDetails internally groups data by SavingsPlansArn. 
+   * Retrieves attribute data along with aggregate utilization and savings data for a given time period. This doesn't support granular or grouped data (daily/monthly) in response. You can't retrieve data by dates in a single response similar to GetSavingsPlanUtilization, but you have the option to make multiple calls to GetSavingsPlanUtilizationDetails by providing individual dates. You can use GetDimensionValues in SAVINGS_PLANS to determine the possible dimension values.   GetSavingsPlanUtilizationDetails internally groups data by SavingsPlansArn.  GetSavingsPlansUtilizationDetails doesn't support filtering by tags. GetSavingsPlansUtilizationDetails also doesn't support the OR operator between filter dimensions. For the full request syntax with supported parameters, see Examples. 
    */
   getSavingsPlansUtilizationDetails(params: CostExplorer.Types.GetSavingsPlansUtilizationDetailsRequest, callback?: (err: AWSError, data: CostExplorer.Types.GetSavingsPlansUtilizationDetailsResponse) => void): Request<CostExplorer.Types.GetSavingsPlansUtilizationDetailsResponse, AWSError>;
   /**
-   * Retrieves attribute data along with aggregate utilization and savings data for a given time period. This doesn't support granular or grouped data (daily/monthly) in response. You can't retrieve data by dates in a single response similar to GetSavingsPlanUtilization, but you have the option to make multiple calls to GetSavingsPlanUtilizationDetails by providing individual dates. You can use GetDimensionValues in SAVINGS_PLANS to determine the possible dimension values.   GetSavingsPlanUtilizationDetails internally groups data by SavingsPlansArn. 
+   * Retrieves attribute data along with aggregate utilization and savings data for a given time period. This doesn't support granular or grouped data (daily/monthly) in response. You can't retrieve data by dates in a single response similar to GetSavingsPlanUtilization, but you have the option to make multiple calls to GetSavingsPlanUtilizationDetails by providing individual dates. You can use GetDimensionValues in SAVINGS_PLANS to determine the possible dimension values.   GetSavingsPlanUtilizationDetails internally groups data by SavingsPlansArn.  GetSavingsPlansUtilizationDetails doesn't support filtering by tags. GetSavingsPlansUtilizationDetails also doesn't support the OR operator between filter dimensions. For the full request syntax with supported parameters, see Examples. 
    */
   getSavingsPlansUtilizationDetails(callback?: (err: AWSError, data: CostExplorer.Types.GetSavingsPlansUtilizationDetailsResponse) => void): Request<CostExplorer.Types.GetSavingsPlansUtilizationDetailsResponse, AWSError>;
   /**
@@ -1125,7 +1125,7 @@ declare namespace CostExplorer {
      */
     Granularity: Granularity;
     /**
-     * Filters Amazon Web Services costs by different dimensions. For example, you can specify SERVICE and LINKED_ACCOUNT and get the costs that are associated with that account's usage of that service. You can nest Expression objects to define any combination of dimension filters. For more information, see Expression. 
+     * Filters Amazon Web Services costs by different dimensions. For example, you can specify SERVICE and LINKED_ACCOUNT and get the costs that are associated with that account's usage of that service. You can nest Expression objects to define any combination of dimension filters. For more information, see Expression.  The default values are EQUALS and CASE_SENSITIVE. Valid values for MatchOptions for Dimensions are EQUALS and CASE_SENSITIVE. Valid values for MatchOptions for CostCategories and Tags are EQUALS, ABSENT, and CASE_SENSITIVE.
      */
     Filter?: Expression;
     /**
@@ -1169,7 +1169,7 @@ declare namespace CostExplorer {
      */
     Granularity: Granularity;
     /**
-     * Filters Amazon Web Services costs by different dimensions. For example, you can specify SERVICE and LINKED_ACCOUNT and get the costs that are associated with that account's usage of that service. You can nest Expression objects to define any combination of dimension filters. For more information, see Expression.  The GetCostAndUsageWithResources operation requires that you either group by or filter by a ResourceId. It requires the Expression "SERVICE = Amazon Elastic Compute Cloud - Compute" in the filter.
+     * Filters Amazon Web Services costs by different dimensions. For example, you can specify SERVICE and LINKED_ACCOUNT and get the costs that are associated with that account's usage of that service. You can nest Expression objects to define any combination of dimension filters. For more information, see Expression.  The GetCostAndUsageWithResources operation requires that you either group by or filter by a ResourceId. It requires the Expression "SERVICE = Amazon Elastic Compute Cloud - Compute" in the filter. The default values are EQUALS and CASE_SENSITIVE. Valid values for MatchOptions for Dimensions are EQUALS and CASE_SENSITIVE. Valid values for MatchOptions for CostCategories and Tags are EQUALS, ABSENT, and CASE_SENSITIVE.
      */
     Filter: Expression;
     /**
@@ -1341,7 +1341,7 @@ declare namespace CostExplorer {
      */
     Granularity?: Granularity;
     /**
-     * Filters utilization data by dimensions. You can filter by the following dimensions:   AZ   CACHE_ENGINE   DATABASE_ENGINE   DEPLOYMENT_OPTION   INSTANCE_TYPE   LINKED_ACCOUNT   OPERATING_SYSTEM   PLATFORM   REGION   SERVICE   TAG   TENANCY    GetReservationCoverage uses the same Expression object as the other operations, but only AND is supported among each dimension. You can nest only one level deep. If there are multiple values for a dimension, they are OR'd together. If you don't provide a SERVICE filter, Cost Explorer defaults to EC2. Cost category is also supported.
+     * Filters utilization data by dimensions. You can filter by the following dimensions:   AZ   CACHE_ENGINE   DATABASE_ENGINE   DEPLOYMENT_OPTION   INSTANCE_TYPE   LINKED_ACCOUNT   OPERATING_SYSTEM   PLATFORM   REGION   SERVICE   TAG   TENANCY    GetReservationCoverage uses the same Expression object as the other operations, but only AND is supported among each dimension. You can nest only one level deep. If you don't provide a SERVICE filter, Cost Explorer defaults to EC2. Cost category is also supported.
      */
     Filter?: Expression;
     /**
@@ -1442,7 +1442,7 @@ declare namespace CostExplorer {
      */
     Granularity?: Granularity;
     /**
-     * Filters utilization data by dimensions. You can filter by the following dimensions:   AZ   CACHE_ENGINE   DEPLOYMENT_OPTION   INSTANCE_TYPE   LINKED_ACCOUNT   OPERATING_SYSTEM   PLATFORM   REGION   SERVICE   SCOPE   TENANCY    GetReservationUtilization uses the same Expression object as the other operations, but only AND is supported among each dimension, and nesting is supported up to only one level deep. If there are multiple values for a dimension, they are OR'd together.
+     * Filters utilization data by dimensions. You can filter by the following dimensions:   AZ   CACHE_ENGINE   DEPLOYMENT_OPTION   INSTANCE_TYPE   LINKED_ACCOUNT   OPERATING_SYSTEM   PLATFORM   REGION   SERVICE   SCOPE   TENANCY    GetReservationUtilization uses the same Expression object as the other operations, but only AND is supported among each dimension, and nesting is supported up to only one level deep.
      */
     Filter?: Expression;
     /**
@@ -1527,7 +1527,7 @@ declare namespace CostExplorer {
      */
     Granularity?: Granularity;
     /**
-     * Filters Savings Plans coverage data by dimensions. You can filter data for Savings Plans usage with the following dimensions:    LINKED_ACCOUNT     REGION     SERVICE     INSTANCE_FAMILY     GetSavingsPlansCoverage uses the same Expression object as the other operations, but only AND is supported among each dimension. If there are multiple values for a dimension, they are OR'd together. Cost category is also supported.
+     * Filters Savings Plans coverage data by dimensions. You can filter data for Savings Plans usage with the following dimensions:    LINKED_ACCOUNT     REGION     SERVICE     INSTANCE_FAMILY     GetSavingsPlansCoverage uses the same Expression object as the other operations, but only AND is supported among each dimension. Cost category is supported. Tags are not supported.
      */
     Filter?: Expression;
     /**
@@ -1611,7 +1611,7 @@ declare namespace CostExplorer {
      */
     TimePeriod: DateInterval;
     /**
-     * Filters Savings Plans utilization coverage data for active Savings Plans dimensions. You can filter data with the following dimensions:    LINKED_ACCOUNT     SAVINGS_PLAN_ARN     REGION     PAYMENT_OPTION     INSTANCE_TYPE_FAMILY     GetSavingsPlansUtilizationDetails uses the same Expression object as the other operations, but only AND is supported among each dimension.
+     * Filters Savings Plans utilization coverage data for active Savings Plans dimensions. You can filter data with the following dimensions:    LINKED_ACCOUNT     SAVINGS_PLAN_ARN     REGION     PAYMENT_OPTION     INSTANCE_TYPE_FAMILY     GetSavingsPlansUtilizationDetails uses the same Expression object as the other operations, but only AND is supported among each dimension. Filtering by tags isn't supported.
      */
     Filter?: Expression;
     /**
@@ -1656,7 +1656,7 @@ declare namespace CostExplorer {
      */
     Granularity?: Granularity;
     /**
-     * Filters Savings Plans utilization coverage data for active Savings Plans dimensions. You can filter data with the following dimensions:    LINKED_ACCOUNT     SAVINGS_PLAN_ARN     SAVINGS_PLANS_TYPE     REGION     PAYMENT_OPTION     INSTANCE_TYPE_FAMILY     GetSavingsPlansUtilization uses the same Expression object as the other operations, but only AND is supported among each dimension.
+     * Filters Savings Plans utilization coverage data for active Savings Plans dimensions. You can filter data with the following dimensions:    LINKED_ACCOUNT     SAVINGS_PLAN_ARN     SAVINGS_PLANS_TYPE     REGION     PAYMENT_OPTION     INSTANCE_TYPE_FAMILY     GetSavingsPlansUtilization uses the same Expression object as the other operations, but only AND is supported among each dimension. Filtering by tags isn't supported.
      */
     Filter?: Expression;
     /**
@@ -1804,7 +1804,7 @@ declare namespace CostExplorer {
      */
     ElastiCacheInstanceDetails?: ElastiCacheInstanceDetails;
     /**
-     * The Amazon ES instances that Amazon Web Services recommends that you purchase.
+     * The Amazon OpenSearch Service instances that Amazon Web Services recommends that you purchase.
      */
     ESInstanceDetails?: ESInstanceDetails;
   }

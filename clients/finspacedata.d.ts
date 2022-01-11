@@ -182,6 +182,9 @@ declare namespace Finspacedata {
      * Time until which the Changeset is active. The value is determined as Epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
      */
     activeUntilTimestamp?: TimestampEpoch;
+    /**
+     * Beginning time from which the Changeset is active. The value is determined as Epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+     */
     activeFromTimestamp?: TimestampEpoch;
     /**
      * The unique identifier of the Changeset that is updated.
@@ -214,7 +217,7 @@ declare namespace Finspacedata {
   export type ColumnNameList = ColumnName[];
   export interface CreateChangesetRequest {
     /**
-     * A token used to ensure idempotency.
+     * A token that ensures idempotency. This token expires in 10 minutes.
      */
     clientToken?: ClientToken;
     /**
@@ -226,11 +229,11 @@ declare namespace Finspacedata {
      */
     changeType: ChangeType;
     /**
-     * Options that define the location of the data being ingested.
+     * Options that define the location of the data being ingested (s3SourcePath) and the source of the changeset (sourceType). Both s3SourcePath and sourceType are required attributes. Here is an example of how you could specify the sourceParams:   "sourceParams": { "s3SourcePath": "s3://finspace-landing-us-east-2-bk7gcfvitndqa6ebnvys4d/scratch/wr5hh8pwkpqqkxa4sxrmcw/ingestion/equity.csv", "sourceType": "S3" }   The S3 path that you specify must allow the FinSpace role access. To do that, you first need to configure the IAM policy on S3 bucket. For more information, see Loading data from an Amazon S3 Bucket using the FinSpace APIsection.
      */
     sourceParams: SourceParams;
     /**
-     * Options that define the structure of the source file(s) including the format type (formatType), header row (withHeader), data separation character (separator) and the type of compression (compression).   formatType is a required attribute and can have the following values:     PARQUET - Parquet source file format.    CSV - CSV source file format.    JSON - JSON source file format.    XML - XML source file format.    For example, you could specify the following for formatParams:  "formatParams": { "formatType": "CSV", "withHeader": "true", "separator": ",", "compression":"None" }  
+     * Options that define the structure of the source file(s) including the format type (formatType), header row (withHeader), data separation character (separator) and the type of compression (compression).   formatType is a required attribute and can have the following values:     PARQUET - Parquet source file format.    CSV - CSV source file format.    JSON - JSON source file format.    XML - XML source file format.   Here is an example of how you could specify the formatParams:   "formatParams": { "formatType": "CSV", "withHeader": "true", "separator": ",", "compression":"None" }   Note that if you only provide formatType as CSV, the rest of the attributes will automatically default to CSV values as following:   { "withHeader": "true", "separator": "," }    For more information about supported file formats, see Supported Data Types and File Formats in the FinSpace User Guide.
      */
     formatParams: FormatParams;
   }
@@ -246,7 +249,7 @@ declare namespace Finspacedata {
   }
   export interface CreateDataViewRequest {
     /**
-     * A token used to ensure idempotency.
+     * A token that ensures idempotency. This token expires in 10 minutes.
      */
     clientToken?: ClientToken;
     /**
@@ -286,7 +289,7 @@ declare namespace Finspacedata {
   }
   export interface CreateDatasetRequest {
     /**
-     * A token used to ensure idempotency.
+     * A token that ensures idempotency. This token expires in 10 minutes.
      */
     clientToken?: ClientToken;
     /**
@@ -342,10 +345,16 @@ declare namespace Finspacedata {
   export type DataViewDestinationType = string;
   export interface DataViewDestinationTypeParams {
     /**
-     * Destination type for a Dataview.    GLUE_TABLE - Glue table destination type.  
+     * Destination type for a Dataview.    GLUE_TABLE - Glue table destination type.    S3 - S3 destination type.  
      */
     destinationType: DataViewDestinationType;
+    /**
+     * Data view export file format.    PARQUET - Parquet export file format.    DELIMITED_TEXT - Delimited text export file format.  
+     */
     s3DestinationExportFileFormat?: ExportFileFormat;
+    /**
+     * Format Options for S3 Destination type. Here is an example of how you could specify the s3DestinationExportFileFormatOptions    { "header": "true", "delimiter": ",", "compression": "gzip" } 
+     */
     s3DestinationExportFileFormatOptions?: S3DestinationFormatOptions;
   }
   export interface DataViewErrorInfo {
@@ -476,7 +485,7 @@ declare namespace Finspacedata {
   export type DatasetTitle = string;
   export interface DeleteDatasetRequest {
     /**
-     * A token used to ensure idempotency.
+     * A token that ensures idempotency. This token expires in 10 minutes.
      */
     clientToken?: ClientToken;
     /**
@@ -546,6 +555,9 @@ declare namespace Finspacedata {
      * Time until which the Changeset is active. The value is determined as Epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
      */
     activeUntilTimestamp?: TimestampEpoch;
+    /**
+     * Beginning time from which the Changeset is active. The value is determined as Epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+     */
     activeFromTimestamp?: TimestampEpoch;
     /**
      * The unique identifier of the Changeset that is being updated.
@@ -824,7 +836,7 @@ declare namespace Finspacedata {
   export type TimestampEpoch = number;
   export interface UpdateChangesetRequest {
     /**
-     * A token used to ensure idempotency.
+     * A token that ensures idempotency. This token expires in 10 minutes.
      */
     clientToken?: ClientToken;
     /**
@@ -836,11 +848,11 @@ declare namespace Finspacedata {
      */
     changesetId: ChangesetId;
     /**
-     * Options that define the location of the data being ingested.
+     * Options that define the location of the data being ingested (s3SourcePath) and the source of the changeset (sourceType). Both s3SourcePath and sourceType are required attributes. Here is an example of how you could specify the sourceParams:   "sourceParams": { "s3SourcePath": "s3://finspace-landing-us-east-2-bk7gcfvitndqa6ebnvys4d/scratch/wr5hh8pwkpqqkxa4sxrmcw/ingestion/equity.csv", "sourceType": "S3" }   The S3 path that you specify must allow the FinSpace role access. To do that, you first need to configure the IAM policy on S3 bucket. For more information, see Loading data from an Amazon S3 Bucket using the FinSpace APIsection.
      */
     sourceParams: SourceParams;
     /**
-     * Options that define the structure of the source file(s).
+     * Options that define the structure of the source file(s) including the format type (formatType), header row (withHeader), data separation character (separator) and the type of compression (compression).   formatType is a required attribute and can have the following values:     PARQUET - Parquet source file format.    CSV - CSV source file format.    JSON - JSON source file format.    XML - XML source file format.   Here is an example of how you could specify the formatParams:   "formatParams": { "formatType": "CSV", "withHeader": "true", "separator": ",", "compression":"None" }   Note that if you only provide formatType as CSV, the rest of the attributes will automatically default to CSV values as following:   { "withHeader": "true", "separator": "," }    For more information about supported file formats, see Supported Data Types and File Formats in the FinSpace User Guide.
      */
     formatParams: FormatParams;
   }
@@ -856,7 +868,7 @@ declare namespace Finspacedata {
   }
   export interface UpdateDatasetRequest {
     /**
-     * A token used to ensure idempotency.
+     * A token that ensures idempotency. This token expires in 10 minutes.
      */
     clientToken?: ClientToken;
     /**

@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1054.0-->
+<!--LATEST=2.1055.0-->
 <!--ENTRYINSERT-->
+
+## 2.1055.0
+* feature: EC2: EC2 Capacity Reservations now supports RHEL instance platforms (RHEL with SQL Server Standard, RHEL with SQL Server Enterprise, RHEL with SQL Server Web, RHEL with HA, RHEL with HA and SQL Server Standard, RHEL with HA and SQL Server Enterprise)
+* feature: Kendra: Amazon Kendra now supports advanced query language and query-less search.
+* feature: RDS: This release adds the db-proxy event type to support subscribing to RDS Proxy events.
+* feature: WorkSpaces: Introducing new APIs for Workspaces audio optimization with Amazon Connect: CreateConnectClientAddIn, DescribeConnectClientAddIns, UpdateConnectClientAddIn and DeleteConnectClientAddIn.
 
 ## 2.1054.0
 * feature: ComputeOptimizer: Adds support for new Compute Optimizer capability that makes it easier for customers to optimize their EC2 instances by leveraging multiple CPU architectures.

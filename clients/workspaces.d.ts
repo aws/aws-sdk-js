@@ -44,6 +44,14 @@ declare class WorkSpaces extends Service {
    */
   copyWorkspaceImage(callback?: (err: AWSError, data: WorkSpaces.Types.CopyWorkspaceImageResult) => void): Request<WorkSpaces.Types.CopyWorkspaceImageResult, AWSError>;
   /**
+   * Creates a client-add-in for Amazon Connect within a directory. You can create only one Amazon Connect client add-in within a directory. This client add-in allows WorkSpaces users to seamlessly connect to Amazon Connect.
+   */
+  createConnectClientAddIn(params: WorkSpaces.Types.CreateConnectClientAddInRequest, callback?: (err: AWSError, data: WorkSpaces.Types.CreateConnectClientAddInResult) => void): Request<WorkSpaces.Types.CreateConnectClientAddInResult, AWSError>;
+  /**
+   * Creates a client-add-in for Amazon Connect within a directory. You can create only one Amazon Connect client add-in within a directory. This client add-in allows WorkSpaces users to seamlessly connect to Amazon Connect.
+   */
+  createConnectClientAddIn(callback?: (err: AWSError, data: WorkSpaces.Types.CreateConnectClientAddInResult) => void): Request<WorkSpaces.Types.CreateConnectClientAddInResult, AWSError>;
+  /**
    * Creates the specified connection alias for use with cross-Region redirection. For more information, see  Cross-Region Redirection for Amazon WorkSpaces.
    */
   createConnectionAlias(params: WorkSpaces.Types.CreateConnectionAliasRequest, callback?: (err: AWSError, data: WorkSpaces.Types.CreateConnectionAliasResult) => void): Request<WorkSpaces.Types.CreateConnectionAliasResult, AWSError>;
@@ -91,6 +99,14 @@ declare class WorkSpaces extends Service {
    * Creates one or more WorkSpaces. This operation is asynchronous and returns before the WorkSpaces are created.
    */
   createWorkspaces(callback?: (err: AWSError, data: WorkSpaces.Types.CreateWorkspacesResult) => void): Request<WorkSpaces.Types.CreateWorkspacesResult, AWSError>;
+  /**
+   * Deletes a client-add-in for Amazon Connect that is configured within a directory.
+   */
+  deleteConnectClientAddIn(params: WorkSpaces.Types.DeleteConnectClientAddInRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DeleteConnectClientAddInResult) => void): Request<WorkSpaces.Types.DeleteConnectClientAddInResult, AWSError>;
+  /**
+   * Deletes a client-add-in for Amazon Connect that is configured within a directory.
+   */
+  deleteConnectClientAddIn(callback?: (err: AWSError, data: WorkSpaces.Types.DeleteConnectClientAddInResult) => void): Request<WorkSpaces.Types.DeleteConnectClientAddInResult, AWSError>;
   /**
    * Deletes the specified connection alias. For more information, see  Cross-Region Redirection for Amazon WorkSpaces.   If you will no longer be using a fully qualified domain name (FQDN) as the registration code for your WorkSpaces users, you must take certain precautions to prevent potential security issues. For more information, see  Security Considerations if You Stop Using Cross-Region Redirection.   To delete a connection alias that has been shared, the shared account must first disassociate the connection alias from any directories it has been associated with. Then you must unshare the connection alias from the account it has been shared with. You can delete a connection alias only after it is no longer shared with any accounts or associated with any directories. 
    */
@@ -163,6 +179,14 @@ declare class WorkSpaces extends Service {
    * Retrieves a list that describes one or more specified Amazon WorkSpaces clients.
    */
   describeClientProperties(callback?: (err: AWSError, data: WorkSpaces.Types.DescribeClientPropertiesResult) => void): Request<WorkSpaces.Types.DescribeClientPropertiesResult, AWSError>;
+  /**
+   * Retrieves a list of Amazon Connect client add-ins that have been created.
+   */
+  describeConnectClientAddIns(params: WorkSpaces.Types.DescribeConnectClientAddInsRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DescribeConnectClientAddInsResult) => void): Request<WorkSpaces.Types.DescribeConnectClientAddInsResult, AWSError>;
+  /**
+   * Retrieves a list of Amazon Connect client add-ins that have been created.
+   */
+  describeConnectClientAddIns(callback?: (err: AWSError, data: WorkSpaces.Types.DescribeConnectClientAddInsResult) => void): Request<WorkSpaces.Types.DescribeConnectClientAddInsResult, AWSError>;
   /**
    * Describes the permissions that the owner of a connection alias has granted to another Amazon Web Services account for the specified connection alias. For more information, see  Cross-Region Redirection for Amazon WorkSpaces.
    */
@@ -412,6 +436,14 @@ declare class WorkSpaces extends Service {
    */
   terminateWorkspaces(callback?: (err: AWSError, data: WorkSpaces.Types.TerminateWorkspacesResult) => void): Request<WorkSpaces.Types.TerminateWorkspacesResult, AWSError>;
   /**
+   * Updates a Amazon Connect client add-in. Use this action to update the name and endpoint URL of a Amazon Connect client add-in.
+   */
+  updateConnectClientAddIn(params: WorkSpaces.Types.UpdateConnectClientAddInRequest, callback?: (err: AWSError, data: WorkSpaces.Types.UpdateConnectClientAddInResult) => void): Request<WorkSpaces.Types.UpdateConnectClientAddInResult, AWSError>;
+  /**
+   * Updates a Amazon Connect client add-in. Use this action to update the name and endpoint URL of a Amazon Connect client add-in.
+   */
+  updateConnectClientAddIn(callback?: (err: AWSError, data: WorkSpaces.Types.UpdateConnectClientAddInResult) => void): Request<WorkSpaces.Types.UpdateConnectClientAddInResult, AWSError>;
+  /**
    * Shares or unshares a connection alias with one account by specifying whether that account has permission to associate the connection alias with a directory. If the association permission is granted, the connection alias is shared with that account. If the association permission is revoked, the connection alias is unshared with the account. For more information, see  Cross-Region Redirection for Amazon WorkSpaces.    Before performing this operation, call  DescribeConnectionAliases to make sure that the current state of the connection alias is CREATED.   To delete a connection alias that has been shared, the shared account must first disassociate the connection alias from any directories it has been associated with. Then you must unshare the connection alias from the account it has been shared with. You can delete a connection alias only after it is no longer shared with any accounts or associated with any directories.   
    */
   updateConnectionAliasPermission(params: WorkSpaces.Types.UpdateConnectionAliasPermissionRequest, callback?: (err: AWSError, data: WorkSpaces.Types.UpdateConnectionAliasPermissionResult) => void): Request<WorkSpaces.Types.UpdateConnectionAliasPermissionResult, AWSError>;
@@ -474,7 +506,10 @@ declare namespace WorkSpaces {
     ErrorMessage?: Description;
   }
   export type AccountModificationList = AccountModification[];
+  export type AddInName = string;
+  export type AddInUrl = string;
   export type Alias = string;
+  export type AmazonUuid = string;
   export type Application = "Microsoft_Office_2016"|"Microsoft_Office_2019"|string;
   export type ApplicationList = Application[];
   export interface AssociateConnectionAliasRequest {
@@ -549,6 +584,25 @@ declare namespace WorkSpaces {
     Name?: Compute;
   }
   export type ComputerName = string;
+  export interface ConnectClientAddIn {
+    /**
+     * The client add-in identifier.
+     */
+    AddInId?: AmazonUuid;
+    /**
+     * The directory identifier for which the client add-in is configured.
+     */
+    ResourceId?: DirectoryId;
+    /**
+     * The name of the client add in.
+     */
+    Name?: AddInName;
+    /**
+     * The endpoint URL of the client add-in.
+     */
+    URL?: AddInUrl;
+  }
+  export type ConnectClientAddInList = ConnectClientAddIn[];
   export interface ConnectionAlias {
     /**
      * The connection string specified for the connection alias. The connection string must be in the form of a fully qualified domain name (FQDN), such as www.example.com.
@@ -635,6 +689,26 @@ declare namespace WorkSpaces {
      * The identifier of the image.
      */
     ImageId?: WorkspaceImageId;
+  }
+  export interface CreateConnectClientAddInRequest {
+    /**
+     * The directory identifier for which to configure the client add-in.
+     */
+    ResourceId: DirectoryId;
+    /**
+     * The name of the client add-in.
+     */
+    Name: AddInName;
+    /**
+     * The endpoint URL of the Amazon Connect client add-in.
+     */
+    URL: AddInUrl;
+  }
+  export interface CreateConnectClientAddInResult {
+    /**
+     * The client add-in identifier.
+     */
+    AddInId?: AmazonUuid;
   }
   export interface CreateConnectionAliasRequest {
     /**
@@ -784,6 +858,18 @@ declare namespace WorkSpaces {
      */
     EnableMaintenanceMode?: BooleanObject;
   }
+  export interface DeleteConnectClientAddInRequest {
+    /**
+     * The identifier of the client add-in to delete.
+     */
+    AddInId: AmazonUuid;
+    /**
+     * The directory identifier for which the client add-in is configured.
+     */
+    ResourceId: DirectoryId;
+  }
+  export interface DeleteConnectClientAddInResult {
+  }
   export interface DeleteConnectionAliasRequest {
     /**
      * The identifier of the connection alias to delete.
@@ -875,6 +961,30 @@ declare namespace WorkSpaces {
      * Information about the specified Amazon WorkSpaces clients.
      */
     ClientPropertiesList?: ClientPropertiesList;
+  }
+  export interface DescribeConnectClientAddInsRequest {
+    /**
+     * The directory identifier for which the client add-in is configured.
+     */
+    ResourceId: DirectoryId;
+    /**
+     * If you received a NextToken from a previous call that was paginated, provide this token to receive the next set of results.
+     */
+    NextToken?: PaginationToken;
+    /**
+     * The maximum number of items to return.
+     */
+    MaxResults?: Limit;
+  }
+  export interface DescribeConnectClientAddInsResult {
+    /**
+     * Information about client add-ins.
+     */
+    AddIns?: ConnectClientAddInList;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return. 
+     */
+    NextToken?: PaginationToken;
   }
   export interface DescribeConnectionAliasPermissionsRequest {
     /**
@@ -1623,6 +1733,26 @@ declare namespace WorkSpaces {
     FailedRequests?: FailedTerminateWorkspaceRequests;
   }
   export type Timestamp = Date;
+  export interface UpdateConnectClientAddInRequest {
+    /**
+     * The identifier of the client add-in to update.
+     */
+    AddInId: AmazonUuid;
+    /**
+     * The directory identifier for which the client add-in is configured.
+     */
+    ResourceId: DirectoryId;
+    /**
+     * The name of the client add-in.
+     */
+    Name?: AddInName;
+    /**
+     * The endpoint URL of the Amazon Connect client add-in.
+     */
+    URL?: AddInUrl;
+  }
+  export interface UpdateConnectClientAddInResult {
+  }
   export interface UpdateConnectionAliasPermissionRequest {
     /**
      * The identifier of the connection alias that you want to update permissions for.

@@ -76,11 +76,11 @@ declare class Kendra extends Service {
    */
   createExperience(callback?: (err: AWSError, data: Kendra.Types.CreateExperienceResponse) => void): Request<Kendra.Types.CreateExperienceResponse, AWSError>;
   /**
-   * Creates an new set of frequently asked question (FAQ) questions and answers.
+   * Creates an new set of frequently asked question (FAQ) questions and answers. Adding FAQs to an index is an asynchronous operation.
    */
   createFaq(params: Kendra.Types.CreateFaqRequest, callback?: (err: AWSError, data: Kendra.Types.CreateFaqResponse) => void): Request<Kendra.Types.CreateFaqResponse, AWSError>;
   /**
-   * Creates an new set of frequently asked question (FAQ) questions and answers.
+   * Creates an new set of frequently asked question (FAQ) questions and answers. Adding FAQs to an index is an asynchronous operation.
    */
   createFaq(callback?: (err: AWSError, data: Kendra.Types.CreateFaqResponse) => void): Request<Kendra.Types.CreateFaqResponse, AWSError>;
   /**
@@ -2080,7 +2080,7 @@ declare namespace Kendra {
      */
     LongValue?: Long;
     /**
-     * A date expressed as an ISO 8601 string. It is important for the time zone to be included in the ISO 8601 date-time format. For example, 20120325T123010+01:00 is the ISO 8601 date-time format for March 25th 2012 at 12:30PM (plus 10 seconds) in Central European Time.
+     * A date expressed as an ISO 8601 string. It is important for the time zone to be included in the ISO 8601 date-time format. For example, 2012-03-25T12:30:10+01:00 is the ISO 8601 date-time format for March 25th 2012 at 12:30PM (plus 10 seconds) in Central European Time.
      */
     DateValue?: Timestamp;
   }
@@ -3087,7 +3087,7 @@ declare namespace Kendra {
     /**
      * The text to search for.
      */
-    QueryText: QueryText;
+    QueryText?: QueryText;
     /**
      * Enables filtered searches based on document attributes. You can only provide one attribute filter; however, the AndAllFilters, NotFilter, and OrAllFilters parameters contain a list of other filters. The AttributeFilter parameter enables you to create a set of filtering rules that a document must satisfy to be included in the query results.
      */
@@ -3146,6 +3146,10 @@ declare namespace Kendra {
      * The total number of items found by the search; however, you can only retrieve up to 100 items. For example, if the search found 192 items, you can only retrieve the first 100 of the items.
      */
     TotalNumberOfResults?: Integer;
+    /**
+     * A list of warning codes and their messages on problems with your query. Amazon Kendra currently only supports one type of warning, which is a warning on invalid syntax used in the query. For examples of invalid query syntax, see Searching with advanced query syntax.
+     */
+    Warnings?: WarningList;
   }
   export interface QueryResultItem {
     /**
@@ -4083,6 +4087,19 @@ declare namespace Kendra {
   export type ValueImportanceMapKey = string;
   export type VisitorId = string;
   export type VpcSecurityGroupId = string;
+  export interface Warning {
+    /**
+     * The message that explains the problem with the query.
+     */
+    Message?: WarningMessage;
+    /**
+     * The code used to show the type of warning for the query.
+     */
+    Code?: WarningCode;
+  }
+  export type WarningCode = "QUERY_LANGUAGE_INVALID_SYNTAX"|string;
+  export type WarningList = Warning[];
+  export type WarningMessage = string;
   export interface WebCrawlerConfiguration {
     /**
      * Specifies the seed or starting point URLs of the websites or the sitemap URLs of the websites you want to crawl. You can include website subdomains. You can list up to 100 seed URLs and up to three sitemap URLs. You can only crawl websites that use the secure communication protocol, Hypertext Transfer Protocol Secure (HTTPS). If you receive an error when crawling a website, it could be that the website is blocked from crawling.  When selecting websites to index, you must adhere to the Amazon Acceptable Use Policy and all other Amazon terms. Remember that you must only use Amazon Kendra Web Crawler to index your own webpages, or webpages that you have authorization to index. 

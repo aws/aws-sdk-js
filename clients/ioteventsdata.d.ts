@@ -36,11 +36,11 @@ declare class IoTEventsData extends Service {
    */
   batchEnableAlarm(callback?: (err: AWSError, data: IoTEventsData.Types.BatchEnableAlarmResponse) => void): Request<IoTEventsData.Types.BatchEnableAlarmResponse, AWSError>;
   /**
-   * Sends a set of messages to the AWS IoT Events system. Each message payload is transformed into the input you specify ("inputName") and ingested into any detectors that monitor that input. If multiple messages are sent, the order in which the messages are processed isn't guaranteed. To guarantee ordering, you must send messages one at a time and wait for a successful response.
+   * Sends a set of messages to the IoT Events system. Each message payload is transformed into the input you specify ("inputName") and ingested into any detectors that monitor that input. If multiple messages are sent, the order in which the messages are processed isn't guaranteed. To guarantee ordering, you must send messages one at a time and wait for a successful response.
    */
   batchPutMessage(params: IoTEventsData.Types.BatchPutMessageRequest, callback?: (err: AWSError, data: IoTEventsData.Types.BatchPutMessageResponse) => void): Request<IoTEventsData.Types.BatchPutMessageResponse, AWSError>;
   /**
-   * Sends a set of messages to the AWS IoT Events system. Each message payload is transformed into the input you specify ("inputName") and ingested into any detectors that monitor that input. If multiple messages are sent, the order in which the messages are processed isn't guaranteed. To guarantee ordering, you must send messages one at a time and wait for a successful response.
+   * Sends a set of messages to the IoT Events system. Each message payload is transformed into the input you specify ("inputName") and ingested into any detectors that monitor that input. If multiple messages are sent, the order in which the messages are processed isn't guaranteed. To guarantee ordering, you must send messages one at a time and wait for a successful response.
    */
   batchPutMessage(callback?: (err: AWSError, data: IoTEventsData.Types.BatchPutMessageResponse) => void): Request<IoTEventsData.Types.BatchPutMessageResponse, AWSError>;
   /**
@@ -721,7 +721,7 @@ declare namespace IoTEventsData {
      */
     name: TimerName;
     /**
-     * The number of seconds which have elapsed on the timer.
+     * The expiration time for the timer.
      */
     timestamp: Timestamp;
   }
