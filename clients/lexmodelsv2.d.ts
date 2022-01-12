@@ -140,6 +140,14 @@ declare class LexModelsV2 extends Service {
    */
   deleteBotVersion(callback?: (err: AWSError, data: LexModelsV2.Types.DeleteBotVersionResponse) => void): Request<LexModelsV2.Types.DeleteBotVersionResponse, AWSError>;
   /**
+   * Removes a custom vocabulary from the specified locale in the specified bot.
+   */
+  deleteCustomVocabulary(params: LexModelsV2.Types.DeleteCustomVocabularyRequest, callback?: (err: AWSError, data: LexModelsV2.Types.DeleteCustomVocabularyResponse) => void): Request<LexModelsV2.Types.DeleteCustomVocabularyResponse, AWSError>;
+  /**
+   * Removes a custom vocabulary from the specified locale in the specified bot.
+   */
+  deleteCustomVocabulary(callback?: (err: AWSError, data: LexModelsV2.Types.DeleteCustomVocabularyResponse) => void): Request<LexModelsV2.Types.DeleteCustomVocabularyResponse, AWSError>;
+  /**
    * Removes a previous export and the associated files stored in an S3 bucket.
    */
   deleteExport(params: LexModelsV2.Types.DeleteExportRequest, callback?: (err: AWSError, data: LexModelsV2.Types.DeleteExportResponse) => void): Request<LexModelsV2.Types.DeleteExportResponse, AWSError>;
@@ -243,6 +251,14 @@ declare class LexModelsV2 extends Service {
    * Provides metadata about a version of a bot.
    */
   describeBotVersion(callback?: (err: AWSError, data: LexModelsV2.Types.DescribeBotVersionResponse) => void): Request<LexModelsV2.Types.DescribeBotVersionResponse, AWSError>;
+  /**
+   * Provides metadata information about a custom vocabulary.
+   */
+  describeCustomVocabularyMetadata(params: LexModelsV2.Types.DescribeCustomVocabularyMetadataRequest, callback?: (err: AWSError, data: LexModelsV2.Types.DescribeCustomVocabularyMetadataResponse) => void): Request<LexModelsV2.Types.DescribeCustomVocabularyMetadataResponse, AWSError>;
+  /**
+   * Provides metadata information about a custom vocabulary.
+   */
+  describeCustomVocabularyMetadata(callback?: (err: AWSError, data: LexModelsV2.Types.DescribeCustomVocabularyMetadataResponse) => void): Request<LexModelsV2.Types.DescribeCustomVocabularyMetadataResponse, AWSError>;
   /**
    * Gets information about a specific export.
    */
@@ -356,19 +372,19 @@ declare class LexModelsV2 extends Service {
    */
   listBuiltInSlotTypes(callback?: (err: AWSError, data: LexModelsV2.Types.ListBuiltInSlotTypesResponse) => void): Request<LexModelsV2.Types.ListBuiltInSlotTypesResponse, AWSError>;
   /**
-   * Lists the exports for a bot or bot locale. Exports are kept in the list for 7 days.
+   * Lists the exports for a bot, bot locale, or custom vocabulary. Exports are kept in the list for 7 days.
    */
   listExports(params: LexModelsV2.Types.ListExportsRequest, callback?: (err: AWSError, data: LexModelsV2.Types.ListExportsResponse) => void): Request<LexModelsV2.Types.ListExportsResponse, AWSError>;
   /**
-   * Lists the exports for a bot or bot locale. Exports are kept in the list for 7 days.
+   * Lists the exports for a bot, bot locale, or custom vocabulary. Exports are kept in the list for 7 days.
    */
   listExports(callback?: (err: AWSError, data: LexModelsV2.Types.ListExportsResponse) => void): Request<LexModelsV2.Types.ListExportsResponse, AWSError>;
   /**
-   * Lists the imports for a bot or bot locale. Imports are kept in the list for 7 days.
+   * Lists the imports for a bot, bot locale, or custom vocabulary. Imports are kept in the list for 7 days.
    */
   listImports(params: LexModelsV2.Types.ListImportsRequest, callback?: (err: AWSError, data: LexModelsV2.Types.ListImportsResponse) => void): Request<LexModelsV2.Types.ListImportsResponse, AWSError>;
   /**
-   * Lists the imports for a bot or bot locale. Imports are kept in the list for 7 days.
+   * Lists the imports for a bot, bot locale, or custom vocabulary. Imports are kept in the list for 7 days.
    */
   listImports(callback?: (err: AWSError, data: LexModelsV2.Types.ListImportsResponse) => void): Request<LexModelsV2.Types.ListImportsResponse, AWSError>;
   /**
@@ -428,11 +444,11 @@ declare class LexModelsV2 extends Service {
    */
   startBotRecommendation(callback?: (err: AWSError, data: LexModelsV2.Types.StartBotRecommendationResponse) => void): Request<LexModelsV2.Types.StartBotRecommendationResponse, AWSError>;
   /**
-   * Starts importing a bot or bot locale from a zip archive that you uploaded to an S3 bucket.
+   * Starts importing a bot, bot locale, or custom vocabulary from a zip archive that you uploaded to an S3 bucket.
    */
   startImport(params: LexModelsV2.Types.StartImportRequest, callback?: (err: AWSError, data: LexModelsV2.Types.StartImportResponse) => void): Request<LexModelsV2.Types.StartImportResponse, AWSError>;
   /**
-   * Starts importing a bot or bot locale from a zip archive that you uploaded to an S3 bucket.
+   * Starts importing a bot, bot locale, or custom vocabulary from a zip archive that you uploaded to an S3 bucket.
    */
   startImport(callback?: (err: AWSError, data: LexModelsV2.Types.StartImportResponse) => void): Request<LexModelsV2.Types.StartImportResponse, AWSError>;
   /**
@@ -525,6 +541,12 @@ declare class LexModelsV2 extends Service {
   updateSlotType(callback?: (err: AWSError, data: LexModelsV2.Types.UpdateSlotTypeResponse) => void): Request<LexModelsV2.Types.UpdateSlotTypeResponse, AWSError>;
 }
 declare namespace LexModelsV2 {
+  export interface AdvancedRecognitionSetting {
+    /**
+     * Enables using the slot values as a custom vocabulary for recognizing user utterances.
+     */
+    audioRecognitionStrategy?: AudioRecognitionStrategy;
+  }
   export interface AggregatedUtterancesFilter {
     /**
      * The name of the field to filter the utterance list.
@@ -616,6 +638,7 @@ declare namespace LexModelsV2 {
     destination: AudioLogDestination;
   }
   export type AudioLogSettingsList = AudioLogSetting[];
+  export type AudioRecognitionStrategy = "UseSlotValuesAsCustomVocabulary"|string;
   export type Boolean = boolean;
   export interface BotAliasHistoryEvent {
     /**
@@ -1748,6 +1771,35 @@ declare namespace LexModelsV2 {
     value: CustomPayloadValue;
   }
   export type CustomPayloadValue = string;
+  export interface CustomVocabularyExportSpecification {
+    /**
+     * The identifier of the bot that contains the custom vocabulary to export.
+     */
+    botId: Id;
+    /**
+     * The version of the bot that contains the custom vocabulary to export.
+     */
+    botVersion: BotVersion;
+    /**
+     * The locale of the bot that contains the custom vocabulary to export.
+     */
+    localeId: LocaleId;
+  }
+  export interface CustomVocabularyImportSpecification {
+    /**
+     * The identifier of the bot to import the custom vocabulary to.
+     */
+    botId: Id;
+    /**
+     * The version of the bot to import the custom vocabulary to.
+     */
+    botVersion: DraftBotVersion;
+    /**
+     * The identifier of the local to import the custom vocabulary to. The value must be en_GB.
+     */
+    localeId: LocaleId;
+  }
+  export type CustomVocabularyStatus = "Ready"|"Deleting"|"Exporting"|"Importing"|"Creating"|string;
   export interface DataPrivacy {
     /**
      * For each Amazon Lex bot created with the Amazon Lex Model Building Service, you must specify whether your use of Amazon Lex is related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to the Children's Online Privacy Protection Act (COPPA) by specifying true or false in the childDirected field. By specifying true in the childDirected field, you confirm that your use of Amazon Lex is related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to COPPA. By specifying false in the childDirected field, you confirm that your use of Amazon Lex is not related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to COPPA. You may not specify a default value for the childDirected field that does not accurately reflect whether your use of Amazon Lex is related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to COPPA. If your use of Amazon Lex relates to a website, program, or other application that is directed in whole or in part, to children under age 13, you must obtain any required verifiable parental consent under COPPA. For information regarding the use of Amazon Lex in connection with websites, programs, or other applications that are directed or targeted, in whole or in part, to children under age 13, see the Amazon Lex FAQ.
@@ -1871,6 +1923,38 @@ declare namespace LexModelsV2 {
      * The current status of the bot. 
      */
     botStatus?: BotStatus;
+  }
+  export interface DeleteCustomVocabularyRequest {
+    /**
+     * The unique identifier of the bot to remove the custom vocabulary from.
+     */
+    botId: Id;
+    /**
+     * The version of the bot to remove the custom vocabulary from.
+     */
+    botVersion: DraftBotVersion;
+    /**
+     * The locale identifier for the locale that contains the custom vocabulary to remove.
+     */
+    localeId: LocaleId;
+  }
+  export interface DeleteCustomVocabularyResponse {
+    /**
+     * The identifier of the bot that the custom vocabulary was removed from.
+     */
+    botId?: Id;
+    /**
+     * The version of the bot that the custom vocabulary was removed from.
+     */
+    botVersion?: DraftBotVersion;
+    /**
+     * The locale identifier for the locale that the custom vocabulary was removed from.
+     */
+    localeId?: LocaleId;
+    /**
+     * The status of removing the custom vocabulary.
+     */
+    customVocabularyStatus?: CustomVocabularyStatus;
   }
   export interface DeleteExportRequest {
     /**
@@ -2323,6 +2407,46 @@ declare namespace LexModelsV2 {
      */
     creationDateTime?: Timestamp;
   }
+  export interface DescribeCustomVocabularyMetadataRequest {
+    /**
+     * The unique identifier of the bot that contains the custom vocabulary.
+     */
+    botId: Id;
+    /**
+     * The bot version of the bot to return metadata for.
+     */
+    botVersion: BotVersion;
+    /**
+     * The locale to return the custom vocabulary information for. The locale must be en_GB.
+     */
+    localeId: LocaleId;
+  }
+  export interface DescribeCustomVocabularyMetadataResponse {
+    /**
+     * The identifier of the bot that contains the custom vocabulary.
+     */
+    botId?: Id;
+    /**
+     * The version of the bot that contains the custom vocabulary to describe.
+     */
+    botVersion?: BotVersion;
+    /**
+     * The locale that contains the custom vocabulary to describe.
+     */
+    localeId?: LocaleId;
+    /**
+     * The status of the custom vocabulary. If the status is Ready the custom vocabulary is ready to use.
+     */
+    customVocabularyStatus?: CustomVocabularyStatus;
+    /**
+     * The date and time that the custom vocabulary was created.
+     */
+    creationDateTime?: Timestamp;
+    /**
+     * The date and time that the custom vocabulary was last updated.
+     */
+    lastUpdatedDateTime?: Timestamp;
+  }
   export interface DescribeExportRequest {
     /**
      * The unique identifier of the export to describe.
@@ -2339,7 +2463,7 @@ declare namespace LexModelsV2 {
      */
     resourceSpecification?: ExportResourceSpecification;
     /**
-     * The file format used in the files that describe the bot or bot locale.
+     * The file format used in the files that describe the resource. 
      */
     fileFormat?: ImportExportFileFormat;
     /**
@@ -2375,7 +2499,7 @@ declare namespace LexModelsV2 {
      */
     importId?: Id;
     /**
-     * The specifications of the imported bot or bot locale.
+     * The specifications of the imported bot, bot locale, or custom vocabulary.
      */
     resourceSpecification?: ImportResourceSpecification;
     /**
@@ -2689,7 +2813,7 @@ declare namespace LexModelsV2 {
      */
     name: ExportFilterName;
     /**
-     * The values to use to filter the response.
+     * The values to use to filter the response. The values must be Bot, BotLocale, or CustomVocabulary.
      */
     values: FilterValues;
     /**
@@ -2709,6 +2833,10 @@ declare namespace LexModelsV2 {
      * Parameters for exporting a bot locale.
      */
     botLocaleExportSpecification?: BotLocaleExportSpecification;
+    /**
+     * The parameters required to export a custom vocabulary.
+     */
+    customVocabularyExportSpecification?: CustomVocabularyExportSpecification;
   }
   export type ExportSortAttribute = "LastUpdatedDateTime"|string;
   export interface ExportSortBy {
@@ -2863,7 +2991,7 @@ declare namespace LexModelsV2 {
      */
     buttons?: ButtonsList;
   }
-  export type ImportExportFileFormat = "LexJson"|string;
+  export type ImportExportFileFormat = "LexJson"|"TSV"|string;
   export type ImportExportFilePassword = string;
   export interface ImportFilter {
     /**
@@ -2871,7 +2999,7 @@ declare namespace LexModelsV2 {
      */
     name: ImportFilterName;
     /**
-     * The values to use to filter the response.
+     * The values to use to filter the response. The values must be Bot, BotLocale, or CustomVocabulary.
      */
     values: FilterValues;
     /**
@@ -2891,7 +3019,9 @@ declare namespace LexModelsV2 {
      * Parameters for importing a bot locale.
      */
     botLocaleImportSpecification?: BotLocaleImportSpecification;
+    customVocabularyImportSpecification?: CustomVocabularyImportSpecification;
   }
+  export type ImportResourceType = "Bot"|"BotLocale"|"CustomVocabulary"|string;
   export type ImportSortAttribute = "LastUpdatedDateTime"|string;
   export interface ImportSortBy {
     /**
@@ -2933,6 +3063,10 @@ declare namespace LexModelsV2 {
      * The date and time that the import was last updated.
      */
     lastUpdatedDateTime?: Timestamp;
+    /**
+     * The type of resource that was imported.
+     */
+    importedResourceType?: ImportResourceType;
   }
   export type ImportSummaryList = ImportSummary[];
   export type ImportedResourceId = string;
@@ -3308,7 +3442,7 @@ declare namespace LexModelsV2 {
      */
     maxResults?: MaxResults;
     /**
-     * If the response from the ListBots operation contains more results than specified in the maxResults parameter, a token is returned in the response. Use that token in the nextToken parameter to return the next page of results.
+     * If the response from the ListBots operation contains more results than specified in the maxResults parameter, a token is returned in the response.  Use the returned token in the nextToken parameter of a ListBots request to return the next page of results. For a complete set of results, call the ListBots operation until the nextToken returned in the response is null.
      */
     nextToken?: NextToken;
   }
@@ -3408,9 +3542,13 @@ declare namespace LexModelsV2 {
      */
     maxResults?: MaxResults;
     /**
-     * If the response from the ListExports operation contains more results that specified in the maxResults parameter, a token is returned in the response. Use that token in the nextToken parameter to return the next page of results.
+     * If the response from the ListExports operation contains more results that specified in the maxResults parameter, a token is returned in the response.  Use the returned token in the nextToken parameter of a ListExports request to return the next page of results. For a complete set of results, call the ListExports operation until the nextToken returned in the response is null.
      */
     nextToken?: NextToken;
+    /**
+     * Specifies the resources that should be exported. If you don't specify a resource type in the filters parameter, both bot locales and custom vocabularies are exported.
+     */
+    localeId?: LocaleId;
   }
   export interface ListExportsResponse {
     /**
@@ -3429,6 +3567,10 @@ declare namespace LexModelsV2 {
      * A token that indicates whether there are more results to return in a response to the ListExports operation. If the nextToken field is present, you send the contents as the nextToken parameter of a ListExports operation request to get the next page of results.
      */
     nextToken?: NextToken;
+    /**
+     * The locale specified in the request.
+     */
+    localeId?: LocaleId;
   }
   export interface ListImportsRequest {
     /**
@@ -3452,9 +3594,13 @@ declare namespace LexModelsV2 {
      */
     maxResults?: MaxResults;
     /**
-     * If the response from the ListImports operation contains more results than specified in the maxResults parameter, a token is returned in the response. Use that token in the nextToken parameter to return the next page of results.
+     * If the response from the ListImports operation contains more results than specified in the maxResults parameter, a token is returned in the response. Use the returned token in the nextToken parameter of a ListImports request to return the next page of results. For a complete set of results, call the ListImports operation until the nextToken returned in the response is null.
      */
     nextToken?: NextToken;
+    /**
+     * Specifies the locale that should be present in the list. If you don't specify a resource type in the filters parameter, the list contains both bot locales and custom vocabularies.
+     */
+    localeId?: LocaleId;
   }
   export interface ListImportsResponse {
     /**
@@ -3473,6 +3619,10 @@ declare namespace LexModelsV2 {
      * A token that indicates whether there are more results to return in a response to the ListImports operation. If the nextToken field is present, you send the contents as the nextToken parameter of a ListImports operation request to get the next page of results.
      */
     nextToken?: NextToken;
+    /**
+     * The locale specified in the request.
+     */
+    localeId?: LocaleId;
   }
   export interface ListIntentsRequest {
     /**
@@ -3500,7 +3650,7 @@ declare namespace LexModelsV2 {
      */
     maxResults?: MaxResults;
     /**
-     * If the response from the ListIntents operation contains more results than specified in the maxResults parameter, a token is returned in the response. Use that token in the nextToken parameter to return the next page of results.
+     * If the response from the ListIntents operation contains more results than specified in the maxResults parameter, a token is returned in the response. Use the returned token in the nextToken parameter of a ListIntents request to return the next page of results. For a complete set of results, call the ListIntents operation until the nextToken returned in the response is null.
      */
     nextToken?: NextToken;
   }
@@ -4193,6 +4343,10 @@ declare namespace LexModelsV2 {
      * A regular expression used to validate the value of a slot.
      */
     regexFilter?: SlotValueRegexFilter;
+    /**
+     * Provides settings that enable advanced recognition settings for slot values.
+     */
+    advancedRecognitionSetting?: AdvancedRecognitionSetting;
   }
   export type SortOrder = "Ascending"|"Descending"|string;
   export interface StartBotRecommendationRequest {
@@ -4257,7 +4411,7 @@ declare namespace LexModelsV2 {
      */
     importId: Id;
     /**
-     * Parameters for creating the bot or bot locale.
+     * Parameters for creating the bot, bot locale or custom vocabulary.
      */
     resourceSpecification: ImportResourceSpecification;
     /**
@@ -4265,7 +4419,7 @@ declare namespace LexModelsV2 {
      */
     mergeStrategy: MergeStrategy;
     /**
-     * The password used to encrypt the zip archive that contains the bot or bot locale definition. You should always encrypt the zip archive to protect it during transit between your site and Amazon Lex.
+     * The password used to encrypt the zip archive that contains the resource definition. You should always encrypt the zip archive to protect it during transit between your site and Amazon Lex.
      */
     filePassword?: ImportExportFilePassword;
   }
@@ -4275,7 +4429,7 @@ declare namespace LexModelsV2 {
      */
     importId?: Id;
     /**
-     * The parameters used when importing the bot or bot locale.
+     * The parameters used when importing the resource.
      */
     resourceSpecification?: ImportResourceSpecification;
     /**
@@ -4283,7 +4437,7 @@ declare namespace LexModelsV2 {
      */
     mergeStrategy?: MergeStrategy;
     /**
-     * The current status of the import. When the status is Complete the bot or bot alias is ready to use.
+     * The current status of the import. When the status is Complete the bot, bot alias, or custom vocabulary is ready to use.
      */
     importStatus?: ImportStatus;
     /**
@@ -4665,7 +4819,7 @@ declare namespace LexModelsV2 {
      */
     resourceSpecification?: ExportResourceSpecification;
     /**
-     * The file format used for the files that define the resource.
+     * The file format used for the files that define the resource. The TSV format is required to export a custom vocabulary only; otherwise use LexJson format.
      */
     fileFormat?: ImportExportFileFormat;
     /**

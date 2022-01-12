@@ -92,6 +92,14 @@ declare class Honeycode extends Service {
    */
   listTables(callback?: (err: AWSError, data: Honeycode.Types.ListTablesResult) => void): Request<Honeycode.Types.ListTablesResult, AWSError>;
   /**
+   *  The ListTagsForResource API allows you to return a resource's tags. 
+   */
+  listTagsForResource(params: Honeycode.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: Honeycode.Types.ListTagsForResourceResult) => void): Request<Honeycode.Types.ListTagsForResourceResult, AWSError>;
+  /**
+   *  The ListTagsForResource API allows you to return a resource's tags. 
+   */
+  listTagsForResource(callback?: (err: AWSError, data: Honeycode.Types.ListTagsForResourceResult) => void): Request<Honeycode.Types.ListTagsForResourceResult, AWSError>;
+  /**
    *  The QueryTableRows API allows you to use a filter formula to query for specific rows in a table. 
    */
   queryTableRows(params: Honeycode.Types.QueryTableRowsRequest, callback?: (err: AWSError, data: Honeycode.Types.QueryTableRowsResult) => void): Request<Honeycode.Types.QueryTableRowsResult, AWSError>;
@@ -107,6 +115,22 @@ declare class Honeycode extends Service {
    *  The StartTableDataImportJob API allows you to start an import job on a table. This API will only return the id of the job that was started. To find out the status of the import request, you need to call the DescribeTableDataImportJob API. 
    */
   startTableDataImportJob(callback?: (err: AWSError, data: Honeycode.Types.StartTableDataImportJobResult) => void): Request<Honeycode.Types.StartTableDataImportJobResult, AWSError>;
+  /**
+   *  The TagResource API allows you to add tags to an ARN-able resource. Resource includes workbook, table, screen and screen-automation. 
+   */
+  tagResource(params: Honeycode.Types.TagResourceRequest, callback?: (err: AWSError, data: Honeycode.Types.TagResourceResult) => void): Request<Honeycode.Types.TagResourceResult, AWSError>;
+  /**
+   *  The TagResource API allows you to add tags to an ARN-able resource. Resource includes workbook, table, screen and screen-automation. 
+   */
+  tagResource(callback?: (err: AWSError, data: Honeycode.Types.TagResourceResult) => void): Request<Honeycode.Types.TagResourceResult, AWSError>;
+  /**
+   *  The UntagResource API allows you to removes tags from an ARN-able resource. Resource includes workbook, table, screen and screen-automation. 
+   */
+  untagResource(params: Honeycode.Types.UntagResourceRequest, callback?: (err: AWSError, data: Honeycode.Types.UntagResourceResult) => void): Request<Honeycode.Types.UntagResourceResult, AWSError>;
+  /**
+   *  The UntagResource API allows you to removes tags from an ARN-able resource. Resource includes workbook, table, screen and screen-automation. 
+   */
+  untagResource(callback?: (err: AWSError, data: Honeycode.Types.UntagResourceResult) => void): Request<Honeycode.Types.UntagResourceResult, AWSError>;
 }
 declare namespace Honeycode {
   export type AwsUserArn = string;
@@ -380,7 +404,7 @@ declare namespace Honeycode {
      */
     workbookId: ResourceId;
     /**
-     * The ID of the app that contains the screem.
+     * The ID of the app that contains the screen.
      */
     appId: ResourceId;
     /**
@@ -588,6 +612,18 @@ declare namespace Honeycode {
      */
     workbookCursor?: WorkbookCursor;
   }
+  export interface ListTagsForResourceRequest {
+    /**
+     * The resource's Amazon Resource Name (ARN).
+     */
+    resourceArn: ResourceArn;
+  }
+  export interface ListTagsForResourceResult {
+    /**
+     * The resource's tags.
+     */
+    tags?: TagsMap;
+  }
   export type MaxResults = number;
   export type Name = string;
   export type PaginationToken = string;
@@ -632,6 +668,7 @@ declare namespace Honeycode {
     workbookCursor: WorkbookCursor;
   }
   export type RawValue = string;
+  export type ResourceArn = string;
   export type ResourceId = string;
   export type ResourceIds = ResourceId[];
   export type ResultHeader = ColumnMetadata[];
@@ -763,7 +800,35 @@ declare namespace Honeycode {
   }
   export type TableRows = TableRow[];
   export type Tables = Table[];
+  export type TagKey = string;
+  export type TagKeysList = TagKey[];
+  export interface TagResourceRequest {
+    /**
+     * The resource's Amazon Resource Name (ARN).
+     */
+    resourceArn: ResourceArn;
+    /**
+     * A list of tags to apply to the resource.
+     */
+    tags: TagsMap;
+  }
+  export interface TagResourceResult {
+  }
+  export type TagValue = string;
+  export type TagsMap = {[key: string]: TagValue};
   export type TimestampInMillis = Date;
+  export interface UntagResourceRequest {
+    /**
+     * The resource's Amazon Resource Name (ARN).
+     */
+    resourceArn: ResourceArn;
+    /**
+     * A list of tag keys to remove from the resource.
+     */
+    tagKeys: TagKeysList;
+  }
+  export interface UntagResourceResult {
+  }
   export interface UpdateRowData {
     /**
      *  The id of the row that needs to be updated. 
