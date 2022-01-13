@@ -7610,6 +7610,10 @@ declare namespace Glue {
      * The name of the workflow to start.
      */
     Name: NameString;
+    /**
+     * The workflow run properties for the new workflow run.
+     */
+    RunProperties?: WorkflowRunProperties;
   }
   export interface StartWorkflowRunResponse {
     /**

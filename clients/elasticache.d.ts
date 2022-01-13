@@ -2417,7 +2417,7 @@ declare namespace ElastiCache {
   }
   export interface LogDeliveryConfiguration {
     /**
-     * Refers to slow-log.
+     * Refers to slow-log or engine-log.
      */
     LogType?: LogType;
     /**
@@ -2444,7 +2444,7 @@ declare namespace ElastiCache {
   export type LogDeliveryConfigurationList = LogDeliveryConfiguration[];
   export interface LogDeliveryConfigurationRequest {
     /**
-     * Refers to slow-log.
+     * Refers to slow-log or engine-log..
      */
     LogType?: LogType;
     /**
@@ -2467,7 +2467,7 @@ declare namespace ElastiCache {
   export type LogDeliveryConfigurationRequestList = LogDeliveryConfigurationRequest[];
   export type LogDeliveryConfigurationStatus = "active"|"enabling"|"modifying"|"disabling"|"error"|string;
   export type LogFormat = "text"|"json"|string;
-  export type LogType = "slow-log"|string;
+  export type LogType = "slow-log"|"engine-log"|string;
   export interface ModifyCacheClusterMessage {
     /**
      * The cluster identifier. This value is stored as a lowercase string.
@@ -3021,7 +3021,7 @@ declare namespace ElastiCache {
   export type PendingAutomaticFailoverStatus = "enabled"|"disabled"|string;
   export interface PendingLogDeliveryConfiguration {
     /**
-     * Refers to slow-log.
+     * Refers to slow-log or engine-log..
      */
     LogType?: LogType;
     /**

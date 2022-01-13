@@ -7260,6 +7260,10 @@ declare namespace Pinpoint {
      * Specifies whether a journey should be refreshed on segment update.
      */
     RefreshOnSegmentUpdate?: __boolean;
+    /**
+     * The channel-specific configurations for the journey.
+     */
+    JourneyChannelSettings?: JourneyChannelSettings;
   }
   export interface WriteSegmentRequest {
     /**

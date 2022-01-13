@@ -173,11 +173,11 @@ declare class Nimble extends Service {
    */
   getStreamingImage(callback?: (err: AWSError, data: Nimble.Types.GetStreamingImageResponse) => void): Request<Nimble.Types.GetStreamingImageResponse, AWSError>;
   /**
-   * Gets StreamingSession resource. anvoke this operation to poll for a streaming session state while creating or deleting a session.
+   * Gets StreamingSession resource. Invoke this operation to poll for a streaming session state while creating or deleting a session.
    */
   getStreamingSession(params: Nimble.Types.GetStreamingSessionRequest, callback?: (err: AWSError, data: Nimble.Types.GetStreamingSessionResponse) => void): Request<Nimble.Types.GetStreamingSessionResponse, AWSError>;
   /**
-   * Gets StreamingSession resource. anvoke this operation to poll for a streaming session state while creating or deleting a session.
+   * Gets StreamingSession resource. Invoke this operation to poll for a streaming session state while creating or deleting a session.
    */
   getStreamingSession(callback?: (err: AWSError, data: Nimble.Types.GetStreamingSessionResponse) => void): Request<Nimble.Types.GetStreamingSessionResponse, AWSError>;
   /**
@@ -637,7 +637,7 @@ declare namespace Nimble {
      */
     launchProfileId?: String;
     /**
-     * The user ID of the user that owns the streaming session.
+     * The user ID of the user that owns the streaming session. The user that owns the session will be logging into the session and interacting with the virtual workstation.
      */
     ownedBy?: String;
     /**
@@ -1218,6 +1218,10 @@ declare namespace Nimble {
      * The user ID of the user that most recently updated the resource.
      */
     updatedBy?: String;
+    /**
+     * The list of the latest validation results.
+     */
+    validationResults?: ValidationResults;
   }
   export type LaunchProfileDescription = string;
   export type LaunchProfileId = string;
@@ -1331,8 +1335,13 @@ declare namespace Nimble {
   export type LaunchProfileProtocolVersionList = LaunchProfileProtocolVersion[];
   export type LaunchProfileSecurityGroupIdList = SecurityGroupId[];
   export type LaunchProfileState = "CREATE_IN_PROGRESS"|"READY"|"UPDATE_IN_PROGRESS"|"DELETE_IN_PROGRESS"|"DELETED"|"DELETE_FAILED"|"CREATE_FAILED"|"UPDATE_FAILED"|string;
+  export type LaunchProfileStateList = LaunchProfileState[];
   export type LaunchProfileStatusCode = "LAUNCH_PROFILE_CREATED"|"LAUNCH_PROFILE_UPDATED"|"LAUNCH_PROFILE_DELETED"|"LAUNCH_PROFILE_CREATE_IN_PROGRESS"|"LAUNCH_PROFILE_UPDATE_IN_PROGRESS"|"LAUNCH_PROFILE_DELETE_IN_PROGRESS"|"INTERNAL_ERROR"|"STREAMING_IMAGE_NOT_FOUND"|"STREAMING_IMAGE_NOT_READY"|"LAUNCH_PROFILE_WITH_STREAM_SESSIONS_NOT_DELETED"|"ENCRYPTION_KEY_ACCESS_DENIED"|"ENCRYPTION_KEY_NOT_FOUND"|"INVALID_SUBNETS_PROVIDED"|string;
   export type LaunchProfileStudioComponentIdList = String[];
+  export type LaunchProfileValidationState = "VALIDATION_NOT_STARTED"|"VALIDATION_IN_PROGRESS"|"VALIDATION_SUCCESS"|"VALIDATION_FAILED"|"VALIDATION_FAILED_INTERNAL_SERVER_ERROR"|string;
+  export type LaunchProfileValidationStatusCode = "VALIDATION_NOT_STARTED"|"VALIDATION_IN_PROGRESS"|"VALIDATION_SUCCESS"|"VALIDATION_FAILED_INVALID_SUBNET_ROUTE_TABLE_ASSOCIATION"|"VALIDATION_FAILED_SUBNET_NOT_FOUND"|"VALIDATION_FAILED_INVALID_SECURITY_GROUP_ASSOCIATION"|"VALIDATION_FAILED_INVALID_ACTIVE_DIRECTORY"|"VALIDATION_FAILED_UNAUTHORIZED"|"VALIDATION_FAILED_INTERNAL_SERVER_ERROR"|string;
+  export type LaunchProfileValidationStatusMessage = string;
+  export type LaunchProfileValidationType = "VALIDATE_ACTIVE_DIRECTORY_STUDIO_COMPONENT"|"VALIDATE_SUBNET_ASSOCIATION"|"VALIDATE_NETWORK_ACL_ASSOCIATION"|"VALIDATE_SECURITY_GROUP_ASSOCIATION"|string;
   export type LaunchPurpose = string;
   export interface LicenseServiceConfiguration {
     /**
@@ -1429,7 +1438,7 @@ declare namespace Nimble {
     /**
      * Filter this request to launch profiles in any of the given states.
      */
-    states?: StringList;
+    states?: LaunchProfileStateList;
     /**
      * The studio ID. 
      */
@@ -1513,7 +1522,7 @@ declare namespace Nimble {
     /**
      * Filters the request to studio components that are in one of the given states. 
      */
-    states?: StringList;
+    states?: StudioComponentStateList;
     /**
      * The studio ID. 
      */
@@ -1521,7 +1530,7 @@ declare namespace Nimble {
     /**
      * Filters the request to studio components that are of one of the given types.
      */
-    types?: StringList;
+    types?: StudioComponentTypeList;
   }
   export interface ListStudioComponentsResponse {
     /**
@@ -1900,7 +1909,7 @@ declare namespace Nimble {
      */
     launchProfileId?: String;
     /**
-     * The user ID of the user that owns the streaming session.
+     * The user ID of the user that owns the streaming session. The user that owns the session will be logging into the session and interacting with the virtual workstation.
      */
     ownedBy?: String;
     /**
@@ -1963,16 +1972,16 @@ declare namespace Nimble {
   export type StreamingSessionId = string;
   export type StreamingSessionList = StreamingSession[];
   export type StreamingSessionState = "CREATE_IN_PROGRESS"|"DELETE_IN_PROGRESS"|"READY"|"DELETED"|"CREATE_FAILED"|"DELETE_FAILED"|"STOP_IN_PROGRESS"|"START_IN_PROGRESS"|"STOPPED"|"STOP_FAILED"|"START_FAILED"|string;
-  export type StreamingSessionStatusCode = "STREAMING_SESSION_READY"|"STREAMING_SESSION_DELETED"|"STREAMING_SESSION_CREATE_IN_PROGRESS"|"STREAMING_SESSION_DELETE_IN_PROGRESS"|"INTERNAL_ERROR"|"INSUFFICIENT_CAPACITY"|"ACTIVE_DIRECTORY_DOMAIN_JOIN_ERROR"|"NETWORK_CONNECTION_ERROR"|"INITIALIZATION_SCRIPT_ERROR"|"DECRYPT_STREAMING_IMAGE_ERROR"|"NETWORK_INTERFACE_ERROR"|"STREAMING_SESSION_STOPPED"|"STREAMING_SESSION_STARTED"|"STREAMING_SESSION_STOP_IN_PROGRESS"|"STREAMING_SESSION_START_IN_PROGRESS"|string;
+  export type StreamingSessionStatusCode = "STREAMING_SESSION_READY"|"STREAMING_SESSION_DELETED"|"STREAMING_SESSION_CREATE_IN_PROGRESS"|"STREAMING_SESSION_DELETE_IN_PROGRESS"|"INTERNAL_ERROR"|"INSUFFICIENT_CAPACITY"|"ACTIVE_DIRECTORY_DOMAIN_JOIN_ERROR"|"NETWORK_CONNECTION_ERROR"|"INITIALIZATION_SCRIPT_ERROR"|"DECRYPT_STREAMING_IMAGE_ERROR"|"NETWORK_INTERFACE_ERROR"|"STREAMING_SESSION_STOPPED"|"STREAMING_SESSION_STARTED"|"STREAMING_SESSION_STOP_IN_PROGRESS"|"STREAMING_SESSION_START_IN_PROGRESS"|"AMI_VALIDATION_ERROR"|string;
   export type StreamingSessionStorageMode = "UPLOAD"|string;
   export type StreamingSessionStorageModeList = StreamingSessionStorageMode[];
   export interface StreamingSessionStorageRoot {
     /**
-     * The folder path in Linux workstations where files are uploaded. The default path is $HOME/Downloads.
+     * The folder path in Linux workstations where files are uploaded.
      */
     linux?: StreamingSessionStorageRootPathLinux;
     /**
-     * The folder path in Windows workstations where files are uploaded. The default path is %HOMEPATH%\Downloads.
+     * The folder path in Windows workstations where files are uploaded.
      */
     windows?: StreamingSessionStorageRootPathWindows;
   }
@@ -1992,7 +2001,7 @@ declare namespace Nimble {
      */
     expiresAt?: Timestamp;
     /**
-     * The user ID of the user that owns the streaming session.
+     * The user ID of the user that owns the streaming session. The user that owns the session will be logging into the session and interacting with the virtual workstation.
      */
     ownedBy?: String;
     /**
@@ -2203,6 +2212,7 @@ declare namespace Nimble {
   export type StudioComponentScriptParameterKeyValueList = ScriptParameterKeyValue[];
   export type StudioComponentSecurityGroupIdList = SecurityGroupId[];
   export type StudioComponentState = "CREATE_IN_PROGRESS"|"READY"|"UPDATE_IN_PROGRESS"|"DELETE_IN_PROGRESS"|"DELETED"|"DELETE_FAILED"|"CREATE_FAILED"|"UPDATE_FAILED"|string;
+  export type StudioComponentStateList = StudioComponentState[];
   export type StudioComponentStatusCode = "ACTIVE_DIRECTORY_ALREADY_EXISTS"|"STUDIO_COMPONENT_CREATED"|"STUDIO_COMPONENT_UPDATED"|"STUDIO_COMPONENT_DELETED"|"ENCRYPTION_KEY_ACCESS_DENIED"|"ENCRYPTION_KEY_NOT_FOUND"|"STUDIO_COMPONENT_CREATE_IN_PROGRESS"|"STUDIO_COMPONENT_UPDATE_IN_PROGRESS"|"STUDIO_COMPONENT_DELETE_IN_PROGRESS"|"INTERNAL_ERROR"|string;
   export type StudioComponentSubtype = "AWS_MANAGED_MICROSOFT_AD"|"AMAZON_FSX_FOR_WINDOWS"|"AMAZON_FSX_FOR_LUSTRE"|"CUSTOM"|string;
   export interface StudioComponentSummary {
@@ -2245,6 +2255,7 @@ declare namespace Nimble {
   }
   export type StudioComponentSummaryList = StudioComponentSummary[];
   export type StudioComponentType = "ACTIVE_DIRECTORY"|"SHARED_FILE_SYSTEM"|"COMPUTE_FARM"|"LICENSE_SERVICE"|"CUSTOM"|string;
+  export type StudioComponentTypeList = StudioComponentType[];
   export interface StudioEncryptionConfiguration {
     /**
      * The ARN for a KMS key that is used to encrypt studio data.
@@ -2493,6 +2504,25 @@ declare namespace Nimble {
      */
     studio: Studio;
   }
+  export interface ValidationResult {
+    /**
+     * The current state.
+     */
+    state: LaunchProfileValidationState;
+    /**
+     * The status code. This will contain the failure reason if the state is VALIDATION_FAILED.
+     */
+    statusCode: LaunchProfileValidationStatusCode;
+    /**
+     * The status message for the validation result.
+     */
+    statusMessage: LaunchProfileValidationStatusMessage;
+    /**
+     * The type of the validation result.
+     */
+    type: LaunchProfileValidationType;
+  }
+  export type ValidationResults = ValidationResult[];
   export type WindowsMountDrive = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
