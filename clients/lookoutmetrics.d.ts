@@ -52,6 +52,14 @@ declare class LookoutMetrics extends Service {
    */
   createMetricSet(callback?: (err: AWSError, data: LookoutMetrics.Types.CreateMetricSetResponse) => void): Request<LookoutMetrics.Types.CreateMetricSetResponse, AWSError>;
   /**
+   * Deactivates an anomaly detector.
+   */
+  deactivateAnomalyDetector(params: LookoutMetrics.Types.DeactivateAnomalyDetectorRequest, callback?: (err: AWSError, data: LookoutMetrics.Types.DeactivateAnomalyDetectorResponse) => void): Request<LookoutMetrics.Types.DeactivateAnomalyDetectorResponse, AWSError>;
+  /**
+   * Deactivates an anomaly detector.
+   */
+  deactivateAnomalyDetector(callback?: (err: AWSError, data: LookoutMetrics.Types.DeactivateAnomalyDetectorResponse) => void): Request<LookoutMetrics.Types.DeactivateAnomalyDetectorResponse, AWSError>;
+  /**
    * Deletes an alert.
    */
   deleteAlert(params: LookoutMetrics.Types.DeleteAlertRequest, callback?: (err: AWSError, data: LookoutMetrics.Types.DeleteAlertResponse) => void): Request<LookoutMetrics.Types.DeleteAlertResponse, AWSError>;
@@ -340,9 +348,9 @@ declare namespace LookoutMetrics {
     AnomalyDetectorFrequency?: Frequency;
   }
   export type AnomalyDetectorDescription = string;
-  export type AnomalyDetectorFailureType = "ACTIVATION_FAILURE"|"BACK_TEST_ACTIVATION_FAILURE"|"DELETION_FAILURE"|string;
+  export type AnomalyDetectorFailureType = "ACTIVATION_FAILURE"|"BACK_TEST_ACTIVATION_FAILURE"|"DELETION_FAILURE"|"DEACTIVATION_FAILURE"|string;
   export type AnomalyDetectorName = string;
-  export type AnomalyDetectorStatus = "ACTIVE"|"ACTIVATING"|"DELETING"|"FAILED"|"INACTIVE"|"LEARNING"|"BACK_TEST_ACTIVATING"|"BACK_TEST_ACTIVE"|"BACK_TEST_COMPLETE"|string;
+  export type AnomalyDetectorStatus = "ACTIVE"|"ACTIVATING"|"DELETING"|"FAILED"|"INACTIVE"|"LEARNING"|"BACK_TEST_ACTIVATING"|"BACK_TEST_ACTIVE"|"BACK_TEST_COMPLETE"|"DEACTIVATED"|"DEACTIVATING"|string;
   export interface AnomalyDetectorSummary {
     /**
      * The ARN of the detector.
@@ -638,6 +646,14 @@ declare namespace LookoutMetrics {
   export type DatabaseHost = string;
   export type DatabasePort = number;
   export type DateTimeFormat = string;
+  export interface DeactivateAnomalyDetectorRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the anomaly detector.
+     */
+    AnomalyDetectorArn: Arn;
+  }
+  export interface DeactivateAnomalyDetectorResponse {
+  }
   export interface DeleteAlertRequest {
     /**
      * The ARN of the alert to delete.

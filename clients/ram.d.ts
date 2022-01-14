@@ -124,6 +124,14 @@ declare class RAM extends Service {
    */
   listPendingInvitationResources(callback?: (err: AWSError, data: RAM.Types.ListPendingInvitationResourcesResponse) => void): Request<RAM.Types.ListPendingInvitationResourcesResponse, AWSError>;
   /**
+   * Lists the available versions of the specified RAM permission.
+   */
+  listPermissionVersions(params: RAM.Types.ListPermissionVersionsRequest, callback?: (err: AWSError, data: RAM.Types.ListPermissionVersionsResponse) => void): Request<RAM.Types.ListPermissionVersionsResponse, AWSError>;
+  /**
+   * Lists the available versions of the specified RAM permission.
+   */
+  listPermissionVersions(callback?: (err: AWSError, data: RAM.Types.ListPermissionVersionsResponse) => void): Request<RAM.Types.ListPermissionVersionsResponse, AWSError>;
+  /**
    * Retrieves a list of available RAM permissions that you can use for the supported resource types. 
    */
   listPermissions(params: RAM.Types.ListPermissionsRequest, callback?: (err: AWSError, data: RAM.Types.ListPermissionsResponse) => void): Request<RAM.Types.ListPermissionsResponse, AWSError>;
@@ -243,7 +251,7 @@ declare namespace RAM {
      */
     clientToken?: String;
     /**
-     * Specifies the version of the RAM permission to associate with the resource share. If you don't specify this parameter, the operation uses the version designated as the default.
+     * Specifies the version of the RAM permission to associate with the resource share. If you don't specify this parameter, the operation uses the version designated as the default. You can use the ListPermissionVersions operation to discover the available versions of a permission.
      */
     permissionVersion?: Integer;
   }
@@ -587,6 +595,30 @@ declare namespace RAM {
      * An array of objects that contain the information about the resources included the specified resource share.
      */
     resources?: ResourceList;
+    /**
+     * If present, this value indicates that more output is available than is included in the current response. Use this value in the NextToken request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the NextToken response element comes back as null. This indicates that this is the last page of results.
+     */
+    nextToken?: String;
+  }
+  export interface ListPermissionVersionsRequest {
+    /**
+     * Specifies the Amazon Resoure Name (ARN) of the RAM permission whose versions you want to list. You can use the permissionVersion parameter on the AssociateResourceSharePermission operation to specify a non-default version to attach.
+     */
+    permissionArn: String;
+    /**
+     * Specifies that you want to receive the next page of results. Valid only if you received a NextToken response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call's NextToken response to request the next page of results.
+     */
+    nextToken?: String;
+    /**
+     * Specifies the total number of results that you want included on each page of the response. If you do not include this parameter, it defaults to a value that is specific to the operation. If additional items exist beyond the number you specify, the NextToken response element is returned with a value (not null). Include the specified value as the NextToken request parameter in the next call to the operation to get the next part of the results. Note that the service might return fewer results than the maximum even when there are more results available. You should check NextToken after every operation to ensure that you receive all of the results.
+     */
+    maxResults?: MaxResults;
+  }
+  export interface ListPermissionVersionsResponse {
+    /**
+     * An array of objects that contain details for each of the available versions.
+     */
+    permissions?: ResourceSharePermissionList;
     /**
      * If present, this value indicates that more output is available than is included in the current response. Use this value in the NextToken request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the NextToken response element comes back as null. This indicates that this is the last page of results.
      */

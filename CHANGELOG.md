@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1057.0-->
+<!--LATEST=2.1058.0-->
 <!--ENTRYINSERT-->
+
+## 2.1058.0
+* feature: ConfigService: Update ResourceType enum with values for CodeDeploy, EC2 and Kinesis resources
+* feature: Honeycode: Added read and write api support for multi-select picklist. And added errorcode field to DescribeTableDataImportJob API output, when import job fails.
+* feature: LookoutMetrics: This release adds a new DeactivateAnomalyDetector API operation.
+* feature: RAM: This release adds the ListPermissionVersions API which lists the versions for a given permission.
 
 ## 2.1057.0
 * feature: ElastiCache: AWS ElastiCache for Redis has added a new Engine Log LogType in LogDelivery feature. You can now publish the Engine Log from your Amazon ElastiCache for Redis clusters to Amazon CloudWatch Logs and Amazon Kinesis Data Firehose.
