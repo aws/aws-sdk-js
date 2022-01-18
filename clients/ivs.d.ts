@@ -424,6 +424,10 @@ declare namespace IVS {
      * Array of 1-50 maps, each of the form string:string (key:value).
      */
     tags?: Tags;
+    /**
+     * A complex type that allows you to enable/disable the recording of thumbnails for a live session and modify the interval at which thumbnails are generated for the live session.
+     */
+    thumbnailConfiguration?: ThumbnailConfiguration;
   }
   export interface CreateRecordingConfigurationResponse {
     /**
@@ -700,7 +704,7 @@ declare namespace IVS {
      */
     nextToken?: PaginationToken;
     /**
-     * 
+     * List of stream sessions.
      */
     streamSessions: StreamSessionList;
   }
@@ -815,6 +819,10 @@ declare namespace IVS {
      * Array of 1-50 maps, each of the form string:string (key:value).
      */
     tags?: Tags;
+    /**
+     * A complex type that allows you to enable/disable the recording of thumbnails for a live session and modify the interval at which thumbnails are generated for the live session.
+     */
+    thumbnailConfiguration?: ThumbnailConfiguration;
   }
   export type RecordingConfigurationArn = string;
   export type RecordingConfigurationList = RecordingConfigurationSummary[];
@@ -842,6 +850,7 @@ declare namespace IVS {
      */
     tags?: Tags;
   }
+  export type RecordingMode = "DISABLED"|"INTERVAL"|string;
   export type ResourceArn = string;
   export type S3DestinationBucketName = string;
   export interface S3DestinationConfiguration {
@@ -1045,6 +1054,17 @@ declare namespace IVS {
   }
   export type TagValue = string;
   export type Tags = {[key: string]: TagValue};
+  export type TargetIntervalSeconds = number;
+  export interface ThumbnailConfiguration {
+    /**
+     * Thumbnail recording mode. Default: INTERVAL.
+     */
+    recordingMode?: RecordingMode;
+    /**
+     * The targeted thumbnail-generation interval in seconds. This is configurable (and required) only if recordingMode is INTERVAL. Default: 60.  Important: Setting a value for targetIntervalSeconds does not guarantee that thumbnails are generated at the specified interval. For thumbnails to be generated at the targetIntervalSeconds interval, the IDR/Keyframe value for the input video must be less than the targetIntervalSeconds value. See  Amazon IVS Streaming Configuration for information on setting IDR/Keyframe to the recommended value in video-encoder settings.
+     */
+    targetIntervalSeconds?: TargetIntervalSeconds;
+  }
   export type Time = Date;
   export interface UntagResourceRequest {
     /**

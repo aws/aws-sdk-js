@@ -11122,6 +11122,30 @@
       },
       "documentation": "<p>Describes the client-specific data.</p>"
     },
+    "ClientLoginBannerOptions": {
+      "type": "structure",
+      "members": {
+        "Enabled": {
+          "shape": "Boolean"
+        },
+        "BannerText": {
+          "shape": "String"
+        }
+      }
+    },
+    "ClientLoginBannerResponseOptions": {
+      "type": "structure",
+      "members": {
+        "Enabled": {
+          "shape": "Boolean",
+          "locationName": "enabled"
+        },
+        "BannerText": {
+          "shape": "String",
+          "locationName": "bannerText"
+        }
+      }
+    },
     "ClientVpnAssociationId": {
       "type": "string"
     },
@@ -11436,6 +11460,14 @@
           "shape": "ClientConnectResponseOptions",
           "documentation": "<p>The options for managing connection authorization for new client connections.</p>",
           "locationName": "clientConnectOptions"
+        },
+        "SessionTimeoutHours": {
+          "shape": "Integer",
+          "locationName": "sessionTimeoutHours"
+        },
+        "ClientLoginBannerOptions": {
+          "shape": "ClientLoginBannerResponseOptions",
+          "locationName": "clientLoginBannerOptions"
         }
       },
       "documentation": "<p>Describes a Client VPN endpoint.</p>"
@@ -12423,6 +12455,12 @@
         "ClientConnectOptions": {
           "shape": "ClientConnectOptions",
           "documentation": "<p>The options for managing connection authorization for new client connections.</p>"
+        },
+        "SessionTimeoutHours": {
+          "shape": "Integer"
+        },
+        "ClientLoginBannerOptions": {
+          "shape": "ClientLoginBannerOptions"
         }
       }
     },
@@ -37094,6 +37132,12 @@
         "ClientConnectOptions": {
           "shape": "ClientConnectOptions",
           "documentation": "<p>The options for managing connection authorization for new client connections.</p>"
+        },
+        "SessionTimeoutHours": {
+          "shape": "Integer"
+        },
+        "ClientLoginBannerOptions": {
+          "shape": "ClientLoginBannerOptions"
         }
       }
     },

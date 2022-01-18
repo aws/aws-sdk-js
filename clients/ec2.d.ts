@@ -6728,6 +6728,14 @@ declare namespace EC2 {
      */
     UploadStart?: DateTime;
   }
+  export interface ClientLoginBannerOptions {
+    Enabled?: Boolean;
+    BannerText?: String;
+  }
+  export interface ClientLoginBannerResponseOptions {
+    Enabled?: Boolean;
+    BannerText?: String;
+  }
   export type ClientVpnAssociationId = string;
   export interface ClientVpnAuthentication {
     /**
@@ -6934,6 +6942,8 @@ declare namespace EC2 {
      * The options for managing connection authorization for new client connections.
      */
     ClientConnectOptions?: ClientConnectResponseOptions;
+    SessionTimeoutHours?: Integer;
+    ClientLoginBannerOptions?: ClientLoginBannerResponseOptions;
   }
   export interface ClientVpnEndpointAttributeStatus {
     /**
@@ -7568,6 +7578,8 @@ declare namespace EC2 {
      * The options for managing connection authorization for new client connections.
      */
     ClientConnectOptions?: ClientConnectOptions;
+    SessionTimeoutHours?: Integer;
+    ClientLoginBannerOptions?: ClientLoginBannerOptions;
   }
   export interface CreateClientVpnEndpointResult {
     /**
@@ -23277,6 +23289,8 @@ declare namespace EC2 {
      * The options for managing connection authorization for new client connections.
      */
     ClientConnectOptions?: ClientConnectOptions;
+    SessionTimeoutHours?: Integer;
+    ClientLoginBannerOptions?: ClientLoginBannerOptions;
   }
   export interface ModifyClientVpnEndpointResult {
     /**

@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1058.0-->
+<!--LATEST=2.1059.0-->
 <!--ENTRYINSERT-->
+
+## 2.1059.0
+* feature: EC2: Add support for AWS Client VPN client login banner and session timeout.
+* feature: IVS: This release adds support for the new Thumbnail Configuration property for Recording Configurations. For more information see https://docs.aws.amazon.com/ivs/latest/userguide/record-to-s3.html
+* feature: Location: This release adds the CalculateRouteMatrix API which calculates routes for the provided departure and destination positions. The release also deprecates the use of pricing plan across all verticals.
 
 ## 2.1058.0
 * feature: ConfigService: Update ResourceType enum with values for CodeDeploy, EC2 and Kinesis resources

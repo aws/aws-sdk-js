@@ -68,13 +68,21 @@ declare class Location extends Service {
    */
   batchUpdateDevicePosition(callback?: (err: AWSError, data: Location.Types.BatchUpdateDevicePositionResponse) => void): Request<Location.Types.BatchUpdateDevicePositionResponse, AWSError>;
   /**
-   *  Calculates a route given the following required parameters: DeparturePostiton and DestinationPosition. Requires that you first create a route calculator resource. By default, a request that doesn't specify a departure time uses the best time of day to travel with the best traffic conditions when calculating the route. Additional options include:    Specifying a departure time using either DepartureTime or DepartureNow. This calculates a route based on predictive traffic data at the given time.   You can't specify both DepartureTime and DepartureNow in a single request. Specifying both parameters returns a validation error.     Specifying a travel mode using TravelMode. This lets you specify an additional route preference such as CarModeOptions if traveling by Car, or TruckModeOptions if traveling by Truck.    
+   *  Calculates a route given the following required parameters: DeparturePosition and DestinationPosition. Requires that you first create a route calculator resource. By default, a request that doesn't specify a departure time uses the best time of day to travel with the best traffic conditions when calculating the route. Additional options include:    Specifying a departure time using either DepartureTime or DepartNow. This calculates a route based on predictive traffic data at the given time.   You can't specify both DepartureTime and DepartNow in a single request. Specifying both parameters returns a validation error.     Specifying a travel mode using TravelMode sets the transportation mode used to calculate the routes. This also lets you specify additional route preferences in CarModeOptions if traveling by Car, or TruckModeOptions if traveling by Truck.  
    */
   calculateRoute(params: Location.Types.CalculateRouteRequest, callback?: (err: AWSError, data: Location.Types.CalculateRouteResponse) => void): Request<Location.Types.CalculateRouteResponse, AWSError>;
   /**
-   *  Calculates a route given the following required parameters: DeparturePostiton and DestinationPosition. Requires that you first create a route calculator resource. By default, a request that doesn't specify a departure time uses the best time of day to travel with the best traffic conditions when calculating the route. Additional options include:    Specifying a departure time using either DepartureTime or DepartureNow. This calculates a route based on predictive traffic data at the given time.   You can't specify both DepartureTime and DepartureNow in a single request. Specifying both parameters returns a validation error.     Specifying a travel mode using TravelMode. This lets you specify an additional route preference such as CarModeOptions if traveling by Car, or TruckModeOptions if traveling by Truck.    
+   *  Calculates a route given the following required parameters: DeparturePosition and DestinationPosition. Requires that you first create a route calculator resource. By default, a request that doesn't specify a departure time uses the best time of day to travel with the best traffic conditions when calculating the route. Additional options include:    Specifying a departure time using either DepartureTime or DepartNow. This calculates a route based on predictive traffic data at the given time.   You can't specify both DepartureTime and DepartNow in a single request. Specifying both parameters returns a validation error.     Specifying a travel mode using TravelMode sets the transportation mode used to calculate the routes. This also lets you specify additional route preferences in CarModeOptions if traveling by Car, or TruckModeOptions if traveling by Truck.  
    */
   calculateRoute(callback?: (err: AWSError, data: Location.Types.CalculateRouteResponse) => void): Request<Location.Types.CalculateRouteResponse, AWSError>;
+  /**
+   *   Calculates a route matrix given the following required parameters: DeparturePositions and DestinationPositions. CalculateRouteMatrix calculates routes and returns the travel time and travel distance from each departure position to each destination position in the request. For example, given departure positions A and B, and destination positions X and Y, CalculateRouteMatrix will return time and distance for routes from A to X, A to Y, B to X, and B to Y (in that order). The number of results returned (and routes calculated) will be the number of DeparturePositions times the number of DestinationPositions.  Your account is charged for each route calculated, not the number of requests.  Requires that you first create a route calculator resource. By default, a request that doesn't specify a departure time uses the best time of day to travel with the best traffic conditions when calculating routes. Additional options include:     Specifying a departure time using either DepartureTime or DepartNow. This calculates routes based on predictive traffic data at the given time.   You can't specify both DepartureTime and DepartNow in a single request. Specifying both parameters returns a validation error.     Specifying a travel mode using TravelMode sets the transportation mode used to calculate the routes. This also lets you specify additional route preferences in CarModeOptions if traveling by Car, or TruckModeOptions if traveling by Truck.  
+   */
+  calculateRouteMatrix(params: Location.Types.CalculateRouteMatrixRequest, callback?: (err: AWSError, data: Location.Types.CalculateRouteMatrixResponse) => void): Request<Location.Types.CalculateRouteMatrixResponse, AWSError>;
+  /**
+   *   Calculates a route matrix given the following required parameters: DeparturePositions and DestinationPositions. CalculateRouteMatrix calculates routes and returns the travel time and travel distance from each departure position to each destination position in the request. For example, given departure positions A and B, and destination positions X and Y, CalculateRouteMatrix will return time and distance for routes from A to X, A to Y, B to X, and B to Y (in that order). The number of results returned (and routes calculated) will be the number of DeparturePositions times the number of DestinationPositions.  Your account is charged for each route calculated, not the number of requests.  Requires that you first create a route calculator resource. By default, a request that doesn't specify a departure time uses the best time of day to travel with the best traffic conditions when calculating routes. Additional options include:     Specifying a departure time using either DepartureTime or DepartNow. This calculates routes based on predictive traffic data at the given time.   You can't specify both DepartureTime and DepartNow in a single request. Specifying both parameters returns a validation error.     Specifying a travel mode using TravelMode sets the transportation mode used to calculate the routes. This also lets you specify additional route preferences in CarModeOptions if traveling by Car, or TruckModeOptions if traveling by Truck.  
+   */
+  calculateRouteMatrix(callback?: (err: AWSError, data: Location.Types.CalculateRouteMatrixResponse) => void): Request<Location.Types.CalculateRouteMatrixResponse, AWSError>;
   /**
    * Creates a geofence collection, which manages and stores geofences.
    */
@@ -84,27 +92,27 @@ declare class Location extends Service {
    */
   createGeofenceCollection(callback?: (err: AWSError, data: Location.Types.CreateGeofenceCollectionResponse) => void): Request<Location.Types.CreateGeofenceCollectionResponse, AWSError>;
   /**
-   * Creates a map resource in your AWS account, which provides map tiles of different styles sourced from global location data providers.
+   * Creates a map resource in your AWS account, which provides map tiles of different styles sourced from global location data providers.  If your application is tracking or routing assets you use in your business, such as delivery vehicles or employees, you may only use HERE as your geolocation provider. See section 82 of the AWS service terms for more details. 
    */
   createMap(params: Location.Types.CreateMapRequest, callback?: (err: AWSError, data: Location.Types.CreateMapResponse) => void): Request<Location.Types.CreateMapResponse, AWSError>;
   /**
-   * Creates a map resource in your AWS account, which provides map tiles of different styles sourced from global location data providers.
+   * Creates a map resource in your AWS account, which provides map tiles of different styles sourced from global location data providers.  If your application is tracking or routing assets you use in your business, such as delivery vehicles or employees, you may only use HERE as your geolocation provider. See section 82 of the AWS service terms for more details. 
    */
   createMap(callback?: (err: AWSError, data: Location.Types.CreateMapResponse) => void): Request<Location.Types.CreateMapResponse, AWSError>;
   /**
-   * Creates a place index resource in your AWS account. Use a place index resource to geocode addresses and other text queries by using the SearchPlaceIndexForText operation, and reverse geocode coordinates by using the SearchPlaceIndexForPosition operation, and enable autosuggestions by using the SearchPlaceIndexForSuggestions operation.
+   * Creates a place index resource in your AWS account. Use a place index resource to geocode addresses and other text queries by using the SearchPlaceIndexForText operation, and reverse geocode coordinates by using the SearchPlaceIndexForPosition operation, and enable autosuggestions by using the SearchPlaceIndexForSuggestions operation.  If your application is tracking or routing assets you use in your business, such as delivery vehicles or employees, you may only use HERE as your geolocation provider. See section 82 of the AWS service terms for more details. 
    */
   createPlaceIndex(params: Location.Types.CreatePlaceIndexRequest, callback?: (err: AWSError, data: Location.Types.CreatePlaceIndexResponse) => void): Request<Location.Types.CreatePlaceIndexResponse, AWSError>;
   /**
-   * Creates a place index resource in your AWS account. Use a place index resource to geocode addresses and other text queries by using the SearchPlaceIndexForText operation, and reverse geocode coordinates by using the SearchPlaceIndexForPosition operation, and enable autosuggestions by using the SearchPlaceIndexForSuggestions operation.
+   * Creates a place index resource in your AWS account. Use a place index resource to geocode addresses and other text queries by using the SearchPlaceIndexForText operation, and reverse geocode coordinates by using the SearchPlaceIndexForPosition operation, and enable autosuggestions by using the SearchPlaceIndexForSuggestions operation.  If your application is tracking or routing assets you use in your business, such as delivery vehicles or employees, you may only use HERE as your geolocation provider. See section 82 of the AWS service terms for more details. 
    */
   createPlaceIndex(callback?: (err: AWSError, data: Location.Types.CreatePlaceIndexResponse) => void): Request<Location.Types.CreatePlaceIndexResponse, AWSError>;
   /**
-   * Creates a route calculator resource in your AWS account. You can send requests to a route calculator resource to estimate travel time, distance, and get directions. A route calculator sources traffic and road network data from your chosen data provider.
+   * Creates a route calculator resource in your AWS account. You can send requests to a route calculator resource to estimate travel time, distance, and get directions. A route calculator sources traffic and road network data from your chosen data provider.  If your application is tracking or routing assets you use in your business, such as delivery vehicles or employees, you may only use HERE as your geolocation provider. See section 82 of the AWS service terms for more details. 
    */
   createRouteCalculator(params: Location.Types.CreateRouteCalculatorRequest, callback?: (err: AWSError, data: Location.Types.CreateRouteCalculatorResponse) => void): Request<Location.Types.CreateRouteCalculatorResponse, AWSError>;
   /**
-   * Creates a route calculator resource in your AWS account. You can send requests to a route calculator resource to estimate travel time, distance, and get directions. A route calculator sources traffic and road network data from your chosen data provider.
+   * Creates a route calculator resource in your AWS account. You can send requests to a route calculator resource to estimate travel time, distance, and get directions. A route calculator sources traffic and road network data from your chosen data provider.  If your application is tracking or routing assets you use in your business, such as delivery vehicles or employees, you may only use HERE as your geolocation provider. See section 82 of the AWS service terms for more details. 
    */
   createRouteCalculator(callback?: (err: AWSError, data: Location.Types.CreateRouteCalculatorResponse) => void): Request<Location.Types.CreateRouteCalculatorResponse, AWSError>;
   /**
@@ -666,6 +674,86 @@ declare namespace Location {
      */
     AvoidTolls?: Boolean;
   }
+  export interface CalculateRouteMatrixRequest {
+    /**
+     * The name of the route calculator resource that you want to use to calculate the route matrix. 
+     */
+    CalculatorName: ResourceName;
+    /**
+     * Specifies route preferences when traveling by Car, such as avoiding routes that use ferries or tolls. Requirements: TravelMode must be specified as Car.
+     */
+    CarModeOptions?: CalculateRouteCarModeOptions;
+    /**
+     * Sets the time of departure as the current time. Uses the current time to calculate the route matrix. You can't set both DepartureTime and DepartNow. If neither is set, the best time of day to travel with the best traffic conditions is used to calculate the route matrix. Default Value: false  Valid Values: false | true 
+     */
+    DepartNow?: Boolean;
+    /**
+     * The list of departure (origin) positions for the route matrix. An array of points, each of which is itself a 2-value array defined in WGS 84 format: [longitude, latitude]. For example, [-123.115, 49.285].  Depending on the data provider selected in the route calculator resource there may be additional restrictions on the inputs you can choose. See  Position restrictions in the Amazon Location Service Developer Guide.   For route calculators that use Esri as the data provider, if you specify a departure that's not located on a road, Amazon Location  moves the position to the nearest road. The snapped value is available in the result in SnappedDeparturePositions.  Valid Values: [-180 to 180,-90 to 90] 
+     */
+    DeparturePositions: CalculateRouteMatrixRequestDeparturePositionsList;
+    /**
+     * Specifies the desired time of departure. Uses the given time to calculate the route matrix. You can't set both DepartureTime and DepartNow. If neither is set, the best time of day to travel with the best traffic conditions is used to calculate the route matrix.  Setting a departure time in the past returns a 400 ValidationException error.    In ISO 8601 format: YYYY-MM-DDThh:mm:ss.sssZ. For example, 2020–07-2T12:15:20.000Z+01:00   
+     */
+    DepartureTime?: Timestamp;
+    /**
+     * The list of destination positions for the route matrix. An array of points, each of which is itself a 2-value array defined in WGS 84 format: [longitude, latitude]. For example, [-122.339, 47.615]   Depending on the data provider selected in the route calculator resource there may be additional restrictions on the inputs you can choose. See  Position restrictions in the Amazon Location Service Developer Guide.   For route calculators that use Esri as the data provider, if you specify a destination that's not located on a road, Amazon Location  moves the position to the nearest road. The snapped value is available in the result in SnappedDestinationPositions.  Valid Values: [-180 to 180,-90 to 90] 
+     */
+    DestinationPositions: CalculateRouteMatrixRequestDestinationPositionsList;
+    /**
+     * Set the unit system to specify the distance. Default Value: Kilometers 
+     */
+    DistanceUnit?: DistanceUnit;
+    /**
+     * Specifies the mode of transport when calculating a route. Used in estimating the speed of travel and road compatibility. The TravelMode you specify also determines how you specify route preferences:    If traveling by Car use the CarModeOptions parameter.   If traveling by Truck use the TruckModeOptions parameter.   Default Value: Car 
+     */
+    TravelMode?: TravelMode;
+    /**
+     * Specifies route preferences when traveling by Truck, such as avoiding routes that use ferries or tolls, and truck specifications to consider when choosing an optimal road. Requirements: TravelMode must be specified as Truck.
+     */
+    TruckModeOptions?: CalculateRouteTruckModeOptions;
+  }
+  export type CalculateRouteMatrixRequestDeparturePositionsList = Position[];
+  export type CalculateRouteMatrixRequestDestinationPositionsList = Position[];
+  export interface CalculateRouteMatrixResponse {
+    /**
+     * The calculated route matrix containing the results for all pairs of DeparturePositions to DestinationPositions. Each row corresponds to one entry in DeparturePositions. Each entry in the row corresponds to the route from that entry in DeparturePositions to an entry in DestinationPositions. 
+     */
+    RouteMatrix: RouteMatrix;
+    /**
+     * For routes calculated using an Esri route calculator resource, departure positions are snapped to the closest road. For Esri route calculator resources, this returns the list of departure/origin positions used for calculation of the RouteMatrix.
+     */
+    SnappedDeparturePositions?: CalculateRouteMatrixResponseSnappedDeparturePositionsList;
+    /**
+     * The list of destination positions for the route matrix used for calculation of the RouteMatrix.
+     */
+    SnappedDestinationPositions?: CalculateRouteMatrixResponseSnappedDestinationPositionsList;
+    /**
+     * Contains information about the route matrix, DataSource, DistanceUnit, RouteCount and ErrorCount.
+     */
+    Summary: CalculateRouteMatrixSummary;
+  }
+  export type CalculateRouteMatrixResponseSnappedDeparturePositionsList = Position[];
+  export type CalculateRouteMatrixResponseSnappedDestinationPositionsList = Position[];
+  export interface CalculateRouteMatrixSummary {
+    /**
+     * The data provider of traffic and road network data used to calculate the routes. Indicates one of the available providers:    Esri     Here    For more information about data providers, see Amazon Location Service data providers.
+     */
+    DataSource: String;
+    /**
+     * The unit of measurement for route distances.
+     */
+    DistanceUnit: DistanceUnit;
+    /**
+     * The count of error results in the route matrix. If this number is 0, all routes were calculated successfully.
+     */
+    ErrorCount: CalculateRouteMatrixSummaryErrorCountInteger;
+    /**
+     * The count of cells in the route matrix. Equal to the number of DeparturePositions multiplied by the number of DestinationPositions.
+     */
+    RouteCount: CalculateRouteMatrixSummaryRouteCountInteger;
+  }
+  export type CalculateRouteMatrixSummaryErrorCountInteger = number;
+  export type CalculateRouteMatrixSummaryRouteCountInteger = number;
   export interface CalculateRouteRequest {
     /**
      * The name of the route calculator resource that you want to use to calculate the route. 
@@ -700,7 +788,7 @@ declare namespace Location {
      */
     IncludeLegGeometry?: Boolean;
     /**
-     * Specifies the mode of transport when calculating a route. Used in estimating the speed of travel and road compatibility. The TravelMode you specify determines how you specify route preferences:    If traveling by Car use the CarModeOptions parameter.   If traveling by Truck use the TruckModeOptions parameter.   Default Value: Car 
+     * Specifies the mode of transport when calculating a route. Used in estimating the speed of travel and road compatibility. The TravelMode you specify also determines how you specify route preferences:    If traveling by Car use the CarModeOptions parameter.   If traveling by Truck use the TruckModeOptions parameter.   Default Value: Car 
      */
     TravelMode?: TravelMode;
     /**
@@ -781,11 +869,11 @@ declare namespace Location {
      */
     KmsKeyId?: KmsKeyId;
     /**
-     * Optionally specifies the pricing plan for the geofence collection. Defaults to RequestBasedUsage. For additional details and restrictions on each pricing plan option, see the Amazon Location Service pricing page.
+     * No longer used. If included, the only allowed value is RequestBasedUsage.
      */
     PricingPlan?: PricingPlan;
     /**
-     * Specifies the data provider for the geofence collection.   Required value for the following pricing plans: MobileAssetTracking | MobileAssetManagement    For more information about Data Providers, and Pricing plans, see the Amazon Location Service product page.  Amazon Location Service only uses PricingPlanDataSource to calculate billing for your geofence collection. Your data won't be shared with the data provider, and will remain in your AWS account or Region unless you move it.  Valid Values: Esri | Here 
+     * This parameter is no longer used.
      */
     PricingPlanDataSource?: String;
     /**
@@ -821,7 +909,7 @@ declare namespace Location {
      */
     MapName: ResourceName;
     /**
-     * Optionally specifies the pricing plan for the map resource. Defaults to RequestBasedUsage. For additional details and restrictions on each pricing plan option, see Amazon Location Service pricing.
+     * No longer used. If included, the only allowed value is RequestBasedUsage.
      */
     PricingPlan?: PricingPlan;
     /**
@@ -861,7 +949,7 @@ declare namespace Location {
      */
     IndexName: ResourceName;
     /**
-     * Optionally specifies the pricing plan for the place index resource. Defaults to RequestBasedUsage. For additional details and restrictions on each pricing plan option, see Amazon Location Service pricing.
+     * No longer used. If included, the only allowed value is RequestBasedUsage.
      */
     PricingPlan?: PricingPlan;
     /**
@@ -897,7 +985,7 @@ declare namespace Location {
      */
     Description?: ResourceDescription;
     /**
-     * Optionally specifies the pricing plan for the route calculator resource. Defaults to RequestBasedUsage. For additional details and restrictions on each pricing plan option, see Amazon Location Service pricing.
+     * No longer used. If included, the only allowed value is RequestBasedUsage.
      */
     PricingPlan?: PricingPlan;
     /**
@@ -933,11 +1021,11 @@ declare namespace Location {
      */
     PositionFiltering?: PositionFiltering;
     /**
-     * Optionally specifies the pricing plan for the tracker resource. Defaults to RequestBasedUsage. For additional details and restrictions on each pricing plan option, see Amazon Location Service pricing.
+     * No longer used. If included, the only allowed value is RequestBasedUsage.
      */
     PricingPlan?: PricingPlan;
     /**
-     * Specifies the data provider for the tracker resource.   Required value for the following pricing plans: MobileAssetTracking | MobileAssetManagement    For more information about Data Providers, and Pricing plans, see the Amazon Location Service product page.  Amazon Location Service only uses PricingPlanDataSource to calculate billing for your tracker resource. Your data will not be shared with the data provider, and will remain in your AWS account or Region unless you move it.  Valid values: Esri | Here 
+     * This parameter is no longer used.
      */
     PricingPlanDataSource?: String;
     /**
@@ -1037,11 +1125,11 @@ declare namespace Location {
      */
     KmsKeyId?: KmsKeyId;
     /**
-     * The pricing plan selected for the specified geofence collection. For additional details and restrictions on each pricing plan option, see the Amazon Location Service pricing page.
+     * No longer used. Always returns RequestBasedUsage.
      */
-    PricingPlan: PricingPlan;
+    PricingPlan?: PricingPlan;
     /**
-     * The specified data provider for the geofence collection.
+     * No longer used. Always returns an empty string.
      */
     PricingPlanDataSource?: String;
     /**
@@ -1085,9 +1173,9 @@ declare namespace Location {
      */
     MapName: ResourceName;
     /**
-     * The pricing plan selected for the specified map resource.  &lt;p&gt;For additional details and restrictions on each pricing plan option, see &lt;a href=&quot;https://aws.amazon.com/location/pricing/&quot;&gt;Amazon Location Service pricing&lt;/a&gt;.&lt;/p&gt; 
+     * No longer used. Always returns RequestBasedUsage.
      */
-    PricingPlan: PricingPlan;
+    PricingPlan?: PricingPlan;
     /**
      * Tags associated with the map resource.
      */
@@ -1129,9 +1217,9 @@ declare namespace Location {
      */
     IndexName: ResourceName;
     /**
-     * The pricing plan selected for the specified place index resource. For additional details and restrictions on each pricing plan option, see Amazon Location Service pricing.
+     * No longer used. Always returns RequestBasedUsage.
      */
-    PricingPlan: PricingPlan;
+    PricingPlan?: PricingPlan;
     /**
      * Tags associated with place index resource.
      */
@@ -1169,9 +1257,9 @@ declare namespace Location {
      */
     Description: ResourceDescription;
     /**
-     * The pricing plan selected for the specified route calculator resource. For additional details and restrictions on each pricing plan option, see Amazon Location Service pricing.
+     * Always returns RequestBasedUsage.
      */
-    PricingPlan: PricingPlan;
+    PricingPlan?: PricingPlan;
     /**
      * Tags associated with route calculator resource.
      */
@@ -1205,11 +1293,11 @@ declare namespace Location {
      */
     PositionFiltering?: PositionFiltering;
     /**
-     * The pricing plan selected for the specified tracker resource. For additional details and restrictions on each pricing plan option, see Amazon Location Service pricing.
+     * Always returns RequestBasedUsage.
      */
-    PricingPlan: PricingPlan;
+    PricingPlan?: PricingPlan;
     /**
-     * The specified data provider for the tracker resource.
+     * No longer used. Always returns an empty string.
      */
     PricingPlanDataSource?: String;
     /**
@@ -1618,11 +1706,11 @@ declare namespace Location {
      */
     Description: ResourceDescription;
     /**
-     * The pricing plan for the specified geofence collection. For additional details and restrictions on each pricing plan option, see the Amazon Location Service pricing page.
+     * No longer used. Always returns RequestBasedUsage.
      */
-    PricingPlan: PricingPlan;
+    PricingPlan?: PricingPlan;
     /**
-     * The specified data provider for the geofence collection.
+     * No longer used. Always returns an empty string.
      */
     PricingPlanDataSource?: String;
     /**
@@ -1713,9 +1801,9 @@ declare namespace Location {
      */
     MapName: ResourceName;
     /**
-     * The pricing plan for the specified map resource. For additional details and restrictions on each pricing plan option, see Amazon Location Service pricing.
+     * No longer used. Always returns RequestBasedUsage.
      */
-    PricingPlan: PricingPlan;
+    PricingPlan?: PricingPlan;
     /**
      * The timestamp for when the map resource was last updated in ISO 8601 format: YYYY-MM-DDThh:mm:ss.sssZ.
      */
@@ -1761,9 +1849,9 @@ declare namespace Location {
      */
     IndexName: ResourceName;
     /**
-     * The pricing plan for the specified place index resource. For additional details and restrictions on each pricing plan option, see Amazon Location Service pricing.
+     * No longer used. Always returns RequestBasedUsage.
      */
-    PricingPlan: PricingPlan;
+    PricingPlan?: PricingPlan;
     /**
      * The timestamp for when the place index resource was last updated in ISO 8601 format: YYYY-MM-DDThh:mm:ss.sssZ. 
      */
@@ -1809,9 +1897,9 @@ declare namespace Location {
      */
     Description: ResourceDescription;
     /**
-     * The pricing plan for the specified route calculator resource. For additional details and restrictions on each pricing plan option, see Amazon Location Service pricing.
+     * Always returns RequestBasedUsage.
      */
-    PricingPlan: PricingPlan;
+    PricingPlan?: PricingPlan;
     /**
      * The timestamp when the route calculator resource was last updated in ISO 8601 format: YYYY-MM-DDThh:mm:ss.sssZ.    For example, 2020–07-2T12:15:20.000Z+01:00   
      */
@@ -1886,11 +1974,11 @@ declare namespace Location {
      */
     Description: ResourceDescription;
     /**
-     * The pricing plan for the specified tracker resource. For additional details and restrictions on each pricing plan option, see Amazon Location Service pricing.
+     * Always returns RequestBasedUsage.
      */
-    PricingPlan: PricingPlan;
+    PricingPlan?: PricingPlan;
     /**
-     * The specified data provider for the tracker resource.
+     * No longer used. Always returns an empty string.
      */
     PricingPlanDataSource?: String;
     /**
@@ -2007,6 +2095,35 @@ declare namespace Location {
   }
   export type ResourceDescription = string;
   export type ResourceName = string;
+  export type RouteMatrix = RouteMatrixRow[];
+  export interface RouteMatrixEntry {
+    /**
+     * The total distance of travel for the route.
+     */
+    Distance?: RouteMatrixEntryDistanceDouble;
+    /**
+     * The expected duration of travel for the route.
+     */
+    DurationSeconds?: RouteMatrixEntryDurationSecondsDouble;
+    /**
+     * An error corresponding to the calculation of a route between the DeparturePosition and DestinationPosition.
+     */
+    Error?: RouteMatrixEntryError;
+  }
+  export type RouteMatrixEntryDistanceDouble = number;
+  export type RouteMatrixEntryDurationSecondsDouble = number;
+  export interface RouteMatrixEntryError {
+    /**
+     * The type of error which occurred for the route calculation.
+     */
+    Code: RouteMatrixErrorCode;
+    /**
+     * A message about the error that occurred for the route calculation.
+     */
+    Message?: String;
+  }
+  export type RouteMatrixErrorCode = "RouteNotFound"|"RouteTooLong"|"PositionsNotFound"|"DestinationPositionNotFound"|"DeparturePositionNotFound"|"OtherValidationError"|string;
+  export type RouteMatrixRow = RouteMatrixEntry[];
   export interface SearchForPositionResult {
     /**
      * The distance in meters of a great-circle arc between the query position and the result.  A great-circle arc is the shortest path on a sphere, in this case the Earth. This returns the shortest distance between two locations. 
@@ -2348,11 +2465,11 @@ declare namespace Location {
      */
     Description?: ResourceDescription;
     /**
-     * Updates the pricing plan for the geofence collection. For more information about each pricing plan option restrictions, see Amazon Location Service pricing.
+     * No longer used. If included, the only allowed value is RequestBasedUsage.
      */
     PricingPlan?: PricingPlan;
     /**
-     * Updates the data provider for the geofence collection.  A required value for the following pricing plans: MobileAssetTracking| MobileAssetManagement  For more information about data providers and pricing plans, see the Amazon Location Service product page.  This can only be updated when updating the PricingPlan in the same request. Amazon Location Service uses PricingPlanDataSource to calculate billing for your geofence collection. Your data won't be shared with the data provider, and will remain in your AWS account and Region unless you move it. 
+     * This parameter is no longer used.
      */
     PricingPlanDataSource?: String;
   }
@@ -2380,7 +2497,7 @@ declare namespace Location {
      */
     MapName: ResourceName;
     /**
-     * Updates the pricing plan for the map resource. For more information about each pricing plan option restrictions, see Amazon Location Service pricing.
+     * No longer used. If included, the only allowed value is RequestBasedUsage.
      */
     PricingPlan?: PricingPlan;
   }
@@ -2412,7 +2529,7 @@ declare namespace Location {
      */
     IndexName: ResourceName;
     /**
-     * Updates the pricing plan for the place index resource. For more information about each pricing plan option restrictions, see Amazon Location Service pricing.
+     * No longer used. If included, the only allowed value is RequestBasedUsage.
      */
     PricingPlan?: PricingPlan;
   }
@@ -2440,7 +2557,7 @@ declare namespace Location {
      */
     Description?: ResourceDescription;
     /**
-     * Updates the pricing plan for the route calculator resource. For more information about each pricing plan option restrictions, see Amazon Location Service pricing.
+     * No longer used. If included, the only allowed value is RequestBasedUsage.
      */
     PricingPlan?: PricingPlan;
   }
@@ -2468,11 +2585,11 @@ declare namespace Location {
      */
     PositionFiltering?: PositionFiltering;
     /**
-     * Updates the pricing plan for the tracker resource. For more information about each pricing plan option restrictions, see Amazon Location Service pricing.
+     * No longer used. If included, the only allowed value is RequestBasedUsage.
      */
     PricingPlan?: PricingPlan;
     /**
-     * Updates the data provider for the tracker resource.  A required value for the following pricing plans: MobileAssetTracking| MobileAssetManagement  For more information about data providers and pricing plans, see the Amazon Location Service product page  This can only be updated when updating the PricingPlan in the same request. Amazon Location Service uses PricingPlanDataSource to calculate billing for your tracker resource. Your data won't be shared with the data provider, and will remain in your AWS account and Region unless you move it. 
+     * This parameter is no longer used.
      */
     PricingPlanDataSource?: String;
     /**
