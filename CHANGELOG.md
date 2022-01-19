@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1059.0-->
+<!--LATEST=2.1060.0-->
 <!--ENTRYINSERT-->
+
+## 2.1060.0
+* feature: EC2InstanceConnect: Adds support for ED25519 keys. PushSSHPublicKey Availability Zone parameter is now optional. Adds EC2InstanceStateInvalidException for instances that are not running. This was previously a service exception, so this may require updating your code to handle this new exception.
+* feature: Macie2: This release of the Amazon Macie API introduces stricter validation of requests to create custom data identifiers.
 
 ## 2.1059.0
 * feature: EC2: Add support for AWS Client VPN client login banner and session timeout.

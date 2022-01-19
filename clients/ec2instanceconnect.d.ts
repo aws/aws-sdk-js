@@ -50,7 +50,7 @@ declare namespace EC2InstanceConnect {
     /**
      * The Availability Zone in which the EC2 instance was launched.
      */
-    AvailabilityZone: AvailabilityZone;
+    AvailabilityZone?: AvailabilityZone;
   }
   export interface SendSSHPublicKeyResponse {
     /**
