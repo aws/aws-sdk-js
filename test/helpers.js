@@ -197,8 +197,10 @@
 
   mockHttpSuccessfulResponse = function(status, headers, data, cb) {
     var httpResp;
-    if (!Array.isArray(data)) {
-      data = (data === undefined) ? [] : [data];
+    if (data === undefined) {
+      data = [];
+    } else if (!Array.isArray(data)) {
+      data = [data];
     }
     httpResp = new EventEmitter();
     httpResp.pipe = function(destination) {
