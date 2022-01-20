@@ -648,6 +648,7 @@ declare namespace MediaTailor {
      * The source's HTTP package configurations.
      */
     HttpConfiguration: HttpConfiguration;
+    SegmentDeliveryConfigurations?: __listOfSegmentDeliveryConfiguration;
     /**
      * The identifier for the source location you are working on.
      */
@@ -682,6 +683,7 @@ declare namespace MediaTailor {
      * The timestamp that indicates when the source location was last modified.
      */
     LastModifiedTime?: __timestampUnix;
+    SegmentDeliveryConfigurations?: __listOfSegmentDeliveryConfiguration;
     /**
      * The name of the source location.
      */
@@ -974,6 +976,7 @@ declare namespace MediaTailor {
      * The timestamp that indicates when the source location was last modified.
      */
     LastModifiedTime?: __timestampUnix;
+    SegmentDeliveryConfigurations?: __listOfSegmentDeliveryConfiguration;
     /**
      * The name of the source location.
      */
@@ -1792,6 +1795,10 @@ declare namespace MediaTailor {
      */
     SecretStringKey?: __string;
   }
+  export interface SegmentDeliveryConfiguration {
+    BaseUrl?: __string;
+    Name?: __string;
+  }
   export interface SlateSource {
     /**
      * The name of the source location where the slate VOD source is stored.
@@ -1827,6 +1834,7 @@ declare namespace MediaTailor {
      * The timestamp that indicates when the source location was last modified.
      */
     LastModifiedTime?: __timestampUnix;
+    SegmentDeliveryConfigurations?: __listOfSegmentDeliveryConfiguration;
     /**
      * The name of the source location.
      */
@@ -1974,6 +1982,7 @@ declare namespace MediaTailor {
      * The HTTP configuration for the source location.
      */
     HttpConfiguration: HttpConfiguration;
+    SegmentDeliveryConfigurations?: __listOfSegmentDeliveryConfiguration;
     /**
      * The identifier for the source location you are working on.
      */
@@ -2004,6 +2013,7 @@ declare namespace MediaTailor {
      * The timestamp that indicates when the source location was last modified.
      */
     LastModifiedTime?: __timestampUnix;
+    SegmentDeliveryConfigurations?: __listOfSegmentDeliveryConfiguration;
     /**
      * The name of the source location.
      */
@@ -2099,6 +2109,7 @@ declare namespace MediaTailor {
   export type __listOfPrefetchSchedule = PrefetchSchedule[];
   export type __listOfScheduleAdBreak = ScheduleAdBreak[];
   export type __listOfScheduleEntry = ScheduleEntry[];
+  export type __listOfSegmentDeliveryConfiguration = SegmentDeliveryConfiguration[];
   export type __listOfSourceLocation = SourceLocation[];
   export type __listOfVodSource = VodSource[];
   export type __listOf__string = __string[];

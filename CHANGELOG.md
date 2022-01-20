@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1060.0-->
+<!--LATEST=2.1061.0-->
 <!--ENTRYINSERT-->
+
+## 2.1061.0
+* feature: Connect: This release adds tagging support for UserHierarchyGroups resource.
+* feature: EC2: C6i, M6i and R6i instances are powered by a third-generation Intel Xeon Scalable processor (Ice Lake) delivering all-core turbo frequency of 3.5 GHz
+* feature: Fis: Added action startTime and action endTime timestamp fields to the ExperimentAction object
+* feature: GuardDuty: Amazon GuardDuty findings now include remoteAccountDetails under AwsApiCallAction section if instance credential is exfiltrated.
+* feature: MediaTailor: This release adds support for multiple Segment Delivery Configurations. Users can provide a list of names and URLs when creating or editing a source location. When retrieving content, users can send a header to choose which URL should be used to serve content.
 
 ## 2.1060.0
 * feature: EC2InstanceConnect: Adds support for ED25519 keys. PushSSHPublicKey Availability Zone parameter is now optional. Adds EC2InstanceStateInvalidException for instances that are not running. This was previously a service exception, so this may require updating your code to handle this new exception.

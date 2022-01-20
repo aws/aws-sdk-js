@@ -12,11 +12,11 @@ declare class Fis extends Service {
   constructor(options?: Fis.Types.ClientConfiguration)
   config: Config & Fis.Types.ClientConfiguration;
   /**
-   * Creates an experiment template.  To create a template, specify the following information:     Targets: A target can be a specific resource in your AWS environment, or one or more resources that match criteria that you specify, for example, resources that have specific tags.    Actions: The actions to carry out on the target. You can specify multiple actions, the duration of each action, and when to start each action during an experiment.    Stop conditions: If a stop condition is triggered while an experiment is running, the experiment is automatically stopped. You can define a stop condition as a CloudWatch alarm.   For more information, see the AWS Fault Injection Simulator User Guide.
+   * Creates an experiment template.  An experiment template includes the following components:    Targets: A target can be a specific resource in your Amazon Web Services environment, or one or more resources that match criteria that you specify, for example, resources that have specific tags.    Actions: The actions to carry out on the target. You can specify multiple actions, the duration of each action, and when to start each action during an experiment.    Stop conditions: If a stop condition is triggered while an experiment is running, the experiment is automatically stopped. You can define a stop condition as a CloudWatch alarm.   For more information, see Experiment templates in the Fault Injection Simulator User Guide.
    */
   createExperimentTemplate(params: Fis.Types.CreateExperimentTemplateRequest, callback?: (err: AWSError, data: Fis.Types.CreateExperimentTemplateResponse) => void): Request<Fis.Types.CreateExperimentTemplateResponse, AWSError>;
   /**
-   * Creates an experiment template.  To create a template, specify the following information:     Targets: A target can be a specific resource in your AWS environment, or one or more resources that match criteria that you specify, for example, resources that have specific tags.    Actions: The actions to carry out on the target. You can specify multiple actions, the duration of each action, and when to start each action during an experiment.    Stop conditions: If a stop condition is triggered while an experiment is running, the experiment is automatically stopped. You can define a stop condition as a CloudWatch alarm.   For more information, see the AWS Fault Injection Simulator User Guide.
+   * Creates an experiment template.  An experiment template includes the following components:    Targets: A target can be a specific resource in your Amazon Web Services environment, or one or more resources that match criteria that you specify, for example, resources that have specific tags.    Actions: The actions to carry out on the target. You can specify multiple actions, the duration of each action, and when to start each action during an experiment.    Stop conditions: If a stop condition is triggered while an experiment is running, the experiment is automatically stopped. You can define a stop condition as a CloudWatch alarm.   For more information, see Experiment templates in the Fault Injection Simulator User Guide.
    */
   createExperimentTemplate(callback?: (err: AWSError, data: Fis.Types.CreateExperimentTemplateResponse) => void): Request<Fis.Types.CreateExperimentTemplateResponse, AWSError>;
   /**
@@ -28,11 +28,11 @@ declare class Fis extends Service {
    */
   deleteExperimentTemplate(callback?: (err: AWSError, data: Fis.Types.DeleteExperimentTemplateResponse) => void): Request<Fis.Types.DeleteExperimentTemplateResponse, AWSError>;
   /**
-   * Gets information about the specified AWS FIS action.
+   * Gets information about the specified FIS action.
    */
   getAction(params: Fis.Types.GetActionRequest, callback?: (err: AWSError, data: Fis.Types.GetActionResponse) => void): Request<Fis.Types.GetActionResponse, AWSError>;
   /**
-   * Gets information about the specified AWS FIS action.
+   * Gets information about the specified FIS action.
    */
   getAction(callback?: (err: AWSError, data: Fis.Types.GetActionResponse) => void): Request<Fis.Types.GetActionResponse, AWSError>;
   /**
@@ -52,11 +52,11 @@ declare class Fis extends Service {
    */
   getExperimentTemplate(callback?: (err: AWSError, data: Fis.Types.GetExperimentTemplateResponse) => void): Request<Fis.Types.GetExperimentTemplateResponse, AWSError>;
   /**
-   * Lists the available AWS FIS actions.
+   * Lists the available FIS actions.
    */
   listActions(params: Fis.Types.ListActionsRequest, callback?: (err: AWSError, data: Fis.Types.ListActionsResponse) => void): Request<Fis.Types.ListActionsResponse, AWSError>;
   /**
-   * Lists the available AWS FIS actions.
+   * Lists the available FIS actions.
    */
   listActions(callback?: (err: AWSError, data: Fis.Types.ListActionsResponse) => void): Request<Fis.Types.ListActionsResponse, AWSError>;
   /**
@@ -193,7 +193,7 @@ declare namespace Fis {
   export type ClientToken = string;
   export interface CreateExperimentTemplateActionInput {
     /**
-     * The ID of the action.
+     * The ID of the action. The format of the action ID is: aws:service-name:action-type.
      */
     actionId: ActionId;
     /**
@@ -220,7 +220,7 @@ declare namespace Fis {
      */
     clientToken: ClientToken;
     /**
-     * A description for the experiment template. Can contain up to 64 letters (A-Z and a-z).
+     * A description for the experiment template.
      */
     description: ExperimentTemplateDescription;
     /**
@@ -236,7 +236,7 @@ declare namespace Fis {
      */
     actions: CreateExperimentTemplateActionInputMap;
     /**
-     * The Amazon Resource Name (ARN) of an IAM role that grants the AWS FIS service permission to perform service actions on your behalf.
+     * The Amazon Resource Name (ARN) of an IAM role that grants the FIS service permission to perform service actions on your behalf.
      */
     roleArn: RoleArn;
     /**
@@ -263,7 +263,7 @@ declare namespace Fis {
   export type CreateExperimentTemplateStopConditionInputList = CreateExperimentTemplateStopConditionInput[];
   export interface CreateExperimentTemplateTargetInput {
     /**
-     * The AWS resource type. The resource type must be supported for the specified action.
+     * The Amazon Web Services resource type. The resource type must be supported for the specified action.
      */
     resourceType: ResourceType;
     /**
@@ -307,7 +307,7 @@ declare namespace Fis {
      */
     experimentTemplateId?: ExperimentTemplateId;
     /**
-     * The Amazon Resource Name (ARN) of an IAM role that grants the AWS FIS service permission to perform service actions on your behalf.
+     * The Amazon Resource Name (ARN) of an IAM role that grants the FIS service permission to perform service actions on your behalf.
      */
     roleArn?: RoleArn;
     /**
@@ -327,11 +327,11 @@ declare namespace Fis {
      */
     stopConditions?: ExperimentStopConditionList;
     /**
-     * The time the experiment was created.
+     * The time that the experiment was created.
      */
     creationTime?: CreationTime;
     /**
-     * The time that the experiment was started.
+     * The time that the experiment started.
      */
     startTime?: ExperimentStartTime;
     /**
@@ -368,8 +368,17 @@ declare namespace Fis {
      * The state of the action.
      */
     state?: ExperimentActionState;
+    /**
+     * The time that the action started.
+     */
+    startTime?: ExperimentActionStartTime;
+    /**
+     * The time that the action ended.
+     */
+    endTime?: ExperimentActionEndTime;
   }
   export type ExperimentActionDescription = string;
+  export type ExperimentActionEndTime = Date;
   export type ExperimentActionMap = {[key: string]: ExperimentAction};
   export type ExperimentActionName = string;
   export type ExperimentActionParameter = string;
@@ -377,6 +386,7 @@ declare namespace Fis {
   export type ExperimentActionParameterName = string;
   export type ExperimentActionStartAfter = string;
   export type ExperimentActionStartAfterList = ExperimentActionStartAfter[];
+  export type ExperimentActionStartTime = Date;
   export interface ExperimentActionState {
     /**
      * The state of the action.
@@ -860,7 +870,7 @@ declare namespace Fis {
      */
     actions?: UpdateExperimentTemplateActionInputMap;
     /**
-     * The Amazon Resource Name (ARN) of an IAM role that grants the AWS FIS service permission to perform service actions on your behalf.
+     * The Amazon Resource Name (ARN) of an IAM role that grants the FIS service permission to perform service actions on your behalf.
      */
     roleArn?: RoleArn;
   }
@@ -883,7 +893,7 @@ declare namespace Fis {
   export type UpdateExperimentTemplateStopConditionInputList = UpdateExperimentTemplateStopConditionInput[];
   export interface UpdateExperimentTemplateTargetInput {
     /**
-     * The AWS resource type. The resource type must be supported for the specified action.
+     * The Amazon Web Services resource type. The resource type must be supported for the specified action.
      */
     resourceType: ResourceType;
     /**

@@ -116,11 +116,11 @@ declare class Connect extends Service {
    */
   createInstance(callback?: (err: AWSError, data: Connect.Types.CreateInstanceResponse) => void): Request<Connect.Types.CreateInstanceResponse, AWSError>;
   /**
-   * Creates an AWS resource association with an Amazon Connect instance.
+   * Creates an Amazon Web Services resource association with an Amazon Connect instance.
    */
   createIntegrationAssociation(params: Connect.Types.CreateIntegrationAssociationRequest, callback?: (err: AWSError, data: Connect.Types.CreateIntegrationAssociationResponse) => void): Request<Connect.Types.CreateIntegrationAssociationResponse, AWSError>;
   /**
-   * Creates an AWS resource association with an Amazon Connect instance.
+   * Creates an Amazon Web Services resource association with an Amazon Connect instance.
    */
   createIntegrationAssociation(callback?: (err: AWSError, data: Connect.Types.CreateIntegrationAssociationResponse) => void): Request<Connect.Types.CreateIntegrationAssociationResponse, AWSError>;
   /**
@@ -212,11 +212,11 @@ declare class Connect extends Service {
    */
   deleteInstance(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes an AWS resource association from an Amazon Connect instance. The association must not have any use cases associated with it.
+   * Deletes an Amazon Web Services resource association from an Amazon Connect instance. The association must not have any use cases associated with it.
    */
   deleteIntegrationAssociation(params: Connect.Types.DeleteIntegrationAssociationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes an AWS resource association from an Amazon Connect instance. The association must not have any use cases associated with it.
+   * Deletes an Amazon Web Services resource association from an Amazon Connect instance. The association must not have any use cases associated with it.
    */
   deleteIntegrationAssociation(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -556,11 +556,11 @@ declare class Connect extends Service {
    */
   listInstances(callback?: (err: AWSError, data: Connect.Types.ListInstancesResponse) => void): Request<Connect.Types.ListInstancesResponse, AWSError>;
   /**
-   * Provides summary information about the AWS resource associations for the specified Amazon Connect instance.
+   * Provides summary information about the Amazon Web Services resource associations for the specified Amazon Connect instance.
    */
   listIntegrationAssociations(params: Connect.Types.ListIntegrationAssociationsRequest, callback?: (err: AWSError, data: Connect.Types.ListIntegrationAssociationsResponse) => void): Request<Connect.Types.ListIntegrationAssociationsResponse, AWSError>;
   /**
-   * Provides summary information about the AWS resource associations for the specified Amazon Connect instance.
+   * Provides summary information about the Amazon Web Services resource associations for the specified Amazon Connect instance.
    */
   listIntegrationAssociations(callback?: (err: AWSError, data: Connect.Types.ListIntegrationAssociationsResponse) => void): Request<Connect.Types.ListIntegrationAssociationsResponse, AWSError>;
   /**
@@ -1881,6 +1881,10 @@ declare namespace Connect {
      * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
+    /**
+     * The tags used to organize, track, or control access for this resource.
+     */
+    Tags?: TagMap;
   }
   export interface CreateUserHierarchyGroupResponse {
     /**
@@ -2462,7 +2466,7 @@ declare namespace Connect {
   export type EncryptionType = "KMS"|string;
   export interface Filters {
     /**
-     * The queues to use to filter the metrics. You can specify up to 100 queues per request.
+     * The queues to use to filter the metrics. You should specify at least one queue, and can specify up to 100 queues per request. The GetCurrentMetricsData API in particular requires a queue when you include a Filter in your request. 
      */
     Queues?: Queues;
     /**
@@ -2607,6 +2611,10 @@ declare namespace Connect {
      * Information about the levels in the hierarchy group.
      */
     HierarchyPath?: HierarchyPath;
+    /**
+     * The tags used to organize, track, or control access for this resource.
+     */
+    Tags?: TagMap;
   }
   export type HierarchyGroupId = string;
   export type HierarchyGroupName = string;
@@ -4721,7 +4729,7 @@ declare namespace Connect {
      */
     InstanceId: InstanceId;
     /**
-     * The type of attribute.  Only allowlisted customers can consume USE_CUSTOM_TTS_VOICES. To access this feature, contact AWS Support for allowlisting. 
+     * The type of attribute.  Only allowlisted customers can consume USE_CUSTOM_TTS_VOICES. To access this feature, contact Amazon Web Services Support for allowlisting. 
      */
     AttributeType: InstanceAttributeType;
     /**
