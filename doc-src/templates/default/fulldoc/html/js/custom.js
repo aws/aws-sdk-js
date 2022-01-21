@@ -1,3 +1,5 @@
+hljs.initHighlightingOnLoad();
+
 $(document).ready(function() {
   var trueValue = 'true';
   var nodeVersionNoticeKey = 'nodeVersionNoticeDismissed';
