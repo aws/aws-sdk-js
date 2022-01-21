@@ -223,6 +223,10 @@
                       type: 'integer'
                     }
                   }
+                },
+                hash3: {
+                  type: 'structure',
+                  document: true
                 }
               }
             }
@@ -268,6 +272,13 @@
         return expectError({
           hash1: {
             oops: 'abc'
+          }
+        });
+      });
+      it('accepts document type members', function () {
+        return expectValid({
+          hash1: {
+            hash3: {foo: 'foo', bar: ['bar']}
           }
         });
       });
