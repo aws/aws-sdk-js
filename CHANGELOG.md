@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1061.0-->
+<!--LATEST=2.1062.0-->
 <!--ENTRYINSERT-->
+
+## 2.1062.0
+* bugfix: ParamValidator: fix the issue that the ParamValidator always fails on the document trait
+* feature: MediaConvert: AWS Elemental MediaConvert SDK has added support for 4K AV1 output resolutions & 10-bit AV1 color, the ability to ingest sidecar Dolby Vision XML metadata files, and the ability to flag WebVTT and IMSC tracks for accessibility in HLS.
+* feature: TranscribeService: Add support for granular PIIEntityTypes when using Batch ContentRedaction.
 
 ## 2.1061.0
 * feature: Connect: This release adds tagging support for UserHierarchyGroups resource.

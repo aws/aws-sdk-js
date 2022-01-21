@@ -503,6 +503,10 @@ declare namespace TranscribeService {
      * The output transcript file stored in either the default S3 bucket or in a bucket you specify. When you choose redacted Amazon Transcribe outputs only the redacted transcript. When you choose redacted_and_unredacted Amazon Transcribe outputs both the redacted and unredacted transcripts.
      */
     RedactionOutput: RedactionOutput;
+    /**
+     * The types of personally identifiable information (PII) you want to redact in your transcript.
+     */
+    PiiEntityTypes?: PiiEntityTypes;
   }
   export interface CreateCallAnalyticsCategoryRequest {
     /**
@@ -1433,6 +1437,8 @@ declare namespace TranscribeService {
   export type Percentage = number;
   export type Phrase = string;
   export type Phrases = Phrase[];
+  export type PiiEntityType = "BANK_ACCOUNT_NUMBER"|"BANK_ROUTING"|"CREDIT_DEBIT_NUMBER"|"CREDIT_DEBIT_CVV"|"CREDIT_DEBIT_EXPIRY"|"PIN"|"EMAIL"|"ADDRESS"|"NAME"|"PHONE"|"SSN"|"ALL"|string;
+  export type PiiEntityTypes = PiiEntityType[];
   export type RedactionOutput = "redacted"|"redacted_and_unredacted"|string;
   export type RedactionType = "PII"|string;
   export interface RelativeTimeRange {

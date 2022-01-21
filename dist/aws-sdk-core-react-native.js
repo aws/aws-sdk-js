@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.1061.0',
+	  VERSION: '2.1062.0',
 
 	  /**
 	   * @api private
@@ -12081,6 +12081,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  validateStructure: function validateStructure(shape, params, context) {
 	    this.validateType(params, context, ['object'], 'structure');
+
+	    if (shape.isDocument) return true;
 
 	    var paramName;
 	    for (var i = 0; shape.required && i < shape.required.length; i++) {

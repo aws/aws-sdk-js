@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "ParamValidator",
-  "description": "fix the issue that the ParamValidator always fails on the document trait"
-}
