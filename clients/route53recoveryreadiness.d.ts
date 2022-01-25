@@ -12,406 +12,418 @@ declare class Route53RecoveryReadiness extends Service {
   constructor(options?: Route53RecoveryReadiness.Types.ClientConfiguration)
   config: Config & Route53RecoveryReadiness.Types.ClientConfiguration;
   /**
-   * Creates a new Cell.
+   * Creates a cell in an account.
    */
   createCell(params: Route53RecoveryReadiness.Types.CreateCellRequest, callback?: (err: AWSError, data: Route53RecoveryReadiness.Types.CreateCellResponse) => void): Request<Route53RecoveryReadiness.Types.CreateCellResponse, AWSError>;
   /**
-   * Creates a new Cell.
+   * Creates a cell in an account.
    */
   createCell(callback?: (err: AWSError, data: Route53RecoveryReadiness.Types.CreateCellResponse) => void): Request<Route53RecoveryReadiness.Types.CreateCellResponse, AWSError>;
   /**
-   * Create a new cross account readiness authorization.
+   * Creates a cross-account readiness authorization. This lets you authorize another account to work with Route 53 Application Recovery Controller, for example, to check the readiness status of resources in a separate account.
    */
   createCrossAccountAuthorization(params: Route53RecoveryReadiness.Types.CreateCrossAccountAuthorizationRequest, callback?: (err: AWSError, data: Route53RecoveryReadiness.Types.CreateCrossAccountAuthorizationResponse) => void): Request<Route53RecoveryReadiness.Types.CreateCrossAccountAuthorizationResponse, AWSError>;
   /**
-   * Create a new cross account readiness authorization.
+   * Creates a cross-account readiness authorization. This lets you authorize another account to work with Route 53 Application Recovery Controller, for example, to check the readiness status of resources in a separate account.
    */
   createCrossAccountAuthorization(callback?: (err: AWSError, data: Route53RecoveryReadiness.Types.CreateCrossAccountAuthorizationResponse) => void): Request<Route53RecoveryReadiness.Types.CreateCrossAccountAuthorizationResponse, AWSError>;
   /**
-   * Creates a new Readiness Check.
+   * Creates a readiness check in an account. A readiness check monitors a resource set in your application, such as a set of Amazon Aurora instances, that Application Recovery Controller is auditing recovery readiness for. The audits run once every minute on every resource that's associated with a readiness check.
    */
   createReadinessCheck(params: Route53RecoveryReadiness.Types.CreateReadinessCheckRequest, callback?: (err: AWSError, data: Route53RecoveryReadiness.Types.CreateReadinessCheckResponse) => void): Request<Route53RecoveryReadiness.Types.CreateReadinessCheckResponse, AWSError>;
   /**
-   * Creates a new Readiness Check.
+   * Creates a readiness check in an account. A readiness check monitors a resource set in your application, such as a set of Amazon Aurora instances, that Application Recovery Controller is auditing recovery readiness for. The audits run once every minute on every resource that's associated with a readiness check.
    */
   createReadinessCheck(callback?: (err: AWSError, data: Route53RecoveryReadiness.Types.CreateReadinessCheckResponse) => void): Request<Route53RecoveryReadiness.Types.CreateReadinessCheckResponse, AWSError>;
   /**
-   * Creates a new Recovery Group.
+   * Creates a recovery group in an account. A recovery group corresponds to an application and includes a list of the cells that make up the application.
    */
   createRecoveryGroup(params: Route53RecoveryReadiness.Types.CreateRecoveryGroupRequest, callback?: (err: AWSError, data: Route53RecoveryReadiness.Types.CreateRecoveryGroupResponse) => void): Request<Route53RecoveryReadiness.Types.CreateRecoveryGroupResponse, AWSError>;
   /**
-   * Creates a new Recovery Group.
+   * Creates a recovery group in an account. A recovery group corresponds to an application and includes a list of the cells that make up the application.
    */
   createRecoveryGroup(callback?: (err: AWSError, data: Route53RecoveryReadiness.Types.CreateRecoveryGroupResponse) => void): Request<Route53RecoveryReadiness.Types.CreateRecoveryGroupResponse, AWSError>;
   /**
-   * Creates a new Resource Set.
+   * Creates a resource set. A resource set is a set of resources of one type that span multiple cells. You can associate a resource set with a readiness check to monitor the resources for failover readiness.
    */
   createResourceSet(params: Route53RecoveryReadiness.Types.CreateResourceSetRequest, callback?: (err: AWSError, data: Route53RecoveryReadiness.Types.CreateResourceSetResponse) => void): Request<Route53RecoveryReadiness.Types.CreateResourceSetResponse, AWSError>;
   /**
-   * Creates a new Resource Set.
+   * Creates a resource set. A resource set is a set of resources of one type that span multiple cells. You can associate a resource set with a readiness check to monitor the resources for failover readiness.
    */
   createResourceSet(callback?: (err: AWSError, data: Route53RecoveryReadiness.Types.CreateResourceSetResponse) => void): Request<Route53RecoveryReadiness.Types.CreateResourceSetResponse, AWSError>;
   /**
-   * Deletes an existing Cell.
+   * Delete a cell. When successful, the response code is 204, with no response body.
    */
   deleteCell(params: Route53RecoveryReadiness.Types.DeleteCellRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes an existing Cell.
+   * Delete a cell. When successful, the response code is 204, with no response body.
    */
   deleteCell(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Delete cross account readiness authorization
+   * Deletes cross account readiness authorization.
    */
   deleteCrossAccountAuthorization(params: Route53RecoveryReadiness.Types.DeleteCrossAccountAuthorizationRequest, callback?: (err: AWSError, data: Route53RecoveryReadiness.Types.DeleteCrossAccountAuthorizationResponse) => void): Request<Route53RecoveryReadiness.Types.DeleteCrossAccountAuthorizationResponse, AWSError>;
   /**
-   * Delete cross account readiness authorization
+   * Deletes cross account readiness authorization.
    */
   deleteCrossAccountAuthorization(callback?: (err: AWSError, data: Route53RecoveryReadiness.Types.DeleteCrossAccountAuthorizationResponse) => void): Request<Route53RecoveryReadiness.Types.DeleteCrossAccountAuthorizationResponse, AWSError>;
   /**
-   * Deletes an existing Readiness Check.
+   * Deletes a readiness check.
    */
   deleteReadinessCheck(params: Route53RecoveryReadiness.Types.DeleteReadinessCheckRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes an existing Readiness Check.
+   * Deletes a readiness check.
    */
   deleteReadinessCheck(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes an existing Recovery Group.
+   * Deletes a recovery group.
    */
   deleteRecoveryGroup(params: Route53RecoveryReadiness.Types.DeleteRecoveryGroupRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes an existing Recovery Group.
+   * Deletes a recovery group.
    */
   deleteRecoveryGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes an existing Resource Set.
+   * Deletes a resource set.
    */
   deleteResourceSet(params: Route53RecoveryReadiness.Types.DeleteResourceSetRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes an existing Resource Set.
+   * Deletes a resource set.
    */
   deleteResourceSet(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Returns a collection of recommendations to improve resilliance and readiness check quality for a Recovery Group.
+   * Gets recommendations about architecture designs for improving resiliency for an application, based on a recovery group.
    */
   getArchitectureRecommendations(params: Route53RecoveryReadiness.Types.GetArchitectureRecommendationsRequest, callback?: (err: AWSError, data: Route53RecoveryReadiness.Types.GetArchitectureRecommendationsResponse) => void): Request<Route53RecoveryReadiness.Types.GetArchitectureRecommendationsResponse, AWSError>;
   /**
-   * Returns a collection of recommendations to improve resilliance and readiness check quality for a Recovery Group.
+   * Gets recommendations about architecture designs for improving resiliency for an application, based on a recovery group.
    */
   getArchitectureRecommendations(callback?: (err: AWSError, data: Route53RecoveryReadiness.Types.GetArchitectureRecommendationsResponse) => void): Request<Route53RecoveryReadiness.Types.GetArchitectureRecommendationsResponse, AWSError>;
   /**
-   * Returns information about a Cell.
+   * Gets information about a cell including cell name, cell Amazon Resource Name (ARN), ARNs of nested cells for this cell, and a list of those cell ARNs with their associated recovery group ARNs.
    */
   getCell(params: Route53RecoveryReadiness.Types.GetCellRequest, callback?: (err: AWSError, data: Route53RecoveryReadiness.Types.GetCellResponse) => void): Request<Route53RecoveryReadiness.Types.GetCellResponse, AWSError>;
   /**
-   * Returns information about a Cell.
+   * Gets information about a cell including cell name, cell Amazon Resource Name (ARN), ARNs of nested cells for this cell, and a list of those cell ARNs with their associated recovery group ARNs.
    */
   getCell(callback?: (err: AWSError, data: Route53RecoveryReadiness.Types.GetCellResponse) => void): Request<Route53RecoveryReadiness.Types.GetCellResponse, AWSError>;
   /**
-   * Returns information about readiness of a Cell.
+   * Gets readiness for a cell. Aggregates the readiness of all the resources that are associated with the cell into a single value.
    */
   getCellReadinessSummary(params: Route53RecoveryReadiness.Types.GetCellReadinessSummaryRequest, callback?: (err: AWSError, data: Route53RecoveryReadiness.Types.GetCellReadinessSummaryResponse) => void): Request<Route53RecoveryReadiness.Types.GetCellReadinessSummaryResponse, AWSError>;
   /**
-   * Returns information about readiness of a Cell.
+   * Gets readiness for a cell. Aggregates the readiness of all the resources that are associated with the cell into a single value.
    */
   getCellReadinessSummary(callback?: (err: AWSError, data: Route53RecoveryReadiness.Types.GetCellReadinessSummaryResponse) => void): Request<Route53RecoveryReadiness.Types.GetCellReadinessSummaryResponse, AWSError>;
   /**
-   * Returns information about a ReadinessCheck.
+   * Gets details about a readiness check.
    */
   getReadinessCheck(params: Route53RecoveryReadiness.Types.GetReadinessCheckRequest, callback?: (err: AWSError, data: Route53RecoveryReadiness.Types.GetReadinessCheckResponse) => void): Request<Route53RecoveryReadiness.Types.GetReadinessCheckResponse, AWSError>;
   /**
-   * Returns information about a ReadinessCheck.
+   * Gets details about a readiness check.
    */
   getReadinessCheck(callback?: (err: AWSError, data: Route53RecoveryReadiness.Types.GetReadinessCheckResponse) => void): Request<Route53RecoveryReadiness.Types.GetReadinessCheckResponse, AWSError>;
   /**
-   * Returns detailed information about the status of an individual resource within a Readiness Check's Resource Set.
+   * Gets individual readiness status for a readiness check. To see the overall readiness status for a recovery group, that considers the readiness status for all the readiness checks in the recovery group, use GetRecoveryGroupReadinessSummary.
    */
   getReadinessCheckResourceStatus(params: Route53RecoveryReadiness.Types.GetReadinessCheckResourceStatusRequest, callback?: (err: AWSError, data: Route53RecoveryReadiness.Types.GetReadinessCheckResourceStatusResponse) => void): Request<Route53RecoveryReadiness.Types.GetReadinessCheckResourceStatusResponse, AWSError>;
   /**
-   * Returns detailed information about the status of an individual resource within a Readiness Check's Resource Set.
+   * Gets individual readiness status for a readiness check. To see the overall readiness status for a recovery group, that considers the readiness status for all the readiness checks in the recovery group, use GetRecoveryGroupReadinessSummary.
    */
   getReadinessCheckResourceStatus(callback?: (err: AWSError, data: Route53RecoveryReadiness.Types.GetReadinessCheckResourceStatusResponse) => void): Request<Route53RecoveryReadiness.Types.GetReadinessCheckResourceStatusResponse, AWSError>;
   /**
-   * Returns information about the status of a Readiness Check.
+   * Gets the readiness status for an individual readiness check. To see the overall readiness status for a recovery group, that considers the readiness status for all the readiness checks in a recovery group, use GetRecoveryGroupReadinessSummary.
    */
   getReadinessCheckStatus(params: Route53RecoveryReadiness.Types.GetReadinessCheckStatusRequest, callback?: (err: AWSError, data: Route53RecoveryReadiness.Types.GetReadinessCheckStatusResponse) => void): Request<Route53RecoveryReadiness.Types.GetReadinessCheckStatusResponse, AWSError>;
   /**
-   * Returns information about the status of a Readiness Check.
+   * Gets the readiness status for an individual readiness check. To see the overall readiness status for a recovery group, that considers the readiness status for all the readiness checks in a recovery group, use GetRecoveryGroupReadinessSummary.
    */
   getReadinessCheckStatus(callback?: (err: AWSError, data: Route53RecoveryReadiness.Types.GetReadinessCheckStatusResponse) => void): Request<Route53RecoveryReadiness.Types.GetReadinessCheckStatusResponse, AWSError>;
   /**
-   * Returns information about a Recovery Group.
+   * Gets details about a recovery group, including a list of the cells that are included in it.
    */
   getRecoveryGroup(params: Route53RecoveryReadiness.Types.GetRecoveryGroupRequest, callback?: (err: AWSError, data: Route53RecoveryReadiness.Types.GetRecoveryGroupResponse) => void): Request<Route53RecoveryReadiness.Types.GetRecoveryGroupResponse, AWSError>;
   /**
-   * Returns information about a Recovery Group.
+   * Gets details about a recovery group, including a list of the cells that are included in it.
    */
   getRecoveryGroup(callback?: (err: AWSError, data: Route53RecoveryReadiness.Types.GetRecoveryGroupResponse) => void): Request<Route53RecoveryReadiness.Types.GetRecoveryGroupResponse, AWSError>;
   /**
-   * Returns information about a Recovery Group.
+   * Displays a summary of information about a recovery group's readiness status. Includes the readiness checks for resources in the recovery group and the readiness status of each one.
    */
   getRecoveryGroupReadinessSummary(params: Route53RecoveryReadiness.Types.GetRecoveryGroupReadinessSummaryRequest, callback?: (err: AWSError, data: Route53RecoveryReadiness.Types.GetRecoveryGroupReadinessSummaryResponse) => void): Request<Route53RecoveryReadiness.Types.GetRecoveryGroupReadinessSummaryResponse, AWSError>;
   /**
-   * Returns information about a Recovery Group.
+   * Displays a summary of information about a recovery group's readiness status. Includes the readiness checks for resources in the recovery group and the readiness status of each one.
    */
   getRecoveryGroupReadinessSummary(callback?: (err: AWSError, data: Route53RecoveryReadiness.Types.GetRecoveryGroupReadinessSummaryResponse) => void): Request<Route53RecoveryReadiness.Types.GetRecoveryGroupReadinessSummaryResponse, AWSError>;
   /**
-   * Returns information about a Resource Set.
+   * Displays the details about a resource set, including a list of the resources in the set.
    */
   getResourceSet(params: Route53RecoveryReadiness.Types.GetResourceSetRequest, callback?: (err: AWSError, data: Route53RecoveryReadiness.Types.GetResourceSetResponse) => void): Request<Route53RecoveryReadiness.Types.GetResourceSetResponse, AWSError>;
   /**
-   * Returns information about a Resource Set.
+   * Displays the details about a resource set, including a list of the resources in the set.
    */
   getResourceSet(callback?: (err: AWSError, data: Route53RecoveryReadiness.Types.GetResourceSetResponse) => void): Request<Route53RecoveryReadiness.Types.GetResourceSetResponse, AWSError>;
   /**
-   * Returns a collection of Cells.
+   * Lists the cells for an account.
    */
   listCells(params: Route53RecoveryReadiness.Types.ListCellsRequest, callback?: (err: AWSError, data: Route53RecoveryReadiness.Types.ListCellsResponse) => void): Request<Route53RecoveryReadiness.Types.ListCellsResponse, AWSError>;
   /**
-   * Returns a collection of Cells.
+   * Lists the cells for an account.
    */
   listCells(callback?: (err: AWSError, data: Route53RecoveryReadiness.Types.ListCellsResponse) => void): Request<Route53RecoveryReadiness.Types.ListCellsResponse, AWSError>;
   /**
-   * Returns a collection of cross account readiness authorizations.
+   * Lists the cross-account readiness authorizations that are in place for an account.
    */
   listCrossAccountAuthorizations(params: Route53RecoveryReadiness.Types.ListCrossAccountAuthorizationsRequest, callback?: (err: AWSError, data: Route53RecoveryReadiness.Types.ListCrossAccountAuthorizationsResponse) => void): Request<Route53RecoveryReadiness.Types.ListCrossAccountAuthorizationsResponse, AWSError>;
   /**
-   * Returns a collection of cross account readiness authorizations.
+   * Lists the cross-account readiness authorizations that are in place for an account.
    */
   listCrossAccountAuthorizations(callback?: (err: AWSError, data: Route53RecoveryReadiness.Types.ListCrossAccountAuthorizationsResponse) => void): Request<Route53RecoveryReadiness.Types.ListCrossAccountAuthorizationsResponse, AWSError>;
   /**
-   * Returns a collection of Readiness Checks.
+   * Lists the readiness checks for an account.
    */
   listReadinessChecks(params: Route53RecoveryReadiness.Types.ListReadinessChecksRequest, callback?: (err: AWSError, data: Route53RecoveryReadiness.Types.ListReadinessChecksResponse) => void): Request<Route53RecoveryReadiness.Types.ListReadinessChecksResponse, AWSError>;
   /**
-   * Returns a collection of Readiness Checks.
+   * Lists the readiness checks for an account.
    */
   listReadinessChecks(callback?: (err: AWSError, data: Route53RecoveryReadiness.Types.ListReadinessChecksResponse) => void): Request<Route53RecoveryReadiness.Types.ListReadinessChecksResponse, AWSError>;
   /**
-   * Returns a collection of Recovery Groups.
+   * Lists the recovery groups in an account.
    */
   listRecoveryGroups(params: Route53RecoveryReadiness.Types.ListRecoveryGroupsRequest, callback?: (err: AWSError, data: Route53RecoveryReadiness.Types.ListRecoveryGroupsResponse) => void): Request<Route53RecoveryReadiness.Types.ListRecoveryGroupsResponse, AWSError>;
   /**
-   * Returns a collection of Recovery Groups.
+   * Lists the recovery groups in an account.
    */
   listRecoveryGroups(callback?: (err: AWSError, data: Route53RecoveryReadiness.Types.ListRecoveryGroupsResponse) => void): Request<Route53RecoveryReadiness.Types.ListRecoveryGroupsResponse, AWSError>;
   /**
-   * Returns a collection of Resource Sets.
+   * Lists the resource sets in an account.
    */
   listResourceSets(params: Route53RecoveryReadiness.Types.ListResourceSetsRequest, callback?: (err: AWSError, data: Route53RecoveryReadiness.Types.ListResourceSetsResponse) => void): Request<Route53RecoveryReadiness.Types.ListResourceSetsResponse, AWSError>;
   /**
-   * Returns a collection of Resource Sets.
+   * Lists the resource sets in an account.
    */
   listResourceSets(callback?: (err: AWSError, data: Route53RecoveryReadiness.Types.ListResourceSetsResponse) => void): Request<Route53RecoveryReadiness.Types.ListResourceSetsResponse, AWSError>;
   /**
-   * Returns a collection of rules that are applied as part of Readiness Checks.
+   * Lists all readiness rules, or lists the readiness rules for a specific resource type.
    */
   listRules(params: Route53RecoveryReadiness.Types.ListRulesRequest, callback?: (err: AWSError, data: Route53RecoveryReadiness.Types.ListRulesResponse) => void): Request<Route53RecoveryReadiness.Types.ListRulesResponse, AWSError>;
   /**
-   * Returns a collection of rules that are applied as part of Readiness Checks.
+   * Lists all readiness rules, or lists the readiness rules for a specific resource type.
    */
   listRules(callback?: (err: AWSError, data: Route53RecoveryReadiness.Types.ListRulesResponse) => void): Request<Route53RecoveryReadiness.Types.ListRulesResponse, AWSError>;
   /**
-   * Returns a list of the tags assigned to the specified resource.
+   * Lists the tags for a resource.
    */
   listTagsForResources(params: Route53RecoveryReadiness.Types.ListTagsForResourcesRequest, callback?: (err: AWSError, data: Route53RecoveryReadiness.Types.ListTagsForResourcesResponse) => void): Request<Route53RecoveryReadiness.Types.ListTagsForResourcesResponse, AWSError>;
   /**
-   * Returns a list of the tags assigned to the specified resource.
+   * Lists the tags for a resource.
    */
   listTagsForResources(callback?: (err: AWSError, data: Route53RecoveryReadiness.Types.ListTagsForResourcesResponse) => void): Request<Route53RecoveryReadiness.Types.ListTagsForResourcesResponse, AWSError>;
   /**
-   * Adds tags to the specified resource. You can specify one or more tags to add.
+   * Adds a tag to a resource.
    */
   tagResource(params: Route53RecoveryReadiness.Types.TagResourceRequest, callback?: (err: AWSError, data: Route53RecoveryReadiness.Types.TagResourceResponse) => void): Request<Route53RecoveryReadiness.Types.TagResourceResponse, AWSError>;
   /**
-   * Adds tags to the specified resource. You can specify one or more tags to add.
+   * Adds a tag to a resource.
    */
   tagResource(callback?: (err: AWSError, data: Route53RecoveryReadiness.Types.TagResourceResponse) => void): Request<Route53RecoveryReadiness.Types.TagResourceResponse, AWSError>;
   /**
-   * Removes tags from the specified resource. You can specify one or more tags to remove.
+   * Removes a tag from a resource.
    */
   untagResource(params: Route53RecoveryReadiness.Types.UntagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Removes tags from the specified resource. You can specify one or more tags to remove.
+   * Removes a tag from a resource.
    */
   untagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates an existing Cell.
+   * Updates a cell to replace the list of nested cells with a new list of nested cells.
    */
   updateCell(params: Route53RecoveryReadiness.Types.UpdateCellRequest, callback?: (err: AWSError, data: Route53RecoveryReadiness.Types.UpdateCellResponse) => void): Request<Route53RecoveryReadiness.Types.UpdateCellResponse, AWSError>;
   /**
-   * Updates an existing Cell.
+   * Updates a cell to replace the list of nested cells with a new list of nested cells.
    */
   updateCell(callback?: (err: AWSError, data: Route53RecoveryReadiness.Types.UpdateCellResponse) => void): Request<Route53RecoveryReadiness.Types.UpdateCellResponse, AWSError>;
   /**
-   * Updates an exisiting Readiness Check.
+   * Updates a readiness check.
    */
   updateReadinessCheck(params: Route53RecoveryReadiness.Types.UpdateReadinessCheckRequest, callback?: (err: AWSError, data: Route53RecoveryReadiness.Types.UpdateReadinessCheckResponse) => void): Request<Route53RecoveryReadiness.Types.UpdateReadinessCheckResponse, AWSError>;
   /**
-   * Updates an exisiting Readiness Check.
+   * Updates a readiness check.
    */
   updateReadinessCheck(callback?: (err: AWSError, data: Route53RecoveryReadiness.Types.UpdateReadinessCheckResponse) => void): Request<Route53RecoveryReadiness.Types.UpdateReadinessCheckResponse, AWSError>;
   /**
-   * Updates an existing Recovery Group.
+   * Updates a recovery group.
    */
   updateRecoveryGroup(params: Route53RecoveryReadiness.Types.UpdateRecoveryGroupRequest, callback?: (err: AWSError, data: Route53RecoveryReadiness.Types.UpdateRecoveryGroupResponse) => void): Request<Route53RecoveryReadiness.Types.UpdateRecoveryGroupResponse, AWSError>;
   /**
-   * Updates an existing Recovery Group.
+   * Updates a recovery group.
    */
   updateRecoveryGroup(callback?: (err: AWSError, data: Route53RecoveryReadiness.Types.UpdateRecoveryGroupResponse) => void): Request<Route53RecoveryReadiness.Types.UpdateRecoveryGroupResponse, AWSError>;
   /**
-   * Updates an existing Resource Set.
+   * Updates a resource set.
    */
   updateResourceSet(params: Route53RecoveryReadiness.Types.UpdateResourceSetRequest, callback?: (err: AWSError, data: Route53RecoveryReadiness.Types.UpdateResourceSetResponse) => void): Request<Route53RecoveryReadiness.Types.UpdateResourceSetResponse, AWSError>;
   /**
-   * Updates an existing Resource Set.
+   * Updates a resource set.
    */
   updateResourceSet(callback?: (err: AWSError, data: Route53RecoveryReadiness.Types.UpdateResourceSetResponse) => void): Request<Route53RecoveryReadiness.Types.UpdateResourceSetResponse, AWSError>;
 }
 declare namespace Route53RecoveryReadiness {
   export interface CellOutput {
     /**
-     * The arn for the Cell
+     * The Amazon Resource Name (ARN) for the cell.
      */
     CellArn: __stringMax256;
     /**
-     * The name of the Cell
+     * The name of the cell.
      */
     CellName: __stringMax64PatternAAZAZ09Z;
     /**
-     * A list of Cell arns
+     * A list of cell ARNs.
      */
     Cells: __listOf__string;
     /**
-     * A list of Cell ARNs and/or RecoveryGroup ARNs
+     * The readiness scope for the cell, which can be a cell Amazon Resource Name (ARN) or a recovery group ARN. This is a list but currently can have only one element.
      */
     ParentReadinessScopes: __listOf__string;
+    /**
+     * Tags on the resources.
+     */
     Tags?: Tags;
   }
   export interface CreateCellRequest {
     /**
-     * The name of the Cell to create
+     * The name of the cell to create.
      */
     CellName: __string;
     /**
-     * A list of Cell arns contained within this Cell (for use in nested Cells, e.g. regions within which AZs)
+     * A list of cell Amazon Resource Names (ARNs) contained within this cell, for use in nested cells. For example, Availability Zones within specific Amazon Web Services Regions.
      */
     Cells?: __listOf__string;
     Tags?: Tags;
   }
   export interface CreateCellResponse {
     /**
-     * The arn for the Cell
+     * The Amazon Resource Name (ARN) for the cell.
      */
     CellArn?: __stringMax256;
     /**
-     * The name of the Cell
+     * The name of the cell.
      */
     CellName?: __stringMax64PatternAAZAZ09Z;
     /**
-     * A list of Cell arns
+     * A list of cell ARNs.
      */
     Cells?: __listOf__string;
     /**
-     * A list of Cell ARNs and/or RecoveryGroup ARNs
+     * The readiness scope for the cell, which can be a cell Amazon Resource Name (ARN) or a recovery group ARN. This is a list but currently can have only one element.
      */
     ParentReadinessScopes?: __listOf__string;
+    /**
+     * Tags on the resources.
+     */
     Tags?: Tags;
   }
   export interface CreateCrossAccountAuthorizationRequest {
     /**
-     * The cross account authorization
+     * The cross-account authorization.
      */
     CrossAccountAuthorization: CrossAccountAuthorization;
   }
   export interface CreateCrossAccountAuthorizationResponse {
     /**
-     * The cross account authorization
+     * The cross-account authorization.
      */
     CrossAccountAuthorization?: CrossAccountAuthorization;
   }
   export interface CreateReadinessCheckRequest {
     /**
-     * The name of the ReadinessCheck to create
+     * The name of the readiness check to create.
      */
     ReadinessCheckName: __string;
     /**
-     * The name of the ResourceSet to check
+     * The name of the resource set to check.
      */
     ResourceSetName: __string;
     Tags?: Tags;
   }
   export interface CreateReadinessCheckResponse {
     /**
-     * Arn associated with ReadinessCheck
+     * The Amazon Resource Name (ARN) associated with a readiness check.
      */
     ReadinessCheckArn?: __stringMax256;
     /**
-     * Name for a ReadinessCheck
+     * Name of a readiness check.
      */
     ReadinessCheckName?: __stringMax64PatternAAZAZ09Z;
     /**
-     * Name of the ResourceSet to be checked
+     * Name of the resource set to be checked.
      */
     ResourceSet?: __stringMax64PatternAAZAZ09Z;
     Tags?: Tags;
   }
   export interface CreateRecoveryGroupRequest {
     /**
-     * A list of Cell arns
+     * A list of the cell Amazon Resource Names (ARNs) in the recovery group.
      */
     Cells?: __listOf__string;
     /**
-     * The name of the RecoveryGroup to create
+     * The name of the recovery group to create.
      */
     RecoveryGroupName: __string;
     Tags?: Tags;
   }
   export interface CreateRecoveryGroupResponse {
     /**
-     * A list of Cell arns
+     * A list of a cell's Amazon Resource Names (ARNs).
      */
     Cells?: __listOf__string;
     /**
-     * The arn for the RecoveryGroup
+     * The Amazon Resource Name (ARN) for the recovery group.
      */
     RecoveryGroupArn?: __stringMax256;
     /**
-     * The name of the RecoveryGroup
+     * The name of the recovery group.
      */
     RecoveryGroupName?: __stringMax64PatternAAZAZ09Z;
+    /**
+     * The tags associated with the recovery group.
+     */
     Tags?: Tags;
   }
   export interface CreateResourceSetRequest {
     /**
-     * The name of the ResourceSet to create
+     * The name of the resource set to create.
      */
     ResourceSetName: __string;
     /**
-     * AWS Resource type of the resources in the ResourceSet
+     * The resource type of the resources in the resource set. Enter one of the following values for resource type: AWS::ApiGateway::Stage, AWS::ApiGatewayV2::Stage, AWS::AutoScaling::AutoScalingGroup, AWS::CloudWatch::Alarm, AWS::EC2::CustomerGateway, AWS::DynamoDB::Table, AWS::EC2::Volume, AWS::ElasticLoadBalancing::LoadBalancer, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::Lambda::Function, AWS::MSK::Cluster, AWS::RDS::DBCluster, AWS::Route53::HealthCheck, AWS::SQS::Queue, AWS::SNS::Topic, AWS::SNS::Subscription, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::Route53RecoveryReadiness::DNSTargetResource
      */
     ResourceSetType: __stringPatternAWSAZaZ09AZaZ09;
     /**
-     * A list of Resource objects
+     * A list of resource objects in the resource set.
      */
     Resources: __listOfResource;
+    /**
+     * A tag to associate with the parameters for a resource set.
+     */
     Tags?: Tags;
   }
   export interface CreateResourceSetResponse {
     /**
-     * The arn for the ResourceSet
+     * The Amazon Resource Name (ARN) for the resource set.
      */
     ResourceSetArn?: __stringMax256;
     /**
-     * The name of the ResourceSet
+     * The name of the resource set.
      */
     ResourceSetName?: __stringMax64PatternAAZAZ09Z;
     /**
-     * AWS Resource Type of the resources in the ResourceSet
+     * The resource type of the resources in the resource set. Enter one of the following values for resource type: AWS::ApiGateway::Stage, AWS::ApiGatewayV2::Stage, AWS::AutoScaling::AutoScalingGroup, AWS::CloudWatch::Alarm, AWS::EC2::CustomerGateway, AWS::DynamoDB::Table, AWS::EC2::Volume, AWS::ElasticLoadBalancing::LoadBalancer, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::Lambda::Function, AWS::MSK::Cluster, AWS::RDS::DBCluster, AWS::Route53::HealthCheck, AWS::SQS::Queue, AWS::SNS::Topic, AWS::SNS::Subscription, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::Route53RecoveryReadiness::DNSTargetResource
      */
     ResourceSetType?: __stringPatternAWSAZaZ09AZaZ09;
     /**
-     * A list of Resource objects
+     * A list of resource objects.
      */
     Resources?: __listOfResource;
     Tags?: Tags;
@@ -419,32 +431,35 @@ declare namespace Route53RecoveryReadiness {
   export type CrossAccountAuthorization = string;
   export interface DNSTargetResource {
     /**
-     * The DNS Name that acts as ingress point to a portion of application
+     * The domain name that acts as an ingress point to a portion of the customer application.
      */
     DomainName?: __string;
     /**
-     * The Hosted Zone ARN that contains the DNS record with the provided name of target resource.
+     * The hosted zone Amazon Resource Name (ARN) that contains the DNS record with the provided name of the target resource.
      */
     HostedZoneArn?: __string;
     /**
-     * The R53 Set Id to uniquely identify a record given a Name and a Type
+     * The Route 53 record set ID that uniquely identifies a DNS record, given a name and a type.
      */
     RecordSetId?: __string;
     /**
-     * The Type of DNS Record of target resource
+     * The type of DNS record of the target resource.
      */
     RecordType?: __string;
+    /**
+     * The target resource of the DNS target resource.
+     */
     TargetResource?: TargetResource;
   }
   export interface DeleteCellRequest {
     /**
-     * The Cell to delete
+     * The name of the cell.
      */
     CellName: __string;
   }
   export interface DeleteCrossAccountAuthorizationRequest {
     /**
-     * The cross account authorization
+     * The cross-account authorization.
      */
     CrossAccountAuthorization: __string;
   }
@@ -452,167 +467,170 @@ declare namespace Route53RecoveryReadiness {
   }
   export interface DeleteReadinessCheckRequest {
     /**
-     * The ReadinessCheck to delete
+     * Name of a readiness check.
      */
     ReadinessCheckName: __string;
   }
   export interface DeleteRecoveryGroupRequest {
     /**
-     * The RecoveryGroup to delete
+     * The name of a recovery group.
      */
     RecoveryGroupName: __string;
   }
   export interface DeleteResourceSetRequest {
     /**
-     * The ResourceSet to delete
+     * Name of a resource set.
      */
     ResourceSetName: __string;
   }
   export interface GetArchitectureRecommendationsRequest {
     /**
-     * Upper bound on number of records to return.
+     * The number of objects that you want to return with this call.
      */
     MaxResults?: MaxResults;
     /**
-     * A token that can be used to resume pagination from the end of the collection.
+     * The token that identifies which batch of results you want to see.
      */
     NextToken?: __string;
     /**
-     * Name of RecoveryGroup (top level resource) to be analyzed.
+     * The name of a recovery group.
      */
     RecoveryGroupName: __string;
   }
   export interface GetArchitectureRecommendationsResponse {
     /**
-     * The time a Recovery Group was last assessed for recommendations in UTC ISO-8601 format.
+     * The time that a recovery group was last assessed for recommendations, in UTC ISO-8601 format.
      */
     LastAuditTimestamp?: LastAuditTimestamp;
     /**
-     * A token that can be used to resume pagination from the end of the collection
+     * The token that identifies which batch of results you want to see.
      */
     NextToken?: __string;
     /**
-     * A list of recommendations for the customer's application
+     * A list of the recommendations for the customer's application.
      */
     Recommendations?: __listOfRecommendation;
   }
   export interface GetCellReadinessSummaryRequest {
     /**
-     * The name of the Cell
+     * The name of the cell.
      */
     CellName: __string;
     /**
-     * Upper bound on number of records to return.
+     * The number of objects that you want to return with this call.
      */
     MaxResults?: MaxResults;
     /**
-     * A token used to resume pagination from the end of a previous request.
+     * The token that identifies which batch of results you want to see.
      */
     NextToken?: __string;
   }
   export interface GetCellReadinessSummaryResponse {
     /**
-     * A token that can be used to resume pagination from the end of the collection.
+     * The token that identifies which batch of results you want to see.
      */
     NextToken?: __string;
     /**
-     * The readiness at Cell level.
+     * The readiness at a cell level.
      */
     Readiness?: Readiness;
     /**
-     * Summaries for the ReadinessChecks making up the Cell
+     * Summaries for the readiness checks that make up the cell.
      */
     ReadinessChecks?: __listOfReadinessCheckSummary;
   }
   export interface GetCellRequest {
     /**
-     * The Cell to get
+     * The name of the cell.
      */
     CellName: __string;
   }
   export interface GetCellResponse {
     /**
-     * The arn for the Cell
+     * The Amazon Resource Name (ARN) for the cell.
      */
     CellArn?: __stringMax256;
     /**
-     * The name of the Cell
+     * The name of the cell.
      */
     CellName?: __stringMax64PatternAAZAZ09Z;
     /**
-     * A list of Cell arns
+     * A list of cell ARNs.
      */
     Cells?: __listOf__string;
     /**
-     * A list of Cell ARNs and/or RecoveryGroup ARNs
+     * The readiness scope for the cell, which can be a cell Amazon Resource Name (ARN) or a recovery group ARN. This is a list but currently can have only one element.
      */
     ParentReadinessScopes?: __listOf__string;
+    /**
+     * Tags on the resources.
+     */
     Tags?: Tags;
   }
   export interface GetReadinessCheckRequest {
     /**
-     * The ReadinessCheck to get
+     * Name of a readiness check.
      */
     ReadinessCheckName: __string;
   }
   export interface GetReadinessCheckResourceStatusRequest {
     /**
-     * Upper bound on number of records to return.
+     * The number of objects that you want to return with this call.
      */
     MaxResults?: MaxResults;
     /**
-     * A token used to resume pagination from the end of a previous request.
+     * The token that identifies which batch of results you want to see.
      */
     NextToken?: __string;
     /**
-     * The ReadinessCheck to get
+     * Name of a readiness check.
      */
     ReadinessCheckName: __string;
     /**
-     * The resource ARN or component Id to get
+     * The resource identifier, which is the Amazon Resource Name (ARN) or the identifier generated for the resource by Application Recovery Controller (for example, for a DNS target resource).
      */
     ResourceIdentifier: __string;
   }
   export interface GetReadinessCheckResourceStatusResponse {
     /**
-     * A token that can be used to resume pagination from the end of the collection.
+     * The token that identifies which batch of results you want to see.
      */
     NextToken?: __string;
     /**
-     * The readiness at rule level.
+     * The readiness at a rule level.
      */
     Readiness?: Readiness;
     /**
-     * Details of the rules's results
+     * Details of the rule's results.
      */
     Rules?: __listOfRuleResult;
   }
   export interface GetReadinessCheckResponse {
     /**
-     * Arn associated with ReadinessCheck
+     * The Amazon Resource Name (ARN) associated with a readiness check.
      */
     ReadinessCheckArn?: __stringMax256;
     /**
-     * Name for a ReadinessCheck
+     * Name of a readiness check.
      */
     ReadinessCheckName?: __stringMax64PatternAAZAZ09Z;
     /**
-     * Name of the ResourceSet to be checked
+     * Name of the resource set to be checked.
      */
     ResourceSet?: __stringMax64PatternAAZAZ09Z;
     Tags?: Tags;
   }
   export interface GetReadinessCheckStatusRequest {
     /**
-     * Upper bound on number of records to return.
+     * The number of objects that you want to return with this call.
      */
     MaxResults?: MaxResults;
     /**
-     * A token used to resume pagination from the end of a previous request.
+     * The token that identifies which batch of results you want to see.
      */
     NextToken?: __string;
     /**
-     * The ReadinessCheck to get
+     * Name of a readiness check.
      */
     ReadinessCheckName: __string;
   }
@@ -622,7 +640,7 @@ declare namespace Route53RecoveryReadiness {
      */
     Messages?: __listOfMessage;
     /**
-     * A token that can be used to resume pagination from the end of the collection.
+     * The token that identifies which batch of results you want to see.
      */
     NextToken?: __string;
     /**
@@ -630,80 +648,83 @@ declare namespace Route53RecoveryReadiness {
      */
     Readiness?: Readiness;
     /**
-     * Summary of resources's readiness
+     * Summary of the readiness of resources.
      */
     Resources?: __listOfResourceResult;
   }
   export interface GetRecoveryGroupReadinessSummaryRequest {
     /**
-     * Upper bound on number of records to return.
+     * The number of objects that you want to return with this call.
      */
     MaxResults?: MaxResults;
     /**
-     * A token used to resume pagination from the end of a previous request.
+     * The token that identifies which batch of results you want to see.
      */
     NextToken?: __string;
     /**
-     * The name of the RecoveryGroup
+     * The name of a recovery group.
      */
     RecoveryGroupName: __string;
   }
   export interface GetRecoveryGroupReadinessSummaryResponse {
     /**
-     * A token that can be used to resume pagination from the end of the collection.
+     * The token that identifies which batch of results you want to see.
      */
     NextToken?: __string;
     /**
-     * The readiness at RecoveryGroup level.
+     * The readiness status at a recovery group level.
      */
     Readiness?: Readiness;
     /**
-     * Summaries for the ReadinessChecks making up the RecoveryGroup
+     * Summaries of the readiness checks for the recovery group.
      */
     ReadinessChecks?: __listOfReadinessCheckSummary;
   }
   export interface GetRecoveryGroupRequest {
     /**
-     * The RecoveryGroup to get
+     * The name of a recovery group.
      */
     RecoveryGroupName: __string;
   }
   export interface GetRecoveryGroupResponse {
     /**
-     * A list of Cell arns
+     * A list of a cell's Amazon Resource Names (ARNs).
      */
     Cells?: __listOf__string;
     /**
-     * The arn for the RecoveryGroup
+     * The Amazon Resource Name (ARN) for the recovery group.
      */
     RecoveryGroupArn?: __stringMax256;
     /**
-     * The name of the RecoveryGroup
+     * The name of the recovery group.
      */
     RecoveryGroupName?: __stringMax64PatternAAZAZ09Z;
+    /**
+     * The tags associated with the recovery group.
+     */
     Tags?: Tags;
   }
   export interface GetResourceSetRequest {
     /**
-     * The ResourceSet to get
+     * Name of a resource set.
      */
     ResourceSetName: __string;
   }
   export interface GetResourceSetResponse {
     /**
-     * The arn for the ResourceSet
+     * The Amazon Resource Name (ARN) for the resource set.
      */
     ResourceSetArn?: __stringMax256;
     /**
-     * The name of the ResourceSet
+     * The name of the resource set.
      */
     ResourceSetName?: __stringMax64PatternAAZAZ09Z;
     /**
-     * AWS Resource Type of the resources in the ResourceSet
+     * The resource type of the resources in the resource set. Enter one of the following values for resource type: AWS::ApiGateway::Stage, AWS::ApiGatewayV2::Stage, AWS::AutoScaling::AutoScalingGroup, AWS::CloudWatch::Alarm, AWS::EC2::CustomerGateway, AWS::DynamoDB::Table, AWS::EC2::Volume, AWS::ElasticLoadBalancing::LoadBalancer, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::Lambda::Function, AWS::MSK::Cluster, AWS::RDS::DBCluster, AWS::Route53::HealthCheck, AWS::SQS::Queue, AWS::SNS::Topic, AWS::SNS::Subscription, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::Route53RecoveryReadiness::DNSTargetResource
      */
     ResourceSetType?: __stringPatternAWSAZaZ09AZaZ09;
     /**
-     * A list of Resource objects
+     * A list of resource objects.
      */
     Resources?: __listOfResource;
     Tags?: Tags;
@@ -711,270 +732,279 @@ declare namespace Route53RecoveryReadiness {
   export type LastAuditTimestamp = Date;
   export interface ListCellsRequest {
     /**
-     * Upper bound on number of records to return.
+     * The number of objects that you want to return with this call.
      */
     MaxResults?: MaxResults;
     /**
-     * A token used to resume pagination from the end of a previous request.
+     * The token that identifies which batch of results you want to see.
      */
     NextToken?: __string;
   }
   export interface ListCellsResponse {
     /**
-     * A list of Cells
+     * A list of cells.
      */
     Cells?: __listOfCellOutput;
     /**
-     * A token that can be used to resume pagination from the end of the collection.
+     * The token that identifies which batch of results you want to see.
      */
     NextToken?: __string;
   }
   export interface ListCrossAccountAuthorizationsRequest {
     /**
-     * Upper bound on number of records to return.
+     * The number of objects that you want to return with this call.
      */
     MaxResults?: MaxResults;
     /**
-     * A token used to resume pagination from the end of a previous request.
+     * The token that identifies which batch of results you want to see.
      */
     NextToken?: __string;
   }
   export interface ListCrossAccountAuthorizationsResponse {
     /**
-     * A list of CrossAccountAuthorizations
+     * A list of cross-account authorizations.
      */
     CrossAccountAuthorizations?: __listOfCrossAccountAuthorization;
     /**
-     * A token that can be used to resume pagination from the end of the collection.
+     * The token that identifies which batch of results you want to see.
      */
     NextToken?: __string;
   }
   export interface ListReadinessChecksRequest {
     /**
-     * Upper bound on number of records to return.
+     * The number of objects that you want to return with this call.
      */
     MaxResults?: MaxResults;
     /**
-     * A token used to resume pagination from the end of a previous request.
+     * The token that identifies which batch of results you want to see.
      */
     NextToken?: __string;
   }
   export interface ListReadinessChecksResponse {
     /**
-     * A token that can be used to resume pagination from the end of the collection.
+     * The token that identifies which batch of results you want to see.
      */
     NextToken?: __string;
     /**
-     * A list of ReadinessCheck associated with the account
+     * A list of readiness checks associated with the account.
      */
     ReadinessChecks?: __listOfReadinessCheckOutput;
   }
   export interface ListRecoveryGroupsRequest {
     /**
-     * Upper bound on number of records to return.
+     * The number of objects that you want to return with this call.
      */
     MaxResults?: MaxResults;
     /**
-     * A token used to resume pagination from the end of a previous request.
+     * The token that identifies which batch of results you want to see.
      */
     NextToken?: __string;
   }
   export interface ListRecoveryGroupsResponse {
     /**
-     * A token that can be used to resume pagination from the end of the collection.
+     * The token that identifies which batch of results you want to see.
      */
     NextToken?: __string;
     /**
-     * A list of RecoveryGroups
+     * A list of recovery groups.
      */
     RecoveryGroups?: __listOfRecoveryGroupOutput;
   }
   export interface ListResourceSetsRequest {
     /**
-     * Upper bound on number of records to return.
+     * The number of objects that you want to return with this call.
      */
     MaxResults?: MaxResults;
     /**
-     * A token used to resume pagination from the end of a previous request.
+     * The token that identifies which batch of results you want to see.
      */
     NextToken?: __string;
   }
   export interface ListResourceSetsResponse {
     /**
-     * A token that can be used to resume pagination from the end of the collection.
+     * The token that identifies which batch of results you want to see.
      */
     NextToken?: __string;
     /**
-     * A list of ResourceSets associated with the account
+     * A list of resource sets associated with the account.
      */
     ResourceSets?: __listOfResourceSetOutput;
   }
   export interface ListRulesOutput {
     /**
-     * The resource type the rule applies to.
+     * The resource type that the readiness rule applies to.
      */
     ResourceType: __stringMax64;
     /**
-     * A description of the rule
+     * The description of a readiness rule.
      */
     RuleDescription: __stringMax256;
     /**
-     * The Rule's ID.
+     * The ID for the readiness rule.
      */
     RuleId: __stringMax64;
   }
   export interface ListRulesRequest {
     /**
-     * Upper bound on number of records to return.
+     * The number of objects that you want to return with this call.
      */
     MaxResults?: MaxResults;
     /**
-     * A token used to resume pagination from the end of a previous request.
+     * The token that identifies which batch of results you want to see.
      */
     NextToken?: __string;
     /**
-     * Filter parameter which specifies the rules to return given a resource type.
+     * The resource type that a readiness rule applies to.
      */
     ResourceType?: __string;
   }
   export interface ListRulesResponse {
     /**
-     * A token that can be used to resume pagination from the end of the collection.
+     * The token that identifies which batch of results you want to see.
      */
     NextToken?: __string;
     /**
-     * A list of rules
+     * A list of readiness rules for a specific resource type.
      */
     Rules?: __listOfListRulesOutput;
   }
   export interface ListTagsForResourcesRequest {
     /**
-     * The Amazon Resource Name (ARN) for the resource. You can get this from the response to any request to the resource.
+     * The Amazon Resource Name (ARN) for a resource.
      */
     ResourceArn: __string;
   }
   export interface ListTagsForResourcesResponse {
+    /**
+     * 
+     */
     Tags?: Tags;
   }
   export type MaxResults = number;
   export interface Message {
     /**
-     * The text of a readiness check message
+     * The text of a readiness check message.
      */
     MessageText?: __string;
   }
   export interface NLBResource {
     /**
-     * An NLB resource arn
+     * The Network Load Balancer resource Amazon Resource Name (ARN).
      */
     Arn?: __string;
   }
   export interface R53ResourceRecord {
     /**
-     * The DNS target name
+     * The DNS target domain name.
      */
     DomainName?: __string;
     /**
-     * The Resource Record set id
+     * The Route 53 Resource Record Set ID.
      */
     RecordSetId?: __string;
   }
   export type Readiness = "READY"|"NOT_READY"|"UNKNOWN"|"NOT_AUTHORIZED"|string;
   export interface ReadinessCheckOutput {
     /**
-     * Arn associated with ReadinessCheck
+     * The Amazon Resource Name (ARN) associated with a readiness check.
      */
     ReadinessCheckArn: __stringMax256;
     /**
-     * Name for a ReadinessCheck
+     * Name of a readiness check.
      */
     ReadinessCheckName?: __stringMax64PatternAAZAZ09Z;
     /**
-     * Name of the ResourceSet to be checked
+     * Name of the resource set to be checked.
      */
     ResourceSet: __stringMax64PatternAAZAZ09Z;
     Tags?: Tags;
   }
   export interface ReadinessCheckSummary {
     /**
-     * The readiness of this ReadinessCheck
+     * The readiness status of this readiness check.
      */
     Readiness?: Readiness;
     /**
-     * The name of a ReadinessCheck which is part of the given RecoveryGroup or Cell
+     * The name of a readiness check.
      */
     ReadinessCheckName?: __string;
   }
   export type ReadinessCheckTimestamp = Date;
   export interface Recommendation {
     /**
-     * Guidance text for recommendation
+     * Text of the recommendations that are provided to make an application more recovery resilient.
      */
     RecommendationText: __string;
   }
   export interface RecoveryGroupOutput {
     /**
-     * A list of Cell arns
+     * A list of a cell's Amazon Resource Names (ARNs).
      */
     Cells: __listOf__string;
     /**
-     * The arn for the RecoveryGroup
+     * The Amazon Resource Name (ARN) for the recovery group.
      */
     RecoveryGroupArn: __stringMax256;
     /**
-     * The name of the RecoveryGroup
+     * The name of the recovery group.
      */
     RecoveryGroupName: __stringMax64PatternAAZAZ09Z;
+    /**
+     * The tags associated with the recovery group.
+     */
     Tags?: Tags;
   }
   export interface Resource {
     /**
-     * The component id of the resource, generated by the service when dnsTargetResource is used
+     * The component identifier of the resource, generated when DNS target resource is used.
      */
     ComponentId?: __string;
+    /**
+     * The DNS target resource.
+     */
     DnsTargetResource?: DNSTargetResource;
     /**
-     * A list of RecoveryGroup ARNs and/or Cell ARNs that this resource is contained within.
+     * A list of recovery group Amazon Resource Names (ARNs) and cell ARNs that this resource is contained within.
      */
     ReadinessScopes?: __listOf__string;
     /**
-     * The ARN of the AWS resource, can be skipped if dnsTargetResource is used
+     * The Amazon Resource Name (ARN) of the Amazon Web Services resource.
      */
     ResourceArn?: __string;
   }
   export interface ResourceResult {
     /**
-     * The component id of the resource
+     * The component id of the resource.
      */
     ComponentId?: __string;
     /**
-     * The time the resource was last checked for readiness, in ISO-8601 format, UTC.
+     * The time (UTC) that the resource was last checked for readiness, in ISO-8601 format.
      */
     LastCheckedTimestamp: ReadinessCheckTimestamp;
     /**
-     * The readiness of the resource.
+     * The readiness of a resource.
      */
     Readiness: Readiness;
     /**
-     * The ARN of the resource
+     * The Amazon Resource Name (ARN) of the resource.
      */
     ResourceArn?: __string;
   }
   export interface ResourceSetOutput {
     /**
-     * The arn for the ResourceSet
+     * The Amazon Resource Name (ARN) for the resource set.
      */
     ResourceSetArn: __stringMax256;
     /**
-     * The name of the ResourceSet
+     * The name of the resource set.
      */
     ResourceSetName: __stringMax64PatternAAZAZ09Z;
     /**
-     * AWS Resource Type of the resources in the ResourceSet
+     * The resource type of the resources in the resource set. Enter one of the following values for resource type: AWS::ApiGateway::Stage, AWS::ApiGatewayV2::Stage, AWS::AutoScaling::AutoScalingGroup, AWS::CloudWatch::Alarm, AWS::EC2::CustomerGateway, AWS::DynamoDB::Table, AWS::EC2::Volume, AWS::ElasticLoadBalancing::LoadBalancer, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::Lambda::Function, AWS::MSK::Cluster, AWS::RDS::DBCluster, AWS::Route53::HealthCheck, AWS::SQS::Queue, AWS::SNS::Topic, AWS::SNS::Subscription, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::Route53RecoveryReadiness::DNSTargetResource
      */
     ResourceSetType: __stringPatternAWSAZaZ09AZaZ09;
     /**
-     * A list of Resource objects
+     * A list of resource objects.
      */
     Resources: __listOfResource;
     Tags?: Tags;
@@ -985,7 +1015,7 @@ declare namespace Route53RecoveryReadiness {
      */
     LastCheckedTimestamp: ReadinessCheckTimestamp;
     /**
-     * Details about the resource's readiness
+     * Details about the resource's readiness.
      */
     Messages: __listOfMessage;
     /**
@@ -999,136 +1029,151 @@ declare namespace Route53RecoveryReadiness {
   }
   export interface TagResourceRequest {
     /**
-     * The Amazon Resource Name (ARN) for the resource. You can get this from the response to any request to the resource.
+     * The Amazon Resource Name (ARN) for a resource.
      */
     ResourceArn: __string;
+    /**
+     * 
+     */
     Tags: Tags;
   }
   export interface TagResourceResponse {
   }
   export type Tags = {[key: string]: __string};
   export interface TargetResource {
+    /**
+     * The Network Load Balancer Resource.
+     */
     NLBResource?: NLBResource;
+    /**
+     * The Route 53 resource.
+     */
     R53Resource?: R53ResourceRecord;
   }
   export interface UntagResourceRequest {
     /**
-     * The Amazon Resource Name (ARN) for the resource. You can get this from the response to any request to the resource.
+     * The Amazon Resource Name (ARN) for a resource.
      */
     ResourceArn: __string;
     /**
-     * A comma-separated list of the tag keys to remove from the resource.
+     * The keys for tags you add to resources.
      */
     TagKeys: __listOf__string;
   }
   export interface UpdateCellRequest {
     /**
-     * The Cell to update
+     * The name of the cell.
      */
     CellName: __string;
     /**
-     * A list of Cell arns, completely replaces previous list
+     * A list of cell Amazon Resource Names (ARNs), which completely replaces the previous list.
      */
     Cells: __listOf__string;
   }
   export interface UpdateCellResponse {
     /**
-     * The arn for the Cell
+     * The Amazon Resource Name (ARN) for the cell.
      */
     CellArn?: __stringMax256;
     /**
-     * The name of the Cell
+     * The name of the cell.
      */
     CellName?: __stringMax64PatternAAZAZ09Z;
     /**
-     * A list of Cell arns
+     * A list of cell ARNs.
      */
     Cells?: __listOf__string;
     /**
-     * A list of Cell ARNs and/or RecoveryGroup ARNs
+     * The readiness scope for the cell, which can be a cell Amazon Resource Name (ARN) or a recovery group ARN. This is a list but currently can have only one element.
      */
     ParentReadinessScopes?: __listOf__string;
+    /**
+     * Tags on the resources.
+     */
     Tags?: Tags;
   }
   export interface UpdateReadinessCheckRequest {
     /**
-     * The ReadinessCheck to update
+     * Name of a readiness check.
      */
     ReadinessCheckName: __string;
     /**
-     * The name of the ResourceSet to check
+     * The name of the resource set to be checked.
      */
     ResourceSetName: __string;
   }
   export interface UpdateReadinessCheckResponse {
     /**
-     * Arn associated with ReadinessCheck
+     * The Amazon Resource Name (ARN) associated with a readiness check.
      */
     ReadinessCheckArn?: __stringMax256;
     /**
-     * Name for a ReadinessCheck
+     * Name of a readiness check.
      */
     ReadinessCheckName?: __stringMax64PatternAAZAZ09Z;
     /**
-     * Name of the ResourceSet to be checked
+     * Name of the resource set to be checked.
      */
     ResourceSet?: __stringMax64PatternAAZAZ09Z;
     Tags?: Tags;
   }
   export interface UpdateRecoveryGroupRequest {
     /**
-     * A list of Cell arns, completely replaces previous list
+     * A list of cell Amazon Resource Names (ARNs). This list completely replaces the previous list.
      */
     Cells: __listOf__string;
     /**
-     * The RecoveryGroup to update
+     * The name of a recovery group.
      */
     RecoveryGroupName: __string;
   }
   export interface UpdateRecoveryGroupResponse {
     /**
-     * A list of Cell arns
+     * A list of a cell's Amazon Resource Names (ARNs).
      */
     Cells?: __listOf__string;
     /**
-     * The arn for the RecoveryGroup
+     * The Amazon Resource Name (ARN) for the recovery group.
      */
     RecoveryGroupArn?: __stringMax256;
     /**
-     * The name of the RecoveryGroup
+     * The name of the recovery group.
      */
     RecoveryGroupName?: __stringMax64PatternAAZAZ09Z;
+    /**
+     * The tags associated with the recovery group.
+     */
     Tags?: Tags;
   }
   export interface UpdateResourceSetRequest {
     /**
-     * The ResourceSet to update
+     * Name of a resource set.
      */
     ResourceSetName: __string;
     /**
-     * AWS Resource Type of the resources in the ResourceSet
+     * The resource type of the resources in the resource set. Enter one of the following values for resource type: AWS::ApiGateway::Stage, AWS::ApiGatewayV2::Stage, AWS::AutoScaling::AutoScalingGroup, AWS::CloudWatch::Alarm, AWS::EC2::CustomerGateway, AWS::DynamoDB::Table, AWS::EC2::Volume, AWS::ElasticLoadBalancing::LoadBalancer, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::Lambda::Function, AWS::MSK::Cluster, AWS::RDS::DBCluster, AWS::Route53::HealthCheck, AWS::SQS::Queue, AWS::SNS::Topic, AWS::SNS::Subscription, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::Route53RecoveryReadiness::DNSTargetResource
      */
     ResourceSetType: __stringPatternAWSAZaZ09AZaZ09;
     /**
-     * A list of Resource objects
+     * A list of resource objects.
      */
     Resources: __listOfResource;
   }
   export interface UpdateResourceSetResponse {
     /**
-     * The arn for the ResourceSet
+     * The Amazon Resource Name (ARN) for the resource set.
      */
     ResourceSetArn?: __stringMax256;
     /**
-     * The name of the ResourceSet
+     * The name of the resource set.
      */
     ResourceSetName?: __stringMax64PatternAAZAZ09Z;
     /**
-     * AWS Resource Type of the resources in the ResourceSet
+     * The resource type of the resources in the resource set. Enter one of the following values for resource type: AWS::ApiGateway::Stage, AWS::ApiGatewayV2::Stage, AWS::AutoScaling::AutoScalingGroup, AWS::CloudWatch::Alarm, AWS::EC2::CustomerGateway, AWS::DynamoDB::Table, AWS::EC2::Volume, AWS::ElasticLoadBalancing::LoadBalancer, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::Lambda::Function, AWS::MSK::Cluster, AWS::RDS::DBCluster, AWS::Route53::HealthCheck, AWS::SQS::Queue, AWS::SNS::Topic, AWS::SNS::Subscription, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::Route53RecoveryReadiness::DNSTargetResource
      */
     ResourceSetType?: __stringPatternAWSAZaZ09AZaZ09;
     /**
-     * A list of Resource objects
+     * A list of resource objects.
      */
     Resources?: __listOfResource;
     Tags?: Tags;

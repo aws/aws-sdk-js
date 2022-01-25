@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1062.0-->
+<!--LATEST=2.1063.0-->
 <!--ENTRYINSERT-->
+
+## 2.1063.0
+* feature: Connect: This release adds support for custom vocabularies to be used with Contact Lens. Custom vocabularies improve transcription accuracy for one or more specific words.
+* feature: EFS: Use Amazon EFS Replication to replicate your Amazon EFS file system in the AWS Region of your preference.
+* feature: FSx: This release adds support for growing SSD storage capacity and growing/shrinking SSD IOPS for FSx for ONTAP file systems.
+* feature: GuardDuty: Amazon GuardDuty expands threat detection coverage to protect Amazon Elastic Kubernetes Service (EKS) workloads.
 
 ## 2.1062.0
 * bugfix: ParamValidator: fix the issue that the ParamValidator always fails on the document trait

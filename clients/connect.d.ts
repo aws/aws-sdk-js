@@ -28,6 +28,14 @@ declare class Connect extends Service {
    */
   associateBot(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Associates an existing vocabulary as the default. Contact Lens for Amazon Connect uses the vocabulary in post-call and real-time analysis sessions for the given language.
+   */
+  associateDefaultVocabulary(params: Connect.Types.AssociateDefaultVocabularyRequest, callback?: (err: AWSError, data: Connect.Types.AssociateDefaultVocabularyResponse) => void): Request<Connect.Types.AssociateDefaultVocabularyResponse, AWSError>;
+  /**
+   * Associates an existing vocabulary as the default. Contact Lens for Amazon Connect uses the vocabulary in post-call and real-time analysis sessions for the given language.
+   */
+  associateDefaultVocabulary(callback?: (err: AWSError, data: Connect.Types.AssociateDefaultVocabularyResponse) => void): Request<Connect.Types.AssociateDefaultVocabularyResponse, AWSError>;
+  /**
    * This API is in preview release for Amazon Connect and is subject to change. Associates a storage resource type for the first time. You can only associate one type of storage configuration in a single call. This means, for example, that you can't define an instance with multiple S3 buckets for storing chat transcripts. This API does not create a resource that doesn't exist. It only associates it to the instance. Ensure that the resource being specified in the storage configuration, like an S3 bucket, exists when being used for association.
    */
   associateInstanceStorageConfig(params: Connect.Types.AssociateInstanceStorageConfigRequest, callback?: (err: AWSError, data: Connect.Types.AssociateInstanceStorageConfigResponse) => void): Request<Connect.Types.AssociateInstanceStorageConfigResponse, AWSError>;
@@ -180,6 +188,14 @@ declare class Connect extends Service {
    */
   createUserHierarchyGroup(callback?: (err: AWSError, data: Connect.Types.CreateUserHierarchyGroupResponse) => void): Request<Connect.Types.CreateUserHierarchyGroupResponse, AWSError>;
   /**
+   * Creates a custom vocabulary associated with your Amazon Connect instance. You can set a custom vocabulary to be your default vocabulary for a given language. Contact Lens for Amazon Connect uses the default vocabulary in post-call and real-time contact analysis sessions for that language.
+   */
+  createVocabulary(params: Connect.Types.CreateVocabularyRequest, callback?: (err: AWSError, data: Connect.Types.CreateVocabularyResponse) => void): Request<Connect.Types.CreateVocabularyResponse, AWSError>;
+  /**
+   * Creates a custom vocabulary associated with your Amazon Connect instance. You can set a custom vocabulary to be your default vocabulary for a given language. Contact Lens for Amazon Connect uses the default vocabulary in post-call and real-time contact analysis sessions for that language.
+   */
+  createVocabulary(callback?: (err: AWSError, data: Connect.Types.CreateVocabularyResponse) => void): Request<Connect.Types.CreateVocabularyResponse, AWSError>;
+  /**
    * Deletes a contact flow for the specified Amazon Connect instance.
    */
   deleteContactFlow(params: Connect.Types.DeleteContactFlowRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -259,6 +275,14 @@ declare class Connect extends Service {
    * Deletes an existing user hierarchy group. It must not be associated with any agents or have any active child groups.
    */
   deleteUserHierarchyGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes the vocabulary that has the given identifier.
+   */
+  deleteVocabulary(params: Connect.Types.DeleteVocabularyRequest, callback?: (err: AWSError, data: Connect.Types.DeleteVocabularyResponse) => void): Request<Connect.Types.DeleteVocabularyResponse, AWSError>;
+  /**
+   * Deletes the vocabulary that has the given identifier.
+   */
+  deleteVocabulary(callback?: (err: AWSError, data: Connect.Types.DeleteVocabularyResponse) => void): Request<Connect.Types.DeleteVocabularyResponse, AWSError>;
   /**
    * This API is in preview release for Amazon Connect and is subject to change. Describes an agent status.
    */
@@ -379,6 +403,14 @@ declare class Connect extends Service {
    * Describes the hierarchy structure of the specified Amazon Connect instance.
    */
   describeUserHierarchyStructure(callback?: (err: AWSError, data: Connect.Types.DescribeUserHierarchyStructureResponse) => void): Request<Connect.Types.DescribeUserHierarchyStructureResponse, AWSError>;
+  /**
+   * Describes the specified vocabulary.
+   */
+  describeVocabulary(params: Connect.Types.DescribeVocabularyRequest, callback?: (err: AWSError, data: Connect.Types.DescribeVocabularyResponse) => void): Request<Connect.Types.DescribeVocabularyResponse, AWSError>;
+  /**
+   * Describes the specified vocabulary.
+   */
+  describeVocabulary(callback?: (err: AWSError, data: Connect.Types.DescribeVocabularyResponse) => void): Request<Connect.Types.DescribeVocabularyResponse, AWSError>;
   /**
    * This API is in preview release for Amazon Connect and is subject to change. Revokes access to integrated applications from Amazon Connect.
    */
@@ -523,6 +555,14 @@ declare class Connect extends Service {
    * This API is in preview release for Amazon Connect and is subject to change. For the specified referenceTypes, returns a list of references associated with the contact. 
    */
   listContactReferences(callback?: (err: AWSError, data: Connect.Types.ListContactReferencesResponse) => void): Request<Connect.Types.ListContactReferencesResponse, AWSError>;
+  /**
+   * Lists the default vocabularies for the specified Amazon Connect instance.
+   */
+  listDefaultVocabularies(params: Connect.Types.ListDefaultVocabulariesRequest, callback?: (err: AWSError, data: Connect.Types.ListDefaultVocabulariesResponse) => void): Request<Connect.Types.ListDefaultVocabulariesResponse, AWSError>;
+  /**
+   * Lists the default vocabularies for the specified Amazon Connect instance.
+   */
+  listDefaultVocabularies(callback?: (err: AWSError, data: Connect.Types.ListDefaultVocabulariesResponse) => void): Request<Connect.Types.ListDefaultVocabulariesResponse, AWSError>;
   /**
    * Provides information about the hours of operation for the specified Amazon Connect instance. For more information about hours of operation, see Set the Hours of Operation for a Queue in the Amazon Connect Administrator Guide.
    */
@@ -699,6 +739,14 @@ declare class Connect extends Service {
    * When a contact is being recorded, and the recording has been suspended using SuspendContactRecording, this API resumes recording the call. Only voice recordings are supported at this time.
    */
   resumeContactRecording(callback?: (err: AWSError, data: Connect.Types.ResumeContactRecordingResponse) => void): Request<Connect.Types.ResumeContactRecordingResponse, AWSError>;
+  /**
+   * Searches for vocabularies within a specific Amazon Connect instance using State, NameStartsWith, and LanguageCode.
+   */
+  searchVocabularies(params: Connect.Types.SearchVocabulariesRequest, callback?: (err: AWSError, data: Connect.Types.SearchVocabulariesResponse) => void): Request<Connect.Types.SearchVocabulariesResponse, AWSError>;
+  /**
+   * Searches for vocabularies within a specific Amazon Connect instance using State, NameStartsWith, and LanguageCode.
+   */
+  searchVocabularies(callback?: (err: AWSError, data: Connect.Types.SearchVocabulariesResponse) => void): Request<Connect.Types.SearchVocabulariesResponse, AWSError>;
   /**
    * Initiates a contact flow to start a new chat for the customer. Response of this API provides a token required to obtain credentials from the CreateParticipantConnection API in the Amazon Connect Participant Service. When a new chat contact is successfully created, clients must subscribe to the participant’s connection for the created chat within 5 minutes. This is achieved by invoking CreateParticipantConnection with WEBSOCKET and CONNECTION_CREDENTIALS.  A 429 error occurs in two situations:   API rate limit is exceeded. API TPS throttling returns a TooManyRequests exception.   The quota for concurrent active chats is exceeded. Active chat throttling returns a LimitExceededException.   For more information about chat, see Chat in the Amazon Connect Administrator Guide.
    */
@@ -1144,6 +1192,22 @@ declare namespace Connect {
      * The Amazon Lex V2 bot to associate with the instance.
      */
     LexV2Bot?: LexV2Bot;
+  }
+  export interface AssociateDefaultVocabularyRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The language code of the vocabulary entries. For a list of languages and their corresponding language codes, see What is Amazon Transcribe? 
+     */
+    LanguageCode: VocabularyLanguageCode;
+    /**
+     * The identifier of the custom vocabulary. If this is empty, the default is set to none.
+     */
+    VocabularyId?: VocabularyId;
+  }
+  export interface AssociateDefaultVocabularyResponse {
   }
   export interface AssociateInstanceStorageConfigRequest {
     /**
@@ -1948,6 +2012,46 @@ declare namespace Connect {
      */
     UserArn?: ARN;
   }
+  export interface CreateVocabularyRequest {
+    /**
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If a create request is received more than once with same client token, subsequent requests return the previous response without creating a vocabulary again.
+     */
+    ClientToken?: ClientToken;
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * A unique name of the custom vocabulary.
+     */
+    VocabularyName: VocabularyName;
+    /**
+     * The language code of the vocabulary entries. For a list of languages and their corresponding language codes, see What is Amazon Transcribe? 
+     */
+    LanguageCode: VocabularyLanguageCode;
+    /**
+     * The content of the custom vocabulary in plain-text format with a table of values. Each row in the table represents a word or a phrase, described with Phrase, IPA, SoundsLike, and DisplayAs fields. Separate the fields with TAB characters. The size limit is 50KB. For more information, see Create a custom vocabulary using a table.
+     */
+    Content: VocabularyContent;
+    /**
+     * The tags used to organize, track, or control access for this resource.
+     */
+    Tags?: TagMap;
+  }
+  export interface CreateVocabularyResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the custom vocabulary.
+     */
+    VocabularyArn: ARN;
+    /**
+     * The identifier of the custom vocabulary.
+     */
+    VocabularyId: VocabularyId;
+    /**
+     * The current state of the custom vocabulary.
+     */
+    State: VocabularyState;
+  }
   export interface Credentials {
     /**
      * An access token generated for a federated user to access Amazon Connect.
@@ -2000,6 +2104,25 @@ declare namespace Connect {
   }
   export type CurrentMetricResults = CurrentMetricResult[];
   export type CurrentMetrics = CurrentMetric[];
+  export interface DefaultVocabulary {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The language code of the vocabulary entries. For a list of languages and their corresponding language codes, see What is Amazon Transcribe? 
+     */
+    LanguageCode: VocabularyLanguageCode;
+    /**
+     * The identifier of the custom vocabulary.
+     */
+    VocabularyId: VocabularyId;
+    /**
+     * A unique name of the custom vocabulary.
+     */
+    VocabularyName: VocabularyName;
+  }
+  export type DefaultVocabularyList = DefaultVocabulary[];
   export type Delay = number;
   export interface DeleteContactFlowModuleRequest {
     /**
@@ -2102,6 +2225,30 @@ declare namespace Connect {
      * The identifier of the user.
      */
     UserId: UserId;
+  }
+  export interface DeleteVocabularyRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The identifier of the custom vocabulary.
+     */
+    VocabularyId: VocabularyId;
+  }
+  export interface DeleteVocabularyResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the custom vocabulary.
+     */
+    VocabularyArn: ARN;
+    /**
+     * The identifier of the custom vocabulary.
+     */
+    VocabularyId: VocabularyId;
+    /**
+     * The current state of the custom vocabulary.
+     */
+    State: VocabularyState;
   }
   export interface DescribeAgentStatusRequest {
     /**
@@ -2338,6 +2485,22 @@ declare namespace Connect {
      * Information about the user account and configuration settings.
      */
     User?: User;
+  }
+  export interface DescribeVocabularyRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The identifier of the custom vocabulary.
+     */
+    VocabularyId: VocabularyId;
+  }
+  export interface DescribeVocabularyResponse {
+    /**
+     * A list of specific words that you want Contact Lens for Amazon Connect to recognize in your audio input. They are generally domain-specific words and phrases, words that Contact Lens is not recognizing, or proper nouns.
+     */
+    Vocabulary: Vocabulary;
   }
   export type Description = string;
   export interface Dimensions {
@@ -3213,6 +3376,34 @@ declare namespace Connect {
      * If there are additional results, this is the token for the next set of results.  This is always returned as null in the response. 
      */
     NextToken?: NextToken;
+  }
+  export interface ListDefaultVocabulariesRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The language code of the vocabulary entries. For a list of languages and their corresponding language codes, see What is Amazon Transcribe? 
+     */
+    LanguageCode?: VocabularyLanguageCode;
+    /**
+     * The maximum number of results to return per page.
+     */
+    MaxResults?: MaxResult100;
+    /**
+     * The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+     */
+    NextToken?: VocabularyNextToken;
+  }
+  export interface ListDefaultVocabulariesResponse {
+    /**
+     * A list of default vocabularies.
+     */
+    DefaultVocabularyList: DefaultVocabularyList;
+    /**
+     * If there are additional results, this is the token for the next set of results.
+     */
+    NextToken?: VocabularyNextToken;
   }
   export interface ListHoursOfOperationsRequest {
     /**
@@ -4171,6 +4362,42 @@ declare namespace Connect {
      */
     EncryptionConfig?: EncryptionConfig;
   }
+  export interface SearchVocabulariesRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The maximum number of results to return per page.
+     */
+    MaxResults?: MaxResult100;
+    /**
+     * The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+     */
+    NextToken?: VocabularyNextToken;
+    /**
+     * The current state of the custom vocabulary.
+     */
+    State?: VocabularyState;
+    /**
+     * The starting pattern of the name of the vocabulary.
+     */
+    NameStartsWith?: VocabularyName;
+    /**
+     * The language code of the vocabulary entries. For a list of languages and their corresponding language codes, see What is Amazon Transcribe? 
+     */
+    LanguageCode?: VocabularyLanguageCode;
+  }
+  export interface SearchVocabulariesResponse {
+    /**
+     * The list of the available custom vocabularies.
+     */
+    VocabularySummaryList?: VocabularySummaryList;
+    /**
+     * If there are additional results, this is the token for the next set of results.
+     */
+    NextToken?: VocabularyNextToken;
+  }
   export interface SecurityKey {
     /**
      * The existing association identifier that uniquely identifies the resource type and storage config for the given instance ID.
@@ -4586,7 +4813,7 @@ declare namespace Connect {
      */
     ContactFlowId: ContactFlowId;
     /**
-     * TThe name of the contact flow.
+     * The name of the contact flow.
      */
     Name?: ContactFlowName;
     /**
@@ -5159,6 +5386,83 @@ declare namespace Connect {
   }
   export type UserSummaryList = UserSummary[];
   export type Value = number;
+  export interface Vocabulary {
+    /**
+     * A unique name of the custom vocabulary.
+     */
+    Name: VocabularyName;
+    /**
+     * The identifier of the custom vocabulary.
+     */
+    Id: VocabularyId;
+    /**
+     * The Amazon Resource Name (ARN) of the custom vocabulary.
+     */
+    Arn: ARN;
+    /**
+     * The language code of the vocabulary entries. For a list of languages and their corresponding language codes, see What is Amazon Transcribe? 
+     */
+    LanguageCode: VocabularyLanguageCode;
+    /**
+     * The current state of the custom vocabulary.
+     */
+    State: VocabularyState;
+    /**
+     * The timestamp when the custom vocabulary was last modified.
+     */
+    LastModifiedTime: VocabularyLastModifiedTime;
+    /**
+     * The reason why the custom vocabulary was not created.
+     */
+    FailureReason?: VocabularyFailureReason;
+    /**
+     * The content of the custom vocabulary in plain-text format with a table of values. Each row in the table represents a word or a phrase, described with Phrase, IPA, SoundsLike, and DisplayAs fields. Separate the fields with TAB characters. For more information, see Create a custom vocabulary using a table.
+     */
+    Content?: VocabularyContent;
+    /**
+     * The tags used to organize, track, or control access for this resource.
+     */
+    Tags?: TagMap;
+  }
+  export type VocabularyContent = string;
+  export type VocabularyFailureReason = string;
+  export type VocabularyId = string;
+  export type VocabularyLanguageCode = "ar-AE"|"de-CH"|"de-DE"|"en-AB"|"en-AU"|"en-GB"|"en-IE"|"en-IN"|"en-US"|"en-WL"|"es-ES"|"es-US"|"fr-CA"|"fr-FR"|"hi-IN"|"it-IT"|"ja-JP"|"ko-KR"|"pt-BR"|"pt-PT"|"zh-CN"|string;
+  export type VocabularyLastModifiedTime = Date;
+  export type VocabularyName = string;
+  export type VocabularyNextToken = string;
+  export type VocabularyState = "CREATION_IN_PROGRESS"|"ACTIVE"|"CREATION_FAILED"|"DELETE_IN_PROGRESS"|string;
+  export interface VocabularySummary {
+    /**
+     * A unique name of the custom vocabulary.
+     */
+    Name: VocabularyName;
+    /**
+     * The identifier of the custom vocabulary.
+     */
+    Id: VocabularyId;
+    /**
+     * The Amazon Resource Name (ARN) of the custom vocabulary.
+     */
+    Arn: ARN;
+    /**
+     * The language code of the vocabulary entries. For a list of languages and their corresponding language codes, see What is Amazon Transcribe? 
+     */
+    LanguageCode: VocabularyLanguageCode;
+    /**
+     * The current state of the custom vocabulary.
+     */
+    State: VocabularyState;
+    /**
+     * The timestamp when the custom vocabulary was last modified.
+     */
+    LastModifiedTime: VocabularyLastModifiedTime;
+    /**
+     * The reason why the custom vocabulary was not created.
+     */
+    FailureReason?: VocabularyFailureReason;
+  }
+  export type VocabularySummaryList = VocabularySummary[];
   export interface VoiceRecordingConfiguration {
     /**
      * Identifies which track is being recorded.

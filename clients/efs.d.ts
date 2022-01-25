@@ -36,6 +36,14 @@ declare class EFS extends Service {
    */
   createMountTarget(callback?: (err: AWSError, data: EFS.Types.MountTargetDescription) => void): Request<EFS.Types.MountTargetDescription, AWSError>;
   /**
+   * Creates a replication configuration that replicates an existing EFS file system to a new, read-only file system. For more information, see Amazon EFS replication. The replication configuration specifies the following:    Source file system - an existing EFS file system that you want replicated. The source file system cannot be a destination file system in an existing replication configuration.    Destination file system configuration - the configuration of the destination file system to which the source file system will be replicated. There can only be one destination file system in a replication configuration.    Amazon Web Services Region - The Amazon Web Services Region in which the destination file system is created. EFS Replication is available in all Amazon Web Services Region that Amazon EFS is available in, except the following regions: Asia Pacific (Hong Kong) Europe (Milan), Middle East (Bahrain), Africa (Cape Town), and Asia Pacific (Jakarta).    Availability zone - If you want the destination file system to use One Zone availability and durability, you must specify the Availability Zone to create the file system in. For more information about EFS storage classes, see  Amazon EFS storage classes in the Amazon EFS User Guide.    Encryption - All destination file systems are created with encryption at rest enabled. You can specify the KMS key that is used to encrypt the destination file system. Your service-managed KMS key for Amazon EFS is used if you don't specify a KMS key. You cannot change this after the file system is created.     The following properties are set by default:    Performance mode - The destination file system's performance mode will match that of the source file system, unless the destination file system uses One Zone storage. In that case, the General Purpose performance mode is used. The Performance mode cannot be changed.    Throughput mode - The destination file system use the Bursting throughput mode by default. You can modify the throughput mode once the file system is created.   The following properties are turned off by default:    Lifecycle management - EFS lifecycle management and intelligent tiering are not enabled on the destination file system. You can enable EFS lifecycle management and intelligent tiering after the destination file system is created.    Automatic backups - Automatic daily backups not enabled on the destination file system. You can change this setting after the file system is created.   For more information, see Amazon EFS replication.
+   */
+  createReplicationConfiguration(params: EFS.Types.CreateReplicationConfigurationRequest, callback?: (err: AWSError, data: EFS.Types.ReplicationConfigurationDescription) => void): Request<EFS.Types.ReplicationConfigurationDescription, AWSError>;
+  /**
+   * Creates a replication configuration that replicates an existing EFS file system to a new, read-only file system. For more information, see Amazon EFS replication. The replication configuration specifies the following:    Source file system - an existing EFS file system that you want replicated. The source file system cannot be a destination file system in an existing replication configuration.    Destination file system configuration - the configuration of the destination file system to which the source file system will be replicated. There can only be one destination file system in a replication configuration.    Amazon Web Services Region - The Amazon Web Services Region in which the destination file system is created. EFS Replication is available in all Amazon Web Services Region that Amazon EFS is available in, except the following regions: Asia Pacific (Hong Kong) Europe (Milan), Middle East (Bahrain), Africa (Cape Town), and Asia Pacific (Jakarta).    Availability zone - If you want the destination file system to use One Zone availability and durability, you must specify the Availability Zone to create the file system in. For more information about EFS storage classes, see  Amazon EFS storage classes in the Amazon EFS User Guide.    Encryption - All destination file systems are created with encryption at rest enabled. You can specify the KMS key that is used to encrypt the destination file system. Your service-managed KMS key for Amazon EFS is used if you don't specify a KMS key. You cannot change this after the file system is created.     The following properties are set by default:    Performance mode - The destination file system's performance mode will match that of the source file system, unless the destination file system uses One Zone storage. In that case, the General Purpose performance mode is used. The Performance mode cannot be changed.    Throughput mode - The destination file system use the Bursting throughput mode by default. You can modify the throughput mode once the file system is created.   The following properties are turned off by default:    Lifecycle management - EFS lifecycle management and intelligent tiering are not enabled on the destination file system. You can enable EFS lifecycle management and intelligent tiering after the destination file system is created.    Automatic backups - Automatic daily backups not enabled on the destination file system. You can change this setting after the file system is created.   For more information, see Amazon EFS replication.
+   */
+  createReplicationConfiguration(callback?: (err: AWSError, data: EFS.Types.ReplicationConfigurationDescription) => void): Request<EFS.Types.ReplicationConfigurationDescription, AWSError>;
+  /**
    *  DEPRECATED - CreateTags is deprecated and not maintained. Please use the API action to create tags for EFS resources.  Creates or overwrites tags associated with a file system. Each tag is a key-value pair. If a tag key specified in the request already exists on the file system, this operation overwrites its value with the value provided in the request. If you add the Name tag to your file system, Amazon EFS returns it in the response to the DescribeFileSystems operation.  This operation requires permission for the elasticfilesystem:CreateTags action.
    */
   createTags(params: EFS.Types.CreateTagsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -75,6 +83,14 @@ declare class EFS extends Service {
    * Deletes the specified mount target. This operation forcibly breaks any mounts of the file system by using the mount target that is being deleted, which might disrupt instances or applications using those mounts. To avoid applications getting cut off abruptly, you might consider unmounting any mounts of the mount target, if feasible. The operation also deletes the associated network interface. Uncommitted writes might be lost, but breaking a mount target using this operation does not corrupt the file system itself. The file system you created remains. You can mount an EC2 instance in your VPC by using another mount target. This operation requires permissions for the following action on the file system:    elasticfilesystem:DeleteMountTarget     The DeleteMountTarget call returns while the mount target state is still deleting. You can check the mount target deletion by calling the DescribeMountTargets operation, which returns a list of mount target descriptions for the given file system.   The operation also requires permissions for the following Amazon EC2 action on the mount target's network interface:    ec2:DeleteNetworkInterface   
    */
   deleteMountTarget(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes an existing replication configuration. To delete a replication configuration, you must make the request from the Amazon Web Services Region in which the destination file system is located. Deleting a replication configuration ends the replication process. You can write to the destination file system once it's status becomes Writeable.
+   */
+  deleteReplicationConfiguration(params: EFS.Types.DeleteReplicationConfigurationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes an existing replication configuration. To delete a replication configuration, you must make the request from the Amazon Web Services Region in which the destination file system is located. Deleting a replication configuration ends the replication process. You can write to the destination file system once it's status becomes Writeable.
+   */
+  deleteReplicationConfiguration(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    *  DEPRECATED - DeleteTags is deprecated and not maintained. Please use the API action to remove tags from EFS resources.  Deletes the specified tags from a file system. If the DeleteTags request includes a tag key that doesn't exist, Amazon EFS ignores it and doesn't cause an error. For more information about tags and related restrictions, see Tag restrictions in the Billing and Cost Management User Guide. This operation requires permissions for the elasticfilesystem:DeleteTags action.
    */
@@ -147,6 +163,14 @@ declare class EFS extends Service {
    * Returns the descriptions of all the current mount targets, or a specific mount target, for a file system. When requesting all of the current mount targets, the order of mount targets returned in the response is unspecified. This operation requires permissions for the elasticfilesystem:DescribeMountTargets action, on either the file system ID that you specify in FileSystemId, or on the file system of the mount target that you specify in MountTargetId.
    */
   describeMountTargets(callback?: (err: AWSError, data: EFS.Types.DescribeMountTargetsResponse) => void): Request<EFS.Types.DescribeMountTargetsResponse, AWSError>;
+  /**
+   * Retrieves the replication configurations for either a specific file system, or all configurations for the Amazon Web Services account in an Amazon Web Services Region if a file system is not specified.
+   */
+  describeReplicationConfigurations(params: EFS.Types.DescribeReplicationConfigurationsRequest, callback?: (err: AWSError, data: EFS.Types.DescribeReplicationConfigurationsResponse) => void): Request<EFS.Types.DescribeReplicationConfigurationsResponse, AWSError>;
+  /**
+   * Retrieves the replication configurations for either a specific file system, or all configurations for the Amazon Web Services account in an Amazon Web Services Region if a file system is not specified.
+   */
+  describeReplicationConfigurations(callback?: (err: AWSError, data: EFS.Types.DescribeReplicationConfigurationsResponse) => void): Request<EFS.Types.DescribeReplicationConfigurationsResponse, AWSError>;
   /**
    *  DEPRECATED - The DeleteTags action is deprecated and not maintained. Please use the API action to remove tags from EFS resources.  Returns the tags associated with a file system. The order of tags returned in the response of one DescribeTags call and the order of tags returned across the responses of a multiple-call iteration (when using pagination) is unspecified.   This operation requires permissions for the elasticfilesystem:DescribeTags action. 
    */
@@ -324,11 +348,11 @@ declare namespace EFS {
      */
     PerformanceMode?: PerformanceMode;
     /**
-     * A Boolean value that, if true, creates an encrypted file system. When creating an encrypted file system, you have the option of specifying CreateFileSystemRequest$KmsKeyId for an existing Key Management Service (KMS customer master key (CMK). If you don't specify a CMK, then the default CMK for Amazon EFS, /aws/elasticfilesystem, is used to protect the encrypted file system. 
+     * A Boolean value that, if true, creates an encrypted file system. When creating an encrypted file system, you have the option of specifying an existing Key Management Service key (KMS key). If you don't specify a KMS key, then the default KMS key for Amazon EFS, /aws/elasticfilesystem, is used to protect the encrypted file system. 
      */
     Encrypted?: Encrypted;
     /**
-     * The ID of the KMS CMK that you want to use to protect the encrypted file system. This parameter is only required if you want to use a non-default KMS key. If this parameter is not specified, the default CMK for Amazon EFS is used. This ID can be in one of the following formats:   Key ID - A unique identifier of the key, for example 1234abcd-12ab-34cd-56ef-1234567890ab.   ARN - An Amazon Resource Name (ARN) for the key, for example arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab.   Key alias - A previously created display name for a key, for example alias/projectKey1.   Key alias ARN - An ARN for a key alias, for example arn:aws:kms:us-west-2:444455556666:alias/projectKey1.   If KmsKeyId is specified, the CreateFileSystemRequest$Encrypted parameter must be set to true.  EFS accepts only symmetric KMS keys. You cannot use asymmetric KMS keys with EFS file systems. 
+     * The ID of the KMS key that you want to use to protect the encrypted file system. This parameter is only required if you want to use a non-default KMS key. If this parameter is not specified, the default KMS key for Amazon EFS is used. You can specify a KMS key ID using the following formats:   Key ID - A unique identifier of the key, for example 1234abcd-12ab-34cd-56ef-1234567890ab.   ARN - An Amazon Resource Name (ARN) for the key, for example arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab.   Key alias - A previously created display name for a key, for example alias/projectKey1.   Key alias ARN - An ARN for a key alias, for example arn:aws:kms:us-west-2:444455556666:alias/projectKey1.   If you use KmsKeyId, you must set the CreateFileSystemRequest$Encrypted parameter to true.  EFS accepts only symmetric KMS keys. You cannot use asymmetric KMS keys with Amazon EFS file systems. 
      */
     KmsKeyId?: KmsKeyId;
     /**
@@ -344,7 +368,7 @@ declare namespace EFS {
      */
     AvailabilityZoneName?: AvailabilityZoneName;
     /**
-     * Specifies whether automatic backups are enabled on the file system that you are creating. Set the value to true to enable automatic backups. If you are creating a file system that uses One Zone storage classes, automatic backups are enabled by default. For more information, see Automatic backups in the Amazon EFS User Guide. Default is false. However, if you specify an AvailabilityZoneName, the default is true.  Backup is not available in all Amazon Web Services Regionswhere Amazon EFS is available. 
+     * Specifies whether automatic backups are enabled on the file system that you are creating. Set the value to true to enable automatic backups. If you are creating a file system that uses One Zone storage classes, automatic backups are enabled by default. For more information, see Automatic backups in the Amazon EFS User Guide. Default is false. However, if you specify an AvailabilityZoneName, the default is true.  Backup is not available in all Amazon Web Services Regions where Amazon EFS is available. 
      */
     Backup?: Backup;
     /**
@@ -369,6 +393,16 @@ declare namespace EFS {
      * Up to five VPC security group IDs, of the form sg-xxxxxxxx. These must be for the same VPC as subnet specified.
      */
     SecurityGroups?: SecurityGroups;
+  }
+  export interface CreateReplicationConfigurationRequest {
+    /**
+     * Specifies the Amazon EFS file system that you want to replicate. This file system cannot already be a source or destination file system in another replication configuration.
+     */
+    SourceFileSystemId: FileSystemId;
+    /**
+     * An array of destination configuration objects. Only one destination configuration object is supported.
+     */
+    Destinations: DestinationsToCreate;
   }
   export interface CreateTagsRequest {
     /**
@@ -418,6 +452,12 @@ declare namespace EFS {
      * The ID of the mount target to delete (String).
      */
     MountTargetId: MountTargetId;
+  }
+  export interface DeleteReplicationConfigurationRequest {
+    /**
+     * The ID of the source file system in the replication configuration.
+     */
+    SourceFileSystemId: FileSystemId;
   }
   export interface DeleteTagsRequest {
     /**
@@ -575,6 +615,30 @@ declare namespace EFS {
      */
     NextMarker?: Marker;
   }
+  export interface DescribeReplicationConfigurationsRequest {
+    /**
+     * You can retrieve replication configurations for a specific file system by providing a file system ID.
+     */
+    FileSystemId?: FileSystemId;
+    /**
+     *  NextToken is present if the response is paginated. You can use NextMarker in a subsequent request to fetch the next page of output.
+     */
+    NextToken?: Token;
+    /**
+     * (Optional) You can optionally specify the MaxItems parameter to limit the number of objects returned in a response. The default value is 100. 
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface DescribeReplicationConfigurationsResponse {
+    /**
+     * The collection of replication configurations returned.
+     */
+    Replications?: ReplicationConfigurationDescriptions;
+    /**
+     * You can use the NextToken from the previous response in a subsequent request to fetch the additional descriptions.
+     */
+    NextToken?: Token;
+  }
   export interface DescribeTagsRequest {
     /**
      * (Optional) The maximum number of file system tags to return in the response. Currently, this number is automatically set to 100, and other values are ignored. The response is paginated at 100 per page if you have more than 100 tags.
@@ -603,6 +667,40 @@ declare namespace EFS {
      */
     NextMarker?: Marker;
   }
+  export interface Destination {
+    /**
+     * Describes the status of the destination Amazon EFS file system.
+     */
+    Status: ReplicationStatus;
+    /**
+     * The ID of the destination Amazon EFS file system.
+     */
+    FileSystemId: FileSystemId;
+    /**
+     * The Amazon Web Services Region in which the destination file system is located.
+     */
+    Region: RegionName;
+    /**
+     * The time when the most recent sync successfully completed on the destination file system. Any changes to data on the source file system that occurred prior to this time were successfully replicated to the destination file system. Any changes that occurred after this time might not be fully replicated.
+     */
+    LastReplicatedTimestamp?: Timestamp;
+  }
+  export interface DestinationToCreate {
+    /**
+     * To create a file system that uses regional storage, specify the Amazon Web Services Region in which to create the destination file system.
+     */
+    Region?: RegionName;
+    /**
+     * To create a file system that uses One Zone storage, specify the name of the Availability Zone in which to create the destination file system.
+     */
+    AvailabilityZoneName?: AvailabilityZoneName;
+    /**
+     * Specifies the KMS key you want to use to encrypt the destination file system. If you do not specify a KMS key, EFS uses your default KMS key for Amazon EFS, /aws/elasticfilesystem. This ID can be in one of the following formats:   Key ID - A unique identifier of the key, for example 1234abcd-12ab-34cd-56ef-1234567890ab.   ARN - An Amazon Resource Name (ARN) for the key, for example arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab.   Key alias - A previously created display name for a key, for example alias/projectKey1.   Key alias ARN - An ARN for a key alias, for example arn:aws:kms:us-west-2:444455556666:alias/projectKey1.  
+     */
+    KmsKeyId?: KmsKeyId;
+  }
+  export type Destinations = Destination[];
+  export type DestinationsToCreate = DestinationToCreate[];
   export type Encrypted = boolean;
   export type FileSystemArn = string;
   export interface FileSystemDescription {
@@ -651,7 +749,7 @@ declare namespace EFS {
      */
     Encrypted?: Encrypted;
     /**
-     * The ID of an Key Management Service customer master key (CMK) that was used to protect the encrypted file system.
+     * The ID of an KMS key used to protect the encrypted file system.
      */
     KmsKeyId?: KmsKeyId;
     /**
@@ -876,6 +974,35 @@ declare namespace EFS {
      */
     LifecyclePolicies: LifecyclePolicies;
   }
+  export type RegionName = string;
+  export interface ReplicationConfigurationDescription {
+    /**
+     * The ID of the source Amazon EFS file system that is being replicated.
+     */
+    SourceFileSystemId: FileSystemId;
+    /**
+     * The Amazon Web Services Region in which the source Amazon EFS file system is located.
+     */
+    SourceFileSystemRegion: RegionName;
+    /**
+     * The ARN of the current source file system in the replication configuration.
+     */
+    SourceFileSystemArn: FileSystemArn;
+    /**
+     * The Amazon Resource Name (ARN) of the original source Amazon EFS file system in the replication configuration.
+     */
+    OriginalSourceFileSystemArn: FileSystemArn;
+    /**
+     * Describes when the replication configuration was created.
+     */
+    CreationTime: Timestamp;
+    /**
+     * Array of destination objects. Only one destination object is supported.
+     */
+    Destinations: Destinations;
+  }
+  export type ReplicationConfigurationDescriptions = ReplicationConfigurationDescription[];
+  export type ReplicationStatus = "ENABLED"|"ENABLING"|"DELETING"|"ERROR"|string;
   export type Resource = "FILE_SYSTEM"|"MOUNT_TARGET"|string;
   export type ResourceId = string;
   export interface ResourceIdPreference {

@@ -561,6 +561,10 @@ declare namespace GuardDuty {
      * Information about the PORT_PROBE action described in this finding.
      */
     PortProbeAction?: PortProbeAction;
+    /**
+     * Information about the Kubernetes API call action described in this finding.
+     */
+    KubernetesApiCallAction?: KubernetesApiCallAction;
   }
   export interface AdminAccount {
     /**
@@ -603,6 +607,7 @@ declare namespace GuardDuty {
      * The error code of the failed Amazon Web Services API action.
      */
     ErrorCode?: String;
+    UserAgent?: String;
     /**
      * The remote IP information of the connection that initiated the Amazon Web Services API call.
      */
@@ -722,6 +727,37 @@ declare namespace GuardDuty {
      */
     LessThanOrEqual?: Long;
   }
+  export interface Container {
+    /**
+     * The container runtime (such as, Docker or containerd) used to run the container.
+     */
+    ContainerRuntime?: String;
+    /**
+     * Container ID.
+     */
+    Id?: String;
+    /**
+     * Container name.
+     */
+    Name?: String;
+    /**
+     * Container image.
+     */
+    Image?: String;
+    /**
+     * Part of the image name before the last slash. For example, imagePrefix for public.ecr.aws/amazonlinux/amazonlinux:latest would be public.ecr.aws/amazonlinux. If the image name is relative and does not have a slash, this field is empty.
+     */
+    ImagePrefix?: String;
+    /**
+     * Container volume mounts.
+     */
+    VolumeMounts?: VolumeMounts;
+    /**
+     * Container security context.
+     */
+    SecurityContext?: SecurityContext;
+  }
+  export type Containers = Container[];
   export type CountBySeverity = {[key: string]: Integer};
   export interface Country {
     /**
@@ -932,12 +968,16 @@ declare namespace GuardDuty {
      */
     Status: DataSourceStatus;
   }
-  export type DataSource = "FLOW_LOGS"|"CLOUD_TRAIL"|"DNS_LOGS"|"S3_LOGS"|string;
+  export type DataSource = "FLOW_LOGS"|"CLOUD_TRAIL"|"DNS_LOGS"|"S3_LOGS"|"KUBERNETES_AUDIT_LOGS"|string;
   export interface DataSourceConfigurations {
     /**
      * Describes whether S3 data event logs are enabled as a data source.
      */
     S3Logs?: S3LogsConfiguration;
+    /**
+     * Describes whether any Kubernetes logs are enabled as data sources.
+     */
+    Kubernetes?: KubernetesConfiguration;
   }
   export interface DataSourceConfigurationsResult {
     /**
@@ -956,6 +996,10 @@ declare namespace GuardDuty {
      * An object that contains information on the status of S3 Data event logs as a data source.
      */
     S3Logs: S3LogsConfigurationResult;
+    /**
+     * An object that contains information on the status of all Kubernetes data sources.
+     */
+    Kubernetes?: KubernetesConfigurationResult;
   }
   export type DataSourceList = DataSource[];
   export type DataSourceStatus = "ENABLED"|"DISABLED"|string;
@@ -1191,6 +1235,32 @@ declare namespace GuardDuty {
     Domain?: String;
   }
   export type Double = number;
+  export interface EksClusterDetails {
+    /**
+     * EKS cluster name.
+     */
+    Name?: String;
+    /**
+     * EKS cluster ARN.
+     */
+    Arn?: String;
+    /**
+     * The VPC ID to which the EKS cluster is attached.
+     */
+    VpcId?: String;
+    /**
+     * The EKS cluster status.
+     */
+    Status?: String;
+    /**
+     * The EKS cluster tags.
+     */
+    Tags?: Tags;
+    /**
+     * The timestamp when the EKS cluster was created.
+     */
+    CreatedAt?: Timestamp;
+  }
   export type Email = string;
   export interface EnableOrganizationAdminAccountRequest {
     /**
@@ -1578,7 +1648,14 @@ declare namespace GuardDuty {
      */
     NextToken?: String;
   }
+  export type Groups = String[];
   export type GuardDutyArn = string;
+  export interface HostPath {
+    /**
+     * Path of the file or directory on the host that the volume maps to.
+     */
+    Path?: String;
+  }
   export interface IamInstanceProfile {
     /**
      * The profile ARN of the EC2 instance.
@@ -1691,6 +1768,111 @@ declare namespace GuardDuty {
   export type IpSetIds = String[];
   export type IpSetStatus = "INACTIVE"|"ACTIVATING"|"ACTIVE"|"DEACTIVATING"|"ERROR"|"DELETE_PENDING"|"DELETED"|string;
   export type Ipv6Addresses = String[];
+  export interface KubernetesApiCallAction {
+    /**
+     * The Kubernetes API request URI.
+     */
+    RequestUri?: String;
+    /**
+     * The Kubernetes API request HTTP verb.
+     */
+    Verb?: String;
+    /**
+     * The IP of the Kubernetes API caller and the IPs of any proxies or load balancers between the caller and the API endpoint.
+     */
+    SourceIps?: SourceIps;
+    /**
+     * The user agent of the caller of the Kubernetes API.
+     */
+    UserAgent?: String;
+    RemoteIpDetails?: RemoteIpDetails;
+    /**
+     * The resulting HTTP response code of the Kubernetes API call action.
+     */
+    StatusCode?: Integer;
+    /**
+     * Parameters related to the Kubernetes API call action.
+     */
+    Parameters?: String;
+  }
+  export interface KubernetesAuditLogsConfiguration {
+    /**
+     * The status of Kubernetes audit logs as a data source.
+     */
+    Enable: Boolean;
+  }
+  export interface KubernetesAuditLogsConfigurationResult {
+    /**
+     * A value that describes whether Kubernetes audit logs are enabled as a data source.
+     */
+    Status: DataSourceStatus;
+  }
+  export interface KubernetesConfiguration {
+    /**
+     * The status of Kubernetes audit logs as a data source.
+     */
+    AuditLogs: KubernetesAuditLogsConfiguration;
+  }
+  export interface KubernetesConfigurationResult {
+    /**
+     * Describes whether Kubernetes audit logs are enabled as a data source.
+     */
+    AuditLogs: KubernetesAuditLogsConfigurationResult;
+  }
+  export interface KubernetesDetails {
+    /**
+     * Details about the Kubernetes user involved in a Kubernetes finding.
+     */
+    KubernetesUserDetails?: KubernetesUserDetails;
+    /**
+     * Details about the Kubernetes workload involved in a Kubernetes finding.
+     */
+    KubernetesWorkloadDetails?: KubernetesWorkloadDetails;
+  }
+  export interface KubernetesUserDetails {
+    /**
+     * The username of the user who called the Kubernetes API.
+     */
+    Username?: String;
+    /**
+     * The user ID of the user who called the Kubernetes API.
+     */
+    Uid?: String;
+    /**
+     * The groups that include the user who called the Kubernetes API.
+     */
+    Groups?: Groups;
+  }
+  export interface KubernetesWorkloadDetails {
+    /**
+     * Kubernetes workload name.
+     */
+    Name?: String;
+    /**
+     * Kubernetes workload type (e.g. Pod, Deployment, etc.).
+     */
+    Type?: String;
+    /**
+     * Kubernetes workload ID.
+     */
+    Uid?: String;
+    /**
+     * Kubernetes namespace that the workload is part of.
+     */
+    Namespace?: String;
+    /**
+     * Whether the hostNetwork flag is enabled for the pods included in the workload.
+     */
+    HostNetwork?: Boolean;
+    /**
+     * Containers running as part of the Kubernetes workload.
+     */
+    Containers?: Containers;
+    /**
+     * Volumes used by the Kubernetes workload.
+     */
+    Volumes?: Volumes;
+  }
   export interface ListDetectorsRequest {
     /**
      * You can use this parameter to indicate the maximum number of items that you want in the response. The default value is 50. The maximum value is 50.
@@ -2098,12 +2280,44 @@ declare namespace GuardDuty {
      * Describes whether S3 data event logs are enabled for new members of the organization.
      */
     S3Logs?: OrganizationS3LogsConfiguration;
+    /**
+     * Describes the configuration of Kubernetes data sources for new members of the organization.
+     */
+    Kubernetes?: OrganizationKubernetesConfiguration;
   }
   export interface OrganizationDataSourceConfigurationsResult {
     /**
      * Describes whether S3 data event logs are enabled as a data source.
      */
     S3Logs: OrganizationS3LogsConfigurationResult;
+    /**
+     * Describes the configuration of Kubernetes data sources.
+     */
+    Kubernetes?: OrganizationKubernetesConfigurationResult;
+  }
+  export interface OrganizationKubernetesAuditLogsConfiguration {
+    /**
+     * A value that contains information on whether Kubernetes audit logs should be enabled automatically as a data source for the organization.
+     */
+    AutoEnable: Boolean;
+  }
+  export interface OrganizationKubernetesAuditLogsConfigurationResult {
+    /**
+     * Whether Kubernetes audit logs data source should be auto-enabled for new members joining the organization.
+     */
+    AutoEnable: Boolean;
+  }
+  export interface OrganizationKubernetesConfiguration {
+    /**
+     * Whether Kubernetes audit logs data source should be auto-enabled for new members joining the organization.
+     */
+    AuditLogs: OrganizationKubernetesAuditLogsConfiguration;
+  }
+  export interface OrganizationKubernetesConfigurationResult {
+    /**
+     * The current configuration of Kubernetes audit logs as a data source for the organization.
+     */
+    AuditLogs: OrganizationKubernetesAuditLogsConfigurationResult;
   }
   export interface OrganizationS3LogsConfiguration {
     /**
@@ -2247,6 +2461,14 @@ declare namespace GuardDuty {
      */
     InstanceDetails?: InstanceDetails;
     /**
+     * Details about the EKS cluster involved in a Kubernetes finding.
+     */
+    EksClusterDetails?: EksClusterDetails;
+    /**
+     * Details about the Kubernetes user and workload involved in a Kubernetes finding.
+     */
+    KubernetesDetails?: KubernetesDetails;
+    /**
      * The type of Amazon Web Services resource.
      */
     ResourceType?: String;
@@ -2298,6 +2520,12 @@ declare namespace GuardDuty {
      * A value that describes whether S3 data event logs are automatically enabled for new members of the organization.
      */
     Status: DataSourceStatus;
+  }
+  export interface SecurityContext {
+    /**
+     * Whether the container is privileged.
+     */
+    Privileged?: Boolean;
   }
   export interface SecurityGroup {
     /**
@@ -2362,6 +2590,7 @@ declare namespace GuardDuty {
      */
     OrderBy?: OrderBy;
   }
+  export type SourceIps = String[];
   export interface StartMonitoringMembersRequest {
     /**
      * The unique ID of the detector of the GuardDuty administrator account associated with the member accounts to monitor.
@@ -2721,6 +2950,28 @@ declare namespace GuardDuty {
      */
     TopResources?: UsageResourceResultList;
   }
+  export interface Volume {
+    /**
+     * Volume name.
+     */
+    Name?: String;
+    /**
+     * Represents a pre-existing file or directory on the host machine that the volume maps to.
+     */
+    HostPath?: HostPath;
+  }
+  export interface VolumeMount {
+    /**
+     * Volume mount name.
+     */
+    Name?: String;
+    /**
+     * Volume mount path.
+     */
+    MountPath?: String;
+  }
+  export type VolumeMounts = VolumeMount[];
+  export type Volumes = Volume[];
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */
