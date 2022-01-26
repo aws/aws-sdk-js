@@ -125,19 +125,19 @@ declare class CodeGuruReviewer extends Service {
    */
   untagResource(callback?: (err: AWSError, data: CodeGuruReviewer.Types.UntagResourceResponse) => void): Request<CodeGuruReviewer.Types.UntagResourceResponse, AWSError>;
   /**
-   * Waits for the repositoryAssociationSucceeded state by periodically calling the underlying CodeGuruReviewer.describeRepositoryAssociationoperation every 10 seconds (at most 20 times). Wait until a repository association is complete.
+   * Waits for the repositoryAssociationSucceeded state by periodically calling the underlying CodeGuruReviewer.describeRepositoryAssociationoperation every 10 seconds (at most 30 times). Wait until a repository association is complete.
    */
   waitFor(state: "repositoryAssociationSucceeded", params: CodeGuruReviewer.Types.DescribeRepositoryAssociationRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: CodeGuruReviewer.Types.DescribeRepositoryAssociationResponse) => void): Request<CodeGuruReviewer.Types.DescribeRepositoryAssociationResponse, AWSError>;
   /**
-   * Waits for the repositoryAssociationSucceeded state by periodically calling the underlying CodeGuruReviewer.describeRepositoryAssociationoperation every 10 seconds (at most 20 times). Wait until a repository association is complete.
+   * Waits for the repositoryAssociationSucceeded state by periodically calling the underlying CodeGuruReviewer.describeRepositoryAssociationoperation every 10 seconds (at most 30 times). Wait until a repository association is complete.
    */
   waitFor(state: "repositoryAssociationSucceeded", callback?: (err: AWSError, data: CodeGuruReviewer.Types.DescribeRepositoryAssociationResponse) => void): Request<CodeGuruReviewer.Types.DescribeRepositoryAssociationResponse, AWSError>;
   /**
-   * Waits for the codeReviewCompleted state by periodically calling the underlying CodeGuruReviewer.describeCodeReviewoperation every 10 seconds (at most 60 times). Wait until a code review is complete.
+   * Waits for the codeReviewCompleted state by periodically calling the underlying CodeGuruReviewer.describeCodeReviewoperation every 10 seconds (at most 180 times). Wait until a code review is complete.
    */
   waitFor(state: "codeReviewCompleted", params: CodeGuruReviewer.Types.DescribeCodeReviewRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: CodeGuruReviewer.Types.DescribeCodeReviewResponse) => void): Request<CodeGuruReviewer.Types.DescribeCodeReviewResponse, AWSError>;
   /**
-   * Waits for the codeReviewCompleted state by periodically calling the underlying CodeGuruReviewer.describeCodeReviewoperation every 10 seconds (at most 60 times). Wait until a code review is complete.
+   * Waits for the codeReviewCompleted state by periodically calling the underlying CodeGuruReviewer.describeCodeReviewoperation every 10 seconds (at most 180 times). Wait until a code review is complete.
    */
   waitFor(state: "codeReviewCompleted", callback?: (err: AWSError, data: CodeGuruReviewer.Types.DescribeCodeReviewResponse) => void): Request<CodeGuruReviewer.Types.DescribeCodeReviewResponse, AWSError>;
 }
@@ -524,6 +524,7 @@ declare namespace CodeGuruReviewer {
      */
     NextToken?: NextToken;
   }
+  export type ListRecommendationsMaxResults = number;
   export interface ListRecommendationsRequest {
     /**
      *  Pagination token. 
@@ -532,7 +533,7 @@ declare namespace CodeGuruReviewer {
     /**
      *  The maximum number of results that are returned per call. The default is 100. 
      */
-    MaxResults?: MaxResults;
+    MaxResults?: ListRecommendationsMaxResults;
     /**
      * The Amazon Resource Name (ARN) of the  CodeReview  object. 
      */

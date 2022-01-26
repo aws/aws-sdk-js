@@ -7209,6 +7209,10 @@ declare namespace SecurityHub {
      * In a BatchImportFindings request, finding providers use FindingProviderFields to provide and update their own values for confidence, criticality, related findings, severity, and types.
      */
     FindingProviderFields?: FindingProviderFields;
+    /**
+     * Indicates whether the finding is a sample finding.
+     */
+    Sample?: Boolean;
   }
   export interface AwsSecurityFindingFilters {
     /**
@@ -7587,6 +7591,10 @@ declare namespace SecurityHub {
      * One or more finding types that the finding provider assigned to the finding. Uses the format of namespace/category/classifier that classify a finding. Valid namespace values are: Software and Configuration Checks | TTPs | Effects | Unusual Behaviors | Sensitive Data Identifications
      */
     FindingProviderFieldsTypes?: StringFilterList;
+    /**
+     * Indicates whether or not sample findings are included in the filter results.
+     */
+    Sample?: BooleanFilterList;
   }
   export interface AwsSecurityFindingIdentifier {
     /**
@@ -7984,6 +7992,13 @@ declare namespace SecurityHub {
   }
   export type BatchUpdateFindingsUnprocessedFindingsList = BatchUpdateFindingsUnprocessedFinding[];
   export type Boolean = boolean;
+  export interface BooleanFilter {
+    /**
+     * The value of the boolean.
+     */
+    Value?: Boolean;
+  }
+  export type BooleanFilterList = BooleanFilter[];
   export type CategoryList = NonEmptyString[];
   export interface Cell {
     /**

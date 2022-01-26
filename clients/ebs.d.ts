@@ -171,15 +171,15 @@ declare namespace EBS {
      */
     SecondSnapshotId: SnapshotId;
     /**
-     * The token to request the next page of results.
+     * The token to request the next page of results. If you specify NextToken, then StartingBlockIndex is ignored.
      */
     NextToken?: PageToken;
     /**
-     * The number of results to return.
+     * The maximum number of blocks to be returned by the request. Even if additional blocks can be retrieved from the snapshot, the request can return less blocks than MaxResults or an empty array of blocks. To retrieve the next set of blocks from the snapshot, make another request with the returned NextToken value. The value of NextToken is null when there are no more blocks to return.
      */
     MaxResults?: MaxResults;
     /**
-     * The block index from which the comparison should start. The list in the response will start from this block index or the next valid block index in the snapshots.
+     * The block index from which the comparison should start. The list in the response will start from this block index or the next valid block index in the snapshots. If you specify NextToken, then StartingBlockIndex is ignored.
      */
     StartingBlockIndex?: BlockIndex;
   }
@@ -211,15 +211,15 @@ declare namespace EBS {
      */
     SnapshotId: SnapshotId;
     /**
-     * The token to request the next page of results.
+     * The token to request the next page of results. If you specify NextToken, then StartingBlockIndex is ignored.
      */
     NextToken?: PageToken;
     /**
-     * The number of results to return.
+     * The maximum number of blocks to be returned by the request. Even if additional blocks can be retrieved from the snapshot, the request can return less blocks than MaxResults or an empty array of blocks. To retrieve the next set of blocks from the snapshot, make another request with the returned NextToken value. The value of NextToken is null when there are no more blocks to return.
      */
     MaxResults?: MaxResults;
     /**
-     * The block index from which the list should start. The list in the response will start from this block index or the next valid block index in the snapshot.
+     * The block index from which the list should start. The list in the response will start from this block index or the next valid block index in the snapshot. If you specify NextToken, then StartingBlockIndex is ignored.
      */
     StartingBlockIndex?: BlockIndex;
   }

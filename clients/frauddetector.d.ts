@@ -300,6 +300,14 @@ declare class FraudDetector extends Service {
    */
   getEventPrediction(callback?: (err: AWSError, data: FraudDetector.Types.GetEventPredictionResult) => void): Request<FraudDetector.Types.GetEventPredictionResult, AWSError>;
   /**
+   *  Gets details of the past fraud predictions for the specified event ID, event type, detector ID, and detector version ID that was generated in the specified time period. 
+   */
+  getEventPredictionMetadata(params: FraudDetector.Types.GetEventPredictionMetadataRequest, callback?: (err: AWSError, data: FraudDetector.Types.GetEventPredictionMetadataResult) => void): Request<FraudDetector.Types.GetEventPredictionMetadataResult, AWSError>;
+  /**
+   *  Gets details of the past fraud predictions for the specified event ID, event type, detector ID, and detector version ID that was generated in the specified time period. 
+   */
+  getEventPredictionMetadata(callback?: (err: AWSError, data: FraudDetector.Types.GetEventPredictionMetadataResult) => void): Request<FraudDetector.Types.GetEventPredictionMetadataResult, AWSError>;
+  /**
    * Gets all event types or a specific event type if name is provided. This is a paginated API. If you provide a null maxResults, this action retrieves a maximum of 10 records per page. If you provide a maxResults, the value must be between 5 and 10. To get the next page results, provide the pagination token from the GetEventTypesResponse as part of your request. A null pagination token fetches the records from the beginning. 
    */
   getEventTypes(params: FraudDetector.Types.GetEventTypesRequest, callback?: (err: AWSError, data: FraudDetector.Types.GetEventTypesResult) => void): Request<FraudDetector.Types.GetEventTypesResult, AWSError>;
@@ -367,6 +375,14 @@ declare class FraudDetector extends Service {
    * Gets all of the variables or the specific variable. This is a paginated API. Providing null maxSizePerPage results in retrieving maximum of 100 records per page. If you provide maxSizePerPage the value must be between 50 and 100. To get the next page result, a provide a pagination token from GetVariablesResult as part of your request. Null pagination token fetches the records from the beginning. 
    */
   getVariables(callback?: (err: AWSError, data: FraudDetector.Types.GetVariablesResult) => void): Request<FraudDetector.Types.GetVariablesResult, AWSError>;
+  /**
+   * Gets a list of past predictions. The list can be filtered by detector ID, detector version ID, event ID, event type, or by specifying a time period. If filter is not specified, the most recent prediction is returned. For example, the following filter lists all past predictions for xyz event type - { "eventType":{ "value": "xyz" }” }   This is a paginated API. If you provide a null maxResults, this action will retrieve a maximum of 10 records per page. If you provide a maxResults, the value must be between 50 and 100. To get the next page results, provide the nextToken from the response as part of your request. A null nextToken fetches the records from the beginning. 
+   */
+  listEventPredictions(params: FraudDetector.Types.ListEventPredictionsRequest, callback?: (err: AWSError, data: FraudDetector.Types.ListEventPredictionsResult) => void): Request<FraudDetector.Types.ListEventPredictionsResult, AWSError>;
+  /**
+   * Gets a list of past predictions. The list can be filtered by detector ID, detector version ID, event ID, event type, or by specifying a time period. If filter is not specified, the most recent prediction is returned. For example, the following filter lists all past predictions for xyz event type - { "eventType":{ "value": "xyz" }” }   This is a paginated API. If you provide a null maxResults, this action will retrieve a maximum of 10 records per page. If you provide a maxResults, the value must be between 50 and 100. To get the next page results, provide the nextToken from the response as part of your request. A null nextToken fetches the records from the beginning. 
+   */
+  listEventPredictions(callback?: (err: AWSError, data: FraudDetector.Types.ListEventPredictionsResult) => void): Request<FraudDetector.Types.ListEventPredictionsResult, AWSError>;
   /**
    * Lists all tags associated with the resource. This is a paginated API. To get the next page results, provide the pagination token from the response as part of your request. A null pagination token fetches the records from the beginning. 
    */
@@ -718,6 +734,7 @@ declare namespace FraudDetector {
     totalRecordsCount?: Integer;
   }
   export type BatchPredictionList = BatchPrediction[];
+  export type Boolean = boolean;
   export interface CancelBatchImportJobRequest {
     /**
      *  The ID of an in-progress batch import job to cancel.  Amazon Fraud Detector will throw an error if the batch import job is in FAILED, CANCELED, or COMPLETED state.
@@ -1290,6 +1307,73 @@ declare namespace FraudDetector {
      */
     arn?: fraudDetectorArn;
   }
+  export interface EvaluatedExternalModel {
+    /**
+     *  The endpoint of the external (Amazon Sagemaker) model. 
+     */
+    modelEndpoint?: string;
+    /**
+     *  Indicates whether event variables were used to generate predictions. 
+     */
+    useEventVariables?: Boolean;
+    /**
+     *  Input variables use for generating predictions. 
+     */
+    inputVariables?: MapOfStrings;
+    /**
+     *  Output variables. 
+     */
+    outputVariables?: MapOfStrings;
+  }
+  export interface EvaluatedModelVersion {
+    /**
+     *  The model ID. 
+     */
+    modelId?: string;
+    /**
+     *  The model version. 
+     */
+    modelVersion?: string;
+    /**
+     * The model type.  Valid values: ONLINE_FRAUD_INSIGHTS | TRANSACTION_FRAUD_INSIGHTS 
+     */
+    modelType?: string;
+    /**
+     *  Evaluations generated for the model version. 
+     */
+    evaluations?: ListOfModelVersionEvaluations;
+  }
+  export interface EvaluatedRule {
+    /**
+     *  The rule ID. 
+     */
+    ruleId?: identifier;
+    /**
+     *  The rule version. 
+     */
+    ruleVersion?: wholeNumberVersionString;
+    /**
+     *  The rule expression. 
+     */
+    expression?: sensitiveString;
+    /**
+     *  The rule expression value. 
+     */
+    expressionWithValues?: sensitiveString;
+    /**
+     *  The rule outcome. 
+     */
+    outcomes?: ListOfStrings;
+    /**
+     *  Indicates whether the rule was evaluated. 
+     */
+    evaluated?: Boolean;
+    /**
+     *  Indicates whether the rule matched. 
+     */
+    matched?: Boolean;
+  }
+  export type EvaluatedRuleList = EvaluatedRule[];
   export interface Event {
     /**
      * The event ID.
@@ -1322,6 +1406,33 @@ declare namespace FraudDetector {
   }
   export type EventAttributeMap = {[key: string]: attributeValue};
   export type EventIngestion = "ENABLED"|"DISABLED"|string;
+  export interface EventPredictionSummary {
+    /**
+     *  The event ID. 
+     */
+    eventId?: identifier;
+    /**
+     *  The event type. 
+     */
+    eventTypeName?: identifier;
+    /**
+     *  The timestamp of the event. 
+     */
+    eventTimestamp?: time;
+    /**
+     *  The timestamp when the prediction was generated. 
+     */
+    predictionTimestamp?: time;
+    /**
+     *  The detector ID. 
+     */
+    detectorId?: identifier;
+    /**
+     *  The detector version ID. 
+     */
+    detectorVersionId?: wholeNumberVersionString;
+  }
+  export type EventPredictionsMaxResults = number;
   export interface EventType {
     /**
      * The event type name.
@@ -1365,6 +1476,20 @@ declare namespace FraudDetector {
     arn?: fraudDetectorArn;
   }
   export type EventVariableMap = {[key: string]: variableValue};
+  export interface EventVariableSummary {
+    /**
+     *  The event variable name. 
+     */
+    name?: sensitiveString;
+    /**
+     *  The value of the event variable. 
+     */
+    value?: sensitiveString;
+    /**
+     *  The event variable source. 
+     */
+    source?: sensitiveString;
+  }
   export interface ExternalEventsDetail {
     /**
      * The Amazon S3 bucket location for the data.
@@ -1472,6 +1597,12 @@ declare namespace FraudDetector {
      * The message type.
      */
     type?: string;
+  }
+  export interface FilterCondition {
+    /**
+     *  A statement containing a resource property and a value to specify filter condition. 
+     */
+    value?: filterString;
   }
   export interface GetBatchImportJobsRequest {
     /**
@@ -1640,6 +1771,90 @@ declare namespace FraudDetector {
      * The next page token.
      */
     nextToken?: string;
+  }
+  export interface GetEventPredictionMetadataRequest {
+    /**
+     *  The event ID. 
+     */
+    eventId: identifier;
+    /**
+     *  The event type associated with the detector specified for the prediction. 
+     */
+    eventTypeName: identifier;
+    /**
+     *  The detector ID. 
+     */
+    detectorId: identifier;
+    /**
+     *  The detector version ID. 
+     */
+    detectorVersionId: wholeNumberVersionString;
+    /**
+     *  The timestamp that defines when the prediction was generated. 
+     */
+    predictionTimestamp: time;
+  }
+  export interface GetEventPredictionMetadataResult {
+    /**
+     *  The event ID. 
+     */
+    eventId?: identifier;
+    /**
+     *  The event type associated with the detector specified for this prediction. 
+     */
+    eventTypeName?: identifier;
+    /**
+     *  The entity ID. 
+     */
+    entityId?: string;
+    /**
+     *  The entity type. 
+     */
+    entityType?: string;
+    /**
+     *  The timestamp for when the prediction was generated for the associated event ID. 
+     */
+    eventTimestamp?: time;
+    /**
+     *  The detector ID. 
+     */
+    detectorId?: identifier;
+    /**
+     *  The detector version ID. 
+     */
+    detectorVersionId?: wholeNumberVersionString;
+    /**
+     *  The status of the detector version. 
+     */
+    detectorVersionStatus?: string;
+    /**
+     *  A list of event variables that influenced the prediction scores. 
+     */
+    eventVariables?: ListOfEventVariableSummaries;
+    /**
+     *  List of rules associated with the detector version that were used for evaluating variable values. 
+     */
+    rules?: EvaluatedRuleList;
+    /**
+     *  The execution mode of the rule used for evaluating variable values. 
+     */
+    ruleExecutionMode?: RuleExecutionMode;
+    /**
+     *  The outcomes of the matched rule, based on the rule execution mode. 
+     */
+    outcomes?: ListOfStrings;
+    /**
+     *  Model versions that were evaluated for generating predictions. 
+     */
+    evaluatedModelVersions?: ListOfEvaluatedModelVersions;
+    /**
+     *  External (Amazon SageMaker) models that were evaluated for generating predictions. 
+     */
+    evaluatedExternalModels?: ListOfEvaluatedExternalModels;
+    /**
+     * The timestamp that defines when the prediction was generated. 
+     */
+    predictionTimestamp?: time;
   }
   export interface GetEventPredictionRequest {
     /**
@@ -2023,9 +2238,54 @@ declare namespace FraudDetector {
     unlabeledEventsTreatment?: UnlabeledEventsTreatment;
   }
   export type Language = "DETECTORPL"|string;
+  export interface ListEventPredictionsRequest {
+    /**
+     *  The event ID. 
+     */
+    eventId?: FilterCondition;
+    /**
+     *  The event type associated with the detector. 
+     */
+    eventType?: FilterCondition;
+    /**
+     *  The detector ID. 
+     */
+    detectorId?: FilterCondition;
+    /**
+     *  The detector version ID. 
+     */
+    detectorVersionId?: FilterCondition;
+    /**
+     *  The time period for when the predictions were generated. 
+     */
+    predictionTimeRange?: PredictionTimeRange;
+    /**
+     *  Identifies the next page of results to return. Use the token to make the call again to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. 
+     */
+    nextToken?: string;
+    /**
+     *  The maximum number of predictions to return for the request. 
+     */
+    maxResults?: EventPredictionsMaxResults;
+  }
+  export interface ListEventPredictionsResult {
+    /**
+     *  The summary of the past predictions. 
+     */
+    eventPredictionSummaries?: ListOfEventPredictionSummaries;
+    /**
+     *  Identifies the next page of results to return. Use the token to make the call again to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. 
+     */
+    nextToken?: string;
+  }
+  export type ListOfEvaluatedExternalModels = EvaluatedExternalModel[];
+  export type ListOfEvaluatedModelVersions = EvaluatedModelVersion[];
+  export type ListOfEventPredictionSummaries = EventPredictionSummary[];
+  export type ListOfEventVariableSummaries = EventVariableSummary[];
   export type ListOfExternalModelOutputs = ExternalModelOutputs[];
   export type ListOfLogOddsMetrics = LogOddsMetric[];
   export type ListOfModelScores = ModelScores[];
+  export type ListOfModelVersionEvaluations = ModelVersionEvaluation[];
   export type ListOfModelVersions = ModelVersion[];
   export type ListOfRuleResults = RuleResult[];
   export type ListOfStrings = string[];
@@ -2068,6 +2328,7 @@ declare namespace FraudDetector {
     variableImportance: float;
   }
   export type Long = number;
+  export type MapOfStrings = {[key: string]: string};
   export interface MetricDataPoint {
     /**
      * The false positive rate. This is the percentage of total legitimate events that are incorrectly predicted as fraud.
@@ -2246,6 +2507,20 @@ declare namespace FraudDetector {
      */
     arn?: fraudDetectorArn;
   }
+  export interface ModelVersionEvaluation {
+    /**
+     *  The output variable name. 
+     */
+    outputVariableName?: string;
+    /**
+     *  The evaluation score generated for the model version. 
+     */
+    evaluationScore?: string;
+    /**
+     *  The prediction explanations generated for the model version. 
+     */
+    predictionExplanations?: PredictionExplanations;
+  }
   export type ModelVersionStatus = "ACTIVE"|"INACTIVE"|"TRAINING_CANCELLED"|string;
   export type NameList = string[];
   export type NonEmptyListOfStrings = string[];
@@ -2273,6 +2548,22 @@ declare namespace FraudDetector {
   }
   export type OutcomeList = Outcome[];
   export type OutcomesMaxResults = number;
+  export interface PredictionExplanations {
+    /**
+     *  The details of the event variable's impact on the prediction score. 
+     */
+    variableImpactExplanations?: listOfVariableImpactExplanations;
+  }
+  export interface PredictionTimeRange {
+    /**
+     *  The start time of the time period for when the predictions were generated. 
+     */
+    startTime: time;
+    /**
+     *  The end time of the time period for when the predictions were generated. 
+     */
+    endTime: time;
+  }
   export interface PutDetectorRequest {
     /**
      * The detector ID. 
@@ -2877,6 +3168,20 @@ declare namespace FraudDetector {
     variableType?: string;
   }
   export type VariableEntryList = VariableEntry[];
+  export interface VariableImpactExplanation {
+    /**
+     *  The event variable name. 
+     */
+    eventVariableName?: string;
+    /**
+     *  The event variable's relative impact in terms of magnitude on the prediction scores. The relative impact values consist of a numerical rating (0-5, 5 being the highest) and direction (increased/decreased) impact of the fraud risk. 
+     */
+    relativeImpact?: string;
+    /**
+     *  The raw, uninterpreted value represented as log-odds of the fraud. These values are usually between -10 to +10, but range from - infinity to + infinity.   A positive value indicates that the variable drove the risk score up.   A negative value indicates that the variable drove the risk score down.  
+     */
+    logOddsImpact?: float;
+  }
   export interface VariableImportanceMetrics {
     /**
      * List of variable metrics.
@@ -2899,6 +3204,7 @@ declare namespace FraudDetector {
   export type eventTypesMaxResults = number;
   export type fieldValidationMessageList = FieldValidationMessage[];
   export type fileValidationMessageList = FileValidationMessage[];
+  export type filterString = string;
   export type float = number;
   export type floatVersionString = string;
   export type fraudDetectorArn = string;
@@ -2909,6 +3215,7 @@ declare namespace FraudDetector {
   export type labelMapper = {[key: string]: NonEmptyListOfStrings};
   export type labelsMaxResults = number;
   export type listOfEntities = Entity[];
+  export type listOfVariableImpactExplanations = VariableImpactExplanation[];
   export type metricDataPointsList = MetricDataPoint[];
   export type modelIdentifier = string;
   export type modelInputTemplate = string;
@@ -2918,6 +3225,7 @@ declare namespace FraudDetector {
   export type ruleExpression = string;
   export type s3BucketLocation = string;
   export type sageMakerEndpointIdentifier = string;
+  export type sensitiveString = string;
   export type tagKey = string;
   export type tagKeyList = tagKey[];
   export type tagList = Tag[];

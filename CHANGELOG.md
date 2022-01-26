@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1063.0-->
+<!--LATEST=2.1064.0-->
 <!--ENTRYINSERT-->
+
+## 2.1064.0
+* feature: CodeGuruReviewer: Added failure state and adjusted timeout in waiter
+* feature: FraudDetector: Added new APIs for viewing past predictions and obtaining prediction metadata including prediction explanations: ListEventPredictions and GetEventPredictionMetadata
+* feature: SageMaker: API changes relating to Fail steps in model building pipeline and add PipelineExecutionFailureReason in PipelineExecutionSummary.
+* feature: SecurityHub: Adding top level Sample boolean field
 
 ## 2.1063.0
 * feature: Connect: This release adds support for custom vocabularies to be used with Contact Lens. Custom vocabularies improve transcription accuracy for one or more specific words.

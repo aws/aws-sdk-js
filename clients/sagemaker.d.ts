@@ -1789,11 +1789,11 @@ declare class SageMaker extends Service {
    */
   stopNotebookInstance(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Stops a pipeline execution.  Callback Step  A pipeline execution won't stop while a callback step is running. When you call StopPipelineExecution on a pipeline execution with a running callback step, Amazon SageMaker Pipelines sends an additional Amazon SQS message to the specified SQS queue. The body of the SQS message contains a "Status" field which is set to "Stopping". You should add logic to your Amazon SQS message consumer to take any needed action (for example, resource cleanup) upon receipt of the message followed by a call to SendPipelineExecutionStepSuccess or SendPipelineExecutionStepFailure. Only when Amazon SageMaker Pipelines receives one of these calls will it stop the pipeline execution.  Lambda Step  A pipeline execution can't be stopped while a lambda step is running because the Lambda function invoked by the lambda step can't be stopped. If you attempt to stop the execution while the Lambda function is running, the pipeline waits for the Lambda function to finish or until the timeout is hit, whichever occurs first, and then stops. If the Lambda function finishes, the pipeline execution status is Stopped. If the timeout is hit the pipeline execution status is Failed.
+   * Stops a pipeline execution.  Callback Step  A pipeline execution won't stop while a callback step is running. When you call StopPipelineExecution on a pipeline execution with a running callback step, SageMaker Pipelines sends an additional Amazon SQS message to the specified SQS queue. The body of the SQS message contains a "Status" field which is set to "Stopping". You should add logic to your Amazon SQS message consumer to take any needed action (for example, resource cleanup) upon receipt of the message followed by a call to SendPipelineExecutionStepSuccess or SendPipelineExecutionStepFailure. Only when SageMaker Pipelines receives one of these calls will it stop the pipeline execution.  Lambda Step  A pipeline execution can't be stopped while a lambda step is running because the Lambda function invoked by the lambda step can't be stopped. If you attempt to stop the execution while the Lambda function is running, the pipeline waits for the Lambda function to finish or until the timeout is hit, whichever occurs first, and then stops. If the Lambda function finishes, the pipeline execution status is Stopped. If the timeout is hit the pipeline execution status is Failed.
    */
   stopPipelineExecution(params: SageMaker.Types.StopPipelineExecutionRequest, callback?: (err: AWSError, data: SageMaker.Types.StopPipelineExecutionResponse) => void): Request<SageMaker.Types.StopPipelineExecutionResponse, AWSError>;
   /**
-   * Stops a pipeline execution.  Callback Step  A pipeline execution won't stop while a callback step is running. When you call StopPipelineExecution on a pipeline execution with a running callback step, Amazon SageMaker Pipelines sends an additional Amazon SQS message to the specified SQS queue. The body of the SQS message contains a "Status" field which is set to "Stopping". You should add logic to your Amazon SQS message consumer to take any needed action (for example, resource cleanup) upon receipt of the message followed by a call to SendPipelineExecutionStepSuccess or SendPipelineExecutionStepFailure. Only when Amazon SageMaker Pipelines receives one of these calls will it stop the pipeline execution.  Lambda Step  A pipeline execution can't be stopped while a lambda step is running because the Lambda function invoked by the lambda step can't be stopped. If you attempt to stop the execution while the Lambda function is running, the pipeline waits for the Lambda function to finish or until the timeout is hit, whichever occurs first, and then stops. If the Lambda function finishes, the pipeline execution status is Stopped. If the timeout is hit the pipeline execution status is Failed.
+   * Stops a pipeline execution.  Callback Step  A pipeline execution won't stop while a callback step is running. When you call StopPipelineExecution on a pipeline execution with a running callback step, SageMaker Pipelines sends an additional Amazon SQS message to the specified SQS queue. The body of the SQS message contains a "Status" field which is set to "Stopping". You should add logic to your Amazon SQS message consumer to take any needed action (for example, resource cleanup) upon receipt of the message followed by a call to SendPipelineExecutionStepSuccess or SendPipelineExecutionStepFailure. Only when SageMaker Pipelines receives one of these calls will it stop the pipeline execution.  Lambda Step  A pipeline execution can't be stopped while a lambda step is running because the Lambda function invoked by the lambda step can't be stopped. If you attempt to stop the execution while the Lambda function is running, the pipeline waits for the Lambda function to finish or until the timeout is hit, whichever occurs first, and then stops. If the Lambda function finishes, the pipeline execution status is Stopped. If the timeout is hit the pipeline execution status is Failed.
    */
   stopPipelineExecution(callback?: (err: AWSError, data: SageMaker.Types.StopPipelineExecutionResponse) => void): Request<SageMaker.Types.StopPipelineExecutionResponse, AWSError>;
   /**
@@ -3880,7 +3880,7 @@ declare namespace SageMaker {
      */
     KmsKeyId?: KmsKeyId;
     /**
-     * Specifies configuration for how an endpoint performs asynchronous inference. This is a required field in order for your Endpoint to be invoked using  InvokeEndpointAsync .
+     * Specifies configuration for how an endpoint performs asynchronous inference. This is a required field in order for your Endpoint to be invoked using InvokeEndpointAsync.
      */
     AsyncInferenceConfig?: AsyncInferenceConfig;
   }
@@ -8943,6 +8943,12 @@ declare namespace SageMaker {
     Report?: MetricsSource;
   }
   export type ExplainabilityLocation = string;
+  export interface FailStepMetadata {
+    /**
+     * A message that you define and then is processed and rendered by the Fail step when the error occurs.
+     */
+    ErrorMessage?: String3072;
+  }
   export type FailureReason = string;
   export interface FeatureDefinition {
     /**
@@ -11684,7 +11690,7 @@ declare namespace SageMaker {
      */
     ModelPackageGroupName?: ArnOrName;
     /**
-     * A filter that returns onlyl the model packages of the specified type. This can be one of the following values.    VERSIONED - List only versioned models.    UNVERSIONED - List only unversioined models.    BOTH - List both versioned and unversioned models.  
+     * A filter that returns only the model packages of the specified type. This can be one of the following values.    UNVERSIONED - List only unversioined models. This is the default value if no ModelPackageType is specified.    VERSIONED - List only versioned models.    BOTH - List both versioned and unversioned models.  
      */
     ModelPackageType?: ModelPackageType;
     /**
@@ -14294,7 +14300,7 @@ declare namespace SageMaker {
      */
     CacheHitResult?: CacheHitResult;
     /**
-     * The current attempt of the execution step. For more information, see Retry Policy for Amazon SageMaker Pipelines steps.
+     * The current attempt of the execution step. For more information, see Retry Policy for SageMaker Pipelines steps.
      */
     AttemptCount?: IntegerValue;
     /**
@@ -14356,6 +14362,10 @@ declare namespace SageMaker {
      * The configurations and outcomes of an EMR step execution.
      */
     EMR?: EMRStepMetadata;
+    /**
+     * The configurations and outcomes of a Fail step execution.
+     */
+    Fail?: FailStepMetadata;
   }
   export interface PipelineExecutionSummary {
     /**
@@ -14378,6 +14388,10 @@ declare namespace SageMaker {
      * The display name of the pipeline execution.
      */
     PipelineExecutionDisplayName?: PipelineExecutionName;
+    /**
+     * A message generated by SageMaker Pipelines describing why the pipeline execution failed.
+     */
+    PipelineExecutionFailureReason?: String3072;
   }
   export type PipelineExecutionSummaryList = PipelineExecutionSummary[];
   export interface PipelineExperimentConfig {
@@ -15880,6 +15894,7 @@ declare namespace SageMaker {
   export type String200 = string;
   export type String2048 = string;
   export type String256 = string;
+  export type String3072 = string;
   export type String40 = string;
   export type String64 = string;
   export type String8192 = string;
