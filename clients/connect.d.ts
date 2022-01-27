@@ -748,11 +748,11 @@ declare class Connect extends Service {
    */
   searchVocabularies(callback?: (err: AWSError, data: Connect.Types.SearchVocabulariesResponse) => void): Request<Connect.Types.SearchVocabulariesResponse, AWSError>;
   /**
-   * Initiates a contact flow to start a new chat for the customer. Response of this API provides a token required to obtain credentials from the CreateParticipantConnection API in the Amazon Connect Participant Service. When a new chat contact is successfully created, clients must subscribe to the participant’s connection for the created chat within 5 minutes. This is achieved by invoking CreateParticipantConnection with WEBSOCKET and CONNECTION_CREDENTIALS.  A 429 error occurs in two situations:   API rate limit is exceeded. API TPS throttling returns a TooManyRequests exception.   The quota for concurrent active chats is exceeded. Active chat throttling returns a LimitExceededException.   For more information about chat, see Chat in the Amazon Connect Administrator Guide.
+   * Initiates a contact flow to start a new chat for the customer. Response of this API provides a token required to obtain credentials from the CreateParticipantConnection API in the Amazon Connect Participant Service. When a new chat contact is successfully created, clients must subscribe to the participant’s connection for the created chat within 5 minutes. This is achieved by invoking CreateParticipantConnection with WEBSOCKET and CONNECTION_CREDENTIALS.  A 429 error occurs in the following situations:   API rate limit is exceeded. API TPS throttling returns a TooManyRequests exception.   The quota for concurrent active chats is exceeded. Active chat throttling returns a LimitExceededException.   If you use the ChatDurationInMinutes parameter and receive a 400 error, your account may not support the ability to configure custom chat durations. For more information, contact Amazon Web Services Support.  For more information about chat, see Chat in the Amazon Connect Administrator Guide.
    */
   startChatContact(params: Connect.Types.StartChatContactRequest, callback?: (err: AWSError, data: Connect.Types.StartChatContactResponse) => void): Request<Connect.Types.StartChatContactResponse, AWSError>;
   /**
-   * Initiates a contact flow to start a new chat for the customer. Response of this API provides a token required to obtain credentials from the CreateParticipantConnection API in the Amazon Connect Participant Service. When a new chat contact is successfully created, clients must subscribe to the participant’s connection for the created chat within 5 minutes. This is achieved by invoking CreateParticipantConnection with WEBSOCKET and CONNECTION_CREDENTIALS.  A 429 error occurs in two situations:   API rate limit is exceeded. API TPS throttling returns a TooManyRequests exception.   The quota for concurrent active chats is exceeded. Active chat throttling returns a LimitExceededException.   For more information about chat, see Chat in the Amazon Connect Administrator Guide.
+   * Initiates a contact flow to start a new chat for the customer. Response of this API provides a token required to obtain credentials from the CreateParticipantConnection API in the Amazon Connect Participant Service. When a new chat contact is successfully created, clients must subscribe to the participant’s connection for the created chat within 5 minutes. This is achieved by invoking CreateParticipantConnection with WEBSOCKET and CONNECTION_CREDENTIALS.  A 429 error occurs in the following situations:   API rate limit is exceeded. API TPS throttling returns a TooManyRequests exception.   The quota for concurrent active chats is exceeded. Active chat throttling returns a LimitExceededException.   If you use the ChatDurationInMinutes parameter and receive a 400 error, your account may not support the ability to configure custom chat durations. For more information, contact Amazon Web Services Support.  For more information about chat, see Chat in the Amazon Connect Administrator Guide.
    */
   startChatContact(callback?: (err: AWSError, data: Connect.Types.StartChatContactResponse) => void): Request<Connect.Types.StartChatContactResponse, AWSError>;
   /**
@@ -1331,6 +1331,7 @@ declare namespace Connect {
   export type Channels = Channel[];
   export type ChatContent = string;
   export type ChatContentType = string;
+  export type ChatDurationInMinutes = number;
   export interface ChatMessage {
     /**
      * The type of the content. Supported types are text and plain.
@@ -4487,6 +4488,10 @@ declare namespace Connect {
      * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
      */
     ClientToken?: ClientToken;
+    /**
+     * The total duration of the newly started chat session. If not specified, the chat session duration defaults to 25 hour. The minumum configurable time is 60 minutes. The maximum configurable time is 10,080 minutes (7 days).
+     */
+    ChatDurationInMinutes?: ChatDurationInMinutes;
   }
   export interface StartChatContactResponse {
     /**
@@ -4813,7 +4818,7 @@ declare namespace Connect {
      */
     ContactFlowId: ContactFlowId;
     /**
-     * The name of the contact flow.
+     * TThe name of the contact flow.
      */
     Name?: ContactFlowName;
     /**

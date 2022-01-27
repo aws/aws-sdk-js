@@ -373,7 +373,7 @@ declare namespace Amplify {
      */
     enableBasicAuth: EnableBasicAuth;
     /**
-     *  The basic authorization credentials for branches for the Amplify app. 
+     *  The basic authorization credentials for branches for the Amplify app. You must base64-encode the authorization credentials and provide them in the format user:password.
      */
     basicAuthCredentials?: BasicAuthCredentials;
     /**
@@ -443,7 +443,7 @@ declare namespace Amplify {
      */
     environmentVariables?: EnvironmentVariables;
     /**
-     *  The basic authorization credentials for the autocreated branch. 
+     *  The basic authorization credentials for the autocreated branch. You must base64-encode the authorization credentials and provide them in the format user:password.
      */
     basicAuthCredentials?: BasicAuthCredentials;
     /**
@@ -575,7 +575,7 @@ declare namespace Amplify {
      */
     thumbnailUrl?: ThumbnailUrl;
     /**
-     *  The basic authorization credentials for a branch of an Amplify app. 
+     *  The basic authorization credentials for a branch of an Amplify app. You must base64-encode the authorization credentials and provide them in the format user:password.
      */
     basicAuthCredentials?: BasicAuthCredentials;
     /**
@@ -667,7 +667,7 @@ declare namespace Amplify {
      */
     enableBasicAuth?: EnableBasicAuth;
     /**
-     *  The credentials for basic authorization for an Amplify app. 
+     *  The credentials for basic authorization for an Amplify app. You must base64-encode the authorization credentials and provide them in the format user:password.
      */
     basicAuthCredentials?: BasicAuthCredentials;
     /**
@@ -760,7 +760,7 @@ declare namespace Amplify {
      */
     environmentVariables?: EnvironmentVariables;
     /**
-     *  The basic authorization credentials for the branch. 
+     *  The basic authorization credentials for the branch. You must base64-encode the authorization credentials and provide them in the format user:password.
      */
     basicAuthCredentials?: BasicAuthCredentials;
     /**
@@ -1696,7 +1696,7 @@ declare namespace Amplify {
      */
     enableBasicAuth?: EnableBasicAuth;
     /**
-     *  The basic authorization credentials for an Amplify app. 
+     *  The basic authorization credentials for an Amplify app. You must base64-encode the authorization credentials and provide them in the format user:password.
      */
     basicAuthCredentials?: BasicAuthCredentials;
     /**
@@ -1776,7 +1776,7 @@ declare namespace Amplify {
      */
     environmentVariables?: EnvironmentVariables;
     /**
-     *  The basic authorization credentials for the branch. 
+     *  The basic authorization credentials for the branch. You must base64-encode the authorization credentials and provide them in the format user:password.
      */
     basicAuthCredentials?: BasicAuthCredentials;
     /**

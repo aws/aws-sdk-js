@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1064.0-->
+<!--LATEST=2.1065.0-->
 <!--ENTRYINSERT-->
+
+## 2.1065.0
+* feature: Connect: This release adds support for configuring a custom chat duration when starting a new chat session via the StartChatContact API. The default value for chat duration is 25 hours, minimum configurable value is 1 hour (60 minutes) and maximum configurable value is 7 days (10,080 minutes).
+* feature: EC2: X2ezn instances are powered by Intel Cascade Lake CPUs that deliver turbo all core frequency of up to 4.5 GHz and up to 100 Gbps of networking bandwidth
+* feature: Kafka: Amazon MSK has updated the CreateCluster and UpdateBrokerStorage API that allows you to specify volume throughput during cluster creation and broker volume updates.
+* feature: OpenSearch: Allows customers to get progress updates for blue/green deployments
 
 ## 2.1064.0
 * feature: CodeGuruReviewer: Added failure state and adjusted timeout in waiter

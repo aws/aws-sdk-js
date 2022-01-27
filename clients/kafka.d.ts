@@ -466,11 +466,15 @@ declare namespace Kafka {
      */
     KafkaBrokerNodeId: __string;
     /**
+     * EBS volume provisioned throughput information.
+     */
+    ProvisionedThroughput?: ProvisionedThroughput;
+    /**
      * 
             Size of the EBS volume to update.
          
      */
-    VolumeSizeGB: __integer;
+    VolumeSizeGB?: __integer;
   }
   export interface BrokerLogs {
     CloudWatchLogs?: CloudWatchLogs;
@@ -1550,6 +1554,10 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
   }
   export interface EBSStorageInfo {
     /**
+     * EBS volume provisioned throughput information.
+     */
+    ProvisionedThroughput?: ProvisionedThroughput;
+    /**
      * 
             The size in GiB of the EBS volume for the data drive on each broker node.
          
@@ -2119,6 +2127,16 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
          
      */
     NodeExporter?: NodeExporterInfo;
+  }
+  export interface ProvisionedThroughput {
+    /**
+     * Provisioned throughput is enabled or not.
+     */
+    Enabled?: __boolean;
+    /**
+     * Throughput value of the EBS volumes for the data drive on each kafka broker node in MiB per second.
+     */
+    VolumeThroughput?: __integer;
   }
   export interface PublicAccess {
     /**
