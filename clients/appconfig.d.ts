@@ -20,11 +20,11 @@ declare class AppConfig extends Service {
    */
   createApplication(callback?: (err: AWSError, data: AppConfig.Types.Application) => void): Request<AppConfig.Types.Application, AWSError>;
   /**
-   * Creates a configuration profile, which is information that enables AppConfig to access the configuration source. Valid configuration sources include the AppConfig hosted configuration store, Amazon Web Services Systems Manager (SSM) documents, SSM Parameter Store parameters, Amazon S3 objects, or any integration source action supported by CodePipeline. A configuration profile includes the following information:   The URI location of the configuration data.   The Identity and Access Management (IAM) role that provides access to the configuration data.   A validator for the configuration data. Available validators include either a JSON Schema or an Lambda function.   For more information, see Create a Configuration and a Configuration Profile in the AppConfig User Guide.
+   * Creates a configuration profile, which is information that enables AppConfig to access the configuration source. Valid configuration sources include the AppConfig hosted configuration store, Amazon Web Services Systems Manager (SSM) documents, SSM Parameter Store parameters, Amazon S3 objects, or any integration source action supported by CodePipeline. A configuration profile includes the following information:   The URI location of the configuration data.   The Identity and Access Management (IAM) role that provides access to the configuration data.   A validator for the configuration data. Available validators include either a JSON Schema or an Amazon Web Services Lambda function.   For more information, see Create a Configuration and a Configuration Profile in the AppConfig User Guide.
    */
   createConfigurationProfile(params: AppConfig.Types.CreateConfigurationProfileRequest, callback?: (err: AWSError, data: AppConfig.Types.ConfigurationProfile) => void): Request<AppConfig.Types.ConfigurationProfile, AWSError>;
   /**
-   * Creates a configuration profile, which is information that enables AppConfig to access the configuration source. Valid configuration sources include the AppConfig hosted configuration store, Amazon Web Services Systems Manager (SSM) documents, SSM Parameter Store parameters, Amazon S3 objects, or any integration source action supported by CodePipeline. A configuration profile includes the following information:   The URI location of the configuration data.   The Identity and Access Management (IAM) role that provides access to the configuration data.   A validator for the configuration data. Available validators include either a JSON Schema or an Lambda function.   For more information, see Create a Configuration and a Configuration Profile in the AppConfig User Guide.
+   * Creates a configuration profile, which is information that enables AppConfig to access the configuration source. Valid configuration sources include the AppConfig hosted configuration store, Amazon Web Services Systems Manager (SSM) documents, SSM Parameter Store parameters, Amazon S3 objects, or any integration source action supported by CodePipeline. A configuration profile includes the following information:   The URI location of the configuration data.   The Identity and Access Management (IAM) role that provides access to the configuration data.   A validator for the configuration data. Available validators include either a JSON Schema or an Amazon Web Services Lambda function.   For more information, see Create a Configuration and a Configuration Profile in the AppConfig User Guide.
    */
   createConfigurationProfile(callback?: (err: AWSError, data: AppConfig.Types.ConfigurationProfile) => void): Request<AppConfig.Types.ConfigurationProfile, AWSError>;
   /**
@@ -100,11 +100,11 @@ declare class AppConfig extends Service {
    */
   getApplication(callback?: (err: AWSError, data: AppConfig.Types.Application) => void): Request<AppConfig.Types.Application, AWSError>;
   /**
-   * Retrieves information about a configuration.  AppConfig uses the value of the ClientConfigurationVersion parameter to identify the configuration version on your clients. If you don’t send ClientConfigurationVersion with each call to GetConfiguration, your clients receive the current configuration. You are charged each time your clients receive a configuration. To avoid excess charges, we recommend that you include the ClientConfigurationVersion value with every call to GetConfiguration. This value must be saved on your client. Subsequent calls to GetConfiguration must pass this value by using the ClientConfigurationVersion parameter.  
+   * Retrieves the latest deployed configuration.  Note the following important information.   This API action has been deprecated. Calls to receive configuration data should use the StartConfigurationSession and GetLatestConfiguration APIs instead.     GetConfiguration is a priced call. For more information, see Pricing.   AppConfig uses the value of the ClientConfigurationVersion parameter to identify the configuration version on your clients. If you don’t send ClientConfigurationVersion with each call to GetConfiguration, your clients receive the current configuration. You are charged each time your clients receive a configuration. To avoid excess charges, we recommend you use the StartConfigurationSession and GetLatestConfiguration APIs, which track the client configuration version on your behalf. If you choose to continue using GetConfiguration, we recommend that you include the ClientConfigurationVersion value with every call to GetConfiguration. The value to use for ClientConfigurationVersion comes from the ConfigurationVersion attribute returned by GetConfiguration when there is new or updated data, and should be saved for subsequent calls to GetConfiguration.   
    */
   getConfiguration(params: AppConfig.Types.GetConfigurationRequest, callback?: (err: AWSError, data: AppConfig.Types.Configuration) => void): Request<AppConfig.Types.Configuration, AWSError>;
   /**
-   * Retrieves information about a configuration.  AppConfig uses the value of the ClientConfigurationVersion parameter to identify the configuration version on your clients. If you don’t send ClientConfigurationVersion with each call to GetConfiguration, your clients receive the current configuration. You are charged each time your clients receive a configuration. To avoid excess charges, we recommend that you include the ClientConfigurationVersion value with every call to GetConfiguration. This value must be saved on your client. Subsequent calls to GetConfiguration must pass this value by using the ClientConfigurationVersion parameter.  
+   * Retrieves the latest deployed configuration.  Note the following important information.   This API action has been deprecated. Calls to receive configuration data should use the StartConfigurationSession and GetLatestConfiguration APIs instead.     GetConfiguration is a priced call. For more information, see Pricing.   AppConfig uses the value of the ClientConfigurationVersion parameter to identify the configuration version on your clients. If you don’t send ClientConfigurationVersion with each call to GetConfiguration, your clients receive the current configuration. You are charged each time your clients receive a configuration. To avoid excess charges, we recommend you use the StartConfigurationSession and GetLatestConfiguration APIs, which track the client configuration version on your behalf. If you choose to continue using GetConfiguration, we recommend that you include the ClientConfigurationVersion value with every call to GetConfiguration. The value to use for ClientConfigurationVersion comes from the ConfigurationVersion attribute returned by GetConfiguration when there is new or updated data, and should be saved for subsequent calls to GetConfiguration.   
    */
   getConfiguration(callback?: (err: AWSError, data: AppConfig.Types.Configuration) => void): Request<AppConfig.Types.Configuration, AWSError>;
   /**
@@ -172,11 +172,11 @@ declare class AppConfig extends Service {
    */
   listDeploymentStrategies(callback?: (err: AWSError, data: AppConfig.Types.DeploymentStrategies) => void): Request<AppConfig.Types.DeploymentStrategies, AWSError>;
   /**
-   * Lists the deployments for an environment.
+   * Lists the deployments for an environment in descending deployment number order.
    */
   listDeployments(params: AppConfig.Types.ListDeploymentsRequest, callback?: (err: AWSError, data: AppConfig.Types.Deployments) => void): Request<AppConfig.Types.Deployments, AWSError>;
   /**
-   * Lists the deployments for an environment.
+   * Lists the deployments for an environment in descending deployment number order.
    */
   listDeployments(callback?: (err: AWSError, data: AppConfig.Types.Deployments) => void): Request<AppConfig.Types.Deployments, AWSError>;
   /**
@@ -306,7 +306,7 @@ declare namespace AppConfig {
   export type _Blob = Buffer|Uint8Array|Blob|string;
   export interface Configuration {
     /**
-     * The content of the configuration or the configuration data.  Compare the configuration version numbers of the configuration cached locally on your machine and the configuration number in the the header. If the configuration numbers are the same, the content can be ignored. The Content section only appears if the system finds new or updated configuration data. If the system doesn't find new or updated configuration data, then the Content section is not returned. 
+     * The content of the configuration or the configuration data.  The Content attribute only contains data if the system finds new or updated configuration data. If there is no new or updated data and ClientConfigurationVersion matches the version of the current configuration, AppConfig returns a 204 No Content HTTP response code and the Content value will be empty. 
      */
     Content?: _Blob;
     /**
@@ -348,7 +348,7 @@ declare namespace AppConfig {
      */
     Validators?: ValidatorList;
     /**
-     * The type of configurations that the configuration profile contains. A configuration can be a feature flag used for enabling or disabling new features or a free-form configuration used for distributing configurations to your application. 
+     * The type of configurations contained in the profile. AppConfig supports feature flags and freeform configurations. We recommend you create feature flag configurations to enable or disable new features and freeform configurations to distribute configurations to an application. When calling this API, enter one of the following values for Type:  AWS.AppConfig.FeatureFlags   AWS.Freeform 
      */
     Type?: ConfigurationProfileType;
   }
@@ -374,7 +374,7 @@ declare namespace AppConfig {
      */
     ValidatorTypes?: ValidatorTypeList;
     /**
-     * The type of configurations that the configuration profile contains. A configuration can be a feature flag used for enabling or disabling new features or a free-form configuration used to introduce changes to your application.
+     * The type of configurations contained in the profile. AppConfig supports feature flags and freeform configurations. We recommend you create feature flag configurations to enable or disable new features and freeform configurations to distribute configurations to an application. When calling this API, enter one of the following values for Type:  AWS.AppConfig.FeatureFlags   AWS.Freeform 
      */
     Type?: ConfigurationProfileType;
   }
@@ -434,7 +434,7 @@ declare namespace AppConfig {
      */
     Tags?: TagMap;
     /**
-     * The type of configurations that the configuration profile contains. A configuration can be a feature flag used for enabling or disabling new features or a free-form configuration used for distributing configurations to your application.
+     * The type of configurations contained in the profile. AppConfig supports feature flags and freeform configurations. We recommend you create feature flag configurations to enable or disable new features and freeform configurations to distribute configurations to an application. When calling this API, enter one of the following values for Type:  AWS.AppConfig.FeatureFlags   AWS.Freeform 
      */
     Type?: ConfigurationProfileType;
   }
@@ -973,7 +973,7 @@ declare namespace AppConfig {
      */
     NextToken?: NextToken;
     /**
-     * A filter based on the type of configurations that the configuration profile contains. A configuration can be a feature flag or a free-form configuration.
+     * A filter based on the type of configurations that the configuration profile contains. A configuration can be a feature flag or a freeform configuration.
      */
     Type?: ConfigurationProfileType;
   }
@@ -997,11 +997,11 @@ declare namespace AppConfig {
      */
     EnvironmentId: Id;
     /**
-     * The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
+     * The maximum number of items that may be returned for this call. If there are items that have not yet been returned, the response will include a non-null NextToken that you can provide in a subsequent call to get the next set of results.
      */
     MaxResults?: MaxResults;
     /**
-     * A token to start the list. Use this token to get the next set of results.
+     * The token returned by a prior call to this operation indicating the next set of results to be returned. If not specified, the operation will return the first set of results.
      */
     NextToken?: NextToken;
   }

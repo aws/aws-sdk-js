@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "Athena",
+        "description": "This release adds a field, AthenaError, to the GetQueryExecution response object when a query fails."
+    },
+    {
+        "type": "feature",
+        "category": "SageMaker",
+        "description": "This release added a new NNA accelerator compilation support for Sagemaker Neo."
+    },
+    {
+        "type": "feature",
+        "category": "SecretsManager",
+        "description": "Feature are ready to release on Jan 28th"
+    }
+]

@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1065.0-->
+<!--LATEST=2.1066.0-->
 <!--ENTRYINSERT-->
+
+## 2.1066.0
+* feature: Athena: This release adds a field, AthenaError, to the GetQueryExecution response object when a query fails.
+* feature: SageMaker: This release added a new NNA accelerator compilation support for Sagemaker Neo.
+* feature: SecretsManager: Feature are ready to release on Jan 28th
 
 ## 2.1065.0
 * feature: Connect: This release adds support for configuring a custom chat duration when starting a new chat session via the StartChatContact API. The default value for chat duration is 25 hours, minimum configurable value is 1 hour (60 minutes) and maximum configurable value is 7 days (10,080 minutes).

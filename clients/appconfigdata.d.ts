@@ -12,19 +12,19 @@ declare class AppConfigData extends Service {
   constructor(options?: AppConfigData.Types.ClientConfiguration)
   config: Config & AppConfigData.Types.ClientConfiguration;
   /**
-   * Retrieves the latest deployed configuration. This API may return empty Configuration data if the client already has the latest version. See StartConfigurationSession to obtain an InitialConfigurationToken to call this API.  Each call to GetLatestConfiguration returns a new ConfigurationToken (NextPollConfigurationToken in the response). This new token MUST be provided to the next call to GetLatestConfiguration when polling for configuration updates. To avoid excess charges, we recommend that you include the ClientConfigurationVersion value with every call to GetConfiguration. This value must be saved on your client. Subsequent calls to GetConfiguration must pass this value by using the ClientConfigurationVersion parameter.  
+   * Retrieves the latest deployed configuration. This API may return empty configuration data if the client already has the latest version. For more information about this API action and to view example CLI commands that show how to use it with the StartConfigurationSession API action, see Receiving the configuration in the AppConfig User Guide.   Note the following important information.   Each configuration token is only valid for one call to GetLatestConfiguration. The GetLatestConfiguration response includes a NextPollConfigurationToken that should always replace the token used for the just-completed call in preparation for the next one.     GetLatestConfiguration is a priced call. For more information, see Pricing.   
    */
   getLatestConfiguration(params: AppConfigData.Types.GetLatestConfigurationRequest, callback?: (err: AWSError, data: AppConfigData.Types.GetLatestConfigurationResponse) => void): Request<AppConfigData.Types.GetLatestConfigurationResponse, AWSError>;
   /**
-   * Retrieves the latest deployed configuration. This API may return empty Configuration data if the client already has the latest version. See StartConfigurationSession to obtain an InitialConfigurationToken to call this API.  Each call to GetLatestConfiguration returns a new ConfigurationToken (NextPollConfigurationToken in the response). This new token MUST be provided to the next call to GetLatestConfiguration when polling for configuration updates. To avoid excess charges, we recommend that you include the ClientConfigurationVersion value with every call to GetConfiguration. This value must be saved on your client. Subsequent calls to GetConfiguration must pass this value by using the ClientConfigurationVersion parameter.  
+   * Retrieves the latest deployed configuration. This API may return empty configuration data if the client already has the latest version. For more information about this API action and to view example CLI commands that show how to use it with the StartConfigurationSession API action, see Receiving the configuration in the AppConfig User Guide.   Note the following important information.   Each configuration token is only valid for one call to GetLatestConfiguration. The GetLatestConfiguration response includes a NextPollConfigurationToken that should always replace the token used for the just-completed call in preparation for the next one.     GetLatestConfiguration is a priced call. For more information, see Pricing.   
    */
   getLatestConfiguration(callback?: (err: AWSError, data: AppConfigData.Types.GetLatestConfigurationResponse) => void): Request<AppConfigData.Types.GetLatestConfigurationResponse, AWSError>;
   /**
-   * Starts a configuration session used to retrieve a deployed configuration. See the GetLatestConfiguration API for more details.
+   * Starts a configuration session used to retrieve a deployed configuration. For more information about this API action and to view example CLI commands that show how to use it with the GetLatestConfiguration API action, see Receiving the configuration in the AppConfig User Guide. 
    */
   startConfigurationSession(params: AppConfigData.Types.StartConfigurationSessionRequest, callback?: (err: AWSError, data: AppConfigData.Types.StartConfigurationSessionResponse) => void): Request<AppConfigData.Types.StartConfigurationSessionResponse, AWSError>;
   /**
-   * Starts a configuration session used to retrieve a deployed configuration. See the GetLatestConfiguration API for more details.
+   * Starts a configuration session used to retrieve a deployed configuration. For more information about this API action and to view example CLI commands that show how to use it with the GetLatestConfiguration API action, see Receiving the configuration in the AppConfig User Guide. 
    */
   startConfigurationSession(callback?: (err: AWSError, data: AppConfigData.Types.StartConfigurationSessionResponse) => void): Request<AppConfigData.Types.StartConfigurationSessionResponse, AWSError>;
 }
@@ -37,21 +37,21 @@ declare namespace AppConfigData {
   }
   export interface GetLatestConfigurationResponse {
     /**
-     * The data of the configuration. Note that this may be empty if the client already has the latest version of configuration.
+     * The latest token describing the current state of the configuration session. This MUST be provided to the next call to GetLatestConfiguration. 
      */
-    Configuration?: SyntheticGetLatestConfigurationResponseBlob;
+    NextPollConfigurationToken?: Token;
+    /**
+     * The amount of time the client should wait before polling for configuration updates again. Use RequiredMinimumPollIntervalInSeconds to set the desired poll interval.
+     */
+    NextPollIntervalInSeconds?: Integer;
     /**
      * A standard MIME type describing the format of the configuration content.
      */
     ContentType?: String;
     /**
-     * The latest token describing the current state of the configuration session. This MUST be provided to the next call to GetLatestConfiguration.
+     * The data of the configuration. This may be empty if the client already has the latest version of configuration.
      */
-    NextPollConfigurationToken?: Token;
-    /**
-     * The amount of time the client should wait before polling for configuration updates again. See RequiredMinimumPollIntervalInSeconds to set the desired poll interval.
-     */
-    NextPollIntervalInSeconds?: Integer;
+    Configuration?: SyntheticGetLatestConfigurationResponseBlob;
   }
   export type Identifier = string;
   export type Integer = number;
@@ -62,21 +62,21 @@ declare namespace AppConfigData {
      */
     ApplicationIdentifier: Identifier;
     /**
-     * The configuration profile ID or the configuration profile name.
-     */
-    ConfigurationProfileIdentifier: Identifier;
-    /**
      * The environment ID or the environment name.
      */
     EnvironmentIdentifier: Identifier;
     /**
-     * The interval at which your client will poll for configuration. If provided, the service will throw a BadRequestException if the client polls before the specified poll interval. By default, client poll intervals are not enforced.
+     * The configuration profile ID or the configuration profile name.
+     */
+    ConfigurationProfileIdentifier: Identifier;
+    /**
+     * Sets a constraint on a session. If you specify a value of, for example, 60 seconds, then the client that established the session can't call GetLatestConfiguration more frequently then every 60 seconds.
      */
     RequiredMinimumPollIntervalInSeconds?: OptionalPollSeconds;
   }
   export interface StartConfigurationSessionResponse {
     /**
-     * Token encapsulating state about the configuration session. Provide this token to the GetLatestConfiguration API to retrieve configuration data.  This token should only be used once in your first call to GetLatestConfiguration. You MUST use the new token in the GetConfiguration response (NextPollConfigurationToken) in each subsequent call to GetLatestConfiguration. 
+     * Token encapsulating state about the configuration session. Provide this token to the GetLatestConfiguration API to retrieve configuration data.  This token should only be used once in your first call to GetLatestConfiguration. You MUST use the new token in the GetLatestConfiguration response (NextPollConfigurationToken) in each subsequent call to GetLatestConfiguration. 
      */
     InitialConfigurationToken?: Token;
   }

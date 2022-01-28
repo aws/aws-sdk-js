@@ -286,6 +286,12 @@ declare class Athena extends Service {
 }
 declare namespace Athena {
   export type AmazonResourceName = string;
+  export interface AthenaError {
+    /**
+     * An integer value that specifies the category of a query failure error. The following list shows the category for each integer value.  1 - System  2 - User  3 - Unknown
+     */
+    ErrorCategory?: ErrorCategory;
+  }
   export interface BatchGetNamedQueryInput {
     /**
      * An array of query IDs.
@@ -384,7 +390,7 @@ declare namespace Athena {
   export type CommentString = string;
   export interface CreateDataCatalogInput {
     /**
-     * The name of the data catalog to create. The catalog name must be unique for the Amazon Web Services account and can use a maximum of 128 alphanumeric, underscore, at sign, or hyphen characters.
+     * The name of the data catalog to create. The catalog name must be unique for the Amazon Web Services account and can use a maximum of 127 alphanumeric, underscore, at sign, or hyphen characters. The remainder of the length constraint of 256 is reserved for use by Athena.
      */
     Name: CatalogNameString;
     /**
@@ -480,7 +486,7 @@ declare namespace Athena {
   }
   export interface DataCatalog {
     /**
-     * The name of the data catalog. The catalog name must be unique for the Amazon Web Services account and can use a maximum of 128 alphanumeric, underscore, at sign, or hyphen characters.
+     * The name of the data catalog. The catalog name must be unique for the Amazon Web Services account and can use a maximum of 127 alphanumeric, underscore, at sign, or hyphen characters. The remainder of the length constraint of 256 is reserved for use by Athena.
      */
     Name: CatalogNameString;
     /**
@@ -498,7 +504,7 @@ declare namespace Athena {
   }
   export interface DataCatalogSummary {
     /**
-     * The name of the data catalog.
+     * The name of the data catalog. The catalog name is unique for the Amazon Web Services account and can use a maximum of 127 alphanumeric, underscore, at sign, or hyphen characters. The remainder of the length constraint of 256 is reserved for use by Athena.
      */
     CatalogName?: CatalogNameString;
     /**
@@ -594,6 +600,7 @@ declare namespace Athena {
     EffectiveEngineVersion?: NameString;
   }
   export type EngineVersionsList = EngineVersion[];
+  export type ErrorCategory = number;
   export type ErrorCode = string;
   export type ErrorMessage = string;
   export type ExpressionString = string;
@@ -1115,6 +1122,10 @@ declare namespace Athena {
      * The date and time that the query completed.
      */
     CompletionDateTime?: _Date;
+    /**
+     * Provides information about an Athena query error.
+     */
+    AthenaError?: AthenaError;
   }
   export type QueryString = string;
   export interface ResultConfiguration {
@@ -1312,7 +1323,7 @@ declare namespace Athena {
   }
   export interface UpdateDataCatalogInput {
     /**
-     * The name of the data catalog to update. The catalog name must be unique for the Amazon Web Services account and can use a maximum of 128 alphanumeric, underscore, at sign, or hyphen characters.
+     * The name of the data catalog to update. The catalog name must be unique for the Amazon Web Services account and can use a maximum of 127 alphanumeric, underscore, at sign, or hyphen characters. The remainder of the length constraint of 256 is reserved for use by Athena.
      */
     Name: CatalogNameString;
     /**

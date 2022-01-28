@@ -15991,7 +15991,7 @@ declare namespace SageMaker {
      */
     Accelerator?: TargetPlatformAccelerator;
   }
-  export type TargetPlatformAccelerator = "INTEL_GRAPHICS"|"MALI"|"NVIDIA"|string;
+  export type TargetPlatformAccelerator = "INTEL_GRAPHICS"|"MALI"|"NVIDIA"|"NNA"|string;
   export type TargetPlatformArch = "X86_64"|"X86"|"ARM64"|"ARM_EABI"|"ARM_EABIHF"|string;
   export type TargetPlatformOs = "ANDROID"|"LINUX"|string;
   export type TaskAvailabilityLifetimeInSeconds = number;
