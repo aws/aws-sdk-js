@@ -116,6 +116,14 @@ declare class Comprehend extends Service {
    */
   deleteEntityRecognizer(callback?: (err: AWSError, data: Comprehend.Types.DeleteEntityRecognizerResponse) => void): Request<Comprehend.Types.DeleteEntityRecognizerResponse, AWSError>;
   /**
+   * Deletes a resource-based policy that is attached to a custom model.
+   */
+  deleteResourcePolicy(params: Comprehend.Types.DeleteResourcePolicyRequest, callback?: (err: AWSError, data: Comprehend.Types.DeleteResourcePolicyResponse) => void): Request<Comprehend.Types.DeleteResourcePolicyResponse, AWSError>;
+  /**
+   * Deletes a resource-based policy that is attached to a custom model.
+   */
+  deleteResourcePolicy(callback?: (err: AWSError, data: Comprehend.Types.DeleteResourcePolicyResponse) => void): Request<Comprehend.Types.DeleteResourcePolicyResponse, AWSError>;
+  /**
    * Gets the properties associated with a document classification job. Use this operation to get the status of a classification job.
    */
   describeDocumentClassificationJob(params: Comprehend.Types.DescribeDocumentClassificationJobRequest, callback?: (err: AWSError, data: Comprehend.Types.DescribeDocumentClassificationJobResponse) => void): Request<Comprehend.Types.DescribeDocumentClassificationJobResponse, AWSError>;
@@ -188,6 +196,14 @@ declare class Comprehend extends Service {
    */
   describePiiEntitiesDetectionJob(callback?: (err: AWSError, data: Comprehend.Types.DescribePiiEntitiesDetectionJobResponse) => void): Request<Comprehend.Types.DescribePiiEntitiesDetectionJobResponse, AWSError>;
   /**
+   * Gets the details of a resource-based policy that is attached to a custom model, including the JSON body of the policy.
+   */
+  describeResourcePolicy(params: Comprehend.Types.DescribeResourcePolicyRequest, callback?: (err: AWSError, data: Comprehend.Types.DescribeResourcePolicyResponse) => void): Request<Comprehend.Types.DescribeResourcePolicyResponse, AWSError>;
+  /**
+   * Gets the details of a resource-based policy that is attached to a custom model, including the JSON body of the policy.
+   */
+  describeResourcePolicy(callback?: (err: AWSError, data: Comprehend.Types.DescribeResourcePolicyResponse) => void): Request<Comprehend.Types.DescribeResourcePolicyResponse, AWSError>;
+  /**
    * Gets the properties associated with a sentiment detection job. Use this operation to get the status of a detection job.
    */
   describeSentimentDetectionJob(params: Comprehend.Types.DescribeSentimentDetectionJobRequest, callback?: (err: AWSError, data: Comprehend.Types.DescribeSentimentDetectionJobResponse) => void): Request<Comprehend.Types.DescribeSentimentDetectionJobResponse, AWSError>;
@@ -251,6 +267,14 @@ declare class Comprehend extends Service {
    * Inspects text for syntax and the part of speech of words in the document. For more information, how-syntax.
    */
   detectSyntax(callback?: (err: AWSError, data: Comprehend.Types.DetectSyntaxResponse) => void): Request<Comprehend.Types.DetectSyntaxResponse, AWSError>;
+  /**
+   * Creates a new custom model that replicates a source custom model that you import. The source model can be in your AWS account or another one. If the source model is in another AWS account, then it must have a resource-based policy that authorizes you to import it. The source model must be in the same AWS region that you're using when you import. You can't import a model that's in a different region.
+   */
+  importModel(params: Comprehend.Types.ImportModelRequest, callback?: (err: AWSError, data: Comprehend.Types.ImportModelResponse) => void): Request<Comprehend.Types.ImportModelResponse, AWSError>;
+  /**
+   * Creates a new custom model that replicates a source custom model that you import. The source model can be in your AWS account or another one. If the source model is in another AWS account, then it must have a resource-based policy that authorizes you to import it. The source model must be in the same AWS region that you're using when you import. You can't import a model that's in a different region.
+   */
+  importModel(callback?: (err: AWSError, data: Comprehend.Types.ImportModelResponse) => void): Request<Comprehend.Types.ImportModelResponse, AWSError>;
   /**
    * Gets a list of the documentation classification jobs that you have submitted.
    */
@@ -363,6 +387,14 @@ declare class Comprehend extends Service {
    * Gets a list of the topic detection jobs that you have submitted.
    */
   listTopicsDetectionJobs(callback?: (err: AWSError, data: Comprehend.Types.ListTopicsDetectionJobsResponse) => void): Request<Comprehend.Types.ListTopicsDetectionJobsResponse, AWSError>;
+  /**
+   * Attaches a resource-based policy to a custom model. You can use this policy to authorize an entity in another AWS account to import the custom model, which replicates it in Amazon Comprehend in their account.
+   */
+  putResourcePolicy(params: Comprehend.Types.PutResourcePolicyRequest, callback?: (err: AWSError, data: Comprehend.Types.PutResourcePolicyResponse) => void): Request<Comprehend.Types.PutResourcePolicyResponse, AWSError>;
+  /**
+   * Attaches a resource-based policy to a custom model. You can use this policy to authorize an entity in another AWS account to import the custom model, which replicates it in Amazon Comprehend in their account.
+   */
+  putResourcePolicy(callback?: (err: AWSError, data: Comprehend.Types.PutResourcePolicyResponse) => void): Request<Comprehend.Types.PutResourcePolicyResponse, AWSError>;
   /**
    * Starts an asynchronous document classification job. Use the operation to track the progress of the job.
    */
@@ -855,6 +887,10 @@ declare namespace Comprehend {
      * ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt trained custom models. The ModelKmsKeyId can be either of the following formats:   KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"    Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"   
      */
     ModelKmsKeyId?: KmsKeyId;
+    /**
+     * The resource-based policy to attach to your custom document classifier model. You can use this policy to allow another AWS account to import your custom model. Provide your policy as a JSON body that you enter as a UTF-8 encoded string without line breaks. To provide valid JSON, enclose the attribute names and values in double quotes. If the JSON body is also enclosed in double quotes, then you must escape the double quotes that are inside the policy:  "{\"attribute\": \"value\", \"attribute\": [\"value\"]}"  To avoid escaping quotes, you can use single quotes to enclose the policy and double quotes to enclose the JSON names and values:  '{"attribute": "value", "attribute": ["value"]}' 
+     */
+    ModelPolicy?: Policy;
   }
   export interface CreateDocumentClassifierResponse {
     /**
@@ -935,6 +971,10 @@ declare namespace Comprehend {
      * ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt trained custom models. The ModelKmsKeyId can be either of the following formats   KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"    Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"   
      */
     ModelKmsKeyId?: KmsKeyId;
+    /**
+     * The JSON resource-based policy to attach to your custom entity recognizer model. You can use this policy to allow another AWS account to import your custom model. Provide your JSON as a UTF-8 encoded string without line breaks. To provide valid JSON for your policy, enclose the attribute names and values in double quotes. If the JSON body is also enclosed in double quotes, then you must escape the double quotes that are inside the policy:  "{\"attribute\": \"value\", \"attribute\": [\"value\"]}"  To avoid escaping quotes, you can use single quotes to enclose the policy and double quotes to enclose the JSON names and values:  '{"attribute": "value", "attribute": ["value"]}' 
+     */
+    ModelPolicy?: Policy;
   }
   export interface CreateEntityRecognizerResponse {
     /**
@@ -967,6 +1007,18 @@ declare namespace Comprehend {
     EntityRecognizerArn: EntityRecognizerArn;
   }
   export interface DeleteEntityRecognizerResponse {
+  }
+  export interface DeleteResourcePolicyRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the custom model version that has the policy to delete.
+     */
+    ResourceArn: ComprehendModelArn;
+    /**
+     * The revision ID of the policy to delete.
+     */
+    PolicyRevisionId?: PolicyRevisionId;
+  }
+  export interface DeleteResourcePolicyResponse {
   }
   export interface DescribeDocumentClassificationJobRequest {
     /**
@@ -1072,6 +1124,30 @@ declare namespace Comprehend {
   }
   export interface DescribePiiEntitiesDetectionJobResponse {
     PiiEntitiesDetectionJobProperties?: PiiEntitiesDetectionJobProperties;
+  }
+  export interface DescribeResourcePolicyRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the policy to describe.
+     */
+    ResourceArn: ComprehendModelArn;
+  }
+  export interface DescribeResourcePolicyResponse {
+    /**
+     * The JSON body of the resource-based policy.
+     */
+    ResourcePolicy?: Policy;
+    /**
+     * The time at which the policy was created.
+     */
+    CreationTime?: Timestamp;
+    /**
+     * The time at which the policy was last modified.
+     */
+    LastModifiedTime?: Timestamp;
+    /**
+     * The revision ID of the policy. Each time you modify a policy, Amazon Comprehend assigns a new revision ID, and it deletes the prior version of the policy.
+     */
+    PolicyRevisionId?: PolicyRevisionId;
   }
   export interface DescribeSentimentDetectionJobRequest {
     /**
@@ -1404,6 +1480,10 @@ declare namespace Comprehend {
      * The version name that you assigned to the document classifier.
      */
     VersionName?: VersionName;
+    /**
+     * The Amazon Resource Name (ARN) of the source model. This model was imported from a different AWS account to create the document classifier model in your AWS account.
+     */
+    SourceModelArn?: DocumentClassifierArn;
   }
   export type DocumentClassifierPropertiesList = DocumentClassifierProperties[];
   export type DocumentClassifierSummariesList = DocumentClassifierSummary[];
@@ -1897,6 +1977,10 @@ declare namespace Comprehend {
      * The version name you assigned to the entity recognizer.
      */
     VersionName?: VersionName;
+    /**
+     * The Amazon Resource Name (ARN) of the source model. This model was imported from a different AWS account to create the entity recognizer model in your AWS account.
+     */
+    SourceModelArn?: EntityRecognizerArn;
   }
   export type EntityRecognizerPropertiesList = EntityRecognizerProperties[];
   export type EntityRecognizerSummariesList = EntityRecognizerSummary[];
@@ -2017,6 +2101,38 @@ declare namespace Comprehend {
   export type EventsDetectionJobPropertiesList = EventsDetectionJobProperties[];
   export type Float = number;
   export type IamRoleArn = string;
+  export interface ImportModelRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the custom model to import.
+     */
+    SourceModelArn: ComprehendModelArn;
+    /**
+     * The name to assign to the custom model that is created in Amazon Comprehend by this import.
+     */
+    ModelName?: ComprehendArnName;
+    /**
+     * The version name given to the custom model that is created by this import. Version names can have a maximum of 256 characters. Alphanumeric characters, hyphens (-) and underscores (_) are allowed. The version name must be unique among all models with the same classifier name in the account/AWS Region.
+     */
+    VersionName?: VersionName;
+    /**
+     * ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt trained custom models. The ModelKmsKeyId can be either of the following formats:   KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"    Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"   
+     */
+    ModelKmsKeyId?: KmsKeyId;
+    /**
+     * The Amazon Resource Name (ARN) of the AWS Identity and Management (IAM) role that allows Amazon Comprehend to use Amazon Key Management Service (KMS) to encrypt or decrypt the custom model.
+     */
+    DataAccessRoleArn?: IamRoleArn;
+    /**
+     * Tags to be associated with the custom model that is created by this import. A tag is a key-value pair that adds as a metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department.
+     */
+    Tags?: TagList;
+  }
+  export interface ImportModelResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the custom model being imported.
+     */
+    ModelArn?: ComprehendModelArn;
+  }
   export type InferenceUnitsInteger = number;
   export interface InputDataConfig {
     /**
@@ -2594,6 +2710,28 @@ declare namespace Comprehend {
      * ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt the output results from an analysis job.
      */
     KmsKeyId?: KmsKeyId;
+  }
+  export type Policy = string;
+  export type PolicyRevisionId = string;
+  export interface PutResourcePolicyRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the custom model to attach the policy to.
+     */
+    ResourceArn: ComprehendModelArn;
+    /**
+     * The JSON resource-based policy to attach to your custom model. Provide your JSON as a UTF-8 encoded string without line breaks. To provide valid JSON for your policy, enclose the attribute names and values in double quotes. If the JSON body is also enclosed in double quotes, then you must escape the double quotes that are inside the policy:  "{\"attribute\": \"value\", \"attribute\": [\"value\"]}"  To avoid escaping quotes, you can use single quotes to enclose the policy and double quotes to enclose the JSON names and values:  '{"attribute": "value", "attribute": ["value"]}' 
+     */
+    ResourcePolicy: Policy;
+    /**
+     * The revision ID that Amazon Comprehend assigned to the policy that you are updating. If you are creating a new policy that has no prior version, don't use this parameter. Amazon Comprehend creates the revision ID for you.
+     */
+    PolicyRevisionId?: PolicyRevisionId;
+  }
+  export interface PutResourcePolicyResponse {
+    /**
+     * The revision ID of the policy. Each time you modify a policy, Amazon Comprehend assigns a new revision ID, and it deletes the prior version of the policy.
+     */
+    PolicyRevisionId?: PolicyRevisionId;
   }
   export interface RedactionConfig {
     /**

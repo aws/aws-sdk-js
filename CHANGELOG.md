@@ -1,6 +1,15 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1066.0-->
+<!--LATEST=2.1067.0-->
 <!--ENTRYINSERT-->
+
+## 2.1067.0
+* feature: Appflow: Launching Amazon AppFlow Custom Connector SDK.
+* feature: Comprehend: Amazon Comprehend now supports sharing and importing custom trained models from one AWS account to another within the same region.
+* feature: ES: Allows customers to get progress updates for blue/green deployments
+* feature: Fis: Added GetTargetResourceType and ListTargetResourceTypesAPI actions. These actions return additional details about resource types and parameters that can be targeted by FIS actions. Added a parameters field for the targets that can be specified in experiment templates.
+* feature: Glue: Launch Protobuf support for AWS Glue Schema Registry
+* feature: Iot: This release adds support for configuring AWS IoT logging level per client ID, source IP, or principal ID.
+* feature: Personalize: Adding minRecommendationRequestsPerSecond attribute to recommender APIs.
 
 ## 2.1066.0
 * feature: Athena: This release adds a field, AthenaError, to the GetQueryExecution response object when a query fails.

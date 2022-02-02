@@ -52,6 +52,14 @@ declare class Fis extends Service {
    */
   getExperimentTemplate(callback?: (err: AWSError, data: Fis.Types.GetExperimentTemplateResponse) => void): Request<Fis.Types.GetExperimentTemplateResponse, AWSError>;
   /**
+   * Gets information about the specified resource type.
+   */
+  getTargetResourceType(params: Fis.Types.GetTargetResourceTypeRequest, callback?: (err: AWSError, data: Fis.Types.GetTargetResourceTypeResponse) => void): Request<Fis.Types.GetTargetResourceTypeResponse, AWSError>;
+  /**
+   * Gets information about the specified resource type.
+   */
+  getTargetResourceType(callback?: (err: AWSError, data: Fis.Types.GetTargetResourceTypeResponse) => void): Request<Fis.Types.GetTargetResourceTypeResponse, AWSError>;
+  /**
    * Lists the available FIS actions.
    */
   listActions(params: Fis.Types.ListActionsRequest, callback?: (err: AWSError, data: Fis.Types.ListActionsResponse) => void): Request<Fis.Types.ListActionsResponse, AWSError>;
@@ -83,6 +91,14 @@ declare class Fis extends Service {
    * Lists the tags for the specified resource.
    */
   listTagsForResource(callback?: (err: AWSError, data: Fis.Types.ListTagsForResourceResponse) => void): Request<Fis.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Lists the target resource types.
+   */
+  listTargetResourceTypes(params: Fis.Types.ListTargetResourceTypesRequest, callback?: (err: AWSError, data: Fis.Types.ListTargetResourceTypesResponse) => void): Request<Fis.Types.ListTargetResourceTypesResponse, AWSError>;
+  /**
+   * Lists the target resource types.
+   */
+  listTargetResourceTypes(callback?: (err: AWSError, data: Fis.Types.ListTargetResourceTypesResponse) => void): Request<Fis.Types.ListTargetResourceTypesResponse, AWSError>;
   /**
    * Starts running an experiment from the specified experiment template.
    */
@@ -186,7 +202,7 @@ declare namespace Fis {
     /**
      * The resource type of the target.
      */
-    resourceType?: TargetResourceType;
+    resourceType?: TargetResourceTypeId;
   }
   export type ActionTargetMap = {[key: string]: ActionTarget};
   export type ActionTargetName = string;
@@ -263,9 +279,9 @@ declare namespace Fis {
   export type CreateExperimentTemplateStopConditionInputList = CreateExperimentTemplateStopConditionInput[];
   export interface CreateExperimentTemplateTargetInput {
     /**
-     * The Amazon Web Services resource type. The resource type must be supported for the specified action.
+     * The resource type. The resource type must be supported for the specified action.
      */
-    resourceType: ResourceType;
+    resourceType: TargetResourceTypeId;
     /**
      * The Amazon Resource Names (ARNs) of the resources.
      */
@@ -282,6 +298,10 @@ declare namespace Fis {
      * Scopes the identified resources to a specific count of the resources at random, or a percentage of the resources. All identified resources are included in the target.   ALL - Run the action on all identified targets. This is the default.   COUNT(n) - Run the action on the specified number of targets, chosen from the identified targets at random. For example, COUNT(1) selects one of the targets.   PERCENT(n) - Run the action on the specified percentage of targets, chosen from the identified targets at random. For example, PERCENT(25) selects 25% of the targets.  
      */
     selectionMode: ExperimentTemplateTargetSelectionMode;
+    /**
+     * The resource type parameters.
+     */
+    parameters?: ExperimentTemplateTargetParameterMap;
   }
   export type CreateExperimentTemplateTargetInputMap = {[key: string]: CreateExperimentTemplateTargetInput};
   export type CreationTime = Date;
@@ -454,7 +474,7 @@ declare namespace Fis {
     /**
      * The resource type.
      */
-    resourceType?: ResourceType;
+    resourceType?: TargetResourceTypeId;
     /**
      * The Amazon Resource Names (ARNs) of the resources.
      */
@@ -471,6 +491,10 @@ declare namespace Fis {
      * Scopes the identified resources to a specific count or percentage.
      */
     selectionMode?: ExperimentTargetSelectionMode;
+    /**
+     * The resource type parameters.
+     */
+    parameters?: ExperimentTargetParameterMap;
   }
   export interface ExperimentTargetFilter {
     /**
@@ -488,6 +512,9 @@ declare namespace Fis {
   export type ExperimentTargetFilterValues = ExperimentTargetFilterValue[];
   export type ExperimentTargetMap = {[key: string]: ExperimentTarget};
   export type ExperimentTargetName = string;
+  export type ExperimentTargetParameterMap = {[key: string]: ExperimentTargetParameterValue};
+  export type ExperimentTargetParameterName = string;
+  export type ExperimentTargetParameterValue = string;
   export type ExperimentTargetSelectionMode = string;
   export interface ExperimentTemplate {
     /**
@@ -599,7 +626,7 @@ declare namespace Fis {
     /**
      * The resource type.
      */
-    resourceType?: ResourceType;
+    resourceType?: TargetResourceTypeId;
     /**
      * The Amazon Resource Names (ARNs) of the targets.
      */
@@ -616,6 +643,10 @@ declare namespace Fis {
      * Scopes the identified resources to a specific count or percentage.
      */
     selectionMode?: ExperimentTemplateTargetSelectionMode;
+    /**
+     * The resource type parameters.
+     */
+    parameters?: ExperimentTemplateTargetParameterMap;
   }
   export interface ExperimentTemplateTargetFilter {
     /**
@@ -644,6 +675,9 @@ declare namespace Fis {
   }
   export type ExperimentTemplateTargetMap = {[key: string]: ExperimentTemplateTarget};
   export type ExperimentTemplateTargetName = string;
+  export type ExperimentTemplateTargetParameterMap = {[key: string]: ExperimentTemplateTargetParameterValue};
+  export type ExperimentTemplateTargetParameterName = string;
+  export type ExperimentTemplateTargetParameterValue = string;
   export type ExperimentTemplateTargetSelectionMode = string;
   export interface GetActionRequest {
     /**
@@ -680,6 +714,18 @@ declare namespace Fis {
      * Information about the experiment template.
      */
     experimentTemplate?: ExperimentTemplate;
+  }
+  export interface GetTargetResourceTypeRequest {
+    /**
+     * The resource type.
+     */
+    resourceType: TargetResourceTypeId;
+  }
+  export interface GetTargetResourceTypeResponse {
+    /**
+     * Information about the resource type.
+     */
+    targetResourceType?: TargetResourceType;
   }
   export type LastUpdateTime = Date;
   export type ListActionsMaxResults = number;
@@ -757,10 +803,30 @@ declare namespace Fis {
      */
     tags?: TagMap;
   }
+  export type ListTargetResourceTypesMaxResults = number;
+  export interface ListTargetResourceTypesRequest {
+    /**
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
+     */
+    maxResults?: ListTargetResourceTypesMaxResults;
+    /**
+     * The token for the next page of results.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListTargetResourceTypesResponse {
+    /**
+     * The target resource types.
+     */
+    targetResourceTypes?: TargetResourceTypeSummaryList;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    nextToken?: NextToken;
+  }
   export type NextToken = string;
   export type ResourceArn = string;
   export type ResourceArnList = ResourceArn[];
-  export type ResourceType = string;
   export type RoleArn = string;
   export interface StartExperimentRequest {
     /**
@@ -812,7 +878,47 @@ declare namespace Fis {
   export interface TagResourceResponse {
   }
   export type TagValue = string;
-  export type TargetResourceType = string;
+  export interface TargetResourceType {
+    /**
+     * The resource type.
+     */
+    resourceType?: TargetResourceTypeId;
+    /**
+     * A description of the resource type.
+     */
+    description?: TargetResourceTypeDescription;
+    /**
+     * The parameters for the resource type.
+     */
+    parameters?: TargetResourceTypeParameterMap;
+  }
+  export type TargetResourceTypeDescription = string;
+  export type TargetResourceTypeId = string;
+  export interface TargetResourceTypeParameter {
+    /**
+     * A description of the parameter.
+     */
+    description?: TargetResourceTypeParameterDescription;
+    /**
+     * Indicates whether the parameter is required.
+     */
+    required?: TargetResourceTypeParameterRequired;
+  }
+  export type TargetResourceTypeParameterDescription = string;
+  export type TargetResourceTypeParameterMap = {[key: string]: TargetResourceTypeParameter};
+  export type TargetResourceTypeParameterName = string;
+  export type TargetResourceTypeParameterRequired = boolean;
+  export interface TargetResourceTypeSummary {
+    /**
+     * The resource type.
+     */
+    resourceType?: TargetResourceTypeId;
+    /**
+     * A description of the resource type.
+     */
+    description?: TargetResourceTypeDescription;
+  }
+  export type TargetResourceTypeSummaryList = TargetResourceTypeSummary[];
   export interface UntagResourceRequest {
     /**
      * The Amazon Resource Name (ARN) of the resource.
@@ -893,9 +999,9 @@ declare namespace Fis {
   export type UpdateExperimentTemplateStopConditionInputList = UpdateExperimentTemplateStopConditionInput[];
   export interface UpdateExperimentTemplateTargetInput {
     /**
-     * The Amazon Web Services resource type. The resource type must be supported for the specified action.
+     * The resource type. The resource type must be supported for the specified action.
      */
-    resourceType: ResourceType;
+    resourceType: TargetResourceTypeId;
     /**
      * The Amazon Resource Names (ARNs) of the targets.
      */
@@ -912,6 +1018,10 @@ declare namespace Fis {
      * Scopes the identified resources to a specific count or percentage.
      */
     selectionMode: ExperimentTemplateTargetSelectionMode;
+    /**
+     * The resource type parameters.
+     */
+    parameters?: ExperimentTemplateTargetParameterMap;
   }
   export type UpdateExperimentTemplateTargetInputMap = {[key: string]: UpdateExperimentTemplateTargetInput};
   /**

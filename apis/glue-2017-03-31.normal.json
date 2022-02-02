@@ -820,6 +820,9 @@
           "shape": "ResourceNumberLimitExceededException"
         },
         {
+          "shape": "ConcurrentModificationException"
+        },
+        {
           "shape": "InternalServiceException"
         }
       ],
@@ -852,6 +855,9 @@
         },
         {
           "shape": "ResourceNumberLimitExceededException"
+        },
+        {
+          "shape": "ConcurrentModificationException"
         },
         {
           "shape": "InternalServiceException"
@@ -6004,7 +6010,7 @@
       "members": {
         "DataFormat": {
           "shape": "DataFormat",
-          "documentation": "<p>The data format of the schema definition. Currently <code>AVRO</code> and <code>JSON</code> are supported.</p>"
+          "documentation": "<p>The data format of the schema definition. Currently <code>AVRO</code>, <code>JSON</code> and <code>PROTOBUF</code> are supported.</p>"
         },
         "SchemaDefinition": {
           "shape": "SchemaDefinitionString",
@@ -7596,7 +7602,7 @@
         },
         "DataFormat": {
           "shape": "DataFormat",
-          "documentation": "<p>The data format of the schema definition. Currently <code>AVRO</code> and <code>JSON</code> are supported.</p>"
+          "documentation": "<p>The data format of the schema definition. Currently <code>AVRO</code>, <code>JSON</code> and <code>PROTOBUF</code> are supported.</p>"
         },
         "Compatibility": {
           "shape": "Compatibility",
@@ -7641,7 +7647,7 @@
         },
         "DataFormat": {
           "shape": "DataFormat",
-          "documentation": "<p>The data format of the schema definition. Currently <code>AVRO</code> and <code>JSON</code> are supported.</p>"
+          "documentation": "<p>The data format of the schema definition. Currently <code>AVRO</code>, <code>JSON</code> and <code>PROTOBUF</code> are supported.</p>"
         },
         "Compatibility": {
           "shape": "Compatibility",
@@ -8030,7 +8036,8 @@
       "type": "string",
       "enum": [
         "AVRO",
-        "JSON"
+        "JSON",
+        "PROTOBUF"
       ]
     },
     "DataLakePrincipal": {
@@ -10527,7 +10534,7 @@
         },
         "DataFormat": {
           "shape": "DataFormat",
-          "documentation": "<p>The data format of the schema definition. Currently only <code>AVRO</code> and <code>JSON</code> are supported.</p>"
+          "documentation": "<p>The data format of the schema definition. Currently <code>AVRO</code>, <code>JSON</code> and <code>PROTOBUF</code> are supported.</p>"
         },
         "Status": {
           "shape": "SchemaVersionStatus",
@@ -10576,7 +10583,7 @@
         },
         "DataFormat": {
           "shape": "DataFormat",
-          "documentation": "<p>The data format of the schema definition. Currently <code>AVRO</code> and <code>JSON</code> are supported.</p>"
+          "documentation": "<p>The data format of the schema definition. Currently <code>AVRO</code>, <code>JSON</code> and <code>PROTOBUF</code> are supported.</p>"
         },
         "Compatibility": {
           "shape": "Compatibility",
@@ -10638,7 +10645,7 @@
         },
         "DataFormat": {
           "shape": "DataFormat",
-          "documentation": "<p>The data format of the schema definition. Currently <code>AVRO</code> and <code>JSON</code> are supported.</p>"
+          "documentation": "<p>The data format of the schema definition. Currently <code>AVRO</code>, <code>JSON</code> and <code>PROTOBUF</code> are supported.</p>"
         },
         "SchemaArn": {
           "shape": "GlueResourceArn",

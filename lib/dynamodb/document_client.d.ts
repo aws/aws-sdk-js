@@ -1840,7 +1840,7 @@ export namespace DocumentClient {
   export type PartiQLStatement = string;
   export interface PointInTimeRecoveryDescription {
     /**
-     * The current state of point in time recovery:    ENABLING - Point in time recovery is being enabled.    ENABLED - Point in time recovery is enabled.    DISABLED - Point in time recovery is disabled.  
+     * The current state of point in time recovery:    ENABLED - Point in time recovery is enabled.    DISABLED - Point in time recovery is disabled.  
      */
     PointInTimeRecoveryStatus?: PointInTimeRecoveryStatus;
     /**

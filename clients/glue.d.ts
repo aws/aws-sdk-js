@@ -1968,7 +1968,7 @@ declare namespace Glue {
   export type CatalogTargetList = CatalogTarget[];
   export interface CheckSchemaVersionValidityInput {
     /**
-     * The data format of the schema definition. Currently AVRO and JSON are supported.
+     * The data format of the schema definition. Currently AVRO, JSON and PROTOBUF are supported.
      */
     DataFormat: DataFormat;
     /**
@@ -3050,7 +3050,7 @@ declare namespace Glue {
      */
     SchemaName: SchemaRegistryNameString;
     /**
-     * The data format of the schema definition. Currently AVRO and JSON are supported.
+     * The data format of the schema definition. Currently AVRO, JSON and PROTOBUF are supported.
      */
     DataFormat: DataFormat;
     /**
@@ -3092,7 +3092,7 @@ declare namespace Glue {
      */
     Description?: DescriptionString;
     /**
-     * The data format of the schema definition. Currently AVRO and JSON are supported.
+     * The data format of the schema definition. Currently AVRO, JSON and PROTOBUF are supported.
      */
     DataFormat?: DataFormat;
     /**
@@ -3363,7 +3363,7 @@ declare namespace Glue {
      */
     ConnectionPasswordEncryption?: ConnectionPasswordEncryption;
   }
-  export type DataFormat = "AVRO"|"JSON"|string;
+  export type DataFormat = "AVRO"|"JSON"|"PROTOBUF"|string;
   export interface DataLakePrincipal {
     /**
      * An identifier for the Lake Formation principal.
@@ -5073,7 +5073,7 @@ declare namespace Glue {
      */
     SchemaArn?: GlueResourceArn;
     /**
-     * The data format of the schema definition. Currently only AVRO and JSON are supported.
+     * The data format of the schema definition. Currently AVRO, JSON and PROTOBUF are supported.
      */
     DataFormat?: DataFormat;
     /**
@@ -5113,7 +5113,7 @@ declare namespace Glue {
      */
     Description?: DescriptionString;
     /**
-     * The data format of the schema definition. Currently AVRO and JSON are supported.
+     * The data format of the schema definition. Currently AVRO, JSON and PROTOBUF are supported.
      */
     DataFormat?: DataFormat;
     /**
@@ -5169,7 +5169,7 @@ declare namespace Glue {
      */
     SchemaDefinition?: SchemaDefinitionString;
     /**
-     * The data format of the schema definition. Currently AVRO and JSON are supported.
+     * The data format of the schema definition. Currently AVRO, JSON and PROTOBUF are supported.
      */
     DataFormat?: DataFormat;
     /**
