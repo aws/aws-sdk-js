@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1067.0-->
+<!--LATEST=2.1068.0-->
 <!--ENTRYINSERT-->
+
+## 2.1068.0
+* feature: EC2: adds support for AMIs in Recycle Bin
+* feature: MarketplaceMetering: Add CustomerAWSAccountId to ResolveCustomer API response and increase UsageAllocation limit to 2500.
+* feature: Rbin: Add EC2 Image recycle bin support.
+* feature: RoboMaker: The release deprecates the use various APIs of RoboMaker Deployment Service in favor of AWS IoT GreenGrass v2.0.
 
 ## 2.1067.0
 * feature: Appflow: Launching Amazon AppFlow Custom Connector SDK.

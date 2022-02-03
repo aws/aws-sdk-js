@@ -493,11 +493,11 @@ declare class EC2 extends Service {
    */
   createFpgaImage(callback?: (err: AWSError, data: EC2.Types.CreateFpgaImageResult) => void): Request<EC2.Types.CreateFpgaImageResult, AWSError>;
   /**
-   * Creates an Amazon EBS-backed AMI from an Amazon EBS-backed instance that is either running or stopped. If you customized your instance with instance store volumes or Amazon EBS volumes in addition to the root device volume, the new AMI contains block device mapping information for those volumes. When you launch an instance from this new AMI, the instance automatically launches with those additional volumes. For more information, see Creating Amazon EBS-Backed Linux AMIs in the Amazon Elastic Compute Cloud User Guide.
+   * Creates an Amazon EBS-backed AMI from an Amazon EBS-backed instance that is either running or stopped.  By default, Amazon EC2 shuts down and reboots the instance before creating the AMI to ensure that everything on the instance is stopped and in a consistent state during the creation process. If you're confident that your instance is in a consistent state appropriate for AMI creation, use the NoReboot parameter to prevent Amazon EC2 from shutting down and rebooting the instance.   If you customized your instance with instance store volumes or Amazon EBS volumes in addition to the root device volume, the new AMI contains block device mapping information for those volumes. When you launch an instance from this new AMI, the instance automatically launches with those additional volumes. For more information, see Creating Amazon EBS-Backed Linux AMIs in the Amazon Elastic Compute Cloud User Guide.
    */
   createImage(params: EC2.Types.CreateImageRequest, callback?: (err: AWSError, data: EC2.Types.CreateImageResult) => void): Request<EC2.Types.CreateImageResult, AWSError>;
   /**
-   * Creates an Amazon EBS-backed AMI from an Amazon EBS-backed instance that is either running or stopped. If you customized your instance with instance store volumes or Amazon EBS volumes in addition to the root device volume, the new AMI contains block device mapping information for those volumes. When you launch an instance from this new AMI, the instance automatically launches with those additional volumes. For more information, see Creating Amazon EBS-Backed Linux AMIs in the Amazon Elastic Compute Cloud User Guide.
+   * Creates an Amazon EBS-backed AMI from an Amazon EBS-backed instance that is either running or stopped.  By default, Amazon EC2 shuts down and reboots the instance before creating the AMI to ensure that everything on the instance is stopped and in a consistent state during the creation process. If you're confident that your instance is in a consistent state appropriate for AMI creation, use the NoReboot parameter to prevent Amazon EC2 from shutting down and rebooting the instance.   If you customized your instance with instance store volumes or Amazon EBS volumes in addition to the root device volume, the new AMI contains block device mapping information for those volumes. When you launch an instance from this new AMI, the instance automatically launches with those additional volumes. For more information, see Creating Amazon EBS-Backed Linux AMIs in the Amazon Elastic Compute Cloud User Guide.
    */
   createImage(callback?: (err: AWSError, data: EC2.Types.CreateImageResult) => void): Request<EC2.Types.CreateImageResult, AWSError>;
   /**
@@ -1469,11 +1469,11 @@ declare class EC2 extends Service {
    */
   deprovisionPublicIpv4PoolCidr(callback?: (err: AWSError, data: EC2.Types.DeprovisionPublicIpv4PoolCidrResult) => void): Request<EC2.Types.DeprovisionPublicIpv4PoolCidrResult, AWSError>;
   /**
-   * Deregisters the specified AMI. After you deregister an AMI, it can't be used to launch new instances; however, it doesn't affect any instances that you've already launched from the AMI. You'll continue to incur usage costs for those instances until you terminate them. When you deregister an Amazon EBS-backed AMI, it doesn't affect the snapshot that was created for the root volume of the instance during the AMI creation process. When you deregister an instance store-backed AMI, it doesn't affect the files that you uploaded to Amazon S3 when you created the AMI.
+   * Deregisters the specified AMI. After you deregister an AMI, it can't be used to launch new instances. If you deregister an AMI that matches a Recycle Bin retention rule, the AMI is retained in the Recycle Bin for the specified retention period. For more information, see Recycle Bin in the Amazon Elastic Compute Cloud User Guide. When you deregister an AMI, it doesn't affect any instances that you've already launched from the AMI. You'll continue to incur usage costs for those instances until you terminate them. When you deregister an Amazon EBS-backed AMI, it doesn't affect the snapshot that was created for the root volume of the instance during the AMI creation process. When you deregister an instance store-backed AMI, it doesn't affect the files that you uploaded to Amazon S3 when you created the AMI.
    */
   deregisterImage(params: EC2.Types.DeregisterImageRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deregisters the specified AMI. After you deregister an AMI, it can't be used to launch new instances; however, it doesn't affect any instances that you've already launched from the AMI. You'll continue to incur usage costs for those instances until you terminate them. When you deregister an Amazon EBS-backed AMI, it doesn't affect the snapshot that was created for the root volume of the instance during the AMI creation process. When you deregister an instance store-backed AMI, it doesn't affect the files that you uploaded to Amazon S3 when you created the AMI.
+   * Deregisters the specified AMI. After you deregister an AMI, it can't be used to launch new instances. If you deregister an AMI that matches a Recycle Bin retention rule, the AMI is retained in the Recycle Bin for the specified retention period. For more information, see Recycle Bin in the Amazon Elastic Compute Cloud User Guide. When you deregister an AMI, it doesn't affect any instances that you've already launched from the AMI. You'll continue to incur usage costs for those instances until you terminate them. When you deregister an Amazon EBS-backed AMI, it doesn't affect the snapshot that was created for the root volume of the instance during the AMI creation process. When you deregister an instance store-backed AMI, it doesn't affect the files that you uploaded to Amazon S3 when you created the AMI.
    */
   deregisterImage(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -2613,11 +2613,11 @@ declare class EC2 extends Service {
    */
   disableEbsEncryptionByDefault(callback?: (err: AWSError, data: EC2.Types.DisableEbsEncryptionByDefaultResult) => void): Request<EC2.Types.DisableEbsEncryptionByDefaultResult, AWSError>;
   /**
-   * Discontinue faster launching for a Windows AMI, and clean up existing pre-provisioned snapshots. When you disable faster launching, the AMI uses the standard launch process for each instance. All pre-provisioned snapshots must be removed before you can enable faster launching again.
+   * Discontinue faster launching for a Windows AMI, and clean up existing pre-provisioned snapshots. When you disable faster launching, the AMI uses the standard launch process for each instance. All pre-provisioned snapshots must be removed before you can enable faster launching again.  To change these settings, you must own the AMI. 
    */
   disableFastLaunch(params: EC2.Types.DisableFastLaunchRequest, callback?: (err: AWSError, data: EC2.Types.DisableFastLaunchResult) => void): Request<EC2.Types.DisableFastLaunchResult, AWSError>;
   /**
-   * Discontinue faster launching for a Windows AMI, and clean up existing pre-provisioned snapshots. When you disable faster launching, the AMI uses the standard launch process for each instance. All pre-provisioned snapshots must be removed before you can enable faster launching again.
+   * Discontinue faster launching for a Windows AMI, and clean up existing pre-provisioned snapshots. When you disable faster launching, the AMI uses the standard launch process for each instance. All pre-provisioned snapshots must be removed before you can enable faster launching again.  To change these settings, you must own the AMI. 
    */
   disableFastLaunch(callback?: (err: AWSError, data: EC2.Types.DisableFastLaunchResult) => void): Request<EC2.Types.DisableFastLaunchResult, AWSError>;
   /**
@@ -2781,11 +2781,11 @@ declare class EC2 extends Service {
    */
   enableEbsEncryptionByDefault(callback?: (err: AWSError, data: EC2.Types.EnableEbsEncryptionByDefaultResult) => void): Request<EC2.Types.EnableEbsEncryptionByDefaultResult, AWSError>;
   /**
-   * When you enable faster launching for a Windows AMI, images are pre-provisioned, using snapshots to launch instances up to 65% faster. To create the optimized Windows image, Amazon EC2 launches an instance and runs through Sysprep steps, rebooting as required. Then it creates a set of reserved snapshots that are used for subsequent launches. The reserved snapshots are automatically replenished as they are used, depending on your settings for launch frequency.
+   * When you enable faster launching for a Windows AMI, images are pre-provisioned, using snapshots to launch instances up to 65% faster. To create the optimized Windows image, Amazon EC2 launches an instance and runs through Sysprep steps, rebooting as required. Then it creates a set of reserved snapshots that are used for subsequent launches. The reserved snapshots are automatically replenished as they are used, depending on your settings for launch frequency.  To change these settings, you must own the AMI. 
    */
   enableFastLaunch(params: EC2.Types.EnableFastLaunchRequest, callback?: (err: AWSError, data: EC2.Types.EnableFastLaunchResult) => void): Request<EC2.Types.EnableFastLaunchResult, AWSError>;
   /**
-   * When you enable faster launching for a Windows AMI, images are pre-provisioned, using snapshots to launch instances up to 65% faster. To create the optimized Windows image, Amazon EC2 launches an instance and runs through Sysprep steps, rebooting as required. Then it creates a set of reserved snapshots that are used for subsequent launches. The reserved snapshots are automatically replenished as they are used, depending on your settings for launch frequency.
+   * When you enable faster launching for a Windows AMI, images are pre-provisioned, using snapshots to launch instances up to 65% faster. To create the optimized Windows image, Amazon EC2 launches an instance and runs through Sysprep steps, rebooting as required. Then it creates a set of reserved snapshots that are used for subsequent launches. The reserved snapshots are automatically replenished as they are used, depending on your settings for launch frequency.  To change these settings, you must own the AMI. 
    */
   enableFastLaunch(callback?: (err: AWSError, data: EC2.Types.EnableFastLaunchResult) => void): Request<EC2.Types.EnableFastLaunchResult, AWSError>;
   /**
@@ -3212,6 +3212,14 @@ declare class EC2 extends Service {
    * Creates an import volume task using metadata from the specified disk image. This API action supports only single-volume VMs. To import multi-volume VMs, use ImportImage instead. To import a disk to a snapshot, use ImportSnapshot instead. This API action is not supported by the Command Line Interface (CLI). For information about using the Amazon EC2 CLI, which is deprecated, see Importing Disks to Amazon EBS in the Amazon EC2 CLI Reference PDF file. For information about the import manifest referenced by this API action, see VM Import Manifest.
    */
   importVolume(callback?: (err: AWSError, data: EC2.Types.ImportVolumeResult) => void): Request<EC2.Types.ImportVolumeResult, AWSError>;
+  /**
+   * Lists one or more AMIs that are currently in the Recycle Bin. For more information, see Recycle Bin in the Amazon Elastic Compute Cloud User Guide.
+   */
+  listImagesInRecycleBin(params: EC2.Types.ListImagesInRecycleBinRequest, callback?: (err: AWSError, data: EC2.Types.ListImagesInRecycleBinResult) => void): Request<EC2.Types.ListImagesInRecycleBinResult, AWSError>;
+  /**
+   * Lists one or more AMIs that are currently in the Recycle Bin. For more information, see Recycle Bin in the Amazon Elastic Compute Cloud User Guide.
+   */
+  listImagesInRecycleBin(callback?: (err: AWSError, data: EC2.Types.ListImagesInRecycleBinResult) => void): Request<EC2.Types.ListImagesInRecycleBinResult, AWSError>;
   /**
    * Lists one or more snapshots that are currently in the Recycle Bin.
    */
@@ -3964,6 +3972,14 @@ declare class EC2 extends Service {
    * Restores an Elastic IP address that was previously moved to the EC2-VPC platform back to the EC2-Classic platform. You cannot move an Elastic IP address that was originally allocated for use in EC2-VPC. The Elastic IP address must not be associated with an instance or network interface.
    */
   restoreAddressToClassic(callback?: (err: AWSError, data: EC2.Types.RestoreAddressToClassicResult) => void): Request<EC2.Types.RestoreAddressToClassicResult, AWSError>;
+  /**
+   * Restores an AMI from the Recycle Bin. For more information, see Recycle Bin in the Amazon Elastic Compute Cloud User Guide.
+   */
+  restoreImageFromRecycleBin(params: EC2.Types.RestoreImageFromRecycleBinRequest, callback?: (err: AWSError, data: EC2.Types.RestoreImageFromRecycleBinResult) => void): Request<EC2.Types.RestoreImageFromRecycleBinResult, AWSError>;
+  /**
+   * Restores an AMI from the Recycle Bin. For more information, see Recycle Bin in the Amazon Elastic Compute Cloud User Guide.
+   */
+  restoreImageFromRecycleBin(callback?: (err: AWSError, data: EC2.Types.RestoreImageFromRecycleBinResult) => void): Request<EC2.Types.RestoreImageFromRecycleBinResult, AWSError>;
   /**
    * Restores the entries from a previous version of a managed prefix list to a new version of the prefix list.
    */
@@ -6729,11 +6745,23 @@ declare namespace EC2 {
     UploadStart?: DateTime;
   }
   export interface ClientLoginBannerOptions {
+    /**
+     * Enable or disable a customizable text banner that will be displayed on Amazon Web Services provided clients when a VPN session is established. Valid values: true | false  Default value: false 
+     */
     Enabled?: Boolean;
+    /**
+     * Customizable text that will be displayed in a banner on Amazon Web Services provided clients when a VPN session is established. UTF-8 encoded characters only. Maximum of 1400 characters.
+     */
     BannerText?: String;
   }
   export interface ClientLoginBannerResponseOptions {
+    /**
+     * Current state of text banner feature. Valid values: true | false 
+     */
     Enabled?: Boolean;
+    /**
+     * Customizable text that will be displayed in a banner on Amazon Web Services provided clients when a VPN session is established. UTF-8 encoded characters only. Maximum of 1400 characters.
+     */
     BannerText?: String;
   }
   export type ClientVpnAssociationId = string;
@@ -6942,7 +6970,13 @@ declare namespace EC2 {
      * The options for managing connection authorization for new client connections.
      */
     ClientConnectOptions?: ClientConnectResponseOptions;
+    /**
+     * The maximum VPN session duration time in hours. Valid values: 8 | 10 | 12 | 24  Default value: 24 
+     */
     SessionTimeoutHours?: Integer;
+    /**
+     * Options for enabling a customizable text banner that will be displayed on Amazon Web Services provided clients when a VPN session is established.
+     */
     ClientLoginBannerOptions?: ClientLoginBannerResponseOptions;
   }
   export interface ClientVpnEndpointAttributeStatus {
@@ -7578,7 +7612,13 @@ declare namespace EC2 {
      * The options for managing connection authorization for new client connections.
      */
     ClientConnectOptions?: ClientConnectOptions;
+    /**
+     * The maximum VPN session duration time in hours. Valid values: 8 | 10 | 12 | 24  Default value: 24 
+     */
     SessionTimeoutHours?: Integer;
+    /**
+     * Options for enabling a customizable text banner that will be displayed on Amazon Web Services provided clients when a VPN session is established.
+     */
     ClientLoginBannerOptions?: ClientLoginBannerOptions;
   }
   export interface CreateClientVpnEndpointResult {
@@ -16394,7 +16434,7 @@ declare namespace EC2 {
      */
     LaunchTemplate?: FastLaunchLaunchTemplateSpecificationRequest;
     /**
-     * The maximum number of parallel instances to launch for creating resources.
+     * The maximum number of parallel instances to launch for creating resources. Value must be 6 or greater. 
      */
     MaxParallelLaunches?: Integer;
     /**
@@ -19333,6 +19373,29 @@ declare namespace EC2 {
   export type ImageIdList = ImageId[];
   export type ImageIdStringList = ImageId[];
   export type ImageList = Image[];
+  export interface ImageRecycleBinInfo {
+    /**
+     * The ID of the AMI.
+     */
+    ImageId?: String;
+    /**
+     * The name of the AMI.
+     */
+    Name?: String;
+    /**
+     * The description of the AMI.
+     */
+    Description?: String;
+    /**
+     * The date and time when the AMI entered the Recycle Bin.
+     */
+    RecycleBinEnterTime?: MillisecondDateTime;
+    /**
+     * The date and time when the AMI is to be permanently deleted from the Recycle Bin.
+     */
+    RecycleBinExitTime?: MillisecondDateTime;
+  }
+  export type ImageRecycleBinInfoList = ImageRecycleBinInfo[];
   export type ImageState = "pending"|"available"|"invalid"|"deregistered"|"transient"|"failed"|"error"|string;
   export type ImageTypeValues = "machine"|"kernel"|"ramdisk"|string;
   export interface ImportClientVpnClientCertificateRevocationListRequest {
@@ -22721,6 +22784,35 @@ declare namespace EC2 {
   }
   export type LicenseList = LicenseConfiguration[];
   export type LicenseSpecificationListRequest = LicenseConfigurationRequest[];
+  export type ListImagesInRecycleBinMaxResults = number;
+  export interface ListImagesInRecycleBinRequest {
+    /**
+     * The IDs of the AMIs to list. Omit this parameter to list all of the AMIs that are in the Recycle Bin. You can specify up to 20 IDs in a single request.
+     */
+    ImageIds?: ImageIdStringList;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: String;
+    /**
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value. If you do not specify a value for MaxResults, the request returns 1,000 items per page by default. For more information, see  Pagination.
+     */
+    MaxResults?: ListImagesInRecycleBinMaxResults;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface ListImagesInRecycleBinResult {
+    /**
+     * Information about the AMIs.
+     */
+    Images?: ImageRecycleBinInfoList;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: String;
+  }
   export type ListSnapshotsInRecycleBinMaxResults = number;
   export interface ListSnapshotsInRecycleBinRequest {
     /**
@@ -23289,7 +23381,13 @@ declare namespace EC2 {
      * The options for managing connection authorization for new client connections.
      */
     ClientConnectOptions?: ClientConnectOptions;
+    /**
+     * The maximum VPN session duration time in hours. Valid values: 8 | 10 | 12 | 24  Default value: 24 
+     */
     SessionTimeoutHours?: Integer;
+    /**
+     * Options for enabling a customizable text banner that will be displayed on Amazon Web Services provided clients when a VPN session is established.
+     */
     ClientLoginBannerOptions?: ClientLoginBannerOptions;
   }
   export interface ModifyClientVpnEndpointResult {
@@ -28194,6 +28292,22 @@ declare namespace EC2 {
      * The move status for the IP address.
      */
     Status?: Status;
+  }
+  export interface RestoreImageFromRecycleBinRequest {
+    /**
+     * The ID of the AMI to restore.
+     */
+    ImageId: ImageId;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface RestoreImageFromRecycleBinResult {
+    /**
+     * Returns true if the request succeeds; otherwise, it returns an error.
+     */
+    Return?: Boolean;
   }
   export interface RestoreManagedPrefixListVersionRequest {
     /**

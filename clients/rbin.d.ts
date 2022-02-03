@@ -12,19 +12,19 @@ declare class Rbin extends Service {
   constructor(options?: Rbin.Types.ClientConfiguration)
   config: Config & Rbin.Types.ClientConfiguration;
   /**
-   * Creates a Recycle Bin retention rule. For more information, see  Create Recycle Bin retention rules in the Amazon EC2 User Guide.
+   * Creates a Recycle Bin retention rule. For more information, see  Create Recycle Bin retention rules in the Amazon Elastic Compute Cloud User Guide.
    */
   createRule(params: Rbin.Types.CreateRuleRequest, callback?: (err: AWSError, data: Rbin.Types.CreateRuleResponse) => void): Request<Rbin.Types.CreateRuleResponse, AWSError>;
   /**
-   * Creates a Recycle Bin retention rule. For more information, see  Create Recycle Bin retention rules in the Amazon EC2 User Guide.
+   * Creates a Recycle Bin retention rule. For more information, see  Create Recycle Bin retention rules in the Amazon Elastic Compute Cloud User Guide.
    */
   createRule(callback?: (err: AWSError, data: Rbin.Types.CreateRuleResponse) => void): Request<Rbin.Types.CreateRuleResponse, AWSError>;
   /**
-   * Deletes a Recycle Bin retention rule. For more information, see  Delete Recycle Bin retention rules in the Amazon EC2 User Guide.
+   * Deletes a Recycle Bin retention rule. For more information, see  Delete Recycle Bin retention rules in the Amazon Elastic Compute Cloud User Guide.
    */
   deleteRule(params: Rbin.Types.DeleteRuleRequest, callback?: (err: AWSError, data: Rbin.Types.DeleteRuleResponse) => void): Request<Rbin.Types.DeleteRuleResponse, AWSError>;
   /**
-   * Deletes a Recycle Bin retention rule. For more information, see  Delete Recycle Bin retention rules in the Amazon EC2 User Guide.
+   * Deletes a Recycle Bin retention rule. For more information, see  Delete Recycle Bin retention rules in the Amazon Elastic Compute Cloud User Guide.
    */
   deleteRule(callback?: (err: AWSError, data: Rbin.Types.DeleteRuleResponse) => void): Request<Rbin.Types.DeleteRuleResponse, AWSError>;
   /**
@@ -44,35 +44,35 @@ declare class Rbin extends Service {
    */
   listRules(callback?: (err: AWSError, data: Rbin.Types.ListRulesResponse) => void): Request<Rbin.Types.ListRulesResponse, AWSError>;
   /**
-   * Lists the tags assigned a specific resource.
+   * Lists the tags assigned to a retention rule.
    */
   listTagsForResource(params: Rbin.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: Rbin.Types.ListTagsForResourceResponse) => void): Request<Rbin.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Lists the tags assigned a specific resource.
+   * Lists the tags assigned to a retention rule.
    */
   listTagsForResource(callback?: (err: AWSError, data: Rbin.Types.ListTagsForResourceResponse) => void): Request<Rbin.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Assigns tags to the specified resource.
+   * Assigns tags to the specified retention rule.
    */
   tagResource(params: Rbin.Types.TagResourceRequest, callback?: (err: AWSError, data: Rbin.Types.TagResourceResponse) => void): Request<Rbin.Types.TagResourceResponse, AWSError>;
   /**
-   * Assigns tags to the specified resource.
+   * Assigns tags to the specified retention rule.
    */
   tagResource(callback?: (err: AWSError, data: Rbin.Types.TagResourceResponse) => void): Request<Rbin.Types.TagResourceResponse, AWSError>;
   /**
-   * Unassigns a tag from a resource.
+   * Unassigns a tag from a retention rule.
    */
   untagResource(params: Rbin.Types.UntagResourceRequest, callback?: (err: AWSError, data: Rbin.Types.UntagResourceResponse) => void): Request<Rbin.Types.UntagResourceResponse, AWSError>;
   /**
-   * Unassigns a tag from a resource.
+   * Unassigns a tag from a retention rule.
    */
   untagResource(callback?: (err: AWSError, data: Rbin.Types.UntagResourceResponse) => void): Request<Rbin.Types.UntagResourceResponse, AWSError>;
   /**
-   * Updates an existing Recycle Bin retention rule. For more information, see  Update Recycle Bin retention rules in the Amazon EC2 User Guide.
+   * Updates an existing Recycle Bin retention rule. For more information, see  Update Recycle Bin retention rules in the Amazon Elastic Compute Cloud User Guide.
    */
   updateRule(params: Rbin.Types.UpdateRuleRequest, callback?: (err: AWSError, data: Rbin.Types.UpdateRuleResponse) => void): Request<Rbin.Types.UpdateRuleResponse, AWSError>;
   /**
-   * Updates an existing Recycle Bin retention rule. For more information, see  Update Recycle Bin retention rules in the Amazon EC2 User Guide.
+   * Updates an existing Recycle Bin retention rule. For more information, see  Update Recycle Bin retention rules in the Amazon Elastic Compute Cloud User Guide.
    */
   updateRule(callback?: (err: AWSError, data: Rbin.Types.UpdateRuleResponse) => void): Request<Rbin.Types.UpdateRuleResponse, AWSError>;
 }
@@ -83,7 +83,7 @@ declare namespace Rbin {
      */
     RetentionPeriod: RetentionPeriod;
     /**
-     * A brief description for the retention rule.
+     * The retention rule description.
      */
     Description?: Description;
     /**
@@ -91,17 +91,17 @@ declare namespace Rbin {
      */
     Tags?: TagList;
     /**
-     * The resource type to be retained by the retention rule. Currently, only Amazon EBS snapshots are supported.
+     * The resource type to be retained by the retention rule. Currently, only Amazon EBS snapshots and EBS-backed AMIs are supported. To retain snapshots, specify EBS_SNAPSHOT. To retain EBS-backed AMIs, specify EC2_IMAGE.
      */
     ResourceType: ResourceType;
     /**
-     * Information about the resource tags to use to identify resources that are to be retained by the retention rule. The retention rule retains only deleted snapshots that have one or more of the specified tag key and value pairs. If a snapshot is deleted, but it does not have any of the specified tag key and value pairs, it is immediately deleted without being retained by the retention rule. You can add the same tag key and value pair to a maximum or five retention rules.
+     * Specifies the resource tags to use to identify resources that are to be retained by a tag-level retention rule. For tag-level retention rules, only deleted resources, of the specified resource type, that have one or more of the specified tag key and value pairs are retained. If a resource is deleted, but it does not have any of the specified tag key and value pairs, it is immediately deleted without being retained by the retention rule. You can add the same tag key and value pair to a maximum or five retention rules. To create a Region-level retention rule, omit this parameter. A Region-level retention rule does not have any resource tags specified. It retains all deleted resources of the specified resource type in the Region in which the rule is created, even if the resources are not tagged.
      */
     ResourceTags?: ResourceTags;
   }
   export interface CreateRuleResponse {
     /**
-     * The unique identifier of the retention rule.
+     * The unique ID of the retention rule.
      */
     Identifier?: RuleIdentifier;
     RetentionPeriod?: RetentionPeriod;
@@ -110,7 +110,7 @@ declare namespace Rbin {
      */
     Description?: Description;
     /**
-     * The tags assigned to the retention rule.
+     * Information about the tags assigned to the retention rule.
      */
     Tags?: TagList;
     /**
@@ -122,13 +122,13 @@ declare namespace Rbin {
      */
     ResourceTags?: ResourceTags;
     /**
-     * The state of the retention rule. Only retention rules that are in the available state retain snapshots.
+     * The state of the retention rule. Only retention rules that are in the available state retain resources.
      */
     Status?: RuleStatus;
   }
   export interface DeleteRuleRequest {
     /**
-     * The unique ID of the retention rule to delete.
+     * The unique ID of the retention rule.
      */
     Identifier: RuleIdentifier;
   }
@@ -147,41 +147,41 @@ declare namespace Rbin {
      */
     Identifier?: RuleIdentifier;
     /**
-     * The description assigned to the retention rule.
+     * The retention rule description.
      */
     Description?: Description;
     /**
-     * The resource type retained by the retention rule. Currently, only Amazon EBS snapshots are supported.
+     * The resource type retained by the retention rule.
      */
     ResourceType?: ResourceType;
     /**
-     * Information about the period for which the retention rule retains resources.
+     * Information about the retention period for which the retention rule is to retain resources.
      */
     RetentionPeriod?: RetentionPeriod;
     /**
-     * The resource tags used to identify resources that are to be retained by the retention rule.
+     * Information about the resource tags used to identify resources that are retained by the retention rule.
      */
     ResourceTags?: ResourceTags;
     /**
-     * The state of the retention rule. Only retention rules that are in the available state retain snapshots.
+     * The state of the retention rule. Only retention rules that are in the available state retain resources.
      */
     Status?: RuleStatus;
   }
   export interface ListRulesRequest {
     /**
-     * The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the returned nextToken value. This value can be between 5 and 500. If maxResults is given a larger value than 500, you receive an error.
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned NextToken value.
      */
     MaxResults?: MaxResults;
     /**
-     * The token to use to retrieve the next page of results.
+     * The token for the next page of results.
      */
     NextToken?: NextToken;
     /**
-     * The resource type retained by the retention rule. Only retention rules that retain the specified resource type are listed.
+     * The resource type retained by the retention rule. Only retention rules that retain the specified resource type are listed. Currently, only Amazon EBS snapshots and EBS-backed AMIs are supported. To list retention rules that retain snapshots, specify EBS_SNAPSHOT. To list retention rules that retain EBS-backed AMIs, specify EC2_IMAGE.
      */
     ResourceType: ResourceType;
     /**
-     * The tags used to identify resources that are to be retained by the retention rule.
+     * Information about the resource tags used to identify resources that are retained by the retention rule.
      */
     ResourceTags?: ResourceTags;
   }
@@ -197,13 +197,13 @@ declare namespace Rbin {
   }
   export interface ListTagsForResourceRequest {
     /**
-     * The Amazon Resource Name (ARN) of the resource for which to list the tags.
+     * The Amazon Resource Name (ARN) of the retention rule.
      */
     ResourceArn: RuleArn;
   }
   export interface ListTagsForResourceResponse {
     /**
-     * Information about the tags assigned to the resource.
+     * Information about the tags assigned to the retention rule.
      */
     Tags?: TagList;
   }
@@ -222,7 +222,7 @@ declare namespace Rbin {
   export type ResourceTagKey = string;
   export type ResourceTagValue = string;
   export type ResourceTags = ResourceTag[];
-  export type ResourceType = "EBS_SNAPSHOT"|string;
+  export type ResourceType = "EBS_SNAPSHOT"|"EC2_IMAGE"|string;
   export interface RetentionPeriod {
     /**
      * The period value for which the retention rule is to retain resources. The period is measured using the unit specified for RetentionPeriodUnit.
@@ -244,11 +244,11 @@ declare namespace Rbin {
      */
     Identifier?: RuleIdentifier;
     /**
-     * The description for the retention rule.
+     * The retention rule description.
      */
     Description?: Description;
     /**
-     * Information about the retention period for which the retention rule retains resources
+     * Information about the retention period for which the retention rule is to retain resources.
      */
     RetentionPeriod?: RetentionPeriod;
   }
@@ -268,11 +268,11 @@ declare namespace Rbin {
   export type TagList = Tag[];
   export interface TagResourceRequest {
     /**
-     * The Amazon Resource Name (ARN) of the resource to which to assign the tags.
+     * The Amazon Resource Name (ARN) of the retention rule.
      */
     ResourceArn: RuleArn;
     /**
-     * Information about the tags to assign to the resource.
+     * Information about the tags to assign to the retention rule.
      */
     Tags: TagList;
   }
@@ -281,11 +281,11 @@ declare namespace Rbin {
   export type TagValue = string;
   export interface UntagResourceRequest {
     /**
-     * The Amazon Resource Name (ARN) of the resource from which to unassign the tags.
+     * The Amazon Resource Name (ARN) of the retention rule.
      */
     ResourceArn: RuleArn;
     /**
-     * Information about the tags to unassign from the resource.
+     * The tag keys of the tags to unassign. All tags that have the specified tag key are unassigned.
      */
     TagKeys: TagKeyList;
   }
@@ -293,7 +293,7 @@ declare namespace Rbin {
   }
   export interface UpdateRuleRequest {
     /**
-     * The unique ID of the retention rule to update.
+     * The unique ID of the retention rule.
      */
     Identifier: RuleIdentifier;
     /**
@@ -305,11 +305,11 @@ declare namespace Rbin {
      */
     Description?: Description;
     /**
-     * The resource type to be retained by the retention rule. Currently, only Amazon EBS snapshots are supported.
+     * The resource type to be retained by the retention rule. Currently, only Amazon EBS snapshots and EBS-backed AMIs are supported. To retain snapshots, specify EBS_SNAPSHOT. To retain EBS-backed AMIs, specify EC2_IMAGE.
      */
     ResourceType?: ResourceType;
     /**
-     * Information about the resource tags to use to identify resources that are to be retained by the retention rule. The retention rule retains only deleted snapshots that have one or more of the specified tag key and value pairs. If a snapshot is deleted, but it does not have any of the specified tag key and value pairs, it is immediately deleted without being retained by the retention rule.  You can add the same tag key and value pair to a maximum or five retention rules.
+     * Specifies the resource tags to use to identify resources that are to be retained by a tag-level retention rule. For tag-level retention rules, only deleted resources, of the specified resource type, that have one or more of the specified tag key and value pairs are retained. If a resource is deleted, but it does not have any of the specified tag key and value pairs, it is immediately deleted without being retained by the retention rule. You can add the same tag key and value pair to a maximum or five retention rules. To create a Region-level retention rule, omit this parameter. A Region-level retention rule does not have any resource tags specified. It retains all deleted resources of the specified resource type in the Region in which the rule is created, even if the resources are not tagged.
      */
     ResourceTags?: ResourceTags;
   }
@@ -332,7 +332,7 @@ declare namespace Rbin {
      */
     ResourceTags?: ResourceTags;
     /**
-     * The state of the retention rule. Only retention rules that are in the available state retain snapshots.
+     * The state of the retention rule. Only retention rules that are in the available state retain resources.
      */
     Status?: RuleStatus;
   }
