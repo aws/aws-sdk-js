@@ -1934,7 +1934,7 @@ declare namespace LakeFormation {
     /**
      * The transaction at which to do the write.
      */
-    TransactionId: TransactionIdString;
+    TransactionId?: TransactionIdString;
     /**
      * A list of WriteOperation objects that define an object to add to or delete from the manifest for a governed table.
      */

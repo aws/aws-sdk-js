@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1068.0-->
+<!--LATEST=2.1069.0-->
 <!--ENTRYINSERT-->
+
+## 2.1069.0
+* feature: Athena: You can now optionally specify the account ID that you expect to be the owner of your query results output location bucket in Athena. If the account ID of the query results bucket owner does not match the specified account ID, attempts to output to the bucket will fail with an S3 permissions error.
+* feature: LakeFormation: Add support for calling Update Table Objects without a TransactionId.
 
 ## 2.1068.0
 * feature: EC2: adds support for AMIs in Recycle Bin
