@@ -1440,7 +1440,7 @@ declare namespace AuditManager {
     /**
      *  The unique identifier of the control. 
      */
-    id?: UUID;
+    id: UUID;
   }
   export interface CreateAssessmentFrameworkControlSet {
     /**
@@ -2874,7 +2874,7 @@ declare namespace AuditManager {
     /**
      *  The list of controls that are contained within the control set. 
      */
-    controls?: CreateAssessmentFrameworkControls;
+    controls: CreateAssessmentFrameworkControls;
   }
   export type UpdateAssessmentFrameworkControlSets = UpdateAssessmentFrameworkControlSet[];
   export interface UpdateAssessmentFrameworkRequest {

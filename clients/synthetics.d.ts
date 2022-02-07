@@ -28,19 +28,19 @@ declare class Synthetics extends Service {
    */
   deleteCanary(callback?: (err: AWSError, data: Synthetics.Types.DeleteCanaryResponse) => void): Request<Synthetics.Types.DeleteCanaryResponse, AWSError>;
   /**
-   * This operation returns a list of the canaries in your account, along with full details about each canary. This operation does not have resource-level authorization, so if a user is able to use DescribeCanaries, the user can see all of the canaries in the account. A deny policy can only be used to restrict access to all canaries. It cannot be used on specific resources. 
+   * This operation returns a list of the canaries in your account, along with full details about each canary. This operation supports resource-level authorization using an IAM policy and the Names parameter. If you specify the Names parameter, the operation is successful only if you have authorization to view all the canaries that you specify in your request. If you do not have permission to view any of the canaries, the request fails with a 403 response. You are required to use the Names parameter if you are logged on to a user or role that has an IAM policy that restricts which canaries that you are allowed to view. For more information, see  Limiting a user to viewing specific canaries.
    */
   describeCanaries(params: Synthetics.Types.DescribeCanariesRequest, callback?: (err: AWSError, data: Synthetics.Types.DescribeCanariesResponse) => void): Request<Synthetics.Types.DescribeCanariesResponse, AWSError>;
   /**
-   * This operation returns a list of the canaries in your account, along with full details about each canary. This operation does not have resource-level authorization, so if a user is able to use DescribeCanaries, the user can see all of the canaries in the account. A deny policy can only be used to restrict access to all canaries. It cannot be used on specific resources. 
+   * This operation returns a list of the canaries in your account, along with full details about each canary. This operation supports resource-level authorization using an IAM policy and the Names parameter. If you specify the Names parameter, the operation is successful only if you have authorization to view all the canaries that you specify in your request. If you do not have permission to view any of the canaries, the request fails with a 403 response. You are required to use the Names parameter if you are logged on to a user or role that has an IAM policy that restricts which canaries that you are allowed to view. For more information, see  Limiting a user to viewing specific canaries.
    */
   describeCanaries(callback?: (err: AWSError, data: Synthetics.Types.DescribeCanariesResponse) => void): Request<Synthetics.Types.DescribeCanariesResponse, AWSError>;
   /**
-   * Use this operation to see information from the most recent run of each canary that you have created.
+   * Use this operation to see information from the most recent run of each canary that you have created. This operation supports resource-level authorization using an IAM policy and the Names parameter. If you specify the Names parameter, the operation is successful only if you have authorization to view all the canaries that you specify in your request. If you do not have permission to view any of the canaries, the request fails with a 403 response. You are required to use the Names parameter if you are logged on to a user or role that has an IAM policy that restricts which canaries that you are allowed to view. For more information, see  Limiting a user to viewing specific canaries.
    */
   describeCanariesLastRun(params: Synthetics.Types.DescribeCanariesLastRunRequest, callback?: (err: AWSError, data: Synthetics.Types.DescribeCanariesLastRunResponse) => void): Request<Synthetics.Types.DescribeCanariesLastRunResponse, AWSError>;
   /**
-   * Use this operation to see information from the most recent run of each canary that you have created.
+   * Use this operation to see information from the most recent run of each canary that you have created. This operation supports resource-level authorization using an IAM policy and the Names parameter. If you specify the Names parameter, the operation is successful only if you have authorization to view all the canaries that you specify in your request. If you do not have permission to view any of the canaries, the request fails with a 403 response. You are required to use the Names parameter if you are logged on to a user or role that has an IAM policy that restricts which canaries that you are allowed to view. For more information, see  Limiting a user to viewing specific canaries.
    */
   describeCanariesLastRun(callback?: (err: AWSError, data: Synthetics.Types.DescribeCanariesLastRunResponse) => void): Request<Synthetics.Types.DescribeCanariesLastRunResponse, AWSError>;
   /**
@@ -221,7 +221,7 @@ declare namespace Synthetics {
      */
     S3Version?: String;
     /**
-     * If you input your canary script directly into the canary instead of referring to an S3 location, the value of this parameter is the base64-encoded contents of the .zip file that contains the script. It must be smaller than 256 Kb.
+     * If you input your canary script directly into the canary instead of referring to an S3 location, the value of this parameter is the base64-encoded contents of the .zip file that contains the script. It must be smaller than 225 Kb. For large canary scripts, we recommend that you use an S3 location instead of inputting it directly with this parameter.
      */
     ZipFile?: _Blob;
     /**
@@ -449,6 +449,7 @@ declare namespace Synthetics {
   }
   export interface DeleteCanaryResponse {
   }
+  export type DescribeCanariesLastRunNameFilter = CanaryName[];
   export interface DescribeCanariesLastRunRequest {
     /**
      * A token that indicates that there is more data available. You can use this token in a subsequent DescribeCanaries operation to retrieve the next set of results.
@@ -458,6 +459,10 @@ declare namespace Synthetics {
      * Specify this parameter to limit how many runs are returned each time you use the DescribeLastRun operation. If you omit this parameter, the default of 100 is used.
      */
     MaxResults?: MaxSize100;
+    /**
+     * Use this parameter to return only canaries that match the names that you specify here. You can specify as many as five canary names. If you specify this parameter, the operation is successful only if you have authorization to view all the canaries that you specify in your request. If you do not have permission to view any of the canaries, the request fails with a 403 response. You are required to use the Names parameter if you are logged on to a user or role that has an IAM policy that restricts which canaries that you are allowed to view. For more information, see  Limiting a user to viewing specific canaries.
+     */
+    Names?: DescribeCanariesLastRunNameFilter;
   }
   export interface DescribeCanariesLastRunResponse {
     /**
@@ -469,6 +474,7 @@ declare namespace Synthetics {
      */
     NextToken?: Token;
   }
+  export type DescribeCanariesNameFilter = CanaryName[];
   export interface DescribeCanariesRequest {
     /**
      * A token that indicates that there is more data available. You can use this token in a subsequent operation to retrieve the next set of results.
@@ -478,6 +484,10 @@ declare namespace Synthetics {
      * Specify this parameter to limit how many canaries are returned each time you use the DescribeCanaries operation. If you omit this parameter, the default of 100 is used.
      */
     MaxResults?: MaxCanaryResults;
+    /**
+     * Use this parameter to return only canaries that match the names that you specify here. You can specify as many as five canary names. If you specify this parameter, the operation is successful only if you have authorization to view all the canaries that you specify in your request. If you do not have permission to view any of the canaries, the request fails with a 403 response. You are required to use this parameter if you are logged on to a user or role that has an IAM policy that restricts which canaries that you are allowed to view. For more information, see  Limiting a user to viewing specific canaries.
+     */
+    Names?: DescribeCanariesNameFilter;
   }
   export interface DescribeCanariesResponse {
     /**

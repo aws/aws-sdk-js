@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1069.0-->
+<!--LATEST=2.1070.0-->
 <!--ENTRYINSERT-->
+
+## 2.1070.0
+* feature: AuditManager: This release updates 3 API parameters. UpdateAssessmentFrameworkControlSet now requires the controls attribute, and CreateAssessmentFrameworkControl requires the id attribute. Additionally, UpdateAssessmentFramework now has a minimum length constraint for the controlSets attribute.
+* feature: SSMIncidents: Update RelatedItem enum to support SSM Automation
+* feature: Synthetics: Adding names parameters to the Describe APIs.
 
 ## 2.1069.0
 * feature: Athena: You can now optionally specify the account ID that you expect to be the owner of your query results output location bucket in Athena. If the account ID of the query results bucket owner does not match the specified account ID, attempts to output to the bucket will fail with an S3 permissions error.

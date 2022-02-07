@@ -3052,6 +3052,9 @@
     },
     "CreateAssessmentFrameworkControl": {
       "type": "structure",
+      "required": [
+        "id"
+      ],
       "members": {
         "id": {
           "shape": "UUID",
@@ -5537,7 +5540,8 @@
     "UpdateAssessmentFrameworkControlSet": {
       "type": "structure",
       "required": [
-        "name"
+        "name",
+        "controls"
       ],
       "members": {
         "id": {
@@ -5559,7 +5563,8 @@
       "type": "list",
       "member": {
         "shape": "UpdateAssessmentFrameworkControlSet"
-      }
+      },
+      "min": 1
     },
     "UpdateAssessmentFrameworkRequest": {
       "type": "structure",
