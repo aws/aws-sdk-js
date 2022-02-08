@@ -2764,7 +2764,7 @@ declare namespace SageMaker {
     MetricName: AutoMLMetricEnum;
   }
   export type AutoMLJobObjectiveType = "Maximize"|"Minimize"|string;
-  export type AutoMLJobSecondaryStatus = "Starting"|"AnalyzingData"|"FeatureEngineering"|"ModelTuning"|"MaxCandidatesReached"|"Failed"|"Stopped"|"MaxAutoMLJobRuntimeReached"|"Stopping"|"CandidateDefinitionsGenerated"|"GeneratingExplainabilityReport"|"Completed"|"ExplainabilityError"|"DeployingModel"|"ModelDeploymentError"|string;
+  export type AutoMLJobSecondaryStatus = "Starting"|"AnalyzingData"|"FeatureEngineering"|"ModelTuning"|"MaxCandidatesReached"|"Failed"|"Stopped"|"MaxAutoMLJobRuntimeReached"|"Stopping"|"CandidateDefinitionsGenerated"|"GeneratingExplainabilityReport"|"Completed"|"ExplainabilityError"|"DeployingModel"|"ModelDeploymentError"|"GeneratingModelInsightsReport"|"ModelInsightsError"|string;
   export type AutoMLJobStatus = "Completed"|"InProgress"|"Failed"|"Stopped"|"Stopping"|string;
   export type AutoMLJobSummaries = AutoMLJobSummary[];
   export interface AutoMLJobSummary {
@@ -2972,6 +2972,10 @@ declare namespace SageMaker {
      * The Amazon S3 prefix to the explainability artifacts generated for the AutoML candidate.
      */
     Explainability: ExplainabilityLocation;
+    /**
+     * The Amazon S3 prefix to the model insight artifacts generated for the AutoML candidate.
+     */
+    ModelInsights?: ModelInsightsLocation;
   }
   export type CandidateDefinitionNotebookLocation = string;
   export type CandidateName = string;
@@ -12936,6 +12940,7 @@ declare namespace SageMaker {
      */
     DataInputConfig: DataInputConfig;
   }
+  export type ModelInsightsLocation = string;
   export interface ModelLatencyThreshold {
     /**
      * The model latency percentile threshold.

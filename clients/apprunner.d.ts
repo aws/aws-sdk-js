@@ -20,11 +20,11 @@ declare class AppRunner extends Service {
    */
   associateCustomDomain(callback?: (err: AWSError, data: AppRunner.Types.AssociateCustomDomainResponse) => void): Request<AppRunner.Types.AssociateCustomDomainResponse, AWSError>;
   /**
-   * Create an App Runner automatic scaling configuration resource. App Runner requires this resource when you create App Runner services that require non-default auto scaling settings. You can share an auto scaling configuration across multiple services. Create multiple revisions of a configuration by using the same AutoScalingConfigurationName and different AutoScalingConfigurationRevision values. When you create a service, you can set it to use the latest active revision of an auto scaling configuration or a specific revision. Configure a higher MinSize to increase the spread of your App Runner service over more Availability Zones in the Amazon Web Services Region. The tradeoff is a higher minimal cost. Configure a lower MaxSize to control your cost. The tradeoff is lower responsiveness during peak demand.
+   * Create an App Runner automatic scaling configuration resource. App Runner requires this resource when you create App Runner services that require non-default auto scaling settings. You can share an auto scaling configuration across multiple services. Create multiple revisions of a configuration by calling this action multiple times using the same AutoScalingConfigurationName. The call returns incremental AutoScalingConfigurationRevision values. When you create a service, you can set it to use the latest active revision of an auto scaling configuration or a specific revision. Configure a higher MinSize to increase the spread of your App Runner service over more Availability Zones in the Amazon Web Services Region. The tradeoff is a higher minimal cost. Configure a lower MaxSize to control your cost. The tradeoff is lower responsiveness during peak demand.
    */
   createAutoScalingConfiguration(params: AppRunner.Types.CreateAutoScalingConfigurationRequest, callback?: (err: AWSError, data: AppRunner.Types.CreateAutoScalingConfigurationResponse) => void): Request<AppRunner.Types.CreateAutoScalingConfigurationResponse, AWSError>;
   /**
-   * Create an App Runner automatic scaling configuration resource. App Runner requires this resource when you create App Runner services that require non-default auto scaling settings. You can share an auto scaling configuration across multiple services. Create multiple revisions of a configuration by using the same AutoScalingConfigurationName and different AutoScalingConfigurationRevision values. When you create a service, you can set it to use the latest active revision of an auto scaling configuration or a specific revision. Configure a higher MinSize to increase the spread of your App Runner service over more Availability Zones in the Amazon Web Services Region. The tradeoff is a higher minimal cost. Configure a lower MaxSize to control your cost. The tradeoff is lower responsiveness during peak demand.
+   * Create an App Runner automatic scaling configuration resource. App Runner requires this resource when you create App Runner services that require non-default auto scaling settings. You can share an auto scaling configuration across multiple services. Create multiple revisions of a configuration by calling this action multiple times using the same AutoScalingConfigurationName. The call returns incremental AutoScalingConfigurationRevision values. When you create a service, you can set it to use the latest active revision of an auto scaling configuration or a specific revision. Configure a higher MinSize to increase the spread of your App Runner service over more Availability Zones in the Amazon Web Services Region. The tradeoff is a higher minimal cost. Configure a lower MaxSize to control your cost. The tradeoff is lower responsiveness during peak demand.
    */
   createAutoScalingConfiguration(callback?: (err: AWSError, data: AppRunner.Types.CreateAutoScalingConfigurationResponse) => void): Request<AppRunner.Types.CreateAutoScalingConfigurationResponse, AWSError>;
   /**
@@ -43,6 +43,14 @@ declare class AppRunner extends Service {
    * Create an App Runner service. After the service is created, the action also automatically starts a deployment. This is an asynchronous operation. On a successful call, you can use the returned OperationId and the ListOperations call to track the operation's progress.
    */
   createService(callback?: (err: AWSError, data: AppRunner.Types.CreateServiceResponse) => void): Request<AppRunner.Types.CreateServiceResponse, AWSError>;
+  /**
+   * Create an App Runner VPC connector resource. App Runner requires this resource when you want to associate your App Runner service to a custom Amazon Virtual Private Cloud (Amazon VPC).
+   */
+  createVpcConnector(params: AppRunner.Types.CreateVpcConnectorRequest, callback?: (err: AWSError, data: AppRunner.Types.CreateVpcConnectorResponse) => void): Request<AppRunner.Types.CreateVpcConnectorResponse, AWSError>;
+  /**
+   * Create an App Runner VPC connector resource. App Runner requires this resource when you want to associate your App Runner service to a custom Amazon Virtual Private Cloud (Amazon VPC).
+   */
+  createVpcConnector(callback?: (err: AWSError, data: AppRunner.Types.CreateVpcConnectorResponse) => void): Request<AppRunner.Types.CreateVpcConnectorResponse, AWSError>;
   /**
    * Delete an App Runner automatic scaling configuration resource. You can delete a specific revision or the latest active revision. You can't delete a configuration that's used by one or more App Runner services.
    */
@@ -68,6 +76,14 @@ declare class AppRunner extends Service {
    */
   deleteService(callback?: (err: AWSError, data: AppRunner.Types.DeleteServiceResponse) => void): Request<AppRunner.Types.DeleteServiceResponse, AWSError>;
   /**
+   * Delete an App Runner VPC connector resource. You can't delete a connector that's used by one or more App Runner services.
+   */
+  deleteVpcConnector(params: AppRunner.Types.DeleteVpcConnectorRequest, callback?: (err: AWSError, data: AppRunner.Types.DeleteVpcConnectorResponse) => void): Request<AppRunner.Types.DeleteVpcConnectorResponse, AWSError>;
+  /**
+   * Delete an App Runner VPC connector resource. You can't delete a connector that's used by one or more App Runner services.
+   */
+  deleteVpcConnector(callback?: (err: AWSError, data: AppRunner.Types.DeleteVpcConnectorResponse) => void): Request<AppRunner.Types.DeleteVpcConnectorResponse, AWSError>;
+  /**
    * Return a full description of an App Runner automatic scaling configuration resource.
    */
   describeAutoScalingConfiguration(params: AppRunner.Types.DescribeAutoScalingConfigurationRequest, callback?: (err: AWSError, data: AppRunner.Types.DescribeAutoScalingConfigurationResponse) => void): Request<AppRunner.Types.DescribeAutoScalingConfigurationResponse, AWSError>;
@@ -91,6 +107,14 @@ declare class AppRunner extends Service {
    * Return a full description of an App Runner service.
    */
   describeService(callback?: (err: AWSError, data: AppRunner.Types.DescribeServiceResponse) => void): Request<AppRunner.Types.DescribeServiceResponse, AWSError>;
+  /**
+   * Return a description of an App Runner VPC connector resource.
+   */
+  describeVpcConnector(params: AppRunner.Types.DescribeVpcConnectorRequest, callback?: (err: AWSError, data: AppRunner.Types.DescribeVpcConnectorResponse) => void): Request<AppRunner.Types.DescribeVpcConnectorResponse, AWSError>;
+  /**
+   * Return a description of an App Runner VPC connector resource.
+   */
+  describeVpcConnector(callback?: (err: AWSError, data: AppRunner.Types.DescribeVpcConnectorResponse) => void): Request<AppRunner.Types.DescribeVpcConnectorResponse, AWSError>;
   /**
    * Disassociate a custom domain name from an App Runner service. Certificates tracking domain validity are associated with a custom domain and are stored in AWS Certificate Manager (ACM). These certificates aren't deleted as part of this action. App Runner delays certificate deletion for 30 days after a domain is disassociated from your service.
    */
@@ -139,6 +163,14 @@ declare class AppRunner extends Service {
    * List tags that are associated with for an App Runner resource. The response contains a list of tag key-value pairs.
    */
   listTagsForResource(callback?: (err: AWSError, data: AppRunner.Types.ListTagsForResourceResponse) => void): Request<AppRunner.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Returns a list of App Runner VPC connectors in your Amazon Web Services account.
+   */
+  listVpcConnectors(params: AppRunner.Types.ListVpcConnectorsRequest, callback?: (err: AWSError, data: AppRunner.Types.ListVpcConnectorsResponse) => void): Request<AppRunner.Types.ListVpcConnectorsResponse, AWSError>;
+  /**
+   * Returns a list of App Runner VPC connectors in your Amazon Web Services account.
+   */
+  listVpcConnectors(callback?: (err: AWSError, data: AppRunner.Types.ListVpcConnectorsResponse) => void): Request<AppRunner.Types.ListVpcConnectorsResponse, AWSError>;
   /**
    * Pause an active App Runner service. App Runner reduces compute capacity for the service to zero and loses state (for example, ephemeral storage is removed). This is an asynchronous operation. On a successful call, you can use the returned OperationId and the ListOperations call to track the operation's progress.
    */
@@ -409,7 +441,7 @@ declare namespace AppRunner {
   export type Cpu = string;
   export interface CreateAutoScalingConfigurationRequest {
     /**
-     * A name for the auto scaling configuration. When you use it for the first time in an Amazon Web Services Region, App Runner creates revision number 1 of this name. When you use the same name in subsequent calls, App Runner creates incremental revisions of the configuration.
+     * A name for the auto scaling configuration. When you use it for the first time in an Amazon Web Services Region, App Runner creates revision number 1 of this name. When you use the same name in subsequent calls, App Runner creates incremental revisions of the configuration.  The name DefaultConfiguration is reserved (it's the configuration that App Runner uses if you don't provide a custome one). You can't use it to create a new auto scaling configuration, and you can't create a revision of it. When you want to use your own auto scaling configuration for your App Runner service, create a configuration with a different name, and then provide it when you create or update your service. 
      */
     AutoScalingConfigurationName: AutoScalingConfigurationName;
     /**
@@ -457,7 +489,7 @@ declare namespace AppRunner {
   }
   export interface CreateServiceRequest {
     /**
-     * A name for the new service. It must be unique across all the running App Runner services in your Amazon Web Services account in the Amazon Web Services Region.
+     * A name for the App Runner service. It must be unique across all the running App Runner services in your Amazon Web Services account in the Amazon Web Services Region.
      */
     ServiceName: ServiceName;
     /**
@@ -469,21 +501,25 @@ declare namespace AppRunner {
      */
     InstanceConfiguration?: InstanceConfiguration;
     /**
-     * An optional list of metadata items that you can associate with your service resource. A tag is a key-value pair.
+     * An optional list of metadata items that you can associate with the App Runner service resource. A tag is a key-value pair.
      */
     Tags?: TagList;
     /**
-     * An optional custom encryption key that App Runner uses to encrypt the copy of your source repository that it maintains and your service logs. By default, App Runner uses an Amazon Web Services managed CMK.
+     * An optional custom encryption key that App Runner uses to encrypt the copy of your source repository that it maintains and your service logs. By default, App Runner uses an Amazon Web Services managed key.
      */
     EncryptionConfiguration?: EncryptionConfiguration;
     /**
-     * The settings for the health check that App Runner performs to monitor the health of your service.
+     * The settings for the health check that App Runner performs to monitor the health of the App Runner service.
      */
     HealthCheckConfiguration?: HealthCheckConfiguration;
     /**
-     * The Amazon Resource Name (ARN) of an App Runner automatic scaling configuration resource that you want to associate with your service. If not provided, App Runner associates the latest revision of a default auto scaling configuration.
+     * The Amazon Resource Name (ARN) of an App Runner automatic scaling configuration resource that you want to associate with the App Runner service. If not provided, App Runner associates the latest revision of a default auto scaling configuration.
      */
     AutoScalingConfigurationArn?: AppRunnerResourceArn;
+    /**
+     * Configuration settings related to network traffic of the web application that the App Runner service runs.
+     */
+    NetworkConfiguration?: NetworkConfiguration;
   }
   export interface CreateServiceResponse {
     /**
@@ -494,6 +530,30 @@ declare namespace AppRunner {
      * The unique ID of the asynchronous operation that this request started. You can use it combined with the ListOperations call to track the operation's progress.
      */
     OperationId: UUID;
+  }
+  export interface CreateVpcConnectorRequest {
+    /**
+     * A name for the VPC connector.
+     */
+    VpcConnectorName: VpcConnectorName;
+    /**
+     * A list of IDs of subnets that App Runner should use when it associates your service with a custom Amazon VPC. Specify IDs of subnets of a single Amazon VPC. App Runner determines the Amazon VPC from the subnets you specify.
+     */
+    Subnets: StringList;
+    /**
+     * A list of IDs of security groups that App Runner should use for access to Amazon Web Services resources under the specified subnets. If not specified, App Runner uses the default security group of the Amazon VPC. The default security group allows all outbound traffic.
+     */
+    SecurityGroups?: StringList;
+    /**
+     * A list of metadata items that you can associate with your VPC connector resource. A tag is a key-value pair.
+     */
+    Tags?: TagList;
+  }
+  export interface CreateVpcConnectorResponse {
+    /**
+     * A description of the App Runner VPC connector that's created by this request.
+     */
+    VpcConnector: VpcConnector;
   }
   export interface CustomDomain {
     /**
@@ -555,6 +615,18 @@ declare namespace AppRunner {
      */
     OperationId: UUID;
   }
+  export interface DeleteVpcConnectorRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the App Runner VPC connector that you want to delete. The ARN must be a full VPC connector ARN.
+     */
+    VpcConnectorArn: AppRunnerResourceArn;
+  }
+  export interface DeleteVpcConnectorResponse {
+    /**
+     * A description of the App Runner VPC connector that this request just deleted.
+     */
+    VpcConnector: VpcConnector;
+  }
   export interface DescribeAutoScalingConfigurationRequest {
     /**
      * The Amazon Resource Name (ARN) of the App Runner auto scaling configuration that you want a description for. The ARN can be a full auto scaling configuration ARN, or a partial ARN ending with either .../name  or .../name/revision . If a revision isn't specified, the latest active revision is described.
@@ -612,6 +684,18 @@ declare namespace AppRunner {
      */
     Service: Service;
   }
+  export interface DescribeVpcConnectorRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the App Runner VPC connector that you want a description for. The ARN must be a full VPC connector ARN.
+     */
+    VpcConnectorArn: AppRunnerResourceArn;
+  }
+  export interface DescribeVpcConnectorResponse {
+    /**
+     * A description of the App Runner VPC connector that you specified in this request.
+     */
+    VpcConnector: VpcConnector;
+  }
   export interface DisassociateCustomDomainRequest {
     /**
      * The Amazon Resource Name (ARN) of the App Runner service that you want to disassociate a custom domain name from.
@@ -637,6 +721,17 @@ declare namespace AppRunner {
     CustomDomain: CustomDomain;
   }
   export type DomainName = string;
+  export interface EgressConfiguration {
+    /**
+     * The type of egress configuration. Set to DEFAULT for access to resources hosted on public networks. Set to VPC to associate your service to a custom VPC specified by VpcConnectorArn.
+     */
+    EgressType?: EgressType;
+    /**
+     * The Amazon Resource Name (ARN) of the App Runner VPC connector that you want to associate with your App Runner service. Only valid when EgressType = VPC.
+     */
+    VpcConnectorArn?: AppRunnerResourceArn;
+  }
+  export type EgressType = "DEFAULT"|"VPC"|string;
   export interface EncryptionConfiguration {
     /**
      * The ARN of the KMS key that's used for encryption.
@@ -683,7 +778,7 @@ declare namespace AppRunner {
     /**
      * An optional command that App Runner runs to start the application in the source image. If specified, this command overrides the Docker image’s default start command.
      */
-    StartCommand?: String;
+    StartCommand?: StartCommand;
     /**
      * The port that your application listens to in the container. Default: 8080 
      */
@@ -830,8 +925,34 @@ declare namespace AppRunner {
      */
     Tags?: TagList;
   }
+  export interface ListVpcConnectorsRequest {
+    /**
+     * The maximum number of results to include in each response (result page). It's used for a paginated request. If you don't specify MaxResults, the request retrieves all available results in a single response.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * A token from a previous result page. It's used for a paginated request. The request retrieves the next result page. All other parameter values must be identical to the ones that are specified in the initial request. If you don't specify NextToken, the request retrieves the first result page.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListVpcConnectorsResponse {
+    /**
+     * A list of information records for VPC connectors. In a paginated request, the request returns up to MaxResults records for each call.
+     */
+    VpcConnectors: VpcConnectors;
+    /**
+     * The token that you can pass in a subsequent request to get the next result page. It's returned in a paginated request.
+     */
+    NextToken?: NextToken;
+  }
   export type MaxResults = number;
   export type Memory = string;
+  export interface NetworkConfiguration {
+    /**
+     * Network configuration settings for outbound message traffic.
+     */
+    EgressConfiguration?: EgressConfiguration;
+  }
   export type NextToken = string;
   export type NullableBoolean = boolean;
   export type OperationStatus = "PENDING"|"IN_PROGRESS"|"FAILED"|"SUCCEEDED"|"ROLLBACK_IN_PROGRESS"|"ROLLBACK_FAILED"|"ROLLBACK_SUCCEEDED"|string;
@@ -947,7 +1068,7 @@ declare namespace AppRunner {
      */
     InstanceConfiguration: InstanceConfiguration;
     /**
-     * The encryption key that App Runner uses to encrypt the service logs and the copy of the source repository that App Runner maintains for the service. It can be either a customer-provided encryption key or an Amazon Web Services managed CMK.
+     * The encryption key that App Runner uses to encrypt the service logs and the copy of the source repository that App Runner maintains for the service. It can be either a customer-provided encryption key or an Amazon Web Services managed key.
      */
     EncryptionConfiguration?: EncryptionConfiguration;
     /**
@@ -958,6 +1079,10 @@ declare namespace AppRunner {
      * Summary information for the App Runner automatic scaling configuration resource that's associated with this service.
      */
     AutoScalingConfigurationSummary: AutoScalingConfigurationSummary;
+    /**
+     * Configuration settings related to network traffic of the web application that this service runs.
+     */
+    NetworkConfiguration: NetworkConfiguration;
   }
   export type ServiceId = string;
   export type ServiceMaxResults = number;
@@ -1037,6 +1162,7 @@ declare namespace AppRunner {
     OperationId: UUID;
   }
   export type String = string;
+  export type StringList = String[];
   export interface Tag {
     /**
      * The key of the tag.
@@ -1091,13 +1217,17 @@ declare namespace AppRunner {
      */
     InstanceConfiguration?: InstanceConfiguration;
     /**
-     * The Amazon Resource Name (ARN) of an App Runner automatic scaling configuration resource that you want to associate with your service.
+     * The Amazon Resource Name (ARN) of an App Runner automatic scaling configuration resource that you want to associate with the App Runner service.
      */
     AutoScalingConfigurationArn?: AppRunnerResourceArn;
     /**
-     * The settings for the health check that App Runner performs to monitor the health of your service.
+     * The settings for the health check that App Runner performs to monitor the health of the App Runner service.
      */
     HealthCheckConfiguration?: HealthCheckConfiguration;
+    /**
+     * Configuration settings related to network traffic of the web application that the App Runner service runs.
+     */
+    NetworkConfiguration?: NetworkConfiguration;
   }
   export interface UpdateServiceResponse {
     /**
@@ -1109,6 +1239,43 @@ declare namespace AppRunner {
      */
     OperationId: UUID;
   }
+  export interface VpcConnector {
+    /**
+     * The customer-provided VPC connector name.
+     */
+    VpcConnectorName?: VpcConnectorName;
+    /**
+     * The Amazon Resource Name (ARN) of this VPC connector.
+     */
+    VpcConnectorArn?: AppRunnerResourceArn;
+    /**
+     * The revision of this VPC connector. It's unique among all the active connectors ("Status": "ACTIVE") that share the same Name.  At this time, App Runner supports only one revision per name. 
+     */
+    VpcConnectorRevision?: Integer;
+    /**
+     * A list of IDs of subnets that App Runner uses for your service. All IDs are of subnets of a single Amazon VPC.
+     */
+    Subnets?: StringList;
+    /**
+     * A list of IDs of security groups that App Runner uses for access to Amazon Web Services resources under the specified subnets. If not specified, App Runner uses the default security group of the Amazon VPC. The default security group allows all outbound traffic.
+     */
+    SecurityGroups?: StringList;
+    /**
+     * The current state of the VPC connector. If the status of a connector revision is INACTIVE, it was deleted and can't be used. Inactive connector revisions are permanently removed some time after they are deleted.
+     */
+    Status?: VpcConnectorStatus;
+    /**
+     * The time when the VPC connector was created. It's in Unix time stamp format.
+     */
+    CreatedAt?: Timestamp;
+    /**
+     * The time when the VPC connector was deleted. It's in Unix time stamp format.
+     */
+    DeletedAt?: Timestamp;
+  }
+  export type VpcConnectorName = string;
+  export type VpcConnectorStatus = "ACTIVE"|"INACTIVE"|string;
+  export type VpcConnectors = VpcConnector[];
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

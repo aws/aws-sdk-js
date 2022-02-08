@@ -325,11 +325,11 @@ declare class S3Control extends Service {
    */
   listAccessPoints(callback?: (err: AWSError, data: S3Control.Types.ListAccessPointsResult) => void): Request<S3Control.Types.ListAccessPointsResult, AWSError>;
   /**
-   * Returns a list of the access points associated with the Object Lambda Access Point. You can retrieve up to 1000 access points per call. If there are more than 1,000 access points (or the number specified in maxResults, whichever is less), the response will include a continuation token that you can use to list the additional access points. The following actions are related to ListAccessPointsForObjectLambda:    CreateAccessPointForObjectLambda     DeleteAccessPointForObjectLambda     GetAccessPointForObjectLambda   
+   * Returns some or all (up to 1,000) access points associated with the Object Lambda Access Point per call. If there are more access points than what can be returned in one call, the response will include a continuation token that you can use to list the additional access points. The following actions are related to ListAccessPointsForObjectLambda:    CreateAccessPointForObjectLambda     DeleteAccessPointForObjectLambda     GetAccessPointForObjectLambda   
    */
   listAccessPointsForObjectLambda(params: S3Control.Types.ListAccessPointsForObjectLambdaRequest, callback?: (err: AWSError, data: S3Control.Types.ListAccessPointsForObjectLambdaResult) => void): Request<S3Control.Types.ListAccessPointsForObjectLambdaResult, AWSError>;
   /**
-   * Returns a list of the access points associated with the Object Lambda Access Point. You can retrieve up to 1000 access points per call. If there are more than 1,000 access points (or the number specified in maxResults, whichever is less), the response will include a continuation token that you can use to list the additional access points. The following actions are related to ListAccessPointsForObjectLambda:    CreateAccessPointForObjectLambda     DeleteAccessPointForObjectLambda     GetAccessPointForObjectLambda   
+   * Returns some or all (up to 1,000) access points associated with the Object Lambda Access Point per call. If there are more access points than what can be returned in one call, the response will include a continuation token that you can use to list the additional access points. The following actions are related to ListAccessPointsForObjectLambda:    CreateAccessPointForObjectLambda     DeleteAccessPointForObjectLambda     GetAccessPointForObjectLambda   
    */
   listAccessPointsForObjectLambda(callback?: (err: AWSError, data: S3Control.Types.ListAccessPointsForObjectLambdaResult) => void): Request<S3Control.Types.ListAccessPointsForObjectLambdaResult, AWSError>;
   /**
@@ -429,11 +429,11 @@ declare class S3Control extends Service {
    */
   putMultiRegionAccessPointPolicy(callback?: (err: AWSError, data: S3Control.Types.PutMultiRegionAccessPointPolicyResult) => void): Request<S3Control.Types.PutMultiRegionAccessPointPolicyResult, AWSError>;
   /**
-   * Creates or modifies the PublicAccessBlock configuration for an Amazon Web Services account. For more information, see  Using Amazon S3 block public access. Related actions include:    GetPublicAccessBlock     DeletePublicAccessBlock   
+   * Creates or modifies the PublicAccessBlock configuration for an Amazon Web Services account. For this operation, users must have the s3:PutBucketPublicAccessBlock permission. For more information, see  Using Amazon S3 block public access. Related actions include:    GetPublicAccessBlock     DeletePublicAccessBlock   
    */
   putPublicAccessBlock(params: S3Control.Types.PutPublicAccessBlockRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Creates or modifies the PublicAccessBlock configuration for an Amazon Web Services account. For more information, see  Using Amazon S3 block public access. Related actions include:    GetPublicAccessBlock     DeletePublicAccessBlock   
+   * Creates or modifies the PublicAccessBlock configuration for an Amazon Web Services account. For this operation, users must have the s3:PutBucketPublicAccessBlock permission. For more information, see  Using Amazon S3 block public access. Related actions include:    GetPublicAccessBlock     DeletePublicAccessBlock   
    */
   putPublicAccessBlock(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -765,7 +765,7 @@ declare namespace S3Control {
     /**
      * Configuration parameters for the manifest.
      */
-    Manifest: JobManifest;
+    Manifest?: JobManifest;
     /**
      * A description for this job. You can use any string within the permitted length. Descriptions don't need to be unique and can be used for multiple jobs.
      */
@@ -782,6 +782,10 @@ declare namespace S3Control {
      * A set of tags to associate with the S3 Batch Operations job. This is an optional parameter. 
      */
     Tags?: S3TagSet;
+    /**
+     * The attribute container for the ManifestGenerator details. Jobs must be created with either a manifest file or a ManifestGenerator, but not both.
+     */
+    ManifestGenerator?: JobManifestGenerator;
   }
   export interface CreateJobResult {
     /**
@@ -1024,6 +1028,17 @@ declare namespace S3Control {
   export type ExpiredObjectDeleteMarker = boolean;
   export type Format = "CSV"|"Parquet"|string;
   export type FunctionArnString = string;
+  export interface GeneratedManifestEncryption {
+    /**
+     * Specifies the use of SSE-S3 to encrypt generated manifest objects.
+     */
+    SSES3?: SSES3Encryption;
+    /**
+     * Configuration details on how SSE-KMS is used to encrypt generated manifest objects.
+     */
+    SSEKMS?: SSEKMSEncryption;
+  }
+  export type GeneratedManifestFormat = "S3InventoryReport_CSV_20211130"|string;
   export interface GetAccessPointConfigurationForObjectLambdaRequest {
     /**
      * The account ID for the account that owns the specified Object Lambda Access Point.
@@ -1437,6 +1452,14 @@ declare namespace S3Control {
      * The reason why the specified job was suspended. A job is only suspended if you create it through the Amazon S3 console. When you create the job, it enters the Suspended state to await confirmation before running. After you confirm the job, it automatically exits the Suspended state.
      */
     SuspendedCause?: SuspendedCause;
+    /**
+     * The manifest generator that was used to generate a job manifest for this job.
+     */
+    ManifestGenerator?: JobManifestGenerator;
+    /**
+     * The attribute of the JobDescriptor containing details about the job's generated manifest.
+     */
+    GeneratedManifestDescriptor?: S3GeneratedManifestDescriptor;
   }
   export interface JobFailure {
     /**
@@ -1500,6 +1523,30 @@ declare namespace S3Control {
   export type JobManifestFieldList = JobManifestFieldName[];
   export type JobManifestFieldName = "Ignore"|"Bucket"|"Key"|"VersionId"|string;
   export type JobManifestFormat = "S3BatchOperations_CSV_20180820"|"S3InventoryReport_CSV_20161130"|string;
+  export interface JobManifestGenerator {
+    /**
+     * The S3 job ManifestGenerator's configuration details.
+     */
+    S3JobManifestGenerator?: S3JobManifestGenerator;
+  }
+  export interface JobManifestGeneratorFilter {
+    /**
+     * Include objects in the generated manifest only if they are eligible for replication according to the Replication configuration on the source bucket.
+     */
+    EligibleForReplication?: Boolean;
+    /**
+     * If provided, the generated manifest should include only source bucket objects that were created after this time.
+     */
+    CreatedAfter?: ObjectCreationTime;
+    /**
+     * If provided, the generated manifest should include only source bucket objects that were created before this time.
+     */
+    CreatedBefore?: ObjectCreationTime;
+    /**
+     * If provided, the generated manifest should include only source bucket objects that have one of the specified Replication statuses.
+     */
+    ObjectReplicationStatuses?: ReplicationStatusFilterList;
+  }
   export interface JobManifestLocation {
     /**
      * The Amazon Resource Name (ARN) for a manifest object.  Replacement must be made for object keys containing special characters (such as carriage returns) when using XML requests. For more information, see  XML related object key constraints. 
@@ -1553,6 +1600,10 @@ declare namespace S3Control {
     S3InitiateRestoreObject?: S3InitiateRestoreObjectOperation;
     S3PutObjectLegalHold?: S3SetObjectLegalHoldOperation;
     S3PutObjectRetention?: S3SetObjectRetentionOperation;
+    /**
+     * Directs the specified job to invoke ReplicateObject on every object in the job's manifest.
+     */
+    S3ReplicateObject?: S3ReplicateObjectOperation;
   }
   export type JobPriority = number;
   export interface JobProgressSummary {
@@ -1568,6 +1619,10 @@ declare namespace S3Control {
      * 
      */
     NumberOfTasksFailed?: JobNumberOfTasksFailed;
+    /**
+     * The JobTimers attribute of a job's progress summary.
+     */
+    Timers?: JobTimers;
   }
   export interface JobReport {
     /**
@@ -1597,6 +1652,13 @@ declare namespace S3Control {
   export type JobStatusList = JobStatus[];
   export type JobStatusUpdateReason = string;
   export type JobTerminationDate = Date;
+  export type JobTimeInStateSeconds = number;
+  export interface JobTimers {
+    /**
+     * Indicates the elapsed time in seconds the job has been in the Active job state.
+     */
+    ElapsedTimeInActiveSeconds?: JobTimeInStateSeconds;
+  }
   export type JobTotalNumberOfTasks = number;
   export type KmsKeyArnString = string;
   export interface LambdaInvokeOperation {
@@ -1691,7 +1753,7 @@ declare namespace S3Control {
      */
     NextToken?: NonEmptyMaxLength1024String;
     /**
-     * The maximum number of access points that you want to include in the list. If there are more than this number of access points, then the response will include a continuation token in the NextToken field that you can use to retrieve the next page of access points.
+     * The maximum number of access points that you want to include in the list. The response may contain fewer access points but will never contain more. If there are more than this number of access points, then the response will include a continuation token in the NextToken field that you can use to retrieve the next page of access points.
      */
     MaxResults?: MaxResults;
   }
@@ -1852,6 +1914,7 @@ declare namespace S3Control {
     StorageLensConfigurationList?: StorageLensConfigurationList;
   }
   export type Location = string;
+  export type ManifestPrefixString = string;
   export type MaxLength1024String = string;
   export type MaxResults = number;
   export type MinStorageBytesPercentage = number;
@@ -1932,6 +1995,7 @@ declare namespace S3Control {
     StorageClass?: TransitionStorageClass;
   }
   export type NoncurrentVersionTransitionList = NoncurrentVersionTransition[];
+  export type ObjectCreationTime = Date;
   export interface ObjectLambdaAccessPoint {
     /**
      * The name of the Object Lambda Access Point.
@@ -1987,7 +2051,7 @@ declare namespace S3Control {
   export type ObjectLambdaTransformationConfigurationActionsList = ObjectLambdaTransformationConfigurationAction[];
   export type ObjectLambdaTransformationConfigurationsList = ObjectLambdaTransformationConfiguration[];
   export type ObjectLockEnabledForBucket = boolean;
-  export type OperationName = "LambdaInvoke"|"S3PutObjectCopy"|"S3PutObjectAcl"|"S3PutObjectTagging"|"S3DeleteObjectTagging"|"S3InitiateRestoreObject"|"S3PutObjectLegalHold"|"S3PutObjectRetention"|string;
+  export type OperationName = "LambdaInvoke"|"S3PutObjectCopy"|"S3PutObjectAcl"|"S3PutObjectTagging"|"S3DeleteObjectTagging"|"S3InitiateRestoreObject"|"S3PutObjectLegalHold"|"S3PutObjectRetention"|"S3ReplicateObject"|string;
   export type OutputSchemaVersion = "V_1"|string;
   export type Policy = string;
   export interface PolicyStatus {
@@ -2256,6 +2320,8 @@ declare namespace S3Control {
   }
   export type RegionalBucketList = RegionalBucket[];
   export type Regions = S3AWSRegion[];
+  export type ReplicationStatus = "COMPLETED"|"FAILED"|"REPLICA"|"NONE"|string;
+  export type ReplicationStatusFilterList = ReplicationStatus[];
   export type ReportPrefixString = string;
   export type RequestedJobStatus = "Cancelled"|"Ready"|string;
   export type S3AWSRegion = string;
@@ -2331,7 +2397,7 @@ declare namespace S3Control {
      */
     ModifiedSinceConstraint?: TimeStamp;
     /**
-     * 
+     * If you don't provide this parameter, Amazon S3 copies all the metadata from the original objects. If you specify an empty set, the new objects will have no tags. Otherwise, Amazon S3 assigns the supplied tags to the new objects.
      */
     NewObjectMetadata?: S3ObjectMetadata;
     /**
@@ -2382,6 +2448,13 @@ declare namespace S3Control {
   export interface S3DeleteObjectTaggingOperation {
   }
   export type S3ExpirationInDays = number;
+  export interface S3GeneratedManifestDescriptor {
+    /**
+     * The format of the generated manifest.
+     */
+    Format?: GeneratedManifestFormat;
+    Location?: JobManifestLocation;
+  }
   export type S3GlacierJobTier = "BULK"|"STANDARD"|string;
   export interface S3Grant {
     /**
@@ -2411,7 +2484,7 @@ declare namespace S3Control {
   export type S3GranteeTypeIdentifier = "id"|"emailAddress"|"uri"|string;
   export interface S3InitiateRestoreObjectOperation {
     /**
-     * This argument specifies how long the S3 Glacier Flexible Retrieval or S3 Glacier Deep Archive object remains available in Amazon S3. S3 Initiate Restore Object jobs that target S3 Glacier Flexible Retrieval and S3 Glacier Deep Archive objects require ExpirationInDays set to 1 or greater. Conversely, do not set ExpirationInDays when creating S3 Initiate Restore Object jobs that target S3 Intelligent-Tiering Archive Access and Deep Archive Access tier objects. Objects in S3 Intelligent-Tiering archive access tiers are not subject to restore expiry, so specifying ExpirationInDays results in restore request failure. S3 Batch Operations jobs can operate either on S3 Glacier Flexible Retrieval and S3 Glacier Deep Archive storage class objects or on S3 Intelligent-Tiering Archive Access and Deep Archive Access storage tier objects, but not both types in the same job. If you need to restore objects of both types you must create separate Batch Operations jobs. 
+     * This argument specifies how long the S3 Glacier or S3 Glacier Deep Archive object remains available in Amazon S3. S3 Initiate Restore Object jobs that target S3 Glacier and S3 Glacier Deep Archive objects require ExpirationInDays set to 1 or greater. Conversely, do not set ExpirationInDays when creating S3 Initiate Restore Object jobs that target S3 Intelligent-Tiering Archive Access and Deep Archive Access tier objects. Objects in S3 Intelligent-Tiering archive access tiers are not subject to restore expiry, so specifying ExpirationInDays results in restore request failure. S3 Batch Operations jobs can operate either on S3 Glacier and S3 Glacier Deep Archive storage class objects or on S3 Intelligent-Tiering Archive Access and Deep Archive Access storage tier objects, but not both types in the same job. If you need to restore objects of both types you must create separate Batch Operations jobs. 
      */
     ExpirationInDays?: S3ExpirationInDays;
     /**
@@ -2419,7 +2492,51 @@ declare namespace S3Control {
      */
     GlacierJobTier?: S3GlacierJobTier;
   }
+  export interface S3JobManifestGenerator {
+    /**
+     * The Amazon Web Services account ID that owns the bucket the generated manifest is written to. If provided the generated manifest bucket's owner Amazon Web Services account ID must match this value, else the job fails.
+     */
+    ExpectedBucketOwner?: AccountId;
+    /**
+     * The source bucket used by the ManifestGenerator.
+     */
+    SourceBucket: S3BucketArnString;
+    /**
+     * Specifies the location the generated manifest will be written to.
+     */
+    ManifestOutputLocation?: S3ManifestOutputLocation;
+    /**
+     * Specifies rules the S3JobManifestGenerator should use to use to decide whether an object in the source bucket should or should not be included in the generated job manifest.
+     */
+    Filter?: JobManifestGeneratorFilter;
+    /**
+     * Determines whether or not to write the job's generated manifest to a bucket.
+     */
+    EnableManifestOutput: Boolean;
+  }
   export type S3KeyArnString = string;
+  export interface S3ManifestOutputLocation {
+    /**
+     * The Account ID that owns the bucket the generated manifest is written to.
+     */
+    ExpectedManifestBucketOwner?: AccountId;
+    /**
+     * The bucket ARN the generated manifest should be written to.
+     */
+    Bucket: S3BucketArnString;
+    /**
+     * Prefix identifying one or more objects to which the manifest applies.
+     */
+    ManifestPrefix?: ManifestPrefixString;
+    /**
+     * Specifies what encryption should be used when the generated manifest objects are written.
+     */
+    ManifestEncryption?: GeneratedManifestEncryption;
+    /**
+     * The format of the generated manifest.
+     */
+    ManifestFormat: GeneratedManifestFormat;
+  }
   export type S3MetadataDirective = "COPY"|"REPLACE"|string;
   export interface S3ObjectLockLegalHold {
     /**
@@ -2489,6 +2606,8 @@ declare namespace S3Control {
   export type S3ObjectVersionId = string;
   export type S3Permission = "FULL_CONTROL"|"READ"|"WRITE"|"READ_ACP"|"WRITE_ACP"|string;
   export type S3RegionalBucketArn = string;
+  export interface S3ReplicateObjectOperation {
+  }
   export interface S3Retention {
     /**
      * The date when the applied Object Lock retention will expire on all objects set by the Batch Operations job.
@@ -2528,7 +2647,7 @@ declare namespace S3Control {
      */
     TagSet?: S3TagSet;
   }
-  export type S3StorageClass = "STANDARD"|"STANDARD_IA"|"ONEZONE_IA"|"GLACIER"|"INTELLIGENT_TIERING"|"DEEP_ARCHIVE"|string;
+  export type S3StorageClass = "STANDARD"|"STANDARD_IA"|"ONEZONE_IA"|"GLACIER"|"INTELLIGENT_TIERING"|"DEEP_ARCHIVE"|"GLACIER_IR"|string;
   export interface S3Tag {
     /**
      * 
@@ -2547,8 +2666,16 @@ declare namespace S3Control {
      */
     KeyId: SSEKMSKeyId;
   }
+  export interface SSEKMSEncryption {
+    /**
+     * Specifies the ID of the Amazon Web Services Key Management Service (Amazon Web Services KMS) symmetric customer managed key to use for encrypting generated manifest objects.
+     */
+    KeyId: KmsKeyArnString;
+  }
   export type SSEKMSKeyId = string;
   export interface SSES3 {
+  }
+  export interface SSES3Encryption {
   }
   export interface SelectionCriteria {
     /**

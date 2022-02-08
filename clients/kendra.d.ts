@@ -28,27 +28,27 @@ declare class Kendra extends Service {
    */
   associatePersonasToEntities(callback?: (err: AWSError, data: Kendra.Types.AssociatePersonasToEntitiesResponse) => void): Request<Kendra.Types.AssociatePersonasToEntitiesResponse, AWSError>;
   /**
-   * Removes one or more documents from an index. The documents must have been added with the BatchPutDocument operation. The documents are deleted asynchronously. You can see the progress of the deletion by using Amazon Web Services CloudWatch. Any error messages related to the processing of the batch are sent to you CloudWatch log.
+   * Removes one or more documents from an index. The documents must have been added with the BatchPutDocument API. The documents are deleted asynchronously. You can see the progress of the deletion by using Amazon Web Services CloudWatch. Any error messages related to the processing of the batch are sent to you CloudWatch log.
    */
   batchDeleteDocument(params: Kendra.Types.BatchDeleteDocumentRequest, callback?: (err: AWSError, data: Kendra.Types.BatchDeleteDocumentResponse) => void): Request<Kendra.Types.BatchDeleteDocumentResponse, AWSError>;
   /**
-   * Removes one or more documents from an index. The documents must have been added with the BatchPutDocument operation. The documents are deleted asynchronously. You can see the progress of the deletion by using Amazon Web Services CloudWatch. Any error messages related to the processing of the batch are sent to you CloudWatch log.
+   * Removes one or more documents from an index. The documents must have been added with the BatchPutDocument API. The documents are deleted asynchronously. You can see the progress of the deletion by using Amazon Web Services CloudWatch. Any error messages related to the processing of the batch are sent to you CloudWatch log.
    */
   batchDeleteDocument(callback?: (err: AWSError, data: Kendra.Types.BatchDeleteDocumentResponse) => void): Request<Kendra.Types.BatchDeleteDocumentResponse, AWSError>;
   /**
-   * Returns the indexing status for one or more documents submitted with the  BatchPutDocument operation. When you use the BatchPutDocument operation, documents are indexed asynchronously. You can use the BatchGetDocumentStatus operation to get the current status of a list of documents so that you can determine if they have been successfully indexed. You can also use the BatchGetDocumentStatus operation to check the status of the  BatchDeleteDocument operation. When a document is deleted from the index, Amazon Kendra returns NOT_FOUND as the status.
+   * Returns the indexing status for one or more documents submitted with the  BatchPutDocument API. When you use the BatchPutDocument API, documents are indexed asynchronously. You can use the BatchGetDocumentStatus API to get the current status of a list of documents so that you can determine if they have been successfully indexed. You can also use the BatchGetDocumentStatus API to check the status of the  BatchDeleteDocument API. When a document is deleted from the index, Amazon Kendra returns NOT_FOUND as the status.
    */
   batchGetDocumentStatus(params: Kendra.Types.BatchGetDocumentStatusRequest, callback?: (err: AWSError, data: Kendra.Types.BatchGetDocumentStatusResponse) => void): Request<Kendra.Types.BatchGetDocumentStatusResponse, AWSError>;
   /**
-   * Returns the indexing status for one or more documents submitted with the  BatchPutDocument operation. When you use the BatchPutDocument operation, documents are indexed asynchronously. You can use the BatchGetDocumentStatus operation to get the current status of a list of documents so that you can determine if they have been successfully indexed. You can also use the BatchGetDocumentStatus operation to check the status of the  BatchDeleteDocument operation. When a document is deleted from the index, Amazon Kendra returns NOT_FOUND as the status.
+   * Returns the indexing status for one or more documents submitted with the  BatchPutDocument API. When you use the BatchPutDocument API, documents are indexed asynchronously. You can use the BatchGetDocumentStatus API to get the current status of a list of documents so that you can determine if they have been successfully indexed. You can also use the BatchGetDocumentStatus API to check the status of the  BatchDeleteDocument API. When a document is deleted from the index, Amazon Kendra returns NOT_FOUND as the status.
    */
   batchGetDocumentStatus(callback?: (err: AWSError, data: Kendra.Types.BatchGetDocumentStatusResponse) => void): Request<Kendra.Types.BatchGetDocumentStatusResponse, AWSError>;
   /**
-   * Adds one or more documents to an index. The BatchPutDocument operation enables you to ingest inline documents or a set of documents stored in an Amazon S3 bucket. Use this operation to ingest your text and unstructured text into an index, add custom attributes to the documents, and to attach an access control list to the documents added to the index. The documents are indexed asynchronously. You can see the progress of the batch using Amazon Web Services CloudWatch. Any error messages related to processing the batch are sent to your Amazon Web Services CloudWatch log.
+   * Adds one or more documents to an index. The BatchPutDocument API enables you to ingest inline documents or a set of documents stored in an Amazon S3 bucket. Use this API to ingest your text and unstructured text into an index, add custom attributes to the documents, and to attach an access control list to the documents added to the index. The documents are indexed asynchronously. You can see the progress of the batch using Amazon Web Services CloudWatch. Any error messages related to processing the batch are sent to your Amazon Web Services CloudWatch log.
    */
   batchPutDocument(params: Kendra.Types.BatchPutDocumentRequest, callback?: (err: AWSError, data: Kendra.Types.BatchPutDocumentResponse) => void): Request<Kendra.Types.BatchPutDocumentResponse, AWSError>;
   /**
-   * Adds one or more documents to an index. The BatchPutDocument operation enables you to ingest inline documents or a set of documents stored in an Amazon S3 bucket. Use this operation to ingest your text and unstructured text into an index, add custom attributes to the documents, and to attach an access control list to the documents added to the index. The documents are indexed asynchronously. You can see the progress of the batch using Amazon Web Services CloudWatch. Any error messages related to processing the batch are sent to your Amazon Web Services CloudWatch log.
+   * Adds one or more documents to an index. The BatchPutDocument API enables you to ingest inline documents or a set of documents stored in an Amazon S3 bucket. Use this API to ingest your text and unstructured text into an index, add custom attributes to the documents, and to attach an access control list to the documents added to the index. The documents are indexed asynchronously. You can see the progress of the batch using Amazon Web Services CloudWatch. Any error messages related to processing the batch are sent to your Amazon Web Services CloudWatch log.
    */
   batchPutDocument(callback?: (err: AWSError, data: Kendra.Types.BatchPutDocumentResponse) => void): Request<Kendra.Types.BatchPutDocumentResponse, AWSError>;
   /**
@@ -84,11 +84,11 @@ declare class Kendra extends Service {
    */
   createFaq(callback?: (err: AWSError, data: Kendra.Types.CreateFaqResponse) => void): Request<Kendra.Types.CreateFaqResponse, AWSError>;
   /**
-   * Creates a new Amazon Kendra index. Index creation is an asynchronous operation. To determine if index creation has completed, check the Status field returned from a call to DescribeIndex. The Status field is set to ACTIVE when the index is ready to use. Once the index is active you can index your documents using the BatchPutDocument operation or using one of the supported data sources. 
+   * Creates a new Amazon Kendra index. Index creation is an asynchronous API. To determine if index creation has completed, check the Status field returned from a call to DescribeIndex. The Status field is set to ACTIVE when the index is ready to use. Once the index is active you can index your documents using the BatchPutDocument API or using one of the supported data sources. 
    */
   createIndex(params: Kendra.Types.CreateIndexRequest, callback?: (err: AWSError, data: Kendra.Types.CreateIndexResponse) => void): Request<Kendra.Types.CreateIndexResponse, AWSError>;
   /**
-   * Creates a new Amazon Kendra index. Index creation is an asynchronous operation. To determine if index creation has completed, check the Status field returned from a call to DescribeIndex. The Status field is set to ACTIVE when the index is ready to use. Once the index is active you can index your documents using the BatchPutDocument operation or using one of the supported data sources. 
+   * Creates a new Amazon Kendra index. Index creation is an asynchronous API. To determine if index creation has completed, check the Status field returned from a call to DescribeIndex. The Status field is set to ACTIVE when the index is ready to use. Once the index is active you can index your documents using the BatchPutDocument API or using one of the supported data sources. 
    */
   createIndex(callback?: (err: AWSError, data: Kendra.Types.CreateIndexResponse) => void): Request<Kendra.Types.CreateIndexResponse, AWSError>;
   /**
@@ -108,11 +108,11 @@ declare class Kendra extends Service {
    */
   createThesaurus(callback?: (err: AWSError, data: Kendra.Types.CreateThesaurusResponse) => void): Request<Kendra.Types.CreateThesaurusResponse, AWSError>;
   /**
-   * Deletes an Amazon Kendra data source. An exception is not thrown if the data source is already being deleted. While the data source is being deleted, the Status field returned by a call to the DescribeDataSource operation is set to DELETING. For more information, see Deleting Data Sources.
+   * Deletes an Amazon Kendra data source. An exception is not thrown if the data source is already being deleted. While the data source is being deleted, the Status field returned by a call to the DescribeDataSource API is set to DELETING. For more information, see Deleting Data Sources.
    */
   deleteDataSource(params: Kendra.Types.DeleteDataSourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes an Amazon Kendra data source. An exception is not thrown if the data source is already being deleted. While the data source is being deleted, the Status field returned by a call to the DescribeDataSource operation is set to DELETING. For more information, see Deleting Data Sources.
+   * Deletes an Amazon Kendra data source. An exception is not thrown if the data source is already being deleted. While the data source is being deleted, the Status field returned by a call to the DescribeDataSource API is set to DELETING. For more information, see Deleting Data Sources.
    */
   deleteDataSource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -132,11 +132,11 @@ declare class Kendra extends Service {
    */
   deleteFaq(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes an existing Amazon Kendra index. An exception is not thrown if the index is already being deleted. While the index is being deleted, the Status field returned by a call to the DescribeIndex operation is set to DELETING.
+   * Deletes an existing Amazon Kendra index. An exception is not thrown if the index is already being deleted. While the index is being deleted, the Status field returned by a call to the DescribeIndex API is set to DELETING.
    */
   deleteIndex(params: Kendra.Types.DeleteIndexRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes an existing Amazon Kendra index. An exception is not thrown if the index is already being deleted. While the index is being deleted, the Status field returned by a call to the DescribeIndex operation is set to DELETING.
+   * Deletes an existing Amazon Kendra index. An exception is not thrown if the index is already being deleted. While the index is being deleted, the Status field returned by a call to the DescribeIndex API is set to DELETING.
    */
   deleteIndex(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -164,11 +164,11 @@ declare class Kendra extends Service {
    */
   deleteThesaurus(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Gets information about a Amazon Kendra data source.
+   * Gets information about an Amazon Kendra data source.
    */
   describeDataSource(params: Kendra.Types.DescribeDataSourceRequest, callback?: (err: AWSError, data: Kendra.Types.DescribeDataSourceResponse) => void): Request<Kendra.Types.DescribeDataSourceResponse, AWSError>;
   /**
-   * Gets information about a Amazon Kendra data source.
+   * Gets information about an Amazon Kendra data source.
    */
   describeDataSource(callback?: (err: AWSError, data: Kendra.Types.DescribeDataSourceResponse) => void): Request<Kendra.Types.DescribeDataSourceResponse, AWSError>;
   /**
@@ -356,11 +356,11 @@ declare class Kendra extends Service {
    */
   putPrincipalMapping(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Searches an active index. Use this API to search your documents using query. The Query operation enables to do faceted search and to filter results based on document attributes. It also enables you to provide user context that Amazon Kendra uses to enforce document access control in the search results.  Amazon Kendra searches your index for text content and question and answer (FAQ) content. By default the response contains three types of results.   Relevant passages   Matching FAQs   Relevant documents   You can specify that the query return only one type of result using the QueryResultTypeConfig parameter. Each query returns the 100 most relevant results. 
+   * Searches an active index. Use this API to search your documents using query. The Query API enables to do faceted search and to filter results based on document attributes. It also enables you to provide user context that Amazon Kendra uses to enforce document access control in the search results. Amazon Kendra searches your index for text content and question and answer (FAQ) content. By default the response contains three types of results.   Relevant passages   Matching FAQs   Relevant documents   You can specify that the query return only one type of result using the QueryResultTypeConfig parameter. Each query returns the 100 most relevant results. 
    */
   query(params: Kendra.Types.QueryRequest, callback?: (err: AWSError, data: Kendra.Types.QueryResult) => void): Request<Kendra.Types.QueryResult, AWSError>;
   /**
-   * Searches an active index. Use this API to search your documents using query. The Query operation enables to do faceted search and to filter results based on document attributes. It also enables you to provide user context that Amazon Kendra uses to enforce document access control in the search results.  Amazon Kendra searches your index for text content and question and answer (FAQ) content. By default the response contains three types of results.   Relevant passages   Matching FAQs   Relevant documents   You can specify that the query return only one type of result using the QueryResultTypeConfig parameter. Each query returns the 100 most relevant results. 
+   * Searches an active index. Use this API to search your documents using query. The Query API enables to do faceted search and to filter results based on document attributes. It also enables you to provide user context that Amazon Kendra uses to enforce document access control in the search results. Amazon Kendra searches your index for text content and question and answer (FAQ) content. By default the response contains three types of results.   Relevant passages   Matching FAQs   Relevant documents   You can specify that the query return only one type of result using the QueryResultTypeConfig parameter. Each query returns the 100 most relevant results. 
    */
   query(callback?: (err: AWSError, data: Kendra.Types.QueryResult) => void): Request<Kendra.Types.QueryResult, AWSError>;
   /**
@@ -372,11 +372,11 @@ declare class Kendra extends Service {
    */
   startDataSourceSyncJob(callback?: (err: AWSError, data: Kendra.Types.StartDataSourceSyncJobResponse) => void): Request<Kendra.Types.StartDataSourceSyncJobResponse, AWSError>;
   /**
-   * Stops a running synchronization job. You can't stop a scheduled synchronization job.
+   * Stops a synchronization job that is currently running. You can't stop a scheduled synchronization job.
    */
   stopDataSourceSyncJob(params: Kendra.Types.StopDataSourceSyncJobRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Stops a running synchronization job. You can't stop a scheduled synchronization job.
+   * Stops a synchronization job that is currently running. You can't stop a scheduled synchronization job.
    */
   stopDataSourceSyncJob(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -461,7 +461,7 @@ declare namespace Kendra {
   }
   export interface AclConfiguration {
     /**
-     * A list of groups, separated by semi-colons, that filters a query response based on user context. The document is only returned to users that are in one of the groups specified in the UserContext field of the Query operation.
+     * A list of groups, separated by semi-colons, that filters a query response based on user context. The document is only returned to users that are in one of the groups specified in the UserContext field of the Query API.
      */
     AllowedGroupsColumnName: ColumnName;
   }
@@ -628,7 +628,7 @@ declare namespace Kendra {
   export type BatchDeleteDocumentResponseFailedDocuments = BatchDeleteDocumentResponseFailedDocument[];
   export interface BatchGetDocumentStatusRequest {
     /**
-     * The identifier of the index to add documents to. The index ID is returned by the  CreateIndex  operation.
+     * The identifier of the index to add documents to. The index ID is returned by the CreateIndex  API.
      */
     IndexId: IndexId;
     /**
@@ -663,19 +663,19 @@ declare namespace Kendra {
   export type BatchGetDocumentStatusResponseErrors = BatchGetDocumentStatusResponseError[];
   export interface BatchPutDocumentRequest {
     /**
-     * The identifier of the index to add the documents to. You need to create the index first using the CreateIndex operation.
+     * The identifier of the index to add the documents to. You need to create the index first using the CreateIndex API.
      */
     IndexId: IndexId;
     /**
-     * The Amazon Resource Name (ARN) of a role that is allowed to run the BatchPutDocument operation. For more information, see IAM Roles for Amazon Kendra.
+     * The Amazon Resource Name (ARN) of a role that is allowed to run the BatchPutDocument API. For more information, see IAM Roles for Amazon Kendra.
      */
     RoleArn?: RoleArn;
     /**
-     * One or more documents to add to the index. Documents can include custom attributes. For example, 'DataSourceId' and 'DataSourceSyncJobId' are custom attributes that provide information on the synchronization of documents running on a data source. Note, 'DataSourceSyncJobId' could be an optional custom attribute as Amazon Kendra will use the ID of a running sync job. Documents have the following file size limits.   5 MB total size for inline documents   50 MB total size for files from an S3 bucket   5 MB extracted text for any file   For more information about file size and transaction per second quotas, see Quotas.
+     * One or more documents to add to the index. Documents have the following file size limits.   5 MB total size for inline documents   50 MB total size for files from an S3 bucket   5 MB extracted text for any file   For more information about file size and transaction per second quotas, see Quotas.
      */
     Documents: DocumentList;
     /**
-     * Configuration information for altering your document metadata and content during the document ingestion process when you use the BatchPutDocument operation. For more information on how to create, modify and delete document metadata, or make other content alterations when you ingest documents into Amazon Kendra, see Customizing document metadata during the ingestion process.
+     * Configuration information for altering your document metadata and content during the document ingestion process when you use the BatchPutDocument API. For more information on how to create, modify and delete document metadata, or make other content alterations when you ingest documents into Amazon Kendra, see Customizing document metadata during the ingestion process.
      */
     CustomDocumentEnrichmentConfiguration?: CustomDocumentEnrichmentConfiguration;
   }
@@ -746,7 +746,7 @@ declare namespace Kendra {
      */
     DocumentTitleColumnName?: ColumnName;
     /**
-     * An array of objects that map database column names to the corresponding fields in an index. You must first create the fields in the index using the UpdateIndex operation.
+     * An array of objects that map database column names to the corresponding fields in an index. You must first create the fields in the index using the UpdateIndex API.
      */
     FieldMappings?: DataSourceToIndexFieldMappingList;
     /**
@@ -762,7 +762,7 @@ declare namespace Kendra {
      */
     CrawlAttachments?: Boolean;
     /**
-     * Defines how attachment metadata fields should be mapped to index fields. Before you can map a field, you must first create an index field with a matching type using the console or the UpdateIndex operation. If you specify the AttachentFieldMappings parameter, you must specify at least one field mapping.
+     * Defines how attachment metadata fields should be mapped to index fields. Before you can map a field, you must first create an index field with a matching type using the console or the UpdateIndex API. If you specify the AttachentFieldMappings parameter, you must specify at least one field mapping.
      */
     AttachmentFieldMappings?: ConfluenceAttachmentFieldMappingsList;
   }
@@ -770,7 +770,7 @@ declare namespace Kendra {
   export type ConfluenceAttachmentFieldName = "AUTHOR"|"CONTENT_TYPE"|"CREATED_DATE"|"DISPLAY_URL"|"FILE_SIZE"|"ITEM_TYPE"|"PARENT_ID"|"SPACE_KEY"|"SPACE_NAME"|"URL"|"VERSION"|string;
   export interface ConfluenceAttachmentToIndexFieldMapping {
     /**
-     * The name of the field in the data source.  You must first create the index field using the UpdateIndex operation. 
+     * The name of the field in the data source.  You must first create the index field using the UpdateIndex API. 
      */
     DataSourceFieldName?: ConfluenceAttachmentFieldName;
     /**
@@ -784,7 +784,7 @@ declare namespace Kendra {
   }
   export interface ConfluenceBlogConfiguration {
     /**
-     * Defines how blog metadata fields should be mapped to index fields. Before you can map a field, you must first create an index field with a matching type using the console or the UpdateIndex operation. If you specify the BlogFieldMappings parameter, you must specify at least one field mapping.
+     * Defines how blog metadata fields should be mapped to index fields. Before you can map a field, you must first create an index field with a matching type using the console or the UpdateIndex API. If you specify the BlogFieldMappings parameter, you must specify at least one field mapping.
      */
     BlogFieldMappings?: ConfluenceBlogFieldMappingsList;
   }
@@ -848,7 +848,7 @@ declare namespace Kendra {
   }
   export interface ConfluencePageConfiguration {
     /**
-     * Defines how page metadata fields should be mapped to index fields. Before you can map a field, you must first create an index field with a matching type using the console or the UpdateIndex operation. If you specify the PageFieldMappings parameter, you must specify at least one field mapping.
+     * Defines how page metadata fields should be mapped to index fields. Before you can map a field, you must first create an index field with a matching type using the console or the UpdateIndex API. If you specify the PageFieldMappings parameter, you must specify at least one field mapping.
      */
     PageFieldMappings?: ConfluencePageFieldMappingsList;
   }
@@ -886,7 +886,7 @@ declare namespace Kendra {
      */
     ExcludeSpaces?: ConfluenceSpaceList;
     /**
-     * Defines how space metadata fields should be mapped to index fields. Before you can map a field, you must first create an index field with a matching type using the console or the UpdateIndex operation. If you specify the SpaceFieldMappings parameter, you must specify at least one field mapping.
+     * Defines how space metadata fields should be mapped to index fields. Before you can map a field, you must first create an index field with a matching type using the console or the UpdateIndex API. If you specify the SpaceFieldMappings parameter, you must specify at least one field mapping.
      */
     SpaceFieldMappings?: ConfluenceSpaceFieldMappingsList;
   }
@@ -941,7 +941,7 @@ declare namespace Kendra {
      */
     FaqIds?: FaqIdsList;
     /**
-     *  TRUE to use documents you indexed directly using the BatchPutDocument operation.
+     *  TRUE to use documents you indexed directly using the BatchPutDocument API.
      */
     DirectPutContent?: Boolean;
   }
@@ -969,7 +969,7 @@ declare namespace Kendra {
      */
     Description?: Description;
     /**
-     * Sets the frequency that Amazon Kendra will check the documents in your repository and update the index. If you don't set a schedule Amazon Kendra will not periodically update the index. You can call the StartDataSourceSyncJob operation to update the index. You can't specify the Schedule parameter when the Type parameter is set to CUSTOM. If you do, you receive a ValidationException exception.
+     * Sets the frequency for Amazon Kendra to check the documents in your repository and update the index. If you don't set a schedule Amazon Kendra will not periodically update the index. You can call the StartDataSourceSyncJob API to update the index. You can't specify the Schedule parameter when the Type parameter is set to CUSTOM. If you do, you receive a ValidationException exception.
      */
     Schedule?: ScanSchedule;
     /**
@@ -981,7 +981,7 @@ declare namespace Kendra {
      */
     Tags?: TagList;
     /**
-     * A token that you provide to identify the request to create a data source. Multiple calls to the CreateDataSource operation with the same client token will create only one data source.
+     * A token that you provide to identify the request to create a data source. Multiple calls to the CreateDataSource API with the same client token will create only one data source.
      */
     ClientToken?: ClientTokenName;
     /**
@@ -1009,7 +1009,7 @@ declare namespace Kendra {
      */
     IndexId: IndexId;
     /**
-     * The Amazon Resource Name (ARN) of a role with permission to access Query operations, QuerySuggestions operations, SubmitFeedback operations, and Amazon Web Services SSO that stores your user and group information. For more information, see IAM roles for Amazon Kendra.
+     * The Amazon Resource Name (ARN) of a role with permission to access Query API, QuerySuggestions API, SubmitFeedback API, and Amazon Web Services SSO that stores your user and group information. For more information, see IAM roles for Amazon Kendra.
      */
     RoleArn?: RoleArn;
     /**
@@ -1021,7 +1021,7 @@ declare namespace Kendra {
      */
     Description?: Description;
     /**
-     * A token that you provide to identify the request to create your Amazon Kendra experience. Multiple calls to the CreateExperience operation with the same client token creates only one Amazon Kendra experience.
+     * A token that you provide to identify the request to create your Amazon Kendra experience. Multiple calls to the CreateExperience API with the same client token creates only one Amazon Kendra experience.
      */
     ClientToken?: ClientTokenName;
   }
@@ -1061,7 +1061,7 @@ declare namespace Kendra {
      */
     FileFormat?: FaqFileFormat;
     /**
-     * A token that you provide to identify the request to create a FAQ. Multiple calls to the CreateFaqRequest operation with the same client token will create only one FAQ. 
+     * A token that you provide to identify the request to create a FAQ. Multiple calls to the CreateFaqRequest API with the same client token will create only one FAQ. 
      */
     ClientToken?: ClientTokenName;
     /**
@@ -1085,7 +1085,7 @@ declare namespace Kendra {
      */
     Edition?: IndexEdition;
     /**
-     * An Identity and Access Management(IAM) role that gives Amazon Kendra permissions to access your Amazon CloudWatch logs and metrics. This is also the role used when you use the BatchPutDocument operation to index documents from an Amazon S3 bucket.
+     * An Identity and Access Management(IAM) role that gives Amazon Kendra permissions to access your Amazon CloudWatch logs and metrics. This is also the role used when you use the BatchPutDocument API to index documents from an Amazon S3 bucket.
      */
     RoleArn: RoleArn;
     /**
@@ -1097,7 +1097,7 @@ declare namespace Kendra {
      */
     Description?: Description;
     /**
-     * A token that you provide to identify the request to create an index. Multiple calls to the CreateIndex operation with the same client token will create only one index.
+     * A token that you provide to identify the request to create an index. Multiple calls to the CreateIndex API with the same client token will create only one index.
      */
     ClientToken?: ClientTokenName;
     /**
@@ -1145,7 +1145,7 @@ declare namespace Kendra {
      */
     ClientToken?: ClientTokenName;
     /**
-     * The IAM (Identity and Access Management) role used by Amazon Kendra to access the block list text file in your S3 bucket. You need permissions to the role ARN (Amazon Resource Name). The role needs S3 read permissions to your file in S3 and needs to give STS (Security Token Service) assume role permissions to Amazon Kendra.
+     * The IAM (Identity and Access Management) role used by Amazon Kendra to access the block list text file in your S3 bucket. You need permissions to the role ARN (Amazon Web Services Resource Name). The role needs S3 read permissions to your file in S3 and needs to give STS (Security Token Service) assume role permissions to Amazon Kendra.
      */
     RoleArn: RoleArn;
     /**
@@ -1185,7 +1185,7 @@ declare namespace Kendra {
      */
     SourceS3Path: S3Path;
     /**
-     * A token that you provide to identify the request to create a thesaurus. Multiple calls to the CreateThesaurus operation with the same client token will create only one thesaurus. 
+     * A token that you provide to identify the request to create a thesaurus. Multiple calls to the CreateThesaurus API with the same client token will create only one thesaurus. 
      */
     ClientToken?: ClientTokenName;
   }
@@ -1248,9 +1248,13 @@ declare namespace Kendra {
     GoogleDriveConfiguration?: GoogleDriveConfiguration;
     WebCrawlerConfiguration?: WebCrawlerConfiguration;
     /**
-     * Provides the configuration information to connect to WorkDocs as your data source.
+     * Provides the configuration information to connect to Amazon WorkDocs as your data source.
      */
     WorkDocsConfiguration?: WorkDocsConfiguration;
+    /**
+     * Provides the configuration information to connect to Amazon FSx as your data source.
+     */
+    FsxConfiguration?: FsxConfiguration;
   }
   export type DataSourceDateFieldFormat = string;
   export type DataSourceFieldName = string;
@@ -1308,11 +1312,11 @@ declare namespace Kendra {
      */
     ExecutionId?: String;
     /**
-     * The UNIX datetime that the synchronization job was started.
+     * The UNIX datetime that the synchronization job started.
      */
     StartTime?: Timestamp;
     /**
-     * The UNIX datetime that the synchronization job was completed.
+     * The UNIX datetime that the synchronization job completed.
      */
     EndTime?: Timestamp;
     /**
@@ -1324,7 +1328,7 @@ declare namespace Kendra {
      */
     ErrorMessage?: ErrorMessage;
     /**
-     * If the Status field is set to FAILED, the ErrorCode field contains a the reason that the synchronization failed.
+     * If the Status field is set to FAILED, the ErrorCode field indicates the reason the synchronization failed.
      */
     ErrorCode?: ErrorCode;
     /**
@@ -1386,7 +1390,7 @@ declare namespace Kendra {
     IndexFieldName: IndexFieldName;
   }
   export type DataSourceToIndexFieldMappingList = DataSourceToIndexFieldMapping[];
-  export type DataSourceType = "S3"|"SHAREPOINT"|"DATABASE"|"SALESFORCE"|"ONEDRIVE"|"SERVICENOW"|"CUSTOM"|"CONFLUENCE"|"GOOGLEDRIVE"|"WEBCRAWLER"|"WORKDOCS"|string;
+  export type DataSourceType = "S3"|"SHAREPOINT"|"DATABASE"|"SALESFORCE"|"ONEDRIVE"|"SERVICENOW"|"CUSTOM"|"CONFLUENCE"|"GOOGLEDRIVE"|"WEBCRAWLER"|"WORKDOCS"|"FSX"|string;
   export interface DataSourceVpcConfiguration {
     /**
      * A list of identifiers for subnets within your Amazon VPC. The subnets should be able to connect to each other in the VPC, and they should have outgoing access to the Internet through a NAT device.
@@ -1548,7 +1552,7 @@ declare namespace Kendra {
      */
     Status?: DataSourceStatus;
     /**
-     * The schedule that Amazon Kendra will update the data source.
+     * The schedule for Amazon Kendra to update the index.
      */
     Schedule?: ScanSchedule;
     /**
@@ -1616,7 +1620,7 @@ declare namespace Kendra {
      */
     Status?: ExperienceStatus;
     /**
-     * Shows the Amazon Resource Name (ARN) of a role with permission to access Query operations, QuerySuggestions operations, SubmitFeedback operations, and Amazon Web Services SSO that stores your user and group information.
+     * Shows the Amazon Resource Name (ARN) of a role with permission to access Query API, QuerySuggestions API, SubmitFeedback API, and Amazon Web Services SSO that stores your user and group information.
      */
     RoleArn?: RoleArn;
     /**
@@ -1853,7 +1857,7 @@ declare namespace Kendra {
   }
   export interface DescribeQuerySuggestionsConfigResponse {
     /**
-     * Shows whether query suggestions are currently in ENABLED mode or LEARN_ONLY mode. By default, Amazon Kendra enables query suggestions.LEARN_ONLY turns off query suggestions for your users. You can change the mode using the UpdateQuerySuggestionsConfig operation.
+     * Shows whether query suggestions are currently in ENABLED mode or LEARN_ONLY mode. By default, Amazon Kendra enables query suggestions.LEARN_ONLY turns off query suggestions for your users. You can change the mode using the UpdateQuerySuggestionsConfig API.
      */
     Mode?: Mode;
     /**
@@ -2002,12 +2006,12 @@ declare namespace Kendra {
      */
     Title?: Title;
     /**
-     * The contents of the document.  Documents passed to the Blob parameter must be base64 encoded. Your code might not need to encode the document file bytes if you're using an Amazon Web Services SDK to call Amazon Kendra operations. If you are calling the Amazon Kendra endpoint directly using REST, you must base64 encode the contents before sending.
+     * The contents of the document.  Documents passed to the Blob parameter must be base64 encoded. Your code might not need to encode the document file bytes if you're using an Amazon Web Services SDK to call Amazon Kendra APIs. If you are calling the Amazon Kendra endpoint directly using REST, you must base64 encode the contents before sending.
      */
     Blob?: _Blob;
     S3Path?: S3Path;
     /**
-     * Custom attributes to apply to the document. Use the custom attributes to provide additional information for searching, to provide facets for refining searches, and to provide additional information in the query response.
+     * Custom attributes to apply to the document. Use the custom attributes to provide additional information for searching, to provide facets for refining searches, and to provide additional information in the query response. For example, 'DataSourceId' and 'DataSourceSyncJobId' are custom attributes that provide information on the synchronization of documents running on a data source. Note, 'DataSourceSyncJobId' could be an optional custom attribute as Amazon Kendra will use the ID of a running sync job.
      */
     Attributes?: DocumentAttributeList;
     /**
@@ -2203,7 +2207,7 @@ declare namespace Kendra {
   export type ExcludeUserAccountsList = UserAccount[];
   export interface ExperienceConfiguration {
     /**
-     * The identifiers of your data sources and FAQs. Or, you can specify that you want to use documents indexed via the BatchPutDocument operation. This is the content you want to use for your Amazon Kendra experience.
+     * The identifiers of your data sources and FAQs. Or, you can specify that you want to use documents indexed via the BatchPutDocument API. This is the content you want to use for your Amazon Kendra experience.
      */
     ContentSourceConfiguration?: ContentSourceConfiguration;
     /**
@@ -2340,6 +2344,38 @@ declare namespace Kendra {
   }
   export type FaqSummaryItems = FaqSummary[];
   export type FeedbackToken = string;
+  export type FileSystemId = string;
+  export interface FsxConfiguration {
+    /**
+     * The identifier of the Amazon FSx file system. You can find your file system ID on the file system dashboard in the Amazon FSx console. For information on how to create a file system in Amazon FSx console, using Windows File Server as an example, see Amazon FSx Getting started guide.
+     */
+    FileSystemId: FileSystemId;
+    /**
+     * The Amazon FSx file system type. Windows is currently the only supported type.
+     */
+    FileSystemType: FsxFileSystemType;
+    /**
+     * Provides the configuration information for connecting to an Amazon Virtual Private Cloud for your Amazon FSx. Your Amazon FSx instance must reside inside your VPC.
+     */
+    VpcConfiguration: DataSourceVpcConfiguration;
+    /**
+     * The Amazon Resource Name (ARN) of an Secrets Manager secret that contains the key-value pairs required to connect to your Amazon FSx file system. Windows is currently the only supported type. The secret must contain a JSON structure with the following keys:   username—The Active Directory user name, along with the Domain Name System (DNS) domain name. For example, user@corp.example.com. The Active Directory user account must have read and mounting access to the Amazon FSx file system for Windows.   password—The password of the active directory user with read and mounting access Amazon FSx Windows file system.  
+     */
+    SecretArn?: SecretArn;
+    /**
+     * A list of regular expression patterns to include certain files in your Amazon FSx file system. Files that match the patterns are included in the index. Files that don't match the patterns are excluded from the index. If a file matches both an inclusion pattern and an exclusion pattern, the exclusion pattern takes precedence and the file isn't included in the index.
+     */
+    InclusionPatterns?: DataSourceInclusionsExclusionsStrings;
+    /**
+     * A list of regular expression patterns to exclude certain files in your Amazon FSx file system. Files that match the patterns are excluded from the index. Files that don’t match the patterns are included in the index. If a file matches both an inclusion pattern and an exclusion pattern, the exclusion pattern takes precedence and the file isn't included in the index.
+     */
+    ExclusionPatterns?: DataSourceInclusionsExclusionsStrings;
+    /**
+     * A list of DataSourceToIndexFieldMapping objects that map Amazon FSx data source attributes or field names to Amazon Kendra index field names in Amazon Kendra. To create custom fields, use the UpdateIndex API before you map to Amazon FSx fields. For more information, see Mapping data source fields. The Amazon FSx data source field names must exist in your Amazon FSx custom metadata.
+     */
+    FieldMappings?: DataSourceToIndexFieldMappingList;
+  }
+  export type FsxFileSystemType = "WINDOWS"|string;
   export interface GetQuerySuggestionsRequest {
     /**
      * The identifier of the index you want to get query suggestions from.
@@ -2418,7 +2454,7 @@ declare namespace Kendra {
      */
     ExclusionPatterns?: DataSourceInclusionsExclusionsStrings;
     /**
-     * Defines mapping between a field in the Google Drive and a Amazon Kendra index field. If you are using the console, you can define index fields when creating the mapping. If you are using the API, you must first create the field using the UpdateIndex operation.
+     * Defines mapping between a field in the Google Drive and a Amazon Kendra index field. If you are using the console, you can define index fields when creating the mapping. If you are using the API, you must first create the field using the UpdateIndex API.
      */
     FieldMappings?: DataSourceToIndexFieldMappingList;
     /**
@@ -2534,7 +2570,7 @@ declare namespace Kendra {
      */
     Name?: IndexName;
     /**
-     * A unique identifier for the index. Use this to identify the index when you are using operations such as Query, DescribeIndex, UpdateIndex, and DeleteIndex.
+     * A unique identifier for the index. Use this to identify the index when you are using APIs such as Query, DescribeIndex, UpdateIndex, and DeleteIndex.
      */
     Id?: IndexId;
     /**
@@ -2546,7 +2582,7 @@ declare namespace Kendra {
      */
     CreatedAt: Timestamp;
     /**
-     * The Unix timestamp when the index was last updated by the UpdateIndex operation.
+     * The Unix timestamp when the index was last updated by the UpdateIndex API.
      */
     UpdatedAt: Timestamp;
     /**
@@ -3081,7 +3117,7 @@ declare namespace Kendra {
   export type QueryIdentifiersEnclosingOption = "DOUBLE_QUOTES"|"NONE"|string;
   export interface QueryRequest {
     /**
-     * The unique identifier of the index to search. The identifier is returned in the response from the CreateIndex operation.
+     * The unique identifier of the index to search. The identifier is returned in the response from the CreateIndex API.
      */
     IndexId: IndexId;
     /**
@@ -3601,7 +3637,7 @@ declare namespace Kendra {
     ExclusionPatterns?: DataSourceInclusionsExclusionsStrings;
     VpcConfiguration?: DataSourceVpcConfiguration;
     /**
-     * A list of DataSourceToIndexFieldMapping objects that map Microsoft SharePoint attributes to custom fields in the Amazon Kendra index. You must first create the index fields using the UpdateIndex operation before you map SharePoint attributes. For more information, see Mapping Data Source Fields.
+     * A list of DataSourceToIndexFieldMapping objects that map Microsoft SharePoint attributes to custom fields in the Amazon Kendra index. You must first create the index fields using the UpdateIndex API before you map SharePoint attributes. For more information, see Mapping Data Source Fields.
      */
     FieldMappings?: DataSourceToIndexFieldMappingList;
     /**
@@ -3697,7 +3733,7 @@ declare namespace Kendra {
      */
     IndexId: IndexId;
     /**
-     * The identifier of the specific query for which you are submitting feedback. The query ID is returned in the response to the Query operation.
+     * The identifier of the specific query for which you are submitting feedback. The query ID is returned in the response to the Query API.
      */
     QueryId: QueryId;
     /**
@@ -3901,7 +3937,7 @@ declare namespace Kendra {
      */
     IndexId: IndexId;
     /**
-     * The Amazon Resource Name (ARN) of a role with permission to access Query operations, QuerySuggestions operations, SubmitFeedback operations, and Amazon Web Services SSO that stores your user and group information. For more information, see IAM roles for Amazon Kendra.
+     * The Amazon Resource Name (ARN) of a role with permission to access Query API, QuerySuggestions API, SubmitFeedback API, and Amazon Web Services SSO that stores your user and group information. For more information, see IAM roles for Amazon Kendra.
      */
     RoleArn?: RoleArn;
     /**
@@ -4161,7 +4197,7 @@ declare namespace Kendra {
      */
     ExclusionPatterns?: DataSourceInclusionsExclusionsStrings;
     /**
-     * A list of DataSourceToIndexFieldMapping objects that map Amazon WorkDocs field names to custom index field names in Amazon Kendra. You must first create the custom index fields using the UpdateIndex operation before you map to Amazon WorkDocs fields. For more information, see Mapping Data Source Fields. The Amazon WorkDocs data source field names need to exist in your Amazon WorkDocs custom metadata.
+     * A list of DataSourceToIndexFieldMapping objects that map Amazon WorkDocs field names to custom index field names in Amazon Kendra. You must first create the custom index fields using the UpdateIndex API before you map to Amazon WorkDocs fields. For more information, see Mapping Data Source Fields. The Amazon WorkDocs data source field names need to exist in your Amazon WorkDocs custom metadata.
      */
     FieldMappings?: DataSourceToIndexFieldMappingList;
   }
