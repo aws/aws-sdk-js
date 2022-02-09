@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1071.0-->
+<!--LATEST=2.1072.0-->
 <!--ENTRYINSERT-->
+
+## 2.1072.0
+* feature: CloudFormation: This SDK release is for the feature launch of AWS CloudFormation Hooks.
 
 ## 2.1071.0
 * feature: AppRunner: This release adds support for App Runner to route outbound network traffic of a service through an Amazon VPC. New API: CreateVpcConnector, DescribeVpcConnector, ListVpcConnectors, and DeleteVpcConnector. Updated API: CreateService, DescribeService, and UpdateService.
