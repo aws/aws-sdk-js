@@ -1746,6 +1746,10 @@ declare namespace Pinpoint {
      * A string-to-string map of key-value pairs that identifies the tags that are associated with the application. Each tag consists of a required tag key and an associated tag value.
      */
     tags?: MapOf__string;
+    /**
+     * The date and time when the Application was created.
+     */
+    CreationDate?: __string;
   }
   export interface ApplicationSettingsResource {
     /**

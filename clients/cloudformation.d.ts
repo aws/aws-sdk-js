@@ -2053,7 +2053,7 @@ declare namespace CloudFormation {
      */
     ResourceIdentifierSummaries?: ResourceIdentifierSummaries;
   }
-  export type HandlerErrorCode = "NotUpdatable"|"InvalidRequest"|"AccessDenied"|"InvalidCredentials"|"AlreadyExists"|"NotFound"|"ResourceConflict"|"Throttling"|"ServiceLimitExceeded"|"NotStabilized"|"GeneralServiceException"|"ServiceInternalError"|"NetworkFailure"|"InternalFailure"|"InvalidTypeConfiguration"|string;
+  export type HandlerErrorCode = "NotUpdatable"|"InvalidRequest"|"AccessDenied"|"InvalidCredentials"|"AlreadyExists"|"NotFound"|"ResourceConflict"|"Throttling"|"ServiceLimitExceeded"|"NotStabilized"|"GeneralServiceException"|"ServiceInternalError"|"NetworkFailure"|"InternalFailure"|"InvalidTypeConfiguration"|"HandlerInternalFailure"|"NonCompliant"|"Unknown"|string;
   export type HookFailureMode = "FAIL"|"WARN"|string;
   export type HookInvocationCount = number;
   export type HookInvocationPoint = "PRE_PROVISION"|string;

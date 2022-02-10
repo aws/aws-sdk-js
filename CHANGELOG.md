@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1072.0-->
+<!--LATEST=2.1073.0-->
 <!--ENTRYINSERT-->
+
+## 2.1073.0
+* feature: CloudFormation: This SDK release adds AWS CloudFormation Hooks HandlerErrorCodes
+* feature: LookoutVision: This release makes CompilerOptions in Lookout for Vision's StartModelPackagingJob's Configuration object optional.
+* feature: Pinpoint: This SDK release adds a new paramater creation date for GetApp and GetApps Api call
+* feature: WAFV2: Adds support for AWS WAF Fraud Control account takeover prevention (ATP), with configuration options for the new managed rule group AWSManagedRulesATPRuleSet and support for application integration SDKs for Android and iOS mobile apps.
 
 ## 2.1072.0
 * feature: CloudFormation: This SDK release is for the feature launch of AWS CloudFormation Hooks.
