@@ -3218,9 +3218,6 @@
       },
       "errors": [
         {
-          "shape": "DoesNotExistException"
-        },
-        {
           "shape": "InternalServerError"
         }
       ],
