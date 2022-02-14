@@ -226,6 +226,7 @@
                 },
                 hash3: {
                   type: 'structure',
+                  members: {},
                   document: true
                 }
               }
@@ -275,13 +276,21 @@
           }
         });
       });
-      it('accepts document type members', function () {
-        return expectValid({
-          hash1: {
-            hash3: {foo: 'foo', bar: ['bar']}
-          }
+      for (const documentMember of [
+        'string',
+        1,
+        true,
+        { foo: 'foo', bar: ['bar'] },
+        [1, 'array', false, { baz: 'baz' }]
+      ]) {
+        it('accepts document type member of ' + JSON.stringify(documentMember), function () {
+          return expectValid({
+            hash1: {
+              hash3: documentMember
+            }
+          });
         });
-      });
+      }
       return it('does not check inherited properties on parameters', function() {
         var cls, obj;
         cls = function() {
