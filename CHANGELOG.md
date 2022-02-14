@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1073.0-->
+<!--LATEST=2.1074.0-->
 <!--ENTRYINSERT-->
+
+## 2.1074.0
+* bugfix: ParamValidator: Fix the validation error when assign non-object values to member with document trait
+* feature: Appflow: Launching Amazon AppFlow SAP as a destination connector SDK.
+* feature: Athena: This release adds a subfield, ErrorType, to the AthenaError response object in the GetQueryExecution API when a query fails.
+* feature: RDS: Adds support for determining which Aurora PostgreSQL versions support Babelfish.
 
 ## 2.1073.0
 * feature: CloudFormation: This SDK release adds AWS CloudFormation Hooks HandlerErrorCodes

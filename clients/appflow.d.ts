@@ -1410,6 +1410,10 @@ declare namespace Appflow {
      * The properties that are required to query the custom Connector.
      */
     CustomConnector?: CustomConnectorDestinationProperties;
+    /**
+     * The properties required to query SAPOData.
+     */
+    SAPOData?: SAPODataDestinationProperties;
   }
   export type DestinationField = string;
   export interface DestinationFieldProperties {
@@ -2216,6 +2220,19 @@ declare namespace Appflow {
      */
     oAuthProperties?: OAuthProperties;
   }
+  export interface SAPODataDestinationProperties {
+    /**
+     * The object path specified in the SAPOData flow destination.
+     */
+    objectPath: Object;
+    /**
+     * Determines how Amazon AppFlow handles the success response that it gets from the connector after placing data. For example, this setting would determine where to write the response from a destination connector upon a successful insert operation.
+     */
+    successResponseHandlingConfig?: SuccessResponseHandlingConfig;
+    idFieldNames?: IdFieldNameList;
+    errorHandlingConfig?: ErrorHandlingConfig;
+    writeOperationType?: WriteOperationType;
+  }
   export interface SAPODataMetadata {
   }
   export interface SAPODataSourceProperties {
@@ -2604,6 +2621,16 @@ declare namespace Appflow {
     flowStatus?: FlowStatus;
   }
   export type String = string;
+  export interface SuccessResponseHandlingConfig {
+    /**
+     * The Amazon S3 bucket prefix.
+     */
+    bucketPrefix?: BucketPrefix;
+    /**
+     * The name of the Amazon S3 bucket.
+     */
+    bucketName?: BucketName;
+  }
   export type SupportedApiVersion = string;
   export type SupportedApiVersionList = SupportedApiVersion[];
   export interface SupportedFieldTypeDetails {
@@ -2654,7 +2681,7 @@ declare namespace Appflow {
     taskProperties?: TaskPropertiesMap;
   }
   export type TaskPropertiesMap = {[key: string]: Property};
-  export type TaskType = "Arithmetic"|"Filter"|"Map"|"Map_all"|"Mask"|"Merge"|"Truncate"|"Validate"|string;
+  export type TaskType = "Arithmetic"|"Filter"|"Map"|"Map_all"|"Mask"|"Merge"|"Passthrough"|"Truncate"|"Validate"|string;
   export type Tasks = Task[];
   export type Timezone = string;
   export type TokenUrl = string;

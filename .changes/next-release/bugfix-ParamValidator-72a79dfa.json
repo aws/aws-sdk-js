@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "ParamValidator",
-  "description": "Fix the validation error when assign non-object values to member with document trait"
-}
