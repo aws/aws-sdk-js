@@ -469,11 +469,11 @@ declare class EC2 extends Service {
    */
   createEgressOnlyInternetGateway(callback?: (err: AWSError, data: EC2.Types.CreateEgressOnlyInternetGatewayResult) => void): Request<EC2.Types.CreateEgressOnlyInternetGatewayResult, AWSError>;
   /**
-   * Launches an EC2 Fleet. You can create a single EC2 Fleet that includes multiple launch specifications that vary by instance type, AMI, Availability Zone, or subnet. For more information, see Launching an EC2 Fleet in the Amazon EC2 User Guide.
+   * Launches an EC2 Fleet. You can create a single EC2 Fleet that includes multiple launch specifications that vary by instance type, AMI, Availability Zone, or subnet. For more information, see EC2 Fleet in the Amazon EC2 User Guide.
    */
   createFleet(params: EC2.Types.CreateFleetRequest, callback?: (err: AWSError, data: EC2.Types.CreateFleetResult) => void): Request<EC2.Types.CreateFleetResult, AWSError>;
   /**
-   * Launches an EC2 Fleet. You can create a single EC2 Fleet that includes multiple launch specifications that vary by instance type, AMI, Availability Zone, or subnet. For more information, see Launching an EC2 Fleet in the Amazon EC2 User Guide.
+   * Launches an EC2 Fleet. You can create a single EC2 Fleet that includes multiple launch specifications that vary by instance type, AMI, Availability Zone, or subnet. For more information, see EC2 Fleet in the Amazon EC2 User Guide.
    */
   createFleet(callback?: (err: AWSError, data: EC2.Types.CreateFleetResult) => void): Request<EC2.Types.CreateFleetResult, AWSError>;
   /**
@@ -997,11 +997,11 @@ declare class EC2 extends Service {
    */
   deleteEgressOnlyInternetGateway(callback?: (err: AWSError, data: EC2.Types.DeleteEgressOnlyInternetGatewayResult) => void): Request<EC2.Types.DeleteEgressOnlyInternetGatewayResult, AWSError>;
   /**
-   * Deletes the specified EC2 Fleet. After you delete an EC2 Fleet, it launches no new instances. You must specify whether a deleted EC2 Fleet should also terminate its instances. If you choose to terminate the instances, the EC2 Fleet enters the deleted_terminating state. Otherwise, the EC2 Fleet enters the deleted_running state, and the instances continue to run until they are interrupted or you terminate them manually. For instant fleets, EC2 Fleet must terminate the instances when the fleet is deleted. A deleted instant fleet with running instances is not supported.  Restrictions    You can delete up to 25 instant fleets in a single request. If you exceed this number, no instant fleets are deleted and an error is returned. There is no restriction on the number of fleets of type maintain or request that can be deleted in a single request.   Up to 1000 instances can be terminated in a single request to delete instant fleets.   For more information, see Deleting an EC2 Fleet in the Amazon EC2 User Guide.
+   * Deletes the specified EC2 Fleet. After you delete an EC2 Fleet, it launches no new instances. You must specify whether a deleted EC2 Fleet should also terminate its instances. If you choose to terminate the instances, the EC2 Fleet enters the deleted_terminating state. Otherwise, the EC2 Fleet enters the deleted_running state, and the instances continue to run until they are interrupted or you terminate them manually. For instant fleets, EC2 Fleet must terminate the instances when the fleet is deleted. A deleted instant fleet with running instances is not supported.  Restrictions    You can delete up to 25 instant fleets in a single request. If you exceed this number, no instant fleets are deleted and an error is returned. There is no restriction on the number of fleets of type maintain or request that can be deleted in a single request.   Up to 1000 instances can be terminated in a single request to delete instant fleets.   For more information, see Delete an EC2 Fleet in the Amazon EC2 User Guide.
    */
   deleteFleets(params: EC2.Types.DeleteFleetsRequest, callback?: (err: AWSError, data: EC2.Types.DeleteFleetsResult) => void): Request<EC2.Types.DeleteFleetsResult, AWSError>;
   /**
-   * Deletes the specified EC2 Fleet. After you delete an EC2 Fleet, it launches no new instances. You must specify whether a deleted EC2 Fleet should also terminate its instances. If you choose to terminate the instances, the EC2 Fleet enters the deleted_terminating state. Otherwise, the EC2 Fleet enters the deleted_running state, and the instances continue to run until they are interrupted or you terminate them manually. For instant fleets, EC2 Fleet must terminate the instances when the fleet is deleted. A deleted instant fleet with running instances is not supported.  Restrictions    You can delete up to 25 instant fleets in a single request. If you exceed this number, no instant fleets are deleted and an error is returned. There is no restriction on the number of fleets of type maintain or request that can be deleted in a single request.   Up to 1000 instances can be terminated in a single request to delete instant fleets.   For more information, see Deleting an EC2 Fleet in the Amazon EC2 User Guide.
+   * Deletes the specified EC2 Fleet. After you delete an EC2 Fleet, it launches no new instances. You must specify whether a deleted EC2 Fleet should also terminate its instances. If you choose to terminate the instances, the EC2 Fleet enters the deleted_terminating state. Otherwise, the EC2 Fleet enters the deleted_running state, and the instances continue to run until they are interrupted or you terminate them manually. For instant fleets, EC2 Fleet must terminate the instances when the fleet is deleted. A deleted instant fleet with running instances is not supported.  Restrictions    You can delete up to 25 instant fleets in a single request. If you exceed this number, no instant fleets are deleted and an error is returned. There is no restriction on the number of fleets of type maintain or request that can be deleted in a single request.   Up to 1000 instances can be terminated in a single request to delete instant fleets.   For more information, see Delete an EC2 Fleet in the Amazon EC2 User Guide.
    */
   deleteFleets(callback?: (err: AWSError, data: EC2.Types.DeleteFleetsResult) => void): Request<EC2.Types.DeleteFleetsResult, AWSError>;
   /**
@@ -1477,11 +1477,11 @@ declare class EC2 extends Service {
    */
   deregisterImage(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * c Deregisters tag keys to prevent tags that have the specified tag keys from being included in scheduled event notifications for resources in the Region.
+   * Deregisters tag keys to prevent tags that have the specified tag keys from being included in scheduled event notifications for resources in the Region.
    */
   deregisterInstanceEventNotificationAttributes(params: EC2.Types.DeregisterInstanceEventNotificationAttributesRequest, callback?: (err: AWSError, data: EC2.Types.DeregisterInstanceEventNotificationAttributesResult) => void): Request<EC2.Types.DeregisterInstanceEventNotificationAttributesResult, AWSError>;
   /**
-   * c Deregisters tag keys to prevent tags that have the specified tag keys from being included in scheduled event notifications for resources in the Region.
+   * Deregisters tag keys to prevent tags that have the specified tag keys from being included in scheduled event notifications for resources in the Region.
    */
   deregisterInstanceEventNotificationAttributes(callback?: (err: AWSError, data: EC2.Types.DeregisterInstanceEventNotificationAttributesResult) => void): Request<EC2.Types.DeregisterInstanceEventNotificationAttributesResult, AWSError>;
   /**
@@ -1717,19 +1717,19 @@ declare class EC2 extends Service {
    */
   describeFleetHistory(callback?: (err: AWSError, data: EC2.Types.DescribeFleetHistoryResult) => void): Request<EC2.Types.DescribeFleetHistoryResult, AWSError>;
   /**
-   * Describes the running instances for the specified EC2 Fleet. For more information, see Monitoring your EC2 Fleet in the Amazon EC2 User Guide.
+   * Describes the running instances for the specified EC2 Fleet. For more information, see Monitor your EC2 Fleet in the Amazon EC2 User Guide.
    */
   describeFleetInstances(params: EC2.Types.DescribeFleetInstancesRequest, callback?: (err: AWSError, data: EC2.Types.DescribeFleetInstancesResult) => void): Request<EC2.Types.DescribeFleetInstancesResult, AWSError>;
   /**
-   * Describes the running instances for the specified EC2 Fleet. For more information, see Monitoring your EC2 Fleet in the Amazon EC2 User Guide.
+   * Describes the running instances for the specified EC2 Fleet. For more information, see Monitor your EC2 Fleet in the Amazon EC2 User Guide.
    */
   describeFleetInstances(callback?: (err: AWSError, data: EC2.Types.DescribeFleetInstancesResult) => void): Request<EC2.Types.DescribeFleetInstancesResult, AWSError>;
   /**
-   * Describes the specified EC2 Fleets or all of your EC2 Fleets. For more information, see Monitoring your EC2 Fleet in the Amazon EC2 User Guide.
+   * Describes the specified EC2 Fleets or all of your EC2 Fleets. For more information, see Monitor your EC2 Fleet in the Amazon EC2 User Guide.
    */
   describeFleets(params: EC2.Types.DescribeFleetsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeFleetsResult) => void): Request<EC2.Types.DescribeFleetsResult, AWSError>;
   /**
-   * Describes the specified EC2 Fleets or all of your EC2 Fleets. For more information, see Monitoring your EC2 Fleet in the Amazon EC2 User Guide.
+   * Describes the specified EC2 Fleets or all of your EC2 Fleets. For more information, see Monitor your EC2 Fleet in the Amazon EC2 User Guide.
    */
   describeFleets(callback?: (err: AWSError, data: EC2.Types.DescribeFleetsResult) => void): Request<EC2.Types.DescribeFleetsResult, AWSError>;
   /**
@@ -3661,11 +3661,11 @@ declare class EC2 extends Service {
    */
   modifyVpnTunnelOptions(callback?: (err: AWSError, data: EC2.Types.ModifyVpnTunnelOptionsResult) => void): Request<EC2.Types.ModifyVpnTunnelOptionsResult, AWSError>;
   /**
-   * Enables detailed monitoring for a running instance. Otherwise, basic monitoring is enabled. For more information, see Monitor your instances using CloudWatch in the Amazon EC2 User Guide. To disable detailed monitoring, see .
+   * Enables detailed monitoring for a running instance. Otherwise, basic monitoring is enabled. For more information, see Monitor your instances using CloudWatch in the Amazon EC2 User Guide. To disable detailed monitoring, see UnmonitorInstances.
    */
   monitorInstances(params: EC2.Types.MonitorInstancesRequest, callback?: (err: AWSError, data: EC2.Types.MonitorInstancesResult) => void): Request<EC2.Types.MonitorInstancesResult, AWSError>;
   /**
-   * Enables detailed monitoring for a running instance. Otherwise, basic monitoring is enabled. For more information, see Monitor your instances using CloudWatch in the Amazon EC2 User Guide. To disable detailed monitoring, see .
+   * Enables detailed monitoring for a running instance. Otherwise, basic monitoring is enabled. For more information, see Monitor your instances using CloudWatch in the Amazon EC2 User Guide. To disable detailed monitoring, see UnmonitorInstances.
    */
   monitorInstances(callback?: (err: AWSError, data: EC2.Types.MonitorInstancesResult) => void): Request<EC2.Types.MonitorInstancesResult, AWSError>;
   /**
@@ -3749,11 +3749,11 @@ declare class EC2 extends Service {
    */
   registerImage(callback?: (err: AWSError, data: EC2.Types.RegisterImageResult) => void): Request<EC2.Types.RegisterImageResult, AWSError>;
   /**
-   * Registers a set of tag keys to include in scheduled event notifications for your resources.  To remove tags, use .
+   * Registers a set of tag keys to include in scheduled event notifications for your resources.  To remove tags, use DeregisterInstanceEventNotificationAttributes.
    */
   registerInstanceEventNotificationAttributes(params: EC2.Types.RegisterInstanceEventNotificationAttributesRequest, callback?: (err: AWSError, data: EC2.Types.RegisterInstanceEventNotificationAttributesResult) => void): Request<EC2.Types.RegisterInstanceEventNotificationAttributesResult, AWSError>;
   /**
-   * Registers a set of tag keys to include in scheduled event notifications for your resources.  To remove tags, use .
+   * Registers a set of tag keys to include in scheduled event notifications for your resources.  To remove tags, use DeregisterInstanceEventNotificationAttributes.
    */
   registerInstanceEventNotificationAttributes(callback?: (err: AWSError, data: EC2.Types.RegisterInstanceEventNotificationAttributesResult) => void): Request<EC2.Types.RegisterInstanceEventNotificationAttributesResult, AWSError>;
   /**
@@ -5937,7 +5937,7 @@ declare namespace EC2 {
   export type AutoRecoveryFlag = boolean;
   export interface AvailabilityZone {
     /**
-     * The state of the Availability Zone, Local Zone, or Wavelength Zone.
+     * The state of the Availability Zone, Local Zone, or Wavelength Zone. This value is always available.
      */
     State?: AvailabilityZoneState;
     /**
@@ -7793,11 +7793,11 @@ declare namespace EC2 {
      */
     Lifecycle?: InstanceLifecycle;
     /**
-     * The error code that indicates why the instance could not be launched. For more information about error codes, see Error Codes.
+     * The error code that indicates why the instance could not be launched. For more information about error codes, see Error codes.
      */
     ErrorCode?: String;
     /**
-     * The error message that describes why the instance could not be launched. For more information about error messages, see Error Codes.
+     * The error message that describes why the instance could not be launched. For more information about error messages, see Error codes.
      */
     ErrorMessage?: String;
   }
@@ -7831,7 +7831,7 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see Ensuring Idempotency.
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see Ensuring idempotency.
      */
     ClientToken?: String;
     /**
@@ -8667,7 +8667,7 @@ declare namespace EC2 {
      */
     Ipv6PrefixCount?: Integer;
     /**
-     * Indicates the type of network interface. To create an Elastic Fabric Adapter (EFA), specify efa. For more information, see  Elastic Fabric Adapter in the Amazon Elastic Compute Cloud User Guide. To create a trunk network interface, specify trunk.
+     * The type of network interface. The default is interface. The only supported values are efa and trunk.
      */
     InterfaceType?: NetworkInterfaceCreationType;
     /**
@@ -11290,7 +11290,7 @@ declare namespace EC2 {
   }
   export interface DescribeAvailabilityZonesRequest {
     /**
-     * The filters.    group-name - For Availability Zones, use the Region name. For Local Zones, use the name of the group associated with the Local Zone (for example, us-west-2-lax-1) For Wavelength Zones, use the name of the group associated with the Wavelength Zone (for example, us-east-1-wl1-bos-wlz-1).    message - The Zone message.    opt-in-status - The opt-in status (opted-in, and not-opted-in | opt-in-not-required).    parent-zoneID - The ID of the zone that handles some of the Local Zone and Wavelength Zone control plane operations, such as API calls.    parent-zoneName - The ID of the zone that handles some of the Local Zone and Wavelength Zone control plane operations, such as API calls.    region-name - The name of the Region for the Zone (for example, us-east-1).    state - The state of the Availability Zone, the Local Zone, or the Wavelength Zone (available | information | impaired | unavailable).    zone-id - The ID of the Availability Zone (for example, use1-az1), the Local Zone (for example, usw2-lax1-az1), or the Wavelength Zone (for example, us-east-1-wl1-bos-wlz-1).    zone-type - The type of zone, for example, local-zone.    zone-name - The name of the Availability Zone (for example, us-east-1a), the Local Zone (for example, us-west-2-lax-1a), or the Wavelength Zone (for example, us-east-1-wl1-bos-wlz-1).    zone-type - The type of zone, for example, local-zone.  
+     * The filters.    group-name - For Availability Zones, use the Region name. For Local Zones, use the name of the group associated with the Local Zone (for example, us-west-2-lax-1) For Wavelength Zones, use the name of the group associated with the Wavelength Zone (for example, us-east-1-wl1-bos-wlz-1).    message - The Zone message.    opt-in-status - The opt-in status (opted-in, and not-opted-in | opt-in-not-required).    parent-zoneID - The ID of the zone that handles some of the Local Zone and Wavelength Zone control plane operations, such as API calls.    parent-zoneName - The ID of the zone that handles some of the Local Zone and Wavelength Zone control plane operations, such as API calls.    region-name - The name of the Region for the Zone (for example, us-east-1).    state - The state of the Availability Zone, the Local Zone, or the Wavelength Zone (available).    zone-id - The ID of the Availability Zone (for example, use1-az1), the Local Zone (for example, usw2-lax1-az1), or the Wavelength Zone (for example, us-east-1-wl1-bos-wlz-1).    zone-type - The type of zone, for example, local-zone.    zone-name - The name of the Availability Zone (for example, us-east-1a), the Local Zone (for example, us-west-2-lax-1a), or the Wavelength Zone (for example, us-east-1-wl1-bos-wlz-1).    zone-type - The type of zone, for example, local-zone.  
      */
     Filters?: FilterList;
     /**
@@ -11409,7 +11409,7 @@ declare namespace EC2 {
      */
     MaxResults?: DescribeCapacityReservationsMaxResults;
     /**
-     * One or more filters.    instance-type - The type of instance for which the Capacity Reservation reserves capacity.    owner-id - The ID of the Amazon Web Services account that owns the Capacity Reservation.    instance-platform - The type of operating system for which the Capacity Reservation reserves capacity.    availability-zone - The Availability Zone of the Capacity Reservation.    tenancy - Indicates the tenancy of the Capacity Reservation. A Capacity Reservation can have one of the following tenancy settings:    default - The Capacity Reservation is created on hardware that is shared with other Amazon Web Services accounts.    dedicated - The Capacity Reservation is created on single-tenant hardware that is dedicated to a single Amazon Web Services account.      outpost-arn - The Amazon Resource Name (ARN) of the Outpost on which the Capacity Reservation was created.    state - The current state of the Capacity Reservation. A Capacity Reservation can be in one of the following states:    active- The Capacity Reservation is active and the capacity is available for your use.    expired - The Capacity Reservation expired automatically at the date and time specified in your request. The reserved capacity is no longer available for your use.    cancelled - The Capacity Reservation was cancelled. The reserved capacity is no longer available for your use.    pending - The Capacity Reservation request was successful but the capacity provisioning is still pending.    failed - The Capacity Reservation request has failed. A request might fail due to invalid request parameters, capacity constraints, or instance limit constraints. Failed requests are retained for 60 minutes.      start-date - The date and time at which the Capacity Reservation was started.    end-date - The date and time at which the Capacity Reservation expires. When a Capacity Reservation expires, the reserved capacity is released and you can no longer launch instances into it. The Capacity Reservation's state changes to expired when it reaches its end date and time.    end-date-type - Indicates the way in which the Capacity Reservation ends. A Capacity Reservation can have one of the following end types:    unlimited - The Capacity Reservation remains active until you explicitly cancel it.    limited - The Capacity Reservation expires automatically at a specified date and time.      instance-match-criteria - Indicates the type of instance launches that the Capacity Reservation accepts. The options include:    open - The Capacity Reservation accepts all instances that have matching attributes (instance type, platform, and Availability Zone). Instances that have matching attributes launch into the Capacity Reservation automatically without specifying any additional parameters.    targeted - The Capacity Reservation only accepts instances that have matching attributes (instance type, platform, and Availability Zone), and explicitly target the Capacity Reservation. This ensures that only permitted instances can use the reserved capacity.    
+     * One or more filters.    instance-type - The type of instance for which the Capacity Reservation reserves capacity.    owner-id - The ID of the Amazon Web Services account that owns the Capacity Reservation.    instance-platform - The type of operating system for which the Capacity Reservation reserves capacity.    availability-zone - The Availability Zone of the Capacity Reservation.    tenancy - Indicates the tenancy of the Capacity Reservation. A Capacity Reservation can have one of the following tenancy settings:    default - The Capacity Reservation is created on hardware that is shared with other Amazon Web Services accounts.    dedicated - The Capacity Reservation is created on single-tenant hardware that is dedicated to a single Amazon Web Services account.      outpost-arn - The Amazon Resource Name (ARN) of the Outpost on which the Capacity Reservation was created.    state - The current state of the Capacity Reservation. A Capacity Reservation can be in one of the following states:    active- The Capacity Reservation is active and the capacity is available for your use.    expired - The Capacity Reservation expired automatically at the date and time specified in your request. The reserved capacity is no longer available for your use.    cancelled - The Capacity Reservation was cancelled. The reserved capacity is no longer available for your use.    pending - The Capacity Reservation request was successful but the capacity provisioning is still pending.    failed - The Capacity Reservation request has failed. A request might fail due to invalid request parameters, capacity constraints, or instance limit constraints. Failed requests are retained for 60 minutes.      start-date - The date and time at which the Capacity Reservation was started.    end-date - The date and time at which the Capacity Reservation expires. When a Capacity Reservation expires, the reserved capacity is released and you can no longer launch instances into it. The Capacity Reservation's state changes to expired when it reaches its end date and time.    end-date-type - Indicates the way in which the Capacity Reservation ends. A Capacity Reservation can have one of the following end types:    unlimited - The Capacity Reservation remains active until you explicitly cancel it.    limited - The Capacity Reservation expires automatically at a specified date and time.      instance-match-criteria - Indicates the type of instance launches that the Capacity Reservation accepts. The options include:    open - The Capacity Reservation accepts all instances that have matching attributes (instance type, platform, and Availability Zone). Instances that have matching attributes launch into the Capacity Reservation automatically without specifying any additional parameters.    targeted - The Capacity Reservation only accepts instances that have matching attributes (instance type, platform, and Availability Zone), and explicitly target the Capacity Reservation. This ensures that only permitted instances can use the reserved capacity.      placement-group-arn - The ARN of the cluster placement group in which the Capacity Reservation was created.  
      */
     Filters?: FilterList;
     /**
@@ -11667,7 +11667,7 @@ declare namespace EC2 {
      */
     PoolIds?: CoipPoolIdSet;
     /**
-     * The filters. The following are the possible values:    coip-pool.pool-id       coip-pool.local-gateway-route-table-id   
+     * One or more filters.    coip-pool.local-gateway-route-table-id - The ID of the local gateway route table.    coip-pool.pool-id - The ID of the address pool.  
      */
     Filters?: FilterList;
     /**
@@ -12040,11 +12040,11 @@ declare namespace EC2 {
      */
     Lifecycle?: InstanceLifecycle;
     /**
-     * The error code that indicates why the instance could not be launched. For more information about error codes, see Error Codes.
+     * The error code that indicates why the instance could not be launched. For more information about error codes, see Error codes.
      */
     ErrorCode?: String;
     /**
-     * The error message that describes why the instance could not be launched. For more information about error messages, see Error Codes.
+     * The error message that describes why the instance could not be launched. For more information about error messages, see Error codes.
      */
     ErrorMessage?: String;
   }
@@ -12170,7 +12170,7 @@ declare namespace EC2 {
      */
     NextToken?: String;
     /**
-     * The ID of the EC2 Fleets.
+     * The IDs of the EC2 Fleets.  If a fleet is of type instant, you must specify the fleet ID, otherwise it does not appear in the response. 
      */
     FleetIds?: FleetIdSet;
     /**
@@ -12706,7 +12706,7 @@ declare namespace EC2 {
      */
     InstanceTypes?: RequestInstanceTypeList;
     /**
-     * One or more filters. Filter names and values are case-sensitive.    auto-recovery-supported - Indicates whether auto recovery is supported (true | false).    bare-metal - Indicates whether it is a bare metal instance type (true | false).    burstable-performance-supported - Indicates whether it is a burstable performance instance type (true | false).    current-generation - Indicates whether this instance type is the latest generation instance type of an instance family (true | false).    ebs-info.ebs-optimized-info.baseline-bandwidth-in-mbps - The baseline bandwidth performance for an EBS-optimized instance type, in Mbps.    ebs-info.ebs-optimized-info.baseline-iops - The baseline input/output storage operations per second for an EBS-optimized instance type.    ebs-info.ebs-optimized-info.baseline-throughput-in-mbps - The baseline throughput performance for an EBS-optimized instance type, in MB/s.    ebs-info.ebs-optimized-info.maximum-bandwidth-in-mbps - The maximum bandwidth performance for an EBS-optimized instance type, in Mbps.    ebs-info.ebs-optimized-info.maximum-iops - The maximum input/output storage operations per second for an EBS-optimized instance type.    ebs-info.ebs-optimized-info.maximum-throughput-in-mbps - The maximum throughput performance for an EBS-optimized instance type, in MB/s.    ebs-info.ebs-optimized-support - Indicates whether the instance type is EBS-optimized (supported | unsupported | default).    ebs-info.encryption-support - Indicates whether EBS encryption is supported (supported | unsupported).    ebs-info.nvme-support - Indicates whether non-volatile memory express (NVMe) is supported for EBS volumes (required | supported | unsupported).    free-tier-eligible - Indicates whether the instance type is eligible to use in the free tier (true | false).    hibernation-supported - Indicates whether On-Demand hibernation is supported (true | false).    hypervisor - The hypervisor (nitro | xen).    instance-storage-info.disk.count - The number of local disks.    instance-storage-info.disk.size-in-gb - The storage size of each instance storage disk, in GB.    instance-storage-info.disk.type - The storage technology for the local instance storage disks (hdd | ssd).    instance-storage-info.encryption-supported - Indicates whether data is encrypted at rest (required | unsupported).    instance-storage-info.nvme-support - Indicates whether non-volatile memory express (NVMe) is supported for instance store (required | supported | unsupported).    instance-storage-info.total-size-in-gb - The total amount of storage available from all local instance storage, in GB.    instance-storage-supported - Indicates whether the instance type has local instance storage (true | false).    instance-type - The instance type (for example c5.2xlarge or c5*).    memory-info.size-in-mib - The memory size.    network-info.efa-info.maximum-efa-interfaces - The maximum number of Elastic Fabric Adapters (EFAs) per instance.    network-info.efa-supported - Indicates whether the instance type supports Elastic Fabric Adapter (EFA) (true | false).    network-info.ena-support - Indicates whether Elastic Network Adapter (ENA) is supported or required (required | supported | unsupported).    network-info.encryption-in-transit-supported - Indicates whether the instance type automatically encrypts in-transit traffic between instances (true | false).    network-info.ipv4-addresses-per-interface - The maximum number of private IPv4 addresses per network interface.    network-info.ipv6-addresses-per-interface - The maximum number of private IPv6 addresses per network interface.    network-info.ipv6-supported - Indicates whether the instance type supports IPv6 (true | false).    network-info.maximum-network-interfaces - The maximum number of network interfaces per instance.    network-info.network-performance - The network performance (for example, "25 Gigabit").    processor-info.supported-architecture - The CPU architecture (arm64 | i386 | x86_64).    processor-info.sustained-clock-speed-in-ghz - The CPU clock speed, in GHz.    supported-boot-mode - The boot mode (legacy-bios | uefi).    supported-root-device-type - The root device type (ebs | instance-store).    supported-usage-class - The usage class (on-demand | spot).    supported-virtualization-type - The virtualization type (hvm | paravirtual).    vcpu-info.default-cores - The default number of cores for the instance type.    vcpu-info.default-threads-per-core - The default number of threads per core for the instance type.    vcpu-info.default-vcpus - The default number of vCPUs for the instance type.    vcpu-info.valid-cores - The number of cores that can be configured for the instance type.    vcpu-info.valid-threads-per-core - The number of threads per core that can be configured for the instance type. For example, "1" or "1,2".  
+     * One or more filters. Filter names and values are case-sensitive.    auto-recovery-supported - Indicates whether auto recovery is supported (true | false).    bare-metal - Indicates whether it is a bare metal instance type (true | false).    burstable-performance-supported - Indicates whether it is a burstable performance instance type (true | false).    current-generation - Indicates whether this instance type is the latest generation instance type of an instance family (true | false).    ebs-info.ebs-optimized-info.baseline-bandwidth-in-mbps - The baseline bandwidth performance for an EBS-optimized instance type, in Mbps.    ebs-info.ebs-optimized-info.baseline-iops - The baseline input/output storage operations per second for an EBS-optimized instance type.    ebs-info.ebs-optimized-info.baseline-throughput-in-mbps - The baseline throughput performance for an EBS-optimized instance type, in MB/s.    ebs-info.ebs-optimized-info.maximum-bandwidth-in-mbps - The maximum bandwidth performance for an EBS-optimized instance type, in Mbps.    ebs-info.ebs-optimized-info.maximum-iops - The maximum input/output storage operations per second for an EBS-optimized instance type.    ebs-info.ebs-optimized-info.maximum-throughput-in-mbps - The maximum throughput performance for an EBS-optimized instance type, in MB/s.    ebs-info.ebs-optimized-support - Indicates whether the instance type is EBS-optimized (supported | unsupported | default).    ebs-info.encryption-support - Indicates whether EBS encryption is supported (supported | unsupported).    ebs-info.nvme-support - Indicates whether non-volatile memory express (NVMe) is supported for EBS volumes (required | supported | unsupported).    free-tier-eligible - Indicates whether the instance type is eligible to use in the free tier (true | false).    hibernation-supported - Indicates whether On-Demand hibernation is supported (true | false).    hypervisor - The hypervisor (nitro | xen).    instance-storage-info.disk.count - The number of local disks.    instance-storage-info.disk.size-in-gb - The storage size of each instance storage disk, in GB.    instance-storage-info.disk.type - The storage technology for the local instance storage disks (hdd | ssd).    instance-storage-info.encryption-support - Indicates whether data is encrypted at rest (required | supported | unsupported).    instance-storage-info.nvme-support - Indicates whether non-volatile memory express (NVMe) is supported for instance store (required | supported | unsupported).    instance-storage-info.total-size-in-gb - The total amount of storage available from all local instance storage, in GB.    instance-storage-supported - Indicates whether the instance type has local instance storage (true | false).    instance-type - The instance type (for example c5.2xlarge or c5*).    memory-info.size-in-mib - The memory size.    network-info.efa-info.maximum-efa-interfaces - The maximum number of Elastic Fabric Adapters (EFAs) per instance.    network-info.efa-supported - Indicates whether the instance type supports Elastic Fabric Adapter (EFA) (true | false).    network-info.ena-support - Indicates whether Elastic Network Adapter (ENA) is supported or required (required | supported | unsupported).    network-info.encryption-in-transit-supported - Indicates whether the instance type automatically encrypts in-transit traffic between instances (true | false).    network-info.ipv4-addresses-per-interface - The maximum number of private IPv4 addresses per network interface.    network-info.ipv6-addresses-per-interface - The maximum number of private IPv6 addresses per network interface.    network-info.ipv6-supported - Indicates whether the instance type supports IPv6 (true | false).    network-info.maximum-network-cards - The maximum number of network cards per instance.    network-info.maximum-network-interfaces - The maximum number of network interfaces per instance.    network-info.network-performance - The network performance (for example, "25 Gigabit").    processor-info.supported-architecture - The CPU architecture (arm64 | i386 | x86_64).    processor-info.sustained-clock-speed-in-ghz - The CPU clock speed, in GHz.    supported-boot-mode - The boot mode (legacy-bios | uefi).    supported-root-device-type - The root device type (ebs | instance-store).    supported-usage-class - The usage class (on-demand | spot).    supported-virtualization-type - The virtualization type (hvm | paravirtual).    vcpu-info.default-cores - The default number of cores for the instance type.    vcpu-info.default-threads-per-core - The default number of threads per core for the instance type.    vcpu-info.default-vcpus - The default number of vCPUs for the instance type.    vcpu-info.valid-cores - The number of cores that can be configured for the instance type.    vcpu-info.valid-threads-per-core - The number of threads per core that can be configured for the instance type. For example, "1" or "1,2".  
      */
     Filters?: FilterList;
     /**
@@ -13036,7 +13036,7 @@ declare namespace EC2 {
      */
     LocalGatewayRouteTableVirtualInterfaceGroupAssociationIds?: LocalGatewayRouteTableVirtualInterfaceGroupAssociationIdSet;
     /**
-     * One or more filters.    local-gateway-id - The ID of a local gateway.    local-gateway-route-table-id - The ID of the local gateway route table.    local-gateway-route-table-virtual-interface-group-association-id - The ID of the association.    local-gateway-route-table-virtual-interface-group-id - The ID of the virtual interface group.    state - The state of the association.  
+     * One or more filters.    local-gateway-id - The ID of a local gateway.    local-gateway-route-table-arn - The Amazon Resource Name (ARN) of the local gateway route table for the virtual interface group.    local-gateway-route-table-id - The ID of the local gateway route table.    local-gateway-route-table-virtual-interface-group-association-id - The ID of the association.    local-gateway-route-table-virtual-interface-group-id - The ID of the virtual interface group.    owner-id - The ID of the Amazon Web Services account that owns the local gateway virtual interface group association.    state - The state of the association.  
      */
     Filters?: FilterList;
     /**
@@ -13068,7 +13068,7 @@ declare namespace EC2 {
      */
     LocalGatewayRouteTableVpcAssociationIds?: LocalGatewayRouteTableVpcAssociationIdSet;
     /**
-     * One or more filters.    local-gateway-id - The ID of a local gateway.    local-gateway-route-table-id - The ID of the local gateway route table.    local-gateway-route-table-vpc-association-id - The ID of the association.    state - The state of the association.    vpc-id - The ID of the VPC.  
+     * One or more filters.    local-gateway-id - The ID of a local gateway.    local-gateway-route-table-arn - The Amazon Resource Name (ARN) of the local gateway route table for the association.    local-gateway-route-table-id - The ID of the local gateway route table.    local-gateway-route-table-vpc-association-id - The ID of the association.    owner-id - The ID of the Amazon Web Services account that owns the local gateway route table for the association.    state - The state of the association.    vpc-id - The ID of the VPC.  
      */
     Filters?: FilterList;
     /**
@@ -13100,7 +13100,7 @@ declare namespace EC2 {
      */
     LocalGatewayRouteTableIds?: LocalGatewayRouteTableIdSet;
     /**
-     * One or more filters.    local-gateway-id - The ID of a local gateway.    local-gateway-route-table-id - The ID of a local gateway route table.    outpost-arn - The Amazon Resource Name (ARN) of the Outpost.    state - The state of the local gateway route table.  
+     * One or more filters.    local-gateway-id - The ID of a local gateway.    local-gateway-route-table-arn - The Amazon Resource Name (ARN) of the local gateway route table.    local-gateway-route-table-id - The ID of a local gateway route table.    outpost-arn - The Amazon Resource Name (ARN) of the Outpost.    owner-id - The ID of the Amazon Web Services account that owns the local gateway route table.    state - The state of the local gateway route table.  
      */
     Filters?: FilterList;
     /**
@@ -13132,7 +13132,7 @@ declare namespace EC2 {
      */
     LocalGatewayVirtualInterfaceGroupIds?: LocalGatewayVirtualInterfaceGroupIdSet;
     /**
-     * One or more filters.    local-gateway-id - The ID of a local gateway.    local-gateway-virtual-interface-id - The ID of the virtual interface.    local-gateway-virtual-interface-group-id - The ID of the virtual interface group.  
+     * One or more filters.    local-gateway-id - The ID of a local gateway.    local-gateway-virtual-interface-group-id - The ID of the virtual interface group.    local-gateway-virtual-interface-id - The ID of the virtual interface.    owner-id - The ID of the Amazon Web Services account that owns the local gateway virtual interface group.  
      */
     Filters?: FilterList;
     /**
@@ -13164,7 +13164,7 @@ declare namespace EC2 {
      */
     LocalGatewayVirtualInterfaceIds?: LocalGatewayVirtualInterfaceIdSet;
     /**
-     * One or more filters.
+     * One or more filters.    local-address - The local address.    local-bgp-asn - The Border Gateway Protocol (BGP) Autonomous System Number (ASN) of the local gateway.    local-gateway-id - The ID of the local gateway.    local-gateway-virtual-interface-id - The ID of the virtual interface.    local-gateway-virtual-interface-group-id - The ID of the virtual interface group.    owner-id - The ID of the Amazon Web Services account that owns the local gateway virtual interface.    peer-address - The peer address.    peer-bgp-asn - The peer BGP ASN.    vlan - The ID of the VLAN.  
      */
     Filters?: FilterList;
     /**
@@ -13192,11 +13192,11 @@ declare namespace EC2 {
   }
   export interface DescribeLocalGatewaysRequest {
     /**
-     * One or more filters.    local-gateway-id - The ID of a local gateway.    local-gateway-route-table-id - The ID of the local gateway route table.    local-gateway-route-table-virtual-interface-group-association-id - The ID of the association.    local-gateway-route-table-virtual-interface-group-id - The ID of the virtual interface group.    outpost-arn - The Amazon Resource Name (ARN) of the Outpost.    state - The state of the association.  
+     * The IDs of the local gateways.
      */
     LocalGatewayIds?: LocalGatewayIdSet;
     /**
-     * One or more filters.
+     * One or more filters.    local-gateway-id - The ID of a local gateway.    outpost-arn - The Amazon Resource Name (ARN) of the Outpost.    owner-id - The ID of the Amazon Web Services account that owns the local gateway.    state - The state of the association.  
      */
     Filters?: FilterList;
     /**
@@ -13573,7 +13573,7 @@ declare namespace EC2 {
   export type DescribeNetworkInterfacesMaxResults = number;
   export interface DescribeNetworkInterfacesRequest {
     /**
-     * One or more filters.    addresses.private-ip-address - The private IPv4 addresses associated with the network interface.    addresses.primary - Whether the private IPv4 address is the primary IP address associated with the network interface.     addresses.association.public-ip - The association ID returned when the network interface was associated with the Elastic IP address (IPv4).    addresses.association.owner-id - The owner ID of the addresses associated with the network interface.    association.association-id - The association ID returned when the network interface was associated with an IPv4 address.    association.allocation-id - The allocation ID returned when you allocated the Elastic IP address (IPv4) for your network interface.    association.ip-owner-id - The owner of the Elastic IP address (IPv4) associated with the network interface.    association.public-ip - The address of the Elastic IP address (IPv4) bound to the network interface.    association.public-dns-name - The public DNS name for the network interface (IPv4).    attachment.attachment-id - The ID of the interface attachment.    attachment.attach-time - The time that the network interface was attached to an instance.    attachment.delete-on-termination - Indicates whether the attachment is deleted when an instance is terminated.    attachment.device-index - The device index to which the network interface is attached.    attachment.instance-id - The ID of the instance to which the network interface is attached.    attachment.instance-owner-id - The owner ID of the instance to which the network interface is attached.    attachment.status - The status of the attachment (attaching | attached | detaching | detached).    availability-zone - The Availability Zone of the network interface.    description - The description of the network interface.    group-id - The ID of a security group associated with the network interface.    group-name - The name of a security group associated with the network interface.    ipv6-addresses.ipv6-address - An IPv6 address associated with the network interface.    mac-address - The MAC address of the network interface.    network-interface-id - The ID of the network interface.    owner-id - The Amazon Web Services account ID of the network interface owner.    private-ip-address - The private IPv4 address or addresses of the network interface.    private-dns-name - The private DNS name of the network interface (IPv4).    requester-id - The alias or Amazon Web Services account ID of the principal or service that created the network interface.    requester-managed - Indicates whether the network interface is being managed by an Amazon Web Service (for example, Amazon Web Services Management Console, Auto Scaling, and so on).    source-dest-check - Indicates whether the network interface performs source/destination checking. A value of true means checking is enabled, and false means checking is disabled. The value must be false for the network interface to perform network address translation (NAT) in your VPC.     status - The status of the network interface. If the network interface is not attached to an instance, the status is available; if a network interface is attached to an instance the status is in-use.    subnet-id - The ID of the subnet for the network interface.    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.    vpc-id - The ID of the VPC for the network interface.  
+     * One or more filters.    addresses.private-ip-address - The private IPv4 addresses associated with the network interface.    addresses.primary - Whether the private IPv4 address is the primary IP address associated with the network interface.     addresses.association.public-ip - The association ID returned when the network interface was associated with the Elastic IP address (IPv4).    addresses.association.owner-id - The owner ID of the addresses associated with the network interface.    association.association-id - The association ID returned when the network interface was associated with an IPv4 address.    association.allocation-id - The allocation ID returned when you allocated the Elastic IP address (IPv4) for your network interface.    association.ip-owner-id - The owner of the Elastic IP address (IPv4) associated with the network interface.    association.public-ip - The address of the Elastic IP address (IPv4) bound to the network interface.    association.public-dns-name - The public DNS name for the network interface (IPv4).    attachment.attachment-id - The ID of the interface attachment.    attachment.attach-time - The time that the network interface was attached to an instance.    attachment.delete-on-termination - Indicates whether the attachment is deleted when an instance is terminated.    attachment.device-index - The device index to which the network interface is attached.    attachment.instance-id - The ID of the instance to which the network interface is attached.    attachment.instance-owner-id - The owner ID of the instance to which the network interface is attached.    attachment.status - The status of the attachment (attaching | attached | detaching | detached).    availability-zone - The Availability Zone of the network interface.    description - The description of the network interface.    group-id - The ID of a security group associated with the network interface.    group-name - The name of a security group associated with the network interface.    ipv6-addresses.ipv6-address - An IPv6 address associated with the network interface.    interface-type - The type of network interface (api_gateway_managed | aws_codestar_connections_managed | branch | efa | gateway_load_balancer | gateway_load_balancer_endpoint | global_accelerator_managed | interface | iot_rules_managed | lambda | load_balancer | nat_gateway | network_load_balancer | quicksight | transit_gateway | trunk | vpc_endpoint).    mac-address - The MAC address of the network interface.    network-interface-id - The ID of the network interface.    owner-id - The Amazon Web Services account ID of the network interface owner.    private-ip-address - The private IPv4 address or addresses of the network interface.    private-dns-name - The private DNS name of the network interface (IPv4).    requester-id - The alias or Amazon Web Services account ID of the principal or service that created the network interface.    requester-managed - Indicates whether the network interface is being managed by an Amazon Web Service (for example, Amazon Web Services Management Console, Auto Scaling, and so on).    source-dest-check - Indicates whether the network interface performs source/destination checking. A value of true means checking is enabled, and false means checking is disabled. The value must be false for the network interface to perform network address translation (NAT) in your VPC.     status - The status of the network interface. If the network interface is not attached to an instance, the status is available; if a network interface is attached to an instance the status is in-use.    subnet-id - The ID of the subnet for the network interface.    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.    vpc-id - The ID of the VPC for the network interface.  
      */
     Filters?: FilterList;
     /**
@@ -16193,7 +16193,7 @@ declare namespace EC2 {
      */
     OutpostArn?: String;
     /**
-     * Indicates whether the encryption state of an EBS volume is changed while being restored from a backing snapshot. The effect of setting the encryption state to true depends on the volume origin (new or from a snapshot), starting encryption state, ownership, and whether encryption by default is enabled. For more information, see Amazon EBS encryption in the Amazon EC2 User Guide. In no case can you remove encryption from an encrypted volume. Encrypted volumes can only be attached to instances that support Amazon EBS encryption. For more information, see Supported instance types. This parameter is not returned by .
+     * Indicates whether the encryption state of an EBS volume is changed while being restored from a backing snapshot. The effect of setting the encryption state to true depends on the volume origin (new or from a snapshot), starting encryption state, ownership, and whether encryption by default is enabled. For more information, see Amazon EBS encryption in the Amazon EC2 User Guide. In no case can you remove encryption from an encrypted volume. Encrypted volumes can only be attached to instances that support Amazon EBS encryption. For more information, see Supported instance types. This parameter is not returned by DescribeImageAttribute.
      */
     Encrypted?: Boolean;
   }
@@ -17354,7 +17354,7 @@ declare namespace EC2 {
      */
     FleetState?: FleetStateCode;
     /**
-     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see Ensuring Idempotency. Constraints: Maximum 64 ASCII characters
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see Ensuring idempotency. Constraints: Maximum 64 ASCII characters
      */
     ClientToken?: String;
     /**
@@ -17893,7 +17893,7 @@ declare namespace EC2 {
      */
     PoolId: CoipPoolId;
     /**
-     * The filters. The following are the possible values:    coip-address-usage.allocation-id       coip-address-usage.aws-account-id       coip-address-usage.aws-service       coip-address-usage.co-ip   
+     * One or more filters.    coip-address-usage.allocation-id - The allocation ID of the address.    coip-address-usage.aws-account-id - The ID of the Amazon Web Services account that is using the customer-owned IP address.    coip-address-usage.aws-service - The Amazon Web Services service that is using the customer-owned IP address.    coip-address-usage.co-ip - The customer-owned IP address.  
      */
     Filters?: FilterList;
     /**
@@ -20633,7 +20633,7 @@ declare namespace EC2 {
      */
     VpcId?: String;
     /**
-     * Describes the type of network interface. Valid values: interface | efa | trunk 
+     * The type of network interface. Valid values: interface | efa | trunk 
      */
     InterfaceType?: String;
     /**
@@ -20748,7 +20748,7 @@ declare namespace EC2 {
      */
     AssociateCarrierIpAddress?: Boolean;
     /**
-     * The type of network interface. To create an Elastic Fabric Adapter (EFA), specify efa. For more information, see Elastic Fabric Adapter in the Amazon Elastic Compute Cloud User Guide. Valid values: interface | efa 
+     * The type of network interface. Valid values: interface | efa 
      */
     InterfaceType?: String;
     /**
@@ -22312,7 +22312,7 @@ declare namespace EC2 {
      */
     HttpProtocolIpv6?: LaunchTemplateInstanceMetadataProtocolIpv6;
     /**
-     *  
+     * Set to enabled to allow access to instance tags from the instance metadata. Set to disabled to turn off access to instance tags from the instance metadata. For more information, see Work with instance tags using the instance metadata. Default: disabled 
      */
     InstanceMetadataTags?: LaunchTemplateInstanceMetadataTagsState;
   }
@@ -22714,7 +22714,7 @@ declare namespace EC2 {
   export type LaunchTemplateTagSpecificationList = LaunchTemplateTagSpecification[];
   export interface LaunchTemplateTagSpecificationRequest {
     /**
-     * The type of resource to tag. Currently, the resource types that support tagging on creation are instance and volume. To tag a resource after it has been created, see CreateTags.
+     * The type of resource to tag. Currently, the resource types that support tagging on creation are instance, volume, elastic-gpu, network-interface, and spot-instances-request. To tag a resource after it has been created, see CreateTags.
      */
     ResourceType?: ResourceType;
     /**
@@ -25737,7 +25737,7 @@ declare namespace EC2 {
   }
   export type NetworkInterfacePrivateIpAddressList = NetworkInterfacePrivateIpAddress[];
   export type NetworkInterfaceStatus = "available"|"associated"|"attaching"|"in-use"|"detaching"|string;
-  export type NetworkInterfaceType = "interface"|"natGateway"|"efa"|"trunk"|string;
+  export type NetworkInterfaceType = "interface"|"natGateway"|"efa"|"trunk"|"load_balancer"|"network_load_balancer"|"vpc_endpoint"|"branch"|"transit_gateway"|"lambda"|"quicksight"|"global_accelerator_managed"|"api_gateway_managed"|"gateway_load_balancer"|"gateway_load_balancer_endpoint"|"iot_rules_managed"|"aws_codestar_connections_managed"|string;
   export type NetworkPerformance = string;
   export interface NewDhcpConfiguration {
     Key?: String;
@@ -29293,7 +29293,7 @@ declare namespace EC2 {
      */
     LocalGatewayRouteTableId: LocalGatewayRoutetableId;
     /**
-     * One or more filters.
+     * One or more filters.    route-search.exact-match - The exact match of the specified filter.    route-search.longest-prefix-match - The longest prefix that matches the route.    route-search.subnet-of-match - The routes with a subnet that match the specified CIDR filter.    route-search.supernet-of-match - The routes with a CIDR that encompass the CIDR filter. For example, if you have 10.0.1.0/29 and 10.0.1.0/31 routes in your route table and you specify supernet-of-match as 10.0.1.0/30, then the result returns 10.0.1.0/29.    state - The state of the route.    type - The route type.  
      */
     Filters?: FilterList;
     /**
@@ -30952,7 +30952,7 @@ declare namespace EC2 {
      */
     Key?: String;
     /**
-     * The value of the tag. Constraints: Tag values are case-sensitive and accept a maximum of 255 Unicode characters.
+     * The value of the tag. Constraints: Tag values are case-sensitive and accept a maximum of 256 Unicode characters.
      */
     Value?: String;
   }

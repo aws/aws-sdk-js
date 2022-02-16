@@ -965,11 +965,11 @@ declare class SSM extends Service {
    */
   stopAutomationExecution(callback?: (err: AWSError, data: SSM.Types.StopAutomationExecutionResult) => void): Request<SSM.Types.StopAutomationExecutionResult, AWSError>;
   /**
-   * Permanently ends a session and closes the data connection between the Session Manager client and SSM Agent on the managed node. A terminated session isn't be resumed.
+   * Permanently ends a session and closes the data connection between the Session Manager client and SSM Agent on the managed node. A terminated session can't be resumed.
    */
   terminateSession(params: SSM.Types.TerminateSessionRequest, callback?: (err: AWSError, data: SSM.Types.TerminateSessionResponse) => void): Request<SSM.Types.TerminateSessionResponse, AWSError>;
   /**
-   * Permanently ends a session and closes the data connection between the Session Manager client and SSM Agent on the managed node. A terminated session isn't be resumed.
+   * Permanently ends a session and closes the data connection between the Session Manager client and SSM Agent on the managed node. A terminated session can't be resumed.
    */
   terminateSession(callback?: (err: AWSError, data: SSM.Types.TerminateSessionResponse) => void): Request<SSM.Types.TerminateSessionResponse, AWSError>;
   /**
@@ -981,11 +981,11 @@ declare class SSM extends Service {
    */
   unlabelParameterVersion(callback?: (err: AWSError, data: SSM.Types.UnlabelParameterVersionResult) => void): Request<SSM.Types.UnlabelParameterVersionResult, AWSError>;
   /**
-   * Updates an association. You can update the association name and version, the document version, schedule, parameters, and Amazon Simple Storage Service (Amazon S3) output. When you call UpdateAssociation, the system drops all optional parameters from the request and overwrites the association with null values for those parameters. This is by design. You must specify all optional parameters in the call, even if you are not changing the parameters. This includes the Name parameter. Before calling this API action, we recommend that you call the DescribeAssociation API operation and make a note of all optional parameters required for your UpdateAssociation call. In order to call this API operation, your Identity and Access Management (IAM) user account, group, or role must be configured with permission to call the DescribeAssociation API operation. If you don't have permission to call DescribeAssociation, then you receive the following error: An error occurred (AccessDeniedException) when calling the UpdateAssociation operation: User: &lt;user_arn&gt; isn't authorized to perform: ssm:DescribeAssociation on resource: &lt;resource_arn&gt;   When you update an association, the association immediately runs against the specified targets. You can add the ApplyOnlyAtCronInterval parameter to run the association during the next schedule run. 
+   * Updates an association. You can update the association name and version, the document version, schedule, parameters, and Amazon Simple Storage Service (Amazon S3) output. When you call UpdateAssociation, the system removes all optional parameters from the request and overwrites the association with null values for those parameters. This is by design. You must specify all optional parameters in the call, even if you are not changing the parameters. This includes the Name parameter. Before calling this API action, we recommend that you call the DescribeAssociation API operation and make a note of all optional parameters required for your UpdateAssociation call. In order to call this API operation, your Identity and Access Management (IAM) user account, group, or role must be configured with permission to call the DescribeAssociation API operation. If you don't have permission to call DescribeAssociation, then you receive the following error: An error occurred (AccessDeniedException) when calling the UpdateAssociation operation: User: &lt;user_arn&gt; isn't authorized to perform: ssm:DescribeAssociation on resource: &lt;resource_arn&gt;   When you update an association, the association immediately runs against the specified targets. You can add the ApplyOnlyAtCronInterval parameter to run the association during the next schedule run. 
    */
   updateAssociation(params: SSM.Types.UpdateAssociationRequest, callback?: (err: AWSError, data: SSM.Types.UpdateAssociationResult) => void): Request<SSM.Types.UpdateAssociationResult, AWSError>;
   /**
-   * Updates an association. You can update the association name and version, the document version, schedule, parameters, and Amazon Simple Storage Service (Amazon S3) output. When you call UpdateAssociation, the system drops all optional parameters from the request and overwrites the association with null values for those parameters. This is by design. You must specify all optional parameters in the call, even if you are not changing the parameters. This includes the Name parameter. Before calling this API action, we recommend that you call the DescribeAssociation API operation and make a note of all optional parameters required for your UpdateAssociation call. In order to call this API operation, your Identity and Access Management (IAM) user account, group, or role must be configured with permission to call the DescribeAssociation API operation. If you don't have permission to call DescribeAssociation, then you receive the following error: An error occurred (AccessDeniedException) when calling the UpdateAssociation operation: User: &lt;user_arn&gt; isn't authorized to perform: ssm:DescribeAssociation on resource: &lt;resource_arn&gt;   When you update an association, the association immediately runs against the specified targets. You can add the ApplyOnlyAtCronInterval parameter to run the association during the next schedule run. 
+   * Updates an association. You can update the association name and version, the document version, schedule, parameters, and Amazon Simple Storage Service (Amazon S3) output. When you call UpdateAssociation, the system removes all optional parameters from the request and overwrites the association with null values for those parameters. This is by design. You must specify all optional parameters in the call, even if you are not changing the parameters. This includes the Name parameter. Before calling this API action, we recommend that you call the DescribeAssociation API operation and make a note of all optional parameters required for your UpdateAssociation call. In order to call this API operation, your Identity and Access Management (IAM) user account, group, or role must be configured with permission to call the DescribeAssociation API operation. If you don't have permission to call DescribeAssociation, then you receive the following error: An error occurred (AccessDeniedException) when calling the UpdateAssociation operation: User: &lt;user_arn&gt; isn't authorized to perform: ssm:DescribeAssociation on resource: &lt;resource_arn&gt;   When you update an association, the association immediately runs against the specified targets. You can add the ApplyOnlyAtCronInterval parameter to run the association during the next schedule run. 
    */
   updateAssociation(callback?: (err: AWSError, data: SSM.Types.UpdateAssociationResult) => void): Request<SSM.Types.UpdateAssociationResult, AWSError>;
   /**
@@ -2582,7 +2582,7 @@ declare namespace SSM {
      */
     VersionName?: DocumentVersionName;
     /**
-     * The type of document to create.
+     * The type of document to create.  The DeploymentStrategy document type is an internal-use-only document type reserved for AppConfig. 
      */
     DocumentType?: DocumentType;
     /**
@@ -5134,7 +5134,7 @@ declare namespace SSM {
   export type GetParametersByPathMaxResults = number;
   export interface GetParametersByPathRequest {
     /**
-     * The hierarchy for the parameter. Hierarchies start with a forward slash (/). The hierachy is the parameter name except the last part of the parameter. For the API call to succeeed, the last part of the parameter name can't be in the path. A parameter name hierarchy can have a maximum of 15 levels. Here is an example of a hierarchy: /Finance/Prod/IAD/WinServ2016/license33  
+     * The hierarchy for the parameter. Hierarchies start with a forward slash (/). The hierarchy is the parameter name except the last part of the parameter. For the API call to succeed, the last part of the parameter name can't be in the path. A parameter name hierarchy can have a maximum of 15 levels. Here is an example of a hierarchy: /Finance/Prod/IAD/WinServ2016/license33  
      */
     Path: PSParameterName;
     /**
@@ -6701,11 +6701,11 @@ declare namespace SSM {
      */
     ServiceRoleArn?: ServiceRole;
     /**
-     * The maximum number of targets this task can be run for, in parallel.
+     * The maximum number of targets this task can be run for, in parallel.  Although this element is listed as "Required: No", a value can be omitted only when you are registering or updating a targetless task You must provide a value in all other cases. For maintenance window tasks without a target specified, you can't supply a value for this option. Instead, the system inserts a placeholder value of 1. This value doesn't affect the running of your task. 
      */
     MaxConcurrency?: MaxConcurrency;
     /**
-     * The maximum number of errors allowed before this task stops being scheduled.
+     * The maximum number of errors allowed before this task stops being scheduled.  Although this element is listed as "Required: No", a value can be omitted only when you are registering or updating a targetless task You must provide a value in all other cases. For maintenance window tasks without a target specified, you can't supply a value for this option. Instead, the system inserts a placeholder value of 1. This value doesn't affect the running of your task. 
      */
     MaxErrors?: MaxErrors;
     /**
@@ -7300,11 +7300,11 @@ declare namespace SSM {
      */
     Name?: PSParameterName;
     /**
-     * The type of parameter. Valid values include the following: String, StringList, and SecureString.
+     * The type of parameter. Valid values include the following: String, StringList, and SecureString.  If type is StringList, the system returns a comma-separated string with no spaces between commas in the Value field. 
      */
     Type?: ParameterType;
     /**
-     * The parameter value.
+     * The parameter value.  If type is StringList, the system returns a comma-separated string with no spaces between commas in the Value field. 
      */
     Value?: PSParameterValue;
     /**
@@ -7395,7 +7395,7 @@ declare namespace SSM {
      */
     PolicyText?: String;
     /**
-     * The type of policy. Parameter Store, a capablility of Amazon Web Services Systems Manager, supports the following policy types: Expiration, ExpirationNotification, and NoChangeNotification. 
+     * The type of policy. Parameter Store, a capability of Amazon Web Services Systems Manager, supports the following policy types: Expiration, ExpirationNotification, and NoChangeNotification. 
      */
     PolicyType?: String;
     /**
@@ -7638,7 +7638,7 @@ declare namespace SSM {
      */
     Classification: PatchClassification;
     /**
-     * The severity of the patchsuch as Critical, Important, and Moderate.
+     * The severity of the patch such as Critical, Important, and Moderate.
      */
     Severity: PatchSeverity;
     /**
@@ -7921,7 +7921,7 @@ declare namespace SSM {
      */
     Policies?: ParameterPolicies;
     /**
-     * The data type for a String parameter. Supported data types include plain text and Amazon Machine Image (AMI) IDs.  The following data type values are supported.     text     aws:ec2:image    When you create a String parameter and specify aws:ec2:image, Amazon Web Services Systems Manager validates the parameter value is in the required format, such as ami-12345abcdeEXAMPLE, and that the specified AMI is available in your Amazon Web Services account. For more information, see Native parameter support for Amazon Machine Image (AMI) IDs in the Amazon Web Services Systems Manager User Guide.
+     * The data type for a String parameter. Supported data types include plain text and Amazon Machine Image (AMI) IDs.  The following data type values are supported.     text     aws:ec2:image     aws:ssm:integration    When you create a String parameter and specify aws:ec2:image, Amazon Web Services Systems Manager validates the parameter value is in the required format, such as ami-12345abcdeEXAMPLE, and that the specified AMI is available in your Amazon Web Services account. For more information, see Native parameter support for Amazon Machine Image (AMI) IDs in the Amazon Web Services Systems Manager User Guide.
      */
     DataType?: ParameterDataType;
   }
@@ -8040,11 +8040,11 @@ declare namespace SSM {
      */
     Priority?: MaintenanceWindowTaskPriority;
     /**
-     * The maximum number of targets this task can be run for in parallel.  For maintenance window tasks without a target specified, you can't supply a value for this option. Instead, the system inserts a placeholder value of 1. This value doesn't affect the running of your task. 
+     * The maximum number of targets this task can be run for, in parallel.  Although this element is listed as "Required: No", a value can be omitted only when you are registering or updating a targetless task You must provide a value in all other cases. For maintenance window tasks without a target specified, you can't supply a value for this option. Instead, the system inserts a placeholder value of 1. This value doesn't affect the running of your task. 
      */
     MaxConcurrency?: MaxConcurrency;
     /**
-     * The maximum number of errors allowed before this task stops being scheduled.  For maintenance window tasks without a target specified, you can't supply a value for this option. Instead, the system inserts a placeholder value of 1. This value doesn't affect the running of your task. 
+     * The maximum number of errors allowed before this task stops being scheduled.  Although this element is listed as "Required: No", a value can be omitted only when you are registering or updating a targetless task You must provide a value in all other cases. For maintenance window tasks without a target specified, you can't supply a value for this option. Instead, the system inserts a placeholder value of 1. This value doesn't affect the running of your task. 
      */
     MaxErrors?: MaxErrors;
     /**
@@ -9245,7 +9245,7 @@ declare namespace SSM {
      */
     Description?: MaintenanceWindowDescription;
     /**
-     * The time zone that the scheduled maintenance window executions are based on, in Internet Assigned Numbers Authority (IANA) format. For example: "America/Los_Angeles", "UTC", or "Asia/Seoul". For more information, see the Time Zone Database on the IANA website.
+     * The date and time, in ISO-8601 Extended format, for when you want the maintenance window to become active. StartDate allows you to delay activation of the maintenance window until the specified future date.
      */
     StartDate?: MaintenanceWindowStringDateTime;
     /**
@@ -9425,11 +9425,11 @@ declare namespace SSM {
      */
     Priority?: MaintenanceWindowTaskPriority;
     /**
-     * The new MaxConcurrency value you want to specify. MaxConcurrency is the number of targets that are allowed to run this task in parallel.  For maintenance window tasks without a target specified, you can't supply a value for this option. Instead, the system inserts a placeholder value of 1, which may be reported in the response to this command. This value doesn't affect the running of your task and can be ignored. 
+     * The new MaxConcurrency value you want to specify. MaxConcurrency is the number of targets that are allowed to run this task, in parallel.  Although this element is listed as "Required: No", a value can be omitted only when you are registering or updating a targetless task You must provide a value in all other cases. For maintenance window tasks without a target specified, you can't supply a value for this option. Instead, the system inserts a placeholder value of 1. This value doesn't affect the running of your task. 
      */
     MaxConcurrency?: MaxConcurrency;
     /**
-     * The new MaxErrors value to specify. MaxErrors is the maximum number of errors that are allowed before the task stops being scheduled.  For maintenance window tasks without a target specified, you can't supply a value for this option. Instead, the system inserts a placeholder value of 1, which may be reported in the response to this command. This value doesn't affect the running of your task and can be ignored. 
+     * The new MaxErrors value to specify. MaxErrors is the maximum number of errors that are allowed before the task stops being scheduled.  Although this element is listed as "Required: No", a value can be omitted only when you are registering or updating a targetless task You must provide a value in all other cases. For maintenance window tasks without a target specified, you can't supply a value for this option. Instead, the system inserts a placeholder value of 1. This value doesn't affect the running of your task. 
      */
     MaxErrors?: MaxErrors;
     /**
@@ -9589,7 +9589,7 @@ declare namespace SSM {
   }
   export interface UpdateOpsMetadataRequest {
     /**
-     * The Amazon Resoure Name (ARN) of the OpsMetadata Object to update.
+     * The Amazon Resource Name (ARN) of the OpsMetadata Object to update.
      */
     OpsMetadataArn: OpsMetadataArn;
     /**

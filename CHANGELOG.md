@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1074.0-->
+<!--LATEST=2.1075.0-->
 <!--ENTRYINSERT-->
+
+## 2.1075.0
+* feature: Budgets: Adds support for auto-adjusting budgets, a new budget method alongside fixed and planned. Auto-adjusting budgets introduces new metadata to configure a budget limit baseline using a historical lookback average or current period forecast.
+* feature: CostExplorer: AWS Cost Anomaly Detection now supports SNS FIFO topic subscribers.
+* feature: Glue: Support for optimistic locking in UpdateTable
 
 ## 2.1074.0
 * bugfix: ParamValidator: Fix the validation error when assign non-object values to member with document trait

@@ -7822,6 +7822,7 @@ declare namespace Glue {
      * The ID of the Data Catalog in which the table resides.
      */
     CatalogId?: CatalogIdString;
+    VersionId?: VersionString;
   }
   export interface TableError {
     /**
@@ -8675,6 +8676,7 @@ declare namespace Glue {
      * The transaction ID at which to update the table contents. 
      */
     TransactionId?: TransactionIdString;
+    VersionId?: VersionString;
   }
   export interface UpdateTableResponse {
   }
