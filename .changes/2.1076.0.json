@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "Backup",
+        "description": "AWS Backup add new S3_BACKUP_OBJECT_FAILED and S3_RESTORE_OBJECT_FAILED event types in BackupVaultNotifications events list."
+    },
+    {
+        "type": "feature",
+        "category": "Evidently",
+        "description": "Add support for filtering list of experiments and launches by status"
+    },
+    {
+        "type": "feature",
+        "category": "Redshift",
+        "description": "SDK release for Cross region datasharing and cost-control for cross region datasharing"
+    }
+]

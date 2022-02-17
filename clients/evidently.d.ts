@@ -1098,6 +1098,10 @@ declare namespace Evidently {
      * The name or ARN of the project to return the experiment list from.
      */
     project: ProjectRef;
+    /**
+     * Use this optional parameter to limit the returned results to only the experiments with the status that you specify here.
+     */
+    status?: ExperimentStatus;
   }
   export interface ListExperimentsResponse {
     /**
@@ -1146,6 +1150,10 @@ declare namespace Evidently {
      * The name or ARN of the project to return the launch list from.
      */
     project: ProjectRef;
+    /**
+     * Use this optional parameter to limit the returned results to only the launches with the status that you specify here.
+     */
+    status?: LaunchStatus;
   }
   export interface ListLaunchesResponse {
     /**
@@ -1220,7 +1228,7 @@ declare namespace Evidently {
     /**
      * The entity, such as a user or session, that does an action that causes a metric value to be recorded. An example is userDetails.userID.
      */
-    entityIdKey?: JsonPath;
+    entityIdKey: JsonPath;
     /**
      * The EventBridge event pattern that defines how the metric is recorded. For more information about EventBridge event patterns, see Amazon EventBridge event patterns.
      */
@@ -1228,7 +1236,7 @@ declare namespace Evidently {
     /**
      * A name for the metric.
      */
-    name?: CwDimensionSafeName;
+    name: CwDimensionSafeName;
     /**
      * A label for the units that the metric is measuring.
      */
@@ -1236,7 +1244,7 @@ declare namespace Evidently {
     /**
      * The value that is tracked to produce the metric.
      */
-    valueKey?: JsonPath;
+    valueKey: JsonPath;
   }
   export type MetricDefinitionConfigEventPatternString = string;
   export interface MetricGoal {
