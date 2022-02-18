@@ -116,6 +116,14 @@ declare class Budgets extends Service {
    */
   describeBudgetActionsForBudget(callback?: (err: AWSError, data: Budgets.Types.DescribeBudgetActionsForBudgetResponse) => void): Request<Budgets.Types.DescribeBudgetActionsForBudgetResponse, AWSError>;
   /**
+   *  Lists the budget names and notifications that are associated with an account. 
+   */
+  describeBudgetNotificationsForAccount(params: Budgets.Types.DescribeBudgetNotificationsForAccountRequest, callback?: (err: AWSError, data: Budgets.Types.DescribeBudgetNotificationsForAccountResponse) => void): Request<Budgets.Types.DescribeBudgetNotificationsForAccountResponse, AWSError>;
+  /**
+   *  Lists the budget names and notifications that are associated with an account. 
+   */
+  describeBudgetNotificationsForAccount(callback?: (err: AWSError, data: Budgets.Types.DescribeBudgetNotificationsForAccountResponse) => void): Request<Budgets.Types.DescribeBudgetNotificationsForAccountResponse, AWSError>;
+  /**
    * Describes the history for DAILY, MONTHLY, and QUARTERLY budgets. Budget history isn't available for ANNUAL budgets.
    */
   describeBudgetPerformanceHistory(params: Budgets.Types.DescribeBudgetPerformanceHistoryRequest, callback?: (err: AWSError, data: Budgets.Types.DescribeBudgetPerformanceHistoryResponse) => void): Request<Budgets.Types.DescribeBudgetPerformanceHistoryResponse, AWSError>;
@@ -319,6 +327,11 @@ declare namespace Budgets {
     AutoAdjustData?: AutoAdjustData;
   }
   export type BudgetName = string;
+  export interface BudgetNotificationsForAccount {
+    Notifications?: Notifications;
+    BudgetName?: BudgetName;
+  }
+  export type BudgetNotificationsForAccountList = BudgetNotificationsForAccount[];
   export interface BudgetPerformanceHistory {
     BudgetName?: BudgetName;
     BudgetType?: BudgetType;
@@ -629,6 +642,21 @@ declare namespace Budgets {
     Actions: Actions;
     NextToken?: GenericString;
   }
+  export interface DescribeBudgetNotificationsForAccountRequest {
+    AccountId: AccountId;
+    /**
+     *  An integer that shows how many budget name entries a paginated response contains. 
+     */
+    MaxResults?: MaxResultsBudgetNotifications;
+    NextToken?: GenericString;
+  }
+  export interface DescribeBudgetNotificationsForAccountResponse {
+    /**
+     *  A list of budget names and associated notifications for an account. 
+     */
+    BudgetNotificationsForAccount?: BudgetNotificationsForAccountList;
+    NextToken?: GenericString;
+  }
   export interface DescribeBudgetPerformanceHistoryRequest {
     AccountId: AccountId;
     BudgetName: BudgetName;
@@ -808,6 +836,7 @@ declare namespace Budgets {
   export type InstanceId = string;
   export type InstanceIds = InstanceId[];
   export type MaxResults = number;
+  export type MaxResultsBudgetNotifications = number;
   export interface Notification {
     /**
      * Specifies whether the notification is for how much you have spent (ACTUAL) or for how much that you're forecasted to spend (FORECASTED).

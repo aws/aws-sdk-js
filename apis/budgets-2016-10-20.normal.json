@@ -407,6 +407,40 @@
       ],
       "documentation": "<p> Describes all of the budget actions for a budget. </p>"
     },
+    "DescribeBudgetNotificationsForAccount": {
+      "name": "DescribeBudgetNotificationsForAccount",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeBudgetNotificationsForAccountRequest"
+      },
+      "output": {
+        "shape": "DescribeBudgetNotificationsForAccountResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalErrorException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "InvalidNextTokenException"
+        },
+        {
+          "shape": "ExpiredNextTokenException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        }
+      ],
+      "documentation": "<p> Lists the budget names and notifications that are associated with an account. </p>"
+    },
     "DescribeBudgetPerformanceHistory": {
       "name": "DescribeBudgetPerformanceHistory",
       "http": {
@@ -973,6 +1007,25 @@
       "max": 100,
       "min": 1,
       "pattern": "[^:\\\\]+"
+    },
+    "BudgetNotificationsForAccount": {
+      "type": "structure",
+      "members": {
+        "Notifications": {
+          "shape": "Notifications"
+        },
+        "BudgetName": {
+          "shape": "BudgetName"
+        }
+      },
+      "documentation": "<p> The budget name and associated notifications for an account. </p>"
+    },
+    "BudgetNotificationsForAccountList": {
+      "type": "list",
+      "member": {
+        "shape": "BudgetNotificationsForAccount"
+      },
+      "max": 50
     },
     "BudgetPerformanceHistory": {
       "type": "structure",
@@ -1582,6 +1635,36 @@
         }
       }
     },
+    "DescribeBudgetNotificationsForAccountRequest": {
+      "type": "structure",
+      "required": [
+        "AccountId"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "AccountId"
+        },
+        "MaxResults": {
+          "shape": "MaxResultsBudgetNotifications",
+          "documentation": "<p> An integer that shows how many budget name entries a paginated response contains. </p>"
+        },
+        "NextToken": {
+          "shape": "GenericString"
+        }
+      }
+    },
+    "DescribeBudgetNotificationsForAccountResponse": {
+      "type": "structure",
+      "members": {
+        "BudgetNotificationsForAccount": {
+          "shape": "BudgetNotificationsForAccountList",
+          "documentation": "<p> A list of budget names and associated notifications for an account. </p>"
+        },
+        "NextToken": {
+          "shape": "GenericString"
+        }
+      }
+    },
     "DescribeBudgetPerformanceHistoryRequest": {
       "type": "structure",
       "required": [
@@ -1930,6 +2013,12 @@
       "max": 100,
       "min": 1
     },
+    "MaxResultsBudgetNotifications": {
+      "type": "integer",
+      "box": true,
+      "max": 50,
+      "min": 1
+    },
     "Notification": {
       "type": "structure",
       "required": [
@@ -1971,7 +2060,7 @@
     "NotificationThreshold": {
       "type": "double",
       "documentation": "<p> The threshold of a notification.</p>",
-      "max": 40000000000,
+      "max": 15000000000000,
       "min": 0
     },
     "NotificationType": {

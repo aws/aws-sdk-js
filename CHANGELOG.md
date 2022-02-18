@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1076.0-->
+<!--LATEST=2.1077.0-->
 <!--ENTRYINSERT-->
+
+## 2.1077.0
+* feature: Budgets: This change introduces DescribeBudgetNotificationsForAccount API which returns budget notifications for the specified account
+* feature: Transfer: Properties for Transfer Family used with SFTP, FTP, and FTPS protocols. Display Banners are bodies of text that can be displayed before and/or after a user authenticates onto a server using one of the previously mentioned protocols.
 
 ## 2.1076.0
 * feature: Backup: AWS Backup add new S3_BACKUP_OBJECT_FAILED and S3_RESTORE_OBJECT_FAILED event types in BackupVaultNotifications events list.
