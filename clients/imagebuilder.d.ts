@@ -20,11 +20,11 @@ declare class Imagebuilder extends Service {
    */
   cancelImageCreation(callback?: (err: AWSError, data: Imagebuilder.Types.CancelImageCreationResponse) => void): Request<Imagebuilder.Types.CancelImageCreationResponse, AWSError>;
   /**
-   * Creates a new component that can be used to build, validate, test, and assess your image.
+   * Creates a new component that can be used to build, validate, test, and assess your image. The component is based on a YAML document that you specify using exactly one of the following methods:   Inline, using the data property in the request body.   A URL that points to a YAML document file stored in Amazon S3, using the uri property in the request body.  
    */
   createComponent(params: Imagebuilder.Types.CreateComponentRequest, callback?: (err: AWSError, data: Imagebuilder.Types.CreateComponentResponse) => void): Request<Imagebuilder.Types.CreateComponentResponse, AWSError>;
   /**
-   * Creates a new component that can be used to build, validate, test, and assess your image.
+   * Creates a new component that can be used to build, validate, test, and assess your image. The component is based on a YAML document that you specify using exactly one of the following methods:   Inline, using the data property in the request body.   A URL that points to a YAML document file stored in Amazon S3, using the uri property in the request body.  
    */
   createComponent(callback?: (err: AWSError, data: Imagebuilder.Types.CreateComponentResponse) => void): Request<Imagebuilder.Types.CreateComponentResponse, AWSError>;
   /**
@@ -421,7 +421,7 @@ declare namespace Imagebuilder {
      */
     systemsManagerAgent?: SystemsManagerAgent;
     /**
-     * Use this property to provide commands or a command script to run when you launch your build instance.  The userDataOverride property replaces any commands that Image Builder might have added to ensure that Systems Manager is installed on your Linux build instance. If you override the user data, make sure that you add commands to install Systems Manager, if it is not pre-installed on your base image. 
+     * Use this property to provide commands or a command script to run when you launch your build instance. The userDataOverride property replaces any commands that Image Builder might have added to ensure that Systems Manager is installed on your Linux build instance. If you override the user data, make sure that you add commands to install Systems Manager, if it is not pre-installed on your base image.  The user data is always base 64 encoded. For example, the following commands are encoded as IyEvYmluL2Jhc2gKbWtkaXIgLXAgL3Zhci9iYi8KdG91Y2ggL3Zhci$:  #!/bin/bash  mkdir -p /var/bb/ touch /var 
      */
     userDataOverride?: UserDataOverride;
   }
@@ -550,7 +550,7 @@ declare namespace Imagebuilder {
      */
     owner?: NonEmptyString;
     /**
-     * The data of the component.
+     * Component data contains the YAML document content for the component.
      */
     data?: ComponentData;
     /**
@@ -882,11 +882,11 @@ declare namespace Imagebuilder {
      */
     supportedOsVersions?: OsVersionList;
     /**
-     * The data of the component. Used to specify the data inline. Either data or uri can be used to specify the data within the component.
+     * Component data contains inline YAML document content for the component. Alternatively, you can specify the uri of a YAML document file stored in Amazon S3. However, you cannot specify both properties.
      */
     data?: InlineComponentData;
     /**
-     * The uri of the component. Must be an Amazon S3 URL and the requester must have permission to access the Amazon S3 bucket. If you use Amazon S3, you can specify component content up to your service quota. Either data or uri can be used to specify the data within the component.
+     * The uri of a YAML component document file. This must be an S3 URL (s3://bucket/key), and the requester must have permission to access the S3 bucket it points to. If you use Amazon S3, you can specify component content up to your service quota. Alternatively, you can specify the YAML document inline, using the component data property. You cannot specify both properties.
      */
     uri?: Uri;
     /**
@@ -1411,6 +1411,10 @@ declare namespace Imagebuilder {
      * Configure export settings to deliver disk images created from your image build, using a file format that is compatible with your VMs in that Region.
      */
     s3ExportConfiguration?: S3ExportConfiguration;
+    /**
+     * The Windows faster-launching configurations to use for AMI distribution.
+     */
+    fastLaunchConfigurations?: FastLaunchConfigurationList;
   }
   export interface DistributionConfiguration {
     /**
@@ -1520,6 +1524,49 @@ declare namespace Imagebuilder {
   export type EbsVolumeThroughput = number;
   export type EbsVolumeType = "standard"|"io1"|"io2"|"gp2"|"gp3"|"sc1"|"st1"|string;
   export type EmptyString = string;
+  export interface FastLaunchConfiguration {
+    /**
+     * A Boolean that represents the current state of faster launching for the Windows AMI. Set to true to start using Windows faster launching, or false to stop using it.
+     */
+    enabled: Boolean;
+    /**
+     * Configuration settings for managing the number of snapshots that are created from pre-provisioned instances for the Windows AMI when faster launching is enabled.
+     */
+    snapshotConfiguration?: FastLaunchSnapshotConfiguration;
+    /**
+     * The maximum number of parallel instances that are launched for creating resources.
+     */
+    maxParallelLaunches?: MaxParallelLaunches;
+    /**
+     * The launch template that the fast-launch enabled Windows AMI uses when it launches Windows instances to create pre-provisioned snapshots.
+     */
+    launchTemplate?: FastLaunchLaunchTemplateSpecification;
+    /**
+     * The owner account ID for the fast-launch enabled Windows AMI.
+     */
+    accountId?: AccountId;
+  }
+  export type FastLaunchConfigurationList = FastLaunchConfiguration[];
+  export interface FastLaunchLaunchTemplateSpecification {
+    /**
+     * The ID of the launch template to use for faster launching for a Windows AMI.
+     */
+    launchTemplateId?: LaunchTemplateId;
+    /**
+     * The name of the launch template to use for faster launching for a Windows AMI.
+     */
+    launchTemplateName?: NonEmptyString;
+    /**
+     * The version of the launch template to use for faster launching for a Windows AMI.
+     */
+    launchTemplateVersion?: NonEmptyString;
+  }
+  export interface FastLaunchSnapshotConfiguration {
+    /**
+     * The number of pre-provisioned snapshots to keep on hand for a fast-launch enabled Windows AMI.
+     */
+    targetResourceCount?: TargetResourceCount;
+  }
   export interface Filter {
     /**
      * The name of the filter. Filter names are case-sensitive.
@@ -2740,6 +2787,7 @@ declare namespace Imagebuilder {
      */
     s3Logs?: S3Logs;
   }
+  export type MaxParallelLaunches = number;
   export type NonEmptyString = string;
   export type NullableBoolean = boolean;
   export type OrganizationArn = string;
@@ -2949,6 +2997,7 @@ declare namespace Imagebuilder {
      */
     repositoryName: NonEmptyString;
   }
+  export type TargetResourceCount = number;
   export type Timezone = string;
   export interface UntagResourceRequest {
     /**

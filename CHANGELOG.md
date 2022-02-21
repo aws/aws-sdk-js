@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1077.0-->
+<!--LATEST=2.1078.0-->
 <!--ENTRYINSERT-->
+
+## 2.1078.0
+* feature: CustomerProfiles: This release introduces apis CreateIntegrationWorkflow, DeleteWorkflow, ListWorkflows, GetWorkflow and GetWorkflowSteps. These apis are used to manage and view integration workflows.
+* feature: DynamoDB: DynamoDB ExecuteStatement API now supports Limit as a request parameter to specify the maximum number of items to evaluate. If specified, the service will process up to the Limit and the results will include a LastEvaluatedKey value to continue the read in a subsequent operation.
+* feature: Imagebuilder: This release adds support to enable faster launching for Windows AMIs created by EC2 Image Builder.
 
 ## 2.1077.0
 * feature: Budgets: This change introduces DescribeBudgetNotificationsForAccount API which returns budget notifications for the specified account
