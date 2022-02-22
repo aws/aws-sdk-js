@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "AppRunner",
+        "description": "AWS App Runner adds a Java platform (Corretto 8, Corretto 11 runtimes) and a Node.js 14 runtime."
+    },
+    {
+        "type": "feature",
+        "category": "Translate",
+        "description": "This release enables customers to use translation settings for formality customization in their synchronous translation output."
+    }
+]

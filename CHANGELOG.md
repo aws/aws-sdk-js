@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1078.0-->
+<!--LATEST=2.1079.0-->
 <!--ENTRYINSERT-->
+
+## 2.1079.0
+* feature: AppRunner: AWS App Runner adds a Java platform (Corretto 8, Corretto 11 runtimes) and a Node.js 14 runtime.
+* feature: Translate: This release enables customers to use translation settings for formality customization in their synchronous translation output.
 
 ## 2.1078.0
 * feature: CustomerProfiles: This release introduces apis CreateIntegrationWorkflow, DeleteWorkflow, ListWorkflows, GetWorkflow and GetWorkflowSteps. These apis are used to manage and view integration workflows.
