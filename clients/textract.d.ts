@@ -225,7 +225,7 @@ declare namespace Textract {
     Page?: UInteger;
   }
   export type BlockList = Block[];
-  export type BlockType = "KEY_VALUE_SET"|"PAGE"|"LINE"|"WORD"|"TABLE"|"CELL"|"SELECTION_ELEMENT"|string;
+  export type BlockType = "KEY_VALUE_SET"|"PAGE"|"LINE"|"WORD"|"TABLE"|"CELL"|"SELECTION_ELEMENT"|"MERGED_CELL"|"TITLE"|string;
   export interface BoundingBox {
     /**
      * The width of the bounding box as a ratio of the overall document page width.
@@ -290,7 +290,7 @@ declare namespace Textract {
     Pages?: UInteger;
   }
   export type DocumentPages = Document[];
-  export type EntityType = "KEY"|"VALUE"|string;
+  export type EntityType = "KEY"|"VALUE"|"COLUMN_HEADER"|string;
   export type EntityTypes = EntityType[];
   export type ErrorCode = string;
   export interface ExpenseDetection {
@@ -630,7 +630,7 @@ declare namespace Textract {
     Ids?: IdList;
   }
   export type RelationshipList = Relationship[];
-  export type RelationshipType = "VALUE"|"CHILD"|"COMPLEX_FEATURES"|string;
+  export type RelationshipType = "VALUE"|"CHILD"|"COMPLEX_FEATURES"|"MERGED_CELL"|"TITLE"|string;
   export type RoleArn = string;
   export type S3Bucket = string;
   export interface S3Object {

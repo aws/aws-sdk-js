@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1079.0-->
+<!--LATEST=2.1080.0-->
 <!--ENTRYINSERT-->
+
+## 2.1080.0
+* feature: Lambda: Lambda releases .NET 6 managed runtime to be available in all commercial regions.
+* feature: Textract: Added support for merged cells and column header for table response.
+* feature: Transfer: The file input selection feature provides the ability to use either the originally uploaded file or the output file from the previous workflow step, enabling customers to make multiple copies of the original file while keeping the source file intact for file archival.
 
 ## 2.1079.0
 * feature: AppRunner: AWS App Runner adds a Java platform (Corretto 8, Corretto 11 runtimes) and a Node.js 14 runtime.
