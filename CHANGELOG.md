@@ -1,6 +1,15 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1080.0-->
+<!--LATEST=2.1081.0-->
 <!--ENTRYINSERT-->
+
+## 2.1081.0
+* feature: AutoScaling: You can now hibernate instances in a warm pool to stop instances without deleting their RAM contents. You can now also return instances to the warm pool on scale in, instead of always terminating capacity that you will need later.
+* feature: DataBrew: This AWS Glue Databrew release adds feature to merge job outputs into a max number of files for S3 File output type.
+* feature: FMS: AWS Firewall Manager now supports the configuration of AWS Network Firewall policies with either centralized or distributed deployment models. This release also adds support for custom endpoint configuration, where you can choose which Availability Zones to create firewall endpoints in.
+* feature: Lightsail: This release adds support to delete and create Lightsail default key pairs that you can use with Lightsail instances.
+* feature: S3: This release adds support for new integrity checking capabilities in Amazon S3. You can choose from four supported checksum algorithms for data integrity checking on your upload and download requests. In addition, AWS SDK can automatically calculate a checksum as it streams data into S3
+* feature: S3Control: Amazon S3 Batch Operations adds support for new integrity checking capabilities in Amazon S3.
+* feature: Transfer: Support automatic pagination when listing AWS Transfer Family resources.
 
 ## 2.1080.0
 * feature: Lambda: Lambda releases .NET 6 managed runtime to be available in all commercial regions.

@@ -2374,6 +2374,7 @@ declare namespace S3Control {
     Encryption?: StorageLensDataExportEncryption;
   }
   export type S3CannedAccessControlList = "private"|"public-read"|"public-read-write"|"aws-exec-read"|"authenticated-read"|"bucket-owner-read"|"bucket-owner-full-control"|string;
+  export type S3ChecksumAlgorithm = "CRC32"|"CRC32C"|"SHA1"|"SHA256"|string;
   export type S3ContentLength = number;
   export interface S3CopyObjectOperation {
     /**
@@ -2444,6 +2445,10 @@ declare namespace S3Control {
      * Specifies whether Amazon S3 should use an S3 Bucket Key for object encryption with server-side encryption using Amazon Web Services KMS (SSE-KMS). Setting this header to true causes Amazon S3 to use an S3 Bucket Key for object encryption with SSE-KMS. Specifying this header with an object action doesn’t affect bucket-level settings for S3 Bucket Key.
      */
     BucketKeyEnabled?: Boolean;
+    /**
+     * Indicates the algorithm you want Amazon S3 to use to create the checksum. For more information see  Checking object integrity in the Amazon S3 User Guide.
+     */
+    ChecksumAlgorithm?: S3ChecksumAlgorithm;
   }
   export interface S3DeleteObjectTaggingOperation {
   }

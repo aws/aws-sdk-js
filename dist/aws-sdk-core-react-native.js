@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.1080.0',
+	  VERSION: '2.1081.0',
 
 	  /**
 	   * @api private
@@ -3624,7 +3624,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	      (operation.endpointdiscovery.required ? 'REQUIRED' : 'OPTIONAL') :
 	    'NULL'
 	  );
-	  property(this, 'httpChecksumRequired', operation.httpChecksumRequired, false);
+
+	  // httpChecksum replaces usage of httpChecksumRequired, but some APIs
+	  // (s3control) still uses old trait.
+	  var httpChecksumRequired = operation.httpChecksumRequired
+	    || (operation.httpChecksum && operation.httpChecksum.requestChecksumRequired);
+	  property(this, 'httpChecksumRequired', httpChecksumRequired, false);
 
 	  memoizedProperty(this, 'input', function() {
 	    if (!operation.input) {
