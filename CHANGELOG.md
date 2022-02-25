@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1081.0-->
+<!--LATEST=2.1082.0-->
 <!--ENTRYINSERT-->
+
+## 2.1082.0
+* feature: Panorama: Added NTP server configuration parameter to ProvisionDevice operation. Added alternate software fields to DescribeDevice response
 
 ## 2.1081.0
 * feature: AutoScaling: You can now hibernate instances in a warm pool to stop instances without deleting their RAM contents. You can now also return instances to the warm pool on scale in, instead of always terminating capacity that you will need later.

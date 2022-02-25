@@ -60,11 +60,11 @@ declare class Panorama extends Service {
    */
   deleteDevice(callback?: (err: AWSError, data: Panorama.Types.DeleteDeviceResponse) => void): Request<Panorama.Types.DeleteDeviceResponse, AWSError>;
   /**
-   * Deletes a package.
+   * Deletes a package.  To delete a package, you need permission to call s3:DeleteObject in addition to permissions for the AWS Panorama API. 
    */
   deletePackage(params: Panorama.Types.DeletePackageRequest, callback?: (err: AWSError, data: Panorama.Types.DeletePackageResponse) => void): Request<Panorama.Types.DeletePackageResponse, AWSError>;
   /**
-   * Deletes a package.
+   * Deletes a package.  To delete a package, you need permission to call s3:DeleteObject in addition to permissions for the AWS Panorama API. 
    */
   deletePackage(callback?: (err: AWSError, data: Panorama.Types.DeletePackageResponse) => void): Request<Panorama.Types.DeletePackageResponse, AWSError>;
   /**
@@ -277,15 +277,26 @@ declare class Panorama extends Service {
   updateDeviceMetadata(callback?: (err: AWSError, data: Panorama.Types.UpdateDeviceMetadataResponse) => void): Request<Panorama.Types.UpdateDeviceMetadataResponse, AWSError>;
 }
 declare namespace Panorama {
-  export interface ApplicationInstance {
+  export interface AlternateSoftwareMetadata {
     /**
-     * The application instance's name.
+     * The appliance software version.
      */
-    Name?: ApplicationInstanceName;
+    Version?: Version;
+  }
+  export type AlternateSoftwares = AlternateSoftwareMetadata[];
+  export interface ApplicationInstance {
     /**
      * The application instance's ID.
      */
     ApplicationInstanceId?: ApplicationInstanceId;
+    /**
+     * The application instance's ARN.
+     */
+    Arn?: ApplicationInstanceArn;
+    /**
+     * When the application instance was created.
+     */
+    CreatedTime?: TimeStamp;
     /**
      * The device's ID.
      */
@@ -299,25 +310,21 @@ declare namespace Panorama {
      */
     Description?: Description;
     /**
-     * The application instance's status.
-     */
-    Status?: ApplicationInstanceStatus;
-    /**
      * The application instance's health status.
      */
     HealthStatus?: ApplicationInstanceHealthStatus;
     /**
+     * The application instance's name.
+     */
+    Name?: ApplicationInstanceName;
+    /**
+     * The application instance's status.
+     */
+    Status?: ApplicationInstanceStatus;
+    /**
      * The application instance's status description.
      */
     StatusDescription?: ApplicationInstanceStatusDescription;
-    /**
-     * When the application instance was created.
-     */
-    CreatedTime?: TimeStamp;
-    /**
-     * The application instance's ARN.
-     */
-    Arn?: ApplicationInstanceArn;
     /**
      * The application instance's tags.
      */
@@ -338,33 +345,33 @@ declare namespace Panorama {
   export type ConnectionType = "STATIC_IP"|"DHCP"|string;
   export interface CreateApplicationInstanceRequest {
     /**
-     * A name for the application instance.
+     * The ID of an application instance to replace with the new instance.
      */
-    Name?: ApplicationInstanceName;
+    ApplicationInstanceIdToReplace?: ApplicationInstanceId;
+    /**
+     * A device's ID.
+     */
+    DefaultRuntimeContextDevice: DefaultRuntimeContextDevice;
     /**
      * A description for the application instance.
      */
     Description?: Description;
     /**
-     * The application's manifest document.
-     */
-    ManifestPayload: ManifestPayload;
-    /**
      * Setting overrides for the application manifest.
      */
     ManifestOverridesPayload?: ManifestOverridesPayload;
     /**
-     * The ID of an application instance to replace with the new instance.
+     * The application's manifest document.
      */
-    ApplicationInstanceIdToReplace?: ApplicationInstanceId;
+    ManifestPayload: ManifestPayload;
+    /**
+     * A name for the application instance.
+     */
+    Name?: ApplicationInstanceName;
     /**
      * The ARN of a runtime role for the application instance.
      */
     RuntimeRoleArn?: RuntimeRoleArn;
-    /**
-     * A device's ID.
-     */
-    DefaultRuntimeContextDevice: DefaultRuntimeContextDevice;
     /**
      * Tags for the application instance.
      */
@@ -398,9 +405,17 @@ declare namespace Panorama {
   }
   export interface CreateNodeFromTemplateJobRequest {
     /**
-     * The type of node.
+     * Tags for the job.
      */
-    TemplateType: TemplateType;
+    JobTags?: JobTagsList;
+    /**
+     * A description for the node.
+     */
+    NodeDescription?: Description;
+    /**
+     * A name for the node.
+     */
+    NodeName: NodeName;
     /**
      * An output package name for the node.
      */
@@ -410,21 +425,13 @@ declare namespace Panorama {
      */
     OutputPackageVersion: NodePackageVersion;
     /**
-     * A name for the node.
-     */
-    NodeName: NodeName;
-    /**
-     * A description for the node.
-     */
-    NodeDescription?: Description;
-    /**
      * Template parameters for the node.
      */
     TemplateParameters: TemplateParametersMap;
     /**
-     * Tags for the job.
+     * The type of node.
      */
-    JobTags?: JobTagsList;
+    TemplateType: TemplateType;
   }
   export interface CreateNodeFromTemplateJobResponse {
     /**
@@ -434,25 +441,25 @@ declare namespace Panorama {
   }
   export interface CreatePackageImportJobRequest {
     /**
-     * A job type for the package import job.
+     * A client token for the package import job.
      */
-    JobType: PackageImportJobType;
+    ClientToken: ClientToken;
     /**
      * An input config for the package import job.
      */
     InputConfig: PackageImportJobInputConfig;
     /**
-     * An output config for the package import job.
-     */
-    OutputConfig: PackageImportJobOutputConfig;
-    /**
-     * A client token for the package import job.
-     */
-    ClientToken: ClientToken;
-    /**
      * Tags for the package import job.
      */
     JobTags?: JobTagsList;
+    /**
+     * A job type for the package import job.
+     */
+    JobType: PackageImportJobType;
+    /**
+     * An output config for the package import job.
+     */
+    OutputConfig: PackageImportJobOutputConfig;
   }
   export interface CreatePackageImportJobResponse {
     /**
@@ -472,13 +479,13 @@ declare namespace Panorama {
   }
   export interface CreatePackageResponse {
     /**
-     * The package's ID.
-     */
-    PackageId?: NodePackageId;
-    /**
      * The package's ARN.
      */
     Arn?: NodePackageArn;
+    /**
+     * The package's ID.
+     */
+    PackageId?: NodePackageId;
     /**
      * The package's storage location.
      */
@@ -502,13 +509,13 @@ declare namespace Panorama {
   }
   export interface DeletePackageRequest {
     /**
-     * The package's ID.
-     */
-    PackageId: NodePackageId;
-    /**
      * Delete the package even if it has artifacts stored in its access point. Deletes the package's artifacts from Amazon S3.
      */
     ForceDelete?: Boolean;
+    /**
+     * The package's ID.
+     */
+    PackageId: NodePackageId;
   }
   export interface DeletePackageResponse {
   }
@@ -544,25 +551,9 @@ declare namespace Panorama {
   }
   export interface DescribeApplicationInstanceDetailsResponse {
     /**
-     * The application instance's name.
+     * The application instance's ID.
      */
-    Name?: ApplicationInstanceName;
-    /**
-     * The application instance's description.
-     */
-    Description?: Description;
-    /**
-     * The application instance's default runtime context device.
-     */
-    DefaultRuntimeContextDevice?: DefaultRuntimeContextDevice;
-    /**
-     * The application instance's configuration manifest.
-     */
-    ManifestPayload?: ManifestPayload;
-    /**
-     * Parameter overrides for the configuration manifest.
-     */
-    ManifestOverridesPayload?: ManifestOverridesPayload;
+    ApplicationInstanceId?: ApplicationInstanceId;
     /**
      * The ID of the application instance that this instance replaced.
      */
@@ -572,9 +563,25 @@ declare namespace Panorama {
      */
     CreatedTime?: TimeStamp;
     /**
-     * The application instance's ID.
+     * The application instance's default runtime context device.
      */
-    ApplicationInstanceId?: ApplicationInstanceId;
+    DefaultRuntimeContextDevice?: DefaultRuntimeContextDevice;
+    /**
+     * The application instance's description.
+     */
+    Description?: Description;
+    /**
+     * Parameter overrides for the configuration manifest.
+     */
+    ManifestOverridesPayload?: ManifestOverridesPayload;
+    /**
+     * The application instance's configuration manifest.
+     */
+    ManifestPayload?: ManifestPayload;
+    /**
+     * The application instance's name.
+     */
+    Name?: ApplicationInstanceName;
   }
   export interface DescribeApplicationInstanceRequest {
     /**
@@ -584,13 +591,21 @@ declare namespace Panorama {
   }
   export interface DescribeApplicationInstanceResponse {
     /**
-     * The application instance's name.
+     * The application instance's ID.
      */
-    Name?: ApplicationInstanceName;
+    ApplicationInstanceId?: ApplicationInstanceId;
     /**
-     * The application instance's description.
+     * The ID of the application instance that this instance replaced.
      */
-    Description?: Description;
+    ApplicationInstanceIdToReplace?: ApplicationInstanceId;
+    /**
+     * The application instance's ARN.
+     */
+    Arn?: ApplicationInstanceArn;
+    /**
+     * When the application instance was created.
+     */
+    CreatedTime?: TimeStamp;
     /**
      * The device's ID.
      */
@@ -600,9 +615,21 @@ declare namespace Panorama {
      */
     DefaultRuntimeContextDeviceName?: DeviceName;
     /**
-     * The ID of the application instance that this instance replaced.
+     * The application instance's description.
      */
-    ApplicationInstanceIdToReplace?: ApplicationInstanceId;
+    Description?: Description;
+    /**
+     * The application instance's health status.
+     */
+    HealthStatus?: ApplicationInstanceHealthStatus;
+    /**
+     * The application instance was updated.
+     */
+    LastUpdatedTime?: TimeStamp;
+    /**
+     * The application instance's name.
+     */
+    Name?: ApplicationInstanceName;
     /**
      * The application instance's runtime role ARN.
      */
@@ -612,29 +639,9 @@ declare namespace Panorama {
      */
     Status?: ApplicationInstanceStatus;
     /**
-     * The application instance's health status.
-     */
-    HealthStatus?: ApplicationInstanceHealthStatus;
-    /**
      * The application instance's status description.
      */
     StatusDescription?: ApplicationInstanceStatusDescription;
-    /**
-     * When the application instance was created.
-     */
-    CreatedTime?: TimeStamp;
-    /**
-     * The application instance was updated.
-     */
-    LastUpdatedTime?: TimeStamp;
-    /**
-     * The application instance's ID.
-     */
-    ApplicationInstanceId?: ApplicationInstanceId;
-    /**
-     * The application instance's ARN.
-     */
-    Arn?: ApplicationInstanceArn;
     /**
      * The application instance's tags.
      */
@@ -648,17 +655,17 @@ declare namespace Panorama {
   }
   export interface DescribeDeviceJobResponse {
     /**
-     * The job's ID.
+     * When the job was created.
      */
-    JobId?: JobId;
-    /**
-     * The device's ID.
-     */
-    DeviceId?: DeviceId;
+    CreatedTime?: UpdateCreatedTime;
     /**
      * The device's ARN.
      */
     DeviceArn?: DeviceArn;
+    /**
+     * The device's ID.
+     */
+    DeviceId?: DeviceId;
     /**
      * The device's name.
      */
@@ -672,13 +679,13 @@ declare namespace Panorama {
      */
     ImageVersion?: ImageVersion;
     /**
+     * The job's ID.
+     */
+    JobId?: JobId;
+    /**
      * The job's status.
      */
     Status?: UpdateProgress;
-    /**
-     * When the job was created.
-     */
-    CreatedTime?: UpdateCreatedTime;
   }
   export interface DescribeDeviceRequest {
     /**
@@ -688,45 +695,61 @@ declare namespace Panorama {
   }
   export interface DescribeDeviceResponse {
     /**
-     * The device's ID.
+     * Beta software releases available for the device.
      */
-    DeviceId?: DeviceId;
-    /**
-     * The device's name.
-     */
-    Name?: DeviceName;
+    AlternateSoftwares?: AlternateSoftwares;
     /**
      * The device's ARN.
      */
     Arn?: DeviceArn;
     /**
+     * When the device was created.
+     */
+    CreatedTime?: CreatedTime;
+    /**
+     * The device's networking status.
+     */
+    CurrentNetworkingStatus?: NetworkStatus;
+    /**
+     * The device's current software version.
+     */
+    CurrentSoftware?: CurrentSoftware;
+    /**
      * The device's description.
      */
     Description?: Description;
-    /**
-     * The device's type.
-     */
-    Type?: DeviceType;
     /**
      * The device's connection status.
      */
     DeviceConnectionStatus?: DeviceConnectionStatus;
     /**
-     * When the device was created.
+     * The device's ID.
      */
-    CreatedTime?: CreatedTime;
+    DeviceId?: DeviceId;
     /**
-     * The device's provisioning status.
+     * The most recent beta software release.
      */
-    ProvisioningStatus?: DeviceStatus;
+    LatestAlternateSoftware?: LatestAlternateSoftware;
     /**
      * The latest software version available for the device.
      */
     LatestSoftware?: LatestSoftware;
     /**
-     * The device's current software version.
+     * The device's lease expiration time.
      */
-    CurrentSoftware?: CurrentSoftware;
+    LeaseExpirationTime?: LeaseExpirationTime;
+    /**
+     * The device's name.
+     */
+    Name?: DeviceName;
+    /**
+     * The device's networking configuration.
+     */
+    NetworkingConfiguration?: NetworkPayload;
+    /**
+     * The device's provisioning status.
+     */
+    ProvisioningStatus?: DeviceStatus;
     /**
      * The device's serial number.
      */
@@ -736,17 +759,9 @@ declare namespace Panorama {
      */
     Tags?: TagMap;
     /**
-     * The device's networking configuration.
+     * The device's type.
      */
-    NetworkingConfiguration?: NetworkPayload;
-    /**
-     * The device's networking status.
-     */
-    CurrentNetworkingStatus?: NetworkStatus;
-    /**
-     * The device's lease expiration time.
-     */
-    LeaseExpirationTime?: LeaseExpirationTime;
+    Type?: DeviceType;
   }
   export interface DescribeNodeFromTemplateJobRequest {
     /**
@@ -756,25 +771,29 @@ declare namespace Panorama {
   }
   export interface DescribeNodeFromTemplateJobResponse {
     /**
-     * The job's ID.
-     */
-    JobId: JobId;
-    /**
-     * The job's status.
-     */
-    Status: NodeFromTemplateJobStatus;
-    /**
-     * The job's status message.
-     */
-    StatusMessage: NodeFromTemplateJobStatusMessage;
-    /**
      * When the job was created.
      */
     CreatedTime: CreatedTime;
     /**
+     * The job's ID.
+     */
+    JobId: JobId;
+    /**
+     * The job's tags.
+     */
+    JobTags?: JobTagsList;
+    /**
      * When the job was updated.
      */
     LastUpdatedTime: LastUpdatedTime;
+    /**
+     * The node's description.
+     */
+    NodeDescription?: Description;
+    /**
+     * The node's name.
+     */
+    NodeName: NodeName;
     /**
      * The job's output package name.
      */
@@ -784,25 +803,21 @@ declare namespace Panorama {
      */
     OutputPackageVersion: NodePackageVersion;
     /**
-     * The node's name.
+     * The job's status.
      */
-    NodeName: NodeName;
+    Status: NodeFromTemplateJobStatus;
     /**
-     * The node's description.
+     * The job's status message.
      */
-    NodeDescription?: Description;
-    /**
-     * The job's template type.
-     */
-    TemplateType: TemplateType;
+    StatusMessage: NodeFromTemplateJobStatusMessage;
     /**
      * The job's template parameters.
      */
     TemplateParameters: TemplateParametersMap;
     /**
-     * The job's tags.
+     * The job's template type.
      */
-    JobTags?: JobTagsList;
+    TemplateType: TemplateType;
   }
   export interface DescribeNodeRequest {
     /**
@@ -816,33 +831,53 @@ declare namespace Panorama {
   }
   export interface DescribeNodeResponse {
     /**
-     * The node's ID.
+     * The node's asset name.
      */
-    NodeId: NodeId;
-    /**
-     * The node's name.
-     */
-    Name: NodeName;
+    AssetName?: NodeAssetName;
     /**
      * The node's category.
      */
     Category: NodeCategory;
     /**
+     * When the node was created.
+     */
+    CreatedTime: TimeStamp;
+    /**
+     * The node's description.
+     */
+    Description: Description;
+    /**
+     * When the node was updated.
+     */
+    LastUpdatedTime: TimeStamp;
+    /**
+     * The node's name.
+     */
+    Name: NodeName;
+    /**
+     * The node's ID.
+     */
+    NodeId: NodeId;
+    /**
+     * The node's interface.
+     */
+    NodeInterface: NodeInterface;
+    /**
      * The account ID of the node's owner.
      */
     OwnerAccount: PackageOwnerAccount;
     /**
-     * The node's package name.
+     * The node's ARN.
      */
-    PackageName: NodePackageName;
+    PackageArn?: NodePackageArn;
     /**
      * The node's package ID.
      */
     PackageId: NodePackageId;
     /**
-     * The node's ARN.
+     * The node's package name.
      */
-    PackageArn?: NodePackageArn;
+    PackageName: NodePackageName;
     /**
      * The node's package version.
      */
@@ -851,26 +886,6 @@ declare namespace Panorama {
      * The node's patch version.
      */
     PatchVersion: NodePackagePatchVersion;
-    /**
-     * The node's interface.
-     */
-    NodeInterface: NodeInterface;
-    /**
-     * The node's asset name.
-     */
-    AssetName?: NodeAssetName;
-    /**
-     * The node's description.
-     */
-    Description: Description;
-    /**
-     * When the node was created.
-     */
-    CreatedTime: TimeStamp;
-    /**
-     * When the node was updated.
-     */
-    LastUpdatedTime: TimeStamp;
   }
   export interface DescribePackageImportJobRequest {
     /**
@@ -880,37 +895,41 @@ declare namespace Panorama {
   }
   export interface DescribePackageImportJobResponse {
     /**
-     * The job's ID.
-     */
-    JobId: JobId;
-    /**
      * The job's client token.
      */
     ClientToken?: ClientToken;
-    /**
-     * The job's type.
-     */
-    JobType: PackageImportJobType;
-    /**
-     * The job's input config.
-     */
-    InputConfig: PackageImportJobInputConfig;
-    /**
-     * The job's output config.
-     */
-    OutputConfig: PackageImportJobOutputConfig;
-    /**
-     * The job's output.
-     */
-    Output: PackageImportJobOutput;
     /**
      * When the job was created.
      */
     CreatedTime: CreatedTime;
     /**
+     * The job's input config.
+     */
+    InputConfig: PackageImportJobInputConfig;
+    /**
+     * The job's ID.
+     */
+    JobId: JobId;
+    /**
+     * The job's tags.
+     */
+    JobTags?: JobTagsList;
+    /**
+     * The job's type.
+     */
+    JobType: PackageImportJobType;
+    /**
      * When the job was updated.
      */
     LastUpdatedTime: LastUpdatedTime;
+    /**
+     * The job's output.
+     */
+    Output: PackageImportJobOutput;
+    /**
+     * The job's output config.
+     */
+    OutputConfig: PackageImportJobOutputConfig;
     /**
      * The job's status.
      */
@@ -919,10 +938,6 @@ declare namespace Panorama {
      * The job's status message.
      */
     StatusMessage: PackageImportJobStatusMessage;
-    /**
-     * The job's tags.
-     */
-    JobTags?: JobTagsList;
   }
   export interface DescribePackageRequest {
     /**
@@ -932,6 +947,14 @@ declare namespace Panorama {
   }
   export interface DescribePackageResponse {
     /**
+     * The package's ARN.
+     */
+    Arn: NodePackageArn;
+    /**
+     * When the package was created.
+     */
+    CreatedTime: TimeStamp;
+    /**
      * The package's ID.
      */
     PackageId: NodePackageId;
@@ -940,29 +963,21 @@ declare namespace Panorama {
      */
     PackageName: NodePackageName;
     /**
-     * The package's ARN.
+     * ARNs of accounts that have read access to the package.
      */
-    Arn: NodePackageArn;
+    ReadAccessPrincipalArns?: PrincipalArnsList;
     /**
      * The package's storage location.
      */
     StorageLocation: StorageLocation;
     /**
-     * ARNs of accounts that have read access to the package.
+     * The package's tags.
      */
-    ReadAccessPrincipalArns?: PrincipalArnsList;
+    Tags: TagMap;
     /**
      * ARNs of accounts that have write access to the package.
      */
     WriteAccessPrincipalArns?: PrincipalArnsList;
-    /**
-     * When the package was created.
-     */
-    CreatedTime: TimeStamp;
-    /**
-     * The package's tags.
-     */
-    Tags: TagMap;
   }
   export interface DescribePackageVersionRequest {
     /**
@@ -984,17 +999,21 @@ declare namespace Panorama {
   }
   export interface DescribePackageVersionResponse {
     /**
+     * Whether the version is the latest available.
+     */
+    IsLatestPatch: Boolean;
+    /**
      * The account ID of the version's owner.
      */
     OwnerAccount?: PackageOwnerAccount;
     /**
-     * The version's ID.
-     */
-    PackageId: NodePackageId;
-    /**
      * The ARN of the package.
      */
     PackageArn?: NodePackageArn;
+    /**
+     * The version's ID.
+     */
+    PackageId: NodePackageId;
     /**
      * The version's name.
      */
@@ -1008,9 +1027,9 @@ declare namespace Panorama {
      */
     PatchVersion: NodePackagePatchVersion;
     /**
-     * Whether the version is the latest available.
+     * The version's registered time.
      */
-    IsLatestPatch: Boolean;
+    RegisteredTime?: TimeStamp;
     /**
      * The version's status.
      */
@@ -1019,29 +1038,17 @@ declare namespace Panorama {
      * The version's status description.
      */
     StatusDescription?: PackageVersionStatusDescription;
-    /**
-     * The version's registered time.
-     */
-    RegisteredTime?: TimeStamp;
   }
   export type Description = string;
   export interface Device {
-    /**
-     * The device's ID.
-     */
-    DeviceId?: DeviceId;
-    /**
-     * The device's name.
-     */
-    Name?: DeviceName;
     /**
      * When the device was created.
      */
     CreatedTime?: CreatedTime;
     /**
-     * The device's provisioning status.
+     * The device's ID.
      */
-    ProvisioningStatus?: DeviceStatus;
+    DeviceId?: DeviceId;
     /**
      * When the device was updated.
      */
@@ -1050,6 +1057,14 @@ declare namespace Panorama {
      * The device's lease expiration time.
      */
     LeaseExpirationTime?: LeaseExpirationTime;
+    /**
+     * The device's name.
+     */
+    Name?: DeviceName;
+    /**
+     * The device's provisioning status.
+     */
+    ProvisioningStatus?: DeviceStatus;
   }
   export type DeviceArn = string;
   export type DeviceConnectionStatus = "ONLINE"|"OFFLINE"|"AWAITING_CREDENTIALS"|"NOT_AVAILABLE"|"ERROR"|string;
@@ -1057,21 +1072,21 @@ declare namespace Panorama {
   export type DeviceIdList = DeviceId[];
   export interface DeviceJob {
     /**
-     * The name of the target device
+     * When the job was created.
      */
-    DeviceName?: DeviceName;
+    CreatedTime?: CreatedTime;
     /**
      * The ID of the target device.
      */
     DeviceId?: DeviceId;
     /**
+     * The name of the target device
+     */
+    DeviceName?: DeviceName;
+    /**
      * The job's ID.
      */
     JobId?: JobId;
-    /**
-     * When the job was created.
-     */
-    CreatedTime?: CreatedTime;
   }
   export interface DeviceJobConfig {
     /**
@@ -1099,10 +1114,6 @@ declare namespace Panorama {
   }
   export interface EthernetStatus {
     /**
-     * The device's IP address.
-     */
-    IpAddress?: IpAddress;
-    /**
      * The device's connection status.
      */
     ConnectionStatus?: NetworkConnectionStatus;
@@ -1110,21 +1121,26 @@ declare namespace Panorama {
      * The device's physical address.
      */
     HwAddress?: HwAddress;
+    /**
+     * The device's IP address.
+     */
+    IpAddress?: IpAddress;
   }
   export type HwAddress = string;
   export type ImageVersion = string;
   export type InputPortList = NodeInputPort[];
   export type IotThingName = string;
   export type IpAddress = string;
+  export type IpAddressOrServerName = string;
   export interface Job {
-    /**
-     * The job's ID.
-     */
-    JobId?: JobId;
     /**
      * The target device's ID.
      */
     DeviceId?: DeviceId;
+    /**
+     * The job's ID.
+     */
+    JobId?: JobId;
   }
   export type JobId = string;
   export type JobList = Job[];
@@ -1142,6 +1158,7 @@ declare namespace Panorama {
   export type JobTagsList = JobResourceTags[];
   export type JobType = "OTA"|string;
   export type LastUpdatedTime = Date;
+  export type LatestAlternateSoftware = string;
   export type LatestSoftware = string;
   export type LeaseExpirationTime = Date;
   export interface ListApplicationInstanceDependenciesRequest {
@@ -1160,13 +1177,13 @@ declare namespace Panorama {
   }
   export interface ListApplicationInstanceDependenciesResponse {
     /**
-     * A list of package objects.
-     */
-    PackageObjects?: PackageObjects;
-    /**
      * A pagination token that's included if more results are available.
      */
     NextToken?: NextToken;
+    /**
+     * A list of package objects.
+     */
+    PackageObjects?: PackageObjects;
   }
   export interface ListApplicationInstanceNodeInstancesRequest {
     /**
@@ -1184,23 +1201,19 @@ declare namespace Panorama {
   }
   export interface ListApplicationInstanceNodeInstancesResponse {
     /**
-     * A list of node instances.
-     */
-    NodeInstances?: NodeInstances;
-    /**
      * A pagination token that's included if more results are available.
      */
     NextToken?: NextToken;
+    /**
+     * A list of node instances.
+     */
+    NodeInstances?: NodeInstances;
   }
   export interface ListApplicationInstancesRequest {
     /**
      * The application instances' device ID.
      */
     DeviceId?: DeviceId;
-    /**
-     * Only include instances with a specific status.
-     */
-    StatusFilter?: StatusFilter;
     /**
      * The maximum number of application instances to return in one page of results.
      */
@@ -1209,6 +1222,10 @@ declare namespace Panorama {
      * Specify the pagination token from a previous request to retrieve the next page of results.
      */
     NextToken?: NextToken;
+    /**
+     * Only include instances with a specific status.
+     */
+    StatusFilter?: StatusFilter;
   }
   export interface ListApplicationInstancesResponse {
     /**
@@ -1226,13 +1243,13 @@ declare namespace Panorama {
      */
     DeviceId?: DeviceId;
     /**
-     * Specify the pagination token from a previous request to retrieve the next page of results.
-     */
-    NextToken?: NextToken;
-    /**
      * The maximum number of device jobs to return in one page of results.
      */
     MaxResults?: MaxSize25;
+    /**
+     * Specify the pagination token from a previous request to retrieve the next page of results.
+     */
+    NextToken?: NextToken;
   }
   export interface ListDevicesJobsResponse {
     /**
@@ -1246,13 +1263,13 @@ declare namespace Panorama {
   }
   export interface ListDevicesRequest {
     /**
-     * Specify the pagination token from a previous request to retrieve the next page of results.
-     */
-    NextToken?: NextToken;
-    /**
      * The maximum number of devices to return in one page of results.
      */
     MaxResults?: MaxSize25;
+    /**
+     * Specify the pagination token from a previous request to retrieve the next page of results.
+     */
+    NextToken?: NextToken;
   }
   export interface ListDevicesResponse {
     /**
@@ -1266,29 +1283,37 @@ declare namespace Panorama {
   }
   export interface ListNodeFromTemplateJobsRequest {
     /**
-     * Specify the pagination token from a previous request to retrieve the next page of results.
-     */
-    NextToken?: NextToken;
-    /**
      * The maximum number of node from template jobs to return in one page of results.
      */
     MaxResults?: MaxSize25;
+    /**
+     * Specify the pagination token from a previous request to retrieve the next page of results.
+     */
+    NextToken?: NextToken;
   }
   export interface ListNodeFromTemplateJobsResponse {
-    /**
-     * A list of jobs.
-     */
-    NodeFromTemplateJobs: NodeFromTemplateJobList;
     /**
      * A pagination token that's included if more results are available.
      */
     NextToken?: NextToken;
+    /**
+     * A list of jobs.
+     */
+    NodeFromTemplateJobs: NodeFromTemplateJobList;
   }
   export interface ListNodesRequest {
     /**
      * Search for nodes by category.
      */
     Category?: NodeCategory;
+    /**
+     * The maximum number of nodes to return in one page of results.
+     */
+    MaxResults?: MaxSize25;
+    /**
+     * Specify the pagination token from a previous request to retrieve the next page of results.
+     */
+    NextToken?: Token;
     /**
      * Search for nodes by the account ID of the nodes' owner.
      */
@@ -1305,44 +1330,36 @@ declare namespace Panorama {
      * Search for nodes by patch version.
      */
     PatchVersion?: NodePackagePatchVersion;
-    /**
-     * Specify the pagination token from a previous request to retrieve the next page of results.
-     */
-    NextToken?: Token;
-    /**
-     * The maximum number of nodes to return in one page of results.
-     */
-    MaxResults?: MaxSize25;
   }
   export interface ListNodesResponse {
+    /**
+     * A pagination token that's included if more results are available.
+     */
+    NextToken?: Token;
     /**
      * A list of nodes.
      */
     Nodes?: NodesList;
-    /**
-     * A pagination token that's included if more results are available.
-     */
-    NextToken?: Token;
   }
   export interface ListPackageImportJobsRequest {
-    /**
-     * Specify the pagination token from a previous request to retrieve the next page of results.
-     */
-    NextToken?: NextToken;
     /**
      * The maximum number of package import jobs to return in one page of results.
      */
     MaxResults?: MaxSize25;
+    /**
+     * Specify the pagination token from a previous request to retrieve the next page of results.
+     */
+    NextToken?: NextToken;
   }
   export interface ListPackageImportJobsResponse {
-    /**
-     * A list of package import jobs.
-     */
-    PackageImportJobs: PackageImportJobList;
     /**
      * A pagination token that's included if more results are available.
      */
     NextToken?: NextToken;
+    /**
+     * A list of package import jobs.
+     */
+    PackageImportJobs: PackageImportJobList;
   }
   export interface ListPackagesRequest {
     /**
@@ -1356,13 +1373,13 @@ declare namespace Panorama {
   }
   export interface ListPackagesResponse {
     /**
-     * A list of packages.
-     */
-    Packages?: PackageList;
-    /**
      * A pagination token that's included if more results are available.
      */
     NextToken?: NextToken;
+    /**
+     * A list of packages.
+     */
+    Packages?: PackageList;
   }
   export interface ListTagsForResourceRequest {
     /**
@@ -1394,7 +1411,7 @@ declare namespace Panorama {
   export type Mask = string;
   export type MaxConnections = number;
   export type MaxSize25 = number;
-  export type NetworkConnectionStatus = "CONNECTED"|"NOT_CONNECTED"|string;
+  export type NetworkConnectionStatus = "CONNECTED"|"NOT_CONNECTED"|"CONNECTING"|string;
   export interface NetworkPayload {
     /**
      * Settings for Ethernet port 0.
@@ -1404,6 +1421,10 @@ declare namespace Panorama {
      * Settings for Ethernet port 1.
      */
     Ethernet1?: EthernetPayload;
+    /**
+     * Network time protocol (NTP) server settings.
+     */
+    Ntp?: NtpPayload;
   }
   export interface NetworkStatus {
     /**
@@ -1414,37 +1435,53 @@ declare namespace Panorama {
      * The status of Ethernet port 1.
      */
     Ethernet1Status?: EthernetStatus;
+    /**
+     * When the network status changed.
+     */
+    LastUpdatedTime?: LastUpdatedTime;
+    /**
+     * Details about a network time protocol (NTP) server connection.
+     */
+    NtpStatus?: NtpStatus;
   }
   export type NextToken = string;
   export interface Node {
-    /**
-     * The node's ID.
-     */
-    NodeId: NodeId;
-    /**
-     * The node's name.
-     */
-    Name: NodeName;
     /**
      * The node's category.
      */
     Category: NodeCategory;
     /**
+     * When the node was created.
+     */
+    CreatedTime: TimeStamp;
+    /**
+     * The node's description.
+     */
+    Description?: Description;
+    /**
+     * The node's name.
+     */
+    Name: NodeName;
+    /**
+     * The node's ID.
+     */
+    NodeId: NodeId;
+    /**
      * The account ID of the node's owner.
      */
     OwnerAccount?: PackageOwnerAccount;
     /**
-     * The node's package name.
+     * The node's ARN.
      */
-    PackageName: NodePackageName;
+    PackageArn?: NodePackageArn;
     /**
      * The node's package ID.
      */
     PackageId: NodePackageId;
     /**
-     * The node's ARN.
+     * The node's package name.
      */
-    PackageArn?: NodePackageArn;
+    PackageName: NodePackageName;
     /**
      * The node's package version.
      */
@@ -1453,26 +1490,22 @@ declare namespace Panorama {
      * The node's patch version.
      */
     PatchVersion: NodePackagePatchVersion;
-    /**
-     * The node's description.
-     */
-    Description?: Description;
-    /**
-     * When the node was created.
-     */
-    CreatedTime: TimeStamp;
   }
   export type NodeAssetName = string;
   export type NodeCategory = "BUSINESS_LOGIC"|"ML_MODEL"|"MEDIA_SOURCE"|"MEDIA_SINK"|string;
   export interface NodeFromTemplateJob {
     /**
+     * When the job was created.
+     */
+    CreatedTime?: CreatedTime;
+    /**
      * The job's ID.
      */
     JobId?: JobId;
     /**
-     * The job's template type.
+     * The node's name.
      */
-    TemplateType?: TemplateType;
+    NodeName?: NodeName;
     /**
      * The job's status.
      */
@@ -1482,13 +1515,9 @@ declare namespace Panorama {
      */
     StatusMessage?: NodeFromTemplateJobStatusMessage;
     /**
-     * When the job was created.
+     * The job's template type.
      */
-    CreatedTime?: CreatedTime;
-    /**
-     * The node's name.
-     */
-    NodeName?: NodeName;
+    TemplateType?: TemplateType;
   }
   export type NodeFromTemplateJobList = NodeFromTemplateJob[];
   export type NodeFromTemplateJobStatus = "PENDING"|"SUCCEEDED"|"FAILED"|string;
@@ -1496,55 +1525,55 @@ declare namespace Panorama {
   export type NodeId = string;
   export interface NodeInputPort {
     /**
-     * The input port's name.
+     * The input port's default value.
      */
-    Name?: PortName;
+    DefaultValue?: PortDefaultValue;
     /**
      * The input port's description.
      */
     Description?: Description;
     /**
-     * The input port's type.
-     */
-    Type?: PortType;
-    /**
-     * The input port's default value.
-     */
-    DefaultValue?: PortDefaultValue;
-    /**
      * The input port's max connections.
      */
     MaxConnections?: MaxConnections;
+    /**
+     * The input port's name.
+     */
+    Name?: PortName;
+    /**
+     * The input port's type.
+     */
+    Type?: PortType;
   }
   export interface NodeInstance {
     /**
-     * The instance's ID.
+     * The instance's current status.
      */
-    NodeInstanceId: NodeInstanceId;
+    CurrentStatus: NodeInstanceStatus;
     /**
      * The node's ID.
      */
     NodeId?: NodeId;
     /**
-     * The instance's package name.
+     * The instance's ID.
      */
-    PackageName?: NodePackageName;
-    /**
-     * The instance's package version.
-     */
-    PackageVersion?: NodePackageVersion;
-    /**
-     * The instance's package patch version.
-     */
-    PackagePatchVersion?: NodePackagePatchVersion;
+    NodeInstanceId: NodeInstanceId;
     /**
      * The instance's name.
      */
     NodeName?: NodeName;
     /**
-     * The instance's current status.
+     * The instance's package name.
      */
-    CurrentStatus: NodeInstanceStatus;
+    PackageName?: NodePackageName;
+    /**
+     * The instance's package patch version.
+     */
+    PackagePatchVersion?: NodePackagePatchVersion;
+    /**
+     * The instance's package version.
+     */
+    PackageVersion?: NodePackageVersion;
   }
   export type NodeInstanceId = string;
   export type NodeInstanceStatus = "RUNNING"|"ERROR"|"NOT_AVAILABLE"|string;
@@ -1562,13 +1591,13 @@ declare namespace Panorama {
   export type NodeName = string;
   export interface NodeOutputPort {
     /**
-     * The output port's name.
-     */
-    Name?: PortName;
-    /**
      * The output port's description.
      */
     Description?: Description;
+    /**
+     * The output port's name.
+     */
+    Name?: PortName;
     /**
      * The output port's type.
      */
@@ -1580,6 +1609,28 @@ declare namespace Panorama {
   export type NodePackagePatchVersion = string;
   export type NodePackageVersion = string;
   export type NodesList = Node[];
+  export interface NtpPayload {
+    /**
+     * NTP servers to use, in order of preference.
+     */
+    NtpServers: NtpServerList;
+  }
+  export type NtpServerList = IpAddressOrServerName[];
+  export type NtpServerName = string;
+  export interface NtpStatus {
+    /**
+     * The connection's status.
+     */
+    ConnectionStatus?: NetworkConnectionStatus;
+    /**
+     * The IP address of the server.
+     */
+    IpAddress?: IpAddress;
+    /**
+     * The domain name of the server.
+     */
+    NtpServerName?: NtpServerName;
+  }
   export interface OTAJobConfig {
     /**
      * The target version of the device software.
@@ -1601,6 +1652,10 @@ declare namespace Panorama {
   export type OutputPortList = NodeOutputPort[];
   export interface PackageImportJob {
     /**
+     * When the job was created.
+     */
+    CreatedTime?: CreatedTime;
+    /**
      * The job's ID.
      */
     JobId?: JobId;
@@ -1609,6 +1664,10 @@ declare namespace Panorama {
      */
     JobType?: PackageImportJobType;
     /**
+     * When the job was updated.
+     */
+    LastUpdatedTime?: LastUpdatedTime;
+    /**
      * The job's status.
      */
     Status?: PackageImportJobStatus;
@@ -1616,14 +1675,6 @@ declare namespace Panorama {
      * The job's status message.
      */
     StatusMessage?: PackageImportJobStatusMessage;
-    /**
-     * When the job was created.
-     */
-    CreatedTime?: CreatedTime;
-    /**
-     * When the job was updated.
-     */
-    LastUpdatedTime?: LastUpdatedTime;
   }
   export interface PackageImportJobInputConfig {
     /**
@@ -1633,6 +1684,10 @@ declare namespace Panorama {
   }
   export type PackageImportJobList = PackageImportJob[];
   export interface PackageImportJobOutput {
+    /**
+     * The package's output location.
+     */
+    OutputS3Location: OutPutS3Location;
     /**
      * The package's ID.
      */
@@ -1645,10 +1700,6 @@ declare namespace Panorama {
      * The package's patch version.
      */
     PatchVersion: NodePackagePatchVersion;
-    /**
-     * The package's output location.
-     */
-    OutputS3Location: OutPutS3Location;
   }
   export interface PackageImportJobOutputConfig {
     /**
@@ -1658,17 +1709,9 @@ declare namespace Panorama {
   }
   export type PackageImportJobStatus = "PENDING"|"SUCCEEDED"|"FAILED"|string;
   export type PackageImportJobStatusMessage = string;
-  export type PackageImportJobType = "NODE_PACKAGE_VERSION"|string;
+  export type PackageImportJobType = "NODE_PACKAGE_VERSION"|"MARKETPLACE_NODE_PACKAGE_VERSION"|string;
   export type PackageList = PackageListItem[];
   export interface PackageListItem {
-    /**
-     * The package's ID.
-     */
-    PackageId?: NodePackageId;
-    /**
-     * The package's name.
-     */
-    PackageName?: NodePackageName;
     /**
      * The package's ARN.
      */
@@ -1677,6 +1720,14 @@ declare namespace Panorama {
      * When the package was created.
      */
     CreatedTime?: TimeStamp;
+    /**
+     * The package's ID.
+     */
+    PackageId?: NodePackageId;
+    /**
+     * The package's name.
+     */
+    PackageName?: NodePackageName;
     /**
      * The package's tags.
      */
@@ -1706,6 +1757,10 @@ declare namespace Panorama {
   }
   export interface PackageVersionOutputConfig {
     /**
+     * Indicates that the version is recommended for all users.
+     */
+    MarkLatest?: MarkLatestPatch;
+    /**
      * The output's package name.
      */
     PackageName: NodePackageName;
@@ -1713,10 +1768,6 @@ declare namespace Panorama {
      * The output's package version.
      */
     PackageVersion: NodePackageVersion;
-    /**
-     * Indicates that the version is recommended for all users.
-     */
-    MarkLatest?: MarkLatestPatch;
   }
   export type PackageVersionStatus = "REGISTER_PENDING"|"REGISTER_COMPLETED"|"FAILED"|"DELETING"|string;
   export type PackageVersionStatusDescription = string;
@@ -1727,46 +1778,50 @@ declare namespace Panorama {
   export type PrincipalArnsList = PrincipalArn[];
   export interface ProvisionDeviceRequest {
     /**
-     * A name for the device.
-     */
-    Name: DeviceName;
-    /**
      * A description for the device.
      */
     Description?: Description;
     /**
-     * Tags for the device.
+     * A name for the device.
      */
-    Tags?: TagMap;
+    Name: DeviceName;
     /**
      * A networking configuration for the device.
      */
     NetworkingConfiguration?: NetworkPayload;
+    /**
+     * Tags for the device.
+     */
+    Tags?: TagMap;
   }
   export interface ProvisionDeviceResponse {
-    /**
-     * The device's ID.
-     */
-    DeviceId?: DeviceId;
     /**
      * The device's ARN.
      */
     Arn: DeviceArn;
     /**
-     * The device's status.
-     */
-    Status: DeviceStatus;
-    /**
      * The device's configuration bundle.
      */
     Certificates?: Certificates;
     /**
+     * The device's ID.
+     */
+    DeviceId?: DeviceId;
+    /**
      * The device's IoT thing name.
      */
     IotThingName?: IotThingName;
+    /**
+     * The device's status.
+     */
+    Status: DeviceStatus;
   }
   export type Region = string;
   export interface RegisterPackageVersionRequest {
+    /**
+     * Whether to mark the new version as the latest version.
+     */
+    MarkLatest?: MarkLatestPatch;
     /**
      * An owner account.
      */
@@ -1783,10 +1838,6 @@ declare namespace Panorama {
      * A patch version.
      */
     PatchVersion: NodePackagePatchVersion;
-    /**
-     * Whether to mark the new version as the latest version.
-     */
-    MarkLatest?: MarkLatestPatch;
   }
   export interface RegisterPackageVersionResponse {
   }
@@ -1802,10 +1853,6 @@ declare namespace Panorama {
   export type RuntimeRoleArn = string;
   export interface S3Location {
     /**
-     * The bucket's Region.
-     */
-    Region?: Region;
-    /**
      * A bucket name.
      */
     BucketName: BucketName;
@@ -1813,8 +1860,20 @@ declare namespace Panorama {
      * An object key.
      */
     ObjectKey: ObjectKey;
+    /**
+     * The bucket's Region.
+     */
+    Region?: Region;
   }
   export interface StaticIpConnectionInfo {
+    /**
+     * The connection's default gateway.
+     */
+    DefaultGateway: DefaultGateway;
+    /**
+     * The connection's DNS address.
+     */
+    Dns: DnsList;
     /**
      * The connection's IP address.
      */
@@ -1823,37 +1882,29 @@ declare namespace Panorama {
      * The connection's DNS mask.
      */
     Mask: Mask;
-    /**
-     * The connection's DNS address.
-     */
-    Dns: DnsList;
-    /**
-     * The connection's default gateway.
-     */
-    DefaultGateway: DefaultGateway;
   }
   export type StatusFilter = "DEPLOYMENT_SUCCEEDED"|"DEPLOYMENT_ERROR"|"REMOVAL_SUCCEEDED"|"REMOVAL_FAILED"|"PROCESSING_DEPLOYMENT"|"PROCESSING_REMOVAL"|string;
   export interface StorageLocation {
-    /**
-     * The location's bucket.
-     */
-    Bucket: Bucket;
-    /**
-     * The location's repo prefix.
-     */
-    RepoPrefixLocation: Object;
-    /**
-     * The location's generated prefix.
-     */
-    GeneratedPrefixLocation: Object;
     /**
      * The location's binary prefix.
      */
     BinaryPrefixLocation: Object;
     /**
+     * The location's bucket.
+     */
+    Bucket: Bucket;
+    /**
+     * The location's generated prefix.
+     */
+    GeneratedPrefixLocation: Object;
+    /**
      * The location's manifest prefix.
      */
     ManifestPrefixLocation: Object;
+    /**
+     * The location's repo prefix.
+     */
+    RepoPrefixLocation: Object;
   }
   export type TagKey = string;
   export type TagKeyList = TagKey[];
@@ -1892,13 +1943,13 @@ declare namespace Panorama {
   export type UpdateCreatedTime = Date;
   export interface UpdateDeviceMetadataRequest {
     /**
-     * The device's ID.
-     */
-    DeviceId: DeviceId;
-    /**
      * A description for the device.
      */
     Description?: Description;
+    /**
+     * The device's ID.
+     */
+    DeviceId: DeviceId;
   }
   export interface UpdateDeviceMetadataResponse {
     /**
@@ -1907,6 +1958,7 @@ declare namespace Panorama {
     DeviceId?: DeviceId;
   }
   export type UpdateProgress = "PENDING"|"IN_PROGRESS"|"VERIFYING"|"REBOOTING"|"DOWNLOADING"|"COMPLETED"|"FAILED"|string;
+  export type Version = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */
