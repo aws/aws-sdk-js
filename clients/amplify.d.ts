@@ -333,7 +333,7 @@ declare namespace Amplify {
      */
     description: Description;
     /**
-     *  The repository for the Amplify app. 
+     *  The Git repository for the Amplify app. 
      */
     repository: Repository;
     /**
@@ -404,6 +404,10 @@ declare namespace Amplify {
      *  Describes the automated branch creation configuration for the Amplify app. 
      */
     autoBranchCreationConfig?: AutoBranchCreationConfig;
+    /**
+     * The authentication protocol to use to access the Git repository for an Amplify app. For a GitHub repository, specify TOKEN. For an Amazon Web Services CodeCommit repository, specify SIGV4. For GitLab and Bitbucket repositories, specify SSH.
+     */
+    repositoryCloneMethod?: RepositoryCloneMethod;
   }
   export type AppArn = string;
   export type AppId = string;
@@ -1434,7 +1438,7 @@ declare namespace Amplify {
   export type Name = string;
   export type NextToken = string;
   export type OauthToken = string;
-  export type Platform = "WEB"|string;
+  export type Platform = "WEB"|"WEB_DYNAMIC"|string;
   export interface ProductionBranch {
     /**
      *  The last deploy time of the production branch. 
@@ -1455,6 +1459,7 @@ declare namespace Amplify {
   }
   export type PullRequestEnvironmentName = string;
   export type Repository = string;
+  export type RepositoryCloneMethod = "SSH"|"TOKEN"|"SIGV4"|string;
   export type ResourceArn = string;
   export type Screenshots = {[key: string]: ThumbnailUrl};
   export type ServiceRoleArn = string;
@@ -1834,7 +1839,7 @@ declare namespace Amplify {
     /**
      *  Describes the settings for the subdomain. 
      */
-    subDomainSettings: SubDomainSettings;
+    subDomainSettings?: SubDomainSettings;
     /**
      *  Sets the branch patterns for automatic subdomain creation. 
      */

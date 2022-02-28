@@ -125,6 +125,44 @@ declare class AmplifyUIBuilder extends Service {
   updateTheme(callback?: (err: AWSError, data: AmplifyUIBuilder.Types.UpdateThemeResponse) => void): Request<AmplifyUIBuilder.Types.UpdateThemeResponse, AWSError>;
 }
 declare namespace AmplifyUIBuilder {
+  export interface ActionParameters {
+    /**
+     * The HTML anchor link to the location to open. Specify this value for a navigation action.
+     */
+    anchor?: ComponentProperty;
+    /**
+     * A dictionary of key-value pairs mapping Amplify Studio properties to fields in a data model. Use when the action performs an operation on an Amplify DataStore model.
+     */
+    fields?: ComponentProperties;
+    /**
+     * Specifies whether the user should be signed out globally. Specify this value for an auth sign out action.
+     */
+    global?: ComponentProperty;
+    /**
+     * The unique ID of the component that the ActionParameters apply to.
+     */
+    id?: ComponentProperty;
+    /**
+     * The name of the data model. Use when the action performs an operation on an Amplify DataStore model.
+     */
+    model?: String;
+    /**
+     * A key-value pair that specifies the state property name and its initial value.
+     */
+    state?: MutationActionSetStateParameter;
+    /**
+     * The element within the same component to modify when the action occurs.
+     */
+    target?: ComponentProperty;
+    /**
+     * The type of navigation action. Valid values are url and anchor. This value is required for a navigation action.
+     */
+    type?: ComponentProperty;
+    /**
+     * The URL to the location to open. Specify this value for a navigation action.
+     */
+    url?: ComponentProperty;
+  }
   export type Boolean = boolean;
   export interface Component {
     /**
@@ -132,7 +170,7 @@ declare namespace AmplifyUIBuilder {
      */
     appId: String;
     /**
-     * The information to connect a component's properties to data at runtime.
+     * The information to connect a component's properties to data at runtime. You can't specify tags as a valid property for bindingProperties. 
      */
     bindingProperties: ComponentBindingProperties;
     /**
@@ -140,7 +178,7 @@ declare namespace AmplifyUIBuilder {
      */
     children?: ComponentChildList;
     /**
-     * The data binding configuration for the component's properties. Use this for a collection component.
+     * The data binding configuration for the component's properties. Use this for a collection component. You can't specify tags as a valid property for collectionProperties.
      */
     collectionProperties?: ComponentCollectionProperties;
     /**
@@ -156,6 +194,10 @@ declare namespace AmplifyUIBuilder {
      */
     environmentName: String;
     /**
+     * Describes the events that can be raised on the component. Use for the workflow feature in Amplify Studio that allows you to bind events and actions to components.
+     */
+    events?: ComponentEvents;
+    /**
      * The unique ID of the component.
      */
     id: Uuid;
@@ -168,13 +210,17 @@ declare namespace AmplifyUIBuilder {
      */
     name: ComponentName;
     /**
-     * Describes the component's properties that can be overriden in a customized instance of the component.
+     * Describes the component's properties that can be overriden in a customized instance of the component. You can't specify tags as a valid property for overrides.
      */
     overrides: ComponentOverrides;
     /**
-     * Describes the component's properties.
+     * Describes the component's properties. You can't specify tags as a valid property for properties.
      */
     properties: ComponentProperties;
+    /**
+     * The schema version of the component when it was imported.
+     */
+    schemaVersion?: String;
     /**
      * The unique ID of the component in its original source system, such as Figma.
      */
@@ -243,11 +289,15 @@ declare namespace AmplifyUIBuilder {
      */
     componentType: String;
     /**
+     * Describes the events that can be raised on the child component. Use for the workflow feature in Amplify Studio that allows you to bind events and actions to components.
+     */
+    events?: ComponentEvents;
+    /**
      * The name of the child component.
      */
     name: String;
     /**
-     * Describes the properties of the child component.
+     * Describes the properties of the child component. You can't specify tags as a valid property for properties.
      */
     properties: ComponentProperties;
   }
@@ -266,6 +316,10 @@ declare namespace AmplifyUIBuilder {
      * The value of the property to evaluate.
      */
     operand?: String;
+    /**
+     * The type of the property to evaluate.
+     */
+    operandType?: String;
     /**
      * The operator to use to perform the evaluation, such as eq to represent equals.
      */
@@ -297,6 +351,17 @@ declare namespace AmplifyUIBuilder {
      */
     sort?: SortPropertyList;
   }
+  export interface ComponentEvent {
+    /**
+     * The action to perform when a specific event is raised.
+     */
+    action?: String;
+    /**
+     * Describes information about the action.
+     */
+    parameters?: ActionParameters;
+  }
+  export type ComponentEvents = {[key: string]: ComponentEvent};
   export type ComponentList = Component[];
   export type ComponentName = string;
   export type ComponentOverrides = {[key: string]: ComponentOverridesValue};
@@ -316,11 +381,15 @@ declare namespace AmplifyUIBuilder {
      */
     collectionBindingProperties?: ComponentPropertyBindingProperties;
     /**
+     * The name of the component that is affected by an event.
+     */
+    componentName?: String;
+    /**
      * A list of component properties to concatenate to create the value to assign to this component property.
      */
     concat?: ComponentPropertyList;
     /**
-     * The conditional expression to use to assign a value to the component property..
+     * The conditional expression to use to assign a value to the component property.
      */
     condition?: ComponentConditionProperty;
     /**
@@ -336,13 +405,17 @@ declare namespace AmplifyUIBuilder {
      */
     event?: String;
     /**
-     * The default value assigned to property when the component is imported into an app.
+     * The default value assigned to the property when the component is imported into an app.
      */
     importedValue?: String;
     /**
      * The data model to use to assign a value to the component property.
      */
     model?: String;
+    /**
+     * The name of the component's property that is affected by an event.
+     */
+    property?: String;
     /**
      * The component type.
      */
@@ -393,11 +466,11 @@ declare namespace AmplifyUIBuilder {
   export type ComponentType = string;
   export interface ComponentVariant {
     /**
-     * The properties of the component variant that can be overriden when customizing an instance of the component.
+     * The properties of the component variant that can be overriden when customizing an instance of the component. You can't specify tags as a valid property for overrides.
      */
     overrides?: ComponentOverrides;
     /**
-     * The combination of variants that comprise this variant.
+     * The combination of variants that comprise this variant. You can't specify tags as a valid property for variantValues.
      */
     variantValues?: ComponentVariantValues;
   }
@@ -421,6 +494,10 @@ declare namespace AmplifyUIBuilder {
      */
     componentType: ComponentType;
     /**
+     * The event configuration for the component. Use for the workflow feature in Amplify Studio that allows you to bind events and actions to components.
+     */
+    events?: ComponentEvents;
+    /**
      * The name of the component
      */
     name: ComponentName;
@@ -432,6 +509,10 @@ declare namespace AmplifyUIBuilder {
      * Describes the component's properties.
      */
     properties: ComponentProperties;
+    /**
+     * The schema version of the component when it was imported.
+     */
+    schemaVersion?: String;
     /**
      * The unique ID of the component in its original source system, such as Figma.
      */
@@ -582,12 +663,20 @@ declare namespace AmplifyUIBuilder {
      * The name of the backend environment that is a part of the Amplify app.
      */
     environmentName: String;
+    /**
+     * The token to request the next page of results.
+     */
+    nextToken?: String;
   }
   export interface ExportComponentsResponse {
     /**
      * Represents the configuration of the exported components.
      */
     entities: ComponentList;
+    /**
+     * The pagination token that's included if more results are available.
+     */
+    nextToken?: String;
   }
   export interface ExportThemesRequest {
     /**
@@ -598,12 +687,20 @@ declare namespace AmplifyUIBuilder {
      * The name of the backend environment that is part of the Amplify app.
      */
     environmentName: String;
+    /**
+     * The token to request the next page of results.
+     */
+    nextToken?: String;
   }
   export interface ExportThemesResponse {
     /**
      * Represents the configuration of the exported themes.
      */
     entities: ThemeList;
+    /**
+     * The pagination token that's included if more results are available.
+     */
+    nextToken?: String;
   }
   export interface FormBindingElement {
     /**
@@ -715,6 +812,20 @@ declare namespace AmplifyUIBuilder {
      * The pagination token that's returned if more results are available.
      */
     nextToken?: String;
+  }
+  export interface MutationActionSetStateParameter {
+    /**
+     * The name of the component that is being modified.
+     */
+    componentName: String;
+    /**
+     * The name of the component property to apply the state configuration to.
+     */
+    property: String;
+    /**
+     * The state configuration to assign to the property.
+     */
+    set: ComponentProperty;
   }
   export interface Predicate {
     /**
@@ -885,6 +996,10 @@ declare namespace AmplifyUIBuilder {
      */
     componentType?: ComponentType;
     /**
+     * The event configuration for the component. Use for the workflow feature in Amplify Studio that allows you to bind events and actions to components.
+     */
+    events?: ComponentEvents;
+    /**
      * The unique ID of the component to update.
      */
     id?: Uuid;
@@ -900,6 +1015,10 @@ declare namespace AmplifyUIBuilder {
      * Describes the component's properties.
      */
     properties?: ComponentProperties;
+    /**
+     * The schema version of the component when it was imported.
+     */
+    schemaVersion?: String;
     /**
      * The unique ID of the component in its original source system, such as Figma.
      */

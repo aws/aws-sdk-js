@@ -36,6 +36,22 @@ declare class Finspacedata extends Service {
    */
   createDataset(callback?: (err: AWSError, data: Finspacedata.Types.CreateDatasetResponse) => void): Request<Finspacedata.Types.CreateDatasetResponse, AWSError>;
   /**
+   * Creates a group of permissions for various actions that a user can perform in FinSpace.
+   */
+  createPermissionGroup(params: Finspacedata.Types.CreatePermissionGroupRequest, callback?: (err: AWSError, data: Finspacedata.Types.CreatePermissionGroupResponse) => void): Request<Finspacedata.Types.CreatePermissionGroupResponse, AWSError>;
+  /**
+   * Creates a group of permissions for various actions that a user can perform in FinSpace.
+   */
+  createPermissionGroup(callback?: (err: AWSError, data: Finspacedata.Types.CreatePermissionGroupResponse) => void): Request<Finspacedata.Types.CreatePermissionGroupResponse, AWSError>;
+  /**
+   * Creates a new user in FinSpace.
+   */
+  createUser(params: Finspacedata.Types.CreateUserRequest, callback?: (err: AWSError, data: Finspacedata.Types.CreateUserResponse) => void): Request<Finspacedata.Types.CreateUserResponse, AWSError>;
+  /**
+   * Creates a new user in FinSpace.
+   */
+  createUser(callback?: (err: AWSError, data: Finspacedata.Types.CreateUserResponse) => void): Request<Finspacedata.Types.CreateUserResponse, AWSError>;
+  /**
    * Deletes a FinSpace Dataset.
    */
   deleteDataset(params: Finspacedata.Types.DeleteDatasetRequest, callback?: (err: AWSError, data: Finspacedata.Types.DeleteDatasetResponse) => void): Request<Finspacedata.Types.DeleteDatasetResponse, AWSError>;
@@ -43,6 +59,30 @@ declare class Finspacedata extends Service {
    * Deletes a FinSpace Dataset.
    */
   deleteDataset(callback?: (err: AWSError, data: Finspacedata.Types.DeleteDatasetResponse) => void): Request<Finspacedata.Types.DeleteDatasetResponse, AWSError>;
+  /**
+   * Deletes a permission group. This action is irreversible.
+   */
+  deletePermissionGroup(params: Finspacedata.Types.DeletePermissionGroupRequest, callback?: (err: AWSError, data: Finspacedata.Types.DeletePermissionGroupResponse) => void): Request<Finspacedata.Types.DeletePermissionGroupResponse, AWSError>;
+  /**
+   * Deletes a permission group. This action is irreversible.
+   */
+  deletePermissionGroup(callback?: (err: AWSError, data: Finspacedata.Types.DeletePermissionGroupResponse) => void): Request<Finspacedata.Types.DeletePermissionGroupResponse, AWSError>;
+  /**
+   * Denies access to the FinSpace web application and API for the specified user.
+   */
+  disableUser(params: Finspacedata.Types.DisableUserRequest, callback?: (err: AWSError, data: Finspacedata.Types.DisableUserResponse) => void): Request<Finspacedata.Types.DisableUserResponse, AWSError>;
+  /**
+   * Denies access to the FinSpace web application and API for the specified user.
+   */
+  disableUser(callback?: (err: AWSError, data: Finspacedata.Types.DisableUserResponse) => void): Request<Finspacedata.Types.DisableUserResponse, AWSError>;
+  /**
+   *  Allows the specified user to access the FinSpace web application and API.
+   */
+  enableUser(params: Finspacedata.Types.EnableUserRequest, callback?: (err: AWSError, data: Finspacedata.Types.EnableUserResponse) => void): Request<Finspacedata.Types.EnableUserResponse, AWSError>;
+  /**
+   *  Allows the specified user to access the FinSpace web application and API.
+   */
+  enableUser(callback?: (err: AWSError, data: Finspacedata.Types.EnableUserResponse) => void): Request<Finspacedata.Types.EnableUserResponse, AWSError>;
   /**
    * Get information about a Changeset.
    */
@@ -76,6 +116,14 @@ declare class Finspacedata extends Service {
    */
   getProgrammaticAccessCredentials(callback?: (err: AWSError, data: Finspacedata.Types.GetProgrammaticAccessCredentialsResponse) => void): Request<Finspacedata.Types.GetProgrammaticAccessCredentialsResponse, AWSError>;
   /**
+   * Retrieves details for a specific user.
+   */
+  getUser(params: Finspacedata.Types.GetUserRequest, callback?: (err: AWSError, data: Finspacedata.Types.GetUserResponse) => void): Request<Finspacedata.Types.GetUserResponse, AWSError>;
+  /**
+   * Retrieves details for a specific user.
+   */
+  getUser(callback?: (err: AWSError, data: Finspacedata.Types.GetUserResponse) => void): Request<Finspacedata.Types.GetUserResponse, AWSError>;
+  /**
    * A temporary Amazon S3 location, where you can copy your files from a source location to stage or use as a scratch space in FinSpace notebook.
    */
   getWorkingLocation(params: Finspacedata.Types.GetWorkingLocationRequest, callback?: (err: AWSError, data: Finspacedata.Types.GetWorkingLocationResponse) => void): Request<Finspacedata.Types.GetWorkingLocationResponse, AWSError>;
@@ -108,6 +156,30 @@ declare class Finspacedata extends Service {
    */
   listDatasets(callback?: (err: AWSError, data: Finspacedata.Types.ListDatasetsResponse) => void): Request<Finspacedata.Types.ListDatasetsResponse, AWSError>;
   /**
+   * Lists all available permission groups in FinSpace.
+   */
+  listPermissionGroups(params: Finspacedata.Types.ListPermissionGroupsRequest, callback?: (err: AWSError, data: Finspacedata.Types.ListPermissionGroupsResponse) => void): Request<Finspacedata.Types.ListPermissionGroupsResponse, AWSError>;
+  /**
+   * Lists all available permission groups in FinSpace.
+   */
+  listPermissionGroups(callback?: (err: AWSError, data: Finspacedata.Types.ListPermissionGroupsResponse) => void): Request<Finspacedata.Types.ListPermissionGroupsResponse, AWSError>;
+  /**
+   * Lists all available user accounts in FinSpace.
+   */
+  listUsers(params: Finspacedata.Types.ListUsersRequest, callback?: (err: AWSError, data: Finspacedata.Types.ListUsersResponse) => void): Request<Finspacedata.Types.ListUsersResponse, AWSError>;
+  /**
+   * Lists all available user accounts in FinSpace.
+   */
+  listUsers(callback?: (err: AWSError, data: Finspacedata.Types.ListUsersResponse) => void): Request<Finspacedata.Types.ListUsersResponse, AWSError>;
+  /**
+   * Resets the password for a specified user ID and generates a temporary one. Only a superuser can reset password for other users. Resetting the password immediately invalidates the previous password associated with the user.
+   */
+  resetUserPassword(params: Finspacedata.Types.ResetUserPasswordRequest, callback?: (err: AWSError, data: Finspacedata.Types.ResetUserPasswordResponse) => void): Request<Finspacedata.Types.ResetUserPasswordResponse, AWSError>;
+  /**
+   * Resets the password for a specified user ID and generates a temporary one. Only a superuser can reset password for other users. Resetting the password immediately invalidates the previous password associated with the user.
+   */
+  resetUserPassword(callback?: (err: AWSError, data: Finspacedata.Types.ResetUserPasswordResponse) => void): Request<Finspacedata.Types.ResetUserPasswordResponse, AWSError>;
+  /**
    * Updates a FinSpace Changeset.
    */
   updateChangeset(params: Finspacedata.Types.UpdateChangesetRequest, callback?: (err: AWSError, data: Finspacedata.Types.UpdateChangesetResponse) => void): Request<Finspacedata.Types.UpdateChangesetResponse, AWSError>;
@@ -123,9 +195,28 @@ declare class Finspacedata extends Service {
    * Updates a FinSpace Dataset.
    */
   updateDataset(callback?: (err: AWSError, data: Finspacedata.Types.UpdateDatasetResponse) => void): Request<Finspacedata.Types.UpdateDatasetResponse, AWSError>;
+  /**
+   * Modifies the details of a permission group. You cannot modify a permissionGroupID.
+   */
+  updatePermissionGroup(params: Finspacedata.Types.UpdatePermissionGroupRequest, callback?: (err: AWSError, data: Finspacedata.Types.UpdatePermissionGroupResponse) => void): Request<Finspacedata.Types.UpdatePermissionGroupResponse, AWSError>;
+  /**
+   * Modifies the details of a permission group. You cannot modify a permissionGroupID.
+   */
+  updatePermissionGroup(callback?: (err: AWSError, data: Finspacedata.Types.UpdatePermissionGroupResponse) => void): Request<Finspacedata.Types.UpdatePermissionGroupResponse, AWSError>;
+  /**
+   * Modifies the details of the specified user account. You cannot update the userId for a user.
+   */
+  updateUser(params: Finspacedata.Types.UpdateUserRequest, callback?: (err: AWSError, data: Finspacedata.Types.UpdateUserResponse) => void): Request<Finspacedata.Types.UpdateUserResponse, AWSError>;
+  /**
+   * Modifies the details of the specified user account. You cannot update the userId for a user.
+   */
+  updateUser(callback?: (err: AWSError, data: Finspacedata.Types.UpdateUserResponse) => void): Request<Finspacedata.Types.UpdateUserResponse, AWSError>;
 }
 declare namespace Finspacedata {
   export type AliasString = string;
+  export type ApiAccess = "ENABLED"|"DISABLED"|string;
+  export type ApplicationPermission = "CreateDataset"|"ManageClusters"|"ManageUsersAndGroups"|"ManageAttributeSets"|"ViewAuditData"|"AccessNotebooks"|"GetTemporaryCredentials"|string;
+  export type ApplicationPermissionList = ApplicationPermission[];
   export type Boolean = boolean;
   export type ChangeType = "REPLACE"|"APPEND"|"MODIFY"|string;
   export type ChangesetArn = string;
@@ -135,7 +226,7 @@ declare namespace Finspacedata {
      */
     errorMessage?: ErrorMessage;
     /**
-     * The category of the error.    VALIDATION -The inputs to this request are invalid.    SERVICE_QUOTA_EXCEEDED - Service quotas have been exceeded. Please contact AWS support to increase quotas.    ACCESS_DENIED - Missing required permission to perform this request.    RESOURCE_NOT_FOUND - One or more inputs to this request were not found.    THROTTLING - The system temporarily lacks sufficient resources to process the request.    INTERNAL_SERVICE_EXCEPTION - An internal service error has occurred.    CANCELLED - Cancelled.    USER_RECOVERABLE - A user recoverable error has occurred.  
+     * The category of the error.    VALIDATION – The inputs to this request are invalid.    SERVICE_QUOTA_EXCEEDED – Service quotas have been exceeded. Please contact AWS support to increase quotas.    ACCESS_DENIED – Missing required permission to perform this request.    RESOURCE_NOT_FOUND – One or more inputs to this request were not found.    THROTTLING – The system temporarily lacks sufficient resources to process the request.    INTERNAL_SERVICE_EXCEPTION – An internal service error has occurred.    CANCELLED – Cancelled.    USER_RECOVERABLE – A user recoverable error has occurred.  
      */
     errorCategory?: ErrorCategory;
   }
@@ -155,7 +246,7 @@ declare namespace Finspacedata {
      */
     datasetId?: DatasetId;
     /**
-     * Type that indicates how a Changeset is applied to a Dataset.    REPLACE - Changeset is considered as a replacement to all prior loaded Changesets.    APPEND - Changeset is considered as an addition to the end of all prior loaded Changesets.    MODIFY - Changeset is considered as a replacement to a specific prior ingested Changeset.  
+     * Type that indicates how a Changeset is applied to a Dataset.    REPLACE – Changeset is considered as a replacement to all prior loaded Changesets.    APPEND – Changeset is considered as an addition to the end of all prior loaded Changesets.    MODIFY – Changeset is considered as a replacement to a specific prior ingested Changeset.  
      */
     changeType?: ChangeType;
     /**
@@ -167,11 +258,11 @@ declare namespace Finspacedata {
      */
     formatParams?: FormatParams;
     /**
-     * The timestamp at which the Changeset was created in FinSpace. The value is determined as Epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+     * The timestamp at which the Changeset was created in FinSpace. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
      */
     createTime?: TimestampEpoch;
     /**
-     * Status of the Changeset ingestion.    PENDING - Changeset is pending creation.    FAILED - Changeset creation has failed.    SUCCESS - Changeset creation has succeeded.    RUNNING - Changeset creation is running.    STOP_REQUESTED - User requested Changeset creation to stop.  
+     * Status of the Changeset ingestion.    PENDING – Changeset is pending creation.    FAILED – Changeset creation has failed.    SUCCESS – Changeset creation has succeeded.    RUNNING – Changeset creation is running.    STOP_REQUESTED – User requested Changeset creation to stop.  
      */
     status?: IngestionStatus;
     /**
@@ -179,11 +270,11 @@ declare namespace Finspacedata {
      */
     errorInfo?: ChangesetErrorInfo;
     /**
-     * Time until which the Changeset is active. The value is determined as Epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+     * Time until which the Changeset is active. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
      */
     activeUntilTimestamp?: TimestampEpoch;
     /**
-     * Beginning time from which the Changeset is active. The value is determined as Epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+     * Beginning time from which the Changeset is active. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
      */
     activeFromTimestamp?: TimestampEpoch;
     /**
@@ -199,11 +290,11 @@ declare namespace Finspacedata {
   export type ColumnDataType = "STRING"|"CHAR"|"INTEGER"|"TINYINT"|"SMALLINT"|"BIGINT"|"FLOAT"|"DOUBLE"|"DATE"|"DATETIME"|"BOOLEAN"|"BINARY"|string;
   export interface ColumnDefinition {
     /**
-     * Data type of a column.    STRING - A String data type.  CHAR - A char data type.  INTEGER - An integer data type.  TINYINT - A tinyint data type.  SMALLINT - A smallint data type.  BIGINT - A bigint data type.  FLOAT - A float data type.  DOUBLE - A double data type.  DATE - A date data type.  DATETIME - A datetime data type.  BOOLEAN - A boolean data type.  BINARY - A binary data type.  
+     * Data type of a column.    STRING – A String data type.  CHAR – A char data type.  INTEGER – An integer data type.  TINYINT – A tinyint data type.  SMALLINT – A smallint data type.  BIGINT – A bigint data type.  FLOAT – A float data type.  DOUBLE – A double data type.  DATE – A date data type.  DATETIME – A datetime data type.  BOOLEAN – A boolean data type.  BINARY – A binary data type.  
      */
     dataType?: ColumnDataType;
     /**
-     * Name for a column.
+     * The name of a column.
      */
     columnName?: ColumnName;
     /**
@@ -225,15 +316,15 @@ declare namespace Finspacedata {
      */
     datasetId: DatasetId;
     /**
-     * Option to indicate how a Changeset will be applied to a Dataset.    REPLACE - Changeset will be considered as a replacement to all prior loaded Changesets.    APPEND - Changeset will be considered as an addition to the end of all prior loaded Changesets.    MODIFY - Changeset is considered as a replacement to a specific prior ingested Changeset.  
+     * The option to indicate how a Changeset will be applied to a Dataset.    REPLACE – Changeset will be considered as a replacement to all prior loaded Changesets.    APPEND – Changeset will be considered as an addition to the end of all prior loaded Changesets.    MODIFY – Changeset is considered as a replacement to a specific prior ingested Changeset.  
      */
     changeType: ChangeType;
     /**
-     * Options that define the location of the data being ingested (s3SourcePath) and the source of the changeset (sourceType). Both s3SourcePath and sourceType are required attributes. Here is an example of how you could specify the sourceParams:   "sourceParams": { "s3SourcePath": "s3://finspace-landing-us-east-2-bk7gcfvitndqa6ebnvys4d/scratch/wr5hh8pwkpqqkxa4sxrmcw/ingestion/equity.csv", "sourceType": "S3" }   The S3 path that you specify must allow the FinSpace role access. To do that, you first need to configure the IAM policy on S3 bucket. For more information, see Loading data from an Amazon S3 Bucket using the FinSpace APIsection.
+     * Options that define the location of the data being ingested (s3SourcePath) and the source of the changeset (sourceType). Both s3SourcePath and sourceType are required attributes. Here is an example of how you could specify the sourceParams:   "sourceParams": { "s3SourcePath": "s3://finspace-landing-us-east-2-bk7gcfvitndqa6ebnvys4d/scratch/wr5hh8pwkpqqkxa4sxrmcw/ingestion/equity.csv", "sourceType": "S3" }   The S3 path that you specify must allow the FinSpace role access. To do that, you first need to configure the IAM policy on S3 bucket. For more information, see Loading data from an Amazon S3 Bucket using the FinSpace API section.
      */
     sourceParams: SourceParams;
     /**
-     * Options that define the structure of the source file(s) including the format type (formatType), header row (withHeader), data separation character (separator) and the type of compression (compression).   formatType is a required attribute and can have the following values:     PARQUET - Parquet source file format.    CSV - CSV source file format.    JSON - JSON source file format.    XML - XML source file format.   Here is an example of how you could specify the formatParams:   "formatParams": { "formatType": "CSV", "withHeader": "true", "separator": ",", "compression":"None" }   Note that if you only provide formatType as CSV, the rest of the attributes will automatically default to CSV values as following:   { "withHeader": "true", "separator": "," }    For more information about supported file formats, see Supported Data Types and File Formats in the FinSpace User Guide.
+     * Options that define the structure of the source file(s) including the format type (formatType), header row (withHeader), data separation character (separator) and the type of compression (compression).   formatType is a required attribute and can have the following values:     PARQUET – Parquet source file format.    CSV – CSV source file format.    JSON – JSON source file format.    XML – XML source file format.   Here is an example of how you could specify the formatParams:   "formatParams": { "formatType": "CSV", "withHeader": "true", "separator": ",", "compression":"None" }   Note that if you only provide formatType as CSV, the rest of the attributes will automatically default to CSV values as following:   { "withHeader": "true", "separator": "," }    For more information about supported file formats, see Supported Data Types and File Formats in the FinSpace User Guide.
      */
     formatParams: FormatParams;
   }
@@ -269,7 +360,7 @@ declare namespace Finspacedata {
      */
     partitionColumns?: PartitionColumnList;
     /**
-     * Beginning time to use for the Dataview. The value is determined as Epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+     * Beginning time to use for the Dataview. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
      */
     asOfTimestamp?: TimestampEpoch;
     /**
@@ -297,7 +388,7 @@ declare namespace Finspacedata {
      */
     datasetTitle: DatasetTitle;
     /**
-     * The format in which Dataset data is structured.    TABULAR - Data is structured in a tabular format.    NON_TABULAR - Data is structured in a non-tabular format.  
+     * The format in which Dataset data is structured.    TABULAR – Data is structured in a tabular format.    NON_TABULAR – Data is structured in a non-tabular format.  
      */
     kind: DatasetKind;
     /**
@@ -327,6 +418,66 @@ declare namespace Finspacedata {
      */
     datasetId?: DatasetId;
   }
+  export interface CreatePermissionGroupRequest {
+    /**
+     * The name of the permission group.
+     */
+    name: PermissionGroupName;
+    /**
+     * A brief description for the permission group.
+     */
+    description?: PermissionGroupDescription;
+    /**
+     * The option to indicate FinSpace application permissions that are granted to a specific group.    CreateDataset – Group members can create new datasets.    ManageClusters – Group members can manage Apache Spark clusters from FinSpace notebooks.    ManageUsersAndGroups – Group members can manage users and permission groups.    ManageAttributeSets – Group members can manage attribute sets.    ViewAuditData – Group members can view audit data.    AccessNotebooks – Group members will have access to FinSpace notebooks.    GetTemporaryCredentials – Group members can get temporary API credentials.  
+     */
+    applicationPermissions: ApplicationPermissionList;
+    /**
+     * A token that ensures idempotency. This token expires in 10 minutes.
+     */
+    clientToken?: ClientToken;
+  }
+  export interface CreatePermissionGroupResponse {
+    /**
+     * The unique identifier for the permission group.
+     */
+    permissionGroupId?: PermissionGroupId;
+  }
+  export interface CreateUserRequest {
+    /**
+     * The email address of the user that you want to register. The email address serves as a uniquer identifier for each user and cannot be changed after it's created.
+     */
+    emailAddress: Email;
+    /**
+     * The option to indicate the type of user. Use one of the following options to specify this parameter:    SUPER_USER – A user with permission to all the functionality and data in FinSpace.    APP_USER – A user with specific permissions in FinSpace. The users are assigned permissions by adding them to a permission group.  
+     */
+    type: UserType;
+    /**
+     * The first name of the user that you want to register.
+     */
+    firstName?: FirstName;
+    /**
+     * The last name of the user that you want to register.
+     */
+    lastName?: LastName;
+    /**
+     * The option to indicate whether the user can use the GetProgrammaticAccessCredentials API to obtain credentials that can then be used to access other FinSpace Data API operations.    ENABLED – The user has permissions to use the APIs.    DISABLED – The user does not have permissions to use any APIs.  
+     */
+    ApiAccess?: ApiAccess;
+    /**
+     * The ARN identifier of an AWS user or role that is allowed to call the GetProgrammaticAccessCredentials API to obtain a credentials token for a specific FinSpace user. This must be an IAM role within your FinSpace account.
+     */
+    apiAccessPrincipalArn?: RoleArn;
+    /**
+     * A token that ensures idempotency. This token expires in 10 minutes.
+     */
+    clientToken?: ClientToken;
+  }
+  export interface CreateUserResponse {
+    /**
+     * The unique identifier for the user.
+     */
+    userId?: UserId;
+  }
   export interface Credentials {
     /**
      * The access key identifier.
@@ -345,11 +496,11 @@ declare namespace Finspacedata {
   export type DataViewDestinationType = string;
   export interface DataViewDestinationTypeParams {
     /**
-     * Destination type for a Dataview.    GLUE_TABLE - Glue table destination type.    S3 - S3 destination type.  
+     * Destination type for a Dataview.    GLUE_TABLE – Glue table destination type.    S3 – S3 destination type.  
      */
     destinationType: DataViewDestinationType;
     /**
-     * Data view export file format.    PARQUET - Parquet export file format.    DELIMITED_TEXT - Delimited text export file format.  
+     * Data view export file format.    PARQUET – Parquet export file format.    DELIMITED_TEXT – Delimited text export file format.  
      */
     s3DestinationExportFileFormat?: ExportFileFormat;
     /**
@@ -363,7 +514,7 @@ declare namespace Finspacedata {
      */
     errorMessage?: ErrorMessage;
     /**
-     * The category of the error.    VALIDATION -The inputs to this request are invalid.    SERVICE_QUOTA_EXCEEDED - Service quotas have been exceeded. Please contact AWS support to increase quotas.    ACCESS_DENIED - Missing required permission to perform this request.    RESOURCE_NOT_FOUND - One or more inputs to this request were not found.    THROTTLING - The system temporarily lacks sufficient resources to process the request.    INTERNAL_SERVICE_EXCEPTION - An internal service error has occurred.    CANCELLED - Cancelled.    USER_RECOVERABLE - A user recoverable error has occurred.  
+     * The category of the error.    VALIDATION – The inputs to this request are invalid.    SERVICE_QUOTA_EXCEEDED – Service quotas have been exceeded. Please contact AWS support to increase quotas.    ACCESS_DENIED – Missing required permission to perform this request.    RESOURCE_NOT_FOUND – One or more inputs to this request were not found.    THROTTLING – The system temporarily lacks sufficient resources to process the request.    INTERNAL_SERVICE_EXCEPTION – An internal service error has occurred.    CANCELLED – Cancelled.    USER_RECOVERABLE – A user recoverable error has occurred.  
      */
     errorCategory?: ErrorCategory;
   }
@@ -384,7 +535,7 @@ declare namespace Finspacedata {
      */
     datasetId?: DatasetId;
     /**
-     * Time range to use for the Dataview. The value is determined as Epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+     * Time range to use for the Dataview. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
      */
     asOfTimestamp?: TimestampEpoch;
     /**
@@ -396,7 +547,7 @@ declare namespace Finspacedata {
      */
     sortColumns?: SortColumnList;
     /**
-     * The status of a Dataview creation.    RUNNING - Dataview creation is running.    STARTING - Dataview creation is starting.    FAILED - Dataview creation has failed.    CANCELLED - Dataview creation has been cancelled.    TIMEOUT - Dataview creation has timed out.    SUCCESS - Dataview creation has succeeded.    PENDING - Dataview creation is pending.    FAILED_CLEANUP_FAILED - Dataview creation failed and resource cleanup failed.  
+     * The status of a Dataview creation.    RUNNING – Dataview creation is running.    STARTING – Dataview creation is starting.    FAILED – Dataview creation has failed.    CANCELLED – Dataview creation has been cancelled.    TIMEOUT – Dataview creation has timed out.    SUCCESS – Dataview creation has succeeded.    PENDING – Dataview creation is pending.    FAILED_CLEANUP_FAILED – Dataview creation failed and resource cleanup failed.  
      */
     status?: DataViewStatus;
     /**
@@ -412,11 +563,11 @@ declare namespace Finspacedata {
      */
     autoUpdate?: Boolean;
     /**
-     * The timestamp at which the Dataview was created in FinSpace. The value is determined as Epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+     * The timestamp at which the Dataview was created in FinSpace. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
      */
     createTime?: TimestampEpoch;
     /**
-     * The last time that a Dataview was modified. The value is determined as Epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+     * The last time that a Dataview was modified. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
      */
     lastModifiedTime?: TimestampEpoch;
   }
@@ -434,7 +585,7 @@ declare namespace Finspacedata {
      */
     datasetTitle?: DatasetTitle;
     /**
-     * The format in which Dataset data is structured.    TABULAR - Data is structured in a tabular format.    NON_TABULAR - Data is structured in a non-tabular format.  
+     * The format in which Dataset data is structured.    TABULAR – Data is structured in a tabular format.    NON_TABULAR – Data is structured in a non-tabular format.  
      */
     kind?: DatasetKind;
     /**
@@ -446,11 +597,11 @@ declare namespace Finspacedata {
      */
     ownerInfo?: DatasetOwnerInfo;
     /**
-     * The timestamp at which the Dataset was created in FinSpace. The value is determined as Epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+     * The timestamp at which the Dataset was created in FinSpace. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
      */
     createTime?: TimestampEpoch;
     /**
-     * The last time that the Dataset was modified. The value is determined as Epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+     * The last time that the Dataset was modified. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
      */
     lastModifiedTime?: TimestampEpoch;
     /**
@@ -469,7 +620,7 @@ declare namespace Finspacedata {
   export type DatasetList = Dataset[];
   export interface DatasetOwnerInfo {
     /**
-     * Name of the Dataset owner.
+     * The name of the Dataset owner.
      */
     name?: OwnerName;
     /**
@@ -499,10 +650,59 @@ declare namespace Finspacedata {
      */
     datasetId?: DatasetId;
   }
+  export interface DeletePermissionGroupRequest {
+    /**
+     * The unique identifier for the permission group that you want to delete.
+     */
+    permissionGroupId: PermissionGroupId;
+    /**
+     * A token that ensures idempotency. This token expires in 10 minutes.
+     */
+    clientToken?: ClientToken;
+  }
+  export interface DeletePermissionGroupResponse {
+    /**
+     * The unique identifier for the deleted permission group.
+     */
+    permissionGroupId?: PermissionGroupId;
+  }
+  export interface DisableUserRequest {
+    /**
+     * The unique identifier for the user account that you want to disable.
+     */
+    userId: UserId;
+    /**
+     * A token that ensures idempotency. This token expires in 10 minutes.
+     */
+    clientToken?: ClientToken;
+  }
+  export interface DisableUserResponse {
+    /**
+     * The unique identifier for the disabled user account.
+     */
+    userId?: UserId;
+  }
   export type Email = string;
+  export interface EnableUserRequest {
+    /**
+     * The unique identifier for the user account that you want to enable.
+     */
+    userId: UserId;
+    /**
+     * A token that ensures idempotency. This token expires in 10 minutes.
+     */
+    clientToken?: ClientToken;
+  }
+  export interface EnableUserResponse {
+    /**
+     * The unique identifier for the enabled user account.
+     */
+    userId?: UserId;
+  }
   export type ErrorCategory = "VALIDATION"|"SERVICE_QUOTA_EXCEEDED"|"ACCESS_DENIED"|"RESOURCE_NOT_FOUND"|"THROTTLING"|"INTERNAL_SERVICE_EXCEPTION"|"CANCELLED"|"USER_RECOVERABLE"|string;
   export type ErrorMessage = string;
   export type ExportFileFormat = "PARQUET"|"DELIMITED_TEXT"|string;
+  export type FirstName = string;
   export type FormatParams = {[key: string]: StringMapValue};
   export interface GetChangesetRequest {
     /**
@@ -528,7 +728,7 @@ declare namespace Finspacedata {
      */
     datasetId?: DatasetId;
     /**
-     * Type that indicates how a Changeset is applied to a Dataset.    REPLACE - Changeset is considered as a replacement to all prior loaded Changesets.    APPEND - Changeset is considered as an addition to the end of all prior loaded Changesets.    MODIFY - Changeset is considered as a replacement to a specific prior ingested Changeset.  
+     * Type that indicates how a Changeset is applied to a Dataset.    REPLACE – Changeset is considered as a replacement to all prior loaded Changesets.    APPEND – Changeset is considered as an addition to the end of all prior loaded Changesets.    MODIFY – Changeset is considered as a replacement to a specific prior ingested Changeset.  
      */
     changeType?: ChangeType;
     /**
@@ -540,7 +740,7 @@ declare namespace Finspacedata {
      */
     formatParams?: FormatParams;
     /**
-     * The timestamp at which the Changeset was created in FinSpace. The value is determined as Epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+     * The timestamp at which the Changeset was created in FinSpace. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
      */
     createTime?: TimestampEpoch;
     /**
@@ -552,11 +752,11 @@ declare namespace Finspacedata {
      */
     errorInfo?: ChangesetErrorInfo;
     /**
-     * Time until which the Changeset is active. The value is determined as Epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+     * Time until which the Changeset is active. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
      */
     activeUntilTimestamp?: TimestampEpoch;
     /**
-     * Beginning time from which the Changeset is active. The value is determined as Epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+     * Beginning time from which the Changeset is active. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
      */
     activeFromTimestamp?: TimestampEpoch;
     /**
@@ -592,7 +792,7 @@ declare namespace Finspacedata {
      */
     datasetId?: DatasetId;
     /**
-     * Time range to use for the Dataview. The value is determined as Epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+     * Time range to use for the Dataview. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
      */
     asOfTimestamp?: TimestampEpoch;
     /**
@@ -600,11 +800,11 @@ declare namespace Finspacedata {
      */
     errorInfo?: DataViewErrorInfo;
     /**
-     * The last time that a Dataview was modified. The value is determined as Epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+     * The last time that a Dataview was modified. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
      */
     lastModifiedTime?: TimestampEpoch;
     /**
-     * The timestamp at which the Dataview was created in FinSpace. The value is determined as Epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+     * The timestamp at which the Dataview was created in FinSpace. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
      */
     createTime?: TimestampEpoch;
     /**
@@ -624,7 +824,7 @@ declare namespace Finspacedata {
      */
     destinationTypeParams?: DataViewDestinationTypeParams;
     /**
-     * The status of a Dataview creation.    RUNNING - Dataview creation is running.    STARTING - Dataview creation is starting.    FAILED - Dataview creation has failed.    CANCELLED - Dataview creation has been cancelled.    TIMEOUT - Dataview creation has timed out.    SUCCESS - Dataview creation has succeeded.    PENDING - Dataview creation is pending.    FAILED_CLEANUP_FAILED - Dataview creation failed and resource cleanup failed.  
+     * The status of a Dataview creation.    RUNNING – Dataview creation is running.    STARTING – Dataview creation is starting.    FAILED – Dataview creation has failed.    CANCELLED – Dataview creation has been cancelled.    TIMEOUT – Dataview creation has timed out.    SUCCESS – Dataview creation has succeeded.    PENDING – Dataview creation is pending.    FAILED_CLEANUP_FAILED – Dataview creation failed and resource cleanup failed.  
      */
     status?: DataViewStatus;
   }
@@ -648,7 +848,7 @@ declare namespace Finspacedata {
      */
     datasetTitle?: DatasetTitle;
     /**
-     * The format in which Dataset data is structured.    TABULAR - Data is structured in a tabular format.    NON_TABULAR - Data is structured in a non-tabular format.  
+     * The format in which Dataset data is structured.    TABULAR – Data is structured in a tabular format.    NON_TABULAR – Data is structured in a non-tabular format.  
      */
     kind?: DatasetKind;
     /**
@@ -656,11 +856,11 @@ declare namespace Finspacedata {
      */
     datasetDescription?: DatasetDescription;
     /**
-     * The timestamp at which the Dataset was created in FinSpace. The value is determined as Epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+     * The timestamp at which the Dataset was created in FinSpace. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
      */
     createTime?: TimestampEpoch;
     /**
-     * The last time that the Dataset was modified. The value is determined as Epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+     * The last time that the Dataset was modified. The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
      */
     lastModifiedTime?: TimestampEpoch;
     /**
@@ -672,7 +872,7 @@ declare namespace Finspacedata {
      */
     alias?: AliasString;
     /**
-     * Status of the Dataset creation.    PENDING - Dataset is pending creation.    FAILED - Dataset creation has failed.    SUCCESS - Dataset creation has succeeded.    RUNNING - Dataset creation is running.  
+     * Status of the Dataset creation.    PENDING – Dataset is pending creation.    FAILED – Dataset creation has failed.    SUCCESS – Dataset creation has succeeded.    RUNNING – Dataset creation is running.  
      */
     status?: DatasetStatus;
   }
@@ -696,9 +896,69 @@ declare namespace Finspacedata {
      */
     durationInMinutes?: SessionDuration;
   }
+  export interface GetUserRequest {
+    /**
+     * The unique identifier of the user to get data for.
+     */
+    userId: UserId;
+  }
+  export interface GetUserResponse {
+    /**
+     * The unique identifier for the user account that is retrieved.
+     */
+    userId?: UserId;
+    /**
+     * The current status of the user account.     CREATING – The user account creation is in progress.    ENABLED – The user account is created and is currently active.    DISABLED – The user account is currently inactive.  
+     */
+    status?: UserStatus;
+    /**
+     * The first name of the user.
+     */
+    firstName?: FirstName;
+    /**
+     * The last name of the user.
+     */
+    lastName?: LastName;
+    /**
+     * The email address that is associated with the user.
+     */
+    emailAddress?: Email;
+    /**
+     * Indicates the type of user.     SUPER_USER – A user with permission to all the functionality and data in FinSpace.      APP_USER – A user with specific permissions in FinSpace. The users are assigned permissions by adding them to a permissions group.  
+     */
+    type?: UserType;
+    /**
+     * Indicates whether the user can use the GetProgrammaticAccessCredentials API to obtain credentials that can then be used to access other FinSpace Data API operations.     ENABLED – The user has permissions to use the APIs.    DISABLED – The user does not have permissions to use any APIs.  
+     */
+    apiAccess?: ApiAccess;
+    /**
+     * The ARN identifier of an AWS user or role that is allowed to call the GetProgrammaticAccessCredentials API to obtain a credentials token for a specific FinSpace user. This must be an IAM role within your FinSpace account.
+     */
+    apiAccessPrincipalArn?: RoleArn;
+    /**
+     * The timestamp at which the user account was created in FinSpace. The value is determined as epoch time in milliseconds. 
+     */
+    createTime?: TimestampEpoch;
+    /**
+     * Describes the last time the user account was enabled. The value is determined as epoch time in milliseconds.
+     */
+    lastEnabledTime?: TimestampEpoch;
+    /**
+     * Describes the last time the user account was disabled. The value is determined as epoch time in milliseconds.
+     */
+    lastDisabledTime?: TimestampEpoch;
+    /**
+     * Describes the last time the user account was updated. The value is determined as epoch time in milliseconds.
+     */
+    lastModifiedTime?: TimestampEpoch;
+    /**
+     * Describes the last time that the user logged into their account. The value is determined as epoch time in milliseconds.
+     */
+    lastLoginTime?: TimestampEpoch;
+  }
   export interface GetWorkingLocationRequest {
     /**
-     * Specify the type of the working location.    SAGEMAKER - Use the Amazon S3 location as a temporary location to store data content when working with FinSpace Notebooks that run on SageMaker studio.    INGESTION - Use the Amazon S3 location as a staging location to copy your data content and then use the location with the Changeset creation operation.  
+     * Specify the type of the working location.    SAGEMAKER – Use the Amazon S3 location as a temporary location to store data content when working with FinSpace Notebooks that run on SageMaker studio.    INGESTION – Use the Amazon S3 location as a staging location to copy your data content and then use the location with the Changeset creation operation.  
      */
     locationType?: locationType;
   }
@@ -718,6 +978,7 @@ declare namespace Finspacedata {
   }
   export type IdType = string;
   export type IngestionStatus = "PENDING"|"FAILED"|"SUCCESS"|"RUNNING"|"STOP_REQUESTED"|string;
+  export type LastName = string;
   export interface ListChangesetsRequest {
     /**
      * The unique identifier for the FinSpace Dataset to which the Changeset belongs.
@@ -728,7 +989,7 @@ declare namespace Finspacedata {
      */
     maxResults?: ResultLimit;
     /**
-     * A token indicating where a results page should begin.
+     * A token that indicates where a results page should begin.
      */
     nextToken?: PaginationToken;
   }
@@ -738,7 +999,7 @@ declare namespace Finspacedata {
      */
     changesets?: ChangesetList;
     /**
-     * A token indicating where a results page should begin.
+     * A token that indicates where a results page should begin.
      */
     nextToken?: PaginationToken;
   }
@@ -748,7 +1009,7 @@ declare namespace Finspacedata {
      */
     datasetId: DatasetId;
     /**
-     * A token indicating where a results page should begin.
+     * A token that indicates where a results page should begin.
      */
     nextToken?: PaginationToken;
     /**
@@ -758,7 +1019,7 @@ declare namespace Finspacedata {
   }
   export interface ListDataViewsResponse {
     /**
-     * A token indicating where a results page should begin.
+     * A token that indicates where a results page should begin.
      */
     nextToken?: PaginationToken;
     /**
@@ -768,7 +1029,7 @@ declare namespace Finspacedata {
   }
   export interface ListDatasetsRequest {
     /**
-     * A token indicating where a results page should begin.
+     * A token that indicates where a results page should begin.
      */
     nextToken?: PaginationToken;
     /**
@@ -782,17 +1043,87 @@ declare namespace Finspacedata {
      */
     datasets?: DatasetList;
     /**
-     * A token indicating where a results page should begin.
+     * A token that indicates where a results page should begin.
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface ListPermissionGroupsRequest {
+    /**
+     * A token that indicates where a results page should begin.
+     */
+    nextToken?: PaginationToken;
+    /**
+     * The maximum number of results per page.
+     */
+    maxResults: ResultLimit;
+  }
+  export interface ListPermissionGroupsResponse {
+    /**
+     * A list of all the permission groups.
+     */
+    permissionGroups?: PermissionGroupList;
+    /**
+     * A token that indicates where a results page should begin.
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface ListUsersRequest {
+    /**
+     * A token that indicates where a results page should begin.
+     */
+    nextToken?: PaginationToken;
+    /**
+     * The maximum number of results per page.
+     */
+    maxResults: ResultLimit;
+  }
+  export interface ListUsersResponse {
+    /**
+     * A list of all the user accounts.
+     */
+    users?: UserList;
+    /**
+     * A token that indicates where a results page should begin.
      */
     nextToken?: PaginationToken;
   }
   export type OwnerName = string;
   export type PaginationToken = string;
   export type PartitionColumnList = StringValueLength1to255[];
+  export type Password = string;
+  export interface PermissionGroup {
+    /**
+     *  The unique identifier for the permission group.
+     */
+    permissionGroupId?: PermissionGroupId;
+    /**
+     * The name of the permission group.
+     */
+    name?: PermissionGroupName;
+    /**
+     *  A brief description for the permission group.
+     */
+    description?: PermissionGroupDescription;
+    /**
+     * Indicates the permissions that are granted to a specific group for accessing the FinSpace application.    CreateDataset – Group members can create new datasets.    ManageClusters – Group members can manage Apache Spark clusters from FinSpace notebooks.    ManageUsersAndGroups – Group members can manage users and permission groups.    ManageAttributeSets – Group members can manage attribute sets.    ViewAuditData – Group members can view audit data.    AccessNotebooks – Group members will have access to FinSpace notebooks.    GetTemporaryCredentials – Group members can get temporary API credentials.  
+     */
+    applicationPermissions?: ApplicationPermissionList;
+    /**
+     * The timestamp at which the group was created in FinSpace. The value is determined as epoch time in milliseconds. 
+     */
+    createTime?: TimestampEpoch;
+    /**
+     * Describes the last time the permission group was updated. The value is determined as epoch time in milliseconds. 
+     */
+    lastModifiedTime?: TimestampEpoch;
+  }
+  export type PermissionGroupDescription = string;
   export type PermissionGroupId = string;
+  export type PermissionGroupList = PermissionGroup[];
+  export type PermissionGroupName = string;
   export interface PermissionGroupParams {
     /**
-     * The unique identifier of the PermissionGroup.
+     * The unique identifier for the PermissionGroup.
      */
     permissionGroupId?: PermissionGroupId;
     /**
@@ -801,6 +1132,26 @@ declare namespace Finspacedata {
     datasetPermissions?: ResourcePermissionsList;
   }
   export type PhoneNumber = string;
+  export interface ResetUserPasswordRequest {
+    /**
+     * The unique identifier of the user that a temporary password is requested for.
+     */
+    userId: UserId;
+    /**
+     * A token that ensures idempotency. This token expires in 10 minutes.
+     */
+    clientToken?: ClientToken;
+  }
+  export interface ResetUserPasswordResponse {
+    /**
+     * The unique identifier of the user that a new password is generated for.
+     */
+    userId?: UserId;
+    /**
+     * A randomly generated temporary password for the requested user account. This password expires in 7 days.
+     */
+    temporaryPassword?: Password;
+  }
   export interface ResourcePermission {
     /**
      * Permission for a resource.
@@ -809,6 +1160,7 @@ declare namespace Finspacedata {
   }
   export type ResourcePermissionsList = ResourcePermission[];
   export type ResultLimit = number;
+  export type RoleArn = string;
   export type S3DestinationFormatOptions = {[key: string]: StringMapValue};
   export interface SchemaDefinition {
     /**
@@ -852,7 +1204,7 @@ declare namespace Finspacedata {
      */
     sourceParams: SourceParams;
     /**
-     * Options that define the structure of the source file(s) including the format type (formatType), header row (withHeader), data separation character (separator) and the type of compression (compression).   formatType is a required attribute and can have the following values:     PARQUET - Parquet source file format.    CSV - CSV source file format.    JSON - JSON source file format.    XML - XML source file format.   Here is an example of how you could specify the formatParams:   "formatParams": { "formatType": "CSV", "withHeader": "true", "separator": ",", "compression":"None" }   Note that if you only provide formatType as CSV, the rest of the attributes will automatically default to CSV values as following:   { "withHeader": "true", "separator": "," }    For more information about supported file formats, see Supported Data Types and File Formats in the FinSpace User Guide.
+     * Options that define the structure of the source file(s) including the format type (formatType), header row (withHeader), data separation character (separator) and the type of compression (compression).   formatType is a required attribute and can have the following values:     PARQUET – Parquet source file format.    CSV – CSV source file format.    JSON – JSON source file format.    XML – XML source file format.   Here is an example of how you could specify the formatParams:   "formatParams": { "formatType": "CSV", "withHeader": "true", "separator": ",", "compression":"None" }   Note that if you only provide formatType as CSV, the rest of the attributes will automatically default to CSV values as following:   { "withHeader": "true", "separator": "," }    For more information about supported file formats, see Supported Data Types and File Formats in the FinSpace User Guide.
      */
     formatParams: FormatParams;
   }
@@ -880,7 +1232,7 @@ declare namespace Finspacedata {
      */
     datasetTitle: DatasetTitle;
     /**
-     * The format in which the Dataset data is structured.    TABULAR - Data is structured in a tabular format.    NON_TABULAR - Data is structured in a non-tabular format.  
+     * The format in which the Dataset data is structured.    TABULAR – Data is structured in a tabular format.    NON_TABULAR – Data is structured in a non-tabular format.  
      */
     kind: DatasetKind;
     /**
@@ -902,6 +1254,128 @@ declare namespace Finspacedata {
      */
     datasetId?: DatasetId;
   }
+  export interface UpdatePermissionGroupRequest {
+    /**
+     * The unique identifier for the permission group to update.
+     */
+    permissionGroupId: PermissionGroupId;
+    /**
+     * The name of the permission group.
+     */
+    name?: PermissionGroupName;
+    /**
+     * A brief description for the permission group.
+     */
+    description?: PermissionGroupDescription;
+    /**
+     * The permissions that are granted to a specific group for accessing the FinSpace application.    CreateDataset – Group members can create new datasets.    ManageClusters – Group members can manage Apache Spark clusters from FinSpace notebooks.    ManageUsersAndGroups – Group members can manage users and permission groups.    ManageAttributeSets – Group members can manage attribute sets.    ViewAuditData – Group members can view audit data.    AccessNotebooks – Group members will have access to FinSpace notebooks.    GetTemporaryCredentials – Group members can get temporary API credentials.  
+     */
+    applicationPermissions?: ApplicationPermissionList;
+    /**
+     * A token that ensures idempotency. This token expires in 10 minutes.
+     */
+    clientToken?: ClientToken;
+  }
+  export interface UpdatePermissionGroupResponse {
+    /**
+     * The unique identifier for the updated permission group.
+     */
+    permissionGroupId?: PermissionGroupId;
+  }
+  export interface UpdateUserRequest {
+    /**
+     * The unique identifier for the user account to update.
+     */
+    userId: UserId;
+    /**
+     * The option to indicate the type of user.    SUPER_USER– A user with permission to all the functionality and data in FinSpace.    APP_USER – A user with specific permissions in FinSpace. The users are assigned permissions by adding them to a permissions group.  
+     */
+    type?: UserType;
+    /**
+     * The first name of the user.
+     */
+    firstName?: FirstName;
+    /**
+     * The last name of the user.
+     */
+    lastName?: LastName;
+    /**
+     * The option to indicate whether the user can use the GetProgrammaticAccessCredentials API to obtain credentials that can then be used to access other FinSpace Data API operations.    ENABLED – The user has permissions to use the APIs.    DISABLED – The user does not have permissions to use any APIs.  
+     */
+    apiAccess?: ApiAccess;
+    /**
+     * The ARN identifier of an AWS user or role that is allowed to call the GetProgrammaticAccessCredentials API to obtain a credentials token for a specific FinSpace user. This must be an IAM role within your FinSpace account.
+     */
+    apiAccessPrincipalArn?: RoleArn;
+    /**
+     * A token that ensures idempotency. This token expires in 10 minutes.
+     */
+    clientToken?: ClientToken;
+  }
+  export interface UpdateUserResponse {
+    /**
+     * The unique identifier of the updated user account.
+     */
+    userId?: UserId;
+  }
+  export interface User {
+    /**
+     * The unique identifier for the user.
+     */
+    userId?: UserId;
+    /**
+     * The current status of the user account.     CREATING – The user account creation is in progress.    ENABLED – The user account is created and is currently active.    DISABLED – The user account is currently inactive.  
+     */
+    status?: UserStatus;
+    /**
+     * The first name of the user.
+     */
+    firstName?: FirstName;
+    /**
+     *  The last name of the user.
+     */
+    lastName?: LastName;
+    /**
+     * The email address of the user. The email address serves as a uniquer identifier for each user and cannot be changed after it's created.
+     */
+    emailAddress?: Email;
+    /**
+     *  Indicates the type of user.    SUPER_USER – A user with permission to all the functionality and data in FinSpace.    APP_USER – A user with specific permissions in FinSpace. The users are assigned permissions by adding them to a permissions group.  
+     */
+    type?: UserType;
+    /**
+     * Indicates whether the user can use the GetProgrammaticAccessCredentials API to obtain credentials that can then be used to access other FinSpace Data API operations.    ENABLED – The user has permissions to use the APIs.    DISABLED – The user does not have permissions to use any APIs.  
+     */
+    apiAccess?: ApiAccess;
+    /**
+     * The ARN identifier of an AWS user or role that is allowed to call the GetProgrammaticAccessCredentials API to obtain a credentials token for a specific FinSpace user. This must be an IAM role within your FinSpace account.
+     */
+    apiAccessPrincipalArn?: RoleArn;
+    /**
+     * The timestamp at which the user account was created in FinSpace. The value is determined as epoch time in milliseconds. 
+     */
+    createTime?: TimestampEpoch;
+    /**
+     *  Describes the last time the user account was enabled. The value is determined as epoch time in milliseconds. 
+     */
+    lastEnabledTime?: TimestampEpoch;
+    /**
+     * Describes the last time the user account was disabled. The value is determined as epoch time in milliseconds.
+     */
+    lastDisabledTime?: TimestampEpoch;
+    /**
+     * Describes the last time the user account was updated. The value is determined as epoch time in milliseconds. 
+     */
+    lastModifiedTime?: TimestampEpoch;
+    /**
+     * Describes the last time that the user logged into their account. The value is determined as epoch time in milliseconds. 
+     */
+    lastLoginTime?: TimestampEpoch;
+  }
+  export type UserId = string;
+  export type UserList = User[];
+  export type UserStatus = "CREATING"|"ENABLED"|"DISABLED"|string;
+  export type UserType = "SUPER_USER"|"APP_USER"|string;
   export type locationType = "INGESTION"|"SAGEMAKER"|string;
   export type stringValueLength1to1024 = string;
   export type stringValueLength1to255 = string;

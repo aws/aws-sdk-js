@@ -493,6 +493,12 @@
       "min": 1,
       "pattern": "[\\S]+"
     },
+    "CloudWatchLogGroupArn": {
+      "type": "string",
+      "max": 2048,
+      "min": 20,
+      "pattern": "[\\S]+"
+    },
     "CreateExperimentTemplateActionInput": {
       "type": "structure",
       "required": [
@@ -530,6 +536,27 @@
       "value": {
         "shape": "CreateExperimentTemplateActionInput"
       }
+    },
+    "CreateExperimentTemplateLogConfigurationInput": {
+      "type": "structure",
+      "required": [
+        "logSchemaVersion"
+      ],
+      "members": {
+        "cloudWatchLogsConfiguration": {
+          "shape": "ExperimentTemplateCloudWatchLogsLogConfigurationInput",
+          "documentation": "<p>The configuration for experiment logging to Amazon CloudWatch Logs.</p>"
+        },
+        "s3Configuration": {
+          "shape": "ExperimentTemplateS3LogConfigurationInput",
+          "documentation": "<p>The configuration for experiment logging to Amazon S3.</p>"
+        },
+        "logSchemaVersion": {
+          "shape": "LogSchemaVersion",
+          "documentation": "<p>The schema version.</p>"
+        }
+      },
+      "documentation": "<p>Specifies the configuration for experiment logging.</p>"
     },
     "CreateExperimentTemplateRequest": {
       "type": "structure",
@@ -569,6 +596,10 @@
         "tags": {
           "shape": "TagMap",
           "documentation": "<p>The tags to apply to the experiment template.</p>"
+        },
+        "logConfiguration": {
+          "shape": "CreateExperimentTemplateLogConfigurationInput",
+          "documentation": "<p>The configuration for experiment logging.</p>"
         }
       }
     },
@@ -719,6 +750,10 @@
         "tags": {
           "shape": "TagMap",
           "documentation": "<p>The tags for the experiment.</p>"
+        },
+        "logConfiguration": {
+          "shape": "ExperimentLogConfiguration",
+          "documentation": "<p>The configuration for experiment logging.</p>"
         }
       },
       "documentation": "<p>Describes an experiment.</p>"
@@ -862,6 +897,16 @@
       "max": 64,
       "pattern": "[\\S]+"
     },
+    "ExperimentCloudWatchLogsLogConfiguration": {
+      "type": "structure",
+      "members": {
+        "logGroupArn": {
+          "shape": "CloudWatchLogGroupArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the destination Amazon CloudWatch Logs log group.</p>"
+        }
+      },
+      "documentation": "<p>Describes the configuration for experiment logging to Amazon CloudWatch Logs.</p>"
+    },
     "ExperimentEndTime": {
       "type": "timestamp"
     },
@@ -869,6 +914,38 @@
       "type": "string",
       "max": 64,
       "pattern": "[\\S]+"
+    },
+    "ExperimentLogConfiguration": {
+      "type": "structure",
+      "members": {
+        "cloudWatchLogsConfiguration": {
+          "shape": "ExperimentCloudWatchLogsLogConfiguration",
+          "documentation": "<p>The configuration for experiment logging to Amazon CloudWatch Logs.</p>"
+        },
+        "s3Configuration": {
+          "shape": "ExperimentS3LogConfiguration",
+          "documentation": "<p>The configuration for experiment logging to Amazon S3.</p>"
+        },
+        "logSchemaVersion": {
+          "shape": "LogSchemaVersion",
+          "documentation": "<p>The schema version.</p>"
+        }
+      },
+      "documentation": "<p>Describes the configuration for experiment logging.</p>"
+    },
+    "ExperimentS3LogConfiguration": {
+      "type": "structure",
+      "members": {
+        "bucketName": {
+          "shape": "S3BucketName",
+          "documentation": "<p>The name of the destination bucket.</p>"
+        },
+        "prefix": {
+          "shape": "S3ObjectKey",
+          "documentation": "<p>The bucket prefix.</p>"
+        }
+      },
+      "documentation": "<p>Describes the configuration for experiment logging to Amazon S3.</p>"
     },
     "ExperimentStartTime": {
       "type": "timestamp"
@@ -1098,6 +1175,10 @@
         "tags": {
           "shape": "TagMap",
           "documentation": "<p>The tags for the experiment template.</p>"
+        },
+        "logConfiguration": {
+          "shape": "ExperimentTemplateLogConfiguration",
+          "documentation": "<p>The configuration for experiment logging.</p>"
         }
       },
       "documentation": "<p>Describes an experiment template.</p>"
@@ -1191,6 +1272,29 @@
       "max": 64,
       "pattern": "[\\S]+"
     },
+    "ExperimentTemplateCloudWatchLogsLogConfiguration": {
+      "type": "structure",
+      "members": {
+        "logGroupArn": {
+          "shape": "CloudWatchLogGroupArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the destination Amazon CloudWatch Logs log group.</p>"
+        }
+      },
+      "documentation": "<p>Describes the configuration for experiment logging to Amazon CloudWatch Logs.</p>"
+    },
+    "ExperimentTemplateCloudWatchLogsLogConfigurationInput": {
+      "type": "structure",
+      "required": [
+        "logGroupArn"
+      ],
+      "members": {
+        "logGroupArn": {
+          "shape": "CloudWatchLogGroupArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the destination Amazon CloudWatch Logs log group.</p>"
+        }
+      },
+      "documentation": "<p>Specifies the configuration for experiment logging to Amazon CloudWatch Logs.</p>"
+    },
     "ExperimentTemplateDescription": {
       "type": "string",
       "max": 512,
@@ -1200,6 +1304,55 @@
       "type": "string",
       "max": 64,
       "pattern": "[\\S]+"
+    },
+    "ExperimentTemplateLogConfiguration": {
+      "type": "structure",
+      "members": {
+        "cloudWatchLogsConfiguration": {
+          "shape": "ExperimentTemplateCloudWatchLogsLogConfiguration",
+          "documentation": "<p>The configuration for experiment logging to Amazon CloudWatch Logs.</p>"
+        },
+        "s3Configuration": {
+          "shape": "ExperimentTemplateS3LogConfiguration",
+          "documentation": "<p>The configuration for experiment logging to Amazon S3.</p>"
+        },
+        "logSchemaVersion": {
+          "shape": "LogSchemaVersion",
+          "documentation": "<p>The schema version.</p>"
+        }
+      },
+      "documentation": "<p>Describes the configuration for experiment logging.</p>"
+    },
+    "ExperimentTemplateS3LogConfiguration": {
+      "type": "structure",
+      "members": {
+        "bucketName": {
+          "shape": "S3BucketName",
+          "documentation": "<p>The name of the destination bucket.</p>"
+        },
+        "prefix": {
+          "shape": "S3ObjectKey",
+          "documentation": "<p>The bucket prefix.</p>"
+        }
+      },
+      "documentation": "<p>Describes the configuration for experiment logging to Amazon S3.</p>"
+    },
+    "ExperimentTemplateS3LogConfigurationInput": {
+      "type": "structure",
+      "required": [
+        "bucketName"
+      ],
+      "members": {
+        "bucketName": {
+          "shape": "S3BucketName",
+          "documentation": "<p>The name of the destination bucket.</p>"
+        },
+        "prefix": {
+          "shape": "S3ObjectKey",
+          "documentation": "<p>The bucket prefix.</p>"
+        }
+      },
+      "documentation": "<p>Specifies the configuration for experiment logging to Amazon S3.</p>"
     },
     "ExperimentTemplateStopCondition": {
       "type": "structure",
@@ -1644,6 +1797,9 @@
         }
       }
     },
+    "LogSchemaVersion": {
+      "type": "integer"
+    },
     "NextToken": {
       "type": "string",
       "max": 1024,
@@ -1668,6 +1824,18 @@
       "max": 2048,
       "min": 20,
       "pattern": "[\\S]+"
+    },
+    "S3BucketName": {
+      "type": "string",
+      "max": 63,
+      "min": 3,
+      "pattern": "[\\S]+"
+    },
+    "S3ObjectKey": {
+      "type": "string",
+      "max": 1024,
+      "min": 1,
+      "pattern": "[\\s\\S]+"
     },
     "StartExperimentRequest": {
       "type": "structure",
@@ -1927,6 +2095,24 @@
         "shape": "UpdateExperimentTemplateActionInputItem"
       }
     },
+    "UpdateExperimentTemplateLogConfigurationInput": {
+      "type": "structure",
+      "members": {
+        "cloudWatchLogsConfiguration": {
+          "shape": "ExperimentTemplateCloudWatchLogsLogConfigurationInput",
+          "documentation": "<p>The configuration for experiment logging to Amazon CloudWatch Logs.</p>"
+        },
+        "s3Configuration": {
+          "shape": "ExperimentTemplateS3LogConfigurationInput",
+          "documentation": "<p>The configuration for experiment logging to Amazon S3.</p>"
+        },
+        "logSchemaVersion": {
+          "shape": "LogSchemaVersion",
+          "documentation": "<p>The schema version.</p>"
+        }
+      },
+      "documentation": "<p>Specifies the configuration for experiment logging.</p>"
+    },
     "UpdateExperimentTemplateRequest": {
       "type": "structure",
       "required": [
@@ -1958,6 +2144,10 @@
         "roleArn": {
           "shape": "RoleArn",
           "documentation": "<p>The Amazon Resource Name (ARN) of an IAM role that grants the FIS service permission to perform service actions on your behalf.</p>"
+        },
+        "logConfiguration": {
+          "shape": "UpdateExperimentTemplateLogConfigurationInput",
+          "documentation": "<p>The configuration for experiment logging.</p>"
         }
       }
     },

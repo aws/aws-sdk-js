@@ -68,19 +68,19 @@ declare class FSx extends Service {
    */
   createFileSystem(callback?: (err: AWSError, data: FSx.Types.CreateFileSystemResponse) => void): Request<FSx.Types.CreateFileSystemResponse, AWSError>;
   /**
-   * Creates a new Amazon FSx for Lustre, Amazon FSx for Windows File Server, or Amazon FSx for OpenZFS file system from an existing Amazon FSx backup. If a file system with the specified client request token exists and the parameters match, this operation returns the description of the file system. If a client request token with the specified by the file system exists and the parameters don't match, this call returns IncompatibleParameterError. If a file system with the specified client request token doesn't exist, this operation does the following:   Creates a new Amazon FSx file system from backup with an assigned ID, and an initial lifecycle state of CREATING.   Returns the description of the file system.   Parameters like the Active Directory, default share name, automatic backup, and backup settings default to the parameters of the file system that was backed up, unless overridden. You can explicitly supply other settings. By using the idempotent operation, you can retry a CreateFileSystemFromBackup call without the risk of creating an extra file system. This approach can be useful when an initial call fails in a way that makes it unclear whether a file system was created. Examples are if a transport level timeout occurred, or your connection was reset. If you use the same client request token and the initial call created a file system, the client receives a success message as long as the parameters are the same.  The CreateFileSystemFromBackup call returns while the file system's lifecycle state is still CREATING. You can check the file-system creation status by calling the  DescribeFileSystems operation, which returns the file system state along with other information. 
+   * Creates a new Amazon FSx for Lustre, Amazon FSx for Windows File Server, or Amazon FSx for OpenZFS file system from an existing Amazon FSx backup. If a file system with the specified client request token exists and the parameters match, this operation returns the description of the file system. If a file system with the specified client request token exists but the parameters don't match, this call returns IncompatibleParameterError. If a file system with the specified client request token doesn't exist, this operation does the following:   Creates a new Amazon FSx file system from backup with an assigned ID, and an initial lifecycle state of CREATING.   Returns the description of the file system.   Parameters like the Active Directory, default share name, automatic backup, and backup settings default to the parameters of the file system that was backed up, unless overridden. You can explicitly supply other settings. By using the idempotent operation, you can retry a CreateFileSystemFromBackup call without the risk of creating an extra file system. This approach can be useful when an initial call fails in a way that makes it unclear whether a file system was created. Examples are if a transport level timeout occurred, or your connection was reset. If you use the same client request token and the initial call created a file system, the client receives a success message as long as the parameters are the same.  The CreateFileSystemFromBackup call returns while the file system's lifecycle state is still CREATING. You can check the file-system creation status by calling the  DescribeFileSystems operation, which returns the file system state along with other information. 
    */
   createFileSystemFromBackup(params: FSx.Types.CreateFileSystemFromBackupRequest, callback?: (err: AWSError, data: FSx.Types.CreateFileSystemFromBackupResponse) => void): Request<FSx.Types.CreateFileSystemFromBackupResponse, AWSError>;
   /**
-   * Creates a new Amazon FSx for Lustre, Amazon FSx for Windows File Server, or Amazon FSx for OpenZFS file system from an existing Amazon FSx backup. If a file system with the specified client request token exists and the parameters match, this operation returns the description of the file system. If a client request token with the specified by the file system exists and the parameters don't match, this call returns IncompatibleParameterError. If a file system with the specified client request token doesn't exist, this operation does the following:   Creates a new Amazon FSx file system from backup with an assigned ID, and an initial lifecycle state of CREATING.   Returns the description of the file system.   Parameters like the Active Directory, default share name, automatic backup, and backup settings default to the parameters of the file system that was backed up, unless overridden. You can explicitly supply other settings. By using the idempotent operation, you can retry a CreateFileSystemFromBackup call without the risk of creating an extra file system. This approach can be useful when an initial call fails in a way that makes it unclear whether a file system was created. Examples are if a transport level timeout occurred, or your connection was reset. If you use the same client request token and the initial call created a file system, the client receives a success message as long as the parameters are the same.  The CreateFileSystemFromBackup call returns while the file system's lifecycle state is still CREATING. You can check the file-system creation status by calling the  DescribeFileSystems operation, which returns the file system state along with other information. 
+   * Creates a new Amazon FSx for Lustre, Amazon FSx for Windows File Server, or Amazon FSx for OpenZFS file system from an existing Amazon FSx backup. If a file system with the specified client request token exists and the parameters match, this operation returns the description of the file system. If a file system with the specified client request token exists but the parameters don't match, this call returns IncompatibleParameterError. If a file system with the specified client request token doesn't exist, this operation does the following:   Creates a new Amazon FSx file system from backup with an assigned ID, and an initial lifecycle state of CREATING.   Returns the description of the file system.   Parameters like the Active Directory, default share name, automatic backup, and backup settings default to the parameters of the file system that was backed up, unless overridden. You can explicitly supply other settings. By using the idempotent operation, you can retry a CreateFileSystemFromBackup call without the risk of creating an extra file system. This approach can be useful when an initial call fails in a way that makes it unclear whether a file system was created. Examples are if a transport level timeout occurred, or your connection was reset. If you use the same client request token and the initial call created a file system, the client receives a success message as long as the parameters are the same.  The CreateFileSystemFromBackup call returns while the file system's lifecycle state is still CREATING. You can check the file-system creation status by calling the  DescribeFileSystems operation, which returns the file system state along with other information. 
    */
   createFileSystemFromBackup(callback?: (err: AWSError, data: FSx.Types.CreateFileSystemFromBackupResponse) => void): Request<FSx.Types.CreateFileSystemFromBackupResponse, AWSError>;
   /**
-   * Creates a snapshot of an existing Amazon FSx for OpenZFS file system. With snapshots, you can easily undo file changes and compare file versions by restoring the volume to a previous version. If a snapshot with the specified client request token exists, and the parameters match, this operation returns the description of the existing snapshot. If a snapshot with the specified client request token exists, and the parameters don't match, this operation returns IncompatibleParameterError. If a snapshot with the specified client request token doesn't exist, CreateSnapshot does the following:    Creates a new OpenZFS snapshot with an assigned ID, and an initial lifecycle state of CREATING.   Returns the description of the snapshot.   By using the idempotent operation, you can retry a CreateSnapshot operation without the risk of creating an extra snapshot. This approach can be useful when an initial call fails in a way that makes it unclear whether a snapshot was created. If you use the same client request token and the initial call created a snapshot, the operation returns a successful result because all the parameters are the same. The CreateSnapshot operation returns while the snapshot's lifecycle state is still CREATING. You can check the snapshot creation status by calling the DescribeSnapshots operation, which returns the snapshot state along with other information. 
+   * Creates a snapshot of an existing Amazon FSx for OpenZFS volume. With snapshots, you can easily undo file changes and compare file versions by restoring the volume to a previous version. If a snapshot with the specified client request token exists, and the parameters match, this operation returns the description of the existing snapshot. If a snapshot with the specified client request token exists, and the parameters don't match, this operation returns IncompatibleParameterError. If a snapshot with the specified client request token doesn't exist, CreateSnapshot does the following:   Creates a new OpenZFS snapshot with an assigned ID, and an initial lifecycle state of CREATING.   Returns the description of the snapshot.   By using the idempotent operation, you can retry a CreateSnapshot operation without the risk of creating an extra snapshot. This approach can be useful when an initial call fails in a way that makes it unclear whether a snapshot was created. If you use the same client request token and the initial call created a snapshot, the operation returns a successful result because all the parameters are the same. The CreateSnapshot operation returns while the snapshot's lifecycle state is still CREATING. You can check the snapshot creation status by calling the DescribeSnapshots operation, which returns the snapshot state along with other information.
    */
   createSnapshot(params: FSx.Types.CreateSnapshotRequest, callback?: (err: AWSError, data: FSx.Types.CreateSnapshotResponse) => void): Request<FSx.Types.CreateSnapshotResponse, AWSError>;
   /**
-   * Creates a snapshot of an existing Amazon FSx for OpenZFS file system. With snapshots, you can easily undo file changes and compare file versions by restoring the volume to a previous version. If a snapshot with the specified client request token exists, and the parameters match, this operation returns the description of the existing snapshot. If a snapshot with the specified client request token exists, and the parameters don't match, this operation returns IncompatibleParameterError. If a snapshot with the specified client request token doesn't exist, CreateSnapshot does the following:    Creates a new OpenZFS snapshot with an assigned ID, and an initial lifecycle state of CREATING.   Returns the description of the snapshot.   By using the idempotent operation, you can retry a CreateSnapshot operation without the risk of creating an extra snapshot. This approach can be useful when an initial call fails in a way that makes it unclear whether a snapshot was created. If you use the same client request token and the initial call created a snapshot, the operation returns a successful result because all the parameters are the same. The CreateSnapshot operation returns while the snapshot's lifecycle state is still CREATING. You can check the snapshot creation status by calling the DescribeSnapshots operation, which returns the snapshot state along with other information. 
+   * Creates a snapshot of an existing Amazon FSx for OpenZFS volume. With snapshots, you can easily undo file changes and compare file versions by restoring the volume to a previous version. If a snapshot with the specified client request token exists, and the parameters match, this operation returns the description of the existing snapshot. If a snapshot with the specified client request token exists, and the parameters don't match, this operation returns IncompatibleParameterError. If a snapshot with the specified client request token doesn't exist, CreateSnapshot does the following:   Creates a new OpenZFS snapshot with an assigned ID, and an initial lifecycle state of CREATING.   Returns the description of the snapshot.   By using the idempotent operation, you can retry a CreateSnapshot operation without the risk of creating an extra snapshot. This approach can be useful when an initial call fails in a way that makes it unclear whether a snapshot was created. If you use the same client request token and the initial call created a snapshot, the operation returns a successful result because all the parameters are the same. The CreateSnapshot operation returns while the snapshot's lifecycle state is still CREATING. You can check the snapshot creation status by calling the DescribeSnapshots operation, which returns the snapshot state along with other information.
    */
   createSnapshot(callback?: (err: AWSError, data: FSx.Types.CreateSnapshotResponse) => void): Request<FSx.Types.CreateSnapshotResponse, AWSError>;
   /**
@@ -132,11 +132,11 @@ declare class FSx extends Service {
    */
   deleteFileSystem(callback?: (err: AWSError, data: FSx.Types.DeleteFileSystemResponse) => void): Request<FSx.Types.DeleteFileSystemResponse, AWSError>;
   /**
-   * Deletes the Amazon FSx snapshot. After deletion, the snapshot no longer exists, and its data is gone. Deleting a snapshot doesn't affect snapshots stored in a file system backup.  The DeleteSnapshot operation returns instantly. The snapshot appears with the lifecycle status of DELETING until the deletion is complete.
+   * Deletes an Amazon FSx for OpenZFS snapshot. After deletion, the snapshot no longer exists, and its data is gone. Deleting a snapshot doesn't affect snapshots stored in a file system backup.  The DeleteSnapshot operation returns instantly. The snapshot appears with the lifecycle status of DELETING until the deletion is complete.
    */
   deleteSnapshot(params: FSx.Types.DeleteSnapshotRequest, callback?: (err: AWSError, data: FSx.Types.DeleteSnapshotResponse) => void): Request<FSx.Types.DeleteSnapshotResponse, AWSError>;
   /**
-   * Deletes the Amazon FSx snapshot. After deletion, the snapshot no longer exists, and its data is gone. Deleting a snapshot doesn't affect snapshots stored in a file system backup.  The DeleteSnapshot operation returns instantly. The snapshot appears with the lifecycle status of DELETING until the deletion is complete.
+   * Deletes an Amazon FSx for OpenZFS snapshot. After deletion, the snapshot no longer exists, and its data is gone. Deleting a snapshot doesn't affect snapshots stored in a file system backup.  The DeleteSnapshot operation returns instantly. The snapshot appears with the lifecycle status of DELETING until the deletion is complete.
    */
   deleteSnapshot(callback?: (err: AWSError, data: FSx.Types.DeleteSnapshotResponse) => void): Request<FSx.Types.DeleteSnapshotResponse, AWSError>;
   /**
@@ -196,11 +196,11 @@ declare class FSx extends Service {
    */
   describeFileSystems(callback?: (err: AWSError, data: FSx.Types.DescribeFileSystemsResponse) => void): Request<FSx.Types.DescribeFileSystemsResponse, AWSError>;
   /**
-   * Returns the description of specific Amazon FSx snapshots, if a SnapshotIds value is provided. Otherwise, this operation returns all snapshots owned by your Amazon Web Services account in the Amazon Web Services Region of the endpoint that you're calling. When retrieving all snapshots, you can optionally specify the MaxResults parameter to limit the number of snapshots in a response. If more backups remain, Amazon FSx returns a NextToken value in the response. In this case, send a later request with the NextToken request parameter set to the value of NextToken from the last response.  Use this operation in an iterative process to retrieve a list of your snapshots. DescribeSnapshots is called first without a NextToken value. Then the operation continues to be called with the NextToken parameter set to the value of the last NextToken value until a response has no NextToken value. When using this operation, keep the following in mind:   The operation might return fewer than the MaxResults value of snapshot descriptions while still including a NextToken value.   The order of snapshots returned in the response of one DescribeSnapshots call and the order of backups returned across the responses of a multi-call iteration is unspecified.   
+   * Returns the description of specific Amazon FSx for OpenZFS snapshots, if a SnapshotIds value is provided. Otherwise, this operation returns all snapshots owned by your Amazon Web Services account in the Amazon Web Services Region of the endpoint that you're calling. When retrieving all snapshots, you can optionally specify the MaxResults parameter to limit the number of snapshots in a response. If more backups remain, Amazon FSx returns a NextToken value in the response. In this case, send a later request with the NextToken request parameter set to the value of NextToken from the last response.  Use this operation in an iterative process to retrieve a list of your snapshots. DescribeSnapshots is called first without a NextToken value. Then the operation continues to be called with the NextToken parameter set to the value of the last NextToken value until a response has no NextToken value. When using this operation, keep the following in mind:   The operation might return fewer than the MaxResults value of snapshot descriptions while still including a NextToken value.   The order of snapshots returned in the response of one DescribeSnapshots call and the order of backups returned across the responses of a multi-call iteration is unspecified.   
    */
   describeSnapshots(params: FSx.Types.DescribeSnapshotsRequest, callback?: (err: AWSError, data: FSx.Types.DescribeSnapshotsResponse) => void): Request<FSx.Types.DescribeSnapshotsResponse, AWSError>;
   /**
-   * Returns the description of specific Amazon FSx snapshots, if a SnapshotIds value is provided. Otherwise, this operation returns all snapshots owned by your Amazon Web Services account in the Amazon Web Services Region of the endpoint that you're calling. When retrieving all snapshots, you can optionally specify the MaxResults parameter to limit the number of snapshots in a response. If more backups remain, Amazon FSx returns a NextToken value in the response. In this case, send a later request with the NextToken request parameter set to the value of NextToken from the last response.  Use this operation in an iterative process to retrieve a list of your snapshots. DescribeSnapshots is called first without a NextToken value. Then the operation continues to be called with the NextToken parameter set to the value of the last NextToken value until a response has no NextToken value. When using this operation, keep the following in mind:   The operation might return fewer than the MaxResults value of snapshot descriptions while still including a NextToken value.   The order of snapshots returned in the response of one DescribeSnapshots call and the order of backups returned across the responses of a multi-call iteration is unspecified.   
+   * Returns the description of specific Amazon FSx for OpenZFS snapshots, if a SnapshotIds value is provided. Otherwise, this operation returns all snapshots owned by your Amazon Web Services account in the Amazon Web Services Region of the endpoint that you're calling. When retrieving all snapshots, you can optionally specify the MaxResults parameter to limit the number of snapshots in a response. If more backups remain, Amazon FSx returns a NextToken value in the response. In this case, send a later request with the NextToken request parameter set to the value of NextToken from the last response.  Use this operation in an iterative process to retrieve a list of your snapshots. DescribeSnapshots is called first without a NextToken value. Then the operation continues to be called with the NextToken parameter set to the value of the last NextToken value until a response has no NextToken value. When using this operation, keep the following in mind:   The operation might return fewer than the MaxResults value of snapshot descriptions while still including a NextToken value.   The order of snapshots returned in the response of one DescribeSnapshots call and the order of backups returned across the responses of a multi-call iteration is unspecified.   
    */
   describeSnapshots(callback?: (err: AWSError, data: FSx.Types.DescribeSnapshotsResponse) => void): Request<FSx.Types.DescribeSnapshotsResponse, AWSError>;
   /**
@@ -284,11 +284,11 @@ declare class FSx extends Service {
    */
   updateFileSystem(callback?: (err: AWSError, data: FSx.Types.UpdateFileSystemResponse) => void): Request<FSx.Types.UpdateFileSystemResponse, AWSError>;
   /**
-   * Updates the name of a snapshot. 
+   * Updates the name of an Amazon FSx for OpenZFS snapshot.
    */
   updateSnapshot(params: FSx.Types.UpdateSnapshotRequest, callback?: (err: AWSError, data: FSx.Types.UpdateSnapshotResponse) => void): Request<FSx.Types.UpdateSnapshotResponse, AWSError>;
   /**
-   * Updates the name of a snapshot. 
+   * Updates the name of an Amazon FSx for OpenZFS snapshot.
    */
   updateSnapshot(callback?: (err: AWSError, data: FSx.Types.UpdateSnapshotResponse) => void): Request<FSx.Types.UpdateSnapshotResponse, AWSError>;
   /**
@@ -875,23 +875,27 @@ declare namespace FSx {
   }
   export interface CreateOpenZFSVolumeConfiguration {
     /**
-     * The ID of the volume to use as the parent volume. 
+     * The ID of the volume to use as the parent volume.
      */
     ParentVolumeId: VolumeId;
     /**
-     * The amount of storage in gibibytes (GiB) to reserve from the parent volume. You can't reserve more storage than the parent volume has reserved.
+     * The amount of storage in gibibytes (GiB) to reserve from the parent volume. You can't reserve more storage than the parent volume has reserved. To not specify a storage capacity reservation, set this to -1.
      */
-    StorageCapacityReservationGiB?: IntegerNoMax;
+    StorageCapacityReservationGiB?: IntegerNoMaxFromNegativeOne;
     /**
-     * The maximum amount of storage in gibibytes (GiB) that the volume can use from its parent. You can specify a quota larger than the storage on the parent volume.
+     * The maximum amount of storage in gibibytes (GiB) that the volume can use from its parent. You can't specify a quota larger than the storage on the parent volume. To not specify a storage capacity quota, set this to -1. 
      */
-    StorageCapacityQuotaGiB?: IntegerNoMax;
+    StorageCapacityQuotaGiB?: IntegerNoMaxFromNegativeOne;
     /**
-     * Specifies the method used to compress the data on the volume. Unless the compression type is specified, volumes inherit the DataCompressionType value of their parent volume.    NONE - Doesn't compress the data on the volume.    ZSTD - Compresses the data in the volume using the Zstandard (ZSTD) compression algorithm. This algorithm reduces the amount of space used on your volume and has very little impact on compute resources.  
+     * Specifies the record size of an OpenZFS volume, in kibibytes (KiB). Valid values are 4, 8, 16, 32, 64, 128, 256, 512, or 1024 KiB. The default is 128 KiB. Most workloads should use the default record size. Database workflows can benefit from a smaller record size, while streaming workflows can benefit from a larger record size. For additional guidance on when to set a custom record size, see  Tips for maximizing performance in the Amazon FSx for OpenZFS User Guide.
+     */
+    RecordSizeKiB?: IntegerRecordSizeKiB;
+    /**
+     * Specifies the method used to compress the data on the volume. The compression type is NONE by default.    NONE - Doesn't compress the data on the volume. NONE is the default.    ZSTD - Compresses the data in the volume using the Zstandard (ZSTD) compression algorithm. Compared to LZ4, Z-Standard provides a better compression ratio to minimize on-disk storage utilization.    LZ4 - Compresses the data in the volume using the LZ4 compression algorithm. Compared to Z-Standard, LZ4 is less compute-intensive and delivers higher write throughput speeds.  
      */
     DataCompressionType?: OpenZFSDataCompressionType;
     /**
-     * A Boolean value indicating whether tags for the volume should be copied to snapshots. This value defaults to false. If it's set to true, all tags for the volume are copied to snapshots where the user doesn't specify tags. If this value is true, and you specify one or more tags, only the specified tags are copied to snapshots. If you specify one or more tags when creating the snapshot, no tags are copied from the volume, regardless of this value. 
+     * A Boolean value indicating whether tags for the volume should be copied to snapshots. This value defaults to false. If it's set to true, all tags for the volume are copied to snapshots where the user doesn't specify tags. If this value is true, and you specify one or more tags, only the specified tags are copied to snapshots. If you specify one or more tags when creating the snapshot, no tags are copied from the volume, regardless of this value.
      */
     CopyTagsToSnapshots?: Flag;
     /**
@@ -899,15 +903,15 @@ declare namespace FSx {
      */
     OriginSnapshot?: CreateOpenZFSOriginSnapshotConfiguration;
     /**
-     * A Boolean value indicating whether the volume is read-only. 
+     * A Boolean value indicating whether the volume is read-only.
      */
     ReadOnly?: ReadOnly;
     /**
-     * The configuration object for mounting a Network File System (NFS) file system. 
+     * The configuration object for mounting a Network File System (NFS) file system.
      */
     NfsExports?: OpenZFSNfsExports;
     /**
-     * An object specifying how much storage users or groups can use on the volume. 
+     * An object specifying how much storage users or groups can use on the volume.
      */
     UserAndGroupQuotas?: OpenZFSUserAndGroupQuotas;
   }
@@ -1224,11 +1228,20 @@ declare namespace FSx {
   }
   export interface DeleteFileSystemOpenZFSConfiguration {
     /**
-     * By default, Amazon FSx for OpenZFS takes a final backup on your behalf when the DeleteFileSystem operation is invoked. Doing this helps protect you from data loss, and we highly recommend taking the final backup. If you want to skip this backup, use this value to do so. 
+     * By default, Amazon FSx for OpenZFS takes a final backup on your behalf when the DeleteFileSystem operation is invoked. Doing this helps protect you from data loss, and we highly recommend taking the final backup. If you want to skip taking a final backup, set this value to true.
      */
     SkipFinalBackup?: Flag;
+    /**
+     * A list of tags to apply to the file system's final backup.
+     */
     FinalBackupTags?: Tags;
+    /**
+     * To delete a file system if there are child volumes present below the root volume, use the string DELETE_CHILD_VOLUMES_AND_SNAPSHOTS. If your file system has child volumes and you don't use this option, the delete request will fail.
+     */
+    Options?: DeleteFileSystemOpenZFSOptions;
   }
+  export type DeleteFileSystemOpenZFSOption = "DELETE_CHILD_VOLUMES_AND_SNAPSHOTS"|string;
+  export type DeleteFileSystemOpenZFSOptions = DeleteFileSystemOpenZFSOption[];
   export interface DeleteFileSystemOpenZFSResponse {
     FinalBackupId?: BackupId;
     FinalBackupTags?: Tags;
@@ -1707,6 +1720,8 @@ declare namespace FSx {
   export type FlexCacheEndpointType = "NONE"|"ORIGIN"|"CACHE"|string;
   export type GeneralARN = string;
   export type IntegerNoMax = number;
+  export type IntegerNoMaxFromNegativeOne = number;
+  export type IntegerRecordSizeKiB = number;
   export type Iops = number;
   export type IpAddress = string;
   export type IpAddressRange = string;
@@ -1883,11 +1898,11 @@ declare namespace FSx {
   export type OntapVolumeType = "RW"|"DP"|"LS"|string;
   export interface OpenZFSClientConfiguration {
     /**
-     * A value that specifies who can mount the file system. You can provide a wildcard character (*), an IP address (0.0.0.0), or a CIDR address (192.0.2.0/24. By default, Amazon FSx uses the wildcard character when specifying the client. 
+     * A value that specifies who can mount the file system. You can provide a wildcard character (*), an IP address (0.0.0.0), or a CIDR address (192.0.2.0/24). By default, Amazon FSx uses the wildcard character when specifying the client. 
      */
     Clients: OpenZFSClients;
     /**
-     * The options to use when mounting the file system. For a list of options that you can use with Network File System (NFS), see the exports(5) - Linux man page. When choosing your options, consider the following:    crossmount is used by default. If you don't specify crossmount when changing the client configuration, you won't be able to see or access snapshots in your file system's snapshot directory.    sync is used by default. If you instead specify async, the system acknowledges writes before writing to disk. If the system crashes before the writes are finished, you lose the unwritten data.   
+     * The options to use when mounting the file system. For a list of options that you can use with Network File System (NFS), see the exports(5) - Linux man page. When choosing your options, consider the following:    crossmnt is used by default. If you don't specify crossmnt when changing the client configuration, you won't be able to see or access snapshots in your file system's snapshot directory.    sync is used by default. If you instead specify async, the system acknowledges writes before writing to disk. If the system crashes before the writes are finished, you lose the unwritten data.   
      */
     Options: OpenZFSNfsExportOptions;
   }
@@ -1896,7 +1911,11 @@ declare namespace FSx {
   export type OpenZFSCopyStrategy = "CLONE"|"FULL_COPY"|string;
   export interface OpenZFSCreateRootVolumeConfiguration {
     /**
-     * Specifies the method used to compress the data on the volume. Unless the compression type is specified, volumes inherit the DataCompressionType value of their parent volume.    NONE - Doesn't compress the data on the volume.    ZSTD - Compresses the data in the volume using the ZStandard (ZSTD) compression algorithm. This algorithm reduces the amount of space used on your volume and has very little impact on compute resources.  
+     * Specifies the record size of an OpenZFS root volume, in kibibytes (KiB). Valid values are 4, 8, 16, 32, 64, 128, 256, 512, or 1024 KiB. The default is 128 KiB. Most workloads should use the default record size. Database workflows can benefit from a smaller record size, while streaming workflows can benefit from a larger record size. For additional guidance on setting a custom record size, see  Tips for maximizing performance in the Amazon FSx for OpenZFS User Guide.
+     */
+    RecordSizeKiB?: IntegerRecordSizeKiB;
+    /**
+     * Specifies the method used to compress the data on the volume. The compression type is NONE by default.    NONE - Doesn't compress the data on the volume. NONE is the default.    ZSTD - Compresses the data in the volume using the Zstandard (ZSTD) compression algorithm. Compared to LZ4, Z-Standard provides a better compression ratio to minimize on-disk storage utilization.    LZ4 - Compresses the data in the volume using the LZ4 compression algorithm. Compared to Z-Standard, LZ4 is less compute-intensive and delivers higher write throughput speeds.  
      */
     DataCompressionType?: OpenZFSDataCompressionType;
     /**
@@ -1908,7 +1927,7 @@ declare namespace FSx {
      */
     UserAndGroupQuotas?: OpenZFSUserAndGroupQuotas;
     /**
-     * A Boolean value indicating whether tags for the volume should be copied to snapshots. This value defaults to false. If it's set to true, all tags for the volume are copied to snapshots where the user doesn't specify tags. If this value is true and you specify one or more tags, only the specified tags are copied to snapshots. If you specify one or more tags when creating the snapshot, no tags are copied from the volume, regardless of this value. 
+     * A Boolean value indicating whether tags for the volume should be copied to snapshots of the volume. This value defaults to false. If it's set to true, all tags for the volume are copied to snapshots where the user doesn't specify tags. If this value is true and you specify one or more tags, only the specified tags are copied to snapshots. If you specify one or more tags when creating the snapshot, no tags are copied from the volume, regardless of this value. 
      */
     CopyTagsToSnapshots?: Flag;
     /**
@@ -1916,7 +1935,7 @@ declare namespace FSx {
      */
     ReadOnly?: ReadOnly;
   }
-  export type OpenZFSDataCompressionType = "NONE"|"ZSTD"|string;
+  export type OpenZFSDataCompressionType = "NONE"|"ZSTD"|"LZ4"|string;
   export type OpenZFSDeploymentType = "SINGLE_AZ_1"|string;
   export interface OpenZFSFileSystemConfiguration {
     AutomaticBackupRetentionDays?: AutomaticBackupRetentionDays;
@@ -1934,7 +1953,7 @@ declare namespace FSx {
      */
     DeploymentType?: OpenZFSDeploymentType;
     /**
-     * The throughput of an Amazon FSx file system, measured in megabytes per second (MBps), in 2 to the nth increments, between 2^3 (8) and 2^11 (2048). 
+     * The throughput of an Amazon FSx file system, measured in megabytes per second (MBps). Valid values are 64, 128, 256, 512, 1024, 2048, 3072, or 4096 MB/s.
      */
     ThroughputCapacity?: MegabytesPerSecond;
     WeeklyMaintenanceStartTime?: WeeklyTime;
@@ -1994,11 +2013,15 @@ declare namespace FSx {
      */
     StorageCapacityQuotaGiB?: IntegerNoMax;
     /**
-     * The method used to compress the data on the volume. Unless a compression type is specified, volumes inherit the DataCompressionType value of their parent volume.    NONE - Doesn't compress the data on the volume.    ZSTD - Compresses the data in the volume using the Zstandard (ZSTD) compression algorithm. This algorithm reduces the amount of space used on your volume and has very little impact on compute resources.  
+     * The record size of an OpenZFS volume, in kibibytes (KiB). Valid values are 4, 8, 16, 32, 64, 128, 256, 512, or 1024 KiB. The default is 128 KiB. Most workloads should use the default record size. For guidance on when to set a custom record size, see the Amazon FSx for OpenZFS User Guide.
+     */
+    RecordSizeKiB?: IntegerRecordSizeKiB;
+    /**
+     * Specifies the method used to compress the data on the volume. The compression type is NONE by default.    NONE - Doesn't compress the data on the volume. NONE is the default.    ZSTD - Compresses the data in the volume using the Zstandard (ZSTD) compression algorithm. Compared to LZ4, Z-Standard provides a better compression ratio to minimize on-disk storage utilization.    LZ4 - Compresses the data in the volume using the LZ4 compression algorithm. Compared to Z-Standard, LZ4 is less compute-intensive and delivers higher write throughput speeds.  
      */
     DataCompressionType?: OpenZFSDataCompressionType;
     /**
-     * A Boolean value indicating whether tags for the volume should be copied to snapshots. This value defaults to false. If it's set to true, all tags for the volume are copied to snapshots where the user doesn't specify tags. If this value is true and you specify one or more tags, only the specified tags are copied to snapshots. If you specify one or more tags when creating the snapshot, no tags are copied from the volume, regardless of this value. 
+     * A Boolean value indicating whether tags for the volume should be copied to snapshots. This value defaults to false. If it's set to true, all tags for the volume are copied to snapshots where the user doesn't specify tags. If this value is true and you specify one or more tags, only the specified tags are copied to snapshots. If you specify one or more tags when creating the snapshot, no tags are copied from the volume, regardless of this value.
      */
     CopyTagsToSnapshots?: Flag;
     /**
@@ -2014,7 +2037,7 @@ declare namespace FSx {
      */
     NfsExports?: OpenZFSNfsExports;
     /**
-     * An object specifying how much storage users or groups can use on the volume. 
+     * An object specifying how much storage users or groups can use on the volume.
      */
     UserAndGroupQuotas?: OpenZFSUserAndGroupQuotas;
   }
@@ -2158,6 +2181,7 @@ declare namespace FSx {
      * The lifecycle status of the snapshot.    PENDING - Amazon FSx hasn't started creating the snapshot.    CREATING - Amazon FSx is creating the snapshot.    DELETING - Amazon FSx is deleting the snapshot.    AVAILABLE - The snapshot is fully available.  
      */
     Lifecycle?: SnapshotLifecycle;
+    LifecycleTransitionReason?: LifecycleTransitionReason;
     Tags?: Tags;
     /**
      * A list of administrative actions for the file system that are in process or waiting to be processed. Administrative actions describe changes to the Amazon FSx system.
@@ -2396,16 +2420,16 @@ declare namespace FSx {
   export interface UpdateFileSystemOpenZFSConfiguration {
     AutomaticBackupRetentionDays?: AutomaticBackupRetentionDays;
     /**
-     * A Boolean value indicating whether tags for the file system should be copied to backups. This value defaults to false. If it's set to true, all tags for the file system are copied to all automatic and user-initiated backups where the user doesn't specify tags. If this value is true and you specify one or more tags, only the specified tags are copied to backups. If you specify one or more tags when creating a user-initiated backup, no tags are copied from the file system, regardless of this value. 
+     * A Boolean value indicating whether tags for the file system should be copied to backups. This value defaults to false. If it's set to true, all tags for the file system are copied to all automatic and user-initiated backups where the user doesn't specify tags. If this value is true and you specify one or more tags, only the specified tags are copied to backups. If you specify one or more tags when creating a user-initiated backup, no tags are copied from the file system, regardless of this value.
      */
     CopyTagsToBackups?: Flag;
     /**
-     * A Boolean value indicating whether tags for the volume should be copied to snapshots. This value defaults to false. If it's set to true, all tags for the volume are copied to snapshots where the user doesn't specify tags. If this value is true and you specify one or more tags, only the specified tags are copied to snapshots. If you specify one or more tags when creating the snapshot, no tags are copied from the volume, regardless of this value. 
+     * A Boolean value indicating whether tags for the volume should be copied to snapshots. This value defaults to false. If it's set to true, all tags for the volume are copied to snapshots where the user doesn't specify tags. If this value is true and you specify one or more tags, only the specified tags are copied to snapshots. If you specify one or more tags when creating the snapshot, no tags are copied from the volume, regardless of this value.
      */
     CopyTagsToVolumes?: Flag;
     DailyAutomaticBackupStartTime?: DailyTime;
     /**
-     * The throughput of an Amazon FSx file system, measured in megabytes per second (MBps), in 2 to the nth increments, between 2^3 (8) and 2^12 (4096). 
+     * The throughput of an Amazon FSx file system, measured in megabytes per second (MBps). Valid values are 64, 128, 256, 512, 1024, 2048, 3072, or 4096 MB/s.
      */
     ThroughputCapacity?: MegabytesPerSecond;
     WeeklyMaintenanceStartTime?: WeeklyTime;
@@ -2491,15 +2515,19 @@ declare namespace FSx {
   }
   export interface UpdateOpenZFSVolumeConfiguration {
     /**
-     * The amount of storage in gibibytes (GiB) to reserve from the parent volume. You can't reserve more storage than the parent volume has reserved.
+     * The amount of storage in gibibytes (GiB) to reserve from the parent volume. You can't reserve more storage than the parent volume has reserved. You can specify a value of -1 to unset a volume's storage capacity reservation.
      */
-    StorageCapacityReservationGiB?: IntegerNoMax;
+    StorageCapacityReservationGiB?: IntegerNoMaxFromNegativeOne;
     /**
-     *  The maximum amount of storage in gibibytes (GiB) that the volume can use from its parent. You can specify a quota larger than the storage on the parent volume.
+     * The maximum amount of storage in gibibytes (GiB) that the volume can use from its parent. You can specify a quota larger than the storage on the parent volume. You can specify a value of -1 to unset a volume's storage capacity quota.
      */
-    StorageCapacityQuotaGiB?: IntegerNoMax;
+    StorageCapacityQuotaGiB?: IntegerNoMaxFromNegativeOne;
     /**
-     *  Specifies the method used to compress the data on the volume. Unless the compression type is specified, volumes inherit the DataCompressionType value of their parent volume.    NONE - Doesn't compress the data on the volume.    ZSTD - Compresses the data in the volume using the Zstandard (ZSTD) compression algorithm. This algorithm reduces the amount of space used on your volume and has very little impact on compute resources.  
+     * Specifies the record size of an OpenZFS volume, in kibibytes (KiB). Valid values are 4, 8, 16, 32, 64, 128, 256, 512, or 1024 KiB. The default is 128 KiB. Most workloads should use the default record size. Database workflows can benefit from a smaller record size, while streaming workflows can benefit from a larger record size. For additional guidance on when to set a custom record size, see  Tips for maximizing performance in the Amazon FSx for OpenZFS User Guide.
+     */
+    RecordSizeKiB?: IntegerRecordSizeKiB;
+    /**
+     * Specifies the method used to compress the data on the volume. The compression type is NONE by default.    NONE - Doesn't compress the data on the volume. NONE is the default.    ZSTD - Compresses the data in the volume using the Zstandard (ZSTD) compression algorithm. Compared to LZ4, Z-Standard provides a better compression ratio to minimize on-disk storage utilization.    LZ4 - Compresses the data in the volume using the LZ4 compression algorithm. Compared to Z-Standard, LZ4 is less compute-intensive and delivers higher write throughput speeds.  
      */
     DataCompressionType?: OpenZFSDataCompressionType;
     /**
@@ -2518,7 +2546,7 @@ declare namespace FSx {
   export interface UpdateSnapshotRequest {
     ClientRequestToken?: ClientRequestToken;
     /**
-     * The name of the snapshot to update. 
+     * The name of the snapshot to update.
      */
     Name: SnapshotName;
     /**

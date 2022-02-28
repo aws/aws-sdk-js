@@ -268,6 +268,14 @@ declare class Athena extends Service {
    */
   updateDataCatalog(callback?: (err: AWSError, data: Athena.Types.UpdateDataCatalogOutput) => void): Request<Athena.Types.UpdateDataCatalogOutput, AWSError>;
   /**
+   * Updates a NamedQuery object. The database or workgroup cannot be updated.
+   */
+  updateNamedQuery(params: Athena.Types.UpdateNamedQueryInput, callback?: (err: AWSError, data: Athena.Types.UpdateNamedQueryOutput) => void): Request<Athena.Types.UpdateNamedQueryOutput, AWSError>;
+  /**
+   * Updates a NamedQuery object. The database or workgroup cannot be updated.
+   */
+  updateNamedQuery(callback?: (err: AWSError, data: Athena.Types.UpdateNamedQueryOutput) => void): Request<Athena.Types.UpdateNamedQueryOutput, AWSError>;
+  /**
    * Updates a prepared statement.
    */
   updatePreparedStatement(params: Athena.Types.UpdatePreparedStatementInput, callback?: (err: AWSError, data: Athena.Types.UpdatePreparedStatementOutput) => void): Request<Athena.Types.UpdatePreparedStatementOutput, AWSError>;
@@ -288,7 +296,7 @@ declare namespace Athena {
   export type AmazonResourceName = string;
   export interface AthenaError {
     /**
-     * An integer value that specifies the category of a query failure error. The following list shows the category for each integer value.  1 - System  2 - User  3 - Unknown
+     * An integer value that specifies the category of a query failure error. The following list shows the category for each integer value.  1 - System  2 - User  3 - Other
      */
     ErrorCategory?: ErrorCategory;
     /**
@@ -978,7 +986,7 @@ declare namespace Athena {
      */
     Database: DatabaseString;
     /**
-     * The SQL query statements that comprise the query.
+     * The SQL statements that make up the query.
      */
     QueryString: QueryString;
     /**
@@ -990,6 +998,7 @@ declare namespace Athena {
      */
     WorkGroup?: WorkGroupName;
   }
+  export type NamedQueryDescriptionString = string;
   export type NamedQueryId = string;
   export type NamedQueryIdList = NamedQueryId[];
   export type NamedQueryList = NamedQuery[];
@@ -1357,6 +1366,26 @@ declare namespace Athena {
     Parameters?: ParametersMap;
   }
   export interface UpdateDataCatalogOutput {
+  }
+  export interface UpdateNamedQueryInput {
+    /**
+     * The unique identifier (UUID) of the query.
+     */
+    NamedQueryId: NamedQueryId;
+    /**
+     * The name of the query.
+     */
+    Name: NameString;
+    /**
+     * The query description.
+     */
+    Description?: NamedQueryDescriptionString;
+    /**
+     * The contents of the query with all query statements.
+     */
+    QueryString: QueryString;
+  }
+  export interface UpdateNamedQueryOutput {
   }
   export interface UpdatePreparedStatementInput {
     /**

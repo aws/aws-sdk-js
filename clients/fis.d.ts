@@ -207,6 +207,7 @@ declare namespace Fis {
   export type ActionTargetMap = {[key: string]: ActionTarget};
   export type ActionTargetName = string;
   export type ClientToken = string;
+  export type CloudWatchLogGroupArn = string;
   export interface CreateExperimentTemplateActionInput {
     /**
      * The ID of the action. The format of the action ID is: aws:service-name:action-type.
@@ -230,6 +231,20 @@ declare namespace Fis {
     startAfter?: ExperimentTemplateActionStartAfterList;
   }
   export type CreateExperimentTemplateActionInputMap = {[key: string]: CreateExperimentTemplateActionInput};
+  export interface CreateExperimentTemplateLogConfigurationInput {
+    /**
+     * The configuration for experiment logging to Amazon CloudWatch Logs.
+     */
+    cloudWatchLogsConfiguration?: ExperimentTemplateCloudWatchLogsLogConfigurationInput;
+    /**
+     * The configuration for experiment logging to Amazon S3.
+     */
+    s3Configuration?: ExperimentTemplateS3LogConfigurationInput;
+    /**
+     * The schema version.
+     */
+    logSchemaVersion: LogSchemaVersion;
+  }
   export interface CreateExperimentTemplateRequest {
     /**
      * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
@@ -259,6 +274,10 @@ declare namespace Fis {
      * The tags to apply to the experiment template.
      */
     tags?: TagMap;
+    /**
+     * The configuration for experiment logging.
+     */
+    logConfiguration?: CreateExperimentTemplateLogConfigurationInput;
   }
   export interface CreateExperimentTemplateResponse {
     /**
@@ -362,6 +381,10 @@ declare namespace Fis {
      * The tags for the experiment.
      */
     tags?: TagMap;
+    /**
+     * The configuration for experiment logging.
+     */
+    logConfiguration?: ExperimentLogConfiguration;
   }
   export interface ExperimentAction {
     /**
@@ -421,8 +444,38 @@ declare namespace Fis {
   export type ExperimentActionStatusReason = string;
   export type ExperimentActionTargetMap = {[key: string]: ExperimentTargetName};
   export type ExperimentActionTargetName = string;
+  export interface ExperimentCloudWatchLogsLogConfiguration {
+    /**
+     * The Amazon Resource Name (ARN) of the destination Amazon CloudWatch Logs log group.
+     */
+    logGroupArn?: CloudWatchLogGroupArn;
+  }
   export type ExperimentEndTime = Date;
   export type ExperimentId = string;
+  export interface ExperimentLogConfiguration {
+    /**
+     * The configuration for experiment logging to Amazon CloudWatch Logs.
+     */
+    cloudWatchLogsConfiguration?: ExperimentCloudWatchLogsLogConfiguration;
+    /**
+     * The configuration for experiment logging to Amazon S3.
+     */
+    s3Configuration?: ExperimentS3LogConfiguration;
+    /**
+     * The schema version.
+     */
+    logSchemaVersion?: LogSchemaVersion;
+  }
+  export interface ExperimentS3LogConfiguration {
+    /**
+     * The name of the destination bucket.
+     */
+    bucketName?: S3BucketName;
+    /**
+     * The bucket prefix.
+     */
+    prefix?: S3ObjectKey;
+  }
   export type ExperimentStartTime = Date;
   export interface ExperimentState {
     /**
@@ -553,6 +606,10 @@ declare namespace Fis {
      * The tags for the experiment template.
      */
     tags?: TagMap;
+    /**
+     * The configuration for experiment logging.
+     */
+    logConfiguration?: ExperimentTemplateLogConfiguration;
   }
   export interface ExperimentTemplateAction {
     /**
@@ -586,8 +643,54 @@ declare namespace Fis {
   export type ExperimentTemplateActionStartAfterList = ExperimentTemplateActionStartAfter[];
   export type ExperimentTemplateActionTargetMap = {[key: string]: ExperimentTemplateTargetName};
   export type ExperimentTemplateActionTargetName = string;
+  export interface ExperimentTemplateCloudWatchLogsLogConfiguration {
+    /**
+     * The Amazon Resource Name (ARN) of the destination Amazon CloudWatch Logs log group.
+     */
+    logGroupArn?: CloudWatchLogGroupArn;
+  }
+  export interface ExperimentTemplateCloudWatchLogsLogConfigurationInput {
+    /**
+     * The Amazon Resource Name (ARN) of the destination Amazon CloudWatch Logs log group.
+     */
+    logGroupArn: CloudWatchLogGroupArn;
+  }
   export type ExperimentTemplateDescription = string;
   export type ExperimentTemplateId = string;
+  export interface ExperimentTemplateLogConfiguration {
+    /**
+     * The configuration for experiment logging to Amazon CloudWatch Logs.
+     */
+    cloudWatchLogsConfiguration?: ExperimentTemplateCloudWatchLogsLogConfiguration;
+    /**
+     * The configuration for experiment logging to Amazon S3.
+     */
+    s3Configuration?: ExperimentTemplateS3LogConfiguration;
+    /**
+     * The schema version.
+     */
+    logSchemaVersion?: LogSchemaVersion;
+  }
+  export interface ExperimentTemplateS3LogConfiguration {
+    /**
+     * The name of the destination bucket.
+     */
+    bucketName?: S3BucketName;
+    /**
+     * The bucket prefix.
+     */
+    prefix?: S3ObjectKey;
+  }
+  export interface ExperimentTemplateS3LogConfigurationInput {
+    /**
+     * The name of the destination bucket.
+     */
+    bucketName: S3BucketName;
+    /**
+     * The bucket prefix.
+     */
+    prefix?: S3ObjectKey;
+  }
   export interface ExperimentTemplateStopCondition {
     /**
      * The source for the stop condition.
@@ -824,10 +927,13 @@ declare namespace Fis {
      */
     nextToken?: NextToken;
   }
+  export type LogSchemaVersion = number;
   export type NextToken = string;
   export type ResourceArn = string;
   export type ResourceArnList = ResourceArn[];
   export type RoleArn = string;
+  export type S3BucketName = string;
+  export type S3ObjectKey = string;
   export interface StartExperimentRequest {
     /**
      * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
@@ -954,6 +1060,20 @@ declare namespace Fis {
     startAfter?: ExperimentTemplateActionStartAfterList;
   }
   export type UpdateExperimentTemplateActionInputMap = {[key: string]: UpdateExperimentTemplateActionInputItem};
+  export interface UpdateExperimentTemplateLogConfigurationInput {
+    /**
+     * The configuration for experiment logging to Amazon CloudWatch Logs.
+     */
+    cloudWatchLogsConfiguration?: ExperimentTemplateCloudWatchLogsLogConfigurationInput;
+    /**
+     * The configuration for experiment logging to Amazon S3.
+     */
+    s3Configuration?: ExperimentTemplateS3LogConfigurationInput;
+    /**
+     * The schema version.
+     */
+    logSchemaVersion?: LogSchemaVersion;
+  }
   export interface UpdateExperimentTemplateRequest {
     /**
      * The ID of the experiment template.
@@ -979,6 +1099,10 @@ declare namespace Fis {
      * The Amazon Resource Name (ARN) of an IAM role that grants the FIS service permission to perform service actions on your behalf.
      */
     roleArn?: RoleArn;
+    /**
+     * The configuration for experiment logging.
+     */
+    logConfiguration?: UpdateExperimentTemplateLogConfigurationInput;
   }
   export interface UpdateExperimentTemplateResponse {
     /**

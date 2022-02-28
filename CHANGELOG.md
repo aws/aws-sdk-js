@@ -1,6 +1,17 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1082.0-->
+<!--LATEST=2.1083.0-->
 <!--ENTRYINSERT-->
+
+## 2.1083.0
+* feature: Amplify: Add repositoryCloneMethod field for hosting an Amplify app. This field shows what authorization method is used to clone the repo: SSH, TOKEN, or SIGV4.
+* feature: AmplifyUIBuilder: We are adding the ability to configure workflows and actions for components.
+* feature: Athena: This release adds support for updating an existing named query.
+* feature: EC2: This release adds support for new AMI property 'lastLaunchedTime'
+* feature: FSx: This release adds support for the following FSx for OpenZFS features: snapshot lifecycle transition messages, force flag for deleting file systems with child resources, LZ4 data compression, custom record sizes, and unsetting volume quotas and reservations.
+* feature: Finspacedata: Add new APIs for managing Users and Permission Groups.
+* feature: Fis: This release adds logging support for AWS Fault Injection Simulator experiments. Experiment templates can now be configured to send experiment activity logs to Amazon CloudWatch Logs or to an S3 bucket.
+* feature: Route53RecoveryCluster: This release adds a new API option to enable overriding safety rules to allow routing control state updates.
+* feature: ServiceCatalogAppRegistry: AppRegistry is deprecating Application and Attribute-Group Name update feature. In this release, we are marking the name attributes for Update APIs as deprecated to give a heads up to our customers.
 
 ## 2.1082.0
 * feature: Panorama: Added NTP server configuration parameter to ProvisionDevice operation. Added alternate software fields to DescribeDevice response
