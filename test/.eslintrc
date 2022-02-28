@@ -1,6 +1,6 @@
 {
     "extends": "../.eslintrc",
     "parserOptions": {
-        "ecmaVersion": 8
+        "ecmaVersion": 9
     }
 }
