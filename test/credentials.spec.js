@@ -1312,7 +1312,7 @@ const exp = require('constants');
                 expect(creds.needsRefresh()).to.equal(false);
                 expect(creds.accessKeyId).to.equal('KEY3');
                 expect(warnSpy.calls.length).to.equal(2);
-  
+
                 // Print warning message if extended expiration is extended.
                 helpers.spyOn(AWS.util.date, 'getDate').andReturn(new Date(Date.now() + 2 * ONE_HOUR));
                 expect(creds.needsRefresh()).to.equal(true);
