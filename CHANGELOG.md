@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1083.0-->
+<!--LATEST=2.1084.0-->
 <!--ENTRYINSERT-->
+
+## 2.1084.0
+* feature: KafkaConnect: Adds operation for custom plugin deletion (DeleteCustomPlugin) and adds new StateDescription field to DescribeCustomPlugin and DescribeConnector responses to return errors from asynchronous resource creation.
+* feature: MediaPackage: This release adds Hybridcast as an available profile option for Dash Origin Endpoints.
+* feature: Mgn: Add support for GP3 and IO2 volume types. Add bootMode to LaunchConfiguration object (and as a parameter to UpdateLaunchConfigurationRequest).
 
 ## 2.1083.0
 * feature: Amplify: Add repositoryCloneMethod field for hosting an Amplify app. This field shows what authorization method is used to clone the repo: SSH, TOKEN, or SIGV4.

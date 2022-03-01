@@ -1135,7 +1135,7 @@ If not specified, there will be no time delay in effect for the OriginEndpoint.
   export type PlaylistType = "NONE"|"EVENT"|"VOD"|string;
   export type PresetSpeke20Audio = "PRESET-AUDIO-1"|string;
   export type PresetSpeke20Video = "PRESET-VIDEO-1"|string;
-  export type Profile = "NONE"|"HBBTV_1_5"|string;
+  export type Profile = "NONE"|"HBBTV_1_5"|"HYBRIDCAST"|string;
   export interface RotateChannelCredentialsRequest {
     /**
      * The ID of the channel to update.

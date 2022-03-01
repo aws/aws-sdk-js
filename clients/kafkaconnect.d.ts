@@ -44,6 +44,14 @@ declare class KafkaConnect extends Service {
    */
   deleteConnector(callback?: (err: AWSError, data: KafkaConnect.Types.DeleteConnectorResponse) => void): Request<KafkaConnect.Types.DeleteConnectorResponse, AWSError>;
   /**
+   * Deletes a custom plugin.
+   */
+  deleteCustomPlugin(params: KafkaConnect.Types.DeleteCustomPluginRequest, callback?: (err: AWSError, data: KafkaConnect.Types.DeleteCustomPluginResponse) => void): Request<KafkaConnect.Types.DeleteCustomPluginResponse, AWSError>;
+  /**
+   * Deletes a custom plugin.
+   */
+  deleteCustomPlugin(callback?: (err: AWSError, data: KafkaConnect.Types.DeleteCustomPluginResponse) => void): Request<KafkaConnect.Types.DeleteCustomPluginResponse, AWSError>;
+  /**
    * Returns summary information about the connector.
    */
   describeConnector(params: KafkaConnect.Types.DescribeConnectorRequest, callback?: (err: AWSError, data: KafkaConnect.Types.DescribeConnectorResponse) => void): Request<KafkaConnect.Types.DescribeConnectorResponse, AWSError>;
@@ -308,7 +316,7 @@ declare namespace KafkaConnect {
     /**
      * A map of keys to values that represent the configuration for the connector.
      */
-    connectorConfiguration: __mapOf__string;
+    connectorConfiguration: SyntheticCreateConnectorRequest__mapOf__string;
     /**
      * A summary description of the connector.
      */
@@ -412,7 +420,7 @@ declare namespace KafkaConnect {
     /**
      * Base64 encoded contents of connect-distributed.properties file.
      */
-    propertiesFileContent: __string;
+    propertiesFileContent: SyntheticCreateWorkerConfigurationRequest__string;
   }
   export interface CreateWorkerConfigurationResponse {
     /**
@@ -548,6 +556,22 @@ declare namespace KafkaConnect {
      */
     connectorState?: ConnectorState;
   }
+  export interface DeleteCustomPluginRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the custom plugin that you want to delete.
+     */
+    customPluginArn: __string;
+  }
+  export interface DeleteCustomPluginResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the custom plugin that you requested to delete.
+     */
+    customPluginArn?: __string;
+    /**
+     * The state of the custom plugin.
+     */
+    customPluginState?: CustomPluginState;
+  }
   export interface DescribeConnectorRequest {
     /**
      * The Amazon Resource Name (ARN) of the connector that you want to describe.
@@ -566,7 +590,7 @@ declare namespace KafkaConnect {
     /**
      * A map of keys to values that represent the configuration for the connector.
      */
-    connectorConfiguration?: __mapOf__string;
+    connectorConfiguration?: SyntheticDescribeConnectorResponse__mapOf__string;
     /**
      * A summary description of the connector.
      */
@@ -616,6 +640,10 @@ declare namespace KafkaConnect {
      */
     serviceExecutionRoleArn?: __string;
     /**
+     * Details about the state of a connector.
+     */
+    stateDescription?: StateDescription;
+    /**
      * Specifies which worker configuration was used for the connector.
      */
     workerConfiguration?: WorkerConfigurationDescription;
@@ -651,6 +679,10 @@ declare namespace KafkaConnect {
      * The name of the custom plugin.
      */
     name?: __string;
+    /**
+     * Details about the state of a custom plugin.
+     */
+    stateDescription?: StateDescription;
   }
   export interface DescribeWorkerConfigurationRequest {
     /**
@@ -949,6 +981,20 @@ declare namespace KafkaConnect {
      */
     cpuUtilizationPercentage: __integerMin1Max100;
   }
+  export interface StateDescription {
+    /**
+     * A code that describes the state of a resource.
+     */
+    code?: __string;
+    /**
+     * A message that describes the state of a resource.
+     */
+    message?: __string;
+  }
+  export type SyntheticCreateConnectorRequest__mapOf__string = {[key: string]: __string};
+  export type SyntheticCreateWorkerConfigurationRequest__string = string;
+  export type SyntheticDescribeConnectorResponse__mapOf__string = {[key: string]: __string};
+  export type SyntheticWorkerConfigurationRevisionDescription__string = string;
   export interface UpdateConnectorRequest {
     /**
      * The target capacity.
@@ -1025,7 +1071,7 @@ declare namespace KafkaConnect {
     /**
      * Base64 encoded contents of the connect-distributed.properties file.
      */
-    propertiesFileContent?: __string;
+    propertiesFileContent?: SyntheticWorkerConfigurationRevisionDescription__string;
     /**
      * The description of a revision of the worker configuration.
      */
@@ -1108,7 +1154,6 @@ declare namespace KafkaConnect {
   export type __listOf__string = __string[];
   export type __long = number;
   export type __longMin1 = number;
-  export type __mapOf__string = {[key: string]: __string};
   export type __string = string;
   export type __stringMax1024 = string;
   export type __stringMin1Max128 = string;

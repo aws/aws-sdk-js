@@ -2118,7 +2118,8 @@
     "Profile": {
       "enum": [
         "NONE",
-        "HBBTV_1_5"
+        "HBBTV_1_5",
+        "HYBRIDCAST"
       ],
       "type": "string"
     },
