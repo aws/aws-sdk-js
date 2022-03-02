@@ -300,6 +300,7 @@ export abstract class ConfigurationServicePlaceholders {
   iottwinmaker?: AWS.IoTTwinMaker.Types.ClientConfiguration;
   workspacesweb?: AWS.WorkSpacesWeb.Types.ClientConfiguration;
   amplifyuibuilder?: AWS.AmplifyUIBuilder.Types.ClientConfiguration;
+  keyspaces?: AWS.Keyspaces.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -602,4 +603,5 @@ export interface ConfigurationServiceApiVersions {
   iottwinmaker?: AWS.IoTTwinMaker.Types.apiVersion;
   workspacesweb?: AWS.WorkSpacesWeb.Types.apiVersion;
   amplifyuibuilder?: AWS.AmplifyUIBuilder.Types.apiVersion;
+  keyspaces?: AWS.Keyspaces.Types.apiVersion;
 }

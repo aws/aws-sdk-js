@@ -245,11 +245,11 @@ declare class ECR extends Service {
    */
   putImage(callback?: (err: AWSError, data: ECR.Types.PutImageResponse) => void): Request<ECR.Types.PutImageResponse, AWSError>;
   /**
-   * Updates the image scanning configuration for the specified repository.
+   *  The PutImageScanningConfiguration API is being deprecated, in favor of specifying the image scanning configuration at the registry level. For more information, see PutRegistryScanningConfiguration.  Updates the image scanning configuration for the specified repository.
    */
   putImageScanningConfiguration(params: ECR.Types.PutImageScanningConfigurationRequest, callback?: (err: AWSError, data: ECR.Types.PutImageScanningConfigurationResponse) => void): Request<ECR.Types.PutImageScanningConfigurationResponse, AWSError>;
   /**
-   * Updates the image scanning configuration for the specified repository.
+   *  The PutImageScanningConfiguration API is being deprecated, in favor of specifying the image scanning configuration at the registry level. For more information, see PutRegistryScanningConfiguration.  Updates the image scanning configuration for the specified repository.
    */
   putImageScanningConfiguration(callback?: (err: AWSError, data: ECR.Types.PutImageScanningConfigurationResponse) => void): Request<ECR.Types.PutImageScanningConfigurationResponse, AWSError>;
   /**
@@ -1277,6 +1277,10 @@ declare namespace ECR {
      * The artifact media type of the image.
      */
     artifactMediaType?: MediaType;
+    /**
+     * The date and time, expressed in standard JavaScript date format, when Amazon ECR recorded the last image pull.  Amazon ECR refreshes the last image pull timestamp at least once every 24 hours. For example, if you pull an image once a day then the lastRecordedPullTime timestamp will indicate the exact time that the image was last pulled. However, if you pull an image once an hour, because Amazon ECR refreshes the lastRecordedPullTime timestamp at least once every 24 hours, the result may not be the exact time that the image was last pulled. 
+     */
+    lastRecordedPullTime?: RecordedPullTimestamp;
   }
   export type ImageDetailList = ImageDetail[];
   export type ImageDigest = string;
@@ -1773,7 +1777,7 @@ declare namespace ECR {
   }
   export interface PutRegistryScanningConfigurationRequest {
     /**
-     * The scanning type to set for the registry. By default, the BASIC scan type is used. When basic scanning is set, you may specify filters to determine which individual repositories, or all repositories, are scanned when new images are pushed. Alternatively, you can do manual scans of images with basic scanning. When the ENHANCED scan type is set, Amazon Inspector provides automated, continuous scanning of all repositories in your registry.
+     * The scanning type to set for the registry. When a registry scanning configuration is not defined, by default the BASIC scan type is used. When basic scanning is used, you may specify filters to determine which individual repositories, or all repositories, are scanned when new images are pushed to those repositories. Alternatively, you can do manual scans of images with basic scanning. When the ENHANCED scan type is set, Amazon Inspector provides automated vulnerability scanning. You may choose between continuous scanning or scan on push and you may specify filters to determine which individual repositories, or all repositories, are scanned.
      */
     scanType?: ScanType;
     /**
@@ -1811,6 +1815,7 @@ declare namespace ECR {
     text?: RecommendationText;
   }
   export type RecommendationText = string;
+  export type RecordedPullTimestamp = Date;
   export type ReferenceUrlsList = Url[];
   export type Region = string;
   export type RegistryId = string;
@@ -1827,7 +1832,7 @@ declare namespace ECR {
   }
   export interface RegistryScanningRule {
     /**
-     * The frequency that scans are performed at for a private registry.
+     * The frequency that scans are performed at for a private registry. When the ENHANCED scan type is specified, the supported scan frequencies are CONTINUOUS_SCAN and SCAN_ON_PUSH. When the BASIC scan type is specified, the SCAN_ON_PUSH and MANUAL scan frequencies are supported.
      */
     scanFrequency: ScanFrequency;
     /**
@@ -2118,7 +2123,7 @@ declare namespace ECR {
      */
     Key?: TagKey;
     /**
-     * The optional part of a key-value pair that make up a tag. A value acts as a descriptor within a tag category (key).
+     * A value acts as a descriptor within a tag category (key).
      */
     Value?: TagValue;
   }

@@ -293,6 +293,12 @@ declare class Athena extends Service {
   updateWorkGroup(callback?: (err: AWSError, data: Athena.Types.UpdateWorkGroupOutput) => void): Request<Athena.Types.UpdateWorkGroupOutput, AWSError>;
 }
 declare namespace Athena {
+  export interface AclConfiguration {
+    /**
+     * The Amazon S3 canned ACL that Athena should specify when storing query results. Currently the only supported canned ACL is BUCKET_OWNER_FULL_CONTROL. If a query runs in a workgroup and the workgroup overrides client-side settings, then the Amazon S3 canned ACL specified in the workgroup's settings is used for all queries that run in the workgroup. For more information about Amazon S3 canned ACLs, see Canned ACL in the Amazon S3 User Guide.
+     */
+    S3AclOption: S3AclOption;
+  }
   export type AmazonResourceName = string;
   export interface AthenaError {
     /**
@@ -1155,6 +1161,10 @@ declare namespace Athena {
      * The Amazon Web Services account ID that you expect to be the owner of the Amazon S3 bucket specified by ResultConfiguration$OutputLocation. If set, Athena uses the value for ExpectedBucketOwner when it makes Amazon S3 calls to your specified output location. If the ExpectedBucketOwner Amazon Web Services account ID does not match the actual owner of the Amazon S3 bucket, the call fails with a permissions error. This is a client-side setting. If workgroup settings override client-side settings, then the query uses the ExpectedBucketOwner setting that is specified for the workgroup, and also uses the location for storing query results specified in the workgroup. See WorkGroupConfiguration$EnforceWorkGroupConfiguration and Workgroup Settings Override Client-Side Settings.
      */
     ExpectedBucketOwner?: String;
+    /**
+     * Indicates that an Amazon S3 canned ACL should be set to control ownership of stored query results. Currently the only supported canned ACL is BUCKET_OWNER_FULL_CONTROL. This is a client-side setting. If workgroup settings override client-side settings, then the query uses the ACL configuration that is specified for the workgroup, and also uses the location for storing query results specified in the workgroup. For more information, see WorkGroupConfiguration$EnforceWorkGroupConfiguration and Workgroup Settings Override Client-Side Settings.
+     */
+    AclConfiguration?: AclConfiguration;
   }
   export interface ResultConfigurationUpdates {
     /**
@@ -1181,6 +1191,14 @@ declare namespace Athena {
      * If set to "true", removes the Amazon Web Services account ID previously specified for ResultConfiguration$ExpectedBucketOwner. If set to "false" or not set, and a value is present in the ExpectedBucketOwner in ResultConfigurationUpdates (the client-side setting), the ExpectedBucketOwner in the workgroup's ResultConfiguration is updated with the new value. For more information, see Workgroup Settings Override Client-Side Settings.
      */
     RemoveExpectedBucketOwner?: BoxedBoolean;
+    /**
+     * The ACL configuration for the query results.
+     */
+    AclConfiguration?: AclConfiguration;
+    /**
+     * If set to true, indicates that the previously-specified ACL configuration for queries in this workgroup should be ignored and set to null. If set to false or not set, and a value is present in the AclConfiguration of ResultConfigurationUpdates, the AclConfiguration in the workgroup's ResultConfiguration is updated with the new value. For more information, see Workgroup Settings Override Client-Side Settings.
+     */
+    RemoveAclConfiguration?: BoxedBoolean;
   }
   export interface ResultSet {
     /**
@@ -1205,6 +1223,7 @@ declare namespace Athena {
     Data?: datumList;
   }
   export type RowList = Row[];
+  export type S3AclOption = "BUCKET_OWNER_FULL_CONTROL"|string;
   export interface StartQueryExecutionInput {
     /**
      * The SQL query statements to be executed.

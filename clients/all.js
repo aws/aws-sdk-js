@@ -299,5 +299,6 @@ module.exports = {
   BackupGateway: require('./backupgateway'),
   IoTTwinMaker: require('./iottwinmaker'),
   WorkSpacesWeb: require('./workspacesweb'),
-  AmplifyUIBuilder: require('./amplifyuibuilder')
+  AmplifyUIBuilder: require('./amplifyuibuilder'),
+  Keyspaces: require('./keyspaces')
 };

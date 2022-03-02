@@ -20,11 +20,11 @@ declare class CloudTrail extends Service {
    */
   addTags(callback?: (err: AWSError, data: CloudTrail.Types.AddTagsResponse) => void): Request<CloudTrail.Types.AddTagsResponse, AWSError>;
   /**
-   * Cancels a query if the query is not in a terminated state, such as CANCELLED, FAILED or FINISHED. You must specify an ARN value for EventDataStore. The ID of the query that you want to cancel is also required. When you run CancelQuery, the query status might show as CANCELLED even if the operation is not yet finished.
+   * Cancels a query if the query is not in a terminated state, such as CANCELLED, FAILED, TIMED_OUT, or FINISHED. You must specify an ARN value for EventDataStore. The ID of the query that you want to cancel is also required. When you run CancelQuery, the query status might show as CANCELLED even if the operation is not yet finished.
    */
   cancelQuery(params: CloudTrail.Types.CancelQueryRequest, callback?: (err: AWSError, data: CloudTrail.Types.CancelQueryResponse) => void): Request<CloudTrail.Types.CancelQueryResponse, AWSError>;
   /**
-   * Cancels a query if the query is not in a terminated state, such as CANCELLED, FAILED or FINISHED. You must specify an ARN value for EventDataStore. The ID of the query that you want to cancel is also required. When you run CancelQuery, the query status might show as CANCELLED even if the operation is not yet finished.
+   * Cancels a query if the query is not in a terminated state, such as CANCELLED, FAILED, TIMED_OUT, or FINISHED. You must specify an ARN value for EventDataStore. The ID of the query that you want to cancel is also required. When you run CancelQuery, the query status might show as CANCELLED even if the operation is not yet finished.
    */
   cancelQuery(callback?: (err: AWSError, data: CloudTrail.Types.CancelQueryResponse) => void): Request<CloudTrail.Types.CancelQueryResponse, AWSError>;
   /**
@@ -140,11 +140,11 @@ declare class CloudTrail extends Service {
    */
   listPublicKeys(callback?: (err: AWSError, data: CloudTrail.Types.ListPublicKeysResponse) => void): Request<CloudTrail.Types.ListPublicKeysResponse, AWSError>;
   /**
-   * Returns a list of queries and query statuses for the past seven days. You must specify an ARN value for EventDataStore. Optionally, to shorten the list of results, you can specify a time range, formatted as timestamps, by adding StartTime and EndTime parameters, and a QueryStatus value. Valid values for QueryStatus include QUEUED, RUNNING, FINISHED, FAILED, or CANCELLED.
+   * Returns a list of queries and query statuses for the past seven days. You must specify an ARN value for EventDataStore. Optionally, to shorten the list of results, you can specify a time range, formatted as timestamps, by adding StartTime and EndTime parameters, and a QueryStatus value. Valid values for QueryStatus include QUEUED, RUNNING, FINISHED, FAILED, TIMED_OUT, or CANCELLED.
    */
   listQueries(params: CloudTrail.Types.ListQueriesRequest, callback?: (err: AWSError, data: CloudTrail.Types.ListQueriesResponse) => void): Request<CloudTrail.Types.ListQueriesResponse, AWSError>;
   /**
-   * Returns a list of queries and query statuses for the past seven days. You must specify an ARN value for EventDataStore. Optionally, to shorten the list of results, you can specify a time range, formatted as timestamps, by adding StartTime and EndTime parameters, and a QueryStatus value. Valid values for QueryStatus include QUEUED, RUNNING, FINISHED, FAILED, or CANCELLED.
+   * Returns a list of queries and query statuses for the past seven days. You must specify an ARN value for EventDataStore. Optionally, to shorten the list of results, you can specify a time range, formatted as timestamps, by adding StartTime and EndTime parameters, and a QueryStatus value. Valid values for QueryStatus include QUEUED, RUNNING, FINISHED, FAILED, TIMED_OUT, or CANCELLED.
    */
   listQueries(callback?: (err: AWSError, data: CloudTrail.Types.ListQueriesResponse) => void): Request<CloudTrail.Types.ListQueriesResponse, AWSError>;
   /**
@@ -541,7 +541,7 @@ declare namespace CloudTrail {
      */
     QueryString?: QueryStatement;
     /**
-     * The status of a query. Values for QueryStatus include QUEUED, RUNNING, FINISHED, FAILED, or CANCELLED 
+     * The status of a query. Values for QueryStatus include QUEUED, RUNNING, FINISHED, FAILED, TIMED_OUT, or CANCELLED 
      */
     QueryStatus?: QueryStatus;
     /**
@@ -780,7 +780,7 @@ declare namespace CloudTrail {
   }
   export interface GetQueryResultsResponse {
     /**
-     * The status of the query. Values include QUEUED, RUNNING, FINISHED, FAILED, or CANCELLED.
+     * The status of the query. Values include QUEUED, RUNNING, FINISHED, FAILED, TIMED_OUT, or CANCELLED.
      */
     QueryStatus?: QueryStatus;
     /**
@@ -962,7 +962,7 @@ declare namespace CloudTrail {
      */
     EndTime?: _Date;
     /**
-     * The status of queries that you want to return in results. Valid values for QueryStatus include QUEUED, RUNNING, FINISHED, FAILED, or CANCELLED.
+     * The status of queries that you want to return in results. Valid values for QueryStatus include QUEUED, RUNNING, FINISHED, FAILED, TIMED_OUT, or CANCELLED.
      */
     QueryStatus?: QueryStatus;
   }
@@ -1141,7 +1141,7 @@ declare namespace CloudTrail {
      */
     QueryId?: UUID;
     /**
-     * The status of the query. This can be QUEUED, RUNNING, FINISHED, FAILED, or CANCELLED.
+     * The status of the query. This can be QUEUED, RUNNING, FINISHED, FAILED, TIMED_OUT, or CANCELLED.
      */
     QueryStatus?: QueryStatus;
     /**
@@ -1164,6 +1164,10 @@ declare namespace CloudTrail {
      * The total number of results returned by a query.
      */
     TotalResultsCount?: Integer;
+    /**
+     * The total bytes that the query scanned in the event data store. This value matches the number of bytes for which your account is billed for the query, unless the query is still running.
+     */
+    BytesScanned?: Long;
   }
   export interface QueryStatisticsForDescribeQuery {
     /**
@@ -1175,6 +1179,10 @@ declare namespace CloudTrail {
      */
     EventsScanned?: Long;
     /**
+     * The total bytes that the query scanned in the event data store. This value matches the number of bytes for which your account is billed for the query, unless the query is still running.
+     */
+    BytesScanned?: Long;
+    /**
      * The query's run time, in milliseconds.
      */
     ExecutionTimeInMillis?: Integer;
@@ -1183,7 +1191,7 @@ declare namespace CloudTrail {
      */
     CreationTime?: _Date;
   }
-  export type QueryStatus = "QUEUED"|"RUNNING"|"FINISHED"|"FAILED"|"CANCELLED"|string;
+  export type QueryStatus = "QUEUED"|"RUNNING"|"FINISHED"|"FAILED"|"CANCELLED"|"TIMED_OUT"|string;
   export type ReadWriteType = "ReadOnly"|"WriteOnly"|"All"|string;
   export interface RemoveTagsRequest {
     /**

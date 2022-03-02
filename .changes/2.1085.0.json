@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "Athena",
+        "description": "This release adds support for S3 Object Ownership by allowing the S3 bucket owner full control canned ACL to be set when Athena writes query results to S3 buckets."
+    },
+    {
+        "type": "feature",
+        "category": "CloudTrail",
+        "description": "Add bytesScanned field into responses of DescribeQuery and GetQueryResults."
+    },
+    {
+        "type": "feature",
+        "category": "ECR",
+        "description": "This release adds support for tracking images lastRecordedPullTime."
+    },
+    {
+        "type": "feature",
+        "category": "Keyspaces",
+        "description": "This release adds support for data definition language (DDL) operations"
+    }
+]

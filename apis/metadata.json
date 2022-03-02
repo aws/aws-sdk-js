@@ -1139,5 +1139,8 @@
   },
   "amplifyuibuilder": {
     "name": "AmplifyUIBuilder"
+  },
+  "keyspaces": {
+    "name": "Keyspaces"
   }
 }

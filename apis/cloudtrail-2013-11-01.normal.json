@@ -107,7 +107,7 @@
           "shape": "ConflictException"
         }
       ],
-      "documentation": "<p>Cancels a query if the query is not in a terminated state, such as <code>CANCELLED</code>, <code>FAILED</code> or <code>FINISHED</code>. You must specify an ARN value for <code>EventDataStore</code>. The ID of the query that you want to cancel is also required. When you run <code>CancelQuery</code>, the query status might show as <code>CANCELLED</code> even if the operation is not yet finished.</p>",
+      "documentation": "<p>Cancels a query if the query is not in a terminated state, such as <code>CANCELLED</code>, <code>FAILED</code>, <code>TIMED_OUT</code>, or <code>FINISHED</code>. You must specify an ARN value for <code>EventDataStore</code>. The ID of the query that you want to cancel is also required. When you run <code>CancelQuery</code>, the query status might show as <code>CANCELLED</code> even if the operation is not yet finished.</p>",
       "idempotent": true
     },
     "CreateEventDataStore": {
@@ -707,7 +707,7 @@
           "shape": "UnsupportedOperationException"
         }
       ],
-      "documentation": "<p>Returns a list of queries and query statuses for the past seven days. You must specify an ARN value for <code>EventDataStore</code>. Optionally, to shorten the list of results, you can specify a time range, formatted as timestamps, by adding <code>StartTime</code> and <code>EndTime</code> parameters, and a <code>QueryStatus</code> value. Valid values for <code>QueryStatus</code> include <code>QUEUED</code>, <code>RUNNING</code>, <code>FINISHED</code>, <code>FAILED</code>, or <code>CANCELLED</code>.</p>",
+      "documentation": "<p>Returns a list of queries and query statuses for the past seven days. You must specify an ARN value for <code>EventDataStore</code>. Optionally, to shorten the list of results, you can specify a time range, formatted as timestamps, by adding <code>StartTime</code> and <code>EndTime</code> parameters, and a <code>QueryStatus</code> value. Valid values for <code>QueryStatus</code> include <code>QUEUED</code>, <code>RUNNING</code>, <code>FINISHED</code>, <code>FAILED</code>, <code>TIMED_OUT</code>, or <code>CANCELLED</code>.</p>",
       "idempotent": true
     },
     "ListTags": {
@@ -1697,7 +1697,7 @@
         },
         "QueryStatus": {
           "shape": "QueryStatus",
-          "documentation": "<p>The status of a query. Values for <code>QueryStatus</code> include <code>QUEUED</code>, <code>RUNNING</code>, <code>FINISHED</code>, <code>FAILED</code>, or <code>CANCELLED</code> </p>"
+          "documentation": "<p>The status of a query. Values for <code>QueryStatus</code> include <code>QUEUED</code>, <code>RUNNING</code>, <code>FINISHED</code>, <code>FAILED</code>, <code>TIMED_OUT</code>, or <code>CANCELLED</code> </p>"
         },
         "QueryStatistics": {
           "shape": "QueryStatisticsForDescribeQuery",
@@ -2040,7 +2040,7 @@
       "members": {
         "QueryStatus": {
           "shape": "QueryStatus",
-          "documentation": "<p>The status of the query. Values include <code>QUEUED</code>, <code>RUNNING</code>, <code>FINISHED</code>, <code>FAILED</code>, or <code>CANCELLED</code>.</p>"
+          "documentation": "<p>The status of the query. Values include <code>QUEUED</code>, <code>RUNNING</code>, <code>FINISHED</code>, <code>FAILED</code>, <code>TIMED_OUT</code>, or <code>CANCELLED</code>.</p>"
         },
         "QueryStatistics": {
           "shape": "QueryStatistics",
@@ -2289,7 +2289,7 @@
         },
         "QueryStatus": {
           "shape": "QueryStatus",
-          "documentation": "<p>The status of queries that you want to return in results. Valid values for <code>QueryStatus</code> include <code>QUEUED</code>, <code>RUNNING</code>, <code>FINISHED</code>, <code>FAILED</code>, or <code>CANCELLED</code>.</p>"
+          "documentation": "<p>The status of queries that you want to return in results. Valid values for <code>QueryStatus</code> include <code>QUEUED</code>, <code>RUNNING</code>, <code>FINISHED</code>, <code>FAILED</code>, <code>TIMED_OUT</code>, or <code>CANCELLED</code>.</p>"
         }
       }
     },
@@ -2585,7 +2585,7 @@
         },
         "QueryStatus": {
           "shape": "QueryStatus",
-          "documentation": "<p>The status of the query. This can be <code>QUEUED</code>, <code>RUNNING</code>, <code>FINISHED</code>, <code>FAILED</code>, or <code>CANCELLED</code>.</p>"
+          "documentation": "<p>The status of the query. This can be <code>QUEUED</code>, <code>RUNNING</code>, <code>FINISHED</code>, <code>FAILED</code>, <code>TIMED_OUT</code>, or <code>CANCELLED</code>.</p>"
         },
         "CreationTime": {
           "shape": "Date",
@@ -2637,6 +2637,10 @@
         "TotalResultsCount": {
           "shape": "Integer",
           "documentation": "<p>The total number of results returned by a query.</p>"
+        },
+        "BytesScanned": {
+          "shape": "Long",
+          "documentation": "<p>The total bytes that the query scanned in the event data store. This value matches the number of bytes for which your account is billed for the query, unless the query is still running.</p>"
         }
       },
       "documentation": "<p>Metadata about a query, such as the number of results.</p>"
@@ -2651,6 +2655,10 @@
         "EventsScanned": {
           "shape": "Long",
           "documentation": "<p>The number of events that the query scanned in the event data store.</p>"
+        },
+        "BytesScanned": {
+          "shape": "Long",
+          "documentation": "<p>The total bytes that the query scanned in the event data store. This value matches the number of bytes for which your account is billed for the query, unless the query is still running.</p>"
         },
         "ExecutionTimeInMillis": {
           "shape": "Integer",
@@ -2670,7 +2678,8 @@
         "RUNNING",
         "FINISHED",
         "FAILED",
-        "CANCELLED"
+        "CANCELLED",
+        "TIMED_OUT"
       ]
     },
     "ReadWriteType": {
