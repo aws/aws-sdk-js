@@ -1407,6 +1407,10 @@ declare namespace Appflow {
      */
     Zendesk?: ZendeskDestinationProperties;
     /**
+     * The properties required to query Marketo.
+     */
+    Marketo?: MarketoDestinationProperties;
+    /**
      * The properties that are required to query the custom Connector.
      */
     CustomConnector?: CustomConnectorDestinationProperties;
@@ -1907,6 +1911,13 @@ declare namespace Appflow {
      *  The location of the Marketo resource. 
      */
     instanceUrl: InstanceUrl;
+  }
+  export interface MarketoDestinationProperties {
+    /**
+     * The object specified in the Marketo flow destination.
+     */
+    object: Object;
+    errorHandlingConfig?: ErrorHandlingConfig;
   }
   export interface MarketoMetadata {
   }

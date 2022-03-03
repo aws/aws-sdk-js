@@ -946,6 +946,25 @@ declare namespace Kendra {
     DirectPutContent?: Boolean;
   }
   export type ContentType = "PDF"|"HTML"|"MS_WORD"|"PLAIN_TEXT"|"PPT"|string;
+  export interface Correction {
+    /**
+     * The zero-based location in the response string or text where the corrected word starts.
+     */
+    BeginOffset?: Integer;
+    /**
+     * The zero-based location in the response string or text where the corrected word ends.
+     */
+    EndOffset?: Integer;
+    /**
+     * The string or text of a misspelled word in a query.
+     */
+    Term?: String;
+    /**
+     * The string or text of a corrected misspelled word in a query.
+     */
+    CorrectedTerm?: String;
+  }
+  export type CorrectionList = Correction[];
   export type CrawlDepth = number;
   export interface CreateDataSourceRequest {
     /**
@@ -961,7 +980,7 @@ declare namespace Kendra {
      */
     Type: DataSourceType;
     /**
-     * The connector configuration information that is required to access the repository. You can't specify the Configuration parameter when the Type parameter is set to CUSTOM. If you do, you receive a ValidationException exception. The Configuration parameter is required for all other data sources.
+     * Configuration information that is required to access the data source repository. You can't specify the Configuration parameter when the Type parameter is set to CUSTOM. If you do, you receive a ValidationException exception. The Configuration parameter is required for all other data sources.
      */
     Configuration?: DataSourceConfiguration;
     /**
@@ -1013,7 +1032,7 @@ declare namespace Kendra {
      */
     RoleArn?: RoleArn;
     /**
-     * Provides the configuration information for your Amazon Kendra experience. This includes ContentSourceConfiguration, which specifies the data source IDs and/or FAQ IDs, and UserIdentityConfiguration, which specifies the user or group information to grant access to your Amazon Kendra experience.
+     * Configuration information for your Amazon Kendra experience. This includes ContentSourceConfiguration, which specifies the data source IDs and/or FAQ IDs, and UserIdentityConfiguration, which specifies the user or group information to grant access to your Amazon Kendra experience.
      */
     Configuration?: ExperienceConfiguration;
     /**
@@ -1215,27 +1234,27 @@ declare namespace Kendra {
   }
   export interface DataSourceConfiguration {
     /**
-     * Provides information to create a data source connector for a document repository in an Amazon S3 bucket.
+     * Provides the configuration information to connect to an Amazon S3 bucket as your data source.
      */
     S3Configuration?: S3DataSourceConfiguration;
     /**
-     * Provides information necessary to create a data source connector for a Microsoft SharePoint site.
+     * Provides the configuration information to connect to Microsoft SharePoint as your data source.
      */
     SharePointConfiguration?: SharePointConfiguration;
     /**
-     * Provides information necessary to create a data source connector for a database.
+     * Provides the configuration information to connect to a database as your data source.
      */
     DatabaseConfiguration?: DatabaseConfiguration;
     /**
-     * Provides configuration information for data sources that connect to a Salesforce site.
+     * Provides the configuration information to connect to Salesforce as your data source.
      */
     SalesforceConfiguration?: SalesforceConfiguration;
     /**
-     * Provides configuration for data sources that connect to Microsoft OneDrive.
+     * Provides the configuration information to connect to Microsoft OneDrive as your data source.
      */
     OneDriveConfiguration?: OneDriveConfiguration;
     /**
-     * Provides configuration for data sources that connect to ServiceNow instances.
+     * Provides the configuration information to connect to ServiceNow as your data source.
      */
     ServiceNowConfiguration?: ServiceNowConfiguration;
     /**
@@ -1243,7 +1262,7 @@ declare namespace Kendra {
      */
     ConfluenceConfiguration?: ConfluenceConfiguration;
     /**
-     * Provides configuration for data sources that connect to Google Drive. 
+     * Provides the configuration information to connect to Google Drive as your data source. 
      */
     GoogleDriveConfiguration?: GoogleDriveConfiguration;
     WebCrawlerConfiguration?: WebCrawlerConfiguration;
@@ -1407,7 +1426,7 @@ declare namespace Kendra {
      */
     DatabaseEngineType: DatabaseEngineType;
     /**
-     * The information necessary to connect to a database.
+     * Configuration information that's required to connect to a database.
      */
     ConnectionConfiguration: ConnectionConfiguration;
     VpcConfiguration?: DataSourceVpcConfiguration;
@@ -1532,7 +1551,7 @@ declare namespace Kendra {
      */
     Type?: DataSourceType;
     /**
-     * Information that describes where the data source is located and how the data source is configured. The specific information in the description depends on the data source provider.
+     * Describes how the data source is configured. The specific information in the description depends on the data source provider.
      */
     Configuration?: DataSourceConfiguration;
     /**
@@ -2355,11 +2374,11 @@ declare namespace Kendra {
      */
     FileSystemType: FsxFileSystemType;
     /**
-     * Provides the configuration information for connecting to an Amazon Virtual Private Cloud for your Amazon FSx. Your Amazon FSx instance must reside inside your VPC.
+     * Configuration information for connecting to an Amazon Virtual Private Cloud for your Amazon FSx. Your Amazon FSx instance must reside inside your VPC.
      */
     VpcConfiguration: DataSourceVpcConfiguration;
     /**
-     * The Amazon Resource Name (ARN) of an Secrets Manager secret that contains the key-value pairs required to connect to your Amazon FSx file system. Windows is currently the only supported type. The secret must contain a JSON structure with the following keys:   username—The Active Directory user name, along with the Domain Name System (DNS) domain name. For example, user@corp.example.com. The Active Directory user account must have read and mounting access to the Amazon FSx file system for Windows.   password—The password of the active directory user with read and mounting access Amazon FSx Windows file system.  
+     * The Amazon Resource Name (ARN) of an Secrets Manager secret that contains the key-value pairs required to connect to your Amazon FSx file system. Windows is currently the only supported type. The secret must contain a JSON structure with the following keys:   username—The Active Directory user name, along with the Domain Name System (DNS) domain name. For example, user@corp.example.com. The Active Directory user account must have read and mounting access to the Amazon FSx file system for Windows.   password—The password of the Active Directory user account with read and mounting access to the Amazon FSx Windows file system.  
      */
     SecretArn?: SecretArn;
     /**
@@ -2371,7 +2390,7 @@ declare namespace Kendra {
      */
     ExclusionPatterns?: DataSourceInclusionsExclusionsStrings;
     /**
-     * A list of DataSourceToIndexFieldMapping objects that map Amazon FSx data source attributes or field names to Amazon Kendra index field names in Amazon Kendra. To create custom fields, use the UpdateIndex API before you map to Amazon FSx fields. For more information, see Mapping data source fields. The Amazon FSx data source field names must exist in your Amazon FSx custom metadata.
+     * A list of DataSourceToIndexFieldMapping objects that map Amazon FSx data source attributes or field names to Amazon Kendra index field names. To create custom fields, use the UpdateIndex API before you map to Amazon FSx fields. For more information, see Mapping data source fields. The Amazon FSx data source field names must exist in your Amazon FSx custom metadata.
      */
     FieldMappings?: DataSourceToIndexFieldMappingList;
   }
@@ -2875,7 +2894,7 @@ declare namespace Kendra {
   }
   export interface ListIndicesResponse {
     /**
-     * An array of summary information for one or more indexes.
+     * An array of summary information on the configuration of one or more indexes.
      */
     IndexConfigurationSummaryItems?: IndexConfigurationSummaryList;
     /**
@@ -3164,6 +3183,10 @@ declare namespace Kendra {
      * Provides an identifier for a specific user. The VisitorId should be a unique identifier, such as a GUID. Don't use personally identifiable information, such as the user's email address, as the VisitorId.
      */
     VisitorId?: VisitorId;
+    /**
+     * Enables suggested spell corrections for queries.
+     */
+    SpellCorrectionConfiguration?: SpellCorrectionConfiguration;
   }
   export interface QueryResult {
     /**
@@ -3186,6 +3209,10 @@ declare namespace Kendra {
      * A list of warning codes and their messages on problems with your query. Amazon Kendra currently only supports one type of warning, which is a warning on invalid syntax used in the query. For examples of invalid query syntax, see Searching with advanced query syntax.
      */
     Warnings?: WarningList;
+    /**
+     * A list of information related to suggested spell corrections for a query.
+     */
+    SpellCorrectedQueries?: SpellCorrectedQueryList;
   }
   export interface QueryResultItem {
     /**
@@ -3382,7 +3409,7 @@ declare namespace Kendra {
      */
     CrawlAttachments?: Boolean;
     /**
-     * Provides configuration information for processing attachments to Salesforce standard objects. 
+     * Configuration information for processing attachments to Salesforce standard objects. 
      */
     StandardObjectAttachmentConfiguration?: SalesforceStandardObjectAttachmentConfiguration;
     /**
@@ -3420,11 +3447,11 @@ declare namespace Kendra {
      */
     IncludedStates: SalesforceKnowledgeArticleStateList;
     /**
-     * Provides configuration information for standard Salesforce knowledge articles.
+     * Configuration information for standard Salesforce knowledge articles.
      */
     StandardKnowledgeArticleTypeConfiguration?: SalesforceStandardKnowledgeArticleTypeConfiguration;
     /**
-     * Provides configuration information for custom Salesforce knowledge articles.
+     * Configuration information for custom Salesforce knowledge articles.
      */
     CustomKnowledgeArticleTypeConfigurations?: SalesforceCustomKnowledgeArticleTypeConfigurationList;
   }
@@ -3536,11 +3563,11 @@ declare namespace Kendra {
      */
     ServiceNowBuildVersion: ServiceNowBuildVersionType;
     /**
-     * Provides configuration information for crawling knowledge articles in the ServiceNow site.
+     * Configuration information for crawling knowledge articles in the ServiceNow site.
      */
     KnowledgeArticleConfiguration?: ServiceNowKnowledgeArticleConfiguration;
     /**
-     * Provides configuration information for crawling service catalogs in the ServiceNow site.
+     * Configuration information for crawling service catalogs in the ServiceNow site.
      */
     ServiceCatalogConfiguration?: ServiceNowServiceCatalogConfiguration;
     /**
@@ -3675,6 +3702,23 @@ declare namespace Kendra {
      */
     SortOrder: SortOrder;
   }
+  export interface SpellCorrectedQuery {
+    /**
+     * The query with the suggested spell corrections.
+     */
+    SuggestedQueryText?: SuggestedQueryText;
+    /**
+     * The corrected misspelled word or words in a query.
+     */
+    Corrections?: CorrectionList;
+  }
+  export type SpellCorrectedQueryList = SpellCorrectedQuery[];
+  export interface SpellCorrectionConfiguration {
+    /**
+     *  TRUE to suggest spell corrections for queries.
+     */
+    IncludeQuerySpellCheckSuggestions: Boolean;
+  }
   export interface SqlConfiguration {
     /**
      * Determines whether Amazon Kendra encloses SQL identifiers for tables and column names in double quotes (") when making a database query. By default, Amazon Kendra passes SQL identifiers the way that they are entered into the data source configuration. It does not change the case of identifiers or enclose them in quotes. PostgreSQL internally converts uppercase characters to lower case characters in identifiers unless they are quoted. Choosing this option encloses identifiers in quotes so that PostgreSQL does not convert the character's case. For MySQL databases, you must enable the ansi_quotes option when you set this field to DOUBLE_QUOTES.
@@ -3747,6 +3791,7 @@ declare namespace Kendra {
   }
   export type SubnetId = string;
   export type SubnetIdList = SubnetId[];
+  export type SuggestedQueryText = string;
   export interface Suggestion {
     /**
      * The unique UUID (universally unique identifier) of a single query suggestion.
@@ -3899,7 +3944,7 @@ declare namespace Kendra {
      */
     IndexId: IndexId;
     /**
-     * Configuration information for an Amazon Kendra data source.
+     * Configuration information for an Amazon Kendra data source you want to update.
      */
     Configuration?: DataSourceConfiguration;
     /**
@@ -3941,7 +3986,7 @@ declare namespace Kendra {
      */
     RoleArn?: RoleArn;
     /**
-     * Provides the user configuration information. This includes the Amazon Web Services SSO field name that contains the identifiers of your users, such as their emails.
+     * Configuration information for your Amazon Kendra you want to update.
      */
     Configuration?: ExperienceConfiguration;
     /**
@@ -3967,7 +4012,7 @@ declare namespace Kendra {
      */
     Description?: Description;
     /**
-     * The document metadata to update. 
+     * The document metadata you want to update.
      */
     DocumentMetadataConfigurationUpdates?: DocumentMetadataConfigurationList;
     /**
@@ -4065,11 +4110,11 @@ declare namespace Kendra {
   export type Url = string;
   export interface Urls {
     /**
-     * Provides the configuration of the seed or starting point URLs of the websites you want to crawl. You can choose to crawl only the website host names, or the website host names with subdomains, or the website host names with subdomains and other domains that the webpages link to. You can list up to 100 seed URLs.
+     * Configuration of the seed or starting point URLs of the websites you want to crawl. You can choose to crawl only the website host names, or the website host names with subdomains, or the website host names with subdomains and other domains that the webpages link to. You can list up to 100 seed URLs.
      */
     SeedUrlConfiguration?: SeedUrlConfiguration;
     /**
-     * Provides the configuration of the sitemap URLs of the websites you want to crawl. Only URLs belonging to the same website host names are crawled. You can list up to three sitemap URLs.
+     * Configuration of the sitemap URLs of the websites you want to crawl. Only URLs belonging to the same website host names are crawled. You can list up to three sitemap URLs.
      */
     SiteMapsConfiguration?: SiteMapsConfiguration;
   }
@@ -4166,11 +4211,11 @@ declare namespace Kendra {
      */
     UrlExclusionPatterns?: DataSourceInclusionsExclusionsStrings;
     /**
-     * Provides configuration information required to connect to your internal websites via a web proxy. You must provide the website host name and port number. For example, the host name of https://a.example.com/page1.html is "a.example.com" and the port is 443, the standard port for HTTPS. Web proxy credentials are optional and you can use them to connect to a web proxy server that requires basic authentication. To store web proxy credentials, you use a secret in Secrets Manager.
+     * Configuration information required to connect to your internal websites via a web proxy. You must provide the website host name and port number. For example, the host name of https://a.example.com/page1.html is "a.example.com" and the port is 443, the standard port for HTTPS. Web proxy credentials are optional and you can use them to connect to a web proxy server that requires basic authentication. To store web proxy credentials, you use a secret in Secrets Manager.
      */
     ProxyConfiguration?: ProxyConfiguration;
     /**
-     * Provides configuration information required to connect to websites using authentication. You can connect to websites using basic authentication of user name and password. You must provide the website host name and port number. For example, the host name of https://a.example.com/page1.html is "a.example.com" and the port is 443, the standard port for HTTPS. You use a secret in Secrets Manager to store your authentication credentials.
+     * Configuration information required to connect to websites using authentication. You can connect to websites using basic authentication of user name and password. You must provide the website host name and port number. For example, the host name of https://a.example.com/page1.html is "a.example.com" and the port is 443, the standard port for HTTPS. You use a secret in Secrets Manager to store your authentication credentials.
      */
     AuthenticationConfiguration?: AuthenticationConfiguration;
   }

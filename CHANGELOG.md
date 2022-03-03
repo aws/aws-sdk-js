@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1085.0-->
+<!--LATEST=2.1086.0-->
 <!--ENTRYINSERT-->
+
+## 2.1086.0
+* feature: Appflow: Launching Amazon AppFlow Marketo as a destination connector SDK.
+* feature: FSx: This release adds support for data repository associations to use root ("/") as the file system path
+* feature: Kendra: Amazon Kendra now suggests spell corrections for a query. For more information, see https://docs.aws.amazon.com/kendra/latest/dg/query-spell-check.html
 
 ## 2.1085.0
 * feature: Athena: This release adds support for S3 Object Ownership by allowing the S3 bucket owner full control canned ACL to be set when Athena writes query results to S3 buckets.
