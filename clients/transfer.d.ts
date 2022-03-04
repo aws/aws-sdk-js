@@ -2,6 +2,7 @@ import {Request} from '../lib/request';
 import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
+import {WaiterConfiguration} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config-base';
 interface Blob {}
@@ -267,6 +268,22 @@ declare class Transfer extends Service {
    * Assigns new properties to a user. Parameters you pass modify any or all of the following: the home directory, role, and policy for the UserName and ServerId you specify. The response returns the ServerId and the UserName for the updated user.
    */
   updateUser(callback?: (err: AWSError, data: Transfer.Types.UpdateUserResponse) => void): Request<Transfer.Types.UpdateUserResponse, AWSError>;
+  /**
+   * Waits for the serverOffline state by periodically calling the underlying Transfer.describeServeroperation every 30 seconds (at most 120 times).
+   */
+  waitFor(state: "serverOffline", params: Transfer.Types.DescribeServerRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: Transfer.Types.DescribeServerResponse) => void): Request<Transfer.Types.DescribeServerResponse, AWSError>;
+  /**
+   * Waits for the serverOffline state by periodically calling the underlying Transfer.describeServeroperation every 30 seconds (at most 120 times).
+   */
+  waitFor(state: "serverOffline", callback?: (err: AWSError, data: Transfer.Types.DescribeServerResponse) => void): Request<Transfer.Types.DescribeServerResponse, AWSError>;
+  /**
+   * Waits for the serverOnline state by periodically calling the underlying Transfer.describeServeroperation every 30 seconds (at most 120 times).
+   */
+  waitFor(state: "serverOnline", params: Transfer.Types.DescribeServerRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: Transfer.Types.DescribeServerResponse) => void): Request<Transfer.Types.DescribeServerResponse, AWSError>;
+  /**
+   * Waits for the serverOnline state by periodically calling the underlying Transfer.describeServeroperation every 30 seconds (at most 120 times).
+   */
+  waitFor(state: "serverOnline", callback?: (err: AWSError, data: Transfer.Types.DescribeServerResponse) => void): Request<Transfer.Types.DescribeServerResponse, AWSError>;
 }
 declare namespace Transfer {
   export type AddressAllocationId = string;

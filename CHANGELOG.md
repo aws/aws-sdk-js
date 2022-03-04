@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1086.0-->
+<!--LATEST=2.1087.0-->
 <!--ENTRYINSERT-->
+
+## 2.1087.0
+* feature: Connect: This release updates the *InstanceStorageConfig APIs so they support a new ResourceType: REAL_TIME_CONTACT_ANALYSIS_SEGMENTS. Use this resource type to enable streaming for real-time contact analysis and to associate the Kinesis stream where real-time contact analysis segments will be published.
+* feature: DevOpsGuru: Amazon DevOps Guru now integrates with Amazon CodeGuru Profiler. You can view CodeGuru Profiler recommendations for your AWS Lambda function in DevOps Guru. This feature is enabled by default for new customers as of 3/4/2022. Existing customers can enable this feature with UpdateEventSourcesConfig.
+* feature: Synthetics: Allow custom handler function.
+* feature: Transfer: Add waiters for server online and offline.
 
 ## 2.1086.0
 * feature: Appflow: Launching Amazon AppFlow Marketo as a destination connector SDK.

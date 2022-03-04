@@ -44,6 +44,14 @@ declare class DevOpsGuru extends Service {
    */
   describeAnomaly(callback?: (err: AWSError, data: DevOpsGuru.Types.DescribeAnomalyResponse) => void): Request<DevOpsGuru.Types.DescribeAnomalyResponse, AWSError>;
   /**
+   * This operation lists details about a DevOps Guru event source that is shared with your&#x2028; account.
+   */
+  describeEventSourcesConfig(params: DevOpsGuru.Types.DescribeEventSourcesConfigRequest, callback?: (err: AWSError, data: DevOpsGuru.Types.DescribeEventSourcesConfigResponse) => void): Request<DevOpsGuru.Types.DescribeEventSourcesConfigResponse, AWSError>;
+  /**
+   * This operation lists details about a DevOps Guru event source that is shared with your&#x2028; account.
+   */
+  describeEventSourcesConfig(callback?: (err: AWSError, data: DevOpsGuru.Types.DescribeEventSourcesConfigResponse) => void): Request<DevOpsGuru.Types.DescribeEventSourcesConfigResponse, AWSError>;
+  /**
    *  Returns the most recent feedback submitted in the current Amazon Web Services account and Region. 
    */
   describeFeedback(params: DevOpsGuru.Types.DescribeFeedbackRequest, callback?: (err: AWSError, data: DevOpsGuru.Types.DescribeFeedbackResponse) => void): Request<DevOpsGuru.Types.DescribeFeedbackResponse, AWSError>;
@@ -204,6 +212,14 @@ declare class DevOpsGuru extends Service {
    */
   startCostEstimation(callback?: (err: AWSError, data: DevOpsGuru.Types.StartCostEstimationResponse) => void): Request<DevOpsGuru.Types.StartCostEstimationResponse, AWSError>;
   /**
+   * Updates the event source configuration.
+   */
+  updateEventSourcesConfig(params: DevOpsGuru.Types.UpdateEventSourcesConfigRequest, callback?: (err: AWSError, data: DevOpsGuru.Types.UpdateEventSourcesConfigResponse) => void): Request<DevOpsGuru.Types.UpdateEventSourcesConfigResponse, AWSError>;
+  /**
+   * Updates the event source configuration.
+   */
+  updateEventSourcesConfig(callback?: (err: AWSError, data: DevOpsGuru.Types.UpdateEventSourcesConfigResponse) => void): Request<DevOpsGuru.Types.UpdateEventSourcesConfigResponse, AWSError>;
+  /**
    *  Updates the collection of resources that DevOps Guru analyzes. The two types of Amazon Web Services resource collections supported are Amazon Web Services CloudFormation stacks and Amazon Web Services resources that contain the same Amazon Web Services tag. DevOps Guru can be configured to analyze the Amazon Web Services resources that are defined in the stacks or that are tagged using the same tag key. You can specify up to 500 Amazon Web Services CloudFormation stacks. This method also creates the IAM role required for you to use DevOps Guru. 
    */
   updateResourceCollection(params: DevOpsGuru.Types.UpdateResourceCollectionRequest, callback?: (err: AWSError, data: DevOpsGuru.Types.UpdateResourceCollectionResponse) => void): Request<DevOpsGuru.Types.UpdateResourceCollectionResponse, AWSError>;
@@ -255,6 +271,12 @@ declare namespace DevOpsGuru {
      */
     Id: NotificationChannelId;
   }
+  export interface AmazonCodeGuruProfilerIntegration {
+    /**
+     * The status of the CodeGuru Profiler integration.
+     */
+    Status?: EventSourceOptInStatus;
+  }
   export type AnomalyDescription = string;
   export type AnomalyId = string;
   export type AnomalyLimit = number;
@@ -281,6 +303,7 @@ declare namespace DevOpsGuru {
   }
   export type AnomalyResources = AnomalyResource[];
   export type AnomalySeverity = "LOW"|"MEDIUM"|"HIGH"|string;
+  export type AnomalySource = string;
   export interface AnomalySourceDetails {
     /**
      * An array of CloudWatchMetricsDetail objects that contain information about analyzed CloudWatch metrics that show anomalous behavior. 
@@ -290,6 +313,20 @@ declare namespace DevOpsGuru {
      * An array of PerformanceInsightsMetricsDetail objects that contain information about analyzed Performance Insights metrics that show anomalous behavior.
      */
     PerformanceInsightsMetrics?: PerformanceInsightsMetricsDetails;
+  }
+  export interface AnomalySourceMetadata {
+    /**
+     * The source of the anomaly.
+     */
+    Source?: AnomalySource;
+    /**
+     * The name of the anomaly's resource.
+     */
+    SourceResourceName?: ResourceName;
+    /**
+     * The anomaly's resource type.
+     */
+    SourceResourceType?: ResourceType;
   }
   export type AnomalyStatus = "ONGOING"|"CLOSED"|string;
   export interface AnomalyTimeRange {
@@ -486,6 +523,14 @@ declare namespace DevOpsGuru {
      *  A ReactiveAnomaly object that represents the requested anomaly. 
      */
     ReactiveAnomaly?: ReactiveAnomaly;
+  }
+  export interface DescribeEventSourcesConfigRequest {
+  }
+  export interface DescribeEventSourcesConfigResponse {
+    /**
+     * The name of the event source.
+     */
+    EventSources?: EventSourcesConfig;
   }
   export interface DescribeFeedbackRequest {
     /**
@@ -713,6 +758,13 @@ declare namespace DevOpsGuru {
   export type EventResourceType = string;
   export type EventResources = EventResource[];
   export type EventSource = string;
+  export type EventSourceOptInStatus = "ENABLED"|"DISABLED"|string;
+  export interface EventSourcesConfig {
+    /**
+     * 
+     */
+    AmazonCodeGuruProfiler?: AmazonCodeGuruProfilerIntegration;
+  }
   export interface EventTimeRange {
     /**
      *  The time when the event started. 
@@ -776,6 +828,7 @@ declare namespace DevOpsGuru {
      */
     NextToken?: UuidNextToken;
   }
+  export type InsightDescription = string;
   export interface InsightFeedback {
     /**
      *  The insight feedback ID. 
@@ -1256,6 +1309,14 @@ declare namespace DevOpsGuru {
      *  A threshold that was exceeded by behavior in analyzed resources. Exceeding this threshold is related to the anomalous behavior that generated this anomaly. 
      */
     Limit?: AnomalyLimit;
+    /**
+     * The metadata for the anomaly.
+     */
+    SourceMetadata?: AnomalySourceMetadata;
+    /**
+     * Information about a resource in which DevOps Guru detected anomalous behavior.
+     */
+    AnomalyResources?: AnomalyResources;
   }
   export interface ProactiveAnomalySummary {
     /**
@@ -1293,6 +1354,14 @@ declare namespace DevOpsGuru {
      *  A threshold that was exceeded by behavior in analyzed resources. Exceeding this threshold is related to the anomalous behavior that generated this anomaly. 
      */
     Limit?: AnomalyLimit;
+    /**
+     * Returns the metadata of the source.
+     */
+    SourceMetadata?: AnomalySourceMetadata;
+    /**
+     * Information about a resource in which DevOps Guru detected anomalous behavior.
+     */
+    AnomalyResources?: AnomalyResources;
   }
   export interface ProactiveInsight {
     /**
@@ -1318,6 +1387,10 @@ declare namespace DevOpsGuru {
      *  The ID of the Amazon Web Services System Manager OpsItem created for this insight. You must enable the creation of OpstItems insights before they are created for each insight. 
      */
     SsmOpsItemId?: SsmOpsItemId;
+    /**
+     * Describes the proactive insight.
+     */
+    Description?: InsightDescription;
   }
   export interface ProactiveInsightSummary {
     /**
@@ -1508,6 +1581,10 @@ declare namespace DevOpsGuru {
      *  The ID of the Amazon Web Services System Manager OpsItem created for this insight. You must enable the creation of OpstItems insights before they are created for each insight. 
      */
     SsmOpsItemId?: SsmOpsItemId;
+    /**
+     * Describes the reactive insight.
+     */
+    Description?: InsightDescription;
   }
   export interface ReactiveInsightSummary {
     /**
@@ -1593,7 +1670,12 @@ declare namespace DevOpsGuru {
      *  Anomalies that are related to the problem. Use these Anomalies to learn more about what's happening and to help address the issue. 
      */
     RelatedAnomalies?: RecommendationRelatedAnomalies;
+    /**
+     * The category type of the recommendation.
+     */
+    Category?: RecommendationCategory;
   }
+  export type RecommendationCategory = string;
   export type RecommendationDescription = string;
   export type RecommendationLink = string;
   export type RecommendationName = string;
@@ -1965,6 +2047,14 @@ declare namespace DevOpsGuru {
      *  An array of the names of the Amazon Web Services CloudFormation stacks to update. You can specify up to 500 Amazon Web Services CloudFormation stacks. 
      */
     StackNames?: UpdateStackNames;
+  }
+  export interface UpdateEventSourcesConfigRequest {
+    /**
+     * The name of the event source.
+     */
+    EventSources?: EventSourcesConfig;
+  }
+  export interface UpdateEventSourcesConfigResponse {
   }
   export type UpdateResourceCollectionAction = "ADD"|"REMOVE"|string;
   export interface UpdateResourceCollectionFilter {
