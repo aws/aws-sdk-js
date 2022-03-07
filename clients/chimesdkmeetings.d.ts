@@ -189,7 +189,7 @@ declare namespace ChimeSDKMeetings {
      */
     ClientRequestToken: ClientRequestToken;
     /**
-     * The Region in which to create the meeting.  Available values: af-south-1 , ap-northeast-1 , ap-northeast-2 , ap-south-1 , ap-southeast-1 , ap-southeast-2 , ca-central-1 , eu-central-1 , eu-north-1 , eu-south-1 , eu-west-1 , eu-west-2 , eu-west-3 , sa-east-1 , us-east-1 , us-east-2 , us-west-1 , us-west-2 . 
+     * The Region in which to create the meeting.  Available values: af-south-1, ap-northeast-1, ap-northeast-2, ap-south-1, ap-southeast-1, ap-southeast-2, ca-central-1, eu-central-1, eu-north-1, eu-south-1, eu-west-1, eu-west-2, eu-west-3, sa-east-1, us-east-1, us-east-2, us-west-1, us-west-2.  Available values in AWS GovCloud (US) Regions: us-gov-east-1, us-gov-west-1.
      */
     MediaRegion: MediaRegion;
     /**
@@ -221,7 +221,7 @@ declare namespace ChimeSDKMeetings {
      */
     ClientRequestToken: ClientRequestToken;
     /**
-     * The Region in which to create the meeting.
+     * The Region in which to create the meeting.  Available values: af-south-1, ap-northeast-1, ap-northeast-2, ap-south-1, ap-southeast-1, ap-southeast-2, ca-central-1, eu-central-1, eu-north-1, eu-south-1, eu-west-1, eu-west-2, eu-west-3, sa-east-1, us-east-1, us-east-2, us-west-1, us-west-2.  Available values in AWS GovCloud (US) Regions: us-gov-east-1, us-gov-west-1.
      */
     MediaRegion: MediaRegion;
     /**
@@ -306,7 +306,7 @@ declare namespace ChimeSDKMeetings {
     /**
      * The language code specified for the Amazon Transcribe engine.
      */
-    LanguageCode: TranscribeLanguageCode;
+    LanguageCode?: TranscribeLanguageCode;
     /**
      * The filtering method passed to Amazon Transcribe.
      */
@@ -340,13 +340,25 @@ declare namespace ChimeSDKMeetings {
      */
     ContentRedactionType?: TranscribeContentRedactionType;
     /**
-     * Lists the PII entity types you want to identify or redact. To specify entity types, you must enable ContentIdentificationType or ContentRedactionType. PIIEntityTypes must be comma-separated. The available values are: BANK_ACCOUNT_NUMBER, BANK_ROUTING, CREDIT_DEBIT_NUMBER, CREDIT_DEBIT_CVV, CREDIT_DEBIT_EXPIRY, PIN, EMAIL, ADDRESS, NAME, PHONE, SSN, and ALL.  PiiEntityTypes is an optional parameter with a default value of ALL.
+     * Lists the PII entity types you want to identify or redact. To specify entity types, you must enable ContentIdentificationType or ContentRedactionType.  PIIEntityTypes must be comma-separated. The available values are: BANK_ACCOUNT_NUMBER, BANK_ROUTING, CREDIT_DEBIT_NUMBER, CREDIT_DEBIT_CVV, CREDIT_DEBIT_EXPIRY, PIN, EMAIL, ADDRESS, NAME, PHONE, SSN, and ALL.  PiiEntityTypes is an optional parameter with a default value of ALL.
      */
     PiiEntityTypes?: TranscribePiiEntityTypes;
     /**
      * The name of the language model used during transcription.
      */
     LanguageModelName?: TranscribeLanguageModelName;
+    /**
+     * Automatically identifies the language spoken in media files.
+     */
+    IdentifyLanguage?: Boolean;
+    /**
+     * Language codes for the languages that you want to identify. You must provide at least 2 codes.
+     */
+    LanguageOptions?: TranscribeLanguageOptions;
+    /**
+     * Language code for the preferred language.
+     */
+    PreferredLanguage?: TranscribeLanguageCode;
   }
   export type ExternalMeetingId = string;
   export type ExternalUserId = string;
@@ -453,7 +465,7 @@ declare namespace ChimeSDKMeetings {
      */
     ExternalMeetingId?: ExternalMeetingId;
     /**
-     * The Region in which you create the meeting. Available values: af-south-1, ap-northeast-1, ap-northeast-2, ap-south-1, ap-southeast-1, ap-southeast-2, ca-central-1, eu-central-1, eu-north-1, eu-south-1, eu-west-1, eu-west-2, eu-west-3, sa-east-1, us-east-1, us-east-2, us-west-1, us-west-2.
+     * The Region in which you create the meeting. Available values: af-south-1, ap-northeast-1, ap-northeast-2, ap-south-1, ap-southeast-1, ap-southeast-2, ca-central-1, eu-central-1, eu-north-1, eu-south-1, eu-west-1, eu-west-2, eu-west-3, sa-east-1, us-east-1, us-east-2, us-west-1, us-west-2. Available values in AWS GovCloud (US) Regions: us-gov-east-1, us-gov-west-1.
      */
     MediaRegion?: MediaRegion;
     /**
@@ -508,6 +520,7 @@ declare namespace ChimeSDKMeetings {
   export type TranscribeContentRedactionType = "PII"|string;
   export type TranscribeLanguageCode = "en-US"|"en-GB"|"es-US"|"fr-CA"|"fr-FR"|"en-AU"|"it-IT"|"de-DE"|"pt-BR"|"ja-JP"|"ko-KR"|"zh-CN"|string;
   export type TranscribeLanguageModelName = string;
+  export type TranscribeLanguageOptions = string;
   export type TranscribeMedicalContentIdentificationType = "PHI"|string;
   export type TranscribeMedicalLanguageCode = "en-US"|string;
   export type TranscribeMedicalRegion = "us-east-1"|"us-east-2"|"us-west-2"|"ap-southeast-2"|"ca-central-1"|"eu-west-1"|"auto"|string;
