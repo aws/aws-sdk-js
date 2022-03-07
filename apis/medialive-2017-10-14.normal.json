@@ -320,6 +320,56 @@
       ],
       "documentation": "Cancel an input device transfer that you have requested."
     },
+    "ClaimDevice": {
+      "name": "ClaimDevice",
+      "http": {
+        "method": "POST",
+        "requestUri": "/prod/claimDevice",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ClaimDeviceRequest"
+      },
+      "output": {
+        "shape": "ClaimDeviceResponse",
+        "documentation": "Your request to claim this device has succeeded."
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "This request was invalid."
+        },
+        {
+          "shape": "UnprocessableEntityException",
+          "documentation": "Claim operation failed, device id could not be validated."
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "Unexpected internal service error."
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "You don't have the IAM access permissions to claim this device. You must have permission for the WriteClaim operation."
+        },
+        {
+          "shape": "BadGatewayException",
+          "documentation": "Bad gateway error."
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "Device not found or you called an unsupported region."
+        },
+        {
+          "shape": "GatewayTimeoutException",
+          "documentation": "Bad gateway error. Try again."
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "Request limit exceeded. Your have sent this request too many times. There might be a bug in your API client."
+        }
+      ],
+      "documentation": "Send a request to claim an AWS Elemental device that you have purchased from a third-party vendor. After the request succeeds, you will own the device."
+    },
     "CreateChannel": {
       "name": "CreateChannel",
       "http": {
@@ -3038,6 +3088,11 @@
           "locationName": "audioTypeControl",
           "documentation": "Determines how audio type is determined.\n  followInput: If the input contains an ISO 639 audioType, then that value is passed through to the output. If the input contains no ISO 639 audioType, the value in Audio Type is included in the output.\n  useConfigured: The value in Audio Type is included in the output.\nNote that this field and audioType are both ignored if inputType is broadcasterMixedAd."
         },
+        "AudioWatermarkingSettings": {
+          "shape": "AudioWatermarkSettings",
+          "locationName": "audioWatermarkingSettings",
+          "documentation": "Settings to configure one or more solutions that insert audio watermarks in the audio encode"
+        },
         "CodecSettings": {
           "shape": "AudioCodecSettings",
           "locationName": "codecSettings",
@@ -3089,6 +3144,26 @@
       "enum": [
         "FOLLOW_INPUT",
         "USE_CONFIGURED"
+      ]
+    },
+    "AudioHlsRenditionSelection": {
+      "type": "structure",
+      "members": {
+        "GroupId": {
+          "shape": "__stringMin1",
+          "locationName": "groupId",
+          "documentation": "Specifies the GROUP-ID in the #EXT-X-MEDIA tag of the target HLS audio rendition."
+        },
+        "Name": {
+          "shape": "__stringMin1",
+          "locationName": "name",
+          "documentation": "Specifies the NAME in the #EXT-X-MEDIA tag of the target HLS audio rendition."
+        }
+      },
+      "documentation": "Audio Hls Rendition Selection",
+      "required": [
+        "Name",
+        "GroupId"
       ]
     },
     "AudioLanguageSelection": {
@@ -3234,6 +3309,10 @@
     "AudioSelectorSettings": {
       "type": "structure",
       "members": {
+        "AudioHlsRenditionSelection": {
+          "shape": "AudioHlsRenditionSelection",
+          "locationName": "audioHlsRenditionSelection"
+        },
         "AudioLanguageSelection": {
           "shape": "AudioLanguageSelection",
           "locationName": "audioLanguageSelection"
@@ -3305,6 +3384,17 @@
         "UNDEFINED",
         "VISUAL_IMPAIRED_COMMENTARY"
       ]
+    },
+    "AudioWatermarkSettings": {
+      "type": "structure",
+      "members": {
+        "NielsenWatermarksSettings": {
+          "shape": "NielsenWatermarksSettings",
+          "locationName": "nielsenWatermarksSettings",
+          "documentation": "Settings to configure Nielsen Watermarks in the audio encode"
+        }
+      },
+      "documentation": "Audio Watermark Settings"
     },
     "AuthenticationScheme": {
       "type": "string",
@@ -4289,10 +4379,26 @@
         "Vpc": {
           "shape": "VpcOutputSettingsDescription",
           "locationName": "vpc",
-          "documentation": "Settings for VPC output"
+          "documentation": "Settings for any VPC outputs."
         }
       },
       "documentation": "Placeholder documentation for ChannelSummary"
+    },
+    "ClaimDeviceRequest": {
+      "type": "structure",
+      "members": {
+        "Id": {
+          "shape": "__string",
+          "locationName": "id",
+          "documentation": "The id of the device you want to claim."
+        }
+      },
+      "documentation": "A request to claim an AWS Elemental device that you have purchased from a third-party vendor."
+    },
+    "ClaimDeviceResponse": {
+      "type": "structure",
+      "members": {},
+      "documentation": "Placeholder documentation for ClaimDeviceResponse"
     },
     "ColorSpacePassthroughSettings": {
       "type": "structure",
@@ -4365,7 +4471,7 @@
         "Vpc": {
           "shape": "VpcOutputSettings",
           "locationName": "vpc",
-          "documentation": "Settings for VPC output"
+          "documentation": "Settings for the VPC outputs"
         }
       },
       "documentation": "A request to create a channel"
@@ -5343,7 +5449,7 @@
         "InputSourceType": {
           "shape": "InputSourceType",
           "locationName": "inputSourceType",
-          "documentation": "Certain pull input sources can be dynamic, meaning that they can have their URL's dynamically changes\nduring input switch actions. Presently, this functionality only works with MP4_FILE inputs.\n"
+          "documentation": "Certain pull input sources can be dynamic, meaning that they can have their URL's dynamically changes\nduring input switch actions. Presently, this functionality only works with MP4_FILE and TS_FILE inputs.\n"
         },
         "MediaConnectFlows": {
           "shape": "__listOfMediaConnectFlow",
@@ -6016,9 +6122,26 @@
         "SCALED"
       ]
     },
+    "DvbSubOcrLanguage": {
+      "type": "string",
+      "documentation": "Dvb Sub Ocr Language",
+      "enum": [
+        "DEU",
+        "ENG",
+        "FRA",
+        "NLD",
+        "POR",
+        "SPA"
+      ]
+    },
     "DvbSubSourceSettings": {
       "type": "structure",
       "members": {
+        "OcrLanguage": {
+          "shape": "DvbSubOcrLanguage",
+          "locationName": "ocrLanguage",
+          "documentation": "If you will configure a WebVTT caption description that references this caption selector, use this field to\nprovide the language to consider when translating the image-based source to text."
+        },
         "Pid": {
           "shape": "__integerMin1",
           "locationName": "pid",
@@ -6763,6 +6886,7 @@
       "type": "string",
       "documentation": "H264 Adaptive Quantization",
       "enum": [
+        "AUTO",
         "HIGH",
         "HIGHER",
         "LOW",
@@ -6947,7 +7071,7 @@
         "AdaptiveQuantization": {
           "shape": "H264AdaptiveQuantization",
           "locationName": "adaptiveQuantization",
-          "documentation": "Adaptive quantization. Allows intra-frame quantizers to vary to improve visual quality."
+          "documentation": "Enables or disables adaptive quantization, which is a technique MediaLive can apply to video on a frame-by-frame basis to produce more compression without losing quality. There are three types of adaptive quantization: flicker, spatial, and temporal. Set the field in one of these ways: Set to Auto. Recommended. For each type of AQ, MediaLive will determine if AQ is needed, and if so, the appropriate strength. Set a strength (a value other than Auto or Disable). This strength will apply to any of the AQ fields that you choose to enable. Set to Disabled to disable all types of adaptive quantization."
         },
         "AfdSignaling": {
           "shape": "AfdSignaling",
@@ -6997,7 +7121,7 @@
         "FlickerAq": {
           "shape": "H264FlickerAq",
           "locationName": "flickerAq",
-          "documentation": "If set to enabled, adjust quantization within each frame to reduce flicker or 'pop' on I-frames."
+          "documentation": "Flicker AQ makes adjustments within each frame to reduce flicker or 'pop' on I-frames. The value to enter in this field depends on the value in the Adaptive quantization field: If you have set the Adaptive quantization field to Auto, MediaLive ignores any value in this field. MediaLive will determine if flicker AQ is appropriate and will apply the appropriate strength. If you have set the Adaptive quantization field to a strength, you can set this field to Enabled or Disabled. Enabled: MediaLive will apply flicker AQ using the specified strength. Disabled: MediaLive won't apply flicker AQ. If you have set the Adaptive quantization to Disabled, MediaLive ignores any value in this field and doesn't apply flicker AQ."
         },
         "ForceFieldPictures": {
           "shape": "H264ForceFieldPictures",
@@ -7097,7 +7221,7 @@
         "QvbrQualityLevel": {
           "shape": "__integerMin1Max10",
           "locationName": "qvbrQualityLevel",
-          "documentation": "Controls the target quality for the video encode. Applies only when the rate control mode is QVBR. Set values for the QVBR quality level field and Max bitrate field that suit your most important viewing devices. Recommended values are:\n- Primary screen: Quality level: 8 to 10. Max bitrate: 4M\n- PC or tablet: Quality level: 7. Max bitrate: 1.5M to 3M\n- Smartphone: Quality level: 6. Max bitrate: 1M to 1.5M"
+          "documentation": "Controls the target quality for the video encode. Applies only when the rate control mode is QVBR. You can set a target quality or you can let MediaLive determine the best quality. To set a target quality, enter values in the QVBR quality level field and the Max bitrate field. Enter values that suit your most important viewing devices. Recommended values are:\n- Primary screen: Quality level: 8 to 10. Max bitrate: 4M\n- PC or tablet: Quality level: 7. Max bitrate: 1.5M to 3M\n- Smartphone: Quality level: 6. Max bitrate: 1M to 1.5M\nTo let MediaLive decide, leave the QVBR quality level field empty, and in Max bitrate enter the maximum rate you want in the video. For more information, see the section called \"Video - rate control mode\" in the MediaLive user guide"
         },
         "RateControlMode": {
           "shape": "H264RateControlMode",
@@ -7127,7 +7251,7 @@
         "SpatialAq": {
           "shape": "H264SpatialAq",
           "locationName": "spatialAq",
-          "documentation": "If set to enabled, adjust quantization within each frame based on spatial variation of content complexity."
+          "documentation": "Spatial AQ makes adjustments within each frame based on spatial variation of content complexity. The value to enter in this field depends on the value in the Adaptive quantization field: If you have set the Adaptive quantization field to Auto, MediaLive ignores any value in this field. MediaLive will determine if spatial AQ is appropriate and will apply the appropriate strength. If you have set the Adaptive quantization field to a strength, you can set this field to Enabled or Disabled. Enabled: MediaLive will apply spatial AQ using the specified strength. Disabled: MediaLive won't apply spatial AQ. If you have set the Adaptive quantization to Disabled, MediaLive ignores any value in this field and doesn't apply spatial AQ."
         },
         "SubgopLength": {
           "shape": "H264SubGopLength",
@@ -7142,7 +7266,7 @@
         "TemporalAq": {
           "shape": "H264TemporalAq",
           "locationName": "temporalAq",
-          "documentation": "If set to enabled, adjust quantization within each frame based on temporal variation of content complexity."
+          "documentation": "Temporal makes adjustments within each frame based on temporal variation of content complexity. The value to enter in this field depends on the value in the Adaptive quantization field: If you have set the Adaptive quantization field to Auto, MediaLive ignores any value in this field. MediaLive will determine if temporal AQ is appropriate and will apply the appropriate strength. If you have set the Adaptive quantization field to a strength, you can set this field to Enabled or Disabled. Enabled: MediaLive will apply temporal AQ using the specified strength. Disabled: MediaLive won't apply temporal AQ. If you have set the Adaptive quantization to Disabled, MediaLive ignores any value in this field and doesn't apply temporal AQ."
         },
         "TimecodeInsertion": {
           "shape": "H264TimecodeInsertionBehavior",
@@ -7196,6 +7320,7 @@
       "type": "string",
       "documentation": "H265 Adaptive Quantization",
       "enum": [
+        "AUTO",
         "HIGH",
         "HIGHER",
         "LOW",
@@ -7837,7 +7962,12 @@
         "ProgramDateTime": {
           "shape": "HlsProgramDateTime",
           "locationName": "programDateTime",
-          "documentation": "Includes or excludes EXT-X-PROGRAM-DATE-TIME tag in .m3u8 manifest files. The value is calculated as follows: either the program date and time are initialized using the input timecode source, or the time is initialized using the input timecode source and the date is initialized using the timestampOffset."
+          "documentation": "Includes or excludes EXT-X-PROGRAM-DATE-TIME tag in .m3u8 manifest files. The value is calculated using the program date time clock."
+        },
+        "ProgramDateTimeClock": {
+          "shape": "HlsProgramDateTimeClock",
+          "locationName": "programDateTimeClock",
+          "documentation": "Specifies the algorithm used to drive the HLS EXT-X-PROGRAM-DATE-TIME clock. Options include:\n\nINITIALIZE_FROM_OUTPUT_TIMECODE: The PDT clock is initialized as a function of the first output timecode, then incremented by the EXTINF duration of each encoded segment.\n\nSYSTEM_CLOCK: The PDT clock is initialized as a function of the UTC wall clock, then incremented by the EXTINF duration of each encoded segment. If the PDT clock diverges from the wall clock by more than 500ms, it is resynchronized to the wall clock."
         },
         "ProgramDateTimePeriod": {
           "shape": "__integerMin0Max3600",
@@ -7955,6 +8085,11 @@
           "shape": "__integerMin0",
           "locationName": "retryInterval",
           "documentation": "The number of seconds between retries when an attempt to read a manifest or segment fails."
+        },
+        "Scte35Source": {
+          "shape": "HlsScte35SourceType",
+          "locationName": "scte35Source",
+          "documentation": "Identifies the source for the SCTE-35 messages that MediaLive will ingest. Messages can be ingested from the content segments (in the stream) or from tags in the playlist (the HLS manifest). MediaLive ignores SCTE-35 information in the source that is not selected."
         }
       },
       "documentation": "Hls Input Settings"
@@ -8083,6 +8218,14 @@
         "INCLUDE"
       ]
     },
+    "HlsProgramDateTimeClock": {
+      "type": "string",
+      "documentation": "Hls Program Date Time Clock",
+      "enum": [
+        "INITIALIZE_FROM_OUTPUT_TIMECODE",
+        "SYSTEM_CLOCK"
+      ]
+    },
     "HlsRedundantManifest": {
       "type": "string",
       "documentation": "Hls Redundant Manifest",
@@ -8101,6 +8244,14 @@
         }
       },
       "documentation": "Hls S3 Settings"
+    },
+    "HlsScte35SourceType": {
+      "type": "string",
+      "documentation": "Hls Scte35 Source Type",
+      "enum": [
+        "MANIFEST",
+        "SEGMENTS"
+      ]
     },
     "HlsSegmentationMode": {
       "type": "string",
@@ -8269,7 +8420,7 @@
         "InputSourceType": {
           "shape": "InputSourceType",
           "locationName": "inputSourceType",
-          "documentation": "Certain pull input sources can be dynamic, meaning that they can have their URL's dynamically changes\nduring input switch actions. Presently, this functionality only works with MP4_FILE inputs.\n"
+          "documentation": "Certain pull input sources can be dynamic, meaning that they can have their URL's dynamically changes\nduring input switch actions. Presently, this functionality only works with MP4_FILE and TS_FILE inputs.\n"
         },
         "MediaConnectFlows": {
           "shape": "__listOfMediaConnectFlow",
@@ -9005,6 +9156,11 @@
           "locationName": "networkInputSettings",
           "documentation": "Input settings."
         },
+        "Scte35Pid": {
+          "shape": "__integerMin32Max8191",
+          "locationName": "scte35Pid",
+          "documentation": "PID from which to read SCTE-35 messages. If left undefined, EML will select the first SCTE-35 PID found in the input."
+        },
         "Smpte2038DataPreference": {
           "shape": "Smpte2038DataPreference",
           "locationName": "smpte2038DataPreference",
@@ -9075,7 +9231,7 @@
     },
     "InputSourceType": {
       "type": "string",
-      "documentation": "There are two types of input sources, static and dynamic. If an input source is dynamic you can\nchange the source url of the input dynamically using an input switch action. However, the only input type\nto support a dynamic url at this time is MP4_FILE. By default all input sources are static.\n",
+      "documentation": "There are two types of input sources, static and dynamic. If an input source is dynamic you can\nchange the source url of the input dynamically using an input switch action. Currently, two input types\nsupport a dynamic url at this time, MP4_FILE and TS_FILE. By default all input sources are static.\n",
       "enum": [
         "STATIC",
         "DYNAMIC"
@@ -9147,6 +9303,7 @@
     },
     "InputType": {
       "type": "string",
+      "documentation": "The different types of inputs that AWS Elemental MediaLive supports.",
       "enum": [
         "UDP_PUSH",
         "RTP_PUSH",
@@ -9156,9 +9313,9 @@
         "MP4_FILE",
         "MEDIACONNECT",
         "INPUT_DEVICE",
-        "AWS_CDI"
-      ],
-      "documentation": "Placeholder documentation for InputType"
+        "AWS_CDI",
+        "TS_FILE"
+      ]
     },
     "InputVpcRequest": {
       "type": "structure",
@@ -11086,6 +11243,32 @@
       },
       "documentation": "Network source to transcode. Must be accessible to the Elemental Live node that is running the live event through a network connection."
     },
+    "NielsenCBET": {
+      "type": "structure",
+      "members": {
+        "CbetCheckDigitString": {
+          "shape": "__stringMin2Max2",
+          "locationName": "cbetCheckDigitString",
+          "documentation": "Enter the CBET check digits to use in the watermark."
+        },
+        "CbetStepaside": {
+          "shape": "NielsenWatermarksCbetStepaside",
+          "locationName": "cbetStepaside",
+          "documentation": "Determines the method of CBET insertion mode when prior encoding is detected on the same layer."
+        },
+        "Csid": {
+          "shape": "__stringMin1Max7",
+          "locationName": "csid",
+          "documentation": "Enter the CBET Source ID (CSID) to use in the watermark"
+        }
+      },
+      "documentation": "Nielsen CBET",
+      "required": [
+        "CbetCheckDigitString",
+        "CbetStepaside",
+        "Csid"
+      ]
+    },
     "NielsenConfiguration": {
       "type": "structure",
       "members": {
@@ -11102,6 +11285,26 @@
       },
       "documentation": "Nielsen Configuration"
     },
+    "NielsenNaesIiNw": {
+      "type": "structure",
+      "members": {
+        "CheckDigitString": {
+          "shape": "__stringMin2Max2",
+          "locationName": "checkDigitString",
+          "documentation": "Enter the check digit string for the watermark"
+        },
+        "Sid": {
+          "shape": "__doubleMin1Max65535",
+          "locationName": "sid",
+          "documentation": "Enter the Nielsen Source ID (SID) to include in the watermark"
+        }
+      },
+      "documentation": "Nielsen Naes Ii Nw",
+      "required": [
+        "CheckDigitString",
+        "Sid"
+      ]
+    },
     "NielsenPcmToId3TaggingState": {
       "type": "string",
       "documentation": "State of Nielsen PCM to ID3 tagging",
@@ -11109,6 +11312,43 @@
         "DISABLED",
         "ENABLED"
       ]
+    },
+    "NielsenWatermarksCbetStepaside": {
+      "type": "string",
+      "documentation": "Nielsen Watermarks Cbet Stepaside",
+      "enum": [
+        "DISABLED",
+        "ENABLED"
+      ]
+    },
+    "NielsenWatermarksDistributionTypes": {
+      "type": "string",
+      "documentation": "Nielsen Watermarks Distribution Types",
+      "enum": [
+        "FINAL_DISTRIBUTOR",
+        "PROGRAM_CONTENT"
+      ]
+    },
+    "NielsenWatermarksSettings": {
+      "type": "structure",
+      "members": {
+        "NielsenCbetSettings": {
+          "shape": "NielsenCBET",
+          "locationName": "nielsenCbetSettings",
+          "documentation": "Complete these fields only if you want to insert watermarks of type Nielsen CBET"
+        },
+        "NielsenDistributionType": {
+          "shape": "NielsenWatermarksDistributionTypes",
+          "locationName": "nielsenDistributionType",
+          "documentation": "Choose the distribution types that you want to assign to the watermarks:\n- PROGRAM_CONTENT\n- FINAL_DISTRIBUTOR"
+        },
+        "NielsenNaesIiNwSettings": {
+          "shape": "NielsenNaesIiNw",
+          "locationName": "nielsenNaesIiNwSettings",
+          "documentation": "Complete these fields only if you want to insert watermarks of type Nielsen NAES II (N2) and Nielsen NAES VI (NW)."
+        }
+      },
+      "documentation": "Nielsen Watermarks Settings"
     },
     "Offering": {
       "type": "structure",
@@ -11761,10 +12001,12 @@
     },
     "ReservationSpecialFeature": {
       "type": "string",
-      "documentation": "Special features, 'ADVANCED_AUDIO' or 'AUDIO_NORMALIZATION'",
+      "documentation": "Special features, 'ADVANCED_AUDIO' 'AUDIO_NORMALIZATION' 'MGHD' or 'MGUHD'",
       "enum": [
         "ADVANCED_AUDIO",
-        "AUDIO_NORMALIZATION"
+        "AUDIO_NORMALIZATION",
+        "MGHD",
+        "MGUHD"
       ]
     },
     "ReservationState": {
@@ -12050,9 +12292,26 @@
       "members": {},
       "documentation": "Scte27 Destination Settings"
     },
+    "Scte27OcrLanguage": {
+      "type": "string",
+      "documentation": "Scte27 Ocr Language",
+      "enum": [
+        "DEU",
+        "ENG",
+        "FRA",
+        "NLD",
+        "POR",
+        "SPA"
+      ]
+    },
     "Scte27SourceSettings": {
       "type": "structure",
       "members": {
+        "OcrLanguage": {
+          "shape": "Scte27OcrLanguage",
+          "locationName": "ocrLanguage",
+          "documentation": "If you will configure a WebVTT caption description that references this caption selector, use this field to\nprovide the language to consider when translating the image-based source to text."
+        },
         "Pid": {
           "shape": "__integerMin1",
           "locationName": "pid",
@@ -13841,8 +14100,22 @@
     },
     "WebvttDestinationSettings": {
       "type": "structure",
-      "members": {},
+      "members": {
+        "StyleControl": {
+          "shape": "WebvttDestinationStyleControl",
+          "locationName": "styleControl",
+          "documentation": "Controls whether the color and position of the source captions is passed through to the WebVTT output captions.  PASSTHROUGH - Valid only if the source captions are EMBEDDED or TELETEXT.  NO_STYLE_DATA - Don't pass through the style. The output captions will not contain any font styling information."
+        }
+      },
       "documentation": "Webvtt Destination Settings"
+    },
+    "WebvttDestinationStyleControl": {
+      "type": "string",
+      "documentation": "Webvtt Destination Style Control",
+      "enum": [
+        "NO_STYLE_DATA",
+        "PASSTHROUGH"
+      ]
     },
     "__double": {
       "type": "double",
@@ -13863,6 +14136,10 @@
     "__doubleMin1": {
       "type": "double",
       "documentation": "Placeholder documentation for __doubleMin1"
+    },
+    "__doubleMin1Max65535": {
+      "type": "double",
+      "documentation": "Placeholder documentation for __doubleMin1Max65535"
     },
     "__doubleMinNegative59Max0": {
       "type": "double",
@@ -14123,6 +14400,12 @@
       "type": "integer",
       "min": 30,
       "documentation": "Placeholder documentation for __integerMin30"
+    },
+    "__integerMin32Max8191": {
+      "type": "integer",
+      "min": 32,
+      "max": 8191,
+      "documentation": "Placeholder documentation for __integerMin32Max8191"
     },
     "__integerMin4Max20": {
       "type": "integer",
@@ -14571,6 +14854,18 @@
       "min": 1,
       "max": 35,
       "documentation": "Placeholder documentation for __stringMin1Max35"
+    },
+    "__stringMin1Max7": {
+      "type": "string",
+      "min": 1,
+      "max": 7,
+      "documentation": "Placeholder documentation for __stringMin1Max7"
+    },
+    "__stringMin2Max2": {
+      "type": "string",
+      "min": 2,
+      "max": 2,
+      "documentation": "Placeholder documentation for __stringMin2Max2"
     },
     "__stringMin32Max32": {
       "type": "string",

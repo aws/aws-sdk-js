@@ -4099,7 +4099,7 @@
         "DomainNameStatus": {
           "shape": "DomainNameStatus",
           "locationName": "domainNameStatus",
-          "documentation": "<p>The status of the domain name migration. The valid values are AVAILABLE and UPDATING. If the status is UPDATING, the domain cannot be modified further until the existing operation is complete. If it is AVAILABLE, the domain can be updated.</p>"
+          "documentation": "<p>The status of the domain name migration. The valid values are AVAILABLE, UPDATING, PENDING_CERTIFICATE_REIMPORT, and PENDING_OWNERSHIP_VERIFICATION. If the status is UPDATING, the domain cannot be modified further until the existing operation is complete. If it is AVAILABLE, the domain can be updated.</p>"
         },
         "DomainNameStatusMessage": {
           "shape": "__string",
@@ -4120,6 +4120,11 @@
           "shape": "SecurityPolicy",
           "locationName": "securityPolicy",
           "documentation": "<p>The Transport Layer Security (TLS) version of the security policy for this domain name. The valid values are TLS_1_0 and TLS_1_2.</p>"
+        },
+        "OwnershipVerificationCertificateArn": {
+          "shape": "Arn",
+          "locationName": "ownershipVerificationCertificateArn",
+          "documentation": "<p>The ARN of the public certificate issued by ACM to validate ownership of your custom domain. Only required when configuring mutual TLS and using an ACM imported or private CA certificate ARN as the regionalCertificateArn</p>"
         }
       },
       "documentation": "<p>The domain name configuration.</p>"
@@ -4133,10 +4138,12 @@
     },
     "DomainNameStatus": {
       "type": "string",
-      "documentation": "<p>The status of the domain name migration. The valid values are AVAILABLE and UPDATING. If the status is UPDATING, the domain cannot be modified further until the existing operation is complete. If it is AVAILABLE, the domain can be updated.</p>",
+      "documentation": "<p>The status of the domain name migration. The valid values are AVAILABLE, UPDATING, PENDING_CERTIFICATE_REIMPORT, and PENDING_OWNERSHIP_VERIFICATION. If the status is UPDATING, the domain cannot be modified further until the existing operation is complete. If it is AVAILABLE, the domain can be updated.</p>",
       "enum": [
         "AVAILABLE",
-        "UPDATING"
+        "UPDATING",
+        "PENDING_CERTIFICATE_REIMPORT",
+        "PENDING_OWNERSHIP_VERIFICATION"
       ]
     },
     "EndpointType": {

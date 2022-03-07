@@ -361,7 +361,7 @@
           "shape": "OrganizationStateException"
         }
       ],
-      "documentation": "<p>Deletes an access control rule for the specified WorkMail organization.</p>"
+      "documentation": "<p>Deletes an access control rule for the specified WorkMail organization.</p> <note> <p>Deleting already deleted and non-existing rules does not produce an error. In those cases, the service sends back an HTTP 200 response with an empty HTTP body.</p> </note>"
     },
     "DeleteAlias": {
       "name": "DeleteAlias",
@@ -393,6 +393,32 @@
         }
       ],
       "documentation": "<p>Remove one or more specified aliases from a set of aliases for a given user.</p>",
+      "idempotent": true
+    },
+    "DeleteEmailMonitoringConfiguration": {
+      "name": "DeleteEmailMonitoringConfiguration",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteEmailMonitoringConfigurationRequest"
+      },
+      "output": {
+        "shape": "DeleteEmailMonitoringConfigurationResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "OrganizationNotFoundException"
+        },
+        {
+          "shape": "OrganizationStateException"
+        }
+      ],
+      "documentation": "<p>Deletes the email monitoring configuration for a specified organization.</p>",
       "idempotent": true
     },
     "DeleteGroup": {
@@ -465,6 +491,34 @@
       "documentation": "<p>Deletes permissions granted to a member (user or group).</p>",
       "idempotent": true
     },
+    "DeleteMobileDeviceAccessOverride": {
+      "name": "DeleteMobileDeviceAccessOverride",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteMobileDeviceAccessOverrideRequest"
+      },
+      "output": {
+        "shape": "DeleteMobileDeviceAccessOverrideResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "OrganizationNotFoundException"
+        },
+        {
+          "shape": "OrganizationStateException"
+        },
+        {
+          "shape": "EntityNotFoundException"
+        }
+      ],
+      "documentation": "<p>Deletes the mobile device access override for the given WorkMail organization, user, and device.</p> <note> <p>Deleting already deleted and non-existing overrides does not produce an error. In those cases, the service sends back an HTTP 200 response with an empty HTTP body.</p> </note>"
+    },
     "DeleteMobileDeviceAccessRule": {
       "name": "DeleteMobileDeviceAccessRule",
       "http": {
@@ -488,7 +542,7 @@
           "shape": "OrganizationStateException"
         }
       ],
-      "documentation": "<p>Deletes a mobile device access rule for the specified Amazon WorkMail organization.</p>"
+      "documentation": "<p>Deletes a mobile device access rule for the specified Amazon WorkMail organization.</p> <note> <p>Deleting already deleted and non-existing rules does not produce an error. In those cases, the service sends back an HTTP 200 response with an empty HTTP body.</p> </note>"
     },
     "DeleteOrganization": {
       "name": "DeleteOrganization",
@@ -641,6 +695,67 @@
       "documentation": "<p>Mark a user, group, or resource as no longer used in Amazon WorkMail. This action disassociates the mailbox and schedules it for clean-up. WorkMail keeps mailboxes for 30 days before they are permanently removed. The functionality in the console is <i>Disable</i>.</p>",
       "idempotent": true
     },
+    "DeregisterMailDomain": {
+      "name": "DeregisterMailDomain",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeregisterMailDomainRequest"
+      },
+      "output": {
+        "shape": "DeregisterMailDomainResponse"
+      },
+      "errors": [
+        {
+          "shape": "MailDomainInUseException"
+        },
+        {
+          "shape": "OrganizationNotFoundException"
+        },
+        {
+          "shape": "OrganizationStateException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "InvalidCustomSesConfigurationException"
+        }
+      ],
+      "documentation": "<p>Removes a domain from Amazon WorkMail, stops email routing to WorkMail, and removes the authorization allowing WorkMail use. SES keeps the domain because other applications may use it. You must first remove any email address used by WorkMail entities before you remove the domain.</p>",
+      "idempotent": true
+    },
+    "DescribeEmailMonitoringConfiguration": {
+      "name": "DescribeEmailMonitoringConfiguration",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeEmailMonitoringConfigurationRequest"
+      },
+      "output": {
+        "shape": "DescribeEmailMonitoringConfigurationResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "OrganizationNotFoundException"
+        },
+        {
+          "shape": "OrganizationStateException"
+        }
+      ],
+      "documentation": "<p>Describes the current email monitoring configuration for a specified organization.</p>",
+      "idempotent": true
+    },
     "DescribeGroup": {
       "name": "DescribeGroup",
       "http": {
@@ -668,6 +783,29 @@
         }
       ],
       "documentation": "<p>Returns the data available for the group.</p>",
+      "idempotent": true
+    },
+    "DescribeInboundDmarcSettings": {
+      "name": "DescribeInboundDmarcSettings",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeInboundDmarcSettingsRequest"
+      },
+      "output": {
+        "shape": "DescribeInboundDmarcSettingsResponse"
+      },
+      "errors": [
+        {
+          "shape": "OrganizationNotFoundException"
+        },
+        {
+          "shape": "OrganizationStateException"
+        }
+      ],
+      "documentation": "<p>Lists the settings in a DMARC policy for a specified organization.</p>",
       "idempotent": true
     },
     "DescribeMailboxExportJob": {
@@ -910,6 +1048,35 @@
       "documentation": "<p>Gets the default retention policy details for the specified organization.</p>",
       "idempotent": true
     },
+    "GetMailDomain": {
+      "name": "GetMailDomain",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetMailDomainRequest"
+      },
+      "output": {
+        "shape": "GetMailDomainResponse"
+      },
+      "errors": [
+        {
+          "shape": "MailDomainNotFoundException"
+        },
+        {
+          "shape": "OrganizationNotFoundException"
+        },
+        {
+          "shape": "OrganizationStateException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        }
+      ],
+      "documentation": "<p>Gets details for a mail domain, including domain records required to configure your domain with recommended security.</p>",
+      "idempotent": true
+    },
     "GetMailboxDetails": {
       "name": "GetMailboxDetails",
       "http": {
@@ -960,6 +1127,37 @@
         }
       ],
       "documentation": "<p>Simulates the effect of the mobile device access rules for the given attributes of a sample access event. Use this method to test the effects of the current set of mobile device access rules for the Amazon WorkMail organization for a particular user's attributes.</p>"
+    },
+    "GetMobileDeviceAccessOverride": {
+      "name": "GetMobileDeviceAccessOverride",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetMobileDeviceAccessOverrideRequest"
+      },
+      "output": {
+        "shape": "GetMobileDeviceAccessOverrideResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "OrganizationNotFoundException"
+        },
+        {
+          "shape": "OrganizationStateException"
+        },
+        {
+          "shape": "EntityNotFoundException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p>Gets the mobile device access override for the given WorkMail organization, user, and device.</p>"
     },
     "ListAccessControlRules": {
       "name": "ListAccessControlRules",
@@ -1076,6 +1274,32 @@
       "documentation": "<p>Returns summaries of the organization's groups.</p>",
       "idempotent": true
     },
+    "ListMailDomains": {
+      "name": "ListMailDomains",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListMailDomainsRequest"
+      },
+      "output": {
+        "shape": "ListMailDomainsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "OrganizationNotFoundException"
+        },
+        {
+          "shape": "OrganizationStateException"
+        }
+      ],
+      "documentation": "<p>Lists the mail domains in a given Amazon WorkMail organization.</p>",
+      "idempotent": true
+    },
     "ListMailboxExportJobs": {
       "name": "ListMailboxExportJobs",
       "http": {
@@ -1130,6 +1354,34 @@
       ],
       "documentation": "<p>Lists the mailbox permissions associated with a user, group, or resource mailbox.</p>",
       "idempotent": true
+    },
+    "ListMobileDeviceAccessOverrides": {
+      "name": "ListMobileDeviceAccessOverrides",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListMobileDeviceAccessOverridesRequest"
+      },
+      "output": {
+        "shape": "ListMobileDeviceAccessOverridesResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "OrganizationNotFoundException"
+        },
+        {
+          "shape": "OrganizationStateException"
+        },
+        {
+          "shape": "EntityNotFoundException"
+        }
+      ],
+      "documentation": "<p>Lists all the mobile device access overrides for any given combination of WorkMail organization, user, or device.</p>"
     },
     "ListMobileDeviceAccessRules": {
       "name": "ListMobileDeviceAccessRules",
@@ -1310,6 +1562,58 @@
       ],
       "documentation": "<p>Adds a new access control rule for the specified organization. The rule allows or denies access to the organization for the specified IPv4 addresses, access protocol actions, and user IDs. Adding a new rule with the same name as an existing rule replaces the older rule.</p>"
     },
+    "PutEmailMonitoringConfiguration": {
+      "name": "PutEmailMonitoringConfiguration",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "PutEmailMonitoringConfigurationRequest"
+      },
+      "output": {
+        "shape": "PutEmailMonitoringConfigurationResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "OrganizationNotFoundException"
+        },
+        {
+          "shape": "OrganizationStateException"
+        }
+      ],
+      "documentation": "<p>Creates or updates the email monitoring configuration for a specified organization.</p>",
+      "idempotent": true
+    },
+    "PutInboundDmarcSettings": {
+      "name": "PutInboundDmarcSettings",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "PutInboundDmarcSettingsRequest"
+      },
+      "output": {
+        "shape": "PutInboundDmarcSettingsResponse"
+      },
+      "errors": [
+        {
+          "shape": "OrganizationNotFoundException"
+        },
+        {
+          "shape": "OrganizationStateException"
+        }
+      ],
+      "documentation": "<p>Enables or disables a DMARC policy for a given organization.</p>",
+      "idempotent": true
+    },
     "PutMailboxPermissions": {
       "name": "PutMailboxPermissions",
       "http": {
@@ -1342,6 +1646,37 @@
       "documentation": "<p>Sets permissions for a user, group, or resource. This replaces any pre-existing permissions.</p>",
       "idempotent": true
     },
+    "PutMobileDeviceAccessOverride": {
+      "name": "PutMobileDeviceAccessOverride",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "PutMobileDeviceAccessOverrideRequest"
+      },
+      "output": {
+        "shape": "PutMobileDeviceAccessOverrideResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "OrganizationNotFoundException"
+        },
+        {
+          "shape": "OrganizationStateException"
+        },
+        {
+          "shape": "EntityNotFoundException"
+        },
+        {
+          "shape": "EntityStateException"
+        }
+      ],
+      "documentation": "<p>Creates or updates a mobile device access override for the given WorkMail organization, user, and device.</p>"
+    },
     "PutRetentionPolicy": {
       "name": "PutRetentionPolicy",
       "http": {
@@ -1369,6 +1704,38 @@
         }
       ],
       "documentation": "<p>Puts a retention policy to the specified organization.</p>",
+      "idempotent": true
+    },
+    "RegisterMailDomain": {
+      "name": "RegisterMailDomain",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "RegisterMailDomainRequest"
+      },
+      "output": {
+        "shape": "RegisterMailDomainResponse"
+      },
+      "errors": [
+        {
+          "shape": "MailDomainInUseException"
+        },
+        {
+          "shape": "OrganizationNotFoundException"
+        },
+        {
+          "shape": "OrganizationStateException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        }
+      ],
+      "documentation": "<p>Registers a new domain in Amazon WorkMail and SES, and configures it for use by WorkMail. Emails received by SES for this domain are routed to the specified WorkMail organization, and WorkMail has permanent permission to use the specified domain for sending your users' emails.</p>",
       "idempotent": true
     },
     "RegisterToWorkMail": {
@@ -1540,6 +1907,38 @@
         }
       ],
       "documentation": "<p>Untags the specified tags from the specified Amazon WorkMail organization resource.</p>"
+    },
+    "UpdateDefaultMailDomain": {
+      "name": "UpdateDefaultMailDomain",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateDefaultMailDomainRequest"
+      },
+      "output": {
+        "shape": "UpdateDefaultMailDomainResponse"
+      },
+      "errors": [
+        {
+          "shape": "MailDomainNotFoundException"
+        },
+        {
+          "shape": "MailDomainStateException"
+        },
+        {
+          "shape": "OrganizationNotFoundException"
+        },
+        {
+          "shape": "OrganizationStateException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        }
+      ],
+      "documentation": "<p>Updates the default mail domain for an organization. The default mail domain is used by the WorkMail AWS Console to suggest an email address when enabling a mail user. You can only have one default domain.</p>",
+      "idempotent": true
     },
     "UpdateMailboxQuota": {
       "name": "UpdateMailboxQuota",
@@ -1886,6 +2285,9 @@
     "Boolean": {
       "type": "boolean"
     },
+    "BooleanObject": {
+      "type": "boolean"
+    },
     "CancelMailboxExportJobRequest": {
       "type": "structure",
       "required": [
@@ -2211,6 +2613,22 @@
       "type": "structure",
       "members": {}
     },
+    "DeleteEmailMonitoringConfigurationRequest": {
+      "type": "structure",
+      "required": [
+        "OrganizationId"
+      ],
+      "members": {
+        "OrganizationId": {
+          "shape": "OrganizationId",
+          "documentation": "<p>The ID of the organization from which the email monitoring configuration is deleted.</p>"
+        }
+      }
+    },
+    "DeleteEmailMonitoringConfigurationResponse": {
+      "type": "structure",
+      "members": {}
+    },
     "DeleteGroupRequest": {
       "type": "structure",
       "required": [
@@ -2255,6 +2673,32 @@
       }
     },
     "DeleteMailboxPermissionsResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "DeleteMobileDeviceAccessOverrideRequest": {
+      "type": "structure",
+      "required": [
+        "OrganizationId",
+        "UserId",
+        "DeviceId"
+      ],
+      "members": {
+        "OrganizationId": {
+          "shape": "OrganizationId",
+          "documentation": "<p>The Amazon WorkMail organization for which the access override will be deleted.</p>"
+        },
+        "UserId": {
+          "shape": "EntityIdentifier",
+          "documentation": "<p>The WorkMail user for which you want to delete the override. Accepts the following types of user identities:</p> <ul> <li> <p>User ID: <code>12345678-1234-1234-1234-123456789012</code> or <code>S-1-1-12-1234567890-123456789-123456789-1234</code> </p> </li> <li> <p>Email address: <code>user@domain.tld</code> </p> </li> <li> <p>User name: <code>user</code> </p> </li> </ul>"
+        },
+        "DeviceId": {
+          "shape": "DeviceId",
+          "documentation": "<p>The mobile device for which you delete the override. <code>DeviceId</code> is case insensitive.</p>"
+        }
+      }
+    },
+    "DeleteMobileDeviceAccessOverrideResponse": {
       "type": "structure",
       "members": {}
     },
@@ -2398,6 +2842,52 @@
       "type": "structure",
       "members": {}
     },
+    "DeregisterMailDomainRequest": {
+      "type": "structure",
+      "required": [
+        "OrganizationId",
+        "DomainName"
+      ],
+      "members": {
+        "OrganizationId": {
+          "shape": "OrganizationId",
+          "documentation": "<p>The Amazon WorkMail organization for which the domain will be deregistered.</p>"
+        },
+        "DomainName": {
+          "shape": "WorkMailDomainName",
+          "documentation": "<p>The domain to deregister in WorkMail and SES. </p>"
+        }
+      }
+    },
+    "DeregisterMailDomainResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "DescribeEmailMonitoringConfigurationRequest": {
+      "type": "structure",
+      "required": [
+        "OrganizationId"
+      ],
+      "members": {
+        "OrganizationId": {
+          "shape": "OrganizationId",
+          "documentation": "<p>The ID of the organization for which the email monitoring configuration is described.</p>"
+        }
+      }
+    },
+    "DescribeEmailMonitoringConfigurationResponse": {
+      "type": "structure",
+      "members": {
+        "RoleArn": {
+          "shape": "RoleArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the IAM Role associated with the email monitoring configuration.</p>"
+        },
+        "LogGroupArn": {
+          "shape": "LogGroupArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the CloudWatch Log group associated with the email monitoring configuration.</p>"
+        }
+      }
+    },
     "DescribeGroupRequest": {
       "type": "structure",
       "required": [
@@ -2441,6 +2931,27 @@
         "DisabledDate": {
           "shape": "Timestamp",
           "documentation": "<p>The date and time when a user was deregistered from WorkMail, in UNIX epoch time format.</p>"
+        }
+      }
+    },
+    "DescribeInboundDmarcSettingsRequest": {
+      "type": "structure",
+      "required": [
+        "OrganizationId"
+      ],
+      "members": {
+        "OrganizationId": {
+          "shape": "OrganizationId",
+          "documentation": "<p>Lists the ID of the given organization.</p>"
+        }
+      }
+    },
+    "DescribeInboundDmarcSettingsResponse": {
+      "type": "structure",
+      "members": {
+        "Enforced": {
+          "shape": "Boolean",
+          "documentation": "<p>Lists the enforcement setting of the applied policy.</p>"
         }
       }
     },
@@ -2681,6 +3192,12 @@
       "min": 0,
       "pattern": "[\\S\\s]*"
     },
+    "DeviceId": {
+      "type": "string",
+      "max": 32,
+      "min": 1,
+      "pattern": "[A-Za-z0-9]+"
+    },
     "DeviceModel": {
       "type": "string",
       "max": 256,
@@ -2795,6 +3312,38 @@
       "type": "structure",
       "members": {}
     },
+    "DnsRecord": {
+      "type": "structure",
+      "members": {
+        "Type": {
+          "shape": "String",
+          "documentation": "<p>The RFC 1035 record type. Possible values: <code>CNAME</code>, <code>A</code>, <code>MX</code>.</p>"
+        },
+        "Hostname": {
+          "shape": "String",
+          "documentation": "<p>The DNS hostname.- For example, <code>domain.example.com</code>.</p>"
+        },
+        "Value": {
+          "shape": "String",
+          "documentation": "<p>The value returned by the DNS for a query to that hostname and record type.</p>"
+        }
+      },
+      "documentation": "<p>A DNS record uploaded to your DNS provider.</p>"
+    },
+    "DnsRecordVerificationStatus": {
+      "type": "string",
+      "enum": [
+        "PENDING",
+        "VERIFIED",
+        "FAILED"
+      ]
+    },
+    "DnsRecords": {
+      "type": "list",
+      "member": {
+        "shape": "DnsRecord"
+      }
+    },
     "Domain": {
       "type": "structure",
       "members": {
@@ -2829,6 +3378,12 @@
       "min": 1,
       "pattern": "[a-zA-Z0-9._%+-]{1,64}@[a-zA-Z0-9.-]+\\.[a-zA-Z-]{2,}"
     },
+    "EntityIdentifier": {
+      "type": "string",
+      "max": 256,
+      "min": 1,
+      "pattern": "[a-zA-Z0-9._%+@-]+"
+    },
     "EntityState": {
       "type": "string",
       "enum": [
@@ -2854,7 +3409,7 @@
         },
         "Period": {
           "shape": "RetentionPeriod",
-          "documentation": "<p>The period of time at which the folder configuration action is applied.</p>"
+          "documentation": "<p>The number of days for which the folder-configuration action applies.</p>"
         }
       },
       "documentation": "<p>The configuration applied to an organization's folders by its retention policy.</p>"
@@ -2948,6 +3503,48 @@
         }
       }
     },
+    "GetMailDomainRequest": {
+      "type": "structure",
+      "required": [
+        "OrganizationId",
+        "DomainName"
+      ],
+      "members": {
+        "OrganizationId": {
+          "shape": "OrganizationId",
+          "documentation": "<p>The Amazon WorkMail organization for which the domain is retrieved.</p>"
+        },
+        "DomainName": {
+          "shape": "WorkMailDomainName",
+          "documentation": "<p>The domain from which you want to retrieve details.</p>"
+        }
+      }
+    },
+    "GetMailDomainResponse": {
+      "type": "structure",
+      "members": {
+        "Records": {
+          "shape": "DnsRecords",
+          "documentation": "<p>A list of the DNS records that Amazon WorkMail recommends adding in your DNS provider for the best user experience. The records configure your domain with DMARC, SPF, DKIM, and direct incoming email traffic to SES. See admin guide for more details.</p>"
+        },
+        "IsTestDomain": {
+          "shape": "Boolean",
+          "documentation": "<p>Specifies whether the domain is a test domain provided by WorkMail, or a custom domain.</p>"
+        },
+        "IsDefault": {
+          "shape": "Boolean",
+          "documentation": "<p>Specifies whether the domain is the default domain for your organization.</p>"
+        },
+        "OwnershipVerificationStatus": {
+          "shape": "DnsRecordVerificationStatus",
+          "documentation": "<p> Indicates the status of the domain ownership verification.</p>"
+        },
+        "DkimVerificationStatus": {
+          "shape": "DnsRecordVerificationStatus",
+          "documentation": "<p>Indicates the status of a DKIM verification.</p>"
+        }
+      }
+    },
     "GetMailboxDetailsRequest": {
       "type": "structure",
       "required": [
@@ -3016,6 +3613,57 @@
         "MatchedRules": {
           "shape": "MobileDeviceAccessMatchedRuleList",
           "documentation": "<p>A list of the rules which matched the simulated user input and produced the effect.</p>"
+        }
+      }
+    },
+    "GetMobileDeviceAccessOverrideRequest": {
+      "type": "structure",
+      "required": [
+        "OrganizationId",
+        "UserId",
+        "DeviceId"
+      ],
+      "members": {
+        "OrganizationId": {
+          "shape": "OrganizationId",
+          "documentation": "<p>The Amazon WorkMail organization to which you want to apply the override.</p>"
+        },
+        "UserId": {
+          "shape": "EntityIdentifier",
+          "documentation": "<p>Identifies the WorkMail user for the override. Accepts the following types of user identities: </p> <ul> <li> <p>User ID: <code>12345678-1234-1234-1234-123456789012</code> or <code>S-1-1-12-1234567890-123456789-123456789-1234</code> </p> </li> <li> <p>Email address: <code>user@domain.tld</code> </p> </li> <li> <p>User name: <code>user</code> </p> </li> </ul>"
+        },
+        "DeviceId": {
+          "shape": "DeviceId",
+          "documentation": "<p>The mobile device to which the override applies. <code>DeviceId</code> is case insensitive.</p>"
+        }
+      }
+    },
+    "GetMobileDeviceAccessOverrideResponse": {
+      "type": "structure",
+      "members": {
+        "UserId": {
+          "shape": "WorkMailIdentifier",
+          "documentation": "<p>The WorkMail user to which the access override applies.</p>"
+        },
+        "DeviceId": {
+          "shape": "DeviceId",
+          "documentation": "<p>The device to which the access override applies.</p>"
+        },
+        "Effect": {
+          "shape": "MobileDeviceAccessRuleEffect",
+          "documentation": "<p>The effect of the override, <code>ALLOW</code> or <code>DENY</code>.</p>"
+        },
+        "Description": {
+          "shape": "MobileDeviceAccessRuleDescription",
+          "documentation": "<p>A description of the override.</p>"
+        },
+        "DateCreated": {
+          "shape": "Timestamp",
+          "documentation": "<p>The date the override was first created.</p>"
+        },
+        "DateModified": {
+          "shape": "Timestamp",
+          "documentation": "<p>The date the description was last modified.</p>"
         }
       }
     },
@@ -3235,6 +3883,39 @@
         }
       }
     },
+    "ListMailDomainsRequest": {
+      "type": "structure",
+      "required": [
+        "OrganizationId"
+      ],
+      "members": {
+        "OrganizationId": {
+          "shape": "OrganizationId",
+          "documentation": "<p>The Amazon WorkMail organization for which to list domains.</p>"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of results to return in a single call.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token to use to retrieve the next page of results. The first call does not require a token.</p>"
+        }
+      }
+    },
+    "ListMailDomainsResponse": {
+      "type": "structure",
+      "members": {
+        "MailDomains": {
+          "shape": "MailDomains",
+          "documentation": "<p>The list of mail domain summaries, specifying domains that exist in the specified Amazon WorkMail organization, along with the information about whether the domain is or isn't the default.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token to use to retrieve the next page of results. The value becomes <code>null</code> when there are no more results to return.</p>"
+        }
+      }
+    },
     "ListMailboxExportJobsRequest": {
       "type": "structure",
       "required": [
@@ -3303,6 +3984,47 @@
         "NextToken": {
           "shape": "NextToken",
           "documentation": "<p>The token to use to retrieve the next page of results. The value is \"null\" when there are no more results to return.</p>"
+        }
+      }
+    },
+    "ListMobileDeviceAccessOverridesRequest": {
+      "type": "structure",
+      "required": [
+        "OrganizationId"
+      ],
+      "members": {
+        "OrganizationId": {
+          "shape": "OrganizationId",
+          "documentation": "<p>The Amazon WorkMail organization under which to list mobile device access overrides.</p>"
+        },
+        "UserId": {
+          "shape": "EntityIdentifier",
+          "documentation": "<p>The WorkMail user under which you list the mobile device access overrides. Accepts the following types of user identities:</p> <ul> <li> <p>User ID: <code>12345678-1234-1234-1234-123456789012</code> or <code>S-1-1-12-1234567890-123456789-123456789-1234</code> </p> </li> <li> <p>Email address: <code>user@domain.tld</code> </p> </li> <li> <p>User name: <code>user</code> </p> </li> </ul>"
+        },
+        "DeviceId": {
+          "shape": "DeviceId",
+          "documentation": "<p>The mobile device to which the access override applies.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token to use to retrieve the next page of results. The first call does not require a token.</p>"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of results to return in a single call.</p>"
+        }
+      }
+    },
+    "ListMobileDeviceAccessOverridesResponse": {
+      "type": "structure",
+      "members": {
+        "Overrides": {
+          "shape": "MobileDeviceAccessOverridesList",
+          "documentation": "<p>The list of mobile device access overrides that exist for the specified Amazon WorkMail organization and user.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token to use to retrieve the next page of results. The value is “null” when there are no more results to return.</p>"
         }
       }
     },
@@ -3478,6 +4200,32 @@
         }
       }
     },
+    "LogGroupArn": {
+      "type": "string",
+      "max": 562,
+      "min": 47,
+      "pattern": "arn:aws:logs:[a-z\\-0-9]*:[0-9]{12}:log-group:([\\.\\-_/#A-Za-z0-9]+):\\*$"
+    },
+    "MailDomainSummary": {
+      "type": "structure",
+      "members": {
+        "DomainName": {
+          "shape": "DomainName",
+          "documentation": "<p>The domain name.</p>"
+        },
+        "DefaultDomain": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether the domain is default or not.</p>"
+        }
+      },
+      "documentation": "<p>The data for a given domain.</p>"
+    },
+    "MailDomains": {
+      "type": "list",
+      "member": {
+        "shape": "MailDomainSummary"
+      }
+    },
     "MailboxExportErrorInfo": {
       "type": "string",
       "max": 1024,
@@ -3620,6 +4368,42 @@
       },
       "max": 10,
       "min": 0
+    },
+    "MobileDeviceAccessOverride": {
+      "type": "structure",
+      "members": {
+        "UserId": {
+          "shape": "WorkMailIdentifier",
+          "documentation": "<p>The WorkMail user to which the access override applies.</p>"
+        },
+        "DeviceId": {
+          "shape": "DeviceId",
+          "documentation": "<p>The device to which the override applies.</p>"
+        },
+        "Effect": {
+          "shape": "MobileDeviceAccessRuleEffect",
+          "documentation": "<p>The effect of the override, <code>ALLOW</code> or <code>DENY</code>.</p>"
+        },
+        "Description": {
+          "shape": "MobileDeviceAccessRuleDescription",
+          "documentation": "<p>A description of the override.</p>"
+        },
+        "DateCreated": {
+          "shape": "Timestamp",
+          "documentation": "<p>The date the override was first created.</p>"
+        },
+        "DateModified": {
+          "shape": "Timestamp",
+          "documentation": "<p>The date the override was last modified.</p>"
+        }
+      },
+      "documentation": "<p>The override object.</p>"
+    },
+    "MobileDeviceAccessOverridesList": {
+      "type": "list",
+      "member": {
+        "shape": "MobileDeviceAccessOverride"
+      }
     },
     "MobileDeviceAccessRule": {
       "type": "structure",
@@ -3881,6 +4665,53 @@
       "type": "structure",
       "members": {}
     },
+    "PutEmailMonitoringConfigurationRequest": {
+      "type": "structure",
+      "required": [
+        "OrganizationId",
+        "RoleArn",
+        "LogGroupArn"
+      ],
+      "members": {
+        "OrganizationId": {
+          "shape": "OrganizationId",
+          "documentation": "<p>The ID of the organization for which the email monitoring configuration is set.</p>"
+        },
+        "RoleArn": {
+          "shape": "RoleArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the IAM Role associated with the email monitoring configuration.</p>"
+        },
+        "LogGroupArn": {
+          "shape": "LogGroupArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the CloudWatch Log group associated with the email monitoring configuration.</p>"
+        }
+      }
+    },
+    "PutEmailMonitoringConfigurationResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "PutInboundDmarcSettingsRequest": {
+      "type": "structure",
+      "required": [
+        "OrganizationId",
+        "Enforced"
+      ],
+      "members": {
+        "OrganizationId": {
+          "shape": "OrganizationId",
+          "documentation": "<p>The ID of the organization that you are applying the DMARC policy to. </p>"
+        },
+        "Enforced": {
+          "shape": "BooleanObject",
+          "documentation": "<p>Enforces or suspends a policy after it's applied.</p>"
+        }
+      }
+    },
+    "PutInboundDmarcSettingsResponse": {
+      "type": "structure",
+      "members": {}
+    },
     "PutMailboxPermissionsRequest": {
       "type": "structure",
       "required": [
@@ -3909,6 +4740,41 @@
       }
     },
     "PutMailboxPermissionsResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "PutMobileDeviceAccessOverrideRequest": {
+      "type": "structure",
+      "required": [
+        "OrganizationId",
+        "UserId",
+        "DeviceId",
+        "Effect"
+      ],
+      "members": {
+        "OrganizationId": {
+          "shape": "OrganizationId",
+          "documentation": "<p>Identifies the Amazon WorkMail organization for which you create the override.</p>"
+        },
+        "UserId": {
+          "shape": "EntityIdentifier",
+          "documentation": "<p>The WorkMail user for which you create the override. Accepts the following types of user identities:</p> <ul> <li> <p>User ID: <code>12345678-1234-1234-1234-123456789012</code> or <code>S-1-1-12-1234567890-123456789-123456789-1234</code> </p> </li> <li> <p>Email address: <code>user@domain.tld</code> </p> </li> <li> <p>User name: <code>user</code> </p> </li> </ul>"
+        },
+        "DeviceId": {
+          "shape": "DeviceId",
+          "documentation": "<p>The mobile device for which you create the override. <code>DeviceId</code> is case insensitive.</p>"
+        },
+        "Effect": {
+          "shape": "MobileDeviceAccessRuleEffect",
+          "documentation": "<p>The effect of the override, <code>ALLOW</code> or <code>DENY</code>.</p>"
+        },
+        "Description": {
+          "shape": "MobileDeviceAccessRuleDescription",
+          "documentation": "<p>A description of the override.</p>"
+        }
+      }
+    },
+    "PutMobileDeviceAccessOverrideResponse": {
       "type": "structure",
       "members": {}
     },
@@ -3943,6 +4809,32 @@
       }
     },
     "PutRetentionPolicyResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "RegisterMailDomainRequest": {
+      "type": "structure",
+      "required": [
+        "OrganizationId",
+        "DomainName"
+      ],
+      "members": {
+        "ClientToken": {
+          "shape": "IdempotencyClientToken",
+          "documentation": "<p>Idempotency token used when retrying requests.</p>",
+          "idempotencyToken": true
+        },
+        "OrganizationId": {
+          "shape": "OrganizationId",
+          "documentation": "<p>The Amazon WorkMail organization under which you're creating the domain.</p>"
+        },
+        "DomainName": {
+          "shape": "WorkMailDomainName",
+          "documentation": "<p>The name of the mail domain to create in Amazon WorkMail and SES.</p>"
+        }
+      }
+    },
+    "RegisterMailDomainResponse": {
       "type": "structure",
       "members": {}
     },
@@ -4249,6 +5141,27 @@
       "type": "structure",
       "members": {}
     },
+    "UpdateDefaultMailDomainRequest": {
+      "type": "structure",
+      "required": [
+        "OrganizationId",
+        "DomainName"
+      ],
+      "members": {
+        "OrganizationId": {
+          "shape": "OrganizationId",
+          "documentation": "<p>The Amazon WorkMail organization for which to list domains.</p>"
+        },
+        "DomainName": {
+          "shape": "WorkMailDomainName",
+          "documentation": "<p>The domain name that will become the default domain.</p>"
+        }
+      }
+    },
+    "UpdateDefaultMailDomainResponse": {
+      "type": "structure",
+      "members": {}
+    },
     "UpdateMailboxQuotaRequest": {
       "type": "structure",
       "required": [
@@ -4462,6 +5375,12 @@
       "member": {
         "shape": "User"
       }
+    },
+    "WorkMailDomainName": {
+      "type": "string",
+      "max": 209,
+      "min": 3,
+      "pattern": "[a-zA-Z0-9.-]+\\.[a-zA-Z-]{2,}"
     },
     "WorkMailIdentifier": {
       "type": "string",

@@ -205,7 +205,7 @@ describe('AWS.S3Control', function() {
         });
       });
 
-      it('should correctly generate access point endpoint for pseudo regions', function() {
+      it('should correctly generate access point endpoint for s3-external-1', function() {
         var client = new AWS.S3Control({region: 'us-east-1'});
         helpers.mockHttpResponse(200, {}, '');
         var request = client.getBucket({
@@ -215,18 +215,32 @@ describe('AWS.S3Control', function() {
         expect(
           built.httpRequest.endpoint.hostname
         ).to.equal('s3-outposts.s3-external-1.amazonaws.com');
+      });
 
-        client = new AWS.S3Control({region: 'us-east-1-fips'});
+      it('should correctly generate access point endpoint when useFipsEndpoint=true', function() {
+        var client = new AWS.S3Control({region: 'us-gov-west-1', useFipsEndpoint: true});
         helpers.mockHttpResponse(200, {}, '');
-        request = client.getBucket({
-          Bucket: 'arn:aws:s3-outposts:s3-external-1:123456789012:outpost/op-01234567890123456/bucket/mybucket'
+        var request = client.getBucket({
+          Bucket: 'arn:aws:s3-outposts:us-gov-west-1:123456789012:outpost/op-01234567890123456/bucket/mybucket'
+        });
+        var built = request.build(function() {});
+        expect(
+          built.httpRequest.endpoint.hostname
+        ).to.equal('s3-outposts-fips.us-gov-west-1.amazonaws.com');
+      });
+
+      it('should throw when fips region is passed in ARN', function() {
+        var client = new AWS.S3Control({region: 'us-gov-west-1', useFipsEndpoint: true});
+        helpers.mockHttpResponse(200, {}, '');
+        var request = client.getBucket({
+          Bucket: 'arn:aws:s3-outposts:fips-us-gov-west-1:123456789012:outpost/op-01234567890123456/bucket/mybucket'
         });
         var error;
         request.build(function(err) {
           error = err;
         });
         expect(error.name).to.equal('InvalidConfiguration');
-        expect(error.message).to.equal('ARN endpoint is not compatible with FIPS region');
+        expect(error.message).to.equal('FIPS region not allowed in ARN');
       });
 
       it('should use regions from ARN if s3UseArnRegion config is set to false', function(done) {
@@ -336,8 +350,8 @@ describe('AWS.S3Control', function() {
         });
       });
 
-      it('should throw if useDualstack it set to true for outposts Arn', function(done) {
-        var client = new AWS.S3Control({region: 'us-west-2', useDualstack: true});
+      it('should throw if useDualstackEndpoint it set to true for outposts Arn', function(done) {
+        var client = new AWS.S3Control({region: 'us-west-2', useDualstackEndpoint: true});
         helpers.mockHttpResponse(200, {}, '');
         var request = client.getBucket({
           Bucket: 'arn:aws:s3-outposts:us-west-2:123456789012:outpost/op-01234567890123456/accesspoint/myendpoint'
@@ -345,7 +359,7 @@ describe('AWS.S3Control', function() {
         request.send(function(err, data) {
           expect(err).to.exist;
           expect(err.name).to.equal('InvalidConfiguration');
-          expect(err.message).to.equal('useDualstack config is not supported with outposts access point ARN');
+          expect(err.message).to.equal('Dualstack is not supported with outposts access point ARN');
           done();
         });
       });

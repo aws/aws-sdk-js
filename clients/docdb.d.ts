@@ -21,11 +21,11 @@ declare class DocDB extends Service {
    */
   addSourceIdentifierToSubscription(callback?: (err: AWSError, data: DocDB.Types.AddSourceIdentifierToSubscriptionResult) => void): Request<DocDB.Types.AddSourceIdentifierToSubscriptionResult, AWSError>;
   /**
-   * Adds metadata tags to an Amazon DocumentDB resource. You can use these tags with cost allocation reporting to track costs that are associated with Amazon DocumentDB resources. or in a Condition statement in an AWS Identity and Access Management (IAM) policy for Amazon DocumentDB.
+   * Adds metadata tags to an Amazon DocumentDB resource. You can use these tags with cost allocation reporting to track costs that are associated with Amazon DocumentDB resources or in a Condition statement in an Identity and Access Management (IAM) policy for Amazon DocumentDB.
    */
   addTagsToResource(params: DocDB.Types.AddTagsToResourceMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Adds metadata tags to an Amazon DocumentDB resource. You can use these tags with cost allocation reporting to track costs that are associated with Amazon DocumentDB resources. or in a Condition statement in an AWS Identity and Access Management (IAM) policy for Amazon DocumentDB.
+   * Adds metadata tags to an Amazon DocumentDB resource. You can use these tags with cost allocation reporting to track costs that are associated with Amazon DocumentDB resources or in a Condition statement in an Identity and Access Management (IAM) policy for Amazon DocumentDB.
    */
   addTagsToResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -45,11 +45,11 @@ declare class DocDB extends Service {
    */
   copyDBClusterParameterGroup(callback?: (err: AWSError, data: DocDB.Types.CopyDBClusterParameterGroupResult) => void): Request<DocDB.Types.CopyDBClusterParameterGroupResult, AWSError>;
   /**
-   * Copies a snapshot of a cluster. To copy a cluster snapshot from a shared manual cluster snapshot, SourceDBClusterSnapshotIdentifier must be the Amazon Resource Name (ARN) of the shared cluster snapshot. You can only copy a shared DB cluster snapshot, whether encrypted or not, in the same AWS Region. To cancel the copy operation after it is in progress, delete the target cluster snapshot identified by TargetDBClusterSnapshotIdentifier while that cluster snapshot is in the copying status.
+   * Copies a snapshot of a cluster. To copy a cluster snapshot from a shared manual cluster snapshot, SourceDBClusterSnapshotIdentifier must be the Amazon Resource Name (ARN) of the shared cluster snapshot. You can only copy a shared DB cluster snapshot, whether encrypted or not, in the same Region. To cancel the copy operation after it is in progress, delete the target cluster snapshot identified by TargetDBClusterSnapshotIdentifier while that cluster snapshot is in the copying status.
    */
   copyDBClusterSnapshot(params: DocDB.Types.CopyDBClusterSnapshotMessage, callback?: (err: AWSError, data: DocDB.Types.CopyDBClusterSnapshotResult) => void): Request<DocDB.Types.CopyDBClusterSnapshotResult, AWSError>;
   /**
-   * Copies a snapshot of a cluster. To copy a cluster snapshot from a shared manual cluster snapshot, SourceDBClusterSnapshotIdentifier must be the Amazon Resource Name (ARN) of the shared cluster snapshot. You can only copy a shared DB cluster snapshot, whether encrypted or not, in the same AWS Region. To cancel the copy operation after it is in progress, delete the target cluster snapshot identified by TargetDBClusterSnapshotIdentifier while that cluster snapshot is in the copying status.
+   * Copies a snapshot of a cluster. To copy a cluster snapshot from a shared manual cluster snapshot, SourceDBClusterSnapshotIdentifier must be the Amazon Resource Name (ARN) of the shared cluster snapshot. You can only copy a shared DB cluster snapshot, whether encrypted or not, in the same Region. To cancel the copy operation after it is in progress, delete the target cluster snapshot identified by TargetDBClusterSnapshotIdentifier while that cluster snapshot is in the copying status.
    */
   copyDBClusterSnapshot(callback?: (err: AWSError, data: DocDB.Types.CopyDBClusterSnapshotResult) => void): Request<DocDB.Types.CopyDBClusterSnapshotResult, AWSError>;
   /**
@@ -85,11 +85,11 @@ declare class DocDB extends Service {
    */
   createDBInstance(callback?: (err: AWSError, data: DocDB.Types.CreateDBInstanceResult) => void): Request<DocDB.Types.CreateDBInstanceResult, AWSError>;
   /**
-   * Creates a new subnet group. subnet groups must contain at least one subnet in at least two Availability Zones in the AWS Region.
+   * Creates a new subnet group. subnet groups must contain at least one subnet in at least two Availability Zones in the Region.
    */
   createDBSubnetGroup(params: DocDB.Types.CreateDBSubnetGroupMessage, callback?: (err: AWSError, data: DocDB.Types.CreateDBSubnetGroupResult) => void): Request<DocDB.Types.CreateDBSubnetGroupResult, AWSError>;
   /**
-   * Creates a new subnet group. subnet groups must contain at least one subnet in at least two Availability Zones in the AWS Region.
+   * Creates a new subnet group. subnet groups must contain at least one subnet in at least two Availability Zones in the Region.
    */
   createDBSubnetGroup(callback?: (err: AWSError, data: DocDB.Types.CreateDBSubnetGroupResult) => void): Request<DocDB.Types.CreateDBSubnetGroupResult, AWSError>;
   /**
@@ -100,6 +100,14 @@ declare class DocDB extends Service {
    * Creates an Amazon DocumentDB event notification subscription. This action requires a topic Amazon Resource Name (ARN) created by using the Amazon DocumentDB console, the Amazon SNS console, or the Amazon SNS API. To obtain an ARN with Amazon SNS, you must create a topic in Amazon SNS and subscribe to the topic. The ARN is displayed in the Amazon SNS console. You can specify the type of source (SourceType) that you want to be notified of. You can also provide a list of Amazon DocumentDB sources (SourceIds) that trigger the events, and you can provide a list of event categories (EventCategories) for events that you want to be notified of. For example, you can specify SourceType = db-instance, SourceIds = mydbinstance1, mydbinstance2 and EventCategories = Availability, Backup. If you specify both the SourceType and SourceIds (such as SourceType = db-instance and SourceIdentifier = myDBInstance1), you are notified of all the db-instance events for the specified source. If you specify a SourceType but do not specify a SourceIdentifier, you receive notice of the events for that source type for all your Amazon DocumentDB sources. If you do not specify either the SourceType or the SourceIdentifier, you are notified of events generated from all Amazon DocumentDB sources belonging to your customer account.
    */
   createEventSubscription(callback?: (err: AWSError, data: DocDB.Types.CreateEventSubscriptionResult) => void): Request<DocDB.Types.CreateEventSubscriptionResult, AWSError>;
+  /**
+   * Creates an Amazon DocumentDB global cluster that can span multiple multiple Regions. The global cluster contains one primary cluster with read-write capability, and up-to give read-only secondary clusters. Global clusters uses storage-based fast replication across regions with latencies less than one second, using dedicated infrastructure with no impact to your workload’s performance.  You can create a global cluster that is initially empty, and then add a primary and a secondary to it. Or you can specify an existing cluster during the create operation, and this cluster becomes the primary of the global cluster.   This action only applies to Amazon DocumentDB clusters. 
+   */
+  createGlobalCluster(params: DocDB.Types.CreateGlobalClusterMessage, callback?: (err: AWSError, data: DocDB.Types.CreateGlobalClusterResult) => void): Request<DocDB.Types.CreateGlobalClusterResult, AWSError>;
+  /**
+   * Creates an Amazon DocumentDB global cluster that can span multiple multiple Regions. The global cluster contains one primary cluster with read-write capability, and up-to give read-only secondary clusters. Global clusters uses storage-based fast replication across regions with latencies less than one second, using dedicated infrastructure with no impact to your workload’s performance.  You can create a global cluster that is initially empty, and then add a primary and a secondary to it. Or you can specify an existing cluster during the create operation, and this cluster becomes the primary of the global cluster.   This action only applies to Amazon DocumentDB clusters. 
+   */
+  createGlobalCluster(callback?: (err: AWSError, data: DocDB.Types.CreateGlobalClusterResult) => void): Request<DocDB.Types.CreateGlobalClusterResult, AWSError>;
   /**
    * Deletes a previously provisioned cluster. When you delete a cluster, all automated backups for that cluster are deleted and can't be recovered. Manual DB cluster snapshots of the specified cluster are not deleted. 
    */
@@ -125,11 +133,11 @@ declare class DocDB extends Service {
    */
   deleteDBClusterSnapshot(callback?: (err: AWSError, data: DocDB.Types.DeleteDBClusterSnapshotResult) => void): Request<DocDB.Types.DeleteDBClusterSnapshotResult, AWSError>;
   /**
-   * Deletes a previously provisioned instance. 
+   * Deletes a previously provisioned instance.
    */
   deleteDBInstance(params: DocDB.Types.DeleteDBInstanceMessage, callback?: (err: AWSError, data: DocDB.Types.DeleteDBInstanceResult) => void): Request<DocDB.Types.DeleteDBInstanceResult, AWSError>;
   /**
-   * Deletes a previously provisioned instance. 
+   * Deletes a previously provisioned instance.
    */
   deleteDBInstance(callback?: (err: AWSError, data: DocDB.Types.DeleteDBInstanceResult) => void): Request<DocDB.Types.DeleteDBInstanceResult, AWSError>;
   /**
@@ -149,11 +157,19 @@ declare class DocDB extends Service {
    */
   deleteEventSubscription(callback?: (err: AWSError, data: DocDB.Types.DeleteEventSubscriptionResult) => void): Request<DocDB.Types.DeleteEventSubscriptionResult, AWSError>;
   /**
-   * Returns a list of certificate authority (CA) certificates provided by Amazon DocumentDB for this AWS account.
+   * Deletes a global cluster. The primary and secondary clusters must already be detached or deleted before attempting to delete a global cluster.  This action only applies to Amazon DocumentDB clusters. 
+   */
+  deleteGlobalCluster(params: DocDB.Types.DeleteGlobalClusterMessage, callback?: (err: AWSError, data: DocDB.Types.DeleteGlobalClusterResult) => void): Request<DocDB.Types.DeleteGlobalClusterResult, AWSError>;
+  /**
+   * Deletes a global cluster. The primary and secondary clusters must already be detached or deleted before attempting to delete a global cluster.  This action only applies to Amazon DocumentDB clusters. 
+   */
+  deleteGlobalCluster(callback?: (err: AWSError, data: DocDB.Types.DeleteGlobalClusterResult) => void): Request<DocDB.Types.DeleteGlobalClusterResult, AWSError>;
+  /**
+   * Returns a list of certificate authority (CA) certificates provided by Amazon DocumentDB for this account.
    */
   describeCertificates(params: DocDB.Types.DescribeCertificatesMessage, callback?: (err: AWSError, data: DocDB.Types.CertificateMessage) => void): Request<DocDB.Types.CertificateMessage, AWSError>;
   /**
-   * Returns a list of certificate authority (CA) certificates provided by Amazon DocumentDB for this AWS account.
+   * Returns a list of certificate authority (CA) certificates provided by Amazon DocumentDB for this account.
    */
   describeCertificates(callback?: (err: AWSError, data: DocDB.Types.CertificateMessage) => void): Request<DocDB.Types.CertificateMessage, AWSError>;
   /**
@@ -173,11 +189,11 @@ declare class DocDB extends Service {
    */
   describeDBClusterParameters(callback?: (err: AWSError, data: DocDB.Types.DBClusterParameterGroupDetails) => void): Request<DocDB.Types.DBClusterParameterGroupDetails, AWSError>;
   /**
-   * Returns a list of cluster snapshot attribute names and values for a manual DB cluster snapshot. When you share snapshots with other AWS accounts, DescribeDBClusterSnapshotAttributes returns the restore attribute and a list of IDs for the AWS accounts that are authorized to copy or restore the manual cluster snapshot. If all is included in the list of values for the restore attribute, then the manual cluster snapshot is public and can be copied or restored by all AWS accounts.
+   * Returns a list of cluster snapshot attribute names and values for a manual DB cluster snapshot. When you share snapshots with other accounts, DescribeDBClusterSnapshotAttributes returns the restore attribute and a list of IDs for the accounts that are authorized to copy or restore the manual cluster snapshot. If all is included in the list of values for the restore attribute, then the manual cluster snapshot is public and can be copied or restored by all accounts.
    */
   describeDBClusterSnapshotAttributes(params: DocDB.Types.DescribeDBClusterSnapshotAttributesMessage, callback?: (err: AWSError, data: DocDB.Types.DescribeDBClusterSnapshotAttributesResult) => void): Request<DocDB.Types.DescribeDBClusterSnapshotAttributesResult, AWSError>;
   /**
-   * Returns a list of cluster snapshot attribute names and values for a manual DB cluster snapshot. When you share snapshots with other AWS accounts, DescribeDBClusterSnapshotAttributes returns the restore attribute and a list of IDs for the AWS accounts that are authorized to copy or restore the manual cluster snapshot. If all is included in the list of values for the restore attribute, then the manual cluster snapshot is public and can be copied or restored by all AWS accounts.
+   * Returns a list of cluster snapshot attribute names and values for a manual DB cluster snapshot. When you share snapshots with other accounts, DescribeDBClusterSnapshotAttributes returns the restore attribute and a list of IDs for the accounts that are authorized to copy or restore the manual cluster snapshot. If all is included in the list of values for the restore attribute, then the manual cluster snapshot is public and can be copied or restored by all accounts.
    */
   describeDBClusterSnapshotAttributes(callback?: (err: AWSError, data: DocDB.Types.DescribeDBClusterSnapshotAttributesResult) => void): Request<DocDB.Types.DescribeDBClusterSnapshotAttributesResult, AWSError>;
   /**
@@ -253,6 +269,14 @@ declare class DocDB extends Service {
    */
   describeEvents(callback?: (err: AWSError, data: DocDB.Types.EventsMessage) => void): Request<DocDB.Types.EventsMessage, AWSError>;
   /**
+   * Returns information about Amazon DocumentDB global clusters. This API supports pagination.  This action only applies to Amazon DocumentDB clusters. 
+   */
+  describeGlobalClusters(params: DocDB.Types.DescribeGlobalClustersMessage, callback?: (err: AWSError, data: DocDB.Types.GlobalClustersMessage) => void): Request<DocDB.Types.GlobalClustersMessage, AWSError>;
+  /**
+   * Returns information about Amazon DocumentDB global clusters. This API supports pagination.  This action only applies to Amazon DocumentDB clusters. 
+   */
+  describeGlobalClusters(callback?: (err: AWSError, data: DocDB.Types.GlobalClustersMessage) => void): Request<DocDB.Types.GlobalClustersMessage, AWSError>;
+  /**
    * Returns a list of orderable instance options for the specified engine.
    */
   describeOrderableDBInstanceOptions(params: DocDB.Types.DescribeOrderableDBInstanceOptionsMessage, callback?: (err: AWSError, data: DocDB.Types.OrderableDBInstanceOptionsMessage) => void): Request<DocDB.Types.OrderableDBInstanceOptionsMessage, AWSError>;
@@ -301,11 +325,11 @@ declare class DocDB extends Service {
    */
   modifyDBClusterParameterGroup(callback?: (err: AWSError, data: DocDB.Types.DBClusterParameterGroupNameMessage) => void): Request<DocDB.Types.DBClusterParameterGroupNameMessage, AWSError>;
   /**
-   * Adds an attribute and values to, or removes an attribute and values from, a manual DB cluster snapshot. To share a manual cluster snapshot with other AWS accounts, specify restore as the AttributeName, and use the ValuesToAdd parameter to add a list of IDs of the AWS accounts that are authorized to restore the manual cluster snapshot. Use the value all to make the manual cluster snapshot public, which means that it can be copied or restored by all AWS accounts. Do not add the all value for any manual DB cluster snapshots that contain private information that you don't want available to all AWS accounts. If a manual cluster snapshot is encrypted, it can be shared, but only by specifying a list of authorized AWS account IDs for the ValuesToAdd parameter. You can't use all as a value for that parameter in this case.
+   * Adds an attribute and values to, or removes an attribute and values from, a manual cluster snapshot. To share a manual cluster snapshot with other accounts, specify restore as the AttributeName, and use the ValuesToAdd parameter to add a list of IDs of the accounts that are authorized to restore the manual cluster snapshot. Use the value all to make the manual cluster snapshot public, which means that it can be copied or restored by all accounts. Do not add the all value for any manual cluster snapshots that contain private information that you don't want available to all accounts. If a manual cluster snapshot is encrypted, it can be shared, but only by specifying a list of authorized account IDs for the ValuesToAdd parameter. You can't use all as a value for that parameter in this case.
    */
   modifyDBClusterSnapshotAttribute(params: DocDB.Types.ModifyDBClusterSnapshotAttributeMessage, callback?: (err: AWSError, data: DocDB.Types.ModifyDBClusterSnapshotAttributeResult) => void): Request<DocDB.Types.ModifyDBClusterSnapshotAttributeResult, AWSError>;
   /**
-   * Adds an attribute and values to, or removes an attribute and values from, a manual DB cluster snapshot. To share a manual cluster snapshot with other AWS accounts, specify restore as the AttributeName, and use the ValuesToAdd parameter to add a list of IDs of the AWS accounts that are authorized to restore the manual cluster snapshot. Use the value all to make the manual cluster snapshot public, which means that it can be copied or restored by all AWS accounts. Do not add the all value for any manual DB cluster snapshots that contain private information that you don't want available to all AWS accounts. If a manual cluster snapshot is encrypted, it can be shared, but only by specifying a list of authorized AWS account IDs for the ValuesToAdd parameter. You can't use all as a value for that parameter in this case.
+   * Adds an attribute and values to, or removes an attribute and values from, a manual cluster snapshot. To share a manual cluster snapshot with other accounts, specify restore as the AttributeName, and use the ValuesToAdd parameter to add a list of IDs of the accounts that are authorized to restore the manual cluster snapshot. Use the value all to make the manual cluster snapshot public, which means that it can be copied or restored by all accounts. Do not add the all value for any manual cluster snapshots that contain private information that you don't want available to all accounts. If a manual cluster snapshot is encrypted, it can be shared, but only by specifying a list of authorized account IDs for the ValuesToAdd parameter. You can't use all as a value for that parameter in this case.
    */
   modifyDBClusterSnapshotAttribute(callback?: (err: AWSError, data: DocDB.Types.ModifyDBClusterSnapshotAttributeResult) => void): Request<DocDB.Types.ModifyDBClusterSnapshotAttributeResult, AWSError>;
   /**
@@ -317,11 +341,11 @@ declare class DocDB extends Service {
    */
   modifyDBInstance(callback?: (err: AWSError, data: DocDB.Types.ModifyDBInstanceResult) => void): Request<DocDB.Types.ModifyDBInstanceResult, AWSError>;
   /**
-   * Modifies an existing subnet group. subnet groups must contain at least one subnet in at least two Availability Zones in the AWS Region.
+   * Modifies an existing subnet group. subnet groups must contain at least one subnet in at least two Availability Zones in the Region.
    */
   modifyDBSubnetGroup(params: DocDB.Types.ModifyDBSubnetGroupMessage, callback?: (err: AWSError, data: DocDB.Types.ModifyDBSubnetGroupResult) => void): Request<DocDB.Types.ModifyDBSubnetGroupResult, AWSError>;
   /**
-   * Modifies an existing subnet group. subnet groups must contain at least one subnet in at least two Availability Zones in the AWS Region.
+   * Modifies an existing subnet group. subnet groups must contain at least one subnet in at least two Availability Zones in the Region.
    */
   modifyDBSubnetGroup(callback?: (err: AWSError, data: DocDB.Types.ModifyDBSubnetGroupResult) => void): Request<DocDB.Types.ModifyDBSubnetGroupResult, AWSError>;
   /**
@@ -333,6 +357,14 @@ declare class DocDB extends Service {
    */
   modifyEventSubscription(callback?: (err: AWSError, data: DocDB.Types.ModifyEventSubscriptionResult) => void): Request<DocDB.Types.ModifyEventSubscriptionResult, AWSError>;
   /**
+   * Modify a setting for an Amazon DocumentDB global cluster. You can change one or more configuration parameters (for example: deletion protection), or the global cluster identifier by specifying these parameters and the new values in the request.  This action only applies to Amazon DocumentDB clusters. 
+   */
+  modifyGlobalCluster(params: DocDB.Types.ModifyGlobalClusterMessage, callback?: (err: AWSError, data: DocDB.Types.ModifyGlobalClusterResult) => void): Request<DocDB.Types.ModifyGlobalClusterResult, AWSError>;
+  /**
+   * Modify a setting for an Amazon DocumentDB global cluster. You can change one or more configuration parameters (for example: deletion protection), or the global cluster identifier by specifying these parameters and the new values in the request.  This action only applies to Amazon DocumentDB clusters. 
+   */
+  modifyGlobalCluster(callback?: (err: AWSError, data: DocDB.Types.ModifyGlobalClusterResult) => void): Request<DocDB.Types.ModifyGlobalClusterResult, AWSError>;
+  /**
    * You might need to reboot your instance, usually for maintenance reasons. For example, if you make certain changes, or if you change the cluster parameter group that is associated with the instance, you must reboot the instance for the changes to take effect.  Rebooting an instance restarts the database engine service. Rebooting an instance results in a momentary outage, during which the instance status is set to rebooting. 
    */
   rebootDBInstance(params: DocDB.Types.RebootDBInstanceMessage, callback?: (err: AWSError, data: DocDB.Types.RebootDBInstanceResult) => void): Request<DocDB.Types.RebootDBInstanceResult, AWSError>;
@@ -340,6 +372,14 @@ declare class DocDB extends Service {
    * You might need to reboot your instance, usually for maintenance reasons. For example, if you make certain changes, or if you change the cluster parameter group that is associated with the instance, you must reboot the instance for the changes to take effect.  Rebooting an instance restarts the database engine service. Rebooting an instance results in a momentary outage, during which the instance status is set to rebooting. 
    */
   rebootDBInstance(callback?: (err: AWSError, data: DocDB.Types.RebootDBInstanceResult) => void): Request<DocDB.Types.RebootDBInstanceResult, AWSError>;
+  /**
+   * Detaches an Amazon DocumentDB secondary cluster from a global cluster. The cluster becomes a standalone cluster with read-write capability instead of being read-only and receiving data from a primary in a different region.   This action only applies to Amazon DocumentDB clusters. 
+   */
+  removeFromGlobalCluster(params: DocDB.Types.RemoveFromGlobalClusterMessage, callback?: (err: AWSError, data: DocDB.Types.RemoveFromGlobalClusterResult) => void): Request<DocDB.Types.RemoveFromGlobalClusterResult, AWSError>;
+  /**
+   * Detaches an Amazon DocumentDB secondary cluster from a global cluster. The cluster becomes a standalone cluster with read-write capability instead of being read-only and receiving data from a primary in a different region.   This action only applies to Amazon DocumentDB clusters. 
+   */
+  removeFromGlobalCluster(callback?: (err: AWSError, data: DocDB.Types.RemoveFromGlobalClusterResult) => void): Request<DocDB.Types.RemoveFromGlobalClusterResult, AWSError>;
   /**
    * Removes a source identifier from an existing Amazon DocumentDB event notification subscription.
    */
@@ -495,7 +535,7 @@ declare namespace DocDB {
   export type CertificateList = Certificate[];
   export interface CertificateMessage {
     /**
-     * A list of certificates for this AWS account.
+     * A list of certificates for this account.
      */
     Certificates?: CertificateList;
     /**
@@ -515,7 +555,7 @@ declare namespace DocDB {
   }
   export interface CopyDBClusterParameterGroupMessage {
     /**
-     * The identifier or Amazon Resource Name (ARN) for the source cluster parameter group. Constraints:   Must specify a valid cluster parameter group.   If the source cluster parameter group is in the same AWS Region as the copy, specify a valid parameter group identifier; for example, my-db-cluster-param-group, or a valid ARN.   If the source parameter group is in a different AWS Region than the copy, specify a valid cluster parameter group ARN; for example, arn:aws:rds:us-east-1:123456789012:sample-cluster:sample-parameter-group.  
+     * The identifier or Amazon Resource Name (ARN) for the source cluster parameter group. Constraints:   Must specify a valid cluster parameter group.   If the source cluster parameter group is in the same Region as the copy, specify a valid parameter group identifier; for example, my-db-cluster-param-group, or a valid ARN.   If the source parameter group is in a different Region than the copy, specify a valid cluster parameter group ARN; for example, arn:aws:rds:us-east-1:123456789012:sample-cluster:sample-parameter-group.  
      */
     SourceDBClusterParameterGroupIdentifier: String;
     /**
@@ -536,7 +576,7 @@ declare namespace DocDB {
   }
   export interface CopyDBClusterSnapshotMessage {
     /**
-     * The identifier of the cluster snapshot to copy. This parameter is not case sensitive. Constraints:   Must specify a valid system snapshot in the available state.   If the source snapshot is in the same AWS Region as the copy, specify a valid snapshot identifier.   If the source snapshot is in a different AWS Region than the copy, specify a valid cluster snapshot ARN.   Example: my-cluster-snapshot1 
+     * The identifier of the cluster snapshot to copy. This parameter is not case sensitive. Constraints:   Must specify a valid system snapshot in the available state.   If the source snapshot is in the same Region as the copy, specify a valid snapshot identifier.   If the source snapshot is in a different Region than the copy, specify a valid cluster snapshot ARN.   Example: my-cluster-snapshot1 
      */
     SourceDBClusterSnapshotIdentifier: String;
     /**
@@ -544,11 +584,11 @@ declare namespace DocDB {
      */
     TargetDBClusterSnapshotIdentifier: String;
     /**
-     * The AWS KMS key ID for an encrypted cluster snapshot. The AWS KMS key ID is the Amazon Resource Name (ARN), AWS KMS key identifier, or the AWS KMS key alias for the AWS KMS encryption key.  If you copy an encrypted cluster snapshot from your AWS account, you can specify a value for KmsKeyId to encrypt the copy with a new AWS KMS encryption key. If you don't specify a value for KmsKeyId, then the copy of the cluster snapshot is encrypted with the same AWS KMS key as the source cluster snapshot.  If you copy an encrypted cluster snapshot that is shared from another AWS account, then you must specify a value for KmsKeyId. To copy an encrypted cluster snapshot to another AWS Region, set KmsKeyId to the AWS KMS key ID that you want to use to encrypt the copy of the cluster snapshot in the destination Region. AWS KMS encryption keys are specific to the AWS Region that they are created in, and you can't use encryption keys from one AWS Region in another AWS Region. If you copy an unencrypted cluster snapshot and specify a value for the KmsKeyId parameter, an error is returned.
+     * The KMS key ID for an encrypted cluster snapshot. The KMS key ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS key alias for the KMS encryption key.  If you copy an encrypted cluster snapshot from your account, you can specify a value for KmsKeyId to encrypt the copy with a new KMS encryption key. If you don't specify a value for KmsKeyId, then the copy of the cluster snapshot is encrypted with the same KMS key as the source cluster snapshot. If you copy an encrypted cluster snapshot that is shared from another account, then you must specify a value for KmsKeyId. To copy an encrypted cluster snapshot to another Region, set KmsKeyId to the KMS key ID that you want to use to encrypt the copy of the cluster snapshot in the destination Region. KMS encryption keys are specific to the Region that they are created in, and you can't use encryption keys from one Region in another Region. If you copy an unencrypted cluster snapshot and specify a value for the KmsKeyId parameter, an error is returned.
      */
     KmsKeyId?: String;
     /**
-     * The URL that contains a Signature Version 4 signed request for the CopyDBClusterSnapshot API action in the AWS Region that contains the source cluster snapshot to copy. You must use the PreSignedUrl parameter when copying a cluster snapshot from another AWS Region. If you are using an AWS SDK tool or the AWS CLI, you can specify SourceRegion (or --source-region for the AWS CLI) instead of specifying PreSignedUrl manually. Specifying SourceRegion autogenerates a pre-signed URL that is a valid request for the operation that can be executed in the source AWS Region. The presigned URL must be a valid request for the CopyDBClusterSnapshot API action that can be executed in the source AWS Region that contains the cluster snapshot to be copied. The presigned URL request must contain the following parameter values:    SourceRegion - The ID of the region that contains the snapshot to be copied.    SourceDBClusterSnapshotIdentifier - The identifier for the the encrypted cluster snapshot to be copied. This identifier must be in the Amazon Resource Name (ARN) format for the source AWS Region. For example, if you are copying an encrypted cluster snapshot from the us-east-1 AWS Region, then your SourceDBClusterSnapshotIdentifier looks something like the following: arn:aws:rds:us-east-1:12345678012:sample-cluster:sample-cluster-snapshot.    TargetDBClusterSnapshotIdentifier - The identifier for the new cluster snapshot to be created. This parameter isn't case sensitive.  
+     * The URL that contains a Signature Version 4 signed request for theCopyDBClusterSnapshot API action in the Region that contains the source cluster snapshot to copy. You must use the PreSignedUrl parameter when copying a cluster snapshot from another Region. If you are using an Amazon Web Services SDK tool or the CLI, you can specify SourceRegion (or --source-region for the CLI) instead of specifying PreSignedUrl manually. Specifying SourceRegion autogenerates a pre-signed URL that is a valid request for the operation that can be executed in the source Region. The presigned URL must be a valid request for the CopyDBClusterSnapshot API action that can be executed in the source Region that contains the cluster snapshot to be copied. The presigned URL request must contain the following parameter values:    SourceRegion - The ID of the region that contains the snapshot to be copied.    SourceDBClusterSnapshotIdentifier - The identifier for the the encrypted cluster snapshot to be copied. This identifier must be in the Amazon Resource Name (ARN) format for the source Region. For example, if you are copying an encrypted cluster snapshot from the us-east-1 Region, then your SourceDBClusterSnapshotIdentifier looks something like the following: arn:aws:rds:us-east-1:12345678012:sample-cluster:sample-cluster-snapshot.    TargetDBClusterSnapshotIdentifier - The identifier for the new cluster snapshot to be created. This parameter isn't case sensitive.  
      */
     PreSignedUrl?: String;
     /**
@@ -603,17 +643,17 @@ declare namespace DocDB {
     /**
      * The name of the master user for the cluster. Constraints:   Must be from 1 to 63 letters or numbers.   The first character must be a letter.   Cannot be a reserved word for the chosen database engine.   
      */
-    MasterUsername: String;
+    MasterUsername?: String;
     /**
      * The password for the master database user. This password can contain any printable ASCII character except forward slash (/), double quote ("), or the "at" symbol (@). Constraints: Must contain from 8 to 100 characters.
      */
-    MasterUserPassword: String;
+    MasterUserPassword?: String;
     /**
-     * The daily time range during which automated backups are created if automated backups are enabled using the BackupRetentionPeriod parameter.  The default is a 30-minute window selected at random from an 8-hour block of time for each AWS Region.  Constraints:   Must be in the format hh24:mi-hh24:mi.   Must be in Universal Coordinated Time (UTC).   Must not conflict with the preferred maintenance window.    Must be at least 30 minutes.  
+     * The daily time range during which automated backups are created if automated backups are enabled using the BackupRetentionPeriod parameter.  The default is a 30-minute window selected at random from an 8-hour block of time for each Region.  Constraints:   Must be in the format hh24:mi-hh24:mi.   Must be in Universal Coordinated Time (UTC).   Must not conflict with the preferred maintenance window.    Must be at least 30 minutes.  
      */
     PreferredBackupWindow?: String;
     /**
-     * The weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC). Format: ddd:hh24:mi-ddd:hh24:mi  The default is a 30-minute window selected at random from an 8-hour block of time for each AWS Region, occurring on a random day of the week. Valid days: Mon, Tue, Wed, Thu, Fri, Sat, Sun Constraints: Minimum 30-minute window.
+     * The weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC). Format: ddd:hh24:mi-ddd:hh24:mi  The default is a 30-minute window selected at random from an 8-hour block of time for each Region, occurring on a random day of the week. Valid days: Mon, Tue, Wed, Thu, Fri, Sat, Sun Constraints: Minimum 30-minute window.
      */
     PreferredMaintenanceWindow?: String;
     /**
@@ -625,7 +665,7 @@ declare namespace DocDB {
      */
     StorageEncrypted?: BooleanOptional;
     /**
-     * The AWS KMS key identifier for an encrypted cluster. The AWS KMS key identifier is the Amazon Resource Name (ARN) for the AWS KMS encryption key. If you are creating a cluster using the same AWS account that owns the AWS KMS encryption key that is used to encrypt the new cluster, you can use the AWS KMS key alias instead of the ARN for the AWS KMS encryption key. If an encryption key is not specified in KmsKeyId:    If the StorageEncrypted parameter is true, Amazon DocumentDB uses your default encryption key.    AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS Region.
+     * The KMS key identifier for an encrypted cluster. The KMS key identifier is the Amazon Resource Name (ARN) for the KMS encryption key. If you are creating a cluster using the same account that owns the KMS encryption key that is used to encrypt the new cluster, you can use the KMS key alias instead of the ARN for the KMS encryption key. If an encryption key is not specified in KmsKeyId:    If the StorageEncrypted parameter is true, Amazon DocumentDB uses your default encryption key.    KMS creates the default encryption key for your account. Your account has a different default encryption key for each Regions.
      */
     KmsKeyId?: String;
     /**
@@ -640,6 +680,10 @@ declare namespace DocDB {
      * Specifies whether this cluster can be deleted. If DeletionProtection is enabled, the cluster cannot be deleted unless it is modified and DeletionProtection is disabled. DeletionProtection protects clusters from being accidentally deleted.
      */
     DeletionProtection?: BooleanOptional;
+    /**
+     * The cluster identifier of the new global cluster.
+     */
+    GlobalClusterIdentifier?: GlobalClusterIdentifier;
   }
   export interface CreateDBClusterParameterGroupMessage {
     /**
@@ -696,15 +740,15 @@ declare namespace DocDB {
      */
     Engine: String;
     /**
-     * The Amazon EC2 Availability Zone that the instance is created in.  Default: A random, system-chosen Availability Zone in the endpoint's AWS Region. Example: us-east-1d 
+     * The Amazon EC2 Availability Zone that the instance is created in.  Default: A random, system-chosen Availability Zone in the endpoint's Region. Example: us-east-1d 
      */
     AvailabilityZone?: String;
     /**
-     * The time range each week during which system maintenance can occur, in Universal Coordinated Time (UTC).  Format: ddd:hh24:mi-ddd:hh24:mi  The default is a 30-minute window selected at random from an 8-hour block of time for each AWS Region, occurring on a random day of the week.  Valid days: Mon, Tue, Wed, Thu, Fri, Sat, Sun Constraints: Minimum 30-minute window.
+     * The time range each week during which system maintenance can occur, in Universal Coordinated Time (UTC).  Format: ddd:hh24:mi-ddd:hh24:mi  The default is a 30-minute window selected at random from an 8-hour block of time for each Region, occurring on a random day of the week.  Valid days: Mon, Tue, Wed, Thu, Fri, Sat, Sun Constraints: Minimum 30-minute window.
      */
     PreferredMaintenanceWindow?: String;
     /**
-     * Indicates that minor engine upgrades are applied automatically to the instance during the maintenance window. Default: true 
+     * This parameter does not apply to Amazon DocumentDB. Amazon DocumentDB does not perform minor version upgrades regardless of the value set. Default: false 
      */
     AutoMinorVersionUpgrade?: BooleanOptional;
     /**
@@ -754,7 +798,7 @@ declare namespace DocDB {
      */
     SnsTopicArn: String;
     /**
-     * The type of source that is generating the events. For example, if you want to be notified of events generated by an instance, you would set this parameter to db-instance. If this value is not specified, all events are returned. Valid values: db-instance, db-cluster, db-parameter-group, db-security-group, db-snapshot, db-cluster-snapshot 
+     * The type of source that is generating the events. For example, if you want to be notified of events generated by an instance, you would set this parameter to db-instance. If this value is not specified, all events are returned. Valid values: db-instance, db-cluster, db-parameter-group, db-security-group, db-cluster-snapshot 
      */
     SourceType?: String;
     /**
@@ -776,6 +820,39 @@ declare namespace DocDB {
   }
   export interface CreateEventSubscriptionResult {
     EventSubscription?: EventSubscription;
+  }
+  export interface CreateGlobalClusterMessage {
+    /**
+     * The cluster identifier of the new global cluster.
+     */
+    GlobalClusterIdentifier: GlobalClusterIdentifier;
+    /**
+     * The Amazon Resource Name (ARN) to use as the primary cluster of the global cluster. This parameter is optional.
+     */
+    SourceDBClusterIdentifier?: String;
+    /**
+     * The name of the database engine to be used for this cluster.
+     */
+    Engine?: String;
+    /**
+     * The engine version of the global cluster.
+     */
+    EngineVersion?: String;
+    /**
+     * The deletion protection setting for the new global cluster. The global cluster can't be deleted when deletion protection is enabled. 
+     */
+    DeletionProtection?: BooleanOptional;
+    /**
+     * The name for your database of up to 64 alpha-numeric characters. If you do not provide a name, Amazon DocumentDB will not create a database in the global cluster you are creating.
+     */
+    DatabaseName?: String;
+    /**
+     * The storage encryption setting for the new global cluster. 
+     */
+    StorageEncrypted?: BooleanOptional;
+  }
+  export interface CreateGlobalClusterResult {
+    GlobalCluster?: GlobalCluster;
   }
   export interface DBCluster {
     /**
@@ -851,6 +928,14 @@ declare namespace DocDB {
      */
     PreferredMaintenanceWindow?: String;
     /**
+     * Contains the identifier of the source cluster if this cluster is a secondary cluster.
+     */
+    ReplicationSourceIdentifier?: String;
+    /**
+     * Contains one or more identifiers of the secondary clusters that are associated with this cluster.
+     */
+    ReadReplicaIdentifiers?: ReadReplicaIdentifierList;
+    /**
      * Provides the list of instances that make up the cluster.
      */
     DBClusterMembers?: DBClusterMemberList;
@@ -867,11 +952,11 @@ declare namespace DocDB {
      */
     StorageEncrypted?: Boolean;
     /**
-     * If StorageEncrypted is true, the AWS KMS key identifier for the encrypted cluster.
+     * If StorageEncrypted is true, the KMS key identifier for the encrypted cluster.
      */
     KmsKeyId?: String;
     /**
-     * The AWS Region-unique, immutable identifier for the cluster. This identifier is found in AWS CloudTrail log entries whenever the AWS KMS key for the cluster is accessed.
+     * The Region-unique, immutable identifier for the cluster. This identifier is found in CloudTrail log entries whenever the KMS key for the cluster is accessed.
      */
     DbClusterResourceId?: String;
     /**
@@ -879,7 +964,7 @@ declare namespace DocDB {
      */
     DBClusterArn?: String;
     /**
-     * Provides a list of the AWS Identity and Access Management (IAM) roles that are associated with the cluster. IAM roles that are associated with a cluster grant permission for the cluster to access other AWS services on your behalf.
+     * Provides a list of the Identity and Access Management (IAM) roles that are associated with the cluster. (IAM) roles that are associated with a cluster grant permission for the cluster to access other Amazon Web Services services on your behalf.
      */
     AssociatedRoles?: DBClusterRoles;
     /**
@@ -972,11 +1057,11 @@ declare namespace DocDB {
   }
   export interface DBClusterRole {
     /**
-     * The Amazon Resource Name (ARN) of the IAM role that is associated with the DB cluster.
+     * The Amazon Resource Name (ARN) of the IAMrole that is associated with the DB cluster.
      */
     RoleArn?: String;
     /**
-     * Describes the state of association between the IAM role and the cluster. The Status property returns one of the following values:    ACTIVE - The IAM role ARN is associated with the cluster and can be used to access other AWS services on your behalf.    PENDING - The IAM role ARN is being associated with the DB cluster.    INVALID - The IAM role ARN is associated with the cluster, but the cluster cannot assume the IAM role to access other AWS services on your behalf.  
+     * Describes the state of association between the IAMrole and the cluster. The Status property returns one of the following values:    ACTIVE - The IAMrole ARN is associated with the cluster and can be used to access other Amazon Web Services services on your behalf.    PENDING - The IAMrole ARN is being associated with the cluster.    INVALID - The IAMrole ARN is associated with the cluster, but the cluster cannot assume the IAMrole to access other Amazon Web Services services on your behalf.  
      */
     Status?: String;
   }
@@ -1039,7 +1124,7 @@ declare namespace DocDB {
      */
     StorageEncrypted?: Boolean;
     /**
-     * If StorageEncrypted is true, the AWS KMS key identifier for the encrypted cluster snapshot.
+     * If StorageEncrypted is true, the KMS key identifier for the encrypted cluster snapshot.
      */
     KmsKeyId?: String;
     /**
@@ -1053,11 +1138,11 @@ declare namespace DocDB {
   }
   export interface DBClusterSnapshotAttribute {
     /**
-     * The name of the manual cluster snapshot attribute. The attribute named restore refers to the list of AWS accounts that have permission to copy or restore the manual cluster snapshot.
+     * The name of the manual cluster snapshot attribute. The attribute named restore refers to the list of accounts that have permission to copy or restore the manual cluster snapshot.
      */
     AttributeName?: String;
     /**
-     * The values for the manual cluster snapshot attribute. If the AttributeName field is set to restore, then this element returns a list of IDs of the AWS accounts that are authorized to copy or restore the manual cluster snapshot. If a value of all is in the list, then the manual cluster snapshot is public and available for any AWS account to copy or restore.
+     * The values for the manual cluster snapshot attribute. If the AttributeName field is set to restore, then this element returns a list of IDs of the accounts that are authorized to copy or restore the manual cluster snapshot. If a value of all is in the list, then the manual cluster snapshot is public and available for any account to copy or restore.
      */
     AttributeValues?: AttributeValueList;
   }
@@ -1190,7 +1275,7 @@ declare namespace DocDB {
      */
     EngineVersion?: String;
     /**
-     * Indicates that minor version patches are applied automatically.
+     * Does not apply. This parameter does not apply to Amazon DocumentDB. Amazon DocumentDB does not perform minor version upgrades regardless of the value set.
      */
     AutoMinorVersionUpgrade?: Boolean;
     /**
@@ -1210,11 +1295,11 @@ declare namespace DocDB {
      */
     StorageEncrypted?: Boolean;
     /**
-     *  If StorageEncrypted is true, the AWS KMS key identifier for the encrypted instance. 
+     *  If StorageEncrypted is true, the KMS key identifier for the encrypted instance. 
      */
     KmsKeyId?: String;
     /**
-     * The AWS Region-unique, immutable identifier for the instance. This identifier is found in AWS CloudTrail log entries whenever the AWS KMS key for the instance is accessed.
+     * The Region-unique, immutable identifier for the instance. This identifier is found in CloudTrail log entries whenever the KMS key for the instance is accessed.
      */
     DbiResourceId?: String;
     /**
@@ -1230,7 +1315,7 @@ declare namespace DocDB {
      */
     DBInstanceArn?: String;
     /**
-     * A list of log types that this instance is configured to export to Amazon CloudWatch Logs.
+     * A list of log types that this instance is configured to export to CloudWatch Logs.
      */
     EnabledCloudwatchLogsExports?: LogTypeList;
   }
@@ -1357,6 +1442,15 @@ declare namespace DocDB {
   export interface DeleteEventSubscriptionResult {
     EventSubscription?: EventSubscription;
   }
+  export interface DeleteGlobalClusterMessage {
+    /**
+     * The cluster identifier of the global cluster being deleted.
+     */
+    GlobalClusterIdentifier: GlobalClusterIdentifier;
+  }
+  export interface DeleteGlobalClusterResult {
+    GlobalCluster?: GlobalCluster;
+  }
   export interface DescribeCertificatesMessage {
     /**
      * The user-supplied certificate identifier. If this parameter is specified, information for only the specified certificate is returned. If this parameter is omitted, a list of up to MaxRecords certificates is returned. This parameter is not case sensitive. Constraints   Must match an existing CertificateIdentifier.  
@@ -1434,7 +1528,7 @@ declare namespace DocDB {
      */
     DBClusterSnapshotIdentifier?: String;
     /**
-     * The type of cluster snapshots to be returned. You can specify one of the following values:    automated - Return all cluster snapshots that Amazon DocumentDB has automatically created for your AWS account.    manual - Return all cluster snapshots that you have manually created for your AWS account.    shared - Return all manual cluster snapshots that have been shared to your AWS account.    public - Return all cluster snapshots that have been marked as public.   If you don't specify a SnapshotType value, then both automated and manual cluster snapshots are returned. You can include shared cluster snapshots with these results by setting the IncludeShared parameter to true. You can include public cluster snapshots with these results by setting the IncludePublic parameter to true. The IncludeShared and IncludePublic parameters don't apply for SnapshotType values of manual or automated. The IncludePublic parameter doesn't apply when SnapshotType is set to shared. The IncludeShared parameter doesn't apply when SnapshotType is set to public.
+     * The type of cluster snapshots to be returned. You can specify one of the following values:    automated - Return all cluster snapshots that Amazon DocumentDB has automatically created for your account.    manual - Return all cluster snapshots that you have manually created for your account.    shared - Return all manual cluster snapshots that have been shared to your account.    public - Return all cluster snapshots that have been marked as public.   If you don't specify a SnapshotType value, then both automated and manual cluster snapshots are returned. You can include shared cluster snapshots with these results by setting the IncludeShared parameter to true. You can include public cluster snapshots with these results by setting theIncludePublic parameter to true. The IncludeShared and IncludePublic parameters don't apply for SnapshotType values of manual or automated. The IncludePublic parameter doesn't apply when SnapshotType is set to shared. The IncludeShared parameter doesn't apply when SnapshotType is set to public.
      */
     SnapshotType?: String;
     /**
@@ -1450,11 +1544,11 @@ declare namespace DocDB {
      */
     Marker?: String;
     /**
-     * Set to true to include shared manual cluster snapshots from other AWS accounts that this AWS account has been given permission to copy or restore, and otherwise false. The default is false.
+     * Set to true to include shared manual cluster snapshots from other accounts that this account has been given permission to copy or restore, and otherwise false. The default is false.
      */
     IncludeShared?: Boolean;
     /**
-     * Set to true to include manual cluster snapshots that are public and can be copied or restored by any AWS account, and otherwise false. The default is false.
+     * Set to true to include manual cluster snapshots that are public and can be copied or restored by any account, and otherwise false. The default is false.
      */
     IncludePublic?: Boolean;
   }
@@ -1573,7 +1667,7 @@ declare namespace DocDB {
   }
   export interface DescribeEventCategoriesMessage {
     /**
-     * The type of source that is generating the events. Valid values: db-instance, db-parameter-group, db-security-group, db-snapshot 
+     * The type of source that is generating the events. Valid values: db-instance, db-parameter-group, db-security-group 
      */
     SourceType?: String;
     /**
@@ -1634,6 +1728,24 @@ declare namespace DocDB {
     MaxRecords?: IntegerOptional;
     /**
      * An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
+     */
+    Marker?: String;
+  }
+  export interface DescribeGlobalClustersMessage {
+    /**
+     * The user-supplied cluster identifier. If this parameter is specified, information from only the specific cluster is returned. This parameter isn't case-sensitive.
+     */
+    GlobalClusterIdentifier?: GlobalClusterIdentifier;
+    /**
+     * A filter that specifies one or more global DB clusters to describe. Supported filters: db-cluster-id accepts cluster identifiers and cluster Amazon Resource Names (ARNs). The results list will only include information about the clusters identified by these ARNs.
+     */
+    Filters?: FilterList;
+    /**
+     * The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. 
+     */
+    MaxRecords?: IntegerOptional;
+    /**
+     * An optional pagination token provided by a previous DescribeGlobalClusters request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
      */
     Marker?: String;
   }
@@ -1764,7 +1876,7 @@ declare namespace DocDB {
   export type EventList = Event[];
   export interface EventSubscription {
     /**
-     * The AWS customer account that is associated with the Amazon DocumentDB event notification subscription.
+     * The Amazon Web Services customer account that is associated with the Amazon DocumentDB event notification subscription.
      */
     CustomerAwsId?: String;
     /**
@@ -1850,6 +1962,75 @@ declare namespace DocDB {
   }
   export type FilterList = Filter[];
   export type FilterValueList = String[];
+  export interface GlobalCluster {
+    /**
+     * Contains a user-supplied global cluster identifier. This identifier is the unique key that identifies a global cluster. 
+     */
+    GlobalClusterIdentifier?: GlobalClusterIdentifier;
+    /**
+     * The Region-unique, immutable identifier for the global database cluster. This identifier is found in AWS CloudTrail log entries whenever the AWS KMS customer master key (CMK) for the cluster is accessed. 
+     */
+    GlobalClusterResourceId?: String;
+    /**
+     * The Amazon Resource Name (ARN) for the global cluster.
+     */
+    GlobalClusterArn?: String;
+    /**
+     * Specifies the current state of this global cluster.
+     */
+    Status?: String;
+    /**
+     * The Amazon DocumentDB database engine used by the global cluster. 
+     */
+    Engine?: String;
+    /**
+     * Indicates the database engine version.
+     */
+    EngineVersion?: String;
+    /**
+     * The default database name within the new global cluster.
+     */
+    DatabaseName?: String;
+    /**
+     * The storage encryption setting for the global cluster.
+     */
+    StorageEncrypted?: BooleanOptional;
+    /**
+     * The deletion protection setting for the new global cluster.
+     */
+    DeletionProtection?: BooleanOptional;
+    /**
+     * The list of cluster IDs for secondary clusters within the global cluster. Currently limited to one item. 
+     */
+    GlobalClusterMembers?: GlobalClusterMemberList;
+  }
+  export type GlobalClusterIdentifier = string;
+  export type GlobalClusterList = GlobalCluster[];
+  export interface GlobalClusterMember {
+    /**
+     * The Amazon Resource Name (ARN) for each Amazon DocumentDB cluster.
+     */
+    DBClusterArn?: String;
+    /**
+     * The Amazon Resource Name (ARN) for each read-only secondary cluster associated with the Aurora global cluster.
+     */
+    Readers?: ReadersArnList;
+    /**
+     *  Specifies whether the Amazon DocumentDB cluster is the primary cluster (that is, has read-write capability) for the Amazon DocumentDB global cluster with which it is associated. 
+     */
+    IsWriter?: Boolean;
+  }
+  export type GlobalClusterMemberList = GlobalClusterMember[];
+  export interface GlobalClustersMessage {
+    /**
+     * 
+     */
+    Marker?: String;
+    /**
+     * 
+     */
+    GlobalClusters?: GlobalClusterList;
+  }
   export type Integer = number;
   export type IntegerOptional = number;
   export type KeyList = String[];
@@ -1898,11 +2079,11 @@ declare namespace DocDB {
      */
     MasterUserPassword?: String;
     /**
-     * The daily time range during which automated backups are created if automated backups are enabled, using the BackupRetentionPeriod parameter.  The default is a 30-minute window selected at random from an 8-hour block of time for each AWS Region.  Constraints:   Must be in the format hh24:mi-hh24:mi.   Must be in Universal Coordinated Time (UTC).   Must not conflict with the preferred maintenance window.   Must be at least 30 minutes.  
+     * The daily time range during which automated backups are created if automated backups are enabled, using the BackupRetentionPeriod parameter.  The default is a 30-minute window selected at random from an 8-hour block of time for each Region.  Constraints:   Must be in the format hh24:mi-hh24:mi.   Must be in Universal Coordinated Time (UTC).   Must not conflict with the preferred maintenance window.   Must be at least 30 minutes.  
      */
     PreferredBackupWindow?: String;
     /**
-     * The weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC). Format: ddd:hh24:mi-ddd:hh24:mi  The default is a 30-minute window selected at random from an 8-hour block of time for each AWS Region, occurring on a random day of the week.  Valid days: Mon, Tue, Wed, Thu, Fri, Sat, Sun Constraints: Minimum 30-minute window.
+     * The weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC). Format: ddd:hh24:mi-ddd:hh24:mi  The default is a 30-minute window selected at random from an 8-hour block of time for each Region, occurring on a random day of the week.  Valid days: Mon, Tue, Wed, Thu, Fri, Sat, Sun Constraints: Minimum 30-minute window.
      */
     PreferredMaintenanceWindow?: String;
     /**
@@ -1910,7 +2091,7 @@ declare namespace DocDB {
      */
     CloudwatchLogsExportConfiguration?: CloudwatchLogsExportConfiguration;
     /**
-     * The version number of the database engine to which you want to upgrade. Changing this parameter results in an outage. The change is applied during the next maintenance window unless the ApplyImmediately parameter is set to true.
+     * The version number of the database engine to which you want to upgrade. Modifying engine version is not supported on Amazon DocumentDB.
      */
     EngineVersion?: String;
     /**
@@ -1937,15 +2118,15 @@ declare namespace DocDB {
      */
     DBClusterSnapshotIdentifier: String;
     /**
-     * The name of the cluster snapshot attribute to modify. To manage authorization for other AWS accounts to copy or restore a manual cluster snapshot, set this value to restore.
+     * The name of the cluster snapshot attribute to modify. To manage authorization for other accounts to copy or restore a manual cluster snapshot, set this value to restore.
      */
     AttributeName: String;
     /**
-     * A list of cluster snapshot attributes to add to the attribute specified by AttributeName. To authorize other AWS accounts to copy or restore a manual cluster snapshot, set this list to include one or more AWS account IDs. To make the manual cluster snapshot restorable by any AWS account, set it to all. Do not add the all value for any manual cluster snapshots that contain private information that you don't want to be available to all AWS accounts.
+     * A list of cluster snapshot attributes to add to the attribute specified by AttributeName. To authorize other accounts to copy or restore a manual cluster snapshot, set this list to include one or more account IDs. To make the manual cluster snapshot restorable by any account, set it to all. Do not add the all value for any manual cluster snapshots that contain private information that you don't want to be available to all accounts.
      */
     ValuesToAdd?: AttributeValueList;
     /**
-     * A list of cluster snapshot attributes to remove from the attribute specified by AttributeName. To remove authorization for other AWS accounts to copy or restore a manual cluster snapshot, set this list to include one or more AWS account identifiers. To remove authorization for any AWS account to copy or restore the cluster snapshot, set it to all . If you specify all, an AWS account whose account ID is explicitly added to the restore attribute can still copy or restore a manual cluster snapshot.
+     * A list of cluster snapshot attributes to remove from the attribute specified by AttributeName. To remove authorization for other accounts to copy or restore a manual cluster snapshot, set this list to include one or more account identifiers. To remove authorization for any account to copy or restore the cluster snapshot, set it to all . If you specify all, an account whose account ID is explicitly added to the restore attribute can still copy or restore a manual cluster snapshot.
      */
     ValuesToRemove?: AttributeValueList;
   }
@@ -1958,7 +2139,7 @@ declare namespace DocDB {
      */
     DBInstanceIdentifier: String;
     /**
-     * The new compute and memory capacity of the instance; for example, db.r5.large. Not all instance classes are available in all AWS Regions.  If you modify the instance class, an outage occurs during the change. The change is applied during the next maintenance window, unless ApplyImmediately is specified as true for this request.  Default: Uses existing setting.
+     * The new compute and memory capacity of the instance; for example, db.r5.large. Not all instance classes are available in all Regions.  If you modify the instance class, an outage occurs during the change. The change is applied during the next maintenance window, unless ApplyImmediately is specified as true for this request.  Default: Uses existing setting.
      */
     DBInstanceClass?: String;
     /**
@@ -1970,7 +2151,7 @@ declare namespace DocDB {
      */
     PreferredMaintenanceWindow?: String;
     /**
-     * Indicates that minor version upgrades are applied automatically to the instance during the maintenance window. Changing this parameter doesn't result in an outage except in the following case, and the change is asynchronously applied as soon as possible. An outage results if this parameter is set to true during the maintenance window, and a newer minor version is available, and Amazon DocumentDB has enabled automatic patching for that engine version. 
+     * This parameter does not apply to Amazon DocumentDB. Amazon DocumentDB does not perform minor version upgrades regardless of the value set.
      */
     AutoMinorVersionUpgrade?: BooleanOptional;
     /**
@@ -2016,7 +2197,7 @@ declare namespace DocDB {
      */
     SnsTopicArn?: String;
     /**
-     * The type of source that is generating the events. For example, if you want to be notified of events generated by an instance, set this parameter to db-instance. If this value is not specified, all events are returned. Valid values: db-instance, db-parameter-group, db-security-group, db-snapshot 
+     * The type of source that is generating the events. For example, if you want to be notified of events generated by an instance, set this parameter to db-instance. If this value is not specified, all events are returned. Valid values: db-instance, db-parameter-group, db-security-group 
      */
     SourceType?: String;
     /**
@@ -2030,6 +2211,23 @@ declare namespace DocDB {
   }
   export interface ModifyEventSubscriptionResult {
     EventSubscription?: EventSubscription;
+  }
+  export interface ModifyGlobalClusterMessage {
+    /**
+     * The identifier for the global cluster being modified. This parameter isn't case-sensitive. Constraints:   Must match the identifier of an existing global cluster.  
+     */
+    GlobalClusterIdentifier: GlobalClusterIdentifier;
+    /**
+     * The new identifier for a global cluster when you modify a global cluster. This value is stored as a lowercase string.   Must contain from 1 to 63 letters, numbers, or hyphens The first character must be a letter Can't end with a hyphen or contain two consecutive hyphens   Example: my-cluster2 
+     */
+    NewGlobalClusterIdentifier?: GlobalClusterIdentifier;
+    /**
+     * Indicates if the global cluster has deletion protection enabled. The global cluster can't be deleted when deletion protection is enabled. 
+     */
+    DeletionProtection?: BooleanOptional;
+  }
+  export interface ModifyGlobalClusterResult {
+    GlobalCluster?: GlobalCluster;
   }
   export interface OrderableDBInstanceOption {
     /**
@@ -2217,6 +2415,8 @@ declare namespace DocDB {
      */
     PendingCloudwatchLogsExports?: PendingCloudwatchLogsExports;
   }
+  export type ReadReplicaIdentifierList = String[];
+  export type ReadersArnList = String[];
   export interface RebootDBInstanceMessage {
     /**
      * The instance identifier. This parameter is stored as a lowercase string. Constraints:   Must match the identifier of an existing DBInstance.  
@@ -2229,6 +2429,19 @@ declare namespace DocDB {
   }
   export interface RebootDBInstanceResult {
     DBInstance?: DBInstance;
+  }
+  export interface RemoveFromGlobalClusterMessage {
+    /**
+     * The cluster identifier to detach from the Amazon DocumentDB global cluster. 
+     */
+    GlobalClusterIdentifier: GlobalClusterIdentifier;
+    /**
+     * The Amazon Resource Name (ARN) identifying the cluster that was detached from the Amazon DocumentDB global cluster. 
+     */
+    DbClusterIdentifier: String;
+  }
+  export interface RemoveFromGlobalClusterResult {
+    GlobalCluster?: GlobalCluster;
   }
   export interface RemoveSourceIdentifierFromSubscriptionMessage {
     /**
@@ -2315,7 +2528,7 @@ declare namespace DocDB {
      */
     Tags?: TagList;
     /**
-     * The AWS KMS key identifier to use when restoring an encrypted cluster from a DB snapshot or cluster snapshot. The AWS KMS key identifier is the Amazon Resource Name (ARN) for the AWS KMS encryption key. If you are restoring a cluster with the same AWS account that owns the AWS KMS encryption key used to encrypt the new cluster, then you can use the AWS KMS key alias instead of the ARN for the AWS KMS encryption key. If you do not specify a value for the KmsKeyId parameter, then the following occurs:   If the snapshot or cluster snapshot in SnapshotIdentifier is encrypted, then the restored cluster is encrypted using the AWS KMS key that was used to encrypt the snapshot or the cluster snapshot.   If the snapshot or the cluster snapshot in SnapshotIdentifier is not encrypted, then the restored DB cluster is not encrypted.  
+     * The KMS key identifier to use when restoring an encrypted cluster from a DB snapshot or cluster snapshot. The KMS key identifier is the Amazon Resource Name (ARN) for the KMS encryption key. If you are restoring a cluster with the same account that owns the KMS encryption key used to encrypt the new cluster, then you can use the KMS key alias instead of the ARN for the KMS encryption key. If you do not specify a value for the KmsKeyId parameter, then the following occurs:   If the snapshot or cluster snapshot in SnapshotIdentifier is encrypted, then the restored cluster is encrypted using the KMS key that was used to encrypt the snapshot or the cluster snapshot.   If the snapshot or the cluster snapshot in SnapshotIdentifier is not encrypted, then the restored DB cluster is not encrypted.  
      */
     KmsKeyId?: String;
     /**
@@ -2364,7 +2577,7 @@ declare namespace DocDB {
      */
     Tags?: TagList;
     /**
-     * The AWS KMS key identifier to use when restoring an encrypted cluster from an encrypted cluster. The AWS KMS key identifier is the Amazon Resource Name (ARN) for the AWS KMS encryption key. If you are restoring a cluster with the same AWS account that owns the AWS KMS encryption key used to encrypt the new cluster, then you can use the AWS KMS key alias instead of the ARN for the AWS KMS encryption key. You can restore to a new cluster and encrypt the new cluster with an AWS KMS key that is different from the AWS KMS key used to encrypt the source cluster. The new DB cluster is encrypted with the AWS KMS key identified by the KmsKeyId parameter. If you do not specify a value for the KmsKeyId parameter, then the following occurs:   If the cluster is encrypted, then the restored cluster is encrypted using the AWS KMS key that was used to encrypt the source cluster.   If the cluster is not encrypted, then the restored cluster is not encrypted.   If DBClusterIdentifier refers to a cluster that is not encrypted, then the restore request is rejected.
+     * The KMS key identifier to use when restoring an encrypted cluster from an encrypted cluster. The KMS key identifier is the Amazon Resource Name (ARN) for the KMS encryption key. If you are restoring a cluster with the same account that owns the KMS encryption key used to encrypt the new cluster, then you can use the KMS key alias instead of the ARN for the KMS encryption key. You can restore to a new cluster and encrypt the new cluster with an KMS key that is different from the KMS key used to encrypt the source cluster. The new DB cluster is encrypted with the KMS key identified by the KmsKeyId parameter. If you do not specify a value for the KmsKeyId parameter, then the following occurs:   If the cluster is encrypted, then the restored cluster is encrypted using the KMS key that was used to encrypt the source cluster.   If the cluster is not encrypted, then the restored cluster is not encrypted.   If DBClusterIdentifier refers to a cluster that is not encrypted, then the restore request is rejected.
      */
     KmsKeyId?: String;
     /**

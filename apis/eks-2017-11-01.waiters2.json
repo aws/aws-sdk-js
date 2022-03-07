@@ -44,6 +44,12 @@
           "argument": "cluster.status"
         },
         {
+          "expected": "PENDING",
+          "matcher": "path",
+          "state": "failure",
+          "argument": "cluster.status"
+        },
+        {
           "expected": "ResourceNotFoundException",
           "matcher": "error",
           "state": "success"
@@ -99,6 +105,12 @@
           "argument": "addon.status"
         },
         {
+          "expected": "DEGRADED",
+          "matcher": "path",
+          "state": "failure",
+          "argument": "addon.status"
+        },
+        {
           "expected": "ACTIVE",
           "matcher": "path",
           "state": "success",
@@ -116,6 +128,43 @@
           "matcher": "path",
           "state": "failure",
           "argument": "addon.status"
+        },
+        {
+          "expected": "ResourceNotFoundException",
+          "matcher": "error",
+          "state": "success"
+        }
+      ]
+    },
+    "FargateProfileActive": {
+      "delay": 10,
+      "operation": "DescribeFargateProfile",
+      "maxAttempts": 60,
+      "acceptors": [
+        {
+          "expected": "CREATE_FAILED",
+          "matcher": "path",
+          "state": "failure",
+          "argument": "fargateProfile.status"
+        },
+        {
+          "expected": "ACTIVE",
+          "matcher": "path",
+          "state": "success",
+          "argument": "fargateProfile.status"
+        }
+      ]
+    },
+    "FargateProfileDeleted": {
+      "delay": 30,
+      "operation": "DescribeFargateProfile",
+      "maxAttempts": 60,
+      "acceptors": [
+        {
+          "expected": "DELETE_FAILED",
+          "matcher": "path",
+          "state": "failure",
+          "argument": "fargateProfile.status"
         },
         {
           "expected": "ResourceNotFoundException",

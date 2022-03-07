@@ -1,11 +1,21 @@
 {
   "pagination": {
+    "ListAggregatedUtterances": {
+      "input_token": "nextToken",
+      "output_token": "nextToken",
+      "limit_key": "maxResults"
+    },
     "ListBotAliases": {
       "input_token": "nextToken",
       "output_token": "nextToken",
       "limit_key": "maxResults"
     },
     "ListBotLocales": {
+      "input_token": "nextToken",
+      "output_token": "nextToken",
+      "limit_key": "maxResults"
+    },
+    "ListBotRecommendations": {
       "input_token": "nextToken",
       "output_token": "nextToken",
       "limit_key": "maxResults"
@@ -30,7 +40,22 @@
       "output_token": "nextToken",
       "limit_key": "maxResults"
     },
+    "ListExports": {
+      "input_token": "nextToken",
+      "output_token": "nextToken",
+      "limit_key": "maxResults"
+    },
+    "ListImports": {
+      "input_token": "nextToken",
+      "output_token": "nextToken",
+      "limit_key": "maxResults"
+    },
     "ListIntents": {
+      "input_token": "nextToken",
+      "output_token": "nextToken",
+      "limit_key": "maxResults"
+    },
+    "ListRecommendedIntents": {
       "input_token": "nextToken",
       "output_token": "nextToken",
       "limit_key": "maxResults"

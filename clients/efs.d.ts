@@ -20,11 +20,11 @@ declare class EFS extends Service {
    */
   createAccessPoint(callback?: (err: AWSError, data: EFS.Types.AccessPointDescription) => void): Request<EFS.Types.AccessPointDescription, AWSError>;
   /**
-   * Creates a new, empty file system. The operation requires a creation token in the request that Amazon EFS uses to ensure idempotent creation (calling the operation with same creation token has no effect). If a file system does not currently exist that is owned by the caller's AWS account with the specified creation token, this operation does the following:   Creates a new, empty file system. The file system will have an Amazon EFS assigned ID, and an initial lifecycle state creating.   Returns with the description of the created file system.   Otherwise, this operation returns a FileSystemAlreadyExists error with the ID of the existing file system.  For basic use cases, you can use a randomly generated UUID for the creation token.   The idempotent operation allows you to retry a CreateFileSystem call without risk of creating an extra file system. This can happen when an initial call fails in a way that leaves it uncertain whether or not a file system was actually created. An example might be that a transport level timeout occurred or your connection was reset. As long as you use the same creation token, if the initial call had succeeded in creating a file system, the client can learn of its existence from the FileSystemAlreadyExists error. For more information, see Creating a file system in the Amazon EFS User Guide.  The CreateFileSystem call returns while the file system's lifecycle state is still creating. You can check the file system creation status by calling the DescribeFileSystems operation, which among other things returns the file system state.  This operation accepts an optional PerformanceMode parameter that you choose for your file system. We recommend generalPurpose performance mode for most file systems. File systems using the maxIO performance mode can scale to higher levels of aggregate throughput and operations per second with a tradeoff of slightly higher latencies for most file operations. The performance mode can't be changed after the file system has been created. For more information, see Amazon EFS performance modes. You can set the throughput mode for the file system using the ThroughputMode parameter. After the file system is fully created, Amazon EFS sets its lifecycle state to available, at which point you can create one or more mount targets for the file system in your VPC. For more information, see CreateMountTarget. You mount your Amazon EFS file system on an EC2 instances in your VPC by using the mount target. For more information, see Amazon EFS: How it Works.   This operation requires permissions for the elasticfilesystem:CreateFileSystem action. 
+   * Creates a new, empty file system. The operation requires a creation token in the request that Amazon EFS uses to ensure idempotent creation (calling the operation with same creation token has no effect). If a file system does not currently exist that is owned by the caller's Amazon Web Services account with the specified creation token, this operation does the following:   Creates a new, empty file system. The file system will have an Amazon EFS assigned ID, and an initial lifecycle state creating.   Returns with the description of the created file system.   Otherwise, this operation returns a FileSystemAlreadyExists error with the ID of the existing file system.  For basic use cases, you can use a randomly generated UUID for the creation token.   The idempotent operation allows you to retry a CreateFileSystem call without risk of creating an extra file system. This can happen when an initial call fails in a way that leaves it uncertain whether or not a file system was actually created. An example might be that a transport level timeout occurred or your connection was reset. As long as you use the same creation token, if the initial call had succeeded in creating a file system, the client can learn of its existence from the FileSystemAlreadyExists error. For more information, see Creating a file system in the Amazon EFS User Guide.  The CreateFileSystem call returns while the file system's lifecycle state is still creating. You can check the file system creation status by calling the DescribeFileSystems operation, which among other things returns the file system state.  This operation accepts an optional PerformanceMode parameter that you choose for your file system. We recommend generalPurpose performance mode for most file systems. File systems using the maxIO performance mode can scale to higher levels of aggregate throughput and operations per second with a tradeoff of slightly higher latencies for most file operations. The performance mode can't be changed after the file system has been created. For more information, see Amazon EFS performance modes. You can set the throughput mode for the file system using the ThroughputMode parameter. After the file system is fully created, Amazon EFS sets its lifecycle state to available, at which point you can create one or more mount targets for the file system in your VPC. For more information, see CreateMountTarget. You mount your Amazon EFS file system on an EC2 instances in your VPC by using the mount target. For more information, see Amazon EFS: How it Works.   This operation requires permissions for the elasticfilesystem:CreateFileSystem action. 
    */
   createFileSystem(params: EFS.Types.CreateFileSystemRequest, callback?: (err: AWSError, data: EFS.Types.FileSystemDescription) => void): Request<EFS.Types.FileSystemDescription, AWSError>;
   /**
-   * Creates a new, empty file system. The operation requires a creation token in the request that Amazon EFS uses to ensure idempotent creation (calling the operation with same creation token has no effect). If a file system does not currently exist that is owned by the caller's AWS account with the specified creation token, this operation does the following:   Creates a new, empty file system. The file system will have an Amazon EFS assigned ID, and an initial lifecycle state creating.   Returns with the description of the created file system.   Otherwise, this operation returns a FileSystemAlreadyExists error with the ID of the existing file system.  For basic use cases, you can use a randomly generated UUID for the creation token.   The idempotent operation allows you to retry a CreateFileSystem call without risk of creating an extra file system. This can happen when an initial call fails in a way that leaves it uncertain whether or not a file system was actually created. An example might be that a transport level timeout occurred or your connection was reset. As long as you use the same creation token, if the initial call had succeeded in creating a file system, the client can learn of its existence from the FileSystemAlreadyExists error. For more information, see Creating a file system in the Amazon EFS User Guide.  The CreateFileSystem call returns while the file system's lifecycle state is still creating. You can check the file system creation status by calling the DescribeFileSystems operation, which among other things returns the file system state.  This operation accepts an optional PerformanceMode parameter that you choose for your file system. We recommend generalPurpose performance mode for most file systems. File systems using the maxIO performance mode can scale to higher levels of aggregate throughput and operations per second with a tradeoff of slightly higher latencies for most file operations. The performance mode can't be changed after the file system has been created. For more information, see Amazon EFS performance modes. You can set the throughput mode for the file system using the ThroughputMode parameter. After the file system is fully created, Amazon EFS sets its lifecycle state to available, at which point you can create one or more mount targets for the file system in your VPC. For more information, see CreateMountTarget. You mount your Amazon EFS file system on an EC2 instances in your VPC by using the mount target. For more information, see Amazon EFS: How it Works.   This operation requires permissions for the elasticfilesystem:CreateFileSystem action. 
+   * Creates a new, empty file system. The operation requires a creation token in the request that Amazon EFS uses to ensure idempotent creation (calling the operation with same creation token has no effect). If a file system does not currently exist that is owned by the caller's Amazon Web Services account with the specified creation token, this operation does the following:   Creates a new, empty file system. The file system will have an Amazon EFS assigned ID, and an initial lifecycle state creating.   Returns with the description of the created file system.   Otherwise, this operation returns a FileSystemAlreadyExists error with the ID of the existing file system.  For basic use cases, you can use a randomly generated UUID for the creation token.   The idempotent operation allows you to retry a CreateFileSystem call without risk of creating an extra file system. This can happen when an initial call fails in a way that leaves it uncertain whether or not a file system was actually created. An example might be that a transport level timeout occurred or your connection was reset. As long as you use the same creation token, if the initial call had succeeded in creating a file system, the client can learn of its existence from the FileSystemAlreadyExists error. For more information, see Creating a file system in the Amazon EFS User Guide.  The CreateFileSystem call returns while the file system's lifecycle state is still creating. You can check the file system creation status by calling the DescribeFileSystems operation, which among other things returns the file system state.  This operation accepts an optional PerformanceMode parameter that you choose for your file system. We recommend generalPurpose performance mode for most file systems. File systems using the maxIO performance mode can scale to higher levels of aggregate throughput and operations per second with a tradeoff of slightly higher latencies for most file operations. The performance mode can't be changed after the file system has been created. For more information, see Amazon EFS performance modes. You can set the throughput mode for the file system using the ThroughputMode parameter. After the file system is fully created, Amazon EFS sets its lifecycle state to available, at which point you can create one or more mount targets for the file system in your VPC. For more information, see CreateMountTarget. You mount your Amazon EFS file system on an EC2 instances in your VPC by using the mount target. For more information, see Amazon EFS: How it Works.   This operation requires permissions for the elasticfilesystem:CreateFileSystem action. 
    */
   createFileSystem(callback?: (err: AWSError, data: EFS.Types.FileSystemDescription) => void): Request<EFS.Types.FileSystemDescription, AWSError>;
   /**
@@ -36,11 +36,19 @@ declare class EFS extends Service {
    */
   createMountTarget(callback?: (err: AWSError, data: EFS.Types.MountTargetDescription) => void): Request<EFS.Types.MountTargetDescription, AWSError>;
   /**
-   * Creates or overwrites tags associated with a file system. Each tag is a key-value pair. If a tag key specified in the request already exists on the file system, this operation overwrites its value with the value provided in the request. If you add the Name tag to your file system, Amazon EFS returns it in the response to the DescribeFileSystems operation.  This operation requires permission for the elasticfilesystem:CreateTags action.
+   * Creates a replication configuration that replicates an existing EFS file system to a new, read-only file system. For more information, see Amazon EFS replication. The replication configuration specifies the following:    Source file system - an existing EFS file system that you want replicated. The source file system cannot be a destination file system in an existing replication configuration.    Destination file system configuration - the configuration of the destination file system to which the source file system will be replicated. There can only be one destination file system in a replication configuration.    Amazon Web Services Region - The Amazon Web Services Region in which the destination file system is created. EFS Replication is available in all Amazon Web Services Region that Amazon EFS is available in, except the following regions: Asia Pacific (Hong Kong) Europe (Milan), Middle East (Bahrain), Africa (Cape Town), and Asia Pacific (Jakarta).    Availability zone - If you want the destination file system to use One Zone availability and durability, you must specify the Availability Zone to create the file system in. For more information about EFS storage classes, see  Amazon EFS storage classes in the Amazon EFS User Guide.    Encryption - All destination file systems are created with encryption at rest enabled. You can specify the KMS key that is used to encrypt the destination file system. Your service-managed KMS key for Amazon EFS is used if you don't specify a KMS key. You cannot change this after the file system is created.     The following properties are set by default:    Performance mode - The destination file system's performance mode will match that of the source file system, unless the destination file system uses One Zone storage. In that case, the General Purpose performance mode is used. The Performance mode cannot be changed.    Throughput mode - The destination file system use the Bursting throughput mode by default. You can modify the throughput mode once the file system is created.   The following properties are turned off by default:    Lifecycle management - EFS lifecycle management and intelligent tiering are not enabled on the destination file system. You can enable EFS lifecycle management and intelligent tiering after the destination file system is created.    Automatic backups - Automatic daily backups not enabled on the destination file system. You can change this setting after the file system is created.   For more information, see Amazon EFS replication.
+   */
+  createReplicationConfiguration(params: EFS.Types.CreateReplicationConfigurationRequest, callback?: (err: AWSError, data: EFS.Types.ReplicationConfigurationDescription) => void): Request<EFS.Types.ReplicationConfigurationDescription, AWSError>;
+  /**
+   * Creates a replication configuration that replicates an existing EFS file system to a new, read-only file system. For more information, see Amazon EFS replication. The replication configuration specifies the following:    Source file system - an existing EFS file system that you want replicated. The source file system cannot be a destination file system in an existing replication configuration.    Destination file system configuration - the configuration of the destination file system to which the source file system will be replicated. There can only be one destination file system in a replication configuration.    Amazon Web Services Region - The Amazon Web Services Region in which the destination file system is created. EFS Replication is available in all Amazon Web Services Region that Amazon EFS is available in, except the following regions: Asia Pacific (Hong Kong) Europe (Milan), Middle East (Bahrain), Africa (Cape Town), and Asia Pacific (Jakarta).    Availability zone - If you want the destination file system to use One Zone availability and durability, you must specify the Availability Zone to create the file system in. For more information about EFS storage classes, see  Amazon EFS storage classes in the Amazon EFS User Guide.    Encryption - All destination file systems are created with encryption at rest enabled. You can specify the KMS key that is used to encrypt the destination file system. Your service-managed KMS key for Amazon EFS is used if you don't specify a KMS key. You cannot change this after the file system is created.     The following properties are set by default:    Performance mode - The destination file system's performance mode will match that of the source file system, unless the destination file system uses One Zone storage. In that case, the General Purpose performance mode is used. The Performance mode cannot be changed.    Throughput mode - The destination file system use the Bursting throughput mode by default. You can modify the throughput mode once the file system is created.   The following properties are turned off by default:    Lifecycle management - EFS lifecycle management and intelligent tiering are not enabled on the destination file system. You can enable EFS lifecycle management and intelligent tiering after the destination file system is created.    Automatic backups - Automatic daily backups not enabled on the destination file system. You can change this setting after the file system is created.   For more information, see Amazon EFS replication.
+   */
+  createReplicationConfiguration(callback?: (err: AWSError, data: EFS.Types.ReplicationConfigurationDescription) => void): Request<EFS.Types.ReplicationConfigurationDescription, AWSError>;
+  /**
+   *  DEPRECATED - CreateTags is deprecated and not maintained. Please use the API action to create tags for EFS resources.  Creates or overwrites tags associated with a file system. Each tag is a key-value pair. If a tag key specified in the request already exists on the file system, this operation overwrites its value with the value provided in the request. If you add the Name tag to your file system, Amazon EFS returns it in the response to the DescribeFileSystems operation.  This operation requires permission for the elasticfilesystem:CreateTags action.
    */
   createTags(params: EFS.Types.CreateTagsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Creates or overwrites tags associated with a file system. Each tag is a key-value pair. If a tag key specified in the request already exists on the file system, this operation overwrites its value with the value provided in the request. If you add the Name tag to your file system, Amazon EFS returns it in the response to the DescribeFileSystems operation.  This operation requires permission for the elasticfilesystem:CreateTags action.
+   *  DEPRECATED - CreateTags is deprecated and not maintained. Please use the API action to create tags for EFS resources.  Creates or overwrites tags associated with a file system. Each tag is a key-value pair. If a tag key specified in the request already exists on the file system, this operation overwrites its value with the value provided in the request. If you add the Name tag to your file system, Amazon EFS returns it in the response to the DescribeFileSystems operation.  This operation requires permission for the elasticfilesystem:CreateTags action.
    */
   createTags(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -76,11 +84,19 @@ declare class EFS extends Service {
    */
   deleteMountTarget(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the specified tags from a file system. If the DeleteTags request includes a tag key that doesn't exist, Amazon EFS ignores it and doesn't cause an error. For more information about tags and related restrictions, see Tag Restrictions in the AWS Billing and Cost Management User Guide. This operation requires permissions for the elasticfilesystem:DeleteTags action.
+   * Deletes an existing replication configuration. To delete a replication configuration, you must make the request from the Amazon Web Services Region in which the destination file system is located. Deleting a replication configuration ends the replication process. You can write to the destination file system once it's status becomes Writeable.
+   */
+  deleteReplicationConfiguration(params: EFS.Types.DeleteReplicationConfigurationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes an existing replication configuration. To delete a replication configuration, you must make the request from the Amazon Web Services Region in which the destination file system is located. Deleting a replication configuration ends the replication process. You can write to the destination file system once it's status becomes Writeable.
+   */
+  deleteReplicationConfiguration(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   *  DEPRECATED - DeleteTags is deprecated and not maintained. Please use the API action to remove tags from EFS resources.  Deletes the specified tags from a file system. If the DeleteTags request includes a tag key that doesn't exist, Amazon EFS ignores it and doesn't cause an error. For more information about tags and related restrictions, see Tag restrictions in the Billing and Cost Management User Guide. This operation requires permissions for the elasticfilesystem:DeleteTags action.
    */
   deleteTags(params: EFS.Types.DeleteTagsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the specified tags from a file system. If the DeleteTags request includes a tag key that doesn't exist, Amazon EFS ignores it and doesn't cause an error. For more information about tags and related restrictions, see Tag Restrictions in the AWS Billing and Cost Management User Guide. This operation requires permissions for the elasticfilesystem:DeleteTags action.
+   *  DEPRECATED - DeleteTags is deprecated and not maintained. Please use the API action to remove tags from EFS resources.  Deletes the specified tags from a file system. If the DeleteTags request includes a tag key that doesn't exist, Amazon EFS ignores it and doesn't cause an error. For more information about tags and related restrictions, see Tag restrictions in the Billing and Cost Management User Guide. This operation requires permissions for the elasticfilesystem:DeleteTags action.
    */
   deleteTags(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -91,6 +107,14 @@ declare class EFS extends Service {
    * Returns the description of a specific Amazon EFS access point if the AccessPointId is provided. If you provide an EFS FileSystemId, it returns descriptions of all access points for that file system. You can provide either an AccessPointId or a FileSystemId in the request, but not both.  This operation requires permissions for the elasticfilesystem:DescribeAccessPoints action.
    */
   describeAccessPoints(callback?: (err: AWSError, data: EFS.Types.DescribeAccessPointsResponse) => void): Request<EFS.Types.DescribeAccessPointsResponse, AWSError>;
+  /**
+   * Returns the account preferences settings for the Amazon Web Services account associated with the user making the request, in the current Amazon Web Services Region. For more information, see Managing Amazon EFS resource IDs.
+   */
+  describeAccountPreferences(params: EFS.Types.DescribeAccountPreferencesRequest, callback?: (err: AWSError, data: EFS.Types.DescribeAccountPreferencesResponse) => void): Request<EFS.Types.DescribeAccountPreferencesResponse, AWSError>;
+  /**
+   * Returns the account preferences settings for the Amazon Web Services account associated with the user making the request, in the current Amazon Web Services Region. For more information, see Managing Amazon EFS resource IDs.
+   */
+  describeAccountPreferences(callback?: (err: AWSError, data: EFS.Types.DescribeAccountPreferencesResponse) => void): Request<EFS.Types.DescribeAccountPreferencesResponse, AWSError>;
   /**
    * Returns the backup policy for the specified EFS file system.
    */
@@ -108,19 +132,19 @@ declare class EFS extends Service {
    */
   describeFileSystemPolicy(callback?: (err: AWSError, data: EFS.Types.FileSystemPolicyDescription) => void): Request<EFS.Types.FileSystemPolicyDescription, AWSError>;
   /**
-   * Returns the description of a specific Amazon EFS file system if either the file system CreationToken or the FileSystemId is provided. Otherwise, it returns descriptions of all file systems owned by the caller's AWS account in the AWS Region of the endpoint that you're calling. When retrieving all file system descriptions, you can optionally specify the MaxItems parameter to limit the number of descriptions in a response. Currently, this number is automatically set to 10. If more file system descriptions remain, Amazon EFS returns a NextMarker, an opaque token, in the response. In this case, you should send a subsequent request with the Marker request parameter set to the value of NextMarker.  To retrieve a list of your file system descriptions, this operation is used in an iterative process, where DescribeFileSystems is called first without the Marker and then the operation continues to call it with the Marker parameter set to the value of the NextMarker from the previous response until the response has no NextMarker.   The order of file systems returned in the response of one DescribeFileSystems call and the order of file systems returned across the responses of a multi-call iteration is unspecified.   This operation requires permissions for the elasticfilesystem:DescribeFileSystems action. 
+   * Returns the description of a specific Amazon EFS file system if either the file system CreationToken or the FileSystemId is provided. Otherwise, it returns descriptions of all file systems owned by the caller's Amazon Web Services account in the Amazon Web Services Region of the endpoint that you're calling. When retrieving all file system descriptions, you can optionally specify the MaxItems parameter to limit the number of descriptions in a response. Currently, this number is automatically set to 10. If more file system descriptions remain, Amazon EFS returns a NextMarker, an opaque token, in the response. In this case, you should send a subsequent request with the Marker request parameter set to the value of NextMarker.  To retrieve a list of your file system descriptions, this operation is used in an iterative process, where DescribeFileSystems is called first without the Marker and then the operation continues to call it with the Marker parameter set to the value of the NextMarker from the previous response until the response has no NextMarker.   The order of file systems returned in the response of one DescribeFileSystems call and the order of file systems returned across the responses of a multi-call iteration is unspecified.   This operation requires permissions for the elasticfilesystem:DescribeFileSystems action. 
    */
   describeFileSystems(params: EFS.Types.DescribeFileSystemsRequest, callback?: (err: AWSError, data: EFS.Types.DescribeFileSystemsResponse) => void): Request<EFS.Types.DescribeFileSystemsResponse, AWSError>;
   /**
-   * Returns the description of a specific Amazon EFS file system if either the file system CreationToken or the FileSystemId is provided. Otherwise, it returns descriptions of all file systems owned by the caller's AWS account in the AWS Region of the endpoint that you're calling. When retrieving all file system descriptions, you can optionally specify the MaxItems parameter to limit the number of descriptions in a response. Currently, this number is automatically set to 10. If more file system descriptions remain, Amazon EFS returns a NextMarker, an opaque token, in the response. In this case, you should send a subsequent request with the Marker request parameter set to the value of NextMarker.  To retrieve a list of your file system descriptions, this operation is used in an iterative process, where DescribeFileSystems is called first without the Marker and then the operation continues to call it with the Marker parameter set to the value of the NextMarker from the previous response until the response has no NextMarker.   The order of file systems returned in the response of one DescribeFileSystems call and the order of file systems returned across the responses of a multi-call iteration is unspecified.   This operation requires permissions for the elasticfilesystem:DescribeFileSystems action. 
+   * Returns the description of a specific Amazon EFS file system if either the file system CreationToken or the FileSystemId is provided. Otherwise, it returns descriptions of all file systems owned by the caller's Amazon Web Services account in the Amazon Web Services Region of the endpoint that you're calling. When retrieving all file system descriptions, you can optionally specify the MaxItems parameter to limit the number of descriptions in a response. Currently, this number is automatically set to 10. If more file system descriptions remain, Amazon EFS returns a NextMarker, an opaque token, in the response. In this case, you should send a subsequent request with the Marker request parameter set to the value of NextMarker.  To retrieve a list of your file system descriptions, this operation is used in an iterative process, where DescribeFileSystems is called first without the Marker and then the operation continues to call it with the Marker parameter set to the value of the NextMarker from the previous response until the response has no NextMarker.   The order of file systems returned in the response of one DescribeFileSystems call and the order of file systems returned across the responses of a multi-call iteration is unspecified.   This operation requires permissions for the elasticfilesystem:DescribeFileSystems action. 
    */
   describeFileSystems(callback?: (err: AWSError, data: EFS.Types.DescribeFileSystemsResponse) => void): Request<EFS.Types.DescribeFileSystemsResponse, AWSError>;
   /**
-   * Returns the current LifecycleConfiguration object for the specified Amazon EFS file system. EFS lifecycle management uses the LifecycleConfiguration object to identify which files to move to the EFS Infrequent Access (IA) storage class. For a file system without a LifecycleConfiguration object, the call returns an empty array in the response. This operation requires permissions for the elasticfilesystem:DescribeLifecycleConfiguration operation.
+   * Returns the current LifecycleConfiguration object for the specified Amazon EFS file system. EFS lifecycle management uses the LifecycleConfiguration object to identify which files to move to the EFS Infrequent Access (IA) storage class. For a file system without a LifecycleConfiguration object, the call returns an empty array in the response. When EFS Intelligent Tiering is enabled, TransitionToPrimaryStorageClass has a value of AFTER_1_ACCESS. This operation requires permissions for the elasticfilesystem:DescribeLifecycleConfiguration operation.
    */
   describeLifecycleConfiguration(params: EFS.Types.DescribeLifecycleConfigurationRequest, callback?: (err: AWSError, data: EFS.Types.LifecycleConfigurationDescription) => void): Request<EFS.Types.LifecycleConfigurationDescription, AWSError>;
   /**
-   * Returns the current LifecycleConfiguration object for the specified Amazon EFS file system. EFS lifecycle management uses the LifecycleConfiguration object to identify which files to move to the EFS Infrequent Access (IA) storage class. For a file system without a LifecycleConfiguration object, the call returns an empty array in the response. This operation requires permissions for the elasticfilesystem:DescribeLifecycleConfiguration operation.
+   * Returns the current LifecycleConfiguration object for the specified Amazon EFS file system. EFS lifecycle management uses the LifecycleConfiguration object to identify which files to move to the EFS Infrequent Access (IA) storage class. For a file system without a LifecycleConfiguration object, the call returns an empty array in the response. When EFS Intelligent Tiering is enabled, TransitionToPrimaryStorageClass has a value of AFTER_1_ACCESS. This operation requires permissions for the elasticfilesystem:DescribeLifecycleConfiguration operation.
    */
   describeLifecycleConfiguration(callback?: (err: AWSError, data: EFS.Types.LifecycleConfigurationDescription) => void): Request<EFS.Types.LifecycleConfigurationDescription, AWSError>;
   /**
@@ -140,11 +164,19 @@ declare class EFS extends Service {
    */
   describeMountTargets(callback?: (err: AWSError, data: EFS.Types.DescribeMountTargetsResponse) => void): Request<EFS.Types.DescribeMountTargetsResponse, AWSError>;
   /**
-   * Returns the tags associated with a file system. The order of tags returned in the response of one DescribeTags call and the order of tags returned across the responses of a multiple-call iteration (when using pagination) is unspecified.   This operation requires permissions for the elasticfilesystem:DescribeTags action. 
+   * Retrieves the replication configurations for either a specific file system, or all configurations for the Amazon Web Services account in an Amazon Web Services Region if a file system is not specified.
+   */
+  describeReplicationConfigurations(params: EFS.Types.DescribeReplicationConfigurationsRequest, callback?: (err: AWSError, data: EFS.Types.DescribeReplicationConfigurationsResponse) => void): Request<EFS.Types.DescribeReplicationConfigurationsResponse, AWSError>;
+  /**
+   * Retrieves the replication configurations for either a specific file system, or all configurations for the Amazon Web Services account in an Amazon Web Services Region if a file system is not specified.
+   */
+  describeReplicationConfigurations(callback?: (err: AWSError, data: EFS.Types.DescribeReplicationConfigurationsResponse) => void): Request<EFS.Types.DescribeReplicationConfigurationsResponse, AWSError>;
+  /**
+   *  DEPRECATED - The DeleteTags action is deprecated and not maintained. Please use the API action to remove tags from EFS resources.  Returns the tags associated with a file system. The order of tags returned in the response of one DescribeTags call and the order of tags returned across the responses of a multiple-call iteration (when using pagination) is unspecified.   This operation requires permissions for the elasticfilesystem:DescribeTags action. 
    */
   describeTags(params: EFS.Types.DescribeTagsRequest, callback?: (err: AWSError, data: EFS.Types.DescribeTagsResponse) => void): Request<EFS.Types.DescribeTagsResponse, AWSError>;
   /**
-   * Returns the tags associated with a file system. The order of tags returned in the response of one DescribeTags call and the order of tags returned across the responses of a multiple-call iteration (when using pagination) is unspecified.   This operation requires permissions for the elasticfilesystem:DescribeTags action. 
+   *  DEPRECATED - The DeleteTags action is deprecated and not maintained. Please use the API action to remove tags from EFS resources.  Returns the tags associated with a file system. The order of tags returned in the response of one DescribeTags call and the order of tags returned across the responses of a multiple-call iteration (when using pagination) is unspecified.   This operation requires permissions for the elasticfilesystem:DescribeTags action. 
    */
   describeTags(callback?: (err: AWSError, data: EFS.Types.DescribeTagsResponse) => void): Request<EFS.Types.DescribeTagsResponse, AWSError>;
   /**
@@ -164,6 +196,14 @@ declare class EFS extends Service {
    */
   modifyMountTargetSecurityGroups(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Use this operation to set the account preference in the current Amazon Web Services Region to use long 17 character (63 bit) or short 8 character (32 bit) resource IDs for new EFS file system and mount target resources. All existing resource IDs are not affected by any changes you make. You can set the ID preference during the opt-in period as EFS transitions to long resource IDs. For more information, see Managing Amazon EFS resource IDs.  Starting in October, 2021, you will receive an error if you try to set the account preference to use the short 8 character format resource ID. Contact Amazon Web Services support if you receive an error and need to use short IDs for file system and mount target resources. 
+   */
+  putAccountPreferences(params: EFS.Types.PutAccountPreferencesRequest, callback?: (err: AWSError, data: EFS.Types.PutAccountPreferencesResponse) => void): Request<EFS.Types.PutAccountPreferencesResponse, AWSError>;
+  /**
+   * Use this operation to set the account preference in the current Amazon Web Services Region to use long 17 character (63 bit) or short 8 character (32 bit) resource IDs for new EFS file system and mount target resources. All existing resource IDs are not affected by any changes you make. You can set the ID preference during the opt-in period as EFS transitions to long resource IDs. For more information, see Managing Amazon EFS resource IDs.  Starting in October, 2021, you will receive an error if you try to set the account preference to use the short 8 character format resource ID. Contact Amazon Web Services support if you receive an error and need to use short IDs for file system and mount target resources. 
+   */
+  putAccountPreferences(callback?: (err: AWSError, data: EFS.Types.PutAccountPreferencesResponse) => void): Request<EFS.Types.PutAccountPreferencesResponse, AWSError>;
+  /**
    * Updates the file system's backup policy. Use this action to start or stop automatic backups of the file system. 
    */
   putBackupPolicy(params: EFS.Types.PutBackupPolicyRequest, callback?: (err: AWSError, data: EFS.Types.BackupPolicyDescription) => void): Request<EFS.Types.BackupPolicyDescription, AWSError>;
@@ -172,19 +212,19 @@ declare class EFS extends Service {
    */
   putBackupPolicy(callback?: (err: AWSError, data: EFS.Types.BackupPolicyDescription) => void): Request<EFS.Types.BackupPolicyDescription, AWSError>;
   /**
-   * Applies an Amazon EFS FileSystemPolicy to an Amazon EFS file system. A file system policy is an IAM resource-based policy and can contain multiple policy statements. A file system always has exactly one file system policy, which can be the default policy or an explicit policy set or updated using this API operation. EFS file system policies have a 20,000 character limit. When an explicit policy is set, it overrides the default policy. For more information about the default file system policy, see Default EFS File System Policy.  EFS file system policies have a 20,000 character limit. This operation requires permissions for the elasticfilesystem:PutFileSystemPolicy action.
+   * Applies an Amazon EFS FileSystemPolicy to an Amazon EFS file system. A file system policy is an IAM resource-based policy and can contain multiple policy statements. A file system always has exactly one file system policy, which can be the default policy or an explicit policy set or updated using this API operation. EFS file system policies have a 20,000 character limit. When an explicit policy is set, it overrides the default policy. For more information about the default file system policy, see Default EFS File System Policy.   EFS file system policies have a 20,000 character limit.  This operation requires permissions for the elasticfilesystem:PutFileSystemPolicy action.
    */
   putFileSystemPolicy(params: EFS.Types.PutFileSystemPolicyRequest, callback?: (err: AWSError, data: EFS.Types.FileSystemPolicyDescription) => void): Request<EFS.Types.FileSystemPolicyDescription, AWSError>;
   /**
-   * Applies an Amazon EFS FileSystemPolicy to an Amazon EFS file system. A file system policy is an IAM resource-based policy and can contain multiple policy statements. A file system always has exactly one file system policy, which can be the default policy or an explicit policy set or updated using this API operation. EFS file system policies have a 20,000 character limit. When an explicit policy is set, it overrides the default policy. For more information about the default file system policy, see Default EFS File System Policy.  EFS file system policies have a 20,000 character limit. This operation requires permissions for the elasticfilesystem:PutFileSystemPolicy action.
+   * Applies an Amazon EFS FileSystemPolicy to an Amazon EFS file system. A file system policy is an IAM resource-based policy and can contain multiple policy statements. A file system always has exactly one file system policy, which can be the default policy or an explicit policy set or updated using this API operation. EFS file system policies have a 20,000 character limit. When an explicit policy is set, it overrides the default policy. For more information about the default file system policy, see Default EFS File System Policy.   EFS file system policies have a 20,000 character limit.  This operation requires permissions for the elasticfilesystem:PutFileSystemPolicy action.
    */
   putFileSystemPolicy(callback?: (err: AWSError, data: EFS.Types.FileSystemPolicyDescription) => void): Request<EFS.Types.FileSystemPolicyDescription, AWSError>;
   /**
-   * Enables lifecycle management by creating a new LifecycleConfiguration object. A LifecycleConfiguration object defines when files in an Amazon EFS file system are automatically transitioned to the lower-cost EFS Infrequent Access (IA) storage class. A LifecycleConfiguration applies to all files in a file system. Each Amazon EFS file system supports one lifecycle configuration, which applies to all files in the file system. If a LifecycleConfiguration object already exists for the specified file system, a PutLifecycleConfiguration call modifies the existing configuration. A PutLifecycleConfiguration call with an empty LifecyclePolicies array in the request body deletes any existing LifecycleConfiguration and disables lifecycle management. In the request, specify the following:    The ID for the file system for which you are enabling, disabling, or modifying lifecycle management.   A LifecyclePolicies array of LifecyclePolicy objects that define when files are moved to the IA storage class. The array can contain only one LifecyclePolicy item.   This operation requires permissions for the elasticfilesystem:PutLifecycleConfiguration operation. To apply a LifecycleConfiguration object to an encrypted file system, you need the same AWS Key Management Service (AWS KMS) permissions as when you created the encrypted file system. 
+   * Enables lifecycle management by creating a new LifecycleConfiguration object. A LifecycleConfiguration object defines when files in an Amazon EFS file system are automatically transitioned to the lower-cost EFS Infrequent Access (IA) storage class. To enable EFS Intelligent Tiering, set the value of TransitionToPrimaryStorageClass to AFTER_1_ACCESS. For more information, see EFS Lifecycle Management. Each Amazon EFS file system supports one lifecycle configuration, which applies to all files in the file system. If a LifecycleConfiguration object already exists for the specified file system, a PutLifecycleConfiguration call modifies the existing configuration. A PutLifecycleConfiguration call with an empty LifecyclePolicies array in the request body deletes any existing LifecycleConfiguration and turns off lifecycle management for the file system. In the request, specify the following:    The ID for the file system for which you are enabling, disabling, or modifying lifecycle management.   A LifecyclePolicies array of LifecyclePolicy objects that define when files are moved to the IA storage class. Amazon EFS requires that each LifecyclePolicy object have only have a single transition, so the LifecyclePolicies array needs to be structured with separate LifecyclePolicy objects. See the example requests in the following section for more information.   This operation requires permissions for the elasticfilesystem:PutLifecycleConfiguration operation. To apply a LifecycleConfiguration object to an encrypted file system, you need the same Key Management Service permissions as when you created the encrypted file system. 
    */
   putLifecycleConfiguration(params: EFS.Types.PutLifecycleConfigurationRequest, callback?: (err: AWSError, data: EFS.Types.LifecycleConfigurationDescription) => void): Request<EFS.Types.LifecycleConfigurationDescription, AWSError>;
   /**
-   * Enables lifecycle management by creating a new LifecycleConfiguration object. A LifecycleConfiguration object defines when files in an Amazon EFS file system are automatically transitioned to the lower-cost EFS Infrequent Access (IA) storage class. A LifecycleConfiguration applies to all files in a file system. Each Amazon EFS file system supports one lifecycle configuration, which applies to all files in the file system. If a LifecycleConfiguration object already exists for the specified file system, a PutLifecycleConfiguration call modifies the existing configuration. A PutLifecycleConfiguration call with an empty LifecyclePolicies array in the request body deletes any existing LifecycleConfiguration and disables lifecycle management. In the request, specify the following:    The ID for the file system for which you are enabling, disabling, or modifying lifecycle management.   A LifecyclePolicies array of LifecyclePolicy objects that define when files are moved to the IA storage class. The array can contain only one LifecyclePolicy item.   This operation requires permissions for the elasticfilesystem:PutLifecycleConfiguration operation. To apply a LifecycleConfiguration object to an encrypted file system, you need the same AWS Key Management Service (AWS KMS) permissions as when you created the encrypted file system. 
+   * Enables lifecycle management by creating a new LifecycleConfiguration object. A LifecycleConfiguration object defines when files in an Amazon EFS file system are automatically transitioned to the lower-cost EFS Infrequent Access (IA) storage class. To enable EFS Intelligent Tiering, set the value of TransitionToPrimaryStorageClass to AFTER_1_ACCESS. For more information, see EFS Lifecycle Management. Each Amazon EFS file system supports one lifecycle configuration, which applies to all files in the file system. If a LifecycleConfiguration object already exists for the specified file system, a PutLifecycleConfiguration call modifies the existing configuration. A PutLifecycleConfiguration call with an empty LifecyclePolicies array in the request body deletes any existing LifecycleConfiguration and turns off lifecycle management for the file system. In the request, specify the following:    The ID for the file system for which you are enabling, disabling, or modifying lifecycle management.   A LifecyclePolicies array of LifecyclePolicy objects that define when files are moved to the IA storage class. Amazon EFS requires that each LifecyclePolicy object have only have a single transition, so the LifecyclePolicies array needs to be structured with separate LifecyclePolicy objects. See the example requests in the following section for more information.   This operation requires permissions for the elasticfilesystem:PutLifecycleConfiguration operation. To apply a LifecycleConfiguration object to an encrypted file system, you need the same Key Management Service permissions as when you created the encrypted file system. 
    */
   putLifecycleConfiguration(callback?: (err: AWSError, data: EFS.Types.LifecycleConfigurationDescription) => void): Request<EFS.Types.LifecycleConfigurationDescription, AWSError>;
   /**
@@ -248,7 +288,7 @@ declare namespace EFS {
      */
     RootDirectory?: RootDirectory;
     /**
-     * Identified the AWS account that owns the access point resource.
+     * Identified the Amazon Web Services account that owns the access point resource.
      */
     OwnerId?: AwsAccountId;
     /**
@@ -264,7 +304,7 @@ declare namespace EFS {
   export type Backup = boolean;
   export interface BackupPolicy {
     /**
-     * Describes the status of the file system's backup policy.     ENABLED  - EFS is automatically backing up the file system.&gt;     ENABLING  - EFS is turning on automatic backups for the file system.     DISABLED  - automatic back ups are turned off for the file system.     DISABLING  - EFS is turning off automatic backups for the file system.  
+     * Describes the status of the file system's backup policy.     ENABLED  - EFS is automatically backing up the file system.     ENABLING  - EFS is turning on automatic backups for the file system.     DISABLED  - automatic back ups are turned off for the file system.     DISABLING  - EFS is turning off automatic backups for the file system.  
      */
     Status: Status;
   }
@@ -282,7 +322,7 @@ declare namespace EFS {
      */
     ClientToken: ClientToken;
     /**
-     * Creates tags associated with the access point. Each tag is a key-value pair.
+     * Creates tags associated with the access point. Each tag is a key-value pair, each key must be unique. For more information, see Tagging Amazon Web Services resources in the Amazon Web Services General Reference Guide.
      */
     Tags?: Tags;
     /**
@@ -308,11 +348,11 @@ declare namespace EFS {
      */
     PerformanceMode?: PerformanceMode;
     /**
-     * A Boolean value that, if true, creates an encrypted file system. When creating an encrypted file system, you have the option of specifying CreateFileSystemRequest$KmsKeyId for an existing AWS Key Management Service (AWS KMS) customer master key (CMK). If you don't specify a CMK, then the default CMK for Amazon EFS, /aws/elasticfilesystem, is used to protect the encrypted file system. 
+     * A Boolean value that, if true, creates an encrypted file system. When creating an encrypted file system, you have the option of specifying an existing Key Management Service key (KMS key). If you don't specify a KMS key, then the default KMS key for Amazon EFS, /aws/elasticfilesystem, is used to protect the encrypted file system. 
      */
     Encrypted?: Encrypted;
     /**
-     * The ID of the AWS KMS CMK to be used to protect the encrypted file system. This parameter is only required if you want to use a non-default CMK. If this parameter is not specified, the default CMK for Amazon EFS is used. This ID can be in one of the following formats:   Key ID - A unique identifier of the key, for example 1234abcd-12ab-34cd-56ef-1234567890ab.   ARN - An Amazon Resource Name (ARN) for the key, for example arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab.   Key alias - A previously created display name for a key, for example alias/projectKey1.   Key alias ARN - An ARN for a key alias, for example arn:aws:kms:us-west-2:444455556666:alias/projectKey1.   If KmsKeyId is specified, the CreateFileSystemRequest$Encrypted parameter must be set to true.  EFS accepts only symmetric CMKs. You cannot use asymmetric CMKs with EFS file systems. 
+     * The ID of the KMS key that you want to use to protect the encrypted file system. This parameter is only required if you want to use a non-default KMS key. If this parameter is not specified, the default KMS key for Amazon EFS is used. You can specify a KMS key ID using the following formats:   Key ID - A unique identifier of the key, for example 1234abcd-12ab-34cd-56ef-1234567890ab.   ARN - An Amazon Resource Name (ARN) for the key, for example arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab.   Key alias - A previously created display name for a key, for example alias/projectKey1.   Key alias ARN - An ARN for a key alias, for example arn:aws:kms:us-west-2:444455556666:alias/projectKey1.   If you use KmsKeyId, you must set the CreateFileSystemRequest$Encrypted parameter to true.  EFS accepts only symmetric KMS keys. You cannot use asymmetric KMS keys with Amazon EFS file systems. 
      */
     KmsKeyId?: KmsKeyId;
     /**
@@ -320,19 +360,19 @@ declare namespace EFS {
      */
     ThroughputMode?: ThroughputMode;
     /**
-     * The throughput, measured in MiB/s, that you want to provision for a file system that you're creating. Valid values are 1-1024. Required if ThroughputMode is set to provisioned. The upper limit for throughput is 1024 MiB/s. To increase this limit, contact AWS Support. For more information, see Amazon EFS quotas that you can increase in the Amazon EFS User Guide.
+     * The throughput, measured in MiB/s, that you want to provision for a file system that you're creating. Valid values are 1-1024. Required if ThroughputMode is set to provisioned. The upper limit for throughput is 1024 MiB/s. To increase this limit, contact Amazon Web Services Support. For more information, see Amazon EFS quotas that you can increase in the Amazon EFS User Guide.
      */
     ProvisionedThroughputInMibps?: ProvisionedThroughputInMibps;
     /**
-     * Used to create a file system that uses One Zone storage classes. It specifies the AWS Availability Zone in which to create the file system. Use the format us-east-1a to specify the Availability Zone. For more information about One Zone storage classes, see Using EFS storage classes in the Amazon EFS User Guide.  One Zone storage classes are not available in all Availability Zones in AWS Regions where Amazon EFS is available. 
+     * Used to create a file system that uses One Zone storage classes. It specifies the Amazon Web Services Availability Zone in which to create the file system. Use the format us-east-1a to specify the Availability Zone. For more information about One Zone storage classes, see Using EFS storage classes in the Amazon EFS User Guide.  One Zone storage classes are not available in all Availability Zones in Amazon Web Services Regions where Amazon EFS is available. 
      */
     AvailabilityZoneName?: AvailabilityZoneName;
     /**
-     * Specifies whether automatic backups are enabled on the file system that you are creating. Set the value to true to enable automatic backups. If you are creating a file system that uses One Zone storage classes, automatic backups are enabled by default. For more information, see Automatic backups in the Amazon EFS User Guide. Default is false. However, if you specify an AvailabilityZoneName, the default is true.  AWS Backup is not available in all AWS Regions where Amazon EFS is available. 
+     * Specifies whether automatic backups are enabled on the file system that you are creating. Set the value to true to enable automatic backups. If you are creating a file system that uses One Zone storage classes, automatic backups are enabled by default. For more information, see Automatic backups in the Amazon EFS User Guide. Default is false. However, if you specify an AvailabilityZoneName, the default is true.  Backup is not available in all Amazon Web Services Regions where Amazon EFS is available. 
      */
     Backup?: Backup;
     /**
-     * A value that specifies to create one or more tags associated with the file system. Each tag is a user-defined key-value pair. Name your file system on creation by including a "Key":"Name","Value":"{value}" key-value pair.
+     * Use to create one or more tags associated with the file system. Each tag is a user-defined key-value pair. Name your file system on creation by including a "Key":"Name","Value":"{value}" key-value pair. Each key must be unique. For more information, see Tagging Amazon Web Services resources in the Amazon Web Services General Reference Guide.
      */
     Tags?: Tags;
   }
@@ -353,6 +393,16 @@ declare namespace EFS {
      * Up to five VPC security group IDs, of the form sg-xxxxxxxx. These must be for the same VPC as subnet specified.
      */
     SecurityGroups?: SecurityGroups;
+  }
+  export interface CreateReplicationConfigurationRequest {
+    /**
+     * Specifies the Amazon EFS file system that you want to replicate. This file system cannot already be a source or destination file system in another replication configuration.
+     */
+    SourceFileSystemId: FileSystemId;
+    /**
+     * An array of destination configuration objects. Only one destination configuration object is supported.
+     */
+    Destinations: DestinationsToCreate;
   }
   export interface CreateTagsRequest {
     /**
@@ -403,6 +453,12 @@ declare namespace EFS {
      */
     MountTargetId: MountTargetId;
   }
+  export interface DeleteReplicationConfigurationRequest {
+    /**
+     * The ID of the source file system in the replication configuration.
+     */
+    SourceFileSystemId: FileSystemId;
+  }
   export interface DeleteTagsRequest {
     /**
      * The ID of the file system whose tags you want to delete (String).
@@ -438,6 +494,26 @@ declare namespace EFS {
     AccessPoints?: AccessPointDescriptions;
     /**
      * Present if there are more access points than returned in the response. You can use the NextMarker in the subsequent request to fetch the additional descriptions.
+     */
+    NextToken?: Token;
+  }
+  export interface DescribeAccountPreferencesRequest {
+    /**
+     * (Optional) You can use NextToken in a subsequent request to fetch the next page of Amazon Web Services account preferences if the response payload was paginated.
+     */
+    NextToken?: Token;
+    /**
+     * (Optional) When retrieving account preferences, you can optionally specify the MaxItems parameter to limit the number of objects returned in a response. The default value is 100. 
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface DescribeAccountPreferencesResponse {
+    /**
+     * Describes the resource ID preference setting for the Amazon Web Services account associated with the user making the request, in the current Amazon Web Services Region.
+     */
+    ResourceIdPreference?: ResourceIdPreference;
+    /**
+     * Present if there are more records than returned in the response. You can use the NextToken in the subsequent request to fetch the additional descriptions.
      */
     NextToken?: Token;
   }
@@ -539,6 +615,30 @@ declare namespace EFS {
      */
     NextMarker?: Marker;
   }
+  export interface DescribeReplicationConfigurationsRequest {
+    /**
+     * You can retrieve replication configurations for a specific file system by providing a file system ID.
+     */
+    FileSystemId?: FileSystemId;
+    /**
+     *  NextToken is present if the response is paginated. You can use NextMarker in a subsequent request to fetch the next page of output.
+     */
+    NextToken?: Token;
+    /**
+     * (Optional) You can optionally specify the MaxItems parameter to limit the number of objects returned in a response. The default value is 100. 
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface DescribeReplicationConfigurationsResponse {
+    /**
+     * The collection of replication configurations returned.
+     */
+    Replications?: ReplicationConfigurationDescriptions;
+    /**
+     * You can use the NextToken from the previous response in a subsequent request to fetch the additional descriptions.
+     */
+    NextToken?: Token;
+  }
   export interface DescribeTagsRequest {
     /**
      * (Optional) The maximum number of file system tags to return in the response. Currently, this number is automatically set to 100, and other values are ignored. The response is paginated at 100 per page if you have more than 100 tags.
@@ -567,11 +667,45 @@ declare namespace EFS {
      */
     NextMarker?: Marker;
   }
+  export interface Destination {
+    /**
+     * Describes the status of the destination Amazon EFS file system.
+     */
+    Status: ReplicationStatus;
+    /**
+     * The ID of the destination Amazon EFS file system.
+     */
+    FileSystemId: FileSystemId;
+    /**
+     * The Amazon Web Services Region in which the destination file system is located.
+     */
+    Region: RegionName;
+    /**
+     * The time when the most recent sync successfully completed on the destination file system. Any changes to data on the source file system that occurred prior to this time were successfully replicated to the destination file system. Any changes that occurred after this time might not be fully replicated.
+     */
+    LastReplicatedTimestamp?: Timestamp;
+  }
+  export interface DestinationToCreate {
+    /**
+     * To create a file system that uses regional storage, specify the Amazon Web Services Region in which to create the destination file system.
+     */
+    Region?: RegionName;
+    /**
+     * To create a file system that uses One Zone storage, specify the name of the Availability Zone in which to create the destination file system.
+     */
+    AvailabilityZoneName?: AvailabilityZoneName;
+    /**
+     * Specifies the KMS key you want to use to encrypt the destination file system. If you do not specify a KMS key, EFS uses your default KMS key for Amazon EFS, /aws/elasticfilesystem. This ID can be in one of the following formats:   Key ID - A unique identifier of the key, for example 1234abcd-12ab-34cd-56ef-1234567890ab.   ARN - An Amazon Resource Name (ARN) for the key, for example arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab.   Key alias - A previously created display name for a key, for example alias/projectKey1.   Key alias ARN - An ARN for a key alias, for example arn:aws:kms:us-west-2:444455556666:alias/projectKey1.  
+     */
+    KmsKeyId?: KmsKeyId;
+  }
+  export type Destinations = Destination[];
+  export type DestinationsToCreate = DestinationToCreate[];
   export type Encrypted = boolean;
   export type FileSystemArn = string;
   export interface FileSystemDescription {
     /**
-     * The AWS account that created the file system. If the file system was created by an IAM user, the parent account to which the user belongs is the owner.
+     * The Amazon Web Services account that created the file system. If the file system was created by an IAM user, the parent account to which the user belongs is the owner.
      */
     OwnerId: AwsAccountId;
     /**
@@ -615,7 +749,7 @@ declare namespace EFS {
      */
     Encrypted?: Encrypted;
     /**
-     * The ID of an AWS Key Management Service (AWS KMS) customer master key (CMK) that was used to protect the encrypted file system.
+     * The ID of an KMS key used to protect the encrypted file system.
      */
     KmsKeyId?: KmsKeyId;
     /**
@@ -627,11 +761,11 @@ declare namespace EFS {
      */
     ProvisionedThroughputInMibps?: ProvisionedThroughputInMibps;
     /**
-     * Describes the AWS Availability Zone in which the file system is located, and is valid only for file systems using One Zone storage classes. For more information, see Using EFS storage classes in the Amazon EFS User Guide.
+     * Describes the Amazon Web Services Availability Zone in which the file system is located, and is valid only for file systems using One Zone storage classes. For more information, see Using EFS storage classes in the Amazon EFS User Guide.
      */
     AvailabilityZoneName?: AvailabilityZoneName;
     /**
-     * The unique and consistent identifier of the Availability Zone in which the file system's One Zone storage classes exist. For example, use1-az1 is an Availability Zone ID for the us-east-1 AWS Region, and it has the same location in every AWS account.
+     * The unique and consistent identifier of the Availability Zone in which the file system's One Zone storage classes exist. For example, use1-az1 is an Availability Zone ID for the us-east-1 Amazon Web Services Region, and it has the same location in every Amazon Web Services account.
      */
     AvailabilityZoneId?: AvailabilityZoneId;
     /**
@@ -677,16 +811,20 @@ declare namespace EFS {
   export type LifeCycleState = "creating"|"available"|"updating"|"deleting"|"deleted"|"error"|string;
   export interface LifecycleConfigurationDescription {
     /**
-     * An array of lifecycle management policies. Currently, EFS supports a maximum of one policy per file system.
+     * An array of lifecycle management policies. EFS supports a maximum of one policy per file system.
      */
     LifecyclePolicies?: LifecyclePolicies;
   }
   export type LifecyclePolicies = LifecyclePolicy[];
   export interface LifecyclePolicy {
     /**
-     *  A value that describes the period of time that a file is not accessed, after which it transitions to the IA storage class. Metadata operations such as listing the contents of a directory don't count as file access events.
+     *  Describes the period of time that a file is not accessed, after which it transitions to IA storage. Metadata operations such as listing the contents of a directory don't count as file access events.
      */
     TransitionToIA?: TransitionToIARules;
+    /**
+     * Describes when to transition a file from IA storage to primary storage. Metadata operations such as listing the contents of a directory don't count as file access events.
+     */
+    TransitionToPrimaryStorageClass?: TransitionToPrimaryStorageClassRules;
   }
   export interface ListTagsForResourceRequest {
     /**
@@ -698,7 +836,7 @@ declare namespace EFS {
      */
     MaxResults?: MaxResults;
     /**
-     * You can use NextToken in a subsequent request to fetch the next page of access point descriptions if the response payload was paginated.
+     * (Optional) You can use NextToken in a subsequent request to fetch the next page of access point descriptions if the response payload was paginated.
      */
     NextToken?: Token;
   }
@@ -728,7 +866,7 @@ declare namespace EFS {
   export type MountTargetCount = number;
   export interface MountTargetDescription {
     /**
-     * AWS account ID that owns the resource.
+     * Amazon Web Services account ID that owns the resource.
      */
     OwnerId?: AwsAccountId;
     /**
@@ -756,11 +894,11 @@ declare namespace EFS {
      */
     NetworkInterfaceId?: NetworkInterfaceId;
     /**
-     * The unique and consistent identifier of the Availability Zone that the mount target resides in. For example, use1-az1 is an AZ ID for the us-east-1 Region and it has the same location in every AWS account.
+     * The unique and consistent identifier of the Availability Zone that the mount target resides in. For example, use1-az1 is an AZ ID for the us-east-1 Region and it has the same location in every Amazon Web Services account.
      */
     AvailabilityZoneId?: AvailabilityZoneId;
     /**
-     * The name of the Availability Zone in which the mount target is located. Availability Zones are independently mapped to names for each AWS account. For example, the Availability Zone us-east-1a for your AWS account might not be the same location as us-east-1a for another AWS account.
+     * The name of the Availability Zone in which the mount target is located. Availability Zones are independently mapped to names for each Amazon Web Services account. For example, the Availability Zone us-east-1a for your Amazon Web Services account might not be the same location as us-east-1a for another Amazon Web Services account.
      */
     AvailabilityZoneName?: AvailabilityZoneName;
     /**
@@ -793,6 +931,15 @@ declare namespace EFS {
     SecondaryGids?: SecondaryGids;
   }
   export type ProvisionedThroughputInMibps = number;
+  export interface PutAccountPreferencesRequest {
+    /**
+     * Specifies the EFS resource ID preference to set for the user's Amazon Web Services account, in the current Amazon Web Services Region, either LONG_ID (17 characters), or SHORT_ID (8 characters).  Starting in October, 2021, you will receive an error when setting the account preference to SHORT_ID. Contact Amazon Web Services support if you receive an error and need to use short IDs for file system and mount target resources. 
+     */
+    ResourceIdType: ResourceIdType;
+  }
+  export interface PutAccountPreferencesResponse {
+    ResourceIdPreference?: ResourceIdPreference;
+  }
   export interface PutBackupPolicyRequest {
     /**
      * Specifies which EFS file system to update the backup policy for.
@@ -823,11 +970,53 @@ declare namespace EFS {
      */
     FileSystemId: FileSystemId;
     /**
-     * An array of LifecyclePolicy objects that define the file system's LifecycleConfiguration object. A LifecycleConfiguration object tells lifecycle management when to transition files from the Standard storage class to the Infrequent Access storage class.
+     * An array of LifecyclePolicy objects that define the file system's LifecycleConfiguration object. A LifecycleConfiguration object informs EFS lifecycle management and intelligent tiering of the following:   When to move files in the file system from primary storage to the IA storage class.   When to move files that are in IA storage to primary storage.    When using the put-lifecycle-configuration CLI command or the PutLifecycleConfiguration API action, Amazon EFS requires that each LifecyclePolicy object have only a single transition. This means that in a request body, LifecyclePolicies needs to be structured as an array of LifecyclePolicy objects, one object for each transition, TransitionToIA, TransitionToPrimaryStorageClass. See the example requests in the following section for more information. 
      */
     LifecyclePolicies: LifecyclePolicies;
   }
+  export type RegionName = string;
+  export interface ReplicationConfigurationDescription {
+    /**
+     * The ID of the source Amazon EFS file system that is being replicated.
+     */
+    SourceFileSystemId: FileSystemId;
+    /**
+     * The Amazon Web Services Region in which the source Amazon EFS file system is located.
+     */
+    SourceFileSystemRegion: RegionName;
+    /**
+     * The ARN of the current source file system in the replication configuration.
+     */
+    SourceFileSystemArn: FileSystemArn;
+    /**
+     * The Amazon Resource Name (ARN) of the original source Amazon EFS file system in the replication configuration.
+     */
+    OriginalSourceFileSystemArn: FileSystemArn;
+    /**
+     * Describes when the replication configuration was created.
+     */
+    CreationTime: Timestamp;
+    /**
+     * Array of destination objects. Only one destination object is supported.
+     */
+    Destinations: Destinations;
+  }
+  export type ReplicationConfigurationDescriptions = ReplicationConfigurationDescription[];
+  export type ReplicationStatus = "ENABLED"|"ENABLING"|"DELETING"|"ERROR"|string;
+  export type Resource = "FILE_SYSTEM"|"MOUNT_TARGET"|string;
   export type ResourceId = string;
+  export interface ResourceIdPreference {
+    /**
+     * Identifies the EFS resource ID preference, either LONG_ID (17 characters) or SHORT_ID (8 characters).
+     */
+    ResourceIdType?: ResourceIdType;
+    /**
+     * Identifies the Amazon EFS resources to which the ID preference setting applies, FILE_SYSTEM and MOUNT_TARGET.
+     */
+    Resources?: Resources;
+  }
+  export type ResourceIdType = "LONG_ID"|"SHORT_ID"|string;
+  export type Resources = Resource[];
   export interface RootDirectory {
     /**
      * Specifies the path on the EFS file system to expose as the root directory to NFS clients using the access point to access the EFS file system. A path can have up to four subdirectories. If the specified path does not exist, you are required to provide the CreationInfo.
@@ -857,11 +1046,11 @@ declare namespace EFS {
   export type TagKeys = TagKey[];
   export interface TagResourceRequest {
     /**
-     * The ID specifying the EFS resource that you want to create a tag for. 
+     * The ID specifying the EFS resource that you want to create a tag for.
      */
     ResourceId: ResourceId;
     /**
-     * 
+     * An array of Tag objects to add. Each Tag object is a key-value pair.
      */
     Tags: Tags;
   }
@@ -871,6 +1060,7 @@ declare namespace EFS {
   export type Timestamp = Date;
   export type Token = string;
   export type TransitionToIARules = "AFTER_7_DAYS"|"AFTER_14_DAYS"|"AFTER_30_DAYS"|"AFTER_60_DAYS"|"AFTER_90_DAYS"|string;
+  export type TransitionToPrimaryStorageClassRules = "AFTER_1_ACCESS"|string;
   export type Uid = number;
   export interface UntagResourceRequest {
     /**

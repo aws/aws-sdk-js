@@ -40,7 +40,7 @@
           "shape": "ServiceQuotaExceededException"
         }
       ],
-      "documentation": "<p>Creates an experiment template. </p> <p>To create a template, specify the following information: </p> <ul> <li> <p> <b>Targets</b>: A target can be a specific resource in your AWS environment, or one or more resources that match criteria that you specify, for example, resources that have specific tags.</p> </li> <li> <p> <b>Actions</b>: The actions to carry out on the target. You can specify multiple actions, the duration of each action, and when to start each action during an experiment.</p> </li> <li> <p> <b>Stop conditions</b>: If a stop condition is triggered while an experiment is running, the experiment is automatically stopped. You can define a stop condition as a CloudWatch alarm.</p> </li> </ul> <p>For more information, see the <a href=\"https://docs.aws.amazon.com/fis/latest/userguide/\">AWS Fault Injection Simulator User Guide</a>.</p>"
+      "documentation": "<p>Creates an experiment template. </p> <p>An experiment template includes the following components:</p> <ul> <li> <p> <b>Targets</b>: A target can be a specific resource in your Amazon Web Services environment, or one or more resources that match criteria that you specify, for example, resources that have specific tags.</p> </li> <li> <p> <b>Actions</b>: The actions to carry out on the target. You can specify multiple actions, the duration of each action, and when to start each action during an experiment.</p> </li> <li> <p> <b>Stop conditions</b>: If a stop condition is triggered while an experiment is running, the experiment is automatically stopped. You can define a stop condition as a CloudWatch alarm.</p> </li> </ul> <p>For more information, see <a href=\"https://docs.aws.amazon.com/fis/latest/userguide/experiment-templates.html\">Experiment templates</a> in the <i>Fault Injection Simulator User Guide</i>.</p>"
     },
     "DeleteExperimentTemplate": {
       "name": "DeleteExperimentTemplate",
@@ -86,7 +86,7 @@
           "shape": "ResourceNotFoundException"
         }
       ],
-      "documentation": "<p>Gets information about the specified AWS FIS action.</p>"
+      "documentation": "<p>Gets information about the specified FIS action.</p>"
     },
     "GetExperiment": {
       "name": "GetExperiment",
@@ -134,6 +134,29 @@
       ],
       "documentation": "<p>Gets information about the specified experiment template.</p>"
     },
+    "GetTargetResourceType": {
+      "name": "GetTargetResourceType",
+      "http": {
+        "method": "GET",
+        "requestUri": "/targetResourceTypes/{resourceType}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "GetTargetResourceTypeRequest"
+      },
+      "output": {
+        "shape": "GetTargetResourceTypeResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p>Gets information about the specified resource type.</p>"
+    },
     "ListActions": {
       "name": "ListActions",
       "http": {
@@ -152,7 +175,7 @@
           "shape": "ValidationException"
         }
       ],
-      "documentation": "<p>Lists the available AWS FIS actions.</p>"
+      "documentation": "<p>Lists the available FIS actions.</p>"
     },
     "ListExperimentTemplates": {
       "name": "ListExperimentTemplates",
@@ -208,6 +231,26 @@
         "shape": "ListTagsForResourceResponse"
       },
       "documentation": "<p>Lists the tags for the specified resource.</p>"
+    },
+    "ListTargetResourceTypes": {
+      "name": "ListTargetResourceTypes",
+      "http": {
+        "method": "GET",
+        "requestUri": "/targetResourceTypes",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ListTargetResourceTypesRequest"
+      },
+      "output": {
+        "shape": "ListTargetResourceTypesResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        }
+      ],
+      "documentation": "<p>Lists the target resource types.</p>"
     },
     "StartExperiment": {
       "name": "StartExperiment",
@@ -343,7 +386,7 @@
           "documentation": "<p>The tags for the action.</p>"
         }
       },
-      "documentation": "<p>Describes an action. For more information, see <a href=\"https://docs.aws.amazon.com/fis/latest/userguide/fis-actions-reference.html\">AWS FIS actions</a> in the <i>AWS Fault Injection Simulator User Guide</i>.</p>"
+      "documentation": "<p>Describes an action. For more information, see <a href=\"https://docs.aws.amazon.com/fis/latest/userguide/fis-actions-reference.html\">FIS actions</a> in the <i>Fault Injection Simulator User Guide</i>.</p>"
     },
     "ActionDescription": {
       "type": "string",
@@ -424,7 +467,7 @@
       "type": "structure",
       "members": {
         "resourceType": {
-          "shape": "TargetResourceType",
+          "shape": "TargetResourceTypeId",
           "documentation": "<p>The resource type of the target.</p>"
         }
       },
@@ -450,6 +493,12 @@
       "min": 1,
       "pattern": "[\\S]+"
     },
+    "CloudWatchLogGroupArn": {
+      "type": "string",
+      "max": 2048,
+      "min": 20,
+      "pattern": "[\\S]+"
+    },
     "CreateExperimentTemplateActionInput": {
       "type": "structure",
       "required": [
@@ -458,7 +507,7 @@
       "members": {
         "actionId": {
           "shape": "ActionId",
-          "documentation": "<p>The ID of the action.</p>"
+          "documentation": "<p>The ID of the action. The format of the action ID is: aws:<i>service-name</i>:<i>action-type</i>.</p>"
         },
         "description": {
           "shape": "ExperimentTemplateActionDescription",
@@ -477,7 +526,7 @@
           "documentation": "<p>The name of the action that must be completed before the current action starts. Omit this parameter to run the action at the start of the experiment.</p>"
         }
       },
-      "documentation": "<p>Specifies an action for an experiment template.</p>"
+      "documentation": "<p>Specifies an action for an experiment template.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/fis/latest/userguide/actions.html\">Actions</a> in the <i>Fault Injection Simulator User Guide</i>.</p>"
     },
     "CreateExperimentTemplateActionInputMap": {
       "type": "map",
@@ -487,6 +536,27 @@
       "value": {
         "shape": "CreateExperimentTemplateActionInput"
       }
+    },
+    "CreateExperimentTemplateLogConfigurationInput": {
+      "type": "structure",
+      "required": [
+        "logSchemaVersion"
+      ],
+      "members": {
+        "cloudWatchLogsConfiguration": {
+          "shape": "ExperimentTemplateCloudWatchLogsLogConfigurationInput",
+          "documentation": "<p>The configuration for experiment logging to Amazon CloudWatch Logs.</p>"
+        },
+        "s3Configuration": {
+          "shape": "ExperimentTemplateS3LogConfigurationInput",
+          "documentation": "<p>The configuration for experiment logging to Amazon S3.</p>"
+        },
+        "logSchemaVersion": {
+          "shape": "LogSchemaVersion",
+          "documentation": "<p>The schema version.</p>"
+        }
+      },
+      "documentation": "<p>Specifies the configuration for experiment logging.</p>"
     },
     "CreateExperimentTemplateRequest": {
       "type": "structure",
@@ -505,7 +575,7 @@
         },
         "description": {
           "shape": "ExperimentTemplateDescription",
-          "documentation": "<p>A description for the experiment template. Can contain up to 64 letters (A-Z and a-z).</p>"
+          "documentation": "<p>A description for the experiment template.</p>"
         },
         "stopConditions": {
           "shape": "CreateExperimentTemplateStopConditionInputList",
@@ -521,11 +591,15 @@
         },
         "roleArn": {
           "shape": "RoleArn",
-          "documentation": "<p>The Amazon Resource Name (ARN) of an IAM role that grants the AWS FIS service permission to perform service actions on your behalf.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of an IAM role that grants the FIS service permission to perform service actions on your behalf.</p>"
         },
         "tags": {
           "shape": "TagMap",
           "documentation": "<p>The tags to apply to the experiment template.</p>"
+        },
+        "logConfiguration": {
+          "shape": "CreateExperimentTemplateLogConfigurationInput",
+          "documentation": "<p>The configuration for experiment logging.</p>"
         }
       }
     },
@@ -569,8 +643,8 @@
       ],
       "members": {
         "resourceType": {
-          "shape": "ResourceType",
-          "documentation": "<p>The AWS resource type. The resource type must be supported for the specified action.</p>"
+          "shape": "TargetResourceTypeId",
+          "documentation": "<p>The resource type. The resource type must be supported for the specified action.</p>"
         },
         "resourceArns": {
           "shape": "ResourceArnList",
@@ -587,9 +661,13 @@
         "selectionMode": {
           "shape": "ExperimentTemplateTargetSelectionMode",
           "documentation": "<p>Scopes the identified resources to a specific count of the resources at random, or a percentage of the resources. All identified resources are included in the target.</p> <ul> <li> <p>ALL - Run the action on all identified targets. This is the default.</p> </li> <li> <p>COUNT(n) - Run the action on the specified number of targets, chosen from the identified targets at random. For example, COUNT(1) selects one of the targets.</p> </li> <li> <p>PERCENT(n) - Run the action on the specified percentage of targets, chosen from the identified targets at random. For example, PERCENT(25) selects 25% of the targets.</p> </li> </ul>"
+        },
+        "parameters": {
+          "shape": "ExperimentTemplateTargetParameterMap",
+          "documentation": "<p>The resource type parameters.</p>"
         }
       },
-      "documentation": "<p>Specifies a target for an experiment. You must specify at least one Amazon Resource Name (ARN) or at least one resource tag. You cannot specify both ARNs and tags.</p>"
+      "documentation": "<p>Specifies a target for an experiment. You must specify at least one Amazon Resource Name (ARN) or at least one resource tag. You cannot specify both ARNs and tags.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/fis/latest/userguide/targets.html\">Targets</a> in the <i>Fault Injection Simulator User Guide</i>.</p>"
     },
     "CreateExperimentTemplateTargetInputMap": {
       "type": "map",
@@ -639,7 +717,7 @@
         },
         "roleArn": {
           "shape": "RoleArn",
-          "documentation": "<p>The Amazon Resource Name (ARN) of an IAM role that grants the AWS FIS service permission to perform service actions on your behalf.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of an IAM role that grants the FIS service permission to perform service actions on your behalf.</p>"
         },
         "state": {
           "shape": "ExperimentState",
@@ -659,11 +737,11 @@
         },
         "creationTime": {
           "shape": "CreationTime",
-          "documentation": "<p>The time the experiment was created.</p>"
+          "documentation": "<p>The time that the experiment was created.</p>"
         },
         "startTime": {
           "shape": "ExperimentStartTime",
-          "documentation": "<p>The time that the experiment was started.</p>"
+          "documentation": "<p>The time that the experiment started.</p>"
         },
         "endTime": {
           "shape": "ExperimentEndTime",
@@ -672,6 +750,10 @@
         "tags": {
           "shape": "TagMap",
           "documentation": "<p>The tags for the experiment.</p>"
+        },
+        "logConfiguration": {
+          "shape": "ExperimentLogConfiguration",
+          "documentation": "<p>The configuration for experiment logging.</p>"
         }
       },
       "documentation": "<p>Describes an experiment.</p>"
@@ -702,6 +784,14 @@
         "state": {
           "shape": "ExperimentActionState",
           "documentation": "<p>The state of the action.</p>"
+        },
+        "startTime": {
+          "shape": "ExperimentActionStartTime",
+          "documentation": "<p>The time that the action started.</p>"
+        },
+        "endTime": {
+          "shape": "ExperimentActionEndTime",
+          "documentation": "<p>The time that the action ended.</p>"
         }
       },
       "documentation": "<p>Describes the action for an experiment.</p>"
@@ -710,6 +800,9 @@
       "type": "string",
       "max": 512,
       "pattern": "[\\s\\S]+"
+    },
+    "ExperimentActionEndTime": {
+      "type": "timestamp"
     },
     "ExperimentActionMap": {
       "type": "map",
@@ -754,6 +847,9 @@
       "member": {
         "shape": "ExperimentActionStartAfter"
       }
+    },
+    "ExperimentActionStartTime": {
+      "type": "timestamp"
     },
     "ExperimentActionState": {
       "type": "structure",
@@ -801,6 +897,16 @@
       "max": 64,
       "pattern": "[\\S]+"
     },
+    "ExperimentCloudWatchLogsLogConfiguration": {
+      "type": "structure",
+      "members": {
+        "logGroupArn": {
+          "shape": "CloudWatchLogGroupArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the destination Amazon CloudWatch Logs log group.</p>"
+        }
+      },
+      "documentation": "<p>Describes the configuration for experiment logging to Amazon CloudWatch Logs.</p>"
+    },
     "ExperimentEndTime": {
       "type": "timestamp"
     },
@@ -808,6 +914,38 @@
       "type": "string",
       "max": 64,
       "pattern": "[\\S]+"
+    },
+    "ExperimentLogConfiguration": {
+      "type": "structure",
+      "members": {
+        "cloudWatchLogsConfiguration": {
+          "shape": "ExperimentCloudWatchLogsLogConfiguration",
+          "documentation": "<p>The configuration for experiment logging to Amazon CloudWatch Logs.</p>"
+        },
+        "s3Configuration": {
+          "shape": "ExperimentS3LogConfiguration",
+          "documentation": "<p>The configuration for experiment logging to Amazon S3.</p>"
+        },
+        "logSchemaVersion": {
+          "shape": "LogSchemaVersion",
+          "documentation": "<p>The schema version.</p>"
+        }
+      },
+      "documentation": "<p>Describes the configuration for experiment logging.</p>"
+    },
+    "ExperimentS3LogConfiguration": {
+      "type": "structure",
+      "members": {
+        "bucketName": {
+          "shape": "S3BucketName",
+          "documentation": "<p>The name of the destination bucket.</p>"
+        },
+        "prefix": {
+          "shape": "S3ObjectKey",
+          "documentation": "<p>The bucket prefix.</p>"
+        }
+      },
+      "documentation": "<p>Describes the configuration for experiment logging to Amazon S3.</p>"
     },
     "ExperimentStartTime": {
       "type": "timestamp"
@@ -899,7 +1037,7 @@
       "type": "structure",
       "members": {
         "resourceType": {
-          "shape": "ResourceType",
+          "shape": "TargetResourceTypeId",
           "documentation": "<p>The resource type.</p>"
         },
         "resourceArns": {
@@ -917,6 +1055,10 @@
         "selectionMode": {
           "shape": "ExperimentTargetSelectionMode",
           "documentation": "<p>Scopes the identified resources to a specific count or percentage.</p>"
+        },
+        "parameters": {
+          "shape": "ExperimentTargetParameterMap",
+          "documentation": "<p>The resource type parameters.</p>"
         }
       },
       "documentation": "<p>Describes a target for an experiment.</p>"
@@ -971,6 +1113,25 @@
       "max": 64,
       "pattern": "[\\S]+"
     },
+    "ExperimentTargetParameterMap": {
+      "type": "map",
+      "key": {
+        "shape": "ExperimentTargetParameterName"
+      },
+      "value": {
+        "shape": "ExperimentTargetParameterValue"
+      }
+    },
+    "ExperimentTargetParameterName": {
+      "type": "string",
+      "max": 64,
+      "pattern": "[\\S]+"
+    },
+    "ExperimentTargetParameterValue": {
+      "type": "string",
+      "max": 1024,
+      "min": 1
+    },
     "ExperimentTargetSelectionMode": {
       "type": "string",
       "max": 64,
@@ -1014,6 +1175,10 @@
         "tags": {
           "shape": "TagMap",
           "documentation": "<p>The tags for the experiment template.</p>"
+        },
+        "logConfiguration": {
+          "shape": "ExperimentTemplateLogConfiguration",
+          "documentation": "<p>The configuration for experiment logging.</p>"
         }
       },
       "documentation": "<p>Describes an experiment template.</p>"
@@ -1107,6 +1272,29 @@
       "max": 64,
       "pattern": "[\\S]+"
     },
+    "ExperimentTemplateCloudWatchLogsLogConfiguration": {
+      "type": "structure",
+      "members": {
+        "logGroupArn": {
+          "shape": "CloudWatchLogGroupArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the destination Amazon CloudWatch Logs log group.</p>"
+        }
+      },
+      "documentation": "<p>Describes the configuration for experiment logging to Amazon CloudWatch Logs.</p>"
+    },
+    "ExperimentTemplateCloudWatchLogsLogConfigurationInput": {
+      "type": "structure",
+      "required": [
+        "logGroupArn"
+      ],
+      "members": {
+        "logGroupArn": {
+          "shape": "CloudWatchLogGroupArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the destination Amazon CloudWatch Logs log group.</p>"
+        }
+      },
+      "documentation": "<p>Specifies the configuration for experiment logging to Amazon CloudWatch Logs.</p>"
+    },
     "ExperimentTemplateDescription": {
       "type": "string",
       "max": 512,
@@ -1116,6 +1304,55 @@
       "type": "string",
       "max": 64,
       "pattern": "[\\S]+"
+    },
+    "ExperimentTemplateLogConfiguration": {
+      "type": "structure",
+      "members": {
+        "cloudWatchLogsConfiguration": {
+          "shape": "ExperimentTemplateCloudWatchLogsLogConfiguration",
+          "documentation": "<p>The configuration for experiment logging to Amazon CloudWatch Logs.</p>"
+        },
+        "s3Configuration": {
+          "shape": "ExperimentTemplateS3LogConfiguration",
+          "documentation": "<p>The configuration for experiment logging to Amazon S3.</p>"
+        },
+        "logSchemaVersion": {
+          "shape": "LogSchemaVersion",
+          "documentation": "<p>The schema version.</p>"
+        }
+      },
+      "documentation": "<p>Describes the configuration for experiment logging.</p>"
+    },
+    "ExperimentTemplateS3LogConfiguration": {
+      "type": "structure",
+      "members": {
+        "bucketName": {
+          "shape": "S3BucketName",
+          "documentation": "<p>The name of the destination bucket.</p>"
+        },
+        "prefix": {
+          "shape": "S3ObjectKey",
+          "documentation": "<p>The bucket prefix.</p>"
+        }
+      },
+      "documentation": "<p>Describes the configuration for experiment logging to Amazon S3.</p>"
+    },
+    "ExperimentTemplateS3LogConfigurationInput": {
+      "type": "structure",
+      "required": [
+        "bucketName"
+      ],
+      "members": {
+        "bucketName": {
+          "shape": "S3BucketName",
+          "documentation": "<p>The name of the destination bucket.</p>"
+        },
+        "prefix": {
+          "shape": "S3ObjectKey",
+          "documentation": "<p>The bucket prefix.</p>"
+        }
+      },
+      "documentation": "<p>Specifies the configuration for experiment logging to Amazon S3.</p>"
     },
     "ExperimentTemplateStopCondition": {
       "type": "structure",
@@ -1173,7 +1410,7 @@
       "type": "structure",
       "members": {
         "resourceType": {
-          "shape": "ResourceType",
+          "shape": "TargetResourceTypeId",
           "documentation": "<p>The resource type.</p>"
         },
         "resourceArns": {
@@ -1191,6 +1428,10 @@
         "selectionMode": {
           "shape": "ExperimentTemplateTargetSelectionMode",
           "documentation": "<p>Scopes the identified resources to a specific count or percentage.</p>"
+        },
+        "parameters": {
+          "shape": "ExperimentTemplateTargetParameterMap",
+          "documentation": "<p>The resource type parameters.</p>"
         }
       },
       "documentation": "<p>Describes a target for an experiment template.</p>"
@@ -1253,7 +1494,7 @@
           "documentation": "<p>The attribute values for the filter.</p>"
         }
       },
-      "documentation": "<p>Describes a filter used for the target resource input in an experiment template.</p>"
+      "documentation": "<p>Specifies a filter used for the target resource input in an experiment template.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/fis/latest/userguide/targets.html#target-filters\">Resource filters</a> in the <i>Fault Injection Simulator User Guide</i>.</p>"
     },
     "ExperimentTemplateTargetMap": {
       "type": "map",
@@ -1268,6 +1509,26 @@
       "type": "string",
       "max": 64,
       "pattern": "[\\S]+"
+    },
+    "ExperimentTemplateTargetParameterMap": {
+      "type": "map",
+      "key": {
+        "shape": "ExperimentTemplateTargetParameterName"
+      },
+      "value": {
+        "shape": "ExperimentTemplateTargetParameterValue"
+      }
+    },
+    "ExperimentTemplateTargetParameterName": {
+      "type": "string",
+      "max": 64,
+      "pattern": "[\\S]+"
+    },
+    "ExperimentTemplateTargetParameterValue": {
+      "type": "string",
+      "max": 1024,
+      "min": 1,
+      "pattern": "^[\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]+$"
     },
     "ExperimentTemplateTargetSelectionMode": {
       "type": "string",
@@ -1340,6 +1601,29 @@
         "experimentTemplate": {
           "shape": "ExperimentTemplate",
           "documentation": "<p>Information about the experiment template.</p>"
+        }
+      }
+    },
+    "GetTargetResourceTypeRequest": {
+      "type": "structure",
+      "required": [
+        "resourceType"
+      ],
+      "members": {
+        "resourceType": {
+          "shape": "TargetResourceTypeId",
+          "documentation": "<p>The resource type.</p>",
+          "location": "uri",
+          "locationName": "resourceType"
+        }
+      }
+    },
+    "GetTargetResourceTypeResponse": {
+      "type": "structure",
+      "members": {
+        "targetResourceType": {
+          "shape": "TargetResourceType",
+          "documentation": "<p>Information about the resource type.</p>"
         }
       }
     },
@@ -1477,6 +1761,45 @@
         }
       }
     },
+    "ListTargetResourceTypesMaxResults": {
+      "type": "integer",
+      "max": 100,
+      "min": 1
+    },
+    "ListTargetResourceTypesRequest": {
+      "type": "structure",
+      "members": {
+        "maxResults": {
+          "shape": "ListTargetResourceTypesMaxResults",
+          "documentation": "<p>The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>",
+          "box": true,
+          "location": "querystring",
+          "locationName": "maxResults"
+        },
+        "nextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token for the next page of results.</p>",
+          "location": "querystring",
+          "locationName": "nextToken"
+        }
+      }
+    },
+    "ListTargetResourceTypesResponse": {
+      "type": "structure",
+      "members": {
+        "targetResourceTypes": {
+          "shape": "TargetResourceTypeSummaryList",
+          "documentation": "<p>The target resource types.</p>"
+        },
+        "nextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>"
+        }
+      }
+    },
+    "LogSchemaVersion": {
+      "type": "integer"
+    },
     "NextToken": {
       "type": "string",
       "max": 1024,
@@ -1496,16 +1819,23 @@
       },
       "max": 5
     },
-    "ResourceType": {
-      "type": "string",
-      "max": 64,
-      "pattern": "[\\S]+"
-    },
     "RoleArn": {
       "type": "string",
       "max": 2048,
       "min": 20,
       "pattern": "[\\S]+"
+    },
+    "S3BucketName": {
+      "type": "string",
+      "max": 63,
+      "min": 3,
+      "pattern": "[\\S]+"
+    },
+    "S3ObjectKey": {
+      "type": "string",
+      "max": 1024,
+      "min": 1,
+      "pattern": "[\\s\\S]+"
     },
     "StartExperimentRequest": {
       "type": "structure",
@@ -1622,9 +1952,89 @@
       "pattern": "[\\s\\S]*"
     },
     "TargetResourceType": {
+      "type": "structure",
+      "members": {
+        "resourceType": {
+          "shape": "TargetResourceTypeId",
+          "documentation": "<p>The resource type.</p>"
+        },
+        "description": {
+          "shape": "TargetResourceTypeDescription",
+          "documentation": "<p>A description of the resource type.</p>"
+        },
+        "parameters": {
+          "shape": "TargetResourceTypeParameterMap",
+          "documentation": "<p>The parameters for the resource type.</p>"
+        }
+      },
+      "documentation": "<p>Describes a resource type.</p>"
+    },
+    "TargetResourceTypeDescription": {
+      "type": "string",
+      "max": 512,
+      "pattern": "[\\s\\S]+"
+    },
+    "TargetResourceTypeId": {
       "type": "string",
       "max": 128,
       "pattern": "[\\S]+"
+    },
+    "TargetResourceTypeParameter": {
+      "type": "structure",
+      "members": {
+        "description": {
+          "shape": "TargetResourceTypeParameterDescription",
+          "documentation": "<p>A description of the parameter.</p>"
+        },
+        "required": {
+          "shape": "TargetResourceTypeParameterRequired",
+          "documentation": "<p>Indicates whether the parameter is required.</p>",
+          "box": true
+        }
+      },
+      "documentation": "<p>Describes the parameters for a resource type. Use parameters to determine which tasks are identified during target resolution.</p>"
+    },
+    "TargetResourceTypeParameterDescription": {
+      "type": "string",
+      "max": 512,
+      "pattern": "[\\s\\S]+"
+    },
+    "TargetResourceTypeParameterMap": {
+      "type": "map",
+      "key": {
+        "shape": "TargetResourceTypeParameterName"
+      },
+      "value": {
+        "shape": "TargetResourceTypeParameter"
+      }
+    },
+    "TargetResourceTypeParameterName": {
+      "type": "string",
+      "max": 64,
+      "pattern": "[\\S]+"
+    },
+    "TargetResourceTypeParameterRequired": {
+      "type": "boolean"
+    },
+    "TargetResourceTypeSummary": {
+      "type": "structure",
+      "members": {
+        "resourceType": {
+          "shape": "TargetResourceTypeId",
+          "documentation": "<p>The resource type.</p>"
+        },
+        "description": {
+          "shape": "TargetResourceTypeDescription",
+          "documentation": "<p>A description of the resource type.</p>"
+        }
+      },
+      "documentation": "<p>Describes a resource type.</p>"
+    },
+    "TargetResourceTypeSummaryList": {
+      "type": "list",
+      "member": {
+        "shape": "TargetResourceTypeSummary"
+      }
     },
     "UntagResourceRequest": {
       "type": "structure",
@@ -1685,6 +2095,24 @@
         "shape": "UpdateExperimentTemplateActionInputItem"
       }
     },
+    "UpdateExperimentTemplateLogConfigurationInput": {
+      "type": "structure",
+      "members": {
+        "cloudWatchLogsConfiguration": {
+          "shape": "ExperimentTemplateCloudWatchLogsLogConfigurationInput",
+          "documentation": "<p>The configuration for experiment logging to Amazon CloudWatch Logs.</p>"
+        },
+        "s3Configuration": {
+          "shape": "ExperimentTemplateS3LogConfigurationInput",
+          "documentation": "<p>The configuration for experiment logging to Amazon S3.</p>"
+        },
+        "logSchemaVersion": {
+          "shape": "LogSchemaVersion",
+          "documentation": "<p>The schema version.</p>"
+        }
+      },
+      "documentation": "<p>Specifies the configuration for experiment logging.</p>"
+    },
     "UpdateExperimentTemplateRequest": {
       "type": "structure",
       "required": [
@@ -1715,7 +2143,11 @@
         },
         "roleArn": {
           "shape": "RoleArn",
-          "documentation": "<p>The Amazon Resource Name (ARN) of an IAM role that grants the AWS FIS service permission to perform service actions on your behalf.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of an IAM role that grants the FIS service permission to perform service actions on your behalf.</p>"
+        },
+        "logConfiguration": {
+          "shape": "UpdateExperimentTemplateLogConfigurationInput",
+          "documentation": "<p>The configuration for experiment logging.</p>"
         }
       }
     },
@@ -1759,8 +2191,8 @@
       ],
       "members": {
         "resourceType": {
-          "shape": "ResourceType",
-          "documentation": "<p>The AWS resource type. The resource type must be supported for the specified action.</p>"
+          "shape": "TargetResourceTypeId",
+          "documentation": "<p>The resource type. The resource type must be supported for the specified action.</p>"
         },
         "resourceArns": {
           "shape": "ResourceArnList",
@@ -1777,6 +2209,10 @@
         "selectionMode": {
           "shape": "ExperimentTemplateTargetSelectionMode",
           "documentation": "<p>Scopes the identified resources to a specific count or percentage.</p>"
+        },
+        "parameters": {
+          "shape": "ExperimentTemplateTargetParameterMap",
+          "documentation": "<p>The resource type parameters.</p>"
         }
       },
       "documentation": "<p>Specifies a target for an experiment. You must specify at least one Amazon Resource Name (ARN) or at least one resource tag. You cannot specify both.</p>"
@@ -1791,5 +2227,5 @@
       }
     }
   },
-  "documentation": "<p>AWS Fault Injection Simulator is a managed service that enables you to perform fault injection experiments on your AWS workloads. For more information, see the <a href=\"https://docs.aws.amazon.com/fis/latest/userguide/\">AWS Fault Injection Simulator User Guide</a>.</p>"
+  "documentation": "<p>Fault Injection Simulator is a managed service that enables you to perform fault injection experiments on your Amazon Web Services workloads. For more information, see the <a href=\"https://docs.aws.amazon.com/fis/latest/userguide/\">Fault Injection Simulator User Guide</a>.</p>"
 }

@@ -192,6 +192,10 @@ declare namespace MediaPackageVod {
     SecretsRoleArn: __string;
   }
   export interface CmafEncryption {
+    /**
+     * An optional 128-bit, 16-byte hex value represented by a 32-character string, used in conjunction with the key for encrypting blocks. If you don't specify a value, then MediaPackage creates the constant initialization vector (IV).
+     */
+    ConstantInitializationVector?: __string;
     SpekeKeyProvider: SpekeKeyProvider;
   }
   export interface CmafPackage {
@@ -531,6 +535,10 @@ rounded to the nearest multiple of the source segment duration.
      */
     PackagingConfigurationId?: __string;
     /**
+     * The current processing status of the asset used for the packaging configuration. The status can be either QUEUED, PROCESSING, PLAYABLE, or FAILED. Status information won't be available for most assets ingested before 2021-09-30.
+     */
+    Status?: __string;
+    /**
      * The URL of the parent manifest for the repackaged Asset.
      */
     Url?: __string;
@@ -593,6 +601,10 @@ it will be passed through to HLS output.
      * A list of HLS manifest configurations.
      */
     HlsManifests: __listOfHlsManifest;
+    /**
+     * When enabled, MediaPackage passes through digital video broadcasting (DVB) subtitles into the output.
+     */
+    IncludeDvbSubtitles?: __boolean;
     /**
      * Duration (in seconds) of each fragment. Actual fragments will be
 rounded to the nearest multiple of the source fragment duration.

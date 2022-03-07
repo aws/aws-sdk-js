@@ -15,12 +15,22 @@
       "output_token": "NextToken",
       "limit_key": "MaxResults"
     },
+    "ListMailDomains": {
+      "input_token": "NextToken",
+      "output_token": "NextToken",
+      "limit_key": "MaxResults"
+    },
     "ListMailboxExportJobs": {
       "input_token": "NextToken",
       "output_token": "NextToken",
       "limit_key": "MaxResults"
     },
     "ListMailboxPermissions": {
+      "input_token": "NextToken",
+      "output_token": "NextToken",
+      "limit_key": "MaxResults"
+    },
+    "ListMobileDeviceAccessOverrides": {
       "input_token": "NextToken",
       "output_token": "NextToken",
       "limit_key": "MaxResults"

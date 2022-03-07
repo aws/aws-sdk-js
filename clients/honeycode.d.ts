@@ -92,6 +92,14 @@ declare class Honeycode extends Service {
    */
   listTables(callback?: (err: AWSError, data: Honeycode.Types.ListTablesResult) => void): Request<Honeycode.Types.ListTablesResult, AWSError>;
   /**
+   *  The ListTagsForResource API allows you to return a resource's tags. 
+   */
+  listTagsForResource(params: Honeycode.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: Honeycode.Types.ListTagsForResourceResult) => void): Request<Honeycode.Types.ListTagsForResourceResult, AWSError>;
+  /**
+   *  The ListTagsForResource API allows you to return a resource's tags. 
+   */
+  listTagsForResource(callback?: (err: AWSError, data: Honeycode.Types.ListTagsForResourceResult) => void): Request<Honeycode.Types.ListTagsForResourceResult, AWSError>;
+  /**
    *  The QueryTableRows API allows you to use a filter formula to query for specific rows in a table. 
    */
   queryTableRows(params: Honeycode.Types.QueryTableRowsRequest, callback?: (err: AWSError, data: Honeycode.Types.QueryTableRowsResult) => void): Request<Honeycode.Types.QueryTableRowsResult, AWSError>;
@@ -107,6 +115,22 @@ declare class Honeycode extends Service {
    *  The StartTableDataImportJob API allows you to start an import job on a table. This API will only return the id of the job that was started. To find out the status of the import request, you need to call the DescribeTableDataImportJob API. 
    */
   startTableDataImportJob(callback?: (err: AWSError, data: Honeycode.Types.StartTableDataImportJobResult) => void): Request<Honeycode.Types.StartTableDataImportJobResult, AWSError>;
+  /**
+   *  The TagResource API allows you to add tags to an ARN-able resource. Resource includes workbook, table, screen and screen-automation. 
+   */
+  tagResource(params: Honeycode.Types.TagResourceRequest, callback?: (err: AWSError, data: Honeycode.Types.TagResourceResult) => void): Request<Honeycode.Types.TagResourceResult, AWSError>;
+  /**
+   *  The TagResource API allows you to add tags to an ARN-able resource. Resource includes workbook, table, screen and screen-automation. 
+   */
+  tagResource(callback?: (err: AWSError, data: Honeycode.Types.TagResourceResult) => void): Request<Honeycode.Types.TagResourceResult, AWSError>;
+  /**
+   *  The UntagResource API allows you to removes tags from an ARN-able resource. Resource includes workbook, table, screen and screen-automation. 
+   */
+  untagResource(params: Honeycode.Types.UntagResourceRequest, callback?: (err: AWSError, data: Honeycode.Types.UntagResourceResult) => void): Request<Honeycode.Types.UntagResourceResult, AWSError>;
+  /**
+   *  The UntagResource API allows you to removes tags from an ARN-able resource. Resource includes workbook, table, screen and screen-automation. 
+   */
+  untagResource(callback?: (err: AWSError, data: Honeycode.Types.UntagResourceResult) => void): Request<Honeycode.Types.UntagResourceResult, AWSError>;
 }
 declare namespace Honeycode {
   export type AwsUserArn = string;
@@ -242,19 +266,27 @@ declare namespace Honeycode {
      */
     format?: Format;
     /**
-     *  The raw value of the data contained in the cell. The raw value depends on the format of the data in the cell. However the attribute in the API return value is always a string containing the raw value.   Cells with format DATE, DATE_TIME or TIME have the raw value as a floating point number where the whole number represents the number of days since 1/1/1900 and the fractional part represents the fraction of the day since midnight. For example, a cell with date 11/3/2020 has the raw value "44138". A cell with the time 9:00 AM has the raw value "0.375" and a cell with date/time value of 11/3/2020 9:00 AM has the raw value "44138.375". Notice that even though the raw value is a number in all three cases, it is still represented as a string.   Cells with format NUMBER, CURRENCY, PERCENTAGE and ACCOUNTING have the raw value of the data as the number representing the data being displayed. For example, the number 1.325 with two decimal places in the format will have it's raw value as "1.325" and formatted value as "1.33". A currency value for $10 will have the raw value as "10" and formatted value as "$10.00". A value representing 20% with two decimal places in the format will have its raw value as "0.2" and the formatted value as "20.00%". An accounting value of -$25 will have "-25" as the raw value and "$ (25.00)" as the formatted value.   Cells with format TEXT will have the raw text as the raw value. For example, a cell with text "John Smith" will have "John Smith" as both the raw value and the formatted value.   Cells with format CONTACT will have the name of the contact as a formatted value and the email address of the contact as the raw value. For example, a contact for John Smith will have "John Smith" as the formatted value and "john.smith@example.com" as the raw value.   Cells with format ROWLINK (aka picklist) will have the first column of the linked row as the formatted value and the row id of the linked row as the raw value. For example, a cell containing a picklist to a table that displays task status might have "Completed" as the formatted value and "row:dfcefaee-5b37-4355-8f28-40c3e4ff5dd4/ca432b2f-b8eb-431d-9fb5-cbe0342f9f03" as the raw value.   Cells with format AUTO or cells without any format that are auto-detected as one of the formats above will contain the raw and formatted values as mentioned above, based on the auto-detected formats. If there is no auto-detected format, the raw and formatted values will be the same as the data in the cell. 
+     *  The raw value of the data contained in the cell. The raw value depends on the format of the data in the cell. However the attribute in the API return value is always a string containing the raw value.   Cells with format DATE, DATE_TIME or TIME have the raw value as a floating point number where the whole number represents the number of days since 1/1/1900 and the fractional part represents the fraction of the day since midnight. For example, a cell with date 11/3/2020 has the raw value "44138". A cell with the time 9:00 AM has the raw value "0.375" and a cell with date/time value of 11/3/2020 9:00 AM has the raw value "44138.375". Notice that even though the raw value is a number in all three cases, it is still represented as a string.   Cells with format NUMBER, CURRENCY, PERCENTAGE and ACCOUNTING have the raw value of the data as the number representing the data being displayed. For example, the number 1.325 with two decimal places in the format will have it's raw value as "1.325" and formatted value as "1.33". A currency value for $10 will have the raw value as "10" and formatted value as "$10.00". A value representing 20% with two decimal places in the format will have its raw value as "0.2" and the formatted value as "20.00%". An accounting value of -$25 will have "-25" as the raw value and "$ (25.00)" as the formatted value.   Cells with format TEXT will have the raw text as the raw value. For example, a cell with text "John Smith" will have "John Smith" as both the raw value and the formatted value.   Cells with format CONTACT will have the name of the contact as a formatted value and the email address of the contact as the raw value. For example, a contact for John Smith will have "John Smith" as the formatted value and "john.smith@example.com" as the raw value.   Cells with format ROWLINK (aka picklist) will have the first column of the linked row as the formatted value and the row id of the linked row as the raw value. For example, a cell containing a picklist to a table that displays task status might have "Completed" as the formatted value and "row:dfcefaee-5b37-4355-8f28-40c3e4ff5dd4/ca432b2f-b8eb-431d-9fb5-cbe0342f9f03" as the raw value.   Cells with format ROWSET (aka multi-select or multi-record picklist) will by default have the first column of each of the linked rows as the formatted value in the list, and the rowset id of the linked rows as the raw value. For example, a cell containing a multi-select picklist to a table that contains items might have "Item A", "Item B" in the formatted value list and "rows:b742c1f4-6cb0-4650-a845-35eb86fcc2bb/ [fdea123b-8f68-474a-aa8a-5ff87aa333af,6daf41f0-a138-4eee-89da-123086d36ecf]" as the raw value.   Cells with format ATTACHMENT will have the name of the attachment as the formatted value and the attachment id as the raw value. For example, a cell containing an attachment named "image.jpeg" will have "image.jpeg" as the formatted value and "attachment:ca432b2f-b8eb-431d-9fb5-cbe0342f9f03" as the raw value.   Cells with format AUTO or cells without any format that are auto-detected as one of the formats above will contain the raw and formatted values as mentioned above, based on the auto-detected formats. If there is no auto-detected format, the raw and formatted values will be the same as the data in the cell. 
      */
     rawValue?: RawValue;
     /**
      *  The formatted value of the cell. This is the value that you see displayed in the cell in the UI.   Note that the formatted value of a cell is always represented as a string irrespective of the data that is stored in the cell. For example, if a cell contains a date, the formatted value of the cell is the string representation of the formatted date being shown in the cell in the UI. See details in the rawValue field below for how cells of different formats will have different raw and formatted values. 
      */
     formattedValue?: FormattedValue;
+    /**
+     *  A list of formatted values of the cell. This field is only returned when the cell is ROWSET format (aka multi-select or multi-record picklist). Values in the list are always represented as strings. The formattedValue field will be empty if this field is returned. 
+     */
+    formattedValues?: FormattedValuesList;
   }
   export interface CellInput {
     /**
      *  Fact represents the data that is entered into a cell. This data can be free text or a formula. Formulas need to start with the equals (=) sign. 
      */
     fact?: Fact;
+    /**
+     *  A list representing the values that are entered into a ROWSET cell. Facts list can have either only values or rowIDs, and rowIDs should from the same table. 
+     */
+    facts?: FactList;
   }
   export type Cells = Cell[];
   export type ClientRequestToken = string;
@@ -341,6 +373,10 @@ declare namespace Honeycode {
      *  The metadata about the job that was submitted for import. 
      */
     jobMetadata: TableDataImportJobMetadata;
+    /**
+     *  If job status is failed, error code to understand reason for the failure. 
+     */
+    errorCode?: ErrorCode;
   }
   export interface DestinationOptions {
     /**
@@ -349,7 +385,9 @@ declare namespace Honeycode {
     columnMap?: ImportColumnMap;
   }
   export type Email = string;
+  export type ErrorCode = "ACCESS_DENIED"|"INVALID_URL_ERROR"|"INVALID_IMPORT_OPTIONS_ERROR"|"INVALID_TABLE_ID_ERROR"|"INVALID_TABLE_COLUMN_ID_ERROR"|"TABLE_NOT_FOUND_ERROR"|"FILE_EMPTY_ERROR"|"INVALID_FILE_TYPE_ERROR"|"FILE_PARSING_ERROR"|"FILE_SIZE_LIMIT_ERROR"|"FILE_NOT_FOUND_ERROR"|"UNKNOWN_ERROR"|"RESOURCE_NOT_FOUND_ERROR"|"SYSTEM_LIMIT_ERROR"|string;
   export type Fact = string;
+  export type FactList = Fact[];
   export interface FailedBatchItem {
     /**
      *  The id of the batch item that failed. This is the batch item id for the BatchCreateTableRows and BatchUpsertTableRows operations and the row id for the BatchUpdateTableRows and BatchDeleteTableRows operations. 
@@ -371,8 +409,9 @@ declare namespace Honeycode {
      */
     contextRowId?: RowId;
   }
-  export type Format = "AUTO"|"NUMBER"|"CURRENCY"|"DATE"|"TIME"|"DATE_TIME"|"PERCENTAGE"|"TEXT"|"ACCOUNTING"|"CONTACT"|"ROWLINK"|string;
+  export type Format = "AUTO"|"NUMBER"|"CURRENCY"|"DATE"|"TIME"|"DATE_TIME"|"PERCENTAGE"|"TEXT"|"ACCOUNTING"|"CONTACT"|"ROWLINK"|"ROWSET"|string;
   export type FormattedValue = string;
+  export type FormattedValuesList = FormattedValue[];
   export type Formula = string;
   export interface GetScreenDataRequest {
     /**
@@ -380,7 +419,7 @@ declare namespace Honeycode {
      */
     workbookId: ResourceId;
     /**
-     * The ID of the app that contains the screem.
+     * The ID of the app that contains the screen.
      */
     appId: ResourceId;
     /**
@@ -588,6 +627,18 @@ declare namespace Honeycode {
      */
     workbookCursor?: WorkbookCursor;
   }
+  export interface ListTagsForResourceRequest {
+    /**
+     * The resource's Amazon Resource Name (ARN).
+     */
+    resourceArn: ResourceArn;
+  }
+  export interface ListTagsForResourceResult {
+    /**
+     * The resource's tags.
+     */
+    tags?: TagsMap;
+  }
   export type MaxResults = number;
   export type Name = string;
   export type PaginationToken = string;
@@ -632,6 +683,7 @@ declare namespace Honeycode {
     workbookCursor: WorkbookCursor;
   }
   export type RawValue = string;
+  export type ResourceArn = string;
   export type ResourceId = string;
   export type ResourceIds = ResourceId[];
   export type ResultHeader = ColumnMetadata[];
@@ -763,7 +815,35 @@ declare namespace Honeycode {
   }
   export type TableRows = TableRow[];
   export type Tables = Table[];
+  export type TagKey = string;
+  export type TagKeysList = TagKey[];
+  export interface TagResourceRequest {
+    /**
+     * The resource's Amazon Resource Name (ARN).
+     */
+    resourceArn: ResourceArn;
+    /**
+     * A list of tags to apply to the resource.
+     */
+    tags: TagsMap;
+  }
+  export interface TagResourceResult {
+  }
+  export type TagValue = string;
+  export type TagsMap = {[key: string]: TagValue};
   export type TimestampInMillis = Date;
+  export interface UntagResourceRequest {
+    /**
+     * The resource's Amazon Resource Name (ARN).
+     */
+    resourceArn: ResourceArn;
+    /**
+     * A list of tag keys to remove from the resource.
+     */
+    tagKeys: TagKeysList;
+  }
+  export interface UntagResourceResult {
+  }
   export interface UpdateRowData {
     /**
      *  The id of the row that needs to be updated. 

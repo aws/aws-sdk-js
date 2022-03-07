@@ -1,0 +1,7 @@
+require_relative 'handlers/base'
+require_relative 'handlers/class_handler'
+require_relative 'handlers/comment_handler'
+require_relative 'handlers/constant_handler'
+require_relative 'handlers/instance_method_handler'
+require_relative 'handlers/mixin_handler'
+require_relative 'handlers/module_handler'

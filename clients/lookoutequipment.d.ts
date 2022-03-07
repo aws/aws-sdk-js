@@ -68,11 +68,11 @@ declare class LookoutEquipment extends Service {
    */
   describeDataIngestionJob(callback?: (err: AWSError, data: LookoutEquipment.Types.DescribeDataIngestionJobResponse) => void): Request<LookoutEquipment.Types.DescribeDataIngestionJobResponse, AWSError>;
   /**
-   * Provides information on a specified dataset such as the schema location, status, and so on.
+   * Provides a JSON description of the data that is in each time series dataset, including names, column names, and data types.
    */
   describeDataset(params: LookoutEquipment.Types.DescribeDatasetRequest, callback?: (err: AWSError, data: LookoutEquipment.Types.DescribeDatasetResponse) => void): Request<LookoutEquipment.Types.DescribeDatasetResponse, AWSError>;
   /**
-   * Provides information on a specified dataset such as the schema location, status, and so on.
+   * Provides a JSON description of the data that is in each time series dataset, including names, column names, and data types.
    */
   describeDataset(callback?: (err: AWSError, data: LookoutEquipment.Types.DescribeDatasetResponse) => void): Request<LookoutEquipment.Types.DescribeDatasetResponse, AWSError>;
   /**
@@ -84,11 +84,11 @@ declare class LookoutEquipment extends Service {
    */
   describeInferenceScheduler(callback?: (err: AWSError, data: LookoutEquipment.Types.DescribeInferenceSchedulerResponse) => void): Request<LookoutEquipment.Types.DescribeInferenceSchedulerResponse, AWSError>;
   /**
-   * Provides overall information about a specific ML model, including model name and ARN, dataset, training and evaluation information, status, and so on. 
+   * Provides a JSON containing the overall information about a specific ML model, including model name and ARN, dataset, training and evaluation information, status, and so on. 
    */
   describeModel(params: LookoutEquipment.Types.DescribeModelRequest, callback?: (err: AWSError, data: LookoutEquipment.Types.DescribeModelResponse) => void): Request<LookoutEquipment.Types.DescribeModelResponse, AWSError>;
   /**
-   * Provides overall information about a specific ML model, including model name and ARN, dataset, training and evaluation information, status, and so on. 
+   * Provides a JSON containing the overall information about a specific ML model, including model name and ARN, dataset, training and evaluation information, status, and so on. 
    */
   describeModel(callback?: (err: AWSError, data: LookoutEquipment.Types.DescribeModelResponse) => void): Request<LookoutEquipment.Types.DescribeModelResponse, AWSError>;
   /**
@@ -202,7 +202,7 @@ declare namespace LookoutEquipment {
      */
     DatasetSchema: DatasetSchema;
     /**
-     * Provides the identifier of the AWS KMS customer master key (CMK) used to encrypt dataset data by Amazon Lookout for Equipment. 
+     * Provides the identifier of the KMS key used to encrypt dataset data by Amazon Lookout for Equipment. 
      */
     ServerSideKmsKeyId?: NameOrArn;
     /**
@@ -238,7 +238,7 @@ declare namespace LookoutEquipment {
      */
     InferenceSchedulerName: InferenceSchedulerName;
     /**
-     *  A period of time (in minutes) by which inference on the data is delayed after the data starts. For instance, if you select an offset delay time of five minutes, inference will not begin on the data until the first data measurement after the five minute mark. For example, if five minutes is selected, the inference scheduler will wake up at the configured frequency with the additional five minute delay time to check the customer S3 bucket. The customer can upload data at the same frequency and they don't need to stop and restart the scheduler when uploading new data. 
+     * A period of time (in minutes) by which inference on the data is delayed after the data starts. For instance, if you select an offset delay time of five minutes, inference will not begin on the data until the first data measurement after the five minute mark. For example, if five minutes is selected, the inference scheduler will wake up at the configured frequency with the additional five minute delay time to check the customer S3 bucket. The customer can upload data at the same frequency and they don't need to stop and restart the scheduler when uploading new data. 
      */
     DataDelayOffsetInMinutes?: DataDelayOffsetInMinutes;
     /**
@@ -258,7 +258,7 @@ declare namespace LookoutEquipment {
      */
     RoleArn: IamRoleArn;
     /**
-     * Provides the identifier of the AWS KMS customer master key (CMK) used to encrypt inference scheduler data by Amazon Lookout for Equipment. 
+     * Provides the identifier of the KMS key used to encrypt inference scheduler data by Amazon Lookout for Equipment. 
      */
     ServerSideKmsKeyId?: NameOrArn;
     /**
@@ -330,13 +330,17 @@ declare namespace LookoutEquipment {
      */
     DataPreProcessingConfiguration?: DataPreProcessingConfiguration;
     /**
-     * Provides the identifier of the AWS KMS customer master key (CMK) used to encrypt model data by Amazon Lookout for Equipment. 
+     * Provides the identifier of the KMS key used to encrypt model data by Amazon Lookout for Equipment. 
      */
     ServerSideKmsKeyId?: NameOrArn;
     /**
      *  Any tags associated with the ML model being created. 
      */
     Tags?: TagList;
+    /**
+     * Indicates that the asset associated with this sensor has been shut off. As long as this condition is met, Lookout for Equipment will not use data from this asset for training, evaluation, or inference.
+     */
+    OffCondition?: OffCondition;
   }
   export interface CreateModelResponse {
     /**
@@ -494,7 +498,7 @@ declare namespace LookoutEquipment {
      */
     Schema?: InlineDataSchema;
     /**
-     * Provides the identifier of the AWS KMS customer master key (CMK) used to encrypt dataset data by Amazon Lookout for Equipment. 
+     * Provides the identifier of the KMS key used to encrypt dataset data by Amazon Lookout for Equipment. 
      */
     ServerSideKmsKeyId?: KmsKeyArn;
     /**
@@ -558,7 +562,7 @@ declare namespace LookoutEquipment {
      */
     RoleArn?: IamRoleArn;
     /**
-     * Provides the identifier of the AWS KMS customer master key (CMK) used to encrypt inference scheduler data by Amazon Lookout for Equipment. 
+     * Provides the identifier of the KMS key used to encrypt inference scheduler data by Amazon Lookout for Equipment. 
      */
     ServerSideKmsKeyId?: KmsKeyArn;
   }
@@ -646,9 +650,13 @@ declare namespace LookoutEquipment {
      */
     CreatedAt?: Timestamp;
     /**
-     * Provides the identifier of the AWS KMS customer master key (CMK) used to encrypt model data by Amazon Lookout for Equipment. 
+     * Provides the identifier of the KMS key used to encrypt model data by Amazon Lookout for Equipment. 
      */
     ServerSideKmsKeyId?: KmsKeyArn;
+    /**
+     * Indicates that the asset associated with this sensor has been shut off. As long as this condition is met, Lookout for Equipment will not use data from this asset for training, evaluation, or inference.
+     */
+    OffCondition?: OffCondition;
   }
   export type FileNameTimestampFormat = string;
   export type IamRoleArn = string;
@@ -715,7 +723,7 @@ declare namespace LookoutEquipment {
      */
     InputTimeZoneOffset?: TimeZoneOffset;
     /**
-     * &gt; Specifies configuration information for the input data for the inference, including timestamp format and delimiter. 
+     * Specifies configuration information for the input data for the inference, including timestamp format and delimiter. 
      */
     InferenceInputNameConfiguration?: InferenceInputNameConfiguration;
   }
@@ -786,7 +794,7 @@ declare namespace LookoutEquipment {
      */
     Status?: InferenceSchedulerStatus;
     /**
-     * &gt; A period of time (in minutes) by which inference on the data is delayed after the data starts. For instance, if an offset delay time of five minutes was selected, inference will not begin on the data until the first data measurement after the five minute mark. For example, if five minutes is selected, the inference scheduler will wake up at the configured frequency with the additional five minute delay time to check the customer S3 bucket. The customer can upload data at the same frequency and they don't need to stop and restart the scheduler when uploading new data. 
+     * A period of time (in minutes) by which inference on the data is delayed after the data starts. For instance, if an offset delay time of five minutes was selected, inference will not begin on the data until the first data measurement after the five minute mark. For example, if five minutes is selected, the inference scheduler will wake up at the configured frequency with the additional five minute delay time to check the customer S3 bucket. The customer can upload data at the same frequency and they don't need to stop and restart the scheduler when uploading new data. 
      */
     DataDelayOffsetInMinutes?: DataDelayOffsetInMinutes;
     /**
@@ -1024,6 +1032,7 @@ declare namespace LookoutEquipment {
   }
   export type NameOrArn = string;
   export type NextToken = string;
+  export type OffCondition = string;
   export type S3Bucket = string;
   export type S3Key = string;
   export interface S3Object {
@@ -1168,7 +1177,7 @@ declare namespace LookoutEquipment {
      */
     InferenceSchedulerName: InferenceSchedulerIdentifier;
     /**
-     * &gt; A period of time (in minutes) by which inference on the data is delayed after the data starts. For instance, if you select an offset delay time of five minutes, inference will not begin on the data until the first data measurement after the five minute mark. For example, if five minutes is selected, the inference scheduler will wake up at the configured frequency with the additional five minute delay time to check the customer S3 bucket. The customer can upload data at the same frequency and they don't need to stop and restart the scheduler when uploading new data.
+     *  A period of time (in minutes) by which inference on the data is delayed after the data starts. For instance, if you select an offset delay time of five minutes, inference will not begin on the data until the first data measurement after the five minute mark. For example, if five minutes is selected, the inference scheduler will wake up at the configured frequency with the additional five minute delay time to check the customer S3 bucket. The customer can upload data at the same frequency and they don't need to stop and restart the scheduler when uploading new data.
      */
     DataDelayOffsetInMinutes?: DataDelayOffsetInMinutes;
     /**

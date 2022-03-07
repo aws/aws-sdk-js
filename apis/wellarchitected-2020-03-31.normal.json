@@ -42,7 +42,81 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Associate a lens to a workload.</p>"
+      "documentation": "<p>Associate a lens to a workload.</p> <p>Up to 10 lenses can be associated with a workload in a single API operation. A maximum of 20 lenses can be associated with a workload.</p> <note> <p> <b>Disclaimer</b> </p> <p>By accessing and/or applying custom lenses created by another Amazon Web Services user or account, you acknowledge that custom lenses created by other users and shared with you are Third Party Content as defined in the Amazon Web Services Customer Agreement. </p> </note>"
+    },
+    "CreateLensShare": {
+      "name": "CreateLensShare",
+      "http": {
+        "method": "POST",
+        "requestUri": "/lenses/{LensAlias}/shares"
+      },
+      "input": {
+        "shape": "CreateLensShareInput"
+      },
+      "output": {
+        "shape": "CreateLensShareOutput"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ServiceQuotaExceededException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Create a lens share.</p> <p>The owner of a lens can share it with other Amazon Web Services accounts and IAM users in the same Amazon Web Services Region. Shared access to a lens is not removed until the lens invitation is deleted.</p> <note> <p> <b>Disclaimer</b> </p> <p>By sharing your custom lenses with other Amazon Web Services accounts, you acknowledge that Amazon Web Services will make your custom lenses available to those other accounts. Those other accounts may continue to access and use your shared custom lenses even if you delete the custom lenses from your own Amazon Web Services account or terminate your Amazon Web Services account.</p> </note>"
+    },
+    "CreateLensVersion": {
+      "name": "CreateLensVersion",
+      "http": {
+        "method": "POST",
+        "requestUri": "/lenses/{LensAlias}/versions"
+      },
+      "input": {
+        "shape": "CreateLensVersionInput"
+      },
+      "output": {
+        "shape": "CreateLensVersionOutput"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ServiceQuotaExceededException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Create a new lens version.</p> <p>A lens can have up to 100 versions.</p> <p>After a lens has been imported, create a new lens version to publish it. The owner of a lens can share the lens with other Amazon Web Services accounts and IAM users in the same Amazon Web Services Region. Only the owner of a lens can delete it. </p>"
     },
     "CreateMilestone": {
       "name": "CreateMilestone",
@@ -113,7 +187,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Create a new workload.</p> <p>The owner of a workload can share the workload with other AWS accounts and IAM users in the same AWS Region. Only the owner of a workload can delete it.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/wellarchitected/latest/userguide/define-workload.html\">Defining a Workload</a> in the <i>AWS Well-Architected Tool User Guide</i>.</p>"
+      "documentation": "<p>Create a new workload.</p> <p>The owner of a workload can share the workload with other Amazon Web Services accounts and IAM users in the same Amazon Web Services Region. Only the owner of a workload can delete it.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/wellarchitected/latest/userguide/define-workload.html\">Defining a Workload</a> in the <i>Well-Architected Tool User Guide</i>.</p>"
     },
     "CreateWorkloadShare": {
       "name": "CreateWorkloadShare",
@@ -150,7 +224,69 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Create a workload share.</p> <p>The owner of a workload can share it with other AWS accounts and IAM users in the same AWS Region. Shared access to a workload is not removed until the workload invitation is deleted.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/wellarchitected/latest/userguide/workloads-sharing.html\">Sharing a Workload</a> in the <i>AWS Well-Architected Tool User Guide</i>.</p>"
+      "documentation": "<p>Create a workload share.</p> <p>The owner of a workload can share it with other Amazon Web Services accounts and IAM users in the same Amazon Web Services Region. Shared access to a workload is not removed until the workload invitation is deleted.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/wellarchitected/latest/userguide/workloads-sharing.html\">Sharing a Workload</a> in the <i>Well-Architected Tool User Guide</i>.</p>"
+    },
+    "DeleteLens": {
+      "name": "DeleteLens",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/lenses/{LensAlias}"
+      },
+      "input": {
+        "shape": "DeleteLensInput"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Delete an existing lens.</p> <p>Only the owner of a lens can delete it. After the lens is deleted, Amazon Web Services accounts and IAM users that you shared the lens with can continue to use it, but they will no longer be able to apply it to new workloads. </p> <note> <p> <b>Disclaimer</b> </p> <p>By sharing your custom lenses with other Amazon Web Services accounts, you acknowledge that Amazon Web Services will make your custom lenses available to those other accounts. Those other accounts may continue to access and use your shared custom lenses even if you delete the custom lenses from your own Amazon Web Services account or terminate your Amazon Web Services account.</p> </note>"
+    },
+    "DeleteLensShare": {
+      "name": "DeleteLensShare",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/lenses/{LensAlias}/shares/{ShareId}"
+      },
+      "input": {
+        "shape": "DeleteLensShareInput"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Delete a lens share.</p> <p>After the lens share is deleted, Amazon Web Services accounts and IAM users that you shared the lens with can continue to use it, but they will no longer be able to apply it to new workloads.</p> <note> <p> <b>Disclaimer</b> </p> <p>By sharing your custom lenses with other Amazon Web Services accounts, you acknowledge that Amazon Web Services will make your custom lenses available to those other accounts. Those other accounts may continue to access and use your shared custom lenses even if you delete the custom lenses from your own Amazon Web Services account or terminate your Amazon Web Services account.</p> </note>"
     },
     "DeleteWorkload": {
       "name": "DeleteWorkload",
@@ -243,7 +379,38 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Disassociate a lens from a workload.</p> <note> <p>The AWS Well-Architected Framework lens (<code>wellarchitected</code>) cannot be removed from a workload.</p> </note>"
+      "documentation": "<p>Disassociate a lens from a workload.</p> <p>Up to 10 lenses can be disassociated from a workload in a single API operation.</p> <note> <p>The Amazon Web Services Well-Architected Framework lens (<code>wellarchitected</code>) cannot be removed from a workload.</p> </note>"
+    },
+    "ExportLens": {
+      "name": "ExportLens",
+      "http": {
+        "method": "GET",
+        "requestUri": "/lenses/{LensAlias}/export"
+      },
+      "input": {
+        "shape": "ExportLensInput"
+      },
+      "output": {
+        "shape": "ExportLensOutput"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Export an existing lens.</p> <p>Lenses are defined in JSON. For more information, see <a href=\"https://docs.aws.amazon.com/wellarchitected/latest/userguide/lenses-format-specification.html\">JSON format specification</a> in the <i>Well-Architected Tool User Guide</i>. Only the owner of a lens can export it. </p> <note> <p> <b>Disclaimer</b> </p> <p>Do not include or gather personal identifiable information (PII) of end users or other identifiable individuals in or via your custom lenses. If your custom lens or those shared with you and used in your account do include or collect PII you are responsible for: ensuring that the included PII is processed in accordance with applicable law, providing adequate privacy notices, and obtaining necessary consents for processing such data.</p> </note>"
     },
     "GetAnswer": {
       "name": "GetAnswer",
@@ -274,7 +441,38 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Get lens review.</p>"
+      "documentation": "<p>Get the answer to a specific question in a workload review.</p>"
+    },
+    "GetLens": {
+      "name": "GetLens",
+      "http": {
+        "method": "GET",
+        "requestUri": "/lenses/{LensAlias}"
+      },
+      "input": {
+        "shape": "GetLensInput"
+      },
+      "output": {
+        "shape": "GetLensOutput"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Get an existing lens.</p>"
     },
     "GetLensReview": {
       "name": "GetLensReview",
@@ -431,6 +629,43 @@
       ],
       "documentation": "<p>Get an existing workload.</p>"
     },
+    "ImportLens": {
+      "name": "ImportLens",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/importLens"
+      },
+      "input": {
+        "shape": "ImportLensInput"
+      },
+      "output": {
+        "shape": "ImportLensOutput"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ServiceQuotaExceededException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Import a new lens.</p> <p>The lens cannot be applied to workloads or shared with other Amazon Web Services accounts until it's published with <a>CreateLensVersion</a> </p> <p>Lenses are defined in JSON. For more information, see <a href=\"https://docs.aws.amazon.com/wellarchitected/latest/userguide/lenses-format-specification.html\">JSON format specification</a> in the <i>Well-Architected Tool User Guide</i>.</p> <p>A custom lens cannot exceed 500 KB in size.</p> <note> <p> <b>Disclaimer</b> </p> <p>Do not include or gather personal identifiable information (PII) of end users or other identifiable individuals in or via your custom lenses. If your custom lens or those shared with you and used in your account do include or collect PII you are responsible for: ensuring that the included PII is processed in accordance with applicable law, providing adequate privacy notices, and obtaining necessary consents for processing such data.</p> </note>"
+    },
     "ListAnswers": {
       "name": "ListAnswers",
       "http": {
@@ -523,6 +758,37 @@
         }
       ],
       "documentation": "<p>List lens reviews.</p>"
+    },
+    "ListLensShares": {
+      "name": "ListLensShares",
+      "http": {
+        "method": "GET",
+        "requestUri": "/lenses/{LensAlias}/shares"
+      },
+      "input": {
+        "shape": "ListLensSharesInput"
+      },
+      "output": {
+        "shape": "ListLensSharesOutput"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>List the lens shares associated with the lens.</p>"
     },
     "ListLenses": {
       "name": "ListLenses",
@@ -762,7 +1028,7 @@
           "shape": "ResourceNotFoundException"
         }
       ],
-      "documentation": "<p>Deletes specified tags from a resource.</p>"
+      "documentation": "<p>Deletes specified tags from a resource.</p> <p>To specify multiple tags, use separate <b>tagKeys</b> parameters, for example:</p> <p> <code>DELETE /tags/WorkloadArn?tagKeys=key1&amp;tagKeys=key2</code> </p>"
     },
     "UpdateAnswer": {
       "name": "UpdateAnswer",
@@ -988,11 +1254,19 @@
         "HelpfulResourceUrl": {
           "shape": "HelpfulResourceUrl"
         },
+        "HelpfulResourceDisplayText": {
+          "shape": "DisplayText",
+          "documentation": "<p>The helpful resource text to be displayed.</p>"
+        },
         "Choices": {
           "shape": "Choices"
         },
         "SelectedChoices": {
           "shape": "SelectedChoices"
+        },
+        "ChoiceAnswers": {
+          "shape": "ChoiceAnswers",
+          "documentation": "<p>A list of selected choices to a question in your workload.</p>"
         },
         "IsApplicable": {
           "shape": "IsApplicable"
@@ -1002,9 +1276,23 @@
         },
         "Notes": {
           "shape": "Notes"
+        },
+        "Reason": {
+          "shape": "AnswerReason",
+          "documentation": "<p>The reason why the question is not applicable to your workload.</p>"
         }
       },
       "documentation": "<p>An answer of the question.</p>"
+    },
+    "AnswerReason": {
+      "type": "string",
+      "enum": [
+        "OUT_OF_SCOPE",
+        "BUSINESS_PRIORITIES",
+        "ARCHITECTURE_CONSTRAINTS",
+        "OTHER",
+        "NONE"
+      ]
     },
     "AnswerSummaries": {
       "type": "list",
@@ -1031,11 +1319,19 @@
         "SelectedChoices": {
           "shape": "SelectedChoices"
         },
+        "ChoiceAnswerSummaries": {
+          "shape": "ChoiceAnswerSummaries",
+          "documentation": "<p>A list of selected choices to a question in your workload.</p>"
+        },
         "IsApplicable": {
           "shape": "IsApplicable"
         },
         "Risk": {
           "shape": "Risk"
+        },
+        "Reason": {
+          "shape": "AnswerReason",
+          "documentation": "<p>The reason why a choice is non-applicable to a question in your workload.</p>"
         }
       },
       "documentation": "<p>An answer summary of a lens review in a workload.</p>"
@@ -1060,12 +1356,12 @@
     },
     "AwsAccountId": {
       "type": "string",
-      "documentation": "<p>An AWS account ID.</p>",
+      "documentation": "<p>An Amazon Web Services account ID.</p>",
       "pattern": "[0-9]{12}"
     },
     "AwsRegion": {
       "type": "string",
-      "documentation": "<p>An AWS Region, for example, <code>us-west-2</code> or <code>ap-northeast-1</code>.</p>",
+      "documentation": "<p>An Amazon Web Services Region, for example, <code>us-west-2</code> or <code>ap-northeast-1</code>.</p>",
       "max": 100
     },
     "Base64String": {
@@ -1083,9 +1379,91 @@
         },
         "Description": {
           "shape": "ChoiceDescription"
+        },
+        "HelpfulResource": {
+          "shape": "ChoiceContent",
+          "documentation": "<p>The choice level helpful resource.</p>"
+        },
+        "ImprovementPlan": {
+          "shape": "ChoiceContent",
+          "documentation": "<p>The choice level improvement plan.</p>"
         }
       },
       "documentation": "<p>A choice available to answer question.</p>"
+    },
+    "ChoiceAnswer": {
+      "type": "structure",
+      "members": {
+        "ChoiceId": {
+          "shape": "ChoiceId"
+        },
+        "Status": {
+          "shape": "ChoiceStatus",
+          "documentation": "<p>The status of a choice.</p>"
+        },
+        "Reason": {
+          "shape": "ChoiceReason",
+          "documentation": "<p>The reason why a choice is non-applicable to a question in your workload.</p>"
+        },
+        "Notes": {
+          "shape": "ChoiceNotes",
+          "documentation": "<p>The notes associated with a choice.</p>"
+        }
+      },
+      "documentation": "<p>A choice that has been answered on a question in your workload.</p>"
+    },
+    "ChoiceAnswerSummaries": {
+      "type": "list",
+      "member": {
+        "shape": "ChoiceAnswerSummary"
+      }
+    },
+    "ChoiceAnswerSummary": {
+      "type": "structure",
+      "members": {
+        "ChoiceId": {
+          "shape": "ChoiceId"
+        },
+        "Status": {
+          "shape": "ChoiceStatus",
+          "documentation": "<p>The status of a choice.</p>"
+        },
+        "Reason": {
+          "shape": "ChoiceReason",
+          "documentation": "<p>The reason why a choice is non-applicable to a question in your workload.</p>"
+        }
+      },
+      "documentation": "<p>A choice summary that has been answered on a question in your workload.</p>"
+    },
+    "ChoiceAnswers": {
+      "type": "list",
+      "member": {
+        "shape": "ChoiceAnswer"
+      }
+    },
+    "ChoiceContent": {
+      "type": "structure",
+      "members": {
+        "DisplayText": {
+          "shape": "ChoiceContentDisplayText",
+          "documentation": "<p>The display text for the choice content.</p>"
+        },
+        "Url": {
+          "shape": "ChoiceContentUrl",
+          "documentation": "<p>The URL for the choice content.</p>"
+        }
+      },
+      "documentation": "<p>The choice content.</p>"
+    },
+    "ChoiceContentDisplayText": {
+      "type": "string",
+      "max": 1024,
+      "min": 1
+    },
+    "ChoiceContentUrl": {
+      "type": "string",
+      "max": 1024,
+      "min": 1
     },
     "ChoiceDescription": {
       "type": "string",
@@ -1099,11 +1477,85 @@
       "max": 64,
       "min": 1
     },
+    "ChoiceImprovementPlan": {
+      "type": "structure",
+      "members": {
+        "ChoiceId": {
+          "shape": "ChoiceId"
+        },
+        "DisplayText": {
+          "shape": "DisplayText",
+          "documentation": "<p>The display text for the improvement plan.</p>"
+        },
+        "ImprovementPlanUrl": {
+          "shape": "ImprovementPlanUrl"
+        }
+      },
+      "documentation": "<p>The choice level improvement plan.</p>"
+    },
+    "ChoiceImprovementPlans": {
+      "type": "list",
+      "member": {
+        "shape": "ChoiceImprovementPlan"
+      }
+    },
+    "ChoiceNotes": {
+      "type": "string",
+      "max": 250
+    },
+    "ChoiceReason": {
+      "type": "string",
+      "enum": [
+        "OUT_OF_SCOPE",
+        "BUSINESS_PRIORITIES",
+        "ARCHITECTURE_CONSTRAINTS",
+        "OTHER",
+        "NONE"
+      ]
+    },
+    "ChoiceStatus": {
+      "type": "string",
+      "enum": [
+        "SELECTED",
+        "NOT_APPLICABLE",
+        "UNSELECTED"
+      ]
+    },
     "ChoiceTitle": {
       "type": "string",
       "documentation": "<p>The title of a choice.</p>",
       "max": 512,
       "min": 1
+    },
+    "ChoiceUpdate": {
+      "type": "structure",
+      "required": [
+        "Status"
+      ],
+      "members": {
+        "Status": {
+          "shape": "ChoiceStatus",
+          "documentation": "<p>The status of a choice.</p>"
+        },
+        "Reason": {
+          "shape": "ChoiceReason",
+          "documentation": "<p>The reason why a choice is non-applicable to a question in your workload.</p>"
+        },
+        "Notes": {
+          "shape": "ChoiceNotes",
+          "documentation": "<p>The notes associated with a choice.</p>"
+        }
+      },
+      "documentation": "<p>A list of choices to be updated.</p>"
+    },
+    "ChoiceUpdates": {
+      "type": "map",
+      "key": {
+        "shape": "ChoiceId"
+      },
+      "value": {
+        "shape": "ChoiceUpdate"
+      }
     },
     "Choices": {
       "type": "list",
@@ -1114,12 +1566,82 @@
     },
     "ClientRequestToken": {
       "type": "string",
-      "documentation": "<p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after it has completed successfully, the result of the original request is returned. </p> <important> <p>This token is listed as required, however, if you do not specify it, the AWS SDKs automatically generate one for you. If you are not using the AWS SDK or the AWS CLI, you must provide this token or the request will fail.</p> </important>"
+      "documentation": "<p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after it has completed successfully, the result of the original request is returned. </p> <important> <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI, you must provide this token or the request will fail.</p> </important>"
     },
     "Count": {
       "type": "integer",
       "documentation": "<p>A non-negative integer that denotes how many.</p>",
       "min": 0
+    },
+    "CreateLensShareInput": {
+      "type": "structure",
+      "required": [
+        "LensAlias",
+        "SharedWith",
+        "ClientRequestToken"
+      ],
+      "members": {
+        "LensAlias": {
+          "shape": "LensAlias",
+          "location": "uri",
+          "locationName": "LensAlias"
+        },
+        "SharedWith": {
+          "shape": "SharedWith"
+        },
+        "ClientRequestToken": {
+          "shape": "ClientRequestToken",
+          "idempotencyToken": true
+        }
+      }
+    },
+    "CreateLensShareOutput": {
+      "type": "structure",
+      "members": {
+        "ShareId": {
+          "shape": "ShareId"
+        }
+      }
+    },
+    "CreateLensVersionInput": {
+      "type": "structure",
+      "required": [
+        "LensAlias",
+        "LensVersion",
+        "ClientRequestToken"
+      ],
+      "members": {
+        "LensAlias": {
+          "shape": "LensAlias",
+          "location": "uri",
+          "locationName": "LensAlias"
+        },
+        "LensVersion": {
+          "shape": "LensVersion",
+          "documentation": "<p>The version of the lens being created.</p>"
+        },
+        "IsMajorVersion": {
+          "shape": "IsMajorVersion",
+          "documentation": "<p>Set to true if this new major lens version.</p>"
+        },
+        "ClientRequestToken": {
+          "shape": "ClientRequestToken",
+          "idempotencyToken": true
+        }
+      }
+    },
+    "CreateLensVersionOutput": {
+      "type": "structure",
+      "members": {
+        "LensArn": {
+          "shape": "LensArn",
+          "documentation": "<p>The ARN for the lens.</p>"
+        },
+        "LensVersion": {
+          "shape": "LensVersion",
+          "documentation": "<p>The version of the lens.</p>"
+        }
+      }
     },
     "CreateMilestoneInput": {
       "type": "structure",
@@ -1268,6 +1790,59 @@
       },
       "documentation": "<p>Input for Create Workload Share</p>"
     },
+    "DeleteLensInput": {
+      "type": "structure",
+      "required": [
+        "LensAlias",
+        "ClientRequestToken",
+        "LensStatus"
+      ],
+      "members": {
+        "LensAlias": {
+          "shape": "LensAlias",
+          "location": "uri",
+          "locationName": "LensAlias"
+        },
+        "ClientRequestToken": {
+          "shape": "ClientRequestToken",
+          "idempotencyToken": true,
+          "location": "querystring",
+          "locationName": "ClientRequestToken"
+        },
+        "LensStatus": {
+          "shape": "LensStatusType",
+          "documentation": "<p>The status of the lens to be deleted.</p>",
+          "location": "querystring",
+          "locationName": "LensStatus"
+        }
+      }
+    },
+    "DeleteLensShareInput": {
+      "type": "structure",
+      "required": [
+        "ShareId",
+        "LensAlias",
+        "ClientRequestToken"
+      ],
+      "members": {
+        "ShareId": {
+          "shape": "ShareId",
+          "location": "uri",
+          "locationName": "ShareId"
+        },
+        "LensAlias": {
+          "shape": "LensAlias",
+          "location": "uri",
+          "locationName": "LensAlias"
+        },
+        "ClientRequestToken": {
+          "shape": "ClientRequestToken",
+          "idempotencyToken": true,
+          "location": "querystring",
+          "locationName": "ClientRequestToken"
+        }
+      }
+    },
     "DeleteWorkloadInput": {
       "type": "structure",
       "required": [
@@ -1342,6 +1917,39 @@
       },
       "documentation": "<p>Input to disassociate lens reviews.</p>"
     },
+    "DisplayText": {
+      "type": "string",
+      "max": 64,
+      "min": 1
+    },
+    "ExportLensInput": {
+      "type": "structure",
+      "required": [
+        "LensAlias"
+      ],
+      "members": {
+        "LensAlias": {
+          "shape": "LensAlias",
+          "location": "uri",
+          "locationName": "LensAlias"
+        },
+        "LensVersion": {
+          "shape": "LensVersion",
+          "documentation": "<p>The lens version to be exported.</p>",
+          "location": "querystring",
+          "locationName": "LensVersion"
+        }
+      }
+    },
+    "ExportLensOutput": {
+      "type": "structure",
+      "members": {
+        "LensJSON": {
+          "shape": "LensJSON",
+          "documentation": "<p>The JSON for the lens.</p>"
+        }
+      }
+    },
     "GetAnswerInput": {
       "type": "structure",
       "required": [
@@ -1385,11 +1993,43 @@
         "LensAlias": {
           "shape": "LensAlias"
         },
+        "LensArn": {
+          "shape": "LensArn",
+          "documentation": "<p>The ARN for the lens.</p>"
+        },
         "Answer": {
           "shape": "Answer"
         }
       },
       "documentation": "<p>Output of a get answer call.</p>"
+    },
+    "GetLensInput": {
+      "type": "structure",
+      "required": [
+        "LensAlias"
+      ],
+      "members": {
+        "LensAlias": {
+          "shape": "LensAlias",
+          "location": "uri",
+          "locationName": "LensAlias"
+        },
+        "LensVersion": {
+          "shape": "LensVersion",
+          "documentation": "<p>The lens version to be retrieved.</p>",
+          "location": "querystring",
+          "locationName": "LensVersion"
+        }
+      }
+    },
+    "GetLensOutput": {
+      "type": "structure",
+      "members": {
+        "Lens": {
+          "shape": "Lens",
+          "documentation": "<p>A lens return object.</p>"
+        }
+      }
     },
     "GetLensReviewInput": {
       "type": "structure",
@@ -1474,8 +2114,7 @@
     "GetLensVersionDifferenceInput": {
       "type": "structure",
       "required": [
-        "LensAlias",
-        "BaseLensVersion"
+        "LensAlias"
       ],
       "members": {
         "LensAlias": {
@@ -1488,6 +2127,12 @@
           "documentation": "<p>The base version of the lens.</p>",
           "location": "querystring",
           "locationName": "BaseLensVersion"
+        },
+        "TargetLensVersion": {
+          "shape": "LensVersion",
+          "documentation": "<p>The lens version to target a difference for.</p>",
+          "location": "querystring",
+          "locationName": "TargetLensVersion"
         }
       }
     },
@@ -1497,9 +2142,17 @@
         "LensAlias": {
           "shape": "LensAlias"
         },
+        "LensArn": {
+          "shape": "LensArn",
+          "documentation": "<p>The ARN for the lens.</p>"
+        },
         "BaseLensVersion": {
           "shape": "LensVersion",
           "documentation": "<p>The base version of the lens.</p>"
+        },
+        "TargetLensVersion": {
+          "shape": "LensVersion",
+          "documentation": "<p>The target lens version for the lens.</p>"
         },
         "LatestLensVersion": {
           "shape": "LensVersion",
@@ -1571,9 +2224,54 @@
       "max": 2048,
       "min": 1
     },
+    "ImportLensInput": {
+      "type": "structure",
+      "required": [
+        "JSONString",
+        "ClientRequestToken"
+      ],
+      "members": {
+        "LensAlias": {
+          "shape": "LensAlias"
+        },
+        "JSONString": {
+          "shape": "LensJSON",
+          "documentation": "<p>The JSON representation of a lens.</p>"
+        },
+        "ClientRequestToken": {
+          "shape": "ClientRequestToken",
+          "idempotencyToken": true
+        },
+        "Tags": {
+          "shape": "TagMap",
+          "documentation": "<p>Tags to associate to a lens.</p>"
+        }
+      }
+    },
+    "ImportLensOutput": {
+      "type": "structure",
+      "members": {
+        "LensArn": {
+          "shape": "LensArn",
+          "documentation": "<p>The ARN for the lens.</p>"
+        },
+        "Status": {
+          "shape": "ImportLensStatus",
+          "documentation": "<p>The status of the imported lens.</p>"
+        }
+      }
+    },
+    "ImportLensStatus": {
+      "type": "string",
+      "enum": [
+        "IN_PROGRESS",
+        "COMPLETE",
+        "ERROR"
+      ]
+    },
     "ImprovementPlanUrl": {
       "type": "string",
-      "documentation": "<p>The improvement plan URL for a question.</p>",
+      "documentation": "<p>The improvement plan URL for a question.</p> <p>This value is only available if the question has been answered.</p>",
       "max": 2048,
       "min": 1
     },
@@ -1601,6 +2299,10 @@
         },
         "ImprovementPlanUrl": {
           "shape": "ImprovementPlanUrl"
+        },
+        "ImprovementPlans": {
+          "shape": "ChoiceImprovementPlans",
+          "documentation": "<p>The improvement plan details.</p>"
         }
       },
       "documentation": "<p>An improvement summary of a lens review in a workload.</p>"
@@ -1609,13 +2311,44 @@
       "type": "boolean",
       "documentation": "<p>Defines whether this question is applicable to a lens review.</p>"
     },
+    "IsMajorVersion": {
+      "type": "boolean"
+    },
     "IsReviewOwnerUpdateAcknowledged": {
       "type": "boolean"
+    },
+    "Lens": {
+      "type": "structure",
+      "members": {
+        "LensArn": {
+          "shape": "LensArn",
+          "documentation": "<p>The ARN of a lens.</p>"
+        },
+        "LensVersion": {
+          "shape": "LensVersion",
+          "documentation": "<p>The version of a lens.</p>"
+        },
+        "Name": {
+          "shape": "LensName"
+        },
+        "Description": {
+          "shape": "LensDescription"
+        },
+        "Owner": {
+          "shape": "LensOwner",
+          "documentation": "<p>The Amazon Web Services account ID that owns the lens.</p>"
+        },
+        "ShareInvitationId": {
+          "shape": "ShareInvitationId",
+          "documentation": "<p>The ID assigned to the share invitation.</p>"
+        }
+      },
+      "documentation": "<p>A lens return object.</p>"
     },
     "LensAlias": {
       "type": "string",
       "documentation": "<p>The alias of the lens, for example, <code>serverless</code>.</p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>",
-      "max": 64,
+      "max": 128,
       "min": 1
     },
     "LensAliases": {
@@ -1623,8 +2356,11 @@
       "member": {
         "shape": "LensAlias"
       },
-      "documentation": "<p>List of lens aliases to associate or disassociate with a workload.</p> <p>Identify a lens using its <a>LensSummary$LensAlias</a>.</p>",
+      "documentation": "<p>List of lens aliases to associate or disassociate with a workload. Up to 10 lenses can be specified.</p> <p>Identify a lens using its <a>LensSummary$LensAlias</a>.</p>",
       "min": 1
+    },
+    "LensArn": {
+      "type": "string"
     },
     "LensDescription": {
       "type": "string",
@@ -1632,17 +2368,33 @@
       "max": 1024,
       "min": 1
     },
+    "LensJSON": {
+      "type": "string",
+      "max": 500000,
+      "min": 2
+    },
     "LensName": {
       "type": "string",
       "documentation": "<p>The full name of the lens.</p>",
       "max": 128,
       "min": 1
     },
+    "LensNamePrefix": {
+      "type": "string",
+      "max": 100
+    },
+    "LensOwner": {
+      "type": "string"
+    },
     "LensReview": {
       "type": "structure",
       "members": {
         "LensAlias": {
           "shape": "LensAlias"
+        },
+        "LensArn": {
+          "shape": "LensArn",
+          "documentation": "<p>The ARN for the lens.</p>"
         },
         "LensVersion": {
           "shape": "LensVersion",
@@ -1679,6 +2431,10 @@
         "LensAlias": {
           "shape": "LensAlias"
         },
+        "LensArn": {
+          "shape": "LensArn",
+          "documentation": "<p>The ARN for the lens.</p>"
+        },
         "Base64String": {
           "shape": "Base64String"
         }
@@ -1697,6 +2453,10 @@
       "members": {
         "LensAlias": {
           "shape": "LensAlias"
+        },
+        "LensArn": {
+          "shape": "LensArn",
+          "documentation": "<p>The ARN for the lens.</p>"
         },
         "LensVersion": {
           "shape": "LensVersion",
@@ -1718,12 +2478,43 @@
       },
       "documentation": "<p>A lens review summary of a workload.</p>"
     },
+    "LensShareSummaries": {
+      "type": "list",
+      "member": {
+        "shape": "LensShareSummary"
+      }
+    },
+    "LensShareSummary": {
+      "type": "structure",
+      "members": {
+        "ShareId": {
+          "shape": "ShareId"
+        },
+        "SharedWith": {
+          "shape": "SharedWith"
+        },
+        "Status": {
+          "shape": "ShareStatus"
+        }
+      },
+      "documentation": "<p>A lens share summary return object.</p>"
+    },
     "LensStatus": {
       "type": "string",
       "enum": [
         "CURRENT",
         "NOT_CURRENT",
-        "DEPRECATED"
+        "DEPRECATED",
+        "DELETED",
+        "UNSHARED"
+      ]
+    },
+    "LensStatusType": {
+      "type": "string",
+      "enum": [
+        "ALL",
+        "DRAFT",
+        "PUBLISHED"
       ]
     },
     "LensSummaries": {
@@ -1736,21 +2527,50 @@
     "LensSummary": {
       "type": "structure",
       "members": {
+        "LensArn": {
+          "shape": "LensArn",
+          "documentation": "<p>The ARN of the lens.</p>"
+        },
         "LensAlias": {
           "shape": "LensAlias"
+        },
+        "LensName": {
+          "shape": "LensName"
+        },
+        "LensType": {
+          "shape": "LensType",
+          "documentation": "<p>The type of the lens.</p>"
+        },
+        "Description": {
+          "shape": "LensDescription"
+        },
+        "CreatedAt": {
+          "shape": "Timestamp"
+        },
+        "UpdatedAt": {
+          "shape": "Timestamp"
         },
         "LensVersion": {
           "shape": "LensVersion",
           "documentation": "<p>The version of the lens.</p>"
         },
-        "LensName": {
-          "shape": "LensName"
+        "Owner": {
+          "shape": "AwsAccountId"
         },
-        "Description": {
-          "shape": "LensDescription"
+        "LensStatus": {
+          "shape": "LensStatus",
+          "documentation": "<p>The status of the lens.</p>"
         }
       },
       "documentation": "<p>A lens summary of a lens.</p>"
+    },
+    "LensType": {
+      "type": "string",
+      "enum": [
+        "AWS_OFFICIAL",
+        "CUSTOM_SHARED",
+        "CUSTOM_SELF"
+      ]
     },
     "LensUpgradeSummary": {
       "type": "structure",
@@ -1763,6 +2583,10 @@
         },
         "LensAlias": {
           "shape": "LensAlias"
+        },
+        "LensArn": {
+          "shape": "LensArn",
+          "documentation": "<p>The ARN for the lens.</p>"
         },
         "CurrentLensVersion": {
           "shape": "LensVersion",
@@ -1777,7 +2601,7 @@
     },
     "LensVersion": {
       "type": "string",
-      "max": 128,
+      "max": 32,
       "min": 1
     },
     "ListAnswersInput": {
@@ -1837,6 +2661,10 @@
         },
         "LensAlias": {
           "shape": "LensAlias"
+        },
+        "LensArn": {
+          "shape": "LensArn",
+          "documentation": "<p>The ARN for the lens.</p>"
         },
         "AnswerSummaries": {
           "shape": "AnswerSummaries"
@@ -1905,6 +2733,10 @@
         "LensAlias": {
           "shape": "LensAlias"
         },
+        "LensArn": {
+          "shape": "LensArn",
+          "documentation": "<p>The ARN for the lens.</p>"
+        },
         "ImprovementSummaries": {
           "shape": "ImprovementSummaries"
         },
@@ -1961,6 +2793,48 @@
       },
       "documentation": "<p>Output of a list lens reviews call.</p>"
     },
+    "ListLensSharesInput": {
+      "type": "structure",
+      "required": [
+        "LensAlias"
+      ],
+      "members": {
+        "LensAlias": {
+          "shape": "LensAlias",
+          "location": "uri",
+          "locationName": "LensAlias"
+        },
+        "SharedWithPrefix": {
+          "shape": "SharedWithPrefix",
+          "documentation": "<p>The Amazon Web Services account ID or IAM role with which the lens is shared.</p>",
+          "location": "querystring",
+          "locationName": "SharedWithPrefix"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "location": "querystring",
+          "locationName": "NextToken"
+        },
+        "MaxResults": {
+          "shape": "ListWorkloadSharesMaxResults",
+          "documentation": "<p>The maximum number of results to return for this request.</p>",
+          "location": "querystring",
+          "locationName": "MaxResults"
+        }
+      }
+    },
+    "ListLensSharesOutput": {
+      "type": "structure",
+      "members": {
+        "LensShareSummaries": {
+          "shape": "LensShareSummaries",
+          "documentation": "<p>A list of lens share summaries.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken"
+        }
+      }
+    },
     "ListLensesInput": {
       "type": "structure",
       "members": {
@@ -1973,6 +2847,23 @@
           "shape": "MaxResults",
           "location": "querystring",
           "locationName": "MaxResults"
+        },
+        "LensType": {
+          "shape": "LensType",
+          "documentation": "<p>The type of lenses to be returned.</p>",
+          "location": "querystring",
+          "locationName": "LensType"
+        },
+        "LensStatus": {
+          "shape": "LensStatusType",
+          "documentation": "<p>The status of lenses to be returned.</p>",
+          "location": "querystring",
+          "locationName": "LensStatus"
+        },
+        "LensName": {
+          "shape": "LensName",
+          "location": "querystring",
+          "locationName": "LensName"
         }
       },
       "documentation": "<p>Input to list lenses.</p>"
@@ -2064,6 +2955,18 @@
           "location": "querystring",
           "locationName": "WorkloadNamePrefix"
         },
+        "LensNamePrefix": {
+          "shape": "LensNamePrefix",
+          "documentation": "<p>An optional string added to the beginning of each lens name returned in the results.</p>",
+          "location": "querystring",
+          "locationName": "LensNamePrefix"
+        },
+        "ShareResourceType": {
+          "shape": "ShareResourceType",
+          "documentation": "<p>The type of share invitations to be returned.</p>",
+          "location": "querystring",
+          "locationName": "ShareResourceType"
+        },
         "NextToken": {
           "shape": "NextToken",
           "location": "querystring",
@@ -2131,7 +3034,7 @@
         },
         "SharedWithPrefix": {
           "shape": "SharedWithPrefix",
-          "documentation": "<p>The AWS account ID or IAM role with which the workload is shared.</p>",
+          "documentation": "<p>The Amazon Web Services account ID or IAM role with which the workload is shared.</p>",
           "location": "querystring",
           "locationName": "SharedWithPrefix"
         },
@@ -2313,6 +3216,9 @@
         "PillarId": {
           "shape": "PillarId"
         },
+        "PillarName": {
+          "shape": "PillarName"
+        },
         "DifferenceStatus": {
           "shape": "DifferenceStatus",
           "documentation": "<p>Indicates the type of change to the pillar.</p>"
@@ -2457,8 +3363,19 @@
           "shape": "ShareInvitationId",
           "documentation": "<p>The ID assigned to the share invitation.</p>"
         },
+        "ShareResourceType": {
+          "shape": "ShareResourceType",
+          "documentation": "<p>The resource type of the share invitation.</p>"
+        },
         "WorkloadId": {
           "shape": "WorkloadId"
+        },
+        "LensAlias": {
+          "shape": "LensAlias"
+        },
+        "LensArn": {
+          "shape": "LensArn",
+          "documentation": "<p>The ARN for the lens.</p>"
         }
       },
       "documentation": "<p>The share invitation.</p>"
@@ -2497,14 +3414,32 @@
         "PermissionType": {
           "shape": "PermissionType"
         },
+        "ShareResourceType": {
+          "shape": "ShareResourceType",
+          "documentation": "<p>The resource type of the share invitation.</p>"
+        },
         "WorkloadName": {
           "shape": "WorkloadName"
         },
         "WorkloadId": {
           "shape": "WorkloadId"
+        },
+        "LensName": {
+          "shape": "LensName"
+        },
+        "LensArn": {
+          "shape": "LensArn",
+          "documentation": "<p>The ARN for the lens.</p>"
         }
       },
       "documentation": "<p>A share invitation summary return object.</p>"
+    },
+    "ShareResourceType": {
+      "type": "string",
+      "enum": [
+        "WORKLOAD",
+        "LENS"
+      ]
     },
     "ShareStatus": {
       "type": "string",
@@ -2519,7 +3454,7 @@
     },
     "SharedWith": {
       "type": "string",
-      "documentation": "<p>The AWS account ID or IAM role with which the workload is shared.</p>",
+      "documentation": "<p>The Amazon Web Services account ID or IAM role with which the workload is shared.</p>",
       "max": 2048,
       "min": 12
     },
@@ -2596,7 +3531,7 @@
         },
         "TagKeys": {
           "shape": "TagKeyList",
-          "documentation": "<p>The keys of the tags to be removed.</p>",
+          "documentation": "<p>A list of tag keys. Existing tags of the resource whose keys are members of this list are removed from the resource.</p>",
           "location": "querystring",
           "locationName": "tagKeys"
         }
@@ -2632,11 +3567,19 @@
         "SelectedChoices": {
           "shape": "SelectedChoices"
         },
+        "ChoiceUpdates": {
+          "shape": "ChoiceUpdates",
+          "documentation": "<p>A list of choices to update on a question in your workload. The String key corresponds to the choice ID to be updated.</p>"
+        },
         "Notes": {
           "shape": "Notes"
         },
         "IsApplicable": {
           "shape": "IsApplicable"
+        },
+        "Reason": {
+          "shape": "AnswerReason",
+          "documentation": "<p>The reason why a question is not applicable to your workload.</p>"
         }
       },
       "documentation": "<p>Input to update answer.</p>"
@@ -2649,6 +3592,10 @@
         },
         "LensAlias": {
           "shape": "LensAlias"
+        },
+        "LensArn": {
+          "shape": "LensArn",
+          "documentation": "<p>The ARN for the lens.</p>"
         },
         "Answer": {
           "shape": "Answer"
@@ -2943,7 +3890,7 @@
       "member": {
         "shape": "AwsAccountId"
       },
-      "documentation": "<p>The list of AWS account IDs associated with the workload.</p>",
+      "documentation": "<p>The list of Amazon Web Services account IDs associated with the workload.</p>",
       "max": 100
     },
     "WorkloadArchitecturalDesign": {
@@ -2960,7 +3907,7 @@
       "member": {
         "shape": "AwsRegion"
       },
-      "documentation": "<p>The list of AWS Regions associated with the workload, for example, <code>us-east-2</code>, or <code>ca-central-1</code>.</p>",
+      "documentation": "<p>The list of Amazon Web Services Regions associated with the workload, for example, <code>us-east-2</code>, or <code>ca-central-1</code>.</p>",
       "max": 50
     },
     "WorkloadDescription": {
@@ -2979,7 +3926,7 @@
     },
     "WorkloadId": {
       "type": "string",
-      "documentation": "<p>The ID assigned to the workload. This ID is unique within an AWS Region.</p>",
+      "documentation": "<p>The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.</p>",
       "pattern": "[0-9a-f]{32}"
     },
     "WorkloadImprovementStatus": {
@@ -3012,7 +3959,7 @@
     },
     "WorkloadName": {
       "type": "string",
-      "documentation": "<p>The name of the workload.</p> <p>The name must be unique within an account within a Region. Spaces and capitalization are ignored when checking for uniqueness.</p>",
+      "documentation": "<p>The name of the workload.</p> <p>The name must be unique within an account within an Amazon Web Services Region. Spaces and capitalization are ignored when checking for uniqueness.</p>",
       "max": 100,
       "min": 3
     },
@@ -3031,7 +3978,7 @@
       "member": {
         "shape": "WorkloadNonAwsRegion"
       },
-      "documentation": "<p> The list of non-AWS Regions associated with the workload.</p>",
+      "documentation": "<p> The list of non-Amazon Web Services Regions associated with the workload.</p>",
       "max": 5
     },
     "WorkloadPillarPriorities": {
@@ -3137,5 +4084,5 @@
       "documentation": "<p>A workload summary return object.</p>"
     }
   },
-  "documentation": "<fullname>AWS Well-Architected Tool</fullname> <p>This is the <i>AWS Well-Architected Tool API Reference</i>. The AWS Well-Architected Tool API provides programmatic access to the <a href=\"http://aws.amazon.com/well-architected-tool\">AWS Well-Architected Tool</a> in the <a href=\"https://console.aws.amazon.com/wellarchitected\">AWS Management Console</a>. For information about the AWS Well-Architected Tool, see the <a href=\"https://docs.aws.amazon.com/wellarchitected/latest/userguide/intro.html\">AWS Well-Architected Tool User Guide</a>.</p>"
+  "documentation": "<fullname>Well-Architected Tool</fullname> <p>This is the <i>Well-Architected Tool API Reference</i>. The WA Tool API provides programmatic access to the <a href=\"http://aws.amazon.com/well-architected-tool\">Well-Architected Tool</a> in the <a href=\"https://console.aws.amazon.com/wellarchitected\">Amazon Web Services Management Console</a>. For information about the Well-Architected Tool, see the <a href=\"https://docs.aws.amazon.com/wellarchitected/latest/userguide/intro.html\">Well-Architected Tool User Guide</a>.</p>"
 }

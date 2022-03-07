@@ -155,6 +155,45 @@
             return expect(numCalls).to.equal(1);
           });
         });
+
+        describe('ECONNRESET', function() {
+          var mockClientRequest = null;
+          var oldRequest = httpModule.request;
+
+          beforeEach(function() {
+            mockClientRequest = new EventEmitter();
+            mockClientRequest.setTimeout = function() {
+              return {};
+            };
+            mockClientRequest.abort = function() {
+              return {};
+            };
+            mockClientRequest.end = function() {
+              return {};
+            };
+            return requestSpy = helpers.spyOn(httpModule, 'request').andReturn(mockClientRequest);
+          });
+
+          afterEach(function() {
+            httpModule.request = oldRequest;
+          });
+
+          it('retries ECONNRESET', function() {
+            var req = new AWS.HttpRequest('http://10.255.255.255');
+            var numCalls = 0;
+
+            http.handleRequest(req, {}, null, function(err) {
+              numCalls += 1;
+
+              expect(err.code).to.equal('TimeoutError');
+              expect(err.message).to.equal('test ECONNRESET');
+              return expect(numCalls).to.equal(1);
+            });
+
+            mockClientRequest.emit('error', { code: 'ECONNRESET', message: 'test ECONNRESET' });
+          });
+        });
+
         describe('timeout', function() {
           it('is obeyed even after response headers are recieved', function(done) {
             // a mock server with 'ShakyStream' allows us to simulate a period of socket inactivity

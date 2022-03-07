@@ -1,0 +1,47 @@
+[
+    {
+        "type": "feature",
+        "category": "CloudFront",
+        "description": "Amazon CloudFront adds support for a new security policy, TLSv1.2_2021."
+    },
+    {
+        "type": "feature",
+        "category": "CloudSearch",
+        "description": "This release replaces previous generation CloudSearch instances with equivalent new instances that provide better stability at the same price."
+    },
+    {
+        "type": "feature",
+        "category": "CloudWatchEvents",
+        "description": "Added the following parameters to ECS targets: CapacityProviderStrategy, EnableECSManagedTags, EnableExecuteCommand, PlacementConstraints, PlacementStrategy, PropagateTags, ReferenceId, and Tags"
+    },
+    {
+        "type": "feature",
+        "category": "CodeGuruReviewer",
+        "description": "Adds support for S3 based full repository analysis and changed lines scan."
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "This release adds support for provisioning your own IP (BYOIP) range in multiple regions. This feature is in limited Preview for this release. Contact your account manager if you are interested in this feature."
+    },
+    {
+        "type": "feature",
+        "category": "EventBridge",
+        "description": "Added the following parameters to ECS targets: CapacityProviderStrategy, EnableECSManagedTags, EnableExecuteCommand, PlacementConstraints, PlacementStrategy, PropagateTags, ReferenceId, and Tags"
+    },
+    {
+        "type": "feature",
+        "category": "LicenseManager",
+        "description": "AWS License Manager now allows license administrators and end users to communicate to each other by setting custom status reasons when updating the status on a granted license."
+    },
+    {
+        "type": "feature",
+        "category": "MediaTailor",
+        "description": "Update GetChannelSchedule to return information on ad breaks."
+    },
+    {
+        "type": "feature",
+        "category": "QuickSight",
+        "description": "Releasing new APIs for AWS QuickSight Folders"
+    }
+]

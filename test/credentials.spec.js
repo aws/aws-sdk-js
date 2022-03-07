@@ -751,7 +751,7 @@
           mockConfig = '[default]\ncredential_process=federated_cli_mock';
           helpers.spyOn(AWS.util, 'readFileSync').andReturn(mockConfig);
           mockProcess = '{"Version": 1,"AccessKeyId": "akid","SecretAccessKey": "secret","SessionToken": "session","Expiration": ""}';
-          helpers.spyOn(child_process, 'exec').andCallFake(function (_, cb) {
+          helpers.spyOn(child_process, 'exec').andCallFake(function (_, _, cb) {
             cb(undefined, mockProcess, undefined);
           });
         });
@@ -783,7 +783,7 @@
         it('throws error if version is not 1', function(done) {
           var child_process = require('child_process');
           mockProcess = '{"Version": 2,"AccessKeyId": "xxx","SecretAccessKey": "yyy","SessionToken": "zzz","Expiration": ""}';
-          helpers.spyOn(child_process, 'exec').andCallFake(function (_, cb) {
+          helpers.spyOn(child_process, 'exec').andCallFake(function (_, _, cb) {
             cb(undefined, mockProcess, undefined);
           });
           var creds = new AWS.ProcessCredentials();
@@ -798,7 +798,7 @@
           var expired;
           expired = AWS.util.date.iso8601(new Date(0));
           mockProcess = '{"Version": 1,"AccessKeyId": "xxx","SecretAccessKey": "yyy","SessionToken": "zzz","Expiration": "' + expired +'"}';
-          helpers.spyOn(child_process, 'exec').andCallFake(function (_, cb) {
+          helpers.spyOn(child_process, 'exec').andCallFake(function (_, _, cb) {
             cb(undefined, mockProcess, undefined);
           });
           var creds = new AWS.ProcessCredentials();
@@ -812,7 +812,7 @@
           var child_process = require('child_process');
           var mockErr;
           mockErr = 'foo Error';
-          helpers.spyOn(child_process, 'exec').andCallFake(function (_, cb) {
+          helpers.spyOn(child_process, 'exec').andCallFake(function (_, _, cb) {
             cb(mockErr, undefined, undefined);
           });
           var creds = new AWS.ProcessCredentials();
@@ -828,7 +828,7 @@
           futureExpiration = AWS.util.date.unixTimestamp() + 900;
           futureExpiration = AWS.util.date.iso8601(new Date(futureExpiration * 1000));
           mockProcess = '{"Version": 1,"AccessKeyId": "akid","SecretAccessKey": "secret","SessionToken": "session","Expiration": "' + futureExpiration + '"}';
-          helpers.spyOn(child_process, 'exec').andCallFake(function (_, cb) {
+          helpers.spyOn(child_process, 'exec').andCallFake(function (_, _, cb) {
             cb(undefined, mockProcess, undefined);
           });
           creds = new AWS.ProcessCredentials();
@@ -1316,7 +1316,7 @@
       };
       describe('constructor', function() {
         it('allows passing of AWS.MetadataService options', function() {
-          return expect(creds.metadataService.host).to.equal('host');
+          return expect(creds.metadataService.endpoint).to.equal('http://host');
         });
         it('does not modify options object', function() {
           var opts;

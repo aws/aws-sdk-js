@@ -189,6 +189,40 @@
       ],
       "documentation": "<p>Creates a dataset.</p>"
     },
+    "DeactivateAnomalyDetector": {
+      "name": "DeactivateAnomalyDetector",
+      "http": {
+        "method": "POST",
+        "requestUri": "/DeactivateAnomalyDetector"
+      },
+      "input": {
+        "shape": "DeactivateAnomalyDetectorRequest"
+      },
+      "output": {
+        "shape": "DeactivateAnomalyDetectorResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Deactivates an anomaly detector.</p>"
+    },
     "DeleteAlert": {
       "name": "DeleteAlert",
       "http": {
@@ -252,7 +286,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p>Deletes a detector. Deleting an anomaly detector will delete all of its corresponding resources including any configured datasets and alerts. </p>"
+      "documentation": "<p>Deletes a detector. Deleting an anomaly detector will delete all of its corresponding resources including any configured datasets and alerts.</p>"
     },
     "DescribeAlert": {
       "name": "DescribeAlert",
@@ -283,7 +317,7 @@
           "shape": "TooManyRequestsException"
         }
       ],
-      "documentation": "<p>Describes an alert.</p>"
+      "documentation": "<p>Describes an alert.</p> <p>Amazon Lookout for Metrics API actions are eventually consistent. If you do a read operation on a resource immediately after creating or modifying it, use retries to allow time for the write operation to complete.</p>"
     },
     "DescribeAnomalyDetectionExecutions": {
       "name": "DescribeAnomalyDetectionExecutions",
@@ -345,7 +379,7 @@
           "shape": "TooManyRequestsException"
         }
       ],
-      "documentation": "<p>Describes a detector.</p>"
+      "documentation": "<p>Describes a detector.</p> <p>Amazon Lookout for Metrics API actions are eventually consistent. If you do a read operation on a resource immediately after creating or modifying it, use retries to allow time for the write operation to complete.</p>"
     },
     "DescribeMetricSet": {
       "name": "DescribeMetricSet",
@@ -376,7 +410,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p>Describes a dataset.</p>"
+      "documentation": "<p>Describes a dataset.</p> <p>Amazon Lookout for Metrics API actions are eventually consistent. If you do a read operation on a resource immediately after creating or modifying it, use retries to allow time for the write operation to complete.</p>"
     },
     "GetAnomalyGroup": {
       "name": "GetAnomalyGroup",
@@ -500,7 +534,7 @@
           "shape": "ValidationException"
         }
       ],
-      "documentation": "<p>Lists the alerts attached to a detector.</p>"
+      "documentation": "<p>Lists the alerts attached to a detector.</p> <p>Amazon Lookout for Metrics API actions are eventually consistent. If you do a read operation on a resource immediately after creating or modifying it, use retries to allow time for the write operation to complete.</p>"
     },
     "ListAnomalyDetectors": {
       "name": "ListAnomalyDetectors",
@@ -531,7 +565,38 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p>Lists the detectors in the current AWS Region.</p>"
+      "documentation": "<p>Lists the detectors in the current AWS Region.</p> <p>Amazon Lookout for Metrics API actions are eventually consistent. If you do a read operation on a resource immediately after creating or modifying it, use retries to allow time for the write operation to complete.</p>"
+    },
+    "ListAnomalyGroupRelatedMetrics": {
+      "name": "ListAnomalyGroupRelatedMetrics",
+      "http": {
+        "method": "POST",
+        "requestUri": "/ListAnomalyGroupRelatedMetrics"
+      },
+      "input": {
+        "shape": "ListAnomalyGroupRelatedMetricsRequest"
+      },
+      "output": {
+        "shape": "ListAnomalyGroupRelatedMetricsResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        }
+      ],
+      "documentation": "<p>Returns a list of measures that are potential causes or effects of an anomaly group.</p>"
     },
     "ListAnomalyGroupSummaries": {
       "name": "ListAnomalyGroupSummaries",
@@ -624,7 +689,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p>Lists the datasets in the current AWS Region.</p>"
+      "documentation": "<p>Lists the datasets in the current AWS Region.</p> <p>Amazon Lookout for Metrics API actions are eventually consistent. If you do a read operation on a resource immediately after creating or modifying it, use retries to allow time for the write operation to complete.</p>"
     },
     "ListTagsForResource": {
       "name": "ListTagsForResource",
@@ -793,6 +858,9 @@
         },
         {
           "shape": "TooManyRequestsException"
+        },
+        {
+          "shape": "ServiceQuotaExceededException"
         }
       ],
       "documentation": "<p>Updates a dataset.</p>"
@@ -997,6 +1065,15 @@
       "min": 1,
       "pattern": ".*\\S.*"
     },
+    "AnomalyDetectorFailureType": {
+      "type": "string",
+      "enum": [
+        "ACTIVATION_FAILURE",
+        "BACK_TEST_ACTIVATION_FAILURE",
+        "DELETION_FAILURE",
+        "DEACTIVATION_FAILURE"
+      ]
+    },
     "AnomalyDetectorName": {
       "type": "string",
       "max": 63,
@@ -1011,9 +1088,12 @@
         "DELETING",
         "FAILED",
         "INACTIVE",
+        "LEARNING",
         "BACK_TEST_ACTIVATING",
         "BACK_TEST_ACTIVE",
-        "BACK_TEST_COMPLETE"
+        "BACK_TEST_COMPLETE",
+        "DEACTIVATED",
+        "DEACTIVATING"
       ]
     },
     "AnomalyDetectorSummary": {
@@ -1178,10 +1258,6 @@
     },
     "AppFlowConfig": {
       "type": "structure",
-      "required": [
-        "RoleArn",
-        "FlowName"
-      ],
       "members": {
         "RoleArn": {
           "shape": "Arn",
@@ -1189,7 +1265,7 @@
         },
         "FlowName": {
           "shape": "FlowName",
-          "documentation": "<p>The name of the flow.</p>"
+          "documentation": "<p> name of the flow.</p>"
         }
       },
       "documentation": "<p>Details about an Amazon AppFlow flow datasource.</p>"
@@ -1232,9 +1308,6 @@
     },
     "CloudWatchConfig": {
       "type": "structure",
-      "required": [
-        "RoleArn"
-      ],
       "members": {
         "RoleArn": {
           "shape": "Arn",
@@ -1368,7 +1441,7 @@
         },
         "Offset": {
           "shape": "Offset",
-          "documentation": "<p>After an interval ends, the amount of time that the detector waits before importing data.</p>",
+          "documentation": "<p>After an interval ends, the amount of seconds that the detector waits before importing data. Offset is only supported for S3 and Redshift datasources.</p>",
           "box": true
         },
         "TimestampColumn": {
@@ -1454,6 +1527,22 @@
       "type": "string",
       "max": 63,
       "pattern": ".*\\S.*"
+    },
+    "DeactivateAnomalyDetectorRequest": {
+      "type": "structure",
+      "required": [
+        "AnomalyDetectorArn"
+      ],
+      "members": {
+        "AnomalyDetectorArn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the anomaly detector.</p>"
+        }
+      }
+    },
+    "DeactivateAnomalyDetectorResponse": {
+      "type": "structure",
+      "members": {}
     },
     "DeleteAlertRequest": {
       "type": "structure",
@@ -1596,11 +1685,15 @@
         },
         "FailureReason": {
           "shape": "ErrorMessage",
-          "documentation": "<p>The reason that the detector failed, if any.</p>"
+          "documentation": "<p>The reason that the detector failed.</p>"
         },
         "KmsKeyArn": {
           "shape": "KmsKeyArn",
           "documentation": "<p>The ARN of the KMS key to use to encrypt your data.</p>"
+        },
+        "FailureType": {
+          "shape": "AnomalyDetectorFailureType",
+          "documentation": "<p>The process that caused the detector to fail.</p>"
         }
       }
     },
@@ -1645,7 +1738,7 @@
         },
         "Offset": {
           "shape": "Offset",
-          "documentation": "<p>The offset for the dataset.</p>",
+          "documentation": "<p>The offset in seconds. Only supported for S3 and Redshift datasources.</p>",
           "box": true
         },
         "MetricList": {
@@ -1922,6 +2015,34 @@
     "Integer": {
       "type": "integer"
     },
+    "InterMetricImpactDetails": {
+      "type": "structure",
+      "members": {
+        "MetricName": {
+          "shape": "MetricName",
+          "documentation": "<p>The name of the measure.</p>"
+        },
+        "AnomalyGroupId": {
+          "shape": "UUID",
+          "documentation": "<p>The ID of the anomaly group.</p>"
+        },
+        "RelationshipType": {
+          "shape": "RelationshipType",
+          "documentation": "<p>Whether a measure is a potential cause of the anomaly group (<code>CAUSE_OF_INPUT_ANOMALY_GROUP</code>), or whether the measure is impacted by the anomaly group (<code>EFFECT_OF_INPUT_ANOMALY_GROUP</code>).</p>"
+        },
+        "ContributionPercentage": {
+          "shape": "MetricChangePercentage",
+          "documentation": "<p>For potential causes (<code>CAUSE_OF_INPUT_ANOMALY_GROUP</code>), the percentage contribution the measure has in causing the anomalies.</p>"
+        }
+      },
+      "documentation": "<p>Aggregated details about the measures contributing to the anomaly group, and the measures potentially impacted by the anomaly group.</p> <p/>"
+    },
+    "InterMetricImpactList": {
+      "type": "list",
+      "member": {
+        "shape": "InterMetricImpactDetails"
+      }
+    },
     "ItemizedMetricStats": {
       "type": "structure",
       "members": {
@@ -1967,7 +2088,7 @@
       "type": "string",
       "max": 2048,
       "min": 20,
-      "pattern": "arn:aws.*:kms:.*:[0-9]{12}:key/.*"
+      "pattern": "arn:aws.*:kms:.*:[0-9]{12}:key/[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}"
     },
     "LambdaConfiguration": {
       "type": "structure",
@@ -2042,6 +2163,49 @@
         "NextToken": {
           "shape": "NextToken",
           "documentation": "<p>If the response is truncated, the service returns this token. To retrieve the next set of results, use the token in the next request.</p>"
+        }
+      }
+    },
+    "ListAnomalyGroupRelatedMetricsRequest": {
+      "type": "structure",
+      "required": [
+        "AnomalyDetectorArn",
+        "AnomalyGroupId"
+      ],
+      "members": {
+        "AnomalyDetectorArn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the anomaly detector.</p>"
+        },
+        "AnomalyGroupId": {
+          "shape": "UUID",
+          "documentation": "<p>The ID of the anomaly group.</p>"
+        },
+        "RelationshipTypeFilter": {
+          "shape": "RelationshipType",
+          "documentation": "<p>Filter for potential causes (<code>CAUSE_OF_INPUT_ANOMALY_GROUP</code>) or downstream effects (<code>EFFECT_OF_INPUT_ANOMALY_GROUP</code>) of the anomaly group.</p>"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of results to return.</p>",
+          "box": true
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>Specify the pagination token that's returned by a previous request to retrieve the next page of results.</p>"
+        }
+      }
+    },
+    "ListAnomalyGroupRelatedMetricsResponse": {
+      "type": "structure",
+      "members": {
+        "InterMetricImpactList": {
+          "shape": "InterMetricImpactList",
+          "documentation": "<p>Aggregated details about the measures contributing to the anomaly group, and the measures potentially impacted by the anomaly group.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The pagination token that's included if more results are available.</p>"
         }
       }
     },
@@ -2225,6 +2389,11 @@
         }
       },
       "documentation": "<p>A calculation made by contrasting a measure and a dimension from your source data.</p>"
+    },
+    "MetricChangePercentage": {
+      "type": "double",
+      "max": 100,
+      "min": 0
     },
     "MetricLevelImpact": {
       "type": "structure",
@@ -2410,16 +2579,6 @@
     },
     "RDSSourceConfig": {
       "type": "structure",
-      "required": [
-        "DBInstanceIdentifier",
-        "DatabaseHost",
-        "DatabasePort",
-        "SecretManagerArn",
-        "DatabaseName",
-        "TableName",
-        "RoleArn",
-        "VpcConfiguration"
-      ],
       "members": {
         "DBInstanceIdentifier": {
           "shape": "RDSDatabaseIdentifier",
@@ -2471,16 +2630,6 @@
     },
     "RedshiftSourceConfig": {
       "type": "structure",
-      "required": [
-        "ClusterIdentifier",
-        "DatabaseHost",
-        "DatabasePort",
-        "SecretManagerArn",
-        "DatabaseName",
-        "TableName",
-        "RoleArn",
-        "VpcConfiguration"
-      ],
       "members": {
         "ClusterIdentifier": {
           "shape": "RedshiftClusterIdentifier",
@@ -2518,11 +2667,15 @@
       },
       "documentation": "<p>Provides information about the Amazon Redshift database configuration.</p>"
     },
+    "RelationshipType": {
+      "type": "string",
+      "enum": [
+        "CAUSE_OF_INPUT_ANOMALY_GROUP",
+        "EFFECT_OF_INPUT_ANOMALY_GROUP"
+      ]
+    },
     "S3SourceConfig": {
       "type": "structure",
-      "required": [
-        "RoleArn"
-      ],
       "members": {
         "RoleArn": {
           "shape": "Arn",
@@ -2552,7 +2705,7 @@
       "members": {
         "RoleArn": {
           "shape": "Arn",
-          "documentation": "<p>THe ARN of the IAM role that has access to the target SNS topic.</p>"
+          "documentation": "<p>The ARN of the IAM role that has access to the target SNS topic.</p>"
         },
         "SnsTopicArn": {
           "shape": "Arn",
@@ -2635,7 +2788,7 @@
       "type": "string",
       "max": 100,
       "min": 1,
-      "pattern": "^[a-zA-Z][a-zA-Z0-9_]*$"
+      "pattern": "^[a-zA-Z][a-zA-Z0-9_.]*$"
     },
     "TagKey": {
       "type": "string",
@@ -2792,7 +2945,7 @@
     "UUID": {
       "type": "string",
       "max": 63,
-      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*"
+      "pattern": "[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}"
     },
     "UntagResourceRequest": {
       "type": "structure",
@@ -2872,7 +3025,7 @@
         },
         "Offset": {
           "shape": "Offset",
-          "documentation": "<p>After an interval ends, the amount of time that the detector waits before importing data.</p>",
+          "documentation": "<p>After an interval ends, the amount of seconds that the detector waits before importing data. Offset is only supported for S3 and Redshift datasources.</p>",
           "box": true
         },
         "TimestampColumn": {

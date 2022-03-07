@@ -12,27 +12,27 @@ declare class S3Outposts extends Service {
   constructor(options?: S3Outposts.Types.ClientConfiguration)
   config: Config & S3Outposts.Types.ClientConfiguration;
   /**
-   * S3 on Outposts access points simplify managing data access at scale for shared datasets in Amazon S3 on Outposts. S3 on Outposts uses endpoints to connect to Outposts buckets so that you can perform actions within your virtual private cloud (VPC).  This action creates an endpoint and associates it with the specified Outpost.   Related actions include:    DeleteEndpoint     ListEndpoints   
+   * Amazon S3 on Outposts Access Points simplify managing data access at scale for shared datasets in S3 on Outposts. S3 on Outposts uses endpoints to connect to Outposts buckets so that you can perform actions within your virtual private cloud (VPC). For more information, see  Accessing S3 on Outposts using VPC only access points. This action creates an endpoint and associates it with the specified Outposts.  It can take up to 5 minutes for this action to complete.   Related actions include:    DeleteEndpoint     ListEndpoints   
    */
   createEndpoint(params: S3Outposts.Types.CreateEndpointRequest, callback?: (err: AWSError, data: S3Outposts.Types.CreateEndpointResult) => void): Request<S3Outposts.Types.CreateEndpointResult, AWSError>;
   /**
-   * S3 on Outposts access points simplify managing data access at scale for shared datasets in Amazon S3 on Outposts. S3 on Outposts uses endpoints to connect to Outposts buckets so that you can perform actions within your virtual private cloud (VPC).  This action creates an endpoint and associates it with the specified Outpost.   Related actions include:    DeleteEndpoint     ListEndpoints   
+   * Amazon S3 on Outposts Access Points simplify managing data access at scale for shared datasets in S3 on Outposts. S3 on Outposts uses endpoints to connect to Outposts buckets so that you can perform actions within your virtual private cloud (VPC). For more information, see  Accessing S3 on Outposts using VPC only access points. This action creates an endpoint and associates it with the specified Outposts.  It can take up to 5 minutes for this action to complete.   Related actions include:    DeleteEndpoint     ListEndpoints   
    */
   createEndpoint(callback?: (err: AWSError, data: S3Outposts.Types.CreateEndpointResult) => void): Request<S3Outposts.Types.CreateEndpointResult, AWSError>;
   /**
-   * S3 on Outposts access points simplify managing data access at scale for shared datasets in Amazon S3 on Outposts. S3 on Outposts uses endpoints to connect to Outposts buckets so that you can perform actions within your virtual private cloud (VPC).  This action deletes an endpoint.   Related actions include:    CreateEndpoint     ListEndpoints   
+   * Amazon S3 on Outposts Access Points simplify managing data access at scale for shared datasets in S3 on Outposts. S3 on Outposts uses endpoints to connect to Outposts buckets so that you can perform actions within your virtual private cloud (VPC). For more information, see  Accessing S3 on Outposts using VPC only access points. This action deletes an endpoint.  It can take up to 5 minutes for this action to complete.   Related actions include:    CreateEndpoint     ListEndpoints   
    */
   deleteEndpoint(params: S3Outposts.Types.DeleteEndpointRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * S3 on Outposts access points simplify managing data access at scale for shared datasets in Amazon S3 on Outposts. S3 on Outposts uses endpoints to connect to Outposts buckets so that you can perform actions within your virtual private cloud (VPC).  This action deletes an endpoint.   Related actions include:    CreateEndpoint     ListEndpoints   
+   * Amazon S3 on Outposts Access Points simplify managing data access at scale for shared datasets in S3 on Outposts. S3 on Outposts uses endpoints to connect to Outposts buckets so that you can perform actions within your virtual private cloud (VPC). For more information, see  Accessing S3 on Outposts using VPC only access points. This action deletes an endpoint.  It can take up to 5 minutes for this action to complete.   Related actions include:    CreateEndpoint     ListEndpoints   
    */
   deleteEndpoint(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * S3 on Outposts access points simplify managing data access at scale for shared datasets in Amazon S3 on Outposts. S3 on Outposts uses endpoints to connect to Outposts buckets so that you can perform actions within your virtual private cloud (VPC).  This action lists endpoints associated with the Outpost.   Related actions include:    CreateEndpoint     DeleteEndpoint   
+   * Amazon S3 on Outposts Access Points simplify managing data access at scale for shared datasets in S3 on Outposts. S3 on Outposts uses endpoints to connect to Outposts buckets so that you can perform actions within your virtual private cloud (VPC). For more information, see  Accessing S3 on Outposts using VPC only access points. This action lists endpoints associated with the Outposts.   Related actions include:    CreateEndpoint     DeleteEndpoint   
    */
   listEndpoints(params: S3Outposts.Types.ListEndpointsRequest, callback?: (err: AWSError, data: S3Outposts.Types.ListEndpointsResult) => void): Request<S3Outposts.Types.ListEndpointsResult, AWSError>;
   /**
-   * S3 on Outposts access points simplify managing data access at scale for shared datasets in Amazon S3 on Outposts. S3 on Outposts uses endpoints to connect to Outposts buckets so that you can perform actions within your virtual private cloud (VPC).  This action lists endpoints associated with the Outpost.   Related actions include:    CreateEndpoint     DeleteEndpoint   
+   * Amazon S3 on Outposts Access Points simplify managing data access at scale for shared datasets in S3 on Outposts. S3 on Outposts uses endpoints to connect to Outposts buckets so that you can perform actions within your virtual private cloud (VPC). For more information, see  Accessing S3 on Outposts using VPC only access points. This action lists endpoints associated with the Outposts.   Related actions include:    CreateEndpoint     DeleteEndpoint   
    */
   listEndpoints(callback?: (err: AWSError, data: S3Outposts.Types.ListEndpointsResult) => void): Request<S3Outposts.Types.ListEndpointsResult, AWSError>;
 }
@@ -40,17 +40,25 @@ declare namespace S3Outposts {
   export type CidrBlock = string;
   export interface CreateEndpointRequest {
     /**
-     * The ID of the AWS Outpost. 
+     * The ID of the AWS Outposts. 
      */
     OutpostId: OutpostId;
     /**
-     * The ID of the subnet in the selected VPC.
+     * The ID of the subnet in the selected VPC. The endpoint subnet must belong to the Outpost that has the Amazon S3 on Outposts provisioned.
      */
     SubnetId: SubnetId;
     /**
      * The ID of the security group to use with the endpoint.
      */
     SecurityGroupId: SecurityGroupId;
+    /**
+     * The type of access for the on-premise network connectivity for the Outpost endpoint. To access the endpoint from an on-premises network, you must specify the access type and provide the customer owned IPv4 pool.
+     */
+    AccessType?: EndpointAccessType;
+    /**
+     * The ID of the customer-owned IPv4 pool for the endpoint. IP addresses will be allocated from this pool for the endpoint.
+     */
+    CustomerOwnedIpv4Pool?: CustomerOwnedIpv4Pool;
   }
   export interface CreateEndpointResult {
     /**
@@ -59,13 +67,14 @@ declare namespace S3Outposts {
     EndpointArn?: EndpointArn;
   }
   export type CreationTime = Date;
+  export type CustomerOwnedIpv4Pool = string;
   export interface DeleteEndpointRequest {
     /**
-     * The ID of the end point.
+     * The ID of the endpoint.
      */
     EndpointId: EndpointId;
     /**
-     * The ID of the AWS Outpost. 
+     * The ID of the AWS Outposts. 
      */
     OutpostId: OutpostId;
   }
@@ -75,7 +84,7 @@ declare namespace S3Outposts {
      */
     EndpointArn?: EndpointArn;
     /**
-     * The ID of the AWS Outpost.
+     * The ID of the AWS Outposts.
      */
     OutpostsId?: OutpostId;
     /**
@@ -94,10 +103,31 @@ declare namespace S3Outposts {
      * The network interface of the endpoint.
      */
     NetworkInterfaces?: NetworkInterfaces;
+    /**
+     * The ID of the VPC used for the endpoint.
+     */
+    VpcId?: VpcId;
+    /**
+     * The ID of the subnet used for the endpoint.
+     */
+    SubnetId?: SubnetId;
+    /**
+     * The ID of the security group used for the endpoint.
+     */
+    SecurityGroupId?: SecurityGroupId;
+    /**
+     * 
+     */
+    AccessType?: EndpointAccessType;
+    /**
+     * The ID of the customer-owned IPv4 pool used for the endpoint.
+     */
+    CustomerOwnedIpv4Pool?: CustomerOwnedIpv4Pool;
   }
+  export type EndpointAccessType = "Private"|"CustomerOwnedIp"|string;
   export type EndpointArn = string;
   export type EndpointId = string;
-  export type EndpointStatus = "PENDING"|"AVAILABLE"|string;
+  export type EndpointStatus = "Pending"|"Available"|"Deleting"|string;
   export type Endpoints = Endpoint[];
   export interface ListEndpointsRequest {
     /**
@@ -111,7 +141,7 @@ declare namespace S3Outposts {
   }
   export interface ListEndpointsResult {
     /**
-     * Returns an array of endpoints associated with AWS Outpost.
+     * Returns an array of endpoints associated with AWS Outposts.
      */
     Endpoints?: Endpoints;
     /**
@@ -132,6 +162,7 @@ declare namespace S3Outposts {
   export type OutpostId = string;
   export type SecurityGroupId = string;
   export type SubnetId = string;
+  export type VpcId = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

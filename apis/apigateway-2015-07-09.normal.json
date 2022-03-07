@@ -25,22 +25,22 @@
       },
       "errors": [
         {
-          "shape": "UnauthorizedException"
+          "shape": "BadRequestException"
         },
         {
-          "shape": "NotFoundException"
-        },
-        {
-          "shape": "TooManyRequestsException"
+          "shape": "ConflictException"
         },
         {
           "shape": "LimitExceededException"
         },
         {
-          "shape": "BadRequestException"
+          "shape": "NotFoundException"
         },
         {
-          "shape": "ConflictException"
+          "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "TooManyRequestsException"
         }
       ],
       "documentation": "<p>Create an <a>ApiKey</a> resource. </p> <div class=\"seeAlso\"><a href=\"https://docs.aws.amazon.com/cli/latest/reference/apigateway/create-api-key.html\">AWS CLI</a></div>"
@@ -63,13 +63,16 @@
           "shape": "BadRequestException"
         },
         {
-          "shape": "UnauthorizedException"
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "LimitExceededException"
         },
         {
           "shape": "NotFoundException"
         },
         {
-          "shape": "LimitExceededException"
+          "shape": "UnauthorizedException"
         },
         {
           "shape": "TooManyRequestsException"
@@ -92,16 +95,19 @@
       },
       "errors": [
         {
-          "shape": "UnauthorizedException"
+          "shape": "BadRequestException"
         },
         {
           "shape": "ConflictException"
         },
         {
-          "shape": "BadRequestException"
+          "shape": "LimitExceededException"
         },
         {
           "shape": "NotFoundException"
+        },
+        {
+          "shape": "UnauthorizedException"
         },
         {
           "shape": "TooManyRequestsException"
@@ -124,19 +130,19 @@
       },
       "errors": [
         {
-          "shape": "UnauthorizedException"
-        },
-        {
           "shape": "BadRequestException"
-        },
-        {
-          "shape": "NotFoundException"
         },
         {
           "shape": "ConflictException"
         },
         {
           "shape": "LimitExceededException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "UnauthorizedException"
         },
         {
           "shape": "TooManyRequestsException"
@@ -168,13 +174,13 @@
           "shape": "ConflictException"
         },
         {
-          "shape": "UnauthorizedException"
+          "shape": "LimitExceededException"
         },
         {
           "shape": "NotFoundException"
         },
         {
-          "shape": "LimitExceededException"
+          "shape": "UnauthorizedException"
         },
         {
           "shape": "TooManyRequestsException"
@@ -202,13 +208,13 @@
           "shape": "ConflictException"
         },
         {
-          "shape": "UnauthorizedException"
+          "shape": "LimitExceededException"
         },
         {
           "shape": "NotFoundException"
         },
         {
-          "shape": "LimitExceededException"
+          "shape": "UnauthorizedException"
         },
         {
           "shape": "TooManyRequestsException"
@@ -230,13 +236,16 @@
       },
       "errors": [
         {
-          "shape": "UnauthorizedException"
-        },
-        {
           "shape": "BadRequestException"
         },
         {
           "shape": "ConflictException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "UnauthorizedException"
         },
         {
           "shape": "TooManyRequestsException"
@@ -262,16 +271,16 @@
           "shape": "BadRequestException"
         },
         {
-          "shape": "UnauthorizedException"
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "LimitExceededException"
         },
         {
           "shape": "NotFoundException"
         },
         {
-          "shape": "ConflictException"
-        },
-        {
-          "shape": "LimitExceededException"
+          "shape": "UnauthorizedException"
         },
         {
           "shape": "TooManyRequestsException"
@@ -297,13 +306,16 @@
           "shape": "BadRequestException"
         },
         {
-          "shape": "UnauthorizedException"
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "LimitExceededException"
         },
         {
           "shape": "NotFoundException"
         },
         {
-          "shape": "LimitExceededException"
+          "shape": "UnauthorizedException"
         },
         {
           "shape": "TooManyRequestsException"
@@ -361,13 +373,16 @@
       },
       "errors": [
         {
-          "shape": "UnauthorizedException"
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ConflictException"
         },
         {
           "shape": "LimitExceededException"
         },
         {
-          "shape": "BadRequestException"
+          "shape": "UnauthorizedException"
         },
         {
           "shape": "TooManyRequestsException"
@@ -428,19 +443,19 @@
           "shape": "BadRequestException"
         },
         {
-          "shape": "UnauthorizedException"
-        },
-        {
-          "shape": "TooManyRequestsException"
+          "shape": "ConflictException"
         },
         {
           "shape": "LimitExceededException"
         },
         {
-          "shape": "ConflictException"
+          "shape": "NotFoundException"
         },
         {
-          "shape": "NotFoundException"
+          "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "TooManyRequestsException"
         }
       ],
       "documentation": "<p>Creates a usage plan with the throttle and quota limits, as well as the associated API stages, specified in the payload. </p>"
@@ -466,10 +481,13 @@
           "shape": "ConflictException"
         },
         {
-          "shape": "UnauthorizedException"
+          "shape": "LimitExceededException"
         },
         {
           "shape": "NotFoundException"
+        },
+        {
+          "shape": "UnauthorizedException"
         },
         {
           "shape": "TooManyRequestsException"
@@ -492,10 +510,16 @@
       },
       "errors": [
         {
-          "shape": "UnauthorizedException"
+          "shape": "BadRequestException"
         },
         {
-          "shape": "BadRequestException"
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "UnauthorizedException"
         },
         {
           "shape": "TooManyRequestsException"
@@ -515,10 +539,16 @@
       },
       "errors": [
         {
-          "shape": "UnauthorizedException"
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ConflictException"
         },
         {
           "shape": "NotFoundException"
+        },
+        {
+          "shape": "UnauthorizedException"
         },
         {
           "shape": "TooManyRequestsException"
@@ -538,19 +568,19 @@
       },
       "errors": [
         {
-          "shape": "UnauthorizedException"
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ConflictException"
         },
         {
           "shape": "NotFoundException"
         },
         {
+          "shape": "UnauthorizedException"
+        },
+        {
           "shape": "TooManyRequestsException"
-        },
-        {
-          "shape": "BadRequestException"
-        },
-        {
-          "shape": "ConflictException"
         }
       ],
       "documentation": "<p>Deletes an existing <a>Authorizer</a> resource.</p> <div class=\"seeAlso\"><a href=\"https://docs.aws.amazon.com/cli/latest/reference/apigateway/delete-authorizer.html\">AWS CLI</a></div>"
@@ -567,16 +597,16 @@
       },
       "errors": [
         {
-          "shape": "UnauthorizedException"
-        },
-        {
-          "shape": "NotFoundException"
+          "shape": "BadRequestException"
         },
         {
           "shape": "ConflictException"
         },
         {
-          "shape": "BadRequestException"
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "UnauthorizedException"
         },
         {
           "shape": "TooManyRequestsException"
@@ -596,16 +626,19 @@
       },
       "errors": [
         {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
           "shape": "UnauthorizedException"
         },
         {
           "shape": "TooManyRequestsException"
-        },
-        {
-          "shape": "BadRequestException"
-        },
-        {
-          "shape": "NotFoundException"
         }
       ],
       "documentation": "<p>Deletes the <a>ClientCertificate</a> resource.</p>"
@@ -622,13 +655,19 @@
       },
       "errors": [
         {
-          "shape": "UnauthorizedException"
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "LimitExceededException"
         },
         {
           "shape": "NotFoundException"
         },
         {
-          "shape": "BadRequestException"
+          "shape": "UnauthorizedException"
         },
         {
           "shape": "TooManyRequestsException"
@@ -648,19 +687,19 @@
       },
       "errors": [
         {
-          "shape": "UnauthorizedException"
-        },
-        {
-          "shape": "NotFoundException"
-        },
-        {
-          "shape": "TooManyRequestsException"
+          "shape": "BadRequestException"
         },
         {
           "shape": "ConflictException"
         },
         {
-          "shape": "BadRequestException"
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "TooManyRequestsException"
         }
       ]
     },
@@ -676,16 +715,16 @@
       },
       "errors": [
         {
-          "shape": "UnauthorizedException"
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ConflictException"
         },
         {
           "shape": "NotFoundException"
         },
         {
-          "shape": "BadRequestException"
-        },
-        {
-          "shape": "ConflictException"
+          "shape": "UnauthorizedException"
         },
         {
           "shape": "TooManyRequestsException"
@@ -704,16 +743,19 @@
       },
       "errors": [
         {
-          "shape": "UnauthorizedException"
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ConflictException"
         },
         {
           "shape": "NotFoundException"
         },
         {
-          "shape": "TooManyRequestsException"
+          "shape": "UnauthorizedException"
         },
         {
-          "shape": "BadRequestException"
+          "shape": "TooManyRequestsException"
         }
       ],
       "documentation": "<p>Deletes the <a>DomainName</a> resource.</p>"
@@ -730,19 +772,19 @@
       },
       "errors": [
         {
-          "shape": "UnauthorizedException"
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ConflictException"
         },
         {
           "shape": "NotFoundException"
         },
         {
+          "shape": "UnauthorizedException"
+        },
+        {
           "shape": "TooManyRequestsException"
-        },
-        {
-          "shape": "BadRequestException"
-        },
-        {
-          "shape": "ConflictException"
         }
       ],
       "documentation": "<p>Clears any customization of a <a>GatewayResponse</a> of a specified response type on the given <a>RestApi</a> and resets it with the default settings.</p>"
@@ -759,16 +801,19 @@
       },
       "errors": [
         {
-          "shape": "UnauthorizedException"
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ConflictException"
         },
         {
           "shape": "NotFoundException"
         },
         {
-          "shape": "TooManyRequestsException"
+          "shape": "UnauthorizedException"
         },
         {
-          "shape": "ConflictException"
+          "shape": "TooManyRequestsException"
         }
       ],
       "documentation": "<p>Represents a delete integration.</p>"
@@ -785,19 +830,19 @@
       },
       "errors": [
         {
-          "shape": "UnauthorizedException"
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ConflictException"
         },
         {
           "shape": "NotFoundException"
         },
         {
+          "shape": "UnauthorizedException"
+        },
+        {
           "shape": "TooManyRequestsException"
-        },
-        {
-          "shape": "BadRequestException"
-        },
-        {
-          "shape": "ConflictException"
         }
       ],
       "documentation": "<p>Represents a delete integration response.</p>"
@@ -869,19 +914,19 @@
       },
       "errors": [
         {
-          "shape": "UnauthorizedException"
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ConflictException"
         },
         {
           "shape": "NotFoundException"
         },
         {
+          "shape": "UnauthorizedException"
+        },
+        {
           "shape": "TooManyRequestsException"
-        },
-        {
-          "shape": "BadRequestException"
-        },
-        {
-          "shape": "ConflictException"
         }
       ],
       "documentation": "<p>Deletes a model.</p>"
@@ -898,19 +943,19 @@
       },
       "errors": [
         {
-          "shape": "UnauthorizedException"
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ConflictException"
         },
         {
           "shape": "NotFoundException"
         },
         {
+          "shape": "UnauthorizedException"
+        },
+        {
           "shape": "TooManyRequestsException"
-        },
-        {
-          "shape": "BadRequestException"
-        },
-        {
-          "shape": "ConflictException"
         }
       ],
       "documentation": "<p>Deletes a <a>RequestValidator</a> of a given <a>RestApi</a>.</p>"
@@ -956,16 +1001,19 @@
       },
       "errors": [
         {
-          "shape": "UnauthorizedException"
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ConflictException"
         },
         {
           "shape": "NotFoundException"
         },
         {
-          "shape": "TooManyRequestsException"
+          "shape": "UnauthorizedException"
         },
         {
-          "shape": "BadRequestException"
+          "shape": "TooManyRequestsException"
         }
       ],
       "documentation": "<p>Deletes the specified API.</p>"
@@ -982,16 +1030,22 @@
       },
       "errors": [
         {
-          "shape": "UnauthorizedException"
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "LimitExceededException"
         },
         {
           "shape": "NotFoundException"
         },
         {
-          "shape": "TooManyRequestsException"
+          "shape": "UnauthorizedException"
         },
         {
-          "shape": "BadRequestException"
+          "shape": "TooManyRequestsException"
         }
       ],
       "documentation": "<p>Deletes a <a>Stage</a> resource.</p>"
@@ -1008,16 +1062,19 @@
       },
       "errors": [
         {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
           "shape": "UnauthorizedException"
         },
         {
           "shape": "TooManyRequestsException"
-        },
-        {
-          "shape": "BadRequestException"
-        },
-        {
-          "shape": "NotFoundException"
         }
       ],
       "documentation": "<p>Deletes a usage plan of a given plan Id.</p>"
@@ -1040,10 +1097,10 @@
           "shape": "ConflictException"
         },
         {
-          "shape": "UnauthorizedException"
+          "shape": "NotFoundException"
         },
         {
-          "shape": "NotFoundException"
+          "shape": "UnauthorizedException"
         },
         {
           "shape": "TooManyRequestsException"
@@ -1063,16 +1120,19 @@
       },
       "errors": [
         {
-          "shape": "UnauthorizedException"
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ConflictException"
         },
         {
           "shape": "NotFoundException"
         },
         {
-          "shape": "TooManyRequestsException"
+          "shape": "UnauthorizedException"
         },
         {
-          "shape": "BadRequestException"
+          "shape": "TooManyRequestsException"
         }
       ],
       "documentation": "<p>Deletes an existing <a>VpcLink</a> of a specified identifier.</p>"
@@ -1089,13 +1149,19 @@
       },
       "errors": [
         {
-          "shape": "UnauthorizedException"
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "LimitExceededException"
         },
         {
           "shape": "NotFoundException"
         },
         {
-          "shape": "BadRequestException"
+          "shape": "UnauthorizedException"
         },
         {
           "shape": "TooManyRequestsException"
@@ -1115,13 +1181,19 @@
       },
       "errors": [
         {
-          "shape": "UnauthorizedException"
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "LimitExceededException"
         },
         {
           "shape": "NotFoundException"
         },
         {
-          "shape": "BadRequestException"
+          "shape": "UnauthorizedException"
         },
         {
           "shape": "TooManyRequestsException"
@@ -1144,13 +1216,19 @@
       },
       "errors": [
         {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
           "shape": "UnauthorizedException"
         },
         {
           "shape": "TooManyRequestsException"
-        },
-        {
-          "shape": "LimitExceededException"
         }
       ],
       "documentation": "<p>Generates a <a>ClientCertificate</a> resource.</p>"
@@ -1169,10 +1247,13 @@
       },
       "errors": [
         {
-          "shape": "UnauthorizedException"
+          "shape": "BadRequestException"
         },
         {
           "shape": "NotFoundException"
+        },
+        {
+          "shape": "UnauthorizedException"
         },
         {
           "shape": "TooManyRequestsException"
@@ -1194,10 +1275,13 @@
       },
       "errors": [
         {
-          "shape": "UnauthorizedException"
+          "shape": "BadRequestException"
         },
         {
           "shape": "NotFoundException"
+        },
+        {
+          "shape": "UnauthorizedException"
         },
         {
           "shape": "TooManyRequestsException"
@@ -1222,6 +1306,9 @@
           "shape": "BadRequestException"
         },
         {
+          "shape": "NotFoundException"
+        },
+        {
           "shape": "UnauthorizedException"
         },
         {
@@ -1244,10 +1331,13 @@
       },
       "errors": [
         {
-          "shape": "UnauthorizedException"
+          "shape": "BadRequestException"
         },
         {
           "shape": "NotFoundException"
+        },
+        {
+          "shape": "UnauthorizedException"
         },
         {
           "shape": "TooManyRequestsException"
@@ -1272,10 +1362,10 @@
           "shape": "BadRequestException"
         },
         {
-          "shape": "UnauthorizedException"
+          "shape": "NotFoundException"
         },
         {
-          "shape": "NotFoundException"
+          "shape": "UnauthorizedException"
         },
         {
           "shape": "TooManyRequestsException"
@@ -1297,10 +1387,13 @@
       },
       "errors": [
         {
-          "shape": "UnauthorizedException"
+          "shape": "BadRequestException"
         },
         {
           "shape": "NotFoundException"
+        },
+        {
+          "shape": "UnauthorizedException"
         },
         {
           "shape": "TooManyRequestsException"
@@ -1322,10 +1415,13 @@
       },
       "errors": [
         {
-          "shape": "UnauthorizedException"
+          "shape": "BadRequestException"
         },
         {
           "shape": "NotFoundException"
+        },
+        {
+          "shape": "UnauthorizedException"
         },
         {
           "shape": "TooManyRequestsException"
@@ -1347,10 +1443,13 @@
       },
       "errors": [
         {
-          "shape": "UnauthorizedException"
+          "shape": "BadRequestException"
         },
         {
           "shape": "NotFoundException"
+        },
+        {
+          "shape": "UnauthorizedException"
         },
         {
           "shape": "TooManyRequestsException"
@@ -1375,6 +1474,9 @@
           "shape": "BadRequestException"
         },
         {
+          "shape": "NotFoundException"
+        },
+        {
           "shape": "UnauthorizedException"
         },
         {
@@ -1397,10 +1499,13 @@
       },
       "errors": [
         {
-          "shape": "UnauthorizedException"
+          "shape": "BadRequestException"
         },
         {
           "shape": "NotFoundException"
+        },
+        {
+          "shape": "UnauthorizedException"
         },
         {
           "shape": "TooManyRequestsException"
@@ -1456,10 +1561,13 @@
       },
       "errors": [
         {
-          "shape": "UnauthorizedException"
+          "shape": "BadRequestException"
         },
         {
           "shape": "NotFoundException"
+        },
+        {
+          "shape": "UnauthorizedException"
         },
         {
           "shape": "TooManyRequestsException"
@@ -1483,10 +1591,10 @@
           "shape": "BadRequestException"
         },
         {
-          "shape": "UnauthorizedException"
+          "shape": "NotFoundException"
         },
         {
-          "shape": "NotFoundException"
+          "shape": "UnauthorizedException"
         },
         {
           "shape": "TooManyRequestsException"
@@ -1558,13 +1666,13 @@
       },
       "errors": [
         {
-          "shape": "UnauthorizedException"
+          "shape": "BadRequestException"
         },
         {
           "shape": "NotFoundException"
         },
         {
-          "shape": "ServiceUnavailableException"
+          "shape": "UnauthorizedException"
         },
         {
           "shape": "TooManyRequestsException"
@@ -1587,6 +1695,9 @@
       "errors": [
         {
           "shape": "BadRequestException"
+        },
+        {
+          "shape": "NotFoundException"
         },
         {
           "shape": "UnauthorizedException"
@@ -1612,16 +1723,19 @@
       },
       "errors": [
         {
-          "shape": "UnauthorizedException"
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "LimitExceededException"
         },
         {
           "shape": "NotFoundException"
         },
         {
-          "shape": "BadRequestException"
-        },
-        {
-          "shape": "ConflictException"
+          "shape": "UnauthorizedException"
         },
         {
           "shape": "TooManyRequestsException"
@@ -1643,10 +1757,13 @@
       },
       "errors": [
         {
-          "shape": "UnauthorizedException"
+          "shape": "BadRequestException"
         },
         {
           "shape": "NotFoundException"
+        },
+        {
+          "shape": "UnauthorizedException"
         },
         {
           "shape": "TooManyRequestsException"
@@ -1671,10 +1788,10 @@
           "shape": "BadRequestException"
         },
         {
-          "shape": "UnauthorizedException"
+          "shape": "NotFoundException"
         },
         {
-          "shape": "NotFoundException"
+          "shape": "UnauthorizedException"
         },
         {
           "shape": "TooManyRequestsException"
@@ -1696,10 +1813,13 @@
       },
       "errors": [
         {
-          "shape": "UnauthorizedException"
+          "shape": "BadRequestException"
         },
         {
           "shape": "NotFoundException"
+        },
+        {
+          "shape": "UnauthorizedException"
         },
         {
           "shape": "TooManyRequestsException"
@@ -1721,10 +1841,13 @@
       },
       "errors": [
         {
-          "shape": "UnauthorizedException"
+          "shape": "BadRequestException"
         },
         {
           "shape": "NotFoundException"
+        },
+        {
+          "shape": "UnauthorizedException"
         },
         {
           "shape": "TooManyRequestsException"
@@ -1796,10 +1919,13 @@
       },
       "errors": [
         {
-          "shape": "UnauthorizedException"
+          "shape": "BadRequestException"
         },
         {
           "shape": "NotFoundException"
+        },
+        {
+          "shape": "UnauthorizedException"
         },
         {
           "shape": "TooManyRequestsException"
@@ -1877,10 +2003,13 @@
       },
       "errors": [
         {
-          "shape": "UnauthorizedException"
+          "shape": "BadRequestException"
         },
         {
           "shape": "NotFoundException"
+        },
+        {
+          "shape": "UnauthorizedException"
         },
         {
           "shape": "TooManyRequestsException"
@@ -1905,10 +2034,10 @@
           "shape": "BadRequestException"
         },
         {
-          "shape": "UnauthorizedException"
+          "shape": "NotFoundException"
         },
         {
-          "shape": "NotFoundException"
+          "shape": "UnauthorizedException"
         },
         {
           "shape": "TooManyRequestsException"
@@ -1983,10 +2112,13 @@
       },
       "errors": [
         {
-          "shape": "UnauthorizedException"
+          "shape": "BadRequestException"
         },
         {
           "shape": "NotFoundException"
+        },
+        {
+          "shape": "UnauthorizedException"
         },
         {
           "shape": "TooManyRequestsException"
@@ -2009,6 +2141,9 @@
       "errors": [
         {
           "shape": "BadRequestException"
+        },
+        {
+          "shape": "NotFoundException"
         },
         {
           "shape": "UnauthorizedException"
@@ -2034,16 +2169,19 @@
       },
       "errors": [
         {
-          "shape": "UnauthorizedException"
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "LimitExceededException"
         },
         {
           "shape": "NotFoundException"
         },
         {
-          "shape": "BadRequestException"
-        },
-        {
-          "shape": "ConflictException"
+          "shape": "UnauthorizedException"
         },
         {
           "shape": "TooManyRequestsException"
@@ -2065,10 +2203,13 @@
       },
       "errors": [
         {
-          "shape": "UnauthorizedException"
+          "shape": "BadRequestException"
         },
         {
           "shape": "NotFoundException"
+        },
+        {
+          "shape": "UnauthorizedException"
         },
         {
           "shape": "TooManyRequestsException"
@@ -2088,6 +2229,12 @@
         "shape": "SdkTypes"
       },
       "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
         {
           "shape": "UnauthorizedException"
         },
@@ -2110,10 +2257,19 @@
       },
       "errors": [
         {
-          "shape": "UnauthorizedException"
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "LimitExceededException"
         },
         {
           "shape": "NotFoundException"
+        },
+        {
+          "shape": "UnauthorizedException"
         },
         {
           "shape": "TooManyRequestsException"
@@ -2135,10 +2291,19 @@
       },
       "errors": [
         {
-          "shape": "UnauthorizedException"
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "LimitExceededException"
         },
         {
           "shape": "NotFoundException"
+        },
+        {
+          "shape": "UnauthorizedException"
         },
         {
           "shape": "TooManyRequestsException"
@@ -2163,16 +2328,13 @@
           "shape": "BadRequestException"
         },
         {
+          "shape": "NotFoundException"
+        },
+        {
           "shape": "UnauthorizedException"
         },
         {
           "shape": "TooManyRequestsException"
-        },
-        {
-          "shape": "NotFoundException"
-        },
-        {
-          "shape": "LimitExceededException"
         }
       ],
       "documentation": "<p>Gets the <a>Tags</a> collection for a given resource.</p>"
@@ -2222,10 +2384,10 @@
           "shape": "BadRequestException"
         },
         {
-          "shape": "UnauthorizedException"
+          "shape": "NotFoundException"
         },
         {
-          "shape": "NotFoundException"
+          "shape": "UnauthorizedException"
         },
         {
           "shape": "TooManyRequestsException"
@@ -2251,10 +2413,10 @@
           "shape": "BadRequestException"
         },
         {
-          "shape": "UnauthorizedException"
+          "shape": "NotFoundException"
         },
         {
-          "shape": "NotFoundException"
+          "shape": "UnauthorizedException"
         },
         {
           "shape": "TooManyRequestsException"
@@ -2279,10 +2441,10 @@
           "shape": "BadRequestException"
         },
         {
-          "shape": "UnauthorizedException"
+          "shape": "NotFoundException"
         },
         {
-          "shape": "NotFoundException"
+          "shape": "UnauthorizedException"
         },
         {
           "shape": "TooManyRequestsException"
@@ -2307,16 +2469,13 @@
           "shape": "BadRequestException"
         },
         {
+          "shape": "NotFoundException"
+        },
+        {
           "shape": "UnauthorizedException"
         },
         {
           "shape": "TooManyRequestsException"
-        },
-        {
-          "shape": "ConflictException"
-        },
-        {
-          "shape": "NotFoundException"
         }
       ],
       "documentation": "<p>Gets all the usage plans of the caller's account.</p>"
@@ -2335,10 +2494,13 @@
       },
       "errors": [
         {
-          "shape": "UnauthorizedException"
+          "shape": "BadRequestException"
         },
         {
           "shape": "NotFoundException"
+        },
+        {
+          "shape": "UnauthorizedException"
         },
         {
           "shape": "TooManyRequestsException"
@@ -2361,6 +2523,9 @@
       "errors": [
         {
           "shape": "BadRequestException"
+        },
+        {
+          "shape": "NotFoundException"
         },
         {
           "shape": "UnauthorizedException"
@@ -2386,22 +2551,22 @@
       },
       "errors": [
         {
-          "shape": "UnauthorizedException"
+          "shape": "BadRequestException"
         },
         {
-          "shape": "NotFoundException"
-        },
-        {
-          "shape": "TooManyRequestsException"
+          "shape": "ConflictException"
         },
         {
           "shape": "LimitExceededException"
         },
         {
-          "shape": "BadRequestException"
+          "shape": "NotFoundException"
         },
         {
-          "shape": "ConflictException"
+          "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "TooManyRequestsException"
         }
       ],
       "documentation": "<p>Import API keys from an external source, such as a CSV-formatted file.</p>"
@@ -2420,16 +2585,19 @@
       },
       "errors": [
         {
-          "shape": "UnauthorizedException"
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "LimitExceededException"
         },
         {
           "shape": "NotFoundException"
         },
         {
-          "shape": "BadRequestException"
-        },
-        {
-          "shape": "LimitExceededException"
+          "shape": "UnauthorizedException"
         },
         {
           "shape": "TooManyRequestsException"
@@ -2451,19 +2619,22 @@
       },
       "errors": [
         {
-          "shape": "UnauthorizedException"
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ConflictException"
         },
         {
           "shape": "LimitExceededException"
         },
         {
-          "shape": "BadRequestException"
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "UnauthorizedException"
         },
         {
           "shape": "TooManyRequestsException"
-        },
-        {
-          "shape": "ConflictException"
         }
       ],
       "documentation": "<p>A feature of the API Gateway control service for creating a new API from an external API definition file.</p>"
@@ -2486,13 +2657,16 @@
           "shape": "BadRequestException"
         },
         {
-          "shape": "UnauthorizedException"
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "LimitExceededException"
         },
         {
           "shape": "NotFoundException"
         },
         {
-          "shape": "LimitExceededException"
+          "shape": "UnauthorizedException"
         },
         {
           "shape": "TooManyRequestsException"
@@ -2515,16 +2689,19 @@
       },
       "errors": [
         {
-          "shape": "UnauthorizedException"
-        },
-        {
           "shape": "BadRequestException"
         },
         {
           "shape": "ConflictException"
         },
         {
+          "shape": "LimitExceededException"
+        },
+        {
           "shape": "NotFoundException"
+        },
+        {
+          "shape": "UnauthorizedException"
         },
         {
           "shape": "TooManyRequestsException"
@@ -2547,22 +2724,22 @@
       },
       "errors": [
         {
-          "shape": "UnauthorizedException"
+          "shape": "BadRequestException"
         },
         {
-          "shape": "NotFoundException"
+          "shape": "ConflictException"
         },
         {
           "shape": "LimitExceededException"
         },
         {
-          "shape": "BadRequestException"
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "UnauthorizedException"
         },
         {
           "shape": "TooManyRequestsException"
-        },
-        {
-          "shape": "ConflictException"
         }
       ],
       "documentation": "<p>Represents a put integration.</p>"
@@ -2651,7 +2828,10 @@
       },
       "errors": [
         {
-          "shape": "UnauthorizedException"
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ConflictException"
         },
         {
           "shape": "LimitExceededException"
@@ -2660,13 +2840,10 @@
           "shape": "NotFoundException"
         },
         {
-          "shape": "BadRequestException"
+          "shape": "UnauthorizedException"
         },
         {
           "shape": "TooManyRequestsException"
-        },
-        {
-          "shape": "ConflictException"
         }
       ],
       "documentation": "<p>A feature of the API Gateway control service for updating an existing API with an input of external API definitions. The update can take the form of merging the supplied definition into the existing API or overwriting the existing API.</p>"
@@ -2686,19 +2863,19 @@
           "shape": "BadRequestException"
         },
         {
-          "shape": "UnauthorizedException"
-        },
-        {
-          "shape": "TooManyRequestsException"
-        },
-        {
-          "shape": "NotFoundException"
+          "shape": "ConflictException"
         },
         {
           "shape": "LimitExceededException"
         },
         {
-          "shape": "ConflictException"
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "TooManyRequestsException"
         }
       ],
       "documentation": "<p>Adds or updates a tag on a given resource.</p>"
@@ -2774,16 +2951,19 @@
           "shape": "BadRequestException"
         },
         {
-          "shape": "UnauthorizedException"
+          "shape": "ConflictException"
         },
         {
-          "shape": "TooManyRequestsException"
+          "shape": "LimitExceededException"
         },
         {
           "shape": "NotFoundException"
         },
         {
-          "shape": "ConflictException"
+          "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "TooManyRequestsException"
         }
       ],
       "documentation": "<p>Removes a tag from a given resource.</p>"
@@ -2802,13 +2982,19 @@
       },
       "errors": [
         {
-          "shape": "UnauthorizedException"
-        },
-        {
           "shape": "BadRequestException"
         },
         {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
           "shape": "NotFoundException"
+        },
+        {
+          "shape": "UnauthorizedException"
         },
         {
           "shape": "TooManyRequestsException"
@@ -2830,19 +3016,22 @@
       },
       "errors": [
         {
-          "shape": "UnauthorizedException"
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "LimitExceededException"
         },
         {
           "shape": "NotFoundException"
         },
         {
-          "shape": "BadRequestException"
+          "shape": "UnauthorizedException"
         },
         {
           "shape": "TooManyRequestsException"
-        },
-        {
-          "shape": "ConflictException"
         }
       ],
       "documentation": "<p>Changes information about an <a>ApiKey</a> resource.</p>"
@@ -2861,13 +3050,19 @@
       },
       "errors": [
         {
-          "shape": "UnauthorizedException"
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "LimitExceededException"
         },
         {
           "shape": "NotFoundException"
         },
         {
-          "shape": "BadRequestException"
+          "shape": "UnauthorizedException"
         },
         {
           "shape": "TooManyRequestsException"
@@ -2889,16 +3084,19 @@
       },
       "errors": [
         {
-          "shape": "UnauthorizedException"
-        },
-        {
-          "shape": "NotFoundException"
+          "shape": "BadRequestException"
         },
         {
           "shape": "ConflictException"
         },
         {
-          "shape": "BadRequestException"
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "UnauthorizedException"
         },
         {
           "shape": "TooManyRequestsException"
@@ -2920,16 +3118,22 @@
       },
       "errors": [
         {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
           "shape": "UnauthorizedException"
         },
         {
           "shape": "TooManyRequestsException"
-        },
-        {
-          "shape": "BadRequestException"
-        },
-        {
-          "shape": "NotFoundException"
         }
       ],
       "documentation": "<p>Changes information about an <a>ClientCertificate</a> resource.</p>"
@@ -2948,13 +3152,19 @@
       },
       "errors": [
         {
-          "shape": "UnauthorizedException"
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "LimitExceededException"
         },
         {
           "shape": "NotFoundException"
         },
         {
-          "shape": "BadRequestException"
+          "shape": "UnauthorizedException"
         },
         {
           "shape": "TooManyRequestsException"
@@ -2982,16 +3192,16 @@
           "shape": "BadRequestException"
         },
         {
-          "shape": "UnauthorizedException"
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "LimitExceededException"
         },
         {
           "shape": "NotFoundException"
         },
         {
-          "shape": "ConflictException"
-        },
-        {
-          "shape": "LimitExceededException"
+          "shape": "UnauthorizedException"
         },
         {
           "shape": "TooManyRequestsException"
@@ -3012,16 +3222,19 @@
       },
       "errors": [
         {
-          "shape": "UnauthorizedException"
-        },
-        {
-          "shape": "NotFoundException"
+          "shape": "BadRequestException"
         },
         {
           "shape": "ConflictException"
         },
         {
-          "shape": "BadRequestException"
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "UnauthorizedException"
         },
         {
           "shape": "TooManyRequestsException"
@@ -3042,16 +3255,19 @@
       },
       "errors": [
         {
-          "shape": "UnauthorizedException"
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "LimitExceededException"
         },
         {
           "shape": "NotFoundException"
         },
         {
-          "shape": "BadRequestException"
-        },
-        {
-          "shape": "ConflictException"
+          "shape": "UnauthorizedException"
         },
         {
           "shape": "TooManyRequestsException"
@@ -3073,13 +3289,19 @@
       },
       "errors": [
         {
-          "shape": "UnauthorizedException"
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "LimitExceededException"
         },
         {
           "shape": "NotFoundException"
         },
         {
-          "shape": "BadRequestException"
+          "shape": "UnauthorizedException"
         },
         {
           "shape": "TooManyRequestsException"
@@ -3101,19 +3323,22 @@
       },
       "errors": [
         {
-          "shape": "UnauthorizedException"
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "LimitExceededException"
         },
         {
           "shape": "NotFoundException"
         },
         {
-          "shape": "BadRequestException"
+          "shape": "UnauthorizedException"
         },
         {
           "shape": "TooManyRequestsException"
-        },
-        {
-          "shape": "ConflictException"
         }
       ],
       "documentation": "<p>Represents an update integration.</p>"
@@ -3132,16 +3357,19 @@
       },
       "errors": [
         {
-          "shape": "UnauthorizedException"
-        },
-        {
-          "shape": "NotFoundException"
+          "shape": "BadRequestException"
         },
         {
           "shape": "ConflictException"
         },
         {
-          "shape": "BadRequestException"
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "UnauthorizedException"
         },
         {
           "shape": "TooManyRequestsException"
@@ -3229,16 +3457,19 @@
       },
       "errors": [
         {
-          "shape": "UnauthorizedException"
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "LimitExceededException"
         },
         {
           "shape": "NotFoundException"
         },
         {
-          "shape": "BadRequestException"
-        },
-        {
-          "shape": "ConflictException"
+          "shape": "UnauthorizedException"
         },
         {
           "shape": "TooManyRequestsException"
@@ -3260,13 +3491,19 @@
       },
       "errors": [
         {
-          "shape": "UnauthorizedException"
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "LimitExceededException"
         },
         {
           "shape": "NotFoundException"
         },
         {
-          "shape": "BadRequestException"
+          "shape": "UnauthorizedException"
         },
         {
           "shape": "TooManyRequestsException"
@@ -3319,16 +3556,19 @@
       },
       "errors": [
         {
-          "shape": "UnauthorizedException"
-        },
-        {
-          "shape": "NotFoundException"
+          "shape": "BadRequestException"
         },
         {
           "shape": "ConflictException"
         },
         {
-          "shape": "BadRequestException"
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "UnauthorizedException"
         },
         {
           "shape": "TooManyRequestsException"
@@ -3350,16 +3590,19 @@
       },
       "errors": [
         {
-          "shape": "UnauthorizedException"
-        },
-        {
-          "shape": "NotFoundException"
+          "shape": "BadRequestException"
         },
         {
           "shape": "ConflictException"
         },
         {
-          "shape": "BadRequestException"
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "UnauthorizedException"
         },
         {
           "shape": "TooManyRequestsException"
@@ -3381,16 +3624,22 @@
       },
       "errors": [
         {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
           "shape": "UnauthorizedException"
         },
         {
           "shape": "TooManyRequestsException"
-        },
-        {
-          "shape": "BadRequestException"
-        },
-        {
-          "shape": "NotFoundException"
         }
       ],
       "documentation": "<p>Grants a temporary extension to the remaining quota of a usage plan associated with a specified API key.</p>"
@@ -3409,19 +3658,22 @@
       },
       "errors": [
         {
-          "shape": "UnauthorizedException"
-        },
-        {
-          "shape": "TooManyRequestsException"
-        },
-        {
           "shape": "BadRequestException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "LimitExceededException"
         },
         {
           "shape": "NotFoundException"
         },
         {
-          "shape": "ConflictException"
+          "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "TooManyRequestsException"
         }
       ],
       "documentation": "<p>Updates a usage plan of a given plan Id.</p>"
@@ -3440,16 +3692,19 @@
       },
       "errors": [
         {
-          "shape": "UnauthorizedException"
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "LimitExceededException"
         },
         {
           "shape": "NotFoundException"
         },
         {
-          "shape": "BadRequestException"
-        },
-        {
-          "shape": "ConflictException"
+          "shape": "UnauthorizedException"
         },
         {
           "shape": "TooManyRequestsException"
@@ -3478,7 +3733,7 @@
       "members": {
         "cloudwatchRoleArn": {
           "shape": "String",
-          "documentation": "<p>The ARN of an Amazon CloudWatch role for the current <a>Account</a>. </p>"
+          "documentation": "<p>The ARN of an Amazon CloudWatch role for the current <a>Account</a>.</p>"
         },
         "throttleSettings": {
           "shape": "ThrottleSettings",
@@ -4087,6 +4342,10 @@
         },
         "mutualTlsAuthentication": {
           "shape": "MutualTlsAuthenticationInput"
+        },
+        "ownershipVerificationCertificateArn": {
+          "shape": "String",
+          "documentation": "<p>The ARN of the public certificate issued by ACM to validate ownership of your custom domain. Only required when configuring mutual TLS and using an ACM imported or private CA certificate ARN as the regionalCertificateArn.</p>"
         }
       },
       "documentation": "<p>A request to create a new domain name.</p>"
@@ -4542,7 +4801,7 @@
         },
         "responseType": {
           "shape": "GatewayResponseType",
-          "documentation": "<p>[Required] <p>The response type of the associated <a>GatewayResponse</a>. Valid values are <ul><li>ACCESS_DENIED</li><li>API_CONFIGURATION_ERROR</li><li>AUTHORIZER_FAILURE</li><li> AUTHORIZER_CONFIGURATION_ERROR</li><li>BAD_REQUEST_PARAMETERS</li><li>BAD_REQUEST_BODY</li><li>DEFAULT_4XX</li><li>DEFAULT_5XX</li><li>EXPIRED_TOKEN</li><li>INVALID_SIGNATURE</li><li>INTEGRATION_FAILURE</li><li>INTEGRATION_TIMEOUT</li><li>INVALID_API_KEY</li><li>MISSING_AUTHENTICATION_TOKEN</li><li> QUOTA_EXCEEDED</li><li>REQUEST_TOO_LARGE</li><li>RESOURCE_NOT_FOUND</li><li>THROTTLED</li><li>UNAUTHORIZED</li><li>UNSUPPORTED_MEDIA_TYPE</li></ul> </p></p>",
+          "documentation": "<p>[Required] <p>The response type of the associated <a>GatewayResponse</a>.</p></p>",
           "location": "uri",
           "locationName": "response_type"
         }
@@ -5041,7 +5300,7 @@
         },
         "regionalHostedZoneId": {
           "shape": "String",
-          "documentation": "<p>The region-specific Amazon Route 53 Hosted Zone ID of the regional endpoint. For more information, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-regional-api-custom-domain-create.html\">Set up a Regional Custom Domain Name</a> and <a href=\"https://docs.aws.amazon.com/general/latest/gr/rande.html#apigateway_region\">AWS Regions and Endpoints for API Gateway</a>. </p>"
+          "documentation": "<p>The region-specific Amazon Route 53 Hosted Zone ID of the regional endpoint. For more information, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-regional-api-custom-domain-create.html\">Set up a Regional Custom Domain Name</a> and <a href=\"https://docs.aws.amazon.com/general/latest/gr/rande.html#apigateway_region\">AWS Regions and Endpoints for API Gateway</a>.</p>"
         },
         "regionalCertificateName": {
           "shape": "String",
@@ -5057,7 +5316,7 @@
         },
         "distributionHostedZoneId": {
           "shape": "String",
-          "documentation": "<p>The region-agnostic Amazon Route 53 Hosted Zone ID of the edge-optimized endpoint. The valid value is <code>Z2FDTNDATAQYW2</code> for all the regions. For more information, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-regional-api-custom-domain-create.html\">Set up a Regional Custom Domain Name</a> and <a href=\"https://docs.aws.amazon.com/general/latest/gr/rande.html#apigateway_region\">AWS Regions and Endpoints for API Gateway</a>. </p>"
+          "documentation": "<p>The region-agnostic Amazon Route 53 Hosted Zone ID of the edge-optimized endpoint. The valid value is <code>Z2FDTNDATAQYW2</code> for all the regions. For more information, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-regional-api-custom-domain-create.html\">Set up a Regional Custom Domain Name</a> and <a href=\"https://docs.aws.amazon.com/general/latest/gr/rande.html#apigateway_region\">AWS Regions and Endpoints for API Gateway</a>.</p>"
         },
         "endpointConfiguration": {
           "shape": "EndpointConfiguration",
@@ -5065,7 +5324,7 @@
         },
         "domainNameStatus": {
           "shape": "DomainNameStatus",
-          "documentation": "<p>The status of the <a>DomainName</a> migration. The valid values are <code>AVAILABLE</code> and <code>UPDATING</code>. If the status is <code>UPDATING</code>, the domain cannot be modified further until the existing operation is complete. If it is <code>AVAILABLE</code>, the domain can be updated.</p>"
+          "documentation": "<p>The status of the <a>DomainName</a> migration. The valid values are <code>AVAILABLE</code>, <code>UPDATING</code>, <code>PENDING_CERTIFICATE_REIMPORT</code>, and <code>PENDING_OWNERSHIP_VERIFICATION</code>. If the status is <code>UPDATING</code>, the domain cannot be modified further until the existing operation is complete. If it is <code>AVAILABLE</code>, the domain can be updated.</p>"
         },
         "domainNameStatusMessage": {
           "shape": "String",
@@ -5082,6 +5341,10 @@
         "mutualTlsAuthentication": {
           "shape": "MutualTlsAuthentication",
           "documentation": "<p>The mutual TLS authentication configuration for a custom domain name. If specified, API Gateway performs two-way authentication between the client and the server. Clients must present a trusted certificate to access your API.</p>"
+        },
+        "ownershipVerificationCertificateArn": {
+          "shape": "String",
+          "documentation": "<p>The ARN of the public certificate issued by ACM to validate ownership of your custom domain. Only required when configuring mutual TLS and using an ACM imported or private CA certificate ARN as the regionalCertificateArn.</p>"
         }
       },
       "documentation": "<p>Represents a custom domain name as a user-friendly host name of an API (<a>RestApi</a>).</p> <div class=\"Remarks\"> <p>When you deploy an API, API Gateway creates a default host name for the API. This default API host name is of the <code>{restapi-id}.execute-api.{region}.amazonaws.com</code> format. With the default host name, you can access the API's root resource with the URL of <code>https://{restapi-id}.execute-api.{region}.amazonaws.com/{stage}/</code>. When you set up a custom domain name of <code>apis.example.com</code> for this API, you can then access the same resource using the URL of the <code>https://apis.examples.com/myApi</code>, where <code>myApi</code> is the base path mapping (<a>BasePathMapping</a>) of your API under the custom domain name. </p> </div> <div class=\"seeAlso\"> <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html\">Set a Custom Host Name for an API</a> </div>"
@@ -5091,7 +5354,9 @@
       "enum": [
         "AVAILABLE",
         "UPDATING",
-        "PENDING"
+        "PENDING",
+        "PENDING_CERTIFICATE_REIMPORT",
+        "PENDING_OWNERSHIP_VERIFICATION"
       ]
     },
     "DomainNames": {
@@ -5206,7 +5471,7 @@
       "members": {
         "responseType": {
           "shape": "GatewayResponseType",
-          "documentation": "<p>The response type of the associated <a>GatewayResponse</a>. Valid values are <ul><li>ACCESS_DENIED</li><li>API_CONFIGURATION_ERROR</li><li>AUTHORIZER_FAILURE</li><li> AUTHORIZER_CONFIGURATION_ERROR</li><li>BAD_REQUEST_PARAMETERS</li><li>BAD_REQUEST_BODY</li><li>DEFAULT_4XX</li><li>DEFAULT_5XX</li><li>EXPIRED_TOKEN</li><li>INVALID_SIGNATURE</li><li>INTEGRATION_FAILURE</li><li>INTEGRATION_TIMEOUT</li><li>INVALID_API_KEY</li><li>MISSING_AUTHENTICATION_TOKEN</li><li> QUOTA_EXCEEDED</li><li>REQUEST_TOO_LARGE</li><li>RESOURCE_NOT_FOUND</li><li>THROTTLED</li><li>UNAUTHORIZED</li><li>UNSUPPORTED_MEDIA_TYPE</li></ul> </p>"
+          "documentation": "<p>The response type of the associated <a>GatewayResponse</a>.</p>"
         },
         "statusCode": {
           "shape": "StatusCode",
@@ -5249,7 +5514,8 @@
         "BAD_REQUEST_BODY",
         "REQUEST_TOO_LARGE",
         "THROTTLED",
-        "QUOTA_EXCEEDED"
+        "QUOTA_EXCEEDED",
+        "WAF_FILTERED"
       ]
     },
     "GatewayResponses": {
@@ -5738,7 +6004,7 @@
         },
         "responseType": {
           "shape": "GatewayResponseType",
-          "documentation": "<p>[Required] <p>The response type of the associated <a>GatewayResponse</a>. Valid values are <ul><li>ACCESS_DENIED</li><li>API_CONFIGURATION_ERROR</li><li>AUTHORIZER_FAILURE</li><li> AUTHORIZER_CONFIGURATION_ERROR</li><li>BAD_REQUEST_PARAMETERS</li><li>BAD_REQUEST_BODY</li><li>DEFAULT_4XX</li><li>DEFAULT_5XX</li><li>EXPIRED_TOKEN</li><li>INVALID_SIGNATURE</li><li>INTEGRATION_FAILURE</li><li>INTEGRATION_TIMEOUT</li><li>INVALID_API_KEY</li><li>MISSING_AUTHENTICATION_TOKEN</li><li> QUOTA_EXCEEDED</li><li>REQUEST_TOO_LARGE</li><li>RESOURCE_NOT_FOUND</li><li>THROTTLED</li><li>UNAUTHORIZED</li><li>UNSUPPORTED_MEDIA_TYPE</li></ul> </p></p>",
+          "documentation": "<p>[Required] <p>The response type of the associated <a>GatewayResponse</a>.</p></p>",
           "location": "uri",
           "locationName": "response_type"
         }
@@ -6968,7 +7234,7 @@
         },
         "dataTraceEnabled": {
           "shape": "Boolean",
-          "documentation": "<p>Specifies whether data trace logging is enabled for this method, which affects the log entries pushed to Amazon CloudWatch Logs. The PATCH path for this setting is <code>/{method_setting_key}/logging/dataTrace</code>, and the value is a Boolean.</p>"
+          "documentation": "<p>Specifies whether full requests and responses are logged for this method, which affects the log entries pushed to Amazon CloudWatch Logs. This can be useful to troubleshoot APIs, but can result in logging sensitive data. We recommend that you don't enable this option for production APIs. The PATCH path for this setting is <code>/{method_setting_key}/logging/dataTrace</code>, and the value is a Boolean.</p>"
         },
         "throttlingBurstLimit": {
           "shape": "Integer",
@@ -7153,7 +7419,7 @@
         },
         "responseType": {
           "shape": "GatewayResponseType",
-          "documentation": "<p>[Required] <p>The response type of the associated <a>GatewayResponse</a>. Valid values are <ul><li>ACCESS_DENIED</li><li>API_CONFIGURATION_ERROR</li><li>AUTHORIZER_FAILURE</li><li> AUTHORIZER_CONFIGURATION_ERROR</li><li>BAD_REQUEST_PARAMETERS</li><li>BAD_REQUEST_BODY</li><li>DEFAULT_4XX</li><li>DEFAULT_5XX</li><li>EXPIRED_TOKEN</li><li>INVALID_SIGNATURE</li><li>INTEGRATION_FAILURE</li><li>INTEGRATION_TIMEOUT</li><li>INVALID_API_KEY</li><li>MISSING_AUTHENTICATION_TOKEN</li><li> QUOTA_EXCEEDED</li><li>REQUEST_TOO_LARGE</li><li>RESOURCE_NOT_FOUND</li><li>THROTTLED</li><li>UNAUTHORIZED</li><li>UNSUPPORTED_MEDIA_TYPE</li></ul> </p></p>",
+          "documentation": "<p>[Required] <p>The response type of the associated <a>GatewayResponse</a>.</p></p>",
           "location": "uri",
           "locationName": "response_type"
         },
@@ -7474,7 +7740,7 @@
       "members": {
         "limit": {
           "shape": "Integer",
-          "documentation": "<p>The maximum number of requests that can be made in a given time period.</p>"
+          "documentation": "<p>The target maximum number of requests that can be made in a given time period.</p>"
         },
         "offset": {
           "shape": "Integer",
@@ -8040,11 +8306,11 @@
       "members": {
         "burstLimit": {
           "shape": "Integer",
-          "documentation": "<p>The API request burst limit, the maximum rate limit over a time ranging from one to a few seconds, depending upon whether the underlying token bucket is at its full capacity.</p>"
+          "documentation": "<p>The API target request burst rate limit. This allows more requests through for a period of time than the target rate limit.</p>"
         },
         "rateLimit": {
           "shape": "Double",
-          "documentation": "<p>The API request steady-state rate limit.</p>"
+          "documentation": "<p>The API target request rate limit.</p>"
         }
       },
       "documentation": "<p> The API request rate limits.</p>"
@@ -8303,7 +8569,7 @@
         },
         "responseType": {
           "shape": "GatewayResponseType",
-          "documentation": "<p>[Required] <p>The response type of the associated <a>GatewayResponse</a>. Valid values are <ul><li>ACCESS_DENIED</li><li>API_CONFIGURATION_ERROR</li><li>AUTHORIZER_FAILURE</li><li> AUTHORIZER_CONFIGURATION_ERROR</li><li>BAD_REQUEST_PARAMETERS</li><li>BAD_REQUEST_BODY</li><li>DEFAULT_4XX</li><li>DEFAULT_5XX</li><li>EXPIRED_TOKEN</li><li>INVALID_SIGNATURE</li><li>INTEGRATION_FAILURE</li><li>INTEGRATION_TIMEOUT</li><li>INVALID_API_KEY</li><li>MISSING_AUTHENTICATION_TOKEN</li><li> QUOTA_EXCEEDED</li><li>REQUEST_TOO_LARGE</li><li>RESOURCE_NOT_FOUND</li><li>THROTTLED</li><li>UNAUTHORIZED</li><li>UNSUPPORTED_MEDIA_TYPE</li></ul> </p></p>",
+          "documentation": "<p>[Required] <p>The response type of the associated <a>GatewayResponse</a>.</p></p>",
           "location": "uri",
           "locationName": "response_type"
         },
@@ -8694,11 +8960,11 @@
         },
         "throttle": {
           "shape": "ThrottleSettings",
-          "documentation": "<p>The request throttle limits of a usage plan.</p>"
+          "documentation": "<p>Map containing method level throttling information for API stage in a usage plan.</p>"
         },
         "quota": {
           "shape": "QuotaSettings",
-          "documentation": "<p>The maximum number of permitted requests per a given unit time interval.</p>"
+          "documentation": "<p>The target maximum number of permitted requests per a given unit time interval.</p>"
         },
         "productCode": {
           "shape": "String",
@@ -8709,7 +8975,7 @@
           "documentation": "<p>The collection of tags. Each tag element is associated with a given resource.</p>"
         }
       },
-      "documentation": "<p>Represents a usage plan than can specify who can assess associated API stages with specified request limits and quotas.</p> <div class=\"remarks\"> <p>In a usage plan, you associate an API by specifying the API's Id and a stage name of the specified API. You add plan customers by adding API keys to the plan. </p> </div> <div class=\"seeAlso\"> <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html\">Create and Use Usage Plans</a> </div>"
+      "documentation": "<p>Represents a usage plan used to specify who can assess associated API stages. Optionally, target request rate and quota limits can be set. In some cases clients can exceed the targets that you set. Don’t rely on usage plans to control costs. Consider using <a href=\"https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-managing-costs.html\">AWS Budgets</a> to monitor costs and <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html\">AWS WAF</a> to manage API requests.</p> <div class=\"remarks\"> <p>In a usage plan, you associate an API by specifying the API's Id and a stage name of the specified API. You add plan customers by adding API keys to the plan. </p> </div> <div class=\"seeAlso\"> <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html\">Create and Use Usage Plans</a> </div>"
     },
     "UsagePlanKey": {
       "type": "structure",

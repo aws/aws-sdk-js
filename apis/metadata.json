@@ -448,7 +448,8 @@
     "name": "MarketplaceEntitlementService"
   },
   "athena": {
-    "name": "Athena"
+    "name": "Athena",
+    "cors": true
   },
   "greengrass": {
     "name": "Greengrass"
@@ -461,7 +462,8 @@
     "name": "MigrationHub"
   },
   "cloudhsmv2": {
-    "name": "CloudHSMV2"
+    "name": "CloudHSMV2",
+    "cors": true
   },
   "glue": {
     "name": "Glue"
@@ -986,7 +988,8 @@
     "name": "IoTWireless"
   },
   "location": {
-    "name": "Location"
+    "name": "Location",
+    "cors": true
   },
   "wellarchitected": {
     "name": "WellArchitected"
@@ -1014,5 +1017,130 @@
   },
   "nimble": {
     "name": "Nimble"
+  },
+  "finspace": {
+    "name": "Finspace"
+  },
+  "finspacedata": {
+    "prefix": "finspace-data",
+    "name": "Finspacedata"
+  },
+  "ssmcontacts": {
+    "prefix": "ssm-contacts",
+    "name": "SSMContacts"
+  },
+  "ssmincidents": {
+    "prefix": "ssm-incidents",
+    "name": "SSMIncidents"
+  },
+  "applicationcostprofiler": {
+    "name": "ApplicationCostProfiler"
+  },
+  "apprunner": {
+    "name": "AppRunner"
+  },
+  "proton": {
+    "name": "Proton"
+  },
+  "route53recoverycluster": {
+    "prefix": "route53-recovery-cluster",
+    "name": "Route53RecoveryCluster"
+  },
+  "route53recoverycontrolconfig": {
+    "prefix": "route53-recovery-control-config",
+    "name": "Route53RecoveryControlConfig"
+  },
+  "route53recoveryreadiness": {
+    "prefix": "route53-recovery-readiness",
+    "name": "Route53RecoveryReadiness"
+  },
+  "chimesdkidentity": {
+    "prefix": "chime-sdk-identity",
+    "name": "ChimeSDKIdentity"
+  },
+  "chimesdkmessaging": {
+    "prefix": "chime-sdk-messaging",
+    "name": "ChimeSDKMessaging"
+  },
+  "snowdevicemanagement": {
+    "prefix": "snow-device-management",
+    "name": "SnowDeviceManagement"
+  },
+  "memorydb": {
+    "name": "MemoryDB"
+  },
+  "opensearch": {
+    "name": "OpenSearch"
+  },
+  "kafkaconnect": {
+    "name": "KafkaConnect"
+  },
+  "voiceid": {
+    "prefix": "voice-id",
+    "name": "VoiceID"
+  },
+  "wisdom": {
+    "name": "Wisdom"
+  },
+  "account": {
+    "name": "Account"
+  },
+  "cloudcontrol": {
+    "name": "CloudControl"
+  },
+  "grafana": {
+    "name": "Grafana"
+  },
+  "panorama": {
+    "name": "Panorama"
+  },
+  "chimesdkmeetings": {
+    "prefix": "chime-sdk-meetings",
+    "name": "ChimeSDKMeetings"
+  },
+  "resiliencehub": {
+    "name": "Resiliencehub"
+  },
+  "migrationhubstrategy": {
+    "name": "MigrationHubStrategy"
+  },
+  "appconfigdata": {
+    "name": "AppConfigData"
+  },
+  "drs": {
+    "name": "Drs"
+  },
+  "migrationhubrefactorspaces": {
+    "prefix": "migration-hub-refactor-spaces",
+    "name": "MigrationHubRefactorSpaces"
+  },
+  "evidently": {
+    "name": "Evidently"
+  },
+  "inspector2": {
+    "name": "Inspector2"
+  },
+  "rbin": {
+    "name": "Rbin"
+  },
+  "rum": {
+    "name": "RUM"
+  },
+  "backupgateway": {
+    "prefix": "backup-gateway",
+    "name": "BackupGateway"
+  },
+  "iottwinmaker": {
+    "name": "IoTTwinMaker"
+  },
+  "workspacesweb": {
+    "prefix": "workspaces-web",
+    "name": "WorkSpacesWeb"
+  },
+  "amplifyuibuilder": {
+    "name": "AmplifyUIBuilder"
+  },
+  "keyspaces": {
+    "name": "Keyspaces"
   }
 }

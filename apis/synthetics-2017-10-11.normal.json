@@ -31,6 +31,9 @@
         },
         {
           "shape": "ValidationException"
+        },
+        {
+          "shape": "RequestEntityTooLargeException"
         }
       ],
       "documentation": "<p>Creates a canary. Canaries are scripts that monitor your endpoints and APIs from the outside-in. Canaries help you check the availability and latency of your web services and troubleshoot anomalies by investigating load time data, screenshots of the UI, logs, and metrics. You can set up a canary to run continuously or just once. </p> <p>Do not use <code>CreateCanary</code> to modify an existing canary. Use <a href=\"https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_UpdateCanary.html\">UpdateCanary</a> instead.</p> <p>To create canaries, you must have the <code>CloudWatchSyntheticsFullAccess</code> policy. If you are creating a new IAM role for the canary, you also need the the <code>iam:CreateRole</code>, <code>iam:CreatePolicy</code> and <code>iam:AttachRolePolicy</code> permissions. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Roles\">Necessary Roles and Permissions</a>.</p> <p>Do not include secrets or proprietary information in your canary names. The canary name makes up part of the Amazon Resource Name (ARN) for the canary, and the ARN is included in outbound calls over the internet. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/servicelens_canaries_security.html\">Security Considerations for Synthetics Canaries</a>.</p>"
@@ -83,7 +86,7 @@
           "shape": "ValidationException"
         }
       ],
-      "documentation": "<p>This operation returns a list of the canaries in your account, along with full details about each canary.</p> <p>This operation does not have resource-level authorization, so if a user is able to use <code>DescribeCanaries</code>, the user can see all of the canaries in the account. A deny policy can only be used to restrict access to all canaries. It cannot be used on specific resources. </p>"
+      "documentation": "<p>This operation returns a list of the canaries in your account, along with full details about each canary.</p> <p>This operation supports resource-level authorization using an IAM policy and the <code>Names</code> parameter. If you specify the <code>Names</code> parameter, the operation is successful only if you have authorization to view all the canaries that you specify in your request. If you do not have permission to view any of the canaries, the request fails with a 403 response.</p> <p>You are required to use the <code>Names</code> parameter if you are logged on to a user or role that has an IAM policy that restricts which canaries that you are allowed to view. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Restricted.html\"> Limiting a user to viewing specific canaries</a>.</p>"
     },
     "DescribeCanariesLastRun": {
       "name": "DescribeCanariesLastRun",
@@ -105,7 +108,7 @@
           "shape": "ValidationException"
         }
       ],
-      "documentation": "<p>Use this operation to see information from the most recent run of each canary that you have created.</p>"
+      "documentation": "<p>Use this operation to see information from the most recent run of each canary that you have created.</p> <p>This operation supports resource-level authorization using an IAM policy and the <code>Names</code> parameter. If you specify the <code>Names</code> parameter, the operation is successful only if you have authorization to view all the canaries that you specify in your request. If you do not have permission to view any of the canaries, the request fails with a 403 response.</p> <p>You are required to use the <code>Names</code> parameter if you are logged on to a user or role that has an IAM policy that restricts which canaries that you are allowed to view. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Restricted.html\"> Limiting a user to viewing specific canaries</a>.</p>"
     },
     "DescribeRuntimeVersions": {
       "name": "DescribeRuntimeVersions",
@@ -280,7 +283,7 @@
           "shape": "ValidationException"
         }
       ],
-      "documentation": "<p>Assigns one or more tags (key-value pairs) to the specified canary. </p> <p>Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with certain tag values.</p> <p>Tags don't have any semantic meaning to AWS and are interpreted strictly as strings of characters.</p> <p>You can use the <code>TagResource</code> action with a canary that already has tags. If you specify a new tag key for the alarm, this tag is appended to the list of tags associated with the alarm. If you specify a tag key that is already associated with the alarm, the new tag value that you specify replaces the previous value for that tag.</p> <p>You can associate as many as 50 tags with a canary.</p>"
+      "documentation": "<p>Assigns one or more tags (key-value pairs) to the specified canary. </p> <p>Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with certain tag values.</p> <p>Tags don't have any semantic meaning to Amazon Web Services and are interpreted strictly as strings of characters.</p> <p>You can use the <code>TagResource</code> action with a canary that already has tags. If you specify a new tag key for the alarm, this tag is appended to the list of tags associated with the alarm. If you specify a tag key that is already associated with the alarm, the new tag value that you specify replaces the previous value for that tag.</p> <p>You can associate as many as 50 tags with a canary.</p>"
     },
     "UntagResource": {
       "name": "UntagResource",
@@ -331,12 +334,70 @@
         },
         {
           "shape": "ConflictException"
+        },
+        {
+          "shape": "RequestEntityTooLargeException"
         }
       ],
       "documentation": "<p>Use this operation to change the settings of a canary that has already been created.</p> <p>You can't use this operation to update the tags of an existing canary. To change the tags of an existing canary, use <a href=\"https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_TagResource.html\">TagResource</a>.</p>"
     }
   },
   "shapes": {
+    "ArtifactConfigInput": {
+      "type": "structure",
+      "members": {
+        "S3Encryption": {
+          "shape": "S3EncryptionConfig",
+          "documentation": "<p>A structure that contains the configuration of the encryption-at-rest settings for artifacts that the canary uploads to Amazon S3. Artifact encryption functionality is available only for canaries that use Synthetics runtime version syn-nodejs-puppeteer-3.3 or later. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_artifact_encryption.html\">Encrypting canary artifacts</a> </p>"
+        }
+      },
+      "documentation": "<p>A structure that contains the configuration for canary artifacts, including the encryption-at-rest settings for artifacts that the canary uploads to Amazon S3.</p>"
+    },
+    "ArtifactConfigOutput": {
+      "type": "structure",
+      "members": {
+        "S3Encryption": {
+          "shape": "S3EncryptionConfig",
+          "documentation": "<p>A structure that contains the configuration of encryption settings for canary artifacts that are stored in Amazon S3. </p>"
+        }
+      },
+      "documentation": "<p>A structure that contains the configuration for canary artifacts, including the encryption-at-rest settings for artifacts that the canary uploads to Amazon S3.</p>"
+    },
+    "BaseScreenshot": {
+      "type": "structure",
+      "required": [
+        "ScreenshotName"
+      ],
+      "members": {
+        "ScreenshotName": {
+          "shape": "String",
+          "documentation": "<p>The name of the screenshot. This is generated the first time the canary is run after the <code>UpdateCanary</code> operation that specified for this canary to perform visual monitoring.</p>"
+        },
+        "IgnoreCoordinates": {
+          "shape": "BaseScreenshotIgnoreCoordinates",
+          "documentation": "<p>Coordinates that define the part of a screen to ignore during screenshot comparisons. To obtain the coordinates to use here, use the CloudWatch Logs console to draw the boundaries on the screen. For more information, see {LINK}</p>"
+        }
+      },
+      "documentation": "<p>A structure representing a screenshot that is used as a baseline during visual monitoring comparisons made by the canary.</p>"
+    },
+    "BaseScreenshotConfigIgnoreCoordinate": {
+      "type": "string",
+      "pattern": "^(-?\\d{1,5}\\.?\\d{0,2},){3}(-?\\d{1,5}\\.?\\d{0,2}){1}$"
+    },
+    "BaseScreenshotIgnoreCoordinates": {
+      "type": "list",
+      "member": {
+        "shape": "BaseScreenshotConfigIgnoreCoordinate"
+      },
+      "max": 20,
+      "min": 0
+    },
+    "BaseScreenshots": {
+      "type": "list",
+      "member": {
+        "shape": "BaseScreenshot"
+      }
+    },
     "Blob": {
       "type": "blob",
       "max": 10000000,
@@ -410,9 +471,17 @@
         "VpcConfig": {
           "shape": "VpcConfigOutput"
         },
+        "VisualReference": {
+          "shape": "VisualReferenceOutput",
+          "documentation": "<p>If this canary performs visual monitoring by comparing screenshots, this structure contains the ID of the canary run to use as the baseline for screenshots, and the coordinates of any parts of the screen to ignore during the visual monitoring comparison.</p>"
+        },
         "Tags": {
           "shape": "TagMap",
           "documentation": "<p>The list of key-value pairs that are associated with the canary.</p>"
+        },
+        "ArtifactConfig": {
+          "shape": "ArtifactConfigOutput",
+          "documentation": "<p>A structure that contains the configuration for canary artifacts, including the encryption-at-rest settings for artifacts that the canary uploads to Amazon S3.</p>"
         }
       },
       "documentation": "<p>This structure contains all information about one canary in your account.</p>"
@@ -431,7 +500,7 @@
       "members": {
         "S3Bucket": {
           "shape": "String",
-          "documentation": "<p>If your canary script is located in S3, specify the full bucket name here. The bucket must already exist. Specify the full bucket name, including <code>s3://</code> as the start of the bucket name.</p>"
+          "documentation": "<p>If your canary script is located in S3, specify the bucket name here. Do not include <code>s3://</code> as the start of the bucket name.</p>"
         },
         "S3Key": {
           "shape": "String",
@@ -443,11 +512,11 @@
         },
         "ZipFile": {
           "shape": "Blob",
-          "documentation": "<p>If you input your canary script directly into the canary instead of referring to an S3 location, the value of this parameter is the .zip file that contains the script. It can be up to 5 MB.</p>"
+          "documentation": "<p>If you input your canary script directly into the canary instead of referring to an S3 location, the value of this parameter is the base64-encoded contents of the .zip file that contains the script. It must be smaller than 225 Kb.</p> <p>For large canary scripts, we recommend that you use an S3 location instead of inputting it directly with this parameter.</p>"
         },
         "Handler": {
-          "shape": "String",
-          "documentation": "<p>The entry point to use for the source code when running the canary. This value must end with the string <code>.handler</code>.</p>"
+          "shape": "CodeHandler",
+          "documentation": "<p>The entry point to use for the source code when running the canary. For canaries that use the <code>syn-python-selenium-1.0</code> runtime or a <code>syn-nodejs.puppeteer</code> runtime earlier than <code>syn-nodejs.puppeteer-3.4</code>, the handler must be specified as <code> <i>fileName</i>.handler</code>. For <code>syn-python-selenium-1.1</code>, <code>syn-nodejs.puppeteer-3.4</code>, and later runtimes, the handler can be specified as <code> <i>fileName</i>.<i>functionName</i> </code>, or you can specify a folder where canary scripts reside as <code> <i>folder</i>/<i>fileName</i>.<i>functionName</i> </code>.</p>"
         }
       },
       "documentation": "<p>Use this structure to input your script code for the canary. This structure contains the Lambda handler with the location where the canary should start running the script. If the script is stored in an S3 bucket, the bucket name, key, and version are also included. If the script was passed into the canary directly, the script code is contained in the value of <code>Zipfile</code>. </p>"
@@ -525,7 +594,7 @@
         },
         "ActiveTracing": {
           "shape": "NullableBoolean",
-          "documentation": "<p>Specifies whether this canary is to use active AWS X-Ray tracing when it runs. Active tracing enables this canary run to be displayed in the ServiceLens and X-Ray service maps even if the canary does not hit an endpoint that has X-ray tracing enabled. Using X-Ray tracing incurs charges. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_tracing.html\"> Canaries and X-Ray tracing</a>.</p> <p>You can enable active tracing only for canaries that use version <code>syn-nodejs-2.0</code> or later for their canary runtime.</p>"
+          "documentation": "<p>Specifies whether this canary is to use active X-Ray tracing when it runs. Active tracing enables this canary run to be displayed in the ServiceLens and X-Ray service maps even if the canary does not hit an endpoint that has X-Ray tracing enabled. Using X-Ray tracing incurs charges. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_tracing.html\"> Canaries and X-Ray tracing</a>.</p> <p>You can enable active tracing only for canaries that use version <code>syn-nodejs-2.0</code> or later for their canary runtime.</p>"
         },
         "EnvironmentVariables": {
           "shape": "EnvironmentVariablesMap",
@@ -547,7 +616,7 @@
         },
         "ActiveTracing": {
           "shape": "NullableBoolean",
-          "documentation": "<p>Displays whether this canary run used active AWS X-Ray tracing. </p>"
+          "documentation": "<p>Displays whether this canary run used active X-Ray tracing. </p>"
         }
       },
       "documentation": "<p>A structure that contains information about a canary run.</p>"
@@ -613,7 +682,7 @@
       "members": {
         "Expression": {
           "shape": "String",
-          "documentation": "<p>A rate expression that defines how often the canary is to run. The syntax is <code>rate(<i>number unit</i>)</code>. <i>unit</i> can be <code>minute</code>, <code>minutes</code>, or <code>hour</code>. </p> <p>For example, <code>rate(1 minute)</code> runs the canary once a minute, <code>rate(10 minutes)</code> runs it once every 10 minutes, and <code>rate(1 hour)</code> runs it once every hour. You can specify a frequency between <code>rate(1 minute)</code> and <code>rate(1 hour)</code>.</p> <p>Specifying <code>rate(0 minute)</code> or <code>rate(0 hour)</code> is a special value that causes the canary to run only once when it is started.</p>"
+          "documentation": "<p>A <code>rate</code> expression or a <code>cron</code> expression that defines how often the canary is to run.</p> <p>For a rate expression, The syntax is <code>rate(<i>number unit</i>)</code>. <i>unit</i> can be <code>minute</code>, <code>minutes</code>, or <code>hour</code>. </p> <p>For example, <code>rate(1 minute)</code> runs the canary once a minute, <code>rate(10 minutes)</code> runs it once every 10 minutes, and <code>rate(1 hour)</code> runs it once every hour. You can specify a frequency between <code>rate(1 minute)</code> and <code>rate(1 hour)</code>.</p> <p>Specifying <code>rate(0 minute)</code> or <code>rate(0 hour)</code> is a special value that causes the canary to run only once when it is started.</p> <p>Use <code>cron(<i>expression</i>)</code> to specify a cron expression. You can't schedule a canary to wait for more than a year before running. For information about the syntax for cron expressions, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_cron.html\"> Scheduling canary runs using cron</a>.</p>"
         },
         "DurationInSeconds": {
           "shape": "MaxOneYearInSeconds",
@@ -627,7 +696,7 @@
       "members": {
         "Expression": {
           "shape": "String",
-          "documentation": "<p>A rate expression that defines how often the canary is to run. The syntax is <code>rate(<i>number unit</i>)</code>. <i>unit</i> can be <code>minute</code>, <code>minutes</code>, or <code>hour</code>. </p> <p>For example, <code>rate(1 minute)</code> runs the canary once a minute, <code>rate(10 minutes)</code> runs it once every 10 minutes, and <code>rate(1 hour)</code> runs it once every hour.</p> <p>Specifying <code>rate(0 minute)</code> or <code>rate(0 hour)</code> is a special value that causes the canary to run only once when it is started.</p>"
+          "documentation": "<p>A <code>rate</code> expression or a <code>cron</code> expression that defines how often the canary is to run.</p> <p>For a rate expression, The syntax is <code>rate(<i>number unit</i>)</code>. <i>unit</i> can be <code>minute</code>, <code>minutes</code>, or <code>hour</code>. </p> <p>For example, <code>rate(1 minute)</code> runs the canary once a minute, <code>rate(10 minutes)</code> runs it once every 10 minutes, and <code>rate(1 hour)</code> runs it once every hour. You can specify a frequency between <code>rate(1 minute)</code> and <code>rate(1 hour)</code>.</p> <p>Specifying <code>rate(0 minute)</code> or <code>rate(0 hour)</code> is a special value that causes the canary to run only once when it is started.</p> <p>Use <code>cron(<i>expression</i>)</code> to specify a cron expression. For information about the syntax for cron expressions, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_cron.html\"> Scheduling canary runs using cron</a>.</p>"
         },
         "DurationInSeconds": {
           "shape": "MaxOneYearInSeconds",
@@ -696,6 +765,12 @@
       },
       "documentation": "<p>This structure contains information about when the canary was created and modified.</p>"
     },
+    "CodeHandler": {
+      "type": "string",
+      "max": 128,
+      "min": 1,
+      "pattern": "^([0-9a-zA-Z_-]+\\/)*[0-9A-Za-z_\\\\-]+\\.[A-Za-z_][A-Za-z0-9_]*$"
+    },
     "CreateCanaryRequest": {
       "type": "structure",
       "required": [
@@ -717,7 +792,7 @@
         },
         "ArtifactS3Location": {
           "shape": "String",
-          "documentation": "<p>The location in Amazon S3 where Synthetics stores artifacts from the test runs of this canary. Artifacts include the log file, screenshots, and HAR files.</p>"
+          "documentation": "<p>The location in Amazon S3 where Synthetics stores artifacts from the test runs of this canary. Artifacts include the log file, screenshots, and HAR files. The name of the S3 bucket can't include a period (.).</p>"
         },
         "ExecutionRoleArn": {
           "shape": "RoleArn",
@@ -750,6 +825,10 @@
         "Tags": {
           "shape": "TagMap",
           "documentation": "<p>A list of key-value pairs to associate with the canary. You can associate as many as 50 tags with a canary.</p> <p>Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only the resources that have certain tag values.</p>"
+        },
+        "ArtifactConfig": {
+          "shape": "ArtifactConfigInput",
+          "documentation": "<p>A structure that contains the configuration for canary artifacts, including the encryption-at-rest settings for artifacts that the canary uploads to Amazon S3.</p>"
         }
       }
     },
@@ -780,6 +859,14 @@
       "type": "structure",
       "members": {}
     },
+    "DescribeCanariesLastRunNameFilter": {
+      "type": "list",
+      "member": {
+        "shape": "CanaryName"
+      },
+      "max": 5,
+      "min": 1
+    },
     "DescribeCanariesLastRunRequest": {
       "type": "structure",
       "members": {
@@ -790,6 +877,10 @@
         "MaxResults": {
           "shape": "MaxSize100",
           "documentation": "<p>Specify this parameter to limit how many runs are returned each time you use the <code>DescribeLastRun</code> operation. If you omit this parameter, the default of 100 is used.</p>"
+        },
+        "Names": {
+          "shape": "DescribeCanariesLastRunNameFilter",
+          "documentation": "<p>Use this parameter to return only canaries that match the names that you specify here. You can specify as many as five canary names.</p> <p>If you specify this parameter, the operation is successful only if you have authorization to view all the canaries that you specify in your request. If you do not have permission to view any of the canaries, the request fails with a 403 response.</p> <p>You are required to use the <code>Names</code> parameter if you are logged on to a user or role that has an IAM policy that restricts which canaries that you are allowed to view. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Restricted.html\"> Limiting a user to viewing specific canaries</a>.</p>"
         }
       }
     },
@@ -806,6 +897,14 @@
         }
       }
     },
+    "DescribeCanariesNameFilter": {
+      "type": "list",
+      "member": {
+        "shape": "CanaryName"
+      },
+      "max": 5,
+      "min": 1
+    },
     "DescribeCanariesRequest": {
       "type": "structure",
       "members": {
@@ -816,6 +915,10 @@
         "MaxResults": {
           "shape": "MaxCanaryResults",
           "documentation": "<p>Specify this parameter to limit how many canaries are returned each time you use the <code>DescribeCanaries</code> operation. If you omit this parameter, the default of 100 is used.</p>"
+        },
+        "Names": {
+          "shape": "DescribeCanariesNameFilter",
+          "documentation": "<p>Use this parameter to return only canaries that match the names that you specify here. You can specify as many as five canary names.</p> <p>If you specify this parameter, the operation is successful only if you have authorization to view all the canaries that you specify in your request. If you do not have permission to view any of the canaries, the request fails with a 403 response.</p> <p>You are required to use this parameter if you are logged on to a user or role that has an IAM policy that restricts which canaries that you are allowed to view. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Restricted.html\"> Limiting a user to viewing specific canaries</a>.</p>"
         }
       }
     },
@@ -857,6 +960,13 @@
           "documentation": "<p>A token that indicates that there is more data available. You can use this token in a subsequent <code>DescribeRuntimeVersions</code> operation to retrieve the next set of results.</p>"
         }
       }
+    },
+    "EncryptionMode": {
+      "type": "string",
+      "enum": [
+        "SSE_S3",
+        "SSE_KMS"
+      ]
     },
     "EnvironmentVariableName": {
       "type": "string",
@@ -937,6 +1047,12 @@
           "documentation": "<p>A token that indicates that there is more data available. You can use this token in a subsequent <code>GetCanaryRuns</code> operation to retrieve the next set of results.</p>"
         }
       }
+    },
+    "KmsKeyArn": {
+      "type": "string",
+      "max": 2048,
+      "min": 1,
+      "pattern": "arn:(aws[a-zA-Z-]*)?:kms:[a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}:\\d{12}:key/[\\w\\-\\/]+"
     },
     "ListTagsForResourceRequest": {
       "type": "structure",
@@ -1027,6 +1143,20 @@
       "member": {
         "shape": "RuntimeVersion"
       }
+    },
+    "S3EncryptionConfig": {
+      "type": "structure",
+      "members": {
+        "EncryptionMode": {
+          "shape": "EncryptionMode",
+          "documentation": "<p> The encryption method to use for artifacts created by this canary. Specify <code>SSE_S3</code> to use server-side encryption (SSE) with an Amazon S3-managed key. Specify <code>SSE-KMS</code> to use server-side encryption with a customer-managed KMS key.</p> <p>If you omit this parameter, an Amazon Web Services-managed KMS key is used. </p>"
+        },
+        "KmsKeyArn": {
+          "shape": "KmsKeyArn",
+          "documentation": "<p>The ARN of the customer-managed KMS key to use, if you specify <code>SSE-KMS</code> for <code>EncryptionMode</code> </p>"
+        }
+      },
+      "documentation": "<p>A structure that contains the configuration of encryption-at-rest settings for canary artifacts that the canary uploads to Amazon S3. </p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_artifact_encryption.html\">Encrypting canary artifacts</a> </p>"
     },
     "SecurityGroupId": {
       "type": "string"
@@ -1223,12 +1353,55 @@
         "VpcConfig": {
           "shape": "VpcConfigInput",
           "documentation": "<p>If this canary is to test an endpoint in a VPC, this structure contains information about the subnet and security groups of the VPC endpoint. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_VPC.html\"> Running a Canary in a VPC</a>.</p>"
+        },
+        "VisualReference": {
+          "shape": "VisualReferenceInput",
+          "documentation": "<p>Defines the screenshots to use as the baseline for comparisons during visual monitoring comparisons during future runs of this canary. If you omit this parameter, no changes are made to any baseline screenshots that the canary might be using already.</p> <p>Visual monitoring is supported only on canaries running the <b>syn-puppeteer-node-3.2</b> runtime or later. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Library_SyntheticsLogger_VisualTesting.html\"> Visual monitoring</a> and <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Blueprints_VisualTesting.html\"> Visual monitoring blueprint</a> </p>"
+        },
+        "ArtifactS3Location": {
+          "shape": "String",
+          "documentation": "<p>The location in Amazon S3 where Synthetics stores artifacts from the test runs of this canary. Artifacts include the log file, screenshots, and HAR files. The name of the S3 bucket can't include a period (.).</p>"
+        },
+        "ArtifactConfig": {
+          "shape": "ArtifactConfigInput",
+          "documentation": "<p>A structure that contains the configuration for canary artifacts, including the encryption-at-rest settings for artifacts that the canary uploads to Amazon S3.</p>"
         }
       }
     },
     "UpdateCanaryResponse": {
       "type": "structure",
       "members": {}
+    },
+    "VisualReferenceInput": {
+      "type": "structure",
+      "required": [
+        "BaseCanaryRunId"
+      ],
+      "members": {
+        "BaseScreenshots": {
+          "shape": "BaseScreenshots",
+          "documentation": "<p>An array of screenshots that will be used as the baseline for visual monitoring in future runs of this canary. If there is a screenshot that you don't want to be used for visual monitoring, remove it from this array.</p>"
+        },
+        "BaseCanaryRunId": {
+          "shape": "String",
+          "documentation": "<p>Specifies which canary run to use the screenshots from as the baseline for future visual monitoring with this canary. Valid values are <code>nextrun</code> to use the screenshots from the next run after this update is made, <code>lastrun</code> to use the screenshots from the most recent run before this update was made, or the value of <code>Id</code> in the <a href=\"https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_CanaryRun.html\"> CanaryRun</a> from any past run of this canary.</p>"
+        }
+      },
+      "documentation": "<p>An object that specifies what screenshots to use as a baseline for visual monitoring by this canary, and optionally the parts of the screenshots to ignore during the visual monitoring comparison.</p> <p>Visual monitoring is supported only on canaries running the <b>syn-puppeteer-node-3.2</b> runtime or later. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Library_SyntheticsLogger_VisualTesting.html\"> Visual monitoring</a> and <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Blueprints_VisualTesting.html\"> Visual monitoring blueprint</a> </p>"
+    },
+    "VisualReferenceOutput": {
+      "type": "structure",
+      "members": {
+        "BaseScreenshots": {
+          "shape": "BaseScreenshots",
+          "documentation": "<p>An array of screenshots that are used as the baseline for comparisons during visual monitoring.</p>"
+        },
+        "BaseCanaryRunId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the canary run that produced the screenshots that are used as the baseline for visual monitoring comparisons during future runs of this canary.</p>"
+        }
+      },
+      "documentation": "<p>If this canary performs visual monitoring by comparing screenshots, this structure contains the ID of the canary run that is used as the baseline for screenshots, and the coordinates of any parts of those screenshots that are ignored during visual monitoring comparison.</p> <p>Visual monitoring is supported only on canaries running the <b>syn-puppeteer-node-3.2</b> runtime or later.</p>"
     },
     "VpcConfigInput": {
       "type": "structure",

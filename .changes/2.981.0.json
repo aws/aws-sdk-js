@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "Added LaunchTemplate support for the IMDS IPv6 endpoint"
+    },
+    {
+        "type": "feature",
+        "category": "MediaTailor",
+        "description": "This release adds support for wall clock programs in LINEAR channels."
+    },
+    {
+        "type": "feature",
+        "category": "ServiceCatalogAppRegistry",
+        "description": "Introduction of GetAssociatedResource API and GetApplication response extension for Resource Groups support."
+    }
+]

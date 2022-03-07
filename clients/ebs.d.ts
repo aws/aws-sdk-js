@@ -45,11 +45,11 @@ declare class EBS extends Service {
    */
   listSnapshotBlocks(callback?: (err: AWSError, data: EBS.Types.ListSnapshotBlocksResponse) => void): Request<EBS.Types.ListSnapshotBlocksResponse, AWSError>;
   /**
-   * Writes a block of data to a snapshot. If the specified block contains data, the existing data is overwritten. The target snapshot must be in the pending state. Data written to a snapshot must be aligned with 512-byte sectors.
+   * Writes a block of data to a snapshot. If the specified block contains data, the existing data is overwritten. The target snapshot must be in the pending state. Data written to a snapshot must be aligned with 512-KiB sectors.
    */
   putSnapshotBlock(params: EBS.Types.PutSnapshotBlockRequest, callback?: (err: AWSError, data: EBS.Types.PutSnapshotBlockResponse) => void): Request<EBS.Types.PutSnapshotBlockResponse, AWSError>;
   /**
-   * Writes a block of data to a snapshot. If the specified block contains data, the existing data is overwritten. The target snapshot must be in the pending state. Data written to a snapshot must be aligned with 512-byte sectors.
+   * Writes a block of data to a snapshot. If the specified block contains data, the existing data is overwritten. The target snapshot must be in the pending state. Data written to a snapshot must be aligned with 512-KiB sectors.
    */
   putSnapshotBlock(callback?: (err: AWSError, data: EBS.Types.PutSnapshotBlockResponse) => void): Request<EBS.Types.PutSnapshotBlockResponse, AWSError>;
   /**
@@ -171,15 +171,15 @@ declare namespace EBS {
      */
     SecondSnapshotId: SnapshotId;
     /**
-     * The token to request the next page of results.
+     * The token to request the next page of results. If you specify NextToken, then StartingBlockIndex is ignored.
      */
     NextToken?: PageToken;
     /**
-     * The number of results to return.
+     * The maximum number of blocks to be returned by the request. Even if additional blocks can be retrieved from the snapshot, the request can return less blocks than MaxResults or an empty array of blocks. To retrieve the next set of blocks from the snapshot, make another request with the returned NextToken value. The value of NextToken is null when there are no more blocks to return.
      */
     MaxResults?: MaxResults;
     /**
-     * The block index from which the comparison should start. The list in the response will start from this block index or the next valid block index in the snapshots.
+     * The block index from which the comparison should start. The list in the response will start from this block index or the next valid block index in the snapshots. If you specify NextToken, then StartingBlockIndex is ignored.
      */
     StartingBlockIndex?: BlockIndex;
   }
@@ -197,7 +197,7 @@ declare namespace EBS {
      */
     VolumeSize?: VolumeSize;
     /**
-     * The size of the block.
+     * The size of the blocks in the snapshot, in bytes.
      */
     BlockSize?: BlockSize;
     /**
@@ -211,15 +211,15 @@ declare namespace EBS {
      */
     SnapshotId: SnapshotId;
     /**
-     * The token to request the next page of results.
+     * The token to request the next page of results. If you specify NextToken, then StartingBlockIndex is ignored.
      */
     NextToken?: PageToken;
     /**
-     * The number of results to return.
+     * The maximum number of blocks to be returned by the request. Even if additional blocks can be retrieved from the snapshot, the request can return less blocks than MaxResults or an empty array of blocks. To retrieve the next set of blocks from the snapshot, make another request with the returned NextToken value. The value of NextToken is null when there are no more blocks to return.
      */
     MaxResults?: MaxResults;
     /**
-     * The block index from which the list should start. The list in the response will start from this block index or the next valid block index in the snapshot.
+     * The block index from which the list should start. The list in the response will start from this block index or the next valid block index in the snapshot. If you specify NextToken, then StartingBlockIndex is ignored.
      */
     StartingBlockIndex?: BlockIndex;
   }
@@ -237,7 +237,7 @@ declare namespace EBS {
      */
     VolumeSize?: VolumeSize;
     /**
-     * The size of the block.
+     * The size of the blocks in the snapshot, in bytes.
      */
     BlockSize?: BlockSize;
     /**
@@ -263,7 +263,7 @@ declare namespace EBS {
      */
     BlockData: BlockData;
     /**
-     * The size of the data to write to the block, in bytes. Currently, the only supported size is 524288. Valid values: 524288 
+     * The size of the data to write to the block, in bytes. Currently, the only supported size is 524288 bytes. Valid values: 524288 
      */
     DataLength: DataLength;
     /**
@@ -292,7 +292,7 @@ declare namespace EBS {
   export type SnapshotId = string;
   export interface StartSnapshotRequest {
     /**
-     * The size of the volume, in GiB. The maximum size is 16384 GiB (16 TiB).
+     * The size of the volume, in GiB. The maximum size is 65536 GiB (64 TiB).
      */
     VolumeSize: VolumeSize;
     /**
@@ -308,15 +308,15 @@ declare namespace EBS {
      */
     Description?: Description;
     /**
-     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. Idempotency ensures that an API request completes only once. With an idempotent request, if the original request completes successfully. The subsequent retries with the same client token return the result from the original successful request and they have no additional effect. If you do not specify a client token, one is automatically generated by the AWS SDK. For more information, see  Idempotency for StartSnapshot API in the Amazon Elastic Compute Cloud User Guide.
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. Idempotency ensures that an API request completes only once. With an idempotent request, if the original request completes successfully. The subsequent retries with the same client token return the result from the original successful request and they have no additional effect. If you do not specify a client token, one is automatically generated by the Amazon Web Services SDK. For more information, see  Idempotency for StartSnapshot API in the Amazon Elastic Compute Cloud User Guide.
      */
     ClientToken?: IdempotencyToken;
     /**
-     * Indicates whether to encrypt the snapshot. To create an encrypted snapshot, specify true. To create an unencrypted snapshot, omit this parameter. If you specify a value for ParentSnapshotId, omit this parameter. If you specify true, the snapshot is encrypted using the CMK specified using the KmsKeyArn parameter. If no value is specified for KmsKeyArn, the default CMK for your account is used. If no default CMK has been specified for your account, the AWS managed CMK is used. To set a default CMK for your account, use  ModifyEbsDefaultKmsKeyId. If your account is enabled for encryption by default, you cannot set this parameter to false. In this case, you can omit this parameter. For more information, see  Using encryption in the Amazon Elastic Compute Cloud User Guide.
+     * Indicates whether to encrypt the snapshot. To create an encrypted snapshot, specify true. To create an unencrypted snapshot, omit this parameter. If you specify a value for ParentSnapshotId, omit this parameter. If you specify true, the snapshot is encrypted using the KMS key specified using the KmsKeyArn parameter. If no value is specified for KmsKeyArn, the default KMS key for your account is used. If no default KMS key has been specified for your account, the Amazon Web Services managed KMS key is used. To set a default KMS key for your account, use  ModifyEbsDefaultKmsKeyId. If your account is enabled for encryption by default, you cannot set this parameter to false. In this case, you can omit this parameter. For more information, see  Using encryption in the Amazon Elastic Compute Cloud User Guide.
      */
     Encrypted?: Boolean;
     /**
-     * The Amazon Resource Name (ARN) of the AWS Key Management Service (AWS KMS) customer master key (CMK) to be used to encrypt the snapshot. If you do not specify a CMK, the default AWS managed CMK is used. If you specify a ParentSnapshotId, omit this parameter; the snapshot will be encrypted using the same CMK that was used to encrypt the parent snapshot. If Encrypted is set to true, you must specify a CMK ARN. 
+     * The Amazon Resource Name (ARN) of the Key Management Service (KMS) key to be used to encrypt the snapshot. If you do not specify a KMS key, the default Amazon Web Services managed KMS key is used. If you specify a ParentSnapshotId, omit this parameter; the snapshot will be encrypted using the same KMS key that was used to encrypt the parent snapshot. If Encrypted is set to true, you must specify a KMS key ARN. 
      */
     KmsKeyArn?: KmsKeyArn;
     /**
@@ -334,7 +334,7 @@ declare namespace EBS {
      */
     SnapshotId?: SnapshotId;
     /**
-     * The AWS account ID of the snapshot owner.
+     * The Amazon Web Services account ID of the snapshot owner.
      */
     OwnerId?: OwnerId;
     /**
@@ -362,7 +362,7 @@ declare namespace EBS {
      */
     ParentSnapshotId?: SnapshotId;
     /**
-     * The Amazon Resource Name (ARN) of the AWS Key Management Service (AWS KMS) customer master key (CMK) used to encrypt the snapshot.
+     * The Amazon Resource Name (ARN) of the Key Management Service (KMS) key used to encrypt the snapshot.
      */
     KmsKeyArn?: KmsKeyArn;
   }

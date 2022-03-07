@@ -6,6 +6,12 @@
             "output_token": "NextToken",
             "result_key": "Items"
         },
+        "ListAlerts": {
+            "input_token": "NextToken",
+            "limit_key": "MaxResults",
+            "output_token": "NextToken",
+            "result_key": "Items"
+        },
         "ListChannels": {
             "input_token": "NextToken",
             "limit_key": "MaxResults",
@@ -13,6 +19,12 @@
             "result_key": "Items"
         },
         "ListPlaybackConfigurations": {
+            "input_token": "NextToken",
+            "limit_key": "MaxResults",
+            "output_token": "NextToken",
+            "result_key": "Items"
+        },
+        "ListPrefetchSchedules": {
             "input_token": "NextToken",
             "limit_key": "MaxResults",
             "output_token": "NextToken",

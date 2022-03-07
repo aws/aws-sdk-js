@@ -14,11 +14,11 @@ declare class Polly extends PollyCustomizations {
   constructor(options?: Polly.Types.ClientConfiguration)
   config: Config & Polly.Types.ClientConfiguration;
   /**
-   * Deletes the specified pronunciation lexicon stored in an AWS Region. A lexicon which has been deleted is not available for speech synthesis, nor is it possible to retrieve it using either the GetLexicon or ListLexicon APIs. For more information, see Managing Lexicons.
+   * Deletes the specified pronunciation lexicon stored in an Amazon Web Services Region. A lexicon which has been deleted is not available for speech synthesis, nor is it possible to retrieve it using either the GetLexicon or ListLexicon APIs. For more information, see Managing Lexicons.
    */
   deleteLexicon(params: Polly.Types.DeleteLexiconInput, callback?: (err: AWSError, data: Polly.Types.DeleteLexiconOutput) => void): Request<Polly.Types.DeleteLexiconOutput, AWSError>;
   /**
-   * Deletes the specified pronunciation lexicon stored in an AWS Region. A lexicon which has been deleted is not available for speech synthesis, nor is it possible to retrieve it using either the GetLexicon or ListLexicon APIs. For more information, see Managing Lexicons.
+   * Deletes the specified pronunciation lexicon stored in an Amazon Web Services Region. A lexicon which has been deleted is not available for speech synthesis, nor is it possible to retrieve it using either the GetLexicon or ListLexicon APIs. For more information, see Managing Lexicons.
    */
   deleteLexicon(callback?: (err: AWSError, data: Polly.Types.DeleteLexiconOutput) => void): Request<Polly.Types.DeleteLexiconOutput, AWSError>;
   /**
@@ -30,11 +30,11 @@ declare class Polly extends PollyCustomizations {
    */
   describeVoices(callback?: (err: AWSError, data: Polly.Types.DescribeVoicesOutput) => void): Request<Polly.Types.DescribeVoicesOutput, AWSError>;
   /**
-   * Returns the content of the specified pronunciation lexicon stored in an AWS Region. For more information, see Managing Lexicons.
+   * Returns the content of the specified pronunciation lexicon stored in an Amazon Web Services Region. For more information, see Managing Lexicons.
    */
   getLexicon(params: Polly.Types.GetLexiconInput, callback?: (err: AWSError, data: Polly.Types.GetLexiconOutput) => void): Request<Polly.Types.GetLexiconOutput, AWSError>;
   /**
-   * Returns the content of the specified pronunciation lexicon stored in an AWS Region. For more information, see Managing Lexicons.
+   * Returns the content of the specified pronunciation lexicon stored in an Amazon Web Services Region. For more information, see Managing Lexicons.
    */
   getLexicon(callback?: (err: AWSError, data: Polly.Types.GetLexiconOutput) => void): Request<Polly.Types.GetLexiconOutput, AWSError>;
   /**
@@ -46,11 +46,11 @@ declare class Polly extends PollyCustomizations {
    */
   getSpeechSynthesisTask(callback?: (err: AWSError, data: Polly.Types.GetSpeechSynthesisTaskOutput) => void): Request<Polly.Types.GetSpeechSynthesisTaskOutput, AWSError>;
   /**
-   * Returns a list of pronunciation lexicons stored in an AWS Region. For more information, see Managing Lexicons.
+   * Returns a list of pronunciation lexicons stored in an Amazon Web Services Region. For more information, see Managing Lexicons.
    */
   listLexicons(params: Polly.Types.ListLexiconsInput, callback?: (err: AWSError, data: Polly.Types.ListLexiconsOutput) => void): Request<Polly.Types.ListLexiconsOutput, AWSError>;
   /**
-   * Returns a list of pronunciation lexicons stored in an AWS Region. For more information, see Managing Lexicons.
+   * Returns a list of pronunciation lexicons stored in an Amazon Web Services Region. For more information, see Managing Lexicons.
    */
   listLexicons(callback?: (err: AWSError, data: Polly.Types.ListLexiconsOutput) => void): Request<Polly.Types.ListLexiconsOutput, AWSError>;
   /**
@@ -62,19 +62,19 @@ declare class Polly extends PollyCustomizations {
    */
   listSpeechSynthesisTasks(callback?: (err: AWSError, data: Polly.Types.ListSpeechSynthesisTasksOutput) => void): Request<Polly.Types.ListSpeechSynthesisTasksOutput, AWSError>;
   /**
-   * Stores a pronunciation lexicon in an AWS Region. If a lexicon with the same name already exists in the region, it is overwritten by the new lexicon. Lexicon operations have eventual consistency, therefore, it might take some time before the lexicon is available to the SynthesizeSpeech operation. For more information, see Managing Lexicons.
+   * Stores a pronunciation lexicon in an Amazon Web Services Region. If a lexicon with the same name already exists in the region, it is overwritten by the new lexicon. Lexicon operations have eventual consistency, therefore, it might take some time before the lexicon is available to the SynthesizeSpeech operation. For more information, see Managing Lexicons.
    */
   putLexicon(params: Polly.Types.PutLexiconInput, callback?: (err: AWSError, data: Polly.Types.PutLexiconOutput) => void): Request<Polly.Types.PutLexiconOutput, AWSError>;
   /**
-   * Stores a pronunciation lexicon in an AWS Region. If a lexicon with the same name already exists in the region, it is overwritten by the new lexicon. Lexicon operations have eventual consistency, therefore, it might take some time before the lexicon is available to the SynthesizeSpeech operation. For more information, see Managing Lexicons.
+   * Stores a pronunciation lexicon in an Amazon Web Services Region. If a lexicon with the same name already exists in the region, it is overwritten by the new lexicon. Lexicon operations have eventual consistency, therefore, it might take some time before the lexicon is available to the SynthesizeSpeech operation. For more information, see Managing Lexicons.
    */
   putLexicon(callback?: (err: AWSError, data: Polly.Types.PutLexiconOutput) => void): Request<Polly.Types.PutLexiconOutput, AWSError>;
   /**
-   * Allows the creation of an asynchronous synthesis task, by starting a new SpeechSynthesisTask. This operation requires all the standard information needed for speech synthesis, plus the name of an Amazon S3 bucket for the service to store the output of the synthesis task and two optional parameters (OutputS3KeyPrefix and SnsTopicArn). Once the synthesis task is created, this operation will return a SpeechSynthesisTask object, which will include an identifier of this task as well as the current status.
+   * Allows the creation of an asynchronous synthesis task, by starting a new SpeechSynthesisTask. This operation requires all the standard information needed for speech synthesis, plus the name of an Amazon S3 bucket for the service to store the output of the synthesis task and two optional parameters (OutputS3KeyPrefix and SnsTopicArn). Once the synthesis task is created, this operation will return a SpeechSynthesisTask object, which will include an identifier of this task as well as the current status. The SpeechSynthesisTask object is available for 72 hours after starting the asynchronous synthesis task.
    */
   startSpeechSynthesisTask(params: Polly.Types.StartSpeechSynthesisTaskInput, callback?: (err: AWSError, data: Polly.Types.StartSpeechSynthesisTaskOutput) => void): Request<Polly.Types.StartSpeechSynthesisTaskOutput, AWSError>;
   /**
-   * Allows the creation of an asynchronous synthesis task, by starting a new SpeechSynthesisTask. This operation requires all the standard information needed for speech synthesis, plus the name of an Amazon S3 bucket for the service to store the output of the synthesis task and two optional parameters (OutputS3KeyPrefix and SnsTopicArn). Once the synthesis task is created, this operation will return a SpeechSynthesisTask object, which will include an identifier of this task as well as the current status.
+   * Allows the creation of an asynchronous synthesis task, by starting a new SpeechSynthesisTask. This operation requires all the standard information needed for speech synthesis, plus the name of an Amazon S3 bucket for the service to store the output of the synthesis task and two optional parameters (OutputS3KeyPrefix and SnsTopicArn). Once the synthesis task is created, this operation will return a SpeechSynthesisTask object, which will include an identifier of this task as well as the current status. The SpeechSynthesisTask object is available for 72 hours after starting the asynchronous synthesis task.
    */
   startSpeechSynthesisTask(callback?: (err: AWSError, data: Polly.Types.StartSpeechSynthesisTaskOutput) => void): Request<Polly.Types.StartSpeechSynthesisTaskOutput, AWSError>;
   /**
@@ -162,7 +162,7 @@ declare namespace Polly {
     SynthesisTask?: SynthesisTask;
   }
   export type IncludeAdditionalLanguageCodes = boolean;
-  export type LanguageCode = "arb"|"cmn-CN"|"cy-GB"|"da-DK"|"de-DE"|"en-AU"|"en-GB"|"en-GB-WLS"|"en-IN"|"en-US"|"es-ES"|"es-MX"|"es-US"|"fr-CA"|"fr-FR"|"is-IS"|"it-IT"|"ja-JP"|"hi-IN"|"ko-KR"|"nb-NO"|"nl-NL"|"pl-PL"|"pt-BR"|"pt-PT"|"ro-RO"|"ru-RU"|"sv-SE"|"tr-TR"|string;
+  export type LanguageCode = "arb"|"cmn-CN"|"cy-GB"|"da-DK"|"de-DE"|"en-AU"|"en-GB"|"en-GB-WLS"|"en-IN"|"en-US"|"es-ES"|"es-MX"|"es-US"|"fr-CA"|"fr-FR"|"is-IS"|"it-IT"|"ja-JP"|"hi-IN"|"ko-KR"|"nb-NO"|"nl-NL"|"pl-PL"|"pt-BR"|"pt-PT"|"ro-RO"|"ru-RU"|"sv-SE"|"tr-TR"|"en-NZ"|"en-ZA"|string;
   export type LanguageCodeList = LanguageCode[];
   export type LanguageName = string;
   export type LastModified = Date;
@@ -288,7 +288,7 @@ declare namespace Polly {
      */
     Engine?: Engine;
     /**
-     * Optional language code for the Speech Synthesis request. This is only necessary if using a bilingual voice, such as Aditi, which can be used for either Indian English (en-IN) or Hindi (hi-IN).  If a bilingual voice is used and no language code is specified, Amazon Polly will use the default language of the bilingual voice. The default language for any voice is the one returned by the DescribeVoices operation for the LanguageCode parameter. For example, if no language code is specified, Aditi will use Indian English rather than Hindi.
+     * Optional language code for the Speech Synthesis request. This is only necessary if using a bilingual voice, such as Aditi, which can be used for either Indian English (en-IN) or Hindi (hi-IN).  If a bilingual voice is used and no language code is specified, Amazon Polly uses the default language of the bilingual voice. The default language for any voice is the one returned by the DescribeVoices operation for the LanguageCode parameter. For example, if no language code is specified, Aditi will use Indian English rather than Hindi.
      */
     LanguageCode?: LanguageCode;
     /**
@@ -396,7 +396,7 @@ declare namespace Polly {
      */
     VoiceId?: VoiceId;
     /**
-     * Optional language code for a synthesis task. This is only necessary if using a bilingual voice, such as Aditi, which can be used for either Indian English (en-IN) or Hindi (hi-IN).  If a bilingual voice is used and no language code is specified, Amazon Polly will use the default language of the bilingual voice. The default language for any voice is the one returned by the DescribeVoices operation for the LanguageCode parameter. For example, if no language code is specified, Aditi will use Indian English rather than Hindi.
+     * Optional language code for a synthesis task. This is only necessary if using a bilingual voice, such as Aditi, which can be used for either Indian English (en-IN) or Hindi (hi-IN).  If a bilingual voice is used and no language code is specified, Amazon Polly uses the default language of the bilingual voice. The default language for any voice is the one returned by the DescribeVoices operation for the LanguageCode parameter. For example, if no language code is specified, Aditi will use Indian English rather than Hindi.
      */
     LanguageCode?: LanguageCode;
   }
@@ -407,7 +407,7 @@ declare namespace Polly {
      */
     Engine?: Engine;
     /**
-     * Optional language code for the Synthesize Speech request. This is only necessary if using a bilingual voice, such as Aditi, which can be used for either Indian English (en-IN) or Hindi (hi-IN).  If a bilingual voice is used and no language code is specified, Amazon Polly will use the default language of the bilingual voice. The default language for any voice is the one returned by the DescribeVoices operation for the LanguageCode parameter. For example, if no language code is specified, Aditi will use Indian English rather than Hindi.
+     * Optional language code for the Synthesize Speech request. This is only necessary if using a bilingual voice, such as Aditi, which can be used for either Indian English (en-IN) or Hindi (hi-IN).  If a bilingual voice is used and no language code is specified, Amazon Polly uses the default language of the bilingual voice. The default language for any voice is the one returned by the DescribeVoices operation for the LanguageCode parameter. For example, if no language code is specified, Aditi will use Indian English rather than Hindi.
      */
     LanguageCode?: LanguageCode;
     /**
@@ -488,7 +488,7 @@ declare namespace Polly {
      */
     SupportedEngines?: EngineList;
   }
-  export type VoiceId = "Aditi"|"Amy"|"Astrid"|"Bianca"|"Brian"|"Camila"|"Carla"|"Carmen"|"Celine"|"Chantal"|"Conchita"|"Cristiano"|"Dora"|"Emma"|"Enrique"|"Ewa"|"Filiz"|"Geraint"|"Giorgio"|"Gwyneth"|"Hans"|"Ines"|"Ivy"|"Jacek"|"Jan"|"Joanna"|"Joey"|"Justin"|"Karl"|"Kendra"|"Kevin"|"Kimberly"|"Lea"|"Liv"|"Lotte"|"Lucia"|"Lupe"|"Mads"|"Maja"|"Marlene"|"Mathieu"|"Matthew"|"Maxim"|"Mia"|"Miguel"|"Mizuki"|"Naja"|"Nicole"|"Olivia"|"Penelope"|"Raveena"|"Ricardo"|"Ruben"|"Russell"|"Salli"|"Seoyeon"|"Takumi"|"Tatyana"|"Vicki"|"Vitoria"|"Zeina"|"Zhiyu"|string;
+  export type VoiceId = "Aditi"|"Amy"|"Astrid"|"Bianca"|"Brian"|"Camila"|"Carla"|"Carmen"|"Celine"|"Chantal"|"Conchita"|"Cristiano"|"Dora"|"Emma"|"Enrique"|"Ewa"|"Filiz"|"Gabrielle"|"Geraint"|"Giorgio"|"Gwyneth"|"Hans"|"Ines"|"Ivy"|"Jacek"|"Jan"|"Joanna"|"Joey"|"Justin"|"Karl"|"Kendra"|"Kevin"|"Kimberly"|"Lea"|"Liv"|"Lotte"|"Lucia"|"Lupe"|"Mads"|"Maja"|"Marlene"|"Mathieu"|"Matthew"|"Maxim"|"Mia"|"Miguel"|"Mizuki"|"Naja"|"Nicole"|"Olivia"|"Penelope"|"Raveena"|"Ricardo"|"Ruben"|"Russell"|"Salli"|"Seoyeon"|"Takumi"|"Tatyana"|"Vicki"|"Vitoria"|"Zeina"|"Zhiyu"|"Aria"|"Ayanda"|string;
   export type VoiceList = Voice[];
   export type VoiceName = string;
   /**

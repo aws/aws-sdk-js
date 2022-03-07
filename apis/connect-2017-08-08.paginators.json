@@ -10,17 +10,46 @@
       "limit_key": "MaxResults",
       "output_token": "NextToken"
     },
+    "ListAgentStatuses": {
+      "input_token": "NextToken",
+      "limit_key": "MaxResults",
+      "output_token": "NextToken",
+      "result_key": "AgentStatusSummaryList"
+    },
     "ListApprovedOrigins": {
       "input_token": "NextToken",
       "limit_key": "MaxResults",
       "output_token": "NextToken",
       "result_key": "Origins"
     },
+    "ListBots": {
+      "input_token": "NextToken",
+      "limit_key": "MaxResults",
+      "output_token": "NextToken",
+      "result_key": "LexBots"
+    },
+    "ListContactFlowModules": {
+      "input_token": "NextToken",
+      "limit_key": "MaxResults",
+      "output_token": "NextToken",
+      "result_key": "ContactFlowModulesSummaryList"
+    },
     "ListContactFlows": {
       "input_token": "NextToken",
       "limit_key": "MaxResults",
       "output_token": "NextToken",
       "result_key": "ContactFlowSummaryList"
+    },
+    "ListContactReferences": {
+      "input_token": "NextToken",
+      "output_token": "NextToken",
+      "result_key": "ReferenceSummaryList"
+    },
+    "ListDefaultVocabularies": {
+      "input_token": "NextToken",
+      "limit_key": "MaxResults",
+      "output_token": "NextToken",
+      "result_key": "DefaultVocabularyList"
     },
     "ListHoursOfOperations": {
       "input_token": "NextToken",
@@ -112,6 +141,12 @@
       "output_token": "NextToken",
       "result_key": "SecurityKeys"
     },
+    "ListSecurityProfilePermissions": {
+      "input_token": "NextToken",
+      "limit_key": "MaxResults",
+      "output_token": "NextToken",
+      "result_key": "Permissions"
+    },
     "ListSecurityProfiles": {
       "input_token": "NextToken",
       "limit_key": "MaxResults",
@@ -135,6 +170,12 @@
       "limit_key": "MaxResults",
       "output_token": "NextToken",
       "result_key": "UserSummaryList"
+    },
+    "SearchVocabularies": {
+      "input_token": "NextToken",
+      "limit_key": "MaxResults",
+      "output_token": "NextToken",
+      "result_key": "VocabularySummaryList"
     }
   }
 }

@@ -21,35 +21,35 @@ declare class LexRuntimeV2 extends Service {
    */
   deleteSession(callback?: (err: AWSError, data: LexRuntimeV2.Types.DeleteSessionResponse) => void): Request<LexRuntimeV2.Types.DeleteSessionResponse, AWSError>;
   /**
-   * Returns session information for a specified bot, alias, and user. For example, you can use this operation to retrieve session information for a user that has left a long-running session in use. If the bot, alias, or session identifier doesn't exist, Amazon Lex returns a BadRequestException. If the locale doesn't exist or is not enabled for the alias, you receive a BadRequestException.
+   * Returns session information for a specified bot, alias, and user. For example, you can use this operation to retrieve session information for a user that has left a long-running session in use. If the bot, alias, or session identifier doesn't exist, Amazon Lex V2 returns a BadRequestException. If the locale doesn't exist or is not enabled for the alias, you receive a BadRequestException.
    */
   getSession(params: LexRuntimeV2.Types.GetSessionRequest, callback?: (err: AWSError, data: LexRuntimeV2.Types.GetSessionResponse) => void): Request<LexRuntimeV2.Types.GetSessionResponse, AWSError>;
   /**
-   * Returns session information for a specified bot, alias, and user. For example, you can use this operation to retrieve session information for a user that has left a long-running session in use. If the bot, alias, or session identifier doesn't exist, Amazon Lex returns a BadRequestException. If the locale doesn't exist or is not enabled for the alias, you receive a BadRequestException.
+   * Returns session information for a specified bot, alias, and user. For example, you can use this operation to retrieve session information for a user that has left a long-running session in use. If the bot, alias, or session identifier doesn't exist, Amazon Lex V2 returns a BadRequestException. If the locale doesn't exist or is not enabled for the alias, you receive a BadRequestException.
    */
   getSession(callback?: (err: AWSError, data: LexRuntimeV2.Types.GetSessionResponse) => void): Request<LexRuntimeV2.Types.GetSessionResponse, AWSError>;
   /**
-   * Creates a new session or modifies an existing session with an Amazon Lex bot. Use this operation to enable your application to set the state of the bot.
+   * Creates a new session or modifies an existing session with an Amazon Lex V2 bot. Use this operation to enable your application to set the state of the bot.
    */
   putSession(params: LexRuntimeV2.Types.PutSessionRequest, callback?: (err: AWSError, data: LexRuntimeV2.Types.PutSessionResponse) => void): Request<LexRuntimeV2.Types.PutSessionResponse, AWSError>;
   /**
-   * Creates a new session or modifies an existing session with an Amazon Lex bot. Use this operation to enable your application to set the state of the bot.
+   * Creates a new session or modifies an existing session with an Amazon Lex V2 bot. Use this operation to enable your application to set the state of the bot.
    */
   putSession(callback?: (err: AWSError, data: LexRuntimeV2.Types.PutSessionResponse) => void): Request<LexRuntimeV2.Types.PutSessionResponse, AWSError>;
   /**
-   * Sends user input to Amazon Lex. Client applications use this API to send requests to Amazon Lex at runtime. Amazon Lex then interprets the user input using the machine learning model that it build for the bot. In response, Amazon Lex returns the next message to convey to the user and an optional response card to display.
+   * Sends user input to Amazon Lex V2. Client applications use this API to send requests to Amazon Lex V2 at runtime. Amazon Lex V2 then interprets the user input using the machine learning model that it build for the bot. In response, Amazon Lex V2 returns the next message to convey to the user and an optional response card to display. If the optional post-fulfillment response is specified, the messages are returned as follows. For more information, see PostFulfillmentStatusSpecification.    Success message - Returned if the Lambda function completes successfully and the intent state is fulfilled or ready fulfillment if the message is present.    Failed message - The failed message is returned if the Lambda function throws an exception or if the Lambda function returns a failed intent state without a message.    Timeout message - If you don't configure a timeout message and a timeout, and the Lambda function doesn't return within 30 seconds, the timeout message is returned. If you configure a timeout, the timeout message is returned when the period times out.    For more information, see Completion message.
    */
   recognizeText(params: LexRuntimeV2.Types.RecognizeTextRequest, callback?: (err: AWSError, data: LexRuntimeV2.Types.RecognizeTextResponse) => void): Request<LexRuntimeV2.Types.RecognizeTextResponse, AWSError>;
   /**
-   * Sends user input to Amazon Lex. Client applications use this API to send requests to Amazon Lex at runtime. Amazon Lex then interprets the user input using the machine learning model that it build for the bot. In response, Amazon Lex returns the next message to convey to the user and an optional response card to display.
+   * Sends user input to Amazon Lex V2. Client applications use this API to send requests to Amazon Lex V2 at runtime. Amazon Lex V2 then interprets the user input using the machine learning model that it build for the bot. In response, Amazon Lex V2 returns the next message to convey to the user and an optional response card to display. If the optional post-fulfillment response is specified, the messages are returned as follows. For more information, see PostFulfillmentStatusSpecification.    Success message - Returned if the Lambda function completes successfully and the intent state is fulfilled or ready fulfillment if the message is present.    Failed message - The failed message is returned if the Lambda function throws an exception or if the Lambda function returns a failed intent state without a message.    Timeout message - If you don't configure a timeout message and a timeout, and the Lambda function doesn't return within 30 seconds, the timeout message is returned. If you configure a timeout, the timeout message is returned when the period times out.    For more information, see Completion message.
    */
   recognizeText(callback?: (err: AWSError, data: LexRuntimeV2.Types.RecognizeTextResponse) => void): Request<LexRuntimeV2.Types.RecognizeTextResponse, AWSError>;
   /**
-   * Sends user input to Amazon Lex. You can send text or speech. Clients use this API to send text and audio requests to Amazon Lex at runtime. Amazon Lex interprets the user input using the machine learning model built for the bot.
+   * Sends user input to Amazon Lex V2. You can send text or speech. Clients use this API to send text and audio requests to Amazon Lex V2 at runtime. Amazon Lex V2 interprets the user input using the machine learning model built for the bot. The following request fields must be compressed with gzip and then base64 encoded before you send them to Amazon Lex V2.    requestAttributes   sessionState   The following response fields are compressed using gzip and then base64 encoded by Amazon Lex V2. Before you can use these fields, you must decode and decompress them.    inputTranscript   interpretations   messages   requestAttributes   sessionState   The example contains a Java application that compresses and encodes a Java object to send to Amazon Lex V2, and a second that decodes and decompresses a response from Amazon Lex V2. If the optional post-fulfillment response is specified, the messages are returned as follows. For more information, see PostFulfillmentStatusSpecification.    Success message - Returned if the Lambda function completes successfully and the intent state is fulfilled or ready fulfillment if the message is present.    Failed message - The failed message is returned if the Lambda function throws an exception or if the Lambda function returns a failed intent state without a message.    Timeout message - If you don't configure a timeout message and a timeout, and the Lambda function doesn't return within 30 seconds, the timeout message is returned. If you configure a timeout, the timeout message is returned when the period times out.    For more information, see Completion message.
    */
   recognizeUtterance(params: LexRuntimeV2.Types.RecognizeUtteranceRequest, callback?: (err: AWSError, data: LexRuntimeV2.Types.RecognizeUtteranceResponse) => void): Request<LexRuntimeV2.Types.RecognizeUtteranceResponse, AWSError>;
   /**
-   * Sends user input to Amazon Lex. You can send text or speech. Clients use this API to send text and audio requests to Amazon Lex at runtime. Amazon Lex interprets the user input using the machine learning model built for the bot.
+   * Sends user input to Amazon Lex V2. You can send text or speech. Clients use this API to send text and audio requests to Amazon Lex V2 at runtime. Amazon Lex V2 interprets the user input using the machine learning model built for the bot. The following request fields must be compressed with gzip and then base64 encoded before you send them to Amazon Lex V2.    requestAttributes   sessionState   The following response fields are compressed using gzip and then base64 encoded by Amazon Lex V2. Before you can use these fields, you must decode and decompress them.    inputTranscript   interpretations   messages   requestAttributes   sessionState   The example contains a Java application that compresses and encodes a Java object to send to Amazon Lex V2, and a second that decodes and decompresses a response from Amazon Lex V2. If the optional post-fulfillment response is specified, the messages are returned as follows. For more information, see PostFulfillmentStatusSpecification.    Success message - Returned if the Lambda function completes successfully and the intent state is fulfilled or ready fulfillment if the message is present.    Failed message - The failed message is returned if the Lambda function throws an exception or if the Lambda function returns a failed intent state without a message.    Timeout message - If you don't configure a timeout message and a timeout, and the Lambda function doesn't return within 30 seconds, the timeout message is returned. If you configure a timeout, the timeout message is returned when the period times out.    For more information, see Completion message.
    */
   recognizeUtterance(callback?: (err: AWSError, data: LexRuntimeV2.Types.RecognizeUtteranceResponse) => void): Request<LexRuntimeV2.Types.RecognizeUtteranceResponse, AWSError>;
 }
@@ -64,9 +64,9 @@ declare namespace LexRuntimeV2 {
      */
     timeToLive: ActiveContextTimeToLive;
     /**
-     * A lis tof contexts active for the request. A context can be activated when a previous intent is fulfilled, or by including the context in the request. If you don't specify a list of contexts, Amazon Lex will use the current list of contexts for the session. If you specify an empty list, all contexts for the session are cleared. 
+     * A list of contexts active for the request. A context can be activated when a previous intent is fulfilled, or by including the context in the request. If you don't specify a list of contexts, Amazon Lex V2 will use the current list of contexts for the session. If you specify an empty list, all contexts for the session are cleared. 
      */
-    contextAttributes?: ActiveContextParametersMap;
+    contextAttributes: ActiveContextParametersMap;
   }
   export type ActiveContextName = string;
   export type ActiveContextParametersMap = {[key: string]: Text};
@@ -94,7 +94,7 @@ declare namespace LexRuntimeV2 {
      */
     text: ButtonText;
     /**
-     * The value returned to Amazon Lex when a user chooses the button.
+     * The value returned to Amazon Lex V2 when a user chooses the button.
      */
     value: ButtonValue;
   }
@@ -103,7 +103,7 @@ declare namespace LexRuntimeV2 {
   export type ButtonsList = Button[];
   export interface ConfidenceScore {
     /**
-     * A score that indicates how confident Amazon Lex is that an intent satisfies the user's intent. Ranges between 0.00 and 1.00. Higher scores indicate higher confidence.
+     * A score that indicates how confident Amazon Lex V2 is that an intent satisfies the user's intent. Ranges between 0.00 and 1.00. Higher scores indicate higher confidence.
      */
     score?: Double;
   }
@@ -146,15 +146,19 @@ declare namespace LexRuntimeV2 {
   }
   export interface DialogAction {
     /**
-     * The next action that the bot should take in its interaction with the user. The possible values are:    Close - Indicates that there will not be a response from the user. For example, the statement "Your order has been placed" does not require a response.    ConfirmIntent - The next action is asking the user if the intent is complete and ready to be fulfilled. This is a yes/no question such as "Place the order?"    Delegate - The next action is determined by Amazon Lex.    ElicitSlot - The next action is to elicit a slot value from the user.  
+     * The next action that the bot should take in its interaction with the user. The possible values are:    Close - Indicates that there will not be a response from the user. For example, the statement "Your order has been placed" does not require a response.    ConfirmIntent - The next action is asking the user if the intent is complete and ready to be fulfilled. This is a yes/no question such as "Place the order?"    Delegate - The next action is determined by Amazon Lex V2.    ElicitSlot - The next action is to elicit a slot value from the user.  
      */
     type: DialogActionType;
     /**
      * The name of the slot that should be elicited from the user.
      */
     slotToElicit?: NonEmptyString;
+    /**
+     * Configures the slot to use spell-by-letter or spell-by-word style. When you use a style on a slot, users can spell out their input to make it clear to your bot.   Spell by letter - "b" "o" "b"   Spell by word - "b as in boy" "o as in oscar" "b as in boy"   For more information, see  Using spelling to enter slot values .
+     */
+    slotElicitationStyle?: StyleType;
   }
-  export type DialogActionType = "Close"|"ConfirmIntent"|"Delegate"|"ElicitIntent"|"ElicitSlot"|string;
+  export type DialogActionType = "Close"|"ConfirmIntent"|"Delegate"|"ElicitIntent"|"ElicitSlot"|"None"|string;
   export type Double = number;
   export interface GetSessionRequest {
     /**
@@ -184,7 +188,7 @@ declare namespace LexRuntimeV2 {
      */
     messages?: Messages;
     /**
-     * A list of intents that Amazon Lex determined might satisfy the user's utterance.  Each interpretation includes the intent, a score that indicates how confident Amazon Lex is that the interpretation is the correct one, and an optional sentiment response that indicates the sentiment expressed in the utterance.
+     * A list of intents that Amazon Lex V2 determined might satisfy the user's utterance.  Each interpretation includes the intent, a score that indicates how confident Amazon Lex V2 is that the interpretation is the correct one, and an optional sentiment response that indicates the sentiment expressed in the utterance.
      */
     interpretations?: Interpretations;
     /**
@@ -228,10 +232,10 @@ declare namespace LexRuntimeV2 {
      */
     confirmationState?: ConfirmationState;
   }
-  export type IntentState = "Failed"|"Fulfilled"|"InProgress"|"ReadyForFulfillment"|"Waiting"|string;
+  export type IntentState = "Failed"|"Fulfilled"|"InProgress"|"ReadyForFulfillment"|"Waiting"|"FulfillmentInProgress"|string;
   export interface Interpretation {
     /**
-     * Determines the threshold where Amazon Lex will insert the AMAZON.FallbackIntent, AMAZON.KendraSearchIntent, or both when returning alternative intents in a response. AMAZON.FallbackIntent and AMAZON.KendraSearchIntent are only inserted if they are configured for the bot.
+     * Determines the threshold where Amazon Lex V2 will insert the AMAZON.FallbackIntent, AMAZON.KendraSearchIntent, or both when returning alternative intents in a response. AMAZON.FallbackIntent and AMAZON.KendraSearchIntent are only inserted if they are configured for the bot.
      */
     nluConfidence?: ConfidenceScore;
     /**
@@ -253,11 +257,12 @@ declare namespace LexRuntimeV2 {
     /**
      * Indicates the type of response.
      */
-    contentType?: MessageContentType;
+    contentType: MessageContentType;
     imageResponseCard?: ImageResponseCard;
   }
   export type MessageContentType = "CustomPayload"|"ImageResponseCard"|"PlainText"|"SSML"|string;
   export type Messages = Message[];
+  export type Name = string;
   export type NonEmptyString = string;
   export type ParameterName = string;
   export interface PutSessionRequest {
@@ -282,15 +287,15 @@ declare namespace LexRuntimeV2 {
      */
     messages?: Messages;
     /**
-     * Sets the state of the session with the user. You can use this to set the current intent, attributes, context, and dialog action. Use the dialog action to determine the next step that Amazon Lex should use in the conversation with the user.
+     * Sets the state of the session with the user. You can use this to set the current intent, attributes, context, and dialog action. Use the dialog action to determine the next step that Amazon Lex V2 should use in the conversation with the user.
      */
     sessionState: SessionState;
     /**
-     * Request-specific information passed between Amazon Lex and the client application. The namespace x-amz-lex: is reserved for special attributes. Don't create any request attributes with the prefix x-amz-lex:.
+     * Request-specific information passed between Amazon Lex V2 and the client application. The namespace x-amz-lex: is reserved for special attributes. Don't create any request attributes with the prefix x-amz-lex:.
      */
     requestAttributes?: StringMap;
     /**
-     * The message that Amazon Lex returns in the response can be either text or speech depending on the value of this parameter.    If the value is text/plain; charset=utf-8, Amazon Lex returns text in the response.  
+     * The message that Amazon Lex V2 returns in the response can be either text or speech depending on the value of this parameter.    If the value is text/plain; charset=utf-8, Amazon Lex V2 returns text in the response.  
      */
     responseContentType?: NonEmptyString;
   }
@@ -308,7 +313,7 @@ declare namespace LexRuntimeV2 {
      */
     sessionState?: NonEmptyString;
     /**
-     * Request-specific information passed between the client application and Amazon Lex. These are the same as the requestAttribute parameter in the call to the PutSession operation.
+     * Request-specific information passed between the client application and Amazon Lex V2. These are the same as the requestAttribute parameter in the call to the PutSession operation.
      */
     requestAttributes?: NonEmptyString;
     /**
@@ -338,7 +343,7 @@ declare namespace LexRuntimeV2 {
      */
     sessionId: SessionId;
     /**
-     * The text that the user entered. Amazon Lex interprets this text.
+     * The text that the user entered. Amazon Lex V2 interprets this text.
      */
     text: Text;
     /**
@@ -346,7 +351,7 @@ declare namespace LexRuntimeV2 {
      */
     sessionState?: SessionState;
     /**
-     * Request-specific information passed between the client application and Amazon Lex  The namespace x-amz-lex: is reserved for special attributes. Don't create any request attributes with the prefix x-amz-lex:.
+     * Request-specific information passed between the client application and Amazon Lex V2  The namespace x-amz-lex: is reserved for special attributes. Don't create any request attributes with the prefix x-amz-lex:.
      */
     requestAttributes?: StringMap;
   }
@@ -360,7 +365,7 @@ declare namespace LexRuntimeV2 {
      */
     sessionState?: SessionState;
     /**
-     * A list of intents that Amazon Lex determined might satisfy the user's utterance.  Each interpretation includes the intent, a score that indicates now confident Amazon Lex is that the interpretation is the correct one, and an optional sentiment response that indicates the sentiment expressed in the utterance.
+     * A list of intents that Amazon Lex V2 determined might satisfy the user's utterance.  Each interpretation includes the intent, a score that indicates now confident Amazon Lex V2 is that the interpretation is the correct one, and an optional sentiment response that indicates the sentiment expressed in the utterance.
      */
     interpretations?: Interpretations;
     /**
@@ -390,11 +395,11 @@ declare namespace LexRuntimeV2 {
      */
     sessionId: SessionId;
     /**
-     * Sets the state of the session with the user. You can use this to set the current intent, attributes, context, and dialog action. Use the dialog action to determine the next step that Amazon Lex should use in the conversation with the user.
+     * Sets the state of the session with the user. You can use this to set the current intent, attributes, context, and dialog action. Use the dialog action to determine the next step that Amazon Lex V2 should use in the conversation with the user. The sessionState field must be compressed using gzip and then base64 encoded before sending to Amazon Lex V2.
      */
     sessionState?: SensitiveNonEmptyString;
     /**
-     * Request-specific information passed between the client application and Amazon Lex  The namespace x-amz-lex: is reserved for special attributes. Don't create any request attributes for prefix x-amz-lex:.
+     * Request-specific information passed between the client application and Amazon Lex V2  The namespace x-amz-lex: is reserved for special attributes. Don't create any request attributes for prefix x-amz-lex:. The requestAttributes field must be compressed using gzip and then base64 encoded before sending to Amazon Lex V2.
      */
     requestAttributes?: SensitiveNonEmptyString;
     /**
@@ -402,7 +407,7 @@ declare namespace LexRuntimeV2 {
      */
     requestContentType: NonEmptyString;
     /**
-     * The message that Amazon Lex returns in the response can be either text or speech based on the responseContentType value.   If the value is text/plain;charset=utf-8, Amazon Lex returns text in the response.   If the value begins with audio/, Amazon Lex returns speech in the response. Amazon Lex uses Amazon Polly to generate the speech using the configuration that you specified in the requestContentType parameter. For example, if you specify audio/mpeg as the value, Amazon Lex returns speech in the MPEG format.   If the value is audio/pcm, the speech returned is audio/pcm at 16 KHz in 16-bit, little-endian format.   The following are the accepted values:   audio/mpeg   audio/ogg   audio/pcm (16 KHz)   audio/* (defaults to mpeg)   text/plain; charset=utf-8    
+     * The message that Amazon Lex V2 returns in the response can be either text or speech based on the responseContentType value.   If the value is text/plain;charset=utf-8, Amazon Lex V2 returns text in the response.   If the value begins with audio/, Amazon Lex V2 returns speech in the response. Amazon Lex V2 uses Amazon Polly to generate the speech using the configuration that you specified in the requestContentType parameter. For example, if you specify audio/mpeg as the value, Amazon Lex V2 returns speech in the MPEG format.   If the value is audio/pcm, the speech returned is audio/pcm at 16 KHz in 16-bit, little-endian format.   The following are the accepted values:   audio/mpeg   audio/ogg   audio/pcm (16 KHz)   audio/* (defaults to mpeg)   text/plain; charset=utf-8    
      */
     responseContentType?: NonEmptyString;
     /**
@@ -420,19 +425,19 @@ declare namespace LexRuntimeV2 {
      */
     contentType?: NonEmptyString;
     /**
-     * A list of messages that were last sent to the user. The messages are ordered based on the order that you returned the messages from your Lambda function or the order that the messages are defined in the bot.
+     * A list of messages that were last sent to the user. The messages are ordered based on the order that you returned the messages from your Lambda function or the order that the messages are defined in the bot. The messages field is compressed with gzip and then base64 encoded. Before you can use the contents of the field, you must decode and decompress the contents. See the example for a simple function to decode and decompress the contents.
      */
     messages?: NonEmptyString;
     /**
-     * A list of intents that Amazon Lex determined might satisfy the user's utterance. Each interpretation includes the intent, a score that indicates how confident Amazon Lex is that the interpretation is the correct one, and an optional sentiment response that indicates the sentiment expressed in the utterance.
+     * A list of intents that Amazon Lex V2 determined might satisfy the user's utterance. Each interpretation includes the intent, a score that indicates how confident Amazon Lex V2 is that the interpretation is the correct one, and an optional sentiment response that indicates the sentiment expressed in the utterance. The interpretations field is compressed with gzip and then base64 encoded. Before you can use the contents of the field, you must decode and decompress the contents. See the example for a simple function to decode and decompress the contents.
      */
     interpretations?: NonEmptyString;
     /**
-     * Represents the current state of the dialog between the user and the bot. Use this to determine the progress of the conversation and what the next action might be.
+     * Represents the current state of the dialog between the user and the bot. Use this to determine the progress of the conversation and what the next action might be. The sessionState field is compressed with gzip and then base64 encoded. Before you can use the contents of the field, you must decode and decompress the contents. See the example for a simple function to decode and decompress the contents.
      */
     sessionState?: NonEmptyString;
     /**
-     * The attributes sent in the request.
+     * The attributes sent in the request. The requestAttributes field is compressed with gzip and then base64 encoded. Before you can use the contents of the field, you must decode and decompress the contents.
      */
     requestAttributes?: NonEmptyString;
     /**
@@ -440,13 +445,33 @@ declare namespace LexRuntimeV2 {
      */
     sessionId?: SessionId;
     /**
-     * The text used to process the request. If the input was an audio stream, the inputTranscript field contains the text extracted from the audio stream. This is the text that is actually processed to recognize intents and slot values. You can use this information to determine if Amazon Lex is correctly processing the audio that you send.
+     * The text used to process the request. If the input was an audio stream, the inputTranscript field contains the text extracted from the audio stream. This is the text that is actually processed to recognize intents and slot values. You can use this information to determine if Amazon Lex V2 is correctly processing the audio that you send. The inputTranscript field is compressed with gzip and then base64 encoded. Before you can use the contents of the field, you must decode and decompress the contents. See the example for a simple function to decode and decompress the contents.
      */
     inputTranscript?: NonEmptyString;
     /**
-     * The prompt or statement to send to the user. This is based on the bot configuration and context. For example, if Amazon Lex did not understand the user intent, it sends the clarificationPrompt configured for the bot. If the intent requires confirmation before taking the fulfillment action, it sends the confirmationPrompt. Another example: Suppose that the Lambda function successfully fulfilled the intent, and sent a message to convey to the user. Then Amazon Lex sends that message in the response.
+     * The prompt or statement to send to the user. This is based on the bot configuration and context. For example, if Amazon Lex V2 did not understand the user intent, it sends the clarificationPrompt configured for the bot. If the intent requires confirmation before taking the fulfillment action, it sends the confirmationPrompt. Another example: Suppose that the Lambda function successfully fulfilled the intent, and sent a message to convey to the user. Then Amazon Lex V2 sends that message in the response.
      */
     audioStream?: BlobStream;
+  }
+  export interface RuntimeHintDetails {
+    /**
+     * One or more strings that Amazon Lex V2 should look for in the input to the bot. Each phrase is given preference when deciding on slot values.
+     */
+    runtimeHintValues: RuntimeHintValuesList;
+  }
+  export type RuntimeHintPhrase = string;
+  export interface RuntimeHintValue {
+    /**
+     * The phrase that Amazon Lex V2 should look for in the user's input to the bot.
+     */
+    phrase: RuntimeHintPhrase;
+  }
+  export type RuntimeHintValuesList = RuntimeHintValue[];
+  export interface RuntimeHints {
+    /**
+     * A list of the slots in the intent that should have runtime hints added, and the phrases that should be added for each slot. The first level of the slotHints map is the name of the intent. The second level is the name of the slot within the intent. For more information, see Using hints to improve accuracy. The intent name and slot name must exist.
+     */
+    slotHints?: SlotHintsIntentMap;
   }
   export type SensitiveNonEmptyString = string;
   export interface SentimentResponse {
@@ -478,36 +503,52 @@ declare namespace LexRuntimeV2 {
   export type SessionId = string;
   export interface SessionState {
     /**
-     * The next step that Amazon Lex should take in the conversation with a user.
+     * The next step that Amazon Lex V2 should take in the conversation with a user.
      */
     dialogAction?: DialogAction;
     /**
-     * The active intent that Amazon Lex is processing.
+     * The active intent that Amazon Lex V2 is processing.
      */
     intent?: Intent;
     /**
-     * One or more contexts that indicate to Amazon Lex the context of a request. When a context is active, Amazon Lex considers intents with the matching context as a trigger as the next intent in a session.
+     * One or more contexts that indicate to Amazon Lex V2 the context of a request. When a context is active, Amazon Lex V2 considers intents with the matching context as a trigger as the next intent in a session.
      */
     activeContexts?: ActiveContextsList;
     /**
-     * Map of key/value pairs representing session-specific context information. It contains application information passed between Amazon Lex and a client application.
+     * Map of key/value pairs representing session-specific context information. It contains application information passed between Amazon Lex V2 and a client application.
      */
     sessionAttributes?: StringMap;
     /**
-     * 
+     * A unique identifier for a specific request.
      */
     originatingRequestId?: NonEmptyString;
+    /**
+     * Hints for phrases that a customer is likely to use for a slot. Amazon Lex V2 uses the hints to help determine the correct value of a slot.
+     */
+    runtimeHints?: RuntimeHints;
   }
+  export type Shape = "Scalar"|"List"|string;
   export interface Slot {
     /**
      * The current value of the slot.
      */
     value?: Value;
+    /**
+     * When the shape value is List, it indicates that the values field contains a list of slot values. When the value is Scalar, it indicates that the value field contains a single value.
+     */
+    shape?: Shape;
+    /**
+     * A list of one or more values that the user provided for the slot. For example, if a for a slot that elicits pizza toppings, the values might be "pepperoni" and "pineapple." 
+     */
+    values?: Values;
   }
+  export type SlotHintsIntentMap = {[key: string]: SlotHintsSlotMap};
+  export type SlotHintsSlotMap = {[key: string]: RuntimeHintDetails};
   export type Slots = {[key: string]: Slot};
   export type String = string;
   export type StringList = NonEmptyString[];
   export type StringMap = {[key: string]: String};
+  export type StyleType = "Default"|"SpellByLetter"|"SpellByWord"|string;
   export type Text = string;
   export interface Value {
     /**
@@ -515,7 +556,7 @@ declare namespace LexRuntimeV2 {
      */
     originalValue?: NonEmptyString;
     /**
-     * The value that Amazon Lex determines for the slot. The actual value depends on the setting of the value selection strategy for the bot. You can choose to use the value entered by the user, or you can have Amazon Lex choose the first value in the resolvedValues list.
+     * The value that Amazon Lex V2 determines for the slot. The actual value depends on the setting of the value selection strategy for the bot. You can choose to use the value entered by the user, or you can have Amazon Lex V2 choose the first value in the resolvedValues list.
      */
     interpretedValue: NonEmptyString;
     /**
@@ -523,6 +564,7 @@ declare namespace LexRuntimeV2 {
      */
     resolvedValues?: StringList;
   }
+  export type Values = Slot[];
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

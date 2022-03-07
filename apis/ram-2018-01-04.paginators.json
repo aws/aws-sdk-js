@@ -25,7 +25,27 @@
       "output_token": "nextToken",
       "limit_key": "maxResults"
     },
+    "ListPermissionVersions": {
+      "input_token": "nextToken",
+      "output_token": "nextToken",
+      "limit_key": "maxResults"
+    },
+    "ListPermissions": {
+      "input_token": "nextToken",
+      "output_token": "nextToken",
+      "limit_key": "maxResults"
+    },
     "ListPrincipals": {
+      "input_token": "nextToken",
+      "output_token": "nextToken",
+      "limit_key": "maxResults"
+    },
+    "ListResourceSharePermissions": {
+      "input_token": "nextToken",
+      "output_token": "nextToken",
+      "limit_key": "maxResults"
+    },
+    "ListResourceTypes": {
       "input_token": "nextToken",
       "output_token": "nextToken",
       "limit_key": "maxResults"

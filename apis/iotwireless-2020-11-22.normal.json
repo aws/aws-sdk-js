@@ -45,6 +45,111 @@
       ],
       "documentation": "<p>Associates a partner account with your AWS account.</p>"
     },
+    "AssociateMulticastGroupWithFuotaTask": {
+      "name": "AssociateMulticastGroupWithFuotaTask",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/fuota-tasks/{Id}/multicast-group",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "AssociateMulticastGroupWithFuotaTaskRequest"
+      },
+      "output": {
+        "shape": "AssociateMulticastGroupWithFuotaTaskResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Associate a multicast group with a FUOTA task.</p>"
+    },
+    "AssociateWirelessDeviceWithFuotaTask": {
+      "name": "AssociateWirelessDeviceWithFuotaTask",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/fuota-tasks/{Id}/wireless-device",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "AssociateWirelessDeviceWithFuotaTaskRequest"
+      },
+      "output": {
+        "shape": "AssociateWirelessDeviceWithFuotaTaskResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Associate a wireless device with a FUOTA task.</p>"
+    },
+    "AssociateWirelessDeviceWithMulticastGroup": {
+      "name": "AssociateWirelessDeviceWithMulticastGroup",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/multicast-groups/{Id}/wireless-device",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "AssociateWirelessDeviceWithMulticastGroupRequest"
+      },
+      "output": {
+        "shape": "AssociateWirelessDeviceWithMulticastGroupResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Associates a wireless device with a multicast group.</p>"
+    },
     "AssociateWirelessDeviceWithThing": {
       "name": "AssociateWirelessDeviceWithThing",
       "http": {
@@ -149,6 +254,41 @@
       ],
       "documentation": "<p>Associates a wireless gateway with a thing.</p>"
     },
+    "CancelMulticastGroupSession": {
+      "name": "CancelMulticastGroupSession",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/multicast-groups/{Id}/session",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "CancelMulticastGroupSessionRequest"
+      },
+      "output": {
+        "shape": "CancelMulticastGroupSessionResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Cancels an existing multicast group session.</p>"
+    },
     "CreateDestination": {
       "name": "CreateDestination",
       "http": {
@@ -215,6 +355,76 @@
         }
       ],
       "documentation": "<p>Creates a new device profile.</p>"
+    },
+    "CreateFuotaTask": {
+      "name": "CreateFuotaTask",
+      "http": {
+        "method": "POST",
+        "requestUri": "/fuota-tasks",
+        "responseCode": 201
+      },
+      "input": {
+        "shape": "CreateFuotaTaskRequest"
+      },
+      "output": {
+        "shape": "CreateFuotaTaskResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Creates a FUOTA task.</p>"
+    },
+    "CreateMulticastGroup": {
+      "name": "CreateMulticastGroup",
+      "http": {
+        "method": "POST",
+        "requestUri": "/multicast-groups",
+        "responseCode": 201
+      },
+      "input": {
+        "shape": "CreateMulticastGroupRequest"
+      },
+      "output": {
+        "shape": "CreateMulticastGroupResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Creates a multicast group.</p>"
     },
     "CreateServiceProfile": {
       "name": "CreateServiceProfile",
@@ -455,6 +665,105 @@
       ],
       "documentation": "<p>Deletes a device profile.</p>"
     },
+    "DeleteFuotaTask": {
+      "name": "DeleteFuotaTask",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/fuota-tasks/{Id}",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "DeleteFuotaTaskRequest"
+      },
+      "output": {
+        "shape": "DeleteFuotaTaskResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Deletes a FUOTA task.</p>"
+    },
+    "DeleteMulticastGroup": {
+      "name": "DeleteMulticastGroup",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/multicast-groups/{Id}",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "DeleteMulticastGroupRequest"
+      },
+      "output": {
+        "shape": "DeleteMulticastGroupResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Deletes a multicast group if it is not in use by a fuota task.</p>"
+    },
+    "DeleteQueuedMessages": {
+      "name": "DeleteQueuedMessages",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/wireless-devices/{Id}/data",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "DeleteQueuedMessagesRequest"
+      },
+      "output": {
+        "shape": "DeleteQueuedMessagesResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        }
+      ],
+      "documentation": "<p> The operation to delete queued messages. </p>"
+    },
     "DeleteServiceProfile": {
       "name": "DeleteServiceProfile",
       "http": {
@@ -647,6 +956,105 @@
       ],
       "documentation": "<p>Disassociates your AWS account from a partner account. If <code>PartnerAccountId</code> and <code>PartnerType</code> are <code>null</code>, disassociates your AWS account from all partner accounts.</p>"
     },
+    "DisassociateMulticastGroupFromFuotaTask": {
+      "name": "DisassociateMulticastGroupFromFuotaTask",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/fuota-tasks/{Id}/multicast-groups/{MulticastGroupId}",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "DisassociateMulticastGroupFromFuotaTaskRequest"
+      },
+      "output": {
+        "shape": "DisassociateMulticastGroupFromFuotaTaskResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Disassociates a multicast group from a fuota task.</p>"
+    },
+    "DisassociateWirelessDeviceFromFuotaTask": {
+      "name": "DisassociateWirelessDeviceFromFuotaTask",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/fuota-tasks/{Id}/wireless-devices/{WirelessDeviceId}",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "DisassociateWirelessDeviceFromFuotaTaskRequest"
+      },
+      "output": {
+        "shape": "DisassociateWirelessDeviceFromFuotaTaskResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Disassociates a wireless device from a FUOTA task.</p>"
+    },
+    "DisassociateWirelessDeviceFromMulticastGroup": {
+      "name": "DisassociateWirelessDeviceFromMulticastGroup",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/multicast-groups/{Id}/wireless-devices/{WirelessDeviceId}",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "DisassociateWirelessDeviceFromMulticastGroupRequest"
+      },
+      "output": {
+        "shape": "DisassociateWirelessDeviceFromMulticastGroupResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Disassociates a wireless device from a multicast group.</p>"
+    },
     "DisassociateWirelessDeviceFromThing": {
       "name": "DisassociateWirelessDeviceFromThing",
       "http": {
@@ -811,6 +1219,163 @@
       ],
       "documentation": "<p>Gets information about a device profile.</p>"
     },
+    "GetFuotaTask": {
+      "name": "GetFuotaTask",
+      "http": {
+        "method": "GET",
+        "requestUri": "/fuota-tasks/{Id}"
+      },
+      "input": {
+        "shape": "GetFuotaTaskRequest"
+      },
+      "output": {
+        "shape": "GetFuotaTaskResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Gets information about a FUOTA task.</p>"
+    },
+    "GetLogLevelsByResourceTypes": {
+      "name": "GetLogLevelsByResourceTypes",
+      "http": {
+        "method": "GET",
+        "requestUri": "/log-levels",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "GetLogLevelsByResourceTypesRequest"
+      },
+      "output": {
+        "shape": "GetLogLevelsByResourceTypesResponse"
+      },
+      "errors": [
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ValidationException"
+        }
+      ],
+      "documentation": "<p>Returns current default log levels or log levels by resource types. Based on resource types, log levels can be for wireless device log options or wireless gateway log options.</p>"
+    },
+    "GetMulticastGroup": {
+      "name": "GetMulticastGroup",
+      "http": {
+        "method": "GET",
+        "requestUri": "/multicast-groups/{Id}"
+      },
+      "input": {
+        "shape": "GetMulticastGroupRequest"
+      },
+      "output": {
+        "shape": "GetMulticastGroupResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Gets information about a multicast group.</p>"
+    },
+    "GetMulticastGroupSession": {
+      "name": "GetMulticastGroupSession",
+      "http": {
+        "method": "GET",
+        "requestUri": "/multicast-groups/{Id}/session"
+      },
+      "input": {
+        "shape": "GetMulticastGroupSessionRequest"
+      },
+      "output": {
+        "shape": "GetMulticastGroupSessionResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Gets information about a multicast group session.</p>"
+    },
+    "GetNetworkAnalyzerConfiguration": {
+      "name": "GetNetworkAnalyzerConfiguration",
+      "http": {
+        "method": "GET",
+        "requestUri": "/network-analyzer-configurations/{ConfigurationName}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "GetNetworkAnalyzerConfigurationRequest"
+      },
+      "output": {
+        "shape": "GetNetworkAnalyzerConfigurationResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Get NetworkAnalyzer configuration.</p>"
+    },
     "GetPartnerAccount": {
       "name": "GetPartnerAccount",
       "http": {
@@ -838,6 +1403,69 @@
         }
       ],
       "documentation": "<p>Gets information about a partner account. If <code>PartnerAccountId</code> and <code>PartnerType</code> are <code>null</code>, returns all partner accounts.</p>"
+    },
+    "GetResourceEventConfiguration": {
+      "name": "GetResourceEventConfiguration",
+      "http": {
+        "method": "GET",
+        "requestUri": "/event-configurations/{Identifier}"
+      },
+      "input": {
+        "shape": "GetResourceEventConfigurationRequest"
+      },
+      "output": {
+        "shape": "GetResourceEventConfigurationResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Get the event configuration for a particular resource identifier.</p>"
+    },
+    "GetResourceLogLevel": {
+      "name": "GetResourceLogLevel",
+      "http": {
+        "method": "GET",
+        "requestUri": "/log-levels/{ResourceIdentifier}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "GetResourceLogLevelRequest"
+      },
+      "output": {
+        "shape": "GetResourceLogLevelResponse"
+      },
+      "errors": [
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ValidationException"
+        }
+      ],
+      "documentation": "<p>Fetches the log-level override, if any, for a given resource-ID and resource-type. It can be used for a wireless device or a wireless gateway.</p>"
     },
     "GetServiceEndpoint": {
       "name": "GetServiceEndpoint",
@@ -1204,6 +1832,93 @@
       ],
       "documentation": "<p>Lists the device profiles registered to your AWS account.</p>"
     },
+    "ListFuotaTasks": {
+      "name": "ListFuotaTasks",
+      "http": {
+        "method": "GET",
+        "requestUri": "/fuota-tasks"
+      },
+      "input": {
+        "shape": "ListFuotaTasksRequest"
+      },
+      "output": {
+        "shape": "ListFuotaTasksResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Lists the FUOTA tasks registered to your AWS account.</p>"
+    },
+    "ListMulticastGroups": {
+      "name": "ListMulticastGroups",
+      "http": {
+        "method": "GET",
+        "requestUri": "/multicast-groups"
+      },
+      "input": {
+        "shape": "ListMulticastGroupsRequest"
+      },
+      "output": {
+        "shape": "ListMulticastGroupsResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Lists the multicast groups registered to your AWS account.</p>"
+    },
+    "ListMulticastGroupsByFuotaTask": {
+      "name": "ListMulticastGroupsByFuotaTask",
+      "http": {
+        "method": "GET",
+        "requestUri": "/fuota-tasks/{Id}/multicast-groups"
+      },
+      "input": {
+        "shape": "ListMulticastGroupsByFuotaTaskRequest"
+      },
+      "output": {
+        "shape": "ListMulticastGroupsByFuotaTaskResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>List all multicast groups associated with a fuota task.</p>"
+    },
     "ListPartnerAccounts": {
       "name": "ListPartnerAccounts",
       "http": {
@@ -1231,6 +1946,37 @@
         }
       ],
       "documentation": "<p>Lists the partner accounts associated with your AWS account.</p>"
+    },
+    "ListQueuedMessages": {
+      "name": "ListQueuedMessages",
+      "http": {
+        "method": "GET",
+        "requestUri": "/wireless-devices/{Id}/data"
+      },
+      "input": {
+        "shape": "ListQueuedMessagesRequest"
+      },
+      "output": {
+        "shape": "ListQueuedMessagesResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        }
+      ],
+      "documentation": "<p>The operation to list queued messages. </p>"
     },
     "ListServiceProfiles": {
       "name": "ListServiceProfiles",
@@ -1375,6 +2121,137 @@
       ],
       "documentation": "<p>Lists the wireless gateways registered to your AWS account.</p>"
     },
+    "PutResourceLogLevel": {
+      "name": "PutResourceLogLevel",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/log-levels/{ResourceIdentifier}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "PutResourceLogLevelRequest"
+      },
+      "output": {
+        "shape": "PutResourceLogLevelResponse"
+      },
+      "errors": [
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ValidationException"
+        }
+      ],
+      "documentation": "<p>Sets the log-level override for a resource-ID and resource-type. This option can be specified for a wireless gateway or a wireless device. A limit of 200 log level override can be set per account.</p>"
+    },
+    "ResetAllResourceLogLevels": {
+      "name": "ResetAllResourceLogLevels",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/log-levels",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "ResetAllResourceLogLevelsRequest"
+      },
+      "output": {
+        "shape": "ResetAllResourceLogLevelsResponse"
+      },
+      "errors": [
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ValidationException"
+        }
+      ],
+      "documentation": "<p>Removes the log-level overrides for all resources; both wireless devices and wireless gateways.</p>"
+    },
+    "ResetResourceLogLevel": {
+      "name": "ResetResourceLogLevel",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/log-levels/{ResourceIdentifier}",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "ResetResourceLogLevelRequest"
+      },
+      "output": {
+        "shape": "ResetResourceLogLevelResponse"
+      },
+      "errors": [
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ValidationException"
+        }
+      ],
+      "documentation": "<p>Removes the log-level override, if any, for a specific resource-ID and resource-type. It can be used for a wireless device or a wireless gateway.</p>"
+    },
+    "SendDataToMulticastGroup": {
+      "name": "SendDataToMulticastGroup",
+      "http": {
+        "method": "POST",
+        "requestUri": "/multicast-groups/{Id}/data",
+        "responseCode": 201
+      },
+      "input": {
+        "shape": "SendDataToMulticastGroupRequest"
+      },
+      "output": {
+        "shape": "SendDataToMulticastGroupResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Sends the specified data to a multicast group.</p>"
+    },
     "SendDataToWirelessDevice": {
       "name": "SendDataToWirelessDevice",
       "http": {
@@ -1403,6 +2280,140 @@
         }
       ],
       "documentation": "<p>Sends a decrypted application data frame to a device.</p>"
+    },
+    "StartBulkAssociateWirelessDeviceWithMulticastGroup": {
+      "name": "StartBulkAssociateWirelessDeviceWithMulticastGroup",
+      "http": {
+        "method": "PATCH",
+        "requestUri": "/multicast-groups/{Id}/bulk",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "StartBulkAssociateWirelessDeviceWithMulticastGroupRequest"
+      },
+      "output": {
+        "shape": "StartBulkAssociateWirelessDeviceWithMulticastGroupResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Starts a bulk association of all qualifying wireless devices with a multicast group.</p>"
+    },
+    "StartBulkDisassociateWirelessDeviceFromMulticastGroup": {
+      "name": "StartBulkDisassociateWirelessDeviceFromMulticastGroup",
+      "http": {
+        "method": "POST",
+        "requestUri": "/multicast-groups/{Id}/bulk",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "StartBulkDisassociateWirelessDeviceFromMulticastGroupRequest"
+      },
+      "output": {
+        "shape": "StartBulkDisassociateWirelessDeviceFromMulticastGroupResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Starts a bulk disassociatin of all qualifying wireless devices from a multicast group.</p>"
+    },
+    "StartFuotaTask": {
+      "name": "StartFuotaTask",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/fuota-tasks/{Id}",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "StartFuotaTaskRequest"
+      },
+      "output": {
+        "shape": "StartFuotaTaskResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Starts a FUOTA task.</p>"
+    },
+    "StartMulticastGroupSession": {
+      "name": "StartMulticastGroupSession",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/multicast-groups/{Id}/session",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "StartMulticastGroupSessionRequest"
+      },
+      "output": {
+        "shape": "StartMulticastGroupSessionResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Starts a multicast group session.</p>"
     },
     "TagResource": {
       "name": "TagResource",
@@ -1532,6 +2543,143 @@
       ],
       "documentation": "<p>Updates properties of a destination.</p>"
     },
+    "UpdateFuotaTask": {
+      "name": "UpdateFuotaTask",
+      "http": {
+        "method": "PATCH",
+        "requestUri": "/fuota-tasks/{Id}",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "UpdateFuotaTaskRequest"
+      },
+      "output": {
+        "shape": "UpdateFuotaTaskResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Updates properties of a FUOTA task.</p>"
+    },
+    "UpdateLogLevelsByResourceTypes": {
+      "name": "UpdateLogLevelsByResourceTypes",
+      "http": {
+        "method": "POST",
+        "requestUri": "/log-levels",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "UpdateLogLevelsByResourceTypesRequest"
+      },
+      "output": {
+        "shape": "UpdateLogLevelsByResourceTypesResponse"
+      },
+      "errors": [
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ValidationException"
+        }
+      ],
+      "documentation": "<p>Set default log level, or log levels by resource types. This can be for wireless device log options or wireless gateways log options and is used to control the log messages that'll be displayed in CloudWatch.</p>"
+    },
+    "UpdateMulticastGroup": {
+      "name": "UpdateMulticastGroup",
+      "http": {
+        "method": "PATCH",
+        "requestUri": "/multicast-groups/{Id}",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "UpdateMulticastGroupRequest"
+      },
+      "output": {
+        "shape": "UpdateMulticastGroupResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Updates properties of a multicast group session.</p>"
+    },
+    "UpdateNetworkAnalyzerConfiguration": {
+      "name": "UpdateNetworkAnalyzerConfiguration",
+      "http": {
+        "method": "PATCH",
+        "requestUri": "/network-analyzer-configurations/{ConfigurationName}",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "UpdateNetworkAnalyzerConfigurationRequest"
+      },
+      "output": {
+        "shape": "UpdateNetworkAnalyzerConfigurationResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Update NetworkAnalyzer configuration.</p>"
+    },
     "UpdatePartnerAccount": {
       "name": "UpdatePartnerAccount",
       "http": {
@@ -1560,6 +2708,41 @@
         }
       ],
       "documentation": "<p>Updates properties of a partner account.</p>"
+    },
+    "UpdateResourceEventConfiguration": {
+      "name": "UpdateResourceEventConfiguration",
+      "http": {
+        "method": "PATCH",
+        "requestUri": "/event-configurations/{Identifier}",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "UpdateResourceEventConfigurationRequest"
+      },
+      "output": {
+        "shape": "UpdateResourceEventConfigurationResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Update the event configuration for a particular resource identifier.</p>"
     },
     "UpdateWirelessDevice": {
       "name": "UpdateWirelessDevice",
@@ -1663,6 +2846,7 @@
     },
     "AmazonId": {
       "type": "string",
+      "documentation": "<p>The Sidewalk Amazon ID.</p>",
       "max": 2048
     },
     "AmazonResourceName": {
@@ -1722,6 +2906,69 @@
           "documentation": "<p>The Amazon Resource Name of the resource.</p>"
         }
       }
+    },
+    "AssociateMulticastGroupWithFuotaTaskRequest": {
+      "type": "structure",
+      "required": [
+        "Id",
+        "MulticastGroupId"
+      ],
+      "members": {
+        "Id": {
+          "shape": "FuotaTaskId",
+          "location": "uri",
+          "locationName": "Id"
+        },
+        "MulticastGroupId": {
+          "shape": "MulticastGroupId"
+        }
+      }
+    },
+    "AssociateMulticastGroupWithFuotaTaskResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "AssociateWirelessDeviceWithFuotaTaskRequest": {
+      "type": "structure",
+      "required": [
+        "Id",
+        "WirelessDeviceId"
+      ],
+      "members": {
+        "Id": {
+          "shape": "FuotaTaskId",
+          "location": "uri",
+          "locationName": "Id"
+        },
+        "WirelessDeviceId": {
+          "shape": "WirelessDeviceId"
+        }
+      }
+    },
+    "AssociateWirelessDeviceWithFuotaTaskResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "AssociateWirelessDeviceWithMulticastGroupRequest": {
+      "type": "structure",
+      "required": [
+        "Id",
+        "WirelessDeviceId"
+      ],
+      "members": {
+        "Id": {
+          "shape": "MulticastGroupId",
+          "location": "uri",
+          "locationName": "Id"
+        },
+        "WirelessDeviceId": {
+          "shape": "WirelessDeviceId"
+        }
+      }
+    },
+    "AssociateWirelessDeviceWithMulticastGroupResponse": {
+      "type": "structure",
+      "members": {}
     },
     "AssociateWirelessDeviceWithThingRequest": {
       "type": "structure",
@@ -1809,6 +3056,23 @@
         "critical"
       ]
     },
+    "CancelMulticastGroupSessionRequest": {
+      "type": "structure",
+      "required": [
+        "Id"
+      ],
+      "members": {
+        "Id": {
+          "shape": "MulticastGroupId",
+          "location": "uri",
+          "locationName": "Id"
+        }
+      }
+    },
+    "CancelMulticastGroupSessionResponse": {
+      "type": "structure",
+      "members": {}
+    },
     "CertificateList": {
       "type": "structure",
       "required": [
@@ -1855,6 +3119,7 @@
     },
     "ClientRequestToken": {
       "type": "string",
+      "documentation": "<p>Each resource must have a unique client request token. If you try to create a new resource with the same token as a resource that already exists, an exception occurs. If you omit this value, AWS SDKs will automatically generate a unique client request.</p>",
       "max": 64,
       "min": 1,
       "pattern": "^[a-zA-Z0-9-_]+$"
@@ -1956,6 +3221,85 @@
         "Id": {
           "shape": "DeviceProfileId",
           "documentation": "<p>The ID of the new device profile.</p>"
+        }
+      }
+    },
+    "CreateFuotaTaskRequest": {
+      "type": "structure",
+      "required": [
+        "FirmwareUpdateImage",
+        "FirmwareUpdateRole"
+      ],
+      "members": {
+        "Name": {
+          "shape": "FuotaTaskName"
+        },
+        "Description": {
+          "shape": "Description"
+        },
+        "ClientRequestToken": {
+          "shape": "ClientRequestToken",
+          "idempotencyToken": true
+        },
+        "LoRaWAN": {
+          "shape": "LoRaWANFuotaTask"
+        },
+        "FirmwareUpdateImage": {
+          "shape": "FirmwareUpdateImage"
+        },
+        "FirmwareUpdateRole": {
+          "shape": "FirmwareUpdateRole"
+        },
+        "Tags": {
+          "shape": "TagList"
+        }
+      }
+    },
+    "CreateFuotaTaskResponse": {
+      "type": "structure",
+      "members": {
+        "Arn": {
+          "shape": "FuotaTaskArn"
+        },
+        "Id": {
+          "shape": "FuotaTaskId"
+        }
+      }
+    },
+    "CreateMulticastGroupRequest": {
+      "type": "structure",
+      "required": [
+        "LoRaWAN"
+      ],
+      "members": {
+        "Name": {
+          "shape": "MulticastGroupName"
+        },
+        "Description": {
+          "shape": "Description",
+          "documentation": "<p>The description of the multicast group.</p>"
+        },
+        "ClientRequestToken": {
+          "shape": "ClientRequestToken",
+          "documentation": "<p>Each resource must have a unique client request token. If you try to create a new resource with the same token as a resource that already exists, an exception occurs. If you omit this value, AWS SDKs will automatically generate a unique client request. </p>",
+          "idempotencyToken": true
+        },
+        "LoRaWAN": {
+          "shape": "LoRaWANMulticast"
+        },
+        "Tags": {
+          "shape": "TagList"
+        }
+      }
+    },
+    "CreateMulticastGroupResponse": {
+      "type": "structure",
+      "members": {
+        "Arn": {
+          "shape": "MulticastGroupArn"
+        },
+        "Id": {
+          "shape": "MulticastGroupId"
         }
       }
     },
@@ -2161,6 +3505,10 @@
         }
       }
     },
+    "CreatedAt": {
+      "type": "timestamp",
+      "documentation": "<p>Created at timestamp for the resource.</p>"
+    },
     "DeleteDestinationRequest": {
       "type": "structure",
       "required": [
@@ -2194,6 +3542,71 @@
       }
     },
     "DeleteDeviceProfileResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "DeleteFuotaTaskRequest": {
+      "type": "structure",
+      "required": [
+        "Id"
+      ],
+      "members": {
+        "Id": {
+          "shape": "FuotaTaskId",
+          "location": "uri",
+          "locationName": "Id"
+        }
+      }
+    },
+    "DeleteFuotaTaskResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "DeleteMulticastGroupRequest": {
+      "type": "structure",
+      "required": [
+        "Id"
+      ],
+      "members": {
+        "Id": {
+          "shape": "MulticastGroupId",
+          "location": "uri",
+          "locationName": "Id"
+        }
+      }
+    },
+    "DeleteMulticastGroupResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "DeleteQueuedMessagesRequest": {
+      "type": "structure",
+      "required": [
+        "Id",
+        "MessageId"
+      ],
+      "members": {
+        "Id": {
+          "shape": "WirelessDeviceId",
+          "documentation": "<p>Id of a given wireless device which messages will be deleted </p>",
+          "location": "uri",
+          "locationName": "Id"
+        },
+        "MessageId": {
+          "shape": "MessageId",
+          "documentation": "<p>if messageID==\"*\", the queue for a particular wireless deviceId will be purged, otherwise, the specific message with messageId will be deleted </p>",
+          "location": "querystring",
+          "locationName": "messageId"
+        },
+        "WirelessDeviceType": {
+          "shape": "WirelessDeviceType",
+          "documentation": "<p>The wireless device type, it is either Sidewalk or LoRaWAN. </p>",
+          "location": "querystring",
+          "locationName": "WirelessDeviceType"
+        }
+      }
+    },
+    "DeleteQueuedMessagesResponse": {
       "type": "structure",
       "members": {}
     },
@@ -2289,6 +3702,7 @@
     },
     "Description": {
       "type": "string",
+      "documentation": "<p>The description of the new resource.</p>",
       "max": 2048
     },
     "DestinationArn": {
@@ -2390,6 +3804,16 @@
       "type": "string",
       "max": 256
     },
+    "DeviceRegistrationStateEventConfiguration": {
+      "type": "structure",
+      "members": {
+        "Sidewalk": {
+          "shape": "SidewalkEventNotificationConfigurations",
+          "documentation": "<p>Device registration state event configuration object for enabling or disabling Sidewalk related event topics.</p>"
+        }
+      },
+      "documentation": "<p>Device registration state event configuration object for enabling and disabling relevant topics.</p>"
+    },
     "DeviceState": {
       "type": "string",
       "documentation": "<p>Device state defines the device status of sidewalk device.</p>",
@@ -2422,6 +3846,75 @@
       }
     },
     "DisassociateAwsAccountFromPartnerAccountResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "DisassociateMulticastGroupFromFuotaTaskRequest": {
+      "type": "structure",
+      "required": [
+        "Id",
+        "MulticastGroupId"
+      ],
+      "members": {
+        "Id": {
+          "shape": "FuotaTaskId",
+          "location": "uri",
+          "locationName": "Id"
+        },
+        "MulticastGroupId": {
+          "shape": "MulticastGroupId",
+          "location": "uri",
+          "locationName": "MulticastGroupId"
+        }
+      }
+    },
+    "DisassociateMulticastGroupFromFuotaTaskResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "DisassociateWirelessDeviceFromFuotaTaskRequest": {
+      "type": "structure",
+      "required": [
+        "Id",
+        "WirelessDeviceId"
+      ],
+      "members": {
+        "Id": {
+          "shape": "FuotaTaskId",
+          "location": "uri",
+          "locationName": "Id"
+        },
+        "WirelessDeviceId": {
+          "shape": "WirelessDeviceId",
+          "location": "uri",
+          "locationName": "WirelessDeviceId"
+        }
+      }
+    },
+    "DisassociateWirelessDeviceFromFuotaTaskResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "DisassociateWirelessDeviceFromMulticastGroupRequest": {
+      "type": "structure",
+      "required": [
+        "Id",
+        "WirelessDeviceId"
+      ],
+      "members": {
+        "Id": {
+          "shape": "MulticastGroupId",
+          "location": "uri",
+          "locationName": "Id"
+        },
+        "WirelessDeviceId": {
+          "shape": "WirelessDeviceId",
+          "location": "uri",
+          "locationName": "WirelessDeviceId"
+        }
+      }
+    },
+    "DisassociateWirelessDeviceFromMulticastGroupResponse": {
       "type": "structure",
       "members": {}
     },
@@ -2484,6 +3977,27 @@
       "max": 2147483647,
       "min": 0
     },
+    "DlClass": {
+      "type": "string",
+      "documentation": "<p>DlClass for LoRaWAM, valid values are ClassB and ClassC.</p>",
+      "enum": [
+        "ClassB",
+        "ClassC"
+      ],
+      "max": 256
+    },
+    "DlDr": {
+      "type": "integer",
+      "documentation": "<p>Downlink data rate.</p>",
+      "max": 15,
+      "min": 0
+    },
+    "DlFreq": {
+      "type": "integer",
+      "documentation": "<p>Downlink frequency.</p>",
+      "max": 1000000000,
+      "min": 100000000
+    },
     "DlRate": {
       "type": "integer",
       "max": 2147483647,
@@ -2495,6 +4009,33 @@
     },
     "Double": {
       "type": "double"
+    },
+    "DownlinkQueueMessage": {
+      "type": "structure",
+      "members": {
+        "MessageId": {
+          "shape": "MessageId",
+          "documentation": "<p> The messageId allocated by IoT Wireless for tracing purpose</p>"
+        },
+        "TransmitMode": {
+          "shape": "TransmitMode",
+          "documentation": "<p>The transmit mode to use to send data to the wireless device. Can be: <code>0</code> for UM (unacknowledge mode) or <code>1</code> for AM (acknowledge mode).</p>"
+        },
+        "ReceivedAt": {
+          "shape": "ISODateTimeString",
+          "documentation": "<p>The timestamp that Iot Wireless received the message.</p>"
+        },
+        "LoRaWAN": {
+          "shape": "LoRaWANSendDataToDevice"
+        }
+      },
+      "documentation": "<p>The message in downlink queue.</p>"
+    },
+    "DownlinkQueueMessagesList": {
+      "type": "list",
+      "member": {
+        "shape": "DownlinkQueueMessage"
+      }
     },
     "DrMax": {
       "type": "integer",
@@ -2522,6 +4063,19 @@
         "passthrough"
       ]
     },
+    "EventNotificationPartnerType": {
+      "type": "string",
+      "enum": [
+        "Sidewalk"
+      ]
+    },
+    "EventNotificationTopicStatus": {
+      "type": "string",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ]
+    },
     "Expression": {
       "type": "string",
       "max": 2048
@@ -2539,8 +4093,24 @@
     },
     "FPort": {
       "type": "integer",
+      "documentation": "<p>The Fport value.</p>",
       "max": 223,
       "min": 1
+    },
+    "FPorts": {
+      "type": "structure",
+      "members": {
+        "Fuota": {
+          "shape": "FPort"
+        },
+        "Multicast": {
+          "shape": "FPort"
+        },
+        "ClockSync": {
+          "shape": "FPort"
+        }
+      },
+      "documentation": "<p>List of FPort assigned for different LoRaWAN application packages to use</p>"
     },
     "FactoryPresetFreqsList": {
       "type": "list",
@@ -2557,9 +4127,90 @@
       "pattern": "[a-fA-F0-9]{64}",
       "sensitive": true
     },
+    "FirmwareUpdateImage": {
+      "type": "string",
+      "documentation": "<p>The S3 URI points to a firmware update image that is to be used with a FUOTA task.</p>",
+      "max": 4096,
+      "min": 1
+    },
+    "FirmwareUpdateRole": {
+      "type": "string",
+      "documentation": "<p>The firmware update role that is to be used with a FUOTA task.</p>",
+      "max": 2048,
+      "min": 1
+    },
+    "FuotaDeviceStatus": {
+      "type": "string",
+      "documentation": "<p>The status of a wireless device in a FUOTA task.</p>",
+      "enum": [
+        "Initial",
+        "Package_Not_Supported",
+        "FragAlgo_unsupported",
+        "Not_enough_memory",
+        "FragIndex_unsupported",
+        "Wrong_descriptor",
+        "SessionCnt_replay",
+        "MissingFrag",
+        "MemoryError",
+        "MICError",
+        "Successful"
+      ]
+    },
+    "FuotaTask": {
+      "type": "structure",
+      "members": {
+        "Id": {
+          "shape": "FuotaTaskId"
+        },
+        "Arn": {
+          "shape": "FuotaTaskArn"
+        },
+        "Name": {
+          "shape": "FuotaTaskName"
+        }
+      },
+      "documentation": "<p>A FUOTA task.</p>"
+    },
+    "FuotaTaskArn": {
+      "type": "string",
+      "documentation": "<p>The arn of a FUOTA task.</p>",
+      "max": 128
+    },
+    "FuotaTaskId": {
+      "type": "string",
+      "documentation": "<p>The ID of a FUOTA task.</p>",
+      "max": 256
+    },
+    "FuotaTaskList": {
+      "type": "list",
+      "member": {
+        "shape": "FuotaTask"
+      },
+      "documentation": "<p>Lists the FUOTA tasks registered to your AWS account.</p>"
+    },
+    "FuotaTaskName": {
+      "type": "string",
+      "documentation": "<p>The name of a FUOTA task.</p>",
+      "max": 256
+    },
+    "FuotaTaskStatus": {
+      "type": "string",
+      "documentation": "<p>The status of a FUOTA task.</p>",
+      "enum": [
+        "Pending",
+        "FuotaSession_Waiting",
+        "In_FuotaSession",
+        "FuotaDone",
+        "Delete_Waiting"
+      ]
+    },
     "GatewayEui": {
       "type": "string",
       "pattern": "^(([0-9A-Fa-f]{2}-){7}|([0-9A-Fa-f]{2}:){7}|([0-9A-Fa-f]{2}\\s){7}|([0-9A-Fa-f]{2}){7})([0-9A-Fa-f]{2})$"
+    },
+    "GenAppKey": {
+      "type": "string",
+      "pattern": "[a-fA-F0-9]{32}"
     },
     "GetDestinationRequest": {
       "type": "structure",
@@ -2639,6 +4290,158 @@
         }
       }
     },
+    "GetFuotaTaskRequest": {
+      "type": "structure",
+      "required": [
+        "Id"
+      ],
+      "members": {
+        "Id": {
+          "shape": "FuotaTaskId",
+          "location": "uri",
+          "locationName": "Id"
+        }
+      }
+    },
+    "GetFuotaTaskResponse": {
+      "type": "structure",
+      "members": {
+        "Arn": {
+          "shape": "FuotaTaskArn"
+        },
+        "Id": {
+          "shape": "FuotaTaskId"
+        },
+        "Status": {
+          "shape": "FuotaTaskStatus"
+        },
+        "Name": {
+          "shape": "FuotaTaskName"
+        },
+        "Description": {
+          "shape": "Description"
+        },
+        "LoRaWAN": {
+          "shape": "LoRaWANFuotaTaskGetInfo"
+        },
+        "FirmwareUpdateImage": {
+          "shape": "FirmwareUpdateImage"
+        },
+        "FirmwareUpdateRole": {
+          "shape": "FirmwareUpdateRole"
+        },
+        "CreatedAt": {
+          "shape": "CreatedAt"
+        }
+      }
+    },
+    "GetLogLevelsByResourceTypesRequest": {
+      "type": "structure",
+      "members": {}
+    },
+    "GetLogLevelsByResourceTypesResponse": {
+      "type": "structure",
+      "members": {
+        "DefaultLogLevel": {
+          "shape": "LogLevel"
+        },
+        "WirelessGatewayLogOptions": {
+          "shape": "WirelessGatewayLogOptionList"
+        },
+        "WirelessDeviceLogOptions": {
+          "shape": "WirelessDeviceLogOptionList"
+        }
+      }
+    },
+    "GetMulticastGroupRequest": {
+      "type": "structure",
+      "required": [
+        "Id"
+      ],
+      "members": {
+        "Id": {
+          "shape": "MulticastGroupId",
+          "location": "uri",
+          "locationName": "Id"
+        }
+      }
+    },
+    "GetMulticastGroupResponse": {
+      "type": "structure",
+      "members": {
+        "Arn": {
+          "shape": "MulticastGroupArn"
+        },
+        "Id": {
+          "shape": "MulticastGroupId"
+        },
+        "Name": {
+          "shape": "MulticastGroupName"
+        },
+        "Description": {
+          "shape": "Description"
+        },
+        "Status": {
+          "shape": "MulticastGroupStatus"
+        },
+        "LoRaWAN": {
+          "shape": "LoRaWANMulticastGet"
+        },
+        "CreatedAt": {
+          "shape": "CreatedAt"
+        }
+      }
+    },
+    "GetMulticastGroupSessionRequest": {
+      "type": "structure",
+      "required": [
+        "Id"
+      ],
+      "members": {
+        "Id": {
+          "shape": "MulticastGroupId",
+          "location": "uri",
+          "locationName": "Id"
+        }
+      }
+    },
+    "GetMulticastGroupSessionResponse": {
+      "type": "structure",
+      "members": {
+        "LoRaWAN": {
+          "shape": "LoRaWANMulticastSession"
+        }
+      }
+    },
+    "GetNetworkAnalyzerConfigurationRequest": {
+      "type": "structure",
+      "required": [
+        "ConfigurationName"
+      ],
+      "members": {
+        "ConfigurationName": {
+          "shape": "NetworkAnalyzerConfigurationName",
+          "location": "uri",
+          "locationName": "ConfigurationName"
+        }
+      }
+    },
+    "GetNetworkAnalyzerConfigurationResponse": {
+      "type": "structure",
+      "members": {
+        "TraceContent": {
+          "shape": "TraceContent"
+        },
+        "WirelessDevices": {
+          "shape": "WirelessDeviceList",
+          "documentation": "<p>List of WirelessDevices in the NetworkAnalyzerConfiguration.</p>"
+        },
+        "WirelessGateways": {
+          "shape": "WirelessGatewayList",
+          "documentation": "<p>List of WirelessGateways in the NetworkAnalyzerConfiguration.</p>"
+        }
+      }
+    },
     "GetPartnerAccountRequest": {
       "type": "structure",
       "required": [
@@ -2670,6 +4473,74 @@
         "AccountLinked": {
           "shape": "AccountLinked",
           "documentation": "<p>Whether the partner account is linked to the AWS account.</p>"
+        }
+      }
+    },
+    "GetResourceEventConfigurationRequest": {
+      "type": "structure",
+      "required": [
+        "Identifier",
+        "IdentifierType"
+      ],
+      "members": {
+        "Identifier": {
+          "shape": "Identifier",
+          "documentation": "<p>Resource identifier to opt in for event messaging.</p>",
+          "location": "uri",
+          "locationName": "Identifier"
+        },
+        "IdentifierType": {
+          "shape": "IdentifierType",
+          "documentation": "<p>Identifier type of the particular resource identifier for event configuration.</p>",
+          "location": "querystring",
+          "locationName": "identifierType"
+        },
+        "PartnerType": {
+          "shape": "EventNotificationPartnerType",
+          "documentation": "<p>Partner type of the resource if the identifier type is PartnerAccountId.</p>",
+          "location": "querystring",
+          "locationName": "partnerType"
+        }
+      }
+    },
+    "GetResourceEventConfigurationResponse": {
+      "type": "structure",
+      "members": {
+        "DeviceRegistrationState": {
+          "shape": "DeviceRegistrationStateEventConfiguration",
+          "documentation": "<p>Event configuration for the device registration state event</p>"
+        },
+        "Proximity": {
+          "shape": "ProximityEventConfiguration",
+          "documentation": "<p>Event configuration for the Proximity event</p>"
+        }
+      }
+    },
+    "GetResourceLogLevelRequest": {
+      "type": "structure",
+      "required": [
+        "ResourceIdentifier",
+        "ResourceType"
+      ],
+      "members": {
+        "ResourceIdentifier": {
+          "shape": "ResourceIdentifier",
+          "location": "uri",
+          "locationName": "ResourceIdentifier"
+        },
+        "ResourceType": {
+          "shape": "ResourceType",
+          "documentation": "<p>The type of the resource, which can be <code>WirelessDevice</code> or <code>WirelessGateway</code>.</p>",
+          "location": "querystring",
+          "locationName": "resourceType"
+        }
+      }
+    },
+    "GetResourceLogLevelResponse": {
+      "type": "structure",
+      "members": {
+        "LogLevel": {
+          "shape": "LogLevel"
         }
       }
     },
@@ -3057,6 +4928,12 @@
       "type": "string",
       "max": 256
     },
+    "IdentifierType": {
+      "type": "string",
+      "enum": [
+        "PartnerAccountId"
+      ]
+    },
     "Integer": {
       "type": "integer"
     },
@@ -3068,6 +4945,24 @@
     "JoinEui": {
       "type": "string",
       "pattern": "[a-fA-F0-9]{16}"
+    },
+    "JoinEuiFilters": {
+      "type": "list",
+      "member": {
+        "shape": "JoinEuiRange"
+      },
+      "documentation": "<p>A list of JoinEuiRange used by LoRa gateways to filter LoRa frames.</p>",
+      "max": 3,
+      "min": 0
+    },
+    "JoinEuiRange": {
+      "type": "list",
+      "member": {
+        "shape": "JoinEui"
+      },
+      "documentation": "<p>A pair of join EUI describing a range [BegEui, EndEui], both ends are inclusive.</p>",
+      "max": 2,
+      "min": 2
     },
     "ListDestinationsRequest": {
       "type": "structure",
@@ -3129,6 +5024,98 @@
         }
       }
     },
+    "ListFuotaTasksRequest": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>To retrieve the next set of results, the <code>nextToken</code> value from a previous response; otherwise <b>null</b> to receive the first set of results.</p>",
+          "location": "querystring",
+          "locationName": "nextToken"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "location": "querystring",
+          "locationName": "maxResults"
+        }
+      }
+    },
+    "ListFuotaTasksResponse": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>To retrieve the next set of results, the <code>nextToken</code> value from a previous response; otherwise <b>null</b> to receive the first set of results.</p>"
+        },
+        "FuotaTaskList": {
+          "shape": "FuotaTaskList"
+        }
+      }
+    },
+    "ListMulticastGroupsByFuotaTaskRequest": {
+      "type": "structure",
+      "required": [
+        "Id"
+      ],
+      "members": {
+        "Id": {
+          "shape": "FuotaTaskId",
+          "location": "uri",
+          "locationName": "Id"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>To retrieve the next set of results, the <code>nextToken</code> value from a previous response; otherwise <b>null</b> to receive the first set of results.</p>",
+          "location": "querystring",
+          "locationName": "nextToken"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "location": "querystring",
+          "locationName": "maxResults"
+        }
+      }
+    },
+    "ListMulticastGroupsByFuotaTaskResponse": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>To retrieve the next set of results, the <code>nextToken</code> value from a previous response; otherwise <b>null</b> to receive the first set of results.</p>"
+        },
+        "MulticastGroupList": {
+          "shape": "MulticastGroupListByFuotaTask"
+        }
+      }
+    },
+    "ListMulticastGroupsRequest": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>To retrieve the next set of results, the <code>nextToken</code> value from a previous response; otherwise <b>null</b> to receive the first set of results.</p>",
+          "location": "querystring",
+          "locationName": "nextToken"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "location": "querystring",
+          "locationName": "maxResults"
+        }
+      }
+    },
+    "ListMulticastGroupsResponse": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>To retrieve the next set of results, the <code>nextToken</code> value from a previous response; otherwise <b>null</b> to receive the first set of results.</p>"
+        },
+        "MulticastGroupList": {
+          "shape": "MulticastGroupList"
+        }
+      }
+    },
     "ListPartnerAccountsRequest": {
       "type": "structure",
       "members": {
@@ -3156,6 +5143,51 @@
         "Sidewalk": {
           "shape": "SidewalkAccountList",
           "documentation": "<p>The Sidewalk account credentials.</p>"
+        }
+      }
+    },
+    "ListQueuedMessagesRequest": {
+      "type": "structure",
+      "required": [
+        "Id"
+      ],
+      "members": {
+        "Id": {
+          "shape": "WirelessDeviceId",
+          "documentation": "<p>Id of a given wireless device which the downlink packets are targeted </p>",
+          "location": "uri",
+          "locationName": "Id"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>To retrieve the next set of results, the <code>nextToken</code> value from a previous response; otherwise <b>null</b> to receive the first set of results.</p>",
+          "location": "querystring",
+          "locationName": "nextToken"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of results to return in this operation.</p>",
+          "location": "querystring",
+          "locationName": "maxResults"
+        },
+        "WirelessDeviceType": {
+          "shape": "WirelessDeviceType",
+          "documentation": "<p>The wireless device type, it is either Sidewalk or LoRaWAN.</p>",
+          "location": "querystring",
+          "locationName": "WirelessDeviceType"
+        }
+      }
+    },
+    "ListQueuedMessagesResponse": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>To retrieve the next set of results, the <code>nextToken</code> value from a previous response; otherwise <b>null</b> to receive the first set of results.</p>"
+        },
+        "DownlinkQueueMessagesList": {
+          "shape": "DownlinkQueueMessagesList",
+          "documentation": "<p>The messages in downlink queue.</p>"
         }
       }
     },
@@ -3250,6 +5282,16 @@
           "documentation": "<p>A filter to list only the wireless devices that use this wireless device type.</p>",
           "location": "querystring",
           "locationName": "wirelessDeviceType"
+        },
+        "FuotaTaskId": {
+          "shape": "FuotaTaskId",
+          "location": "querystring",
+          "locationName": "fuotaTaskId"
+        },
+        "MulticastGroupId": {
+          "shape": "MulticastGroupId",
+          "location": "querystring",
+          "locationName": "multicastGroupId"
         }
       }
     },
@@ -3362,6 +5404,9 @@
         "AbpV1_0_x": {
           "shape": "AbpV1_0_x",
           "documentation": "<p>LoRaWAN object for create APIs</p>"
+        },
+        "FPorts": {
+          "shape": "FPorts"
         }
       },
       "documentation": "<p>LoRaWAN object for create functions.</p>"
@@ -3478,6 +5523,27 @@
       },
       "documentation": "<p>LoRaWANDeviceProfile object.</p>"
     },
+    "LoRaWANFuotaTask": {
+      "type": "structure",
+      "members": {
+        "RfRegion": {
+          "shape": "SupportedRfRegion"
+        }
+      },
+      "documentation": "<p>The LoRaWAN information used with a FUOTA task.</p>"
+    },
+    "LoRaWANFuotaTaskGetInfo": {
+      "type": "structure",
+      "members": {
+        "RfRegion": {
+          "shape": "RfRegion"
+        },
+        "StartTime": {
+          "shape": "StartTime"
+        }
+      },
+      "documentation": "<p>The LoRaWAN information returned from getting a FUOTA task.</p>"
+    },
     "LoRaWANGateway": {
       "type": "structure",
       "members": {
@@ -3488,6 +5554,15 @@
         "RfRegion": {
           "shape": "RfRegion",
           "documentation": "<p>The frequency band (RFRegion) value.</p>"
+        },
+        "JoinEuiFilters": {
+          "shape": "JoinEuiFilters"
+        },
+        "NetIdFilters": {
+          "shape": "NetIdFilters"
+        },
+        "SubBands": {
+          "shape": "SubBands"
         }
       },
       "documentation": "<p>LoRaWANGateway object.</p>"
@@ -3636,12 +5711,68 @@
       },
       "documentation": "<p>LoRaWAN object for list functions.</p>"
     },
+    "LoRaWANMulticast": {
+      "type": "structure",
+      "members": {
+        "RfRegion": {
+          "shape": "SupportedRfRegion"
+        },
+        "DlClass": {
+          "shape": "DlClass"
+        }
+      },
+      "documentation": "<p>The LoRaWAN information that is to be used with the multicast group.</p>"
+    },
+    "LoRaWANMulticastGet": {
+      "type": "structure",
+      "members": {
+        "RfRegion": {
+          "shape": "SupportedRfRegion"
+        },
+        "DlClass": {
+          "shape": "DlClass"
+        },
+        "NumberOfDevicesRequested": {
+          "shape": "NumberOfDevicesRequested"
+        },
+        "NumberOfDevicesInGroup": {
+          "shape": "NumberOfDevicesInGroup"
+        }
+      },
+      "documentation": "<p>The LoRaWAN information that is to be returned from getting multicast group information.</p>"
+    },
+    "LoRaWANMulticastMetadata": {
+      "type": "structure",
+      "members": {
+        "FPort": {
+          "shape": "FPort"
+        }
+      },
+      "documentation": "<p>The metadata information of the LoRaWAN multicast group.</p>"
+    },
+    "LoRaWANMulticastSession": {
+      "type": "structure",
+      "members": {
+        "DlDr": {
+          "shape": "DlDr"
+        },
+        "DlFreq": {
+          "shape": "DlFreq"
+        },
+        "SessionStartTime": {
+          "shape": "SessionStartTimeTimestamp"
+        },
+        "SessionTimeout": {
+          "shape": "SessionTimeout"
+        }
+      },
+      "documentation": "<p>The LoRaWAN information used with the multicast session.</p>"
+    },
     "LoRaWANSendDataToDevice": {
       "type": "structure",
       "members": {
         "FPort": {
-          "shape": "FPort",
-          "documentation": "<p>The Fport value.</p>"
+          "shape": "FPort"
         }
       },
       "documentation": "<p>LoRaWAN router info.</p>"
@@ -3655,6 +5786,15 @@
         }
       },
       "documentation": "<p>LoRaWANServiceProfile object.</p>"
+    },
+    "LoRaWANStartFuotaTask": {
+      "type": "structure",
+      "members": {
+        "StartTime": {
+          "shape": "StartTime"
+        }
+      },
+      "documentation": "<p>The LoRaWAN information used to start a FUOTA task.</p>"
     },
     "LoRaWANUpdateDevice": {
       "type": "structure",
@@ -3706,6 +5846,15 @@
       },
       "documentation": "<p>LoRaWANUpdateGatewayTaskEntry object.</p>"
     },
+    "LogLevel": {
+      "type": "string",
+      "documentation": "<p>The log level for a log message.</p>",
+      "enum": [
+        "INFO",
+        "ERROR",
+        "DISABLED"
+      ]
+    },
     "MacVersion": {
       "type": "string",
       "max": 64
@@ -3722,15 +5871,22 @@
     },
     "MaxResults": {
       "type": "integer",
+      "documentation": "<p>The maximum number of results to return in this operation.</p>",
       "max": 250,
       "min": 0
+    },
+    "McGroupId": {
+      "type": "integer",
+      "documentation": "<p>Id of the multicast group.</p>",
+      "max": 256,
+      "min": 1
     },
     "MessageId": {
       "type": "string"
     },
     "MessageType": {
       "type": "string",
-      "documentation": "<p>Sidewalk device message type.</p>",
+      "documentation": "<p>Sidewalk device message type. Default value is <code>CUSTOM_COMMAND_ID_NOTIFY</code>.</p>",
       "enum": [
         "CUSTOM_COMMAND_ID_NOTIFY",
         "CUSTOM_COMMAND_ID_GET",
@@ -3748,9 +5904,114 @@
       "max": 4096,
       "min": 1
     },
+    "MulticastDeviceStatus": {
+      "type": "string",
+      "max": 256
+    },
+    "MulticastGroup": {
+      "type": "structure",
+      "members": {
+        "Id": {
+          "shape": "MulticastGroupId"
+        },
+        "Arn": {
+          "shape": "MulticastGroupArn"
+        },
+        "Name": {
+          "shape": "MulticastGroupName"
+        }
+      },
+      "documentation": "<p>A multicast group.</p>"
+    },
+    "MulticastGroupArn": {
+      "type": "string",
+      "documentation": "<p>The arn of the multicast group.</p>",
+      "max": 128
+    },
+    "MulticastGroupByFuotaTask": {
+      "type": "structure",
+      "members": {
+        "Id": {
+          "shape": "MulticastGroupId"
+        }
+      },
+      "documentation": "<p>A multicast group that is associated with a FUOTA task.</p>"
+    },
+    "MulticastGroupId": {
+      "type": "string",
+      "documentation": "<p>The ID of the multicast group.</p>",
+      "max": 256
+    },
+    "MulticastGroupList": {
+      "type": "list",
+      "member": {
+        "shape": "MulticastGroup"
+      },
+      "documentation": "<p>List of multicast groups.</p>"
+    },
+    "MulticastGroupListByFuotaTask": {
+      "type": "list",
+      "member": {
+        "shape": "MulticastGroupByFuotaTask"
+      },
+      "documentation": "<p>List of multicast groups associated with a FUOTA task.</p>"
+    },
+    "MulticastGroupMessageId": {
+      "type": "string",
+      "documentation": "<p>ID of a multicast group message.</p>",
+      "max": 256
+    },
+    "MulticastGroupName": {
+      "type": "string",
+      "documentation": "<p>The name of the multicast group.</p>",
+      "max": 256
+    },
+    "MulticastGroupStatus": {
+      "type": "string",
+      "documentation": "<p>The status of the multicast group.</p>",
+      "max": 256
+    },
+    "MulticastWirelessMetadata": {
+      "type": "structure",
+      "members": {
+        "LoRaWAN": {
+          "shape": "LoRaWANMulticastMetadata"
+        }
+      },
+      "documentation": "<p>Wireless metadata that is to be sent to multicast group.</p>"
+    },
+    "NetId": {
+      "type": "string",
+      "documentation": "<p>LoRaWAN network ID.</p>",
+      "pattern": "[a-fA-F0-9]{6}"
+    },
+    "NetIdFilters": {
+      "type": "list",
+      "member": {
+        "shape": "NetId"
+      },
+      "documentation": "<p>A list of NetId values that are used by LoRa gateways to filter the uplink frames.</p>",
+      "max": 10,
+      "min": 0
+    },
+    "NetworkAnalyzerConfigurationName": {
+      "type": "string",
+      "documentation": "<p>NetworkAnalyzer configuration name.</p>",
+      "max": 1024,
+      "min": 1,
+      "pattern": "NetworkAnalyzerConfig_Default"
+    },
     "NextToken": {
       "type": "string",
       "max": 4096
+    },
+    "NumberOfDevicesInGroup": {
+      "type": "integer",
+      "documentation": "<p>Number of devices that are associated to the multicast group.</p>"
+    },
+    "NumberOfDevicesRequested": {
+      "type": "integer",
+      "documentation": "<p>Number of devices that are requested to be associated with the multicast group.</p>"
     },
     "NwkGeoLoc": {
       "type": "boolean"
@@ -3777,6 +6038,10 @@
         "AppEui": {
           "shape": "AppEui",
           "documentation": "<p>The AppEUI value.</p>"
+        },
+        "GenAppKey": {
+          "shape": "GenAppKey",
+          "documentation": "<p>The GenAppKey value.</p>"
         }
       },
       "documentation": "<p>OTAA device object for v1.0.x</p>"
@@ -3819,6 +6084,7 @@
     },
     "PayloadData": {
       "type": "string",
+      "documentation": "<p>The binary to be sent to the end device, encoded in base64.</p>",
       "max": 2048,
       "pattern": "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$"
     },
@@ -3845,6 +6111,49 @@
       "max": 16700000,
       "min": 1000000
     },
+    "ProximityEventConfiguration": {
+      "type": "structure",
+      "members": {
+        "Sidewalk": {
+          "shape": "SidewalkEventNotificationConfigurations",
+          "documentation": "<p>Proximity event configuration object for enabling or disabling Sidewalk related event topics.</p>"
+        }
+      },
+      "documentation": "<p>Proximity event configuration object for enabling and disabling relevant topics.</p>"
+    },
+    "PutResourceLogLevelRequest": {
+      "type": "structure",
+      "required": [
+        "ResourceIdentifier",
+        "ResourceType",
+        "LogLevel"
+      ],
+      "members": {
+        "ResourceIdentifier": {
+          "shape": "ResourceIdentifier",
+          "location": "uri",
+          "locationName": "ResourceIdentifier"
+        },
+        "ResourceType": {
+          "shape": "ResourceType",
+          "documentation": "<p>The type of the resource, which can be <code>WirelessDevice</code> or <code>WirelessGateway</code>.</p>",
+          "location": "querystring",
+          "locationName": "resourceType"
+        },
+        "LogLevel": {
+          "shape": "LogLevel"
+        }
+      }
+    },
+    "PutResourceLogLevelResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "QueryString": {
+      "type": "string",
+      "documentation": "<p>Query string used to search for wireless devices as part of the bulk associate and disassociate process.</p>",
+      "max": 4096
+    },
     "RaAllowed": {
       "type": "boolean"
     },
@@ -3858,12 +6167,53 @@
     "ReportDevStatusMargin": {
       "type": "boolean"
     },
+    "ResetAllResourceLogLevelsRequest": {
+      "type": "structure",
+      "members": {}
+    },
+    "ResetAllResourceLogLevelsResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "ResetResourceLogLevelRequest": {
+      "type": "structure",
+      "required": [
+        "ResourceIdentifier",
+        "ResourceType"
+      ],
+      "members": {
+        "ResourceIdentifier": {
+          "shape": "ResourceIdentifier",
+          "location": "uri",
+          "locationName": "ResourceIdentifier"
+        },
+        "ResourceType": {
+          "shape": "ResourceType",
+          "documentation": "<p>The type of the resource, which can be <code>WirelessDevice</code> or <code>WirelessGateway</code>.</p>",
+          "location": "querystring",
+          "locationName": "resourceType"
+        }
+      }
+    },
+    "ResetResourceLogLevelResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "ResourceIdentifier": {
+      "type": "string",
+      "documentation": "<p>The identifier of the resource. For a Wireless Device, it is the wireless device ID. For a wireless gateway, it is the wireless gateway ID.</p>",
+      "max": 256
+    },
+    "ResourceType": {
+      "type": "string"
+    },
     "Result": {
       "type": "string",
       "max": 2048
     },
     "RfRegion": {
       "type": "string",
+      "documentation": "<p>The frequency band (RFRegion) value.</p>",
       "max": 64
     },
     "RoleArn": {
@@ -3895,6 +6245,35 @@
       "type": "string",
       "pattern": "[a-fA-F0-9]{32}"
     },
+    "SendDataToMulticastGroupRequest": {
+      "type": "structure",
+      "required": [
+        "Id",
+        "PayloadData",
+        "WirelessMetadata"
+      ],
+      "members": {
+        "Id": {
+          "shape": "MulticastGroupId",
+          "location": "uri",
+          "locationName": "Id"
+        },
+        "PayloadData": {
+          "shape": "PayloadData"
+        },
+        "WirelessMetadata": {
+          "shape": "MulticastWirelessMetadata"
+        }
+      }
+    },
+    "SendDataToMulticastGroupResponse": {
+      "type": "structure",
+      "members": {
+        "MessageId": {
+          "shape": "MulticastGroupMessageId"
+        }
+      }
+    },
     "SendDataToWirelessDeviceRequest": {
       "type": "structure",
       "required": [
@@ -3914,8 +6293,7 @@
           "documentation": "<p>The transmit mode to use to send data to the wireless device. Can be: <code>0</code> for UM (unacknowledge mode) or <code>1</code> for AM (acknowledge mode).</p>"
         },
         "PayloadData": {
-          "shape": "PayloadData",
-          "documentation": "<p>The message payload to send.</p>"
+          "shape": "PayloadData"
         },
         "WirelessMetadata": {
           "shape": "WirelessMetadata",
@@ -4008,6 +6386,17 @@
       },
       "documentation": "<p>Session keys for ABP v1.1</p>"
     },
+    "SessionStartTimeTimestamp": {
+      "type": "timestamp",
+      "documentation": "<p>Timestamp of when the multicast group session is to start.</p>",
+      "timestampFormat": "iso8601"
+    },
+    "SessionTimeout": {
+      "type": "integer",
+      "documentation": "<p>How long before a multicast group session is to timeout.</p>",
+      "max": 172800,
+      "min": 60
+    },
     "SidewalkAccountInfo": {
       "type": "structure",
       "members": {
@@ -4049,6 +6438,9 @@
     "SidewalkDevice": {
       "type": "structure",
       "members": {
+        "AmazonId": {
+          "shape": "AmazonId"
+        },
         "SidewalkId": {
           "shape": "SidewalkId",
           "documentation": "<p>The sidewalk device identification.</p>"
@@ -4085,6 +6477,16 @@
         }
       },
       "documentation": "<p>MetaData for Sidewalk device.</p>"
+    },
+    "SidewalkEventNotificationConfigurations": {
+      "type": "structure",
+      "members": {
+        "AmazonIdEventTopic": {
+          "shape": "EventNotificationTopicStatus",
+          "documentation": "<p>Enum to denote whether amazon id event topic is enabled or disabled.</p>"
+        }
+      },
+      "documentation": "<p> SidewalkEventNotificationConfigurations object Event configuration object for Sidewalk related event topics.</p>"
     },
     "SidewalkId": {
       "type": "string",
@@ -4148,10 +6550,127 @@
         "P256r1"
       ]
     },
+    "StartBulkAssociateWirelessDeviceWithMulticastGroupRequest": {
+      "type": "structure",
+      "required": [
+        "Id"
+      ],
+      "members": {
+        "Id": {
+          "shape": "MulticastGroupId",
+          "location": "uri",
+          "locationName": "Id"
+        },
+        "QueryString": {
+          "shape": "QueryString"
+        },
+        "Tags": {
+          "shape": "TagList"
+        }
+      }
+    },
+    "StartBulkAssociateWirelessDeviceWithMulticastGroupResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "StartBulkDisassociateWirelessDeviceFromMulticastGroupRequest": {
+      "type": "structure",
+      "required": [
+        "Id"
+      ],
+      "members": {
+        "Id": {
+          "shape": "MulticastGroupId",
+          "location": "uri",
+          "locationName": "Id"
+        },
+        "QueryString": {
+          "shape": "QueryString"
+        },
+        "Tags": {
+          "shape": "TagList"
+        }
+      }
+    },
+    "StartBulkDisassociateWirelessDeviceFromMulticastGroupResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "StartFuotaTaskRequest": {
+      "type": "structure",
+      "required": [
+        "Id"
+      ],
+      "members": {
+        "Id": {
+          "shape": "FuotaTaskId",
+          "location": "uri",
+          "locationName": "Id"
+        },
+        "LoRaWAN": {
+          "shape": "LoRaWANStartFuotaTask"
+        }
+      }
+    },
+    "StartFuotaTaskResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "StartMulticastGroupSessionRequest": {
+      "type": "structure",
+      "required": [
+        "Id",
+        "LoRaWAN"
+      ],
+      "members": {
+        "Id": {
+          "shape": "MulticastGroupId",
+          "location": "uri",
+          "locationName": "Id"
+        },
+        "LoRaWAN": {
+          "shape": "LoRaWANMulticastSession"
+        }
+      }
+    },
+    "StartMulticastGroupSessionResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "StartTime": {
+      "type": "timestamp",
+      "documentation": "<p>Start time of a FUOTA task.</p>",
+      "timestampFormat": "iso8601"
+    },
     "Station": {
       "type": "string",
       "max": 4096,
       "min": 1
+    },
+    "SubBand": {
+      "type": "integer",
+      "documentation": "<p>A subset of supported frequency channels in a certain RFRegion.</p>",
+      "max": 8,
+      "min": 1
+    },
+    "SubBands": {
+      "type": "list",
+      "member": {
+        "shape": "SubBand"
+      },
+      "documentation": "<p>A list of integer indicating which sub bands are supported by LoRa gateway.</p>",
+      "max": 8,
+      "min": 0
+    },
+    "SupportedRfRegion": {
+      "type": "string",
+      "documentation": "<p>Supported RfRegions</p>",
+      "enum": [
+        "EU868",
+        "US915",
+        "AU915",
+        "AS923-1"
+      ]
     },
     "Supports32BitFCnt": {
       "type": "boolean"
@@ -4201,6 +6720,7 @@
       "member": {
         "shape": "Tag"
       },
+      "documentation": "<p>The tag to attach to the specified resource. Tags are metadata that you can use to manage a resource.</p>",
       "max": 200,
       "min": 0
     },
@@ -4265,6 +6785,18 @@
     },
     "ThingName": {
       "type": "string"
+    },
+    "TraceContent": {
+      "type": "structure",
+      "members": {
+        "WirelessDeviceFrameInfo": {
+          "shape": "WirelessDeviceFrameInfo"
+        },
+        "LogLevel": {
+          "shape": "LogLevel"
+        }
+      },
+      "documentation": "<p>Trace Content for resources.</p>"
     },
     "TransmitMode": {
       "type": "integer",
@@ -4349,6 +6881,118 @@
       "type": "structure",
       "members": {}
     },
+    "UpdateFuotaTaskRequest": {
+      "type": "structure",
+      "required": [
+        "Id"
+      ],
+      "members": {
+        "Id": {
+          "shape": "FuotaTaskId",
+          "location": "uri",
+          "locationName": "Id"
+        },
+        "Name": {
+          "shape": "FuotaTaskName"
+        },
+        "Description": {
+          "shape": "Description"
+        },
+        "LoRaWAN": {
+          "shape": "LoRaWANFuotaTask"
+        },
+        "FirmwareUpdateImage": {
+          "shape": "FirmwareUpdateImage"
+        },
+        "FirmwareUpdateRole": {
+          "shape": "FirmwareUpdateRole"
+        }
+      }
+    },
+    "UpdateFuotaTaskResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "UpdateLogLevelsByResourceTypesRequest": {
+      "type": "structure",
+      "members": {
+        "DefaultLogLevel": {
+          "shape": "LogLevel"
+        },
+        "WirelessDeviceLogOptions": {
+          "shape": "WirelessDeviceLogOptionList"
+        },
+        "WirelessGatewayLogOptions": {
+          "shape": "WirelessGatewayLogOptionList"
+        }
+      }
+    },
+    "UpdateLogLevelsByResourceTypesResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "UpdateMulticastGroupRequest": {
+      "type": "structure",
+      "required": [
+        "Id"
+      ],
+      "members": {
+        "Id": {
+          "shape": "MulticastGroupId",
+          "location": "uri",
+          "locationName": "Id"
+        },
+        "Name": {
+          "shape": "MulticastGroupName"
+        },
+        "Description": {
+          "shape": "Description"
+        },
+        "LoRaWAN": {
+          "shape": "LoRaWANMulticast"
+        }
+      }
+    },
+    "UpdateMulticastGroupResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "UpdateNetworkAnalyzerConfigurationRequest": {
+      "type": "structure",
+      "required": [
+        "ConfigurationName"
+      ],
+      "members": {
+        "ConfigurationName": {
+          "shape": "NetworkAnalyzerConfigurationName",
+          "location": "uri",
+          "locationName": "ConfigurationName"
+        },
+        "TraceContent": {
+          "shape": "TraceContent"
+        },
+        "WirelessDevicesToAdd": {
+          "shape": "WirelessDeviceList",
+          "documentation": "<p>WirelessDevices to add into NetworkAnalyzerConfiguration.</p>"
+        },
+        "WirelessDevicesToRemove": {
+          "shape": "WirelessDeviceList",
+          "documentation": "<p>WirelessDevices to remove from NetworkAnalyzerConfiguration.</p>"
+        },
+        "WirelessGatewaysToAdd": {
+          "shape": "WirelessGatewayList",
+          "documentation": "<p>WirelessGateways to add into NetworkAnalyzerConfiguration.</p>"
+        },
+        "WirelessGatewaysToRemove": {
+          "shape": "WirelessGatewayList",
+          "documentation": "<p>WirelessGateways to remove from NetworkAnalyzerConfiguration.</p>"
+        }
+      }
+    },
+    "UpdateNetworkAnalyzerConfigurationResponse": {
+      "type": "structure",
+      "members": {}
+    },
     "UpdatePartnerAccountRequest": {
       "type": "structure",
       "required": [
@@ -4376,6 +7020,45 @@
       }
     },
     "UpdatePartnerAccountResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "UpdateResourceEventConfigurationRequest": {
+      "type": "structure",
+      "required": [
+        "Identifier",
+        "IdentifierType"
+      ],
+      "members": {
+        "Identifier": {
+          "shape": "Identifier",
+          "documentation": "<p>Resource identifier to opt in for event messaging.</p>",
+          "location": "uri",
+          "locationName": "Identifier"
+        },
+        "IdentifierType": {
+          "shape": "IdentifierType",
+          "documentation": "<p>Identifier type of the particular resource identifier for event configuration.</p>",
+          "location": "querystring",
+          "locationName": "identifierType"
+        },
+        "PartnerType": {
+          "shape": "EventNotificationPartnerType",
+          "documentation": "<p>Partner type of the resource if the identifier type is PartnerAccountId</p>",
+          "location": "querystring",
+          "locationName": "partnerType"
+        },
+        "DeviceRegistrationState": {
+          "shape": "DeviceRegistrationStateEventConfiguration",
+          "documentation": "<p>Event configuration for the device registration state event</p>"
+        },
+        "Proximity": {
+          "shape": "ProximityEventConfiguration",
+          "documentation": "<p>Event configuration for the Proximity event</p>"
+        }
+      }
+    },
+    "UpdateResourceEventConfigurationResponse": {
       "type": "structure",
       "members": {}
     },
@@ -4437,6 +7120,12 @@
         "Description": {
           "shape": "Description",
           "documentation": "<p>A new description of the resource.</p>"
+        },
+        "JoinEuiFilters": {
+          "shape": "JoinEuiFilters"
+        },
+        "NetIdFilters": {
+          "shape": "NetIdFilters"
         }
       }
     },
@@ -4483,8 +7172,51 @@
     "WirelessDeviceArn": {
       "type": "string"
     },
+    "WirelessDeviceEvent": {
+      "type": "string",
+      "documentation": "<p>The event for a log message, if the log message is tied to a wireless device.</p>",
+      "enum": [
+        "Join",
+        "Rejoin",
+        "Uplink_Data",
+        "Downlink_Data",
+        "Registration"
+      ]
+    },
+    "WirelessDeviceEventLogOption": {
+      "type": "structure",
+      "required": [
+        "Event",
+        "LogLevel"
+      ],
+      "members": {
+        "Event": {
+          "shape": "WirelessDeviceEvent"
+        },
+        "LogLevel": {
+          "shape": "LogLevel"
+        }
+      },
+      "documentation": "<p>The log options for a wireless device event and can be used to set log levels for a specific wireless device event.</p> <p>For a LoRaWAN device, possible events for a log messsage are: <code>Join</code>, <code>Rejoin</code>, <code>Downlink_Data</code>, and <code>Uplink_Data</code>. For a Sidewalk device, possible events for a log message are <code>Registration</code>, <code>Downlink_Data</code>, and <code>Uplink_Data</code>.</p>"
+    },
+    "WirelessDeviceEventLogOptionList": {
+      "type": "list",
+      "member": {
+        "shape": "WirelessDeviceEventLogOption"
+      },
+      "documentation": "<p>The list of wireless device event log options.</p>"
+    },
+    "WirelessDeviceFrameInfo": {
+      "type": "string",
+      "documentation": "<p>WirelessDevice FrameInfo for trace content.</p>",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
+      ]
+    },
     "WirelessDeviceId": {
       "type": "string",
+      "documentation": "<p>The ID of the wireless device.</p>",
       "max": 256
     },
     "WirelessDeviceIdType": {
@@ -4492,8 +7224,44 @@
       "enum": [
         "WirelessDeviceId",
         "DevEui",
-        "ThingName"
+        "ThingName",
+        "SidewalkManufacturingSn"
       ]
+    },
+    "WirelessDeviceList": {
+      "type": "list",
+      "member": {
+        "shape": "WirelessDeviceId"
+      },
+      "max": 250,
+      "min": 0
+    },
+    "WirelessDeviceLogOption": {
+      "type": "structure",
+      "required": [
+        "Type",
+        "LogLevel"
+      ],
+      "members": {
+        "Type": {
+          "shape": "WirelessDeviceType",
+          "documentation": "<p>The wireless device type.</p>"
+        },
+        "LogLevel": {
+          "shape": "LogLevel"
+        },
+        "Events": {
+          "shape": "WirelessDeviceEventLogOptionList"
+        }
+      },
+      "documentation": "<p>The log options for wireless devices and can be used to set log levels for a specific type of wireless device.</p>"
+    },
+    "WirelessDeviceLogOptionList": {
+      "type": "list",
+      "member": {
+        "shape": "WirelessDeviceLogOption"
+      },
+      "documentation": "<p>The list of wireless device log options.</p>"
     },
     "WirelessDeviceName": {
       "type": "string",
@@ -4533,6 +7301,16 @@
         "Sidewalk": {
           "shape": "SidewalkListDevice",
           "documentation": "<p>The Sidewalk account credentials.</p>"
+        },
+        "FuotaDeviceStatus": {
+          "shape": "FuotaDeviceStatus"
+        },
+        "MulticastDeviceStatus": {
+          "shape": "MulticastDeviceStatus",
+          "documentation": "<p>The status of the wireless device in the multicast group.</p>"
+        },
+        "McGroupId": {
+          "shape": "McGroupId"
         }
       },
       "documentation": "<p>Information about a wireless device's operation.</p>"
@@ -4553,6 +7331,37 @@
     "WirelessGatewayArn": {
       "type": "string"
     },
+    "WirelessGatewayEvent": {
+      "type": "string",
+      "documentation": "<p>The event for a log message, if the log message is tied to a wireless gateway.</p>",
+      "enum": [
+        "CUPS_Request",
+        "Certificate"
+      ]
+    },
+    "WirelessGatewayEventLogOption": {
+      "type": "structure",
+      "required": [
+        "Event",
+        "LogLevel"
+      ],
+      "members": {
+        "Event": {
+          "shape": "WirelessGatewayEvent"
+        },
+        "LogLevel": {
+          "shape": "LogLevel"
+        }
+      },
+      "documentation": "<p>The log options for a wireless gateway event and can be used to set log levels for a specific wireless gateway event.</p> <p>For a LoRaWAN gateway, possible events for a log message are <code>CUPS_Request</code> and <code>Certificate</code>.</p>"
+    },
+    "WirelessGatewayEventLogOptionList": {
+      "type": "list",
+      "member": {
+        "shape": "WirelessGatewayEventLogOption"
+      },
+      "documentation": "<p>The list of wireless gateway event log options.</p>"
+    },
     "WirelessGatewayId": {
       "type": "string",
       "max": 256
@@ -4564,6 +7373,38 @@
         "WirelessGatewayId",
         "ThingName"
       ]
+    },
+    "WirelessGatewayList": {
+      "type": "list",
+      "member": {
+        "shape": "WirelessGatewayId"
+      }
+    },
+    "WirelessGatewayLogOption": {
+      "type": "structure",
+      "required": [
+        "Type",
+        "LogLevel"
+      ],
+      "members": {
+        "Type": {
+          "shape": "WirelessGatewayType"
+        },
+        "LogLevel": {
+          "shape": "LogLevel"
+        },
+        "Events": {
+          "shape": "WirelessGatewayEventLogOptionList"
+        }
+      },
+      "documentation": "<p>The log options for wireless gateways and can be used to set log levels for a specific type of wireless gateway.</p>"
+    },
+    "WirelessGatewayLogOptionList": {
+      "type": "list",
+      "member": {
+        "shape": "WirelessGatewayLogOption"
+      },
+      "documentation": "<p>The list of wireless gateway log options.</p>"
     },
     "WirelessGatewayName": {
       "type": "string",
@@ -4648,6 +7489,13 @@
         "FAILED"
       ]
     },
+    "WirelessGatewayType": {
+      "type": "string",
+      "documentation": "<p>The wireless gateway type.</p>",
+      "enum": [
+        "LoRaWAN"
+      ]
+    },
     "WirelessMetadata": {
       "type": "structure",
       "members": {
@@ -4663,5 +7511,5 @@
       "documentation": "<p>WirelessMetadata object.</p>"
     }
   },
-  "documentation": "<p>AWS IoT Wireless API documentation</p>"
+  "documentation": "<p>AWS IoT Wireless provides bi-directional communication between internet-connected wireless devices and the AWS Cloud. To onboard both LoRaWAN and Sidewalk devices to AWS IoT, use the IoT Wireless API. These wireless devices use the Low Power Wide Area Networking (LPWAN) communication protocol to communicate with AWS IoT.</p> <p>Using the API, you can perform create, read, update, and delete operations for your wireless devices, gateways, destinations, and profiles. After onboarding your devices, you can use the API operations to set log levels and monitor your devices with CloudWatch.</p> <p>You can also use the API operations to create multicast groups and schedule a multicast session for sending a downlink message to devices in the group. By using Firmware Updates Over-The-Air (FUOTA) API operations, you can create a FUOTA task and schedule a session to update the firmware of individual devices or an entire group of devices in a multicast group.</p>"
 }

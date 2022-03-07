@@ -638,6 +638,11 @@
     "CmafEncryption": {
       "documentation": "A CMAF encryption configuration.",
       "members": {
+        "ConstantInitializationVector": {
+          "documentation": "An optional 128-bit, 16-byte hex value represented by a 32-character string, used in conjunction with the key for encrypting blocks. If you don't specify a value, then MediaPackage creates the constant initialization vector (IV).",
+          "locationName": "constantInitializationVector",
+          "shape": "__string"
+        },
         "SpekeKeyProvider": {
           "locationName": "spekeKeyProvider",
           "shape": "SpekeKeyProvider"
@@ -1272,6 +1277,11 @@
           "locationName": "packagingConfigurationId",
           "shape": "__string"
         },
+        "Status": {
+          "documentation": "The current processing status of the asset used for the packaging configuration. The status can be either QUEUED, PROCESSING, PLAYABLE, or FAILED. Status information won't be available for most assets ingested before 2021-09-30.",
+          "locationName": "status",
+          "shape": "__string"
+        },
         "Url": {
           "documentation": "The URL of the parent manifest for the repackaged Asset.",
           "locationName": "url",
@@ -1356,6 +1366,11 @@
           "documentation": "A list of HLS manifest configurations.",
           "locationName": "hlsManifests",
           "shape": "__listOfHlsManifest"
+        },
+        "IncludeDvbSubtitles": {
+          "documentation": "When enabled, MediaPackage passes through digital video broadcasting (DVB) subtitles into the output.",
+          "locationName": "includeDvbSubtitles",
+          "shape": "__boolean"
         },
         "SegmentDurationSeconds": {
           "documentation": "Duration (in seconds) of each fragment. Actual fragments will be\nrounded to the nearest multiple of the source fragment duration.\n",

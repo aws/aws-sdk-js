@@ -431,5 +431,151 @@
         }
       }
     ]
+  },
+  {
+    "description": "Modeled exceptions",
+    "metadata": {
+      "protocol": "json"
+    },
+    "shapes": {
+      "ExceptionShape": {
+        "type": "structure",
+        "members": {
+          "Status": {
+            "shape": "StatusShape",
+            "location": "statusCode"
+          },
+          "BodyMember": {
+            "shape": "StringType"
+          },
+          "Code": {
+            "shape": "StringType"
+          },
+          "Message": {
+            "shape": "StringType"
+          }
+        }
+      },
+      "OtherExceptionShape": {
+        "BodyMember": {
+          "shape": "StringType"
+        }
+      },
+      "StatusShape": {
+        "type": "integer"
+      },
+      "StringType": {
+        "type": "string"
+      }
+    },
+    "cases": [
+      {
+        "given": {
+          "errors": [
+            {"shape": "ExceptionShape"}
+          ],
+          "name": "OperationName"
+        },
+        "error": {
+          "Status": 400,
+          "BodyMember": "mybody",
+          "Code": "OtherExceptionShape",
+          "Message": "mymessage"
+        },
+        "errorCode": "ExceptionShape",
+        "errorMessage": "mymessage",
+        "response": {
+          "status_code": 400,
+          "headers": {},
+          "body": "{ \"__type\": \"ExceptionShape\", \"Code\": \"OtherExceptionShape\", \"BodyMember\": \"mybody\", \"Message\": \"mymessage\"}"
+        }
+      },
+      {
+        "given": {
+          "errors": [
+            {"shape": "ExceptionShape"}
+          ],
+          "name": "OperationName"
+        },
+        "error": {},
+        "errorCode": "OtherExceptionShape",
+        "errorMessage": "mymessage",
+        "response": {
+          "status_code": 400,
+          "headers": {},
+          "body": "{ \"__type\": \"OtherExceptionShape\", \"Code\": \"ExceptionShape\", \"BodyMember\": \"mybody\", \"Message\": \"mymessage\"}"
+        }
+      },
+      {
+        "given": {
+          "errors": [
+            {"shape": "ExceptionShape"}
+          ],
+          "name": "OperationName"
+        },
+        "error": {},
+        "errorCode": "UndefinedShape",
+        "response": {
+          "status_code": 400,
+          "headers": {
+            "ImaHeader": "test",
+            "X-Foo": "abc"
+          },
+          "body": "{ \"__type\": \"UndefinedShape\", \"Code\": \"ExceptionShape\", \"BodyMember\": \"mybody\"}"
+        }
+      }
+    ]
+  },
+  {
+    "description": "Modeled exceptions with jsonVersion 1.0",
+    "metadata": {
+      "protocol": "json",
+      "jsonVersion": "1.0"
+    },
+    "shapes": {
+      "ExceptionShape": {
+        "type": "structure",
+        "members": {
+          "Status": {
+            "shape": "StatusShape",
+            "location": "statusCode"
+          },
+          "BodyMember": {
+            "shape": "StringType"
+          },
+          "Message": {
+            "shape": "StringType"
+          }
+        }
+      },
+      "StatusShape": {
+        "type": "integer"
+      },
+      "StringType": {
+        "type": "string"
+      }
+    },
+    "cases": [
+      {
+        "given": {
+          "errors": [
+            {"shape": "ExceptionShape"}
+          ],
+          "name": "OperationName"
+        },
+        "error": {
+          "Status": 400,
+          "BodyMember": "mybody",
+          "Message": "mymessage"
+        },
+        "errorCode": "ExceptionShape",
+        "errorMessage": "mymessage",
+        "response": {
+          "status_code": 400,
+          "headers": {},
+          "body": "{ \"__type\": \"FooPrefix#ExceptionShape\", \"BodyMember\": \"mybody\", \"Message\": \"mymessage\"}"
+        }
+      }
+    ]
   }
 ]

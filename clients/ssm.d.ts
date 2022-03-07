@@ -13,13 +13,21 @@ declare class SSM extends Service {
   constructor(options?: SSM.Types.ClientConfiguration)
   config: Config & SSM.Types.ClientConfiguration;
   /**
-   * Adds or overwrites one or more tags for the specified resource. Tags are metadata that you can assign to your documents, managed instances, maintenance windows, Parameter Store parameters, and patch baselines. Tags enable you to categorize your resources in different ways, for example, by purpose, owner, or environment. Each tag consists of a key and an optional value, both of which you define. For example, you could define a set of tags for your account's managed instances that helps you track each instance's owner and stack level. For example: Key=Owner and Value=DbAdmin, SysAdmin, or Dev. Or Key=Stack and Value=Production, Pre-Production, or Test. Each resource can have a maximum of 50 tags.  We recommend that you devise a set of tag keys that meets your needs for each resource type. Using a consistent set of tag keys makes it easier for you to manage your resources. You can search and filter the resources based on the tags you add. Tags don't have any semantic meaning to and are interpreted strictly as a string of characters.  For more information about using tags with EC2 instances, see Tagging your Amazon EC2 resources in the Amazon EC2 User Guide.
+   * Adds or overwrites one or more tags for the specified resource. Tags are metadata that you can assign to your documents, managed nodes, maintenance windows, Parameter Store parameters, and patch baselines. Tags enable you to categorize your resources in different ways, for example, by purpose, owner, or environment. Each tag consists of a key and an optional value, both of which you define. For example, you could define a set of tags for your account's managed nodes that helps you track each node's owner and stack level. For example:    Key=Owner,Value=DbAdmin     Key=Owner,Value=SysAdmin     Key=Owner,Value=Dev     Key=Stack,Value=Production     Key=Stack,Value=Pre-Production     Key=Stack,Value=Test    Each resource can have a maximum of 50 tags. We recommend that you devise a set of tag keys that meets your needs for each resource type. Using a consistent set of tag keys makes it easier for you to manage your resources. You can search and filter the resources based on the tags you add. Tags don't have any semantic meaning to and are interpreted strictly as a string of characters.  For more information about using tags with Amazon Elastic Compute Cloud (Amazon EC2) instances, see Tagging your Amazon EC2 resources in the Amazon EC2 User Guide.
    */
   addTagsToResource(params: SSM.Types.AddTagsToResourceRequest, callback?: (err: AWSError, data: SSM.Types.AddTagsToResourceResult) => void): Request<SSM.Types.AddTagsToResourceResult, AWSError>;
   /**
-   * Adds or overwrites one or more tags for the specified resource. Tags are metadata that you can assign to your documents, managed instances, maintenance windows, Parameter Store parameters, and patch baselines. Tags enable you to categorize your resources in different ways, for example, by purpose, owner, or environment. Each tag consists of a key and an optional value, both of which you define. For example, you could define a set of tags for your account's managed instances that helps you track each instance's owner and stack level. For example: Key=Owner and Value=DbAdmin, SysAdmin, or Dev. Or Key=Stack and Value=Production, Pre-Production, or Test. Each resource can have a maximum of 50 tags.  We recommend that you devise a set of tag keys that meets your needs for each resource type. Using a consistent set of tag keys makes it easier for you to manage your resources. You can search and filter the resources based on the tags you add. Tags don't have any semantic meaning to and are interpreted strictly as a string of characters.  For more information about using tags with EC2 instances, see Tagging your Amazon EC2 resources in the Amazon EC2 User Guide.
+   * Adds or overwrites one or more tags for the specified resource. Tags are metadata that you can assign to your documents, managed nodes, maintenance windows, Parameter Store parameters, and patch baselines. Tags enable you to categorize your resources in different ways, for example, by purpose, owner, or environment. Each tag consists of a key and an optional value, both of which you define. For example, you could define a set of tags for your account's managed nodes that helps you track each node's owner and stack level. For example:    Key=Owner,Value=DbAdmin     Key=Owner,Value=SysAdmin     Key=Owner,Value=Dev     Key=Stack,Value=Production     Key=Stack,Value=Pre-Production     Key=Stack,Value=Test    Each resource can have a maximum of 50 tags. We recommend that you devise a set of tag keys that meets your needs for each resource type. Using a consistent set of tag keys makes it easier for you to manage your resources. You can search and filter the resources based on the tags you add. Tags don't have any semantic meaning to and are interpreted strictly as a string of characters.  For more information about using tags with Amazon Elastic Compute Cloud (Amazon EC2) instances, see Tagging your Amazon EC2 resources in the Amazon EC2 User Guide.
    */
   addTagsToResource(callback?: (err: AWSError, data: SSM.Types.AddTagsToResourceResult) => void): Request<SSM.Types.AddTagsToResourceResult, AWSError>;
+  /**
+   * Associates a related item to a Systems Manager OpsCenter OpsItem. For example, you can associate an Incident Manager incident or analysis with an OpsItem. Incident Manager and OpsCenter are capabilities of Amazon Web Services Systems Manager.
+   */
+  associateOpsItemRelatedItem(params: SSM.Types.AssociateOpsItemRelatedItemRequest, callback?: (err: AWSError, data: SSM.Types.AssociateOpsItemRelatedItemResponse) => void): Request<SSM.Types.AssociateOpsItemRelatedItemResponse, AWSError>;
+  /**
+   * Associates a related item to a Systems Manager OpsCenter OpsItem. For example, you can associate an Incident Manager incident or analysis with an OpsItem. Incident Manager and OpsCenter are capabilities of Amazon Web Services Systems Manager.
+   */
+  associateOpsItemRelatedItem(callback?: (err: AWSError, data: SSM.Types.AssociateOpsItemRelatedItemResponse) => void): Request<SSM.Types.AssociateOpsItemRelatedItemResponse, AWSError>;
   /**
    * Attempts to cancel the command specified by the Command ID. There is no guarantee that the command will be terminated and the underlying process stopped.
    */
@@ -29,43 +37,43 @@ declare class SSM extends Service {
    */
   cancelCommand(callback?: (err: AWSError, data: SSM.Types.CancelCommandResult) => void): Request<SSM.Types.CancelCommandResult, AWSError>;
   /**
-   * Stops a maintenance window execution that is already in progress and cancels any tasks in the window that have not already starting running. (Tasks already in progress will continue to completion.)
+   * Stops a maintenance window execution that is already in progress and cancels any tasks in the window that haven't already starting running. Tasks already in progress will continue to completion.
    */
   cancelMaintenanceWindowExecution(params: SSM.Types.CancelMaintenanceWindowExecutionRequest, callback?: (err: AWSError, data: SSM.Types.CancelMaintenanceWindowExecutionResult) => void): Request<SSM.Types.CancelMaintenanceWindowExecutionResult, AWSError>;
   /**
-   * Stops a maintenance window execution that is already in progress and cancels any tasks in the window that have not already starting running. (Tasks already in progress will continue to completion.)
+   * Stops a maintenance window execution that is already in progress and cancels any tasks in the window that haven't already starting running. Tasks already in progress will continue to completion.
    */
   cancelMaintenanceWindowExecution(callback?: (err: AWSError, data: SSM.Types.CancelMaintenanceWindowExecutionResult) => void): Request<SSM.Types.CancelMaintenanceWindowExecutionResult, AWSError>;
   /**
-   * Generates an activation code and activation ID you can use to register your on-premises server or virtual machine (VM) with Systems Manager. Registering these machines with Systems Manager makes it possible to manage them using Systems Manager capabilities. You use the activation code and ID when installing SSM Agent on machines in your hybrid environment. For more information about requirements for managing on-premises instances and VMs using Systems Manager, see Setting up AWS Systems Manager for hybrid environments in the AWS Systems Manager User Guide.   On-premises servers or VMs that are registered with Systems Manager and EC2 instances that you manage with Systems Manager are all called managed instances. 
+   * Generates an activation code and activation ID you can use to register your on-premises servers, edge devices, or virtual machine (VM) with Amazon Web Services Systems Manager. Registering these machines with Systems Manager makes it possible to manage them using Systems Manager capabilities. You use the activation code and ID when installing SSM Agent on machines in your hybrid environment. For more information about requirements for managing on-premises machines using Systems Manager, see Setting up Amazon Web Services Systems Manager for hybrid environments in the Amazon Web Services Systems Manager User Guide.   Amazon Elastic Compute Cloud (Amazon EC2) instances, edge devices, and on-premises servers and VMs that are configured for Systems Manager are all called managed nodes. 
    */
   createActivation(params: SSM.Types.CreateActivationRequest, callback?: (err: AWSError, data: SSM.Types.CreateActivationResult) => void): Request<SSM.Types.CreateActivationResult, AWSError>;
   /**
-   * Generates an activation code and activation ID you can use to register your on-premises server or virtual machine (VM) with Systems Manager. Registering these machines with Systems Manager makes it possible to manage them using Systems Manager capabilities. You use the activation code and ID when installing SSM Agent on machines in your hybrid environment. For more information about requirements for managing on-premises instances and VMs using Systems Manager, see Setting up AWS Systems Manager for hybrid environments in the AWS Systems Manager User Guide.   On-premises servers or VMs that are registered with Systems Manager and EC2 instances that you manage with Systems Manager are all called managed instances. 
+   * Generates an activation code and activation ID you can use to register your on-premises servers, edge devices, or virtual machine (VM) with Amazon Web Services Systems Manager. Registering these machines with Systems Manager makes it possible to manage them using Systems Manager capabilities. You use the activation code and ID when installing SSM Agent on machines in your hybrid environment. For more information about requirements for managing on-premises machines using Systems Manager, see Setting up Amazon Web Services Systems Manager for hybrid environments in the Amazon Web Services Systems Manager User Guide.   Amazon Elastic Compute Cloud (Amazon EC2) instances, edge devices, and on-premises servers and VMs that are configured for Systems Manager are all called managed nodes. 
    */
   createActivation(callback?: (err: AWSError, data: SSM.Types.CreateActivationResult) => void): Request<SSM.Types.CreateActivationResult, AWSError>;
   /**
-   * A State Manager association defines the state that you want to maintain on your instances. For example, an association can specify that anti-virus software must be installed and running on your instances, or that certain ports must be closed. For static targets, the association specifies a schedule for when the configuration is reapplied. For dynamic targets, such as an AWS Resource Group or an AWS Autoscaling Group, State Manager applies the configuration when new instances are added to the group. The association also specifies actions to take when applying the configuration. For example, an association for anti-virus software might run once a day. If the software is not installed, then State Manager installs it. If the software is installed, but the service is not running, then the association might instruct State Manager to start the service. 
+   * A State Manager association defines the state that you want to maintain on your managed nodes. For example, an association can specify that anti-virus software must be installed and running on your managed nodes, or that certain ports must be closed. For static targets, the association specifies a schedule for when the configuration is reapplied. For dynamic targets, such as an Amazon Web Services resource group or an Amazon Web Services autoscaling group, State Manager, a capability of Amazon Web Services Systems Manager applies the configuration when new managed nodes are added to the group. The association also specifies actions to take when applying the configuration. For example, an association for anti-virus software might run once a day. If the software isn't installed, then State Manager installs it. If the software is installed, but the service isn't running, then the association might instruct State Manager to start the service. 
    */
   createAssociation(params: SSM.Types.CreateAssociationRequest, callback?: (err: AWSError, data: SSM.Types.CreateAssociationResult) => void): Request<SSM.Types.CreateAssociationResult, AWSError>;
   /**
-   * A State Manager association defines the state that you want to maintain on your instances. For example, an association can specify that anti-virus software must be installed and running on your instances, or that certain ports must be closed. For static targets, the association specifies a schedule for when the configuration is reapplied. For dynamic targets, such as an AWS Resource Group or an AWS Autoscaling Group, State Manager applies the configuration when new instances are added to the group. The association also specifies actions to take when applying the configuration. For example, an association for anti-virus software might run once a day. If the software is not installed, then State Manager installs it. If the software is installed, but the service is not running, then the association might instruct State Manager to start the service. 
+   * A State Manager association defines the state that you want to maintain on your managed nodes. For example, an association can specify that anti-virus software must be installed and running on your managed nodes, or that certain ports must be closed. For static targets, the association specifies a schedule for when the configuration is reapplied. For dynamic targets, such as an Amazon Web Services resource group or an Amazon Web Services autoscaling group, State Manager, a capability of Amazon Web Services Systems Manager applies the configuration when new managed nodes are added to the group. The association also specifies actions to take when applying the configuration. For example, an association for anti-virus software might run once a day. If the software isn't installed, then State Manager installs it. If the software is installed, but the service isn't running, then the association might instruct State Manager to start the service. 
    */
   createAssociation(callback?: (err: AWSError, data: SSM.Types.CreateAssociationResult) => void): Request<SSM.Types.CreateAssociationResult, AWSError>;
   /**
-   * Associates the specified Systems Manager document with the specified instances or targets. When you associate a document with one or more instances using instance IDs or tags, SSM Agent running on the instance processes the document and configures the instance as specified. If you associate a document with an instance that already has an associated document, the system returns the AssociationAlreadyExists exception.
+   * Associates the specified Amazon Web Services Systems Manager document (SSM document) with the specified managed nodes or targets. When you associate a document with one or more managed nodes using IDs or tags, Amazon Web Services Systems Manager Agent (SSM Agent) running on the managed node processes the document and configures the node as specified. If you associate a document with a managed node that already has an associated document, the system returns the AssociationAlreadyExists exception.
    */
   createAssociationBatch(params: SSM.Types.CreateAssociationBatchRequest, callback?: (err: AWSError, data: SSM.Types.CreateAssociationBatchResult) => void): Request<SSM.Types.CreateAssociationBatchResult, AWSError>;
   /**
-   * Associates the specified Systems Manager document with the specified instances or targets. When you associate a document with one or more instances using instance IDs or tags, SSM Agent running on the instance processes the document and configures the instance as specified. If you associate a document with an instance that already has an associated document, the system returns the AssociationAlreadyExists exception.
+   * Associates the specified Amazon Web Services Systems Manager document (SSM document) with the specified managed nodes or targets. When you associate a document with one or more managed nodes using IDs or tags, Amazon Web Services Systems Manager Agent (SSM Agent) running on the managed node processes the document and configures the node as specified. If you associate a document with a managed node that already has an associated document, the system returns the AssociationAlreadyExists exception.
    */
   createAssociationBatch(callback?: (err: AWSError, data: SSM.Types.CreateAssociationBatchResult) => void): Request<SSM.Types.CreateAssociationBatchResult, AWSError>;
   /**
-   * Creates a Systems Manager (SSM) document. An SSM document defines the actions that Systems Manager performs on your managed instances. For more information about SSM documents, including information about supported schemas, features, and syntax, see AWS Systems Manager Documents in the AWS Systems Manager User Guide.
+   * Creates a Amazon Web Services Systems Manager (SSM document). An SSM document defines the actions that Systems Manager performs on your managed nodes. For more information about SSM documents, including information about supported schemas, features, and syntax, see Amazon Web Services Systems Manager Documents in the Amazon Web Services Systems Manager User Guide.
    */
   createDocument(params: SSM.Types.CreateDocumentRequest, callback?: (err: AWSError, data: SSM.Types.CreateDocumentResult) => void): Request<SSM.Types.CreateDocumentResult, AWSError>;
   /**
-   * Creates a Systems Manager (SSM) document. An SSM document defines the actions that Systems Manager performs on your managed instances. For more information about SSM documents, including information about supported schemas, features, and syntax, see AWS Systems Manager Documents in the AWS Systems Manager User Guide.
+   * Creates a Amazon Web Services Systems Manager (SSM document). An SSM document defines the actions that Systems Manager performs on your managed nodes. For more information about SSM documents, including information about supported schemas, features, and syntax, see Amazon Web Services Systems Manager Documents in the Amazon Web Services Systems Manager User Guide.
    */
   createDocument(callback?: (err: AWSError, data: SSM.Types.CreateDocumentResult) => void): Request<SSM.Types.CreateDocumentResult, AWSError>;
   /**
@@ -77,59 +85,59 @@ declare class SSM extends Service {
    */
   createMaintenanceWindow(callback?: (err: AWSError, data: SSM.Types.CreateMaintenanceWindowResult) => void): Request<SSM.Types.CreateMaintenanceWindowResult, AWSError>;
   /**
-   * Creates a new OpsItem. You must have permission in AWS Identity and Access Management (IAM) to create a new OpsItem. For more information, see Getting started with OpsCenter in the AWS Systems Manager User Guide. Operations engineers and IT professionals use OpsCenter to view, investigate, and remediate operational issues impacting the performance and health of their AWS resources. For more information, see AWS Systems Manager OpsCenter in the AWS Systems Manager User Guide. 
+   * Creates a new OpsItem. You must have permission in Identity and Access Management (IAM) to create a new OpsItem. For more information, see Getting started with OpsCenter in the Amazon Web Services Systems Manager User Guide. Operations engineers and IT professionals use Amazon Web Services Systems Manager OpsCenter to view, investigate, and remediate operational issues impacting the performance and health of their Amazon Web Services resources. For more information, see Amazon Web Services Systems Manager OpsCenter in the Amazon Web Services Systems Manager User Guide. 
    */
   createOpsItem(params: SSM.Types.CreateOpsItemRequest, callback?: (err: AWSError, data: SSM.Types.CreateOpsItemResponse) => void): Request<SSM.Types.CreateOpsItemResponse, AWSError>;
   /**
-   * Creates a new OpsItem. You must have permission in AWS Identity and Access Management (IAM) to create a new OpsItem. For more information, see Getting started with OpsCenter in the AWS Systems Manager User Guide. Operations engineers and IT professionals use OpsCenter to view, investigate, and remediate operational issues impacting the performance and health of their AWS resources. For more information, see AWS Systems Manager OpsCenter in the AWS Systems Manager User Guide. 
+   * Creates a new OpsItem. You must have permission in Identity and Access Management (IAM) to create a new OpsItem. For more information, see Getting started with OpsCenter in the Amazon Web Services Systems Manager User Guide. Operations engineers and IT professionals use Amazon Web Services Systems Manager OpsCenter to view, investigate, and remediate operational issues impacting the performance and health of their Amazon Web Services resources. For more information, see Amazon Web Services Systems Manager OpsCenter in the Amazon Web Services Systems Manager User Guide. 
    */
   createOpsItem(callback?: (err: AWSError, data: SSM.Types.CreateOpsItemResponse) => void): Request<SSM.Types.CreateOpsItemResponse, AWSError>;
   /**
-   * If you create a new application in Application Manager, Systems Manager calls this API action to specify information about the new application, including the application type.
+   * If you create a new application in Application Manager, Amazon Web Services Systems Manager calls this API operation to specify information about the new application, including the application type.
    */
   createOpsMetadata(params: SSM.Types.CreateOpsMetadataRequest, callback?: (err: AWSError, data: SSM.Types.CreateOpsMetadataResult) => void): Request<SSM.Types.CreateOpsMetadataResult, AWSError>;
   /**
-   * If you create a new application in Application Manager, Systems Manager calls this API action to specify information about the new application, including the application type.
+   * If you create a new application in Application Manager, Amazon Web Services Systems Manager calls this API operation to specify information about the new application, including the application type.
    */
   createOpsMetadata(callback?: (err: AWSError, data: SSM.Types.CreateOpsMetadataResult) => void): Request<SSM.Types.CreateOpsMetadataResult, AWSError>;
   /**
-   * Creates a patch baseline.  For information about valid key and value pairs in PatchFilters for each supported operating system type, see PatchFilter. 
+   * Creates a patch baseline.  For information about valid key-value pairs in PatchFilters for each supported operating system type, see PatchFilter. 
    */
   createPatchBaseline(params: SSM.Types.CreatePatchBaselineRequest, callback?: (err: AWSError, data: SSM.Types.CreatePatchBaselineResult) => void): Request<SSM.Types.CreatePatchBaselineResult, AWSError>;
   /**
-   * Creates a patch baseline.  For information about valid key and value pairs in PatchFilters for each supported operating system type, see PatchFilter. 
+   * Creates a patch baseline.  For information about valid key-value pairs in PatchFilters for each supported operating system type, see PatchFilter. 
    */
   createPatchBaseline(callback?: (err: AWSError, data: SSM.Types.CreatePatchBaselineResult) => void): Request<SSM.Types.CreatePatchBaselineResult, AWSError>;
   /**
-   * A resource data sync helps you view data from multiple sources in a single location. Systems Manager offers two types of resource data sync: SyncToDestination and SyncFromSource. You can configure Systems Manager Inventory to use the SyncToDestination type to synchronize Inventory data from multiple AWS Regions to a single S3 bucket. For more information, see Configuring Resource Data Sync for Inventory in the AWS Systems Manager User Guide. You can configure Systems Manager Explorer to use the SyncFromSource type to synchronize operational work items (OpsItems) and operational data (OpsData) from multiple AWS Regions to a single S3 bucket. This type can synchronize OpsItems and OpsData from multiple AWS accounts and Regions or EntireOrganization by using AWS Organizations. For more information, see Setting up Systems Manager Explorer to display data from multiple accounts and Regions in the AWS Systems Manager User Guide. A resource data sync is an asynchronous operation that returns immediately. After a successful initial sync is completed, the system continuously syncs data. To check the status of a sync, use the ListResourceDataSync.  By default, data is not encrypted in Amazon S3. We strongly recommend that you enable encryption in Amazon S3 to ensure secure data storage. We also recommend that you secure access to the Amazon S3 bucket by creating a restrictive bucket policy.  
+   * A resource data sync helps you view data from multiple sources in a single location. Amazon Web Services Systems Manager offers two types of resource data sync: SyncToDestination and SyncFromSource. You can configure Systems Manager Inventory to use the SyncToDestination type to synchronize Inventory data from multiple Amazon Web Services Regions to a single Amazon Simple Storage Service (Amazon S3) bucket. For more information, see Configuring resource data sync for Inventory in the Amazon Web Services Systems Manager User Guide. You can configure Systems Manager Explorer to use the SyncFromSource type to synchronize operational work items (OpsItems) and operational data (OpsData) from multiple Amazon Web Services Regions to a single Amazon S3 bucket. This type can synchronize OpsItems and OpsData from multiple Amazon Web Services accounts and Amazon Web Services Regions or EntireOrganization by using Organizations. For more information, see Setting up Systems Manager Explorer to display data from multiple accounts and Regions in the Amazon Web Services Systems Manager User Guide. A resource data sync is an asynchronous operation that returns immediately. After a successful initial sync is completed, the system continuously syncs data. To check the status of a sync, use the ListResourceDataSync.  By default, data isn't encrypted in Amazon S3. We strongly recommend that you enable encryption in Amazon S3 to ensure secure data storage. We also recommend that you secure access to the Amazon S3 bucket by creating a restrictive bucket policy.  
    */
   createResourceDataSync(params: SSM.Types.CreateResourceDataSyncRequest, callback?: (err: AWSError, data: SSM.Types.CreateResourceDataSyncResult) => void): Request<SSM.Types.CreateResourceDataSyncResult, AWSError>;
   /**
-   * A resource data sync helps you view data from multiple sources in a single location. Systems Manager offers two types of resource data sync: SyncToDestination and SyncFromSource. You can configure Systems Manager Inventory to use the SyncToDestination type to synchronize Inventory data from multiple AWS Regions to a single S3 bucket. For more information, see Configuring Resource Data Sync for Inventory in the AWS Systems Manager User Guide. You can configure Systems Manager Explorer to use the SyncFromSource type to synchronize operational work items (OpsItems) and operational data (OpsData) from multiple AWS Regions to a single S3 bucket. This type can synchronize OpsItems and OpsData from multiple AWS accounts and Regions or EntireOrganization by using AWS Organizations. For more information, see Setting up Systems Manager Explorer to display data from multiple accounts and Regions in the AWS Systems Manager User Guide. A resource data sync is an asynchronous operation that returns immediately. After a successful initial sync is completed, the system continuously syncs data. To check the status of a sync, use the ListResourceDataSync.  By default, data is not encrypted in Amazon S3. We strongly recommend that you enable encryption in Amazon S3 to ensure secure data storage. We also recommend that you secure access to the Amazon S3 bucket by creating a restrictive bucket policy.  
+   * A resource data sync helps you view data from multiple sources in a single location. Amazon Web Services Systems Manager offers two types of resource data sync: SyncToDestination and SyncFromSource. You can configure Systems Manager Inventory to use the SyncToDestination type to synchronize Inventory data from multiple Amazon Web Services Regions to a single Amazon Simple Storage Service (Amazon S3) bucket. For more information, see Configuring resource data sync for Inventory in the Amazon Web Services Systems Manager User Guide. You can configure Systems Manager Explorer to use the SyncFromSource type to synchronize operational work items (OpsItems) and operational data (OpsData) from multiple Amazon Web Services Regions to a single Amazon S3 bucket. This type can synchronize OpsItems and OpsData from multiple Amazon Web Services accounts and Amazon Web Services Regions or EntireOrganization by using Organizations. For more information, see Setting up Systems Manager Explorer to display data from multiple accounts and Regions in the Amazon Web Services Systems Manager User Guide. A resource data sync is an asynchronous operation that returns immediately. After a successful initial sync is completed, the system continuously syncs data. To check the status of a sync, use the ListResourceDataSync.  By default, data isn't encrypted in Amazon S3. We strongly recommend that you enable encryption in Amazon S3 to ensure secure data storage. We also recommend that you secure access to the Amazon S3 bucket by creating a restrictive bucket policy.  
    */
   createResourceDataSync(callback?: (err: AWSError, data: SSM.Types.CreateResourceDataSyncResult) => void): Request<SSM.Types.CreateResourceDataSyncResult, AWSError>;
   /**
-   * Deletes an activation. You are not required to delete an activation. If you delete an activation, you can no longer use it to register additional managed instances. Deleting an activation does not de-register managed instances. You must manually de-register managed instances.
+   * Deletes an activation. You aren't required to delete an activation. If you delete an activation, you can no longer use it to register additional managed nodes. Deleting an activation doesn't de-register managed nodes. You must manually de-register managed nodes.
    */
   deleteActivation(params: SSM.Types.DeleteActivationRequest, callback?: (err: AWSError, data: SSM.Types.DeleteActivationResult) => void): Request<SSM.Types.DeleteActivationResult, AWSError>;
   /**
-   * Deletes an activation. You are not required to delete an activation. If you delete an activation, you can no longer use it to register additional managed instances. Deleting an activation does not de-register managed instances. You must manually de-register managed instances.
+   * Deletes an activation. You aren't required to delete an activation. If you delete an activation, you can no longer use it to register additional managed nodes. Deleting an activation doesn't de-register managed nodes. You must manually de-register managed nodes.
    */
   deleteActivation(callback?: (err: AWSError, data: SSM.Types.DeleteActivationResult) => void): Request<SSM.Types.DeleteActivationResult, AWSError>;
   /**
-   * Disassociates the specified Systems Manager document from the specified instance. When you disassociate a document from an instance, it does not change the configuration of the instance. To change the configuration state of an instance after you disassociate a document, you must create a new document with the desired configuration and associate it with the instance.
+   * Disassociates the specified Amazon Web Services Systems Manager document (SSM document) from the specified managed node. If you created the association by using the Targets parameter, then you must delete the association by using the association ID. When you disassociate a document from a managed node, it doesn't change the configuration of the node. To change the configuration state of a managed node after you disassociate a document, you must create a new document with the desired configuration and associate it with the node.
    */
   deleteAssociation(params: SSM.Types.DeleteAssociationRequest, callback?: (err: AWSError, data: SSM.Types.DeleteAssociationResult) => void): Request<SSM.Types.DeleteAssociationResult, AWSError>;
   /**
-   * Disassociates the specified Systems Manager document from the specified instance. When you disassociate a document from an instance, it does not change the configuration of the instance. To change the configuration state of an instance after you disassociate a document, you must create a new document with the desired configuration and associate it with the instance.
+   * Disassociates the specified Amazon Web Services Systems Manager document (SSM document) from the specified managed node. If you created the association by using the Targets parameter, then you must delete the association by using the association ID. When you disassociate a document from a managed node, it doesn't change the configuration of the node. To change the configuration state of a managed node after you disassociate a document, you must create a new document with the desired configuration and associate it with the node.
    */
   deleteAssociation(callback?: (err: AWSError, data: SSM.Types.DeleteAssociationResult) => void): Request<SSM.Types.DeleteAssociationResult, AWSError>;
   /**
-   * Deletes the Systems Manager document and all instance associations to the document. Before you delete the document, we recommend that you use DeleteAssociation to disassociate all instances that are associated with the document.
+   * Deletes the Amazon Web Services Systems Manager document (SSM document) and all managed node associations to the document. Before you delete the document, we recommend that you use DeleteAssociation to disassociate all managed nodes that are associated with the document.
    */
   deleteDocument(params: SSM.Types.DeleteDocumentRequest, callback?: (err: AWSError, data: SSM.Types.DeleteDocumentResult) => void): Request<SSM.Types.DeleteDocumentResult, AWSError>;
   /**
-   * Deletes the Systems Manager document and all instance associations to the document. Before you delete the document, we recommend that you use DeleteAssociation to disassociate all instances that are associated with the document.
+   * Deletes the Amazon Web Services Systems Manager document (SSM document) and all managed node associations to the document. Before you delete the document, we recommend that you use DeleteAssociation to disassociate all managed nodes that are associated with the document.
    */
   deleteDocument(callback?: (err: AWSError, data: SSM.Types.DeleteDocumentResult) => void): Request<SSM.Types.DeleteDocumentResult, AWSError>;
   /**
@@ -157,19 +165,19 @@ declare class SSM extends Service {
    */
   deleteOpsMetadata(callback?: (err: AWSError, data: SSM.Types.DeleteOpsMetadataResult) => void): Request<SSM.Types.DeleteOpsMetadataResult, AWSError>;
   /**
-   * Delete a parameter from the system.
+   * Delete a parameter from the system. After deleting a parameter, wait for at least 30 seconds to create a parameter with the same name.
    */
   deleteParameter(params: SSM.Types.DeleteParameterRequest, callback?: (err: AWSError, data: SSM.Types.DeleteParameterResult) => void): Request<SSM.Types.DeleteParameterResult, AWSError>;
   /**
-   * Delete a parameter from the system.
+   * Delete a parameter from the system. After deleting a parameter, wait for at least 30 seconds to create a parameter with the same name.
    */
   deleteParameter(callback?: (err: AWSError, data: SSM.Types.DeleteParameterResult) => void): Request<SSM.Types.DeleteParameterResult, AWSError>;
   /**
-   * Delete a list of parameters.
+   * Delete a list of parameters. After deleting a parameter, wait for at least 30 seconds to create a parameter with the same name.
    */
   deleteParameters(params: SSM.Types.DeleteParametersRequest, callback?: (err: AWSError, data: SSM.Types.DeleteParametersResult) => void): Request<SSM.Types.DeleteParametersResult, AWSError>;
   /**
-   * Delete a list of parameters.
+   * Delete a list of parameters. After deleting a parameter, wait for at least 30 seconds to create a parameter with the same name.
    */
   deleteParameters(callback?: (err: AWSError, data: SSM.Types.DeleteParametersResult) => void): Request<SSM.Types.DeleteParametersResult, AWSError>;
   /**
@@ -181,19 +189,19 @@ declare class SSM extends Service {
    */
   deletePatchBaseline(callback?: (err: AWSError, data: SSM.Types.DeletePatchBaselineResult) => void): Request<SSM.Types.DeletePatchBaselineResult, AWSError>;
   /**
-   * Deletes a Resource Data Sync configuration. After the configuration is deleted, changes to data on managed instances are no longer synced to or from the target. Deleting a sync configuration does not delete data.
+   * Deletes a resource data sync configuration. After the configuration is deleted, changes to data on managed nodes are no longer synced to or from the target. Deleting a sync configuration doesn't delete data.
    */
   deleteResourceDataSync(params: SSM.Types.DeleteResourceDataSyncRequest, callback?: (err: AWSError, data: SSM.Types.DeleteResourceDataSyncResult) => void): Request<SSM.Types.DeleteResourceDataSyncResult, AWSError>;
   /**
-   * Deletes a Resource Data Sync configuration. After the configuration is deleted, changes to data on managed instances are no longer synced to or from the target. Deleting a sync configuration does not delete data.
+   * Deletes a resource data sync configuration. After the configuration is deleted, changes to data on managed nodes are no longer synced to or from the target. Deleting a sync configuration doesn't delete data.
    */
   deleteResourceDataSync(callback?: (err: AWSError, data: SSM.Types.DeleteResourceDataSyncResult) => void): Request<SSM.Types.DeleteResourceDataSyncResult, AWSError>;
   /**
-   * Removes the server or virtual machine from the list of registered servers. You can reregister the instance again at any time. If you don't plan to use Run Command on the server, we suggest uninstalling SSM Agent first.
+   * Removes the server or virtual machine from the list of registered servers. You can reregister the node again at any time. If you don't plan to use Run Command on the server, we suggest uninstalling SSM Agent first.
    */
   deregisterManagedInstance(params: SSM.Types.DeregisterManagedInstanceRequest, callback?: (err: AWSError, data: SSM.Types.DeregisterManagedInstanceResult) => void): Request<SSM.Types.DeregisterManagedInstanceResult, AWSError>;
   /**
-   * Removes the server or virtual machine from the list of registered servers. You can reregister the instance again at any time. If you don't plan to use Run Command on the server, we suggest uninstalling SSM Agent first.
+   * Removes the server or virtual machine from the list of registered servers. You can reregister the node again at any time. If you don't plan to use Run Command on the server, we suggest uninstalling SSM Agent first.
    */
   deregisterManagedInstance(callback?: (err: AWSError, data: SSM.Types.DeregisterManagedInstanceResult) => void): Request<SSM.Types.DeregisterManagedInstanceResult, AWSError>;
   /**
@@ -221,35 +229,35 @@ declare class SSM extends Service {
    */
   deregisterTaskFromMaintenanceWindow(callback?: (err: AWSError, data: SSM.Types.DeregisterTaskFromMaintenanceWindowResult) => void): Request<SSM.Types.DeregisterTaskFromMaintenanceWindowResult, AWSError>;
   /**
-   * Describes details about the activation, such as the date and time the activation was created, its expiration date, the IAM role assigned to the instances in the activation, and the number of instances registered by using this activation.
+   * Describes details about the activation, such as the date and time the activation was created, its expiration date, the Identity and Access Management (IAM) role assigned to the managed nodes in the activation, and the number of nodes registered by using this activation.
    */
   describeActivations(params: SSM.Types.DescribeActivationsRequest, callback?: (err: AWSError, data: SSM.Types.DescribeActivationsResult) => void): Request<SSM.Types.DescribeActivationsResult, AWSError>;
   /**
-   * Describes details about the activation, such as the date and time the activation was created, its expiration date, the IAM role assigned to the instances in the activation, and the number of instances registered by using this activation.
+   * Describes details about the activation, such as the date and time the activation was created, its expiration date, the Identity and Access Management (IAM) role assigned to the managed nodes in the activation, and the number of nodes registered by using this activation.
    */
   describeActivations(callback?: (err: AWSError, data: SSM.Types.DescribeActivationsResult) => void): Request<SSM.Types.DescribeActivationsResult, AWSError>;
   /**
-   * Describes the association for the specified target or instance. If you created the association by using the Targets parameter, then you must retrieve the association by using the association ID. If you created the association by specifying an instance ID and a Systems Manager document, then you retrieve the association by specifying the document name and the instance ID. 
+   * Describes the association for the specified target or managed node. If you created the association by using the Targets parameter, then you must retrieve the association by using the association ID.
    */
   describeAssociation(params: SSM.Types.DescribeAssociationRequest, callback?: (err: AWSError, data: SSM.Types.DescribeAssociationResult) => void): Request<SSM.Types.DescribeAssociationResult, AWSError>;
   /**
-   * Describes the association for the specified target or instance. If you created the association by using the Targets parameter, then you must retrieve the association by using the association ID. If you created the association by specifying an instance ID and a Systems Manager document, then you retrieve the association by specifying the document name and the instance ID. 
+   * Describes the association for the specified target or managed node. If you created the association by using the Targets parameter, then you must retrieve the association by using the association ID.
    */
   describeAssociation(callback?: (err: AWSError, data: SSM.Types.DescribeAssociationResult) => void): Request<SSM.Types.DescribeAssociationResult, AWSError>;
   /**
-   * Use this API action to view information about a specific execution of a specific association.
+   * Views information about a specific execution of a specific association.
    */
   describeAssociationExecutionTargets(params: SSM.Types.DescribeAssociationExecutionTargetsRequest, callback?: (err: AWSError, data: SSM.Types.DescribeAssociationExecutionTargetsResult) => void): Request<SSM.Types.DescribeAssociationExecutionTargetsResult, AWSError>;
   /**
-   * Use this API action to view information about a specific execution of a specific association.
+   * Views information about a specific execution of a specific association.
    */
   describeAssociationExecutionTargets(callback?: (err: AWSError, data: SSM.Types.DescribeAssociationExecutionTargetsResult) => void): Request<SSM.Types.DescribeAssociationExecutionTargetsResult, AWSError>;
   /**
-   * Use this API action to view all executions for a specific association ID. 
+   * Views all executions for a specific association ID. 
    */
   describeAssociationExecutions(params: SSM.Types.DescribeAssociationExecutionsRequest, callback?: (err: AWSError, data: SSM.Types.DescribeAssociationExecutionsResult) => void): Request<SSM.Types.DescribeAssociationExecutionsResult, AWSError>;
   /**
-   * Use this API action to view all executions for a specific association ID. 
+   * Views all executions for a specific association ID. 
    */
   describeAssociationExecutions(callback?: (err: AWSError, data: SSM.Types.DescribeAssociationExecutionsResult) => void): Request<SSM.Types.DescribeAssociationExecutionsResult, AWSError>;
   /**
@@ -277,75 +285,75 @@ declare class SSM extends Service {
    */
   describeAvailablePatches(callback?: (err: AWSError, data: SSM.Types.DescribeAvailablePatchesResult) => void): Request<SSM.Types.DescribeAvailablePatchesResult, AWSError>;
   /**
-   * Describes the specified Systems Manager document.
+   * Describes the specified Amazon Web Services Systems Manager document (SSM document).
    */
   describeDocument(params: SSM.Types.DescribeDocumentRequest, callback?: (err: AWSError, data: SSM.Types.DescribeDocumentResult) => void): Request<SSM.Types.DescribeDocumentResult, AWSError>;
   /**
-   * Describes the specified Systems Manager document.
+   * Describes the specified Amazon Web Services Systems Manager document (SSM document).
    */
   describeDocument(callback?: (err: AWSError, data: SSM.Types.DescribeDocumentResult) => void): Request<SSM.Types.DescribeDocumentResult, AWSError>;
   /**
-   * Describes the permissions for a Systems Manager document. If you created the document, you are the owner. If a document is shared, it can either be shared privately (by specifying a user's AWS account ID) or publicly (All). 
+   * Describes the permissions for a Amazon Web Services Systems Manager document (SSM document). If you created the document, you are the owner. If a document is shared, it can either be shared privately (by specifying a user's Amazon Web Services account ID) or publicly (All). 
    */
   describeDocumentPermission(params: SSM.Types.DescribeDocumentPermissionRequest, callback?: (err: AWSError, data: SSM.Types.DescribeDocumentPermissionResponse) => void): Request<SSM.Types.DescribeDocumentPermissionResponse, AWSError>;
   /**
-   * Describes the permissions for a Systems Manager document. If you created the document, you are the owner. If a document is shared, it can either be shared privately (by specifying a user's AWS account ID) or publicly (All). 
+   * Describes the permissions for a Amazon Web Services Systems Manager document (SSM document). If you created the document, you are the owner. If a document is shared, it can either be shared privately (by specifying a user's Amazon Web Services account ID) or publicly (All). 
    */
   describeDocumentPermission(callback?: (err: AWSError, data: SSM.Types.DescribeDocumentPermissionResponse) => void): Request<SSM.Types.DescribeDocumentPermissionResponse, AWSError>;
   /**
-   * All associations for the instance(s).
+   * All associations for the managed node(s).
    */
   describeEffectiveInstanceAssociations(params: SSM.Types.DescribeEffectiveInstanceAssociationsRequest, callback?: (err: AWSError, data: SSM.Types.DescribeEffectiveInstanceAssociationsResult) => void): Request<SSM.Types.DescribeEffectiveInstanceAssociationsResult, AWSError>;
   /**
-   * All associations for the instance(s).
+   * All associations for the managed node(s).
    */
   describeEffectiveInstanceAssociations(callback?: (err: AWSError, data: SSM.Types.DescribeEffectiveInstanceAssociationsResult) => void): Request<SSM.Types.DescribeEffectiveInstanceAssociationsResult, AWSError>;
   /**
-   * Retrieves the current effective patches (the patch and the approval state) for the specified patch baseline. Note that this API applies only to Windows patch baselines.
+   * Retrieves the current effective patches (the patch and the approval state) for the specified patch baseline. Applies to patch baselines for Windows only.
    */
   describeEffectivePatchesForPatchBaseline(params: SSM.Types.DescribeEffectivePatchesForPatchBaselineRequest, callback?: (err: AWSError, data: SSM.Types.DescribeEffectivePatchesForPatchBaselineResult) => void): Request<SSM.Types.DescribeEffectivePatchesForPatchBaselineResult, AWSError>;
   /**
-   * Retrieves the current effective patches (the patch and the approval state) for the specified patch baseline. Note that this API applies only to Windows patch baselines.
+   * Retrieves the current effective patches (the patch and the approval state) for the specified patch baseline. Applies to patch baselines for Windows only.
    */
   describeEffectivePatchesForPatchBaseline(callback?: (err: AWSError, data: SSM.Types.DescribeEffectivePatchesForPatchBaselineResult) => void): Request<SSM.Types.DescribeEffectivePatchesForPatchBaselineResult, AWSError>;
   /**
-   * The status of the associations for the instance(s).
+   * The status of the associations for the managed node(s).
    */
   describeInstanceAssociationsStatus(params: SSM.Types.DescribeInstanceAssociationsStatusRequest, callback?: (err: AWSError, data: SSM.Types.DescribeInstanceAssociationsStatusResult) => void): Request<SSM.Types.DescribeInstanceAssociationsStatusResult, AWSError>;
   /**
-   * The status of the associations for the instance(s).
+   * The status of the associations for the managed node(s).
    */
   describeInstanceAssociationsStatus(callback?: (err: AWSError, data: SSM.Types.DescribeInstanceAssociationsStatusResult) => void): Request<SSM.Types.DescribeInstanceAssociationsStatusResult, AWSError>;
   /**
-   * Describes one or more of your instances, including information about the operating system platform, the version of SSM Agent installed on the instance, instance status, and so on. If you specify one or more instance IDs, it returns information for those instances. If you do not specify instance IDs, it returns information for all your instances. If you specify an instance ID that is not valid or an instance that you do not own, you receive an error.  The IamRole field for this API action is the Amazon Identity and Access Management (IAM) role assigned to on-premises instances. This call does not return the IAM role for EC2 instances. 
+   * Describes one or more of your managed nodes, including information about the operating system platform, the version of SSM Agent installed on the managed node, node status, and so on. If you specify one or more managed node IDs, it returns information for those managed nodes. If you don't specify node IDs, it returns information for all your managed nodes. If you specify a node ID that isn't valid or a node that you don't own, you receive an error.  The IamRole field for this API operation is the Identity and Access Management (IAM) role assigned to on-premises managed nodes. This call doesn't return the IAM role for EC2 instances. 
    */
   describeInstanceInformation(params: SSM.Types.DescribeInstanceInformationRequest, callback?: (err: AWSError, data: SSM.Types.DescribeInstanceInformationResult) => void): Request<SSM.Types.DescribeInstanceInformationResult, AWSError>;
   /**
-   * Describes one or more of your instances, including information about the operating system platform, the version of SSM Agent installed on the instance, instance status, and so on. If you specify one or more instance IDs, it returns information for those instances. If you do not specify instance IDs, it returns information for all your instances. If you specify an instance ID that is not valid or an instance that you do not own, you receive an error.  The IamRole field for this API action is the Amazon Identity and Access Management (IAM) role assigned to on-premises instances. This call does not return the IAM role for EC2 instances. 
+   * Describes one or more of your managed nodes, including information about the operating system platform, the version of SSM Agent installed on the managed node, node status, and so on. If you specify one or more managed node IDs, it returns information for those managed nodes. If you don't specify node IDs, it returns information for all your managed nodes. If you specify a node ID that isn't valid or a node that you don't own, you receive an error.  The IamRole field for this API operation is the Identity and Access Management (IAM) role assigned to on-premises managed nodes. This call doesn't return the IAM role for EC2 instances. 
    */
   describeInstanceInformation(callback?: (err: AWSError, data: SSM.Types.DescribeInstanceInformationResult) => void): Request<SSM.Types.DescribeInstanceInformationResult, AWSError>;
   /**
-   * Retrieves the high-level patch state of one or more instances.
+   * Retrieves the high-level patch state of one or more managed nodes.
    */
   describeInstancePatchStates(params: SSM.Types.DescribeInstancePatchStatesRequest, callback?: (err: AWSError, data: SSM.Types.DescribeInstancePatchStatesResult) => void): Request<SSM.Types.DescribeInstancePatchStatesResult, AWSError>;
   /**
-   * Retrieves the high-level patch state of one or more instances.
+   * Retrieves the high-level patch state of one or more managed nodes.
    */
   describeInstancePatchStates(callback?: (err: AWSError, data: SSM.Types.DescribeInstancePatchStatesResult) => void): Request<SSM.Types.DescribeInstancePatchStatesResult, AWSError>;
   /**
-   * Retrieves the high-level patch state for the instances in the specified patch group.
+   * Retrieves the high-level patch state for the managed nodes in the specified patch group.
    */
   describeInstancePatchStatesForPatchGroup(params: SSM.Types.DescribeInstancePatchStatesForPatchGroupRequest, callback?: (err: AWSError, data: SSM.Types.DescribeInstancePatchStatesForPatchGroupResult) => void): Request<SSM.Types.DescribeInstancePatchStatesForPatchGroupResult, AWSError>;
   /**
-   * Retrieves the high-level patch state for the instances in the specified patch group.
+   * Retrieves the high-level patch state for the managed nodes in the specified patch group.
    */
   describeInstancePatchStatesForPatchGroup(callback?: (err: AWSError, data: SSM.Types.DescribeInstancePatchStatesForPatchGroupResult) => void): Request<SSM.Types.DescribeInstancePatchStatesForPatchGroupResult, AWSError>;
   /**
-   * Retrieves information about the patches on the specified instance and their state relative to the patch baseline being used for the instance.
+   * Retrieves information about the patches on the specified managed node and their state relative to the patch baseline being used for the node.
    */
   describeInstancePatches(params: SSM.Types.DescribeInstancePatchesRequest, callback?: (err: AWSError, data: SSM.Types.DescribeInstancePatchesResult) => void): Request<SSM.Types.DescribeInstancePatchesResult, AWSError>;
   /**
-   * Retrieves information about the patches on the specified instance and their state relative to the patch baseline being used for the instance.
+   * Retrieves information about the patches on the specified managed node and their state relative to the patch baseline being used for the node.
    */
   describeInstancePatches(callback?: (err: AWSError, data: SSM.Types.DescribeInstancePatchesResult) => void): Request<SSM.Types.DescribeInstancePatchesResult, AWSError>;
   /**
@@ -397,59 +405,59 @@ declare class SSM extends Service {
    */
   describeMaintenanceWindowTargets(callback?: (err: AWSError, data: SSM.Types.DescribeMaintenanceWindowTargetsResult) => void): Request<SSM.Types.DescribeMaintenanceWindowTargetsResult, AWSError>;
   /**
-   * Lists the tasks in a maintenance window.  For maintenance window tasks without a specified target, you cannot supply values for --max-errors and --max-concurrency. Instead, the system inserts a placeholder value of 1, which may be reported in the response to this command. These values do not affect the running of your task and can be ignored. 
+   * Lists the tasks in a maintenance window.  For maintenance window tasks without a specified target, you can't supply values for --max-errors and --max-concurrency. Instead, the system inserts a placeholder value of 1, which may be reported in the response to this command. These values don't affect the running of your task and can be ignored. 
    */
   describeMaintenanceWindowTasks(params: SSM.Types.DescribeMaintenanceWindowTasksRequest, callback?: (err: AWSError, data: SSM.Types.DescribeMaintenanceWindowTasksResult) => void): Request<SSM.Types.DescribeMaintenanceWindowTasksResult, AWSError>;
   /**
-   * Lists the tasks in a maintenance window.  For maintenance window tasks without a specified target, you cannot supply values for --max-errors and --max-concurrency. Instead, the system inserts a placeholder value of 1, which may be reported in the response to this command. These values do not affect the running of your task and can be ignored. 
+   * Lists the tasks in a maintenance window.  For maintenance window tasks without a specified target, you can't supply values for --max-errors and --max-concurrency. Instead, the system inserts a placeholder value of 1, which may be reported in the response to this command. These values don't affect the running of your task and can be ignored. 
    */
   describeMaintenanceWindowTasks(callback?: (err: AWSError, data: SSM.Types.DescribeMaintenanceWindowTasksResult) => void): Request<SSM.Types.DescribeMaintenanceWindowTasksResult, AWSError>;
   /**
-   * Retrieves the maintenance windows in an AWS account.
+   * Retrieves the maintenance windows in an Amazon Web Services account.
    */
   describeMaintenanceWindows(params: SSM.Types.DescribeMaintenanceWindowsRequest, callback?: (err: AWSError, data: SSM.Types.DescribeMaintenanceWindowsResult) => void): Request<SSM.Types.DescribeMaintenanceWindowsResult, AWSError>;
   /**
-   * Retrieves the maintenance windows in an AWS account.
+   * Retrieves the maintenance windows in an Amazon Web Services account.
    */
   describeMaintenanceWindows(callback?: (err: AWSError, data: SSM.Types.DescribeMaintenanceWindowsResult) => void): Request<SSM.Types.DescribeMaintenanceWindowsResult, AWSError>;
   /**
-   * Retrieves information about the maintenance window targets or tasks that an instance is associated with.
+   * Retrieves information about the maintenance window targets or tasks that a managed node is associated with.
    */
   describeMaintenanceWindowsForTarget(params: SSM.Types.DescribeMaintenanceWindowsForTargetRequest, callback?: (err: AWSError, data: SSM.Types.DescribeMaintenanceWindowsForTargetResult) => void): Request<SSM.Types.DescribeMaintenanceWindowsForTargetResult, AWSError>;
   /**
-   * Retrieves information about the maintenance window targets or tasks that an instance is associated with.
+   * Retrieves information about the maintenance window targets or tasks that a managed node is associated with.
    */
   describeMaintenanceWindowsForTarget(callback?: (err: AWSError, data: SSM.Types.DescribeMaintenanceWindowsForTargetResult) => void): Request<SSM.Types.DescribeMaintenanceWindowsForTargetResult, AWSError>;
   /**
-   * Query a set of OpsItems. You must have permission in AWS Identity and Access Management (IAM) to query a list of OpsItems. For more information, see Getting started with OpsCenter in the AWS Systems Manager User Guide. Operations engineers and IT professionals use OpsCenter to view, investigate, and remediate operational issues impacting the performance and health of their AWS resources. For more information, see AWS Systems Manager OpsCenter in the AWS Systems Manager User Guide. 
+   * Query a set of OpsItems. You must have permission in Identity and Access Management (IAM) to query a list of OpsItems. For more information, see Getting started with OpsCenter in the Amazon Web Services Systems Manager User Guide. Operations engineers and IT professionals use Amazon Web Services Systems Manager OpsCenter to view, investigate, and remediate operational issues impacting the performance and health of their Amazon Web Services resources. For more information, see OpsCenter in the Amazon Web Services Systems Manager User Guide. 
    */
   describeOpsItems(params: SSM.Types.DescribeOpsItemsRequest, callback?: (err: AWSError, data: SSM.Types.DescribeOpsItemsResponse) => void): Request<SSM.Types.DescribeOpsItemsResponse, AWSError>;
   /**
-   * Query a set of OpsItems. You must have permission in AWS Identity and Access Management (IAM) to query a list of OpsItems. For more information, see Getting started with OpsCenter in the AWS Systems Manager User Guide. Operations engineers and IT professionals use OpsCenter to view, investigate, and remediate operational issues impacting the performance and health of their AWS resources. For more information, see AWS Systems Manager OpsCenter in the AWS Systems Manager User Guide. 
+   * Query a set of OpsItems. You must have permission in Identity and Access Management (IAM) to query a list of OpsItems. For more information, see Getting started with OpsCenter in the Amazon Web Services Systems Manager User Guide. Operations engineers and IT professionals use Amazon Web Services Systems Manager OpsCenter to view, investigate, and remediate operational issues impacting the performance and health of their Amazon Web Services resources. For more information, see OpsCenter in the Amazon Web Services Systems Manager User Guide. 
    */
   describeOpsItems(callback?: (err: AWSError, data: SSM.Types.DescribeOpsItemsResponse) => void): Request<SSM.Types.DescribeOpsItemsResponse, AWSError>;
   /**
-   * Get information about a parameter.  Request results are returned on a best-effort basis. If you specify MaxResults in the request, the response includes information up to the limit specified. The number of items returned, however, can be between zero and the value of MaxResults. If the service reaches an internal limit while processing the results, it stops the operation and returns the matching values up to that point and a NextToken. You can specify the NextToken in a subsequent call to get the next set of results. 
+   * Get information about a parameter. Request results are returned on a best-effort basis. If you specify MaxResults in the request, the response includes information up to the limit specified. The number of items returned, however, can be between zero and the value of MaxResults. If the service reaches an internal limit while processing the results, it stops the operation and returns the matching values up to that point and a NextToken. You can specify the NextToken in a subsequent call to get the next set of results.  If you change the KMS key alias for the KMS key used to encrypt a parameter, then you must also update the key alias the parameter uses to reference KMS. Otherwise, DescribeParameters retrieves whatever the original key alias was referencing. 
    */
   describeParameters(params: SSM.Types.DescribeParametersRequest, callback?: (err: AWSError, data: SSM.Types.DescribeParametersResult) => void): Request<SSM.Types.DescribeParametersResult, AWSError>;
   /**
-   * Get information about a parameter.  Request results are returned on a best-effort basis. If you specify MaxResults in the request, the response includes information up to the limit specified. The number of items returned, however, can be between zero and the value of MaxResults. If the service reaches an internal limit while processing the results, it stops the operation and returns the matching values up to that point and a NextToken. You can specify the NextToken in a subsequent call to get the next set of results. 
+   * Get information about a parameter. Request results are returned on a best-effort basis. If you specify MaxResults in the request, the response includes information up to the limit specified. The number of items returned, however, can be between zero and the value of MaxResults. If the service reaches an internal limit while processing the results, it stops the operation and returns the matching values up to that point and a NextToken. You can specify the NextToken in a subsequent call to get the next set of results.  If you change the KMS key alias for the KMS key used to encrypt a parameter, then you must also update the key alias the parameter uses to reference KMS. Otherwise, DescribeParameters retrieves whatever the original key alias was referencing. 
    */
   describeParameters(callback?: (err: AWSError, data: SSM.Types.DescribeParametersResult) => void): Request<SSM.Types.DescribeParametersResult, AWSError>;
   /**
-   * Lists the patch baselines in your AWS account.
+   * Lists the patch baselines in your Amazon Web Services account.
    */
   describePatchBaselines(params: SSM.Types.DescribePatchBaselinesRequest, callback?: (err: AWSError, data: SSM.Types.DescribePatchBaselinesResult) => void): Request<SSM.Types.DescribePatchBaselinesResult, AWSError>;
   /**
-   * Lists the patch baselines in your AWS account.
+   * Lists the patch baselines in your Amazon Web Services account.
    */
   describePatchBaselines(callback?: (err: AWSError, data: SSM.Types.DescribePatchBaselinesResult) => void): Request<SSM.Types.DescribePatchBaselinesResult, AWSError>;
   /**
-   * Returns high-level aggregated patch compliance state for a patch group.
+   * Returns high-level aggregated patch compliance state information for a patch group.
    */
   describePatchGroupState(params: SSM.Types.DescribePatchGroupStateRequest, callback?: (err: AWSError, data: SSM.Types.DescribePatchGroupStateResult) => void): Request<SSM.Types.DescribePatchGroupStateResult, AWSError>;
   /**
-   * Returns high-level aggregated patch compliance state for a patch group.
+   * Returns high-level aggregated patch compliance state information for a patch group.
    */
   describePatchGroupState(callback?: (err: AWSError, data: SSM.Types.DescribePatchGroupStateResult) => void): Request<SSM.Types.DescribePatchGroupStateResult, AWSError>;
   /**
@@ -461,11 +469,11 @@ declare class SSM extends Service {
    */
   describePatchGroups(callback?: (err: AWSError, data: SSM.Types.DescribePatchGroupsResult) => void): Request<SSM.Types.DescribePatchGroupsResult, AWSError>;
   /**
-   * Lists the properties of available patches organized by product, product family, classification, severity, and other properties of available patches. You can use the reported properties in the filters you specify in requests for actions such as CreatePatchBaseline, UpdatePatchBaseline, DescribeAvailablePatches, and DescribePatchBaselines. The following section lists the properties that can be used in filters for each major operating system type:  AMAZON_LINUX  Valid properties: PRODUCT, CLASSIFICATION, SEVERITY  AMAZON_LINUX_2  Valid properties: PRODUCT, CLASSIFICATION, SEVERITY  CENTOS  Valid properties: PRODUCT, CLASSIFICATION, SEVERITY  DEBIAN  Valid properties: PRODUCT, PRIORITY  MACOS  Valid properties: PRODUCT, CLASSIFICATION  ORACLE_LINUX  Valid properties: PRODUCT, CLASSIFICATION, SEVERITY  REDHAT_ENTERPRISE_LINUX  Valid properties: PRODUCT, CLASSIFICATION, SEVERITY  SUSE  Valid properties: PRODUCT, CLASSIFICATION, SEVERITY  UBUNTU  Valid properties: PRODUCT, PRIORITY  WINDOWS  Valid properties: PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, MSRC_SEVERITY  
+   * Lists the properties of available patches organized by product, product family, classification, severity, and other properties of available patches. You can use the reported properties in the filters you specify in requests for operations such as CreatePatchBaseline, UpdatePatchBaseline, DescribeAvailablePatches, and DescribePatchBaselines. The following section lists the properties that can be used in filters for each major operating system type:  AMAZON_LINUX  Valid properties: PRODUCT | CLASSIFICATION | SEVERITY   AMAZON_LINUX_2  Valid properties: PRODUCT | CLASSIFICATION | SEVERITY   CENTOS  Valid properties: PRODUCT | CLASSIFICATION | SEVERITY   DEBIAN  Valid properties: PRODUCT | PRIORITY   MACOS  Valid properties: PRODUCT | CLASSIFICATION   ORACLE_LINUX  Valid properties: PRODUCT | CLASSIFICATION | SEVERITY   REDHAT_ENTERPRISE_LINUX  Valid properties: PRODUCT | CLASSIFICATION | SEVERITY   SUSE  Valid properties: PRODUCT | CLASSIFICATION | SEVERITY   UBUNTU  Valid properties: PRODUCT | PRIORITY   WINDOWS  Valid properties: PRODUCT | PRODUCT_FAMILY | CLASSIFICATION | MSRC_SEVERITY   
    */
   describePatchProperties(params: SSM.Types.DescribePatchPropertiesRequest, callback?: (err: AWSError, data: SSM.Types.DescribePatchPropertiesResult) => void): Request<SSM.Types.DescribePatchPropertiesResult, AWSError>;
   /**
-   * Lists the properties of available patches organized by product, product family, classification, severity, and other properties of available patches. You can use the reported properties in the filters you specify in requests for actions such as CreatePatchBaseline, UpdatePatchBaseline, DescribeAvailablePatches, and DescribePatchBaselines. The following section lists the properties that can be used in filters for each major operating system type:  AMAZON_LINUX  Valid properties: PRODUCT, CLASSIFICATION, SEVERITY  AMAZON_LINUX_2  Valid properties: PRODUCT, CLASSIFICATION, SEVERITY  CENTOS  Valid properties: PRODUCT, CLASSIFICATION, SEVERITY  DEBIAN  Valid properties: PRODUCT, PRIORITY  MACOS  Valid properties: PRODUCT, CLASSIFICATION  ORACLE_LINUX  Valid properties: PRODUCT, CLASSIFICATION, SEVERITY  REDHAT_ENTERPRISE_LINUX  Valid properties: PRODUCT, CLASSIFICATION, SEVERITY  SUSE  Valid properties: PRODUCT, CLASSIFICATION, SEVERITY  UBUNTU  Valid properties: PRODUCT, PRIORITY  WINDOWS  Valid properties: PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, MSRC_SEVERITY  
+   * Lists the properties of available patches organized by product, product family, classification, severity, and other properties of available patches. You can use the reported properties in the filters you specify in requests for operations such as CreatePatchBaseline, UpdatePatchBaseline, DescribeAvailablePatches, and DescribePatchBaselines. The following section lists the properties that can be used in filters for each major operating system type:  AMAZON_LINUX  Valid properties: PRODUCT | CLASSIFICATION | SEVERITY   AMAZON_LINUX_2  Valid properties: PRODUCT | CLASSIFICATION | SEVERITY   CENTOS  Valid properties: PRODUCT | CLASSIFICATION | SEVERITY   DEBIAN  Valid properties: PRODUCT | PRIORITY   MACOS  Valid properties: PRODUCT | CLASSIFICATION   ORACLE_LINUX  Valid properties: PRODUCT | CLASSIFICATION | SEVERITY   REDHAT_ENTERPRISE_LINUX  Valid properties: PRODUCT | CLASSIFICATION | SEVERITY   SUSE  Valid properties: PRODUCT | CLASSIFICATION | SEVERITY   UBUNTU  Valid properties: PRODUCT | PRIORITY   WINDOWS  Valid properties: PRODUCT | PRODUCT_FAMILY | CLASSIFICATION | MSRC_SEVERITY   
    */
   describePatchProperties(callback?: (err: AWSError, data: SSM.Types.DescribePatchPropertiesResult) => void): Request<SSM.Types.DescribePatchPropertiesResult, AWSError>;
   /**
@@ -477,6 +485,14 @@ declare class SSM extends Service {
    */
   describeSessions(callback?: (err: AWSError, data: SSM.Types.DescribeSessionsResponse) => void): Request<SSM.Types.DescribeSessionsResponse, AWSError>;
   /**
+   * Deletes the association between an OpsItem and a related item. For example, this API operation can delete an Incident Manager incident from an OpsItem. Incident Manager is a capability of Amazon Web Services Systems Manager.
+   */
+  disassociateOpsItemRelatedItem(params: SSM.Types.DisassociateOpsItemRelatedItemRequest, callback?: (err: AWSError, data: SSM.Types.DisassociateOpsItemRelatedItemResponse) => void): Request<SSM.Types.DisassociateOpsItemRelatedItemResponse, AWSError>;
+  /**
+   * Deletes the association between an OpsItem and a related item. For example, this API operation can delete an Incident Manager incident from an OpsItem. Incident Manager is a capability of Amazon Web Services Systems Manager.
+   */
+  disassociateOpsItemRelatedItem(callback?: (err: AWSError, data: SSM.Types.DisassociateOpsItemRelatedItemResponse) => void): Request<SSM.Types.DisassociateOpsItemRelatedItemResponse, AWSError>;
+  /**
    * Get detailed information about a particular Automation execution.
    */
   getAutomationExecution(params: SSM.Types.GetAutomationExecutionRequest, callback?: (err: AWSError, data: SSM.Types.GetAutomationExecutionResult) => void): Request<SSM.Types.GetAutomationExecutionResult, AWSError>;
@@ -485,59 +501,59 @@ declare class SSM extends Service {
    */
   getAutomationExecution(callback?: (err: AWSError, data: SSM.Types.GetAutomationExecutionResult) => void): Request<SSM.Types.GetAutomationExecutionResult, AWSError>;
   /**
-   * Gets the state of the AWS Systems Manager Change Calendar at an optional, specified time. If you specify a time, GetCalendarState returns the state of the calendar at a specific time, and returns the next time that the Change Calendar state will transition. If you do not specify a time, GetCalendarState assumes the current time. Change Calendar entries have two possible states: OPEN or CLOSED. If you specify more than one calendar in a request, the command returns the status of OPEN only if all calendars in the request are open. If one or more calendars in the request are closed, the status returned is CLOSED. For more information about Systems Manager Change Calendar, see AWS Systems Manager Change Calendar in the AWS Systems Manager User Guide.
+   * Gets the state of a Amazon Web Services Systems Manager change calendar at the current time or a specified time. If you specify a time, GetCalendarState returns the state of the calendar at that specific time, and returns the next time that the change calendar state will transition. If you don't specify a time, GetCalendarState uses the current time. Change Calendar entries have two possible states: OPEN or CLOSED. If you specify more than one calendar in a request, the command returns the status of OPEN only if all calendars in the request are open. If one or more calendars in the request are closed, the status returned is CLOSED. For more information about Change Calendar, a capability of Amazon Web Services Systems Manager, see Amazon Web Services Systems Manager Change Calendar in the Amazon Web Services Systems Manager User Guide.
    */
   getCalendarState(params: SSM.Types.GetCalendarStateRequest, callback?: (err: AWSError, data: SSM.Types.GetCalendarStateResponse) => void): Request<SSM.Types.GetCalendarStateResponse, AWSError>;
   /**
-   * Gets the state of the AWS Systems Manager Change Calendar at an optional, specified time. If you specify a time, GetCalendarState returns the state of the calendar at a specific time, and returns the next time that the Change Calendar state will transition. If you do not specify a time, GetCalendarState assumes the current time. Change Calendar entries have two possible states: OPEN or CLOSED. If you specify more than one calendar in a request, the command returns the status of OPEN only if all calendars in the request are open. If one or more calendars in the request are closed, the status returned is CLOSED. For more information about Systems Manager Change Calendar, see AWS Systems Manager Change Calendar in the AWS Systems Manager User Guide.
+   * Gets the state of a Amazon Web Services Systems Manager change calendar at the current time or a specified time. If you specify a time, GetCalendarState returns the state of the calendar at that specific time, and returns the next time that the change calendar state will transition. If you don't specify a time, GetCalendarState uses the current time. Change Calendar entries have two possible states: OPEN or CLOSED. If you specify more than one calendar in a request, the command returns the status of OPEN only if all calendars in the request are open. If one or more calendars in the request are closed, the status returned is CLOSED. For more information about Change Calendar, a capability of Amazon Web Services Systems Manager, see Amazon Web Services Systems Manager Change Calendar in the Amazon Web Services Systems Manager User Guide.
    */
   getCalendarState(callback?: (err: AWSError, data: SSM.Types.GetCalendarStateResponse) => void): Request<SSM.Types.GetCalendarStateResponse, AWSError>;
   /**
-   * Returns detailed information about command execution for an invocation or plugin.  GetCommandInvocation only gives the execution status of a plugin in a document. To get the command execution status on a specific instance, use ListCommandInvocations. To get the command execution status across instances, use ListCommands.
+   * Returns detailed information about command execution for an invocation or plugin.  GetCommandInvocation only gives the execution status of a plugin in a document. To get the command execution status on a specific managed node, use ListCommandInvocations. To get the command execution status across managed nodes, use ListCommands.
    */
   getCommandInvocation(params: SSM.Types.GetCommandInvocationRequest, callback?: (err: AWSError, data: SSM.Types.GetCommandInvocationResult) => void): Request<SSM.Types.GetCommandInvocationResult, AWSError>;
   /**
-   * Returns detailed information about command execution for an invocation or plugin.  GetCommandInvocation only gives the execution status of a plugin in a document. To get the command execution status on a specific instance, use ListCommandInvocations. To get the command execution status across instances, use ListCommands.
+   * Returns detailed information about command execution for an invocation or plugin.  GetCommandInvocation only gives the execution status of a plugin in a document. To get the command execution status on a specific managed node, use ListCommandInvocations. To get the command execution status across managed nodes, use ListCommands.
    */
   getCommandInvocation(callback?: (err: AWSError, data: SSM.Types.GetCommandInvocationResult) => void): Request<SSM.Types.GetCommandInvocationResult, AWSError>;
   /**
-   * Retrieves the Session Manager connection status for an instance to determine whether it is running and ready to receive Session Manager connections.
+   * Retrieves the Session Manager connection status for a managed node to determine whether it is running and ready to receive Session Manager connections.
    */
   getConnectionStatus(params: SSM.Types.GetConnectionStatusRequest, callback?: (err: AWSError, data: SSM.Types.GetConnectionStatusResponse) => void): Request<SSM.Types.GetConnectionStatusResponse, AWSError>;
   /**
-   * Retrieves the Session Manager connection status for an instance to determine whether it is running and ready to receive Session Manager connections.
+   * Retrieves the Session Manager connection status for a managed node to determine whether it is running and ready to receive Session Manager connections.
    */
   getConnectionStatus(callback?: (err: AWSError, data: SSM.Types.GetConnectionStatusResponse) => void): Request<SSM.Types.GetConnectionStatusResponse, AWSError>;
   /**
-   * Retrieves the default patch baseline. Note that Systems Manager supports creating multiple default patch baselines. For example, you can create a default patch baseline for each operating system. If you do not specify an operating system value, the default patch baseline for Windows is returned.
+   * Retrieves the default patch baseline. Amazon Web Services Systems Manager supports creating multiple default patch baselines. For example, you can create a default patch baseline for each operating system. If you don't specify an operating system value, the default patch baseline for Windows is returned.
    */
   getDefaultPatchBaseline(params: SSM.Types.GetDefaultPatchBaselineRequest, callback?: (err: AWSError, data: SSM.Types.GetDefaultPatchBaselineResult) => void): Request<SSM.Types.GetDefaultPatchBaselineResult, AWSError>;
   /**
-   * Retrieves the default patch baseline. Note that Systems Manager supports creating multiple default patch baselines. For example, you can create a default patch baseline for each operating system. If you do not specify an operating system value, the default patch baseline for Windows is returned.
+   * Retrieves the default patch baseline. Amazon Web Services Systems Manager supports creating multiple default patch baselines. For example, you can create a default patch baseline for each operating system. If you don't specify an operating system value, the default patch baseline for Windows is returned.
    */
   getDefaultPatchBaseline(callback?: (err: AWSError, data: SSM.Types.GetDefaultPatchBaselineResult) => void): Request<SSM.Types.GetDefaultPatchBaselineResult, AWSError>;
   /**
-   * Retrieves the current snapshot for the patch baseline the instance uses. This API is primarily used by the AWS-RunPatchBaseline Systems Manager document. 
+   * Retrieves the current snapshot for the patch baseline the managed node uses. This API is primarily used by the AWS-RunPatchBaseline Systems Manager document (SSM document).  If you run the command locally, such as with the Command Line Interface (CLI), the system attempts to use your local Amazon Web Services credentials and the operation fails. To avoid this, you can run the command in the Amazon Web Services Systems Manager console. Use Run Command, a capability of Amazon Web Services Systems Manager, with an SSM document that enables you to target a managed node with a script or command. For example, run the command using the AWS-RunShellScript document or the AWS-RunPowerShellScript document. 
    */
   getDeployablePatchSnapshotForInstance(params: SSM.Types.GetDeployablePatchSnapshotForInstanceRequest, callback?: (err: AWSError, data: SSM.Types.GetDeployablePatchSnapshotForInstanceResult) => void): Request<SSM.Types.GetDeployablePatchSnapshotForInstanceResult, AWSError>;
   /**
-   * Retrieves the current snapshot for the patch baseline the instance uses. This API is primarily used by the AWS-RunPatchBaseline Systems Manager document. 
+   * Retrieves the current snapshot for the patch baseline the managed node uses. This API is primarily used by the AWS-RunPatchBaseline Systems Manager document (SSM document).  If you run the command locally, such as with the Command Line Interface (CLI), the system attempts to use your local Amazon Web Services credentials and the operation fails. To avoid this, you can run the command in the Amazon Web Services Systems Manager console. Use Run Command, a capability of Amazon Web Services Systems Manager, with an SSM document that enables you to target a managed node with a script or command. For example, run the command using the AWS-RunShellScript document or the AWS-RunPowerShellScript document. 
    */
   getDeployablePatchSnapshotForInstance(callback?: (err: AWSError, data: SSM.Types.GetDeployablePatchSnapshotForInstanceResult) => void): Request<SSM.Types.GetDeployablePatchSnapshotForInstanceResult, AWSError>;
   /**
-   * Gets the contents of the specified Systems Manager document.
+   * Gets the contents of the specified Amazon Web Services Systems Manager document (SSM document).
    */
   getDocument(params: SSM.Types.GetDocumentRequest, callback?: (err: AWSError, data: SSM.Types.GetDocumentResult) => void): Request<SSM.Types.GetDocumentResult, AWSError>;
   /**
-   * Gets the contents of the specified Systems Manager document.
+   * Gets the contents of the specified Amazon Web Services Systems Manager document (SSM document).
    */
   getDocument(callback?: (err: AWSError, data: SSM.Types.GetDocumentResult) => void): Request<SSM.Types.GetDocumentResult, AWSError>;
   /**
-   * Query inventory information.
+   * Query inventory information. This includes managed node status, such as Stopped or Terminated.
    */
   getInventory(params: SSM.Types.GetInventoryRequest, callback?: (err: AWSError, data: SSM.Types.GetInventoryResult) => void): Request<SSM.Types.GetInventoryResult, AWSError>;
   /**
-   * Query inventory information.
+   * Query inventory information. This includes managed node status, such as Stopped or Terminated.
    */
   getInventory(callback?: (err: AWSError, data: SSM.Types.GetInventoryResult) => void): Request<SSM.Types.GetInventoryResult, AWSError>;
   /**
@@ -581,19 +597,19 @@ declare class SSM extends Service {
    */
   getMaintenanceWindowExecutionTaskInvocation(callback?: (err: AWSError, data: SSM.Types.GetMaintenanceWindowExecutionTaskInvocationResult) => void): Request<SSM.Types.GetMaintenanceWindowExecutionTaskInvocationResult, AWSError>;
   /**
-   * Lists the tasks in a maintenance window.  For maintenance window tasks without a specified target, you cannot supply values for --max-errors and --max-concurrency. Instead, the system inserts a placeholder value of 1, which may be reported in the response to this command. These values do not affect the running of your task and can be ignored. 
+   * Lists the tasks in a maintenance window.  For maintenance window tasks without a specified target, you can't supply values for --max-errors and --max-concurrency. Instead, the system inserts a placeholder value of 1, which may be reported in the response to this command. These values don't affect the running of your task and can be ignored. 
    */
   getMaintenanceWindowTask(params: SSM.Types.GetMaintenanceWindowTaskRequest, callback?: (err: AWSError, data: SSM.Types.GetMaintenanceWindowTaskResult) => void): Request<SSM.Types.GetMaintenanceWindowTaskResult, AWSError>;
   /**
-   * Lists the tasks in a maintenance window.  For maintenance window tasks without a specified target, you cannot supply values for --max-errors and --max-concurrency. Instead, the system inserts a placeholder value of 1, which may be reported in the response to this command. These values do not affect the running of your task and can be ignored. 
+   * Lists the tasks in a maintenance window.  For maintenance window tasks without a specified target, you can't supply values for --max-errors and --max-concurrency. Instead, the system inserts a placeholder value of 1, which may be reported in the response to this command. These values don't affect the running of your task and can be ignored. 
    */
   getMaintenanceWindowTask(callback?: (err: AWSError, data: SSM.Types.GetMaintenanceWindowTaskResult) => void): Request<SSM.Types.GetMaintenanceWindowTaskResult, AWSError>;
   /**
-   * Get information about an OpsItem by using the ID. You must have permission in AWS Identity and Access Management (IAM) to view information about an OpsItem. For more information, see Getting started with OpsCenter in the AWS Systems Manager User Guide. Operations engineers and IT professionals use OpsCenter to view, investigate, and remediate operational issues impacting the performance and health of their AWS resources. For more information, see AWS Systems Manager OpsCenter in the AWS Systems Manager User Guide. 
+   * Get information about an OpsItem by using the ID. You must have permission in Identity and Access Management (IAM) to view information about an OpsItem. For more information, see Getting started with OpsCenter in the Amazon Web Services Systems Manager User Guide. Operations engineers and IT professionals use Amazon Web Services Systems Manager OpsCenter to view, investigate, and remediate operational issues impacting the performance and health of their Amazon Web Services resources. For more information, see OpsCenter in the Amazon Web Services Systems Manager User Guide. 
    */
   getOpsItem(params: SSM.Types.GetOpsItemRequest, callback?: (err: AWSError, data: SSM.Types.GetOpsItemResponse) => void): Request<SSM.Types.GetOpsItemResponse, AWSError>;
   /**
-   * Get information about an OpsItem by using the ID. You must have permission in AWS Identity and Access Management (IAM) to view information about an OpsItem. For more information, see Getting started with OpsCenter in the AWS Systems Manager User Guide. Operations engineers and IT professionals use OpsCenter to view, investigate, and remediate operational issues impacting the performance and health of their AWS resources. For more information, see AWS Systems Manager OpsCenter in the AWS Systems Manager User Guide. 
+   * Get information about an OpsItem by using the ID. You must have permission in Identity and Access Management (IAM) to view information about an OpsItem. For more information, see Getting started with OpsCenter in the Amazon Web Services Systems Manager User Guide. Operations engineers and IT professionals use Amazon Web Services Systems Manager OpsCenter to view, investigate, and remediate operational issues impacting the performance and health of their Amazon Web Services resources. For more information, see OpsCenter in the Amazon Web Services Systems Manager User Guide. 
    */
   getOpsItem(callback?: (err: AWSError, data: SSM.Types.GetOpsItemResponse) => void): Request<SSM.Types.GetOpsItemResponse, AWSError>;
   /**
@@ -605,43 +621,43 @@ declare class SSM extends Service {
    */
   getOpsMetadata(callback?: (err: AWSError, data: SSM.Types.GetOpsMetadataResult) => void): Request<SSM.Types.GetOpsMetadataResult, AWSError>;
   /**
-   * View a summary of OpsItems based on specified filters and aggregators.
+   * View a summary of operations metadata (OpsData) based on specified filters and aggregators. OpsData can include information about Amazon Web Services Systems Manager OpsCenter operational workitems (OpsItems) as well as information about any Amazon Web Services resource or service configured to report OpsData to Amazon Web Services Systems Manager Explorer. 
    */
   getOpsSummary(params: SSM.Types.GetOpsSummaryRequest, callback?: (err: AWSError, data: SSM.Types.GetOpsSummaryResult) => void): Request<SSM.Types.GetOpsSummaryResult, AWSError>;
   /**
-   * View a summary of OpsItems based on specified filters and aggregators.
+   * View a summary of operations metadata (OpsData) based on specified filters and aggregators. OpsData can include information about Amazon Web Services Systems Manager OpsCenter operational workitems (OpsItems) as well as information about any Amazon Web Services resource or service configured to report OpsData to Amazon Web Services Systems Manager Explorer. 
    */
   getOpsSummary(callback?: (err: AWSError, data: SSM.Types.GetOpsSummaryResult) => void): Request<SSM.Types.GetOpsSummaryResult, AWSError>;
   /**
-   * Get information about a parameter by using the parameter name. Don't confuse this API action with the GetParameters API action.
+   * Get information about a single parameter by specifying the parameter name.  To get information about more than one parameter at a time, use the GetParameters operation. 
    */
   getParameter(params: SSM.Types.GetParameterRequest, callback?: (err: AWSError, data: SSM.Types.GetParameterResult) => void): Request<SSM.Types.GetParameterResult, AWSError>;
   /**
-   * Get information about a parameter by using the parameter name. Don't confuse this API action with the GetParameters API action.
+   * Get information about a single parameter by specifying the parameter name.  To get information about more than one parameter at a time, use the GetParameters operation. 
    */
   getParameter(callback?: (err: AWSError, data: SSM.Types.GetParameterResult) => void): Request<SSM.Types.GetParameterResult, AWSError>;
   /**
-   * Retrieves the history of all changes to a parameter.
+   * Retrieves the history of all changes to a parameter.  If you change the KMS key alias for the KMS key used to encrypt a parameter, then you must also update the key alias the parameter uses to reference KMS. Otherwise, GetParameterHistory retrieves whatever the original key alias was referencing. 
    */
   getParameterHistory(params: SSM.Types.GetParameterHistoryRequest, callback?: (err: AWSError, data: SSM.Types.GetParameterHistoryResult) => void): Request<SSM.Types.GetParameterHistoryResult, AWSError>;
   /**
-   * Retrieves the history of all changes to a parameter.
+   * Retrieves the history of all changes to a parameter.  If you change the KMS key alias for the KMS key used to encrypt a parameter, then you must also update the key alias the parameter uses to reference KMS. Otherwise, GetParameterHistory retrieves whatever the original key alias was referencing. 
    */
   getParameterHistory(callback?: (err: AWSError, data: SSM.Types.GetParameterHistoryResult) => void): Request<SSM.Types.GetParameterHistoryResult, AWSError>;
   /**
-   * Get details of a parameter. Don't confuse this API action with the GetParameter API action.
+   * Get information about one or more parameters by specifying multiple parameter names.  To get information about a single parameter, you can use the GetParameter operation instead. 
    */
   getParameters(params: SSM.Types.GetParametersRequest, callback?: (err: AWSError, data: SSM.Types.GetParametersResult) => void): Request<SSM.Types.GetParametersResult, AWSError>;
   /**
-   * Get details of a parameter. Don't confuse this API action with the GetParameter API action.
+   * Get information about one or more parameters by specifying multiple parameter names.  To get information about a single parameter, you can use the GetParameter operation instead. 
    */
   getParameters(callback?: (err: AWSError, data: SSM.Types.GetParametersResult) => void): Request<SSM.Types.GetParametersResult, AWSError>;
   /**
-   * Retrieve information about one or more parameters in a specific hierarchy.   Request results are returned on a best-effort basis. If you specify MaxResults in the request, the response includes information up to the limit specified. The number of items returned, however, can be between zero and the value of MaxResults. If the service reaches an internal limit while processing the results, it stops the operation and returns the matching values up to that point and a NextToken. You can specify the NextToken in a subsequent call to get the next set of results. 
+   * Retrieve information about one or more parameters in a specific hierarchy.  Request results are returned on a best-effort basis. If you specify MaxResults in the request, the response includes information up to the limit specified. The number of items returned, however, can be between zero and the value of MaxResults. If the service reaches an internal limit while processing the results, it stops the operation and returns the matching values up to that point and a NextToken. You can specify the NextToken in a subsequent call to get the next set of results.
    */
   getParametersByPath(params: SSM.Types.GetParametersByPathRequest, callback?: (err: AWSError, data: SSM.Types.GetParametersByPathResult) => void): Request<SSM.Types.GetParametersByPathResult, AWSError>;
   /**
-   * Retrieve information about one or more parameters in a specific hierarchy.   Request results are returned on a best-effort basis. If you specify MaxResults in the request, the response includes information up to the limit specified. The number of items returned, however, can be between zero and the value of MaxResults. If the service reaches an internal limit while processing the results, it stops the operation and returns the matching values up to that point and a NextToken. You can specify the NextToken in a subsequent call to get the next set of results. 
+   * Retrieve information about one or more parameters in a specific hierarchy.  Request results are returned on a best-effort basis. If you specify MaxResults in the request, the response includes information up to the limit specified. The number of items returned, however, can be between zero and the value of MaxResults. If the service reaches an internal limit while processing the results, it stops the operation and returns the matching values up to that point and a NextToken. You can specify the NextToken in a subsequent call to get the next set of results.
    */
   getParametersByPath(callback?: (err: AWSError, data: SSM.Types.GetParametersByPathResult) => void): Request<SSM.Types.GetParametersByPathResult, AWSError>;
   /**
@@ -661,19 +677,19 @@ declare class SSM extends Service {
    */
   getPatchBaselineForPatchGroup(callback?: (err: AWSError, data: SSM.Types.GetPatchBaselineForPatchGroupResult) => void): Request<SSM.Types.GetPatchBaselineForPatchGroupResult, AWSError>;
   /**
-   *  ServiceSetting is an account-level setting for an AWS service. This setting defines how a user interacts with or uses a service or a feature of a service. For example, if an AWS service charges money to the account based on feature or service usage, then the AWS service team might create a default setting of "false". This means the user can't use this feature unless they change the setting to "true" and intentionally opt in for a paid feature. Services map a SettingId object to a setting value. AWS services teams define the default value for a SettingId. You can't create a new SettingId, but you can overwrite the default value if you have the ssm:UpdateServiceSetting permission for the setting. Use the UpdateServiceSetting API action to change the default setting. Or use the ResetServiceSetting to change the value back to the original value defined by the AWS service team. Query the current service setting for the account. 
+   *  ServiceSetting is an account-level setting for an Amazon Web Services service. This setting defines how a user interacts with or uses a service or a feature of a service. For example, if an Amazon Web Services service charges money to the account based on feature or service usage, then the Amazon Web Services service team might create a default setting of false. This means the user can't use this feature unless they change the setting to true and intentionally opt in for a paid feature. Services map a SettingId object to a setting value. Amazon Web Services services teams define the default value for a SettingId. You can't create a new SettingId, but you can overwrite the default value if you have the ssm:UpdateServiceSetting permission for the setting. Use the UpdateServiceSetting API operation to change the default setting. Or use the ResetServiceSetting to change the value back to the original value defined by the Amazon Web Services service team. Query the current service setting for the Amazon Web Services account. 
    */
   getServiceSetting(params: SSM.Types.GetServiceSettingRequest, callback?: (err: AWSError, data: SSM.Types.GetServiceSettingResult) => void): Request<SSM.Types.GetServiceSettingResult, AWSError>;
   /**
-   *  ServiceSetting is an account-level setting for an AWS service. This setting defines how a user interacts with or uses a service or a feature of a service. For example, if an AWS service charges money to the account based on feature or service usage, then the AWS service team might create a default setting of "false". This means the user can't use this feature unless they change the setting to "true" and intentionally opt in for a paid feature. Services map a SettingId object to a setting value. AWS services teams define the default value for a SettingId. You can't create a new SettingId, but you can overwrite the default value if you have the ssm:UpdateServiceSetting permission for the setting. Use the UpdateServiceSetting API action to change the default setting. Or use the ResetServiceSetting to change the value back to the original value defined by the AWS service team. Query the current service setting for the account. 
+   *  ServiceSetting is an account-level setting for an Amazon Web Services service. This setting defines how a user interacts with or uses a service or a feature of a service. For example, if an Amazon Web Services service charges money to the account based on feature or service usage, then the Amazon Web Services service team might create a default setting of false. This means the user can't use this feature unless they change the setting to true and intentionally opt in for a paid feature. Services map a SettingId object to a setting value. Amazon Web Services services teams define the default value for a SettingId. You can't create a new SettingId, but you can overwrite the default value if you have the ssm:UpdateServiceSetting permission for the setting. Use the UpdateServiceSetting API operation to change the default setting. Or use the ResetServiceSetting to change the value back to the original value defined by the Amazon Web Services service team. Query the current service setting for the Amazon Web Services account. 
    */
   getServiceSetting(callback?: (err: AWSError, data: SSM.Types.GetServiceSettingResult) => void): Request<SSM.Types.GetServiceSettingResult, AWSError>;
   /**
-   * A parameter label is a user-defined alias to help you manage different versions of a parameter. When you modify a parameter, Systems Manager automatically saves a new version and increments the version number by one. A label can help you remember the purpose of a parameter when there are multiple versions.  Parameter labels have the following requirements and restrictions.   A version of a parameter can have a maximum of 10 labels.   You can't attach the same label to different versions of the same parameter. For example, if version 1 has the label Production, then you can't attach Production to version 2.   You can move a label from one version of a parameter to another.   You can't create a label when you create a new parameter. You must attach a label to a specific version of a parameter.   If you no longer want to use a parameter label, then you can either delete it or move it to a different version of a parameter.   A label can have a maximum of 100 characters.   Labels can contain letters (case sensitive), numbers, periods (.), hyphens (-), or underscores (_).   Labels can't begin with a number, "aws," or "ssm" (not case sensitive). If a label fails to meet these requirements, then the label is not associated with a parameter and the system displays it in the list of InvalidLabels.  
+   * A parameter label is a user-defined alias to help you manage different versions of a parameter. When you modify a parameter, Amazon Web Services Systems Manager automatically saves a new version and increments the version number by one. A label can help you remember the purpose of a parameter when there are multiple versions.  Parameter labels have the following requirements and restrictions.   A version of a parameter can have a maximum of 10 labels.   You can't attach the same label to different versions of the same parameter. For example, if version 1 has the label Production, then you can't attach Production to version 2.   You can move a label from one version of a parameter to another.   You can't create a label when you create a new parameter. You must attach a label to a specific version of a parameter.   If you no longer want to use a parameter label, then you can either delete it or move it to a different version of a parameter.   A label can have a maximum of 100 characters.   Labels can contain letters (case sensitive), numbers, periods (.), hyphens (-), or underscores (_).   Labels can't begin with a number, "aws" or "ssm" (not case sensitive). If a label fails to meet these requirements, then the label isn't associated with a parameter and the system displays it in the list of InvalidLabels.  
    */
   labelParameterVersion(params: SSM.Types.LabelParameterVersionRequest, callback?: (err: AWSError, data: SSM.Types.LabelParameterVersionResult) => void): Request<SSM.Types.LabelParameterVersionResult, AWSError>;
   /**
-   * A parameter label is a user-defined alias to help you manage different versions of a parameter. When you modify a parameter, Systems Manager automatically saves a new version and increments the version number by one. A label can help you remember the purpose of a parameter when there are multiple versions.  Parameter labels have the following requirements and restrictions.   A version of a parameter can have a maximum of 10 labels.   You can't attach the same label to different versions of the same parameter. For example, if version 1 has the label Production, then you can't attach Production to version 2.   You can move a label from one version of a parameter to another.   You can't create a label when you create a new parameter. You must attach a label to a specific version of a parameter.   If you no longer want to use a parameter label, then you can either delete it or move it to a different version of a parameter.   A label can have a maximum of 100 characters.   Labels can contain letters (case sensitive), numbers, periods (.), hyphens (-), or underscores (_).   Labels can't begin with a number, "aws," or "ssm" (not case sensitive). If a label fails to meet these requirements, then the label is not associated with a parameter and the system displays it in the list of InvalidLabels.  
+   * A parameter label is a user-defined alias to help you manage different versions of a parameter. When you modify a parameter, Amazon Web Services Systems Manager automatically saves a new version and increments the version number by one. A label can help you remember the purpose of a parameter when there are multiple versions.  Parameter labels have the following requirements and restrictions.   A version of a parameter can have a maximum of 10 labels.   You can't attach the same label to different versions of the same parameter. For example, if version 1 has the label Production, then you can't attach Production to version 2.   You can move a label from one version of a parameter to another.   You can't create a label when you create a new parameter. You must attach a label to a specific version of a parameter.   If you no longer want to use a parameter label, then you can either delete it or move it to a different version of a parameter.   A label can have a maximum of 100 characters.   Labels can contain letters (case sensitive), numbers, periods (.), hyphens (-), or underscores (_).   Labels can't begin with a number, "aws" or "ssm" (not case sensitive). If a label fails to meet these requirements, then the label isn't associated with a parameter and the system displays it in the list of InvalidLabels.  
    */
   labelParameterVersion(callback?: (err: AWSError, data: SSM.Types.LabelParameterVersionResult) => void): Request<SSM.Types.LabelParameterVersionResult, AWSError>;
   /**
@@ -685,35 +701,35 @@ declare class SSM extends Service {
    */
   listAssociationVersions(callback?: (err: AWSError, data: SSM.Types.ListAssociationVersionsResult) => void): Request<SSM.Types.ListAssociationVersionsResult, AWSError>;
   /**
-   * Returns all State Manager associations in the current AWS account and Region. You can limit the results to a specific State Manager association document or instance by specifying a filter.
+   * Returns all State Manager associations in the current Amazon Web Services account and Amazon Web Services Region. You can limit the results to a specific State Manager association document or managed node by specifying a filter. State Manager is a capability of Amazon Web Services Systems Manager.
    */
   listAssociations(params: SSM.Types.ListAssociationsRequest, callback?: (err: AWSError, data: SSM.Types.ListAssociationsResult) => void): Request<SSM.Types.ListAssociationsResult, AWSError>;
   /**
-   * Returns all State Manager associations in the current AWS account and Region. You can limit the results to a specific State Manager association document or instance by specifying a filter.
+   * Returns all State Manager associations in the current Amazon Web Services account and Amazon Web Services Region. You can limit the results to a specific State Manager association document or managed node by specifying a filter. State Manager is a capability of Amazon Web Services Systems Manager.
    */
   listAssociations(callback?: (err: AWSError, data: SSM.Types.ListAssociationsResult) => void): Request<SSM.Types.ListAssociationsResult, AWSError>;
   /**
-   * An invocation is copy of a command sent to a specific instance. A command can apply to one or more instances. A command invocation applies to one instance. For example, if a user runs SendCommand against three instances, then a command invocation is created for each requested instance ID. ListCommandInvocations provide status about command execution.
+   * An invocation is copy of a command sent to a specific managed node. A command can apply to one or more managed nodes. A command invocation applies to one managed node. For example, if a user runs SendCommand against three managed nodes, then a command invocation is created for each requested managed node ID. ListCommandInvocations provide status about command execution.
    */
   listCommandInvocations(params: SSM.Types.ListCommandInvocationsRequest, callback?: (err: AWSError, data: SSM.Types.ListCommandInvocationsResult) => void): Request<SSM.Types.ListCommandInvocationsResult, AWSError>;
   /**
-   * An invocation is copy of a command sent to a specific instance. A command can apply to one or more instances. A command invocation applies to one instance. For example, if a user runs SendCommand against three instances, then a command invocation is created for each requested instance ID. ListCommandInvocations provide status about command execution.
+   * An invocation is copy of a command sent to a specific managed node. A command can apply to one or more managed nodes. A command invocation applies to one managed node. For example, if a user runs SendCommand against three managed nodes, then a command invocation is created for each requested managed node ID. ListCommandInvocations provide status about command execution.
    */
   listCommandInvocations(callback?: (err: AWSError, data: SSM.Types.ListCommandInvocationsResult) => void): Request<SSM.Types.ListCommandInvocationsResult, AWSError>;
   /**
-   * Lists the commands requested by users of the AWS account.
+   * Lists the commands requested by users of the Amazon Web Services account.
    */
   listCommands(params: SSM.Types.ListCommandsRequest, callback?: (err: AWSError, data: SSM.Types.ListCommandsResult) => void): Request<SSM.Types.ListCommandsResult, AWSError>;
   /**
-   * Lists the commands requested by users of the AWS account.
+   * Lists the commands requested by users of the Amazon Web Services account.
    */
   listCommands(callback?: (err: AWSError, data: SSM.Types.ListCommandsResult) => void): Request<SSM.Types.ListCommandsResult, AWSError>;
   /**
-   * For a specified resource ID, this API action returns a list of compliance statuses for different resource types. Currently, you can only specify one resource ID per call. List results depend on the criteria specified in the filter.
+   * For a specified resource ID, this API operation returns a list of compliance statuses for different resource types. Currently, you can only specify one resource ID per call. List results depend on the criteria specified in the filter.
    */
   listComplianceItems(params: SSM.Types.ListComplianceItemsRequest, callback?: (err: AWSError, data: SSM.Types.ListComplianceItemsResult) => void): Request<SSM.Types.ListComplianceItemsResult, AWSError>;
   /**
-   * For a specified resource ID, this API action returns a list of compliance statuses for different resource types. Currently, you can only specify one resource ID per call. List results depend on the criteria specified in the filter.
+   * For a specified resource ID, this API operation returns a list of compliance statuses for different resource types. Currently, you can only specify one resource ID per call. List results depend on the criteria specified in the filter.
    */
   listComplianceItems(callback?: (err: AWSError, data: SSM.Types.ListComplianceItemsResult) => void): Request<SSM.Types.ListComplianceItemsResult, AWSError>;
   /**
@@ -725,11 +741,11 @@ declare class SSM extends Service {
    */
   listComplianceSummaries(callback?: (err: AWSError, data: SSM.Types.ListComplianceSummariesResult) => void): Request<SSM.Types.ListComplianceSummariesResult, AWSError>;
   /**
-   * Information about approval reviews for a version of an SSM document.
+   * Information about approval reviews for a version of a change template in Change Manager.
    */
   listDocumentMetadataHistory(params: SSM.Types.ListDocumentMetadataHistoryRequest, callback?: (err: AWSError, data: SSM.Types.ListDocumentMetadataHistoryResponse) => void): Request<SSM.Types.ListDocumentMetadataHistoryResponse, AWSError>;
   /**
-   * Information about approval reviews for a version of an SSM document.
+   * Information about approval reviews for a version of a change template in Change Manager.
    */
   listDocumentMetadataHistory(callback?: (err: AWSError, data: SSM.Types.ListDocumentMetadataHistoryResponse) => void): Request<SSM.Types.ListDocumentMetadataHistoryResponse, AWSError>;
   /**
@@ -741,11 +757,11 @@ declare class SSM extends Service {
    */
   listDocumentVersions(callback?: (err: AWSError, data: SSM.Types.ListDocumentVersionsResult) => void): Request<SSM.Types.ListDocumentVersionsResult, AWSError>;
   /**
-   * Returns all Systems Manager (SSM) documents in the current AWS account and Region. You can limit the results of this request by using a filter.
+   * Returns all Systems Manager (SSM) documents in the current Amazon Web Services account and Amazon Web Services Region. You can limit the results of this request by using a filter.
    */
   listDocuments(params: SSM.Types.ListDocumentsRequest, callback?: (err: AWSError, data: SSM.Types.ListDocumentsResult) => void): Request<SSM.Types.ListDocumentsResult, AWSError>;
   /**
-   * Returns all Systems Manager (SSM) documents in the current AWS account and Region. You can limit the results of this request by using a filter.
+   * Returns all Systems Manager (SSM) documents in the current Amazon Web Services account and Amazon Web Services Region. You can limit the results of this request by using a filter.
    */
   listDocuments(callback?: (err: AWSError, data: SSM.Types.ListDocumentsResult) => void): Request<SSM.Types.ListDocumentsResult, AWSError>;
   /**
@@ -757,19 +773,27 @@ declare class SSM extends Service {
    */
   listInventoryEntries(callback?: (err: AWSError, data: SSM.Types.ListInventoryEntriesResult) => void): Request<SSM.Types.ListInventoryEntriesResult, AWSError>;
   /**
-   * Returns a list of all OpsItem events in the current AWS account and Region. You can limit the results to events associated with specific OpsItems by specifying a filter.
+   * Returns a list of all OpsItem events in the current Amazon Web Services Region and Amazon Web Services account. You can limit the results to events associated with specific OpsItems by specifying a filter.
    */
   listOpsItemEvents(params: SSM.Types.ListOpsItemEventsRequest, callback?: (err: AWSError, data: SSM.Types.ListOpsItemEventsResponse) => void): Request<SSM.Types.ListOpsItemEventsResponse, AWSError>;
   /**
-   * Returns a list of all OpsItem events in the current AWS account and Region. You can limit the results to events associated with specific OpsItems by specifying a filter.
+   * Returns a list of all OpsItem events in the current Amazon Web Services Region and Amazon Web Services account. You can limit the results to events associated with specific OpsItems by specifying a filter.
    */
   listOpsItemEvents(callback?: (err: AWSError, data: SSM.Types.ListOpsItemEventsResponse) => void): Request<SSM.Types.ListOpsItemEventsResponse, AWSError>;
   /**
-   * Systems Manager calls this API action when displaying all Application Manager OpsMetadata objects or blobs.
+   * Lists all related-item resources associated with a Systems Manager OpsCenter OpsItem. OpsCenter is a capability of Amazon Web Services Systems Manager.
+   */
+  listOpsItemRelatedItems(params: SSM.Types.ListOpsItemRelatedItemsRequest, callback?: (err: AWSError, data: SSM.Types.ListOpsItemRelatedItemsResponse) => void): Request<SSM.Types.ListOpsItemRelatedItemsResponse, AWSError>;
+  /**
+   * Lists all related-item resources associated with a Systems Manager OpsCenter OpsItem. OpsCenter is a capability of Amazon Web Services Systems Manager.
+   */
+  listOpsItemRelatedItems(callback?: (err: AWSError, data: SSM.Types.ListOpsItemRelatedItemsResponse) => void): Request<SSM.Types.ListOpsItemRelatedItemsResponse, AWSError>;
+  /**
+   * Amazon Web Services Systems Manager calls this API operation when displaying all Application Manager OpsMetadata objects or blobs.
    */
   listOpsMetadata(params: SSM.Types.ListOpsMetadataRequest, callback?: (err: AWSError, data: SSM.Types.ListOpsMetadataResult) => void): Request<SSM.Types.ListOpsMetadataResult, AWSError>;
   /**
-   * Systems Manager calls this API action when displaying all Application Manager OpsMetadata objects or blobs.
+   * Amazon Web Services Systems Manager calls this API operation when displaying all Application Manager OpsMetadata objects or blobs.
    */
   listOpsMetadata(callback?: (err: AWSError, data: SSM.Types.ListOpsMetadataResult) => void): Request<SSM.Types.ListOpsMetadataResult, AWSError>;
   /**
@@ -789,35 +813,35 @@ declare class SSM extends Service {
    */
   listResourceDataSync(callback?: (err: AWSError, data: SSM.Types.ListResourceDataSyncResult) => void): Request<SSM.Types.ListResourceDataSyncResult, AWSError>;
   /**
-   * Returns a list of the tags assigned to the specified resource.
+   * Returns a list of the tags assigned to the specified resource. For information about the ID format for each supported resource type, see AddTagsToResource.
    */
   listTagsForResource(params: SSM.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: SSM.Types.ListTagsForResourceResult) => void): Request<SSM.Types.ListTagsForResourceResult, AWSError>;
   /**
-   * Returns a list of the tags assigned to the specified resource.
+   * Returns a list of the tags assigned to the specified resource. For information about the ID format for each supported resource type, see AddTagsToResource.
    */
   listTagsForResource(callback?: (err: AWSError, data: SSM.Types.ListTagsForResourceResult) => void): Request<SSM.Types.ListTagsForResourceResult, AWSError>;
   /**
-   * Shares a Systems Manager document publicly or privately. If you share a document privately, you must specify the AWS user account IDs for those people who can use the document. If you share a document publicly, you must specify All as the account ID.
+   * Shares a Amazon Web Services Systems Manager document (SSM document)publicly or privately. If you share a document privately, you must specify the Amazon Web Services user account IDs for those people who can use the document. If you share a document publicly, you must specify All as the account ID.
    */
   modifyDocumentPermission(params: SSM.Types.ModifyDocumentPermissionRequest, callback?: (err: AWSError, data: SSM.Types.ModifyDocumentPermissionResponse) => void): Request<SSM.Types.ModifyDocumentPermissionResponse, AWSError>;
   /**
-   * Shares a Systems Manager document publicly or privately. If you share a document privately, you must specify the AWS user account IDs for those people who can use the document. If you share a document publicly, you must specify All as the account ID.
+   * Shares a Amazon Web Services Systems Manager document (SSM document)publicly or privately. If you share a document privately, you must specify the Amazon Web Services user account IDs for those people who can use the document. If you share a document publicly, you must specify All as the account ID.
    */
   modifyDocumentPermission(callback?: (err: AWSError, data: SSM.Types.ModifyDocumentPermissionResponse) => void): Request<SSM.Types.ModifyDocumentPermissionResponse, AWSError>;
   /**
-   * Registers a compliance type and other compliance details on a designated resource. This action lets you register custom compliance details with a resource. This call overwrites existing compliance information on the resource, so you must provide a full list of compliance items each time that you send the request. ComplianceType can be one of the following:   ExecutionId: The execution ID when the patch, association, or custom compliance item was applied.   ExecutionType: Specify patch, association, or Custom:string.   ExecutionTime. The time the patch, association, or custom compliance item was applied to the instance.   Id: The patch, association, or custom compliance ID.   Title: A title.   Status: The status of the compliance item. For example, approved for patches, or Failed for associations.   Severity: A patch severity. For example, critical.   DocumentName: A SSM document name. For example, AWS-RunPatchBaseline.   DocumentVersion: An SSM document version number. For example, 4.   Classification: A patch classification. For example, security updates.   PatchBaselineId: A patch baseline ID.   PatchSeverity: A patch severity. For example, Critical.   PatchState: A patch state. For example, InstancesWithFailedPatches.   PatchGroup: The name of a patch group.   InstalledTime: The time the association, patch, or custom compliance item was applied to the resource. Specify the time by using the following format: yyyy-MM-dd'T'HH:mm:ss'Z'  
+   * Registers a compliance type and other compliance details on a designated resource. This operation lets you register custom compliance details with a resource. This call overwrites existing compliance information on the resource, so you must provide a full list of compliance items each time that you send the request. ComplianceType can be one of the following:   ExecutionId: The execution ID when the patch, association, or custom compliance item was applied.   ExecutionType: Specify patch, association, or Custom:string.   ExecutionTime. The time the patch, association, or custom compliance item was applied to the managed node.   Id: The patch, association, or custom compliance ID.   Title: A title.   Status: The status of the compliance item. For example, approved for patches, or Failed for associations.   Severity: A patch severity. For example, critical.   DocumentName: An SSM document name. For example, AWS-RunPatchBaseline.   DocumentVersion: An SSM document version number. For example, 4.   Classification: A patch classification. For example, security updates.   PatchBaselineId: A patch baseline ID.   PatchSeverity: A patch severity. For example, Critical.   PatchState: A patch state. For example, InstancesWithFailedPatches.   PatchGroup: The name of a patch group.   InstalledTime: The time the association, patch, or custom compliance item was applied to the resource. Specify the time by using the following format: yyyy-MM-dd'T'HH:mm:ss'Z'  
    */
   putComplianceItems(params: SSM.Types.PutComplianceItemsRequest, callback?: (err: AWSError, data: SSM.Types.PutComplianceItemsResult) => void): Request<SSM.Types.PutComplianceItemsResult, AWSError>;
   /**
-   * Registers a compliance type and other compliance details on a designated resource. This action lets you register custom compliance details with a resource. This call overwrites existing compliance information on the resource, so you must provide a full list of compliance items each time that you send the request. ComplianceType can be one of the following:   ExecutionId: The execution ID when the patch, association, or custom compliance item was applied.   ExecutionType: Specify patch, association, or Custom:string.   ExecutionTime. The time the patch, association, or custom compliance item was applied to the instance.   Id: The patch, association, or custom compliance ID.   Title: A title.   Status: The status of the compliance item. For example, approved for patches, or Failed for associations.   Severity: A patch severity. For example, critical.   DocumentName: A SSM document name. For example, AWS-RunPatchBaseline.   DocumentVersion: An SSM document version number. For example, 4.   Classification: A patch classification. For example, security updates.   PatchBaselineId: A patch baseline ID.   PatchSeverity: A patch severity. For example, Critical.   PatchState: A patch state. For example, InstancesWithFailedPatches.   PatchGroup: The name of a patch group.   InstalledTime: The time the association, patch, or custom compliance item was applied to the resource. Specify the time by using the following format: yyyy-MM-dd'T'HH:mm:ss'Z'  
+   * Registers a compliance type and other compliance details on a designated resource. This operation lets you register custom compliance details with a resource. This call overwrites existing compliance information on the resource, so you must provide a full list of compliance items each time that you send the request. ComplianceType can be one of the following:   ExecutionId: The execution ID when the patch, association, or custom compliance item was applied.   ExecutionType: Specify patch, association, or Custom:string.   ExecutionTime. The time the patch, association, or custom compliance item was applied to the managed node.   Id: The patch, association, or custom compliance ID.   Title: A title.   Status: The status of the compliance item. For example, approved for patches, or Failed for associations.   Severity: A patch severity. For example, critical.   DocumentName: An SSM document name. For example, AWS-RunPatchBaseline.   DocumentVersion: An SSM document version number. For example, 4.   Classification: A patch classification. For example, security updates.   PatchBaselineId: A patch baseline ID.   PatchSeverity: A patch severity. For example, Critical.   PatchState: A patch state. For example, InstancesWithFailedPatches.   PatchGroup: The name of a patch group.   InstalledTime: The time the association, patch, or custom compliance item was applied to the resource. Specify the time by using the following format: yyyy-MM-dd'T'HH:mm:ss'Z'  
    */
   putComplianceItems(callback?: (err: AWSError, data: SSM.Types.PutComplianceItemsResult) => void): Request<SSM.Types.PutComplianceItemsResult, AWSError>;
   /**
-   * Bulk update custom inventory items on one more instance. The request adds an inventory item, if it doesn't already exist, or updates an inventory item, if it does exist.
+   * Bulk update custom inventory items on one or more managed nodes. The request adds an inventory item, if it doesn't already exist, or updates an inventory item, if it does exist.
    */
   putInventory(params: SSM.Types.PutInventoryRequest, callback?: (err: AWSError, data: SSM.Types.PutInventoryResult) => void): Request<SSM.Types.PutInventoryResult, AWSError>;
   /**
-   * Bulk update custom inventory items on one more instance. The request adds an inventory item, if it doesn't already exist, or updates an inventory item, if it does exist.
+   * Bulk update custom inventory items on one or more managed nodes. The request adds an inventory item, if it doesn't already exist, or updates an inventory item, if it does exist.
    */
   putInventory(callback?: (err: AWSError, data: SSM.Types.PutInventoryResult) => void): Request<SSM.Types.PutInventoryResult, AWSError>;
   /**
@@ -829,11 +853,11 @@ declare class SSM extends Service {
    */
   putParameter(callback?: (err: AWSError, data: SSM.Types.PutParameterResult) => void): Request<SSM.Types.PutParameterResult, AWSError>;
   /**
-   * Defines the default patch baseline for the relevant operating system. To reset the AWS predefined patch baseline as the default, specify the full patch baseline ARN as the baseline ID value. For example, for CentOS, specify arn:aws:ssm:us-east-2:733109147000:patchbaseline/pb-0574b43a65ea646ed instead of pb-0574b43a65ea646ed.
+   * Defines the default patch baseline for the relevant operating system. To reset the Amazon Web Services-predefined patch baseline as the default, specify the full patch baseline Amazon Resource Name (ARN) as the baseline ID value. For example, for CentOS, specify arn:aws:ssm:us-east-2:733109147000:patchbaseline/pb-0574b43a65ea646ed instead of pb-0574b43a65ea646ed.
    */
   registerDefaultPatchBaseline(params: SSM.Types.RegisterDefaultPatchBaselineRequest, callback?: (err: AWSError, data: SSM.Types.RegisterDefaultPatchBaselineResult) => void): Request<SSM.Types.RegisterDefaultPatchBaselineResult, AWSError>;
   /**
-   * Defines the default patch baseline for the relevant operating system. To reset the AWS predefined patch baseline as the default, specify the full patch baseline ARN as the baseline ID value. For example, for CentOS, specify arn:aws:ssm:us-east-2:733109147000:patchbaseline/pb-0574b43a65ea646ed instead of pb-0574b43a65ea646ed.
+   * Defines the default patch baseline for the relevant operating system. To reset the Amazon Web Services-predefined patch baseline as the default, specify the full patch baseline Amazon Resource Name (ARN) as the baseline ID value. For example, for CentOS, specify arn:aws:ssm:us-east-2:733109147000:patchbaseline/pb-0574b43a65ea646ed instead of pb-0574b43a65ea646ed.
    */
   registerDefaultPatchBaseline(callback?: (err: AWSError, data: SSM.Types.RegisterDefaultPatchBaselineResult) => void): Request<SSM.Types.RegisterDefaultPatchBaselineResult, AWSError>;
   /**
@@ -869,19 +893,19 @@ declare class SSM extends Service {
    */
   removeTagsFromResource(callback?: (err: AWSError, data: SSM.Types.RemoveTagsFromResourceResult) => void): Request<SSM.Types.RemoveTagsFromResourceResult, AWSError>;
   /**
-   *  ServiceSetting is an account-level setting for an AWS service. This setting defines how a user interacts with or uses a service or a feature of a service. For example, if an AWS service charges money to the account based on feature or service usage, then the AWS service team might create a default setting of "false". This means the user can't use this feature unless they change the setting to "true" and intentionally opt in for a paid feature. Services map a SettingId object to a setting value. AWS services teams define the default value for a SettingId. You can't create a new SettingId, but you can overwrite the default value if you have the ssm:UpdateServiceSetting permission for the setting. Use the GetServiceSetting API action to view the current value. Use the UpdateServiceSetting API action to change the default setting.  Reset the service setting for the account to the default value as provisioned by the AWS service team. 
+   *  ServiceSetting is an account-level setting for an Amazon Web Services service. This setting defines how a user interacts with or uses a service or a feature of a service. For example, if an Amazon Web Services service charges money to the account based on feature or service usage, then the Amazon Web Services service team might create a default setting of "false". This means the user can't use this feature unless they change the setting to "true" and intentionally opt in for a paid feature. Services map a SettingId object to a setting value. Amazon Web Services services teams define the default value for a SettingId. You can't create a new SettingId, but you can overwrite the default value if you have the ssm:UpdateServiceSetting permission for the setting. Use the GetServiceSetting API operation to view the current value. Use the UpdateServiceSetting API operation to change the default setting.  Reset the service setting for the account to the default value as provisioned by the Amazon Web Services service team. 
    */
   resetServiceSetting(params: SSM.Types.ResetServiceSettingRequest, callback?: (err: AWSError, data: SSM.Types.ResetServiceSettingResult) => void): Request<SSM.Types.ResetServiceSettingResult, AWSError>;
   /**
-   *  ServiceSetting is an account-level setting for an AWS service. This setting defines how a user interacts with or uses a service or a feature of a service. For example, if an AWS service charges money to the account based on feature or service usage, then the AWS service team might create a default setting of "false". This means the user can't use this feature unless they change the setting to "true" and intentionally opt in for a paid feature. Services map a SettingId object to a setting value. AWS services teams define the default value for a SettingId. You can't create a new SettingId, but you can overwrite the default value if you have the ssm:UpdateServiceSetting permission for the setting. Use the GetServiceSetting API action to view the current value. Use the UpdateServiceSetting API action to change the default setting.  Reset the service setting for the account to the default value as provisioned by the AWS service team. 
+   *  ServiceSetting is an account-level setting for an Amazon Web Services service. This setting defines how a user interacts with or uses a service or a feature of a service. For example, if an Amazon Web Services service charges money to the account based on feature or service usage, then the Amazon Web Services service team might create a default setting of "false". This means the user can't use this feature unless they change the setting to "true" and intentionally opt in for a paid feature. Services map a SettingId object to a setting value. Amazon Web Services services teams define the default value for a SettingId. You can't create a new SettingId, but you can overwrite the default value if you have the ssm:UpdateServiceSetting permission for the setting. Use the GetServiceSetting API operation to view the current value. Use the UpdateServiceSetting API operation to change the default setting.  Reset the service setting for the account to the default value as provisioned by the Amazon Web Services service team. 
    */
   resetServiceSetting(callback?: (err: AWSError, data: SSM.Types.ResetServiceSettingResult) => void): Request<SSM.Types.ResetServiceSettingResult, AWSError>;
   /**
-   * Reconnects a session to an instance after it has been disconnected. Connections can be resumed for disconnected sessions, but not terminated sessions.  This command is primarily for use by client machines to automatically reconnect during intermittent network issues. It is not intended for any other use. 
+   * Reconnects a session to a managed node after it has been disconnected. Connections can be resumed for disconnected sessions, but not terminated sessions.  This command is primarily for use by client machines to automatically reconnect during intermittent network issues. It isn't intended for any other use. 
    */
   resumeSession(params: SSM.Types.ResumeSessionRequest, callback?: (err: AWSError, data: SSM.Types.ResumeSessionResponse) => void): Request<SSM.Types.ResumeSessionResponse, AWSError>;
   /**
-   * Reconnects a session to an instance after it has been disconnected. Connections can be resumed for disconnected sessions, but not terminated sessions.  This command is primarily for use by client machines to automatically reconnect during intermittent network issues. It is not intended for any other use. 
+   * Reconnects a session to a managed node after it has been disconnected. Connections can be resumed for disconnected sessions, but not terminated sessions.  This command is primarily for use by client machines to automatically reconnect during intermittent network issues. It isn't intended for any other use. 
    */
   resumeSession(callback?: (err: AWSError, data: SSM.Types.ResumeSessionResponse) => void): Request<SSM.Types.ResumeSessionResponse, AWSError>;
   /**
@@ -893,43 +917,43 @@ declare class SSM extends Service {
    */
   sendAutomationSignal(callback?: (err: AWSError, data: SSM.Types.SendAutomationSignalResult) => void): Request<SSM.Types.SendAutomationSignalResult, AWSError>;
   /**
-   * Runs commands on one or more managed instances.
+   * Runs commands on one or more managed nodes.
    */
   sendCommand(params: SSM.Types.SendCommandRequest, callback?: (err: AWSError, data: SSM.Types.SendCommandResult) => void): Request<SSM.Types.SendCommandResult, AWSError>;
   /**
-   * Runs commands on one or more managed instances.
+   * Runs commands on one or more managed nodes.
    */
   sendCommand(callback?: (err: AWSError, data: SSM.Types.SendCommandResult) => void): Request<SSM.Types.SendCommandResult, AWSError>;
   /**
-   * Use this API action to run an association immediately and only one time. This action can be helpful when troubleshooting associations.
+   * Runs an association immediately and only one time. This operation can be helpful when troubleshooting associations.
    */
   startAssociationsOnce(params: SSM.Types.StartAssociationsOnceRequest, callback?: (err: AWSError, data: SSM.Types.StartAssociationsOnceResult) => void): Request<SSM.Types.StartAssociationsOnceResult, AWSError>;
   /**
-   * Use this API action to run an association immediately and only one time. This action can be helpful when troubleshooting associations.
+   * Runs an association immediately and only one time. This operation can be helpful when troubleshooting associations.
    */
   startAssociationsOnce(callback?: (err: AWSError, data: SSM.Types.StartAssociationsOnceResult) => void): Request<SSM.Types.StartAssociationsOnceResult, AWSError>;
   /**
-   * Initiates execution of an Automation document.
+   * Initiates execution of an Automation runbook.
    */
   startAutomationExecution(params: SSM.Types.StartAutomationExecutionRequest, callback?: (err: AWSError, data: SSM.Types.StartAutomationExecutionResult) => void): Request<SSM.Types.StartAutomationExecutionResult, AWSError>;
   /**
-   * Initiates execution of an Automation document.
+   * Initiates execution of an Automation runbook.
    */
   startAutomationExecution(callback?: (err: AWSError, data: SSM.Types.StartAutomationExecutionResult) => void): Request<SSM.Types.StartAutomationExecutionResult, AWSError>;
   /**
-   * Creates a change request for Change Manager. The runbooks (Automation documents) specified in the change request run only after all required approvals for the change request have been received.
+   * Creates a change request for Change Manager. The Automation runbooks specified in the change request run only after all required approvals for the change request have been received.
    */
   startChangeRequestExecution(params: SSM.Types.StartChangeRequestExecutionRequest, callback?: (err: AWSError, data: SSM.Types.StartChangeRequestExecutionResult) => void): Request<SSM.Types.StartChangeRequestExecutionResult, AWSError>;
   /**
-   * Creates a change request for Change Manager. The runbooks (Automation documents) specified in the change request run only after all required approvals for the change request have been received.
+   * Creates a change request for Change Manager. The Automation runbooks specified in the change request run only after all required approvals for the change request have been received.
    */
   startChangeRequestExecution(callback?: (err: AWSError, data: SSM.Types.StartChangeRequestExecutionResult) => void): Request<SSM.Types.StartChangeRequestExecutionResult, AWSError>;
   /**
-   * Initiates a connection to a target (for example, an instance) for a Session Manager session. Returns a URL and token that can be used to open a WebSocket connection for sending input and receiving outputs.  AWS CLI usage: start-session is an interactive command that requires the Session Manager plugin to be installed on the client machine making the call. For information, see Install the Session Manager plugin for the AWS CLI in the AWS Systems Manager User Guide. AWS Tools for PowerShell usage: Start-SSMSession is not currently supported by AWS Tools for PowerShell on Windows local machines. 
+   * Initiates a connection to a target (for example, a managed node) for a Session Manager session. Returns a URL and token that can be used to open a WebSocket connection for sending input and receiving outputs.  Amazon Web Services CLI usage: start-session is an interactive command that requires the Session Manager plugin to be installed on the client machine making the call. For information, see Install the Session Manager plugin for the Amazon Web Services CLI in the Amazon Web Services Systems Manager User Guide. Amazon Web Services Tools for PowerShell usage: Start-SSMSession isn't currently supported by Amazon Web Services Tools for PowerShell on Windows local machines. 
    */
   startSession(params: SSM.Types.StartSessionRequest, callback?: (err: AWSError, data: SSM.Types.StartSessionResponse) => void): Request<SSM.Types.StartSessionResponse, AWSError>;
   /**
-   * Initiates a connection to a target (for example, an instance) for a Session Manager session. Returns a URL and token that can be used to open a WebSocket connection for sending input and receiving outputs.  AWS CLI usage: start-session is an interactive command that requires the Session Manager plugin to be installed on the client machine making the call. For information, see Install the Session Manager plugin for the AWS CLI in the AWS Systems Manager User Guide. AWS Tools for PowerShell usage: Start-SSMSession is not currently supported by AWS Tools for PowerShell on Windows local machines. 
+   * Initiates a connection to a target (for example, a managed node) for a Session Manager session. Returns a URL and token that can be used to open a WebSocket connection for sending input and receiving outputs.  Amazon Web Services CLI usage: start-session is an interactive command that requires the Session Manager plugin to be installed on the client machine making the call. For information, see Install the Session Manager plugin for the Amazon Web Services CLI in the Amazon Web Services Systems Manager User Guide. Amazon Web Services Tools for PowerShell usage: Start-SSMSession isn't currently supported by Amazon Web Services Tools for PowerShell on Windows local machines. 
    */
   startSession(callback?: (err: AWSError, data: SSM.Types.StartSessionResponse) => void): Request<SSM.Types.StartSessionResponse, AWSError>;
   /**
@@ -941,11 +965,11 @@ declare class SSM extends Service {
    */
   stopAutomationExecution(callback?: (err: AWSError, data: SSM.Types.StopAutomationExecutionResult) => void): Request<SSM.Types.StopAutomationExecutionResult, AWSError>;
   /**
-   * Permanently ends a session and closes the data connection between the Session Manager client and SSM Agent on the instance. A terminated session cannot be resumed.
+   * Permanently ends a session and closes the data connection between the Session Manager client and SSM Agent on the managed node. A terminated session can't be resumed.
    */
   terminateSession(params: SSM.Types.TerminateSessionRequest, callback?: (err: AWSError, data: SSM.Types.TerminateSessionResponse) => void): Request<SSM.Types.TerminateSessionResponse, AWSError>;
   /**
-   * Permanently ends a session and closes the data connection between the Session Manager client and SSM Agent on the instance. A terminated session cannot be resumed.
+   * Permanently ends a session and closes the data connection between the Session Manager client and SSM Agent on the managed node. A terminated session can't be resumed.
    */
   terminateSession(callback?: (err: AWSError, data: SSM.Types.TerminateSessionResponse) => void): Request<SSM.Types.TerminateSessionResponse, AWSError>;
   /**
@@ -957,19 +981,19 @@ declare class SSM extends Service {
    */
   unlabelParameterVersion(callback?: (err: AWSError, data: SSM.Types.UnlabelParameterVersionResult) => void): Request<SSM.Types.UnlabelParameterVersionResult, AWSError>;
   /**
-   * Updates an association. You can update the association name and version, the document version, schedule, parameters, and Amazon S3 output.  In order to call this API action, your IAM user account, group, or role must be configured with permission to call the DescribeAssociation API action. If you don't have permission to call DescribeAssociation, then you receive the following error: An error occurred (AccessDeniedException) when calling the UpdateAssociation operation: User: &lt;user_arn&gt; is not authorized to perform: ssm:DescribeAssociation on resource: &lt;resource_arn&gt;   When you update an association, the association immediately runs against the specified targets. 
+   * Updates an association. You can update the association name and version, the document version, schedule, parameters, and Amazon Simple Storage Service (Amazon S3) output. When you call UpdateAssociation, the system removes all optional parameters from the request and overwrites the association with null values for those parameters. This is by design. You must specify all optional parameters in the call, even if you are not changing the parameters. This includes the Name parameter. Before calling this API action, we recommend that you call the DescribeAssociation API operation and make a note of all optional parameters required for your UpdateAssociation call. In order to call this API operation, your Identity and Access Management (IAM) user account, group, or role must be configured with permission to call the DescribeAssociation API operation. If you don't have permission to call DescribeAssociation, then you receive the following error: An error occurred (AccessDeniedException) when calling the UpdateAssociation operation: User: &lt;user_arn&gt; isn't authorized to perform: ssm:DescribeAssociation on resource: &lt;resource_arn&gt;   When you update an association, the association immediately runs against the specified targets. You can add the ApplyOnlyAtCronInterval parameter to run the association during the next schedule run. 
    */
   updateAssociation(params: SSM.Types.UpdateAssociationRequest, callback?: (err: AWSError, data: SSM.Types.UpdateAssociationResult) => void): Request<SSM.Types.UpdateAssociationResult, AWSError>;
   /**
-   * Updates an association. You can update the association name and version, the document version, schedule, parameters, and Amazon S3 output.  In order to call this API action, your IAM user account, group, or role must be configured with permission to call the DescribeAssociation API action. If you don't have permission to call DescribeAssociation, then you receive the following error: An error occurred (AccessDeniedException) when calling the UpdateAssociation operation: User: &lt;user_arn&gt; is not authorized to perform: ssm:DescribeAssociation on resource: &lt;resource_arn&gt;   When you update an association, the association immediately runs against the specified targets. 
+   * Updates an association. You can update the association name and version, the document version, schedule, parameters, and Amazon Simple Storage Service (Amazon S3) output. When you call UpdateAssociation, the system removes all optional parameters from the request and overwrites the association with null values for those parameters. This is by design. You must specify all optional parameters in the call, even if you are not changing the parameters. This includes the Name parameter. Before calling this API action, we recommend that you call the DescribeAssociation API operation and make a note of all optional parameters required for your UpdateAssociation call. In order to call this API operation, your Identity and Access Management (IAM) user account, group, or role must be configured with permission to call the DescribeAssociation API operation. If you don't have permission to call DescribeAssociation, then you receive the following error: An error occurred (AccessDeniedException) when calling the UpdateAssociation operation: User: &lt;user_arn&gt; isn't authorized to perform: ssm:DescribeAssociation on resource: &lt;resource_arn&gt;   When you update an association, the association immediately runs against the specified targets. You can add the ApplyOnlyAtCronInterval parameter to run the association during the next schedule run. 
    */
   updateAssociation(callback?: (err: AWSError, data: SSM.Types.UpdateAssociationResult) => void): Request<SSM.Types.UpdateAssociationResult, AWSError>;
   /**
-   * Updates the status of the Systems Manager document associated with the specified instance.
+   * Updates the status of the Amazon Web Services Systems Manager document (SSM document) associated with the specified managed node.  UpdateAssociationStatus is primarily used by the Amazon Web Services Systems Manager Agent (SSM Agent) to report status updates about your associations and is only used for associations created with the InstanceId legacy parameter.
    */
   updateAssociationStatus(params: SSM.Types.UpdateAssociationStatusRequest, callback?: (err: AWSError, data: SSM.Types.UpdateAssociationStatusResult) => void): Request<SSM.Types.UpdateAssociationStatusResult, AWSError>;
   /**
-   * Updates the status of the Systems Manager document associated with the specified instance.
+   * Updates the status of the Amazon Web Services Systems Manager document (SSM document) associated with the specified managed node.  UpdateAssociationStatus is primarily used by the Amazon Web Services Systems Manager Agent (SSM Agent) to report status updates about your associations and is only used for associations created with the InstanceId legacy parameter.
    */
   updateAssociationStatus(callback?: (err: AWSError, data: SSM.Types.UpdateAssociationStatusResult) => void): Request<SSM.Types.UpdateAssociationStatusResult, AWSError>;
   /**
@@ -989,11 +1013,11 @@ declare class SSM extends Service {
    */
   updateDocumentDefaultVersion(callback?: (err: AWSError, data: SSM.Types.UpdateDocumentDefaultVersionResult) => void): Request<SSM.Types.UpdateDocumentDefaultVersionResult, AWSError>;
   /**
-   * Updates information related to approval reviews for a specific version of a document.
+   * Updates information related to approval reviews for a specific version of a change template in Change Manager.
    */
   updateDocumentMetadata(params: SSM.Types.UpdateDocumentMetadataRequest, callback?: (err: AWSError, data: SSM.Types.UpdateDocumentMetadataResponse) => void): Request<SSM.Types.UpdateDocumentMetadataResponse, AWSError>;
   /**
-   * Updates information related to approval reviews for a specific version of a document.
+   * Updates information related to approval reviews for a specific version of a change template in Change Manager.
    */
   updateDocumentMetadata(callback?: (err: AWSError, data: SSM.Types.UpdateDocumentMetadataResponse) => void): Request<SSM.Types.UpdateDocumentMetadataResponse, AWSError>;
   /**
@@ -1005,67 +1029,67 @@ declare class SSM extends Service {
    */
   updateMaintenanceWindow(callback?: (err: AWSError, data: SSM.Types.UpdateMaintenanceWindowResult) => void): Request<SSM.Types.UpdateMaintenanceWindowResult, AWSError>;
   /**
-   * Modifies the target of an existing maintenance window. You can change the following:   Name   Description   Owner   IDs for an ID target   Tags for a Tag target   From any supported tag type to another. The three supported tag types are ID target, Tag target, and resource group. For more information, see Target.    If a parameter is null, then the corresponding field is not modified. 
+   * Modifies the target of an existing maintenance window. You can change the following:   Name   Description   Owner   IDs for an ID target   Tags for a Tag target   From any supported tag type to another. The three supported tag types are ID target, Tag target, and resource group. For more information, see Target.    If a parameter is null, then the corresponding field isn't modified. 
    */
   updateMaintenanceWindowTarget(params: SSM.Types.UpdateMaintenanceWindowTargetRequest, callback?: (err: AWSError, data: SSM.Types.UpdateMaintenanceWindowTargetResult) => void): Request<SSM.Types.UpdateMaintenanceWindowTargetResult, AWSError>;
   /**
-   * Modifies the target of an existing maintenance window. You can change the following:   Name   Description   Owner   IDs for an ID target   Tags for a Tag target   From any supported tag type to another. The three supported tag types are ID target, Tag target, and resource group. For more information, see Target.    If a parameter is null, then the corresponding field is not modified. 
+   * Modifies the target of an existing maintenance window. You can change the following:   Name   Description   Owner   IDs for an ID target   Tags for a Tag target   From any supported tag type to another. The three supported tag types are ID target, Tag target, and resource group. For more information, see Target.    If a parameter is null, then the corresponding field isn't modified. 
    */
   updateMaintenanceWindowTarget(callback?: (err: AWSError, data: SSM.Types.UpdateMaintenanceWindowTargetResult) => void): Request<SSM.Types.UpdateMaintenanceWindowTargetResult, AWSError>;
   /**
-   * Modifies a task assigned to a maintenance window. You can't change the task type, but you can change the following values:   TaskARN. For example, you can change a RUN_COMMAND task from AWS-RunPowerShellScript to AWS-RunShellScript.   ServiceRoleArn   TaskInvocationParameters   Priority   MaxConcurrency   MaxErrors    One or more targets must be specified for maintenance window Run Command-type tasks. Depending on the task, targets are optional for other maintenance window task types (Automation, AWS Lambda, and AWS Step Functions). For more information about running tasks that do not specify targets, see Registering maintenance window tasks without targets in the AWS Systems Manager User Guide.  If the value for a parameter in UpdateMaintenanceWindowTask is null, then the corresponding field is not modified. If you set Replace to true, then all fields required by the RegisterTaskWithMaintenanceWindow action are required for this request. Optional fields that aren't specified are set to null.  When you update a maintenance window task that has options specified in TaskInvocationParameters, you must provide again all the TaskInvocationParameters values that you want to retain. The values you do not specify again are removed. For example, suppose that when you registered a Run Command task, you specified TaskInvocationParameters values for Comment, NotificationConfig, and OutputS3BucketName. If you update the maintenance window task and specify only a different OutputS3BucketName value, the values for Comment and NotificationConfig are removed. 
+   * Modifies a task assigned to a maintenance window. You can't change the task type, but you can change the following values:    TaskARN. For example, you can change a RUN_COMMAND task from AWS-RunPowerShellScript to AWS-RunShellScript.    ServiceRoleArn     TaskInvocationParameters     Priority     MaxConcurrency     MaxErrors     One or more targets must be specified for maintenance window Run Command-type tasks. Depending on the task, targets are optional for other maintenance window task types (Automation, Lambda, and Step Functions). For more information about running tasks that don't specify targets, see Registering maintenance window tasks without targets in the Amazon Web Services Systems Manager User Guide.  If the value for a parameter in UpdateMaintenanceWindowTask is null, then the corresponding field isn't modified. If you set Replace to true, then all fields required by the RegisterTaskWithMaintenanceWindow operation are required for this request. Optional fields that aren't specified are set to null.  When you update a maintenance window task that has options specified in TaskInvocationParameters, you must provide again all the TaskInvocationParameters values that you want to retain. The values you don't specify again are removed. For example, suppose that when you registered a Run Command task, you specified TaskInvocationParameters values for Comment, NotificationConfig, and OutputS3BucketName. If you update the maintenance window task and specify only a different OutputS3BucketName value, the values for Comment and NotificationConfig are removed. 
    */
   updateMaintenanceWindowTask(params: SSM.Types.UpdateMaintenanceWindowTaskRequest, callback?: (err: AWSError, data: SSM.Types.UpdateMaintenanceWindowTaskResult) => void): Request<SSM.Types.UpdateMaintenanceWindowTaskResult, AWSError>;
   /**
-   * Modifies a task assigned to a maintenance window. You can't change the task type, but you can change the following values:   TaskARN. For example, you can change a RUN_COMMAND task from AWS-RunPowerShellScript to AWS-RunShellScript.   ServiceRoleArn   TaskInvocationParameters   Priority   MaxConcurrency   MaxErrors    One or more targets must be specified for maintenance window Run Command-type tasks. Depending on the task, targets are optional for other maintenance window task types (Automation, AWS Lambda, and AWS Step Functions). For more information about running tasks that do not specify targets, see Registering maintenance window tasks without targets in the AWS Systems Manager User Guide.  If the value for a parameter in UpdateMaintenanceWindowTask is null, then the corresponding field is not modified. If you set Replace to true, then all fields required by the RegisterTaskWithMaintenanceWindow action are required for this request. Optional fields that aren't specified are set to null.  When you update a maintenance window task that has options specified in TaskInvocationParameters, you must provide again all the TaskInvocationParameters values that you want to retain. The values you do not specify again are removed. For example, suppose that when you registered a Run Command task, you specified TaskInvocationParameters values for Comment, NotificationConfig, and OutputS3BucketName. If you update the maintenance window task and specify only a different OutputS3BucketName value, the values for Comment and NotificationConfig are removed. 
+   * Modifies a task assigned to a maintenance window. You can't change the task type, but you can change the following values:    TaskARN. For example, you can change a RUN_COMMAND task from AWS-RunPowerShellScript to AWS-RunShellScript.    ServiceRoleArn     TaskInvocationParameters     Priority     MaxConcurrency     MaxErrors     One or more targets must be specified for maintenance window Run Command-type tasks. Depending on the task, targets are optional for other maintenance window task types (Automation, Lambda, and Step Functions). For more information about running tasks that don't specify targets, see Registering maintenance window tasks without targets in the Amazon Web Services Systems Manager User Guide.  If the value for a parameter in UpdateMaintenanceWindowTask is null, then the corresponding field isn't modified. If you set Replace to true, then all fields required by the RegisterTaskWithMaintenanceWindow operation are required for this request. Optional fields that aren't specified are set to null.  When you update a maintenance window task that has options specified in TaskInvocationParameters, you must provide again all the TaskInvocationParameters values that you want to retain. The values you don't specify again are removed. For example, suppose that when you registered a Run Command task, you specified TaskInvocationParameters values for Comment, NotificationConfig, and OutputS3BucketName. If you update the maintenance window task and specify only a different OutputS3BucketName value, the values for Comment and NotificationConfig are removed. 
    */
   updateMaintenanceWindowTask(callback?: (err: AWSError, data: SSM.Types.UpdateMaintenanceWindowTaskResult) => void): Request<SSM.Types.UpdateMaintenanceWindowTaskResult, AWSError>;
   /**
-   * Changes the Amazon Identity and Access Management (IAM) role that is assigned to the on-premises instance or virtual machines (VM). IAM roles are first assigned to these hybrid instances during the activation process. For more information, see CreateActivation.
+   * Changes the Identity and Access Management (IAM) role that is assigned to the on-premises server, edge device, or virtual machines (VM). IAM roles are first assigned to these hybrid nodes during the activation process. For more information, see CreateActivation.
    */
   updateManagedInstanceRole(params: SSM.Types.UpdateManagedInstanceRoleRequest, callback?: (err: AWSError, data: SSM.Types.UpdateManagedInstanceRoleResult) => void): Request<SSM.Types.UpdateManagedInstanceRoleResult, AWSError>;
   /**
-   * Changes the Amazon Identity and Access Management (IAM) role that is assigned to the on-premises instance or virtual machines (VM). IAM roles are first assigned to these hybrid instances during the activation process. For more information, see CreateActivation.
+   * Changes the Identity and Access Management (IAM) role that is assigned to the on-premises server, edge device, or virtual machines (VM). IAM roles are first assigned to these hybrid nodes during the activation process. For more information, see CreateActivation.
    */
   updateManagedInstanceRole(callback?: (err: AWSError, data: SSM.Types.UpdateManagedInstanceRoleResult) => void): Request<SSM.Types.UpdateManagedInstanceRoleResult, AWSError>;
   /**
-   * Edit or change an OpsItem. You must have permission in AWS Identity and Access Management (IAM) to update an OpsItem. For more information, see Getting started with OpsCenter in the AWS Systems Manager User Guide. Operations engineers and IT professionals use OpsCenter to view, investigate, and remediate operational issues impacting the performance and health of their AWS resources. For more information, see AWS Systems Manager OpsCenter in the AWS Systems Manager User Guide. 
+   * Edit or change an OpsItem. You must have permission in Identity and Access Management (IAM) to update an OpsItem. For more information, see Getting started with OpsCenter in the Amazon Web Services Systems Manager User Guide. Operations engineers and IT professionals use Amazon Web Services Systems Manager OpsCenter to view, investigate, and remediate operational issues impacting the performance and health of their Amazon Web Services resources. For more information, see OpsCenter in the Amazon Web Services Systems Manager User Guide. 
    */
   updateOpsItem(params: SSM.Types.UpdateOpsItemRequest, callback?: (err: AWSError, data: SSM.Types.UpdateOpsItemResponse) => void): Request<SSM.Types.UpdateOpsItemResponse, AWSError>;
   /**
-   * Edit or change an OpsItem. You must have permission in AWS Identity and Access Management (IAM) to update an OpsItem. For more information, see Getting started with OpsCenter in the AWS Systems Manager User Guide. Operations engineers and IT professionals use OpsCenter to view, investigate, and remediate operational issues impacting the performance and health of their AWS resources. For more information, see AWS Systems Manager OpsCenter in the AWS Systems Manager User Guide. 
+   * Edit or change an OpsItem. You must have permission in Identity and Access Management (IAM) to update an OpsItem. For more information, see Getting started with OpsCenter in the Amazon Web Services Systems Manager User Guide. Operations engineers and IT professionals use Amazon Web Services Systems Manager OpsCenter to view, investigate, and remediate operational issues impacting the performance and health of their Amazon Web Services resources. For more information, see OpsCenter in the Amazon Web Services Systems Manager User Guide. 
    */
   updateOpsItem(callback?: (err: AWSError, data: SSM.Types.UpdateOpsItemResponse) => void): Request<SSM.Types.UpdateOpsItemResponse, AWSError>;
   /**
-   * Systems Manager calls this API action when you edit OpsMetadata in Application Manager.
+   * Amazon Web Services Systems Manager calls this API operation when you edit OpsMetadata in Application Manager.
    */
   updateOpsMetadata(params: SSM.Types.UpdateOpsMetadataRequest, callback?: (err: AWSError, data: SSM.Types.UpdateOpsMetadataResult) => void): Request<SSM.Types.UpdateOpsMetadataResult, AWSError>;
   /**
-   * Systems Manager calls this API action when you edit OpsMetadata in Application Manager.
+   * Amazon Web Services Systems Manager calls this API operation when you edit OpsMetadata in Application Manager.
    */
   updateOpsMetadata(callback?: (err: AWSError, data: SSM.Types.UpdateOpsMetadataResult) => void): Request<SSM.Types.UpdateOpsMetadataResult, AWSError>;
   /**
-   * Modifies an existing patch baseline. Fields not specified in the request are left unchanged.  For information about valid key and value pairs in PatchFilters for each supported operating system type, see PatchFilter. 
+   * Modifies an existing patch baseline. Fields not specified in the request are left unchanged.  For information about valid key-value pairs in PatchFilters for each supported operating system type, see PatchFilter. 
    */
   updatePatchBaseline(params: SSM.Types.UpdatePatchBaselineRequest, callback?: (err: AWSError, data: SSM.Types.UpdatePatchBaselineResult) => void): Request<SSM.Types.UpdatePatchBaselineResult, AWSError>;
   /**
-   * Modifies an existing patch baseline. Fields not specified in the request are left unchanged.  For information about valid key and value pairs in PatchFilters for each supported operating system type, see PatchFilter. 
+   * Modifies an existing patch baseline. Fields not specified in the request are left unchanged.  For information about valid key-value pairs in PatchFilters for each supported operating system type, see PatchFilter. 
    */
   updatePatchBaseline(callback?: (err: AWSError, data: SSM.Types.UpdatePatchBaselineResult) => void): Request<SSM.Types.UpdatePatchBaselineResult, AWSError>;
   /**
-   * Update a resource data sync. After you create a resource data sync for a Region, you can't change the account options for that sync. For example, if you create a sync in the us-east-2 (Ohio) Region and you choose the Include only the current account option, you can't edit that sync later and choose the Include all accounts from my AWS Organizations configuration option. Instead, you must delete the first resource data sync, and create a new one.  This API action only supports a resource data sync that was created with a SyncFromSource SyncType. 
+   * Update a resource data sync. After you create a resource data sync for a Region, you can't change the account options for that sync. For example, if you create a sync in the us-east-2 (Ohio) Region and you choose the Include only the current account option, you can't edit that sync later and choose the Include all accounts from my Organizations configuration option. Instead, you must delete the first resource data sync, and create a new one.  This API operation only supports a resource data sync that was created with a SyncFromSource SyncType. 
    */
   updateResourceDataSync(params: SSM.Types.UpdateResourceDataSyncRequest, callback?: (err: AWSError, data: SSM.Types.UpdateResourceDataSyncResult) => void): Request<SSM.Types.UpdateResourceDataSyncResult, AWSError>;
   /**
-   * Update a resource data sync. After you create a resource data sync for a Region, you can't change the account options for that sync. For example, if you create a sync in the us-east-2 (Ohio) Region and you choose the Include only the current account option, you can't edit that sync later and choose the Include all accounts from my AWS Organizations configuration option. Instead, you must delete the first resource data sync, and create a new one.  This API action only supports a resource data sync that was created with a SyncFromSource SyncType. 
+   * Update a resource data sync. After you create a resource data sync for a Region, you can't change the account options for that sync. For example, if you create a sync in the us-east-2 (Ohio) Region and you choose the Include only the current account option, you can't edit that sync later and choose the Include all accounts from my Organizations configuration option. Instead, you must delete the first resource data sync, and create a new one.  This API operation only supports a resource data sync that was created with a SyncFromSource SyncType. 
    */
   updateResourceDataSync(callback?: (err: AWSError, data: SSM.Types.UpdateResourceDataSyncResult) => void): Request<SSM.Types.UpdateResourceDataSyncResult, AWSError>;
   /**
-   *  ServiceSetting is an account-level setting for an AWS service. This setting defines how a user interacts with or uses a service or a feature of a service. For example, if an AWS service charges money to the account based on feature or service usage, then the AWS service team might create a default setting of "false". This means the user can't use this feature unless they change the setting to "true" and intentionally opt in for a paid feature. Services map a SettingId object to a setting value. AWS services teams define the default value for a SettingId. You can't create a new SettingId, but you can overwrite the default value if you have the ssm:UpdateServiceSetting permission for the setting. Use the GetServiceSetting API action to view the current value. Or, use the ResetServiceSetting to change the value back to the original value defined by the AWS service team. Update the service setting for the account. 
+   *  ServiceSetting is an account-level setting for an Amazon Web Services service. This setting defines how a user interacts with or uses a service or a feature of a service. For example, if an Amazon Web Services service charges money to the account based on feature or service usage, then the Amazon Web Services service team might create a default setting of "false". This means the user can't use this feature unless they change the setting to "true" and intentionally opt in for a paid feature. Services map a SettingId object to a setting value. Amazon Web Services services teams define the default value for a SettingId. You can't create a new SettingId, but you can overwrite the default value if you have the ssm:UpdateServiceSetting permission for the setting. Use the GetServiceSetting API operation to view the current value. Or, use the ResetServiceSetting to change the value back to the original value defined by the Amazon Web Services service team. Update the service setting for the account. 
    */
   updateServiceSetting(params: SSM.Types.UpdateServiceSettingRequest, callback?: (err: AWSError, data: SSM.Types.UpdateServiceSettingResult) => void): Request<SSM.Types.UpdateServiceSettingResult, AWSError>;
   /**
-   *  ServiceSetting is an account-level setting for an AWS service. This setting defines how a user interacts with or uses a service or a feature of a service. For example, if an AWS service charges money to the account based on feature or service usage, then the AWS service team might create a default setting of "false". This means the user can't use this feature unless they change the setting to "true" and intentionally opt in for a paid feature. Services map a SettingId object to a setting value. AWS services teams define the default value for a SettingId. You can't create a new SettingId, but you can overwrite the default value if you have the ssm:UpdateServiceSetting permission for the setting. Use the GetServiceSetting API action to view the current value. Or, use the ResetServiceSetting to change the value back to the original value defined by the AWS service team. Update the service setting for the account. 
+   *  ServiceSetting is an account-level setting for an Amazon Web Services service. This setting defines how a user interacts with or uses a service or a feature of a service. For example, if an Amazon Web Services service charges money to the account based on feature or service usage, then the Amazon Web Services service team might create a default setting of "false". This means the user can't use this feature unless they change the setting to "true" and intentionally opt in for a paid feature. Services map a SettingId object to a setting value. Amazon Web Services services teams define the default value for a SettingId. You can't create a new SettingId, but you can overwrite the default value if you have the ssm:UpdateServiceSetting permission for the setting. Use the GetServiceSetting API operation to view the current value. Or, use the ResetServiceSetting to change the value back to the original value defined by the Amazon Web Services service team. Update the service setting for the account. 
    */
   updateServiceSetting(callback?: (err: AWSError, data: SSM.Types.UpdateServiceSettingResult) => void): Request<SSM.Types.UpdateServiceSettingResult, AWSError>;
   /**
@@ -1083,7 +1107,7 @@ declare namespace SSM {
   export type AccountIdList = AccountId[];
   export interface AccountSharingInfo {
     /**
-     * The AWS account ID where the current document is shared.
+     * The Amazon Web Services account ID where the current document is shared.
      */
     AccountId?: AccountId;
     /**
@@ -1103,23 +1127,23 @@ declare namespace SSM {
      */
     Description?: ActivationDescription;
     /**
-     * A name for the managed instance when it is created.
+     * A name for the managed node when it is created.
      */
     DefaultInstanceName?: DefaultInstanceName;
     /**
-     * The Amazon Identity and Access Management (IAM) role to assign to the managed instance.
+     * The Identity and Access Management (IAM) role to assign to the managed node.
      */
     IamRole?: IamRole;
     /**
-     * The maximum number of managed instances that can be registered using this activation.
+     * The maximum number of managed nodes that can be registered using this activation.
      */
     RegistrationLimit?: RegistrationLimit;
     /**
-     * The number of managed instances already registered with this activation.
+     * The number of managed nodes already registered with this activation.
      */
     RegistrationsCount?: RegistrationsCount;
     /**
-     * The date when this activation can no longer be used to register managed instances.
+     * The date when this activation can no longer be used to register managed nodes.
      */
     ExpirationDate?: ExpirationDate;
     /**
@@ -1141,15 +1165,15 @@ declare namespace SSM {
   export type ActivationList = Activation[];
   export interface AddTagsToResourceRequest {
     /**
-     * Specifies the type of resource you are tagging.  The ManagedInstance type for this API action is for on-premises managed instances. You must specify the name of the managed instance in the following format: mi-ID_number. For example, mi-1a2b3c4d5e6f. 
+     * Specifies the type of resource you are tagging.  The ManagedInstance type for this API operation is for on-premises managed nodes. You must specify the name of the managed node in the following format: mi-ID_number . For example, mi-1a2b3c4d5e6f. 
      */
     ResourceType: ResourceTypeForTagging;
     /**
-     * The resource ID you want to tag. Use the ID of the resource. Here are some examples: ManagedInstance: mi-012345abcde MaintenanceWindow: mw-012345abcde PatchBaseline: pb-012345abcde OpsMetadata object: ResourceID for tagging is created from the Amazon Resource Name (ARN) for the object. Specifically, ResourceID is created from the strings that come after the word opsmetadata in the ARN. For example, an OpsMetadata object with an ARN of arn:aws:ssm:us-east-2:1234567890:opsmetadata/aws/ssm/MyGroup/appmanager has a ResourceID of either aws/ssm/MyGroup/appmanager or /aws/ssm/MyGroup/appmanager. For the Document and Parameter values, use the name of the resource.  The ManagedInstance type for this API action is only for on-premises managed instances. You must specify the name of the managed instance in the following format: mi-ID_number. For example, mi-1a2b3c4d5e6f. 
+     * The resource ID you want to tag. Use the ID of the resource. Here are some examples:  MaintenanceWindow: mw-012345abcde   PatchBaseline: pb-012345abcde   OpsMetadata object: ResourceID for tagging is created from the Amazon Resource Name (ARN) for the object. Specifically, ResourceID is created from the strings that come after the word opsmetadata in the ARN. For example, an OpsMetadata object with an ARN of arn:aws:ssm:us-east-2:1234567890:opsmetadata/aws/ssm/MyGroup/appmanager has a ResourceID of either aws/ssm/MyGroup/appmanager or /aws/ssm/MyGroup/appmanager. For the Document and Parameter values, use the name of the resource.  ManagedInstance: mi-012345abcde   The ManagedInstance type for this API operation is only for on-premises managed nodes. You must specify the name of the managed node in the following format: mi-ID_number . For example, mi-1a2b3c4d5e6f. 
      */
     ResourceId: ResourceId;
     /**
-     * One or more tags. The value parameter is required.  Do not enter personally identifiable information in this field. 
+     * One or more tags. The value parameter is required.  Don't enter personally identifiable information in this field. 
      */
     Tags: TagList;
   }
@@ -1160,13 +1184,37 @@ declare namespace SSM {
   export type AllowedPattern = string;
   export type ApplyOnlyAtCronInterval = boolean;
   export type ApproveAfterDays = number;
+  export interface AssociateOpsItemRelatedItemRequest {
+    /**
+     * The ID of the OpsItem to which you want to associate a resource as a related item.
+     */
+    OpsItemId: OpsItemId;
+    /**
+     * The type of association that you want to create between an OpsItem and a resource. OpsCenter supports IsParentOf and RelatesTo association types.
+     */
+    AssociationType: OpsItemRelatedItemAssociationType;
+    /**
+     * The type of resource that you want to associate with an OpsItem. OpsCenter supports the following types:  AWS::SSMIncidents::IncidentRecord: an Incident Manager incident.   AWS::SSM::Document: a Systems Manager (SSM) document.
+     */
+    ResourceType: OpsItemRelatedItemAssociationResourceType;
+    /**
+     * The Amazon Resource Name (ARN) of the Amazon Web Services resource that you want to associate with the OpsItem.
+     */
+    ResourceUri: OpsItemRelatedItemAssociationResourceUri;
+  }
+  export interface AssociateOpsItemRelatedItemResponse {
+    /**
+     * The association ID.
+     */
+    AssociationId?: OpsItemRelatedItemAssociationId;
+  }
   export interface Association {
     /**
-     * The name of the Systems Manager document.
+     * The name of the SSM document.
      */
     Name?: DocumentARN;
     /**
-     * The ID of the instance.
+     * The managed node ID.
      */
     InstanceId?: InstanceId;
     /**
@@ -1178,11 +1226,11 @@ declare namespace SSM {
      */
     AssociationVersion?: AssociationVersion;
     /**
-     * The version of the document used in the association.
+     * The version of the document used in the association.  State Manager doesn't support running associations that use a new version of a document if that document is shared from another account. State Manager always runs the default version of a document if shared from another account, even though the Systems Manager console shows that a new version was processed. If you want to run an association using a new version of a document shared form another account, you must set the document version to default. 
      */
     DocumentVersion?: DocumentVersion;
     /**
-     * The instances targeted by the request to create an association. 
+     * The managed nodes targeted by the request to create an association. You can target all managed nodes in an Amazon Web Services account by specifying the InstanceIds key with a value of *.
      */
     Targets?: Targets;
     /**
@@ -1205,11 +1253,11 @@ declare namespace SSM {
   export type AssociationComplianceSeverity = "CRITICAL"|"HIGH"|"MEDIUM"|"LOW"|"UNSPECIFIED"|string;
   export interface AssociationDescription {
     /**
-     * The name of the Systems Manager document.
+     * The name of the SSM document.
      */
     Name?: DocumentARN;
     /**
-     * The ID of the instance.
+     * The managed node ID.
      */
     InstanceId?: InstanceId;
     /**
@@ -1237,7 +1285,7 @@ declare namespace SSM {
      */
     DocumentVersion?: DocumentVersion;
     /**
-     * Specify the target for the association. This target is required for associations that use an Automation document and target resources by using rate controls.
+     * Choose the parameter that will define how your automation will branch out. This target is required for associations that use an Automation runbook and target resources by using rate controls. Automation is a capability of Amazon Web Services Systems Manager.
      */
     AutomationTargetParameterName?: AutomationTargetParameterName;
     /**
@@ -1249,7 +1297,7 @@ declare namespace SSM {
      */
     AssociationId?: AssociationId;
     /**
-     * The instances targeted by the request. 
+     * The managed nodes targeted by the request. 
      */
     Targets?: Targets;
     /**
@@ -1273,11 +1321,11 @@ declare namespace SSM {
      */
     AssociationName?: AssociationName;
     /**
-     * The number of errors that are allowed before the system stops sending requests to run the association on additional targets. You can specify either an absolute number of errors, for example 10, or a percentage of the target set, for example 10%. If you specify 3, for example, the system stops sending requests when the fourth error is received. If you specify 0, then the system stops sending requests after the first error is returned. If you run an association on 50 instances and set MaxError to 10%, then the system stops sending the request when the sixth error is received. Executions that are already running an association when MaxErrors is reached are allowed to complete, but some of these executions may fail as well. If you need to ensure that there won't be more than max-errors failed executions, set MaxConcurrency to 1 so that executions proceed one at a time.
+     * The number of errors that are allowed before the system stops sending requests to run the association on additional targets. You can specify either an absolute number of errors, for example 10, or a percentage of the target set, for example 10%. If you specify 3, for example, the system stops sending requests when the fourth error is received. If you specify 0, then the system stops sending requests after the first error is returned. If you run an association on 50 managed nodes and set MaxError to 10%, then the system stops sending the request when the sixth error is received. Executions that are already running an association when MaxErrors is reached are allowed to complete, but some of these executions may fail as well. If you need to ensure that there won't be more than max-errors failed executions, set MaxConcurrency to 1 so that executions proceed one at a time.
      */
     MaxErrors?: MaxErrors;
     /**
-     * The maximum number of targets allowed to run the association at the same time. You can specify a number, for example 10, or a percentage of the target set, for example 10%. The default value is 100%, which means all targets run the association at the same time. If a new instance starts and attempts to run an association while Systems Manager is running MaxConcurrency associations, the association is allowed to run. During the next association interval, the new instance will process its association within the limit specified for MaxConcurrency.
+     * The maximum number of targets allowed to run the association at the same time. You can specify a number, for example 10, or a percentage of the target set, for example 10%. The default value is 100%, which means all targets run the association at the same time. If a new managed node starts and attempts to run an association while Systems Manager is running MaxConcurrency associations, the association is allowed to run. During the next association interval, the new managed node will process its association within the limit specified for MaxConcurrency.
      */
     MaxConcurrency?: MaxConcurrency;
     /**
@@ -1285,15 +1333,19 @@ declare namespace SSM {
      */
     ComplianceSeverity?: AssociationComplianceSeverity;
     /**
-     * The mode for generating association compliance. You can specify AUTO or MANUAL. In AUTO mode, the system uses the status of the association execution to determine the compliance status. If the association execution runs successfully, then the association is COMPLIANT. If the association execution doesn't run successfully, the association is NON-COMPLIANT. In MANUAL mode, you must specify the AssociationId as a parameter for the PutComplianceItems API action. In this case, compliance data is not managed by State Manager. It is managed by your direct call to the PutComplianceItems API action. By default, all associations use AUTO mode.
+     * The mode for generating association compliance. You can specify AUTO or MANUAL. In AUTO mode, the system uses the status of the association execution to determine the compliance status. If the association execution runs successfully, then the association is COMPLIANT. If the association execution doesn't run successfully, the association is NON-COMPLIANT. In MANUAL mode, you must specify the AssociationId as a parameter for the PutComplianceItems API operation. In this case, compliance data isn't managed by State Manager, a capability of Amazon Web Services Systems Manager. It is managed by your direct call to the PutComplianceItems API operation. By default, all associations use AUTO mode.
      */
     SyncCompliance?: AssociationSyncCompliance;
     /**
-     * By default, when you create a new associations, the system runs it immediately after it is created and then according to the schedule you specified. Specify this option if you don't want an association to run immediately after you create it. This parameter is not supported for rate expressions.
+     * By default, when you create a new associations, the system runs it immediately after it is created and then according to the schedule you specified. Specify this option if you don't want an association to run immediately after you create it. This parameter isn't supported for rate expressions.
      */
     ApplyOnlyAtCronInterval?: ApplyOnlyAtCronInterval;
     /**
-     * The combination of AWS Regions and AWS accounts where you want to run the association.
+     * The names or Amazon Resource Names (ARNs) of the Change Calendar type documents your associations are gated under. The associations only run when that change calendar is open. For more information, see Amazon Web Services Systems Manager Change Calendar.
+     */
+    CalendarNames?: CalendarNameOrARNList;
+    /**
+     * The combination of Amazon Web Services Regions and Amazon Web Services accounts where you want to run the association.
      */
     TargetLocations?: TargetLocations;
   }
@@ -1364,11 +1416,11 @@ declare namespace SSM {
      */
     ExecutionId?: AssociationExecutionId;
     /**
-     * The resource ID, for example, the instance ID where the association ran.
+     * The resource ID, for example, the managed node ID where the association ran.
      */
     ResourceId?: AssociationResourceId;
     /**
-     * The resource type, for example, instance.
+     * The resource type, for example, EC2.
      */
     ResourceType?: AssociationResourceType;
     /**
@@ -1431,7 +1483,7 @@ declare namespace SSM {
      */
     DetailedStatus?: StatusName;
     /**
-     * Returns the number of targets for the association status. For example, if you created an association with two instances, and one of them was successful, this would return the count of instances by status.
+     * Returns the number of targets for the association status. For example, if you created an association with two managed nodes, and one of them was successful, this would return the count of managed nodes by status.
      */
     AssociationStatusAggregatedCount?: AssociationStatusAggregatedCount;
   }
@@ -1477,7 +1529,7 @@ declare namespace SSM {
      */
     Name?: DocumentARN;
     /**
-     * The version of a Systems Manager document used when the association version was created.
+     * The version of an Amazon Web Services Systems Manager document (SSM document) used when the association version was created.
      */
     DocumentVersion?: DocumentVersion;
     /**
@@ -1501,11 +1553,11 @@ declare namespace SSM {
      */
     AssociationName?: AssociationName;
     /**
-     * The number of errors that are allowed before the system stops sending requests to run the association on additional targets. You can specify either an absolute number of errors, for example 10, or a percentage of the target set, for example 10%. If you specify 3, for example, the system stops sending requests when the fourth error is received. If you specify 0, then the system stops sending requests after the first error is returned. If you run an association on 50 instances and set MaxError to 10%, then the system stops sending the request when the sixth error is received. Executions that are already running an association when MaxErrors is reached are allowed to complete, but some of these executions may fail as well. If you need to ensure that there won't be more than max-errors failed executions, set MaxConcurrency to 1 so that executions proceed one at a time.
+     * The number of errors that are allowed before the system stops sending requests to run the association on additional targets. You can specify either an absolute number of errors, for example 10, or a percentage of the target set, for example 10%. If you specify 3, for example, the system stops sending requests when the fourth error is received. If you specify 0, then the system stops sending requests after the first error is returned. If you run an association on 50 managed nodes and set MaxError to 10%, then the system stops sending the request when the sixth error is received. Executions that are already running an association when MaxErrors is reached are allowed to complete, but some of these executions may fail as well. If you need to ensure that there won't be more than max-errors failed executions, set MaxConcurrency to 1 so that executions proceed one at a time.
      */
     MaxErrors?: MaxErrors;
     /**
-     * The maximum number of targets allowed to run the association at the same time. You can specify a number, for example 10, or a percentage of the target set, for example 10%. The default value is 100%, which means all targets run the association at the same time. If a new instance starts and attempts to run an association while Systems Manager is running MaxConcurrency associations, the association is allowed to run. During the next association interval, the new instance will process its association within the limit specified for MaxConcurrency.
+     * The maximum number of targets allowed to run the association at the same time. You can specify a number, for example 10, or a percentage of the target set, for example 10%. The default value is 100%, which means all targets run the association at the same time. If a new managed node starts and attempts to run an association while Systems Manager is running MaxConcurrency associations, the association is allowed to run. During the next association interval, the new managed node will process its association within the limit specified for MaxConcurrency.
      */
     MaxConcurrency?: MaxConcurrency;
     /**
@@ -1513,15 +1565,19 @@ declare namespace SSM {
      */
     ComplianceSeverity?: AssociationComplianceSeverity;
     /**
-     * The mode for generating association compliance. You can specify AUTO or MANUAL. In AUTO mode, the system uses the status of the association execution to determine the compliance status. If the association execution runs successfully, then the association is COMPLIANT. If the association execution doesn't run successfully, the association is NON-COMPLIANT. In MANUAL mode, you must specify the AssociationId as a parameter for the PutComplianceItems API action. In this case, compliance data is not managed by State Manager. It is managed by your direct call to the PutComplianceItems API action. By default, all associations use AUTO mode.
+     * The mode for generating association compliance. You can specify AUTO or MANUAL. In AUTO mode, the system uses the status of the association execution to determine the compliance status. If the association execution runs successfully, then the association is COMPLIANT. If the association execution doesn't run successfully, the association is NON-COMPLIANT. In MANUAL mode, you must specify the AssociationId as a parameter for the PutComplianceItems API operation. In this case, compliance data isn't managed by State Manager, a capability of Amazon Web Services Systems Manager. It is managed by your direct call to the PutComplianceItems API operation. By default, all associations use AUTO mode.
      */
     SyncCompliance?: AssociationSyncCompliance;
     /**
-     * By default, when you create a new associations, the system runs it immediately after it is created and then according to the schedule you specified. Specify this option if you don't want an association to run immediately after you create it. This parameter is not supported for rate expressions.
+     * By default, when you create a new associations, the system runs it immediately after it is created and then according to the schedule you specified. Specify this option if you don't want an association to run immediately after you create it. This parameter isn't supported for rate expressions.
      */
     ApplyOnlyAtCronInterval?: ApplyOnlyAtCronInterval;
     /**
-     * The combination of AWS Regions and AWS accounts where you wanted to run the association when this association version was created.
+     * The names or Amazon Resource Names (ARNs) of the Change Calendar type documents your associations are gated under. The associations for this version only run when that Change Calendar is open. For more information, see Amazon Web Services Systems Manager Change Calendar.
+     */
+    CalendarNames?: CalendarNameOrARNList;
+    /**
+     * The combination of Amazon Web Services Regions and Amazon Web Services accounts where you wanted to run the association when this association version was created.
      */
     TargetLocations?: TargetLocations;
   }
@@ -1588,7 +1644,7 @@ declare namespace SSM {
      */
     AutomationExecutionId?: AutomationExecutionId;
     /**
-     * The name of the Automation document used during the execution.
+     * The name of the Automation runbook used during the execution.
      */
     DocumentName?: DocumentName;
     /**
@@ -1608,11 +1664,11 @@ declare namespace SSM {
      */
     AutomationExecutionStatus?: AutomationExecutionStatus;
     /**
-     * A list of details about the current state of all steps that comprise an execution. An Automation document contains a list of steps that are run in order.
+     * A list of details about the current state of all steps that comprise an execution. An Automation runbook contains a list of steps that are run in order.
      */
     StepExecutions?: StepExecutionList;
     /**
-     * A boolean value that indicates if the response contains the full list of the Automation step executions. If true, use the DescribeAutomationStepExecutions API action to get the full list of step executions.
+     * A boolean value that indicates if the response contains the full list of the Automation step executions. If true, use the DescribeAutomationStepExecutions API operation to get the full list of step executions.
      */
     StepExecutionsTruncated?: Boolean;
     /**
@@ -1620,7 +1676,7 @@ declare namespace SSM {
      */
     Parameters?: AutomationParameterMap;
     /**
-     * The list of execution outputs as defined in the automation document.
+     * The list of execution outputs as defined in the Automation runbook.
      */
     Outputs?: AutomationParameterMap;
     /**
@@ -1676,11 +1732,11 @@ declare namespace SSM {
      */
     Target?: String;
     /**
-     * The combination of AWS Regions and/or AWS accounts where you want to run the Automation.
+     * The combination of Amazon Web Services Regions and/or Amazon Web Services accounts where you want to run the Automation.
      */
     TargetLocations?: TargetLocations;
     /**
-     * An aggregate of step execution statuses displayed in the AWS Console for a multi-Region and multi-account Automation execution.
+     * An aggregate of step execution statuses displayed in the Amazon Web Services Systems Manager console for a multi-Region and multi-account Automation execution.
      */
     ProgressCounters?: ProgressCounters;
     /**
@@ -1692,7 +1748,7 @@ declare namespace SSM {
      */
     ScheduledTime?: DateTime;
     /**
-     * Information about the Automation runbooks (Automation documents) that are run as part of a runbook workflow.  The Automation runbooks specified for the runbook workflow can't run until all required approvals for the change request have been received. 
+     * Information about the Automation runbooks that are run as part of a runbook workflow.  The Automation runbooks specified for the runbook workflow can't run until all required approvals for the change request have been received. 
      */
     Runbooks?: Runbooks;
     /**
@@ -1729,7 +1785,7 @@ declare namespace SSM {
      */
     AutomationExecutionId?: AutomationExecutionId;
     /**
-     * The name of the Automation document used during execution.
+     * The name of the Automation runbook used during execution.
      */
     DocumentName?: DocumentName;
     /**
@@ -1745,11 +1801,11 @@ declare namespace SSM {
      */
     ExecutionStartTime?: DateTime;
     /**
-     * The time the execution finished. This is not populated if the execution is still in progress.
+     * The time the execution finished. This isn't populated if the execution is still in progress.
      */
     ExecutionEndTime?: DateTime;
     /**
-     * The IAM role ARN of the user who ran the Automation.
+     * The IAM role ARN of the user who ran the automation.
      */
     ExecutedBy?: String;
     /**
@@ -1757,7 +1813,7 @@ declare namespace SSM {
      */
     LogFile?: String;
     /**
-     * The list of execution outputs as defined in the Automation document.
+     * The list of execution outputs as defined in the Automation runbook.
      */
     Outputs?: AutomationParameterMap;
     /**
@@ -1765,7 +1821,7 @@ declare namespace SSM {
      */
     Mode?: ExecutionMode;
     /**
-     * The ExecutionId of the parent Automation.
+     * The execution ID of the parent automation.
      */
     ParentAutomationExecutionId?: AutomationExecutionId;
     /**
@@ -1777,15 +1833,15 @@ declare namespace SSM {
      */
     CurrentAction?: String;
     /**
-     * The list of execution outputs as defined in the Automation document.
+     * The list of execution outputs as defined in the Automation runbook.
      */
     FailureMessage?: String;
     /**
-     * The list of execution outputs as defined in the Automation document.
+     * The list of execution outputs as defined in the Automation runbook.
      */
     TargetParameterName?: AutomationParameterKey;
     /**
-     * The targets defined by the user when starting the Automation.
+     * The targets defined by the user when starting the automation.
      */
     Targets?: Targets;
     /**
@@ -1797,19 +1853,19 @@ declare namespace SSM {
      */
     ResolvedTargets?: ResolvedTargets;
     /**
-     * The MaxConcurrency value specified by the user when starting the Automation.
+     * The MaxConcurrency value specified by the user when starting the automation.
      */
     MaxConcurrency?: MaxConcurrency;
     /**
-     * The MaxErrors value specified by the user when starting the Automation.
+     * The MaxErrors value specified by the user when starting the automation.
      */
     MaxErrors?: MaxErrors;
     /**
-     * The list of execution outputs as defined in the Automation document.
+     * The list of execution outputs as defined in the Automation runbook.
      */
     Target?: String;
     /**
-     * Use this filter with DescribeAutomationExecutions. Specify either Local or CrossAccount. CrossAccount is an Automation that runs in multiple AWS Regions and accounts. For more information, see Running Automation workflows in multiple AWS Regions and accounts in the AWS Systems Manager User Guide. 
+     * Use this filter with DescribeAutomationExecutions. Specify either Local or CrossAccount. CrossAccount is an Automation that runs in multiple Amazon Web Services Regions and Amazon Web Services accounts. For more information, see Running Automation workflows in multiple Amazon Web Services Regions and accounts in the Amazon Web Services Systems Manager User Guide. 
      */
     AutomationType?: AutomationType;
     /**
@@ -1821,7 +1877,7 @@ declare namespace SSM {
      */
     ScheduledTime?: DateTime;
     /**
-     * Information about the Automation runbooks (Automation documents) that are run during a runbook workflow in Change Manager.  The Automation runbooks specified for the runbook workflow can't run until all required approvals for the change request have been received. 
+     * Information about the Automation runbooks that are run during a runbook workflow in Change Manager.  The Automation runbooks specified for the runbook workflow can't run until all required approvals for the change request have been received. 
      */
     Runbooks?: Runbooks;
     /**
@@ -1857,7 +1913,7 @@ declare namespace SSM {
     GlobalFilters?: PatchFilterGroup;
     ApprovalRules?: PatchRuleGroup;
     /**
-     * A list of explicitly approved patches for the baseline. For information about accepted formats for lists of approved patches and rejected patches, see About package name formats for approved and rejected patch lists in the AWS Systems Manager User Guide.
+     * A list of explicitly approved patches for the baseline. For information about accepted formats for lists of approved patches and rejected patches, see About package name formats for approved and rejected patch lists in the Amazon Web Services Systems Manager User Guide.
      */
     ApprovedPatches?: PatchIdList;
     /**
@@ -1865,7 +1921,7 @@ declare namespace SSM {
      */
     ApprovedPatchesComplianceLevel?: PatchComplianceLevel;
     /**
-     * A list of explicitly rejected patches for the baseline. For information about accepted formats for lists of approved patches and rejected patches, see About package name formats for approved and rejected patch lists in the AWS Systems Manager User Guide.
+     * A list of explicitly rejected patches for the baseline. For information about accepted formats for lists of approved patches and rejected patches, see About package name formats for approved and rejected patch lists in the Amazon Web Services Systems Manager User Guide.
      */
     RejectedPatches?: PatchIdList;
     /**
@@ -1873,11 +1929,11 @@ declare namespace SSM {
      */
     RejectedPatchesAction?: PatchAction;
     /**
-     * Indicates whether the list of approved patches includes non-security updates that should be applied to the instances. The default value is 'false'. Applies to Linux instances only.
+     * Indicates whether the list of approved patches includes non-security updates that should be applied to the managed nodes. The default value is false. Applies to Linux managed nodes only.
      */
     ApprovedPatchesEnableNonSecurity?: Boolean;
     /**
-     * Information about the patches to use to update the instances, including target operating systems and source repositories. Applies to Linux instances only.
+     * Information about the patches to use to update the managed nodes, including target operating systems and source repositories. Applies to Linux managed nodes only.
      */
     Sources?: PatchSourceList;
   }
@@ -1892,7 +1948,7 @@ declare namespace SSM {
      */
     CommandId: CommandId;
     /**
-     * (Optional) A list of instance IDs on which you want to cancel the command. If not provided, the command is canceled on every instance on which it was requested.
+     * (Optional) A list of managed node IDs on which you want to cancel the command. If not provided, the command is canceled on every node on which it was requested.
      */
     InstanceIds?: InstanceIdList;
   }
@@ -1910,13 +1966,16 @@ declare namespace SSM {
      */
     WindowExecutionId?: MaintenanceWindowExecutionId;
   }
+  export type Category = string;
+  export type CategoryEnumList = Category[];
+  export type CategoryList = Category[];
   export type ChangeDetailsValue = string;
   export type ChangeRequestName = string;
   export type ClientToken = string;
   export type CloudWatchLogGroupName = string;
   export interface CloudWatchOutputConfig {
     /**
-     * The name of the CloudWatch log group where you want to send command output. If you don't specify a group name, Systems Manager automatically creates a log group for you. The log group uses the following naming format: aws/ssm/SystemsManagerDocumentName.
+     * The name of the CloudWatch Logs log group where you want to send command output. If you don't specify a group name, Amazon Web Services Systems Manager automatically creates a log group for you. The log group uses the following naming format:  aws/ssm/SystemsManagerDocumentName  
      */
     CloudWatchLogGroupName?: CloudWatchLogGroupName;
     /**
@@ -1935,7 +1994,7 @@ declare namespace SSM {
      */
     DocumentName?: DocumentName;
     /**
-     * The SSM document version.
+     * The Systems Manager document (SSM document) version.
      */
     DocumentVersion?: DocumentVersion;
     /**
@@ -1943,7 +2002,7 @@ declare namespace SSM {
      */
     Comment?: Comment;
     /**
-     * If this time is reached and the command has not already started running, it will not run. Calculated based on the ExpiresAfter user input provided as part of the SendCommand API.
+     * If this time is reached and the command hasn't already started running, it won't run. Calculated based on the ExpiresAfter user input provided as part of the SendCommand API operation.
      */
     ExpiresAfter?: DateTime;
     /**
@@ -1951,11 +2010,11 @@ declare namespace SSM {
      */
     Parameters?: Parameters;
     /**
-     * The instance IDs against which this command was requested.
+     * The managed node IDs against which this command was requested.
      */
     InstanceIds?: InstanceIdList;
     /**
-     * An array of search criteria that targets instances using a Key,Value combination that you specify. Targets is required if you don't provide one or more instance IDs in the call.
+     * An array of search criteria that targets managed nodes using a Key,Value combination that you specify. Targets is required if you don't provide one or more managed node IDs in the call.
      */
     Targets?: Targets;
     /**
@@ -1967,11 +2026,11 @@ declare namespace SSM {
      */
     Status?: CommandStatus;
     /**
-     * A detailed status of the command execution. StatusDetails includes more information than Status because it includes states resulting from error and concurrency control parameters. StatusDetails can show different results than Status. For more information about these statuses, see Understanding command statuses in the AWS Systems Manager User Guide. StatusDetails can be one of the following values:   Pending: The command has not been sent to any instances.   In Progress: The command has been sent to at least one instance but has not reached a final state on all instances.   Success: The command successfully ran on all invocations. This is a terminal state.   Delivery Timed Out: The value of MaxErrors or more command invocations shows a status of Delivery Timed Out. This is a terminal state.   Execution Timed Out: The value of MaxErrors or more command invocations shows a status of Execution Timed Out. This is a terminal state.   Failed: The value of MaxErrors or more command invocations shows a status of Failed. This is a terminal state.   Incomplete: The command was attempted on all instances and one or more invocations does not have a value of Success but not enough invocations failed for the status to be Failed. This is a terminal state.   Canceled: The command was terminated before it was completed. This is a terminal state.   Rate Exceeded: The number of instances targeted by the command exceeded the account limit for pending invocations. The system has canceled the command before running it on any instance. This is a terminal state.  
+     * A detailed status of the command execution. StatusDetails includes more information than Status because it includes states resulting from error and concurrency control parameters. StatusDetails can show different results than Status. For more information about these statuses, see Understanding command statuses in the Amazon Web Services Systems Manager User Guide. StatusDetails can be one of the following values:   Pending: The command hasn't been sent to any managed nodes.   In Progress: The command has been sent to at least one managed node but hasn't reached a final state on all managed nodes.   Success: The command successfully ran on all invocations. This is a terminal state.   Delivery Timed Out: The value of MaxErrors or more command invocations shows a status of Delivery Timed Out. This is a terminal state.   Execution Timed Out: The value of MaxErrors or more command invocations shows a status of Execution Timed Out. This is a terminal state.   Failed: The value of MaxErrors or more command invocations shows a status of Failed. This is a terminal state.   Incomplete: The command was attempted on all managed nodes and one or more invocations doesn't have a value of Success but not enough invocations failed for the status to be Failed. This is a terminal state.   Cancelled: The command was terminated before it was completed. This is a terminal state.   Rate Exceeded: The number of managed nodes targeted by the command exceeded the account limit for pending invocations. The system has canceled the command before running it on any managed node. This is a terminal state.  
      */
     StatusDetails?: StatusDetails;
     /**
-     * (Deprecated) You can no longer specify this parameter. The system ignores it. Instead, Systems Manager automatically determines the Region of the S3 bucket.
+     * (Deprecated) You can no longer specify this parameter. The system ignores it. Instead, Systems Manager automatically determines the Amazon Web Services Region of the S3 bucket.
      */
     OutputS3Region?: S3Region;
     /**
@@ -1983,11 +2042,11 @@ declare namespace SSM {
      */
     OutputS3KeyPrefix?: S3KeyPrefix;
     /**
-     * The maximum number of instances that are allowed to run the command at the same time. You can specify a number of instances, such as 10, or a percentage of instances, such as 10%. The default value is 50. For more information about how to use MaxConcurrency, see Running commands using Systems Manager Run Command in the AWS Systems Manager User Guide.
+     * The maximum number of managed nodes that are allowed to run the command at the same time. You can specify a number of managed nodes, such as 10, or a percentage of nodes, such as 10%. The default value is 50. For more information about how to use MaxConcurrency, see Running commands using Systems Manager Run Command in the Amazon Web Services Systems Manager User Guide.
      */
     MaxConcurrency?: MaxConcurrency;
     /**
-     * The maximum number of errors allowed before the system stops sending the command to additional targets. You can specify a number of errors, such as 10, or a percentage or errors, such as 10%. The default value is 0. For more information about how to use MaxErrors, see Running commands using Systems Manager Run Command in the AWS Systems Manager User Guide.
+     * The maximum number of errors allowed before the system stops sending the command to additional targets. You can specify a number of errors, such as 10, or a percentage or errors, such as 10%. The default value is 0. For more information about how to use MaxErrors, see Running commands using Systems Manager Run Command in the Amazon Web Services Systems Manager User Guide.
      */
     MaxErrors?: MaxErrors;
     /**
@@ -1995,7 +2054,7 @@ declare namespace SSM {
      */
     TargetCount?: TargetCount;
     /**
-     * The number of targets for which the command invocation reached a terminal state. Terminal states include the following: Success, Failed, Execution Timed Out, Delivery Timed Out, Canceled, Terminated, or Undeliverable.
+     * The number of targets for which the command invocation reached a terminal state. Terminal states include the following: Success, Failed, Execution Timed Out, Delivery Timed Out, Cancelled, Terminated, or Undeliverable.
      */
     CompletedCount?: CompletedCount;
     /**
@@ -2007,7 +2066,7 @@ declare namespace SSM {
      */
     DeliveryTimedOutCount?: DeliveryTimedOutCount;
     /**
-     * The IAM service role that Run Command uses to act on your behalf when sending notifications about command status changes. 
+     * The Identity and Access Management (IAM) service role that Run Command, a capability of Amazon Web Services Systems Manager, uses to act on your behalf when sending notifications about command status changes. 
      */
     ServiceRole?: ServiceRole;
     /**
@@ -2015,7 +2074,7 @@ declare namespace SSM {
      */
     NotificationConfig?: NotificationConfig;
     /**
-     * CloudWatch Logs information where you want Systems Manager to send the command output.
+     * Amazon CloudWatch Logs information where you want Amazon Web Services Systems Manager to send the command output.
      */
     CloudWatchOutputConfig?: CloudWatchOutputConfig;
     /**
@@ -2025,11 +2084,11 @@ declare namespace SSM {
   }
   export interface CommandFilter {
     /**
-     * The name of the filter.
+     * The name of the filter.  The ExecutionStage filter can't be used with the ListCommandInvocations operation, only with ListCommands. 
      */
     key: CommandFilterKey;
     /**
-     * The filter value. Valid values for each filter key are as follows:    InvokedAfter: Specify a timestamp to limit your results. For example, specify 2018-07-07T00:00:00Z to see a list of command executions occurring July 7, 2018, and later.    InvokedBefore: Specify a timestamp to limit your results. For example, specify 2018-07-07T00:00:00Z to see a list of command executions from before July 7, 2018.    Status: Specify a valid command status to see a list of all command executions with that status. Status values you can specify include:    Pending     InProgress     Success     Cancelled     Failed     TimedOut     Cancelling       DocumentName: Specify name of the SSM document for which you want to see command execution results. For example, specify AWS-RunPatchBaseline to see command executions that used this SSM document to perform security patching operations on instances.     ExecutionStage: Specify one of the following values:    Executing: Returns a list of command executions that are currently still running.    Complete: Returns a list of command executions that have already completed.     
+     * The filter value. Valid values for each filter key are as follows:    InvokedAfter: Specify a timestamp to limit your results. For example, specify 2021-07-07T00:00:00Z to see a list of command executions occurring July 7, 2021, and later.    InvokedBefore: Specify a timestamp to limit your results. For example, specify 2021-07-07T00:00:00Z to see a list of command executions from before July 7, 2021.    Status: Specify a valid command status to see a list of all command executions with that status. The status choices depend on the API you call. The status values you can specify for ListCommands are:    Pending     InProgress     Success     Cancelled     Failed     TimedOut (this includes both Delivery and Execution time outs)     AccessDenied     DeliveryTimedOut     ExecutionTimedOut     Incomplete     NoInstancesInTag     LimitExceeded    The status values you can specify for ListCommandInvocations are:    Pending     InProgress     Delayed     Success     Cancelled     Failed     TimedOut (this includes both Delivery and Execution time outs)     AccessDenied     DeliveryTimedOut     ExecutionTimedOut     Undeliverable     InvalidPlatform     Terminated       DocumentName: Specify name of the Amazon Web Services Systems Manager document (SSM document) for which you want to see command execution results. For example, specify AWS-RunPatchBaseline to see command executions that used this SSM document to perform security patching operations on managed nodes.     ExecutionStage: Specify one of the following values (ListCommands operations only):    Executing: Returns a list of command executions that are currently still running.    Complete: Returns a list of command executions that have already completed.     
      */
     value: CommandFilterValue;
   }
@@ -2043,11 +2102,11 @@ declare namespace SSM {
      */
     CommandId?: CommandId;
     /**
-     * The instance ID in which this invocation was requested.
+     * The managed node ID in which this invocation was requested.
      */
     InstanceId?: InstanceId;
     /**
-     * The name of the invocation target. For EC2 instances this is the value for the aws:Name tag. For on-premises instances, this is the name of the instance.
+     * The fully qualified host name of the managed node.
      */
     InstanceName?: InstanceTagName;
     /**
@@ -2059,11 +2118,11 @@ declare namespace SSM {
      */
     DocumentName?: DocumentName;
     /**
-     * The SSM document version.
+     * The Systems Manager document (SSM document) version.
      */
     DocumentVersion?: DocumentVersion;
     /**
-     * The time and date the request was sent to this instance.
+     * The time and date the request was sent to this managed node.
      */
     RequestedDateTime?: DateTime;
     /**
@@ -2071,7 +2130,7 @@ declare namespace SSM {
      */
     Status?: CommandInvocationStatus;
     /**
-     * A detailed status of the command execution for each invocation (each instance targeted by the command). StatusDetails includes more information than Status because it includes states resulting from error and concurrency control parameters. StatusDetails can show different results than Status. For more information about these statuses, see Understanding command statuses in the AWS Systems Manager User Guide. StatusDetails can be one of the following values:   Pending: The command has not been sent to the instance.   In Progress: The command has been sent to the instance but has not reached a terminal state.   Success: The execution of the command or plugin was successfully completed. This is a terminal state.   Delivery Timed Out: The command was not delivered to the instance before the delivery timeout expired. Delivery timeouts do not count against the parent command's MaxErrors limit, but they do contribute to whether the parent command status is Success or Incomplete. This is a terminal state.   Execution Timed Out: Command execution started on the instance, but the execution was not complete before the execution timeout expired. Execution timeouts count against the MaxErrors limit of the parent command. This is a terminal state.   Failed: The command was not successful on the instance. For a plugin, this indicates that the result code was not zero. For a command invocation, this indicates that the result code for one or more plugins was not zero. Invocation failures count against the MaxErrors limit of the parent command. This is a terminal state.   Canceled: The command was terminated before it was completed. This is a terminal state.   Undeliverable: The command can't be delivered to the instance. The instance might not exist or might not be responding. Undeliverable invocations don't count against the parent command's MaxErrors limit and don't contribute to whether the parent command status is Success or Incomplete. This is a terminal state.   Terminated: The parent command exceeded its MaxErrors limit and subsequent command invocations were canceled by the system. This is a terminal state.  
+     * A detailed status of the command execution for each invocation (each managed node targeted by the command). StatusDetails includes more information than Status because it includes states resulting from error and concurrency control parameters. StatusDetails can show different results than Status. For more information about these statuses, see Understanding command statuses in the Amazon Web Services Systems Manager User Guide. StatusDetails can be one of the following values:   Pending: The command hasn't been sent to the managed node.   In Progress: The command has been sent to the managed node but hasn't reached a terminal state.   Success: The execution of the command or plugin was successfully completed. This is a terminal state.   Delivery Timed Out: The command wasn't delivered to the managed node before the delivery timeout expired. Delivery timeouts don't count against the parent command's MaxErrors limit, but they do contribute to whether the parent command status is Success or Incomplete. This is a terminal state.   Execution Timed Out: Command execution started on the managed node, but the execution wasn't complete before the execution timeout expired. Execution timeouts count against the MaxErrors limit of the parent command. This is a terminal state.   Failed: The command wasn't successful on the managed node. For a plugin, this indicates that the result code wasn't zero. For a command invocation, this indicates that the result code for one or more plugins wasn't zero. Invocation failures count against the MaxErrors limit of the parent command. This is a terminal state.   Cancelled: The command was terminated before it was completed. This is a terminal state.   Undeliverable: The command can't be delivered to the managed node. The managed node might not exist or might not be responding. Undeliverable invocations don't count against the parent command's MaxErrors limit and don't contribute to whether the parent command status is Success or Incomplete. This is a terminal state.   Terminated: The parent command exceeded its MaxErrors limit and subsequent command invocations were canceled by the system. This is a terminal state.  
      */
     StatusDetails?: StatusDetails;
     /**
@@ -2079,24 +2138,27 @@ declare namespace SSM {
      */
     TraceOutput?: InvocationTraceOutput;
     /**
-     * The URL to the plugin's StdOut file in Amazon S3, if the S3 bucket was defined for the parent command. For an invocation, StandardOutputUrl is populated if there is just one plugin defined for the command, and the S3 bucket was defined for the command.
+     * The URL to the plugin's StdOut file in Amazon Simple Storage Service (Amazon S3), if the S3 bucket was defined for the parent command. For an invocation, StandardOutputUrl is populated if there is just one plugin defined for the command, and the S3 bucket was defined for the command.
      */
     StandardOutputUrl?: Url;
     /**
-     * The URL to the plugin's StdErr file in Amazon S3, if the S3 bucket was defined for the parent command. For an invocation, StandardErrorUrl is populated if there is just one plugin defined for the command, and the S3 bucket was defined for the command.
+     * The URL to the plugin's StdErr file in Amazon Simple Storage Service (Amazon S3), if the S3 bucket was defined for the parent command. For an invocation, StandardErrorUrl is populated if there is just one plugin defined for the command, and the S3 bucket was defined for the command.
      */
     StandardErrorUrl?: Url;
+    /**
+     * Plugins processed by the command.
+     */
     CommandPlugins?: CommandPluginList;
     /**
-     * The IAM service role that Run Command uses to act on your behalf when sending notifications about command status changes on a per instance basis.
+     * The Identity and Access Management (IAM) service role that Run Command, a capability of Amazon Web Services Systems Manager, uses to act on your behalf when sending notifications about command status changes on a per managed node basis.
      */
     ServiceRole?: ServiceRole;
     /**
-     * Configurations for sending notifications about command status changes on a per instance basis.
+     * Configurations for sending notifications about command status changes on a per managed node basis.
      */
     NotificationConfig?: NotificationConfig;
     /**
-     * CloudWatch Logs information where you want Systems Manager to send the command output.
+     * Amazon CloudWatch Logs information where you want Amazon Web Services Systems Manager to send the command output.
      */
     CloudWatchOutputConfig?: CloudWatchOutputConfig;
   }
@@ -2114,7 +2176,7 @@ declare namespace SSM {
      */
     Status?: CommandPluginStatus;
     /**
-     * A detailed status of the plugin execution. StatusDetails includes more information than Status because it includes states resulting from error and concurrency control parameters. StatusDetails can show different results than Status. For more information about these statuses, see Understanding command statuses in the AWS Systems Manager User Guide. StatusDetails can be one of the following values:   Pending: The command has not been sent to the instance.   In Progress: The command has been sent to the instance but has not reached a terminal state.   Success: The execution of the command or plugin was successfully completed. This is a terminal state.   Delivery Timed Out: The command was not delivered to the instance before the delivery timeout expired. Delivery timeouts do not count against the parent command's MaxErrors limit, but they do contribute to whether the parent command status is Success or Incomplete. This is a terminal state.   Execution Timed Out: Command execution started on the instance, but the execution was not complete before the execution timeout expired. Execution timeouts count against the MaxErrors limit of the parent command. This is a terminal state.   Failed: The command was not successful on the instance. For a plugin, this indicates that the result code was not zero. For a command invocation, this indicates that the result code for one or more plugins was not zero. Invocation failures count against the MaxErrors limit of the parent command. This is a terminal state.   Canceled: The command was terminated before it was completed. This is a terminal state.   Undeliverable: The command can't be delivered to the instance. The instance might not exist, or it might not be responding. Undeliverable invocations don't count against the parent command's MaxErrors limit, and they don't contribute to whether the parent command status is Success or Incomplete. This is a terminal state.   Terminated: The parent command exceeded its MaxErrors limit and subsequent command invocations were canceled by the system. This is a terminal state.  
+     * A detailed status of the plugin execution. StatusDetails includes more information than Status because it includes states resulting from error and concurrency control parameters. StatusDetails can show different results than Status. For more information about these statuses, see Understanding command statuses in the Amazon Web Services Systems Manager User Guide. StatusDetails can be one of the following values:   Pending: The command hasn't been sent to the managed node.   In Progress: The command has been sent to the managed node but hasn't reached a terminal state.   Success: The execution of the command or plugin was successfully completed. This is a terminal state.   Delivery Timed Out: The command wasn't delivered to the managed node before the delivery timeout expired. Delivery timeouts don't count against the parent command's MaxErrors limit, but they do contribute to whether the parent command status is Success or Incomplete. This is a terminal state.   Execution Timed Out: Command execution started on the managed node, but the execution wasn't complete before the execution timeout expired. Execution timeouts count against the MaxErrors limit of the parent command. This is a terminal state.   Failed: The command wasn't successful on the managed node. For a plugin, this indicates that the result code wasn't zero. For a command invocation, this indicates that the result code for one or more plugins wasn't zero. Invocation failures count against the MaxErrors limit of the parent command. This is a terminal state.   Cancelled: The command was terminated before it was completed. This is a terminal state.   Undeliverable: The command can't be delivered to the managed node. The managed node might not exist, or it might not be responding. Undeliverable invocations don't count against the parent command's MaxErrors limit, and they don't contribute to whether the parent command status is Success or Incomplete. This is a terminal state.   Terminated: The parent command exceeded its MaxErrors limit and subsequent command invocations were canceled by the system. This is a terminal state.  
      */
     StatusDetails?: StatusDetails;
     /**
@@ -2134,23 +2196,23 @@ declare namespace SSM {
      */
     Output?: CommandPluginOutput;
     /**
-     * The URL for the complete text written by the plugin to stdout in Amazon S3. If the S3 bucket for the command was not specified, then this string is empty.
+     * The URL for the complete text written by the plugin to stdout in Amazon S3. If the S3 bucket for the command wasn't specified, then this string is empty.
      */
     StandardOutputUrl?: Url;
     /**
-     * The URL for the complete text written by the plugin to stderr. If execution is not yet complete, then this string is empty.
+     * The URL for the complete text written by the plugin to stderr. If execution isn't yet complete, then this string is empty.
      */
     StandardErrorUrl?: Url;
     /**
-     * (Deprecated) You can no longer specify this parameter. The system ignores it. Instead, Systems Manager automatically determines the S3 bucket region.
+     * (Deprecated) You can no longer specify this parameter. The system ignores it. Instead, Amazon Web Services Systems Manager automatically determines the S3 bucket region.
      */
     OutputS3Region?: S3Region;
     /**
-     * The S3 bucket where the responses to the command executions should be stored. This was requested when issuing the command. For example, in the following response: doc-example-bucket/ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix/i-02573cafcfEXAMPLE/awsrunShellScript  doc-example-bucket is the name of the S3 bucket; ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix is the name of the S3 prefix; i-02573cafcfEXAMPLE is the instance ID; awsrunShellScript is the name of the plugin.
+     * The S3 bucket where the responses to the command executions should be stored. This was requested when issuing the command. For example, in the following response:  doc-example-bucket/ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix/i-02573cafcfEXAMPLE/awsrunShellScript   doc-example-bucket is the name of the S3 bucket;  ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix is the name of the S3 prefix;  i-02573cafcfEXAMPLE is the managed node ID;  awsrunShellScript is the name of the plugin.
      */
     OutputS3BucketName?: S3BucketName;
     /**
-     * The S3 directory path inside the bucket where the responses to the command executions should be stored. This was requested when issuing the command. For example, in the following response: doc-example-bucket/ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix/i-02573cafcfEXAMPLE/awsrunShellScript  doc-example-bucket is the name of the S3 bucket; ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix is the name of the S3 prefix; i-02573cafcfEXAMPLE is the instance ID; awsrunShellScript is the name of the plugin.
+     * The S3 directory path inside the bucket where the responses to the command executions should be stored. This was requested when issuing the command. For example, in the following response:  doc-example-bucket/ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix/i-02573cafcfEXAMPLE/awsrunShellScript   doc-example-bucket is the name of the S3 bucket;  ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix is the name of the S3 prefix;  i-02573cafcfEXAMPLE is the managed node ID;  awsrunShellScript is the name of the plugin.
      */
     OutputS3KeyPrefix?: S3KeyPrefix;
   }
@@ -2188,7 +2250,7 @@ declare namespace SSM {
      */
     ResourceType?: ComplianceResourceType;
     /**
-     * An ID for the resource. For a managed instance, this is the instance ID.
+     * An ID for the resource. For a managed node, this is the node ID.
      */
     ResourceId?: ComplianceResourceId;
     /**
@@ -2301,19 +2363,19 @@ declare namespace SSM {
   export type ContentLength = number;
   export interface CreateActivationRequest {
     /**
-     * A user-defined description of the resource that you want to register with Systems Manager.   Do not enter personally identifiable information in this field. 
+     * A user-defined description of the resource that you want to register with Systems Manager.   Don't enter personally identifiable information in this field. 
      */
     Description?: ActivationDescription;
     /**
-     * The name of the registered, managed instance as it will appear in the Systems Manager console or when you use the AWS command line tools to list Systems Manager resources.  Do not enter personally identifiable information in this field. 
+     * The name of the registered, managed node as it will appear in the Amazon Web Services Systems Manager console or when you use the Amazon Web Services command line tools to list Systems Manager resources.  Don't enter personally identifiable information in this field. 
      */
     DefaultInstanceName?: DefaultInstanceName;
     /**
-     * The Amazon Identity and Access Management (IAM) role that you want to assign to the managed instance. This IAM role must provide AssumeRole permissions for the Systems Manager service principal ssm.amazonaws.com. For more information, see Create an IAM service role for a hybrid environment in the AWS Systems Manager User Guide.
+     * The name of the Identity and Access Management (IAM) role that you want to assign to the managed node. This IAM role must provide AssumeRole permissions for the Amazon Web Services Systems Manager service principal ssm.amazonaws.com. For more information, see Create an IAM service role for a hybrid environment in the Amazon Web Services Systems Manager User Guide.
      */
     IamRole: IamRole;
     /**
-     * Specify the maximum number of managed instances you want to register. The default value is 1 instance.
+     * Specify the maximum number of managed nodes you want to register. The default value is 1.
      */
     RegistrationLimit?: RegistrationLimit;
     /**
@@ -2321,9 +2383,13 @@ declare namespace SSM {
      */
     ExpirationDate?: ExpirationDate;
     /**
-     * Optional metadata that you assign to a resource. Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment. For example, you might want to tag an activation to identify which servers or virtual machines (VMs) in your on-premises environment you intend to activate. In this case, you could specify the following key name/value pairs:    Key=OS,Value=Windows     Key=Environment,Value=Production     When you install SSM Agent on your on-premises servers and VMs, you specify an activation ID and code. When you specify the activation ID and code, tags assigned to the activation are automatically applied to the on-premises servers or VMs.  You can't add tags to or delete tags from an existing activation. You can tag your on-premises servers and VMs after they connect to Systems Manager for the first time and are assigned a managed instance ID. This means they are listed in the AWS Systems Manager console with an ID that is prefixed with "mi-". For information about how to add tags to your managed instances, see AddTagsToResource. For information about how to remove tags from your managed instances, see RemoveTagsFromResource.
+     * Optional metadata that you assign to a resource. Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment. For example, you might want to tag an activation to identify which servers or virtual machines (VMs) in your on-premises environment you intend to activate. In this case, you could specify the following key-value pairs:    Key=OS,Value=Windows     Key=Environment,Value=Production     When you install SSM Agent on your on-premises servers and VMs, you specify an activation ID and code. When you specify the activation ID and code, tags assigned to the activation are automatically applied to the on-premises servers or VMs.  You can't add tags to or delete tags from an existing activation. You can tag your on-premises servers, edge devices, and VMs after they connect to Systems Manager for the first time and are assigned a managed node ID. This means they are listed in the Amazon Web Services Systems Manager console with an ID that is prefixed with "mi-". For information about how to add tags to your managed nodes, see AddTagsToResource. For information about how to remove tags from your managed nodes, see RemoveTagsFromResource.
      */
     Tags?: TagList;
+    /**
+     * Reserved for internal use.
+     */
+    RegistrationMetadata?: RegistrationMetadataList;
   }
   export interface CreateActivationResult {
     /**
@@ -2344,11 +2410,11 @@ declare namespace SSM {
   export type CreateAssociationBatchRequestEntries = CreateAssociationBatchRequestEntry[];
   export interface CreateAssociationBatchRequestEntry {
     /**
-     * The name of the SSM document that contains the configuration information for the instance. You can specify Command or Automation documents. You can specify AWS-predefined documents, documents you created, or a document that is shared with you from another account. For SSM documents that are shared with you from other AWS accounts, you must specify the complete SSM document ARN, in the following format:  arn:aws:ssm:region:account-id:document/document-name   For example:  arn:aws:ssm:us-east-2:12345678912:document/My-Shared-Document  For AWS-predefined documents and SSM documents you created in your account, you only need to specify the document name. For example, AWS-ApplyPatchBaseline or My-Document.
+     * The name of the SSM document that contains the configuration information for the managed node. You can specify Command or Automation runbooks. You can specify Amazon Web Services-predefined documents, documents you created, or a document that is shared with you from another account. For SSM documents that are shared with you from other Amazon Web Services accounts, you must specify the complete SSM document ARN, in the following format:  arn:aws:ssm:region:account-id:document/document-name   For example:  arn:aws:ssm:us-east-2:12345678912:document/My-Shared-Document  For Amazon Web Services-predefined documents and SSM documents you created in your account, you only need to specify the document name. For example, AWS-ApplyPatchBaseline or My-Document.
      */
     Name: DocumentARN;
     /**
-     * The ID of the instance. 
+     * The managed node ID.   InstanceId has been deprecated. To specify a managed node ID for an association, use the Targets parameter. Requests that include the parameter InstanceID with Systems Manager documents (SSM documents) that use schema version 2.0 or later will fail. In addition, if you use the parameter InstanceId, you can't use the parameters AssociationName, DocumentVersion, MaxErrors, MaxConcurrency, OutputLocation, or ScheduleExpression. To use these parameters, you must use the Targets parameter. 
      */
     InstanceId?: InstanceId;
     /**
@@ -2356,7 +2422,7 @@ declare namespace SSM {
      */
     Parameters?: Parameters;
     /**
-     * Specify the target for the association. This target is required for associations that use an Automation document and target resources by using rate controls.
+     * Specify the target for the association. This target is required for associations that use an Automation runbook and target resources by using rate controls. Automation is a capability of Amazon Web Services Systems Manager.
      */
     AutomationTargetParameterName?: AutomationTargetParameterName;
     /**
@@ -2364,7 +2430,7 @@ declare namespace SSM {
      */
     DocumentVersion?: DocumentVersion;
     /**
-     * The instances targeted by the request.
+     * The managed nodes targeted by the request.
      */
     Targets?: Targets;
     /**
@@ -2380,11 +2446,11 @@ declare namespace SSM {
      */
     AssociationName?: AssociationName;
     /**
-     * The number of errors that are allowed before the system stops sending requests to run the association on additional targets. You can specify either an absolute number of errors, for example 10, or a percentage of the target set, for example 10%. If you specify 3, for example, the system stops sending requests when the fourth error is received. If you specify 0, then the system stops sending requests after the first error is returned. If you run an association on 50 instances and set MaxError to 10%, then the system stops sending the request when the sixth error is received. Executions that are already running an association when MaxErrors is reached are allowed to complete, but some of these executions may fail as well. If you need to ensure that there won't be more than max-errors failed executions, set MaxConcurrency to 1 so that executions proceed one at a time.
+     * The number of errors that are allowed before the system stops sending requests to run the association on additional targets. You can specify either an absolute number of errors, for example 10, or a percentage of the target set, for example 10%. If you specify 3, for example, the system stops sending requests when the fourth error is received. If you specify 0, then the system stops sending requests after the first error is returned. If you run an association on 50 managed nodes and set MaxError to 10%, then the system stops sending the request when the sixth error is received. Executions that are already running an association when MaxErrors is reached are allowed to complete, but some of these executions may fail as well. If you need to ensure that there won't be more than max-errors failed executions, set MaxConcurrency to 1 so that executions proceed one at a time.
      */
     MaxErrors?: MaxErrors;
     /**
-     * The maximum number of targets allowed to run the association at the same time. You can specify a number, for example 10, or a percentage of the target set, for example 10%. The default value is 100%, which means all targets run the association at the same time. If a new instance starts and attempts to run an association while Systems Manager is running MaxConcurrency associations, the association is allowed to run. During the next association interval, the new instance will process its association within the limit specified for MaxConcurrency.
+     * The maximum number of targets allowed to run the association at the same time. You can specify a number, for example 10, or a percentage of the target set, for example 10%. The default value is 100%, which means all targets run the association at the same time. If a new managed node starts and attempts to run an association while Systems Manager is running MaxConcurrency associations, the association is allowed to run. During the next association interval, the new managed node will process its association within the limit specified for MaxConcurrency.
      */
     MaxConcurrency?: MaxConcurrency;
     /**
@@ -2392,13 +2458,17 @@ declare namespace SSM {
      */
     ComplianceSeverity?: AssociationComplianceSeverity;
     /**
-     * The mode for generating association compliance. You can specify AUTO or MANUAL. In AUTO mode, the system uses the status of the association execution to determine the compliance status. If the association execution runs successfully, then the association is COMPLIANT. If the association execution doesn't run successfully, the association is NON-COMPLIANT.  In MANUAL mode, you must specify the AssociationId as a parameter for the PutComplianceItems API action. In this case, compliance data is not managed by State Manager. It is managed by your direct call to the PutComplianceItems API action. By default, all associations use AUTO mode.
+     * The mode for generating association compliance. You can specify AUTO or MANUAL. In AUTO mode, the system uses the status of the association execution to determine the compliance status. If the association execution runs successfully, then the association is COMPLIANT. If the association execution doesn't run successfully, the association is NON-COMPLIANT.  In MANUAL mode, you must specify the AssociationId as a parameter for the PutComplianceItems API operation. In this case, compliance data isn't managed by State Manager, a capability of Amazon Web Services Systems Manager. It is managed by your direct call to the PutComplianceItems API operation. By default, all associations use AUTO mode.
      */
     SyncCompliance?: AssociationSyncCompliance;
     /**
-     * By default, when you create a new associations, the system runs it immediately after it is created and then according to the schedule you specified. Specify this option if you don't want an association to run immediately after you create it. This parameter is not supported for rate expressions.
+     * By default, when you create a new associations, the system runs it immediately after it is created and then according to the schedule you specified. Specify this option if you don't want an association to run immediately after you create it. This parameter isn't supported for rate expressions.
      */
     ApplyOnlyAtCronInterval?: ApplyOnlyAtCronInterval;
+    /**
+     * The names or Amazon Resource Names (ARNs) of the Change Calendar type documents your associations are gated under. The associations only run when that Change Calendar is open. For more information, see Amazon Web Services Systems Manager Change Calendar.
+     */
+    CalendarNames?: CalendarNameOrARNList;
     /**
      * Use this action to create an association in multiple Regions and multiple accounts.
      */
@@ -2416,15 +2486,15 @@ declare namespace SSM {
   }
   export interface CreateAssociationRequest {
     /**
-     * The name of the SSM document that contains the configuration information for the instance. You can specify Command or Automation documents. You can specify AWS-predefined documents, documents you created, or a document that is shared with you from another account. For SSM documents that are shared with you from other AWS accounts, you must specify the complete SSM document ARN, in the following format:  arn:partition:ssm:region:account-id:document/document-name   For example:  arn:aws:ssm:us-east-2:12345678912:document/My-Shared-Document  For AWS-predefined documents and SSM documents you created in your account, you only need to specify the document name. For example, AWS-ApplyPatchBaseline or My-Document.
+     * The name of the SSM Command document or Automation runbook that contains the configuration information for the managed node. You can specify Amazon Web Services-predefined documents, documents you created, or a document that is shared with you from another account. For Systems Manager documents (SSM documents) that are shared with you from other Amazon Web Services accounts, you must specify the complete SSM document ARN, in the following format:  arn:partition:ssm:region:account-id:document/document-name   For example:  arn:aws:ssm:us-east-2:12345678912:document/My-Shared-Document  For Amazon Web Services-predefined documents and SSM documents you created in your account, you only need to specify the document name. For example, AWS-ApplyPatchBaseline or My-Document.
      */
     Name: DocumentARN;
     /**
-     * The document version you want to associate with the target(s). Can be a specific version or the default version.
+     * The document version you want to associate with the target(s). Can be a specific version or the default version.  State Manager doesn't support running associations that use a new version of a document if that document is shared from another account. State Manager always runs the default version of a document if shared from another account, even though the Systems Manager console shows that a new version was processed. If you want to run an association using a new version of a document shared form another account, you must set the document version to default. 
      */
     DocumentVersion?: DocumentVersion;
     /**
-     * The instance ID.   InstanceId has been deprecated. To specify an instance ID for an association, use the Targets parameter. Requests that include the parameter InstanceID with SSM documents that use schema version 2.0 or later will fail. In addition, if you use the parameter InstanceId, you cannot use the parameters AssociationName, DocumentVersion, MaxErrors, MaxConcurrency, OutputLocation, or ScheduleExpression. To use these parameters, you must use the Targets parameter. 
+     * The managed node ID.   InstanceId has been deprecated. To specify a managed node ID for an association, use the Targets parameter. Requests that include the parameter InstanceID with Systems Manager documents (SSM documents) that use schema version 2.0 or later will fail. In addition, if you use the parameter InstanceId, you can't use the parameters AssociationName, DocumentVersion, MaxErrors, MaxConcurrency, OutputLocation, or ScheduleExpression. To use these parameters, you must use the Targets parameter. 
      */
     InstanceId?: InstanceId;
     /**
@@ -2432,7 +2502,7 @@ declare namespace SSM {
      */
     Parameters?: Parameters;
     /**
-     * The targets for the association. You can target instances by using tags, AWS Resource Groups, all instances in an AWS account, or individual instance IDs. For more information about choosing targets for an association, see Using targets and rate controls with State Manager associations in the AWS Systems Manager User Guide.
+     * The targets for the association. You can target managed nodes by using tags, Amazon Web Services resource groups, all managed nodes in an Amazon Web Services account, or individual managed node IDs. You can target all managed nodes in an Amazon Web Services account by specifying the InstanceIds key with a value of *. For more information about choosing targets for an association, see Using targets and rate controls with State Manager associations in the Amazon Web Services Systems Manager User Guide.
      */
     Targets?: Targets;
     /**
@@ -2440,7 +2510,7 @@ declare namespace SSM {
      */
     ScheduleExpression?: ScheduleExpression;
     /**
-     * An S3 bucket where you want to store the output details of the request.
+     * An Amazon Simple Storage Service (Amazon S3) bucket where you want to store the output details of the request.
      */
     OutputLocation?: InstanceAssociationOutputLocation;
     /**
@@ -2448,15 +2518,15 @@ declare namespace SSM {
      */
     AssociationName?: AssociationName;
     /**
-     * Specify the target for the association. This target is required for associations that use an Automation document and target resources by using rate controls.
+     * Choose the parameter that will define how your automation will branch out. This target is required for associations that use an Automation runbook and target resources by using rate controls. Automation is a capability of Amazon Web Services Systems Manager.
      */
     AutomationTargetParameterName?: AutomationTargetParameterName;
     /**
-     * The number of errors that are allowed before the system stops sending requests to run the association on additional targets. You can specify either an absolute number of errors, for example 10, or a percentage of the target set, for example 10%. If you specify 3, for example, the system stops sending requests when the fourth error is received. If you specify 0, then the system stops sending requests after the first error is returned. If you run an association on 50 instances and set MaxError to 10%, then the system stops sending the request when the sixth error is received. Executions that are already running an association when MaxErrors is reached are allowed to complete, but some of these executions may fail as well. If you need to ensure that there won't be more than max-errors failed executions, set MaxConcurrency to 1 so that executions proceed one at a time.
+     * The number of errors that are allowed before the system stops sending requests to run the association on additional targets. You can specify either an absolute number of errors, for example 10, or a percentage of the target set, for example 10%. If you specify 3, for example, the system stops sending requests when the fourth error is received. If you specify 0, then the system stops sending requests after the first error is returned. If you run an association on 50 managed nodes and set MaxError to 10%, then the system stops sending the request when the sixth error is received. Executions that are already running an association when MaxErrors is reached are allowed to complete, but some of these executions may fail as well. If you need to ensure that there won't be more than max-errors failed executions, set MaxConcurrency to 1 so that executions proceed one at a time.
      */
     MaxErrors?: MaxErrors;
     /**
-     * The maximum number of targets allowed to run the association at the same time. You can specify a number, for example 10, or a percentage of the target set, for example 10%. The default value is 100%, which means all targets run the association at the same time. If a new instance starts and attempts to run an association while Systems Manager is running MaxConcurrency associations, the association is allowed to run. During the next association interval, the new instance will process its association within the limit specified for MaxConcurrency.
+     * The maximum number of targets allowed to run the association at the same time. You can specify a number, for example 10, or a percentage of the target set, for example 10%. The default value is 100%, which means all targets run the association at the same time. If a new managed node starts and attempts to run an association while Systems Manager is running MaxConcurrency associations, the association is allowed to run. During the next association interval, the new managed node will process its association within the limit specified for MaxConcurrency.
      */
     MaxConcurrency?: MaxConcurrency;
     /**
@@ -2464,15 +2534,19 @@ declare namespace SSM {
      */
     ComplianceSeverity?: AssociationComplianceSeverity;
     /**
-     * The mode for generating association compliance. You can specify AUTO or MANUAL. In AUTO mode, the system uses the status of the association execution to determine the compliance status. If the association execution runs successfully, then the association is COMPLIANT. If the association execution doesn't run successfully, the association is NON-COMPLIANT. In MANUAL mode, you must specify the AssociationId as a parameter for the PutComplianceItems API action. In this case, compliance data is not managed by State Manager. It is managed by your direct call to the PutComplianceItems API action. By default, all associations use AUTO mode.
+     * The mode for generating association compliance. You can specify AUTO or MANUAL. In AUTO mode, the system uses the status of the association execution to determine the compliance status. If the association execution runs successfully, then the association is COMPLIANT. If the association execution doesn't run successfully, the association is NON-COMPLIANT. In MANUAL mode, you must specify the AssociationId as a parameter for the PutComplianceItems API operation. In this case, compliance data isn't managed by State Manager. It is managed by your direct call to the PutComplianceItems API operation. By default, all associations use AUTO mode.
      */
     SyncCompliance?: AssociationSyncCompliance;
     /**
-     * By default, when you create a new associations, the system runs it immediately after it is created and then according to the schedule you specified. Specify this option if you don't want an association to run immediately after you create it. This parameter is not supported for rate expressions.
+     * By default, when you create a new association, the system runs it immediately after it is created and then according to the schedule you specified. Specify this option if you don't want an association to run immediately after you create it. This parameter isn't supported for rate expressions.
      */
     ApplyOnlyAtCronInterval?: ApplyOnlyAtCronInterval;
     /**
-     * A location is a combination of AWS Regions and AWS accounts where you want to run the association. Use this action to create an association in multiple Regions and multiple accounts.
+     * The names or Amazon Resource Names (ARNs) of the Change Calendar type documents you want to gate your associations under. The associations only run when that change calendar is open. For more information, see Amazon Web Services Systems Manager Change Calendar.
+     */
+    CalendarNames?: CalendarNameOrARNList;
+    /**
+     * A location is a combination of Amazon Web Services Regions and Amazon Web Services accounts where you want to run the association. Use this action to create an association in multiple Regions and multiple accounts.
      */
     TargetLocations?: TargetLocations;
   }
@@ -2484,27 +2558,31 @@ declare namespace SSM {
   }
   export interface CreateDocumentRequest {
     /**
-     * The content for the new SSM document in JSON or YAML format. We recommend storing the contents for your new document in an external JSON or YAML file and referencing the file in a command. For examples, see the following topics in the AWS Systems Manager User Guide.    Create an SSM document (AWS API)     Create an SSM document (AWS CLI)     Create an SSM document (API)   
+     * The content for the new SSM document in JSON or YAML format. We recommend storing the contents for your new document in an external JSON or YAML file and referencing the file in a command. For examples, see the following topics in the Amazon Web Services Systems Manager User Guide.    Create an SSM document (Amazon Web Services API)     Create an SSM document (Amazon Web Services CLI)     Create an SSM document (API)   
      */
     Content: DocumentContent;
     /**
-     * A list of SSM documents required by a document. This parameter is used exclusively by AWS AppConfig. When a user creates an AppConfig configuration in an SSM document, the user must also specify a required document for validation purposes. In this case, an ApplicationConfiguration document requires an ApplicationConfigurationSchema document for validation purposes. For more information, see AWS AppConfig in the AWS Systems Manager User Guide.
+     * A list of SSM documents required by a document. This parameter is used exclusively by AppConfig. When a user creates an AppConfig configuration in an SSM document, the user must also specify a required document for validation purposes. In this case, an ApplicationConfiguration document requires an ApplicationConfigurationSchema document for validation purposes. For more information, see What is AppConfig? in the AppConfig User Guide.
      */
     Requires?: DocumentRequiresList;
     /**
-     * A list of key and value pairs that describe attachments to a version of a document.
+     * A list of key-value pairs that describe attachments to a version of a document.
      */
     Attachments?: AttachmentsSourceList;
     /**
-     * A name for the Systems Manager document.  You can't use the following strings as document name prefixes. These are reserved by AWS for use as document name prefixes:    aws-     amazon     amzn    
+     * A name for the SSM document.  You can't use the following strings as document name prefixes. These are reserved by Amazon Web Services for use as document name prefixes:    aws-     amazon     amzn    
      */
     Name: DocumentName;
     /**
-     * An optional field specifying the version of the artifact you are creating with the document. For example, "Release 12, Update 6". This value is unique across all versions of a document, and cannot be changed.
+     * An optional field where you can specify a friendly name for the SSM document. This value can differ for each version of the document. You can update this value at a later time using the UpdateDocument operation.
+     */
+    DisplayName?: DocumentDisplayName;
+    /**
+     * An optional field specifying the version of the artifact you are creating with the document. For example, "Release 12, Update 6". This value is unique across all versions of a document, and can't be changed.
      */
     VersionName?: DocumentVersionName;
     /**
-     * The type of document to create.
+     * The type of document to create.  The DeploymentStrategy document type is an internal-use-only document type reserved for AppConfig. 
      */
     DocumentType?: DocumentType;
     /**
@@ -2512,17 +2590,17 @@ declare namespace SSM {
      */
     DocumentFormat?: DocumentFormat;
     /**
-     * Specify a target type to define the kinds of resources the document can run on. For example, to run a document on EC2 instances, specify the following value: /AWS::EC2::Instance. If you specify a value of '/' the document can run on all types of resources. If you don't specify a value, the document can't run on any resources. For a list of valid resource types, see AWS resource and property types reference in the AWS CloudFormation User Guide. 
+     * Specify a target type to define the kinds of resources the document can run on. For example, to run a document on EC2 instances, specify the following value: /AWS::EC2::Instance. If you specify a value of '/' the document can run on all types of resources. If you don't specify a value, the document can't run on any resources. For a list of valid resource types, see Amazon Web Services resource and property types reference in the CloudFormation User Guide. 
      */
     TargetType?: TargetType;
     /**
-     * Optional metadata that you assign to a resource. Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment. For example, you might want to tag an SSM document to identify the types of targets or the environment where it will run. In this case, you could specify the following key name/value pairs:    Key=OS,Value=Windows     Key=Environment,Value=Production     To add tags to an existing SSM document, use the AddTagsToResource action. 
+     * Optional metadata that you assign to a resource. Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment. For example, you might want to tag an SSM document to identify the types of targets or the environment where it will run. In this case, you could specify the following key-value pairs:    Key=OS,Value=Windows     Key=Environment,Value=Production     To add tags to an existing SSM document, use the AddTagsToResource operation. 
      */
     Tags?: TagList;
   }
   export interface CreateDocumentResult {
     /**
-     * Information about the Systems Manager document.
+     * Information about the SSM document.
      */
     DocumentDescription?: DocumentDescription;
   }
@@ -2552,7 +2630,7 @@ declare namespace SSM {
      */
     ScheduleTimezone?: MaintenanceWindowTimezone;
     /**
-     * The number of days to wait after the date and time specified by a CRON expression before running the maintenance window. For example, the following cron expression schedules a maintenance window to run on the third Tuesday of every month at 11:30 PM.  cron(30 23 ? * TUE#3 *)  If the schedule offset is 2, the maintenance window won't run until two days later.
+     * The number of days to wait after the date and time specified by a cron expression before running the maintenance window. For example, the following cron expression schedules a maintenance window to run on the third Tuesday of every month at 11:30 PM.  cron(30 23 ? * TUE#3 *)  If the schedule offset is 2, the maintenance window won't run until two days later.
      */
     ScheduleOffset?: MaintenanceWindowOffset;
     /**
@@ -2560,11 +2638,11 @@ declare namespace SSM {
      */
     Duration: MaintenanceWindowDurationHours;
     /**
-     * The number of hours before the end of the maintenance window that Systems Manager stops scheduling new tasks for execution.
+     * The number of hours before the end of the maintenance window that Amazon Web Services Systems Manager stops scheduling new tasks for execution.
      */
     Cutoff: MaintenanceWindowCutoff;
     /**
-     * Enables a maintenance window task to run on managed instances, even if you have not registered those instances as targets. If enabled, then you must specify the unregistered instances (by instance ID) when you register a task with the maintenance window. If you don't enable this option, then you must specify previously-registered targets when you register a task with the maintenance window.
+     * Enables a maintenance window task to run on managed nodes, even if you haven't registered those nodes as targets. If enabled, then you must specify the unregistered managed nodes (by node ID) when you register a task with the maintenance window. If you don't enable this option, then you must specify previously-registered targets when you register a task with the maintenance window.
      */
     AllowUnassociatedTargets: MaintenanceWindowAllowUnassociatedTargets;
     /**
@@ -2572,7 +2650,7 @@ declare namespace SSM {
      */
     ClientToken?: ClientToken;
     /**
-     * Optional metadata that you assign to a resource. Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment. For example, you might want to tag a maintenance window to identify the type of tasks it will run, the types of targets, and the environment it will run in. In this case, you could specify the following key name/value pairs:    Key=TaskType,Value=AgentUpdate     Key=OS,Value=Windows     Key=Environment,Value=Production     To add tags to an existing maintenance window, use the AddTagsToResource action. 
+     * Optional metadata that you assign to a resource. Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment. For example, you might want to tag a maintenance window to identify the type of tasks it will run, the types of targets, and the environment it will run in. In this case, you could specify the following key-value pairs:    Key=TaskType,Value=AgentUpdate     Key=OS,Value=Windows     Key=Environment,Value=Production     To add tags to an existing maintenance window, use the AddTagsToResource operation. 
      */
     Tags?: TagList;
   }
@@ -2592,7 +2670,7 @@ declare namespace SSM {
      */
     OpsItemType?: OpsItemType;
     /**
-     * Operational data is custom data that provides useful reference details about the OpsItem. For example, you can specify log files, error strings, license keys, troubleshooting tips, or other relevant data. You enter operational data as key-value pairs. The key has a maximum length of 128 characters. The value has a maximum size of 20 KB.  Operational data keys can't begin with the following: amazon, aws, amzn, ssm, /amazon, /aws, /amzn, /ssm.  You can choose to make the data searchable by other users in the account or you can restrict search access. Searchable data means that all users with access to the OpsItem Overview page (as provided by the DescribeOpsItems API action) can view and search on the specified data. Operational data that is not searchable is only viewable by users who have access to the OpsItem (as provided by the GetOpsItem API action). Use the /aws/resources key in OperationalData to specify a related resource in the request. Use the /aws/automations key in OperationalData to associate an Automation runbook with the OpsItem. To view AWS CLI example commands that use these keys, see Creating OpsItems manually in the AWS Systems Manager User Guide.
+     * Operational data is custom data that provides useful reference details about the OpsItem. For example, you can specify log files, error strings, license keys, troubleshooting tips, or other relevant data. You enter operational data as key-value pairs. The key has a maximum length of 128 characters. The value has a maximum size of 20 KB.  Operational data keys can't begin with the following: amazon, aws, amzn, ssm, /amazon, /aws, /amzn, /ssm.  You can choose to make the data searchable by other users in the account or you can restrict search access. Searchable data means that all users with access to the OpsItem Overview page (as provided by the DescribeOpsItems API operation) can view and search on the specified data. Operational data that isn't searchable is only viewable by users who have access to the OpsItem (as provided by the GetOpsItem API operation). Use the /aws/resources key in OperationalData to specify a related resource in the request. Use the /aws/automations key in OperationalData to associate an Automation runbook with the OpsItem. To view Amazon Web Services CLI example commands that use these keys, see Creating OpsItems manually in the Amazon Web Services Systems Manager User Guide.
      */
     OperationalData?: OpsItemOperationalData;
     /**
@@ -2616,7 +2694,7 @@ declare namespace SSM {
      */
     Title: OpsItemTitle;
     /**
-     * Optional metadata that you assign to a resource. You can restrict access to OpsItems by using an inline IAM policy that specifies tags. For more information, see Getting started with OpsCenter in the AWS Systems Manager User Guide. Tags use a key-value pair. For example:  Key=Department,Value=Finance   To add tags to an existing OpsItem, use the AddTagsToResource action. 
+     * Optional metadata that you assign to a resource. You can restrict access to OpsItems by using an inline IAM policy that specifies tags. For more information, see Getting started with OpsCenter in the Amazon Web Services Systems Manager User Guide. Tags use a key-value pair. For example:  Key=Department,Value=Finance   To add tags to a new OpsItem, a user must have IAM permissions for both the ssm:CreateOpsItems operation and the ssm:AddTagsToResource operation. To add tags to an existing OpsItem, use the AddTagsToResource operation. 
      */
     Tags?: TagList;
     /**
@@ -2660,7 +2738,7 @@ declare namespace SSM {
      */
     Metadata?: MetadataMap;
     /**
-     * Optional metadata that you assign to a resource. You can specify a maximum of five tags for an OpsMetadata object. Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment. For example, you might want to tag an OpsMetadata object to identify an environment or target AWS Region. In this case, you could specify the following key-value pairs:    Key=Environment,Value=Production     Key=Region,Value=us-east-2   
+     * Optional metadata that you assign to a resource. You can specify a maximum of five tags for an OpsMetadata object. Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment. For example, you might want to tag an OpsMetadata object to identify an environment or target Amazon Web Services Region. In this case, you could specify the following key-value pairs:    Key=Environment,Value=Production     Key=Region,Value=us-east-2   
      */
     Tags?: TagList;
   }
@@ -2672,7 +2750,7 @@ declare namespace SSM {
   }
   export interface CreatePatchBaselineRequest {
     /**
-     * Defines the operating system the patch baseline applies to. The Default value is WINDOWS.
+     * Defines the operating system the patch baseline applies to. The default value is WINDOWS.
      */
     OperatingSystem?: OperatingSystem;
     /**
@@ -2688,7 +2766,7 @@ declare namespace SSM {
      */
     ApprovalRules?: PatchRuleGroup;
     /**
-     * A list of explicitly approved patches for the baseline. For information about accepted formats for lists of approved patches and rejected patches, see About package name formats for approved and rejected patch lists in the AWS Systems Manager User Guide.
+     * A list of explicitly approved patches for the baseline. For information about accepted formats for lists of approved patches and rejected patches, see About package name formats for approved and rejected patch lists in the Amazon Web Services Systems Manager User Guide.
      */
     ApprovedPatches?: PatchIdList;
     /**
@@ -2696,15 +2774,15 @@ declare namespace SSM {
      */
     ApprovedPatchesComplianceLevel?: PatchComplianceLevel;
     /**
-     * Indicates whether the list of approved patches includes non-security updates that should be applied to the instances. The default value is 'false'. Applies to Linux instances only.
+     * Indicates whether the list of approved patches includes non-security updates that should be applied to the managed nodes. The default value is false. Applies to Linux managed nodes only.
      */
     ApprovedPatchesEnableNonSecurity?: Boolean;
     /**
-     * A list of explicitly rejected patches for the baseline. For information about accepted formats for lists of approved patches and rejected patches, see About package name formats for approved and rejected patch lists in the AWS Systems Manager User Guide.
+     * A list of explicitly rejected patches for the baseline. For information about accepted formats for lists of approved patches and rejected patches, see About package name formats for approved and rejected patch lists in the Amazon Web Services Systems Manager User Guide.
      */
     RejectedPatches?: PatchIdList;
     /**
-     * The action for Patch Manager to take on patches included in the RejectedPackages list.    ALLOW_AS_DEPENDENCY: A package in the Rejected patches list is installed only if it is a dependency of another package. It is considered compliant with the patch baseline, and its status is reported as InstalledOther. This is the default action if no option is specified.    BLOCK: Packages in the RejectedPatches list, and packages that include them as dependencies, are not installed under any circumstances. If a package was installed before it was added to the Rejected patches list, it is considered non-compliant with the patch baseline, and its status is reported as InstalledRejected.  
+     * The action for Patch Manager to take on patches included in the RejectedPackages list.     ALLOW_AS_DEPENDENCY : A package in the Rejected patches list is installed only if it is a dependency of another package. It is considered compliant with the patch baseline, and its status is reported as InstalledOther. This is the default action if no option is specified.     BLOCK : Packages in the RejectedPatches list, and packages that include them as dependencies, aren't installed under any circumstances. If a package was installed before it was added to the Rejected patches list, it is considered non-compliant with the patch baseline, and its status is reported as InstalledRejected.  
      */
     RejectedPatchesAction?: PatchAction;
     /**
@@ -2712,7 +2790,7 @@ declare namespace SSM {
      */
     Description?: BaselineDescription;
     /**
-     * Information about the patches to use to update the instances, including target operating systems and source repositories. Applies to Linux instances only.
+     * Information about the patches to use to update the managed nodes, including target operating systems and source repositories. Applies to Linux managed nodes only.
      */
     Sources?: PatchSourceList;
     /**
@@ -2720,7 +2798,7 @@ declare namespace SSM {
      */
     ClientToken?: ClientToken;
     /**
-     * Optional metadata that you assign to a resource. Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment. For example, you might want to tag a patch baseline to identify the severity level of patches it specifies and the operating system family it applies to. In this case, you could specify the following key name/value pairs:    Key=PatchSeverity,Value=Critical     Key=OS,Value=Windows     To add tags to an existing patch baseline, use the AddTagsToResource action. 
+     * Optional metadata that you assign to a resource. Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment. For example, you might want to tag a patch baseline to identify the severity level of patches it specifies and the operating system family it applies to. In this case, you could specify the following key-value pairs:    Key=PatchSeverity,Value=Critical     Key=OS,Value=Windows     To add tags to an existing patch baseline, use the AddTagsToResource operation. 
      */
     Tags?: TagList;
   }
@@ -2740,7 +2818,7 @@ declare namespace SSM {
      */
     S3Destination?: ResourceDataSyncS3Destination;
     /**
-     * Specify SyncToDestination to create a resource data sync that synchronizes data to an S3 bucket for Inventory. If you specify SyncToDestination, you must provide a value for S3Destination. Specify SyncFromSource to synchronize data from a single account and multiple Regions, or multiple AWS accounts and Regions, as listed in AWS Organizations for Explorer. If you specify SyncFromSource, you must provide a value for SyncSource. The default value is SyncToDestination.
+     * Specify SyncToDestination to create a resource data sync that synchronizes data to an S3 bucket for Inventory. If you specify SyncToDestination, you must provide a value for S3Destination. Specify SyncFromSource to synchronize data from a single account and multiple Regions, or multiple Amazon Web Services accounts and Amazon Web Services Regions, as listed in Organizations for Explorer. If you specify SyncFromSource, you must provide a value for SyncSource. The default value is SyncToDestination.
      */
     SyncType?: ResourceDataSyncType;
     /**
@@ -2764,11 +2842,11 @@ declare namespace SSM {
   }
   export interface DeleteAssociationRequest {
     /**
-     * The name of the Systems Manager document.
+     * The name of the SSM document.
      */
     Name?: DocumentARN;
     /**
-     * The ID of the instance.
+     * The managed node ID.   InstanceId has been deprecated. To specify a managed node ID for an association, use the Targets parameter. Requests that include the parameter InstanceID with Systems Manager documents (SSM documents) that use schema version 2.0 or later will fail. In addition, if you use the parameter InstanceId, you can't use the parameters AssociationName, DocumentVersion, MaxErrors, MaxConcurrency, OutputLocation, or ScheduleExpression. To use these parameters, you must use the Targets parameter. 
      */
     InstanceId?: InstanceId;
     /**
@@ -2792,7 +2870,7 @@ declare namespace SSM {
      */
     VersionName?: DocumentVersionName;
     /**
-     * Some SSM document types require that you specify a Force flag before you can delete the document. For example, you must specify a Force flag to delete a document of type ApplicationConfigurationSchema. You can restrict access to the Force flag in an AWS Identity and Access Management (IAM) policy.
+     * Some SSM document types require that you specify a Force flag before you can delete the document. For example, you must specify a Force flag to delete a document of type ApplicationConfigurationSchema. You can restrict access to the Force flag in an Identity and Access Management (IAM) policy.
      */
     Force?: Boolean;
   }
@@ -2804,7 +2882,7 @@ declare namespace SSM {
      */
     TypeName: InventoryItemTypeName;
     /**
-     * Use the SchemaDeleteOption to delete a custom inventory type (schema). If you don't choose this option, the system only deletes existing inventory data associated with the custom inventory type. Choose one of the following options: DisableSchema: If you choose this option, the system ignores all inventory data for the specified version, and any earlier versions. To enable this schema again, you must call the PutInventory action for a version greater than the disabled version. DeleteSchema: This option deletes the specified custom type from the Inventory service. You can recreate the schema later, if you want.
+     * Use the SchemaDeleteOption to delete a custom inventory type (schema). If you don't choose this option, the system only deletes existing inventory data associated with the custom inventory type. Choose one of the following options: DisableSchema: If you choose this option, the system ignores all inventory data for the specified version, and any earlier versions. To enable this schema again, you must call the PutInventory operation for a version greater than the disabled version. DeleteSchema: This option deletes the specified custom type from the Inventory service. You can recreate the schema later, if you want.
      */
     SchemaDeleteOption?: InventorySchemaDeleteOption;
     /**
@@ -2818,7 +2896,7 @@ declare namespace SSM {
   }
   export interface DeleteInventoryResult {
     /**
-     * Every DeleteInventory action is assigned a unique ID. This option returns a unique ID. You can use this ID to query the status of a delete operation. This option is useful for ensuring that a delete operation has completed before you begin other actions. 
+     * Every DeleteInventory operation is assigned a unique ID. This option returns a unique ID. You can use this ID to query the status of a delete operation. This option is useful for ensuring that a delete operation has completed before you begin other operations. 
      */
     DeletionId?: UUID;
     /**
@@ -2826,7 +2904,7 @@ declare namespace SSM {
      */
     TypeName?: InventoryItemTypeName;
     /**
-     * A summary of the delete operation. For more information about this summary, see Deleting custom inventory in the AWS Systems Manager User Guide.
+     * A summary of the delete operation. For more information about this summary, see Deleting custom inventory in the Amazon Web Services Systems Manager User Guide.
      */
     DeletionSummary?: InventoryDeletionSummary;
   }
@@ -2860,7 +2938,7 @@ declare namespace SSM {
   }
   export interface DeleteParametersRequest {
     /**
-     * The names of the parameters to delete.
+     * The names of the parameters to delete. After deleting a parameter, wait for at least 30 seconds to create a parameter with the same name.
      */
     Names: ParameterNameList;
   }
@@ -2870,7 +2948,7 @@ declare namespace SSM {
      */
     DeletedParameters?: ParameterNameList;
     /**
-     * The names of parameters that weren't deleted because the parameters are not valid.
+     * The names of parameters that weren't deleted because the parameters aren't valid.
      */
     InvalidParameters?: ParameterNameList;
   }
@@ -2901,7 +2979,7 @@ declare namespace SSM {
   export type DeliveryTimedOutCount = number;
   export interface DeregisterManagedInstanceRequest {
     /**
-     * The ID assigned to the managed instance when you registered it using the activation process. 
+     * The ID assigned to the managed node when you registered it using the activation process. 
      */
     InstanceId: ManagedInstanceId;
   }
@@ -2937,7 +3015,7 @@ declare namespace SSM {
      */
     WindowTargetId: MaintenanceWindowTargetId;
     /**
-     * The system checks if the target is being referenced by a task. If the target is being referenced, the system returns an error and does not deregister the target from the maintenance window.
+     * The system checks if the target is being referenced by a task. If the target is being referenced, the system returns an error and doesn't deregister the target from the maintenance window.
      */
     Safe?: Boolean;
   }
@@ -2999,7 +3077,7 @@ declare namespace SSM {
   }
   export interface DescribeActivationsResult {
     /**
-     * A list of activations for your AWS account.
+     * A list of activations for your Amazon Web Services account.
      */
     ActivationList?: ActivationList;
     /**
@@ -3069,11 +3147,11 @@ declare namespace SSM {
   }
   export interface DescribeAssociationRequest {
     /**
-     * The name of the Systems Manager document.
+     * The name of the SSM document.
      */
     Name?: DocumentARN;
     /**
-     * The instance ID.
+     * The managed node ID.
      */
     InstanceId?: InstanceId;
     /**
@@ -3081,7 +3159,7 @@ declare namespace SSM {
      */
     AssociationId?: AssociationId;
     /**
-     * Specify the association version to retrieve. To view the latest version, either specify $LATEST for this parameter, or omit this parameter. To view a list of all associations for an instance, use ListAssociations. To get a list of versions for a specific association, use ListAssociationVersions. 
+     * Specify the association version to retrieve. To view the latest version, either specify $LATEST for this parameter, or omit this parameter. To view a list of all associations for a managed node, use ListAssociations. To get a list of versions for a specific association, use ListAssociationVersions. 
      */
     AssociationVersion?: AssociationVersion;
   }
@@ -3133,7 +3211,7 @@ declare namespace SSM {
      */
     MaxResults?: MaxResults;
     /**
-     * A boolean that indicates whether to list step executions in reverse order by start time. The default value is 'false'.
+     * Indicates whether to list step executions in reverse order by start time. The default value is 'false'.
      */
     ReverseOrder?: Boolean;
   }
@@ -3149,7 +3227,7 @@ declare namespace SSM {
   }
   export interface DescribeAvailablePatchesRequest {
     /**
-     * Filters used to scope down the returned patches.
+     * Each element in the array is a structure containing a key-value pair.  Windows Server  Supported keys for Windows Server managed node patches include the following:     PATCH_SET   Sample values: OS | APPLICATION      PRODUCT   Sample values: WindowsServer2012 | Office 2010 | MicrosoftDefenderAntivirus      PRODUCT_FAMILY   Sample values: Windows | Office      MSRC_SEVERITY   Sample values: ServicePacks | Important | Moderate      CLASSIFICATION   Sample values: ServicePacks | SecurityUpdates | DefinitionUpdates      PATCH_ID   Sample values: KB123456 | KB4516046     Linux   When specifying filters for Linux patches, you must specify a key-pair for PRODUCT. For example, using the Command Line Interface (CLI), the following command fails:  aws ssm describe-available-patches --filters Key=CVE_ID,Values=CVE-2018-3615  However, the following command succeeds:  aws ssm describe-available-patches --filters Key=PRODUCT,Values=AmazonLinux2018.03 Key=CVE_ID,Values=CVE-2018-3615   Supported keys for Linux managed node patches include the following:     PRODUCT   Sample values: AmazonLinux2018.03 | AmazonLinux2.0      NAME   Sample values: kernel-headers | samba-python | php      SEVERITY   Sample values: Critical | Important | Medium | Low      EPOCH   Sample values: 0 | 1      VERSION   Sample values: 78.6.1 | 4.10.16      RELEASE   Sample values: 9.56.amzn1 | 1.amzn2      ARCH   Sample values: i686 | x86_64      REPOSITORY   Sample values: Core | Updates      ADVISORY_ID   Sample values: ALAS-2018-1058 | ALAS2-2021-1594      CVE_ID   Sample values: CVE-2018-3615 | CVE-2020-1472      BUGZILLA_ID   Sample values: 1463241   
      */
     Filters?: PatchOrchestratorFilterList;
     /**
@@ -3191,11 +3269,11 @@ declare namespace SSM {
   }
   export interface DescribeDocumentPermissionResponse {
     /**
-     * The account IDs that have permission to use this document. The ID can be either an AWS account or All.
+     * The account IDs that have permission to use this document. The ID can be either an Amazon Web Services account or All.
      */
     AccountIds?: AccountIdList;
     /**
-     * A list of AWS accounts where the current document is shared and the version shared with each account.
+     * A list of Amazon Web Services accounts where the current document is shared and the version shared with each account.
      */
     AccountSharingInfoList?: AccountSharingInfoList;
     /**
@@ -3205,7 +3283,7 @@ declare namespace SSM {
   }
   export interface DescribeDocumentRequest {
     /**
-     * The name of the Systems Manager document.
+     * The name of the SSM document.
      */
     Name: DocumentARN;
     /**
@@ -3213,19 +3291,19 @@ declare namespace SSM {
      */
     DocumentVersion?: DocumentVersion;
     /**
-     * An optional field specifying the version of the artifact associated with the document. For example, "Release 12, Update 6". This value is unique across all versions of a document, and cannot be changed.
+     * An optional field specifying the version of the artifact associated with the document. For example, "Release 12, Update 6". This value is unique across all versions of a document, and can't be changed.
      */
     VersionName?: DocumentVersionName;
   }
   export interface DescribeDocumentResult {
     /**
-     * Information about the Systems Manager document.
+     * Information about the SSM document.
      */
     Document?: DocumentDescription;
   }
   export interface DescribeEffectiveInstanceAssociationsRequest {
     /**
-     * The instance ID for which you want to view all associations.
+     * The managed node ID for which you want to view all associations.
      */
     InstanceId: InstanceId;
     /**
@@ -3239,7 +3317,7 @@ declare namespace SSM {
   }
   export interface DescribeEffectiveInstanceAssociationsResult {
     /**
-     * The associations for the requested instance.
+     * The associations for the requested managed node.
      */
     Associations?: InstanceAssociationList;
     /**
@@ -3273,7 +3351,7 @@ declare namespace SSM {
   }
   export interface DescribeInstanceAssociationsStatusRequest {
     /**
-     * The instance IDs for which you want association status information.
+     * The managed node IDs for which you want association status information.
      */
     InstanceId: InstanceId;
     /**
@@ -3297,11 +3375,11 @@ declare namespace SSM {
   }
   export interface DescribeInstanceInformationRequest {
     /**
-     * This is a legacy method. We recommend that you don't use this method. Instead, use the Filters data type. Filters enables you to return instance information by filtering based on tags applied to managed instances.  Attempting to use InstanceInformationFilterList and Filters leads to an exception error.  
+     * This is a legacy method. We recommend that you don't use this method. Instead, use the Filters data type. Filters enables you to return node information by filtering based on tags applied to managed nodes.  Attempting to use InstanceInformationFilterList and Filters leads to an exception error.  
      */
     InstanceInformationFilterList?: InstanceInformationFilterList;
     /**
-     * One or more filters. Use a filter to return a more specific list of instances. You can filter based on tags applied to EC2 instances. Use this Filters data type instead of InstanceInformationFilterList, which is deprecated.
+     * One or more filters. Use a filter to return a more specific list of managed nodes. You can filter based on tags applied to EC2 instances. Use this Filters data type instead of InstanceInformationFilterList, which is deprecated.
      */
     Filters?: InstanceInformationStringFilterList;
     /**
@@ -3315,7 +3393,7 @@ declare namespace SSM {
   }
   export interface DescribeInstanceInformationResult {
     /**
-     * The instance information list.
+     * The managed node information list.
      */
     InstanceInformationList?: InstanceInformationList;
     /**
@@ -3329,7 +3407,7 @@ declare namespace SSM {
      */
     PatchGroup: PatchGroup;
     /**
-     * Each entry in the array is a structure containing: Key (string between 1 and 200 characters)  Values (array containing a single string)  Type (string "Equal", "NotEqual", "LessThan", "GreaterThan")
+     * Each entry in the array is a structure containing:   Key (string between 1 and 200 characters)   Values (array containing a single string)   Type (string "Equal", "NotEqual", "LessThan", "GreaterThan")  
      */
     Filters?: InstancePatchStateFilterList;
     /**
@@ -3343,7 +3421,7 @@ declare namespace SSM {
   }
   export interface DescribeInstancePatchStatesForPatchGroupResult {
     /**
-     * The high-level patch state for the requested instances. 
+     * The high-level patch state for the requested managed nodes. 
      */
     InstancePatchStates?: InstancePatchStatesList;
     /**
@@ -3353,7 +3431,7 @@ declare namespace SSM {
   }
   export interface DescribeInstancePatchStatesRequest {
     /**
-     * The ID of the instance whose patch state information should be retrieved.
+     * The ID of the managed node for which patch state information should be retrieved.
      */
     InstanceIds: InstanceIdList;
     /**
@@ -3361,13 +3439,13 @@ declare namespace SSM {
      */
     NextToken?: NextToken;
     /**
-     * The maximum number of instances to return (per page).
+     * The maximum number of managed nodes to return (per page).
      */
     MaxResults?: PatchComplianceMaxResults;
   }
   export interface DescribeInstancePatchStatesResult {
     /**
-     * The high-level patch state for the requested instances.
+     * The high-level patch state for the requested managed nodes.
      */
     InstancePatchStates?: InstancePatchStateList;
     /**
@@ -3377,11 +3455,11 @@ declare namespace SSM {
   }
   export interface DescribeInstancePatchesRequest {
     /**
-     * The ID of the instance whose patch state information should be retrieved.
+     * The ID of the managed node whose patch state information should be retrieved.
      */
     InstanceId: InstanceId;
     /**
-     * An array of structures. Each entry in the array is a structure containing a Key, Value combination. Valid values for Key are Classification | KBId | Severity | State.
+     * Each element in the array is a structure containing a key-value pair. Supported keys for DescribeInstancePatchesinclude the following:     Classification   Sample values: Security | SecurityUpdates      KBId   Sample values: KB4480056 | java-1.7.0-openjdk.x86_64      Severity   Sample values: Important | Medium | Low      State   Sample values: Installed | InstalledOther | InstalledPendingReboot   
      */
     Filters?: PatchOrchestratorFilterList;
     /**
@@ -3395,7 +3473,7 @@ declare namespace SSM {
   }
   export interface DescribeInstancePatchesResult {
     /**
-     * Each entry in the array is a structure containing: Title (string) KBId (string) Classification (string) Severity (string) State (string, such as "INSTALLED" or "FAILED") InstalledTime (DateTime) InstalledBy (string)
+     * Each entry in the array is a structure containing:   Title (string)   KBId (string)   Classification (string)   Severity (string)   State (string, such as "INSTALLED" or "FAILED")   InstalledTime (DateTime)   InstalledBy (string)  
      */
     Patches?: PatchComplianceDataList;
     /**
@@ -3405,7 +3483,7 @@ declare namespace SSM {
   }
   export interface DescribeInventoryDeletionsRequest {
     /**
-     * Specify the delete inventory ID for which you want information. This ID was returned by the DeleteInventory action.
+     * Specify the delete inventory ID for which you want information. This ID was returned by the DeleteInventory operation.
      */
     DeletionId?: UUID;
     /**
@@ -3465,7 +3543,7 @@ declare namespace SSM {
      */
     WindowExecutionId: MaintenanceWindowExecutionId;
     /**
-     * Optional filters used to scope down the returned tasks. The supported filter key is STATUS with the corresponding values PENDING, IN_PROGRESS, SUCCESS, FAILED, TIMED_OUT, CANCELLING, and CANCELLED. 
+     * Optional filters used to scope down the returned tasks. The supported filter key is STATUS with the corresponding values PENDING, IN_PROGRESS, SUCCESS, FAILED, TIMED_OUT, CANCELLING, and CANCELLED.
      */
     Filters?: MaintenanceWindowFilterList;
     /**
@@ -3493,7 +3571,7 @@ declare namespace SSM {
      */
     WindowId: MaintenanceWindowId;
     /**
-     * Each entry in the array is a structure containing: Key (string, between 1 and 128 characters) Values (array of strings, each string is between 1 and 256 characters) The supported Keys are ExecutedBefore and ExecutedAfter with the value being a date/time string such as 2016-11-04T05:00:00Z.
+     * Each entry in the array is a structure containing:   Key. A string between 1 and 128 characters. Supported keys include ExecutedBefore and ExecutedAfter.   Values. An array of strings, each between 1 and 256 characters. Supported values are date/time strings in a valid ISO 8601 date/time format, such as 2021-11-04T05:00:00Z.  
      */
     Filters?: MaintenanceWindowFilterList;
     /**
@@ -3521,11 +3599,11 @@ declare namespace SSM {
      */
     WindowId?: MaintenanceWindowId;
     /**
-     * The instance ID or key/value pair to retrieve information about.
+     * The managed node ID or key-value pair to retrieve information about.
      */
     Targets?: Targets;
     /**
-     * The type of resource you want to retrieve information about. For example, "INSTANCE".
+     * The type of resource you want to retrieve information about. For example, INSTANCE.
      */
     ResourceType?: MaintenanceWindowResourceType;
     /**
@@ -3557,7 +3635,7 @@ declare namespace SSM {
      */
     WindowId: MaintenanceWindowId;
     /**
-     * Optional filters that can be used to narrow down the scope of the returned window targets. The supported filter keys are Type, WindowTargetId and OwnerInformation.
+     * Optional filters that can be used to narrow down the scope of the returned window targets. The supported filter keys are Type, WindowTargetId, and OwnerInformation.
      */
     Filters?: MaintenanceWindowFilterList;
     /**
@@ -3609,11 +3687,11 @@ declare namespace SSM {
   }
   export interface DescribeMaintenanceWindowsForTargetRequest {
     /**
-     * The instance ID or key/value pair to retrieve information about.
+     * The managed node ID or key-value pair to retrieve information about.
      */
     Targets: Targets;
     /**
-     * The type of resource you want to retrieve information about. For example, "INSTANCE".
+     * The type of resource you want to retrieve information about. For example, INSTANCE.
      */
     ResourceType: MaintenanceWindowResourceType;
     /**
@@ -3627,7 +3705,7 @@ declare namespace SSM {
   }
   export interface DescribeMaintenanceWindowsForTargetResult {
     /**
-     * Information about the maintenance window targets and tasks an instance is associated with.
+     * Information about the maintenance window targets and tasks a managed node is associated with.
      */
     WindowIdentities?: MaintenanceWindowsForTargetList;
     /**
@@ -3637,7 +3715,7 @@ declare namespace SSM {
   }
   export interface DescribeMaintenanceWindowsRequest {
     /**
-     * Optional filters used to narrow down the scope of the returned maintenance windows. Supported filter keys are Name and Enabled.
+     * Optional filters used to narrow down the scope of the returned maintenance windows. Supported filter keys are Name and Enabled. For example, Name=MyMaintenanceWindow and Enabled=True.
      */
     Filters?: MaintenanceWindowFilterList;
     /**
@@ -3661,7 +3739,7 @@ declare namespace SSM {
   }
   export interface DescribeOpsItemsRequest {
     /**
-     * One or more filters to limit the response.   Key: CreatedTime Operations: GreaterThan, LessThan   Key: LastModifiedBy Operations: Contains, Equals   Key: LastModifiedTime Operations: GreaterThan, LessThan   Key: Priority Operations: Equals   Key: Source Operations: Contains, Equals   Key: Status Operations: Equals   Key: Title Operations: Contains   Key: OperationalData* Operations: Equals   Key: OperationalDataKey Operations: Equals   Key: OperationalDataValue Operations: Equals, Contains   Key: OpsItemId Operations: Equals   Key: ResourceId Operations: Contains   Key: AutomationId Operations: Equals   *If you filter the response by using the OperationalData operator, specify a key-value pair by using the following JSON format: {"key":"key_name","value":"a_value"}
+     * One or more filters to limit the response.   Key: CreatedTime Operations: GreaterThan, LessThan   Key: LastModifiedBy Operations: Contains, Equals   Key: LastModifiedTime Operations: GreaterThan, LessThan   Key: Priority Operations: Equals   Key: Source Operations: Contains, Equals   Key: Status Operations: Equals   Key: Title* Operations: Equals,Contains   Key: OperationalData** Operations: Equals   Key: OperationalDataKey Operations: Equals   Key: OperationalDataValue Operations: Equals, Contains   Key: OpsItemId Operations: Equals   Key: ResourceId Operations: Contains   Key: AutomationId Operations: Equals   *The Equals operator for Title matches the first 100 characters. If you specify more than 100 characters, they system returns an error that the filter value exceeds the length limit. **If you filter the response by using the OperationalData operator, specify a key-value pair by using the following JSON format: {"key":"key_name","value":"a_value"}
      */
     OpsItemFilters?: OpsItemFilters;
     /**
@@ -3713,7 +3791,7 @@ declare namespace SSM {
   }
   export interface DescribePatchBaselinesRequest {
     /**
-     * Each element in the array is a structure containing:  Key: (string, "NAME_PREFIX" or "OWNER") Value: (array of strings, exactly 1 entry, between 1 and 255 characters)
+     * Each element in the array is a structure containing a key-value pair. Supported keys for DescribePatchBaselines include the following:     NAME_PREFIX   Sample values: AWS- | My-      OWNER   Sample values: AWS | Self      OPERATING_SYSTEM   Sample values: AMAZON_LINUX | SUSE | WINDOWS   
      */
     Filters?: PatchOrchestratorFilterList;
     /**
@@ -3743,51 +3821,51 @@ declare namespace SSM {
   }
   export interface DescribePatchGroupStateResult {
     /**
-     * The number of instances in the patch group.
+     * The number of managed nodes in the patch group.
      */
     Instances?: Integer;
     /**
-     * The number of instances with installed patches.
+     * The number of managed nodes with installed patches.
      */
     InstancesWithInstalledPatches?: Integer;
     /**
-     * The number of instances with patches installed that aren't defined in the patch baseline.
+     * The number of managed nodes with patches installed that aren't defined in the patch baseline.
      */
     InstancesWithInstalledOtherPatches?: Integer;
     /**
-     * The number of instances with patches installed by Patch Manager that have not been rebooted after the patch installation. The status of these instances is NON_COMPLIANT.
+     * The number of managed nodes with patches installed by Patch Manager that haven't been rebooted after the patch installation. The status of these managed nodes is NON_COMPLIANT.
      */
     InstancesWithInstalledPendingRebootPatches?: InstancesCount;
     /**
-     * The number of instances with patches installed that are specified in a RejectedPatches list. Patches with a status of INSTALLED_REJECTED were typically installed before they were added to a RejectedPatches list.  If ALLOW_AS_DEPENDENCY is the specified option for RejectedPatchesAction, the value of InstancesWithInstalledRejectedPatches will always be 0 (zero). 
+     * The number of managed nodes with patches installed that are specified in a RejectedPatches list. Patches with a status of INSTALLED_REJECTED were typically installed before they were added to a RejectedPatches list.  If ALLOW_AS_DEPENDENCY is the specified option for RejectedPatchesAction, the value of InstancesWithInstalledRejectedPatches will always be 0 (zero). 
      */
     InstancesWithInstalledRejectedPatches?: InstancesCount;
     /**
-     * The number of instances with missing patches from the patch baseline.
+     * The number of managed nodes with missing patches from the patch baseline.
      */
     InstancesWithMissingPatches?: Integer;
     /**
-     * The number of instances with patches from the patch baseline that failed to install.
+     * The number of managed nodes with patches from the patch baseline that failed to install.
      */
     InstancesWithFailedPatches?: Integer;
     /**
-     * The number of instances with patches that aren't applicable.
+     * The number of managed nodes with patches that aren't applicable.
      */
     InstancesWithNotApplicablePatches?: Integer;
     /**
-     * The number of instances with NotApplicable patches beyond the supported limit, which are not reported by name to Systems Manager Inventory.
+     * The number of managed nodes with NotApplicable patches beyond the supported limit, which aren't reported by name to Inventory. Inventory is a capability of Amazon Web Services Systems Manager.
      */
     InstancesWithUnreportedNotApplicablePatches?: Integer;
     /**
-     * The number of instances where patches that are specified as "Critical" for compliance reporting in the patch baseline are not installed. These patches might be missing, have failed installation, were rejected, or were installed but awaiting a required instance reboot. The status of these instances is NON_COMPLIANT.
+     * The number of managed nodes where patches that are specified as Critical for compliance reporting in the patch baseline aren't installed. These patches might be missing, have failed installation, were rejected, or were installed but awaiting a required managed node reboot. The status of these managed nodes is NON_COMPLIANT.
      */
     InstancesWithCriticalNonCompliantPatches?: InstancesCount;
     /**
-     * The number of instances where patches that are specified as "Security" in a patch advisory are not installed. These patches might be missing, have failed installation, were rejected, or were installed but awaiting a required instance reboot. The status of these instances is NON_COMPLIANT.
+     * The number of managed nodes where patches that are specified as Security in a patch advisory aren't installed. These patches might be missing, have failed installation, were rejected, or were installed but awaiting a required managed node reboot. The status of these managed nodes is NON_COMPLIANT.
      */
     InstancesWithSecurityNonCompliantPatches?: InstancesCount;
     /**
-     * The number of instances with patches installed that are specified as other than "Critical" or "Security" but are not compliant with the patch baseline. The status of these instances is NON_COMPLIANT.
+     * The number of managed nodes with patches installed that are specified as other than Critical or Security but aren't compliant with the patch baseline. The status of these managed nodes is NON_COMPLIANT.
      */
     InstancesWithOtherNonCompliantPatches?: InstancesCount;
   }
@@ -3797,7 +3875,7 @@ declare namespace SSM {
      */
     MaxResults?: PatchBaselineMaxResults;
     /**
-     * One or more filters. Use a filter to return a more specific list of results. For DescribePatchGroups,valid filter keys include the following:    NAME_PREFIX: The name of the patch group. Wildcards (*) are accepted.    OPERATING_SYSTEM: The supported operating system type to return results for. For valid operating system values, see GetDefaultPatchBaselineRequest$OperatingSystem in CreatePatchBaseline. Examples:    --filters Key=NAME_PREFIX,Values=MyPatchGroup*     --filters Key=OPERATING_SYSTEM,Values=AMAZON_LINUX_2     
+     * Each element in the array is a structure containing a key-value pair. Supported keys for DescribePatchGroups include the following:     NAME_PREFIX   Sample values: AWS- | My-.     OPERATING_SYSTEM   Sample values: AMAZON_LINUX | SUSE | WINDOWS   
      */
     Filters?: PatchOrchestratorFilterList;
     /**
@@ -3807,7 +3885,7 @@ declare namespace SSM {
   }
   export interface DescribePatchGroupsResult {
     /**
-     * Each entry in the array contains: PatchGroup: string (between 1 and 256 characters, Regex: ^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$) PatchBaselineIdentity: A PatchBaselineIdentity element. 
+     * Each entry in the array contains:    PatchGroup: string (between 1 and 256 characters. Regex: ^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$)     PatchBaselineIdentity: A PatchBaselineIdentity element.  
      */
     Mappings?: PatchGroupPatchBaselineMappingList;
     /**
@@ -3825,7 +3903,7 @@ declare namespace SSM {
      */
     Property: PatchProperty;
     /**
-     * Indicates whether to list patches for the Windows operating system or for Microsoft applications. Not applicable for the Linux or macOS operating systems.
+     * Indicates whether to list patches for the Windows operating system or for applications released by Microsoft. Not applicable for the Linux or macOS operating systems.
      */
     PatchSet?: PatchSet;
     /**
@@ -3876,6 +3954,18 @@ declare namespace SSM {
     NextToken?: NextToken;
   }
   export type DescriptionInDocument = string;
+  export interface DisassociateOpsItemRelatedItemRequest {
+    /**
+     * The ID of the OpsItem for which you want to delete an association between the OpsItem and a related item.
+     */
+    OpsItemId: OpsItemId;
+    /**
+     * The ID of the association for which you want to delete an association between the OpsItem and a related item.
+     */
+    AssociationId: OpsItemRelatedItemAssociationId;
+  }
+  export interface DisassociateOpsItemRelatedItemResponse {
+  }
   export type DocumentARN = string;
   export type DocumentAuthor = string;
   export type DocumentContent = string;
@@ -3907,15 +3997,19 @@ declare namespace SSM {
      */
     HashType?: DocumentHashType;
     /**
-     * The name of the Systems Manager document.
+     * The name of the SSM document.
      */
     Name?: DocumentARN;
+    /**
+     * The friendly name of the SSM document. This value can differ for each version of the document. If you want to update this value, see UpdateDocument.
+     */
+    DisplayName?: DocumentDisplayName;
     /**
      * The version of the artifact associated with the document.
      */
     VersionName?: DocumentVersionName;
     /**
-     * The AWS user account that created the document.
+     * The Amazon Web Services user account that created the document.
      */
     Owner?: DocumentOwner;
     /**
@@ -3923,11 +4017,11 @@ declare namespace SSM {
      */
     CreatedDate?: DateTime;
     /**
-     * The status of the Systems Manager document.
+     * The status of the SSM document.
      */
     Status?: DocumentStatus;
     /**
-     * A message returned by AWS Systems Manager that explains the Status value. For example, a Failed status might be explained by the StatusInformation message, "The specified S3 bucket does not exist. Verify that the URL of the S3 bucket is correct."
+     * A message returned by Amazon Web Services Systems Manager that explains the Status value. For example, a Failed status might be explained by the StatusInformation message, "The specified S3 bucket doesn't exist. Verify that the URL of the S3 bucket is correct."
      */
     StatusInformation?: DocumentStatusInformation;
     /**
@@ -3943,7 +4037,7 @@ declare namespace SSM {
      */
     Parameters?: DocumentParameterList;
     /**
-     * The list of OS platforms compatible with this Systems Manager document. 
+     * The list of operating system (OS) platforms compatible with this SSM document. 
      */
     PlatformTypes?: PlatformTypeList;
     /**
@@ -3967,7 +4061,7 @@ declare namespace SSM {
      */
     DocumentFormat?: DocumentFormat;
     /**
-     * The target type which defines the kinds of resources the document can run on. For example, /AWS::EC2::Instance. For a list of valid resource types, see AWS resource and property types reference in the AWS CloudFormation User Guide. 
+     * The target type which defines the kinds of resources the document can run on. For example, /AWS::EC2::Instance. For a list of valid resource types, see Amazon Web Services resource and property types reference in the CloudFormation User Guide. 
      */
     TargetType?: TargetType;
     /**
@@ -4002,7 +4096,16 @@ declare namespace SSM {
      * The current status of the review.
      */
     ReviewStatus?: ReviewStatus;
+    /**
+     * The classification of a document to help you identify and categorize its use.
+     */
+    Category?: CategoryList;
+    /**
+     * The value that identifies a document's category.
+     */
+    CategoryEnum?: CategoryEnumList;
   }
+  export type DocumentDisplayName = string;
   export interface DocumentFilter {
     /**
      * The name of the filter.
@@ -4021,15 +4124,23 @@ declare namespace SSM {
   export type DocumentHashType = "Sha256"|"Sha1"|string;
   export interface DocumentIdentifier {
     /**
-     * The name of the Systems Manager document.
+     * The name of the SSM document.
      */
     Name?: DocumentARN;
     /**
-     * The AWS user account that created the document.
+     * The date the SSM document was created.
+     */
+    CreatedDate?: DateTime;
+    /**
+     * An optional field where you can specify a friendly name for the SSM document. This value can differ for each version of the document. If you want to update this value, see UpdateDocument.
+     */
+    DisplayName?: DocumentDisplayName;
+    /**
+     * The Amazon Web Services user account that created the document.
      */
     Owner?: DocumentOwner;
     /**
-     * An optional field specifying the version of the artifact associated with the document. For example, "Release 12, Update 6". This value is unique across all versions of a document, and cannot be changed.
+     * An optional field specifying the version of the artifact associated with the document. For example, "Release 12, Update 6". This value is unique across all versions of a document, and can't be changed.
      */
     VersionName?: DocumentVersionName;
     /**
@@ -4053,7 +4164,7 @@ declare namespace SSM {
      */
     DocumentFormat?: DocumentFormat;
     /**
-     * The target type which defines the kinds of resources the document can run on. For example, /AWS::EC2::Instance. For a list of valid resource types, see AWS resource and property types reference in the AWS CloudFormation User Guide. 
+     * The target type which defines the kinds of resources the document can run on. For example, /AWS::EC2::Instance. For a list of valid resource types, see Amazon Web Services resource and property types reference in the CloudFormation User Guide. 
      */
     TargetType?: TargetType;
     /**
@@ -4184,7 +4295,7 @@ declare namespace SSM {
   export type DocumentSha1 = string;
   export type DocumentStatus = "Creating"|"Active"|"Updating"|"Deleting"|"Failed"|string;
   export type DocumentStatusInformation = string;
-  export type DocumentType = "Command"|"Policy"|"Automation"|"Session"|"Package"|"ApplicationConfiguration"|"ApplicationConfigurationSchema"|"DeploymentStrategy"|"ChangeCalendar"|"Automation.ChangeTemplate"|string;
+  export type DocumentType = "Command"|"Policy"|"Automation"|"Session"|"Package"|"ApplicationConfiguration"|"ApplicationConfigurationSchema"|"DeploymentStrategy"|"ChangeCalendar"|"Automation.ChangeTemplate"|"ProblemAnalysis"|"ProblemAnalysisTemplate"|string;
   export type DocumentVersion = string;
   export interface DocumentVersionInfo {
     /**
@@ -4192,11 +4303,15 @@ declare namespace SSM {
      */
     Name?: DocumentName;
     /**
+     * The friendly name of the SSM document. This value can differ for each version of the document. If you want to update this value, see UpdateDocument.
+     */
+    DisplayName?: DocumentDisplayName;
+    /**
      * The document version.
      */
     DocumentVersion?: DocumentVersion;
     /**
-     * The version of the artifact associated with the document. For example, "Release 12, Update 6". This value is unique across all versions of a document, and cannot be changed.
+     * The version of the artifact associated with the document. For example, "Release 12, Update 6". This value is unique across all versions of a document, and can't be changed.
      */
     VersionName?: DocumentVersionName;
     /**
@@ -4212,11 +4327,11 @@ declare namespace SSM {
      */
     DocumentFormat?: DocumentFormat;
     /**
-     * The status of the Systems Manager document, such as Creating, Active, Failed, and Deleting.
+     * The status of the SSM document, such as Creating, Active, Failed, and Deleting.
      */
     Status?: DocumentStatus;
     /**
-     * A message returned by AWS Systems Manager that explains the Status value. For example, a Failed status might be explained by the StatusInformation message, "The specified S3 bucket does not exist. Verify that the URL of the S3 bucket is correct."
+     * A message returned by Amazon Web Services Systems Manager that explains the Status value. For example, a Failed status might be explained by the StatusInformation message, "The specified S3 bucket doesn't exist. Verify that the URL of the S3 bucket is correct."
      */
     StatusInformation?: DocumentStatusInformation;
     /**
@@ -4276,7 +4391,7 @@ declare namespace SSM {
   export type Fault = "Client"|"Server"|"Unknown"|string;
   export interface GetAutomationExecutionRequest {
     /**
-     * The unique identifier for an existing automation execution to examine. The execution ID is returned by StartAutomationExecution when the execution of an Automation document is initiated.
+     * The unique identifier for an existing automation execution to examine. The execution ID is returned by StartAutomationExecution when the execution of an Automation runbook is initiated.
      */
     AutomationExecutionId: AutomationExecutionId;
   }
@@ -4288,21 +4403,21 @@ declare namespace SSM {
   }
   export interface GetCalendarStateRequest {
     /**
-     * The names or Amazon Resource Names (ARNs) of the Systems Manager documents that represent the calendar entries for which you want to get the state.
+     * The names or Amazon Resource Names (ARNs) of the Systems Manager documents (SSM documents) that represent the calendar entries for which you want to get the state.
      */
     CalendarNames: CalendarNameOrARNList;
     /**
-     * (Optional) The specific time for which you want to get calendar state information, in ISO 8601 format. If you do not add AtTime, the current time is assumed.
+     * (Optional) The specific time for which you want to get calendar state information, in ISO 8601 format. If you don't specify a value or AtTime, the current time is used.
      */
     AtTime?: ISO8601String;
   }
   export interface GetCalendarStateResponse {
     /**
-     * The state of the calendar. An OPEN calendar indicates that actions are allowed to proceed, and a CLOSED calendar indicates that actions are not allowed to proceed.
+     * The state of the calendar. An OPEN calendar indicates that actions are allowed to proceed, and a CLOSED calendar indicates that actions aren't allowed to proceed.
      */
     State?: CalendarState;
     /**
-     * The time, as an ISO 8601 string, that you specified in your command. If you did not specify a time, GetCalendarState uses the current time.
+     * The time, as an ISO 8601 string, that you specified in your command. If you don't specify a time, GetCalendarState uses the current time.
      */
     AtTime?: ISO8601String;
     /**
@@ -4316,11 +4431,11 @@ declare namespace SSM {
      */
     CommandId: CommandId;
     /**
-     * (Required) The ID of the managed instance targeted by the command. A managed instance can be an Amazon Elastic Compute Cloud (Amazon EC2) instance or an instance in your hybrid environment that is configured for AWS Systems Manager.
+     * (Required) The ID of the managed node targeted by the command. A managed node can be an Amazon Elastic Compute Cloud (Amazon EC2) instance, edge device, and on-premises server or VM in your hybrid environment that is configured for Amazon Web Services Systems Manager.
      */
     InstanceId: InstanceId;
     /**
-     * The name of the plugin for which you want detailed results. If the document contains only one plugin, you can omit the name and details for that plugin. If the document contains more than one plugin, you must specify the name of the plugin for which you want to view details. Plugin names are also referred to as step names in Systems Manager documents. For example, aws:RunShellScript is a plugin. To find the PluginName, check the document content and find the name of the plugin. Alternatively, use ListCommandInvocations with the CommandId and Details parameters. The PluginName is the Name attribute of the CommandPlugin object in the CommandPlugins list.
+     * The name of the plugin for which you want detailed results. If the document contains only one plugin, you can omit the name and details for that plugin. If the document contains more than one plugin, you must specify the name of the plugin for which you want to view details. Plugin names are also referred to as step names in Systems Manager documents (SSM documents). For example, aws:RunShellScript is a plugin. To find the PluginName, check the document content and find the name of the plugin. Alternatively, use ListCommandInvocations with the CommandId and Details parameters. The PluginName is the Name attribute of the CommandPlugin object in the CommandPlugins list.
      */
     PluginName?: CommandPluginName;
   }
@@ -4330,7 +4445,7 @@ declare namespace SSM {
      */
     CommandId?: CommandId;
     /**
-     * The ID of the managed instance targeted by the command. A managed instance can be an EC2 instance or an instance in your hybrid environment that is configured for Systems Manager.
+     * The ID of the managed node targeted by the command. A managed node can be an Amazon Elastic Compute Cloud (Amazon EC2) instance, edge device, or on-premises server or VM in your hybrid environment that is configured for Amazon Web Services Systems Manager.
      */
     InstanceId?: InstanceId;
     /**
@@ -4342,7 +4457,7 @@ declare namespace SSM {
      */
     DocumentName?: DocumentName;
     /**
-     * The SSM document version used in the request.
+     * The Systems Manager document (SSM document) version used in the request.
      */
     DocumentVersion?: DocumentVersion;
     /**
@@ -4350,11 +4465,11 @@ declare namespace SSM {
      */
     PluginName?: CommandPluginName;
     /**
-     * The error level response code for the plugin script. If the response code is -1, then the command has not started running on the instance, or it was not received by the instance.
+     * The error level response code for the plugin script. If the response code is -1, then the command hasn't started running on the managed node, or it wasn't received by the node.
      */
     ResponseCode?: ResponseCode;
     /**
-     * The date and time the plugin started running. Date and time are written in ISO 8601 format. For example, June 7, 2017 is represented as 2017-06-7. The following sample AWS CLI command uses the InvokedBefore filter.  aws ssm list-commands --filters key=InvokedBefore,value=2017-06-07T00:00:00Z  If the plugin has not started to run, the string is empty.
+     * The date and time the plugin started running. Date and time are written in ISO 8601 format. For example, June 7, 2017 is represented as 2017-06-7. The following sample Amazon Web Services CLI command uses the InvokedBefore filter.  aws ssm list-commands --filters key=InvokedBefore,value=2017-06-07T00:00:00Z  If the plugin hasn't started to run, the string is empty.
      */
     ExecutionStartDateTime?: StringDateTime;
     /**
@@ -4362,7 +4477,7 @@ declare namespace SSM {
      */
     ExecutionElapsedTime?: StringDateTime;
     /**
-     * The date and time the plugin finished running. Date and time are written in ISO 8601 format. For example, June 7, 2017 is represented as 2017-06-7. The following sample AWS CLI command uses the InvokedAfter filter.  aws ssm list-commands --filters key=InvokedAfter,value=2017-06-07T00:00:00Z  If the plugin has not started to run, the string is empty.
+     * The date and time the plugin finished running. Date and time are written in ISO 8601 format. For example, June 7, 2017 is represented as 2017-06-7. The following sample Amazon Web Services CLI command uses the InvokedAfter filter.  aws ssm list-commands --filters key=InvokedAfter,value=2017-06-07T00:00:00Z  If the plugin hasn't started to run, the string is empty.
      */
     ExecutionEndDateTime?: StringDateTime;
     /**
@@ -4370,43 +4485,43 @@ declare namespace SSM {
      */
     Status?: CommandInvocationStatus;
     /**
-     * A detailed status of the command execution for an invocation. StatusDetails includes more information than Status because it includes states resulting from error and concurrency control parameters. StatusDetails can show different results than Status. For more information about these statuses, see Understanding command statuses in the AWS Systems Manager User Guide. StatusDetails can be one of the following values:   Pending: The command has not been sent to the instance.   In Progress: The command has been sent to the instance but has not reached a terminal state.   Delayed: The system attempted to send the command to the target, but the target was not available. The instance might not be available because of network issues, because the instance was stopped, or for similar reasons. The system will try to send the command again.   Success: The command or plugin ran successfully. This is a terminal state.   Delivery Timed Out: The command was not delivered to the instance before the delivery timeout expired. Delivery timeouts do not count against the parent command's MaxErrors limit, but they do contribute to whether the parent command status is Success or Incomplete. This is a terminal state.   Execution Timed Out: The command started to run on the instance, but the execution was not complete before the timeout expired. Execution timeouts count against the MaxErrors limit of the parent command. This is a terminal state.   Failed: The command wasn't run successfully on the instance. For a plugin, this indicates that the result code was not zero. For a command invocation, this indicates that the result code for one or more plugins was not zero. Invocation failures count against the MaxErrors limit of the parent command. This is a terminal state.   Canceled: The command was terminated before it was completed. This is a terminal state.   Undeliverable: The command can't be delivered to the instance. The instance might not exist or might not be responding. Undeliverable invocations don't count against the parent command's MaxErrors limit and don't contribute to whether the parent command status is Success or Incomplete. This is a terminal state.   Terminated: The parent command exceeded its MaxErrors limit and subsequent command invocations were canceled by the system. This is a terminal state.  
+     * A detailed status of the command execution for an invocation. StatusDetails includes more information than Status because it includes states resulting from error and concurrency control parameters. StatusDetails can show different results than Status. For more information about these statuses, see Understanding command statuses in the Amazon Web Services Systems Manager User Guide. StatusDetails can be one of the following values:   Pending: The command hasn't been sent to the managed node.   In Progress: The command has been sent to the managed node but hasn't reached a terminal state.   Delayed: The system attempted to send the command to the target, but the target wasn't available. The managed node might not be available because of network issues, because the node was stopped, or for similar reasons. The system will try to send the command again.   Success: The command or plugin ran successfully. This is a terminal state.   Delivery Timed Out: The command wasn't delivered to the managed node before the delivery timeout expired. Delivery timeouts don't count against the parent command's MaxErrors limit, but they do contribute to whether the parent command status is Success or Incomplete. This is a terminal state.   Execution Timed Out: The command started to run on the managed node, but the execution wasn't complete before the timeout expired. Execution timeouts count against the MaxErrors limit of the parent command. This is a terminal state.   Failed: The command wasn't run successfully on the managed node. For a plugin, this indicates that the result code wasn't zero. For a command invocation, this indicates that the result code for one or more plugins wasn't zero. Invocation failures count against the MaxErrors limit of the parent command. This is a terminal state.   Cancelled: The command was terminated before it was completed. This is a terminal state.   Undeliverable: The command can't be delivered to the managed node. The node might not exist or might not be responding. Undeliverable invocations don't count against the parent command's MaxErrors limit and don't contribute to whether the parent command status is Success or Incomplete. This is a terminal state.   Terminated: The parent command exceeded its MaxErrors limit and subsequent command invocations were canceled by the system. This is a terminal state.  
      */
     StatusDetails?: StatusDetails;
     /**
-     * The first 24,000 characters written by the plugin to stdout. If the command has not finished running, if ExecutionStatus is neither Succeeded nor Failed, then this string is empty.
+     * The first 24,000 characters written by the plugin to stdout. If the command hasn't finished running, if ExecutionStatus is neither Succeeded nor Failed, then this string is empty.
      */
     StandardOutputContent?: StandardOutputContent;
     /**
-     * The URL for the complete text written by the plugin to stdout in Amazon Simple Storage Service (Amazon S3). If an S3 bucket was not specified, then this string is empty.
+     * The URL for the complete text written by the plugin to stdout in Amazon Simple Storage Service (Amazon S3). If an S3 bucket wasn't specified, then this string is empty.
      */
     StandardOutputUrl?: Url;
     /**
-     * The first 8,000 characters written by the plugin to stderr. If the command has not finished running, then this string is empty.
+     * The first 8,000 characters written by the plugin to stderr. If the command hasn't finished running, then this string is empty.
      */
     StandardErrorContent?: StandardErrorContent;
     /**
-     * The URL for the complete text written by the plugin to stderr. If the command has not finished running, then this string is empty.
+     * The URL for the complete text written by the plugin to stderr. If the command hasn't finished running, then this string is empty.
      */
     StandardErrorUrl?: Url;
     /**
-     * CloudWatch Logs information where Systems Manager sent the command output.
+     * Amazon CloudWatch Logs information where Systems Manager sent the command output.
      */
     CloudWatchOutputConfig?: CloudWatchOutputConfig;
   }
   export interface GetConnectionStatusRequest {
     /**
-     * The ID of the instance.
+     * The managed node ID.
      */
     Target: SessionTarget;
   }
   export interface GetConnectionStatusResponse {
     /**
-     * The ID of the instance to check connection status. 
+     * The ID of the managed node to check connection status. 
      */
     Target?: SessionTarget;
     /**
-     * The status of the connection to the instance. For example, 'Connected' or 'Not Connected'.
+     * The status of the connection to the managed node. For example, 'Connected' or 'Not Connected'.
      */
     Status?: ConnectionStatus;
   }
@@ -4428,11 +4543,11 @@ declare namespace SSM {
   }
   export interface GetDeployablePatchSnapshotForInstanceRequest {
     /**
-     * The ID of the instance for which the appropriate patch snapshot should be retrieved.
+     * The ID of the managed node for which the appropriate patch snapshot should be retrieved.
      */
     InstanceId: InstanceId;
     /**
-     * The user-defined snapshot ID.
+     * The snapshot ID provided by the user when running AWS-RunPatchBaseline.
      */
     SnapshotId: SnapshotId;
     /**
@@ -4442,7 +4557,7 @@ declare namespace SSM {
   }
   export interface GetDeployablePatchSnapshotForInstanceResult {
     /**
-     * The ID of the instance.
+     * The managed node ID.
      */
     InstanceId?: InstanceId;
     /**
@@ -4450,17 +4565,17 @@ declare namespace SSM {
      */
     SnapshotId?: SnapshotId;
     /**
-     * A pre-signed Amazon S3 URL that can be used to download the patch snapshot.
+     * A pre-signed Amazon Simple Storage Service (Amazon S3) URL that can be used to download the patch snapshot.
      */
     SnapshotDownloadUrl?: SnapshotDownloadUrl;
     /**
-     * Returns the specific operating system (for example Windows Server 2012 or Amazon Linux 2015.09) on the instance for the specified patch snapshot.
+     * Returns the specific operating system (for example Windows Server 2012 or Amazon Linux 2015.09) on the managed node for the specified patch snapshot.
      */
     Product?: Product;
   }
   export interface GetDocumentRequest {
     /**
-     * The name of the Systems Manager document.
+     * The name of the SSM document.
      */
     Name: DocumentARN;
     /**
@@ -4478,11 +4593,19 @@ declare namespace SSM {
   }
   export interface GetDocumentResult {
     /**
-     * The name of the Systems Manager document.
+     * The name of the SSM document.
      */
     Name?: DocumentARN;
     /**
-     * The version of the artifact associated with the document. For example, "Release 12, Update 6". This value is unique across all versions of a document, and cannot be changed.
+     * The date the SSM document was created.
+     */
+    CreatedDate?: DateTime;
+    /**
+     * The friendly name of the SSM document. This value can differ for each version of the document. If you want to update this value, see UpdateDocument.
+     */
+    DisplayName?: DocumentDisplayName;
+    /**
+     * The version of the artifact associated with the document. For example, "Release 12, Update 6". This value is unique across all versions of a document, and can't be changed.
      */
     VersionName?: DocumentVersionName;
     /**
@@ -4490,15 +4613,15 @@ declare namespace SSM {
      */
     DocumentVersion?: DocumentVersion;
     /**
-     * The status of the Systems Manager document, such as Creating, Active, Updating, Failed, and Deleting.
+     * The status of the SSM document, such as Creating, Active, Updating, Failed, and Deleting.
      */
     Status?: DocumentStatus;
     /**
-     * A message returned by AWS Systems Manager that explains the Status value. For example, a Failed status might be explained by the StatusInformation message, "The specified S3 bucket does not exist. Verify that the URL of the S3 bucket is correct."
+     * A message returned by Amazon Web Services Systems Manager that explains the Status value. For example, a Failed status might be explained by the StatusInformation message, "The specified S3 bucket doesn't exist. Verify that the URL of the S3 bucket is correct."
      */
     StatusInformation?: DocumentStatusInformation;
     /**
-     * The contents of the Systems Manager document.
+     * The contents of the SSM document.
      */
     Content?: DocumentContent;
     /**
@@ -4528,7 +4651,7 @@ declare namespace SSM {
      */
     Filters?: InventoryFilterList;
     /**
-     * Returns counts of inventory types based on one or more expressions. For example, if you aggregate by using an expression that uses the AWS:InstanceInformation.PlatformType type, you can see a count of how many Windows and Linux instances exist in your inventoried fleet.
+     * Returns counts of inventory types based on one or more expressions. For example, if you aggregate by using an expression that uses the AWS:InstanceInformation.PlatformType type, you can see a count of how many Windows and Linux managed nodes exist in your inventoried fleet.
      */
     Aggregators?: InventoryAggregatorList;
     /**
@@ -4546,7 +4669,7 @@ declare namespace SSM {
   }
   export interface GetInventoryResult {
     /**
-     * Collection of inventory entities such as a collection of instance inventory. 
+     * Collection of inventory entities such as a collection of managed node inventory. 
      */
     Entities?: InventoryResultEntityList;
     /**
@@ -4607,7 +4730,7 @@ declare namespace SSM {
      */
     Status?: MaintenanceWindowExecutionStatus;
     /**
-     * The details explaining the Status. Only available for certain status values.
+     * The details explaining the status. Not available for all status values.
      */
     StatusDetails?: MaintenanceWindowExecutionStatusDetails;
     /**
@@ -4651,7 +4774,7 @@ declare namespace SSM {
      */
     ExecutionId?: MaintenanceWindowExecutionTaskExecutionId;
     /**
-     * Retrieves the task type for a maintenance window. Task types include the following: LAMBDA, STEP_FUNCTIONS, AUTOMATION, RUN_COMMAND.
+     * Retrieves the task type for a maintenance window.
      */
     TaskType?: MaintenanceWindowTaskType;
     /**
@@ -4675,7 +4798,7 @@ declare namespace SSM {
      */
     EndTime?: DateTime;
     /**
-     * User-provided value to be included in any CloudWatch events raised while running tasks for these targets in this maintenance window. 
+     * User-provided value to be included in any Amazon CloudWatch Events or Amazon EventBridge events raised while running tasks for these targets in this maintenance window.
      */
     OwnerInformation?: OwnerInformation;
     /**
@@ -4703,7 +4826,7 @@ declare namespace SSM {
      */
     TaskExecutionId?: MaintenanceWindowExecutionTaskId;
     /**
-     * The ARN of the task that ran.
+     * The Amazon Resource Name (ARN) of the task that ran.
      */
     TaskArn?: MaintenanceWindowTaskArn;
     /**
@@ -4715,7 +4838,7 @@ declare namespace SSM {
      */
     Type?: MaintenanceWindowTaskType;
     /**
-     * The parameters passed to the task when it was run.   TaskParameters has been deprecated. To specify parameters to pass to a task when it runs, instead use the Parameters option in the TaskInvocationParameters structure. For information about how Systems Manager handles these options for the supported maintenance window task types, see MaintenanceWindowTaskInvocationParameters.  The map has the following format: Key: string, between 1 and 255 characters Value: an array of strings, each string is between 1 and 255 characters
+     * The parameters passed to the task when it was run.   TaskParameters has been deprecated. To specify parameters to pass to a task when it runs, instead use the Parameters option in the TaskInvocationParameters structure. For information about how Systems Manager handles these options for the supported maintenance window task types, see MaintenanceWindowTaskInvocationParameters.  The map has the following format:    Key: string, between 1 and 255 characters    Value: an array of strings, each between 1 and 255 characters  
      */
     TaskParameters?: MaintenanceWindowTaskParametersList;
     /**
@@ -4735,7 +4858,7 @@ declare namespace SSM {
      */
     Status?: MaintenanceWindowExecutionStatus;
     /**
-     * The details explaining the Status. Only available for certain status values.
+     * The details explaining the status. Not available for all status values.
      */
     StatusDetails?: MaintenanceWindowExecutionStatusDetails;
     /**
@@ -4767,11 +4890,11 @@ declare namespace SSM {
      */
     Description?: MaintenanceWindowDescription;
     /**
-     * The date and time, in ISO-8601 Extended format, for when the maintenance window is scheduled to become active. The maintenance window will not run before this specified time.
+     * The date and time, in ISO-8601 Extended format, for when the maintenance window is scheduled to become active. The maintenance window won't run before this specified time.
      */
     StartDate?: MaintenanceWindowStringDateTime;
     /**
-     * The date and time, in ISO-8601 Extended format, for when the maintenance window is scheduled to become inactive. The maintenance window will not run after this specified time.
+     * The date and time, in ISO-8601 Extended format, for when the maintenance window is scheduled to become inactive. The maintenance window won't run after this specified time.
      */
     EndDate?: MaintenanceWindowStringDateTime;
     /**
@@ -4783,7 +4906,7 @@ declare namespace SSM {
      */
     ScheduleTimezone?: MaintenanceWindowTimezone;
     /**
-     * The number of days to wait to run a maintenance window after the scheduled CRON expression date and time.
+     * The number of days to wait to run a maintenance window after the scheduled cron expression date and time.
      */
     ScheduleOffset?: MaintenanceWindowOffset;
     /**
@@ -4795,7 +4918,7 @@ declare namespace SSM {
      */
     Duration?: MaintenanceWindowDurationHours;
     /**
-     * The number of hours before the end of the maintenance window that Systems Manager stops scheduling new tasks for execution.
+     * The number of hours before the end of the maintenance window that Amazon Web Services Systems Manager stops scheduling new tasks for execution.
      */
     Cutoff?: MaintenanceWindowCutoff;
     /**
@@ -4839,11 +4962,11 @@ declare namespace SSM {
      */
     Targets?: Targets;
     /**
-     * The resource that the task used during execution. For RUN_COMMAND and AUTOMATION task types, the TaskArn is the Systems Manager Document name/ARN. For LAMBDA tasks, the value is the function name/ARN. For STEP_FUNCTIONS tasks, the value is the state machine ARN.
+     * The resource that the task used during execution. For RUN_COMMAND and AUTOMATION task types, the value of TaskArn is the SSM document name/ARN. For LAMBDA tasks, the value is the function name/ARN. For STEP_FUNCTIONS tasks, the value is the state machine ARN.
      */
     TaskArn?: MaintenanceWindowTaskArn;
     /**
-     * The ARN of the IAM service role to use to publish Amazon Simple Notification Service (Amazon SNS) notifications for maintenance window Run Command tasks.
+     * The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) service role to use to publish Amazon Simple Notification Service (Amazon SNS) notifications for maintenance window Run Command tasks.
      */
     ServiceRoleArn?: ServiceRole;
     /**
@@ -4863,15 +4986,15 @@ declare namespace SSM {
      */
     Priority?: MaintenanceWindowTaskPriority;
     /**
-     * The maximum number of targets allowed to run this task in parallel.  For maintenance window tasks without a target specified, you cannot supply a value for this option. Instead, the system inserts a placeholder value of 1, which may be reported in the response to this command. This value does not affect the running of your task and can be ignored. 
+     * The maximum number of targets allowed to run this task in parallel.  For maintenance window tasks without a target specified, you can't supply a value for this option. Instead, the system inserts a placeholder value of 1, which may be reported in the response to this command. This value doesn't affect the running of your task and can be ignored. 
      */
     MaxConcurrency?: MaxConcurrency;
     /**
-     * The maximum number of errors allowed before the task stops being scheduled.  For maintenance window tasks without a target specified, you cannot supply a value for this option. Instead, the system inserts a placeholder value of 1, which may be reported in the response to this command. This value does not affect the running of your task and can be ignored. 
+     * The maximum number of errors allowed before the task stops being scheduled.  For maintenance window tasks without a target specified, you can't supply a value for this option. Instead, the system inserts a placeholder value of 1, which may be reported in the response to this command. This value doesn't affect the running of your task and can be ignored. 
      */
     MaxErrors?: MaxErrors;
     /**
-     * The location in Amazon S3 where the task results are logged.   LoggingInfo has been deprecated. To specify an S3 bucket to contain logs, instead use the OutputS3BucketName and OutputS3KeyPrefix options in the TaskInvocationParameters structure. For information about how Systems Manager handles these options for the supported maintenance window task types, see MaintenanceWindowTaskInvocationParameters. 
+     * The location in Amazon Simple Storage Service (Amazon S3) where the task results are logged.   LoggingInfo has been deprecated. To specify an Amazon Simple Storage Service (Amazon S3) bucket to contain logs, instead use the OutputS3BucketName and OutputS3KeyPrefix options in the TaskInvocationParameters structure. For information about how Amazon Web Services Systems Manager handles these options for the supported maintenance window task types, see MaintenanceWindowTaskInvocationParameters. 
      */
     LoggingInfo?: LoggingInfo;
     /**
@@ -4882,6 +5005,10 @@ declare namespace SSM {
      * The retrieved task description.
      */
     Description?: MaintenanceWindowDescription;
+    /**
+     * The action to take on tasks when the maintenance window cutoff time is reached. CONTINUE_TASK means that tasks continue to run. For Automation, Lambda, Step Functions tasks, CANCEL_TASK means that currently running task invocations continue, but no new task invocations are started. For Run Command tasks, CANCEL_TASK means the system attempts to stop the task by sending a CancelCommand operation.
+     */
+    CutoffBehavior?: MaintenanceWindowTaskCutoffBehavior;
   }
   export interface GetOpsItemRequest {
     /**
@@ -4930,15 +5057,15 @@ declare namespace SSM {
      */
     SyncName?: ResourceDataSyncName;
     /**
-     * Optional filters used to scope down the returned OpsItems. 
+     * Optional filters used to scope down the returned OpsData. 
      */
     Filters?: OpsFilterList;
     /**
-     * Optional aggregators that return counts of OpsItems based on one or more expressions.
+     * Optional aggregators that return counts of OpsData based on one or more expressions.
      */
     Aggregators?: OpsAggregatorList;
     /**
-     * The OpsItem data type to return.
+     * The OpsData data type to return.
      */
     ResultAttributes?: OpsResultAttributeList;
     /**
@@ -4952,7 +5079,7 @@ declare namespace SSM {
   }
   export interface GetOpsSummaryResult {
     /**
-     * The list of aggregated and filtered OpsItems.
+     * The list of aggregated details and filtered OpsData.
      */
     Entities?: OpsEntityList;
     /**
@@ -4990,7 +5117,7 @@ declare namespace SSM {
   }
   export interface GetParameterRequest {
     /**
-     * The name of the parameter you want to query.
+     * The name of the parameter you want to query. To query by parameter label, use "Name": "name:label". To query by parameter version, use "Name": "name:version".
      */
     Name: PSParameterName;
     /**
@@ -5007,15 +5134,15 @@ declare namespace SSM {
   export type GetParametersByPathMaxResults = number;
   export interface GetParametersByPathRequest {
     /**
-     * The hierarchy for the parameter. Hierarchies start with a forward slash (/). The hierachy is the parameter name except the last part of the parameter. For the API call to succeeed, the last part of the parameter name cannot be in the path. A parameter name hierarchy can have a maximum of 15 levels. Here is an example of a hierarchy: /Finance/Prod/IAD/WinServ2016/license33  
+     * The hierarchy for the parameter. Hierarchies start with a forward slash (/). The hierarchy is the parameter name except the last part of the parameter. For the API call to succeed, the last part of the parameter name can't be in the path. A parameter name hierarchy can have a maximum of 15 levels. Here is an example of a hierarchy: /Finance/Prod/IAD/WinServ2016/license33  
      */
     Path: PSParameterName;
     /**
-     * Retrieve all parameters within a hierarchy.  If a user has access to a path, then the user can access all levels of that path. For example, if a user has permission to access path /a, then the user can also access /a/b. Even if a user has explicitly been denied access in IAM for parameter /a/b, they can still call the GetParametersByPath API action recursively for /a and view /a/b. 
+     * Retrieve all parameters within a hierarchy.  If a user has access to a path, then the user can access all levels of that path. For example, if a user has permission to access path /a, then the user can also access /a/b. Even if a user has explicitly been denied access in IAM for parameter /a/b, they can still call the GetParametersByPath API operation recursively for /a and view /a/b. 
      */
     Recursive?: Boolean;
     /**
-     * Filters to limit the request results.  For GetParametersByPath, the following filter Key names are supported: Type, KeyId, Label, and DataType. The following Key values are not supported for GetParametersByPath: tag, Name, Path, and Tier. 
+     * Filters to limit the request results.  The following Key values are supported for GetParametersByPath: Type, KeyId, and Label. The following Key values aren't supported for GetParametersByPath: tag, DataType, Name, Path, and Tier. 
      */
     ParameterFilters?: ParameterStringFilterList;
     /**
@@ -5043,7 +5170,7 @@ declare namespace SSM {
   }
   export interface GetParametersRequest {
     /**
-     * Names of the parameters for which you want to query information.
+     * Names of the parameters for which you want to query information. To query by parameter label, use "Name": "name:label". To query by parameter version, use "Name": "name:version".
      */
     Names: ParameterNameList;
     /**
@@ -5057,7 +5184,7 @@ declare namespace SSM {
      */
     Parameters?: ParameterList;
     /**
-     * A list of parameters that are not formatted correctly or do not run during an execution.
+     * A list of parameters that aren't formatted correctly or don't run during an execution.
      */
     InvalidParameters?: ParameterNameList;
   }
@@ -5087,7 +5214,7 @@ declare namespace SSM {
   }
   export interface GetPatchBaselineRequest {
     /**
-     * The ID of the patch baseline to retrieve.
+     * The ID of the patch baseline to retrieve.  To retrieve information about an Amazon Web Services managed patch baseline, specify the full Amazon Resource Name (ARN) of the baseline. For example, for the baseline AWS-AmazonLinuxDefaultPatchBaseline, specify arn:aws:ssm:us-east-2:733109147000:patchbaseline/pb-0e392de35e7c563b7 instead of pb-0e392de35e7c563b7. 
      */
     BaselineId: BaselineId;
   }
@@ -5121,7 +5248,7 @@ declare namespace SSM {
      */
     ApprovedPatchesComplianceLevel?: PatchComplianceLevel;
     /**
-     * Indicates whether the list of approved patches includes non-security updates that should be applied to the instances. The default value is 'false'. Applies to Linux instances only.
+     * Indicates whether the list of approved patches includes non-security updates that should be applied to the managed nodes. The default value is false. Applies to Linux managed nodes only.
      */
     ApprovedPatchesEnableNonSecurity?: Boolean;
     /**
@@ -5149,13 +5276,13 @@ declare namespace SSM {
      */
     Description?: BaselineDescription;
     /**
-     * Information about the patches to use to update the instances, including target operating systems and source repositories. Applies to Linux instances only.
+     * Information about the patches to use to update the managed nodes, including target operating systems and source repositories. Applies to Linux managed nodes only.
      */
     Sources?: PatchSourceList;
   }
   export interface GetServiceSettingRequest {
     /**
-     * The ID of the service setting to get. The setting ID can be /ssm/automation/customer-script-log-destination, /ssm/automation/customer-script-log-group-name, /ssm/parameter-store/default-parameter-tier, /ssm/parameter-store/high-throughput-enabled, or /ssm/managed-instance/activation-tier.
+     * The ID of the service setting to get. The setting ID can be one of the following.    /ssm/automation/customer-script-log-destination     /ssm/automation/customer-script-log-group-name     /ssm/documents/console/public-sharing-permission     /ssm/parameter-store/default-parameter-tier     /ssm/parameter-store/high-throughput-enabled     /ssm/managed-instance/activation-tier   
      */
     SettingId: ServiceSettingId;
   }
@@ -5176,7 +5303,7 @@ declare namespace SSM {
      */
     DetailedStatus?: StatusName;
     /**
-     * The number of associations for the instance(s).
+     * The number of associations for the managed node(s).
      */
     InstanceAssociationStatusAggregatedCount?: InstanceAssociationStatusAggregatedCount;
   }
@@ -5186,15 +5313,15 @@ declare namespace SSM {
      */
     AssociationId?: AssociationId;
     /**
-     * The instance ID.
+     * The managed node ID.
      */
     InstanceId?: InstanceId;
     /**
-     * The content of the association document for the instance(s).
+     * The content of the association document for the managed node(s).
      */
     Content?: DocumentContent;
     /**
-     * Version information for the association on the instance.
+     * Version information for the association on the managed node.
      */
     AssociationVersion?: AssociationVersion;
   }
@@ -5227,23 +5354,23 @@ declare namespace SSM {
      */
     DocumentVersion?: DocumentVersion;
     /**
-     * The version of the association applied to the instance.
+     * The version of the association applied to the managed node.
      */
     AssociationVersion?: AssociationVersion;
     /**
-     * The instance ID where the association was created.
+     * The managed node ID where the association was created.
      */
     InstanceId?: InstanceId;
     /**
-     * The date the instance association ran. 
+     * The date the association ran. 
      */
     ExecutionDate?: DateTime;
     /**
-     * Status information about the instance association.
+     * Status information about the association.
      */
     Status?: StatusName;
     /**
-     * Detailed status information about the instance association.
+     * Detailed status information about the association.
      */
     DetailedStatus?: StatusName;
     /**
@@ -5259,7 +5386,7 @@ declare namespace SSM {
      */
     OutputUrl?: InstanceAssociationOutputUrl;
     /**
-     * The name of the association applied to the instance.
+     * The name of the association applied to the managed node.
      */
     AssociationName?: AssociationName;
   }
@@ -5269,7 +5396,7 @@ declare namespace SSM {
   export type InstanceIdList = InstanceId[];
   export interface InstanceInformation {
     /**
-     * The instance ID. 
+     * The managed node ID. 
      */
     InstanceId?: InstanceId;
     /**
@@ -5281,11 +5408,11 @@ declare namespace SSM {
      */
     LastPingDateTime?: DateTime;
     /**
-     * The version of SSM Agent running on your Linux instance. 
+     * The version of SSM Agent running on your Linux managed node. 
      */
     AgentVersion?: Version;
     /**
-     * Indicates whether the latest version of SSM Agent is running on your Linux Managed Instance. This field does not indicate whether or not the latest version is installed on Windows managed instances, because some older versions of Windows Server use the EC2Config service to process SSM requests.
+     * Indicates whether the latest version of SSM Agent is running on your Linux managed node. This field doesn't indicate whether or not the latest version is installed on Windows managed nodes, because some older versions of Windows Server use the EC2Config service to process Systems Manager requests.
      */
     IsLatestVersion?: Boolean;
     /**
@@ -5293,23 +5420,23 @@ declare namespace SSM {
      */
     PlatformType?: PlatformType;
     /**
-     * The name of the operating system platform running on your instance. 
+     * The name of the operating system platform running on your managed node. 
      */
     PlatformName?: String;
     /**
-     * The version of the OS platform running on your instance. 
+     * The version of the OS platform running on your managed node. 
      */
     PlatformVersion?: String;
     /**
-     * The activation ID created by Systems Manager when the server or VM was registered.
+     * The activation ID created by Amazon Web Services Systems Manager when the server or virtual machine (VM) was registered.
      */
     ActivationId?: ActivationId;
     /**
-     * The Amazon Identity and Access Management (IAM) role assigned to the on-premises Systems Manager managed instance. This call does not return the IAM role for EC2 instances. To retrieve the IAM role for an EC2 instance, use the Amazon EC2 DescribeInstances action. For information, see DescribeInstances in the Amazon EC2 API Reference or describe-instances in the AWS CLI Command Reference.
+     * The Identity and Access Management (IAM) role assigned to the on-premises Systems Manager managed node. This call doesn't return the IAM role for Amazon Elastic Compute Cloud (Amazon EC2) instances. To retrieve the IAM role for an EC2 instance, use the Amazon EC2 DescribeInstances operation. For information, see DescribeInstances in the Amazon EC2 API Reference or describe-instances in the Amazon Web Services CLI Command Reference.
      */
     IamRole?: IamRole;
     /**
-     * The date the server or VM was registered with AWS as a managed instance.
+     * The date the server or VM was registered with Amazon Web Services as a managed node.
      */
     RegistrationDate?: DateTime;
     /**
@@ -5317,15 +5444,15 @@ declare namespace SSM {
      */
     ResourceType?: ResourceType;
     /**
-     * The name assigned to an on-premises server or virtual machine (VM) when it is activated as a Systems Manager managed instance. The name is specified as the DefaultInstanceName property using the CreateActivation command. It is applied to the managed instance by specifying the Activation Code and Activation ID when you install SSM Agent on the instance, as explained in Install SSM Agent for a hybrid environment (Linux) and Install SSM Agent for a hybrid environment (Windows). To retrieve the Name tag of an EC2 instance, use the Amazon EC2 DescribeInstances action. For information, see DescribeInstances in the Amazon EC2 API Reference or describe-instances in the AWS CLI Command Reference.
+     * The name assigned to an on-premises server, edge device, or virtual machine (VM) when it is activated as a Systems Manager managed node. The name is specified as the DefaultInstanceName property using the CreateActivation command. It is applied to the managed node by specifying the Activation Code and Activation ID when you install SSM Agent on the node, as explained in Install SSM Agent for a hybrid environment (Linux) and Install SSM Agent for a hybrid environment (Windows). To retrieve the Name tag of an EC2 instance, use the Amazon EC2 DescribeInstances operation. For information, see DescribeInstances in the Amazon EC2 API Reference or describe-instances in the Amazon Web Services CLI Command Reference.
      */
     Name?: String;
     /**
-     * The IP address of the managed instance.
+     * The IP address of the managed node.
      */
     IPAddress?: IPAddress;
     /**
-     * The fully qualified host name of the managed instance.
+     * The fully qualified host name of the managed node.
      */
     ComputerName?: ComputerName;
     /**
@@ -5344,6 +5471,14 @@ declare namespace SSM {
      * Information about the association.
      */
     AssociationOverview?: InstanceAggregatedAssociationOverview;
+    /**
+     * The ID of the source resource. For IoT Greengrass devices, SourceId is the Thing name. 
+     */
+    SourceId?: SourceId;
+    /**
+     * The type of the source resource. For IoT Greengrass devices, SourceType is AWS::IoT::Thing. 
+     */
+    SourceType?: SourceType;
   }
   export interface InstanceInformationFilter {
     /**
@@ -5362,7 +5497,7 @@ declare namespace SSM {
   export type InstanceInformationList = InstanceInformation[];
   export interface InstanceInformationStringFilter {
     /**
-     * The filter key name to describe your instances. For example: "InstanceIds"|"AgentVersion"|"PingStatus"|"PlatformTypes"|"ActivationIds"|"IamRole"|"ResourceType"|"AssociationStatus"|"Tag Key"   Tag key is not a valid filter. You must specify either tag-key or tag:keyname and a string. Here are some valid examples: tag-key, tag:123, tag:al!, tag:Windows. Here are some invalid examples: tag-keys, Tag Key, tag:, tagKey, abc:keyname. 
+     * The filter key name to describe your managed nodes. For example: "InstanceIds"|"AgentVersion"|"PingStatus"|"PlatformTypes"|"ActivationIds"|"IamRole"|"ResourceType"|"AssociationStatus"|"Tag Key"   Tag key isn't a valid filter. You must specify either tag-key or tag:keyname and a string. Here are some valid examples: tag-key, tag:123, tag:al!, tag:Windows. Here are some invalid examples: tag-keys, Tag Key, tag:, tagKey, abc:keyname. 
      */
     Key: InstanceInformationStringFilterKey;
     /**
@@ -5374,15 +5509,15 @@ declare namespace SSM {
   export type InstanceInformationStringFilterList = InstanceInformationStringFilter[];
   export interface InstancePatchState {
     /**
-     * The ID of the managed instance the high-level patch compliance information was collected for.
+     * The ID of the managed node the high-level patch compliance information was collected for.
      */
     InstanceId: InstanceId;
     /**
-     * The name of the patch group the managed instance belongs to.
+     * The name of the patch group the managed node belongs to.
      */
     PatchGroup: PatchGroup;
     /**
-     * The ID of the patch baseline used to patch the instance.
+     * The ID of the patch baseline used to patch the managed node.
      */
     BaselineId: BaselineId;
     /**
@@ -5390,7 +5525,7 @@ declare namespace SSM {
      */
     SnapshotId?: SnapshotId;
     /**
-     * An https URL or an Amazon S3 path-style URL to a list of patches to be installed. This patch installation list, which you maintain in an S3 bucket in YAML format and specify in the SSM document AWS-RunPatchBaseline, overrides the patches specified by the default patch baseline. For more information about the InstallOverrideList parameter, see About the SSM document AWS-RunPatchBaseline in the AWS Systems Manager User Guide.
+     * An https URL or an Amazon Simple Storage Service (Amazon S3) path-style URL to a list of patches to be installed. This patch installation list, which you maintain in an S3 bucket in YAML format and specify in the SSM document AWS-RunPatchBaseline, overrides the patches specified by the default patch baseline. For more information about the InstallOverrideList parameter, see About the AWS-RunPatchBaseline  SSM document in the Amazon Web Services Systems Manager User Guide.
      */
     InstallOverrideList?: InstallOverrideList;
     /**
@@ -5398,23 +5533,23 @@ declare namespace SSM {
      */
     OwnerInformation?: OwnerInformation;
     /**
-     * The number of patches from the patch baseline that are installed on the instance.
+     * The number of patches from the patch baseline that are installed on the managed node.
      */
     InstalledCount?: PatchInstalledCount;
     /**
-     * The number of patches not specified in the patch baseline that are installed on the instance.
+     * The number of patches not specified in the patch baseline that are installed on the managed node.
      */
     InstalledOtherCount?: PatchInstalledOtherCount;
     /**
-     * The number of patches installed by Patch Manager since the last time the instance was rebooted.
+     * The number of patches installed by Patch Manager since the last time the managed node was rebooted.
      */
     InstalledPendingRebootCount?: PatchInstalledPendingRebootCount;
     /**
-     * The number of patches installed on an instance that are specified in a RejectedPatches list. Patches with a status of InstalledRejected were typically installed before they were added to a RejectedPatches list.  If ALLOW_AS_DEPENDENCY is the specified option for RejectedPatchesAction, the value of InstalledRejectedCount will always be 0 (zero). 
+     * The number of patches installed on a managed node that are specified in a RejectedPatches list. Patches with a status of InstalledRejected were typically installed before they were added to a RejectedPatches list.  If ALLOW_AS_DEPENDENCY is the specified option for RejectedPatchesAction, the value of InstalledRejectedCount will always be 0 (zero). 
      */
     InstalledRejectedCount?: PatchInstalledRejectedCount;
     /**
-     * The number of patches from the patch baseline that are applicable for the instance but aren't currently installed.
+     * The number of patches from the patch baseline that are applicable for the managed node but aren't currently installed.
      */
     MissingCount?: PatchMissingCount;
     /**
@@ -5422,57 +5557,57 @@ declare namespace SSM {
      */
     FailedCount?: PatchFailedCount;
     /**
-     * The number of patches beyond the supported limit of NotApplicableCount that are not reported by name to Systems Manager Inventory.
+     * The number of patches beyond the supported limit of NotApplicableCount that aren't reported by name to Inventory. Inventory is a capability of Amazon Web Services Systems Manager.
      */
     UnreportedNotApplicableCount?: PatchUnreportedNotApplicableCount;
     /**
-     * The number of patches from the patch baseline that aren't applicable for the instance and therefore aren't installed on the instance. This number may be truncated if the list of patch names is very large. The number of patches beyond this limit are reported in UnreportedNotApplicableCount.
+     * The number of patches from the patch baseline that aren't applicable for the managed node and therefore aren't installed on the node. This number may be truncated if the list of patch names is very large. The number of patches beyond this limit are reported in UnreportedNotApplicableCount.
      */
     NotApplicableCount?: PatchNotApplicableCount;
     /**
-     * The time the most recent patching operation was started on the instance.
+     * The time the most recent patching operation was started on the managed node.
      */
     OperationStartTime: DateTime;
     /**
-     * The time the most recent patching operation completed on the instance.
+     * The time the most recent patching operation completed on the managed node.
      */
     OperationEndTime: DateTime;
     /**
-     * The type of patching operation that was performed: SCAN (assess patch compliance state) or INSTALL (install missing patches).
+     * The type of patching operation that was performed: or     SCAN assesses the patch compliance state.    INSTALL installs missing patches.  
      */
     Operation: PatchOperationType;
     /**
-     * The time of the last attempt to patch the instance with NoReboot specified as the reboot option.
+     * The time of the last attempt to patch the managed node with NoReboot specified as the reboot option.
      */
     LastNoRebootInstallOperationTime?: DateTime;
     /**
-     * Indicates the reboot option specified in the patch baseline.  Reboot options apply to Install operations only. Reboots are not attempted for Patch Manager Scan operations.     RebootIfNeeded: Patch Manager tries to reboot the instance if it installed any patches, or if any patches are detected with a status of InstalledPendingReboot.    NoReboot: Patch Manager attempts to install missing packages without trying to reboot the system. Patches installed with this option are assigned a status of InstalledPendingReboot. These patches might not be in effect until a reboot is performed.  
+     * Indicates the reboot option specified in the patch baseline.  Reboot options apply to Install operations only. Reboots aren't attempted for Patch Manager Scan operations.     RebootIfNeeded: Patch Manager tries to reboot the managed node if it installed any patches, or if any patches are detected with a status of InstalledPendingReboot.    NoReboot: Patch Manager attempts to install missing packages without trying to reboot the system. Patches installed with this option are assigned a status of InstalledPendingReboot. These patches might not be in effect until a reboot is performed.  
      */
     RebootOption?: RebootOption;
     /**
-     * The number of instances where patches that are specified as "Critical" for compliance reporting in the patch baseline are not installed. These patches might be missing, have failed installation, were rejected, or were installed but awaiting a required instance reboot. The status of these instances is NON_COMPLIANT.
+     * The number of managed nodes where patches that are specified as Critical for compliance reporting in the patch baseline aren't installed. These patches might be missing, have failed installation, were rejected, or were installed but awaiting a required managed node reboot. The status of these managed nodes is NON_COMPLIANT.
      */
     CriticalNonCompliantCount?: PatchCriticalNonCompliantCount;
     /**
-     * The number of instances where patches that are specified as "Security" in a patch advisory are not installed. These patches might be missing, have failed installation, were rejected, or were installed but awaiting a required instance reboot. The status of these instances is NON_COMPLIANT.
+     * The number of managed nodes where patches that are specified as Security in a patch advisory aren't installed. These patches might be missing, have failed installation, were rejected, or were installed but awaiting a required managed node reboot. The status of these managed nodes is NON_COMPLIANT.
      */
     SecurityNonCompliantCount?: PatchSecurityNonCompliantCount;
     /**
-     * The number of instances with patches installed that are specified as other than "Critical" or "Security" but are not compliant with the patch baseline. The status of these instances is NON_COMPLIANT.
+     * The number of managed nodes with patches installed that are specified as other than Critical or Security but aren't compliant with the patch baseline. The status of these managed nodes is NON_COMPLIANT.
      */
     OtherNonCompliantCount?: PatchOtherNonCompliantCount;
   }
   export interface InstancePatchStateFilter {
     /**
-     * The key for the filter. Supported values are FailedCount, InstalledCount, InstalledOtherCount, MissingCount and NotApplicableCount.
+     * The key for the filter. Supported values include the following:    InstalledCount     InstalledOtherCount     InstalledPendingRebootCount     InstalledRejectedCount     MissingCount     FailedCount     UnreportedNotApplicableCount     NotApplicableCount   
      */
     Key: InstancePatchStateFilterKey;
     /**
-     * The value for the filter, must be an integer greater than or equal to 0.
+     * The value for the filter. Must be an integer greater than or equal to 0.
      */
     Values: InstancePatchStateFilterValues;
     /**
-     * The type of comparison that should be performed for the value: Equal, NotEqual, LessThan or GreaterThan.
+     * The type of comparison that should be performed for the value.
      */
     Type: InstancePatchStateOperatorType;
   }
@@ -5509,7 +5644,7 @@ declare namespace SSM {
   export type InventoryDeletionStatus = "InProgress"|"Complete"|string;
   export interface InventoryDeletionStatusItem {
     /**
-     * The deletion ID returned by the DeleteInventory action.
+     * The deletion ID returned by the DeleteInventory operation.
      */
     DeletionId?: UUID;
     /**
@@ -5529,7 +5664,7 @@ declare namespace SSM {
      */
     LastStatusMessage?: InventoryDeletionLastStatusMessage;
     /**
-     * Information about the delete operation. For more information about this summary, see Understanding the delete inventory summary in the AWS Systems Manager User Guide.
+     * Information about the delete operation. For more information about this summary, see Understanding the delete inventory summary in the Amazon Web Services Systems Manager User Guide.
      */
     DeletionSummary?: InventoryDeletionSummary;
     /**
@@ -5539,7 +5674,7 @@ declare namespace SSM {
   }
   export interface InventoryDeletionSummary {
     /**
-     * The total number of items to delete. This count does not change during the delete operation.
+     * The total number of items to delete. This count doesn't change during the delete operation.
      */
     TotalCount?: TotalCount;
     /**
@@ -5573,11 +5708,11 @@ declare namespace SSM {
      */
     Key: InventoryFilterKey;
     /**
-     * Inventory filter values. Example: inventory filter where instance IDs are specified as values Key=AWS:InstanceInformation.InstanceId,Values= i-a12b3c4d5e6g, i-1a2b3c4d5e6,Type=Equal 
+     * Inventory filter values. Example: inventory filter where managed node IDs are specified as values Key=AWS:InstanceInformation.InstanceId,Values= i-a12b3c4d5e6g, i-1a2b3c4d5e6,Type=Equal. 
      */
     Values: InventoryFilterValueList;
     /**
-     * The type of filter.  The Exists filter must be used with aggregators. For more information, see Aggregating inventory data in the AWS Systems Manager User Guide. 
+     * The type of filter.  The Exists filter must be used with aggregators. For more information, see Aggregating inventory data in the Amazon Web Services Systems Manager User Guide. 
      */
     Type?: InventoryQueryOperatorType;
   }
@@ -5611,7 +5746,7 @@ declare namespace SSM {
      */
     CaptureTime: InventoryItemCaptureTime;
     /**
-     * MD5 hash of the inventory item type contents. The content hash is used to determine whether to update inventory information. The PutInventory API does not update the inventory item type contents if the MD5 hash has not changed since last update. 
+     * MD5 hash of the inventory item type contents. The content hash is used to determine whether to update inventory information. The PutInventory API doesn't update the inventory item type contents if the MD5 hash hasn't changed since last update. 
      */
     ContentHash?: InventoryItemContentHash;
     /**
@@ -5643,7 +5778,7 @@ declare namespace SSM {
   export type InventoryItemList = InventoryItem[];
   export interface InventoryItemSchema {
     /**
-     * The name of the inventory type. Default inventory item type names start with AWS. Custom inventory type names will start with Custom. Default inventory item types include the following: AWS:AWSComponent, AWS:Application, AWS:InstanceInformation, AWS:Network, and AWS:WindowsUpdate.
+     * The name of the inventory type. Default inventory item type names start with Amazon Web Services. Custom inventory type names will start with Custom. Default inventory item types include the following: AWS:AWSComponent, AWS:Application, AWS:InstanceInformation, AWS:Network, and AWS:WindowsUpdate.
      */
     TypeName: InventoryItemTypeName;
     /**
@@ -5666,7 +5801,7 @@ declare namespace SSM {
   export type InventoryQueryOperatorType = "Equal"|"NotEqual"|"BeginWith"|"LessThan"|"GreaterThan"|"Exists"|string;
   export interface InventoryResultEntity {
     /**
-     * ID of the inventory result entity. For example, for managed instance inventory the result will be the managed instance ID. For EC2 instance inventory, the result will be the instance ID. 
+     * ID of the inventory result entity. For example, for managed node inventory the result will be the managed node ID. For EC2 instance inventory, the result will be the instance ID. 
      */
     Id?: InventoryResultEntityId;
     /**
@@ -5690,7 +5825,7 @@ declare namespace SSM {
      */
     CaptureTime?: InventoryItemCaptureTime;
     /**
-     * MD5 hash of the inventory item type contents. The content hash is used to determine whether to update inventory information. The PutInventory API does not update the inventory item type contents if the MD5 hash has not changed since last update. 
+     * MD5 hash of the inventory item type contents. The content hash is used to determine whether to update inventory information. The PutInventory API doesn't update the inventory item type contents if the MD5 hash hasn't changed since last update. 
      */
     ContentHash?: InventoryItemContentHash;
     /**
@@ -5721,7 +5856,7 @@ declare namespace SSM {
   }
   export interface LabelParameterVersionResult {
     /**
-     * The label does not meet the requirements. For information about parameter label requirements, see Labeling parameters in the AWS Systems Manager User Guide.
+     * The label doesn't meet the requirements. For information about parameter label requirements, see Labeling parameters in the Amazon Web Services Systems Manager User Guide.
      */
     InvalidLabels?: ParameterLabelList;
     /**
@@ -5759,7 +5894,7 @@ declare namespace SSM {
   }
   export interface ListAssociationsRequest {
     /**
-     * One or more filters. Use a filter to return a more specific list of results.  Filtering associations using the InstanceID attribute only returns legacy associations created using the InstanceID attribute. Associations targeting the instance that are part of the Target Attributes ResourceGroup or Tags are not returned. 
+     * One or more filters. Use a filter to return a more specific list of results.  Filtering associations using the InstanceID attribute only returns legacy associations created using the InstanceID attribute. Associations targeting the managed node that are part of the Target Attributes ResourceGroup or Tags aren't returned. 
      */
     AssociationFilterList?: AssociationFilterList;
     /**
@@ -5787,7 +5922,7 @@ declare namespace SSM {
      */
     CommandId?: CommandId;
     /**
-     * (Optional) The command execution details for a specific instance ID.
+     * (Optional) The command execution details for a specific managed node ID.
      */
     InstanceId?: InstanceId;
     /**
@@ -5803,7 +5938,7 @@ declare namespace SSM {
      */
     Filters?: CommandFilterList;
     /**
-     * (Optional) If set this returns the response of the command executions and any command output. The default value is 'false'. 
+     * (Optional) If set this returns the response of the command executions and any command output. The default value is false. 
      */
     Details?: Boolean;
   }
@@ -5823,7 +5958,7 @@ declare namespace SSM {
      */
     CommandId?: CommandId;
     /**
-     * (Optional) Lists commands issued against this instance ID.  You can't specify an instance ID in the same command that you specify Status = Pending. This is because the command has not reached the instance yet. 
+     * (Optional) Lists commands issued against this managed node ID.  You can't specify a managed node ID in the same command that you specify Status = Pending. This is because the command hasn't reached the managed node yet. 
      */
     InstanceId?: InstanceId;
     /**
@@ -5907,11 +6042,11 @@ declare namespace SSM {
   }
   export interface ListDocumentMetadataHistoryRequest {
     /**
-     * The name of the document.
+     * The name of the change template.
      */
     Name: DocumentName;
     /**
-     * The version of the document.
+     * The version of the change template.
      */
     DocumentVersion?: DocumentVersion;
     /**
@@ -5929,19 +6064,19 @@ declare namespace SSM {
   }
   export interface ListDocumentMetadataHistoryResponse {
     /**
-     * The name of the document.
+     * The name of the change template.
      */
     Name?: DocumentName;
     /**
-     * The version of the document.
+     * The version of the change template.
      */
     DocumentVersion?: DocumentVersion;
     /**
-     * The user ID of the person in the organization who requested the document review.
+     * The user ID of the person in the organization who requested the review of the change template.
      */
     Author?: DocumentAuthor;
     /**
-     * Information about the response to the document approval request.
+     * Information about the response to the change template approval request.
      */
     Metadata?: DocumentMetadataResponseInfo;
     /**
@@ -5979,7 +6114,7 @@ declare namespace SSM {
      */
     DocumentFilterList?: DocumentFilterList;
     /**
-     * One or more DocumentKeyValuesFilter objects. Use a filter to return a more specific list of results. For keys, you can specify one or more key-value pair tags that have been applied to a document. Other valid keys include Owner, Name, PlatformTypes, DocumentType, and TargetType. For example, to return documents you own use Key=Owner,Values=Self. To specify a custom key-value pair, use the format Key=tag:tagName,Values=valueName.  This API action only supports filtering documents by using a single tag key and one or more tag values. For example: Key=tag:tagName,Values=valueName1,valueName2  
+     * One or more DocumentKeyValuesFilter objects. Use a filter to return a more specific list of results. For keys, you can specify one or more key-value pair tags that have been applied to a document. Other valid keys include Owner, Name, PlatformTypes, DocumentType, and TargetType. For example, to return documents you own use Key=Owner,Values=Self. To specify a custom key-value pair, use the format Key=tag:tagName,Values=valueName.  This API operation only supports filtering documents by using a single tag key and one or more tag values. For example: Key=tag:tagName,Values=valueName1,valueName2  
      */
     Filters?: DocumentKeyValuesFilterList;
     /**
@@ -5993,7 +6128,7 @@ declare namespace SSM {
   }
   export interface ListDocumentsResult {
     /**
-     * The names of the Systems Manager documents.
+     * The names of the SSM documents.
      */
     DocumentIdentifiers?: DocumentIdentifierList;
     /**
@@ -6003,7 +6138,7 @@ declare namespace SSM {
   }
   export interface ListInventoryEntriesRequest {
     /**
-     * The instance ID for which you want inventory information.
+     * The managed node ID for which you want inventory information.
      */
     InstanceId: InstanceId;
     /**
@@ -6029,19 +6164,19 @@ declare namespace SSM {
      */
     TypeName?: InventoryItemTypeName;
     /**
-     * The instance ID targeted by the request to query inventory information.
+     * The managed node ID targeted by the request to query inventory information.
      */
     InstanceId?: InstanceId;
     /**
-     * The inventory schema version used by the instance(s).
+     * The inventory schema version used by the managed node(s).
      */
     SchemaVersion?: InventoryItemSchemaVersion;
     /**
-     * The time that inventory information was collected for the instance(s).
+     * The time that inventory information was collected for the managed node(s).
      */
     CaptureTime?: InventoryItemCaptureTime;
     /**
-     * A list of inventory items on the instance(s).
+     * A list of inventory items on the managed node(s).
      */
     Entries?: InventoryItemEntryList;
     /**
@@ -6072,6 +6207,34 @@ declare namespace SSM {
      * A list of event information for the specified OpsItems.
      */
     Summaries?: OpsItemEventSummaries;
+  }
+  export interface ListOpsItemRelatedItemsRequest {
+    /**
+     * The ID of the OpsItem for which you want to list all related-item resources.
+     */
+    OpsItemId?: OpsItemId;
+    /**
+     * One or more OpsItem filters. Use a filter to return a more specific list of results. 
+     */
+    Filters?: OpsItemRelatedItemsFilters;
+    /**
+     * The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
+     */
+    MaxResults?: OpsItemRelatedItemsMaxResults;
+    /**
+     * The token for the next set of items to return. (You received this token from a previous call.)
+     */
+    NextToken?: String;
+  }
+  export interface ListOpsItemRelatedItemsResponse {
+    /**
+     * The token for the next set of items to return. Use this token to get the next set of results.
+     */
+    NextToken?: String;
+    /**
+     * A list of related-item resources for the specified OpsItem.
+     */
+    Summaries?: OpsItemRelatedItemSummaries;
   }
   export type ListOpsMetadataMaxResults = number;
   export interface ListOpsMetadataRequest {
@@ -6114,7 +6277,7 @@ declare namespace SSM {
   }
   export interface ListResourceComplianceSummariesResult {
     /**
-     * A summary count for specified or targeted managed instances. Summary count includes information about compliant and non-compliant State Manager associations, patch status, or custom items according to the filter criteria that you specify. 
+     * A summary count for specified or targeted managed nodes. Summary count includes information about compliant and non-compliant State Manager associations, patch status, or custom items according to the filter criteria that you specify. 
      */
     ResourceComplianceSummaryItems?: ResourceComplianceSummaryItemList;
     /**
@@ -6124,7 +6287,7 @@ declare namespace SSM {
   }
   export interface ListResourceDataSyncRequest {
     /**
-     * View a list of resource data syncs according to the sync type. Specify SyncToDestination to view resource data syncs that synchronize data to an Amazon S3 bucket. Specify SyncFromSource to view resource data syncs from AWS Organizations or from multiple AWS Regions.
+     * View a list of resource data syncs according to the sync type. Specify SyncToDestination to view resource data syncs that synchronize data to an Amazon S3 bucket. Specify SyncFromSource to view resource data syncs from Organizations or from multiple Amazon Web Services Regions.
      */
     SyncType?: ResourceDataSyncType;
     /**
@@ -6138,7 +6301,7 @@ declare namespace SSM {
   }
   export interface ListResourceDataSyncResult {
     /**
-     * A list of your current Resource Data Sync configurations and their statuses.
+     * A list of your current resource data sync configurations and their statuses.
      */
     ResourceDataSyncItems?: ResourceDataSyncItemList;
     /**
@@ -6172,7 +6335,7 @@ declare namespace SSM {
      */
     S3KeyPrefix?: S3KeyPrefix;
     /**
-     * The Region where the S3 bucket is located.
+     * The Amazon Web Services Region where the S3 bucket is located.
      */
     S3Region: S3Region;
   }
@@ -6180,11 +6343,11 @@ declare namespace SSM {
   export type MaintenanceWindowAllowUnassociatedTargets = boolean;
   export interface MaintenanceWindowAutomationParameters {
     /**
-     * The version of an Automation document to use during task execution.
+     * The version of an Automation runbook to use during task execution.
      */
     DocumentVersion?: DocumentVersion;
     /**
-     * The parameters for the AUTOMATION task. For information about specifying and updating task parameters, see RegisterTaskWithMaintenanceWindow and UpdateMaintenanceWindowTask.   LoggingInfo has been deprecated. To specify an S3 bucket to contain logs, instead use the OutputS3BucketName and OutputS3KeyPrefix options in the TaskInvocationParameters structure. For information about how Systems Manager handles these options for the supported maintenance window task types, see MaintenanceWindowTaskInvocationParameters.  TaskParameters has been deprecated. To specify parameters to pass to a task when it runs, instead use the Parameters option in the TaskInvocationParameters structure. For information about how Systems Manager handles these options for the supported maintenance window task types, see MaintenanceWindowTaskInvocationParameters. For AUTOMATION task types, Systems Manager ignores any values specified for these parameters. 
+     * The parameters for the AUTOMATION task. For information about specifying and updating task parameters, see RegisterTaskWithMaintenanceWindow and UpdateMaintenanceWindowTask.   LoggingInfo has been deprecated. To specify an Amazon Simple Storage Service (Amazon S3) bucket to contain logs, instead use the OutputS3BucketName and OutputS3KeyPrefix options in the TaskInvocationParameters structure. For information about how Amazon Web Services Systems Manager handles these options for the supported maintenance window task types, see MaintenanceWindowTaskInvocationParameters.  TaskParameters has been deprecated. To specify parameters to pass to a task when it runs, instead use the Parameters option in the TaskInvocationParameters structure. For information about how Systems Manager handles these options for the supported maintenance window task types, see MaintenanceWindowTaskInvocationParameters. For AUTOMATION task types, Amazon Web Services Systems Manager ignores any values specified for these parameters. 
      */
     Parameters?: AutomationParameterMap;
   }
@@ -6206,7 +6369,7 @@ declare namespace SSM {
      */
     Status?: MaintenanceWindowExecutionStatus;
     /**
-     * The details explaining the Status. Only available for certain status values.
+     * The details explaining the status. Not available for all status values.
      */
     StatusDetails?: MaintenanceWindowExecutionStatusDetails;
     /**
@@ -6239,7 +6402,7 @@ declare namespace SSM {
      */
     Status?: MaintenanceWindowExecutionStatus;
     /**
-     * The details explaining the status of the task execution. Only available for certain status values.
+     * The details explaining the status of the task execution. Not available for all status values.
      */
     StatusDetails?: MaintenanceWindowExecutionStatusDetails;
     /**
@@ -6251,7 +6414,7 @@ declare namespace SSM {
      */
     EndTime?: DateTime;
     /**
-     * The ARN of the task that ran.
+     * The Amazon Resource Name (ARN) of the task that ran.
      */
     TaskArn?: MaintenanceWindowTaskArn;
     /**
@@ -6291,7 +6454,7 @@ declare namespace SSM {
      */
     Status?: MaintenanceWindowExecutionStatus;
     /**
-     * The details explaining the status of the task invocation. Only available for certain Status values. 
+     * The details explaining the status of the task invocation. Not available for all status values. 
      */
     StatusDetails?: MaintenanceWindowExecutionStatusDetails;
     /**
@@ -6303,7 +6466,7 @@ declare namespace SSM {
      */
     EndTime?: DateTime;
     /**
-     * User-provided value that was specified when the target was registered with the maintenance window. This was also included in any CloudWatch events raised during the task invocation.
+     * User-provided value that was specified when the target was registered with the maintenance window. This was also included in any Amazon CloudWatch Events events raised during the task invocation.
      */
     OwnerInformation?: OwnerInformation;
     /**
@@ -6350,7 +6513,7 @@ declare namespace SSM {
      */
     Duration?: MaintenanceWindowDurationHours;
     /**
-     * The number of hours before the end of the maintenance window that Systems Manager stops scheduling new tasks for execution.
+     * The number of hours before the end of the maintenance window that Amazon Web Services Systems Manager stops scheduling new tasks for execution.
      */
     Cutoff?: MaintenanceWindowCutoff;
     /**
@@ -6362,7 +6525,7 @@ declare namespace SSM {
      */
     ScheduleTimezone?: MaintenanceWindowTimezone;
     /**
-     * The number of days to wait to run a maintenance window after the scheduled CRON expression date and time.
+     * The number of days to wait to run a maintenance window after the scheduled cron expression date and time.
      */
     ScheduleOffset?: MaintenanceWindowOffset;
     /**
@@ -6396,7 +6559,7 @@ declare namespace SSM {
      */
     ClientContext?: MaintenanceWindowLambdaClientContext;
     /**
-     * (Optional) Specify a Lambda function version or alias name. If you specify a function version, the action uses the qualified function ARN to invoke a specific Lambda function. If you specify an alias name, the action uses the alias ARN to invoke the Lambda function version to which the alias points.
+     * (Optional) Specify an Lambda function version or alias name. If you specify a function version, the operation uses the qualified function Amazon Resource Name (ARN) to invoke a specific Lambda function. If you specify an alias name, the operation uses the alias ARN to invoke the Lambda function version to which the alias points.
      */
     Qualifier?: MaintenanceWindowLambdaQualifier;
     /**
@@ -6425,15 +6588,15 @@ declare namespace SSM {
      */
     DocumentHashType?: DocumentHashType;
     /**
-     * The SSM document version to use in the request. You can specify $DEFAULT, $LATEST, or a specific version number. If you run commands by using the AWS CLI, then you must escape the first two options by using a backslash. If you specify a version number, then you don't need to use the backslash. For example: --document-version "\$DEFAULT" --document-version "\$LATEST" --document-version "3"
+     * The Amazon Web Services Systems Manager document (SSM document) version to use in the request. You can specify $DEFAULT, $LATEST, or a specific version number. If you run commands by using the Amazon Web Services CLI, then you must escape the first two options by using a backslash. If you specify a version number, then you don't need to use the backslash. For example:  --document-version "\$DEFAULT"   --document-version "\$LATEST"   --document-version "3" 
      */
     DocumentVersion?: DocumentVersion;
     /**
-     * Configurations for sending notifications about command status changes on a per-instance basis.
+     * Configurations for sending notifications about command status changes on a per-managed node basis.
      */
     NotificationConfig?: NotificationConfig;
     /**
-     * The name of the S3 bucket.
+     * The name of the Amazon Simple Storage Service (Amazon S3) bucket.
      */
     OutputS3BucketName?: S3BucketName;
     /**
@@ -6445,11 +6608,11 @@ declare namespace SSM {
      */
     Parameters?: Parameters;
     /**
-     * The ARN of the IAM service role to use to publish Amazon Simple Notification Service (Amazon SNS) notifications for maintenance window Run Command tasks.
+     * The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) service role to use to publish Amazon Simple Notification Service (Amazon SNS) notifications for maintenance window Run Command tasks.
      */
     ServiceRoleArn?: ServiceRole;
     /**
-     * If this time is reached and the command has not already started running, it doesn't run.
+     * If this time is reached and the command hasn't already started running, it doesn't run.
      */
     TimeoutSeconds?: TimeoutSeconds;
   }
@@ -6482,11 +6645,11 @@ declare namespace SSM {
      */
     ResourceType?: MaintenanceWindowResourceType;
     /**
-     * The targets, either instances or tags. Specify instances using the following format:  Key=instanceids,Values=&lt;instanceid1&gt;,&lt;instanceid2&gt;  Tags are specified using the following format:  Key=&lt;tag name&gt;,Values=&lt;tag value&gt;.
+     * The targets, either managed nodes or tags. Specify managed nodes using the following format:  Key=instanceids,Values=&lt;instanceid1&gt;,&lt;instanceid2&gt;  Tags are specified using the following format:  Key=&lt;tag name&gt;,Values=&lt;tag value&gt;.
      */
     Targets?: Targets;
     /**
-     * A user-provided value that will be included in any CloudWatch events that are raised while running tasks for these targets in this maintenance window.
+     * A user-provided value that will be included in any Amazon CloudWatch Events events that are raised while running tasks for these targets in this maintenance window.
      */
     OwnerInformation?: OwnerInformation;
     /**
@@ -6510,15 +6673,15 @@ declare namespace SSM {
      */
     WindowTaskId?: MaintenanceWindowTaskId;
     /**
-     * The resource that the task uses during execution. For RUN_COMMAND and AUTOMATION task types, TaskArn is the Systems Manager document name or ARN. For LAMBDA tasks, it's the function name or ARN. For STEP_FUNCTIONS tasks, it's the state machine ARN.
+     * The resource that the task uses during execution. For RUN_COMMAND and AUTOMATION task types, TaskArn is the Amazon Web Services Systems Manager (SSM document) name or ARN. For LAMBDA tasks, it's the function name or ARN. For STEP_FUNCTIONS tasks, it's the state machine ARN.
      */
     TaskArn?: MaintenanceWindowTaskArn;
     /**
-     * The type of task. The type can be one of the following: RUN_COMMAND, AUTOMATION, LAMBDA, or STEP_FUNCTIONS.
+     * The type of task.
      */
     Type?: MaintenanceWindowTaskType;
     /**
-     * The targets (either instances or tags). Instances are specified using Key=instanceids,Values=&lt;instanceid1&gt;,&lt;instanceid2&gt;. Tags are specified using Key=&lt;tag name&gt;,Values=&lt;tag value&gt;.
+     * The targets (either managed nodes or tags). Managed nodes are specified using Key=instanceids,Values=&lt;instanceid1&gt;,&lt;instanceid2&gt;. Tags are specified using Key=&lt;tag name&gt;,Values=&lt;tag value&gt;.
      */
     Targets?: Targets;
     /**
@@ -6530,19 +6693,19 @@ declare namespace SSM {
      */
     Priority?: MaintenanceWindowTaskPriority;
     /**
-     * Information about an S3 bucket to write task-level logs to.   LoggingInfo has been deprecated. To specify an S3 bucket to contain logs, instead use the OutputS3BucketName and OutputS3KeyPrefix options in the TaskInvocationParameters structure. For information about how Systems Manager handles these options for the supported maintenance window task types, see MaintenanceWindowTaskInvocationParameters. 
+     * Information about an S3 bucket to write task-level logs to.   LoggingInfo has been deprecated. To specify an Amazon Simple Storage Service (Amazon S3) bucket to contain logs, instead use the OutputS3BucketName and OutputS3KeyPrefix options in the TaskInvocationParameters structure. For information about how Amazon Web Services Systems Manager handles these options for the supported maintenance window task types, see MaintenanceWindowTaskInvocationParameters. 
      */
     LoggingInfo?: LoggingInfo;
     /**
-     * The ARN of the IAM service role to use to publish Amazon Simple Notification Service (Amazon SNS) notifications for maintenance window Run Command tasks.
+     * The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) service role to use to publish Amazon Simple Notification Service (Amazon SNS) notifications for maintenance window Run Command tasks.
      */
     ServiceRoleArn?: ServiceRole;
     /**
-     * The maximum number of targets this task can be run for, in parallel.
+     * The maximum number of targets this task can be run for, in parallel.  Although this element is listed as "Required: No", a value can be omitted only when you are registering or updating a targetless task You must provide a value in all other cases. For maintenance window tasks without a target specified, you can't supply a value for this option. Instead, the system inserts a placeholder value of 1. This value doesn't affect the running of your task. 
      */
     MaxConcurrency?: MaxConcurrency;
     /**
-     * The maximum number of errors allowed before this task stops being scheduled.
+     * The maximum number of errors allowed before this task stops being scheduled.  Although this element is listed as "Required: No", a value can be omitted only when you are registering or updating a targetless task You must provide a value in all other cases. For maintenance window tasks without a target specified, you can't supply a value for this option. Instead, the system inserts a placeholder value of 1. This value doesn't affect the running of your task. 
      */
     MaxErrors?: MaxErrors;
     /**
@@ -6553,8 +6716,13 @@ declare namespace SSM {
      * A description of the task.
      */
     Description?: MaintenanceWindowDescription;
+    /**
+     * The specification for whether tasks should continue to run after the cutoff time specified in the maintenance windows is reached. 
+     */
+    CutoffBehavior?: MaintenanceWindowTaskCutoffBehavior;
   }
   export type MaintenanceWindowTaskArn = string;
+  export type MaintenanceWindowTaskCutoffBehavior = "CONTINUE_TASK"|"CANCEL_TASK"|string;
   export type MaintenanceWindowTaskId = string;
   export interface MaintenanceWindowTaskInvocationParameters {
     /**
@@ -6596,6 +6764,7 @@ declare namespace SSM {
   export type MaxErrors = string;
   export type MaxResults = number;
   export type MaxResultsEC2Compatible = number;
+  export type MaxSessionDuration = string;
   export type MetadataKey = string;
   export type MetadataKeysToDeleteList = MetadataKey[];
   export type MetadataMap = {[key: string]: MetadataValue};
@@ -6616,15 +6785,15 @@ declare namespace SSM {
      */
     PermissionType: DocumentPermissionType;
     /**
-     * The AWS user accounts that should have access to the document. The account IDs can either be a group of account IDs or All.
+     * The Amazon Web Services user accounts that should have access to the document. The account IDs can either be a group of account IDs or All.
      */
     AccountIdsToAdd?: AccountIdList;
     /**
-     * The AWS user accounts that should no longer have access to the document. The AWS user account can either be a group of account IDs or All. This action has a higher priority than AccountIdsToAdd. If you specify an account ID to add and the same ID to remove, the system removes access to the document.
+     * The Amazon Web Services user accounts that should no longer have access to the document. The Amazon Web Services user account can either be a group of account IDs or All. This action has a higher priority than AccountIdsToAdd. If you specify an account ID to add and the same ID to remove, the system removes access to the document.
      */
     AccountIdsToRemove?: AccountIdList;
     /**
-     * (Optional) The version of the document to share. If it's not specified, the system choose the Default version to share.
+     * (Optional) The version of the document to share. If it isn't specified, the system choose the Default version to share.
      */
     SharedDocumentVersion?: SharedDocumentVersion;
   }
@@ -6633,7 +6802,7 @@ declare namespace SSM {
   export type NextToken = string;
   export interface NonCompliantSummary {
     /**
-     * The total number of compliance items that are not compliant.
+     * The total number of compliance items that aren't compliant.
      */
     NonCompliantCount?: ComplianceSummaryCount;
     /**
@@ -6649,29 +6818,29 @@ declare namespace SSM {
      */
     NotificationArn?: NotificationArn;
     /**
-     * The different events for which you can receive notifications. These events include the following: All (events), InProgress, Success, TimedOut, Cancelled, Failed. To learn more about these events, see Monitoring Systems Manager status changes using Amazon SNS notifications in the AWS Systems Manager User Guide.
+     * The different events for which you can receive notifications. To learn more about these events, see Monitoring Systems Manager status changes using Amazon SNS notifications in the Amazon Web Services Systems Manager User Guide.
      */
     NotificationEvents?: NotificationEventList;
     /**
-     * Command: Receive notification when the status of a command changes. Invocation: For commands sent to multiple instances, receive notification on a per-instance basis when the status of a command changes. 
+     * The type of notification.    Command: Receive notification when the status of a command changes.    Invocation: For commands sent to multiple managed nodes, receive notification on a per-node basis when the status of a command changes.   
      */
     NotificationType?: NotificationType;
   }
   export type NotificationEvent = "All"|"InProgress"|"Success"|"TimedOut"|"Cancelled"|"Failed"|string;
   export type NotificationEventList = NotificationEvent[];
   export type NotificationType = "Command"|"Invocation"|string;
-  export type OperatingSystem = "WINDOWS"|"AMAZON_LINUX"|"AMAZON_LINUX_2"|"UBUNTU"|"REDHAT_ENTERPRISE_LINUX"|"SUSE"|"CENTOS"|"ORACLE_LINUX"|"DEBIAN"|"MACOS"|string;
+  export type OperatingSystem = "WINDOWS"|"AMAZON_LINUX"|"AMAZON_LINUX_2"|"UBUNTU"|"REDHAT_ENTERPRISE_LINUX"|"SUSE"|"CENTOS"|"ORACLE_LINUX"|"DEBIAN"|"MACOS"|"RASPBIAN"|string;
   export interface OpsAggregator {
     /**
-     * Either a Range or Count aggregator for limiting an OpsItem summary.
+     * Either a Range or Count aggregator for limiting an OpsData summary.
      */
     AggregatorType?: OpsAggregatorType;
     /**
-     * The data type name to use for viewing counts of OpsItems.
+     * The data type name to use for viewing counts of OpsData.
      */
     TypeName?: OpsDataTypeName;
     /**
-     * The name of an OpsItem attribute on which to limit the count of OpsItems.
+     * The name of an OpsData attribute on which to limit the count of OpsData.
      */
     AttributeName?: OpsDataAttributeName;
     /**
@@ -6683,7 +6852,7 @@ declare namespace SSM {
      */
     Filters?: OpsFilterList;
     /**
-     * A nested aggregator for viewing counts of OpsItems.
+     * A nested aggregator for viewing counts of OpsData.
      */
     Aggregators?: OpsAggregatorList;
   }
@@ -6707,11 +6876,11 @@ declare namespace SSM {
   export type OpsEntityId = string;
   export interface OpsEntityItem {
     /**
-     * The time OpsItem data was captured.
+     * The time the OpsData was captured.
      */
     CaptureTime?: OpsEntityItemCaptureTime;
     /**
-     * The detailed data content for an OpsItem summaries result item.
+     * The details of an OpsData summary.
      */
     Content?: OpsEntityItemEntryList;
   }
@@ -6742,7 +6911,7 @@ declare namespace SSM {
   export type OpsFilterValueList = OpsFilterValue[];
   export interface OpsItem {
     /**
-     * The ARN of the AWS account that created the OpsItem.
+     * The ARN of the Amazon Web Services account that created the OpsItem.
      */
     CreatedBy?: String;
     /**
@@ -6758,7 +6927,7 @@ declare namespace SSM {
      */
     Description?: OpsItemDescription;
     /**
-     * The ARN of the AWS account that last updated the OpsItem.
+     * The ARN of the Amazon Web Services account that last updated the OpsItem.
      */
     LastModifiedBy?: String;
     /**
@@ -6766,7 +6935,7 @@ declare namespace SSM {
      */
     LastModifiedTime?: DateTime;
     /**
-     * The Amazon Resource Name (ARN) of an SNS topic where notifications are sent when this OpsItem is edited or changed.
+     * The Amazon Resource Name (ARN) of an Amazon Simple Notification Service (Amazon SNS) topic where notifications are sent when this OpsItem is edited or changed.
      */
     Notifications?: OpsItemNotifications;
     /**
@@ -6778,7 +6947,7 @@ declare namespace SSM {
      */
     RelatedOpsItems?: RelatedOpsItems;
     /**
-     * The OpsItem status. Status can be Open, In Progress, or Resolved. For more information, see Editing OpsItem details in the AWS Systems Manager User Guide.
+     * The OpsItem status. Status can be Open, In Progress, or Resolved. For more information, see Editing OpsItem details in the Amazon Web Services Systems Manager User Guide.
      */
     Status?: OpsItemStatus;
     /**
@@ -6798,7 +6967,7 @@ declare namespace SSM {
      */
     Source?: OpsItemSource;
     /**
-     * Operational data is custom data that provides useful reference details about the OpsItem. For example, you can specify log files, error strings, license keys, troubleshooting tips, or other relevant data. You enter operational data as key-value pairs. The key has a maximum length of 128 characters. The value has a maximum size of 20 KB.  Operational data keys can't begin with the following: amazon, aws, amzn, ssm, /amazon, /aws, /amzn, /ssm.  You can choose to make the data searchable by other users in the account or you can restrict search access. Searchable data means that all users with access to the OpsItem Overview page (as provided by the DescribeOpsItems API action) can view and search on the specified data. Operational data that is not searchable is only viewable by users who have access to the OpsItem (as provided by the GetOpsItem API action). Use the /aws/resources key in OperationalData to specify a related resource in the request. Use the /aws/automations key in OperationalData to associate an Automation runbook with the OpsItem. To view AWS CLI example commands that use these keys, see Creating OpsItems manually in the AWS Systems Manager User Guide.
+     * Operational data is custom data that provides useful reference details about the OpsItem. For example, you can specify log files, error strings, license keys, troubleshooting tips, or other relevant data. You enter operational data as key-value pairs. The key has a maximum length of 128 characters. The value has a maximum size of 20 KB.  Operational data keys can't begin with the following: amazon, aws, amzn, ssm, /amazon, /aws, /amzn, /ssm.  You can choose to make the data searchable by other users in the account or you can restrict search access. Searchable data means that all users with access to the OpsItem Overview page (as provided by the DescribeOpsItems API operation) can view and search on the specified data. Operational data that isn't searchable is only viewable by users who have access to the OpsItem (as provided by the GetOpsItem API operation). Use the /aws/resources key in OperationalData to specify a related resource in the request. Use the /aws/automations key in OperationalData to associate an Automation runbook with the OpsItem. To view Amazon Web Services CLI example commands that use these keys, see Creating OpsItems manually in the Amazon Web Services Systems Manager User Guide.
      */
     OperationalData?: OpsItemOperationalData;
     /**
@@ -6906,7 +7075,7 @@ declare namespace SSM {
      */
     Operator: OpsItemFilterOperator;
   }
-  export type OpsItemFilterKey = "Status"|"CreatedBy"|"Source"|"Priority"|"Title"|"OpsItemId"|"CreatedTime"|"LastModifiedTime"|"ActualStartTime"|"ActualEndTime"|"PlannedStartTime"|"PlannedEndTime"|"OperationalData"|"OperationalDataKey"|"OperationalDataValue"|"ResourceId"|"AutomationId"|"Category"|"Severity"|"OpsItemType"|"ChangeRequestByRequesterArn"|"ChangeRequestByRequesterName"|"ChangeRequestByApproverArn"|"ChangeRequestByApproverName"|"ChangeRequestByTemplate"|"ChangeRequestByTargetsResourceGroup"|string;
+  export type OpsItemFilterKey = "Status"|"CreatedBy"|"Source"|"Priority"|"Title"|"OpsItemId"|"CreatedTime"|"LastModifiedTime"|"ActualStartTime"|"ActualEndTime"|"PlannedStartTime"|"PlannedEndTime"|"OperationalData"|"OperationalDataKey"|"OperationalDataValue"|"ResourceId"|"AutomationId"|"Category"|"Severity"|"OpsItemType"|"ChangeRequestByRequesterArn"|"ChangeRequestByRequesterName"|"ChangeRequestByApproverArn"|"ChangeRequestByApproverName"|"ChangeRequestByTemplate"|"ChangeRequestByTargetsResourceGroup"|"InsightByType"|string;
   export type OpsItemFilterOperator = "Equal"|"Contains"|"GreaterThan"|"LessThan"|string;
   export type OpsItemFilterValue = string;
   export type OpsItemFilterValues = OpsItemFilterValue[];
@@ -6921,7 +7090,7 @@ declare namespace SSM {
   export type OpsItemMaxResults = number;
   export interface OpsItemNotification {
     /**
-     * The Amazon Resource Name (ARN) of an SNS topic where notifications are sent when this OpsItem is edited or changed.
+     * The Amazon Resource Name (ARN) of an Amazon Simple Notification Service (Amazon SNS) topic where notifications are sent when this OpsItem is edited or changed.
      */
     Arn?: String;
   }
@@ -6929,9 +7098,66 @@ declare namespace SSM {
   export type OpsItemOperationalData = {[key: string]: OpsItemDataValue};
   export type OpsItemOpsDataKeysList = String[];
   export type OpsItemPriority = number;
+  export type OpsItemRelatedItemAssociationId = string;
+  export type OpsItemRelatedItemAssociationResourceType = string;
+  export type OpsItemRelatedItemAssociationResourceUri = string;
+  export type OpsItemRelatedItemAssociationType = string;
+  export type OpsItemRelatedItemSummaries = OpsItemRelatedItemSummary[];
+  export interface OpsItemRelatedItemSummary {
+    /**
+     * The OpsItem ID.
+     */
+    OpsItemId?: OpsItemId;
+    /**
+     * The association ID.
+     */
+    AssociationId?: OpsItemRelatedItemAssociationId;
+    /**
+     * The resource type.
+     */
+    ResourceType?: OpsItemRelatedItemAssociationResourceType;
+    /**
+     * The association type.
+     */
+    AssociationType?: OpsItemRelatedItemAssociationType;
+    /**
+     * The Amazon Resource Name (ARN) of the related-item resource.
+     */
+    ResourceUri?: OpsItemRelatedItemAssociationResourceUri;
+    CreatedBy?: OpsItemIdentity;
+    /**
+     * The time the related-item association was created.
+     */
+    CreatedTime?: DateTime;
+    LastModifiedBy?: OpsItemIdentity;
+    /**
+     * The time the related-item association was last updated.
+     */
+    LastModifiedTime?: DateTime;
+  }
+  export interface OpsItemRelatedItemsFilter {
+    /**
+     * The name of the filter key. Supported values include ResourceUri, ResourceType, or AssociationId.
+     */
+    Key: OpsItemRelatedItemsFilterKey;
+    /**
+     * The values for the filter.
+     */
+    Values: OpsItemRelatedItemsFilterValues;
+    /**
+     * The operator used by the filter call. The only supported operator is EQUAL.
+     */
+    Operator: OpsItemRelatedItemsFilterOperator;
+  }
+  export type OpsItemRelatedItemsFilterKey = "ResourceType"|"AssociationId"|"ResourceUri"|string;
+  export type OpsItemRelatedItemsFilterOperator = "Equal"|string;
+  export type OpsItemRelatedItemsFilterValue = string;
+  export type OpsItemRelatedItemsFilterValues = OpsItemRelatedItemsFilterValue[];
+  export type OpsItemRelatedItemsFilters = OpsItemRelatedItemsFilter[];
+  export type OpsItemRelatedItemsMaxResults = number;
   export type OpsItemSeverity = string;
   export type OpsItemSource = string;
-  export type OpsItemStatus = "Open"|"InProgress"|"Resolved"|"Pending"|"TimedOut"|"Cancelling"|"Cancelled"|"Failed"|"CompletedWithSuccess"|"CompletedWithFailure"|"Scheduled"|"RunbookInProgress"|"PendingChangeCalendarOverride"|"ChangeCalendarOverrideApproved"|"ChangeCalendarOverrideRejected"|"PendingApproval"|"Approved"|"Rejected"|string;
+  export type OpsItemStatus = "Open"|"InProgress"|"Resolved"|"Pending"|"TimedOut"|"Cancelling"|"Cancelled"|"Failed"|"CompletedWithSuccess"|"CompletedWithFailure"|"Scheduled"|"RunbookInProgress"|"PendingChangeCalendarOverride"|"ChangeCalendarOverrideApproved"|"ChangeCalendarOverrideRejected"|"PendingApproval"|"Approved"|"Rejected"|"Closed"|string;
   export type OpsItemSummaries = OpsItemSummary[];
   export interface OpsItemSummary {
     /**
@@ -6955,7 +7181,7 @@ declare namespace SSM {
      */
     Priority?: OpsItemPriority;
     /**
-     * The impacted AWS resource.
+     * The impacted Amazon Web Services resource.
      */
     Source?: OpsItemSource;
     /**
@@ -7074,11 +7300,11 @@ declare namespace SSM {
      */
     Name?: PSParameterName;
     /**
-     * The type of parameter. Valid values include the following: String, StringList, and SecureString.
+     * The type of parameter. Valid values include the following: String, StringList, and SecureString.  If type is StringList, the system returns a comma-separated string with no spaces between commas in the Value field. 
      */
     Type?: ParameterType;
     /**
-     * The parameter value.
+     * The parameter value.  If type is StringList, the system returns a comma-separated string with no spaces between commas in the Value field. 
      */
     Value?: PSParameterValue;
     /**
@@ -7090,7 +7316,7 @@ declare namespace SSM {
      */
     Selector?: PSParameterSelector;
     /**
-     * Applies to parameters that reference information in other AWS services. SourceResult is the raw result or response from the source.
+     * Applies to parameters that reference information in other Amazon Web Services services. SourceResult is the raw result or response from the source.
      */
     SourceResult?: String;
     /**
@@ -7126,7 +7352,7 @@ declare namespace SSM {
      */
     LastModifiedDate?: DateTime;
     /**
-     * Amazon Resource Name (ARN) of the AWS user who last changed the parameter.
+     * Amazon Resource Name (ARN) of the Amazon Web Services user who last changed the parameter.
      */
     LastModifiedUser?: String;
     /**
@@ -7154,7 +7380,7 @@ declare namespace SSM {
      */
     Tier?: ParameterTier;
     /**
-     * Information about the policies assigned to a parameter.  Assigning parameter policies in the AWS Systems Manager User Guide.
+     * Information about the policies assigned to a parameter.  Assigning parameter policies in the Amazon Web Services Systems Manager User Guide.
      */
     Policies?: ParameterPolicyList;
     /**
@@ -7169,11 +7395,11 @@ declare namespace SSM {
      */
     PolicyText?: String;
     /**
-     * The type of policy. Parameter Store supports the following policy types: Expiration, ExpirationNotification, and NoChangeNotification. 
+     * The type of policy. Parameter Store, a capability of Amazon Web Services Systems Manager, supports the following policy types: Expiration, ExpirationNotification, and NoChangeNotification. 
      */
     PolicyType?: String;
     /**
-     * The status of the policy. Policies report the following statuses: Pending (the policy has not been enforced or applied yet), Finished (the policy was applied), Failed (the policy was not applied), or InProgress (the policy is being applied now). 
+     * The status of the policy. Policies report the following statuses: Pending (the policy hasn't been enforced or applied yet), Finished (the policy was applied), Failed (the policy wasn't applied), or InProgress (the policy is being applied now). 
      */
     PolicyStatus?: String;
   }
@@ -7199,7 +7425,7 @@ declare namespace SSM {
      */
     LastModifiedDate?: DateTime;
     /**
-     * Amazon Resource Name (ARN) of the AWS user who last changed the parameter.
+     * Amazon Resource Name (ARN) of the Amazon Web Services user who last changed the parameter.
      */
     LastModifiedUser?: String;
     /**
@@ -7234,7 +7460,7 @@ declare namespace SSM {
   export type ParameterPolicyList = ParameterInlinePolicy[];
   export interface ParameterStringFilter {
     /**
-     * The name of the filter.  The ParameterStringFilter object is used by the DescribeParameters and GetParametersByPath API actions. However, not all of the pattern values listed for Key can be used with both actions. For DescribeActions, all of the listed patterns are valid, with the exception of Label. For GetParametersByPath, the following patterns listed for Key are not valid: tag, Name, Path, and Tier. For examples of CLI commands demonstrating valid parameter filter constructions, see Searching for Systems Manager parameters in the AWS Systems Manager User Guide. 
+     * The name of the filter. The ParameterStringFilter object is used by the DescribeParameters and GetParametersByPath API operations. However, not all of the pattern values listed for Key can be used with both operations. For DescribeParameters, all of the listed patterns are valid except Label. For GetParametersByPath, the following patterns listed for Key aren't valid: tag, DataType, Name, Path, and Tier. For examples of Amazon Web Services CLI commands demonstrating valid parameter filter constructions, see Searching for Systems Manager parameters in the Amazon Web Services Systems Manager User Guide.
      */
     Key: ParameterStringFilterKey;
     /**
@@ -7272,7 +7498,7 @@ declare namespace SSM {
   export type ParametersFilterValueList = ParametersFilterValue[];
   export interface Patch {
     /**
-     * The ID of the patch. Applies to Windows patches only.  This ID is not the same as the Microsoft Knowledge Base ID. 
+     * The ID of the patch. Applies to Windows patches only.  This ID isn't the same as the Microsoft Knowledge Base ID. 
      */
     Id?: PatchId;
     /**
@@ -7324,35 +7550,35 @@ declare namespace SSM {
      */
     Language?: PatchLanguage;
     /**
-     * The Advisory ID of the patch. For example, RHSA-2020:3779. Applies to Linux-based instances only.
+     * The Advisory ID of the patch. For example, RHSA-2020:3779. Applies to Linux-based managed nodes only.
      */
     AdvisoryIds?: PatchAdvisoryIdList;
     /**
-     * The Bugzilla ID of the patch. For example, 1600646. Applies to Linux-based instances only.
+     * The Bugzilla ID of the patch. For example, 1600646. Applies to Linux-based managed nodes only.
      */
     BugzillaIds?: PatchBugzillaIdList;
     /**
-     * The Common Vulnerabilities and Exposures (CVE) ID of the patch. For example, CVE-2011-3192. Applies to Linux-based instances only.
+     * The Common Vulnerabilities and Exposures (CVE) ID of the patch. For example, CVE-2011-3192. Applies to Linux-based managed nodes only.
      */
     CVEIds?: PatchCVEIdList;
     /**
-     * The name of the patch. Applies to Linux-based instances only.
+     * The name of the patch. Applies to Linux-based managed nodes only.
      */
     Name?: PatchName;
     /**
-     * The epoch of the patch. For example in pkg-example-EE-20180914-2.2.amzn1.noarch, the epoch value is 20180914-2. Applies to Linux-based instances only.
+     * The epoch of the patch. For example in pkg-example-EE-20180914-2.2.amzn1.noarch, the epoch value is 20180914-2. Applies to Linux-based managed nodes only.
      */
     Epoch?: PatchEpoch;
     /**
-     * The version number of the patch. For example, in example-pkg-1.710.10-2.7.abcd.x86_64, the version number is indicated by -1. Applies to Linux-based instances only.
+     * The version number of the patch. For example, in example-pkg-1.710.10-2.7.abcd.x86_64, the version number is indicated by -1. Applies to Linux-based managed nodes only.
      */
     Version?: PatchVersion;
     /**
-     * The particular release of a patch. For example, in pkg-example-EE-20180914-2.2.amzn1.noarch, the release is 2.amaz1. Applies to Linux-based instances only.
+     * The particular release of a patch. For example, in pkg-example-EE-20180914-2.2.amzn1.noarch, the release is 2.amaz1. Applies to Linux-based managed nodes only.
      */
     Release?: PatchRelease;
     /**
-     * The architecture of the patch. For example, in example-pkg-0.710.10-2.7.abcd.x86_64, the architecture is indicated by x86_64. Applies to Linux-based instances only.
+     * The architecture of the patch. For example, in example-pkg-0.710.10-2.7.abcd.x86_64, the architecture is indicated by x86_64. Applies to Linux-based managed nodes only.
      */
     Arch?: PatchArch;
     /**
@@ -7360,7 +7586,7 @@ declare namespace SSM {
      */
     Severity?: PatchSeverity;
     /**
-     * The source patch repository for the operating system and version, such as trusty-security for Ubuntu Server 14.04 LTE and focal-security for Ubuntu Server 20.04 LTE. Applies to Linux-based instances only.
+     * The source patch repository for the operating system and version, such as trusty-security for Ubuntu Server 14.04 LTE and focal-security for Ubuntu Server 20.04 LTE. Applies to Linux-based managed nodes only.
      */
     Repository?: PatchRepository;
   }
@@ -7378,7 +7604,7 @@ declare namespace SSM {
      */
     BaselineName?: BaselineName;
     /**
-     * Defines the operating system the patch baseline applies to. The Default value is WINDOWS. 
+     * Defines the operating system the patch baseline applies to. The default value is WINDOWS. 
      */
     OperatingSystem?: OperatingSystem;
     /**
@@ -7386,7 +7612,7 @@ declare namespace SSM {
      */
     BaselineDescription?: BaselineDescription;
     /**
-     * Whether this is the default baseline. Note that Systems Manager supports creating multiple default patch baselines. For example, you can create a default patch baseline for each operating system.
+     * Whether this is the default baseline. Amazon Web Services Systems Manager supports creating multiple default patch baselines. For example, you can create a default patch baseline for each operating system.
      */
     DefaultBaseline?: DefaultBaseline;
   }
@@ -7408,19 +7634,19 @@ declare namespace SSM {
      */
     KBId: PatchKbNumber;
     /**
-     * The classification of the patch (for example, SecurityUpdates, Updates, CriticalUpdates).
+     * The classification of the patch, such as SecurityUpdates, Updates, and CriticalUpdates.
      */
     Classification: PatchClassification;
     /**
-     * The severity of the patch (for example, Critical, Important, Moderate).
+     * The severity of the patch such as Critical, Important, and Moderate.
      */
     Severity: PatchSeverity;
     /**
-     * The state of the patch on the instance, such as INSTALLED or FAILED. For descriptions of each patch state, see About patch compliance in the AWS Systems Manager User Guide.
+     * The state of the patch on the managed node, such as INSTALLED or FAILED. For descriptions of each patch state, see About patch compliance in the Amazon Web Services Systems Manager User Guide.
      */
     State: PatchComplianceDataState;
     /**
-     * The date/time the patch was installed on the instance. Note that not all operating systems provide this level of information.
+     * The date/time the patch was installed on the managed node. Not all operating systems provide this level of information.
      */
     InstalledTime: DateTime;
     /**
@@ -7522,11 +7748,11 @@ declare namespace SSM {
      */
     ApproveAfterDays?: ApproveAfterDays;
     /**
-     * The cutoff date for auto approval of released patches. Any patches released on or before this date are installed automatically. Not supported on Debian Server or Ubuntu Server. Enter dates in the format YYYY-MM-DD. For example, 2020-12-31.
+     * The cutoff date for auto approval of released patches. Any patches released on or before this date are installed automatically. Not supported on Debian Server or Ubuntu Server. Enter dates in the format YYYY-MM-DD. For example, 2021-12-31.
      */
     ApproveUntilDate?: PatchStringDateTime;
     /**
-     * For instances identified by the approval rule filters, enables a patch baseline to apply non-security updates available in the specified repository. The default value is 'false'. Applies to Linux instances only.
+     * For managed nodes identified by the approval rule filters, enables a patch baseline to apply non-security updates available in the specified repository. The default value is false. Applies to Linux managed nodes only.
      */
     EnableNonSecurity?: Boolean;
   }
@@ -7561,7 +7787,7 @@ declare namespace SSM {
   export type PatchSourceProductList = PatchSourceProduct[];
   export interface PatchStatus {
     /**
-     * The approval status of a patch (APPROVED, PENDING_APPROVAL, EXPLICIT_APPROVED, EXPLICIT_REJECTED).
+     * The approval status of a patch.
      */
     DeploymentStatus?: PatchDeploymentStatus;
     /**
@@ -7579,34 +7805,34 @@ declare namespace SSM {
   export type PatchVendor = string;
   export type PatchVersion = string;
   export type PingStatus = "Online"|"ConnectionLost"|"Inactive"|string;
-  export type PlatformType = "Windows"|"Linux"|string;
+  export type PlatformType = "Windows"|"Linux"|"MacOS"|string;
   export type PlatformTypeList = PlatformType[];
   export type Product = string;
   export interface ProgressCounters {
     /**
-     * The total number of steps run in all specified AWS Regions and accounts for the current Automation execution.
+     * The total number of steps run in all specified Amazon Web Services Regions and Amazon Web Services accounts for the current Automation execution.
      */
     TotalSteps?: Integer;
     /**
-     * The total number of steps that successfully completed in all specified AWS Regions and accounts for the current Automation execution.
+     * The total number of steps that successfully completed in all specified Amazon Web Services Regions and Amazon Web Services accounts for the current Automation execution.
      */
     SuccessSteps?: Integer;
     /**
-     * The total number of steps that failed to run in all specified AWS Regions and accounts for the current Automation execution.
+     * The total number of steps that failed to run in all specified Amazon Web Services Regions and Amazon Web Services accounts for the current Automation execution.
      */
     FailedSteps?: Integer;
     /**
-     * The total number of steps that the system cancelled in all specified AWS Regions and accounts for the current Automation execution.
+     * The total number of steps that the system cancelled in all specified Amazon Web Services Regions and Amazon Web Services accounts for the current Automation execution.
      */
     CancelledSteps?: Integer;
     /**
-     * The total number of steps that timed out in all specified AWS Regions and accounts for the current Automation execution.
+     * The total number of steps that timed out in all specified Amazon Web Services Regions and Amazon Web Services accounts for the current Automation execution.
      */
     TimedOutSteps?: Integer;
   }
   export interface PutComplianceItemsRequest {
     /**
-     * Specify an ID for this resource. For a managed instance, this is the instance ID.
+     * Specify an ID for this resource. For a managed node, this is the node ID.
      */
     ResourceId: ComplianceResourceId;
     /**
@@ -7639,11 +7865,11 @@ declare namespace SSM {
   export type PutInventoryMessage = string;
   export interface PutInventoryRequest {
     /**
-     * An instance ID where you want to add or update inventory items.
+     * An managed node ID where you want to add or update inventory items.
      */
     InstanceId: InstanceId;
     /**
-     * The inventory items that you want to add or update on instances.
+     * The inventory items that you want to add or update on managed nodes.
      */
     Items: InventoryItemList;
   }
@@ -7655,11 +7881,11 @@ declare namespace SSM {
   }
   export interface PutParameterRequest {
     /**
-     * The fully qualified name of the parameter that you want to add to the system. The fully qualified name includes the complete hierarchy of the parameter path and name. For parameters in a hierarchy, you must include a leading forward slash character (/) when you create or reference a parameter. For example: /Dev/DBServer/MySQL/db-string13  Naming Constraints:   Parameter names are case sensitive.   A parameter name must be unique within an AWS Region   A parameter name can't be prefixed with "aws" or "ssm" (case-insensitive).   Parameter names can include only the following symbols and letters: a-zA-Z0-9_.-  In addition, the slash character ( / ) is used to delineate hierarchies in parameter names. For example: /Dev/Production/East/Project-ABC/MyParameter    A parameter name can't include spaces.   Parameter hierarchies are limited to a maximum depth of fifteen levels.   For additional information about valid values for parameter names, see Creating Systems Manager parameters in the AWS Systems Manager User Guide.  The maximum length constraint listed below includes capacity for additional system attributes that are not part of the name. The maximum length for a parameter name, including the full length of the parameter ARN, is 1011 characters. For example, the length of the following parameter name is 65 characters, not 20 characters:  arn:aws:ssm:us-east-2:111122223333:parameter/ExampleParameterName  
+     * The fully qualified name of the parameter that you want to add to the system. The fully qualified name includes the complete hierarchy of the parameter path and name. For parameters in a hierarchy, you must include a leading forward slash character (/) when you create or reference a parameter. For example: /Dev/DBServer/MySQL/db-string13  Naming Constraints:   Parameter names are case sensitive.   A parameter name must be unique within an Amazon Web Services Region   A parameter name can't be prefixed with "aws" or "ssm" (case-insensitive).   Parameter names can include only the following symbols and letters: a-zA-Z0-9_.-  In addition, the slash character ( / ) is used to delineate hierarchies in parameter names. For example: /Dev/Production/East/Project-ABC/MyParameter    A parameter name can't include spaces.   Parameter hierarchies are limited to a maximum depth of fifteen levels.   For additional information about valid values for parameter names, see Creating Systems Manager parameters in the Amazon Web Services Systems Manager User Guide.  The maximum length constraint listed below includes capacity for additional system attributes that aren't part of the name. The maximum length for a parameter name, including the full length of the parameter ARN, is 1011 characters. For example, the length of the following parameter name is 65 characters, not 20 characters:  arn:aws:ssm:us-east-2:111122223333:parameter/ExampleParameterName  
      */
     Name: PSParameterName;
     /**
-     * Information about the parameter that you want to add to the system. Optional but recommended.  Do not enter personally identifiable information in this field. 
+     * Information about the parameter that you want to add to the system. Optional but recommended.  Don't enter personally identifiable information in this field. 
      */
     Description?: ParameterDescription;
     /**
@@ -7667,15 +7893,15 @@ declare namespace SSM {
      */
     Value: PSParameterValue;
     /**
-     * The type of parameter that you want to add to the system.   SecureString is not currently supported for AWS CloudFormation templates.  Items in a StringList must be separated by a comma (,). You can't use other punctuation or special character to escape items in the list. If you have a parameter value that requires a comma, then use the String data type.  Specifying a parameter type is not required when updating a parameter. You must specify a parameter type when creating a parameter. 
+     * The type of parameter that you want to add to the system.   SecureString isn't currently supported for CloudFormation templates.  Items in a StringList must be separated by a comma (,). You can't use other punctuation or special character to escape items in the list. If you have a parameter value that requires a comma, then use the String data type.  Specifying a parameter type isn't required when updating a parameter. You must specify a parameter type when creating a parameter. 
      */
     Type?: ParameterType;
     /**
-     * The KMS Key ID that you want to use to encrypt a parameter. Either the default AWS Key Management Service (AWS KMS) key automatically assigned to your AWS account or a custom key. Required for parameters that use the SecureString data type. If you don't specify a key ID, the system uses the default key associated with your AWS account.   To use your default AWS KMS key, choose the SecureString data type, and do not specify the Key ID when you create the parameter. The system automatically populates Key ID with your default KMS key.   To use a custom KMS key, choose the SecureString data type with the Key ID parameter.  
+     * The Key Management Service (KMS) ID that you want to use to encrypt a parameter. Either the default KMS key automatically assigned to your Amazon Web Services account or a custom key. Required for parameters that use the SecureString data type. If you don't specify a key ID, the system uses the default key associated with your Amazon Web Services account.   To use your default KMS key, choose the SecureString data type, and do not specify the Key ID when you create the parameter. The system automatically populates Key ID with your default KMS key.   To use a custom KMS key, choose the SecureString data type with the Key ID parameter.  
      */
     KeyId?: ParameterKeyId;
     /**
-     * Overwrite an existing parameter. The default value is 'false'.
+     * Overwrite an existing parameter. The default value is false.
      */
     Overwrite?: Boolean;
     /**
@@ -7683,25 +7909,25 @@ declare namespace SSM {
      */
     AllowedPattern?: AllowedPattern;
     /**
-     * Optional metadata that you assign to a resource. Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment. For example, you might want to tag a Systems Manager parameter to identify the type of resource to which it applies, the environment, or the type of configuration data referenced by the parameter. In this case, you could specify the following key name/value pairs:    Key=Resource,Value=S3bucket     Key=OS,Value=Windows     Key=ParameterType,Value=LicenseKey     To add tags to an existing Systems Manager parameter, use the AddTagsToResource action. 
+     * Optional metadata that you assign to a resource. Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment. For example, you might want to tag a Systems Manager parameter to identify the type of resource to which it applies, the environment, or the type of configuration data referenced by the parameter. In this case, you could specify the following key-value pairs:    Key=Resource,Value=S3bucket     Key=OS,Value=Windows     Key=ParameterType,Value=LicenseKey     To add tags to an existing Systems Manager parameter, use the AddTagsToResource operation. 
      */
     Tags?: TagList;
     /**
-     * The parameter tier to assign to a parameter. Parameter Store offers a standard tier and an advanced tier for parameters. Standard parameters have a content size limit of 4 KB and can't be configured to use parameter policies. You can create a maximum of 10,000 standard parameters for each Region in an AWS account. Standard parameters are offered at no additional cost.  Advanced parameters have a content size limit of 8 KB and can be configured to use parameter policies. You can create a maximum of 100,000 advanced parameters for each Region in an AWS account. Advanced parameters incur a charge. For more information, see Standard and advanced parameter tiers in the AWS Systems Manager User Guide. You can change a standard parameter to an advanced parameter any time. But you can't revert an advanced parameter to a standard parameter. Reverting an advanced parameter to a standard parameter would result in data loss because the system would truncate the size of the parameter from 8 KB to 4 KB. Reverting would also remove any policies attached to the parameter. Lastly, advanced parameters use a different form of encryption than standard parameters.  If you no longer need an advanced parameter, or if you no longer want to incur charges for an advanced parameter, you must delete it and recreate it as a new standard parameter.   Using the Default Tier Configuration  In PutParameter requests, you can specify the tier to create the parameter in. Whenever you specify a tier in the request, Parameter Store creates or updates the parameter according to that request. However, if you do not specify a tier in a request, Parameter Store assigns the tier based on the current Parameter Store default tier configuration. The default tier when you begin using Parameter Store is the standard-parameter tier. If you use the advanced-parameter tier, you can specify one of the following as the default:    Advanced: With this option, Parameter Store evaluates all requests as advanced parameters.     Intelligent-Tiering: With this option, Parameter Store evaluates each request to determine if the parameter is standard or advanced.  If the request doesn't include any options that require an advanced parameter, the parameter is created in the standard-parameter tier. If one or more options requiring an advanced parameter are included in the request, Parameter Store create a parameter in the advanced-parameter tier. This approach helps control your parameter-related costs by always creating standard parameters unless an advanced parameter is necessary.    Options that require an advanced parameter include the following:   The content size of the parameter is more than 4 KB.   The parameter uses a parameter policy.   More than 10,000 parameters already exist in your AWS account in the current Region.   For more information about configuring the default tier option, see Specifying a default parameter tier in the AWS Systems Manager User Guide.
+     * The parameter tier to assign to a parameter. Parameter Store offers a standard tier and an advanced tier for parameters. Standard parameters have a content size limit of 4 KB and can't be configured to use parameter policies. You can create a maximum of 10,000 standard parameters for each Region in an Amazon Web Services account. Standard parameters are offered at no additional cost.  Advanced parameters have a content size limit of 8 KB and can be configured to use parameter policies. You can create a maximum of 100,000 advanced parameters for each Region in an Amazon Web Services account. Advanced parameters incur a charge. For more information, see Standard and advanced parameter tiers in the Amazon Web Services Systems Manager User Guide. You can change a standard parameter to an advanced parameter any time. But you can't revert an advanced parameter to a standard parameter. Reverting an advanced parameter to a standard parameter would result in data loss because the system would truncate the size of the parameter from 8 KB to 4 KB. Reverting would also remove any policies attached to the parameter. Lastly, advanced parameters use a different form of encryption than standard parameters.  If you no longer need an advanced parameter, or if you no longer want to incur charges for an advanced parameter, you must delete it and recreate it as a new standard parameter.   Using the Default Tier Configuration  In PutParameter requests, you can specify the tier to create the parameter in. Whenever you specify a tier in the request, Parameter Store creates or updates the parameter according to that request. However, if you don't specify a tier in a request, Parameter Store assigns the tier based on the current Parameter Store default tier configuration. The default tier when you begin using Parameter Store is the standard-parameter tier. If you use the advanced-parameter tier, you can specify one of the following as the default:    Advanced: With this option, Parameter Store evaluates all requests as advanced parameters.     Intelligent-Tiering: With this option, Parameter Store evaluates each request to determine if the parameter is standard or advanced.  If the request doesn't include any options that require an advanced parameter, the parameter is created in the standard-parameter tier. If one or more options requiring an advanced parameter are included in the request, Parameter Store create a parameter in the advanced-parameter tier. This approach helps control your parameter-related costs by always creating standard parameters unless an advanced parameter is necessary.    Options that require an advanced parameter include the following:   The content size of the parameter is more than 4 KB.   The parameter uses a parameter policy.   More than 10,000 parameters already exist in your Amazon Web Services account in the current Amazon Web Services Region.   For more information about configuring the default tier option, see Specifying a default parameter tier in the Amazon Web Services Systems Manager User Guide.
      */
     Tier?: ParameterTier;
     /**
-     * One or more policies to apply to a parameter. This action takes a JSON array. Parameter Store supports the following policy types: Expiration: This policy deletes the parameter after it expires. When you create the policy, you specify the expiration date. You can update the expiration date and time by updating the policy. Updating the parameter does not affect the expiration date and time. When the expiration time is reached, Parameter Store deletes the parameter. ExpirationNotification: This policy triggers an event in Amazon CloudWatch Events that notifies you about the expiration. By using this policy, you can receive notification before or after the expiration time is reached, in units of days or hours. NoChangeNotification: This policy triggers a CloudWatch event if a parameter has not been modified for a specified period of time. This policy type is useful when, for example, a secret needs to be changed within a period of time, but it has not been changed. All existing policies are preserved until you send new policies or an empty policy. For more information about parameter policies, see Assigning parameter policies. 
+     * One or more policies to apply to a parameter. This operation takes a JSON array. Parameter Store, a capability of Amazon Web Services Systems Manager supports the following policy types: Expiration: This policy deletes the parameter after it expires. When you create the policy, you specify the expiration date. You can update the expiration date and time by updating the policy. Updating the parameter doesn't affect the expiration date and time. When the expiration time is reached, Parameter Store deletes the parameter. ExpirationNotification: This policy initiates an event in Amazon CloudWatch Events that notifies you about the expiration. By using this policy, you can receive notification before or after the expiration time is reached, in units of days or hours. NoChangeNotification: This policy initiates a CloudWatch Events event if a parameter hasn't been modified for a specified period of time. This policy type is useful when, for example, a secret needs to be changed within a period of time, but it hasn't been changed. All existing policies are preserved until you send new policies or an empty policy. For more information about parameter policies, see Assigning parameter policies. 
      */
     Policies?: ParameterPolicies;
     /**
-     * The data type for a String parameter. Supported data types include plain text and Amazon Machine Image IDs.  The following data type values are supported.     text     aws:ec2:image    When you create a String parameter and specify aws:ec2:image, Systems Manager validates the parameter value is in the required format, such as ami-12345abcdeEXAMPLE, and that the specified AMI is available in your AWS account. For more information, see Native parameter support for Amazon Machine Image IDs in the AWS Systems Manager User Guide.
+     * The data type for a String parameter. Supported data types include plain text and Amazon Machine Image (AMI) IDs.  The following data type values are supported.     text     aws:ec2:image     aws:ssm:integration    When you create a String parameter and specify aws:ec2:image, Amazon Web Services Systems Manager validates the parameter value is in the required format, such as ami-12345abcdeEXAMPLE, and that the specified AMI is available in your Amazon Web Services account. For more information, see Native parameter support for Amazon Machine Image (AMI) IDs in the Amazon Web Services Systems Manager User Guide.
      */
     DataType?: ParameterDataType;
   }
   export interface PutParameterResult {
     /**
-     * The new version number of a parameter. If you edit a parameter value, Parameter Store automatically creates a new version and assigns this new version a unique ID. You can reference a parameter version ID in API actions or in Systems Manager documents (SSM documents). By default, if you don't specify a specific version, the system returns the latest parameter value when a parameter is called.
+     * The new version number of a parameter. If you edit a parameter value, Parameter Store automatically creates a new version and assigns this new version a unique ID. You can reference a parameter version ID in API operations or in Systems Manager documents (SSM documents). By default, if you don't specify a specific version, the system returns the latest parameter value when a parameter is called.
      */
     Version?: PSParameterVersion;
     /**
@@ -7726,11 +7952,11 @@ declare namespace SSM {
   }
   export interface RegisterPatchBaselineForPatchGroupRequest {
     /**
-     * The ID of the patch baseline to register the patch group with.
+     * The ID of the patch baseline to register with the patch group.
      */
     BaselineId: BaselineId;
     /**
-     * The name of the patch group that should be registered with the patch baseline.
+     * The name of the patch group to be registered with the patch baseline.
      */
     PatchGroup: PatchGroup;
   }
@@ -7754,11 +7980,11 @@ declare namespace SSM {
      */
     ResourceType: MaintenanceWindowResourceType;
     /**
-     * The targets to register with the maintenance window. In other words, the instances to run commands on when the maintenance window runs.  If a single maintenance window task is registered with multiple targets, its task invocations occur sequentially and not in parallel. If your task must run on multiple targets at the same time, register a task for each target individually and assign each task the same priority level.  You can specify targets using instance IDs, resource group names, or tags that have been applied to instances.  Example 1: Specify instance IDs  Key=InstanceIds,Values=instance-id-1,instance-id-2,instance-id-3    Example 2: Use tag key-pairs applied to instances  Key=tag:my-tag-key,Values=my-tag-value-1,my-tag-value-2    Example 3: Use tag-keys applied to instances  Key=tag-key,Values=my-tag-key-1,my-tag-key-2    Example 4: Use resource group names  Key=resource-groups:Name,Values=resource-group-name    Example 5: Use filters for resource group types  Key=resource-groups:ResourceTypeFilters,Values=resource-type-1,resource-type-2    For Key=resource-groups:ResourceTypeFilters, specify resource types in the following format  Key=resource-groups:ResourceTypeFilters,Values=AWS::EC2::INSTANCE,AWS::EC2::VPC    For more information about these examples formats, including the best use case for each one, see Examples: Register targets with a maintenance window in the AWS Systems Manager User Guide.
+     * The targets to register with the maintenance window. In other words, the managed nodes to run commands on when the maintenance window runs.  If a single maintenance window task is registered with multiple targets, its task invocations occur sequentially and not in parallel. If your task must run on multiple targets at the same time, register a task for each target individually and assign each task the same priority level.  You can specify targets using managed node IDs, resource group names, or tags that have been applied to managed nodes.  Example 1: Specify managed node IDs  Key=InstanceIds,Values=&lt;instance-id-1&gt;,&lt;instance-id-2&gt;,&lt;instance-id-3&gt;   Example 2: Use tag key-pairs applied to managed nodes  Key=tag:&lt;my-tag-key&gt;,Values=&lt;my-tag-value-1&gt;,&lt;my-tag-value-2&gt;   Example 3: Use tag-keys applied to managed nodes  Key=tag-key,Values=&lt;my-tag-key-1&gt;,&lt;my-tag-key-2&gt;   Example 4: Use resource group names  Key=resource-groups:Name,Values=&lt;resource-group-name&gt;   Example 5: Use filters for resource group types  Key=resource-groups:ResourceTypeFilters,Values=&lt;resource-type-1&gt;,&lt;resource-type-2&gt;   For Key=resource-groups:ResourceTypeFilters, specify resource types in the following format  Key=resource-groups:ResourceTypeFilters,Values=AWS::EC2::INSTANCE,AWS::EC2::VPC   For more information about these examples formats, including the best use case for each one, see Examples: Register targets with a maintenance window in the Amazon Web Services Systems Manager User Guide.
      */
     Targets: Targets;
     /**
-     * User-provided value that will be included in any CloudWatch events raised while running tasks for these targets in this maintenance window.
+     * User-provided value that will be included in any Amazon CloudWatch Events events raised while running tasks for these targets in this maintenance window.
      */
     OwnerInformation?: OwnerInformation;
     /**
@@ -7786,7 +8012,7 @@ declare namespace SSM {
      */
     WindowId: MaintenanceWindowId;
     /**
-     * The targets (either instances or maintenance window targets).  One or more targets must be specified for maintenance window Run Command-type tasks. Depending on the task, targets are optional for other maintenance window task types (Automation, AWS Lambda, and AWS Step Functions). For more information about running tasks that do not specify targets, see Registering maintenance window tasks without targets in the AWS Systems Manager User Guide.  Specify instances using the following format:   Key=InstanceIds,Values=&lt;instance-id-1&gt;,&lt;instance-id-2&gt;  Specify maintenance window targets using the following format:  Key=WindowTargetIds,Values=&lt;window-target-id-1&gt;,&lt;window-target-id-2&gt; 
+     * The targets (either managed nodes or maintenance window targets).  One or more targets must be specified for maintenance window Run Command-type tasks. Depending on the task, targets are optional for other maintenance window task types (Automation, Lambda, and Step Functions). For more information about running tasks that don't specify targets, see Registering maintenance window tasks without targets in the Amazon Web Services Systems Manager User Guide.  Specify managed nodes using the following format:   Key=InstanceIds,Values=&lt;instance-id-1&gt;,&lt;instance-id-2&gt;  Specify maintenance window targets using the following format:  Key=WindowTargetIds,Values=&lt;window-target-id-1&gt;,&lt;window-target-id-2&gt; 
      */
     Targets?: Targets;
     /**
@@ -7794,7 +8020,7 @@ declare namespace SSM {
      */
     TaskArn: MaintenanceWindowTaskArn;
     /**
-     * The ARN of the IAM service role for Systems Manager to assume when running a maintenance window task. If you do not specify a service role ARN, Systems Manager uses your account's service-linked role. If no service-linked role for Systems Manager exists in your account, it is created when you run RegisterTaskWithMaintenanceWindow. For more information, see the following topics in the in the AWS Systems Manager User Guide:    Using service-linked roles for Systems Manager     Should I use a service-linked role or a custom service role to run maintenance window tasks?    
+     * The Amazon Resource Name (ARN) of the IAM service role for Amazon Web Services Systems Manager to assume when running a maintenance window task. If you do not specify a service role ARN, Systems Manager uses your account's service-linked role. If no service-linked role for Systems Manager exists in your account, it is created when you run RegisterTaskWithMaintenanceWindow. For more information, see the following topics in the in the Amazon Web Services Systems Manager User Guide:    Using service-linked roles for Systems Manager     Should I use a service-linked role or a custom service role to run maintenance window tasks?    
      */
     ServiceRoleArn?: ServiceRole;
     /**
@@ -7814,15 +8040,15 @@ declare namespace SSM {
      */
     Priority?: MaintenanceWindowTaskPriority;
     /**
-     * The maximum number of targets this task can be run for in parallel.  For maintenance window tasks without a target specified, you cannot supply a value for this option. Instead, the system inserts a placeholder value of 1. This value does not affect the running of your task. 
+     * The maximum number of targets this task can be run for, in parallel.  Although this element is listed as "Required: No", a value can be omitted only when you are registering or updating a targetless task You must provide a value in all other cases. For maintenance window tasks without a target specified, you can't supply a value for this option. Instead, the system inserts a placeholder value of 1. This value doesn't affect the running of your task. 
      */
     MaxConcurrency?: MaxConcurrency;
     /**
-     * The maximum number of errors allowed before this task stops being scheduled.  For maintenance window tasks without a target specified, you cannot supply a value for this option. Instead, the system inserts a placeholder value of 1. This value does not affect the running of your task. 
+     * The maximum number of errors allowed before this task stops being scheduled.  Although this element is listed as "Required: No", a value can be omitted only when you are registering or updating a targetless task You must provide a value in all other cases. For maintenance window tasks without a target specified, you can't supply a value for this option. Instead, the system inserts a placeholder value of 1. This value doesn't affect the running of your task. 
      */
     MaxErrors?: MaxErrors;
     /**
-     * A structure containing information about an S3 bucket to write instance-level logs to.    LoggingInfo has been deprecated. To specify an S3 bucket to contain logs, instead use the OutputS3BucketName and OutputS3KeyPrefix options in the TaskInvocationParameters structure. For information about how Systems Manager handles these options for the supported maintenance window task types, see MaintenanceWindowTaskInvocationParameters. 
+     * A structure containing information about an Amazon Simple Storage Service (Amazon S3) bucket to write managed node-level logs to.    LoggingInfo has been deprecated. To specify an Amazon Simple Storage Service (Amazon S3) bucket to contain logs, instead use the OutputS3BucketName and OutputS3KeyPrefix options in the TaskInvocationParameters structure. For information about how Amazon Web Services Systems Manager handles these options for the supported maintenance window task types, see MaintenanceWindowTaskInvocationParameters. 
      */
     LoggingInfo?: LoggingInfo;
     /**
@@ -7837,6 +8063,10 @@ declare namespace SSM {
      * User-provided idempotency token.
      */
     ClientToken?: ClientToken;
+    /**
+     * Indicates whether tasks should continue to run after the cutoff time specified in the maintenance windows is reached.     CONTINUE_TASK: When the cutoff time is reached, any tasks that are running continue. The default value.    CANCEL_TASK:   For Automation, Lambda, Step Functions tasks: When the cutoff time is reached, any task invocations that are already running continue, but no new task invocations are started.   For Run Command tasks: When the cutoff time is reached, the system sends a CancelCommand operation that attempts to cancel the command associated with the task. However, there is no guarantee that the command will be terminated and the underlying process stopped.   The status for tasks that are not completed is TIMED_OUT.  
+     */
+    CutoffBehavior?: MaintenanceWindowTaskCutoffBehavior;
   }
   export interface RegisterTaskWithMaintenanceWindowResult {
     /**
@@ -7845,6 +8075,19 @@ declare namespace SSM {
     WindowTaskId?: MaintenanceWindowTaskId;
   }
   export type RegistrationLimit = number;
+  export interface RegistrationMetadataItem {
+    /**
+     * Reserved for internal use.
+     */
+    Key: RegistrationMetadataKey;
+    /**
+     * Reserved for internal use.
+     */
+    Value: RegistrationMetadataValue;
+  }
+  export type RegistrationMetadataKey = string;
+  export type RegistrationMetadataList = RegistrationMetadataItem[];
+  export type RegistrationMetadataValue = string;
   export type RegistrationsCount = number;
   export interface RelatedOpsItem {
     /**
@@ -7856,11 +8099,11 @@ declare namespace SSM {
   export type RemainingCount = number;
   export interface RemoveTagsFromResourceRequest {
     /**
-     * The type of resource from which you want to remove a tag.  The ManagedInstance type for this API action is only for on-premises managed instances. Specify the name of the managed instance in the following format: mi-ID_number. For example, mi-1a2b3c4d5e6f. 
+     * The type of resource from which you want to remove a tag.  The ManagedInstance type for this API operation is only for on-premises managed nodes. Specify the name of the managed node in the following format: mi-ID_number . For example, mi-1a2b3c4d5e6f. 
      */
     ResourceType: ResourceTypeForTagging;
     /**
-     * The ID of the resource from which you want to remove tags. For example: ManagedInstance: mi-012345abcde MaintenanceWindow: mw-012345abcde PatchBaseline: pb-012345abcde OpsMetadata object: ResourceID for tagging is created from the Amazon Resource Name (ARN) for the object. Specifically, ResourceID is created from the strings that come after the word opsmetadata in the ARN. For example, an OpsMetadata object with an ARN of arn:aws:ssm:us-east-2:1234567890:opsmetadata/aws/ssm/MyGroup/appmanager has a ResourceID of either aws/ssm/MyGroup/appmanager or /aws/ssm/MyGroup/appmanager. For the Document and Parameter values, use the name of the resource.  The ManagedInstance type for this API action is only for on-premises managed instances. Specify the name of the managed instance in the following format: mi-ID_number. For example, mi-1a2b3c4d5e6f. 
+     * The ID of the resource from which you want to remove tags. For example: ManagedInstance: mi-012345abcde MaintenanceWindow: mw-012345abcde PatchBaseline: pb-012345abcde OpsMetadata object: ResourceID for tagging is created from the Amazon Resource Name (ARN) for the object. Specifically, ResourceID is created from the strings that come after the word opsmetadata in the ARN. For example, an OpsMetadata object with an ARN of arn:aws:ssm:us-east-2:1234567890:opsmetadata/aws/ssm/MyGroup/appmanager has a ResourceID of either aws/ssm/MyGroup/appmanager or /aws/ssm/MyGroup/appmanager. For the Document and Parameter values, use the name of the resource.  The ManagedInstance type for this API operation is only for on-premises managed nodes. Specify the name of the managed node in the following format: mi-ID_number. For example, mi-1a2b3c4d5e6f. 
      */
     ResourceId: ResourceId;
     /**
@@ -7872,13 +8115,13 @@ declare namespace SSM {
   }
   export interface ResetServiceSettingRequest {
     /**
-     * The Amazon Resource Name (ARN) of the service setting to reset. The setting ID can be /ssm/automation/customer-script-log-destination, /ssm/automation/customer-script-log-group-name, /ssm/parameter-store/default-parameter-tier, /ssm/parameter-store/high-throughput-enabled, or /ssm/managed-instance/activation-tier. For example, arn:aws:ssm:us-east-1:111122223333:servicesetting/ssm/parameter-store/high-throughput-enabled.
+     * The Amazon Resource Name (ARN) of the service setting to reset. The setting ID can be one of the following.    /ssm/automation/customer-script-log-destination     /ssm/automation/customer-script-log-group-name     /ssm/documents/console/public-sharing-permission     /ssm/parameter-store/default-parameter-tier     /ssm/parameter-store/high-throughput-enabled     /ssm/managed-instance/activation-tier   
      */
     SettingId: ServiceSettingId;
   }
   export interface ResetServiceSettingResult {
     /**
-     * The current, effective service setting after calling the ResetServiceSetting API action.
+     * The current, effective service setting after calling the ResetServiceSetting API operation.
      */
     ServiceSetting?: ServiceSetting;
   }
@@ -7932,11 +8175,11 @@ declare namespace SSM {
   export type ResourceDataSyncAWSKMSKeyARN = string;
   export interface ResourceDataSyncAwsOrganizationsSource {
     /**
-     * If an AWS Organization is present, this is either OrganizationalUnits or EntireOrganization. For OrganizationalUnits, the data is aggregated from a set of organization units. For EntireOrganization, the data is aggregated from the entire AWS Organization. 
+     * If an Amazon Web Services organization is present, this is either OrganizationalUnits or EntireOrganization. For OrganizationalUnits, the data is aggregated from a set of organization units. For EntireOrganization, the data is aggregated from the entire Amazon Web Services organization.
      */
     OrganizationSourceType: ResourceDataSyncOrganizationSourceType;
     /**
-     * The AWS Organizations organization units included in the sync.
+     * The Organizations organization units included in the sync.
      */
     OrganizationalUnits?: ResourceDataSyncOrganizationalUnitList;
   }
@@ -7952,11 +8195,11 @@ declare namespace SSM {
   export type ResourceDataSyncIncludeFutureRegions = boolean;
   export interface ResourceDataSyncItem {
     /**
-     * The name of the Resource Data Sync.
+     * The name of the resource data sync.
      */
     SyncName?: ResourceDataSyncName;
     /**
-     * The type of resource data sync. If SyncType is SyncToDestination, then the resource data sync synchronizes data to an S3 bucket. If the SyncType is SyncFromSource then the resource data sync synchronizes data from AWS Organizations or from multiple AWS Regions.
+     * The type of resource data sync. If SyncType is SyncToDestination, then the resource data sync synchronizes data to an S3 bucket. If the SyncType is SyncFromSource then the resource data sync synchronizes data from Organizations or from multiple Amazon Web Services Regions.
      */
     SyncType?: ResourceDataSyncType;
     /**
@@ -7998,7 +8241,7 @@ declare namespace SSM {
   export type ResourceDataSyncOrganizationSourceType = string;
   export interface ResourceDataSyncOrganizationalUnit {
     /**
-     * The AWS Organization unit ID data source for the sync.
+     * The Organizations unit ID data source for the sync.
      */
     OrganizationalUnitId?: ResourceDataSyncOrganizationalUnitId;
   }
@@ -8019,7 +8262,7 @@ declare namespace SSM {
      */
     SyncFormat: ResourceDataSyncS3Format;
     /**
-     * The AWS Region with the S3 bucket targeted by the Resource Data Sync.
+     * The Amazon Web Services Region with the S3 bucket targeted by the resource data sync.
      */
     Region: ResourceDataSyncS3Region;
     /**
@@ -8036,23 +8279,23 @@ declare namespace SSM {
   export type ResourceDataSyncS3Region = string;
   export interface ResourceDataSyncSource {
     /**
-     * The type of data source for the resource data sync. SourceType is either AwsOrganizations (if an organization is present in AWS Organizations) or singleAccountMultiRegions.
+     * The type of data source for the resource data sync. SourceType is either AwsOrganizations (if an organization is present in Organizations) or SingleAccountMultiRegions.
      */
     SourceType: ResourceDataSyncSourceType;
     /**
-     * Information about the AwsOrganizationsSource resource data sync source. A sync source of this type can synchronize data from AWS Organizations.
+     * Information about the AwsOrganizationsSource resource data sync source. A sync source of this type can synchronize data from Organizations.
      */
     AwsOrganizationsSource?: ResourceDataSyncAwsOrganizationsSource;
     /**
-     * The SyncSource AWS Regions included in the resource data sync.
+     * The SyncSource Amazon Web Services Regions included in the resource data sync.
      */
     SourceRegions: ResourceDataSyncSourceRegionList;
     /**
-     * Whether to automatically synchronize and aggregate data from new AWS Regions when those Regions come online.
+     * Whether to automatically synchronize and aggregate data from new Amazon Web Services Regions when those Regions come online.
      */
     IncludeFutureRegions?: ResourceDataSyncIncludeFutureRegions;
     /**
-     * When you create a resource data sync, if you choose one of the AWS Organizations options, then Systems Manager automatically enables all OpsData sources in the selected AWS Regions for all AWS accounts in your organization (or in the selected organization units). For more information, see About multiple account and Region resource data syncs in the AWS Systems Manager User Guide.
+     * When you create a resource data sync, if you choose one of the Organizations options, then Systems Manager automatically enables all OpsData sources in the selected Amazon Web Services Regions for all Amazon Web Services accounts in your organization (or in the selected organization units). For more information, see About multiple account and Region resource data syncs in the Amazon Web Services Systems Manager User Guide.
      */
     EnableAllOpsDataSources?: ResourceDataSyncEnableAllOpsDataSources;
   }
@@ -8061,7 +8304,7 @@ declare namespace SSM {
   export type ResourceDataSyncSourceType = string;
   export interface ResourceDataSyncSourceWithState {
     /**
-     * The type of data source for the resource data sync. SourceType is either AwsOrganizations (if an organization is present in AWS Organizations) or singleAccountMultiRegions.
+     * The type of data source for the resource data sync. SourceType is either AwsOrganizations (if an organization is present in Organizations) or singleAccountMultiRegions.
      */
     SourceType?: ResourceDataSyncSourceType;
     /**
@@ -8069,19 +8312,19 @@ declare namespace SSM {
      */
     AwsOrganizationsSource?: ResourceDataSyncAwsOrganizationsSource;
     /**
-     * The SyncSource AWS Regions included in the resource data sync.
+     * The SyncSource Amazon Web Services Regions included in the resource data sync.
      */
     SourceRegions?: ResourceDataSyncSourceRegionList;
     /**
-     * Whether to automatically synchronize and aggregate data from new AWS Regions when those Regions come online.
+     * Whether to automatically synchronize and aggregate data from new Amazon Web Services Regions when those Regions come online.
      */
     IncludeFutureRegions?: ResourceDataSyncIncludeFutureRegions;
     /**
-     * The data type name for including resource data sync state. There are four sync states:  OrganizationNotExists: Your organization doesn't exist.  NoPermissions: The system can't locate the service-linked role. This role is automatically created when a user creates a resource data sync in Explorer.  InvalidOrganizationalUnit: You specified or selected an invalid unit in the resource data sync configuration.  TrustedAccessDisabled: You disabled Systems Manager access in the organization in AWS Organizations.
+     * The data type name for including resource data sync state. There are four sync states:  OrganizationNotExists: Your organization doesn't exist.  NoPermissions: The system can't locate the service-linked role. This role is automatically created when a user creates a resource data sync in Explorer.  InvalidOrganizationalUnit: You specified or selected an invalid unit in the resource data sync configuration.  TrustedAccessDisabled: You disabled Systems Manager access in the organization in Organizations.
      */
     State?: ResourceDataSyncState;
     /**
-     * When you create a resource data sync, if you choose one of the AWS Organizations options, then Systems Manager automatically enables all OpsData sources in the selected AWS Regions for all AWS accounts in your organization (or in the selected organization units). For more information, see About multiple account and Region resource data syncs in the AWS Systems Manager User Guide.
+     * When you create a resource data sync, if you choose one of the Organizations options, then Systems Manager automatically enables all OpsData sources in the selected Amazon Web Services Regions for all Amazon Web Services accounts in your organization (or in the selected organization units). For more information, see About multiple account and Region resource data syncs in the Amazon Web Services Systems Manager User Guide.
      */
     EnableAllOpsDataSources?: ResourceDataSyncEnableAllOpsDataSources;
   }
@@ -8110,11 +8353,11 @@ declare namespace SSM {
      */
     SessionId?: SessionId;
     /**
-     * An encrypted token value containing session and caller information. Used to authenticate the connection to the instance.
+     * An encrypted token value containing session and caller information. Used to authenticate the connection to the managed node.
      */
     TokenValue?: TokenValue;
     /**
-     * A URL back to SSM Agent on the instance that the Session Manager client uses to send commands and receive output from the instance. Format: wss://ssmmessages.region.amazonaws.com/v1/data-channel/session-id?stream=(input|output).  region represents the Region identifier for an AWS Region supported by AWS Systems Manager, such as us-east-2 for the US East (Ohio) Region. For a list of supported region values, see the Region column in Systems Manager service endpoints in the AWS General Reference.  session-id represents the ID of a Session Manager session, such as 1a2b3c4dEXAMPLE.
+     * A URL back to SSM Agent on the managed node that the Session Manager client uses to send commands and receive output from the managed node. Format: wss://ssmmessages.region.amazonaws.com/v1/data-channel/session-id?stream=(input|output).  region represents the Region identifier for an Amazon Web Services Region supported by Amazon Web Services Systems Manager, such as us-east-2 for the US East (Ohio) Region. For a list of supported region values, see the Region column in Systems Manager service endpoints in the Amazon Web Services General Reference.  session-id represents the ID of a Session Manager session, such as 1a2b3c4dEXAMPLE.
      */
     StreamUrl?: StreamUrl;
   }
@@ -8137,11 +8380,11 @@ declare namespace SSM {
   export type Reviewer = string;
   export interface Runbook {
     /**
-     * The name of the Automation runbook (Automation document) used in a runbook workflow.
+     * The name of the Automation runbook used in a runbook workflow.
      */
     DocumentName: DocumentARN;
     /**
-     * The version of the Automation runbook (Automation document) used in a runbook workflow.
+     * The version of the Automation runbook used in a runbook workflow.
      */
     DocumentVersion?: DocumentVersion;
     /**
@@ -8153,7 +8396,7 @@ declare namespace SSM {
      */
     TargetParameterName?: AutomationParameterKey;
     /**
-     * A key-value mapping to target resources that the Runbook operation performs tasks on. Required if you specify TargetParameterName.
+     * A key-value mapping to target resources that the runbook operation performs tasks on. Required if you specify TargetParameterName.
      */
     Targets?: Targets;
     /**
@@ -8165,7 +8408,7 @@ declare namespace SSM {
      */
     MaxErrors?: MaxErrors;
     /**
-     * Information about the AWS Regions and accounts targeted by the current Runbook operation.
+     * Information about the Amazon Web Services Regions and Amazon Web Services accounts targeted by the current Runbook operation.
      */
     TargetLocations?: TargetLocations;
   }
@@ -8174,7 +8417,7 @@ declare namespace SSM {
   export type S3KeyPrefix = string;
   export interface S3OutputLocation {
     /**
-     * (Deprecated) You can no longer specify this parameter. The system ignores it. Instead, Systems Manager automatically determines the Region of the S3 bucket.
+     * The Amazon Web Services Region of the S3 bucket.
      */
     OutputS3Region?: S3Region;
     /**
@@ -8227,19 +8470,19 @@ declare namespace SSM {
   }
   export interface SendCommandRequest {
     /**
-     * The IDs of the instances where the command should run. Specifying instance IDs is most useful when you are targeting a limited number of instances, though you can specify up to 50 IDs. To target a larger number of instances, or if you prefer not to list individual instance IDs, we recommend using the Targets option instead. Using Targets, which accepts tag key-value pairs to identify the instances to send commands to, you can a send command to tens, hundreds, or thousands of instances at once. For more information about how to use targets, see Using targets and rate controls to send commands to a fleet in the AWS Systems Manager User Guide.
+     * The IDs of the managed nodes where the command should run. Specifying managed node IDs is most useful when you are targeting a limited number of managed nodes, though you can specify up to 50 IDs. To target a larger number of managed nodes, or if you prefer not to list individual node IDs, we recommend using the Targets option instead. Using Targets, which accepts tag key-value pairs to identify the managed nodes to send commands to, you can a send command to tens, hundreds, or thousands of nodes at once. For more information about how to use targets, see Using targets and rate controls to send commands to a fleet in the Amazon Web Services Systems Manager User Guide.
      */
     InstanceIds?: InstanceIdList;
     /**
-     * An array of search criteria that targets instances using a Key,Value combination that you specify. Specifying targets is most useful when you want to send a command to a large number of instances at once. Using Targets, which accepts tag key-value pairs to identify instances, you can send a command to tens, hundreds, or thousands of instances at once. To send a command to a smaller number of instances, you can use the InstanceIds option instead. For more information about how to use targets, see Sending commands to a fleet in the AWS Systems Manager User Guide.
+     * An array of search criteria that targets managed nodes using a Key,Value combination that you specify. Specifying targets is most useful when you want to send a command to a large number of managed nodes at once. Using Targets, which accepts tag key-value pairs to identify managed nodes, you can send a command to tens, hundreds, or thousands of nodes at once. To send a command to a smaller number of managed nodes, you can use the InstanceIds option instead. For more information about how to use targets, see Sending commands to a fleet in the Amazon Web Services Systems Manager User Guide.
      */
     Targets?: Targets;
     /**
-     * The name of the Systems Manager document to run. This can be a public document or a custom document. To run a shared document belonging to another account, specify the document ARN. For more information about how to use shared documents, see Using shared SSM documents in the AWS Systems Manager User Guide.
+     * The name of the Amazon Web Services Systems Manager document (SSM document) to run. This can be a public document or a custom document. To run a shared document belonging to another account, specify the document Amazon Resource Name (ARN). For more information about how to use shared documents, see Using shared SSM documents in the Amazon Web Services Systems Manager User Guide.  If you specify a document name or ARN that hasn't been shared with your account, you receive an InvalidDocument error.  
      */
     DocumentName: DocumentARN;
     /**
-     * The SSM document version to use in the request. You can specify $DEFAULT, $LATEST, or a specific version number. If you run commands by using the AWS CLI, then you must escape the first two options by using a backslash. If you specify a version number, then you don't need to use the backslash. For example: --document-version "\$DEFAULT" --document-version "\$LATEST" --document-version "3"
+     * The SSM document version to use in the request. You can specify $DEFAULT, $LATEST, or a specific version number. If you run commands by using the Command Line Interface (Amazon Web Services CLI), then you must escape the first two options by using a backslash. If you specify a version number, then you don't need to use the backslash. For example: --document-version "\$DEFAULT" --document-version "\$LATEST" --document-version "3"
      */
     DocumentVersion?: DocumentVersion;
     /**
@@ -8251,7 +8494,7 @@ declare namespace SSM {
      */
     DocumentHashType?: DocumentHashType;
     /**
-     * If this time is reached and the command has not already started running, it will not run.
+     * If this time is reached and the command hasn't already started running, it won't run.
      */
     TimeoutSeconds?: TimeoutSeconds;
     /**
@@ -8263,7 +8506,7 @@ declare namespace SSM {
      */
     Parameters?: Parameters;
     /**
-     * (Deprecated) You can no longer specify this parameter. The system ignores it. Instead, Systems Manager automatically determines the Region of the S3 bucket.
+     * (Deprecated) You can no longer specify this parameter. The system ignores it. Instead, Systems Manager automatically determines the Amazon Web Services Region of the S3 bucket.
      */
     OutputS3Region?: S3Region;
     /**
@@ -8275,15 +8518,15 @@ declare namespace SSM {
      */
     OutputS3KeyPrefix?: S3KeyPrefix;
     /**
-     * (Optional) The maximum number of instances that are allowed to run the command at the same time. You can specify a number such as 10 or a percentage such as 10%. The default value is 50. For more information about how to use MaxConcurrency, see Using concurrency controls in the AWS Systems Manager User Guide.
+     * (Optional) The maximum number of managed nodes that are allowed to run the command at the same time. You can specify a number such as 10 or a percentage such as 10%. The default value is 50. For more information about how to use MaxConcurrency, see Using concurrency controls in the Amazon Web Services Systems Manager User Guide.
      */
     MaxConcurrency?: MaxConcurrency;
     /**
-     * The maximum number of errors allowed without the command failing. When the command fails one more time beyond the value of MaxErrors, the systems stops sending the command to additional targets. You can specify a number like 10 or a percentage like 10%. The default value is 0. For more information about how to use MaxErrors, see Using error controls in the AWS Systems Manager User Guide.
+     * The maximum number of errors allowed without the command failing. When the command fails one more time beyond the value of MaxErrors, the systems stops sending the command to additional targets. You can specify a number like 10 or a percentage like 10%. The default value is 0. For more information about how to use MaxErrors, see Using error controls in the Amazon Web Services Systems Manager User Guide.
      */
     MaxErrors?: MaxErrors;
     /**
-     * The ARN of the IAM service role to use to publish Amazon Simple Notification Service (Amazon SNS) notifications for Run Command commands.
+     * The ARN of the Identity and Access Management (IAM) service role to use to publish Amazon Simple Notification Service (Amazon SNS) notifications for Run Command commands.
      */
     ServiceRoleArn?: ServiceRole;
     /**
@@ -8291,7 +8534,7 @@ declare namespace SSM {
      */
     NotificationConfig?: NotificationConfig;
     /**
-     * Enables Systems Manager to send Run Command output to Amazon CloudWatch Logs. 
+     * Enables Amazon Web Services Systems Manager to send Run Command output to Amazon CloudWatch Logs. Run Command is a capability of Amazon Web Services Systems Manager.
      */
     CloudWatchOutputConfig?: CloudWatchOutputConfig;
   }
@@ -8324,7 +8567,7 @@ declare namespace SSM {
      */
     ARN?: String;
     /**
-     * The status of the service setting. The value can be Default, Customized or PendingUpdate.   Default: The current setting uses a default value provisioned by the AWS service team.   Customized: The current setting use a custom value specified by the customer.   PendingUpdate: The current setting uses a default or custom value, but a setting change request is pending approval.  
+     * The status of the service setting. The value can be Default, Customized or PendingUpdate.   Default: The current setting uses a default value provisioned by the Amazon Web Services service team.   Customized: The current setting use a custom value specified by the customer.   PendingUpdate: The current setting uses a default or custom value, but a setting change request is pending approval.  
      */
     Status?: String;
   }
@@ -8336,7 +8579,7 @@ declare namespace SSM {
      */
     SessionId?: SessionId;
     /**
-     * The instance that the Session Manager session connected to.
+     * The managed node that the Session Manager session connected to.
      */
     Target?: SessionTarget;
     /**
@@ -8356,9 +8599,13 @@ declare namespace SSM {
      */
     DocumentName?: DocumentName;
     /**
-     * The ID of the AWS user account that started the session.
+     * The ID of the Amazon Web Services user account that started the session.
      */
     Owner?: SessionOwner;
+    /**
+     * The reason for connecting to the instance.
+     */
+    Reason?: SessionReason;
     /**
      * Reserved for future use.
      */
@@ -8367,6 +8614,10 @@ declare namespace SSM {
      * Reserved for future use.
      */
     OutputUrl?: SessionManagerOutputUrl;
+    /**
+     * The maximum duration of a session before it terminates.
+     */
+    MaxSessionDuration?: MaxSessionDuration;
   }
   export type SessionDetails = string;
   export interface SessionFilter {
@@ -8375,7 +8626,7 @@ declare namespace SSM {
      */
     key: SessionFilterKey;
     /**
-     * The filter value. Valid values for each filter key are as follows:   InvokedAfter: Specify a timestamp to limit your results. For example, specify 2018-08-29T00:00:00Z to see sessions that started August 29, 2018, and later.   InvokedBefore: Specify a timestamp to limit your results. For example, specify 2018-08-29T00:00:00Z to see sessions that started before August 29, 2018.   Target: Specify an instance to which session connections have been made.   Owner: Specify an AWS user account to see a list of sessions started by that user.   Status: Specify a valid session status to see a list of all sessions with that status. Status values you can specify include:   Connected   Connecting   Disconnected   Terminated   Terminating   Failed     SessionId: Specify a session ID to return details about the session.  
+     * The filter value. Valid values for each filter key are as follows:   InvokedAfter: Specify a timestamp to limit your results. For example, specify 2018-08-29T00:00:00Z to see sessions that started August 29, 2018, and later.   InvokedBefore: Specify a timestamp to limit your results. For example, specify 2018-08-29T00:00:00Z to see sessions that started before August 29, 2018.   Target: Specify a managed node to which session connections have been made.   Owner: Specify an Amazon Web Services user account to see a list of sessions started by that user.   Status: Specify a valid session status to see a list of all sessions with that status. Status values you can specify include:   Connected   Connecting   Disconnected   Terminated   Terminating   Failed     SessionId: Specify a session ID to return details about the session.  
      */
     value: SessionFilterValue;
   }
@@ -8402,6 +8653,7 @@ declare namespace SSM {
   export type SessionManagerS3OutputUrl = string;
   export type SessionMaxResults = number;
   export type SessionOwner = string;
+  export type SessionReason = string;
   export type SessionState = "Active"|"History"|string;
   export type SessionStatus = "Connected"|"Connecting"|"Disconnected"|"Terminated"|"Terminating"|"Failed"|string;
   export type SessionTarget = string;
@@ -8435,6 +8687,8 @@ declare namespace SSM {
   export type SignalType = "Approve"|"Reject"|"StartStep"|"StopStep"|"Resume"|string;
   export type SnapshotDownloadUrl = string;
   export type SnapshotId = string;
+  export type SourceId = string;
+  export type SourceType = "AWS::EC2::Instance"|"AWS::IoT::Thing"|"AWS::SSM::ManagedInstance"|string;
   export type StandardErrorContent = string;
   export type StandardOutputContent = string;
   export interface StartAssociationsOnceRequest {
@@ -8447,15 +8701,15 @@ declare namespace SSM {
   }
   export interface StartAutomationExecutionRequest {
     /**
-     * The name of the Systems Manager document to run. This can be a public document or a custom document. To run a shared document belonging to another account, specify the document ARN. For more information about how to use shared documents, see Using shared SSM documents in the AWS Systems Manager User Guide.
+     * The name of the SSM document to run. This can be a public document or a custom document. To run a shared document belonging to another account, specify the document ARN. For more information about how to use shared documents, see Using shared SSM documents in the Amazon Web Services Systems Manager User Guide.
      */
     DocumentName: DocumentARN;
     /**
-     * The version of the Automation document to use for this execution.
+     * The version of the Automation runbook to use for this execution.
      */
     DocumentVersion?: DocumentVersion;
     /**
-     * A key-value map of execution parameters, which match the declared parameters in the Automation document.
+     * A key-value map of execution parameters, which match the declared parameters in the Automation runbook.
      */
     Parameters?: AutomationParameterMap;
     /**
@@ -8475,7 +8729,7 @@ declare namespace SSM {
      */
     Targets?: Targets;
     /**
-     * A key-value mapping of document parameters to target resources. Both Targets and TargetMaps cannot be specified together.
+     * A key-value mapping of document parameters to target resources. Both Targets and TargetMaps can't be specified together.
      */
     TargetMaps?: TargetMaps;
     /**
@@ -8487,11 +8741,11 @@ declare namespace SSM {
      */
     MaxErrors?: MaxErrors;
     /**
-     * A location is a combination of AWS Regions and/or AWS accounts where you want to run the Automation. Use this action to start an Automation in multiple Regions and multiple accounts. For more information, see Running Automation workflows in multiple AWS Regions and accounts in the AWS Systems Manager User Guide. 
+     * A location is a combination of Amazon Web Services Regions and/or Amazon Web Services accounts where you want to run the automation. Use this operation to start an automation in multiple Amazon Web Services Regions and multiple Amazon Web Services accounts. For more information, see Running Automation workflows in multiple Amazon Web Services Regions and Amazon Web Services accounts in the Amazon Web Services Systems Manager User Guide. 
      */
     TargetLocations?: TargetLocations;
     /**
-     * Optional metadata that you assign to a resource. You can specify a maximum of five tags for an automation. Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment. For example, you might want to tag an automation to identify an environment or operating system. In this case, you could specify the following key name/value pairs:    Key=environment,Value=test     Key=OS,Value=Windows     To add tags to an existing patch baseline, use the AddTagsToResource action. 
+     * Optional metadata that you assign to a resource. You can specify a maximum of five tags for an automation. Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment. For example, you might want to tag an automation to identify an environment or operating system. In this case, you could specify the following key-value pairs:    Key=environment,Value=test     Key=OS,Value=Windows     To add tags to an existing patch baseline, use the AddTagsToResource operation. 
      */
     Tags?: TagList;
   }
@@ -8527,11 +8781,15 @@ declare namespace SSM {
      */
     ClientToken?: IdempotencyToken;
     /**
-     * Information about the Automation runbooks (Automation documents) that are run during the runbook workflow.  The Automation runbooks specified for the runbook workflow can't run until all required approvals for the change request have been received. 
+     * Indicates whether the change request can be approved automatically without the need for manual approvals. If AutoApprovable is enabled in a change template, then setting AutoApprove to true in StartChangeRequestExecution creates a change request that bypasses approver review.  Change Calendar restrictions are not bypassed in this scenario. If the state of an associated calendar is CLOSED, change freeze approvers must still grant permission for this change request to run. If they don't, the change won't be processed until the calendar state is again OPEN.  
+     */
+    AutoApprove?: Boolean;
+    /**
+     * Information about the Automation runbooks that are run during the runbook workflow.  The Automation runbooks specified for the runbook workflow can't run until all required approvals for the change request have been received. 
      */
     Runbooks: Runbooks;
     /**
-     * Optional metadata that you assign to a resource. You can specify a maximum of five tags for a change request. Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment. For example, you might want to tag a change request to identify an environment or target AWS Region. In this case, you could specify the following key-value pairs:    Key=Environment,Value=Production     Key=Region,Value=us-east-2   
+     * Optional metadata that you assign to a resource. You can specify a maximum of five tags for a change request. Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment. For example, you might want to tag a change request to identify an environment or target Amazon Web Services Region. In this case, you could specify the following key-value pairs:    Key=Environment,Value=Production     Key=Region,Value=us-east-2   
      */
     Tags?: TagList;
     /**
@@ -8551,13 +8809,17 @@ declare namespace SSM {
   }
   export interface StartSessionRequest {
     /**
-     * The instance to connect to for the session.
+     * The managed node to connect to for the session.
      */
     Target: SessionTarget;
     /**
-     * The name of the SSM document to define the parameters and plugin settings for the session. For example, SSM-SessionManagerRunShell. You can call the GetDocument API to verify the document exists before attempting to start a session. If no document name is provided, a shell to the instance is launched by default.
+     * The name of the SSM document to define the parameters and plugin settings for the session. For example, SSM-SessionManagerRunShell. You can call the GetDocument API to verify the document exists before attempting to start a session. If no document name is provided, a shell to the managed node is launched by default.
      */
     DocumentName?: DocumentARN;
+    /**
+     * The reason for connecting to the instance. This value is included in the details for the Amazon CloudWatch Events event created when you start the session.
+     */
+    Reason?: SessionReason;
     /**
      * Reserved for future use.
      */
@@ -8569,11 +8831,11 @@ declare namespace SSM {
      */
     SessionId?: SessionId;
     /**
-     * An encrypted token value containing session and caller information. Used to authenticate the connection to the instance.
+     * An encrypted token value containing session and caller information. Used to authenticate the connection to the managed node.
      */
     TokenValue?: TokenValue;
     /**
-     * A URL back to SSM Agent on the instance that the Session Manager client uses to send commands and receive output from the instance. Format: wss://ssmmessages.region.amazonaws.com/v1/data-channel/session-id?stream=(input|output)   region represents the Region identifier for an AWS Region supported by AWS Systems Manager, such as us-east-2 for the US East (Ohio) Region. For a list of supported region values, see the Region column in Systems Manager service endpoints in the AWS General Reference.  session-id represents the ID of a Session Manager session, such as 1a2b3c4dEXAMPLE.
+     * A URL back to SSM Agent on the managed node that the Session Manager client uses to send commands and receive output from the node. Format: wss://ssmmessages.region.amazonaws.com/v1/data-channel/session-id?stream=(input|output)   region represents the Region identifier for an Amazon Web Services Region supported by Amazon Web Services Systems Manager, such as us-east-2 for the US East (Ohio) Region. For a list of supported region values, see the Region column in Systems Manager service endpoints in the Amazon Web Services General Reference.  session-id represents the ID of a Session Manager session, such as 1a2b3c4dEXAMPLE.
      */
     StreamUrl?: StreamUrl;
   }
@@ -8603,11 +8865,11 @@ declare namespace SSM {
      */
     MaxAttempts?: Integer;
     /**
-     * If a step has begun execution, this contains the time the step started. If the step is in Pending status, this field is not populated.
+     * If a step has begun execution, this contains the time the step started. If the step is in Pending status, this field isn't populated.
      */
     ExecutionStartTime?: DateTime;
     /**
-     * If a step has finished execution, this contains the time the execution ended. If the step has not yet concluded, this field is not populated.
+     * If a step has finished execution, this contains the time the execution ended. If the step hasn't yet concluded, this field isn't populated.
      */
     ExecutionEndTime?: DateTime;
     /**
@@ -8667,7 +8929,7 @@ declare namespace SSM {
      */
     Targets?: Targets;
     /**
-     * The combination of AWS Regions and accounts targeted by the current Automation execution.
+     * The combination of Amazon Web Services Regions and Amazon Web Services accounts targeted by the current Automation execution.
      */
     TargetLocation?: TargetLocation;
   }
@@ -8718,11 +8980,11 @@ declare namespace SSM {
   export type TagValue = string;
   export interface Target {
     /**
-     * User-defined criteria for sending commands that target instances that meet the criteria.
+     * User-defined criteria for sending commands that target managed nodes that meet the criteria.
      */
     Key?: TargetKey;
     /**
-     * User-defined criteria that maps to Key. For example, if you specified tag:ServerRole, you could specify value:WebServer to run a command on instances that include EC2 tags of ServerRole,WebServer.  Depending on the type of Target, the maximum number of values for a Key might be lower than the global maximum of 50.
+     * User-defined criteria that maps to Key. For example, if you specified tag:ServerRole, you could specify value:WebServer to run a command on instances that include EC2 tags of ServerRole,WebServer.  Depending on the type of target, the maximum number of values for a key might be lower than the global maximum of 50.
      */
     Values?: TargetValues;
   }
@@ -8730,15 +8992,15 @@ declare namespace SSM {
   export type TargetKey = string;
   export interface TargetLocation {
     /**
-     * The AWS accounts targeted by the current Automation execution.
+     * The Amazon Web Services accounts targeted by the current Automation execution.
      */
     Accounts?: Accounts;
     /**
-     * The AWS Regions targeted by the current Automation execution.
+     * The Amazon Web Services Regions targeted by the current Automation execution.
      */
     Regions?: Regions;
     /**
-     * The maximum number of AWS accounts and AWS regions allowed to run the Automation concurrently.
+     * The maximum number of Amazon Web Services Regions and Amazon Web Services accounts allowed to run the Automation concurrently.
      */
     TargetLocationMaxConcurrency?: MaxConcurrency;
     /**
@@ -8779,11 +9041,11 @@ declare namespace SSM {
   export type UUID = string;
   export interface UnlabelParameterVersionRequest {
     /**
-     * The parameter name of which you want to delete one or more labels.
+     * The name of the parameter from which you want to delete one or more labels.
      */
     Name: PSParameterName;
     /**
-     * The specific version of the parameter which you want to delete one or more labels from. If it is not present, the call will fail.
+     * The specific version of the parameter which you want to delete one or more labels from. If it isn't present, the call will fail.
      */
     ParameterVersion: PSParameterVersion;
     /**
@@ -8797,7 +9059,7 @@ declare namespace SSM {
      */
     RemovedLabels?: ParameterLabelList;
     /**
-     * The labels that are not attached to the given parameter version.
+     * The labels that aren't attached to the given parameter version.
      */
     InvalidLabels?: ParameterLabelList;
   }
@@ -8807,11 +9069,11 @@ declare namespace SSM {
      */
     AssociationId: AssociationId;
     /**
-     * The parameters you want to update for the association. If you create a parameter using Parameter Store, you can reference the parameter using {{ssm:parameter-name}}
+     * The parameters you want to update for the association. If you create a parameter using Parameter Store, a capability of Amazon Web Services Systems Manager, you can reference the parameter using {{ssm:parameter-name}}.
      */
     Parameters?: Parameters;
     /**
-     * The document version you want update for the association. 
+     * The document version you want update for the association.   State Manager doesn't support running associations that use a new version of a document if that document is shared from another account. State Manager always runs the default version of a document if shared from another account, even though the Systems Manager console shows that a new version was processed. If you want to run an association using a new version of a document shared form another account, you must set the document version to default. 
      */
     DocumentVersion?: DocumentVersion;
     /**
@@ -8823,7 +9085,7 @@ declare namespace SSM {
      */
     OutputLocation?: InstanceAssociationOutputLocation;
     /**
-     * The name of the SSM document that contains the configuration information for the instance. You can specify Command or Automation documents. You can specify AWS-predefined documents, documents you created, or a document that is shared with you from another account. For SSM documents that are shared with you from other AWS accounts, you must specify the complete SSM document ARN, in the following format:  arn:aws:ssm:region:account-id:document/document-name   For example:  arn:aws:ssm:us-east-2:12345678912:document/My-Shared-Document  For AWS-predefined documents and SSM documents you created in your account, you only need to specify the document name. For example, AWS-ApplyPatchBaseline or My-Document.
+     * The name of the SSM Command document or Automation runbook that contains the configuration information for the managed node. You can specify Amazon Web Services-predefined documents, documents you created, or a document that is shared with you from another account. For Systems Manager document (SSM document) that are shared with you from other Amazon Web Services accounts, you must specify the complete SSM document ARN, in the following format:  arn:aws:ssm:region:account-id:document/document-name   For example:  arn:aws:ssm:us-east-2:12345678912:document/My-Shared-Document  For Amazon Web Services-predefined documents and SSM documents you created in your account, you only need to specify the document name. For example, AWS-ApplyPatchBaseline or My-Document.
      */
     Name?: DocumentARN;
     /**
@@ -8839,15 +9101,15 @@ declare namespace SSM {
      */
     AssociationVersion?: AssociationVersion;
     /**
-     * Specify the target for the association. This target is required for associations that use an Automation document and target resources by using rate controls.
+     * Choose the parameter that will define how your automation will branch out. This target is required for associations that use an Automation runbook and target resources by using rate controls. Automation is a capability of Amazon Web Services Systems Manager.
      */
     AutomationTargetParameterName?: AutomationTargetParameterName;
     /**
-     * The number of errors that are allowed before the system stops sending requests to run the association on additional targets. You can specify either an absolute number of errors, for example 10, or a percentage of the target set, for example 10%. If you specify 3, for example, the system stops sending requests when the fourth error is received. If you specify 0, then the system stops sending requests after the first error is returned. If you run an association on 50 instances and set MaxError to 10%, then the system stops sending the request when the sixth error is received. Executions that are already running an association when MaxErrors is reached are allowed to complete, but some of these executions may fail as well. If you need to ensure that there won't be more than max-errors failed executions, set MaxConcurrency to 1 so that executions proceed one at a time.
+     * The number of errors that are allowed before the system stops sending requests to run the association on additional targets. You can specify either an absolute number of errors, for example 10, or a percentage of the target set, for example 10%. If you specify 3, for example, the system stops sending requests when the fourth error is received. If you specify 0, then the system stops sending requests after the first error is returned. If you run an association on 50 managed nodes and set MaxError to 10%, then the system stops sending the request when the sixth error is received. Executions that are already running an association when MaxErrors is reached are allowed to complete, but some of these executions may fail as well. If you need to ensure that there won't be more than max-errors failed executions, set MaxConcurrency to 1 so that executions proceed one at a time.
      */
     MaxErrors?: MaxErrors;
     /**
-     * The maximum number of targets allowed to run the association at the same time. You can specify a number, for example 10, or a percentage of the target set, for example 10%. The default value is 100%, which means all targets run the association at the same time. If a new instance starts and attempts to run an association while Systems Manager is running MaxConcurrency associations, the association is allowed to run. During the next association interval, the new instance will process its association within the limit specified for MaxConcurrency.
+     * The maximum number of targets allowed to run the association at the same time. You can specify a number, for example 10, or a percentage of the target set, for example 10%. The default value is 100%, which means all targets run the association at the same time. If a new managed node starts and attempts to run an association while Systems Manager is running MaxConcurrency associations, the association is allowed to run. During the next association interval, the new managed node will process its association within the limit specified for MaxConcurrency.
      */
     MaxConcurrency?: MaxConcurrency;
     /**
@@ -8855,15 +9117,19 @@ declare namespace SSM {
      */
     ComplianceSeverity?: AssociationComplianceSeverity;
     /**
-     * The mode for generating association compliance. You can specify AUTO or MANUAL. In AUTO mode, the system uses the status of the association execution to determine the compliance status. If the association execution runs successfully, then the association is COMPLIANT. If the association execution doesn't run successfully, the association is NON-COMPLIANT. In MANUAL mode, you must specify the AssociationId as a parameter for the PutComplianceItems API action. In this case, compliance data is not managed by State Manager. It is managed by your direct call to the PutComplianceItems API action. By default, all associations use AUTO mode.
+     * The mode for generating association compliance. You can specify AUTO or MANUAL. In AUTO mode, the system uses the status of the association execution to determine the compliance status. If the association execution runs successfully, then the association is COMPLIANT. If the association execution doesn't run successfully, the association is NON-COMPLIANT. In MANUAL mode, you must specify the AssociationId as a parameter for the PutComplianceItems API operation. In this case, compliance data isn't managed by State Manager, a capability of Amazon Web Services Systems Manager. It is managed by your direct call to the PutComplianceItems API operation. By default, all associations use AUTO mode.
      */
     SyncCompliance?: AssociationSyncCompliance;
     /**
-     * By default, when you update an association, the system runs it immediately after it is updated and then according to the schedule you specified. Specify this option if you don't want an association to run immediately after you update it. This parameter is not supported for rate expressions. Also, if you specified this option when you created the association, you can reset it. To do so, specify the no-apply-only-at-cron-interval parameter when you update the association from the command line. This parameter forces the association to run immediately after updating it and according to the interval specified.
+     * By default, when you update an association, the system runs it immediately after it is updated and then according to the schedule you specified. Specify this option if you don't want an association to run immediately after you update it. This parameter isn't supported for rate expressions. Also, if you specified this option when you created the association, you can reset it. To do so, specify the no-apply-only-at-cron-interval parameter when you update the association from the command line. This parameter forces the association to run immediately after updating it and according to the interval specified.
      */
     ApplyOnlyAtCronInterval?: ApplyOnlyAtCronInterval;
     /**
-     * A location is a combination of AWS Regions and AWS accounts where you want to run the association. Use this action to update an association in multiple Regions and multiple accounts.
+     * The names or Amazon Resource Names (ARNs) of the Change Calendar type documents you want to gate your associations under. The associations only run when that change calendar is open. For more information, see Amazon Web Services Systems Manager Change Calendar.
+     */
+    CalendarNames?: CalendarNameOrARNList;
+    /**
+     * A location is a combination of Amazon Web Services Regions and Amazon Web Services accounts where you want to run the association. Use this action to update an association in multiple Regions and multiple accounts.
      */
     TargetLocations?: TargetLocations;
   }
@@ -8875,11 +9141,11 @@ declare namespace SSM {
   }
   export interface UpdateAssociationStatusRequest {
     /**
-     * The name of the Systems Manager document.
+     * The name of the SSM document.
      */
     Name: DocumentARN;
     /**
-     * The ID of the instance.
+     * The managed node ID.
      */
     InstanceId: InstanceId;
     /**
@@ -8911,15 +9177,15 @@ declare namespace SSM {
   }
   export interface UpdateDocumentMetadataRequest {
     /**
-     * The name of the document for which a version is to be updated.
+     * The name of the change template for which a version's metadata is to be updated.
      */
     Name: DocumentName;
     /**
-     * The version of a document to update.
+     * The version of a change template in which to update approval metadata.
      */
     DocumentVersion?: DocumentVersion;
     /**
-     * The document review details to update.
+     * The change template review details to update.
      */
     DocumentReviews: DocumentReviews;
   }
@@ -8931,15 +9197,19 @@ declare namespace SSM {
      */
     Content: DocumentContent;
     /**
-     * A list of key and value pairs that describe attachments to a version of a document.
+     * A list of key-value pairs that describe attachments to a version of a document.
      */
     Attachments?: AttachmentsSourceList;
     /**
-     * The name of the document that you want to update.
+     * The name of the SSM document that you want to update.
      */
     Name: DocumentName;
     /**
-     * An optional field specifying the version of the artifact you are updating with the document. For example, "Release 12, Update 6". This value is unique across all versions of a document, and cannot be changed.
+     * The friendly name of the SSM document that you want to update. This value can differ for each version of the document. If you don't specify a value for this parameter in your request, the existing value is applied to the new document version.
+     */
+    DisplayName?: DocumentDisplayName;
+    /**
+     * An optional field specifying the version of the artifact you are updating with the document. For example, "Release 12, Update 6". This value is unique across all versions of a document, and can't be changed.
      */
     VersionName?: DocumentVersionName;
     /**
@@ -8975,7 +9245,7 @@ declare namespace SSM {
      */
     Description?: MaintenanceWindowDescription;
     /**
-     * The time zone that the scheduled maintenance window executions are based on, in Internet Assigned Numbers Authority (IANA) format. For example: "America/Los_Angeles", "UTC", or "Asia/Seoul". For more information, see the Time Zone Database on the IANA website.
+     * The date and time, in ISO-8601 Extended format, for when you want the maintenance window to become active. StartDate allows you to delay activation of the maintenance window until the specified future date.
      */
     StartDate?: MaintenanceWindowStringDateTime;
     /**
@@ -8991,7 +9261,7 @@ declare namespace SSM {
      */
     ScheduleTimezone?: MaintenanceWindowTimezone;
     /**
-     * The number of days to wait after the date and time specified by a CRON expression before running the maintenance window. For example, the following cron expression schedules a maintenance window to run the third Tuesday of every month at 11:30 PM.  cron(30 23 ? * TUE#3 *)  If the schedule offset is 2, the maintenance window won't run until two days later.
+     * The number of days to wait after the date and time specified by a cron expression before running the maintenance window. For example, the following cron expression schedules a maintenance window to run the third Tuesday of every month at 11:30 PM.  cron(30 23 ? * TUE#3 *)  If the schedule offset is 2, the maintenance window won't run until two days later.
      */
     ScheduleOffset?: MaintenanceWindowOffset;
     /**
@@ -8999,7 +9269,7 @@ declare namespace SSM {
      */
     Duration?: MaintenanceWindowDurationHours;
     /**
-     * The number of hours before the end of the maintenance window that Systems Manager stops scheduling new tasks for execution.
+     * The number of hours before the end of the maintenance window that Amazon Web Services Systems Manager stops scheduling new tasks for execution.
      */
     Cutoff?: MaintenanceWindowCutoff;
     /**
@@ -9011,7 +9281,7 @@ declare namespace SSM {
      */
     Enabled?: MaintenanceWindowEnabled;
     /**
-     * If True, then all fields that are required by the CreateMaintenanceWindow action are also required for this API request. Optional fields that are not specified are set to null. 
+     * If True, then all fields that are required by the CreateMaintenanceWindow operation are also required for this API request. Optional fields that aren't specified are set to null. 
      */
     Replace?: Boolean;
   }
@@ -9029,11 +9299,11 @@ declare namespace SSM {
      */
     Description?: MaintenanceWindowDescription;
     /**
-     * The date and time, in ISO-8601 Extended format, for when the maintenance window is scheduled to become active. The maintenance window will not run before this specified time.
+     * The date and time, in ISO-8601 Extended format, for when the maintenance window is scheduled to become active. The maintenance window won't run before this specified time.
      */
     StartDate?: MaintenanceWindowStringDateTime;
     /**
-     * The date and time, in ISO-8601 Extended format, for when the maintenance window is scheduled to become inactive. The maintenance window will not run after this specified time.
+     * The date and time, in ISO-8601 Extended format, for when the maintenance window is scheduled to become inactive. The maintenance window won't run after this specified time.
      */
     EndDate?: MaintenanceWindowStringDateTime;
     /**
@@ -9045,7 +9315,7 @@ declare namespace SSM {
      */
     ScheduleTimezone?: MaintenanceWindowTimezone;
     /**
-     * The number of days to wait to run a maintenance window after the scheduled CRON expression date and time.
+     * The number of days to wait to run a maintenance window after the scheduled cron expression date and time.
      */
     ScheduleOffset?: MaintenanceWindowOffset;
     /**
@@ -9053,7 +9323,7 @@ declare namespace SSM {
      */
     Duration?: MaintenanceWindowDurationHours;
     /**
-     * The number of hours before the end of the maintenance window that Systems Manager stops scheduling new tasks for execution.
+     * The number of hours before the end of the maintenance window that Amazon Web Services Systems Manager stops scheduling new tasks for execution.
      */
     Cutoff?: MaintenanceWindowCutoff;
     /**
@@ -9079,7 +9349,7 @@ declare namespace SSM {
      */
     Targets?: Targets;
     /**
-     * User-provided value that will be included in any CloudWatch events raised while running tasks for these targets in this maintenance window.
+     * User-provided value that will be included in any Amazon CloudWatch Events events raised while running tasks for these targets in this maintenance window.
      */
     OwnerInformation?: OwnerInformation;
     /**
@@ -9091,7 +9361,7 @@ declare namespace SSM {
      */
     Description?: MaintenanceWindowDescription;
     /**
-     * If True, then all fields that are required by the RegisterTargetWithMaintenanceWindow action are also required for this API request. Optional fields that are not specified are set to null.
+     * If True, then all fields that are required by the RegisterTargetWithMaintenanceWindow operation are also required for this API request. Optional fields that aren't specified are set to null.
      */
     Replace?: Boolean;
   }
@@ -9131,7 +9401,7 @@ declare namespace SSM {
      */
     WindowTaskId: MaintenanceWindowTaskId;
     /**
-     * The targets (either instances or tags) to modify. Instances are specified using Key=instanceids,Values=instanceID_1,instanceID_2. Tags are specified using Key=tag_name,Values=tag_value.   One or more targets must be specified for maintenance window Run Command-type tasks. Depending on the task, targets are optional for other maintenance window task types (Automation, AWS Lambda, and AWS Step Functions). For more information about running tasks that do not specify targets, see Registering maintenance window tasks without targets in the AWS Systems Manager User Guide. 
+     * The targets (either managed nodes or tags) to modify. Managed nodes are specified using the format Key=instanceids,Values=instanceID_1,instanceID_2. Tags are specified using the format  Key=tag_name,Values=tag_value.   One or more targets must be specified for maintenance window Run Command-type tasks. Depending on the task, targets are optional for other maintenance window task types (Automation, Lambda, and Step Functions). For more information about running tasks that don't specify targets, see Registering maintenance window tasks without targets in the Amazon Web Services Systems Manager User Guide. 
      */
     Targets?: Targets;
     /**
@@ -9139,7 +9409,7 @@ declare namespace SSM {
      */
     TaskArn?: MaintenanceWindowTaskArn;
     /**
-     * The ARN of the IAM service role for Systems Manager to assume when running a maintenance window task. If you do not specify a service role ARN, Systems Manager uses your account's service-linked role. If no service-linked role for Systems Manager exists in your account, it is created when you run RegisterTaskWithMaintenanceWindow. For more information, see the following topics in the in the AWS Systems Manager User Guide:    Using service-linked roles for Systems Manager     Should I use a service-linked role or a custom service role to run maintenance window tasks?    
+     * The Amazon Resource Name (ARN) of the IAM service role for Amazon Web Services Systems Manager to assume when running a maintenance window task. If you do not specify a service role ARN, Systems Manager uses your account's service-linked role. If no service-linked role for Systems Manager exists in your account, it is created when you run RegisterTaskWithMaintenanceWindow. For more information, see the following topics in the in the Amazon Web Services Systems Manager User Guide:    Using service-linked roles for Systems Manager     Should I use a service-linked role or a custom service role to run maintenance window tasks?    
      */
     ServiceRoleArn?: ServiceRole;
     /**
@@ -9147,7 +9417,7 @@ declare namespace SSM {
      */
     TaskParameters?: MaintenanceWindowTaskParameters;
     /**
-     * The parameters that the task should use during execution. Populate only the fields that match the task type. All other fields should be empty.  When you update a maintenance window task that has options specified in TaskInvocationParameters, you must provide again all the TaskInvocationParameters values that you want to retain. The values you do not specify again are removed. For example, suppose that when you registered a Run Command task, you specified TaskInvocationParameters values for Comment, NotificationConfig, and OutputS3BucketName. If you update the maintenance window task and specify only a different OutputS3BucketName value, the values for Comment and NotificationConfig are removed. 
+     * The parameters that the task should use during execution. Populate only the fields that match the task type. All other fields should be empty.  When you update a maintenance window task that has options specified in TaskInvocationParameters, you must provide again all the TaskInvocationParameters values that you want to retain. The values you don't specify again are removed. For example, suppose that when you registered a Run Command task, you specified TaskInvocationParameters values for Comment, NotificationConfig, and OutputS3BucketName. If you update the maintenance window task and specify only a different OutputS3BucketName value, the values for Comment and NotificationConfig are removed. 
      */
     TaskInvocationParameters?: MaintenanceWindowTaskInvocationParameters;
     /**
@@ -9155,15 +9425,15 @@ declare namespace SSM {
      */
     Priority?: MaintenanceWindowTaskPriority;
     /**
-     * The new MaxConcurrency value you want to specify. MaxConcurrency is the number of targets that are allowed to run this task in parallel.  For maintenance window tasks without a target specified, you cannot supply a value for this option. Instead, the system inserts a placeholder value of 1, which may be reported in the response to this command. This value does not affect the running of your task and can be ignored. 
+     * The new MaxConcurrency value you want to specify. MaxConcurrency is the number of targets that are allowed to run this task, in parallel.  Although this element is listed as "Required: No", a value can be omitted only when you are registering or updating a targetless task You must provide a value in all other cases. For maintenance window tasks without a target specified, you can't supply a value for this option. Instead, the system inserts a placeholder value of 1. This value doesn't affect the running of your task. 
      */
     MaxConcurrency?: MaxConcurrency;
     /**
-     * The new MaxErrors value to specify. MaxErrors is the maximum number of errors that are allowed before the task stops being scheduled.  For maintenance window tasks without a target specified, you cannot supply a value for this option. Instead, the system inserts a placeholder value of 1, which may be reported in the response to this command. This value does not affect the running of your task and can be ignored. 
+     * The new MaxErrors value to specify. MaxErrors is the maximum number of errors that are allowed before the task stops being scheduled.  Although this element is listed as "Required: No", a value can be omitted only when you are registering or updating a targetless task You must provide a value in all other cases. For maintenance window tasks without a target specified, you can't supply a value for this option. Instead, the system inserts a placeholder value of 1. This value doesn't affect the running of your task. 
      */
     MaxErrors?: MaxErrors;
     /**
-     * The new logging location in Amazon S3 to specify.   LoggingInfo has been deprecated. To specify an S3 bucket to contain logs, instead use the OutputS3BucketName and OutputS3KeyPrefix options in the TaskInvocationParameters structure. For information about how Systems Manager handles these options for the supported maintenance window task types, see MaintenanceWindowTaskInvocationParameters. 
+     * The new logging location in Amazon S3 to specify.   LoggingInfo has been deprecated. To specify an Amazon Simple Storage Service (Amazon S3) bucket to contain logs, instead use the OutputS3BucketName and OutputS3KeyPrefix options in the TaskInvocationParameters structure. For information about how Amazon Web Services Systems Manager handles these options for the supported maintenance window task types, see MaintenanceWindowTaskInvocationParameters. 
      */
     LoggingInfo?: LoggingInfo;
     /**
@@ -9175,9 +9445,13 @@ declare namespace SSM {
      */
     Description?: MaintenanceWindowDescription;
     /**
-     * If True, then all fields that are required by the RegisterTaskWithMaintenanceWindow action are also required for this API request. Optional fields that are not specified are set to null.
+     * If True, then all fields that are required by the RegisterTaskWithMaintenanceWindow operation are also required for this API request. Optional fields that aren't specified are set to null.
      */
     Replace?: Boolean;
+    /**
+     * Indicates whether tasks should continue to run after the cutoff time specified in the maintenance windows is reached.     CONTINUE_TASK: When the cutoff time is reached, any tasks that are running continue. The default value.    CANCEL_TASK:   For Automation, Lambda, Step Functions tasks: When the cutoff time is reached, any task invocations that are already running continue, but no new task invocations are started.   For Run Command tasks: When the cutoff time is reached, the system sends a CancelCommand operation that attempts to cancel the command associated with the task. However, there is no guarantee that the command will be terminated and the underlying process stopped.   The status for tasks that are not completed is TIMED_OUT.  
+     */
+    CutoffBehavior?: MaintenanceWindowTaskCutoffBehavior;
   }
   export interface UpdateMaintenanceWindowTaskResult {
     /**
@@ -9197,7 +9471,7 @@ declare namespace SSM {
      */
     TaskArn?: MaintenanceWindowTaskArn;
     /**
-     * The ARN of the IAM service role to use to publish Amazon Simple Notification Service (Amazon SNS) notifications for maintenance window Run Command tasks.
+     * The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) service role to use to publish Amazon Simple Notification Service (Amazon SNS) notifications for maintenance window Run Command tasks.
      */
     ServiceRoleArn?: ServiceRole;
     /**
@@ -9221,7 +9495,7 @@ declare namespace SSM {
      */
     MaxErrors?: MaxErrors;
     /**
-     * The updated logging information in Amazon S3.   LoggingInfo has been deprecated. To specify an S3 bucket to contain logs, instead use the OutputS3BucketName and OutputS3KeyPrefix options in the TaskInvocationParameters structure. For information about how Systems Manager handles these options for the supported maintenance window task types, see MaintenanceWindowTaskInvocationParameters. 
+     * The updated logging information in Amazon S3.   LoggingInfo has been deprecated. To specify an Amazon Simple Storage Service (Amazon S3) bucket to contain logs, instead use the OutputS3BucketName and OutputS3KeyPrefix options in the TaskInvocationParameters structure. For information about how Amazon Web Services Systems Manager handles these options for the supported maintenance window task types, see MaintenanceWindowTaskInvocationParameters. 
      */
     LoggingInfo?: LoggingInfo;
     /**
@@ -9232,10 +9506,14 @@ declare namespace SSM {
      * The updated task description.
      */
     Description?: MaintenanceWindowDescription;
+    /**
+     * The specification for whether tasks should continue to run after the cutoff time specified in the maintenance windows is reached. 
+     */
+    CutoffBehavior?: MaintenanceWindowTaskCutoffBehavior;
   }
   export interface UpdateManagedInstanceRoleRequest {
     /**
-     * The ID of the managed instance where you want to update the role.
+     * The ID of the managed node where you want to update the role.
      */
     InstanceId: ManagedInstanceId;
     /**
@@ -9251,7 +9529,7 @@ declare namespace SSM {
      */
     Description?: OpsItemDescription;
     /**
-     * Add new keys or edit existing key-value pairs of the OperationalData map in the OpsItem object. Operational data is custom data that provides useful reference details about the OpsItem. For example, you can specify log files, error strings, license keys, troubleshooting tips, or other relevant data. You enter operational data as key-value pairs. The key has a maximum length of 128 characters. The value has a maximum size of 20 KB.  Operational data keys can't begin with the following: amazon, aws, amzn, ssm, /amazon, /aws, /amzn, /ssm.  You can choose to make the data searchable by other users in the account or you can restrict search access. Searchable data means that all users with access to the OpsItem Overview page (as provided by the DescribeOpsItems API action) can view and search on the specified data. Operational data that is not searchable is only viewable by users who have access to the OpsItem (as provided by the GetOpsItem API action). Use the /aws/resources key in OperationalData to specify a related resource in the request. Use the /aws/automations key in OperationalData to associate an Automation runbook with the OpsItem. To view AWS CLI example commands that use these keys, see Creating OpsItems manually in the AWS Systems Manager User Guide.
+     * Add new keys or edit existing key-value pairs of the OperationalData map in the OpsItem object. Operational data is custom data that provides useful reference details about the OpsItem. For example, you can specify log files, error strings, license keys, troubleshooting tips, or other relevant data. You enter operational data as key-value pairs. The key has a maximum length of 128 characters. The value has a maximum size of 20 KB.  Operational data keys can't begin with the following: amazon, aws, amzn, ssm, /amazon, /aws, /amzn, /ssm.  You can choose to make the data searchable by other users in the account or you can restrict search access. Searchable data means that all users with access to the OpsItem Overview page (as provided by the DescribeOpsItems API operation) can view and search on the specified data. Operational data that isn't searchable is only viewable by users who have access to the OpsItem (as provided by the GetOpsItem API operation). Use the /aws/resources key in OperationalData to specify a related resource in the request. Use the /aws/automations key in OperationalData to associate an Automation runbook with the OpsItem. To view Amazon Web Services CLI example commands that use these keys, see Creating OpsItems manually in the Amazon Web Services Systems Manager User Guide.
      */
     OperationalData?: OpsItemOperationalData;
     /**
@@ -9271,7 +9549,7 @@ declare namespace SSM {
      */
     RelatedOpsItems?: RelatedOpsItems;
     /**
-     * The OpsItem status. Status can be Open, In Progress, or Resolved. For more information, see Editing OpsItem details in the AWS Systems Manager User Guide.
+     * The OpsItem status. Status can be Open, In Progress, or Resolved. For more information, see Editing OpsItem details in the Amazon Web Services Systems Manager User Guide.
      */
     Status?: OpsItemStatus;
     /**
@@ -9311,7 +9589,7 @@ declare namespace SSM {
   }
   export interface UpdateOpsMetadataRequest {
     /**
-     * The Amazon Resoure Name (ARN) of the OpsMetadata Object to update.
+     * The Amazon Resource Name (ARN) of the OpsMetadata Object to update.
      */
     OpsMetadataArn: OpsMetadataArn;
     /**
@@ -9347,7 +9625,7 @@ declare namespace SSM {
      */
     ApprovalRules?: PatchRuleGroup;
     /**
-     * A list of explicitly approved patches for the baseline. For information about accepted formats for lists of approved patches and rejected patches, see About package name formats for approved and rejected patch lists in the AWS Systems Manager User Guide.
+     * A list of explicitly approved patches for the baseline. For information about accepted formats for lists of approved patches and rejected patches, see About package name formats for approved and rejected patch lists in the Amazon Web Services Systems Manager User Guide.
      */
     ApprovedPatches?: PatchIdList;
     /**
@@ -9355,15 +9633,15 @@ declare namespace SSM {
      */
     ApprovedPatchesComplianceLevel?: PatchComplianceLevel;
     /**
-     * Indicates whether the list of approved patches includes non-security updates that should be applied to the instances. The default value is 'false'. Applies to Linux instances only.
+     * Indicates whether the list of approved patches includes non-security updates that should be applied to the managed nodes. The default value is false. Applies to Linux managed nodes only.
      */
     ApprovedPatchesEnableNonSecurity?: Boolean;
     /**
-     * A list of explicitly rejected patches for the baseline. For information about accepted formats for lists of approved patches and rejected patches, see About package name formats for approved and rejected patch lists in the AWS Systems Manager User Guide.
+     * A list of explicitly rejected patches for the baseline. For information about accepted formats for lists of approved patches and rejected patches, see About package name formats for approved and rejected patch lists in the Amazon Web Services Systems Manager User Guide.
      */
     RejectedPatches?: PatchIdList;
     /**
-     * The action for Patch Manager to take on patches included in the RejectedPackages list.    ALLOW_AS_DEPENDENCY: A package in the Rejected patches list is installed only if it is a dependency of another package. It is considered compliant with the patch baseline, and its status is reported as InstalledOther. This is the default action if no option is specified.    BLOCK: Packages in the RejectedPatches list, and packages that include them as dependencies, are not installed under any circumstances. If a package was installed before it was added to the Rejected patches list, it is considered non-compliant with the patch baseline, and its status is reported as InstalledRejected.  
+     * The action for Patch Manager to take on patches included in the RejectedPackages list.     ALLOW_AS_DEPENDENCY : A package in the Rejected patches list is installed only if it is a dependency of another package. It is considered compliant with the patch baseline, and its status is reported as InstalledOther. This is the default action if no option is specified.     BLOCK : Packages in the RejectedPatches list, and packages that include them as dependencies, aren't installed under any circumstances. If a package was installed before it was added to the Rejected patches list, it is considered non-compliant with the patch baseline, and its status is reported as InstalledRejected.  
      */
     RejectedPatchesAction?: PatchAction;
     /**
@@ -9371,11 +9649,11 @@ declare namespace SSM {
      */
     Description?: BaselineDescription;
     /**
-     * Information about the patches to use to update the instances, including target operating systems and source repositories. Applies to Linux instances only.
+     * Information about the patches to use to update the managed nodes, including target operating systems and source repositories. Applies to Linux managed nodes only.
      */
     Sources?: PatchSourceList;
     /**
-     * If True, then all fields that are required by the CreatePatchBaseline action are also required for this API request. Optional fields that are not specified are set to null.
+     * If True, then all fields that are required by the CreatePatchBaseline operation are also required for this API request. Optional fields that aren't specified are set to null.
      */
     Replace?: Boolean;
   }
@@ -9409,7 +9687,7 @@ declare namespace SSM {
      */
     ApprovedPatchesComplianceLevel?: PatchComplianceLevel;
     /**
-     * Indicates whether the list of approved patches includes non-security updates that should be applied to the instances. The default value is 'false'. Applies to Linux instances only.
+     * Indicates whether the list of approved patches includes non-security updates that should be applied to the managed nodes. The default value is false. Applies to Linux managed nodes only.
      */
     ApprovedPatchesEnableNonSecurity?: Boolean;
     /**
@@ -9429,11 +9707,11 @@ declare namespace SSM {
      */
     ModifiedDate?: DateTime;
     /**
-     * A description of the Patch Baseline.
+     * A description of the patch baseline.
      */
     Description?: BaselineDescription;
     /**
-     * Information about the patches to use to update the instances, including target operating systems and source repositories. Applies to Linux instances only.
+     * Information about the patches to use to update the managed nodes, including target operating systems and source repositories. Applies to Linux managed nodes only.
      */
     Sources?: PatchSourceList;
   }
@@ -9455,11 +9733,11 @@ declare namespace SSM {
   }
   export interface UpdateServiceSettingRequest {
     /**
-     * The Amazon Resource Name (ARN) of the service setting to reset. For example, arn:aws:ssm:us-east-1:111122223333:servicesetting/ssm/parameter-store/high-throughput-enabled. The setting ID can be one of the following.    /ssm/automation/customer-script-log-destination     /ssm/automation/customer-script-log-group-name     /ssm/parameter-store/default-parameter-tier     /ssm/parameter-store/high-throughput-enabled     /ssm/managed-instance/activation-tier   
+     * The Amazon Resource Name (ARN) of the service setting to reset. For example, arn:aws:ssm:us-east-1:111122223333:servicesetting/ssm/parameter-store/high-throughput-enabled. The setting ID can be one of the following.    /ssm/automation/customer-script-log-destination     /ssm/automation/customer-script-log-group-name     /ssm/documents/console/public-sharing-permission     /ssm/parameter-store/default-parameter-tier     /ssm/parameter-store/high-throughput-enabled     /ssm/managed-instance/activation-tier   
      */
     SettingId: ServiceSettingId;
     /**
-     * The new value to specify for the service setting. For the /ssm/parameter-store/default-parameter-tier setting ID, the setting value can be one of the following.   Standard   Advanced   Intelligent-Tiering   For the /ssm/parameter-store/high-throughput-enabled, and /ssm/managed-instance/activation-tier setting IDs, the setting value can be true or false. For the /ssm/automation/customer-script-log-destination setting ID, the setting value can be CloudWatch. For the /ssm/automation/customer-script-log-group-name setting ID, the setting value can be the name of a CloudWatch Logs log group.
+     * The new value to specify for the service setting. The following list specifies the available values for each setting.    /ssm/parameter-store/default-parameter-tier: Standard, Advanced, Intelligent-Tiering     /ssm/parameter-store/high-throughput-enabled: true or false     /ssm/managed-instance/activation-tier: true or false     /ssm/automation/customer-script-log-destination: CloudWatch     /ssm/automation/customer-script-log-group-name: the name of an Amazon CloudWatch Logs log group    /ssm/documents/console/public-sharing-permission: Enable or Disable     /ssm/managed-instance/activation-tier: standard or advanced   
      */
     SettingValue: ServiceSettingValue;
   }

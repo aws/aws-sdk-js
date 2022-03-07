@@ -985,7 +985,7 @@ declare namespace APIGateway {
   }
   export interface Account {
     /**
-     * The ARN of an Amazon CloudWatch role for the current Account. 
+     * The ARN of an Amazon CloudWatch role for the current Account.
      */
     cloudwatchRoleArn?: String;
     /**
@@ -1418,6 +1418,10 @@ declare namespace APIGateway {
      */
     securityPolicy?: SecurityPolicy;
     mutualTlsAuthentication?: MutualTlsAuthenticationInput;
+    /**
+     * The ARN of the public certificate issued by ACM to validate ownership of your custom domain. Only required when configuring mutual TLS and using an ACM imported or private CA certificate ARN as the regionalCertificateArn.
+     */
+    ownershipVerificationCertificateArn?: String;
   }
   export interface CreateModelRequest {
     /**
@@ -1697,7 +1701,7 @@ declare namespace APIGateway {
      */
     restApiId: String;
     /**
-     * [Required] The response type of the associated GatewayResponse. Valid values are ACCESS_DENIEDAPI_CONFIGURATION_ERRORAUTHORIZER_FAILURE AUTHORIZER_CONFIGURATION_ERRORBAD_REQUEST_PARAMETERSBAD_REQUEST_BODYDEFAULT_4XXDEFAULT_5XXEXPIRED_TOKENINVALID_SIGNATUREINTEGRATION_FAILUREINTEGRATION_TIMEOUTINVALID_API_KEYMISSING_AUTHENTICATION_TOKEN QUOTA_EXCEEDEDREQUEST_TOO_LARGERESOURCE_NOT_FOUNDTHROTTLEDUNAUTHORIZEDUNSUPPORTED_MEDIA_TYPE 
+     * [Required] The response type of the associated GatewayResponse.
      */
     responseType: GatewayResponseType;
   }
@@ -1970,7 +1974,7 @@ declare namespace APIGateway {
      */
     regionalDomainName?: String;
     /**
-     * The region-specific Amazon Route 53 Hosted Zone ID of the regional endpoint. For more information, see Set up a Regional Custom Domain Name and AWS Regions and Endpoints for API Gateway. 
+     * The region-specific Amazon Route 53 Hosted Zone ID of the regional endpoint. For more information, see Set up a Regional Custom Domain Name and AWS Regions and Endpoints for API Gateway.
      */
     regionalHostedZoneId?: String;
     /**
@@ -1986,7 +1990,7 @@ declare namespace APIGateway {
      */
     distributionDomainName?: String;
     /**
-     * The region-agnostic Amazon Route 53 Hosted Zone ID of the edge-optimized endpoint. The valid value is Z2FDTNDATAQYW2 for all the regions. For more information, see Set up a Regional Custom Domain Name and AWS Regions and Endpoints for API Gateway. 
+     * The region-agnostic Amazon Route 53 Hosted Zone ID of the edge-optimized endpoint. The valid value is Z2FDTNDATAQYW2 for all the regions. For more information, see Set up a Regional Custom Domain Name and AWS Regions and Endpoints for API Gateway.
      */
     distributionHostedZoneId?: String;
     /**
@@ -1994,7 +1998,7 @@ declare namespace APIGateway {
      */
     endpointConfiguration?: EndpointConfiguration;
     /**
-     * The status of the DomainName migration. The valid values are AVAILABLE and UPDATING. If the status is UPDATING, the domain cannot be modified further until the existing operation is complete. If it is AVAILABLE, the domain can be updated.
+     * The status of the DomainName migration. The valid values are AVAILABLE, UPDATING, PENDING_CERTIFICATE_REIMPORT, and PENDING_OWNERSHIP_VERIFICATION. If the status is UPDATING, the domain cannot be modified further until the existing operation is complete. If it is AVAILABLE, the domain can be updated.
      */
     domainNameStatus?: DomainNameStatus;
     /**
@@ -2013,8 +2017,12 @@ declare namespace APIGateway {
      * The mutual TLS authentication configuration for a custom domain name. If specified, API Gateway performs two-way authentication between the client and the server. Clients must present a trusted certificate to access your API.
      */
     mutualTlsAuthentication?: MutualTlsAuthentication;
+    /**
+     * The ARN of the public certificate issued by ACM to validate ownership of your custom domain. Only required when configuring mutual TLS and using an ACM imported or private CA certificate ARN as the regionalCertificateArn.
+     */
+    ownershipVerificationCertificateArn?: String;
   }
-  export type DomainNameStatus = "AVAILABLE"|"UPDATING"|"PENDING"|string;
+  export type DomainNameStatus = "AVAILABLE"|"UPDATING"|"PENDING"|"PENDING_CERTIFICATE_REIMPORT"|"PENDING_OWNERSHIP_VERIFICATION"|string;
   export interface DomainNames {
     position?: String;
     /**
@@ -2070,7 +2078,7 @@ declare namespace APIGateway {
   }
   export interface GatewayResponse {
     /**
-     * The response type of the associated GatewayResponse. Valid values are ACCESS_DENIEDAPI_CONFIGURATION_ERRORAUTHORIZER_FAILURE AUTHORIZER_CONFIGURATION_ERRORBAD_REQUEST_PARAMETERSBAD_REQUEST_BODYDEFAULT_4XXDEFAULT_5XXEXPIRED_TOKENINVALID_SIGNATUREINTEGRATION_FAILUREINTEGRATION_TIMEOUTINVALID_API_KEYMISSING_AUTHENTICATION_TOKEN QUOTA_EXCEEDEDREQUEST_TOO_LARGERESOURCE_NOT_FOUNDTHROTTLEDUNAUTHORIZEDUNSUPPORTED_MEDIA_TYPE 
+     * The response type of the associated GatewayResponse.
      */
     responseType?: GatewayResponseType;
     /**
@@ -2090,7 +2098,7 @@ declare namespace APIGateway {
      */
     defaultResponse?: Boolean;
   }
-  export type GatewayResponseType = "DEFAULT_4XX"|"DEFAULT_5XX"|"RESOURCE_NOT_FOUND"|"UNAUTHORIZED"|"INVALID_API_KEY"|"ACCESS_DENIED"|"AUTHORIZER_FAILURE"|"AUTHORIZER_CONFIGURATION_ERROR"|"INVALID_SIGNATURE"|"EXPIRED_TOKEN"|"MISSING_AUTHENTICATION_TOKEN"|"INTEGRATION_FAILURE"|"INTEGRATION_TIMEOUT"|"API_CONFIGURATION_ERROR"|"UNSUPPORTED_MEDIA_TYPE"|"BAD_REQUEST_PARAMETERS"|"BAD_REQUEST_BODY"|"REQUEST_TOO_LARGE"|"THROTTLED"|"QUOTA_EXCEEDED"|string;
+  export type GatewayResponseType = "DEFAULT_4XX"|"DEFAULT_5XX"|"RESOURCE_NOT_FOUND"|"UNAUTHORIZED"|"INVALID_API_KEY"|"ACCESS_DENIED"|"AUTHORIZER_FAILURE"|"AUTHORIZER_CONFIGURATION_ERROR"|"INVALID_SIGNATURE"|"EXPIRED_TOKEN"|"MISSING_AUTHENTICATION_TOKEN"|"INTEGRATION_FAILURE"|"INTEGRATION_TIMEOUT"|"API_CONFIGURATION_ERROR"|"UNSUPPORTED_MEDIA_TYPE"|"BAD_REQUEST_PARAMETERS"|"BAD_REQUEST_BODY"|"REQUEST_TOO_LARGE"|"THROTTLED"|"QUOTA_EXCEEDED"|"WAF_FILTERED"|string;
   export interface GatewayResponses {
     position?: String;
     /**
@@ -2342,7 +2350,7 @@ declare namespace APIGateway {
      */
     restApiId: String;
     /**
-     * [Required] The response type of the associated GatewayResponse. Valid values are ACCESS_DENIEDAPI_CONFIGURATION_ERRORAUTHORIZER_FAILURE AUTHORIZER_CONFIGURATION_ERRORBAD_REQUEST_PARAMETERSBAD_REQUEST_BODYDEFAULT_4XXDEFAULT_5XXEXPIRED_TOKENINVALID_SIGNATUREINTEGRATION_FAILUREINTEGRATION_TIMEOUTINVALID_API_KEYMISSING_AUTHENTICATION_TOKEN QUOTA_EXCEEDEDREQUEST_TOO_LARGERESOURCE_NOT_FOUNDTHROTTLEDUNAUTHORIZEDUNSUPPORTED_MEDIA_TYPE 
+     * [Required] The response type of the associated GatewayResponse.
      */
     responseType: GatewayResponseType;
   }
@@ -2933,7 +2941,7 @@ declare namespace APIGateway {
      */
     loggingLevel?: String;
     /**
-     * Specifies whether data trace logging is enabled for this method, which affects the log entries pushed to Amazon CloudWatch Logs. The PATCH path for this setting is /{method_setting_key}/logging/dataTrace, and the value is a Boolean.
+     * Specifies whether full requests and responses are logged for this method, which affects the log entries pushed to Amazon CloudWatch Logs. This can be useful to troubleshoot APIs, but can result in logging sensitive data. We recommend that you don't enable this option for production APIs. The PATCH path for this setting is /{method_setting_key}/logging/dataTrace, and the value is a Boolean.
      */
     dataTraceEnabled?: Boolean;
     /**
@@ -3057,7 +3065,7 @@ declare namespace APIGateway {
      */
     restApiId: String;
     /**
-     * [Required] The response type of the associated GatewayResponse. Valid values are ACCESS_DENIEDAPI_CONFIGURATION_ERRORAUTHORIZER_FAILURE AUTHORIZER_CONFIGURATION_ERRORBAD_REQUEST_PARAMETERSBAD_REQUEST_BODYDEFAULT_4XXDEFAULT_5XXEXPIRED_TOKENINVALID_SIGNATUREINTEGRATION_FAILUREINTEGRATION_TIMEOUTINVALID_API_KEYMISSING_AUTHENTICATION_TOKEN QUOTA_EXCEEDEDREQUEST_TOO_LARGERESOURCE_NOT_FOUNDTHROTTLEDUNAUTHORIZEDUNSUPPORTED_MEDIA_TYPE 
+     * [Required] The response type of the associated GatewayResponse.
      */
     responseType: GatewayResponseType;
     /**
@@ -3272,7 +3280,7 @@ declare namespace APIGateway {
   export type QuotaPeriodType = "DAY"|"WEEK"|"MONTH"|string;
   export interface QuotaSettings {
     /**
-     * The maximum number of requests that can be made in a given time period.
+     * The target maximum number of requests that can be made in a given time period.
      */
     limit?: Integer;
     /**
@@ -3698,11 +3706,11 @@ declare namespace APIGateway {
   }
   export interface ThrottleSettings {
     /**
-     * The API request burst limit, the maximum rate limit over a time ranging from one to a few seconds, depending upon whether the underlying token bucket is at its full capacity.
+     * The API target request burst rate limit. This allows more requests through for a period of time than the target rate limit.
      */
     burstLimit?: Integer;
     /**
-     * The API request steady-state rate limit.
+     * The API target request rate limit.
      */
     rateLimit?: Double;
   }
@@ -3836,7 +3844,7 @@ declare namespace APIGateway {
      */
     restApiId: String;
     /**
-     * [Required] The response type of the associated GatewayResponse. Valid values are ACCESS_DENIEDAPI_CONFIGURATION_ERRORAUTHORIZER_FAILURE AUTHORIZER_CONFIGURATION_ERRORBAD_REQUEST_PARAMETERSBAD_REQUEST_BODYDEFAULT_4XXDEFAULT_5XXEXPIRED_TOKENINVALID_SIGNATUREINTEGRATION_FAILUREINTEGRATION_TIMEOUTINVALID_API_KEYMISSING_AUTHENTICATION_TOKEN QUOTA_EXCEEDEDREQUEST_TOO_LARGERESOURCE_NOT_FOUNDTHROTTLEDUNAUTHORIZEDUNSUPPORTED_MEDIA_TYPE 
+     * [Required] The response type of the associated GatewayResponse.
      */
     responseType: GatewayResponseType;
     /**
@@ -4061,11 +4069,11 @@ declare namespace APIGateway {
      */
     apiStages?: ListOfApiStage;
     /**
-     * The request throttle limits of a usage plan.
+     * Map containing method level throttling information for API stage in a usage plan.
      */
     throttle?: ThrottleSettings;
     /**
-     * The maximum number of permitted requests per a given unit time interval.
+     * The target maximum number of permitted requests per a given unit time interval.
      */
     quota?: QuotaSettings;
     /**

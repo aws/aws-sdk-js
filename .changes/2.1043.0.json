@@ -1,0 +1,7 @@
+[
+    {
+        "type": "feature",
+        "category": "Rekognition",
+        "description": "This release added new KnownGender types for Celebrity Recognition."
+    }
+]

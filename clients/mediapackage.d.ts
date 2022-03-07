@@ -914,6 +914,10 @@ that is greater than 0.
     AdsOnDeliveryRestrictions?: AdsOnDeliveryRestrictions;
     Encryption?: HlsEncryption;
     /**
+     * When enabled, MediaPackage passes through digital video broadcasting (DVB) subtitles into the output.
+     */
+    IncludeDvbSubtitles?: __boolean;
+    /**
      * When enabled, an I-Frame only stream will be included in the output.
      */
     IncludeIframeOnlyStream?: __boolean;
@@ -1131,7 +1135,7 @@ If not specified, there will be no time delay in effect for the OriginEndpoint.
   export type PlaylistType = "NONE"|"EVENT"|"VOD"|string;
   export type PresetSpeke20Audio = "PRESET-AUDIO-1"|string;
   export type PresetSpeke20Video = "PRESET-VIDEO-1"|string;
-  export type Profile = "NONE"|"HBBTV_1_5"|string;
+  export type Profile = "NONE"|"HBBTV_1_5"|"HYBRIDCAST"|string;
   export interface RotateChannelCredentialsRequest {
     /**
      * The ID of the channel to update.

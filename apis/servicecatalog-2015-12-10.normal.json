@@ -4190,7 +4190,7 @@
           "documentation": "<p>The page token for the next set of results. To retrieve the first set of results, use null.</p>"
         },
         "PageSize": {
-          "shape": "PageSize",
+          "shape": "PageSizeMax100",
           "documentation": "<p>The maximum number of items to return with this call.</p>"
         },
         "PortfolioShareType": {
@@ -4429,7 +4429,7 @@
           "documentation": "<p>The page token for the next set of results. To retrieve the first set of results, use null.</p>"
         },
         "PageSize": {
-          "shape": "PageSize",
+          "shape": "PageSizeMax100",
           "documentation": "<p>The maximum number of items to return with this call.</p>"
         }
       }
@@ -4459,7 +4459,7 @@
           "documentation": "<p>The page token for the next set of results. To retrieve the first set of results, use null.</p>"
         },
         "PageSize": {
-          "shape": "PageSize",
+          "shape": "PageSizeMax100",
           "documentation": "<p>The maximum number of items to return with this call.</p>"
         }
       }
@@ -6562,7 +6562,7 @@
           "documentation": "<p>The search filters. If no search filters are specified, the output includes all products to which the caller has access.</p>"
         },
         "PageSize": {
-          "shape": "PageSize",
+          "shape": "PageSizeMax100",
           "documentation": "<p>The maximum number of items to return with this call.</p>"
         },
         "SortBy": {

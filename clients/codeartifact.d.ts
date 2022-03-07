@@ -85,19 +85,19 @@ declare class CodeArtifact extends Service {
    */
   deleteRepositoryPermissionsPolicy(callback?: (err: AWSError, data: CodeArtifact.Types.DeleteRepositoryPermissionsPolicyResult) => void): Request<CodeArtifact.Types.DeleteRepositoryPermissionsPolicyResult, AWSError>;
   /**
-   *  Returns a  DomainDescription  object that contains information about the requested domain. 
+   *  Returns a DomainDescription object that contains information about the requested domain. 
    */
   describeDomain(params: CodeArtifact.Types.DescribeDomainRequest, callback?: (err: AWSError, data: CodeArtifact.Types.DescribeDomainResult) => void): Request<CodeArtifact.Types.DescribeDomainResult, AWSError>;
   /**
-   *  Returns a  DomainDescription  object that contains information about the requested domain. 
+   *  Returns a DomainDescription object that contains information about the requested domain. 
    */
   describeDomain(callback?: (err: AWSError, data: CodeArtifact.Types.DescribeDomainResult) => void): Request<CodeArtifact.Types.DescribeDomainResult, AWSError>;
   /**
-   *  Returns a  PackageVersionDescription  object that contains information about the requested package version. 
+   *  Returns a PackageVersionDescription object that contains information about the requested package version. 
    */
   describePackageVersion(params: CodeArtifact.Types.DescribePackageVersionRequest, callback?: (err: AWSError, data: CodeArtifact.Types.DescribePackageVersionResult) => void): Request<CodeArtifact.Types.DescribePackageVersionResult, AWSError>;
   /**
-   *  Returns a  PackageVersionDescription  object that contains information about the requested package version. 
+   *  Returns a PackageVersionDescription object that contains information about the requested package version. 
    */
   describePackageVersion(callback?: (err: AWSError, data: CodeArtifact.Types.DescribePackageVersionResult) => void): Request<CodeArtifact.Types.DescribePackageVersionResult, AWSError>;
   /**
@@ -117,11 +117,11 @@ declare class CodeArtifact extends Service {
    */
   disassociateExternalConnection(callback?: (err: AWSError, data: CodeArtifact.Types.DisassociateExternalConnectionResult) => void): Request<CodeArtifact.Types.DisassociateExternalConnectionResult, AWSError>;
   /**
-   *  Deletes the assets in package versions and sets the package versions' status to Disposed. A disposed package version cannot be restored in your repository because its assets are deleted.   To view all disposed package versions in a repository, use  ListPackageVersions  and set the  status  parameter to Disposed.   To view information about a disposed package version, use  DescribePackageVersion .. 
+   *  Deletes the assets in package versions and sets the package versions' status to Disposed. A disposed package version cannot be restored in your repository because its assets are deleted.   To view all disposed package versions in a repository, use ListPackageVersions and set the status parameter to Disposed.   To view information about a disposed package version, use DescribePackageVersion. 
    */
   disposePackageVersions(params: CodeArtifact.Types.DisposePackageVersionsRequest, callback?: (err: AWSError, data: CodeArtifact.Types.DisposePackageVersionsResult) => void): Request<CodeArtifact.Types.DisposePackageVersionsResult, AWSError>;
   /**
-   *  Deletes the assets in package versions and sets the package versions' status to Disposed. A disposed package version cannot be restored in your repository because its assets are deleted.   To view all disposed package versions in a repository, use  ListPackageVersions  and set the  status  parameter to Disposed.   To view information about a disposed package version, use  DescribePackageVersion .. 
+   *  Deletes the assets in package versions and sets the package versions' status to Disposed. A disposed package version cannot be restored in your repository because its assets are deleted.   To view all disposed package versions in a repository, use ListPackageVersions and set the status parameter to Disposed.   To view information about a disposed package version, use DescribePackageVersion. 
    */
   disposePackageVersions(callback?: (err: AWSError, data: CodeArtifact.Types.DisposePackageVersionsResult) => void): Request<CodeArtifact.Types.DisposePackageVersionsResult, AWSError>;
   /**
@@ -181,51 +181,51 @@ declare class CodeArtifact extends Service {
    */
   listDomains(callback?: (err: AWSError, data: CodeArtifact.Types.ListDomainsResult) => void): Request<CodeArtifact.Types.ListDomainsResult, AWSError>;
   /**
-   *  Returns a list of  AssetSummary  objects for assets in a package version. 
+   *  Returns a list of AssetSummary objects for assets in a package version. 
    */
   listPackageVersionAssets(params: CodeArtifact.Types.ListPackageVersionAssetsRequest, callback?: (err: AWSError, data: CodeArtifact.Types.ListPackageVersionAssetsResult) => void): Request<CodeArtifact.Types.ListPackageVersionAssetsResult, AWSError>;
   /**
-   *  Returns a list of  AssetSummary  objects for assets in a package version. 
+   *  Returns a list of AssetSummary objects for assets in a package version. 
    */
   listPackageVersionAssets(callback?: (err: AWSError, data: CodeArtifact.Types.ListPackageVersionAssetsResult) => void): Request<CodeArtifact.Types.ListPackageVersionAssetsResult, AWSError>;
   /**
-   *  Returns the direct dependencies for a package version. The dependencies are returned as  PackageDependency  objects. CodeArtifact extracts the dependencies for a package version from the metadata file for the package format (for example, the package.json file for npm packages and the pom.xml file for Maven). Any package version dependencies that are not listed in the configuration file are not returned. 
+   *  Returns the direct dependencies for a package version. The dependencies are returned as PackageDependency objects. CodeArtifact extracts the dependencies for a package version from the metadata file for the package format (for example, the package.json file for npm packages and the pom.xml file for Maven). Any package version dependencies that are not listed in the configuration file are not returned. 
    */
   listPackageVersionDependencies(params: CodeArtifact.Types.ListPackageVersionDependenciesRequest, callback?: (err: AWSError, data: CodeArtifact.Types.ListPackageVersionDependenciesResult) => void): Request<CodeArtifact.Types.ListPackageVersionDependenciesResult, AWSError>;
   /**
-   *  Returns the direct dependencies for a package version. The dependencies are returned as  PackageDependency  objects. CodeArtifact extracts the dependencies for a package version from the metadata file for the package format (for example, the package.json file for npm packages and the pom.xml file for Maven). Any package version dependencies that are not listed in the configuration file are not returned. 
+   *  Returns the direct dependencies for a package version. The dependencies are returned as PackageDependency objects. CodeArtifact extracts the dependencies for a package version from the metadata file for the package format (for example, the package.json file for npm packages and the pom.xml file for Maven). Any package version dependencies that are not listed in the configuration file are not returned. 
    */
   listPackageVersionDependencies(callback?: (err: AWSError, data: CodeArtifact.Types.ListPackageVersionDependenciesResult) => void): Request<CodeArtifact.Types.ListPackageVersionDependenciesResult, AWSError>;
   /**
-   *  Returns a list of  PackageVersionSummary  objects for package versions in a repository that match the request parameters. 
+   *  Returns a list of PackageVersionSummary objects for package versions in a repository that match the request parameters. 
    */
   listPackageVersions(params: CodeArtifact.Types.ListPackageVersionsRequest, callback?: (err: AWSError, data: CodeArtifact.Types.ListPackageVersionsResult) => void): Request<CodeArtifact.Types.ListPackageVersionsResult, AWSError>;
   /**
-   *  Returns a list of  PackageVersionSummary  objects for package versions in a repository that match the request parameters. 
+   *  Returns a list of PackageVersionSummary objects for package versions in a repository that match the request parameters. 
    */
   listPackageVersions(callback?: (err: AWSError, data: CodeArtifact.Types.ListPackageVersionsResult) => void): Request<CodeArtifact.Types.ListPackageVersionsResult, AWSError>;
   /**
-   *  Returns a list of  PackageSummary  objects for packages in a repository that match the request parameters. 
+   *  Returns a list of PackageSummary objects for packages in a repository that match the request parameters. 
    */
   listPackages(params: CodeArtifact.Types.ListPackagesRequest, callback?: (err: AWSError, data: CodeArtifact.Types.ListPackagesResult) => void): Request<CodeArtifact.Types.ListPackagesResult, AWSError>;
   /**
-   *  Returns a list of  PackageSummary  objects for packages in a repository that match the request parameters. 
+   *  Returns a list of PackageSummary objects for packages in a repository that match the request parameters. 
    */
   listPackages(callback?: (err: AWSError, data: CodeArtifact.Types.ListPackagesResult) => void): Request<CodeArtifact.Types.ListPackagesResult, AWSError>;
   /**
-   *  Returns a list of  RepositorySummary  objects. Each RepositorySummary contains information about a repository in the specified AWS account and that matches the input parameters. 
+   *  Returns a list of RepositorySummary objects. Each RepositorySummary contains information about a repository in the specified AWS account and that matches the input parameters. 
    */
   listRepositories(params: CodeArtifact.Types.ListRepositoriesRequest, callback?: (err: AWSError, data: CodeArtifact.Types.ListRepositoriesResult) => void): Request<CodeArtifact.Types.ListRepositoriesResult, AWSError>;
   /**
-   *  Returns a list of  RepositorySummary  objects. Each RepositorySummary contains information about a repository in the specified AWS account and that matches the input parameters. 
+   *  Returns a list of RepositorySummary objects. Each RepositorySummary contains information about a repository in the specified AWS account and that matches the input parameters. 
    */
   listRepositories(callback?: (err: AWSError, data: CodeArtifact.Types.ListRepositoriesResult) => void): Request<CodeArtifact.Types.ListRepositoriesResult, AWSError>;
   /**
-   *  Returns a list of  RepositorySummary  objects. Each RepositorySummary contains information about a repository in the specified domain and that matches the input parameters. 
+   *  Returns a list of RepositorySummary objects. Each RepositorySummary contains information about a repository in the specified domain and that matches the input parameters. 
    */
   listRepositoriesInDomain(params: CodeArtifact.Types.ListRepositoriesInDomainRequest, callback?: (err: AWSError, data: CodeArtifact.Types.ListRepositoriesInDomainResult) => void): Request<CodeArtifact.Types.ListRepositoriesInDomainResult, AWSError>;
   /**
-   *  Returns a list of  RepositorySummary  objects. Each RepositorySummary contains information about a repository in the specified domain and that matches the input parameters. 
+   *  Returns a list of RepositorySummary objects. Each RepositorySummary contains information about a repository in the specified domain and that matches the input parameters. 
    */
   listRepositoriesInDomain(callback?: (err: AWSError, data: CodeArtifact.Types.ListRepositoriesInDomainResult) => void): Request<CodeArtifact.Types.ListRepositoriesInDomainResult, AWSError>;
   /**
@@ -1072,7 +1072,7 @@ declare namespace CodeArtifact {
      */
     nextToken?: PaginationToken;
     /**
-     *  The returned list of  AssetSummary  objects. 
+     *  The returned list of AssetSummary objects. 
      */
     assets?: AssetSummaryList;
   }
@@ -1136,7 +1136,7 @@ declare namespace CodeArtifact {
      */
     nextToken?: PaginationToken;
     /**
-     *  The returned list of  PackageDependency  objects. 
+     *  The returned list of PackageDependency objects. 
      */
     dependencies?: PackageDependencyList;
   }
@@ -1201,7 +1201,7 @@ declare namespace CodeArtifact {
      */
     package?: PackageName;
     /**
-     *  The returned list of  PackageVersionSummary  objects. 
+     *  The returned list of PackageVersionSummary objects. 
      */
     versions?: PackageVersionSummaryList;
     /**
@@ -1246,7 +1246,7 @@ declare namespace CodeArtifact {
   }
   export interface ListPackagesResult {
     /**
-     *  The list of returned  PackageSummary  objects. 
+     *  The list of returned PackageSummary objects. 
      */
     packages?: PackageSummaryList;
     /**
@@ -1308,7 +1308,7 @@ declare namespace CodeArtifact {
   }
   export interface ListRepositoriesResult {
     /**
-     *  The returned list of  RepositorySummary  objects. 
+     *  The returned list of RepositorySummary objects. 
      */
     repositories?: RepositorySummaryList;
     /**

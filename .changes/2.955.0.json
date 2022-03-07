@@ -1,0 +1,52 @@
+[
+    {
+        "type": "feature",
+        "category": "Batch",
+        "description": "Add support for ListJob filters"
+    },
+    {
+        "type": "feature",
+        "category": "IoTAnalytics",
+        "description": "IoT Analytics now supports creating a dataset resource with IoT SiteWise MultiLayerStorage data stores, enabling customers to query industrial data within the service. This release includes adding JOIN functionality for customers to query multiple data sources in a dataset."
+    },
+    {
+        "type": "feature",
+        "category": "IoTWireless",
+        "description": "Add SidewalkManufacturingSn as an identifier to allow Customer to query WirelessDevice, in the response, AmazonId is added in the case that Sidewalk device is return."
+    },
+    {
+        "type": "feature",
+        "category": "LexModelsV2",
+        "description": "Add waiters that automatically poll for resource status for asynchronous operations, such as building a bot"
+    },
+    {
+        "type": "feature",
+        "category": "QuickSight",
+        "description": "Add support to use row-level security with tags when embedding dashboards for users not provisioned in QuickSight"
+    },
+    {
+        "type": "feature",
+        "category": "RedshiftData",
+        "description": "Added structures to support new Data API operation BatchExecuteStatement, used to execute multiple SQL statements within a single transaction."
+    },
+    {
+        "type": "feature",
+        "category": "Route53",
+        "description": "This release adds support for the RECOVERY_CONTROL health check type to be used in conjunction with Route53 Application Recovery Controller."
+    },
+    {
+        "type": "feature",
+        "category": "Route53RecoveryCluster",
+        "description": "Amazon Route 53 Application Recovery Controller's routing control - Routing Control Data Plane APIs help you update the state (On/Off) of the routing controls to reroute traffic across application replicas in a 100% available manner."
+    },
+    {
+        "type": "feature",
+        "category": "Route53RecoveryControlConfig",
+        "description": "Amazon Route 53 Application Recovery Controller's routing control - Routing Control Configuration APIs help you create and delete clusters, control panels, routing controls and safety rules. State changes (On/Off) of routing controls are not part of configuration APIs."
+    },
+    {
+        "type": "feature",
+        "category": "Route53RecoveryReadiness",
+        "description": "Amazon Route 53 Application Recovery Controller's readiness check capability continually monitors resource quotas, capacity, and network routing policies to ensure that the recovery environment is scaled and configured to take over when needed."
+    }
+]

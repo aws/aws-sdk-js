@@ -37,6 +37,14 @@ declare class ECR extends Service {
    */
   batchGetImage(callback?: (err: AWSError, data: ECR.Types.BatchGetImageResponse) => void): Request<ECR.Types.BatchGetImageResponse, AWSError>;
   /**
+   * Gets the scanning configuration for one or more repositories.
+   */
+  batchGetRepositoryScanningConfiguration(params: ECR.Types.BatchGetRepositoryScanningConfigurationRequest, callback?: (err: AWSError, data: ECR.Types.BatchGetRepositoryScanningConfigurationResponse) => void): Request<ECR.Types.BatchGetRepositoryScanningConfigurationResponse, AWSError>;
+  /**
+   * Gets the scanning configuration for one or more repositories.
+   */
+  batchGetRepositoryScanningConfiguration(callback?: (err: AWSError, data: ECR.Types.BatchGetRepositoryScanningConfigurationResponse) => void): Request<ECR.Types.BatchGetRepositoryScanningConfigurationResponse, AWSError>;
+  /**
    * Informs Amazon ECR that the image layer upload has completed for a specified registry, repository name, and upload ID. You can optionally provide a sha256 digest of the image layer for data validation purposes. When an image is pushed, the CompleteLayerUpload API is called once per each new image layer to verify that the upload has completed.  This operation is used by the Amazon ECR proxy and is not generally used by customers for pulling and pushing images. In most cases, you should use the docker CLI to pull, tag, and push images. 
    */
   completeLayerUpload(params: ECR.Types.CompleteLayerUploadRequest, callback?: (err: AWSError, data: ECR.Types.CompleteLayerUploadResponse) => void): Request<ECR.Types.CompleteLayerUploadResponse, AWSError>;
@@ -45,11 +53,19 @@ declare class ECR extends Service {
    */
   completeLayerUpload(callback?: (err: AWSError, data: ECR.Types.CompleteLayerUploadResponse) => void): Request<ECR.Types.CompleteLayerUploadResponse, AWSError>;
   /**
-   * Creates a repository. For more information, see Amazon ECR Repositories in the Amazon Elastic Container Registry User Guide.
+   * Creates a pull through cache rule. A pull through cache rule provides a way to cache images from an external public registry in your Amazon ECR private registry.
+   */
+  createPullThroughCacheRule(params: ECR.Types.CreatePullThroughCacheRuleRequest, callback?: (err: AWSError, data: ECR.Types.CreatePullThroughCacheRuleResponse) => void): Request<ECR.Types.CreatePullThroughCacheRuleResponse, AWSError>;
+  /**
+   * Creates a pull through cache rule. A pull through cache rule provides a way to cache images from an external public registry in your Amazon ECR private registry.
+   */
+  createPullThroughCacheRule(callback?: (err: AWSError, data: ECR.Types.CreatePullThroughCacheRuleResponse) => void): Request<ECR.Types.CreatePullThroughCacheRuleResponse, AWSError>;
+  /**
+   * Creates a repository. For more information, see Amazon ECR repositories in the Amazon Elastic Container Registry User Guide.
    */
   createRepository(params: ECR.Types.CreateRepositoryRequest, callback?: (err: AWSError, data: ECR.Types.CreateRepositoryResponse) => void): Request<ECR.Types.CreateRepositoryResponse, AWSError>;
   /**
-   * Creates a repository. For more information, see Amazon ECR Repositories in the Amazon Elastic Container Registry User Guide.
+   * Creates a repository. For more information, see Amazon ECR repositories in the Amazon Elastic Container Registry User Guide.
    */
   createRepository(callback?: (err: AWSError, data: ECR.Types.CreateRepositoryResponse) => void): Request<ECR.Types.CreateRepositoryResponse, AWSError>;
   /**
@@ -60,6 +76,14 @@ declare class ECR extends Service {
    * Deletes the lifecycle policy associated with the specified repository.
    */
   deleteLifecyclePolicy(callback?: (err: AWSError, data: ECR.Types.DeleteLifecyclePolicyResponse) => void): Request<ECR.Types.DeleteLifecyclePolicyResponse, AWSError>;
+  /**
+   * Deletes a pull through cache rule.
+   */
+  deletePullThroughCacheRule(params: ECR.Types.DeletePullThroughCacheRuleRequest, callback?: (err: AWSError, data: ECR.Types.DeletePullThroughCacheRuleResponse) => void): Request<ECR.Types.DeletePullThroughCacheRuleResponse, AWSError>;
+  /**
+   * Deletes a pull through cache rule.
+   */
+  deletePullThroughCacheRule(callback?: (err: AWSError, data: ECR.Types.DeletePullThroughCacheRuleResponse) => void): Request<ECR.Types.DeletePullThroughCacheRuleResponse, AWSError>;
   /**
    * Deletes the registry permissions policy.
    */
@@ -85,6 +109,14 @@ declare class ECR extends Service {
    */
   deleteRepositoryPolicy(callback?: (err: AWSError, data: ECR.Types.DeleteRepositoryPolicyResponse) => void): Request<ECR.Types.DeleteRepositoryPolicyResponse, AWSError>;
   /**
+   * Returns the replication status for a specified image.
+   */
+  describeImageReplicationStatus(params: ECR.Types.DescribeImageReplicationStatusRequest, callback?: (err: AWSError, data: ECR.Types.DescribeImageReplicationStatusResponse) => void): Request<ECR.Types.DescribeImageReplicationStatusResponse, AWSError>;
+  /**
+   * Returns the replication status for a specified image.
+   */
+  describeImageReplicationStatus(callback?: (err: AWSError, data: ECR.Types.DescribeImageReplicationStatusResponse) => void): Request<ECR.Types.DescribeImageReplicationStatusResponse, AWSError>;
+  /**
    * Returns the scan findings for the specified image.
    */
   describeImageScanFindings(params: ECR.Types.DescribeImageScanFindingsRequest, callback?: (err: AWSError, data: ECR.Types.DescribeImageScanFindingsResponse) => void): Request<ECR.Types.DescribeImageScanFindingsResponse, AWSError>;
@@ -100,6 +132,14 @@ declare class ECR extends Service {
    * Returns metadata about the images in a repository.  Beginning with Docker version 1.9, the Docker client compresses image layers before pushing them to a V2 Docker registry. The output of the docker images command shows the uncompressed image size, so it may return a larger image size than the image sizes returned by DescribeImages. 
    */
   describeImages(callback?: (err: AWSError, data: ECR.Types.DescribeImagesResponse) => void): Request<ECR.Types.DescribeImagesResponse, AWSError>;
+  /**
+   * Returns the pull through cache rules for a registry.
+   */
+  describePullThroughCacheRules(params: ECR.Types.DescribePullThroughCacheRulesRequest, callback?: (err: AWSError, data: ECR.Types.DescribePullThroughCacheRulesResponse) => void): Request<ECR.Types.DescribePullThroughCacheRulesResponse, AWSError>;
+  /**
+   * Returns the pull through cache rules for a registry.
+   */
+  describePullThroughCacheRules(callback?: (err: AWSError, data: ECR.Types.DescribePullThroughCacheRulesResponse) => void): Request<ECR.Types.DescribePullThroughCacheRulesResponse, AWSError>;
   /**
    * Describes the settings for a registry. The replication configuration for a repository can be created or updated with the PutReplicationConfiguration API action.
    */
@@ -117,11 +157,11 @@ declare class ECR extends Service {
    */
   describeRepositories(callback?: (err: AWSError, data: ECR.Types.DescribeRepositoriesResponse) => void): Request<ECR.Types.DescribeRepositoriesResponse, AWSError>;
   /**
-   * Retrieves an authorization token. An authorization token represents your IAM authentication credentials and can be used to access any Amazon ECR registry that your IAM principal has access to. The authorization token is valid for 12 hours. The authorizationToken returned is a base64 encoded string that can be decoded and used in a docker login command to authenticate to a registry. The AWS CLI offers an get-login-password command that simplifies the login process. For more information, see Registry Authentication in the Amazon Elastic Container Registry User Guide.
+   * Retrieves an authorization token. An authorization token represents your IAM authentication credentials and can be used to access any Amazon ECR registry that your IAM principal has access to. The authorization token is valid for 12 hours. The authorizationToken returned is a base64 encoded string that can be decoded and used in a docker login command to authenticate to a registry. The CLI offers an get-login-password command that simplifies the login process. For more information, see Registry authentication in the Amazon Elastic Container Registry User Guide.
    */
   getAuthorizationToken(params: ECR.Types.GetAuthorizationTokenRequest, callback?: (err: AWSError, data: ECR.Types.GetAuthorizationTokenResponse) => void): Request<ECR.Types.GetAuthorizationTokenResponse, AWSError>;
   /**
-   * Retrieves an authorization token. An authorization token represents your IAM authentication credentials and can be used to access any Amazon ECR registry that your IAM principal has access to. The authorization token is valid for 12 hours. The authorizationToken returned is a base64 encoded string that can be decoded and used in a docker login command to authenticate to a registry. The AWS CLI offers an get-login-password command that simplifies the login process. For more information, see Registry Authentication in the Amazon Elastic Container Registry User Guide.
+   * Retrieves an authorization token. An authorization token represents your IAM authentication credentials and can be used to access any Amazon ECR registry that your IAM principal has access to. The authorization token is valid for 12 hours. The authorizationToken returned is a base64 encoded string that can be decoded and used in a docker login command to authenticate to a registry. The CLI offers an get-login-password command that simplifies the login process. For more information, see Registry authentication in the Amazon Elastic Container Registry User Guide.
    */
   getAuthorizationToken(callback?: (err: AWSError, data: ECR.Types.GetAuthorizationTokenResponse) => void): Request<ECR.Types.GetAuthorizationTokenResponse, AWSError>;
   /**
@@ -156,6 +196,14 @@ declare class ECR extends Service {
    * Retrieves the permissions policy for a registry.
    */
   getRegistryPolicy(callback?: (err: AWSError, data: ECR.Types.GetRegistryPolicyResponse) => void): Request<ECR.Types.GetRegistryPolicyResponse, AWSError>;
+  /**
+   * Retrieves the scanning configuration for a registry.
+   */
+  getRegistryScanningConfiguration(params: ECR.Types.GetRegistryScanningConfigurationRequest, callback?: (err: AWSError, data: ECR.Types.GetRegistryScanningConfigurationResponse) => void): Request<ECR.Types.GetRegistryScanningConfigurationResponse, AWSError>;
+  /**
+   * Retrieves the scanning configuration for a registry.
+   */
+  getRegistryScanningConfiguration(callback?: (err: AWSError, data: ECR.Types.GetRegistryScanningConfigurationResponse) => void): Request<ECR.Types.GetRegistryScanningConfigurationResponse, AWSError>;
   /**
    * Retrieves the repository policy for the specified repository.
    */
@@ -197,59 +245,67 @@ declare class ECR extends Service {
    */
   putImage(callback?: (err: AWSError, data: ECR.Types.PutImageResponse) => void): Request<ECR.Types.PutImageResponse, AWSError>;
   /**
-   * Updates the image scanning configuration for the specified repository.
+   *  The PutImageScanningConfiguration API is being deprecated, in favor of specifying the image scanning configuration at the registry level. For more information, see PutRegistryScanningConfiguration.  Updates the image scanning configuration for the specified repository.
    */
   putImageScanningConfiguration(params: ECR.Types.PutImageScanningConfigurationRequest, callback?: (err: AWSError, data: ECR.Types.PutImageScanningConfigurationResponse) => void): Request<ECR.Types.PutImageScanningConfigurationResponse, AWSError>;
   /**
-   * Updates the image scanning configuration for the specified repository.
+   *  The PutImageScanningConfiguration API is being deprecated, in favor of specifying the image scanning configuration at the registry level. For more information, see PutRegistryScanningConfiguration.  Updates the image scanning configuration for the specified repository.
    */
   putImageScanningConfiguration(callback?: (err: AWSError, data: ECR.Types.PutImageScanningConfigurationResponse) => void): Request<ECR.Types.PutImageScanningConfigurationResponse, AWSError>;
   /**
-   * Updates the image tag mutability settings for the specified repository. For more information, see Image Tag Mutability in the Amazon Elastic Container Registry User Guide.
+   * Updates the image tag mutability settings for the specified repository. For more information, see Image tag mutability in the Amazon Elastic Container Registry User Guide.
    */
   putImageTagMutability(params: ECR.Types.PutImageTagMutabilityRequest, callback?: (err: AWSError, data: ECR.Types.PutImageTagMutabilityResponse) => void): Request<ECR.Types.PutImageTagMutabilityResponse, AWSError>;
   /**
-   * Updates the image tag mutability settings for the specified repository. For more information, see Image Tag Mutability in the Amazon Elastic Container Registry User Guide.
+   * Updates the image tag mutability settings for the specified repository. For more information, see Image tag mutability in the Amazon Elastic Container Registry User Guide.
    */
   putImageTagMutability(callback?: (err: AWSError, data: ECR.Types.PutImageTagMutabilityResponse) => void): Request<ECR.Types.PutImageTagMutabilityResponse, AWSError>;
   /**
-   * Creates or updates the lifecycle policy for the specified repository. For more information, see Lifecycle Policy Template.
+   * Creates or updates the lifecycle policy for the specified repository. For more information, see Lifecycle policy template.
    */
   putLifecyclePolicy(params: ECR.Types.PutLifecyclePolicyRequest, callback?: (err: AWSError, data: ECR.Types.PutLifecyclePolicyResponse) => void): Request<ECR.Types.PutLifecyclePolicyResponse, AWSError>;
   /**
-   * Creates or updates the lifecycle policy for the specified repository. For more information, see Lifecycle Policy Template.
+   * Creates or updates the lifecycle policy for the specified repository. For more information, see Lifecycle policy template.
    */
   putLifecyclePolicy(callback?: (err: AWSError, data: ECR.Types.PutLifecyclePolicyResponse) => void): Request<ECR.Types.PutLifecyclePolicyResponse, AWSError>;
   /**
-   * Creates or updates the permissions policy for your registry. A registry policy is used to specify permissions for another AWS account and is used when configuring cross-account replication. For more information, see Registry permissions in the Amazon Elastic Container Registry User Guide.
+   * Creates or updates the permissions policy for your registry. A registry policy is used to specify permissions for another Amazon Web Services account and is used when configuring cross-account replication. For more information, see Registry permissions in the Amazon Elastic Container Registry User Guide.
    */
   putRegistryPolicy(params: ECR.Types.PutRegistryPolicyRequest, callback?: (err: AWSError, data: ECR.Types.PutRegistryPolicyResponse) => void): Request<ECR.Types.PutRegistryPolicyResponse, AWSError>;
   /**
-   * Creates or updates the permissions policy for your registry. A registry policy is used to specify permissions for another AWS account and is used when configuring cross-account replication. For more information, see Registry permissions in the Amazon Elastic Container Registry User Guide.
+   * Creates or updates the permissions policy for your registry. A registry policy is used to specify permissions for another Amazon Web Services account and is used when configuring cross-account replication. For more information, see Registry permissions in the Amazon Elastic Container Registry User Guide.
    */
   putRegistryPolicy(callback?: (err: AWSError, data: ECR.Types.PutRegistryPolicyResponse) => void): Request<ECR.Types.PutRegistryPolicyResponse, AWSError>;
   /**
-   * Creates or updates the replication configuration for a registry. The existing replication configuration for a repository can be retrieved with the DescribeRegistry API action. The first time the PutReplicationConfiguration API is called, a service-linked IAM role is created in your account for the replication process. For more information, see Using Service-Linked Roles for Amazon ECR in the Amazon Elastic Container Registry User Guide.  When configuring cross-account replication, the destination account must grant the source account permission to replicate. This permission is controlled using a registry permissions policy. For more information, see PutRegistryPolicy. 
+   * Creates or updates the scanning configuration for your private registry.
+   */
+  putRegistryScanningConfiguration(params: ECR.Types.PutRegistryScanningConfigurationRequest, callback?: (err: AWSError, data: ECR.Types.PutRegistryScanningConfigurationResponse) => void): Request<ECR.Types.PutRegistryScanningConfigurationResponse, AWSError>;
+  /**
+   * Creates or updates the scanning configuration for your private registry.
+   */
+  putRegistryScanningConfiguration(callback?: (err: AWSError, data: ECR.Types.PutRegistryScanningConfigurationResponse) => void): Request<ECR.Types.PutRegistryScanningConfigurationResponse, AWSError>;
+  /**
+   * Creates or updates the replication configuration for a registry. The existing replication configuration for a repository can be retrieved with the DescribeRegistry API action. The first time the PutReplicationConfiguration API is called, a service-linked IAM role is created in your account for the replication process. For more information, see Using service-linked roles for Amazon ECR in the Amazon Elastic Container Registry User Guide.  When configuring cross-account replication, the destination account must grant the source account permission to replicate. This permission is controlled using a registry permissions policy. For more information, see PutRegistryPolicy. 
    */
   putReplicationConfiguration(params: ECR.Types.PutReplicationConfigurationRequest, callback?: (err: AWSError, data: ECR.Types.PutReplicationConfigurationResponse) => void): Request<ECR.Types.PutReplicationConfigurationResponse, AWSError>;
   /**
-   * Creates or updates the replication configuration for a registry. The existing replication configuration for a repository can be retrieved with the DescribeRegistry API action. The first time the PutReplicationConfiguration API is called, a service-linked IAM role is created in your account for the replication process. For more information, see Using Service-Linked Roles for Amazon ECR in the Amazon Elastic Container Registry User Guide.  When configuring cross-account replication, the destination account must grant the source account permission to replicate. This permission is controlled using a registry permissions policy. For more information, see PutRegistryPolicy. 
+   * Creates or updates the replication configuration for a registry. The existing replication configuration for a repository can be retrieved with the DescribeRegistry API action. The first time the PutReplicationConfiguration API is called, a service-linked IAM role is created in your account for the replication process. For more information, see Using service-linked roles for Amazon ECR in the Amazon Elastic Container Registry User Guide.  When configuring cross-account replication, the destination account must grant the source account permission to replicate. This permission is controlled using a registry permissions policy. For more information, see PutRegistryPolicy. 
    */
   putReplicationConfiguration(callback?: (err: AWSError, data: ECR.Types.PutReplicationConfigurationResponse) => void): Request<ECR.Types.PutReplicationConfigurationResponse, AWSError>;
   /**
-   * Applies a repository policy to the specified repository to control access permissions. For more information, see Amazon ECR Repository Policies in the Amazon Elastic Container Registry User Guide.
+   * Applies a repository policy to the specified repository to control access permissions. For more information, see Amazon ECR Repository policies in the Amazon Elastic Container Registry User Guide.
    */
   setRepositoryPolicy(params: ECR.Types.SetRepositoryPolicyRequest, callback?: (err: AWSError, data: ECR.Types.SetRepositoryPolicyResponse) => void): Request<ECR.Types.SetRepositoryPolicyResponse, AWSError>;
   /**
-   * Applies a repository policy to the specified repository to control access permissions. For more information, see Amazon ECR Repository Policies in the Amazon Elastic Container Registry User Guide.
+   * Applies a repository policy to the specified repository to control access permissions. For more information, see Amazon ECR Repository policies in the Amazon Elastic Container Registry User Guide.
    */
   setRepositoryPolicy(callback?: (err: AWSError, data: ECR.Types.SetRepositoryPolicyResponse) => void): Request<ECR.Types.SetRepositoryPolicyResponse, AWSError>;
   /**
-   * Starts an image vulnerability scan. An image scan can only be started once per day on an individual image. This limit includes if an image was scanned on initial push. For more information, see Image Scanning in the Amazon Elastic Container Registry User Guide.
+   * Starts an image vulnerability scan. An image scan can only be started once per 24 hours on an individual image. This limit includes if an image was scanned on initial push. For more information, see Image scanning in the Amazon Elastic Container Registry User Guide.
    */
   startImageScan(params: ECR.Types.StartImageScanRequest, callback?: (err: AWSError, data: ECR.Types.StartImageScanResponse) => void): Request<ECR.Types.StartImageScanResponse, AWSError>;
   /**
-   * Starts an image vulnerability scan. An image scan can only be started once per day on an individual image. This limit includes if an image was scanned on initial push. For more information, see Image Scanning in the Amazon Elastic Container Registry User Guide.
+   * Starts an image vulnerability scan. An image scan can only be started once per 24 hours on an individual image. This limit includes if an image was scanned on initial push. For more information, see Image scanning in the Amazon Elastic Container Registry User Guide.
    */
   startImageScan(callback?: (err: AWSError, data: ECR.Types.StartImageScanResponse) => void): Request<ECR.Types.StartImageScanResponse, AWSError>;
   /**
@@ -302,6 +358,7 @@ declare class ECR extends Service {
   waitFor(state: "lifecyclePolicyPreviewComplete", callback?: (err: AWSError, data: ECR.Types.GetLifecyclePolicyPreviewResponse) => void): Request<ECR.Types.GetLifecyclePolicyPreviewResponse, AWSError>;
 }
 declare namespace ECR {
+  export type Arch = string;
   export type Arn = string;
   export interface Attribute {
     /**
@@ -316,6 +373,7 @@ declare namespace ECR {
   export type AttributeKey = string;
   export type AttributeList = Attribute[];
   export type AttributeValue = string;
+  export type Author = string;
   export interface AuthorizationData {
     /**
      * A base64-encoded string that contains authorization data for the specified Amazon ECR registry. When the string is decoded, it is presented in the format user:password for private registry authentication using docker login.
@@ -331,10 +389,45 @@ declare namespace ECR {
     proxyEndpoint?: ProxyEndpoint;
   }
   export type AuthorizationDataList = AuthorizationData[];
+  export interface AwsEcrContainerImageDetails {
+    /**
+     * The architecture of the Amazon ECR container image.
+     */
+    architecture?: Arch;
+    /**
+     * The image author of the Amazon ECR container image.
+     */
+    author?: Author;
+    /**
+     * The image hash of the Amazon ECR container image.
+     */
+    imageHash?: ImageDigest;
+    /**
+     * The image tags attached to the Amazon ECR container image.
+     */
+    imageTags?: ImageTagsList;
+    /**
+     * The platform of the Amazon ECR container image.
+     */
+    platform?: Platform;
+    /**
+     * The date and time the Amazon ECR container image was pushed.
+     */
+    pushedAt?: _Date;
+    /**
+     * The registry the Amazon ECR container image belongs to.
+     */
+    registry?: RegistryId;
+    /**
+     * The name of the repository the Amazon ECR container image resides in.
+     */
+    repositoryName?: RepositoryName;
+  }
   export type Base64 = string;
+  export type BaseScore = number;
   export interface BatchCheckLayerAvailabilityRequest {
     /**
-     * The AWS account ID associated with the registry that contains the image layers to check. If you do not specify a registry, the default registry is assumed.
+     * The Amazon Web Services account ID associated with the registry that contains the image layers to check. If you do not specify a registry, the default registry is assumed.
      */
     registryId?: RegistryId;
     /**
@@ -358,7 +451,7 @@ declare namespace ECR {
   }
   export interface BatchDeleteImageRequest {
     /**
-     * The AWS account ID associated with the registry that contains the image to delete. If you do not specify a registry, the default registry is assumed.
+     * The Amazon Web Services account ID associated with the registry that contains the image to delete. If you do not specify a registry, the default registry is assumed.
      */
     registryId?: RegistryId;
     /**
@@ -382,7 +475,7 @@ declare namespace ECR {
   }
   export interface BatchGetImageRequest {
     /**
-     * The AWS account ID associated with the registry that contains the images to describe. If you do not specify a registry, the default registry is assumed.
+     * The Amazon Web Services account ID associated with the registry that contains the images to describe. If you do not specify a registry, the default registry is assumed.
      */
     registryId?: RegistryId;
     /**
@@ -408,11 +501,27 @@ declare namespace ECR {
      */
     failures?: ImageFailureList;
   }
+  export interface BatchGetRepositoryScanningConfigurationRequest {
+    /**
+     * One or more repository names to get the scanning configuration for.
+     */
+    repositoryNames: ScanningConfigurationRepositoryNameList;
+  }
+  export interface BatchGetRepositoryScanningConfigurationResponse {
+    /**
+     * The scanning configuration for the requested repositories.
+     */
+    scanningConfigurations?: RepositoryScanningConfigurationList;
+    /**
+     * Any failures associated with the call.
+     */
+    failures?: RepositoryScanningConfigurationFailureList;
+  }
   export type BatchedOperationLayerDigest = string;
   export type BatchedOperationLayerDigestList = BatchedOperationLayerDigest[];
   export interface CompleteLayerUploadRequest {
     /**
-     * The AWS account ID associated with the registry to which to upload layers. If you do not specify a registry, the default registry is assumed.
+     * The Amazon Web Services account ID associated with the registry to which to upload layers. If you do not specify a registry, the default registry is assumed.
      */
     registryId?: RegistryId;
     /**
@@ -446,7 +555,43 @@ declare namespace ECR {
      */
     layerDigest?: LayerDigest;
   }
+  export interface CreatePullThroughCacheRuleRequest {
+    /**
+     * The repository name prefix to use when caching images from the source registry.
+     */
+    ecrRepositoryPrefix: PullThroughCacheRuleRepositoryPrefix;
+    /**
+     * The registry URL of the upstream public registry to use as the source for the pull through cache rule.
+     */
+    upstreamRegistryUrl: Url;
+    /**
+     * The Amazon Web Services account ID associated with the registry to create the pull through cache rule for. If you do not specify a registry, the default registry is assumed.
+     */
+    registryId?: RegistryId;
+  }
+  export interface CreatePullThroughCacheRuleResponse {
+    /**
+     * The Amazon ECR repository prefix associated with the pull through cache rule.
+     */
+    ecrRepositoryPrefix?: PullThroughCacheRuleRepositoryPrefix;
+    /**
+     * The upstream registry URL associated with the pull through cache rule.
+     */
+    upstreamRegistryUrl?: Url;
+    /**
+     * The date and time, in JavaScript date format, when the pull through cache rule was created.
+     */
+    createdAt?: CreationTimestamp;
+    /**
+     * The registry ID associated with the request.
+     */
+    registryId?: RegistryId;
+  }
   export interface CreateRepositoryRequest {
+    /**
+     * The Amazon Web Services account ID associated with the registry to create the repository. If you do not specify a registry, the default registry is assumed.
+     */
+    registryId?: RegistryId;
     /**
      * The name to use for the repository. The repository name may be specified on its own (such as nginx-web-app) or it can be prepended with a namespace to group the repository into a category (such as project-a/nginx-web-app).
      */
@@ -475,9 +620,62 @@ declare namespace ECR {
     repository?: Repository;
   }
   export type CreationTimestamp = Date;
+  export interface CvssScore {
+    /**
+     * The base CVSS score used for the finding.
+     */
+    baseScore?: BaseScore;
+    /**
+     * The vector string of the CVSS score.
+     */
+    scoringVector?: ScoringVector;
+    /**
+     * The source of the CVSS score.
+     */
+    source?: Source;
+    /**
+     * The version of CVSS used for the score.
+     */
+    version?: Version;
+  }
+  export interface CvssScoreAdjustment {
+    /**
+     * The metric used to adjust the CVSS score.
+     */
+    metric?: Metric;
+    /**
+     * The reason the CVSS score has been adjustment.
+     */
+    reason?: Reason;
+  }
+  export type CvssScoreAdjustmentList = CvssScoreAdjustment[];
+  export interface CvssScoreDetails {
+    /**
+     * An object that contains details about adjustment Amazon Inspector made to the CVSS score.
+     */
+    adjustments?: CvssScoreAdjustmentList;
+    /**
+     * The CVSS score.
+     */
+    score?: Score;
+    /**
+     * The source for the CVSS score.
+     */
+    scoreSource?: Source;
+    /**
+     * The vector for the CVSS score.
+     */
+    scoringVector?: ScoringVector;
+    /**
+     * The CVSS version used in scoring.
+     */
+    version?: Version;
+  }
+  export type CvssScoreList = CvssScore[];
+  export type _Date = Date;
   export interface DeleteLifecyclePolicyRequest {
     /**
-     * The AWS account ID associated with the registry that contains the repository. If you do not specify a registry, the default registry is assumed.
+     * The Amazon Web Services account ID associated with the registry that contains the repository. If you do not specify a registry, the default registry is assumed.
      */
     registryId?: RegistryId;
     /**
@@ -503,6 +701,34 @@ declare namespace ECR {
      */
     lastEvaluatedAt?: EvaluationTimestamp;
   }
+  export interface DeletePullThroughCacheRuleRequest {
+    /**
+     * The Amazon ECR repository prefix associated with the pull through cache rule to delete.
+     */
+    ecrRepositoryPrefix: PullThroughCacheRuleRepositoryPrefix;
+    /**
+     * The Amazon Web Services account ID associated with the registry that contains the pull through cache rule. If you do not specify a registry, the default registry is assumed.
+     */
+    registryId?: RegistryId;
+  }
+  export interface DeletePullThroughCacheRuleResponse {
+    /**
+     * The Amazon ECR repository prefix associated with the request.
+     */
+    ecrRepositoryPrefix?: PullThroughCacheRuleRepositoryPrefix;
+    /**
+     * The upstream registry URL associated with the pull through cache rule.
+     */
+    upstreamRegistryUrl?: Url;
+    /**
+     * The timestamp associated with the pull through cache rule.
+     */
+    createdAt?: CreationTimestamp;
+    /**
+     * The registry ID associated with the request.
+     */
+    registryId?: RegistryId;
+  }
   export interface DeleteRegistryPolicyRequest {
   }
   export interface DeleteRegistryPolicyResponse {
@@ -517,7 +743,7 @@ declare namespace ECR {
   }
   export interface DeleteRepositoryPolicyRequest {
     /**
-     * The AWS account ID associated with the registry that contains the repository policy to delete. If you do not specify a registry, the default registry is assumed.
+     * The Amazon Web Services account ID associated with the registry that contains the repository policy to delete. If you do not specify a registry, the default registry is assumed.
      */
     registryId?: RegistryId;
     /**
@@ -541,7 +767,7 @@ declare namespace ECR {
   }
   export interface DeleteRepositoryRequest {
     /**
-     * The AWS account ID associated with the registry that contains the repository to delete. If you do not specify a registry, the default registry is assumed.
+     * The Amazon Web Services account ID associated with the registry that contains the repository to delete. If you do not specify a registry, the default registry is assumed.
      */
     registryId?: RegistryId;
     /**
@@ -559,9 +785,31 @@ declare namespace ECR {
      */
     repository?: Repository;
   }
+  export interface DescribeImageReplicationStatusRequest {
+    /**
+     * The name of the repository that the image is in.
+     */
+    repositoryName: RepositoryName;
+    imageId: ImageIdentifier;
+    /**
+     * The Amazon Web Services account ID associated with the registry. If you do not specify a registry, the default registry is assumed.
+     */
+    registryId?: RegistryId;
+  }
+  export interface DescribeImageReplicationStatusResponse {
+    /**
+     * The repository name associated with the request.
+     */
+    repositoryName?: RepositoryName;
+    imageId?: ImageIdentifier;
+    /**
+     * The replication status details for the images in the specified repository.
+     */
+    replicationStatuses?: ImageReplicationStatusList;
+  }
   export interface DescribeImageScanFindingsRequest {
     /**
-     * The AWS account ID associated with the registry that contains the repository in which to describe the image scan findings for. If you do not specify a registry, the default registry is assumed.
+     * The Amazon Web Services account ID associated with the registry that contains the repository in which to describe the image scan findings for. If you do not specify a registry, the default registry is assumed.
      */
     registryId?: RegistryId;
     /**
@@ -609,7 +857,7 @@ declare namespace ECR {
   }
   export interface DescribeImagesRequest {
     /**
-     * The AWS account ID associated with the registry that contains the repository in which to describe images. If you do not specify a registry, the default registry is assumed.
+     * The Amazon Web Services account ID associated with the registry that contains the repository in which to describe images. If you do not specify a registry, the default registry is assumed.
      */
     registryId?: RegistryId;
     /**
@@ -643,6 +891,34 @@ declare namespace ECR {
      */
     nextToken?: NextToken;
   }
+  export interface DescribePullThroughCacheRulesRequest {
+    /**
+     * The Amazon Web Services account ID associated with the registry to return the pull through cache rules for. If you do not specify a registry, the default registry is assumed.
+     */
+    registryId?: RegistryId;
+    /**
+     * The Amazon ECR repository prefixes associated with the pull through cache rules to return. If no repository prefix value is specified, all pull through cache rules are returned.
+     */
+    ecrRepositoryPrefixes?: PullThroughCacheRuleRepositoryPrefixList;
+    /**
+     * The nextToken value returned from a previous paginated DescribePullThroughCacheRulesRequest request where maxResults was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the nextToken value. This value is null when there are no more results to return.
+     */
+    nextToken?: NextToken;
+    /**
+     * The maximum number of pull through cache rules returned by DescribePullThroughCacheRulesRequest in paginated output. When this parameter is used, DescribePullThroughCacheRulesRequest only returns maxResults results in a single page along with a nextToken response element. The remaining results of the initial request can be seen by sending another DescribePullThroughCacheRulesRequest request with the returned nextToken value. This value can be between 1 and 1000. If this parameter is not used, then DescribePullThroughCacheRulesRequest returns up to 100 results and a nextToken value, if applicable.
+     */
+    maxResults?: MaxResults;
+  }
+  export interface DescribePullThroughCacheRulesResponse {
+    /**
+     * The details of the pull through cache rules.
+     */
+    pullThroughCacheRules?: PullThroughCacheRuleList;
+    /**
+     * The nextToken value to include in a future DescribePullThroughCacheRulesRequest request. When the results of a DescribePullThroughCacheRulesRequest request exceed maxResults, this value can be used to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    nextToken?: NextToken;
+  }
   export interface DescribeRegistryRequest {
   }
   export interface DescribeRegistryResponse {
@@ -657,7 +933,7 @@ declare namespace ECR {
   }
   export interface DescribeRepositoriesRequest {
     /**
-     * The AWS account ID associated with the registry that contains the repositories to be described. If you do not specify a registry, the default registry is assumed.
+     * The Amazon Web Services account ID associated with the registry that contains the repositories to be described. If you do not specify a registry, the default registry is assumed.
      */
     registryId?: RegistryId;
     /**
@@ -685,17 +961,83 @@ declare namespace ECR {
   }
   export interface EncryptionConfiguration {
     /**
-     * The encryption type to use. If you use the KMS encryption type, the contents of the repository will be encrypted using server-side encryption with customer master keys (CMKs) stored in AWS KMS. When you use AWS KMS to encrypt your data, you can either use the default AWS managed CMK for Amazon ECR, or specify your own CMK, which you already created. For more information, see Protecting Data Using Server-Side Encryption with CMKs Stored in AWS Key Management Service (SSE-KMS) in the Amazon Simple Storage Service Console Developer Guide.. If you use the AES256 encryption type, Amazon ECR uses server-side encryption with Amazon S3-managed encryption keys which encrypts the images in the repository using an AES-256 encryption algorithm. For more information, see Protecting Data Using Server-Side Encryption with Amazon S3-Managed Encryption Keys (SSE-S3) in the Amazon Simple Storage Service Console Developer Guide..
+     * The encryption type to use. If you use the KMS encryption type, the contents of the repository will be encrypted using server-side encryption with Key Management Service key stored in KMS. When you use KMS to encrypt your data, you can either use the default Amazon Web Services managed KMS key for Amazon ECR, or specify your own KMS key, which you already created. For more information, see Protecting data using server-side encryption with an KMS key stored in Key Management Service (SSE-KMS) in the Amazon Simple Storage Service Console Developer Guide. If you use the AES256 encryption type, Amazon ECR uses server-side encryption with Amazon S3-managed encryption keys which encrypts the images in the repository using an AES-256 encryption algorithm. For more information, see Protecting data using server-side encryption with Amazon S3-managed encryption keys (SSE-S3) in the Amazon Simple Storage Service Console Developer Guide.
      */
     encryptionType: EncryptionType;
     /**
-     * If you use the KMS encryption type, specify the CMK to use for encryption. The alias, key ID, or full ARN of the CMK can be specified. The key must exist in the same Region as the repository. If no key is specified, the default AWS managed CMK for Amazon ECR will be used.
+     * If you use the KMS encryption type, specify the KMS key to use for encryption. The alias, key ID, or full ARN of the KMS key can be specified. The key must exist in the same Region as the repository. If no key is specified, the default Amazon Web Services managed KMS key for Amazon ECR will be used.
      */
     kmsKey?: KmsKey;
   }
   export type EncryptionType = "AES256"|"KMS"|string;
+  export interface EnhancedImageScanFinding {
+    /**
+     * The Amazon Web Services account ID associated with the image.
+     */
+    awsAccountId?: RegistryId;
+    /**
+     * The description of the finding.
+     */
+    description?: FindingDescription;
+    /**
+     * The Amazon Resource Number (ARN) of the finding.
+     */
+    findingArn?: FindingArn;
+    /**
+     * The date and time that the finding was first observed.
+     */
+    firstObservedAt?: _Date;
+    /**
+     * The date and time that the finding was last observed.
+     */
+    lastObservedAt?: _Date;
+    /**
+     * An object that contains the details of a package vulnerability finding.
+     */
+    packageVulnerabilityDetails?: PackageVulnerabilityDetails;
+    /**
+     * An object that contains the details about how to remediate a finding.
+     */
+    remediation?: Remediation;
+    /**
+     * Contains information on the resources involved in a finding.
+     */
+    resources?: ResourceList;
+    /**
+     * The Amazon Inspector score given to the finding.
+     */
+    score?: Score;
+    /**
+     * An object that contains details of the Amazon Inspector score.
+     */
+    scoreDetails?: ScoreDetails;
+    /**
+     * The severity of the finding.
+     */
+    severity?: Severity;
+    /**
+     * The status of the finding.
+     */
+    status?: Status;
+    /**
+     * The title of the finding.
+     */
+    title?: Title;
+    /**
+     * The type of the finding.
+     */
+    type?: Type;
+    /**
+     * The date and time the finding was last updated at.
+     */
+    updatedAt?: _Date;
+  }
+  export type EnhancedImageScanFindingList = EnhancedImageScanFinding[];
+  export type Epoch = number;
   export type EvaluationTimestamp = Date;
   export type ExpirationTimestamp = Date;
+  export type FilePath = string;
+  export type FindingArn = string;
   export type FindingDescription = string;
   export type FindingName = string;
   export type FindingSeverity = "INFORMATIONAL"|"LOW"|"MEDIUM"|"HIGH"|"CRITICAL"|"UNDEFINED"|string;
@@ -704,7 +1046,7 @@ declare namespace ECR {
   export type GetAuthorizationTokenRegistryIdList = RegistryId[];
   export interface GetAuthorizationTokenRequest {
     /**
-     * A list of AWS account IDs that are associated with the registries for which to get AuthorizationData objects. If you do not specify a registry, the default registry is assumed.
+     * A list of Amazon Web Services account IDs that are associated with the registries for which to get AuthorizationData objects. If you do not specify a registry, the default registry is assumed.
      */
     registryIds?: GetAuthorizationTokenRegistryIdList;
   }
@@ -716,7 +1058,7 @@ declare namespace ECR {
   }
   export interface GetDownloadUrlForLayerRequest {
     /**
-     * The AWS account ID associated with the registry that contains the image layer to download. If you do not specify a registry, the default registry is assumed.
+     * The Amazon Web Services account ID associated with the registry that contains the image layer to download. If you do not specify a registry, the default registry is assumed.
      */
     registryId?: RegistryId;
     /**
@@ -740,7 +1082,7 @@ declare namespace ECR {
   }
   export interface GetLifecyclePolicyPreviewRequest {
     /**
-     * The AWS account ID associated with the registry that contains the repository. If you do not specify a registry, the default registry is assumed.
+     * The Amazon Web Services account ID associated with the registry that contains the repository. If you do not specify a registry, the default registry is assumed.
      */
     registryId?: RegistryId;
     /**
@@ -796,7 +1138,7 @@ declare namespace ECR {
   }
   export interface GetLifecyclePolicyRequest {
     /**
-     * The AWS account ID associated with the registry that contains the repository. If you do not specify a registry, the default registry is assumed.
+     * The Amazon Web Services account ID associated with the registry that contains the repository. If you do not specify a registry, the default registry is assumed.
      */
     registryId?: RegistryId;
     /**
@@ -834,9 +1176,21 @@ declare namespace ECR {
      */
     policyText?: RegistryPolicyText;
   }
+  export interface GetRegistryScanningConfigurationRequest {
+  }
+  export interface GetRegistryScanningConfigurationResponse {
+    /**
+     * The ID of the registry.
+     */
+    registryId?: RegistryId;
+    /**
+     * The scanning configuration for the registry.
+     */
+    scanningConfiguration?: RegistryScanningConfiguration;
+  }
   export interface GetRepositoryPolicyRequest {
     /**
-     * The AWS account ID associated with the registry that contains the repository. If you do not specify a registry, the default registry is assumed.
+     * The Amazon Web Services account ID associated with the registry that contains the repository. If you do not specify a registry, the default registry is assumed.
      */
     registryId?: RegistryId;
     /**
@@ -860,7 +1214,7 @@ declare namespace ECR {
   }
   export interface Image {
     /**
-     * The AWS account ID associated with the registry containing the image.
+     * The Amazon Web Services account ID associated with the registry containing the image.
      */
     registryId?: RegistryId;
     /**
@@ -884,7 +1238,7 @@ declare namespace ECR {
   export type ImageCount = number;
   export interface ImageDetail {
     /**
-     * The AWS account ID associated with the registry to which this image belongs.
+     * The Amazon Web Services account ID associated with the registry to which this image belongs.
      */
     registryId?: RegistryId;
     /**
@@ -923,6 +1277,10 @@ declare namespace ECR {
      * The artifact media type of the image.
      */
     artifactMediaType?: MediaType;
+    /**
+     * The date and time, expressed in standard JavaScript date format, when Amazon ECR recorded the last image pull.  Amazon ECR refreshes the last image pull timestamp at least once every 24 hours. For example, if you pull an image once a day then the lastRecordedPullTime timestamp will indicate the exact time that the image was last pulled. However, if you pull an image once an hour, because Amazon ECR refreshes the lastRecordedPullTime timestamp at least once every 24 hours, the result may not be the exact time that the image was last pulled. 
+     */
+    lastRecordedPullTime?: RecordedPullTimestamp;
   }
   export type ImageDetailList = ImageDetail[];
   export type ImageDigest = string;
@@ -956,6 +1314,25 @@ declare namespace ECR {
   export type ImageIdentifierList = ImageIdentifier[];
   export type ImageList = Image[];
   export type ImageManifest = string;
+  export interface ImageReplicationStatus {
+    /**
+     * The destination Region for the image replication.
+     */
+    region?: Region;
+    /**
+     * The Amazon Web Services account ID associated with the registry to which the image belongs.
+     */
+    registryId?: RegistryId;
+    /**
+     * The image replication status.
+     */
+    status?: ReplicationStatus;
+    /**
+     * The failure code for a replication that has failed.
+     */
+    failureCode?: ReplicationError;
+  }
+  export type ImageReplicationStatusList = ImageReplicationStatus[];
   export interface ImageScanFinding {
     /**
      * The name associated with the finding, usually a CVE number.
@@ -989,13 +1366,17 @@ declare namespace ECR {
      */
     vulnerabilitySourceUpdatedAt?: VulnerabilitySourceUpdateTimestamp;
     /**
+     * The image vulnerability counts, sorted by severity.
+     */
+    findingSeverityCounts?: FindingSeverityCounts;
+    /**
      * The findings from the image scan.
      */
     findings?: ImageScanFindingList;
     /**
-     * The image vulnerability counts, sorted by severity.
+     * Details about the enhanced scan findings from Amazon Inspector.
      */
-    findingSeverityCounts?: FindingSeverityCounts;
+    enhancedFindings?: EnhancedImageScanFindingList;
   }
   export interface ImageScanFindingsSummary {
     /**
@@ -1023,7 +1404,7 @@ declare namespace ECR {
   }
   export interface ImageScanningConfiguration {
     /**
-     * The setting that determines whether images are scanned after being pushed to a repository. If set to true, images will be scanned after being pushed. If this parameter is not specified, it will default to false and images will not be scanned unless a scan is manually started with the StartImageScan API.
+     * The setting that determines whether images are scanned after being pushed to a repository. If set to true, images will be scanned after being pushed. If this parameter is not specified, it will default to false and images will not be scanned unless a scan is manually started with the API_StartImageScan API.
      */
     scanOnPush?: ScanOnPushFlag;
   }
@@ -1031,9 +1412,10 @@ declare namespace ECR {
   export type ImageTag = string;
   export type ImageTagList = ImageTag[];
   export type ImageTagMutability = "MUTABLE"|"IMMUTABLE"|string;
+  export type ImageTagsList = ImageTag[];
   export interface InitiateLayerUploadRequest {
     /**
-     * The AWS account ID associated with the registry to which you intend to upload layers. If you do not specify a registry, the default registry is assumed.
+     * The Amazon Web Services account ID associated with the registry to which you intend to upload layers. If you do not specify a registry, the default registry is assumed.
      */
     registryId?: RegistryId;
     /**
@@ -1146,7 +1528,7 @@ declare namespace ECR {
   }
   export interface ListImagesRequest {
     /**
-     * The AWS account ID associated with the registry that contains the repository in which to list images. If you do not specify a registry, the default registry is assumed.
+     * The Amazon Web Services account ID associated with the registry that contains the repository in which to list images. If you do not specify a registry, the default registry is assumed.
      */
     registryId?: RegistryId;
     /**
@@ -1191,13 +1573,79 @@ declare namespace ECR {
   export type MaxResults = number;
   export type MediaType = string;
   export type MediaTypeList = MediaType[];
+  export type Metric = string;
   export type NextToken = string;
+  export type PackageManager = string;
+  export interface PackageVulnerabilityDetails {
+    /**
+     * An object that contains details about the CVSS score of a finding.
+     */
+    cvss?: CvssScoreList;
+    /**
+     * One or more URLs that contain details about this vulnerability type.
+     */
+    referenceUrls?: ReferenceUrlsList;
+    /**
+     * One or more vulnerabilities related to the one identified in this finding.
+     */
+    relatedVulnerabilities?: RelatedVulnerabilitiesList;
+    /**
+     * The source of the vulnerability information.
+     */
+    source?: Source;
+    /**
+     * A URL to the source of the vulnerability information.
+     */
+    sourceUrl?: Url;
+    /**
+     * The date and time that this vulnerability was first added to the vendor's database.
+     */
+    vendorCreatedAt?: _Date;
+    /**
+     * The severity the vendor has given to this vulnerability type.
+     */
+    vendorSeverity?: Severity;
+    /**
+     * The date and time the vendor last updated this vulnerability in their database.
+     */
+    vendorUpdatedAt?: _Date;
+    /**
+     * The ID given to this vulnerability.
+     */
+    vulnerabilityId?: VulnerabilityId;
+    /**
+     * The packages impacted by this vulnerability.
+     */
+    vulnerablePackages?: VulnerablePackagesList;
+  }
   export type PartSize = number;
+  export type Platform = string;
   export type ProxyEndpoint = string;
+  export interface PullThroughCacheRule {
+    /**
+     * The Amazon ECR repository prefix associated with the pull through cache rule.
+     */
+    ecrRepositoryPrefix?: PullThroughCacheRuleRepositoryPrefix;
+    /**
+     * The upstream registry URL associated with the pull through cache rule.
+     */
+    upstreamRegistryUrl?: Url;
+    /**
+     * The date and time the pull through cache was created.
+     */
+    createdAt?: CreationTimestamp;
+    /**
+     * The Amazon Web Services account ID associated with the registry the pull through cache rule is associated with.
+     */
+    registryId?: RegistryId;
+  }
+  export type PullThroughCacheRuleList = PullThroughCacheRule[];
+  export type PullThroughCacheRuleRepositoryPrefix = string;
+  export type PullThroughCacheRuleRepositoryPrefixList = PullThroughCacheRuleRepositoryPrefix[];
   export type PushTimestamp = Date;
   export interface PutImageRequest {
     /**
-     * The AWS account ID associated with the registry that contains the repository in which to put the image. If you do not specify a registry, the default registry is assumed.
+     * The Amazon Web Services account ID associated with the registry that contains the repository in which to put the image. If you do not specify a registry, the default registry is assumed.
      */
     registryId?: RegistryId;
     /**
@@ -1229,7 +1677,7 @@ declare namespace ECR {
   }
   export interface PutImageScanningConfigurationRequest {
     /**
-     * The AWS account ID associated with the registry that contains the repository in which to update the image scanning configuration setting. If you do not specify a registry, the default registry is assumed.
+     * The Amazon Web Services account ID associated with the registry that contains the repository in which to update the image scanning configuration setting. If you do not specify a registry, the default registry is assumed.
      */
     registryId?: RegistryId;
     /**
@@ -1257,7 +1705,7 @@ declare namespace ECR {
   }
   export interface PutImageTagMutabilityRequest {
     /**
-     * The AWS account ID associated with the registry that contains the repository in which to update the image tag mutability settings. If you do not specify a registry, the default registry is assumed.
+     * The Amazon Web Services account ID associated with the registry that contains the repository in which to update the image tag mutability settings. If you do not specify a registry, the default registry is assumed.
      */
     registryId?: RegistryId;
     /**
@@ -1285,7 +1733,7 @@ declare namespace ECR {
   }
   export interface PutLifecyclePolicyRequest {
     /**
-     * The AWS account ID associated with the registry that contains the repository. If you do&#x2028; not specify a registry, the default registry is assumed.
+     * The Amazon Web Services account ID associated with the registry that contains the repository. If you do&#x2028; not specify a registry, the default registry is assumed.
      */
     registryId?: RegistryId;
     /**
@@ -1327,6 +1775,22 @@ declare namespace ECR {
      */
     policyText?: RegistryPolicyText;
   }
+  export interface PutRegistryScanningConfigurationRequest {
+    /**
+     * The scanning type to set for the registry. When a registry scanning configuration is not defined, by default the BASIC scan type is used. When basic scanning is used, you may specify filters to determine which individual repositories, or all repositories, are scanned when new images are pushed to those repositories. Alternatively, you can do manual scans of images with basic scanning. When the ENHANCED scan type is set, Amazon Inspector provides automated vulnerability scanning. You may choose between continuous scanning or scan on push and you may specify filters to determine which individual repositories, or all repositories, are scanned.
+     */
+    scanType?: ScanType;
+    /**
+     * The scanning rules to use for the registry. A scanning rule is used to determine which repository filters are used and at what frequency scanning will occur.
+     */
+    rules?: RegistryScanningRuleList;
+  }
+  export interface PutRegistryScanningConfigurationResponse {
+    /**
+     * The scanning configuration for your registry.
+     */
+    registryScanningConfiguration?: RegistryScanningConfiguration;
+  }
   export interface PutReplicationConfigurationRequest {
     /**
      * An object representing the replication configuration for a registry.
@@ -1339,40 +1803,90 @@ declare namespace ECR {
      */
     replicationConfiguration?: ReplicationConfiguration;
   }
+  export type Reason = string;
+  export interface Recommendation {
+    /**
+     * The URL address to the CVE remediation recommendations.
+     */
+    url?: Url;
+    /**
+     * The recommended course of action to remediate the finding.
+     */
+    text?: RecommendationText;
+  }
+  export type RecommendationText = string;
+  export type RecordedPullTimestamp = Date;
+  export type ReferenceUrlsList = Url[];
   export type Region = string;
   export type RegistryId = string;
   export type RegistryPolicyText = string;
+  export interface RegistryScanningConfiguration {
+    /**
+     * The type of scanning configured for the registry.
+     */
+    scanType?: ScanType;
+    /**
+     * The scanning rules associated with the registry.
+     */
+    rules?: RegistryScanningRuleList;
+  }
+  export interface RegistryScanningRule {
+    /**
+     * The frequency that scans are performed at for a private registry. When the ENHANCED scan type is specified, the supported scan frequencies are CONTINUOUS_SCAN and SCAN_ON_PUSH. When the BASIC scan type is specified, the SCAN_ON_PUSH and MANUAL scan frequencies are supported.
+     */
+    scanFrequency: ScanFrequency;
+    /**
+     * The repository filters associated with the scanning configuration for a private registry.
+     */
+    repositoryFilters: ScanningRepositoryFilterList;
+  }
+  export type RegistryScanningRuleList = RegistryScanningRule[];
+  export type RelatedVulnerabilitiesList = RelatedVulnerability[];
+  export type RelatedVulnerability = string;
+  export type Release = string;
+  export interface Remediation {
+    /**
+     * An object that contains information about the recommended course of action to remediate the finding.
+     */
+    recommendation?: Recommendation;
+  }
   export interface ReplicationConfiguration {
     /**
-     * An array of objects representing the replication rules for a replication configuration. A replication configuration may contain only one replication rule but the rule may contain one or more replication destinations.
+     * An array of objects representing the replication destinations and repository filters for a replication configuration.
      */
     rules: ReplicationRuleList;
   }
   export interface ReplicationDestination {
     /**
-     * A Region to replicate to.
+     * The Region to replicate to.
      */
     region: Region;
     /**
-     * The account ID of the destination registry to replicate to.
+     * The Amazon Web Services account ID of the Amazon ECR private registry to replicate to. When configuring cross-Region replication within your own registry, specify your own account ID.
      */
     registryId: RegistryId;
   }
   export type ReplicationDestinationList = ReplicationDestination[];
+  export type ReplicationError = string;
   export interface ReplicationRule {
     /**
-     * An array of objects representing the details of a replication destination.
+     * An array of objects representing the destination for a replication rule.
      */
     destinations: ReplicationDestinationList;
+    /**
+     * An array of objects representing the filters for a replication rule. Specifying a repository filter for a replication rule provides a method for controlling which repositories in a private registry are replicated.
+     */
+    repositoryFilters?: RepositoryFilterList;
   }
   export type ReplicationRuleList = ReplicationRule[];
+  export type ReplicationStatus = "IN_PROGRESS"|"COMPLETE"|"FAILED"|string;
   export interface Repository {
     /**
-     * The Amazon Resource Name (ARN) that identifies the repository. The ARN contains the arn:aws:ecr namespace, followed by the region of the repository, AWS account ID of the repository owner, repository namespace, and repository name. For example, arn:aws:ecr:region:012345678910:repository/test.
+     * The Amazon Resource Name (ARN) that identifies the repository. The ARN contains the arn:aws:ecr namespace, followed by the region of the repository, Amazon Web Services account ID of the repository owner, repository namespace, and repository name. For example, arn:aws:ecr:region:012345678910:repository/test.
      */
     repositoryArn?: Arn;
     /**
-     * The AWS account ID associated with the registry that contains the repository.
+     * The Amazon Web Services account ID associated with the registry that contains the repository.
      */
     registryId?: RegistryId;
     /**
@@ -1397,17 +1911,120 @@ declare namespace ECR {
      */
     encryptionConfiguration?: EncryptionConfiguration;
   }
+  export interface RepositoryFilter {
+    /**
+     * The repository filter details. When the PREFIX_MATCH filter type is specified, this value is required and should be the repository name prefix to configure replication for.
+     */
+    filter: RepositoryFilterValue;
+    /**
+     * The repository filter type. The only supported value is PREFIX_MATCH, which is a repository name prefix specified with the filter parameter.
+     */
+    filterType: RepositoryFilterType;
+  }
+  export type RepositoryFilterList = RepositoryFilter[];
+  export type RepositoryFilterType = "PREFIX_MATCH"|string;
+  export type RepositoryFilterValue = string;
   export type RepositoryList = Repository[];
   export type RepositoryName = string;
   export type RepositoryNameList = RepositoryName[];
   export type RepositoryPolicyText = string;
+  export interface RepositoryScanningConfiguration {
+    /**
+     * The ARN of the repository.
+     */
+    repositoryArn?: Arn;
+    /**
+     * The name of the repository.
+     */
+    repositoryName?: RepositoryName;
+    /**
+     * Whether or not scan on push is configured for the repository.
+     */
+    scanOnPush?: ScanOnPushFlag;
+    /**
+     * The scan frequency for the repository.
+     */
+    scanFrequency?: ScanFrequency;
+    /**
+     * The scan filters applied to the repository.
+     */
+    appliedScanFilters?: ScanningRepositoryFilterList;
+  }
+  export interface RepositoryScanningConfigurationFailure {
+    /**
+     * The name of the repository.
+     */
+    repositoryName?: RepositoryName;
+    /**
+     * The failure code.
+     */
+    failureCode?: ScanningConfigurationFailureCode;
+    /**
+     * The reason for the failure.
+     */
+    failureReason?: ScanningConfigurationFailureReason;
+  }
+  export type RepositoryScanningConfigurationFailureList = RepositoryScanningConfigurationFailure[];
+  export type RepositoryScanningConfigurationList = RepositoryScanningConfiguration[];
+  export interface Resource {
+    /**
+     * An object that contains details about the resource involved in a finding.
+     */
+    details?: ResourceDetails;
+    /**
+     * The ID of the resource.
+     */
+    id?: ResourceId;
+    /**
+     * The tags attached to the resource.
+     */
+    tags?: Tags;
+    /**
+     * The type of resource.
+     */
+    type?: Type;
+  }
+  export interface ResourceDetails {
+    /**
+     * An object that contains details about the Amazon ECR container image involved in the finding.
+     */
+    awsEcrContainerImage?: AwsEcrContainerImageDetails;
+  }
+  export type ResourceId = string;
+  export type ResourceList = Resource[];
+  export type ScanFrequency = "SCAN_ON_PUSH"|"CONTINUOUS_SCAN"|"MANUAL"|string;
   export type ScanOnPushFlag = boolean;
-  export type ScanStatus = "IN_PROGRESS"|"COMPLETE"|"FAILED"|string;
+  export type ScanStatus = "IN_PROGRESS"|"COMPLETE"|"FAILED"|"UNSUPPORTED_IMAGE"|"ACTIVE"|"PENDING"|"SCAN_ELIGIBILITY_EXPIRED"|"FINDINGS_UNAVAILABLE"|string;
   export type ScanStatusDescription = string;
   export type ScanTimestamp = Date;
+  export type ScanType = "BASIC"|"ENHANCED"|string;
+  export type ScanningConfigurationFailureCode = "REPOSITORY_NOT_FOUND"|string;
+  export type ScanningConfigurationFailureReason = string;
+  export type ScanningConfigurationRepositoryNameList = RepositoryName[];
+  export interface ScanningRepositoryFilter {
+    /**
+     * The filter to use when scanning.
+     */
+    filter: ScanningRepositoryFilterValue;
+    /**
+     * The type associated with the filter.
+     */
+    filterType: ScanningRepositoryFilterType;
+  }
+  export type ScanningRepositoryFilterList = ScanningRepositoryFilter[];
+  export type ScanningRepositoryFilterType = "WILDCARD"|string;
+  export type ScanningRepositoryFilterValue = string;
+  export type Score = number;
+  export interface ScoreDetails {
+    /**
+     * An object that contains details about the CVSS score given to a finding.
+     */
+    cvss?: CvssScoreDetails;
+  }
+  export type ScoringVector = string;
   export interface SetRepositoryPolicyRequest {
     /**
-     * The AWS account ID associated with the registry that contains the repository. If you do not specify a registry, the default registry is assumed.
+     * The Amazon Web Services account ID associated with the registry that contains the repository. If you do not specify a registry, the default registry is assumed.
      */
     registryId?: RegistryId;
     /**
@@ -1415,7 +2032,7 @@ declare namespace ECR {
      */
     repositoryName: RepositoryName;
     /**
-     * The JSON repository policy text to apply to the repository. For more information, see Amazon ECR Repository Policies in the Amazon Elastic Container Registry User Guide.
+     * The JSON repository policy text to apply to the repository. For more information, see Amazon ECR repository policies in the Amazon Elastic Container Registry User Guide.
      */
     policyText: RepositoryPolicyText;
     /**
@@ -1437,10 +2054,13 @@ declare namespace ECR {
      */
     policyText?: RepositoryPolicyText;
   }
+  export type Severity = string;
   export type SeverityCount = number;
+  export type Source = string;
+  export type SourceLayerHash = string;
   export interface StartImageScanRequest {
     /**
-     * The AWS account ID associated with the registry that contains the repository in which to start an image scan request. If you do not specify a registry, the default registry is assumed.
+     * The Amazon Web Services account ID associated with the registry that contains the repository in which to start an image scan request. If you do not specify a registry, the default registry is assumed.
      */
     registryId?: RegistryId;
     /**
@@ -1466,7 +2086,7 @@ declare namespace ECR {
   }
   export interface StartLifecyclePolicyPreviewRequest {
     /**
-     * The AWS account ID associated with the registry that contains the repository. If you do not specify a registry, the default registry is assumed.
+     * The Amazon Web Services account ID associated with the registry that contains the repository. If you do not specify a registry, the default registry is assumed.
      */
     registryId?: RegistryId;
     /**
@@ -1496,13 +2116,14 @@ declare namespace ECR {
      */
     status?: LifecyclePolicyPreviewStatus;
   }
+  export type Status = string;
   export interface Tag {
     /**
      * One part of a key-value pair that make up a tag. A key is a general label that acts like a category for more specific tag values.
      */
     Key?: TagKey;
     /**
-     * The optional part of a key-value pair that make up a tag. A value acts as a descriptor within a tag category (key).
+     * A value acts as a descriptor within a tag category (key).
      */
     Value?: TagValue;
   }
@@ -1523,6 +2144,9 @@ declare namespace ECR {
   }
   export type TagStatus = "TAGGED"|"UNTAGGED"|"ANY"|string;
   export type TagValue = string;
+  export type Tags = {[key: string]: TagValue};
+  export type Title = string;
+  export type Type = string;
   export interface UntagResourceRequest {
     /**
      * The Amazon Resource Name (ARN) of the resource from which to remove tags. Currently, the only supported resource is an Amazon ECR repository.
@@ -1538,7 +2162,7 @@ declare namespace ECR {
   export type UploadId = string;
   export interface UploadLayerPartRequest {
     /**
-     * The AWS account ID associated with the registry to which you are uploading layer parts. If you do not specify a registry, the default registry is assumed.
+     * The Amazon Web Services account ID associated with the registry to which you are uploading layer parts. If you do not specify a registry, the default registry is assumed.
      */
     registryId?: RegistryId;
     /**
@@ -1581,7 +2205,45 @@ declare namespace ECR {
     lastByteReceived?: PartSize;
   }
   export type Url = string;
+  export type Version = string;
+  export type VulnerabilityId = string;
   export type VulnerabilitySourceUpdateTimestamp = Date;
+  export interface VulnerablePackage {
+    /**
+     * The architecture of the vulnerable package.
+     */
+    arch?: Arch;
+    /**
+     * The epoch of the vulnerable package.
+     */
+    epoch?: Epoch;
+    /**
+     * The file path of the vulnerable package.
+     */
+    filePath?: FilePath;
+    /**
+     * The name of the vulnerable package.
+     */
+    name?: VulnerablePackageName;
+    /**
+     * The package manager of the vulnerable package.
+     */
+    packageManager?: PackageManager;
+    /**
+     * The release of the vulnerable package.
+     */
+    release?: Release;
+    /**
+     * The source layer hash of the vulnerable package.
+     */
+    sourceLayerHash?: SourceLayerHash;
+    /**
+     * The version of the vulnerable package.
+     */
+    version?: Version;
+  }
+  export type VulnerablePackageName = string;
+  export type VulnerablePackagesList = VulnerablePackage[];
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

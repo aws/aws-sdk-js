@@ -12,6 +12,14 @@ declare class MediaTailor extends Service {
   constructor(options?: MediaTailor.Types.ClientConfiguration)
   config: Config & MediaTailor.Types.ClientConfiguration;
   /**
+   * Configures Amazon CloudWatch log settings for a playback configuration.
+   */
+  configureLogsForPlaybackConfiguration(params: MediaTailor.Types.ConfigureLogsForPlaybackConfigurationRequest, callback?: (err: AWSError, data: MediaTailor.Types.ConfigureLogsForPlaybackConfigurationResponse) => void): Request<MediaTailor.Types.ConfigureLogsForPlaybackConfigurationResponse, AWSError>;
+  /**
+   * Configures Amazon CloudWatch log settings for a playback configuration.
+   */
+  configureLogsForPlaybackConfiguration(callback?: (err: AWSError, data: MediaTailor.Types.ConfigureLogsForPlaybackConfigurationResponse) => void): Request<MediaTailor.Types.ConfigureLogsForPlaybackConfigurationResponse, AWSError>;
+  /**
    * Creates a channel.
    */
   createChannel(params: MediaTailor.Types.CreateChannelRequest, callback?: (err: AWSError, data: MediaTailor.Types.CreateChannelResponse) => void): Request<MediaTailor.Types.CreateChannelResponse, AWSError>;
@@ -19,6 +27,14 @@ declare class MediaTailor extends Service {
    * Creates a channel.
    */
   createChannel(callback?: (err: AWSError, data: MediaTailor.Types.CreateChannelResponse) => void): Request<MediaTailor.Types.CreateChannelResponse, AWSError>;
+  /**
+   * Creates a new prefetch schedule for the specified playback configuration.
+   */
+  createPrefetchSchedule(params: MediaTailor.Types.CreatePrefetchScheduleRequest, callback?: (err: AWSError, data: MediaTailor.Types.CreatePrefetchScheduleResponse) => void): Request<MediaTailor.Types.CreatePrefetchScheduleResponse, AWSError>;
+  /**
+   * Creates a new prefetch schedule for the specified playback configuration.
+   */
+  createPrefetchSchedule(callback?: (err: AWSError, data: MediaTailor.Types.CreatePrefetchScheduleResponse) => void): Request<MediaTailor.Types.CreatePrefetchScheduleResponse, AWSError>;
   /**
    * Creates a program.
    */
@@ -67,6 +83,14 @@ declare class MediaTailor extends Service {
    * Deletes the playback configuration for the specified name.  
    */
   deletePlaybackConfiguration(callback?: (err: AWSError, data: MediaTailor.Types.DeletePlaybackConfigurationResponse) => void): Request<MediaTailor.Types.DeletePlaybackConfigurationResponse, AWSError>;
+  /**
+   * Deletes a prefetch schedule for a specific playback configuration. If you call DeletePrefetchSchedule on an expired prefetch schedule, MediaTailor returns an HTTP 404 status code.
+   */
+  deletePrefetchSchedule(params: MediaTailor.Types.DeletePrefetchScheduleRequest, callback?: (err: AWSError, data: MediaTailor.Types.DeletePrefetchScheduleResponse) => void): Request<MediaTailor.Types.DeletePrefetchScheduleResponse, AWSError>;
+  /**
+   * Deletes a prefetch schedule for a specific playback configuration. If you call DeletePrefetchSchedule on an expired prefetch schedule, MediaTailor returns an HTTP 404 status code.
+   */
+  deletePrefetchSchedule(callback?: (err: AWSError, data: MediaTailor.Types.DeletePrefetchScheduleResponse) => void): Request<MediaTailor.Types.DeletePrefetchScheduleResponse, AWSError>;
   /**
    * Deletes a specific program on a specific channel.
    */
@@ -148,6 +172,22 @@ declare class MediaTailor extends Service {
    */
   getPlaybackConfiguration(callback?: (err: AWSError, data: MediaTailor.Types.GetPlaybackConfigurationResponse) => void): Request<MediaTailor.Types.GetPlaybackConfigurationResponse, AWSError>;
   /**
+   * Returns information about the prefetch schedule for a specific playback configuration. If you call GetPrefetchSchedule on an expired prefetch schedule, MediaTailor returns an HTTP 404 status code.
+   */
+  getPrefetchSchedule(params: MediaTailor.Types.GetPrefetchScheduleRequest, callback?: (err: AWSError, data: MediaTailor.Types.GetPrefetchScheduleResponse) => void): Request<MediaTailor.Types.GetPrefetchScheduleResponse, AWSError>;
+  /**
+   * Returns information about the prefetch schedule for a specific playback configuration. If you call GetPrefetchSchedule on an expired prefetch schedule, MediaTailor returns an HTTP 404 status code.
+   */
+  getPrefetchSchedule(callback?: (err: AWSError, data: MediaTailor.Types.GetPrefetchScheduleResponse) => void): Request<MediaTailor.Types.GetPrefetchScheduleResponse, AWSError>;
+  /**
+   * Returns a list of alerts for the given resource.
+   */
+  listAlerts(params: MediaTailor.Types.ListAlertsRequest, callback?: (err: AWSError, data: MediaTailor.Types.ListAlertsResponse) => void): Request<MediaTailor.Types.ListAlertsResponse, AWSError>;
+  /**
+   * Returns a list of alerts for the given resource.
+   */
+  listAlerts(callback?: (err: AWSError, data: MediaTailor.Types.ListAlertsResponse) => void): Request<MediaTailor.Types.ListAlertsResponse, AWSError>;
+  /**
    * Retrieves a list of channels that are associated with this account.
    */
   listChannels(params: MediaTailor.Types.ListChannelsRequest, callback?: (err: AWSError, data: MediaTailor.Types.ListChannelsResponse) => void): Request<MediaTailor.Types.ListChannelsResponse, AWSError>;
@@ -163,6 +203,14 @@ declare class MediaTailor extends Service {
    * Returns a list of the playback configurations defined in AWS Elemental MediaTailor. You can specify a maximum number of configurations to return at a time. The default maximum is 50. Results are returned in pagefuls. If MediaTailor has more configurations than the specified maximum, it provides parameters in the response that you can use to retrieve the next pageful.  
    */
   listPlaybackConfigurations(callback?: (err: AWSError, data: MediaTailor.Types.ListPlaybackConfigurationsResponse) => void): Request<MediaTailor.Types.ListPlaybackConfigurationsResponse, AWSError>;
+  /**
+   * Creates a new prefetch schedule.
+   */
+  listPrefetchSchedules(params: MediaTailor.Types.ListPrefetchSchedulesRequest, callback?: (err: AWSError, data: MediaTailor.Types.ListPrefetchSchedulesResponse) => void): Request<MediaTailor.Types.ListPrefetchSchedulesResponse, AWSError>;
+  /**
+   * Creates a new prefetch schedule.
+   */
+  listPrefetchSchedules(callback?: (err: AWSError, data: MediaTailor.Types.ListPrefetchSchedulesResponse) => void): Request<MediaTailor.Types.ListPrefetchSchedulesResponse, AWSError>;
   /**
    * Retrieves a list of source locations.
    */
@@ -266,8 +314,12 @@ declare namespace MediaTailor {
      * The type of authentication used to access content from HttpConfiguration::BaseUrl on your source location. Accepted value: S3_SIGV4. S3_SIGV4 - AWS Signature Version 4 authentication for Amazon S3 hosted virtual-style access. If your source location base URL is an Amazon S3 bucket, MediaTailor can use AWS Signature Version 4 (SigV4) authentication to access the bucket where your source content is stored. Your MediaTailor source location baseURL must follow the S3 virtual hosted-style request URL format. For example, https://bucket-name.s3.Region.amazonaws.com/key-name. Before you can use S3_SIGV4, you must meet these requirements: • You must allow MediaTailor to access your S3 bucket by granting mediatailor.amazonaws.com principal access in IAM. For information about configuring access in IAM, see Access management in the IAM User Guide. • The mediatailor.amazonaws.com service principal must have permissions to read all top level manifests referenced by the VodSource packaging configurations. • The caller of the API must have s3:GetObject IAM permissions to read all top level manifests referenced by your MediaTailor VodSource packaging configurations.
      */
     AccessType?: AccessType;
+    /**
+     * AWS Secrets Manager access token configuration parameters.
+     */
+    SecretsManagerAccessTokenConfiguration?: SecretsManagerAccessTokenConfiguration;
   }
-  export type AccessType = "S3_SIGV4"|string;
+  export type AccessType = "S3_SIGV4"|"SECRETS_MANAGER_ACCESS_TOKEN"|string;
   export interface AdBreak {
     /**
      * The SCTE-35 ad insertion type. Accepted value: SPLICE_INSERT.
@@ -291,6 +343,38 @@ declare namespace MediaTailor {
      * Enables ad marker passthrough for your configuration.
      */
     Enabled?: __boolean;
+  }
+  export interface Alert {
+    /**
+     * The code for the alert. For example, NOT_PROCESSED.
+     */
+    AlertCode: __string;
+    /**
+     * If an alert is generated for a resource, an explanation of the reason for the alert.
+     */
+    AlertMessage: __string;
+    /**
+     * The timestamp when the alert was last modified.
+     */
+    LastModifiedTime: __timestampUnix;
+    /**
+     * The Amazon Resource Names (ARNs) related to this alert.
+     */
+    RelatedResourceArns: __listOf__string;
+    /**
+     * The Amazon Resource Name (ARN) of the resource.
+     */
+    ResourceArn: __string;
+  }
+  export interface AvailMatchingCriteria {
+    /**
+     * The dynamic variable(s) that MediaTailor should use as avail matching criteria. MediaTailor only places the prefetched ads into the avail if the avail matches the criteria defined by the dynamic variable. For information about dynamic variables, see Using dynamic ad variables in the MediaTailor User Guide. You can include up to 100 dynamic variables.
+     */
+    DynamicVariable: __string;
+    /**
+     * For the DynamicVariable specified in AvailMatchingCriteria, the Operator that is used for the comparison.
+     */
+    Operator: Operator;
   }
   export interface AvailSuppression {
     /**
@@ -340,6 +424,10 @@ declare namespace MediaTailor {
      */
     CreationTime?: __timestampUnix;
     /**
+     * The slate used to fill gaps between programs in the schedule. You must configure filler slate if your channel uses the LINEAR PlaybackMode. MediaTailor doesn't support filler slate for channels using the LOOP PlaybackMode.
+     */
+    FillerSlate?: SlateSource;
+    /**
      * The timestamp of when the channel was last modified.
      */
     LastModifiedTime?: __timestampUnix;
@@ -348,7 +436,7 @@ declare namespace MediaTailor {
      */
     Outputs: ResponseOutputs;
     /**
-     * The type of playback mode for this channel. Possible values: ONCE or LOOP.
+     * The type of playback mode for this channel. LINEAR - Programs play back-to-back only once. LOOP - Programs play back-to-back in an endless loop. When the last program in the schedule plays, playback loops back to the first program in the schedule.
      */
     PlaybackMode: __string;
     /**
@@ -359,17 +447,41 @@ declare namespace MediaTailor {
   export type ChannelState = "RUNNING"|"STOPPED"|string;
   export type ConfigurationAliasesRequest = {[key: string]: __mapOf__string};
   export type ConfigurationAliasesResponse = {[key: string]: __mapOf__string};
+  export interface ConfigureLogsForPlaybackConfigurationRequest {
+    /**
+     * The percentage of session logs that MediaTailor sends to your Cloudwatch Logs account. For example, if your playback configuration has 1000 sessions and percentEnabled is set to 60, MediaTailor sends logs for 600 of the sessions to CloudWatch Logs. MediaTailor decides at random which of the playback configuration sessions to send logs for. If you want to view logs for a specific session, you can use the debug log mode. Valid values: 0 - 100
+     */
+    PercentEnabled: __integer;
+    /**
+     * The name of the playback configuration.
+     */
+    PlaybackConfigurationName: __string;
+  }
+  export interface ConfigureLogsForPlaybackConfigurationResponse {
+    /**
+     * The percentage of session logs that MediaTailor sends to your Cloudwatch Logs account.
+     */
+    PercentEnabled?: __integer;
+    /**
+     * The name of the playback configuration.
+     */
+    PlaybackConfigurationName?: __string;
+  }
   export interface CreateChannelRequest {
     /**
      * The identifier for the channel you are working on.
      */
     ChannelName: __string;
     /**
+     * The slate used to fill gaps between programs in the schedule. You must configure filler slate if your channel uses the LINEAR PlaybackMode. MediaTailor doesn't support filler slate for channels using the LOOP PlaybackMode.
+     */
+    FillerSlate?: SlateSource;
+    /**
      * The channel's output properties.
      */
     Outputs: RequestOutputs;
     /**
-     * The type of playback mode for this channel. The only supported value is LOOP.
+     * The type of playback mode to use for this channel. LINEAR - The programs in the schedule play once back-to-back in the schedule. LOOP - The programs in the schedule play back-to-back in an endless loop. When the last program in the schedule stops playing, playback loops back to the first program in the schedule.
      */
     PlaybackMode: PlaybackMode;
     /**
@@ -395,6 +507,10 @@ declare namespace MediaTailor {
      */
     CreationTime?: __timestampUnix;
     /**
+     * Contains information about the slate used to fill gaps between programs in the schedule.
+     */
+    FillerSlate?: SlateSource;
+    /**
      * The timestamp of when the channel was last modified.
      */
     LastModifiedTime?: __timestampUnix;
@@ -403,13 +519,61 @@ declare namespace MediaTailor {
      */
     Outputs?: ResponseOutputs;
     /**
-     * The type of playback for this channel. The only supported value is LOOP.
+     * The channel's playback mode.
      */
     PlaybackMode?: __string;
     /**
      * The tags assigned to the channel.
      */
     Tags?: __mapOf__string;
+  }
+  export interface CreatePrefetchScheduleRequest {
+    /**
+     * The configuration settings for MediaTailor's consumption of the prefetched ads from the ad decision server. Each consumption configuration contains an end time and an optional start time that define the consumption window. Prefetch schedules automatically expire no earlier than seven days after the end time.
+     */
+    Consumption: PrefetchConsumption;
+    /**
+     * The identifier for the playback configuration.
+     */
+    Name: __string;
+    /**
+     * The name of the playback configuration.
+     */
+    PlaybackConfigurationName: __string;
+    /**
+     * The configuration settings for retrieval of prefetched ads from the ad decision server. Only one set of prefetched ads will be retrieved and subsequently consumed for each ad break.
+     */
+    Retrieval: PrefetchRetrieval;
+    /**
+     * An optional stream identifier that MediaTailor uses to prefetch ads for multiple streams that use the same playback configuration. If StreamId is specified, MediaTailor returns all of the prefetch schedules with an exact match on StreamId. If not specified, MediaTailor returns all of the prefetch schedules for the playback configuration, regardless of StreamId.
+     */
+    StreamId?: __string;
+  }
+  export interface CreatePrefetchScheduleResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the prefetch schedule.
+     */
+    Arn?: __string;
+    /**
+     * Consumption settings determine how, and when, MediaTailor places the prefetched ads into ad breaks. Ad consumption occurs within a span of time that you define, called a consumption window. You can designate which ad breaks that MediaTailor fills with prefetch ads by setting avail matching criteria.
+     */
+    Consumption?: PrefetchConsumption;
+    /**
+     * The name of the prefetch schedule. The name must be unique among all prefetch schedules that are associated with the specified playback configuration.
+     */
+    Name?: __string;
+    /**
+     * The name of the playback configuration to create the prefetch schedule for.
+     */
+    PlaybackConfigurationName?: __string;
+    /**
+     * A complex type that contains settings for prefetch retrieval from the ad decision server (ADS).
+     */
+    Retrieval?: PrefetchRetrieval;
+    /**
+     * An optional stream identifier that you can specify in order to prefetch for multiple streams that use the same playback configuration.
+     */
+    StreamId?: __string;
   }
   export interface CreateProgramRequest {
     /**
@@ -459,6 +623,10 @@ declare namespace MediaTailor {
      */
     ProgramName?: __string;
     /**
+     * The date and time that the program is scheduled to start in ISO 8601 format and Coordinated Universal Time (UTC). For example, the value 2021-03-27T17:48:16.751Z represents March 27, 2021 at 17:48:16.751 UTC.
+     */
+    ScheduledStartTime?: __timestampUnix;
+    /**
      * The source location name.
      */
     SourceLocationName?: __string;
@@ -480,6 +648,7 @@ declare namespace MediaTailor {
      * The source's HTTP package configurations.
      */
     HttpConfiguration: HttpConfiguration;
+    SegmentDeliveryConfigurations?: __listOfSegmentDeliveryConfiguration;
     /**
      * The identifier for the source location you are working on.
      */
@@ -514,6 +683,7 @@ declare namespace MediaTailor {
      * The timestamp that indicates when the source location was last modified.
      */
     LastModifiedTime?: __timestampUnix;
+    SegmentDeliveryConfigurations?: __listOfSegmentDeliveryConfiguration;
     /**
      * The name of the source location.
      */
@@ -643,6 +813,18 @@ declare namespace MediaTailor {
   }
   export interface DeletePlaybackConfigurationResponse {
   }
+  export interface DeletePrefetchScheduleRequest {
+    /**
+     * The identifier for the playback configuration.
+     */
+    Name: __string;
+    /**
+     * The name of the playback configuration.
+     */
+    PlaybackConfigurationName: __string;
+  }
+  export interface DeletePrefetchScheduleResponse {
+  }
   export interface DeleteProgramRequest {
     /**
      * The identifier for the channel you are working on.
@@ -699,6 +881,10 @@ declare namespace MediaTailor {
      */
     CreationTime?: __timestampUnix;
     /**
+     * Contains information about the slate used to fill gaps between programs in the schedule.
+     */
+    FillerSlate?: SlateSource;
+    /**
      * The timestamp of when the channel was last modified.
      */
     LastModifiedTime?: __timestampUnix;
@@ -707,7 +893,7 @@ declare namespace MediaTailor {
      */
     Outputs?: ResponseOutputs;
     /**
-     * The type of playback for this channel. The only supported value is LOOP.
+     * The channel's playback mode.
      */
     PlaybackMode?: __string;
     /**
@@ -746,6 +932,10 @@ declare namespace MediaTailor {
      * The name of the program.
      */
     ProgramName?: __string;
+    /**
+     * The date and time that the program is scheduled to start in ISO 8601 format and Coordinated Universal Time (UTC). For example, the value 2021-03-27T17:48:16.751Z represents March 27, 2021 at 17:48:16.751 UTC.
+     */
+    ScheduledStartTime?: __timestampUnix;
     /**
      * The source location name.
      */
@@ -786,6 +976,7 @@ declare namespace MediaTailor {
      * The timestamp that indicates when the source location was last modified.
      */
     LastModifiedTime?: __timestampUnix;
+    SegmentDeliveryConfigurations?: __listOfSegmentDeliveryConfiguration;
     /**
      * The name of the source location.
      */
@@ -915,6 +1106,10 @@ declare namespace MediaTailor {
      */
     LivePreRollConfiguration?: LivePreRollConfiguration;
     /**
+     * The Amazon CloudWatch log settings for a playback configuration.
+     */
+    LogConfiguration?: LogConfiguration;
+    /**
      * The configuration for manifest processing rules. Manifest processing rules enable customization of the personalized manifests created by MediaTailor.
      */
     ManifestProcessingRules?: ManifestProcessingRules;
@@ -955,6 +1150,42 @@ declare namespace MediaTailor {
      */
     VideoContentSourceUrl?: __string;
   }
+  export interface GetPrefetchScheduleRequest {
+    /**
+     * The identifier for the playback configuration.
+     */
+    Name: __string;
+    /**
+     * The name of the playback configuration.
+     */
+    PlaybackConfigurationName: __string;
+  }
+  export interface GetPrefetchScheduleResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the prefetch schedule.
+     */
+    Arn?: __string;
+    /**
+     * Consumption settings determine how, and when, MediaTailor places the prefetched ads into ad breaks. Ad consumption occurs within a span of time that you define, called a consumption window. You can designate which ad breaks that MediaTailor fills with prefetch ads by setting avail matching criteria.
+     */
+    Consumption?: PrefetchConsumption;
+    /**
+     * The name of the prefetch schedule. The name must be unique among all prefetch schedules that are associated with the specified playback configuration.
+     */
+    Name?: __string;
+    /**
+     * The name of the playback configuration to create the prefetch schedule for.
+     */
+    PlaybackConfigurationName?: __string;
+    /**
+     * A complex type that contains settings for prefetch retrieval from the ad decision server (ADS).
+     */
+    Retrieval?: PrefetchRetrieval;
+    /**
+     * An optional stream identifier that you can specify in order to prefetch for multiple streams that use the same playback configuration.
+     */
+    StreamId?: __string;
+  }
   export interface HlsConfiguration {
     /**
      * The URL that is used to initiate a playback session for devices that support Apple HLS. The session uses server-side reporting.
@@ -988,6 +1219,30 @@ declare namespace MediaTailor {
     Type: Type;
   }
   export type HttpPackageConfigurations = HttpPackageConfiguration[];
+  export interface ListAlertsRequest {
+    /**
+     * Upper bound on number of records to return. The maximum number of results is 100.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * Pagination token from the GET list request. Use the token to fetch the next page of results.
+     */
+    NextToken?: __string;
+    /**
+     * The Amazon Resource Name (ARN) of the resource.
+     */
+    ResourceArn: __string;
+  }
+  export interface ListAlertsResponse {
+    /**
+     * An array of alerts that are associated with this resource.
+     */
+    Items?: __listOfAlert;
+    /**
+     * Pagination token from the list request. Use the token to fetch the next page of results.
+     */
+    NextToken?: __string;
+  }
   export interface ListChannelsRequest {
     /**
      * Upper bound on number of records to return. The maximum number of results is 100.
@@ -1025,6 +1280,34 @@ declare namespace MediaTailor {
     Items?: __listOfPlaybackConfiguration;
     /**
      * Pagination token returned by the GET list request when results exceed the maximum allowed. Use the token to fetch the next page of results.
+     */
+    NextToken?: __string;
+  }
+  export interface ListPrefetchSchedulesRequest {
+    /**
+     * The maximum number of prefetch schedules that you want MediaTailor to return in response to the current request. If the playback configuration has more than MaxResults prefetch schedules, use the value of NextToken in the response to get the next page of results.
+     */
+    MaxResults?: __integerMin1Max100;
+    /**
+     * (Optional) If the playback configuration has more than MaxResults prefetch schedules, use NextToken to get the second and subsequent pages of results. For the first ListPrefetchSchedulesRequest request, omit this value. For the second and subsequent requests, get the value of NextToken from the previous response and specify that value for NextToken in the request. If the previous response didn't include a NextToken element, there are no more prefetch schedules to get.
+     */
+    NextToken?: __string;
+    /**
+     * The name of the playback configuration.
+     */
+    PlaybackConfigurationName: __string;
+    /**
+     * An optional filtering parameter whereby MediaTailor filters the prefetch schedules to include only specific streams.
+     */
+    StreamId?: __string;
+  }
+  export interface ListPrefetchSchedulesResponse {
+    /**
+     * Lists the prefetch schedules. An empty Items list doesn't mean there aren't more items to fetch, just that that page was empty.
+     */
+    Items?: __listOfPrefetchSchedule;
+    /**
+     * The value that you will use forNextToken in the next ListPrefetchSchedulesRequest request.
      */
     NextToken?: __string;
   }
@@ -1094,6 +1377,12 @@ declare namespace MediaTailor {
      */
     MaxDurationSeconds?: __integer;
   }
+  export interface LogConfiguration {
+    /**
+     * The percentage of session logs that MediaTailor sends to your Cloudwatch Logs account. For example, if your playback configuration has 1000 sessions and percentEnabled is set to 60, MediaTailor sends logs for 600 of the sessions to CloudWatch Logs. MediaTailor decides at random which of the playback configuration sessions to send logs for. If you want to view logs for a specific session, you can use the debug log mode. Valid values: 0 - 100
+     */
+    PercentEnabled: __integer;
+  }
   export interface ManifestProcessingRules {
     /**
      * For HLS, when set to true, MediaTailor passes through EXT-X-CUE-IN, EXT-X-CUE-OUT, and EXT-X-SPLICEPOINT-SCTE35 ad markers from the origin manifest to the MediaTailor personalized manifest. No logic is applied to these ad markers. For example, if EXT-X-CUE-OUT has a value of 60, but no ads are filled for that ad break, MediaTailor will not set the value to 0.
@@ -1103,6 +1392,7 @@ declare namespace MediaTailor {
   export type MaxResults = number;
   export type MessageType = "SPLICE_INSERT"|string;
   export type Mode = "OFF"|"BEHIND_LIVE_EDGE"|string;
+  export type Operator = "EQUALS"|string;
   export type OriginManifestType = "SINGLE_PERIOD"|"MULTI_PERIOD"|string;
   export interface PlaybackConfiguration {
     /**
@@ -1137,6 +1427,10 @@ declare namespace MediaTailor {
      * The configuration for pre-roll ad insertion.
      */
     LivePreRollConfiguration?: LivePreRollConfiguration;
+    /**
+     * The Amazon CloudWatch log settings for a playback configuration.
+     */
+    LogConfiguration?: LogConfiguration;
     /**
      * The configuration for manifest processing rules. Manifest processing rules enable customization of the personalized manifests created by MediaTailor.
      */
@@ -1178,7 +1472,61 @@ declare namespace MediaTailor {
      */
     VideoContentSourceUrl?: __string;
   }
-  export type PlaybackMode = "LOOP"|string;
+  export type PlaybackMode = "LOOP"|"LINEAR"|string;
+  export interface PrefetchConsumption {
+    /**
+     * If you only want MediaTailor to insert prefetched ads into avails (ad breaks) that match specific dynamic variables, such as scte.event_id, set the avail matching criteria.
+     */
+    AvailMatchingCriteria?: __listOfAvailMatchingCriteria;
+    /**
+     * The time when MediaTailor no longer considers the prefetched ads for use in an ad break. MediaTailor automatically deletes prefetch schedules no less than seven days after the end time. If you'd like to manually delete the prefetch schedule, you can call DeletePrefetchSchedule.
+     */
+    EndTime: __timestampUnix;
+    /**
+     * The time when prefetched ads are considered for use in an ad break. If you don't specify StartTime, the prefetched ads are available after MediaTailor retrives them from the ad decision server.
+     */
+    StartTime?: __timestampUnix;
+  }
+  export interface PrefetchRetrieval {
+    /**
+     * The dynamic variables to use for substitution during prefetch requests to the ad decision server (ADS). You intially configure dynamic variables for the ADS URL when you set up your playback configuration. When you specify DynamicVariables for prefetch retrieval, MediaTailor includes the dynamic variables in the request to the ADS.
+     */
+    DynamicVariables?: __mapOf__string;
+    /**
+     * The time when prefetch retrieval ends for the ad break. Prefetching will be attempted for manifest requests that occur at or before this time.
+     */
+    EndTime: __timestampUnix;
+    /**
+     * The time when prefetch retrievals can start for this break. Ad prefetching will be attempted for manifest requests that occur at or after this time. Defaults to the current time. If not specified, the prefetch retrieval starts as soon as possible.
+     */
+    StartTime?: __timestampUnix;
+  }
+  export interface PrefetchSchedule {
+    /**
+     * The Amazon Resource Name (ARN) of the prefetch schedule.
+     */
+    Arn: __string;
+    /**
+     * Consumption settings determine how, and when, MediaTailor places the prefetched ads into ad breaks. Ad consumption occurs within a span of time that you define, called a consumption window. You can designate which ad breaks that MediaTailor fills with prefetch ads by setting avail matching criteria.
+     */
+    Consumption: PrefetchConsumption;
+    /**
+     * The name of the prefetch schedule. The name must be unique among all prefetch schedules that are associated with the specified playback configuration.
+     */
+    Name: __string;
+    /**
+     * The name of the playback configuration to create the prefetch schedule for.
+     */
+    PlaybackConfigurationName: __string;
+    /**
+     * A complex type that contains settings for prefetch retrieval from the ad decision server (ADS).
+     */
+    Retrieval: PrefetchRetrieval;
+    /**
+     * An optional stream identifier that you can specify in order to prefetch for multiple streams that use the same playback configuration.
+     */
+    StreamId?: __string;
+  }
   export interface PutChannelPolicyRequest {
     /**
      * The identifier for the channel you are working on.
@@ -1283,6 +1631,10 @@ declare namespace MediaTailor {
      */
     LivePreRollConfiguration?: LivePreRollConfiguration;
     /**
+     * The Amazon CloudWatch log settings for a playback configuration.
+     */
+    LogConfiguration?: LogConfiguration;
+    /**
      * The configuration for manifest processing rules. Manifest processing rules enable customization of the personalized manifests created by MediaTailor.
      */
     ManifestProcessingRules?: ManifestProcessingRules;
@@ -1366,6 +1718,24 @@ declare namespace MediaTailor {
     SourceGroup: __string;
   }
   export type ResponseOutputs = ResponseOutputItem[];
+  export interface ScheduleAdBreak {
+    /**
+     * The approximate duration of the ad break, in seconds.
+     */
+    ApproximateDurationSeconds?: __long;
+    /**
+     * The approximate time that the ad will start playing.
+     */
+    ApproximateStartTime?: __timestampUnix;
+    /**
+     * The name of the source location containing the VOD source used for the ad break.
+     */
+    SourceLocationName?: __string;
+    /**
+     * The name of the VOD source used for the ad break.
+     */
+    VodSourceName?: __string;
+  }
   export interface ScheduleConfiguration {
     /**
      * Program transition configurations.
@@ -1394,6 +1764,14 @@ declare namespace MediaTailor {
      */
     ProgramName: __string;
     /**
+     * The schedule's ad break properties.
+     */
+    ScheduleAdBreaks?: __listOfScheduleAdBreak;
+    /**
+     * The type of schedule entry. Valid values: PROGRAM or FILLER_SLATE.
+     */
+    ScheduleEntryType?: ScheduleEntryType;
+    /**
      * The name of the source location.
      */
     SourceLocationName: __string;
@@ -1401,6 +1779,25 @@ declare namespace MediaTailor {
      * The name of the VOD source.
      */
     VodSourceName: __string;
+  }
+  export type ScheduleEntryType = "PROGRAM"|"FILLER_SLATE"|string;
+  export interface SecretsManagerAccessTokenConfiguration {
+    /**
+     * The name of the HTTP header used to supply the access token in requests to the source location.
+     */
+    HeaderName?: __string;
+    /**
+     * The Amazon Resource Name (ARN) of the AWS Secrets Manager secret that contains the access token.
+     */
+    SecretArn?: __string;
+    /**
+     * The AWS Secrets Manager SecretString key associated with the access token. MediaTailor uses the key to look up SecretString key and value pair containing the access token.
+     */
+    SecretStringKey?: __string;
+  }
+  export interface SegmentDeliveryConfiguration {
+    BaseUrl?: __string;
+    Name?: __string;
   }
   export interface SlateSource {
     /**
@@ -1437,6 +1834,7 @@ declare namespace MediaTailor {
      * The timestamp that indicates when the source location was last modified.
      */
     LastModifiedTime?: __timestampUnix;
+    SegmentDeliveryConfigurations?: __listOfSegmentDeliveryConfiguration;
     /**
      * The name of the source location.
      */
@@ -1492,7 +1890,7 @@ declare namespace MediaTailor {
   }
   export interface Transition {
     /**
-     * The position where this program will be inserted relative to the RelativeProgram. Possible values are: AFTER_PROGRAM, and BEFORE_PROGRAM.
+     * The position where this program will be inserted relative to the RelativePosition.
      */
     RelativePosition: RelativePosition;
     /**
@@ -1500,7 +1898,11 @@ declare namespace MediaTailor {
      */
     RelativeProgram?: __string;
     /**
-     * When the program should be played. RELATIVE means that programs will be played back-to-back.
+     * The date and time that the program is scheduled to start, in epoch milliseconds.
+     */
+    ScheduledStartTimeMillis?: __long;
+    /**
+     * Defines when the program plays in the schedule. You can set the value to ABSOLUTE or RELATIVE. ABSOLUTE - The program plays at a specific wall clock time. This setting can only be used for channels using the LINEAR PlaybackMode. Note the following considerations when using ABSOLUTE transitions: If the preceding program in the schedule has a duration that extends past the wall clock time, MediaTailor truncates the preceding program on a common segment boundary. If there are gaps in playback, MediaTailor plays the FillerSlate you configured for your linear channel. RELATIVE - The program is inserted into the schedule either before or after a program that you specify via RelativePosition.
      */
     Type: __string;
   }
@@ -1520,6 +1922,10 @@ declare namespace MediaTailor {
      * The identifier for the channel you are working on.
      */
     ChannelName: __string;
+    /**
+     * The slate used to fill gaps between programs in the schedule. You must configure filler slate if your channel uses the LINEAR PlaybackMode. MediaTailor doesn't support filler slate for channels using the LOOP PlaybackMode.
+     */
+    FillerSlate?: SlateSource;
     /**
      * The channel's output properties.
      */
@@ -1543,6 +1949,10 @@ declare namespace MediaTailor {
      */
     CreationTime?: __timestampUnix;
     /**
+     * Contains information about the slate used to fill gaps between programs in the schedule.
+     */
+    FillerSlate?: SlateSource;
+    /**
      * The timestamp of when the channel was last modified.
      */
     LastModifiedTime?: __timestampUnix;
@@ -1551,7 +1961,7 @@ declare namespace MediaTailor {
      */
     Outputs?: ResponseOutputs;
     /**
-     * The type of playback for this channel. The only supported value is LOOP.
+     * The channel's playback mode.
      */
     PlaybackMode?: __string;
     /**
@@ -1572,6 +1982,7 @@ declare namespace MediaTailor {
      * The HTTP configuration for the source location.
      */
     HttpConfiguration: HttpConfiguration;
+    SegmentDeliveryConfigurations?: __listOfSegmentDeliveryConfiguration;
     /**
      * The identifier for the source location you are working on.
      */
@@ -1602,6 +2013,7 @@ declare namespace MediaTailor {
      * The timestamp that indicates when the source location was last modified.
      */
     LastModifiedTime?: __timestampUnix;
+    SegmentDeliveryConfigurations?: __listOfSegmentDeliveryConfiguration;
     /**
      * The name of the source location.
      */
@@ -1688,10 +2100,16 @@ declare namespace MediaTailor {
   export type __boolean = boolean;
   export type __integer = number;
   export type __integerMin1 = number;
+  export type __integerMin1Max100 = number;
   export type __listOfAdBreak = AdBreak[];
+  export type __listOfAlert = Alert[];
+  export type __listOfAvailMatchingCriteria = AvailMatchingCriteria[];
   export type __listOfChannel = Channel[];
   export type __listOfPlaybackConfiguration = PlaybackConfiguration[];
+  export type __listOfPrefetchSchedule = PrefetchSchedule[];
+  export type __listOfScheduleAdBreak = ScheduleAdBreak[];
   export type __listOfScheduleEntry = ScheduleEntry[];
+  export type __listOfSegmentDeliveryConfiguration = SegmentDeliveryConfiguration[];
   export type __listOfSourceLocation = SourceLocation[];
   export type __listOfVodSource = VodSource[];
   export type __listOf__string = __string[];

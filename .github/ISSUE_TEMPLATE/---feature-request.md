@@ -6,6 +6,8 @@ labels: feature-request
 assignees: ''
 
 ---
+Confirm by changing [ ] to [x] below:
+- [ ] This is a feature with version 2.x of the SDK
 
 **Is your feature request related to a problem? Please describe.**
 A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]

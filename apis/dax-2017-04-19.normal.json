@@ -67,6 +67,9 @@
         },
         {
           "shape": "InvalidParameterCombinationException"
+        },
+        {
+          "shape": "ServiceQuotaExceededException"
         }
       ],
       "documentation": "<p>Creates a DAX cluster. All nodes in the cluster run the same DAX caching software.</p>"
@@ -745,7 +748,7 @@
         },
         "ClusterDiscoveryEndpoint": {
           "shape": "Endpoint",
-          "documentation": "<p>The configuration endpoint for this DAX cluster, consisting of a DNS name and a port number. Client applications can specify this endpoint, rather than an individual node endpoint, and allow the DAX client software to intelligently route requests and responses to nodes in the DAX cluster.</p>"
+          "documentation": "<p>The endpoint for this DAX cluster, consisting of a DNS name, a port number, and a URL. Applications should use the URL to configure the DAX client to find their cluster.</p>"
         },
         "NodeIdsToRemove": {
           "shape": "NodeIdentifierList",
@@ -782,9 +785,20 @@
         "SSEDescription": {
           "shape": "SSEDescription",
           "documentation": "<p>The description of the server-side encryption status on the specified DAX cluster.</p>"
+        },
+        "ClusterEndpointEncryptionType": {
+          "shape": "ClusterEndpointEncryptionType",
+          "documentation": "<p>The type of encryption supported by the cluster's endpoint. Values are:</p> <ul> <li> <p> <code>NONE</code> for no encryption</p> <p> <code>TLS</code> for Transport Layer Security</p> </li> </ul>"
         }
       },
       "documentation": "<p>Contains all of the attributes of a specific DAX cluster.</p>"
+    },
+    "ClusterEndpointEncryptionType": {
+      "type": "string",
+      "enum": [
+        "NONE",
+        "TLS"
+      ]
     },
     "ClusterList": {
       "type": "list",
@@ -858,6 +872,10 @@
         "SSESpecification": {
           "shape": "SSESpecification",
           "documentation": "<p>Represents the settings used to enable server-side encryption on the cluster.</p>"
+        },
+        "ClusterEndpointEncryptionType": {
+          "shape": "ClusterEndpointEncryptionType",
+          "documentation": "<p>The type of encryption the cluster's endpoint should support. Values are:</p> <ul> <li> <p> <code>NONE</code> for no encryption</p> </li> <li> <p> <code>TLS</code> for Transport Layer Security</p> </li> </ul>"
         }
       }
     },
@@ -1231,9 +1249,13 @@
         "Port": {
           "shape": "Integer",
           "documentation": "<p>The port number that applications should use to connect to the endpoint.</p>"
+        },
+        "URL": {
+          "shape": "String",
+          "documentation": "<p>The URL that applications should use to connect to the endpoint. The default ports are 8111 for the \"dax\" protocol and 9111 for the \"daxs\" protocol.</p>"
         }
       },
-      "documentation": "<p>Represents the information required for client programs to connect to the configuration endpoint for a DAX cluster, or to an individual node within the cluster.</p>"
+      "documentation": "<p>Represents the information required for client programs to connect to the endpoint for a DAX cluster.</p>"
     },
     "Event": {
       "type": "structure",
@@ -1413,7 +1435,7 @@
         },
         "TopicStatus": {
           "shape": "String",
-          "documentation": "<p>The current state of the topic.</p>"
+          "documentation": "<p>The current state of the topic. A value of “active” means that notifications will be sent to the topic. A value of “inactive” means that notifications will not be sent to the topic.</p>"
         }
       },
       "documentation": "<p>Describes a notification topic and its status. Notification topics are used for publishing DAX events to subscribers using Amazon Simple Notification Service (SNS).</p>"
@@ -1798,7 +1820,7 @@
         },
         "NotificationTopicStatus": {
           "shape": "String",
-          "documentation": "<p>The current state of the topic.</p>"
+          "documentation": "<p>The current state of the topic. A value of “active” means that notifications will be sent to the topic. A value of “inactive” means that notifications will not be sent to the topic.</p>"
         },
         "ParameterGroupName": {
           "shape": "String",
@@ -1832,7 +1854,7 @@
         },
         "ParameterNameValues": {
           "shape": "ParameterNameValueList",
-          "documentation": "<p>An array of name-value pairs for the parameters in the group. Each element in the array represents a single parameter.</p>"
+          "documentation": "<p>An array of name-value pairs for the parameters in the group. Each element in the array represents a single parameter.</p> <note> <p> <code>record-ttl-millis</code> and <code>query-ttl-millis</code> are the only supported parameter names. For more details, see <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DAX.cluster-management.html#DAX.cluster-management.custom-settings.ttl\">Configuring TTL Settings</a>.</p> </note>"
         }
       }
     },

@@ -700,7 +700,7 @@ declare namespace ManagedBlockchain {
      */
     LogPublishingConfiguration?: MemberLogPublishingConfiguration;
     /**
-     * The status of a member.    CREATING - The AWS account is in the process of creating a member.    AVAILABLE - The member has been created and can participate in the network.    CREATE_FAILED - The AWS account attempted to create a member and creation failed.    DELETING - The member and all associated resources are in the process of being deleted. Either the AWS account that owns the member deleted it, or the member is being deleted as the result of an APPROVED PROPOSAL to remove the member.    DELETED - The member can no longer participate on the network and all associated resources are deleted. Either the AWS account that owns the member deleted it, or the member is being deleted as the result of an APPROVED PROPOSAL to remove the member.  
+     * The status of a member.    CREATING - The AWS account is in the process of creating a member.    AVAILABLE - The member has been created and can participate in the network.    CREATE_FAILED - The AWS account attempted to create a member and creation failed.    UPDATING - The member is in the process of being updated.    DELETING - The member and all associated resources are in the process of being deleted. Either the AWS account that owns the member deleted it, or the member is being deleted as the result of an APPROVED PROPOSAL to remove the member.    DELETED - The member can no longer participate on the network and all associated resources are deleted. Either the AWS account that owns the member deleted it, or the member is being deleted as the result of an APPROVED PROPOSAL to remove the member.    INACCESSIBLE_ENCRYPTION_KEY - The member is impaired and might not function as expected because it cannot access the specified customer managed key in AWS KMS for encryption at rest. Either the KMS key was disabled or deleted, or the grants on the key were revoked. The effect of disabling or deleting a key, or revoking a grant is not immediate. The member resource might take some time to find that the key is inaccessible. When a resource is in this state, we recommend deleting and recreating the resource.  
      */
     Status?: MemberStatus;
     /**
@@ -715,6 +715,10 @@ declare namespace ManagedBlockchain {
      * The Amazon Resource Name (ARN) of the member. For more information about ARNs and their format, see Amazon Resource Names (ARNs) in the AWS General Reference.
      */
     Arn?: ArnString;
+    /**
+     * The Amazon Resource Name (ARN) of the customer managed key in AWS Key Management Service (AWS KMS) that the member uses for encryption at rest. If the value of this parameter is "AWS Owned KMS Key", the member uses an AWS owned KMS key for encryption. This parameter is inherited by the nodes that this member owns.
+     */
+    KmsKeyArn?: String;
   }
   export interface MemberConfiguration {
     /**
@@ -737,6 +741,10 @@ declare namespace ManagedBlockchain {
      * Tags assigned to the member. Tags consist of a key and optional value. For more information about tags, see Tagging Resources in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide. When specifying tags during creation, you can specify multiple key-value pairs in a single request, with an overall maximum of 50 tags added to each resource.
      */
     Tags?: InputTagMap;
+    /**
+     * The Amazon Resource Name (ARN) of the customer managed key in AWS Key Management Service (AWS KMS) to use for encryption at rest in the member. This parameter is inherited by any nodes that this member creates. Use one of the following options to specify this parameter:    Undefined or empty string - The member uses an AWS owned KMS key for encryption by default.    A valid symmetric customer managed KMS key - The member uses the specified key for encryption. Amazon Managed Blockchain doesn't support asymmetric keys. For more information, see Using symmetric and asymmetric keys in the AWS Key Management Service Developer Guide. The following is an example of a KMS key ARN: arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab   
+     */
+    KmsKeyArn?: ArnString;
   }
   export interface MemberFabricAttributes {
     /**
@@ -783,7 +791,7 @@ declare namespace ManagedBlockchain {
      */
     Fabric?: MemberFabricLogPublishingConfiguration;
   }
-  export type MemberStatus = "CREATING"|"AVAILABLE"|"CREATE_FAILED"|"UPDATING"|"DELETING"|"DELETED"|string;
+  export type MemberStatus = "CREATING"|"AVAILABLE"|"CREATE_FAILED"|"UPDATING"|"DELETING"|"DELETED"|"INACCESSIBLE_ENCRYPTION_KEY"|string;
   export interface MemberSummary {
     /**
      * The unique identifier of the member.
@@ -798,7 +806,7 @@ declare namespace ManagedBlockchain {
      */
     Description?: DescriptionString;
     /**
-     * The status of the member.    CREATING - The AWS account is in the process of creating a member.    AVAILABLE - The member has been created and can participate in the network.    CREATE_FAILED - The AWS account attempted to create a member and creation failed.    DELETING - The member and all associated resources are in the process of being deleted. Either the AWS account that owns the member deleted it, or the member is being deleted as the result of an APPROVED PROPOSAL to remove the member.    DELETED - The member can no longer participate on the network and all associated resources are deleted. Either the AWS account that owns the member deleted it, or the member is being deleted as the result of an APPROVED PROPOSAL to remove the member.  
+     * The status of the member.    CREATING - The AWS account is in the process of creating a member.    AVAILABLE - The member has been created and can participate in the network.    CREATE_FAILED - The AWS account attempted to create a member and creation failed.    UPDATING - The member is in the process of being updated.    DELETING - The member and all associated resources are in the process of being deleted. Either the AWS account that owns the member deleted it, or the member is being deleted as the result of an APPROVED PROPOSAL to remove the member.    DELETED - The member can no longer participate on the network and all associated resources are deleted. Either the AWS account that owns the member deleted it, or the member is being deleted as the result of an APPROVED PROPOSAL to remove the member.    INACCESSIBLE_ENCRYPTION_KEY - The member is impaired and might not function as expected because it cannot access the specified customer managed key in AWS Key Management Service (AWS KMS) for encryption at rest. Either the KMS key was disabled or deleted, or the grants on the key were revoked. The effect of disabling or deleting a key, or revoking a grant is not immediate. The member resource might take some time to find that the key is inaccessible. When a resource is in this state, we recommend deleting and recreating the resource.  
      */
     Status?: MemberStatus;
     /**
@@ -976,7 +984,7 @@ declare namespace ManagedBlockchain {
      */
     StateDB?: StateDBType;
     /**
-     * The status of the node.
+     * The status of the node.    CREATING - The AWS account is in the process of creating a node.    AVAILABLE - The node has been created and can participate in the network.    UNHEALTHY - The node is impaired and might not function as expected. Amazon Managed Blockchain automatically finds nodes in this state and tries to recover them. If a node is recoverable, it returns to AVAILABLE. Otherwise, it moves to FAILED status.    CREATE_FAILED - The AWS account attempted to create a node and creation failed.    UPDATING - The node is in the process of being updated.    DELETING - The node is in the process of being deleted.    DELETED - The node can no longer participate on the network.    FAILED - The node is no longer functional, cannot be recovered, and must be deleted.    INACCESSIBLE_ENCRYPTION_KEY - The node is impaired and might not function as expected because it cannot access the specified customer managed key in AWS KMS for encryption at rest. Either the KMS key was disabled or deleted, or the grants on the key were revoked. The effect of disabling or deleting a key, or revoking a grant is not immediate. The node resource might take some time to find that the key is inaccessible. When a resource is in this state, we recommend deleting and recreating the resource.  
      */
     Status?: NodeStatus;
     /**
@@ -991,6 +999,10 @@ declare namespace ManagedBlockchain {
      * The Amazon Resource Name (ARN) of the node. For more information about ARNs and their format, see Amazon Resource Names (ARNs) in the AWS General Reference.
      */
     Arn?: ArnString;
+    /**
+     * The Amazon Resource Name (ARN) of the customer managed key in AWS Key Management Service (AWS KMS) that the node uses for encryption at rest. If the value of this parameter is "AWS Owned KMS Key", the node uses an AWS owned KMS key for encryption. The node inherits this parameter from the member that it belongs to. Applies only to Hyperledger Fabric.
+     */
+    KmsKeyArn?: String;
   }
   export interface NodeConfiguration {
     /**
@@ -1057,7 +1069,7 @@ declare namespace ManagedBlockchain {
      */
     Fabric?: NodeFabricLogPublishingConfiguration;
   }
-  export type NodeStatus = "CREATING"|"AVAILABLE"|"UNHEALTHY"|"CREATE_FAILED"|"UPDATING"|"DELETING"|"DELETED"|"FAILED"|string;
+  export type NodeStatus = "CREATING"|"AVAILABLE"|"UNHEALTHY"|"CREATE_FAILED"|"UPDATING"|"DELETING"|"DELETED"|"FAILED"|"INACCESSIBLE_ENCRYPTION_KEY"|string;
   export interface NodeSummary {
     /**
      * The unique identifier of the node.

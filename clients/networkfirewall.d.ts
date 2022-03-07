@@ -124,6 +124,14 @@ declare class NetworkFirewall extends Service {
    */
   describeRuleGroup(callback?: (err: AWSError, data: NetworkFirewall.Types.DescribeRuleGroupResponse) => void): Request<NetworkFirewall.Types.DescribeRuleGroupResponse, AWSError>;
   /**
+   * High-level information about a rule group, returned by operations like create and describe. You can use the information provided in the metadata to retrieve and manage a rule group. You can retrieve all objects for a rule group by calling DescribeRuleGroup. 
+   */
+  describeRuleGroupMetadata(params: NetworkFirewall.Types.DescribeRuleGroupMetadataRequest, callback?: (err: AWSError, data: NetworkFirewall.Types.DescribeRuleGroupMetadataResponse) => void): Request<NetworkFirewall.Types.DescribeRuleGroupMetadataResponse, AWSError>;
+  /**
+   * High-level information about a rule group, returned by operations like create and describe. You can use the information provided in the metadata to retrieve and manage a rule group. You can retrieve all objects for a rule group by calling DescribeRuleGroup. 
+   */
+  describeRuleGroupMetadata(callback?: (err: AWSError, data: NetworkFirewall.Types.DescribeRuleGroupMetadataResponse) => void): Request<NetworkFirewall.Types.DescribeRuleGroupMetadataResponse, AWSError>;
+  /**
    * Removes the specified subnet associations from the firewall. This removes the firewall endpoints from the subnets and removes any network filtering protections that the endpoints were providing. 
    */
   disassociateSubnets(params: NetworkFirewall.Types.DisassociateSubnetsRequest, callback?: (err: AWSError, data: NetworkFirewall.Types.DisassociateSubnetsResponse) => void): Request<NetworkFirewall.Types.DisassociateSubnetsResponse, AWSError>;
@@ -212,11 +220,11 @@ declare class NetworkFirewall extends Service {
    */
   updateFirewallPolicy(callback?: (err: AWSError, data: NetworkFirewall.Types.UpdateFirewallPolicyResponse) => void): Request<NetworkFirewall.Types.UpdateFirewallPolicyResponse, AWSError>;
   /**
-   * 
+   * Modifies the flag, ChangeProtection, which indicates whether it is possible to change the firewall. If the flag is set to TRUE, the firewall is protected from changes. This setting helps protect against accidentally changing a firewall that's in use.
    */
   updateFirewallPolicyChangeProtection(params: NetworkFirewall.Types.UpdateFirewallPolicyChangeProtectionRequest, callback?: (err: AWSError, data: NetworkFirewall.Types.UpdateFirewallPolicyChangeProtectionResponse) => void): Request<NetworkFirewall.Types.UpdateFirewallPolicyChangeProtectionResponse, AWSError>;
   /**
-   * 
+   * Modifies the flag, ChangeProtection, which indicates whether it is possible to change the firewall. If the flag is set to TRUE, the firewall is protected from changes. This setting helps protect against accidentally changing a firewall that's in use.
    */
   updateFirewallPolicyChangeProtection(callback?: (err: AWSError, data: NetworkFirewall.Types.UpdateFirewallPolicyChangeProtectionResponse) => void): Request<NetworkFirewall.Types.UpdateFirewallPolicyChangeProtectionResponse, AWSError>;
   /**
@@ -623,6 +631,43 @@ declare namespace NetworkFirewall {
      */
     Policy?: PolicyString;
   }
+  export interface DescribeRuleGroupMetadataRequest {
+    /**
+     * The descriptive name of the rule group. You can't change the name of a rule group after you create it. You must specify the ARN or the name, and you can specify both. 
+     */
+    RuleGroupName?: ResourceName;
+    /**
+     * The descriptive name of the rule group. You can't change the name of a rule group after you create it. You must specify the ARN or the name, and you can specify both. 
+     */
+    RuleGroupArn?: ResourceArn;
+    /**
+     * Indicates whether the rule group is stateless or stateful. If the rule group is stateless, it contains stateless rules. If it is stateful, it contains stateful rules.   This setting is required for requests that do not include the RuleGroupARN. 
+     */
+    Type?: RuleGroupType;
+  }
+  export interface DescribeRuleGroupMetadataResponse {
+    /**
+     * The descriptive name of the rule group. You can't change the name of a rule group after you create it. You must specify the ARN or the name, and you can specify both. 
+     */
+    RuleGroupArn: ResourceArn;
+    /**
+     * The descriptive name of the rule group. You can't change the name of a rule group after you create it. You must specify the ARN or the name, and you can specify both. 
+     */
+    RuleGroupName: ResourceName;
+    /**
+     * Returns the metadata objects for the specified rule group. 
+     */
+    Description?: Description;
+    /**
+     * Indicates whether the rule group is stateless or stateful. If the rule group is stateless, it contains stateless rules. If it is stateful, it contains stateful rules.   This setting is required for requests that do not include the RuleGroupARN. 
+     */
+    Type?: RuleGroupType;
+    /**
+     * The maximum operating resources that this rule group can use. Rule group capacity is fixed at creation. When you update a rule group, you are limited to this capacity. When you reference a rule group from a firewall policy, Network Firewall reserves this capacity for the rule group.  You can retrieve the capacity that would be required for a rule group before you create the rule group by calling CreateRuleGroup with DryRun set to TRUE. 
+     */
+    Capacity?: RuleCapacity;
+    StatefulRuleOptions?: StatefulRuleOptions;
+  }
   export interface DescribeRuleGroupRequest {
     /**
      * The descriptive name of the rule group. You can't change the name of a rule group after you create it. You must specify the ARN or the name, and you can specify both. 
@@ -773,9 +818,17 @@ declare namespace NetworkFirewall {
      */
     StatelessCustomActions?: CustomActions;
     /**
-     * References to the stateless rule groups that are used in the policy. These define the inspection criteria in stateful rules. 
+     * References to the stateful rule groups that are used in the policy. These define the inspection criteria in stateful rules. 
      */
     StatefulRuleGroupReferences?: StatefulRuleGroupReferences;
+    /**
+     * The default actions to take on a packet that doesn't match any stateful rules. The stateful default action is optional, and is only valid when using the strict rule order. Valid values of the stateful default action:   aws:drop_strict   aws:drop_established   aws:alert_strict   aws:alert_established   For more information, see Strict evaluation order in the AWS Network Firewall Developer Guide. 
+     */
+    StatefulDefaultActions?: StatefulActions;
+    /**
+     * Additional options governing how Network Firewall handles stateful rules. The stateful rule groups that you use in your policy must have stateful rule options settings that are compatible with these settings.
+     */
+    StatefulEngineOptions?: StatefulEngineOptions;
   }
   export interface FirewallPolicyMetadata {
     /**
@@ -812,6 +865,18 @@ declare namespace NetworkFirewall {
      * The key:value pairs to associate with the resource.
      */
     Tags?: TagList;
+    /**
+     * The number of capacity units currently consumed by the policy's stateless rules.
+     */
+    ConsumedStatelessRuleCapacity?: RuleCapacity;
+    /**
+     * The number of capacity units currently consumed by the policy's stateful rules.
+     */
+    ConsumedStatefulRuleCapacity?: RuleCapacity;
+    /**
+     * The number of firewalls that are associated with this firewall policy.
+     */
+    NumberOfAssociations?: NumberOfAssociations;
   }
   export interface FirewallStatus {
     /**
@@ -843,7 +908,7 @@ declare namespace NetworkFirewall {
      */
     Source: Source;
     /**
-     * The source port to inspect for. You can specify an individual port, for example 1994 and you can specify a port range, for example 1990-1994. To match with any port, specify ANY. 
+     * The source port to inspect for. You can specify an individual port, for example 1994 and you can specify a port range, for example 1990:1994. To match with any port, specify ANY. 
      */
     SourcePort: Port;
     /**
@@ -855,7 +920,7 @@ declare namespace NetworkFirewall {
      */
     Destination: Destination;
     /**
-     * The destination port to inspect for. You can specify an individual port, for example 1994 and you can specify a port range, for example 1990-1994. To match with any port, specify ANY. 
+     * The destination port to inspect for. You can specify an individual port, for example 1994 and you can specify a port range, for example 1990:1994. To match with any port, specify ANY. 
      */
     DestinationPort: Port;
   }
@@ -920,6 +985,10 @@ declare namespace NetworkFirewall {
      * The maximum number of objects that you want Network Firewall to return for this request. If more objects are available, in the response, Network Firewall provides a NextToken value that you can use in a subsequent call to get the next batch of objects.
      */
     MaxResults?: PaginationMaxResults;
+    /**
+     * The scope of the request. The default setting of ACCOUNT or a setting of NULL returns all of the rule groups in your account. A setting of MANAGED returns all available managed rule groups.
+     */
+    Scope?: ResourceManagedStatus;
   }
   export interface ListRuleGroupsResponse {
     /**
@@ -989,11 +1058,11 @@ declare namespace NetworkFirewall {
      */
     Destinations?: Addresses;
     /**
-     * The source ports to inspect for. If not specified, this matches with any source port. This setting is only used for protocols 6 (TCP) and 17 (UDP).  You can specify individual ports, for example 1994 and you can specify port ranges, for example 1990-1994. 
+     * The source ports to inspect for. If not specified, this matches with any source port. This setting is only used for protocols 6 (TCP) and 17 (UDP).  You can specify individual ports, for example 1994 and you can specify port ranges, for example 1990:1994. 
      */
     SourcePorts?: PortRanges;
     /**
-     * The destination ports to inspect for. If not specified, this matches with any destination port. This setting is only used for protocols 6 (TCP) and 17 (UDP).  You can specify individual ports, for example 1994 and you can specify port ranges, for example 1990-1994. 
+     * The destination ports to inspect for. If not specified, this matches with any destination port. This setting is only used for protocols 6 (TCP) and 17 (UDP).  You can specify individual ports, for example 1994 and you can specify port ranges, for example 1990:1994. 
      */
     DestinationPorts?: PortRanges;
     /**
@@ -1005,6 +1074,8 @@ declare namespace NetworkFirewall {
      */
     TCPFlags?: TCPFlags;
   }
+  export type NumberOfAssociations = number;
+  export type OverrideAction = "DROP_TO_ALERT"|string;
   export type PaginationMaxResults = number;
   export type PaginationToken = string;
   export interface PerObjectStatus {
@@ -1062,6 +1133,7 @@ declare namespace NetworkFirewall {
   }
   export type ResourceArn = string;
   export type ResourceId = string;
+  export type ResourceManagedStatus = "MANAGED"|"ACCOUNT"|string;
   export type ResourceName = string;
   export type ResourceStatus = "ACTIVE"|"DELETING"|string;
   export type RuleCapacity = number;
@@ -1084,6 +1156,10 @@ declare namespace NetworkFirewall {
      * The stateful rules or stateless rules for the rule group. 
      */
     RulesSource: RulesSource;
+    /**
+     * Additional options governing how Network Firewall handles stateful rules. The policies where you use your stateful rule group must have stateful rule options settings that are compatible with these settings.
+     */
+    StatefulRuleOptions?: StatefulRuleOptions;
   }
   export interface RuleGroupMetadata {
     /**
@@ -1128,6 +1204,14 @@ declare namespace NetworkFirewall {
      * The key:value pairs to associate with the resource.
      */
     Tags?: TagList;
+    /**
+     * The number of capacity units currently consumed by the rule group rules. 
+     */
+    ConsumedCapacity?: RuleCapacity;
+    /**
+     * The number of firewall policies that use this rule group.
+     */
+    NumberOfAssociations?: NumberOfAssociations;
   }
   export type RuleGroupType = "STATELESS"|"STATEFUL"|string;
   export type RuleGroups = RuleGroupMetadata[];
@@ -1142,6 +1226,7 @@ declare namespace NetworkFirewall {
     Settings?: Settings;
   }
   export type RuleOptions = RuleOption[];
+  export type RuleOrder = "DEFAULT_ACTION_ORDER"|"STRICT_ORDER"|string;
   export type RuleTargets = CollectionMember_String[];
   export type RuleVariableName = string;
   export interface RuleVariables {
@@ -1164,7 +1249,7 @@ declare namespace NetworkFirewall {
      */
     RulesSourceList?: RulesSourceList;
     /**
-     * The 5-tuple stateful inspection criteria. This contains an array of individual 5-tuple stateful rules to be used together in a stateful rule group. 
+     * An array of individual stateful rules inspection criteria to be used together in a stateful rule group. Use this option to specify simple Suricata rules with protocol, source and destination, ports, direction, and rule options. For information about the Suricata Rules format, see Rules Format. 
      */
     StatefulRules?: StatefulRules;
     /**
@@ -1174,11 +1259,11 @@ declare namespace NetworkFirewall {
   }
   export interface RulesSourceList {
     /**
-     * The domains that you want to inspect for in your traffic flows. To provide multiple domains, separate them with commas. Valid domain specifications are the following:   Explicit names. For example, abc.example.com matches only the domain abc.example.com.   Names that use a domain wildcard, which you indicate with an initial '.'. For example,.example.com matches example.com and matches all subdomains of example.com, such as abc.example.com and www.example.com.   
+     * The domains that you want to inspect for in your traffic flows. Valid domain specifications are the following:   Explicit names. For example, abc.example.com matches only the domain abc.example.com.   Names that use a domain wildcard, which you indicate with an initial '.'. For example,.example.com matches example.com and matches all subdomains of example.com, such as abc.example.com and www.example.com.   
      */
     Targets: RuleTargets;
     /**
-     * The protocols you want to inspect. Specify TLS_SNI for HTTPS. Specity HTTP_HOST for HTTP. You can specify either or both. 
+     * The protocols you want to inspect. Specify TLS_SNI for HTTPS. Specify HTTP_HOST for HTTP. You can specify either or both. 
      */
     TargetTypes: TargetTypes;
     /**
@@ -1191,28 +1276,55 @@ declare namespace NetworkFirewall {
   export type Settings = Setting[];
   export type Source = string;
   export type StatefulAction = "PASS"|"DROP"|"ALERT"|string;
+  export type StatefulActions = CollectionMember_String[];
+  export interface StatefulEngineOptions {
+    /**
+     * Indicates how to manage the order of stateful rule evaluation for the policy. DEFAULT_ACTION_ORDER is the default behavior. Stateful rules are provided to the rule engine as Suricata compatible strings, and Suricata evaluates them based on certain settings. For more information, see Evaluation order for stateful rules in the AWS Network Firewall Developer Guide. 
+     */
+    RuleOrder?: RuleOrder;
+  }
   export interface StatefulRule {
     /**
      * Defines what Network Firewall should do with the packets in a traffic flow when the flow matches the stateful rule criteria. For all actions, Network Firewall performs the specified action and discontinues stateful inspection of the traffic flow.  The actions for a stateful rule are defined as follows:     PASS - Permits the packets to go to the intended destination.    DROP - Blocks the packets from going to the intended destination and sends an alert log message, if alert logging is configured in the Firewall LoggingConfiguration.     ALERT - Permits the packets to go to the intended destination and sends an alert log message, if alert logging is configured in the Firewall LoggingConfiguration.  You can use this action to test a rule that you intend to use to drop traffic. You can enable the rule with ALERT action, verify in the logs that the rule is filtering as you want, then change the action to DROP.  
      */
     Action: StatefulAction;
     /**
-     * The stateful 5-tuple inspection criteria for this rule, used to inspect traffic flows. 
+     * The stateful inspection criteria for this rule, used to inspect traffic flows. 
      */
     Header: Header;
     /**
-     * 
+     * Additional options for the rule. These are the Suricata RuleOptions settings.
      */
     RuleOptions: RuleOptions;
   }
   export type StatefulRuleDirection = "FORWARD"|"ANY"|string;
+  export interface StatefulRuleGroupOverride {
+    /**
+     * The action that changes the rule group from DROP to ALERT. This only applies to managed rule groups.
+     */
+    Action?: OverrideAction;
+  }
   export interface StatefulRuleGroupReference {
     /**
      * The Amazon Resource Name (ARN) of the stateful rule group.
      */
     ResourceArn: ResourceArn;
+    /**
+     * An integer setting that indicates the order in which to run the stateful rule groups in a single FirewallPolicy. This setting only applies to firewall policies that specify the STRICT_ORDER rule order in the stateful engine options settings. Network Firewall evalutes each stateful rule group against a packet starting with the group that has the lowest priority setting. You must ensure that the priority settings are unique within each policy. You can change the priority settings of your rule groups at any time. To make it easier to insert rule groups later, number them so there's a wide range in between, for example use 100, 200, and so on. 
+     */
+    Priority?: Priority;
+    /**
+     * The action that allows the policy owner to override the behavior of the rule group within a policy.
+     */
+    Override?: StatefulRuleGroupOverride;
   }
   export type StatefulRuleGroupReferences = StatefulRuleGroupReference[];
+  export interface StatefulRuleOptions {
+    /**
+     * Indicates how to manage the order of the rule evaluation for the rule group. DEFAULT_ACTION_ORDER is the default behavior. Stateful rules are provided to the rule engine as Suricata compatible strings, and Suricata evaluates them based on certain settings. For more information, see Evaluation order for stateful rules in the AWS Network Firewall Developer Guide. 
+     */
+    RuleOrder?: RuleOrder;
+  }
   export type StatefulRuleProtocol = "IP"|"TCP"|"UDP"|"ICMP"|"HTTP"|"FTP"|"TLS"|"SMB"|"DNS"|"DCERPC"|"SSH"|"SMTP"|"IMAP"|"MSN"|"KRB5"|"IKEV2"|"TFTP"|"NTP"|"DHCP"|string;
   export type StatefulRules = StatefulRule[];
   export type StatelessActions = CollectionMember_String[];
@@ -1222,7 +1334,7 @@ declare namespace NetworkFirewall {
      */
     RuleDefinition: RuleDefinition;
     /**
-     * A setting that indicates the order in which to run this rule relative to all of the rules that are defined for a stateless rule group. Network Firewall evaluates the rules in a rule group starting with the lowest priority setting. You must ensure that the priority settings are unique for the rule group.  Each stateless rule group uses exactly one StatelessRulesAndCustomActions object, and each StatelessRulesAndCustomActions contains exactly one StatelessRules object. To ensure unique priority settings for your rule groups, set unique priorities for the stateless rules that you define inside any single StatelessRules object. You can change the priority settings of your rules at any time. To make it easier to insert rules later, number them so there's a wide range in between, for example use 100, 200, and so on. 
+     * Indicates the order in which to run this rule relative to all of the rules that are defined for a stateless rule group. Network Firewall evaluates the rules in a rule group starting with the lowest priority setting. You must ensure that the priority settings are unique for the rule group.  Each stateless rule group uses exactly one StatelessRulesAndCustomActions object, and each StatelessRulesAndCustomActions contains exactly one StatelessRules object. To ensure unique priority settings for your rule groups, set unique priorities for the stateless rules that you define inside any single StatelessRules object. You can change the priority settings of your rules at any time. To make it easier to insert rules later, number them so there's a wide range in between, for example use 100, 200, and so on. 
      */
     Priority: Priority;
   }
@@ -1348,7 +1460,7 @@ declare namespace NetworkFirewall {
      */
     FirewallName?: ResourceName;
     /**
-     * 
+     * A flag indicating whether it is possible to delete the firewall. A setting of TRUE indicates that the firewall is protected against deletion. Use this setting to protect against accidentally deleting a firewall that is in use. When you create a firewall, the operation initializes this flag to TRUE.
      */
     DeleteProtection?: Boolean;
     /**

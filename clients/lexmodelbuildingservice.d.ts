@@ -228,6 +228,22 @@ declare class LexModelBuildingService extends Service {
    */
   getIntents(callback?: (err: AWSError, data: LexModelBuildingService.Types.GetIntentsResponse) => void): Request<LexModelBuildingService.Types.GetIntentsResponse, AWSError>;
   /**
+   * Provides details about an ongoing or complete migration from an Amazon Lex V1 bot to an Amazon Lex V2 bot. Use this operation to view the migration alerts and warnings related to the migration.
+   */
+  getMigration(params: LexModelBuildingService.Types.GetMigrationRequest, callback?: (err: AWSError, data: LexModelBuildingService.Types.GetMigrationResponse) => void): Request<LexModelBuildingService.Types.GetMigrationResponse, AWSError>;
+  /**
+   * Provides details about an ongoing or complete migration from an Amazon Lex V1 bot to an Amazon Lex V2 bot. Use this operation to view the migration alerts and warnings related to the migration.
+   */
+  getMigration(callback?: (err: AWSError, data: LexModelBuildingService.Types.GetMigrationResponse) => void): Request<LexModelBuildingService.Types.GetMigrationResponse, AWSError>;
+  /**
+   * Gets a list of migrations between Amazon Lex V1 and Amazon Lex V2.
+   */
+  getMigrations(params: LexModelBuildingService.Types.GetMigrationsRequest, callback?: (err: AWSError, data: LexModelBuildingService.Types.GetMigrationsResponse) => void): Request<LexModelBuildingService.Types.GetMigrationsResponse, AWSError>;
+  /**
+   * Gets a list of migrations between Amazon Lex V1 and Amazon Lex V2.
+   */
+  getMigrations(callback?: (err: AWSError, data: LexModelBuildingService.Types.GetMigrationsResponse) => void): Request<LexModelBuildingService.Types.GetMigrationsResponse, AWSError>;
+  /**
    * Returns information about a specific version of a slot type. In addition to specifying the slot type name, you must specify the slot type version. This operation requires permissions for the lex:GetSlotType action.
    */
   getSlotType(params: LexModelBuildingService.Types.GetSlotTypeRequest, callback?: (err: AWSError, data: LexModelBuildingService.Types.GetSlotTypeResponse) => void): Request<LexModelBuildingService.Types.GetSlotTypeResponse, AWSError>;
@@ -252,11 +268,11 @@ declare class LexModelBuildingService extends Service {
    */
   getSlotTypes(callback?: (err: AWSError, data: LexModelBuildingService.Types.GetSlotTypesResponse) => void): Request<LexModelBuildingService.Types.GetSlotTypesResponse, AWSError>;
   /**
-   * Use the GetUtterancesView operation to get information about the utterances that your users have made to your bot. You can use this list to tune the utterances that your bot responds to. For example, say that you have created a bot to order flowers. After your users have used your bot for a while, use the GetUtterancesView operation to see the requests that they have made and whether they have been successful. You might find that the utterance "I want flowers" is not being recognized. You could add this utterance to the OrderFlowers intent so that your bot recognizes that utterance. After you publish a new version of a bot, you can get information about the old version and the new so that you can compare the performance across the two versions.  Utterance statistics are generated once a day. Data is available for the last 15 days. You can request information for up to 5 versions of your bot in each request. Amazon Lex returns the most frequent utterances received by the bot in the last 15 days. The response contains information about a maximum of 100 utterances for each version. If you set childDirected field to true when you created your bot, or if you opted out of participating in improving Amazon Lex, utterances are not available. This operation requires permissions for the lex:GetUtterancesView action.
+   * Use the GetUtterancesView operation to get information about the utterances that your users have made to your bot. You can use this list to tune the utterances that your bot responds to. For example, say that you have created a bot to order flowers. After your users have used your bot for a while, use the GetUtterancesView operation to see the requests that they have made and whether they have been successful. You might find that the utterance "I want flowers" is not being recognized. You could add this utterance to the OrderFlowers intent so that your bot recognizes that utterance. After you publish a new version of a bot, you can get information about the old version and the new so that you can compare the performance across the two versions.  Utterance statistics are generated once a day. Data is available for the last 15 days. You can request information for up to 5 versions of your bot in each request. Amazon Lex returns the most frequent utterances received by the bot in the last 15 days. The response contains information about a maximum of 100 utterances for each version. If you set childDirected field to true when you created your bot, if you are using slot obfuscation with one or more slots, or if you opted out of participating in improving Amazon Lex, utterances are not available. This operation requires permissions for the lex:GetUtterancesView action.
    */
   getUtterancesView(params: LexModelBuildingService.Types.GetUtterancesViewRequest, callback?: (err: AWSError, data: LexModelBuildingService.Types.GetUtterancesViewResponse) => void): Request<LexModelBuildingService.Types.GetUtterancesViewResponse, AWSError>;
   /**
-   * Use the GetUtterancesView operation to get information about the utterances that your users have made to your bot. You can use this list to tune the utterances that your bot responds to. For example, say that you have created a bot to order flowers. After your users have used your bot for a while, use the GetUtterancesView operation to see the requests that they have made and whether they have been successful. You might find that the utterance "I want flowers" is not being recognized. You could add this utterance to the OrderFlowers intent so that your bot recognizes that utterance. After you publish a new version of a bot, you can get information about the old version and the new so that you can compare the performance across the two versions.  Utterance statistics are generated once a day. Data is available for the last 15 days. You can request information for up to 5 versions of your bot in each request. Amazon Lex returns the most frequent utterances received by the bot in the last 15 days. The response contains information about a maximum of 100 utterances for each version. If you set childDirected field to true when you created your bot, or if you opted out of participating in improving Amazon Lex, utterances are not available. This operation requires permissions for the lex:GetUtterancesView action.
+   * Use the GetUtterancesView operation to get information about the utterances that your users have made to your bot. You can use this list to tune the utterances that your bot responds to. For example, say that you have created a bot to order flowers. After your users have used your bot for a while, use the GetUtterancesView operation to see the requests that they have made and whether they have been successful. You might find that the utterance "I want flowers" is not being recognized. You could add this utterance to the OrderFlowers intent so that your bot recognizes that utterance. After you publish a new version of a bot, you can get information about the old version and the new so that you can compare the performance across the two versions.  Utterance statistics are generated once a day. Data is available for the last 15 days. You can request information for up to 5 versions of your bot in each request. Amazon Lex returns the most frequent utterances received by the bot in the last 15 days. The response contains information about a maximum of 100 utterances for each version. If you set childDirected field to true when you created your bot, if you are using slot obfuscation with one or more slots, or if you opted out of participating in improving Amazon Lex, utterances are not available. This operation requires permissions for the lex:GetUtterancesView action.
    */
   getUtterancesView(callback?: (err: AWSError, data: LexModelBuildingService.Types.GetUtterancesViewResponse) => void): Request<LexModelBuildingService.Types.GetUtterancesViewResponse, AWSError>;
   /**
@@ -307,6 +323,14 @@ declare class LexModelBuildingService extends Service {
    * Starts a job to import a resource to Amazon Lex.
    */
   startImport(callback?: (err: AWSError, data: LexModelBuildingService.Types.StartImportResponse) => void): Request<LexModelBuildingService.Types.StartImportResponse, AWSError>;
+  /**
+   * Starts migrating a bot from Amazon Lex V1 to Amazon Lex V2. Migrate your bot when you want to take advantage of the new features of Amazon Lex V2. For more information, see Migrating a bot in the Amazon Lex developer guide.
+   */
+  startMigration(params: LexModelBuildingService.Types.StartMigrationRequest, callback?: (err: AWSError, data: LexModelBuildingService.Types.StartMigrationResponse) => void): Request<LexModelBuildingService.Types.StartMigrationResponse, AWSError>;
+  /**
+   * Starts migrating a bot from Amazon Lex V1 to Amazon Lex V2. Migrate your bot when you want to take advantage of the new features of Amazon Lex V2. For more information, see Migrating a bot in the Amazon Lex developer guide.
+   */
+  startMigration(callback?: (err: AWSError, data: LexModelBuildingService.Types.StartMigrationResponse) => void): Request<LexModelBuildingService.Types.StartMigrationResponse, AWSError>;
   /**
    * Adds the specified tags to the specified resource. If a tag key already exists, the existing value is replaced with the new value.
    */
@@ -1419,6 +1443,90 @@ declare namespace LexModelBuildingService {
      */
     nextToken?: NextToken;
   }
+  export interface GetMigrationRequest {
+    /**
+     * The unique identifier of the migration to view. The migrationID is returned by the operation.
+     */
+    migrationId: MigrationId;
+  }
+  export interface GetMigrationResponse {
+    /**
+     * The unique identifier of the migration. This is the same as the identifier used when calling the GetMigration operation.
+     */
+    migrationId?: MigrationId;
+    /**
+     * The name of the Amazon Lex V1 bot migrated to Amazon Lex V2.
+     */
+    v1BotName?: BotName;
+    /**
+     * The version of the Amazon Lex V1 bot migrated to Amazon Lex V2.
+     */
+    v1BotVersion?: Version;
+    /**
+     * The locale of the Amazon Lex V1 bot migrated to Amazon Lex V2.
+     */
+    v1BotLocale?: Locale;
+    /**
+     * The unique identifier of the Amazon Lex V2 bot that the Amazon Lex V1 is being migrated to.
+     */
+    v2BotId?: V2BotId;
+    /**
+     * The IAM role that Amazon Lex uses to run the Amazon Lex V2 bot.
+     */
+    v2BotRole?: IamRoleArn;
+    /**
+     * Indicates the status of the migration. When the status is COMPLETE the migration is finished and the bot is available in Amazon Lex V2. There may be alerts and warnings that need to be resolved to complete the migration.
+     */
+    migrationStatus?: MigrationStatus;
+    /**
+     * The strategy used to conduct the migration.    CREATE_NEW - Creates a new Amazon Lex V2 bot and migrates the Amazon Lex V1 bot to the new bot.    UPDATE_EXISTING - Overwrites the existing Amazon Lex V2 bot metadata and the locale being migrated. It doesn't change any other locales in the Amazon Lex V2 bot. If the locale doesn't exist, a new locale is created in the Amazon Lex V2 bot.  
+     */
+    migrationStrategy?: MigrationStrategy;
+    /**
+     * The date and time that the migration started.
+     */
+    migrationTimestamp?: Timestamp;
+    /**
+     * A list of alerts and warnings that indicate issues with the migration for the Amazon Lex V1 bot to Amazon Lex V2. You receive a warning when an Amazon Lex V1 feature has a different implementation if Amazon Lex V2. For more information, see Migrating a bot in the Amazon Lex V2 developer guide.
+     */
+    alerts?: MigrationAlerts;
+  }
+  export interface GetMigrationsRequest {
+    /**
+     * The field to sort the list of migrations by. You can sort by the Amazon Lex V1 bot name or the date and time that the migration was started.
+     */
+    sortByAttribute?: MigrationSortAttribute;
+    /**
+     * The order so sort the list.
+     */
+    sortByOrder?: SortOrder;
+    /**
+     * Filters the list to contain only bots whose name contains the specified string. The string is matched anywhere in bot name.
+     */
+    v1BotNameContains?: BotName;
+    /**
+     * Filters the list to contain only migrations in the specified state.
+     */
+    migrationStatusEquals?: MigrationStatus;
+    /**
+     * The maximum number of migrations to return in the response. The default is 10.
+     */
+    maxResults?: MaxResults;
+    /**
+     * A pagination token that fetches the next page of migrations. If the response to this operation is truncated, Amazon Lex returns a pagination token in the response. To fetch the next page of migrations, specify the pagination token in the request.
+     */
+    nextToken?: NextToken;
+  }
+  export interface GetMigrationsResponse {
+    /**
+     * An array of summaries for migrations from Amazon Lex V1 to Amazon Lex V2. To see details of the migration, use the migrationId from the summary in a call to the operation.
+     */
+    migrationSummaries?: MigrationSummaryList;
+    /**
+     * If the response is truncated, it includes a pagination token that you can specify in your next request to fetch the next page of migrations.
+     */
+    nextToken?: NextToken;
+  }
   export interface GetSlotTypeRequest {
     /**
      * The name of the slot type. The name is case sensitive. 
@@ -1621,7 +1729,7 @@ declare namespace LexModelBuildingService {
     tags?: TagList;
   }
   export type ListsOfUtterances = UtteranceList[];
-  export type Locale = "de-DE"|"en-AU"|"en-GB"|"en-US"|"es-419"|"es-ES"|"es-US"|"fr-FR"|"fr-CA"|"it-IT"|"ja-JP"|string;
+  export type Locale = "de-DE"|"en-AU"|"en-GB"|"en-IN"|"en-US"|"es-419"|"es-ES"|"es-US"|"fr-FR"|"fr-CA"|"it-IT"|"ja-JP"|"ko-KR"|string;
   export type LocaleList = Locale[];
   export interface LogSettingsRequest {
     /**
@@ -1684,6 +1792,74 @@ declare namespace LexModelBuildingService {
   }
   export type MessageList = Message[];
   export type MessageVersion = string;
+  export interface MigrationAlert {
+    /**
+     * The type of alert. There are two kinds of alerts:    ERROR - There was an issue with the migration that can't be resolved. The migration stops.    WARN - There was an issue with the migration that requires manual changes to the new Amazon Lex V2 bot. The migration continues.  
+     */
+    type?: MigrationAlertType;
+    /**
+     * A message that describes why the alert was issued.
+     */
+    message?: MigrationAlertMessage;
+    /**
+     * Additional details about the alert.
+     */
+    details?: MigrationAlertDetails;
+    /**
+     * A link to the Amazon Lex documentation that describes how to resolve the alert.
+     */
+    referenceURLs?: MigrationAlertReferenceURLs;
+  }
+  export type MigrationAlertDetail = string;
+  export type MigrationAlertDetails = MigrationAlertDetail[];
+  export type MigrationAlertMessage = string;
+  export type MigrationAlertReferenceURL = string;
+  export type MigrationAlertReferenceURLs = MigrationAlertReferenceURL[];
+  export type MigrationAlertType = "ERROR"|"WARN"|string;
+  export type MigrationAlerts = MigrationAlert[];
+  export type MigrationId = string;
+  export type MigrationSortAttribute = "V1_BOT_NAME"|"MIGRATION_DATE_TIME"|string;
+  export type MigrationStatus = "IN_PROGRESS"|"COMPLETED"|"FAILED"|string;
+  export type MigrationStrategy = "CREATE_NEW"|"UPDATE_EXISTING"|string;
+  export interface MigrationSummary {
+    /**
+     * The unique identifier that Amazon Lex assigned to the migration.
+     */
+    migrationId?: MigrationId;
+    /**
+     * The name of the Amazon Lex V1 bot that is the source of the migration.
+     */
+    v1BotName?: BotName;
+    /**
+     * The version of the Amazon Lex V1 bot that is the source of the migration.
+     */
+    v1BotVersion?: Version;
+    /**
+     * The locale of the Amazon Lex V1 bot that is the source of the migration.
+     */
+    v1BotLocale?: Locale;
+    /**
+     * The unique identifier of the Amazon Lex V2 that is the destination of the migration.
+     */
+    v2BotId?: V2BotId;
+    /**
+     * The IAM role that Amazon Lex uses to run the Amazon Lex V2 bot.
+     */
+    v2BotRole?: IamRoleArn;
+    /**
+     * The status of the operation. When the status is COMPLETE the bot is available in Amazon Lex V2. There may be alerts and warnings that need to be resolved to complete the migration.
+     */
+    migrationStatus?: MigrationStatus;
+    /**
+     * The strategy used to conduct the migration.
+     */
+    migrationStrategy?: MigrationStrategy;
+    /**
+     * The date and time that the migration started.
+     */
+    migrationTimestamp?: Timestamp;
+  }
+  export type MigrationSummaryList = MigrationSummary[];
   export type Name = string;
   export type NextToken = string;
   export type NumericalVersion = string;
@@ -2270,6 +2446,7 @@ declare namespace LexModelBuildingService {
   }
   export type SlotUtteranceList = Utterance[];
   export type SlotValueSelectionStrategy = "ORIGINAL_VALUE"|"TOP_RESOLUTION"|string;
+  export type SortOrder = "ASCENDING"|"DESCENDING"|string;
   export interface StartImportRequest {
     /**
      * A zip archive in binary format. The archive should contain one file, a JSON file containing the resource to import. The resource should match the type specified in the resourceType field.
@@ -2317,6 +2494,62 @@ declare namespace LexModelBuildingService {
      * A timestamp for the date and time that the import job was requested.
      */
     createdDate?: Timestamp;
+  }
+  export interface StartMigrationRequest {
+    /**
+     * The name of the Amazon Lex V1 bot that you are migrating to Amazon Lex V2.
+     */
+    v1BotName: BotName;
+    /**
+     * The version of the bot to migrate to Amazon Lex V2. You can migrate the $LATEST version as well as any numbered version.
+     */
+    v1BotVersion: Version;
+    /**
+     * The name of the Amazon Lex V2 bot that you are migrating the Amazon Lex V1 bot to.    If the Amazon Lex V2 bot doesn't exist, you must use the CREATE_NEW migration strategy.   If the Amazon Lex V2 bot exists, you must use the UPDATE_EXISTING migration strategy to change the contents of the Amazon Lex V2 bot.  
+     */
+    v2BotName: V2BotName;
+    /**
+     * The IAM role that Amazon Lex uses to run the Amazon Lex V2 bot.
+     */
+    v2BotRole: IamRoleArn;
+    /**
+     * The strategy used to conduct the migration.    CREATE_NEW - Creates a new Amazon Lex V2 bot and migrates the Amazon Lex V1 bot to the new bot.    UPDATE_EXISTING - Overwrites the existing Amazon Lex V2 bot metadata and the locale being migrated. It doesn't change any other locales in the Amazon Lex V2 bot. If the locale doesn't exist, a new locale is created in the Amazon Lex V2 bot.  
+     */
+    migrationStrategy: MigrationStrategy;
+  }
+  export interface StartMigrationResponse {
+    /**
+     * The name of the Amazon Lex V1 bot that you are migrating to Amazon Lex V2.
+     */
+    v1BotName?: BotName;
+    /**
+     * The version of the bot to migrate to Amazon Lex V2. 
+     */
+    v1BotVersion?: Version;
+    /**
+     * The locale used for the Amazon Lex V1 bot. 
+     */
+    v1BotLocale?: Locale;
+    /**
+     * The unique identifier for the Amazon Lex V2 bot. 
+     */
+    v2BotId?: V2BotId;
+    /**
+     * The IAM role that Amazon Lex uses to run the Amazon Lex V2 bot.
+     */
+    v2BotRole?: IamRoleArn;
+    /**
+     * The unique identifier that Amazon Lex assigned to the migration.
+     */
+    migrationId?: MigrationId;
+    /**
+     * The strategy used to conduct the migration.
+     */
+    migrationStrategy?: MigrationStrategy;
+    /**
+     * The date and time that the migration started.
+     */
+    migrationTimestamp?: Timestamp;
   }
   export interface Statement {
     /**
@@ -2407,6 +2640,8 @@ declare namespace LexModelBuildingService {
     utterances?: ListOfUtterance;
   }
   export type UtteranceString = string;
+  export type V2BotId = string;
+  export type V2BotName = string;
   export type Value = string;
   export type Version = string;
   export type roleArn = string;

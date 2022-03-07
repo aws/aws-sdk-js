@@ -52,6 +52,14 @@ declare class AmplifyBackend extends Service {
    */
   createBackendConfig(callback?: (err: AWSError, data: AmplifyBackend.Types.CreateBackendConfigResponse) => void): Request<AmplifyBackend.Types.CreateBackendConfigResponse, AWSError>;
   /**
+   * Creates a backend storage resource.
+   */
+  createBackendStorage(params: AmplifyBackend.Types.CreateBackendStorageRequest, callback?: (err: AWSError, data: AmplifyBackend.Types.CreateBackendStorageResponse) => void): Request<AmplifyBackend.Types.CreateBackendStorageResponse, AWSError>;
+  /**
+   * Creates a backend storage resource.
+   */
+  createBackendStorage(callback?: (err: AWSError, data: AmplifyBackend.Types.CreateBackendStorageResponse) => void): Request<AmplifyBackend.Types.CreateBackendStorageResponse, AWSError>;
+  /**
    * Generates a one-time challenge code to authenticate a user into your Amplify Admin UI.
    */
   createToken(params: AmplifyBackend.Types.CreateTokenRequest, callback?: (err: AWSError, data: AmplifyBackend.Types.CreateTokenResponse) => void): Request<AmplifyBackend.Types.CreateTokenResponse, AWSError>;
@@ -83,6 +91,14 @@ declare class AmplifyBackend extends Service {
    * Deletes an existing backend authentication resource.
    */
   deleteBackendAuth(callback?: (err: AWSError, data: AmplifyBackend.Types.DeleteBackendAuthResponse) => void): Request<AmplifyBackend.Types.DeleteBackendAuthResponse, AWSError>;
+  /**
+   * Removes the specified backend storage resource.
+   */
+  deleteBackendStorage(params: AmplifyBackend.Types.DeleteBackendStorageRequest, callback?: (err: AWSError, data: AmplifyBackend.Types.DeleteBackendStorageResponse) => void): Request<AmplifyBackend.Types.DeleteBackendStorageResponse, AWSError>;
+  /**
+   * Removes the specified backend storage resource.
+   */
+  deleteBackendStorage(callback?: (err: AWSError, data: AmplifyBackend.Types.DeleteBackendStorageResponse) => void): Request<AmplifyBackend.Types.DeleteBackendStorageResponse, AWSError>;
   /**
    * Deletes the challenge token based on the given appId and sessionId.
    */
@@ -124,11 +140,11 @@ declare class AmplifyBackend extends Service {
    */
   getBackendAPIModels(callback?: (err: AWSError, data: AmplifyBackend.Types.GetBackendAPIModelsResponse) => void): Request<AmplifyBackend.Types.GetBackendAPIModelsResponse, AWSError>;
   /**
-   * Gets backend auth details.
+   * Gets a backend auth details.
    */
   getBackendAuth(params: AmplifyBackend.Types.GetBackendAuthRequest, callback?: (err: AWSError, data: AmplifyBackend.Types.GetBackendAuthResponse) => void): Request<AmplifyBackend.Types.GetBackendAuthResponse, AWSError>;
   /**
-   * Gets backend auth details.
+   * Gets a backend auth details.
    */
   getBackendAuth(callback?: (err: AWSError, data: AmplifyBackend.Types.GetBackendAuthResponse) => void): Request<AmplifyBackend.Types.GetBackendAuthResponse, AWSError>;
   /**
@@ -140,6 +156,14 @@ declare class AmplifyBackend extends Service {
    */
   getBackendJob(callback?: (err: AWSError, data: AmplifyBackend.Types.GetBackendJobResponse) => void): Request<AmplifyBackend.Types.GetBackendJobResponse, AWSError>;
   /**
+   * Gets details for a backend storage resource.
+   */
+  getBackendStorage(params: AmplifyBackend.Types.GetBackendStorageRequest, callback?: (err: AWSError, data: AmplifyBackend.Types.GetBackendStorageResponse) => void): Request<AmplifyBackend.Types.GetBackendStorageResponse, AWSError>;
+  /**
+   * Gets details for a backend storage resource.
+   */
+  getBackendStorage(callback?: (err: AWSError, data: AmplifyBackend.Types.GetBackendStorageResponse) => void): Request<AmplifyBackend.Types.GetBackendStorageResponse, AWSError>;
+  /**
    * Gets the challenge token based on the given appId and sessionId.
    */
   getToken(params: AmplifyBackend.Types.GetTokenRequest, callback?: (err: AWSError, data: AmplifyBackend.Types.GetTokenResponse) => void): Request<AmplifyBackend.Types.GetTokenResponse, AWSError>;
@@ -147,6 +171,22 @@ declare class AmplifyBackend extends Service {
    * Gets the challenge token based on the given appId and sessionId.
    */
   getToken(callback?: (err: AWSError, data: AmplifyBackend.Types.GetTokenResponse) => void): Request<AmplifyBackend.Types.GetTokenResponse, AWSError>;
+  /**
+   * Imports an existing backend authentication resource.
+   */
+  importBackendAuth(params: AmplifyBackend.Types.ImportBackendAuthRequest, callback?: (err: AWSError, data: AmplifyBackend.Types.ImportBackendAuthResponse) => void): Request<AmplifyBackend.Types.ImportBackendAuthResponse, AWSError>;
+  /**
+   * Imports an existing backend authentication resource.
+   */
+  importBackendAuth(callback?: (err: AWSError, data: AmplifyBackend.Types.ImportBackendAuthResponse) => void): Request<AmplifyBackend.Types.ImportBackendAuthResponse, AWSError>;
+  /**
+   * Imports an existing backend storage resource.
+   */
+  importBackendStorage(params: AmplifyBackend.Types.ImportBackendStorageRequest, callback?: (err: AWSError, data: AmplifyBackend.Types.ImportBackendStorageResponse) => void): Request<AmplifyBackend.Types.ImportBackendStorageResponse, AWSError>;
+  /**
+   * Imports an existing backend storage resource.
+   */
+  importBackendStorage(callback?: (err: AWSError, data: AmplifyBackend.Types.ImportBackendStorageResponse) => void): Request<AmplifyBackend.Types.ImportBackendStorageResponse, AWSError>;
   /**
    * Lists the jobs for the backend of an Amplify app.
    */
@@ -156,6 +196,14 @@ declare class AmplifyBackend extends Service {
    */
   listBackendJobs(callback?: (err: AWSError, data: AmplifyBackend.Types.ListBackendJobsResponse) => void): Request<AmplifyBackend.Types.ListBackendJobsResponse, AWSError>;
   /**
+   * The list of S3 buckets in your account.
+   */
+  listS3Buckets(params: AmplifyBackend.Types.ListS3BucketsRequest, callback?: (err: AWSError, data: AmplifyBackend.Types.ListS3BucketsResponse) => void): Request<AmplifyBackend.Types.ListS3BucketsResponse, AWSError>;
+  /**
+   * The list of S3 buckets in your account.
+   */
+  listS3Buckets(callback?: (err: AWSError, data: AmplifyBackend.Types.ListS3BucketsResponse) => void): Request<AmplifyBackend.Types.ListS3BucketsResponse, AWSError>;
+  /**
    * Removes all backend environments from your Amplify project.
    */
   removeAllBackends(params: AmplifyBackend.Types.RemoveAllBackendsRequest, callback?: (err: AWSError, data: AmplifyBackend.Types.RemoveAllBackendsResponse) => void): Request<AmplifyBackend.Types.RemoveAllBackendsResponse, AWSError>;
@@ -164,11 +212,11 @@ declare class AmplifyBackend extends Service {
    */
   removeAllBackends(callback?: (err: AWSError, data: AmplifyBackend.Types.RemoveAllBackendsResponse) => void): Request<AmplifyBackend.Types.RemoveAllBackendsResponse, AWSError>;
   /**
-   * Removes the AWS resources that are required to access the Amplify Admin UI.
+   * Removes the AWS resources required to access the Amplify Admin UI.
    */
   removeBackendConfig(params: AmplifyBackend.Types.RemoveBackendConfigRequest, callback?: (err: AWSError, data: AmplifyBackend.Types.RemoveBackendConfigResponse) => void): Request<AmplifyBackend.Types.RemoveBackendConfigResponse, AWSError>;
   /**
-   * Removes the AWS resources that are required to access the Amplify Admin UI.
+   * Removes the AWS resources required to access the Amplify Admin UI.
    */
   removeBackendConfig(callback?: (err: AWSError, data: AmplifyBackend.Types.RemoveBackendConfigResponse) => void): Request<AmplifyBackend.Types.RemoveBackendConfigResponse, AWSError>;
   /**
@@ -188,11 +236,11 @@ declare class AmplifyBackend extends Service {
    */
   updateBackendAuth(callback?: (err: AWSError, data: AmplifyBackend.Types.UpdateBackendAuthResponse) => void): Request<AmplifyBackend.Types.UpdateBackendAuthResponse, AWSError>;
   /**
-   * Updates the AWS resources that are required to access the Amplify Admin UI.
+   * Updates the AWS resources required to access the Amplify Admin UI.
    */
   updateBackendConfig(params: AmplifyBackend.Types.UpdateBackendConfigRequest, callback?: (err: AWSError, data: AmplifyBackend.Types.UpdateBackendConfigResponse) => void): Request<AmplifyBackend.Types.UpdateBackendConfigResponse, AWSError>;
   /**
-   * Updates the AWS resources that are required to access the Amplify Admin UI.
+   * Updates the AWS resources required to access the Amplify Admin UI.
    */
   updateBackendConfig(callback?: (err: AWSError, data: AmplifyBackend.Types.UpdateBackendConfigResponse) => void): Request<AmplifyBackend.Types.UpdateBackendConfigResponse, AWSError>;
   /**
@@ -203,20 +251,28 @@ declare class AmplifyBackend extends Service {
    * Updates a specific job.
    */
   updateBackendJob(callback?: (err: AWSError, data: AmplifyBackend.Types.UpdateBackendJobResponse) => void): Request<AmplifyBackend.Types.UpdateBackendJobResponse, AWSError>;
+  /**
+   * Updates an existing backend storage resource.
+   */
+  updateBackendStorage(params: AmplifyBackend.Types.UpdateBackendStorageRequest, callback?: (err: AWSError, data: AmplifyBackend.Types.UpdateBackendStorageResponse) => void): Request<AmplifyBackend.Types.UpdateBackendStorageResponse, AWSError>;
+  /**
+   * Updates an existing backend storage resource.
+   */
+  updateBackendStorage(callback?: (err: AWSError, data: AmplifyBackend.Types.UpdateBackendStorageResponse) => void): Request<AmplifyBackend.Types.UpdateBackendStorageResponse, AWSError>;
 }
 declare namespace AmplifyBackend {
   export type AuthResources = "USER_POOL_ONLY"|"IDENTITY_POOL_AND_USER_POOL"|string;
   export interface BackendAPIAppSyncAuthSettings {
     /**
-     * The Amazon Cognito user pool ID, if Amazon Cognito is used as an authentication setting to access your data models.
+     * The Amazon Cognito user pool ID, if Amazon Cognito was used as an authentication setting to access your data models.
      */
     CognitoUserPoolId?: __string;
     /**
-     * The API key description for API_KEY, if it is used as an authentication mechanism to access your data models.
+     * The API key description for API_KEY, if it was used as an authentication mechanism to access your data models.
      */
     Description?: __string;
     /**
-     * The API key expiration time for API_KEY, if it is used as an authentication mechanism to access your data models.
+     * The API key expiration time for API_KEY, if it was used as an authentication mechanism to access your data models.
      */
     ExpirationTime?: __double;
     /**
@@ -224,7 +280,7 @@ declare namespace AmplifyBackend {
      */
     OpenIDAuthTTL?: __string;
     /**
-     * The clientID for openID, if openID is used as an authentication setting to access your data models.
+     * The clientID for openID, if openID was used as an authentication setting to access your data models.
      */
     OpenIDClientId?: __string;
     /**
@@ -232,11 +288,11 @@ declare namespace AmplifyBackend {
      */
     OpenIDIatTTL?: __string;
     /**
-     * The openID issuer URL, if openID is used as an authentication setting to access your data models.
+     * The openID issuer URL, if openID was used as an authentication setting to access your data models.
      */
     OpenIDIssueURL?: __string;
     /**
-     * The openID provider name, if openID is used as an authentication mechanism to access your data models.
+     * The OpenID provider name, if OpenID was used as an authentication mechanism to access your data models.
      */
     OpenIDProviderName?: __string;
   }
@@ -262,7 +318,7 @@ declare namespace AmplifyBackend {
      */
     AdditionalAuthTypes?: ListOfBackendAPIAuthType;
     /**
-     * The API name used to interact with the data model, configured as a part of the Amplify project.
+     * The API name used to interact with the data model, configured as a part of your Amplify project.
      */
     ApiName?: __string;
     /**
@@ -282,13 +338,31 @@ declare namespace AmplifyBackend {
      */
     TransformSchema?: __string;
   }
-  export interface BackendAuthSocialProviderConfig {
+  export interface BackendAuthAppleProviderConfig {
     /**
-     * Describes the client_id that can be obtained from the third-party social federation provider.
+     * Describes the client_id (also called Services ID) that comes from Apple.
      */
     ClientId?: __string;
     /**
-     * Describes the client_secret that can be obtained from third-party social federation providers.
+     * Describes the key_id that comes from Apple.
+     */
+    KeyId?: __string;
+    /**
+     * Describes the private_key that comes from Apple.
+     */
+    PrivateKey?: __string;
+    /**
+     * Describes the team_id that comes from Apple.
+     */
+    TeamId?: __string;
+  }
+  export interface BackendAuthSocialProviderConfig {
+    /**
+     * Describes the client_id, which can be obtained from the third-party social federation provider.
+     */
+    ClientId?: __string;
+    /**
+     * Describes the client_secret, which can be obtained from third-party social federation providers.
      */
     ClientSecret?: __string;
   }
@@ -306,7 +380,7 @@ declare namespace AmplifyBackend {
      */
     CreateTime?: __string;
     /**
-     * If the request failed, this is the returned error.
+     * If the request fails, this error is returned.
      */
     Error?: __string;
     /**
@@ -325,6 +399,16 @@ declare namespace AmplifyBackend {
      * The time when the job was last updated.
      */
     UpdateTime?: __string;
+  }
+  export interface BackendStoragePermissions {
+    /**
+     * Lists all authenticated user read, write, and delete permissions for your S3 bucket.
+     */
+    Authenticated: ListOfAuthenticatedElement;
+    /**
+     * Lists all unauthenticated user read, write, and delete permissions for your S3 bucket.
+     */
+    UnAuthenticated?: ListOfUnAuthenticatedElement;
   }
   export interface CloneBackendRequest {
     /**
@@ -350,7 +434,7 @@ declare namespace AmplifyBackend {
      */
     BackendEnvironmentName?: __string;
     /**
-     * If the request failed, this is the returned error.
+     * If the request fails, this error is returned.
      */
     Error?: __string;
     /**
@@ -394,7 +478,7 @@ declare namespace AmplifyBackend {
      */
     BackendEnvironmentName?: __string;
     /**
-     * If the request failed, this is the returned error.
+     * If the request fails, this error is returned.
      */
     Error?: __string;
     /**
@@ -412,7 +496,7 @@ declare namespace AmplifyBackend {
   }
   export interface CreateBackendAuthForgotPasswordConfig {
     /**
-     * Describes which method to use (either SMS or email) to deliver messages to app users that want to recover their password.
+     * Describes which mode to use (either SMS or email) to deliver messages to app users who want to recover their password.
      */
     DeliveryMethod: DeliveryMethod;
     /**
@@ -426,7 +510,7 @@ declare namespace AmplifyBackend {
   }
   export interface CreateBackendAuthIdentityPoolConfig {
     /**
-     * Name of the identity pool used for authorization.
+     * Name of the Amazon Cognito identity pool used for authorization.
      */
     IdentityPoolName: __string;
     /**
@@ -454,7 +538,7 @@ declare namespace AmplifyBackend {
      */
     OAuthGrantType: OAuthGrantType;
     /**
-     * List of OAuth-related flows that allow your app users to authenticate from your Amplify app.
+     * List of OAuth-related flows used to allow your app users to authenticate from your Amplify app.
      */
     OAuthScopes: ListOfOAuthScopesElement;
     /**
@@ -466,7 +550,7 @@ declare namespace AmplifyBackend {
      */
     RedirectSignOutURIs: ListOf__string;
     /**
-     * The settings for using social identity providers for access to your Amplify app.
+     * The settings for using social providers to access your Amplify app.
      */
     SocialProviderSettings?: SocialProviderSettings;
   }
@@ -504,7 +588,7 @@ declare namespace AmplifyBackend {
      */
     AuthResources: AuthResources;
     /**
-     * Describes the authorization configuration for the Amazon Cognito identity pool, provisioned as a part of the auth resource in your Amplify project.
+     * Describes the authorization configuration for the Amazon Cognito identity pool, provisioned as a part of your auth resource in the Amplify project.
      */
     IdentityPoolConfigs?: CreateBackendAuthIdentityPoolConfig;
     /**
@@ -512,7 +596,7 @@ declare namespace AmplifyBackend {
      */
     Service: Service;
     /**
-     * Describes the authentication configuration for the Amazon Cognito user pool, provisioned as a part of the auth resource in your Amplify project.
+     * Describes authentication configuration for the Amazon Cognito user pool, provisioned as a part of your auth resource in the Amplify project.
      */
     UserPoolConfigs: CreateBackendAuthUserPoolConfig;
   }
@@ -526,7 +610,7 @@ declare namespace AmplifyBackend {
      */
     BackendEnvironmentName?: __string;
     /**
-     * If the request failed, this is the returned error.
+     * If the request fails, this error is returned.
      */
     Error?: __string;
     /**
@@ -548,7 +632,7 @@ declare namespace AmplifyBackend {
      */
     ForgotPassword?: CreateBackendAuthForgotPasswordConfig;
     /**
-     * Describes whether to apply multi-factor authentication (MFA) policies for your Amazon Cognito user pool that's configured as a part of your Amplify project.
+     * Describes whether to apply multi-factor authentication policies for your Amazon Cognito user pool configured as a part of your Amplify project.
      */
     Mfa?: CreateBackendAuthMFAConfig;
     /**
@@ -560,11 +644,11 @@ declare namespace AmplifyBackend {
      */
     PasswordPolicy?: CreateBackendAuthPasswordPolicyConfig;
     /**
-     * The required attributes to sign up new users in the Amazon Cognito user pool.
+     * The required attributes to sign up new users in the user pool.
      */
     RequiredSignUpAttributes: ListOfRequiredSignUpAttributesElement;
     /**
-     * Describes the sign-in methods that your Amplify app users to log in using the Amazon Cognito user pool that's configured as a part of your Amplify project.
+     * Describes the sign-in methods that your Amplify app users use to log in using the Amazon Cognito user pool, configured as a part of your Amplify project.
      */
     SignInMethod: SignInMethod;
     /**
@@ -614,7 +698,7 @@ declare namespace AmplifyBackend {
      */
     BackendEnvironmentName: __string;
     /**
-     * The resource configuration for the backend creation request.
+     * The resource configuration for creating backend storage.
      */
     ResourceConfig?: ResourceConfig;
     /**
@@ -632,7 +716,7 @@ declare namespace AmplifyBackend {
      */
     BackendEnvironmentName?: __string;
     /**
-     * If the request failed, this is the returned error.
+     * If the request fails, this error is returned.
      */
     Error?: __string;
     /**
@@ -643,6 +727,56 @@ declare namespace AmplifyBackend {
      * The name of the operation.
      */
     Operation?: __string;
+    /**
+     * The current status of the request.
+     */
+    Status?: __string;
+  }
+  export interface CreateBackendStorageRequest {
+    /**
+     * The app ID.
+     */
+    AppId: __string;
+    /**
+     * The name of the backend environment.
+     */
+    BackendEnvironmentName: __string;
+    /**
+     * The resource configuration for creating backend storage.
+     */
+    ResourceConfig: CreateBackendStorageResourceConfig;
+    /**
+     * The name of the storage resource.
+     */
+    ResourceName: __string;
+  }
+  export interface CreateBackendStorageResourceConfig {
+    /**
+     * The name of the S3 bucket.
+     */
+    BucketName?: __string;
+    /**
+     * The authorization configuration for the storage S3 bucket.
+     */
+    Permissions: BackendStoragePermissions;
+    /**
+     * The name of the storage service.
+     */
+    ServiceName: ServiceName;
+  }
+  export interface CreateBackendStorageResponse {
+    /**
+     * The app ID.
+     */
+    AppId?: __string;
+    /**
+     * The name of the backend environment.
+     */
+    BackendEnvironmentName?: __string;
+    /**
+     * The ID for the job.
+     */
+    JobId?: __string;
     /**
      * The current status of the request.
      */
@@ -700,7 +834,7 @@ declare namespace AmplifyBackend {
      */
     BackendEnvironmentName?: __string;
     /**
-     * If the request failed, this is the returned error.
+     * If the request fails, this error is returned.
      */
     Error?: __string;
     /**
@@ -740,7 +874,7 @@ declare namespace AmplifyBackend {
      */
     BackendEnvironmentName?: __string;
     /**
-     * If the request failed, this is the returned error.
+     * If the request fails, this error is returned.
      */
     Error?: __string;
     /**
@@ -776,7 +910,7 @@ declare namespace AmplifyBackend {
      */
     BackendEnvironmentName?: __string;
     /**
-     * If the request failed, this is the returned error.
+     * If the request fails, this error is returned.
      */
     Error?: __string;
     /**
@@ -787,6 +921,42 @@ declare namespace AmplifyBackend {
      * The name of the operation.
      */
     Operation?: __string;
+    /**
+     * The current status of the request.
+     */
+    Status?: __string;
+  }
+  export interface DeleteBackendStorageRequest {
+    /**
+     * The app ID.
+     */
+    AppId: __string;
+    /**
+     * The name of the backend environment.
+     */
+    BackendEnvironmentName: __string;
+    /**
+     * The name of the storage resource.
+     */
+    ResourceName: __string;
+    /**
+     * The name of the storage service.
+     */
+    ServiceName: ServiceName;
+  }
+  export interface DeleteBackendStorageResponse {
+    /**
+     * The app ID.
+     */
+    AppId?: __string;
+    /**
+     * The name of the backend environment.
+     */
+    BackendEnvironmentName?: __string;
+    /**
+     * The ID for the job.
+     */
+    JobId?: __string;
     /**
      * The current status of the request.
      */
@@ -843,7 +1013,7 @@ declare namespace AmplifyBackend {
      */
     BackendEnvironmentName?: __string;
     /**
-     * If the request failed, this is the returned error.
+     * If the request fails, this error is returned.
      */
     Error?: __string;
     /**
@@ -875,7 +1045,7 @@ declare namespace AmplifyBackend {
   }
   export interface GetBackendAPIModelsResponse {
     /**
-     * Stringified JSON of the DataStore model.
+     * Stringified JSON of the datastore model.
      */
     Models?: __string;
     /**
@@ -911,7 +1081,7 @@ declare namespace AmplifyBackend {
      */
     BackendEnvironmentName?: __string;
     /**
-     * If the request failed, this is the returned error.
+     * If the request fails, this error is returned.
      */
     Error?: __string;
     /**
@@ -947,7 +1117,7 @@ declare namespace AmplifyBackend {
      */
     BackendEnvironmentName?: __string;
     /**
-     * If the request failed, this is the returned error.
+     * If the request fails, this error is returned.
      */
     Error?: __string;
     /**
@@ -987,7 +1157,7 @@ declare namespace AmplifyBackend {
      */
     CreateTime?: __string;
     /**
-     * If the request failed, this is the returned error.
+     * If the request fails, this error is returned.
      */
     Error?: __string;
     /**
@@ -1019,7 +1189,11 @@ declare namespace AmplifyBackend {
   }
   export interface GetBackendResponse {
     /**
-     * A stringified version of the current configurations for your Amplify project.
+     * A stringified version of the cli.json file for your Amplify project.
+     */
+    AmplifyFeatureFlags?: __string;
+    /**
+     * A stringified version of the current configs for your Amplify project.
      */
     AmplifyMetaConfig?: __string;
     /**
@@ -1042,6 +1216,56 @@ declare namespace AmplifyBackend {
      * If the request failed, this is the returned error.
      */
     Error?: __string;
+  }
+  export interface GetBackendStorageRequest {
+    /**
+     * The app ID.
+     */
+    AppId: __string;
+    /**
+     * The name of the backend environment.
+     */
+    BackendEnvironmentName: __string;
+    /**
+     * The name of the storage resource.
+     */
+    ResourceName: __string;
+  }
+  export interface GetBackendStorageResourceConfig {
+    /**
+     * The name of the S3 bucket.
+     */
+    BucketName?: __string;
+    /**
+     * Returns True if the storage resource has been imported.
+     */
+    Imported: __boolean;
+    /**
+     * The authorization configuration for the storage S3 bucket.
+     */
+    Permissions?: BackendStoragePermissions;
+    /**
+     * The name of the storage service.
+     */
+    ServiceName: ServiceName;
+  }
+  export interface GetBackendStorageResponse {
+    /**
+     * The app ID.
+     */
+    AppId?: __string;
+    /**
+     * The name of the backend environment.
+     */
+    BackendEnvironmentName?: __string;
+    /**
+     * The resource configuration for the backend storage resource.
+     */
+    ResourceConfig?: GetBackendStorageResourceConfig;
+    /**
+     * The name of the storage resource.
+     */
+    ResourceName?: __string;
   }
   export interface GetTokenRequest {
     /**
@@ -1070,6 +1294,94 @@ declare namespace AmplifyBackend {
      * The expiry time for the one-time generated token code.
      */
     Ttl?: __string;
+  }
+  export interface ImportBackendAuthRequest {
+    /**
+     * The app ID.
+     */
+    AppId: __string;
+    /**
+     * The name of the backend environment.
+     */
+    BackendEnvironmentName: __string;
+    /**
+     * The ID of the Amazon Cognito identity pool.
+     */
+    IdentityPoolId?: __string;
+    /**
+     * The ID of the Amazon Cognito native client.
+     */
+    NativeClientId: __string;
+    /**
+     * The ID of the Amazon Cognito user pool.
+     */
+    UserPoolId: __string;
+    /**
+     * The ID of the Amazon Cognito web client.
+     */
+    WebClientId: __string;
+  }
+  export interface ImportBackendAuthResponse {
+    /**
+     * The app ID.
+     */
+    AppId?: __string;
+    /**
+     * The name of the backend environment.
+     */
+    BackendEnvironmentName?: __string;
+    /**
+     * If the request fails, this error is returned.
+     */
+    Error?: __string;
+    /**
+     * The ID for the job.
+     */
+    JobId?: __string;
+    /**
+     * The name of the operation.
+     */
+    Operation?: __string;
+    /**
+     * The current status of the request.
+     */
+    Status?: __string;
+  }
+  export interface ImportBackendStorageRequest {
+    /**
+     * The app ID.
+     */
+    AppId: __string;
+    /**
+     * The name of the backend environment.
+     */
+    BackendEnvironmentName: __string;
+    /**
+     * The name of the S3 bucket.
+     */
+    BucketName?: __string;
+    /**
+     * The name of the storage service.
+     */
+    ServiceName: ServiceName;
+  }
+  export interface ImportBackendStorageResponse {
+    /**
+     * The app ID.
+     */
+    AppId?: __string;
+    /**
+     * The name of the backend environment.
+     */
+    BackendEnvironmentName?: __string;
+    /**
+     * The ID for the job.
+     */
+    JobId?: __string;
+    /**
+     * The current status of the request.
+     */
+    Status?: __string;
   }
   export interface ListBackendJobsRequest {
     /**
@@ -1111,9 +1423,25 @@ declare namespace AmplifyBackend {
      */
     NextToken?: __string;
   }
+  export interface ListS3BucketsRequest {
+    /**
+     * Reserved for future use.
+     */
+    NextToken?: __string;
+  }
+  export interface ListS3BucketsResponse {
+    /**
+     * The list of S3 buckets.
+     */
+    Buckets?: ListOfS3BucketInfo;
+    /**
+     * Reserved for future use.
+     */
+    NextToken?: __string;
+  }
   export interface LoginAuthConfigReqObj {
     /**
-     * The Amazon Cognito identity pool ID used for Amplify Admin UI login authorization.
+     * The Amazon Cognito identity pool ID used for the Amplify Admin UI login authorization.
      */
     AwsCognitoIdentityPoolId?: __string;
     /**
@@ -1148,7 +1476,7 @@ declare namespace AmplifyBackend {
      */
     AppId?: __string;
     /**
-     * If the request failed, this is the returned error.
+     * If the request fails, this error is returned.
      */
     Error?: __string;
     /**
@@ -1172,14 +1500,25 @@ declare namespace AmplifyBackend {
   }
   export interface RemoveBackendConfigResponse {
     /**
-     * If the request failed, this is the returned error.
+     * If the request fails, this error is returned.
      */
     Error?: __string;
   }
   export type ResolutionStrategy = "OPTIMISTIC_CONCURRENCY"|"LAMBDA"|"AUTOMERGE"|"NONE"|string;
   export interface ResourceConfig {
   }
+  export interface S3BucketInfo {
+    /**
+     * The creation date of the S3 bucket.
+     */
+    CreationDate?: __string;
+    /**
+     * The name of the S3 bucket.
+     */
+    Name?: __string;
+  }
   export type Service = "COGNITO"|string;
+  export type ServiceName = "S3"|string;
   export interface Settings {
     /**
      * The supported MFA types.
@@ -1201,6 +1540,7 @@ declare namespace AmplifyBackend {
     Facebook?: BackendAuthSocialProviderConfig;
     Google?: BackendAuthSocialProviderConfig;
     LoginWithAmazon?: BackendAuthSocialProviderConfig;
+    SignInWithApple?: BackendAuthAppleProviderConfig;
   }
   export type Status = "LATEST"|"STALE"|string;
   export interface UpdateBackendAPIRequest {
@@ -1231,7 +1571,7 @@ declare namespace AmplifyBackend {
      */
     BackendEnvironmentName?: __string;
     /**
-     * If the request failed, this is the returned error.
+     * If the request fails, this error is returned.
      */
     Error?: __string;
     /**
@@ -1249,7 +1589,7 @@ declare namespace AmplifyBackend {
   }
   export interface UpdateBackendAuthForgotPasswordConfig {
     /**
-     * Describes which method to use (either SMS or email) to deliver messages to app users that want to recover their password.
+     * Describes which mode to use (either SMS or email) to deliver messages to app users that want to recover their password.
      */
     DeliveryMethod?: DeliveryMethod;
     /**
@@ -1263,7 +1603,7 @@ declare namespace AmplifyBackend {
   }
   export interface UpdateBackendAuthIdentityPoolConfig {
     /**
-     * A Boolean value that you can set to allow or disallow guest-level authorization into your Amplify app.
+     * A boolean value that can be set to allow or disallow guest-level authorization into your Amplify app.
      */
     UnauthenticatedLogin?: __boolean;
   }
@@ -1305,7 +1645,7 @@ declare namespace AmplifyBackend {
   }
   export interface UpdateBackendAuthPasswordPolicyConfig {
     /**
-     * Describes additional constrains on the password requirements to sign in to the auth resource, configured as a part of your Amplify project.
+     * Describes additional constraints on password requirements to sign in to the auth resource, configured as a part of your Amplify project.
      */
     AdditionalConstraints?: ListOfAdditionalConstraintsElement;
     /**
@@ -1337,7 +1677,7 @@ declare namespace AmplifyBackend {
      */
     AuthResources: AuthResources;
     /**
-     * Describes the authorization configuration for the Amazon Cognito identity pool, provisioned as a part of the auth resource in your Amplify project.
+     * Describes the authorization configuration for the Amazon Cognito identity pool, provisioned as a part of your auth resource in the Amplify project.
      */
     IdentityPoolConfigs?: UpdateBackendAuthIdentityPoolConfig;
     /**
@@ -1345,7 +1685,7 @@ declare namespace AmplifyBackend {
      */
     Service: Service;
     /**
-     * Describes the authentication configuration for the Amazon Cognito user pool, provisioned as a part of the auth resource in your Amplify project.
+     * Describes the authentication configuration for the Amazon Cognito user pool, provisioned as a part of your auth resource in the Amplify project.
      */
     UserPoolConfigs: UpdateBackendAuthUserPoolConfig;
   }
@@ -1359,7 +1699,7 @@ declare namespace AmplifyBackend {
      */
     BackendEnvironmentName?: __string;
     /**
-     * If the request failed, this is the returned error.
+     * If the request fails, this error is returned.
      */
     Error?: __string;
     /**
@@ -1381,7 +1721,7 @@ declare namespace AmplifyBackend {
      */
     ForgotPassword?: UpdateBackendAuthForgotPasswordConfig;
     /**
-     * Describes whether to apply multi-factor authentication (MFA) policies for your Amazon Cognito user pool that's configured as a part of your Amplify project.
+     * Describes whether to apply multi-factor authentication policies for your Amazon Cognito user pool configured as a part of your Amplify project.
      */
     Mfa?: UpdateBackendAuthMFAConfig;
     /**
@@ -1413,7 +1753,7 @@ declare namespace AmplifyBackend {
      */
     BackendManagerAppId?: __string;
     /**
-     * If the request failed, this is the returned error.
+     * If the request fails, this error is returned.
      */
     Error?: __string;
     /**
@@ -1457,7 +1797,7 @@ declare namespace AmplifyBackend {
      */
     CreateTime?: __string;
     /**
-     * If the request failed, this is the returned error.
+     * If the request fails, this error is returned.
      */
     Error?: __string;
     /**
@@ -1477,19 +1817,70 @@ declare namespace AmplifyBackend {
      */
     UpdateTime?: __string;
   }
+  export interface UpdateBackendStorageRequest {
+    /**
+     * The app ID.
+     */
+    AppId: __string;
+    /**
+     * The name of the backend environment.
+     */
+    BackendEnvironmentName: __string;
+    /**
+     * The resource configuration for updating backend storage.
+     */
+    ResourceConfig: UpdateBackendStorageResourceConfig;
+    /**
+     * The name of the storage resource.
+     */
+    ResourceName: __string;
+  }
+  export interface UpdateBackendStorageResourceConfig {
+    /**
+     * The authorization configuration for the storage S3 bucket.
+     */
+    Permissions: BackendStoragePermissions;
+    /**
+     * The name of the storage service.
+     */
+    ServiceName: ServiceName;
+  }
+  export interface UpdateBackendStorageResponse {
+    /**
+     * The app ID.
+     */
+    AppId?: __string;
+    /**
+     * The name of the backend environment.
+     */
+    BackendEnvironmentName?: __string;
+    /**
+     * The ID for the job.
+     */
+    JobId?: __string;
+    /**
+     * The current status of the request.
+     */
+    Status?: __string;
+  }
   export type AdditionalConstraintsElement = "REQUIRE_DIGIT"|"REQUIRE_LOWERCASE"|"REQUIRE_SYMBOL"|"REQUIRE_UPPERCASE"|string;
+  export type AuthenticatedElement = "READ"|"CREATE_AND_UPDATE"|"DELETE"|string;
   export type MfaTypesElement = "SMS"|"TOTP"|string;
   export type OAuthScopesElement = "PHONE"|"EMAIL"|"OPENID"|"PROFILE"|"AWS_COGNITO_SIGNIN_USER_ADMIN"|string;
   export type RequiredSignUpAttributesElement = "ADDRESS"|"BIRTHDATE"|"EMAIL"|"FAMILY_NAME"|"GENDER"|"GIVEN_NAME"|"LOCALE"|"MIDDLE_NAME"|"NAME"|"NICKNAME"|"PHONE_NUMBER"|"PICTURE"|"PREFERRED_USERNAME"|"PROFILE"|"UPDATED_AT"|"WEBSITE"|"ZONE_INFO"|string;
+  export type UnAuthenticatedElement = "READ"|"CREATE_AND_UPDATE"|"DELETE"|string;
   export type __boolean = boolean;
   export type __double = number;
   export type __integerMin1Max25 = number;
   export type ListOfBackendAPIAuthType = BackendAPIAuthType[];
   export type ListOfBackendJobRespObj = BackendJobRespObj[];
+  export type ListOfS3BucketInfo = S3BucketInfo[];
   export type ListOfAdditionalConstraintsElement = AdditionalConstraintsElement[];
+  export type ListOfAuthenticatedElement = AuthenticatedElement[];
   export type ListOfMfaTypesElement = MfaTypesElement[];
   export type ListOfOAuthScopesElement = OAuthScopesElement[];
   export type ListOfRequiredSignUpAttributesElement = RequiredSignUpAttributesElement[];
+  export type ListOfUnAuthenticatedElement = UnAuthenticatedElement[];
   export type ListOf__string = __string[];
   export type __string = string;
   /**

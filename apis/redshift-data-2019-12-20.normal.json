@@ -13,6 +13,31 @@
     "uid": "redshift-data-2019-12-20"
   },
   "operations": {
+    "BatchExecuteStatement": {
+      "name": "BatchExecuteStatement",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "BatchExecuteStatementInput"
+      },
+      "output": {
+        "shape": "BatchExecuteStatementOutput"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ActiveStatementsExceededException"
+        },
+        {
+          "shape": "BatchExecuteStatementException"
+        }
+      ],
+      "documentation": "<p>Runs one or more SQL statements, which can be data manipulation language (DML) or data definition language (DDL). Depending on the authorization method, use one of the following combinations of request parameters: </p> <ul> <li> <p>Secrets Manager - when connecting to a cluster, specify the Amazon Resource Name (ARN) of the secret, the database name, and the cluster identifier that matches the cluster in the secret. When connecting to a serverless endpoint, specify the Amazon Resource Name (ARN) of the secret and the database name. </p> </li> <li> <p>Temporary credentials - when connecting to a cluster, specify the cluster identifier, the database name, and the database user name. Also, permission to call the <code>redshift:GetClusterCredentials</code> operation is required. When connecting to a serverless endpoint, specify the database name. </p> </li> </ul>"
+    },
     "CancelStatement": {
       "name": "CancelStatement",
       "http": {
@@ -27,10 +52,16 @@
       },
       "errors": [
         {
+          "shape": "ValidationException"
+        },
+        {
           "shape": "ResourceNotFoundException"
         },
         {
           "shape": "InternalServerException"
+        },
+        {
+          "shape": "DatabaseConnectionException"
         }
       ],
       "documentation": "<p>Cancels a running query. To be canceled, a query must be running. </p>"
@@ -78,9 +109,12 @@
         },
         {
           "shape": "InternalServerException"
+        },
+        {
+          "shape": "DatabaseConnectionException"
         }
       ],
-      "documentation": "<p>Describes the detailed information about a table from metadata in the cluster. The information includes its columns. A token is returned to page through the column list. Depending on the authorization method, use one of the following combinations of request parameters: </p> <ul> <li> <p>AWS Secrets Manager - specify the Amazon Resource Name (ARN) of the secret and the cluster identifier that matches the cluster in the secret. </p> </li> <li> <p>Temporary credentials - specify the cluster identifier, the database name, and the database user name. Permission to call the <code>redshift:GetClusterCredentials</code> operation is required to use this method. </p> </li> </ul>"
+      "documentation": "<p>Describes the detailed information about a table from metadata in the cluster. The information includes its columns. A token is returned to page through the column list. Depending on the authorization method, use one of the following combinations of request parameters: </p> <ul> <li> <p>Secrets Manager - when connecting to a cluster, specify the Amazon Resource Name (ARN) of the secret, the database name, and the cluster identifier that matches the cluster in the secret. When connecting to a serverless endpoint, specify the Amazon Resource Name (ARN) of the secret and the database name. </p> </li> <li> <p>Temporary credentials - when connecting to a cluster, specify the cluster identifier, the database name, and the database user name. Also, permission to call the <code>redshift:GetClusterCredentials</code> operation is required. When connecting to a serverless endpoint, specify the database name. </p> </li> </ul>"
     },
     "ExecuteStatement": {
       "name": "ExecuteStatement",
@@ -105,7 +139,7 @@
           "shape": "ActiveStatementsExceededException"
         }
       ],
-      "documentation": "<p>Runs an SQL statement, which can be data manipulation language (DML) or data definition language (DDL). This statement must be a single SQL statement. Depending on the authorization method, use one of the following combinations of request parameters: </p> <ul> <li> <p>AWS Secrets Manager - specify the Amazon Resource Name (ARN) of the secret and the cluster identifier that matches the cluster in the secret. </p> </li> <li> <p>Temporary credentials - specify the cluster identifier, the database name, and the database user name. Permission to call the <code>redshift:GetClusterCredentials</code> operation is required to use this method. </p> </li> </ul>"
+      "documentation": "<p>Runs an SQL statement, which can be data manipulation language (DML) or data definition language (DDL). This statement must be a single SQL statement. Depending on the authorization method, use one of the following combinations of request parameters: </p> <ul> <li> <p>Secrets Manager - when connecting to a cluster, specify the Amazon Resource Name (ARN) of the secret, the database name, and the cluster identifier that matches the cluster in the secret. When connecting to a serverless endpoint, specify the Amazon Resource Name (ARN) of the secret and the database name. </p> </li> <li> <p>Temporary credentials - when connecting to a cluster, specify the cluster identifier, the database name, and the database user name. Also, permission to call the <code>redshift:GetClusterCredentials</code> operation is required. When connecting to a serverless endpoint, specify the database name. </p> </li> </ul>"
     },
     "GetStatementResult": {
       "name": "GetStatementResult",
@@ -150,9 +184,12 @@
         },
         {
           "shape": "InternalServerException"
+        },
+        {
+          "shape": "DatabaseConnectionException"
         }
       ],
-      "documentation": "<p>List the databases in a cluster. A token is returned to page through the database list. Depending on the authorization method, use one of the following combinations of request parameters: </p> <ul> <li> <p>AWS Secrets Manager - specify the Amazon Resource Name (ARN) of the secret and the cluster identifier that matches the cluster in the secret. </p> </li> <li> <p>Temporary credentials - specify the cluster identifier, the database name, and the database user name. Permission to call the <code>redshift:GetClusterCredentials</code> operation is required to use this method. </p> </li> </ul>"
+      "documentation": "<p>List the databases in a cluster. A token is returned to page through the database list. Depending on the authorization method, use one of the following combinations of request parameters: </p> <ul> <li> <p>Secrets Manager - when connecting to a cluster, specify the Amazon Resource Name (ARN) of the secret, the database name, and the cluster identifier that matches the cluster in the secret. When connecting to a serverless endpoint, specify the Amazon Resource Name (ARN) of the secret and the database name. </p> </li> <li> <p>Temporary credentials - when connecting to a cluster, specify the cluster identifier, the database name, and the database user name. Also, permission to call the <code>redshift:GetClusterCredentials</code> operation is required. When connecting to a serverless endpoint, specify the database name. </p> </li> </ul>"
     },
     "ListSchemas": {
       "name": "ListSchemas",
@@ -172,9 +209,12 @@
         },
         {
           "shape": "InternalServerException"
+        },
+        {
+          "shape": "DatabaseConnectionException"
         }
       ],
-      "documentation": "<p>Lists the schemas in a database. A token is returned to page through the schema list. Depending on the authorization method, use one of the following combinations of request parameters: </p> <ul> <li> <p>AWS Secrets Manager - specify the Amazon Resource Name (ARN) of the secret and the cluster identifier that matches the cluster in the secret. </p> </li> <li> <p>Temporary credentials - specify the cluster identifier, the database name, and the database user name. Permission to call the <code>redshift:GetClusterCredentials</code> operation is required to use this method. </p> </li> </ul>"
+      "documentation": "<p>Lists the schemas in a database. A token is returned to page through the schema list. Depending on the authorization method, use one of the following combinations of request parameters: </p> <ul> <li> <p>Secrets Manager - when connecting to a cluster, specify the Amazon Resource Name (ARN) of the secret, the database name, and the cluster identifier that matches the cluster in the secret. When connecting to a serverless endpoint, specify the Amazon Resource Name (ARN) of the secret and the database name. </p> </li> <li> <p>Temporary credentials - when connecting to a cluster, specify the cluster identifier, the database name, and the database user name. Also, permission to call the <code>redshift:GetClusterCredentials</code> operation is required. When connecting to a serverless endpoint, specify the database name. </p> </li> </ul>"
     },
     "ListStatements": {
       "name": "ListStatements",
@@ -216,12 +256,81 @@
         },
         {
           "shape": "InternalServerException"
+        },
+        {
+          "shape": "DatabaseConnectionException"
         }
       ],
-      "documentation": "<p>List the tables in a database. If neither <code>SchemaPattern</code> nor <code>TablePattern</code> are specified, then all tables in the database are returned. A token is returned to page through the table list. Depending on the authorization method, use one of the following combinations of request parameters: </p> <ul> <li> <p>AWS Secrets Manager - specify the Amazon Resource Name (ARN) of the secret and the cluster identifier that matches the cluster in the secret. </p> </li> <li> <p>Temporary credentials - specify the cluster identifier, the database name, and the database user name. Permission to call the <code>redshift:GetClusterCredentials</code> operation is required to use this method. </p> </li> </ul>"
+      "documentation": "<p>List the tables in a database. If neither <code>SchemaPattern</code> nor <code>TablePattern</code> are specified, then all tables in the database are returned. A token is returned to page through the table list. Depending on the authorization method, use one of the following combinations of request parameters: </p> <ul> <li> <p>Secrets Manager - when connecting to a cluster, specify the Amazon Resource Name (ARN) of the secret, the database name, and the cluster identifier that matches the cluster in the secret. When connecting to a serverless endpoint, specify the Amazon Resource Name (ARN) of the secret and the database name. </p> </li> <li> <p>Temporary credentials - when connecting to a cluster, specify the cluster identifier, the database name, and the database user name. Also, permission to call the <code>redshift:GetClusterCredentials</code> operation is required. When connecting to a serverless endpoint, specify the database name. </p> </li> </ul>"
     }
   },
   "shapes": {
+    "BatchExecuteStatementInput": {
+      "type": "structure",
+      "required": [
+        "Database",
+        "Sqls"
+      ],
+      "members": {
+        "ClusterIdentifier": {
+          "shape": "Location",
+          "documentation": "<p>The cluster identifier. This parameter is required when connecting to a cluster and authenticating using either Secrets Manager or temporary credentials. </p>"
+        },
+        "Database": {
+          "shape": "String",
+          "documentation": "<p>The name of the database. This parameter is required when authenticating using either Secrets Manager or temporary credentials. </p>"
+        },
+        "DbUser": {
+          "shape": "String",
+          "documentation": "<p>The database user name. This parameter is required when connecting to a cluster and authenticating using temporary credentials. </p>"
+        },
+        "SecretArn": {
+          "shape": "SecretArn",
+          "documentation": "<p>The name or ARN of the secret that enables access to the database. This parameter is required when authenticating using Secrets Manager. </p>"
+        },
+        "Sqls": {
+          "shape": "SqlList",
+          "documentation": "<p>One or more SQL statements to run. </p>"
+        },
+        "StatementName": {
+          "shape": "StatementNameString",
+          "documentation": "<p>The name of the SQL statements. You can name the SQL statements when you create them to identify the query. </p>"
+        },
+        "WithEvent": {
+          "shape": "Boolean",
+          "documentation": "<p>A value that indicates whether to send an event to the Amazon EventBridge event bus after the SQL statements run. </p>"
+        }
+      }
+    },
+    "BatchExecuteStatementOutput": {
+      "type": "structure",
+      "members": {
+        "ClusterIdentifier": {
+          "shape": "Location",
+          "documentation": "<p>The cluster identifier. This parameter is not returned when connecting to a serverless endpoint. </p>"
+        },
+        "CreatedAt": {
+          "shape": "Timestamp",
+          "documentation": "<p>The date and time (UTC) the statement was created. </p>"
+        },
+        "Database": {
+          "shape": "String",
+          "documentation": "<p>The name of the database.</p>"
+        },
+        "DbUser": {
+          "shape": "String",
+          "documentation": "<p>The database user name.</p>"
+        },
+        "Id": {
+          "shape": "StatementId",
+          "documentation": "<p>The identifier of the SQL statement whose results are to be fetched. This value is a universally unique identifier (UUID) generated by Amazon Redshift Data API. This identifier is returned by <code>BatchExecuteStatment</code>. </p>"
+        },
+        "SecretArn": {
+          "shape": "SecretArn",
+          "documentation": "<p>The name or ARN of the secret that enables access to the database. </p>"
+        }
+      }
+    },
     "Blob": {
       "type": "blob"
     },
@@ -248,8 +357,8 @@
       ],
       "members": {
         "Id": {
-          "shape": "UUID",
-          "documentation": "<p>The identifier of the SQL statement to cancel. This value is a universally unique identifier (UUID) generated by Amazon Redshift Data API. This identifier is returned by <code>ExecuteStatment</code> and <code>ListStatements</code>. </p>"
+          "shape": "StatementId",
+          "documentation": "<p>The identifier of the SQL statement to cancel. This value is a universally unique identifier (UUID) generated by Amazon Redshift Data API. This identifier is returned by <code>BatchExecuteStatment</code>, <code>ExecuteStatment</code>, and <code>ListStatements</code>. </p>"
         }
       }
     },
@@ -345,8 +454,8 @@
       ],
       "members": {
         "Id": {
-          "shape": "UUID",
-          "documentation": "<p>The identifier of the SQL statement to describe. This value is a universally unique identifier (UUID) generated by Amazon Redshift Data API. This identifier is returned by <code>ExecuteStatment</code> and <code>ListStatements</code>. </p>"
+          "shape": "StatementId",
+          "documentation": "<p>The identifier of the SQL statement to describe. This value is a universally unique identifier (UUID) generated by Amazon Redshift Data API. A suffix indicates the number of the SQL statement. For example, <code>d9b6c0c9-0747-4bf4-b142-e8883122f766:2</code> has a suffix of <code>:2</code> that indicates the second SQL statement of a batch query. This identifier is returned by <code>BatchExecuteStatment</code>, <code>ExecuteStatement</code>, and <code>ListStatements</code>. </p>"
         }
       }
     },
@@ -382,11 +491,15 @@
         },
         "HasResultSet": {
           "shape": "Boolean",
-          "documentation": "<p>A value that indicates whether the statement has a result set. The result set can be empty. </p>"
+          "documentation": "<p>A value that indicates whether the statement has a result set. The result set can be empty. The value is true for an empty result set. The value is true if any substatement returns a result set.</p>"
         },
         "Id": {
-          "shape": "UUID",
+          "shape": "StatementId",
           "documentation": "<p>The identifier of the SQL statement described. This value is a universally unique identifier (UUID) generated by Amazon Redshift Data API. </p>"
+        },
+        "QueryParameters": {
+          "shape": "SqlParametersList",
+          "documentation": "<p>The parameters for the SQL statement.</p>"
         },
         "QueryString": {
           "shape": "StatementString",
@@ -402,11 +515,11 @@
         },
         "ResultRows": {
           "shape": "Long",
-          "documentation": "<p>Either the number of rows returned from the SQL statement or the number of rows affected. If result size is greater than zero, the result rows can be the number of rows affected by SQL statements such as INSERT, UPDATE, DELETE, COPY, and others. </p>"
+          "documentation": "<p>Either the number of rows returned from the SQL statement or the number of rows affected. If result size is greater than zero, the result rows can be the number of rows affected by SQL statements such as INSERT, UPDATE, DELETE, COPY, and others. A <code>-1</code> indicates the value is null.</p>"
         },
         "ResultSize": {
           "shape": "Long",
-          "documentation": "<p>The size in bytes of the returned results. </p>"
+          "documentation": "<p>The size in bytes of the returned results. A <code>-1</code> indicates the value is null.</p>"
         },
         "SecretArn": {
           "shape": "SecretArn",
@@ -415,6 +528,10 @@
         "Status": {
           "shape": "StatusString",
           "documentation": "<p>The status of the SQL statement being described. Status values are defined as follows: </p> <ul> <li> <p>ABORTED - The query run was stopped by the user. </p> </li> <li> <p>ALL - A status value that includes all query statuses. This value can be used to filter results. </p> </li> <li> <p>FAILED - The query run failed. </p> </li> <li> <p>FINISHED - The query has finished running. </p> </li> <li> <p>PICKED - The query has been chosen to be run. </p> </li> <li> <p>STARTED - The query run has started. </p> </li> <li> <p>SUBMITTED - The query was submitted, but not yet processed. </p> </li> </ul>"
+        },
+        "SubStatements": {
+          "shape": "SubStatementList",
+          "documentation": "<p>The SQL statements from a multiple statement run.</p>"
         },
         "UpdatedAt": {
           "shape": "Timestamp",
@@ -425,13 +542,12 @@
     "DescribeTableRequest": {
       "type": "structure",
       "required": [
-        "ClusterIdentifier",
         "Database"
       ],
       "members": {
         "ClusterIdentifier": {
           "shape": "Location",
-          "documentation": "<p>The cluster identifier. This parameter is required when authenticating using either AWS Secrets Manager or temporary credentials. </p>"
+          "documentation": "<p>The cluster identifier. This parameter is required when connecting to a cluster and authenticating using either Secrets Manager or temporary credentials. </p>"
         },
         "ConnectedDatabase": {
           "shape": "String",
@@ -443,7 +559,7 @@
         },
         "DbUser": {
           "shape": "String",
-          "documentation": "<p>The database user name. This parameter is required when authenticating using temporary credentials. </p>"
+          "documentation": "<p>The database user name. This parameter is required when connecting to a cluster and authenticating using temporary credentials. </p>"
         },
         "MaxResults": {
           "shape": "PageSize",
@@ -459,7 +575,7 @@
         },
         "SecretArn": {
           "shape": "SecretArn",
-          "documentation": "<p>The name or ARN of the secret that enables access to the database. This parameter is required when authenticating using AWS Secrets Manager. </p>"
+          "documentation": "<p>The name or ARN of the secret that enables access to the database. This parameter is required when authenticating using Secrets Manager. </p>"
         },
         "Table": {
           "shape": "String",
@@ -487,25 +603,29 @@
     "ExecuteStatementInput": {
       "type": "structure",
       "required": [
-        "ClusterIdentifier",
+        "Database",
         "Sql"
       ],
       "members": {
         "ClusterIdentifier": {
           "shape": "Location",
-          "documentation": "<p>The cluster identifier. This parameter is required when authenticating using either AWS Secrets Manager or temporary credentials. </p>"
+          "documentation": "<p>The cluster identifier. This parameter is required when connecting to a cluster and authenticating using either Secrets Manager or temporary credentials. </p>"
         },
         "Database": {
           "shape": "String",
-          "documentation": "<p>The name of the database. This parameter is required when authenticating using temporary credentials.</p>"
+          "documentation": "<p>The name of the database. This parameter is required when authenticating using either Secrets Manager or temporary credentials. </p>"
         },
         "DbUser": {
           "shape": "String",
-          "documentation": "<p>The database user name. This parameter is required when authenticating using temporary credentials. </p>"
+          "documentation": "<p>The database user name. This parameter is required when connecting to a cluster and authenticating using temporary credentials. </p>"
+        },
+        "Parameters": {
+          "shape": "SqlParametersList",
+          "documentation": "<p>The parameters for the SQL statement.</p>"
         },
         "SecretArn": {
           "shape": "SecretArn",
-          "documentation": "<p>The name or ARN of the secret that enables access to the database. This parameter is required when authenticating using AWS Secrets Manager. </p>"
+          "documentation": "<p>The name or ARN of the secret that enables access to the database. This parameter is required when authenticating using Secrets Manager. </p>"
         },
         "Sql": {
           "shape": "StatementString",
@@ -526,7 +646,7 @@
       "members": {
         "ClusterIdentifier": {
           "shape": "Location",
-          "documentation": "<p>The cluster identifier. </p>"
+          "documentation": "<p>The cluster identifier. This parameter is not returned when connecting to a serverless endpoint. </p>"
         },
         "CreatedAt": {
           "shape": "Timestamp",
@@ -541,8 +661,8 @@
           "documentation": "<p>The database user name.</p>"
         },
         "Id": {
-          "shape": "UUID",
-          "documentation": "<p>The identifier of the statement to be run. This value is a universally unique identifier (UUID) generated by Amazon Redshift Data API. </p>"
+          "shape": "StatementId",
+          "documentation": "<p>The identifier of the SQL statement whose results are to be fetched. This value is a universally unique identifier (UUID) generated by Amazon Redshift Data API. </p>"
         },
         "SecretArn": {
           "shape": "SecretArn",
@@ -594,8 +714,8 @@
       ],
       "members": {
         "Id": {
-          "shape": "UUID",
-          "documentation": "<p>The identifier of the SQL statement whose results are to be fetched. This value is a universally unique identifier (UUID) generated by Amazon Redshift Data API. This identifier is returned by <code>ExecuteStatment</code> and <code>ListStatements</code>. </p>"
+          "shape": "StatementId",
+          "documentation": "<p>The identifier of the SQL statement whose results are to be fetched. This value is a universally unique identifier (UUID) generated by Amazon Redshift Data API. A suffix indicates then number of the SQL statement. For example, <code>d9b6c0c9-0747-4bf4-b142-e8883122f766:2</code> has a suffix of <code>:2</code> that indicates the second SQL statement of a batch query. This identifier is returned by <code>BatchExecuteStatment</code>, <code>ExecuteStatment</code>, and <code>ListStatements</code>. </p>"
         },
         "NextToken": {
           "shape": "String",
@@ -633,20 +753,20 @@
     "ListDatabasesRequest": {
       "type": "structure",
       "required": [
-        "ClusterIdentifier"
+        "Database"
       ],
       "members": {
         "ClusterIdentifier": {
           "shape": "Location",
-          "documentation": "<p>The cluster identifier. This parameter is required when authenticating using either AWS Secrets Manager or temporary credentials. </p>"
+          "documentation": "<p>The cluster identifier. This parameter is required when connecting to a cluster and authenticating using either Secrets Manager or temporary credentials. </p>"
         },
         "Database": {
           "shape": "String",
-          "documentation": "<p>The name of the database. This parameter is required when authenticating using temporary credentials. </p>"
+          "documentation": "<p>The name of the database. This parameter is required when authenticating using either Secrets Manager or temporary credentials. </p>"
         },
         "DbUser": {
           "shape": "String",
-          "documentation": "<p>The database user name. This parameter is required when authenticating using temporary credentials. </p>"
+          "documentation": "<p>The database user name. This parameter is required when connecting to a cluster and authenticating using temporary credentials. </p>"
         },
         "MaxResults": {
           "shape": "PageSize",
@@ -658,7 +778,7 @@
         },
         "SecretArn": {
           "shape": "SecretArn",
-          "documentation": "<p>The name or ARN of the secret that enables access to the database. This parameter is required when authenticating using AWS Secrets Manager. </p>"
+          "documentation": "<p>The name or ARN of the secret that enables access to the database. This parameter is required when authenticating using Secrets Manager. </p>"
         }
       }
     },
@@ -678,13 +798,12 @@
     "ListSchemasRequest": {
       "type": "structure",
       "required": [
-        "ClusterIdentifier",
         "Database"
       ],
       "members": {
         "ClusterIdentifier": {
           "shape": "Location",
-          "documentation": "<p>The cluster identifier. This parameter is required when authenticating using either AWS Secrets Manager or temporary credentials. </p>"
+          "documentation": "<p>The cluster identifier. This parameter is required when connecting to a cluster and authenticating using either Secrets Manager or temporary credentials. </p>"
         },
         "ConnectedDatabase": {
           "shape": "String",
@@ -696,7 +815,7 @@
         },
         "DbUser": {
           "shape": "String",
-          "documentation": "<p>The database user name. This parameter is required when authenticating using temporary credentials. </p>"
+          "documentation": "<p>The database user name. This parameter is required when connecting to a cluster and authenticating using temporary credentials. </p>"
         },
         "MaxResults": {
           "shape": "PageSize",
@@ -712,7 +831,7 @@
         },
         "SecretArn": {
           "shape": "SecretArn",
-          "documentation": "<p>The name or ARN of the secret that enables access to the database. This parameter is required when authenticating using AWS Secrets Manager. </p>"
+          "documentation": "<p>The name or ARN of the secret that enables access to the database. This parameter is required when authenticating using Secrets Manager. </p>"
         }
       }
     },
@@ -751,7 +870,7 @@
         },
         "StatementName": {
           "shape": "StatementNameString",
-          "documentation": "<p>The name of the SQL statement specified as input to <code>ExecuteStatement</code> to identify the query. You can list multiple statements by providing a prefix that matches the beginning of the statement name. For example, to list myStatement1, myStatement2, myStatement3, and so on, then provide the a value of <code>myStatement</code>. Data API does a case-sensitive match of SQL statement names to the prefix value you provide. </p>"
+          "documentation": "<p>The name of the SQL statement specified as input to <code>BatchExecuteStatement</code> or <code>ExecuteStatement</code> to identify the query. You can list multiple statements by providing a prefix that matches the beginning of the statement name. For example, to list myStatement1, myStatement2, myStatement3, and so on, then provide the a value of <code>myStatement</code>. Data API does a case-sensitive match of SQL statement names to the prefix value you provide. </p>"
         },
         "Status": {
           "shape": "StatusString",
@@ -778,13 +897,12 @@
     "ListTablesRequest": {
       "type": "structure",
       "required": [
-        "ClusterIdentifier",
         "Database"
       ],
       "members": {
         "ClusterIdentifier": {
           "shape": "Location",
-          "documentation": "<p>The cluster identifier. This parameter is required when authenticating using either AWS Secrets Manager or temporary credentials. </p>"
+          "documentation": "<p>The cluster identifier. This parameter is required when connecting to a cluster and authenticating using either Secrets Manager or temporary credentials. </p>"
         },
         "ConnectedDatabase": {
           "shape": "String",
@@ -796,7 +914,7 @@
         },
         "DbUser": {
           "shape": "String",
-          "documentation": "<p>The database user name. This parameter is required when authenticating using temporary credentials. </p>"
+          "documentation": "<p>The database user name. This parameter is required when connecting to a cluster and authenticating using temporary credentials. </p>"
         },
         "MaxResults": {
           "shape": "PageSize",
@@ -812,7 +930,7 @@
         },
         "SecretArn": {
           "shape": "SecretArn",
-          "documentation": "<p>The name or ARN of the secret that enables access to the database. This parameter is required when authenticating using AWS Secrets Manager. </p>"
+          "documentation": "<p>The name or ARN of the secret that enables access to the database. This parameter is required when authenticating using Secrets Manager. </p>"
         },
         "TablePattern": {
           "shape": "String",
@@ -844,6 +962,14 @@
       "max": 1000,
       "min": 0
     },
+    "ParameterName": {
+      "type": "string",
+      "pattern": "^[0-9a-zA-Z_]+$"
+    },
+    "ParameterValue": {
+      "type": "string",
+      "min": 1
+    },
     "SchemaList": {
       "type": "list",
       "member": {
@@ -852,6 +978,39 @@
     },
     "SecretArn": {
       "type": "string"
+    },
+    "SqlList": {
+      "type": "list",
+      "member": {
+        "shape": "StatementString"
+      },
+      "max": 40,
+      "min": 1
+    },
+    "SqlParameter": {
+      "type": "structure",
+      "required": [
+        "name",
+        "value"
+      ],
+      "members": {
+        "name": {
+          "shape": "ParameterName",
+          "documentation": "<p>The name of the parameter.</p>"
+        },
+        "value": {
+          "shape": "ParameterValue",
+          "documentation": "<p>The value of the parameter. Amazon Redshift implicitly converts to the proper data type. For more inforation, see <a href=\"https://docs.aws.amazon.com/redshift/latest/dg/c_Supported_data_types.html\">Data types</a> in the <i>Amazon Redshift Database Developer Guide</i>. </p>"
+        }
+      },
+      "documentation": "<p>A parameter used in a SQL statement.</p>"
+    },
+    "SqlParametersList": {
+      "type": "list",
+      "member": {
+        "shape": "SqlParameter"
+      },
+      "min": 1
     },
     "SqlRecords": {
       "type": "list",
@@ -870,12 +1029,24 @@
           "documentation": "<p>The date and time (UTC) the statement was created. </p>"
         },
         "Id": {
-          "shape": "UUID",
+          "shape": "StatementId",
           "documentation": "<p>The SQL statement identifier. This value is a universally unique identifier (UUID) generated by Amazon Redshift Data API. </p>"
+        },
+        "IsBatchStatement": {
+          "shape": "Boolean",
+          "documentation": "<p>A value that indicates whether the statement is a batch query request.</p>"
+        },
+        "QueryParameters": {
+          "shape": "SqlParametersList",
+          "documentation": "<p>The parameters used in a SQL statement.</p>"
         },
         "QueryString": {
           "shape": "StatementString",
           "documentation": "<p>The SQL statement.</p>"
+        },
+        "QueryStrings": {
+          "shape": "StatementStringList",
+          "documentation": "<p>One or more SQL statements. Each query string in the array corresponds to one of the queries in a batch query request.</p>"
         },
         "SecretArn": {
           "shape": "SecretArn",
@@ -896,6 +1067,10 @@
       },
       "documentation": "<p>The SQL statement to run.</p>"
     },
+    "StatementId": {
+      "type": "string",
+      "pattern": "^[a-z0-9]{8}(-[a-z0-9]{4}){3}-[a-z0-9]{12}(:\\d+)?$"
+    },
     "StatementList": {
       "type": "list",
       "member": {
@@ -907,8 +1082,25 @@
       "max": 500,
       "min": 0
     },
+    "StatementStatusString": {
+      "type": "string",
+      "enum": [
+        "SUBMITTED",
+        "PICKED",
+        "STARTED",
+        "FINISHED",
+        "ABORTED",
+        "FAILED"
+      ]
+    },
     "StatementString": {
       "type": "string"
+    },
+    "StatementStringList": {
+      "type": "list",
+      "member": {
+        "shape": "StatementString"
+      }
     },
     "StatusString": {
       "type": "string",
@@ -924,6 +1116,65 @@
     },
     "String": {
       "type": "string"
+    },
+    "SubStatementData": {
+      "type": "structure",
+      "required": [
+        "Id"
+      ],
+      "members": {
+        "CreatedAt": {
+          "shape": "Timestamp",
+          "documentation": "<p>The date and time (UTC) the statement was created. </p>"
+        },
+        "Duration": {
+          "shape": "Long",
+          "documentation": "<p>The amount of time in nanoseconds that the statement ran.</p>"
+        },
+        "Error": {
+          "shape": "String",
+          "documentation": "<p>The error message from the cluster if the SQL statement encountered an error while running.</p>"
+        },
+        "HasResultSet": {
+          "shape": "Boolean",
+          "documentation": "<p>A value that indicates whether the statement has a result set. The result set can be empty. The value is true for an empty result set.</p>"
+        },
+        "Id": {
+          "shape": "StatementId",
+          "documentation": "<p>The identifier of the SQL statement. This value is a universally unique identifier (UUID) generated by Amazon Redshift Data API. A suffix indicates the number of the SQL statement. For example, <code>d9b6c0c9-0747-4bf4-b142-e8883122f766:2</code> has a suffix of <code>:2</code> that indicates the second SQL statement of a batch query.</p>"
+        },
+        "QueryString": {
+          "shape": "StatementString",
+          "documentation": "<p>The SQL statement text.</p>"
+        },
+        "RedshiftQueryId": {
+          "shape": "Long",
+          "documentation": "<p>The SQL statement identifier. This value is a universally unique identifier (UUID) generated by Amazon Redshift Data API. </p>"
+        },
+        "ResultRows": {
+          "shape": "Long",
+          "documentation": "<p>Either the number of rows returned from the SQL statement or the number of rows affected. If result size is greater than zero, the result rows can be the number of rows affected by SQL statements such as INSERT, UPDATE, DELETE, COPY, and others. A <code>-1</code> indicates the value is null.</p>"
+        },
+        "ResultSize": {
+          "shape": "Long",
+          "documentation": "<p>The size in bytes of the returned results. A <code>-1</code> indicates the value is null.</p>"
+        },
+        "Status": {
+          "shape": "StatementStatusString",
+          "documentation": "<p>The status of the SQL statement. An example is the that the SQL statement finished. </p>"
+        },
+        "UpdatedAt": {
+          "shape": "Timestamp",
+          "documentation": "<p>The date and time (UTC) that the statement metadata was last updated.</p>"
+        }
+      },
+      "documentation": "<p>Information about an SQL statement.</p>"
+    },
+    "SubStatementList": {
+      "type": "list",
+      "member": {
+        "shape": "SubStatementData"
+      }
     },
     "TableList": {
       "type": "list",
@@ -952,12 +1203,9 @@
     "Timestamp": {
       "type": "timestamp"
     },
-    "UUID": {
-      "type": "string"
-    },
     "bool": {
       "type": "boolean"
     }
   },
-  "documentation": "<p>You can use the Amazon Redshift Data API to run queries on Amazon Redshift tables. You can run individual SQL statements, which are committed if the statement succeeds. </p> <p>For more information about the Amazon Redshift Data API, see <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html\">Using the Amazon Redshift Data API</a> in the <i>Amazon Redshift Cluster Management Guide</i>. </p>"
+  "documentation": "<p>You can use the Amazon Redshift Data API to run queries on Amazon Redshift tables. You can run SQL statements, which are committed if the statement succeeds. </p> <p>For more information about the Amazon Redshift Data API, see <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html\">Using the Amazon Redshift Data API</a> in the <i>Amazon Redshift Cluster Management Guide</i>. </p>"
 }

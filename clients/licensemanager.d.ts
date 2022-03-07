@@ -44,11 +44,11 @@ declare class LicenseManager extends Service {
    */
   checkoutLicense(callback?: (err: AWSError, data: LicenseManager.Types.CheckoutLicenseResponse) => void): Request<LicenseManager.Types.CheckoutLicenseResponse, AWSError>;
   /**
-   * Creates a grant for the specified license. A grant shares the use of license entitlements with specific AWS accounts.
+   * Creates a grant for the specified license. A grant shares the use of license entitlements with specific Amazon Web Services accounts.
    */
   createGrant(params: LicenseManager.Types.CreateGrantRequest, callback?: (err: AWSError, data: LicenseManager.Types.CreateGrantResponse) => void): Request<LicenseManager.Types.CreateGrantResponse, AWSError>;
   /**
-   * Creates a grant for the specified license. A grant shares the use of license entitlements with specific AWS accounts.
+   * Creates a grant for the specified license. A grant shares the use of license entitlements with specific Amazon Web Services accounts.
    */
   createGrant(callback?: (err: AWSError, data: LicenseManager.Types.CreateGrantResponse) => void): Request<LicenseManager.Types.CreateGrantResponse, AWSError>;
   /**
@@ -75,6 +75,22 @@ declare class LicenseManager extends Service {
    * Creates a license configuration. A license configuration is an abstraction of a customer license agreement that can be consumed and enforced by License Manager. Components include specifications for the license type (licensing by instance, socket, CPU, or vCPU), allowed tenancy (shared tenancy, Dedicated Instance, Dedicated Host, or all of these), license affinity to host (how long a license must be associated with a host), and the number of licenses purchased and used.
    */
   createLicenseConfiguration(callback?: (err: AWSError, data: LicenseManager.Types.CreateLicenseConfigurationResponse) => void): Request<LicenseManager.Types.CreateLicenseConfigurationResponse, AWSError>;
+  /**
+   * Creates a new license conversion task.
+   */
+  createLicenseConversionTaskForResource(params: LicenseManager.Types.CreateLicenseConversionTaskForResourceRequest, callback?: (err: AWSError, data: LicenseManager.Types.CreateLicenseConversionTaskForResourceResponse) => void): Request<LicenseManager.Types.CreateLicenseConversionTaskForResourceResponse, AWSError>;
+  /**
+   * Creates a new license conversion task.
+   */
+  createLicenseConversionTaskForResource(callback?: (err: AWSError, data: LicenseManager.Types.CreateLicenseConversionTaskForResourceResponse) => void): Request<LicenseManager.Types.CreateLicenseConversionTaskForResourceResponse, AWSError>;
+  /**
+   * Creates a report generator.
+   */
+  createLicenseManagerReportGenerator(params: LicenseManager.Types.CreateLicenseManagerReportGeneratorRequest, callback?: (err: AWSError, data: LicenseManager.Types.CreateLicenseManagerReportGeneratorResponse) => void): Request<LicenseManager.Types.CreateLicenseManagerReportGeneratorResponse, AWSError>;
+  /**
+   * Creates a report generator.
+   */
+  createLicenseManagerReportGenerator(callback?: (err: AWSError, data: LicenseManager.Types.CreateLicenseManagerReportGeneratorResponse) => void): Request<LicenseManager.Types.CreateLicenseManagerReportGeneratorResponse, AWSError>;
   /**
    * Creates a new version of the specified license.
    */
@@ -115,6 +131,14 @@ declare class LicenseManager extends Service {
    * Deletes the specified license configuration. You cannot delete a license configuration that is in use.
    */
   deleteLicenseConfiguration(callback?: (err: AWSError, data: LicenseManager.Types.DeleteLicenseConfigurationResponse) => void): Request<LicenseManager.Types.DeleteLicenseConfigurationResponse, AWSError>;
+  /**
+   * Deletes the specified report generator. This action deletes the report generator, which stops it from generating future reports. The action cannot be reversed. It has no effect on the previous reports from this generator.
+   */
+  deleteLicenseManagerReportGenerator(params: LicenseManager.Types.DeleteLicenseManagerReportGeneratorRequest, callback?: (err: AWSError, data: LicenseManager.Types.DeleteLicenseManagerReportGeneratorResponse) => void): Request<LicenseManager.Types.DeleteLicenseManagerReportGeneratorResponse, AWSError>;
+  /**
+   * Deletes the specified report generator. This action deletes the report generator, which stops it from generating future reports. The action cannot be reversed. It has no effect on the previous reports from this generator.
+   */
+  deleteLicenseManagerReportGenerator(callback?: (err: AWSError, data: LicenseManager.Types.DeleteLicenseManagerReportGeneratorResponse) => void): Request<LicenseManager.Types.DeleteLicenseManagerReportGeneratorResponse, AWSError>;
   /**
    * Deletes the specified token. Must be called in the license home Region.
    */
@@ -164,6 +188,22 @@ declare class LicenseManager extends Service {
    */
   getLicenseConfiguration(callback?: (err: AWSError, data: LicenseManager.Types.GetLicenseConfigurationResponse) => void): Request<LicenseManager.Types.GetLicenseConfigurationResponse, AWSError>;
   /**
+   * Gets information about the specified license type conversion task.
+   */
+  getLicenseConversionTask(params: LicenseManager.Types.GetLicenseConversionTaskRequest, callback?: (err: AWSError, data: LicenseManager.Types.GetLicenseConversionTaskResponse) => void): Request<LicenseManager.Types.GetLicenseConversionTaskResponse, AWSError>;
+  /**
+   * Gets information about the specified license type conversion task.
+   */
+  getLicenseConversionTask(callback?: (err: AWSError, data: LicenseManager.Types.GetLicenseConversionTaskResponse) => void): Request<LicenseManager.Types.GetLicenseConversionTaskResponse, AWSError>;
+  /**
+   * Gets information about the specified report generator.
+   */
+  getLicenseManagerReportGenerator(params: LicenseManager.Types.GetLicenseManagerReportGeneratorRequest, callback?: (err: AWSError, data: LicenseManager.Types.GetLicenseManagerReportGeneratorResponse) => void): Request<LicenseManager.Types.GetLicenseManagerReportGeneratorResponse, AWSError>;
+  /**
+   * Gets information about the specified report generator.
+   */
+  getLicenseManagerReportGenerator(callback?: (err: AWSError, data: LicenseManager.Types.GetLicenseManagerReportGeneratorResponse) => void): Request<LicenseManager.Types.GetLicenseManagerReportGeneratorResponse, AWSError>;
+  /**
    * Gets detailed information about the usage of the specified license.
    */
   getLicenseUsage(params: LicenseManager.Types.GetLicenseUsageRequest, callback?: (err: AWSError, data: LicenseManager.Types.GetLicenseUsageResponse) => void): Request<LicenseManager.Types.GetLicenseUsageResponse, AWSError>;
@@ -211,6 +251,22 @@ declare class LicenseManager extends Service {
    * Lists the license configurations for your account.
    */
   listLicenseConfigurations(callback?: (err: AWSError, data: LicenseManager.Types.ListLicenseConfigurationsResponse) => void): Request<LicenseManager.Types.ListLicenseConfigurationsResponse, AWSError>;
+  /**
+   * Lists the license type conversion tasks for your account.
+   */
+  listLicenseConversionTasks(params: LicenseManager.Types.ListLicenseConversionTasksRequest, callback?: (err: AWSError, data: LicenseManager.Types.ListLicenseConversionTasksResponse) => void): Request<LicenseManager.Types.ListLicenseConversionTasksResponse, AWSError>;
+  /**
+   * Lists the license type conversion tasks for your account.
+   */
+  listLicenseConversionTasks(callback?: (err: AWSError, data: LicenseManager.Types.ListLicenseConversionTasksResponse) => void): Request<LicenseManager.Types.ListLicenseConversionTasksResponse, AWSError>;
+  /**
+   * Lists the report generators for your account.
+   */
+  listLicenseManagerReportGenerators(params: LicenseManager.Types.ListLicenseManagerReportGeneratorsRequest, callback?: (err: AWSError, data: LicenseManager.Types.ListLicenseManagerReportGeneratorsResponse) => void): Request<LicenseManager.Types.ListLicenseManagerReportGeneratorsResponse, AWSError>;
+  /**
+   * Lists the report generators for your account.
+   */
+  listLicenseManagerReportGenerators(callback?: (err: AWSError, data: LicenseManager.Types.ListLicenseManagerReportGeneratorsResponse) => void): Request<LicenseManager.Types.ListLicenseManagerReportGeneratorsResponse, AWSError>;
   /**
    * Describes the license configurations for the specified resource.
    */
@@ -316,11 +372,19 @@ declare class LicenseManager extends Service {
    */
   updateLicenseConfiguration(callback?: (err: AWSError, data: LicenseManager.Types.UpdateLicenseConfigurationResponse) => void): Request<LicenseManager.Types.UpdateLicenseConfigurationResponse, AWSError>;
   /**
-   * Adds or removes the specified license configurations for the specified AWS resource. You can update the license specifications of AMIs, instances, and hosts. You cannot update the license specifications for launch templates and AWS CloudFormation templates, as they send license configurations to the operation that creates the resource.
+   * Updates a report generator. After you make changes to a report generator, it starts generating new reports within 60 minutes of being updated.
+   */
+  updateLicenseManagerReportGenerator(params: LicenseManager.Types.UpdateLicenseManagerReportGeneratorRequest, callback?: (err: AWSError, data: LicenseManager.Types.UpdateLicenseManagerReportGeneratorResponse) => void): Request<LicenseManager.Types.UpdateLicenseManagerReportGeneratorResponse, AWSError>;
+  /**
+   * Updates a report generator. After you make changes to a report generator, it starts generating new reports within 60 minutes of being updated.
+   */
+  updateLicenseManagerReportGenerator(callback?: (err: AWSError, data: LicenseManager.Types.UpdateLicenseManagerReportGeneratorResponse) => void): Request<LicenseManager.Types.UpdateLicenseManagerReportGeneratorResponse, AWSError>;
+  /**
+   * Adds or removes the specified license configurations for the specified Amazon Web Services resource. You can update the license specifications of AMIs, instances, and hosts. You cannot update the license specifications for launch templates and CloudFormation templates, as they send license configurations to the operation that creates the resource.
    */
   updateLicenseSpecificationsForResource(params: LicenseManager.Types.UpdateLicenseSpecificationsForResourceRequest, callback?: (err: AWSError, data: LicenseManager.Types.UpdateLicenseSpecificationsForResourceResponse) => void): Request<LicenseManager.Types.UpdateLicenseSpecificationsForResourceResponse, AWSError>;
   /**
-   * Adds or removes the specified license configurations for the specified AWS resource. You can update the license specifications of AMIs, instances, and hosts. You cannot update the license specifications for launch templates and AWS CloudFormation templates, as they send license configurations to the operation that creates the resource.
+   * Adds or removes the specified license configurations for the specified Amazon Web Services resource. You can update the license specifications of AMIs, instances, and hosts. You cannot update the license specifications for launch templates and CloudFormation templates, as they send license configurations to the operation that creates the resource.
    */
   updateLicenseSpecificationsForResource(callback?: (err: AWSError, data: LicenseManager.Types.UpdateLicenseSpecificationsForResourceResponse) => void): Request<LicenseManager.Types.UpdateLicenseSpecificationsForResourceResponse, AWSError>;
   /**
@@ -508,8 +572,13 @@ declare namespace LicenseManager {
      * Date and time at which the license checkout expires.
      */
     Expiration?: ISO8601DateTime;
+    /**
+     * Amazon Resource Name (ARN) of the checkout license.
+     */
+    LicenseArn?: String;
   }
-  export type CheckoutType = "PROVISIONAL"|string;
+  export type CheckoutType = "PROVISIONAL"|"PERPETUAL"|string;
+  export type ClientRequestToken = string;
   export type ClientToken = string;
   export interface ConsumedLicenseSummary {
     /**
@@ -540,7 +609,7 @@ declare namespace LicenseManager {
     /**
      * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
      */
-    ClientToken: String;
+    ClientToken: ClientToken;
     /**
      * Grant name.
      */
@@ -580,7 +649,7 @@ declare namespace LicenseManager {
     /**
      * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
      */
-    ClientToken: String;
+    ClientToken: ClientToken;
     /**
      * Amazon Resource Name (ARN) of the grant.
      */
@@ -597,6 +666,10 @@ declare namespace LicenseManager {
      * Grant status.
      */
     Status?: GrantStatus;
+    /**
+     * Grant status reason.
+     */
+    StatusReason?: StatusReasonMessage;
     /**
      * Current version of the grant.
      */
@@ -660,6 +733,62 @@ declare namespace LicenseManager {
      */
     LicenseConfigurationArn?: String;
   }
+  export interface CreateLicenseConversionTaskForResourceRequest {
+    /**
+     * Amazon Resource Name (ARN) of the resource you are converting the license type for.
+     */
+    ResourceArn: Arn;
+    /**
+     * Information that identifies the license type you are converting from. For the structure of the source license, see Convert a license type using the AWS CLI in the License Manager User Guide.
+     */
+    SourceLicenseContext: LicenseConversionContext;
+    /**
+     * Information that identifies the license type you are converting to. For the structure of the destination license, see Convert a license type using the AWS CLI in the License Manager User Guide.
+     */
+    DestinationLicenseContext: LicenseConversionContext;
+  }
+  export interface CreateLicenseConversionTaskForResourceResponse {
+    /**
+     * The ID of the created license type conversion task.
+     */
+    LicenseConversionTaskId?: LicenseConversionTaskId;
+  }
+  export interface CreateLicenseManagerReportGeneratorRequest {
+    /**
+     * Name of the report generator.
+     */
+    ReportGeneratorName: ReportGeneratorName;
+    /**
+     * Type of reports to generate. The following report types an be generated:   License configuration report - Reports the number and details of consumed licenses for a license configuration.   Resource report - Reports the tracked licenses and resource consumption for a license configuration.  
+     */
+    Type: ReportTypeList;
+    /**
+     * Defines the type of license configuration the report generator tracks.
+     */
+    ReportContext: ReportContext;
+    /**
+     * Frequency by which reports are generated. Reports can be generated daily, monthly, or weekly.
+     */
+    ReportFrequency: ReportFrequency;
+    /**
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+     */
+    ClientToken: ClientRequestToken;
+    /**
+     * Description of the report generator.
+     */
+    Description?: String;
+    /**
+     * Tags to add to the report generator.
+     */
+    Tags?: TagList;
+  }
+  export interface CreateLicenseManagerReportGeneratorResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the new report generator.
+     */
+    LicenseManagerReportGeneratorArn?: String;
+  }
   export interface CreateLicenseRequest {
     /**
      * License name.
@@ -704,7 +833,7 @@ declare namespace LicenseManager {
     /**
      * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
      */
-    ClientToken: String;
+    ClientToken: ClientToken;
   }
   export interface CreateLicenseResponse {
     /**
@@ -764,7 +893,7 @@ declare namespace LicenseManager {
     /**
      * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
      */
-    ClientToken: String;
+    ClientToken: ClientToken;
     /**
      * Current version of the license.
      */
@@ -804,7 +933,7 @@ declare namespace LicenseManager {
     /**
      * Idempotency token, valid for 10 minutes.
      */
-    ClientToken: IdempotencyToken;
+    ClientToken: ClientToken;
   }
   export interface CreateTokenResponse {
     /**
@@ -837,6 +966,10 @@ declare namespace LicenseManager {
      */
     GrantArn: Arn;
     /**
+     * The Status reason for the delete request.
+     */
+    StatusReason?: StatusReasonMessage;
+    /**
      * Current version of the grant.
      */
     Version: String;
@@ -863,6 +996,14 @@ declare namespace LicenseManager {
   }
   export interface DeleteLicenseConfigurationResponse {
   }
+  export interface DeleteLicenseManagerReportGeneratorRequest {
+    /**
+     * Amazon Resource Name (ARN) of the report generator to be deleted.
+     */
+    LicenseManagerReportGeneratorArn: String;
+  }
+  export interface DeleteLicenseManagerReportGeneratorResponse {
+  }
   export interface DeleteLicenseRequest {
     /**
      * Amazon Resource Name (ARN) of the license.
@@ -879,7 +1020,7 @@ declare namespace LicenseManager {
      */
     Status?: LicenseDeletionStatus;
     /**
-     * Date on which the license is deleted.
+     * Date when the license is deleted.
      */
     DeletionDate?: ISO8601DateTime;
   }
@@ -1046,7 +1187,7 @@ declare namespace LicenseManager {
      */
     Description?: String;
     /**
-     * Dimension on which the licenses are counted.
+     * Dimension for which the licenses are counted.
      */
     LicenseCountingType?: LicenseCountingType;
     /**
@@ -1098,6 +1239,62 @@ declare namespace LicenseManager {
      */
     DisassociateWhenNotFound?: BoxBoolean;
   }
+  export interface GetLicenseConversionTaskRequest {
+    /**
+     * ID of the license type conversion task to retrieve information on.
+     */
+    LicenseConversionTaskId: LicenseConversionTaskId;
+  }
+  export interface GetLicenseConversionTaskResponse {
+    /**
+     * ID of the license type conversion task.
+     */
+    LicenseConversionTaskId?: LicenseConversionTaskId;
+    /**
+     * Amazon Resource Names (ARN) of the resources the license conversion task is associated with.
+     */
+    ResourceArn?: String;
+    /**
+     * Information about the license type converted from.
+     */
+    SourceLicenseContext?: LicenseConversionContext;
+    /**
+     * Information about the license type converted to.
+     */
+    DestinationLicenseContext?: LicenseConversionContext;
+    /**
+     * The status message for the conversion task.
+     */
+    StatusMessage?: String;
+    /**
+     * Status of the license type conversion task.
+     */
+    Status?: LicenseConversionTaskStatus;
+    /**
+     * Time at which the license type conversion task was started .
+     */
+    StartTime?: DateTime;
+    /**
+     * Amount of time to complete the license type conversion.
+     */
+    LicenseConversionTime?: DateTime;
+    /**
+     * Time at which the license type conversion task was completed.
+     */
+    EndTime?: DateTime;
+  }
+  export interface GetLicenseManagerReportGeneratorRequest {
+    /**
+     * Amazon Resource Name (ARN) of the report generator.
+     */
+    LicenseManagerReportGeneratorArn: String;
+  }
+  export interface GetLicenseManagerReportGeneratorResponse {
+    /**
+     * A report generator that creates periodic reports about your license configurations.
+     */
+    ReportGenerator?: ReportGenerator;
+  }
   export interface GetLicenseRequest {
     /**
      * Amazon Resource Name (ARN) of the license.
@@ -1138,7 +1335,7 @@ declare namespace LicenseManager {
      */
     SnsTopicArn?: String;
     /**
-     * Indicates whether AWS Organizations is integrated with License Manager for cross-account discovery.
+     * Indicates whether Organizations is integrated with License Manager for cross-account discovery.
      */
     OrganizationConfiguration?: OrganizationConfiguration;
     /**
@@ -1146,7 +1343,7 @@ declare namespace LicenseManager {
      */
     EnableCrossAccountsDiscovery?: BoxBoolean;
     /**
-     * Amazon Resource Name (ARN) of the AWS resource share. The License Manager master account will provide member accounts with access to this share.
+     * Amazon Resource Name (ARN) of the resource share. The License Manager management account provides member accounts with access to this share.
      */
     LicenseManagerResourceShareArn?: String;
   }
@@ -1182,7 +1379,7 @@ declare namespace LicenseManager {
     /**
      * Grant status reason.
      */
-    StatusReason?: String;
+    StatusReason?: StatusReasonMessage;
     /**
      * Grant version.
      */
@@ -1193,7 +1390,7 @@ declare namespace LicenseManager {
     GrantedOperations: AllowedOperationList;
   }
   export type GrantList = Grant[];
-  export type GrantStatus = "PENDING_WORKFLOW"|"PENDING_ACCEPT"|"REJECTED"|"ACTIVE"|"FAILED_WORKFLOW"|"DELETED"|"PENDING_DELETE"|"DISABLED"|string;
+  export type GrantStatus = "PENDING_WORKFLOW"|"PENDING_ACCEPT"|"REJECTED"|"ACTIVE"|"FAILED_WORKFLOW"|"DELETED"|"PENDING_DELETE"|"DISABLED"|"WORKFLOW_COMPLETED"|string;
   export interface GrantedLicense {
     /**
      * Amazon Resource Name (ARN) of the license.
@@ -1258,7 +1455,6 @@ declare namespace LicenseManager {
   }
   export type GrantedLicenseList = GrantedLicense[];
   export type ISO8601DateTime = string;
-  export type IdempotencyToken = string;
   export type Integer = number;
   export interface InventoryFilter {
     /**
@@ -1282,7 +1478,7 @@ declare namespace LicenseManager {
      */
     Name: String;
     /**
-     * Asymmetric CMK from AWS Key Management Service. The CMK must have a key usage of sign and verify, and support the RSASSA-PSS SHA-256 signing algorithm.
+     * Asymmetric KMS key from Key Management Service. The KMS key must have a key usage of sign and verify, and support the RSASSA-PSS SHA-256 signing algorithm.
      */
     SignKey?: String;
   }
@@ -1292,7 +1488,7 @@ declare namespace LicenseManager {
      */
     Name?: String;
     /**
-     * Asymmetric CMK from AWS Key Management Service. The CMK must have a key usage of sign and verify, and support the RSASSA-PSS SHA-256 signing algorithm.
+     * Asymmetric KMS key from Key Management Service. The KMS key must have a key usage of sign and verify, and support the RSASSA-PSS SHA-256 signing algorithm.
      */
     SignKey?: String;
     /**
@@ -1434,7 +1630,7 @@ declare namespace LicenseManager {
      */
     ResourceType?: ResourceType;
     /**
-     * ID of the AWS account that owns the resource consuming licenses.
+     * ID of the Amazon Web Services account that owns the resource consuming licenses.
      */
     ResourceOwnerId?: String;
     /**
@@ -1476,6 +1672,53 @@ declare namespace LicenseManager {
   }
   export type LicenseConfigurationUsageList = LicenseConfigurationUsage[];
   export type LicenseConfigurations = LicenseConfiguration[];
+  export interface LicenseConversionContext {
+    /**
+     * The Usage operation value that corresponds to the license type you are converting your resource from. For more information about which platforms correspond to which usage operation values see Sample data: usage operation by platform  
+     */
+    UsageOperation?: UsageOperation;
+  }
+  export interface LicenseConversionTask {
+    /**
+     * The ID of the license type conversion task.
+     */
+    LicenseConversionTaskId?: LicenseConversionTaskId;
+    /**
+     * The Amazon Resource Name (ARN) of the resource associated with the license type conversion task.
+     */
+    ResourceArn?: String;
+    /**
+     * Information about the license type this conversion task converted from.
+     */
+    SourceLicenseContext?: LicenseConversionContext;
+    /**
+     * Information about the license type this conversion task converted to.
+     */
+    DestinationLicenseContext?: LicenseConversionContext;
+    /**
+     * The status of the conversion task.
+     */
+    Status?: LicenseConversionTaskStatus;
+    /**
+     * The status message for the conversion task.
+     */
+    StatusMessage?: String;
+    /**
+     * The time the conversion task was started at.
+     */
+    StartTime?: DateTime;
+    /**
+     * The time the usage operation value of the resource was changed.
+     */
+    LicenseConversionTime?: DateTime;
+    /**
+     * The time the conversion task was completed.
+     */
+    EndTime?: DateTime;
+  }
+  export type LicenseConversionTaskId = string;
+  export type LicenseConversionTaskStatus = "IN_PROGRESS"|"SUCCEEDED"|"FAILED"|string;
+  export type LicenseConversionTasks = LicenseConversionTask[];
   export type LicenseCountingType = "vCPU"|"Instance"|"Core"|"Socket"|string;
   export type LicenseDeletionStatus = "PENDING_DELETE"|"DELETED"|string;
   export type LicenseList = License[];
@@ -1501,7 +1744,7 @@ declare namespace LicenseManager {
      */
     OperationName?: String;
     /**
-     * ID of the AWS account that owns the resource.
+     * ID of the Amazon Web Services account that owns the resource.
      */
     ResourceOwnerId?: String;
     /**
@@ -1562,7 +1805,7 @@ declare namespace LicenseManager {
      */
     GrantArns?: ArnList;
     /**
-     * Filters to scope the results. The following filters are supported:    LicenseARN     Status     PrincipalARN     ParentARN   
+     * Filters to scope the results. The following filters are supported:    LicenseArn     GrantStatus     GranteePrincipalARN     ProductSKU     LicenseIssuerName   
      */
     Filters?: FilterList;
     /**
@@ -1622,7 +1865,7 @@ declare namespace LicenseManager {
      */
     NextToken?: String;
     /**
-     * Filters to scope the results. The following filters and logical operators are supported:    licenseCountingType - The dimension on which licenses are counted. Possible values are vCPU | Instance | Core | Socket. Logical operators are EQUALS | NOT_EQUALS.    enforceLicenseCount - A Boolean value that indicates whether hard license enforcement is used. Logical operators are EQUALS | NOT_EQUALS.    usagelimitExceeded - A Boolean value that indicates whether the available licenses have been exceeded. Logical operators are EQUALS | NOT_EQUALS.  
+     * Filters to scope the results. The following filters and logical operators are supported:    licenseCountingType - The dimension for which licenses are counted. Possible values are vCPU | Instance | Core | Socket. Logical operators are EQUALS | NOT_EQUALS.    enforceLicenseCount - A Boolean value that indicates whether hard license enforcement is used. Logical operators are EQUALS | NOT_EQUALS.    usagelimitExceeded - A Boolean value that indicates whether the available licenses have been exceeded. Logical operators are EQUALS | NOT_EQUALS.  
      */
     Filters?: Filters;
   }
@@ -1631,6 +1874,54 @@ declare namespace LicenseManager {
      * Information about the license configurations.
      */
     LicenseConfigurations?: LicenseConfigurations;
+    /**
+     * Token for the next set of results.
+     */
+    NextToken?: String;
+  }
+  export interface ListLicenseConversionTasksRequest {
+    /**
+     * Token for the next set of results.
+     */
+    NextToken?: String;
+    /**
+     * Maximum number of results to return in a single call.
+     */
+    MaxResults?: BoxInteger;
+    /**
+     *  Filters to scope the results. Valid filters are ResourceArns and Status. 
+     */
+    Filters?: Filters;
+  }
+  export interface ListLicenseConversionTasksResponse {
+    /**
+     * Information about the license configuration tasks for your account.
+     */
+    LicenseConversionTasks?: LicenseConversionTasks;
+    /**
+     * Token for the next set of results.
+     */
+    NextToken?: String;
+  }
+  export interface ListLicenseManagerReportGeneratorsRequest {
+    /**
+     * Filters to scope the results. The following filters are supported:     LicenseConfigurationArn   
+     */
+    Filters?: FilterList;
+    /**
+     * Token for the next set of results.
+     */
+    NextToken?: String;
+    /**
+     * Maximum number of results to return in a single call.
+     */
+    MaxResults?: MaxSize100;
+  }
+  export interface ListLicenseManagerReportGeneratorsResponse {
+    /**
+     * A report generator that creates periodic reports about your license configurations.
+     */
+    ReportGenerators?: ReportGeneratorList;
     /**
      * Token for the next set of results.
      */
@@ -1690,7 +1981,7 @@ declare namespace LicenseManager {
      */
     LicenseArns?: ArnList;
     /**
-     * Filters to scope the results. The following filters are supported:    Beneficiary     ProductSKU     KeyFingerprint     Status   
+     * Filters to scope the results. The following filters are supported:    Beneficiary     ProductSKU     Fingerprint     Status   
      */
     Filters?: FilterList;
     /**
@@ -1718,7 +2009,7 @@ declare namespace LicenseManager {
      */
     GrantArns?: ArnList;
     /**
-     * Filters to scope the results. The following filters are supported:    LicenseARN     Status   
+     * Filters to scope the results. The following filters are supported:    ProductSKU     LicenseIssuerName     LicenseArn     GrantStatus     GranterAccountId   
      */
     Filters?: FilterList;
     /**
@@ -1746,7 +2037,7 @@ declare namespace LicenseManager {
      */
     LicenseArns?: ArnList;
     /**
-     * Filters to scope the results. The following filters are supported:    ProductSKU     Status     KeyFingerprint     Issuer   
+     * Filters to scope the results. The following filters are supported:    ProductSKU     Status     Fingerprint     IssuerName     Beneficiary   
      */
     Filters?: FilterList;
     /**
@@ -1778,7 +2069,7 @@ declare namespace LicenseManager {
      */
     NextToken?: String;
     /**
-     * Filters to scope the results. The following filters and logical operators are supported:    account_id - The ID of the AWS account that owns the resource. Logical operators are EQUALS | NOT_EQUALS.    application_name - The name of the application. Logical operators are EQUALS | BEGINS_WITH.    license_included - The type of license included. Logical operators are EQUALS | NOT_EQUALS. Possible values are sql-server-enterprise | sql-server-standard | sql-server-web | windows-server-datacenter.    platform - The platform of the resource. Logical operators are EQUALS | BEGINS_WITH.    resource_id - The ID of the resource. Logical operators are EQUALS | NOT_EQUALS.    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Logical operators are EQUALS (single account) or EQUALS | NOT_EQUALS (cross account).  
+     * Filters to scope the results. The following filters and logical operators are supported:    account_id - The ID of the Amazon Web Services account that owns the resource. Logical operators are EQUALS | NOT_EQUALS.    application_name - The name of the application. Logical operators are EQUALS | BEGINS_WITH.    license_included - The type of license included. Logical operators are EQUALS | NOT_EQUALS. Possible values are sql-server-enterprise | sql-server-standard | sql-server-web | windows-server-datacenter.    platform - The platform of the resource. Logical operators are EQUALS | BEGINS_WITH.    resource_id - The ID of the resource. Logical operators are EQUALS | NOT_EQUALS.    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Logical operators are EQUALS (single account) or EQUALS | NOT_EQUALS (cross account).  
      */
     Filters?: InventoryFilterList;
   }
@@ -1810,7 +2101,7 @@ declare namespace LicenseManager {
      */
     TokenIds?: StringList;
     /**
-     * Filters to scope the results. The following filter is supported:    licenseArns   
+     * Filters to scope the results. The following filter is supported:    LicenseArns   
      */
     Filters?: FilterList;
     /**
@@ -1887,7 +2178,7 @@ declare namespace LicenseManager {
   export type MetadataList = Metadata[];
   export interface OrganizationConfiguration {
     /**
-     * Enables AWS Organization integration.
+     * Enables Organizations integration.
      */
     EnableIntegration: Boolean;
   }
@@ -1898,7 +2189,7 @@ declare namespace LicenseManager {
      */
     ResourceType: String;
     /**
-     * Product information filters. The following filters and logical operators are supported when the resource type is SSM_MANAGED:    Application Name - The name of the application. Logical operator is EQUALS.    Application Publisher - The publisher of the application. Logical operator is EQUALS.    Application Version - The version of the application. Logical operator is EQUALS.    Platform Name - The name of the platform. Logical operator is EQUALS.    Platform Type - The platform type. Logical operator is EQUALS.    License Included - The type of license included. Logical operators are EQUALS and NOT_EQUALS. Possible values are: sql-server-enterprise | sql-server-standard | sql-server-web | windows-server-datacenter.   The following filters and logical operators are supported when the resource type is RDS:    Engine Edition - The edition of the database engine. Logical operator is EQUALS. Possible values are: oracle-ee | oracle-se | oracle-se1 | oracle-se2.    License Pack - The license pack. Logical operator is EQUALS. Possible values are: data guard | diagnostic pack sqlt | tuning pack sqlt | ols | olap.  
+     * A Product information filter consists of a ProductInformationFilterComparator which is a logical operator, a ProductInformationFilterName which specifies the type of filter being declared, and a ProductInformationFilterValue that specifies the value to filter on.  Accepted values for ProductInformationFilterName are listed here along with descriptions and valid options for ProductInformationFilterComparator.  The following filters and are supported when the resource type is SSM_MANAGED:    Application Name - The name of the application. Logical operator is EQUALS.    Application Publisher - The publisher of the application. Logical operator is EQUALS.    Application Version - The version of the application. Logical operator is EQUALS.    Platform Name - The name of the platform. Logical operator is EQUALS.    Platform Type - The platform type. Logical operator is EQUALS.    Tag:key - The key of a tag attached to an Amazon Web Services resource you wish to exclude from automated discovery. Logical operator is NOT_EQUALS. The key for your tag must be appended to Tag: following the example: Tag:name-of-your-key. ProductInformationFilterValue is optional if you are not using values for the key.     AccountId - The 12-digit ID of an Amazon Web Services account you wish to exclude from automated discovery. Logical operator is NOT_EQUALS.    License Included - The type of license included. Logical operators are EQUALS and NOT_EQUALS. Possible values are: sql-server-enterprise | sql-server-standard | sql-server-web | windows-server-datacenter.   The following filters and logical operators are supported when the resource type is RDS:    Engine Edition - The edition of the database engine. Logical operator is EQUALS. Possible values are: oracle-ee | oracle-se | oracle-se1 | oracle-se2.    License Pack - The license pack. Logical operator is EQUALS. Possible values are: data guard | diagnostic pack sqlt | tuning pack sqlt | ols | olap.  
      */
     ProductInformationFilterList: ProductInformationFilterList;
   }
@@ -1930,11 +2221,15 @@ declare namespace LicenseManager {
      */
     ReceivedStatus?: ReceivedStatus;
     /**
+     * Received status reason.
+     */
+    ReceivedStatusReason?: StatusReasonMessage;
+    /**
      * Allowed operations.
      */
     AllowedOperations?: AllowedOperationList;
   }
-  export type ReceivedStatus = "PENDING_WORKFLOW"|"PENDING_ACCEPT"|"REJECTED"|"ACTIVE"|"FAILED_WORKFLOW"|"DELETED"|"DISABLED"|string;
+  export type ReceivedStatus = "PENDING_WORKFLOW"|"PENDING_ACCEPT"|"REJECTED"|"ACTIVE"|"FAILED_WORKFLOW"|"DELETED"|"DISABLED"|"WORKFLOW_COMPLETED"|string;
   export interface RejectGrantRequest {
     /**
      * Amazon Resource Name (ARN) of the grant.
@@ -1956,6 +2251,81 @@ declare namespace LicenseManager {
     Version?: String;
   }
   export type RenewType = "None"|"Weekly"|"Monthly"|string;
+  export interface ReportContext {
+    /**
+     * Amazon Resource Name (ARN) of the license configuration that this generator reports on.
+     */
+    licenseConfigurationArns: ArnList;
+  }
+  export interface ReportFrequency {
+    /**
+     * Number of times within the frequency period that a report is generated. The only supported value is 1.
+     */
+    value?: Integer;
+    /**
+     * Time period between each report. The period can be daily, weekly, or monthly.
+     */
+    period?: ReportFrequencyType;
+  }
+  export type ReportFrequencyType = "DAY"|"WEEK"|"MONTH"|string;
+  export interface ReportGenerator {
+    /**
+     * Name of the report generator.
+     */
+    ReportGeneratorName?: String;
+    /**
+     * Type of reports that are generated.
+     */
+    ReportType?: ReportTypeList;
+    /**
+     * License configuration type for this generator.
+     */
+    ReportContext?: ReportContext;
+    /**
+     * Details about how frequently reports are generated.
+     */
+    ReportFrequency?: ReportFrequency;
+    /**
+     * Amazon Resource Name (ARN) of the report generator.
+     */
+    LicenseManagerReportGeneratorArn?: String;
+    /**
+     * Status of the last report generation attempt.
+     */
+    LastRunStatus?: String;
+    /**
+     * Failure message for the last report generation attempt.
+     */
+    LastRunFailureReason?: String;
+    /**
+     * Time the last report was generated at.
+     */
+    LastReportGenerationTime?: String;
+    /**
+     * The Amazon Web Services account ID used to create the report generator.
+     */
+    ReportCreatorAccount?: String;
+    /**
+     * Description of the report generator.
+     */
+    Description?: String;
+    /**
+     * Details of the S3 bucket that report generator reports are published to.
+     */
+    S3Location?: S3Location;
+    /**
+     * Time the report was created.
+     */
+    CreateTime?: String;
+    /**
+     * Tags associated with the report generator.
+     */
+    Tags?: TagList;
+  }
+  export type ReportGeneratorList = ReportGenerator[];
+  export type ReportGeneratorName = string;
+  export type ReportType = "LicenseConfigurationSummaryReport"|"LicenseConfigurationUsageReport"|string;
+  export type ReportTypeList = ReportType[];
   export interface ResourceInventory {
     /**
      * ID of the resource.
@@ -1984,7 +2354,18 @@ declare namespace LicenseManager {
   }
   export type ResourceInventoryList = ResourceInventory[];
   export type ResourceType = "EC2_INSTANCE"|"EC2_HOST"|"EC2_AMI"|"RDS"|"SYSTEMS_MANAGER_MANAGED_INSTANCE"|string;
+  export interface S3Location {
+    /**
+     * Name of the S3 bucket reports are published to.
+     */
+    bucket?: String;
+    /**
+     * Prefix of the S3 bucket reports are published to.
+     */
+    keyPrefix?: String;
+  }
   export type SignedToken = string;
+  export type StatusReasonMessage = string;
   export type String = string;
   export type StringList = String[];
   export interface Tag {
@@ -2096,9 +2477,41 @@ declare namespace LicenseManager {
   }
   export interface UpdateLicenseConfigurationResponse {
   }
+  export interface UpdateLicenseManagerReportGeneratorRequest {
+    /**
+     * Amazon Resource Name (ARN) of the report generator to update.
+     */
+    LicenseManagerReportGeneratorArn: String;
+    /**
+     * Name of the report generator.
+     */
+    ReportGeneratorName: ReportGeneratorName;
+    /**
+     * Type of reports to generate. The following report types are supported:   License configuration report - Reports the number and details of consumed licenses for a license configuration.   Resource report - Reports the tracked licenses and resource consumption for a license configuration.  
+     */
+    Type: ReportTypeList;
+    /**
+     * The report context.
+     */
+    ReportContext: ReportContext;
+    /**
+     * Frequency by which reports are generated.
+     */
+    ReportFrequency: ReportFrequency;
+    /**
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+     */
+    ClientToken: ClientRequestToken;
+    /**
+     * Description of the report generator.
+     */
+    Description?: String;
+  }
+  export interface UpdateLicenseManagerReportGeneratorResponse {
+  }
   export interface UpdateLicenseSpecificationsForResourceRequest {
     /**
-     * Amazon Resource Name (ARN) of the AWS resource.
+     * Amazon Resource Name (ARN) of the Amazon Web Services resource.
      */
     ResourceArn: String;
     /**
@@ -2122,7 +2535,7 @@ declare namespace LicenseManager {
      */
     SnsTopicArn?: String;
     /**
-     * Enables integration with AWS Organizations for cross-account discovery.
+     * Enables integration with Organizations for cross-account discovery.
      */
     OrganizationConfiguration?: OrganizationConfiguration;
     /**
@@ -2132,6 +2545,7 @@ declare namespace LicenseManager {
   }
   export interface UpdateServiceSettingsResponse {
   }
+  export type UsageOperation = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

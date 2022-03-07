@@ -12,19 +12,19 @@ declare class DevOpsGuru extends Service {
   constructor(options?: DevOpsGuru.Types.ClientConfiguration)
   config: Config & DevOpsGuru.Types.ClientConfiguration;
   /**
-   *  Adds a notification channel to DevOps Guru. A notification channel is used to notify you about important DevOps Guru events, such as when an insight is generated.  If you use an Amazon SNS topic in another account, you must attach a policy to it that grants DevOps Guru permission to it notifications. DevOps Guru adds the required policy on your behalf to send notifications using Amazon SNS in your account. For more information, see Permissions for cross account Amazon SNS topics. If you use an Amazon SNS topic that is encrypted by an AWS Key Management Service customer-managed key (CMK), then you must add permissions to the CMK. For more information, see Permissions for AWS KMS–encrypted Amazon SNS topics.
+   *  Adds a notification channel to DevOps Guru. A notification channel is used to notify you about important DevOps Guru events, such as when an insight is generated.  If you use an Amazon SNS topic in another account, you must attach a policy to it that grants DevOps Guru permission to it notifications. DevOps Guru adds the required policy on your behalf to send notifications using Amazon SNS in your account. For more information, see Permissions for cross account Amazon SNS topics. If you use an Amazon SNS topic that is encrypted by an Amazon Web Services Key Management Service customer-managed key (CMK), then you must add permissions to the CMK. For more information, see Permissions for Amazon Web Services KMS–encrypted Amazon SNS topics.
    */
   addNotificationChannel(params: DevOpsGuru.Types.AddNotificationChannelRequest, callback?: (err: AWSError, data: DevOpsGuru.Types.AddNotificationChannelResponse) => void): Request<DevOpsGuru.Types.AddNotificationChannelResponse, AWSError>;
   /**
-   *  Adds a notification channel to DevOps Guru. A notification channel is used to notify you about important DevOps Guru events, such as when an insight is generated.  If you use an Amazon SNS topic in another account, you must attach a policy to it that grants DevOps Guru permission to it notifications. DevOps Guru adds the required policy on your behalf to send notifications using Amazon SNS in your account. For more information, see Permissions for cross account Amazon SNS topics. If you use an Amazon SNS topic that is encrypted by an AWS Key Management Service customer-managed key (CMK), then you must add permissions to the CMK. For more information, see Permissions for AWS KMS–encrypted Amazon SNS topics.
+   *  Adds a notification channel to DevOps Guru. A notification channel is used to notify you about important DevOps Guru events, such as when an insight is generated.  If you use an Amazon SNS topic in another account, you must attach a policy to it that grants DevOps Guru permission to it notifications. DevOps Guru adds the required policy on your behalf to send notifications using Amazon SNS in your account. For more information, see Permissions for cross account Amazon SNS topics. If you use an Amazon SNS topic that is encrypted by an Amazon Web Services Key Management Service customer-managed key (CMK), then you must add permissions to the CMK. For more information, see Permissions for Amazon Web Services KMS–encrypted Amazon SNS topics.
    */
   addNotificationChannel(callback?: (err: AWSError, data: DevOpsGuru.Types.AddNotificationChannelResponse) => void): Request<DevOpsGuru.Types.AddNotificationChannelResponse, AWSError>;
   /**
-   *  Returns the number of open reactive insights, the number of open proactive insights, and the number of metrics analyzed in your AWS account. Use these numbers to gauge the health of operations in your AWS account. 
+   *  Returns the number of open reactive insights, the number of open proactive insights, and the number of metrics analyzed in your Amazon Web Services account. Use these numbers to gauge the health of operations in your Amazon Web Services account. 
    */
   describeAccountHealth(params: DevOpsGuru.Types.DescribeAccountHealthRequest, callback?: (err: AWSError, data: DevOpsGuru.Types.DescribeAccountHealthResponse) => void): Request<DevOpsGuru.Types.DescribeAccountHealthResponse, AWSError>;
   /**
-   *  Returns the number of open reactive insights, the number of open proactive insights, and the number of metrics analyzed in your AWS account. Use these numbers to gauge the health of operations in your AWS account. 
+   *  Returns the number of open reactive insights, the number of open proactive insights, and the number of metrics analyzed in your Amazon Web Services account. Use these numbers to gauge the health of operations in your Amazon Web Services account. 
    */
   describeAccountHealth(callback?: (err: AWSError, data: DevOpsGuru.Types.DescribeAccountHealthResponse) => void): Request<DevOpsGuru.Types.DescribeAccountHealthResponse, AWSError>;
   /**
@@ -44,11 +44,19 @@ declare class DevOpsGuru extends Service {
    */
   describeAnomaly(callback?: (err: AWSError, data: DevOpsGuru.Types.DescribeAnomalyResponse) => void): Request<DevOpsGuru.Types.DescribeAnomalyResponse, AWSError>;
   /**
-   *  Returns the most recent feedback submitted in the current AWS account and Region. 
+   * This operation lists details about a DevOps Guru event source that is shared with your&#x2028; account.
+   */
+  describeEventSourcesConfig(params: DevOpsGuru.Types.DescribeEventSourcesConfigRequest, callback?: (err: AWSError, data: DevOpsGuru.Types.DescribeEventSourcesConfigResponse) => void): Request<DevOpsGuru.Types.DescribeEventSourcesConfigResponse, AWSError>;
+  /**
+   * This operation lists details about a DevOps Guru event source that is shared with your&#x2028; account.
+   */
+  describeEventSourcesConfig(callback?: (err: AWSError, data: DevOpsGuru.Types.DescribeEventSourcesConfigResponse) => void): Request<DevOpsGuru.Types.DescribeEventSourcesConfigResponse, AWSError>;
+  /**
+   *  Returns the most recent feedback submitted in the current Amazon Web Services account and Region. 
    */
   describeFeedback(params: DevOpsGuru.Types.DescribeFeedbackRequest, callback?: (err: AWSError, data: DevOpsGuru.Types.DescribeFeedbackResponse) => void): Request<DevOpsGuru.Types.DescribeFeedbackResponse, AWSError>;
   /**
-   *  Returns the most recent feedback submitted in the current AWS account and Region. 
+   *  Returns the most recent feedback submitted in the current Amazon Web Services account and Region. 
    */
   describeFeedback(callback?: (err: AWSError, data: DevOpsGuru.Types.DescribeFeedbackResponse) => void): Request<DevOpsGuru.Types.DescribeFeedbackResponse, AWSError>;
   /**
@@ -60,27 +68,59 @@ declare class DevOpsGuru extends Service {
    */
   describeInsight(callback?: (err: AWSError, data: DevOpsGuru.Types.DescribeInsightResponse) => void): Request<DevOpsGuru.Types.DescribeInsightResponse, AWSError>;
   /**
-   *  Returns the number of open proactive insights, open reactive insights, and the Mean Time to Recover (MTTR) for all closed insights in resource collections in your account. You specify the type of AWS resources collection. The one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze only the AWS resources that are defined in the stacks. 
+   * Returns active insights, predictive insights, and resource hours analyzed in last hour.
+   */
+  describeOrganizationHealth(params: DevOpsGuru.Types.DescribeOrganizationHealthRequest, callback?: (err: AWSError, data: DevOpsGuru.Types.DescribeOrganizationHealthResponse) => void): Request<DevOpsGuru.Types.DescribeOrganizationHealthResponse, AWSError>;
+  /**
+   * Returns active insights, predictive insights, and resource hours analyzed in last hour.
+   */
+  describeOrganizationHealth(callback?: (err: AWSError, data: DevOpsGuru.Types.DescribeOrganizationHealthResponse) => void): Request<DevOpsGuru.Types.DescribeOrganizationHealthResponse, AWSError>;
+  /**
+   * Returns an overview of your organization's history based on the specified time range. The overview includes the total reactive and proactive insights.
+   */
+  describeOrganizationOverview(params: DevOpsGuru.Types.DescribeOrganizationOverviewRequest, callback?: (err: AWSError, data: DevOpsGuru.Types.DescribeOrganizationOverviewResponse) => void): Request<DevOpsGuru.Types.DescribeOrganizationOverviewResponse, AWSError>;
+  /**
+   * Returns an overview of your organization's history based on the specified time range. The overview includes the total reactive and proactive insights.
+   */
+  describeOrganizationOverview(callback?: (err: AWSError, data: DevOpsGuru.Types.DescribeOrganizationOverviewResponse) => void): Request<DevOpsGuru.Types.DescribeOrganizationOverviewResponse, AWSError>;
+  /**
+   * Provides an overview of your system's health. If additional member accounts are part of your organization, you can filter those accounts using the AccountIds field.
+   */
+  describeOrganizationResourceCollectionHealth(params: DevOpsGuru.Types.DescribeOrganizationResourceCollectionHealthRequest, callback?: (err: AWSError, data: DevOpsGuru.Types.DescribeOrganizationResourceCollectionHealthResponse) => void): Request<DevOpsGuru.Types.DescribeOrganizationResourceCollectionHealthResponse, AWSError>;
+  /**
+   * Provides an overview of your system's health. If additional member accounts are part of your organization, you can filter those accounts using the AccountIds field.
+   */
+  describeOrganizationResourceCollectionHealth(callback?: (err: AWSError, data: DevOpsGuru.Types.DescribeOrganizationResourceCollectionHealthResponse) => void): Request<DevOpsGuru.Types.DescribeOrganizationResourceCollectionHealthResponse, AWSError>;
+  /**
+   *  Returns the number of open proactive insights, open reactive insights, and the Mean Time to Recover (MTTR) for all closed insights in resource collections in your account. You specify the type of Amazon Web Services resources collection. The two types of Amazon Web Services resource collections supported are Amazon Web Services CloudFormation stacks and Amazon Web Services resources that contain the same Amazon Web Services tag. DevOps Guru can be configured to analyze the Amazon Web Services resources that are defined in the stacks or that are tagged using the same tag key. You can specify up to 500 Amazon Web Services CloudFormation stacks. 
    */
   describeResourceCollectionHealth(params: DevOpsGuru.Types.DescribeResourceCollectionHealthRequest, callback?: (err: AWSError, data: DevOpsGuru.Types.DescribeResourceCollectionHealthResponse) => void): Request<DevOpsGuru.Types.DescribeResourceCollectionHealthResponse, AWSError>;
   /**
-   *  Returns the number of open proactive insights, open reactive insights, and the Mean Time to Recover (MTTR) for all closed insights in resource collections in your account. You specify the type of AWS resources collection. The one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze only the AWS resources that are defined in the stacks. 
+   *  Returns the number of open proactive insights, open reactive insights, and the Mean Time to Recover (MTTR) for all closed insights in resource collections in your account. You specify the type of Amazon Web Services resources collection. The two types of Amazon Web Services resource collections supported are Amazon Web Services CloudFormation stacks and Amazon Web Services resources that contain the same Amazon Web Services tag. DevOps Guru can be configured to analyze the Amazon Web Services resources that are defined in the stacks or that are tagged using the same tag key. You can specify up to 500 Amazon Web Services CloudFormation stacks. 
    */
   describeResourceCollectionHealth(callback?: (err: AWSError, data: DevOpsGuru.Types.DescribeResourceCollectionHealthResponse) => void): Request<DevOpsGuru.Types.DescribeResourceCollectionHealthResponse, AWSError>;
   /**
-   *  Returns the integration status of services that are integrated with DevOps Guru. The one service that can be integrated with DevOps Guru is AWS Systems Manager, which can be used to create an OpsItem for each generated insight. 
+   *  Returns the integration status of services that are integrated with DevOps Guru. The one service that can be integrated with DevOps Guru is Amazon Web Services Systems Manager, which can be used to create an OpsItem for each generated insight. 
    */
   describeServiceIntegration(params: DevOpsGuru.Types.DescribeServiceIntegrationRequest, callback?: (err: AWSError, data: DevOpsGuru.Types.DescribeServiceIntegrationResponse) => void): Request<DevOpsGuru.Types.DescribeServiceIntegrationResponse, AWSError>;
   /**
-   *  Returns the integration status of services that are integrated with DevOps Guru. The one service that can be integrated with DevOps Guru is AWS Systems Manager, which can be used to create an OpsItem for each generated insight. 
+   *  Returns the integration status of services that are integrated with DevOps Guru. The one service that can be integrated with DevOps Guru is Amazon Web Services Systems Manager, which can be used to create an OpsItem for each generated insight. 
    */
   describeServiceIntegration(callback?: (err: AWSError, data: DevOpsGuru.Types.DescribeServiceIntegrationResponse) => void): Request<DevOpsGuru.Types.DescribeServiceIntegrationResponse, AWSError>;
   /**
-   *  Returns lists AWS resources that are of the specified resource collection type. The one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze only the AWS resources that are defined in the stacks. 
+   * Returns an estimate of the monthly cost for DevOps Guru to analyze your Amazon Web Services resources. For more information, see Estimate your Amazon DevOps Guru costs and Amazon DevOps Guru pricing.
+   */
+  getCostEstimation(params: DevOpsGuru.Types.GetCostEstimationRequest, callback?: (err: AWSError, data: DevOpsGuru.Types.GetCostEstimationResponse) => void): Request<DevOpsGuru.Types.GetCostEstimationResponse, AWSError>;
+  /**
+   * Returns an estimate of the monthly cost for DevOps Guru to analyze your Amazon Web Services resources. For more information, see Estimate your Amazon DevOps Guru costs and Amazon DevOps Guru pricing.
+   */
+  getCostEstimation(callback?: (err: AWSError, data: DevOpsGuru.Types.GetCostEstimationResponse) => void): Request<DevOpsGuru.Types.GetCostEstimationResponse, AWSError>;
+  /**
+   *  Returns lists Amazon Web Services resources that are of the specified resource collection type. The two types of Amazon Web Services resource collections supported are Amazon Web Services CloudFormation stacks and Amazon Web Services resources that contain the same Amazon Web Services tag. DevOps Guru can be configured to analyze the Amazon Web Services resources that are defined in the stacks or that are tagged using the same tag key. You can specify up to 500 Amazon Web Services CloudFormation stacks. 
    */
   getResourceCollection(params: DevOpsGuru.Types.GetResourceCollectionRequest, callback?: (err: AWSError, data: DevOpsGuru.Types.GetResourceCollectionResponse) => void): Request<DevOpsGuru.Types.GetResourceCollectionResponse, AWSError>;
   /**
-   *  Returns lists AWS resources that are of the specified resource collection type. The one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze only the AWS resources that are defined in the stacks. 
+   *  Returns lists Amazon Web Services resources that are of the specified resource collection type. The two types of Amazon Web Services resource collections supported are Amazon Web Services CloudFormation stacks and Amazon Web Services resources that contain the same Amazon Web Services tag. DevOps Guru can be configured to analyze the Amazon Web Services resources that are defined in the stacks or that are tagged using the same tag key. You can specify up to 500 Amazon Web Services CloudFormation stacks. 
    */
   getResourceCollection(callback?: (err: AWSError, data: DevOpsGuru.Types.GetResourceCollectionResponse) => void): Request<DevOpsGuru.Types.GetResourceCollectionResponse, AWSError>;
   /**
@@ -100,11 +140,11 @@ declare class DevOpsGuru extends Service {
    */
   listEvents(callback?: (err: AWSError, data: DevOpsGuru.Types.ListEventsResponse) => void): Request<DevOpsGuru.Types.ListEventsResponse, AWSError>;
   /**
-   *  Returns a list of insights in your AWS account. You can specify which insights are returned by their start time and status (ONGOING, CLOSED, or ANY). 
+   *  Returns a list of insights in your Amazon Web Services account. You can specify which insights are returned by their start time and status (ONGOING, CLOSED, or ANY). 
    */
   listInsights(params: DevOpsGuru.Types.ListInsightsRequest, callback?: (err: AWSError, data: DevOpsGuru.Types.ListInsightsResponse) => void): Request<DevOpsGuru.Types.ListInsightsResponse, AWSError>;
   /**
-   *  Returns a list of insights in your AWS account. You can specify which insights are returned by their start time and status (ONGOING, CLOSED, or ANY). 
+   *  Returns a list of insights in your Amazon Web Services account. You can specify which insights are returned by their start time and status (ONGOING, CLOSED, or ANY). 
    */
   listInsights(callback?: (err: AWSError, data: DevOpsGuru.Types.ListInsightsResponse) => void): Request<DevOpsGuru.Types.ListInsightsResponse, AWSError>;
   /**
@@ -115,6 +155,14 @@ declare class DevOpsGuru extends Service {
    *  Returns a list of notification channels configured for DevOps Guru. Each notification channel is used to notify you when DevOps Guru generates an insight that contains information about how to improve your operations. The one supported notification channel is Amazon Simple Notification Service (Amazon SNS). 
    */
   listNotificationChannels(callback?: (err: AWSError, data: DevOpsGuru.Types.ListNotificationChannelsResponse) => void): Request<DevOpsGuru.Types.ListNotificationChannelsResponse, AWSError>;
+  /**
+   * Returns a list of insights associated with the account or OU Id.
+   */
+  listOrganizationInsights(params: DevOpsGuru.Types.ListOrganizationInsightsRequest, callback?: (err: AWSError, data: DevOpsGuru.Types.ListOrganizationInsightsResponse) => void): Request<DevOpsGuru.Types.ListOrganizationInsightsResponse, AWSError>;
+  /**
+   * Returns a list of insights associated with the account or OU Id.
+   */
+  listOrganizationInsights(callback?: (err: AWSError, data: DevOpsGuru.Types.ListOrganizationInsightsResponse) => void): Request<DevOpsGuru.Types.ListOrganizationInsightsResponse, AWSError>;
   /**
    *  Returns a list of a specified insight's recommendations. Each recommendation includes a list of related metrics and a list of related events. 
    */
@@ -140,31 +188,77 @@ declare class DevOpsGuru extends Service {
    */
   removeNotificationChannel(callback?: (err: AWSError, data: DevOpsGuru.Types.RemoveNotificationChannelResponse) => void): Request<DevOpsGuru.Types.RemoveNotificationChannelResponse, AWSError>;
   /**
-   *  Returns a list of insights in your AWS account. You can specify which insights are returned by their start time, one or more statuses (ONGOING, CLOSED, and CLOSED), one or more severities (LOW, MEDIUM, and HIGH), and type (REACTIVE or PROACTIVE).   Use the Filters parameter to specify status and severity search parameters. Use the Type parameter to specify REACTIVE or PROACTIVE in your search. 
+   *  Returns a list of insights in your Amazon Web Services account. You can specify which insights are returned by their start time, one or more statuses (ONGOING, CLOSED, and CLOSED), one or more severities (LOW, MEDIUM, and HIGH), and type (REACTIVE or PROACTIVE).   Use the Filters parameter to specify status and severity search parameters. Use the Type parameter to specify REACTIVE or PROACTIVE in your search. 
    */
   searchInsights(params: DevOpsGuru.Types.SearchInsightsRequest, callback?: (err: AWSError, data: DevOpsGuru.Types.SearchInsightsResponse) => void): Request<DevOpsGuru.Types.SearchInsightsResponse, AWSError>;
   /**
-   *  Returns a list of insights in your AWS account. You can specify which insights are returned by their start time, one or more statuses (ONGOING, CLOSED, and CLOSED), one or more severities (LOW, MEDIUM, and HIGH), and type (REACTIVE or PROACTIVE).   Use the Filters parameter to specify status and severity search parameters. Use the Type parameter to specify REACTIVE or PROACTIVE in your search. 
+   *  Returns a list of insights in your Amazon Web Services account. You can specify which insights are returned by their start time, one or more statuses (ONGOING, CLOSED, and CLOSED), one or more severities (LOW, MEDIUM, and HIGH), and type (REACTIVE or PROACTIVE).   Use the Filters parameter to specify status and severity search parameters. Use the Type parameter to specify REACTIVE or PROACTIVE in your search. 
    */
   searchInsights(callback?: (err: AWSError, data: DevOpsGuru.Types.SearchInsightsResponse) => void): Request<DevOpsGuru.Types.SearchInsightsResponse, AWSError>;
   /**
-   *  Updates the collection of resources that DevOps Guru analyzes. The one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze only the AWS resources that are defined in the stacks. This method also creates the IAM role required for you to use DevOps Guru. 
+   *  Returns a list of insights in your organization. You can specify which insights are returned by their start time, one or more statuses (ONGOING, CLOSED, and CLOSED), one or more severities (LOW, MEDIUM, and HIGH), and type (REACTIVE or PROACTIVE).   Use the Filters parameter to specify status and severity search parameters. Use the Type parameter to specify REACTIVE or PROACTIVE in your search. 
+   */
+  searchOrganizationInsights(params: DevOpsGuru.Types.SearchOrganizationInsightsRequest, callback?: (err: AWSError, data: DevOpsGuru.Types.SearchOrganizationInsightsResponse) => void): Request<DevOpsGuru.Types.SearchOrganizationInsightsResponse, AWSError>;
+  /**
+   *  Returns a list of insights in your organization. You can specify which insights are returned by their start time, one or more statuses (ONGOING, CLOSED, and CLOSED), one or more severities (LOW, MEDIUM, and HIGH), and type (REACTIVE or PROACTIVE).   Use the Filters parameter to specify status and severity search parameters. Use the Type parameter to specify REACTIVE or PROACTIVE in your search. 
+   */
+  searchOrganizationInsights(callback?: (err: AWSError, data: DevOpsGuru.Types.SearchOrganizationInsightsResponse) => void): Request<DevOpsGuru.Types.SearchOrganizationInsightsResponse, AWSError>;
+  /**
+   * Starts the creation of an estimate of the monthly cost to analyze your Amazon Web Services resources.
+   */
+  startCostEstimation(params: DevOpsGuru.Types.StartCostEstimationRequest, callback?: (err: AWSError, data: DevOpsGuru.Types.StartCostEstimationResponse) => void): Request<DevOpsGuru.Types.StartCostEstimationResponse, AWSError>;
+  /**
+   * Starts the creation of an estimate of the monthly cost to analyze your Amazon Web Services resources.
+   */
+  startCostEstimation(callback?: (err: AWSError, data: DevOpsGuru.Types.StartCostEstimationResponse) => void): Request<DevOpsGuru.Types.StartCostEstimationResponse, AWSError>;
+  /**
+   * Updates the event source configuration.
+   */
+  updateEventSourcesConfig(params: DevOpsGuru.Types.UpdateEventSourcesConfigRequest, callback?: (err: AWSError, data: DevOpsGuru.Types.UpdateEventSourcesConfigResponse) => void): Request<DevOpsGuru.Types.UpdateEventSourcesConfigResponse, AWSError>;
+  /**
+   * Updates the event source configuration.
+   */
+  updateEventSourcesConfig(callback?: (err: AWSError, data: DevOpsGuru.Types.UpdateEventSourcesConfigResponse) => void): Request<DevOpsGuru.Types.UpdateEventSourcesConfigResponse, AWSError>;
+  /**
+   *  Updates the collection of resources that DevOps Guru analyzes. The two types of Amazon Web Services resource collections supported are Amazon Web Services CloudFormation stacks and Amazon Web Services resources that contain the same Amazon Web Services tag. DevOps Guru can be configured to analyze the Amazon Web Services resources that are defined in the stacks or that are tagged using the same tag key. You can specify up to 500 Amazon Web Services CloudFormation stacks. This method also creates the IAM role required for you to use DevOps Guru. 
    */
   updateResourceCollection(params: DevOpsGuru.Types.UpdateResourceCollectionRequest, callback?: (err: AWSError, data: DevOpsGuru.Types.UpdateResourceCollectionResponse) => void): Request<DevOpsGuru.Types.UpdateResourceCollectionResponse, AWSError>;
   /**
-   *  Updates the collection of resources that DevOps Guru analyzes. The one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze only the AWS resources that are defined in the stacks. This method also creates the IAM role required for you to use DevOps Guru. 
+   *  Updates the collection of resources that DevOps Guru analyzes. The two types of Amazon Web Services resource collections supported are Amazon Web Services CloudFormation stacks and Amazon Web Services resources that contain the same Amazon Web Services tag. DevOps Guru can be configured to analyze the Amazon Web Services resources that are defined in the stacks or that are tagged using the same tag key. You can specify up to 500 Amazon Web Services CloudFormation stacks. This method also creates the IAM role required for you to use DevOps Guru. 
    */
   updateResourceCollection(callback?: (err: AWSError, data: DevOpsGuru.Types.UpdateResourceCollectionResponse) => void): Request<DevOpsGuru.Types.UpdateResourceCollectionResponse, AWSError>;
   /**
-   *  Enables or disables integration with a service that can be integrated with DevOps Guru. The one service that can be integrated with DevOps Guru is AWS Systems Manager, which can be used to create an OpsItem for each generated insight. 
+   *  Enables or disables integration with a service that can be integrated with DevOps Guru. The one service that can be integrated with DevOps Guru is Amazon Web Services Systems Manager, which can be used to create an OpsItem for each generated insight. 
    */
   updateServiceIntegration(params: DevOpsGuru.Types.UpdateServiceIntegrationRequest, callback?: (err: AWSError, data: DevOpsGuru.Types.UpdateServiceIntegrationResponse) => void): Request<DevOpsGuru.Types.UpdateServiceIntegrationResponse, AWSError>;
   /**
-   *  Enables or disables integration with a service that can be integrated with DevOps Guru. The one service that can be integrated with DevOps Guru is AWS Systems Manager, which can be used to create an OpsItem for each generated insight. 
+   *  Enables or disables integration with a service that can be integrated with DevOps Guru. The one service that can be integrated with DevOps Guru is Amazon Web Services Systems Manager, which can be used to create an OpsItem for each generated insight. 
    */
   updateServiceIntegration(callback?: (err: AWSError, data: DevOpsGuru.Types.UpdateServiceIntegrationResponse) => void): Request<DevOpsGuru.Types.UpdateServiceIntegrationResponse, AWSError>;
 }
 declare namespace DevOpsGuru {
+  export interface AccountHealth {
+    /**
+     * The ID of the Amazon Web Services account. 
+     */
+    AccountId?: AwsAccountId;
+    /**
+     *  Information about the health of the Amazon Web Services resources in your account, including the number of open proactive, open reactive insights, and the Mean Time to Recover (MTTR) of closed insights. 
+     */
+    Insight?: AccountInsightHealth;
+  }
+  export type AccountHealths = AccountHealth[];
+  export type AccountIdList = AwsAccountId[];
+  export interface AccountInsightHealth {
+    /**
+     * An integer that specifies the number of open proactive insights in your Amazon Web Services account.
+     */
+    OpenProactiveInsights?: NumOpenProactiveInsights;
+    /**
+     * An integer that specifies the number of open reactive insights in your Amazon Web Services account.
+     */
+    OpenReactiveInsights?: NumOpenReactiveInsights;
+  }
   export interface AddNotificationChannelRequest {
     /**
      *  A NotificationChannelConfig object that specifies what type of notification channel to add. The one supported notification channel is Amazon Simple Notification Service (Amazon SNS). 
@@ -177,14 +271,62 @@ declare namespace DevOpsGuru {
      */
     Id: NotificationChannelId;
   }
+  export interface AmazonCodeGuruProfilerIntegration {
+    /**
+     * The status of the CodeGuru Profiler integration.
+     */
+    Status?: EventSourceOptInStatus;
+  }
+  export type AnomalyDescription = string;
   export type AnomalyId = string;
   export type AnomalyLimit = number;
+  export type AnomalyName = string;
+  export interface AnomalyReportedTimeRange {
+    /**
+     *  The time when an anomaly is opened. 
+     */
+    OpenTime: Timestamp;
+    /**
+     *  The time when an anomaly is closed. 
+     */
+    CloseTime?: Timestamp;
+  }
+  export interface AnomalyResource {
+    /**
+     * The name of the Amazon Web Services resource.
+     */
+    Name?: ResourceName;
+    /**
+     * The type of the Amazon Web Services resource.
+     */
+    Type?: ResourceType;
+  }
+  export type AnomalyResources = AnomalyResource[];
   export type AnomalySeverity = "LOW"|"MEDIUM"|"HIGH"|string;
+  export type AnomalySource = string;
   export interface AnomalySourceDetails {
     /**
-     *  An array of CloudWatchMetricsDetail object that contains information about the analyzed metrics that displayed anomalous behavior. 
+     * An array of CloudWatchMetricsDetail objects that contain information about analyzed CloudWatch metrics that show anomalous behavior. 
      */
     CloudWatchMetrics?: CloudWatchMetricsDetails;
+    /**
+     * An array of PerformanceInsightsMetricsDetail objects that contain information about analyzed Performance Insights metrics that show anomalous behavior.
+     */
+    PerformanceInsightsMetrics?: PerformanceInsightsMetricsDetails;
+  }
+  export interface AnomalySourceMetadata {
+    /**
+     * The source of the anomaly.
+     */
+    Source?: AnomalySource;
+    /**
+     * The name of the anomaly's resource.
+     */
+    SourceResourceName?: ResourceName;
+    /**
+     * The anomaly's resource type.
+     */
+    SourceResourceType?: ResourceType;
   }
   export type AnomalyStatus = "ONGOING"|"CLOSED"|string;
   export interface AnomalyTimeRange {
@@ -197,7 +339,12 @@ declare namespace DevOpsGuru {
      */
     EndTime?: Timestamp;
   }
+  export type AnomalyType = "CAUSAL"|"CONTEXTUAL"|string;
+  export type AppBoundaryKey = string;
+  export type AssociatedResourceArns = ResourceArn[];
+  export type AwsAccountId = string;
   export type Channels = NotificationChannel[];
+  export type ClientToken = string;
   export interface CloudFormationCollection {
     /**
      *  An array of CloudFormation stack names. 
@@ -210,17 +357,34 @@ declare namespace DevOpsGuru {
      */
     StackNames?: StackNames;
   }
+  export interface CloudFormationCostEstimationResourceCollectionFilter {
+    /**
+     * An array of CloudFormation stack names. Its size is fixed at 1 item.
+     */
+    StackNames?: CostEstimationStackNames;
+  }
   export interface CloudFormationHealth {
     /**
      *  The name of the CloudFormation stack. 
      */
     StackName?: StackName;
     /**
-     *  Information about the health of the AWS resources in your account that are specified by an AWS CloudFormation stack, including the number of open proactive, open reactive insights, and the Mean Time to Recover (MTTR) of closed insights. 
+     *  Information about the health of the Amazon Web Services resources in your account that are specified by an Amazon Web Services CloudFormation stack, including the number of open proactive, open reactive insights, and the Mean Time to Recover (MTTR) of closed insights. 
      */
     Insight?: InsightHealth;
   }
   export type CloudFormationHealths = CloudFormationHealth[];
+  export type CloudWatchMetricDataStatusCode = "Complete"|"InternalError"|"PartialData"|string;
+  export interface CloudWatchMetricsDataSummary {
+    /**
+     * This is a list of Amazon CloudWatch metric values at given timestamp.
+     */
+    TimestampMetricValuePairList?: TimestampMetricValuePairList;
+    /**
+     * This is an enum of the status showing whether the metric value pair list has partial or complete data, or if there was an error.
+     */
+    StatusCode?: CloudWatchMetricDataStatusCode;
+  }
   export interface CloudWatchMetricsDetail {
     /**
      *  The name of the CloudWatch metric. 
@@ -246,6 +410,10 @@ declare namespace DevOpsGuru {
      *  The length of time associated with the CloudWatch metric in number of seconds. 
      */
     Period?: CloudWatchMetricsPeriod;
+    /**
+     * This object returns anomaly metric data.
+     */
+    MetricDataSummary?: CloudWatchMetricsDataSummary;
   }
   export type CloudWatchMetricsDetails = CloudWatchMetricsDetail[];
   export interface CloudWatchMetricsDimension {
@@ -266,23 +434,49 @@ declare namespace DevOpsGuru {
   export type CloudWatchMetricsPeriod = number;
   export type CloudWatchMetricsStat = "Sum"|"Average"|"SampleCount"|"Minimum"|"Maximum"|"p99"|"p90"|"p50"|string;
   export type CloudWatchMetricsUnit = string;
+  export type Cost = number;
+  export interface CostEstimationResourceCollectionFilter {
+    /**
+     * An object that specifies the CloudFormation stack that defines the Amazon Web Services resources used to create a monthly estimate for DevOps Guru.
+     */
+    CloudFormation?: CloudFormationCostEstimationResourceCollectionFilter;
+    /**
+     * The Amazon Web Services tags used to filter the resource collection that is used for a cost estimate. Tags help you identify and organize your Amazon Web Services resources. Many Amazon Web Services services support tagging, so you can assign the same tag to resources from different services to indicate that the resources are related. For example, you can assign the same tag to an Amazon DynamoDB table resource that you assign to an Lambda function. For more information about using tags, see the Tagging best practices whitepaper.  Each Amazon Web Services tag has two parts.    A tag key (for example, CostCenter, Environment, Project, or Secret). Tag keys are case-sensitive.   An optional field known as a tag value (for example, 111122223333, Production, or a team name). Omitting the tag value is the same as using an empty string. Like tag keys, tag values are case-sensitive.   Together these are known as key-value pairs.  The string used for a key in a tag that you use to define your resource coverage must begin with the prefix Devops-guru-. The tag key might be Devops-guru-deployment-application or Devops-guru-rds-application. While keys are case-sensitive, the case of key characters don't matter to DevOps Guru. For example, DevOps Guru works with a key named devops-guru-rds and a key named DevOps-Guru-RDS. Possible key/value pairs in your application might be Devops-Guru-production-application/RDS or Devops-Guru-production-application/containers. 
+     */
+    Tags?: TagCostEstimationResourceCollectionFilters;
+  }
+  export type CostEstimationServiceResourceCount = number;
+  export type CostEstimationServiceResourceState = "ACTIVE"|"INACTIVE"|string;
+  export type CostEstimationStackNames = StackName[];
+  export type CostEstimationStatus = "ONGOING"|"COMPLETED"|string;
+  export type CostEstimationTagValues = TagValue[];
+  export interface CostEstimationTimeRange {
+    /**
+     * The start time of the cost estimation.
+     */
+    StartTime?: Timestamp;
+    /**
+     * The end time of the cost estimation.
+     */
+    EndTime?: Timestamp;
+  }
   export interface DescribeAccountHealthRequest {
   }
   export interface DescribeAccountHealthResponse {
     /**
-     *  An integer that specifies the number of open reactive insights in your AWS account. 
+     *  An integer that specifies the number of open reactive insights in your Amazon Web Services account. 
      */
     OpenReactiveInsights: NumOpenReactiveInsights;
     /**
-     *  An integer that specifies the number of open proactive insights in your AWS account. 
+     *  An integer that specifies the number of open proactive insights in your Amazon Web Services account. 
      */
     OpenProactiveInsights: NumOpenProactiveInsights;
     /**
-     *  An integer that specifies the number of metrics that have been analyzed in your AWS account. 
+     *  An integer that specifies the number of metrics that have been analyzed in your Amazon Web Services account. 
      */
     MetricsAnalyzed: NumMetricsAnalyzed;
     /**
-     * The number of Amazon DevOps Guru resource analysis hours billed to the current AWS account in the last hour. 
+     * The number of Amazon DevOps Guru resource analysis hours billed to the current Amazon Web Services account in the last hour. 
      */
     ResourceHours: ResourceHours;
   }
@@ -298,11 +492,11 @@ declare namespace DevOpsGuru {
   }
   export interface DescribeAccountOverviewResponse {
     /**
-     *  An integer that specifies the number of open reactive insights in your AWS account that were created during the time range passed in. 
+     *  An integer that specifies the number of open reactive insights in your Amazon Web Services account that were created during the time range passed in. 
      */
     ReactiveInsights: NumReactiveInsights;
     /**
-     *  An integer that specifies the number of open proactive insights in your AWS account that were created during the time range passed in. 
+     *  An integer that specifies the number of open proactive insights in your Amazon Web Services account that were created during the time range passed in. 
      */
     ProactiveInsights: NumProactiveInsights;
     /**
@@ -315,16 +509,28 @@ declare namespace DevOpsGuru {
      *  The ID of the anomaly. 
      */
     Id: AnomalyId;
+    /**
+     * The ID of the member account.
+     */
+    AccountId?: AwsAccountId;
   }
   export interface DescribeAnomalyResponse {
     /**
-     *  An ReactiveAnomaly object that represents the requested anomaly. 
+     *  A ProactiveAnomaly object that represents the requested anomaly. 
      */
     ProactiveAnomaly?: ProactiveAnomaly;
     /**
-     *  An ProactiveAnomaly object that represents the requested anomaly. 
+     *  A ReactiveAnomaly object that represents the requested anomaly. 
      */
     ReactiveAnomaly?: ReactiveAnomaly;
+  }
+  export interface DescribeEventSourcesConfigRequest {
+  }
+  export interface DescribeEventSourcesConfigResponse {
+    /**
+     * The name of the event source.
+     */
+    EventSources?: EventSourcesConfig;
   }
   export interface DescribeFeedbackRequest {
     /**
@@ -340,20 +546,124 @@ declare namespace DevOpsGuru {
      *  The ID of the insight. 
      */
     Id: InsightId;
+    /**
+     * The ID of the member account in the organization.
+     */
+    AccountId?: AwsAccountId;
   }
   export interface DescribeInsightResponse {
     /**
-     *  An ProactiveInsight object that represents the requested insight. 
+     *  A ProactiveInsight object that represents the requested insight. 
      */
     ProactiveInsight?: ProactiveInsight;
     /**
-     *  An ReactiveInsight object that represents the requested insight. 
+     *  A ReactiveInsight object that represents the requested insight. 
      */
     ReactiveInsight?: ReactiveInsight;
   }
+  export interface DescribeOrganizationHealthRequest {
+    /**
+     * The ID of the Amazon Web Services account.
+     */
+    AccountIds?: AccountIdList;
+    /**
+     * The ID of the organizational unit.
+     */
+    OrganizationalUnitIds?: OrganizationalUnitIdList;
+  }
+  export interface DescribeOrganizationHealthResponse {
+    /**
+     * An integer that specifies the number of open reactive insights in your Amazon Web Services account.
+     */
+    OpenReactiveInsights: NumOpenReactiveInsights;
+    /**
+     * An integer that specifies the number of open proactive insights in your Amazon Web Services account.
+     */
+    OpenProactiveInsights: NumOpenProactiveInsights;
+    /**
+     * An integer that specifies the number of metrics that have been analyzed in your organization.
+     */
+    MetricsAnalyzed: NumMetricsAnalyzed;
+    /**
+     * The number of Amazon DevOps Guru resource analysis hours billed to the current Amazon Web Services account in the last hour. 
+     */
+    ResourceHours: ResourceHours;
+  }
+  export interface DescribeOrganizationOverviewRequest {
+    /**
+     *  The start of the time range passed in. The start time granularity is at the day level. The floor of the start time is used. Returned information occurred after this day. 
+     */
+    FromTime: Timestamp;
+    /**
+     *  The end of the time range passed in. The start time granularity is at the day level. The floor of the start time is used. Returned information occurred before this day. If this is not specified, then the current day is used. 
+     */
+    ToTime?: Timestamp;
+    /**
+     * The ID of the Amazon Web Services account.
+     */
+    AccountIds?: AccountIdList;
+    /**
+     * The ID of the organizational unit.
+     */
+    OrganizationalUnitIds?: OrganizationalUnitIdList;
+  }
+  export interface DescribeOrganizationOverviewResponse {
+    /**
+     * An integer that specifies the number of open reactive insights in your Amazon Web Services account.
+     */
+    ReactiveInsights: NumReactiveInsights;
+    /**
+     * An integer that specifies the number of open proactive insights in your Amazon Web Services account.
+     */
+    ProactiveInsights: NumProactiveInsights;
+  }
+  export interface DescribeOrganizationResourceCollectionHealthRequest {
+    /**
+     *  An Amazon Web Services resource collection type. This type specifies how analyzed Amazon Web Services resources are defined. The two types of Amazon Web Services resource collections supported are Amazon Web Services CloudFormation stacks and Amazon Web Services resources that contain the same Amazon Web Services tag. DevOps Guru can be configured to analyze the Amazon Web Services resources that are defined in the stacks or that are tagged using the same tag key. You can specify up to 500 Amazon Web Services CloudFormation stacks. 
+     */
+    OrganizationResourceCollectionType: OrganizationResourceCollectionType;
+    /**
+     * The ID of the Amazon Web Services account.
+     */
+    AccountIds?: AccountIdList;
+    /**
+     * The ID of the organizational unit.
+     */
+    OrganizationalUnitIds?: OrganizationalUnitIdList;
+    /**
+     * The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.
+     */
+    NextToken?: UuidNextToken;
+    /**
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
+     */
+    MaxResults?: OrganizationResourceCollectionMaxResults;
+  }
+  export interface DescribeOrganizationResourceCollectionHealthResponse {
+    /**
+     * The returned CloudFormationHealthOverview object that contains an InsightHealthOverview object with the requested system health information.
+     */
+    CloudFormation?: CloudFormationHealths;
+    /**
+     * An array of ServiceHealth objects that describes the health of the Amazon Web Services services associated with the resources in the collection.
+     */
+    Service?: ServiceHealths;
+    /**
+     * The name of the organization's account.
+     */
+    Account?: AccountHealths;
+    /**
+     * The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.
+     */
+    NextToken?: UuidNextToken;
+    /**
+     * Tags help you identify and organize your Amazon Web Services resources. Many Amazon Web Services services support tagging, so you can assign the same tag to resources from different services to indicate that the resources are related. For example, you can assign the same tag to an Amazon DynamoDB table resource that you assign to an Lambda function. For more information about using tags, see the Tagging best practices whitepaper.  Each Amazon Web Services tag has two parts.    A tag key (for example, CostCenter, Environment, Project, or Secret). Tag keys are case-sensitive.   An optional field known as a tag value (for example, 111122223333, Production, or a team name). Omitting the tag value is the same as using an empty string. Like tag keys, tag values are case-sensitive.   Together these are known as key-value pairs.  The string used for a key in a tag that you use to define your resource coverage must begin with the prefix Devops-guru-. The tag key might be Devops-guru-deployment-application or Devops-guru-rds-application. While keys are case-sensitive, the case of key characters don't matter to DevOps Guru. For example, DevOps Guru works with a key named devops-guru-rds and a key named DevOps-Guru-RDS. Possible key/value pairs in your application might be Devops-Guru-production-application/RDS or Devops-Guru-production-application/containers. 
+     */
+    Tags?: TagHealths;
+  }
   export interface DescribeResourceCollectionHealthRequest {
     /**
-     *  An AWS resource collection type. This type specifies how analyzed AWS resources are defined. The one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze only the AWS resources that are defined in the stacks. 
+     *  An Amazon Web Services resource collection type. This type specifies how analyzed Amazon Web Services resources are defined. The two types of Amazon Web Services resource collections supported are Amazon Web Services CloudFormation stacks and Amazon Web Services resources that contain the same Amazon Web Services tag. DevOps Guru can be configured to analyze the Amazon Web Services resources that are defined in the stacks or that are tagged using the same tag key. You can specify up to 500 Amazon Web Services CloudFormation stacks. 
      */
     ResourceCollectionType: ResourceCollectionType;
     /**
@@ -365,11 +675,19 @@ declare namespace DevOpsGuru {
     /**
      *  The returned CloudFormationHealthOverview object that contains an InsightHealthOverview object with the requested system health information. 
      */
-    CloudFormation: CloudFormationHealths;
+    CloudFormation?: CloudFormationHealths;
+    /**
+     * An array of ServiceHealth objects that describes the health of the Amazon Web Services services associated with the resources in the collection.
+     */
+    Service?: ServiceHealths;
     /**
      * The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.
      */
     NextToken?: UuidNextToken;
+    /**
+     * The Amazon Web Services tags that are used by resources in the resource collection. Tags help you identify and organize your Amazon Web Services resources. Many Amazon Web Services services support tagging, so you can assign the same tag to resources from different services to indicate that the resources are related. For example, you can assign the same tag to an Amazon DynamoDB table resource that you assign to an Lambda function. For more information about using tags, see the Tagging best practices whitepaper.  Each Amazon Web Services tag has two parts.    A tag key (for example, CostCenter, Environment, Project, or Secret). Tag keys are case-sensitive.   An optional field known as a tag value (for example, 111122223333, Production, or a team name). Omitting the tag value is the same as using an empty string. Like tag keys, tag values are case-sensitive.   Together these are known as key-value pairs.  The string used for a key in a tag that you use to define your resource coverage must begin with the prefix Devops-guru-. The tag key might be Devops-guru-deployment-application or Devops-guru-rds-application. While keys are case-sensitive, the case of key characters don't matter to DevOps Guru. For example, DevOps Guru works with a key named devops-guru-rds and a key named DevOps-Guru-RDS. Possible key/value pairs in your application might be Devops-Guru-production-application/RDS or Devops-Guru-production-application/containers. 
+     */
+    Tags?: TagHealths;
   }
   export interface DescribeServiceIntegrationRequest {
   }
@@ -397,7 +715,7 @@ declare namespace DevOpsGuru {
      */
     Time?: Timestamp;
     /**
-     *  The AWS source that emitted the event. 
+     *  The Amazon Web Services source that emitted the event. 
      */
     EventSource?: EventSource;
     /**
@@ -440,6 +758,13 @@ declare namespace DevOpsGuru {
   export type EventResourceType = string;
   export type EventResources = EventResource[];
   export type EventSource = string;
+  export type EventSourceOptInStatus = "ENABLED"|"DISABLED"|string;
+  export interface EventSourcesConfig {
+    /**
+     * 
+     */
+    AmazonCodeGuruProfiler?: AmazonCodeGuruProfilerIntegration;
+  }
   export interface EventTimeRange {
     /**
      *  The time when the event started. 
@@ -451,9 +776,41 @@ declare namespace DevOpsGuru {
     ToTime: Timestamp;
   }
   export type Events = Event[];
+  export interface GetCostEstimationRequest {
+    /**
+     * The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.
+     */
+    NextToken?: UuidNextToken;
+  }
+  export interface GetCostEstimationResponse {
+    /**
+     * The collection of the Amazon Web Services resources used to create your monthly DevOps Guru cost estimate.
+     */
+    ResourceCollection?: CostEstimationResourceCollectionFilter;
+    /**
+     * The status of creating this cost estimate. If it's still in progress, the status ONGOING is returned. If it is finished, the status COMPLETED is returned.
+     */
+    Status?: CostEstimationStatus;
+    /**
+     * An array of ResourceCost objects that each contains details about the monthly cost estimate to analyze one of your Amazon Web Services resources.
+     */
+    Costs?: ServiceResourceCosts;
+    /**
+     * The start and end time of the cost estimation.
+     */
+    TimeRange?: CostEstimationTimeRange;
+    /**
+     * The estimated monthly cost to analyze the Amazon Web Services resources. This value is the sum of the estimated costs to analyze each resource in the Costs object in this response.
+     */
+    TotalCost?: Cost;
+    /**
+     * The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.
+     */
+    NextToken?: UuidNextToken;
+  }
   export interface GetResourceCollectionRequest {
     /**
-     *  The type of AWS resource collections to return. The one valid value is CLOUD_FORMATION for AWS CloudFormation stacks. 
+     *  The type of Amazon Web Services resource collections to return. The one valid value is CLOUD_FORMATION for Amazon Web Services CloudFormation stacks. 
      */
     ResourceCollectionType: ResourceCollectionType;
     /**
@@ -463,7 +820,7 @@ declare namespace DevOpsGuru {
   }
   export interface GetResourceCollectionResponse {
     /**
-     *  The requested list of AWS resource collections. The one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze only the AWS resources that are defined in the stacks. 
+     *  The requested list of Amazon Web Services resource collections. The two types of Amazon Web Services resource collections supported are Amazon Web Services CloudFormation stacks and Amazon Web Services resources that contain the same Amazon Web Services tag. DevOps Guru can be configured to analyze the Amazon Web Services resources that are defined in the stacks or that are tagged using the same tag key. You can specify up to 500 Amazon Web Services CloudFormation stacks. 
      */
     ResourceCollection?: ResourceCollectionFilter;
     /**
@@ -471,6 +828,7 @@ declare namespace DevOpsGuru {
      */
     NextToken?: UuidNextToken;
   }
+  export type InsightDescription = string;
   export interface InsightFeedback {
     /**
      *  The insight feedback ID. 
@@ -531,6 +889,10 @@ declare namespace DevOpsGuru {
      * The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.
      */
     NextToken?: UuidNextToken;
+    /**
+     * The ID of the Amazon Web Services account. 
+     */
+    AccountId?: AwsAccountId;
   }
   export interface ListAnomaliesForInsightResponse {
     /**
@@ -560,7 +922,7 @@ declare namespace DevOpsGuru {
      */
     EventClass?: EventClass;
     /**
-     *  The AWS source that emitted the events you want to filter for. 
+     *  The Amazon Web Services source that emitted the events you want to filter for. 
      */
     EventSource?: EventSource;
     /**
@@ -583,6 +945,10 @@ declare namespace DevOpsGuru {
      * The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.
      */
     NextToken?: UuidNextToken;
+    /**
+     * The ID of the Amazon Web Services account. 
+     */
+    AccountId?: AwsAccountId;
   }
   export interface ListEventsResponse {
     /**
@@ -594,6 +960,7 @@ declare namespace DevOpsGuru {
      */
     NextToken?: UuidNextToken;
   }
+  export type ListInsightsAccountIdList = AwsAccountId[];
   export interface ListInsightsAnyStatusFilter {
     /**
      *  Use to filter for either REACTIVE or PROACTIVE insights. 
@@ -621,6 +988,7 @@ declare namespace DevOpsGuru {
      */
     Type: InsightType;
   }
+  export type ListInsightsOrganizationalUnitIdList = OrganizationalUnitId[];
   export interface ListInsightsRequest {
     /**
      *  A filter used to filter the returned insights by their status. You can specify one status filter. 
@@ -679,6 +1047,39 @@ declare namespace DevOpsGuru {
      */
     NextToken?: UuidNextToken;
   }
+  export interface ListOrganizationInsightsRequest {
+    StatusFilter: ListInsightsStatusFilter;
+    /**
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
+     */
+    MaxResults?: ListInsightsMaxResults;
+    /**
+     * The ID of the Amazon Web Services account. 
+     */
+    AccountIds?: ListInsightsAccountIdList;
+    /**
+     * The ID of the organizational unit.
+     */
+    OrganizationalUnitIds?: ListInsightsOrganizationalUnitIdList;
+    /**
+     * The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.
+     */
+    NextToken?: UuidNextToken;
+  }
+  export interface ListOrganizationInsightsResponse {
+    /**
+     * An integer that specifies the number of open proactive insights in your Amazon Web Services account.
+     */
+    ProactiveInsights?: ProactiveOrganizationInsights;
+    /**
+     * An integer that specifies the number of open reactive insights in your Amazon Web Services account.
+     */
+    ReactiveInsights?: ReactiveOrganizationInsights;
+    /**
+     * The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.
+     */
+    NextToken?: UuidNextToken;
+  }
   export interface ListRecommendationsRequest {
     /**
      *  The ID of the requested insight. 
@@ -688,6 +1089,14 @@ declare namespace DevOpsGuru {
      * The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.
      */
     NextToken?: UuidNextToken;
+    /**
+     * A locale that specifies the language to use for recommendations.
+     */
+    Locale?: Locale;
+    /**
+     * The ID of the Amazon Web Services account. 
+     */
+    AccountId?: AwsAccountId;
   }
   export interface ListRecommendationsResponse {
     /**
@@ -699,7 +1108,9 @@ declare namespace DevOpsGuru {
      */
     NextToken?: UuidNextToken;
   }
+  export type Locale = "DE_DE"|"EN_US"|"EN_GB"|"ES_ES"|"FR_FR"|"IT_IT"|"JA_JP"|"KO_KR"|"PT_BR"|"ZH_CN"|"ZH_TW"|string;
   export type MeanTimeToRecoverInMilliseconds = number;
+  export type MetricValue = number;
   export interface NotificationChannel {
     /**
      *  The ID of a notification channel. 
@@ -712,7 +1123,7 @@ declare namespace DevOpsGuru {
   }
   export interface NotificationChannelConfig {
     /**
-     *  Information about a notification channel configured in DevOps Guru to send notifications when insights are created.  If you use an Amazon SNS topic in another account, you must attach a policy to it that grants DevOps Guru permission to it notifications. DevOps Guru adds the required policy on your behalf to send notifications using Amazon SNS in your account. For more information, see Permissions for cross account Amazon SNS topics. If you use an Amazon SNS topic that is encrypted by an AWS Key Management Service customer-managed key (CMK), then you must add permissions to the CMK. For more information, see Permissions for AWS KMS–encrypted Amazon SNS topics.
+     *  Information about a notification channel configured in DevOps Guru to send notifications when insights are created.  If you use an Amazon SNS topic in another account, you must attach a policy to it that grants DevOps Guru permission to it notifications. DevOps Guru adds the required policy on your behalf to send notifications using Amazon SNS in your account. For more information, see Permissions for cross account Amazon SNS topics. If you use an Amazon SNS topic that is encrypted by an Amazon Web Services Key Management Service customer-managed key (CMK), then you must add permissions to the CMK. For more information, see Permissions for Amazon Web Services KMS–encrypted Amazon SNS topics.
      */
     Sns: SnsChannelConfig;
   }
@@ -724,17 +1135,133 @@ declare namespace DevOpsGuru {
   export type NumReactiveInsights = number;
   export interface OpsCenterIntegration {
     /**
-     *  Specifies if DevOps Guru is enabled to create an AWS Systems Manager OpsItem for each created insight. 
+     *  Specifies if DevOps Guru is enabled to create an Amazon Web Services Systems Manager OpsItem for each created insight. 
      */
     OptInStatus?: OptInStatus;
   }
   export interface OpsCenterIntegrationConfig {
     /**
-     *  Specifies if DevOps Guru is enabled to create an AWS Systems Manager OpsItem for each created insight. 
+     *  Specifies if DevOps Guru is enabled to create an Amazon Web Services Systems Manager OpsItem for each created insight. 
      */
     OptInStatus?: OptInStatus;
   }
   export type OptInStatus = "ENABLED"|"DISABLED"|string;
+  export type OrganizationResourceCollectionMaxResults = number;
+  export type OrganizationResourceCollectionType = "AWS_CLOUD_FORMATION"|"AWS_SERVICE"|"AWS_ACCOUNT"|"AWS_TAGS"|string;
+  export type OrganizationalUnitId = string;
+  export type OrganizationalUnitIdList = OrganizationalUnitId[];
+  export type PerformanceInsightsMetricDimension = string;
+  export interface PerformanceInsightsMetricDimensionGroup {
+    /**
+     * The name of the dimension group. Its valid values are:    db - The name of the database to which the client is connected (only Aurora PostgreSQL, Amazon RDS PostgreSQL, Aurora MySQL, Amazon RDS MySQL, and MariaDB)    db.application - The name of the application that is connected to the database (only Aurora PostgreSQL and RDS PostgreSQL)    db.host - The host name of the connected client (all engines)    db.session_type - The type of the current session (only Aurora PostgreSQL and RDS PostgreSQL)    db.sql - The SQL that is currently executing (all engines)    db.sql_tokenized - The SQL digest (all engines)    db.wait_event - The event for which the database backend is waiting (all engines)    db.wait_event_type - The type of event for which the database backend is waiting (all engines)    db.user - The user logged in to the database (all engines)  
+     */
+    Group?: PerformanceInsightsMetricGroup;
+    /**
+     * A list of specific dimensions from a dimension group. If this parameter is not present, then it signifies that all of the dimensions in the group were requested or are present in the response. Valid values for elements in the Dimensions array are:    db.application.name - The name of the application that is connected to the database (only Aurora PostgreSQL and RDS PostgreSQL)    db.host.id - The host ID of the connected client (all engines)    db.host.name - The host name of the connected client (all engines)    db.name - The name of the database to which the client is connected (only Aurora PostgreSQL, Amazon RDS PostgreSQL, Aurora MySQL, Amazon RDS MySQL, and MariaDB)    db.session_type.name - The type of the current session (only Aurora PostgreSQL and RDS PostgreSQL)    db.sql.id - The SQL ID generated by Performance Insights (all engines)    db.sql.db_id - The SQL ID generated by the database (all engines)    db.sql.statement - The SQL text that is being executed (all engines)    db.sql.tokenized_id     db.sql_tokenized.id - The SQL digest ID generated by Performance Insights (all engines)    db.sql_tokenized.db_id - SQL digest ID generated by the database (all engines)    db.sql_tokenized.statement - The SQL digest text (all engines)    db.user.id - The ID of the user logged in to the database (all engines)    db.user.name - The name of the user logged in to the database (all engines)    db.wait_event.name - The event for which the backend is waiting (all engines)    db.wait_event.type - The type of event for which the backend is waiting (all engines)    db.wait_event_type.name - The name of the event type for which the backend is waiting (all engines)  
+     */
+    Dimensions?: PerformanceInsightsMetricDimensions;
+    /**
+     * The maximum number of items to fetch for this dimension group.
+     */
+    Limit?: PerformanceInsightsMetricLimitInteger;
+  }
+  export type PerformanceInsightsMetricDimensions = PerformanceInsightsMetricDimension[];
+  export type PerformanceInsightsMetricDisplayName = string;
+  export type PerformanceInsightsMetricFilterKey = string;
+  export type PerformanceInsightsMetricFilterMap = {[key: string]: PerformanceInsightsMetricFilterValue};
+  export type PerformanceInsightsMetricFilterValue = string;
+  export type PerformanceInsightsMetricGroup = string;
+  export type PerformanceInsightsMetricLimitInteger = number;
+  export type PerformanceInsightsMetricName = string;
+  export interface PerformanceInsightsMetricQuery {
+    /**
+     * The name of the meteric used used when querying an Performance Insights GetResourceMetrics API for anomaly metrics. Valid values for Metric are:    db.load.avg - a scaled representation of the number of active sessions for the database engine.    db.sampledload.avg - the raw number of active sessions for the database engine.   If the number of active sessions is less than an internal Performance Insights threshold, db.load.avg and db.sampledload.avg are the same value. If the number of active sessions is greater than the internal threshold, Performance Insights samples the active sessions, with db.load.avg showing the scaled values, db.sampledload.avg showing the raw values, and db.sampledload.avg less than db.load.avg. For most use cases, you can query db.load.avg only. 
+     */
+    Metric?: PerformanceInsightsMetricName;
+    /**
+     * The specification for how to aggregate the data points from a Performance Insights GetResourceMetrics API query. The Performance Insights query returns all of the dimensions within that group, unless you provide the names of specific dimensions within that group. You can also request that Performance Insights return a limited number of values for a dimension.
+     */
+    GroupBy?: PerformanceInsightsMetricDimensionGroup;
+    /**
+     * One or more filters to apply to a Performance Insights GetResourceMetrics API query. Restrictions:   Any number of filters by the same dimension, as specified in the GroupBy parameter.   A single filter for any other dimension in this dimension group.  
+     */
+    Filter?: PerformanceInsightsMetricFilterMap;
+  }
+  export type PerformanceInsightsMetricUnit = string;
+  export interface PerformanceInsightsMetricsDetail {
+    /**
+     * The name used for a specific Performance Insights metric.
+     */
+    MetricDisplayName?: PerformanceInsightsMetricDisplayName;
+    /**
+     * The unit of measure for a metric. For example, a session or a process.
+     */
+    Unit?: PerformanceInsightsMetricUnit;
+    /**
+     * A single query to be processed for the metric. For more information, see  PerformanceInsightsMetricQuery .
+     */
+    MetricQuery?: PerformanceInsightsMetricQuery;
+    /**
+     *  For more information, see  PerformanceInsightsReferenceData . 
+     */
+    ReferenceData?: PerformanceInsightsReferenceDataList;
+    /**
+     * The metric statistics during the anomalous period detected by DevOps Guru;
+     */
+    StatsAtAnomaly?: PerformanceInsightsStats;
+    /**
+     * Typical metric statistics that are not considered anomalous. When DevOps Guru analyzes metrics, it compares them to StatsAtBaseline to help determine if they are anomalous.
+     */
+    StatsAtBaseline?: PerformanceInsightsStats;
+  }
+  export type PerformanceInsightsMetricsDetails = PerformanceInsightsMetricsDetail[];
+  export interface PerformanceInsightsReferenceComparisonValues {
+    /**
+     * A scalar value DevOps Guru for a metric that DevOps Guru compares to actual metric values. This reference value is used to determine if an actual metric value should be considered anomalous.
+     */
+    ReferenceScalar?: PerformanceInsightsReferenceScalar;
+    /**
+     * A metric that DevOps Guru compares to actual metric values. This reference metric is used to determine if an actual metric should be considered anomalous.
+     */
+    ReferenceMetric?: PerformanceInsightsReferenceMetric;
+  }
+  export interface PerformanceInsightsReferenceData {
+    /**
+     * The name of the reference data.
+     */
+    Name?: PerformanceInsightsReferenceName;
+    /**
+     * The specific reference values used to evaluate the Performance Insights. For more information, see  PerformanceInsightsReferenceComparisonValues . 
+     */
+    ComparisonValues?: PerformanceInsightsReferenceComparisonValues;
+  }
+  export type PerformanceInsightsReferenceDataList = PerformanceInsightsReferenceData[];
+  export interface PerformanceInsightsReferenceMetric {
+    /**
+     * A query to be processed on the metric.
+     */
+    MetricQuery?: PerformanceInsightsMetricQuery;
+  }
+  export type PerformanceInsightsReferenceName = string;
+  export interface PerformanceInsightsReferenceScalar {
+    /**
+     * The reference value.
+     */
+    Value?: PerformanceInsightsValueDouble;
+  }
+  export interface PerformanceInsightsStat {
+    /**
+     * The statistic type.
+     */
+    Type?: PerformanceInsightsStatType;
+    /**
+     * The value of the statistic.
+     */
+    Value?: PerformanceInsightsValueDouble;
+  }
+  export type PerformanceInsightsStatType = string;
+  export type PerformanceInsightsStats = PerformanceInsightsStat[];
+  export type PerformanceInsightsValueDouble = number;
   export interface PredictionTimeRange {
     /**
      *  The time range during which a metric limit is expected to be exceeded. This applies to proactive insights only. 
@@ -752,7 +1279,7 @@ declare namespace DevOpsGuru {
      */
     Id?: AnomalyId;
     /**
-     *  The severity of a proactive anomaly. 
+     * The severity of the anomaly. The severity of anomalies that generate an insight determine that insight's severity. For more information, see Understanding insight severities in the Amazon DevOps Guru User Guide.
      */
     Severity?: AnomalySeverity;
     /**
@@ -764,6 +1291,10 @@ declare namespace DevOpsGuru {
      */
     UpdateTime?: Timestamp;
     AnomalyTimeRange?: AnomalyTimeRange;
+    /**
+     *  An AnomalyReportedTimeRange object that specifies the time range between when the anomaly is opened and the time when it is closed. 
+     */
+    AnomalyReportedTimeRange?: AnomalyReportedTimeRange;
     PredictionTimeRange?: PredictionTimeRange;
     /**
      *  Details about the source of the analyzed operational data that triggered the anomaly. The one supported source is Amazon CloudWatch metrics. 
@@ -778,6 +1309,14 @@ declare namespace DevOpsGuru {
      *  A threshold that was exceeded by behavior in analyzed resources. Exceeding this threshold is related to the anomalous behavior that generated this anomaly. 
      */
     Limit?: AnomalyLimit;
+    /**
+     * The metadata for the anomaly.
+     */
+    SourceMetadata?: AnomalySourceMetadata;
+    /**
+     * Information about a resource in which DevOps Guru detected anomalous behavior.
+     */
+    AnomalyResources?: AnomalyResources;
   }
   export interface ProactiveAnomalySummary {
     /**
@@ -785,7 +1324,7 @@ declare namespace DevOpsGuru {
      */
     Id?: AnomalyId;
     /**
-     * The severity of the anomaly.
+     * The severity of the anomaly. The severity of anomalies that generate an insight determine that insight's severity. For more information, see Understanding insight severities in the Amazon DevOps Guru User Guide.
      */
     Severity?: AnomalySeverity;
     /**
@@ -797,6 +1336,10 @@ declare namespace DevOpsGuru {
      */
     UpdateTime?: Timestamp;
     AnomalyTimeRange?: AnomalyTimeRange;
+    /**
+     *  An AnomalyReportedTimeRange object that specifies the time range between when the anomaly is opened and the time when it is closed. 
+     */
+    AnomalyReportedTimeRange?: AnomalyReportedTimeRange;
     PredictionTimeRange?: PredictionTimeRange;
     /**
      *  Details about the source of the analyzed operational data that triggered the anomaly. The one supported source is Amazon CloudWatch metrics. 
@@ -811,6 +1354,14 @@ declare namespace DevOpsGuru {
      *  A threshold that was exceeded by behavior in analyzed resources. Exceeding this threshold is related to the anomalous behavior that generated this anomaly. 
      */
     Limit?: AnomalyLimit;
+    /**
+     * Returns the metadata of the source.
+     */
+    SourceMetadata?: AnomalySourceMetadata;
+    /**
+     * Information about a resource in which DevOps Guru detected anomalous behavior.
+     */
+    AnomalyResources?: AnomalyResources;
   }
   export interface ProactiveInsight {
     /**
@@ -822,7 +1373,7 @@ declare namespace DevOpsGuru {
      */
     Name?: InsightName;
     /**
-     * The severity of the proactive insight. 
+     * The severity of the insight. For more information, see Understanding insight severities in the Amazon DevOps Guru User Guide.
      */
     Severity?: InsightSeverity;
     /**
@@ -833,9 +1384,13 @@ declare namespace DevOpsGuru {
     PredictionTimeRange?: PredictionTimeRange;
     ResourceCollection?: ResourceCollection;
     /**
-     *  The ID of the AWS System Manager OpsItem created for this insight. You must enable the creation of OpstItems insights before they are created for each insight. 
+     *  The ID of the Amazon Web Services System Manager OpsItem created for this insight. You must enable the creation of OpstItems insights before they are created for each insight. 
      */
     SsmOpsItemId?: SsmOpsItemId;
+    /**
+     * Describes the proactive insight.
+     */
+    Description?: InsightDescription;
   }
   export interface ProactiveInsightSummary {
     /**
@@ -847,7 +1402,7 @@ declare namespace DevOpsGuru {
      */
     Name?: InsightName;
     /**
-     * The severity of the proactive insight. 
+     * The severity of the insight. For more information, see Understanding insight severities in the Amazon DevOps Guru User Guide.
      */
     Severity?: InsightSeverity;
     /**
@@ -857,8 +1412,47 @@ declare namespace DevOpsGuru {
     InsightTimeRange?: InsightTimeRange;
     PredictionTimeRange?: PredictionTimeRange;
     ResourceCollection?: ResourceCollection;
+    /**
+     * A collection of the names of Amazon Web Services services.
+     */
+    ServiceCollection?: ServiceCollection;
+    /**
+     * The Amazon Resource Names (ARNs) of the Amazon Web Services resources that generated this insight.
+     */
+    AssociatedResourceArns?: AssociatedResourceArns;
   }
   export type ProactiveInsights = ProactiveInsightSummary[];
+  export interface ProactiveOrganizationInsightSummary {
+    /**
+     * The ID of the insight summary.
+     */
+    Id?: InsightId;
+    /**
+     * The ID of the Amazon Web Services account.
+     */
+    AccountId?: AwsAccountId;
+    /**
+     * The ID of the organizational unit.
+     */
+    OrganizationalUnitId?: OrganizationalUnitId;
+    /**
+     * The name of the insight summary.
+     */
+    Name?: InsightName;
+    /**
+     *  An array of severity values used to search for insights. For more information, see Understanding insight severities in the Amazon DevOps Guru User Guide.
+     */
+    Severity?: InsightSeverity;
+    /**
+     *  An array of status values used to search for insights. 
+     */
+    Status?: InsightStatus;
+    InsightTimeRange?: InsightTimeRange;
+    PredictionTimeRange?: PredictionTimeRange;
+    ResourceCollection?: ResourceCollection;
+    ServiceCollection?: ServiceCollection;
+  }
+  export type ProactiveOrganizationInsights = ProactiveOrganizationInsightSummary[];
   export interface PutFeedbackRequest {
     /**
      *  The feedback from customers is about the recommendations in this insight. 
@@ -874,7 +1468,7 @@ declare namespace DevOpsGuru {
      */
     Id?: AnomalyId;
     /**
-     * The severity of the anomaly. 
+     * The severity of the anomaly. The severity of anomalies that generate an insight determine that insight's severity. For more information, see Understanding insight severities in the Amazon DevOps Guru User Guide.
      */
     Severity?: AnomalySeverity;
     /**
@@ -883,6 +1477,10 @@ declare namespace DevOpsGuru {
     Status?: AnomalyStatus;
     AnomalyTimeRange?: AnomalyTimeRange;
     /**
+     *  An AnomalyReportedTimeRange object that specifies the time range between when the anomaly is opened and the time when it is closed. 
+     */
+    AnomalyReportedTimeRange?: AnomalyReportedTimeRange;
+    /**
      *  Details about the source of the analyzed operational data that triggered the anomaly. The one supported source is Amazon CloudWatch metrics. 
      */
     SourceDetails?: AnomalySourceDetails;
@@ -891,6 +1489,26 @@ declare namespace DevOpsGuru {
      */
     AssociatedInsightId?: InsightId;
     ResourceCollection?: ResourceCollection;
+    /**
+     * The type of the reactive anomaly. It can be one of the following types.    CAUSAL - the anomaly can cause a new insight.    CONTEXTUAL - the anomaly contains additional information about an insight or its causal anomaly.  
+     */
+    Type?: AnomalyType;
+    /**
+     * The name of the reactive anomaly.
+     */
+    Name?: AnomalyName;
+    /**
+     * A description of the reactive anomaly.
+     */
+    Description?: AnomalyDescription;
+    /**
+     * The ID of the causal anomaly that is associated with this reactive anomaly. The ID of a `CAUSAL` anomaly is always `NULL`.
+     */
+    CausalAnomalyId?: AnomalyId;
+    /**
+     * The Amazon Web Services resources in which anomalous behavior was detected by DevOps Guru.
+     */
+    AnomalyResources?: AnomalyResources;
   }
   export interface ReactiveAnomalySummary {
     /**
@@ -898,7 +1516,7 @@ declare namespace DevOpsGuru {
      */
     Id?: AnomalyId;
     /**
-     *  The severity of the reactive anomaly. 
+     * The severity of the anomaly. The severity of anomalies that generate an insight determine that insight's severity. For more information, see Understanding insight severities in the Amazon DevOps Guru User Guide.
      */
     Severity?: AnomalySeverity;
     /**
@@ -907,6 +1525,10 @@ declare namespace DevOpsGuru {
     Status?: AnomalyStatus;
     AnomalyTimeRange?: AnomalyTimeRange;
     /**
+     *  An AnomalyReportedTimeRange object that specifies the time range between when the anomaly is opened and the time when it is closed. 
+     */
+    AnomalyReportedTimeRange?: AnomalyReportedTimeRange;
+    /**
      *  Details about the source of the analyzed operational data that triggered the anomaly. The one supported source is Amazon CloudWatch metrics. 
      */
     SourceDetails?: AnomalySourceDetails;
@@ -915,6 +1537,26 @@ declare namespace DevOpsGuru {
      */
     AssociatedInsightId?: InsightId;
     ResourceCollection?: ResourceCollection;
+    /**
+     * The type of the reactive anomaly. It can be one of the following types.    CAUSAL - the anomaly can cause a new insight.    CONTEXTUAL - the anomaly contains additional information about an insight or its causal anomaly.  
+     */
+    Type?: AnomalyType;
+    /**
+     * The name of the reactive anomaly.
+     */
+    Name?: AnomalyName;
+    /**
+     * A description of the reactive anomaly.
+     */
+    Description?: AnomalyDescription;
+    /**
+     * The ID of the causal anomaly that is associated with this reactive anomaly. The ID of a `CAUSAL` anomaly is always `NULL`.
+     */
+    CausalAnomalyId?: AnomalyId;
+    /**
+     * The Amazon Web Services resources in which anomalous behavior was detected by DevOps Guru.
+     */
+    AnomalyResources?: AnomalyResources;
   }
   export interface ReactiveInsight {
     /**
@@ -926,7 +1568,7 @@ declare namespace DevOpsGuru {
      */
     Name?: InsightName;
     /**
-     *  The severity of a reactive insight. 
+     * The severity of the insight. For more information, see Understanding insight severities in the Amazon DevOps Guru User Guide.
      */
     Severity?: InsightSeverity;
     /**
@@ -936,9 +1578,13 @@ declare namespace DevOpsGuru {
     InsightTimeRange?: InsightTimeRange;
     ResourceCollection?: ResourceCollection;
     /**
-     *  The ID of the AWS System Manager OpsItem created for this insight. You must enable the creation of OpstItems insights before they are created for each insight. 
+     *  The ID of the Amazon Web Services System Manager OpsItem created for this insight. You must enable the creation of OpstItems insights before they are created for each insight. 
      */
     SsmOpsItemId?: SsmOpsItemId;
+    /**
+     * Describes the reactive insight.
+     */
+    Description?: InsightDescription;
   }
   export interface ReactiveInsightSummary {
     /**
@@ -950,7 +1596,7 @@ declare namespace DevOpsGuru {
      */
     Name?: InsightName;
     /**
-     *  The severity of a reactive insight. 
+     * The severity of the insight. For more information, see Understanding insight severities in the Amazon DevOps Guru User Guide.
      */
     Severity?: InsightSeverity;
     /**
@@ -959,8 +1605,46 @@ declare namespace DevOpsGuru {
     Status?: InsightStatus;
     InsightTimeRange?: InsightTimeRange;
     ResourceCollection?: ResourceCollection;
+    /**
+     * A collection of the names of Amazon Web Services services.
+     */
+    ServiceCollection?: ServiceCollection;
+    /**
+     * The Amazon Resource Names (ARNs) of the Amazon Web Services resources that generated this insight.
+     */
+    AssociatedResourceArns?: AssociatedResourceArns;
   }
   export type ReactiveInsights = ReactiveInsightSummary[];
+  export interface ReactiveOrganizationInsightSummary {
+    /**
+     * The ID of the insight summary.
+     */
+    Id?: InsightId;
+    /**
+     * The ID of the Amazon Web Services account. 
+     */
+    AccountId?: AwsAccountId;
+    /**
+     * The ID of the organizational unit.
+     */
+    OrganizationalUnitId?: OrganizationalUnitId;
+    /**
+     * The name of the insight summary.
+     */
+    Name?: InsightName;
+    /**
+     *  An array of severity values used to search for insights. For more information, see Understanding insight severities in the Amazon DevOps Guru User Guide.
+     */
+    Severity?: InsightSeverity;
+    /**
+     *  An array of status values used to search for insights. 
+     */
+    Status?: InsightStatus;
+    InsightTimeRange?: InsightTimeRange;
+    ResourceCollection?: ResourceCollection;
+    ServiceCollection?: ServiceCollection;
+  }
+  export type ReactiveOrganizationInsights = ReactiveOrganizationInsightSummary[];
   export interface Recommendation {
     /**
      *  A description of the problem. 
@@ -986,7 +1670,12 @@ declare namespace DevOpsGuru {
      *  Anomalies that are related to the problem. Use these Anomalies to learn more about what's happening and to help address the issue. 
      */
     RelatedAnomalies?: RecommendationRelatedAnomalies;
+    /**
+     * The category type of the recommendation.
+     */
+    Category?: RecommendationCategory;
   }
+  export type RecommendationCategory = string;
   export type RecommendationDescription = string;
   export type RecommendationLink = string;
   export type RecommendationName = string;
@@ -1001,6 +1690,10 @@ declare namespace DevOpsGuru {
      *  Information about where the anomalous behavior related the recommendation was found. For example, details in Amazon CloudWatch metrics. 
      */
     SourceDetails?: RelatedAnomalySourceDetails;
+    /**
+     * The ID of an anomaly that generated the insight with this recommendation.
+     */
+    AnomalyId?: AnomalyId;
   }
   export interface RecommendationRelatedAnomalyResource {
     /**
@@ -1008,7 +1701,7 @@ declare namespace DevOpsGuru {
      */
     Name?: RecommendationRelatedAnomalyResourceName;
     /**
-     *  The type of the resource. 
+     *  The type of the resource. Resource types take the same form that is used by Amazon Web Services CloudFormation resource type identifiers, service-provider::service-name::data-type-name. For example, AWS::RDS::DBCluster. For more information, see Amazon Web Services resource and property types reference in the Amazon Web Services CloudFormation User Guide.
      */
     Type?: RecommendationRelatedAnomalyResourceType;
   }
@@ -1040,7 +1733,7 @@ declare namespace DevOpsGuru {
      */
     Name?: RecommendationRelatedEventName;
     /**
-     *  A ResourceCollection object that contains arrays of the names of AWS CloudFormation stacks. 
+     *  A ResourceCollection object that contains arrays of the names of Amazon Web Services CloudFormation stacks. You can specify up to 500 Amazon Web Services CloudFormation stacks. 
      */
     Resources?: RecommendationRelatedEventResources;
   }
@@ -1069,20 +1762,32 @@ declare namespace DevOpsGuru {
   }
   export interface RemoveNotificationChannelResponse {
   }
+  export type ResourceArn = string;
   export interface ResourceCollection {
     /**
-     *  An array of the names of AWS CloudFormation stacks. The stacks define AWS resources that DevOps Guru analyzes. 
+     *  An array of the names of Amazon Web Services CloudFormation stacks. The stacks define Amazon Web Services resources that DevOps Guru analyzes. You can specify up to 500 Amazon Web Services CloudFormation stacks. 
      */
     CloudFormation?: CloudFormationCollection;
+    /**
+     * The Amazon Web Services tags that are used by resources in the resource collection. Tags help you identify and organize your Amazon Web Services resources. Many Amazon Web Services services support tagging, so you can assign the same tag to resources from different services to indicate that the resources are related. For example, you can assign the same tag to an Amazon DynamoDB table resource that you assign to an Lambda function. For more information about using tags, see the Tagging best practices whitepaper.  Each Amazon Web Services tag has two parts.    A tag key (for example, CostCenter, Environment, Project, or Secret). Tag keys are case-sensitive.   An optional field known as a tag value (for example, 111122223333, Production, or a team name). Omitting the tag value is the same as using an empty string. Like tag keys, tag values are case-sensitive.   Together these are known as key-value pairs.  The string used for a key in a tag that you use to define your resource coverage must begin with the prefix Devops-guru-. The tag key might be Devops-guru-deployment-application or Devops-guru-rds-application. While keys are case-sensitive, the case of key characters don't matter to DevOps Guru. For example, DevOps Guru works with a key named devops-guru-rds and a key named DevOps-Guru-RDS. Possible key/value pairs in your application might be Devops-Guru-production-application/RDS or Devops-Guru-production-application/containers. 
+     */
+    Tags?: TagCollections;
   }
   export interface ResourceCollectionFilter {
     /**
-     *  Information about AWS CloudFormation stacks. You can use stacks to specify which AWS resources in your account to analyze. For more information, see Stacks in the AWS CloudFormation User Guide. 
+     *  Information about Amazon Web Services CloudFormation stacks. You can use up to 500 stacks to specify which Amazon Web Services resources in your account to analyze. For more information, see Stacks in the Amazon Web Services CloudFormation User Guide. 
      */
     CloudFormation?: CloudFormationCollectionFilter;
+    /**
+     * The Amazon Web Services tags used to filter the resources in the resource collection. Tags help you identify and organize your Amazon Web Services resources. Many Amazon Web Services services support tagging, so you can assign the same tag to resources from different services to indicate that the resources are related. For example, you can assign the same tag to an Amazon DynamoDB table resource that you assign to an Lambda function. For more information about using tags, see the Tagging best practices whitepaper.  Each Amazon Web Services tag has two parts.    A tag key (for example, CostCenter, Environment, Project, or Secret). Tag keys are case-sensitive.   An optional field known as a tag value (for example, 111122223333, Production, or a team name). Omitting the tag value is the same as using an empty string. Like tag keys, tag values are case-sensitive.   Together these are known as key-value pairs.  The string used for a key in a tag that you use to define your resource coverage must begin with the prefix Devops-guru-. The tag key might be Devops-guru-deployment-application or Devops-guru-rds-application. While keys are case-sensitive, the case of key characters don't matter to DevOps Guru. For example, DevOps Guru works with a key named devops-guru-rds and a key named DevOps-Guru-RDS. Possible key/value pairs in your application might be Devops-Guru-production-application/RDS or Devops-Guru-production-application/containers. 
+     */
+    Tags?: TagCollectionFilters;
   }
-  export type ResourceCollectionType = "AWS_CLOUD_FORMATION"|string;
+  export type ResourceCollectionType = "AWS_CLOUD_FORMATION"|"AWS_SERVICE"|"AWS_TAGS"|string;
   export type ResourceHours = number;
+  export type ResourceName = string;
+  export type ResourceType = string;
+  export type SearchInsightsAccountIdList = AwsAccountId[];
   export interface SearchInsightsFilters {
     /**
      *  An array of severity values used to search for insights. 
@@ -1093,6 +1798,10 @@ declare namespace DevOpsGuru {
      */
     Statuses?: InsightStatuses;
     ResourceCollection?: ResourceCollection;
+    /**
+     * A collection of the names of Amazon Web Services services.
+     */
+    ServiceCollection?: ServiceCollection;
   }
   export type SearchInsightsMaxResults = number;
   export interface SearchInsightsRequest {
@@ -1131,12 +1840,114 @@ declare namespace DevOpsGuru {
      */
     NextToken?: UuidNextToken;
   }
+  export interface SearchOrganizationInsightsFilters {
+    /**
+     *  An array of severity values used to search for insights. 
+     */
+    Severities?: InsightSeverities;
+    /**
+     *  An array of status values used to search for insights. 
+     */
+    Statuses?: InsightStatuses;
+    ResourceCollection?: ResourceCollection;
+    ServiceCollection?: ServiceCollection;
+  }
+  export type SearchOrganizationInsightsMaxResults = number;
+  export interface SearchOrganizationInsightsRequest {
+    /**
+     * The ID of the Amazon Web Services account. 
+     */
+    AccountIds: SearchInsightsAccountIdList;
+    StartTimeRange: StartTimeRange;
+    /**
+     *  A SearchOrganizationInsightsFilters object that is used to set the severity and status filters on your insight search. 
+     */
+    Filters?: SearchOrganizationInsightsFilters;
+    /**
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
+     */
+    MaxResults?: SearchOrganizationInsightsMaxResults;
+    /**
+     * The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.
+     */
+    NextToken?: UuidNextToken;
+    /**
+     *  The type of insights you are searching for (REACTIVE or PROACTIVE). 
+     */
+    Type: InsightType;
+  }
+  export interface SearchOrganizationInsightsResponse {
+    /**
+     * An integer that specifies the number of open proactive insights in your Amazon Web Services account.
+     */
+    ProactiveInsights?: ProactiveInsights;
+    /**
+     * An integer that specifies the number of open reactive insights in your Amazon Web Services account.
+     */
+    ReactiveInsights?: ReactiveInsights;
+    /**
+     * The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.
+     */
+    NextToken?: UuidNextToken;
+  }
+  export interface ServiceCollection {
+    /**
+     * An array of strings that each specifies the name of an Amazon Web Services service.
+     */
+    ServiceNames?: ServiceNames;
+  }
+  export interface ServiceHealth {
+    /**
+     * The name of the Amazon Web Services service.
+     */
+    ServiceName?: ServiceName;
+    /**
+     * Represents the health of an Amazon Web Services service. This is a ServiceInsightHealth that contains the number of open proactive and reactive insights for this service.
+     */
+    Insight?: ServiceInsightHealth;
+  }
+  export type ServiceHealths = ServiceHealth[];
+  export interface ServiceInsightHealth {
+    /**
+     * The number of open proactive insights in the Amazon Web Services service
+     */
+    OpenProactiveInsights?: NumOpenProactiveInsights;
+    /**
+     * The number of open reactive insights in the Amazon Web Services service
+     */
+    OpenReactiveInsights?: NumOpenReactiveInsights;
+  }
   export interface ServiceIntegrationConfig {
     /**
-     *  Information about whether DevOps Guru is configured to create an OpsItem in AWS Systems Manager OpsCenter for each created insight. 
+     *  Information about whether DevOps Guru is configured to create an OpsItem in Amazon Web Services Systems Manager OpsCenter for each created insight. 
      */
     OpsCenter?: OpsCenterIntegration;
   }
+  export type ServiceName = "API_GATEWAY"|"APPLICATION_ELB"|"AUTO_SCALING_GROUP"|"CLOUD_FRONT"|"DYNAMO_DB"|"EC2"|"ECS"|"EKS"|"ELASTIC_BEANSTALK"|"ELASTI_CACHE"|"ELB"|"ES"|"KINESIS"|"LAMBDA"|"NAT_GATEWAY"|"NETWORK_ELB"|"RDS"|"REDSHIFT"|"ROUTE_53"|"S3"|"SAGE_MAKER"|"SNS"|"SQS"|"STEP_FUNCTIONS"|"SWF"|string;
+  export type ServiceNames = ServiceName[];
+  export interface ServiceResourceCost {
+    /**
+     * The type of the Amazon Web Services resource.
+     */
+    Type?: ResourceType;
+    /**
+     * The state of the resource. The resource is ACTIVE if it produces metrics, events, or logs within an hour, otherwise it is INACTIVE. You pay for the number of active Amazon Web Services resource hours analyzed for each resource. Inactive resources are not charged. 
+     */
+    State?: CostEstimationServiceResourceState;
+    /**
+     * The number of active resources analyzed for this service to create a monthly cost estimate.
+     */
+    Count?: CostEstimationServiceResourceCount;
+    /**
+     * The price per hour to analyze the resources in the service. For more information, see Estimate your Amazon DevOps Guru costs and Amazon DevOps Guru pricing.
+     */
+    UnitCost?: Cost;
+    /**
+     * The total estimated monthly cost to analyze the active resources for this resource.
+     */
+    Cost?: Cost;
+  }
+  export type ServiceResourceCosts = ServiceResourceCost[];
   export interface SnsChannelConfig {
     /**
      *  The Amazon Resource Name (ARN) of an Amazon Simple Notification Service topic. 
@@ -1146,6 +1957,18 @@ declare namespace DevOpsGuru {
   export type SsmOpsItemId = string;
   export type StackName = string;
   export type StackNames = StackName[];
+  export interface StartCostEstimationRequest {
+    /**
+     * The collection of Amazon Web Services resources used to create a monthly DevOps Guru cost estimate.
+     */
+    ResourceCollection: CostEstimationResourceCollectionFilter;
+    /**
+     * The idempotency token used to identify each cost estimate request.
+     */
+    ClientToken?: ClientToken;
+  }
+  export interface StartCostEstimationResponse {
+  }
   export interface StartTimeRange {
     /**
      *  The start time of the time range. 
@@ -1156,20 +1979,93 @@ declare namespace DevOpsGuru {
      */
     ToTime?: Timestamp;
   }
+  export interface TagCollection {
+    /**
+     * An Amazon Web Services tag key that is used to identify the Amazon Web Services resources that DevOps Guru analyzes. All Amazon Web Services resources in your account and Region tagged with this key make up your DevOps Guru application and analysis boundary.  The string used for a key in a tag that you use to define your resource coverage must begin with the prefix Devops-guru-. The tag key might be Devops-guru-deployment-application or Devops-guru-rds-application. While keys are case-sensitive, the case of key characters don't matter to DevOps Guru. For example, DevOps Guru works with a key named devops-guru-rds and a key named DevOps-Guru-RDS. Possible key/value pairs in your application might be Devops-Guru-production-application/RDS or Devops-Guru-production-application/containers. 
+     */
+    AppBoundaryKey: AppBoundaryKey;
+    /**
+     * The values in an Amazon Web Services tag collection. The tag's value is an optional field used to associate a string with the tag key (for example, 111122223333, Production, or a team name). The key and value are the tag's key pair. Omitting the tag value is the same as using an empty string. Like tag keys, tag values are case-sensitive. You can specify a maximum of 256 characters for a tag value.
+     */
+    TagValues: TagValues;
+  }
+  export interface TagCollectionFilter {
+    /**
+     * An Amazon Web Services tag key that is used to identify the Amazon Web Services resources that DevOps Guru analyzes. All Amazon Web Services resources in your account and Region tagged with this key make up your DevOps Guru application and analysis boundary.  The string used for a key in a tag that you use to define your resource coverage must begin with the prefix Devops-guru-. The tag key might be Devops-guru-deployment-application or Devops-guru-rds-application. While keys are case-sensitive, the case of key characters don't matter to DevOps Guru. For example, DevOps Guru works with a key named devops-guru-rds and a key named DevOps-Guru-RDS. Possible key/value pairs in your application might be Devops-Guru-production-application/RDS or Devops-Guru-production-application/containers. 
+     */
+    AppBoundaryKey: AppBoundaryKey;
+    /**
+     * The values in an Amazon Web Services tag collection. The tag's value is an optional field used to associate a string with the tag key (for example, 111122223333, Production, or a team name). The key and value are the tag's key pair. Omitting the tag value is the same as using an empty string. Like tag keys, tag values are case-sensitive. You can specify a maximum of 256 characters for a tag value.
+     */
+    TagValues: TagValues;
+  }
+  export type TagCollectionFilters = TagCollectionFilter[];
+  export type TagCollections = TagCollection[];
+  export interface TagCostEstimationResourceCollectionFilter {
+    /**
+     * An Amazon Web Services tag key that is used to identify the Amazon Web Services resources that DevOps Guru analyzes. All Amazon Web Services resources in your account and Region tagged with this key make up your DevOps Guru application and analysis boundary.  The string used for a key in a tag that you use to define your resource coverage must begin with the prefix Devops-guru-. The tag key might be Devops-guru-deployment-application or Devops-guru-rds-application. While keys are case-sensitive, the case of key characters don't matter to DevOps Guru. For example, DevOps Guru works with a key named devops-guru-rds and a key named DevOps-Guru-RDS. Possible key/value pairs in your application might be Devops-Guru-production-application/RDS or Devops-Guru-production-application/containers. 
+     */
+    AppBoundaryKey: AppBoundaryKey;
+    /**
+     * The values in an Amazon Web Services tag collection. The tag's value is an optional field used to associate a string with the tag key (for example, 111122223333, Production, or a team name). The key and value are the tag's key pair. Omitting the tag value is the same as using an empty string. Like tag keys, tag values are case-sensitive. You can specify a maximum of 256 characters for a tag value.
+     */
+    TagValues: CostEstimationTagValues;
+  }
+  export type TagCostEstimationResourceCollectionFilters = TagCostEstimationResourceCollectionFilter[];
+  export interface TagHealth {
+    /**
+     * An Amazon Web Services tag key that is used to identify the Amazon Web Services resources that DevOps Guru analyzes. All Amazon Web Services resources in your account and Region tagged with this key make up your DevOps Guru application and analysis boundary.  The string used for a key in a tag that you use to define your resource coverage must begin with the prefix Devops-guru-. The tag key might be Devops-guru-deployment-application or Devops-guru-rds-application. While keys are case-sensitive, the case of key characters don't matter to DevOps Guru. For example, DevOps Guru works with a key named devops-guru-rds and a key named DevOps-Guru-RDS. Possible key/value pairs in your application might be Devops-Guru-production-application/RDS or Devops-Guru-production-application/containers. 
+     */
+    AppBoundaryKey?: AppBoundaryKey;
+    /**
+     * The value in an Amazon Web Services tag. The tag's value is an optional field used to associate a string with the tag key (for example, 111122223333, Production, or a team name). The key and value are the tag's key pair. Omitting the tag value is the same as using an empty string. Like tag keys, tag values are case-sensitive. You can specify a maximum of 256 characters for a tag value.
+     */
+    TagValue?: TagValue;
+    /**
+     * Information about the health of the Amazon Web Services resources in your account that are specified by an Amazon Web Services tag, including the number of open proactive, open reactive insights, and the Mean Time to Recover (MTTR) of closed insights. 
+     */
+    Insight?: InsightHealth;
+  }
+  export type TagHealths = TagHealth[];
+  export type TagValue = string;
+  export type TagValues = TagValue[];
   export type Timestamp = Date;
+  export interface TimestampMetricValuePair {
+    /**
+     * A Timestamp that specifies the time the event occurred. 
+     */
+    Timestamp?: Timestamp;
+    /**
+     * Value of the anomalous metric data point at respective Timestamp.
+     */
+    MetricValue?: MetricValue;
+  }
+  export type TimestampMetricValuePairList = TimestampMetricValuePair[];
   export type TopicArn = string;
   export interface UpdateCloudFormationCollectionFilter {
     /**
-     *  An array of the name of stacks to update. 
+     *  An array of the names of the Amazon Web Services CloudFormation stacks to update. You can specify up to 500 Amazon Web Services CloudFormation stacks. 
      */
     StackNames?: UpdateStackNames;
+  }
+  export interface UpdateEventSourcesConfigRequest {
+    /**
+     * The name of the event source.
+     */
+    EventSources?: EventSourcesConfig;
+  }
+  export interface UpdateEventSourcesConfigResponse {
   }
   export type UpdateResourceCollectionAction = "ADD"|"REMOVE"|string;
   export interface UpdateResourceCollectionFilter {
     /**
-     *  An collection of AWS CloudFormation stacks. 
+     *  A collection of Amazon Web Services CloudFormation stacks. You can specify up to 500 Amazon Web Services CloudFormation stacks. 
      */
     CloudFormation?: UpdateCloudFormationCollectionFilter;
+    /**
+     * The updated Amazon Web Services tags used to filter the resources in the resource collection. Tags help you identify and organize your Amazon Web Services resources. Many Amazon Web Services services support tagging, so you can assign the same tag to resources from different services to indicate that the resources are related. For example, you can assign the same tag to an Amazon DynamoDB table resource that you assign to an Lambda function. For more information about using tags, see the Tagging best practices whitepaper.  Each Amazon Web Services tag has two parts.    A tag key (for example, CostCenter, Environment, Project, or Secret). Tag keys are case-sensitive.   An optional field known as a tag value (for example, 111122223333, Production, or a team name). Omitting the tag value is the same as using an empty string. Like tag keys, tag values are case-sensitive.   Together these are known as key-value pairs.  The string used for a key in a tag that you use to define your resource coverage must begin with the prefix Devops-guru-. The tag key might be Devops-guru-deployment-application or Devops-guru-rds-application. While keys are case-sensitive, the case of key characters don't matter to DevOps Guru. For example, DevOps Guru works with a key named devops-guru-rds and a key named DevOps-Guru-RDS. Possible key/value pairs in your application might be Devops-Guru-production-application/RDS or Devops-Guru-production-application/containers. 
+     */
+    Tags?: UpdateTagCollectionFilters;
   }
   export interface UpdateResourceCollectionRequest {
     /**
@@ -1192,6 +2088,18 @@ declare namespace DevOpsGuru {
   export interface UpdateServiceIntegrationResponse {
   }
   export type UpdateStackNames = StackName[];
+  export interface UpdateTagCollectionFilter {
+    /**
+     * An Amazon Web Services tag key that is used to identify the Amazon Web Services resources that DevOps Guru analyzes. All Amazon Web Services resources in your account and Region tagged with this key make up your DevOps Guru application and analysis boundary.  The string used for a key in a tag that you use to define your resource coverage must begin with the prefix Devops-guru-. The tag key might be Devops-guru-deployment-application or Devops-guru-rds-application. While keys are case-sensitive, the case of key characters don't matter to DevOps Guru. For example, DevOps Guru works with a key named devops-guru-rds and a key named DevOps-Guru-RDS. Possible key/value pairs in your application might be Devops-Guru-production-application/RDS or Devops-Guru-production-application/containers. 
+     */
+    AppBoundaryKey: AppBoundaryKey;
+    /**
+     * The values in an Amazon Web Services tag collection. The tag's value is an optional field used to associate a string with the tag key (for example, 111122223333, Production, or a team name). The key and value are the tag's key pair. Omitting the tag value is the same as using an empty string. Like tag keys, tag values are case-sensitive. You can specify a maximum of 256 characters for a tag value.
+     */
+    TagValues: UpdateTagValues;
+  }
+  export type UpdateTagCollectionFilters = UpdateTagCollectionFilter[];
+  export type UpdateTagValues = TagValue[];
   export type UuidNextToken = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

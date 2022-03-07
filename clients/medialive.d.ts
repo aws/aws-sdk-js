@@ -62,6 +62,14 @@ declare class MediaLive extends Service {
    */
   cancelInputDeviceTransfer(callback?: (err: AWSError, data: MediaLive.Types.CancelInputDeviceTransferResponse) => void): Request<MediaLive.Types.CancelInputDeviceTransferResponse, AWSError>;
   /**
+   * Send a request to claim an AWS Elemental device that you have purchased from a third-party vendor. After the request succeeds, you will own the device.
+   */
+  claimDevice(params: MediaLive.Types.ClaimDeviceRequest, callback?: (err: AWSError, data: MediaLive.Types.ClaimDeviceResponse) => void): Request<MediaLive.Types.ClaimDeviceResponse, AWSError>;
+  /**
+   * Send a request to claim an AWS Elemental device that you have purchased from a third-party vendor. After the request succeeds, you will own the device.
+   */
+  claimDevice(callback?: (err: AWSError, data: MediaLive.Types.ClaimDeviceResponse) => void): Request<MediaLive.Types.ClaimDeviceResponse, AWSError>;
+  /**
    * Creates a new channel
    */
   createChannel(params: MediaLive.Types.CreateChannelRequest, callback?: (err: AWSError, data: MediaLive.Types.CreateChannelResponse) => void): Request<MediaLive.Types.CreateChannelResponse, AWSError>;
@@ -732,6 +740,10 @@ Note that this field and audioType are both ignored if inputType is broadcasterM
      */
     AudioTypeControl?: AudioDescriptionAudioTypeControl;
     /**
+     * Settings to configure one or more solutions that insert audio watermarks in the audio encode
+     */
+    AudioWatermarkingSettings?: AudioWatermarkSettings;
+    /**
      * Audio codec settings.
      */
     CodecSettings?: AudioCodecSettings;
@@ -758,6 +770,16 @@ Note that this field and audioType are both ignored if inputType is broadcasterM
   }
   export type AudioDescriptionAudioTypeControl = "FOLLOW_INPUT"|"USE_CONFIGURED"|string;
   export type AudioDescriptionLanguageCodeControl = "FOLLOW_INPUT"|"USE_CONFIGURED"|string;
+  export interface AudioHlsRenditionSelection {
+    /**
+     * Specifies the GROUP-ID in the #EXT-X-MEDIA tag of the target HLS audio rendition.
+     */
+    GroupId: __stringMin1;
+    /**
+     * Specifies the NAME in the #EXT-X-MEDIA tag of the target HLS audio rendition.
+     */
+    Name: __stringMin1;
+  }
   export interface AudioLanguageSelection {
     /**
      * Selects a specific three-letter language code from within an audio source.
@@ -836,6 +858,7 @@ Alternate rendition that the client will not try to play back by default. Repres
     SelectorSettings?: AudioSelectorSettings;
   }
   export interface AudioSelectorSettings {
+    AudioHlsRenditionSelection?: AudioHlsRenditionSelection;
     AudioLanguageSelection?: AudioLanguageSelection;
     AudioPidSelection?: AudioPidSelection;
     AudioTrackSelection?: AudioTrackSelection;
@@ -863,6 +886,12 @@ Alternate rendition that the client will not try to play back by default. Repres
     Tracks: __listOfAudioTrack;
   }
   export type AudioType = "CLEAN_EFFECTS"|"HEARING_IMPAIRED"|"UNDEFINED"|"VISUAL_IMPAIRED_COMMENTARY"|string;
+  export interface AudioWatermarkSettings {
+    /**
+     * Settings to configure Nielsen Watermarks in the audio encode
+     */
+    NielsenWatermarksSettings?: NielsenWatermarksSettings;
+  }
   export type AuthenticationScheme = "AKAMAI"|"COMMON"|string;
   export interface AutomaticInputFailoverSettings {
     /**
@@ -1400,9 +1429,17 @@ one destination per packager.
      */
     Tags?: Tags;
     /**
-     * Settings for VPC output
+     * Settings for any VPC outputs.
      */
     Vpc?: VpcOutputSettingsDescription;
+  }
+  export interface ClaimDeviceRequest {
+    /**
+     * The id of the device you want to claim.
+     */
+    Id?: __string;
+  }
+  export interface ClaimDeviceResponse {
   }
   export interface ColorSpacePassthroughSettings {
   }
@@ -1452,7 +1489,7 @@ creating multiple resources.
      */
     Tags?: Tags;
     /**
-     * Settings for VPC output
+     * Settings for the VPC outputs
      */
     Vpc?: VpcOutputSettings;
   }
@@ -2066,7 +2103,7 @@ SINGLE_PIPELINE - You can connect only one source to this input. If the ChannelC
     InputPartnerIds?: __listOf__string;
     /**
      * Certain pull input sources can be dynamic, meaning that they can have their URL's dynamically changes
-during input switch actions. Presently, this functionality only works with MP4_FILE inputs.
+during input switch actions. Presently, this functionality only works with MP4_FILE and TS_FILE inputs.
 
      */
     InputSourceType?: InputSourceType;
@@ -2470,7 +2507,13 @@ during input switch actions. Presently, this functionality only works with MP4_F
   }
   export type DvbSubDestinationShadowColor = "BLACK"|"NONE"|"WHITE"|string;
   export type DvbSubDestinationTeletextGridControl = "FIXED"|"SCALED"|string;
+  export type DvbSubOcrLanguage = "DEU"|"ENG"|"FRA"|"NLD"|"POR"|"SPA"|string;
   export interface DvbSubSourceSettings {
+    /**
+     * If you will configure a WebVTT caption description that references this caption selector, use this field to
+provide the language to consider when translating the image-based source to text.
+     */
+    OcrLanguage?: DvbSubOcrLanguage;
     /**
      * When using DVB-Sub with Burn-In or SMPTE-TT, use this PID for the source content. Unused for DVB-Sub passthrough. All DVB-Sub content is passed through, regardless of selectors.
      */
@@ -2822,7 +2865,7 @@ EPOCH_LOCKING - MediaLive will attempt to synchronize the output of each pipelin
   export type GlobalConfigurationLowFramerateInputs = "DISABLED"|"ENABLED"|string;
   export type GlobalConfigurationOutputLockingMode = "EPOCH_LOCKING"|"PIPELINE_LOCKING"|string;
   export type GlobalConfigurationOutputTimingSource = "INPUT_CLOCK"|"SYSTEM_CLOCK"|string;
-  export type H264AdaptiveQuantization = "HIGH"|"HIGHER"|"LOW"|"MAX"|"MEDIUM"|"OFF"|string;
+  export type H264AdaptiveQuantization = "AUTO"|"HIGH"|"HIGHER"|"LOW"|"MAX"|"MEDIUM"|"OFF"|string;
   export type H264ColorMetadata = "IGNORE"|"INSERT"|string;
   export interface H264ColorSpaceSettings {
     ColorSpacePassthroughSettings?: ColorSpacePassthroughSettings;
@@ -2848,7 +2891,7 @@ EPOCH_LOCKING - MediaLive will attempt to synchronize the output of each pipelin
   export type H264SceneChangeDetect = "DISABLED"|"ENABLED"|string;
   export interface H264Settings {
     /**
-     * Adaptive quantization. Allows intra-frame quantizers to vary to improve visual quality.
+     * Enables or disables adaptive quantization, which is a technique MediaLive can apply to video on a frame-by-frame basis to produce more compression without losing quality. There are three types of adaptive quantization: flicker, spatial, and temporal. Set the field in one of these ways: Set to Auto. Recommended. For each type of AQ, MediaLive will determine if AQ is needed, and if so, the appropriate strength. Set a strength (a value other than Auto or Disable). This strength will apply to any of the AQ fields that you choose to enable. Set to Disabled to disable all types of adaptive quantization.
      */
     AdaptiveQuantization?: H264AdaptiveQuantization;
     /**
@@ -2888,7 +2931,7 @@ EPOCH_LOCKING - MediaLive will attempt to synchronize the output of each pipelin
      */
     FixedAfd?: FixedAfd;
     /**
-     * If set to enabled, adjust quantization within each frame to reduce flicker or 'pop' on I-frames.
+     * Flicker AQ makes adjustments within each frame to reduce flicker or 'pop' on I-frames. The value to enter in this field depends on the value in the Adaptive quantization field: If you have set the Adaptive quantization field to Auto, MediaLive ignores any value in this field. MediaLive will determine if flicker AQ is appropriate and will apply the appropriate strength. If you have set the Adaptive quantization field to a strength, you can set this field to Enabled or Disabled. Enabled: MediaLive will apply flicker AQ using the specified strength. Disabled: MediaLive won't apply flicker AQ. If you have set the Adaptive quantization to Disabled, MediaLive ignores any value in this field and doesn't apply flicker AQ.
      */
     FlickerAq?: H264FlickerAq;
     /**
@@ -2976,10 +3019,11 @@ For VBR: Set the maximum bitrate in order to accommodate expected spikes in the 
      */
     QualityLevel?: H264QualityLevel;
     /**
-     * Controls the target quality for the video encode. Applies only when the rate control mode is QVBR. Set values for the QVBR quality level field and Max bitrate field that suit your most important viewing devices. Recommended values are:
+     * Controls the target quality for the video encode. Applies only when the rate control mode is QVBR. You can set a target quality or you can let MediaLive determine the best quality. To set a target quality, enter values in the QVBR quality level field and the Max bitrate field. Enter values that suit your most important viewing devices. Recommended values are:
 - Primary screen: Quality level: 8 to 10. Max bitrate: 4M
 - PC or tablet: Quality level: 7. Max bitrate: 1.5M to 3M
 - Smartphone: Quality level: 6. Max bitrate: 1M to 1.5M
+To let MediaLive decide, leave the QVBR quality level field empty, and in Max bitrate enter the maximum rate you want in the video. For more information, see the section called "Video - rate control mode" in the MediaLive user guide
      */
     QvbrQualityLevel?: __integerMin1Max10;
     /**
@@ -3020,7 +3064,7 @@ This field is optional; when no value is specified the encoder will choose the n
      */
     Softness?: __integerMin0Max128;
     /**
-     * If set to enabled, adjust quantization within each frame based on spatial variation of content complexity.
+     * Spatial AQ makes adjustments within each frame based on spatial variation of content complexity. The value to enter in this field depends on the value in the Adaptive quantization field: If you have set the Adaptive quantization field to Auto, MediaLive ignores any value in this field. MediaLive will determine if spatial AQ is appropriate and will apply the appropriate strength. If you have set the Adaptive quantization field to a strength, you can set this field to Enabled or Disabled. Enabled: MediaLive will apply spatial AQ using the specified strength. Disabled: MediaLive won't apply spatial AQ. If you have set the Adaptive quantization to Disabled, MediaLive ignores any value in this field and doesn't apply spatial AQ.
      */
     SpatialAq?: H264SpatialAq;
     /**
@@ -3032,7 +3076,7 @@ This field is optional; when no value is specified the encoder will choose the n
      */
     Syntax?: H264Syntax;
     /**
-     * If set to enabled, adjust quantization within each frame based on temporal variation of content complexity.
+     * Temporal makes adjustments within each frame based on temporal variation of content complexity. The value to enter in this field depends on the value in the Adaptive quantization field: If you have set the Adaptive quantization field to Auto, MediaLive ignores any value in this field. MediaLive will determine if temporal AQ is appropriate and will apply the appropriate strength. If you have set the Adaptive quantization field to a strength, you can set this field to Enabled or Disabled. Enabled: MediaLive will apply temporal AQ using the specified strength. Disabled: MediaLive won't apply temporal AQ. If you have set the Adaptive quantization to Disabled, MediaLive ignores any value in this field and doesn't apply temporal AQ.
      */
     TemporalAq?: H264TemporalAq;
     /**
@@ -3047,7 +3091,7 @@ This field is optional; when no value is specified the encoder will choose the n
   export type H264Syntax = "DEFAULT"|"RP2027"|string;
   export type H264TemporalAq = "DISABLED"|"ENABLED"|string;
   export type H264TimecodeInsertionBehavior = "DISABLED"|"PIC_TIMING_SEI"|string;
-  export type H265AdaptiveQuantization = "HIGH"|"HIGHER"|"LOW"|"MAX"|"MEDIUM"|"OFF"|string;
+  export type H265AdaptiveQuantization = "AUTO"|"HIGH"|"HIGHER"|"LOW"|"MAX"|"MEDIUM"|"OFF"|string;
   export type H265AlternativeTransferFunction = "INSERT"|"OMIT"|string;
   export type H265ColorMetadata = "IGNORE"|"INSERT"|string;
   export interface H265ColorSpaceSettings {
@@ -3433,9 +3477,17 @@ SEGMENTS_ONLY: Does not generate any manifests for this output group.
      */
     OutputSelection?: HlsOutputSelection;
     /**
-     * Includes or excludes EXT-X-PROGRAM-DATE-TIME tag in .m3u8 manifest files. The value is calculated as follows: either the program date and time are initialized using the input timecode source, or the time is initialized using the input timecode source and the date is initialized using the timestampOffset.
+     * Includes or excludes EXT-X-PROGRAM-DATE-TIME tag in .m3u8 manifest files. The value is calculated using the program date time clock.
      */
     ProgramDateTime?: HlsProgramDateTime;
+    /**
+     * Specifies the algorithm used to drive the HLS EXT-X-PROGRAM-DATE-TIME clock. Options include:
+
+INITIALIZE_FROM_OUTPUT_TIMECODE: The PDT clock is initialized as a function of the first output timecode, then incremented by the EXTINF duration of each encoded segment.
+
+SYSTEM_CLOCK: The PDT clock is initialized as a function of the UTC wall clock, then incremented by the EXTINF duration of each encoded segment. If the PDT clock diverges from the wall clock by more than 500ms, it is resynchronized to the wall clock.
+     */
+    ProgramDateTimeClock?: HlsProgramDateTimeClock;
     /**
      * Period of insertion of EXT-X-PROGRAM-DATE-TIME entry, in seconds.
      */
@@ -3509,6 +3561,10 @@ SINGLE_FILE: Applies only if Mode field is VOD. Emit the program as a single .ts
      * The number of seconds between retries when an attempt to read a manifest or segment fails.
      */
     RetryInterval?: __integerMin0;
+    /**
+     * Identifies the source for the SCTE-35 messages that MediaLive will ingest. Messages can be ingested from the content segments (in the stream) or from tags in the playlist (the HLS manifest). MediaLive ignores SCTE-35 information in the source that is not selected.
+     */
+    Scte35Source?: HlsScte35SourceType;
   }
   export type HlsIvInManifest = "EXCLUDE"|"INCLUDE"|string;
   export type HlsIvSource = "EXPLICIT"|"FOLLOWS_SEGMENT_NUMBER"|string;
@@ -3559,6 +3615,7 @@ Specifies whether MP4 segments should be packaged as HEV1 or HVC1.
     SegmentModifier?: __string;
   }
   export type HlsProgramDateTime = "EXCLUDE"|"INCLUDE"|string;
+  export type HlsProgramDateTimeClock = "INITIALIZE_FROM_OUTPUT_TIMECODE"|"SYSTEM_CLOCK"|string;
   export type HlsRedundantManifest = "DISABLED"|"ENABLED"|string;
   export interface HlsS3Settings {
     /**
@@ -3566,6 +3623,7 @@ Specifies whether MP4 segments should be packaged as HEV1 or HVC1.
      */
     CannedAcl?: S3CannedAcl;
   }
+  export type HlsScte35SourceType = "MANIFEST"|"SEGMENTS"|string;
   export type HlsSegmentationMode = "USE_INPUT_SEGMENTATION"|"USE_SEGMENT_DURATION"|string;
   export interface HlsSettings {
     AudioOnlyHlsSettings?: AudioOnlyHlsSettings;
@@ -3643,7 +3701,7 @@ SINGLE_PIPELINE - You can connect only one source to this input. If the ChannelC
     InputPartnerIds?: __listOf__string;
     /**
      * Certain pull input sources can be dynamic, meaning that they can have their URL's dynamically changes
-during input switch actions. Presently, this functionality only works with MP4_FILE inputs.
+during input switch actions. Presently, this functionality only works with MP4_FILE and TS_FILE inputs.
 
      */
     InputSourceType?: InputSourceType;
@@ -4054,6 +4112,10 @@ to.
      */
     NetworkInputSettings?: NetworkInputSettings;
     /**
+     * PID from which to read SCTE-35 messages. If left undefined, EML will select the first SCTE-35 PID found in the input.
+     */
+    Scte35Pid?: __integerMin32Max8191;
+    /**
      * Specifies whether to extract applicable ancillary data from a SMPTE-2038 source in this input. Applicable data types are captions, timecode, AFD, and SCTE-104 messages.
 - PREFER: Extract from SMPTE-2038 if present in this input, otherwise extract from another source (if any).
 - IGNORE: Never extract any ancillary data from SMPTE-2038.
@@ -4132,7 +4194,7 @@ pulled from.
     UrlPath?: __listOf__string;
   }
   export type InputTimecodeSource = "ZEROBASED"|"EMBEDDED"|string;
-  export type InputType = "UDP_PUSH"|"RTP_PUSH"|"RTMP_PUSH"|"RTMP_PULL"|"URL_PULL"|"MP4_FILE"|"MEDIACONNECT"|"INPUT_DEVICE"|"AWS_CDI"|string;
+  export type InputType = "UDP_PUSH"|"RTP_PUSH"|"RTMP_PUSH"|"RTMP_PULL"|"URL_PULL"|"MP4_FILE"|"MEDIACONNECT"|"INPUT_DEVICE"|"AWS_CDI"|"TS_FILE"|string;
   export interface InputVpcRequest {
     /**
      * A list of up to 5 EC2 VPC security group IDs to attach to the Input VPC network interfaces.
@@ -5189,6 +5251,20 @@ When this field is defined, ConstantBitrate must be undefined.
      */
     ServerValidation?: NetworkInputServerValidation;
   }
+  export interface NielsenCBET {
+    /**
+     * Enter the CBET check digits to use in the watermark.
+     */
+    CbetCheckDigitString: __stringMin2Max2;
+    /**
+     * Determines the method of CBET insertion mode when prior encoding is detected on the same layer.
+     */
+    CbetStepaside: NielsenWatermarksCbetStepaside;
+    /**
+     * Enter the CBET Source ID (CSID) to use in the watermark
+     */
+    Csid: __stringMin1Max7;
+  }
   export interface NielsenConfiguration {
     /**
      * Enter the Distributor ID assigned to your organization by Nielsen.
@@ -5199,7 +5275,35 @@ When this field is defined, ConstantBitrate must be undefined.
      */
     NielsenPcmToId3Tagging?: NielsenPcmToId3TaggingState;
   }
+  export interface NielsenNaesIiNw {
+    /**
+     * Enter the check digit string for the watermark
+     */
+    CheckDigitString: __stringMin2Max2;
+    /**
+     * Enter the Nielsen Source ID (SID) to include in the watermark
+     */
+    Sid: __doubleMin1Max65535;
+  }
   export type NielsenPcmToId3TaggingState = "DISABLED"|"ENABLED"|string;
+  export type NielsenWatermarksCbetStepaside = "DISABLED"|"ENABLED"|string;
+  export type NielsenWatermarksDistributionTypes = "FINAL_DISTRIBUTOR"|"PROGRAM_CONTENT"|string;
+  export interface NielsenWatermarksSettings {
+    /**
+     * Complete these fields only if you want to insert watermarks of type Nielsen CBET
+     */
+    NielsenCbetSettings?: NielsenCBET;
+    /**
+     * Choose the distribution types that you want to assign to the watermarks:
+- PROGRAM_CONTENT
+- FINAL_DISTRIBUTOR
+     */
+    NielsenDistributionType?: NielsenWatermarksDistributionTypes;
+    /**
+     * Complete these fields only if you want to insert watermarks of type Nielsen NAES II (N2) and Nielsen NAES VI (NW).
+     */
+    NielsenNaesIiNwSettings?: NielsenNaesIiNw;
+  }
   export interface Offering {
     /**
      * Unique offering ARN, e.g. 'arn:aws:medialive:us-west-2:123456789012:offering:87654321'
@@ -5546,7 +5650,7 @@ Valid values: 1, 2, 4, 6, 8
     VideoQuality?: ReservationVideoQuality;
   }
   export type ReservationResourceType = "INPUT"|"OUTPUT"|"MULTIPLEX"|"CHANNEL"|string;
-  export type ReservationSpecialFeature = "ADVANCED_AUDIO"|"AUDIO_NORMALIZATION"|string;
+  export type ReservationSpecialFeature = "ADVANCED_AUDIO"|"AUDIO_NORMALIZATION"|"MGHD"|"MGUHD"|string;
   export type ReservationState = "ACTIVE"|"EXPIRED"|"CANCELED"|"DELETED"|string;
   export type ReservationVideoQuality = "STANDARD"|"ENHANCED"|"PREMIUM"|string;
   export type RtmpAdMarkers = "ON_CUE_POINT_SCTE35"|string;
@@ -5700,7 +5804,13 @@ Valid values: 1, 2, 4, 6, 8
   }
   export interface Scte27DestinationSettings {
   }
+  export type Scte27OcrLanguage = "DEU"|"ENG"|"FRA"|"NLD"|"POR"|"SPA"|string;
   export interface Scte27SourceSettings {
+    /**
+     * If you will configure a WebVTT caption description that references this caption selector, use this field to
+provide the language to consider when translating the image-based source to text.
+     */
+    OcrLanguage?: Scte27OcrLanguage;
     /**
      * The pid field is used in conjunction with the caption selector languageCode field as follows:
   - Specify PID and Language: Extracts captions from that PID; the language is "informational".
@@ -6689,12 +6799,18 @@ If STANDARD channel, subnet IDs must be mapped to two unique availability zones 
     SampleRate?: __double;
   }
   export interface WebvttDestinationSettings {
+    /**
+     * Controls whether the color and position of the source captions is passed through to the WebVTT output captions.  PASSTHROUGH - Valid only if the source captions are EMBEDDED or TELETEXT.  NO_STYLE_DATA - Don't pass through the style. The output captions will not contain any font styling information.
+     */
+    StyleControl?: WebvttDestinationStyleControl;
   }
+  export type WebvttDestinationStyleControl = "NO_STYLE_DATA"|"PASSTHROUGH"|string;
   export type __double = number;
   export type __doubleMin0 = number;
   export type __doubleMin0Max1 = number;
   export type __doubleMin0Max100 = number;
   export type __doubleMin1 = number;
+  export type __doubleMin1Max65535 = number;
   export type __doubleMinNegative59Max0 = number;
   export type __integer = number;
   export type __integerMin0 = number;
@@ -6740,6 +6856,7 @@ If STANDARD channel, subnet IDs must be mapped to two unique availability zones 
   export type __integerMin25Max2000 = number;
   export type __integerMin3 = number;
   export type __integerMin30 = number;
+  export type __integerMin32Max8191 = number;
   export type __integerMin4Max20 = number;
   export type __integerMin800Max3000 = number;
   export type __integerMin96Max600 = number;
@@ -6808,6 +6925,8 @@ If STANDARD channel, subnet IDs must be mapped to two unique availability zones 
   export type __stringMin1Max255 = string;
   export type __stringMin1Max256 = string;
   export type __stringMin1Max35 = string;
+  export type __stringMin1Max7 = string;
+  export type __stringMin2Max2 = string;
   export type __stringMin32Max32 = string;
   export type __stringMin34Max34 = string;
   export type __stringMin3Max3 = string;

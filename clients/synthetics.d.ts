@@ -28,19 +28,19 @@ declare class Synthetics extends Service {
    */
   deleteCanary(callback?: (err: AWSError, data: Synthetics.Types.DeleteCanaryResponse) => void): Request<Synthetics.Types.DeleteCanaryResponse, AWSError>;
   /**
-   * This operation returns a list of the canaries in your account, along with full details about each canary. This operation does not have resource-level authorization, so if a user is able to use DescribeCanaries, the user can see all of the canaries in the account. A deny policy can only be used to restrict access to all canaries. It cannot be used on specific resources. 
+   * This operation returns a list of the canaries in your account, along with full details about each canary. This operation supports resource-level authorization using an IAM policy and the Names parameter. If you specify the Names parameter, the operation is successful only if you have authorization to view all the canaries that you specify in your request. If you do not have permission to view any of the canaries, the request fails with a 403 response. You are required to use the Names parameter if you are logged on to a user or role that has an IAM policy that restricts which canaries that you are allowed to view. For more information, see  Limiting a user to viewing specific canaries.
    */
   describeCanaries(params: Synthetics.Types.DescribeCanariesRequest, callback?: (err: AWSError, data: Synthetics.Types.DescribeCanariesResponse) => void): Request<Synthetics.Types.DescribeCanariesResponse, AWSError>;
   /**
-   * This operation returns a list of the canaries in your account, along with full details about each canary. This operation does not have resource-level authorization, so if a user is able to use DescribeCanaries, the user can see all of the canaries in the account. A deny policy can only be used to restrict access to all canaries. It cannot be used on specific resources. 
+   * This operation returns a list of the canaries in your account, along with full details about each canary. This operation supports resource-level authorization using an IAM policy and the Names parameter. If you specify the Names parameter, the operation is successful only if you have authorization to view all the canaries that you specify in your request. If you do not have permission to view any of the canaries, the request fails with a 403 response. You are required to use the Names parameter if you are logged on to a user or role that has an IAM policy that restricts which canaries that you are allowed to view. For more information, see  Limiting a user to viewing specific canaries.
    */
   describeCanaries(callback?: (err: AWSError, data: Synthetics.Types.DescribeCanariesResponse) => void): Request<Synthetics.Types.DescribeCanariesResponse, AWSError>;
   /**
-   * Use this operation to see information from the most recent run of each canary that you have created.
+   * Use this operation to see information from the most recent run of each canary that you have created. This operation supports resource-level authorization using an IAM policy and the Names parameter. If you specify the Names parameter, the operation is successful only if you have authorization to view all the canaries that you specify in your request. If you do not have permission to view any of the canaries, the request fails with a 403 response. You are required to use the Names parameter if you are logged on to a user or role that has an IAM policy that restricts which canaries that you are allowed to view. For more information, see  Limiting a user to viewing specific canaries.
    */
   describeCanariesLastRun(params: Synthetics.Types.DescribeCanariesLastRunRequest, callback?: (err: AWSError, data: Synthetics.Types.DescribeCanariesLastRunResponse) => void): Request<Synthetics.Types.DescribeCanariesLastRunResponse, AWSError>;
   /**
-   * Use this operation to see information from the most recent run of each canary that you have created.
+   * Use this operation to see information from the most recent run of each canary that you have created. This operation supports resource-level authorization using an IAM policy and the Names parameter. If you specify the Names parameter, the operation is successful only if you have authorization to view all the canaries that you specify in your request. If you do not have permission to view any of the canaries, the request fails with a 403 response. You are required to use the Names parameter if you are logged on to a user or role that has an IAM policy that restricts which canaries that you are allowed to view. For more information, see  Limiting a user to viewing specific canaries.
    */
   describeCanariesLastRun(callback?: (err: AWSError, data: Synthetics.Types.DescribeCanariesLastRunResponse) => void): Request<Synthetics.Types.DescribeCanariesLastRunResponse, AWSError>;
   /**
@@ -92,11 +92,11 @@ declare class Synthetics extends Service {
    */
   stopCanary(callback?: (err: AWSError, data: Synthetics.Types.StopCanaryResponse) => void): Request<Synthetics.Types.StopCanaryResponse, AWSError>;
   /**
-   * Assigns one or more tags (key-value pairs) to the specified canary.  Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with certain tag values. Tags don't have any semantic meaning to AWS and are interpreted strictly as strings of characters. You can use the TagResource action with a canary that already has tags. If you specify a new tag key for the alarm, this tag is appended to the list of tags associated with the alarm. If you specify a tag key that is already associated with the alarm, the new tag value that you specify replaces the previous value for that tag. You can associate as many as 50 tags with a canary.
+   * Assigns one or more tags (key-value pairs) to the specified canary.  Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with certain tag values. Tags don't have any semantic meaning to Amazon Web Services and are interpreted strictly as strings of characters. You can use the TagResource action with a canary that already has tags. If you specify a new tag key for the alarm, this tag is appended to the list of tags associated with the alarm. If you specify a tag key that is already associated with the alarm, the new tag value that you specify replaces the previous value for that tag. You can associate as many as 50 tags with a canary.
    */
   tagResource(params: Synthetics.Types.TagResourceRequest, callback?: (err: AWSError, data: Synthetics.Types.TagResourceResponse) => void): Request<Synthetics.Types.TagResourceResponse, AWSError>;
   /**
-   * Assigns one or more tags (key-value pairs) to the specified canary.  Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with certain tag values. Tags don't have any semantic meaning to AWS and are interpreted strictly as strings of characters. You can use the TagResource action with a canary that already has tags. If you specify a new tag key for the alarm, this tag is appended to the list of tags associated with the alarm. If you specify a tag key that is already associated with the alarm, the new tag value that you specify replaces the previous value for that tag. You can associate as many as 50 tags with a canary.
+   * Assigns one or more tags (key-value pairs) to the specified canary.  Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with certain tag values. Tags don't have any semantic meaning to Amazon Web Services and are interpreted strictly as strings of characters. You can use the TagResource action with a canary that already has tags. If you specify a new tag key for the alarm, this tag is appended to the list of tags associated with the alarm. If you specify a tag key that is already associated with the alarm, the new tag value that you specify replaces the previous value for that tag. You can associate as many as 50 tags with a canary.
    */
   tagResource(callback?: (err: AWSError, data: Synthetics.Types.TagResourceResponse) => void): Request<Synthetics.Types.TagResourceResponse, AWSError>;
   /**
@@ -117,6 +117,31 @@ declare class Synthetics extends Service {
   updateCanary(callback?: (err: AWSError, data: Synthetics.Types.UpdateCanaryResponse) => void): Request<Synthetics.Types.UpdateCanaryResponse, AWSError>;
 }
 declare namespace Synthetics {
+  export interface ArtifactConfigInput {
+    /**
+     * A structure that contains the configuration of the encryption-at-rest settings for artifacts that the canary uploads to Amazon S3. Artifact encryption functionality is available only for canaries that use Synthetics runtime version syn-nodejs-puppeteer-3.3 or later. For more information, see Encrypting canary artifacts 
+     */
+    S3Encryption?: S3EncryptionConfig;
+  }
+  export interface ArtifactConfigOutput {
+    /**
+     * A structure that contains the configuration of encryption settings for canary artifacts that are stored in Amazon S3. 
+     */
+    S3Encryption?: S3EncryptionConfig;
+  }
+  export interface BaseScreenshot {
+    /**
+     * The name of the screenshot. This is generated the first time the canary is run after the UpdateCanary operation that specified for this canary to perform visual monitoring.
+     */
+    ScreenshotName: String;
+    /**
+     * Coordinates that define the part of a screen to ignore during screenshot comparisons. To obtain the coordinates to use here, use the CloudWatch Logs console to draw the boundaries on the screen. For more information, see {LINK}
+     */
+    IgnoreCoordinates?: BaseScreenshotIgnoreCoordinates;
+  }
+  export type BaseScreenshotConfigIgnoreCoordinate = string;
+  export type BaseScreenshotIgnoreCoordinates = BaseScreenshotConfigIgnoreCoordinate[];
+  export type BaseScreenshots = BaseScreenshot[];
   export type _Blob = Buffer|Uint8Array|Blob|string;
   export type Canaries = Canary[];
   export type CanariesLastRun = CanaryLastRun[];
@@ -169,14 +194,22 @@ declare namespace Synthetics {
     RuntimeVersion?: String;
     VpcConfig?: VpcConfigOutput;
     /**
+     * If this canary performs visual monitoring by comparing screenshots, this structure contains the ID of the canary run to use as the baseline for screenshots, and the coordinates of any parts of the screen to ignore during the visual monitoring comparison.
+     */
+    VisualReference?: VisualReferenceOutput;
+    /**
      * The list of key-value pairs that are associated with the canary.
      */
     Tags?: TagMap;
+    /**
+     * A structure that contains the configuration for canary artifacts, including the encryption-at-rest settings for artifacts that the canary uploads to Amazon S3.
+     */
+    ArtifactConfig?: ArtifactConfigOutput;
   }
   export type CanaryArn = string;
   export interface CanaryCodeInput {
     /**
-     * If your canary script is located in S3, specify the full bucket name here. The bucket must already exist. Specify the full bucket name, including s3:// as the start of the bucket name.
+     * If your canary script is located in S3, specify the bucket name here. Do not include s3:// as the start of the bucket name.
      */
     S3Bucket?: String;
     /**
@@ -188,13 +221,13 @@ declare namespace Synthetics {
      */
     S3Version?: String;
     /**
-     * If you input your canary script directly into the canary instead of referring to an S3 location, the value of this parameter is the .zip file that contains the script. It can be up to 5 MB.
+     * If you input your canary script directly into the canary instead of referring to an S3 location, the value of this parameter is the base64-encoded contents of the .zip file that contains the script. It must be smaller than 225 Kb. For large canary scripts, we recommend that you use an S3 location instead of inputting it directly with this parameter.
      */
     ZipFile?: _Blob;
     /**
-     * The entry point to use for the source code when running the canary. This value must end with the string .handler.
+     * The entry point to use for the source code when running the canary. For canaries that use the syn-python-selenium-1.0 runtime or a syn-nodejs.puppeteer runtime earlier than syn-nodejs.puppeteer-3.4, the handler must be specified as  fileName.handler. For syn-python-selenium-1.1, syn-nodejs.puppeteer-3.4, and later runtimes, the handler can be specified as  fileName.functionName , or you can specify a folder where canary scripts reside as  folder/fileName.functionName .
      */
-    Handler: String;
+    Handler: CodeHandler;
   }
   export interface CanaryCodeOutput {
     /**
@@ -249,7 +282,7 @@ declare namespace Synthetics {
      */
     MemoryInMB?: MaxSize3008;
     /**
-     * Specifies whether this canary is to use active AWS X-Ray tracing when it runs. Active tracing enables this canary run to be displayed in the ServiceLens and X-Ray service maps even if the canary does not hit an endpoint that has X-ray tracing enabled. Using X-Ray tracing incurs charges. For more information, see  Canaries and X-Ray tracing. You can enable active tracing only for canaries that use version syn-nodejs-2.0 or later for their canary runtime.
+     * Specifies whether this canary is to use active X-Ray tracing when it runs. Active tracing enables this canary run to be displayed in the ServiceLens and X-Ray service maps even if the canary does not hit an endpoint that has X-Ray tracing enabled. Using X-Ray tracing incurs charges. For more information, see  Canaries and X-Ray tracing. You can enable active tracing only for canaries that use version syn-nodejs-2.0 or later for their canary runtime.
      */
     ActiveTracing?: NullableBoolean;
     /**
@@ -267,7 +300,7 @@ declare namespace Synthetics {
      */
     MemoryInMB?: MaxSize3008;
     /**
-     * Displays whether this canary run used active AWS X-Ray tracing. 
+     * Displays whether this canary run used active X-Ray tracing. 
      */
     ActiveTracing?: NullableBoolean;
   }
@@ -300,7 +333,7 @@ declare namespace Synthetics {
   export type CanaryRuns = CanaryRun[];
   export interface CanaryScheduleInput {
     /**
-     * A rate expression that defines how often the canary is to run. The syntax is rate(number unit). unit can be minute, minutes, or hour.  For example, rate(1 minute) runs the canary once a minute, rate(10 minutes) runs it once every 10 minutes, and rate(1 hour) runs it once every hour. You can specify a frequency between rate(1 minute) and rate(1 hour). Specifying rate(0 minute) or rate(0 hour) is a special value that causes the canary to run only once when it is started.
+     * A rate expression or a cron expression that defines how often the canary is to run. For a rate expression, The syntax is rate(number unit). unit can be minute, minutes, or hour.  For example, rate(1 minute) runs the canary once a minute, rate(10 minutes) runs it once every 10 minutes, and rate(1 hour) runs it once every hour. You can specify a frequency between rate(1 minute) and rate(1 hour). Specifying rate(0 minute) or rate(0 hour) is a special value that causes the canary to run only once when it is started. Use cron(expression) to specify a cron expression. You can't schedule a canary to wait for more than a year before running. For information about the syntax for cron expressions, see  Scheduling canary runs using cron.
      */
     Expression: String;
     /**
@@ -310,7 +343,7 @@ declare namespace Synthetics {
   }
   export interface CanaryScheduleOutput {
     /**
-     * A rate expression that defines how often the canary is to run. The syntax is rate(number unit). unit can be minute, minutes, or hour.  For example, rate(1 minute) runs the canary once a minute, rate(10 minutes) runs it once every 10 minutes, and rate(1 hour) runs it once every hour. Specifying rate(0 minute) or rate(0 hour) is a special value that causes the canary to run only once when it is started.
+     * A rate expression or a cron expression that defines how often the canary is to run. For a rate expression, The syntax is rate(number unit). unit can be minute, minutes, or hour.  For example, rate(1 minute) runs the canary once a minute, rate(10 minutes) runs it once every 10 minutes, and rate(1 hour) runs it once every hour. You can specify a frequency between rate(1 minute) and rate(1 hour). Specifying rate(0 minute) or rate(0 hour) is a special value that causes the canary to run only once when it is started. Use cron(expression) to specify a cron expression. For information about the syntax for cron expressions, see  Scheduling canary runs using cron.
      */
     Expression?: String;
     /**
@@ -352,6 +385,7 @@ declare namespace Synthetics {
      */
     LastStopped?: Timestamp;
   }
+  export type CodeHandler = string;
   export interface CreateCanaryRequest {
     /**
      * The name for this canary. Be sure to give it a descriptive name that distinguishes it from other canaries in your account. Do not include secrets or proprietary information in your canary names. The canary name makes up part of the canary ARN, and the ARN is included in outbound calls over the internet. For more information, see Security Considerations for Synthetics Canaries.
@@ -362,7 +396,7 @@ declare namespace Synthetics {
      */
     Code: CanaryCodeInput;
     /**
-     * The location in Amazon S3 where Synthetics stores artifacts from the test runs of this canary. Artifacts include the log file, screenshots, and HAR files.
+     * The location in Amazon S3 where Synthetics stores artifacts from the test runs of this canary. Artifacts include the log file, screenshots, and HAR files. The name of the S3 bucket can't include a period (.).
      */
     ArtifactS3Location: String;
     /**
@@ -397,6 +431,10 @@ declare namespace Synthetics {
      * A list of key-value pairs to associate with the canary. You can associate as many as 50 tags with a canary. Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only the resources that have certain tag values.
      */
     Tags?: TagMap;
+    /**
+     * A structure that contains the configuration for canary artifacts, including the encryption-at-rest settings for artifacts that the canary uploads to Amazon S3.
+     */
+    ArtifactConfig?: ArtifactConfigInput;
   }
   export interface CreateCanaryResponse {
     /**
@@ -412,6 +450,7 @@ declare namespace Synthetics {
   }
   export interface DeleteCanaryResponse {
   }
+  export type DescribeCanariesLastRunNameFilter = CanaryName[];
   export interface DescribeCanariesLastRunRequest {
     /**
      * A token that indicates that there is more data available. You can use this token in a subsequent DescribeCanaries operation to retrieve the next set of results.
@@ -421,6 +460,10 @@ declare namespace Synthetics {
      * Specify this parameter to limit how many runs are returned each time you use the DescribeLastRun operation. If you omit this parameter, the default of 100 is used.
      */
     MaxResults?: MaxSize100;
+    /**
+     * Use this parameter to return only canaries that match the names that you specify here. You can specify as many as five canary names. If you specify this parameter, the operation is successful only if you have authorization to view all the canaries that you specify in your request. If you do not have permission to view any of the canaries, the request fails with a 403 response. You are required to use the Names parameter if you are logged on to a user or role that has an IAM policy that restricts which canaries that you are allowed to view. For more information, see  Limiting a user to viewing specific canaries.
+     */
+    Names?: DescribeCanariesLastRunNameFilter;
   }
   export interface DescribeCanariesLastRunResponse {
     /**
@@ -432,6 +475,7 @@ declare namespace Synthetics {
      */
     NextToken?: Token;
   }
+  export type DescribeCanariesNameFilter = CanaryName[];
   export interface DescribeCanariesRequest {
     /**
      * A token that indicates that there is more data available. You can use this token in a subsequent operation to retrieve the next set of results.
@@ -441,6 +485,10 @@ declare namespace Synthetics {
      * Specify this parameter to limit how many canaries are returned each time you use the DescribeCanaries operation. If you omit this parameter, the default of 100 is used.
      */
     MaxResults?: MaxCanaryResults;
+    /**
+     * Use this parameter to return only canaries that match the names that you specify here. You can specify as many as five canary names. If you specify this parameter, the operation is successful only if you have authorization to view all the canaries that you specify in your request. If you do not have permission to view any of the canaries, the request fails with a 403 response. You are required to use this parameter if you are logged on to a user or role that has an IAM policy that restricts which canaries that you are allowed to view. For more information, see  Limiting a user to viewing specific canaries.
+     */
+    Names?: DescribeCanariesNameFilter;
   }
   export interface DescribeCanariesResponse {
     /**
@@ -472,6 +520,7 @@ declare namespace Synthetics {
      */
     NextToken?: Token;
   }
+  export type EncryptionMode = "SSE_S3"|"SSE_KMS"|string;
   export type EnvironmentVariableName = string;
   export type EnvironmentVariableValue = string;
   export type EnvironmentVariablesMap = {[key: string]: EnvironmentVariableValue};
@@ -512,6 +561,7 @@ declare namespace Synthetics {
      */
     NextToken?: Token;
   }
+  export type KmsKeyArn = string;
   export interface ListTagsForResourceRequest {
     /**
      * The ARN of the canary that you want to view tags for. The ARN format of a canary is arn:aws:synthetics:Region:account-id:canary:canary-name .
@@ -551,6 +601,16 @@ declare namespace Synthetics {
     DeprecationDate?: Timestamp;
   }
   export type RuntimeVersionList = RuntimeVersion[];
+  export interface S3EncryptionConfig {
+    /**
+     *  The encryption method to use for artifacts created by this canary. Specify SSE_S3 to use server-side encryption (SSE) with an Amazon S3-managed key. Specify SSE-KMS to use server-side encryption with a customer-managed KMS key. If you omit this parameter, an Amazon Web Services-managed KMS key is used. 
+     */
+    EncryptionMode?: EncryptionMode;
+    /**
+     * The ARN of the customer-managed KMS key to use, if you specify SSE-KMS for EncryptionMode 
+     */
+    KmsKeyArn?: KmsKeyArn;
+  }
   export type SecurityGroupId = string;
   export type SecurityGroupIds = SecurityGroupId[];
   export interface StartCanaryRequest {
@@ -640,8 +700,40 @@ declare namespace Synthetics {
      * If this canary is to test an endpoint in a VPC, this structure contains information about the subnet and security groups of the VPC endpoint. For more information, see  Running a Canary in a VPC.
      */
     VpcConfig?: VpcConfigInput;
+    /**
+     * Defines the screenshots to use as the baseline for comparisons during visual monitoring comparisons during future runs of this canary. If you omit this parameter, no changes are made to any baseline screenshots that the canary might be using already. Visual monitoring is supported only on canaries running the syn-puppeteer-node-3.2 runtime or later. For more information, see  Visual monitoring and  Visual monitoring blueprint 
+     */
+    VisualReference?: VisualReferenceInput;
+    /**
+     * The location in Amazon S3 where Synthetics stores artifacts from the test runs of this canary. Artifacts include the log file, screenshots, and HAR files. The name of the S3 bucket can't include a period (.).
+     */
+    ArtifactS3Location?: String;
+    /**
+     * A structure that contains the configuration for canary artifacts, including the encryption-at-rest settings for artifacts that the canary uploads to Amazon S3.
+     */
+    ArtifactConfig?: ArtifactConfigInput;
   }
   export interface UpdateCanaryResponse {
+  }
+  export interface VisualReferenceInput {
+    /**
+     * An array of screenshots that will be used as the baseline for visual monitoring in future runs of this canary. If there is a screenshot that you don't want to be used for visual monitoring, remove it from this array.
+     */
+    BaseScreenshots?: BaseScreenshots;
+    /**
+     * Specifies which canary run to use the screenshots from as the baseline for future visual monitoring with this canary. Valid values are nextrun to use the screenshots from the next run after this update is made, lastrun to use the screenshots from the most recent run before this update was made, or the value of Id in the  CanaryRun from any past run of this canary.
+     */
+    BaseCanaryRunId: String;
+  }
+  export interface VisualReferenceOutput {
+    /**
+     * An array of screenshots that are used as the baseline for comparisons during visual monitoring.
+     */
+    BaseScreenshots?: BaseScreenshots;
+    /**
+     * The ID of the canary run that produced the screenshots that are used as the baseline for visual monitoring comparisons during future runs of this canary.
+     */
+    BaseCanaryRunId?: String;
   }
   export interface VpcConfigInput {
     /**

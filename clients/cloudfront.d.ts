@@ -14,6 +14,14 @@ declare class CloudFront extends CloudFrontCustomizations {
   constructor(options?: CloudFront.Types.ClientConfiguration)
   config: Config & CloudFront.Types.ClientConfiguration;
   /**
+   * Associates an alias (also known as a CNAME or an alternate domain name) with a CloudFront distribution. With this operation you can move an alias that’s already in use on a CloudFront distribution to a different distribution in one step. This prevents the downtime that could occur if you first remove the alias from one distribution and then separately add the alias to another distribution. To use this operation to associate an alias with a distribution, you provide the alias and the ID of the target distribution for the alias. For more information, including how to set up the target distribution, prerequisites that you must complete, and other restrictions, see Moving an alternate domain name to a different distribution in the Amazon CloudFront Developer Guide.
+   */
+  associateAlias(params: CloudFront.Types.AssociateAliasRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Associates an alias (also known as a CNAME or an alternate domain name) with a CloudFront distribution. With this operation you can move an alias that’s already in use on a CloudFront distribution to a different distribution in one step. This prevents the downtime that could occur if you first remove the alias from one distribution and then separately add the alias to another distribution. To use this operation to associate an alias with a distribution, you provide the alias and the ID of the target distribution for the alias. For more information, including how to set up the target distribution, prerequisites that you must complete, and other restrictions, see Moving an alternate domain name to a different distribution in the Amazon CloudFront Developer Guide.
+   */
+  associateAlias(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Creates a cache policy. After you create a cache policy, you can attach it to one or more cache behaviors. When it’s attached to a cache behavior, the cache policy determines the following:   The values that CloudFront includes in the cache key. These values can include HTTP headers, cookies, and URL query strings. CloudFront uses the cache key to find an object in its cache that it can return to the viewer.   The default, minimum, and maximum time to live (TTL) values that you want objects to stay in the CloudFront cache.   The headers, cookies, and query strings that are included in the cache key are automatically included in requests that CloudFront sends to the origin. CloudFront sends a request when it can’t find an object in its cache that matches the request’s cache key. If you want to send values to the origin but not include them in the cache key, use OriginRequestPolicy. For more information about cache policies, see Controlling the cache key in the Amazon CloudFront Developer Guide.
    */
   createCachePolicy(params: CloudFront.Types.CreateCachePolicyRequest, callback?: (err: AWSError, data: CloudFront.Types.CreateCachePolicyResult) => void): Request<CloudFront.Types.CreateCachePolicyResult, AWSError>;
@@ -62,6 +70,14 @@ declare class CloudFront extends CloudFrontCustomizations {
    */
   createFieldLevelEncryptionProfile(callback?: (err: AWSError, data: CloudFront.Types.CreateFieldLevelEncryptionProfileResult) => void): Request<CloudFront.Types.CreateFieldLevelEncryptionProfileResult, AWSError>;
   /**
+   * Creates a CloudFront function. To create a function, you provide the function code and some configuration information about the function. The response contains an Amazon Resource Name (ARN) that uniquely identifies the function. When you create a function, it’s in the DEVELOPMENT stage. In this stage, you can test the function with TestFunction, and update it with UpdateFunction. When you’re ready to use your function with a CloudFront distribution, use PublishFunction to copy the function from the DEVELOPMENT stage to LIVE. When it’s live, you can attach the function to a distribution’s cache behavior, using the function’s ARN.
+   */
+  createFunction(params: CloudFront.Types.CreateFunctionRequest, callback?: (err: AWSError, data: CloudFront.Types.CreateFunctionResult) => void): Request<CloudFront.Types.CreateFunctionResult, AWSError>;
+  /**
+   * Creates a CloudFront function. To create a function, you provide the function code and some configuration information about the function. The response contains an Amazon Resource Name (ARN) that uniquely identifies the function. When you create a function, it’s in the DEVELOPMENT stage. In this stage, you can test the function with TestFunction, and update it with UpdateFunction. When you’re ready to use your function with a CloudFront distribution, use PublishFunction to copy the function from the DEVELOPMENT stage to LIVE. When it’s live, you can attach the function to a distribution’s cache behavior, using the function’s ARN.
+   */
+  createFunction(callback?: (err: AWSError, data: CloudFront.Types.CreateFunctionResult) => void): Request<CloudFront.Types.CreateFunctionResult, AWSError>;
+  /**
    * Create a new invalidation. 
    */
   createInvalidation(params: CloudFront.Types.CreateInvalidationRequest, callback?: (err: AWSError, data: CloudFront.Types.CreateInvalidationResult) => void): Request<CloudFront.Types.CreateInvalidationResult, AWSError>;
@@ -109,6 +125,14 @@ declare class CloudFront extends CloudFrontCustomizations {
    * Creates a real-time log configuration. After you create a real-time log configuration, you can attach it to one or more cache behaviors to send real-time log data to the specified Amazon Kinesis data stream. For more information about real-time log configurations, see Real-time logs in the Amazon CloudFront Developer Guide.
    */
   createRealtimeLogConfig(callback?: (err: AWSError, data: CloudFront.Types.CreateRealtimeLogConfigResult) => void): Request<CloudFront.Types.CreateRealtimeLogConfigResult, AWSError>;
+  /**
+   * Creates a response headers policy. A response headers policy contains information about a set of HTTP response headers and their values. To create a response headers policy, you provide some metadata about the policy, and a set of configurations that specify the response headers. After you create a response headers policy, you can use its ID to attach it to one or more cache behaviors in a CloudFront distribution. When it’s attached to a cache behavior, CloudFront adds the headers in the policy to HTTP responses that it sends for requests that match the cache behavior.
+   */
+  createResponseHeadersPolicy(params: CloudFront.Types.CreateResponseHeadersPolicyRequest, callback?: (err: AWSError, data: CloudFront.Types.CreateResponseHeadersPolicyResult) => void): Request<CloudFront.Types.CreateResponseHeadersPolicyResult, AWSError>;
+  /**
+   * Creates a response headers policy. A response headers policy contains information about a set of HTTP response headers and their values. To create a response headers policy, you provide some metadata about the policy, and a set of configurations that specify the response headers. After you create a response headers policy, you can use its ID to attach it to one or more cache behaviors in a CloudFront distribution. When it’s attached to a cache behavior, CloudFront adds the headers in the policy to HTTP responses that it sends for requests that match the cache behavior.
+   */
+  createResponseHeadersPolicy(callback?: (err: AWSError, data: CloudFront.Types.CreateResponseHeadersPolicyResult) => void): Request<CloudFront.Types.CreateResponseHeadersPolicyResult, AWSError>;
   /**
    * This API is deprecated. Amazon CloudFront is deprecating real-time messaging protocol (RTMP) distributions on December 31, 2020. For more information, read the announcement on the Amazon CloudFront discussion forum.
    */
@@ -166,6 +190,14 @@ declare class CloudFront extends CloudFrontCustomizations {
    */
   deleteFieldLevelEncryptionProfile(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Deletes a CloudFront function. You cannot delete a function if it’s associated with a cache behavior. First, update your distributions to remove the function association from all cache behaviors, then delete the function. To delete a function, you must provide the function’s name and version (ETag value). To get these values, you can use ListFunctions and DescribeFunction.
+   */
+  deleteFunction(params: CloudFront.Types.DeleteFunctionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a CloudFront function. You cannot delete a function if it’s associated with a cache behavior. First, update your distributions to remove the function association from all cache behaviors, then delete the function. To delete a function, you must provide the function’s name and version (ETag value). To get these values, you can use ListFunctions and DescribeFunction.
+   */
+  deleteFunction(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Deletes a key group. You cannot delete a key group that is referenced in a cache behavior. First update your distributions to remove the key group from all cache behaviors, then delete the key group. To delete a key group, you must provide the key group’s identifier and version. To get these values, use ListKeyGroups followed by GetKeyGroup or GetKeyGroupConfig.
    */
   deleteKeyGroup(params: CloudFront.Types.DeleteKeyGroupRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -206,6 +238,14 @@ declare class CloudFront extends CloudFrontCustomizations {
    */
   deleteRealtimeLogConfig(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Deletes a response headers policy. You cannot delete a response headers policy if it’s attached to a cache behavior. First update your distributions to remove the response headers policy from all cache behaviors, then delete the response headers policy. To delete a response headers policy, you must provide the policy’s identifier and version. To get these values, you can use ListResponseHeadersPolicies or GetResponseHeadersPolicy. 
+   */
+  deleteResponseHeadersPolicy(params: CloudFront.Types.DeleteResponseHeadersPolicyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a response headers policy. You cannot delete a response headers policy if it’s attached to a cache behavior. First update your distributions to remove the response headers policy from all cache behaviors, then delete the response headers policy. To delete a response headers policy, you must provide the policy’s identifier and version. To get these values, you can use ListResponseHeadersPolicies or GetResponseHeadersPolicy. 
+   */
+  deleteResponseHeadersPolicy(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Delete a streaming distribution. To delete an RTMP distribution using the CloudFront API, perform the following steps.  To delete an RTMP distribution using the CloudFront API:   Disable the RTMP distribution.   Submit a GET Streaming Distribution Config request to get the current configuration and the Etag header for the distribution.    Update the XML document that was returned in the response to your GET Streaming Distribution Config request to change the value of Enabled to false.   Submit a PUT Streaming Distribution Config request to update the configuration for your distribution. In the request body, include the XML document that you updated in Step 3. Then set the value of the HTTP If-Match header to the value of the ETag header that CloudFront returned when you submitted the GET Streaming Distribution Config request in Step 2.   Review the response to the PUT Streaming Distribution Config request to confirm that the distribution was successfully disabled.   Submit a GET Streaming Distribution Config request to confirm that your changes have propagated. When propagation is complete, the value of Status is Deployed.   Submit a DELETE Streaming Distribution request. Set the value of the HTTP If-Match header to the value of the ETag header that CloudFront returned when you submitted the GET Streaming Distribution Config request in Step 2.   Review the response to your DELETE Streaming Distribution request to confirm that the distribution was successfully deleted.   For information about deleting a distribution using the CloudFront console, see Deleting a Distribution in the Amazon CloudFront Developer Guide.
    */
   deleteStreamingDistribution(params: CloudFront.Types.DeleteStreamingDistributionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -213,6 +253,14 @@ declare class CloudFront extends CloudFrontCustomizations {
    * Delete a streaming distribution. To delete an RTMP distribution using the CloudFront API, perform the following steps.  To delete an RTMP distribution using the CloudFront API:   Disable the RTMP distribution.   Submit a GET Streaming Distribution Config request to get the current configuration and the Etag header for the distribution.    Update the XML document that was returned in the response to your GET Streaming Distribution Config request to change the value of Enabled to false.   Submit a PUT Streaming Distribution Config request to update the configuration for your distribution. In the request body, include the XML document that you updated in Step 3. Then set the value of the HTTP If-Match header to the value of the ETag header that CloudFront returned when you submitted the GET Streaming Distribution Config request in Step 2.   Review the response to the PUT Streaming Distribution Config request to confirm that the distribution was successfully disabled.   Submit a GET Streaming Distribution Config request to confirm that your changes have propagated. When propagation is complete, the value of Status is Deployed.   Submit a DELETE Streaming Distribution request. Set the value of the HTTP If-Match header to the value of the ETag header that CloudFront returned when you submitted the GET Streaming Distribution Config request in Step 2.   Review the response to your DELETE Streaming Distribution request to confirm that the distribution was successfully deleted.   For information about deleting a distribution using the CloudFront console, see Deleting a Distribution in the Amazon CloudFront Developer Guide.
    */
   deleteStreamingDistribution(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Gets configuration information and metadata about a CloudFront function, but not the function’s code. To get a function’s code, use GetFunction. To get configuration information and metadata about a function, you must provide the function’s name and stage. To get these values, you can use ListFunctions.
+   */
+  describeFunction(params: CloudFront.Types.DescribeFunctionRequest, callback?: (err: AWSError, data: CloudFront.Types.DescribeFunctionResult) => void): Request<CloudFront.Types.DescribeFunctionResult, AWSError>;
+  /**
+   * Gets configuration information and metadata about a CloudFront function, but not the function’s code. To get a function’s code, use GetFunction. To get configuration information and metadata about a function, you must provide the function’s name and stage. To get these values, you can use ListFunctions.
+   */
+  describeFunction(callback?: (err: AWSError, data: CloudFront.Types.DescribeFunctionResult) => void): Request<CloudFront.Types.DescribeFunctionResult, AWSError>;
   /**
    * Gets a cache policy, including the following metadata:   The policy’s identifier.   The date and time when the policy was last modified.   To get a cache policy, you must provide the policy’s identifier. If the cache policy is attached to a distribution’s cache behavior, you can get the policy’s identifier using ListDistributions or GetDistribution. If the cache policy is not attached to a cache behavior, you can get the identifier using ListCachePolicies.
    */
@@ -294,6 +342,14 @@ declare class CloudFront extends CloudFrontCustomizations {
    */
   getFieldLevelEncryptionProfileConfig(callback?: (err: AWSError, data: CloudFront.Types.GetFieldLevelEncryptionProfileConfigResult) => void): Request<CloudFront.Types.GetFieldLevelEncryptionProfileConfigResult, AWSError>;
   /**
+   * Gets the code of a CloudFront function. To get configuration information and metadata about a function, use DescribeFunction. To get a function’s code, you must provide the function’s name and stage. To get these values, you can use ListFunctions.
+   */
+  getFunction(params: CloudFront.Types.GetFunctionRequest, callback?: (err: AWSError, data: CloudFront.Types.GetFunctionResult) => void): Request<CloudFront.Types.GetFunctionResult, AWSError>;
+  /**
+   * Gets the code of a CloudFront function. To get configuration information and metadata about a function, use DescribeFunction. To get a function’s code, you must provide the function’s name and stage. To get these values, you can use ListFunctions.
+   */
+  getFunction(callback?: (err: AWSError, data: CloudFront.Types.GetFunctionResult) => void): Request<CloudFront.Types.GetFunctionResult, AWSError>;
+  /**
    * Get the information about an invalidation. 
    */
   getInvalidation(params: CloudFront.Types.GetInvalidationRequest, callback?: (err: AWSError, data: CloudFront.Types.GetInvalidationResult) => void): Request<CloudFront.Types.GetInvalidationResult, AWSError>;
@@ -366,6 +422,22 @@ declare class CloudFront extends CloudFrontCustomizations {
    */
   getRealtimeLogConfig(callback?: (err: AWSError, data: CloudFront.Types.GetRealtimeLogConfigResult) => void): Request<CloudFront.Types.GetRealtimeLogConfigResult, AWSError>;
   /**
+   * Gets a response headers policy, including metadata (the policy’s identifier and the date and time when the policy was last modified). To get a response headers policy, you must provide the policy’s identifier. If the response headers policy is attached to a distribution’s cache behavior, you can get the policy’s identifier using ListDistributions or GetDistribution. If the response headers policy is not attached to a cache behavior, you can get the identifier using ListResponseHeadersPolicies.
+   */
+  getResponseHeadersPolicy(params: CloudFront.Types.GetResponseHeadersPolicyRequest, callback?: (err: AWSError, data: CloudFront.Types.GetResponseHeadersPolicyResult) => void): Request<CloudFront.Types.GetResponseHeadersPolicyResult, AWSError>;
+  /**
+   * Gets a response headers policy, including metadata (the policy’s identifier and the date and time when the policy was last modified). To get a response headers policy, you must provide the policy’s identifier. If the response headers policy is attached to a distribution’s cache behavior, you can get the policy’s identifier using ListDistributions or GetDistribution. If the response headers policy is not attached to a cache behavior, you can get the identifier using ListResponseHeadersPolicies.
+   */
+  getResponseHeadersPolicy(callback?: (err: AWSError, data: CloudFront.Types.GetResponseHeadersPolicyResult) => void): Request<CloudFront.Types.GetResponseHeadersPolicyResult, AWSError>;
+  /**
+   * Gets a response headers policy configuration. To get a response headers policy configuration, you must provide the policy’s identifier. If the response headers policy is attached to a distribution’s cache behavior, you can get the policy’s identifier using ListDistributions or GetDistribution. If the response headers policy is not attached to a cache behavior, you can get the identifier using ListResponseHeadersPolicies.
+   */
+  getResponseHeadersPolicyConfig(params: CloudFront.Types.GetResponseHeadersPolicyConfigRequest, callback?: (err: AWSError, data: CloudFront.Types.GetResponseHeadersPolicyConfigResult) => void): Request<CloudFront.Types.GetResponseHeadersPolicyConfigResult, AWSError>;
+  /**
+   * Gets a response headers policy configuration. To get a response headers policy configuration, you must provide the policy’s identifier. If the response headers policy is attached to a distribution’s cache behavior, you can get the policy’s identifier using ListDistributions or GetDistribution. If the response headers policy is not attached to a cache behavior, you can get the identifier using ListResponseHeadersPolicies.
+   */
+  getResponseHeadersPolicyConfig(callback?: (err: AWSError, data: CloudFront.Types.GetResponseHeadersPolicyConfigResult) => void): Request<CloudFront.Types.GetResponseHeadersPolicyConfigResult, AWSError>;
+  /**
    * Gets information about a specified RTMP distribution, including the distribution configuration.
    */
   getStreamingDistribution(params: CloudFront.Types.GetStreamingDistributionRequest, callback?: (err: AWSError, data: CloudFront.Types.GetStreamingDistributionResult) => void): Request<CloudFront.Types.GetStreamingDistributionResult, AWSError>;
@@ -382,11 +454,11 @@ declare class CloudFront extends CloudFrontCustomizations {
    */
   getStreamingDistributionConfig(callback?: (err: AWSError, data: CloudFront.Types.GetStreamingDistributionConfigResult) => void): Request<CloudFront.Types.GetStreamingDistributionConfigResult, AWSError>;
   /**
-   * Gets a list of cache policies. You can optionally apply a filter to return only the managed policies created by AWS, or only the custom policies created in your AWS account. You can optionally specify the maximum number of items to receive in the response. If the total number of items in the list exceeds the maximum that you specify, or the default maximum, the response is paginated. To get the next page of items, send a subsequent request that specifies the NextMarker value from the current response as the Marker value in the subsequent request.
+   * Gets a list of cache policies. You can optionally apply a filter to return only the managed policies created by Amazon Web Services, or only the custom policies created in your Amazon Web Services account. You can optionally specify the maximum number of items to receive in the response. If the total number of items in the list exceeds the maximum that you specify, or the default maximum, the response is paginated. To get the next page of items, send a subsequent request that specifies the NextMarker value from the current response as the Marker value in the subsequent request.
    */
   listCachePolicies(params: CloudFront.Types.ListCachePoliciesRequest, callback?: (err: AWSError, data: CloudFront.Types.ListCachePoliciesResult) => void): Request<CloudFront.Types.ListCachePoliciesResult, AWSError>;
   /**
-   * Gets a list of cache policies. You can optionally apply a filter to return only the managed policies created by AWS, or only the custom policies created in your AWS account. You can optionally specify the maximum number of items to receive in the response. If the total number of items in the list exceeds the maximum that you specify, or the default maximum, the response is paginated. To get the next page of items, send a subsequent request that specifies the NextMarker value from the current response as the Marker value in the subsequent request.
+   * Gets a list of cache policies. You can optionally apply a filter to return only the managed policies created by Amazon Web Services, or only the custom policies created in your Amazon Web Services account. You can optionally specify the maximum number of items to receive in the response. If the total number of items in the list exceeds the maximum that you specify, or the default maximum, the response is paginated. To get the next page of items, send a subsequent request that specifies the NextMarker value from the current response as the Marker value in the subsequent request.
    */
   listCachePolicies(callback?: (err: AWSError, data: CloudFront.Types.ListCachePoliciesResult) => void): Request<CloudFront.Types.ListCachePoliciesResult, AWSError>;
   /**
@@ -397,6 +469,14 @@ declare class CloudFront extends CloudFrontCustomizations {
    * Lists origin access identities.
    */
   listCloudFrontOriginAccessIdentities(callback?: (err: AWSError, data: CloudFront.Types.ListCloudFrontOriginAccessIdentitiesResult) => void): Request<CloudFront.Types.ListCloudFrontOriginAccessIdentitiesResult, AWSError>;
+  /**
+   * Gets a list of aliases (also called CNAMEs or alternate domain names) that conflict or overlap with the provided alias, and the associated CloudFront distributions and Amazon Web Services accounts for each conflicting alias. In the returned list, the distribution and account IDs are partially hidden, which allows you to identify the distributions and accounts that you own, but helps to protect the information of ones that you don’t own. Use this operation to find aliases that are in use in CloudFront that conflict or overlap with the provided alias. For example, if you provide www.example.com as input, the returned list can include www.example.com and the overlapping wildcard alternate domain name (*.example.com), if they exist. If you provide *.example.com as input, the returned list can include *.example.com and any alternate domain names covered by that wildcard (for example, www.example.com, test.example.com, dev.example.com, and so on), if they exist. To list conflicting aliases, you provide the alias to search and the ID of a distribution in your account that has an attached SSL/TLS certificate that includes the provided alias. For more information, including how to set up the distribution and certificate, see Moving an alternate domain name to a different distribution in the Amazon CloudFront Developer Guide. You can optionally specify the maximum number of items to receive in the response. If the total number of items in the list exceeds the maximum that you specify, or the default maximum, the response is paginated. To get the next page of items, send a subsequent request that specifies the NextMarker value from the current response as the Marker value in the subsequent request.
+   */
+  listConflictingAliases(params: CloudFront.Types.ListConflictingAliasesRequest, callback?: (err: AWSError, data: CloudFront.Types.ListConflictingAliasesResult) => void): Request<CloudFront.Types.ListConflictingAliasesResult, AWSError>;
+  /**
+   * Gets a list of aliases (also called CNAMEs or alternate domain names) that conflict or overlap with the provided alias, and the associated CloudFront distributions and Amazon Web Services accounts for each conflicting alias. In the returned list, the distribution and account IDs are partially hidden, which allows you to identify the distributions and accounts that you own, but helps to protect the information of ones that you don’t own. Use this operation to find aliases that are in use in CloudFront that conflict or overlap with the provided alias. For example, if you provide www.example.com as input, the returned list can include www.example.com and the overlapping wildcard alternate domain name (*.example.com), if they exist. If you provide *.example.com as input, the returned list can include *.example.com and any alternate domain names covered by that wildcard (for example, www.example.com, test.example.com, dev.example.com, and so on), if they exist. To list conflicting aliases, you provide the alias to search and the ID of a distribution in your account that has an attached SSL/TLS certificate that includes the provided alias. For more information, including how to set up the distribution and certificate, see Moving an alternate domain name to a different distribution in the Amazon CloudFront Developer Guide. You can optionally specify the maximum number of items to receive in the response. If the total number of items in the list exceeds the maximum that you specify, or the default maximum, the response is paginated. To get the next page of items, send a subsequent request that specifies the NextMarker value from the current response as the Marker value in the subsequent request.
+   */
+  listConflictingAliases(callback?: (err: AWSError, data: CloudFront.Types.ListConflictingAliasesResult) => void): Request<CloudFront.Types.ListConflictingAliasesResult, AWSError>;
   /**
    * List CloudFront distributions.
    */
@@ -438,11 +518,19 @@ declare class CloudFront extends CloudFrontCustomizations {
    */
   listDistributionsByRealtimeLogConfig(callback?: (err: AWSError, data: CloudFront.Types.ListDistributionsByRealtimeLogConfigResult) => void): Request<CloudFront.Types.ListDistributionsByRealtimeLogConfigResult, AWSError>;
   /**
-   * List the distributions that are associated with a specified AWS WAF web ACL. 
+   * Gets a list of distribution IDs for distributions that have a cache behavior that’s associated with the specified response headers policy. You can optionally specify the maximum number of items to receive in the response. If the total number of items in the list exceeds the maximum that you specify, or the default maximum, the response is paginated. To get the next page of items, send a subsequent request that specifies the NextMarker value from the current response as the Marker value in the subsequent request.
+   */
+  listDistributionsByResponseHeadersPolicyId(params: CloudFront.Types.ListDistributionsByResponseHeadersPolicyIdRequest, callback?: (err: AWSError, data: CloudFront.Types.ListDistributionsByResponseHeadersPolicyIdResult) => void): Request<CloudFront.Types.ListDistributionsByResponseHeadersPolicyIdResult, AWSError>;
+  /**
+   * Gets a list of distribution IDs for distributions that have a cache behavior that’s associated with the specified response headers policy. You can optionally specify the maximum number of items to receive in the response. If the total number of items in the list exceeds the maximum that you specify, or the default maximum, the response is paginated. To get the next page of items, send a subsequent request that specifies the NextMarker value from the current response as the Marker value in the subsequent request.
+   */
+  listDistributionsByResponseHeadersPolicyId(callback?: (err: AWSError, data: CloudFront.Types.ListDistributionsByResponseHeadersPolicyIdResult) => void): Request<CloudFront.Types.ListDistributionsByResponseHeadersPolicyIdResult, AWSError>;
+  /**
+   * List the distributions that are associated with a specified WAF web ACL.
    */
   listDistributionsByWebACLId(params: CloudFront.Types.ListDistributionsByWebACLIdRequest, callback?: (err: AWSError, data: CloudFront.Types.ListDistributionsByWebACLIdResult) => void): Request<CloudFront.Types.ListDistributionsByWebACLIdResult, AWSError>;
   /**
-   * List the distributions that are associated with a specified AWS WAF web ACL. 
+   * List the distributions that are associated with a specified WAF web ACL.
    */
   listDistributionsByWebACLId(callback?: (err: AWSError, data: CloudFront.Types.ListDistributionsByWebACLIdResult) => void): Request<CloudFront.Types.ListDistributionsByWebACLIdResult, AWSError>;
   /**
@@ -462,6 +550,14 @@ declare class CloudFront extends CloudFrontCustomizations {
    */
   listFieldLevelEncryptionProfiles(callback?: (err: AWSError, data: CloudFront.Types.ListFieldLevelEncryptionProfilesResult) => void): Request<CloudFront.Types.ListFieldLevelEncryptionProfilesResult, AWSError>;
   /**
+   * Gets a list of all CloudFront functions in your Amazon Web Services account. You can optionally apply a filter to return only the functions that are in the specified stage, either DEVELOPMENT or LIVE. You can optionally specify the maximum number of items to receive in the response. If the total number of items in the list exceeds the maximum that you specify, or the default maximum, the response is paginated. To get the next page of items, send a subsequent request that specifies the NextMarker value from the current response as the Marker value in the subsequent request.
+   */
+  listFunctions(params: CloudFront.Types.ListFunctionsRequest, callback?: (err: AWSError, data: CloudFront.Types.ListFunctionsResult) => void): Request<CloudFront.Types.ListFunctionsResult, AWSError>;
+  /**
+   * Gets a list of all CloudFront functions in your Amazon Web Services account. You can optionally apply a filter to return only the functions that are in the specified stage, either DEVELOPMENT or LIVE. You can optionally specify the maximum number of items to receive in the response. If the total number of items in the list exceeds the maximum that you specify, or the default maximum, the response is paginated. To get the next page of items, send a subsequent request that specifies the NextMarker value from the current response as the Marker value in the subsequent request.
+   */
+  listFunctions(callback?: (err: AWSError, data: CloudFront.Types.ListFunctionsResult) => void): Request<CloudFront.Types.ListFunctionsResult, AWSError>;
+  /**
    * Lists invalidation batches. 
    */
   listInvalidations(params: CloudFront.Types.ListInvalidationsRequest, callback?: (err: AWSError, data: CloudFront.Types.ListInvalidationsResult) => void): Request<CloudFront.Types.ListInvalidationsResult, AWSError>;
@@ -478,11 +574,11 @@ declare class CloudFront extends CloudFrontCustomizations {
    */
   listKeyGroups(callback?: (err: AWSError, data: CloudFront.Types.ListKeyGroupsResult) => void): Request<CloudFront.Types.ListKeyGroupsResult, AWSError>;
   /**
-   * Gets a list of origin request policies. You can optionally apply a filter to return only the managed policies created by AWS, or only the custom policies created in your AWS account. You can optionally specify the maximum number of items to receive in the response. If the total number of items in the list exceeds the maximum that you specify, or the default maximum, the response is paginated. To get the next page of items, send a subsequent request that specifies the NextMarker value from the current response as the Marker value in the subsequent request.
+   * Gets a list of origin request policies. You can optionally apply a filter to return only the managed policies created by Amazon Web Services, or only the custom policies created in your Amazon Web Services account. You can optionally specify the maximum number of items to receive in the response. If the total number of items in the list exceeds the maximum that you specify, or the default maximum, the response is paginated. To get the next page of items, send a subsequent request that specifies the NextMarker value from the current response as the Marker value in the subsequent request.
    */
   listOriginRequestPolicies(params: CloudFront.Types.ListOriginRequestPoliciesRequest, callback?: (err: AWSError, data: CloudFront.Types.ListOriginRequestPoliciesResult) => void): Request<CloudFront.Types.ListOriginRequestPoliciesResult, AWSError>;
   /**
-   * Gets a list of origin request policies. You can optionally apply a filter to return only the managed policies created by AWS, or only the custom policies created in your AWS account. You can optionally specify the maximum number of items to receive in the response. If the total number of items in the list exceeds the maximum that you specify, or the default maximum, the response is paginated. To get the next page of items, send a subsequent request that specifies the NextMarker value from the current response as the Marker value in the subsequent request.
+   * Gets a list of origin request policies. You can optionally apply a filter to return only the managed policies created by Amazon Web Services, or only the custom policies created in your Amazon Web Services account. You can optionally specify the maximum number of items to receive in the response. If the total number of items in the list exceeds the maximum that you specify, or the default maximum, the response is paginated. To get the next page of items, send a subsequent request that specifies the NextMarker value from the current response as the Marker value in the subsequent request.
    */
   listOriginRequestPolicies(callback?: (err: AWSError, data: CloudFront.Types.ListOriginRequestPoliciesResult) => void): Request<CloudFront.Types.ListOriginRequestPoliciesResult, AWSError>;
   /**
@@ -502,6 +598,14 @@ declare class CloudFront extends CloudFrontCustomizations {
    */
   listRealtimeLogConfigs(callback?: (err: AWSError, data: CloudFront.Types.ListRealtimeLogConfigsResult) => void): Request<CloudFront.Types.ListRealtimeLogConfigsResult, AWSError>;
   /**
+   * Gets a list of response headers policies. You can optionally apply a filter to get only the managed policies created by Amazon Web Services, or only the custom policies created in your Amazon Web Services account. You can optionally specify the maximum number of items to receive in the response. If the total number of items in the list exceeds the maximum that you specify, or the default maximum, the response is paginated. To get the next page of items, send a subsequent request that specifies the NextMarker value from the current response as the Marker value in the subsequent request.
+   */
+  listResponseHeadersPolicies(params: CloudFront.Types.ListResponseHeadersPoliciesRequest, callback?: (err: AWSError, data: CloudFront.Types.ListResponseHeadersPoliciesResult) => void): Request<CloudFront.Types.ListResponseHeadersPoliciesResult, AWSError>;
+  /**
+   * Gets a list of response headers policies. You can optionally apply a filter to get only the managed policies created by Amazon Web Services, or only the custom policies created in your Amazon Web Services account. You can optionally specify the maximum number of items to receive in the response. If the total number of items in the list exceeds the maximum that you specify, or the default maximum, the response is paginated. To get the next page of items, send a subsequent request that specifies the NextMarker value from the current response as the Marker value in the subsequent request.
+   */
+  listResponseHeadersPolicies(callback?: (err: AWSError, data: CloudFront.Types.ListResponseHeadersPoliciesResult) => void): Request<CloudFront.Types.ListResponseHeadersPoliciesResult, AWSError>;
+  /**
    * List streaming distributions. 
    */
   listStreamingDistributions(params: CloudFront.Types.ListStreamingDistributionsRequest, callback?: (err: AWSError, data: CloudFront.Types.ListStreamingDistributionsResult) => void): Request<CloudFront.Types.ListStreamingDistributionsResult, AWSError>;
@@ -518,6 +622,14 @@ declare class CloudFront extends CloudFrontCustomizations {
    */
   listTagsForResource(callback?: (err: AWSError, data: CloudFront.Types.ListTagsForResourceResult) => void): Request<CloudFront.Types.ListTagsForResourceResult, AWSError>;
   /**
+   * Publishes a CloudFront function by copying the function code from the DEVELOPMENT stage to LIVE. This automatically updates all cache behaviors that are using this function to use the newly published copy in the LIVE stage. When a function is published to the LIVE stage, you can attach the function to a distribution’s cache behavior, using the function’s Amazon Resource Name (ARN). To publish a function, you must provide the function’s name and version (ETag value). To get these values, you can use ListFunctions and DescribeFunction.
+   */
+  publishFunction(params: CloudFront.Types.PublishFunctionRequest, callback?: (err: AWSError, data: CloudFront.Types.PublishFunctionResult) => void): Request<CloudFront.Types.PublishFunctionResult, AWSError>;
+  /**
+   * Publishes a CloudFront function by copying the function code from the DEVELOPMENT stage to LIVE. This automatically updates all cache behaviors that are using this function to use the newly published copy in the LIVE stage. When a function is published to the LIVE stage, you can attach the function to a distribution’s cache behavior, using the function’s Amazon Resource Name (ARN). To publish a function, you must provide the function’s name and version (ETag value). To get these values, you can use ListFunctions and DescribeFunction.
+   */
+  publishFunction(callback?: (err: AWSError, data: CloudFront.Types.PublishFunctionResult) => void): Request<CloudFront.Types.PublishFunctionResult, AWSError>;
+  /**
    * Add tags to a CloudFront resource.
    */
   tagResource(params: CloudFront.Types.TagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -525,6 +637,14 @@ declare class CloudFront extends CloudFrontCustomizations {
    * Add tags to a CloudFront resource.
    */
   tagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Tests a CloudFront function. To test a function, you provide an event object that represents an HTTP request or response that your CloudFront distribution could receive in production. CloudFront runs the function, passing it the event object that you provided, and returns the function’s result (the modified event object) in the response. The response also contains function logs and error messages, if any exist. For more information about testing functions, see Testing functions in the Amazon CloudFront Developer Guide. To test a function, you provide the function’s name and version (ETag value) along with the event object. To get the function’s name and version, you can use ListFunctions and DescribeFunction.
+   */
+  testFunction(params: CloudFront.Types.TestFunctionRequest, callback?: (err: AWSError, data: CloudFront.Types.TestFunctionResult) => void): Request<CloudFront.Types.TestFunctionResult, AWSError>;
+  /**
+   * Tests a CloudFront function. To test a function, you provide an event object that represents an HTTP request or response that your CloudFront distribution could receive in production. CloudFront runs the function, passing it the event object that you provided, and returns the function’s result (the modified event object) in the response. The response also contains function logs and error messages, if any exist. For more information about testing functions, see Testing functions in the Amazon CloudFront Developer Guide. To test a function, you provide the function’s name and version (ETag value) along with the event object. To get the function’s name and version, you can use ListFunctions and DescribeFunction.
+   */
+  testFunction(callback?: (err: AWSError, data: CloudFront.Types.TestFunctionResult) => void): Request<CloudFront.Types.TestFunctionResult, AWSError>;
   /**
    * Remove tags from a CloudFront resource.
    */
@@ -574,6 +694,14 @@ declare class CloudFront extends CloudFrontCustomizations {
    */
   updateFieldLevelEncryptionProfile(callback?: (err: AWSError, data: CloudFront.Types.UpdateFieldLevelEncryptionProfileResult) => void): Request<CloudFront.Types.UpdateFieldLevelEncryptionProfileResult, AWSError>;
   /**
+   * Updates a CloudFront function. You can update a function’s code or the comment that describes the function. You cannot update a function’s name. To update a function, you provide the function’s name and version (ETag value) along with the updated function code. To get the name and version, you can use ListFunctions and DescribeFunction.
+   */
+  updateFunction(params: CloudFront.Types.UpdateFunctionRequest, callback?: (err: AWSError, data: CloudFront.Types.UpdateFunctionResult) => void): Request<CloudFront.Types.UpdateFunctionResult, AWSError>;
+  /**
+   * Updates a CloudFront function. You can update a function’s code or the comment that describes the function. You cannot update a function’s name. To update a function, you provide the function’s name and version (ETag value) along with the updated function code. To get the name and version, you can use ListFunctions and DescribeFunction.
+   */
+  updateFunction(callback?: (err: AWSError, data: CloudFront.Types.UpdateFunctionResult) => void): Request<CloudFront.Types.UpdateFunctionResult, AWSError>;
+  /**
    * Updates a key group. When you update a key group, all the fields are updated with the values provided in the request. You cannot update some fields independent of others. To update a key group:   Get the current key group with GetKeyGroup or GetKeyGroupConfig.   Locally modify the fields in the key group that you want to update. For example, add or remove public key IDs.   Call UpdateKeyGroup with the entire key group object, including the fields that you modified and those that you didn’t.  
    */
   updateKeyGroup(params: CloudFront.Types.UpdateKeyGroupRequest, callback?: (err: AWSError, data: CloudFront.Types.UpdateKeyGroupResult) => void): Request<CloudFront.Types.UpdateKeyGroupResult, AWSError>;
@@ -605,6 +733,14 @@ declare class CloudFront extends CloudFrontCustomizations {
    * Updates a real-time log configuration. When you update a real-time log configuration, all the parameters are updated with the values provided in the request. You cannot update some parameters independent of others. To update a real-time log configuration:   Call GetRealtimeLogConfig to get the current real-time log configuration.   Locally modify the parameters in the real-time log configuration that you want to update.   Call this API (UpdateRealtimeLogConfig) by providing the entire real-time log configuration, including the parameters that you modified and those that you didn’t.   You cannot update a real-time log configuration’s Name or ARN.
    */
   updateRealtimeLogConfig(callback?: (err: AWSError, data: CloudFront.Types.UpdateRealtimeLogConfigResult) => void): Request<CloudFront.Types.UpdateRealtimeLogConfigResult, AWSError>;
+  /**
+   * Updates a response headers policy. When you update a response headers policy, the entire policy is replaced. You cannot update some policy fields independent of others. To update a response headers policy configuration:   Use GetResponseHeadersPolicyConfig to get the current policy’s configuration.   Modify the fields in the response headers policy configuration that you want to update.   Call UpdateResponseHeadersPolicy, providing the entire response headers policy configuration, including the fields that you modified and those that you didn’t.  
+   */
+  updateResponseHeadersPolicy(params: CloudFront.Types.UpdateResponseHeadersPolicyRequest, callback?: (err: AWSError, data: CloudFront.Types.UpdateResponseHeadersPolicyResult) => void): Request<CloudFront.Types.UpdateResponseHeadersPolicyResult, AWSError>;
+  /**
+   * Updates a response headers policy. When you update a response headers policy, the entire policy is replaced. You cannot update some policy fields independent of others. To update a response headers policy configuration:   Use GetResponseHeadersPolicyConfig to get the current policy’s configuration.   Modify the fields in the response headers policy configuration that you want to update.   Call UpdateResponseHeadersPolicy, providing the entire response headers policy configuration, including the fields that you modified and those that you didn’t.  
+   */
+  updateResponseHeadersPolicy(callback?: (err: AWSError, data: CloudFront.Types.UpdateResponseHeadersPolicyResult) => void): Request<CloudFront.Types.UpdateResponseHeadersPolicyResult, AWSError>;
   /**
    * Update a streaming distribution. 
    */
@@ -642,6 +778,10 @@ declare namespace CloudFront {
   export import Signer = signer;
 }
 declare namespace CloudFront {
+  export type AccessControlAllowHeadersList = string[];
+  export type AccessControlAllowMethodsList = ResponseHeadersPolicyAccessControlAllowMethodsValues[];
+  export type AccessControlAllowOriginsList = string[];
+  export type AccessControlExposeHeadersList = string[];
   export interface ActiveTrustedKeyGroups {
     /**
      * This field is true if any of the key groups have public keys that CloudFront can use to verify the signatures of signed URLs and signed cookies. If not, this field is false.
@@ -658,15 +798,15 @@ declare namespace CloudFront {
   }
   export interface ActiveTrustedSigners {
     /**
-     * This field is true if any of the AWS accounts in the list have active CloudFront key pairs that CloudFront can use to verify the signatures of signed URLs and signed cookies. If not, this field is false.
+     * This field is true if any of the Amazon Web Services accounts in the list have active CloudFront key pairs that CloudFront can use to verify the signatures of signed URLs and signed cookies. If not, this field is false.
      */
     Enabled: boolean;
     /**
-     * The number of AWS accounts in the list.
+     * The number of Amazon Web Services accounts in the list.
      */
     Quantity: integer;
     /**
-     * A list of AWS accounts and the identifiers of active CloudFront key pairs in each account that CloudFront can use to verify the signatures of signed URLs and signed cookies.
+     * A list of Amazon Web Services accounts and the identifiers of active CloudFront key pairs in each account that CloudFront can use to verify the signatures of signed URLs and signed cookies.
      */
     Items?: SignerList;
   }
@@ -703,6 +843,16 @@ declare namespace CloudFront {
     Items: MethodsList;
     CachedMethods?: CachedMethods;
   }
+  export interface AssociateAliasRequest {
+    /**
+     * The ID of the distribution that you’re associating the alias with.
+     */
+    TargetDistributionId: string;
+    /**
+     * The alias (also known as a CNAME) to add to the target distribution.
+     */
+    Alias: string;
+  }
   export type AwsAccountNumberList = string[];
   export interface CacheBehavior {
     /**
@@ -714,7 +864,7 @@ declare namespace CloudFront {
      */
     TargetOriginId: string;
     /**
-     *  We recommend using TrustedKeyGroups instead of TrustedSigners.  A list of AWS account IDs whose public keys CloudFront can use to validate signed URLs or signed cookies. When a cache behavior contains trusted signers, CloudFront requires signed URLs or signed cookies for all requests that match the cache behavior. The URLs or cookies must be signed with the private key of a CloudFront key pair in the trusted signer’s AWS account. The signed URL or cookie contains information about which public key CloudFront should use to verify the signature. For more information, see Serving private content in the Amazon CloudFront Developer Guide.
+     *  We recommend using TrustedKeyGroups instead of TrustedSigners.  A list of Amazon Web Services account IDs whose public keys CloudFront can use to validate signed URLs or signed cookies. When a cache behavior contains trusted signers, CloudFront requires signed URLs or signed cookies for all requests that match the cache behavior. The URLs or cookies must be signed with the private key of a CloudFront key pair in the trusted signer’s Amazon Web Services account. The signed URL or cookie contains information about which public key CloudFront should use to verify the signature. For more information, see Serving private content in the Amazon CloudFront Developer Guide.
      */
     TrustedSigners?: TrustedSigners;
     /**
@@ -735,9 +885,13 @@ declare namespace CloudFront {
      */
     Compress?: boolean;
     /**
-     * A complex type that contains zero or more Lambda function associations for a cache behavior.
+     * A complex type that contains zero or more Lambda@Edge function associations for a cache behavior.
      */
     LambdaFunctionAssociations?: LambdaFunctionAssociations;
+    /**
+     * A list of CloudFront functions that are associated with this cache behavior. CloudFront functions must be published to the LIVE stage to associate them with a cache behavior.
+     */
+    FunctionAssociations?: FunctionAssociations;
     /**
      * The value of ID for the field-level encryption configuration that you want CloudFront to use for encrypting specific fields of data for this cache behavior.
      */
@@ -747,7 +901,7 @@ declare namespace CloudFront {
      */
     RealtimeLogConfigArn?: string;
     /**
-     * The unique identifier of the cache policy that is attached to this cache behavior. For more information, see Creating cache policies or Using the managed cache policies in the Amazon CloudFront Developer Guide.
+     * The unique identifier of the cache policy that is attached to this cache behavior. For more information, see Creating cache policies or Using the managed cache policies in the Amazon CloudFront Developer Guide. A CacheBehavior must include either a CachePolicyId or ForwardedValues. We recommend that you use a CachePolicyId.
      */
     CachePolicyId?: string;
     /**
@@ -755,7 +909,11 @@ declare namespace CloudFront {
      */
     OriginRequestPolicyId?: string;
     /**
-     * This field is deprecated. We recommend that you use a cache policy or an origin request policy instead of this field. For more information, see Working with policies in the Amazon CloudFront Developer Guide. If you want to include values in the cache key, use a cache policy. For more information, see Creating cache policies or Using the managed cache policies in the Amazon CloudFront Developer Guide. If you want to send values to the origin but not include them in the cache key, use an origin request policy. For more information, see Creating origin request policies or Using the managed origin request policies in the Amazon CloudFront Developer Guide. A complex type that specifies how CloudFront handles query strings, cookies, and HTTP headers.
+     * The identifier for a response headers policy.
+     */
+    ResponseHeadersPolicyId?: string;
+    /**
+     * This field is deprecated. We recommend that you use a cache policy or an origin request policy instead of this field. For more information, see Working with policies in the Amazon CloudFront Developer Guide. If you want to include values in the cache key, use a cache policy. For more information, see Creating cache policies or Using the managed cache policies in the Amazon CloudFront Developer Guide. If you want to send values to the origin but not include them in the cache key, use an origin request policy. For more information, see Creating origin request policies or Using the managed origin request policies in the Amazon CloudFront Developer Guide. A CacheBehavior must include either a CachePolicyId or ForwardedValues. We recommend that you use a CachePolicyId. A complex type that specifies how CloudFront handles query strings, cookies, and HTTP headers.
      */
     ForwardedValues?: ForwardedValues;
     /**
@@ -798,7 +956,7 @@ declare namespace CloudFront {
   }
   export interface CachePolicyConfig {
     /**
-     * A comment to describe the cache policy.
+     * A comment to describe the cache policy. The comment cannot be longer than 128 characters.
      */
     Comment?: string;
     /**
@@ -869,7 +1027,7 @@ declare namespace CloudFront {
   }
   export interface CachePolicySummary {
     /**
-     * The type of cache policy, either managed (created by AWS) or custom (created in this AWS account).
+     * The type of cache policy, either managed (created by Amazon Web Services) or custom (created in this Amazon Web Services account).
      */
     Type: CachePolicyType;
     /**
@@ -910,7 +1068,7 @@ declare namespace CloudFront {
      */
     CallerReference: string;
     /**
-     * Any comments you want to include about the origin access identity. 
+     * A comment to describe the origin access identity. The comment cannot be longer than 128 characters.
      */
     Comment: string;
   }
@@ -932,11 +1090,11 @@ declare namespace CloudFront {
      */
     IsTruncated: boolean;
     /**
-     * The number of CloudFront origin access identities that were created by the current AWS account. 
+     * The number of CloudFront origin access identities that were created by the current Amazon Web Services account.
      */
     Quantity: integer;
     /**
-     * A complex type that contains one CloudFrontOriginAccessIdentitySummary element for each origin access identity that was created by the current AWS account.
+     * A complex type that contains one CloudFrontOriginAccessIdentitySummary element for each origin access identity that was created by the current Amazon Web Services account.
      */
     Items?: CloudFrontOriginAccessIdentitySummaryList;
   }
@@ -956,6 +1114,39 @@ declare namespace CloudFront {
   }
   export type CloudFrontOriginAccessIdentitySummaryList = CloudFrontOriginAccessIdentitySummary[];
   export type CommentType = string;
+  export interface ConflictingAlias {
+    /**
+     * An alias (also called a CNAME).
+     */
+    Alias?: string;
+    /**
+     * The (partially hidden) ID of the CloudFront distribution associated with the alias.
+     */
+    DistributionId?: string;
+    /**
+     * The (partially hidden) ID of the Amazon Web Services account that owns the distribution that’s associated with the alias.
+     */
+    AccountId?: string;
+  }
+  export type ConflictingAliases = ConflictingAlias[];
+  export interface ConflictingAliasesList {
+    /**
+     * If there are more items in the list than are in this response, this element is present. It contains the value that you should use in the Marker field of a subsequent request to continue listing conflicting aliases where you left off.
+     */
+    NextMarker?: string;
+    /**
+     * The maximum number of conflicting aliases requested.
+     */
+    MaxItems?: integer;
+    /**
+     * The number of conflicting aliases returned in the response.
+     */
+    Quantity?: integer;
+    /**
+     * Contains the conflicting aliases in the list.
+     */
+    Items?: ConflictingAliases;
+  }
   export interface ContentTypeProfile {
     /**
      * The format for a field-level encryption content type-profile mapping. 
@@ -1008,7 +1199,7 @@ declare namespace CloudFront {
      */
     Forward: ItemSelection;
     /**
-     * This field is deprecated. We recommend that you use a cache policy or an origin request policy instead of this field. If you want to include cookies in the cache key, use a cache policy. For more information, see Creating cache policies in the Amazon CloudFront Developer Guide. If you want to send cookies to the origin but not include them in the cache key, use an origin request policy. For more information, see Creating origin request policies in the Amazon CloudFront Developer Guide. Required if you specify whitelist for the value of Forward. A complex type that specifies how many different cookies you want CloudFront to forward to the origin for this cache behavior and, if you want to forward selected cookies, the names of those cookies. If you specify all or none for the value of Forward, omit WhitelistedNames. If you change the value of Forward from whitelist to all or none and you don't delete the WhitelistedNames element and its child elements, CloudFront deletes them automatically. For the current limit on the number of cookie names that you can whitelist for each cache behavior, see  CloudFront Limits in the AWS General Reference.
+     * This field is deprecated. We recommend that you use a cache policy or an origin request policy instead of this field. If you want to include cookies in the cache key, use a cache policy. For more information, see Creating cache policies in the Amazon CloudFront Developer Guide. If you want to send cookies to the origin but not include them in the cache key, use an origin request policy. For more information, see Creating origin request policies in the Amazon CloudFront Developer Guide. Required if you specify whitelist for the value of Forward. A complex type that specifies how many different cookies you want CloudFront to forward to the origin for this cache behavior and, if you want to forward selected cookies, the names of those cookies. If you specify all or none for the value of Forward, omit WhitelistedNames. If you change the value of Forward from whitelist to all or none and you don't delete the WhitelistedNames element and its child elements, CloudFront deletes them automatically. For the current limit on the number of cookie names that you can whitelist for each cache behavior, see  CloudFront Limits in the Amazon Web Services General Reference.
      */
     WhitelistedNames?: CookieNames;
   }
@@ -1132,6 +1323,34 @@ declare namespace CloudFront {
      */
     ETag?: string;
   }
+  export interface CreateFunctionRequest {
+    /**
+     * A name to identify the function.
+     */
+    Name: FunctionName;
+    /**
+     * Configuration information about the function, including an optional comment and the function’s runtime.
+     */
+    FunctionConfig: FunctionConfig;
+    /**
+     * The function code. For more information about writing a CloudFront function, see Writing function code for CloudFront Functions in the Amazon CloudFront Developer Guide.
+     */
+    FunctionCode: FunctionBlob;
+  }
+  export interface CreateFunctionResult {
+    /**
+     * Contains configuration information and metadata about a CloudFront function.
+     */
+    FunctionSummary?: FunctionSummary;
+    /**
+     * The URL of the CloudFront function. Use the URL to manage the function with the CloudFront API.
+     */
+    Location?: string;
+    /**
+     * The version identifier for the current version of the CloudFront function.
+     */
+    ETag?: string;
+  }
   export interface CreateInvalidationRequest {
     /**
      * The distribution's id.
@@ -1252,6 +1471,26 @@ declare namespace CloudFront {
      */
     RealtimeLogConfig?: RealtimeLogConfig;
   }
+  export interface CreateResponseHeadersPolicyRequest {
+    /**
+     * Contains metadata about the response headers policy, and a set of configurations that specify the response headers.
+     */
+    ResponseHeadersPolicyConfig: ResponseHeadersPolicyConfig;
+  }
+  export interface CreateResponseHeadersPolicyResult {
+    /**
+     * Contains a response headers policy.
+     */
+    ResponseHeadersPolicy?: ResponseHeadersPolicy;
+    /**
+     * The URL of the response headers policy.
+     */
+    Location?: string;
+    /**
+     * The version identifier for the current version of the response headers policy.
+     */
+    ETag?: string;
+  }
   export interface CreateStreamingDistributionRequest {
     /**
      * The streaming distribution's configuration information.
@@ -1363,7 +1602,7 @@ declare namespace CloudFront {
      */
     TargetOriginId: string;
     /**
-     *  We recommend using TrustedKeyGroups instead of TrustedSigners.  A list of AWS account IDs whose public keys CloudFront can use to validate signed URLs or signed cookies. When a cache behavior contains trusted signers, CloudFront requires signed URLs or signed cookies for all requests that match the cache behavior. The URLs or cookies must be signed with the private key of a CloudFront key pair in a trusted signer’s AWS account. The signed URL or cookie contains information about which public key CloudFront should use to verify the signature. For more information, see Serving private content in the Amazon CloudFront Developer Guide.
+     *  We recommend using TrustedKeyGroups instead of TrustedSigners.  A list of Amazon Web Services account IDs whose public keys CloudFront can use to validate signed URLs or signed cookies. When a cache behavior contains trusted signers, CloudFront requires signed URLs or signed cookies for all requests that match the cache behavior. The URLs or cookies must be signed with the private key of a CloudFront key pair in a trusted signer’s Amazon Web Services account. The signed URL or cookie contains information about which public key CloudFront should use to verify the signature. For more information, see Serving private content in the Amazon CloudFront Developer Guide.
      */
     TrustedSigners?: TrustedSigners;
     /**
@@ -1384,9 +1623,13 @@ declare namespace CloudFront {
      */
     Compress?: boolean;
     /**
-     * A complex type that contains zero or more Lambda function associations for a cache behavior.
+     * A complex type that contains zero or more Lambda@Edge function associations for a cache behavior.
      */
     LambdaFunctionAssociations?: LambdaFunctionAssociations;
+    /**
+     * A list of CloudFront functions that are associated with this cache behavior. CloudFront functions must be published to the LIVE stage to associate them with a cache behavior.
+     */
+    FunctionAssociations?: FunctionAssociations;
     /**
      * The value of ID for the field-level encryption configuration that you want CloudFront to use for encrypting specific fields of data for the default cache behavior.
      */
@@ -1396,7 +1639,7 @@ declare namespace CloudFront {
      */
     RealtimeLogConfigArn?: string;
     /**
-     * The unique identifier of the cache policy that is attached to the default cache behavior. For more information, see Creating cache policies or Using the managed cache policies in the Amazon CloudFront Developer Guide.
+     * The unique identifier of the cache policy that is attached to the default cache behavior. For more information, see Creating cache policies or Using the managed cache policies in the Amazon CloudFront Developer Guide. A DefaultCacheBehavior must include either a CachePolicyId or ForwardedValues. We recommend that you use a CachePolicyId.
      */
     CachePolicyId?: string;
     /**
@@ -1404,7 +1647,11 @@ declare namespace CloudFront {
      */
     OriginRequestPolicyId?: string;
     /**
-     * This field is deprecated. We recommend that you use a cache policy or an origin request policy instead of this field. For more information, see Working with policies in the Amazon CloudFront Developer Guide. If you want to include values in the cache key, use a cache policy. For more information, see Creating cache policies or Using the managed cache policies in the Amazon CloudFront Developer Guide. If you want to send values to the origin but not include them in the cache key, use an origin request policy. For more information, see Creating origin request policies or Using the managed origin request policies in the Amazon CloudFront Developer Guide. A complex type that specifies how CloudFront handles query strings, cookies, and HTTP headers.
+     * The identifier for a response headers policy.
+     */
+    ResponseHeadersPolicyId?: string;
+    /**
+     * This field is deprecated. We recommend that you use a cache policy or an origin request policy instead of this field. For more information, see Working with policies in the Amazon CloudFront Developer Guide. If you want to include values in the cache key, use a cache policy. For more information, see Creating cache policies or Using the managed cache policies in the Amazon CloudFront Developer Guide. If you want to send values to the origin but not include them in the cache key, use an origin request policy. For more information, see Creating origin request policies or Using the managed origin request policies in the Amazon CloudFront Developer Guide. A DefaultCacheBehavior must include either a CachePolicyId or ForwardedValues. We recommend that you use a CachePolicyId. A complex type that specifies how CloudFront handles query strings, cookies, and HTTP headers.
      */
     ForwardedValues?: ForwardedValues;
     /**
@@ -1470,6 +1717,16 @@ declare namespace CloudFront {
      */
     IfMatch?: string;
   }
+  export interface DeleteFunctionRequest {
+    /**
+     * The name of the function that you are deleting.
+     */
+    Name: string;
+    /**
+     * The current version (ETag value) of the function that you are deleting, which you can get using DescribeFunction.
+     */
+    IfMatch: string;
+  }
   export interface DeleteKeyGroupRequest {
     /**
      * The identifier of the key group that you are deleting. To get the identifier, use ListKeyGroups.
@@ -1518,6 +1775,16 @@ declare namespace CloudFront {
      */
     ARN?: string;
   }
+  export interface DeleteResponseHeadersPolicyRequest {
+    /**
+     * The identifier for the response headers policy that you are deleting. To get the identifier, you can use ListResponseHeadersPolicies.
+     */
+    Id: string;
+    /**
+     * The version of the response headers policy that you are deleting. The version is the response headers policy’s ETag value, which you can get using ListResponseHeadersPolicies, GetResponseHeadersPolicy, or GetResponseHeadersPolicyConfig.
+     */
+    IfMatch?: string;
+  }
   export interface DeleteStreamingDistributionRequest {
     /**
      * The distribution ID. 
@@ -1528,13 +1795,33 @@ declare namespace CloudFront {
      */
     IfMatch?: string;
   }
+  export interface DescribeFunctionRequest {
+    /**
+     * The name of the function that you are getting information about.
+     */
+    Name: string;
+    /**
+     * The function’s stage, either DEVELOPMENT or LIVE.
+     */
+    Stage?: FunctionStage;
+  }
+  export interface DescribeFunctionResult {
+    /**
+     * Contains configuration information and metadata about a CloudFront function.
+     */
+    FunctionSummary?: FunctionSummary;
+    /**
+     * The version identifier for the current version of the CloudFront function.
+     */
+    ETag?: string;
+  }
   export interface Distribution {
     /**
      * The identifier for the distribution. For example: EDFDVBD632BHDS5. 
      */
     Id: string;
     /**
-     * The ARN (Amazon Resource Name) for the distribution. For example: arn:aws:cloudfront::123456789012:distribution/EDFDVBD632BHDS5, where 123456789012 is your AWS account ID.
+     * The ARN (Amazon Resource Name) for the distribution. For example: arn:aws:cloudfront::123456789012:distribution/EDFDVBD632BHDS5, where 123456789012 is your Amazon Web Services account ID.
      */
     ARN: string;
     /**
@@ -1554,7 +1841,7 @@ declare namespace CloudFront {
      */
     DomainName: string;
     /**
-     *  We recommend using TrustedKeyGroups instead of TrustedSigners.  CloudFront automatically adds this field to the response if you’ve configured a cache behavior in this distribution to serve private content using trusted signers. This field contains a list of AWS account IDs and the active CloudFront key pairs in each account that CloudFront can use to verify the signatures of signed URLs or signed cookies.
+     *  We recommend using TrustedKeyGroups instead of TrustedSigners.  CloudFront automatically adds this field to the response if you’ve configured a cache behavior in this distribution to serve private content using trusted signers. This field contains a list of Amazon Web Services account IDs and the active CloudFront key pairs in each account that CloudFront can use to verify the signatures of signed URLs or signed cookies.
      */
     ActiveTrustedSigners?: ActiveTrustedSigners;
     /**
@@ -1566,7 +1853,7 @@ declare namespace CloudFront {
      */
     DistributionConfig: DistributionConfig;
     /**
-     * AWS services in China customers must file for an Internet Content Provider (ICP) recordal if they want to serve content publicly on an alternate domain name, also known as a CNAME, that they've added to CloudFront. AliasICPRecordal provides the ICP recordal status for CNAMEs associated with distributions. For more information about ICP recordals, see  Signup, Accounts, and Credentials in Getting Started with AWS services in China.
+     * Amazon Web Services services in China customers must file for an Internet Content Provider (ICP) recordal if they want to serve content publicly on an alternate domain name, also known as a CNAME, that they've added to CloudFront. AliasICPRecordal provides the ICP recordal status for CNAMEs associated with distributions. For more information about ICP recordals, see  Signup, Accounts, and Credentials in Getting Started with Amazon Web Services services in China.
      */
     AliasICPRecordals?: AliasICPRecordals;
   }
@@ -1604,7 +1891,7 @@ declare namespace CloudFront {
      */
     CustomErrorResponses?: CustomErrorResponses;
     /**
-     * Any comments you want to include about the distribution. If you don't want to specify a comment, include an empty Comment element. To delete an existing comment, update the distribution configuration and include an empty Comment element. To add or change a comment, update the distribution configuration and specify the new comment.
+     * An optional comment to describe the distribution. The comment cannot be longer than 128 characters.
      */
     Comment: CommentType;
     /**
@@ -1628,7 +1915,7 @@ declare namespace CloudFront {
      */
     Restrictions?: Restrictions;
     /**
-     * A unique identifier that specifies the AWS WAF web ACL, if any, to associate with this distribution. To specify a web ACL created using the latest version of AWS WAF, use the ACL ARN, for example arn:aws:wafv2:us-east-1:123456789012:global/webacl/ExampleWebACL/473e64fd-f30b-4765-81a0-62ad96dd167a. To specify a web ACL created using AWS WAF Classic, use the ACL ID, for example 473e64fd-f30b-4765-81a0-62ad96dd167a. AWS WAF is a web application firewall that lets you monitor the HTTP and HTTPS requests that are forwarded to CloudFront, and lets you control access to your content. Based on conditions that you specify, such as the IP addresses that requests originate from or the values of query strings, CloudFront responds to requests either with the requested content or with an HTTP 403 status code (Forbidden). You can also configure CloudFront to return a custom error page when a request is blocked. For more information about AWS WAF, see the AWS WAF Developer Guide. 
+     * A unique identifier that specifies the WAF web ACL, if any, to associate with this distribution. To specify a web ACL created using the latest version of WAF, use the ACL ARN, for example arn:aws:wafv2:us-east-1:123456789012:global/webacl/ExampleWebACL/473e64fd-f30b-4765-81a0-62ad96dd167a. To specify a web ACL created using WAF Classic, use the ACL ID, for example 473e64fd-f30b-4765-81a0-62ad96dd167a. WAF is a web application firewall that lets you monitor the HTTP and HTTPS requests that are forwarded to CloudFront, and lets you control access to your content. Based on conditions that you specify, such as the IP addresses that requests originate from or the values of query strings, CloudFront responds to requests either with the requested content or with an HTTP 403 status code (Forbidden). You can also configure CloudFront to return a custom error page when a request is blocked. For more information about WAF, see the WAF Developer Guide. 
      */
     WebACLId?: string;
     /**
@@ -1636,7 +1923,7 @@ declare namespace CloudFront {
      */
     HttpVersion?: HttpVersion;
     /**
-     * If you want CloudFront to respond to IPv6 DNS requests with an IPv6 address for your distribution, specify true. If you specify false, CloudFront responds to IPv6 DNS requests with the DNS response code NOERROR and with no IP addresses. This allows viewers to submit a second request, for an IPv4 address for your distribution.  In general, you should enable IPv6 if you have users on IPv6 networks who want to access your content. However, if you're using signed URLs or signed cookies to restrict access to your content, and if you're using a custom policy that includes the IpAddress parameter to restrict the IP addresses that can access your content, don't enable IPv6. If you want to restrict access to some content by IP address and not restrict access to other content (or restrict access but not by IP address), you can create two distributions. For more information, see Creating a Signed URL Using a Custom Policy in the Amazon CloudFront Developer Guide. If you're using an Amazon Route 53 alias resource record set to route traffic to your CloudFront distribution, you need to create a second alias resource record set when both of the following are true:   You enable IPv6 for the distribution   You're using alternate domain names in the URLs for your objects   For more information, see Routing Traffic to an Amazon CloudFront Web Distribution by Using Your Domain Name in the Amazon Route 53 Developer Guide. If you created a CNAME resource record set, either with Amazon Route 53 or with another DNS service, you don't need to make any changes. A CNAME record will route traffic to your distribution regardless of the IP address format of the viewer request.
+     * If you want CloudFront to respond to IPv6 DNS requests with an IPv6 address for your distribution, specify true. If you specify false, CloudFront responds to IPv6 DNS requests with the DNS response code NOERROR and with no IP addresses. This allows viewers to submit a second request, for an IPv4 address for your distribution.  In general, you should enable IPv6 if you have users on IPv6 networks who want to access your content. However, if you're using signed URLs or signed cookies to restrict access to your content, and if you're using a custom policy that includes the IpAddress parameter to restrict the IP addresses that can access your content, don't enable IPv6. If you want to restrict access to some content by IP address and not restrict access to other content (or restrict access but not by IP address), you can create two distributions. For more information, see Creating a Signed URL Using a Custom Policy in the Amazon CloudFront Developer Guide. If you're using an Route 53 Amazon Web Services Integration alias resource record set to route traffic to your CloudFront distribution, you need to create a second alias resource record set when both of the following are true:   You enable IPv6 for the distribution   You're using alternate domain names in the URLs for your objects   For more information, see Routing Traffic to an Amazon CloudFront Web Distribution by Using Your Domain Name in the Route 53 Amazon Web Services Integration Developer Guide. If you created a CNAME resource record set, either with Route 53 Amazon Web Services Integration or with another DNS service, you don't need to make any changes. A CNAME record will route traffic to your distribution regardless of the IP address format of the viewer request.
      */
     IsIPV6Enabled?: boolean;
   }
@@ -1695,11 +1982,11 @@ declare namespace CloudFront {
      */
     IsTruncated: boolean;
     /**
-     * The number of distributions that were created by the current AWS account. 
+     * The number of distributions that were created by the current Amazon Web Services account.
      */
     Quantity: integer;
     /**
-     * A complex type that contains one DistributionSummary element for each distribution that was created by the current AWS account.
+     * A complex type that contains one DistributionSummary element for each distribution that was created by the current Amazon Web Services account.
      */
     Items?: DistributionSummaryList;
   }
@@ -1709,7 +1996,7 @@ declare namespace CloudFront {
      */
     Id: string;
     /**
-     * The ARN (Amazon Resource Name) for the distribution. For example: arn:aws:cloudfront::123456789012:distribution/EDFDVBD632BHDS5, where 123456789012 is your AWS account ID.
+     * The ARN (Amazon Resource Name) for the distribution. For example: arn:aws:cloudfront::123456789012:distribution/EDFDVBD632BHDS5, where 123456789012 is your Amazon Web Services account ID.
      */
     ARN: string;
     /**
@@ -1781,7 +2068,7 @@ declare namespace CloudFront {
      */
     IsIPV6Enabled: boolean;
     /**
-     * AWS services in China customers must file for an Internet Content Provider (ICP) recordal if they want to serve content publicly on an alternate domain name, also known as a CNAME, that they've added to CloudFront. AliasICPRecordal provides the ICP recordal status for CNAMEs associated with distributions. For more information about ICP recordals, see  Signup, Accounts, and Credentials in Getting Started with AWS services in China.
+     * Amazon Web Services services in China customers must file for an Internet Content Provider (ICP) recordal if they want to serve content publicly on an alternate domain name, also known as a CNAME, that they've added to CloudFront. AliasICPRecordal provides the ICP recordal status for CNAMEs associated with distributions. For more information about ICP recordals, see  Signup, Accounts, and Credentials in Getting Started with Amazon Web Services services in China.
      */
     AliasICPRecordals?: AliasICPRecordals;
   }
@@ -1843,7 +2130,7 @@ declare namespace CloudFront {
      */
     CallerReference: string;
     /**
-     * An optional comment about the configuration.
+     * An optional comment about the configuration. The comment cannot be longer than 128 characters.
      */
     Comment?: string;
     /**
@@ -1897,7 +2184,7 @@ declare namespace CloudFront {
      */
     CallerReference: string;
     /**
-     * An optional comment for the field-level encryption profile.
+     * An optional comment for the field-level encryption profile. The comment cannot be longer than 128 characters.
      */
     Comment?: string;
     /**
@@ -1941,7 +2228,7 @@ declare namespace CloudFront {
      */
     EncryptionEntities: EncryptionEntities;
     /**
-     * An optional comment for the field-level encryption profile summary.
+     * An optional comment for the field-level encryption profile summary. The comment cannot be longer than 128 characters.
      */
     Comment?: string;
   }
@@ -1956,7 +2243,7 @@ declare namespace CloudFront {
      */
     LastModifiedTime: timestamp;
     /**
-     * An optional comment about the field-level encryption item.
+     * An optional comment about the field-level encryption item. The comment cannot be longer than 128 characters.
      */
     Comment?: string;
     /**
@@ -2000,6 +2287,100 @@ declare namespace CloudFront {
      */
     QueryStringCacheKeys?: QueryStringCacheKeys;
   }
+  export type FrameOptionsList = "DENY"|"SAMEORIGIN"|string;
+  export type FunctionARN = string;
+  export interface FunctionAssociation {
+    /**
+     * The Amazon Resource Name (ARN) of the function.
+     */
+    FunctionARN: FunctionARN;
+    /**
+     * The event type of the function, either viewer-request or viewer-response. You cannot use origin-facing event types (origin-request and origin-response) with a CloudFront function.
+     */
+    EventType: EventType;
+  }
+  export type FunctionAssociationList = FunctionAssociation[];
+  export interface FunctionAssociations {
+    /**
+     * The number of CloudFront functions in the list.
+     */
+    Quantity: integer;
+    /**
+     * The CloudFront functions that are associated with a cache behavior in a CloudFront distribution. CloudFront functions must be published to the LIVE stage to associate them with a cache behavior.
+     */
+    Items?: FunctionAssociationList;
+  }
+  export type FunctionBlob = Buffer|Uint8Array|Blob|string;
+  export interface FunctionConfig {
+    /**
+     * A comment to describe the function.
+     */
+    Comment: string;
+    /**
+     * The function’s runtime environment. The only valid value is cloudfront-js-1.0.
+     */
+    Runtime: FunctionRuntime;
+  }
+  export type FunctionEventObject = Buffer|Uint8Array|Blob|string;
+  export type FunctionExecutionLogList = string[];
+  export interface FunctionList {
+    /**
+     * If there are more items in the list than are in this response, this element is present. It contains the value that you should use in the Marker field of a subsequent request to continue listing functions where you left off.
+     */
+    NextMarker?: string;
+    /**
+     * The maximum number of functions requested.
+     */
+    MaxItems: integer;
+    /**
+     * The number of functions returned in the response.
+     */
+    Quantity: integer;
+    /**
+     * Contains the functions in the list.
+     */
+    Items?: FunctionSummaryList;
+  }
+  export interface FunctionMetadata {
+    /**
+     * The Amazon Resource Name (ARN) of the function. The ARN uniquely identifies the function.
+     */
+    FunctionARN: string;
+    /**
+     * The stage that the function is in, either DEVELOPMENT or LIVE. When a function is in the DEVELOPMENT stage, you can test the function with TestFunction, and update it with UpdateFunction. When a function is in the LIVE stage, you can attach the function to a distribution’s cache behavior, using the function’s ARN.
+     */
+    Stage?: FunctionStage;
+    /**
+     * The date and time when the function was created.
+     */
+    CreatedTime?: timestamp;
+    /**
+     * The date and time when the function was most recently updated.
+     */
+    LastModifiedTime: timestamp;
+  }
+  export type FunctionName = string;
+  export type FunctionRuntime = "cloudfront-js-1.0"|string;
+  export type FunctionStage = "DEVELOPMENT"|"LIVE"|string;
+  export interface FunctionSummary {
+    /**
+     * The name of the CloudFront function.
+     */
+    Name: FunctionName;
+    /**
+     * The status of the CloudFront function.
+     */
+    Status?: string;
+    /**
+     * Contains configuration information about a CloudFront function.
+     */
+    FunctionConfig: FunctionConfig;
+    /**
+     * Contains metadata about a CloudFront function.
+     */
+    FunctionMetadata: FunctionMetadata;
+  }
+  export type FunctionSummaryList = FunctionSummary[];
   export interface GeoRestriction {
     /**
      * The method that you want to use to restrict distribution of your content by country:    none: No geo restriction is enabled, meaning access to content is not restricted by client geo location.    blacklist: The Location elements specify the countries in which you don't want CloudFront to distribute your content.    whitelist: The Location elements specify the countries in which you want CloudFront to distribute your content.  
@@ -2175,6 +2556,30 @@ declare namespace CloudFront {
      */
     ETag?: string;
   }
+  export interface GetFunctionRequest {
+    /**
+     * The name of the function whose code you are getting.
+     */
+    Name: string;
+    /**
+     * The function’s stage, either DEVELOPMENT or LIVE.
+     */
+    Stage?: FunctionStage;
+  }
+  export interface GetFunctionResult {
+    /**
+     * The function code of a CloudFront function.
+     */
+    FunctionCode?: FunctionBlob;
+    /**
+     * The version identifier for the current version of the CloudFront function.
+     */
+    ETag?: string;
+    /**
+     * The content type (media type) of the response.
+     */
+    ContentType?: string;
+  }
   export interface GetInvalidationRequest {
     /**
      * The distribution's ID.
@@ -2315,6 +2720,38 @@ declare namespace CloudFront {
      */
     RealtimeLogConfig?: RealtimeLogConfig;
   }
+  export interface GetResponseHeadersPolicyConfigRequest {
+    /**
+     * The identifier for the response headers policy. If the response headers policy is attached to a distribution’s cache behavior, you can get the policy’s identifier using ListDistributions or GetDistribution. If the response headers policy is not attached to a cache behavior, you can get the identifier using ListResponseHeadersPolicies.
+     */
+    Id: string;
+  }
+  export interface GetResponseHeadersPolicyConfigResult {
+    /**
+     * Contains a response headers policy.
+     */
+    ResponseHeadersPolicyConfig?: ResponseHeadersPolicyConfig;
+    /**
+     * The version identifier for the current version of the response headers policy.
+     */
+    ETag?: string;
+  }
+  export interface GetResponseHeadersPolicyRequest {
+    /**
+     * The identifier for the response headers policy. If the response headers policy is attached to a distribution’s cache behavior, you can get the policy’s identifier using ListDistributions or GetDistribution. If the response headers policy is not attached to a cache behavior, you can get the identifier using ListResponseHeadersPolicies.
+     */
+    Id: string;
+  }
+  export interface GetResponseHeadersPolicyResult {
+    /**
+     * Contains a response headers policy.
+     */
+    ResponseHeadersPolicy?: ResponseHeadersPolicy;
+    /**
+     * The version identifier for the current version of the response headers policy.
+     */
+    ETag?: string;
+  }
   export interface GetStreamingDistributionConfigRequest {
     /**
      * The streaming distribution's ID.
@@ -2406,11 +2843,11 @@ declare namespace CloudFront {
      */
     IsTruncated: boolean;
     /**
-     * The number of invalidation batches that were created by the current AWS account. 
+     * The number of invalidation batches that were created by the current Amazon Web Services account. 
      */
     Quantity: integer;
     /**
-     * A complex type that contains one InvalidationSummary element for each invalidation batch created by the current AWS account.
+     * A complex type that contains one InvalidationSummary element for each invalidation batch created by the current Amazon Web Services account.
      */
     Items?: InvalidationSummaryList;
   }
@@ -2462,7 +2899,7 @@ declare namespace CloudFront {
      */
     Items: PublicKeyIdList;
     /**
-     * A comment to describe the key group.
+     * A comment to describe the key group. The comment cannot be longer than 128 characters.
      */
     Comment?: string;
   }
@@ -2504,7 +2941,7 @@ declare namespace CloudFront {
   }
   export interface KinesisStreamConfig {
     /**
-     * The Amazon Resource Name (ARN) of an AWS Identity and Access Management (IAM) role that CloudFront can use to send real-time log data to your Kinesis data stream. For more information the IAM role, see Real-time log configuration IAM role in the Amazon CloudFront Developer Guide.
+     * The Amazon Resource Name (ARN) of an Identity and Access Management (IAM) role that CloudFront can use to send real-time log data to your Kinesis data stream. For more information the IAM role, see Real-time log configuration IAM role in the Amazon CloudFront Developer Guide.
      */
     RoleARN: string;
     /**
@@ -2515,22 +2952,22 @@ declare namespace CloudFront {
   export type LambdaFunctionARN = string;
   export interface LambdaFunctionAssociation {
     /**
-     * The ARN of the Lambda function. You must specify the ARN of a function version; you can't specify a Lambda alias or $LATEST.
+     * The ARN of the Lambda@Edge function. You must specify the ARN of a function version; you can't specify an alias or $LATEST.
      */
     LambdaFunctionARN: LambdaFunctionARN;
     /**
-     * Specifies the event type that triggers a Lambda function invocation. You can specify the following values:    viewer-request: The function executes when CloudFront receives a request from a viewer and before it checks to see whether the requested object is in the edge cache.     origin-request: The function executes only when CloudFront sends a request to your origin. When the requested object is in the edge cache, the function doesn't execute.    origin-response: The function executes after CloudFront receives a response from the origin and before it caches the object in the response. When the requested object is in the edge cache, the function doesn't execute.    viewer-response: The function executes before CloudFront returns the requested object to the viewer. The function executes regardless of whether the object was already in the edge cache. If the origin returns an HTTP status code other than HTTP 200 (OK), the function doesn't execute.  
+     * Specifies the event type that triggers a Lambda@Edge function invocation. You can specify the following values:    viewer-request: The function executes when CloudFront receives a request from a viewer and before it checks to see whether the requested object is in the edge cache.     origin-request: The function executes only when CloudFront sends a request to your origin. When the requested object is in the edge cache, the function doesn't execute.    origin-response: The function executes after CloudFront receives a response from the origin and before it caches the object in the response. When the requested object is in the edge cache, the function doesn't execute.    viewer-response: The function executes before CloudFront returns the requested object to the viewer. The function executes regardless of whether the object was already in the edge cache. If the origin returns an HTTP status code other than HTTP 200 (OK), the function doesn't execute.  
      */
     EventType: EventType;
     /**
-     * A flag that allows a Lambda function to have read access to the body content. For more information, see Accessing the Request Body by Choosing the Include Body Option in the Amazon CloudFront Developer Guide.
+     * A flag that allows a Lambda@Edge function to have read access to the body content. For more information, see Accessing the Request Body by Choosing the Include Body Option in the Amazon CloudFront Developer Guide.
      */
     IncludeBody?: boolean;
   }
   export type LambdaFunctionAssociationList = LambdaFunctionAssociation[];
   export interface LambdaFunctionAssociations {
     /**
-     * The number of Lambda function associations for this cache behavior.
+     * The number of Lambda@Edge function associations for this cache behavior.
      */
     Quantity: integer;
     /**
@@ -2540,7 +2977,7 @@ declare namespace CloudFront {
   }
   export interface ListCachePoliciesRequest {
     /**
-     * A filter to return only the specified kinds of cache policies. Valid values are:    managed – Returns only the managed policies created by AWS.    custom – Returns only the custom policies created in your AWS account.  
+     * A filter to return only the specified kinds of cache policies. Valid values are:    managed – Returns only the managed policies created by Amazon Web Services.    custom – Returns only the custom policies created in your Amazon Web Services account.  
      */
     Type?: CachePolicyType;
     /**
@@ -2573,6 +3010,30 @@ declare namespace CloudFront {
      * The CloudFrontOriginAccessIdentityList type. 
      */
     CloudFrontOriginAccessIdentityList?: CloudFrontOriginAccessIdentityList;
+  }
+  export interface ListConflictingAliasesRequest {
+    /**
+     * The ID of a distribution in your account that has an attached SSL/TLS certificate that includes the provided alias.
+     */
+    DistributionId: distributionIdString;
+    /**
+     * The alias (also called a CNAME) to search for conflicting aliases.
+     */
+    Alias: aliasString;
+    /**
+     * Use this field when paginating results to indicate where to begin in the list of conflicting aliases. The response includes conflicting aliases in the list that occur after the marker. To get the next page of the list, set this field’s value to the value of NextMarker from the current page’s response.
+     */
+    Marker?: string;
+    /**
+     * The maximum number of conflicting aliases that you want in the response.
+     */
+    MaxItems?: listConflictingAliasesMaxItemsInteger;
+  }
+  export interface ListConflictingAliasesResult {
+    /**
+     * A list of conflicting aliases.
+     */
+    ConflictingAliasesList?: ConflictingAliasesList;
   }
   export interface ListDistributionsByCachePolicyIdRequest {
     /**
@@ -2652,6 +3113,23 @@ declare namespace CloudFront {
   export interface ListDistributionsByRealtimeLogConfigResult {
     DistributionList?: DistributionList;
   }
+  export interface ListDistributionsByResponseHeadersPolicyIdRequest {
+    /**
+     * Use this field when paginating results to indicate where to begin in your list of distribution IDs. The response includes distribution IDs in the list that occur after the marker. To get the next page of the list, set this field’s value to the value of NextMarker from the current page’s response.
+     */
+    Marker?: string;
+    /**
+     * The maximum number of distribution IDs that you want to get in the response.
+     */
+    MaxItems?: string;
+    /**
+     * The ID of the response headers policy whose associated distribution IDs you want to list.
+     */
+    ResponseHeadersPolicyId: string;
+  }
+  export interface ListDistributionsByResponseHeadersPolicyIdResult {
+    DistributionIdList?: DistributionIdList;
+  }
   export interface ListDistributionsByWebACLIdRequest {
     /**
      * Use Marker and MaxItems to control pagination of results. If you have more than MaxItems distributions that satisfy the request, the response includes a NextMarker element. To get the next page of results, submit another request. For the value of Marker, specify the value of NextMarker from the last response. (For the first request, omit Marker.) 
@@ -2662,7 +3140,7 @@ declare namespace CloudFront {
      */
     MaxItems?: string;
     /**
-     * The ID of the AWS WAF web ACL that you want to list the associated distributions. If you specify "null" for the ID, the request returns a list of the distributions that aren't associated with a web ACL. 
+     * The ID of the WAF web ACL that you want to list the associated distributions. If you specify "null" for the ID, the request returns a list of the distributions that aren't associated with a web ACL.
      */
     WebACLId: string;
   }
@@ -2720,6 +3198,26 @@ declare namespace CloudFront {
      */
     FieldLevelEncryptionProfileList?: FieldLevelEncryptionProfileList;
   }
+  export interface ListFunctionsRequest {
+    /**
+     * Use this field when paginating results to indicate where to begin in your list of functions. The response includes functions in the list that occur after the marker. To get the next page of the list, set this field’s value to the value of NextMarker from the current page’s response.
+     */
+    Marker?: string;
+    /**
+     * The maximum number of functions that you want in the response.
+     */
+    MaxItems?: string;
+    /**
+     * An optional filter to return only the functions that are in the specified stage, either DEVELOPMENT or LIVE.
+     */
+    Stage?: FunctionStage;
+  }
+  export interface ListFunctionsResult {
+    /**
+     * A list of CloudFront functions.
+     */
+    FunctionList?: FunctionList;
+  }
   export interface ListInvalidationsRequest {
     /**
      * The distribution's ID.
@@ -2758,7 +3256,7 @@ declare namespace CloudFront {
   }
   export interface ListOriginRequestPoliciesRequest {
     /**
-     * A filter to return only the specified kinds of origin request policies. Valid values are:    managed – Returns only the managed policies created by AWS.    custom – Returns only the custom policies created in your AWS account.  
+     * A filter to return only the specified kinds of origin request policies. Valid values are:    managed – Returns only the managed policies created by Amazon Web Services.    custom – Returns only the custom policies created in your Amazon Web Services account.  
      */
     Type?: OriginRequestPolicyType;
     /**
@@ -2807,6 +3305,26 @@ declare namespace CloudFront {
      * A list of real-time log configurations.
      */
     RealtimeLogConfigs?: RealtimeLogConfigs;
+  }
+  export interface ListResponseHeadersPoliciesRequest {
+    /**
+     * A filter to get only the specified kind of response headers policies. Valid values are:    managed – Gets only the managed policies created by Amazon Web Services.    custom – Gets only the custom policies created in your Amazon Web Services account.  
+     */
+    Type?: ResponseHeadersPolicyType;
+    /**
+     * Use this field when paginating results to indicate where to begin in your list of response headers policies. The response includes response headers policies in the list that occur after the marker. To get the next page of the list, set this field’s value to the value of NextMarker from the current page’s response. 
+     */
+    Marker?: string;
+    /**
+     * The maximum number of response headers policies that you want to get in the response.
+     */
+    MaxItems?: string;
+  }
+  export interface ListResponseHeadersPoliciesResult {
+    /**
+     * A list of response headers policies.
+     */
+    ResponseHeadersPolicyList?: ResponseHeadersPolicyList;
   }
   export interface ListStreamingDistributionsRequest {
     /**
@@ -2857,7 +3375,7 @@ declare namespace CloudFront {
   }
   export type Method = "GET"|"HEAD"|"POST"|"PUT"|"PATCH"|"OPTIONS"|"DELETE"|string;
   export type MethodsList = Method[];
-  export type MinimumProtocolVersion = "SSLv3"|"TLSv1"|"TLSv1_2016"|"TLSv1.1_2016"|"TLSv1.2_2018"|"TLSv1.2_2019"|string;
+  export type MinimumProtocolVersion = "SSLv3"|"TLSv1"|"TLSv1_2016"|"TLSv1.1_2016"|"TLSv1.2_2018"|"TLSv1.2_2019"|"TLSv1.2_2021"|string;
   export interface MonitoringSubscription {
     /**
      * A subscription configuration for additional CloudWatch metrics.
@@ -2910,7 +3428,7 @@ declare namespace CloudFront {
     /**
      * The value for the header that you specified in the HeaderName field.
      */
-    HeaderValue: string;
+    HeaderValue: sensitiveStringType;
   }
   export type OriginCustomHeadersList = OriginCustomHeader[];
   export interface OriginGroup {
@@ -2979,7 +3497,7 @@ declare namespace CloudFront {
   }
   export interface OriginRequestPolicyConfig {
     /**
-     * A comment to describe the origin request policy.
+     * A comment to describe the origin request policy. The comment cannot be longer than 128 characters.
      */
     Comment?: string;
     /**
@@ -3046,7 +3564,7 @@ declare namespace CloudFront {
   }
   export interface OriginRequestPolicySummary {
     /**
-     * The type of origin request policy, either managed (created by AWS) or custom (created in this AWS account).
+     * The type of origin request policy, either managed (created by Amazon Web Services) or custom (created in this Amazon Web Services account).
      */
     Type: OriginRequestPolicyType;
     /**
@@ -3062,7 +3580,7 @@ declare namespace CloudFront {
      */
     Enabled: boolean;
     /**
-     * The AWS Region for Origin Shield. Specify the AWS Region that has the lowest latency to your origin. To specify a region, use the region code, not the region name. For example, specify the US East (Ohio) region as us-east-2. When you enable CloudFront Origin Shield, you must specify the AWS Region for Origin Shield. For the list of AWS Regions that you can specify, and for help choosing the best Region for your origin, see Choosing the AWS Region for Origin Shield in the Amazon CloudFront Developer Guide.
+     * The Amazon Web Services Region for Origin Shield. Specify the Amazon Web Services Region that has the lowest latency to your origin. To specify a region, use the region code, not the region name. For example, specify the US East (Ohio) region as us-east-2. When you enable CloudFront Origin Shield, you must specify the Amazon Web Services Region for Origin Shield. For the list of Amazon Web Services Regions that you can specify, and for help choosing the best Region for your origin, see Choosing the Amazon Web Services Region for Origin Shield in the Amazon CloudFront Developer Guide.
      */
     OriginShieldRegion?: OriginShieldRegion;
   }
@@ -3149,7 +3667,7 @@ declare namespace CloudFront {
      */
     EncodedKey: string;
     /**
-     * A comment to describe the public key.
+     * A comment to describe the public key. The comment cannot be longer than 128 characters.
      */
     Comment?: string;
   }
@@ -3190,11 +3708,27 @@ declare namespace CloudFront {
      */
     EncodedKey: string;
     /**
-     * A comment to describe the public key.
+     * A comment to describe the public key. The comment cannot be longer than 128 characters.
      */
     Comment?: string;
   }
   export type PublicKeySummaryList = PublicKeySummary[];
+  export interface PublishFunctionRequest {
+    /**
+     * The name of the function that you are publishing.
+     */
+    Name: string;
+    /**
+     * The current version (ETag value) of the function that you are publishing, which you can get using DescribeFunction.
+     */
+    IfMatch: string;
+  }
+  export interface PublishFunctionResult {
+    /**
+     * Contains configuration information and metadata about a CloudFront function.
+     */
+    FunctionSummary?: FunctionSummary;
+  }
   export interface QueryArgProfile {
     /**
      * Query argument for field-level encryption query argument-profile mapping.
@@ -3300,7 +3834,268 @@ declare namespace CloudFront {
     RealtimeMetricsSubscriptionStatus: RealtimeMetricsSubscriptionStatus;
   }
   export type RealtimeMetricsSubscriptionStatus = "Enabled"|"Disabled"|string;
+  export type ReferrerPolicyList = "no-referrer"|"no-referrer-when-downgrade"|"origin"|"origin-when-cross-origin"|"same-origin"|"strict-origin"|"strict-origin-when-cross-origin"|"unsafe-url"|string;
   export type ResourceARN = string;
+  export interface ResponseHeadersPolicy {
+    /**
+     * The identifier for the response headers policy.
+     */
+    Id: string;
+    /**
+     * The date and time when the response headers policy was last modified.
+     */
+    LastModifiedTime: timestamp;
+    /**
+     * A response headers policy configuration. A response headers policy contains information about a set of HTTP response headers and their values. CloudFront adds the headers in the policy to HTTP responses that it sends for requests that match a cache behavior that’s associated with the policy.
+     */
+    ResponseHeadersPolicyConfig: ResponseHeadersPolicyConfig;
+  }
+  export interface ResponseHeadersPolicyAccessControlAllowHeaders {
+    /**
+     * The number of HTTP header names in the list.
+     */
+    Quantity: integer;
+    /**
+     * The list of HTTP header names. You can specify * to allow all headers.
+     */
+    Items: AccessControlAllowHeadersList;
+  }
+  export interface ResponseHeadersPolicyAccessControlAllowMethods {
+    /**
+     * The number of HTTP methods in the list.
+     */
+    Quantity: integer;
+    /**
+     * The list of HTTP methods. Valid values are:    GET     DELETE     HEAD     OPTIONS     PATCH     POST     PUT     ALL     ALL is a special value that includes all of the listed HTTP methods.
+     */
+    Items: AccessControlAllowMethodsList;
+  }
+  export type ResponseHeadersPolicyAccessControlAllowMethodsValues = "GET"|"POST"|"OPTIONS"|"PUT"|"DELETE"|"PATCH"|"HEAD"|"ALL"|string;
+  export interface ResponseHeadersPolicyAccessControlAllowOrigins {
+    /**
+     * The number of origins in the list.
+     */
+    Quantity: integer;
+    /**
+     * The list of origins (domain names). You can specify * to allow all origins.
+     */
+    Items: AccessControlAllowOriginsList;
+  }
+  export interface ResponseHeadersPolicyAccessControlExposeHeaders {
+    /**
+     * The number of HTTP headers in the list.
+     */
+    Quantity: integer;
+    /**
+     * The list of HTTP headers. You can specify * to expose all headers.
+     */
+    Items?: AccessControlExposeHeadersList;
+  }
+  export interface ResponseHeadersPolicyConfig {
+    /**
+     * A comment to describe the response headers policy. The comment cannot be longer than 128 characters.
+     */
+    Comment?: string;
+    /**
+     * A name to identify the response headers policy. The name must be unique for response headers policies in this Amazon Web Services account.
+     */
+    Name: string;
+    /**
+     * A configuration for a set of HTTP response headers that are used for cross-origin resource sharing (CORS).
+     */
+    CorsConfig?: ResponseHeadersPolicyCorsConfig;
+    /**
+     * A configuration for a set of security-related HTTP response headers.
+     */
+    SecurityHeadersConfig?: ResponseHeadersPolicySecurityHeadersConfig;
+    /**
+     * A configuration for a set of custom HTTP response headers.
+     */
+    CustomHeadersConfig?: ResponseHeadersPolicyCustomHeadersConfig;
+  }
+  export interface ResponseHeadersPolicyContentSecurityPolicy {
+    /**
+     * A Boolean that determines whether CloudFront overrides the Content-Security-Policy HTTP response header received from the origin with the one specified in this response headers policy.
+     */
+    Override: boolean;
+    /**
+     * The policy directives and their values that CloudFront includes as values for the Content-Security-Policy HTTP response header.
+     */
+    ContentSecurityPolicy: string;
+  }
+  export interface ResponseHeadersPolicyContentTypeOptions {
+    /**
+     * A Boolean that determines whether CloudFront overrides the X-Content-Type-Options HTTP response header received from the origin with the one specified in this response headers policy.
+     */
+    Override: boolean;
+  }
+  export interface ResponseHeadersPolicyCorsConfig {
+    /**
+     * A list of origins (domain names) that CloudFront can use as the value for the Access-Control-Allow-Origin HTTP response header. For more information about the Access-Control-Allow-Origin HTTP response header, see Access-Control-Allow-Origin in the MDN Web Docs.
+     */
+    AccessControlAllowOrigins: ResponseHeadersPolicyAccessControlAllowOrigins;
+    /**
+     * A list of HTTP header names that CloudFront includes as values for the Access-Control-Allow-Headers HTTP response header. For more information about the Access-Control-Allow-Headers HTTP response header, see Access-Control-Allow-Headers in the MDN Web Docs.
+     */
+    AccessControlAllowHeaders: ResponseHeadersPolicyAccessControlAllowHeaders;
+    /**
+     * A list of HTTP methods that CloudFront includes as values for the Access-Control-Allow-Methods HTTP response header. For more information about the Access-Control-Allow-Methods HTTP response header, see Access-Control-Allow-Methods in the MDN Web Docs.
+     */
+    AccessControlAllowMethods: ResponseHeadersPolicyAccessControlAllowMethods;
+    /**
+     * A Boolean that CloudFront uses as the value for the Access-Control-Allow-Credentials HTTP response header. For more information about the Access-Control-Allow-Credentials HTTP response header, see Access-Control-Allow-Credentials in the MDN Web Docs.
+     */
+    AccessControlAllowCredentials: boolean;
+    /**
+     * A list of HTTP headers that CloudFront includes as values for the Access-Control-Expose-Headers HTTP response header. For more information about the Access-Control-Expose-Headers HTTP response header, see Access-Control-Expose-Headers in the MDN Web Docs.
+     */
+    AccessControlExposeHeaders?: ResponseHeadersPolicyAccessControlExposeHeaders;
+    /**
+     * A number that CloudFront uses as the value for the Access-Control-Max-Age HTTP response header. For more information about the Access-Control-Max-Age HTTP response header, see Access-Control-Max-Age in the MDN Web Docs.
+     */
+    AccessControlMaxAgeSec?: integer;
+    /**
+     * A Boolean that determines whether CloudFront overrides HTTP response headers received from the origin with the ones specified in this response headers policy.
+     */
+    OriginOverride: boolean;
+  }
+  export interface ResponseHeadersPolicyCustomHeader {
+    /**
+     * The HTTP response header name.
+     */
+    Header: string;
+    /**
+     * The value for the HTTP response header.
+     */
+    Value: string;
+    /**
+     * A Boolean that determines whether CloudFront overrides a response header with the same name received from the origin with the header specified here.
+     */
+    Override: boolean;
+  }
+  export type ResponseHeadersPolicyCustomHeaderList = ResponseHeadersPolicyCustomHeader[];
+  export interface ResponseHeadersPolicyCustomHeadersConfig {
+    /**
+     * The number of HTTP response headers in the list.
+     */
+    Quantity: integer;
+    /**
+     * The list of HTTP response headers and their values.
+     */
+    Items?: ResponseHeadersPolicyCustomHeaderList;
+  }
+  export interface ResponseHeadersPolicyFrameOptions {
+    /**
+     * A Boolean that determines whether CloudFront overrides the X-Frame-Options HTTP response header received from the origin with the one specified in this response headers policy.
+     */
+    Override: boolean;
+    /**
+     * The value of the X-Frame-Options HTTP response header. Valid values are DENY and SAMEORIGIN.  For more information about these values, see X-Frame-Options in the MDN Web Docs.
+     */
+    FrameOption: FrameOptionsList;
+  }
+  export interface ResponseHeadersPolicyList {
+    /**
+     * If there are more items in the list than are in this response, this element is present. It contains the value that you should use in the Marker field of a subsequent request to continue listing response headers policies where you left off.
+     */
+    NextMarker?: string;
+    /**
+     * The maximum number of response headers policies requested.
+     */
+    MaxItems: integer;
+    /**
+     * The number of response headers policies returned.
+     */
+    Quantity: integer;
+    /**
+     * The response headers policies in the list.
+     */
+    Items?: ResponseHeadersPolicySummaryList;
+  }
+  export interface ResponseHeadersPolicyReferrerPolicy {
+    /**
+     * A Boolean that determines whether CloudFront overrides the Referrer-Policy HTTP response header received from the origin with the one specified in this response headers policy.
+     */
+    Override: boolean;
+    /**
+     * The value of the Referrer-Policy HTTP response header. Valid values are:    no-referrer     no-referrer-when-downgrade     origin     origin-when-cross-origin     same-origin     strict-origin     strict-origin-when-cross-origin     unsafe-url    For more information about these values, see Referrer-Policy in the MDN Web Docs.
+     */
+    ReferrerPolicy: ReferrerPolicyList;
+  }
+  export interface ResponseHeadersPolicySecurityHeadersConfig {
+    /**
+     * Determines whether CloudFront includes the X-XSS-Protection HTTP response header and the header’s value. For more information about the X-XSS-Protection HTTP response header, see X-XSS-Protection in the MDN Web Docs.
+     */
+    XSSProtection?: ResponseHeadersPolicyXSSProtection;
+    /**
+     * Determines whether CloudFront includes the X-Frame-Options HTTP response header and the header’s value. For more information about the X-Frame-Options HTTP response header, see X-Frame-Options in the MDN Web Docs.
+     */
+    FrameOptions?: ResponseHeadersPolicyFrameOptions;
+    /**
+     * Determines whether CloudFront includes the Referrer-Policy HTTP response header and the header’s value. For more information about the Referrer-Policy HTTP response header, see Referrer-Policy in the MDN Web Docs.
+     */
+    ReferrerPolicy?: ResponseHeadersPolicyReferrerPolicy;
+    /**
+     * The policy directives and their values that CloudFront includes as values for the Content-Security-Policy HTTP response header. For more information about the Content-Security-Policy HTTP response header, see Content-Security-Policy in the MDN Web Docs.
+     */
+    ContentSecurityPolicy?: ResponseHeadersPolicyContentSecurityPolicy;
+    /**
+     * Determines whether CloudFront includes the X-Content-Type-Options HTTP response header with its value set to nosniff. For more information about the X-Content-Type-Options HTTP response header, see X-Content-Type-Options in the MDN Web Docs.
+     */
+    ContentTypeOptions?: ResponseHeadersPolicyContentTypeOptions;
+    /**
+     * Determines whether CloudFront includes the Strict-Transport-Security HTTP response header and the header’s value. For more information about the Strict-Transport-Security HTTP response header, see Strict-Transport-Security in the MDN Web Docs.
+     */
+    StrictTransportSecurity?: ResponseHeadersPolicyStrictTransportSecurity;
+  }
+  export interface ResponseHeadersPolicyStrictTransportSecurity {
+    /**
+     * A Boolean that determines whether CloudFront overrides the Strict-Transport-Security HTTP response header received from the origin with the one specified in this response headers policy.
+     */
+    Override: boolean;
+    /**
+     * A Boolean that determines whether CloudFront includes the includeSubDomains directive in the Strict-Transport-Security HTTP response header.
+     */
+    IncludeSubdomains?: boolean;
+    /**
+     * A Boolean that determines whether CloudFront includes the preload directive in the Strict-Transport-Security HTTP response header.
+     */
+    Preload?: boolean;
+    /**
+     * A number that CloudFront uses as the value for the max-age directive in the Strict-Transport-Security HTTP response header.
+     */
+    AccessControlMaxAgeSec: integer;
+  }
+  export interface ResponseHeadersPolicySummary {
+    /**
+     * The type of response headers policy, either managed (created by Amazon Web Services) or custom (created in this Amazon Web Services account).
+     */
+    Type: ResponseHeadersPolicyType;
+    /**
+     * The response headers policy.
+     */
+    ResponseHeadersPolicy: ResponseHeadersPolicy;
+  }
+  export type ResponseHeadersPolicySummaryList = ResponseHeadersPolicySummary[];
+  export type ResponseHeadersPolicyType = "managed"|"custom"|string;
+  export interface ResponseHeadersPolicyXSSProtection {
+    /**
+     * A Boolean that determines whether CloudFront overrides the X-XSS-Protection HTTP response header received from the origin with the one specified in this response headers policy.
+     */
+    Override: boolean;
+    /**
+     * A Boolean that determines the value of the X-XSS-Protection HTTP response header. When this setting is true, the value of the X-XSS-Protection header is 1. When this setting is false, the value of the X-XSS-Protection header is 0. For more information about these settings, see X-XSS-Protection in the MDN Web Docs.
+     */
+    Protection: boolean;
+    /**
+     * A Boolean that determines whether CloudFront includes the mode=block directive in the X-XSS-Protection header. For more information about this directive, see X-XSS-Protection in the MDN Web Docs.
+     */
+    ModeBlock?: boolean;
+    /**
+     * A reporting URI, which CloudFront uses as the value of the report directive in the X-XSS-Protection header. You cannot specify a ReportUri when ModeBlock is true. For more information about using a reporting URL, see X-XSS-Protection in the MDN Web Docs.
+     */
+    ReportUri?: string;
+  }
   export interface Restrictions {
     /**
      * A complex type that controls the countries in which your content is distributed. CloudFront determines the location of your users using MaxMind GeoIP databases.
@@ -3326,7 +4121,7 @@ declare namespace CloudFront {
   export type SSLSupportMethod = "sni-only"|"vip"|"static-ip"|string;
   export interface _Signer {
     /**
-     * An AWS account number that contains active CloudFront key pairs that CloudFront can use to verify the signatures of signed URLs and signed cookies. If the AWS account that owns the key pairs is the same account that owns the CloudFront distribution, the value of this field is self.
+     * An Amazon Web Services account number that contains active CloudFront key pairs that CloudFront can use to verify the signatures of signed URLs and signed cookies. If the Amazon Web Services account that owns the key pairs is the same account that owns the CloudFront distribution, the value of this field is self.
      */
     AwsAccountNumber?: string;
     /**
@@ -3354,7 +4149,7 @@ declare namespace CloudFront {
      */
     Id: string;
     /**
-     * The ARN (Amazon Resource Name) for the distribution. For example: arn:aws:cloudfront::123456789012:distribution/EDFDVBD632BHDS5, where 123456789012 is your AWS account ID.
+     * The ARN (Amazon Resource Name) for the distribution. For example: arn:aws:cloudfront::123456789012:distribution/EDFDVBD632BHDS5, where 123456789012 is your Amazon Web Services account ID.
      */
     ARN: string;
     /**
@@ -3370,7 +4165,7 @@ declare namespace CloudFront {
      */
     DomainName: string;
     /**
-     * A complex type that lists the AWS accounts, if any, that you included in the TrustedSigners complex type for this distribution. These are the accounts that you want to allow to create signed URLs for private content. The Signer complex type lists the AWS account number of the trusted signer or self if the signer is the AWS account that created the distribution. The Signer element also includes the IDs of any active CloudFront key pairs that are associated with the trusted signer's AWS account. If no KeyPairId element appears for a Signer, that signer can't create signed URLs. For more information, see Serving Private Content through CloudFront in the Amazon CloudFront Developer Guide. 
+     * A complex type that lists the Amazon Web Services accounts, if any, that you included in the TrustedSigners complex type for this distribution. These are the accounts that you want to allow to create signed URLs for private content. The Signer complex type lists the Amazon Web Services account number of the trusted signer or self if the signer is the Amazon Web Services account that created the distribution. The Signer element also includes the IDs of any active CloudFront key pairs that are associated with the trusted signer's Amazon Web Services account. If no KeyPairId element appears for a Signer, that signer can't create signed URLs. For more information, see Serving Private Content through CloudFront in the Amazon CloudFront Developer Guide. 
      */
     ActiveTrustedSigners: ActiveTrustedSigners;
     /**
@@ -3400,7 +4195,7 @@ declare namespace CloudFront {
      */
     Logging?: StreamingLoggingConfig;
     /**
-     * A complex type that specifies any AWS accounts that you want to permit to create signed URLs for private content. If you want the distribution to use signed URLs, include this element; if you want the distribution to use public URLs, remove this element. For more information, see Serving Private Content through CloudFront in the Amazon CloudFront Developer Guide. 
+     * A complex type that specifies any Amazon Web Services accounts that you want to permit to create signed URLs for private content. If you want the distribution to use signed URLs, include this element; if you want the distribution to use public URLs, remove this element. For more information, see Serving Private Content through CloudFront in the Amazon CloudFront Developer Guide. 
      */
     TrustedSigners: TrustedSigners;
     /**
@@ -3440,11 +4235,11 @@ declare namespace CloudFront {
      */
     IsTruncated: boolean;
     /**
-     * The number of streaming distributions that were created by the current AWS account. 
+     * The number of streaming distributions that were created by the current Amazon Web Services account. 
      */
     Quantity: integer;
     /**
-     * A complex type that contains one StreamingDistributionSummary element for each distribution that was created by the current AWS account.
+     * A complex type that contains one StreamingDistributionSummary element for each distribution that was created by the current Amazon Web Services account.
      */
     Items?: StreamingDistributionSummaryList;
   }
@@ -3454,7 +4249,7 @@ declare namespace CloudFront {
      */
     Id: string;
     /**
-     *  The ARN (Amazon Resource Name) for the streaming distribution. For example: arn:aws:cloudfront::123456789012:streaming-distribution/EDFDVBD632BHDS5, where 123456789012 is your AWS account ID.
+     *  The ARN (Amazon Resource Name) for the streaming distribution. For example: arn:aws:cloudfront::123456789012:streaming-distribution/EDFDVBD632BHDS5, where 123456789012 is your Amazon Web Services account ID.
      */
     ARN: string;
     /**
@@ -3478,7 +4273,7 @@ declare namespace CloudFront {
      */
     Aliases: Aliases;
     /**
-     * A complex type that specifies the AWS accounts, if any, that you want to allow to create signed URLs for private content. If you want to require signed URLs in requests for objects in the target origin that match the PathPattern for this cache behavior, specify true for Enabled, and specify the applicable values for Quantity and Items.If you don't want to require signed URLs in requests for objects that match PathPattern, specify false for Enabled and 0 for Quantity. Omit Items. To add, change, or remove one or more trusted signers, change Enabled to true (if it's currently false), change Quantity as applicable, and specify all of the trusted signers that you want to include in the updated distribution. For more information, see Serving Private Content through CloudFront in the Amazon CloudFront Developer Guide. 
+     * A complex type that specifies the Amazon Web Services accounts, if any, that you want to allow to create signed URLs for private content. If you want to require signed URLs in requests for objects in the target origin that match the PathPattern for this cache behavior, specify true for Enabled, and specify the applicable values for Quantity and Items.If you don't want to require signed URLs in requests for objects that match PathPattern, specify false for Enabled and 0 for Quantity. Omit Items. To add, change, or remove one or more trusted signers, change Enabled to true (if it's currently false), change Quantity as applicable, and specify all of the trusted signers that you want to include in the updated distribution. For more information, see Serving Private Content through CloudFront in the Amazon CloudFront Developer Guide. 
      */
     TrustedSigners: TrustedSigners;
     /**
@@ -3545,6 +4340,52 @@ declare namespace CloudFront {
      */
     Items?: TagList;
   }
+  export interface TestFunctionRequest {
+    /**
+     * The name of the function that you are testing.
+     */
+    Name: string;
+    /**
+     * The current version (ETag value) of the function that you are testing, which you can get using DescribeFunction.
+     */
+    IfMatch: string;
+    /**
+     * The stage of the function that you are testing, either DEVELOPMENT or LIVE.
+     */
+    Stage?: FunctionStage;
+    /**
+     * The event object to test the function with. For more information about the structure of the event object, see Testing functions in the Amazon CloudFront Developer Guide.
+     */
+    EventObject: FunctionEventObject;
+  }
+  export interface TestFunctionResult {
+    /**
+     * An object that represents the result of running the function with the provided event object.
+     */
+    TestResult?: TestResult;
+  }
+  export interface TestResult {
+    /**
+     * Contains configuration information and metadata about the CloudFront function that was tested.
+     */
+    FunctionSummary?: FunctionSummary;
+    /**
+     * The amount of time that the function took to run as a percentage of the maximum allowed time. For example, a compute utilization of 35 means that the function completed in 35% of the maximum allowed time.
+     */
+    ComputeUtilization?: string;
+    /**
+     * Contains the log lines that the function wrote (if any) when running the test.
+     */
+    FunctionExecutionLogs?: FunctionExecutionLogList;
+    /**
+     * If the result of testing the function was an error, this field contains the error message.
+     */
+    FunctionErrorMessage?: sensitiveStringType;
+    /**
+     * The event object returned by the function. For more information about the structure of the event object, see Event object structure in the Amazon CloudFront Developer Guide.
+     */
+    FunctionOutput?: sensitiveStringType;
+  }
   export type TrustedKeyGroupIdList = string[];
   export interface TrustedKeyGroups {
     /**
@@ -3562,15 +4403,15 @@ declare namespace CloudFront {
   }
   export interface TrustedSigners {
     /**
-     * This field is true if any of the AWS accounts have public keys that CloudFront can use to verify the signatures of signed URLs and signed cookies. If not, this field is false.
+     * This field is true if any of the Amazon Web Services accounts have public keys that CloudFront can use to verify the signatures of signed URLs and signed cookies. If not, this field is false.
      */
     Enabled: boolean;
     /**
-     * The number of AWS accounts in the list.
+     * The number of Amazon Web Services accounts in the list.
      */
     Quantity: integer;
     /**
-     * A list of AWS account identifiers.
+     * A list of Amazon Web Services account identifiers.
      */
     Items?: AwsAccountNumberList;
   }
@@ -3704,6 +4545,34 @@ declare namespace CloudFront {
      */
     ETag?: string;
   }
+  export interface UpdateFunctionRequest {
+    /**
+     * The name of the function that you are updating.
+     */
+    Name: string;
+    /**
+     * The current version (ETag value) of the function that you are updating, which you can get using DescribeFunction.
+     */
+    IfMatch: string;
+    /**
+     * Configuration information about the function.
+     */
+    FunctionConfig: FunctionConfig;
+    /**
+     * The function code. For more information about writing a CloudFront function, see Writing function code for CloudFront Functions in the Amazon CloudFront Developer Guide.
+     */
+    FunctionCode: FunctionBlob;
+  }
+  export interface UpdateFunctionResult {
+    /**
+     * Contains configuration information and metadata about a CloudFront function.
+     */
+    FunctionSummary?: FunctionSummary;
+    /**
+     * The version identifier for the current version of the CloudFront function.
+     */
+    ETag?: string;
+  }
   export interface UpdateKeyGroupRequest {
     /**
      * The key group configuration.
@@ -3804,6 +4673,30 @@ declare namespace CloudFront {
      */
     RealtimeLogConfig?: RealtimeLogConfig;
   }
+  export interface UpdateResponseHeadersPolicyRequest {
+    /**
+     * A response headers policy configuration.
+     */
+    ResponseHeadersPolicyConfig: ResponseHeadersPolicyConfig;
+    /**
+     * The identifier for the response headers policy that you are updating.
+     */
+    Id: string;
+    /**
+     * The version of the response headers policy that you are updating. The version is returned in the cache policy’s ETag field in the response to GetResponseHeadersPolicyConfig.
+     */
+    IfMatch?: string;
+  }
+  export interface UpdateResponseHeadersPolicyResult {
+    /**
+     * A response headers policy.
+     */
+    ResponseHeadersPolicy?: ResponseHeadersPolicy;
+    /**
+     * The current version of the response headers policy.
+     */
+    ETag?: string;
+  }
   export interface UpdateStreamingDistributionRequest {
     /**
      * The streaming distribution's configuration information.
@@ -3834,19 +4727,19 @@ declare namespace CloudFront {
      */
     CloudFrontDefaultCertificate?: boolean;
     /**
-     * If the distribution uses Aliases (alternate domain names or CNAMEs) and the SSL/TLS certificate is stored in AWS Identity and Access Management (AWS IAM), provide the ID of the IAM certificate. If you specify an IAM certificate ID, you must also specify values for MinimumProtocolVersion and SSLSupportMethod. 
+     * If the distribution uses Aliases (alternate domain names or CNAMEs) and the SSL/TLS certificate is stored in Identity and Access Management (IAM), provide the ID of the IAM certificate. If you specify an IAM certificate ID, you must also specify values for MinimumProtocolVersion and SSLSupportMethod. 
      */
     IAMCertificateId?: string;
     /**
-     * If the distribution uses Aliases (alternate domain names or CNAMEs) and the SSL/TLS certificate is stored in AWS Certificate Manager (ACM), provide the Amazon Resource Name (ARN) of the ACM certificate. CloudFront only supports ACM certificates in the US East (N. Virginia) Region (us-east-1). If you specify an ACM certificate ARN, you must also specify values for MinimumProtocolVersion and SSLSupportMethod. 
+     * If the distribution uses Aliases (alternate domain names or CNAMEs) and the SSL/TLS certificate is stored in Certificate Manager (ACM), provide the Amazon Resource Name (ARN) of the ACM certificate. CloudFront only supports ACM certificates in the US East (N. Virginia) Region (us-east-1). If you specify an ACM certificate ARN, you must also specify values for MinimumProtocolVersion and SSLSupportMethod.
      */
     ACMCertificateArn?: string;
     /**
-     * If the distribution uses Aliases (alternate domain names or CNAMEs), specify which viewers the distribution accepts HTTPS connections from.    sni-only – The distribution accepts HTTPS connections from only viewers that support server name indication (SNI). This is recommended. Most browsers and clients support SNI.    vip – The distribution accepts HTTPS connections from all viewers including those that don’t support SNI. This is not recommended, and results in additional monthly charges from CloudFront.    static-ip - Do not specify this value unless your distribution has been enabled for this feature by the CloudFront team. If you have a use case that requires static IP addresses for a distribution, contact CloudFront through the AWS Support Center.   If the distribution uses the CloudFront domain name such as d111111abcdef8.cloudfront.net, don’t set a value for this field.
+     * If the distribution uses Aliases (alternate domain names or CNAMEs), specify which viewers the distribution accepts HTTPS connections from.    sni-only – The distribution accepts HTTPS connections from only viewers that support server name indication (SNI). This is recommended. Most browsers and clients support SNI.    vip – The distribution accepts HTTPS connections from all viewers including those that don’t support SNI. This is not recommended, and results in additional monthly charges from CloudFront.    static-ip - Do not specify this value unless your distribution has been enabled for this feature by the CloudFront team. If you have a use case that requires static IP addresses for a distribution, contact CloudFront through the Amazon Web Services Support Center.   If the distribution uses the CloudFront domain name such as d111111abcdef8.cloudfront.net, don’t set a value for this field.
      */
     SSLSupportMethod?: SSLSupportMethod;
     /**
-     * If the distribution uses Aliases (alternate domain names or CNAMEs), specify the security policy that you want CloudFront to use for HTTPS connections with viewers. The security policy determines two settings:   The minimum SSL/TLS protocol that CloudFront can use to communicate with viewers.   The ciphers that CloudFront can use to encrypt the content that it returns to viewers.   For more information, see Security Policy and Supported Protocols and Ciphers Between Viewers and CloudFront in the Amazon CloudFront Developer Guide.  On the CloudFront console, this setting is called Security Policy.  When you’re using SNI only (you set SSLSupportMethod to sni-only), you must specify TLSv1 or higher.  If the distribution uses the CloudFront domain name such as d111111abcdef8.cloudfront.net (you set CloudFrontDefaultCertificate to true), CloudFront automatically sets the security policy to TLSv1 regardless of the value that you set here.
+     * If the distribution uses Aliases (alternate domain names or CNAMEs), specify the security policy that you want CloudFront to use for HTTPS connections with viewers. The security policy determines two settings:   The minimum SSL/TLS protocol that CloudFront can use to communicate with viewers.   The ciphers that CloudFront can use to encrypt the content that it returns to viewers.   For more information, see Security Policy and Supported Protocols and Ciphers Between Viewers and CloudFront in the Amazon CloudFront Developer Guide.  On the CloudFront console, this setting is called Security Policy.  When you’re using SNI only (you set SSLSupportMethod to sni-only), you must specify TLSv1 or higher. If the distribution uses the CloudFront domain name such as d111111abcdef8.cloudfront.net (you set CloudFrontDefaultCertificate to true), CloudFront automatically sets the security policy to TLSv1 regardless of the value that you set here.
      */
     MinimumProtocolVersion?: MinimumProtocolVersion;
     /**
@@ -3859,8 +4752,12 @@ declare namespace CloudFront {
     CertificateSource?: CertificateSource;
   }
   export type ViewerProtocolPolicy = "allow-all"|"https-only"|"redirect-to-https"|string;
+  export type aliasString = string;
+  export type distributionIdString = string;
   export type integer = number;
+  export type listConflictingAliasesMaxItemsInteger = number;
   export type long = number;
+  export type sensitiveStringType = string;
   export type timestamp = Date;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

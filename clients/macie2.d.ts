@@ -28,11 +28,11 @@ declare class Macie2 extends Service {
    */
   batchGetCustomDataIdentifiers(callback?: (err: AWSError, data: Macie2.Types.BatchGetCustomDataIdentifiersResponse) => void): Request<Macie2.Types.BatchGetCustomDataIdentifiersResponse, AWSError>;
   /**
-   *  Creates and defines the settings for a classification job.
+   * Creates and defines the settings for a classification job.
    */
   createClassificationJob(params: Macie2.Types.CreateClassificationJobRequest, callback?: (err: AWSError, data: Macie2.Types.CreateClassificationJobResponse) => void): Request<Macie2.Types.CreateClassificationJobResponse, AWSError>;
   /**
-   *  Creates and defines the settings for a classification job.
+   * Creates and defines the settings for a classification job.
    */
   createClassificationJob(callback?: (err: AWSError, data: Macie2.Types.CreateClassificationJobResponse) => void): Request<Macie2.Types.CreateClassificationJobResponse, AWSError>;
   /**
@@ -68,11 +68,11 @@ declare class Macie2 extends Service {
    */
   createMember(callback?: (err: AWSError, data: Macie2.Types.CreateMemberResponse) => void): Request<Macie2.Types.CreateMemberResponse, AWSError>;
   /**
-   *  Creates sample findings.
+   * Creates sample findings.
    */
   createSampleFindings(params: Macie2.Types.CreateSampleFindingsRequest, callback?: (err: AWSError, data: Macie2.Types.CreateSampleFindingsResponse) => void): Request<Macie2.Types.CreateSampleFindingsResponse, AWSError>;
   /**
-   *  Creates sample findings.
+   * Creates sample findings.
    */
   createSampleFindings(callback?: (err: AWSError, data: Macie2.Types.CreateSampleFindingsResponse) => void): Request<Macie2.Types.CreateSampleFindingsResponse, AWSError>;
   /**
@@ -132,27 +132,27 @@ declare class Macie2 extends Service {
    */
   describeClassificationJob(callback?: (err: AWSError, data: Macie2.Types.DescribeClassificationJobResponse) => void): Request<Macie2.Types.DescribeClassificationJobResponse, AWSError>;
   /**
-   * Retrieves the Amazon Macie configuration settings for an AWS organization.
+   * Retrieves the Amazon Macie configuration settings for an organization in Organizations.
    */
   describeOrganizationConfiguration(params: Macie2.Types.DescribeOrganizationConfigurationRequest, callback?: (err: AWSError, data: Macie2.Types.DescribeOrganizationConfigurationResponse) => void): Request<Macie2.Types.DescribeOrganizationConfigurationResponse, AWSError>;
   /**
-   * Retrieves the Amazon Macie configuration settings for an AWS organization.
+   * Retrieves the Amazon Macie configuration settings for an organization in Organizations.
    */
   describeOrganizationConfiguration(callback?: (err: AWSError, data: Macie2.Types.DescribeOrganizationConfigurationResponse) => void): Request<Macie2.Types.DescribeOrganizationConfigurationResponse, AWSError>;
   /**
-   * Disables an Amazon Macie account and deletes Macie resources for the account.
+   * Disables Amazon Macie and deletes all settings and resources for a Macie account.
    */
   disableMacie(params: Macie2.Types.DisableMacieRequest, callback?: (err: AWSError, data: Macie2.Types.DisableMacieResponse) => void): Request<Macie2.Types.DisableMacieResponse, AWSError>;
   /**
-   * Disables an Amazon Macie account and deletes Macie resources for the account.
+   * Disables Amazon Macie and deletes all settings and resources for a Macie account.
    */
   disableMacie(callback?: (err: AWSError, data: Macie2.Types.DisableMacieResponse) => void): Request<Macie2.Types.DisableMacieResponse, AWSError>;
   /**
-   * Disables an account as the delegated Amazon Macie administrator account for an AWS organization.
+   * Disables an account as the delegated Amazon Macie administrator account for an organization in Organizations.
    */
   disableOrganizationAdminAccount(params: Macie2.Types.DisableOrganizationAdminAccountRequest, callback?: (err: AWSError, data: Macie2.Types.DisableOrganizationAdminAccountResponse) => void): Request<Macie2.Types.DisableOrganizationAdminAccountResponse, AWSError>;
   /**
-   * Disables an account as the delegated Amazon Macie administrator account for an AWS organization.
+   * Disables an account as the delegated Amazon Macie administrator account for an organization in Organizations.
    */
   disableOrganizationAdminAccount(callback?: (err: AWSError, data: Macie2.Types.DisableOrganizationAdminAccountResponse) => void): Request<Macie2.Types.DisableOrganizationAdminAccountResponse, AWSError>;
   /**
@@ -188,11 +188,11 @@ declare class Macie2 extends Service {
    */
   enableMacie(callback?: (err: AWSError, data: Macie2.Types.EnableMacieResponse) => void): Request<Macie2.Types.EnableMacieResponse, AWSError>;
   /**
-   * Designates an account as the delegated Amazon Macie administrator account for an AWS organization.
+   * Designates an account as the delegated Amazon Macie administrator account for an organization in Organizations.
    */
   enableOrganizationAdminAccount(params: Macie2.Types.EnableOrganizationAdminAccountRequest, callback?: (err: AWSError, data: Macie2.Types.EnableOrganizationAdminAccountResponse) => void): Request<Macie2.Types.EnableOrganizationAdminAccountResponse, AWSError>;
   /**
-   * Designates an account as the delegated Amazon Macie administrator account for an AWS organization.
+   * Designates an account as the delegated Amazon Macie administrator account for an organization in Organizations.
    */
   enableOrganizationAdminAccount(callback?: (err: AWSError, data: Macie2.Types.EnableOrganizationAdminAccountResponse) => void): Request<Macie2.Types.EnableOrganizationAdminAccountResponse, AWSError>;
   /**
@@ -204,11 +204,11 @@ declare class Macie2 extends Service {
    */
   getAdministratorAccount(callback?: (err: AWSError, data: Macie2.Types.GetAdministratorAccountResponse) => void): Request<Macie2.Types.GetAdministratorAccountResponse, AWSError>;
   /**
-   *  Retrieves (queries) aggregated statistical data for all the S3 buckets that Amazon Macie monitors and analyzes.
+   * Retrieves (queries) aggregated statistical data about S3 buckets that Amazon Macie monitors and analyzes.
    */
   getBucketStatistics(params: Macie2.Types.GetBucketStatisticsRequest, callback?: (err: AWSError, data: Macie2.Types.GetBucketStatisticsResponse) => void): Request<Macie2.Types.GetBucketStatisticsResponse, AWSError>;
   /**
-   *  Retrieves (queries) aggregated statistical data for all the S3 buckets that Amazon Macie monitors and analyzes.
+   * Retrieves (queries) aggregated statistical data about S3 buckets that Amazon Macie monitors and analyzes.
    */
   getBucketStatistics(callback?: (err: AWSError, data: Macie2.Types.GetBucketStatisticsResponse) => void): Request<Macie2.Types.GetBucketStatisticsResponse, AWSError>;
   /**
@@ -252,11 +252,11 @@ declare class Macie2 extends Service {
    */
   getFindingsFilter(callback?: (err: AWSError, data: Macie2.Types.GetFindingsFilterResponse) => void): Request<Macie2.Types.GetFindingsFilterResponse, AWSError>;
   /**
-   * Retrieves the configuration settings for publishing findings to AWS Security Hub.
+   * Retrieves the configuration settings for publishing findings to Security Hub.
    */
   getFindingsPublicationConfiguration(params: Macie2.Types.GetFindingsPublicationConfigurationRequest, callback?: (err: AWSError, data: Macie2.Types.GetFindingsPublicationConfigurationResponse) => void): Request<Macie2.Types.GetFindingsPublicationConfigurationResponse, AWSError>;
   /**
-   * Retrieves the configuration settings for publishing findings to AWS Security Hub.
+   * Retrieves the configuration settings for publishing findings to Security Hub.
    */
   getFindingsPublicationConfiguration(callback?: (err: AWSError, data: Macie2.Types.GetFindingsPublicationConfigurationResponse) => void): Request<Macie2.Types.GetFindingsPublicationConfigurationResponse, AWSError>;
   /**
@@ -324,11 +324,11 @@ declare class Macie2 extends Service {
    */
   listCustomDataIdentifiers(callback?: (err: AWSError, data: Macie2.Types.ListCustomDataIdentifiersResponse) => void): Request<Macie2.Types.ListCustomDataIdentifiersResponse, AWSError>;
   /**
-   *  Retrieves a subset of information about one or more findings.
+   * Retrieves a subset of information about one or more findings.
    */
   listFindings(params: Macie2.Types.ListFindingsRequest, callback?: (err: AWSError, data: Macie2.Types.ListFindingsResponse) => void): Request<Macie2.Types.ListFindingsResponse, AWSError>;
   /**
-   *  Retrieves a subset of information about one or more findings.
+   * Retrieves a subset of information about one or more findings.
    */
   listFindings(callback?: (err: AWSError, data: Macie2.Types.ListFindingsResponse) => void): Request<Macie2.Types.ListFindingsResponse, AWSError>;
   /**
@@ -340,13 +340,21 @@ declare class Macie2 extends Service {
    */
   listFindingsFilters(callback?: (err: AWSError, data: Macie2.Types.ListFindingsFiltersResponse) => void): Request<Macie2.Types.ListFindingsFiltersResponse, AWSError>;
   /**
-   * Retrieves information about all the Amazon Macie membership invitations that were received by an account.
+   * Retrieves information about the Amazon Macie membership invitations that were received by an account.
    */
   listInvitations(params: Macie2.Types.ListInvitationsRequest, callback?: (err: AWSError, data: Macie2.Types.ListInvitationsResponse) => void): Request<Macie2.Types.ListInvitationsResponse, AWSError>;
   /**
-   * Retrieves information about all the Amazon Macie membership invitations that were received by an account.
+   * Retrieves information about the Amazon Macie membership invitations that were received by an account.
    */
   listInvitations(callback?: (err: AWSError, data: Macie2.Types.ListInvitationsResponse) => void): Request<Macie2.Types.ListInvitationsResponse, AWSError>;
+  /**
+   * Retrieves information about all the managed data identifiers that Amazon Macie currently provides.
+   */
+  listManagedDataIdentifiers(params: Macie2.Types.ListManagedDataIdentifiersRequest, callback?: (err: AWSError, data: Macie2.Types.ListManagedDataIdentifiersResponse) => void): Request<Macie2.Types.ListManagedDataIdentifiersResponse, AWSError>;
+  /**
+   * Retrieves information about all the managed data identifiers that Amazon Macie currently provides.
+   */
+  listManagedDataIdentifiers(callback?: (err: AWSError, data: Macie2.Types.ListManagedDataIdentifiersResponse) => void): Request<Macie2.Types.ListManagedDataIdentifiersResponse, AWSError>;
   /**
    * Retrieves information about the accounts that are associated with an Amazon Macie administrator account.
    */
@@ -356,11 +364,11 @@ declare class Macie2 extends Service {
    */
   listMembers(callback?: (err: AWSError, data: Macie2.Types.ListMembersResponse) => void): Request<Macie2.Types.ListMembersResponse, AWSError>;
   /**
-   * Retrieves information about the delegated Amazon Macie administrator account for an AWS organization.
+   * Retrieves information about the delegated Amazon Macie administrator account for an organization in Organizations.
    */
   listOrganizationAdminAccounts(params: Macie2.Types.ListOrganizationAdminAccountsRequest, callback?: (err: AWSError, data: Macie2.Types.ListOrganizationAdminAccountsResponse) => void): Request<Macie2.Types.ListOrganizationAdminAccountsResponse, AWSError>;
   /**
-   * Retrieves information about the delegated Amazon Macie administrator account for an AWS organization.
+   * Retrieves information about the delegated Amazon Macie administrator account for an organization in Organizations.
    */
   listOrganizationAdminAccounts(callback?: (err: AWSError, data: Macie2.Types.ListOrganizationAdminAccountsResponse) => void): Request<Macie2.Types.ListOrganizationAdminAccountsResponse, AWSError>;
   /**
@@ -380,13 +388,21 @@ declare class Macie2 extends Service {
    */
   putClassificationExportConfiguration(callback?: (err: AWSError, data: Macie2.Types.PutClassificationExportConfigurationResponse) => void): Request<Macie2.Types.PutClassificationExportConfigurationResponse, AWSError>;
   /**
-   * Updates the configuration settings for publishing findings to AWS Security Hub.
+   * Updates the configuration settings for publishing findings to Security Hub.
    */
   putFindingsPublicationConfiguration(params: Macie2.Types.PutFindingsPublicationConfigurationRequest, callback?: (err: AWSError, data: Macie2.Types.PutFindingsPublicationConfigurationResponse) => void): Request<Macie2.Types.PutFindingsPublicationConfigurationResponse, AWSError>;
   /**
-   * Updates the configuration settings for publishing findings to AWS Security Hub.
+   * Updates the configuration settings for publishing findings to Security Hub.
    */
   putFindingsPublicationConfiguration(callback?: (err: AWSError, data: Macie2.Types.PutFindingsPublicationConfigurationResponse) => void): Request<Macie2.Types.PutFindingsPublicationConfigurationResponse, AWSError>;
+  /**
+   * Retrieves (queries) statistical data and other information about Amazon Web Services resources that Amazon Macie monitors and analyzes.
+   */
+  searchResources(params: Macie2.Types.SearchResourcesRequest, callback?: (err: AWSError, data: Macie2.Types.SearchResourcesResponse) => void): Request<Macie2.Types.SearchResourcesResponse, AWSError>;
+  /**
+   * Retrieves (queries) statistical data and other information about Amazon Web Services resources that Amazon Macie monitors and analyzes.
+   */
+  searchResources(callback?: (err: AWSError, data: Macie2.Types.SearchResourcesResponse) => void): Request<Macie2.Types.SearchResourcesResponse, AWSError>;
   /**
    * Adds or updates one or more tags (keys and values) that are associated with a classification job, custom data identifier, findings filter, or member account.
    */
@@ -428,34 +444,34 @@ declare class Macie2 extends Service {
    */
   updateFindingsFilter(callback?: (err: AWSError, data: Macie2.Types.UpdateFindingsFilterResponse) => void): Request<Macie2.Types.UpdateFindingsFilterResponse, AWSError>;
   /**
-   * Suspends or re-enables an Amazon Macie account, or updates the configuration settings for a Macie account.
+   * Suspends or re-enables Amazon Macie, or updates the configuration settings for a Macie account.
    */
   updateMacieSession(params: Macie2.Types.UpdateMacieSessionRequest, callback?: (err: AWSError, data: Macie2.Types.UpdateMacieSessionResponse) => void): Request<Macie2.Types.UpdateMacieSessionResponse, AWSError>;
   /**
-   * Suspends or re-enables an Amazon Macie account, or updates the configuration settings for a Macie account.
+   * Suspends or re-enables Amazon Macie, or updates the configuration settings for a Macie account.
    */
   updateMacieSession(callback?: (err: AWSError, data: Macie2.Types.UpdateMacieSessionResponse) => void): Request<Macie2.Types.UpdateMacieSessionResponse, AWSError>;
   /**
-   * Enables an Amazon Macie administrator to suspend or re-enable a member account.
+   * Enables an Amazon Macie administrator to suspend or re-enable Macie for a member account.
    */
   updateMemberSession(params: Macie2.Types.UpdateMemberSessionRequest, callback?: (err: AWSError, data: Macie2.Types.UpdateMemberSessionResponse) => void): Request<Macie2.Types.UpdateMemberSessionResponse, AWSError>;
   /**
-   * Enables an Amazon Macie administrator to suspend or re-enable a member account.
+   * Enables an Amazon Macie administrator to suspend or re-enable Macie for a member account.
    */
   updateMemberSession(callback?: (err: AWSError, data: Macie2.Types.UpdateMemberSessionResponse) => void): Request<Macie2.Types.UpdateMemberSessionResponse, AWSError>;
   /**
-   * Updates the Amazon Macie configuration settings for an AWS organization.
+   * Updates the Amazon Macie configuration settings for an organization in Organizations.
    */
   updateOrganizationConfiguration(params: Macie2.Types.UpdateOrganizationConfigurationRequest, callback?: (err: AWSError, data: Macie2.Types.UpdateOrganizationConfigurationResponse) => void): Request<Macie2.Types.UpdateOrganizationConfigurationResponse, AWSError>;
   /**
-   * Updates the Amazon Macie configuration settings for an AWS organization.
+   * Updates the Amazon Macie configuration settings for an organization in Organizations.
    */
   updateOrganizationConfiguration(callback?: (err: AWSError, data: Macie2.Types.UpdateOrganizationConfigurationResponse) => void): Request<Macie2.Types.UpdateOrganizationConfigurationResponse, AWSError>;
 }
 declare namespace Macie2 {
   export interface AcceptInvitationRequest {
     /**
-     * The AWS account ID for the account that sent the invitation.
+     * The Amazon Web Services account ID for the account that sent the invitation.
      */
     administratorAccountId?: __string;
     /**
@@ -463,7 +479,7 @@ declare namespace Macie2 {
      */
     invitationId: __string;
     /**
-     * (Deprecated) The AWS account ID for the account that sent the invitation. This property has been replaced by the administratorAccountId property and is retained only for backward compatibility.
+     * (Deprecated) The Amazon Web Services account ID for the account that sent the invitation. This property has been replaced by the administratorAccountId property and is retained only for backward compatibility.
      */
     masterAccount?: __string;
   }
@@ -481,7 +497,7 @@ declare namespace Macie2 {
   }
   export interface AccountDetail {
     /**
-     * The AWS account ID for the account.
+     * The Amazon Web Services account ID for the account.
      */
     accountId: __string;
     /**
@@ -491,17 +507,17 @@ declare namespace Macie2 {
   }
   export interface AccountLevelPermissions {
     /**
-     * The block public access settings for the AWS account that owns the bucket.
+     * The block public access settings for the Amazon Web Services account that owns the bucket.
      */
     blockPublicAccess?: BlockPublicAccess;
   }
   export interface AdminAccount {
     /**
-     * The AWS account ID for the account.
+     * The Amazon Web Services account ID for the account.
      */
     accountId?: __string;
     /**
-     * The current status of the account as the delegated administrator of Amazon Macie for the organization.
+     * The current status of the account as the delegated Amazon Macie administrator account for the organization.
      */
     status?: AdminStatus;
   }
@@ -513,7 +529,7 @@ declare namespace Macie2 {
      */
     api?: __string;
     /**
-     * The URL of the AWS service that provides the operation, for example: s3.amazonaws.com.
+     * The URL of the Amazon Web Service that provides the operation, for example: s3.amazonaws.com.
      */
     apiServiceName?: __string;
     /**
@@ -527,11 +543,11 @@ declare namespace Macie2 {
   }
   export interface AssumedRole {
     /**
-     * The AWS access key ID that identifies the credentials.
+     * The Amazon Web Services access key ID that identifies the credentials.
      */
     accessKeyId?: __string;
     /**
-     * The unique identifier for the AWS account that owns the entity that was used to get the credentials.
+     * The unique identifier for the Amazon Web Services account that owns the entity that was used to get the credentials.
      */
     accountId?: __string;
     /**
@@ -549,7 +565,7 @@ declare namespace Macie2 {
   }
   export interface AwsAccount {
     /**
-     * The unique identifier for the AWS account.
+     * The unique identifier for the Amazon Web Services account.
      */
     accountId?: __string;
     /**
@@ -559,7 +575,7 @@ declare namespace Macie2 {
   }
   export interface AwsService {
     /**
-     * The name of the AWS service that performed the action.
+     * The name of the Amazon Web Service that performed the action.
      */
     invokedBy?: __string;
   }
@@ -591,7 +607,7 @@ declare namespace Macie2 {
   }
   export interface BatchGetCustomDataIdentifiersRequest {
     /**
-     * An array of strings that lists the unique identifiers for the custom data identifiers to retrieve information about.
+     * An array of custom data identifier IDs, one for each custom data identifier to retrieve information about.
      */
     ids?: __listOf__string;
   }
@@ -601,7 +617,7 @@ declare namespace Macie2 {
      */
     customDataIdentifiers?: __listOfBatchGetCustomDataIdentifierSummary;
     /**
-     * An array of identifiers, one for each identifier that was specified in the request, but doesn't correlate to an existing custom data identifier.
+     * An array of custom data identifier IDs, one for each custom data identifier that was specified in the request but doesn't correlate to an existing custom data identifier.
      */
     notFoundIdentifierIds?: __listOf__string;
   }
@@ -643,7 +659,7 @@ declare namespace Macie2 {
   }
   export interface BucketCountByEncryptionType {
     /**
-     *  The total number of buckets that use an AWS Key Management Service (AWS KMS) customer master key (CMK) to encrypt new objects by default. These buckets use AWS managed AWS KMS encryption (AWS-KMS) or customer managed AWS KMS encryption (SSE-KMS) by default.
+     *  The total number of buckets that use an KMS key to encrypt new objects by default, either an Amazon Web Services managed key or a customer managed key. These buckets use KMS encryption (SSE-KMS) by default.
      */
     kmsManaged?: __long;
     /**
@@ -661,19 +677,19 @@ declare namespace Macie2 {
   }
   export interface BucketCountBySharedAccessType {
     /**
-     * The total number of buckets that are shared with an AWS account that isn't part of the same Amazon Macie organization.
+     * The total number of buckets that are shared with an Amazon Web Services account that isn't part of the same Amazon Macie organization.
      */
     external?: __long;
     /**
-     * The total number of buckets that are shared with an AWS account that's part of the same Amazon Macie organization.
+     * The total number of buckets that are shared with an Amazon Web Services account that's part of the same Amazon Macie organization.
      */
     internal?: __long;
     /**
-     * The total number of buckets that aren't shared with other AWS accounts.
+     * The total number of buckets that aren't shared with other Amazon Web Services accounts.
      */
     notShared?: __long;
     /**
-     * The total number of buckets that Amazon Macie wasn't able to evaluate shared access settings for. Macie can't determine whether these buckets are shared with other AWS accounts.
+     * The total number of buckets that Amazon Macie wasn't able to evaluate shared access settings for. Macie can't determine whether these buckets are shared with other Amazon Web Services accounts.
      */
     unknown?: __long;
   }
@@ -694,7 +710,7 @@ declare namespace Macie2 {
   export type BucketCriteria = {[key: string]: BucketCriteriaAdditionalProperties};
   export interface BucketCriteriaAdditionalProperties {
     /**
-     * The value for the property matches (equals) the specified value. If you specify multiple values, Macie uses OR logic to join the values.
+     * The value for the property matches (equals) the specified value. If you specify multiple values, Amazon Macie uses OR logic to join the values.
      */
     eq?: __listOf__string;
     /**
@@ -738,7 +754,7 @@ declare namespace Macie2 {
   }
   export interface BucketMetadata {
     /**
-     * The unique identifier for the AWS account that owns the bucket.
+     * The unique identifier for the Amazon Web Services account that owns the bucket.
      */
     accountId?: __string;
     /**
@@ -766,6 +782,14 @@ declare namespace Macie2 {
      */
     classifiableSizeInBytes?: __long;
     /**
+     * Specifies the error code for an error that prevented Amazon Macie from retrieving and processing information about the bucket and the bucket's objects. If this value is ACCESS_DENIED, Macie doesn't have permission to retrieve the information. For example, the bucket has a restrictive bucket policy and Amazon S3 denied the request. If this value is null, Macie was able to retrieve and process the information.
+     */
+    errorCode?: BucketMetadataErrorCode;
+    /**
+     * A brief description of the error (errorCode) that prevented Amazon Macie from retrieving and processing information about the bucket and the bucket's objects. This value is null if Macie was able to retrieve and process the information.
+     */
+    errorMessage?: __string;
+    /**
      * Specifies whether any one-time or recurring classification jobs are configured to analyze data in the bucket, and, if so, the details of the job that ran most recently.
      */
     jobDetails?: JobDetails;
@@ -786,11 +810,11 @@ declare namespace Macie2 {
      */
     publicAccess?: BucketPublicAccess;
     /**
-     * The AWS Region that hosts the bucket.
+     * The Amazon Web Services Region that hosts the bucket.
      */
     region?: __string;
     /**
-     * Specifies whether the bucket is configured to replicate one or more objects to buckets for other AWS accounts and, if so, which accounts.
+     * Specifies whether the bucket is configured to replicate one or more objects to buckets for other Amazon Web Services accounts and, if so, which accounts.
      */
     replicationDetails?: ReplicationDetails;
     /**
@@ -798,7 +822,7 @@ declare namespace Macie2 {
      */
     serverSideEncryption?: BucketServerSideEncryption;
     /**
-     *  Specifies whether the bucket is shared with another AWS account. Possible values are: EXTERNAL - The bucket is shared with an AWS account that isn't part of the same Amazon Macie organization. INTERNAL - The bucket is shared with an AWS account that's part of the same Amazon Macie organization. NOT_SHARED - The bucket isn't shared with other AWS accounts. UNKNOWN - Amazon Macie wasn't able to evaluate the shared access settings for the bucket.
+     *  Specifies whether the bucket is shared with another Amazon Web Services account. Possible values are: EXTERNAL - The bucket is shared with an Amazon Web Services account that isn't part of the same Amazon Macie organization. INTERNAL - The bucket is shared with an Amazon Web Services account that's part of the same Amazon Macie organization. NOT_SHARED - The bucket isn't shared with other Amazon Web Services accounts. UNKNOWN - Amazon Macie wasn't able to evaluate the shared access settings for the bucket.
      */
     sharedAccess?: SharedAccess;
     /**
@@ -806,7 +830,7 @@ declare namespace Macie2 {
      */
     sizeInBytes?: __long;
     /**
-     * The total compressed storage size, in bytes, of the bucket. If versioning is enabled for the bucket, Macie calculates this value based on the size of the latest version of each object in the bucket. This value doesn't reflect the storage size of all versions of each object in the bucket.
+     * The total storage size, in bytes, of the objects that are compressed (.gz, .gzip, .zip) files in the bucket. If versioning is enabled for the bucket, Amazon Macie calculates this value based on the size of the latest version of each applicable object in the bucket. This value doesn't reflect the storage size of all versions of each applicable object in the bucket.
      */
     sizeInBytesCompressed?: __long;
     /**
@@ -826,6 +850,7 @@ declare namespace Macie2 {
      */
     versioning?: __boolean;
   }
+  export type BucketMetadataErrorCode = "ACCESS_DENIED"|string;
   export interface BucketPermissionConfiguration {
     /**
      * The account-level permissions settings that apply to the bucket.
@@ -858,11 +883,11 @@ declare namespace Macie2 {
   }
   export interface BucketServerSideEncryption {
     /**
-     * The Amazon Resource Name (ARN) or unique identifier (key ID) for the AWS Key Management Service (AWS KMS) customer master key (CMK) that's used by default to encrypt objects that are added to the bucket. This value is null if the bucket uses an Amazon S3 managed key to encrypt new objects or the bucket doesn't encrypt new objects by default.
+     * The Amazon Resource Name (ARN) or unique identifier (key ID) for the KMS key that's used by default to encrypt objects that are added to the bucket. This value is null if the bucket uses an Amazon S3 managed key to encrypt new objects or the bucket doesn't encrypt new objects by default.
      */
     kmsMasterKeyId?: __string;
     /**
-     * The type of server-side encryption that's used by default when storing new objects in the bucket. Possible values are: AES256 - New objects are encrypted with an Amazon S3 managed key and use Amazon S3 managed encryption (SSE-S3). aws:kms - New objects are encrypted with an AWS KMS CMK, specified by the kmsMasterKeyId property, and use AWS managed AWS KMS encryption (AWS-KMS) or customer managed AWS KMS encryption (SSE-KMS). NONE - New objects aren't encrypted by default. Default encryption is disabled for the bucket.
+     * The type of server-side encryption that's used by default when storing new objects in the bucket. Possible values are: AES256 - New objects are encrypted with an Amazon S3 managed key. They use SSE-S3 encryption. aws:kms - New objects are encrypted with an KMS key (kmsMasterKeyId), either an Amazon Web Services managed key or a customer managed key. They use SSE-KMS encryption. NONE - New objects aren't encrypted by default. Default encryption is disabled for the bucket.
      */
     type?: Type;
   }
@@ -878,19 +903,19 @@ declare namespace Macie2 {
   }
   export interface Cell {
     /**
-     * The location of the cell, as an absolute cell reference, that contains the data. For example, Sheet2!C5 for cell C5 on Sheet2 in a Microsoft Excel workbook. This value is null for CSV and TSV files.
+     * The location of the cell, as an absolute cell reference, that contains the sensitive data, for example Sheet2!C5 for cell C5 on Sheet2 in a Microsoft Excel workbook. This value is null for CSV and TSV files.
      */
     cellReference?: __string;
     /**
-     * The column number of the column that contains the data. For a Microsoft Excel workbook, this value correlates to the alphabetical character(s) for a column identifier. For example, 1 for column A, 2 for column B, and so on.
+     * The column number of the column that contains the sensitive data. For a Microsoft Excel workbook, this value correlates to the alphabetical character(s) for a column identifier, for example: 1 for column A, 2 for column B, and so on.
      */
     column?: __long;
     /**
-     * The name of the column that contains the data, if available. This value is also null if Amazon Macie detects sensitive data in the name of any column in the file.
+     * The name of the column that contains the sensitive data, if available.
      */
     columnName?: __string;
     /**
-     * The row number of the row that contains the data.
+     * The row number of the row that contains the sensitive data.
      */
     row?: __long;
   }
@@ -909,7 +934,7 @@ declare namespace Macie2 {
      */
     jobId?: __string;
     /**
-     * The status and other details for the finding.
+     * The status and other details of the finding.
      */
     result?: ClassificationResult;
   }
@@ -947,11 +972,11 @@ declare namespace Macie2 {
   }
   export interface ClassificationResultStatus {
     /**
-     *  The status of the finding. Possible values are: COMPLETE - Amazon Macie successfully completed its analysis of the object that the finding applies to. PARTIAL - Macie analyzed only a subset of the data in the object that the finding applies to. For example, the object is an archive file that contains files in an unsupported format. SKIPPED - Macie wasn't able to analyze the object that the finding applies to. For example, the object is a malformed file or a file that uses an unsupported format.
+     *  The status of the finding. Possible values are: COMPLETE - Amazon Macie successfully completed its analysis of the S3 object that the finding applies to. PARTIAL - Macie analyzed only a subset of the data in the S3 object that the finding applies to. For example, the object is an archive file that contains files in an unsupported format. SKIPPED - Macie wasn't able to analyze the S3 object that the finding applies to. For example, the object is a file that uses an unsupported format.
      */
     code?: __string;
     /**
-     * A brief description of the status of the finding. Amazon Macie uses this value to notify you of any errors, warnings, or considerations that might impact your analysis of the finding.
+     * A brief description of the status of the finding. This value is null if the status (code) of the finding is COMPLETE. Amazon Macie uses this value to notify you of any errors, warnings, or considerations that might impact your analysis of the finding and the affected S3 object. Possible values are: ARCHIVE_CONTAINS_UNPROCESSED_FILES - The object is an archive file and Macie extracted and analyzed only some or none of the files in the archive. To determine which files Macie analyzed, if any, you can refer to the corresponding sensitive data discovery result for the finding (ClassificationDetails.detailedResultsLocation). ARCHIVE_EXCEEDS_SIZE_LIMIT - The object is an archive file whose total storage size exceeds the size quota for this type of archive. ARCHIVE_NESTING_LEVEL_OVER_LIMIT - The object is an archive file whose nested depth exceeds the quota for the maximum number of nested levels that Macie analyzes for this type of archive. ARCHIVE_TOTAL_BYTES_EXTRACTED_OVER_LIMIT - The object is an archive file that exceeds the quota for the maximum amount of data that Macie extracts and analyzes for this type of archive. ARCHIVE_TOTAL_DOCUMENTS_PROCESSED_OVER_LIMIT - The object is an archive file that contains more than the maximum number of files that Macie extracts and analyzes for this type of archive. FILE_EXCEEDS_SIZE_LIMIT - The storage size of the object exceeds the size quota for this type of file. INVALID_ENCRYPTION - The object is encrypted using server-side encryption but Macie isn’t allowed to use the key. Macie can’t decrypt and analyze the object. INVALID_KMS_KEY - The object is encrypted with an KMS key that was disabled or is being deleted. Macie can’t decrypt and analyze the object. INVALID_OBJECT_STATE - The object doesn’t use a supported Amazon S3 storage class. For more information, see Discovering sensitive data in the Amazon Macie User Guide. JSON_NESTING_LEVEL_OVER_LIMIT - The object contains JSON data and the nested depth of the data exceeds the quota for the number of nested levels that Macie analyzes for this type of file. MALFORMED_FILE - The object is a malformed or corrupted file. An error occurred when Macie attempted to detect the file’s type or extract data from the file. OBJECT_VERSION_MISMATCH - The object was changed while Macie was analyzing it. NO_SUCH_BUCKET_AVAILABLE - The object was in a bucket that was deleted shortly before or when Macie attempted to analyze the object. MALFORMED_OR_FILE_SIZE_EXCEEDS_LIMIT - The object is a Microsoft Office file that is malformed or exceeds the size quota for this type of file. If the file is malformed, an error occurred when Macie attempted to extract data from the file. OOXML_UNCOMPRESSED_SIZE_EXCEEDS_LIMIT - The object is an Office Open XML file that exceeds the size quota for this type of file. OOXML_UNCOMPRESSED_RATIO_EXCEEDS_LIMIT - The object is an Office Open XML file whose compression ratio exceeds the compression quota for this type of file. PERMISSION_DENIED - Macie isn’t allowed to access the object. The object’s permissions settings prevent Macie from analyzing the object. SOURCE_OBJECT_NO_LONGER_AVAILABLE - The object was deleted shortly before or when Macie attempted to analyze it. UNABLE_TO_PARSE_FILE - The object is a file that contains structured data and an error occurred when Macie attempted to parse the data. UNSUPPORTED_FILE_TYPE_EXCEPTION - The object is a file that uses an unsupported file or storage format. For more information, see Supported file and storage formats in the Amazon Macie User Guide. For information about sensitive data discovery quotas for files, see Amazon Macie quotas in the Amazon Macie User Guide.
      */
     reason?: __string;
   }
@@ -961,7 +986,7 @@ declare namespace Macie2 {
      */
     clientToken: __string;
     /**
-     * The custom data identifiers to use for data analysis and classification.
+     * An array of unique identifiers, one for each custom data identifier for the job to use when it analyzes data. To use only managed data identifiers, don't specify a value for this property and specify a value other than NONE for the managedDataIdentifierSelector property.
      */
     customDataIdentifierIds?: __listOf__string;
     /**
@@ -969,13 +994,21 @@ declare namespace Macie2 {
      */
     description?: __string;
     /**
-     * Specifies whether to analyze all existing, eligible objects immediately after the job is created.
+     * For a recurring job, specifies whether to analyze all existing, eligible objects immediately after the job is created (true). To analyze only those objects that are created or changed after you create the job and before the job's first scheduled run, set this value to false.If you configure the job to run only once, don't specify a value for this property.
      */
     initialRun?: __boolean;
     /**
      * The schedule for running the job. Valid values are: ONE_TIME - Run the job only once. If you specify this value, don't specify a value for the scheduleFrequency property. SCHEDULED - Run the job on a daily, weekly, or monthly basis. If you specify this value, use the scheduleFrequency property to define the recurrence pattern for the job.
      */
     jobType: JobType;
+    /**
+     * An array of unique identifiers, one for each managed data identifier for the job to include (use) or exclude (not use) when it analyzes data. Inclusion or exclusion depends on the managed data identifier selection type that you specify for the job (managedDataIdentifierSelector).To retrieve a list of valid values for this property, use the ListManagedDataIdentifiers operation.
+     */
+    managedDataIdentifierIds?: __listOf__string;
+    /**
+     * The selection type to apply when determining which managed data identifiers the job uses to analyze data. Valid values are: ALL - Use all the managed data identifiers that Amazon Macie provides. If you specify this value, don't specify any values for the managedDataIdentifierIds property. EXCLUDE - Use all the managed data identifiers that Macie provides except the managed data identifiers specified by the managedDataIdentifierIds property. INCLUDE - Use only the managed data identifiers specified by the managedDataIdentifierIds property. NONE - Don't use any managed data identifiers. If you specify this value, specify at least one custom data identifier for the job (customDataIdentifierIds) and don't specify any values for the managedDataIdentifierIds property. If you don't specify a value for this property, the job uses all managed data identifiers. If you don't specify a value for this property or you specify ALL or EXCLUDE for a recurring job, the job also uses new managed data identifiers as they are released.
+     */
+    managedDataIdentifierSelector?: ManagedDataIdentifierSelector;
     /**
      * A custom name for the job. The name can contain as many as 500 characters.
      */
@@ -985,7 +1018,7 @@ declare namespace Macie2 {
      */
     s3JobDefinition: S3JobDefinition;
     /**
-     * The sampling depth, as a percentage, to apply when processing objects. This value determines the percentage of eligible objects that the job analyzes. If this value is less than 100, Amazon Macie selects the objects to analyze at random, up to the specified percentage, and analyzes all the data in those objects.
+     * The sampling depth, as a percentage, for the job to apply when processing objects. This value determines the percentage of eligible objects that the job analyzes. If this value is less than 100, Amazon Macie selects the objects to analyze at random, up to the specified percentage, and analyzes all the data in those objects.
      */
     samplingPercentage?: __integer;
     /**
@@ -1013,29 +1046,33 @@ declare namespace Macie2 {
      */
     clientToken?: __string;
     /**
-     * A custom description of the custom data identifier. The description can contain as many as 512 characters. We strongly recommend that you avoid including any sensitive data in the description of a custom data identifier. Other users of your account might be able to see the identifier's description, depending on the actions that they're allowed to perform in Amazon Macie.
+     * A custom description of the custom data identifier. The description can contain as many as 512 characters. We strongly recommend that you avoid including any sensitive data in the description of a custom data identifier. Other users of your account might be able to see this description, depending on the actions that they're allowed to perform in Amazon Macie.
      */
     description?: __string;
     /**
-     * An array that lists specific character sequences (ignore words) to exclude from the results. If the text matched by the regular expression is the same as any string in this array, Amazon Macie ignores it. The array can contain as many as 10 ignore words. Each ignore word can contain 4 - 90 characters. Ignore words are case sensitive.
+     * An array that lists specific character sequences (ignore words) to exclude from the results. If the text matched by the regular expression contains any string in this array, Amazon Macie ignores it. The array can contain as many as 10 ignore words. Each ignore word can contain 4-90 UTF-8 characters. Ignore words are case sensitive.
      */
     ignoreWords?: __listOf__string;
     /**
-     * An array that lists specific character sequences (keywords), one of which must be within proximity (maximumMatchDistance) of the regular expression to match. The array can contain as many as 50 keywords. Each keyword can contain 3 - 90 characters. Keywords aren't case sensitive.
+     * An array that lists specific character sequences (keywords), one of which must be within proximity (maximumMatchDistance) of the regular expression to match. The array can contain as many as 50 keywords. Each keyword can contain 3-90 UTF-8 characters. Keywords aren't case sensitive.
      */
     keywords?: __listOf__string;
     /**
-     * The maximum number of characters that can exist between text that matches the regex pattern and the character sequences specified by the keywords array. Macie includes or excludes a result based on the proximity of a keyword to text that matches the regex pattern. The distance can be 1 - 300 characters. The default value is 50.
+     * The maximum number of characters that can exist between text that matches the regular expression and the character sequences specified by the keywords array. Amazon Macie includes or excludes a result based on the proximity of a keyword to text that matches the regular expression. The distance can be 1-300 characters. The default value is 50.
      */
     maximumMatchDistance?: __integer;
     /**
-     * A custom name for the custom data identifier. The name can contain as many as 128 characters. We strongly recommend that you avoid including any sensitive data in the name of a custom data identifier. Other users of your account might be able to see the identifier's name, depending on the actions that they're allowed to perform in Amazon Macie.
+     * A custom name for the custom data identifier. The name can contain as many as 128 characters. We strongly recommend that you avoid including any sensitive data in the name of a custom data identifier. Other users of your account might be able to see this name, depending on the actions that they're allowed to perform in Amazon Macie.
      */
-    name?: __string;
+    name: __string;
     /**
      * The regular expression (regex) that defines the pattern to match. The expression can contain as many as 512 characters.
      */
-    regex?: __string;
+    regex: __string;
+    /**
+     * The severity to assign to findings that the custom data identifier produces, based on the number of occurrences of text that matches the custom data identifier's detection criteria. You can specify as many as three SeverityLevel objects in this array, one for each severity: LOW, MEDIUM, or HIGH. If you specify more than one, the occurrences thresholds must be in ascending order by severity, moving from LOW to HIGH. For example, 1 for LOW, 50 for MEDIUM, and 100 for HIGH. If an S3 object contains fewer occurrences than the lowest specified threshold, Amazon Macie doesn't create a finding. If you don't specify any values for this array, Macie creates findings for S3 objects that contain at least one occurrence of text that matches the detection criteria, and Macie assigns the MEDIUM severity to those findings.
+     */
+    severityLevels?: SeverityLevelList;
     /**
      * A map of key-value pairs that specifies the tags to associate with the custom data identifier. A custom data identifier can have a maximum of 50 tags. Each tag consists of a tag key and an associated tag value. The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256 characters.
      */
@@ -1057,7 +1094,7 @@ declare namespace Macie2 {
      */
     clientToken?: __string;
     /**
-     * A custom description of the filter. The description can contain as many as 512 characters. We strongly recommend that you avoid including any sensitive data in the description of a filter. Other users of your account might be able to see the filter's description, depending on the actions that they're allowed to perform in Amazon Macie.
+     * A custom description of the filter. The description can contain as many as 512 characters. We strongly recommend that you avoid including any sensitive data in the description of a filter. Other users of your account might be able to see this description, depending on the actions that they're allowed to perform in Amazon Macie.
      */
     description?: __string;
     /**
@@ -1065,7 +1102,7 @@ declare namespace Macie2 {
      */
     findingCriteria: FindingCriteria;
     /**
-     * A custom name for the filter. The name must contain at least 3 characters and can contain as many as 64 characters. We strongly recommend that you avoid including any sensitive data in the name of a filter. Other users of your account might be able to see the filter's name, depending on the actions that they're allowed to perform in Amazon Macie.
+     * A custom name for the filter. The name must contain at least 3 characters and can contain as many as 64 characters. We strongly recommend that you avoid including any sensitive data in the name of a filter. Other users of your account might be able to see this name, depending on the actions that they're allowed to perform in Amazon Macie.
      */
     name: __string;
     /**
@@ -1089,15 +1126,15 @@ declare namespace Macie2 {
   }
   export interface CreateInvitationsRequest {
     /**
-     * An array that lists AWS account IDs, one for each account to send the invitation to.
+     * An array that lists Amazon Web Services account IDs, one for each account to send the invitation to.
      */
     accountIds: __listOf__string;
     /**
-     * Specifies whether to send an email notification to the root user of each account that the invitation will be sent to. This notification is in addition to an alert that the root user receives in AWS Personal Health Dashboard. To send an email notification to the root user of each account, set this value to true.
+     * Specifies whether to send the invitation as an email message. If this value is false, Amazon Macie sends the invitation (as an email message) to the email address that you specified for the recipient's account when you associated the account with your account. The default value is false.
      */
     disableEmailNotification?: __boolean;
     /**
-     * A custom message to include in the invitation. Amazon Macie adds this message to the standard content that it sends for an invitation.
+     * Custom text to include in the email message that contains the invitation. The text can contain as many as 80 alphanumeric characters.
      */
     message?: __string;
   }
@@ -1109,7 +1146,7 @@ declare namespace Macie2 {
   }
   export interface CreateMemberRequest {
     /**
-     * The details for the account to associate with the administrator account.
+     * The details of the account to associate with the administrator account.
      */
     account: AccountDetail;
     /**
@@ -1125,11 +1162,27 @@ declare namespace Macie2 {
   }
   export interface CreateSampleFindingsRequest {
     /**
-     * An array that lists one or more types of findings to include in the set of sample findings. Currently, the only supported value is Policy:IAMUser/S3BucketEncryptionDisabled. 
+     * An array of finding types, one for each type of sample finding to create. To create a sample of every type of finding that Amazon Macie supports, don't include this array in your request.
      */
     findingTypes?: __listOfFindingType;
   }
   export interface CreateSampleFindingsResponse {
+  }
+  export interface CriteriaBlockForJob {
+    /**
+     * An array of conditions, one for each condition that determines which buckets to include or exclude from the job. If you specify more than one condition, Amazon Macie uses AND logic to join the conditions.
+     */
+    and?: __listOfCriteriaForJob;
+  }
+  export interface CriteriaForJob {
+    /**
+     * A property-based condition that defines a property, operator, and one or more values for including or excluding buckets from the job.
+     */
+    simpleCriterion?: SimpleCriterionForJob;
+    /**
+     * A tag-based condition that defines an operator and tag keys, tag values, or tag key and value pairs for including or excluding buckets from the job.
+     */
+    tagCriterion?: TagCriterionForJob;
   }
   export type Criterion = {[key: string]: CriterionAdditionalProperties};
   export interface CriterionAdditionalProperties {
@@ -1216,10 +1269,11 @@ declare namespace Macie2 {
   export type CustomDetections = CustomDetection[];
   export interface DailySchedule {
   }
+  export type DataIdentifierSeverity = "LOW"|"MEDIUM"|"HIGH"|string;
   export type DayOfWeek = "SUNDAY"|"MONDAY"|"TUESDAY"|"WEDNESDAY"|"THURSDAY"|"FRIDAY"|"SATURDAY"|string;
   export interface DeclineInvitationsRequest {
     /**
-     * An array that lists AWS account IDs, one for each account that sent an invitation to decline.
+     * An array that lists Amazon Web Services account IDs, one for each account that sent an invitation to decline.
      */
     accountIds: __listOf__string;
   }
@@ -1262,7 +1316,7 @@ declare namespace Macie2 {
   }
   export interface DeleteInvitationsRequest {
     /**
-     * An array that lists AWS account IDs, one for each account that sent an invitation to delete.
+     * An array that lists Amazon Web Services account IDs, one for each account that sent an invitation to delete.
      */
     accountIds: __listOf__string;
   }
@@ -1324,7 +1378,7 @@ declare namespace Macie2 {
      */
     createdAt?: __timestampIso8601;
     /**
-     * The custom data identifiers that the job uses to analyze data.
+     * An array of unique identifiers, one for each custom data identifier that the job uses to analyze data. This value is null if the job uses only managed data identifiers to analyze data.
      */
     customDataIdentifierIds?: __listOf__string;
     /**
@@ -1332,7 +1386,7 @@ declare namespace Macie2 {
      */
     description?: __string;
     /**
-     * Specifies whether the job is configured to analyze all existing, eligible objects immediately after it's created.
+     * For a recurring job, specifies whether you configured the job to analyze all existing, eligible objects immediately after the job was created (true). If you configured the job to analyze only those objects that were created or changed after the job was created and before the job's first scheduled run, this value is false. This value is also false for a one-time job.
      */
     initialRun?: __boolean;
     /**
@@ -1344,7 +1398,7 @@ declare namespace Macie2 {
      */
     jobId?: __string;
     /**
-     * The current status of the job. Possible values are: CANCELLED - You cancelled the job or, if it's a one-time job, you paused the job and didn't resume it within 30 days. COMPLETE - For a one-time job, Amazon Macie finished processing the data specified for the job. This value doesn't apply to recurring jobs. IDLE - For a recurring job, the previous scheduled run is complete and the next scheduled run is pending. This value doesn't apply to one-time jobs. PAUSED - Amazon Macie started running the job but additional processing would exceed the monthly sensitive data discovery quota for your account or one or more member accounts that the job analyzes data for. RUNNING - For a one-time job, the job is in progress. For a recurring job, a scheduled run is in progress. USER_PAUSED - You paused the job. If you paused the job while it had a status of RUNNING and you don't resume it within 30 days of pausing it, the job or job run will expire and be cancelled, depending on the job's type. To check the expiration date, refer to the UserPausedDetails.jobExpiresAt property.
+     * The current status of the job. Possible values are: CANCELLED - You cancelled the job or, if it's a one-time job, you paused the job and didn't resume it within 30 days. COMPLETE - For a one-time job, Amazon Macie finished processing the data specified for the job. This value doesn't apply to recurring jobs. IDLE - For a recurring job, the previous scheduled run is complete and the next scheduled run is pending. This value doesn't apply to one-time jobs. PAUSED - Macie started running the job but additional processing would exceed the monthly sensitive data discovery quota for your account or one or more member accounts that the job analyzes data for. RUNNING - For a one-time job, the job is in progress. For a recurring job, a scheduled run is in progress. USER_PAUSED - You paused the job. If you paused the job while it had a status of RUNNING and you don't resume it within 30 days of pausing it, the job or job run will expire and be cancelled, depending on the job's type. To check the expiration date, refer to the UserPausedDetails.jobExpiresAt property.
      */
     jobStatus?: JobStatus;
     /**
@@ -1360,11 +1414,19 @@ declare namespace Macie2 {
      */
     lastRunTime?: __timestampIso8601;
     /**
+     * An array of unique identifiers, one for each managed data identifier that the job is explicitly configured to include (use) or exclude (not use) when it analyzes data. Inclusion or exclusion depends on the managed data identifier selection type specified for the job (managedDataIdentifierSelector). This value is null if the job's managed data identifier selection type is ALL or the job uses only custom data identifiers (customDataIdentifierIds) to analyze data.
+     */
+    managedDataIdentifierIds?: __listOf__string;
+    /**
+     * The selection type that determines which managed data identifiers the job uses to analyze data. Possible values are: ALL - Use all the managed data identifiers that Amazon Macie provides. EXCLUDE - Use all the managed data identifiers that Macie provides except the managed data identifiers specified by the managedDataIdentifierIds property. INCLUDE - Use only the managed data identifiers specified by the managedDataIdentifierIds property. NONE - Don't use any managed data identifiers. If this value is null, the job uses all managed data identifiers. If this value is null, ALL, or EXCLUDE for a recurring job, the job also uses new managed data identifiers as they are released.
+     */
+    managedDataIdentifierSelector?: ManagedDataIdentifierSelector;
+    /**
      * The custom name of the job.
      */
     name?: __string;
     /**
-     * The S3 buckets that the job is configured to analyze, and the scope of that analysis.
+     * The S3 buckets that contain the objects to analyze, and the scope of that analysis.
      */
     s3JobDefinition?: S3JobDefinition;
     /**
@@ -1372,7 +1434,7 @@ declare namespace Macie2 {
      */
     samplingPercentage?: __integer;
     /**
-     * The recurrence pattern for running the job. If the job is configured to run only once, this value is null.
+     * The recurrence pattern for running the job. This value is null if the job is configured to run only once.
      */
     scheduleFrequency?: JobScheduleFrequency;
     /**
@@ -1392,11 +1454,11 @@ declare namespace Macie2 {
   }
   export interface DescribeOrganizationConfigurationResponse {
     /**
-     * Specifies whether Amazon Macie is enabled automatically for accounts that are added to the AWS organization.
+     * Specifies whether Amazon Macie is enabled automatically for accounts that are added to the organization.
      */
     autoEnable?: __boolean;
     /**
-     * Specifies whether the maximum number of Amazon Macie member accounts are part of the AWS organization.
+     * Specifies whether the maximum number of Amazon Macie member accounts are part of the organization.
      */
     maxAccountLimitReached?: __boolean;
   }
@@ -1406,7 +1468,7 @@ declare namespace Macie2 {
   }
   export interface DisableOrganizationAdminAccountRequest {
     /**
-     * The AWS account ID of the delegated Amazon Macie administrator account.
+     * The Amazon Web Services account ID of the delegated Amazon Macie administrator account.
      */
     adminAccountId: __string;
   }
@@ -1441,7 +1503,7 @@ declare namespace Macie2 {
      */
     clientToken?: __string;
     /**
-     * Specifies how often to publish updates to policy findings for the account. This includes publishing updates to AWS Security Hub and Amazon EventBridge (formerly called Amazon CloudWatch Events).
+     * Specifies how often to publish updates to policy findings for the account. This includes publishing updates to Security Hub and Amazon EventBridge (formerly called Amazon CloudWatch Events).
      */
     findingPublishingFrequency?: FindingPublishingFrequency;
     /**
@@ -1453,7 +1515,7 @@ declare namespace Macie2 {
   }
   export interface EnableOrganizationAdminAccountRequest {
     /**
-     * The AWS account ID for the account to designate as the delegated Amazon Macie administrator account for the organization.
+     * The Amazon Web Services account ID for the account to designate as the delegated Amazon Macie administrator account for the organization.
      */
     adminAccountId: __string;
     /**
@@ -1467,11 +1529,11 @@ declare namespace Macie2 {
   export type ErrorCode = "ClientError"|"InternalError"|string;
   export interface FederatedUser {
     /**
-     * The AWS access key ID that identifies the credentials.
+     * The Amazon Web Services access key ID that identifies the credentials.
      */
     accessKeyId?: __string;
     /**
-     * The unique identifier for the AWS account that owns the entity that was used to get the credentials.
+     * The unique identifier for the Amazon Web Services account that owns the entity that was used to get the credentials.
      */
     accountId?: __string;
     /**
@@ -1489,11 +1551,11 @@ declare namespace Macie2 {
   }
   export interface Finding {
     /**
-     * The unique identifier for the AWS account that the finding applies to. This is typically the account that owns the affected resource.
+     * The unique identifier for the Amazon Web Services account that the finding applies to. This is typically the account that owns the affected resource.
      */
     accountId?: __string;
     /**
-     * Specifies whether the finding is archived.
+     * Specifies whether the finding is archived (suppressed).
      */
     archived?: __boolean;
     /**
@@ -1521,7 +1583,7 @@ declare namespace Macie2 {
      */
     id?: __string;
     /**
-     * The AWS partition that Amazon Macie created the finding in.
+     * The Amazon Web Services partition that Amazon Macie created the finding in.
      */
     partition?: __string;
     /**
@@ -1529,7 +1591,7 @@ declare namespace Macie2 {
      */
     policyDetails?: PolicyDetails;
     /**
-     * The AWS Region that Amazon Macie created the finding in.
+     * The Amazon Web Services Region that Amazon Macie created the finding in.
      */
     region?: __string;
     /**
@@ -1633,13 +1695,13 @@ declare namespace Macie2 {
   }
   export interface GetAdministratorAccountResponse {
     /**
-     * The AWS account ID for the administrator account. If the accounts are associated by a Macie membership invitation, this object also provides details about the invitation that was sent to establish the relationship between the accounts.
+     * The Amazon Web Services account ID for the administrator account. If the accounts are associated by an Amazon Macie membership invitation, this object also provides details about the invitation that was sent to establish the relationship between the accounts.
      */
     administrator?: Invitation;
   }
   export interface GetBucketStatisticsRequest {
     /**
-     * The unique identifier for the AWS account.
+     * The unique identifier for the Amazon Web Services account.
      */
     accountId?: __string;
   }
@@ -1657,11 +1719,11 @@ declare namespace Macie2 {
      */
     bucketCountByEncryptionType?: BucketCountByEncryptionType;
     /**
-     * The total number of buckets whose bucket policies do and don't require server-side encryption of objects when objects are uploaded to the buckets.
+     * The total number of buckets whose bucket policies do or don't require server-side encryption of objects when objects are uploaded to the buckets.
      */
     bucketCountByObjectEncryptionRequirement?: BucketCountPolicyAllowsUnencryptedObjectUploads;
     /**
-     * The total number of buckets that are and aren't shared with another AWS account.
+     * The total number of buckets that are or aren't shared with another Amazon Web Services account.
      */
     bucketCountBySharedAccessType?: BucketCountBySharedAccessType;
     /**
@@ -1681,11 +1743,11 @@ declare namespace Macie2 {
      */
     objectCount?: __long;
     /**
-     * The total storage size, in bytes, of the buckets. If versioning is enabled for any of the buckets, Macie calculates this value based on the size of the latest version of each object in those buckets. This value doesn't reflect the storage size of all versions of the objects in the buckets.
+     * The total storage size, in bytes, of the buckets. If versioning is enabled for any of the buckets, Amazon Macie calculates this value based on the size of the latest version of each object in those buckets. This value doesn't reflect the storage size of all versions of the objects in the buckets.
      */
     sizeInBytes?: __long;
     /**
-     * The total compressed storage size, in bytes, of the buckets. If versioning is enabled for any of the buckets, Macie calculates this value based on the size of the latest version of each object in those buckets. This value doesn't reflect the storage size of all versions of the objects in the buckets.
+     * The total storage size, in bytes, of the objects that are compressed (.gz, .gzip, .zip) files in the buckets. If versioning is enabled for any of the buckets, Amazon Macie calculates this value based on the size of the latest version of each applicable object in those buckets. This value doesn't reflect the storage size of all versions of the applicable objects in the buckets.
      */
     sizeInBytesCompressed?: __long;
     /**
@@ -1733,7 +1795,7 @@ declare namespace Macie2 {
      */
     id?: __string;
     /**
-     * An array that lists specific character sequences (ignore words) to exclude from the results. If the text matched by the regular expression is the same as any string in this array, Amazon Macie ignores it. Ignore words are case sensitive.
+     * An array that lists specific character sequences (ignore words) to exclude from the results. If the text matched by the regular expression contains any string in this array, Amazon Macie ignores it. Ignore words are case sensitive.
      */
     ignoreWords?: __listOf__string;
     /**
@@ -1741,7 +1803,7 @@ declare namespace Macie2 {
      */
     keywords?: __listOf__string;
     /**
-     * The maximum number of characters that can exist between text that matches the regex pattern and the character sequences specified by the keywords array. Macie includes or excludes a result based on the proximity of a keyword to text that matches the regex pattern.
+     * The maximum number of characters that can exist between text that matches the regular expression and the character sequences specified by the keywords array. Amazon Macie includes or excludes a result based on the proximity of a keyword to text that matches the regular expression.
      */
     maximumMatchDistance?: __integer;
     /**
@@ -1752,6 +1814,10 @@ declare namespace Macie2 {
      * The regular expression (regex) that defines the pattern to match.
      */
     regex?: __string;
+    /**
+     * Specifies the severity that's assigned to findings that the custom data identifier produces, based on the number of occurrences of text that matches the custom data identifier's detection criteria. By default, Amazon Macie creates findings for S3 objects that contain at least one occurrence of text that matches the detection criteria, and Macie assigns the MEDIUM severity to those findings.
+     */
+    severityLevels?: SeverityLevelList;
     /**
      * A map of key-value pairs that identifies the tags (keys and values) that are associated with the custom data identifier.
      */
@@ -1825,7 +1891,7 @@ declare namespace Macie2 {
   }
   export interface GetFindingsPublicationConfigurationResponse {
     /**
-     * The configuration settings that determine which findings are published to AWS Security Hub.
+     * The configuration settings that determine which findings are published to Security Hub.
      */
     securityHubConfiguration?: SecurityHubConfiguration;
   }
@@ -1861,19 +1927,19 @@ declare namespace Macie2 {
      */
     createdAt?: __timestampIso8601;
     /**
-     * The frequency with which Macie publishes updates to policy findings for the account. This includes publishing updates to AWS Security Hub and Amazon EventBridge (formerly called Amazon CloudWatch Events).
+     * The frequency with which Amazon Macie publishes updates to policy findings for the account. This includes publishing updates to Security Hub and Amazon EventBridge (formerly called Amazon CloudWatch Events).
      */
     findingPublishingFrequency?: FindingPublishingFrequency;
     /**
-     * The Amazon Resource Name (ARN) of the service-linked role that allows Macie to monitor and analyze data in AWS resources for the account.
+     * The Amazon Resource Name (ARN) of the service-linked role that allows Amazon Macie to monitor and analyze data in Amazon Web Services resources for the account.
      */
     serviceRole?: __string;
     /**
-     * The current status of the Macie account. Possible values are: PAUSED, the account is enabled but all Macie activities are suspended (paused) for the account; and, ENABLED, the account is enabled and all Macie activities are enabled for the account.
+     * The current status of the Amazon Macie account. Possible values are: PAUSED, the account is enabled but all Macie activities are suspended (paused) for the account; and, ENABLED, the account is enabled and all Macie activities are enabled for the account.
      */
     status?: MacieStatus;
     /**
-     * The date and time, in UTC and extended ISO 8601 format, of the most recent change to the status of the Macie account.
+     * The date and time, in UTC and extended ISO 8601 format, of the most recent change to the status of the Amazon Macie account.
      */
     updatedAt?: __timestampIso8601;
   }
@@ -1881,7 +1947,7 @@ declare namespace Macie2 {
   }
   export interface GetMasterAccountResponse {
     /**
-     * (Deprecated) The AWS account ID for the administrator account. If the accounts are associated by a Macie membership invitation, this object also provides details about the invitation that was sent to establish the relationship between the accounts.
+     * (Deprecated) The Amazon Web Services account ID for the administrator account. If the accounts are associated by a Macie membership invitation, this object also provides details about the invitation that was sent to establish the relationship between the accounts.
      */
     master?: Invitation;
   }
@@ -1893,11 +1959,11 @@ declare namespace Macie2 {
   }
   export interface GetMemberResponse {
     /**
-     * The AWS account ID for the account.
+     * The Amazon Web Services account ID for the account.
      */
     accountId?: __string;
     /**
-     * The AWS account ID for the administrator account.
+     * The Amazon Web Services account ID for the administrator account.
      */
     administratorAccountId?: __string;
     /**
@@ -1909,11 +1975,11 @@ declare namespace Macie2 {
      */
     email?: __string;
     /**
-     * The date and time, in UTC and extended ISO 8601 format, when an Amazon Macie membership invitation was last sent to the account. This value is null if a Macie invitation hasn't been sent to the account.
+     * The date and time, in UTC and extended ISO 8601 format, when an Amazon Macie membership invitation was last sent to the account. This value is null if an invitation hasn't been sent to the account.
      */
     invitedAt?: __timestampIso8601;
     /**
-     * (Deprecated) The AWS account ID for the administrator account. This property has been replaced by the administratorAccountId property and is retained only for backward compatibility.
+     * (Deprecated) The Amazon Web Services account ID for the administrator account. This property has been replaced by the administratorAccountId property and is retained only for backward compatibility.
      */
     masterAccountId?: __string;
     /**
@@ -1994,7 +2060,7 @@ declare namespace Macie2 {
   }
   export interface IamUser {
     /**
-     * The unique identifier for the AWS account that's associated with the IAM user who performed the action.
+     * The unique identifier for the Amazon Web Services account that's associated with the IAM user who performed the action.
      */
     accountId?: __string;
     /**
@@ -2012,11 +2078,11 @@ declare namespace Macie2 {
   }
   export interface Invitation {
     /**
-     * The AWS account ID for the account that sent the invitation.
+     * The Amazon Web Services account ID for the account that sent the invitation.
      */
     accountId?: __string;
     /**
-     * The unique identifier for the invitation. Amazon Macie uses this identifier to validate the inviter account with the invitee account.
+     * The unique identifier for the invitation.
      */
     invitationId?: __string;
     /**
@@ -2024,7 +2090,7 @@ declare namespace Macie2 {
      */
     invitedAt?: __timestampIso8601;
     /**
-     * The status of the relationship between the account that sent the invitation (inviter account) and the account that received the invitation (invitee account).
+     * The status of the relationship between the account that sent the invitation and the account that received the invitation.
      */
     relationshipStatus?: RelationshipStatus;
   }
@@ -2099,19 +2165,19 @@ declare namespace Macie2 {
   export type JobComparator = "EQ"|"GT"|"GTE"|"LT"|"LTE"|"NE"|"CONTAINS"|"STARTS_WITH"|string;
   export interface JobDetails {
     /**
-     * Specifies whether any one-time or recurring jobs are configured to analyze data in the bucket. Possible values are: TRUE - One or more jobs is configured to analyze data in the bucket, and at least one of those jobs has a status other than CANCELLED. FALSE - No jobs are configured to analyze data in the bucket, or all the jobs that are configured to analyze data in the bucket have a status of CANCELLED. UNKNOWN - An exception occurred when Amazon Macie attempted to retrieve job data for the bucket. 
+     * Specifies whether any one-time or recurring jobs are configured to analyze data in the bucket. Possible values are: TRUE - The bucket is explicitly included in the bucket definition (S3BucketDefinitionForJob) for one or more jobs and at least one of those jobs has a status other than CANCELLED. Or the bucket matched the bucket criteria (S3BucketCriteriaForJob) for at least one job that previously ran. FALSE - The bucket isn't explicitly included in the bucket definition (S3BucketDefinitionForJob) for any jobs, all the jobs that explicitly include the bucket in their bucket definitions have a status of CANCELLED, or the bucket didn't match the bucket criteria (S3BucketCriteriaForJob) for any jobs that previously ran. UNKNOWN - An exception occurred when Amazon Macie attempted to retrieve job data for the bucket. 
      */
     isDefinedInJob?: IsDefinedInJob;
     /**
-     * Specifies whether any recurring jobs are configured to analyze data in the bucket. Possible values are: TRUE - One or more recurring jobs is configured to analyze data in the bucket, and at least one of those jobs has a status other than CANCELLED. FALSE - No recurring jobs are configured to analyze data in the bucket, or all the recurring jobs that are configured to analyze data in the bucket have a status of CANCELLED. UNKNOWN - An exception occurred when Amazon Macie attempted to retrieve job data for the bucket.
+     * Specifies whether any recurring jobs are configured to analyze data in the bucket. Possible values are: TRUE - The bucket is explicitly included in the bucket definition (S3BucketDefinitionForJob) for one or more recurring jobs or the bucket matches the bucket criteria (S3BucketCriteriaForJob) for one or more recurring jobs. At least one of those jobs has a status other than CANCELLED. FALSE - The bucket isn't explicitly included in the bucket definition (S3BucketDefinitionForJob) for any recurring jobs, the bucket doesn't match the bucket criteria (S3BucketCriteriaForJob) for any recurring jobs, or all the recurring jobs that are configured to analyze data in the bucket have a status of CANCELLED. UNKNOWN - An exception occurred when Amazon Macie attempted to retrieve job data for the bucket.
      */
     isMonitoredByJob?: IsMonitoredByJob;
     /**
-     * The unique identifier for the job that ran most recently (either the latest run of a recurring job or the only run of a one-time job) and is configured to analyze data in the bucket. This value is null if the value for the isDefinedInJob property is FALSE or UNKNOWN.
+     * The unique identifier for the job that ran most recently and is configured to analyze data in the bucket, either the latest run of a recurring job or the only run of a one-time job. This value is typically null if the value for the isDefinedInJob property is FALSE or UNKNOWN.
      */
     lastJobId?: __string;
     /**
-     * The date and time, in UTC and extended ISO 8601 format, when the job (lastJobId) started. If the job is a recurring job, this value indicates when the most recent run started. This value is null if the value for the isDefinedInJob property is FALSE or UNKNOWN.
+     * The date and time, in UTC and extended ISO 8601 format, when the job (lastJobId) started. If the job is a recurring job, this value indicates when the most recent run started. This value is typically null if the value for the isDefinedInJob property is FALSE or UNKNOWN.
      */
     lastJobRunTime?: __timestampIso8601;
   }
@@ -2131,24 +2197,24 @@ declare namespace Macie2 {
   }
   export interface JobScopeTerm {
     /**
-     * A property-based condition that defines a property, operator, and one or more values for including or excluding an object from the job.
+     * A property-based condition that defines a property, operator, and one or more values for including or excluding objects from the job.
      */
     simpleScopeTerm?: SimpleScopeTerm;
     /**
-     * A tag-based condition that defines the operator and tag keys or tag key and value pairs for including or excluding an object from the job.
+     * A tag-based condition that defines the operator and tag keys or tag key and value pairs for including or excluding objects from the job.
      */
     tagScopeTerm?: TagScopeTerm;
   }
   export interface JobScopingBlock {
     /**
-     * An array of conditions, one for each condition that determines which objects to include or exclude from the job.
+     * An array of conditions, one for each property- or tag-based condition that determines which objects to include or exclude from the job. If you specify more than one condition, Amazon Macie uses AND logic to join the conditions.
      */
     and?: __listOfJobScopeTerm;
   }
   export type JobStatus = "RUNNING"|"PAUSED"|"CANCELLED"|"COMPLETE"|"IDLE"|"USER_PAUSED"|string;
   export interface JobSummary {
     /**
-     * The S3 buckets that the job is configured to analyze.
+     * An array of objects, one for each Amazon Web Services account that owns specific S3 buckets for the job to analyze. Each object specifies the account ID for an account and one or more buckets to analyze for that account. A job's definition can contain a bucketDefinitions array or a bucketCriteria object, not both.
      */
     bucketDefinitions?: __listOfS3BucketDefinitionForJob;
     /**
@@ -2160,7 +2226,7 @@ declare namespace Macie2 {
      */
     jobId?: __string;
     /**
-     * The current status of the job. Possible values are: CANCELLED - You cancelled the job or, if it's a one-time job, you paused the job and didn't resume it within 30 days. COMPLETE - For a one-time job, Amazon Macie finished processing the data specified for the job. This value doesn't apply to recurring jobs. IDLE - For a recurring job, the previous scheduled run is complete and the next scheduled run is pending. This value doesn't apply to one-time jobs. PAUSED - Amazon Macie started running the job but additional processing would exceed the monthly sensitive data discovery quota for your account or one or more member accounts that the job analyzes data for. RUNNING - For a one-time job, the job is in progress. For a recurring job, a scheduled run is in progress. USER_PAUSED - You paused the job. If you paused the job while it had a status of RUNNING and you don't resume it within 30 days of pausing it, the job or job run will expire and be cancelled, depending on the job's type. To check the expiration date, refer to the UserPausedDetails.jobExpiresAt property.
+     * The current status of the job. Possible values are: CANCELLED - You cancelled the job or, if it's a one-time job, you paused the job and didn't resume it within 30 days. COMPLETE - For a one-time job, Amazon Macie finished processing the data specified for the job. This value doesn't apply to recurring jobs. IDLE - For a recurring job, the previous scheduled run is complete and the next scheduled run is pending. This value doesn't apply to one-time jobs. PAUSED - Macie started running the job but additional processing would exceed the monthly sensitive data discovery quota for your account or one or more member accounts that the job analyzes data for. RUNNING - For a one-time job, the job is in progress. For a recurring job, a scheduled run is in progress. USER_PAUSED - You paused the job. If you paused the job while it had a status of RUNNING and you don't resume it within 30 days of pausing it, the job or job run will expire and be cancelled, depending on the job's type. To check the expiration date, refer to the UserPausedDetails.jobExpiresAt property.
      */
     jobStatus?: JobStatus;
     /**
@@ -2179,6 +2245,10 @@ declare namespace Macie2 {
      * If the current status of the job is USER_PAUSED, specifies when the job was paused and when the job or job run will expire and be cancelled if it isn't resumed. This value is present only if the value for jobStatus is USER_PAUSED.
      */
     userPausedDetails?: UserPausedDetails;
+    /**
+     * The property- and tag-based conditions that determine which S3 buckets are included or excluded from the job's analysis. Each time the job runs, the job uses these criteria to determine which buckets to analyze. A job's definition can contain a bucketCriteria object or a bucketDefinitions array, not both.
+     */
+    bucketCriteria?: S3BucketCriteriaForJob;
   }
   export type JobType = "ONE_TIME"|"SCHEDULED"|string;
   export interface KeyValuePair {
@@ -2351,6 +2421,22 @@ declare namespace Macie2 {
      */
     orderBy?: OrderBy;
   }
+  export interface ListManagedDataIdentifiersRequest {
+    /**
+     * The nextToken string that specifies which page of results to return in a paginated response.
+     */
+    nextToken?: __string;
+  }
+  export interface ListManagedDataIdentifiersResponse {
+    /**
+     * An array of objects, one for each managed data identifier.
+     */
+    items?: __listOfManagedDataIdentifierSummary;
+    /**
+     * The string to use in a subsequent request to get the next page of results in a paginated response. This value is null if there are no additional pages.
+     */
+    nextToken?: __string;
+  }
   export interface ListMembersRequest {
     /**
      * The maximum number of items to include in each page of a paginated response.
@@ -2367,7 +2453,7 @@ declare namespace Macie2 {
   }
   export interface ListMembersResponse {
     /**
-     * An array of objects, one for each account that's associated with the administrator account and meets the criteria specified by the onlyAssociated request parameter.
+     * An array of objects, one for each account that's associated with the administrator account and meets the criteria specified in the request.
      */
     members?: __listOfMember;
     /**
@@ -2408,14 +2494,85 @@ declare namespace Macie2 {
     tags?: TagMap;
   }
   export type MacieStatus = "PAUSED"|"ENABLED"|string;
-  export type MaxResults = number;
-  export interface Member {
+  export type ManagedDataIdentifierSelector = "ALL"|"EXCLUDE"|"INCLUDE"|"NONE"|string;
+  export interface ManagedDataIdentifierSummary {
     /**
-     * The AWS account ID for the account.
+     * The category of sensitive data that the managed data identifier detects: CREDENTIALS, for credentials data such as private keys or Amazon Web Services secret access keys; FINANCIAL_INFORMATION, for financial data such as credit card numbers; or, PERSONAL_INFORMATION, for personal health information, such as health insurance identification numbers, or personally identifiable information, such as passport numbers.
+     */
+    category?: SensitiveDataItemCategory;
+    /**
+     * The unique identifier for the managed data identifier. This is a string that describes the type of sensitive data that the managed data identifier detects. For example: OPENSSH_PRIVATE_KEY for OpenSSH private keys, CREDIT_CARD_NUMBER for credit card numbers, or USA_PASSPORT_NUMBER for US passport numbers.
+     */
+    id?: __string;
+  }
+  export interface MatchingBucket {
+    /**
+     * The unique identifier for the Amazon Web Services account that owns the bucket.
      */
     accountId?: __string;
     /**
-     * The AWS account ID for the administrator account.
+     * The name of the bucket.
+     */
+    bucketName?: __string;
+    /**
+     * The total number of objects that Amazon Macie can analyze in the bucket. These objects use a supported storage class and have a file name extension for a supported file or storage format.
+     */
+    classifiableObjectCount?: __long;
+    /**
+     * The total storage size, in bytes, of the objects that Amazon Macie can analyze in the bucket. These objects use a supported storage class and have a file name extension for a supported file or storage format. If versioning is enabled for the bucket, Macie calculates this value based on the size of the latest version of each applicable object in the bucket. This value doesn't reflect the storage size of all versions of each applicable object in the bucket.
+     */
+    classifiableSizeInBytes?: __long;
+    /**
+     * Specifies the error code for an error that prevented Amazon Macie from retrieving and processing information about the bucket and the bucket's objects. If this value is ACCESS_DENIED, Macie doesn't have permission to retrieve the information. For example, the bucket has a restrictive bucket policy and Amazon S3 denied the request. If this value is null, Macie was able to retrieve and process the information.
+     */
+    errorCode?: BucketMetadataErrorCode;
+    /**
+     * A brief description of the error (errorCode) that prevented Amazon Macie from retrieving and processing information about the bucket and the bucket's objects. This value is null if Macie was able to retrieve and process the information.
+     */
+    errorMessage?: __string;
+    /**
+     * Specifies whether any one-time or recurring classification jobs are configured to analyze objects in the bucket, and, if so, the details of the job that ran most recently.
+     */
+    jobDetails?: JobDetails;
+    /**
+     * The total number of objects in the bucket.
+     */
+    objectCount?: __long;
+    /**
+     * The total number of objects that are in the bucket, grouped by server-side encryption type. This includes a grouping that reports the total number of objects that aren't encrypted or use client-side encryption.
+     */
+    objectCountByEncryptionType?: ObjectCountByEncryptionType;
+    /**
+     * The total storage size, in bytes, of the bucket. If versioning is enabled for the bucket, Amazon Macie calculates this value based on the size of the latest version of each object in the bucket. This value doesn't reflect the storage size of all versions of each object in the bucket.
+     */
+    sizeInBytes?: __long;
+    /**
+     * The total storage size, in bytes, of the objects that are compressed (.gz, .gzip, .zip) files in the bucket. If versioning is enabled for the bucket, Amazon Macie calculates this value based on the size of the latest version of each applicable object in the bucket. This value doesn't reflect the storage size of all versions of each applicable object in the bucket.
+     */
+    sizeInBytesCompressed?: __long;
+    /**
+     * The total number of objects that Amazon Macie can't analyze in the bucket. These objects don't use a supported storage class or don't have a file name extension for a supported file or storage format.
+     */
+    unclassifiableObjectCount?: ObjectLevelStatistics;
+    /**
+     * The total storage size, in bytes, of the objects that Amazon Macie can't analyze in the bucket. These objects don't use a supported storage class or don't have a file name extension for a supported file or storage format.
+     */
+    unclassifiableObjectSizeInBytes?: ObjectLevelStatistics;
+  }
+  export interface MatchingResource {
+    /**
+     * The details of an S3 bucket that Amazon Macie monitors and analyzes.
+     */
+    matchingBucket?: MatchingBucket;
+  }
+  export type MaxResults = number;
+  export interface Member {
+    /**
+     * The Amazon Web Services account ID for the account.
+     */
+    accountId?: __string;
+    /**
+     * The Amazon Web Services account ID for the administrator account.
      */
     administratorAccountId?: __string;
     /**
@@ -2427,11 +2584,11 @@ declare namespace Macie2 {
      */
     email?: __string;
     /**
-     * The date and time, in UTC and extended ISO 8601 format, when an Amazon Macie membership invitation was last sent to the account. This value is null if a Macie invitation hasn't been sent to the account.
+     * The date and time, in UTC and extended ISO 8601 format, when an Amazon Macie membership invitation was last sent to the account. This value is null if an invitation hasn't been sent to the account.
      */
     invitedAt?: __timestampIso8601;
     /**
-     * (Deprecated) The AWS account ID for the administrator account. This property has been replaced by the administratorAccountId property and is retained only for backward compatibility.
+     * (Deprecated) The Amazon Web Services account ID for the administrator account. This property has been replaced by the administratorAccountId property and is retained only for backward compatibility.
      */
     masterAccountId?: __string;
     /**
@@ -2455,15 +2612,15 @@ declare namespace Macie2 {
   }
   export interface ObjectCountByEncryptionType {
     /**
-     * The total number of objects that are encrypted using a customer-managed key. The objects use customer-provided server-side encryption (SSE-C).
+     * The total number of objects that are encrypted with a customer-provided key. The objects use customer-provided server-side encryption (SSE-C).
      */
     customerManaged?: __long;
     /**
-     * The total number of objects that are encrypted using an AWS Key Management Service (AWS KMS) customer master key (CMK). The objects use AWS managed AWS KMS encryption (AWS-KMS) or customer managed AWS KMS encryption (SSE-KMS).
+     * The total number of objects that are encrypted with an KMS key, either an Amazon Web Services managed key or a customer managed key. The objects use KMS encryption (SSE-KMS).
      */
     kmsManaged?: __long;
     /**
-     * The total number of objects that are encrypted using an Amazon S3 managed key. The objects use Amazon S3 managed encryption (SSE-S3).
+     * The total number of objects that are encrypted with an Amazon S3 managed key. The objects use Amazon S3 managed encryption (SSE-S3).
      */
     s3Managed?: __long;
     /**
@@ -2491,38 +2648,38 @@ declare namespace Macie2 {
   }
   export interface Occurrences {
     /**
-     * An array of objects, one for each occurrence of sensitive data in a Microsoft Excel workbook, CSV file, or TSV file. Each object specifies the cell or field that contains the data. This value is null for all other types of files.
+     * An array of objects, one for each occurrence of sensitive data in a Microsoft Excel workbook, CSV file, or TSV file. This value is null for all other types of files.Each Cell object specifies a cell or field that contains the sensitive data.
      */
     cells?: Cells;
     /**
-     * An array of objects, one for each occurrence of sensitive data in a Microsoft Word document or non-binary text file, such as an HTML, JSON, TXT, or XML file. Each object specifies the line that contains the data, and the position of the data on that line. This value is often null for file types that are supported by Cell, Page, or Record objects. Exceptions are the locations of data in: unstructured sections of an otherwise structured file, such as a comment in a file; a malformed file that Amazon Macie analyzes as plain text; and, a CSV or TSV file that has any column names that contain sensitive data.
+     * An array of objects, one for each occurrence of sensitive data in a non-binary text file, such as an HTML, TXT, or XML file. Each Range object specifies a line or inclusive range of lines that contains the sensitive data, and the position of the data on the specified line or lines. This value is often null for file types that are supported by Cell, Page, or Record objects. Exceptions are the location of sensitive data in: unstructured sections of an otherwise structured file, such as a comment in a file; a malformed file that Amazon Macie analyzes as plain text; and, a CSV or TSV file that has any column names that contain sensitive data.
      */
     lineRanges?: Ranges;
     /**
-     * An array of objects, one for each occurrence of sensitive data in a binary text file. Each object specifies the position of the data relative to the beginning of the file. This value is typically null. For binary text files, Amazon Macie adds location data to a lineRanges.Range or Page object, depending on the file type.
+     *  Reserved for future use.
      */
     offsetRanges?: Ranges;
     /**
-     * An array of objects, one for each occurrence of sensitive data in an Adobe Portable Document Format file. Each object specifies the page that contains the data, and the position of the data on that page. This value is null for all other types of files.
+     * An array of objects, one for each occurrence of sensitive data in an Adobe Portable Document Format file. This value is null for all other types of files.Each Page object specifies a page that contains the sensitive data.
      */
     pages?: Pages;
     /**
-     * An array of objects, one for each occurrence of sensitive data in an Apache Avro object container or Apache Parquet file. Each object specifies the record index and the path to the field in the record that contains the data. This value is null for all other types of files.
+     * An array of objects, one for each occurrence of sensitive data in an Apache Avro object container, Apache Parquet file, JSON file, or JSON Lines file. This value is null for all other types of files. For an Avro object container or Parquet file, each Record object specifies a record index and the path to a field in a record that contains the sensitive data. For a JSON or JSON Lines file, each Record object specifies the path to a field or array that contains the sensitive data. For a JSON Lines file, it also specifies the index of the line that contains the data.
      */
     records?: Records;
   }
   export type OrderBy = "ASC"|"DESC"|string;
   export interface Page {
     /**
-     * The line that contains the data, and the position of the data on that line.
+     *  Reserved for future use.
      */
     lineRange?: Range;
     /**
-     * The position of the data on the page, relative to the beginning of the page.
+     *  Reserved for future use.
      */
     offsetRange?: Range;
     /**
-     * The page number of the page that contains the data.
+     * The page number of the page that contains the sensitive data.
      */
     pageNumber?: __long;
   }
@@ -2555,7 +2712,7 @@ declare namespace Macie2 {
      */
     clientToken?: __string;
     /**
-     * The configuration settings that determine which findings to publish to AWS Security Hub.
+     * The configuration settings that determine which findings to publish to Security Hub.
      */
     securityHubConfiguration?: SecurityHubConfiguration;
   }
@@ -2563,26 +2720,26 @@ declare namespace Macie2 {
   }
   export interface Range {
     /**
-     * Possible values are: In an Occurrences.lineRanges array, the number of lines from the beginning of the file to the end of the sensitive data. In an Occurrences.offsetRanges array, the number of characters from the beginning of the file to the end of the sensitive data. In a Page object, the number of lines (lineRange) or characters (offsetRange) from the beginning of the page to the end of the sensitive data.
+     * The number of lines from the beginning of the file to the end of the sensitive data. 
      */
     end?: __long;
     /**
-     * Possible values are: In an Occurrences.lineRanges array, the number of lines from the beginning of the file to the beginning of the sensitive data. In an Occurrences.offsetRanges array, the number of characters from the beginning of the file to the beginning of the sensitive data. In a Page object, the number of lines (lineRange) or characters (offsetRange) from the beginning of the page to the beginning of the sensitive data.
+     * The number of lines from the beginning of the file to the beginning of the sensitive data. 
      */
     start?: __long;
     /**
-     * The column number for the column that contains the data, if the file contains structured data.
+     * The number of characters, with spaces and starting from 1, from the beginning of the first line that contains the sensitive data (start) to the beginning of the sensitive data.
      */
     startColumn?: __long;
   }
   export type Ranges = Range[];
   export interface Record {
     /**
-     * The path, as a JSONPath expression, to the field in the record that contains the data. If Amazon Macie detects sensitive data in the name of any element in the path, Macie omits this field. If the name of an element exceeds 20 characters, Macie truncates the name by removing characters from the beginning of the name. If the resulting full path exceeds 250 characters, Macie also truncates the path, starting with the first element in the path, until the path contains 250 or fewer characters.
+     * The path, as a JSONPath expression, to the sensitive data. For an Avro object container or Parquet file, this is the path to the field in the record (recordIndex) that contains the data. For a JSON or JSON Lines file, this is the path to the field or array that contains the data. If the data is a value in an array, the path also indicates which value contains the data. If Amazon Macie detects sensitive data in the name of any element in the path, Macie omits this field. If the name of an element exceeds 20 characters, Macie truncates the name by removing characters from the beginning of the name. If the resulting full path exceeds 250 characters, Macie also truncates the path, starting with the first element in the path, until the path contains 250 or fewer characters.
      */
     jsonPath?: __string;
     /**
-     * The record index, starting from 0, for the record that contains the data.
+     * For an Avro object container or Parquet file, the record index, starting from 0, for the record that contains the sensitive data. For a JSON Lines file, the line index, starting from 0, for the line that contains the sensitive data. This value is always 0 for JSON files.
      */
     recordIndex?: __long;
   }
@@ -2594,21 +2751,21 @@ declare namespace Macie2 {
      */
     replicated?: __boolean;
     /**
-     * Specifies whether the bucket is configured to replicate one or more objects to an AWS account that isn't part of the same Amazon Macie organization.
+     * Specifies whether the bucket is configured to replicate one or more objects to an Amazon Web Services account that isn't part of the same Amazon Macie organization.
      */
     replicatedExternally?: __boolean;
     /**
-     * An array of AWS account IDs, one for each AWS account that the bucket is configured to replicate one or more objects to.
+     * An array of Amazon Web Services account IDs, one for each Amazon Web Services account that the bucket is configured to replicate one or more objects to.
      */
     replicationAccounts?: __listOf__string;
   }
   export interface ResourcesAffected {
     /**
-     * An array of objects, one for each S3 bucket that the finding applies to. Each object provides a set of metadata about an affected S3 bucket.
+     * The details of the S3 bucket that the finding applies to.
      */
     s3Bucket?: S3Bucket;
     /**
-     * An array of objects, one for each S3 object that the finding applies to. Each object provides a set of metadata about an affected S3 object.
+     * The details of the S3 object that the finding applies to.
      */
     s3Object?: S3Object;
   }
@@ -2634,7 +2791,7 @@ declare namespace Macie2 {
      */
     name?: __string;
     /**
-     * The display name and AWS account ID for the user who owns the bucket.
+     * The display name and canonical user ID for the Amazon Web Services account that owns the bucket.
      */
     owner?: S3BucketOwner;
     /**
@@ -2646,9 +2803,19 @@ declare namespace Macie2 {
      */
     tags?: KeyValuePairList;
   }
+  export interface S3BucketCriteriaForJob {
+    /**
+     * The property- and tag-based conditions that determine which buckets to exclude from the job.
+     */
+    excludes?: CriteriaBlockForJob;
+    /**
+     * The property- and tag-based conditions that determine which buckets to include in the job.
+     */
+    includes?: CriteriaBlockForJob;
+  }
   export interface S3BucketDefinitionForJob {
     /**
-     * The unique identifier for the AWS account that owns the buckets.
+     * The unique identifier for the Amazon Web Services account that owns the buckets.
      */
     accountId: __string;
     /**
@@ -2658,11 +2825,11 @@ declare namespace Macie2 {
   }
   export interface S3BucketOwner {
     /**
-     * The display name of the user who owns the bucket.
+     * The display name of the account that owns the bucket.
      */
     displayName?: __string;
     /**
-     * The AWS account ID for the user who owns the bucket.
+     * The canonical user ID for the account that owns the bucket.
      */
     id?: __string;
   }
@@ -2676,19 +2843,23 @@ declare namespace Macie2 {
      */
     keyPrefix?: __string;
     /**
-     * The Amazon Resource Name (ARN) of the AWS Key Management Service (AWS KMS) customer master key (CMK) to use for encryption of the results. This must be the ARN of an existing CMK that's in the same AWS Region as the bucket.
+     * The Amazon Resource Name (ARN) of the KMS key to use for encryption of the results. This must be the ARN of an existing, symmetric, customer managed KMS key that's in the same Amazon Web Services Region as the bucket.
      */
     kmsKeyArn: __string;
   }
   export interface S3JobDefinition {
     /**
-     * An array of objects, one for each AWS account that owns buckets to analyze. Each object specifies the account ID for an account and one or more buckets to analyze for the account.
+     * An array of objects, one for each Amazon Web Services account that owns specific S3 buckets to analyze. Each object specifies the account ID for an account and one or more buckets to analyze for that account. A job's definition can contain a bucketDefinitions array or a bucketCriteria object, not both.
      */
     bucketDefinitions?: __listOfS3BucketDefinitionForJob;
     /**
-     * The property- and tag-based conditions that determine which objects to include or exclude from the analysis.
+     * The property- and tag-based conditions that determine which S3 objects to include or exclude from the analysis. Each time the job runs, the job uses these criteria to determine which objects to analyze.
      */
     scoping?: Scoping;
+    /**
+     * The property- and tag-based conditions that determine which S3 buckets to include or exclude from the analysis. Each time the job runs, the job uses these criteria to determine which buckets contain objects to analyze. A job's definition can contain a bucketCriteria object or a bucketDefinitions array, not both.
+     */
+    bucketCriteria?: S3BucketCriteriaForJob;
   }
   export interface S3Object {
     /**
@@ -2740,31 +2911,132 @@ declare namespace Macie2 {
      */
     versionId?: __string;
   }
-  export type ScopeFilterKey = "BUCKET_CREATION_DATE"|"OBJECT_EXTENSION"|"OBJECT_LAST_MODIFIED_DATE"|"OBJECT_SIZE"|"TAG"|"OBJECT_KEY"|string;
+  export type ScopeFilterKey = "OBJECT_EXTENSION"|"OBJECT_LAST_MODIFIED_DATE"|"OBJECT_SIZE"|"OBJECT_KEY"|string;
   export interface Scoping {
     /**
-     * The property- or tag-based conditions that determine which objects to exclude from the analysis.
+     * The property- and tag-based conditions that determine which objects to exclude from the analysis.
      */
     excludes?: JobScopingBlock;
     /**
-     * The property- or tag-based conditions that determine which objects to include in the analysis.
+     * The property- and tag-based conditions that determine which objects to include in the analysis.
      */
     includes?: JobScopingBlock;
   }
+  export interface SearchResourcesBucketCriteria {
+    /**
+     * The property- and tag-based conditions that determine which buckets to exclude from the results.
+     */
+    excludes?: SearchResourcesCriteriaBlock;
+    /**
+     * The property- and tag-based conditions that determine which buckets to include in the results.
+     */
+    includes?: SearchResourcesCriteriaBlock;
+  }
+  export type SearchResourcesComparator = "EQ"|"NE"|string;
+  export interface SearchResourcesCriteria {
+    /**
+     * A property-based condition that defines a property, operator, and one or more values for including or excluding resources from the results.
+     */
+    simpleCriterion?: SearchResourcesSimpleCriterion;
+    /**
+     * A tag-based condition that defines an operator and tag keys, tag values, or tag key and value pairs for including or excluding resources from the results.
+     */
+    tagCriterion?: SearchResourcesTagCriterion;
+  }
+  export interface SearchResourcesCriteriaBlock {
+    /**
+     * An array of objects, one for each property- or tag-based condition that includes or excludes resources from the query results. If you specify more than one condition, Amazon Macie uses AND logic to join the conditions.
+     */
+    and?: __listOfSearchResourcesCriteria;
+  }
+  export interface SearchResourcesRequest {
+    /**
+     * The filter conditions that determine which S3 buckets to include or exclude from the query results.
+     */
+    bucketCriteria?: SearchResourcesBucketCriteria;
+    /**
+     * The maximum number of items to include in each page of the response. The default value is 50.
+     */
+    maxResults?: __integer;
+    /**
+     * The nextToken string that specifies which page of results to return in a paginated response.
+     */
+    nextToken?: __string;
+    /**
+     * The criteria to use to sort the results.
+     */
+    sortCriteria?: SearchResourcesSortCriteria;
+  }
+  export interface SearchResourcesResponse {
+    /**
+     * An array of objects, one for each resource that meets the filter criteria specified in the request.
+     */
+    matchingResources?: __listOfMatchingResource;
+    /**
+     * The string to use in a subsequent request to get the next page of results in a paginated response. This value is null if there are no additional pages.
+     */
+    nextToken?: __string;
+  }
+  export interface SearchResourcesSimpleCriterion {
+    /**
+     * The operator to use in the condition. Valid values are EQ (equals) and NE (not equals).
+     */
+    comparator?: SearchResourcesComparator;
+    /**
+     * The property to use in the condition.
+     */
+    key?: SearchResourcesSimpleCriterionKey;
+    /**
+     * An array that lists one or more values to use in the condition. If you specify multiple values, Amazon Macie uses OR logic to join the values. Valid values for each supported property (key) are: ACCOUNT_ID - A string that represents the unique identifier for the Amazon Web Services account that owns the resource. S3_BUCKET_EFFECTIVE_PERMISSION - A string that represents an enumerated value that Macie defines for the BucketPublicAccess.effectivePermission property of an S3 bucket. S3_BUCKET_NAME - A string that represents the name of an S3 bucket. S3_BUCKET_SHARED_ACCESS - A string that represents an enumerated value that Macie defines for the BucketMetadata.sharedAccess property of an S3 bucket. Values are case sensitive. Also, Macie doesn't support use of partial values or wildcard characters in values.
+     */
+    values?: __listOf__string;
+  }
+  export type SearchResourcesSimpleCriterionKey = "ACCOUNT_ID"|"S3_BUCKET_NAME"|"S3_BUCKET_EFFECTIVE_PERMISSION"|"S3_BUCKET_SHARED_ACCESS"|string;
+  export type SearchResourcesSortAttributeName = "ACCOUNT_ID"|"RESOURCE_NAME"|"S3_CLASSIFIABLE_OBJECT_COUNT"|"S3_CLASSIFIABLE_SIZE_IN_BYTES"|string;
+  export interface SearchResourcesSortCriteria {
+    /**
+     * The property to sort the results by.
+     */
+    attributeName?: SearchResourcesSortAttributeName;
+    /**
+     * The sort order to apply to the results, based on the value for the property specified by the attributeName property. Valid values are: ASC, sort the results in ascending order; and, DESC, sort the results in descending order.
+     */
+    orderBy?: OrderBy;
+  }
+  export interface SearchResourcesTagCriterion {
+    /**
+     * The operator to use in the condition. Valid values are EQ (equals) and NE (not equals).
+     */
+    comparator?: SearchResourcesComparator;
+    /**
+     * The tag keys, tag values, or tag key and value pairs to use in the condition.
+     */
+    tagValues?: __listOfSearchResourcesTagCriterionPair;
+  }
+  export interface SearchResourcesTagCriterionPair {
+    /**
+     * The value for the tag key to use in the condition.
+     */
+    key?: __string;
+    /**
+     * The tag value to use in the condition.
+     */
+    value?: __string;
+  }
   export interface SecurityHubConfiguration {
     /**
-     * Specifies whether to publish sensitive data findings to AWS Security Hub. If you set this value to true, Amazon Macie automatically publishes all sensitive data findings that weren't suppressed by a findings filter. The default value is false.
+     * Specifies whether to publish sensitive data findings to Security Hub. If you set this value to true, Amazon Macie automatically publishes all sensitive data findings that weren't suppressed by a findings filter. The default value is false.
      */
     publishClassificationFindings: __boolean;
     /**
-     * Specifies whether to publish policy findings to AWS Security Hub. If you set this value to true, Amazon Macie automatically publishes all new and updated policy findings that weren't suppressed by a findings filter. The default value is true.
+     * Specifies whether to publish policy findings to Security Hub. If you set this value to true, Amazon Macie automatically publishes all new and updated policy findings that weren't suppressed by a findings filter. The default value is true.
      */
     publishPolicyFindings: __boolean;
   }
   export type SensitiveData = SensitiveDataItem[];
   export interface SensitiveDataItem {
     /**
-     * The category of sensitive data that was detected. For example: CREDENTIALS, for credentials data such as private keys or AWS secret keys; FINANCIAL_INFORMATION, for financial data such as credit card numbers; or, PERSONAL_INFORMATION, for personal health information, such as health insurance identification numbers, or personally identifiable information, such as driver's license identification numbers.
+     * The category of sensitive data that was detected. For example: CREDENTIALS, for credentials data such as private keys or Amazon Web Services secret access keys; FINANCIAL_INFORMATION, for financial data such as credit card numbers; or, PERSONAL_INFORMATION, for personal health information, such as health insurance identification numbers, or personally identifiable information, such as passport numbers.
      */
     category?: SensitiveDataItemCategory;
     /**
@@ -2783,7 +3055,7 @@ declare namespace Macie2 {
      */
     encryptionType?: EncryptionType;
     /**
-     * The Amazon Resource Name (ARN) or unique identifier (key ID) for the AWS Key Management Service (AWS KMS) customer master key (CMK) that's used to encrypt data in the bucket or the object. If an AWS KMS CMK isn't used, this value is null.
+     * The Amazon Resource Name (ARN) or unique identifier (key ID) for the KMS key that's used to encrypt data in the bucket or the object. This value is null if an KMS key isn't used to encrypt the data.
      */
     kmsMasterKeyId?: __string;
   }
@@ -2823,7 +3095,7 @@ declare namespace Macie2 {
   }
   export interface SessionIssuer {
     /**
-     * The unique identifier for the AWS account that owns the entity that was used to get the credentials.
+     * The unique identifier for the Amazon Web Services account that owns the entity that was used to get the credentials.
      */
     accountId?: __string;
     /**
@@ -2854,10 +3126,36 @@ declare namespace Macie2 {
     score?: __long;
   }
   export type SeverityDescription = "Low"|"Medium"|"High"|string;
+  export interface SeverityLevel {
+    /**
+     * The minimum number of occurrences of text that must match the custom data identifier's detection criteria in order to produce a finding with the specified severity (severity).
+     */
+    occurrencesThreshold: __long;
+    /**
+     * The severity to assign to a finding: if the number of occurrences is greater than or equal to the specified threshold (occurrencesThreshold); and, if applicable, the number of occurrences is less than the threshold for the next consecutive severity level for the custom data identifier, moving from LOW to HIGH.
+     */
+    severity: DataIdentifierSeverity;
+  }
+  export type SeverityLevelList = SeverityLevel[];
   export type SharedAccess = "EXTERNAL"|"INTERNAL"|"NOT_SHARED"|"UNKNOWN"|string;
+  export interface SimpleCriterionForJob {
+    /**
+     * The operator to use in the condition. Valid values are EQ (equals) and NE (not equals).
+     */
+    comparator?: JobComparator;
+    /**
+     * The property to use in the condition.
+     */
+    key?: SimpleCriterionKeyForJob;
+    /**
+     * An array that lists one or more values to use in the condition. If you specify multiple values, Amazon Macie uses OR logic to join the values. Valid values for each supported property (key) are: ACCOUNT_ID - A string that represents the unique identifier for the Amazon Web Services account that owns the bucket. S3_BUCKET_EFFECTIVE_PERMISSION - A string that represents an enumerated value that Macie defines for the BucketPublicAccess.effectivePermission property of a bucket. S3_BUCKET_NAME - A string that represents the name of a bucket. S3_BUCKET_SHARED_ACCESS - A string that represents an enumerated value that Macie defines for the BucketMetadata.sharedAccess property of a bucket. Values are case sensitive. Also, Macie doesn't support use of partial values or wildcard characters in these values.
+     */
+    values?: __listOf__string;
+  }
+  export type SimpleCriterionKeyForJob = "ACCOUNT_ID"|"S3_BUCKET_NAME"|"S3_BUCKET_EFFECTIVE_PERMISSION"|"S3_BUCKET_SHARED_ACCESS"|string;
   export interface SimpleScopeTerm {
     /**
-     * The operator to use in the condition. Valid operators for each supported property (key) are: OBJECT_EXTENSION - EQ (equals) or NE (not equals) OBJECT_KEY - STARTS_WITH OBJECT_LAST_MODIFIED_DATE - Any operator except CONTAINS OBJECT_SIZE - Any operator except CONTAINS TAG - EQ (equals) or NE (not equals)
+     * The operator to use in the condition. Valid values for each supported property (key) are: OBJECT_EXTENSION - EQ (equals) or NE (not equals) OBJECT_KEY - STARTS_WITH OBJECT_LAST_MODIFIED_DATE - Any operator except CONTAINS OBJECT_SIZE - Any operator except CONTAINS
      */
     comparator?: JobComparator;
     /**
@@ -2865,7 +3163,7 @@ declare namespace Macie2 {
      */
     key?: ScopeFilterKey;
     /**
-     * An array that lists the values to use in the condition. If the value for the key property is OBJECT_EXTENSION or OBJECT_KEY, this array can specify multiple values and Amazon Macie uses an OR operator to join the values. Otherwise, this array can specify only one value. Valid values for each supported property (key) are: OBJECT_EXTENSION - A string that represents the file name extension of an object. For example: docx or pdf OBJECT_KEY - A string that represents the key prefix (folder name or path) of an object. For example: logs or awslogs/eventlogs. This value applies a condition to objects whose keys (names) begin with the specified value. OBJECT_LAST_MODIFIED_DATE - The date and time (in UTC and extended ISO 8601 format) when an object was created or last changed, whichever is latest. For example: 2020-09-28T14:31:13Z OBJECT_SIZE - An integer that represents the storage size (in bytes) of an object. TAG - A string that represents a tag key for an object. For advanced options, use a TagScopeTerm object, instead of a SimpleScopeTerm object, to define a tag-based condition for the job. Macie doesn't support use of wildcard characters in values. Also, string values are case sensitive.
+     * An array that lists the values to use in the condition. If the value for the key property is OBJECT_EXTENSION or OBJECT_KEY, this array can specify multiple values and Amazon Macie uses OR logic to join the values. Otherwise, this array can specify only one value. Valid values for each supported property (key) are: OBJECT_EXTENSION - A string that represents the file name extension of an object. For example: docx or pdf OBJECT_KEY - A string that represents the key prefix (folder name or path) of an object. For example: logs or awslogs/eventlogs. This value applies a condition to objects whose keys (names) begin with the specified value. OBJECT_LAST_MODIFIED_DATE - The date and time (in UTC and extended ISO 8601 format) when an object was created or last changed, whichever is latest. For example: 2020-09-28T14:31:13Z OBJECT_SIZE - An integer that represents the storage size (in bytes) of an object. Macie doesn't support use of wildcard characters in these values. Also, string values are case sensitive.
      */
     values?: __listOf__string;
   }
@@ -2890,6 +3188,26 @@ declare namespace Macie2 {
     numberOfRuns?: __double;
   }
   export type StorageClass = "STANDARD"|"REDUCED_REDUNDANCY"|"STANDARD_IA"|"INTELLIGENT_TIERING"|"DEEP_ARCHIVE"|"ONEZONE_IA"|"GLACIER"|string;
+  export interface TagCriterionForJob {
+    /**
+     * The operator to use in the condition. Valid values are EQ (equals) and NE (not equals).
+     */
+    comparator?: JobComparator;
+    /**
+     * The tag keys, tag values, or tag key and value pairs to use in the condition.
+     */
+    tagValues?: __listOfTagCriterionPairForJob;
+  }
+  export interface TagCriterionPairForJob {
+    /**
+     * The value for the tag key to use in the condition.
+     */
+    key?: __string;
+    /**
+     * The tag value to use in the condition.
+     */
+    value?: __string;
+  }
   export type TagMap = {[key: string]: __string};
   export interface TagResourceRequest {
     /**
@@ -2905,15 +3223,15 @@ declare namespace Macie2 {
   }
   export interface TagScopeTerm {
     /**
-     * The operator to use in the condition. Valid operators are EQ (equals) or NE (not equals).
+     * The operator to use in the condition. Valid values are EQ (equals) or NE (not equals).
      */
     comparator?: JobComparator;
     /**
-     * The tag key to use in the condition.
+     * The object property to use in the condition. The only valid value is TAG.
      */
     key?: __string;
     /**
-     * The tag keys or tag key and value pairs to use in the condition.
+     * The tag keys or tag key and value pairs to use in the condition. To specify only tag keys in a condition, specify the keys in this array and set the value for each associated tag value to an empty string.
      */
     tagValues?: __listOfTagValuePair;
     /**
@@ -2934,15 +3252,15 @@ declare namespace Macie2 {
   }
   export interface TestCustomDataIdentifierRequest {
     /**
-     * An array that lists specific character sequences (ignore words) to exclude from the results. If the text matched by the regular expression is the same as any string in this array, Amazon Macie ignores it. The array can contain as many as 10 ignore words. Each ignore word can contain 4 - 90 characters. Ignore words are case sensitive.
+     * An array that lists specific character sequences (ignore words) to exclude from the results. If the text matched by the regular expression contains any string in this array, Amazon Macie ignores it. The array can contain as many as 10 ignore words. Each ignore word can contain 4-90 UTF-8 characters. Ignore words are case sensitive.
      */
     ignoreWords?: __listOf__string;
     /**
-     * An array that lists specific character sequences (keywords), one of which must be within proximity (maximumMatchDistance) of the regular expression to match. The array can contain as many as 50 keywords. Each keyword can contain 3 - 90 characters. Keywords aren't case sensitive.
+     * An array that lists specific character sequences (keywords), one of which must be within proximity (maximumMatchDistance) of the regular expression to match. The array can contain as many as 50 keywords. Each keyword can contain 3-90 UTF-8 characters. Keywords aren't case sensitive.
      */
     keywords?: __listOf__string;
     /**
-     * The maximum number of characters that can exist between text that matches the regex pattern and the character sequences specified by the keywords array. Macie includes or excludes a result based on the proximity of a keyword to text that matches the regex pattern. The distance can be 1 - 300 characters. The default value is 50.
+     * The maximum number of characters that can exist between text that matches the regular expression and the character sequences specified by the keywords array. Amazon Macie includes or excludes a result based on the proximity of a keyword to text that matches the regular expression. The distance can be 1-300 characters. The default value is 50.
      */
     maximumMatchDistance?: __integer;
     /**
@@ -2956,7 +3274,7 @@ declare namespace Macie2 {
   }
   export interface TestCustomDataIdentifierResponse {
     /**
-     * The number of instances of sample text that matched the detection criteria specified in the custom data identifier.
+     * The number of occurrences of sample text that matched the criteria specified by the custom data identifier.
      */
     matchCount?: __integer;
   }
@@ -2965,7 +3283,7 @@ declare namespace Macie2 {
   export type Unit = "TERABYTES"|string;
   export interface UnprocessedAccount {
     /**
-     * The AWS account ID for the account that the request applies to.
+     * The Amazon Web Services account ID for the account that the request applies to.
      */
     accountId?: __string;
     /**
@@ -3007,7 +3325,7 @@ declare namespace Macie2 {
      */
     action?: FindingsFilterAction;
     /**
-     * A custom description of the filter. The description can contain as many as 512 characters. We strongly recommend that you avoid including any sensitive data in the description of a filter. Other users might be able to see the filter's description, depending on the actions that they're allowed to perform in Amazon Macie.
+     * A custom description of the filter. The description can contain as many as 512 characters. We strongly recommend that you avoid including any sensitive data in the description of a filter. Other users might be able to see this description, depending on the actions that they're allowed to perform in Amazon Macie.
      */
     description?: __string;
     /**
@@ -3019,13 +3337,17 @@ declare namespace Macie2 {
      */
     id: __string;
     /**
-     * A custom name for the filter. The name must contain at least 3 characters and can contain as many as 64 characters. We strongly recommend that you avoid including any sensitive data in the name of a filter. Other users might be able to see the filter's name, depending on the actions that they're allowed to perform in Amazon Macie.
+     * A custom name for the filter. The name must contain at least 3 characters and can contain as many as 64 characters. We strongly recommend that you avoid including any sensitive data in the name of a filter. Other users might be able to see this name, depending on the actions that they're allowed to perform in Amazon Macie.
      */
     name?: __string;
     /**
      * The position of the filter in the list of saved filters on the Amazon Macie console. This value also determines the order in which the filter is applied to findings, relative to other filters that are also applied to the findings.
      */
     position?: __integer;
+    /**
+     * A unique, case-sensitive token that you provide to ensure the idempotency of the request.
+     */
+    clientToken?: __string;
   }
   export interface UpdateFindingsFilterResponse {
     /**
@@ -3039,7 +3361,7 @@ declare namespace Macie2 {
   }
   export interface UpdateMacieSessionRequest {
     /**
-     * Specifies how often to publish updates to policy findings for the account. This includes publishing updates to AWS Security Hub and Amazon EventBridge (formerly called Amazon CloudWatch Events).
+     * Specifies how often to publish updates to policy findings for the account. This includes publishing updates to Security Hub and Amazon EventBridge (formerly called Amazon CloudWatch Events).
      */
     findingPublishingFrequency?: FindingPublishingFrequency;
     /**
@@ -3063,7 +3385,7 @@ declare namespace Macie2 {
   }
   export interface UpdateOrganizationConfigurationRequest {
     /**
-     * Specifies whether to enable Amazon Macie automatically for each account, when the account is added to the AWS organization.
+     * Specifies whether to enable Amazon Macie automatically for an account when the account is added to the organization in Organizations.
      */
     autoEnable: __boolean;
   }
@@ -3089,7 +3411,7 @@ declare namespace Macie2 {
   }
   export interface UsageRecord {
     /**
-     * The unique identifier for the AWS account that the data applies to.
+     * The unique identifier for the Amazon Web Services account that the data applies to.
      */
     accountId?: __string;
     /**
@@ -3111,7 +3433,7 @@ declare namespace Macie2 {
      */
     key?: UsageStatisticsFilterKey;
     /**
-     * An array that lists values to use in the condition, based on the value for the field specified by the key property. If the value for the key property is accountId, this array can specify multiple values. Otherwise, this array can specify only one value. Valid values for each supported field are: accountId - The unique identifier for an AWS account. freeTrialStartDate - The date and time, in UTC and extended ISO 8601 format, when the free trial started for an account. serviceLimit - A Boolean (true or false) value that indicates whether an account has reached its monthly quota. total - A string that represents the current estimated cost for an account.
+     * An array that lists values to use in the condition, based on the value for the field specified by the key property. If the value for the key property is accountId, this array can specify multiple values. Otherwise, this array can specify only one value. Valid values for each supported field are: accountId - The unique identifier for an Amazon Web Services account. freeTrialStartDate - The date and time, in UTC and extended ISO 8601 format, when the free trial started for an account. serviceLimit - A Boolean (true or false) value that indicates whether an account has reached its monthly quota. total - A string that represents the current estimated cost for an account.
      */
     values?: __listOf__string;
   }
@@ -3145,27 +3467,27 @@ declare namespace Macie2 {
   export type UsageType = "DATA_INVENTORY_EVALUATION"|"SENSITIVE_DATA_DISCOVERY"|string;
   export interface UserIdentity {
     /**
-     * If the action was performed with temporary security credentials that were obtained using the AssumeRole operation of the AWS Security Token Service (AWS STS) API, the identifiers, session context, and other details about the identity.
+     * If the action was performed with temporary security credentials that were obtained using the AssumeRole operation of the Security Token Service (STS) API, the identifiers, session context, and other details about the identity.
      */
     assumedRole?: AssumedRole;
     /**
-     * If the action was performed using the credentials for another AWS account, the details of that account.
+     * If the action was performed using the credentials for another Amazon Web Services account, the details of that account.
      */
     awsAccount?: AwsAccount;
     /**
-     * If the action was performed by an AWS account that belongs to an AWS service, the name of the service.
+     * If the action was performed by an Amazon Web Services account that belongs to an Amazon Web Service, the name of the service.
      */
     awsService?: AwsService;
     /**
-     * If the action was performed with temporary security credentials that were obtained using the GetFederationToken operation of the AWS Security Token Service (AWS STS) API, the identifiers, session context, and other details about the identity.
+     * If the action was performed with temporary security credentials that were obtained using the GetFederationToken operation of the Security Token Service (STS) API, the identifiers, session context, and other details about the identity.
      */
     federatedUser?: FederatedUser;
     /**
-     * If the action was performed using the credentials for an AWS Identity and Access Management (IAM) user, the name and other details about the user.
+     * If the action was performed using the credentials for an Identity and Access Management (IAM) user, the name and other details about the user.
      */
     iamUser?: IamUser;
     /**
-     * If the action was performed using the credentials for your AWS account, the details of your account.
+     * If the action was performed using the credentials for your Amazon Web Services account, the details of your account.
      */
     root?: UserIdentityRoot;
     /**
@@ -3175,7 +3497,7 @@ declare namespace Macie2 {
   }
   export interface UserIdentityRoot {
     /**
-     * The unique identifier for the AWS account.
+     * The unique identifier for the Amazon Web Services account.
      */
     accountId?: __string;
     /**
@@ -3194,7 +3516,7 @@ declare namespace Macie2 {
      */
     jobExpiresAt?: __timestampIso8601;
     /**
-     * The Amazon Resource Name (ARN) of the AWS Health event that Amazon Macie sent to notify you of the job or job run's pending expiration and cancellation. This value is null if a job has been paused for less than 23 days.
+     * The Amazon Resource Name (ARN) of the Health event that Amazon Macie sent to notify you of the job or job run's pending expiration and cancellation. This value is null if a job has been paused for less than 23 days.
      */
     jobImminentExpirationHealthEventArn?: __string;
     /**
@@ -3214,6 +3536,7 @@ declare namespace Macie2 {
   export type __listOfAdminAccount = AdminAccount[];
   export type __listOfBatchGetCustomDataIdentifierSummary = BatchGetCustomDataIdentifierSummary[];
   export type __listOfBucketMetadata = BucketMetadata[];
+  export type __listOfCriteriaForJob = CriteriaForJob[];
   export type __listOfCustomDataIdentifierSummary = CustomDataIdentifierSummary[];
   export type __listOfFinding = Finding[];
   export type __listOfFindingType = FindingType[];
@@ -3224,8 +3547,13 @@ declare namespace Macie2 {
   export type __listOfJobSummary = JobSummary[];
   export type __listOfKeyValuePair = KeyValuePair[];
   export type __listOfListJobsFilterTerm = ListJobsFilterTerm[];
+  export type __listOfManagedDataIdentifierSummary = ManagedDataIdentifierSummary[];
+  export type __listOfMatchingResource = MatchingResource[];
   export type __listOfMember = Member[];
   export type __listOfS3BucketDefinitionForJob = S3BucketDefinitionForJob[];
+  export type __listOfSearchResourcesCriteria = SearchResourcesCriteria[];
+  export type __listOfSearchResourcesTagCriterionPair = SearchResourcesTagCriterionPair[];
+  export type __listOfTagCriterionPairForJob = TagCriterionPairForJob[];
   export type __listOfTagValuePair = TagValuePair[];
   export type __listOfUnprocessedAccount = UnprocessedAccount[];
   export type __listOfUsageByAccount = UsageByAccount[];

@@ -28,6 +28,14 @@ declare class DataExchange extends Service {
    */
   createDataSet(callback?: (err: AWSError, data: DataExchange.Types.CreateDataSetResponse) => void): Request<DataExchange.Types.CreateDataSetResponse, AWSError>;
   /**
+   * This operation creates an event action.
+   */
+  createEventAction(params: DataExchange.Types.CreateEventActionRequest, callback?: (err: AWSError, data: DataExchange.Types.CreateEventActionResponse) => void): Request<DataExchange.Types.CreateEventActionResponse, AWSError>;
+  /**
+   * This operation creates an event action.
+   */
+  createEventAction(callback?: (err: AWSError, data: DataExchange.Types.CreateEventActionResponse) => void): Request<DataExchange.Types.CreateEventActionResponse, AWSError>;
+  /**
    * This operation creates a job.
    */
   createJob(params: DataExchange.Types.CreateJobRequest, callback?: (err: AWSError, data: DataExchange.Types.CreateJobResponse) => void): Request<DataExchange.Types.CreateJobResponse, AWSError>;
@@ -60,6 +68,14 @@ declare class DataExchange extends Service {
    */
   deleteDataSet(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * This operation deletes the event action.
+   */
+  deleteEventAction(params: DataExchange.Types.DeleteEventActionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * This operation deletes the event action.
+   */
+  deleteEventAction(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * This operation deletes a revision.
    */
   deleteRevision(params: DataExchange.Types.DeleteRevisionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -83,6 +99,14 @@ declare class DataExchange extends Service {
    * This operation returns information about a data set.
    */
   getDataSet(callback?: (err: AWSError, data: DataExchange.Types.GetDataSetResponse) => void): Request<DataExchange.Types.GetDataSetResponse, AWSError>;
+  /**
+   * This operation retrieves information about an event action.
+   */
+  getEventAction(params: DataExchange.Types.GetEventActionRequest, callback?: (err: AWSError, data: DataExchange.Types.GetEventActionResponse) => void): Request<DataExchange.Types.GetEventActionResponse, AWSError>;
+  /**
+   * This operation retrieves information about an event action.
+   */
+  getEventAction(callback?: (err: AWSError, data: DataExchange.Types.GetEventActionResponse) => void): Request<DataExchange.Types.GetEventActionResponse, AWSError>;
   /**
    * This operation returns information about a job.
    */
@@ -116,6 +140,14 @@ declare class DataExchange extends Service {
    */
   listDataSets(callback?: (err: AWSError, data: DataExchange.Types.ListDataSetsResponse) => void): Request<DataExchange.Types.ListDataSetsResponse, AWSError>;
   /**
+   * This operation lists your event actions.
+   */
+  listEventActions(params: DataExchange.Types.ListEventActionsRequest, callback?: (err: AWSError, data: DataExchange.Types.ListEventActionsResponse) => void): Request<DataExchange.Types.ListEventActionsResponse, AWSError>;
+  /**
+   * This operation lists your event actions.
+   */
+  listEventActions(callback?: (err: AWSError, data: DataExchange.Types.ListEventActionsResponse) => void): Request<DataExchange.Types.ListEventActionsResponse, AWSError>;
+  /**
    * This operation lists your jobs sorted by CreatedAt in descending order.
    */
   listJobs(params: DataExchange.Types.ListJobsRequest, callback?: (err: AWSError, data: DataExchange.Types.ListJobsResponse) => void): Request<DataExchange.Types.ListJobsResponse, AWSError>;
@@ -139,6 +171,14 @@ declare class DataExchange extends Service {
    * This operation lists the tags on the resource.
    */
   listTagsForResource(callback?: (err: AWSError, data: DataExchange.Types.ListTagsForResourceResponse) => void): Request<DataExchange.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * This operation invokes an API Gateway API asset. The request is proxied to the provider’s API Gateway API.
+   */
+  sendApiAsset(params: DataExchange.Types.SendApiAssetRequest, callback?: (err: AWSError, data: DataExchange.Types.SendApiAssetResponse) => void): Request<DataExchange.Types.SendApiAssetResponse, AWSError>;
+  /**
+   * This operation invokes an API Gateway API asset. The request is proxied to the provider’s API Gateway API.
+   */
+  sendApiAsset(callback?: (err: AWSError, data: DataExchange.Types.SendApiAssetResponse) => void): Request<DataExchange.Types.SendApiAssetResponse, AWSError>;
   /**
    * This operation starts a job.
    */
@@ -180,6 +220,14 @@ declare class DataExchange extends Service {
    */
   updateDataSet(callback?: (err: AWSError, data: DataExchange.Types.UpdateDataSetResponse) => void): Request<DataExchange.Types.UpdateDataSetResponse, AWSError>;
   /**
+   * This operation updates the event action.
+   */
+  updateEventAction(params: DataExchange.Types.UpdateEventActionRequest, callback?: (err: AWSError, data: DataExchange.Types.UpdateEventActionResponse) => void): Request<DataExchange.Types.UpdateEventActionResponse, AWSError>;
+  /**
+   * This operation updates the event action.
+   */
+  updateEventAction(callback?: (err: AWSError, data: DataExchange.Types.UpdateEventActionResponse) => void): Request<DataExchange.Types.UpdateEventActionResponse, AWSError>;
+  /**
    * This operation updates a revision.
    */
   updateRevision(params: DataExchange.Types.UpdateRevisionRequest, callback?: (err: AWSError, data: DataExchange.Types.UpdateRevisionResponse) => void): Request<DataExchange.Types.UpdateRevisionResponse, AWSError>;
@@ -189,6 +237,51 @@ declare class DataExchange extends Service {
   updateRevision(callback?: (err: AWSError, data: DataExchange.Types.UpdateRevisionResponse) => void): Request<DataExchange.Types.UpdateRevisionResponse, AWSError>;
 }
 declare namespace DataExchange {
+  export interface Action {
+    /**
+     * Details for the export revision to Amazon S3 action.
+     */
+    ExportRevisionToS3?: AutoExportRevisionToS3RequestDetails;
+  }
+  export type ApiDescription = string;
+  export interface ApiGatewayApiAsset {
+    /**
+     * The API description of the API asset.
+     */
+    ApiDescription?: ApiDescription;
+    /**
+     * The API endpoint of the API asset.
+     */
+    ApiEndpoint?: __string;
+    /**
+     * The unique identifier of the API asset.
+     */
+    ApiId?: __string;
+    /**
+     * The API key of the API asset.
+     */
+    ApiKey?: __string;
+    /**
+     * The API name of the API asset.
+     */
+    ApiName?: __string;
+    /**
+     * The download URL of the API specification of the API asset.
+     */
+    ApiSpecificationDownloadUrl?: __string;
+    /**
+     * The date and time that the upload URL expires, in ISO 8601 format.
+     */
+    ApiSpecificationDownloadUrlExpiresAt?: Timestamp;
+    /**
+     * The protocol type of the API asset.
+     */
+    ProtocolType?: ProtocolType;
+    /**
+     * The stage of the API asset.
+     */
+    Stage?: __string;
+  }
   export type Arn = string;
   export interface AssetDestinationEntry {
     /**
@@ -205,7 +298,18 @@ declare namespace DataExchange {
     Key?: __string;
   }
   export interface AssetDetails {
+    /**
+     * The S3 object that is the asset.
+     */
     S3SnapshotAsset?: S3SnapshotAsset;
+    /**
+     * The Amazon Redshift datashare that is the asset.
+     */
+    RedshiftDataShareAsset?: RedshiftDataShareAsset;
+    /**
+     * Information about the API Gateway API asset.
+     */
+    ApiGatewayApiAsset?: ApiGatewayApiAsset;
   }
   export interface AssetEntry {
     /**
@@ -213,11 +317,11 @@ declare namespace DataExchange {
      */
     Arn: Arn;
     /**
-     * Information about the asset, including its size.
+     * Information about the asset.
      */
     AssetDetails: AssetDetails;
     /**
-     * The type of file your data is stored in. Currently, the supported asset type is S3_SNAPSHOT.
+     * The type of asset that is added to a data set.
      */
     AssetType: AssetType;
     /**
@@ -233,7 +337,7 @@ declare namespace DataExchange {
      */
     Id: Id;
     /**
-     * The name of the asset. When importing from Amazon S3, the S3 object key is used as the asset name. When exporting to Amazon S3, the asset name is used as default target S3 object key.
+     * The name of the asset. When importing from Amazon S3, the S3 object key is used as the asset name. When exporting to Amazon S3, the asset name is used as default target S3 object key. When importing from Amazon API Gateway API, the API name is used as the asset name. When importing from Amazon Redshift, the datashare name is used as the asset name.
      */
     Name: AssetName;
     /**
@@ -260,7 +364,27 @@ declare namespace DataExchange {
      */
     Key: __string;
   }
-  export type AssetType = "S3_SNAPSHOT"|string;
+  export type AssetType = "S3_SNAPSHOT"|"REDSHIFT_DATA_SHARE"|"API_GATEWAY_API"|string;
+  export interface AutoExportRevisionDestinationEntry {
+    /**
+     * The S3 bucket that is the destination for the event action.
+     */
+    Bucket: __string;
+    /**
+     * A string representing the pattern for generated names of the individual assets in the revision. For more information about key patterns, see Key patterns when exporting revisions.
+     */
+    KeyPattern?: __string;
+  }
+  export interface AutoExportRevisionToS3RequestDetails {
+    /**
+     * Encryption configuration for the auto export job.
+     */
+    Encryption?: ExportServerSideEncryption;
+    /**
+     * A revision destination is the Amazon S3 bucket folder destination to where the export will be sent.
+     */
+    RevisionDestination: AutoExportRevisionDestinationEntry;
+  }
   export interface CancelJobRequest {
     /**
      * The unique identifier for a job.
@@ -270,7 +394,7 @@ declare namespace DataExchange {
   export type Code = "ACCESS_DENIED_EXCEPTION"|"INTERNAL_SERVER_EXCEPTION"|"MALWARE_DETECTED"|"RESOURCE_NOT_FOUND_EXCEPTION"|"SERVICE_QUOTA_EXCEEDED_EXCEPTION"|"VALIDATION_EXCEPTION"|"MALWARE_SCAN_ENCRYPTED_FILE"|string;
   export interface CreateDataSetRequest {
     /**
-     * The type of file your data is stored in. Currently, the supported asset type is S3_SNAPSHOT.
+     * The type of asset that is added to a data set.
      */
     AssetType: AssetType;
     /**
@@ -292,7 +416,7 @@ declare namespace DataExchange {
      */
     Arn?: Arn;
     /**
-     * The type of file your data is stored in. Currently, the supported asset type is S3_SNAPSHOT.
+     * The type of asset that is added to a data set.
      */
     AssetType?: AssetType;
     /**
@@ -329,6 +453,42 @@ declare namespace DataExchange {
     Tags?: MapOf__string;
     /**
      * The date and time that the data set was last updated, in ISO 8601 format.
+     */
+    UpdatedAt?: Timestamp;
+  }
+  export interface CreateEventActionRequest {
+    /**
+     * What occurs after a certain event.
+     */
+    Action: Action;
+    /**
+     * What occurs to start an action.
+     */
+    Event: Event;
+  }
+  export interface CreateEventActionResponse {
+    /**
+     * What occurs after a certain event.
+     */
+    Action?: Action;
+    /**
+     * The ARN for the event action.
+     */
+    Arn?: Arn;
+    /**
+     * The date and time that the event action was created, in ISO 8601 format.
+     */
+    CreatedAt?: Timestamp;
+    /**
+     * What occurs to start an action.
+     */
+    Event?: Event;
+    /**
+     * The unique identifier for the event action.
+     */
+    Id?: Id;
+    /**
+     * The date and time that the event action was last updated, in ISO 8601 format.
      */
     UpdatedAt?: Timestamp;
   }
@@ -392,7 +552,7 @@ declare namespace DataExchange {
   }
   export interface CreateRevisionResponse {
     /**
-     * The ARN for the revision
+     * The ARN for the revision.
      */
     Arn?: Arn;
     /**
@@ -434,7 +594,7 @@ declare namespace DataExchange {
      */
     Arn: Arn;
     /**
-     * The type of file your data is stored in. Currently, the supported asset type is S3_SNAPSHOT.
+     * The type of asset that is added to a data set.
      */
     AssetType: AssetType;
     /**
@@ -490,6 +650,12 @@ declare namespace DataExchange {
      */
     DataSetId: __string;
   }
+  export interface DeleteEventActionRequest {
+    /**
+     * The unique identifier for the event action.
+     */
+    EventActionId: __string;
+  }
   export interface DeleteRevisionRequest {
     /**
      * The unique identifier for a data set.
@@ -502,8 +668,46 @@ declare namespace DataExchange {
   }
   export type Description = string;
   export interface Details {
+    /**
+     * Information about the job error.
+     */
     ImportAssetFromSignedUrlJobErrorDetails?: ImportAssetFromSignedUrlJobErrorDetails;
+    /**
+     * Information about the job error.
+     */
     ImportAssetsFromS3JobErrorDetails?: ListOfAssetSourceEntry;
+  }
+  export interface Event {
+    /**
+     * What occurs to start the revision publish action.
+     */
+    RevisionPublished?: RevisionPublished;
+  }
+  export interface EventActionEntry {
+    /**
+     * What occurs after a certain event.
+     */
+    Action: Action;
+    /**
+     * The Amazon Resource Name (ARN) for the event action.
+     */
+    Arn: Arn;
+    /**
+     * The date and time that the event action was created, in ISO 8601 format.
+     */
+    CreatedAt: Timestamp;
+    /**
+     * What occurs to start an action.
+     */
+    Event: Event;
+    /**
+     * The unique identifier for the event action.
+     */
+    Id: Id;
+    /**
+     * The date and time that the event action was last updated, in ISO 8601 format.
+     */
+    UpdatedAt: Timestamp;
   }
   export interface ExportAssetToSignedUrlRequestDetails {
     /**
@@ -604,10 +808,14 @@ declare namespace DataExchange {
      * The destination in Amazon S3 where the revision is exported.
      */
     RevisionDestinations: ListOfRevisionDestinationEntry;
+    /**
+     * The Amazon Resource Name (ARN) of the event action.
+     */
+    EventActionArn?: __string;
   }
   export interface ExportServerSideEncryption {
     /**
-     * The Amazon Resource Name (ARN) of the the AWS KMS key you want to use to encrypt the Amazon S3 objects. This parameter is required if you choose aws:kms as an encryption type.
+     * The Amazon Resource Name (ARN) of the AWS KMS key you want to use to encrypt the Amazon S3 objects. This parameter is required if you choose aws:kms as an encryption type.
      */
     KmsKeyArn?: __string;
     /**
@@ -635,11 +843,11 @@ declare namespace DataExchange {
      */
     Arn?: Arn;
     /**
-     * Information about the asset, including its size.
+     * Information about the asset.
      */
     AssetDetails?: AssetDetails;
     /**
-     * The type of file your data is stored in. Currently, the supported asset type is S3_SNAPSHOT.
+     * The type of asset that is added to a data set.
      */
     AssetType?: AssetType;
     /**
@@ -655,7 +863,7 @@ declare namespace DataExchange {
      */
     Id?: Id;
     /**
-     * The name of the asset When importing from Amazon S3, the S3 object key is used as the asset name. When exporting to Amazon S3, the asset name is used as default target S3 object key.
+     * The name of the asset. When importing from Amazon S3, the S3 object key is used as the asset name. When exporting to Amazon S3, the asset name is used as default target S3 object key. When importing from Amazon API Gateway API, the API name is used as the asset name. When importing from Amazon Redshift, the datashare name is used as the asset name.
      */
     Name?: AssetName;
     /**
@@ -683,7 +891,7 @@ declare namespace DataExchange {
      */
     Arn?: Arn;
     /**
-     * The type of file your data is stored in. Currently, the supported asset type is S3_SNAPSHOT.
+     * The type of asset that is added to a data set.
      */
     AssetType?: AssetType;
     /**
@@ -720,6 +928,38 @@ declare namespace DataExchange {
     Tags?: MapOf__string;
     /**
      * The date and time that the data set was last updated, in ISO 8601 format.
+     */
+    UpdatedAt?: Timestamp;
+  }
+  export interface GetEventActionRequest {
+    /**
+     * The unique identifier for the event action.
+     */
+    EventActionId: __string;
+  }
+  export interface GetEventActionResponse {
+    /**
+     * What occurs after a certain event.
+     */
+    Action?: Action;
+    /**
+     * The ARN for the event action.
+     */
+    Arn?: Arn;
+    /**
+     * The date and time that the event action was created, in ISO 8601 format.
+     */
+    CreatedAt?: Timestamp;
+    /**
+     * What occurs to start an action.
+     */
+    Event?: Event;
+    /**
+     * The unique identifier for the event action.
+     */
+    Id?: Id;
+    /**
+     * The date and time that the event action was last updated, in ISO 8601 format.
      */
     UpdatedAt?: Timestamp;
   }
@@ -775,7 +1015,7 @@ declare namespace DataExchange {
   }
   export interface GetRevisionResponse {
     /**
-     * The ARN for the revision
+     * The ARN for the revision.
      */
     Arn?: Arn;
     /**
@@ -812,7 +1052,94 @@ declare namespace DataExchange {
     UpdatedAt?: Timestamp;
   }
   export type Id = string;
+  export interface ImportAssetFromApiGatewayApiRequestDetails {
+    /**
+     * The API description. Markdown supported.
+     */
+    ApiDescription?: ApiDescription;
+    /**
+     * The API Gateway API ID.
+     */
+    ApiId: __string;
+    /**
+     * The API Gateway API key.
+     */
+    ApiKey?: __string;
+    /**
+     * The API name.
+     */
+    ApiName: __string;
+    /**
+     * The Base64-encoded MD5 hash of the OpenAPI 3.0 JSON API specification file. It is used to ensure the integrity of the file.
+     */
+    ApiSpecificationMd5Hash: __stringMin24Max24PatternAZaZ094AZaZ092AZaZ093;
+    /**
+     * The data set ID.
+     */
+    DataSetId: Id;
+    /**
+     * The protocol type.
+     */
+    ProtocolType: ProtocolType;
+    /**
+     * The revision ID.
+     */
+    RevisionId: Id;
+    /**
+     * The API stage.
+     */
+    Stage: __string;
+  }
+  export interface ImportAssetFromApiGatewayApiResponseDetails {
+    /**
+     * The API description.
+     */
+    ApiDescription?: ApiDescription;
+    /**
+     * The API ID.
+     */
+    ApiId: __string;
+    /**
+     * The API key.
+     */
+    ApiKey?: __string;
+    /**
+     * The API name.
+     */
+    ApiName: __string;
+    /**
+     * The Base64-encoded Md5 hash for the API asset, used to ensure the integrity of the API at that location.
+     */
+    ApiSpecificationMd5Hash: __stringMin24Max24PatternAZaZ094AZaZ092AZaZ093;
+    /**
+     * The upload URL of the API specification.
+     */
+    ApiSpecificationUploadUrl: __string;
+    /**
+     * The date and time that the upload URL expires, in ISO 8601 format.
+     */
+    ApiSpecificationUploadUrlExpiresAt: Timestamp;
+    /**
+     * The data set ID.
+     */
+    DataSetId: Id;
+    /**
+     * The protocol type.
+     */
+    ProtocolType: ProtocolType;
+    /**
+     * The revision ID.
+     */
+    RevisionId: Id;
+    /**
+     * The API stage.
+     */
+    Stage: __string;
+  }
   export interface ImportAssetFromSignedUrlJobErrorDetails {
+    /**
+     * Information about the job error.
+     */
     AssetName: AssetName;
   }
   export interface ImportAssetFromSignedUrlRequestDetails {
@@ -835,7 +1162,7 @@ declare namespace DataExchange {
   }
   export interface ImportAssetFromSignedUrlResponseDetails {
     /**
-     * The name for the asset associated with this import response.
+     * The name for the asset associated with this import job.
      */
     AssetName: AssetName;
     /**
@@ -858,6 +1185,34 @@ declare namespace DataExchange {
      * The time and date at which the signed URL expires, in ISO 8601 format.
      */
     SignedUrlExpiresAt?: Timestamp;
+  }
+  export interface ImportAssetsFromRedshiftDataSharesRequestDetails {
+    /**
+     * A list of Amazon Redshift datashare assets.
+     */
+    AssetSources: ListOfRedshiftDataShareAssetSourceEntry;
+    /**
+     * The unique identifier for the data set associated with this import job.
+     */
+    DataSetId: Id;
+    /**
+     * The unique identifier for the revision associated with this import job.
+     */
+    RevisionId: Id;
+  }
+  export interface ImportAssetsFromRedshiftDataSharesResponseDetails {
+    /**
+     * A list of Amazon Redshift datashare asset sources.
+     */
+    AssetSources: ListOfRedshiftDataShareAssetSourceEntry;
+    /**
+     * The unique identifier for the data set associated with this import job.
+     */
+    DataSetId: Id;
+    /**
+     * The unique identifier for the revision associated with this import job.
+     */
+    RevisionId: Id;
   }
   export interface ImportAssetsFromS3RequestDetails {
     /**
@@ -926,6 +1281,9 @@ declare namespace DataExchange {
      * The code for the job error.
      */
     Code: Code;
+    /**
+     * The details about the job error.
+     */
     Details?: Details;
     /**
      * The name of the limit that was reached.
@@ -948,8 +1306,8 @@ declare namespace DataExchange {
      */
     ResourceType?: JobErrorResourceTypes;
   }
-  export type JobErrorLimitName = "Assets per revision"|"Asset size in GB"|string;
-  export type JobErrorResourceTypes = "REVISION"|"ASSET"|string;
+  export type JobErrorLimitName = "Assets per revision"|"Asset size in GB"|"Amazon Redshift datashare assets per revision"|string;
+  export type JobErrorResourceTypes = "REVISION"|"ASSET"|"DATA_SET"|string;
   export interface ListDataSetRevisionsRequest {
     /**
      * The unique identifier for a data set.
@@ -998,6 +1356,30 @@ declare namespace DataExchange {
      */
     NextToken?: NextToken;
   }
+  export interface ListEventActionsRequest {
+    /**
+     * The unique identifier for the event source.
+     */
+    EventSourceId?: __string;
+    /**
+     * The maximum number of results returned by a single call.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The token value retrieved from a previous call to access the next page of results.
+     */
+    NextToken?: __string;
+  }
+  export interface ListEventActionsResponse {
+    /**
+     * The event action objects listed by the request.
+     */
+    EventActions?: ListOfEventActionEntry;
+    /**
+     * The token value retrieved from a previous call to access the next page of results.
+     */
+    NextToken?: NextToken;
+  }
   export interface ListJobsRequest {
     /**
      * The unique identifier for a data set.
@@ -1028,6 +1410,7 @@ declare namespace DataExchange {
   }
   export type ListOfAssetDestinationEntry = AssetDestinationEntry[];
   export type ListOfAssetSourceEntry = AssetSourceEntry[];
+  export type ListOfRedshiftDataShareAssetSourceEntry = RedshiftDataShareAssetSourceEntry[];
   export type ListOfRevisionDestinationEntry = RevisionDestinationEntry[];
   export interface ListRevisionAssetsRequest {
     /**
@@ -1074,7 +1457,23 @@ declare namespace DataExchange {
   export type NextToken = string;
   export type Origin = "OWNED"|"ENTITLED"|string;
   export interface OriginDetails {
+    /**
+     * The product ID of the origin of the data set.
+     */
     ProductId: __string;
+  }
+  export type ProtocolType = "REST"|string;
+  export interface RedshiftDataShareAsset {
+    /**
+     * The Amazon Resource Name (ARN) of the datashare asset.
+     */
+    Arn: __string;
+  }
+  export interface RedshiftDataShareAssetSourceEntry {
+    /**
+     * The Amazon Resource Name (ARN) of the datashare asset.
+     */
+    DataShareArn: __string;
   }
   export interface RequestDetails {
     /**
@@ -1097,6 +1496,14 @@ declare namespace DataExchange {
      * Details about the import from Amazon S3 request.
      */
     ImportAssetsFromS3?: ImportAssetsFromS3RequestDetails;
+    /**
+     * Details from an import from Amazon Redshift datashare request.
+     */
+    ImportAssetsFromRedshiftDataShares?: ImportAssetsFromRedshiftDataSharesRequestDetails;
+    /**
+     * Information about the import asset from API Gateway API request.
+     */
+    ImportAssetFromApiGatewayApi?: ImportAssetFromApiGatewayApiRequestDetails;
   }
   export interface ResponseDetails {
     /**
@@ -1119,6 +1526,14 @@ declare namespace DataExchange {
      * Details for the import from Amazon S3 response.
      */
     ImportAssetsFromS3?: ImportAssetsFromS3ResponseDetails;
+    /**
+     * Details from an import from Amazon Redshift datashare response.
+     */
+    ImportAssetsFromRedshiftDataShares?: ImportAssetsFromRedshiftDataSharesResponseDetails;
+    /**
+     * The response details.
+     */
+    ImportAssetFromApiGatewayApi?: ImportAssetFromApiGatewayApiResponseDetails;
   }
   export interface RevisionDestinationEntry {
     /**
@@ -1168,11 +1583,61 @@ declare namespace DataExchange {
      */
     UpdatedAt: Timestamp;
   }
+  export interface RevisionPublished {
+    /**
+     * The data set ID of the published revision.
+     */
+    DataSetId: Id;
+  }
   export interface S3SnapshotAsset {
     /**
      * The size of the S3 object that is the object.
      */
     Size: __doubleMin0;
+  }
+  export interface SendApiAssetRequest {
+    /**
+     * The request body.
+     */
+    Body?: __string;
+    /**
+     * Attach query string parameters to the end of the URI (for example, /v1/examplePath?exampleParam=exampleValue).
+     */
+    QueryStringParameters?: MapOf__string;
+    /**
+     * Asset ID value for the API request.
+     */
+    AssetId: __string;
+    /**
+     * Data set ID value for the API request.
+     */
+    DataSetId: __string;
+    /**
+     * Any header value prefixed with x-amzn-dataexchange-header- will have that stripped before sending the Asset API request. Use this when you want to override a header that AWS Data Exchange uses. Alternatively, you can use the header without a prefix to the HTTP request.
+     */
+    RequestHeaders?: MapOf__string;
+    /**
+     * HTTP method value for the API request. Alternatively, you can use the appropriate verb in your request.
+     */
+    Method?: __string;
+    /**
+     * URI path value for the API request. Alternatively, you can set the URI path directly by invoking /v1/{pathValue}
+     */
+    Path?: __string;
+    /**
+     * Revision ID value for the API request.
+     */
+    RevisionId: __string;
+  }
+  export interface SendApiAssetResponse {
+    /**
+     * The response body from the underlying API tracked by the API asset.
+     */
+    Body?: __string;
+    /**
+     * The response headers from the underlying API tracked by the API asset.
+     */
+    ResponseHeaders?: MapOf__string;
   }
   export type ServerSideEncryptionTypes = "aws:kms"|"AES256"|string;
   export interface StartJobRequest {
@@ -1195,7 +1660,7 @@ declare namespace DataExchange {
     Tags: MapOf__string;
   }
   export type Timestamp = Date;
-  export type Type = "IMPORT_ASSETS_FROM_S3"|"IMPORT_ASSET_FROM_SIGNED_URL"|"EXPORT_ASSETS_TO_S3"|"EXPORT_ASSET_TO_SIGNED_URL"|"EXPORT_REVISIONS_TO_S3"|string;
+  export type Type = "IMPORT_ASSETS_FROM_S3"|"IMPORT_ASSET_FROM_SIGNED_URL"|"EXPORT_ASSETS_TO_S3"|"EXPORT_ASSET_TO_SIGNED_URL"|"EXPORT_REVISIONS_TO_S3"|"IMPORT_ASSETS_FROM_REDSHIFT_DATA_SHARES"|"IMPORT_ASSET_FROM_API_GATEWAY_API"|string;
   export interface UntagResourceRequest {
     /**
      * An Amazon Resource Name (ARN) that uniquely identifies an AWS resource.
@@ -1216,7 +1681,7 @@ declare namespace DataExchange {
      */
     DataSetId: __string;
     /**
-     * The name of the asset. When importing from Amazon S3, the S3 object key is used as the asset name. When exporting to Amazon S3, the asset name is used as default target S3 object key.
+     * The name of the asset. When importing from Amazon S3, the S3 object key is used as the asset name. When exporting to Amazon S3, the asset name is used as default target S3 object key. When importing from Amazon API Gateway API, the API name is used as the asset name. When importing from Amazon Redshift, the datashare name is used as the asset name.
      */
     Name: AssetName;
     /**
@@ -1230,11 +1695,11 @@ declare namespace DataExchange {
      */
     Arn?: Arn;
     /**
-     * Information about the asset, including its size.
+     * Information about the asset.
      */
     AssetDetails?: AssetDetails;
     /**
-     * The type of file your data is stored in. Currently, the supported asset type is S3_SNAPSHOT.
+     * The type of asset that is added to a data set.
      */
     AssetType?: AssetType;
     /**
@@ -1250,7 +1715,7 @@ declare namespace DataExchange {
      */
     Id?: Id;
     /**
-     * The name of the asset When importing from Amazon S3, the S3 object key is used as the asset name. When exporting to Amazon S3, the asset name is used as default target S3 object key.
+     * The name of the asset. When importing from Amazon S3, the S3 object key is used as the asset name. When exporting to Amazon S3, the asset name is used as default target S3 object key. When importing from Amazon API Gateway API, the API name is used as the asset name. When importing from Amazon Redshift, the datashare name is used as the asset name.
      */
     Name?: AssetName;
     /**
@@ -1286,7 +1751,7 @@ declare namespace DataExchange {
      */
     Arn?: Arn;
     /**
-     * The type of file your data is stored in. Currently, the supported asset type is S3_SNAPSHOT.
+     * The type of asset that is added to a data set.
      */
     AssetType?: AssetType;
     /**
@@ -1319,6 +1784,42 @@ declare namespace DataExchange {
     SourceId?: Id;
     /**
      * The date and time that the data set was last updated, in ISO 8601 format.
+     */
+    UpdatedAt?: Timestamp;
+  }
+  export interface UpdateEventActionRequest {
+    /**
+     * What occurs after a certain event.
+     */
+    Action?: Action;
+    /**
+     * The unique identifier for the event action.
+     */
+    EventActionId: __string;
+  }
+  export interface UpdateEventActionResponse {
+    /**
+     * What occurs after a certain event.
+     */
+    Action?: Action;
+    /**
+     * The ARN for the event action.
+     */
+    Arn?: Arn;
+    /**
+     * The date and time that the event action was created, in ISO 8601 format.
+     */
+    CreatedAt?: Timestamp;
+    /**
+     * What occurs to start an action.
+     */
+    Event?: Event;
+    /**
+     * The unique identifier for the event action.
+     */
+    Id?: Id;
+    /**
+     * The date and time that the event action was last updated, in ISO 8601 format.
      */
     UpdatedAt?: Timestamp;
   }
@@ -1379,6 +1880,7 @@ declare namespace DataExchange {
   export type __doubleMin0 = number;
   export type ListOfAssetEntry = AssetEntry[];
   export type ListOfDataSetEntry = DataSetEntry[];
+  export type ListOfEventActionEntry = EventActionEntry[];
   export type ListOfJobEntry = JobEntry[];
   export type ListOfJobError = JobError[];
   export type ListOfRevisionEntry = RevisionEntry[];

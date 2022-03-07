@@ -73,7 +73,38 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p>Creates a domain, which is a container for all customer data, such as customer profile attributes, object types, profile keys, and encryption keys. You can create multiple domains, and each domain can have multiple third-party integrations.</p> <p>Each Amazon Connect instance can be associated with only one domain. Multiple Amazon Connect instances can be associated with one domain.</p>"
+      "documentation": "<p>Creates a domain, which is a container for all customer data, such as customer profile attributes, object types, profile keys, and encryption keys. You can create multiple domains, and each domain can have multiple third-party integrations.</p> <p>Each Amazon Connect instance can be associated with only one domain. Multiple Amazon Connect instances can be associated with one domain.</p> <p>Use this API or <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UpdateDomain.html\">UpdateDomain</a> to enable <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html\">identity resolution</a>: set <code>Matching</code> to true. </p> <p>To prevent cross-service impersonation when you call this API, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/cross-service-confused-deputy-prevention.html\">Cross-service confused deputy prevention</a> for sample policies that you should apply. </p>"
+    },
+    "CreateIntegrationWorkflow": {
+      "name": "CreateIntegrationWorkflow",
+      "http": {
+        "method": "POST",
+        "requestUri": "/domains/{DomainName}/workflows/integrations"
+      },
+      "input": {
+        "shape": "CreateIntegrationWorkflowRequest"
+      },
+      "output": {
+        "shape": "CreateIntegrationWorkflowResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p> Creates an integration workflow. An integration workflow is an async process which ingests historic data and sets up an integration for ongoing updates. The supported Amazon AppFlow sources are Salesforce, ServiceNow, and Marketo. </p>"
     },
     "CreateProfile": {
       "name": "CreateProfile",
@@ -292,6 +323,68 @@
       ],
       "documentation": "<p>Removes a ProfileObjectType from a specific domain as well as removes all the ProfileObjects of that type. It also disables integrations from this specific ProfileObjectType. In addition, it scrubs all of the fields of the standard profile that were populated from this ProfileObjectType.</p>"
     },
+    "DeleteWorkflow": {
+      "name": "DeleteWorkflow",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/domains/{DomainName}/workflows/{WorkflowId}"
+      },
+      "input": {
+        "shape": "DeleteWorkflowRequest"
+      },
+      "output": {
+        "shape": "DeleteWorkflowResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Deletes the specified workflow and all its corresponding resources. This is an async process.</p>"
+    },
+    "GetAutoMergingPreview": {
+      "name": "GetAutoMergingPreview",
+      "http": {
+        "method": "POST",
+        "requestUri": "/domains/{DomainName}/identity-resolution-jobs/auto-merging-preview"
+      },
+      "input": {
+        "shape": "GetAutoMergingPreviewRequest"
+      },
+      "output": {
+        "shape": "GetAutoMergingPreviewResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Tests the auto-merging settings of your Identity Resolution Job without merging your data. It randomly selects a sample of matching groups from the existing matching results, and applies the automerging settings that you provided. You can then view the number of profiles in the sample, the number of matches, and the number of profiles identified to be merged. This enables you to evaluate the accuracy of the attributes in your matching list. </p> <p>You can't view which profiles are matched and would be merged.</p> <important> <p>We strongly recommend you use this API to do a dry run of the automerging process before running the Identity Resolution Job. Include <b>at least</b> two matching attributes. If your matching list includes too few attributes (such as only <code>FirstName</code> or only <code>LastName</code>), there may be a large number of matches. This increases the chances of erroneous merges.</p> </important>"
+    },
     "GetDomain": {
       "name": "GetDomain",
       "http": {
@@ -323,6 +416,37 @@
       ],
       "documentation": "<p>Returns information about a specific domain.</p>"
     },
+    "GetIdentityResolutionJob": {
+      "name": "GetIdentityResolutionJob",
+      "http": {
+        "method": "GET",
+        "requestUri": "/domains/{DomainName}/identity-resolution-jobs/{JobId}"
+      },
+      "input": {
+        "shape": "GetIdentityResolutionJobRequest"
+      },
+      "output": {
+        "shape": "GetIdentityResolutionJobResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Returns information about an Identity Resolution Job in a specific domain. </p> <p>Identity Resolution Jobs are set up using the Amazon Connect admin console. For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/use-identity-resolution.html\">Use Identity Resolution to consolidate similar profiles</a>.</p>"
+    },
     "GetIntegration": {
       "name": "GetIntegration",
       "http": {
@@ -353,6 +477,37 @@
         }
       ],
       "documentation": "<p>Returns an integration for a domain.</p>"
+    },
+    "GetMatches": {
+      "name": "GetMatches",
+      "http": {
+        "method": "GET",
+        "requestUri": "/domains/{DomainName}/matches"
+      },
+      "input": {
+        "shape": "GetMatchesRequest"
+      },
+      "output": {
+        "shape": "GetMatchesResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Before calling this API, use <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_CreateDomain.html\">CreateDomain</a> or <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UpdateDomain.html\">UpdateDomain</a> to enable identity resolution: set <code>Matching</code> to true.</p> <p>GetMatches returns potentially matching profiles, based on the results of the latest run of a machine learning process. </p> <important> <p>The process of matching duplicate profiles. If <code>Matching</code> = <code>true</code>, Amazon Connect Customer Profiles starts a weekly batch process called Identity Resolution Job. If you do not specify a date and time for Identity Resolution Job to run, by default it runs every Saturday at 12AM UTC to detect duplicate profiles in your domains. </p> <p>After the Identity Resolution Job completes, use the <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html\">GetMatches</a> API to return and review the results. Or, if you have configured <code>ExportingConfig</code> in the <code>MatchingRequest</code>, you can download the results from S3.</p> </important> <p>Amazon Connect uses the following profile attributes to identify matches:</p> <ul> <li> <p>PhoneNumber</p> </li> <li> <p>HomePhoneNumber</p> </li> <li> <p>BusinessPhoneNumber</p> </li> <li> <p>MobilePhoneNumber</p> </li> <li> <p>EmailAddress</p> </li> <li> <p>PersonalEmailAddress</p> </li> <li> <p>BusinessEmailAddress</p> </li> <li> <p>FullName</p> </li> </ul> <p>For example, two or more profiles—with spelling mistakes such as <b>John Doe</b> and <b>Jhn Doe</b>, or different casing email addresses such as <b>JOHN_DOE@ANYCOMPANY.COM</b> and <b>johndoe@anycompany.com</b>, or different phone number formats such as <b>555-010-0000</b> and <b>+1-555-010-0000</b>—can be detected as belonging to the same customer <b>John Doe</b> and merged into a unified profile.</p>"
     },
     "GetProfileObjectType": {
       "name": "GetProfileObjectType",
@@ -416,6 +571,68 @@
       ],
       "documentation": "<p>Returns the template information for a specific object type.</p> <p>A template is a predefined ProfileObjectType, such as “Salesforce-Account” or “Salesforce-Contact.” When a user sends a ProfileObject, using the PutProfileObject API, with an ObjectTypeName that matches one of the TemplateIds, it uses the mappings from the template.</p>"
     },
+    "GetWorkflow": {
+      "name": "GetWorkflow",
+      "http": {
+        "method": "GET",
+        "requestUri": "/domains/{DomainName}/workflows/{WorkflowId}"
+      },
+      "input": {
+        "shape": "GetWorkflowRequest"
+      },
+      "output": {
+        "shape": "GetWorkflowResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Get details of specified workflow.</p>"
+    },
+    "GetWorkflowSteps": {
+      "name": "GetWorkflowSteps",
+      "http": {
+        "method": "GET",
+        "requestUri": "/domains/{DomainName}/workflows/{WorkflowId}/steps"
+      },
+      "input": {
+        "shape": "GetWorkflowStepsRequest"
+      },
+      "output": {
+        "shape": "GetWorkflowStepsResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Get granular list of steps in workflow.</p>"
+    },
     "ListAccountIntegrations": {
       "name": "ListAccountIntegrations",
       "http": {
@@ -477,6 +694,37 @@
         }
       ],
       "documentation": "<p>Returns a list of all the domains for an AWS account that have been created.</p>"
+    },
+    "ListIdentityResolutionJobs": {
+      "name": "ListIdentityResolutionJobs",
+      "http": {
+        "method": "GET",
+        "requestUri": "/domains/{DomainName}/identity-resolution-jobs"
+      },
+      "input": {
+        "shape": "ListIdentityResolutionJobsRequest"
+      },
+      "output": {
+        "shape": "ListIdentityResolutionJobsResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Lists all of the Identity Resolution Jobs in your domain. The response sorts the list by <code>JobStartTime</code>.</p>"
     },
     "ListIntegrations": {
       "name": "ListIntegrations",
@@ -626,6 +874,65 @@
         }
       ],
       "documentation": "<p>Displays the tags associated with an Amazon Connect Customer Profiles resource. In Connect Customer Profiles, domains, profile object types, and integrations can be tagged.</p>"
+    },
+    "ListWorkflows": {
+      "name": "ListWorkflows",
+      "http": {
+        "method": "POST",
+        "requestUri": "/domains/{DomainName}/workflows"
+      },
+      "input": {
+        "shape": "ListWorkflowsRequest"
+      },
+      "output": {
+        "shape": "ListWorkflowsResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Query to list all workflows.</p>"
+    },
+    "MergeProfiles": {
+      "name": "MergeProfiles",
+      "http": {
+        "method": "POST",
+        "requestUri": "/domains/{DomainName}/profiles/objects/merge"
+      },
+      "input": {
+        "shape": "MergeProfilesRequest"
+      },
+      "output": {
+        "shape": "MergeProfilesResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Runs an AWS Lambda job that does the following:</p> <ol> <li> <p>All the profileKeys in the <code>ProfileToBeMerged</code> will be moved to the main profile.</p> </li> <li> <p>All the objects in the <code>ProfileToBeMerged</code> will be moved to the main profile.</p> </li> <li> <p>All the <code>ProfileToBeMerged</code> will be deleted at the end.</p> </li> <li> <p>All the profileKeys in the <code>ProfileIdsToBeMerged</code> will be moved to the main profile.</p> </li> <li> <p>Standard fields are merged as follows:</p> <ol> <li> <p>Fields are always \"union\"-ed if there are no conflicts in standard fields or attributeKeys.</p> </li> <li> <p>When there are conflicting fields:</p> <ol> <li> <p>If no <code>SourceProfileIds</code> entry is specified, the main Profile value is always taken. </p> </li> <li> <p>If a <code>SourceProfileIds</code> entry is specified, the specified profileId is always taken, even if it is a NULL value.</p> </li> </ol> </li> </ol> </li> </ol> <p>You can use MergeProfiles together with <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html\">GetMatches</a>, which returns potentially matching profiles, or use it with the results of another matching system. After profiles have been merged, they cannot be separated (unmerged).</p>"
     },
     "PutIntegration": {
       "name": "PutIntegration",
@@ -830,7 +1137,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p>Updates the properties of a domain, including creating or selecting a dead letter queue or an encryption key.</p> <p>Once a domain is created, the name can’t be changed.</p>"
+      "documentation": "<p>Updates the properties of a domain, including creating or selecting a dead letter queue or an encryption key.</p> <p>After a domain is created, the name can’t be changed.</p> <p>Use this API or <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_CreateDomain.html\">CreateDomain</a> to enable <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html\">identity resolution</a>: set <code>Matching</code> to true. </p> <p>To prevent cross-service impersonation when you call this API, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/cross-service-confused-deputy-prevention.html\">Cross-service confused deputy prevention</a> for sample policies that you should apply. </p>"
     },
     "UpdateProfile": {
       "name": "UpdateProfile",
@@ -959,6 +1266,124 @@
       },
       "documentation": "<p>A generic address associated with the customer that is not mailing, shipping, or billing.</p>"
     },
+    "AppflowIntegration": {
+      "type": "structure",
+      "required": [
+        "FlowDefinition"
+      ],
+      "members": {
+        "FlowDefinition": {
+          "shape": "FlowDefinition"
+        },
+        "Batches": {
+          "shape": "Batches",
+          "documentation": "<p>Batches in workflow of type <code>APPFLOW_INTEGRATION</code>.</p>"
+        }
+      },
+      "documentation": "<p>Details for workflow of type <code>APPFLOW_INTEGRATION</code>.</p>"
+    },
+    "AppflowIntegrationWorkflowAttributes": {
+      "type": "structure",
+      "required": [
+        "SourceConnectorType",
+        "ConnectorProfileName"
+      ],
+      "members": {
+        "SourceConnectorType": {
+          "shape": "SourceConnectorType",
+          "documentation": "<p>Specifies the source connector type, such as Salesforce, ServiceNow, and Marketo. Indicates source of ingestion.</p>"
+        },
+        "ConnectorProfileName": {
+          "shape": "ConnectorProfileName",
+          "documentation": "<p>The name of the AppFlow connector profile used for ingestion.</p>"
+        },
+        "RoleArn": {
+          "shape": "string1To255",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the IAM role. Customer Profiles assumes this role to create resources on your behalf as part of workflow execution.</p>"
+        }
+      },
+      "documentation": "<p>Structure holding all <code>APPFLOW_INTEGRATION</code> specific workflow attributes.</p>"
+    },
+    "AppflowIntegrationWorkflowMetrics": {
+      "type": "structure",
+      "required": [
+        "RecordsProcessed",
+        "StepsCompleted",
+        "TotalSteps"
+      ],
+      "members": {
+        "RecordsProcessed": {
+          "shape": "long",
+          "documentation": "<p>Number of records processed in <code>APPFLOW_INTEGRATION</code> workflow.</p>"
+        },
+        "StepsCompleted": {
+          "shape": "long",
+          "documentation": "<p>Total steps completed in <code>APPFLOW_INTEGRATION</code> workflow.</p>"
+        },
+        "TotalSteps": {
+          "shape": "long",
+          "documentation": "<p>Total steps in <code>APPFLOW_INTEGRATION</code> workflow.</p>"
+        }
+      },
+      "documentation": "<p>Workflow specific execution metrics for <code>APPFLOW_INTEGRATION</code> workflow.</p>"
+    },
+    "AppflowIntegrationWorkflowStep": {
+      "type": "structure",
+      "required": [
+        "FlowName",
+        "Status",
+        "ExecutionMessage",
+        "RecordsProcessed",
+        "BatchRecordsStartTime",
+        "BatchRecordsEndTime",
+        "CreatedAt",
+        "LastUpdatedAt"
+      ],
+      "members": {
+        "FlowName": {
+          "shape": "FlowName",
+          "documentation": "<p>Name of the flow created during execution of workflow step. <code>APPFLOW_INTEGRATION</code> workflow type creates an appflow flow during workflow step execution on the customers behalf.</p>"
+        },
+        "Status": {
+          "shape": "Status",
+          "documentation": "<p>Workflow step status for <code>APPFLOW_INTEGRATION</code> workflow.</p>"
+        },
+        "ExecutionMessage": {
+          "shape": "string1To255",
+          "documentation": "<p>Message indicating execution of workflow step for <code>APPFLOW_INTEGRATION</code> workflow.</p>"
+        },
+        "RecordsProcessed": {
+          "shape": "long",
+          "documentation": "<p>Total number of records processed during execution of workflow step for <code>APPFLOW_INTEGRATION</code> workflow.</p>"
+        },
+        "BatchRecordsStartTime": {
+          "shape": "string1To255",
+          "documentation": "<p>Start datetime of records pulled in batch during execution of workflow step for <code>APPFLOW_INTEGRATION</code> workflow.</p>"
+        },
+        "BatchRecordsEndTime": {
+          "shape": "string1To255",
+          "documentation": "<p>End datetime of records pulled in batch during execution of workflow step for <code>APPFLOW_INTEGRATION</code> workflow.</p>"
+        },
+        "CreatedAt": {
+          "shape": "timestamp",
+          "documentation": "<p>Creation timestamp of workflow step for <code>APPFLOW_INTEGRATION</code> workflow.</p>"
+        },
+        "LastUpdatedAt": {
+          "shape": "timestamp",
+          "documentation": "<p>Last updated timestamp for workflow step for <code>APPFLOW_INTEGRATION</code> workflow.</p>"
+        }
+      },
+      "documentation": "<p>Workflow step details for <code>APPFLOW_INTEGRATION</code> workflow.</p>"
+    },
+    "AttributeSourceIdMap": {
+      "type": "map",
+      "key": {
+        "shape": "string1To255"
+      },
+      "value": {
+        "shape": "uuid"
+      }
+    },
     "Attributes": {
       "type": "map",
       "key": {
@@ -966,6 +1391,51 @@
       },
       "value": {
         "shape": "string1To255"
+      }
+    },
+    "AutoMerging": {
+      "type": "structure",
+      "required": [
+        "Enabled"
+      ],
+      "members": {
+        "Enabled": {
+          "shape": "optionalBoolean",
+          "documentation": "<p>The flag that enables the auto-merging of duplicate profiles.</p>"
+        },
+        "Consolidation": {
+          "shape": "Consolidation",
+          "documentation": "<p>A list of matching attributes that represent matching criteria. If two profiles meet at least one of the requirements in the matching attributes list, they will be merged.</p>"
+        },
+        "ConflictResolution": {
+          "shape": "ConflictResolution",
+          "documentation": "<p>How the auto-merging process should resolve conflicts between different profiles. For example, if Profile A and Profile B have the same <code>FirstName</code> and <code>LastName</code> (and that is the matching criteria), which <code>EmailAddress</code> should be used? </p>"
+        }
+      },
+      "documentation": "<p>Configuration settings for how to perform the auto-merging of profiles.</p>"
+    },
+    "Batch": {
+      "type": "structure",
+      "required": [
+        "StartTime",
+        "EndTime"
+      ],
+      "members": {
+        "StartTime": {
+          "shape": "timestamp",
+          "documentation": "<p>Start time of batch to split ingestion.</p>"
+        },
+        "EndTime": {
+          "shape": "timestamp",
+          "documentation": "<p>End time of batch to split ingestion.</p>"
+        }
+      },
+      "documentation": "<p>Batch defines the boundaries for ingestion for each step in <code>APPFLOW_INTEGRATION</code> workflow. <code>APPFLOW_INTEGRATION</code> workflow splits ingestion based on these boundaries.</p>"
+    },
+    "Batches": {
+      "type": "list",
+      "member": {
+        "shape": "Batch"
       }
     },
     "BucketName": {
@@ -978,6 +1448,30 @@
       "type": "string",
       "max": 512,
       "pattern": ".*"
+    },
+    "ConflictResolution": {
+      "type": "structure",
+      "required": [
+        "ConflictResolvingModel"
+      ],
+      "members": {
+        "ConflictResolvingModel": {
+          "shape": "ConflictResolvingModel",
+          "documentation": "<p>How the auto-merging process should resolve conflicts between different profiles.</p> <ul> <li> <p> <code>RECENCY</code>: Uses the data that was most recently updated.</p> </li> <li> <p> <code>SOURCE</code>: Uses the data from a specific source. For example, if a company has been aquired or two departments have merged, data from the specified source is used. If two duplicate profiles are from the same source, then <code>RECENCY</code> is used again.</p> </li> </ul>"
+        },
+        "SourceName": {
+          "shape": "string1To255",
+          "documentation": "<p>The <code>ObjectType</code> name that is used to resolve profile merging conflicts when choosing <code>SOURCE</code> as the <code>ConflictResolvingModel</code>.</p>"
+        }
+      },
+      "documentation": "<p>How the auto-merging process should resolve conflicts between different profiles.</p>"
+    },
+    "ConflictResolvingModel": {
+      "type": "string",
+      "enum": [
+        "RECENCY",
+        "SOURCE"
+      ]
     },
     "ConnectorOperator": {
       "type": "structure",
@@ -1010,6 +1504,19 @@
       "max": 256,
       "pattern": "[\\w/!@#+=.-]+"
     },
+    "Consolidation": {
+      "type": "structure",
+      "required": [
+        "MatchingAttributesList"
+      ],
+      "members": {
+        "MatchingAttributesList": {
+          "shape": "MatchingAttributesList",
+          "documentation": "<p>A list of matching criteria.</p>"
+        }
+      },
+      "documentation": "<p>The matching criteria to be used during the auto-merging process. </p>"
+    },
     "CreateDomainRequest": {
       "type": "structure",
       "required": [
@@ -1034,6 +1541,10 @@
         "DeadLetterQueueUrl": {
           "shape": "sqsQueueUrl",
           "documentation": "<p>The URL of the SQS dead letter queue, which is used for reporting errors associated with ingesting data from third party applications. You must set up a policy on the DeadLetterQueue for the SendMessage operation to enable Amazon Connect Customer Profiles to send messages to the DeadLetterQueue.</p>"
+        },
+        "Matching": {
+          "shape": "MatchingRequest",
+          "documentation": "<p>The process of matching duplicate profiles. If <code>Matching</code> = <code>true</code>, Amazon Connect Customer Profiles starts a weekly batch process called Identity Resolution Job. If you do not specify a date and time for Identity Resolution Job to run, by default it runs every Saturday at 12AM UTC to detect duplicate profiles in your domains. </p> <p>After the Identity Resolution Job completes, use the <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html\">GetMatches</a> API to return and review the results. Or, if you have configured <code>ExportingConfig</code> in the <code>MatchingRequest</code>, you can download the results from S3.</p>"
         },
         "Tags": {
           "shape": "TagMap",
@@ -1066,6 +1577,10 @@
           "shape": "sqsQueueUrl",
           "documentation": "<p>The URL of the SQS dead letter queue, which is used for reporting errors associated with ingesting data from third party applications.</p>"
         },
+        "Matching": {
+          "shape": "MatchingResponse",
+          "documentation": "<p>The process of matching duplicate profiles. If <code>Matching</code> = <code>true</code>, Amazon Connect Customer Profiles starts a weekly batch process called Identity Resolution Job. If you do not specify a date and time for Identity Resolution Job to run, by default it runs every Saturday at 12AM UTC to detect duplicate profiles in your domains. </p> <p>After the Identity Resolution Job completes, use the <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html\">GetMatches</a> API to return and review the results. Or, if you have configured <code>ExportingConfig</code> in the <code>MatchingRequest</code>, you can download the results from S3.</p>"
+        },
         "CreatedAt": {
           "shape": "timestamp",
           "documentation": "<p>The timestamp of when the domain was created.</p>"
@@ -1077,6 +1592,61 @@
         "Tags": {
           "shape": "TagMap",
           "documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
+        }
+      }
+    },
+    "CreateIntegrationWorkflowRequest": {
+      "type": "structure",
+      "required": [
+        "DomainName",
+        "WorkflowType",
+        "IntegrationConfig",
+        "ObjectTypeName",
+        "RoleArn"
+      ],
+      "members": {
+        "DomainName": {
+          "shape": "name",
+          "documentation": "<p>The unique name of the domain.</p>",
+          "location": "uri",
+          "locationName": "DomainName"
+        },
+        "WorkflowType": {
+          "shape": "WorkflowType",
+          "documentation": "<p>The type of workflow. The only supported value is APPFLOW_INTEGRATION.</p>"
+        },
+        "IntegrationConfig": {
+          "shape": "IntegrationConfig",
+          "documentation": "<p>Configuration data for integration workflow.</p>"
+        },
+        "ObjectTypeName": {
+          "shape": "typeName",
+          "documentation": "<p>The name of the profile object type.</p>"
+        },
+        "RoleArn": {
+          "shape": "RoleArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the IAM role. Customer Profiles assumes this role to create resources on your behalf as part of workflow execution.</p>"
+        },
+        "Tags": {
+          "shape": "TagMap",
+          "documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
+        }
+      }
+    },
+    "CreateIntegrationWorkflowResponse": {
+      "type": "structure",
+      "required": [
+        "WorkflowId",
+        "Message"
+      ],
+      "members": {
+        "WorkflowId": {
+          "shape": "uuid",
+          "documentation": "<p>Unique identifier for the workflow.</p>"
+        },
+        "Message": {
+          "shape": "string1To255",
+          "documentation": "<p>A message indicating create request was received.</p>"
         }
       }
     },
@@ -1098,7 +1668,7 @@
         },
         "AdditionalInformation": {
           "shape": "string1To1000",
-          "documentation": "<p>Any additional information relevant to the customer's profile.</p>"
+          "documentation": "<p>Any additional information relevant to the customer’s profile.</p>"
         },
         "PartyType": {
           "shape": "PartyType",
@@ -1122,15 +1692,15 @@
         },
         "BirthDate": {
           "shape": "string1To255",
-          "documentation": "<p>The customer’s birth date.</p>"
+          "documentation": "<p>The customer’s birth date. </p>"
         },
         "Gender": {
           "shape": "Gender",
-          "documentation": "<p>The gender with which the customer identifies.</p>"
+          "documentation": "<p>The gender with which the customer identifies. </p>"
         },
         "PhoneNumber": {
           "shape": "string1To255",
-          "documentation": "<p>The customer's phone number, which has not been specified as a mobile, home, or business number.</p>"
+          "documentation": "<p>The customer’s phone number, which has not been specified as a mobile, home, or business number. </p>"
         },
         "MobilePhoneNumber": {
           "shape": "string1To255",
@@ -1146,7 +1716,7 @@
         },
         "EmailAddress": {
           "shape": "string1To255",
-          "documentation": "<p>The customer's email address, which has not been specified as a personal or business address.</p>"
+          "documentation": "<p>The customer’s email address, which has not been specified as a personal or business address. </p>"
         },
         "PersonalEmailAddress": {
           "shape": "string1To255",
@@ -1399,6 +1969,31 @@
         }
       }
     },
+    "DeleteWorkflowRequest": {
+      "type": "structure",
+      "required": [
+        "DomainName",
+        "WorkflowId"
+      ],
+      "members": {
+        "DomainName": {
+          "shape": "name",
+          "documentation": "<p>The unique name of the domain.</p>",
+          "location": "uri",
+          "locationName": "DomainName"
+        },
+        "WorkflowId": {
+          "shape": "string1To255",
+          "documentation": "<p>Unique identifier for the workflow.</p>",
+          "location": "uri",
+          "locationName": "WorkflowId"
+        }
+      }
+    },
+    "DeleteWorkflowResponse": {
+      "type": "structure",
+      "members": {}
+    },
     "DestinationField": {
       "type": "string",
       "max": 256,
@@ -1432,6 +2027,29 @@
       },
       "documentation": "<p>Usage-specific statistics about the domain.</p>"
     },
+    "Double": {
+      "type": "double"
+    },
+    "ExportingConfig": {
+      "type": "structure",
+      "members": {
+        "S3Exporting": {
+          "shape": "S3ExportingConfig",
+          "documentation": "<p>The S3 location where Identity Resolution Jobs write result files.</p>"
+        }
+      },
+      "documentation": "<p>Configuration information about the S3 bucket where Identity Resolution Jobs writes result files. </p> <note> <p>You need to give Customer Profiles service principal write permission to your S3 bucket. Otherwise, you'll get an exception in the API response. For an example policy, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/cross-service-confused-deputy-prevention.html#customer-profiles-cross-service\">Amazon Connect Customer Profiles cross-service confused deputy prevention</a>. </p> </note>"
+    },
+    "ExportingLocation": {
+      "type": "structure",
+      "members": {
+        "S3Exporting": {
+          "shape": "S3ExportingLocation",
+          "documentation": "<p>Information about the S3 location where Identity Resolution Jobs write result files.</p>"
+        }
+      },
+      "documentation": "<p>The S3 location where Identity Resolution Jobs write result files.</p>"
+    },
     "FieldContentType": {
       "type": "string",
       "enum": [
@@ -1456,6 +2074,96 @@
       "member": {
         "shape": "name"
       }
+    },
+    "FieldSourceProfileIds": {
+      "type": "structure",
+      "members": {
+        "AccountNumber": {
+          "shape": "uuid",
+          "documentation": "<p>A unique identifier for the account number field to be merged. </p>"
+        },
+        "AdditionalInformation": {
+          "shape": "uuid",
+          "documentation": "<p>A unique identifier for the additional information field to be merged.</p>"
+        },
+        "PartyType": {
+          "shape": "uuid",
+          "documentation": "<p>A unique identifier for the party type field to be merged.</p>"
+        },
+        "BusinessName": {
+          "shape": "uuid",
+          "documentation": "<p>A unique identifier for the business name field to be merged.</p>"
+        },
+        "FirstName": {
+          "shape": "uuid",
+          "documentation": "<p>A unique identifier for the first name field to be merged.</p>"
+        },
+        "MiddleName": {
+          "shape": "uuid",
+          "documentation": "<p>A unique identifier for the middle name field to be merged.</p>"
+        },
+        "LastName": {
+          "shape": "uuid",
+          "documentation": "<p>A unique identifier for the last name field to be merged.</p>"
+        },
+        "BirthDate": {
+          "shape": "uuid",
+          "documentation": "<p>A unique identifier for the birthdate field to be merged.</p>"
+        },
+        "Gender": {
+          "shape": "uuid",
+          "documentation": "<p>A unique identifier for the gender field to be merged.</p>"
+        },
+        "PhoneNumber": {
+          "shape": "uuid",
+          "documentation": "<p>A unique identifier for the phone number field to be merged.</p>"
+        },
+        "MobilePhoneNumber": {
+          "shape": "uuid",
+          "documentation": "<p>A unique identifier for the mobile phone number field to be merged.</p>"
+        },
+        "HomePhoneNumber": {
+          "shape": "uuid",
+          "documentation": "<p>A unique identifier for the home phone number field to be merged.</p>"
+        },
+        "BusinessPhoneNumber": {
+          "shape": "uuid",
+          "documentation": "<p>A unique identifier for the business phone number field to be merged.</p>"
+        },
+        "EmailAddress": {
+          "shape": "uuid",
+          "documentation": "<p>A unique identifier for the email address field to be merged.</p>"
+        },
+        "PersonalEmailAddress": {
+          "shape": "uuid",
+          "documentation": "<p>A unique identifier for the personal email address field to be merged.</p>"
+        },
+        "BusinessEmailAddress": {
+          "shape": "uuid",
+          "documentation": "<p>A unique identifier for the party type field to be merged.</p>"
+        },
+        "Address": {
+          "shape": "uuid",
+          "documentation": "<p>A unique identifier for the party type field to be merged.</p>"
+        },
+        "ShippingAddress": {
+          "shape": "uuid",
+          "documentation": "<p>A unique identifier for the shipping address field to be merged.</p>"
+        },
+        "MailingAddress": {
+          "shape": "uuid",
+          "documentation": "<p>A unique identifier for the mailing address field to be merged.</p>"
+        },
+        "BillingAddress": {
+          "shape": "uuid",
+          "documentation": "<p>A unique identifier for the billing type field to be merged.</p>"
+        },
+        "Attributes": {
+          "shape": "AttributeSourceIdMap",
+          "documentation": "<p>A unique identifier for the attributes field to be merged.</p>"
+        }
+      },
+      "documentation": "<p>A duplicate customer profile that is to be merged into a main profile. </p>"
     },
     "FlowDefinition": {
       "type": "structure",
@@ -1512,6 +2220,54 @@
         "UNSPECIFIED"
       ]
     },
+    "GetAutoMergingPreviewRequest": {
+      "type": "structure",
+      "required": [
+        "DomainName",
+        "Consolidation",
+        "ConflictResolution"
+      ],
+      "members": {
+        "DomainName": {
+          "shape": "name",
+          "documentation": "<p>The unique name of the domain.</p>",
+          "location": "uri",
+          "locationName": "DomainName"
+        },
+        "Consolidation": {
+          "shape": "Consolidation",
+          "documentation": "<p>A list of matching attributes that represent matching criteria.</p>"
+        },
+        "ConflictResolution": {
+          "shape": "ConflictResolution",
+          "documentation": "<p>How the auto-merging process should resolve conflicts between different profiles.</p>"
+        }
+      }
+    },
+    "GetAutoMergingPreviewResponse": {
+      "type": "structure",
+      "required": [
+        "DomainName"
+      ],
+      "members": {
+        "DomainName": {
+          "shape": "name",
+          "documentation": "<p>The unique name of the domain.</p>"
+        },
+        "NumberOfMatchesInSample": {
+          "shape": "long",
+          "documentation": "<p>The number of match groups in the domain that have been reviewed in this preview dry run.</p>"
+        },
+        "NumberOfProfilesInSample": {
+          "shape": "long",
+          "documentation": "<p>The number of profiles found in this preview dry run.</p>"
+        },
+        "NumberOfProfilesWillBeMerged": {
+          "shape": "long",
+          "documentation": "<p>The number of profiles that would be merged if this wasn't a preview dry run.</p>"
+        }
+      }
+    },
     "GetDomainRequest": {
       "type": "structure",
       "required": [
@@ -1520,7 +2276,7 @@
       "members": {
         "DomainName": {
           "shape": "name",
-          "documentation": "<p>A unique name for the domain.</p>",
+          "documentation": "<p>The unique name of the domain.</p>",
           "location": "uri",
           "locationName": "DomainName"
         }
@@ -1554,6 +2310,10 @@
           "shape": "DomainStats",
           "documentation": "<p>Usage-specific statistics about the domain.</p>"
         },
+        "Matching": {
+          "shape": "MatchingResponse",
+          "documentation": "<p>The process of matching duplicate profiles. If <code>Matching</code> = <code>true</code>, Amazon Connect Customer Profiles starts a weekly batch process called Identity Resolution Job. If you do not specify a date and time for Identity Resolution Job to run, by default it runs every Saturday at 12AM UTC to detect duplicate profiles in your domains. </p> <p>After the Identity Resolution Job completes, use the <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html\">GetMatches</a> API to return and review the results. Or, if you have configured <code>ExportingConfig</code> in the <code>MatchingRequest</code>, you can download the results from S3.</p>"
+        },
         "CreatedAt": {
           "shape": "timestamp",
           "documentation": "<p>The timestamp of when the domain was created.</p>"
@@ -1565,6 +2325,76 @@
         "Tags": {
           "shape": "TagMap",
           "documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
+        }
+      }
+    },
+    "GetIdentityResolutionJobRequest": {
+      "type": "structure",
+      "required": [
+        "DomainName",
+        "JobId"
+      ],
+      "members": {
+        "DomainName": {
+          "shape": "name",
+          "documentation": "<p>The unique name of the domain.</p>",
+          "location": "uri",
+          "locationName": "DomainName"
+        },
+        "JobId": {
+          "shape": "uuid",
+          "documentation": "<p>The unique identifier of the Identity Resolution Job.</p>",
+          "location": "uri",
+          "locationName": "JobId"
+        }
+      }
+    },
+    "GetIdentityResolutionJobResponse": {
+      "type": "structure",
+      "members": {
+        "DomainName": {
+          "shape": "name",
+          "documentation": "<p>The unique name of the domain.</p>"
+        },
+        "JobId": {
+          "shape": "uuid",
+          "documentation": "<p>The unique identifier of the Identity Resolution Job.</p>"
+        },
+        "Status": {
+          "shape": "IdentityResolutionJobStatus",
+          "documentation": "<p>The status of the Identity Resolution Job.</p> <ul> <li> <p> <code>PENDING</code>: The Identity Resolution Job is scheduled but has not started yet. If you turn off the Identity Resolution feature in your domain, jobs in the <code>PENDING</code> state are deleted.</p> </li> <li> <p> <code>PREPROCESSING</code>: The Identity Resolution Job is loading your data.</p> </li> <li> <p> <code>FIND_MATCHING</code>: The Identity Resolution Job is using the machine learning model to identify profiles that belong to the same matching group.</p> </li> <li> <p> <code>MERGING</code>: The Identity Resolution Job is merging duplicate profiles.</p> </li> <li> <p> <code>COMPLETED</code>: The Identity Resolution Job completed successfully.</p> </li> <li> <p> <code>PARTIAL_SUCCESS</code>: There's a system error and not all of the data is merged. The Identity Resolution Job writes a message indicating the source of the problem.</p> </li> <li> <p> <code>FAILED</code>: The Identity Resolution Job did not merge any data. It writes a message indicating the source of the problem.</p> </li> </ul>"
+        },
+        "Message": {
+          "shape": "stringTo2048",
+          "documentation": "<p>The error messages that are generated when the Identity Resolution Job runs.</p>"
+        },
+        "JobStartTime": {
+          "shape": "timestamp",
+          "documentation": "<p>The timestamp of when the Identity Resolution Job was started or will be started.</p>"
+        },
+        "JobEndTime": {
+          "shape": "timestamp",
+          "documentation": "<p>The timestamp of when the Identity Resolution Job was completed.</p>"
+        },
+        "LastUpdatedAt": {
+          "shape": "timestamp",
+          "documentation": "<p>The timestamp of when the Identity Resolution Job was most recently edited.</p>"
+        },
+        "JobExpirationTime": {
+          "shape": "timestamp",
+          "documentation": "<p>The timestamp of when the Identity Resolution Job will expire.</p>"
+        },
+        "AutoMerging": {
+          "shape": "AutoMerging",
+          "documentation": "<p>Configuration settings for how to perform the auto-merging of profiles.</p>"
+        },
+        "ExportingLocation": {
+          "shape": "ExportingLocation",
+          "documentation": "<p>The S3 location where the Identity Resolution Job writes result files.</p>"
+        },
+        "JobStats": {
+          "shape": "JobStats",
+          "documentation": "<p>Statistics about the Identity Resolution Job.</p>"
         }
       }
     },
@@ -1592,7 +2422,6 @@
       "required": [
         "DomainName",
         "Uri",
-        "ObjectTypeName",
         "CreatedAt",
         "LastUpdatedAt"
       ],
@@ -1620,6 +2449,61 @@
         "Tags": {
           "shape": "TagMap",
           "documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
+        },
+        "ObjectTypeNames": {
+          "shape": "ObjectTypeNames",
+          "documentation": "<p>A map in which each key is an event type from an external application such as Segment or Shopify, and each value is an <code>ObjectTypeName</code> (template) used to ingest the event. It supports the following event types: <code>SegmentIdentify</code>, <code>ShopifyCreateCustomers</code>, <code>ShopifyUpdateCustomers</code>, <code>ShopifyCreateDraftOrders</code>, <code>ShopifyUpdateDraftOrders</code>, <code>ShopifyCreateOrders</code>, and <code>ShopifyUpdatedOrders</code>.</p>"
+        },
+        "WorkflowId": {
+          "shape": "string1To255",
+          "documentation": "<p>Unique identifier for the workflow.</p>"
+        }
+      }
+    },
+    "GetMatchesRequest": {
+      "type": "structure",
+      "required": [
+        "DomainName"
+      ],
+      "members": {
+        "NextToken": {
+          "shape": "token",
+          "documentation": "<p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.</p>",
+          "location": "querystring",
+          "locationName": "next-token"
+        },
+        "MaxResults": {
+          "shape": "maxSize100",
+          "documentation": "<p>The maximum number of results to return per page.</p>",
+          "location": "querystring",
+          "locationName": "max-results"
+        },
+        "DomainName": {
+          "shape": "name",
+          "documentation": "<p>The unique name of the domain.</p>",
+          "location": "uri",
+          "locationName": "DomainName"
+        }
+      }
+    },
+    "GetMatchesResponse": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "token",
+          "documentation": "<p>If there are additional results, this is the token for the next set of results.</p>"
+        },
+        "MatchGenerationDate": {
+          "shape": "timestamp",
+          "documentation": "<p>The timestamp this version of Match Result generated.</p>"
+        },
+        "PotentialMatches": {
+          "shape": "matchesNumber",
+          "documentation": "<p>The number of potential matches found.</p>"
+        },
+        "Matches": {
+          "shape": "MatchesList",
+          "documentation": "<p>The list of matched profiles for this instance.</p>"
         }
       }
     },
@@ -1674,6 +2558,10 @@
         "AllowProfileCreation": {
           "shape": "boolean",
           "documentation": "<p>Indicates whether a profile should be created when data is received if one doesn’t exist for an object of this type. The default is <code>FALSE</code>. If the AllowProfileCreation flag is set to <code>FALSE</code>, then the service tries to fetch a standard profile and associate this object with the profile. If it is set to <code>TRUE</code>, and if no match is found, then the service creates a new standard profile.</p>"
+        },
+        "SourceLastUpdatedTimestampFormat": {
+          "shape": "string1To255",
+          "documentation": "<p>The format of your <code>sourceLastUpdatedTimestamp</code> that was previously set up.</p>"
         },
         "Fields": {
           "shape": "FieldMap",
@@ -1730,6 +2618,10 @@
           "shape": "boolean",
           "documentation": "<p>Indicates whether a profile should be created when data is received if one doesn’t exist for an object of this type. The default is <code>FALSE</code>. If the AllowProfileCreation flag is set to <code>FALSE</code>, then the service tries to fetch a standard profile and associate this object with the profile. If it is set to <code>TRUE</code>, and if no match is found, then the service creates a new standard profile.</p>"
         },
+        "SourceLastUpdatedTimestampFormat": {
+          "shape": "string1To255",
+          "documentation": "<p>The format of your <code>sourceLastUpdatedTimestamp</code> that was previously set up.</p>"
+        },
         "Fields": {
           "shape": "FieldMap",
           "documentation": "<p>A map of the name and ObjectType field.</p>"
@@ -1738,6 +2630,174 @@
           "shape": "KeyMap",
           "documentation": "<p>A list of unique keys that can be used to map data to the profile.</p>"
         }
+      }
+    },
+    "GetWorkflowRequest": {
+      "type": "structure",
+      "required": [
+        "DomainName",
+        "WorkflowId"
+      ],
+      "members": {
+        "DomainName": {
+          "shape": "name",
+          "documentation": "<p>The unique name of the domain.</p>",
+          "location": "uri",
+          "locationName": "DomainName"
+        },
+        "WorkflowId": {
+          "shape": "uuid",
+          "documentation": "<p>Unique identifier for the workflow.</p>",
+          "location": "uri",
+          "locationName": "WorkflowId"
+        }
+      }
+    },
+    "GetWorkflowResponse": {
+      "type": "structure",
+      "members": {
+        "WorkflowId": {
+          "shape": "uuid",
+          "documentation": "<p>Unique identifier for the workflow.</p>"
+        },
+        "WorkflowType": {
+          "shape": "WorkflowType",
+          "documentation": "<p>The type of workflow. The only supported value is APPFLOW_INTEGRATION.</p>"
+        },
+        "Status": {
+          "shape": "Status",
+          "documentation": "<p>Status of workflow execution.</p>"
+        },
+        "ErrorDescription": {
+          "shape": "string1To255",
+          "documentation": "<p>Workflow error messages during execution (if any).</p>"
+        },
+        "StartDate": {
+          "shape": "timestamp",
+          "documentation": "<p>The timestamp that represents when workflow execution started.</p>"
+        },
+        "LastUpdatedAt": {
+          "shape": "timestamp",
+          "documentation": "<p>The timestamp that represents when workflow execution last updated.</p>"
+        },
+        "Attributes": {
+          "shape": "WorkflowAttributes",
+          "documentation": "<p>Attributes provided for workflow execution.</p>"
+        },
+        "Metrics": {
+          "shape": "WorkflowMetrics",
+          "documentation": "<p>Workflow specific execution metrics.</p>"
+        }
+      }
+    },
+    "GetWorkflowStepsRequest": {
+      "type": "structure",
+      "required": [
+        "DomainName",
+        "WorkflowId"
+      ],
+      "members": {
+        "DomainName": {
+          "shape": "name",
+          "documentation": "<p>The unique name of the domain.</p>",
+          "location": "uri",
+          "locationName": "DomainName"
+        },
+        "WorkflowId": {
+          "shape": "uuid",
+          "documentation": "<p>Unique identifier for the workflow.</p>",
+          "location": "uri",
+          "locationName": "WorkflowId"
+        },
+        "NextToken": {
+          "shape": "token",
+          "documentation": "<p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.</p>",
+          "location": "querystring",
+          "locationName": "next-token"
+        },
+        "MaxResults": {
+          "shape": "maxSize100",
+          "documentation": "<p>The maximum number of results to return per page.</p>",
+          "location": "querystring",
+          "locationName": "max-results"
+        }
+      }
+    },
+    "GetWorkflowStepsResponse": {
+      "type": "structure",
+      "members": {
+        "WorkflowId": {
+          "shape": "uuid",
+          "documentation": "<p>Unique identifier for the workflow.</p>"
+        },
+        "WorkflowType": {
+          "shape": "WorkflowType",
+          "documentation": "<p>The type of workflow. The only supported value is APPFLOW_INTEGRATION.</p>"
+        },
+        "Items": {
+          "shape": "WorkflowStepsList",
+          "documentation": "<p>List containing workflow step details.</p>"
+        },
+        "NextToken": {
+          "shape": "token",
+          "documentation": "<p>If there are additional results, this is the token for the next set of results.</p>"
+        }
+      }
+    },
+    "IdentityResolutionJob": {
+      "type": "structure",
+      "members": {
+        "DomainName": {
+          "shape": "name",
+          "documentation": "<p>The unique name of the domain.</p>"
+        },
+        "JobId": {
+          "shape": "uuid",
+          "documentation": "<p>The unique identifier of the Identity Resolution Job.</p>"
+        },
+        "Status": {
+          "shape": "IdentityResolutionJobStatus",
+          "documentation": "<p>The status of the Identity Resolution Job.</p> <ul> <li> <p> <code>PENDING</code>: The Identity Resolution Job is scheduled but has not started yet. If you turn off the Identity Resolution feature in your domain, jobs in the <code>PENDING</code> state are deleted.</p> </li> <li> <p> <code>PREPROCESSING</code>: The Identity Resolution Job is loading your data.</p> </li> <li> <p> <code>FIND_MATCHING</code>: The Identity Resolution Job is using the machine learning model to identify profiles that belong to the same matching group.</p> </li> <li> <p> <code>MERGING</code>: The Identity Resolution Job is merging duplicate profiles.</p> </li> <li> <p> <code>COMPLETED</code>: The Identity Resolution Job completed successfully.</p> </li> <li> <p> <code>PARTIAL_SUCCESS</code>: There's a system error and not all of the data is merged. The Identity Resolution Job writes a message indicating the source of the problem.</p> </li> <li> <p> <code>FAILED</code>: The Identity Resolution Job did not merge any data. It writes a message indicating the source of the problem.</p> </li> </ul>"
+        },
+        "JobStartTime": {
+          "shape": "timestamp",
+          "documentation": "<p>The timestamp of when the job was started or will be started.</p>"
+        },
+        "JobEndTime": {
+          "shape": "timestamp",
+          "documentation": "<p>The timestamp of when the job was completed.</p>"
+        },
+        "JobStats": {
+          "shape": "JobStats",
+          "documentation": "<p>Statistics about an Identity Resolution Job.</p>"
+        },
+        "ExportingLocation": {
+          "shape": "ExportingLocation",
+          "documentation": "<p>The S3 location where the Identity Resolution Job writes result files.</p>"
+        },
+        "Message": {
+          "shape": "stringTo2048",
+          "documentation": "<p>The error messages that are generated when the Identity Resolution Job runs.</p>"
+        }
+      },
+      "documentation": "<p>Information about the Identity Resolution Job.</p>"
+    },
+    "IdentityResolutionJobStatus": {
+      "type": "string",
+      "enum": [
+        "PENDING",
+        "PREPROCESSING",
+        "FIND_MATCHING",
+        "MERGING",
+        "COMPLETED",
+        "PARTIAL_SUCCESS",
+        "FAILED"
+      ]
+    },
+    "IdentityResolutionJobsList": {
+      "type": "list",
+      "member": {
+        "shape": "IdentityResolutionJob"
       }
     },
     "IncrementalPullConfig": {
@@ -1750,11 +2810,75 @@
       },
       "documentation": "<p>Specifies the configuration used when importing incremental records from the source.</p>"
     },
+    "IntegrationConfig": {
+      "type": "structure",
+      "members": {
+        "AppflowIntegration": {
+          "shape": "AppflowIntegration",
+          "documentation": "<p>Configuration data for <code>APPFLOW_INTEGRATION</code> workflow type.</p>"
+        }
+      },
+      "documentation": "<p>Configuration data for integration workflow.</p>"
+    },
     "IntegrationList": {
       "type": "list",
       "member": {
         "shape": "ListIntegrationItem"
       }
+    },
+    "JobSchedule": {
+      "type": "structure",
+      "required": [
+        "DayOfTheWeek",
+        "Time"
+      ],
+      "members": {
+        "DayOfTheWeek": {
+          "shape": "JobScheduleDayOfTheWeek",
+          "documentation": "<p>The day when the Identity Resolution Job should run every week.</p>"
+        },
+        "Time": {
+          "shape": "JobScheduleTime",
+          "documentation": "<p>The time when the Identity Resolution Job should run every week.</p>"
+        }
+      },
+      "documentation": "<p>The day and time when do you want to start the Identity Resolution Job every week.</p>"
+    },
+    "JobScheduleDayOfTheWeek": {
+      "type": "string",
+      "enum": [
+        "SUNDAY",
+        "MONDAY",
+        "TUESDAY",
+        "WEDNESDAY",
+        "THURSDAY",
+        "FRIDAY",
+        "SATURDAY"
+      ]
+    },
+    "JobScheduleTime": {
+      "type": "string",
+      "max": 5,
+      "min": 3,
+      "pattern": "^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$"
+    },
+    "JobStats": {
+      "type": "structure",
+      "members": {
+        "NumberOfProfilesReviewed": {
+          "shape": "long",
+          "documentation": "<p>The number of profiles reviewed.</p>"
+        },
+        "NumberOfMatchesFound": {
+          "shape": "long",
+          "documentation": "<p>The number of matches found.</p>"
+        },
+        "NumberOfMergesDone": {
+          "shape": "long",
+          "documentation": "<p>The number of merges completed.</p>"
+        }
+      },
+      "documentation": "<p>Statistics about the Identity Resolution Job.</p>"
     },
     "KeyMap": {
       "type": "map",
@@ -1792,6 +2916,12 @@
           "documentation": "<p>The maximum number of objects returned per page.</p>",
           "location": "querystring",
           "locationName": "max-results"
+        },
+        "IncludeHidden": {
+          "shape": "optionalBoolean",
+          "documentation": "<p>Boolean to indicate if hidden integration should be returned. Defaults to <code>False</code>.</p>",
+          "location": "querystring",
+          "locationName": "include-hidden"
         }
       }
     },
@@ -1865,12 +2995,50 @@
         }
       }
     },
+    "ListIdentityResolutionJobsRequest": {
+      "type": "structure",
+      "required": [
+        "DomainName"
+      ],
+      "members": {
+        "DomainName": {
+          "shape": "name",
+          "documentation": "<p>The unique name of the domain.</p>",
+          "location": "uri",
+          "locationName": "DomainName"
+        },
+        "NextToken": {
+          "shape": "token",
+          "documentation": "<p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.</p>",
+          "location": "querystring",
+          "locationName": "next-token"
+        },
+        "MaxResults": {
+          "shape": "maxSize100",
+          "documentation": "<p>The maximum number of results to return per page.</p>",
+          "location": "querystring",
+          "locationName": "max-results"
+        }
+      }
+    },
+    "ListIdentityResolutionJobsResponse": {
+      "type": "structure",
+      "members": {
+        "IdentityResolutionJobsList": {
+          "shape": "IdentityResolutionJobsList",
+          "documentation": "<p>A list of Identity Resolution Jobs.</p>"
+        },
+        "NextToken": {
+          "shape": "token",
+          "documentation": "<p>If there are additional results, this is the token for the next set of results.</p>"
+        }
+      }
+    },
     "ListIntegrationItem": {
       "type": "structure",
       "required": [
         "DomainName",
         "Uri",
-        "ObjectTypeName",
         "CreatedAt",
         "LastUpdatedAt"
       ],
@@ -1898,6 +3066,14 @@
         "Tags": {
           "shape": "TagMap",
           "documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
+        },
+        "ObjectTypeNames": {
+          "shape": "ObjectTypeNames",
+          "documentation": "<p>A map in which each key is an event type from an external application such as Segment or Shopify, and each value is an <code>ObjectTypeName</code> (template) used to ingest the event. It supports the following event types: <code>SegmentIdentify</code>, <code>ShopifyCreateCustomers</code>, <code>ShopifyUpdateCustomers</code>, <code>ShopifyCreateDraftOrders</code>, <code>ShopifyUpdateDraftOrders</code>, <code>ShopifyCreateOrders</code>, and <code>ShopifyUpdatedOrders</code>.</p>"
+        },
+        "WorkflowId": {
+          "shape": "string1To255",
+          "documentation": "<p>Unique identifier for the workflow.</p>"
         }
       },
       "documentation": "<p>An integration in list of integrations.</p>"
@@ -1925,6 +3101,12 @@
           "documentation": "<p>The maximum number of objects returned per page.</p>",
           "location": "querystring",
           "locationName": "max-results"
+        },
+        "IncludeHidden": {
+          "shape": "optionalBoolean",
+          "documentation": "<p>Boolean to indicate if hidden integration should be returned. Defaults to <code>False</code>.</p>",
+          "location": "querystring",
+          "locationName": "include-hidden"
         }
       }
     },
@@ -2109,6 +3291,10 @@
         "ProfileId": {
           "shape": "uuid",
           "documentation": "<p>The unique identifier of a customer profile.</p>"
+        },
+        "ObjectFilter": {
+          "shape": "ObjectFilter",
+          "documentation": "<p>Applies a filter to the response to include profile objects with the specified index values. This filter is only supported for ObjectTypeName _asset, _case and _order.</p>"
         }
       }
     },
@@ -2148,6 +3334,99 @@
         }
       }
     },
+    "ListWorkflowsItem": {
+      "type": "structure",
+      "required": [
+        "WorkflowType",
+        "WorkflowId",
+        "Status",
+        "StatusDescription",
+        "CreatedAt",
+        "LastUpdatedAt"
+      ],
+      "members": {
+        "WorkflowType": {
+          "shape": "WorkflowType",
+          "documentation": "<p>The type of workflow. The only supported value is APPFLOW_INTEGRATION.</p>"
+        },
+        "WorkflowId": {
+          "shape": "string1To255",
+          "documentation": "<p>Unique identifier for the workflow.</p>"
+        },
+        "Status": {
+          "shape": "Status",
+          "documentation": "<p>Status of workflow execution.</p>"
+        },
+        "StatusDescription": {
+          "shape": "string1To255",
+          "documentation": "<p>Description for workflow execution status.</p>"
+        },
+        "CreatedAt": {
+          "shape": "timestamp",
+          "documentation": "<p>Creation timestamp for workflow.</p>"
+        },
+        "LastUpdatedAt": {
+          "shape": "timestamp",
+          "documentation": "<p>Last updated timestamp for workflow.</p>"
+        }
+      },
+      "documentation": "<p>A workflow in list of workflows.</p>"
+    },
+    "ListWorkflowsRequest": {
+      "type": "structure",
+      "required": [
+        "DomainName"
+      ],
+      "members": {
+        "DomainName": {
+          "shape": "name",
+          "documentation": "<p>The unique name of the domain.</p>",
+          "location": "uri",
+          "locationName": "DomainName"
+        },
+        "WorkflowType": {
+          "shape": "WorkflowType",
+          "documentation": "<p>The type of workflow. The only supported value is APPFLOW_INTEGRATION.</p>"
+        },
+        "Status": {
+          "shape": "Status",
+          "documentation": "<p>Status of workflow execution.</p>"
+        },
+        "QueryStartDate": {
+          "shape": "timestamp",
+          "documentation": "<p>Retrieve workflows started after timestamp.</p>"
+        },
+        "QueryEndDate": {
+          "shape": "timestamp",
+          "documentation": "<p>Retrieve workflows ended after timestamp.</p>"
+        },
+        "NextToken": {
+          "shape": "token",
+          "documentation": "<p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.</p>",
+          "location": "querystring",
+          "locationName": "next-token"
+        },
+        "MaxResults": {
+          "shape": "maxSize100",
+          "documentation": "<p>The maximum number of results to return per page.</p>",
+          "location": "querystring",
+          "locationName": "max-results"
+        }
+      }
+    },
+    "ListWorkflowsResponse": {
+      "type": "structure",
+      "members": {
+        "Items": {
+          "shape": "WorkflowList",
+          "documentation": "<p>List containing workflow details.</p>"
+        },
+        "NextToken": {
+          "shape": "token",
+          "documentation": "<p>If there are additional results, this is the token for the next set of results.</p>"
+        }
+      }
+    },
     "MarketoConnectorOperator": {
       "type": "string",
       "enum": [
@@ -2182,10 +3461,152 @@
       },
       "documentation": "<p>The properties that are applied when Marketo is being used as a source.</p>"
     },
+    "MatchItem": {
+      "type": "structure",
+      "members": {
+        "MatchId": {
+          "shape": "string1To255",
+          "documentation": "<p>The unique identifiers for this group of profiles that match.</p>"
+        },
+        "ProfileIds": {
+          "shape": "ProfileIdList",
+          "documentation": "<p>A list of identifiers for profiles that match.</p>"
+        },
+        "ConfidenceScore": {
+          "shape": "Double",
+          "documentation": "<p>A number between 0 and 1 that represents the confidence level of assigning profiles to a matching group. A score of 1 likely indicates an exact match.</p>"
+        }
+      },
+      "documentation": "<p>The Match group object.</p>"
+    },
+    "MatchesList": {
+      "type": "list",
+      "member": {
+        "shape": "MatchItem"
+      }
+    },
+    "MatchingAttributes": {
+      "type": "list",
+      "member": {
+        "shape": "string1To255"
+      },
+      "max": 20,
+      "min": 1
+    },
+    "MatchingAttributesList": {
+      "type": "list",
+      "member": {
+        "shape": "MatchingAttributes"
+      },
+      "max": 10,
+      "min": 1
+    },
+    "MatchingRequest": {
+      "type": "structure",
+      "required": [
+        "Enabled"
+      ],
+      "members": {
+        "Enabled": {
+          "shape": "optionalBoolean",
+          "documentation": "<p>The flag that enables the matching process of duplicate profiles.</p>"
+        },
+        "JobSchedule": {
+          "shape": "JobSchedule",
+          "documentation": "<p>The day and time when do you want to start the Identity Resolution Job every week.</p>"
+        },
+        "AutoMerging": {
+          "shape": "AutoMerging",
+          "documentation": "<p>Configuration information about the auto-merging process.</p>"
+        },
+        "ExportingConfig": {
+          "shape": "ExportingConfig",
+          "documentation": "<p>Configuration information for exporting Identity Resolution results, for example, to an S3 bucket.</p>"
+        }
+      },
+      "documentation": "<p>The flag that enables the matching process of duplicate profiles.</p>"
+    },
+    "MatchingResponse": {
+      "type": "structure",
+      "members": {
+        "Enabled": {
+          "shape": "optionalBoolean",
+          "documentation": "<p>The flag that enables the matching process of duplicate profiles.</p>"
+        },
+        "JobSchedule": {
+          "shape": "JobSchedule",
+          "documentation": "<p>The day and time when do you want to start the Identity Resolution Job every week.</p>"
+        },
+        "AutoMerging": {
+          "shape": "AutoMerging",
+          "documentation": "<p>Configuration information about the auto-merging process.</p>"
+        },
+        "ExportingConfig": {
+          "shape": "ExportingConfig",
+          "documentation": "<p>Configuration information for exporting Identity Resolution results, for example, to an S3 bucket.</p>"
+        }
+      },
+      "documentation": "<p>The flag that enables the matching process of duplicate profiles.</p>"
+    },
+    "MergeProfilesRequest": {
+      "type": "structure",
+      "required": [
+        "DomainName",
+        "MainProfileId",
+        "ProfileIdsToBeMerged"
+      ],
+      "members": {
+        "DomainName": {
+          "shape": "name",
+          "documentation": "<p>The unique name of the domain.</p>",
+          "location": "uri",
+          "locationName": "DomainName"
+        },
+        "MainProfileId": {
+          "shape": "uuid",
+          "documentation": "<p>The identifier of the profile to be taken.</p>"
+        },
+        "ProfileIdsToBeMerged": {
+          "shape": "ProfileIdToBeMergedList",
+          "documentation": "<p>The identifier of the profile to be merged into MainProfileId.</p>"
+        },
+        "FieldSourceProfileIds": {
+          "shape": "FieldSourceProfileIds",
+          "documentation": "<p>The identifiers of the fields in the profile that has the information you want to apply to the merge. For example, say you want to merge EmailAddress from Profile1 into MainProfile. This would be the identifier of the EmailAddress field in Profile1. </p>"
+        }
+      }
+    },
+    "MergeProfilesResponse": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "shape": "message",
+          "documentation": "<p>A message that indicates the merge request is complete.</p>"
+        }
+      }
+    },
     "Object": {
       "type": "string",
       "max": 512,
       "pattern": "\\S+"
+    },
+    "ObjectFilter": {
+      "type": "structure",
+      "required": [
+        "KeyName",
+        "Values"
+      ],
+      "members": {
+        "KeyName": {
+          "shape": "name",
+          "documentation": "<p>A searchable identifier of a standard profile object. The predefined keys you can use to search for _asset include: _assetId, _assetName, _serialNumber. The predefined keys you can use to search for _case include: _caseId. The predefined keys you can use to search for _order include: _orderId.</p>"
+        },
+        "Values": {
+          "shape": "requestValueList",
+          "documentation": "<p>A list of key values.</p>"
+        }
+      },
+      "documentation": "<p>The filter applied to ListProfileObjects response to include profile objects with the specified index values. This filter is only supported for ObjectTypeName _asset, _case and _order.</p>"
     },
     "ObjectTypeField": {
       "type": "structure",
@@ -2210,7 +3631,7 @@
       "members": {
         "StandardIdentifiers": {
           "shape": "StandardIdentifierList",
-          "documentation": "<p>The types of keys that a ProfileObject can have. Each ProfileObject can have only 1 UNIQUE key but multiple PROFILE keys. PROFILE means that this key can be used to tie an object to a PROFILE. UNIQUE means that it can be used to uniquely identify an object. If a key a is marked as SECONDARY, it will be used to search for profiles after all other PROFILE keys have been searched. A LOOKUP_ONLY key is only used to match a profile but is not persisted to be used for searching of the profile. A NEW_ONLY key is only used if the profile does not already exist before the object is ingested, otherwise it is only used for matching objects to profiles.</p>"
+          "documentation": "<p>The types of keys that a ProfileObject can have. Each ProfileObject can have only 1 UNIQUE key but multiple PROFILE keys. PROFILE, ASSET, CASE, or ORDER means that this key can be used to tie an object to a PROFILE, ASSET, CASE, or ORDER respectively. UNIQUE means that it can be used to uniquely identify an object. If a key a is marked as SECONDARY, it will be used to search for profiles after all other PROFILE keys have been searched. A LOOKUP_ONLY key is only used to match a profile but is not persisted to be used for searching of the profile. A NEW_ONLY key is only used if the profile does not already exist before the object is ingested, otherwise it is only used for matching objects to profiles.</p>"
         },
         "FieldNames": {
           "shape": "FieldNameList",
@@ -2223,6 +3644,15 @@
       "type": "list",
       "member": {
         "shape": "ObjectTypeKey"
+      }
+    },
+    "ObjectTypeNames": {
+      "type": "map",
+      "key": {
+        "shape": "string1To255"
+      },
+      "value": {
+        "shape": "typeName"
       }
     },
     "OperatorPropertiesKeys": {
@@ -2265,7 +3695,7 @@
         },
         "AdditionalInformation": {
           "shape": "string1To1000",
-          "documentation": "<p>Any additional information relevant to the customer's profile.</p>"
+          "documentation": "<p>Any additional information relevant to the customer’s profile.</p>"
         },
         "PartyType": {
           "shape": "PartyType",
@@ -2289,11 +3719,11 @@
         },
         "BirthDate": {
           "shape": "string1To255",
-          "documentation": "<p>The customer’s birth date.</p>"
+          "documentation": "<p>The customer’s birth date. </p>"
         },
         "Gender": {
           "shape": "Gender",
-          "documentation": "<p>The gender with which the customer identifies.</p>"
+          "documentation": "<p>The gender with which the customer identifies. </p>"
         },
         "PhoneNumber": {
           "shape": "string1To255",
@@ -2313,7 +3743,7 @@
         },
         "EmailAddress": {
           "shape": "string1To255",
-          "documentation": "<p>The customer's email address, which has not been specified as a personal or business address.</p>"
+          "documentation": "<p>The customer’s email address, which has not been specified as a personal or business address. </p>"
         },
         "PersonalEmailAddress": {
           "shape": "string1To255",
@@ -2345,6 +3775,20 @@
         }
       },
       "documentation": "<p>The standard profile of a customer.</p>"
+    },
+    "ProfileIdList": {
+      "type": "list",
+      "member": {
+        "shape": "uuid"
+      }
+    },
+    "ProfileIdToBeMergedList": {
+      "type": "list",
+      "member": {
+        "shape": "uuid"
+      },
+      "max": 20,
+      "min": 1
     },
     "ProfileList": {
       "type": "list",
@@ -2378,8 +3822,7 @@
     "PutIntegrationRequest": {
       "type": "structure",
       "required": [
-        "DomainName",
-        "ObjectTypeName"
+        "DomainName"
       ],
       "members": {
         "DomainName": {
@@ -2403,6 +3846,10 @@
         "FlowDefinition": {
           "shape": "FlowDefinition",
           "documentation": "<p>The configuration that controls how Customer Profiles retrieves data from the source.</p>"
+        },
+        "ObjectTypeNames": {
+          "shape": "ObjectTypeNames",
+          "documentation": "<p>A map in which each key is an event type from an external application such as Segment or Shopify, and each value is an <code>ObjectTypeName</code> (template) used to ingest the event. It supports the following event types: <code>SegmentIdentify</code>, <code>ShopifyCreateCustomers</code>, <code>ShopifyUpdateCustomers</code>, <code>ShopifyCreateDraftOrders</code>, <code>ShopifyUpdateDraftOrders</code>, <code>ShopifyCreateOrders</code>, and <code>ShopifyUpdatedOrders</code>.</p>"
         }
       }
     },
@@ -2411,7 +3858,6 @@
       "required": [
         "DomainName",
         "Uri",
-        "ObjectTypeName",
         "CreatedAt",
         "LastUpdatedAt"
       ],
@@ -2439,6 +3885,14 @@
         "Tags": {
           "shape": "TagMap",
           "documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
+        },
+        "ObjectTypeNames": {
+          "shape": "ObjectTypeNames",
+          "documentation": "<p>A map in which each key is an event type from an external application such as Segment or Shopify, and each value is an <code>ObjectTypeName</code> (template) used to ingest the event. It supports the following event types: <code>SegmentIdentify</code>, <code>ShopifyCreateCustomers</code>, <code>ShopifyUpdateCustomers</code>, <code>ShopifyCreateDraftOrders</code>, <code>ShopifyUpdateDraftOrders</code>, <code>ShopifyCreateOrders</code>, and <code>ShopifyUpdatedOrders</code>.</p>"
+        },
+        "WorkflowId": {
+          "shape": "string1To255",
+          "documentation": "<p>Unique identifier for the workflow.</p>"
         }
       }
     },
@@ -2515,6 +3969,10 @@
           "shape": "boolean",
           "documentation": "<p>Indicates whether a profile should be created when data is received if one doesn’t exist for an object of this type. The default is <code>FALSE</code>. If the AllowProfileCreation flag is set to <code>FALSE</code>, then the service tries to fetch a standard profile and associate this object with the profile. If it is set to <code>TRUE</code>, and if no match is found, then the service creates a new standard profile.</p>"
         },
+        "SourceLastUpdatedTimestampFormat": {
+          "shape": "string1To255",
+          "documentation": "<p>The format of your <code>sourceLastUpdatedTimestamp</code> that was previously set up. </p>"
+        },
         "Fields": {
           "shape": "FieldMap",
           "documentation": "<p>A map of the name and ObjectType field.</p>"
@@ -2560,6 +4018,10 @@
           "shape": "boolean",
           "documentation": "<p>Indicates whether a profile should be created when data is received if one doesn’t exist for an object of this type. The default is <code>FALSE</code>. If the AllowProfileCreation flag is set to <code>FALSE</code>, then the service tries to fetch a standard profile and associate this object with the profile. If it is set to <code>TRUE</code>, and if no match is found, then the service creates a new standard profile.</p>"
         },
+        "SourceLastUpdatedTimestampFormat": {
+          "shape": "string1To255",
+          "documentation": "<p>The format of your <code>sourceLastUpdatedTimestamp</code> that was previously set up in fields that were parsed using <a href=\"https://docs.oracle.com/javase/10/docs/api/java/text/SimpleDateFormat.html\">SimpleDateFormat</a>. If you have <code>sourceLastUpdatedTimestamp</code> in your field, you must set up <code>sourceLastUpdatedTimestampFormat</code>.</p>"
+        },
         "Fields": {
           "shape": "FieldMap",
           "documentation": "<p>A map of the name and ObjectType field.</p>"
@@ -2581,6 +4043,11 @@
           "documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
         }
       }
+    },
+    "RoleArn": {
+      "type": "string",
+      "max": 512,
+      "pattern": "arn:aws:iam:.*:[0-9]+:.*"
     },
     "S3ConnectorOperator": {
       "type": "string",
@@ -2606,6 +4073,37 @@
         "VALIDATE_NUMERIC",
         "NO_OP"
       ]
+    },
+    "S3ExportingConfig": {
+      "type": "structure",
+      "required": [
+        "S3BucketName"
+      ],
+      "members": {
+        "S3BucketName": {
+          "shape": "s3BucketName",
+          "documentation": "<p>The name of the S3 bucket where Identity Resolution Jobs write result files.</p>"
+        },
+        "S3KeyName": {
+          "shape": "s3KeyNameCustomerOutputConfig",
+          "documentation": "<p>The S3 key name of the location where Identity Resolution Jobs write result files.</p>"
+        }
+      },
+      "documentation": "<p>Configuration information about the S3 bucket where Identity Resolution Jobs write result files.</p>"
+    },
+    "S3ExportingLocation": {
+      "type": "structure",
+      "members": {
+        "S3BucketName": {
+          "shape": "s3BucketName",
+          "documentation": "<p>The name of the S3 bucket name where Identity Resolution Jobs write result files.</p>"
+        },
+        "S3KeyName": {
+          "shape": "s3KeyName",
+          "documentation": "<p>The S3 key name of the location where Identity Resolution Jobs write result files.</p>"
+        }
+      },
+      "documentation": "<p>The S3 location where Identity Resolution Jobs write result files.</p>"
     },
     "S3SourceProperties": {
       "type": "structure",
@@ -2747,7 +4245,7 @@
         },
         "KeyName": {
           "shape": "name",
-          "documentation": "<p>A searchable identifier of a customer profile. The predefined keys you can use to search include: _account, _profileId, _fullName, _phone, _email, _ctrContactId, _marketoLeadId, _salesforceAccountId, _salesforceContactId, _zendeskUserId, _zendeskExternalId, _serviceNowSystemId.</p>"
+          "documentation": "<p>A searchable identifier of a customer profile. The predefined keys you can use to search include: _account, _profileId, _assetId, _caseId, _orderId, _fullName, _phone, _email, _ctrContactId, _marketoLeadId, _salesforceAccountId, _salesforceContactId, _salesforceAssetId, _zendeskUserId, _zendeskExternalId, _zendeskTicketId, _serviceNowSystemId, _serviceNowIncidentId, _segmentUserId, _shopifyCustomerId, _shopifyOrderId.</p>"
         },
         "Values": {
           "shape": "requestValueList",
@@ -2879,10 +4377,13 @@
       "type": "string",
       "enum": [
         "PROFILE",
+        "ASSET",
+        "CASE",
         "UNIQUE",
         "SECONDARY",
         "LOOKUP_ONLY",
-        "NEW_ONLY"
+        "NEW_ONLY",
+        "ORDER"
       ]
     },
     "StandardIdentifierList": {
@@ -2890,6 +4391,18 @@
       "member": {
         "shape": "StandardIdentifier"
       }
+    },
+    "Status": {
+      "type": "string",
+      "enum": [
+        "NOT_STARTED",
+        "IN_PROGRESS",
+        "COMPLETE",
+        "FAILED",
+        "SPLIT",
+        "RETRY",
+        "CANCELLED"
+      ]
     },
     "TagArn": {
       "type": "string",
@@ -3133,7 +4646,7 @@
       "members": {
         "DomainName": {
           "shape": "name",
-          "documentation": "<p>The unique name for the domain.</p>",
+          "documentation": "<p>The unique name of the domain.</p>",
           "location": "uri",
           "locationName": "DomainName"
         },
@@ -3148,6 +4661,10 @@
         "DeadLetterQueueUrl": {
           "shape": "sqsQueueUrl",
           "documentation": "<p>The URL of the SQS dead letter queue, which is used for reporting errors associated with ingesting data from third party applications. If specified as an empty string, it will clear any existing value. You must set up a policy on the DeadLetterQueue for the SendMessage operation to enable Amazon Connect Customer Profiles to send messages to the DeadLetterQueue.</p>"
+        },
+        "Matching": {
+          "shape": "MatchingRequest",
+          "documentation": "<p>The process of matching duplicate profiles. If <code>Matching</code> = <code>true</code>, Amazon Connect Customer Profiles starts a weekly batch process called Identity Resolution Job. If you do not specify a date and time for Identity Resolution Job to run, by default it runs every Saturday at 12AM UTC to detect duplicate profiles in your domains. </p> <p>After the Identity Resolution Job completes, use the <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html\">GetMatches</a> API to return and review the results. Or, if you have configured <code>ExportingConfig</code> in the <code>MatchingRequest</code>, you can download the results from S3.</p>"
         },
         "Tags": {
           "shape": "TagMap",
@@ -3165,7 +4682,7 @@
       "members": {
         "DomainName": {
           "shape": "name",
-          "documentation": "<p>The unique name for the domain.</p>"
+          "documentation": "<p>The unique name of the domain.</p>"
         },
         "DefaultExpirationDays": {
           "shape": "expirationDaysInteger",
@@ -3178,6 +4695,10 @@
         "DeadLetterQueueUrl": {
           "shape": "sqsQueueUrl",
           "documentation": "<p>The URL of the SQS dead letter queue, which is used for reporting errors associated with ingesting data from third party applications.</p>"
+        },
+        "Matching": {
+          "shape": "MatchingResponse",
+          "documentation": "<p>The process of matching duplicate profiles. If <code>Matching</code> = <code>true</code>, Amazon Connect Customer Profiles starts a weekly batch process called Identity Resolution Job. If you do not specify a date and time for Identity Resolution Job to run, by default it runs every Saturday at 12AM UTC to detect duplicate profiles in your domains. </p> <p>After the Identity Resolution Job completes, use the <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html\">GetMatches</a> API to return and review the results. Or, if you have configured <code>ExportingConfig</code> in the <code>MatchingRequest</code>, you can download the results from S3.</p>"
         },
         "CreatedAt": {
           "shape": "timestamp",
@@ -3212,7 +4733,7 @@
         },
         "AdditionalInformation": {
           "shape": "string0To1000",
-          "documentation": "<p>Any additional information relevant to the customer's profile.</p>"
+          "documentation": "<p>Any additional information relevant to the customer’s profile.</p>"
         },
         "AccountNumber": {
           "shape": "string0To255",
@@ -3240,15 +4761,15 @@
         },
         "BirthDate": {
           "shape": "string0To255",
-          "documentation": "<p>The customer’s birth date.</p>"
+          "documentation": "<p>The customer’s birth date. </p>"
         },
         "Gender": {
           "shape": "Gender",
-          "documentation": "<p>The gender with which the customer identifies.</p>"
+          "documentation": "<p>The gender with which the customer identifies. </p>"
         },
         "PhoneNumber": {
           "shape": "string0To255",
-          "documentation": "<p>The customer's phone number, which has not been specified as a mobile, home, or business number.</p>"
+          "documentation": "<p>The customer’s phone number, which has not been specified as a mobile, home, or business number. </p>"
         },
         "MobilePhoneNumber": {
           "shape": "string0To255",
@@ -3264,7 +4785,7 @@
         },
         "EmailAddress": {
           "shape": "string0To255",
-          "documentation": "<p>The customer's email address, which has not been specified as a personal or business address.</p>"
+          "documentation": "<p>The customer’s email address, which has not been specified as a personal or business address. </p>"
         },
         "PersonalEmailAddress": {
           "shape": "string0To255",
@@ -3307,6 +4828,54 @@
           "documentation": "<p>The unique identifier of a customer profile.</p>"
         }
       }
+    },
+    "WorkflowAttributes": {
+      "type": "structure",
+      "members": {
+        "AppflowIntegration": {
+          "shape": "AppflowIntegrationWorkflowAttributes",
+          "documentation": "<p>Workflow attributes specific to <code>APPFLOW_INTEGRATION</code> workflow.</p>"
+        }
+      },
+      "documentation": "<p>Structure to hold workflow attributes.</p>"
+    },
+    "WorkflowList": {
+      "type": "list",
+      "member": {
+        "shape": "ListWorkflowsItem"
+      }
+    },
+    "WorkflowMetrics": {
+      "type": "structure",
+      "members": {
+        "AppflowIntegration": {
+          "shape": "AppflowIntegrationWorkflowMetrics",
+          "documentation": "<p>Workflow execution metrics for <code>APPFLOW_INTEGRATION</code> workflow.</p>"
+        }
+      },
+      "documentation": "<p>Generic object containing workflow execution metrics.</p>"
+    },
+    "WorkflowStepItem": {
+      "type": "structure",
+      "members": {
+        "AppflowIntegration": {
+          "shape": "AppflowIntegrationWorkflowStep",
+          "documentation": "<p>Workflow step information specific to <code>APPFLOW_INTEGRATION</code> workflow.</p>"
+        }
+      },
+      "documentation": "<p>List containing steps in workflow.</p>"
+    },
+    "WorkflowStepsList": {
+      "type": "list",
+      "member": {
+        "shape": "WorkflowStepItem"
+      }
+    },
+    "WorkflowType": {
+      "type": "string",
+      "enum": [
+        "APPFLOW_INTEGRATION"
+      ]
     },
     "ZendeskConnectorOperator": {
       "type": "string",
@@ -3356,6 +4925,10 @@
     "long": {
       "type": "long"
     },
+    "matchesNumber": {
+      "type": "integer",
+      "min": 0
+    },
     "maxSize100": {
       "type": "integer",
       "max": 100,
@@ -3364,11 +4937,32 @@
     "message": {
       "type": "string"
     },
+    "optionalBoolean": {
+      "type": "boolean"
+    },
     "requestValueList": {
       "type": "list",
       "member": {
         "shape": "string1To255"
       }
+    },
+    "s3BucketName": {
+      "type": "string",
+      "max": 63,
+      "min": 3,
+      "pattern": "^[a-z0-9.-]+$"
+    },
+    "s3KeyName": {
+      "type": "string",
+      "max": 1024,
+      "min": 1,
+      "pattern": ".*"
+    },
+    "s3KeyNameCustomerOutputConfig": {
+      "type": "string",
+      "max": 800,
+      "min": 1,
+      "pattern": ".*"
     },
     "sqsQueueUrl": {
       "type": "string",

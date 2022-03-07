@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "EKS",
+        "description": "Adding new error code UnsupportedAddonModification for Addons in EKS"
+    },
+    {
+        "type": "feature",
+        "category": "Imagebuilder",
+        "description": "Adds support for specifying parameters to customize components for recipes. Expands configuration of the Amazon EC2 instances that are used for building and testing images, including the ability to specify commands to run on launch, and more control over installation and removal of the SSM agent."
+    },
+    {
+        "type": "feature",
+        "category": "Lambda",
+        "description": "Added support for AmazonMQRabbitMQ as an event source. Added support for VIRTUAL_HOST as SourceAccessType for streams event source mappings."
+    },
+    {
+        "type": "feature",
+        "category": "Mgn",
+        "description": "Bug fix: Remove not supported EBS encryption type \"NONE\""
+    }
+]

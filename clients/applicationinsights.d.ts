@@ -287,8 +287,12 @@ declare namespace ApplicationInsights {
      * The issues on the user side that block Application Insights from successfully monitoring an application. Example remarks include:   “Configuring application, detected 1 Errors, 3 Warnings”   “Configuring application, detected 1 Unconfigured Components”  
      */
     Remarks?: Remarks;
+    AutoConfigEnabled?: AutoConfigEnabled;
+    DiscoveryType?: DiscoveryType;
   }
   export type ApplicationInfoList = ApplicationInfo[];
+  export type AutoConfigEnabled = boolean;
+  export type AutoCreate = boolean;
   export type CWEMonitorEnabled = boolean;
   export type CloudWatchEventDetailType = string;
   export type CloudWatchEventId = string;
@@ -337,7 +341,7 @@ declare namespace ApplicationInsights {
     /**
      * The name of the resource group.
      */
-    ResourceGroupName: ResourceGroupName;
+    ResourceGroupName?: ResourceGroupName;
     /**
      *  When set to true, creates opsItems for any problems detected on an application. 
      */
@@ -354,6 +358,8 @@ declare namespace ApplicationInsights {
      * List of tags to add to the application. tag key (Key) and an associated tag value (Value). The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256 characters.
      */
     Tags?: TagList;
+    AutoConfigEnabled?: AutoConfigEnabled;
+    AutoCreate?: AutoCreate;
   }
   export interface CreateApplicationResponse {
     /**
@@ -580,6 +586,7 @@ declare namespace ApplicationInsights {
     Problem?: Problem;
   }
   export type DetectedWorkload = {[key: string]: WorkloadMetaData};
+  export type DiscoveryType = "RESOURCE_GROUP_BASED"|"ACCOUNT_BASED"|string;
   export type EbsCause = string;
   export type EbsEvent = string;
   export type EbsRequestId = string;
@@ -595,6 +602,7 @@ declare namespace ApplicationInsights {
   export type HealthEventTypeCode = string;
   export type HealthService = string;
   export type Insights = string;
+  export type LastRecurrenceTime = Date;
   export type LifeCycle = string;
   export type LineTime = Date;
   export interface ListApplicationsRequest {
@@ -758,6 +766,7 @@ declare namespace ApplicationInsights {
      * The token to request the next page of results.
      */
     NextToken?: PaginationToken;
+    ComponentName?: ComponentName;
   }
   export interface ListProblemsResponse {
     /**
@@ -768,6 +777,7 @@ declare namespace ApplicationInsights {
      * The token used to retrieve the next page of results. This value is null when there are no more results to return. 
      */
     NextToken?: PaginationToken;
+    ResourceGroupName?: ResourceGroupName;
   }
   export interface ListTagsForResourceRequest {
     /**
@@ -1043,11 +1053,14 @@ declare namespace ApplicationInsights {
      * Feedback provided by the user about the problem.
      */
     Feedback?: Feedback;
+    RecurringCount?: RecurringCount;
+    LastRecurrenceTime?: LastRecurrenceTime;
   }
   export type ProblemId = string;
   export type ProblemList = Problem[];
   export type RdsEventCategories = string;
   export type RdsEventMessage = string;
+  export type RecurringCount = number;
   export interface RelatedObservations {
     /**
      * The list of observations related to the problem.
@@ -1069,7 +1082,7 @@ declare namespace ApplicationInsights {
   export type StatesExecutionArn = string;
   export type StatesInput = string;
   export type StatesStatus = string;
-  export type Status = "IGNORE"|"RESOLVED"|"PENDING"|string;
+  export type Status = "IGNORE"|"RESOLVED"|"PENDING"|"RECURRING"|string;
   export interface Tag {
     /**
      * One part of a key-value pair that defines a tag. The maximum length of a tag key is 128 characters. The minimum length is 1 character.
@@ -1096,7 +1109,7 @@ declare namespace ApplicationInsights {
   export interface TagResourceResponse {
   }
   export type TagValue = string;
-  export type Tier = "CUSTOM"|"DEFAULT"|"DOT_NET_CORE"|"DOT_NET_WORKER"|"DOT_NET_WEB_TIER"|"DOT_NET_WEB"|"SQL_SERVER"|"SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP"|"MYSQL"|"POSTGRESQL"|"JAVA_JMX"|"ORACLE"|string;
+  export type Tier = "CUSTOM"|"DEFAULT"|"DOT_NET_CORE"|"DOT_NET_WORKER"|"DOT_NET_WEB_TIER"|"DOT_NET_WEB"|"SQL_SERVER"|"SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP"|"MYSQL"|"POSTGRESQL"|"JAVA_JMX"|"ORACLE"|"SAP_HANA_MULTI_NODE"|"SAP_HANA_SINGLE_NODE"|"SAP_HANA_HIGH_AVAILABILITY"|"SQL_SERVER_FAILOVER_CLUSTER_INSTANCE"|"SHAREPOINT"|"ACTIVE_DIRECTORY"|string;
   export type Title = string;
   export type Unit = string;
   export interface UntagResourceRequest {
@@ -1132,6 +1145,7 @@ declare namespace ApplicationInsights {
      *  Disassociates the SNS topic from the opsItem created for detected problems.
      */
     RemoveSNSTopic?: RemoveSNSTopic;
+    AutoConfigEnabled?: AutoConfigEnabled;
   }
   export interface UpdateApplicationResponse {
     /**
@@ -1160,6 +1174,7 @@ declare namespace ApplicationInsights {
      * The configuration settings of the component. The value is the escaped JSON of the configuration. For more information about the JSON format, see Working with JSON. You can send a request to DescribeComponentConfigurationRecommendation to see the recommended configuration for a component. For the complete format of the component configuration file, see Component Configuration.
      */
     ComponentConfiguration?: ComponentConfiguration;
+    AutoConfigEnabled?: AutoConfigEnabled;
   }
   export interface UpdateComponentConfigurationResponse {
   }

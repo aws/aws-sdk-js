@@ -1,6 +1,6 @@
-var helpers = require('./helpers');
-var AWS = helpers.AWS;
-var MockService = helpers.MockService;
+const helpers = require('./helpers');
+const AWS = helpers.AWS;
+const MockService = helpers.MockService;
 
 describe('region_config.js', function() {
   it('sets endpoint configuration option for default regions', function() {
@@ -108,34 +108,6 @@ describe('region_config.js', function() {
     });
     expect(service.isGlobalEndpoint).to.equal(false);
     expect(service.endpoint.host).to.equal('sts.us-gov-west-1.amazonaws.com');
-  });
-
-  describe('dualstack endpoint', function() {
-    it('uses dualstack endpoint if useDualstack flag configured and available for service', function() {
-      helpers.spyOn(AWS.util, 'isDualstackAvailable').andReturn(true);
-      var service = new MockService({
-        region: 'us-west-2',
-        useDualstack: true
-      });
-      expect(service.config.endpoint).to.equal('mockservice.dualstack.us-west-2.amazonaws.com');
-    });
-
-    it('does not use dualstack endpoint if useDualstack flag not set to true', function() {
-      helpers.spyOn(AWS.util, 'isDualstackAvailable').andReturn(true);
-      var service = new MockService({
-        region: 'us-west-2'
-      });
-      expect(service.config.endpoint).to.equal('mockservice.us-west-2.amazonaws.com');
-    });
-
-    it('does not use dualstack endpoint if not available for service', function() {
-      helpers.spyOn(AWS.util, 'isDualstackAvailable').andReturn(false);
-      var service = new MockService({
-        region: 'us-west-2',
-        useDualstack: true
-      });
-      expect(service.config.endpoint).to.equal('mockservice.us-west-2.amazonaws.com');
-    });
   });
 });
 

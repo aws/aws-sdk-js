@@ -897,7 +897,7 @@ declare namespace CloudSearch {
     PendingDeletion?: Boolean;
   }
   export type PartitionCount = number;
-  export type PartitionInstanceType = "search.m1.small"|"search.m1.large"|"search.m2.xlarge"|"search.m2.2xlarge"|"search.m3.medium"|"search.m3.large"|"search.m3.xlarge"|"search.m3.2xlarge"|"search.small"|"search.medium"|"search.large"|"search.xlarge"|"search.2xlarge"|string;
+  export type PartitionInstanceType = "search.m1.small"|"search.m1.large"|"search.m2.xlarge"|"search.m2.2xlarge"|"search.m3.medium"|"search.m3.large"|"search.m3.xlarge"|"search.m3.2xlarge"|"search.small"|"search.medium"|"search.large"|"search.xlarge"|"search.2xlarge"|"search.previousgeneration.small"|"search.previousgeneration.large"|"search.previousgeneration.xlarge"|"search.previousgeneration.2xlarge"|string;
   export type PolicyDocument = string;
   export interface ScalingParameters {
     /**

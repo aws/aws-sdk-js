@@ -83,6 +83,44 @@
       ],
       "documentation": "<p>This operation creates a data set.</p>"
     },
+    "CreateEventAction": {
+      "name": "CreateEventAction",
+      "http": {
+        "method": "POST",
+        "requestUri": "/v1/event-actions",
+        "responseCode": 201
+      },
+      "input": {
+        "shape": "CreateEventActionRequest"
+      },
+      "output": {
+        "shape": "CreateEventActionResponse",
+        "documentation": "<p>201 response</p>"
+      },
+      "errors": [
+        {
+          "shape": "ThrottlingException",
+          "documentation": "<p>429 response</p>"
+        },
+        {
+          "shape": "ValidationException",
+          "documentation": "<p>400 response</p>"
+        },
+        {
+          "shape": "InternalServerException",
+          "documentation": "<p>500 response</p>"
+        },
+        {
+          "shape": "ServiceLimitExceededException",
+          "documentation": "<p>402 response</p>"
+        },
+        {
+          "shape": "AccessDeniedException",
+          "documentation": "<p>403 response</p>"
+        }
+      ],
+      "documentation": "<p>This operation creates an event action.</p>"
+    },
     "CreateJob": {
       "name": "CreateJob",
       "http": {
@@ -235,6 +273,36 @@
       ],
       "documentation": "<p>This operation deletes a data set.</p>"
     },
+    "DeleteEventAction": {
+      "name": "DeleteEventAction",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/v1/event-actions/{EventActionId}",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "DeleteEventActionRequest"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException",
+          "documentation": "<p>404 response</p>"
+        },
+        {
+          "shape": "ThrottlingException",
+          "documentation": "<p>429 response</p>"
+        },
+        {
+          "shape": "ValidationException",
+          "documentation": "<p>400 response</p>"
+        },
+        {
+          "shape": "InternalServerException",
+          "documentation": "<p>500 response</p>"
+        }
+      ],
+      "documentation": "<p>This operation deletes the event action.</p>"
+    },
     "DeleteRevision": {
       "name": "DeleteRevision",
       "http": {
@@ -340,6 +408,40 @@
         }
       ],
       "documentation": "<p>This operation returns information about a data set.</p>"
+    },
+    "GetEventAction": {
+      "name": "GetEventAction",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v1/event-actions/{EventActionId}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "GetEventActionRequest"
+      },
+      "output": {
+        "shape": "GetEventActionResponse",
+        "documentation": "<p>200 response</p>"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException",
+          "documentation": "<p>404 response</p>"
+        },
+        {
+          "shape": "ThrottlingException",
+          "documentation": "<p>429 response</p>"
+        },
+        {
+          "shape": "ValidationException",
+          "documentation": "<p>400 response</p>"
+        },
+        {
+          "shape": "InternalServerException",
+          "documentation": "<p>500 response</p>"
+        }
+      ],
+      "documentation": "<p>This operation retrieves information about an event action.</p>"
     },
     "GetJob": {
       "name": "GetJob",
@@ -477,6 +579,40 @@
       ],
       "documentation": "<p>This operation lists your data sets. When listing by origin OWNED, results are sorted by CreatedAt in descending order. When listing by origin ENTITLED, there is no order and the maxResults parameter is ignored.</p>"
     },
+    "ListEventActions": {
+      "name": "ListEventActions",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v1/event-actions",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ListEventActionsRequest"
+      },
+      "output": {
+        "shape": "ListEventActionsResponse",
+        "documentation": "<p>200 response</p>"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException",
+          "documentation": "<p>404 response</p>"
+        },
+        {
+          "shape": "ThrottlingException",
+          "documentation": "<p>429 response</p>"
+        },
+        {
+          "shape": "ValidationException",
+          "documentation": "<p>400 response</p>"
+        },
+        {
+          "shape": "InternalServerException",
+          "documentation": "<p>500 response</p>"
+        }
+      ],
+      "documentation": "<p>This operation lists your event actions.</p>"
+    },
     "ListJobs": {
       "name": "ListJobs",
       "http": {
@@ -561,6 +697,47 @@
       },
       "errors": [],
       "documentation": "<p>This operation lists the tags on the resource.</p>"
+    },
+    "SendApiAsset": {
+      "name": "SendApiAsset",
+      "http": {
+        "method": "POST",
+        "requestUri": "/v1",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "SendApiAssetRequest"
+      },
+      "output": {
+        "shape": "SendApiAssetResponse",
+        "documentation": "<p>200 response</p>"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException",
+          "documentation": "<p>404 response</p>"
+        },
+        {
+          "shape": "ThrottlingException",
+          "documentation": "<p>429 response</p>"
+        },
+        {
+          "shape": "ValidationException",
+          "documentation": "<p>400 response</p>"
+        },
+        {
+          "shape": "InternalServerException",
+          "documentation": "<p>500 response</p>"
+        },
+        {
+          "shape": "AccessDeniedException",
+          "documentation": "<p>403 response</p>"
+        }
+      ],
+      "documentation": "<p>This operation invokes an API Gateway API asset. The request is proxied to the provider’s API Gateway API.</p>",
+      "endpoint": {
+        "hostPrefix": "api-fulfill."
+      }
     },
     "StartJob": {
       "name": "StartJob",
@@ -710,6 +887,44 @@
       ],
       "documentation": "<p>This operation updates a data set.</p>"
     },
+    "UpdateEventAction": {
+      "name": "UpdateEventAction",
+      "http": {
+        "method": "PATCH",
+        "requestUri": "/v1/event-actions/{EventActionId}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "UpdateEventActionRequest"
+      },
+      "output": {
+        "shape": "UpdateEventActionResponse",
+        "documentation": "<p>200 response</p>"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException",
+          "documentation": "<p>404 response</p>"
+        },
+        {
+          "shape": "ThrottlingException",
+          "documentation": "<p>429 response</p>"
+        },
+        {
+          "shape": "ValidationException",
+          "documentation": "<p>400 response</p>"
+        },
+        {
+          "shape": "InternalServerException",
+          "documentation": "<p>500 response</p>"
+        },
+        {
+          "shape": "AccessDeniedException",
+          "documentation": "<p>403 response</p>"
+        }
+      ],
+      "documentation": "<p>This operation updates the event action.</p>"
+    },
     "UpdateRevision": {
       "name": "UpdateRevision",
       "http": {
@@ -754,6 +969,62 @@
     }
   },
   "shapes": {
+    "Action": {
+      "type": "structure",
+      "members": {
+        "ExportRevisionToS3": {
+          "shape": "AutoExportRevisionToS3RequestDetails",
+          "documentation": "<p>Details for the export revision to Amazon S3 action.</p>"
+        }
+      },
+      "documentation": "<p>What occurs after a certain event.</p>"
+    },
+    "ApiDescription": {
+      "type": "string",
+      "documentation": "<p>The description of the API.</p>"
+    },
+    "ApiGatewayApiAsset": {
+      "type": "structure",
+      "members": {
+        "ApiDescription": {
+          "shape": "ApiDescription",
+          "documentation": "<p>The API description of the API asset.</p>"
+        },
+        "ApiEndpoint": {
+          "shape": "__string",
+          "documentation": "<p>The API endpoint of the API asset.</p>"
+        },
+        "ApiId": {
+          "shape": "__string",
+          "documentation": "<p>The unique identifier of the API asset.</p>"
+        },
+        "ApiKey": {
+          "shape": "__string",
+          "documentation": "<p>The API key of the API asset.</p>"
+        },
+        "ApiName": {
+          "shape": "__string",
+          "documentation": "<p>The API name of the API asset.</p>"
+        },
+        "ApiSpecificationDownloadUrl": {
+          "shape": "__string",
+          "documentation": "<p>The download URL of the API specification of the API asset.</p>"
+        },
+        "ApiSpecificationDownloadUrlExpiresAt": {
+          "shape": "Timestamp",
+          "documentation": "<p>The date and time that the upload URL expires, in ISO 8601 format.</p>"
+        },
+        "ProtocolType": {
+          "shape": "ProtocolType",
+          "documentation": "<p>The protocol type of the API asset.</p>"
+        },
+        "Stage": {
+          "shape": "__string",
+          "documentation": "<p>The stage of the API asset.</p>"
+        }
+      },
+      "documentation": "<p>The API Gateway API that is the asset.</p>"
+    },
     "Arn": {
       "type": "string",
       "documentation": "<p>An Amazon Resource Name (ARN) that uniquely identifies an AWS resource.</p>"
@@ -784,9 +1055,19 @@
       "type": "structure",
       "members": {
         "S3SnapshotAsset": {
-          "shape": "S3SnapshotAsset"
+          "shape": "S3SnapshotAsset",
+          "documentation": "<p>The S3 object that is the asset.</p>"
+        },
+        "RedshiftDataShareAsset": {
+          "shape": "RedshiftDataShareAsset",
+          "documentation": "<p>The Amazon Redshift datashare that is the asset.</p>"
+        },
+        "ApiGatewayApiAsset": {
+          "shape": "ApiGatewayApiAsset",
+          "documentation": "<p>Information about the API Gateway API asset.</p>"
         }
-      }
+      },
+      "documentation": "<p>Information about the asset.</p>"
     },
     "AssetEntry": {
       "type": "structure",
@@ -797,11 +1078,11 @@
         },
         "AssetDetails": {
           "shape": "AssetDetails",
-          "documentation": "<p>Information about the asset, including its size.</p>"
+          "documentation": "<p>Information about the asset.</p>"
         },
         "AssetType": {
           "shape": "AssetType",
-          "documentation": "<p>The type of file your data is stored in. Currently, the supported asset type is S3_SNAPSHOT.</p>"
+          "documentation": "<p>The type of asset that is added to a data set.</p>"
         },
         "CreatedAt": {
           "shape": "Timestamp",
@@ -817,7 +1098,7 @@
         },
         "Name": {
           "shape": "AssetName",
-          "documentation": "<p>The name of the asset. When importing from Amazon S3, the S3 object key is used as the asset name. When exporting to Amazon S3, the asset name is used as default target S3 object key.</p>"
+          "documentation": "<p>The name of the asset. When importing from Amazon S3, the S3 object key is used as the asset name. When exporting to Amazon S3, the asset name is used as default target S3 object key. When importing from Amazon API Gateway API, the API name is used as the asset name. When importing from Amazon Redshift, the datashare name is used as the asset name.</p>"
         },
         "RevisionId": {
           "shape": "Id",
@@ -832,7 +1113,7 @@
           "documentation": "<p>The date and time that the asset was last updated, in ISO 8601 format.</p>"
         }
       },
-      "documentation": "<p>An asset in AWS Data Exchange is a piece of data that can be stored as an S3 object. The asset can be a structured data file, an image file, or some other data file. When you create an import job for your files, you create an asset in AWS Data Exchange for each of those files.</p>",
+      "documentation": "<p>An asset in AWS Data Exchange is a piece of data (S3 object) or a means of fulfilling data (Amazon Redshift datashare or Amazon API Gateway API). The asset can be a structured data file, an image file, or some other data file that can be stored as an S3 object, an Amazon API Gateway API, or an Amazon Redshift datashare (Preview). When you create an import job for your files, API Gateway APIs, or Amazon Redshift datashares, you create an asset in AWS Data Exchange.</p>",
       "required": [
         "AssetType",
         "CreatedAt",
@@ -847,7 +1128,7 @@
     },
     "AssetName": {
       "type": "string",
-      "documentation": "<p>The name of the asset. When importing from Amazon S3, the S3 object key is used as the asset name. When exporting to Amazon S3, the asset name is used as default target S3 object key.</p>"
+      "documentation": "<p>The name of the asset. When importing from Amazon S3, the S3 object key is used as the asset name. When exporting to Amazon S3, the asset name is used as default target S3 object key. When importing from Amazon API Gateway API, the API name is used as the asset name. When importing from Amazon Redshift, the datashare name is used as the asset name.</p>"
     },
     "AssetSourceEntry": {
       "type": "structure",
@@ -869,9 +1150,45 @@
     },
     "AssetType": {
       "type": "string",
-      "documentation": "<p>The type of file your data is stored in. Currently, the supported asset type is S3_SNAPSHOT.</p>",
+      "documentation": "<p>The type of asset that is added to a data set.</p>",
       "enum": [
-        "S3_SNAPSHOT"
+        "S3_SNAPSHOT",
+        "REDSHIFT_DATA_SHARE",
+        "API_GATEWAY_API"
+      ]
+    },
+    "AutoExportRevisionDestinationEntry": {
+      "type": "structure",
+      "members": {
+        "Bucket": {
+          "shape": "__string",
+          "documentation": "<p>The S3 bucket that is the destination for the event action.</p>"
+        },
+        "KeyPattern": {
+          "shape": "__string",
+          "documentation": "<p>A string representing the pattern for generated names of the individual assets in the revision. For more information about key patterns, see <a href=\"https://docs.aws.amazon.com/data-exchange/latest/userguide/jobs.html#revision-export-keypatterns\">Key patterns when exporting revisions</a>.</p>"
+        }
+      },
+      "documentation": "<p>A revision destination is the Amazon S3 bucket folder destination to where the export will be sent.</p>",
+      "required": [
+        "Bucket"
+      ]
+    },
+    "AutoExportRevisionToS3RequestDetails": {
+      "type": "structure",
+      "members": {
+        "Encryption": {
+          "shape": "ExportServerSideEncryption",
+          "documentation": "<p>Encryption configuration for the auto export job.</p>"
+        },
+        "RevisionDestination": {
+          "shape": "AutoExportRevisionDestinationEntry",
+          "documentation": "<p>A revision destination is the Amazon S3 bucket folder destination to where the export will be sent.</p>"
+        }
+      },
+      "documentation": "<p>Details of the operation to be performed by the job.</p>",
+      "required": [
+        "RevisionDestination"
       ]
     },
     "CancelJobRequest": {
@@ -905,7 +1222,7 @@
       "members": {
         "AssetType": {
           "shape": "AssetType",
-          "documentation": "<p>The type of file your data is stored in. Currently, the supported asset type is S3_SNAPSHOT.</p>"
+          "documentation": "<p>The type of asset that is added to a data set.</p>"
         },
         "Description": {
           "shape": "Description",
@@ -936,7 +1253,7 @@
         },
         "AssetType": {
           "shape": "AssetType",
-          "documentation": "<p>The type of file your data is stored in. Currently, the supported asset type is S3_SNAPSHOT.</p>"
+          "documentation": "<p>The type of asset that is added to a data set.</p>"
         },
         "CreatedAt": {
           "shape": "Timestamp",
@@ -973,6 +1290,53 @@
         "UpdatedAt": {
           "shape": "Timestamp",
           "documentation": "<p>The date and time that the data set was last updated, in ISO 8601 format.</p>"
+        }
+      }
+    },
+    "CreateEventActionRequest": {
+      "type": "structure",
+      "members": {
+        "Action": {
+          "shape": "Action",
+          "documentation": "<p>What occurs after a certain event.</p>"
+        },
+        "Event": {
+          "shape": "Event",
+          "documentation": "<p>What occurs to start an action.</p>"
+        }
+      },
+      "documentation": "<p>The request body for CreateEventAction.</p>",
+      "required": [
+        "Action",
+        "Event"
+      ]
+    },
+    "CreateEventActionResponse": {
+      "type": "structure",
+      "members": {
+        "Action": {
+          "shape": "Action",
+          "documentation": "<p>What occurs after a certain event.</p>"
+        },
+        "Arn": {
+          "shape": "Arn",
+          "documentation": "<p>The ARN for the event action.</p>"
+        },
+        "CreatedAt": {
+          "shape": "Timestamp",
+          "documentation": "<p>The date and time that the event action was created, in ISO 8601 format.</p>"
+        },
+        "Event": {
+          "shape": "Event",
+          "documentation": "<p>What occurs to start an action.</p>"
+        },
+        "Id": {
+          "shape": "Id",
+          "documentation": "<p>The unique identifier for the event action.</p>"
+        },
+        "UpdatedAt": {
+          "shape": "Timestamp",
+          "documentation": "<p>The date and time that the event action was last updated, in ISO 8601 format.</p>"
         }
       }
     },
@@ -1059,7 +1423,7 @@
       "members": {
         "Arn": {
           "shape": "Arn",
-          "documentation": "<p>The ARN for the revision</p>"
+          "documentation": "<p>The ARN for the revision.</p>"
         },
         "Comment": {
           "shape": "__stringMin0Max16384",
@@ -1104,7 +1468,7 @@
         },
         "AssetType": {
           "shape": "AssetType",
-          "documentation": "<p>The type of file your data is stored in. Currently, the supported asset type is S3_SNAPSHOT.</p>"
+          "documentation": "<p>The type of asset that is added to a data set.</p>"
         },
         "CreatedAt": {
           "shape": "Timestamp",
@@ -1193,6 +1557,20 @@
         "DataSetId"
       ]
     },
+    "DeleteEventActionRequest": {
+      "type": "structure",
+      "members": {
+        "EventActionId": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "EventActionId",
+          "documentation": "<p>The unique identifier for the event action.</p>"
+        }
+      },
+      "required": [
+        "EventActionId"
+      ]
+    },
     "DeleteRevisionRequest": {
       "type": "structure",
       "members": {
@@ -1222,12 +1600,63 @@
       "type": "structure",
       "members": {
         "ImportAssetFromSignedUrlJobErrorDetails": {
-          "shape": "ImportAssetFromSignedUrlJobErrorDetails"
+          "shape": "ImportAssetFromSignedUrlJobErrorDetails",
+          "documentation": "<p>Information about the job error.</p>"
         },
         "ImportAssetsFromS3JobErrorDetails": {
-          "shape": "ListOfAssetSourceEntry"
+          "shape": "ListOfAssetSourceEntry",
+          "documentation": "<p>Information about the job error.</p>"
         }
-      }
+      },
+      "documentation": "<p>Information about the job error.</p>"
+    },
+    "Event": {
+      "type": "structure",
+      "members": {
+        "RevisionPublished": {
+          "shape": "RevisionPublished",
+          "documentation": "<p>What occurs to start the revision publish action.</p>"
+        }
+      },
+      "documentation": "<p>What occurs to start an action.</p>"
+    },
+    "EventActionEntry": {
+      "type": "structure",
+      "members": {
+        "Action": {
+          "shape": "Action",
+          "documentation": "<p>What occurs after a certain event.</p>"
+        },
+        "Arn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (ARN) for the event action.</p>"
+        },
+        "CreatedAt": {
+          "shape": "Timestamp",
+          "documentation": "<p>The date and time that the event action was created, in ISO 8601 format.</p>"
+        },
+        "Event": {
+          "shape": "Event",
+          "documentation": "<p>What occurs to start an action.</p>"
+        },
+        "Id": {
+          "shape": "Id",
+          "documentation": "<p>The unique identifier for the event action.</p>"
+        },
+        "UpdatedAt": {
+          "shape": "Timestamp",
+          "documentation": "<p>The date and time that the event action was last updated, in ISO 8601 format.</p>"
+        }
+      },
+      "documentation": "<p>An event action is an object that defines the relationship between a specific event and an automated action that will be taken on behalf of the customer.</p>",
+      "required": [
+        "Action",
+        "CreatedAt",
+        "Event",
+        "Id",
+        "Arn",
+        "UpdatedAt"
+      ]
     },
     "ExportAssetToSignedUrlRequestDetails": {
       "type": "structure",
@@ -1373,6 +1802,10 @@
         "RevisionDestinations": {
           "shape": "ListOfRevisionDestinationEntry",
           "documentation": "<p>The destination in Amazon S3 where the revision is exported.</p>"
+        },
+        "EventActionArn": {
+          "shape": "__string",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the event action.</p>"
         }
       },
       "documentation": "<p>Details about the export revisions to Amazon S3 response.</p>",
@@ -1386,14 +1819,14 @@
       "members": {
         "KmsKeyArn": {
           "shape": "__string",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the the AWS KMS key you want to use to encrypt the Amazon S3 objects. This parameter is required if you choose aws:kms as an encryption type.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the AWS KMS key you want to use to encrypt the Amazon S3 objects. This parameter is required if you choose aws:kms as an encryption type.</p>"
         },
         "Type": {
           "shape": "ServerSideEncryptionTypes",
           "documentation": "<p>The type of server side encryption used for encrypting the objects in Amazon S3.</p>"
         }
       },
-      "documentation": "<p>Encryption configuration of the export job. Includes the encryption type as well as the AWS KMS key. The KMS key is only necessary if you chose the KMS encryption type.</p>",
+      "documentation": "<p>Encryption configuration of the export job. Includes the encryption type in addition to the AWS KMS key. The KMS key is only necessary if you chose the KMS encryption. type.</p>",
       "required": [
         "Type"
       ]
@@ -1435,11 +1868,11 @@
         },
         "AssetDetails": {
           "shape": "AssetDetails",
-          "documentation": "<p>Information about the asset, including its size.</p>"
+          "documentation": "<p>Information about the asset.</p>"
         },
         "AssetType": {
           "shape": "AssetType",
-          "documentation": "<p>The type of file your data is stored in. Currently, the supported asset type is S3_SNAPSHOT.</p>"
+          "documentation": "<p>The type of asset that is added to a data set.</p>"
         },
         "CreatedAt": {
           "shape": "Timestamp",
@@ -1455,7 +1888,7 @@
         },
         "Name": {
           "shape": "AssetName",
-          "documentation": "<p>The name of the asset When importing from Amazon S3, the S3 object key is used as the asset name. When exporting to Amazon S3, the asset name is used as default target S3 object key.</p>"
+          "documentation": "<p>The name of the asset. When importing from Amazon S3, the S3 object key is used as the asset name. When exporting to Amazon S3, the asset name is used as default target S3 object key. When importing from Amazon API Gateway API, the API name is used as the asset name. When importing from Amazon Redshift, the datashare name is used as the asset name.</p>"
         },
         "RevisionId": {
           "shape": "Id",
@@ -1494,7 +1927,7 @@
         },
         "AssetType": {
           "shape": "AssetType",
-          "documentation": "<p>The type of file your data is stored in. Currently, the supported asset type is S3_SNAPSHOT.</p>"
+          "documentation": "<p>The type of asset that is added to a data set.</p>"
         },
         "CreatedAt": {
           "shape": "Timestamp",
@@ -1531,6 +1964,49 @@
         "UpdatedAt": {
           "shape": "Timestamp",
           "documentation": "<p>The date and time that the data set was last updated, in ISO 8601 format.</p>"
+        }
+      }
+    },
+    "GetEventActionRequest": {
+      "type": "structure",
+      "members": {
+        "EventActionId": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "EventActionId",
+          "documentation": "<p>The unique identifier for the event action.</p>"
+        }
+      },
+      "required": [
+        "EventActionId"
+      ]
+    },
+    "GetEventActionResponse": {
+      "type": "structure",
+      "members": {
+        "Action": {
+          "shape": "Action",
+          "documentation": "<p>What occurs after a certain event.</p>"
+        },
+        "Arn": {
+          "shape": "Arn",
+          "documentation": "<p>The ARN for the event action.</p>"
+        },
+        "CreatedAt": {
+          "shape": "Timestamp",
+          "documentation": "<p>The date and time that the event action was created, in ISO 8601 format.</p>"
+        },
+        "Event": {
+          "shape": "Event",
+          "documentation": "<p>What occurs to start an action.</p>"
+        },
+        "Id": {
+          "shape": "Id",
+          "documentation": "<p>The unique identifier for the event action.</p>"
+        },
+        "UpdatedAt": {
+          "shape": "Timestamp",
+          "documentation": "<p>The date and time that the event action was last updated, in ISO 8601 format.</p>"
         }
       }
     },
@@ -1611,7 +2087,7 @@
       "members": {
         "Arn": {
           "shape": "Arn",
-          "documentation": "<p>The ARN for the revision</p>"
+          "documentation": "<p>The ARN for the revision.</p>"
         },
         "Comment": {
           "shape": "__stringMin0Max16384",
@@ -1651,13 +2127,127 @@
       "type": "string",
       "documentation": "<p>A unique identifier.</p>"
     },
+    "ImportAssetFromApiGatewayApiRequestDetails": {
+      "type": "structure",
+      "members": {
+        "ApiDescription": {
+          "shape": "ApiDescription",
+          "documentation": "<p>The API description. Markdown supported.</p>"
+        },
+        "ApiId": {
+          "shape": "__string",
+          "documentation": "<p>The API Gateway API ID.</p>"
+        },
+        "ApiKey": {
+          "shape": "__string",
+          "documentation": "<p>The API Gateway API key.</p>"
+        },
+        "ApiName": {
+          "shape": "__string",
+          "documentation": "<p>The API name.</p>"
+        },
+        "ApiSpecificationMd5Hash": {
+          "shape": "__stringMin24Max24PatternAZaZ094AZaZ092AZaZ093",
+          "documentation": "<p>The Base64-encoded MD5 hash of the OpenAPI 3.0 JSON API specification file. It is used to ensure the integrity of the file.</p>"
+        },
+        "DataSetId": {
+          "shape": "Id",
+          "documentation": "<p>The data set ID.</p>"
+        },
+        "ProtocolType": {
+          "shape": "ProtocolType",
+          "documentation": "<p>The protocol type.</p>"
+        },
+        "RevisionId": {
+          "shape": "Id",
+          "documentation": "<p>The revision ID.</p>"
+        },
+        "Stage": {
+          "shape": "__string",
+          "documentation": "<p>The API stage.</p>"
+        }
+      },
+      "documentation": "<p>The request details.</p>",
+      "required": [
+        "ApiName",
+        "ProtocolType",
+        "ApiSpecificationMd5Hash",
+        "Stage",
+        "DataSetId",
+        "ApiId",
+        "RevisionId"
+      ]
+    },
+    "ImportAssetFromApiGatewayApiResponseDetails": {
+      "type": "structure",
+      "members": {
+        "ApiDescription": {
+          "shape": "ApiDescription",
+          "documentation": "<p>The API description.</p>"
+        },
+        "ApiId": {
+          "shape": "__string",
+          "documentation": "<p>The API ID.</p>"
+        },
+        "ApiKey": {
+          "shape": "__string",
+          "documentation": "<p>The API key.</p>"
+        },
+        "ApiName": {
+          "shape": "__string",
+          "documentation": "<p>The API name.</p>"
+        },
+        "ApiSpecificationMd5Hash": {
+          "shape": "__stringMin24Max24PatternAZaZ094AZaZ092AZaZ093",
+          "documentation": "<p>The Base64-encoded Md5 hash for the API asset, used to ensure the integrity of the API at that location.</p>"
+        },
+        "ApiSpecificationUploadUrl": {
+          "shape": "__string",
+          "documentation": "<p>The upload URL of the API specification.</p>"
+        },
+        "ApiSpecificationUploadUrlExpiresAt": {
+          "shape": "Timestamp",
+          "documentation": "<p>The date and time that the upload URL expires, in ISO 8601 format.</p>"
+        },
+        "DataSetId": {
+          "shape": "Id",
+          "documentation": "<p>The data set ID.</p>"
+        },
+        "ProtocolType": {
+          "shape": "ProtocolType",
+          "documentation": "<p>The protocol type.</p>"
+        },
+        "RevisionId": {
+          "shape": "Id",
+          "documentation": "<p>The revision ID.</p>"
+        },
+        "Stage": {
+          "shape": "__string",
+          "documentation": "<p>The API stage.</p>"
+        }
+      },
+      "documentation": "<p>The response details.</p>",
+      "required": [
+        "ApiSpecificationUploadUrlExpiresAt",
+        "ApiName",
+        "ProtocolType",
+        "ApiSpecificationMd5Hash",
+        "Stage",
+        "DataSetId",
+        "ApiId",
+        "RevisionId",
+        "ApiSpecificationUploadUrl"
+      ]
+    },
     "ImportAssetFromSignedUrlJobErrorDetails": {
       "type": "structure",
       "members": {
         "AssetName": {
-          "shape": "AssetName"
+          "shape": "AssetName",
+          "documentation": "<p>Information about the job error.</p>"
         }
       },
+      "documentation": "<p>Information about the job error.</p>",
       "required": [
         "AssetName"
       ]
@@ -1686,8 +2276,8 @@
       "required": [
         "DataSetId",
         "Md5Hash",
-        "RevisionId",
-        "AssetName"
+        "AssetName",
+        "RevisionId"
       ]
     },
     "ImportAssetFromSignedUrlResponseDetails": {
@@ -1695,7 +2285,7 @@
       "members": {
         "AssetName": {
           "shape": "AssetName",
-          "documentation": "<p>The name for the asset associated with this import response.</p>"
+          "documentation": "<p>The name for the asset associated with this import job.</p>"
         },
         "DataSetId": {
           "shape": "Id",
@@ -1722,6 +2312,52 @@
       "required": [
         "DataSetId",
         "AssetName",
+        "RevisionId"
+      ]
+    },
+    "ImportAssetsFromRedshiftDataSharesRequestDetails": {
+      "type": "structure",
+      "members": {
+        "AssetSources": {
+          "shape": "ListOfRedshiftDataShareAssetSourceEntry",
+          "documentation": "A list of Amazon Redshift datashare assets."
+        },
+        "DataSetId": {
+          "shape": "Id",
+          "documentation": "The unique identifier for the data set associated with this import job."
+        },
+        "RevisionId": {
+          "shape": "Id",
+          "documentation": "The unique identifier for the revision associated with this import job."
+        }
+      },
+      "documentation": "Details from an import from Amazon Redshift datashare request.",
+      "required": [
+        "DataSetId",
+        "AssetSources",
+        "RevisionId"
+      ]
+    },
+    "ImportAssetsFromRedshiftDataSharesResponseDetails": {
+      "type": "structure",
+      "members": {
+        "AssetSources": {
+          "shape": "ListOfRedshiftDataShareAssetSourceEntry",
+          "documentation": "A list of Amazon Redshift datashare asset sources."
+        },
+        "DataSetId": {
+          "shape": "Id",
+          "documentation": "The unique identifier for the data set associated with this import job."
+        },
+        "RevisionId": {
+          "shape": "Id",
+          "documentation": "The unique identifier for the revision associated with this import job."
+        }
+      },
+      "documentation": "Details from an import from Amazon Redshift datashare response.",
+      "required": [
+        "DataSetId",
+        "AssetSources",
         "RevisionId"
       ]
     },
@@ -1826,7 +2462,8 @@
           "documentation": "The code for the job error."
         },
         "Details": {
-          "shape": "Details"
+          "shape": "Details",
+          "documentation": "<p>The details about the job error.</p>"
         },
         "LimitName": {
           "shape": "JobErrorLimitName",
@@ -1860,7 +2497,8 @@
       "documentation": "The name of the limit that was reached.",
       "enum": [
         "Assets per revision",
-        "Asset size in GB"
+        "Asset size in GB",
+        "Amazon Redshift datashare assets per revision"
       ]
     },
     "JobErrorResourceTypes": {
@@ -1868,7 +2506,8 @@
       "documentation": "The types of resource which the job error can apply to.",
       "enum": [
         "REVISION",
-        "ASSET"
+        "ASSET",
+        "DATA_SET"
       ]
     },
     "ListDataSetRevisionsRequest": {
@@ -1946,6 +2585,42 @@
         }
       }
     },
+    "ListEventActionsRequest": {
+      "type": "structure",
+      "members": {
+        "EventSourceId": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "eventSourceId",
+          "documentation": "<p>The unique identifier for the event source.</p>"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "location": "querystring",
+          "locationName": "maxResults",
+          "documentation": "<p>The maximum number of results returned by a single call.</p>"
+        },
+        "NextToken": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "nextToken",
+          "documentation": "<p>The token value retrieved from a previous call to access the next page of results.</p>"
+        }
+      }
+    },
+    "ListEventActionsResponse": {
+      "type": "structure",
+      "members": {
+        "EventActions": {
+          "shape": "ListOfEventActionEntry",
+          "documentation": "<p>The event action objects listed by the request.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token value retrieved from a previous call to access the next page of results.</p>"
+        }
+      }
+    },
     "ListJobsRequest": {
       "type": "structure",
       "members": {
@@ -2000,6 +2675,13 @@
       "documentation": "<p>The list of sources for the assets.</p>",
       "member": {
         "shape": "AssetSourceEntry"
+      }
+    },
+    "ListOfRedshiftDataShareAssetSourceEntry": {
+      "type": "list",
+      "documentation": "A list of Amazon Redshift datashare asset sources.",
+      "member": {
+        "shape": "RedshiftDataShareAssetSourceEntry"
       }
     },
     "ListOfRevisionDestinationEntry": {
@@ -2104,11 +2786,45 @@
       "type": "structure",
       "members": {
         "ProductId": {
-          "shape": "__string"
+          "shape": "__string",
+          "documentation": "<p>The product ID of the origin of the data set.</p>"
         }
       },
+      "documentation": "<p>Information about the origin of the data set.</p>",
       "required": [
         "ProductId"
+      ]
+    },
+    "ProtocolType": {
+      "type": "string",
+      "enum": [
+        "REST"
+      ]
+    },
+    "RedshiftDataShareAsset": {
+      "type": "structure",
+      "members": {
+        "Arn": {
+          "shape": "__string",
+          "documentation": "The Amazon Resource Name (ARN) of the datashare asset."
+        }
+      },
+      "documentation": "The Amazon Redshift datashare asset.",
+      "required": [
+        "Arn"
+      ]
+    },
+    "RedshiftDataShareAssetSourceEntry": {
+      "type": "structure",
+      "members": {
+        "DataShareArn": {
+          "shape": "__string",
+          "documentation": "The Amazon Resource Name (ARN) of the datashare asset."
+        }
+      },
+      "documentation": "<p>The source of the Amazon Redshift datashare asset.</p>",
+      "required": [
+        "DataShareArn"
       ]
     },
     "RequestDetails": {
@@ -2133,6 +2849,14 @@
         "ImportAssetsFromS3": {
           "shape": "ImportAssetsFromS3RequestDetails",
           "documentation": "<p>Details about the import from Amazon S3 request.</p>"
+        },
+        "ImportAssetsFromRedshiftDataShares": {
+          "shape": "ImportAssetsFromRedshiftDataSharesRequestDetails",
+          "documentation": "<p>Details from an import from Amazon Redshift datashare request.</p>"
+        },
+        "ImportAssetFromApiGatewayApi": {
+          "shape": "ImportAssetFromApiGatewayApiRequestDetails",
+          "documentation": "<p>Information about the import asset from API Gateway API request.</p>"
         }
       },
       "documentation": "<p>The details for the request.</p>"
@@ -2159,6 +2883,14 @@
         "ImportAssetsFromS3": {
           "shape": "ImportAssetsFromS3ResponseDetails",
           "documentation": "<p>Details for the import from Amazon S3 response.</p>"
+        },
+        "ImportAssetsFromRedshiftDataShares": {
+          "shape": "ImportAssetsFromRedshiftDataSharesResponseDetails",
+          "documentation": "<p>Details from an import from Amazon Redshift datashare response.</p>"
+        },
+        "ImportAssetFromApiGatewayApi": {
+          "shape": "ImportAssetFromApiGatewayApiResponseDetails",
+          "documentation": "<p>The response details.</p>"
         }
       },
       "documentation": "<p>Details for the response.</p>"
@@ -2230,6 +2962,19 @@
         "UpdatedAt"
       ]
     },
+    "RevisionPublished": {
+      "type": "structure",
+      "members": {
+        "DataSetId": {
+          "shape": "Id",
+          "documentation": "<p>The data set ID of the published revision.</p>"
+        }
+      },
+      "documentation": "<p>Information about the published revision.</p>",
+      "required": [
+        "DataSetId"
+      ]
+    },
     "S3SnapshotAsset": {
       "type": "structure",
       "members": {
@@ -2242,6 +2987,79 @@
       "required": [
         "Size"
       ]
+    },
+    "SendApiAssetRequest": {
+      "type": "structure",
+      "members": {
+        "Body": {
+          "shape": "__string",
+          "documentation": "<p>The request body.</p>"
+        },
+        "QueryStringParameters": {
+          "shape": "MapOf__string",
+          "location": "querystring",
+          "documentation": "<p>Attach query string parameters to the end of the URI (for example, /v1/examplePath?exampleParam=exampleValue).</p>"
+        },
+        "AssetId": {
+          "shape": "__string",
+          "location": "header",
+          "locationName": "x-amzn-dataexchange-asset-id",
+          "documentation": "<p>Asset ID value for the API request.</p>"
+        },
+        "DataSetId": {
+          "shape": "__string",
+          "location": "header",
+          "locationName": "x-amzn-dataexchange-data-set-id",
+          "documentation": "<p>Data set ID value for the API request.</p>"
+        },
+        "RequestHeaders": {
+          "shape": "MapOf__string",
+          "location": "headers",
+          "locationName": "x-amzn-dataexchange-header-",
+          "documentation": "<p>Any header value prefixed with x-amzn-dataexchange-header- will have that stripped before sending the Asset API request. Use this when you want to override a header that AWS Data Exchange uses. Alternatively, you can use the header without a prefix to the HTTP request.</p>"
+        },
+        "Method": {
+          "shape": "__string",
+          "location": "header",
+          "locationName": "x-amzn-dataexchange-http-method",
+          "documentation": "<p>HTTP method value for the API request. Alternatively, you can use the appropriate verb in your request.</p>"
+        },
+        "Path": {
+          "shape": "__string",
+          "location": "header",
+          "locationName": "x-amzn-dataexchange-path",
+          "documentation": "<p>URI path value for the API request. Alternatively, you can set the URI path directly by invoking /v1/{pathValue}</p>"
+        },
+        "RevisionId": {
+          "shape": "__string",
+          "location": "header",
+          "locationName": "x-amzn-dataexchange-revision-id",
+          "documentation": "<p>Revision ID value for the API request.</p>"
+        }
+      },
+      "documentation": "<p>The request body for SendApiAsset.</p>",
+      "required": [
+        "DataSetId",
+        "RevisionId",
+        "AssetId"
+      ],
+      "payload": "Body"
+    },
+    "SendApiAssetResponse": {
+      "type": "structure",
+      "members": {
+        "Body": {
+          "shape": "__string",
+          "documentation": "<p>The response body from the underlying API tracked by the API asset.</p>"
+        },
+        "ResponseHeaders": {
+          "shape": "MapOf__string",
+          "documentation": "<p>The response headers from the underlying API tracked by the API asset.</p>",
+          "location": "headers",
+          "locationName": ""
+        }
+      },
+      "payload": "Body"
     },
     "ServerSideEncryptionTypes": {
       "type": "string",
@@ -2313,7 +3131,9 @@
         "IMPORT_ASSET_FROM_SIGNED_URL",
         "EXPORT_ASSETS_TO_S3",
         "EXPORT_ASSET_TO_SIGNED_URL",
-        "EXPORT_REVISIONS_TO_S3"
+        "EXPORT_REVISIONS_TO_S3",
+        "IMPORT_ASSETS_FROM_REDSHIFT_DATA_SHARES",
+        "IMPORT_ASSET_FROM_API_GATEWAY_API"
       ]
     },
     "UntagResourceRequest": {
@@ -2354,7 +3174,7 @@
         },
         "Name": {
           "shape": "AssetName",
-          "documentation": "<p>The name of the asset. When importing from Amazon S3, the S3 object key is used as the asset name. When exporting to Amazon S3, the asset name is used as default target S3 object key.</p>"
+          "documentation": "<p>The name of the asset. When importing from Amazon S3, the S3 object key is used as the asset name. When exporting to Amazon S3, the asset name is used as default target S3 object key. When importing from Amazon API Gateway API, the API name is used as the asset name. When importing from Amazon Redshift, the datashare name is used as the asset name.</p>"
         },
         "RevisionId": {
           "shape": "__string",
@@ -2380,11 +3200,11 @@
         },
         "AssetDetails": {
           "shape": "AssetDetails",
-          "documentation": "<p>Information about the asset, including its size.</p>"
+          "documentation": "<p>Information about the asset.</p>"
         },
         "AssetType": {
           "shape": "AssetType",
-          "documentation": "<p>The type of file your data is stored in. Currently, the supported asset type is S3_SNAPSHOT.</p>"
+          "documentation": "<p>The type of asset that is added to a data set.</p>"
         },
         "CreatedAt": {
           "shape": "Timestamp",
@@ -2400,7 +3220,7 @@
         },
         "Name": {
           "shape": "AssetName",
-          "documentation": "<p>The name of the asset When importing from Amazon S3, the S3 object key is used as the asset name. When exporting to Amazon S3, the asset name is used as default target S3 object key.</p>"
+          "documentation": "<p>The name of the asset. When importing from Amazon S3, the S3 object key is used as the asset name. When exporting to Amazon S3, the asset name is used as default target S3 object key. When importing from Amazon API Gateway API, the API name is used as the asset name. When importing from Amazon Redshift, the datashare name is used as the asset name.</p>"
         },
         "RevisionId": {
           "shape": "Id",
@@ -2448,7 +3268,7 @@
         },
         "AssetType": {
           "shape": "AssetType",
-          "documentation": "<p>The type of file your data is stored in. Currently, the supported asset type is S3_SNAPSHOT.</p>"
+          "documentation": "<p>The type of asset that is added to a data set.</p>"
         },
         "CreatedAt": {
           "shape": "Timestamp",
@@ -2481,6 +3301,54 @@
         "UpdatedAt": {
           "shape": "Timestamp",
           "documentation": "<p>The date and time that the data set was last updated, in ISO 8601 format.</p>"
+        }
+      }
+    },
+    "UpdateEventActionRequest": {
+      "type": "structure",
+      "members": {
+        "Action": {
+          "shape": "Action",
+          "documentation": "<p>What occurs after a certain event.</p>"
+        },
+        "EventActionId": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "EventActionId",
+          "documentation": "<p>The unique identifier for the event action.</p>"
+        }
+      },
+      "documentation": "<p>The request body for UpdateEventAction.</p>",
+      "required": [
+        "EventActionId"
+      ]
+    },
+    "UpdateEventActionResponse": {
+      "type": "structure",
+      "members": {
+        "Action": {
+          "shape": "Action",
+          "documentation": "<p>What occurs after a certain event.</p>"
+        },
+        "Arn": {
+          "shape": "Arn",
+          "documentation": "<p>The ARN for the event action.</p>"
+        },
+        "CreatedAt": {
+          "shape": "Timestamp",
+          "documentation": "<p>The date and time that the event action was created, in ISO 8601 format.</p>"
+        },
+        "Event": {
+          "shape": "Event",
+          "documentation": "<p>What occurs to start an action.</p>"
+        },
+        "Id": {
+          "shape": "Id",
+          "documentation": "<p>The unique identifier for the event action.</p>"
+        },
+        "UpdatedAt": {
+          "shape": "Timestamp",
+          "documentation": "<p>The date and time that the event action was last updated, in ISO 8601 format.</p>"
         }
       }
     },
@@ -2570,6 +3438,12 @@
       "type": "list",
       "member": {
         "shape": "DataSetEntry"
+      }
+    },
+    "ListOfEventActionEntry": {
+      "type": "list",
+      "member": {
+        "shape": "EventActionEntry"
       }
     },
     "ListOfJobEntry": {

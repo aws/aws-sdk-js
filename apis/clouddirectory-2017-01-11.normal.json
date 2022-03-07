@@ -3870,23 +3870,29 @@
           "shape": "ObjectReference"
         },
         "NextToken": {
-          "shape": "NextToken"
+          "shape": "NextToken",
+          "documentation": "<p>The pagination token.</p>"
         },
         "MaxResults": {
-          "shape": "NumberResults"
+          "shape": "NumberResults",
+          "documentation": "<p>The maximum number of items to be retrieved in a single call. This is an approximate number.</p>"
         }
-      }
+      },
+      "documentation": "<p>Lists parent objects that are associated with a given object in pagination fashion.</p>"
     },
     "BatchListObjectParentsResponse": {
       "type": "structure",
       "members": {
         "ParentLinks": {
-          "shape": "ObjectIdentifierAndLinkNameList"
+          "shape": "ObjectIdentifierAndLinkNameList",
+          "documentation": "<p>Returns a list of parent reference and LinkName Tuples.</p>"
         },
         "NextToken": {
-          "shape": "NextToken"
+          "shape": "NextToken",
+          "documentation": "<p>The pagination token.</p>"
         }
-      }
+      },
+      "documentation": "<p>Represents the output of a <a>ListObjectParents</a> response operation.</p>"
     },
     "BatchListObjectPolicies": {
       "type": "structure",
@@ -4096,7 +4102,8 @@
           "documentation": "<p>Retrieves attributes within a facet that are associated with an object.</p>"
         },
         "ListObjectParents": {
-          "shape": "BatchListObjectParents"
+          "shape": "BatchListObjectParents",
+          "documentation": "<p>Lists parent objects that are associated with a given object in pagination fashion.</p>"
         },
         "ListObjectPolicies": {
           "shape": "BatchListObjectPolicies",
@@ -4245,7 +4252,8 @@
           "documentation": "<p>The list of attributes to retrieve from the typed link.</p>"
         },
         "ListObjectParents": {
-          "shape": "BatchListObjectParentsResponse"
+          "shape": "BatchListObjectParentsResponse",
+          "documentation": "<p>The list of parent objects to retrieve.</p>"
         }
       },
       "documentation": "<p>Represents the output of a <code>BatchRead</code> success response operation.</p>"
@@ -6486,7 +6494,7 @@
       "members": {
         "Selector": {
           "shape": "SelectorObjectReference",
-          "documentation": "<p>A path selector supports easy selection of an object by the parent/child links leading to it from the directory root. Use the link names from each parent/child link to construct the path. Path selectors start with a slash (/) and link names are separated by slashes. For more information about paths, see <a href=\"https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_access_objects.html\">Access Objects</a>. You can identify an object in one of the following ways:</p> <ul> <li> <p> <i>$ObjectIdentifier</i> - An object identifier is an opaque string provided by Amazon Cloud Directory. When creating objects, the system will provide you with the identifier of the created object. An object’s identifier is immutable and no two objects will ever share the same object identifier</p> </li> <li> <p> <i>/some/path</i> - Identifies the object based on path</p> </li> <li> <p> <i>#SomeBatchReference</i> - Identifies the object in a batch call</p> </li> </ul>"
+          "documentation": "<p>A path selector supports easy selection of an object by the parent/child links leading to it from the directory root. Use the link names from each parent/child link to construct the path. Path selectors start with a slash (/) and link names are separated by slashes. For more information about paths, see <a href=\"https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_access_objects.html\">Access Objects</a>. You can identify an object in one of the following ways:</p> <ul> <li> <p> <i>$ObjectIdentifier</i> - An object identifier is an opaque string provided by Amazon Cloud Directory. When creating objects, the system will provide you with the identifier of the created object. An object’s identifier is immutable and no two objects will ever share the same object identifier. To identify an object with ObjectIdentifier, the ObjectIdentifier must be wrapped in double quotes. </p> </li> <li> <p> <i>/some/path</i> - Identifies the object based on path</p> </li> <li> <p> <i>#SomeBatchReference</i> - Identifies the object in a batch call</p> </li> </ul>"
         }
       },
       "documentation": "<p>The reference that identifies an object.</p>"
@@ -6737,11 +6745,11 @@
       "members": {
         "SchemaArn": {
           "shape": "Arn",
-          "documentation": "<p>The ARN of the schema that contains the facet with no minor component. See <a>arns</a> and <a href=\"https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_inplaceschemaupgrade.html\">In-Place Schema Upgrade</a> for a description of when to provide minor versions.</p>"
+          "documentation": "<p>The ARN of the schema that contains the facet with no minor component. See <a>arns</a> and <a href=\"https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_inplaceschemaupgrade.html\">In-Place Schema Upgrade</a> for a description of when to provide minor versions. If this value is set, FacetName must also be set.</p>"
         },
         "FacetName": {
           "shape": "FacetName",
-          "documentation": "<p>The name of the facet.</p>"
+          "documentation": "<p>The name of the facet. If this value is set, SchemaArn must also be set.</p>"
         }
       },
       "documentation": "<p>A facet.</p>"

@@ -52,6 +52,14 @@ declare class LookoutMetrics extends Service {
    */
   createMetricSet(callback?: (err: AWSError, data: LookoutMetrics.Types.CreateMetricSetResponse) => void): Request<LookoutMetrics.Types.CreateMetricSetResponse, AWSError>;
   /**
+   * Deactivates an anomaly detector.
+   */
+  deactivateAnomalyDetector(params: LookoutMetrics.Types.DeactivateAnomalyDetectorRequest, callback?: (err: AWSError, data: LookoutMetrics.Types.DeactivateAnomalyDetectorResponse) => void): Request<LookoutMetrics.Types.DeactivateAnomalyDetectorResponse, AWSError>;
+  /**
+   * Deactivates an anomaly detector.
+   */
+  deactivateAnomalyDetector(callback?: (err: AWSError, data: LookoutMetrics.Types.DeactivateAnomalyDetectorResponse) => void): Request<LookoutMetrics.Types.DeactivateAnomalyDetectorResponse, AWSError>;
+  /**
    * Deletes an alert.
    */
   deleteAlert(params: LookoutMetrics.Types.DeleteAlertRequest, callback?: (err: AWSError, data: LookoutMetrics.Types.DeleteAlertResponse) => void): Request<LookoutMetrics.Types.DeleteAlertResponse, AWSError>;
@@ -60,19 +68,19 @@ declare class LookoutMetrics extends Service {
    */
   deleteAlert(callback?: (err: AWSError, data: LookoutMetrics.Types.DeleteAlertResponse) => void): Request<LookoutMetrics.Types.DeleteAlertResponse, AWSError>;
   /**
-   * Deletes a detector. Deleting an anomaly detector will delete all of its corresponding resources including any configured datasets and alerts. 
+   * Deletes a detector. Deleting an anomaly detector will delete all of its corresponding resources including any configured datasets and alerts.
    */
   deleteAnomalyDetector(params: LookoutMetrics.Types.DeleteAnomalyDetectorRequest, callback?: (err: AWSError, data: LookoutMetrics.Types.DeleteAnomalyDetectorResponse) => void): Request<LookoutMetrics.Types.DeleteAnomalyDetectorResponse, AWSError>;
   /**
-   * Deletes a detector. Deleting an anomaly detector will delete all of its corresponding resources including any configured datasets and alerts. 
+   * Deletes a detector. Deleting an anomaly detector will delete all of its corresponding resources including any configured datasets and alerts.
    */
   deleteAnomalyDetector(callback?: (err: AWSError, data: LookoutMetrics.Types.DeleteAnomalyDetectorResponse) => void): Request<LookoutMetrics.Types.DeleteAnomalyDetectorResponse, AWSError>;
   /**
-   * Describes an alert.
+   * Describes an alert. Amazon Lookout for Metrics API actions are eventually consistent. If you do a read operation on a resource immediately after creating or modifying it, use retries to allow time for the write operation to complete.
    */
   describeAlert(params: LookoutMetrics.Types.DescribeAlertRequest, callback?: (err: AWSError, data: LookoutMetrics.Types.DescribeAlertResponse) => void): Request<LookoutMetrics.Types.DescribeAlertResponse, AWSError>;
   /**
-   * Describes an alert.
+   * Describes an alert. Amazon Lookout for Metrics API actions are eventually consistent. If you do a read operation on a resource immediately after creating or modifying it, use retries to allow time for the write operation to complete.
    */
   describeAlert(callback?: (err: AWSError, data: LookoutMetrics.Types.DescribeAlertResponse) => void): Request<LookoutMetrics.Types.DescribeAlertResponse, AWSError>;
   /**
@@ -84,19 +92,19 @@ declare class LookoutMetrics extends Service {
    */
   describeAnomalyDetectionExecutions(callback?: (err: AWSError, data: LookoutMetrics.Types.DescribeAnomalyDetectionExecutionsResponse) => void): Request<LookoutMetrics.Types.DescribeAnomalyDetectionExecutionsResponse, AWSError>;
   /**
-   * Describes a detector.
+   * Describes a detector. Amazon Lookout for Metrics API actions are eventually consistent. If you do a read operation on a resource immediately after creating or modifying it, use retries to allow time for the write operation to complete.
    */
   describeAnomalyDetector(params: LookoutMetrics.Types.DescribeAnomalyDetectorRequest, callback?: (err: AWSError, data: LookoutMetrics.Types.DescribeAnomalyDetectorResponse) => void): Request<LookoutMetrics.Types.DescribeAnomalyDetectorResponse, AWSError>;
   /**
-   * Describes a detector.
+   * Describes a detector. Amazon Lookout for Metrics API actions are eventually consistent. If you do a read operation on a resource immediately after creating or modifying it, use retries to allow time for the write operation to complete.
    */
   describeAnomalyDetector(callback?: (err: AWSError, data: LookoutMetrics.Types.DescribeAnomalyDetectorResponse) => void): Request<LookoutMetrics.Types.DescribeAnomalyDetectorResponse, AWSError>;
   /**
-   * Describes a dataset.
+   * Describes a dataset. Amazon Lookout for Metrics API actions are eventually consistent. If you do a read operation on a resource immediately after creating or modifying it, use retries to allow time for the write operation to complete.
    */
   describeMetricSet(params: LookoutMetrics.Types.DescribeMetricSetRequest, callback?: (err: AWSError, data: LookoutMetrics.Types.DescribeMetricSetResponse) => void): Request<LookoutMetrics.Types.DescribeMetricSetResponse, AWSError>;
   /**
-   * Describes a dataset.
+   * Describes a dataset. Amazon Lookout for Metrics API actions are eventually consistent. If you do a read operation on a resource immediately after creating or modifying it, use retries to allow time for the write operation to complete.
    */
   describeMetricSet(callback?: (err: AWSError, data: LookoutMetrics.Types.DescribeMetricSetResponse) => void): Request<LookoutMetrics.Types.DescribeMetricSetResponse, AWSError>;
   /**
@@ -124,21 +132,29 @@ declare class LookoutMetrics extends Service {
    */
   getSampleData(callback?: (err: AWSError, data: LookoutMetrics.Types.GetSampleDataResponse) => void): Request<LookoutMetrics.Types.GetSampleDataResponse, AWSError>;
   /**
-   * Lists the alerts attached to a detector.
+   * Lists the alerts attached to a detector. Amazon Lookout for Metrics API actions are eventually consistent. If you do a read operation on a resource immediately after creating or modifying it, use retries to allow time for the write operation to complete.
    */
   listAlerts(params: LookoutMetrics.Types.ListAlertsRequest, callback?: (err: AWSError, data: LookoutMetrics.Types.ListAlertsResponse) => void): Request<LookoutMetrics.Types.ListAlertsResponse, AWSError>;
   /**
-   * Lists the alerts attached to a detector.
+   * Lists the alerts attached to a detector. Amazon Lookout for Metrics API actions are eventually consistent. If you do a read operation on a resource immediately after creating or modifying it, use retries to allow time for the write operation to complete.
    */
   listAlerts(callback?: (err: AWSError, data: LookoutMetrics.Types.ListAlertsResponse) => void): Request<LookoutMetrics.Types.ListAlertsResponse, AWSError>;
   /**
-   * Lists the detectors in the current AWS Region.
+   * Lists the detectors in the current AWS Region. Amazon Lookout for Metrics API actions are eventually consistent. If you do a read operation on a resource immediately after creating or modifying it, use retries to allow time for the write operation to complete.
    */
   listAnomalyDetectors(params: LookoutMetrics.Types.ListAnomalyDetectorsRequest, callback?: (err: AWSError, data: LookoutMetrics.Types.ListAnomalyDetectorsResponse) => void): Request<LookoutMetrics.Types.ListAnomalyDetectorsResponse, AWSError>;
   /**
-   * Lists the detectors in the current AWS Region.
+   * Lists the detectors in the current AWS Region. Amazon Lookout for Metrics API actions are eventually consistent. If you do a read operation on a resource immediately after creating or modifying it, use retries to allow time for the write operation to complete.
    */
   listAnomalyDetectors(callback?: (err: AWSError, data: LookoutMetrics.Types.ListAnomalyDetectorsResponse) => void): Request<LookoutMetrics.Types.ListAnomalyDetectorsResponse, AWSError>;
+  /**
+   * Returns a list of measures that are potential causes or effects of an anomaly group.
+   */
+  listAnomalyGroupRelatedMetrics(params: LookoutMetrics.Types.ListAnomalyGroupRelatedMetricsRequest, callback?: (err: AWSError, data: LookoutMetrics.Types.ListAnomalyGroupRelatedMetricsResponse) => void): Request<LookoutMetrics.Types.ListAnomalyGroupRelatedMetricsResponse, AWSError>;
+  /**
+   * Returns a list of measures that are potential causes or effects of an anomaly group.
+   */
+  listAnomalyGroupRelatedMetrics(callback?: (err: AWSError, data: LookoutMetrics.Types.ListAnomalyGroupRelatedMetricsResponse) => void): Request<LookoutMetrics.Types.ListAnomalyGroupRelatedMetricsResponse, AWSError>;
   /**
    * Returns a list of anomaly groups.
    */
@@ -156,11 +172,11 @@ declare class LookoutMetrics extends Service {
    */
   listAnomalyGroupTimeSeries(callback?: (err: AWSError, data: LookoutMetrics.Types.ListAnomalyGroupTimeSeriesResponse) => void): Request<LookoutMetrics.Types.ListAnomalyGroupTimeSeriesResponse, AWSError>;
   /**
-   * Lists the datasets in the current AWS Region.
+   * Lists the datasets in the current AWS Region. Amazon Lookout for Metrics API actions are eventually consistent. If you do a read operation on a resource immediately after creating or modifying it, use retries to allow time for the write operation to complete.
    */
   listMetricSets(params: LookoutMetrics.Types.ListMetricSetsRequest, callback?: (err: AWSError, data: LookoutMetrics.Types.ListMetricSetsResponse) => void): Request<LookoutMetrics.Types.ListMetricSetsResponse, AWSError>;
   /**
-   * Lists the datasets in the current AWS Region.
+   * Lists the datasets in the current AWS Region. Amazon Lookout for Metrics API actions are eventually consistent. If you do a read operation on a resource immediately after creating or modifying it, use retries to allow time for the write operation to complete.
    */
   listMetricSets(callback?: (err: AWSError, data: LookoutMetrics.Types.ListMetricSetsResponse) => void): Request<LookoutMetrics.Types.ListMetricSetsResponse, AWSError>;
   /**
@@ -332,8 +348,9 @@ declare namespace LookoutMetrics {
     AnomalyDetectorFrequency?: Frequency;
   }
   export type AnomalyDetectorDescription = string;
+  export type AnomalyDetectorFailureType = "ACTIVATION_FAILURE"|"BACK_TEST_ACTIVATION_FAILURE"|"DELETION_FAILURE"|"DEACTIVATION_FAILURE"|string;
   export type AnomalyDetectorName = string;
-  export type AnomalyDetectorStatus = "ACTIVE"|"ACTIVATING"|"DELETING"|"FAILED"|"INACTIVE"|"BACK_TEST_ACTIVATING"|"BACK_TEST_ACTIVE"|"BACK_TEST_COMPLETE"|string;
+  export type AnomalyDetectorStatus = "ACTIVE"|"ACTIVATING"|"DELETING"|"FAILED"|"INACTIVE"|"LEARNING"|"BACK_TEST_ACTIVATING"|"BACK_TEST_ACTIVE"|"BACK_TEST_COMPLETE"|"DEACTIVATED"|"DEACTIVATING"|string;
   export interface AnomalyDetectorSummary {
     /**
      * The ARN of the detector.
@@ -456,11 +473,11 @@ declare namespace LookoutMetrics {
     /**
      * An IAM role that gives Amazon Lookout for Metrics permission to access the flow.
      */
-    RoleArn: Arn;
+    RoleArn?: Arn;
     /**
-     * The name of the flow.
+     *  name of the flow.
      */
-    FlowName: FlowName;
+    FlowName?: FlowName;
   }
   export type Arn = string;
   export interface BackTestAnomalyDetectorRequest {
@@ -478,7 +495,7 @@ declare namespace LookoutMetrics {
     /**
      * An IAM role that gives Amazon Lookout for Metrics permission to access data in Amazon CloudWatch.
      */
-    RoleArn: Arn;
+    RoleArn?: Arn;
   }
   export type ColumnName = string;
   export interface ContributionMatrix {
@@ -565,7 +582,7 @@ declare namespace LookoutMetrics {
      */
     MetricList: MetricList;
     /**
-     * After an interval ends, the amount of time that the detector waits before importing data.
+     * After an interval ends, the amount of seconds that the detector waits before importing data. Offset is only supported for S3 and Redshift datasources.
      */
     Offset?: Offset;
     /**
@@ -629,6 +646,14 @@ declare namespace LookoutMetrics {
   export type DatabaseHost = string;
   export type DatabasePort = number;
   export type DateTimeFormat = string;
+  export interface DeactivateAnomalyDetectorRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the anomaly detector.
+     */
+    AnomalyDetectorArn: Arn;
+  }
+  export interface DeactivateAnomalyDetectorResponse {
+  }
   export interface DeleteAlertRequest {
     /**
      * The ARN of the alert to delete.
@@ -722,13 +747,17 @@ declare namespace LookoutMetrics {
      */
     Status?: AnomalyDetectorStatus;
     /**
-     * The reason that the detector failed, if any.
+     * The reason that the detector failed.
      */
     FailureReason?: ErrorMessage;
     /**
      * The ARN of the KMS key to use to encrypt your data.
      */
     KmsKeyArn?: KmsKeyArn;
+    /**
+     * The process that caused the detector to fail.
+     */
+    FailureType?: AnomalyDetectorFailureType;
   }
   export interface DescribeMetricSetRequest {
     /**
@@ -762,7 +791,7 @@ declare namespace LookoutMetrics {
      */
     LastModificationTime?: Timestamp;
     /**
-     * The offset for the dataset.
+     * The offset in seconds. Only supported for S3 and Redshift datasources.
      */
     Offset?: Offset;
     /**
@@ -919,6 +948,25 @@ declare namespace LookoutMetrics {
   export type HistoricalDataPath = string;
   export type HistoricalDataPathList = HistoricalDataPath[];
   export type Integer = number;
+  export interface InterMetricImpactDetails {
+    /**
+     * The name of the measure.
+     */
+    MetricName?: MetricName;
+    /**
+     * The ID of the anomaly group.
+     */
+    AnomalyGroupId?: UUID;
+    /**
+     * Whether a measure is a potential cause of the anomaly group (CAUSE_OF_INPUT_ANOMALY_GROUP), or whether the measure is impacted by the anomaly group (EFFECT_OF_INPUT_ANOMALY_GROUP).
+     */
+    RelationshipType?: RelationshipType;
+    /**
+     * For potential causes (CAUSE_OF_INPUT_ANOMALY_GROUP), the percentage contribution the measure has in causing the anomalies.
+     */
+    ContributionPercentage?: MetricChangePercentage;
+  }
+  export type InterMetricImpactList = InterMetricImpactDetails[];
   export interface ItemizedMetricStats {
     /**
      * The name of the measure.
@@ -993,6 +1041,38 @@ declare namespace LookoutMetrics {
     AnomalyDetectorSummaryList?: AnomalyDetectorSummaryList;
     /**
      * If the response is truncated, the service returns this token. To retrieve the next set of results, use the token in the next request.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListAnomalyGroupRelatedMetricsRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the anomaly detector.
+     */
+    AnomalyDetectorArn: Arn;
+    /**
+     * The ID of the anomaly group.
+     */
+    AnomalyGroupId: UUID;
+    /**
+     * Filter for potential causes (CAUSE_OF_INPUT_ANOMALY_GROUP) or downstream effects (EFFECT_OF_INPUT_ANOMALY_GROUP) of the anomaly group.
+     */
+    RelationshipTypeFilter?: RelationshipType;
+    /**
+     * The maximum number of results to return.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * Specify the pagination token that's returned by a previous request to retrieve the next page of results.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListAnomalyGroupRelatedMetricsResponse {
+    /**
+     * Aggregated details about the measures contributing to the anomaly group, and the measures potentially impacted by the anomaly group.
+     */
+    InterMetricImpactList?: InterMetricImpactList;
+    /**
+     * The pagination token that's included if more results are available.
      */
     NextToken?: NextToken;
   }
@@ -1123,6 +1203,7 @@ declare namespace LookoutMetrics {
      */
     Namespace?: Namespace;
   }
+  export type MetricChangePercentage = number;
   export interface MetricLevelImpact {
     /**
      * The name of the measure.
@@ -1217,35 +1298,35 @@ declare namespace LookoutMetrics {
     /**
      * A string identifying the database instance.
      */
-    DBInstanceIdentifier: RDSDatabaseIdentifier;
+    DBInstanceIdentifier?: RDSDatabaseIdentifier;
     /**
      * The host name of the database.
      */
-    DatabaseHost: DatabaseHost;
+    DatabaseHost?: DatabaseHost;
     /**
      * The port number where the database can be accessed.
      */
-    DatabasePort: DatabasePort;
+    DatabasePort?: DatabasePort;
     /**
      * The Amazon Resource Name (ARN) of the AWS Secrets Manager role.
      */
-    SecretManagerArn: PoirotSecretManagerArn;
+    SecretManagerArn?: PoirotSecretManagerArn;
     /**
      * The name of the RDS database.
      */
-    DatabaseName: RDSDatabaseName;
+    DatabaseName?: RDSDatabaseName;
     /**
      * The name of the table in the database.
      */
-    TableName: TableName;
+    TableName?: TableName;
     /**
      * The Amazon Resource Name (ARN) of the role.
      */
-    RoleArn: Arn;
+    RoleArn?: Arn;
     /**
      * An object containing information about the Amazon Virtual Private Cloud (VPC) configuration.
      */
-    VpcConfiguration: VpcConfiguration;
+    VpcConfiguration?: VpcConfiguration;
   }
   export type RedshiftClusterIdentifier = string;
   export type RedshiftDatabaseName = string;
@@ -1253,41 +1334,42 @@ declare namespace LookoutMetrics {
     /**
      * A string identifying the Redshift cluster.
      */
-    ClusterIdentifier: RedshiftClusterIdentifier;
+    ClusterIdentifier?: RedshiftClusterIdentifier;
     /**
      * The name of the database host.
      */
-    DatabaseHost: DatabaseHost;
+    DatabaseHost?: DatabaseHost;
     /**
      * The port number where the database can be accessed.
      */
-    DatabasePort: DatabasePort;
+    DatabasePort?: DatabasePort;
     /**
      * The Amazon Resource Name (ARN) of the AWS Secrets Manager role.
      */
-    SecretManagerArn: PoirotSecretManagerArn;
+    SecretManagerArn?: PoirotSecretManagerArn;
     /**
      * The Redshift database name.
      */
-    DatabaseName: RedshiftDatabaseName;
+    DatabaseName?: RedshiftDatabaseName;
     /**
      * The table name of the Redshift database.
      */
-    TableName: TableName;
+    TableName?: TableName;
     /**
      * The Amazon Resource Name (ARN) of the role providing access to the database.
      */
-    RoleArn: Arn;
+    RoleArn?: Arn;
     /**
      * Contains information about the Amazon Virtual Private Cloud (VPC) configuration.
      */
-    VpcConfiguration: VpcConfiguration;
+    VpcConfiguration?: VpcConfiguration;
   }
+  export type RelationshipType = "CAUSE_OF_INPUT_ANOMALY_GROUP"|"EFFECT_OF_INPUT_ANOMALY_GROUP"|string;
   export interface S3SourceConfig {
     /**
      * The ARN of an IAM role that has read and write access permissions to the source S3 bucket.
      */
-    RoleArn: Arn;
+    RoleArn?: Arn;
     /**
      * A list of templated paths to the source files.
      */
@@ -1303,7 +1385,7 @@ declare namespace LookoutMetrics {
   }
   export interface SNSConfiguration {
     /**
-     * THe ARN of the IAM role that has access to the target SNS topic.
+     * The ARN of the IAM role that has access to the target SNS topic.
      */
     RoleArn: Arn;
     /**
@@ -1445,7 +1527,7 @@ declare namespace LookoutMetrics {
      */
     MetricList?: MetricList;
     /**
-     * After an interval ends, the amount of time that the detector waits before importing data.
+     * After an interval ends, the amount of seconds that the detector waits before importing data. Offset is only supported for S3 and Redshift datasources.
      */
     Offset?: Offset;
     /**

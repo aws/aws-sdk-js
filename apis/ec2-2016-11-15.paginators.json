@@ -24,6 +24,12 @@
       "output_token": "NextToken",
       "result_key": "ByoipCidrs"
     },
+    "DescribeCapacityReservationFleets": {
+      "input_token": "NextToken",
+      "limit_key": "MaxResults",
+      "output_token": "NextToken",
+      "result_key": "CapacityReservationFleets"
+    },
     "DescribeCapacityReservations": {
       "input_token": "NextToken",
       "limit_key": "MaxResults",
@@ -105,6 +111,12 @@
     "DescribeExportTasks": {
       "result_key": "ExportTasks"
     },
+    "DescribeFastLaunchImages": {
+      "input_token": "NextToken",
+      "limit_key": "MaxResults",
+      "output_token": "NextToken",
+      "result_key": "FastLaunchImages"
+    },
     "DescribeFastSnapshotRestores": {
       "input_token": "NextToken",
       "limit_key": "MaxResults",
@@ -174,6 +186,12 @@
       "output_token": "NextToken",
       "result_key": "InstanceCreditSpecifications"
     },
+    "DescribeInstanceEventWindows": {
+      "input_token": "NextToken",
+      "limit_key": "MaxResults",
+      "output_token": "NextToken",
+      "result_key": "InstanceEventWindows"
+    },
     "DescribeInstanceStatus": {
       "input_token": "NextToken",
       "limit_key": "MaxResults",
@@ -203,6 +221,24 @@
       "limit_key": "MaxResults",
       "output_token": "NextToken",
       "result_key": "InternetGateways"
+    },
+    "DescribeIpamPools": {
+      "input_token": "NextToken",
+      "limit_key": "MaxResults",
+      "output_token": "NextToken",
+      "result_key": "IpamPools"
+    },
+    "DescribeIpamScopes": {
+      "input_token": "NextToken",
+      "limit_key": "MaxResults",
+      "output_token": "NextToken",
+      "result_key": "IpamScopes"
+    },
+    "DescribeIpams": {
+      "input_token": "NextToken",
+      "limit_key": "MaxResults",
+      "output_token": "NextToken",
+      "result_key": "Ipams"
     },
     "DescribeIpv6Pools": {
       "input_token": "NextToken",
@@ -284,6 +320,18 @@
       "limit_key": "MaxResults",
       "output_token": "NextToken",
       "result_key": "NetworkAcls"
+    },
+    "DescribeNetworkInsightsAccessScopeAnalyses": {
+      "input_token": "NextToken",
+      "limit_key": "MaxResults",
+      "output_token": "NextToken",
+      "result_key": "NetworkInsightsAccessScopeAnalyses"
+    },
+    "DescribeNetworkInsightsAccessScopes": {
+      "input_token": "NextToken",
+      "limit_key": "MaxResults",
+      "output_token": "NextToken",
+      "result_key": "NetworkInsightsAccessScopes"
     },
     "DescribeNetworkInsightsAnalyses": {
       "input_token": "NextToken",
@@ -374,11 +422,23 @@
       "output_token": "NextToken",
       "result_key": "ScheduledInstanceSet"
     },
+    "DescribeSecurityGroupRules": {
+      "input_token": "NextToken",
+      "limit_key": "MaxResults",
+      "output_token": "NextToken",
+      "result_key": "SecurityGroupRules"
+    },
     "DescribeSecurityGroups": {
       "input_token": "NextToken",
       "limit_key": "MaxResults",
       "output_token": "NextToken",
       "result_key": "SecurityGroups"
+    },
+    "DescribeSnapshotTierStatus": {
+      "input_token": "NextToken",
+      "limit_key": "MaxResults",
+      "output_token": "NextToken",
+      "result_key": "SnapshotTierStatuses"
     },
     "DescribeSnapshots": {
       "input_token": "NextToken",
@@ -494,6 +554,12 @@
       "output_token": "NextToken",
       "result_key": "TransitGateways"
     },
+    "DescribeTrunkInterfaceAssociations": {
+      "input_token": "NextToken",
+      "limit_key": "MaxResults",
+      "output_token": "NextToken",
+      "result_key": "InterfaceAssociations"
+    },
     "DescribeVolumeStatus": {
       "input_token": "NextToken",
       "limit_key": "MaxResults",
@@ -578,6 +644,36 @@
       "output_token": "NextToken",
       "result_key": "CapacityReservationGroups"
     },
+    "GetInstanceTypesFromInstanceRequirements": {
+      "input_token": "NextToken",
+      "limit_key": "MaxResults",
+      "output_token": "NextToken",
+      "result_key": "InstanceTypes"
+    },
+    "GetIpamAddressHistory": {
+      "input_token": "NextToken",
+      "limit_key": "MaxResults",
+      "output_token": "NextToken",
+      "result_key": "HistoryRecords"
+    },
+    "GetIpamPoolAllocations": {
+      "input_token": "NextToken",
+      "limit_key": "MaxResults",
+      "output_token": "NextToken",
+      "result_key": "IpamPoolAllocations"
+    },
+    "GetIpamPoolCidrs": {
+      "input_token": "NextToken",
+      "limit_key": "MaxResults",
+      "output_token": "NextToken",
+      "result_key": "IpamPoolCidrs"
+    },
+    "GetIpamResourceCidrs": {
+      "input_token": "NextToken",
+      "limit_key": "MaxResults",
+      "output_token": "NextToken",
+      "result_key": "IpamResourceCidrs"
+    },
     "GetManagedPrefixListAssociations": {
       "input_token": "NextToken",
       "limit_key": "MaxResults",
@@ -589,6 +685,12 @@
       "limit_key": "MaxResults",
       "output_token": "NextToken",
       "result_key": "Entries"
+    },
+    "GetSpotPlacementScores": {
+      "input_token": "NextToken",
+      "limit_key": "MaxResults",
+      "output_token": "NextToken",
+      "result_key": "SpotPlacementScores"
     },
     "GetTransitGatewayAttachmentPropagations": {
       "input_token": "NextToken",
@@ -619,6 +721,24 @@
       "limit_key": "MaxResults",
       "output_token": "NextToken",
       "result_key": "TransitGatewayRouteTablePropagations"
+    },
+    "GetVpnConnectionDeviceTypes": {
+      "input_token": "NextToken",
+      "limit_key": "MaxResults",
+      "output_token": "NextToken",
+      "result_key": "VpnConnectionDeviceTypes"
+    },
+    "ListImagesInRecycleBin": {
+      "input_token": "NextToken",
+      "limit_key": "MaxResults",
+      "output_token": "NextToken",
+      "result_key": "Images"
+    },
+    "ListSnapshotsInRecycleBin": {
+      "input_token": "NextToken",
+      "limit_key": "MaxResults",
+      "output_token": "NextToken",
+      "result_key": "Snapshots"
     },
     "SearchLocalGatewayRoutes": {
       "input_token": "NextToken",

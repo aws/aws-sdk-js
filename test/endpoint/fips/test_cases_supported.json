@@ -1,0 +1,3470 @@
+[
+  {
+    "endpointPrefix": "access-analyzer",
+    "clientName": "AccessAnalyzer",
+    "region": "fips-ca-central-1",
+    "hostname": "access-analyzer-fips.ca-central-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "access-analyzer",
+    "clientName": "AccessAnalyzer",
+    "region": "fips-us-east-1",
+    "hostname": "access-analyzer-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "access-analyzer",
+    "clientName": "AccessAnalyzer",
+    "region": "fips-us-east-2",
+    "hostname": "access-analyzer-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "access-analyzer",
+    "clientName": "AccessAnalyzer",
+    "region": "fips-us-west-1",
+    "hostname": "access-analyzer-fips.us-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "access-analyzer",
+    "clientName": "AccessAnalyzer",
+    "region": "fips-us-west-2",
+    "hostname": "access-analyzer-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "acm",
+    "clientName": "ACM",
+    "region": "ca-central-1-fips",
+    "hostname": "acm-fips.ca-central-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "acm",
+    "clientName": "ACM",
+    "region": "us-east-1-fips",
+    "hostname": "acm-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "acm",
+    "clientName": "ACM",
+    "region": "us-east-2-fips",
+    "hostname": "acm-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "acm",
+    "clientName": "ACM",
+    "region": "us-west-1-fips",
+    "hostname": "acm-fips.us-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "acm",
+    "clientName": "ACM",
+    "region": "us-west-2-fips",
+    "hostname": "acm-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "acm-pca",
+    "clientName": "ACMPCA",
+    "region": "fips-ca-central-1",
+    "hostname": "acm-pca-fips.ca-central-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "acm-pca",
+    "clientName": "ACMPCA",
+    "region": "fips-us-east-1",
+    "hostname": "acm-pca-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "acm-pca",
+    "clientName": "ACMPCA",
+    "region": "fips-us-east-2",
+    "hostname": "acm-pca-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "acm-pca",
+    "clientName": "ACMPCA",
+    "region": "fips-us-west-1",
+    "hostname": "acm-pca-fips.us-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "acm-pca",
+    "clientName": "ACMPCA",
+    "region": "fips-us-west-2",
+    "hostname": "acm-pca-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "api.detective",
+    "clientName": "Detective",
+    "region": "us-east-1-fips",
+    "hostname": "api.detective-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "api.detective",
+    "clientName": "Detective",
+    "region": "us-east-2-fips",
+    "hostname": "api.detective-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "api.detective",
+    "clientName": "Detective",
+    "region": "us-west-1-fips",
+    "hostname": "api.detective-fips.us-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "api.detective",
+    "clientName": "Detective",
+    "region": "us-west-2-fips",
+    "hostname": "api.detective-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "api.ecr",
+    "clientName": "ECR",
+    "region": "fips-dkr-us-east-1",
+    "hostname": "ecr-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "api.ecr",
+    "clientName": "ECR",
+    "region": "fips-dkr-us-east-2",
+    "hostname": "ecr-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "api.ecr",
+    "clientName": "ECR",
+    "region": "fips-dkr-us-west-1",
+    "hostname": "ecr-fips.us-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "api.ecr",
+    "clientName": "ECR",
+    "region": "fips-dkr-us-west-2",
+    "hostname": "ecr-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "api.ecr",
+    "clientName": "ECR",
+    "region": "fips-us-east-1",
+    "hostname": "ecr-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "api.ecr",
+    "clientName": "ECR",
+    "region": "fips-us-east-2",
+    "hostname": "ecr-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "api.ecr",
+    "clientName": "ECR",
+    "region": "fips-us-west-1",
+    "hostname": "ecr-fips.us-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "api.ecr",
+    "clientName": "ECR",
+    "region": "fips-us-west-2",
+    "hostname": "ecr-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "api.fleethub.iot",
+    "clientName": "IoTFleetHub",
+    "region": "fips-ca-central-1",
+    "hostname": "api.fleethub.iot-fips.ca-central-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "api.fleethub.iot",
+    "clientName": "IoTFleetHub",
+    "region": "fips-us-east-1",
+    "hostname": "api.fleethub.iot-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "api.fleethub.iot",
+    "clientName": "IoTFleetHub",
+    "region": "fips-us-east-2",
+    "hostname": "api.fleethub.iot-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "api.fleethub.iot",
+    "clientName": "IoTFleetHub",
+    "region": "fips-us-west-2",
+    "hostname": "api.fleethub.iot-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "api.sagemaker",
+    "clientName": "SageMaker",
+    "region": "us-east-1-fips",
+    "hostname": "api-fips.sagemaker.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "api.sagemaker",
+    "clientName": "SageMaker",
+    "region": "us-east-2-fips",
+    "hostname": "api-fips.sagemaker.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "api.sagemaker",
+    "clientName": "SageMaker",
+    "region": "us-west-1-fips",
+    "hostname": "api-fips.sagemaker.us-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "api.sagemaker",
+    "clientName": "SageMaker",
+    "region": "us-west-2-fips",
+    "hostname": "api-fips.sagemaker.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "athena",
+    "clientName": "Athena",
+    "region": "fips-us-east-1",
+    "hostname": "athena-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "athena",
+    "clientName": "Athena",
+    "region": "fips-us-east-2",
+    "hostname": "athena-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "athena",
+    "clientName": "Athena",
+    "region": "fips-us-west-1",
+    "hostname": "athena-fips.us-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "athena",
+    "clientName": "Athena",
+    "region": "fips-us-west-2",
+    "hostname": "athena-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "batch",
+    "clientName": "Batch",
+    "region": "fips-us-east-1",
+    "hostname": "fips.batch.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "batch",
+    "clientName": "Batch",
+    "region": "fips-us-east-2",
+    "hostname": "fips.batch.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "batch",
+    "clientName": "Batch",
+    "region": "fips-us-west-1",
+    "hostname": "fips.batch.us-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "batch",
+    "clientName": "Batch",
+    "region": "fips-us-west-2",
+    "hostname": "fips.batch.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "cloudcontrolapi",
+    "clientName": "CloudControl",
+    "region": "fips-ca-central-1",
+    "hostname": "cloudcontrolapi-fips.ca-central-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "cloudcontrolapi",
+    "clientName": "CloudControl",
+    "region": "fips-us-east-1",
+    "hostname": "cloudcontrolapi-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "cloudcontrolapi",
+    "clientName": "CloudControl",
+    "region": "fips-us-east-2",
+    "hostname": "cloudcontrolapi-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "cloudcontrolapi",
+    "clientName": "CloudControl",
+    "region": "fips-us-west-1",
+    "hostname": "cloudcontrolapi-fips.us-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "cloudcontrolapi",
+    "clientName": "CloudControl",
+    "region": "fips-us-west-2",
+    "hostname": "cloudcontrolapi-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "cloudformation",
+    "clientName": "CloudFormation",
+    "region": "us-east-1-fips",
+    "hostname": "cloudformation-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "cloudformation",
+    "clientName": "CloudFormation",
+    "region": "us-east-2-fips",
+    "hostname": "cloudformation-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "cloudformation",
+    "clientName": "CloudFormation",
+    "region": "us-west-1-fips",
+    "hostname": "cloudformation-fips.us-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "cloudformation",
+    "clientName": "CloudFormation",
+    "region": "us-west-2-fips",
+    "hostname": "cloudformation-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "cloudtrail",
+    "clientName": "CloudTrail",
+    "region": "fips-us-east-1",
+    "hostname": "cloudtrail-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "cloudtrail",
+    "clientName": "CloudTrail",
+    "region": "fips-us-east-2",
+    "hostname": "cloudtrail-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "cloudtrail",
+    "clientName": "CloudTrail",
+    "region": "fips-us-west-1",
+    "hostname": "cloudtrail-fips.us-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "cloudtrail",
+    "clientName": "CloudTrail",
+    "region": "fips-us-west-2",
+    "hostname": "cloudtrail-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "codebuild",
+    "clientName": "CodeBuild",
+    "region": "us-east-1-fips",
+    "hostname": "codebuild-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "codebuild",
+    "clientName": "CodeBuild",
+    "region": "us-east-2-fips",
+    "hostname": "codebuild-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "codebuild",
+    "clientName": "CodeBuild",
+    "region": "us-west-1-fips",
+    "hostname": "codebuild-fips.us-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "codebuild",
+    "clientName": "CodeBuild",
+    "region": "us-west-2-fips",
+    "hostname": "codebuild-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "codedeploy",
+    "clientName": "CodeDeploy",
+    "region": "us-east-1-fips",
+    "hostname": "codedeploy-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "codedeploy",
+    "clientName": "CodeDeploy",
+    "region": "us-east-2-fips",
+    "hostname": "codedeploy-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "codedeploy",
+    "clientName": "CodeDeploy",
+    "region": "us-west-1-fips",
+    "hostname": "codedeploy-fips.us-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "codedeploy",
+    "clientName": "CodeDeploy",
+    "region": "us-west-2-fips",
+    "hostname": "codedeploy-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "codepipeline",
+    "clientName": "CodePipeline",
+    "region": "fips-ca-central-1",
+    "hostname": "codepipeline-fips.ca-central-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "codepipeline",
+    "clientName": "CodePipeline",
+    "region": "fips-us-east-1",
+    "hostname": "codepipeline-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "codepipeline",
+    "clientName": "CodePipeline",
+    "region": "fips-us-east-2",
+    "hostname": "codepipeline-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "codepipeline",
+    "clientName": "CodePipeline",
+    "region": "fips-us-west-1",
+    "hostname": "codepipeline-fips.us-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "codepipeline",
+    "clientName": "CodePipeline",
+    "region": "fips-us-west-2",
+    "hostname": "codepipeline-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "cognito-identity",
+    "clientName": "CognitoIdentity",
+    "region": "fips-us-east-1",
+    "hostname": "cognito-identity-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "cognito-identity",
+    "clientName": "CognitoIdentity",
+    "region": "fips-us-east-2",
+    "hostname": "cognito-identity-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "cognito-identity",
+    "clientName": "CognitoIdentity",
+    "region": "fips-us-west-2",
+    "hostname": "cognito-identity-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "cognito-idp",
+    "clientName": "CognitoIdentityServiceProvider",
+    "region": "fips-us-east-1",
+    "hostname": "cognito-idp-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "cognito-idp",
+    "clientName": "CognitoIdentityServiceProvider",
+    "region": "fips-us-east-2",
+    "hostname": "cognito-idp-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "cognito-idp",
+    "clientName": "CognitoIdentityServiceProvider",
+    "region": "fips-us-west-1",
+    "hostname": "cognito-idp-fips.us-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "cognito-idp",
+    "clientName": "CognitoIdentityServiceProvider",
+    "region": "fips-us-west-2",
+    "hostname": "cognito-idp-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "comprehend",
+    "clientName": "Comprehend",
+    "region": "fips-us-east-1",
+    "hostname": "comprehend-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "comprehend",
+    "clientName": "Comprehend",
+    "region": "fips-us-east-2",
+    "hostname": "comprehend-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "comprehend",
+    "clientName": "Comprehend",
+    "region": "fips-us-west-2",
+    "hostname": "comprehend-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "comprehendmedical",
+    "clientName": "ComprehendMedical",
+    "region": "fips-us-east-1",
+    "hostname": "comprehendmedical-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "comprehendmedical",
+    "clientName": "ComprehendMedical",
+    "region": "fips-us-east-2",
+    "hostname": "comprehendmedical-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "comprehendmedical",
+    "clientName": "ComprehendMedical",
+    "region": "fips-us-west-2",
+    "hostname": "comprehendmedical-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "config",
+    "clientName": "ConfigService",
+    "region": "fips-us-east-1",
+    "hostname": "config-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "config",
+    "clientName": "ConfigService",
+    "region": "fips-us-east-2",
+    "hostname": "config-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "config",
+    "clientName": "ConfigService",
+    "region": "fips-us-west-1",
+    "hostname": "config-fips.us-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "config",
+    "clientName": "ConfigService",
+    "region": "fips-us-west-2",
+    "hostname": "config-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "data.jobs.iot",
+    "clientName": "IoTJobsDataPlane",
+    "region": "fips-ca-central-1",
+    "hostname": "data.jobs.iot-fips.ca-central-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "data.jobs.iot",
+    "clientName": "IoTJobsDataPlane",
+    "region": "fips-us-east-1",
+    "hostname": "data.jobs.iot-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "data.jobs.iot",
+    "clientName": "IoTJobsDataPlane",
+    "region": "fips-us-east-2",
+    "hostname": "data.jobs.iot-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "data.jobs.iot",
+    "clientName": "IoTJobsDataPlane",
+    "region": "fips-us-west-1",
+    "hostname": "data.jobs.iot-fips.us-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "data.jobs.iot",
+    "clientName": "IoTJobsDataPlane",
+    "region": "fips-us-west-2",
+    "hostname": "data.jobs.iot-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "datasync",
+    "clientName": "DataSync",
+    "region": "fips-ca-central-1",
+    "hostname": "datasync-fips.ca-central-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "datasync",
+    "clientName": "DataSync",
+    "region": "fips-us-east-1",
+    "hostname": "datasync-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "datasync",
+    "clientName": "DataSync",
+    "region": "fips-us-east-2",
+    "hostname": "datasync-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "datasync",
+    "clientName": "DataSync",
+    "region": "fips-us-west-1",
+    "hostname": "datasync-fips.us-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "datasync",
+    "clientName": "DataSync",
+    "region": "fips-us-west-2",
+    "hostname": "datasync-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "directconnect",
+    "clientName": "DirectConnect",
+    "region": "fips-us-east-1",
+    "hostname": "directconnect-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "directconnect",
+    "clientName": "DirectConnect",
+    "region": "fips-us-east-2",
+    "hostname": "directconnect-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "directconnect",
+    "clientName": "DirectConnect",
+    "region": "fips-us-west-1",
+    "hostname": "directconnect-fips.us-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "directconnect",
+    "clientName": "DirectConnect",
+    "region": "fips-us-west-2",
+    "hostname": "directconnect-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "ds",
+    "clientName": "DirectoryService",
+    "region": "fips-ca-central-1",
+    "hostname": "ds-fips.ca-central-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "ds",
+    "clientName": "DirectoryService",
+    "region": "fips-us-east-1",
+    "hostname": "ds-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "ds",
+    "clientName": "DirectoryService",
+    "region": "fips-us-east-2",
+    "hostname": "ds-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "ds",
+    "clientName": "DirectoryService",
+    "region": "fips-us-west-1",
+    "hostname": "ds-fips.us-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "ds",
+    "clientName": "DirectoryService",
+    "region": "fips-us-west-2",
+    "hostname": "ds-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "dynamodb",
+    "clientName": "DynamoDB",
+    "region": "ca-central-1-fips",
+    "hostname": "dynamodb-fips.ca-central-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "dynamodb",
+    "clientName": "DynamoDB",
+    "region": "us-east-1-fips",
+    "hostname": "dynamodb-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "dynamodb",
+    "clientName": "DynamoDB",
+    "region": "us-east-2-fips",
+    "hostname": "dynamodb-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "dynamodb",
+    "clientName": "DynamoDB",
+    "region": "us-west-1-fips",
+    "hostname": "dynamodb-fips.us-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "dynamodb",
+    "clientName": "DynamoDB",
+    "region": "us-west-2-fips",
+    "hostname": "dynamodb-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "ebs",
+    "clientName": "EBS",
+    "region": "fips-ca-central-1",
+    "hostname": "ebs-fips.ca-central-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "ebs",
+    "clientName": "EBS",
+    "region": "fips-us-east-1",
+    "hostname": "ebs-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "ebs",
+    "clientName": "EBS",
+    "region": "fips-us-east-2",
+    "hostname": "ebs-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "ebs",
+    "clientName": "EBS",
+    "region": "fips-us-west-1",
+    "hostname": "ebs-fips.us-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "ebs",
+    "clientName": "EBS",
+    "region": "fips-us-west-2",
+    "hostname": "ebs-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "ec2",
+    "clientName": "EC2",
+    "region": "fips-ca-central-1",
+    "hostname": "ec2-fips.ca-central-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "ec2",
+    "clientName": "EC2",
+    "region": "fips-us-east-1",
+    "hostname": "ec2-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "ec2",
+    "clientName": "EC2",
+    "region": "fips-us-east-2",
+    "hostname": "ec2-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "ec2",
+    "clientName": "EC2",
+    "region": "fips-us-west-1",
+    "hostname": "ec2-fips.us-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "ec2",
+    "clientName": "EC2",
+    "region": "fips-us-west-2",
+    "hostname": "ec2-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "ecs",
+    "clientName": "ECS",
+    "region": "fips-us-east-1",
+    "hostname": "ecs-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "ecs",
+    "clientName": "ECS",
+    "region": "fips-us-east-2",
+    "hostname": "ecs-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "ecs",
+    "clientName": "ECS",
+    "region": "fips-us-west-1",
+    "hostname": "ecs-fips.us-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "ecs",
+    "clientName": "ECS",
+    "region": "fips-us-west-2",
+    "hostname": "ecs-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "eks",
+    "clientName": "EKS",
+    "region": "fips-us-east-1",
+    "hostname": "fips.eks.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "eks",
+    "clientName": "EKS",
+    "region": "fips-us-east-2",
+    "hostname": "fips.eks.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "eks",
+    "clientName": "EKS",
+    "region": "fips-us-west-1",
+    "hostname": "fips.eks.us-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "eks",
+    "clientName": "EKS",
+    "region": "fips-us-west-2",
+    "hostname": "fips.eks.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "elasticbeanstalk",
+    "clientName": "ElasticBeanstalk",
+    "region": "fips-us-east-1",
+    "hostname": "elasticbeanstalk-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "elasticbeanstalk",
+    "clientName": "ElasticBeanstalk",
+    "region": "fips-us-east-2",
+    "hostname": "elasticbeanstalk-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "elasticbeanstalk",
+    "clientName": "ElasticBeanstalk",
+    "region": "fips-us-west-1",
+    "hostname": "elasticbeanstalk-fips.us-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "elasticbeanstalk",
+    "clientName": "ElasticBeanstalk",
+    "region": "fips-us-west-2",
+    "hostname": "elasticbeanstalk-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "elasticfilesystem",
+    "clientName": "EFS",
+    "region": "fips-af-south-1",
+    "hostname": "elasticfilesystem-fips.af-south-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "elasticfilesystem",
+    "clientName": "EFS",
+    "region": "fips-ap-east-1",
+    "hostname": "elasticfilesystem-fips.ap-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "elasticfilesystem",
+    "clientName": "EFS",
+    "region": "fips-ap-northeast-1",
+    "hostname": "elasticfilesystem-fips.ap-northeast-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "elasticfilesystem",
+    "clientName": "EFS",
+    "region": "fips-ap-northeast-2",
+    "hostname": "elasticfilesystem-fips.ap-northeast-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "elasticfilesystem",
+    "clientName": "EFS",
+    "region": "fips-ap-northeast-3",
+    "hostname": "elasticfilesystem-fips.ap-northeast-3.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "elasticfilesystem",
+    "clientName": "EFS",
+    "region": "fips-ap-south-1",
+    "hostname": "elasticfilesystem-fips.ap-south-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "elasticfilesystem",
+    "clientName": "EFS",
+    "region": "fips-ap-southeast-1",
+    "hostname": "elasticfilesystem-fips.ap-southeast-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "elasticfilesystem",
+    "clientName": "EFS",
+    "region": "fips-ap-southeast-2",
+    "hostname": "elasticfilesystem-fips.ap-southeast-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "elasticfilesystem",
+    "clientName": "EFS",
+    "region": "fips-ca-central-1",
+    "hostname": "elasticfilesystem-fips.ca-central-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "elasticfilesystem",
+    "clientName": "EFS",
+    "region": "fips-eu-central-1",
+    "hostname": "elasticfilesystem-fips.eu-central-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "elasticfilesystem",
+    "clientName": "EFS",
+    "region": "fips-eu-north-1",
+    "hostname": "elasticfilesystem-fips.eu-north-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "elasticfilesystem",
+    "clientName": "EFS",
+    "region": "fips-eu-south-1",
+    "hostname": "elasticfilesystem-fips.eu-south-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "elasticfilesystem",
+    "clientName": "EFS",
+    "region": "fips-eu-west-1",
+    "hostname": "elasticfilesystem-fips.eu-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "elasticfilesystem",
+    "clientName": "EFS",
+    "region": "fips-eu-west-2",
+    "hostname": "elasticfilesystem-fips.eu-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "elasticfilesystem",
+    "clientName": "EFS",
+    "region": "fips-eu-west-3",
+    "hostname": "elasticfilesystem-fips.eu-west-3.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "elasticfilesystem",
+    "clientName": "EFS",
+    "region": "fips-me-south-1",
+    "hostname": "elasticfilesystem-fips.me-south-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "elasticfilesystem",
+    "clientName": "EFS",
+    "region": "fips-sa-east-1",
+    "hostname": "elasticfilesystem-fips.sa-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "elasticfilesystem",
+    "clientName": "EFS",
+    "region": "fips-us-east-1",
+    "hostname": "elasticfilesystem-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "elasticfilesystem",
+    "clientName": "EFS",
+    "region": "fips-us-east-2",
+    "hostname": "elasticfilesystem-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "elasticfilesystem",
+    "clientName": "EFS",
+    "region": "fips-us-west-1",
+    "hostname": "elasticfilesystem-fips.us-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "elasticfilesystem",
+    "clientName": "EFS",
+    "region": "fips-us-west-2",
+    "hostname": "elasticfilesystem-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "elasticloadbalancing",
+    "clientName": "ELBv2",
+    "region": "fips-us-east-1",
+    "hostname": "elasticloadbalancing-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "elasticloadbalancing",
+    "clientName": "ELBv2",
+    "region": "fips-us-east-2",
+    "hostname": "elasticloadbalancing-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "elasticloadbalancing",
+    "clientName": "ELBv2",
+    "region": "fips-us-west-1",
+    "hostname": "elasticloadbalancing-fips.us-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "elasticloadbalancing",
+    "clientName": "ELBv2",
+    "region": "fips-us-west-2",
+    "hostname": "elasticloadbalancing-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "elasticmapreduce",
+    "clientName": "EMR",
+    "region": "fips-ca-central-1",
+    "hostname": "elasticmapreduce-fips.ca-central-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "elasticmapreduce",
+    "clientName": "EMR",
+    "region": "fips-us-east-1",
+    "hostname": "elasticmapreduce-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "elasticmapreduce",
+    "clientName": "EMR",
+    "region": "fips-us-east-2",
+    "hostname": "elasticmapreduce-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "elasticmapreduce",
+    "clientName": "EMR",
+    "region": "fips-us-west-1",
+    "hostname": "elasticmapreduce-fips.us-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "elasticmapreduce",
+    "clientName": "EMR",
+    "region": "fips-us-west-2",
+    "hostname": "elasticmapreduce-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "emr-containers",
+    "clientName": "EMRcontainers",
+    "region": "fips-ca-central-1",
+    "hostname": "emr-containers-fips.ca-central-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "emr-containers",
+    "clientName": "EMRcontainers",
+    "region": "fips-us-east-1",
+    "hostname": "emr-containers-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "emr-containers",
+    "clientName": "EMRcontainers",
+    "region": "fips-us-east-2",
+    "hostname": "emr-containers-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "emr-containers",
+    "clientName": "EMRcontainers",
+    "region": "fips-us-west-1",
+    "hostname": "emr-containers-fips.us-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "emr-containers",
+    "clientName": "EMRcontainers",
+    "region": "fips-us-west-2",
+    "hostname": "emr-containers-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "events",
+    "clientName": "CloudWatchEvents",
+    "region": "fips-us-east-1",
+    "hostname": "events-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "events",
+    "clientName": "CloudWatchEvents",
+    "region": "fips-us-east-2",
+    "hostname": "events-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "events",
+    "clientName": "CloudWatchEvents",
+    "region": "fips-us-west-1",
+    "hostname": "events-fips.us-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "events",
+    "clientName": "CloudWatchEvents",
+    "region": "fips-us-west-2",
+    "hostname": "events-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "firehose",
+    "clientName": "Firehose",
+    "region": "fips-us-east-1",
+    "hostname": "firehose-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "firehose",
+    "clientName": "Firehose",
+    "region": "fips-us-east-2",
+    "hostname": "firehose-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "firehose",
+    "clientName": "Firehose",
+    "region": "fips-us-west-1",
+    "hostname": "firehose-fips.us-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "firehose",
+    "clientName": "Firehose",
+    "region": "fips-us-west-2",
+    "hostname": "firehose-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "fms",
+    "clientName": "FMS",
+    "region": "fips-af-south-1",
+    "hostname": "fms-fips.af-south-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "fms",
+    "clientName": "FMS",
+    "region": "fips-ap-east-1",
+    "hostname": "fms-fips.ap-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "fms",
+    "clientName": "FMS",
+    "region": "fips-ap-northeast-1",
+    "hostname": "fms-fips.ap-northeast-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "fms",
+    "clientName": "FMS",
+    "region": "fips-ap-northeast-2",
+    "hostname": "fms-fips.ap-northeast-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "fms",
+    "clientName": "FMS",
+    "region": "fips-ap-south-1",
+    "hostname": "fms-fips.ap-south-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "fms",
+    "clientName": "FMS",
+    "region": "fips-ap-southeast-1",
+    "hostname": "fms-fips.ap-southeast-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "fms",
+    "clientName": "FMS",
+    "region": "fips-ap-southeast-2",
+    "hostname": "fms-fips.ap-southeast-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "fms",
+    "clientName": "FMS",
+    "region": "fips-ca-central-1",
+    "hostname": "fms-fips.ca-central-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "fms",
+    "clientName": "FMS",
+    "region": "fips-eu-central-1",
+    "hostname": "fms-fips.eu-central-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "fms",
+    "clientName": "FMS",
+    "region": "fips-eu-south-1",
+    "hostname": "fms-fips.eu-south-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "fms",
+    "clientName": "FMS",
+    "region": "fips-eu-west-1",
+    "hostname": "fms-fips.eu-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "fms",
+    "clientName": "FMS",
+    "region": "fips-eu-west-2",
+    "hostname": "fms-fips.eu-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "fms",
+    "clientName": "FMS",
+    "region": "fips-eu-west-3",
+    "hostname": "fms-fips.eu-west-3.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "fms",
+    "clientName": "FMS",
+    "region": "fips-me-south-1",
+    "hostname": "fms-fips.me-south-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "fms",
+    "clientName": "FMS",
+    "region": "fips-sa-east-1",
+    "hostname": "fms-fips.sa-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "fms",
+    "clientName": "FMS",
+    "region": "fips-us-east-1",
+    "hostname": "fms-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "fms",
+    "clientName": "FMS",
+    "region": "fips-us-east-2",
+    "hostname": "fms-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "fms",
+    "clientName": "FMS",
+    "region": "fips-us-west-1",
+    "hostname": "fms-fips.us-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "fms",
+    "clientName": "FMS",
+    "region": "fips-us-west-2",
+    "hostname": "fms-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "forecast",
+    "clientName": "ForecastService",
+    "region": "fips-us-east-1",
+    "hostname": "forecast-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "forecast",
+    "clientName": "ForecastService",
+    "region": "fips-us-east-2",
+    "hostname": "forecast-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "forecast",
+    "clientName": "ForecastService",
+    "region": "fips-us-west-2",
+    "hostname": "forecast-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "forecastquery",
+    "clientName": "ForecastQueryService",
+    "region": "fips-us-east-1",
+    "hostname": "forecastquery-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "forecastquery",
+    "clientName": "ForecastQueryService",
+    "region": "fips-us-east-2",
+    "hostname": "forecastquery-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "forecastquery",
+    "clientName": "ForecastQueryService",
+    "region": "fips-us-west-2",
+    "hostname": "forecastquery-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "fsx",
+    "clientName": "FSx",
+    "region": "fips-prod-ca-central-1",
+    "hostname": "fsx-fips.ca-central-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "fsx",
+    "clientName": "FSx",
+    "region": "fips-prod-us-east-1",
+    "hostname": "fsx-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "fsx",
+    "clientName": "FSx",
+    "region": "fips-prod-us-east-2",
+    "hostname": "fsx-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "fsx",
+    "clientName": "FSx",
+    "region": "fips-prod-us-west-1",
+    "hostname": "fsx-fips.us-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "fsx",
+    "clientName": "FSx",
+    "region": "fips-prod-us-west-2",
+    "hostname": "fsx-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "glacier",
+    "clientName": "Glacier",
+    "region": "fips-ca-central-1",
+    "hostname": "glacier-fips.ca-central-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "glacier",
+    "clientName": "Glacier",
+    "region": "fips-us-east-1",
+    "hostname": "glacier-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "glacier",
+    "clientName": "Glacier",
+    "region": "fips-us-east-2",
+    "hostname": "glacier-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "glacier",
+    "clientName": "Glacier",
+    "region": "fips-us-west-1",
+    "hostname": "glacier-fips.us-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "glacier",
+    "clientName": "Glacier",
+    "region": "fips-us-west-2",
+    "hostname": "glacier-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "glue",
+    "clientName": "Glue",
+    "region": "fips-us-east-1",
+    "hostname": "glue-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "glue",
+    "clientName": "Glue",
+    "region": "fips-us-east-2",
+    "hostname": "glue-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "glue",
+    "clientName": "Glue",
+    "region": "fips-us-west-1",
+    "hostname": "glue-fips.us-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "glue",
+    "clientName": "Glue",
+    "region": "fips-us-west-2",
+    "hostname": "glue-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "groundstation",
+    "clientName": "GroundStation",
+    "region": "fips-us-east-1",
+    "hostname": "groundstation-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "groundstation",
+    "clientName": "GroundStation",
+    "region": "fips-us-east-2",
+    "hostname": "groundstation-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "groundstation",
+    "clientName": "GroundStation",
+    "region": "fips-us-west-2",
+    "hostname": "groundstation-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "guardduty",
+    "clientName": "GuardDuty",
+    "region": "us-east-1-fips",
+    "hostname": "guardduty-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "guardduty",
+    "clientName": "GuardDuty",
+    "region": "us-east-2-fips",
+    "hostname": "guardduty-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "guardduty",
+    "clientName": "GuardDuty",
+    "region": "us-west-1-fips",
+    "hostname": "guardduty-fips.us-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "guardduty",
+    "clientName": "GuardDuty",
+    "region": "us-west-2-fips",
+    "hostname": "guardduty-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "health",
+    "clientName": "Health",
+    "region": "fips-us-east-2",
+    "hostname": "health-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "identity-chime",
+    "clientName": "ChimeSDKIdentity",
+    "region": "us-east-1-fips",
+    "hostname": "identity-chime-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "inspector",
+    "clientName": "Inspector",
+    "region": "fips-us-east-1",
+    "hostname": "inspector-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "inspector",
+    "clientName": "Inspector",
+    "region": "fips-us-east-2",
+    "hostname": "inspector-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "inspector",
+    "clientName": "Inspector",
+    "region": "fips-us-west-1",
+    "hostname": "inspector-fips.us-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "inspector",
+    "clientName": "Inspector",
+    "region": "fips-us-west-2",
+    "hostname": "inspector-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "iot",
+    "clientName": "Iot",
+    "region": "fips-ca-central-1",
+    "hostname": "iot-fips.ca-central-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "iot",
+    "clientName": "Iot",
+    "region": "fips-us-east-1",
+    "hostname": "iot-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "iot",
+    "clientName": "Iot",
+    "region": "fips-us-east-2",
+    "hostname": "iot-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "iot",
+    "clientName": "Iot",
+    "region": "fips-us-west-1",
+    "hostname": "iot-fips.us-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "iot",
+    "clientName": "Iot",
+    "region": "fips-us-west-2",
+    "hostname": "iot-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "iotsecuredtunneling",
+    "clientName": "IoTSecureTunneling",
+    "region": "fips-ca-central-1",
+    "hostname": "api.tunneling.iot-fips.ca-central-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "iotsecuredtunneling",
+    "clientName": "IoTSecureTunneling",
+    "region": "fips-us-east-1",
+    "hostname": "api.tunneling.iot-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "iotsecuredtunneling",
+    "clientName": "IoTSecureTunneling",
+    "region": "fips-us-east-2",
+    "hostname": "api.tunneling.iot-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "iotsecuredtunneling",
+    "clientName": "IoTSecureTunneling",
+    "region": "fips-us-west-1",
+    "hostname": "api.tunneling.iot-fips.us-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "iotsecuredtunneling",
+    "clientName": "IoTSecureTunneling",
+    "region": "fips-us-west-2",
+    "hostname": "api.tunneling.iot-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "kendra",
+    "clientName": "Kendra",
+    "region": "fips-us-east-1",
+    "hostname": "kendra-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "kendra",
+    "clientName": "Kendra",
+    "region": "fips-us-east-2",
+    "hostname": "kendra-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "kendra",
+    "clientName": "Kendra",
+    "region": "fips-us-west-2",
+    "hostname": "kendra-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "kinesis",
+    "clientName": "Kinesis",
+    "region": "fips-us-east-1",
+    "hostname": "kinesis-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "kinesis",
+    "clientName": "Kinesis",
+    "region": "fips-us-east-2",
+    "hostname": "kinesis-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "kinesis",
+    "clientName": "Kinesis",
+    "region": "fips-us-west-1",
+    "hostname": "kinesis-fips.us-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "kinesis",
+    "clientName": "Kinesis",
+    "region": "fips-us-west-2",
+    "hostname": "kinesis-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "lakeformation",
+    "clientName": "LakeFormation",
+    "region": "fips-us-east-1",
+    "hostname": "lakeformation-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "lakeformation",
+    "clientName": "LakeFormation",
+    "region": "fips-us-east-2",
+    "hostname": "lakeformation-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "lakeformation",
+    "clientName": "LakeFormation",
+    "region": "fips-us-west-1",
+    "hostname": "lakeformation-fips.us-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "lakeformation",
+    "clientName": "LakeFormation",
+    "region": "fips-us-west-2",
+    "hostname": "lakeformation-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "lambda",
+    "clientName": "Lambda",
+    "region": "fips-us-east-1",
+    "hostname": "lambda-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "lambda",
+    "clientName": "Lambda",
+    "region": "fips-us-east-2",
+    "hostname": "lambda-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "lambda",
+    "clientName": "Lambda",
+    "region": "fips-us-west-1",
+    "hostname": "lambda-fips.us-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "lambda",
+    "clientName": "Lambda",
+    "region": "fips-us-west-2",
+    "hostname": "lambda-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "license-manager",
+    "clientName": "LicenseManager",
+    "region": "fips-us-east-1",
+    "hostname": "license-manager-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "license-manager",
+    "clientName": "LicenseManager",
+    "region": "fips-us-east-2",
+    "hostname": "license-manager-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "license-manager",
+    "clientName": "LicenseManager",
+    "region": "fips-us-west-1",
+    "hostname": "license-manager-fips.us-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "license-manager",
+    "clientName": "LicenseManager",
+    "region": "fips-us-west-2",
+    "hostname": "license-manager-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "logs",
+    "clientName": "CloudWatchLogs",
+    "region": "fips-us-east-1",
+    "hostname": "logs-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "logs",
+    "clientName": "CloudWatchLogs",
+    "region": "fips-us-east-2",
+    "hostname": "logs-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "logs",
+    "clientName": "CloudWatchLogs",
+    "region": "fips-us-west-1",
+    "hostname": "logs-fips.us-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "logs",
+    "clientName": "CloudWatchLogs",
+    "region": "fips-us-west-2",
+    "hostname": "logs-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "macie",
+    "clientName": "Macie",
+    "region": "fips-us-east-1",
+    "hostname": "macie-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "macie",
+    "clientName": "Macie",
+    "region": "fips-us-west-2",
+    "hostname": "macie-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "macie2",
+    "clientName": "Macie2",
+    "region": "fips-us-east-1",
+    "hostname": "macie2-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "macie2",
+    "clientName": "Macie2",
+    "region": "fips-us-east-2",
+    "hostname": "macie2-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "macie2",
+    "clientName": "Macie2",
+    "region": "fips-us-west-1",
+    "hostname": "macie2-fips.us-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "macie2",
+    "clientName": "Macie2",
+    "region": "fips-us-west-2",
+    "hostname": "macie2-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "mediaconvert",
+    "clientName": "MediaConvert",
+    "region": "fips-ca-central-1",
+    "hostname": "mediaconvert-fips.ca-central-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "mediaconvert",
+    "clientName": "MediaConvert",
+    "region": "fips-us-east-1",
+    "hostname": "mediaconvert-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "mediaconvert",
+    "clientName": "MediaConvert",
+    "region": "fips-us-east-2",
+    "hostname": "mediaconvert-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "mediaconvert",
+    "clientName": "MediaConvert",
+    "region": "fips-us-west-1",
+    "hostname": "mediaconvert-fips.us-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "mediaconvert",
+    "clientName": "MediaConvert",
+    "region": "fips-us-west-2",
+    "hostname": "mediaconvert-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "medialive",
+    "clientName": "MediaLive",
+    "region": "fips-us-east-1",
+    "hostname": "medialive-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "medialive",
+    "clientName": "MediaLive",
+    "region": "fips-us-east-2",
+    "hostname": "medialive-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "medialive",
+    "clientName": "MediaLive",
+    "region": "fips-us-west-2",
+    "hostname": "medialive-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "messaging-chime",
+    "clientName": "ChimeSDKMessaging",
+    "region": "us-east-1-fips",
+    "hostname": "messaging-chime-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "models.lex",
+    "clientName": "LexModelBuildingService",
+    "region": "us-east-1-fips",
+    "hostname": "models-fips.lex.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "models.lex",
+    "clientName": "LexModelBuildingService",
+    "region": "us-west-2-fips",
+    "hostname": "models-fips.lex.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "monitoring",
+    "clientName": "CloudWatch",
+    "region": "fips-us-east-1",
+    "hostname": "monitoring-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "monitoring",
+    "clientName": "CloudWatch",
+    "region": "fips-us-east-2",
+    "hostname": "monitoring-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "monitoring",
+    "clientName": "CloudWatch",
+    "region": "fips-us-west-1",
+    "hostname": "monitoring-fips.us-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "monitoring",
+    "clientName": "CloudWatch",
+    "region": "fips-us-west-2",
+    "hostname": "monitoring-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "mq",
+    "clientName": "MQ",
+    "region": "fips-us-east-1",
+    "hostname": "mq-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "mq",
+    "clientName": "MQ",
+    "region": "fips-us-east-2",
+    "hostname": "mq-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "mq",
+    "clientName": "MQ",
+    "region": "fips-us-west-1",
+    "hostname": "mq-fips.us-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "mq",
+    "clientName": "MQ",
+    "region": "fips-us-west-2",
+    "hostname": "mq-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "network-firewall",
+    "clientName": "NetworkFirewall",
+    "region": "fips-ca-central-1",
+    "hostname": "network-firewall-fips.ca-central-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "network-firewall",
+    "clientName": "NetworkFirewall",
+    "region": "fips-us-east-1",
+    "hostname": "network-firewall-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "network-firewall",
+    "clientName": "NetworkFirewall",
+    "region": "fips-us-east-2",
+    "hostname": "network-firewall-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "network-firewall",
+    "clientName": "NetworkFirewall",
+    "region": "fips-us-west-1",
+    "hostname": "network-firewall-fips.us-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "network-firewall",
+    "clientName": "NetworkFirewall",
+    "region": "fips-us-west-2",
+    "hostname": "network-firewall-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "organizations",
+    "clientName": "Organizations",
+    "region": "fips-aws-global",
+    "hostname": "organizations-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "outposts",
+    "clientName": "Outposts",
+    "region": "fips-ca-central-1",
+    "hostname": "outposts-fips.ca-central-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "outposts",
+    "clientName": "Outposts",
+    "region": "fips-us-east-1",
+    "hostname": "outposts-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "outposts",
+    "clientName": "Outposts",
+    "region": "fips-us-east-2",
+    "hostname": "outposts-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "outposts",
+    "clientName": "Outposts",
+    "region": "fips-us-west-1",
+    "hostname": "outposts-fips.us-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "outposts",
+    "clientName": "Outposts",
+    "region": "fips-us-west-2",
+    "hostname": "outposts-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "pinpoint",
+    "clientName": "Pinpoint",
+    "region": "fips-us-east-1",
+    "hostname": "pinpoint-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "pinpoint",
+    "clientName": "Pinpoint",
+    "region": "fips-us-west-2",
+    "hostname": "pinpoint-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "polly",
+    "clientName": "Polly",
+    "region": "fips-us-east-1",
+    "hostname": "polly-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "polly",
+    "clientName": "Polly",
+    "region": "fips-us-east-2",
+    "hostname": "polly-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "polly",
+    "clientName": "Polly",
+    "region": "fips-us-west-1",
+    "hostname": "polly-fips.us-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "polly",
+    "clientName": "Polly",
+    "region": "fips-us-west-2",
+    "hostname": "polly-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "qldb",
+    "clientName": "QLDB",
+    "region": "fips-us-east-1",
+    "hostname": "qldb-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "qldb",
+    "clientName": "QLDB",
+    "region": "fips-us-east-2",
+    "hostname": "qldb-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "qldb",
+    "clientName": "QLDB",
+    "region": "fips-us-west-2",
+    "hostname": "qldb-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "ram",
+    "clientName": "RAM",
+    "region": "fips-ca-central-1",
+    "hostname": "ram-fips.ca-central-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "ram",
+    "clientName": "RAM",
+    "region": "fips-us-east-1",
+    "hostname": "ram-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "ram",
+    "clientName": "RAM",
+    "region": "fips-us-east-2",
+    "hostname": "ram-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "ram",
+    "clientName": "RAM",
+    "region": "fips-us-west-1",
+    "hostname": "ram-fips.us-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "ram",
+    "clientName": "RAM",
+    "region": "fips-us-west-2",
+    "hostname": "ram-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "redshift",
+    "clientName": "Redshift",
+    "region": "fips-ca-central-1",
+    "hostname": "redshift-fips.ca-central-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "redshift",
+    "clientName": "Redshift",
+    "region": "fips-us-east-1",
+    "hostname": "redshift-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "redshift",
+    "clientName": "Redshift",
+    "region": "fips-us-east-2",
+    "hostname": "redshift-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "redshift",
+    "clientName": "Redshift",
+    "region": "fips-us-west-1",
+    "hostname": "redshift-fips.us-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "redshift",
+    "clientName": "Redshift",
+    "region": "fips-us-west-2",
+    "hostname": "redshift-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "resource-groups",
+    "clientName": "ResourceGroups",
+    "region": "fips-us-east-1",
+    "hostname": "resource-groups-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "resource-groups",
+    "clientName": "ResourceGroups",
+    "region": "fips-us-east-2",
+    "hostname": "resource-groups-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "resource-groups",
+    "clientName": "ResourceGroups",
+    "region": "fips-us-west-1",
+    "hostname": "resource-groups-fips.us-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "resource-groups",
+    "clientName": "ResourceGroups",
+    "region": "fips-us-west-2",
+    "hostname": "resource-groups-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "route53",
+    "clientName": "Route53",
+    "region": "fips-aws-global",
+    "hostname": "route53-fips.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "runtime.lex",
+    "clientName": "LexRuntime",
+    "region": "us-east-1-fips",
+    "hostname": "runtime-fips.lex.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "runtime.lex",
+    "clientName": "LexRuntime",
+    "region": "us-west-2-fips",
+    "hostname": "runtime-fips.lex.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "runtime.sagemaker",
+    "clientName": "SageMakerRuntime",
+    "region": "us-east-1-fips",
+    "hostname": "runtime-fips.sagemaker.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "runtime.sagemaker",
+    "clientName": "SageMakerRuntime",
+    "region": "us-east-2-fips",
+    "hostname": "runtime-fips.sagemaker.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "runtime.sagemaker",
+    "clientName": "SageMakerRuntime",
+    "region": "us-west-1-fips",
+    "hostname": "runtime-fips.sagemaker.us-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "runtime.sagemaker",
+    "clientName": "SageMakerRuntime",
+    "region": "us-west-2-fips",
+    "hostname": "runtime-fips.sagemaker.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "s3-control",
+    "clientName": "S3Control",
+    "region": "ca-central-1-fips",
+    "hostname": "s3-control-fips.ca-central-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "s3-control",
+    "clientName": "S3Control",
+    "region": "us-east-1-fips",
+    "hostname": "s3-control-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "s3-control",
+    "clientName": "S3Control",
+    "region": "us-east-2-fips",
+    "hostname": "s3-control-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "s3-control",
+    "clientName": "S3Control",
+    "region": "us-west-1-fips",
+    "hostname": "s3-control-fips.us-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "s3-control",
+    "clientName": "S3Control",
+    "region": "us-west-2-fips",
+    "hostname": "s3-control-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "secretsmanager",
+    "clientName": "SecretsManager",
+    "region": "us-east-1-fips",
+    "hostname": "secretsmanager-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "secretsmanager",
+    "clientName": "SecretsManager",
+    "region": "us-east-2-fips",
+    "hostname": "secretsmanager-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "secretsmanager",
+    "clientName": "SecretsManager",
+    "region": "us-west-1-fips",
+    "hostname": "secretsmanager-fips.us-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "secretsmanager",
+    "clientName": "SecretsManager",
+    "region": "us-west-2-fips",
+    "hostname": "secretsmanager-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "securityhub",
+    "clientName": "SecurityHub",
+    "region": "fips-us-east-1",
+    "hostname": "securityhub-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "securityhub",
+    "clientName": "SecurityHub",
+    "region": "fips-us-east-2",
+    "hostname": "securityhub-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "securityhub",
+    "clientName": "SecurityHub",
+    "region": "fips-us-west-1",
+    "hostname": "securityhub-fips.us-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "securityhub",
+    "clientName": "SecurityHub",
+    "region": "fips-us-west-2",
+    "hostname": "securityhub-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "servicecatalog",
+    "clientName": "ServiceCatalog",
+    "region": "us-east-1-fips",
+    "hostname": "servicecatalog-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "servicecatalog",
+    "clientName": "ServiceCatalog",
+    "region": "us-east-2-fips",
+    "hostname": "servicecatalog-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "servicecatalog",
+    "clientName": "ServiceCatalog",
+    "region": "us-west-1-fips",
+    "hostname": "servicecatalog-fips.us-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "servicecatalog",
+    "clientName": "ServiceCatalog",
+    "region": "us-west-2-fips",
+    "hostname": "servicecatalog-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "servicecatalog-appregistry",
+    "clientName": "ServiceCatalogAppRegistry",
+    "region": "fips-ca-central-1",
+    "hostname": "servicecatalog-appregistry-fips.ca-central-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "servicecatalog-appregistry",
+    "clientName": "ServiceCatalogAppRegistry",
+    "region": "fips-us-east-1",
+    "hostname": "servicecatalog-appregistry-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "servicecatalog-appregistry",
+    "clientName": "ServiceCatalogAppRegistry",
+    "region": "fips-us-east-2",
+    "hostname": "servicecatalog-appregistry-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "servicecatalog-appregistry",
+    "clientName": "ServiceCatalogAppRegistry",
+    "region": "fips-us-west-1",
+    "hostname": "servicecatalog-appregistry-fips.us-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "servicecatalog-appregistry",
+    "clientName": "ServiceCatalogAppRegistry",
+    "region": "fips-us-west-2",
+    "hostname": "servicecatalog-appregistry-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "session.qldb",
+    "clientName": "QLDBSession",
+    "region": "fips-us-east-1",
+    "hostname": "session.qldb-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "session.qldb",
+    "clientName": "QLDBSession",
+    "region": "fips-us-east-2",
+    "hostname": "session.qldb-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "session.qldb",
+    "clientName": "QLDBSession",
+    "region": "fips-us-west-2",
+    "hostname": "session.qldb-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "shield",
+    "clientName": "Shield",
+    "region": "fips-aws-global",
+    "hostname": "shield-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "sms",
+    "clientName": "SMS",
+    "region": "fips-us-east-1",
+    "hostname": "sms-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "sms",
+    "clientName": "SMS",
+    "region": "fips-us-east-2",
+    "hostname": "sms-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "sms",
+    "clientName": "SMS",
+    "region": "fips-us-west-1",
+    "hostname": "sms-fips.us-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "sms",
+    "clientName": "SMS",
+    "region": "fips-us-west-2",
+    "hostname": "sms-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "snowball",
+    "clientName": "Snowball",
+    "region": "fips-ap-northeast-1",
+    "hostname": "snowball-fips.ap-northeast-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "snowball",
+    "clientName": "Snowball",
+    "region": "fips-ap-northeast-2",
+    "hostname": "snowball-fips.ap-northeast-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "snowball",
+    "clientName": "Snowball",
+    "region": "fips-ap-northeast-3",
+    "hostname": "snowball-fips.ap-northeast-3.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "snowball",
+    "clientName": "Snowball",
+    "region": "fips-ap-south-1",
+    "hostname": "snowball-fips.ap-south-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "snowball",
+    "clientName": "Snowball",
+    "region": "fips-ap-southeast-1",
+    "hostname": "snowball-fips.ap-southeast-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "snowball",
+    "clientName": "Snowball",
+    "region": "fips-ap-southeast-2",
+    "hostname": "snowball-fips.ap-southeast-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "snowball",
+    "clientName": "Snowball",
+    "region": "fips-ca-central-1",
+    "hostname": "snowball-fips.ca-central-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "snowball",
+    "clientName": "Snowball",
+    "region": "fips-eu-central-1",
+    "hostname": "snowball-fips.eu-central-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "snowball",
+    "clientName": "Snowball",
+    "region": "fips-eu-west-1",
+    "hostname": "snowball-fips.eu-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "snowball",
+    "clientName": "Snowball",
+    "region": "fips-eu-west-2",
+    "hostname": "snowball-fips.eu-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "snowball",
+    "clientName": "Snowball",
+    "region": "fips-eu-west-3",
+    "hostname": "snowball-fips.eu-west-3.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "snowball",
+    "clientName": "Snowball",
+    "region": "fips-sa-east-1",
+    "hostname": "snowball-fips.sa-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "snowball",
+    "clientName": "Snowball",
+    "region": "fips-us-east-1",
+    "hostname": "snowball-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "snowball",
+    "clientName": "Snowball",
+    "region": "fips-us-east-2",
+    "hostname": "snowball-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "snowball",
+    "clientName": "Snowball",
+    "region": "fips-us-west-1",
+    "hostname": "snowball-fips.us-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "snowball",
+    "clientName": "Snowball",
+    "region": "fips-us-west-2",
+    "hostname": "snowball-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "sns",
+    "clientName": "SNS",
+    "region": "fips-us-east-1",
+    "hostname": "sns-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "sns",
+    "clientName": "SNS",
+    "region": "fips-us-east-2",
+    "hostname": "sns-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "sns",
+    "clientName": "SNS",
+    "region": "fips-us-west-1",
+    "hostname": "sns-fips.us-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "sns",
+    "clientName": "SNS",
+    "region": "fips-us-west-2",
+    "hostname": "sns-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "sqs",
+    "clientName": "SQS",
+    "region": "fips-us-east-1",
+    "hostname": "sqs-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "sqs",
+    "clientName": "SQS",
+    "region": "fips-us-east-2",
+    "hostname": "sqs-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "sqs",
+    "clientName": "SQS",
+    "region": "fips-us-west-1",
+    "hostname": "sqs-fips.us-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "sqs",
+    "clientName": "SQS",
+    "region": "fips-us-west-2",
+    "hostname": "sqs-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "ssm",
+    "clientName": "SSM",
+    "region": "fips-ca-central-1",
+    "hostname": "ssm-fips.ca-central-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "ssm",
+    "clientName": "SSM",
+    "region": "fips-us-east-1",
+    "hostname": "ssm-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "ssm",
+    "clientName": "SSM",
+    "region": "fips-us-east-2",
+    "hostname": "ssm-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "ssm",
+    "clientName": "SSM",
+    "region": "fips-us-west-1",
+    "hostname": "ssm-fips.us-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "ssm",
+    "clientName": "SSM",
+    "region": "fips-us-west-2",
+    "hostname": "ssm-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "states",
+    "clientName": "StepFunctions",
+    "region": "fips-us-east-1",
+    "hostname": "states-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "states",
+    "clientName": "StepFunctions",
+    "region": "fips-us-east-2",
+    "hostname": "states-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "states",
+    "clientName": "StepFunctions",
+    "region": "fips-us-west-1",
+    "hostname": "states-fips.us-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "states",
+    "clientName": "StepFunctions",
+    "region": "fips-us-west-2",
+    "hostname": "states-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "streams.dynamodb",
+    "clientName": "DynamoDBStreams",
+    "region": "ca-central-1-fips",
+    "hostname": "streams.dynamodb-fips.ca-central-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "streams.dynamodb",
+    "clientName": "DynamoDBStreams",
+    "region": "us-east-1-fips",
+    "hostname": "streams.dynamodb-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "streams.dynamodb",
+    "clientName": "DynamoDBStreams",
+    "region": "us-east-2-fips",
+    "hostname": "streams.dynamodb-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "streams.dynamodb",
+    "clientName": "DynamoDBStreams",
+    "region": "us-west-1-fips",
+    "hostname": "streams.dynamodb-fips.us-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "streams.dynamodb",
+    "clientName": "DynamoDBStreams",
+    "region": "us-west-2-fips",
+    "hostname": "streams.dynamodb-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "sts",
+    "clientName": "STS",
+    "region": "us-east-1-fips",
+    "hostname": "sts-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "sts",
+    "clientName": "STS",
+    "region": "us-east-2-fips",
+    "hostname": "sts-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "sts",
+    "clientName": "STS",
+    "region": "us-west-1-fips",
+    "hostname": "sts-fips.us-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "sts",
+    "clientName": "STS",
+    "region": "us-west-2-fips",
+    "hostname": "sts-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "swf",
+    "clientName": "SWF",
+    "region": "fips-us-east-1",
+    "hostname": "swf-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "swf",
+    "clientName": "SWF",
+    "region": "fips-us-east-2",
+    "hostname": "swf-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "swf",
+    "clientName": "SWF",
+    "region": "fips-us-west-1",
+    "hostname": "swf-fips.us-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "swf",
+    "clientName": "SWF",
+    "region": "fips-us-west-2",
+    "hostname": "swf-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "textract",
+    "clientName": "Textract",
+    "region": "fips-ca-central-1",
+    "hostname": "textract-fips.ca-central-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "textract",
+    "clientName": "Textract",
+    "region": "fips-us-east-1",
+    "hostname": "textract-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "textract",
+    "clientName": "Textract",
+    "region": "fips-us-east-2",
+    "hostname": "textract-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "textract",
+    "clientName": "Textract",
+    "region": "fips-us-west-1",
+    "hostname": "textract-fips.us-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "textract",
+    "clientName": "Textract",
+    "region": "fips-us-west-2",
+    "hostname": "textract-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "transcribe",
+    "clientName": "TranscribeService",
+    "region": "fips-us-east-1",
+    "hostname": "fips.transcribe.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "transcribe",
+    "clientName": "TranscribeService",
+    "region": "fips-us-east-2",
+    "hostname": "fips.transcribe.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "transcribe",
+    "clientName": "TranscribeService",
+    "region": "fips-us-west-1",
+    "hostname": "fips.transcribe.us-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "transcribe",
+    "clientName": "TranscribeService",
+    "region": "fips-us-west-2",
+    "hostname": "fips.transcribe.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "transfer",
+    "clientName": "Transfer",
+    "region": "fips-ca-central-1",
+    "hostname": "transfer-fips.ca-central-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "transfer",
+    "clientName": "Transfer",
+    "region": "fips-us-east-1",
+    "hostname": "transfer-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "transfer",
+    "clientName": "Transfer",
+    "region": "fips-us-east-2",
+    "hostname": "transfer-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "transfer",
+    "clientName": "Transfer",
+    "region": "fips-us-west-1",
+    "hostname": "transfer-fips.us-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "transfer",
+    "clientName": "Transfer",
+    "region": "fips-us-west-2",
+    "hostname": "transfer-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "translate",
+    "clientName": "Translate",
+    "region": "us-east-1-fips",
+    "hostname": "translate-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "translate",
+    "clientName": "Translate",
+    "region": "us-east-2-fips",
+    "hostname": "translate-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "translate",
+    "clientName": "Translate",
+    "region": "us-west-2-fips",
+    "hostname": "translate-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "waf",
+    "clientName": "WAF",
+    "region": "aws-fips",
+    "hostname": "waf-fips.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "waf-regional",
+    "clientName": "WAFRegional",
+    "region": "fips-af-south-1",
+    "hostname": "waf-regional-fips.af-south-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "waf-regional",
+    "clientName": "WAFRegional",
+    "region": "fips-ap-east-1",
+    "hostname": "waf-regional-fips.ap-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "waf-regional",
+    "clientName": "WAFRegional",
+    "region": "fips-ap-northeast-1",
+    "hostname": "waf-regional-fips.ap-northeast-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "waf-regional",
+    "clientName": "WAFRegional",
+    "region": "fips-ap-northeast-2",
+    "hostname": "waf-regional-fips.ap-northeast-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "waf-regional",
+    "clientName": "WAFRegional",
+    "region": "fips-ap-northeast-3",
+    "hostname": "waf-regional-fips.ap-northeast-3.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "waf-regional",
+    "clientName": "WAFRegional",
+    "region": "fips-ap-south-1",
+    "hostname": "waf-regional-fips.ap-south-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "waf-regional",
+    "clientName": "WAFRegional",
+    "region": "fips-ap-southeast-1",
+    "hostname": "waf-regional-fips.ap-southeast-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "waf-regional",
+    "clientName": "WAFRegional",
+    "region": "fips-ap-southeast-2",
+    "hostname": "waf-regional-fips.ap-southeast-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "waf-regional",
+    "clientName": "WAFRegional",
+    "region": "fips-ca-central-1",
+    "hostname": "waf-regional-fips.ca-central-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "waf-regional",
+    "clientName": "WAFRegional",
+    "region": "fips-eu-central-1",
+    "hostname": "waf-regional-fips.eu-central-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "waf-regional",
+    "clientName": "WAFRegional",
+    "region": "fips-eu-north-1",
+    "hostname": "waf-regional-fips.eu-north-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "waf-regional",
+    "clientName": "WAFRegional",
+    "region": "fips-eu-south-1",
+    "hostname": "waf-regional-fips.eu-south-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "waf-regional",
+    "clientName": "WAFRegional",
+    "region": "fips-eu-west-1",
+    "hostname": "waf-regional-fips.eu-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "waf-regional",
+    "clientName": "WAFRegional",
+    "region": "fips-eu-west-2",
+    "hostname": "waf-regional-fips.eu-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "waf-regional",
+    "clientName": "WAFRegional",
+    "region": "fips-eu-west-3",
+    "hostname": "waf-regional-fips.eu-west-3.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "waf-regional",
+    "clientName": "WAFRegional",
+    "region": "fips-me-south-1",
+    "hostname": "waf-regional-fips.me-south-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "waf-regional",
+    "clientName": "WAFRegional",
+    "region": "fips-sa-east-1",
+    "hostname": "waf-regional-fips.sa-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "waf-regional",
+    "clientName": "WAFRegional",
+    "region": "fips-us-east-1",
+    "hostname": "waf-regional-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "waf-regional",
+    "clientName": "WAFRegional",
+    "region": "fips-us-east-2",
+    "hostname": "waf-regional-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "waf-regional",
+    "clientName": "WAFRegional",
+    "region": "fips-us-west-1",
+    "hostname": "waf-regional-fips.us-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "waf-regional",
+    "clientName": "WAFRegional",
+    "region": "fips-us-west-2",
+    "hostname": "waf-regional-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "workdocs",
+    "clientName": "WorkDocs",
+    "region": "fips-us-east-1",
+    "hostname": "workdocs-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "workdocs",
+    "clientName": "WorkDocs",
+    "region": "fips-us-west-2",
+    "hostname": "workdocs-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "workspaces",
+    "clientName": "WorkSpaces",
+    "region": "fips-us-east-1",
+    "hostname": "workspaces-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "workspaces",
+    "clientName": "WorkSpaces",
+    "region": "fips-us-west-2",
+    "hostname": "workspaces-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "xray",
+    "clientName": "XRay",
+    "region": "fips-us-east-1",
+    "hostname": "xray-fips.us-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "xray",
+    "clientName": "XRay",
+    "region": "fips-us-east-2",
+    "hostname": "xray-fips.us-east-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "xray",
+    "clientName": "XRay",
+    "region": "fips-us-west-1",
+    "hostname": "xray-fips.us-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "xray",
+    "clientName": "XRay",
+    "region": "fips-us-west-2",
+    "hostname": "xray-fips.us-west-2.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "elasticfilesystem",
+    "clientName": "EFS",
+    "region": "fips-cn-north-1",
+    "hostname": "elasticfilesystem-fips.cn-north-1.amazonaws.com.cn"
+  },
+  {
+    "endpointPrefix": "elasticfilesystem",
+    "clientName": "EFS",
+    "region": "fips-cn-northwest-1",
+    "hostname": "elasticfilesystem-fips.cn-northwest-1.amazonaws.com.cn"
+  },
+  {
+    "endpointPrefix": "snowball",
+    "clientName": "Snowball",
+    "region": "fips-cn-north-1",
+    "hostname": "snowball-fips.cn-north-1.amazonaws.com.cn"
+  },
+  {
+    "endpointPrefix": "snowball",
+    "clientName": "Snowball",
+    "region": "fips-cn-northwest-1",
+    "hostname": "snowball-fips.cn-northwest-1.amazonaws.com.cn"
+  },
+  {
+    "endpointPrefix": "waf-regional",
+    "clientName": "WAFRegional",
+    "region": "fips-cn-north-1",
+    "hostname": "waf-regional-fips.cn-north-1.amazonaws.com.cn"
+  },
+  {
+    "endpointPrefix": "waf-regional",
+    "clientName": "WAFRegional",
+    "region": "fips-cn-northwest-1",
+    "hostname": "waf-regional-fips.cn-northwest-1.amazonaws.com.cn"
+  },
+  {
+    "endpointPrefix": "acm-pca",
+    "clientName": "ACMPCA",
+    "region": "fips-us-gov-east-1",
+    "hostname": "acm-pca.us-gov-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "acm-pca",
+    "clientName": "ACMPCA",
+    "region": "fips-us-gov-west-1",
+    "hostname": "acm-pca.us-gov-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "api.detective",
+    "clientName": "Detective",
+    "region": "us-gov-east-1-fips",
+    "hostname": "api.detective-fips.us-gov-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "api.detective",
+    "clientName": "Detective",
+    "region": "us-gov-west-1-fips",
+    "hostname": "api.detective-fips.us-gov-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "api.ecr",
+    "clientName": "ECR",
+    "region": "fips-dkr-us-gov-east-1",
+    "hostname": "ecr-fips.us-gov-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "api.ecr",
+    "clientName": "ECR",
+    "region": "fips-dkr-us-gov-west-1",
+    "hostname": "ecr-fips.us-gov-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "api.ecr",
+    "clientName": "ECR",
+    "region": "fips-us-gov-east-1",
+    "hostname": "ecr-fips.us-gov-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "api.ecr",
+    "clientName": "ECR",
+    "region": "fips-us-gov-west-1",
+    "hostname": "ecr-fips.us-gov-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "api.sagemaker",
+    "clientName": "SageMaker",
+    "region": "us-gov-west-1-fips",
+    "hostname": "api-fips.sagemaker.us-gov-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "athena",
+    "clientName": "Athena",
+    "region": "fips-us-gov-east-1",
+    "hostname": "athena-fips.us-gov-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "athena",
+    "clientName": "Athena",
+    "region": "fips-us-gov-west-1",
+    "hostname": "athena-fips.us-gov-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "batch",
+    "clientName": "Batch",
+    "region": "fips-us-gov-east-1",
+    "hostname": "batch.us-gov-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "batch",
+    "clientName": "Batch",
+    "region": "fips-us-gov-west-1",
+    "hostname": "batch.us-gov-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "cloudcontrolapi",
+    "clientName": "CloudControl",
+    "region": "fips-us-gov-east-1",
+    "hostname": "cloudcontrolapi-fips.us-gov-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "cloudcontrolapi",
+    "clientName": "CloudControl",
+    "region": "fips-us-gov-west-1",
+    "hostname": "cloudcontrolapi-fips.us-gov-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "codebuild",
+    "clientName": "CodeBuild",
+    "region": "us-gov-east-1-fips",
+    "hostname": "codebuild-fips.us-gov-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "codebuild",
+    "clientName": "CodeBuild",
+    "region": "us-gov-west-1-fips",
+    "hostname": "codebuild-fips.us-gov-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "codedeploy",
+    "clientName": "CodeDeploy",
+    "region": "us-gov-east-1-fips",
+    "hostname": "codedeploy-fips.us-gov-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "codedeploy",
+    "clientName": "CodeDeploy",
+    "region": "us-gov-west-1-fips",
+    "hostname": "codedeploy-fips.us-gov-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "codepipeline",
+    "clientName": "CodePipeline",
+    "region": "fips-us-gov-west-1",
+    "hostname": "codepipeline-fips.us-gov-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "cognito-identity",
+    "clientName": "CognitoIdentity",
+    "region": "fips-us-gov-west-1",
+    "hostname": "cognito-identity-fips.us-gov-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "cognito-idp",
+    "clientName": "CognitoIdentityServiceProvider",
+    "region": "fips-us-gov-west-1",
+    "hostname": "cognito-idp-fips.us-gov-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "comprehend",
+    "clientName": "Comprehend",
+    "region": "fips-us-gov-west-1",
+    "hostname": "comprehend-fips.us-gov-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "comprehendmedical",
+    "clientName": "ComprehendMedical",
+    "region": "fips-us-gov-west-1",
+    "hostname": "comprehendmedical-fips.us-gov-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "config",
+    "clientName": "ConfigService",
+    "region": "fips-us-gov-east-1",
+    "hostname": "config.us-gov-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "config",
+    "clientName": "ConfigService",
+    "region": "fips-us-gov-west-1",
+    "hostname": "config.us-gov-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "data.jobs.iot",
+    "clientName": "IoTJobsDataPlane",
+    "region": "fips-us-gov-east-1",
+    "hostname": "data.jobs.iot-fips.us-gov-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "data.jobs.iot",
+    "clientName": "IoTJobsDataPlane",
+    "region": "fips-us-gov-west-1",
+    "hostname": "data.jobs.iot-fips.us-gov-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "datasync",
+    "clientName": "DataSync",
+    "region": "fips-us-gov-east-1",
+    "hostname": "datasync-fips.us-gov-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "datasync",
+    "clientName": "DataSync",
+    "region": "fips-us-gov-west-1",
+    "hostname": "datasync-fips.us-gov-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "ds",
+    "clientName": "DirectoryService",
+    "region": "fips-us-gov-east-1",
+    "hostname": "ds-fips.us-gov-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "ds",
+    "clientName": "DirectoryService",
+    "region": "fips-us-gov-west-1",
+    "hostname": "ds-fips.us-gov-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "dynamodb",
+    "clientName": "DynamoDB",
+    "region": "us-gov-east-1-fips",
+    "hostname": "dynamodb.us-gov-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "dynamodb",
+    "clientName": "DynamoDB",
+    "region": "us-gov-west-1-fips",
+    "hostname": "dynamodb.us-gov-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "ecs",
+    "clientName": "ECS",
+    "region": "fips-us-gov-east-1",
+    "hostname": "ecs-fips.us-gov-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "ecs",
+    "clientName": "ECS",
+    "region": "fips-us-gov-west-1",
+    "hostname": "ecs-fips.us-gov-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "eks",
+    "clientName": "EKS",
+    "region": "fips-us-gov-east-1",
+    "hostname": "eks.us-gov-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "eks",
+    "clientName": "EKS",
+    "region": "fips-us-gov-west-1",
+    "hostname": "eks.us-gov-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "elasticfilesystem",
+    "clientName": "EFS",
+    "region": "fips-us-gov-east-1",
+    "hostname": "elasticfilesystem-fips.us-gov-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "elasticfilesystem",
+    "clientName": "EFS",
+    "region": "fips-us-gov-west-1",
+    "hostname": "elasticfilesystem-fips.us-gov-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "elasticloadbalancing",
+    "clientName": "ELBv2",
+    "region": "fips-us-gov-east-1",
+    "hostname": "elasticloadbalancing.us-gov-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "elasticloadbalancing",
+    "clientName": "ELBv2",
+    "region": "fips-us-gov-west-1",
+    "hostname": "elasticloadbalancing.us-gov-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "elasticmapreduce",
+    "clientName": "EMR",
+    "region": "fips-us-gov-east-1",
+    "hostname": "elasticmapreduce.us-gov-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "elasticmapreduce",
+    "clientName": "EMR",
+    "region": "fips-us-gov-west-1",
+    "hostname": "elasticmapreduce.us-gov-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "email",
+    "clientName": "SESV2",
+    "region": "fips-us-gov-west-1",
+    "hostname": "email-fips.us-gov-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "firehose",
+    "clientName": "Firehose",
+    "region": "fips-us-gov-east-1",
+    "hostname": "firehose-fips.us-gov-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "firehose",
+    "clientName": "Firehose",
+    "region": "fips-us-gov-west-1",
+    "hostname": "firehose-fips.us-gov-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "fms",
+    "clientName": "FMS",
+    "region": "fips-us-gov-east-1",
+    "hostname": "fms-fips.us-gov-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "fms",
+    "clientName": "FMS",
+    "region": "fips-us-gov-west-1",
+    "hostname": "fms-fips.us-gov-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "fsx",
+    "clientName": "FSx",
+    "region": "fips-prod-us-gov-east-1",
+    "hostname": "fsx-fips.us-gov-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "fsx",
+    "clientName": "FSx",
+    "region": "fips-prod-us-gov-west-1",
+    "hostname": "fsx-fips.us-gov-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "glue",
+    "clientName": "Glue",
+    "region": "fips-us-gov-east-1",
+    "hostname": "glue-fips.us-gov-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "glue",
+    "clientName": "Glue",
+    "region": "fips-us-gov-west-1",
+    "hostname": "glue-fips.us-gov-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "greengrass",
+    "clientName": "GreengrassV2",
+    "region": "fips-us-gov-east-1",
+    "hostname": "greengrass-fips.us-gov-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "guardduty",
+    "clientName": "GuardDuty",
+    "region": "us-gov-east-1-fips",
+    "hostname": "guardduty.us-gov-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "guardduty",
+    "clientName": "GuardDuty",
+    "region": "us-gov-west-1-fips",
+    "hostname": "guardduty.us-gov-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "health",
+    "clientName": "Health",
+    "region": "fips-us-gov-west-1",
+    "hostname": "health-fips.us-gov-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "identitystore",
+    "clientName": "IdentityStore",
+    "region": "fips-us-gov-west-1",
+    "hostname": "identitystore.us-gov-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "inspector",
+    "clientName": "Inspector",
+    "region": "fips-us-gov-east-1",
+    "hostname": "inspector-fips.us-gov-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "inspector",
+    "clientName": "Inspector",
+    "region": "fips-us-gov-west-1",
+    "hostname": "inspector-fips.us-gov-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "iot",
+    "clientName": "Iot",
+    "region": "fips-us-gov-east-1",
+    "hostname": "iot-fips.us-gov-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "iot",
+    "clientName": "Iot",
+    "region": "fips-us-gov-west-1",
+    "hostname": "iot-fips.us-gov-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "iotsecuredtunneling",
+    "clientName": "IoTSecureTunneling",
+    "region": "fips-us-gov-east-1",
+    "hostname": "api.tunneling.iot-fips.us-gov-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "iotsecuredtunneling",
+    "clientName": "IoTSecureTunneling",
+    "region": "fips-us-gov-west-1",
+    "hostname": "api.tunneling.iot-fips.us-gov-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "lakeformation",
+    "clientName": "LakeFormation",
+    "region": "fips-us-gov-west-1",
+    "hostname": "lakeformation-fips.us-gov-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "lambda",
+    "clientName": "Lambda",
+    "region": "fips-us-gov-east-1",
+    "hostname": "lambda-fips.us-gov-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "lambda",
+    "clientName": "Lambda",
+    "region": "fips-us-gov-west-1",
+    "hostname": "lambda-fips.us-gov-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "license-manager",
+    "clientName": "LicenseManager",
+    "region": "fips-us-gov-east-1",
+    "hostname": "license-manager-fips.us-gov-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "license-manager",
+    "clientName": "LicenseManager",
+    "region": "fips-us-gov-west-1",
+    "hostname": "license-manager-fips.us-gov-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "models.lex",
+    "clientName": "LexModelBuildingService",
+    "region": "us-gov-west-1-fips",
+    "hostname": "models-fips.lex.us-gov-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "monitoring",
+    "clientName": "CloudWatch",
+    "region": "fips-us-gov-east-1",
+    "hostname": "monitoring.us-gov-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "monitoring",
+    "clientName": "CloudWatch",
+    "region": "fips-us-gov-west-1",
+    "hostname": "monitoring.us-gov-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "mq",
+    "clientName": "MQ",
+    "region": "fips-us-gov-east-1",
+    "hostname": "mq-fips.us-gov-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "mq",
+    "clientName": "MQ",
+    "region": "fips-us-gov-west-1",
+    "hostname": "mq-fips.us-gov-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "network-firewall",
+    "clientName": "NetworkFirewall",
+    "region": "fips-us-gov-east-1",
+    "hostname": "network-firewall-fips.us-gov-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "network-firewall",
+    "clientName": "NetworkFirewall",
+    "region": "fips-us-gov-west-1",
+    "hostname": "network-firewall-fips.us-gov-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "organizations",
+    "clientName": "Organizations",
+    "region": "fips-aws-us-gov-global",
+    "hostname": "organizations.us-gov-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "pinpoint",
+    "clientName": "Pinpoint",
+    "region": "fips-us-gov-west-1",
+    "hostname": "pinpoint-fips.us-gov-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "polly",
+    "clientName": "Polly",
+    "region": "fips-us-gov-west-1",
+    "hostname": "polly-fips.us-gov-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "resource-groups",
+    "clientName": "ResourceGroups",
+    "region": "fips-us-gov-east-1",
+    "hostname": "resource-groups.us-gov-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "resource-groups",
+    "clientName": "ResourceGroups",
+    "region": "fips-us-gov-west-1",
+    "hostname": "resource-groups.us-gov-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "route53",
+    "clientName": "Route53",
+    "region": "fips-aws-us-gov-global",
+    "hostname": "route53.us-gov.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "runtime.lex",
+    "clientName": "LexRuntime",
+    "region": "us-gov-west-1-fips",
+    "hostname": "runtime-fips.lex.us-gov-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "runtime.sagemaker",
+    "clientName": "SageMakerRuntime",
+    "region": "us-gov-west-1-fips",
+    "hostname": "runtime.sagemaker.us-gov-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "s3",
+    "clientName": "S3",
+    "region": "fips-us-gov-west-1",
+    "hostname": "s3-fips.us-gov-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "s3-control",
+    "clientName": "S3Control",
+    "region": "us-gov-east-1-fips",
+    "hostname": "s3-control-fips.us-gov-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "s3-control",
+    "clientName": "S3Control",
+    "region": "us-gov-west-1-fips",
+    "hostname": "s3-control-fips.us-gov-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "secretsmanager",
+    "clientName": "SecretsManager",
+    "region": "us-gov-east-1-fips",
+    "hostname": "secretsmanager-fips.us-gov-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "secretsmanager",
+    "clientName": "SecretsManager",
+    "region": "us-gov-west-1-fips",
+    "hostname": "secretsmanager-fips.us-gov-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "securityhub",
+    "clientName": "SecurityHub",
+    "region": "fips-us-gov-east-1",
+    "hostname": "securityhub-fips.us-gov-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "securityhub",
+    "clientName": "SecurityHub",
+    "region": "fips-us-gov-west-1",
+    "hostname": "securityhub-fips.us-gov-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "servicecatalog",
+    "clientName": "ServiceCatalog",
+    "region": "us-gov-east-1-fips",
+    "hostname": "servicecatalog-fips.us-gov-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "servicecatalog",
+    "clientName": "ServiceCatalog",
+    "region": "us-gov-west-1-fips",
+    "hostname": "servicecatalog-fips.us-gov-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "servicecatalog-appregistry",
+    "clientName": "ServiceCatalogAppRegistry",
+    "region": "fips-us-gov-east-1",
+    "hostname": "servicecatalog-appregistry.us-gov-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "servicecatalog-appregistry",
+    "clientName": "ServiceCatalogAppRegistry",
+    "region": "fips-us-gov-west-1",
+    "hostname": "servicecatalog-appregistry.us-gov-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "servicequotas",
+    "clientName": "ServiceQuotas",
+    "region": "fips-us-gov-east-1",
+    "hostname": "servicequotas.us-gov-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "servicequotas",
+    "clientName": "ServiceQuotas",
+    "region": "fips-us-gov-west-1",
+    "hostname": "servicequotas.us-gov-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "sms",
+    "clientName": "SMS",
+    "region": "fips-us-gov-east-1",
+    "hostname": "sms-fips.us-gov-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "sms",
+    "clientName": "SMS",
+    "region": "fips-us-gov-west-1",
+    "hostname": "sms-fips.us-gov-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "snowball",
+    "clientName": "Snowball",
+    "region": "fips-us-gov-east-1",
+    "hostname": "snowball-fips.us-gov-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "snowball",
+    "clientName": "Snowball",
+    "region": "fips-us-gov-west-1",
+    "hostname": "snowball-fips.us-gov-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "ssm",
+    "clientName": "SSM",
+    "region": "fips-us-gov-east-1",
+    "hostname": "ssm.us-gov-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "ssm",
+    "clientName": "SSM",
+    "region": "fips-us-gov-west-1",
+    "hostname": "ssm.us-gov-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "states",
+    "clientName": "StepFunctions",
+    "region": "fips-us-gov-east-1",
+    "hostname": "states-fips.us-gov-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "states",
+    "clientName": "StepFunctions",
+    "region": "fips-us-gov-west-1",
+    "hostname": "states.us-gov-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "streams.dynamodb",
+    "clientName": "DynamoDBStreams",
+    "region": "us-gov-east-1-fips",
+    "hostname": "streams.dynamodb-fips.us-gov-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "streams.dynamodb",
+    "clientName": "DynamoDBStreams",
+    "region": "us-gov-west-1-fips",
+    "hostname": "streams.dynamodb-fips.us-gov-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "sts",
+    "clientName": "STS",
+    "region": "us-gov-east-1-fips",
+    "hostname": "sts.us-gov-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "sts",
+    "clientName": "STS",
+    "region": "us-gov-west-1-fips",
+    "hostname": "sts.us-gov-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "support",
+    "clientName": "Support",
+    "region": "fips-us-gov-west-1",
+    "hostname": "support.us-gov-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "textract",
+    "clientName": "Textract",
+    "region": "fips-us-gov-east-1",
+    "hostname": "textract-fips.us-gov-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "textract",
+    "clientName": "Textract",
+    "region": "fips-us-gov-west-1",
+    "hostname": "textract-fips.us-gov-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "transcribe",
+    "clientName": "TranscribeService",
+    "region": "fips-us-gov-east-1",
+    "hostname": "fips.transcribe.us-gov-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "transcribe",
+    "clientName": "TranscribeService",
+    "region": "fips-us-gov-west-1",
+    "hostname": "fips.transcribe.us-gov-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "transfer",
+    "clientName": "Transfer",
+    "region": "fips-us-gov-east-1",
+    "hostname": "transfer-fips.us-gov-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "transfer",
+    "clientName": "Transfer",
+    "region": "fips-us-gov-west-1",
+    "hostname": "transfer-fips.us-gov-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "translate",
+    "clientName": "Translate",
+    "region": "us-gov-west-1-fips",
+    "hostname": "translate-fips.us-gov-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "waf-regional",
+    "clientName": "WAFRegional",
+    "region": "fips-us-gov-east-1",
+    "hostname": "waf-regional-fips.us-gov-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "waf-regional",
+    "clientName": "WAFRegional",
+    "region": "fips-us-gov-west-1",
+    "hostname": "waf-regional-fips.us-gov-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "workspaces",
+    "clientName": "WorkSpaces",
+    "region": "fips-us-gov-west-1",
+    "hostname": "workspaces-fips.us-gov-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "xray",
+    "clientName": "XRay",
+    "region": "fips-us-gov-east-1",
+    "hostname": "xray-fips.us-gov-east-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "xray",
+    "clientName": "XRay",
+    "region": "fips-us-gov-west-1",
+    "hostname": "xray-fips.us-gov-west-1.amazonaws.com"
+  },
+  {
+    "endpointPrefix": "elasticfilesystem",
+    "clientName": "EFS",
+    "region": "fips-us-iso-east-1",
+    "hostname": "elasticfilesystem-fips.us-iso-east-1.c2s.ic.gov"
+  }
+]

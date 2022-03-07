@@ -111,7 +111,7 @@
           "shape": "InvalidRequestException"
         }
       ],
-      "documentation": "<p>Adds an <a>InputProcessingConfiguration</a> to a SQL-based Kinesis Data Analytics application. An input processor pre-processes records on the input stream before the application's SQL code executes. Currently, the only input processor available is <a href=\"https://docs.aws.amazon.com/lambda/\">AWS Lambda</a>.</p>"
+      "documentation": "<p>Adds an <a>InputProcessingConfiguration</a> to a SQL-based Kinesis Data Analytics application. An input processor pre-processes records on the input stream before the application's SQL code executes. Currently, the only input processor available is <a href=\"https://docs.aws.amazon.com/lambda/\">Amazon Lambda</a>.</p>"
     },
     "AddApplicationOutput": {
       "name": "AddApplicationOutput",
@@ -142,7 +142,7 @@
           "shape": "InvalidRequestException"
         }
       ],
-      "documentation": "<p>Adds an external destination to your SQL-based Kinesis Data Analytics application.</p> <p>If you want Kinesis Data Analytics to deliver data from an in-application stream within your application to an external destination (such as an Kinesis data stream, a Kinesis Data Firehose delivery stream, or an AWS Lambda function), you add the relevant configuration to your application using this operation. You can configure one or more outputs for your application. Each output configuration maps an in-application stream and an external destination.</p> <p> You can use one of the output configurations to deliver data from your in-application error stream to an external destination so that you can analyze the errors. </p> <p> Any configuration update, including adding a streaming source using this operation, results in a new version of the application. You can use the <a>DescribeApplication</a> operation to find the current application version.</p>"
+      "documentation": "<p>Adds an external destination to your SQL-based Kinesis Data Analytics application.</p> <p>If you want Kinesis Data Analytics to deliver data from an in-application stream within your application to an external destination (such as an Kinesis data stream, a Kinesis Data Firehose delivery stream, or an Amazon Lambda function), you add the relevant configuration to your application using this operation. You can configure one or more outputs for your application. Each output configuration maps an in-application stream and an external destination.</p> <p> You can use one of the output configurations to deliver data from your in-application error stream to an external destination so that you can analyze the errors. </p> <p> Any configuration update, including adding a streaming source using this operation, results in a new version of the application. You can use the <a>DescribeApplication</a> operation to find the current application version.</p>"
     },
     "AddApplicationReferenceDataSource": {
       "name": "AddApplicationReferenceDataSource",
@@ -239,6 +239,9 @@
         },
         {
           "shape": "ConcurrentModificationException"
+        },
+        {
+          "shape": "UnsupportedOperationException"
         }
       ],
       "documentation": "<p>Creates a Kinesis Data Analytics application. For information about creating a Kinesis Data Analytics application, see <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/java/getting-started.html\">Creating an Application</a>.</p>"
@@ -578,6 +581,31 @@
       ],
       "documentation": "<p>Returns information about a snapshot of application state data.</p>"
     },
+    "DescribeApplicationVersion": {
+      "name": "DescribeApplicationVersion",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeApplicationVersionRequest"
+      },
+      "output": {
+        "shape": "DescribeApplicationVersionResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidArgumentException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "UnsupportedOperationException"
+        }
+      ],
+      "documentation": "<p>Provides a detailed description of a specified version of the application. To see a list of all the versions of an application, invoke the <a>ListApplicationVersions</a> operation.</p> <note> <p>This operation is supported only for Amazon Kinesis Data Analytics for Apache Flink.</p> </note>"
+    },
     "DiscoverInputSchema": {
       "name": "DiscoverInputSchema",
       "http": {
@@ -605,6 +633,9 @@
         },
         {
           "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "UnsupportedOperationException"
         }
       ],
       "documentation": "<p>Infers a schema for a SQL-based Kinesis Data Analytics application by evaluating sample records on the specified streaming source (Kinesis data stream or Kinesis Data Firehose delivery stream) or Amazon S3 object. In the response, the operation returns the inferred schema and also the sample records that the operation used to infer the schema.</p> <p> You can use the inferred schema when configuring a streaming source for your application. When you create an application using the Kinesis Data Analytics console, the console uses this operation to infer a schema and show it in the console user interface. </p>"
@@ -630,6 +661,31 @@
         }
       ],
       "documentation": "<p>Lists information about the current application snapshots.</p>"
+    },
+    "ListApplicationVersions": {
+      "name": "ListApplicationVersions",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListApplicationVersionsRequest"
+      },
+      "output": {
+        "shape": "ListApplicationVersionsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidArgumentException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "UnsupportedOperationException"
+        }
+      ],
+      "documentation": "<p>Lists all the versions for the specified application, including versions that were rolled back. The response also includes a summary of the configuration associated with each version.</p> <p>To get the complete description of a specific application version, invoke the <a>DescribeApplicationVersion</a> operation.</p> <note> <p>This operation is supported only for Amazon Kinesis Data Analytics for Apache Flink.</p> </note>"
     },
     "ListApplications": {
       "name": "ListApplications",
@@ -674,6 +730,40 @@
         }
       ],
       "documentation": "<p>Retrieves the list of key-value tags assigned to the application. For more information, see <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/java/how-tagging.html\">Using Tagging</a>.</p>"
+    },
+    "RollbackApplication": {
+      "name": "RollbackApplication",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "RollbackApplicationRequest"
+      },
+      "output": {
+        "shape": "RollbackApplicationResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InvalidArgumentException"
+        },
+        {
+          "shape": "ResourceInUseException"
+        },
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "ConcurrentModificationException"
+        },
+        {
+          "shape": "UnsupportedOperationException"
+        }
+      ],
+      "documentation": "<p>Reverts the application to the previous running version. You can roll back an application if you suspect it is stuck in a transient status. </p> <p>You can roll back an application only if it is in the <code>UPDATING</code> or <code>AUTOSCALING</code> status.</p> <p>When you rollback an application, it loads state data from the last successful snapshot. If the application has no snapshots, Kinesis Data Analytics rejects the rollback request.</p> <p>This action is not supported for Kinesis Data Analytics for SQL applications.</p>"
     },
     "StartApplication": {
       "name": "StartApplication",
@@ -871,7 +961,7 @@
           "shape": "UnsupportedOperationException"
         }
       ],
-      "documentation": "<p>Updates the configuration for the automatic maintenance that Kinesis Data Analytics performs on the application. For information about automatic application maintenance, see <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/java/maintenance.html\">Kinesis Data Analytics for Apache Flink Maintenance</a>.</p>"
+      "documentation": "<p>Updates the maintenance configuration of the Kinesis Data Analytics application. </p> <p>You can invoke this operation on an application that is in one of the two following states: <code>READY</code> or <code>RUNNING</code>. If you invoke it when the application is in a state other than these two states, it throws a <code>ResourceInUseException</code>. The service makes use of the updated configuration the next time it schedules maintenance for the application. If you invoke this operation after the service schedules maintenance, the service will apply the configuration update the next time it schedules maintenance for the application. This means that you might not see the maintenance configuration update applied to the maintenance process that follows a successful invocation of this operation, but to the following maintenance process instead.</p> <p>To see the current maintenance configuration of your application, invoke the <a>DescribeApplication</a> operation.</p> <p>For information about application maintenance, see <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/java/maintenance.html\">Kinesis Data Analytics for Apache Flink Maintenance</a>.</p> <note> <p>This operation is supported only for Amazon Kinesis Data Analytics for Apache Flink.</p> </note>"
     }
   },
   "shapes": {
@@ -879,7 +969,6 @@
       "type": "structure",
       "required": [
         "ApplicationName",
-        "CurrentApplicationVersionId",
         "CloudWatchLoggingOption"
       ],
       "members": {
@@ -889,11 +978,15 @@
         },
         "CurrentApplicationVersionId": {
           "shape": "ApplicationVersionId",
-          "documentation": "<p>The version ID of the Kinesis Data Analytics application. You can retrieve the application version ID using <a>DescribeApplication</a>.</p>"
+          "documentation": "<p>The version ID of the Kinesis Data Analytics application. You must provide the <code>CurrentApplicationVersionId</code> or the <code>ConditionalToken</code>.You can retrieve the application version ID using <a>DescribeApplication</a>. For better concurrency support, use the <code>ConditionalToken</code> parameter instead of <code>CurrentApplicationVersionId</code>.</p>"
         },
         "CloudWatchLoggingOption": {
           "shape": "CloudWatchLoggingOption",
           "documentation": "<p>Provides the Amazon CloudWatch log stream Amazon Resource Name (ARN). </p>"
+        },
+        "ConditionalToken": {
+          "shape": "ConditionalToken",
+          "documentation": "<p>A value you use to implement strong concurrency for application updates. You must provide the <code>CurrentApplicationVersionId</code> or the <code>ConditionalToken</code>. You get the application's current <code>ConditionalToken</code> using <a>DescribeApplication</a>. For better concurrency support, use the <code>ConditionalToken</code> parameter instead of <code>CurrentApplicationVersionId</code>.</p>"
         }
       }
     },
@@ -950,7 +1043,7 @@
         },
         "ApplicationVersionId": {
           "shape": "ApplicationVersionId",
-          "documentation": "<p>Provides the current application version.</p>"
+          "documentation": "<p>Provides the current application version. </p>"
         },
         "InputId": {
           "shape": "Id",
@@ -976,7 +1069,7 @@
         },
         "CurrentApplicationVersionId": {
           "shape": "ApplicationVersionId",
-          "documentation": "<p>The current version of your application. You can use the <a>DescribeApplication</a> operation to find the current application version.</p>"
+          "documentation": "<p>The current version of your application. You must provide the <code>ApplicationVersionID</code> or the <code>ConditionalToken</code>.You can use the <a>DescribeApplication</a> operation to find the current application version.</p>"
         },
         "Input": {
           "shape": "Input",
@@ -1019,7 +1112,7 @@
         },
         "Output": {
           "shape": "Output",
-          "documentation": "<p>An array of objects, each describing one output configuration. In the output configuration, you specify the name of an in-application stream, a destination (that is, a Kinesis data stream, a Kinesis Data Firehose delivery stream, or an AWS Lambda function), and record the formation to use when writing to the destination.</p>"
+          "documentation": "<p>An array of objects, each describing one output configuration. In the output configuration, you specify the name of an in-application stream, a destination (that is, a Kinesis data stream, a Kinesis Data Firehose delivery stream, or an Amazon Lambda function), and record the formation to use when writing to the destination.</p>"
         }
       }
     },
@@ -1083,7 +1176,6 @@
       "type": "structure",
       "required": [
         "ApplicationName",
-        "CurrentApplicationVersionId",
         "VpcConfiguration"
       ],
       "members": {
@@ -1093,11 +1185,15 @@
         },
         "CurrentApplicationVersionId": {
           "shape": "ApplicationVersionId",
-          "documentation": "<p>The version of the application to which you want to add the VPC configuration. You can use the <a>DescribeApplication</a> operation to get the current application version. If the version specified is not the current version, the <code>ConcurrentModificationException</code> is returned.</p>"
+          "documentation": "<p>The version of the application to which you want to add the VPC configuration. You must provide the <code>CurrentApplicationVersionId</code> or the <code>ConditionalToken</code>. You can use the <a>DescribeApplication</a> operation to get the current application version. If the version specified is not the current version, the <code>ConcurrentModificationException</code> is returned. For better concurrency support, use the <code>ConditionalToken</code> parameter instead of <code>CurrentApplicationVersionId</code>.</p>"
         },
         "VpcConfiguration": {
           "shape": "VpcConfiguration",
           "documentation": "<p>Description of the VPC to add to the application.</p>"
+        },
+        "ConditionalToken": {
+          "shape": "ConditionalToken",
+          "documentation": "<p>A value you use to implement strong concurrency for application updates. You must provide the <code>ApplicationVersionID</code> or the <code>ConditionalToken</code>. You get the application's current <code>ConditionalToken</code> using <a>DescribeApplication</a>. For better concurrency support, use the <code>ConditionalToken</code> parameter instead of <code>CurrentApplicationVersionId</code>.</p>"
         }
       }
     },
@@ -1110,7 +1206,7 @@
         },
         "ApplicationVersionId": {
           "shape": "ApplicationVersionId",
-          "documentation": "<p>Provides the current application version. Kinesis Data Analytics updates the ApplicationVersionId each time you update the application. </p>"
+          "documentation": "<p>Provides the current application version. Kinesis Data Analytics updates the ApplicationVersionId each time you update the application.</p>"
         },
         "VpcConfigurationDescription": {
           "shape": "VpcConfigurationDescription",
@@ -1133,7 +1229,7 @@
           "documentation": "<p>Specifies whether the code content is in text or zip format.</p>"
         }
       },
-      "documentation": "<p>Describes code configuration for a Flink-based Kinesis Data Analytics application.</p>"
+      "documentation": "<p>Describes code configuration for an application.</p>"
     },
     "ApplicationCodeConfigurationDescription": {
       "type": "structure",
@@ -1150,7 +1246,7 @@
           "documentation": "<p>Describes details about the location and format of the application code.</p>"
         }
       },
-      "documentation": "<p>Describes code configuration for a Flink-based Kinesis Data Analytics application.</p>"
+      "documentation": "<p>Describes code configuration for an application.</p>"
     },
     "ApplicationCodeConfigurationUpdate": {
       "type": "structure",
@@ -1164,13 +1260,10 @@
           "documentation": "<p>Describes updates to the code content of an application.</p>"
         }
       },
-      "documentation": "<p>Describes code configuration updates to a Flink-based Kinesis Data Analytics application.</p>"
+      "documentation": "<p>Describes code configuration updates for an application. This is supported for a Flink-based Kinesis Data Analytics application or a SQL-based Kinesis Data Analytics application.</p>"
     },
     "ApplicationConfiguration": {
       "type": "structure",
-      "required": [
-        "ApplicationCodeConfiguration"
-      ],
       "members": {
         "SqlApplicationConfiguration": {
           "shape": "SqlApplicationConfiguration",
@@ -1195,6 +1288,10 @@
         "VpcConfigurations": {
           "shape": "VpcConfigurations",
           "documentation": "<p>The array of descriptions of VPC configurations available to the application.</p>"
+        },
+        "ZeppelinApplicationConfiguration": {
+          "shape": "ZeppelinApplicationConfiguration",
+          "documentation": "<p>The configuration parameters for a Kinesis Data Analytics Studio notebook.</p>"
         }
       },
       "documentation": "<p>Specifies the creation parameters for a Kinesis Data Analytics application.</p>"
@@ -1229,6 +1326,10 @@
         "VpcConfigurationDescriptions": {
           "shape": "VpcConfigurationDescriptions",
           "documentation": "<p>The array of descriptions of VPC configurations available to the application.</p>"
+        },
+        "ZeppelinApplicationConfigurationDescription": {
+          "shape": "ZeppelinApplicationConfigurationDescription",
+          "documentation": "<p>The configuration parameters for a Kinesis Data Analytics Studio notebook.</p>"
         }
       },
       "documentation": "<p>Describes details about the application code and starting parameters for a Kinesis Data Analytics application.</p>"
@@ -1242,7 +1343,7 @@
         },
         "ApplicationCodeConfigurationUpdate": {
           "shape": "ApplicationCodeConfigurationUpdate",
-          "documentation": "<p>Describes updates to a Flink-based Kinesis Data Analytics application's code configuration.</p>"
+          "documentation": "<p>Describes updates to an application's code configuration.</p>"
         },
         "FlinkApplicationConfigurationUpdate": {
           "shape": "FlinkApplicationConfigurationUpdate",
@@ -1259,6 +1360,10 @@
         "VpcConfigurationUpdates": {
           "shape": "VpcConfigurationUpdates",
           "documentation": "<p>Updates to the array of descriptions of VPC configurations available to the application.</p>"
+        },
+        "ZeppelinApplicationConfigurationUpdate": {
+          "shape": "ZeppelinApplicationConfigurationUpdate",
+          "documentation": "<p>Updates to the configuration of a Kinesis Data Analytics Studio notebook.</p>"
         }
       },
       "documentation": "<p>Describes updates to an application's configuration.</p>"
@@ -1316,7 +1421,7 @@
         },
         "ApplicationConfigurationDescription": {
           "shape": "ApplicationConfigurationDescription",
-          "documentation": "<p>Provides details about the application's Java, SQL, or Scala code and starting parameters.</p>"
+          "documentation": "<p>Describes details about the application code and starting parameters for a Kinesis Data Analytics application.</p>"
         },
         "CloudWatchLoggingOptionDescriptions": {
           "shape": "CloudWatchLoggingOptionDescriptions",
@@ -1324,7 +1429,27 @@
         },
         "ApplicationMaintenanceConfigurationDescription": {
           "shape": "ApplicationMaintenanceConfigurationDescription",
-          "documentation": "<p>Describes the time window for automatic application maintenance.</p>"
+          "documentation": "<p>The details of the maintenance configuration for the application.</p>"
+        },
+        "ApplicationVersionUpdatedFrom": {
+          "shape": "ApplicationVersionId",
+          "documentation": "<p>The previous application version before the latest application update. <a>RollbackApplication</a> reverts the application to this version.</p>"
+        },
+        "ApplicationVersionRolledBackFrom": {
+          "shape": "ApplicationVersionId",
+          "documentation": "<p>If you reverted the application using <a>RollbackApplication</a>, the application version when <code>RollbackApplication</code> was called.</p>"
+        },
+        "ConditionalToken": {
+          "shape": "ConditionalToken",
+          "documentation": "<p>A value you use to implement strong concurrency for application updates.</p>"
+        },
+        "ApplicationVersionRolledBackTo": {
+          "shape": "ApplicationVersionId",
+          "documentation": "<p>The version to which you want to roll back the application.</p>"
+        },
+        "ApplicationMode": {
+          "shape": "ApplicationMode",
+          "documentation": "<p>To create a Kinesis Data Analytics Studio notebook, you must set the mode to <code>INTERACTIVE</code>. However, for a Kinesis Data Analytics for Apache Flink application, the mode is optional.</p>"
         }
       },
       "documentation": "<p>Describes the application, including the application Amazon Resource Name (ARN), status, latest version, and input and output configurations.</p>"
@@ -1338,14 +1463,14 @@
       "members": {
         "ApplicationMaintenanceWindowStartTime": {
           "shape": "ApplicationMaintenanceWindowStartTime",
-          "documentation": "<p>The start time for the automatic maintenance window.</p>"
+          "documentation": "<p>The start time for the maintenance window.</p>"
         },
         "ApplicationMaintenanceWindowEndTime": {
           "shape": "ApplicationMaintenanceWindowEndTime",
-          "documentation": "<p>The end time for the automatic maintenance window.</p>"
+          "documentation": "<p>The end time for the maintenance window.</p>"
         }
       },
-      "documentation": "<p>Describes the time window for automatic application maintenance.</p>"
+      "documentation": "<p>The details of the maintenance configuration for the application.</p>"
     },
     "ApplicationMaintenanceConfigurationUpdate": {
       "type": "structure",
@@ -1355,10 +1480,10 @@
       "members": {
         "ApplicationMaintenanceWindowStartTimeUpdate": {
           "shape": "ApplicationMaintenanceWindowStartTime",
-          "documentation": "<p>The updated start time for the automatic maintenance window.</p>"
+          "documentation": "<p>The updated start time for the maintenance window.</p>"
         }
       },
-      "documentation": "<p>Describes the updated time window for automatic application maintenance.</p>"
+      "documentation": "<p>Describes the updated maintenance configuration for the application.</p>"
     },
     "ApplicationMaintenanceWindowEndTime": {
       "type": "string",
@@ -1371,6 +1496,13 @@
       "max": 5,
       "min": 5,
       "pattern": "([01][0-9]|2[0-3]):[0-5][0-9]"
+    },
+    "ApplicationMode": {
+      "type": "string",
+      "enum": [
+        "STREAMING",
+        "INTERACTIVE"
+      ]
     },
     "ApplicationName": {
       "type": "string",
@@ -1437,7 +1569,7 @@
       "members": {
         "SnapshotsEnabledUpdate": {
           "shape": "BooleanObject",
-          "documentation": "<p>Describes updates to whether snapshots are enabled for a Flink-based Kinesis Data Analytics application.</p>"
+          "documentation": "<p>Describes updates to whether snapshots are enabled for an application.</p>"
         }
       },
       "documentation": "<p>Describes updates to whether snapshots are enabled for a Flink-based Kinesis Data Analytics application.</p>"
@@ -1453,7 +1585,9 @@
         "UPDATING",
         "AUTOSCALING",
         "FORCE_STOPPING",
-        "MAINTENANCE"
+        "ROLLING_BACK",
+        "MAINTENANCE",
+        "ROLLED_BACK"
       ]
     },
     "ApplicationSummaries": {
@@ -1490,7 +1624,11 @@
         },
         "RuntimeEnvironment": {
           "shape": "RuntimeEnvironment",
-          "documentation": "<p>The runtime environment for the application (<code>SQL-1_0</code>, <code>FLINK-1_6</code>, <code>FLINK-1_8</code>, or <code>FLINK-1_11</code>).</p>"
+          "documentation": "<p>The runtime environment for the application.</p>"
+        },
+        "ApplicationMode": {
+          "shape": "ApplicationMode",
+          "documentation": "<p>For a Kinesis Data Analytics for Apache Flink application, the mode is <code>STREAMING</code>. For a Kinesis Data Analytics Studio notebook, it is <code>INTERACTIVE</code>.</p>"
         }
       },
       "documentation": "<p>Provides application summary information, including the application Amazon Resource Name (ARN), name, and status.</p>"
@@ -1500,10 +1638,47 @@
       "max": 999999999,
       "min": 1
     },
+    "ApplicationVersionSummaries": {
+      "type": "list",
+      "member": {
+        "shape": "ApplicationVersionSummary"
+      }
+    },
+    "ApplicationVersionSummary": {
+      "type": "structure",
+      "required": [
+        "ApplicationVersionId",
+        "ApplicationStatus"
+      ],
+      "members": {
+        "ApplicationVersionId": {
+          "shape": "ApplicationVersionId",
+          "documentation": "<p>The ID of the application version. Kinesis Data Analytics updates the <code>ApplicationVersionId</code> each time you update the application.</p>"
+        },
+        "ApplicationStatus": {
+          "shape": "ApplicationStatus",
+          "documentation": "<p>The status of the application.</p>"
+        }
+      },
+      "documentation": "<p>The summary of the application version.</p>"
+    },
+    "ArtifactType": {
+      "type": "string",
+      "enum": [
+        "UDF",
+        "DEPENDENCY_JAR"
+      ]
+    },
     "AuthorizedUrl": {
       "type": "string",
       "max": 2048,
       "min": 1
+    },
+    "BasePath": {
+      "type": "string",
+      "max": 1024,
+      "min": 1,
+      "pattern": "[a-zA-Z0-9/!-_.*'()]+"
     },
     "BooleanObject": {
       "type": "boolean"
@@ -1531,6 +1706,45 @@
         }
       },
       "documentation": "<p>For a SQL-based Kinesis Data Analytics application, provides additional mapping information when the record format uses delimiters, such as CSV. For example, the following sample records use CSV format, where the records use the <i>'\\n'</i> as the row delimiter and a comma (\",\") as the column delimiter: </p> <p> <code>\"name1\", \"address1\"</code> </p> <p> <code>\"name2\", \"address2\"</code> </p>"
+    },
+    "CatalogConfiguration": {
+      "type": "structure",
+      "required": [
+        "GlueDataCatalogConfiguration"
+      ],
+      "members": {
+        "GlueDataCatalogConfiguration": {
+          "shape": "GlueDataCatalogConfiguration",
+          "documentation": "<p>The configuration parameters for the default Amazon Glue database. You use this database for Apache Flink SQL queries and table API transforms that you write in a Kinesis Data Analytics Studio notebook.</p>"
+        }
+      },
+      "documentation": "<p>The configuration parameters for the default Amazon Glue database. You use this database for SQL queries that you write in a Kinesis Data Analytics Studio notebook.</p>"
+    },
+    "CatalogConfigurationDescription": {
+      "type": "structure",
+      "required": [
+        "GlueDataCatalogConfigurationDescription"
+      ],
+      "members": {
+        "GlueDataCatalogConfigurationDescription": {
+          "shape": "GlueDataCatalogConfigurationDescription",
+          "documentation": "<p>The configuration parameters for the default Amazon Glue database. You use this database for SQL queries that you write in a Kinesis Data Analytics Studio notebook.</p>"
+        }
+      },
+      "documentation": "<p>The configuration parameters for the default Amazon Glue database. You use this database for Apache Flink SQL queries and table API transforms that you write in a Kinesis Data Analytics Studio notebook.</p>"
+    },
+    "CatalogConfigurationUpdate": {
+      "type": "structure",
+      "required": [
+        "GlueDataCatalogConfigurationUpdate"
+      ],
+      "members": {
+        "GlueDataCatalogConfigurationUpdate": {
+          "shape": "GlueDataCatalogConfigurationUpdate",
+          "documentation": "<p>Updates to the configuration parameters for the default Amazon Glue database. You use this database for SQL queries that you write in a Kinesis Data Analytics Studio notebook.</p>"
+        }
+      },
+      "documentation": "<p>Updates to the configuration parameters for the default Amazon Glue database. You use this database for SQL queries that you write in a Kinesis Data Analytics Studio notebook.</p>"
     },
     "CheckpointConfiguration": {
       "type": "structure",
@@ -1687,7 +1901,7 @@
         },
         "S3ContentLocation": {
           "shape": "S3ContentLocation",
-          "documentation": "<p>Information about the Amazon S3 bucket containing the application code.</p>"
+          "documentation": "<p>Information about the Amazon S3 bucket that contains the application code.</p>"
         }
       },
       "documentation": "<p>Specifies either the application code, or the location of the application code, for a Flink-based Kinesis Data Analytics application. </p>"
@@ -1712,7 +1926,7 @@
           "documentation": "<p>The S3 bucket Amazon Resource Name (ARN), file key, and object version of the application code stored in Amazon S3.</p>"
         }
       },
-      "documentation": "<p>Describes details about the application code for a Flink-based Kinesis Data Analytics application.</p>"
+      "documentation": "<p>Describes details about the code of a Kinesis Data Analytics application.</p>"
     },
     "CodeContentType": {
       "type": "string",
@@ -1737,7 +1951,7 @@
           "documentation": "<p>Describes an update to the location of code for an application.</p>"
         }
       },
-      "documentation": "<p>Describes an update to the code of a Flink-based Kinesis Data Analytics application.</p>"
+      "documentation": "<p>Describes an update to the code of an application. Not supported for Apache Zeppelin.</p>"
     },
     "CodeMD5": {
       "type": "string",
@@ -1748,6 +1962,12 @@
       "type": "long",
       "max": 52428800,
       "min": 0
+    },
+    "ConditionalToken": {
+      "type": "string",
+      "max": 512,
+      "min": 1,
+      "pattern": "[a-zA-Z0-9-_+/=]+"
     },
     "ConfigurationType": {
       "type": "string",
@@ -1821,6 +2041,10 @@
         "Tags": {
           "shape": "Tags",
           "documentation": "<p>A list of one or more tags to assign to the application. A tag is a key-value pair that identifies an application. Note that the maximum number of application tags includes system tags. The maximum number of user-defined application tags is 50. For more information, see <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/java/how-tagging.html\">Using Tagging</a>.</p>"
+        },
+        "ApplicationMode": {
+          "shape": "ApplicationMode",
+          "documentation": "<p>Use the <code>STREAMING</code> mode to create a Kinesis Data Analytics Studio notebook. To create a Kinesis Data Analytics Studio notebook, use the <code>INTERACTIVE</code> mode.</p>"
         }
       }
     },
@@ -1857,11 +2081,67 @@
       "type": "structure",
       "members": {}
     },
+    "CustomArtifactConfiguration": {
+      "type": "structure",
+      "required": [
+        "ArtifactType"
+      ],
+      "members": {
+        "ArtifactType": {
+          "shape": "ArtifactType",
+          "documentation": "<p> <code>UDF</code> stands for user-defined functions. This type of artifact must be in an S3 bucket. A <code>DEPENDENCY_JAR</code> can be in either Maven or an S3 bucket.</p>"
+        },
+        "S3ContentLocation": {
+          "shape": "S3ContentLocation"
+        },
+        "MavenReference": {
+          "shape": "MavenReference",
+          "documentation": "<p>The parameters required to fully specify a Maven reference.</p>"
+        }
+      },
+      "documentation": "<p>Specifies dependency JARs, as well as JAR files that contain user-defined functions (UDF).</p>"
+    },
+    "CustomArtifactConfigurationDescription": {
+      "type": "structure",
+      "members": {
+        "ArtifactType": {
+          "shape": "ArtifactType",
+          "documentation": "<p> <code>UDF</code> stands for user-defined functions. This type of artifact must be in an S3 bucket. A <code>DEPENDENCY_JAR</code> can be in either Maven or an S3 bucket.</p>"
+        },
+        "S3ContentLocationDescription": {
+          "shape": "S3ContentLocation"
+        },
+        "MavenReferenceDescription": {
+          "shape": "MavenReference",
+          "documentation": "<p>The parameters that are required to specify a Maven dependency.</p>"
+        }
+      },
+      "documentation": "<p>Specifies a dependency JAR or a JAR of user-defined functions.</p>"
+    },
+    "CustomArtifactsConfigurationDescriptionList": {
+      "type": "list",
+      "member": {
+        "shape": "CustomArtifactConfigurationDescription"
+      },
+      "max": 50
+    },
+    "CustomArtifactsConfigurationList": {
+      "type": "list",
+      "member": {
+        "shape": "CustomArtifactConfiguration"
+      },
+      "max": 50
+    },
+    "DatabaseARN": {
+      "type": "string",
+      "max": 2048,
+      "min": 1,
+      "pattern": "arn:.*"
+    },
     "DeleteApplicationCloudWatchLoggingOptionRequest": {
       "type": "structure",
       "required": [
         "ApplicationName",
-        "CurrentApplicationVersionId",
         "CloudWatchLoggingOptionId"
       ],
       "members": {
@@ -1871,11 +2151,15 @@
         },
         "CurrentApplicationVersionId": {
           "shape": "ApplicationVersionId",
-          "documentation": "<p>The version ID of the application. You can retrieve the application version ID using <a>DescribeApplication</a>.</p>"
+          "documentation": "<p>The version ID of the application. You must provide the <code>CurrentApplicationVersionId</code> or the <code>ConditionalToken</code>. You can retrieve the application version ID using <a>DescribeApplication</a>. For better concurrency support, use the <code>ConditionalToken</code> parameter instead of <code>CurrentApplicationVersionId</code>.</p>"
         },
         "CloudWatchLoggingOptionId": {
           "shape": "Id",
           "documentation": "<p>The <code>CloudWatchLoggingOptionId</code> of the Amazon CloudWatch logging option to delete. You can get the <code>CloudWatchLoggingOptionId</code> by using the <a>DescribeApplication</a> operation. </p>"
+        },
+        "ConditionalToken": {
+          "shape": "ConditionalToken",
+          "documentation": "<p>A value you use to implement strong concurrency for application updates. You must provide the <code>CurrentApplicationVersionId</code> or the <code>ConditionalToken</code>. You get the application's current <code>ConditionalToken</code> using <a>DescribeApplication</a>. For better concurrency support, use the <code>ConditionalToken</code> parameter instead of <code>CurrentApplicationVersionId</code>.</p>"
         }
       }
     },
@@ -2052,7 +2336,6 @@
       "type": "structure",
       "required": [
         "ApplicationName",
-        "CurrentApplicationVersionId",
         "VpcConfigurationId"
       ],
       "members": {
@@ -2062,11 +2345,15 @@
         },
         "CurrentApplicationVersionId": {
           "shape": "ApplicationVersionId",
-          "documentation": "<p>The current application version ID. You can retrieve the application version ID using <a>DescribeApplication</a>.</p>"
+          "documentation": "<p>The current application version ID. You must provide the <code>CurrentApplicationVersionId</code> or the <code>ConditionalToken</code>. You can retrieve the application version ID using <a>DescribeApplication</a>. For better concurrency support, use the <code>ConditionalToken</code> parameter instead of <code>CurrentApplicationVersionId</code>.</p>"
         },
         "VpcConfigurationId": {
           "shape": "Id",
           "documentation": "<p>The ID of the VPC configuration to delete.</p>"
+        },
+        "ConditionalToken": {
+          "shape": "ConditionalToken",
+          "documentation": "<p>A value you use to implement strong concurrency for application updates. You must provide the <code>CurrentApplicationVersionId</code> or the <code>ConditionalToken</code>. You get the application's current <code>ConditionalToken</code> using <a>DescribeApplication</a>. For better concurrency support, use the <code>ConditionalToken</code> parameter instead of <code>CurrentApplicationVersionId</code>.</p>"
         }
       }
     },
@@ -2082,6 +2369,42 @@
           "documentation": "<p>The updated version ID of the application.</p>"
         }
       }
+    },
+    "DeployAsApplicationConfiguration": {
+      "type": "structure",
+      "required": [
+        "S3ContentLocation"
+      ],
+      "members": {
+        "S3ContentLocation": {
+          "shape": "S3ContentBaseLocation",
+          "documentation": "<p>The description of an Amazon S3 object that contains the Amazon Data Analytics application, including the Amazon Resource Name (ARN) of the S3 bucket, the name of the Amazon S3 object that contains the data, and the version number of the Amazon S3 object that contains the data. </p>"
+        }
+      },
+      "documentation": "<p>The information required to deploy a Kinesis Data Analytics Studio notebook as an application with durable state.</p>"
+    },
+    "DeployAsApplicationConfigurationDescription": {
+      "type": "structure",
+      "required": [
+        "S3ContentLocationDescription"
+      ],
+      "members": {
+        "S3ContentLocationDescription": {
+          "shape": "S3ContentBaseLocationDescription",
+          "documentation": "<p>The location that holds the data required to specify an Amazon Data Analytics application.</p>"
+        }
+      },
+      "documentation": "<p>The configuration information required to deploy an Amazon Data Analytics Studio notebook as an application with durable state.</p>"
+    },
+    "DeployAsApplicationConfigurationUpdate": {
+      "type": "structure",
+      "members": {
+        "S3ContentLocationUpdate": {
+          "shape": "S3ContentBaseLocationUpdate",
+          "documentation": "<p>Updates to the location that holds the data required to specify an Amazon Data Analytics application.</p>"
+        }
+      },
+      "documentation": "<p>Updates to the configuration information required to deploy an Amazon Data Analytics Studio notebook as an application with durable state.</p>"
     },
     "DescribeApplicationRequest": {
       "type": "structure",
@@ -2137,6 +2460,31 @@
         "SnapshotDetails": {
           "shape": "SnapshotDetails",
           "documentation": "<p>An object containing information about the application snapshot.</p>"
+        }
+      }
+    },
+    "DescribeApplicationVersionRequest": {
+      "type": "structure",
+      "required": [
+        "ApplicationName",
+        "ApplicationVersionId"
+      ],
+      "members": {
+        "ApplicationName": {
+          "shape": "ApplicationName",
+          "documentation": "<p>The name of the application for which you want to get the version description.</p>"
+        },
+        "ApplicationVersionId": {
+          "shape": "ApplicationVersionId",
+          "documentation": "<p>The ID of the application version for which you want to get the description.</p>"
+        }
+      }
+    },
+    "DescribeApplicationVersionResponse": {
+      "type": "structure",
+      "members": {
+        "ApplicationVersionDetail": {
+          "shape": "ApplicationDetail"
         }
       }
     },
@@ -2223,7 +2571,7 @@
           "documentation": "<p>Describes the execution property groups.</p>"
         }
       },
-      "documentation": "<p>Describes the execution properties for a Flink-based Kinesis Data Analytics application.</p>"
+      "documentation": "<p>Describes the execution properties for an Apache Flink runtime.</p>"
     },
     "EnvironmentPropertyUpdates": {
       "type": "structure",
@@ -2236,7 +2584,7 @@
           "documentation": "<p>Describes updates to the execution property groups.</p>"
         }
       },
-      "documentation": "<p>Describes updates to the execution property groups for a Flink-based Kinesis Data Analytics application.</p>"
+      "documentation": "<p>Describes updates to the execution property groups for a Flink-based Kinesis Data Analytics application or a Studio notebook.</p>"
     },
     "FileKey": {
       "type": "string",
@@ -2259,7 +2607,7 @@
           "documentation": "<p>Describes parameters for how an application executes multiple tasks simultaneously.</p>"
         }
       },
-      "documentation": "<p>Describes configuration parameters for a Flink-based Kinesis Data Analytics application.</p>"
+      "documentation": "<p>Describes configuration parameters for a Flink-based Kinesis Data Analytics application or a Studio notebook.</p>"
     },
     "FlinkApplicationConfigurationDescription": {
       "type": "structure",
@@ -2310,6 +2658,45 @@
         }
       },
       "documentation": "<p>Describes the starting parameters for a Flink-based Kinesis Data Analytics application.</p>"
+    },
+    "GlueDataCatalogConfiguration": {
+      "type": "structure",
+      "required": [
+        "DatabaseARN"
+      ],
+      "members": {
+        "DatabaseARN": {
+          "shape": "DatabaseARN",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the database.</p>"
+        }
+      },
+      "documentation": "<p>The configuration of the Glue Data Catalog that you use for Apache Flink SQL queries and table API transforms that you write in an application.</p>"
+    },
+    "GlueDataCatalogConfigurationDescription": {
+      "type": "structure",
+      "required": [
+        "DatabaseARN"
+      ],
+      "members": {
+        "DatabaseARN": {
+          "shape": "DatabaseARN",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the database.</p>"
+        }
+      },
+      "documentation": "<p>The configuration of the Glue Data Catalog that you use for Apache Flink SQL queries and table API transforms that you write in an application.</p>"
+    },
+    "GlueDataCatalogConfigurationUpdate": {
+      "type": "structure",
+      "required": [
+        "DatabaseARNUpdate"
+      ],
+      "members": {
+        "DatabaseARNUpdate": {
+          "shape": "DatabaseARN",
+          "documentation": "<p>The updated Amazon Resource Name (ARN) of the database.</p>"
+        }
+      },
+      "documentation": "<p>Updates to the configuration of the Glue Data Catalog that you use for SQL queries that you write in a Kinesis Data Analytics Studio notebook.</p>"
     },
     "Id": {
       "type": "string",
@@ -2424,10 +2811,10 @@
       "members": {
         "ResourceARN": {
           "shape": "ResourceARN",
-          "documentation": "<p>The ARN of the AWS Lambda function that operates on records in the stream.</p> <note> <p>To specify an earlier version of the Lambda function than the latest, include the Lambda function version in the Lambda function ARN. For more information about Lambda ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda\">Example ARNs: AWS Lambda</a> </p> </note>"
+          "documentation": "<p>The ARN of the Amazon Lambda function that operates on records in the stream.</p> <note> <p>To specify an earlier version of the Lambda function than the latest, include the Lambda function version in the Lambda function ARN. For more information about Lambda ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda\">Example ARNs: Amazon Lambda</a> </p> </note>"
         }
       },
-      "documentation": "<p>An object that contains the Amazon Resource Name (ARN) of the AWS Lambda function that is used to preprocess records in the stream in a SQL-based Kinesis Data Analytics application. </p>"
+      "documentation": "<p>An object that contains the Amazon Resource Name (ARN) of the Amazon Lambda function that is used to preprocess records in the stream in a SQL-based Kinesis Data Analytics application. </p>"
     },
     "InputLambdaProcessorDescription": {
       "type": "structure",
@@ -2437,14 +2824,14 @@
       "members": {
         "ResourceARN": {
           "shape": "ResourceARN",
-          "documentation": "<p>The ARN of the AWS Lambda function that is used to preprocess the records in the stream.</p> <note> <p>To specify an earlier version of the Lambda function than the latest, include the Lambda function version in the Lambda function ARN. For more information about Lambda ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda\">Example ARNs: AWS Lambda</a> </p> </note>"
+          "documentation": "<p>The ARN of the Amazon Lambda function that is used to preprocess the records in the stream.</p> <note> <p>To specify an earlier version of the Lambda function than the latest, include the Lambda function version in the Lambda function ARN. For more information about Lambda ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda\">Example ARNs: Amazon Lambda</a> </p> </note>"
         },
         "RoleARN": {
           "shape": "RoleARN",
-          "documentation": "<p>The ARN of the IAM role that is used to access the AWS Lambda function.</p> <note> <p>Provided for backward compatibility. Applications that are created with the current API version have an application-level service execution role rather than a resource-level role.</p> </note>"
+          "documentation": "<p>The ARN of the IAM role that is used to access the Amazon Lambda function.</p> <note> <p>Provided for backward compatibility. Applications that are created with the current API version have an application-level service execution role rather than a resource-level role.</p> </note>"
         }
       },
-      "documentation": "<p>For a SQL-based Kinesis Data Analytics application, an object that contains the Amazon Resource Name (ARN) of the AWS Lambda function that is used to preprocess records in the stream.</p>"
+      "documentation": "<p>For a SQL-based Kinesis Data Analytics application, an object that contains the Amazon Resource Name (ARN) of the Amazon Lambda function that is used to preprocess records in the stream.</p>"
     },
     "InputLambdaProcessorUpdate": {
       "type": "structure",
@@ -2454,7 +2841,7 @@
       "members": {
         "ResourceARNUpdate": {
           "shape": "ResourceARN",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the new AWS Lambda function that is used to preprocess the records in the stream.</p> <note> <p>To specify an earlier version of the Lambda function than the latest, include the Lambda function version in the Lambda function ARN. For more information about Lambda ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda\">Example ARNs: AWS Lambda</a> </p> </note>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the new Amazon Lambda function that is used to preprocess the records in the stream.</p> <note> <p>To specify an earlier version of the Lambda function than the latest, include the Lambda function version in the Lambda function ARN. For more information about Lambda ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda\">Example ARNs: Amazon Lambda</a> </p> </note>"
         }
       },
       "documentation": "<p>For a SQL-based Kinesis Data Analytics application, represents an update to the <a>InputLambdaProcessor</a> that is used to preprocess the records in the stream.</p>"
@@ -2498,7 +2885,7 @@
           "documentation": "<p>The <a>InputLambdaProcessor</a> that is used to preprocess the records in the stream before being processed by your application code.</p>"
         }
       },
-      "documentation": "<p>For a SQL-based Kinesis Data Analytics application, describes a processor that is used to preprocess the records in the stream before being processed by your application code. Currently, the only input processor available is <a href=\"https://docs.aws.amazon.com/lambda/\">AWS Lambda</a>.</p>"
+      "documentation": "<p>For a SQL-based Kinesis Data Analytics application, describes a processor that is used to preprocess the records in the stream before being processed by your application code. Currently, the only input processor available is <a href=\"https://docs.aws.amazon.com/lambda/\">Amazon Lambda</a>.</p>"
     },
     "InputProcessingConfigurationDescription": {
       "type": "structure",
@@ -2508,7 +2895,7 @@
           "documentation": "<p>Provides configuration information about the associated <a>InputLambdaProcessorDescription</a> </p>"
         }
       },
-      "documentation": "<p>For a SQL-based Kinesis Data Analytics application, provides the configuration information about an input processor. Currently, the only input processor available is <a href=\"https://docs.aws.amazon.com/lambda/\">AWS Lambda</a>.</p>"
+      "documentation": "<p>For a SQL-based Kinesis Data Analytics application, provides the configuration information about an input processor. Currently, the only input processor available is <a href=\"https://docs.aws.amazon.com/lambda/\">Amazon Lambda</a>.</p>"
     },
     "InputProcessingConfigurationUpdate": {
       "type": "structure",
@@ -2810,10 +3197,10 @@
       "members": {
         "ResourceARN": {
           "shape": "ResourceARN",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the destination Lambda function to write to.</p> <note> <p>To specify an earlier version of the Lambda function than the latest, include the Lambda function version in the Lambda function ARN. For more information about Lambda ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda\">Example ARNs: AWS Lambda</a> </p> </note>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the destination Lambda function to write to.</p> <note> <p>To specify an earlier version of the Lambda function than the latest, include the Lambda function version in the Lambda function ARN. For more information about Lambda ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda\">Example ARNs: Amazon Lambda</a> </p> </note>"
         }
       },
-      "documentation": "<p>When you configure a SQL-based Kinesis Data Analytics application's output, identifies an AWS Lambda function as the destination. You provide the function Amazon Resource Name (ARN) of the Lambda function. </p>"
+      "documentation": "<p>When you configure a SQL-based Kinesis Data Analytics application's output, identifies an Amazon Lambda function as the destination. You provide the function Amazon Resource Name (ARN) of the Lambda function. </p>"
     },
     "LambdaOutputDescription": {
       "type": "structure",
@@ -2830,7 +3217,7 @@
           "documentation": "<p>The ARN of the IAM role that Kinesis Data Analytics can assume to write to the destination function.</p> <note> <p>Provided for backward compatibility. Applications that are created with the current API version have an application-level service execution role rather than a resource-level role.</p> </note>"
         }
       },
-      "documentation": "<p>For a SQL-based Kinesis Data Analytics application's output, describes the AWS Lambda function that is configured as its destination. </p>"
+      "documentation": "<p>For a SQL-based Kinesis Data Analytics application's output, describes the Amazon Lambda function that is configured as its destination. </p>"
     },
     "LambdaOutputUpdate": {
       "type": "structure",
@@ -2840,10 +3227,10 @@
       "members": {
         "ResourceARNUpdate": {
           "shape": "ResourceARN",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the destination AWS Lambda function.</p> <note> <p>To specify an earlier version of the Lambda function than the latest, include the Lambda function version in the Lambda function ARN. For more information about Lambda ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda\">Example ARNs: AWS Lambda</a> </p> </note>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the destination Amazon Lambda function.</p> <note> <p>To specify an earlier version of the Lambda function than the latest, include the Lambda function version in the Lambda function ARN. For more information about Lambda ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda\">Example ARNs: Amazon Lambda</a> </p> </note>"
         }
       },
-      "documentation": "<p>When you update an SQL-based Kinesis Data Analytics application's output configuration using the <a>UpdateApplication</a> operation, provides information about an AWS Lambda function that is configured as the destination.</p>"
+      "documentation": "<p>When you update an SQL-based Kinesis Data Analytics application's output configuration using the <a>UpdateApplication</a> operation, provides information about an Amazon Lambda function that is configured as the destination.</p>"
     },
     "ListApplicationSnapshotsRequest": {
       "type": "structure",
@@ -2878,6 +3265,44 @@
         }
       }
     },
+    "ListApplicationVersionsInputLimit": {
+      "type": "integer",
+      "max": 50,
+      "min": 1
+    },
+    "ListApplicationVersionsRequest": {
+      "type": "structure",
+      "required": [
+        "ApplicationName"
+      ],
+      "members": {
+        "ApplicationName": {
+          "shape": "ApplicationName",
+          "documentation": "<p>The name of the application for which you want to list all versions.</p>"
+        },
+        "Limit": {
+          "shape": "ListApplicationVersionsInputLimit",
+          "documentation": "<p>The maximum number of versions to list in this invocation of the operation.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>If a previous invocation of this operation returned a pagination token, pass it into this value to retrieve the next set of results. For more information about pagination, see <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/pagination.html\">Using the Amazon Command Line Interface's Pagination Options</a>.</p>"
+        }
+      }
+    },
+    "ListApplicationVersionsResponse": {
+      "type": "structure",
+      "members": {
+        "ApplicationVersionSummaries": {
+          "shape": "ApplicationVersionSummaries",
+          "documentation": "<p>A list of the application versions and the associated configuration summaries. The list includes application versions that were rolled back.</p> <p>To get the complete description of a specific application version, invoke the <a>DescribeApplicationVersion</a> operation.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The pagination token for the next set of results, or <code>null</code> if there are no additional results. To retrieve the next set of items, pass this token into a subsequent invocation of this operation. For more information about pagination, see <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/pagination.html\">Using the Amazon Command Line Interface's Pagination Options</a>.</p>"
+        }
+      }
+    },
     "ListApplicationsInputLimit": {
       "type": "integer",
       "max": 50,
@@ -2892,7 +3317,7 @@
         },
         "NextToken": {
           "shape": "ApplicationName",
-          "documentation": "<p>If a previous command returned a pagination token, pass it into this value to retrieve the next set of results. For more information about pagination, see <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/pagination.html\">Using the AWS Command Line Interface's Pagination Options</a>.</p>"
+          "documentation": "<p>If a previous command returned a pagination token, pass it into this value to retrieve the next set of results. For more information about pagination, see <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/pagination.html\">Using the Amazon Command Line Interface's Pagination Options</a>.</p>"
         }
       }
     },
@@ -2908,7 +3333,7 @@
         },
         "NextToken": {
           "shape": "ApplicationName",
-          "documentation": "<p>The pagination token for the next set of results, or <code>null</code> if there are no additional results. Pass this token into a subsequent command to retrieve the next set of items For more information about pagination, see <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/pagination.html\">Using the AWS Command Line Interface's Pagination Options</a>.</p>"
+          "documentation": "<p>The pagination token for the next set of results, or <code>null</code> if there are no additional results. Pass this token into a subsequent command to retrieve the next set of items For more information about pagination, see <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/pagination.html\">Using the Amazon Command Line Interface's Pagination Options</a>.</p>"
         }
       }
     },
@@ -2967,6 +3392,47 @@
       },
       "documentation": "<p>When you configure a SQL-based Kinesis Data Analytics application's input at the time of creating or updating an application, provides additional mapping information specific to the record format (such as JSON, CSV, or record fields delimited by some delimiter) on the streaming source.</p>"
     },
+    "MavenArtifactId": {
+      "type": "string",
+      "max": 256,
+      "min": 1,
+      "pattern": "[a-zA-Z0-9_.-]+"
+    },
+    "MavenGroupId": {
+      "type": "string",
+      "max": 256,
+      "min": 1,
+      "pattern": "[a-zA-Z0-9_.-]+"
+    },
+    "MavenReference": {
+      "type": "structure",
+      "required": [
+        "GroupId",
+        "ArtifactId",
+        "Version"
+      ],
+      "members": {
+        "GroupId": {
+          "shape": "MavenGroupId",
+          "documentation": "<p>The group ID of the Maven reference.</p>"
+        },
+        "ArtifactId": {
+          "shape": "MavenArtifactId",
+          "documentation": "<p>The artifact ID of the Maven reference.</p>"
+        },
+        "Version": {
+          "shape": "MavenVersion",
+          "documentation": "<p>The version of the Maven reference.</p>"
+        }
+      },
+      "documentation": "<p>The information required to specify a Maven reference. You can use Maven references to specify dependency JAR files.</p>"
+    },
+    "MavenVersion": {
+      "type": "string",
+      "max": 256,
+      "min": 1,
+      "pattern": "[a-zA-Z0-9_.-]+"
+    },
     "MetricsLevel": {
       "type": "string",
       "enum": [
@@ -2999,7 +3465,7 @@
           "documentation": "<p>Describes the verbosity of the CloudWatch Logs for an application.</p>"
         }
       },
-      "documentation": "<p>Describes configuration parameters for Amazon CloudWatch logging for a Flink-based Kinesis Data Analytics application. For more information about CloudWatch logging, see <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/java/monitoring-overview.html\">Monitoring</a>.</p>"
+      "documentation": "<p>Describes configuration parameters for Amazon CloudWatch logging for an application. For more information about CloudWatch logging, see <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/java/monitoring-overview.html\">Monitoring</a>.</p>"
     },
     "MonitoringConfigurationDescription": {
       "type": "structure",
@@ -3017,7 +3483,7 @@
           "documentation": "<p>Describes the verbosity of the CloudWatch Logs for an application.</p>"
         }
       },
-      "documentation": "<p>Describes configuration parameters for CloudWatch logging for a Flink-based Kinesis Data Analytics application.</p>"
+      "documentation": "<p>Describes configuration parameters for CloudWatch logging for an application.</p>"
     },
     "MonitoringConfigurationUpdate": {
       "type": "structure",
@@ -3035,7 +3501,7 @@
           "documentation": "<p>Describes updates to the verbosity of the CloudWatch Logs for an application.</p>"
         }
       },
-      "documentation": "<p>Describes updates to configuration parameters for Amazon CloudWatch logging for a Flink-based Kinesis Data Analytics application.</p>"
+      "documentation": "<p>Describes updates to configuration parameters for Amazon CloudWatch logging for an application.</p>"
     },
     "NextToken": {
       "type": "string",
@@ -3068,7 +3534,7 @@
         },
         "LambdaOutput": {
           "shape": "LambdaOutput",
-          "documentation": "<p>Identifies an AWS Lambda function as the destination.</p>"
+          "documentation": "<p>Identifies an Amazon Lambda function as the destination.</p>"
         },
         "DestinationSchema": {
           "shape": "DestinationSchema",
@@ -3137,7 +3603,7 @@
         },
         "LambdaOutputUpdate": {
           "shape": "LambdaOutputUpdate",
-          "documentation": "<p>Describes an AWS Lambda function as the destination for the output.</p>"
+          "documentation": "<p>Describes an Amazon Lambda function as the destination for the output.</p>"
         },
         "DestinationSchemaUpdate": {
           "shape": "DestinationSchema",
@@ -3230,10 +3696,10 @@
         },
         "AutoScalingEnabledUpdate": {
           "shape": "BooleanObject",
-          "documentation": "<p>Describes updates to whether the Kinesis Data Analytics service can increase the parallelism of the application in response to increased throughput.</p>"
+          "documentation": "<p>Describes updates to whether the Kinesis Data Analytics service can increase the parallelism of a Flink-based Kinesis Data Analytics application in response to increased throughput.</p>"
         }
       },
-      "documentation": "<p>Describes updates to parameters for how a Flink-based Kinesis Data Analytics application executes multiple tasks simultaneously.</p>"
+      "documentation": "<p>Describes updates to parameters for how an application executes multiple tasks simultaneously.</p>"
     },
     "ParallelismPerKPU": {
       "type": "integer",
@@ -3279,7 +3745,7 @@
           "documentation": "<p>Describes the value of an application execution property key-value pair.</p>"
         }
       },
-      "documentation": "<p>Property key-value pairs passed into a Flink-based Kinesis Data Analytics application.</p>"
+      "documentation": "<p>Property key-value pairs passed into an application.</p>"
     },
     "PropertyGroups": {
       "type": "list",
@@ -3514,6 +3980,34 @@
       "min": 1,
       "pattern": "arn:.*"
     },
+    "RollbackApplicationRequest": {
+      "type": "structure",
+      "required": [
+        "ApplicationName",
+        "CurrentApplicationVersionId"
+      ],
+      "members": {
+        "ApplicationName": {
+          "shape": "ApplicationName",
+          "documentation": "<p>The name of the application.</p>"
+        },
+        "CurrentApplicationVersionId": {
+          "shape": "ApplicationVersionId",
+          "documentation": "<p>The current application version ID. You can retrieve the application version ID using <a>DescribeApplication</a>.</p>"
+        }
+      }
+    },
+    "RollbackApplicationResponse": {
+      "type": "structure",
+      "required": [
+        "ApplicationDetail"
+      ],
+      "members": {
+        "ApplicationDetail": {
+          "shape": "ApplicationDetail"
+        }
+      }
+    },
     "RunConfiguration": {
       "type": "structure",
       "members": {
@@ -3565,7 +4059,10 @@
         "SQL-1_0",
         "FLINK-1_6",
         "FLINK-1_8",
-        "FLINK-1_11"
+        "ZEPPELIN-FLINK-1_0",
+        "FLINK-1_11",
+        "FLINK-1_13",
+        "ZEPPELIN-FLINK-2_0"
       ]
     },
     "S3ApplicationCodeLocationDescription": {
@@ -3588,7 +4085,7 @@
           "documentation": "<p>The version of the object containing the application code.</p>"
         }
       },
-      "documentation": "<p>Describes the location of a Flink-based Kinesis Data Analytics application's code stored in an S3 bucket.</p>"
+      "documentation": "<p>Describes the location of an application's code stored in an S3 bucket.</p>"
     },
     "S3Configuration": {
       "type": "structure",
@@ -3607,6 +4104,54 @@
         }
       },
       "documentation": "<p>For a SQL-based Kinesis Data Analytics application, provides a description of an Amazon S3 data source, including the Amazon Resource Name (ARN) of the S3 bucket and the name of the Amazon S3 object that contains the data.</p>"
+    },
+    "S3ContentBaseLocation": {
+      "type": "structure",
+      "required": [
+        "BucketARN"
+      ],
+      "members": {
+        "BucketARN": {
+          "shape": "BucketARN",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the S3 bucket.</p>"
+        },
+        "BasePath": {
+          "shape": "BasePath",
+          "documentation": "<p>The base path for the S3 bucket.</p>"
+        }
+      },
+      "documentation": "<p>The S3 bucket that holds the application information.</p>"
+    },
+    "S3ContentBaseLocationDescription": {
+      "type": "structure",
+      "required": [
+        "BucketARN"
+      ],
+      "members": {
+        "BucketARN": {
+          "shape": "BucketARN",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the S3 bucket.</p>"
+        },
+        "BasePath": {
+          "shape": "BasePath",
+          "documentation": "<p>The base path for the S3 bucket.</p>"
+        }
+      },
+      "documentation": "<p>The description of the S3 base location that holds the application.</p>"
+    },
+    "S3ContentBaseLocationUpdate": {
+      "type": "structure",
+      "members": {
+        "BucketARNUpdate": {
+          "shape": "BucketARN",
+          "documentation": "<p>The updated Amazon Resource Name (ARN) of the S3 bucket.</p>"
+        },
+        "BasePathUpdate": {
+          "shape": "BasePath",
+          "documentation": "<p>The updated S3 bucket path.</p>"
+        }
+      },
+      "documentation": "<p>The information required to update the S3 base location that holds the application.</p>"
     },
     "S3ContentLocation": {
       "type": "structure",
@@ -3628,7 +4173,7 @@
           "documentation": "<p>The version of the object containing the application code.</p>"
         }
       },
-      "documentation": "<p>For a Flink-based Kinesis Data Analytics application, provides a description of an Amazon S3 object, including the Amazon Resource Name (ARN) of the S3 bucket, the name of the Amazon S3 object that contains the data, and the version number of the Amazon S3 object that contains the data. </p>"
+      "documentation": "<p>For a Kinesis Data Analytics application provides a description of an Amazon S3 object, including the Amazon Resource Name (ARN) of the S3 bucket, the name of the Amazon S3 object that contains the data, and the version number of the Amazon S3 object that contains the data. </p>"
     },
     "S3ContentLocationUpdate": {
       "type": "structure",
@@ -3646,7 +4191,7 @@
           "documentation": "<p>The new version of the object containing the application code.</p>"
         }
       },
-      "documentation": "<p>Describes an update for the Amazon S3 code content location for a Flink-based Kinesis Data Analytics application.</p>"
+      "documentation": "<p>Describes an update for the Amazon S3 code content location for an application.</p>"
     },
     "S3ReferenceDataSource": {
       "type": "structure",
@@ -3865,8 +4410,7 @@
     "StartApplicationRequest": {
       "type": "structure",
       "required": [
-        "ApplicationName",
-        "RunConfiguration"
+        "ApplicationName"
       ],
       "members": {
         "ApplicationName": {
@@ -3929,7 +4473,7 @@
           "documentation": "<p>The value of the key-value tag. The value is optional.</p>"
         }
       },
-      "documentation": "<p>A key-value pair (the value is optional) that you can define and assign to AWS resources. If you specify a tag that already exists, the tag value is replaced with the value that you specify in the request. Note that the maximum number of application tags includes system tags. The maximum number of user-defined application tags is 50. For more information, see <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/java/how-tagging.html\">Using Tagging</a>.</p>"
+      "documentation": "<p>A key-value pair (the value is optional) that you can define and assign to Amazon resources. If you specify a tag that already exists, the tag value is replaced with the value that you specify in the request. Note that the maximum number of application tags includes system tags. The maximum number of user-defined application tags is 50. For more information, see <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/java/how-tagging.html\">Using Tagging</a>.</p>"
     },
     "TagKey": {
       "type": "string",
@@ -4016,7 +4560,7 @@
       "members": {
         "ApplicationName": {
           "shape": "ApplicationName",
-          "documentation": "<p>The name of the application for which you want to update the maintenance time window.</p>"
+          "documentation": "<p>The name of the application for which you want to update the maintenance configuration.</p>"
         },
         "ApplicationMaintenanceConfigurationUpdate": {
           "shape": "ApplicationMaintenanceConfigurationUpdate",
@@ -4040,8 +4584,7 @@
     "UpdateApplicationRequest": {
       "type": "structure",
       "required": [
-        "ApplicationName",
-        "CurrentApplicationVersionId"
+        "ApplicationName"
       ],
       "members": {
         "ApplicationName": {
@@ -4050,7 +4593,7 @@
         },
         "CurrentApplicationVersionId": {
           "shape": "ApplicationVersionId",
-          "documentation": "<p>The current application version ID. You can retrieve the application version ID using <a>DescribeApplication</a>.</p>"
+          "documentation": "<p>The current application version ID. You must provide the <code>CurrentApplicationVersionId</code> or the <code>ConditionalToken</code>.You can retrieve the application version ID using <a>DescribeApplication</a>. For better concurrency support, use the <code>ConditionalToken</code> parameter instead of <code>CurrentApplicationVersionId</code>.</p>"
         },
         "ApplicationConfigurationUpdate": {
           "shape": "ApplicationConfigurationUpdate",
@@ -4067,6 +4610,10 @@
         "CloudWatchLoggingOptionUpdates": {
           "shape": "CloudWatchLoggingOptionUpdates",
           "documentation": "<p>Describes application Amazon CloudWatch logging option updates. You can only update existing CloudWatch logging options with this action. To add a new CloudWatch logging option, use <a>AddApplicationCloudWatchLoggingOption</a>.</p>"
+        },
+        "ConditionalToken": {
+          "shape": "ConditionalToken",
+          "documentation": "<p>A value you use to implement strong concurrency for application updates. You must provide the <code>CurrentApplicationVersionId</code> or the <code>ConditionalToken</code>. You get the application's current <code>ConditionalToken</code> using <a>DescribeApplication</a>. For better concurrency support, use the <code>ConditionalToken</code> parameter instead of <code>CurrentApplicationVersionId</code>.</p>"
         }
       }
     },
@@ -4085,7 +4632,8 @@
     "UrlType": {
       "type": "string",
       "enum": [
-        "FLINK_DASHBOARD_URL"
+        "FLINK_DASHBOARD_URL",
+        "ZEPPELIN_UI_URL"
       ]
     },
     "VpcConfiguration": {
@@ -4175,6 +4723,110 @@
     },
     "VpcId": {
       "type": "string"
+    },
+    "ZeppelinApplicationConfiguration": {
+      "type": "structure",
+      "members": {
+        "MonitoringConfiguration": {
+          "shape": "ZeppelinMonitoringConfiguration",
+          "documentation": "<p>The monitoring configuration of a Kinesis Data Analytics Studio notebook.</p>"
+        },
+        "CatalogConfiguration": {
+          "shape": "CatalogConfiguration",
+          "documentation": "<p>The Amazon Glue Data Catalog that you use in queries in a Kinesis Data Analytics Studio notebook.</p>"
+        },
+        "DeployAsApplicationConfiguration": {
+          "shape": "DeployAsApplicationConfiguration",
+          "documentation": "<p>The information required to deploy a Kinesis Data Analytics Studio notebook as an application with durable state.</p>"
+        },
+        "CustomArtifactsConfiguration": {
+          "shape": "CustomArtifactsConfigurationList",
+          "documentation": "<p>Custom artifacts are dependency JARs and user-defined functions (UDF).</p>"
+        }
+      },
+      "documentation": "<p>The configuration of a Kinesis Data Analytics Studio notebook.</p>"
+    },
+    "ZeppelinApplicationConfigurationDescription": {
+      "type": "structure",
+      "required": [
+        "MonitoringConfigurationDescription"
+      ],
+      "members": {
+        "MonitoringConfigurationDescription": {
+          "shape": "ZeppelinMonitoringConfigurationDescription",
+          "documentation": "<p>The monitoring configuration of a Kinesis Data Analytics Studio notebook.</p>"
+        },
+        "CatalogConfigurationDescription": {
+          "shape": "CatalogConfigurationDescription",
+          "documentation": "<p>The Amazon Glue Data Catalog that is associated with the Kinesis Data Analytics Studio notebook.</p>"
+        },
+        "DeployAsApplicationConfigurationDescription": {
+          "shape": "DeployAsApplicationConfigurationDescription",
+          "documentation": "<p>The parameters required to deploy a Kinesis Data Analytics Studio notebook as an application with durable state.</p>"
+        },
+        "CustomArtifactsConfigurationDescription": {
+          "shape": "CustomArtifactsConfigurationDescriptionList",
+          "documentation": "<p>Custom artifacts are dependency JARs and user-defined functions (UDF).</p>"
+        }
+      },
+      "documentation": "<p>The configuration of a Kinesis Data Analytics Studio notebook.</p>"
+    },
+    "ZeppelinApplicationConfigurationUpdate": {
+      "type": "structure",
+      "members": {
+        "MonitoringConfigurationUpdate": {
+          "shape": "ZeppelinMonitoringConfigurationUpdate",
+          "documentation": "<p>Updates to the monitoring configuration of a Kinesis Data Analytics Studio notebook.</p>"
+        },
+        "CatalogConfigurationUpdate": {
+          "shape": "CatalogConfigurationUpdate",
+          "documentation": "<p>Updates to the configuration of the Amazon Glue Data Catalog that is associated with the Kinesis Data Analytics Studio notebook.</p>"
+        },
+        "DeployAsApplicationConfigurationUpdate": {
+          "shape": "DeployAsApplicationConfigurationUpdate"
+        },
+        "CustomArtifactsConfigurationUpdate": {
+          "shape": "CustomArtifactsConfigurationList",
+          "documentation": "<p>Updates to the customer artifacts. Custom artifacts are dependency JAR files and user-defined functions (UDF).</p>"
+        }
+      },
+      "documentation": "<p>Updates to the configuration of Kinesis Data Analytics Studio notebook.</p>"
+    },
+    "ZeppelinMonitoringConfiguration": {
+      "type": "structure",
+      "required": [
+        "LogLevel"
+      ],
+      "members": {
+        "LogLevel": {
+          "shape": "LogLevel",
+          "documentation": "<p>The verbosity of the CloudWatch Logs for an application.</p>"
+        }
+      },
+      "documentation": "<p>Describes configuration parameters for Amazon CloudWatch logging for a Kinesis Data Analytics Studio notebook. For more information about CloudWatch logging, see <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/java/monitoring-overview.html\">Monitoring</a>.</p>"
+    },
+    "ZeppelinMonitoringConfigurationDescription": {
+      "type": "structure",
+      "members": {
+        "LogLevel": {
+          "shape": "LogLevel",
+          "documentation": "<p>Describes the verbosity of the CloudWatch Logs for an application.</p>"
+        }
+      },
+      "documentation": "<p>The monitoring configuration for Apache Zeppelin within a Kinesis Data Analytics Studio notebook.</p>"
+    },
+    "ZeppelinMonitoringConfigurationUpdate": {
+      "type": "structure",
+      "required": [
+        "LogLevelUpdate"
+      ],
+      "members": {
+        "LogLevelUpdate": {
+          "shape": "LogLevel",
+          "documentation": "<p>Updates to the logging level for Apache Zeppelin within a Kinesis Data Analytics Studio notebook.</p>"
+        }
+      },
+      "documentation": "<p>Updates to the monitoring configuration for Apache Zeppelin within a Kinesis Data Analytics Studio notebook.</p>"
     },
     "ZipFileContent": {
       "type": "blob",

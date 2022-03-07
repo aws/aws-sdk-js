@@ -28,11 +28,11 @@ declare class RoboMaker extends Service {
    */
   batchDescribeSimulationJob(callback?: (err: AWSError, data: RoboMaker.Types.BatchDescribeSimulationJobResponse) => void): Request<RoboMaker.Types.BatchDescribeSimulationJobResponse, AWSError>;
   /**
-   * Cancels the specified deployment job.
+   * Cancels the specified deployment job.  This API will no longer be supported as of May 2, 2022. Use it to remove resources that were created for Deployment Service. 
    */
   cancelDeploymentJob(params: RoboMaker.Types.CancelDeploymentJobRequest, callback?: (err: AWSError, data: RoboMaker.Types.CancelDeploymentJobResponse) => void): Request<RoboMaker.Types.CancelDeploymentJobResponse, AWSError>;
   /**
-   * Cancels the specified deployment job.
+   * Cancels the specified deployment job.  This API will no longer be supported as of May 2, 2022. Use it to remove resources that were created for Deployment Service. 
    */
   cancelDeploymentJob(callback?: (err: AWSError, data: RoboMaker.Types.CancelDeploymentJobResponse) => void): Request<RoboMaker.Types.CancelDeploymentJobResponse, AWSError>;
   /**
@@ -68,27 +68,27 @@ declare class RoboMaker extends Service {
    */
   cancelWorldGenerationJob(callback?: (err: AWSError, data: RoboMaker.Types.CancelWorldGenerationJobResponse) => void): Request<RoboMaker.Types.CancelWorldGenerationJobResponse, AWSError>;
   /**
-   * Deploys a specific version of a robot application to robots in a fleet. The robot application must have a numbered applicationVersion for consistency reasons. To create a new version, use CreateRobotApplicationVersion or see Creating a Robot Application Version.   After 90 days, deployment jobs expire and will be deleted. They will no longer be accessible.  
+   * Deploys a specific version of a robot application to robots in a fleet.  This API is no longer supported and will throw an error if used.  The robot application must have a numbered applicationVersion for consistency reasons. To create a new version, use CreateRobotApplicationVersion or see Creating a Robot Application Version.   After 90 days, deployment jobs expire and will be deleted. They will no longer be accessible.  
    */
   createDeploymentJob(params: RoboMaker.Types.CreateDeploymentJobRequest, callback?: (err: AWSError, data: RoboMaker.Types.CreateDeploymentJobResponse) => void): Request<RoboMaker.Types.CreateDeploymentJobResponse, AWSError>;
   /**
-   * Deploys a specific version of a robot application to robots in a fleet. The robot application must have a numbered applicationVersion for consistency reasons. To create a new version, use CreateRobotApplicationVersion or see Creating a Robot Application Version.   After 90 days, deployment jobs expire and will be deleted. They will no longer be accessible.  
+   * Deploys a specific version of a robot application to robots in a fleet.  This API is no longer supported and will throw an error if used.  The robot application must have a numbered applicationVersion for consistency reasons. To create a new version, use CreateRobotApplicationVersion or see Creating a Robot Application Version.   After 90 days, deployment jobs expire and will be deleted. They will no longer be accessible.  
    */
   createDeploymentJob(callback?: (err: AWSError, data: RoboMaker.Types.CreateDeploymentJobResponse) => void): Request<RoboMaker.Types.CreateDeploymentJobResponse, AWSError>;
   /**
-   * Creates a fleet, a logical group of robots running the same robot application.
+   * Creates a fleet, a logical group of robots running the same robot application.  This API is no longer supported and will throw an error if used. 
    */
   createFleet(params: RoboMaker.Types.CreateFleetRequest, callback?: (err: AWSError, data: RoboMaker.Types.CreateFleetResponse) => void): Request<RoboMaker.Types.CreateFleetResponse, AWSError>;
   /**
-   * Creates a fleet, a logical group of robots running the same robot application.
+   * Creates a fleet, a logical group of robots running the same robot application.  This API is no longer supported and will throw an error if used. 
    */
   createFleet(callback?: (err: AWSError, data: RoboMaker.Types.CreateFleetResponse) => void): Request<RoboMaker.Types.CreateFleetResponse, AWSError>;
   /**
-   * Creates a robot.
+   * Creates a robot.  This API is no longer supported and will throw an error if used. 
    */
   createRobot(params: RoboMaker.Types.CreateRobotRequest, callback?: (err: AWSError, data: RoboMaker.Types.CreateRobotResponse) => void): Request<RoboMaker.Types.CreateRobotResponse, AWSError>;
   /**
-   * Creates a robot.
+   * Creates a robot.  This API is no longer supported and will throw an error if used. 
    */
   createRobot(callback?: (err: AWSError, data: RoboMaker.Types.CreateRobotResponse) => void): Request<RoboMaker.Types.CreateRobotResponse, AWSError>;
   /**
@@ -156,19 +156,19 @@ declare class RoboMaker extends Service {
    */
   createWorldTemplate(callback?: (err: AWSError, data: RoboMaker.Types.CreateWorldTemplateResponse) => void): Request<RoboMaker.Types.CreateWorldTemplateResponse, AWSError>;
   /**
-   * Deletes a fleet.
+   * Deletes a fleet.  This API will no longer be supported as of May 2, 2022. Use it to remove resources that were created for Deployment Service. 
    */
   deleteFleet(params: RoboMaker.Types.DeleteFleetRequest, callback?: (err: AWSError, data: RoboMaker.Types.DeleteFleetResponse) => void): Request<RoboMaker.Types.DeleteFleetResponse, AWSError>;
   /**
-   * Deletes a fleet.
+   * Deletes a fleet.  This API will no longer be supported as of May 2, 2022. Use it to remove resources that were created for Deployment Service. 
    */
   deleteFleet(callback?: (err: AWSError, data: RoboMaker.Types.DeleteFleetResponse) => void): Request<RoboMaker.Types.DeleteFleetResponse, AWSError>;
   /**
-   * Deletes a robot.
+   * Deletes a robot.  This API will no longer be supported as of May 2, 2022. Use it to remove resources that were created for Deployment Service. 
    */
   deleteRobot(params: RoboMaker.Types.DeleteRobotRequest, callback?: (err: AWSError, data: RoboMaker.Types.DeleteRobotResponse) => void): Request<RoboMaker.Types.DeleteRobotResponse, AWSError>;
   /**
-   * Deletes a robot.
+   * Deletes a robot.  This API will no longer be supported as of May 2, 2022. Use it to remove resources that were created for Deployment Service. 
    */
   deleteRobot(callback?: (err: AWSError, data: RoboMaker.Types.DeleteRobotResponse) => void): Request<RoboMaker.Types.DeleteRobotResponse, AWSError>;
   /**
@@ -196,35 +196,35 @@ declare class RoboMaker extends Service {
    */
   deleteWorldTemplate(callback?: (err: AWSError, data: RoboMaker.Types.DeleteWorldTemplateResponse) => void): Request<RoboMaker.Types.DeleteWorldTemplateResponse, AWSError>;
   /**
-   * Deregisters a robot.
+   * Deregisters a robot.  This API will no longer be supported as of May 2, 2022. Use it to remove resources that were created for Deployment Service. 
    */
   deregisterRobot(params: RoboMaker.Types.DeregisterRobotRequest, callback?: (err: AWSError, data: RoboMaker.Types.DeregisterRobotResponse) => void): Request<RoboMaker.Types.DeregisterRobotResponse, AWSError>;
   /**
-   * Deregisters a robot.
+   * Deregisters a robot.  This API will no longer be supported as of May 2, 2022. Use it to remove resources that were created for Deployment Service. 
    */
   deregisterRobot(callback?: (err: AWSError, data: RoboMaker.Types.DeregisterRobotResponse) => void): Request<RoboMaker.Types.DeregisterRobotResponse, AWSError>;
   /**
-   * Describes a deployment job.
+   * Describes a deployment job.  This API will no longer be supported as of May 2, 2022. Use it to remove resources that were created for Deployment Service. 
    */
   describeDeploymentJob(params: RoboMaker.Types.DescribeDeploymentJobRequest, callback?: (err: AWSError, data: RoboMaker.Types.DescribeDeploymentJobResponse) => void): Request<RoboMaker.Types.DescribeDeploymentJobResponse, AWSError>;
   /**
-   * Describes a deployment job.
+   * Describes a deployment job.  This API will no longer be supported as of May 2, 2022. Use it to remove resources that were created for Deployment Service. 
    */
   describeDeploymentJob(callback?: (err: AWSError, data: RoboMaker.Types.DescribeDeploymentJobResponse) => void): Request<RoboMaker.Types.DescribeDeploymentJobResponse, AWSError>;
   /**
-   * Describes a fleet.
+   * Describes a fleet.  This API will no longer be supported as of May 2, 2022. Use it to remove resources that were created for Deployment Service. 
    */
   describeFleet(params: RoboMaker.Types.DescribeFleetRequest, callback?: (err: AWSError, data: RoboMaker.Types.DescribeFleetResponse) => void): Request<RoboMaker.Types.DescribeFleetResponse, AWSError>;
   /**
-   * Describes a fleet.
+   * Describes a fleet.  This API will no longer be supported as of May 2, 2022. Use it to remove resources that were created for Deployment Service. 
    */
   describeFleet(callback?: (err: AWSError, data: RoboMaker.Types.DescribeFleetResponse) => void): Request<RoboMaker.Types.DescribeFleetResponse, AWSError>;
   /**
-   * Describes a robot.
+   * Describes a robot.  This API will no longer be supported as of May 2, 2022. Use it to remove resources that were created for Deployment Service. 
    */
   describeRobot(params: RoboMaker.Types.DescribeRobotRequest, callback?: (err: AWSError, data: RoboMaker.Types.DescribeRobotResponse) => void): Request<RoboMaker.Types.DescribeRobotResponse, AWSError>;
   /**
-   * Describes a robot.
+   * Describes a robot.  This API will no longer be supported as of May 2, 2022. Use it to remove resources that were created for Deployment Service. 
    */
   describeRobot(callback?: (err: AWSError, data: RoboMaker.Types.DescribeRobotResponse) => void): Request<RoboMaker.Types.DescribeRobotResponse, AWSError>;
   /**
@@ -300,19 +300,19 @@ declare class RoboMaker extends Service {
    */
   getWorldTemplateBody(callback?: (err: AWSError, data: RoboMaker.Types.GetWorldTemplateBodyResponse) => void): Request<RoboMaker.Types.GetWorldTemplateBodyResponse, AWSError>;
   /**
-   * Returns a list of deployment jobs for a fleet. You can optionally provide filters to retrieve specific deployment jobs. 
+   * Returns a list of deployment jobs for a fleet. You can optionally provide filters to retrieve specific deployment jobs.  This API will no longer be supported as of May 2, 2022. Use it to remove resources that were created for Deployment Service. 
    */
   listDeploymentJobs(params: RoboMaker.Types.ListDeploymentJobsRequest, callback?: (err: AWSError, data: RoboMaker.Types.ListDeploymentJobsResponse) => void): Request<RoboMaker.Types.ListDeploymentJobsResponse, AWSError>;
   /**
-   * Returns a list of deployment jobs for a fleet. You can optionally provide filters to retrieve specific deployment jobs. 
+   * Returns a list of deployment jobs for a fleet. You can optionally provide filters to retrieve specific deployment jobs.  This API will no longer be supported as of May 2, 2022. Use it to remove resources that were created for Deployment Service. 
    */
   listDeploymentJobs(callback?: (err: AWSError, data: RoboMaker.Types.ListDeploymentJobsResponse) => void): Request<RoboMaker.Types.ListDeploymentJobsResponse, AWSError>;
   /**
-   * Returns a list of fleets. You can optionally provide filters to retrieve specific fleets. 
+   * Returns a list of fleets. You can optionally provide filters to retrieve specific fleets.  This API will no longer be supported as of May 2, 2022. Use it to remove resources that were created for Deployment Service. 
    */
   listFleets(params: RoboMaker.Types.ListFleetsRequest, callback?: (err: AWSError, data: RoboMaker.Types.ListFleetsResponse) => void): Request<RoboMaker.Types.ListFleetsResponse, AWSError>;
   /**
-   * Returns a list of fleets. You can optionally provide filters to retrieve specific fleets. 
+   * Returns a list of fleets. You can optionally provide filters to retrieve specific fleets.  This API will no longer be supported as of May 2, 2022. Use it to remove resources that were created for Deployment Service. 
    */
   listFleets(callback?: (err: AWSError, data: RoboMaker.Types.ListFleetsResponse) => void): Request<RoboMaker.Types.ListFleetsResponse, AWSError>;
   /**
@@ -324,11 +324,11 @@ declare class RoboMaker extends Service {
    */
   listRobotApplications(callback?: (err: AWSError, data: RoboMaker.Types.ListRobotApplicationsResponse) => void): Request<RoboMaker.Types.ListRobotApplicationsResponse, AWSError>;
   /**
-   * Returns a list of robots. You can optionally provide filters to retrieve specific robots.
+   * Returns a list of robots. You can optionally provide filters to retrieve specific robots.  This API will no longer be supported as of May 2, 2022. Use it to remove resources that were created for Deployment Service. 
    */
   listRobots(params: RoboMaker.Types.ListRobotsRequest, callback?: (err: AWSError, data: RoboMaker.Types.ListRobotsResponse) => void): Request<RoboMaker.Types.ListRobotsResponse, AWSError>;
   /**
-   * Returns a list of robots. You can optionally provide filters to retrieve specific robots.
+   * Returns a list of robots. You can optionally provide filters to retrieve specific robots.  This API will no longer be supported as of May 2, 2022. Use it to remove resources that were created for Deployment Service. 
    */
   listRobots(callback?: (err: AWSError, data: RoboMaker.Types.ListRobotsResponse) => void): Request<RoboMaker.Types.ListRobotsResponse, AWSError>;
   /**
@@ -396,11 +396,11 @@ declare class RoboMaker extends Service {
    */
   listWorlds(callback?: (err: AWSError, data: RoboMaker.Types.ListWorldsResponse) => void): Request<RoboMaker.Types.ListWorldsResponse, AWSError>;
   /**
-   * Registers a robot with a fleet.
+   * Registers a robot with a fleet.  This API is no longer supported and will throw an error if used. 
    */
   registerRobot(params: RoboMaker.Types.RegisterRobotRequest, callback?: (err: AWSError, data: RoboMaker.Types.RegisterRobotResponse) => void): Request<RoboMaker.Types.RegisterRobotResponse, AWSError>;
   /**
-   * Registers a robot with a fleet.
+   * Registers a robot with a fleet.  This API is no longer supported and will throw an error if used. 
    */
   registerRobot(callback?: (err: AWSError, data: RoboMaker.Types.RegisterRobotResponse) => void): Request<RoboMaker.Types.RegisterRobotResponse, AWSError>;
   /**
@@ -420,11 +420,11 @@ declare class RoboMaker extends Service {
    */
   startSimulationJobBatch(callback?: (err: AWSError, data: RoboMaker.Types.StartSimulationJobBatchResponse) => void): Request<RoboMaker.Types.StartSimulationJobBatchResponse, AWSError>;
   /**
-   * Syncrhonizes robots in a fleet to the latest deployment. This is helpful if robots were added after a deployment.
+   * Syncrhonizes robots in a fleet to the latest deployment. This is helpful if robots were added after a deployment.  This API will no longer be supported as of May 2, 2022. Use it to remove resources that were created for Deployment Service. 
    */
   syncDeploymentJob(params: RoboMaker.Types.SyncDeploymentJobRequest, callback?: (err: AWSError, data: RoboMaker.Types.SyncDeploymentJobResponse) => void): Request<RoboMaker.Types.SyncDeploymentJobResponse, AWSError>;
   /**
-   * Syncrhonizes robots in a fleet to the latest deployment. This is helpful if robots were added after a deployment.
+   * Syncrhonizes robots in a fleet to the latest deployment. This is helpful if robots were added after a deployment.  This API will no longer be supported as of May 2, 2022. Use it to remove resources that were created for Deployment Service. 
    */
   syncDeploymentJob(callback?: (err: AWSError, data: RoboMaker.Types.SyncDeploymentJobResponse) => void): Request<RoboMaker.Types.SyncDeploymentJobResponse, AWSError>;
   /**
@@ -555,18 +555,36 @@ declare namespace RoboMaker {
   }
   export type ClientRequestToken = string;
   export type Command = string;
+  export type CommandList = NonEmptyString[];
   export interface Compute {
     /**
-     * The simulation unit limit. Your simulation is allocated CPU and memory proportional to the supplied simulation unit limit. A simulation unit is 1 vcpu and 2GB of memory. You are only billed for the SU utilization you consume up to the maximim value provided. The default is 15. 
+     * The simulation unit limit. Your simulation is allocated CPU and memory proportional to the supplied simulation unit limit. A simulation unit is 1 vcpu and 2GB of memory. You are only billed for the SU utilization you consume up to the maximum value provided. The default is 15. 
      */
     simulationUnitLimit?: SimulationUnit;
+    /**
+     * Compute type information for the simulation job.
+     */
+    computeType?: ComputeType;
+    /**
+     * Compute GPU unit limit for the simulation job. It is the same as the number of GPUs allocated to the SimulationJob.
+     */
+    gpuUnitLimit?: GPUUnit;
   }
   export interface ComputeResponse {
     /**
-     * The simulation unit limit. Your simulation is allocated CPU and memory proportional to the supplied simulation unit limit. A simulation unit is 1 vcpu and 2GB of memory. You are only billed for the SU utilization you consume up to the maximim value provided. The default is 15. 
+     * The simulation unit limit. Your simulation is allocated CPU and memory proportional to the supplied simulation unit limit. A simulation unit is 1 vcpu and 2GB of memory. You are only billed for the SU utilization you consume up to the maximum value provided. The default is 15. 
      */
     simulationUnitLimit?: SimulationUnit;
+    /**
+     * Compute type response information for the simulation job.
+     */
+    computeType?: ComputeType;
+    /**
+     * Compute GPU unit limit for the simulation job. It is the same as the number of GPUs allocated to the SimulationJob.
+     */
+    gpuUnitLimit?: GPUUnit;
   }
+  export type ComputeType = "CPU"|"GPU_AND_CPU"|string;
   export interface CreateDeploymentJobRequest {
     /**
      * The requested deployment configuration.
@@ -663,7 +681,7 @@ declare namespace RoboMaker {
     /**
      * The sources of the robot application.
      */
-    sources: SourceConfigs;
+    sources?: SourceConfigs;
     /**
      * The robot software suite (ROS distribuition) used by the robot application.
      */
@@ -672,6 +690,10 @@ declare namespace RoboMaker {
      * A map that contains tag keys and tag values that are attached to the robot application.
      */
     tags?: TagMap;
+    /**
+     * The object that contains that URI of the Docker image that you use for your robot application.
+     */
+    environment?: Environment;
   }
   export interface CreateRobotApplicationResponse {
     /**
@@ -706,6 +728,10 @@ declare namespace RoboMaker {
      * The list of all tags added to the robot application.
      */
     tags?: TagMap;
+    /**
+     * An object that contains the Docker image URI used to a create your robot application.
+     */
+    environment?: Environment;
   }
   export interface CreateRobotApplicationVersionRequest {
     /**
@@ -716,6 +742,14 @@ declare namespace RoboMaker {
      * The current revision id for the robot application. If you provide a value and it matches the latest revision ID, a new version will be created.
      */
     currentRevisionId?: RevisionId;
+    /**
+     * The Amazon S3 identifier for the zip file bundle that you use for your robot application.
+     */
+    s3Etags?: S3Etags;
+    /**
+     * A SHA256 identifier for the Docker image that you use for your robot application.
+     */
+    imageDigest?: ImageDigest;
   }
   export interface CreateRobotApplicationVersionResponse {
     /**
@@ -746,6 +780,10 @@ declare namespace RoboMaker {
      * The revision id of the robot application.
      */
     revisionId?: RevisionId;
+    /**
+     * The object that contains the Docker image URI used to create your robot application.
+     */
+    environment?: Environment;
   }
   export interface CreateRobotRequest {
     /**
@@ -799,7 +837,7 @@ declare namespace RoboMaker {
     /**
      * The sources of the simulation application.
      */
-    sources: SourceConfigs;
+    sources?: SourceConfigs;
     /**
      * The simulation software suite used by the simulation application.
      */
@@ -816,6 +854,10 @@ declare namespace RoboMaker {
      * A map that contains tag keys and tag values that are attached to the simulation application.
      */
     tags?: TagMap;
+    /**
+     * The object that contains the Docker image URI used to create your simulation application.
+     */
+    environment?: Environment;
   }
   export interface CreateSimulationApplicationResponse {
     /**
@@ -858,6 +900,10 @@ declare namespace RoboMaker {
      * The list of all tags added to the simulation application.
      */
     tags?: TagMap;
+    /**
+     * The object that contains the Docker image URI that you used to create your simulation application.
+     */
+    environment?: Environment;
   }
   export interface CreateSimulationApplicationVersionRequest {
     /**
@@ -868,6 +914,14 @@ declare namespace RoboMaker {
      * The current revision id for the simulation application. If you provide a value and it matches the latest revision ID, a new version will be created.
      */
     currentRevisionId?: RevisionId;
+    /**
+     * The Amazon S3 eTag identifier for the zip file bundle that you use to create the simulation application.
+     */
+    s3Etags?: S3Etags;
+    /**
+     * The SHA256 digest used to identify the Docker image URI used to created the simulation application.
+     */
+    imageDigest?: ImageDigest;
   }
   export interface CreateSimulationApplicationVersionResponse {
     /**
@@ -906,6 +960,10 @@ declare namespace RoboMaker {
      * The revision ID of the simulation application.
      */
     revisionId?: RevisionId;
+    /**
+     * The object that contains the Docker image URI used to create the simulation application.
+     */
+    environment?: Environment;
   }
   export interface CreateSimulationJobRequest {
     /**
@@ -929,7 +987,7 @@ declare namespace RoboMaker {
      */
     iamRole: IamRole;
     /**
-     * The failure behavior the simulation job.  Continue  Restart the simulation job in the same host instance.  Fail  Stop the simulation job and terminate the instance.  
+     * The failure behavior the simulation job.  Continue  Leaves the instance running for its maximum timeout duration after a 4XX error code.  Fail  Stop the simulation job and terminate the instance.  
      */
     failureBehavior?: FailureBehavior;
     /**
@@ -1200,6 +1258,14 @@ declare namespace RoboMaker {
      * The list of S3 keys identifying the data source files.
      */
     s3Keys?: S3KeyOutputs;
+    /**
+     * The data type for the data source that you're using for your container image or simulation job. You can use this field to specify whether your data source is an Archive, an Amazon S3 prefix, or a file. If you don't specify a field, the default value is File.
+     */
+    type?: DataSourceType;
+    /**
+     * The location where your files are mounted in the container image. If you've specified the type of the data source as an Archive, you must provide an Amazon S3 object key to your archive. The object key must point to either a .zip or .tar.gz file. If you've specified the type of the data source as a Prefix, you provide the Amazon S3 prefix that points to the files that you are using for your data source. If you've specified the type of the data source as a File, you provide the Amazon S3 path to the file that you're using as your data source.
+     */
+    destination?: Path;
   }
   export interface DataSourceConfig {
     /**
@@ -1213,10 +1279,19 @@ declare namespace RoboMaker {
     /**
      * The list of S3 keys identifying the data source files.
      */
-    s3Keys: S3Keys;
+    s3Keys: S3KeysOrPrefixes;
+    /**
+     * The data type for the data source that you're using for your container image or simulation job. You can use this field to specify whether your data source is an Archive, an Amazon S3 prefix, or a file. If you don't specify a field, the default value is File.
+     */
+    type?: DataSourceType;
+    /**
+     * The location where your files are mounted in the container image. If you've specified the type of the data source as an Archive, you must provide an Amazon S3 object key to your archive. The object key must point to either a .zip or .tar.gz file. If you've specified the type of the data source as a Prefix, you provide the Amazon S3 prefix that points to the files that you are using for your data source. If you've specified the type of the data source as a File, you provide the Amazon S3 path to the file that you're using as your data source.
+     */
+    destination?: Path;
   }
   export type DataSourceConfigs = DataSourceConfig[];
   export type DataSourceNames = Name[];
+  export type DataSourceType = "Prefix"|"Archive"|"File"|string;
   export type DataSources = DataSource[];
   export interface DeleteFleetRequest {
     /**
@@ -1511,6 +1586,14 @@ declare namespace RoboMaker {
      * The list of all tags added to the specified robot application.
      */
     tags?: TagMap;
+    /**
+     * The object that contains the Docker image URI used to create the robot application.
+     */
+    environment?: Environment;
+    /**
+     * A SHA256 identifier for the Docker image that you use for your robot application.
+     */
+    imageDigest?: ImageDigest;
   }
   export interface DescribeRobotRequest {
     /**
@@ -1611,6 +1694,14 @@ declare namespace RoboMaker {
      * The list of all tags added to the specified simulation application.
      */
     tags?: TagMap;
+    /**
+     * The object that contains the Docker image URI used to create the simulation application.
+     */
+    environment?: Environment;
+    /**
+     * A SHA256 identifier for the Docker image that you use for your simulation application.
+     */
+    imageDigest?: ImageDigest;
   }
   export interface DescribeSimulationJobBatchRequest {
     /**
@@ -1884,6 +1975,10 @@ declare namespace RoboMaker {
      * A map that contains tag keys and tag values that are attached to the world.
      */
     tags?: TagMap;
+    /**
+     * Returns the JSON formatted string that describes the contents of your world.
+     */
+    worldDescriptionBody?: Json;
   }
   export interface DescribeWorldTemplateRequest {
     /**
@@ -1916,6 +2011,16 @@ declare namespace RoboMaker {
      * A map that contains tag keys and tag values that are attached to the world template.
      */
     tags?: TagMap;
+    /**
+     * The version of the world template that you're using.
+     */
+    version?: GenericString;
+  }
+  export interface Environment {
+    /**
+     * The Docker image URI for either your robot or simulation applications.
+     */
+    uri?: RepositoryUrl;
   }
   export type EnvironmentVariableKey = string;
   export type EnvironmentVariableMap = {[key: string]: EnvironmentVariableValue};
@@ -2006,6 +2111,7 @@ declare namespace RoboMaker {
   }
   export type Fleets = Fleet[];
   export type FloorplanCount = number;
+  export type GPUUnit = number;
   export type GenericInteger = number;
   export type GenericString = string;
   export interface GetWorldTemplateBodyRequest {
@@ -2026,6 +2132,7 @@ declare namespace RoboMaker {
   }
   export type IamRole = string;
   export type Id = string;
+  export type ImageDigest = string;
   export type Integer = number;
   export type InteriorCountPerFloorplan = number;
   export type JobDuration = number;
@@ -2036,11 +2143,11 @@ declare namespace RoboMaker {
     /**
      * The package name.
      */
-    packageName: Command;
+    packageName?: Command;
     /**
      * The launch file name.
      */
-    launchFile: Command;
+    launchFile?: Command;
     /**
      * The environment variables for the application launch.
      */
@@ -2053,6 +2160,10 @@ declare namespace RoboMaker {
      * Boolean indicating whether a streaming session will be configured for the application. If True, AWS RoboMaker will configure a connection so you can interact with your application as it is running in the simulation. You must configure and launch the component. It must have a graphical user interface. 
      */
     streamUI?: Boolean;
+    /**
+     * If you've specified General as the value for your RobotSoftwareSuite, you can use this field to specify a list of commands for your container image. If you've specified SimulationRuntime as the value for your SimulationSoftwareSuite, you can use this field to specify a list of commands for your container image.
+     */
+    command?: CommandList;
   }
   export interface ListDeploymentJobsRequest {
     /**
@@ -2445,6 +2556,7 @@ declare namespace RoboMaker {
   }
   export type RenderingEngineType = "OGRE"|string;
   export type RenderingEngineVersionType = string;
+  export type RepositoryUrl = string;
   export interface RestartSimulationJobRequest {
     /**
      * The Amazon Resource Name (ARN) of the simulation job.
@@ -2589,25 +2701,27 @@ declare namespace RoboMaker {
      */
     version?: RobotSoftwareSuiteVersionType;
   }
-  export type RobotSoftwareSuiteType = "ROS"|"ROS2"|string;
-  export type RobotSoftwareSuiteVersionType = "Kinetic"|"Melodic"|"Dashing"|string;
+  export type RobotSoftwareSuiteType = "ROS"|"ROS2"|"General"|string;
+  export type RobotSoftwareSuiteVersionType = "Kinetic"|"Melodic"|"Dashing"|"Foxy"|string;
   export type RobotStatus = "Available"|"Registered"|"PendingNewDeployment"|"Deploying"|"Failed"|"InSync"|"NoResponse"|string;
   export type Robots = Robot[];
   export type S3Bucket = string;
   export type S3Etag = string;
+  export type S3Etags = S3Etag[];
   export type S3Key = string;
+  export type S3KeyOrPrefix = string;
   export interface S3KeyOutput {
     /**
      * The S3 key.
      */
-    s3Key?: S3Key;
+    s3Key?: S3KeyOrPrefix;
     /**
      * The etag for the object.
      */
     etag?: S3Etag;
   }
   export type S3KeyOutputs = S3KeyOutput[];
-  export type S3Keys = S3Key[];
+  export type S3KeysOrPrefixes = S3KeyOrPrefix[];
   export interface S3Object {
     /**
      * The bucket containing the object.
@@ -2708,7 +2822,7 @@ declare namespace RoboMaker {
      */
     lastUpdatedAt?: LastUpdatedAt;
     /**
-     * The failure behavior the simulation job.  Continue  Restart the simulation job in the same host instance.  Fail  Stop the simulation job and terminate the instance.  
+     * The failure behavior the simulation job.  Continue  Leaves the host running for its maximum timeout duration after a 4XX error code.  Fail  Stop the simulation job and terminate the instance.  
      */
     failureBehavior?: FailureBehavior;
     /**
@@ -2818,7 +2932,7 @@ declare namespace RoboMaker {
      */
     iamRole?: IamRole;
     /**
-     * The failure behavior the simulation job.  Continue  Restart the simulation job in the same host instance.  Fail  Stop the simulation job and terminate the instance.  
+     * The failure behavior the simulation job.  Continue  Leaves the host running for its maximum timeout duration after a 4XX error code.  Fail  Stop the simulation job and terminate the instance.  
      */
     failureBehavior?: FailureBehavior;
     /**
@@ -2878,6 +2992,10 @@ declare namespace RoboMaker {
      * The names of the data sources.
      */
     dataSourceNames?: DataSourceNames;
+    /**
+     * The compute type for the simulation job summary.
+     */
+    computeType?: ComputeType;
   }
   export type SimulationJobs = SimulationJob[];
   export interface SimulationSoftwareSuite {
@@ -2890,7 +3008,7 @@ declare namespace RoboMaker {
      */
     version?: SimulationSoftwareSuiteVersionType;
   }
-  export type SimulationSoftwareSuiteType = "Gazebo"|"RosbagPlay"|string;
+  export type SimulationSoftwareSuiteType = "Gazebo"|"RosbagPlay"|"SimulationRuntime"|string;
   export type SimulationSoftwareSuiteVersionType = string;
   export type SimulationTimeMillis = number;
   export type SimulationUnit = number;
@@ -3082,6 +3200,10 @@ declare namespace RoboMaker {
      * The name of the template.
      */
     name?: TemplateName;
+    /**
+     * The version of the template that you're using.
+     */
+    version?: GenericString;
   }
   export interface Tool {
     /**
@@ -3127,7 +3249,7 @@ declare namespace RoboMaker {
     /**
      * The sources of the robot application.
      */
-    sources: SourceConfigs;
+    sources?: SourceConfigs;
     /**
      * The robot software suite (ROS distribution) used by the robot application.
      */
@@ -3136,6 +3258,10 @@ declare namespace RoboMaker {
      * The revision id for the robot application.
      */
     currentRevisionId?: RevisionId;
+    /**
+     * The object that contains the Docker image URI for your robot application.
+     */
+    environment?: Environment;
   }
   export interface UpdateRobotApplicationResponse {
     /**
@@ -3166,6 +3292,10 @@ declare namespace RoboMaker {
      * The revision id of the robot application.
      */
     revisionId?: RevisionId;
+    /**
+     * The object that contains the Docker image URI for your robot application.
+     */
+    environment?: Environment;
   }
   export interface UpdateSimulationApplicationRequest {
     /**
@@ -3175,7 +3305,7 @@ declare namespace RoboMaker {
     /**
      * The sources of the simulation application.
      */
-    sources: SourceConfigs;
+    sources?: SourceConfigs;
     /**
      * The simulation software suite used by the simulation application.
      */
@@ -3192,6 +3322,10 @@ declare namespace RoboMaker {
      * The revision id for the robot application.
      */
     currentRevisionId?: RevisionId;
+    /**
+     * The object that contains the Docker image URI for your simulation application.
+     */
+    environment?: Environment;
   }
   export interface UpdateSimulationApplicationResponse {
     /**
@@ -3230,6 +3364,10 @@ declare namespace RoboMaker {
      * The revision id of the simulation application.
      */
     revisionId?: RevisionId;
+    /**
+     * The object that contains the Docker image URI used for your simulation application.
+     */
+    environment?: Environment;
   }
   export interface UpdateWorldTemplateRequest {
     /**

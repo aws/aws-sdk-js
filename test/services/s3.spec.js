@@ -77,33 +77,21 @@ describe('AWS.S3', function() {
     it('sets a region-specific dualstack endpoint when dualstack enabled', function() {
       s3 = new AWS.S3({
         region: 'us-west-1',
-        useDualstack: true
+        useDualstackEndpoint: true
       });
       expect(s3.endpoint.hostname).to.equal('s3.dualstack.us-west-1.amazonaws.com');
 
       s3 = new AWS.S3({
         region: 'us-east-1',
-        useDualstack: true
+        useDualstackEndpoint: true
       });
       expect(s3.endpoint.hostname).to.equal('s3.dualstack.us-east-1.amazonaws.com');
 
       s3 = new AWS.S3({
         region: 'cn-north-1',
-        useDualstack: true
+        useDualstackEndpoint: true
       });
       expect(s3.endpoint.hostname).to.equal('s3.dualstack.cn-north-1.amazonaws.com.cn');
-
-      s3 = new AWS.S3({
-        region: 'us-iso-east-1',
-        useDualstack: true
-      });
-      expect(s3.endpoint.hostname).to.equal('s3.dualstack.us-iso-east-1.c2s.ic.gov');
-
-      s3 = new AWS.S3({
-        region: 'us-isob-east-1',
-        useDualstack: true
-      });
-      expect(s3.endpoint.hostname).to.equal('s3.dualstack.us-isob-east-1.sc2s.sgov.gov');
     });
   });
 
@@ -692,7 +680,7 @@ describe('AWS.S3', function() {
       beforeEach(function() {
         s3 = new AWS.S3({
           useAccelerateEndpoint: true,
-          useDualstack: true
+          useDualstackEndpoint: true
         });
       });
 
@@ -708,7 +696,7 @@ describe('AWS.S3', function() {
         var req;
         s3 = new AWS.S3({
           useAccelerateEndpoint: true,
-          useDualstack: true,
+          useDualstackEndpoint: true,
           s3BucketEndpoint: true,
           endpoint: 'foo.region.amazonaws.com'
         });
@@ -1055,7 +1043,7 @@ describe('AWS.S3', function() {
           s3 = new AWS.S3({
             sslEnabled: true,
             region: void 0,
-            useDualstack: true
+            useDualstackEndpoint: true
           });
         });
 
@@ -1090,7 +1078,7 @@ describe('AWS.S3', function() {
             sslEnabled: true,
             s3ForcePathStyle: true,
             region: void 0,
-            useDualstack: true
+            useDualstackEndpoint: true
           });
           var req = build('listObjects', {
             Bucket: 'bucket-name'
@@ -1113,7 +1101,7 @@ describe('AWS.S3', function() {
           s3 = new AWS.S3({
             sslEnabled: false,
             region: void 0,
-            useDualstack: true
+            useDualstackEndpoint: true
           });
         });
 
@@ -1808,7 +1796,7 @@ describe('AWS.S3', function() {
             region: 'eu-west-1'
           };
           s3 = new AWS.S3({
-            useDualstack: true
+            useDualstackEndpoint: true
           });
           var req = request('putObject', {
             Bucket: 'test',
@@ -1829,7 +1817,7 @@ describe('AWS.S3', function() {
             region: 'eu-west-1'
           };
           s3 = new AWS.S3({
-            useDualstack: true
+            useDualstackEndpoint: true
           });
           var req = request('putObject', {
             Bucket: 'foo',
@@ -1853,7 +1841,7 @@ describe('AWS.S3', function() {
           };
           s3 = new AWS.S3({
             useAccelerateEndpoint: true,
-            useDualstack: true
+            useDualstackEndpoint: true
           });
           var req = request('putObject', {
             Bucket: 'test',
@@ -1875,7 +1863,7 @@ describe('AWS.S3', function() {
           };
           s3 = new AWS.S3({
             useAccelerateEndpoint: true,
-            useDualstack: true
+            useDualstackEndpoint: true
           });
           var req = request('putObject', {
             Bucket: 'foo',
@@ -1957,7 +1945,7 @@ describe('AWS.S3', function() {
         region: 'eu-west-1'
       };
       s3 = new AWS.S3({
-        useDualstack: true
+        useDualstackEndpoint: true
       });
       var req = request('operation', {
         Bucket: 'name'
@@ -2532,19 +2520,6 @@ describe('AWS.S3', function() {
     });
   });
 
-  AWS.util.each(AWS.S3.prototype.computableChecksumOperations, function(operation) {
-    describe(operation, function() {
-      it('forces Content-MD5 header parameter', function() {
-        var req = s3[operation]({
-          Bucket: 'bucket',
-          ContentMD5: '000'
-        }).build();
-        var hash = AWS.util.crypto.md5(req.httpRequest.body, 'base64');
-        expect(req.httpRequest.headers['Content-MD5']).to.equal(hash);
-      });
-    });
-  });
-
   describe('willComputeChecksums', function() {
     var willCompute = function(operation, opts) {
       var compute = opts.computeChecksums;
@@ -2568,86 +2543,6 @@ describe('AWS.S3', function() {
         expect(checksum).to.equal(realChecksum);
       }
     };
-
-    it('computes checksums if the operation requires it', function() {
-      willCompute('deleteObjects', {
-        computeChecksums: true
-      });
-      willCompute('putBucketCors', {
-        computeChecksums: true
-      });
-      willCompute('putBucketLifecycle', {
-        computeChecksums: true
-      });
-      willCompute('putBucketLifecycleConfiguration', {
-        computeChecksums: true
-      });
-      willCompute('putBucketTagging', {
-        computeChecksums: true
-      });
-      willCompute('putBucketReplication', {
-        computeChecksums: true
-      });
-      willCompute('putObjectLegalHold', {
-        computeChecksums: true
-      });
-      willCompute('putObjectRetention', {
-        computeChecksums: true
-      });
-      willCompute('putObjectLockConfiguration', {
-        computeChecksums: true
-      });
-    });
-
-    it('computes checksums if computeChecksums is off and operation requires it', function() {
-      willCompute('deleteObjects', {
-        computeChecksums: false
-      });
-      willCompute('putBucketCors', {
-        computeChecksums: false
-      });
-      willCompute('putBucketLifecycle', {
-        computeChecksums: false
-      });
-      willCompute('putBucketLifecycleConfiguration', {
-        computeChecksums: false
-      });
-      willCompute('putBucketTagging', {
-        computeChecksums: false
-      });
-      willCompute('putBucketReplication', {
-        computeChecksums: false
-      });
-      willCompute('putObjectLegalHold', {
-        computeChecksums: false
-      });
-      willCompute('putObjectRetention', {
-        computeChecksums: false
-      });
-      willCompute('putObjectLockConfiguration', {
-        computeChecksums: false
-      });
-    });
-
-    it('does not compute checksums if computeChecksums is off', function() {
-      willCompute('putObject', {
-        computeChecksums: false,
-        hash: null
-      });
-    });
-
-    it('does not compute checksums if computeChecksums is on and ContentMD5 is provided', function() {
-      willCompute('putBucketAcl', {
-        computeChecksums: true,
-        hash: '000'
-      });
-    });
-
-    it('computes checksums if computeChecksums is on and ContentMD5 is not provided', function() {
-      willCompute('putBucketAcl', {
-        computeChecksums: true
-      });
-    });
 
     if (AWS.util.isNode()) {
       it('does not compute checksums for Stream objects', function() {
@@ -3066,13 +2961,25 @@ describe('AWS.S3', function() {
     });
 
     it('supports outposts ARN', function(done) {
+      s3 = new AWS.S3({ region: 'us-west-2', signatureVersion: 'v4' });
+      helpers.spyOn(AWS.S3.prototype, 'getSkewCorrectedDate').andReturn(new Date('2021-08-27T00:00:00'));
       s3.getSignedUrl('getObject', {
-        Bucket: 'arn:aws:s3-outposts:us-west-2:123456789012:outpost/op-01234567890123456/accesspoint/myendpoint',
-        Key: 'key'
-      }, function(err, data) {
-        expect(data).to.equal(
-          'https://myendpoint-123456789012.op-01234567890123456.s3-outposts.us-west-2.amazonaws.com/key?AWSAccessKeyId=akid&Expires=900&Signature=R9HjMWdhk69e7%2BwlOpFH1TUkxRY%3D&x-amz-security-token=session'
-        );
+        Bucket: 'arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myendpoint',
+        Key: 'obj'
+      }, function(_, data) {
+        expect(data).to.contain('20210827%2Fus-west-2%2Fs3-outposts%2Faws4_request');
+        done();
+      });
+    });
+
+    it('supports outposts ARN from resolved region', function(done) {
+      s3 = new AWS.S3({ region: 'us-west-2', signatureVersion: 'v4' });
+      helpers.spyOn(AWS.S3.prototype, 'getSkewCorrectedDate').andReturn(new Date('2021-08-27T00:00:00'));
+      s3.getSignedUrl('getObject', {
+        Bucket: 'arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myendpoint',
+        Key: 'obj'
+      }, function(_, data) {
+        expect(data).to.contain('20210827%2Fus-east-1%2Fs3-outposts%2Faws4_request');
         done();
       });
     });
@@ -3554,30 +3461,42 @@ describe('AWS.S3', function() {
         });
       });
 
-      it('should correctly generate access point endpoint for pseudo regions', function() {
-        s3 = new AWS.S3({region: 'us-east-1'});
+      it('should correctly generate access point endpoint for s3-external-1', function() {
+        var client = new AWS.S3({region: 'us-east-1'});
         helpers.mockHttpResponse(200, {}, '');
-        var request = s3.getObject({
-          Bucket: 'arn:aws:s3:s3-external-1:123456789012:accesspoint/myendpoint',
-          Key: 'key'
+        var request = client.listObjects({
+          Bucket: 'arn:aws:s3:s3-external-1:123456789012:accesspoint/myendpoint'
         });
         var built = request.build(function() {});
         expect(
           built.httpRequest.endpoint.hostname
         ).to.equal('myendpoint-123456789012.s3-accesspoint.s3-external-1.amazonaws.com');
+      });
 
-        s3 = new AWS.S3({region: 'us-east-1-fips'});
+      it('should correctly generate access point endpoint when useFipsEndpoint=true', function() {
+        var client = new AWS.S3({region: 'us-west-2', useFipsEndpoint: true});
         helpers.mockHttpResponse(200, {}, '');
-        request = s3.getObject({
-          Bucket: 'arn:aws:s3:us-east-1:123456789012:accesspoint/myendpoint',
-          Key: 'key'
+        var request = client.listObjects({
+          Bucket: 'arn:aws:s3:us-west-2:123456789012:accesspoint/myendpoint'
+        });
+        var built = request.build(function() {});
+        expect(
+          built.httpRequest.endpoint.hostname
+        ).to.equal('myendpoint-123456789012.s3-accesspoint-fips.us-west-2.amazonaws.com');
+      });
+
+      it('should throw when fips region is passed in ARN', function() {
+        var client = new AWS.S3({region: 'us-west-2', useFipsEndpoint: true});
+        helpers.mockHttpResponse(200, {}, '');
+        var request = client.listObjects({
+          Bucket: 'arn:aws:s3:fips-us-west-2:123456789012:accesspoint/myendpoint'
         });
         var error;
         request.build(function(err) {
           error = err;
         });
         expect(error.name).to.equal('InvalidConfiguration');
-        expect(error.message).to.equal('ARN endpoint is not compatible with FIPS region');
+        expect(error.message).to.equal('FIPS region not allowed in ARN');
       });
 
       it('should use regions from ARN if s3UseArnRegion config is set to false', function(done) {
@@ -3694,8 +3613,8 @@ describe('AWS.S3', function() {
         });
       });
 
-      it('should throw if useDualstack it set to true for outposts Arn', function(done) {
-        s3 = new AWS.S3({region: 'us-west-2', useDualstack: true});
+      it('should throw if useDualstackEndpoint it set to true for outposts Arn', function(done) {
+        s3 = new AWS.S3({region: 'us-west-2', useDualstackEndpoint: true});
         helpers.mockHttpResponse(200, {}, '');
         var request = s3.getObject({
           Bucket: 'arn:aws:s3-outposts:us-west-2:123456789012:outpost/op-01234567890123456/accesspoint/myendpoint',
@@ -3704,7 +3623,7 @@ describe('AWS.S3', function() {
         request.send(function(err, data) {
           expect(err).to.exist;
           expect(err.name).to.equal('InvalidConfiguration');
-          expect(err.message).to.equal('useDualstack config is not supported with outposts access point ARN');
+          expect(err.message).to.equal('Dualstack is not supported with outposts access point ARN');
           done();
         });
       });
@@ -3990,7 +3909,7 @@ describe('AWS.S3', function() {
     });
 
     it('should correctly generate dualstack endpoint from access point arn', function(done) {
-      s3 = new AWS.S3({region: 'us-west-2', useDualstack: true});
+      s3 = new AWS.S3({region: 'us-west-2', useDualstackEndpoint: true});
       helpers.mockHttpResponse(200, {}, '');
       var request = s3.getObject({
         Bucket: 'arn:aws:s3:us-west-2:123456789012:accesspoint/myendpoint',

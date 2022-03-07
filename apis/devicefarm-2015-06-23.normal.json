@@ -169,6 +169,12 @@
       },
       "errors": [
         {
+          "shape": "ArgumentException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
           "shape": "InternalServiceException"
         }
       ],
@@ -2080,6 +2086,9 @@
           "shape": "ArgumentException"
         },
         {
+          "shape": "LimitExceededException"
+        },
+        {
           "shape": "InternalServiceException"
         }
       ],
@@ -2621,6 +2630,10 @@
         "description": {
           "shape": "ResourceDescription",
           "documentation": "<p>Human-readable description of the project.</p>"
+        },
+        "vpcConfig": {
+          "shape": "TestGridVpcConfig",
+          "documentation": "<p>The VPC security groups and subnets that are attached to a project.</p>"
         }
       }
     },
@@ -2654,7 +2667,7 @@
       "type": "structure",
       "members": {
         "url": {
-          "shape": "String",
+          "shape": "SensitiveString",
           "documentation": "<p>A signed URL, expiring in <a>CreateTestGridUrlRequest$expiresInSeconds</a> seconds, to be passed to a <code>RemoteWebDriver</code>. </p>"
         },
         "expires": {
@@ -3041,6 +3054,11 @@
     },
     "DeviceFilter": {
       "type": "structure",
+      "required": [
+        "attribute",
+        "operator",
+        "values"
+      ],
       "members": {
         "attribute": {
           "shape": "DeviceFilterAttribute",
@@ -4822,6 +4840,12 @@
         "shape": "NetworkProfile"
       }
     },
+    "NonEmptyString": {
+      "type": "string",
+      "max": 4096,
+      "min": 1,
+      "pattern": ".*\\S.*"
+    },
     "Offering": {
       "type": "structure",
       "members": {
@@ -5059,6 +5083,10 @@
     },
     "PurchaseOfferingRequest": {
       "type": "structure",
+      "required": [
+        "offeringId",
+        "quantity"
+      ],
       "members": {
         "offeringId": {
           "shape": "OfferingIdentifier",
@@ -5240,6 +5268,10 @@
     },
     "RenewOfferingRequest": {
       "type": "structure",
+      "required": [
+        "offeringId",
+        "quantity"
+      ],
       "members": {
         "offeringId": {
           "shape": "OfferingIdentifier",
@@ -5636,6 +5668,24 @@
       },
       "documentation": "<p>Represents test settings. This data structure is passed in as the test parameter to ScheduleRun. For an example of the JSON request syntax, see <a>ScheduleRun</a>.</p>"
     },
+    "SecurityGroupIds": {
+      "type": "list",
+      "member": {
+        "shape": "NonEmptyString"
+      },
+      "max": 5,
+      "min": 1
+    },
+    "SensitiveString": {
+      "type": "string",
+      "sensitive": true
+    },
+    "SensitiveURL": {
+      "type": "string",
+      "max": 2048,
+      "min": 0,
+      "sensitive": true
+    },
     "ServiceDnsName": {
       "type": "string",
       "max": 2048,
@@ -5718,6 +5768,14 @@
     },
     "String": {
       "type": "string"
+    },
+    "SubnetIds": {
+      "type": "list",
+      "member": {
+        "shape": "NonEmptyString"
+      },
+      "max": 8,
+      "min": 1
     },
     "Suite": {
       "type": "structure",
@@ -5903,6 +5961,10 @@
           "shape": "String",
           "documentation": "<p>A human-readable description for the project.</p>"
         },
+        "vpcConfig": {
+          "shape": "TestGridVpcConfig",
+          "documentation": "<p>The VPC security groups and subnets that are attached to a project.</p>"
+        },
         "created": {
           "shape": "DateTime",
           "documentation": "<p>When the project was created.</p>"
@@ -5990,7 +6052,7 @@
           "documentation": "<p>The kind of artifact.</p>"
         },
         "url": {
-          "shape": "String",
+          "shape": "SensitiveString",
           "documentation": "<p>A semi-stable URL to the content of the object.</p>"
         }
       },
@@ -6035,6 +6097,29 @@
       "type": "integer",
       "max": 86400,
       "min": 60
+    },
+    "TestGridVpcConfig": {
+      "type": "structure",
+      "required": [
+        "securityGroupIds",
+        "subnetIds",
+        "vpcId"
+      ],
+      "members": {
+        "securityGroupIds": {
+          "shape": "SecurityGroupIds",
+          "documentation": "<p>A list of VPC security group IDs in your Amazon VPC.</p>"
+        },
+        "subnetIds": {
+          "shape": "SubnetIds",
+          "documentation": "<p>A list of VPC subnet IDs in your Amazon VPC.</p>"
+        },
+        "vpcId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The ID of the Amazon VPC.</p>"
+        }
+      },
+      "documentation": "<p>The VPC security groups and subnets that are attached to a project.</p>"
     },
     "TestParameters": {
       "type": "map",
@@ -6376,6 +6461,10 @@
         "description": {
           "shape": "ResourceDescription",
           "documentation": "<p>Human-readable description for the project.</p>"
+        },
+        "vpcConfig": {
+          "shape": "TestGridVpcConfig",
+          "documentation": "<p>The VPC security groups and subnets that are attached to a project.</p>"
         }
       }
     },
@@ -6482,7 +6571,7 @@
           "documentation": "<p>The upload's status.</p> <p>Must be one of the following values:</p> <ul> <li> <p>FAILED</p> </li> <li> <p>INITIALIZED</p> </li> <li> <p>PROCESSING</p> </li> <li> <p>SUCCEEDED</p> </li> </ul>"
         },
         "url": {
-          "shape": "URL",
+          "shape": "SensitiveURL",
           "documentation": "<p>The presigned Amazon S3 URL that was used to store a file using a PUT request.</p>"
         },
         "metadata": {

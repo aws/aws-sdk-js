@@ -29,12 +29,15 @@ var EndpointCache = /** @class */ (function () {
         var now = Date.now();
         var records = this.cache.get(keyString);
         if (records) {
-            for (var i = 0; i < records.length; i++) {
+            for (var i = records.length-1; i >= 0; i--) {
                 var record = records[i];
                 if (record.Expire < now) {
-                    this.cache.remove(keyString);
-                    return undefined;
+                    records.splice(i, 1);
                 }
+            }
+            if (records.length === 0) {
+                this.cache.remove(keyString);
+                return undefined;
             }
         }
         return records;

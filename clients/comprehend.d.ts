@@ -116,6 +116,14 @@ declare class Comprehend extends Service {
    */
   deleteEntityRecognizer(callback?: (err: AWSError, data: Comprehend.Types.DeleteEntityRecognizerResponse) => void): Request<Comprehend.Types.DeleteEntityRecognizerResponse, AWSError>;
   /**
+   * Deletes a resource-based policy that is attached to a custom model.
+   */
+  deleteResourcePolicy(params: Comprehend.Types.DeleteResourcePolicyRequest, callback?: (err: AWSError, data: Comprehend.Types.DeleteResourcePolicyResponse) => void): Request<Comprehend.Types.DeleteResourcePolicyResponse, AWSError>;
+  /**
+   * Deletes a resource-based policy that is attached to a custom model.
+   */
+  deleteResourcePolicy(callback?: (err: AWSError, data: Comprehend.Types.DeleteResourcePolicyResponse) => void): Request<Comprehend.Types.DeleteResourcePolicyResponse, AWSError>;
+  /**
    * Gets the properties associated with a document classification job. Use this operation to get the status of a classification job.
    */
   describeDocumentClassificationJob(params: Comprehend.Types.DescribeDocumentClassificationJobRequest, callback?: (err: AWSError, data: Comprehend.Types.DescribeDocumentClassificationJobResponse) => void): Request<Comprehend.Types.DescribeDocumentClassificationJobResponse, AWSError>;
@@ -188,6 +196,14 @@ declare class Comprehend extends Service {
    */
   describePiiEntitiesDetectionJob(callback?: (err: AWSError, data: Comprehend.Types.DescribePiiEntitiesDetectionJobResponse) => void): Request<Comprehend.Types.DescribePiiEntitiesDetectionJobResponse, AWSError>;
   /**
+   * Gets the details of a resource-based policy that is attached to a custom model, including the JSON body of the policy.
+   */
+  describeResourcePolicy(params: Comprehend.Types.DescribeResourcePolicyRequest, callback?: (err: AWSError, data: Comprehend.Types.DescribeResourcePolicyResponse) => void): Request<Comprehend.Types.DescribeResourcePolicyResponse, AWSError>;
+  /**
+   * Gets the details of a resource-based policy that is attached to a custom model, including the JSON body of the policy.
+   */
+  describeResourcePolicy(callback?: (err: AWSError, data: Comprehend.Types.DescribeResourcePolicyResponse) => void): Request<Comprehend.Types.DescribeResourcePolicyResponse, AWSError>;
+  /**
    * Gets the properties associated with a sentiment detection job. Use this operation to get the status of a detection job.
    */
   describeSentimentDetectionJob(params: Comprehend.Types.DescribeSentimentDetectionJobRequest, callback?: (err: AWSError, data: Comprehend.Types.DescribeSentimentDetectionJobResponse) => void): Request<Comprehend.Types.DescribeSentimentDetectionJobResponse, AWSError>;
@@ -252,6 +268,14 @@ declare class Comprehend extends Service {
    */
   detectSyntax(callback?: (err: AWSError, data: Comprehend.Types.DetectSyntaxResponse) => void): Request<Comprehend.Types.DetectSyntaxResponse, AWSError>;
   /**
+   * Creates a new custom model that replicates a source custom model that you import. The source model can be in your AWS account or another one. If the source model is in another AWS account, then it must have a resource-based policy that authorizes you to import it. The source model must be in the same AWS region that you're using when you import. You can't import a model that's in a different region.
+   */
+  importModel(params: Comprehend.Types.ImportModelRequest, callback?: (err: AWSError, data: Comprehend.Types.ImportModelResponse) => void): Request<Comprehend.Types.ImportModelResponse, AWSError>;
+  /**
+   * Creates a new custom model that replicates a source custom model that you import. The source model can be in your AWS account or another one. If the source model is in another AWS account, then it must have a resource-based policy that authorizes you to import it. The source model must be in the same AWS region that you're using when you import. You can't import a model that's in a different region.
+   */
+  importModel(callback?: (err: AWSError, data: Comprehend.Types.ImportModelResponse) => void): Request<Comprehend.Types.ImportModelResponse, AWSError>;
+  /**
    * Gets a list of the documentation classification jobs that you have submitted.
    */
   listDocumentClassificationJobs(params: Comprehend.Types.ListDocumentClassificationJobsRequest, callback?: (err: AWSError, data: Comprehend.Types.ListDocumentClassificationJobsResponse) => void): Request<Comprehend.Types.ListDocumentClassificationJobsResponse, AWSError>;
@@ -259,6 +283,14 @@ declare class Comprehend extends Service {
    * Gets a list of the documentation classification jobs that you have submitted.
    */
   listDocumentClassificationJobs(callback?: (err: AWSError, data: Comprehend.Types.ListDocumentClassificationJobsResponse) => void): Request<Comprehend.Types.ListDocumentClassificationJobsResponse, AWSError>;
+  /**
+   * Gets a list of summaries of the document classifiers that you have created
+   */
+  listDocumentClassifierSummaries(params: Comprehend.Types.ListDocumentClassifierSummariesRequest, callback?: (err: AWSError, data: Comprehend.Types.ListDocumentClassifierSummariesResponse) => void): Request<Comprehend.Types.ListDocumentClassifierSummariesResponse, AWSError>;
+  /**
+   * Gets a list of summaries of the document classifiers that you have created
+   */
+  listDocumentClassifierSummaries(callback?: (err: AWSError, data: Comprehend.Types.ListDocumentClassifierSummariesResponse) => void): Request<Comprehend.Types.ListDocumentClassifierSummariesResponse, AWSError>;
   /**
    * Gets a list of the document classifiers that you have created.
    */
@@ -291,6 +323,14 @@ declare class Comprehend extends Service {
    * Gets a list of the entity detection jobs that you have submitted.
    */
   listEntitiesDetectionJobs(callback?: (err: AWSError, data: Comprehend.Types.ListEntitiesDetectionJobsResponse) => void): Request<Comprehend.Types.ListEntitiesDetectionJobsResponse, AWSError>;
+  /**
+   * Gets a list of summaries for the entity recognizers that you have created.
+   */
+  listEntityRecognizerSummaries(params: Comprehend.Types.ListEntityRecognizerSummariesRequest, callback?: (err: AWSError, data: Comprehend.Types.ListEntityRecognizerSummariesResponse) => void): Request<Comprehend.Types.ListEntityRecognizerSummariesResponse, AWSError>;
+  /**
+   * Gets a list of summaries for the entity recognizers that you have created.
+   */
+  listEntityRecognizerSummaries(callback?: (err: AWSError, data: Comprehend.Types.ListEntityRecognizerSummariesResponse) => void): Request<Comprehend.Types.ListEntityRecognizerSummariesResponse, AWSError>;
   /**
    * Gets a list of the properties of all entity recognizers that you created, including recognizers currently in training. Allows you to filter the list of recognizers based on criteria such as status and submission time. This call returns up to 500 entity recognizers in the list, with a default number of 100 recognizers in the list. The results of this list are not in any particular order. Please get the list and sort locally if needed.
    */
@@ -347,6 +387,14 @@ declare class Comprehend extends Service {
    * Gets a list of the topic detection jobs that you have submitted.
    */
   listTopicsDetectionJobs(callback?: (err: AWSError, data: Comprehend.Types.ListTopicsDetectionJobsResponse) => void): Request<Comprehend.Types.ListTopicsDetectionJobsResponse, AWSError>;
+  /**
+   * Attaches a resource-based policy to a custom model. You can use this policy to authorize an entity in another AWS account to import the custom model, which replicates it in Amazon Comprehend in their account.
+   */
+  putResourcePolicy(params: Comprehend.Types.PutResourcePolicyRequest, callback?: (err: AWSError, data: Comprehend.Types.PutResourcePolicyResponse) => void): Request<Comprehend.Types.PutResourcePolicyResponse, AWSError>;
+  /**
+   * Attaches a resource-based policy to a custom model. You can use this policy to authorize an entity in another AWS account to import the custom model, which replicates it in Amazon Comprehend in their account.
+   */
+  putResourcePolicy(callback?: (err: AWSError, data: Comprehend.Types.PutResourcePolicyResponse) => void): Request<Comprehend.Types.PutResourcePolicyResponse, AWSError>;
   /**
    * Starts an asynchronous document classification job. Use the operation to track the progress of the job.
    */
@@ -504,15 +552,32 @@ declare namespace Comprehend {
   export type AnyLengthString = string;
   export type AttributeNamesList = AttributeNamesListItem[];
   export type AttributeNamesListItem = string;
+  export type AugmentedManifestsDocumentTypeFormat = "PLAIN_TEXT_DOCUMENT"|"SEMI_STRUCTURED_DOCUMENT"|string;
   export interface AugmentedManifestsListItem {
     /**
      * The Amazon S3 location of the augmented manifest file.
      */
     S3Uri: S3Uri;
     /**
+     * The purpose of the data you've provided in the augmented manifest. You can either train or test this data. If you don't specify, the default is train. TRAIN - all of the documents in the manifest will be used for training. If no test documents are provided, Amazon Comprehend will automatically reserve a portion of the training documents for testing.  TEST - all of the documents in the manifest will be used for testing.
+     */
+    Split?: Split;
+    /**
      * The JSON attribute that contains the annotations for your training documents. The number of attribute names that you specify depends on whether your augmented manifest file is the output of a single labeling job or a chained labeling job. If your file is the output of a single labeling job, specify the LabelAttributeName key that was used when the job was created in Ground Truth. If your file is the output of a chained labeling job, specify the LabelAttributeName key for one or more jobs in the chain. Each LabelAttributeName key provides the annotations from an individual job.
      */
     AttributeNames: AttributeNamesList;
+    /**
+     * The S3 prefix to the annotation files that are referred in the augmented manifest file.
+     */
+    AnnotationDataS3Uri?: S3Uri;
+    /**
+     * The S3 prefix to the source files (PDFs) that are referred to in the augmented manifest file.
+     */
+    SourceDocumentsS3Uri?: S3Uri;
+    /**
+     * The type of augmented manifest. PlainTextDocument or SemiStructuredDocument. If you don't specify, the default is PlainTextDocument.     PLAIN_TEXT_DOCUMENT A document type that represents any unicode text that is encoded in UTF-8.    SEMI_STRUCTURED_DOCUMENT A document type with positional and structural context, like a PDF. For training with Amazon Comprehend, only PDFs are supported. For inference, Amazon Comprehend support PDFs, DOCX and TXT.  
+     */
+    DocumentType?: AugmentedManifestsDocumentTypeFormat;
   }
   export interface BatchDetectDominantLanguageItemResult {
     /**
@@ -779,6 +844,10 @@ declare namespace Comprehend {
      */
     DocumentClassifierName: ComprehendArnName;
     /**
+     * The version name given to the newly created classifier. Version names can have a maximum of 256 characters. Alphanumeric characters, hyphens (-) and underscores (_) are allowed. The version name must be unique among all models with the same classifier name in the account/AWS Region.
+     */
+    VersionName?: VersionName;
+    /**
      * The Amazon Resource Name (ARN) of the AWS Identity and Management (IAM) role that grants Amazon Comprehend read access to your input data.
      */
     DataAccessRoleArn: IamRoleArn;
@@ -818,6 +887,10 @@ declare namespace Comprehend {
      * ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt trained custom models. The ModelKmsKeyId can be either of the following formats:   KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"    Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"   
      */
     ModelKmsKeyId?: KmsKeyId;
+    /**
+     * The resource-based policy to attach to your custom document classifier model. You can use this policy to allow another AWS account to import your custom model. Provide your policy as a JSON body that you enter as a UTF-8 encoded string without line breaks. To provide valid JSON, enclose the attribute names and values in double quotes. If the JSON body is also enclosed in double quotes, then you must escape the double quotes that are inside the policy:  "{\"attribute\": \"value\", \"attribute\": [\"value\"]}"  To avoid escaping quotes, you can use single quotes to enclose the policy and double quotes to enclose the JSON names and values:  '{"attribute": "value", "attribute": ["value"]}' 
+     */
+    ModelPolicy?: Policy;
   }
   export interface CreateDocumentClassifierResponse {
     /**
@@ -863,6 +936,10 @@ declare namespace Comprehend {
      */
     RecognizerName: ComprehendArnName;
     /**
+     * The version name given to the newly created recognizer. Version names can be a maximum of 256 characters. Alphanumeric characters, hyphens (-) and underscores (_) are allowed. The version name must be unique among all models with the same recognizer name in the account/ AWS Region.
+     */
+    VersionName?: VersionName;
+    /**
      * The Amazon Resource Name (ARN) of the AWS Identity and Management (IAM) role that grants Amazon Comprehend read access to your input data.
      */
     DataAccessRoleArn: IamRoleArn;
@@ -894,6 +971,10 @@ declare namespace Comprehend {
      * ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt trained custom models. The ModelKmsKeyId can be either of the following formats   KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"    Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"   
      */
     ModelKmsKeyId?: KmsKeyId;
+    /**
+     * The JSON resource-based policy to attach to your custom entity recognizer model. You can use this policy to allow another AWS account to import your custom model. Provide your JSON as a UTF-8 encoded string without line breaks. To provide valid JSON for your policy, enclose the attribute names and values in double quotes. If the JSON body is also enclosed in double quotes, then you must escape the double quotes that are inside the policy:  "{\"attribute\": \"value\", \"attribute\": [\"value\"]}"  To avoid escaping quotes, you can use single quotes to enclose the policy and double quotes to enclose the JSON names and values:  '{"attribute": "value", "attribute": ["value"]}' 
+     */
+    ModelPolicy?: Policy;
   }
   export interface CreateEntityRecognizerResponse {
     /**
@@ -926,6 +1007,18 @@ declare namespace Comprehend {
     EntityRecognizerArn: EntityRecognizerArn;
   }
   export interface DeleteEntityRecognizerResponse {
+  }
+  export interface DeleteResourcePolicyRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the custom model version that has the policy to delete.
+     */
+    ResourceArn: ComprehendModelArn;
+    /**
+     * The revision ID of the policy to delete.
+     */
+    PolicyRevisionId?: PolicyRevisionId;
+  }
+  export interface DeleteResourcePolicyResponse {
   }
   export interface DescribeDocumentClassificationJobRequest {
     /**
@@ -1031,6 +1124,30 @@ declare namespace Comprehend {
   }
   export interface DescribePiiEntitiesDetectionJobResponse {
     PiiEntitiesDetectionJobProperties?: PiiEntitiesDetectionJobProperties;
+  }
+  export interface DescribeResourcePolicyRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the policy to describe.
+     */
+    ResourceArn: ComprehendModelArn;
+  }
+  export interface DescribeResourcePolicyResponse {
+    /**
+     * The JSON body of the resource-based policy.
+     */
+    ResourcePolicy?: Policy;
+    /**
+     * The time at which the policy was created.
+     */
+    CreationTime?: Timestamp;
+    /**
+     * The time at which the policy was last modified.
+     */
+    LastModifiedTime?: Timestamp;
+    /**
+     * The revision ID of the policy. Each time you modify a policy, Amazon Comprehend assigns a new revision ID, and it deletes the prior version of the policy.
+     */
+    PolicyRevisionId?: PolicyRevisionId;
   }
   export interface DescribeSentimentDetectionJobRequest {
     /**
@@ -1190,6 +1307,10 @@ declare namespace Comprehend {
      */
     JobId?: JobId;
     /**
+     * The Amazon Resource Name (ARN) of the document classification job. It is a unique, fully qualified identifier for the job. It includes the AWS account, Region, and the job ID. The format of the ARN is as follows:  arn:&lt;partition&gt;:comprehend:&lt;region&gt;:&lt;account-id&gt;:document-classification-job/&lt;job-id&gt;  The following is an example job ARN:  arn:aws:comprehend:us-west-2:111122223333:document-classification-job/1234abcd12ab34cd56ef1234567890ab 
+     */
+    JobArn?: ComprehendArn;
+    /**
      * The name that you assigned to the document classification job.
      */
     JobName?: JobName;
@@ -1245,6 +1366,10 @@ declare namespace Comprehend {
      */
     Status?: ModelStatus;
     /**
+     * The name that you assigned to the document classifier
+     */
+    DocumentClassifierName?: ComprehendArnName;
+    /**
      * Filters the list of classifiers based on the time that the classifier was submitted for processing. Returns only classifiers submitted before the specified time. Classifiers are returned in ascending order, oldest to newest.
      */
     SubmitTimeBefore?: Timestamp;
@@ -1262,6 +1387,10 @@ declare namespace Comprehend {
      * The Amazon S3 URI for the input data. The S3 bucket must be in the same region as the API endpoint that you are calling. The URI can point to a single input file or it can provide the prefix for a collection of input files. For example, if you use the URI S3://bucketName/prefix, if the prefix is a single file, Amazon Comprehend uses that file as input. If more than one file begins with the prefix, Amazon Comprehend uses all of them as input. This parameter is required if you set DataFormat to COMPREHEND_CSV.
      */
     S3Uri?: S3Uri;
+    /**
+     * The Amazon S3 URI for the input data. The Amazon S3 bucket must be in the same AWS Region as the API endpoint that you are calling. The URI can point to a single input file or it can provide the prefix for a collection of input files. 
+     */
+    TestS3Uri?: S3Uri;
     /**
      * Indicates the delimiter used to separate each label for training a multi-label classifier. The default delimiter between labels is a pipe (|). You can use a different character as a delimiter (if it's an allowed character) by specifying it under Delimiter for labels. If the training documents use a delimiter other than the default or the delimiter you specify, the labels on that line will be combined to make a single unique label, such as LABELLABELLABEL.
      */
@@ -1347,8 +1476,39 @@ declare namespace Comprehend {
      * ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt trained custom models. The ModelKmsKeyId can be either of the following formats:   KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"    Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"   
      */
     ModelKmsKeyId?: KmsKeyId;
+    /**
+     * The version name that you assigned to the document classifier.
+     */
+    VersionName?: VersionName;
+    /**
+     * The Amazon Resource Name (ARN) of the source model. This model was imported from a different AWS account to create the document classifier model in your AWS account.
+     */
+    SourceModelArn?: DocumentClassifierArn;
   }
   export type DocumentClassifierPropertiesList = DocumentClassifierProperties[];
+  export type DocumentClassifierSummariesList = DocumentClassifierSummary[];
+  export interface DocumentClassifierSummary {
+    /**
+     * The name that you assigned the document classifier.
+     */
+    DocumentClassifierName?: ComprehendArnName;
+    /**
+     * The number of versions you created.
+     */
+    NumberOfVersions?: Integer;
+    /**
+     * The time that the latest document classifier version was submitted for processing.
+     */
+    LatestVersionCreatedAt?: Timestamp;
+    /**
+     * The version name you assigned to the latest document classifier version.
+     */
+    LatestVersionName?: VersionName;
+    /**
+     * Provides the status of the latest document classifier version.
+     */
+    LatestVersionStatus?: ModelStatus;
+  }
   export interface DocumentLabel {
     /**
      * The name of the label.
@@ -1358,6 +1518,23 @@ declare namespace Comprehend {
      * The confidence score that Amazon Comprehend has this label correctly attributed.
      */
     Score?: Float;
+  }
+  export type DocumentReadAction = "TEXTRACT_DETECT_DOCUMENT_TEXT"|"TEXTRACT_ANALYZE_DOCUMENT"|string;
+  export type DocumentReadFeatureTypes = "TABLES"|"FORMS"|string;
+  export type DocumentReadMode = "SERVICE_DEFAULT"|"FORCE_DOCUMENT_READ_ACTION"|string;
+  export interface DocumentReaderConfig {
+    /**
+     * This enum field will start with two values which will apply to PDFs:    TEXTRACT_DETECT_DOCUMENT_TEXT - The service calls DetectDocumentText for PDF documents per page.    TEXTRACT_ANALYZE_DOCUMENT - The service calls AnalyzeDocument for PDF documents per page.  
+     */
+    DocumentReadAction: DocumentReadAction;
+    /**
+     * This enum field provides two values:    SERVICE_DEFAULT - use service defaults for Document reading. For Digital PDF it would mean using an internal parser instead of Textract APIs    FORCE_DOCUMENT_READ_ACTION - Always use specified action for DocumentReadAction, including Digital PDF.   
+     */
+    DocumentReadMode?: DocumentReadMode;
+    /**
+     * Specifies how the text in an input file should be processed:
+     */
+    FeatureTypes?: ListOfDocumentReadFeatureTypes;
   }
   export interface DominantLanguage {
     /**
@@ -1392,6 +1569,10 @@ declare namespace Comprehend {
      * The identifier assigned to the dominant language detection job.
      */
     JobId?: JobId;
+    /**
+     * The Amazon Resource Name (ARN) of the dominant language detection job. It is a unique, fully qualified identifier for the job. It includes the AWS account, Region, and the job ID. The format of the ARN is as follows:  arn:&lt;partition&gt;:comprehend:&lt;region&gt;:&lt;account-id&gt;:dominant-language-detection-job/&lt;job-id&gt;  The following is an example job ARN:  arn:aws:comprehend:us-west-2:111122223333:dominant-language-detection-job/1234abcd12ab34cd56ef1234567890ab 
+     */
+    JobArn?: ComprehendArn;
     /**
      * The name that you assigned to the dominant language detection job.
      */
@@ -1471,6 +1652,10 @@ declare namespace Comprehend {
      */
     ModelArn?: ComprehendModelArn;
     /**
+     * ARN of the new model to use for updating an existing endpoint. This ARN is going to be different from the model ARN when the update is in progress
+     */
+    DesiredModelArn?: ComprehendModelArn;
+    /**
      * The desired number of inference units to be used by the model using this endpoint. Each inference unit represents of a throughput of 100 characters per second.
      */
     DesiredInferenceUnits?: InferenceUnitsInteger;
@@ -1490,6 +1675,10 @@ declare namespace Comprehend {
      * The Amazon Resource Name (ARN) of the AWS identity and Access Management (IAM) role that grants Amazon Comprehend read access to trained custom models encrypted with a customer managed key (ModelKmsKeyId).
      */
     DataAccessRoleArn?: IamRoleArn;
+    /**
+     * Data access role ARN to use in case the new model is encrypted with a customer KMS key.
+     */
+    DesiredDataAccessRoleArn?: IamRoleArn;
   }
   export type EndpointPropertiesList = EndpointProperties[];
   export type EndpointStatus = "CREATING"|"DELETING"|"FAILED"|"IN_SERVICE"|"UPDATING"|string;
@@ -1516,6 +1705,10 @@ declare namespace Comprehend {
      * The identifier assigned to the entities detection job.
      */
     JobId?: JobId;
+    /**
+     * The Amazon Resource Name (ARN) of the entities detection job. It is a unique, fully qualified identifier for the job. It includes the AWS account, Region, and the job ID. The format of the ARN is as follows:  arn:&lt;partition&gt;:comprehend:&lt;region&gt;:&lt;account-id&gt;:entities-detection-job/&lt;job-id&gt;  The following is an example job ARN:  arn:aws:comprehend:us-west-2:111122223333:entities-detection-job/1234abcd12ab34cd56ef1234567890ab 
+     */
+    JobArn?: ComprehendArn;
     /**
      * The name that you assigned the entities detection job.
      */
@@ -1603,6 +1796,10 @@ declare namespace Comprehend {
      *  Specifies the Amazon S3 location where the annotations for an entity recognizer are located. The URI must be in the same region as the API endpoint that you are calling.
      */
     S3Uri: S3Uri;
+    /**
+     * This specifies the Amazon S3 location where the test annotations for an entity recognizer are located. The URI must be in the same AWS Region as the API endpoint that you are calling.
+     */
+    TestS3Uri?: S3Uri;
   }
   export type EntityRecognizerArn = string;
   export type EntityRecognizerAugmentedManifestsList = AugmentedManifestsListItem[];
@@ -1612,6 +1809,14 @@ declare namespace Comprehend {
      *  Specifies the Amazon S3 location where the training documents for an entity recognizer are located. The URI must be in the same region as the API endpoint that you are calling.
      */
     S3Uri: S3Uri;
+    /**
+     *  Specifies the Amazon S3 location where the test documents for an entity recognizer are located. The URI must be in the same AWS Region as the API endpoint that you are calling.
+     */
+    TestS3Uri?: S3Uri;
+    /**
+     *  Specifies how the text in an input file should be processed. This is optional, and the default is ONE_DOC_PER_LINE. ONE_DOC_PER_FILE - Each file is considered a separate document. Use this option when you are processing large documents, such as newspaper articles or scientific papers. ONE_DOC_PER_LINE - Each line in a file is considered a separate document. Use this option when you are processing many short documents, such as text messages.
+     */
+    InputFormat?: InputFormat;
   }
   export type EntityRecognizerEndpointArn = string;
   export interface EntityRecognizerEntityList {
@@ -1639,6 +1844,10 @@ declare namespace Comprehend {
      * The status of an entity recognizer.
      */
     Status?: ModelStatus;
+    /**
+     * The name that you assigned the entity recognizer.
+     */
+    RecognizerName?: ComprehendArnName;
     /**
      * Filters the list of entities based on the time that the list was submitted for processing. Returns only jobs submitted before the specified time. Jobs are returned in descending order, newest to oldest.
      */
@@ -1764,8 +1973,39 @@ declare namespace Comprehend {
      * ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt trained custom models. The ModelKmsKeyId can be either of the following formats:    KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"    Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"   
      */
     ModelKmsKeyId?: KmsKeyId;
+    /**
+     * The version name you assigned to the entity recognizer.
+     */
+    VersionName?: VersionName;
+    /**
+     * The Amazon Resource Name (ARN) of the source model. This model was imported from a different AWS account to create the entity recognizer model in your AWS account.
+     */
+    SourceModelArn?: EntityRecognizerArn;
   }
   export type EntityRecognizerPropertiesList = EntityRecognizerProperties[];
+  export type EntityRecognizerSummariesList = EntityRecognizerSummary[];
+  export interface EntityRecognizerSummary {
+    /**
+     *  The name that you assigned the entity recognizer.
+     */
+    RecognizerName?: ComprehendArnName;
+    /**
+     *  The number of versions you created.
+     */
+    NumberOfVersions?: Integer;
+    /**
+     *  The time that the latest entity recognizer version was submitted for processing.
+     */
+    LatestVersionCreatedAt?: Timestamp;
+    /**
+     *  The version name you assigned to the latest entity recognizer version.
+     */
+    LatestVersionName?: VersionName;
+    /**
+     *  Provides the status of the latest entity recognizer version.
+     */
+    LatestVersionStatus?: ModelStatus;
+  }
   export type EntityType = "PERSON"|"LOCATION"|"ORGANIZATION"|"COMMERCIAL_ITEM"|"EVENT"|"DATE"|"QUANTITY"|"TITLE"|"OTHER"|string;
   export type EntityTypeName = string;
   export interface EntityTypesEvaluationMetrics {
@@ -1814,6 +2054,10 @@ declare namespace Comprehend {
      */
     JobId?: JobId;
     /**
+     * The Amazon Resource Name (ARN) of the events detection job. It is a unique, fully qualified identifier for the job. It includes the AWS account, Region, and the job ID. The format of the ARN is as follows:  arn:&lt;partition&gt;:comprehend:&lt;region&gt;:&lt;account-id&gt;:events-detection-job/&lt;job-id&gt;  The following is an example job ARN:  arn:aws:comprehend:us-west-2:111122223333:events-detection-job/1234abcd12ab34cd56ef1234567890ab 
+     */
+    JobArn?: ComprehendArn;
+    /**
      * The name you assigned the events detection job.
      */
     JobName?: JobName;
@@ -1857,6 +2101,38 @@ declare namespace Comprehend {
   export type EventsDetectionJobPropertiesList = EventsDetectionJobProperties[];
   export type Float = number;
   export type IamRoleArn = string;
+  export interface ImportModelRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the custom model to import.
+     */
+    SourceModelArn: ComprehendModelArn;
+    /**
+     * The name to assign to the custom model that is created in Amazon Comprehend by this import.
+     */
+    ModelName?: ComprehendArnName;
+    /**
+     * The version name given to the custom model that is created by this import. Version names can have a maximum of 256 characters. Alphanumeric characters, hyphens (-) and underscores (_) are allowed. The version name must be unique among all models with the same classifier name in the account/AWS Region.
+     */
+    VersionName?: VersionName;
+    /**
+     * ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt trained custom models. The ModelKmsKeyId can be either of the following formats:   KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"    Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"   
+     */
+    ModelKmsKeyId?: KmsKeyId;
+    /**
+     * The Amazon Resource Name (ARN) of the AWS Identity and Management (IAM) role that allows Amazon Comprehend to use Amazon Key Management Service (KMS) to encrypt or decrypt the custom model.
+     */
+    DataAccessRoleArn?: IamRoleArn;
+    /**
+     * Tags to be associated with the custom model that is created by this import. A tag is a key-value pair that adds as a metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department.
+     */
+    Tags?: TagList;
+  }
+  export interface ImportModelResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the custom model being imported.
+     */
+    ModelArn?: ComprehendModelArn;
+  }
   export type InferenceUnitsInteger = number;
   export interface InputDataConfig {
     /**
@@ -1867,6 +2143,10 @@ declare namespace Comprehend {
      * Specifies how the text in an input file should be processed:    ONE_DOC_PER_FILE - Each file is considered a separate document. Use this option when you are processing large documents, such as newspaper articles or scientific papers.    ONE_DOC_PER_LINE - Each line in a file is considered a separate document. Use this option when you are processing many short documents, such as text messages.  
      */
     InputFormat?: InputFormat;
+    /**
+     * The document reader config field applies only for InputDataConfig of StartEntitiesDetectionJob.  Use DocumentReaderConfig to provide specifications about how you want your inference documents read. Currently it applies for PDF documents in StartEntitiesDetectionJob custom inference.
+     */
+    DocumentReaderConfig?: DocumentReaderConfig;
   }
   export type InputFormat = "ONE_DOC_PER_FILE"|"ONE_DOC_PER_LINE"|string;
   export type Integer = number;
@@ -1914,6 +2194,10 @@ declare namespace Comprehend {
      * The identifier assigned to the key phrases detection job.
      */
     JobId?: JobId;
+    /**
+     * The Amazon Resource Name (ARN) of the key phrases detection job. It is a unique, fully qualified identifier for the job. It includes the AWS account, Region, and the job ID. The format of the ARN is as follows:  arn:&lt;partition&gt;:comprehend:&lt;region&gt;:&lt;account-id&gt;:key-phrases-detection-job/&lt;job-id&gt;  The following is an example job ARN:  arn:aws:comprehend:us-west-2:111122223333:key-phrases-detection-job/1234abcd12ab34cd56ef1234567890ab 
+     */
+    JobArn?: ComprehendArn;
     /**
      * The name that you assigned the key phrases detection job.
      */
@@ -1982,6 +2266,26 @@ declare namespace Comprehend {
      * A list containing the properties of each job returned.
      */
     DocumentClassificationJobPropertiesList?: DocumentClassificationJobPropertiesList;
+    /**
+     * Identifies the next page of results to return.
+     */
+    NextToken?: String;
+  }
+  export interface ListDocumentClassifierSummariesRequest {
+    /**
+     * Identifies the next page of results to return.
+     */
+    NextToken?: String;
+    /**
+     * The maximum number of results to return on each page. The default is 100.
+     */
+    MaxResults?: MaxResultsInteger;
+  }
+  export interface ListDocumentClassifierSummariesResponse {
+    /**
+     * The list of summaries of document classifiers.
+     */
+    DocumentClassifierSummariesList?: DocumentClassifierSummariesList;
     /**
      * Identifies the next page of results to return.
      */
@@ -2083,6 +2387,26 @@ declare namespace Comprehend {
      */
     NextToken?: String;
   }
+  export interface ListEntityRecognizerSummariesRequest {
+    /**
+     * Identifies the next page of results to return.
+     */
+    NextToken?: String;
+    /**
+     * The maximum number of results to return on each page. The default is 100.
+     */
+    MaxResults?: MaxResultsInteger;
+  }
+  export interface ListEntityRecognizerSummariesResponse {
+    /**
+     * The list entity recognizer summaries.
+     */
+    EntityRecognizerSummariesList?: EntityRecognizerSummariesList;
+    /**
+     * The list entity recognizer summaries.
+     */
+    NextToken?: String;
+  }
   export interface ListEntityRecognizersRequest {
     /**
      * Filters the list of entities returned. You can filter on Status, SubmitTimeBefore, or SubmitTimeAfter. You can only set one filter at a time.
@@ -2161,6 +2485,7 @@ declare namespace Comprehend {
   export type ListOfDetectKeyPhrasesResult = BatchDetectKeyPhrasesItemResult[];
   export type ListOfDetectSentimentResult = BatchDetectSentimentItemResult[];
   export type ListOfDetectSyntaxResult = BatchDetectSyntaxItemResult[];
+  export type ListOfDocumentReadFeatureTypes = DocumentReadFeatureTypes[];
   export type ListOfDominantLanguages = DominantLanguage[];
   export type ListOfEntities = Entity[];
   export type ListOfEntityLabels = EntityLabel[];
@@ -2306,6 +2631,10 @@ declare namespace Comprehend {
      */
     JobId?: JobId;
     /**
+     * The Amazon Resource Name (ARN) of the PII entities detection job. It is a unique, fully qualified identifier for the job. It includes the AWS account, Region, and the job ID. The format of the ARN is as follows:  arn:&lt;partition&gt;:comprehend:&lt;region&gt;:&lt;account-id&gt;:pii-entities-detection-job/&lt;job-id&gt;  The following is an example job ARN:  arn:aws:comprehend:us-west-2:111122223333:pii-entities-detection-job/1234abcd12ab34cd56ef1234567890ab 
+     */
+    JobArn?: ComprehendArn;
+    /**
      * The name that you assigned the PII entities detection job.
      */
     JobName?: JobName;
@@ -2382,6 +2711,28 @@ declare namespace Comprehend {
      */
     KmsKeyId?: KmsKeyId;
   }
+  export type Policy = string;
+  export type PolicyRevisionId = string;
+  export interface PutResourcePolicyRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the custom model to attach the policy to.
+     */
+    ResourceArn: ComprehendModelArn;
+    /**
+     * The JSON resource-based policy to attach to your custom model. Provide your JSON as a UTF-8 encoded string without line breaks. To provide valid JSON for your policy, enclose the attribute names and values in double quotes. If the JSON body is also enclosed in double quotes, then you must escape the double quotes that are inside the policy:  "{\"attribute\": \"value\", \"attribute\": [\"value\"]}"  To avoid escaping quotes, you can use single quotes to enclose the policy and double quotes to enclose the JSON names and values:  '{"attribute": "value", "attribute": ["value"]}' 
+     */
+    ResourcePolicy: Policy;
+    /**
+     * The revision ID that Amazon Comprehend assigned to the policy that you are updating. If you are creating a new policy that has no prior version, don't use this parameter. Amazon Comprehend creates the revision ID for you.
+     */
+    PolicyRevisionId?: PolicyRevisionId;
+  }
+  export interface PutResourcePolicyResponse {
+    /**
+     * The revision ID of the policy. Each time you modify a policy, Amazon Comprehend assigns a new revision ID, and it deletes the prior version of the policy.
+     */
+    PolicyRevisionId?: PolicyRevisionId;
+  }
   export interface RedactionConfig {
     /**
      * An array of the types of PII entities that Amazon Comprehend detects in the input text for your request.
@@ -2422,6 +2773,10 @@ declare namespace Comprehend {
      * The identifier assigned to the sentiment detection job.
      */
     JobId?: JobId;
+    /**
+     * The Amazon Resource Name (ARN) of the sentiment detection job. It is a unique, fully qualified identifier for the job. It includes the AWS account, Region, and the job ID. The format of the ARN is as follows:  arn:&lt;partition&gt;:comprehend:&lt;region&gt;:&lt;account-id&gt;:sentiment-detection-job/&lt;job-id&gt;  The following is an example job ARN:  arn:aws:comprehend:us-west-2:111122223333:sentiment-detection-job/1234abcd12ab34cd56ef1234567890ab 
+     */
+    JobArn?: ComprehendArn;
     /**
      * The name that you assigned to the sentiment detection job
      */
@@ -2487,6 +2842,7 @@ declare namespace Comprehend {
     Mixed?: Float;
   }
   export type SentimentType = "POSITIVE"|"NEGATIVE"|"NEUTRAL"|"MIXED"|string;
+  export type Split = "TRAIN"|"TEST"|string;
   export interface StartDocumentClassificationJobRequest {
     /**
      * The identifier of the job.
@@ -2520,12 +2876,20 @@ declare namespace Comprehend {
      * Configuration parameters for an optional private Virtual Private Cloud (VPC) containing the resources you are using for your document classification job. For more information, see Amazon VPC. 
      */
     VpcConfig?: VpcConfig;
+    /**
+     * Tags to be associated with the document classification job. A tag is a key-value pair that adds metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department.
+     */
+    Tags?: TagList;
   }
   export interface StartDocumentClassificationJobResponse {
     /**
      * The identifier generated for the job. To get the status of the job, use this identifier with the operation.
      */
     JobId?: JobId;
+    /**
+     * The Amazon Resource Name (ARN) of the document classification job. It is a unique, fully qualified identifier for the job. It includes the AWS account, Region, and the job ID. The format of the ARN is as follows:  arn:&lt;partition&gt;:comprehend:&lt;region&gt;:&lt;account-id&gt;:document-classification-job/&lt;job-id&gt;  The following is an example job ARN:  arn:aws:comprehend:us-west-2:111122223333:document-classification-job/1234abcd12ab34cd56ef1234567890ab 
+     */
+    JobArn?: ComprehendArn;
     /**
      * The status of the job:   SUBMITTED - The job has been received and queued for processing.   IN_PROGRESS - Amazon Comprehend is processing the job.   COMPLETED - The job was successfully completed and the output is available.   FAILED - The job did not complete. For details, use the operation.   STOP_REQUESTED - Amazon Comprehend has received a stop request for the job and is processing the request.   STOPPED - The job was successfully stopped without completing.  
      */
@@ -2560,12 +2924,20 @@ declare namespace Comprehend {
      * Configuration parameters for an optional private Virtual Private Cloud (VPC) containing the resources you are using for your dominant language detection job. For more information, see Amazon VPC. 
      */
     VpcConfig?: VpcConfig;
+    /**
+     * Tags to be associated with the dominant language detection job. A tag is a key-value pair that adds metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department.
+     */
+    Tags?: TagList;
   }
   export interface StartDominantLanguageDetectionJobResponse {
     /**
      * The identifier generated for the job. To get the status of a job, use this identifier with the operation.
      */
     JobId?: JobId;
+    /**
+     * The Amazon Resource Name (ARN) of the dominant language detection job. It is a unique, fully qualified identifier for the job. It includes the AWS account, Region, and the job ID. The format of the ARN is as follows:  arn:&lt;partition&gt;:comprehend:&lt;region&gt;:&lt;account-id&gt;:dominant-language-detection-job/&lt;job-id&gt;  The following is an example job ARN:  arn:aws:comprehend:us-west-2:111122223333:dominant-language-detection-job/1234abcd12ab34cd56ef1234567890ab 
+     */
+    JobArn?: ComprehendArn;
     /**
      * The status of the job.    SUBMITTED - The job has been received and is queued for processing.   IN_PROGRESS - Amazon Comprehend is processing the job.   COMPLETED - The job was successfully completed and the output is available.   FAILED - The job did not complete. To get details, use the operation.  
      */
@@ -2608,12 +2980,20 @@ declare namespace Comprehend {
      * Configuration parameters for an optional private Virtual Private Cloud (VPC) containing the resources you are using for your entity detection job. For more information, see Amazon VPC. 
      */
     VpcConfig?: VpcConfig;
+    /**
+     * Tags to be associated with the entities detection job. A tag is a key-value pair that adds metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department.
+     */
+    Tags?: TagList;
   }
   export interface StartEntitiesDetectionJobResponse {
     /**
      * The identifier generated for the job. To get the status of job, use this identifier with the operation.
      */
     JobId?: JobId;
+    /**
+     * The Amazon Resource Name (ARN) of the entities detection job. It is a unique, fully qualified identifier for the job. It includes the AWS account, Region, and the job ID. The format of the ARN is as follows:  arn:&lt;partition&gt;:comprehend:&lt;region&gt;:&lt;account-id&gt;:entities-detection-job/&lt;job-id&gt;  The following is an example job ARN:  arn:aws:comprehend:us-west-2:111122223333:entities-detection-job/1234abcd12ab34cd56ef1234567890ab 
+     */
+    JobArn?: ComprehendArn;
     /**
      * The status of the job.    SUBMITTED - The job has been received and is queued for processing.   IN_PROGRESS - Amazon Comprehend is processing the job.   COMPLETED - The job was successfully completed and the output is available.   FAILED - The job did not complete. To get details, use the operation.   STOP_REQUESTED - Amazon Comprehend has received a stop request for the job and is processing the request.   STOPPED - The job was successfully stopped without completing.  
      */
@@ -2648,12 +3028,20 @@ declare namespace Comprehend {
      * The types of events to detect in the input documents.
      */
     TargetEventTypes: TargetEventTypes;
+    /**
+     * Tags to be associated with the events detection job. A tag is a key-value pair that adds metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department.
+     */
+    Tags?: TagList;
   }
   export interface StartEventsDetectionJobResponse {
     /**
      * An unique identifier for the request. If you don't set the client request token, Amazon Comprehend generates one.
      */
     JobId?: JobId;
+    /**
+     * The Amazon Resource Name (ARN) of the events detection job. It is a unique, fully qualified identifier for the job. It includes the AWS account, Region, and the job ID. The format of the ARN is as follows:  arn:&lt;partition&gt;:comprehend:&lt;region&gt;:&lt;account-id&gt;:events-detection-job/&lt;job-id&gt;  The following is an example job ARN:  arn:aws:comprehend:us-west-2:111122223333:events-detection-job/1234abcd12ab34cd56ef1234567890ab 
+     */
+    JobArn?: ComprehendArn;
     /**
      * The status of the events detection job.
      */
@@ -2692,12 +3080,20 @@ declare namespace Comprehend {
      *  Configuration parameters for an optional private Virtual Private Cloud (VPC) containing the resources you are using for your key phrases detection job. For more information, see Amazon VPC. 
      */
     VpcConfig?: VpcConfig;
+    /**
+     * Tags to be associated with the key phrases detection job. A tag is a key-value pair that adds metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department.
+     */
+    Tags?: TagList;
   }
   export interface StartKeyPhrasesDetectionJobResponse {
     /**
      * The identifier generated for the job. To get the status of a job, use this identifier with the operation.
      */
     JobId?: JobId;
+    /**
+     * The Amazon Resource Name (ARN) of the key phrase detection job. It is a unique, fully qualified identifier for the job. It includes the AWS account, Region, and the job ID. The format of the ARN is as follows:  arn:&lt;partition&gt;:comprehend:&lt;region&gt;:&lt;account-id&gt;:key-phrases-detection-job/&lt;job-id&gt;  The following is an example job ARN:  arn:aws:comprehend:us-west-2:111122223333:key-phrases-detection-job/1234abcd12ab34cd56ef1234567890ab 
+     */
+    JobArn?: ComprehendArn;
     /**
      * The status of the job.    SUBMITTED - The job has been received and is queued for processing.   IN_PROGRESS - Amazon Comprehend is processing the job.   COMPLETED - The job was successfully completed and the output is available.   FAILED - The job did not complete. To get details, use the operation.  
      */
@@ -2736,12 +3132,20 @@ declare namespace Comprehend {
      * A unique identifier for the request. If you don't set the client request token, Amazon Comprehend generates one.
      */
     ClientRequestToken?: ClientRequestTokenString;
+    /**
+     * Tags to be associated with the PII entities detection job. A tag is a key-value pair that adds metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department.
+     */
+    Tags?: TagList;
   }
   export interface StartPiiEntitiesDetectionJobResponse {
     /**
      * The identifier generated for the job.
      */
     JobId?: JobId;
+    /**
+     * The Amazon Resource Name (ARN) of the PII entity detection job. It is a unique, fully qualified identifier for the job. It includes the AWS account, Region, and the job ID. The format of the ARN is as follows:  arn:&lt;partition&gt;:comprehend:&lt;region&gt;:&lt;account-id&gt;:pii-entities-detection-job/&lt;job-id&gt;  The following is an example job ARN:  arn:aws:comprehend:us-west-2:111122223333:pii-entities-detection-job/1234abcd12ab34cd56ef1234567890ab 
+     */
+    JobArn?: ComprehendArn;
     /**
      * The status of the job.
      */
@@ -2780,12 +3184,20 @@ declare namespace Comprehend {
      * Configuration parameters for an optional private Virtual Private Cloud (VPC) containing the resources you are using for your sentiment detection job. For more information, see Amazon VPC. 
      */
     VpcConfig?: VpcConfig;
+    /**
+     * Tags to be associated with the sentiment detection job. A tag is a key-value pair that adds metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department.
+     */
+    Tags?: TagList;
   }
   export interface StartSentimentDetectionJobResponse {
     /**
      * The identifier generated for the job. To get the status of a job, use this identifier with the operation.
      */
     JobId?: JobId;
+    /**
+     * The Amazon Resource Name (ARN) of the sentiment detection job. It is a unique, fully qualified identifier for the job. It includes the AWS account, Region, and the job ID. The format of the ARN is as follows:  arn:&lt;partition&gt;:comprehend:&lt;region&gt;:&lt;account-id&gt;:sentiment-detection-job/&lt;job-id&gt;  The following is an example job ARN:  arn:aws:comprehend:us-west-2:111122223333:sentiment-detection-job/1234abcd12ab34cd56ef1234567890ab 
+     */
+    JobArn?: ComprehendArn;
     /**
      * The status of the job.    SUBMITTED - The job has been received and is queued for processing.   IN_PROGRESS - Amazon Comprehend is processing the job.   COMPLETED - The job was successfully completed and the output is available.   FAILED - The job did not complete. To get details, use the operation.  
      */
@@ -2824,12 +3236,20 @@ declare namespace Comprehend {
      * Configuration parameters for an optional private Virtual Private Cloud (VPC) containing the resources you are using for your topic detection job. For more information, see Amazon VPC. 
      */
     VpcConfig?: VpcConfig;
+    /**
+     * Tags to be associated with the topics detection job. A tag is a key-value pair that adds metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department.
+     */
+    Tags?: TagList;
   }
   export interface StartTopicsDetectionJobResponse {
     /**
      * The identifier generated for the job. To get the status of the job, use this identifier with the DescribeTopicDetectionJob operation.
      */
     JobId?: JobId;
+    /**
+     * The Amazon Resource Name (ARN) of the topics detection job. It is a unique, fully qualified identifier for the job. It includes the AWS account, Region, and the job ID. The format of the ARN is as follows:  arn:&lt;partition&gt;:comprehend:&lt;region&gt;:&lt;account-id&gt;:topics-detection-job/&lt;job-id&gt;  The following is an example job ARN:  arn:aws:comprehend:us-west-2:111122223333:document-classification-job/1234abcd12ab34cd56ef1234567890ab 
+     */
+    JobArn?: ComprehendArn;
     /**
      * The status of the job:    SUBMITTED - The job has been received and is queued for processing.   IN_PROGRESS - Amazon Comprehend is processing the job.   COMPLETED - The job was successfully completed and the output is available.   FAILED - The job did not complete. To get details, use the DescribeTopicDetectionJob operation.  
      */
@@ -3025,6 +3445,10 @@ declare namespace Comprehend {
      */
     JobId?: JobId;
     /**
+     * The Amazon Resource Name (ARN) of the topics detection job. It is a unique, fully qualified identifier for the job. It includes the AWS account, Region, and the job ID. The format of the ARN is as follows:  arn:&lt;partition&gt;:comprehend:&lt;region&gt;:&lt;account-id&gt;:topics-detection-job/&lt;job-id&gt;  The following is an example job ARN:  arn:aws:comprehend:us-west-2:111122223333:topics-detection-job/1234abcd12ab34cd56ef1234567890ab 
+     */
+    JobArn?: ComprehendArn;
+    /**
      * The name of the topic detection job.
      */
     JobName?: JobName;
@@ -3088,12 +3512,21 @@ declare namespace Comprehend {
      */
     EndpointArn: ComprehendEndpointArn;
     /**
+     * The ARN of the new model to use when updating an existing endpoint.
+     */
+    DesiredModelArn?: ComprehendModelArn;
+    /**
      *  The desired number of inference units to be used by the model using this endpoint. Each inference unit represents of a throughput of 100 characters per second.
      */
-    DesiredInferenceUnits: InferenceUnitsInteger;
+    DesiredInferenceUnits?: InferenceUnitsInteger;
+    /**
+     * Data access role ARN to use in case the new model is encrypted with a customer CMK.
+     */
+    DesiredDataAccessRoleArn?: IamRoleArn;
   }
   export interface UpdateEndpointResponse {
   }
+  export type VersionName = string;
   export interface VpcConfig {
     /**
      * The ID number for a security group on an instance of your private VPC. Security groups on your VPC function serve as a virtual firewall to control inbound and outbound traffic and provides security for the resources that you’ll be accessing on the VPC. This ID number is preceded by "sg-", for instance: "sg-03b388029b0a285ea". For more information, see Security Groups for your VPC. 
