@@ -1188,7 +1188,7 @@ declare namespace MediaConvert {
      */
     Scte35Source?: CmfcScte35Source;
     /**
-     * Applies to CMAF outputs. Use this setting to specify whether the service inserts the ID3 timed metadata from the input in this output.
+     * To include ID3 metadata in this output: Set ID3 metadata (timedMetadata) to Passthrough (PASSTHROUGH). Specify this ID3 metadata in Custom ID3 metadata inserter (timedMetadataInsertion). MediaConvert writes each instance of ID3 metadata in a separate Event Message (eMSG) box. To exclude this ID3 metadata: Set ID3 metadata to None (NONE) or leave blank.
      */
     TimedMetadata?: CmfcTimedMetadata;
   }
@@ -2055,6 +2055,7 @@ Within your job settings, all of your DVB-Sub settings must be identical.
     TerminateCaptions?: EmbeddedTerminateCaptions;
   }
   export type EmbeddedTerminateCaptions = "END_OF_INPUT"|"DISABLED"|string;
+  export type EmbeddedTimecodeOverride = "NONE"|"USE_MDPM"|string;
   export interface Endpoint {
     /**
      * URL of endpoint
@@ -2707,6 +2708,7 @@ Within your job settings, all of your DVB-Sub settings must be identical.
     LanguageDescription?: __string;
   }
   export type HlsCaptionLanguageSetting = "INSERT"|"OMIT"|"NONE"|string;
+  export type HlsCaptionSegmentLengthControl = "LARGE_SEGMENTS"|"MATCH_VIDEO"|string;
   export type HlsClientCache = "DISABLED"|"ENABLED"|string;
   export type HlsCodecSpecification = "RFC_6381"|"RFC_4281"|string;
   export type HlsDescriptiveVideoServiceFlag = "DONT_FLAG"|"FLAG"|string;
@@ -2767,6 +2769,10 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      * Applies only to 608 Embedded output captions. Insert: Include CLOSED-CAPTIONS lines in the manifest. Specify at least one language in the CC1 Language Code field. One CLOSED-CAPTION line is added for each Language Code you specify. Make sure to specify the languages in the order in which they appear in the original source (if the source is embedded format) or the order of the caption selectors (if the source is other than embedded). Otherwise, languages in the manifest will not match up properly with the output captions. None: Include CLOSED-CAPTIONS=NONE line in the manifest. Omit: Omit any CLOSED-CAPTIONS line from the manifest.
      */
     CaptionLanguageSetting?: HlsCaptionLanguageSetting;
+    /**
+     * Set Caption segment length control (CaptionSegmentLengthControl) to Match video (MATCH_VIDEO) to create caption segments that align with the video segments from the first video output in this output group. For example, if the video segments are 2 seconds long, your WebVTT segments will also be 2 seconds long. Keep the default setting, Large segments (LARGE_SEGMENTS) to create caption segments that are 300 seconds long.
+     */
+    CaptionSegmentLengthControl?: HlsCaptionSegmentLengthControl;
     /**
      * Disable this setting only when your workflow requires the #EXT-X-ALLOW-CACHE:no tag. Otherwise, keep the default value Enabled (ENABLED) and control caching in your video distribution set up. For example, use the Cache-Control http header.
      */
@@ -2852,11 +2858,11 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     TargetDurationCompatibilityMode?: HlsTargetDurationCompatibilityMode;
     /**
-     * Indicates ID3 frame that has the timecode.
+     * Specify the type of the ID3 frame (timedMetadataId3Frame) to use for ID3 timestamps (timedMetadataId3Period) in your output. To include ID3 timestamps: Specify PRIV (PRIV) or TDRL (TDRL) and set ID3 metadata (timedMetadata) to Passthrough (PASSTHROUGH). To exclude ID3 timestamps: Set ID3 timestamp frame type to None (NONE).
      */
     TimedMetadataId3Frame?: HlsTimedMetadataId3Frame;
     /**
-     * Timed Metadata interval in seconds.
+     * Specify the interval in seconds to write ID3 timestamps in your output. The first timestamp starts at the output timecode and date, and increases incrementally with each ID3 timestamp. To use the default interval of 10 seconds: Leave blank. To include this metadata in your output: Set ID3 timestamp frame type (timedMetadataId3Frame) to PRIV (PRIV) or TDRL (TDRL), and set ID3 metadata (timedMetadata) to Passthrough (PASSTHROUGH).
      */
     TimedMetadataId3Period?: __integerMinNegative2147483648Max2147483647;
     /**
@@ -2965,7 +2971,7 @@ Within your job settings, all of your DVB-Sub settings must be identical.
   }
   export interface Id3Insertion {
     /**
-     * Use ID3 tag (Id3) to provide a tag value in base64-encode format.
+     * Use ID3 tag (Id3) to provide a fully formed ID3 tag in base64-encode format.
      */
     Id3?: __stringPatternAZaZ0902;
     /**
@@ -2982,7 +2988,7 @@ Within your job settings, all of your DVB-Sub settings must be identical.
   export type ImscAccessibilitySubs = "DISABLED"|"ENABLED"|string;
   export interface ImscDestinationSettings {
     /**
-     * Specify whether to flag this caption track as accessibility in your HLS/CMAF parent manifest. When you choose ENABLED, MediaConvert includes the parameters CHARACTERISTICS="public.accessibility.describes-spoken-dialog,public.accessibility.describes-music-and-sound" and AUTOSELECT="YES" in the EXT-X-MEDIA entry for this track. When you keep the default choice, DISABLED, MediaConvert leaves this parameter out.
+     * Set Accessibility subtitles (Accessibility) to Enabled (ENABLED) if the ISMC or WebVTT captions track is intended to provide accessibility for people who are deaf or hard of hearing. When you enable this feature, MediaConvert adds the following attributes under EXT-X-MEDIA in the HLS or CMAF manifest for this track: CHARACTERISTICS="public.accessibility.describes-spoken-dialog,public.accessibility.describes-music-and-sound" and AUTOSELECT="YES". Keep the default value, Disabled (DISABLED), if the captions track is not intended to provide such accessibility. MediaConvert will not add the above attributes.
      */
     Accessibility?: ImscAccessibilitySubs;
     /**
@@ -3393,7 +3399,7 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     TimecodeConfig?: TimecodeConfig;
     /**
-     * Enable Timed metadata insertion (TimedMetadataInsertion) to include ID3 tags in any HLS outputs. To include timed metadata, you must enable it here, enable it in each output container, and specify tags and timecodes in ID3 insertion (Id3Insertion) objects.
+     * Insert user-defined custom ID3 metadata (id3) at timecodes (timecode) that you specify. In each output that you want to include this metadata, you must set ID3 metadata (timedMetadata) to Passthrough (PASSTHROUGH).
      */
     TimedMetadataInsertion?: TimedMetadataInsertion;
   }
@@ -3499,7 +3505,7 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     TimecodeConfig?: TimecodeConfig;
     /**
-     * Enable Timed metadata insertion (TimedMetadataInsertion) to include ID3 tags in any HLS outputs. To include timed metadata, you must enable it here, enable it in each output container, and specify tags and timecodes in ID3 insertion (Id3Insertion) objects.
+     * Insert user-defined custom ID3 metadata (id3) at timecodes (timecode) that you specify. In each output that you want to include this metadata, you must set ID3 metadata (timedMetadata) to Passthrough (PASSTHROUGH).
      */
     TimedMetadataInsertion?: TimedMetadataInsertion;
   }
@@ -3935,11 +3941,11 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     Scte35Source?: M3u8Scte35Source;
     /**
-     * Applies to HLS outputs. Use this setting to specify whether the service inserts the ID3 timed metadata from the input in this output.
+     * Set ID3 metadata (timedMetadata) to Passthrough (PASSTHROUGH) to include ID3 metadata in this output. This includes ID3 metadata from the following features: ID3 timestamp period (timedMetadataId3Period), and Custom ID3 metadata inserter (timedMetadataInsertion). To exclude this ID3 metadata in this output: set ID3 metadata to None (NONE) or leave blank.
      */
     TimedMetadata?: TimedMetadata;
     /**
-     * Packet Identifier (PID) of the timed metadata stream in the transport stream.
+     * Packet Identifier (PID) of the ID3 metadata stream in the transport stream.
      */
     TimedMetadataPid?: __integerMin32Max8182;
     /**
@@ -4119,7 +4125,7 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     Scte35Source?: MpdScte35Source;
     /**
-     * Applies to DASH outputs. Use this setting to specify whether the service inserts the ID3 timed metadata from the input in this output.
+     * To include ID3 metadata in this output: Set ID3 metadata (timedMetadata) to Passthrough (PASSTHROUGH). Specify this ID3 metadata in Custom ID3 metadata inserter (timedMetadataInsertion). MediaConvert writes each instance of ID3 metadata in a separate Event Message (eMSG) box. To exclude this ID3 metadata: Set ID3 metadata to None (NONE) or leave blank.
      */
     TimedMetadata?: MpdTimedMetadata;
   }
@@ -4477,11 +4483,11 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     AggressiveMode?: __integerMin0Max4;
     /**
-     * When you set Noise reducer (noiseReducer) to Temporal (TEMPORAL), the sharpness of your output is reduced. You can optionally use Post temporal sharpening (PostTemporalSharpening) to apply sharpening to the edges of your output. The default behavior, Auto (AUTO), allows the transcoder to determine whether to apply sharpening, depending on your input type and quality. When you set Post temporal sharpening to Enabled (ENABLED), specify how much sharpening is applied using Post temporal sharpening strength (PostTemporalSharpeningStrength). Set Post temporal sharpening to Disabled (DISABLED) to not apply sharpening.
+     * When you set Noise reducer (noiseReducer) to Temporal (TEMPORAL), the bandwidth and sharpness of your output is reduced. You can optionally use Post temporal sharpening (postTemporalSharpening) to apply sharpening to the edges of your output. Note that Post temporal sharpening will also make the bandwidth reduction from the Noise reducer smaller. The default behavior, Auto (AUTO), allows the transcoder to determine whether to apply sharpening, depending on your input type and quality. When you set Post temporal sharpening to Enabled (ENABLED), specify how much sharpening is applied using Post temporal sharpening strength (postTemporalSharpeningStrength). Set Post temporal sharpening to Disabled (DISABLED) to not apply sharpening.
      */
     PostTemporalSharpening?: NoiseFilterPostTemporalSharpening;
     /**
-     * Use Post temporal sharpening strength (PostTemporalSharpeningStrength) to define the amount of sharpening the transcoder applies to your output. Set Post temporal sharpening strength to Low (LOW), or leave blank, to apply a low amount of sharpening. Set Post temporal sharpening strength to Medium (MEDIUM) to apply medium amount of sharpening. Set Post temporal sharpening strength to High (HIGH) to apply a high amount of sharpening.
+     * Use Post temporal sharpening strength (postTemporalSharpeningStrength) to define the amount of sharpening the transcoder applies to your output. Set Post temporal sharpening strength to Low (LOW), Medium (MEDIUM), or High (HIGH) to indicate the amount of sharpening.
      */
     PostTemporalSharpeningStrength?: NoiseFilterPostTemporalSharpeningStrength;
     /**
@@ -5448,6 +5454,10 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     ColorSpaceUsage?: ColorSpaceUsage;
     /**
+     * Set Embedded timecode override (embeddedTimecodeOverride) to Use MDPM (USE_MDPM) when your AVCHD input contains timecode tag data in the Modified Digital Video Pack Metadata (MDPM). When you do, we recommend you also set Timecode source (inputTimecodeSource) to Embedded (EMBEDDED). Leave Embedded timecode override blank, or set to None (NONE), when your input does not contain MDPM timecode.
+     */
+    EmbeddedTimecodeOverride?: EmbeddedTimecodeOverride;
+    /**
      * Use these settings to provide HDR 10 metadata that is missing or inaccurate in your input video. Appropriate values vary depending on the input video and must be provided by a color grader. The color grader generates these values during the HDR 10 mastering process. The valid range for each of these settings is 0 to 50,000. Each increment represents 0.00002 in CIE1931 color coordinate. Related settings - When you specify these values, you must also set Color space (ColorSpace) to HDR 10 (HDR10). To specify whether the the values you specify here take precedence over the values in the metadata of your input file, set Color space usage (ColorSpaceUsage). To specify whether color metadata is included in an output, set Color metadata (ColorMetadata). For more information about MediaConvert HDR jobs, see https://docs.aws.amazon.com/console/mediaconvert/hdr.
      */
     Hdr10Metadata?: Hdr10Metadata;
@@ -5624,7 +5634,7 @@ Within your job settings, all of your DVB-Sub settings must be identical.
   export type WebvttAccessibilitySubs = "DISABLED"|"ENABLED"|string;
   export interface WebvttDestinationSettings {
     /**
-     * Specify whether to flag this caption track as accessibility in your HLS/CMAF parent manifest. When you choose ENABLED, MediaConvert includes the parameters CHARACTERISTICS="public.accessibility.describes-spoken-dialog,public.accessibility.describes-music-and-sound" and AUTOSELECT="YES" in the EXT-X-MEDIA entry for this track. When you keep the default choice, DISABLED, MediaConvert leaves this parameter out.
+     * Set Accessibility subtitles (Accessibility) to Enabled (ENABLED) if the ISMC or WebVTT captions track is intended to provide accessibility for people who are deaf or hard of hearing. When you enable this feature, MediaConvert adds the following attributes under EXT-X-MEDIA in the HLS or CMAF manifest for this track: CHARACTERISTICS="public.accessibility.describes-spoken-dialog,public.accessibility.describes-music-and-sound" and AUTOSELECT="YES". Keep the default value, Disabled (DISABLED), if the captions track is not intended to provide such accessibility. MediaConvert will not add the above attributes.
      */
     Accessibility?: WebvttAccessibilitySubs;
     /**

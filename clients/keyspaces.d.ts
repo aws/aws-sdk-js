@@ -52,11 +52,11 @@ declare class Keyspaces extends Service {
    */
   getKeyspace(callback?: (err: AWSError, data: Keyspaces.Types.GetKeyspaceResponse) => void): Request<Keyspaces.Types.GetKeyspaceResponse, AWSError>;
   /**
-   * Returns information about the table, including the table's name and current status, the keyspace name, configuration settings, and metadata.
+   * Returns information about the table, including the table's name and current status, the keyspace name, configuration settings, and metadata. To read table metadata using GetTable, Select action permissions for the table and system tables are required to complete the operation.
    */
   getTable(params: Keyspaces.Types.GetTableRequest, callback?: (err: AWSError, data: Keyspaces.Types.GetTableResponse) => void): Request<Keyspaces.Types.GetTableResponse, AWSError>;
   /**
-   * Returns information about the table, including the table's name and current status, the keyspace name, configuration settings, and metadata.
+   * Returns information about the table, including the table's name and current status, the keyspace name, configuration settings, and metadata. To read table metadata using GetTable, Select action permissions for the table and system tables are required to complete the operation.
    */
   getTable(callback?: (err: AWSError, data: Keyspaces.Types.GetTableResponse) => void): Request<Keyspaces.Types.GetTableResponse, AWSError>;
   /**
@@ -92,11 +92,11 @@ declare class Keyspaces extends Service {
    */
   restoreTable(callback?: (err: AWSError, data: Keyspaces.Types.RestoreTableResponse) => void): Request<Keyspaces.Types.RestoreTableResponse, AWSError>;
   /**
-   * Associates a set of tags with a Amazon Keyspaces resource. You can then activate these user-defined tags so that they appear on the Cost Management Console for cost allocation tracking. For more information, see Adding tags and labels to Amazon Keyspaces resources in the Amazon Keyspaces Developer Guide.
+   * Associates a set of tags with a Amazon Keyspaces resource. You can then activate these user-defined tags so that they appear on the Cost Management Console for cost allocation tracking. For more information, see Adding tags and labels to Amazon Keyspaces resources in the Amazon Keyspaces Developer Guide. For IAM policy examples that show how to control access to Amazon Keyspaces resources based on tags, see Amazon Keyspaces resource access based on tags in the Amazon Keyspaces Developer Guide.
    */
   tagResource(params: Keyspaces.Types.TagResourceRequest, callback?: (err: AWSError, data: Keyspaces.Types.TagResourceResponse) => void): Request<Keyspaces.Types.TagResourceResponse, AWSError>;
   /**
-   * Associates a set of tags with a Amazon Keyspaces resource. You can then activate these user-defined tags so that they appear on the Cost Management Console for cost allocation tracking. For more information, see Adding tags and labels to Amazon Keyspaces resources in the Amazon Keyspaces Developer Guide.
+   * Associates a set of tags with a Amazon Keyspaces resource. You can then activate these user-defined tags so that they appear on the Cost Management Console for cost allocation tracking. For more information, see Adding tags and labels to Amazon Keyspaces resources in the Amazon Keyspaces Developer Guide. For IAM policy examples that show how to control access to Amazon Keyspaces resources based on tags, see Amazon Keyspaces resource access based on tags in the Amazon Keyspaces Developer Guide.
    */
   tagResource(callback?: (err: AWSError, data: Keyspaces.Types.TagResourceResponse) => void): Request<Keyspaces.Types.TagResourceResponse, AWSError>;
   /**

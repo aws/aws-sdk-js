@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1088.0-->
+<!--LATEST=2.1089.0-->
 <!--ENTRYINSERT-->
+
+## 2.1089.0
+* feature: EKS: Introducing a new enum for NodeGroup error code: Ec2SubnetMissingIpv6Assignment
+* feature: MediaConvert: AWS Elemental MediaConvert SDK has added support for reading timecode from AVCHD sources and now provides the ability to segment WebVTT at the same interval as the video and audio in HLS packages.
 
 ## 2.1088.0
 * feature: ChimeSDKMeetings: Adds support for Transcribe language identification feature to the StartMeetingTranscription API.
