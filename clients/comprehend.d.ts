@@ -212,6 +212,14 @@ declare class Comprehend extends Service {
    */
   describeSentimentDetectionJob(callback?: (err: AWSError, data: Comprehend.Types.DescribeSentimentDetectionJobResponse) => void): Request<Comprehend.Types.DescribeSentimentDetectionJobResponse, AWSError>;
   /**
+   * Gets the properties associated with a targeted sentiment detection job. Use this operation to get the status of the job.
+   */
+  describeTargetedSentimentDetectionJob(params: Comprehend.Types.DescribeTargetedSentimentDetectionJobRequest, callback?: (err: AWSError, data: Comprehend.Types.DescribeTargetedSentimentDetectionJobResponse) => void): Request<Comprehend.Types.DescribeTargetedSentimentDetectionJobResponse, AWSError>;
+  /**
+   * Gets the properties associated with a targeted sentiment detection job. Use this operation to get the status of the job.
+   */
+  describeTargetedSentimentDetectionJob(callback?: (err: AWSError, data: Comprehend.Types.DescribeTargetedSentimentDetectionJobResponse) => void): Request<Comprehend.Types.DescribeTargetedSentimentDetectionJobResponse, AWSError>;
+  /**
    * Gets the properties associated with a topic detection job. Use this operation to get the status of a detection job.
    */
   describeTopicsDetectionJob(params: Comprehend.Types.DescribeTopicsDetectionJobRequest, callback?: (err: AWSError, data: Comprehend.Types.DescribeTopicsDetectionJobResponse) => void): Request<Comprehend.Types.DescribeTopicsDetectionJobResponse, AWSError>;
@@ -380,6 +388,14 @@ declare class Comprehend extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: Comprehend.Types.ListTagsForResourceResponse) => void): Request<Comprehend.Types.ListTagsForResourceResponse, AWSError>;
   /**
+   * Gets a list of targeted sentiment detection jobs that you have submitted.
+   */
+  listTargetedSentimentDetectionJobs(params: Comprehend.Types.ListTargetedSentimentDetectionJobsRequest, callback?: (err: AWSError, data: Comprehend.Types.ListTargetedSentimentDetectionJobsResponse) => void): Request<Comprehend.Types.ListTargetedSentimentDetectionJobsResponse, AWSError>;
+  /**
+   * Gets a list of targeted sentiment detection jobs that you have submitted.
+   */
+  listTargetedSentimentDetectionJobs(callback?: (err: AWSError, data: Comprehend.Types.ListTargetedSentimentDetectionJobsResponse) => void): Request<Comprehend.Types.ListTargetedSentimentDetectionJobsResponse, AWSError>;
+  /**
    * Gets a list of the topic detection jobs that you have submitted.
    */
   listTopicsDetectionJobs(params: Comprehend.Types.ListTopicsDetectionJobsRequest, callback?: (err: AWSError, data: Comprehend.Types.ListTopicsDetectionJobsResponse) => void): Request<Comprehend.Types.ListTopicsDetectionJobsResponse, AWSError>;
@@ -444,13 +460,21 @@ declare class Comprehend extends Service {
    */
   startPiiEntitiesDetectionJob(callback?: (err: AWSError, data: Comprehend.Types.StartPiiEntitiesDetectionJobResponse) => void): Request<Comprehend.Types.StartPiiEntitiesDetectionJobResponse, AWSError>;
   /**
-   * Starts an asynchronous sentiment detection job for a collection of documents. use the operation to track the status of a job.
+   * Starts an asynchronous sentiment detection job for a collection of documents. Use the operation to track the status of a job.
    */
   startSentimentDetectionJob(params: Comprehend.Types.StartSentimentDetectionJobRequest, callback?: (err: AWSError, data: Comprehend.Types.StartSentimentDetectionJobResponse) => void): Request<Comprehend.Types.StartSentimentDetectionJobResponse, AWSError>;
   /**
-   * Starts an asynchronous sentiment detection job for a collection of documents. use the operation to track the status of a job.
+   * Starts an asynchronous sentiment detection job for a collection of documents. Use the operation to track the status of a job.
    */
   startSentimentDetectionJob(callback?: (err: AWSError, data: Comprehend.Types.StartSentimentDetectionJobResponse) => void): Request<Comprehend.Types.StartSentimentDetectionJobResponse, AWSError>;
+  /**
+   * Starts an asynchronous targeted sentiment detection job for a collection of documents. Use the operation to track the status of a job.
+   */
+  startTargetedSentimentDetectionJob(params: Comprehend.Types.StartTargetedSentimentDetectionJobRequest, callback?: (err: AWSError, data: Comprehend.Types.StartTargetedSentimentDetectionJobResponse) => void): Request<Comprehend.Types.StartTargetedSentimentDetectionJobResponse, AWSError>;
+  /**
+   * Starts an asynchronous targeted sentiment detection job for a collection of documents. Use the operation to track the status of a job.
+   */
+  startTargetedSentimentDetectionJob(callback?: (err: AWSError, data: Comprehend.Types.StartTargetedSentimentDetectionJobResponse) => void): Request<Comprehend.Types.StartTargetedSentimentDetectionJobResponse, AWSError>;
   /**
    * Starts an asynchronous topic detection job. Use the DescribeTopicDetectionJob operation to track the status of a job.
    */
@@ -507,6 +531,14 @@ declare class Comprehend extends Service {
    * Stops a sentiment detection job in progress. If the job state is IN_PROGRESS the job is marked for termination and put into the STOP_REQUESTED state. If the job completes before it can be stopped, it is put into the COMPLETED state; otherwise the job is be stopped and put into the STOPPED state. If the job is in the COMPLETED or FAILED state when you call the StopDominantLanguageDetectionJob operation, the operation returns a 400 Internal Request Exception.  When a job is stopped, any documents already processed are written to the output location.
    */
   stopSentimentDetectionJob(callback?: (err: AWSError, data: Comprehend.Types.StopSentimentDetectionJobResponse) => void): Request<Comprehend.Types.StopSentimentDetectionJobResponse, AWSError>;
+  /**
+   * Stops a targeted sentiment detection job in progress. If the job state is IN_PROGRESS the job is marked for termination and put into the STOP_REQUESTED state. If the job completes before it can be stopped, it is put into the COMPLETED state; otherwise the job is be stopped and put into the STOPPED state. If the job is in the COMPLETED or FAILED state when you call the StopDominantLanguageDetectionJob operation, the operation returns a 400 Internal Request Exception.  When a job is stopped, any documents already processed are written to the output location.
+   */
+  stopTargetedSentimentDetectionJob(params: Comprehend.Types.StopTargetedSentimentDetectionJobRequest, callback?: (err: AWSError, data: Comprehend.Types.StopTargetedSentimentDetectionJobResponse) => void): Request<Comprehend.Types.StopTargetedSentimentDetectionJobResponse, AWSError>;
+  /**
+   * Stops a targeted sentiment detection job in progress. If the job state is IN_PROGRESS the job is marked for termination and put into the STOP_REQUESTED state. If the job completes before it can be stopped, it is put into the COMPLETED state; otherwise the job is be stopped and put into the STOPPED state. If the job is in the COMPLETED or FAILED state when you call the StopDominantLanguageDetectionJob operation, the operation returns a 400 Internal Request Exception.  When a job is stopped, any documents already processed are written to the output location.
+   */
+  stopTargetedSentimentDetectionJob(callback?: (err: AWSError, data: Comprehend.Types.StopTargetedSentimentDetectionJobResponse) => void): Request<Comprehend.Types.StopTargetedSentimentDetectionJobResponse, AWSError>;
   /**
    * Stops a document classifier training job while in progress. If the training job state is TRAINING, the job is marked for termination and put into the STOP_REQUESTED state. If the training job completes before it can be stopped, it is put into the TRAINED; otherwise the training job is stopped and put into the STOPPED state and the service sends back an HTTP 200 response with an empty HTTP body. 
    */
@@ -1160,6 +1192,18 @@ declare namespace Comprehend {
      * An object that contains the properties associated with a sentiment detection job.
      */
     SentimentDetectionJobProperties?: SentimentDetectionJobProperties;
+  }
+  export interface DescribeTargetedSentimentDetectionJobRequest {
+    /**
+     * The identifier that Amazon Comprehend generated for the job. The operation returns this identifier in its response.
+     */
+    JobId: JobId;
+  }
+  export interface DescribeTargetedSentimentDetectionJobResponse {
+    /**
+     * An object that contains the properties associated with a targeted sentiment detection job.
+     */
+    TargetedSentimentDetectionJobProperties?: TargetedSentimentDetectionJobProperties;
   }
   export interface DescribeTopicsDetectionJobRequest {
     /**
@@ -1835,7 +1879,7 @@ declare namespace Comprehend {
      */
     Recall?: Double;
     /**
-     * A measure of how accurate the recognizer results are for the test data. It is derived from the Precision and Recall values. The F1Score is the harmonic average of the two scores. The highest score is 1, and the worst score is 0. 
+     * A measure of how accurate the recognizer results are for the test data. It is derived from the Precision and Recall values. The F1Score is the harmonic average of the two scores. For plain text entity recognizer models, the range is 0 to 100, where 100 is the best score. For PDF/Word entity recognizer models, the range is 0 to 1, where 1 is the best score. 
      */
     F1Score?: Double;
   }
@@ -2558,6 +2602,30 @@ declare namespace Comprehend {
      */
     Tags?: TagList;
   }
+  export interface ListTargetedSentimentDetectionJobsRequest {
+    /**
+     * Filters the jobs that are returned. You can filter jobs on their name, status, or the date and time that they were submitted. You can only set one filter at a time.
+     */
+    Filter?: TargetedSentimentDetectionJobFilter;
+    /**
+     * Identifies the next page of results to return.
+     */
+    NextToken?: String;
+    /**
+     * The maximum number of results to return in each page. The default is 100.
+     */
+    MaxResults?: MaxResultsInteger;
+  }
+  export interface ListTargetedSentimentDetectionJobsResponse {
+    /**
+     * A list containing the properties of each job that is returned.
+     */
+    TargetedSentimentDetectionJobPropertiesList?: TargetedSentimentDetectionJobPropertiesList;
+    /**
+     * Identifies the next page of results to return.
+     */
+    NextToken?: String;
+  }
   export interface ListTopicsDetectionJobsRequest {
     /**
      * Filters the jobs that are returned. Jobs can be filtered on their name, status, or the date and time that they were submitted. You can set only one filter at a time.
@@ -2588,7 +2656,7 @@ declare namespace Comprehend {
   export type NumberOfTopicsInteger = number;
   export interface OutputDataConfig {
     /**
-     * When you use the OutputDataConfig object with asynchronous operations, you specify the Amazon S3 location where you want to write the output data. The URI must be in the same region as the API endpoint that you are calling. The location is used as the prefix for the actual location of the output file. When the topic detection job is finished, the service creates an output file in a directory specific to the job. The S3Uri field contains the location of the output file, called output.tar.gz. It is a compressed archive that contains the ouput of the operation.
+     * When you use the OutputDataConfig object with asynchronous operations, you specify the Amazon S3 location where you want to write the output data. The URI must be in the same region as the API endpoint that you are calling. The location is used as the prefix for the actual location of the output file. When the topic detection job is finished, the service creates an output file in a directory specific to the job. The S3Uri field contains the location of the output file, called output.tar.gz. It is a compressed archive that contains the ouput of the operation.  For a PII entity detection job, the output file is plain text, not a compressed archive. The output file name is the same as the input file, with .out appended at the end. 
      */
     S3Uri: S3Uri;
     /**
@@ -2703,7 +2771,7 @@ declare namespace Comprehend {
   export type PiiEntityType = "BANK_ACCOUNT_NUMBER"|"BANK_ROUTING"|"CREDIT_DEBIT_NUMBER"|"CREDIT_DEBIT_CVV"|"CREDIT_DEBIT_EXPIRY"|"PIN"|"EMAIL"|"ADDRESS"|"NAME"|"PHONE"|"SSN"|"DATE_TIME"|"PASSPORT_NUMBER"|"DRIVER_ID"|"URL"|"AGE"|"USERNAME"|"PASSWORD"|"AWS_ACCESS_KEY"|"AWS_SECRET_KEY"|"IP_ADDRESS"|"MAC_ADDRESS"|"ALL"|string;
   export interface PiiOutputDataConfig {
     /**
-     * When you use the PiiOutputDataConfig object with asynchronous operations, you specify the Amazon S3 location where you want to write the output data. 
+     * When you use the PiiOutputDataConfig object with asynchronous operations, you specify the Amazon S3 location where you want to write the output data.   For a PII entity detection job, the output file is plain text, not a compressed archive. The output file name is the same as the input file, with .out appended at the end. 
      */
     S3Uri: S3Uri;
     /**
@@ -3203,6 +3271,52 @@ declare namespace Comprehend {
      */
     JobStatus?: JobStatus;
   }
+  export interface StartTargetedSentimentDetectionJobRequest {
+    InputDataConfig: InputDataConfig;
+    /**
+     * Specifies where to send the output files. 
+     */
+    OutputDataConfig: OutputDataConfig;
+    /**
+     * The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend read access to your input data. For more information, see Role-based permissions.
+     */
+    DataAccessRoleArn: IamRoleArn;
+    /**
+     * The identifier of the job.
+     */
+    JobName?: JobName;
+    /**
+     * The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend. All documents must be in the same language.
+     */
+    LanguageCode: LanguageCode;
+    /**
+     * A unique identifier for the request. If you don't set the client request token, Amazon Comprehend generates one.
+     */
+    ClientRequestToken?: ClientRequestTokenString;
+    /**
+     * ID for the KMS key that Amazon Comprehend uses to encrypt data on the storage volume attached to the ML compute instance(s) that process the analysis job. The VolumeKmsKeyId can be either of the following formats:   KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"    Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"   
+     */
+    VolumeKmsKeyId?: KmsKeyId;
+    VpcConfig?: VpcConfig;
+    /**
+     * Tags to be associated with the targeted sentiment detection job. A tag is a key-value pair that adds metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department.
+     */
+    Tags?: TagList;
+  }
+  export interface StartTargetedSentimentDetectionJobResponse {
+    /**
+     * The identifier generated for the job. To get the status of a job, use this identifier with the operation.
+     */
+    JobId?: JobId;
+    /**
+     * The Amazon Resource Name (ARN) of the targeted sentiment detection job. It is a unique, fully qualified identifier for the job. It includes the AWS account, Region, and the job ID. The format of the ARN is as follows:  arn:&lt;partition&gt;:comprehend:&lt;region&gt;:&lt;account-id&gt;:targeted-sentiment-detection-job/&lt;job-id&gt;  The following is an example job ARN:  arn:aws:comprehend:us-west-2:111122223333:targeted-sentiment-detection-job/1234abcd12ab34cd56ef1234567890ab 
+     */
+    JobArn?: ComprehendArn;
+    /**
+     * The status of the job.    SUBMITTED - The job has been received and is queued for processing.   IN_PROGRESS - Amazon Comprehend is processing the job.   COMPLETED - The job was successfully completed and the output is available.   FAILED - The job did not complete. To get details, use the operation.  
+     */
+    JobStatus?: JobStatus;
+  }
   export interface StartTopicsDetectionJobRequest {
     /**
      * Specifies the format and location of the input data for the job.
@@ -3351,6 +3465,22 @@ declare namespace Comprehend {
      */
     JobStatus?: JobStatus;
   }
+  export interface StopTargetedSentimentDetectionJobRequest {
+    /**
+     * The identifier of the targeted sentiment detection job to stop.
+     */
+    JobId: JobId;
+  }
+  export interface StopTargetedSentimentDetectionJobResponse {
+    /**
+     * The identifier of the targeted sentiment detection job to stop.
+     */
+    JobId?: JobId;
+    /**
+     * Either STOP_REQUESTED if the job is currently running, or STOPPED if the job was previously stopped with the StopSentimentDetectionJob operation.
+     */
+    JobStatus?: JobStatus;
+  }
   export interface StopTrainingDocumentClassifierRequest {
     /**
      * The Amazon Resource Name (ARN) that identifies the document classifier currently being trained.
@@ -3420,6 +3550,70 @@ declare namespace Comprehend {
   }
   export type TagValue = string;
   export type TargetEventTypes = EventTypeString[];
+  export interface TargetedSentimentDetectionJobFilter {
+    /**
+     * Filters on the name of the job.
+     */
+    JobName?: JobName;
+    /**
+     * Filters the list of jobs based on job status. Returns only jobs with the specified status.
+     */
+    JobStatus?: JobStatus;
+    /**
+     * Filters the list of jobs based on the time that the job was submitted for processing. Returns only jobs submitted before the specified time. Jobs are returned in ascending order, oldest to newest.
+     */
+    SubmitTimeBefore?: Timestamp;
+    /**
+     * Filters the list of jobs based on the time that the job was submitted for processing. Returns only jobs submitted after the specified time. Jobs are returned in descending order, newest to oldest.
+     */
+    SubmitTimeAfter?: Timestamp;
+  }
+  export interface TargetedSentimentDetectionJobProperties {
+    /**
+     * The identifier assigned to the targeted sentiment detection job.
+     */
+    JobId?: JobId;
+    /**
+     * The Amazon Resource Name (ARN) of the targeted sentiment detection job. It is a unique, fully qualified identifier for the job. It includes the AWS account, Region, and the job ID. The format of the ARN is as follows:  arn:&lt;partition&gt;:comprehend:&lt;region&gt;:&lt;account-id&gt;:targeted-sentiment-detection-job/&lt;job-id&gt;  The following is an example job ARN:  arn:aws:comprehend:us-west-2:111122223333:targeted-sentiment-detection-job/1234abcd12ab34cd56ef1234567890ab 
+     */
+    JobArn?: ComprehendArn;
+    /**
+     * The name that you assigned to the targeted sentiment detection job.
+     */
+    JobName?: JobName;
+    /**
+     * The current status of the targeted sentiment detection job. If the status is FAILED, the Messages field shows the reason for the failure.
+     */
+    JobStatus?: JobStatus;
+    /**
+     * A description of the status of a job.
+     */
+    Message?: AnyLengthString;
+    /**
+     * The time that the targeted sentiment detection job was submitted for processing.
+     */
+    SubmitTime?: Timestamp;
+    /**
+     * The time that the targeted sentiment detection job ended.
+     */
+    EndTime?: Timestamp;
+    InputDataConfig?: InputDataConfig;
+    OutputDataConfig?: OutputDataConfig;
+    /**
+     * The language code of the input documents.
+     */
+    LanguageCode?: LanguageCode;
+    /**
+     * The Amazon Resource Name (ARN) that gives Amazon Comprehend read access to your input data.
+     */
+    DataAccessRoleArn?: IamRoleArn;
+    /**
+     * ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt data on the storage volume attached to the ML compute instance(s) that process the targeted sentiment detection job. The VolumeKmsKeyId can be either of the following formats:   KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"    Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"   
+     */
+    VolumeKmsKeyId?: KmsKeyId;
+    VpcConfig?: VpcConfig;
+  }
+  export type TargetedSentimentDetectionJobPropertiesList = TargetedSentimentDetectionJobProperties[];
   export type Timestamp = Date;
   export interface TopicsDetectionJobFilter {
     /**

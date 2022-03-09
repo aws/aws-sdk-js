@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1089.0-->
+<!--LATEST=2.1090.0-->
 <!--ENTRYINSERT-->
+
+## 2.1090.0
+* feature: Comprehend: Amazon Comprehend now supports extracting the sentiment associated with entities such as brands, products and services from text documents.
+* feature: EC2MetadataCredentials: Allow EC2MetadataCredentials to extend the existing expiration when EC2 Metadata Service returns expired credentials or failure response.
 
 ## 2.1089.0
 * feature: EKS: Introducing a new enum for NodeGroup error code: Ec2SubnetMissingIpv6Assignment
