@@ -1306,7 +1306,7 @@ const exp = require('constants');
               expect(timeTillExpiration).to.be.greaterThan(15 * MINUTE);
               expect(timeTillExpiration).to.be.lessThan(20 * MINUTE);
               expect(warnSpy.calls.length).to.equal(1);
-              expect(warnSpy.calls[0].arguments[0]).to.contain('SDK cannot renew the credential');
+              expect(warnSpy.calls[0].arguments[0]).to.contain('Attempting credential expiration extension');
               creds.refresh(function() {
                 // Refresh the credentials and print warning message if force refresh the credentials
                 expect(creds.needsRefresh()).to.equal(false);
