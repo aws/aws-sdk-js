@@ -83,6 +83,7 @@ export interface HTTPOptions {
 export interface Logger {
     write?: (chunk: any, encoding?: string, callback?: () => void) => void
     log?: (...messages: any[]) => void;
+    warn?: (...message: any[]) => void;
 }
 export interface ParamValidation {
     /**
