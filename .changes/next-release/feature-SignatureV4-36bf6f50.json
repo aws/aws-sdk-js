@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "SignatureV4",
+  "description": "Fix the invalid signature error when signing with request containing dot segment in path or relative path"
+}

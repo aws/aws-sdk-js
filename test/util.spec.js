@@ -68,6 +68,16 @@
     });
   });
 
+  describe('uriNormalizePath', function() {
+    it('should normalize relative path', function () {
+      expect(AWS.util.uriNormalizePath('../a/b/../c')).to.equal('a/c');
+    });
+
+    it('should fix invalid path with consecutive slashes', function () {
+      expect(AWS.util.uriNormalizePath('a//c')).to.equal('a/c');
+    });
+  });
+
   describe('AWS.util.queryParamsToString', function() {
     var qpts;
     qpts = AWS.util.queryParamsToString;

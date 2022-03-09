@@ -152,6 +152,18 @@
         return expect(signer.canonicalString().split('\n')[1]).to.equal('/identitypools/id/identities/a%253Ab%253Ac/datasets');
       });
 
+      it('normalize paths for non S3 services', function() {
+        var spy = helpers.spyOn(AWS.util, 'uriNormalizePath').andCallThrough();
+        var req = new AWS.CognitoSync().listDatasets({
+          IdentityPoolId: 'id',
+          IdentityId: 'a:b:c'
+        }).build();
+        expect(spy.calls.length).to.equal(1);
+        signer = new AWS.Signers.V4(req.httpRequest, 'cognito-identity');
+        signer.canonicalString();
+        expect(spy.calls.length).to.equal(2);
+      });
+
       it('does not double encode path for S3', function() {
         var req;
         req = new AWS.S3().getObject({
