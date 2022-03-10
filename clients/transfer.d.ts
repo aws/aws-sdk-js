@@ -383,7 +383,13 @@ declare namespace Transfer {
      * Specifies the Amazon Resource Name (ARN) of the Amazon Web Services Identity and Access Management (IAM) role that allows a server to turn on Amazon CloudWatch logging for Amazon S3 or Amazon EFS events. When set, user activity can be viewed in your CloudWatch logs.
      */
     LoggingRole?: Role;
+    /**
+     * Specify a string to display when users connect to a server. This string is displayed after the user authenticates.  The SFTP protocol does not support post-authentication display banners. 
+     */
     PostAuthenticationLoginBanner?: PostAuthenticationLoginBanner;
+    /**
+     * Specify a string to display when users connect to a server. This string is displayed before the user authenticates. For example, the following banner displays details about using the system.  This system is for the use of authorized users only. Individuals using this computer system without authority, or in excess of their authority, are subject to having all of their activities on this system monitored and recorded by system personnel. 
+     */
     PreAuthenticationLoginBanner?: PreAuthenticationLoginBanner;
     /**
      * Specifies the file transfer protocol or protocols over which your file transfer protocol client can connect to your server's endpoint. The available protocols are:    SFTP (Secure Shell (SSH) File Transfer Protocol): File transfer over SSH    FTPS (File Transfer Protocol Secure): File transfer with TLS encryption    FTP (File Transfer Protocol): Unencrypted file transfer    If you select FTPS, you must choose a certificate stored in Amazon Web Services Certificate Manager (ACM) which is used to identify your server when clients connect to it over FTPS. If Protocol includes either FTP or FTPS, then the EndpointType must be VPC and the IdentityProviderType must be AWS_DIRECTORY_SERVICE or API_GATEWAY. If Protocol includes FTP, then AddressAllocationIds cannot be associated. If Protocol is set only to SFTP, the EndpointType can be set to PUBLIC and the IdentityProviderType can be set to SERVICE_MANAGED. 
@@ -787,7 +793,13 @@ declare namespace Transfer {
      * Specifies the Amazon Resource Name (ARN) of the Amazon Web Services Identity and Access Management (IAM) role that allows a server to turn on Amazon CloudWatch logging for Amazon S3 or Amazon EFS events. When set, user activity can be viewed in your CloudWatch logs.
      */
     LoggingRole?: Role;
+    /**
+     * Specify a string to display when users connect to a server. This string is displayed after the user authenticates.  The SFTP protocol does not support post-authentication display banners. 
+     */
     PostAuthenticationLoginBanner?: PostAuthenticationLoginBanner;
+    /**
+     * Specify a string to display when users connect to a server. This string is displayed before the user authenticates. For example, the following banner displays details about using the system.  This system is for the use of authorized users only. Individuals using this computer system without authority, or in excess of their authority, are subject to having all of their activities on this system monitored and recorded by system personnel. 
+     */
     PreAuthenticationLoginBanner?: PreAuthenticationLoginBanner;
     /**
      * Specifies the file transfer protocol or protocols over which your file transfer protocol client can connect to your server's endpoint. The available protocols are:    SFTP (Secure Shell (SSH) File Transfer Protocol): File transfer over SSH    FTPS (File Transfer Protocol Secure): File transfer with TLS encryption    FTP (File Transfer Protocol): Unencrypted file transfer  
@@ -925,7 +937,7 @@ declare namespace Transfer {
   export type EndpointType = "PUBLIC"|"VPC"|"VPC_ENDPOINT"|string;
   export interface ExecutionError {
     /**
-     * Specifies the error type: currently, the only valid value is PERMISSION_DENIED, which occurs if your policy does not contain the correct permissions to complete one or more of the steps in the workflow.
+     * Specifies the error type.    ALREADY_EXISTS: occurs for a copy step, if the overwrite option is not selected and a file with the same name already exists in the target location.    BAD_REQUEST: a general bad request: for example, a step that attempts to tag an EFS file returns BAD_REQUEST, as only S3 files can be tagged.    CUSTOM_STEP_FAILED: occurs when the custom step provided a callback that indicates failure.    INTERNAL_SERVER_ERROR: a catch-all error that can occur for a variety of reasons.    NOT_FOUND: occurs when a requested entity, for example a source file for a copy step, does not exist.    PERMISSION_DENIED: occurs if your policy does not contain the correct permissions to complete one or more of the steps in the workflow.    TIMEOUT: occurs when the execution times out.   You can set the TimeoutSeconds for a custom step, anywhere from 1 second to 1800 seconds (30 minutes).      THROTTLED: occurs if you exceed the new execution refill rate of one workflow per second.  
      */
     Type: ExecutionErrorType;
     /**
@@ -934,7 +946,7 @@ declare namespace Transfer {
     Message: ExecutionErrorMessage;
   }
   export type ExecutionErrorMessage = string;
-  export type ExecutionErrorType = "PERMISSION_DENIED"|string;
+  export type ExecutionErrorType = "PERMISSION_DENIED"|"CUSTOM_STEP_FAILED"|"THROTTLED"|"ALREADY_EXISTS"|"NOT_FOUND"|"BAD_REQUEST"|"TIMEOUT"|"INTERNAL_SERVER_ERROR"|string;
   export type ExecutionId = string;
   export interface ExecutionResults {
     /**
@@ -1662,7 +1674,13 @@ declare namespace Transfer {
      * Specifies the Amazon Resource Name (ARN) of the Amazon Web Services Identity and Access Management (IAM) role that allows a server to turn on Amazon CloudWatch logging for Amazon S3 or Amazon EFS events. When set, user activity can be viewed in your CloudWatch logs.
      */
     LoggingRole?: NullableRole;
+    /**
+     * Specify a string to display when users connect to a server. This string is displayed after the user authenticates.  The SFTP protocol does not support post-authentication display banners. 
+     */
     PostAuthenticationLoginBanner?: PostAuthenticationLoginBanner;
+    /**
+     * Specify a string to display when users connect to a server. This string is displayed before the user authenticates. For example, the following banner displays details about using the system.  This system is for the use of authorized users only. Individuals using this computer system without authority, or in excess of their authority, are subject to having all of their activities on this system monitored and recorded by system personnel. 
+     */
     PreAuthenticationLoginBanner?: PreAuthenticationLoginBanner;
     /**
      * Specifies the file transfer protocol or protocols over which your file transfer protocol client can connect to your server's endpoint. The available protocols are:   Secure Shell (SSH) File Transfer Protocol (SFTP): File transfer over SSH   File Transfer Protocol Secure (FTPS): File transfer with TLS encryption   File Transfer Protocol (FTP): Unencrypted file transfer    If you select FTPS, you must choose a certificate stored in Amazon Web ServicesCertificate Manager (ACM) which will be used to identify your server when clients connect to it over FTPS. If Protocol includes either FTP or FTPS, then the EndpointType must be VPC and the IdentityProviderType must be AWS_DIRECTORY_SERVICE or API_GATEWAY. If Protocol includes FTP, then AddressAllocationIds cannot be associated. If Protocol is set only to SFTP, the EndpointType can be set to PUBLIC and the IdentityProviderType can be set to SERVICE_MANAGED. 

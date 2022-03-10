@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1090.0-->
+<!--LATEST=2.1091.0-->
 <!--ENTRYINSERT-->
+
+## 2.1091.0
+* feature: LexModelsV2: This release makes slotTypeId an optional parameter in CreateSlot and UpdateSlot APIs in Amazon Lex V2 for model building. Customers can create and update slots without specifying a slot type id.
+* feature: TranscribeService: Documentation fix for API `StartMedicalTranscriptionJobRequest`, now showing min sample rate as 16khz
+* feature: Transfer: Adding more descriptive error types for managed workflows
 
 ## 2.1090.0
 * feature: Comprehend: Amazon Comprehend now supports extracting the sentiment associated with entities such as brands, products and services from text documents.

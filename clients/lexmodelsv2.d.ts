@@ -1588,7 +1588,7 @@ declare namespace LexModelsV2 {
     /**
      * The unique identifier for the slot type associated with this slot. The slot type determines the values that can be entered into the slot.
      */
-    slotTypeId: BuiltInOrCustomSlotTypeId;
+    slotTypeId?: BuiltInOrCustomSlotTypeId;
     /**
      * Specifies prompts that Amazon Lex sends to the user to elicit a response that provides the value for the slot. 
      */
@@ -5015,7 +5015,7 @@ declare namespace LexModelsV2 {
     /**
      * The unique identifier of the new slot type to associate with this slot. 
      */
-    slotTypeId: BuiltInOrCustomSlotTypeId;
+    slotTypeId?: BuiltInOrCustomSlotTypeId;
     /**
      * A new set of prompts that Amazon Lex sends to the user to elicit a response the provides a value for the slot.
      */

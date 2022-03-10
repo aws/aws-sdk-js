@@ -12,115 +12,115 @@ declare class TranscribeService extends Service {
   constructor(options?: TranscribeService.Types.ClientConfiguration)
   config: Config & TranscribeService.Types.ClientConfiguration;
   /**
-   * Creates an analytics category. Amazon Transcribe applies the conditions specified by your analytics categories to your call analytics jobs. For each analytics category, you specify one or more rules. For example, you can specify a rule that the customer sentiment was neutral or negative within that category. If you start a call analytics job, Amazon Transcribe applies the category to the analytics job that you've specified.
+   * Creates a call analytics category. Amazon Transcribe applies the conditions specified by your call analytics categories to your call analytics jobs. For each analytics category, you must create between 1 and 20 rules. For example, you can create a 'greeting' category with a rule that flags calls in which your agent does not use a specified phrase (for example: "Please note this call may be recorded.") in the first 15 seconds of the call. When you start a call analytics job, Amazon Transcribe applies all your existing call analytics categories to that job.
    */
   createCallAnalyticsCategory(params: TranscribeService.Types.CreateCallAnalyticsCategoryRequest, callback?: (err: AWSError, data: TranscribeService.Types.CreateCallAnalyticsCategoryResponse) => void): Request<TranscribeService.Types.CreateCallAnalyticsCategoryResponse, AWSError>;
   /**
-   * Creates an analytics category. Amazon Transcribe applies the conditions specified by your analytics categories to your call analytics jobs. For each analytics category, you specify one or more rules. For example, you can specify a rule that the customer sentiment was neutral or negative within that category. If you start a call analytics job, Amazon Transcribe applies the category to the analytics job that you've specified.
+   * Creates a call analytics category. Amazon Transcribe applies the conditions specified by your call analytics categories to your call analytics jobs. For each analytics category, you must create between 1 and 20 rules. For example, you can create a 'greeting' category with a rule that flags calls in which your agent does not use a specified phrase (for example: "Please note this call may be recorded.") in the first 15 seconds of the call. When you start a call analytics job, Amazon Transcribe applies all your existing call analytics categories to that job.
    */
   createCallAnalyticsCategory(callback?: (err: AWSError, data: TranscribeService.Types.CreateCallAnalyticsCategoryResponse) => void): Request<TranscribeService.Types.CreateCallAnalyticsCategoryResponse, AWSError>;
   /**
-   * Creates a new custom language model. Use Amazon S3 prefixes to provide the location of your input files. The time it takes to create your model depends on the size of your training data.
+   * Creates a new custom language model. When creating a new language model, you must specify if you want a Wideband (audio sample rates over 16,000 Hz) or Narrowband (audio sample rates under 16,000 Hz) base model. You then include the S3 URI location of your training and tuning files, the language for the model, a unique name, and any tags you want associated with your model.
    */
   createLanguageModel(params: TranscribeService.Types.CreateLanguageModelRequest, callback?: (err: AWSError, data: TranscribeService.Types.CreateLanguageModelResponse) => void): Request<TranscribeService.Types.CreateLanguageModelResponse, AWSError>;
   /**
-   * Creates a new custom language model. Use Amazon S3 prefixes to provide the location of your input files. The time it takes to create your model depends on the size of your training data.
+   * Creates a new custom language model. When creating a new language model, you must specify if you want a Wideband (audio sample rates over 16,000 Hz) or Narrowband (audio sample rates under 16,000 Hz) base model. You then include the S3 URI location of your training and tuning files, the language for the model, a unique name, and any tags you want associated with your model.
    */
   createLanguageModel(callback?: (err: AWSError, data: TranscribeService.Types.CreateLanguageModelResponse) => void): Request<TranscribeService.Types.CreateLanguageModelResponse, AWSError>;
   /**
-   * Creates a new custom vocabulary that you can use to modify how Amazon Transcribe Medical transcribes your audio file.
+   * Creates a new custom medical vocabulary. When creating a new medical vocabulary, you must upload a text file that contains your new entries, phrases, and terms into an S3 bucket. Note that this differs from , where you can include a list of terms within your request using the Phrases flag, as CreateMedicalVocabulary does not support the Phrases flag. For more information on creating a custom vocabulary text file, see Creating a custom vocabulary.
    */
   createMedicalVocabulary(params: TranscribeService.Types.CreateMedicalVocabularyRequest, callback?: (err: AWSError, data: TranscribeService.Types.CreateMedicalVocabularyResponse) => void): Request<TranscribeService.Types.CreateMedicalVocabularyResponse, AWSError>;
   /**
-   * Creates a new custom vocabulary that you can use to modify how Amazon Transcribe Medical transcribes your audio file.
+   * Creates a new custom medical vocabulary. When creating a new medical vocabulary, you must upload a text file that contains your new entries, phrases, and terms into an S3 bucket. Note that this differs from , where you can include a list of terms within your request using the Phrases flag, as CreateMedicalVocabulary does not support the Phrases flag. For more information on creating a custom vocabulary text file, see Creating a custom vocabulary.
    */
   createMedicalVocabulary(callback?: (err: AWSError, data: TranscribeService.Types.CreateMedicalVocabularyResponse) => void): Request<TranscribeService.Types.CreateMedicalVocabularyResponse, AWSError>;
   /**
-   * Creates a new custom vocabulary that you can use to change the way Amazon Transcribe handles transcription of an audio file.
+   * Creates a new custom vocabulary. When creating a new medical vocabulary, you can either upload a text file that contains your new entries, phrases, and terms into an S3 bucket or include a list of terms directly in your request using the Phrases flag. For more information on creating a custom vocabulary, see Creating a custom vocabulary.
    */
   createVocabulary(params: TranscribeService.Types.CreateVocabularyRequest, callback?: (err: AWSError, data: TranscribeService.Types.CreateVocabularyResponse) => void): Request<TranscribeService.Types.CreateVocabularyResponse, AWSError>;
   /**
-   * Creates a new custom vocabulary that you can use to change the way Amazon Transcribe handles transcription of an audio file.
+   * Creates a new custom vocabulary. When creating a new medical vocabulary, you can either upload a text file that contains your new entries, phrases, and terms into an S3 bucket or include a list of terms directly in your request using the Phrases flag. For more information on creating a custom vocabulary, see Creating a custom vocabulary.
    */
   createVocabulary(callback?: (err: AWSError, data: TranscribeService.Types.CreateVocabularyResponse) => void): Request<TranscribeService.Types.CreateVocabularyResponse, AWSError>;
   /**
-   * Creates a new vocabulary filter that you can use to filter words, such as profane words, from the output of a transcription job.
+   * Creates a new vocabulary filter that you can use to filter words from your transcription output. For example, you can use this operation to remove profanity from your transcript.
    */
   createVocabularyFilter(params: TranscribeService.Types.CreateVocabularyFilterRequest, callback?: (err: AWSError, data: TranscribeService.Types.CreateVocabularyFilterResponse) => void): Request<TranscribeService.Types.CreateVocabularyFilterResponse, AWSError>;
   /**
-   * Creates a new vocabulary filter that you can use to filter words, such as profane words, from the output of a transcription job.
+   * Creates a new vocabulary filter that you can use to filter words from your transcription output. For example, you can use this operation to remove profanity from your transcript.
    */
   createVocabularyFilter(callback?: (err: AWSError, data: TranscribeService.Types.CreateVocabularyFilterResponse) => void): Request<TranscribeService.Types.CreateVocabularyFilterResponse, AWSError>;
   /**
-   * Deletes a call analytics category using its name.
+   * Deletes a call analytics category. To use this operation, specify the name of the category you want to delete using CategoryName.
    */
   deleteCallAnalyticsCategory(params: TranscribeService.Types.DeleteCallAnalyticsCategoryRequest, callback?: (err: AWSError, data: TranscribeService.Types.DeleteCallAnalyticsCategoryResponse) => void): Request<TranscribeService.Types.DeleteCallAnalyticsCategoryResponse, AWSError>;
   /**
-   * Deletes a call analytics category using its name.
+   * Deletes a call analytics category. To use this operation, specify the name of the category you want to delete using CategoryName.
    */
   deleteCallAnalyticsCategory(callback?: (err: AWSError, data: TranscribeService.Types.DeleteCallAnalyticsCategoryResponse) => void): Request<TranscribeService.Types.DeleteCallAnalyticsCategoryResponse, AWSError>;
   /**
-   * Deletes a call analytics job using its name.
+   * Deletes a call analytics job. To use this operation, specify the name of the job you want to delete using CallAnalyticsJobName.
    */
   deleteCallAnalyticsJob(params: TranscribeService.Types.DeleteCallAnalyticsJobRequest, callback?: (err: AWSError, data: TranscribeService.Types.DeleteCallAnalyticsJobResponse) => void): Request<TranscribeService.Types.DeleteCallAnalyticsJobResponse, AWSError>;
   /**
-   * Deletes a call analytics job using its name.
+   * Deletes a call analytics job. To use this operation, specify the name of the job you want to delete using CallAnalyticsJobName.
    */
   deleteCallAnalyticsJob(callback?: (err: AWSError, data: TranscribeService.Types.DeleteCallAnalyticsJobResponse) => void): Request<TranscribeService.Types.DeleteCallAnalyticsJobResponse, AWSError>;
   /**
-   * Deletes a custom language model using its name.
+   * Deletes a custom language model. To use this operation, specify the name of the language model you want to delete using ModelName.
    */
   deleteLanguageModel(params: TranscribeService.Types.DeleteLanguageModelRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a custom language model using its name.
+   * Deletes a custom language model. To use this operation, specify the name of the language model you want to delete using ModelName.
    */
   deleteLanguageModel(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a transcription job generated by Amazon Transcribe Medical and any related information.
+   * Deletes a medical transcription job, along with any related information. To use this operation, specify the name of the job you want to delete using MedicalTranscriptionJobName.
    */
   deleteMedicalTranscriptionJob(params: TranscribeService.Types.DeleteMedicalTranscriptionJobRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a transcription job generated by Amazon Transcribe Medical and any related information.
+   * Deletes a medical transcription job, along with any related information. To use this operation, specify the name of the job you want to delete using MedicalTranscriptionJobName.
    */
   deleteMedicalTranscriptionJob(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a vocabulary from Amazon Transcribe Medical.
+   * Deletes a custom medical vocabulary. To use this operation, specify the name of the vocabulary you want to delete using VocabularyName.
    */
   deleteMedicalVocabulary(params: TranscribeService.Types.DeleteMedicalVocabularyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a vocabulary from Amazon Transcribe Medical.
+   * Deletes a custom medical vocabulary. To use this operation, specify the name of the vocabulary you want to delete using VocabularyName.
    */
   deleteMedicalVocabulary(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a previously submitted transcription job along with any other generated results such as the transcription, models, and so on.
+   * Deletes a transcription job, along with any related information. To use this operation, specify the name of the job you want to delete using TranscriptionJobName.
    */
   deleteTranscriptionJob(params: TranscribeService.Types.DeleteTranscriptionJobRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a previously submitted transcription job along with any other generated results such as the transcription, models, and so on.
+   * Deletes a transcription job, along with any related information. To use this operation, specify the name of the job you want to delete using TranscriptionJobName.
    */
   deleteTranscriptionJob(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a vocabulary from Amazon Transcribe. 
+   * Deletes a custom vocabulary. To use this operation, specify the name of the vocabulary you want to delete using VocabularyName.
    */
   deleteVocabulary(params: TranscribeService.Types.DeleteVocabularyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a vocabulary from Amazon Transcribe. 
+   * Deletes a custom vocabulary. To use this operation, specify the name of the vocabulary you want to delete using VocabularyName.
    */
   deleteVocabulary(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Removes a vocabulary filter.
+   * Deletes a vocabulary filter. To use this operation, specify the name of the vocabulary filter you want to delete using VocabularyFilterName.
    */
   deleteVocabularyFilter(params: TranscribeService.Types.DeleteVocabularyFilterRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Removes a vocabulary filter.
+   * Deletes a vocabulary filter. To use this operation, specify the name of the vocabulary filter you want to delete using VocabularyFilterName.
    */
   deleteVocabularyFilter(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Gets information about a single custom language model. Use this information to see details about the language model in your Amazon Web Services account. You can also see whether the base language model used to create your custom language model has been updated. If Amazon Transcribe has updated the base model, you can create a new custom language model using the updated base model. If the language model wasn't created, you can use this operation to understand why Amazon Transcribe couldn't create it. 
+   * Provides information about a specific custom language model in your Amazon Web Services account. This operation also shows if the base language model you used to create your custom language model has been updated. If Amazon Transcribe has updated the base model, you can create a new custom language model using the updated base model. If you tried to create a new custom language model and the request wasn't successful, you can use this operation to help identify the reason. 
    */
   describeLanguageModel(params: TranscribeService.Types.DescribeLanguageModelRequest, callback?: (err: AWSError, data: TranscribeService.Types.DescribeLanguageModelResponse) => void): Request<TranscribeService.Types.DescribeLanguageModelResponse, AWSError>;
   /**
-   * Gets information about a single custom language model. Use this information to see details about the language model in your Amazon Web Services account. You can also see whether the base language model used to create your custom language model has been updated. If Amazon Transcribe has updated the base model, you can create a new custom language model using the updated base model. If the language model wasn't created, you can use this operation to understand why Amazon Transcribe couldn't create it. 
+   * Provides information about a specific custom language model in your Amazon Web Services account. This operation also shows if the base language model you used to create your custom language model has been updated. If Amazon Transcribe has updated the base model, you can create a new custom language model using the updated base model. If you tried to create a new custom language model and the request wasn't successful, you can use this operation to help identify the reason. 
    */
   describeLanguageModel(callback?: (err: AWSError, data: TranscribeService.Types.DescribeLanguageModelResponse) => void): Request<TranscribeService.Types.DescribeLanguageModelResponse, AWSError>;
   /**
@@ -132,19 +132,19 @@ declare class TranscribeService extends Service {
    */
   getCallAnalyticsCategory(callback?: (err: AWSError, data: TranscribeService.Types.GetCallAnalyticsCategoryResponse) => void): Request<TranscribeService.Types.GetCallAnalyticsCategoryResponse, AWSError>;
   /**
-   * Returns information about a call analytics job. To see the status of the job, check the CallAnalyticsJobStatus field. If the status is COMPLETED, the job is finished and you can find the results at the location specified in the TranscriptFileUri field. If you enable personally identifiable information (PII) redaction, the redacted transcript appears in the RedactedTranscriptFileUri field.
+   * Retrieves information about a call analytics job. To view the job's status, refer to the CallAnalyticsJobStatus field. If the status is COMPLETED, the job is finished. You can then find your transcript at the URI specified in the TranscriptFileUri field. If you enabled personally identifiable information (PII) redaction, the redacted transcript appears in the RedactedTranscriptFileUri field.
    */
   getCallAnalyticsJob(params: TranscribeService.Types.GetCallAnalyticsJobRequest, callback?: (err: AWSError, data: TranscribeService.Types.GetCallAnalyticsJobResponse) => void): Request<TranscribeService.Types.GetCallAnalyticsJobResponse, AWSError>;
   /**
-   * Returns information about a call analytics job. To see the status of the job, check the CallAnalyticsJobStatus field. If the status is COMPLETED, the job is finished and you can find the results at the location specified in the TranscriptFileUri field. If you enable personally identifiable information (PII) redaction, the redacted transcript appears in the RedactedTranscriptFileUri field.
+   * Retrieves information about a call analytics job. To view the job's status, refer to the CallAnalyticsJobStatus field. If the status is COMPLETED, the job is finished. You can then find your transcript at the URI specified in the TranscriptFileUri field. If you enabled personally identifiable information (PII) redaction, the redacted transcript appears in the RedactedTranscriptFileUri field.
    */
   getCallAnalyticsJob(callback?: (err: AWSError, data: TranscribeService.Types.GetCallAnalyticsJobResponse) => void): Request<TranscribeService.Types.GetCallAnalyticsJobResponse, AWSError>;
   /**
-   * Returns information about a transcription job from Amazon Transcribe Medical. To see the status of the job, check the TranscriptionJobStatus field. If the status is COMPLETED, the job is finished. You find the results of the completed job in the TranscriptFileUri field.
+   * Retrieves information about a medical transcription job. To view the job's status, refer to the TranscriptionJobStatus field. If the status is COMPLETED, the job is finished. You can then find your transcript at the URI specified in the TranscriptFileUri field.
    */
   getMedicalTranscriptionJob(params: TranscribeService.Types.GetMedicalTranscriptionJobRequest, callback?: (err: AWSError, data: TranscribeService.Types.GetMedicalTranscriptionJobResponse) => void): Request<TranscribeService.Types.GetMedicalTranscriptionJobResponse, AWSError>;
   /**
-   * Returns information about a transcription job from Amazon Transcribe Medical. To see the status of the job, check the TranscriptionJobStatus field. If the status is COMPLETED, the job is finished. You find the results of the completed job in the TranscriptFileUri field.
+   * Retrieves information about a medical transcription job. To view the job's status, refer to the TranscriptionJobStatus field. If the status is COMPLETED, the job is finished. You can then find your transcript at the URI specified in the TranscriptFileUri field.
    */
   getMedicalTranscriptionJob(callback?: (err: AWSError, data: TranscribeService.Types.GetMedicalTranscriptionJobResponse) => void): Request<TranscribeService.Types.GetMedicalTranscriptionJobResponse, AWSError>;
   /**
@@ -510,107 +510,107 @@ declare namespace TranscribeService {
   }
   export interface CreateCallAnalyticsCategoryRequest {
     /**
-     * The name that you choose for your category when you create it. 
+     * A unique name, chosen by you, for your call analytics category. For example, sentiment-positive-last30seconds.
      */
     CategoryName: CategoryName;
     /**
-     * To create a category, you must specify between 1 and 20 rules. For each rule, you specify a filter to be applied to the attributes of the call. For example, you can specify a sentiment filter to detect if the customer's sentiment was negative or neutral.
+     * Rules make up a call analytics category. When creating a call analytics category, you must create between 1 and 20 rules for your category. For each rule, you specify a filter you want applied to the attributes of a call. For example, you can choose a sentiment filter that detects if a customer's sentiment was positive during the last 30 seconds of the call.
      */
     Rules: RuleList;
   }
   export interface CreateCallAnalyticsCategoryResponse {
     /**
-     * The rules and associated metadata used to create a category.
+     * If your audio matches one of your categories, this field contains data on that category and its associated rules. This parameter shows which category is flagged (CategoryName) along with metadata for the rules that match your audio. Metadata includes the rule filter (such as InterruptionFilter, NonTalkTimeFilter, SentimentFilter, and TranscriptFilter) and where in your audio (StartTime and EndTime) the rule has a match.
      */
     CategoryProperties?: CategoryProperties;
   }
   export interface CreateLanguageModelRequest {
     /**
-     * The language of the input text you're using to train your custom language model.
+     * The language of your custom language model; note that the language code you select must match the language of your training and tuning data.
      */
     LanguageCode: CLMLanguageCode;
     /**
-     * The Amazon Transcribe standard language model, or base model used to create your custom language model. If you want to use your custom language model to transcribe audio with a sample rate of 16,000 Hz or greater, choose Wideband. If you want to use your custom language model to transcribe audio with a sample rate that is less than 16,000 Hz, choose Narrowband.
+     * The Amazon Transcribe standard language model, or base model, used to create your custom language model. Amazon Transcribe offers two options for base models: Wideband and Narrowband. If the audio you want to transcribe has a sample rate of 16,000 Hz or greater, choose WideBand. To transcribe audio with a sample rate less than 16,000 Hz, choose NarrowBand.
      */
     BaseModelName: BaseModelName;
     /**
-     * The name you choose for your custom language model when you create it.
+     * The name of your new custom language model. This name is case sensitive, cannot contain spaces, and must be unique within an Amazon Web Services account. If you try to create a language model with the same name as a previous language model, you get a ConflictException error.
      */
     ModelName: ModelName;
     /**
-     * Contains the data access role and the Amazon S3 prefixes to read the required input files to create a custom language model.
+     * Contains your data access role ARN (Amazon Resource Name) and the Amazon S3 locations of your training (S3Uri) and tuning (TuningDataS3Uri) data.
      */
     InputDataConfig: InputDataConfig;
     /**
-     * Adds one or more tags, each in the form of a key:value pair, to a new language model at the time you create this new model.
+     * Optionally add tags, each in the form of a key:value pair, to your new language model. See also: .
      */
     Tags?: TagList;
   }
   export interface CreateLanguageModelResponse {
     /**
-     * The language code of the text you've used to create a custom language model.
+     * The language code you selected for your custom language model.
      */
     LanguageCode?: CLMLanguageCode;
     /**
-     * The Amazon Transcribe standard language model, or base model you've used to create a custom language model.
+     * The Amazon Transcribe standard language model, or base model, you used when creating your custom language model. If your audio has a sample rate of 16,000 Hz or greater, this value should be WideBand. If your audio has a sample rate of less than 16,000 Hz, this value should be NarrowBand.
      */
     BaseModelName?: BaseModelName;
     /**
-     * The name you've chosen for your custom language model.
+     * The unique name you chose for your custom language model.
      */
     ModelName?: ModelName;
     /**
-     * The data access role and Amazon S3 prefixes you've chosen to create your custom language model.
+     * Lists your data access role ARN (Amazon Resource Name) and the Amazon S3 locations your provided for your training (S3Uri) and tuning (TuningDataS3Uri) data.
      */
     InputDataConfig?: InputDataConfig;
     /**
-     * The status of the custom language model. When the status is COMPLETED the model is ready to use.
+     * The status of your custom language model. When the status shows as COMPLETED, your model is ready to use.
      */
     ModelStatus?: ModelStatus;
   }
   export interface CreateMedicalVocabularyRequest {
     /**
-     * The name of the custom vocabulary. This case-sensitive name must be unique within an Amazon Web Services account. If you try to create a vocabulary with the same name as a previous vocabulary, you get a ConflictException error.
+     * The name of your new vocabulary. This name is case sensitive, cannot contain spaces, and must be unique within an Amazon Web Services account. If you try to create a vocabulary with the same name as a previous vocabulary, you get a ConflictException error.
      */
     VocabularyName: VocabularyName;
     /**
-     * The language code for the language used for the entries in your custom vocabulary. The language code of your custom vocabulary must match the language code of your transcription job. US English (en-US) is the only language code available for Amazon Transcribe Medical.
+     * The language code that represents the language of the entries in your custom vocabulary. Note that U.S. English (en-US) is the only language supported with Amazon Transcribe Medical.
      */
     LanguageCode: LanguageCode;
     /**
-     * The location in Amazon S3 of the text file you use to define your custom vocabulary. The URI must be in the same Amazon Web Services Region as the resource that you're calling. Enter information about your VocabularyFileUri in the following format:  https://s3.&lt;aws-region&gt;.amazonaws.com/&lt;bucket-name&gt;/&lt;keyprefix&gt;/&lt;objectkey&gt;  The following is an example URI for a vocabulary file that is stored in Amazon S3:  https://s3.us-east-1.amazonaws.com/AWSDOC-EXAMPLE-BUCKET/vocab.txt  For more information about Amazon S3 object names, see Object Keys in the Amazon S3 Developer Guide. For more information about custom vocabularies, see Medical Custom Vocabularies.
+     * The Amazon S3 location (URI) of the text file that contains your custom vocabulary. The URI must be in the same Amazon Web Services Region as the resource that you're calling. Here's an example URI path:  https://s3.us-east-1.amazonaws.com/my-s3-bucket/my-vocab-file.txt 
      */
     VocabularyFileUri: Uri;
     /**
-     * Adds one or more tags, each in the form of a key:value pair, to a new medical vocabulary at the time you create this new vocabulary.
+     * Adds one or more tags, each in the form of a key:value pair, to a new medical vocabulary at the time you create the new vocabulary. To learn more about using tags with Amazon Transcribe, refer to Tagging resources.
      */
     Tags?: TagList;
   }
   export interface CreateMedicalVocabularyResponse {
     /**
-     * The name of the vocabulary. The name must be unique within an Amazon Web Services account and is case sensitive.
+     * The name you chose for your vocabulary.
      */
     VocabularyName?: VocabularyName;
     /**
-     * The language code for the entries in your custom vocabulary. US English (en-US) is the only valid language code for Amazon Transcribe Medical.
+     * The language code you selected for your medical vocabulary. Note that U.S. English (en-US) is the only language supported with Amazon Transcribe Medical.
      */
     LanguageCode?: LanguageCode;
     /**
-     * The processing state of your custom vocabulary in Amazon Transcribe Medical. If the state is READY, you can use the vocabulary in a StartMedicalTranscriptionJob request.
+     * The processing state of your custom medical vocabulary. If the state is READY, you can use the vocabulary in a StartMedicalTranscriptionJob request.
      */
     VocabularyState?: VocabularyState;
     /**
-     * The date and time that you created the vocabulary.
+     * The date and time you created your custom medical vocabulary.
      */
     LastModifiedTime?: DateTime;
     /**
-     * If the VocabularyState field is FAILED, this field contains information about why the job failed.
+     * If the VocabularyState field is FAILED, FailureReason contains information about why the job failed.
      */
     FailureReason?: FailureReason;
   }
   export interface CreateVocabularyFilterRequest {
     /**
-     * The vocabulary filter name. The name must be unique within the account that contains it. If you try to create a vocabulary filter with the same name as another vocabulary filter, you get a ConflictException error.
+     * The name of your new vocabulary filter. This name is case sensitive, cannot contain spaces, and must be unique within an Amazon Web Services account. If you try to create a vocabulary filter with the same name as a previous vocabulary filter, you get a ConflictException error.
      */
     VocabularyFilterName: VocabularyFilterName;
     /**
@@ -618,15 +618,15 @@ declare namespace TranscribeService {
      */
     LanguageCode: LanguageCode;
     /**
-     * The words to use in the vocabulary filter. Only use characters from the character set defined for custom vocabularies. For a list of character sets, see Character Sets for Custom Vocabularies. If you provide a list of words in the Words parameter, you can't use the VocabularyFilterFileUri parameter.
+     * The words you want in your vocabulary filter. Only use characters specified in the Character sets for the language you're transcribing. Note that if you include Words in your request, you cannot use VocabularyFilterFileUri; you must choose one or the other.
      */
     Words?: Words;
     /**
-     * The Amazon S3 location of a text file used as input to create the vocabulary filter. Only use characters from the character set defined for custom vocabularies. For a list of character sets, see Character Sets for Custom Vocabularies. The specified file must be less than 50 KB of UTF-8 characters. If you provide the location of a list of words in the VocabularyFilterFileUri parameter, you can't use the Words parameter.
+     * The Amazon S3 location of a text file used as input to create the vocabulary filter. Only use characters from the character set defined for custom vocabularies. For a list of character sets, see Character Sets for Custom Vocabularies. Your vocabulary filter file must be less than 50 KB in size. Note that if you include VocabularyFilterFileUri in your request, you cannot use Words; you must choose one or the other.
      */
     VocabularyFilterFileUri?: Uri;
     /**
-     * Adds one or more tags, each in the form of a key:value pair, to a new Amazon Transcribe vocabulary filter at the time you create this new vocabulary filter.
+     * Adds one or more tags, each in the form of a key:value pair, to a new vocabulary filter at the time you create this new vocabulary filter.
      */
     Tags?: TagList;
   }
@@ -636,55 +636,55 @@ declare namespace TranscribeService {
      */
     VocabularyFilterName?: VocabularyFilterName;
     /**
-     * The language code of the words in the collection.
+     * The language code associated with your vocabulary filter.
      */
     LanguageCode?: LanguageCode;
     /**
-     * The date and time that the vocabulary filter was modified.
+     * The date and time the vocabulary filter was modified.
      */
     LastModifiedTime?: DateTime;
   }
   export interface CreateVocabularyRequest {
     /**
-     * The name of the vocabulary. The name must be unique within an Amazon Web Services account. The name is case sensitive. If you try to create a vocabulary with the same name as a previous vocabulary you will receive a ConflictException error.
+     * The name of your new vocabulary. This name is case sensitive, cannot contain spaces, and must be unique within an Amazon Web Services account. If you try to create a vocabulary with the same name as a previous vocabulary, you get a ConflictException error.
      */
     VocabularyName: VocabularyName;
     /**
-     * The language code of the vocabulary entries. For a list of languages and their corresponding language codes, see table-language-matrix.
+     * The language code that represents the language of the entries in your custom vocabulary. Each vocabulary must contain terms in only one language. For a list of languages and their corresponding language codes, see Supported languages.
      */
     LanguageCode: LanguageCode;
     /**
-     * An array of strings that contains the vocabulary entries. 
+     * Use this flag to include a list of terms within your request. Note that if you include Phrases in your request, you cannot use VocabularyFileUri; you must choose one or the other.
      */
     Phrases?: Phrases;
     /**
-     * The S3 location of the text file that contains the definition of the custom vocabulary. The URI must be in the same region as the API endpoint that you are calling. The general form is:  https://s3.&lt;Amazon Web Services-region&gt;.amazonaws.com/&lt;AWSDOC-EXAMPLE-BUCKET&gt;/&lt;keyprefix&gt;/&lt;objectkey&gt;   For example:  https://s3.us-east-1.amazonaws.com/AWSDOC-EXAMPLE-BUCKET/vocab.txt  For more information about S3 object names, see Object Keys in the Amazon S3 Developer Guide. For more information about custom vocabularies, see Custom vocabularies.
+     * The S3 location of the text file that contains your custom vocabulary. The URI must be located in the same region as the API endpoint you're calling. Here's an example URI path:  https://s3.us-east-1.amazonaws.com/my-s3-bucket/my-vocab-file.txt  Note that if you include VocabularyFileUri in your request, you cannot use the Phrases flag; you must choose one or the other.
      */
     VocabularyFileUri?: Uri;
     /**
-     * Adds one or more tags, each in the form of a key:value pair, to a new Amazon Transcribe vocabulary at the time you create this new vocabulary.
+     * Adds one or more tags, each in the form of a key:value pair, to a new custom vocabulary at the time you create this new vocabulary.
      */
     Tags?: TagList;
   }
   export interface CreateVocabularyResponse {
     /**
-     * The name of the vocabulary.
+     * The name you chose for your vocabulary.
      */
     VocabularyName?: VocabularyName;
     /**
-     * The language code of the vocabulary entries.
+     * The language code you selected for your vocabulary.
      */
     LanguageCode?: LanguageCode;
     /**
-     * The processing state of the vocabulary. When the VocabularyState field contains READY the vocabulary is ready to be used in a StartTranscriptionJob request.
+     * The processing state of your vocabulary. If the state is READY, you can use the vocabulary in a StartTranscriptionJob request.
      */
     VocabularyState?: VocabularyState;
     /**
-     * The date and time that the vocabulary was created.
+     * The date and time you created your custom vocabulary.
      */
     LastModifiedTime?: DateTime;
     /**
-     * If the VocabularyState field is FAILED, this field contains information about why the job failed.
+     * If the VocabularyState field is FAILED, FailureReason contains information about why the job failed.
      */
     FailureReason?: FailureReason;
   }
@@ -692,7 +692,7 @@ declare namespace TranscribeService {
   export type DateTime = Date;
   export interface DeleteCallAnalyticsCategoryRequest {
     /**
-     * The name of the call analytics category that you're choosing to delete. The value is case sensitive. 
+     * The name of the call analytics category you want to delete. Category names are case-sensitive.
      */
     CategoryName: CategoryName;
   }
@@ -700,7 +700,7 @@ declare namespace TranscribeService {
   }
   export interface DeleteCallAnalyticsJobRequest {
     /**
-     * The name of the call analytics job you want to delete.
+     * The name of the call analytics job you want to delete. Job names are case-sensitive.
      */
     CallAnalyticsJobName: CallAnalyticsJobName;
   }
@@ -708,43 +708,43 @@ declare namespace TranscribeService {
   }
   export interface DeleteLanguageModelRequest {
     /**
-     * The name of the model you're choosing to delete.
+     * The name of the model you want to delete. Model names are case-sensitive.
      */
     ModelName: ModelName;
   }
   export interface DeleteMedicalTranscriptionJobRequest {
     /**
-     * The name you provide to the DeleteMedicalTranscriptionJob object to delete a transcription job.
+     * The name of the medical transcription job you want to delete. Job names are case-sensitive.
      */
     MedicalTranscriptionJobName: TranscriptionJobName;
   }
   export interface DeleteMedicalVocabularyRequest {
     /**
-     * The name of the vocabulary that you want to delete.
+     * The name of the vocabulary that you want to delete. Vocabulary names are case-sensitive.
      */
     VocabularyName: VocabularyName;
   }
   export interface DeleteTranscriptionJobRequest {
     /**
-     * The name of the transcription job to be deleted.
+     * The name of the transcription job you want to delete. Job names are case-sensitive.
      */
     TranscriptionJobName: TranscriptionJobName;
   }
   export interface DeleteVocabularyFilterRequest {
     /**
-     * The name of the vocabulary filter to remove.
+     * The name of the vocabulary filter you want to delete. Vocabulary filter names are case-sensitive.
      */
     VocabularyFilterName: VocabularyFilterName;
   }
   export interface DeleteVocabularyRequest {
     /**
-     * The name of the vocabulary to delete. 
+     * The name of the vocabulary you want to delete. Vocabulary names are case-sensitive.
      */
     VocabularyName: VocabularyName;
   }
   export interface DescribeLanguageModelRequest {
     /**
-     * The name of the custom language model you submit to get more information.
+     * The name of the custom language model you want described. Model names are case-sensitive.
      */
     ModelName: ModelName;
   }
@@ -757,43 +757,43 @@ declare namespace TranscribeService {
   export type FailureReason = string;
   export interface GetCallAnalyticsCategoryRequest {
     /**
-     * The name of the category you want information about. This value is case sensitive.
+     * The name of the category you want information about. Category names are case sensitive.
      */
     CategoryName: CategoryName;
   }
   export interface GetCallAnalyticsCategoryResponse {
     /**
-     * The rules you've defined for a category.
+     * Provides you with the rules associated with the category you specified in your GetCallAnalyticsCategory request.
      */
     CategoryProperties?: CategoryProperties;
   }
   export interface GetCallAnalyticsJobRequest {
     /**
-     * The name of the analytics job you want information about. This value is case sensitive. 
+     * The name of the analytics job you want information about. This value is case sensitive.
      */
     CallAnalyticsJobName: CallAnalyticsJobName;
   }
   export interface GetCallAnalyticsJobResponse {
     /**
-     * An object that contains the results of your call analytics job.
+     * An object that contains detailed information about your call analytics job. Returned fields include: CallAnalyticsJobName, CallAnalyticsJobStatus, ChannelDefinitions, CompletionTime, CreationTime, DataAccessRoleArn, FailureReason, IdentifiedLanguageScore, LanguageCode, Media, MediaFormat, MediaSampleRateHertz, Settings, StartTime, and Transcript.
      */
     CallAnalyticsJob?: CallAnalyticsJob;
   }
   export interface GetMedicalTranscriptionJobRequest {
     /**
-     * The name of the medical transcription job.
+     * The name of the medical transcription job you want information about. This value is case sensitive.
      */
     MedicalTranscriptionJobName: TranscriptionJobName;
   }
   export interface GetMedicalTranscriptionJobResponse {
     /**
-     * An object that contains the results of the medical transcription job.
+     * An object that contains detailed information about your medical transcription job. Returned fields include: CompletionTime, ContentIdentificationType, CreationTime, FailureReason, LanguageCode, Media, MediaFormat, MediaSampleRateHertz, MedicalTranscriptionJobName, Settings, Specialty, StartTime, Tags, Transcript, TranscriptionJobStatus, and Type.
      */
     MedicalTranscriptionJob?: MedicalTranscriptionJob;
   }
   export interface GetMedicalVocabularyRequest {
     /**
-     * The name of the vocabulary that you want information about. The value is case sensitive. 
+     * The name of the medical vocabulary you want information about. This value is case sensitive.
      */
     VocabularyName: VocabularyName;
   }
@@ -815,11 +815,11 @@ declare namespace TranscribeService {
      */
     LastModifiedTime?: DateTime;
     /**
-     * If the VocabularyState is FAILED, this field contains information about why the job failed.
+     * If your request returns a VocabularyState that is FAILED, the FailureReason field contains information about why the request failed. For more information, refer to the Common Errors section.
      */
     FailureReason?: FailureReason;
     /**
-     * The location in Amazon S3 where the vocabulary is stored. Use this URI to get the contents of the vocabulary. You can download your vocabulary from the URI for a limited time.
+     * The S3 location where the vocabulary is stored; use this URI to view or download the vocabulary.
      */
     DownloadUri?: Uri;
   }
@@ -982,7 +982,7 @@ declare namespace TranscribeService {
      */
     ModelStatus?: ModelStatus;
     /**
-     * Whether the base model used for the custom language model is up to date. If this field is true then you are running the most up-to-date version of the base model in your custom language model.
+     * Whether the base model used for the custom language model is up to date. If this field is false then you are running the most up-to-date version of the base model in your custom language model.
      */
     UpgradeAvailability?: Boolean;
     /**
@@ -1131,7 +1131,7 @@ declare namespace TranscribeService {
      */
     Status?: VocabularyState;
     /**
-     * The ListMedicalVocabularies operation returns a page of vocabularies at a time. You set the maximum number of vocabularies to return on a page with the MaxResults parameter. If there are more jobs in the list will fit on a page, Amazon Transcribe Medical returns the NextPage token. To return the next page of vocabularies, include the token in the next request to the ListMedicalVocabularies operation .
+     * The ListMedicalVocabularies operation returns a page of vocabularies at a time. You set the maximum number of vocabularies to return on a page with the MaxResults parameter. If there are more jobs in the list will fit on a page, Amazon Transcribe Medical returns the NextPage token. To return the next page of vocabularies, include the token in the next request to the ListMedicalVocabularies operation.
      */
     NextToken?: NextToken;
     /**
@@ -1248,7 +1248,7 @@ declare namespace TranscribeService {
   export type MaxSpeakers = number;
   export interface Media {
     /**
-     * The S3 object location of the input media file. The URI must be in the same region as the API endpoint that you are calling. The general form is:   s3://&lt;AWSDOC-EXAMPLE-BUCKET&gt;/&lt;keyprefix&gt;/&lt;objectkey&gt;  For example:  s3://AWSDOC-EXAMPLE-BUCKET/example.mp4   s3://AWSDOC-EXAMPLE-BUCKET/mediadocs/example.mp4  For more information about S3 object names, see Object Keys in the Amazon S3 Developer Guide.
+     * The S3 object location of the input media file. The URI must be in the same region as the API endpoint that you are calling. The general form is:  s3://DOC-EXAMPLE-BUCKET/keyprefix/objectkey  For example:  s3://DOC-EXAMPLE-BUCKET/example.flac   s3://DOC-EXAMPLE-BUCKET/mediafiles/example.flac  For more information about S3 object names, see Object Keys in the Amazon S3 Developer Guide.
      */
     MediaFileUri?: Uri;
     /**
@@ -1259,6 +1259,7 @@ declare namespace TranscribeService {
   export type MediaFormat = "mp3"|"mp4"|"wav"|"flac"|"ogg"|"amr"|"webm"|string;
   export type MediaSampleRateHertz = number;
   export type MedicalContentIdentificationType = "PHI"|string;
+  export type MedicalMediaSampleRateHertz = number;
   export interface MedicalTranscript {
     /**
      * The S3 object location of the medical transcript. Use this URI to access the medical transcript. This URI points to the S3 bucket you created to store the medical transcript.
@@ -1281,7 +1282,7 @@ declare namespace TranscribeService {
     /**
      * The sample rate, in Hertz, of the source audio containing medical information. If you don't specify the sample rate, Amazon Transcribe Medical determines it for you. If you choose to specify the sample rate, it must match the rate detected by Amazon Transcribe Medical.
      */
-    MediaSampleRateHertz?: MediaSampleRateHertz;
+    MediaSampleRateHertz?: MedicalMediaSampleRateHertz;
     /**
      * The format of the input media file.
      */
@@ -1582,7 +1583,7 @@ declare namespace TranscribeService {
     /**
      * The sample rate, in Hertz, of the audio track in the input media file. If you do not specify the media sample rate, Amazon Transcribe Medical determines the sample rate. If you specify the sample rate, it must match the rate detected by Amazon Transcribe Medical. In most cases, you should leave the MediaSampleRateHertz field blank and let Amazon Transcribe Medical determine the sample rate.
      */
-    MediaSampleRateHertz?: MediaSampleRateHertz;
+    MediaSampleRateHertz?: MedicalMediaSampleRateHertz;
     /**
      * The audio format of the input media file.
      */
@@ -1621,7 +1622,7 @@ declare namespace TranscribeService {
      */
     Type: Type;
     /**
-     * Add tags to an Amazon Transcribe medical transcription job.
+     * Add tags to an Amazon Transcribe Medical transcription job.
      */
     Tags?: TagList;
   }
@@ -1727,7 +1728,7 @@ declare namespace TranscribeService {
      */
     Formats?: SubtitleFormats;
     /**
-     * Choose the output location for your subtitle file. This location must be an S3 bucket.
+     * Contains the output location for your subtitle file. This location must be an S3 bucket.
      */
     SubtitleFileUris?: SubtitleFileUris;
   }
@@ -1971,7 +1972,7 @@ declare namespace TranscribeService {
      */
     LanguageCode: LanguageCode;
     /**
-     * The location in Amazon S3 of the text file that contains your custom vocabulary. The URI must be in the same Amazon Web Services Region as the resource that you are calling. The following is the format for a URI:   https://s3.&lt;aws-region&gt;.amazonaws.com/&lt;bucket-name&gt;/&lt;keyprefix&gt;/&lt;objectkey&gt;   For example:  https://s3.us-east-1.amazonaws.com/AWSDOC-EXAMPLE-BUCKET/vocab.txt  For more information about Amazon S3 object names, see Object Keys in the Amazon S3 Developer Guide. For more information about custom vocabularies in Amazon Transcribe Medical, see Medical Custom Vocabularies.
+     * The location in Amazon S3 of the text file that contains your custom vocabulary. The URI must be in the same Amazon Web Services Region as the resource that you are calling. The following is the format for a URI:  https://s3.aws-region.amazonaws.com/bucket-name/keyprefix/objectkey  For example:  https://s3.us-east-1.amazonaws.com/DOC-EXAMPLE-BUCKET/vocab.txt  For more information about Amazon S3 object names, see Object Keys in the Amazon S3 Developer Guide. For more information about custom vocabularies in Amazon Transcribe Medical, see Medical Custom Vocabularies.
      */
     VocabularyFileUri?: Uri;
   }
@@ -2035,7 +2036,7 @@ declare namespace TranscribeService {
      */
     Phrases?: Phrases;
     /**
-     * The S3 location of the text file that contains the definition of the custom vocabulary. The URI must be in the same region as the API endpoint that you are calling. The general form is:  https://s3.&lt;aws-region&gt;.amazonaws.com/&lt;AWSDOC-EXAMPLE-BUCKET&gt;/&lt;keyprefix&gt;/&lt;objectkey&gt;  For example:  https://s3.us-east-1.amazonaws.com/AWSDOC-EXAMPLE-BUCKET/vocab.txt  For more information about S3 object names, see Object Keys in the Amazon S3 Developer Guide. For more information about custom vocabularies, see Custom Vocabularies.
+     * The S3 location of the text file that contains the definition of the custom vocabulary. The URI must be in the same region as the API endpoint that you are calling. The general form is:  https://s3.aws-region.amazonaws.com/bucket-name/keyprefix/objectkey  For example:  https://s3.us-east-1.amazonaws.com/DOC-EXAMPLE-BUCKET/vocab.txt  For more information about S3 object names, see Object Keys in the Amazon S3 Developer Guide. For more information about custom vocabularies, see Custom Vocabularies.
      */
     VocabularyFileUri?: Uri;
   }
