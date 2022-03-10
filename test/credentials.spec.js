@@ -124,7 +124,7 @@
         'RemoteCredentials',
         'SAMLCredentials',
         'SharedIniFileCredentials',
-        'SingleSignOnCredentials',
+        'SsoCredentials',
         'ProcessCredentials',
         'WebIdentityCredentials'
       ],
@@ -486,11 +486,11 @@
         });
       });
     });
-    describe('AWS.SingleSignOnCredentials', function() {
+    describe('AWS.SsoCredentials', function() {
       var creds, mockSSO;
       creds = null;
       beforeEach(function() {
-        creds = new AWS.SingleSignOnCredentials({
+        creds = new AWS.SsoCredentials({
           ssoClient: new AWS.SSO({ region: 'us-east-1' })
         });
         mockSSO = function(expireTime) {
@@ -513,7 +513,7 @@
       describe('constructor', function() {
         return it('can override filename as a constructor argument', function() {
           var creds;
-          creds = new AWS.SingleSignOnCredentials({
+          creds = new AWS.SsoCredentials({
             filename: '/etc/config'
           });
           creds.get(function(err) {
@@ -653,7 +653,7 @@
           var mock = '';
           process.env.HOME = '/home/user';
           helpers.spyOn(AWS.util, 'readFileSync').andReturn(mock);
-          new AWS.SingleSignOnCredentials().refresh(function(err) {
+          new AWS.SsoCredentials().refresh(function(err) {
             expect(err.message).to.match(/^Profile default not found/);
             done();
           });
