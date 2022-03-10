@@ -609,10 +609,47 @@
             done();
           });
         });
+        it('throws error if sso credentials are expired', function(done) {
+          mockConfig = {
+            'default': {
+              'sso_start_url': 'https://d-abc123.awsapps.com/start',
+              'sso_account_id': '012345678902',
+              'sso_region': 'us-east-1',
+              'sso_role_name': 'some-role'
+            }
+          };
+          helpers.spyOn(AWS.util, 'getProfilesFromSharedConfig').andReturn(mockConfig);
+          mockToken = JSON.stringify({
+            startUrl: 'https://d-abc123.awsapps.com/start',
+            region: 'us-east-1',
+            accessToken: 'base64 encoded string',
+            expiresAt: '2021-03-11'
+          });
+          helpers.spyOn(AWS.util, 'readFileSync').andReturn(mockToken);
+          creds.refresh(function(err) {
+            expect(err.message).to.match(/^The SSO session associated with this profile has expired. To refresh this SSO session run aws sso login with the corresponding profile./);
+            expect(creds.accessKeyId).to.be.undefined;
+            done();
+          });
+        });
         it('throws error if no cached credentials found', function(done) {
           helpers.spyOn(AWS.util, 'readFileSync').andReturn('');
           creds.refresh(function(err) {
-            expect(err.message).to.match(/^Cached credentials not found under default profile/);
+            expect(err.message).to.match(/^Cached credentials not found under default profile. Please make sure you log in with aws sso login first/);
+            expect(creds.accessKeyId).to.be.undefined;
+            done();
+          });
+        });
+        it('throws error if cached credentials are missing required fields', function(done) {
+          invalidToken = JSON.stringify({
+            startUrl: 'https://d-abc123.awsapps.com/start',
+            region: 'us-east-1',
+            // missing accessToken
+            expiresAt: '9999999-01-01'
+          });
+          helpers.spyOn(AWS.util, 'readFileSync').andReturn(invalidToken);
+          creds.refresh(function(err) {
+            expect(err.message).to.match(/^Cached credentials are missing required properties. Try running aws sso login./);
             expect(creds.accessKeyId).to.be.undefined;
             done();
           });
@@ -623,6 +660,23 @@
           });
           creds.refresh(function(err) {
             expect(err.message).to.eql('Please log in using "aws sso login"');
+            expect(creds.accessKeyId).to.be.undefined;
+            done();
+          });
+        });
+        it('throws error if sso client returns data with missing properties', function(done) {
+          helpers.spyOn(creds.service, 'getRoleCredentials').andCallFake(function(_, cb) {
+            return cb(null, {
+              roleCredentials: {
+                accessKeyId: 'accessKeyId',
+                // missing secretAccessKey,
+                sessionToken: 'sessionToken',
+                expiration: 'expiration',
+              },
+            });
+          });
+          creds.refresh(function(err) {
+            expect(err.message).to.eql('SSO returns an invalid temporary credential.');
             expect(creds.accessKeyId).to.be.undefined;
             done();
           });
