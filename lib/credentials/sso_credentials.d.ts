@@ -1,5 +1,5 @@
 import {Credentials} from '../credentials';
-import {SSO} from '../sso';
+import SSO = require('../../clients/sso');
 export class SingleSignOnCredentials extends Credentials {
     /**
      * Creates a new SingleSignOnCredentials object.
