@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1091.0-->
+<!--LATEST=2.1092.0-->
 <!--ENTRYINSERT-->
+
+## 2.1092.0
+* bugfix: S3: Fixed a bug that S3 client no longer honor the computeChecksums config introduced in #3799. Previously only the members with httpChecksumRequired trait will be disabled by unseting computeChecksums config. S3 doesn't not honor the config because it has its own logic handling MD5 chechsums.
+* feature: Chime: Chime VoiceConnector Logging APIs will now support MediaMetricLogs. Also CreateMeetingDialOut now returns AccessDeniedException.
+* feature: Connect: This release adds support for enabling Rich Messaging when starting a new chat session via the StartChatContact API. Rich Messaging enables the following formatting options: bold, italics, hyperlinks, bulleted lists, and numbered lists.
+* feature: Lambda: Adds PrincipalOrgID support to AddPermission API. Customers can use it to manage permissions to lambda functions at AWS Organizations level.
+* feature: Outposts: This release adds address filters for listSites
 
 ## 2.1091.0
 * feature: LexModelsV2: This release makes slotTypeId an optional parameter in CreateSlot and UpdateSlot APIs in Amazon Lex V2 for model building. Customers can create and update slots without specifying a slot type id.

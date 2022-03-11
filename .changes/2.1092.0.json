@@ -1,0 +1,27 @@
+[
+    {
+        "type": "bugfix",
+        "category": "S3",
+        "description": "Fixed a bug that S3 client no longer honor the computeChecksums config introduced in #3799. Previously only the members with httpChecksumRequired trait will be disabled by unseting computeChecksums config. S3 doesn't not honor the config because it has its own logic handling MD5 chechsums."
+    },
+    {
+        "type": "feature",
+        "category": "Chime",
+        "description": "Chime VoiceConnector Logging APIs will now support MediaMetricLogs. Also CreateMeetingDialOut now returns AccessDeniedException."
+    },
+    {
+        "type": "feature",
+        "category": "Connect",
+        "description": "This release adds support for enabling Rich Messaging when starting a new chat session via the StartChatContact API. Rich Messaging enables the following formatting options: bold, italics, hyperlinks, bulleted lists, and numbered lists."
+    },
+    {
+        "type": "feature",
+        "category": "Lambda",
+        "description": "Adds PrincipalOrgID support to AddPermission API. Customers can use it to manage permissions to lambda functions at AWS Organizations level."
+    },
+    {
+        "type": "feature",
+        "category": "Outposts",
+        "description": "This release adds address filters for listSites"
+    }
+]

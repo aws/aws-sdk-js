@@ -1476,11 +1476,11 @@ declare class Chime extends Service {
    */
   updateSipMediaApplication(callback?: (err: AWSError, data: Chime.Types.UpdateSipMediaApplicationResponse) => void): Request<Chime.Types.UpdateSipMediaApplicationResponse, AWSError>;
   /**
-   * Allows you to trigger a Lambda function at any time while a call is active, and replace the current actions with new actions returned by the invocation.
+   * Invokes the AWS Lambda function associated with the SIP media application and transaction ID in an update request. The Lambda function can then return a new set of actions.
    */
   updateSipMediaApplicationCall(params: Chime.Types.UpdateSipMediaApplicationCallRequest, callback?: (err: AWSError, data: Chime.Types.UpdateSipMediaApplicationCallResponse) => void): Request<Chime.Types.UpdateSipMediaApplicationCallResponse, AWSError>;
   /**
-   * Allows you to trigger a Lambda function at any time while a call is active, and replace the current actions with new actions returned by the invocation.
+   * Invokes the AWS Lambda function associated with the SIP media application and transaction ID in an update request. The Lambda function can then return a new set of actions.
    */
   updateSipMediaApplicationCall(callback?: (err: AWSError, data: Chime.Types.UpdateSipMediaApplicationCallResponse) => void): Request<Chime.Types.UpdateSipMediaApplicationCallResponse, AWSError>;
   /**
@@ -2383,7 +2383,7 @@ declare namespace Chime {
      */
     ClientRequestToken: ClientRequestToken;
     /**
-     * Tags assigned to the AppInstanceUser.
+     * Tags assigned to the AppInstance.
      */
     Tags?: TagList;
   }
@@ -3505,7 +3505,7 @@ declare namespace Chime {
      */
     PartialResultsStability?: TranscribePartialResultsStability;
     /**
-     * Set this field to PII to identify personal health information in the transcription output.
+     * Set this field to PII to identify personally identifiable information in the transcription output.
      */
     ContentIdentificationType?: TranscribeContentIdentificationType;
     /**
@@ -4773,9 +4773,13 @@ declare namespace Chime {
   }
   export interface LoggingConfiguration {
     /**
-     * When true, enables SIP message logs for sending to Amazon CloudWatch Logs.
+     * Boolean that enables SIP message logs to CloudWatch logs.
      */
     EnableSIPLogs?: Boolean;
+    /**
+     * Boolean that enables logging of detailed media metrics for Voice Connectors to CloudWatch logs.
+     */
+    EnableMediaMetricLogs?: Boolean;
   }
   export interface LogoutUserRequest {
     /**
@@ -4862,7 +4866,7 @@ declare namespace Chime {
      */
     TurnControlUrl?: UriType;
     /**
-     * The event ingestion URL.
+     * The event ingestion URL to which you send client meeting events.
      */
     EventIngestionUrl?: UriType;
   }

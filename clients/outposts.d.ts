@@ -132,11 +132,11 @@ declare class Outposts extends Service {
    */
   listOutposts(callback?: (err: AWSError, data: Outposts.Types.ListOutpostsOutput) => void): Request<Outposts.Types.ListOutpostsOutput, AWSError>;
   /**
-   * Lists the sites for your Amazon Web Services account.
+   * Create a list of the Outpost sites for your Amazon Web Services account. Add operating address filters to your request to return a more specific list of results. Use filters to match site city, country code, or state/region of the operating address.  If you specify multiple filters, the filters are joined with an AND, and the request returns only results that match all of the specified filters.
    */
   listSites(params: Outposts.Types.ListSitesInput, callback?: (err: AWSError, data: Outposts.Types.ListSitesOutput) => void): Request<Outposts.Types.ListSitesOutput, AWSError>;
   /**
-   * Lists the sites for your Amazon Web Services account.
+   * Create a list of the Outpost sites for your Amazon Web Services account. Add operating address filters to your request to return a more specific list of results. Use filters to match site city, country code, or state/region of the operating address.  If you specify multiple filters, the filters are joined with an AND, and the request returns only results that match all of the specified filters.
    */
   listSites(callback?: (err: AWSError, data: Outposts.Types.ListSitesOutput) => void): Request<Outposts.Types.ListSitesOutput, AWSError>;
   /**
@@ -298,9 +298,11 @@ declare namespace Outposts {
   export type CatalogItemStatus = "AVAILABLE"|"DISCONTINUED"|string;
   export type CatalogItemWeightLbs = number;
   export type City = string;
+  export type CityList = City[];
   export type ContactName = string;
   export type ContactPhoneNumber = string;
   export type CountryCode = string;
+  export type CountryCodeList = CountryCode[];
   export interface CreateOrderInput {
     /**
      *  The ID or the Amazon Resource Name (ARN) of the Outpost. 
@@ -588,6 +590,18 @@ declare namespace Outposts {
   export interface ListSitesInput {
     NextToken?: Token;
     MaxResults?: MaxResults1000;
+    /**
+     *  A filter for the country code of the Outpost site.  Filter values are case sensitive. If you specify multiple values for a filter, the values are joined with an OR, and the request returns all results that match any of the specified values.
+     */
+    OperatingAddressCountryCodeFilter?: CountryCodeList;
+    /**
+     *  A filter for the state/region of the Outpost site.  Filter values are case sensitive. If you specify multiple values for a filter, the values are joined with an OR, and the request returns all results that match any of the specified values.
+     */
+    OperatingAddressStateOrRegionFilter?: StateOrRegionList;
+    /**
+     *  A filter for the city of the Outpost site.  Filter values are case sensitive. If you specify multiple values for a filter, the values are joined with an OR, and the request returns all results that match any of the specified values.
+     */
+    OperatingAddressCityFilter?: CityList;
   }
   export interface ListSitesOutput {
     Sites?: siteListDefinition;
@@ -788,6 +802,7 @@ declare namespace Outposts {
   export type SiteNotes = string;
   export type SkuCode = string;
   export type StateOrRegion = string;
+  export type StateOrRegionList = StateOrRegion[];
   export type SupportedHardwareType = "RACK"|"SERVER"|string;
   export type SupportedStorageEnum = "EBS"|"S3"|string;
   export type SupportedStorageList = SupportedStorageEnum[];
