@@ -17,7 +17,7 @@ var allowlist = {
         4,
     ],
     '/credentials/sso_credentials.js': [
-        16,
+        15,
     ],
     '/http.js': [
         5
