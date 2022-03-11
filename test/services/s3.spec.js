@@ -2544,6 +2544,27 @@ describe('AWS.S3', function() {
       }
     };
 
+    it('does not compute checksums if computeChecksums is off', function() {
+      willCompute('putObject', {
+        computeChecksums: false,
+        hash: null
+      });
+    });
+
+    it('does not compute checksums if computeChecksums is on and ContentMD5 is provided', function() {
+      willCompute('putBucketAcl', {
+        computeChecksums: true,
+        hash: '000'
+      });
+    });
+
+    it('computes checksums if computeChecksums is on and ContentMD5 is not provided', function() {
+      willCompute('putBucketAcl', {
+        computeChecksums: true,
+        hash: '1B2M2Y8AsgTpgAmY7PhCfg=='
+      });
+    });
+
     if (AWS.util.isNode()) {
       it('does not compute checksums for Stream objects', function() {
         s3 = new AWS.S3({
