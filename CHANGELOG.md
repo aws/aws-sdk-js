@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1092.0-->
+<!--LATEST=2.1093.0-->
 <!--ENTRYINSERT-->
+
+## 2.1093.0
+* feature: ConfigService: Add resourceType enums for AWS::ECR::PublicRepository and AWS::EC2::LaunchTemplate
+* feature: Kendra: Amazon Kendra now provides a data source connector for Slack. For more information, see https://docs.aws.amazon.com/kendra/latest/dg/data-source-slack.html
+* feature: TimestreamQuery: Amazon Timestream Scheduled Queries now support Timestamp datatype in a multi-measure record.
+* feature: credentials: Add AWS SSO Credentials Provider
 
 ## 2.1092.0
 * bugfix: S3: Fixed a bug that S3 client no longer honor the computeChecksums config introduced in #3799. Previously only the members with httpChecksumRequired trait will be disabled by unseting computeChecksums config. S3 doesn't not honor the config because it has its own logic handling MD5 chechsums.

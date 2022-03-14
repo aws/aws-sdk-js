@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.1092.0',
+	  VERSION: '2.1093.0',
 
 	  /**
 	   * @api private
@@ -6277,6 +6277,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * AWS.CredentialProviderChain.defaultProviders = [
 	 *   function () { return new AWS.EnvironmentCredentials('AWS'); },
 	 *   function () { return new AWS.EnvironmentCredentials('AMAZON'); },
+	 *   function () { return new AWS.SsoCredentials(); },
 	 *   function () { return new AWS.SharedIniFileCredentials(); },
 	 *   function () { return new AWS.ECSCredentials(); },
 	 *   function () { return new AWS.ProcessCredentials(); },

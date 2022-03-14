@@ -762,7 +762,7 @@ declare namespace Kendra {
      */
     CrawlAttachments?: Boolean;
     /**
-     * Defines how attachment metadata fields should be mapped to index fields. Before you can map a field, you must first create an index field with a matching type using the console or the UpdateIndex API. If you specify the AttachentFieldMappings parameter, you must specify at least one field mapping.
+     * Maps attributes or field names of Confluence attachments to Amazon Kendra index field names. To create custom fields, use the UpdateIndex API before you map to Confluence fields. For more information, see Mapping data source fields. The Confluence data source field names must exist in your Confluence custom metadata. If you specify the AttachentFieldMappings parameter, you must specify at least one field mapping.
      */
     AttachmentFieldMappings?: ConfluenceAttachmentFieldMappingsList;
   }
@@ -784,7 +784,7 @@ declare namespace Kendra {
   }
   export interface ConfluenceBlogConfiguration {
     /**
-     * Defines how blog metadata fields should be mapped to index fields. Before you can map a field, you must first create an index field with a matching type using the console or the UpdateIndex API. If you specify the BlogFieldMappings parameter, you must specify at least one field mapping.
+     * Maps attributes or field names of Confluence blogs to Amazon Kendra index field names. To create custom fields, use the UpdateIndex API before you map to Confluence fields. For more information, see Mapping data source fields. The Confluence data source field names must exist in your Confluence custom metadata. If you specify the BlogFieldMappings parameter, you must specify at least one field mapping.
      */
     BlogFieldMappings?: ConfluenceBlogFieldMappingsList;
   }
@@ -810,7 +810,7 @@ declare namespace Kendra {
      */
     ServerUrl: Url;
     /**
-     * The Amazon Resource Name (ARN) of an Secrets Manager secret that contains the key/value pairs required to connect to your Confluence server. The secret must contain a JSON structure with the following keys:   username - The user name or email address of a user with administrative privileges for the Confluence server.   password - The password associated with the user logging in to the Confluence server.  
+     * The Amazon Resource Name (ARN) of an Secrets Manager secret that contains the key-value pairs required to connect to your Confluence server. The secret must contain a JSON structure with the following keys:   username—The user name or email address of a user with administrative privileges for the Confluence server.   password—The password associated with the user logging in to the Confluence server.  
      */
     SecretArn: SecretArn;
     /**
@@ -818,37 +818,37 @@ declare namespace Kendra {
      */
     Version: ConfluenceVersion;
     /**
-     * Specifies configuration information for indexing Confluence spaces.
+     * Configuration information for indexing Confluence spaces.
      */
     SpaceConfiguration?: ConfluenceSpaceConfiguration;
     /**
-     * Specifies configuration information for indexing Confluence pages.
+     * Configuration information for indexing Confluence pages.
      */
     PageConfiguration?: ConfluencePageConfiguration;
     /**
-     *  Specifies configuration information for indexing Confluence blogs.
+     * Configuration information for indexing Confluence blogs.
      */
     BlogConfiguration?: ConfluenceBlogConfiguration;
     /**
-     * Specifies configuration information for indexing attachments to Confluence blogs and pages.
+     * Configuration information for indexing attachments to Confluence blogs and pages.
      */
     AttachmentConfiguration?: ConfluenceAttachmentConfiguration;
     /**
-     * Specifies the information for connecting to an Amazon VPC.
+     * Configuration information for an Amazon Virtual Private Cloud to connect to your Confluence. For more information, see Configuring a VPC.
      */
     VpcConfiguration?: DataSourceVpcConfiguration;
     /**
-     * A list of regular expression patterns that apply to a URL on the Confluence server. An inclusion pattern can apply to a blog post, a page, a space, or an attachment. Items that match the patterns are included in the index. Items that don't match the pattern are excluded from the index. If an item matches both an inclusion pattern and an exclusion pattern, the item isn't included in the index.
+     * A list of regular expression patterns to include certain blog posts, pages, spaces, or attachments in your Confluence. Content that matches the patterns are included in the index. Content that doesn't match the patterns is excluded from the index. If content matches both an inclusion and exclusion pattern, the exclusion pattern takes precedence and the content isn't included in the index.
      */
     InclusionPatterns?: DataSourceInclusionsExclusionsStrings;
     /**
-     * A list of regular expression patterns that apply to a URL on the Confluence server. An exclusion pattern can apply to a blog post, a page, a space, or an attachment. Items that match the pattern are excluded from the index. Items that don't match the pattern are included in the index. If a item matches both an exclusion pattern and an inclusion pattern, the item isn't included in the index.
+     * &gt;A list of regular expression patterns to exclude certain blog posts, pages, spaces, or attachments in your Confluence. Content that matches the patterns are excluded from the index. Content that doesn't match the patterns is included in the index. If content matches both an inclusion and exclusion pattern, the exclusion pattern takes precedence and the content isn't included in the index.
      */
     ExclusionPatterns?: DataSourceInclusionsExclusionsStrings;
   }
   export interface ConfluencePageConfiguration {
     /**
-     * Defines how page metadata fields should be mapped to index fields. Before you can map a field, you must first create an index field with a matching type using the console or the UpdateIndex API. If you specify the PageFieldMappings parameter, you must specify at least one field mapping.
+     * &gt;Maps attributes or field names of Confluence pages to Amazon Kendra index field names. To create custom fields, use the UpdateIndex API before you map to Confluence fields. For more information, see Mapping data source fields. The Confluence data source field names must exist in your Confluence custom metadata. If you specify the PageFieldMappings parameter, you must specify at least one field mapping.
      */
     PageFieldMappings?: ConfluencePageFieldMappingsList;
   }
@@ -856,7 +856,7 @@ declare namespace Kendra {
   export type ConfluencePageFieldName = "AUTHOR"|"CONTENT_STATUS"|"CREATED_DATE"|"DISPLAY_URL"|"ITEM_TYPE"|"LABELS"|"MODIFIED_DATE"|"PARENT_ID"|"SPACE_KEY"|"SPACE_NAME"|"URL"|"VERSION"|string;
   export interface ConfluencePageToIndexFieldMapping {
     /**
-     * The name of the field in the data source. 
+     * The name of the field in the data source.
      */
     DataSourceFieldName?: ConfluencePageFieldName;
     /**
@@ -886,7 +886,7 @@ declare namespace Kendra {
      */
     ExcludeSpaces?: ConfluenceSpaceList;
     /**
-     * Defines how space metadata fields should be mapped to index fields. Before you can map a field, you must first create an index field with a matching type using the console or the UpdateIndex API. If you specify the SpaceFieldMappings parameter, you must specify at least one field mapping.
+     * Maps attributes or field names of Confluence spaces to Amazon Kendra index field names. To create custom fields, use the UpdateIndex API before you map to Confluence fields. For more information, see Mapping data source fields. The Confluence data source field names must exist in your Confluence custom metadata. If you specify the SpaceFieldMappings parameter, you must specify at least one field mapping.
      */
     SpaceFieldMappings?: ConfluenceSpaceFieldMappingsList;
   }
@@ -1258,11 +1258,11 @@ declare namespace Kendra {
      */
     ServiceNowConfiguration?: ServiceNowConfiguration;
     /**
-     * Provides configuration information for connecting to a Confluence data source.
+     * Provides the configuration information to connect to Confluence as your data source.
      */
     ConfluenceConfiguration?: ConfluenceConfiguration;
     /**
-     * Provides the configuration information to connect to Google Drive as your data source. 
+     * Provides the configuration information to connect to Google Drive as your data source.
      */
     GoogleDriveConfiguration?: GoogleDriveConfiguration;
     WebCrawlerConfiguration?: WebCrawlerConfiguration;
@@ -1274,6 +1274,10 @@ declare namespace Kendra {
      * Provides the configuration information to connect to Amazon FSx as your data source.
      */
     FsxConfiguration?: FsxConfiguration;
+    /**
+     * Provides the configuration information to connect to Slack as your data source.
+     */
+    SlackConfiguration?: SlackConfiguration;
   }
   export type DataSourceDateFieldFormat = string;
   export type DataSourceFieldName = string;
@@ -1409,7 +1413,7 @@ declare namespace Kendra {
     IndexFieldName: IndexFieldName;
   }
   export type DataSourceToIndexFieldMappingList = DataSourceToIndexFieldMapping[];
-  export type DataSourceType = "S3"|"SHAREPOINT"|"DATABASE"|"SALESFORCE"|"ONEDRIVE"|"SERVICENOW"|"CUSTOM"|"CONFLUENCE"|"GOOGLEDRIVE"|"WEBCRAWLER"|"WORKDOCS"|"FSX"|string;
+  export type DataSourceType = "S3"|"SHAREPOINT"|"DATABASE"|"SALESFORCE"|"ONEDRIVE"|"SERVICENOW"|"CUSTOM"|"CONFLUENCE"|"GOOGLEDRIVE"|"WEBCRAWLER"|"WORKDOCS"|"FSX"|"SLACK"|string;
   export interface DataSourceVpcConfiguration {
     /**
      * A list of identifiers for subnets within your Amazon VPC. The subnets should be able to connect to each other in the VPC, and they should have outgoing access to the Internet through a NAT device.
@@ -2374,7 +2378,7 @@ declare namespace Kendra {
      */
     FileSystemType: FsxFileSystemType;
     /**
-     * Configuration information for connecting to an Amazon Virtual Private Cloud for your Amazon FSx. Your Amazon FSx instance must reside inside your VPC.
+     * Configuration information for an Amazon Virtual Private Cloud to connect to your Amazon FSx. Your Amazon FSx instance must reside inside your VPC.
      */
     VpcConfiguration: DataSourceVpcConfiguration;
     /**
@@ -2382,11 +2386,11 @@ declare namespace Kendra {
      */
     SecretArn?: SecretArn;
     /**
-     * A list of regular expression patterns to include certain files in your Amazon FSx file system. Files that match the patterns are included in the index. Files that don't match the patterns are excluded from the index. If a file matches both an inclusion pattern and an exclusion pattern, the exclusion pattern takes precedence and the file isn't included in the index.
+     * A list of regular expression patterns to include certain files in your Amazon FSx file system. Files that match the patterns are included in the index. Files that don't match the patterns are excluded from the index. If a file matches both an inclusion and exclusion pattern, the exclusion pattern takes precedence and the file isn't included in the index.
      */
     InclusionPatterns?: DataSourceInclusionsExclusionsStrings;
     /**
-     * A list of regular expression patterns to exclude certain files in your Amazon FSx file system. Files that match the patterns are excluded from the index. Files that don’t match the patterns are included in the index. If a file matches both an inclusion pattern and an exclusion pattern, the exclusion pattern takes precedence and the file isn't included in the index.
+     * A list of regular expression patterns to exclude certain files in your Amazon FSx file system. Files that match the patterns are excluded from the index. Files that don't match the patterns are included in the index. If a file matches both an inclusion and exclusion pattern, the exclusion pattern takes precedence and the file isn't included in the index.
      */
     ExclusionPatterns?: DataSourceInclusionsExclusionsStrings;
     /**
@@ -2465,15 +2469,15 @@ declare namespace Kendra {
      */
     SecretArn: SecretArn;
     /**
-     * A list of regular expression patterns that apply to path on Google Drive. Items that match the pattern are included in the index from both shared drives and users' My Drives. Items that don't match the pattern are excluded from the index. If an item matches both an inclusion pattern and an exclusion pattern, it is excluded from the index.
+     * A list of regular expression patterns to include certain items in your Google Drive, including shared drives and users' My Drives. Items that match the patterns are included in the index. Items that don't match the patterns are excluded from the index. If an item matches both an inclusion and exclusion pattern, the exclusion pattern takes precedence and the item isn't included in the index.
      */
     InclusionPatterns?: DataSourceInclusionsExclusionsStrings;
     /**
-     * A list of regular expression patterns that apply to the path on Google Drive. Items that match the pattern are excluded from the index from both shared drives and users' My Drives. Items that don't match the pattern are included in the index. If an item matches both an exclusion pattern and an inclusion pattern, it is excluded from the index.
+     * A list of regular expression patterns to exclude certain items in your Google Drive, including shared drives and users' My Drives. Items that match the patterns are excluded from the index. Items that don't match the patterns are included in the index. If an item matches both an inclusion and exclusion pattern, the exclusion pattern takes precedence and the item isn't included in the index.
      */
     ExclusionPatterns?: DataSourceInclusionsExclusionsStrings;
     /**
-     * Defines mapping between a field in the Google Drive and a Amazon Kendra index field. If you are using the console, you can define index fields when creating the mapping. If you are using the API, you must first create the field using the UpdateIndex API.
+     * Maps Google Drive data source attributes or field names to Amazon Kendra index field names. To create custom fields, use the UpdateIndex API before you map to Google Drive fields. For more information, see Mapping data source fields. The Google Drive data source field names must exist in your Google Drive custom metadata.
      */
     FieldMappings?: DataSourceToIndexFieldMappingList;
     /**
@@ -2964,6 +2968,7 @@ declare namespace Kendra {
     ThesaurusSummaryItems?: ThesaurusSummaryItems;
   }
   export type Long = number;
+  export type LookBackPeriod = number;
   export type MaxContentSizePerPageInMegaBytes = number;
   export type MaxLinksPerPage = number;
   export type MaxResultsIntegerForListDataSourceSyncJobsRequest = number;
@@ -3017,15 +3022,15 @@ declare namespace Kendra {
      */
     OneDriveUsers: OneDriveUsers;
     /**
-     * A list of regular expression patterns. Documents that match the pattern are included in the index. Documents that don't match the pattern are excluded from the index. If a document matches both an inclusion pattern and an exclusion pattern, the document is not included in the index.  The exclusion pattern is applied to the file name.
+     * A list of regular expression patterns to include certain documents in your OneDrive. Documents that match the patterns are included in the index. Documents that don't match the patterns are excluded from the index. If a document matches both an inclusion and exclusion pattern, the exclusion pattern takes precedence and the document isn't included in the index. The pattern is applied to the file name.
      */
     InclusionPatterns?: DataSourceInclusionsExclusionsStrings;
     /**
-     * List of regular expressions applied to documents. Items that match the exclusion pattern are not indexed. If you provide both an inclusion pattern and an exclusion pattern, any item that matches the exclusion pattern isn't indexed.  The exclusion pattern is applied to the file name.
+     * A list of regular expression patterns to exclude certain documents in your OneDrive. Documents that match the patterns are excluded from the index. Documents that don't match the patterns are included in the index. If a document matches both an inclusion and exclusion pattern, the exclusion pattern takes precedence and the document isn't included in the index. The pattern is applied to the file name.
      */
     ExclusionPatterns?: DataSourceInclusionsExclusionsStrings;
     /**
-     * A list of DataSourceToIndexFieldMapping objects that map Microsoft OneDrive fields to custom fields in the Amazon Kendra index. You must first create the index fields before you map OneDrive fields.
+     * A list of DataSourceToIndexFieldMapping objects that map OneDrive data source attributes or field names to Amazon Kendra index field names. To create custom fields, use the UpdateIndex API before you map to OneDrive fields. For more information, see Mapping data source fields. The OneDrive data source field names must exist in your OneDrive custom metadata.
      */
     FieldMappings?: DataSourceToIndexFieldMappingList;
     /**
@@ -3091,6 +3096,7 @@ declare namespace Kendra {
   export type PrincipalName = string;
   export type PrincipalOrderingId = number;
   export type PrincipalType = "USER"|"GROUP"|string;
+  export type PrivateChannelFilter = String[];
   export interface ProxyConfiguration {
     /**
      * The name of the website host you want to connect to via a web proxy server. For example, the host name of https://a.example.com/page1.html is "a.example.com".
@@ -3105,6 +3111,7 @@ declare namespace Kendra {
      */
     Credentials?: SecretArn;
   }
+  export type PublicChannelFilter = String[];
   export interface PutPrincipalMappingRequest {
     /**
      * The identifier of the index you want to map users to their groups.
@@ -3393,15 +3400,15 @@ declare namespace Kendra {
      */
     SecretArn: SecretArn;
     /**
-     * Specifies the Salesforce standard objects that Amazon Kendra indexes.
+     * Configuration of the Salesforce standard objects that Amazon Kendra indexes.
      */
     StandardObjectConfigurations?: SalesforceStandardObjectConfigurationList;
     /**
-     * Specifies configuration information for the knowledge article types that Amazon Kendra indexes. Amazon Kendra indexes standard knowledge articles and the standard fields of knowledge articles, or the custom fields of custom knowledge articles, but not both.
+     * Configuration information for the knowledge article types that Amazon Kendra indexes. Amazon Kendra indexes standard knowledge articles and the standard fields of knowledge articles, or the custom fields of custom knowledge articles, but not both.
      */
     KnowledgeArticleConfiguration?: SalesforceKnowledgeArticleConfiguration;
     /**
-     * Specifies configuration information for Salesforce chatter feeds.
+     * Configuration information for Salesforce chatter feeds.
      */
     ChatterFeedConfiguration?: SalesforceChatterFeedConfiguration;
     /**
@@ -3413,11 +3420,11 @@ declare namespace Kendra {
      */
     StandardObjectAttachmentConfiguration?: SalesforceStandardObjectAttachmentConfiguration;
     /**
-     * A list of regular expression patterns. Documents that match the patterns are included in the index. Documents that don't match the patterns are excluded from the index. If a document matches both an inclusion pattern and an exclusion pattern, the document is not included in the index. The regex is applied to the name of the attached file.
+     * A list of regular expression patterns to include certain documents in your Salesforce. Documents that match the patterns are included in the index. Documents that don't match the patterns are excluded from the index. If a document matches both an inclusion and exclusion pattern, the exclusion pattern takes precedence and the document isn't included in the index. The pattern is applied to the name of the attached file.
      */
     IncludeAttachmentFilePatterns?: DataSourceInclusionsExclusionsStrings;
     /**
-     * A list of regular expression patterns. Documents that match the patterns are excluded from the index. Documents that don't match the patterns are included in the index. If a document matches both an exclusion pattern and an inclusion pattern, the document is not included in the index. The regex is applied to the name of the attached file.
+     * A list of regular expression patterns to exclude certain documents in your Salesforce. Documents that match the patterns are excluded from the index. Documents that don't match the patterns are included in the index. If a document matches both an inclusion and exclusion pattern, the exclusion pattern takes precedence and the document isn't included in the index. The pattern is applied to the name of the attached file.
      */
     ExcludeAttachmentFilePatterns?: DataSourceInclusionsExclusionsStrings;
   }
@@ -3435,7 +3442,7 @@ declare namespace Kendra {
      */
     DocumentTitleFieldName?: DataSourceFieldName;
     /**
-     * One or more objects that map fields in the custom knowledge article to fields in the Amazon Kendra index.
+     * Maps attributes or field names of the custom knowledge article to Amazon Kendra index field names. To create custom fields, use the UpdateIndex API before you map to Salesforce fields. For more information, see Mapping data source fields. The Salesforce data source field names must exist in your Salesforce custom metadata.
      */
     FieldMappings?: DataSourceToIndexFieldMappingList;
   }
@@ -3467,7 +3474,7 @@ declare namespace Kendra {
      */
     DocumentTitleFieldName?: DataSourceFieldName;
     /**
-     * One or more objects that map fields in the knowledge article to Amazon Kendra index fields. The index field must exist before you can map a Salesforce field to it.
+     * Maps attributes or field names of the knowledge article to Amazon Kendra index field names. To create custom fields, use the UpdateIndex API before you map to Salesforce fields. For more information, see Mapping data source fields. The Salesforce data source field names must exist in your Salesforce custom metadata.
      */
     FieldMappings?: DataSourceToIndexFieldMappingList;
   }
@@ -3495,7 +3502,7 @@ declare namespace Kendra {
      */
     DocumentTitleFieldName?: DataSourceFieldName;
     /**
-     * One or more objects that map fields in the standard object to Amazon Kendra index fields. The index field must exist before you can map a Salesforce field to it.
+     * Maps attributes or field names of the standard object to Amazon Kendra index field names. To create custom fields, use the UpdateIndex API before you map to Salesforce fields. For more information, see Mapping data source fields. The Salesforce data source field names must exist in your Salesforce custom metadata.
      */
     FieldMappings?: DataSourceToIndexFieldMappingList;
   }
@@ -3571,7 +3578,7 @@ declare namespace Kendra {
      */
     ServiceCatalogConfiguration?: ServiceNowServiceCatalogConfiguration;
     /**
-     * Determines the type of authentication used to connect to the ServiceNow instance. If you choose HTTP_BASIC, Amazon Kendra is authenticated using the user name and password provided in the Secrets Manager secret in the SecretArn field. When you choose OAUTH2, Amazon Kendra is authenticated using the OAuth token and secret provided in the Secrets Manager secret, and the user name and password are used to determine which information Amazon Kendra has access to. When you use OAUTH2 authentication, you must generate a token and a client secret using the ServiceNow console. For more information, see Using a ServiceNow data source.
+     * The type of authentication used to connect to the ServiceNow instance. If you choose HTTP_BASIC, Amazon Kendra is authenticated using the user name and password provided in the Secrets Manager secret in the SecretArn field. When you choose OAUTH2, Amazon Kendra is authenticated using the OAuth token and secret provided in the Secrets Manager secret, and the user name and password are used to determine which information Amazon Kendra has access to. When you use OAUTH2 authentication, you must generate a token and a client secret using the ServiceNow console. For more information, see Using a ServiceNow data source.
      */
     AuthenticationType?: ServiceNowAuthenticationType;
   }
@@ -3582,11 +3589,11 @@ declare namespace Kendra {
      */
     CrawlAttachments?: Boolean;
     /**
-     * List of regular expressions applied to knowledge articles. Items that don't match the inclusion pattern are not indexed. The regex is applied to the field specified in the PatternTargetField.
+     * A list of regular expression patterns to include certain attachments of knowledge articles in your ServiceNow. Item that match the patterns are included in the index. Items that don't match the patterns are excluded from the index. If an item matches both an inclusion and exclusion pattern, the exclusion pattern takes precedence and the item isn't included in the index. The regex is applied to the field specified in the PatternTargetField.
      */
     IncludeAttachmentFilePatterns?: DataSourceInclusionsExclusionsStrings;
     /**
-     * List of regular expressions applied to knowledge articles. Items that don't match the inclusion pattern are not indexed. The regex is applied to the field specified in the PatternTargetField 
+     * A list of regular expression patterns to exclude certain attachments of knowledge articles in your ServiceNow. Item that match the patterns are excluded from the index. Items that don't match the patterns are included in the index. If an item matches both an inclusion and exclusion pattern, the exclusion pattern takes precedence and the item isn't included in the index. The regex is applied to the field specified in the PatternTargetField.
      */
     ExcludeAttachmentFilePatterns?: DataSourceInclusionsExclusionsStrings;
     /**
@@ -3598,7 +3605,7 @@ declare namespace Kendra {
      */
     DocumentTitleFieldName?: DataSourceFieldName;
     /**
-     * Mapping between ServiceNow fields and Amazon Kendra index fields. You must create the index field before you map the field.
+     * Maps attributes or field names of knoweldge articles to Amazon Kendra index field names. To create custom fields, use the UpdateIndex API before you map to ServiceNow fields. For more information, see Mapping data source fields. The ServiceNow data source field names must exist in your ServiceNow custom metadata.
      */
     FieldMappings?: DataSourceToIndexFieldMappingList;
     /**
@@ -3613,11 +3620,11 @@ declare namespace Kendra {
      */
     CrawlAttachments?: Boolean;
     /**
-     * A list of regular expression patterns. Documents that match the patterns are included in the index. Documents that don't match the patterns are excluded from the index. If a document matches both an exclusion pattern and an inclusion pattern, the document is not included in the index. The regex is applied to the file name of the attachment.
+     * A list of regular expression patterns to include certain attachments of catalogs in your ServiceNow. Item that match the patterns are included in the index. Items that don't match the patterns are excluded from the index. If an item matches both an inclusion and exclusion pattern, the exclusion pattern takes precedence and the item isn't included in the index. The regex is applied to the file name of the attachment.
      */
     IncludeAttachmentFilePatterns?: DataSourceInclusionsExclusionsStrings;
     /**
-     * A list of regular expression patterns. Documents that match the patterns are excluded from the index. Documents that don't match the patterns are included in the index. If a document matches both an exclusion pattern and an inclusion pattern, the document is not included in the index. The regex is applied to the file name of the attachment.
+     * A list of regular expression patterns to exclude certain attachments of catalogs in your ServiceNow. Item that match the patterns are excluded from the index. Items that don't match the patterns are included in the index. If an item matches both an inclusion and exclusion pattern, the exclusion pattern takes precedence and the item isn't included in the index. The regex is applied to the file name of the attachment.
      */
     ExcludeAttachmentFilePatterns?: DataSourceInclusionsExclusionsStrings;
     /**
@@ -3629,7 +3636,7 @@ declare namespace Kendra {
      */
     DocumentTitleFieldName?: DataSourceFieldName;
     /**
-     * Mapping between ServiceNow fields and Amazon Kendra index fields. You must create the index field before you map the field.
+     * Maps attributes or field names of catalogs to Amazon Kendra index field names. To create custom fields, use the UpdateIndex API before you map to ServiceNow fields. For more information, see Mapping data source fields. The ServiceNow data source field names must exist in your ServiceNow custom metadata.
      */
     FieldMappings?: DataSourceToIndexFieldMappingList;
   }
@@ -3651,20 +3658,20 @@ declare namespace Kendra {
      */
     CrawlAttachments?: Boolean;
     /**
-     * Set to TRUE to use the Microsoft SharePoint change log to determine the documents that need to be updated in the index. Depending on the size of the SharePoint change log, it may take longer for Amazon Kendra to use the change log than it takes it to determine the changed documents using the Amazon Kendra document crawler.
+     *  TRUE to use the SharePoint change log to determine which documents require updating in the index. Depending on the change log's size, it may take longer for Amazon Kendra to use the change log than to scan all of your documents in SharePoint.
      */
     UseChangeLog?: Boolean;
     /**
-     * A list of regular expression patterns. Documents that match the patterns are included in the index. Documents that don't match the patterns are excluded from the index. If a document matches both an inclusion pattern and an exclusion pattern, the document is not included in the index. The regex is applied to the display URL of the SharePoint document.
+     * A list of regular expression patterns to include certain documents in your SharePoint. Documents that match the patterns are included in the index. Documents that don't match the patterns are excluded from the index. If a document matches both an inclusion and exclusion pattern, the exclusion pattern takes precedence and the document isn't included in the index. The regex is applied to the display URL of the SharePoint document.
      */
     InclusionPatterns?: DataSourceInclusionsExclusionsStrings;
     /**
-     * A list of regular expression patterns. Documents that match the patterns are excluded from the index. Documents that don't match the patterns are included in the index. If a document matches both an exclusion pattern and an inclusion pattern, the document is not included in the index. The regex is applied to the display URL of the SharePoint document.
+     * A list of regular expression patterns to exclude certain documents in your SharePoint. Documents that match the patterns are excluded from the index. Documents that don't match the patterns are included in the index. If a document matches both an inclusion and exclusion pattern, the exclusion pattern takes precedence and the document isn't included in the index. The regex is applied to the display URL of the SharePoint document.
      */
     ExclusionPatterns?: DataSourceInclusionsExclusionsStrings;
     VpcConfiguration?: DataSourceVpcConfiguration;
     /**
-     * A list of DataSourceToIndexFieldMapping objects that map Microsoft SharePoint attributes to custom fields in the Amazon Kendra index. You must first create the index fields using the UpdateIndex API before you map SharePoint attributes. For more information, see Mapping Data Source Fields.
+     * A list of DataSourceToIndexFieldMapping objects that map SharePoint data source attributes or field names to Amazon Kendra index field names. To create custom fields, use the UpdateIndex API before you map to SharePoint fields. For more information, see Mapping data source fields. The SharePoint data source field names must exist in your SharePoint custom metadata.
      */
     FieldMappings?: DataSourceToIndexFieldMappingList;
     /**
@@ -3680,6 +3687,7 @@ declare namespace Kendra {
   export type SharePointUrlList = Url[];
   export type SharePointVersion = "SHAREPOINT_2013"|"SHAREPOINT_2016"|"SHAREPOINT_ONLINE"|string;
   export type SharedDriveId = string;
+  export type SinceCrawlDate = string;
   export type SiteMap = string;
   export interface SiteMapsConfiguration {
     /**
@@ -3688,6 +3696,66 @@ declare namespace Kendra {
     SiteMaps: SiteMapsList;
   }
   export type SiteMapsList = SiteMap[];
+  export interface SlackConfiguration {
+    /**
+     * The identifier of the team in the Slack workspace. For example, T0123456789. You can find your team ID in the URL of the main page of your Slack workspace. When you log in to Slack via a browser, you are directed to the URL of the main page. For example, https://app.slack.com/client/T0123456789/....
+     */
+    TeamId: TeamId;
+    /**
+     * The Amazon Resource Name (ARN) of an Secrets Manager secret that contains the key-value pairs required to connect to your Slack workspace team. The secret must contain a JSON structure with the following keys:   slackToken—The user or bot token created in Slack. For more information on creating a token in Slack, see Authentication for a Slack data source.  
+     */
+    SecretArn: SecretArn;
+    /**
+     * Configuration information for an Amazon Virtual Private Cloud to connect to your Slack. For more information, see Configuring a VPC.
+     */
+    VpcConfiguration?: DataSourceVpcConfiguration;
+    /**
+     * Specify whether to index public channels, private channels, group messages, and direct messages. You can specify one or more of these options.
+     */
+    SlackEntityList: SlackEntityList;
+    /**
+     *  TRUE to use the Slack change log to determine which documents require updating in the index. Depending on the Slack change log's size, it may take longer for Amazon Kendra to use the change log than to scan all of your documents in Slack.
+     */
+    UseChangeLog?: Boolean;
+    /**
+     *  TRUE to index bot messages from your Slack workspace team.
+     */
+    CrawlBotMessage?: Boolean;
+    /**
+     *  TRUE to exclude archived messages to index from your Slack workspace team.
+     */
+    ExcludeArchived?: Boolean;
+    /**
+     * The date to start crawling your data from your Slack workspace team. The date must follow this format: yyyy-mm-dd.
+     */
+    SinceCrawlDate: SinceCrawlDate;
+    /**
+     * The number of hours for change log to look back from when you last synchronized your data. You can look back up to 7 days or 168 hours. Change log updates your index only if new content was added since you last synced your data. Updated or deleted content from before you last synced does not get updated in your index. To capture updated or deleted content before you last synced, set the LookBackPeriod to the number of hours you want change log to look back.
+     */
+    LookBackPeriod?: LookBackPeriod;
+    /**
+     * The list of private channel names from your Slack workspace team. You use this if you want to index specific private channels, not all private channels. You can also use regular expression patterns to filter private channels.
+     */
+    PrivateChannelFilter?: PrivateChannelFilter;
+    /**
+     * The list of public channel names to index from your Slack workspace team. You use this if you want to index specific public channels, not all public channels. You can also use regular expression patterns to filter public channels.
+     */
+    PublicChannelFilter?: PublicChannelFilter;
+    /**
+     * A list of regular expression patterns to include certain attached files in your Slack workspace team. Files that match the patterns are included in the index. Files that don't match the patterns are excluded from the index. If a file matches both an inclusion and exclusion pattern, the exclusion pattern takes precedence and the file isn't included in the index.
+     */
+    InclusionPatterns?: DataSourceInclusionsExclusionsStrings;
+    /**
+     * A list of regular expression patterns to exclude certain attached files in your Slack workspace team. Files that match the patterns are excluded from the index. Files that don’t match the patterns are included in the index. If a file matches both an inclusion and exclusion pattern, the exclusion pattern takes precedence and the file isn't included in the index.
+     */
+    ExclusionPatterns?: DataSourceInclusionsExclusionsStrings;
+    /**
+     * A list of DataSourceToIndexFieldMapping objects that map Slack data source attributes or field names to Amazon Kendra index field names. To create custom fields, use the UpdateIndex API before you map to Slack fields. For more information, see Mapping data source fields. The Slack data source field names must exist in your Slack custom metadata.
+     */
+    FieldMappings?: DataSourceToIndexFieldMappingList;
+  }
+  export type SlackEntity = "PUBLIC_CHANNEL"|"PRIVATE_CHANNEL"|"GROUP_MESSAGE"|"DIRECT_MESSAGE"|string;
+  export type SlackEntityList = SlackEntity[];
   export type SnapshotsDataHeaderFields = String[];
   export type SnapshotsDataRecord = String[];
   export type SnapshotsDataRecords = SnapshotsDataRecord[];
@@ -3858,6 +3926,7 @@ declare namespace Kendra {
   export interface TagResourceResponse {
   }
   export type TagValue = string;
+  export type TeamId = string;
   export type TenantDomain = string;
   export interface TextDocumentStatistics {
     /**
@@ -4203,11 +4272,11 @@ declare namespace Kendra {
      */
     MaxUrlsPerMinuteCrawlRate?: MaxUrlsPerMinuteCrawlRate;
     /**
-     * The regular expression pattern to include certain URLs to crawl. If there is a regular expression pattern to exclude certain URLs that conflicts with the include pattern, the exclude pattern takes precedence.
+     * A list of regular expression patterns to include certain URLs to crawl. URLs that match the patterns are included in the index. URLs that don't match the patterns are excluded from the index. If a URL matches both an inclusion and exclusion pattern, the exclusion pattern takes precedence and the URL file isn't included in the index.
      */
     UrlInclusionPatterns?: DataSourceInclusionsExclusionsStrings;
     /**
-     * The regular expression pattern to exclude certain URLs to crawl. If there is a regular expression pattern to include certain URLs that conflicts with the exclude pattern, the exclude pattern takes precedence.
+     * A list of regular expression patterns to exclude certain URLs to crawl. URLs that match the patterns are excluded from the index. URLs that don't match the patterns are included in the index. If a URL matches both an inclusion and exclusion pattern, the exclusion pattern takes precedence and the URL file isn't included in the index.
      */
     UrlExclusionPatterns?: DataSourceInclusionsExclusionsStrings;
     /**
@@ -4230,19 +4299,19 @@ declare namespace Kendra {
      */
     CrawlComments?: Boolean;
     /**
-     *  TRUE to use the change logs to update documents in your index instead of scanning all documents. If you are syncing your Amazon WorkDocs data source with your index for the first time, all documents are scanned. After your first sync, you can use the change logs to update your documents in your index for future syncs. The default is set to FALSE.
+     *  TRUE to use the Amazon WorkDocs change log to determine which documents require updating in the index. Depending on the change log's size, it may take longer for Amazon Kendra to use the change log than to scan all of your documents in Amazon WorkDocs.
      */
     UseChangeLog?: Boolean;
     /**
-     * A list of regular expression patterns to include certain files in your Amazon WorkDocs site repository. Files that match the patterns are included in the index. Files that don't match the patterns are excluded from the index. If a file matches both an inclusion pattern and an exclusion pattern, the exclusion pattern takes precedence and the file isn’t included in the index.
+     * A list of regular expression patterns to include certain files in your Amazon WorkDocs site repository. Files that match the patterns are included in the index. Files that don't match the patterns are excluded from the index. If a file matches both an inclusion and exclusion pattern, the exclusion pattern takes precedence and the file isn't included in the index.
      */
     InclusionPatterns?: DataSourceInclusionsExclusionsStrings;
     /**
-     * A list of regular expression patterns to exclude certain files in your Amazon WorkDocs site repository. Files that match the patterns are excluded from the index. Files that don’t match the patterns are included in the index. If a file matches both an inclusion pattern and an exclusion pattern, the exclusion pattern takes precedence and the file isn’t included in the index.
+     * A list of regular expression patterns to exclude certain files in your Amazon WorkDocs site repository. Files that match the patterns are excluded from the index. Files that don’t match the patterns are included in the index. If a file matches both an inclusion and exclusion pattern, the exclusion pattern takes precedence and the file isn't included in the index.
      */
     ExclusionPatterns?: DataSourceInclusionsExclusionsStrings;
     /**
-     * A list of DataSourceToIndexFieldMapping objects that map Amazon WorkDocs field names to custom index field names in Amazon Kendra. You must first create the custom index fields using the UpdateIndex API before you map to Amazon WorkDocs fields. For more information, see Mapping Data Source Fields. The Amazon WorkDocs data source field names need to exist in your Amazon WorkDocs custom metadata.
+     * A list of DataSourceToIndexFieldMapping objects that map Amazon WorkDocs data source attributes or field names to Amazon Kendra index field names. To create custom fields, use the UpdateIndex API before you map to Amazon WorkDocs fields. For more information, see Mapping data source fields. The Amazon WorkDocs data source field names must exist in your Amazon WorkDocs custom metadata.
      */
     FieldMappings?: DataSourceToIndexFieldMappingList;
   }

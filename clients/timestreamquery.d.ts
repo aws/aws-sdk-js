@@ -544,7 +544,7 @@ declare namespace TimestreamQuery {
      */
     ObjectKey?: S3ObjectKey;
   }
-  export type ScalarMeasureValueType = "BIGINT"|"BOOLEAN"|"DOUBLE"|"VARCHAR"|string;
+  export type ScalarMeasureValueType = "BIGINT"|"BOOLEAN"|"DOUBLE"|"VARCHAR"|"TIMESTAMP"|string;
   export type ScalarType = "VARCHAR"|"BOOLEAN"|"BIGINT"|"DOUBLE"|"TIMESTAMP"|"DATE"|"TIME"|"INTERVAL_DAY_TO_SECOND"|"INTERVAL_YEAR_TO_MONTH"|"UNKNOWN"|"INTEGER"|string;
   export type ScalarValue = string;
   export interface ScheduleConfiguration {
