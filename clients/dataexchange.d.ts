@@ -172,6 +172,14 @@ declare class DataExchange extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: DataExchange.Types.ListTagsForResourceResponse) => void): Request<DataExchange.Types.ListTagsForResourceResponse, AWSError>;
   /**
+   * This operation revokes subscribers' access to a revision.
+   */
+  revokeRevision(params: DataExchange.Types.RevokeRevisionRequest, callback?: (err: AWSError, data: DataExchange.Types.RevokeRevisionResponse) => void): Request<DataExchange.Types.RevokeRevisionResponse, AWSError>;
+  /**
+   * This operation revokes subscribers' access to a revision.
+   */
+  revokeRevision(callback?: (err: AWSError, data: DataExchange.Types.RevokeRevisionResponse) => void): Request<DataExchange.Types.RevokeRevisionResponse, AWSError>;
+  /**
    * This operation invokes an API Gateway API asset. The request is proxied to the provider’s API Gateway API.
    */
   sendApiAsset(params: DataExchange.Types.SendApiAssetRequest, callback?: (err: AWSError, data: DataExchange.Types.SendApiAssetResponse) => void): Request<DataExchange.Types.SendApiAssetResponse, AWSError>;
@@ -587,6 +595,18 @@ declare namespace DataExchange {
      * The date and time that the revision was last updated, in ISO 8601 format.
      */
     UpdatedAt?: Timestamp;
+    /**
+     * A required comment to inform subscribers of the reason their access to the revision was revoked.
+     */
+    RevocationComment?: __stringMin10Max512;
+    /**
+     * A status indicating that subscribers' access to the revision was revoked.
+     */
+    Revoked?: __boolean;
+    /**
+     * The date and time that the revision was revoked, in ISO 8601 format.
+     */
+    RevokedAt?: Timestamp;
   }
   export interface DataSetEntry {
     /**
@@ -1050,6 +1070,18 @@ declare namespace DataExchange {
      * The date and time that the revision was last updated, in ISO 8601 format.
      */
     UpdatedAt?: Timestamp;
+    /**
+     * A required comment to inform subscribers of the reason their access to the revision was revoked.
+     */
+    RevocationComment?: __stringMin10Max512;
+    /**
+     * A status indicating that subscribers' access to the revision was revoked.
+     */
+    Revoked?: __boolean;
+    /**
+     * The date and time that the revision was revoked, in ISO 8601 format.
+     */
+    RevokedAt?: Timestamp;
   }
   export type Id = string;
   export interface ImportAssetFromApiGatewayApiRequestDetails {
@@ -1582,12 +1614,84 @@ declare namespace DataExchange {
      * The date and time that the revision was last updated, in ISO 8601 format.
      */
     UpdatedAt: Timestamp;
+    /**
+     * A required comment to inform subscribers of the reason their access to the revision was revoked.
+     */
+    RevocationComment?: __stringMin10Max512;
+    /**
+     * A status indicating that subscribers' access to the revision was revoked.
+     */
+    Revoked?: __boolean;
+    /**
+     * The date and time that the revision was revoked, in ISO 8601 format.
+     */
+    RevokedAt?: Timestamp;
   }
   export interface RevisionPublished {
     /**
      * The data set ID of the published revision.
      */
     DataSetId: Id;
+  }
+  export interface RevokeRevisionRequest {
+    /**
+     * The unique identifier for a data set.
+     */
+    DataSetId: __string;
+    /**
+     * The unique identifier for a revision.
+     */
+    RevisionId: __string;
+    /**
+     * A required comment to inform subscribers of the reason their access to the revision was revoked.
+     */
+    RevocationComment: __stringMin10Max512;
+  }
+  export interface RevokeRevisionResponse {
+    /**
+     * The ARN for the revision.
+     */
+    Arn?: Arn;
+    /**
+     * An optional comment about the revision.
+     */
+    Comment?: __stringMin0Max16384;
+    /**
+     * The date and time that the revision was created, in ISO 8601 format.
+     */
+    CreatedAt?: Timestamp;
+    /**
+     * The unique identifier for the data set associated with this revision.
+     */
+    DataSetId?: Id;
+    /**
+     * To publish a revision to a data set in a product, the revision must first be finalized. Finalizing a revision tells AWS Data Exchange that changes to the assets in the revision are complete. After it's in this read-only state, you can publish the revision to your products. Finalized revisions can be published through the AWS Data Exchange console or the AWS Marketplace Catalog API, using the StartChangeSet AWS Marketplace Catalog API action. When using the API, revisions are uniquely identified by their ARN.
+     */
+    Finalized?: __boolean;
+    /**
+     * The unique identifier for the revision.
+     */
+    Id?: Id;
+    /**
+     * The revision ID of the owned revision corresponding to the entitled revision being viewed. This parameter is returned when a revision owner is viewing the entitled copy of its owned revision.
+     */
+    SourceId?: Id;
+    /**
+     * The date and time that the revision was last updated, in ISO 8601 format.
+     */
+    UpdatedAt?: Timestamp;
+    /**
+     * A required comment to inform subscribers of the reason their access to the revision was revoked.
+     */
+    RevocationComment?: __stringMin10Max512;
+    /**
+     * A status indicating that subscribers' access to the revision was revoked.
+     */
+    Revoked?: __boolean;
+    /**
+     * The date and time that the revision was revoked, in ISO 8601 format.
+     */
+    RevokedAt?: Timestamp;
   }
   export interface S3SnapshotAsset {
     /**
@@ -1874,6 +1978,18 @@ declare namespace DataExchange {
      * The date and time that the revision was last updated, in ISO 8601 format.
      */
     UpdatedAt?: Timestamp;
+    /**
+     * A required comment to inform subscribers of the reason their access to the revision was revoked.
+     */
+    RevocationComment?: __stringMin10Max512;
+    /**
+     * A status indicating that subscribers' access to the revision was revoked.
+     */
+    Revoked?: __boolean;
+    /**
+     * The date and time that the revision was revoked, in ISO 8601 format.
+     */
+    RevokedAt?: Timestamp;
   }
   export type __boolean = boolean;
   export type __double = number;
@@ -1889,6 +2005,7 @@ declare namespace DataExchange {
   export type __string = string;
   export type __stringMin0Max16384 = string;
   export type __stringMin24Max24PatternAZaZ094AZaZ092AZaZ093 = string;
+  export type __stringMin10Max512 = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

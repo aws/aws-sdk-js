@@ -3677,11 +3677,11 @@ declare class EC2 extends Service {
    */
   moveAddressToVpc(callback?: (err: AWSError, data: EC2.Types.MoveAddressToVpcResult) => void): Request<EC2.Types.MoveAddressToVpcResult, AWSError>;
   /**
-   * Move an BYOIP IPv4 CIDR to IPAM from a public IPv4 pool.
+   * Move an BYOIP IPv4 CIDR to IPAM from a public IPv4 pool. If you already have an IPv4 BYOIP CIDR with Amazon Web Services, you can move the CIDR to IPAM from a public IPv4 pool. You cannot move an IPv6 CIDR to IPAM. If you are bringing a new IP address to Amazon Web Services for the first time, complete the steps in Tutorial: BYOIP address CIDRs to IPAM.
    */
   moveByoipCidrToIpam(params: EC2.Types.MoveByoipCidrToIpamRequest, callback?: (err: AWSError, data: EC2.Types.MoveByoipCidrToIpamResult) => void): Request<EC2.Types.MoveByoipCidrToIpamResult, AWSError>;
   /**
-   * Move an BYOIP IPv4 CIDR to IPAM from a public IPv4 pool.
+   * Move an BYOIP IPv4 CIDR to IPAM from a public IPv4 pool. If you already have an IPv4 BYOIP CIDR with Amazon Web Services, you can move the CIDR to IPAM from a public IPv4 pool. You cannot move an IPv6 CIDR to IPAM. If you are bringing a new IP address to Amazon Web Services for the first time, complete the steps in Tutorial: BYOIP address CIDRs to IPAM.
    */
   moveByoipCidrToIpam(callback?: (err: AWSError, data: EC2.Types.MoveByoipCidrToIpamResult) => void): Request<EC2.Types.MoveByoipCidrToIpamResult, AWSError>;
   /**
@@ -3693,19 +3693,19 @@ declare class EC2 extends Service {
    */
   provisionByoipCidr(callback?: (err: AWSError, data: EC2.Types.ProvisionByoipCidrResult) => void): Request<EC2.Types.ProvisionByoipCidrResult, AWSError>;
   /**
-   * Provision a CIDR to an IPAM pool. You can use thsi action to provision new CIDRs to a top-level pool or to transfer a CIDR from a top-level pool to a pool within it. For more information, see Provision CIDRs to pools in the Amazon VPC IPAM User Guide. 
+   * Provision a CIDR to an IPAM pool. You can use this action to provision new CIDRs to a top-level pool or to transfer a CIDR from a top-level pool to a pool within it. For more information, see Provision CIDRs to pools in the Amazon VPC IPAM User Guide. 
    */
   provisionIpamPoolCidr(params: EC2.Types.ProvisionIpamPoolCidrRequest, callback?: (err: AWSError, data: EC2.Types.ProvisionIpamPoolCidrResult) => void): Request<EC2.Types.ProvisionIpamPoolCidrResult, AWSError>;
   /**
-   * Provision a CIDR to an IPAM pool. You can use thsi action to provision new CIDRs to a top-level pool or to transfer a CIDR from a top-level pool to a pool within it. For more information, see Provision CIDRs to pools in the Amazon VPC IPAM User Guide. 
+   * Provision a CIDR to an IPAM pool. You can use this action to provision new CIDRs to a top-level pool or to transfer a CIDR from a top-level pool to a pool within it. For more information, see Provision CIDRs to pools in the Amazon VPC IPAM User Guide. 
    */
   provisionIpamPoolCidr(callback?: (err: AWSError, data: EC2.Types.ProvisionIpamPoolCidrResult) => void): Request<EC2.Types.ProvisionIpamPoolCidrResult, AWSError>;
   /**
-   * Provision a CIDR to a public IPv4 pool. For more information about IPAM, see What is IPAM? in the Amazon VPC IPAM User Guide. 
+   * Provision a CIDR to a public IPv4 pool. For more information about IPAM, see What is IPAM? in the Amazon VPC IPAM User Guide.
    */
   provisionPublicIpv4PoolCidr(params: EC2.Types.ProvisionPublicIpv4PoolCidrRequest, callback?: (err: AWSError, data: EC2.Types.ProvisionPublicIpv4PoolCidrResult) => void): Request<EC2.Types.ProvisionPublicIpv4PoolCidrResult, AWSError>;
   /**
-   * Provision a CIDR to a public IPv4 pool. For more information about IPAM, see What is IPAM? in the Amazon VPC IPAM User Guide. 
+   * Provision a CIDR to a public IPv4 pool. For more information about IPAM, see What is IPAM? in the Amazon VPC IPAM User Guide.
    */
   provisionPublicIpv4PoolCidr(callback?: (err: AWSError, data: EC2.Types.ProvisionPublicIpv4PoolCidrResult) => void): Request<EC2.Types.ProvisionPublicIpv4PoolCidrResult, AWSError>;
   /**
@@ -10256,6 +10256,10 @@ declare namespace EC2 {
      * The ID of the IPAM to delete.
      */
     IpamId: IpamId;
+    /**
+     * Enables you to quickly delete an IPAM, private scopes, pools in private scopes, and any allocations in the pools in private scopes. You cannot delete the IPAM with this option if there is a pool in your public scope. If you use this option, IPAM does the following:   Deallocates any CIDRs allocated to VPC resources (such as VPCs) in pools in private scopes.  No VPC resources are deleted as a result of enabling this option. The CIDR associated with the resource will no longer be allocated from an IPAM pool, but the CIDR itself will remain unchanged.    Deprovisions all IPv4 CIDRs provisioned to IPAM pools in private scopes.   Deletes all IPAM pools in private scopes.   Deletes all non-default private scopes in the IPAM.   Deletes the default public and private scopes and the IPAM.  
+     */
+    Cascade?: Boolean;
   }
   export interface DeleteIpamResult {
     /**
@@ -27094,7 +27098,7 @@ declare namespace EC2 {
     /**
      * The ID of the allocation.
      */
-    IpamPoolAllocationId?: IpamPoolAllocationId;
+    IpamPoolAllocationId: IpamPoolAllocationId;
   }
   export interface ReleaseIpamPoolAllocationResult {
     /**

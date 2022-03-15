@@ -2447,9 +2447,9 @@ declare namespace RoboMaker {
   }
   export interface LoggingConfig {
     /**
-     * A boolean indicating whether to record all ROS topics.
+     * A boolean indicating whether to record all ROS topics.  This API is no longer supported and will throw an error if used. 
      */
-    recordAllRosTopics: BoxedBoolean;
+    recordAllRosTopics?: BoxedBoolean;
   }
   export type MaxConcurrency = number;
   export type MaxResults = number;
@@ -2622,7 +2622,7 @@ declare namespace RoboMaker {
      */
     uploadConfigurations?: UploadConfigurations;
     /**
-     * A Boolean indicating whether to use default upload configurations. By default, .ros and .gazebo files are uploaded when the application terminates and all ROS topics will be recorded. If you set this value, you must specify an outputLocation. 
+     * A Boolean indicating whether to use default upload configurations. By default, .ros and .gazebo files are uploaded when the application terminates and all ROS topics will be recorded. If you set this value, you must specify an outputLocation.  This API is no longer supported and will throw an error if used. 
      */
     useDefaultUploadConfigurations?: BoxedBoolean;
     /**
@@ -2630,7 +2630,7 @@ declare namespace RoboMaker {
      */
     tools?: Tools;
     /**
-     * A Boolean indicating whether to use default robot application tools. The default tools are rviz, rqt, terminal and rosbag record. The default is False. 
+     * A Boolean indicating whether to use default robot application tools. The default tools are rviz, rqt, terminal and rosbag record. The default is False.  This API is no longer supported and will throw an error if used. 
      */
     useDefaultTools?: BoxedBoolean;
   }
@@ -2759,7 +2759,7 @@ declare namespace RoboMaker {
      */
     worldConfigs?: WorldConfigs;
     /**
-     * A Boolean indicating whether to use default upload configurations. By default, .ros and .gazebo files are uploaded when the application terminates and all ROS topics will be recorded. If you set this value, you must specify an outputLocation. 
+     * A Boolean indicating whether to use default upload configurations. By default, .ros and .gazebo files are uploaded when the application terminates and all ROS topics will be recorded. If you set this value, you must specify an outputLocation.  This API is no longer supported and will throw an error if used. 
      */
     useDefaultUploadConfigurations?: BoxedBoolean;
     /**
@@ -2767,7 +2767,7 @@ declare namespace RoboMaker {
      */
     tools?: Tools;
     /**
-     * A Boolean indicating whether to use default simulation application tools. The default tools are rviz, rqt, terminal and rosbag record. The default is False. 
+     * A Boolean indicating whether to use default simulation application tools. The default tools are rviz, rqt, terminal and rosbag record. The default is False.  This API is no longer supported and will throw an error if used. 
      */
     useDefaultTools?: BoxedBoolean;
   }
@@ -3492,6 +3492,7 @@ declare namespace RoboMaker {
      * A list of worlds.
      */
     worlds?: Arns;
+    outputLocation?: OutputLocation;
   }
   export interface WorldFailure {
     /**

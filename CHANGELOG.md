@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1093.0-->
+<!--LATEST=2.1094.0-->
 <!--ENTRYINSERT-->
+
+## 2.1094.0
+* feature: CognitoIdentityServiceProvider: Updated EmailConfigurationType and SmsConfigurationType to reflect that you can now choose Amazon SES and Amazon SNS resources in the same Region.
+* feature: DataExchange: This feature enables data providers to use the RevokeRevision operation to revoke subscriber access to a given revision. Subscribers are unable to interact with assets within a revoked revision.
+* feature: EC2: Adds the Cascade parameter to the DeleteIpam API. Customers can use this parameter to automatically delete their IPAM, including non-default scopes, pools, cidrs, and allocations. There mustn't be any pools provisioned in the default public scope to use this parameter.
+* feature: RoboMaker: This release deprecates ROS, Ubuntu and Gazbeo from RoboMaker Simulation Service Software Suites in favor of user-supplied containers and Relaxed Software Suites.
 
 ## 2.1093.0
 * feature: ConfigService: Add resourceType enums for AWS::ECR::PublicRepository and AWS::EC2::LaunchTemplate
