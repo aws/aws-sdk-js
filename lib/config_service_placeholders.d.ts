@@ -301,6 +301,7 @@ export abstract class ConfigurationServicePlaceholders {
   workspacesweb?: AWS.WorkSpacesWeb.Types.ClientConfiguration;
   amplifyuibuilder?: AWS.AmplifyUIBuilder.Types.ClientConfiguration;
   keyspaces?: AWS.Keyspaces.Types.ClientConfiguration;
+  billingconductor?: AWS.Billingconductor.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -604,4 +605,5 @@ export interface ConfigurationServiceApiVersions {
   workspacesweb?: AWS.WorkSpacesWeb.Types.apiVersion;
   amplifyuibuilder?: AWS.AmplifyUIBuilder.Types.apiVersion;
   keyspaces?: AWS.Keyspaces.Types.apiVersion;
+  billingconductor?: AWS.Billingconductor.Types.apiVersion;
 }

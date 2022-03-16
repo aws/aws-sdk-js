@@ -300,5 +300,6 @@ module.exports = {
   IoTTwinMaker: require('./iottwinmaker'),
   WorkSpacesWeb: require('./workspacesweb'),
   AmplifyUIBuilder: require('./amplifyuibuilder'),
-  Keyspaces: require('./keyspaces')
+  Keyspaces: require('./keyspaces'),
+  Billingconductor: require('./billingconductor')
 };

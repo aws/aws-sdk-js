@@ -1688,7 +1688,7 @@
           "documentation": "<p>The principal that started the incident.</p>"
         },
         "invokedBy": {
-          "shape": "Arn",
+          "shape": "ServicePrincipal",
           "documentation": "<p>The principal the assumed the role specified of the <code>createdBy</code>.</p>"
         },
         "resourceArn": {
@@ -2400,6 +2400,11 @@
       "max": 1000,
       "min": 0,
       "pattern": "^arn:aws(-cn|-us-gov)?:iam::([0-9]{12})?:role/.+$"
+    },
+    "ServicePrincipal": {
+      "type": "string",
+      "max": 1000,
+      "min": 0
     },
     "SnsArn": {
       "type": "string",

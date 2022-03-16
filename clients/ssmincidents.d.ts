@@ -673,7 +673,7 @@ declare namespace SSMIncidents {
     /**
      * The principal the assumed the role specified of the createdBy.
      */
-    invokedBy?: Arn;
+    invokedBy?: ServicePrincipal;
     /**
      * The resource that caused the incident to be created.
      */
@@ -1051,6 +1051,7 @@ declare namespace SSMIncidents {
   }
   export type ResponsePlanSummaryList = ResponsePlanSummary[];
   export type RoleArn = string;
+  export type ServicePrincipal = string;
   export type SnsArn = string;
   export type SortOrder = "ASCENDING"|"DESCENDING"|string;
   export type SseKmsKey = string;

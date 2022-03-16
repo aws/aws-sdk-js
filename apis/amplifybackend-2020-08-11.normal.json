@@ -1431,20 +1431,20 @@
         "DeliveryMethod": {
           "shape": "DeliveryMethod",
           "locationName": "deliveryMethod",
-          "documentation": "<p>Describes which mode to use (either SMS or email) to deliver messages to app users who want to recover their password.</p>"
+          "documentation": "<p><b>(DEPRECATED)</b> Describes which mode to use (either SMS or email) to deliver messages to app users who want to recover their password.</p>"
         },
         "EmailSettings": {
           "shape": "EmailSettings",
           "locationName": "emailSettings",
-          "documentation": "<p>The configuration for the email sent when an app user forgets their password.</p>"
+          "documentation": "<p><b>(DEPRECATED)</b> The configuration for the email sent when an app user forgets their password.</p>"
         },
         "SmsSettings": {
           "shape": "SmsSettings",
           "locationName": "smsSettings",
-          "documentation": "<p>The configuration for the SMS message sent when an app user forgets their password.</p>"
+          "documentation": "<p><b>(DEPRECATED)</b> The configuration for the SMS message sent when an app user forgets their password.</p>"
         }
       },
-      "documentation": "<p>Describes the forgot password policy for authenticating into the Amplify app.</p>",
+      "documentation": "<p><b>(DEPRECATED)</b> Describes the forgot password policy for authenticating into the Amplify app.</p>",
       "required": [
         "DeliveryMethod"
       ]
@@ -1653,7 +1653,7 @@
         "ForgotPassword": {
           "shape": "CreateBackendAuthForgotPasswordConfig",
           "locationName": "forgotPassword",
-          "documentation": "<p>Describes the forgotten password policy for your Amazon Cognito user pool, configured as a part of your Amplify project.</p>"
+          "documentation": "<p><b>(DEPRECATED)</b> Describes the forgotten password policy for your Amazon Cognito user pool, configured as a part of your Amplify project.</p>"
         },
         "Mfa": {
           "shape": "CreateBackendAuthMFAConfig",
@@ -1684,6 +1684,11 @@
           "shape": "__string",
           "locationName": "userPoolName",
           "documentation": "<p>The Amazon Cognito user pool name.</p>"
+        },
+        "VerificationMessage": {
+          "shape": "CreateBackendAuthVerificationMessageConfig",
+          "locationName": "verificationMessage",
+          "documentation": "<p>Describes the email or SMS verification message for your Amazon Cognito user pool, configured as a part of your Amplify project.</p>"
         }
       },
       "documentation": "<p>Describes the Amazon Cognito user pool configuration for the auth resource to be configured for your Amplify project.</p>",
@@ -1691,6 +1696,30 @@
         "RequiredSignUpAttributes",
         "SignInMethod",
         "UserPoolName"
+      ]
+    },
+    "CreateBackendAuthVerificationMessageConfig": {
+      "type": "structure",
+      "members": {
+        "DeliveryMethod": {
+          "shape": "DeliveryMethod",
+          "locationName": "deliveryMethod",
+          "documentation": "<p>The type of verification message to send.</p>"
+        },
+        "EmailSettings": {
+          "shape": "EmailSettings",
+          "locationName": "emailSettings",
+          "documentation": "<p>The settings for the email message.</p>"
+        },
+        "SmsSettings": {
+          "shape": "SmsSettings",
+          "locationName": "smsSettings",
+          "documentation": "<p>The settings for the SMS message.</p>"
+        }
+      },
+      "documentation": "<p>Creates an email or SMS verification message for the auth resource configured for your Amplify project.</p>",
+      "required": [
+        "DeliveryMethod"
       ]
     },
     "CreateBackendConfigRequest": {
@@ -1759,7 +1788,7 @@
         "ResourceConfig": {
           "shape": "ResourceConfig",
           "locationName": "resourceConfig",
-          "documentation": "<p>The resource configuration for creating backend storage.</p>"
+          "documentation": "<p>The resource configuration for creating a backend.</p>"
         },
         "ResourceName": {
           "shape": "__string",
@@ -2210,6 +2239,7 @@
     },
     "DeliveryMethod": {
       "type": "string",
+      "documentation": "<p>The type of verification message to send.</p>",
       "enum": [
         "EMAIL",
         "SMS"
@@ -2221,12 +2251,12 @@
         "EmailMessage": {
           "shape": "__string",
           "locationName": "emailMessage",
-          "documentation": "<p>The body of the email.</p>"
+          "documentation": "<p>The contents of the email message.</p>"
         },
         "EmailSubject": {
           "shape": "__string",
           "locationName": "emailSubject",
-          "documentation": "<p>The subject of the email.</p>"
+          "documentation": "<p>The contents of the subject line of the email message.</p>"
         }
       },
       "documentation": "<p>The configuration for the email sent when an app user forgets their password.</p>"
@@ -3143,7 +3173,7 @@
         "SmsMessage": {
           "shape": "__string",
           "locationName": "smsMessage",
-          "documentation": "<p>The body of the SMS message.</p>"
+          "documentation": "<p>The contents of the SMS message.</p>"
         }
       },
       "documentation": "<p>SMS settings for authentication.</p>"
@@ -3247,20 +3277,20 @@
         "DeliveryMethod": {
           "shape": "DeliveryMethod",
           "locationName": "deliveryMethod",
-          "documentation": "<p>Describes which mode to use (either SMS or email) to deliver messages to app users that want to recover their password.</p>"
+          "documentation": "<p><b>(DEPRECATED)</b> Describes which mode to use (either SMS or email) to deliver messages to app users that want to recover their password.</p>"
         },
         "EmailSettings": {
           "shape": "EmailSettings",
           "locationName": "emailSettings",
-          "documentation": "<p>The configuration for the email sent when an app user forgets their password.</p>"
+          "documentation": "<p><b>(DEPRECATED)</b> The configuration for the email sent when an app user forgets their password.</p>"
         },
         "SmsSettings": {
           "shape": "SmsSettings",
           "locationName": "smsSettings",
-          "documentation": "<p>The configuration for the SMS message sent when an Amplify app user forgets their password.</p>"
+          "documentation": "<p><b>(DEPRECATED)</b> The configuration for the SMS message sent when an Amplify app user forgets their password.</p>"
         }
       },
-      "documentation": "<p>Describes the forgot password policy for authenticating into the Amplify app.</p>"
+      "documentation": "<p><b>(DEPRECATED)</b> Describes the forgot password policy for authenticating into the Amplify app.</p>"
     },
     "UpdateBackendAuthIdentityPoolConfig": {
       "type": "structure",
@@ -3446,7 +3476,7 @@
         "ForgotPassword": {
           "shape": "UpdateBackendAuthForgotPasswordConfig",
           "locationName": "forgotPassword",
-          "documentation": "<p>Describes the forgot password policy for your Amazon Cognito user pool, configured as a part of your Amplify project.</p>"
+          "documentation": "<p><b>(DEPRECATED)</b> Describes the forgot password policy for your Amazon Cognito user pool, configured as a part of your Amplify project.</p>"
         },
         "Mfa": {
           "shape": "UpdateBackendAuthMFAConfig",
@@ -3462,9 +3492,38 @@
           "shape": "UpdateBackendAuthPasswordPolicyConfig",
           "locationName": "passwordPolicy",
           "documentation": "<p>Describes the password policy for your Amazon Cognito user pool, configured as a part of your Amplify project.</p>"
+        },
+        "VerificationMessage": {
+          "shape": "UpdateBackendAuthVerificationMessageConfig",
+          "locationName": "verificationMessage",
+          "documentation": "<p>Describes the email or SMS verification message for your Amazon Cognito user pool, configured as a part of your Amplify project.</p>"
         }
       },
       "documentation": "<p>Describes the Amazon Cognito user pool configuration for the authorization resource to be configured for your Amplify project on an update.</p>"
+    },
+    "UpdateBackendAuthVerificationMessageConfig": {
+      "type": "structure",
+      "members": {
+        "DeliveryMethod": {
+          "shape": "DeliveryMethod",
+          "locationName": "deliveryMethod",
+          "documentation": "<p>The type of verification message to send.</p>"
+        },
+        "EmailSettings": {
+          "shape": "EmailSettings",
+          "locationName": "emailSettings",
+          "documentation": "<p>The settings for the email message.</p>"
+        },
+        "SmsSettings": {
+          "shape": "SmsSettings",
+          "locationName": "smsSettings",
+          "documentation": "<p>The settings for the SMS message.</p>"
+        }
+      },
+      "documentation": "<p>Updates the configuration of the email or SMS message for the auth resource configured for your Amplify project.</p>",
+      "required": [
+        "DeliveryMethod"
+      ]
     },
     "UpdateBackendConfigRequest": {
       "type": "structure",
