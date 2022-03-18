@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1095.0-->
+<!--LATEST=2.1096.0-->
 <!--ENTRYINSERT-->
+
+## 2.1096.0
+* feature: Glue: Added 9 new APIs for AWS Glue Interactive Sessions: ListSessions, StopSession, CreateSession, GetSession, DeleteSession, RunStatement, GetStatement, ListStatements, CancelStatement
 
 ## 2.1095.0
 * feature: ACMPCA: AWS Certificate Manager (ACM) Private Certificate Authority (CA) now supports customizable certificate subject names and extensions.
