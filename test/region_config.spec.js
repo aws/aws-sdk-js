@@ -47,13 +47,20 @@ describe('region_config.js', function() {
     expect(service.endpoint.host).to.equal('iam.cn-north-1.amazonaws.com.cn');
   });
 
-  it('uses "global" endpoint for Route53 in cn-north-1', function() {
-    var service = new AWS.Route53({
-      region: 'cn-north-1'
+  [
+    ['cn-north-1', 'cn-northwest-1', 'route53.amazonaws.com.cn'],
+    ['us-gov-west-1', 'us-gov-west-1', 'route53.us-gov.amazonaws.com'],
+    ['us-iso-west-1', 'us-iso-east-1', 'route53.c2s.ic.gov'],
+    ['us-isob-west-1', 'us-isob-east-1', 'route53.sc2s.sgov.gov'],
+  ].forEach(function([region, signingRegion, endpoint]) {
+    it('uses "global" endpoint for Route53 in ' + region, function () {
+      var service = new AWS.Route53({
+        region
+      });
+      expect(service.isGlobalEndpoint).to.equal(true);
+      expect(service.signingRegion).to.equal(signingRegion);
+      expect(service.endpoint.host).to.equal(endpoint);
     });
-    expect(service.isGlobalEndpoint).to.equal(true);
-    expect(service.signingRegion).to.equal('cn-northwest-1');
-    expect(service.endpoint.host).to.equal('route53.amazonaws.com.cn');
   });
 
   it('enables signature version 4 signing in cn-*', function() {
