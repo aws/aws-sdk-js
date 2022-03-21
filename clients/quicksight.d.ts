@@ -76,11 +76,11 @@ declare class QuickSight extends Service {
    */
   createFolderMembership(callback?: (err: AWSError, data: QuickSight.Types.CreateFolderMembershipResponse) => void): Request<QuickSight.Types.CreateFolderMembershipResponse, AWSError>;
   /**
-   * Creates an Amazon QuickSight group. The permissions resource is arn:aws:quicksight:us-east-1:&lt;relevant-aws-account-id&gt;:group/default/&lt;group-name&gt; . The response is a group object.
+   * Creates an Amazon QuickSight group. The permissions resource is arn:aws:quicksight:&lt;your-region&gt;:&lt;relevant-aws-account-id&gt;:group/default/&lt;group-name&gt; . The response is a group object.
    */
   createGroup(params: QuickSight.Types.CreateGroupRequest, callback?: (err: AWSError, data: QuickSight.Types.CreateGroupResponse) => void): Request<QuickSight.Types.CreateGroupResponse, AWSError>;
   /**
-   * Creates an Amazon QuickSight group. The permissions resource is arn:aws:quicksight:us-east-1:&lt;relevant-aws-account-id&gt;:group/default/&lt;group-name&gt; . The response is a group object.
+   * Creates an Amazon QuickSight group. The permissions resource is arn:aws:quicksight:&lt;your-region&gt;:&lt;relevant-aws-account-id&gt;:group/default/&lt;group-name&gt; . The response is a group object.
    */
   createGroup(callback?: (err: AWSError, data: QuickSight.Types.CreateGroupResponse) => void): Request<QuickSight.Types.CreateGroupResponse, AWSError>;
   /**
@@ -395,6 +395,14 @@ declare class QuickSight extends Service {
    * Returns an Amazon QuickSight group's description and Amazon Resource Name (ARN). 
    */
   describeGroup(callback?: (err: AWSError, data: QuickSight.Types.DescribeGroupResponse) => void): Request<QuickSight.Types.DescribeGroupResponse, AWSError>;
+  /**
+   * Use the DescribeGroupMembership operation to determine if a user is a member of the specified group. If the user exists and is a member of the specified group, an associated GroupMember object is returned.
+   */
+  describeGroupMembership(params: QuickSight.Types.DescribeGroupMembershipRequest, callback?: (err: AWSError, data: QuickSight.Types.DescribeGroupMembershipResponse) => void): Request<QuickSight.Types.DescribeGroupMembershipResponse, AWSError>;
+  /**
+   * Use the DescribeGroupMembership operation to determine if a user is a member of the specified group. If the user exists and is a member of the specified group, an associated GroupMember object is returned.
+   */
+  describeGroupMembership(callback?: (err: AWSError, data: QuickSight.Types.DescribeGroupMembershipResponse) => void): Request<QuickSight.Types.DescribeGroupMembershipResponse, AWSError>;
   /**
    * Describes an existing IAM policy assignment, as specified by the assignment name.
    */
@@ -731,6 +739,14 @@ declare class QuickSight extends Service {
    * Searches the subfolders in a folder.
    */
   searchFolders(callback?: (err: AWSError, data: QuickSight.Types.SearchFoldersResponse) => void): Request<QuickSight.Types.SearchFoldersResponse, AWSError>;
+  /**
+   * Use the SearchGroups operation to search groups in a specified Amazon QuickSight namespace using the supplied filters.
+   */
+  searchGroups(params: QuickSight.Types.SearchGroupsRequest, callback?: (err: AWSError, data: QuickSight.Types.SearchGroupsResponse) => void): Request<QuickSight.Types.SearchGroupsResponse, AWSError>;
+  /**
+   * Use the SearchGroups operation to search groups in a specified Amazon QuickSight namespace using the supplied filters.
+   */
+  searchGroups(callback?: (err: AWSError, data: QuickSight.Types.SearchGroupsResponse) => void): Request<QuickSight.Types.SearchGroupsResponse, AWSError>;
   /**
    * Assigns one or more tags (key-value pairs) to the specified Amazon QuickSight resource.  Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with certain tag values. You can use the TagResource operation with a resource that already has tags. If you specify a new tag key for the resource, this tag is appended to the list of tags associated with the resource. If you specify a tag key that is already associated with the resource, the new tag value that you specify replaces the previous value for that tag. You can associate as many as 50 tags with a resource. Amazon QuickSight supports tagging on data set, data source, dashboard, and template.  Tagging for Amazon QuickSight works in a similar way to tagging for other Amazon Web Services services, except for the following:   You can't use tags to track costs for Amazon QuickSight. This isn't possible because you can't tag the resources that Amazon QuickSight costs are based on, for example Amazon QuickSight storage capacity (SPICE), number of users, type of users, and usage metrics.   Amazon QuickSight doesn't currently support the tag editor for Resource Groups.  
    */
@@ -1727,7 +1743,7 @@ declare namespace QuickSight {
      */
     AwsAccountId: AwsAccountId;
     /**
-     * The namespace. Currently, you should set this to default.
+     * The namespace that you want the user to be a part of.
      */
     Namespace: Namespace;
   }
@@ -1759,7 +1775,7 @@ declare namespace QuickSight {
      */
     AwsAccountId: AwsAccountId;
     /**
-     * The namespace. Currently, you should set this to default.
+     * The namespace that you want the group to be a part of.
      */
     Namespace: Namespace;
   }
@@ -2894,7 +2910,7 @@ declare namespace QuickSight {
      */
     AwsAccountId: AwsAccountId;
     /**
-     * The namespace. Currently, you should set this to default.
+     * The namespace of the group that you want to remove a user from.
      */
     Namespace: Namespace;
   }
@@ -2918,7 +2934,7 @@ declare namespace QuickSight {
      */
     AwsAccountId: AwsAccountId;
     /**
-     * The namespace. Currently, you should set this to default.
+     * The namespace of the group that you want to delete.
      */
     Namespace: Namespace;
   }
@@ -3549,6 +3565,35 @@ declare namespace QuickSight {
      */
     RequestId?: String;
   }
+  export interface DescribeGroupMembershipRequest {
+    /**
+     * The user name of the user that you want to search for.
+     */
+    MemberName: GroupMemberName;
+    /**
+     * The name of the group that you want to search.
+     */
+    GroupName: GroupName;
+    /**
+     * The ID for the Amazon Web Services account that the group is in. Currently, you use the ID for the Amazon Web Services account that contains your Amazon QuickSight account.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The namespace that includes the group you are searching within.
+     */
+    Namespace: Namespace;
+  }
+  export interface DescribeGroupMembershipResponse {
+    GroupMember?: GroupMember;
+    /**
+     * The Amazon Web Services request ID for this operation.
+     */
+    RequestId?: String;
+    /**
+     * The HTTP status of the request.
+     */
+    Status?: StatusCode;
+  }
   export interface DescribeGroupRequest {
     /**
      * The name of the group that you want to describe.
@@ -3559,7 +3604,7 @@ declare namespace QuickSight {
      */
     AwsAccountId: AwsAccountId;
     /**
-     * The namespace. Currently, you should set this to default.
+     * The namespace of the group that you want described.
      */
     Namespace: Namespace;
   }
@@ -4235,6 +4280,8 @@ declare namespace QuickSight {
     PrincipalId?: String;
   }
   export type GroupDescription = string;
+  export type GroupFilterAttribute = "GROUP_NAME"|string;
+  export type GroupFilterOperator = "StartsWith"|string;
   export type GroupList = Group[];
   export interface GroupMember {
     /**
@@ -4249,6 +4296,21 @@ declare namespace QuickSight {
   export type GroupMemberList = GroupMember[];
   export type GroupMemberName = string;
   export type GroupName = string;
+  export interface GroupSearchFilter {
+    /**
+     * The comparison operator that you want to use as a filter, for example "Operator": "StartsWith". Currently, the only supported operator is StartsWith.
+     */
+    Operator: GroupFilterOperator;
+    /**
+     * The name of the value that you want to use as a filter, for example "Name": "GROUP_NAME". Currently, the only supported name is GROUP_NAME.
+     */
+    Name: GroupFilterAttribute;
+    /**
+     * The value of the named item, in this case GROUP_NAME, that you want to use as a filter.
+     */
+    Value: String;
+  }
+  export type GroupSearchFilterList = GroupSearchFilter[];
   export interface GutterStyle {
     /**
      * This Boolean value controls whether to display a gutter space between sheet tiles. 
@@ -4669,7 +4731,7 @@ declare namespace QuickSight {
      */
     AwsAccountId: AwsAccountId;
     /**
-     * The namespace. Currently, you should set this to default.
+     * The namespace of the group that you want a list of users from.
      */
     Namespace: Namespace;
   }
@@ -4705,7 +4767,7 @@ declare namespace QuickSight {
      */
     MaxResults?: MaxResults;
     /**
-     * The namespace. Currently, you should set this to default.
+     * The namespace that you want a list of groups from.
      */
     Namespace: Namespace;
   }
@@ -5494,7 +5556,7 @@ declare namespace QuickSight {
      */
     UserName?: UserName;
     /**
-     * (Enterprise edition only) The name of the custom permissions profile that you want to assign to this user. Customized permissions allows you to control a user's access by restricting access the following operations:   Create and update data sources   Create and update datasets   Create and update email reports   Subscribe to email reports   To add custom permissions to an existing user, use  UpdateUser  instead. A set of custom permissions includes any combination of these restrictions. Currently, you need to create the profile names for custom permission sets by using the Amazon QuickSight console. Then, you use the RegisterUser API operation to assign the named set of permissions to a QuickSight user.  Amazon QuickSight custom permissions are applied through IAM policies. Therefore, they override the permissions typically granted by assigning Amazon QuickSight users to one of the default security cohorts in Amazon QuickSight (admin, author, reader). This feature is available only to Amazon QuickSight Enterprise edition subscriptions.
+     * (Enterprise edition only) The name of the custom permissions profile that you want to assign to this user. Customized permissions allows you to control a user's access by restricting access the following operations:   Create and update data sources   Create and update datasets   Create and update email reports   Subscribe to email reports   To add custom permissions to an existing user, use  UpdateUser  instead. A set of custom permissions includes any combination of these restrictions. Currently, you need to create the profile names for custom permission sets by using the Amazon QuickSight console. Then, you use the RegisterUser API operation to assign the named set of permissions to a Amazon QuickSight user.  Amazon QuickSight custom permissions are applied through IAM policies. Therefore, they override the permissions typically granted by assigning Amazon QuickSight users to one of the default security cohorts in Amazon QuickSight (admin, author, reader). This feature is available only to Amazon QuickSight Enterprise edition subscriptions.
      */
     CustomPermissionsName?: RoleName;
     /**
@@ -5837,6 +5899,46 @@ declare namespace QuickSight {
      * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
+  }
+  export interface SearchGroupsRequest {
+    /**
+     * The ID for the Amazon Web Services account that the group is in. Currently, you use the ID for the Amazon Web Services account that contains your Amazon QuickSight account.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * A pagination token that can be used in a subsequent request.
+     */
+    NextToken?: String;
+    /**
+     * The maximum number of results to return from this request.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The namespace that you want to search.
+     */
+    Namespace: Namespace;
+    /**
+     * The structure for the search filters that you want to apply to your search.
+     */
+    Filters: GroupSearchFilterList;
+  }
+  export interface SearchGroupsResponse {
+    /**
+     * A list of groups in a specified namespace that match the filters you set in your SearchGroups request.
+     */
+    GroupList?: GroupList;
+    /**
+     * A pagination token that can be used in a subsequent request.
+     */
+    NextToken?: String;
+    /**
+     * The Amazon Web Services request ID for this operation.
+     */
+    RequestId?: String;
+    /**
+     * The HTTP status of the request.
+     */
+    Status?: StatusCode;
   }
   export interface ServiceNowParameters {
     /**
@@ -7059,7 +7161,7 @@ declare namespace QuickSight {
      */
     AwsAccountId: AwsAccountId;
     /**
-     * The namespace. Currently, you should set this to default.
+     * The namespace of the group that you want to update.
      */
     Namespace: Namespace;
   }
@@ -7429,7 +7531,7 @@ declare namespace QuickSight {
      */
     Role: UserRole;
     /**
-     * (Enterprise edition only) The name of the custom permissions profile that you want to assign to this user. Customized permissions allows you to control a user's access by restricting access the following operations:   Create and update data sources   Create and update datasets   Create and update email reports   Subscribe to email reports   A set of custom permissions includes any combination of these restrictions. Currently, you need to create the profile names for custom permission sets by using the Amazon QuickSight console. Then, you use the RegisterUser API operation to assign the named set of permissions to a QuickSight user.  Amazon QuickSight custom permissions are applied through IAM policies. Therefore, they override the permissions typically granted by assigning Amazon QuickSight users to one of the default security cohorts in Amazon QuickSight (admin, author, reader). This feature is available only to Amazon QuickSight Enterprise edition subscriptions.
+     * (Enterprise edition only) The name of the custom permissions profile that you want to assign to this user. Customized permissions allows you to control a user's access by restricting access the following operations:   Create and update data sources   Create and update datasets   Create and update email reports   Subscribe to email reports   A set of custom permissions includes any combination of these restrictions. Currently, you need to create the profile names for custom permission sets by using the Amazon QuickSight console. Then, you use the RegisterUser API operation to assign the named set of permissions to a Amazon QuickSight user.  Amazon QuickSight custom permissions are applied through IAM policies. Therefore, they override the permissions typically granted by assigning Amazon QuickSight users to one of the default security cohorts in Amazon QuickSight (admin, author, reader). This feature is available only to Amazon QuickSight Enterprise edition subscriptions.
      */
     CustomPermissionsName?: RoleName;
     /**

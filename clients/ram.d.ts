@@ -164,11 +164,11 @@ declare class RAM extends Service {
    */
   listResourceTypes(callback?: (err: AWSError, data: RAM.Types.ListResourceTypesResponse) => void): Request<RAM.Types.ListResourceTypesResponse, AWSError>;
   /**
-   * Lists the resources that you added to a resource shares or the resources that are shared with you.
+   * Lists the resources that you added to a resource share or the resources that are shared with you.
    */
   listResources(params: RAM.Types.ListResourcesRequest, callback?: (err: AWSError, data: RAM.Types.ListResourcesResponse) => void): Request<RAM.Types.ListResourcesResponse, AWSError>;
   /**
-   * Lists the resources that you added to a resource shares or the resources that are shared with you.
+   * Lists the resources that you added to a resource share or the resources that are shared with you.
    */
   listResources(callback?: (err: AWSError, data: RAM.Types.ListResourcesResponse) => void): Request<RAM.Types.ListResourcesResponse, AWSError>;
   /**
@@ -537,7 +537,7 @@ declare namespace RAM {
      */
     resourceShareStatus?: ResourceShareStatus;
     /**
-     * Specifies that you want to retrieve details of only those resource shares that match the following:     SELF  – resources that you are sharing     OTHER-ACCOUNTS  – resources that other accounts share with you  
+     * Specifies that you want to retrieve details of only those resource shares that match the following:     SELF  – resource shares that your account shares with other accounts     OTHER-ACCOUNTS  – resource shares that other accounts share with your account  
      */
     resourceOwner: ResourceOwner;
     /**
@@ -650,7 +650,7 @@ declare namespace RAM {
   }
   export interface ListPrincipalsRequest {
     /**
-     * Specifies that you want to list information for only resource shares that match the following:     SELF  – resources that you are sharing     OTHER-ACCOUNTS  – resources that other accounts share with you  
+     * Specifies that you want to list information for only resource shares that match the following:     SELF  – principals that your account is sharing resources with     OTHER-ACCOUNTS  – principals that are sharing resources with your account  
      */
     resourceOwner: ResourceOwner;
     /**
@@ -738,7 +738,7 @@ declare namespace RAM {
   }
   export interface ListResourcesRequest {
     /**
-     * Specifies that you want to list only the resource shares that match the following:     SELF  – resources that you are sharing     OTHER-ACCOUNTS  – resources that other accounts share with you  
+     * Specifies that you want to list only the resource shares that match the following:     SELF  – resources that your account shares with other accounts     OTHER-ACCOUNTS  – resources that other accounts share with your account  
      */
     resourceOwner: ResourceOwner;
     /**

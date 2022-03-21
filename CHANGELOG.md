@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1096.0-->
+<!--LATEST=2.1097.0-->
 <!--ENTRYINSERT-->
+
+## 2.1097.0
+* feature: ChimeSDKMeetings: Add support for media replication to link multiple WebRTC media sessions together to reach larger and global audiences. Participants connected to a replica session can be granted access to join the primary session and can switch sessions with their existing WebRTC connection
+* feature: ECR: This release includes a fix in the DescribeImageScanFindings paginated output.
+* feature: MediaConnect: This release adds support for selecting a maintenance window.
+* feature: QuickSight: AWS QuickSight Service Features - Expand public API support for group management.
 
 ## 2.1096.0
 * feature: Glue: Added 9 new APIs for AWS Glue Interactive Sessions: ListSessions, StopSession, CreateSession, GetSession, DeleteSession, RunStatement, GetStatement, ListStatements, CancelStatement

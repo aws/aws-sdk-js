@@ -208,6 +208,10 @@ declare namespace ChimeSDKMeetings {
      * Lists the audio and video features enabled for a meeting, such as echo reduction.
      */
     MeetingFeatures?: MeetingFeaturesConfiguration;
+    /**
+     * When specified, replicates the media from the primary meeting to the new meeting.
+     */
+    PrimaryMeetingId?: PrimaryMeetingId;
   }
   export interface CreateMeetingResponse {
     /**
@@ -244,6 +248,10 @@ declare namespace ChimeSDKMeetings {
      * The attendee information, including attendees' IDs and join tokens.
      */
     Attendees: CreateMeetingWithAttendeesRequestItemList;
+    /**
+     * When specified, replicates the media from the primary meeting to the new meeting.
+     */
+    PrimaryMeetingId?: PrimaryMeetingId;
   }
   export type CreateMeetingWithAttendeesRequestItemList = CreateAttendeeRequestItem[];
   export interface CreateMeetingWithAttendeesResponse {
@@ -476,6 +484,10 @@ declare namespace ChimeSDKMeetings {
      * The features available to a meeting, such as Amazon Voice Focus.
      */
     MeetingFeatures?: MeetingFeaturesConfiguration;
+    /**
+     * When specified, replicates the media from the primary meeting to this meeting.
+     */
+    PrimaryMeetingId?: PrimaryMeetingId;
   }
   export type MeetingFeatureStatus = "AVAILABLE"|"UNAVAILABLE"|string;
   export interface MeetingFeaturesConfiguration {
@@ -498,6 +510,7 @@ declare namespace ChimeSDKMeetings {
      */
     SqsQueueArn?: Arn;
   }
+  export type PrimaryMeetingId = string;
   export type ResultMax = number;
   export interface StartMeetingTranscriptionRequest {
     /**

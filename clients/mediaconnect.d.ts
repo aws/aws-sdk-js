@@ -358,6 +358,16 @@ declare namespace MediaConnect {
      */
     VpcInterfaces?: __listOfVpcInterface;
   }
+  export interface AddMaintenance {
+    /**
+     * A day of a week when the maintenance will happen. Use Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday.
+     */
+    MaintenanceDay: MaintenanceDay;
+    /**
+     * UTC time when the maintenance will happen. Use 24-hour HH:MM format. Minutes must be 00. Example: 13:00. The default value is 02:00.
+     */
+    MaintenanceStartHour: __string;
+  }
   export interface AddMediaStreamRequest {
     /**
      * The attributes that you want to assign to the new media stream.
@@ -480,6 +490,7 @@ declare namespace MediaConnect {
      * The VPC interfaces you want on the flow.
      */
     VpcInterfaces?: __listOfVpcInterfaceRequest;
+    Maintenance?: AddMaintenance;
   }
   export interface CreateFlowResponse {
     Flow?: Flow;
@@ -712,6 +723,7 @@ declare namespace MediaConnect {
      * The VPC Interfaces for this flow.
      */
     VpcInterfaces?: __listOfVpcInterface;
+    Maintenance?: Maintenance;
   }
   export interface Fmtp {
     /**
@@ -987,7 +999,27 @@ declare namespace MediaConnect {
      * The current status of the flow.
      */
     Status: Status;
+    Maintenance?: Maintenance;
   }
+  export interface Maintenance {
+    /**
+     * A day of a week when the maintenance will happen. Use Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday.
+     */
+    MaintenanceDay?: MaintenanceDay;
+    /**
+     * The Maintenance has to be performed before this deadline in ISO UTC format. Example: 2021-01-30T08:30:00Z.
+     */
+    MaintenanceDeadline?: __string;
+    /**
+     * A scheduled date in ISO UTC format when the maintenance will happen. Use YYYY-MM-DD format. Example: 2021-01-30.
+     */
+    MaintenanceScheduledDate?: __string;
+    /**
+     * UTC time when the maintenance will happen. Use 24-hour HH:MM format. Minutes must be 00. Example: 13:00. The default value is 02:00.
+     */
+    MaintenanceStartHour?: __string;
+  }
+  export type MaintenanceDay = "Monday"|"Tuesday"|"Wednesday"|"Thursday"|"Friday"|"Saturday"|"Sunday"|string;
   export type MaxResults = number;
   export interface MediaStream {
     /**
@@ -1841,6 +1873,7 @@ declare namespace MediaConnect {
      */
     FlowArn: __string;
     SourceFailoverConfig?: UpdateFailoverConfig;
+    Maintenance?: UpdateMaintenance;
   }
   export interface UpdateFlowResponse {
     Flow?: Flow;
@@ -1924,6 +1957,20 @@ declare namespace MediaConnect {
      * The settings for the source of the flow.
      */
     Source?: Source;
+  }
+  export interface UpdateMaintenance {
+    /**
+     * A day of a week when the maintenance will happen. use Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday.
+     */
+    MaintenanceDay?: MaintenanceDay;
+    /**
+     * A scheduled date in ISO UTC format when the maintenance will happen. Use YYYY-MM-DD format. Example: 2021-01-30.
+     */
+    MaintenanceScheduledDate?: __string;
+    /**
+     * UTC time when the maintenance will happen. Use 24-hour HH:MM format. Minutes must be 00. Example: 13:00. The default value is 02:00.
+     */
+    MaintenanceStartHour?: __string;
   }
   export interface VpcInterface {
     /**
