@@ -1431,7 +1431,7 @@ declare namespace LakeFormation {
   export type PartitionValueString = string;
   export type PartitionValuesList = PartitionValueString[];
   export type PartitionedTableObjectsList = PartitionObjects[];
-  export type Permission = "ALL"|"SELECT"|"ALTER"|"DROP"|"DELETE"|"INSERT"|"DESCRIBE"|"CREATE_DATABASE"|"CREATE_TABLE"|"DATA_LOCATION_ACCESS"|"CREATE_TAG"|"ALTER_TAG"|"DELETE_TAG"|"DESCRIBE_TAG"|"ASSOCIATE_TAG"|string;
+  export type Permission = "ALL"|"SELECT"|"ALTER"|"DROP"|"DELETE"|"INSERT"|"DESCRIBE"|"CREATE_DATABASE"|"CREATE_TABLE"|"DATA_LOCATION_ACCESS"|"CREATE_TAG"|"ASSOCIATE"|string;
   export type PermissionList = Permission[];
   export type PermissionType = "COLUMN_PERMISSION"|"CELL_FILTER_PERMISSION"|string;
   export type PermissionTypeList = PermissionType[];

@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "Route53",
-  "description": "fix Route53 endpoints resolution for us-iso-* regions"
-}

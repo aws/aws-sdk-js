@@ -220,6 +220,14 @@ declare class CostExplorer extends Service {
    */
   listCostCategoryDefinitions(callback?: (err: AWSError, data: CostExplorer.Types.ListCostCategoryDefinitionsResponse) => void): Request<CostExplorer.Types.ListCostCategoryDefinitionsResponse, AWSError>;
   /**
+   * Returns a list of resource tags associated with the resource specified by the Amazon Resource Name (ARN). 
+   */
+  listTagsForResource(params: CostExplorer.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: CostExplorer.Types.ListTagsForResourceResponse) => void): Request<CostExplorer.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Returns a list of resource tags associated with the resource specified by the Amazon Resource Name (ARN). 
+   */
+  listTagsForResource(callback?: (err: AWSError, data: CostExplorer.Types.ListTagsForResourceResponse) => void): Request<CostExplorer.Types.ListTagsForResourceResponse, AWSError>;
+  /**
    * Modifies the feedback property of a given cost anomaly. 
    */
   provideAnomalyFeedback(params: CostExplorer.Types.ProvideAnomalyFeedbackRequest, callback?: (err: AWSError, data: CostExplorer.Types.ProvideAnomalyFeedbackResponse) => void): Request<CostExplorer.Types.ProvideAnomalyFeedbackResponse, AWSError>;
@@ -228,11 +236,27 @@ declare class CostExplorer extends Service {
    */
   provideAnomalyFeedback(callback?: (err: AWSError, data: CostExplorer.Types.ProvideAnomalyFeedbackResponse) => void): Request<CostExplorer.Types.ProvideAnomalyFeedbackResponse, AWSError>;
   /**
-   * Updates an existing cost anomaly monitor. The changes made are applied going forward, and doesn'tt change anomalies detected in the past. 
+   * An API operation for adding one or more tags (key-value pairs) to a resource. You can use the TagResource operation with a resource that already has tags. If you specify a new tag key for the resource, this tag is appended to the list of tags associated with the resource. If you specify a tag key that is already associated with the resource, the new tag value you specify replaces the previous value for that tag.  Although the maximum number of array members is 200, user-tag maximum is 50. The remaining are reserved for Amazon Web Services use.
+   */
+  tagResource(params: CostExplorer.Types.TagResourceRequest, callback?: (err: AWSError, data: CostExplorer.Types.TagResourceResponse) => void): Request<CostExplorer.Types.TagResourceResponse, AWSError>;
+  /**
+   * An API operation for adding one or more tags (key-value pairs) to a resource. You can use the TagResource operation with a resource that already has tags. If you specify a new tag key for the resource, this tag is appended to the list of tags associated with the resource. If you specify a tag key that is already associated with the resource, the new tag value you specify replaces the previous value for that tag.  Although the maximum number of array members is 200, user-tag maximum is 50. The remaining are reserved for Amazon Web Services use.
+   */
+  tagResource(callback?: (err: AWSError, data: CostExplorer.Types.TagResourceResponse) => void): Request<CostExplorer.Types.TagResourceResponse, AWSError>;
+  /**
+   *  Removes one or more tags from a resource. Specify only tag key(s) in your request. Do not specify the value. 
+   */
+  untagResource(params: CostExplorer.Types.UntagResourceRequest, callback?: (err: AWSError, data: CostExplorer.Types.UntagResourceResponse) => void): Request<CostExplorer.Types.UntagResourceResponse, AWSError>;
+  /**
+   *  Removes one or more tags from a resource. Specify only tag key(s) in your request. Do not specify the value. 
+   */
+  untagResource(callback?: (err: AWSError, data: CostExplorer.Types.UntagResourceResponse) => void): Request<CostExplorer.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Updates an existing cost anomaly monitor. The changes made are applied going forward, and doesn't change anomalies detected in the past. 
    */
   updateAnomalyMonitor(params: CostExplorer.Types.UpdateAnomalyMonitorRequest, callback?: (err: AWSError, data: CostExplorer.Types.UpdateAnomalyMonitorResponse) => void): Request<CostExplorer.Types.UpdateAnomalyMonitorResponse, AWSError>;
   /**
-   * Updates an existing cost anomaly monitor. The changes made are applied going forward, and doesn'tt change anomalies detected in the past. 
+   * Updates an existing cost anomaly monitor. The changes made are applied going forward, and doesn't change anomalies detected in the past. 
    */
   updateAnomalyMonitor(callback?: (err: AWSError, data: CostExplorer.Types.UpdateAnomalyMonitorResponse) => void): Request<CostExplorer.Types.UpdateAnomalyMonitorResponse, AWSError>;
   /**
@@ -617,6 +641,10 @@ declare namespace CostExplorer {
      * The cost anomaly detection monitor object that you want to create.
      */
     AnomalyMonitor: AnomalyMonitor;
+    /**
+     *  An optional list of tags to associate with the specified  AnomalyMonitor . You can use resource tags to control access to your monitor using IAM policies. Each tag consists of a key and a value, and each key must be unique for the resource. The following restrictions apply to resource tags:   Although the maximum number of array members is 200, you can assign a maximum of 50 user-tags to one resource. The remaining are reserved for Amazon Web Services use   The maximum length of a key is 128 characters   The maximum length of a value is 256 characters   Valid characters for keys and values are: A-Z, a-z, spaces, _.:/=+-    Keys and values are case sensitive   Keys and values are trimmed for any leading or trailing whitespaces   Don’t use aws: as a prefix for your keys. This prefix is reserved for Amazon Web Services use  
+     */
+    ResourceTags?: ResourceTagList;
   }
   export interface CreateAnomalyMonitorResponse {
     /**
@@ -629,6 +657,10 @@ declare namespace CostExplorer {
      * The cost anomaly subscription object that you want to create. 
      */
     AnomalySubscription: AnomalySubscription;
+    /**
+     *  An optional list of tags to associate with the specified  AnomalySubscription . You can use resource tags to control access to your subscription using IAM policies. Each tag consists of a key and a value, and each key must be unique for the resource. The following restrictions apply to resource tags:   Although the maximum number of array members is 200, you can assign a maximum of 50 user-tags to one resource. The remaining are reserved for Amazon Web Services use   The maximum length of a key is 128 characters   The maximum length of a value is 256 characters   Valid characters for keys and values are: A-Z, a-z, spaces, _.:/=+-    Keys and values are case sensitive   Keys and values are trimmed for any leading or trailing whitespaces   Don’t use aws: as a prefix for your keys. This prefix is reserved for Amazon Web Services use  
+     */
+    ResourceTags?: ResourceTagList;
   }
   export interface CreateAnomalySubscriptionResponse {
     /**
@@ -648,6 +680,10 @@ declare namespace CostExplorer {
      *  The split charge rules used to allocate your charges between your Cost Category values. 
      */
     SplitChargeRules?: CostCategorySplitChargeRulesList;
+    /**
+     *  An optional list of tags to associate with the specified  CostCategory . You can use resource tags to control access to your cost category using IAM policies. Each tag consists of a key and a value, and each key must be unique for the resource. The following restrictions apply to resource tags:   Although the maximum number of array members is 200, you can assign a maximum of 50 user-tags to one resource. The remaining are reserved for Amazon Web Services use   The maximum length of a key is 128 characters   The maximum length of a value is 256 characters   Valid characters for keys and values are: A-Z, a-z, spaces, _.:/=+-    Keys and values are case sensitive   Keys and values are trimmed for any leading or trailing whitespaces   Don’t use aws: as a prefix for your keys. This prefix is reserved for Amazon Web Services use  
+     */
+    ResourceTags?: ResourceTagList;
   }
   export interface CreateCostCategoryDefinitionResponse {
     /**
@@ -1125,7 +1161,7 @@ declare namespace CostExplorer {
      */
     Granularity: Granularity;
     /**
-     * Filters Amazon Web Services costs by different dimensions. For example, you can specify SERVICE and LINKED_ACCOUNT and get the costs that are associated with that account's usage of that service. You can nest Expression objects to define any combination of dimension filters. For more information, see Expression.  Valid values for MatchOptions for CostCategories and Tags are EQUALS, ABSENT, and CASE_SENSITIVE. The default values are EQUALS and CASE_SENSITIVE. Valid values for MatchOptions for Dimensions are EQUALS and CASE_SENSITIVE.
+     * Filters Amazon Web Services costs by different dimensions. For example, you can specify SERVICE and LINKED_ACCOUNT and get the costs that are associated with that account's usage of that service. You can nest Expression objects to define any combination of dimension filters. For more information, see Expression.  Valid values for MatchOptions for Dimensions are EQUALS and CASE_SENSITIVE. Valid values for MatchOptions for CostCategories and Tags are EQUALS, ABSENT, and CASE_SENSITIVE. Default values are EQUALS and CASE_SENSITIVE.
      */
     Filter?: Expression;
     /**
@@ -1169,7 +1205,7 @@ declare namespace CostExplorer {
      */
     Granularity: Granularity;
     /**
-     * Filters Amazon Web Services costs by different dimensions. For example, you can specify SERVICE and LINKED_ACCOUNT and get the costs that are associated with that account's usage of that service. You can nest Expression objects to define any combination of dimension filters. For more information, see Expression.  The GetCostAndUsageWithResources operation requires that you either group by or filter by a ResourceId. It requires the Expression "SERVICE = Amazon Elastic Compute Cloud - Compute" in the filter. Valid values for MatchOptions for CostCategories and Tags are EQUALS, ABSENT, and CASE_SENSITIVE. The default values are EQUALS and CASE_SENSITIVE. Valid values for MatchOptions for Dimensions are EQUALS and CASE_SENSITIVE.
+     * Filters Amazon Web Services costs by different dimensions. For example, you can specify SERVICE and LINKED_ACCOUNT and get the costs that are associated with that account's usage of that service. You can nest Expression objects to define any combination of dimension filters. For more information, see Expression.  The GetCostAndUsageWithResources operation requires that you either group by or filter by a ResourceId. It requires the Expression "SERVICE = Amazon Elastic Compute Cloud - Compute" in the filter. Valid values for MatchOptions for Dimensions are EQUALS and CASE_SENSITIVE. Valid values for MatchOptions for CostCategories and Tags are EQUALS, ABSENT, and CASE_SENSITIVE. Default values are EQUALS and CASE_SENSITIVE.
      */
     Filter: Expression;
     /**
@@ -1834,6 +1870,18 @@ declare namespace CostExplorer {
      */
     NextToken?: NextPageToken;
   }
+  export interface ListTagsForResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource. For a list of supported resources, see ResourceTag.
+     */
+    ResourceArn: Arn;
+  }
+  export interface ListTagsForResourceResponse {
+    /**
+     * A list of tag key value pairs that are associated with the response. 
+     */
+    ResourceTags?: ResourceTagList;
+  }
   export type LookbackPeriodInDays = "SEVEN_DAYS"|"THIRTY_DAYS"|"SIXTY_DAYS"|string;
   export type MatchOption = "EQUALS"|"ABSENT"|"STARTS_WITH"|"ENDS_WITH"|"CONTAINS"|"CASE_SENSITIVE"|"CASE_INSENSITIVE"|string;
   export type MatchOptions = MatchOption[];
@@ -2221,6 +2269,20 @@ declare namespace CostExplorer {
      */
     EC2ResourceDetails?: EC2ResourceDetails;
   }
+  export interface ResourceTag {
+    /**
+     *  The key that is associated with the tag. 
+     */
+    Key: ResourceTagKey;
+    /**
+     *  The value that is associated with the tag. 
+     */
+    Value: ResourceTagValue;
+  }
+  export type ResourceTagKey = string;
+  export type ResourceTagKeyList = ResourceTagKey[];
+  export type ResourceTagList = ResourceTag[];
+  export type ResourceTagValue = string;
   export interface ResourceUtilization {
     /**
      * The utilization of current Amazon EC2 instance. 
@@ -2679,6 +2741,18 @@ declare namespace CostExplorer {
   export type SupportedSavingsPlansType = "COMPUTE_SP"|"EC2_INSTANCE_SP"|"SAGEMAKER_SP"|string;
   export type TagKey = string;
   export type TagList = Entity[];
+  export interface TagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource. For a list of supported resources, see ResourceTag. 
+     */
+    ResourceArn: Arn;
+    /**
+     *  A list of tag key-value pairs to be added to the resource. Each tag consists of a key and a value, and each key must be unique for the resource. The following restrictions apply to resource tags:   Although the maximum number of array members is 200, you can assign a maximum of 50 user-tags to one resource. The remaining are reserved for Amazon Web Services use   The maximum length of a key is 128 characters   The maximum length of a value is 256 characters   Valid characters for keys and values are: A-Z, a-z, spaces, _.:/=+-    Keys and values are case sensitive   Keys and values are trimmed for any leading or trailing whitespaces   Don’t use aws: as a prefix for your keys. This prefix is reserved for Amazon Web Services use  
+     */
+    ResourceTags: ResourceTagList;
+  }
+  export interface TagResourceResponse {
+  }
   export interface TagValues {
     /**
      * The key for the tag.
@@ -2757,6 +2831,18 @@ declare namespace CostExplorer {
   export type TotalRunningHours = string;
   export type TotalRunningNormalizedUnits = string;
   export type UnrealizedSavings = string;
+  export interface UntagResourceRequest {
+    /**
+     *  The Amazon Resource Name (ARN) of the resource. For a list of supported resources, see ResourceTag. 
+     */
+    ResourceArn: Arn;
+    /**
+     *  A list of tag keys associated with tags that need to be removed from the resource. If you specify a tag key that does not exist, it is ignored. Although the maximum number of array members is 200, user-tag maximum is 50. The remaining are reserved for Amazon Web Services use. 
+     */
+    ResourceTagKeys: ResourceTagKeyList;
+  }
+  export interface UntagResourceResponse {
+  }
   export type UnusedHours = string;
   export type UnusedUnits = string;
   export interface UpdateAnomalyMonitorRequest {

@@ -1397,6 +1397,10 @@ declare namespace Location {
      */
     EndTimeExclusive?: Timestamp;
     /**
+     * An optional limit for the number of device positions returned in a single call. Default value: 100 
+     */
+    MaxResults?: GetDevicePositionHistoryRequestMaxResultsInteger;
+    /**
      * The pagination token specifying which page of results to return in the response. If no token is provided, the default page is the first page.  Default value: null 
      */
     NextToken?: Token;
@@ -1409,6 +1413,7 @@ declare namespace Location {
      */
     TrackerName: ResourceName;
   }
+  export type GetDevicePositionHistoryRequestMaxResultsInteger = number;
   export interface GetDevicePositionHistoryResponse {
     /**
      * Contains the position history details for the requested device.

@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1097.0-->
+<!--LATEST=2.1098.0-->
 <!--ENTRYINSERT-->
+
+## 2.1098.0
+* bugfix: Route53: fix Route53 endpoints resolution for us-iso-* regions
+* feature: CostExplorer: Added three new APIs to support tagging and resource-level authorization on Cost Explorer resources: TagResource, UntagResource, ListTagsForResource.  Added optional parameters to CreateCostCategoryDefinition, CreateAnomalySubscription and CreateAnomalyMonitor APIs to support Tag On Create.
+* feature: LakeFormation: The release fixes the incorrect permissions called out in the documentation - DESCRIBE_TAG, ASSOCIATE_TAG, DELETE_TAG, ALTER_TAG. This trebuchet release fixes the corresponding SDK and documentation.
+* feature: Location: Amazon Location Service now includes a MaxResults parameter for GetDevicePositionHistory requests.
+* feature: Polly: Amazon Polly adds new Catalan voice - Arlet. Arlet is available as Neural voice only.
 
 ## 2.1097.0
 * feature: ChimeSDKMeetings: Add support for media replication to link multiple WebRTC media sessions together to reach larger and global audiences. Participants connected to a replica session can be granted access to join the primary session and can switch sessions with their existing WebRTC connection
