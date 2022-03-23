@@ -4814,7 +4814,7 @@ declare namespace Redshift {
      */
     ManualSnapshotRetentionPeriod?: IntegerOptional;
     /**
-     * The Key Management Service (KMS) key ID of the encryption key that you want to use to encrypt data in the cluster that you restore from a shared snapshot.
+     * The Key Management Service (KMS) key ID of the encryption key to encrypt data in the cluster restored from a shared snapshot. You can also provide the key ID when you restore from an unencrypted snapshot to an encrypted cluster in the same account. Additionally, you can specify a new KMS key ID when you restore from an encrypted snapshot in the same account in order to change it. In that case, the restored cluster is encrypted with the new KMS key ID.
      */
     KmsKeyId?: String;
     /**
@@ -4865,6 +4865,10 @@ declare namespace Redshift {
      * The identifier of the target reserved node offering.
      */
     TargetReservedNodeOfferingId?: String;
+    /**
+     * Enables support for restoring an unencrypted snapshot to a cluster encrypted with Key Management Service (KMS) and a CMK.
+     */
+    Encrypted?: BooleanOptional;
   }
   export interface RestoreFromClusterSnapshotResult {
     Cluster?: Cluster;

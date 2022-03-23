@@ -302,6 +302,7 @@ export abstract class ConfigurationServicePlaceholders {
   amplifyuibuilder?: AWS.AmplifyUIBuilder.Types.ClientConfiguration;
   keyspaces?: AWS.Keyspaces.Types.ClientConfiguration;
   billingconductor?: AWS.Billingconductor.Types.ClientConfiguration;
+  gamesparks?: AWS.GameSparks.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -606,4 +607,5 @@ export interface ConfigurationServiceApiVersions {
   amplifyuibuilder?: AWS.AmplifyUIBuilder.Types.apiVersion;
   keyspaces?: AWS.Keyspaces.Types.apiVersion;
   billingconductor?: AWS.Billingconductor.Types.apiVersion;
+  gamesparks?: AWS.GameSparks.Types.apiVersion;
 }

@@ -1695,7 +1695,7 @@ declare namespace Transfer {
      */
     ServerId: ServerId;
     /**
-     * Specifies the workflow ID for the workflow to assign and the execution role used for executing the workflow.
+     * Specifies the workflow ID for the workflow to assign and the execution role used for executing the workflow. To remove an associated workflow from a server, you can provide an empty OnUpload object, as in the following example.  aws transfer update-server --server-id s-01234567890abcdef --workflow-details '{"OnUpload":[]}' 
      */
     WorkflowDetails?: WorkflowDetails;
   }
@@ -1782,7 +1782,7 @@ declare namespace Transfer {
   }
   export interface WorkflowDetails {
     /**
-     * A trigger that starts a workflow: the workflow begins to execute after a file is uploaded.
+     * A trigger that starts a workflow: the workflow begins to execute after a file is uploaded. To remove an associated workflow from a server, you can provide an empty OnUpload object, as in the following example.  aws transfer update-server --server-id s-01234567890abcdef --workflow-details '{"OnUpload":[]}' 
      */
     OnUpload: OnUploadWorkflowDetails;
   }

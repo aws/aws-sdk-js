@@ -301,5 +301,6 @@ module.exports = {
   WorkSpacesWeb: require('./workspacesweb'),
   AmplifyUIBuilder: require('./amplifyuibuilder'),
   Keyspaces: require('./keyspaces'),
-  Billingconductor: require('./billingconductor')
+  Billingconductor: require('./billingconductor'),
+  GameSparks: require('./gamesparks')
 };

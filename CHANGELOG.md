@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1098.0-->
+<!--LATEST=2.1099.0-->
 <!--ENTRYINSERT-->
+
+## 2.1099.0
+* feature: AuditManager: This release updates 1 API parameter, the SnsArn attribute. The character length and regex pattern for the SnsArn attribute have been updated, which enables you to deselect an SNS topic when using the UpdateSettings operation.
+* feature: EBS: Increased the maximum supported value for the Timeout parameter of the StartSnapshot API from 60 minutes to 4320 minutes.  Changed the HTTP error code for ConflictException from 503 to 409.
+* feature: GameSparks: Released the preview of Amazon GameSparks, a fully managed AWS service that provides a multi-service backend for game developers.
+* feature: Redshift: This release adds a new [--encrypted | --no-encrypted] field in restore-from-cluster-snapshot API. Customers can now restore an unencrypted snapshot to a cluster encrypted with AWS Managed Key or their own KMS key.
+* feature: SSM: Update AddTagsToResource, ListTagsForResource, and RemoveTagsFromResource APIs to reflect the support for tagging Automation resources. Includes other minor documentation updates.
 
 ## 2.1098.0
 * bugfix: Route53: fix Route53 endpoints resolution for us-iso-* regions
