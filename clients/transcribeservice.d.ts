@@ -360,7 +360,7 @@ declare namespace TranscribeService {
      */
     LanguageCode?: LanguageCode;
     /**
-     * The sample rate, in Hertz, of the audio.
+     * The sample rate, in Hertz, of the input audio.
      */
     MediaSampleRateHertz?: MediaSampleRateHertz;
     /**
@@ -1638,7 +1638,7 @@ declare namespace TranscribeService {
      */
     TranscriptionJobName: TranscriptionJobName;
     /**
-     * The language code for the language used in the input media file. To transcribe speech in Modern Standard Arabic (ar-SA), your audio or video file must be encoded at a sample rate of 16,000 Hz or higher.
+     * The language code for the language used in the input media file. You must include either LanguageCode or IdentifyLanguage in your request. To transcribe speech in Modern Standard Arabic (ar-SA), your audio or video file must be encoded at a sample rate of 16,000 Hz or higher.
      */
     LanguageCode?: LanguageCode;
     /**
@@ -1686,7 +1686,7 @@ declare namespace TranscribeService {
      */
     ContentRedaction?: ContentRedaction;
     /**
-     * Set this field to true to enable automatic language identification. Automatic language identification is disabled by default. You receive a BadRequestException error if you enter a value for a LanguageCode.
+     * Set this field to true to enable automatic language identification. Automatic language identification is disabled by default. You receive a BadRequestException error if you enter a value for a LanguageCode. You must include either LanguageCode or IdentifyLanguage in your request.
      */
     IdentifyLanguage?: Boolean;
     /**
@@ -1708,7 +1708,7 @@ declare namespace TranscribeService {
   }
   export interface StartTranscriptionJobResponse {
     /**
-     * An object containing details of the asynchronous transcription job.
+     * Provides information about your asynchronous transcription job.
      */
     TranscriptionJob?: TranscriptionJob;
   }
@@ -1716,21 +1716,30 @@ declare namespace TranscribeService {
   export type SubtitleFileUris = Uri[];
   export type SubtitleFormat = "vtt"|"srt"|string;
   export type SubtitleFormats = SubtitleFormat[];
+  export type SubtitleOutputStartIndex = number;
   export interface Subtitles {
     /**
-     * Specify the output format for your subtitle file.
+     * Specify the output format for your subtitle file; if you select both srt and vtt formats, two output files are generated.
      */
     Formats?: SubtitleFormats;
+    /**
+     * Defines the starting value that is assigned to the first subtitle segment. The default start index for Amazon Transcribe is 0, which differs from the more widely used standard of 1. If you're uncertain which value to use, we recommend choosing 1, as this may improve compatibility with other services.
+     */
+    OutputStartIndex?: SubtitleOutputStartIndex;
   }
   export interface SubtitlesOutput {
     /**
-     * Specify the output format for your subtitle file; if you select both SRT and VTT formats, two output files are generated.
+     * The format of your subtitle files. If your request specified both srt and vtt formats, both formats are shown.
      */
     Formats?: SubtitleFormats;
     /**
      * Contains the output location for your subtitle file. This location must be an S3 bucket.
      */
     SubtitleFileUris?: SubtitleFileUris;
+    /**
+     * Shows the output start index value for your subtitle files. If you did not specify a value in your request, the default value of 0 is used.
+     */
+    OutputStartIndex?: SubtitleOutputStartIndex;
   }
   export interface Tag {
     /**

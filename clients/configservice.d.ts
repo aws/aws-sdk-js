@@ -84,19 +84,19 @@ declare class ConfigService extends Service {
    */
   deleteEvaluationResults(callback?: (err: AWSError, data: ConfigService.Types.DeleteEvaluationResultsResponse) => void): Request<ConfigService.Types.DeleteEvaluationResultsResponse, AWSError>;
   /**
-   * Deletes the specified organization config rule and all of its evaluation results from all member accounts in that organization.  Only a master account and a delegated administrator account can delete an organization config rule. When calling this API with a delegated administrator, you must ensure Organizations ListDelegatedAdministrator permissions are added. Config sets the state of a rule to DELETE_IN_PROGRESS until the deletion is complete. You cannot update a rule while it is in this state.
+   * Deletes the specified organization Config rule and all of its evaluation results from all member accounts in that organization.  Only a master account and a delegated administrator account can delete an organization Config rule. When calling this API with a delegated administrator, you must ensure Organizations ListDelegatedAdministrator permissions are added. Config sets the state of a rule to DELETE_IN_PROGRESS until the deletion is complete. You cannot update a rule while it is in this state.
    */
   deleteOrganizationConfigRule(params: ConfigService.Types.DeleteOrganizationConfigRuleRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the specified organization config rule and all of its evaluation results from all member accounts in that organization.  Only a master account and a delegated administrator account can delete an organization config rule. When calling this API with a delegated administrator, you must ensure Organizations ListDelegatedAdministrator permissions are added. Config sets the state of a rule to DELETE_IN_PROGRESS until the deletion is complete. You cannot update a rule while it is in this state.
+   * Deletes the specified organization Config rule and all of its evaluation results from all member accounts in that organization.  Only a master account and a delegated administrator account can delete an organization Config rule. When calling this API with a delegated administrator, you must ensure Organizations ListDelegatedAdministrator permissions are added. Config sets the state of a rule to DELETE_IN_PROGRESS until the deletion is complete. You cannot update a rule while it is in this state.
    */
   deleteOrganizationConfigRule(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the specified organization conformance pack and all of the config rules and remediation actions from all member accounts in that organization.   Only a master account or a delegated administrator account can delete an organization conformance pack. When calling this API with a delegated administrator, you must ensure Organizations ListDelegatedAdministrator permissions are added. Config sets the state of a conformance pack to DELETE_IN_PROGRESS until the deletion is complete. You cannot update a conformance pack while it is in this state. 
+   * Deletes the specified organization conformance pack and all of the Config rules and remediation actions from all member accounts in that organization.   Only a master account or a delegated administrator account can delete an organization conformance pack. When calling this API with a delegated administrator, you must ensure Organizations ListDelegatedAdministrator permissions are added. Config sets the state of a conformance pack to DELETE_IN_PROGRESS until the deletion is complete. You cannot update a conformance pack while it is in this state. 
    */
   deleteOrganizationConformancePack(params: ConfigService.Types.DeleteOrganizationConformancePackRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the specified organization conformance pack and all of the config rules and remediation actions from all member accounts in that organization.   Only a master account or a delegated administrator account can delete an organization conformance pack. When calling this API with a delegated administrator, you must ensure Organizations ListDelegatedAdministrator permissions are added. Config sets the state of a conformance pack to DELETE_IN_PROGRESS until the deletion is complete. You cannot update a conformance pack while it is in this state. 
+   * Deletes the specified organization conformance pack and all of the Config rules and remediation actions from all member accounts in that organization.   Only a master account or a delegated administrator account can delete an organization conformance pack. When calling this API with a delegated administrator, you must ensure Organizations ListDelegatedAdministrator permissions are added. Config sets the state of a conformance pack to DELETE_IN_PROGRESS until the deletion is complete. You cannot update a conformance pack while it is in this state. 
    */
   deleteOrganizationConformancePack(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -284,19 +284,19 @@ declare class ConfigService extends Service {
    */
   describeDeliveryChannels(callback?: (err: AWSError, data: ConfigService.Types.DescribeDeliveryChannelsResponse) => void): Request<ConfigService.Types.DescribeDeliveryChannelsResponse, AWSError>;
   /**
-   * Provides organization config rule deployment status for an organization.  The status is not considered successful until organization config rule is successfully deployed in all the member accounts with an exception of excluded accounts. When you specify the limit and the next token, you receive a paginated response. Limit and next token are not applicable if you specify organization config rule names. It is only applicable, when you request all the organization config rules. 
+   * Provides organization Config rule deployment status for an organization.  The status is not considered successful until organization Config rule is successfully deployed in all the member accounts with an exception of excluded accounts. When you specify the limit and the next token, you receive a paginated response. Limit and next token are not applicable if you specify organization Config rule names. It is only applicable, when you request all the organization Config rules. 
    */
   describeOrganizationConfigRuleStatuses(params: ConfigService.Types.DescribeOrganizationConfigRuleStatusesRequest, callback?: (err: AWSError, data: ConfigService.Types.DescribeOrganizationConfigRuleStatusesResponse) => void): Request<ConfigService.Types.DescribeOrganizationConfigRuleStatusesResponse, AWSError>;
   /**
-   * Provides organization config rule deployment status for an organization.  The status is not considered successful until organization config rule is successfully deployed in all the member accounts with an exception of excluded accounts. When you specify the limit and the next token, you receive a paginated response. Limit and next token are not applicable if you specify organization config rule names. It is only applicable, when you request all the organization config rules. 
+   * Provides organization Config rule deployment status for an organization.  The status is not considered successful until organization Config rule is successfully deployed in all the member accounts with an exception of excluded accounts. When you specify the limit and the next token, you receive a paginated response. Limit and next token are not applicable if you specify organization Config rule names. It is only applicable, when you request all the organization Config rules. 
    */
   describeOrganizationConfigRuleStatuses(callback?: (err: AWSError, data: ConfigService.Types.DescribeOrganizationConfigRuleStatusesResponse) => void): Request<ConfigService.Types.DescribeOrganizationConfigRuleStatusesResponse, AWSError>;
   /**
-   * Returns a list of organization config rules.   When you specify the limit and the next token, you receive a paginated response. Limit and next token are not applicable if you specify organization config rule names. It is only applicable, when you request all the organization config rules. 
+   * Returns a list of organization Config rules.   When you specify the limit and the next token, you receive a paginated response. Limit and next token are not applicable if you specify organization Config rule names. It is only applicable, when you request all the organization Config rules. 
    */
   describeOrganizationConfigRules(params: ConfigService.Types.DescribeOrganizationConfigRulesRequest, callback?: (err: AWSError, data: ConfigService.Types.DescribeOrganizationConfigRulesResponse) => void): Request<ConfigService.Types.DescribeOrganizationConfigRulesResponse, AWSError>;
   /**
-   * Returns a list of organization config rules.   When you specify the limit and the next token, you receive a paginated response. Limit and next token are not applicable if you specify organization config rule names. It is only applicable, when you request all the organization config rules. 
+   * Returns a list of organization Config rules.   When you specify the limit and the next token, you receive a paginated response. Limit and next token are not applicable if you specify organization Config rule names. It is only applicable, when you request all the organization Config rules. 
    */
   describeOrganizationConfigRules(callback?: (err: AWSError, data: ConfigService.Types.DescribeOrganizationConfigRulesResponse) => void): Request<ConfigService.Types.DescribeOrganizationConfigRulesResponse, AWSError>;
   /**
@@ -440,6 +440,14 @@ declare class ConfigService extends Service {
    */
   getConformancePackComplianceSummary(callback?: (err: AWSError, data: ConfigService.Types.GetConformancePackComplianceSummaryResponse) => void): Request<ConfigService.Types.GetConformancePackComplianceSummaryResponse, AWSError>;
   /**
+   * Returns the policy definition containing the logic for your Config Custom Policy rule.
+   */
+  getCustomRulePolicy(params: ConfigService.Types.GetCustomRulePolicyRequest, callback?: (err: AWSError, data: ConfigService.Types.GetCustomRulePolicyResponse) => void): Request<ConfigService.Types.GetCustomRulePolicyResponse, AWSError>;
+  /**
+   * Returns the policy definition containing the logic for your Config Custom Policy rule.
+   */
+  getCustomRulePolicy(callback?: (err: AWSError, data: ConfigService.Types.GetCustomRulePolicyResponse) => void): Request<ConfigService.Types.GetCustomRulePolicyResponse, AWSError>;
+  /**
    * Returns the resource types, the number of each resource type, and the total number of resources that Config is recording in this region for your Amazon Web Services account.   Example    Config is recording three resource types in the US East (Ohio) Region for your account: 25 EC2 instances, 20 IAM users, and 15 S3 buckets.   You make a call to the GetDiscoveredResourceCounts action and specify that you want all resource types.    Config returns the following:   The resource types (EC2 instances, IAM users, and S3 buckets).   The number of each resource type (25, 20, and 15).   The total number of all resources (60).     The response is paginated. By default, Config lists 100 ResourceCount objects on each page. You can customize this number with the limit parameter. The response includes a nextToken string. To get the next page of results, run the request again and specify the string for the nextToken parameter.  If you make a call to the GetDiscoveredResourceCounts action, you might not immediately receive resource counts in the following situations:   You are a new Config customer.   You just enabled resource recording.   It might take a few minutes for Config to record and count your resources. Wait a few minutes and then retry the GetDiscoveredResourceCounts action.  
    */
   getDiscoveredResourceCounts(params: ConfigService.Types.GetDiscoveredResourceCountsRequest, callback?: (err: AWSError, data: ConfigService.Types.GetDiscoveredResourceCountsResponse) => void): Request<ConfigService.Types.GetDiscoveredResourceCountsResponse, AWSError>;
@@ -448,11 +456,11 @@ declare class ConfigService extends Service {
    */
   getDiscoveredResourceCounts(callback?: (err: AWSError, data: ConfigService.Types.GetDiscoveredResourceCountsResponse) => void): Request<ConfigService.Types.GetDiscoveredResourceCountsResponse, AWSError>;
   /**
-   * Returns detailed status for each member account within an organization for a given organization config rule.
+   * Returns detailed status for each member account within an organization for a given organization Config rule.
    */
   getOrganizationConfigRuleDetailedStatus(params: ConfigService.Types.GetOrganizationConfigRuleDetailedStatusRequest, callback?: (err: AWSError, data: ConfigService.Types.GetOrganizationConfigRuleDetailedStatusResponse) => void): Request<ConfigService.Types.GetOrganizationConfigRuleDetailedStatusResponse, AWSError>;
   /**
-   * Returns detailed status for each member account within an organization for a given organization config rule.
+   * Returns detailed status for each member account within an organization for a given organization Config rule.
    */
   getOrganizationConfigRuleDetailedStatus(callback?: (err: AWSError, data: ConfigService.Types.GetOrganizationConfigRuleDetailedStatusResponse) => void): Request<ConfigService.Types.GetOrganizationConfigRuleDetailedStatusResponse, AWSError>;
   /**
@@ -463,6 +471,14 @@ declare class ConfigService extends Service {
    * Returns detailed status for each member account within an organization for a given organization conformance pack.
    */
   getOrganizationConformancePackDetailedStatus(callback?: (err: AWSError, data: ConfigService.Types.GetOrganizationConformancePackDetailedStatusResponse) => void): Request<ConfigService.Types.GetOrganizationConformancePackDetailedStatusResponse, AWSError>;
+  /**
+   * Returns the policy definition containing the logic for your organization Config Custom Policy rule.
+   */
+  getOrganizationCustomRulePolicy(params: ConfigService.Types.GetOrganizationCustomRulePolicyRequest, callback?: (err: AWSError, data: ConfigService.Types.GetOrganizationCustomRulePolicyResponse) => void): Request<ConfigService.Types.GetOrganizationCustomRulePolicyResponse, AWSError>;
+  /**
+   * Returns the policy definition containing the logic for your organization Config Custom Policy rule.
+   */
+  getOrganizationCustomRulePolicy(callback?: (err: AWSError, data: ConfigService.Types.GetOrganizationCustomRulePolicyResponse) => void): Request<ConfigService.Types.GetOrganizationCustomRulePolicyResponse, AWSError>;
   /**
    * Returns a list of ConfigurationItems for the specified resource. The list contains details about each state of the resource during the specified time interval. If you specified a retention period to retain your ConfigurationItems between a minimum of 30 days and a maximum of 7 years (2557 days), Config returns the ConfigurationItems for the specified retention period.  The response is paginated. By default, Config returns a limit of 10 configuration items per page. You can customize this number with the limit parameter. The response includes a nextToken string. To get the next page of results, run the request again and specify the string for the nextToken parameter.  Each call to the API is limited to span a duration of seven days. It is likely that the number of records returned is smaller than the specified limit. In such cases, you can make another call, using the nextToken. 
    */
@@ -576,11 +592,11 @@ declare class ConfigService extends Service {
    */
   putExternalEvaluation(callback?: (err: AWSError, data: ConfigService.Types.PutExternalEvaluationResponse) => void): Request<ConfigService.Types.PutExternalEvaluationResponse, AWSError>;
   /**
-   * Adds or updates organization config rule for your entire organization evaluating whether your Amazon Web Services resources comply with your desired configurations.  Only a master account and a delegated administrator can create or update an organization config rule. When calling this API with a delegated administrator, you must ensure Organizations ListDelegatedAdministrator permissions are added.  This API enables organization service access through the EnableAWSServiceAccess action and creates a service linked role AWSServiceRoleForConfigMultiAccountSetup in the master or delegated administrator account of your organization. The service linked role is created only when the role does not exist in the caller account. Config verifies the existence of role with GetRole action. To use this API with delegated administrator, register a delegated administrator by calling Amazon Web Services Organization register-delegated-administrator for config-multiaccountsetup.amazonaws.com.  You can use this action to create both custom Config rules and Config managed rules. If you are adding a new custom Config rule, you must first create Lambda function in the master account or a delegated administrator that the rule invokes to evaluate your resources. You also need to create an IAM role in the managed-account that can be assumed by the Lambda function. When you use the PutOrganizationConfigRule action to add the rule to Config, you must specify the Amazon Resource Name (ARN) that Lambda assigns to the function. If you are adding an Config managed rule, specify the rule's identifier for the RuleIdentifier key. The maximum number of organization config rules that Config supports is 150 and 3 delegated administrator per organization.   Prerequisite: Ensure you call EnableAllFeatures API to enable all features in an organization. Specify either OrganizationCustomRuleMetadata or OrganizationManagedRuleMetadata. 
+   * Adds or updates organization Config rule for your entire organization evaluating whether your Amazon Web Services resources comply with your desired configurations.  Only a master account and a delegated administrator can create or update an organization Config rule. When calling this API with a delegated administrator, you must ensure Organizations ListDelegatedAdministrator permissions are added.  This API enables organization service access through the EnableAWSServiceAccess action and creates a service linked role AWSServiceRoleForConfigMultiAccountSetup in the master or delegated administrator account of your organization. The service linked role is created only when the role does not exist in the caller account. Config verifies the existence of role with GetRole action. To use this API with delegated administrator, register a delegated administrator by calling Amazon Web Services Organization register-delegated-administrator for config-multiaccountsetup.amazonaws.com.  You can use this action to create both custom Config rules and Config managed rules. If you are adding a new custom Config rule, you must first create Lambda function in the master account or a delegated administrator that the rule invokes to evaluate your resources. You also need to create an IAM role in the managed-account that can be assumed by the Lambda function. When you use the PutOrganizationConfigRule action to add the rule to Config, you must specify the Amazon Resource Name (ARN) that Lambda assigns to the function. If you are adding an Config managed rule, specify the rule's identifier for the RuleIdentifier key. The maximum number of organization Config rules that Config supports is 150 and 3 delegated administrator per organization.   Prerequisite: Ensure you call EnableAllFeatures API to enable all features in an organization. Specify either OrganizationCustomRuleMetadata or OrganizationManagedRuleMetadata. 
    */
   putOrganizationConfigRule(params: ConfigService.Types.PutOrganizationConfigRuleRequest, callback?: (err: AWSError, data: ConfigService.Types.PutOrganizationConfigRuleResponse) => void): Request<ConfigService.Types.PutOrganizationConfigRuleResponse, AWSError>;
   /**
-   * Adds or updates organization config rule for your entire organization evaluating whether your Amazon Web Services resources comply with your desired configurations.  Only a master account and a delegated administrator can create or update an organization config rule. When calling this API with a delegated administrator, you must ensure Organizations ListDelegatedAdministrator permissions are added.  This API enables organization service access through the EnableAWSServiceAccess action and creates a service linked role AWSServiceRoleForConfigMultiAccountSetup in the master or delegated administrator account of your organization. The service linked role is created only when the role does not exist in the caller account. Config verifies the existence of role with GetRole action. To use this API with delegated administrator, register a delegated administrator by calling Amazon Web Services Organization register-delegated-administrator for config-multiaccountsetup.amazonaws.com.  You can use this action to create both custom Config rules and Config managed rules. If you are adding a new custom Config rule, you must first create Lambda function in the master account or a delegated administrator that the rule invokes to evaluate your resources. You also need to create an IAM role in the managed-account that can be assumed by the Lambda function. When you use the PutOrganizationConfigRule action to add the rule to Config, you must specify the Amazon Resource Name (ARN) that Lambda assigns to the function. If you are adding an Config managed rule, specify the rule's identifier for the RuleIdentifier key. The maximum number of organization config rules that Config supports is 150 and 3 delegated administrator per organization.   Prerequisite: Ensure you call EnableAllFeatures API to enable all features in an organization. Specify either OrganizationCustomRuleMetadata or OrganizationManagedRuleMetadata. 
+   * Adds or updates organization Config rule for your entire organization evaluating whether your Amazon Web Services resources comply with your desired configurations.  Only a master account and a delegated administrator can create or update an organization Config rule. When calling this API with a delegated administrator, you must ensure Organizations ListDelegatedAdministrator permissions are added.  This API enables organization service access through the EnableAWSServiceAccess action and creates a service linked role AWSServiceRoleForConfigMultiAccountSetup in the master or delegated administrator account of your organization. The service linked role is created only when the role does not exist in the caller account. Config verifies the existence of role with GetRole action. To use this API with delegated administrator, register a delegated administrator by calling Amazon Web Services Organization register-delegated-administrator for config-multiaccountsetup.amazonaws.com.  You can use this action to create both custom Config rules and Config managed rules. If you are adding a new custom Config rule, you must first create Lambda function in the master account or a delegated administrator that the rule invokes to evaluate your resources. You also need to create an IAM role in the managed-account that can be assumed by the Lambda function. When you use the PutOrganizationConfigRule action to add the rule to Config, you must specify the Amazon Resource Name (ARN) that Lambda assigns to the function. If you are adding an Config managed rule, specify the rule's identifier for the RuleIdentifier key. The maximum number of organization Config rules that Config supports is 150 and 3 delegated administrator per organization.   Prerequisite: Ensure you call EnableAllFeatures API to enable all features in an organization. Specify either OrganizationCustomRuleMetadata or OrganizationManagedRuleMetadata. 
    */
   putOrganizationConfigRule(callback?: (err: AWSError, data: ConfigService.Types.PutOrganizationConfigRuleResponse) => void): Request<ConfigService.Types.PutOrganizationConfigRuleResponse, AWSError>;
   /**
@@ -1262,9 +1278,21 @@ declare namespace ConfigService {
      */
     LastErrorMessage?: String;
     /**
-     * Indicates whether Config has evaluated your resources against the rule at least once.    true - Config has evaluated your Amazon Web Services resources against the rule at least once.    false - Config has not once finished evaluating your Amazon Web Services resources against the rule.  
+     * Indicates whether Config has evaluated your resources against the rule at least once.    true - Config has evaluated your Amazon Web Services resources against the rule at least once.    false - Config has not finished evaluating your Amazon Web Services resources against the rule at least once.  
      */
     FirstEvaluationStarted?: Boolean;
+    /**
+     * The status of the last attempted delivery of a debug log for your Config Custom Policy rules. Either Successful or Failed.
+     */
+    LastDebugLogDeliveryStatus?: String;
+    /**
+     * The reason Config was not able to deliver a debug log. This is for the last failed attempt to retrieve a debug log for your Config Custom Policy rules.
+     */
+    LastDebugLogDeliveryStatusReason?: String;
+    /**
+     * The time Config last attempted to deliver a debug log for your Config Custom Policy rules.
+     */
+    LastDebugLogDeliveryTime?: _Date;
   }
   export type ConfigRuleEvaluationStatusList = ConfigRuleEvaluationStatus[];
   export type ConfigRuleName = string;
@@ -1574,7 +1602,7 @@ declare namespace ConfigService {
   export type ConformancePackNamesToSummarizeList = ConformancePackName[];
   export interface ConformancePackRuleCompliance {
     /**
-     * Name of the config rule.
+     * Name of the Config rule.
      */
     ConfigRuleName?: ConfigRuleName;
     /**
@@ -1627,7 +1655,22 @@ declare namespace ConfigService {
   export type ConformancePackStatusReason = string;
   export type ControlsList = StringWithCharLimit128[];
   export type CosmosPageLimit = number;
+  export interface CustomPolicyDetails {
+    /**
+     * The runtime system for your Config Custom Policy rule. Guard is a policy-as-code language that allows you to write policies that are enforced by Config Custom Policy rules. For more information about Guard, see the Guard GitHub Repository.
+     */
+    PolicyRuntime: PolicyRuntime;
+    /**
+     * The policy definition containing the logic for your Config Custom Policy rule.
+     */
+    PolicyText: PolicyText;
+    /**
+     * The boolean expression for enabling debug logging for your Config Custom Policy rule. The default value is false.
+     */
+    EnableDebugLogDelivery?: Boolean;
+  }
   export type _Date = Date;
+  export type DebugLogDeliveryAccounts = AccountId[];
   export interface DeleteAggregationAuthorizationRequest {
     /**
      * The 12-digit account ID of the account authorized to aggregate data.
@@ -1678,7 +1721,7 @@ declare namespace ConfigService {
   }
   export interface DeleteOrganizationConfigRuleRequest {
     /**
-     * The name of organization config rule that you want to delete.
+     * The name of organization Config rule that you want to delete.
      */
     OrganizationConfigRuleName: OrganizationConfigRuleName;
   }
@@ -2171,7 +2214,7 @@ declare namespace ConfigService {
   }
   export interface DescribeOrganizationConfigRuleStatusesRequest {
     /**
-     * The names of organization config rules for which you want status details. If you do not specify any names, Config returns details for all your organization Config rules.
+     * The names of organization Config rules for which you want status details. If you do not specify any names, Config returns details for all your organization Config rules.
      */
     OrganizationConfigRuleNames?: OrganizationConfigRuleNames;
     /**
@@ -2195,11 +2238,11 @@ declare namespace ConfigService {
   }
   export interface DescribeOrganizationConfigRulesRequest {
     /**
-     * The names of organization config rules for which you want details. If you do not specify any names, Config returns details for all your organization config rules.
+     * The names of organization Config rules for which you want details. If you do not specify any names, Config returns details for all your organization Config rules.
      */
     OrganizationConfigRuleNames?: OrganizationConfigRuleNames;
     /**
-     * The maximum number of organization config rules returned on each page. If you do no specify a number, Config uses the default. The default is 100.
+     * The maximum number of organization Config rules returned on each page. If you do no specify a number, Config uses the default. The default is 100.
      */
     Limit?: CosmosPageLimit;
     /**
@@ -2822,6 +2865,18 @@ declare namespace ConfigService {
      */
     NextToken?: NextToken;
   }
+  export interface GetCustomRulePolicyRequest {
+    /**
+     * The name of your Config Custom Policy rule.
+     */
+    ConfigRuleName?: ConfigRuleName;
+  }
+  export interface GetCustomRulePolicyResponse {
+    /**
+     * The policy definition containing the logic for your Config Custom Policy rule.
+     */
+    PolicyText?: PolicyText;
+  }
   export interface GetDiscoveredResourceCountsRequest {
     /**
      * The comma-separated list that specifies the resource types that you want Config to return (for example, "AWS::EC2::Instance", "AWS::IAM::User"). If a value for resourceTypes is not specified, Config returns all resource types that Config is recording in the region for your account.  If the configuration recorder is turned off, Config returns an empty list of ResourceCount objects. If the configuration recorder is not recording a specific resource type (for example, S3 buckets), that resource type is not returned in the list of ResourceCount objects. 
@@ -2852,7 +2907,7 @@ declare namespace ConfigService {
   }
   export interface GetOrganizationConfigRuleDetailedStatusRequest {
     /**
-     * The name of organization config rule for which you want status details for member accounts.
+     * The name of your organization Config rule for which you want status details for member accounts.
      */
     OrganizationConfigRuleName: OrganizationConfigRuleName;
     /**
@@ -2905,6 +2960,18 @@ declare namespace ConfigService {
      * The nextToken string returned on a previous page that you use to get the next page of results in a paginated response. 
      */
     NextToken?: String;
+  }
+  export interface GetOrganizationCustomRulePolicyRequest {
+    /**
+     * The name of your organization Config Custom Policy rule. 
+     */
+    OrganizationConfigRuleName: OrganizationConfigRuleName;
+  }
+  export interface GetOrganizationCustomRulePolicyResponse {
+    /**
+     * The policy definition containing the logic for your organization Config Custom Policy rule.
+     */
+    PolicyText?: PolicyText;
   }
   export interface GetResourceConfigHistoryRequest {
     /**
@@ -3095,19 +3162,19 @@ declare namespace ConfigService {
      */
     AccountId: AccountId;
     /**
-     * The name of config rule deployed in the member account.
+     * The name of Config rule deployed in the member account.
      */
     ConfigRuleName: StringWithCharLimit64;
     /**
-     * Indicates deployment status for config rule in the member account. When master account calls PutOrganizationConfigRule action for the first time, config rule status is created in the member account. When master account calls PutOrganizationConfigRule action for the second time, config rule status is updated in the member account. Config rule status is deleted when the master account deletes OrganizationConfigRule and disables service access for config-multiaccountsetup.amazonaws.com.   Config sets the state of the rule to:    CREATE_SUCCESSFUL when config rule has been created in the member account.     CREATE_IN_PROGRESS when config rule is being created in the member account.    CREATE_FAILED when config rule creation has failed in the member account.    DELETE_FAILED when config rule deletion has failed in the member account.    DELETE_IN_PROGRESS when config rule is being deleted in the member account.    DELETE_SUCCESSFUL when config rule has been deleted in the member account.     UPDATE_SUCCESSFUL when config rule has been updated in the member account.    UPDATE_IN_PROGRESS when config rule is being updated in the member account.    UPDATE_FAILED when config rule deletion has failed in the member account.  
+     * Indicates deployment status for Config rule in the member account. When master account calls PutOrganizationConfigRule action for the first time, Config rule status is created in the member account. When master account calls PutOrganizationConfigRule action for the second time, Config rule status is updated in the member account. Config rule status is deleted when the master account deletes OrganizationConfigRule and disables service access for config-multiaccountsetup.amazonaws.com.   Config sets the state of the rule to:    CREATE_SUCCESSFUL when Config rule has been created in the member account.     CREATE_IN_PROGRESS when Config rule is being created in the member account.    CREATE_FAILED when Config rule creation has failed in the member account.    DELETE_FAILED when Config rule deletion has failed in the member account.    DELETE_IN_PROGRESS when Config rule is being deleted in the member account.    DELETE_SUCCESSFUL when Config rule has been deleted in the member account.     UPDATE_SUCCESSFUL when Config rule has been updated in the member account.    UPDATE_IN_PROGRESS when Config rule is being updated in the member account.    UPDATE_FAILED when Config rule deletion has failed in the member account.  
      */
     MemberAccountRuleStatus: MemberAccountRuleStatus;
     /**
-     * An error code that is returned when config rule creation or deletion failed in the member account.
+     * An error code that is returned when Config rule creation or deletion failed in the member account.
      */
     ErrorCode?: String;
     /**
-     * An error message indicating that config rule account creation or deletion has failed due to an error in the member account.
+     * An error message indicating that Config rule account creation or deletion has failed due to an error in the member account.
      */
     ErrorMessage?: String;
     /**
@@ -3135,11 +3202,11 @@ declare namespace ConfigService {
   }
   export interface OrganizationConfigRule {
     /**
-     * The name that you assign to organization config rule.
+     * The name that you assign to organization Config rule.
      */
     OrganizationConfigRuleName: OrganizationConfigRuleName;
     /**
-     * Amazon Resource Name (ARN) of organization config rule.
+     * Amazon Resource Name (ARN) of organization Config rule.
      */
     OrganizationConfigRuleArn: StringWithCharLimit256;
     /**
@@ -3151,32 +3218,36 @@ declare namespace ConfigService {
      */
     OrganizationCustomRuleMetadata?: OrganizationCustomRuleMetadata;
     /**
-     * A comma-separated list of accounts excluded from organization config rule.
+     * A comma-separated list of accounts excluded from organization Config rule.
      */
     ExcludedAccounts?: ExcludedAccounts;
     /**
      * The timestamp of the last update.
      */
     LastUpdateTime?: _Date;
+    /**
+     * An object that specifies metadata for your organization's Config Custom Policy rule. The metadata includes the runtime system in use, which accounts have debug logging enabled, and other custom rule metadata, such as resource type, resource ID of Amazon Web Services resource, and organization trigger types that initiate Config to evaluate Amazon Web Services resources against a rule.
+     */
+    OrganizationCustomPolicyRuleMetadata?: OrganizationCustomPolicyRuleMetadataNoPolicy;
   }
   export type OrganizationConfigRuleDetailedStatus = MemberAccountStatus[];
   export type OrganizationConfigRuleName = string;
   export type OrganizationConfigRuleNames = StringWithCharLimit64[];
   export interface OrganizationConfigRuleStatus {
     /**
-     * The name that you assign to organization config rule.
+     * The name that you assign to organization Config rule.
      */
     OrganizationConfigRuleName: OrganizationConfigRuleName;
     /**
-     * Indicates deployment status of an organization config rule. When master account calls PutOrganizationConfigRule action for the first time, config rule status is created in all the member accounts. When master account calls PutOrganizationConfigRule action for the second time, config rule status is updated in all the member accounts. Additionally, config rule status is updated when one or more member accounts join or leave an organization. Config rule status is deleted when the master account deletes OrganizationConfigRule in all the member accounts and disables service access for config-multiaccountsetup.amazonaws.com. Config sets the state of the rule to:    CREATE_SUCCESSFUL when an organization config rule has been successfully created in all the member accounts.     CREATE_IN_PROGRESS when an organization config rule creation is in progress.    CREATE_FAILED when an organization config rule creation failed in one or more member accounts within that organization.    DELETE_FAILED when an organization config rule deletion failed in one or more member accounts within that organization.    DELETE_IN_PROGRESS when an organization config rule deletion is in progress.    DELETE_SUCCESSFUL when an organization config rule has been successfully deleted from all the member accounts.    UPDATE_SUCCESSFUL when an organization config rule has been successfully updated in all the member accounts.    UPDATE_IN_PROGRESS when an organization config rule update is in progress.    UPDATE_FAILED when an organization config rule update failed in one or more member accounts within that organization.  
+     * Indicates deployment status of an organization Config rule. When master account calls PutOrganizationConfigRule action for the first time, Config rule status is created in all the member accounts. When master account calls PutOrganizationConfigRule action for the second time, Config rule status is updated in all the member accounts. Additionally, Config rule status is updated when one or more member accounts join or leave an organization. Config rule status is deleted when the master account deletes OrganizationConfigRule in all the member accounts and disables service access for config-multiaccountsetup.amazonaws.com. Config sets the state of the rule to:    CREATE_SUCCESSFUL when an organization Config rule has been successfully created in all the member accounts.     CREATE_IN_PROGRESS when an organization Config rule creation is in progress.    CREATE_FAILED when an organization Config rule creation failed in one or more member accounts within that organization.    DELETE_FAILED when an organization Config rule deletion failed in one or more member accounts within that organization.    DELETE_IN_PROGRESS when an organization Config rule deletion is in progress.    DELETE_SUCCESSFUL when an organization Config rule has been successfully deleted from all the member accounts.    UPDATE_SUCCESSFUL when an organization Config rule has been successfully updated in all the member accounts.    UPDATE_IN_PROGRESS when an organization Config rule update is in progress.    UPDATE_FAILED when an organization Config rule update failed in one or more member accounts within that organization.  
      */
     OrganizationRuleStatus: OrganizationRuleStatus;
     /**
-     * An error code that is returned when organization config rule creation or deletion has failed.
+     * An error code that is returned when organization Config rule creation or deletion has failed.
      */
     ErrorCode?: String;
     /**
-     * An error message indicating that organization config rule creation or deletion failed due to an error.
+     * An error message indicating that organization Config rule creation or deletion failed due to an error.
      */
     ErrorMessage?: String;
     /**
@@ -3186,6 +3257,8 @@ declare namespace ConfigService {
   }
   export type OrganizationConfigRuleStatuses = OrganizationConfigRuleStatus[];
   export type OrganizationConfigRuleTriggerType = "ConfigurationItemChangeNotification"|"OversizedConfigurationItemChangeNotification"|"ScheduledNotification"|string;
+  export type OrganizationConfigRuleTriggerTypeNoSN = "ConfigurationItemChangeNotification"|"OversizedConfigurationItemChangeNotification"|string;
+  export type OrganizationConfigRuleTriggerTypeNoSNs = OrganizationConfigRuleTriggerTypeNoSN[];
   export type OrganizationConfigRuleTriggerTypes = OrganizationConfigRuleTriggerType[];
   export type OrganizationConfigRules = OrganizationConfigRule[];
   export interface OrganizationConformancePack {
@@ -3271,9 +3344,97 @@ declare namespace ConfigService {
   }
   export type OrganizationConformancePackStatuses = OrganizationConformancePackStatus[];
   export type OrganizationConformancePacks = OrganizationConformancePack[];
+  export interface OrganizationCustomPolicyRuleMetadata {
+    /**
+     * The description that you provide for your organization Config Custom Policy rule.
+     */
+    Description?: StringWithCharLimit256Min0;
+    /**
+     * The type of notification that initiates Config to run an evaluation for a rule. For Config Custom Policy rules, Config supports change-initiated notification types:    ConfigurationItemChangeNotification - Initiates an evaluation when Config delivers a configuration item as a result of a resource change.    OversizedConfigurationItemChangeNotification - Initiates an evaluation when Config delivers an oversized configuration item. Config may generate this notification type when a resource changes and the notification exceeds the maximum size allowed by Amazon SNS.  
+     */
+    OrganizationConfigRuleTriggerTypes?: OrganizationConfigRuleTriggerTypeNoSNs;
+    /**
+     * A string, in JSON format, that is passed to your organization Config Custom Policy rule.
+     */
+    InputParameters?: StringWithCharLimit2048;
+    /**
+     * The maximum frequency with which Config runs evaluations for a rule. Your Config Custom Policy rule is triggered when Config delivers the configuration snapshot. For more information, see ConfigSnapshotDeliveryProperties.
+     */
+    MaximumExecutionFrequency?: MaximumExecutionFrequency;
+    /**
+     * The type of the Amazon Web Services resource that was evaluated.
+     */
+    ResourceTypesScope?: ResourceTypesScope;
+    /**
+     * The ID of the Amazon Web Services resource that was evaluated.
+     */
+    ResourceIdScope?: StringWithCharLimit768;
+    /**
+     * One part of a key-value pair that make up a tag. A key is a general label that acts like a category for more specific tag values.
+     */
+    TagKeyScope?: StringWithCharLimit128;
+    /**
+     * The optional part of a key-value pair that make up a tag. A value acts as a descriptor within a tag category (key).
+     */
+    TagValueScope?: StringWithCharLimit256;
+    /**
+     * The runtime system for your organization Config Custom Policy rules. Guard is a policy-as-code language that allows you to write policies that are enforced by Config Custom Policy rules. For more information about Guard, see the Guard GitHub Repository.
+     */
+    PolicyRuntime: PolicyRuntime;
+    /**
+     * The policy definition containing the logic for your organization Config Custom Policy rule.
+     */
+    PolicyText: PolicyText;
+    /**
+     * A list of accounts that you can enable debug logging for your organization Config Custom Policy rule. List is null when debug logging is enabled for all accounts.
+     */
+    DebugLogDeliveryAccounts?: DebugLogDeliveryAccounts;
+  }
+  export interface OrganizationCustomPolicyRuleMetadataNoPolicy {
+    /**
+     * The description that you provide for your organization Config Custom Policy rule.
+     */
+    Description?: StringWithCharLimit256Min0;
+    /**
+     * The type of notification that triggers Config to run an evaluation for a rule. For Config Custom Policy rules, Config supports change triggered notification types:    ConfigurationItemChangeNotification - Triggers an evaluation when Config delivers a configuration item as a result of a resource change.    OversizedConfigurationItemChangeNotification - Triggers an evaluation when Config delivers an oversized configuration item. Config may generate this notification type when a resource changes and the notification exceeds the maximum size allowed by Amazon SNS.  
+     */
+    OrganizationConfigRuleTriggerTypes?: OrganizationConfigRuleTriggerTypeNoSNs;
+    /**
+     * A string, in JSON format, that is passed to your organization Config Custom Policy rule.
+     */
+    InputParameters?: StringWithCharLimit2048;
+    /**
+     * The maximum frequency with which Config runs evaluations for a rule. Your Config Custom Policy rule is triggered when Config delivers the configuration snapshot. For more information, see ConfigSnapshotDeliveryProperties.
+     */
+    MaximumExecutionFrequency?: MaximumExecutionFrequency;
+    /**
+     * The type of the Amazon Web Services resource that was evaluated.
+     */
+    ResourceTypesScope?: ResourceTypesScope;
+    /**
+     * The ID of the Amazon Web Services resource that was evaluated.
+     */
+    ResourceIdScope?: StringWithCharLimit768;
+    /**
+     * One part of a key-value pair that make up a tag. A key is a general label that acts like a category for more specific tag values.
+     */
+    TagKeyScope?: StringWithCharLimit128;
+    /**
+     * The optional part of a key-value pair that make up a tag. A value acts as a descriptor within a tag category (key).
+     */
+    TagValueScope?: StringWithCharLimit256;
+    /**
+     * The runtime system for your organization Config Custom Policy rules. Guard is a policy-as-code language that allows you to write policies that are enforced by Config Custom Policy rules. For more information about Guard, see the Guard GitHub Repository.
+     */
+    PolicyRuntime?: PolicyRuntime;
+    /**
+     * A list of accounts that you can enable debug logging for your organization Config Custom Policy rule. List is null when debug logging is enabled for all accounts.
+     */
+    DebugLogDeliveryAccounts?: DebugLogDeliveryAccounts;
+  }
   export interface OrganizationCustomRuleMetadata {
     /**
-     * The description that you provide for organization config rule.
+     * The description that you provide for your organization Config rule.
      */
     Description?: StringWithCharLimit256Min0;
     /**
@@ -3285,7 +3446,7 @@ declare namespace ConfigService {
      */
     OrganizationConfigRuleTriggerTypes: OrganizationConfigRuleTriggerTypes;
     /**
-     * A string, in JSON format, that is passed to organization config rule Lambda function.
+     * A string, in JSON format, that is passed to your organization Config rule Lambda function.
      */
     InputParameters?: StringWithCharLimit2048;
     /**
@@ -3311,7 +3472,7 @@ declare namespace ConfigService {
   }
   export interface OrganizationManagedRuleMetadata {
     /**
-     * The description that you provide for organization config rule.
+     * The description that you provide for your organization Config rule.
      */
     Description?: StringWithCharLimit256Min0;
     /**
@@ -3319,7 +3480,7 @@ declare namespace ConfigService {
      */
     RuleIdentifier: StringWithCharLimit256;
     /**
-     * A string, in JSON format, that is passed to organization config rule Lambda function.
+     * A string, in JSON format, that is passed to your organization Config rule Lambda function.
      */
     InputParameters?: StringWithCharLimit2048;
     /**
@@ -3356,7 +3517,7 @@ declare namespace ConfigService {
   }
   export type OrganizationResourceStatus = "CREATE_SUCCESSFUL"|"CREATE_IN_PROGRESS"|"CREATE_FAILED"|"DELETE_SUCCESSFUL"|"DELETE_FAILED"|"DELETE_IN_PROGRESS"|"UPDATE_SUCCESSFUL"|"UPDATE_IN_PROGRESS"|"UPDATE_FAILED"|string;
   export type OrganizationRuleStatus = "CREATE_SUCCESSFUL"|"CREATE_IN_PROGRESS"|"CREATE_FAILED"|"DELETE_SUCCESSFUL"|"DELETE_FAILED"|"DELETE_IN_PROGRESS"|"UPDATE_SUCCESSFUL"|"UPDATE_IN_PROGRESS"|"UPDATE_FAILED"|string;
-  export type Owner = "CUSTOM_LAMBDA"|"AWS"|string;
+  export type Owner = "CUSTOM_LAMBDA"|"AWS"|"CUSTOM_POLICY"|string;
   export type PageSizeLimit = number;
   export type ParameterName = string;
   export type ParameterValue = string;
@@ -3372,6 +3533,8 @@ declare namespace ConfigService {
   }
   export type PendingAggregationRequestList = PendingAggregationRequest[];
   export type Percentage = number;
+  export type PolicyRuntime = string;
+  export type PolicyText = string;
   export interface PutAggregationAuthorizationRequest {
     /**
      * The 12-digit account ID of the account authorized to aggregate data.
@@ -3442,7 +3605,7 @@ declare namespace ConfigService {
      */
     TemplateS3Uri?: TemplateS3Uri;
     /**
-     * A string containing full conformance pack template body. Structure containing the template body with a minimum length of 1 byte and a maximum length of 51,200 bytes.  You can only use a YAML template with two resource types: config rule (AWS::Config::ConfigRule) and a remediation action (AWS::Config::RemediationConfiguration). 
+     * A string containing full conformance pack template body. Structure containing the template body with a minimum length of 1 byte and a maximum length of 51,200 bytes.  You can only use a YAML template with two resource types: Config rule (AWS::Config::ConfigRule) and a remediation action (AWS::Config::RemediationConfiguration). 
      */
     TemplateBody?: TemplateBody;
     /**
@@ -3504,7 +3667,7 @@ declare namespace ConfigService {
   }
   export interface PutOrganizationConfigRuleRequest {
     /**
-     * The name that you assign to an organization config rule.
+     * The name that you assign to an organization Config rule.
      */
     OrganizationConfigRuleName: OrganizationConfigRuleName;
     /**
@@ -3516,13 +3679,17 @@ declare namespace ConfigService {
      */
     OrganizationCustomRuleMetadata?: OrganizationCustomRuleMetadata;
     /**
-     * A comma-separated list of accounts that you want to exclude from an organization config rule.
+     * A comma-separated list of accounts that you want to exclude from an organization Config rule.
      */
     ExcludedAccounts?: ExcludedAccounts;
+    /**
+     * An object that specifies metadata for your organization's Config Custom Policy rule. The metadata includes the runtime system in use, which accounts have debug logging enabled, and other custom rule metadata, such as resource type, resource ID of Amazon Web Services resource, and organization trigger types that initiate Config to evaluate Amazon Web Services resources against a rule.
+     */
+    OrganizationCustomPolicyRuleMetadata?: OrganizationCustomPolicyRuleMetadata;
   }
   export interface PutOrganizationConfigRuleResponse {
     /**
-     * The Amazon Resource Name (ARN) of an organization config rule.
+     * The Amazon Resource Name (ARN) of an organization Config rule.
      */
     OrganizationConfigRuleArn?: StringWithCharLimit256;
   }
@@ -3924,7 +4091,7 @@ declare namespace ConfigService {
   }
   export type ResourceKeys = ResourceKey[];
   export type ResourceName = string;
-  export type ResourceType = "AWS::EC2::CustomerGateway"|"AWS::EC2::EIP"|"AWS::EC2::Host"|"AWS::EC2::Instance"|"AWS::EC2::InternetGateway"|"AWS::EC2::NetworkAcl"|"AWS::EC2::NetworkInterface"|"AWS::EC2::RouteTable"|"AWS::EC2::SecurityGroup"|"AWS::EC2::Subnet"|"AWS::CloudTrail::Trail"|"AWS::EC2::Volume"|"AWS::EC2::VPC"|"AWS::EC2::VPNConnection"|"AWS::EC2::VPNGateway"|"AWS::EC2::RegisteredHAInstance"|"AWS::EC2::NatGateway"|"AWS::EC2::EgressOnlyInternetGateway"|"AWS::EC2::VPCEndpoint"|"AWS::EC2::VPCEndpointService"|"AWS::EC2::FlowLog"|"AWS::EC2::VPCPeeringConnection"|"AWS::Elasticsearch::Domain"|"AWS::IAM::Group"|"AWS::IAM::Policy"|"AWS::IAM::Role"|"AWS::IAM::User"|"AWS::ElasticLoadBalancingV2::LoadBalancer"|"AWS::ACM::Certificate"|"AWS::RDS::DBInstance"|"AWS::RDS::DBSubnetGroup"|"AWS::RDS::DBSecurityGroup"|"AWS::RDS::DBSnapshot"|"AWS::RDS::DBCluster"|"AWS::RDS::DBClusterSnapshot"|"AWS::RDS::EventSubscription"|"AWS::S3::Bucket"|"AWS::S3::AccountPublicAccessBlock"|"AWS::Redshift::Cluster"|"AWS::Redshift::ClusterSnapshot"|"AWS::Redshift::ClusterParameterGroup"|"AWS::Redshift::ClusterSecurityGroup"|"AWS::Redshift::ClusterSubnetGroup"|"AWS::Redshift::EventSubscription"|"AWS::SSM::ManagedInstanceInventory"|"AWS::CloudWatch::Alarm"|"AWS::CloudFormation::Stack"|"AWS::ElasticLoadBalancing::LoadBalancer"|"AWS::AutoScaling::AutoScalingGroup"|"AWS::AutoScaling::LaunchConfiguration"|"AWS::AutoScaling::ScalingPolicy"|"AWS::AutoScaling::ScheduledAction"|"AWS::DynamoDB::Table"|"AWS::CodeBuild::Project"|"AWS::WAF::RateBasedRule"|"AWS::WAF::Rule"|"AWS::WAF::RuleGroup"|"AWS::WAF::WebACL"|"AWS::WAFRegional::RateBasedRule"|"AWS::WAFRegional::Rule"|"AWS::WAFRegional::RuleGroup"|"AWS::WAFRegional::WebACL"|"AWS::CloudFront::Distribution"|"AWS::CloudFront::StreamingDistribution"|"AWS::Lambda::Function"|"AWS::NetworkFirewall::Firewall"|"AWS::NetworkFirewall::FirewallPolicy"|"AWS::NetworkFirewall::RuleGroup"|"AWS::ElasticBeanstalk::Application"|"AWS::ElasticBeanstalk::ApplicationVersion"|"AWS::ElasticBeanstalk::Environment"|"AWS::WAFv2::WebACL"|"AWS::WAFv2::RuleGroup"|"AWS::WAFv2::IPSet"|"AWS::WAFv2::RegexPatternSet"|"AWS::WAFv2::ManagedRuleSet"|"AWS::XRay::EncryptionConfig"|"AWS::SSM::AssociationCompliance"|"AWS::SSM::PatchCompliance"|"AWS::Shield::Protection"|"AWS::ShieldRegional::Protection"|"AWS::Config::ConformancePackCompliance"|"AWS::Config::ResourceCompliance"|"AWS::ApiGateway::Stage"|"AWS::ApiGateway::RestApi"|"AWS::ApiGatewayV2::Stage"|"AWS::ApiGatewayV2::Api"|"AWS::CodePipeline::Pipeline"|"AWS::ServiceCatalog::CloudFormationProvisionedProduct"|"AWS::ServiceCatalog::CloudFormationProduct"|"AWS::ServiceCatalog::Portfolio"|"AWS::SQS::Queue"|"AWS::KMS::Key"|"AWS::QLDB::Ledger"|"AWS::SecretsManager::Secret"|"AWS::SNS::Topic"|"AWS::SSM::FileData"|"AWS::Backup::BackupPlan"|"AWS::Backup::BackupSelection"|"AWS::Backup::BackupVault"|"AWS::Backup::RecoveryPoint"|"AWS::ECR::Repository"|"AWS::ECS::Cluster"|"AWS::ECS::Service"|"AWS::ECS::TaskDefinition"|"AWS::EFS::AccessPoint"|"AWS::EFS::FileSystem"|"AWS::EKS::Cluster"|"AWS::OpenSearch::Domain"|"AWS::EC2::TransitGateway"|"AWS::Kinesis::Stream"|"AWS::Kinesis::StreamConsumer"|"AWS::CodeDeploy::Application"|"AWS::CodeDeploy::DeploymentConfig"|"AWS::CodeDeploy::DeploymentGroup"|"AWS::EC2::LaunchTemplate"|"AWS::ECR::PublicRepository"|string;
+  export type ResourceType = "AWS::EC2::CustomerGateway"|"AWS::EC2::EIP"|"AWS::EC2::Host"|"AWS::EC2::Instance"|"AWS::EC2::InternetGateway"|"AWS::EC2::NetworkAcl"|"AWS::EC2::NetworkInterface"|"AWS::EC2::RouteTable"|"AWS::EC2::SecurityGroup"|"AWS::EC2::Subnet"|"AWS::CloudTrail::Trail"|"AWS::EC2::Volume"|"AWS::EC2::VPC"|"AWS::EC2::VPNConnection"|"AWS::EC2::VPNGateway"|"AWS::EC2::RegisteredHAInstance"|"AWS::EC2::NatGateway"|"AWS::EC2::EgressOnlyInternetGateway"|"AWS::EC2::VPCEndpoint"|"AWS::EC2::VPCEndpointService"|"AWS::EC2::FlowLog"|"AWS::EC2::VPCPeeringConnection"|"AWS::Elasticsearch::Domain"|"AWS::IAM::Group"|"AWS::IAM::Policy"|"AWS::IAM::Role"|"AWS::IAM::User"|"AWS::ElasticLoadBalancingV2::LoadBalancer"|"AWS::ACM::Certificate"|"AWS::RDS::DBInstance"|"AWS::RDS::DBSubnetGroup"|"AWS::RDS::DBSecurityGroup"|"AWS::RDS::DBSnapshot"|"AWS::RDS::DBCluster"|"AWS::RDS::DBClusterSnapshot"|"AWS::RDS::EventSubscription"|"AWS::S3::Bucket"|"AWS::S3::AccountPublicAccessBlock"|"AWS::Redshift::Cluster"|"AWS::Redshift::ClusterSnapshot"|"AWS::Redshift::ClusterParameterGroup"|"AWS::Redshift::ClusterSecurityGroup"|"AWS::Redshift::ClusterSubnetGroup"|"AWS::Redshift::EventSubscription"|"AWS::SSM::ManagedInstanceInventory"|"AWS::CloudWatch::Alarm"|"AWS::CloudFormation::Stack"|"AWS::ElasticLoadBalancing::LoadBalancer"|"AWS::AutoScaling::AutoScalingGroup"|"AWS::AutoScaling::LaunchConfiguration"|"AWS::AutoScaling::ScalingPolicy"|"AWS::AutoScaling::ScheduledAction"|"AWS::DynamoDB::Table"|"AWS::CodeBuild::Project"|"AWS::WAF::RateBasedRule"|"AWS::WAF::Rule"|"AWS::WAF::RuleGroup"|"AWS::WAF::WebACL"|"AWS::WAFRegional::RateBasedRule"|"AWS::WAFRegional::Rule"|"AWS::WAFRegional::RuleGroup"|"AWS::WAFRegional::WebACL"|"AWS::CloudFront::Distribution"|"AWS::CloudFront::StreamingDistribution"|"AWS::Lambda::Function"|"AWS::NetworkFirewall::Firewall"|"AWS::NetworkFirewall::FirewallPolicy"|"AWS::NetworkFirewall::RuleGroup"|"AWS::ElasticBeanstalk::Application"|"AWS::ElasticBeanstalk::ApplicationVersion"|"AWS::ElasticBeanstalk::Environment"|"AWS::WAFv2::WebACL"|"AWS::WAFv2::RuleGroup"|"AWS::WAFv2::IPSet"|"AWS::WAFv2::RegexPatternSet"|"AWS::WAFv2::ManagedRuleSet"|"AWS::XRay::EncryptionConfig"|"AWS::SSM::AssociationCompliance"|"AWS::SSM::PatchCompliance"|"AWS::Shield::Protection"|"AWS::ShieldRegional::Protection"|"AWS::Config::ConformancePackCompliance"|"AWS::Config::ResourceCompliance"|"AWS::ApiGateway::Stage"|"AWS::ApiGateway::RestApi"|"AWS::ApiGatewayV2::Stage"|"AWS::ApiGatewayV2::Api"|"AWS::CodePipeline::Pipeline"|"AWS::ServiceCatalog::CloudFormationProvisionedProduct"|"AWS::ServiceCatalog::CloudFormationProduct"|"AWS::ServiceCatalog::Portfolio"|"AWS::SQS::Queue"|"AWS::KMS::Key"|"AWS::QLDB::Ledger"|"AWS::SecretsManager::Secret"|"AWS::SNS::Topic"|"AWS::SSM::FileData"|"AWS::Backup::BackupPlan"|"AWS::Backup::BackupSelection"|"AWS::Backup::BackupVault"|"AWS::Backup::RecoveryPoint"|"AWS::ECR::Repository"|"AWS::ECS::Cluster"|"AWS::ECS::Service"|"AWS::ECS::TaskDefinition"|"AWS::EFS::AccessPoint"|"AWS::EFS::FileSystem"|"AWS::EKS::Cluster"|"AWS::OpenSearch::Domain"|"AWS::EC2::TransitGateway"|"AWS::Kinesis::Stream"|"AWS::Kinesis::StreamConsumer"|"AWS::CodeDeploy::Application"|"AWS::CodeDeploy::DeploymentConfig"|"AWS::CodeDeploy::DeploymentGroup"|"AWS::EC2::LaunchTemplate"|"AWS::ECR::PublicRepository"|"AWS::GuardDuty::Detector"|string;
   export type ResourceTypeList = ResourceType[];
   export type ResourceTypeString = string;
   export type ResourceTypes = StringWithCharLimit256[];
@@ -4034,17 +4201,21 @@ declare namespace ConfigService {
   }
   export interface Source {
     /**
-     * Indicates whether Amazon Web Services or the customer owns and manages the Config rule.
+     * Indicates whether Amazon Web Services or the customer owns and manages the Config rule. Config Managed Rules are predefined rules owned by Amazon Web Services. For more information, see Config Managed Rules in the Config developer guide. Config Custom Rules are rules that you can develop either with Guard (CUSTOM_POLICY) or Lambda (CUSTOM_LAMBDA). For more information, see Config Custom Rules  in the Config developer guide.
      */
     Owner: Owner;
     /**
-     * For Config managed rules, a predefined identifier from a list. For example, IAM_PASSWORD_POLICY is a managed rule. To reference a managed rule, see Using Config managed rules. For custom rules, the identifier is the Amazon Resource Name (ARN) of the rule's Lambda function, such as arn:aws:lambda:us-east-2:123456789012:function:custom_rule_name.
+     * For Config Managed rules, a predefined identifier from a list. For example, IAM_PASSWORD_POLICY is a managed rule. To reference a managed rule, see List of Config Managed Rules. For Config Custom Lambda rules, the identifier is the Amazon Resource Name (ARN) of the rule's Lambda function, such as arn:aws:lambda:us-east-2:123456789012:function:custom_rule_name. For Config Custom Policy rules, this field will be ignored.
      */
-    SourceIdentifier: StringWithCharLimit256;
+    SourceIdentifier?: StringWithCharLimit256;
     /**
-     * Provides the source and type of the event that causes Config to evaluate your Amazon Web Services resources.
+     * Provides the source and the message types that cause Config to evaluate your Amazon Web Services resources against a rule. It also provides the frequency with which you want Config to run evaluations for the rule if the trigger type is periodic. If the owner is set to CUSTOM_POLICY, the only acceptable values for the Config rule trigger message type are ConfigurationItemChangeNotification and OversizedConfigurationItemChangeNotification.
      */
     SourceDetails?: SourceDetails;
+    /**
+     * Provides the runtime system, policy definition, and whether debug logging is enabled. Required when owner is set to CUSTOM_POLICY.
+     */
+    CustomPolicyDetails?: CustomPolicyDetails;
   }
   export interface SourceDetail {
     /**
@@ -4119,7 +4290,7 @@ declare namespace ConfigService {
      */
     AccountId?: AccountId;
     /**
-     * Indicates deployment status for config rule in the member account. When master account calls PutOrganizationConfigRule action for the first time, config rule status is created in the member account. When master account calls PutOrganizationConfigRule action for the second time, config rule status is updated in the member account. Config rule status is deleted when the master account deletes OrganizationConfigRule and disables service access for config-multiaccountsetup.amazonaws.com.  Config sets the state of the rule to:    CREATE_SUCCESSFUL when config rule has been created in the member account.    CREATE_IN_PROGRESS when config rule is being created in the member account.    CREATE_FAILED when config rule creation has failed in the member account.    DELETE_FAILED when config rule deletion has failed in the member account.    DELETE_IN_PROGRESS when config rule is being deleted in the member account.    DELETE_SUCCESSFUL when config rule has been deleted in the member account.    UPDATE_SUCCESSFUL when config rule has been updated in the member account.    UPDATE_IN_PROGRESS when config rule is being updated in the member account.    UPDATE_FAILED when config rule deletion has failed in the member account.  
+     * Indicates deployment status for Config rule in the member account. When master account calls PutOrganizationConfigRule action for the first time, Config rule status is created in the member account. When master account calls PutOrganizationConfigRule action for the second time, Config rule status is updated in the member account. Config rule status is deleted when the master account deletes OrganizationConfigRule and disables service access for config-multiaccountsetup.amazonaws.com.  Config sets the state of the rule to:    CREATE_SUCCESSFUL when Config rule has been created in the member account.    CREATE_IN_PROGRESS when Config rule is being created in the member account.    CREATE_FAILED when Config rule creation has failed in the member account.    DELETE_FAILED when Config rule deletion has failed in the member account.    DELETE_IN_PROGRESS when Config rule is being deleted in the member account.    DELETE_SUCCESSFUL when Config rule has been deleted in the member account.    UPDATE_SUCCESSFUL when Config rule has been updated in the member account.    UPDATE_IN_PROGRESS when Config rule is being updated in the member account.    UPDATE_FAILED when Config rule deletion has failed in the member account.  
      */
     MemberAccountRuleStatus?: MemberAccountRuleStatus;
   }

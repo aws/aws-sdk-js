@@ -939,6 +939,10 @@ declare namespace Lambda {
      * The instruction set architecture that the function supports. Enter a string array with one of the valid values (arm64 or x86_64). The default value is x86_64.
      */
     Architectures?: ArchitecturesList;
+    /**
+     * The size of the function’s /tmp directory in MB. The default value is 512, but can be any whole number between 512 and 10240 MB.
+     */
+    EphemeralStorage?: EphemeralStorage;
   }
   export type _Date = Date;
   export interface DeadLetterConfig {
@@ -1069,6 +1073,13 @@ declare namespace Lambda {
   export type EnvironmentVariableName = string;
   export type EnvironmentVariableValue = string;
   export type EnvironmentVariables = {[key: string]: EnvironmentVariableValue};
+  export interface EphemeralStorage {
+    /**
+     * The size of the function’s /tmp directory.
+     */
+    Size: EphemeralStorageSize;
+  }
+  export type EphemeralStorageSize = number;
   export interface EventSourceMappingConfiguration {
     /**
      * The identifier of the event source mapping.
@@ -1362,6 +1373,10 @@ declare namespace Lambda {
      * The instruction set architecture that the function supports. Architecture is a string array with one of the valid values. The default architecture value is x86_64.
      */
     Architectures?: ArchitecturesList;
+    /**
+     * The size of the function’s /tmp directory in MB. The default value is 512, but can be any whole number between 512 and 10240 MB.
+     */
+    EphemeralStorage?: EphemeralStorage;
   }
   export interface FunctionEventInvokeConfig {
     /**
@@ -2707,6 +2722,10 @@ declare namespace Lambda {
      *  Container image configuration values that override the values in the container image Docker file.
      */
     ImageConfig?: ImageConfig;
+    /**
+     * The size of the function’s /tmp directory in MB. The default value is 512, but can be any whole number between 512 and 10240 MB.
+     */
+    EphemeralStorage?: EphemeralStorage;
   }
   export interface UpdateFunctionEventInvokeConfigRequest {
     /**
