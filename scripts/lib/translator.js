@@ -7,7 +7,7 @@ function each(obj, iter) {
 }
 
 function nextString(str) {
-  return 'S' + (parseInt(str.substr(1), 36) + 1).toString(36);
+  return 'S' + (parseInt(str.slice(1), 36) + 1).toString(36);
 }
 
 /* End utility methods */
