@@ -7650,6 +7650,29 @@
       },
       "documentation": "<p>An entry for a prefix list.</p>"
     },
+    "AdditionalDetail": {
+      "type": "structure",
+      "members": {
+        "AdditionalDetailType": {
+          "shape": "String",
+          "documentation": "<p>The information type.</p>",
+          "locationName": "additionalDetailType"
+        },
+        "Component": {
+          "shape": "AnalysisComponent",
+          "documentation": "<p>The path component.</p>",
+          "locationName": "component"
+        }
+      },
+      "documentation": "<p>Describes an additional detail for a path analysis.</p>"
+    },
+    "AdditionalDetailList": {
+      "type": "list",
+      "member": {
+        "shape": "AdditionalDetail",
+        "locationName": "item"
+      }
+    },
     "Address": {
       "type": "structure",
       "members": {
@@ -8274,7 +8297,7 @@
         },
         "Origin": {
           "shape": "String",
-          "documentation": "<p>Describes how the route was created. The following are possible values:</p> <ul> <li> <p> <code>CreateRouteTable</code> - The route was automatically created when the route table was created.</p> </li> <li> <p> <code>CreateRoute</code> - The route was manually added to the route table.</p> </li> <li> <p> <code>EnableVgwRoutePropagation</code> - The route was propagated by route propagation.</p> </li> </ul>",
+          "documentation": "<p>Describes how the route was created. The following are the possible values:</p> <ul> <li> <p>CreateRouteTable - The route was automatically created when the route table was created.</p> </li> <li> <p>CreateRoute - The route was manually added to the route table.</p> </li> <li> <p>EnableVgwRoutePropagation - The route was propagated by route propagation.</p> </li> </ul>",
           "locationName": "origin"
         },
         "TransitGatewayId": {
@@ -8300,7 +8323,7 @@
         },
         "Direction": {
           "shape": "String",
-          "documentation": "<p>The direction. The following are possible values:</p> <ul> <li> <p>egress</p> </li> <li> <p>ingress</p> </li> </ul>",
+          "documentation": "<p>The direction. The following are the possible values:</p> <ul> <li> <p>egress</p> </li> <li> <p>ingress</p> </li> </ul>",
           "locationName": "direction"
         },
         "SecurityGroupId": {
@@ -11683,7 +11706,7 @@
       "type": "structure",
       "members": {
         "PoolId": {
-          "shape": "CoipPoolId",
+          "shape": "Ipv4PoolCoipId",
           "documentation": "<p>The ID of the address pool.</p>",
           "locationName": "poolId"
         },
@@ -11716,7 +11739,7 @@
     "CoipPoolIdSet": {
       "type": "list",
       "member": {
-        "shape": "CoipPoolId",
+        "shape": "Ipv4PoolCoipId",
         "locationName": "item"
       }
     },
@@ -20987,7 +21010,7 @@
         },
         "Filters": {
           "shape": "FilterList",
-          "documentation": "<p>The filters. The following are possible values:</p> <ul> <li> <p>PathFound - A Boolean value that indicates whether a feasible path is found.</p> </li> <li> <p>Status - The status of the analysis (running | succeeded | failed).</p> </li> </ul>",
+          "documentation": "<p>The filters. The following are the possible values:</p> <ul> <li> <p>PathFound - A Boolean value that indicates whether a feasible path is found.</p> </li> <li> <p>Status - The status of the analysis (running | succeeded | failed).</p> </li> </ul>",
           "locationName": "Filter"
         },
         "MaxResults": {
@@ -21029,7 +21052,7 @@
         },
         "Filters": {
           "shape": "FilterList",
-          "documentation": "<p>The filters. The following are possible values:</p> <ul> <li> <p>Destination - The ID of the resource.</p> </li> <li> <p>DestinationPort - The destination port.</p> </li> <li> <p>Name - The path name.</p> </li> <li> <p>Protocol - The protocol.</p> </li> <li> <p>Source - The ID of the resource.</p> </li> </ul>",
+          "documentation": "<p>The filters. The following are the possible values:</p> <ul> <li> <p>Destination - The ID of the resource.</p> </li> <li> <p>DestinationPort - The destination port.</p> </li> <li> <p>Name - The path name.</p> </li> <li> <p>Protocol - The protocol.</p> </li> <li> <p>Source - The ID of the resource.</p> </li> </ul>",
           "locationName": "Filter"
         },
         "MaxResults": {
@@ -26101,7 +26124,7 @@
         },
         "Direction": {
           "shape": "String",
-          "documentation": "<p>The direction. The following are possible values:</p> <ul> <li> <p>egress</p> </li> <li> <p>ingress</p> </li> </ul>",
+          "documentation": "<p>The direction. The following are the possible values:</p> <ul> <li> <p>egress</p> </li> <li> <p>ingress</p> </li> </ul>",
           "locationName": "direction"
         },
         "ExplanationCode": {
@@ -26268,6 +26291,26 @@
           "shape": "AnalysisComponent",
           "documentation": "<p>The VPN gateway.</p>",
           "locationName": "vpnGateway"
+        },
+        "TransitGateway": {
+          "shape": "AnalysisComponent",
+          "documentation": "<p>The transit gateway.</p>",
+          "locationName": "transitGateway"
+        },
+        "TransitGatewayRouteTable": {
+          "shape": "AnalysisComponent",
+          "documentation": "<p>The transit gateway route table.</p>",
+          "locationName": "transitGatewayRouteTable"
+        },
+        "TransitGatewayRouteTableRoute": {
+          "shape": "TransitGatewayRouteTableRoute",
+          "documentation": "<p>The transit gateway route table route.</p>",
+          "locationName": "transitGatewayRouteTableRoute"
+        },
+        "TransitGatewayAttachment": {
+          "shape": "AnalysisComponent",
+          "documentation": "<p>The transit gateway attachment.</p>",
+          "locationName": "transitGatewayAttachment"
         }
       },
       "documentation": "<p>Describes an explanation code for an unreachable path. For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/reachability/explanation-codes.html\">Reachability Analyzer explanation codes</a>.</p>"
@@ -27917,7 +27960,7 @@
       ],
       "members": {
         "PoolId": {
-          "shape": "CoipPoolId",
+          "shape": "Ipv4PoolCoipId",
           "documentation": "<p>The ID of the address pool.</p>"
         },
         "Filters": {
@@ -34549,6 +34592,9 @@
         "delete-failed"
       ]
     },
+    "Ipv4PoolCoipId": {
+      "type": "string"
+    },
     "Ipv4PoolEc2Id": {
       "type": "string"
     },
@@ -41088,6 +41134,20 @@
           "shape": "AnalysisComponent",
           "documentation": "<p>The component VPC.</p>",
           "locationName": "vpc"
+        },
+        "AdditionalDetails": {
+          "shape": "AdditionalDetailList",
+          "documentation": "<p>The additional details.</p>",
+          "locationName": "additionalDetailSet"
+        },
+        "TransitGateway": {
+          "shape": "AnalysisComponent",
+          "locationName": "transitGateway"
+        },
+        "TransitGatewayRouteTableRoute": {
+          "shape": "TransitGatewayRouteTableRoute",
+          "documentation": "<p>The route in a transit gateway route table.</p>",
+          "locationName": "transitGatewayRouteTableRoute"
         }
       },
       "documentation": "<p>Describes a path component.</p>"
@@ -51354,6 +51414,47 @@
         "shape": "TransitGatewayRouteTablePropagation",
         "locationName": "item"
       }
+    },
+    "TransitGatewayRouteTableRoute": {
+      "type": "structure",
+      "members": {
+        "DestinationCidr": {
+          "shape": "String",
+          "documentation": "<p>The CIDR block used for destination matches.</p>",
+          "locationName": "destinationCidr"
+        },
+        "State": {
+          "shape": "String",
+          "documentation": "<p>The state of the route.</p>",
+          "locationName": "state"
+        },
+        "RouteOrigin": {
+          "shape": "String",
+          "documentation": "<p>The route origin. The following are the possible values:</p> <ul> <li> <p>static</p> </li> <li> <p>propagated</p> </li> </ul>",
+          "locationName": "routeOrigin"
+        },
+        "PrefixListId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the prefix list.</p>",
+          "locationName": "prefixListId"
+        },
+        "AttachmentId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the route attachment.</p>",
+          "locationName": "attachmentId"
+        },
+        "ResourceId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the resource for the route attachment.</p>",
+          "locationName": "resourceId"
+        },
+        "ResourceType": {
+          "shape": "String",
+          "documentation": "<p>The resource type for the route attachment.</p>",
+          "locationName": "resourceType"
+        }
+      },
+      "documentation": "<p>Describes a route in a transit gateway route table.</p>"
     },
     "TransitGatewayRouteTableState": {
       "type": "string",

@@ -4708,6 +4708,17 @@ declare namespace EC2 {
      */
     Description?: String;
   }
+  export interface AdditionalDetail {
+    /**
+     * The information type.
+     */
+    AdditionalDetailType?: String;
+    /**
+     * The path component.
+     */
+    Component?: AnalysisComponent;
+  }
+  export type AdditionalDetailList = AdditionalDetail[];
   export interface Address {
     /**
      * The ID of the instance that the address is associated with (if any).
@@ -5099,7 +5110,7 @@ declare namespace EC2 {
      */
     NetworkInterfaceId?: String;
     /**
-     * Describes how the route was created. The following are possible values:    CreateRouteTable - The route was automatically created when the route table was created.    CreateRoute - The route was manually added to the route table.    EnableVgwRoutePropagation - The route was propagated by route propagation.  
+     * Describes how the route was created. The following are the possible values:   CreateRouteTable - The route was automatically created when the route table was created.   CreateRoute - The route was manually added to the route table.   EnableVgwRoutePropagation - The route was propagated by route propagation.  
      */
     Origin?: String;
     /**
@@ -5117,7 +5128,7 @@ declare namespace EC2 {
      */
     Cidr?: String;
     /**
-     * The direction. The following are possible values:   egress   ingress  
+     * The direction. The following are the possible values:   egress   ingress  
      */
     Direction?: String;
     /**
@@ -7069,7 +7080,7 @@ declare namespace EC2 {
     /**
      * The ID of the address pool.
      */
-    PoolId?: CoipPoolId;
+    PoolId?: Ipv4PoolCoipId;
     /**
      * The address ranges of the address pool.
      */
@@ -7088,7 +7099,7 @@ declare namespace EC2 {
     PoolArn?: ResourceArn;
   }
   export type CoipPoolId = string;
-  export type CoipPoolIdSet = CoipPoolId[];
+  export type CoipPoolIdSet = Ipv4PoolCoipId[];
   export type CoipPoolMaxResults = number;
   export type CoipPoolSet = CoipPool[];
   export interface ConfirmProductInstanceRequest {
@@ -13451,7 +13462,7 @@ declare namespace EC2 {
      */
     AnalysisEndTime?: MillisecondDateTime;
     /**
-     * The filters. The following are possible values:   PathFound - A Boolean value that indicates whether a feasible path is found.   Status - The status of the analysis (running | succeeded | failed).  
+     * The filters. The following are the possible values:   PathFound - A Boolean value that indicates whether a feasible path is found.   Status - The status of the analysis (running | succeeded | failed).  
      */
     Filters?: FilterList;
     /**
@@ -13483,7 +13494,7 @@ declare namespace EC2 {
      */
     NetworkInsightsPathIds?: NetworkInsightsPathIdList;
     /**
-     * The filters. The following are possible values:   Destination - The ID of the resource.   DestinationPort - The destination port.   Name - The path name.   Protocol - The protocol.   Source - The ID of the resource.  
+     * The filters. The following are the possible values:   Destination - The ID of the resource.   DestinationPort - The destination port.   Name - The path name.   Protocol - The protocol.   Source - The ID of the resource.  
      */
     Filters?: FilterList;
     /**
@@ -16790,7 +16801,7 @@ declare namespace EC2 {
      */
     DestinationVpc?: AnalysisComponent;
     /**
-     * The direction. The following are possible values:   egress   ingress  
+     * The direction. The following are the possible values:   egress   ingress  
      */
     Direction?: String;
     /**
@@ -16925,6 +16936,22 @@ declare namespace EC2 {
      * The VPN gateway.
      */
     VpnGateway?: AnalysisComponent;
+    /**
+     * The transit gateway.
+     */
+    TransitGateway?: AnalysisComponent;
+    /**
+     * The transit gateway route table.
+     */
+    TransitGatewayRouteTable?: AnalysisComponent;
+    /**
+     * The transit gateway route table route.
+     */
+    TransitGatewayRouteTableRoute?: TransitGatewayRouteTableRoute;
+    /**
+     * The transit gateway attachment.
+     */
+    TransitGatewayAttachment?: AnalysisComponent;
   }
   export type ExplanationList = Explanation[];
   export interface ExportClientVpnClientCertificateRevocationListRequest {
@@ -17895,7 +17922,7 @@ declare namespace EC2 {
     /**
      * The ID of the address pool.
      */
-    PoolId: CoipPoolId;
+    PoolId: Ipv4PoolCoipId;
     /**
      * One or more filters.    coip-address-usage.allocation-id - The allocation ID of the address.    coip-address-usage.aws-account-id - The ID of the Amazon Web Services account that is using the customer-owned IP address.    coip-address-usage.aws-service - The Amazon Web Services service that is using the customer-owned IP address.    coip-address-usage.co-ip - The customer-owned IP address.  
      */
@@ -21763,6 +21790,7 @@ declare namespace EC2 {
   export type IpamScopeType = "public"|"private"|string;
   export type IpamSet = Ipam[];
   export type IpamState = "create-in-progress"|"create-complete"|"create-failed"|"modify-in-progress"|"modify-complete"|"modify-failed"|"delete-in-progress"|"delete-complete"|"delete-failed"|string;
+  export type Ipv4PoolCoipId = string;
   export type Ipv4PoolEc2Id = string;
   export type Ipv4PrefixList = Ipv4PrefixSpecificationRequest[];
   export type Ipv4PrefixListResponse = Ipv4PrefixSpecificationResponse[];
@@ -25929,6 +25957,15 @@ declare namespace EC2 {
      * The component VPC.
      */
     Vpc?: AnalysisComponent;
+    /**
+     * The additional details.
+     */
+    AdditionalDetails?: AdditionalDetailList;
+    TransitGateway?: AnalysisComponent;
+    /**
+     * The route in a transit gateway route table.
+     */
+    TransitGatewayRouteTableRoute?: TransitGatewayRouteTableRoute;
   }
   export type PathComponentList = PathComponent[];
   export interface PathStatement {
@@ -32142,6 +32179,36 @@ declare namespace EC2 {
     State?: TransitGatewayPropagationState;
   }
   export type TransitGatewayRouteTablePropagationList = TransitGatewayRouteTablePropagation[];
+  export interface TransitGatewayRouteTableRoute {
+    /**
+     * The CIDR block used for destination matches.
+     */
+    DestinationCidr?: String;
+    /**
+     * The state of the route.
+     */
+    State?: String;
+    /**
+     * The route origin. The following are the possible values:   static   propagated  
+     */
+    RouteOrigin?: String;
+    /**
+     * The ID of the prefix list.
+     */
+    PrefixListId?: String;
+    /**
+     * The ID of the route attachment.
+     */
+    AttachmentId?: String;
+    /**
+     * The ID of the resource for the route attachment.
+     */
+    ResourceId?: String;
+    /**
+     * The resource type for the route attachment.
+     */
+    ResourceType?: String;
+  }
   export type TransitGatewayRouteTableState = "pending"|"available"|"deleting"|"deleted"|string;
   export type TransitGatewayRouteType = "static"|"propagated"|string;
   export type TransitGatewayState = "pending"|"available"|"modifying"|"deleting"|"deleted"|string;

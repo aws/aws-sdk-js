@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1100.0-->
+<!--LATEST=2.1101.0-->
 <!--ENTRYINSERT-->
+
+## 2.1101.0
+* feature: Batch: Bug Fix: Fixed a bug where shapes were marked as unboxed and were not serialized and sent over the wire, causing an API error from the service.
+* feature: EC2: This is release adds support for Amazon VPC Reachability Analyzer to analyze path through a Transit Gateway.
+* feature: SSM: This Patch Manager release supports creating, updating, and deleting Patch Baselines for Rocky Linux OS.
 
 ## 2.1100.0
 * feature: ConfigService: Added new APIs GetCustomRulePolicy and GetOrganizationCustomRulePolicy, and updated existing APIs PutConfigRule, DescribeConfigRule, DescribeConfigRuleEvaluationStatus, PutOrganizationConfigRule, DescribeConfigRule to support a new feature for building AWS Config rules with AWS CloudFormation Guard
