@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1101.0-->
+<!--LATEST=2.1102.0-->
 <!--ENTRYINSERT-->
+
+## 2.1102.0
+* feature: MediaLive: This release adds support for selecting a maintenance window.
 
 ## 2.1101.0
 * feature: Batch: Bug Fix: Fixed a bug where shapes were marked as unboxed and were not serialized and sent over the wire, causing an API error from the service.

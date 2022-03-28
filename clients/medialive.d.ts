@@ -1338,6 +1338,10 @@ one destination per packager.
      */
     LogLevel?: LogLevel;
     /**
+     * Maintenance settings for this channel.
+     */
+    Maintenance?: MaintenanceStatus;
+    /**
      * The name of the channel. (user-mutable)
      */
     Name?: __string;
@@ -1412,6 +1416,10 @@ one destination per packager.
      */
     LogLevel?: LogLevel;
     /**
+     * Maintenance settings for this channel.
+     */
+    Maintenance?: MaintenanceStatus;
+    /**
      * The name of the channel. (user-mutable)
      */
     Name?: __string;
@@ -1466,6 +1474,10 @@ one destination per packager.
      * The log level to write to CloudWatch Logs.
      */
     LogLevel?: LogLevel;
+    /**
+     * Maintenance settings for this channel.
+     */
+    Maintenance?: MaintenanceCreateSettings;
     /**
      * Name of channel.
      */
@@ -1686,6 +1698,10 @@ one destination per packager.
      * The log level being written to CloudWatch Logs.
      */
     LogLevel?: LogLevel;
+    /**
+     * Maintenance settings for this channel.
+     */
+    Maintenance?: MaintenanceStatus;
     /**
      * The name of the channel. (user-mutable)
      */
@@ -1950,6 +1966,10 @@ one destination per packager.
      * The log level being written to CloudWatch Logs.
      */
     LogLevel?: LogLevel;
+    /**
+     * Maintenance settings for this channel.
+     */
+    Maintenance?: MaintenanceStatus;
     /**
      * The name of the channel. (user-mutable)
      */
@@ -2623,7 +2643,7 @@ provide the language to consider when translating the image-based source to text
   export type Eac3SurroundMode = "DISABLED"|"ENABLED"|"NOT_INDICATED"|string;
   export interface EbuTtDDestinationSettings {
     /**
-     * Applies only if you plan to convert these source captions to EBU-TT-D or TTML in an output. Complete this field if you want to include the name of the copyright holder in the copyright metadata tag in the TTML
+     * Complete this field if you want to include the name of the copyright holder in the copyright tag in the captions metadata.
      */
     CopyrightHolder?: __stringMax1000;
     /**
@@ -4728,6 +4748,49 @@ When a segmentation style of "maintainCadence" is selected and a segment is trun
     VideoPid?: __string;
   }
   export type M3u8TimedMetadataBehavior = "NO_PASSTHROUGH"|"PASSTHROUGH"|string;
+  export interface MaintenanceCreateSettings {
+    /**
+     * Choose one day of the week for maintenance. The chosen day is used for all future maintenance windows.
+     */
+    MaintenanceDay?: MaintenanceDay;
+    /**
+     * Choose the hour that maintenance will start. The chosen time is used for all future maintenance windows.
+     */
+    MaintenanceStartTime?: __stringPattern010920300;
+  }
+  export type MaintenanceDay = "MONDAY"|"TUESDAY"|"WEDNESDAY"|"THURSDAY"|"FRIDAY"|"SATURDAY"|"SUNDAY"|string;
+  export interface MaintenanceStatus {
+    /**
+     * The currently selected maintenance day.
+     */
+    MaintenanceDay?: MaintenanceDay;
+    /**
+     * Maintenance is required by the displayed date and time. Date and time is in ISO.
+     */
+    MaintenanceDeadline?: __string;
+    /**
+     * The currently scheduled maintenance date and time. Date and time is in ISO.
+     */
+    MaintenanceScheduledDate?: __string;
+    /**
+     * The currently selected maintenance start time. Time is in UTC.
+     */
+    MaintenanceStartTime?: __string;
+  }
+  export interface MaintenanceUpdateSettings {
+    /**
+     * Choose one day of the week for maintenance. The chosen day is used for all future maintenance windows.
+     */
+    MaintenanceDay?: MaintenanceDay;
+    /**
+     * Choose a specific date for maintenance to occur. The chosen date is used for the next maintenance window only.
+     */
+    MaintenanceScheduledDate?: __string;
+    /**
+     * Choose the hour that maintenance will start. The chosen time is used for all future maintenance windows.
+     */
+    MaintenanceStartTime?: __stringPattern010920300;
+  }
   export type MaxResults = number;
   export interface MediaConnectFlow {
     /**
@@ -5412,7 +5475,7 @@ When this field is defined, ConstantBitrate must be undefined.
   }
   export interface OutputGroup {
     /**
-     * Custom output group name optionally defined by the user.  Only letters, numbers, and the underscore character allowed; only 32 characters allowed.
+     * Custom output group name optionally defined by the user.
      */
     Name?: __stringMax32;
     /**
@@ -6021,6 +6084,10 @@ one destination per packager.
      */
     LogLevel?: LogLevel;
     /**
+     * Maintenance settings for this channel.
+     */
+    Maintenance?: MaintenanceStatus;
+    /**
      * The name of the channel. (user-mutable)
      */
     Name?: __string;
@@ -6210,6 +6277,10 @@ one destination per packager.
      */
     LogLevel?: LogLevel;
     /**
+     * Maintenance settings for this channel.
+     */
+    Maintenance?: MaintenanceStatus;
+    /**
      * The name of the channel. (user-mutable)
      */
     Name?: __string;
@@ -6374,7 +6445,7 @@ one destination per packager.
   }
   export interface TtmlDestinationSettings {
     /**
-     * When set to passthrough, passes through style and position information from a TTML-like input source (TTML, SMPTE-TT, CFF-TT) to the CFF-TT output or TTML output.
+     * This field is not currently supported and will not affect the output styling. Leave the default value.
      */
     StyleControl?: TtmlDestinationStyleControl;
   }
@@ -6455,6 +6526,10 @@ one destination per packager.
      * The log level to write to CloudWatch Logs.
      */
     LogLevel?: LogLevel;
+    /**
+     * Maintenance settings for this channel.
+     */
+    Maintenance?: MaintenanceUpdateSettings;
     /**
      * The name of the channel.
      */
@@ -6931,6 +7006,7 @@ If STANDARD channel, subnet IDs must be mapped to two unique availability zones 
   export type __stringMin34Max34 = string;
   export type __stringMin3Max3 = string;
   export type __stringMin6Max6 = string;
+  export type __stringPattern010920300 = string;
   export type InputDeviceThumbnail = Buffer|Uint8Array|Blob|string|Readable;
   export type AcceptHeader = "image/jpeg"|string;
   export type ContentType = "image/jpeg"|string;
