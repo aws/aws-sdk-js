@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "This release simplifies the auto-recovery configuration process enabling customers to set the recovery behavior to disabled or default"
+    },
+    {
+        "type": "feature",
+        "category": "FMS",
+        "description": "AWS Firewall Manager now supports the configuration of third-party policies that can use either the centralized or distributed deployment models."
+    },
+    {
+        "type": "feature",
+        "category": "FSx",
+        "description": "This release adds support for modifying throughput capacity for FSx for ONTAP file systems."
+    },
+    {
+        "type": "feature",
+        "category": "IotData",
+        "description": "Update the default AWS IoT Core Data Plane endpoint from VeriSign signed to ATS signed. If you have firewalls with strict egress rules, configure the rules to grant you access to data-ats.iot.[region].amazonaws.com or data-ats.iot.[region].amazonaws.com.cn."
+    }
+]

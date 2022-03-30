@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1103.0-->
+<!--LATEST=2.1104.0-->
 <!--ENTRYINSERT-->
+
+## 2.1104.0
+* feature: EC2: This release simplifies the auto-recovery configuration process enabling customers to set the recovery behavior to disabled or default
+* feature: FMS: AWS Firewall Manager now supports the configuration of third-party policies that can use either the centralized or distributed deployment models.
+* feature: FSx: This release adds support for modifying throughput capacity for FSx for ONTAP file systems.
+* feature: IotData: Update the default AWS IoT Core Data Plane endpoint from VeriSign signed to ATS signed. If you have firewalls with strict egress rules, configure the rules to grant you access to data-ats.iot.[region].amazonaws.com or data-ats.iot.[region].amazonaws.com.cn.
 
 ## 2.1103.0
 * feature: Organizations: This release provides the new CloseAccount API that enables principals in the management account to close any member account within an organization.

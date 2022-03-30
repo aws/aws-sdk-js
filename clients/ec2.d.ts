@@ -3373,6 +3373,14 @@ declare class EC2 extends Service {
    */
   modifyInstanceEventWindow(callback?: (err: AWSError, data: EC2.Types.ModifyInstanceEventWindowResult) => void): Request<EC2.Types.ModifyInstanceEventWindowResult, AWSError>;
   /**
+   * Modifies the recovery behavior of your instance to disable simplified automatic recovery or set the recovery behavior to default. The default configuration will not enable simplified automatic recovery for an unsupported instance type. For more information, see Simplified automatic recovery.
+   */
+  modifyInstanceMaintenanceOptions(params: EC2.Types.ModifyInstanceMaintenanceOptionsRequest, callback?: (err: AWSError, data: EC2.Types.ModifyInstanceMaintenanceOptionsResult) => void): Request<EC2.Types.ModifyInstanceMaintenanceOptionsResult, AWSError>;
+  /**
+   * Modifies the recovery behavior of your instance to disable simplified automatic recovery or set the recovery behavior to default. The default configuration will not enable simplified automatic recovery for an unsupported instance type. For more information, see Simplified automatic recovery.
+   */
+  modifyInstanceMaintenanceOptions(callback?: (err: AWSError, data: EC2.Types.ModifyInstanceMaintenanceOptionsResult) => void): Request<EC2.Types.ModifyInstanceMaintenanceOptionsResult, AWSError>;
+  /**
    * Modify the instance metadata parameters on a running or stopped instance. When you modify the parameters on a stopped instance, they are applied when the instance is started. When you modify the parameters on a running instance, the API responds with a state of “pending”. After the parameter modifications are successfully applied to the instance, the state of the modifications changes from “pending” to “applied” in subsequent describe-instances API calls. For more information, see Instance metadata and user data in the Amazon EC2 User Guide.
    */
   modifyInstanceMetadataOptions(params: EC2.Types.ModifyInstanceMetadataOptionsRequest, callback?: (err: AWSError, data: EC2.Types.ModifyInstanceMetadataOptionsResult) => void): Request<EC2.Types.ModifyInstanceMetadataOptionsResult, AWSError>;
@@ -20204,6 +20212,10 @@ declare namespace EC2 {
      * The IPv6 address assigned to the instance.
      */
     Ipv6Address?: String;
+    /**
+     * Provides information on the recovery and maintenance options of your instance.
+     */
+    MaintenanceOptions?: InstanceMaintenanceOptions;
   }
   export interface InstanceAttribute {
     /**
@@ -20272,6 +20284,7 @@ declare namespace EC2 {
     UserData?: AttributeValue;
   }
   export type InstanceAttributeName = "instanceType"|"kernel"|"ramdisk"|"userData"|"disableApiTermination"|"instanceInitiatedShutdownBehavior"|"rootDeviceName"|"blockDeviceMapping"|"productCodes"|"sourceDestCheck"|"groupSet"|"ebsOptimized"|"sriovNetSupport"|"enaSupport"|"enclaveOptions"|string;
+  export type InstanceAutoRecoveryState = "disabled"|"default"|string;
   export interface InstanceBlockDeviceMapping {
     /**
      * The device name (for example, /dev/sdh or xvdh).
@@ -20535,6 +20548,18 @@ declare namespace EC2 {
   export type InstanceLifecycle = "spot"|"on-demand"|string;
   export type InstanceLifecycleType = "spot"|"scheduled"|string;
   export type InstanceList = Instance[];
+  export interface InstanceMaintenanceOptions {
+    /**
+     * Provides information on the current automatic recovery behavior of your instance.
+     */
+    AutoRecovery?: InstanceAutoRecoveryState;
+  }
+  export interface InstanceMaintenanceOptionsRequest {
+    /**
+     * Disables the automatic recovery behavior of your instance or sets it to default. For more information, see Simplified automatic recovery.
+     */
+    AutoRecovery?: InstanceAutoRecoveryState;
+  }
   export interface InstanceMarketOptionsRequest {
     /**
      * The market type.
@@ -22080,6 +22105,7 @@ declare namespace EC2 {
      */
     Overrides?: FleetLaunchTemplateOverrides;
   }
+  export type LaunchTemplateAutoRecoveryState = "default"|"disabled"|string;
   export interface LaunchTemplateBlockDeviceMapping {
     /**
      * The device name.
@@ -22308,6 +22334,18 @@ declare namespace EC2 {
   }
   export type LaunchTemplateId = string;
   export type LaunchTemplateIdStringList = LaunchTemplateId[];
+  export interface LaunchTemplateInstanceMaintenanceOptions {
+    /**
+     * Disables the automatic recovery behavior of your instance or sets it to default.
+     */
+    AutoRecovery?: LaunchTemplateAutoRecoveryState;
+  }
+  export interface LaunchTemplateInstanceMaintenanceOptionsRequest {
+    /**
+     * Disables the automatic recovery behavior of your instance or sets it to default. For more information, see Simplified automatic recovery.
+     */
+    AutoRecovery?: LaunchTemplateAutoRecoveryState;
+  }
   export interface LaunchTemplateInstanceMarketOptions {
     /**
      * The market type.
@@ -23499,7 +23537,7 @@ declare namespace EC2 {
   }
   export interface ModifyFleetResult {
     /**
-     * Is true if the request succeeds, and an error otherwise.
+     * If the request succeeds, the response returns true. If the request fails, no response is returned, and instead an error message is returned.
      */
     Return?: Boolean;
   }
@@ -23815,6 +23853,30 @@ declare namespace EC2 {
      * Information about the event window.
      */
     InstanceEventWindow?: InstanceEventWindow;
+  }
+  export interface ModifyInstanceMaintenanceOptionsRequest {
+    /**
+     * The ID of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * Disables the automatic recovery behavior of your instance or sets it to default.
+     */
+    AutoRecovery?: InstanceAutoRecoveryState;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface ModifyInstanceMaintenanceOptionsResult {
+    /**
+     * The ID of the instance.
+     */
+    InstanceId?: String;
+    /**
+     * Provides information on the current automatic recovery behavior of your instance.
+     */
+    AutoRecovery?: InstanceAutoRecoveryState;
   }
   export interface ModifyInstanceMetadataOptionsRequest {
     /**
@@ -24261,7 +24323,7 @@ declare namespace EC2 {
   }
   export interface ModifySpotFleetRequestResponse {
     /**
-     * Is true if the request succeeds, and an error otherwise.
+     * If the request succeeds, the response returns true. If the request fails, no response is returned, and instead an error message is returned.
      */
     Return?: Boolean;
   }
@@ -27551,6 +27613,10 @@ declare namespace EC2 {
      * The options for the instance hostname. The default values are inherited from the subnet.
      */
     PrivateDnsNameOptions?: LaunchTemplatePrivateDnsNameOptionsRequest;
+    /**
+     * The maintenance options for the instance.
+     */
+    MaintenanceOptions?: LaunchTemplateInstanceMaintenanceOptionsRequest;
   }
   export interface RequestSpotFleetRequest {
     /**
@@ -28126,7 +28192,7 @@ declare namespace EC2 {
   }
   export interface ResetInstanceAttributeRequest {
     /**
-     * The attribute to reset.  You can only reset the following attributes: kernel | ramdisk | sourceDestCheck. To change an instance attribute, use ModifyInstanceAttribute. 
+     * The attribute to reset.  You can only reset the following attributes: kernel | ramdisk | sourceDestCheck. 
      */
     Attribute: InstanceAttributeName;
     /**
@@ -28319,6 +28385,10 @@ declare namespace EC2 {
      * The options for the instance hostname.
      */
     PrivateDnsNameOptions?: LaunchTemplatePrivateDnsNameOptions;
+    /**
+     * The maintenance options for your instance.
+     */
+    MaintenanceOptions?: LaunchTemplateInstanceMaintenanceOptions;
   }
   export type RestorableByStringList = String[];
   export interface RestoreAddressToClassicRequest {
@@ -28911,6 +28981,10 @@ declare namespace EC2 {
      * The options for the instance hostname. The default values are inherited from the subnet.
      */
     PrivateDnsNameOptions?: PrivateDnsNameOptionsRequest;
+    /**
+     * The maintenance and recovery options for the instance.
+     */
+    MaintenanceOptions?: InstanceMaintenanceOptionsRequest;
   }
   export interface RunScheduledInstancesRequest {
     /**

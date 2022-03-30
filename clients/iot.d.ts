@@ -3332,15 +3332,15 @@ declare namespace Iot {
   }
   export interface CreateCustomMetricRequest {
     /**
-     *  The name of the custom metric. This will be used in the metric report submitted from the device/thing. Shouldn't begin with aws:. Cannot be updated once defined.
+     *  The name of the custom metric. This will be used in the metric report submitted from the device/thing. The name can't begin with aws:. You can't change the name after you define it.
      */
     metricName: MetricName;
     /**
-     *  Field represents a friendly name in the console for the custom metric; it doesn't have to be unique. Don't use this name as the metric identifier in the device metric report. Can be updated once defined.
+     *  The friendly name in the console for the custom metric. This name doesn't have to be unique. Don't use this name as the metric identifier in the device metric report. You can update the friendly name after you define it.
      */
     displayName?: CustomMetricDisplayName;
     /**
-     *  The type of the custom metric. Types include string-list, ip-address-list, number-list, and number. 
+     *  The type of the custom metric.   The type number only takes a single metric value as an input, but when you submit the metrics value in the DeviceMetrics report, you must pass it as an array with a single value. 
      */
     metricType: CustomMetricType;
     /**
@@ -3358,7 +3358,7 @@ declare namespace Iot {
      */
     metricName?: MetricName;
     /**
-     *  The Amazon Resource Number (ARN) of the custom metric, e.g. arn:aws-partition:iot:region:accountId:custommetric/metricName  
+     *  The Amazon Resource Number (ARN) of the custom metric. For example, arn:aws-partition:iot:region:accountId:custommetric/metricName  
      */
     metricArn?: CustomMetricArn;
   }
@@ -3960,7 +3960,7 @@ declare namespace Iot {
      */
     roleArn: RoleArn;
     /**
-     * How long (in seconds) the credentials will be valid. The default value is 3,600 seconds.
+     * How long (in seconds) the credentials will be valid. The default value is 3,600 seconds. This value must be less than or equal to the maximum session duration of the IAM role that the role alias references.
      */
     credentialDurationSeconds?: CredentialDurationSeconds;
     /**
@@ -4221,11 +4221,11 @@ declare namespace Iot {
      */
     certificateChain?: CodeSigningCertificateChain;
     /**
-     * The hash algorithm used to code sign the file.
+     * The hash algorithm used to code sign the file. You can use a string as the algorithm name if the target over-the-air (OTA) update devices are able to verify the signature that was generated using the same signature algorithm. For example, FreeRTOS uses SHA256 or SHA1, so you can pass either of them based on which was used for generating the signature.
      */
     hashAlgorithm?: HashAlgorithm;
     /**
-     * The signature algorithm used to code sign the file.
+     * The signature algorithm used to code sign the file. You can use a string as the algorithm name if the target over-the-air (OTA) update devices are able to verify the signature that was generated using the same signature algorithm. For example, FreeRTOS uses ECDSA or RSA, so you can pass either of them based on which was used for generating the signature.
      */
     signatureAlgorithm?: SignatureAlgorithm;
   }
@@ -4763,7 +4763,7 @@ declare namespace Iot {
      */
     metricArn?: CustomMetricArn;
     /**
-     *  The type of the custom metric. Types include string-list, ip-address-list, number-list, and number. 
+     *  The type of the custom metric.   The type number only takes a single metric value as an input, but while submitting the metrics value in the DeviceMetrics report, it must be passed as an array with a single value. 
      */
     metricType?: CustomMetricType;
     /**
@@ -8920,7 +8920,7 @@ declare namespace Iot {
      */
     verificationCertificate: CertificatePem;
     /**
-     * A boolean value that specifies if the CA certificate is set to active.
+     * A boolean value that specifies if the CA certificate is set to active. Valid values: ACTIVE | INACTIVE 
      */
     setAsActive?: SetAsActive;
     /**
@@ -8956,11 +8956,11 @@ declare namespace Iot {
      */
     caCertificatePem?: CertificatePem;
     /**
-     * A boolean value that specifies if the certificate is set to active.
+     * A boolean value that specifies if the certificate is set to active. Valid values: ACTIVE | INACTIVE 
      */
     setAsActive?: SetAsActiveFlag;
     /**
-     * The status of the register certificate request.
+     * The status of the register certificate request. Valid values that you can use include ACTIVE, INACTIVE, and REVOKED.
      */
     status?: CertificateStatus;
   }
@@ -10623,7 +10623,7 @@ declare namespace Iot {
      */
     metricArn?: CustomMetricArn;
     /**
-     *  The type of the custom metric. Types include string-list, ip-address-list, number-list, and number. 
+     *  The type of the custom metric.   The type number only takes a single metric value as an input, but while submitting the metrics value in the DeviceMetrics report, it must be passed as an array with a single value. 
      */
     metricType?: CustomMetricType;
     /**
@@ -10903,7 +10903,7 @@ declare namespace Iot {
      */
     roleArn?: RoleArn;
     /**
-     * The number of seconds the credential will be valid.
+     * The number of seconds the credential will be valid. This value must be less than or equal to the maximum session duration of the IAM role that the role alias references.
      */
     credentialDurationSeconds?: CredentialDurationSeconds;
   }
