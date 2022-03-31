@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1104.0-->
+<!--LATEST=2.1105.0-->
 <!--ENTRYINSERT-->
+
+## 2.1105.0
+* feature: CloudControl: SDK release for Cloud Control API in Amazon Web Services China (Beijing) Region, operated by Sinnet, and Amazon Web Services China (Ningxia) Region, operated by NWCD
+* feature: DataBrew: This AWS Glue Databrew release adds feature to support ORC as an input format.
+* feature: Grafana: This release adds tagging support to the Managed Grafana service. New APIs: TagResource, UntagResource and ListTagsForResource. Updates: add optional field tags to support tagging while calling CreateWorkspace.
+* feature: PinpointSMSVoiceV2: Amazon Pinpoint now offers a version 2.0 suite of SMS and voice APIs, providing increased control over sending and configuration. This release is a new SDK for sending SMS and voice messages called PinpointSMSVoiceV2.
+* feature: Route53RecoveryCluster: This release adds a new API "ListRoutingControls" to list routing control states using the highly reliable Route 53 ARC data plane endpoints.
+* feature: WorkSpaces: Added APIs that allow you to customize the logo, login message, and help links in the WorkSpaces client login page. To learn more, visit https://docs.aws.amazon.com/workspaces/latest/adminguide/customize-branding.html
 
 ## 2.1104.0
 * feature: EC2: This release simplifies the auto-recovery configuration process enabling customers to set the recovery behavior to disabled or default

@@ -1148,5 +1148,9 @@
   },
   "gamesparks": {
     "name": "GameSparks"
+  },
+  "pinpointsmsvoicev2": {
+    "prefix": "pinpoint-sms-voice-v2",
+    "name": "PinpointSMSVoiceV2"
   }
 }

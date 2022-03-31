@@ -100,6 +100,14 @@ declare class WorkSpaces extends Service {
    */
   createWorkspaces(callback?: (err: AWSError, data: WorkSpaces.Types.CreateWorkspacesResult) => void): Request<WorkSpaces.Types.CreateWorkspacesResult, AWSError>;
   /**
+   * Deletes customized client branding. Client branding allows you to customize your WorkSpace's client login portal. You can tailor your login portal company logo, the support email address, support link, link to reset password, and a custom message for users trying to sign in. After you delete your customized client branding, your login portal reverts to the default client branding.
+   */
+  deleteClientBranding(params: WorkSpaces.Types.DeleteClientBrandingRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DeleteClientBrandingResult) => void): Request<WorkSpaces.Types.DeleteClientBrandingResult, AWSError>;
+  /**
+   * Deletes customized client branding. Client branding allows you to customize your WorkSpace's client login portal. You can tailor your login portal company logo, the support email address, support link, link to reset password, and a custom message for users trying to sign in. After you delete your customized client branding, your login portal reverts to the default client branding.
+   */
+  deleteClientBranding(callback?: (err: AWSError, data: WorkSpaces.Types.DeleteClientBrandingResult) => void): Request<WorkSpaces.Types.DeleteClientBrandingResult, AWSError>;
+  /**
    * Deletes a client-add-in for Amazon Connect that is configured within a directory.
    */
   deleteConnectClientAddIn(params: WorkSpaces.Types.DeleteConnectClientAddInRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DeleteConnectClientAddInResult) => void): Request<WorkSpaces.Types.DeleteConnectClientAddInResult, AWSError>;
@@ -171,6 +179,14 @@ declare class WorkSpaces extends Service {
    * Retrieves a list that describes modifications to the configuration of Bring Your Own License (BYOL) for the specified account.
    */
   describeAccountModifications(callback?: (err: AWSError, data: WorkSpaces.Types.DescribeAccountModificationsResult) => void): Request<WorkSpaces.Types.DescribeAccountModificationsResult, AWSError>;
+  /**
+   * Describes the specified client branding. Client branding allows you to customize the log in page of various device types for your users. You can add your company logo, the support email address, support link, link to reset password, and a custom message for users trying to sign in.  Only device types that have branding information configured will be shown in the response. 
+   */
+  describeClientBranding(params: WorkSpaces.Types.DescribeClientBrandingRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DescribeClientBrandingResult) => void): Request<WorkSpaces.Types.DescribeClientBrandingResult, AWSError>;
+  /**
+   * Describes the specified client branding. Client branding allows you to customize the log in page of various device types for your users. You can add your company logo, the support email address, support link, link to reset password, and a custom message for users trying to sign in.  Only device types that have branding information configured will be shown in the response. 
+   */
+  describeClientBranding(callback?: (err: AWSError, data: WorkSpaces.Types.DescribeClientBrandingResult) => void): Request<WorkSpaces.Types.DescribeClientBrandingResult, AWSError>;
   /**
    * Retrieves a list that describes one or more specified Amazon WorkSpaces clients.
    */
@@ -291,6 +307,14 @@ declare class WorkSpaces extends Service {
    * Disassociates the specified IP access control group from the specified directory.
    */
   disassociateIpGroups(callback?: (err: AWSError, data: WorkSpaces.Types.DisassociateIpGroupsResult) => void): Request<WorkSpaces.Types.DisassociateIpGroupsResult, AWSError>;
+  /**
+   * Imports client branding. Client branding allows you to customize your WorkSpace's client login portal. You can tailor your login portal company logo, the support email address, support link, link to reset password, and a custom message for users trying to sign in. After you import client branding, the default branding experience for the specified platform type is replaced with the imported experience    You must specify at least one platform type when importing client branding.   You can import up to 6 MB of data with each request. If your request exceeds this limit, you can import client branding for different platform types using separate requests.   In each platform type, the SupportEmail and SupportLink parameters are mutually exclusive. You can specify only one parameter for each platform type, but not both.   Imported data can take up to a minute to appear in the WorkSpaces client.   
+   */
+  importClientBranding(params: WorkSpaces.Types.ImportClientBrandingRequest, callback?: (err: AWSError, data: WorkSpaces.Types.ImportClientBrandingResult) => void): Request<WorkSpaces.Types.ImportClientBrandingResult, AWSError>;
+  /**
+   * Imports client branding. Client branding allows you to customize your WorkSpace's client login portal. You can tailor your login portal company logo, the support email address, support link, link to reset password, and a custom message for users trying to sign in. After you import client branding, the default branding experience for the specified platform type is replaced with the imported experience    You must specify at least one platform type when importing client branding.   You can import up to 6 MB of data with each request. If your request exceeds this limit, you can import client branding for different platform types using separate requests.   In each platform type, the SupportEmail and SupportLink parameters are mutually exclusive. You can specify only one parameter for each platform type, but not both.   Imported data can take up to a minute to appear in the WorkSpaces client.   
+   */
+  importClientBranding(callback?: (err: AWSError, data: WorkSpaces.Types.ImportClientBrandingResult) => void): Request<WorkSpaces.Types.ImportClientBrandingResult, AWSError>;
   /**
    * Imports the specified Windows 10 Bring Your Own License (BYOL) image into Amazon WorkSpaces. The image must be an already licensed Amazon EC2 image that is in your Amazon Web Services account, and you must own the image. For more information about creating BYOL images, see  Bring Your Own Windows Desktop Licenses.
    */
@@ -559,6 +583,11 @@ declare namespace WorkSpaces {
   export type BundleIdList = BundleId[];
   export type BundleList = WorkspaceBundle[];
   export type BundleOwner = string;
+  export type ClientDeviceType = "DeviceTypeWindows"|"DeviceTypeOsx"|"DeviceTypeAndroid"|"DeviceTypeIos"|"DeviceTypeLinux"|"DeviceTypeWeb"|string;
+  export type ClientDeviceTypeList = ClientDeviceType[];
+  export type ClientEmail = string;
+  export type ClientLocale = string;
+  export type ClientLoginMessage = string;
   export interface ClientProperties {
     /**
      * Specifies whether users can cache their credentials on the Amazon WorkSpaces client. When enabled, users can choose to reconnect to their WorkSpaces without re-entering their credentials. 
@@ -576,6 +605,7 @@ declare namespace WorkSpaces {
      */
     ClientProperties?: ClientProperties;
   }
+  export type ClientUrl = string;
   export type Compute = "VALUE"|"STANDARD"|"PERFORMANCE"|"POWER"|"GRAPHICS"|"POWERPRO"|"GRAPHICSPRO"|string;
   export interface ComputeType {
     /**
@@ -831,6 +861,51 @@ declare namespace WorkSpaces {
   export type DedicatedTenancyModificationStateEnum = "PENDING"|"COMPLETED"|"FAILED"|string;
   export type DedicatedTenancySupportEnum = "ENABLED"|string;
   export type DedicatedTenancySupportResultEnum = "ENABLED"|"DISABLED"|string;
+  export interface DefaultClientBrandingAttributes {
+    /**
+     * The logo URL. This is the link where users can download the logo image. The only supported image format is .png.
+     */
+    LogoUrl?: ClientUrl;
+    /**
+     * The support email. The company's customer support email address.    In each platform type, the SupportEmail and SupportLink parameters are mutually exclusive. You can specify one parameter for each platform type, but not both.   The default email is workspaces-feedback@amazon.com.   
+     */
+    SupportEmail?: ClientEmail;
+    /**
+     * The support link. The link for the company's customer support page for their WorkSpace.    In each platform type, the SupportEmail and SupportLink parameters are mutually exclusive.You can specify one parameter for each platform type, but not both.   The default support link is workspaces-feedback@amazon.com.   
+     */
+    SupportLink?: ClientUrl;
+    /**
+     * The forgotten password link. This is the web address that users can go to if they forget the password for their WorkSpace.
+     */
+    ForgotPasswordLink?: ClientUrl;
+    /**
+     * The login message. Specified as a key value pair, in which the key is a locale and the value is the localized message for that locale. The only key supported is en_US. 
+     */
+    LoginMessage?: LoginMessage;
+  }
+  export interface DefaultImportClientBrandingAttributes {
+    /**
+     * The logo. This is the link where users can download the logo image. The only image format accepted is .png.
+     */
+    Logo?: DefaultLogo;
+    /**
+     * The support email. The company's customer support email address.    In each platform type, the SupportEmail and SupportLink parameters are mutually exclusive. You can specify one parameter for each platform type, but not both.   The default email is workspaces-feedback@amazon.com.   
+     */
+    SupportEmail?: ClientEmail;
+    /**
+     * The support link. The link for the company's customer support page for their WorkSpace.    In each platform type, the SupportEmail and SupportLink parameters are mutually exclusive. You can specify one parameter for each platform type, but not both.   The default support link is workspaces-feedback@amazon.com.   
+     */
+    SupportLink?: ClientUrl;
+    /**
+     * The forgotten password link. This is the web address that users can go to if they forget the password for their WorkSpace.
+     */
+    ForgotPasswordLink?: ClientUrl;
+    /**
+     * The login message. Specified as a key value pair, in which the key is a locale and the value is the localized message for that locale. The only key supported is en_US. 
+     */
+    LoginMessage?: LoginMessage;
+  }
+  export type DefaultLogo = Buffer|Uint8Array|Blob|string;
   export type DefaultOu = string;
   export interface DefaultWorkspaceCreationProperties {
     /**
@@ -857,6 +932,18 @@ declare namespace WorkSpaces {
      * Specifies whether maintenance mode is enabled for WorkSpaces. For more information, see WorkSpace Maintenance.
      */
     EnableMaintenanceMode?: BooleanObject;
+  }
+  export interface DeleteClientBrandingRequest {
+    /**
+     * The directory identifier of the WorkSpace for which you want to delete client branding.
+     */
+    ResourceId: DirectoryId;
+    /**
+     * The device type for which you want to delete client branding.
+     */
+    Platforms: ClientDeviceTypeList;
+  }
+  export interface DeleteClientBrandingResult {
   }
   export interface DeleteConnectClientAddInRequest {
     /**
@@ -949,6 +1036,38 @@ declare namespace WorkSpaces {
      * The IP address range, specified as an IPv4 CIDR block, used for the management network interface. The management network interface is connected to a secure Amazon WorkSpaces management network. It is used for interactive streaming of the WorkSpace desktop to Amazon WorkSpaces clients, and to allow Amazon WorkSpaces to manage the WorkSpace.
      */
     DedicatedTenancyManagementCidrRange?: DedicatedTenancyManagementCidrRange;
+  }
+  export interface DescribeClientBrandingRequest {
+    /**
+     * The directory identifier of the WorkSpace for which you want to view client branding information.
+     */
+    ResourceId: DirectoryId;
+  }
+  export interface DescribeClientBrandingResult {
+    /**
+     * The branding information for Windows devices.
+     */
+    DeviceTypeWindows?: DefaultClientBrandingAttributes;
+    /**
+     * The branding information for macOS devices.
+     */
+    DeviceTypeOsx?: DefaultClientBrandingAttributes;
+    /**
+     * The branding information for Android devices.
+     */
+    DeviceTypeAndroid?: DefaultClientBrandingAttributes;
+    /**
+     * The branding information for iOS devices.
+     */
+    DeviceTypeIos?: IosClientBrandingAttributes;
+    /**
+     * The branding information for Linux devices.
+     */
+    DeviceTypeLinux?: DefaultClientBrandingAttributes;
+    /**
+     * The branding information for Web access.
+     */
+    DeviceTypeWeb?: DefaultClientBrandingAttributes;
   }
   export interface DescribeClientPropertiesRequest {
     /**
@@ -1324,6 +1443,62 @@ declare namespace WorkSpaces {
   }
   export type ImagePermissions = ImagePermission[];
   export type ImageType = "OWNED"|"SHARED"|string;
+  export interface ImportClientBrandingRequest {
+    /**
+     * The directory identifier of the WorkSpace for which you want to import client branding.
+     */
+    ResourceId: DirectoryId;
+    /**
+     * The branding information to import for Windows devices.
+     */
+    DeviceTypeWindows?: DefaultImportClientBrandingAttributes;
+    /**
+     * The branding information to import for macOS devices.
+     */
+    DeviceTypeOsx?: DefaultImportClientBrandingAttributes;
+    /**
+     * The branding information to import for Android devices.
+     */
+    DeviceTypeAndroid?: DefaultImportClientBrandingAttributes;
+    /**
+     * The branding information to import for iOS devices.
+     */
+    DeviceTypeIos?: IosImportClientBrandingAttributes;
+    /**
+     * The branding information to import for Linux devices.
+     */
+    DeviceTypeLinux?: DefaultImportClientBrandingAttributes;
+    /**
+     * The branding information to import for web access.
+     */
+    DeviceTypeWeb?: DefaultImportClientBrandingAttributes;
+  }
+  export interface ImportClientBrandingResult {
+    /**
+     * The branding information configured for Windows devices.
+     */
+    DeviceTypeWindows?: DefaultClientBrandingAttributes;
+    /**
+     * The branding information configured for macOS devices.
+     */
+    DeviceTypeOsx?: DefaultClientBrandingAttributes;
+    /**
+     * The branding information configured for Android devices.
+     */
+    DeviceTypeAndroid?: DefaultClientBrandingAttributes;
+    /**
+     * The branding information configured for iOS devices.
+     */
+    DeviceTypeIos?: IosClientBrandingAttributes;
+    /**
+     * The branding information configured for Linux devices.
+     */
+    DeviceTypeLinux?: DefaultClientBrandingAttributes;
+    /**
+     * The branding information configured for web access.
+     */
+    DeviceTypeWeb?: DefaultClientBrandingAttributes;
+  }
   export interface ImportWorkspaceImageRequest {
     /**
      * The identifier of the EC2 image.
@@ -1356,6 +1531,69 @@ declare namespace WorkSpaces {
      */
     ImageId?: WorkspaceImageId;
   }
+  export type Ios2XLogo = Buffer|Uint8Array|Blob|string;
+  export type Ios3XLogo = Buffer|Uint8Array|Blob|string;
+  export interface IosClientBrandingAttributes {
+    /**
+     * The logo. This is the link where users can download the logo image. This is the standard-resolution display that has a 1:1 pixel density (or @1x), where one pixel is equal to one point.
+     */
+    LogoUrl?: ClientUrl;
+    /**
+     * The @2x version of the logo. This is the higher resolution display that offers a scale factor of 2.0 (or @2x).   For more information about iOS image size and resolution, see Image Size and Resolution  in the Apple Human Interface Guidelines. 
+     */
+    Logo2xUrl?: ClientUrl;
+    /**
+     * The @3x version of the logo. This is the higher resolution display that offers a scale factor of 3.0 (or @3x).   For more information about iOS image size and resolution, see Image Size and Resolution  in the Apple Human Interface Guidelines. 
+     */
+    Logo3xUrl?: ClientUrl;
+    /**
+     * The support email. The company's customer support email address.    In each platform type, the SupportEmail and SupportLink parameters are mutually exclusive. You can specify one parameter for each platform type, but not both.   The default email is workspaces-feedback@amazon.com.   
+     */
+    SupportEmail?: ClientEmail;
+    /**
+     * The support link. The link for the company's customer support page for their WorkSpace.    In each platform type, the SupportEmail and SupportLink parameters are mutually exclusive. You can specify one parameter for each platform type, but not both.   The default support link is workspaces-feedback@amazon.com.   
+     */
+    SupportLink?: ClientUrl;
+    /**
+     * The forgotten password link. This is the web address that users can go to if they forget the password for their WorkSpace.
+     */
+    ForgotPasswordLink?: ClientUrl;
+    /**
+     * The login message. Specified as a key value pair, in which the key is a locale and the value is the localized message for that locale. The only key supported is en_US. 
+     */
+    LoginMessage?: LoginMessage;
+  }
+  export interface IosImportClientBrandingAttributes {
+    /**
+     * The logo. This is the link where users can download the logo image. This is the standard-resolution display that has a 1:1 pixel density (or @1x), where one pixel is equal to one point.
+     */
+    Logo?: IosLogo;
+    /**
+     * The @2x version of the logo. This is the higher resolution display that offers a scale factor of 2.0 (or @2x).   For more information about iOS image size and resolution, see Image Size and Resolution  in the Apple Human Interface Guidelines. 
+     */
+    Logo2x?: Ios2XLogo;
+    /**
+     * The @3x version of the logo. This is the higher resolution display that offers a scale factor of 3.0 (or @3x).   For more information about iOS image size and resolution, see Image Size and Resolution  in the Apple Human Interface Guidelines. 
+     */
+    Logo3x?: Ios3XLogo;
+    /**
+     * The support email. The company's customer support email address.    In each platform type, the SupportEmail and SupportLink parameters are mutually exclusive. You can specify one parameter for each platform type, but not both.   The default email is workspaces-feedback@amazon.com.   
+     */
+    SupportEmail?: ClientEmail;
+    /**
+     * The support link. The link for the company's customer support page for their WorkSpace.    In each platform type, the SupportEmail and SupportLink parameters are mutually exclusive. You can specify one parameter for each platform type, but not both.   The default support link is workspaces-feedback@amazon.com.   
+     */
+    SupportLink?: ClientUrl;
+    /**
+     * The forgotten password link. This is the web address that users can go to if they forget the password for their WorkSpace.
+     */
+    ForgotPasswordLink?: ClientUrl;
+    /**
+     * The login message. Specified as a key value pair, in which the key is a locale and the value is the localized message for that locale. The only key supported is en_US. 
+     */
+    LoginMessage?: LoginMessage;
+  }
+  export type IosLogo = Buffer|Uint8Array|Blob|string;
   export type IpAddress = string;
   export type IpGroupDesc = string;
   export type IpGroupId = string;
@@ -1400,6 +1638,7 @@ declare namespace WorkSpaces {
      */
     NextToken?: PaginationToken;
   }
+  export type LoginMessage = {[key: string]: ClientLoginMessage};
   export type ManagementCidrRangeConstraint = string;
   export type ManagementCidrRangeMaxResults = number;
   export interface MigrateWorkspaceRequest {

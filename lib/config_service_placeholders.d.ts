@@ -303,6 +303,7 @@ export abstract class ConfigurationServicePlaceholders {
   keyspaces?: AWS.Keyspaces.Types.ClientConfiguration;
   billingconductor?: AWS.Billingconductor.Types.ClientConfiguration;
   gamesparks?: AWS.GameSparks.Types.ClientConfiguration;
+  pinpointsmsvoicev2?: AWS.PinpointSMSVoiceV2.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -608,4 +609,5 @@ export interface ConfigurationServiceApiVersions {
   keyspaces?: AWS.Keyspaces.Types.apiVersion;
   billingconductor?: AWS.Billingconductor.Types.apiVersion;
   gamesparks?: AWS.GameSparks.Types.apiVersion;
+  pinpointsmsvoicev2?: AWS.PinpointSMSVoiceV2.Types.apiVersion;
 }

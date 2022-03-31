@@ -1479,7 +1479,7 @@ declare namespace DataBrew {
      */
     OrderedBy?: OrderedBy;
     /**
-     * A criteria to use for Amazon S3 files sorting before their selection. By default uses DESCENDING order, i.e. most recent files are selected first. Anotherpossible value is ASCENDING.
+     * A criteria to use for Amazon S3 files sorting before their selection. By default uses DESCENDING order, i.e. most recent files are selected first. Another possible value is ASCENDING.
      */
     Order?: Order;
   }
@@ -1528,7 +1528,7 @@ declare namespace DataBrew {
      */
     Metadata?: Metadata;
   }
-  export type InputFormat = "CSV"|"JSON"|"PARQUET"|"EXCEL"|string;
+  export type InputFormat = "CSV"|"JSON"|"PARQUET"|"EXCEL"|"ORC"|string;
   export interface Job {
     /**
      * The ID of the Amazon Web Services account that owns the job.
@@ -2222,7 +2222,7 @@ declare namespace DataBrew {
      */
     Disabled?: Disabled;
     /**
-     * The expression which includes column references, condition names followed by variable references, possibly grouped and combined with other conditions. For example, (:col1 starts_with :prefix1 or :col1 starts_with :prefix2) and (:col1 ends_with :suffix1 or :col1 ends_with :suffix2). Column and value references are substitution variables that should start with the ':' symbol. Depending on the context, substitution variables' values can be either an actual value or a column name. These values are defined in the SubstitutionMap. If a CheckExpression starts with a column reference, then ColumnSelectors in the rule should be null. If ColumnSelectors has been defined, then there should be no columnn reference in the left side of a condition, for example, is_between :val1 and :val2. For more information, see Available checks 
+     * The expression which includes column references, condition names followed by variable references, possibly grouped and combined with other conditions. For example, (:col1 starts_with :prefix1 or :col1 starts_with :prefix2) and (:col1 ends_with :suffix1 or :col1 ends_with :suffix2). Column and value references are substitution variables that should start with the ':' symbol. Depending on the context, substitution variables' values can be either an actual value or a column name. These values are defined in the SubstitutionMap. If a CheckExpression starts with a column reference, then ColumnSelectors in the rule should be null. If ColumnSelectors has been defined, then there should be no column reference in the left side of a condition, for example, is_between :val1 and :val2. For more information, see Available checks 
      */
     CheckExpression: Expression;
     /**
