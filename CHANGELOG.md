@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1106.0-->
+<!--LATEST=2.1107.0-->
 <!--ENTRYINSERT-->
+
+## 2.1107.0
+* feature: Iot: AWS IoT - AWS IoT Device Defender adds support to list metric datapoints collected for IoT devices through the ListMetricValues API
+* feature: Proton: SDK release to support tagging for AWS Proton Repository resource
+* feature: ServiceCatalog: This release adds ProvisioningArtifictOutputKeys to DescribeProvisioningParameters to reference the outputs of a Provisioned Product and deprecates ProvisioningArtifactOutputs.
 
 ## 2.1106.0
 * feature: Connect: This release updates these APIs: UpdateInstanceAttribute, DescribeInstanceAttribute and ListInstanceAttributes. You can use it to programmatically enable/disable multi-party conferencing using attribute type MULTI_PARTY_CONFERENCING on the specified Amazon Connect instance.

@@ -1252,6 +1252,14 @@ declare class Iot extends Service {
    */
   listManagedJobTemplates(callback?: (err: AWSError, data: Iot.Types.ListManagedJobTemplatesResponse) => void): Request<Iot.Types.ListManagedJobTemplatesResponse, AWSError>;
   /**
+   * Lists the values reported for an IoT Device Defender metric (device-side metric, cloud-side metric, or custom metric) by the given thing during the specified time period.
+   */
+  listMetricValues(params: Iot.Types.ListMetricValuesRequest, callback?: (err: AWSError, data: Iot.Types.ListMetricValuesResponse) => void): Request<Iot.Types.ListMetricValuesResponse, AWSError>;
+  /**
+   * Lists the values reported for an IoT Device Defender metric (device-side metric, cloud-side metric, or custom metric) by the given thing during the specified time period.
+   */
+  listMetricValues(callback?: (err: AWSError, data: Iot.Types.ListMetricValuesResponse) => void): Request<Iot.Types.ListMetricValuesResponse, AWSError>;
+  /**
    * Gets a list of all mitigation actions that match the specified filter criteria. Requires permission to access the ListMitigationActions action.
    */
   listMitigationActions(params: Iot.Types.ListMitigationActionsRequest, callback?: (err: AWSError, data: Iot.Types.ListMitigationActionsResponse) => void): Request<Iot.Types.ListMitigationActionsResponse, AWSError>;
@@ -2126,7 +2134,7 @@ declare namespace Iot {
     /**
      * Specifies if this mitigation action can move the things that triggered the mitigation action even if they are part of one or more dynamic thing groups.
      */
-    overrideDynamicGroups?: OverrideDynamicGroups;
+    overrideDynamicGroups?: NullableBoolean;
   }
   export type AdditionalMetricsToRetainList = BehaviorMetric[];
   export type AdditionalMetricsToRetainV2List = MetricToRetain[];
@@ -4221,11 +4229,11 @@ declare namespace Iot {
      */
     certificateChain?: CodeSigningCertificateChain;
     /**
-     * The hash algorithm used to code sign the file. You can use a string as the algorithm name if the target over-the-air (OTA) update devices are able to verify the signature that was generated using the same signature algorithm. For example, FreeRTOS uses SHA256 or SHA1, so you can pass either of them based on which was used for generating the signature.
+     * The hash algorithm used to code sign the file.
      */
     hashAlgorithm?: HashAlgorithm;
     /**
-     * The signature algorithm used to code sign the file. You can use a string as the algorithm name if the target over-the-air (OTA) update devices are able to verify the signature that was generated using the same signature algorithm. For example, FreeRTOS uses ECDSA or RSA, so you can pass either of them based on which was used for generating the signature.
+     * The signature algorithm used to code sign the file.
      */
     signatureAlgorithm?: SignatureAlgorithm;
   }
@@ -7492,6 +7500,50 @@ declare namespace Iot {
      */
     nextToken?: NextToken;
   }
+  export interface ListMetricValuesRequest {
+    /**
+     * The name of the thing for which security profile metric values are returned.
+     */
+    thingName: DeviceDefenderThingName;
+    /**
+     * The name of the security profile metric for which values are returned.
+     */
+    metricName: BehaviorMetric;
+    /**
+     * The dimension name.
+     */
+    dimensionName?: DimensionName;
+    /**
+     * The dimension value operator.
+     */
+    dimensionValueOperator?: DimensionValueOperator;
+    /**
+     * The start of the time period for which metric values are returned.
+     */
+    startTime: Timestamp;
+    /**
+     * The end of the time period for which metric values are returned.
+     */
+    endTime: Timestamp;
+    /**
+     * The maximum number of results to return at one time.
+     */
+    maxResults?: MaxResults;
+    /**
+     * The token for the next set of results.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListMetricValuesResponse {
+    /**
+     * The data the thing reports for the metric during the specified time period.
+     */
+    metricDatumList?: MetricDatumList;
+    /**
+     * A token that can be used to retrieve the next set of results, or null if there are no additional results.
+     */
+    nextToken?: NextToken;
+  }
   export interface ListMitigationActionsRequest {
     /**
      * Specify a value to limit the result to mitigation actions with a specific action type.
@@ -8361,6 +8413,17 @@ declare namespace Iot {
   export type Message = string;
   export type MessageFormat = "RAW"|"JSON"|string;
   export type MessageId = string;
+  export interface MetricDatum {
+    /**
+     * The time the metric value was reported.
+     */
+    timestamp?: Timestamp;
+    /**
+     * The value reported for the metric.
+     */
+    value?: MetricValue;
+  }
+  export type MetricDatumList = MetricDatum[];
   export interface MetricDimension {
     /**
      * A unique identifier for the dimension.
