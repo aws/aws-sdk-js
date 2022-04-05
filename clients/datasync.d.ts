@@ -44,6 +44,14 @@ declare class DataSync extends Service {
    */
   createLocationFsxLustre(callback?: (err: AWSError, data: DataSync.Types.CreateLocationFsxLustreResponse) => void): Request<DataSync.Types.CreateLocationFsxLustreResponse, AWSError>;
   /**
+   * Creates an endpoint for an Amazon FSx for OpenZFS file system.
+   */
+  createLocationFsxOpenZfs(params: DataSync.Types.CreateLocationFsxOpenZfsRequest, callback?: (err: AWSError, data: DataSync.Types.CreateLocationFsxOpenZfsResponse) => void): Request<DataSync.Types.CreateLocationFsxOpenZfsResponse, AWSError>;
+  /**
+   * Creates an endpoint for an Amazon FSx for OpenZFS file system.
+   */
+  createLocationFsxOpenZfs(callback?: (err: AWSError, data: DataSync.Types.CreateLocationFsxOpenZfsResponse) => void): Request<DataSync.Types.CreateLocationFsxOpenZfsResponse, AWSError>;
+  /**
    * Creates an endpoint for an Amazon FSx for Windows File Server file system.
    */
   createLocationFsxWindows(params: DataSync.Types.CreateLocationFsxWindowsRequest, callback?: (err: AWSError, data: DataSync.Types.CreateLocationFsxWindowsResponse) => void): Request<DataSync.Types.CreateLocationFsxWindowsResponse, AWSError>;
@@ -140,19 +148,27 @@ declare class DataSync extends Service {
    */
   describeLocationEfs(callback?: (err: AWSError, data: DataSync.Types.DescribeLocationEfsResponse) => void): Request<DataSync.Types.DescribeLocationEfsResponse, AWSError>;
   /**
-   * Returns metadata, such as the path information about an Amazon FSx for Lustre location.
+   * Returns metadata about an Amazon FSx for Lustre location, such as information about its path.
    */
   describeLocationFsxLustre(params: DataSync.Types.DescribeLocationFsxLustreRequest, callback?: (err: AWSError, data: DataSync.Types.DescribeLocationFsxLustreResponse) => void): Request<DataSync.Types.DescribeLocationFsxLustreResponse, AWSError>;
   /**
-   * Returns metadata, such as the path information about an Amazon FSx for Lustre location.
+   * Returns metadata about an Amazon FSx for Lustre location, such as information about its path.
    */
   describeLocationFsxLustre(callback?: (err: AWSError, data: DataSync.Types.DescribeLocationFsxLustreResponse) => void): Request<DataSync.Types.DescribeLocationFsxLustreResponse, AWSError>;
   /**
-   * Returns metadata, such as the path information about an Amazon FSx for Windows File Server location.
+   * Returns metadata about an Amazon FSx for OpenZFS location, such as information about its path.
+   */
+  describeLocationFsxOpenZfs(params: DataSync.Types.DescribeLocationFsxOpenZfsRequest, callback?: (err: AWSError, data: DataSync.Types.DescribeLocationFsxOpenZfsResponse) => void): Request<DataSync.Types.DescribeLocationFsxOpenZfsResponse, AWSError>;
+  /**
+   * Returns metadata about an Amazon FSx for OpenZFS location, such as information about its path.
+   */
+  describeLocationFsxOpenZfs(callback?: (err: AWSError, data: DataSync.Types.DescribeLocationFsxOpenZfsResponse) => void): Request<DataSync.Types.DescribeLocationFsxOpenZfsResponse, AWSError>;
+  /**
+   * Returns metadata about an Amazon FSx for Windows File Server location, such as information about its path.
    */
   describeLocationFsxWindows(params: DataSync.Types.DescribeLocationFsxWindowsRequest, callback?: (err: AWSError, data: DataSync.Types.DescribeLocationFsxWindowsResponse) => void): Request<DataSync.Types.DescribeLocationFsxWindowsResponse, AWSError>;
   /**
-   * Returns metadata, such as the path information about an Amazon FSx for Windows File Server location.
+   * Returns metadata about an Amazon FSx for Windows File Server location, such as information about its path.
    */
   describeLocationFsxWindows(callback?: (err: AWSError, data: DataSync.Types.DescribeLocationFsxWindowsResponse) => void): Request<DataSync.Types.DescribeLocationFsxWindowsResponse, AWSError>;
   /**
@@ -442,6 +458,34 @@ declare namespace DataSync {
      */
     LocationArn?: LocationArn;
   }
+  export interface CreateLocationFsxOpenZfsRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the FSx for OpenZFS file system.
+     */
+    FsxFilesystemArn: FsxFilesystemArn;
+    /**
+     * The type of protocol that DataSync uses to access your file system.
+     */
+    Protocol: FsxProtocol;
+    /**
+     * The ARNs of the security groups that are used to configure the FSx for OpenZFS file system.
+     */
+    SecurityGroupArns: Ec2SecurityGroupArnList;
+    /**
+     * A subdirectory in the location's path that must begin with /fsx. DataSync uses this subdirectory to read or write data (depending on whether the file system is a source or destination location).
+     */
+    Subdirectory?: FsxOpenZfsSubdirectory;
+    /**
+     * The key-value pair that represents a tag that you want to add to the resource. The value can be an empty string. This value helps you manage, filter, and search for your resources. We recommend that you create a name tag for your location.
+     */
+    Tags?: InputTagList;
+  }
+  export interface CreateLocationFsxOpenZfsResponse {
+    /**
+     * The ARN of the FSx for OpenZFS file system location that you created.
+     */
+    LocationArn?: LocationArn;
+  }
   export interface CreateLocationFsxWindowsRequest {
     /**
      * A subdirectory in the location's path. This subdirectory in the Amazon FSx for Windows File Server file system is used to read data from the Amazon FSx for Windows File Server source location or write data to the FSx for Windows File Server destination.
@@ -452,7 +496,7 @@ declare namespace DataSync {
      */
     FsxFilesystemArn: FsxFilesystemArn;
     /**
-     * The Amazon Resource Names (ARNs) of the security groups that are used to configure the FSx for Windows File Server file system.
+     * The ARNs of the security groups that are used to configure the FSx for Windows File Server file system.
      */
     SecurityGroupArns: Ec2SecurityGroupArnList;
     /**
@@ -474,7 +518,7 @@ declare namespace DataSync {
   }
   export interface CreateLocationFsxWindowsResponse {
     /**
-     * The Amazon Resource Name (ARN) of the FSx for Windows File Server file system location that is created.
+     * The Amazon Resource Name (ARN) of the FSx for Windows File Server file system location you created.
      */
     LocationArn?: LocationArn;
   }
@@ -544,7 +588,7 @@ declare namespace DataSync {
      */
     Subdirectory: NfsSubdirectory;
     /**
-     * The name of the NFS server. This value is the IP address or Domain Name Service (DNS) name of the NFS server. An agent that is installed on-premises uses this host name to mount the NFS server in a network.  If you are copying data to or from your Snowcone device, see NFS Server on Snowcone for more information.  This name must either be DNS-compliant or must be an IP version 4 (IPv4) address. 
+     * The name of the NFS server. This value is the IP address or Domain Name Service (DNS) name of the NFS server. An agent that is installed on-premises uses this hostname to mount the NFS server in a network.  If you are copying data to or from your Snowcone device, see NFS Server on Snowcone for more information.  This name must either be DNS-compliant or must be an IP version 4 (IPv4) address. 
      */
     ServerHostname: ServerHostname;
     /**
@@ -568,7 +612,7 @@ declare namespace DataSync {
   }
   export interface CreateLocationObjectStorageRequest {
     /**
-     * The name of the self-managed object storage server. This value is the IP address or Domain Name Service (DNS) name of the object storage server. An agent uses this host name to mount the object storage server in a network. 
+     * The name of the self-managed object storage server. This value is the IP address or Domain Name Service (DNS) name of the object storage server. An agent uses this hostname to mount the object storage server in a network. 
      */
     ServerHostname: ServerHostname;
     /**
@@ -625,7 +669,7 @@ declare namespace DataSync {
     S3StorageClass?: S3StorageClass;
     S3Config: S3Config;
     /**
-     * If you are using DataSync on an Amazon Web Services Outpost, specify the Amazon Resource Names (ARNs) of the DataSync agents deployed on your Outpost. For more information about launching a DataSync agent on an Amazon Web Services Outpost, see Deploy your DataSync agent on Outposts.
+     * If you're using DataSync on an Amazon Web Services Outpost, specify the Amazon Resource Names (ARNs) of the DataSync agents deployed on your Outpost. For more information about launching a DataSync agent on an Amazon Web Services Outpost, see Deploy your DataSync agent on Outposts.
      */
     AgentArns?: AgentArnList;
     /**
@@ -825,6 +869,34 @@ declare namespace DataSync {
     SecurityGroupArns?: Ec2SecurityGroupArnList;
     /**
      * The time that the FSx for Lustre location was created.
+     */
+    CreationTime?: Time;
+  }
+  export interface DescribeLocationFsxOpenZfsRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the FSx for OpenZFS location to describe.
+     */
+    LocationArn: LocationArn;
+  }
+  export interface DescribeLocationFsxOpenZfsResponse {
+    /**
+     * The ARN of the FSx for OpenZFS location that was described.
+     */
+    LocationArn?: LocationArn;
+    /**
+     * The uniform resource identifier (URI) of the FSx for OpenZFS location that was described. Example: fsxz://us-west-2.fs-1234567890abcdef02/fsx/folderA/folder 
+     */
+    LocationUri?: LocationUri;
+    /**
+     * The ARNs of the security groups that are configured for the FSx for OpenZFS file system.
+     */
+    SecurityGroupArns?: Ec2SecurityGroupArnList;
+    /**
+     * The type of protocol that DataSync uses to access your file system.
+     */
+    Protocol?: FsxProtocol;
+    /**
+     * The time that the FSx for OpenZFS location was created.
      */
     CreationTime?: Time;
   }
@@ -1171,7 +1243,7 @@ declare namespace DataSync {
   export type Duration = number;
   export interface Ec2Config {
     /**
-     * The ARN of the subnet and the security group that DataSync uses to access the target EFS file system.
+     * The ARN of the subnet that DataSync uses to access the target EFS file system.
      */
     SubnetArn: Ec2SubnetArn;
     /**
@@ -1203,6 +1275,16 @@ declare namespace DataSync {
   export type FilterValues = FilterAttributeValue[];
   export type FsxFilesystemArn = string;
   export type FsxLustreSubdirectory = string;
+  export type FsxOpenZfsSubdirectory = string;
+  export interface FsxProtocol {
+    /**
+     * Represents the Network File System (NFS) protocol that DataSync uses to access your FSx for OpenZFS file system.
+     */
+    NFS?: FsxProtocolNfs;
+  }
+  export interface FsxProtocolNfs {
+    MountOptions?: NfsMountOptions;
+  }
   export type FsxWindowsSubdirectory = string;
   export type Gid = "NONE"|"INT_VALUE"|"NAME"|"BOTH"|string;
   export type HdfsAuthenticationType = "SIMPLE"|"KERBEROS"|string;
@@ -1371,7 +1453,7 @@ declare namespace DataSync {
      */
     LocationArn?: LocationArn;
     /**
-     * Represents a list of URIs of a location. LocationUri returns an array that contains a list of locations when the ListLocations operation is called. Format: TYPE://GLOBAL_ID/SUBDIR. TYPE designates the type of location. Valid values: NFS | EFS | S3. GLOBAL_ID is the globally unique identifier of the resource that backs the location. An example for EFS is us-east-2.fs-abcd1234. An example for Amazon S3 is the bucket name, such as myBucket. An example for NFS is a valid IPv4 address or a host name compliant with Domain Name Service (DNS). SUBDIR is a valid file system path, delimited by forward slashes as is the *nix convention. For NFS and Amazon EFS, it's the export path to mount the location. For Amazon S3, it's the prefix path that you mount to and treat as the root of the location. 
+     * Represents a list of URIs of a location. LocationUri returns an array that contains a list of locations when the ListLocations operation is called. Format: TYPE://GLOBAL_ID/SUBDIR. TYPE designates the type of location (for example, nfs or s3). GLOBAL_ID is the globally unique identifier of the resource that backs the location. An example for EFS is us-east-2.fs-abcd1234. An example for Amazon S3 is the bucket name, such as myBucket. An example for NFS is a valid IPv4 address or a hostname that is compliant with Domain Name Service (DNS). SUBDIR is a valid file system path, delimited by forward slashes as is the *nix convention. For NFS and Amazon EFS, it's the export path to mount the location. For Amazon S3, it's the prefix path that you mount to and treat as the root of the location. 
      */
     LocationUri?: LocationUri;
   }
@@ -1499,7 +1581,7 @@ declare namespace DataSync {
   export type S3BucketArn = string;
   export interface S3Config {
     /**
-     * The Amazon S3 bucket to access. This bucket is used as a parameter in the CreateLocationS3 operation. 
+     * The ARN of the IAM role for accessing the S3 bucket. 
      */
     BucketAccessRoleArn: IamRoleArn;
   }
@@ -1727,11 +1809,11 @@ declare namespace DataSync {
      */
     KerberosPrincipal?: KerberosPrincipal;
     /**
-     * The Kerberos key table (keytab) that contains mappings between the defined Kerberos principal and the encrypted keys. You can load the keytab from a file by providing the file's address. If you use the AWS CLI, it performs base64 encoding for you. Otherwise, provide the base64-encoded text.
+     * The Kerberos key table (keytab) that contains mappings between the defined Kerberos principal and the encrypted keys. You can load the keytab from a file by providing the file's address. If you use the CLI, it performs base64 encoding for you. Otherwise, provide the base64-encoded text.
      */
     KerberosKeytab?: KerberosKeytabFile;
     /**
-     * The krb5.conf file that contains the Kerberos configuration information. You can load the krb5.conf file by providing the file's address. If you're using the AWS CLI, it performs the base64 encoding for you. Otherwise, provide the base64-encoded text.
+     * The krb5.conf file that contains the Kerberos configuration information. You can load the krb5.conf file by providing the file's address. If you're using the CLI, it performs the base64 encoding for you. Otherwise, provide the base64-encoded text.
      */
     KerberosKrb5Conf?: KerberosKrb5ConfFile;
     /**

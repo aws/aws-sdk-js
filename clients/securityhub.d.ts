@@ -1002,6 +1002,28 @@ declare namespace SecurityHub {
      * The list of Availability Zones for the automatic scaling group.
      */
     AvailabilityZones?: AwsAutoScalingAutoScalingGroupAvailabilityZonesList;
+    /**
+     * The launch template to use.
+     */
+    LaunchTemplate?: AwsAutoScalingAutoScalingGroupLaunchTemplateLaunchTemplateSpecification;
+    /**
+     * Indicates whether capacity rebalancing is enabled. 
+     */
+    CapacityRebalance?: Boolean;
+  }
+  export interface AwsAutoScalingAutoScalingGroupLaunchTemplateLaunchTemplateSpecification {
+    /**
+     * The identifier of the launch template. You must specify either LaunchTemplateId or LaunchTemplateName.
+     */
+    LaunchTemplateId?: NonEmptyString;
+    /**
+     * The name of the launch template. You must specify either LaunchTemplateId or LaunchTemplateName.
+     */
+    LaunchTemplateName?: NonEmptyString;
+    /**
+     * Identifies the version of the launch template. You can specify a version identifier, or use the values $Latest or $Default.
+     */
+    Version?: NonEmptyString;
   }
   export interface AwsAutoScalingAutoScalingGroupMixedInstancesPolicyDetails {
     /**
@@ -1041,7 +1063,7 @@ declare namespace SecurityHub {
   }
   export interface AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateDetails {
     /**
-     * The launch template to use.
+     * The launch template to use for a mixed instances policy.
      */
     LaunchTemplateSpecification?: AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateLaunchTemplateSpecification;
     /**
@@ -1706,6 +1728,10 @@ declare namespace SecurityHub {
      * Information about the VPC configuration that CodeBuild accesses.
      */
     VpcConfig?: AwsCodeBuildProjectVpcConfig;
+    /**
+     * Information about the secondary artifacts for the CodeBuild project.
+     */
+    SecondaryArtifacts?: AwsCodeBuildProjectArtifactsList;
   }
   export interface AwsCodeBuildProjectEnvironment {
     /**
@@ -4222,6 +4248,17 @@ declare namespace SecurityHub {
      */
     S3BucketPrefix?: NonEmptyString;
   }
+  export interface AwsElbLoadBalancerAdditionalAttribute {
+    /**
+     * The name of the attribute.
+     */
+    Key?: NonEmptyString;
+    /**
+     * The value of the attribute.
+     */
+    Value?: NonEmptyString;
+  }
+  export type AwsElbLoadBalancerAdditionalAttributeList = AwsElbLoadBalancerAdditionalAttribute[];
   export interface AwsElbLoadBalancerAttributes {
     /**
      * Information about the access log configuration for the load balancer. If the access log is enabled, the load balancer captures detailed information about all requests. It delivers the information to a specified S3 bucket.
@@ -4239,6 +4276,10 @@ declare namespace SecurityHub {
      * Cross-zone load balancing settings for the load balancer. If cross-zone load balancing is enabled, the load balancer routes the request traffic evenly across all instances regardless of the Availability Zones.
      */
     CrossZoneLoadBalancing?: AwsElbLoadBalancerCrossZoneLoadBalancing;
+    /**
+     * Any additional attributes for a load balancer.
+     */
+    AdditionalAttributes?: AwsElbLoadBalancerAdditionalAttributeList;
   }
   export interface AwsElbLoadBalancerBackendServerDescription {
     /**
@@ -5981,6 +6022,66 @@ declare namespace SecurityHub {
     Value?: NonEmptyString;
   }
   export type AwsRdsDbProcessorFeatures = AwsRdsDbProcessorFeature[];
+  export interface AwsRdsDbSecurityGroupDetails {
+    /**
+     * The ARN for the DB security group.
+     */
+    DbSecurityGroupArn?: NonEmptyString;
+    /**
+     * Provides the description of the DB security group.
+     */
+    DbSecurityGroupDescription?: NonEmptyString;
+    /**
+     * Specifies the name of the DB security group.
+     */
+    DbSecurityGroupName?: NonEmptyString;
+    /**
+     * Contains a list of EC2 security groups.
+     */
+    Ec2SecurityGroups?: AwsRdsDbSecurityGroupEc2SecurityGroups;
+    /**
+     * Contains a list of IP ranges.
+     */
+    IpRanges?: AwsRdsDbSecurityGroupIpRanges;
+    /**
+     * Provides the Amazon Web Services ID of the owner of a specific DB security group.
+     */
+    OwnerId?: NonEmptyString;
+    /**
+     * Provides VPC ID associated with the DB security group. 
+     */
+    VpcId?: NonEmptyString;
+  }
+  export interface AwsRdsDbSecurityGroupEc2SecurityGroup {
+    /**
+     * Specifies the ID for the EC2 security group.
+     */
+    Ec2SecurityGroupId?: NonEmptyString;
+    /**
+     * Specifies the name of the EC2 security group.
+     */
+    Ec2SecurityGroupName?: NonEmptyString;
+    /**
+     * Provides the Amazon Web Services ID of the owner of the EC2 security group.
+     */
+    Ec2SecurityGroupOwnerId?: NonEmptyString;
+    /**
+     * Provides the status of the EC2 security group.
+     */
+    Status?: NonEmptyString;
+  }
+  export type AwsRdsDbSecurityGroupEc2SecurityGroups = AwsRdsDbSecurityGroupEc2SecurityGroup[];
+  export interface AwsRdsDbSecurityGroupIpRange {
+    /**
+     * Specifies the IP range.
+     */
+    CidrIp?: NonEmptyString;
+    /**
+     * Specifies the status of the IP range.
+     */
+    Status?: NonEmptyString;
+  }
+  export type AwsRdsDbSecurityGroupIpRanges = AwsRdsDbSecurityGroupIpRange[];
   export interface AwsRdsDbSnapshotDetails {
     /**
      * The name or ARN of the DB snapshot that is used to restore the DB instance.
@@ -6471,6 +6572,10 @@ declare namespace SecurityHub {
      * The list of VPC security groups that the cluster belongs to, if the cluster is in a VPC.
      */
     VpcSecurityGroups?: AwsRedshiftClusterVpcSecurityGroups;
+    /**
+     * Information about the logging status of the cluster.
+     */
+    LoggingStatus?: AwsRedshiftClusterLoggingStatus;
   }
   export interface AwsRedshiftClusterElasticIpStatus {
     /**
@@ -6517,6 +6622,32 @@ declare namespace SecurityHub {
     IamRoleArn?: NonEmptyString;
   }
   export type AwsRedshiftClusterIamRoles = AwsRedshiftClusterIamRole[];
+  export interface AwsRedshiftClusterLoggingStatus {
+    /**
+     * The name of the S3 bucket where the log files are stored.
+     */
+    BucketName?: NonEmptyString;
+    /**
+     * The message indicating that the logs failed to be delivered.
+     */
+    LastFailureMessage?: NonEmptyString;
+    /**
+     * The last time when logs failed to be delivered. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     */
+    LastFailureTime?: NonEmptyString;
+    /**
+     * The last time that logs were delivered successfully. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     */
+    LastSuccessfulDeliveryTime?: NonEmptyString;
+    /**
+     * Indicates whether logging is enabled.
+     */
+    LoggingEnabled?: Boolean;
+    /**
+     * Provides the prefix applied to the log file names.
+     */
+    S3KeyPrefix?: NonEmptyString;
+  }
   export interface AwsRedshiftClusterPendingModifiedValues {
     /**
      * The pending or in-progress change to the automated snapshot retention period.
@@ -9859,6 +9990,10 @@ declare namespace SecurityHub {
      * Details about an Network Firewall rule group.
      */
     AwsNetworkFirewallRuleGroup?: AwsNetworkFirewallRuleGroupDetails;
+    /**
+     * Details about an Amazon RDS DB security group.
+     */
+    AwsRdsDbSecurityGroup?: AwsRdsDbSecurityGroupDetails;
   }
   export type ResourceList = Resource[];
   export interface Result {

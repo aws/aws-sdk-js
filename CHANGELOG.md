@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1107.0-->
+<!--LATEST=2.1108.0-->
 <!--ENTRYINSERT-->
+
+## 2.1108.0
+* feature: DataSync: AWS DataSync now supports Amazon FSx for OpenZFS locations.
+* feature: FSx: Provide customers more visibility into file system status by adding new "Misconfigured Unavailable" status for Amazon FSx for Windows File Server.
+* feature: SecurityHub: Added additional ASFF details for RdsSecurityGroup AutoScalingGroup, ElbLoadBalancer, CodeBuildProject and RedshiftCluster.
 
 ## 2.1107.0
 * feature: Iot: AWS IoT - AWS IoT Device Defender adds support to list metric datapoints collected for IoT devices through the ListMetricValues API
