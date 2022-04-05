@@ -1,0 +1,5 @@
+{
+  "type": "feature",
+  "category": "Token",
+  "description": "Set token from AWS.Signers.Bearer when specified by authtype/signatureVersion"
+}
