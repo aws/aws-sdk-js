@@ -188,11 +188,11 @@ declare class Kendra extends Service {
    */
   describeFaq(callback?: (err: AWSError, data: Kendra.Types.DescribeFaqResponse) => void): Request<Kendra.Types.DescribeFaqResponse, AWSError>;
   /**
-   * Describes an existing Amazon Kendra index
+   * Describes an existing Amazon Kendra index.
    */
   describeIndex(params: Kendra.Types.DescribeIndexRequest, callback?: (err: AWSError, data: Kendra.Types.DescribeIndexResponse) => void): Request<Kendra.Types.DescribeIndexResponse, AWSError>;
   /**
-   * Describes an existing Amazon Kendra index
+   * Describes an existing Amazon Kendra index.
    */
   describeIndex(callback?: (err: AWSError, data: Kendra.Types.DescribeIndexResponse) => void): Request<Kendra.Types.DescribeIndexResponse, AWSError>;
   /**
@@ -316,11 +316,11 @@ declare class Kendra extends Service {
    */
   listGroupsOlderThanOrderingId(callback?: (err: AWSError, data: Kendra.Types.ListGroupsOlderThanOrderingIdResponse) => void): Request<Kendra.Types.ListGroupsOlderThanOrderingIdResponse, AWSError>;
   /**
-   * Lists the Amazon Kendra indexes that you have created.
+   * Lists the Amazon Kendra indexes that you created.
    */
   listIndices(params: Kendra.Types.ListIndicesRequest, callback?: (err: AWSError, data: Kendra.Types.ListIndicesResponse) => void): Request<Kendra.Types.ListIndicesResponse, AWSError>;
   /**
-   * Lists the Amazon Kendra indexes that you have created.
+   * Lists the Amazon Kendra indexes that you created.
    */
   listIndices(callback?: (err: AWSError, data: Kendra.Types.ListIndicesResponse) => void): Request<Kendra.Types.ListIndicesResponse, AWSError>;
   /**
@@ -702,6 +702,60 @@ declare namespace Kendra {
   export type BatchPutDocumentResponseFailedDocuments = BatchPutDocumentResponseFailedDocument[];
   export type _Blob = Buffer|Uint8Array|Blob|string;
   export type Boolean = boolean;
+  export interface BoxConfiguration {
+    /**
+     * The identifier of the Box Enterprise platform. You can find the enterprise ID in the Box Developer Console settings or when you create an app in Box and download your authentication credentials. For example, 801234567.
+     */
+    EnterpriseId: EnterpriseId;
+    /**
+     * The Amazon Resource Name (ARN) of an Secrets Manager secret that contains the key-value pairs required to connect to your Box platform. The secret must contain a JSON structure with the following keys:   clientID—The identifier of the client OAuth 2.0 authentication application created in Box.   clientSecret—A set of characters known only to the OAuth 2.0 authentication application created in Box.   publicKeyId—The identifier of the public key contained within an identity certificate.   privateKey—A set of characters that make up an encryption key.   passphrase—A set of characters that act like a password.   You create an application in Box to generate the keys or credentials required for the secret. For more information, see Authentication for a Box data source.
+     */
+    SecretArn: SecretArn;
+    /**
+     *  TRUE to use the Slack change log to determine which documents require updating in the index. Depending on the data source change log's size, it may take longer for Amazon Kendra to use the change log than to scan all of your documents.
+     */
+    UseChangeLog?: Boolean;
+    /**
+     *  TRUE to index comments.
+     */
+    CrawlComments?: Boolean;
+    /**
+     *  TRUE to index the contents of tasks.
+     */
+    CrawlTasks?: Boolean;
+    /**
+     *  TRUE to index web links.
+     */
+    CrawlWebLinks?: Boolean;
+    /**
+     * A list of DataSourceToIndexFieldMapping objects that map attributes or field names of Box files to Amazon Kendra index field names. To create custom fields, use the UpdateIndex API before you map to Box fields. For more information, see Mapping data source fields. The Box field names must exist in your Box custom metadata.
+     */
+    FileFieldMappings?: DataSourceToIndexFieldMappingList;
+    /**
+     * A list of DataSourceToIndexFieldMapping objects that map attributes or field names of Box tasks to Amazon Kendra index field names. To create custom fields, use the UpdateIndex API before you map to Box fields. For more information, see Mapping data source fields. The Box field names must exist in your Box custom metadata.
+     */
+    TaskFieldMappings?: DataSourceToIndexFieldMappingList;
+    /**
+     * A list of DataSourceToIndexFieldMapping objects that map attributes or field names of Box comments to Amazon Kendra index field names. To create custom fields, use the UpdateIndex API before you map to Box fields. For more information, see Mapping data source fields. The Box field names must exist in your Box custom metadata.
+     */
+    CommentFieldMappings?: DataSourceToIndexFieldMappingList;
+    /**
+     * A list of DataSourceToIndexFieldMapping objects that map attributes or field names of Box web links to Amazon Kendra index field names. To create custom fields, use the UpdateIndex API before you map to Box fields. For more information, see Mapping data source fields. The Box field names must exist in your Box custom metadata.
+     */
+    WebLinkFieldMappings?: DataSourceToIndexFieldMappingList;
+    /**
+     * A list of regular expression patterns to include certain files and folders in your Box platform. Files and folders that match the patterns are included in the index. Files and folders that don't match the patterns are excluded from the index. If a file or folder matches both an inclusion and exclusion pattern, the exclusion pattern takes precedence and the file or folder isn't included in the index.
+     */
+    InclusionPatterns?: DataSourceInclusionsExclusionsStrings;
+    /**
+     * A list of regular expression patterns to exclude certain files and folders from your Box platform. Files and folders that match the patterns are excluded from the index.Files and folders that don't match the patterns are included in the index. If a file or folder matches both an inclusion and exclusion pattern, the exclusion pattern takes precedence and the file or folder isn't included in the index.
+     */
+    ExclusionPatterns?: DataSourceInclusionsExclusionsStrings;
+    /**
+     * Configuration information for an Amazon VPC to connect to your Box. For more information, see Configuring a VPC.
+     */
+    VpcConfiguration?: DataSourceVpcConfiguration;
+  }
   export interface CapacityUnitsConfiguration {
     /**
      * The amount of extra storage capacity for an index. A single capacity unit provides 30 GB of storage space or 100,000 documents, whichever is reached first.
@@ -1104,11 +1158,11 @@ declare namespace Kendra {
      */
     Edition?: IndexEdition;
     /**
-     * An Identity and Access Management(IAM) role that gives Amazon Kendra permissions to access your Amazon CloudWatch logs and metrics. This is also the role used when you use the BatchPutDocument API to index documents from an Amazon S3 bucket.
+     * An Identity and Access Management (IAM) role that gives Amazon Kendra permissions to access your Amazon CloudWatch logs and metrics. This is also the role you use when you call the BatchPutDocument API to index documents from an Amazon S3 bucket.
      */
     RoleArn: RoleArn;
     /**
-     * The identifier of the KMScustomer managed key (CMK) to use to encrypt data indexed by Amazon Kendra. Amazon Kendra doesn't support asymmetric CMKs.
+     * The identifier of the KMS customer managed key (CMK) that's used to encrypt data indexed by Amazon Kendra. Amazon Kendra doesn't support asymmetric CMKs.
      */
     ServerSideEncryptionConfiguration?: ServerSideEncryptionConfiguration;
     /**
@@ -1278,6 +1332,10 @@ declare namespace Kendra {
      * Provides the configuration information to connect to Slack as your data source.
      */
     SlackConfiguration?: SlackConfiguration;
+    /**
+     * Provides the configuration information to connect to Box as your data source.
+     */
+    BoxConfiguration?: BoxConfiguration;
   }
   export type DataSourceDateFieldFormat = string;
   export type DataSourceFieldName = string;
@@ -1413,7 +1471,7 @@ declare namespace Kendra {
     IndexFieldName: IndexFieldName;
   }
   export type DataSourceToIndexFieldMappingList = DataSourceToIndexFieldMapping[];
-  export type DataSourceType = "S3"|"SHAREPOINT"|"DATABASE"|"SALESFORCE"|"ONEDRIVE"|"SERVICENOW"|"CUSTOM"|"CONFLUENCE"|"GOOGLEDRIVE"|"WEBCRAWLER"|"WORKDOCS"|"FSX"|"SLACK"|string;
+  export type DataSourceType = "S3"|"SHAREPOINT"|"DATABASE"|"SALESFORCE"|"ONEDRIVE"|"SERVICENOW"|"CUSTOM"|"CONFLUENCE"|"GOOGLEDRIVE"|"WEBCRAWLER"|"WORKDOCS"|"FSX"|"SLACK"|"BOX"|string;
   export interface DataSourceVpcConfiguration {
     /**
      * A list of identifiers for subnets within your Amazon VPC. The subnets should be able to connect to each other in the VPC, and they should have outgoing access to the Internet through a NAT device.
@@ -1710,7 +1768,7 @@ declare namespace Kendra {
   }
   export interface DescribeIndexRequest {
     /**
-     * The name of the index to describe.
+     * The identifier of the index to describe.
      */
     Id: IndexId;
   }
@@ -1720,7 +1778,7 @@ declare namespace Kendra {
      */
     Name?: IndexName;
     /**
-     * The name of the index.
+     * The identifier of the index.
      */
     Id?: IndexId;
     /**
@@ -1732,7 +1790,7 @@ declare namespace Kendra {
      */
     RoleArn?: RoleArn;
     /**
-     * The identifier of the KMScustomer master key (CMK) used to encrypt your data. Amazon Kendra doesn't support asymmetric CMKs.
+     * The identifier of the KMScustomer master key (CMK) that is used to encrypt your data. Amazon Kendra doesn't support asymmetric CMKs.
      */
     ServerSideEncryptionConfiguration?: ServerSideEncryptionConfiguration;
     /**
@@ -1740,7 +1798,7 @@ declare namespace Kendra {
      */
     Status?: IndexStatus;
     /**
-     * The description of the index.
+     * The description for the index.
      */
     Description?: Description;
     /**
@@ -1760,11 +1818,11 @@ declare namespace Kendra {
      */
     IndexStatistics?: IndexStatistics;
     /**
-     * When th eStatus field value is FAILED, the ErrorMessage field contains a message that explains why.
+     * When the Status field value is FAILED, the ErrorMessage field contains a message that explains why.
      */
     ErrorMessage?: ErrorMessage;
     /**
-     * For Enterprise edition indexes, you can choose to use additional capacity to meet the needs of your application. This contains the capacity units used for the index. A 0 for the query capacity or the storage capacity indicates that the index is using the default capacity for the index.
+     * For Enterprise Edition indexes, you can choose to use additional capacity to meet the needs of your application. This contains the capacity units used for the index. A query or document storage capacity of zero indicates that the index is using the default capacity. For more information on the default capacity for an index and adjusting this, see Adjusting capacity.
      */
     CapacityUnits?: CapacityUnitsConfiguration;
     /**
@@ -2177,6 +2235,7 @@ declare namespace Kendra {
   export type Duration = string;
   export type Endpoint = string;
   export type EndpointType = "HOME"|string;
+  export type EnterpriseId = string;
   export interface EntityConfiguration {
     /**
      * The identifier of a user or group in your Amazon Web Services SSO identity source. For example, a user ID could be an email.
@@ -2589,7 +2648,7 @@ declare namespace Kendra {
   export type Importance = number;
   export interface IndexConfigurationSummary {
     /**
-     * The name of the index.
+     * The identifier of the index.
      */
     Name?: IndexName;
     /**
@@ -4085,7 +4144,7 @@ declare namespace Kendra {
      */
     DocumentMetadataConfigurationUpdates?: DocumentMetadataConfigurationList;
     /**
-     * Sets the number of additional storage and query capacity units that should be used by the index. You can change the capacity of the index up to 5 times per day. If you are using extra storage units, you can't reduce the storage capacity below that required to meet the storage needs for your index.
+     * Sets the number of additional document storage and query capacity units that should be used by the index. You can change the capacity of the index up to 5 times per day, or make 5 API calls. If you are using extra storage units, you can't reduce the storage capacity below what is required to meet the storage needs for your index.
      */
     CapacityUnits?: CapacityUnitsConfiguration;
     /**

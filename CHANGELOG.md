@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1108.0-->
+<!--LATEST=2.1109.0-->
 <!--ENTRYINSERT-->
+
+## 2.1109.0
+* feature: ConfigService: Add resourceType enums for AWS::EMR::SecurityConfiguration and AWS::SageMaker::CodeRepository
+* feature: Kendra: Amazon Kendra now provides a data source connector for Box. For more information, see https://docs.aws.amazon.com/kendra/latest/dg/data-source-box.html
+* feature: Lambda: This release adds new APIs for creating and managing Lambda Function URLs and adds a new FunctionUrlAuthType parameter to the AddPermission API. Customers can use Function URLs to create built-in HTTPS endpoints on their functions.
+* feature: Panorama: Added Brand field to device listings.
 
 ## 2.1108.0
 * feature: DataSync: AWS DataSync now supports Amazon FSx for OpenZFS locations.

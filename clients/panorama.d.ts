@@ -228,11 +228,11 @@ declare class Panorama extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: Panorama.Types.ListTagsForResourceResponse) => void): Request<Panorama.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Creates a device and returns a configuration archive. The configuration archive is a ZIP file that contains a provisioning certificate that is valid for 5 minutes. Transfer the configuration archive to the device with the included USB storage device within 5 minutes.
+   * Creates a device and returns a configuration archive. The configuration archive is a ZIP file that contains a provisioning certificate that is valid for 5 minutes. Name the configuration archive certificates-omni_device-name.zip and transfer it to the device within 5 minutes. Use the included USB storage device and connect it to the USB 3.0 port next to the HDMI output.
    */
   provisionDevice(params: Panorama.Types.ProvisionDeviceRequest, callback?: (err: AWSError, data: Panorama.Types.ProvisionDeviceResponse) => void): Request<Panorama.Types.ProvisionDeviceResponse, AWSError>;
   /**
-   * Creates a device and returns a configuration archive. The configuration archive is a ZIP file that contains a provisioning certificate that is valid for 5 minutes. Transfer the configuration archive to the device with the included USB storage device within 5 minutes.
+   * Creates a device and returns a configuration archive. The configuration archive is a ZIP file that contains a provisioning certificate that is valid for 5 minutes. Name the configuration archive certificates-omni_device-name.zip and transfer it to the device within 5 minutes. Use the included USB storage device and connect it to the USB 3.0 port next to the HDMI output.
    */
   provisionDevice(callback?: (err: AWSError, data: Panorama.Types.ProvisionDeviceResponse) => void): Request<Panorama.Types.ProvisionDeviceResponse, AWSError>;
   /**
@@ -334,7 +334,7 @@ declare namespace Panorama {
   export type ApplicationInstanceHealthStatus = "RUNNING"|"ERROR"|"NOT_AVAILABLE"|string;
   export type ApplicationInstanceId = string;
   export type ApplicationInstanceName = string;
-  export type ApplicationInstanceStatus = "DEPLOYMENT_PENDING"|"DEPLOYMENT_REQUESTED"|"DEPLOYMENT_IN_PROGRESS"|"DEPLOYMENT_ERROR"|"DEPLOYMENT_SUCCEEDED"|"REMOVAL_PENDING"|"REMOVAL_REQUESTED"|"REMOVAL_IN_PROGRESS"|"REMOVAL_FAILED"|"REMOVAL_SUCCEEDED"|string;
+  export type ApplicationInstanceStatus = "DEPLOYMENT_PENDING"|"DEPLOYMENT_REQUESTED"|"DEPLOYMENT_IN_PROGRESS"|"DEPLOYMENT_ERROR"|"DEPLOYMENT_SUCCEEDED"|"REMOVAL_PENDING"|"REMOVAL_REQUESTED"|"REMOVAL_IN_PROGRESS"|"REMOVAL_FAILED"|"REMOVAL_SUCCEEDED"|"DEPLOYMENT_FAILED"|string;
   export type ApplicationInstanceStatusDescription = string;
   export type ApplicationInstances = ApplicationInstance[];
   export type Boolean = boolean;
@@ -703,6 +703,10 @@ declare namespace Panorama {
      */
     Arn?: DeviceArn;
     /**
+     * The device's maker.
+     */
+    Brand?: DeviceBrand;
+    /**
      * When the device was created.
      */
     CreatedTime?: CreatedTime;
@@ -1042,6 +1046,10 @@ declare namespace Panorama {
   export type Description = string;
   export interface Device {
     /**
+     * The device's maker.
+     */
+    Brand?: DeviceBrand;
+    /**
      * When the device was created.
      */
     CreatedTime?: CreatedTime;
@@ -1067,6 +1075,7 @@ declare namespace Panorama {
     ProvisioningStatus?: DeviceStatus;
   }
   export type DeviceArn = string;
+  export type DeviceBrand = "AWS_PANORAMA"|"LENOVO"|string;
   export type DeviceConnectionStatus = "ONLINE"|"OFFLINE"|"AWAITING_CREDENTIALS"|"NOT_AVAILABLE"|"ERROR"|string;
   export type DeviceId = string;
   export type DeviceIdList = DeviceId[];
@@ -1883,7 +1892,7 @@ declare namespace Panorama {
      */
     Mask: Mask;
   }
-  export type StatusFilter = "DEPLOYMENT_SUCCEEDED"|"DEPLOYMENT_ERROR"|"REMOVAL_SUCCEEDED"|"REMOVAL_FAILED"|"PROCESSING_DEPLOYMENT"|"PROCESSING_REMOVAL"|string;
+  export type StatusFilter = "DEPLOYMENT_SUCCEEDED"|"DEPLOYMENT_ERROR"|"REMOVAL_SUCCEEDED"|"REMOVAL_FAILED"|"PROCESSING_DEPLOYMENT"|"PROCESSING_REMOVAL"|"DEPLOYMENT_FAILED"|string;
   export interface StorageLocation {
     /**
      * The location's binary prefix.

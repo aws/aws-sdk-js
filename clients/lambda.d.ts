@@ -62,6 +62,14 @@ declare class Lambda extends Service {
    */
   createFunction(callback?: (err: AWSError, data: Lambda.Types.FunctionConfiguration) => void): Request<Lambda.Types.FunctionConfiguration, AWSError>;
   /**
+   * Creates a Lambda function URL with the specified configuration parameters. A function URL is a dedicated HTTP(S) endpoint that you can use to invoke your function.
+   */
+  createFunctionUrlConfig(params: Lambda.Types.CreateFunctionUrlConfigRequest, callback?: (err: AWSError, data: Lambda.Types.CreateFunctionUrlConfigResponse) => void): Request<Lambda.Types.CreateFunctionUrlConfigResponse, AWSError>;
+  /**
+   * Creates a Lambda function URL with the specified configuration parameters. A function URL is a dedicated HTTP(S) endpoint that you can use to invoke your function.
+   */
+  createFunctionUrlConfig(callback?: (err: AWSError, data: Lambda.Types.CreateFunctionUrlConfigResponse) => void): Request<Lambda.Types.CreateFunctionUrlConfigResponse, AWSError>;
+  /**
    * Deletes a Lambda function alias.
    */
   deleteAlias(params: Lambda.Types.DeleteAliasRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -117,6 +125,14 @@ declare class Lambda extends Service {
    * Deletes the configuration for asynchronous invocation for a function, version, or alias. To configure options for asynchronous invocation, use PutFunctionEventInvokeConfig.
    */
   deleteFunctionEventInvokeConfig(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a Lambda function URL. When you delete a function URL, you can't recover it. Creating a new function URL results in a different URL address.
+   */
+  deleteFunctionUrlConfig(params: Lambda.Types.DeleteFunctionUrlConfigRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a Lambda function URL. When you delete a function URL, you can't recover it. Creating a new function URL results in a different URL address.
+   */
+  deleteFunctionUrlConfig(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes a version of an Lambda layer. Deleted versions can no longer be viewed or added to functions. To avoid breaking functions, a copy of the version remains in Lambda until no functions refer to it.
    */
@@ -206,6 +222,14 @@ declare class Lambda extends Service {
    */
   getFunctionEventInvokeConfig(callback?: (err: AWSError, data: Lambda.Types.FunctionEventInvokeConfig) => void): Request<Lambda.Types.FunctionEventInvokeConfig, AWSError>;
   /**
+   * Returns details about a Lambda function URL.
+   */
+  getFunctionUrlConfig(params: Lambda.Types.GetFunctionUrlConfigRequest, callback?: (err: AWSError, data: Lambda.Types.GetFunctionUrlConfigResponse) => void): Request<Lambda.Types.GetFunctionUrlConfigResponse, AWSError>;
+  /**
+   * Returns details about a Lambda function URL.
+   */
+  getFunctionUrlConfig(callback?: (err: AWSError, data: Lambda.Types.GetFunctionUrlConfigResponse) => void): Request<Lambda.Types.GetFunctionUrlConfigResponse, AWSError>;
+  /**
    * Returns information about a version of an Lambda layer, with a link to download the layer archive that's valid for 10 minutes.
    */
   getLayerVersion(params: Lambda.Types.GetLayerVersionRequest, callback?: (err: AWSError, data: Lambda.Types.GetLayerVersionResponse) => void): Request<Lambda.Types.GetLayerVersionResponse, AWSError>;
@@ -293,6 +317,14 @@ declare class Lambda extends Service {
    * Retrieves a list of configurations for asynchronous invocation for a function. To configure options for asynchronous invocation, use PutFunctionEventInvokeConfig.
    */
   listFunctionEventInvokeConfigs(callback?: (err: AWSError, data: Lambda.Types.ListFunctionEventInvokeConfigsResponse) => void): Request<Lambda.Types.ListFunctionEventInvokeConfigsResponse, AWSError>;
+  /**
+   * Returns a list of Lambda function URLs for the specified function.
+   */
+  listFunctionUrlConfigs(params: Lambda.Types.ListFunctionUrlConfigsRequest, callback?: (err: AWSError, data: Lambda.Types.ListFunctionUrlConfigsResponse) => void): Request<Lambda.Types.ListFunctionUrlConfigsResponse, AWSError>;
+  /**
+   * Returns a list of Lambda function URLs for the specified function.
+   */
+  listFunctionUrlConfigs(callback?: (err: AWSError, data: Lambda.Types.ListFunctionUrlConfigsResponse) => void): Request<Lambda.Types.ListFunctionUrlConfigsResponse, AWSError>;
   /**
    * Returns a list of Lambda functions, with the version-specific configuration of each. Lambda returns up to 50 functions per call. Set FunctionVersion to ALL to include all published versions of each function in addition to the unpublished version.   The ListFunctions action returns a subset of the FunctionConfiguration fields. To get the additional fields (State, StateReasonCode, StateReason, LastUpdateStatus, LastUpdateStatusReason, LastUpdateStatusReasonCode) for a function or version, use GetFunction. 
    */
@@ -478,6 +510,14 @@ declare class Lambda extends Service {
    */
   updateFunctionEventInvokeConfig(callback?: (err: AWSError, data: Lambda.Types.FunctionEventInvokeConfig) => void): Request<Lambda.Types.FunctionEventInvokeConfig, AWSError>;
   /**
+   * Updates the configuration for a Lambda function URL.
+   */
+  updateFunctionUrlConfig(params: Lambda.Types.UpdateFunctionUrlConfigRequest, callback?: (err: AWSError, data: Lambda.Types.UpdateFunctionUrlConfigResponse) => void): Request<Lambda.Types.UpdateFunctionUrlConfigResponse, AWSError>;
+  /**
+   * Updates the configuration for a Lambda function URL.
+   */
+  updateFunctionUrlConfig(callback?: (err: AWSError, data: Lambda.Types.UpdateFunctionUrlConfigResponse) => void): Request<Lambda.Types.UpdateFunctionUrlConfigResponse, AWSError>;
+  /**
    * Waits for the functionExists state by periodically calling the underlying Lambda.getFunctionoperation every 1 seconds (at most 20 times).
    */
   waitFor(state: "functionExists", params: Lambda.Types.GetFunctionRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: Lambda.Types.GetFunctionResponse) => void): Request<Lambda.Types.GetFunctionResponse, AWSError>;
@@ -633,6 +673,10 @@ declare namespace Lambda {
      * The identifier for your organization in Organizations. Use this to grant permissions to all the Amazon Web Services accounts under this organization.
      */
     PrincipalOrgID?: PrincipalOrgID;
+    /**
+     * The type of authentication that your function URL uses. Set to AWS_IAM if you want to restrict access to authenticated IAM users only. Set to NONE if you want to bypass IAM authentication to create a public endpoint. For more information, see  Security and auth model for Lambda function URLs.
+     */
+    FunctionUrlAuthType?: FunctionUrlAuthType;
   }
   export interface AddPermissionResponse {
     /**
@@ -676,6 +720,9 @@ declare namespace Lambda {
      */
     AdditionalVersionWeights?: AdditionalVersionWeights;
   }
+  export type AllowCredentials = boolean;
+  export type AllowMethodsList = Method[];
+  export type AllowOriginsList = Origin[];
   export interface AllowedPublishers {
     /**
      * The Amazon Resource Name (ARN) for each of the signing profiles. A signing profile defines a trusted user who can sign a code package. 
@@ -733,6 +780,32 @@ declare namespace Lambda {
      * The number of concurrent executions that are reserved for this function. For more information, see Managing Concurrency.
      */
     ReservedConcurrentExecutions?: ReservedConcurrentExecutions;
+  }
+  export interface Cors {
+    /**
+     * Whether to allow cookies or other credentials in requests to your function URL. The default is false.
+     */
+    AllowCredentials?: AllowCredentials;
+    /**
+     * The HTTP headers that origins can include in requests to your function URL. For example: Date, Keep-Alive, X-Custom-Header.
+     */
+    AllowHeaders?: HeadersList;
+    /**
+     * The HTTP methods that are allowed when calling your function URL. For example: GET, POST, DELETE, or the wildcard character (*).
+     */
+    AllowMethods?: AllowMethodsList;
+    /**
+     * The origins that can access your function URL. You can list any number of specific origins, separated by a comma. For example: https://www.example.com, http://localhost:60905. Alternatively, you can grant access to all origins using the wildcard character (*).
+     */
+    AllowOrigins?: AllowOriginsList;
+    /**
+     * The HTTP headers in your function response that you want to expose to origins that call your function URL. For example: Date, Keep-Alive, X-Custom-Header.
+     */
+    ExposeHeaders?: HeadersList;
+    /**
+     * The maximum amount of time, in seconds, that web browsers can cache results of a preflight request. By default, this is set to 0, which means that the browser doesn't cache results.
+     */
+    MaxAge?: MaxAge;
   }
   export interface CreateAliasRequest {
     /**
@@ -944,6 +1017,46 @@ declare namespace Lambda {
      */
     EphemeralStorage?: EphemeralStorage;
   }
+  export interface CreateFunctionUrlConfigRequest {
+    /**
+     * The name of the Lambda function.  Name formats     Function name - my-function.    Function ARN - arn:aws:lambda:us-west-2:123456789012:function:my-function.    Partial ARN - 123456789012:function:my-function.   The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.
+     */
+    FunctionName: FunctionName;
+    /**
+     * The alias name.
+     */
+    Qualifier?: FunctionUrlQualifier;
+    /**
+     * The type of authentication that your function URL uses. Set to AWS_IAM if you want to restrict access to authenticated IAM users only. Set to NONE if you want to bypass IAM authentication to create a public endpoint. For more information, see  Security and auth model for Lambda function URLs.
+     */
+    AuthType: FunctionUrlAuthType;
+    /**
+     * The cross-origin resource sharing (CORS) settings for your function URL.
+     */
+    Cors?: Cors;
+  }
+  export interface CreateFunctionUrlConfigResponse {
+    /**
+     * The HTTP URL endpoint for your function.
+     */
+    FunctionUrl: FunctionUrl;
+    /**
+     * The Amazon Resource Name (ARN) of your function.
+     */
+    FunctionArn: FunctionArn;
+    /**
+     * The type of authentication that your function URL uses. Set to AWS_IAM if you want to restrict access to authenticated IAM users only. Set to NONE if you want to bypass IAM authentication to create a public endpoint. For more information, see  Security and auth model for Lambda function URLs.
+     */
+    AuthType: FunctionUrlAuthType;
+    /**
+     * The cross-origin resource sharing (CORS) settings for your function URL.
+     */
+    Cors?: Cors;
+    /**
+     * When the function URL was created, in ISO-8601 format (YYYY-MM-DDThh:mm:ss.sTZD).
+     */
+    CreationTime: Timestamp;
+  }
   export type _Date = Date;
   export interface DeadLetterConfig {
     /**
@@ -1006,6 +1119,16 @@ declare namespace Lambda {
      * Specify a version to delete. You can't delete a version that's referenced by an alias.
      */
     Qualifier?: Qualifier;
+  }
+  export interface DeleteFunctionUrlConfigRequest {
+    /**
+     * The name of the Lambda function.  Name formats     Function name - my-function.    Function ARN - arn:aws:lambda:us-west-2:123456789012:function:my-function.    Partial ARN - 123456789012:function:my-function.   The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.
+     */
+    FunctionName: FunctionName;
+    /**
+     * The alias name.
+     */
+    Qualifier?: FunctionUrlQualifier;
   }
   export interface DeleteLayerVersionRequest {
     /**
@@ -1405,6 +1528,36 @@ declare namespace Lambda {
   export type FunctionName = string;
   export type FunctionResponseType = "ReportBatchItemFailures"|string;
   export type FunctionResponseTypeList = FunctionResponseType[];
+  export type FunctionUrl = string;
+  export type FunctionUrlAuthType = "NONE"|"AWS_IAM"|string;
+  export interface FunctionUrlConfig {
+    /**
+     * The HTTP URL endpoint for your function.
+     */
+    FunctionUrl: FunctionUrl;
+    /**
+     * The Amazon Resource Name (ARN) of your function.
+     */
+    FunctionArn: FunctionArn;
+    /**
+     * When the function URL was created, in ISO-8601 format (YYYY-MM-DDThh:mm:ss.sTZD).
+     */
+    CreationTime: Timestamp;
+    /**
+     * When the function URL configuration was last updated, in ISO-8601 format (YYYY-MM-DDThh:mm:ss.sTZD).
+     */
+    LastModifiedTime: Timestamp;
+    /**
+     * The cross-origin resource sharing (CORS) settings for your function URL.
+     */
+    Cors?: Cors;
+    /**
+     * The type of authentication that your function URL uses. Set to AWS_IAM if you want to restrict access to authenticated IAM users only. Set to NONE if you want to bypass IAM authentication to create a public endpoint. For more information, see  Security and auth model for Lambda function URLs.
+     */
+    AuthType: FunctionUrlAuthType;
+  }
+  export type FunctionUrlConfigList = FunctionUrlConfig[];
+  export type FunctionUrlQualifier = string;
   export type FunctionVersion = "ALL"|string;
   export interface GetAccountSettingsRequest {
   }
@@ -1521,6 +1674,42 @@ declare namespace Lambda {
      * The function's reserved concurrency.
      */
     Concurrency?: Concurrency;
+  }
+  export interface GetFunctionUrlConfigRequest {
+    /**
+     * The name of the Lambda function.  Name formats     Function name - my-function.    Function ARN - arn:aws:lambda:us-west-2:123456789012:function:my-function.    Partial ARN - 123456789012:function:my-function.   The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.
+     */
+    FunctionName: FunctionName;
+    /**
+     * The alias name.
+     */
+    Qualifier?: FunctionUrlQualifier;
+  }
+  export interface GetFunctionUrlConfigResponse {
+    /**
+     * The HTTP URL endpoint for your function.
+     */
+    FunctionUrl: FunctionUrl;
+    /**
+     * The Amazon Resource Name (ARN) of your function.
+     */
+    FunctionArn: FunctionArn;
+    /**
+     * The type of authentication that your function URL uses. Set to AWS_IAM if you want to restrict access to authenticated IAM users only. Set to NONE if you want to bypass IAM authentication to create a public endpoint. For more information, see  Security and auth model for Lambda function URLs.
+     */
+    AuthType: FunctionUrlAuthType;
+    /**
+     * The cross-origin resource sharing (CORS) settings for your function URL.
+     */
+    Cors?: Cors;
+    /**
+     * When the function URL was created, in ISO-8601 format (YYYY-MM-DDThh:mm:ss.sTZD).
+     */
+    CreationTime: Timestamp;
+    /**
+     * When the function URL configuration was last updated, in ISO-8601 format (YYYY-MM-DDThh:mm:ss.sTZD).
+     */
+    LastModifiedTime: Timestamp;
   }
   export interface GetLayerVersionByArnRequest {
     /**
@@ -1653,6 +1842,8 @@ declare namespace Lambda {
     LastModified?: Timestamp;
   }
   export type Handler = string;
+  export type Header = string;
+  export type HeadersList = Header[];
   export type HttpStatus = number;
   export interface ImageConfig {
     /**
@@ -1971,6 +2162,30 @@ declare namespace Lambda {
      */
     NextMarker?: String;
   }
+  export interface ListFunctionUrlConfigsRequest {
+    /**
+     * The name of the Lambda function.  Name formats     Function name - my-function.    Function ARN - arn:aws:lambda:us-west-2:123456789012:function:my-function.    Partial ARN - 123456789012:function:my-function.   The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.
+     */
+    FunctionName: FunctionName;
+    /**
+     * Specify the pagination token that's returned by a previous request to retrieve the next page of results.
+     */
+    Marker?: String;
+    /**
+     * The maximum number of function URLs to return in the response. Note that ListFunctionUrlConfigs returns a maximum of 50 items in each response, even if you set the number higher.
+     */
+    MaxItems?: MaxItems;
+  }
+  export interface ListFunctionUrlConfigsResponse {
+    /**
+     * A list of function URL configurations.
+     */
+    FunctionUrlConfigs: FunctionUrlConfigList;
+    /**
+     * The pagination token that's included if more results are available.
+     */
+    NextMarker?: String;
+  }
   export interface ListFunctionsByCodeSigningConfigRequest {
     /**
      * The The Amazon Resource Name (ARN) of the code signing configuration.
@@ -2147,7 +2362,9 @@ declare namespace Lambda {
   export type LogType = "None"|"Tail"|string;
   export type Long = number;
   export type MasterRegion = string;
+  export type MaxAge = number;
   export type MaxFunctionEventInvokeConfigListItems = number;
+  export type MaxItems = number;
   export type MaxLayerListItems = number;
   export type MaxListItems = number;
   export type MaxProvisionedConcurrencyConfigListItems = number;
@@ -2157,6 +2374,7 @@ declare namespace Lambda {
   export type MaximumRetryAttempts = number;
   export type MaximumRetryAttemptsEventSourceMapping = number;
   export type MemorySize = number;
+  export type Method = string;
   export type NameSpacedFunctionArn = string;
   export type NamespacedFunctionName = string;
   export type NamespacedStatementId = string;
@@ -2174,6 +2392,7 @@ declare namespace Lambda {
     Destination?: DestinationArn;
   }
   export type OrganizationId = string;
+  export type Origin = string;
   export type PackageType = "Zip"|"Image"|string;
   export type ParallelizationFactor = number;
   export type Pattern = string;
@@ -2748,6 +2967,50 @@ declare namespace Lambda {
      * A destination for events after they have been sent to a function for processing.  Destinations     Function - The Amazon Resource Name (ARN) of a Lambda function.    Queue - The ARN of an SQS queue.    Topic - The ARN of an SNS topic.    Event Bus - The ARN of an Amazon EventBridge event bus.  
      */
     DestinationConfig?: DestinationConfig;
+  }
+  export interface UpdateFunctionUrlConfigRequest {
+    /**
+     * The name of the Lambda function.  Name formats     Function name - my-function.    Function ARN - arn:aws:lambda:us-west-2:123456789012:function:my-function.    Partial ARN - 123456789012:function:my-function.   The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.
+     */
+    FunctionName: FunctionName;
+    /**
+     * The alias name.
+     */
+    Qualifier?: FunctionUrlQualifier;
+    /**
+     * The type of authentication that your function URL uses. Set to AWS_IAM if you want to restrict access to authenticated IAM users only. Set to NONE if you want to bypass IAM authentication to create a public endpoint. For more information, see  Security and auth model for Lambda function URLs.
+     */
+    AuthType?: FunctionUrlAuthType;
+    /**
+     * The cross-origin resource sharing (CORS) settings for your function URL.
+     */
+    Cors?: Cors;
+  }
+  export interface UpdateFunctionUrlConfigResponse {
+    /**
+     * The HTTP URL endpoint for your function.
+     */
+    FunctionUrl: FunctionUrl;
+    /**
+     * The Amazon Resource Name (ARN) of your function.
+     */
+    FunctionArn: FunctionArn;
+    /**
+     * The type of authentication that your function URL uses. Set to AWS_IAM if you want to restrict access to authenticated IAM users only. Set to NONE if you want to bypass IAM authentication to create a public endpoint. For more information, see  Security and auth model for Lambda function URLs.
+     */
+    AuthType: FunctionUrlAuthType;
+    /**
+     * The cross-origin resource sharing (CORS) settings for your function URL.
+     */
+    Cors?: Cors;
+    /**
+     * When the function URL was created, in ISO-8601 format (YYYY-MM-DDThh:mm:ss.sTZD).
+     */
+    CreationTime: Timestamp;
+    /**
+     * When the function URL configuration was last updated, in ISO-8601 format (YYYY-MM-DDThh:mm:ss.sTZD).
+     */
+    LastModifiedTime: Timestamp;
   }
   export type Version = string;
   export interface VpcConfig {
