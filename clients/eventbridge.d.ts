@@ -52,6 +52,14 @@ declare class EventBridge extends Service {
    */
   createConnection(callback?: (err: AWSError, data: EventBridge.Types.CreateConnectionResponse) => void): Request<EventBridge.Types.CreateConnectionResponse, AWSError>;
   /**
+   * Creates a global endpoint. Global endpoints improve your application's availability by making it regional-fault tolerant. To do this, you define a primary and secondary Region with event buses in each Region. You also create a Amazon Route 53 health check that will tell EventBridge to route events to the secondary Region when an "unhealthy" state is encountered and events will be routed back to the primary Region when the health check reports a "healthy" state.
+   */
+  createEndpoint(params: EventBridge.Types.CreateEndpointRequest, callback?: (err: AWSError, data: EventBridge.Types.CreateEndpointResponse) => void): Request<EventBridge.Types.CreateEndpointResponse, AWSError>;
+  /**
+   * Creates a global endpoint. Global endpoints improve your application's availability by making it regional-fault tolerant. To do this, you define a primary and secondary Region with event buses in each Region. You also create a Amazon Route 53 health check that will tell EventBridge to route events to the secondary Region when an "unhealthy" state is encountered and events will be routed back to the primary Region when the health check reports a "healthy" state.
+   */
+  createEndpoint(callback?: (err: AWSError, data: EventBridge.Types.CreateEndpointResponse) => void): Request<EventBridge.Types.CreateEndpointResponse, AWSError>;
+  /**
    * Creates a new event bus within your account. This can be a custom event bus which you can use to receive events from your custom applications and services, or it can be a partner event bus which can be matched to a partner event source.
    */
   createEventBus(params: EventBridge.Types.CreateEventBusRequest, callback?: (err: AWSError, data: EventBridge.Types.CreateEventBusResponse) => void): Request<EventBridge.Types.CreateEventBusResponse, AWSError>;
@@ -108,6 +116,14 @@ declare class EventBridge extends Service {
    */
   deleteConnection(callback?: (err: AWSError, data: EventBridge.Types.DeleteConnectionResponse) => void): Request<EventBridge.Types.DeleteConnectionResponse, AWSError>;
   /**
+   * Delete an existing global endpoint. For more information about global endpoints, see Making applications Regional-fault tolerant with global endpoints and event replication in the Amazon EventBridge User Guide.
+   */
+  deleteEndpoint(params: EventBridge.Types.DeleteEndpointRequest, callback?: (err: AWSError, data: EventBridge.Types.DeleteEndpointResponse) => void): Request<EventBridge.Types.DeleteEndpointResponse, AWSError>;
+  /**
+   * Delete an existing global endpoint. For more information about global endpoints, see Making applications Regional-fault tolerant with global endpoints and event replication in the Amazon EventBridge User Guide.
+   */
+  deleteEndpoint(callback?: (err: AWSError, data: EventBridge.Types.DeleteEndpointResponse) => void): Request<EventBridge.Types.DeleteEndpointResponse, AWSError>;
+  /**
    * Deletes the specified custom event bus or partner event bus. All rules associated with this event bus need to be deleted. You can't delete your account's default event bus.
    */
   deleteEventBus(params: EventBridge.Types.DeleteEventBusRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -155,6 +171,14 @@ declare class EventBridge extends Service {
    * Retrieves details about a connection.
    */
   describeConnection(callback?: (err: AWSError, data: EventBridge.Types.DescribeConnectionResponse) => void): Request<EventBridge.Types.DescribeConnectionResponse, AWSError>;
+  /**
+   * Get the information about an existing global endpoint. For more information about global endpoints, see Making applications Regional-fault tolerant with global endpoints and event replication in the Amazon EventBridge User Guide..
+   */
+  describeEndpoint(params: EventBridge.Types.DescribeEndpointRequest, callback?: (err: AWSError, data: EventBridge.Types.DescribeEndpointResponse) => void): Request<EventBridge.Types.DescribeEndpointResponse, AWSError>;
+  /**
+   * Get the information about an existing global endpoint. For more information about global endpoints, see Making applications Regional-fault tolerant with global endpoints and event replication in the Amazon EventBridge User Guide..
+   */
+  describeEndpoint(callback?: (err: AWSError, data: EventBridge.Types.DescribeEndpointResponse) => void): Request<EventBridge.Types.DescribeEndpointResponse, AWSError>;
   /**
    * Displays details about an event bus in your account. This can include the external Amazon Web Services accounts that are permitted to write events to your default event bus, and the associated policy. For custom event buses and partner event buses, it displays the name, ARN, policy, state, and creation time.  To enable your account to receive events from other accounts on its default event bus, use PutPermission. For more information about partner event buses, see CreateEventBus.
    */
@@ -236,6 +260,14 @@ declare class EventBridge extends Service {
    */
   listConnections(callback?: (err: AWSError, data: EventBridge.Types.ListConnectionsResponse) => void): Request<EventBridge.Types.ListConnectionsResponse, AWSError>;
   /**
+   * List the global endpoints associated with this account. For more information about global endpoints, see Making applications Regional-fault tolerant with global endpoints and event replication in the Amazon EventBridge User Guide..
+   */
+  listEndpoints(params: EventBridge.Types.ListEndpointsRequest, callback?: (err: AWSError, data: EventBridge.Types.ListEndpointsResponse) => void): Request<EventBridge.Types.ListEndpointsResponse, AWSError>;
+  /**
+   * List the global endpoints associated with this account. For more information about global endpoints, see Making applications Regional-fault tolerant with global endpoints and event replication in the Amazon EventBridge User Guide..
+   */
+  listEndpoints(callback?: (err: AWSError, data: EventBridge.Types.ListEndpointsResponse) => void): Request<EventBridge.Types.ListEndpointsResponse, AWSError>;
+  /**
    * Lists all the event buses in your account, including the default event bus, custom event buses, and partner event buses.
    */
   listEventBuses(params: EventBridge.Types.ListEventBusesRequest, callback?: (err: AWSError, data: EventBridge.Types.ListEventBusesResponse) => void): Request<EventBridge.Types.ListEventBusesResponse, AWSError>;
@@ -308,11 +340,11 @@ declare class EventBridge extends Service {
    */
   listTargetsByRule(callback?: (err: AWSError, data: EventBridge.Types.ListTargetsByRuleResponse) => void): Request<EventBridge.Types.ListTargetsByRuleResponse, AWSError>;
   /**
-   * Sends custom events to Amazon EventBridge so that they can be matched to rules.
+   * Sends custom events to Amazon EventBridge so that they can be matched to rules.  PutEvents will only process nested JSON up to 1100 levels deep. 
    */
   putEvents(params: EventBridge.Types.PutEventsRequest, callback?: (err: AWSError, data: EventBridge.Types.PutEventsResponse) => void): Request<EventBridge.Types.PutEventsResponse, AWSError>;
   /**
-   * Sends custom events to Amazon EventBridge so that they can be matched to rules.
+   * Sends custom events to Amazon EventBridge so that they can be matched to rules.  PutEvents will only process nested JSON up to 1100 levels deep. 
    */
   putEvents(callback?: (err: AWSError, data: EventBridge.Types.PutEventsResponse) => void): Request<EventBridge.Types.PutEventsResponse, AWSError>;
   /**
@@ -340,11 +372,11 @@ declare class EventBridge extends Service {
    */
   putRule(callback?: (err: AWSError, data: EventBridge.Types.PutRuleResponse) => void): Request<EventBridge.Types.PutRuleResponse, AWSError>;
   /**
-   * Adds the specified targets to the specified rule, or updates the targets if they are already associated with the rule. Targets are the resources that are invoked when a rule is triggered.  Each rule can have up to five (5) targets associated with it at one time.  You can configure the following as targets for Events:    API destination    Amazon API Gateway REST API endpoints   API Gateway   Batch job queue   CloudWatch Logs group   CodeBuild project   CodePipeline   Amazon EC2 CreateSnapshot API call   EC2 Image Builder   Amazon EC2 RebootInstances API call   Amazon EC2 StopInstances API call   Amazon EC2 TerminateInstances API call   Amazon ECS tasks   Event bus in a different Amazon Web Services account or Region. You can use an event bus in the US East (N. Virginia) us-east-1, US West (Oregon) us-west-2, or Europe (Ireland) eu-west-1 Regions as a target for a rule.   Firehose delivery stream (Kinesis Data Firehose)   Inspector assessment template (Amazon Inspector)   Kinesis stream (Kinesis Data Stream)   Lambda function   Redshift clusters (Data API statement execution)   Amazon SNS topic   Amazon SQS queues (includes FIFO queues)   SSM Automation   SSM OpsItem   SSM Run Command   Step Functions state machines   Creating rules with built-in targets is supported only in the Amazon Web Services Management Console. The built-in targets are EC2 CreateSnapshot API call, EC2 RebootInstances API call, EC2 StopInstances API call, and EC2 TerminateInstances API call.  For some target types, PutTargets provides target-specific parameters. If the target is a Kinesis data stream, you can optionally specify which shard the event goes to by using the KinesisParameters argument. To invoke a command on multiple EC2 instances with one rule, you can use the RunCommandParameters field. To be able to make API calls against the resources that you own, Amazon EventBridge needs the appropriate permissions. For Lambda and Amazon SNS resources, EventBridge relies on resource-based policies. For EC2 instances, Kinesis Data Streams, Step Functions state machines and API Gateway REST APIs, EventBridge relies on IAM roles that you specify in the RoleARN argument in PutTargets. For more information, see Authentication and Access Control in the Amazon EventBridge User Guide. If another Amazon Web Services account is in the same region and has granted you permission (using PutPermission), you can send events to that account. Set that account's event bus as a target of the rules in your account. To send the matched events to the other account, specify that account's event bus as the Arn value when you run PutTargets. If your account sends events to another account, your account is charged for each sent event. Each event sent to another account is charged as a custom event. The account receiving the event is not charged. For more information, see Amazon EventBridge Pricing.   Input, InputPath, and InputTransformer are not available with PutTarget if the target is an event bus of a different Amazon Web Services account.  If you are setting the event bus of another account as the target, and that account granted permission to your account through an organization instead of directly by the account ID, then you must specify a RoleArn with proper permissions in the Target structure. For more information, see Sending and Receiving Events Between Amazon Web Services Accounts in the Amazon EventBridge User Guide. For more information about enabling cross-account events, see PutPermission.  Input, InputPath, and InputTransformer are mutually exclusive and optional parameters of a target. When a rule is triggered due to a matched event:   If none of the following arguments are specified for a target, then the entire event is passed to the target in JSON format (unless the target is Amazon EC2 Run Command or Amazon ECS task, in which case nothing from the event is passed to the target).   If Input is specified in the form of valid JSON, then the matched event is overridden with this constant.   If InputPath is specified in the form of JSONPath (for example, $.detail), then only the part of the event specified in the path is passed to the target (for example, only the detail part of the event is passed).   If InputTransformer is specified, then one or more specified JSONPaths are extracted from the event and used as values in a template that you specify as the input to the target.   When you specify InputPath or InputTransformer, you must use JSON dot notation, not bracket notation. When you add targets to a rule and the associated rule triggers soon after, new or updated targets might not be immediately invoked. Allow a short period of time for changes to take effect. This action can partially fail if too many requests are made at the same time. If that happens, FailedEntryCount is non-zero in the response and each entry in FailedEntries provides the ID of the failed target and the error code.
+   * Adds the specified targets to the specified rule, or updates the targets if they are already associated with the rule. Targets are the resources that are invoked when a rule is triggered.  Each rule can have up to five (5) targets associated with it at one time.  You can configure the following as targets for Events:    API destination     API Gateway    Batch job queue   CloudWatch group   CodeBuild project   CodePipeline   EC2 CreateSnapshot API call   EC2 Image Builder   EC2 RebootInstances API call   EC2 StopInstances API call   EC2 TerminateInstances API call   ECS task    Event bus in a different account or Region     Event bus in the same account and Region    Firehose delivery stream   Glue workflow    Incident Manager response plan    Inspector assessment template   Kinesis stream   Lambda function   Redshift cluster   SageMaker Pipeline   SNS topic   SQS queue   Step Functions state machine   Systems Manager Automation   Systems Manager OpsItem   Systems Manager Run Command   Creating rules with built-in targets is supported only in the Amazon Web Services Management Console. The built-in targets are EC2 CreateSnapshot API call, EC2 RebootInstances API call, EC2 StopInstances API call, and EC2 TerminateInstances API call.  For some target types, PutTargets provides target-specific parameters. If the target is a Kinesis data stream, you can optionally specify which shard the event goes to by using the KinesisParameters argument. To invoke a command on multiple EC2 instances with one rule, you can use the RunCommandParameters field. To be able to make API calls against the resources that you own, Amazon EventBridge needs the appropriate permissions. For Lambda and Amazon SNS resources, EventBridge relies on resource-based policies. For EC2 instances, Kinesis Data Streams, Step Functions state machines and API Gateway REST APIs, EventBridge relies on IAM roles that you specify in the RoleARN argument in PutTargets. For more information, see Authentication and Access Control in the Amazon EventBridge User Guide. If another Amazon Web Services account is in the same region and has granted you permission (using PutPermission), you can send events to that account. Set that account's event bus as a target of the rules in your account. To send the matched events to the other account, specify that account's event bus as the Arn value when you run PutTargets. If your account sends events to another account, your account is charged for each sent event. Each event sent to another account is charged as a custom event. The account receiving the event is not charged. For more information, see Amazon EventBridge Pricing.   Input, InputPath, and InputTransformer are not available with PutTarget if the target is an event bus of a different Amazon Web Services account.  If you are setting the event bus of another account as the target, and that account granted permission to your account through an organization instead of directly by the account ID, then you must specify a RoleArn with proper permissions in the Target structure. For more information, see Sending and Receiving Events Between Amazon Web Services Accounts in the Amazon EventBridge User Guide. For more information about enabling cross-account events, see PutPermission.  Input, InputPath, and InputTransformer are mutually exclusive and optional parameters of a target. When a rule is triggered due to a matched event:   If none of the following arguments are specified for a target, then the entire event is passed to the target in JSON format (unless the target is Amazon EC2 Run Command or Amazon ECS task, in which case nothing from the event is passed to the target).   If Input is specified in the form of valid JSON, then the matched event is overridden with this constant.   If InputPath is specified in the form of JSONPath (for example, $.detail), then only the part of the event specified in the path is passed to the target (for example, only the detail part of the event is passed).   If InputTransformer is specified, then one or more specified JSONPaths are extracted from the event and used as values in a template that you specify as the input to the target.   When you specify InputPath or InputTransformer, you must use JSON dot notation, not bracket notation. When you add targets to a rule and the associated rule triggers soon after, new or updated targets might not be immediately invoked. Allow a short period of time for changes to take effect. This action can partially fail if too many requests are made at the same time. If that happens, FailedEntryCount is non-zero in the response and each entry in FailedEntries provides the ID of the failed target and the error code.
    */
   putTargets(params: EventBridge.Types.PutTargetsRequest, callback?: (err: AWSError, data: EventBridge.Types.PutTargetsResponse) => void): Request<EventBridge.Types.PutTargetsResponse, AWSError>;
   /**
-   * Adds the specified targets to the specified rule, or updates the targets if they are already associated with the rule. Targets are the resources that are invoked when a rule is triggered.  Each rule can have up to five (5) targets associated with it at one time.  You can configure the following as targets for Events:    API destination    Amazon API Gateway REST API endpoints   API Gateway   Batch job queue   CloudWatch Logs group   CodeBuild project   CodePipeline   Amazon EC2 CreateSnapshot API call   EC2 Image Builder   Amazon EC2 RebootInstances API call   Amazon EC2 StopInstances API call   Amazon EC2 TerminateInstances API call   Amazon ECS tasks   Event bus in a different Amazon Web Services account or Region. You can use an event bus in the US East (N. Virginia) us-east-1, US West (Oregon) us-west-2, or Europe (Ireland) eu-west-1 Regions as a target for a rule.   Firehose delivery stream (Kinesis Data Firehose)   Inspector assessment template (Amazon Inspector)   Kinesis stream (Kinesis Data Stream)   Lambda function   Redshift clusters (Data API statement execution)   Amazon SNS topic   Amazon SQS queues (includes FIFO queues)   SSM Automation   SSM OpsItem   SSM Run Command   Step Functions state machines   Creating rules with built-in targets is supported only in the Amazon Web Services Management Console. The built-in targets are EC2 CreateSnapshot API call, EC2 RebootInstances API call, EC2 StopInstances API call, and EC2 TerminateInstances API call.  For some target types, PutTargets provides target-specific parameters. If the target is a Kinesis data stream, you can optionally specify which shard the event goes to by using the KinesisParameters argument. To invoke a command on multiple EC2 instances with one rule, you can use the RunCommandParameters field. To be able to make API calls against the resources that you own, Amazon EventBridge needs the appropriate permissions. For Lambda and Amazon SNS resources, EventBridge relies on resource-based policies. For EC2 instances, Kinesis Data Streams, Step Functions state machines and API Gateway REST APIs, EventBridge relies on IAM roles that you specify in the RoleARN argument in PutTargets. For more information, see Authentication and Access Control in the Amazon EventBridge User Guide. If another Amazon Web Services account is in the same region and has granted you permission (using PutPermission), you can send events to that account. Set that account's event bus as a target of the rules in your account. To send the matched events to the other account, specify that account's event bus as the Arn value when you run PutTargets. If your account sends events to another account, your account is charged for each sent event. Each event sent to another account is charged as a custom event. The account receiving the event is not charged. For more information, see Amazon EventBridge Pricing.   Input, InputPath, and InputTransformer are not available with PutTarget if the target is an event bus of a different Amazon Web Services account.  If you are setting the event bus of another account as the target, and that account granted permission to your account through an organization instead of directly by the account ID, then you must specify a RoleArn with proper permissions in the Target structure. For more information, see Sending and Receiving Events Between Amazon Web Services Accounts in the Amazon EventBridge User Guide. For more information about enabling cross-account events, see PutPermission.  Input, InputPath, and InputTransformer are mutually exclusive and optional parameters of a target. When a rule is triggered due to a matched event:   If none of the following arguments are specified for a target, then the entire event is passed to the target in JSON format (unless the target is Amazon EC2 Run Command or Amazon ECS task, in which case nothing from the event is passed to the target).   If Input is specified in the form of valid JSON, then the matched event is overridden with this constant.   If InputPath is specified in the form of JSONPath (for example, $.detail), then only the part of the event specified in the path is passed to the target (for example, only the detail part of the event is passed).   If InputTransformer is specified, then one or more specified JSONPaths are extracted from the event and used as values in a template that you specify as the input to the target.   When you specify InputPath or InputTransformer, you must use JSON dot notation, not bracket notation. When you add targets to a rule and the associated rule triggers soon after, new or updated targets might not be immediately invoked. Allow a short period of time for changes to take effect. This action can partially fail if too many requests are made at the same time. If that happens, FailedEntryCount is non-zero in the response and each entry in FailedEntries provides the ID of the failed target and the error code.
+   * Adds the specified targets to the specified rule, or updates the targets if they are already associated with the rule. Targets are the resources that are invoked when a rule is triggered.  Each rule can have up to five (5) targets associated with it at one time.  You can configure the following as targets for Events:    API destination     API Gateway    Batch job queue   CloudWatch group   CodeBuild project   CodePipeline   EC2 CreateSnapshot API call   EC2 Image Builder   EC2 RebootInstances API call   EC2 StopInstances API call   EC2 TerminateInstances API call   ECS task    Event bus in a different account or Region     Event bus in the same account and Region    Firehose delivery stream   Glue workflow    Incident Manager response plan    Inspector assessment template   Kinesis stream   Lambda function   Redshift cluster   SageMaker Pipeline   SNS topic   SQS queue   Step Functions state machine   Systems Manager Automation   Systems Manager OpsItem   Systems Manager Run Command   Creating rules with built-in targets is supported only in the Amazon Web Services Management Console. The built-in targets are EC2 CreateSnapshot API call, EC2 RebootInstances API call, EC2 StopInstances API call, and EC2 TerminateInstances API call.  For some target types, PutTargets provides target-specific parameters. If the target is a Kinesis data stream, you can optionally specify which shard the event goes to by using the KinesisParameters argument. To invoke a command on multiple EC2 instances with one rule, you can use the RunCommandParameters field. To be able to make API calls against the resources that you own, Amazon EventBridge needs the appropriate permissions. For Lambda and Amazon SNS resources, EventBridge relies on resource-based policies. For EC2 instances, Kinesis Data Streams, Step Functions state machines and API Gateway REST APIs, EventBridge relies on IAM roles that you specify in the RoleARN argument in PutTargets. For more information, see Authentication and Access Control in the Amazon EventBridge User Guide. If another Amazon Web Services account is in the same region and has granted you permission (using PutPermission), you can send events to that account. Set that account's event bus as a target of the rules in your account. To send the matched events to the other account, specify that account's event bus as the Arn value when you run PutTargets. If your account sends events to another account, your account is charged for each sent event. Each event sent to another account is charged as a custom event. The account receiving the event is not charged. For more information, see Amazon EventBridge Pricing.   Input, InputPath, and InputTransformer are not available with PutTarget if the target is an event bus of a different Amazon Web Services account.  If you are setting the event bus of another account as the target, and that account granted permission to your account through an organization instead of directly by the account ID, then you must specify a RoleArn with proper permissions in the Target structure. For more information, see Sending and Receiving Events Between Amazon Web Services Accounts in the Amazon EventBridge User Guide. For more information about enabling cross-account events, see PutPermission.  Input, InputPath, and InputTransformer are mutually exclusive and optional parameters of a target. When a rule is triggered due to a matched event:   If none of the following arguments are specified for a target, then the entire event is passed to the target in JSON format (unless the target is Amazon EC2 Run Command or Amazon ECS task, in which case nothing from the event is passed to the target).   If Input is specified in the form of valid JSON, then the matched event is overridden with this constant.   If InputPath is specified in the form of JSONPath (for example, $.detail), then only the part of the event specified in the path is passed to the target (for example, only the detail part of the event is passed).   If InputTransformer is specified, then one or more specified JSONPaths are extracted from the event and used as values in a template that you specify as the input to the target.   When you specify InputPath or InputTransformer, you must use JSON dot notation, not bracket notation. When you add targets to a rule and the associated rule triggers soon after, new or updated targets might not be immediately invoked. Allow a short period of time for changes to take effect. This action can partially fail if too many requests are made at the same time. If that happens, FailedEntryCount is non-zero in the response and each entry in FailedEntries provides the ID of the failed target and the error code.
    */
   putTargets(callback?: (err: AWSError, data: EventBridge.Types.PutTargetsResponse) => void): Request<EventBridge.Types.PutTargetsResponse, AWSError>;
   /**
@@ -419,6 +451,14 @@ declare class EventBridge extends Service {
    * Updates settings for a connection.
    */
   updateConnection(callback?: (err: AWSError, data: EventBridge.Types.UpdateConnectionResponse) => void): Request<EventBridge.Types.UpdateConnectionResponse, AWSError>;
+  /**
+   * Update an existing endpoint. For more information about global endpoints, see Making applications Regional-fault tolerant with global endpoints and event replication in the Amazon EventBridge User Guide..
+   */
+  updateEndpoint(params: EventBridge.Types.UpdateEndpointRequest, callback?: (err: AWSError, data: EventBridge.Types.UpdateEndpointResponse) => void): Request<EventBridge.Types.UpdateEndpointResponse, AWSError>;
+  /**
+   * Update an existing endpoint. For more information about global endpoints, see Making applications Regional-fault tolerant with global endpoints and event replication in the Amazon EventBridge User Guide..
+   */
+  updateEndpoint(callback?: (err: AWSError, data: EventBridge.Types.UpdateEndpointResponse) => void): Request<EventBridge.Types.UpdateEndpointResponse, AWSError>;
 }
 declare namespace EventBridge {
   export type AccountId = string;
@@ -955,6 +995,62 @@ declare namespace EventBridge {
      */
     LastModifiedTime?: Timestamp;
   }
+  export interface CreateEndpointRequest {
+    /**
+     * The name of the global endpoint. For example, "Name":"us-east-2-custom_bus_A-endpoint".
+     */
+    Name: EndpointName;
+    /**
+     * A description of the global endpoint.
+     */
+    Description?: EndpointDescription;
+    /**
+     * Configure the routing policy, including the health check and secondary Region..
+     */
+    RoutingConfig: RoutingConfig;
+    /**
+     * Enable or disable event replication.
+     */
+    ReplicationConfig?: ReplicationConfig;
+    /**
+     * Define the event buses used.   The names of the event buses must be identical in each Region. 
+     */
+    EventBuses: EndpointEventBusList;
+    /**
+     * The ARN of the role used for replication.
+     */
+    RoleArn?: IamRoleArn;
+  }
+  export interface CreateEndpointResponse {
+    /**
+     * The name of the endpoint that was created by this request.
+     */
+    Name?: EndpointName;
+    /**
+     * The ARN of the endpoint that was created by this request.
+     */
+    Arn?: EndpointArn;
+    /**
+     * The routing configuration defined by this request.
+     */
+    RoutingConfig?: RoutingConfig;
+    /**
+     * Whether event replication was enabled or disabled by this request.
+     */
+    ReplicationConfig?: ReplicationConfig;
+    /**
+     * The event buses used by this request.
+     */
+    EventBuses?: EndpointEventBusList;
+    /**
+     * The ARN of the role used by event replication for this request.
+     */
+    RoleArn?: IamRoleArn;
+    /**
+     * The state of the endpoint that was created by this request.
+     */
+    State?: EndpointState;
+  }
   export interface CreateEventBusRequest {
     /**
      * The name of the new event bus.  Event bus names cannot contain the / character. You can't use the name default for a custom event bus, as this name is already used for your account's default event bus. If this is a partner event bus, the name must exactly match the name of the partner event source that this event bus is matched to.
@@ -1077,6 +1173,14 @@ declare namespace EventBridge {
      * A time stamp for the time that the connection was last authorized before it wa deleted.
      */
     LastAuthorizedTime?: Timestamp;
+  }
+  export interface DeleteEndpointRequest {
+    /**
+     * The name of the endpoint you want to delete. For example, "Name":"us-east-2-custom_bus_A-endpoint"..
+     */
+    Name: EndpointName;
+  }
+  export interface DeleteEndpointResponse {
   }
   export interface DeleteEventBusRequest {
     /**
@@ -1259,6 +1363,70 @@ declare namespace EventBridge {
      * A time stamp for the time that the connection was last authorized.
      */
     LastAuthorizedTime?: Timestamp;
+  }
+  export interface DescribeEndpointRequest {
+    /**
+     * The name of the endpoint you want to get information about. For example, "Name":"us-east-2-custom_bus_A-endpoint".
+     */
+    Name: EndpointName;
+    /**
+     * The primary Region of the endpoint you want to get information about. For example "HomeRegion": "us-east-1".
+     */
+    HomeRegion?: HomeRegion;
+  }
+  export interface DescribeEndpointResponse {
+    /**
+     * The name of the endpoint you asked for information about.
+     */
+    Name?: EndpointName;
+    /**
+     * The description of the endpoint you asked for information about.
+     */
+    Description?: EndpointDescription;
+    /**
+     * The ARN of the endpoint you asked for information about.
+     */
+    Arn?: EndpointArn;
+    /**
+     * The routing configuration of the endpoint you asked for information about.
+     */
+    RoutingConfig?: RoutingConfig;
+    /**
+     * Whether replication is enabled or disabled for the endpoint you asked for information about.
+     */
+    ReplicationConfig?: ReplicationConfig;
+    /**
+     * The event buses being used by the endpoint you asked for information about.
+     */
+    EventBuses?: EndpointEventBusList;
+    /**
+     * The ARN of the role used by the endpoint you asked for information about.
+     */
+    RoleArn?: IamRoleArn;
+    /**
+     * The ID of the endpoint you asked for information about.
+     */
+    EndpointId?: EndpointId;
+    /**
+     * The URL of the endpoint you asked for information about.
+     */
+    EndpointUrl?: EndpointUrl;
+    /**
+     * The current state of the endpoint you asked for information about.
+     */
+    State?: EndpointState;
+    /**
+     * The reason the endpoint you asked for information about is in its current state.
+     */
+    StateReason?: EndpointStateReason;
+    /**
+     * The time the endpoint you asked for information about was created.
+     */
+    CreationTime?: Timestamp;
+    /**
+     * The last time the endpoint you asked for information about was modified.
+     */
+    LastModifiedTime?: Timestamp;
   }
   export interface DescribeEventBusRequest {
     /**
@@ -1514,6 +1682,75 @@ declare namespace EventBridge {
      */
     EventBusName?: EventBusNameOrArn;
   }
+  export interface Endpoint {
+    /**
+     * The name of the endpoint.
+     */
+    Name?: EndpointName;
+    /**
+     * A description for the endpoint.
+     */
+    Description?: EndpointDescription;
+    /**
+     * The ARN of the endpoint.
+     */
+    Arn?: EndpointArn;
+    /**
+     * The routing configuration of the endpoint.
+     */
+    RoutingConfig?: RoutingConfig;
+    /**
+     * Whether event replication was enabled or disabled for this endpoint.
+     */
+    ReplicationConfig?: ReplicationConfig;
+    /**
+     * The event buses being used by the endpoint.
+     */
+    EventBuses?: EndpointEventBusList;
+    /**
+     * The ARN of the role used by event replication for the endpoint.
+     */
+    RoleArn?: IamRoleArn;
+    /**
+     * The URL subdomain of the endpoint. For example, if the URL for Endpoint is abcde.veo.endpoints.event.amazonaws.com, then the EndpointId is abcde.veo.
+     */
+    EndpointId?: EndpointId;
+    /**
+     * The URL of the endpoint.
+     */
+    EndpointUrl?: EndpointUrl;
+    /**
+     * The current state of the endpoint.
+     */
+    State?: EndpointState;
+    /**
+     * The reason the endpoint is in its current state.
+     */
+    StateReason?: EndpointStateReason;
+    /**
+     * The time the endpoint was created.
+     */
+    CreationTime?: Timestamp;
+    /**
+     * The last time the endpoint was modified.
+     */
+    LastModifiedTime?: Timestamp;
+  }
+  export type EndpointArn = string;
+  export type EndpointDescription = string;
+  export interface EndpointEventBus {
+    /**
+     * The ARN of the event bus the endpoint is associated with.
+     */
+    EventBusArn: NonPartnerEventBusArn;
+  }
+  export type EndpointEventBusList = EndpointEventBus[];
+  export type EndpointId = string;
+  export type EndpointList = Endpoint[];
+  export type EndpointName = string;
+  export type EndpointState = "ACTIVE"|"CREATING"|"UPDATING"|"DELETING"|"CREATE_FAILED"|"UPDATE_FAILED"|"DELETE_FAILED"|string;
+  export type EndpointStateReason = string;
+  export type EndpointUrl = string;
   export type ErrorCode = string;
   export type ErrorMessage = string;
   export interface EventBus {
@@ -1568,9 +1805,21 @@ declare namespace EventBridge {
   export type EventSourceNamePrefix = string;
   export type EventSourceState = "PENDING"|"ACTIVE"|"DELETED"|string;
   export type EventTime = Date;
+  export interface FailoverConfig {
+    /**
+     * The main Region of the endpoint.
+     */
+    Primary: Primary;
+    /**
+     * The Region that events are routed to when failover is triggered or event replication is enabled.
+     */
+    Secondary: Secondary;
+  }
   export type HeaderKey = string;
   export type HeaderParametersMap = {[key: string]: HeaderValue};
   export type HeaderValue = string;
+  export type HealthCheck = string;
+  export type HomeRegion = string;
   export interface HttpParameters {
     /**
      * The path parameter values to be used to populate API Gateway REST API or EventBridge ApiDestination path wildcards ("*").
@@ -1586,6 +1835,7 @@ declare namespace EventBridge {
     QueryStringParameters?: QueryStringParametersMap;
   }
   export type HttpsEndpoint = string;
+  export type IamRoleArn = string;
   export interface InputTransformer {
     /**
      * Map of JSON paths to be extracted from the event. You can then insert these in the template in InputTemplate to produce the output you want to be sent to the target.  InputPathsMap is an array key-value pairs, where each value is a valid JSON path. You can have as many as 100 key-value pairs. You must use JSON dot notation, not bracket notation. The keys cannot start with "Amazon Web Services." 
@@ -1692,6 +1942,34 @@ declare namespace EventBridge {
     Connections?: ConnectionResponseList;
     /**
      * A token you can use in a subsequent request to retrieve the next set of results.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListEndpointsRequest {
+    /**
+     * A value that will return a subset of the endpoints associated with this account. For example, "NamePrefix": "ABC" will return all endpoints with "ABC" in the name.
+     */
+    NamePrefix?: EndpointName;
+    /**
+     * The primary Region of the endpoints associated with this account. For example "HomeRegion": "us-east-1".
+     */
+    HomeRegion?: HomeRegion;
+    /**
+     * If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an HTTP 400 InvalidToken error.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of results returned by the call.
+     */
+    MaxResults?: LimitMax100;
+  }
+  export interface ListEndpointsResponse {
+    /**
+     * The endpoints returned by the call.
+     */
+    Endpoints?: EndpointList;
+    /**
+     * If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an HTTP 400 InvalidToken error.
      */
     NextToken?: NextToken;
   }
@@ -1931,6 +2209,7 @@ declare namespace EventBridge {
     awsvpcConfiguration?: AwsVpcConfiguration;
   }
   export type NextToken = string;
+  export type NonPartnerEventBusArn = string;
   export type NonPartnerEventBusName = string;
   export type NonPartnerEventBusNameOrArn = string;
   export interface PartnerEventSource {
@@ -1992,6 +2271,12 @@ declare namespace EventBridge {
   }
   export type PlacementStrategyField = string;
   export type PlacementStrategyType = "random"|"spread"|"binpack"|string;
+  export interface Primary {
+    /**
+     * The ARN of the health check used by the endpoint to determine whether failover is triggered.
+     */
+    HealthCheck: HealthCheck;
+  }
   export type Principal = string;
   export type PropagateTags = "TASK_DEFINITION"|string;
   export interface PutEventsRequest {
@@ -1999,6 +2284,10 @@ declare namespace EventBridge {
      * The entry that defines an event in your system. You can specify several parameters for the entry such as the source and type of the event, resources associated with the event, and so on.
      */
     Entries: PutEventsRequestEntryList;
+    /**
+     * The URL subdomain of the endpoint. For example, if the URL for Endpoint is abcde.veo.endpoints.event.amazonaws.com, then the EndpointId is abcde.veo.  When using Java, you must include auth-crt on the class path. 
+     */
+    EndpointId?: EndpointId;
   }
   export interface PutEventsRequestEntry {
     /**
@@ -2018,11 +2307,11 @@ declare namespace EventBridge {
      */
     DetailType?: String;
     /**
-     * A valid JSON string. There is no other schema imposed. The JSON string may contain fields and nested subobjects.
+     * A valid JSON object. There is no other schema imposed. The JSON object may contain fields and nested subobjects.
      */
     Detail?: String;
     /**
-     * The name or ARN of the event bus to receive the event. Only the rules that are associated with this event bus are used to match the event. If you omit this, the default event bus is used.
+     * The name or ARN of the event bus to receive the event. Only the rules that are associated with this event bus are used to match the event. If you omit this, the default event bus is used.  If you're using a global endpoint with a custom bus, you must enter the name, not the ARN, of the event bus in either the primary or secondary Region here and the corresponding event bus in the other Region will be determined based on the endpoint referenced by the EndpointId. 
      */
     EventBusName?: NonPartnerEventBusNameOrArn;
     /**
@@ -2146,7 +2435,7 @@ declare namespace EventBridge {
      */
     ScheduleExpression?: ScheduleExpression;
     /**
-     * The event pattern. For more information, see Events and Event Patterns in the Amazon EventBridge User Guide.
+     * The event pattern. For more information, see EventBridge event patterns in the Amazon EventBridge User Guide.
      */
     EventPattern?: EventPattern;
     /**
@@ -2358,6 +2647,13 @@ declare namespace EventBridge {
   export type ReplayName = string;
   export type ReplayState = "STARTING"|"RUNNING"|"CANCELLING"|"COMPLETED"|"CANCELLED"|"FAILED"|string;
   export type ReplayStateReason = string;
+  export interface ReplicationConfig {
+    /**
+     * The state of event replication.
+     */
+    State?: ReplicationState;
+  }
+  export type ReplicationState = "ENABLED"|"DISABLED"|string;
   export type ResourceArn = string;
   export type RetentionDays = number;
   export interface RetryPolicy {
@@ -2371,6 +2667,13 @@ declare namespace EventBridge {
     MaximumEventAgeInSeconds?: MaximumEventAgeInSeconds;
   }
   export type RoleArn = string;
+  export type Route = string;
+  export interface RoutingConfig {
+    /**
+     * The failover configuration for an endpoint. This includes what triggers failover and what happens when it's triggered.
+     */
+    FailoverConfig: FailoverConfig;
+  }
   export interface Rule {
     /**
      * The name of the rule.
@@ -2455,6 +2758,12 @@ declare namespace EventBridge {
     PipelineParameterList?: SageMakerPipelineParameterList;
   }
   export type ScheduleExpression = string;
+  export interface Secondary {
+    /**
+     * Defines the secondary Region.
+     */
+    Route: Route;
+  }
   export type SecretsManagerSecretArn = string;
   export type Sql = string;
   export interface SqsParameters {
@@ -2827,6 +3136,70 @@ declare namespace EventBridge {
      * A time stamp for the time that the connection was last authorized.
      */
     LastAuthorizedTime?: Timestamp;
+  }
+  export interface UpdateEndpointRequest {
+    /**
+     * The name of the endpoint you want to update.
+     */
+    Name: EndpointName;
+    /**
+     * A description for the endpoint.
+     */
+    Description?: EndpointDescription;
+    /**
+     * Configure the routing policy, including the health check and secondary Region..
+     */
+    RoutingConfig?: RoutingConfig;
+    /**
+     * Whether event replication was enabled or disabled by this request.
+     */
+    ReplicationConfig?: ReplicationConfig;
+    /**
+     * Define event buses used for replication.
+     */
+    EventBuses?: EndpointEventBusList;
+    /**
+     * The ARN of the role used by event replication for this request.
+     */
+    RoleArn?: IamRoleArn;
+  }
+  export interface UpdateEndpointResponse {
+    /**
+     * The name of the endpoint you updated in this request.
+     */
+    Name?: EndpointName;
+    /**
+     * The ARN of the endpoint you updated in this request.
+     */
+    Arn?: EndpointArn;
+    /**
+     * The routing configuration you updated in this request.
+     */
+    RoutingConfig?: RoutingConfig;
+    /**
+     * Whether event replication was enabled or disabled for the endpoint you updated in this request.
+     */
+    ReplicationConfig?: ReplicationConfig;
+    /**
+     * The event buses used for replication for the endpoint you updated in this request.
+     */
+    EventBuses?: EndpointEventBusList;
+    /**
+     * The ARN of the role used by event replication for the endpoint you updated in this request.
+     */
+    RoleArn?: IamRoleArn;
+    /**
+     * The ID of the endpoint you updated in this request.
+     */
+    EndpointId?: EndpointId;
+    /**
+     * The URL of the endpoint you updated in this request.
+     */
+    EndpointUrl?: EndpointUrl;
+    /**
+     * The state of the endpoint you updated in this request.
+     */
+    State?: EndpointState;
   }
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

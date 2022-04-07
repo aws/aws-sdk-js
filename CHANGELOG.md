@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1109.0-->
+<!--LATEST=2.1110.0-->
 <!--ENTRYINSERT-->
+
+## 2.1110.0
+* feature: APIGateway: ApiGateway CLI command get-usage now includes usagePlanId, startDate, and endDate fields in the output to match documentation.
+* feature: DocDB: Added support to enable/disable performance insights when creating or modifying db instances
+* feature: EventBridge: Adds new EventBridge Endpoint resources for disaster recovery, multi-region failover, and cross-region replication capabilities to help you build resilient event-driven applications.
+* feature: Personalize: This release provides tagging support in AWS Personalize.
+* feature: SageMaker: Amazon Sagemaker Notebook Instances now supports G5 instance types
 
 ## 2.1109.0
 * feature: ConfigService: Add resourceType enums for AWS::EMR::SecurityConfiguration and AWS::SageMaker::CodeRepository

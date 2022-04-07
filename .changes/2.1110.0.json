@@ -1,0 +1,27 @@
+[
+    {
+        "type": "feature",
+        "category": "APIGateway",
+        "description": "ApiGateway CLI command get-usage now includes usagePlanId, startDate, and endDate fields in the output to match documentation."
+    },
+    {
+        "type": "feature",
+        "category": "DocDB",
+        "description": "Added support to enable/disable performance insights when creating or modifying db instances"
+    },
+    {
+        "type": "feature",
+        "category": "EventBridge",
+        "description": "Adds new EventBridge Endpoint resources for disaster recovery, multi-region failover, and cross-region replication capabilities to help you build resilient event-driven applications."
+    },
+    {
+        "type": "feature",
+        "category": "Personalize",
+        "description": "This release provides tagging support in AWS Personalize."
+    },
+    {
+        "type": "feature",
+        "category": "SageMaker",
+        "description": "Amazon Sagemaker Notebook Instances now supports G5 instance types"
+    }
+]
