@@ -1152,6 +1152,7 @@ declare namespace MediaConvert {
   export type CmfcAudioTrackType = "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT"|"ALTERNATE_AUDIO_AUTO_SELECT"|"ALTERNATE_AUDIO_NOT_AUTO_SELECT"|string;
   export type CmfcDescriptiveVideoServiceFlag = "DONT_FLAG"|"FLAG"|string;
   export type CmfcIFrameOnlyManifest = "INCLUDE"|"EXCLUDE"|string;
+  export type CmfcKlvMetadata = "PASSTHROUGH"|"NONE"|string;
   export type CmfcScte35Esam = "INSERT"|"NONE"|string;
   export type CmfcScte35Source = "PASSTHROUGH"|"NONE"|string;
   export interface CmfcSettings {
@@ -1179,6 +1180,10 @@ declare namespace MediaConvert {
      * Choose Include (INCLUDE) to have MediaConvert generate an HLS child manifest that lists only the I-frames for this rendition, in addition to your regular manifest for this rendition. You might use this manifest as part of a workflow that creates preview functions for your video. MediaConvert adds both the I-frame only child manifest and the regular child manifest to the parent manifest. When you don't need the I-frame only child manifest, keep the default value Exclude (EXCLUDE).
      */
     IFrameOnlyManifest?: CmfcIFrameOnlyManifest;
+    /**
+     * Applies to CMAF outputs. Use this setting to specify whether the service inserts the KLV metadata from the input in this output.
+     */
+    KlvMetadata?: CmfcKlvMetadata;
     /**
      * Use this setting only when you specify SCTE-35 markers from ESAM. Choose INSERT to put SCTE-35 markers in this output at the insertion points that you specify in an ESAM XML document. Provide the document in the setting SCC XML (sccXml).
      */
@@ -3708,6 +3713,7 @@ Within your job settings, all of your DVB-Sub settings must be identical.
   export type M2tsEbpPlacement = "VIDEO_AND_AUDIO_PIDS"|"VIDEO_PID"|string;
   export type M2tsEsRateInPes = "INCLUDE"|"EXCLUDE"|string;
   export type M2tsForceTsVideoEbpOrder = "FORCE"|"DEFAULT"|string;
+  export type M2tsKlvMetadata = "PASSTHROUGH"|"NONE"|string;
   export type M2tsNielsenId3 = "INSERT"|"NONE"|string;
   export type M2tsPcrControl = "PCR_EVERY_PES_PACKET"|"CONFIGURED_PCR_PERIOD"|string;
   export type M2tsRateMode = "VBR"|"CBR"|string;
@@ -3789,6 +3795,10 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      * The length, in seconds, of each fragment. Only used with EBP markers.
      */
     FragmentTime?: __doubleMin0;
+    /**
+     * Applies to MPEG-TS outputs. Use this setting to specify whether the service inserts the KLV metadata from the input in this output.
+     */
+    KlvMetadata?: M2tsKlvMetadata;
     /**
      * Specify the maximum time, in milliseconds, between Program Clock References (PCRs) inserted into the transport stream.
      */
@@ -4101,6 +4111,7 @@ Within your job settings, all of your DVB-Sub settings must be identical.
   export type MpdAccessibilityCaptionHints = "INCLUDE"|"EXCLUDE"|string;
   export type MpdAudioDuration = "DEFAULT_CODEC_DURATION"|"MATCH_VIDEO_DURATION"|string;
   export type MpdCaptionContainerType = "RAW"|"FRAGMENTED_MP4"|string;
+  export type MpdKlvMetadata = "NONE"|"PASSTHROUGH"|string;
   export type MpdScte35Esam = "INSERT"|"NONE"|string;
   export type MpdScte35Source = "PASSTHROUGH"|"NONE"|string;
   export interface MpdSettings {
@@ -4116,6 +4127,10 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      * Use this setting only in DASH output groups that include sidecar TTML or IMSC captions.  You specify sidecar captions in a separate output from your audio and video. Choose Raw (RAW) for captions in a single XML file in a raw container. Choose Fragmented MPEG-4 (FRAGMENTED_MP4) for captions in XML format contained within fragmented MP4 files. This set of fragmented MP4 files is separate from your video and audio fragmented MP4 files.
      */
     CaptionContainerType?: MpdCaptionContainerType;
+    /**
+     * Applies to DASH ISO outputs. Use this setting to specify whether the service inserts the KLV metadata from the input in this output.
+     */
+    KlvMetadata?: MpdKlvMetadata;
     /**
      * Use this setting only when you specify SCTE-35 markers from ESAM. Choose INSERT to put SCTE-35 markers in this output at the insertion points that you specify in an ESAM XML document. Provide the document in the setting SCC XML (sccXml).
      */
@@ -5638,7 +5653,7 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     Accessibility?: WebvttAccessibilitySubs;
     /**
-     * Set Style passthrough (StylePassthrough) to ENABLED to use the available style, color, and position information from your input captions. MediaConvert uses default settings for any missing style and position information in your input captions. Set Style passthrough to DISABLED, or leave blank, to ignore the style and position information from your input captions and use simplified output captions.
+     * To use the available style, color, and position information from your input captions: Set Style passthrough (stylePassthrough) to Enabled (ENABLED). MediaConvert uses default settings when style and position information is missing from your input captions. To recreate the input captions exactly: Set Style passthrough to Strict (STRICT). MediaConvert automatically applies timing adjustments, including adjustments for frame rate conversion, ad avails, and input clipping. Your input captions format must be WebVTT. To ignore the style and position information from your input captions and use simplified output captions: Set Style passthrough to Disabled (DISABLED), or leave blank.
      */
     StylePassthrough?: WebvttStylePassthrough;
   }
@@ -5656,7 +5671,7 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     RenditionName?: __string;
   }
-  export type WebvttStylePassthrough = "ENABLED"|"DISABLED"|string;
+  export type WebvttStylePassthrough = "ENABLED"|"DISABLED"|"STRICT"|string;
   export type Xavc4kIntraCbgProfileClass = "CLASS_100"|"CLASS_300"|"CLASS_480"|string;
   export interface Xavc4kIntraCbgProfileSettings {
     /**

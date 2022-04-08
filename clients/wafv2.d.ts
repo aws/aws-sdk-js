@@ -1492,6 +1492,10 @@ declare namespace WAFV2 {
      * The versions that are currently available for the specified managed rule group. 
      */
     Versions?: ManagedRuleGroupVersions;
+    /**
+     * The name of the version that's currently set as the default. 
+     */
+    CurrentDefaultVersion?: VersionKeyString;
   }
   export interface ListAvailableManagedRuleGroupsRequest {
     /**
@@ -1803,7 +1807,7 @@ declare namespace WAFV2 {
      */
     ScopeDownStatement?: Statement;
     /**
-     * Additional information that's used by a managed rule group. Most managed rule groups don't require this. Use this for the account takeover prevention managed rule group AWSManagedRulesATPRuleSet, to provide information about the sign-in page of your application. 
+     * Additional information that's used by a managed rule group. Most managed rule groups don't require this. Use this for the account takeover prevention managed rule group AWSManagedRulesATPRuleSet, to provide information about the sign-in page of your application.  You can provide multiple individual ManagedRuleGroupConfig objects for any rule group configuration, for example UsernameField and PasswordField. The configuration that you provide depends on the needs of the managed rule group. For the ATP managed rule group, you provide the following individual configuration objects: LoginPath, PasswordField, PayloadType and UsernameField.
      */
     ManagedRuleGroupConfigs?: ManagedRuleGroupConfigs;
   }
@@ -1817,6 +1821,10 @@ declare namespace WAFV2 {
      * The name of the managed rule group. You use this, along with the vendor name, to identify the rule group.
      */
     Name?: EntityName;
+    /**
+     * Indicates whether the managed rule group is versioned. If it is, you can retrieve the versions list by calling ListAvailableManagedRuleGroupVersions. 
+     */
+    VersioningSupported?: Boolean;
     /**
      * The description of the managed rule group, provided by Amazon Web Services Managed Rules or the Amazon Web Services Marketplace seller who manages it.
      */
@@ -2026,7 +2034,7 @@ declare namespace WAFV2 {
      */
     ResourceArn: ResourceArn;
     /**
-     * The policy to attach to the specified rule group.  The policy specifications must conform to the following:   The policy must be composed using IAM Policy version 2012-10-17 or version 2015-01-01.   The policy must include specifications for Effect, Action, and Principal.    Effect must specify Allow.    Action must specify wafv2:CreateWebACL, wafv2:UpdateWebACL, and wafv2:PutFirewallManagerRuleGroups. WAF rejects any extra actions or wildcard actions in the policy.   The policy must not include a Resource parameter.   For more information, see IAM Policies. 
+     * The policy to attach to the specified rule group.  The policy specifications must conform to the following:   The policy must be composed using IAM Policy version 2012-10-17 or version 2015-01-01.   The policy must include specifications for Effect, Action, and Principal.    Effect must specify Allow.    Action must specify wafv2:CreateWebACL, wafv2:UpdateWebACL, and wafv2:PutFirewallManagerRuleGroups and may optionally specify wafv2:GetRuleGroup. WAF rejects any extra actions or wildcard actions in the policy.   The policy must not include a Resource parameter.   For more information, see IAM Policies. 
      */
     Policy: PolicyString;
   }
