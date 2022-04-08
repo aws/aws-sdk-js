@@ -1,0 +1,5 @@
+{
+  "type": "feature",
+  "category": "S3",
+  "description": "Add error message to try v3 SDK when customer uses multi-regional ARN in s3"
+}
