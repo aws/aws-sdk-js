@@ -300,6 +300,10 @@ declare namespace AmplifyUIBuilder {
      * Describes the properties of the child component. You can't specify tags as a valid property for properties.
      */
     properties: ComponentProperties;
+    /**
+     * The unique ID of the child component in its original source system, such as Figma.
+     */
+    sourceId?: String;
   }
   export type ComponentChildList = ComponentChild[];
   export type ComponentCollectionProperties = {[key: string]: ComponentDataConfiguration};
@@ -356,6 +360,10 @@ declare namespace AmplifyUIBuilder {
      * The action to perform when a specific event is raised.
      */
     action?: String;
+    /**
+     * Binds an event to an action on a component. When you specify a bindingEvent, the event is called when the action is performed.
+     */
+    bindingEvent?: String;
     /**
      * Describes information about the action.
      */
@@ -634,7 +642,7 @@ declare namespace AmplifyUIBuilder {
     /**
      * The access code to send in the request.
      */
-    code: SyntheticExchangeCodeForTokenRequestBodyString;
+    code: SensitiveString;
     /**
      * The location of the application that will receive the access code.
      */
@@ -644,7 +652,7 @@ declare namespace AmplifyUIBuilder {
     /**
      * The access token.
      */
-    accessToken: SyntheticExchangeCodeForTokenResponseString;
+    accessToken: SensitiveString;
     /**
      * The date and time when the new access token expires.
      */
@@ -652,7 +660,7 @@ declare namespace AmplifyUIBuilder {
     /**
      * The token to use to refresh a previously issued access token that might have expired.
      */
-    refreshToken: SyntheticExchangeCodeForTokenResponseString;
+    refreshToken: SensitiveString;
   }
   export interface ExportComponentsRequest {
     /**
@@ -864,18 +872,19 @@ declare namespace AmplifyUIBuilder {
     /**
      * The token to use to refresh a previously issued access token that might have expired.
      */
-    token: SyntheticRefreshTokenRequestBodyString;
+    token: SensitiveString;
   }
   export interface RefreshTokenResponse {
     /**
      * The access token.
      */
-    accessToken: SyntheticRefreshTokenResponseString;
+    accessToken: SensitiveString;
     /**
      * The date and time when the new access token expires.
      */
     expiresIn: Integer;
   }
+  export type SensitiveString = string;
   export type SortDirection = "ASC"|"DESC"|string;
   export interface SortProperty {
     /**
@@ -889,10 +898,6 @@ declare namespace AmplifyUIBuilder {
   }
   export type SortPropertyList = SortProperty[];
   export type String = string;
-  export type SyntheticExchangeCodeForTokenRequestBodyString = string;
-  export type SyntheticExchangeCodeForTokenResponseString = string;
-  export type SyntheticRefreshTokenRequestBodyString = string;
-  export type SyntheticRefreshTokenResponseString = string;
   export type SyntheticTimestamp_date_time = Date;
   export type TagKey = string;
   export type TagValue = string;

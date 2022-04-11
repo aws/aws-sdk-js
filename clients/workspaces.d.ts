@@ -606,7 +606,7 @@ declare namespace WorkSpaces {
     ClientProperties?: ClientProperties;
   }
   export type ClientUrl = string;
-  export type Compute = "VALUE"|"STANDARD"|"PERFORMANCE"|"POWER"|"GRAPHICS"|"POWERPRO"|"GRAPHICSPRO"|string;
+  export type Compute = "VALUE"|"STANDARD"|"PERFORMANCE"|"POWER"|"GRAPHICS"|"POWERPRO"|"GRAPHICSPRO"|"GRAPHICS_G4DN"|"GRAPHICSPRO_G4DN"|string;
   export interface ComputeType {
     /**
      * The compute type.
@@ -1505,7 +1505,7 @@ declare namespace WorkSpaces {
      */
     Ec2ImageId: Ec2ImageId;
     /**
-     * The ingestion process to be used when importing the image, depending on which protocol you want to use for your BYOL Workspace image, either PCoIP or WorkSpaces Streaming Protocol (WSP). To use WSP, specify a value that ends in _WSP. To use PCoIP, specify a value that does not end in _WSP.  For non-GPU-enabled bundles (bundles other than Graphics or GraphicsPro), specify BYOL_REGULAR or BYOL_REGULAR_WSP, depending on the protocol.
+     * The ingestion process to be used when importing the image, depending on which protocol you want to use for your BYOL Workspace image, either PCoIP or WorkSpaces Streaming Protocol (WSP). To use WSP, specify a value that ends in _WSP. To use PCoIP, specify a value that does not end in _WSP.  For non-GPU-enabled images (bundles other than Graphics.g4dn, GraphicsPro.g4dn, Graphics, or GraphicsPro), specify BYOL_REGULAR or BYOL_REGULAR_WSP, depending on the protocol.  Use BYOL_GRAPHICS_G4DN ingestion for both Graphics.g4dn and GraphicsPro.g4dn. 
      */
     IngestionProcess: WorkspaceImageIngestionProcess;
     /**
@@ -1521,7 +1521,7 @@ declare namespace WorkSpaces {
      */
     Tags?: TagList;
     /**
-     * If specified, the version of Microsoft Office to subscribe to. Valid only for Windows 10 BYOL images. For more information about subscribing to Office for BYOL images, see  Bring Your Own Windows Desktop Licenses.  Although this parameter is an array, only one item is allowed at this time. 
+     * If specified, the version of Microsoft Office to subscribe to. Valid only for Windows 10 BYOL images. For more information about subscribing to Office for BYOL images, see  Bring Your Own Windows Desktop Licenses.    Although this parameter is an array, only one item is allowed at this time   Microsoft Office 2016 application subscription through AWS is currently not supported for Graphics.g4dn Bring Your Own License (BYOL) images   
      */
     Applications?: ApplicationList;
   }
@@ -2370,7 +2370,7 @@ declare namespace WorkSpaces {
   export type WorkspaceImageErrorCode = string;
   export type WorkspaceImageId = string;
   export type WorkspaceImageIdList = WorkspaceImageId[];
-  export type WorkspaceImageIngestionProcess = "BYOL_REGULAR"|"BYOL_GRAPHICS"|"BYOL_GRAPHICSPRO"|"BYOL_REGULAR_WSP"|string;
+  export type WorkspaceImageIngestionProcess = "BYOL_REGULAR"|"BYOL_GRAPHICS"|"BYOL_GRAPHICSPRO"|"BYOL_GRAPHICS_G4DN"|"BYOL_REGULAR_WSP"|string;
   export type WorkspaceImageList = WorkspaceImage[];
   export type WorkspaceImageName = string;
   export type WorkspaceImageRequiredTenancy = "DEFAULT"|"DEDICATED"|string;

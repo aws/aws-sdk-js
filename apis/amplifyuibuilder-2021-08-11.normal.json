@@ -580,6 +580,10 @@
         "properties": {
           "shape": "ComponentProperties",
           "documentation": "<p>Describes the properties of the child component. You can't specify <code>tags</code> as a valid property for <code>properties</code>.</p>"
+        },
+        "sourceId": {
+          "shape": "String",
+          "documentation": "<p>The unique ID of the child component in its original source system, such as Figma.</p>"
         }
       },
       "documentation": "<p>A nested UI configuration within a parent <code>Component</code>.</p>"
@@ -664,6 +668,10 @@
         "action": {
           "shape": "String",
           "documentation": "<p>The action to perform when a specific event is raised.</p>"
+        },
+        "bindingEvent": {
+          "shape": "String",
+          "documentation": "<p>Binds an event to an action on a component. When you specify a <code>bindingEvent</code>, the event is called when the action is performed.</p>"
         },
         "parameters": {
           "shape": "ActionParameters",
@@ -1141,7 +1149,7 @@
       ],
       "members": {
         "code": {
-          "shape": "SyntheticExchangeCodeForTokenRequestBodyString",
+          "shape": "SensitiveString",
           "documentation": "<p>The access code to send in the request.</p>"
         },
         "redirectUri": {
@@ -1160,7 +1168,7 @@
       ],
       "members": {
         "accessToken": {
-          "shape": "SyntheticExchangeCodeForTokenResponseString",
+          "shape": "SensitiveString",
           "documentation": "<p>The access token.</p>"
         },
         "expiresIn": {
@@ -1168,7 +1176,7 @@
           "documentation": "<p>The date and time when the new access token expires.</p>"
         },
         "refreshToken": {
-          "shape": "SyntheticExchangeCodeForTokenResponseString",
+          "shape": "SensitiveString",
           "documentation": "<p>The token to use to refresh a previously issued access token that might have expired.</p>"
         }
       }
@@ -1562,7 +1570,7 @@
       ],
       "members": {
         "token": {
-          "shape": "SyntheticRefreshTokenRequestBodyString",
+          "shape": "SensitiveString",
           "documentation": "<p>The token to use to refresh a previously issued access token that might have expired.</p>"
         }
       },
@@ -1576,7 +1584,7 @@
       ],
       "members": {
         "accessToken": {
-          "shape": "SyntheticRefreshTokenResponseString",
+          "shape": "SensitiveString",
           "documentation": "<p>The access token.</p>"
         },
         "expiresIn": {
@@ -1584,6 +1592,10 @@
           "documentation": "<p>The date and time when the new access token expires.</p>"
         }
       }
+    },
+    "SensitiveString": {
+      "type": "string",
+      "sensitive": true
     },
     "SortDirection": {
       "type": "string",
@@ -1618,22 +1630,6 @@
     },
     "String": {
       "type": "string"
-    },
-    "SyntheticExchangeCodeForTokenRequestBodyString": {
-      "type": "string",
-      "sensitive": true
-    },
-    "SyntheticExchangeCodeForTokenResponseString": {
-      "type": "string",
-      "sensitive": true
-    },
-    "SyntheticRefreshTokenRequestBodyString": {
-      "type": "string",
-      "sensitive": true
-    },
-    "SyntheticRefreshTokenResponseString": {
-      "type": "string",
-      "sensitive": true
     },
     "SyntheticTimestamp_date_time": {
       "type": "timestamp",

@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1111.0-->
+<!--LATEST=2.1112.0-->
 <!--ENTRYINSERT-->
+
+## 2.1112.0
+* feature: AmplifyUIBuilder: In this release, we have added the ability to bind events to component level actions.
+* feature: AppRunner: This release adds tracing for App Runner services with X-Ray using AWS Distro for OpenTelemetry. New APIs: CreateObservabilityConfiguration, DescribeObservabilityConfiguration, ListObservabilityConfigurations, and DeleteObservabilityConfiguration. Updated APIs: CreateService and UpdateService.
+* feature: WorkSpaces: Added API support that allows customers to create GPU-enabled WorkSpaces using EC2 G4dn instances.
 
 ## 2.1111.0
 * feature: MediaConvert: AWS Elemental MediaConvert SDK has added support for the pass-through of WebVTT styling to WebVTT outputs, pass-through of KLV metadata to supported formats, and improved filter support for processing 444/RGB content.
