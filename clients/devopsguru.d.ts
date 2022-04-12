@@ -12,13 +12,21 @@ declare class DevOpsGuru extends Service {
   constructor(options?: DevOpsGuru.Types.ClientConfiguration)
   config: Config & DevOpsGuru.Types.ClientConfiguration;
   /**
-   *  Adds a notification channel to DevOps Guru. A notification channel is used to notify you about important DevOps Guru events, such as when an insight is generated.  If you use an Amazon SNS topic in another account, you must attach a policy to it that grants DevOps Guru permission to it notifications. DevOps Guru adds the required policy on your behalf to send notifications using Amazon SNS in your account. For more information, see Permissions for cross account Amazon SNS topics. If you use an Amazon SNS topic that is encrypted by an Amazon Web Services Key Management Service customer-managed key (CMK), then you must add permissions to the CMK. For more information, see Permissions for Amazon Web Services KMS–encrypted Amazon SNS topics.
+   *  Adds a notification channel to DevOps Guru. A notification channel is used to notify you about important DevOps Guru events, such as when an insight is generated.  If you use an Amazon SNS topic in another account, you must attach a policy to it that grants DevOps Guru permission to it notifications. DevOps Guru adds the required policy on your behalf to send notifications using Amazon SNS in your account. DevOps Guru only supports standard SNS topics. For more information, see Permissions for cross account Amazon SNS topics. If you use an Amazon SNS topic in another account, you must attach a policy to it that grants DevOps Guru permission to it notifications. DevOps Guru adds the required policy on your behalf to send notifications using Amazon SNS in your account. For more information, see Permissions for cross account Amazon SNS topics. If you use an Amazon SNS topic that is encrypted by an Amazon Web Services Key Management Service customer-managed key (CMK), then you must add permissions to the CMK. For more information, see Permissions for Amazon Web Services KMS–encrypted Amazon SNS topics.
    */
   addNotificationChannel(params: DevOpsGuru.Types.AddNotificationChannelRequest, callback?: (err: AWSError, data: DevOpsGuru.Types.AddNotificationChannelResponse) => void): Request<DevOpsGuru.Types.AddNotificationChannelResponse, AWSError>;
   /**
-   *  Adds a notification channel to DevOps Guru. A notification channel is used to notify you about important DevOps Guru events, such as when an insight is generated.  If you use an Amazon SNS topic in another account, you must attach a policy to it that grants DevOps Guru permission to it notifications. DevOps Guru adds the required policy on your behalf to send notifications using Amazon SNS in your account. For more information, see Permissions for cross account Amazon SNS topics. If you use an Amazon SNS topic that is encrypted by an Amazon Web Services Key Management Service customer-managed key (CMK), then you must add permissions to the CMK. For more information, see Permissions for Amazon Web Services KMS–encrypted Amazon SNS topics.
+   *  Adds a notification channel to DevOps Guru. A notification channel is used to notify you about important DevOps Guru events, such as when an insight is generated.  If you use an Amazon SNS topic in another account, you must attach a policy to it that grants DevOps Guru permission to it notifications. DevOps Guru adds the required policy on your behalf to send notifications using Amazon SNS in your account. DevOps Guru only supports standard SNS topics. For more information, see Permissions for cross account Amazon SNS topics. If you use an Amazon SNS topic in another account, you must attach a policy to it that grants DevOps Guru permission to it notifications. DevOps Guru adds the required policy on your behalf to send notifications using Amazon SNS in your account. For more information, see Permissions for cross account Amazon SNS topics. If you use an Amazon SNS topic that is encrypted by an Amazon Web Services Key Management Service customer-managed key (CMK), then you must add permissions to the CMK. For more information, see Permissions for Amazon Web Services KMS–encrypted Amazon SNS topics.
    */
   addNotificationChannel(callback?: (err: AWSError, data: DevOpsGuru.Types.AddNotificationChannelResponse) => void): Request<DevOpsGuru.Types.AddNotificationChannelResponse, AWSError>;
+  /**
+   * Deletes the insight along with the associated anomalies, events and recommendations.
+   */
+  deleteInsight(params: DevOpsGuru.Types.DeleteInsightRequest, callback?: (err: AWSError, data: DevOpsGuru.Types.DeleteInsightResponse) => void): Request<DevOpsGuru.Types.DeleteInsightResponse, AWSError>;
+  /**
+   * Deletes the insight along with the associated anomalies, events and recommendations.
+   */
+  deleteInsight(callback?: (err: AWSError, data: DevOpsGuru.Types.DeleteInsightResponse) => void): Request<DevOpsGuru.Types.DeleteInsightResponse, AWSError>;
   /**
    *  Returns the number of open reactive insights, the number of open proactive insights, and the number of metrics analyzed in your Amazon Web Services account. Use these numbers to gauge the health of operations in your Amazon Web Services account. 
    */
@@ -44,11 +52,11 @@ declare class DevOpsGuru extends Service {
    */
   describeAnomaly(callback?: (err: AWSError, data: DevOpsGuru.Types.DescribeAnomalyResponse) => void): Request<DevOpsGuru.Types.DescribeAnomalyResponse, AWSError>;
   /**
-   * This operation lists details about a DevOps Guru event source that is shared with your&#x2028; account.
+   * Returns the integration status of services that are integrated with DevOps Guru as Consumer via EventBridge. The one service that can be integrated with DevOps Guru is Amazon CodeGuru Profiler, which can produce proactive recommendations which can be stored and viewed in DevOps Guru.
    */
   describeEventSourcesConfig(params: DevOpsGuru.Types.DescribeEventSourcesConfigRequest, callback?: (err: AWSError, data: DevOpsGuru.Types.DescribeEventSourcesConfigResponse) => void): Request<DevOpsGuru.Types.DescribeEventSourcesConfigResponse, AWSError>;
   /**
-   * This operation lists details about a DevOps Guru event source that is shared with your&#x2028; account.
+   * Returns the integration status of services that are integrated with DevOps Guru as Consumer via EventBridge. The one service that can be integrated with DevOps Guru is Amazon CodeGuru Profiler, which can produce proactive recommendations which can be stored and viewed in DevOps Guru.
    */
   describeEventSourcesConfig(callback?: (err: AWSError, data: DevOpsGuru.Types.DescribeEventSourcesConfigResponse) => void): Request<DevOpsGuru.Types.DescribeEventSourcesConfigResponse, AWSError>;
   /**
@@ -212,11 +220,11 @@ declare class DevOpsGuru extends Service {
    */
   startCostEstimation(callback?: (err: AWSError, data: DevOpsGuru.Types.StartCostEstimationResponse) => void): Request<DevOpsGuru.Types.StartCostEstimationResponse, AWSError>;
   /**
-   * Updates the event source configuration.
+   * Enables or disables integration with a service that can be integrated with DevOps Guru. The one service that can be integrated with DevOps Guru is Amazon CodeGuru Profiler, which can produce proactive recommendations which can be stored and viewed in DevOps Guru.
    */
   updateEventSourcesConfig(params: DevOpsGuru.Types.UpdateEventSourcesConfigRequest, callback?: (err: AWSError, data: DevOpsGuru.Types.UpdateEventSourcesConfigResponse) => void): Request<DevOpsGuru.Types.UpdateEventSourcesConfigResponse, AWSError>;
   /**
-   * Updates the event source configuration.
+   * Enables or disables integration with a service that can be integrated with DevOps Guru. The one service that can be integrated with DevOps Guru is Amazon CodeGuru Profiler, which can produce proactive recommendations which can be stored and viewed in DevOps Guru.
    */
   updateEventSourcesConfig(callback?: (err: AWSError, data: DevOpsGuru.Types.UpdateEventSourcesConfigResponse) => void): Request<DevOpsGuru.Types.UpdateEventSourcesConfigResponse, AWSError>;
   /**
@@ -273,7 +281,7 @@ declare namespace DevOpsGuru {
   }
   export interface AmazonCodeGuruProfilerIntegration {
     /**
-     * The status of the CodeGuru Profiler integration.
+     * The status of the CodeGuru Profiler integration. Specifies if DevOps Guru is enabled to consume recommendations that are generated from Amazon CodeGuru Profiler.
      */
     Status?: EventSourceOptInStatus;
   }
@@ -460,6 +468,14 @@ declare namespace DevOpsGuru {
      */
     EndTime?: Timestamp;
   }
+  export interface DeleteInsightRequest {
+    /**
+     * The ID of the insight.
+     */
+    Id: InsightId;
+  }
+  export interface DeleteInsightResponse {
+  }
   export interface DescribeAccountHealthRequest {
   }
   export interface DescribeAccountHealthResponse {
@@ -528,7 +544,7 @@ declare namespace DevOpsGuru {
   }
   export interface DescribeEventSourcesConfigResponse {
     /**
-     * The name of the event source.
+     * Lists the event sources in the configuration.
      */
     EventSources?: EventSourcesConfig;
   }
@@ -761,7 +777,7 @@ declare namespace DevOpsGuru {
   export type EventSourceOptInStatus = "ENABLED"|"DISABLED"|string;
   export interface EventSourcesConfig {
     /**
-     * 
+     * Information about whether DevOps Guru is configured to consume recommendations which are generated from AWS CodeGuru Profiler.
      */
     AmazonCodeGuruProfiler?: AmazonCodeGuruProfilerIntegration;
   }
@@ -1123,7 +1139,7 @@ declare namespace DevOpsGuru {
   }
   export interface NotificationChannelConfig {
     /**
-     *  Information about a notification channel configured in DevOps Guru to send notifications when insights are created.  If you use an Amazon SNS topic in another account, you must attach a policy to it that grants DevOps Guru permission to it notifications. DevOps Guru adds the required policy on your behalf to send notifications using Amazon SNS in your account. For more information, see Permissions for cross account Amazon SNS topics. If you use an Amazon SNS topic that is encrypted by an Amazon Web Services Key Management Service customer-managed key (CMK), then you must add permissions to the CMK. For more information, see Permissions for Amazon Web Services KMS–encrypted Amazon SNS topics.
+     *  Information about a notification channel configured in DevOps Guru to send notifications when insights are created.  If you use an Amazon SNS topic in another account, you must attach a policy to it that grants DevOps Guru permission to it notifications. DevOps Guru adds the required policy on your behalf to send notifications using Amazon SNS in your account. DevOps Guru only supports standard SNS topics. For more information, see Permissions for cross account Amazon SNS topics. If you use an Amazon SNS topic in another account, you must attach a policy to it that grants DevOps Guru permission to it notifications. DevOps Guru adds the required policy on your behalf to send notifications using Amazon SNS in your account. For more information, see Permissions for cross account Amazon SNS topics. If you use an Amazon SNS topic that is encrypted by an Amazon Web Services Key Management Service customer-managed key (CMK), then you must add permissions to the CMK. For more information, see Permissions for Amazon Web Services KMS–encrypted Amazon SNS topics.
      */
     Sns: SnsChannelConfig;
   }
@@ -1355,7 +1371,7 @@ declare namespace DevOpsGuru {
      */
     Limit?: AnomalyLimit;
     /**
-     * Returns the metadata of the source.
+     * The metadata of the source which detects proactive anomalies.
      */
     SourceMetadata?: AnomalySourceMetadata;
     /**
@@ -2050,7 +2066,7 @@ declare namespace DevOpsGuru {
   }
   export interface UpdateEventSourcesConfigRequest {
     /**
-     * The name of the event source.
+     * Configuration information about the integration of DevOps Guru as the Consumer via EventBridge with another AWS Service.
      */
     EventSources?: EventSourcesConfig;
   }

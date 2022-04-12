@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1112.0-->
+<!--LATEST=2.1113.0-->
 <!--ENTRYINSERT-->
+
+## 2.1113.0
+* feature: DevOpsGuru: This release adds new APIs DeleteInsight to deletes the insight along with the associated anomalies, events and recommendations.
+* feature: EC2: X2idn and X2iedn instances are powered by 3rd generation Intel Xeon Scalable processors with an all-core turbo frequency up to 3.5 GHzAmazon EC2. C6a instances are powered by 3rd generation AMD EPYC processors.
+* feature: EFS: Amazon EFS adds support for a ThrottlingException when using the CreateAccessPoint API if the account is nearing the AccessPoint limit(120).
+* feature: IoTTwinMaker: This release adds the following new features: 1) ListEntities API now supports search using ExternalId. 2) BatchPutPropertyValue and GetPropertyValueHistory API now allows users to represent time in sub-second level precisions.
 
 ## 2.1112.0
 * feature: AmplifyUIBuilder: In this release, we have added the ability to bind events to component level actions.

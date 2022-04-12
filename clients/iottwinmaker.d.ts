@@ -20,11 +20,11 @@ declare class IoTTwinMaker extends Service {
    */
   batchPutPropertyValues(callback?: (err: AWSError, data: IoTTwinMaker.Types.BatchPutPropertyValuesResponse) => void): Request<IoTTwinMaker.Types.BatchPutPropertyValuesResponse, AWSError>;
   /**
-   * Creates a component type.   TwinMaker is in public preview and is subject to change.  
+   * Creates a component type.
    */
   createComponentType(params: IoTTwinMaker.Types.CreateComponentTypeRequest, callback?: (err: AWSError, data: IoTTwinMaker.Types.CreateComponentTypeResponse) => void): Request<IoTTwinMaker.Types.CreateComponentTypeResponse, AWSError>;
   /**
-   * Creates a component type.   TwinMaker is in public preview and is subject to change.  
+   * Creates a component type.
    */
   createComponentType(callback?: (err: AWSError, data: IoTTwinMaker.Types.CreateComponentTypeResponse) => void): Request<IoTTwinMaker.Types.CreateComponentTypeResponse, AWSError>;
   /**
@@ -515,7 +515,7 @@ declare namespace IoTTwinMaker {
   }
   export interface DataConnector {
     /**
-     * A Boolean value that specifies whether the data connector is native to TwinMaker.
+     * A Boolean value that specifies whether the data connector is native to IoT TwinMaker.
      */
     isNative?: Boolean;
     /**
@@ -886,7 +886,8 @@ declare namespace IoTTwinMaker {
     /**
      * The date and time of the latest property value to return.
      */
-    endDateTime: Timestamp;
+    endDateTime?: Timestamp;
+    endTime?: Time;
     /**
      * The ID of the entity.
      */
@@ -918,7 +919,8 @@ declare namespace IoTTwinMaker {
     /**
      * The date and time of the earliest property value to return.
      */
-    startDateTime: Timestamp;
+    startDateTime?: Timestamp;
+    startTime?: Time;
     /**
      * The ID of the workspace.
      */
@@ -1120,6 +1122,10 @@ declare namespace IoTTwinMaker {
      * The ID of the component type in the entities in the list.
      */
     componentTypeId?: ComponentTypeId;
+    /**
+     * The external-Id property of a component. The external-Id property is the primary key of an external storage system.
+     */
+    externalId?: String;
     /**
      * The parent of the entities in the list.
      */
@@ -1365,12 +1371,13 @@ declare namespace IoTTwinMaker {
     value?: DataValue;
   }
   export type PropertyResponses = {[key: string]: PropertyResponse};
-  export type PropertyUpdateType = "UPDATE"|"DELETE"|string;
+  export type PropertyUpdateType = "UPDATE"|"DELETE"|"CREATE"|string;
   export interface PropertyValue {
+    time?: Time;
     /**
      * The timestamp of a value for a time series property.
      */
-    timestamp: Timestamp;
+    timestamp?: Timestamp;
     /**
      * An object that specifies a value for a time series property.
      */
@@ -1481,6 +1488,7 @@ declare namespace IoTTwinMaker {
   export interface TagResourceResponse {
   }
   export type TagValue = string;
+  export type Time = string;
   export type Timestamp = Date;
   export type TwinMakerArn = string;
   export type Type = "RELATIONSHIP"|"STRING"|"LONG"|"BOOLEAN"|"INTEGER"|"DOUBLE"|"LIST"|"MAP"|string;
