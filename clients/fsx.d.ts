@@ -694,11 +694,11 @@ declare namespace FSx {
     AutomaticBackupRetentionDays?: AutomaticBackupRetentionDays;
     DailyAutomaticBackupStartTime?: DailyTime;
     /**
-     * Specifies the FSx for ONTAP file system deployment type to use in creating the file system. MULTI_AZ_1 is the supported ONTAP deployment type.
+     * Specifies the FSx for ONTAP file system deployment type to use in creating the file system.     MULTI_AZ_1 - (Default) A high availability file system configured for Multi-AZ redundancy to tolerate temporary Availability Zone (AZ) unavailability.     SINGLE_AZ_1 - A file system configured for Single-AZ redundancy.   For information about the use cases for Multi-AZ and Single-AZ deployments, refer to Choosing Multi-AZ or Single-AZ file system deployment. 
      */
     DeploymentType: OntapDeploymentType;
     /**
-     * Specifies the IP address range in which the endpoints to access your file system will be created. By default, Amazon FSx selects an unused IP address range for you from the 198.19.* range.  The Endpoint IP address range you select for your file system must exist outside the VPC's CIDR range and must be at least /30 or larger. 
+     * (Multi-AZ only) Specifies the IP address range in which the endpoints to access your file system will be created. By default, Amazon FSx selects an unused IP address range for you from the 198.19.* range.  The Endpoint IP address range you select for your file system must exist outside the VPC's CIDR range and must be at least /30 or larger. 
      */
     EndpointIpAddressRange?: IpAddressRange;
     /**
@@ -714,7 +714,7 @@ declare namespace FSx {
      */
     PreferredSubnetId?: SubnetId;
     /**
-     * Specifies the virtual private cloud (VPC) route tables in which your file system's endpoints will be created. You should specify all VPC route tables associated with the subnets in which your clients are located. By default, Amazon FSx selects your VPC's default route table.
+     * (Multi-AZ only) Specifies the virtual private cloud (VPC) route tables in which your file system's endpoints will be created. You should specify all VPC route tables associated with the subnets in which your clients are located. By default, Amazon FSx selects your VPC's default route table.
      */
     RouteTableIds?: RouteTableIds;
     /**
@@ -1824,17 +1824,17 @@ declare namespace FSx {
   export type NetworkInterfaceId = string;
   export type NetworkInterfaceIds = NetworkInterfaceId[];
   export type NextToken = string;
-  export type OntapDeploymentType = "MULTI_AZ_1"|string;
+  export type OntapDeploymentType = "MULTI_AZ_1"|"SINGLE_AZ_1"|string;
   export type OntapEndpointIpAddresses = IpAddress[];
   export interface OntapFileSystemConfiguration {
     AutomaticBackupRetentionDays?: AutomaticBackupRetentionDays;
     DailyAutomaticBackupStartTime?: DailyTime;
     /**
-     * The ONTAP file system deployment type.
+     * Specifies the FSx for ONTAP file system deployment type in use in the file system.     MULTI_AZ_1 - (Default) A high availability file system configured for Multi-AZ redundancy to tolerate temporary Availability Zone (AZ) unavailability.     SINGLE_AZ_1 - A file system configured for Single-AZ redundancy.   For information about the use cases for Multi-AZ and Single-AZ deployments, refer to Choosing Multi-AZ or Single-AZ file system deployment. 
      */
     DeploymentType?: OntapDeploymentType;
     /**
-     * The IP address range in which the endpoints to access your file system are created.  The Endpoint IP address range you select for your file system must exist outside the VPC's CIDR range and must be at least /30 or larger. If you do not specify this optional parameter, Amazon FSx will automatically select a CIDR block for you. 
+     * (Multi-AZ only) The IP address range in which the endpoints to access your file system are created.  The Endpoint IP address range you select for your file system must exist outside the VPC's CIDR range and must be at least /30 or larger. If you do not specify this optional parameter, Amazon FSx will automatically select a CIDR block for you. 
      */
     EndpointIpAddressRange?: IpAddressRange;
     /**
@@ -1847,7 +1847,7 @@ declare namespace FSx {
     DiskIopsConfiguration?: DiskIopsConfiguration;
     PreferredSubnetId?: SubnetId;
     /**
-     * The VPC route tables in which your file system's endpoints are created.
+     * (Multi-AZ only) The VPC route tables in which your file system's endpoints are created.
      */
     RouteTableIds?: RouteTableIds;
     ThroughputCapacity?: MegabytesPerSecond;

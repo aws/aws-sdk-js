@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1113.0-->
+<!--LATEST=2.1114.0-->
 <!--ENTRYINSERT-->
+
+## 2.1114.0
+* feature: CloudWatch: Adds support for additional statistics in CloudWatch Metric Streams.
+* feature: FSx: This release adds support for deploying FSx for ONTAP file systems in a single Availability Zone.
 
 ## 2.1113.0
 * feature: DevOpsGuru: This release adds new APIs DeleteInsight to deletes the insight along with the associated anomalies, events and recommendations.
