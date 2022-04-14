@@ -1950,6 +1950,38 @@ declare namespace Appflow {
     refreshToken?: RefreshToken;
     oAuthRequest?: ConnectorOAuthRequest;
   }
+  export interface OAuth2CustomParameter {
+    /**
+     * The key of the custom parameter required for OAuth 2.0 authentication.
+     */
+    key?: Key;
+    /**
+     * Indicates whether the custom parameter for OAuth 2.0 authentication is required.
+     */
+    isRequired?: Boolean;
+    /**
+     * The label of the custom parameter used for OAuth 2.0 authentication.
+     */
+    label?: Label;
+    /**
+     * A description about the custom parameter used for OAuth 2.0 authentication.
+     */
+    description?: Description;
+    /**
+     * Indicates whether this authentication custom parameter is a sensitive field.
+     */
+    isSensitiveField?: Boolean;
+    /**
+     * Contains default values for this authentication parameter that are supplied by the connector.
+     */
+    connectorSuppliedValues?: ConnectorSuppliedValueList;
+    /**
+     * Indicates whether custom parameter is used with TokenUrl or AuthUrl.
+     */
+    type?: OAuth2CustomPropType;
+  }
+  export type OAuth2CustomPropType = "TOKEN_URL"|"AUTH_URL"|string;
+  export type OAuth2CustomPropertiesList = OAuth2CustomParameter[];
   export interface OAuth2Defaults {
     /**
      * OAuth 2.0 scopes that the connector supports.
@@ -1967,6 +1999,10 @@ declare namespace Appflow {
      * OAuth 2.0 grant types supported by the connector.
      */
     oauth2GrantTypesSupported?: OAuth2GrantTypeSupportedList;
+    /**
+     * List of custom parameters required for OAuth 2.0 authentication.
+     */
+    oauth2CustomProperties?: OAuth2CustomPropertiesList;
   }
   export type OAuth2GrantType = "CLIENT_CREDENTIALS"|"AUTHORIZATION_CODE"|string;
   export type OAuth2GrantTypeSupportedList = OAuth2GrantType[];
@@ -1979,6 +2015,10 @@ declare namespace Appflow {
      * The OAuth 2.0 grant type used by connector for OAuth 2.0 authentication.
      */
     oAuth2GrantType: OAuth2GrantType;
+    /**
+     * Associates your token URL with a map of properties that you define. Use this parameter to provide any additional details that the connector requires to authenticate your request.
+     */
+    tokenUrlCustomProperties?: TokenUrlCustomProperties;
   }
   export interface OAuthCredentials {
     /**
@@ -2696,6 +2736,7 @@ declare namespace Appflow {
   export type Tasks = Task[];
   export type Timezone = string;
   export type TokenUrl = string;
+  export type TokenUrlCustomProperties = {[key: string]: CustomPropertyValue};
   export type TokenUrlList = TokenUrl[];
   export type TrendmicroConnectorOperator = "PROJECTION"|"EQUAL_TO"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string;
   export interface TrendmicroConnectorProfileCredentials {

@@ -253,11 +253,11 @@ declare class CloudWatch extends Service {
    */
   putMetricData(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Creates or updates a metric stream. Metric streams can automatically stream CloudWatch metrics to Amazon Web Services destinations including Amazon S3 and to many third-party solutions. For more information, see  Using Metric Streams. To create a metric stream, you must be logged on to an account that has the iam:PassRole permission and either the CloudWatchFullAccess policy or the cloudwatch:PutMetricStream permission. When you create or update a metric stream, you choose one of the following:   Stream metrics from all metric namespaces in the account.   Stream metrics from all metric namespaces in the account, except for the namespaces that you list in ExcludeFilters.   Stream metrics from only the metric namespaces that you list in IncludeFilters.   By default, a metric stream always sends the MAX, MIN, SUM, and SAMPLECOUNT statistics for each metric that is streamed. You can use the StatisticsConfigurations parameter to have the metric stream also send extended statistics in the stream. Streaming extended statistics incurs additional costs. For more information, see Amazon CloudWatch Pricing.  When you use PutMetricStream to create a new metric stream, the stream is created in the running state. If you use it to update an existing stream, the state of the stream is not changed.
+   * Creates or updates a metric stream. Metric streams can automatically stream CloudWatch metrics to Amazon Web Services destinations including Amazon S3 and to many third-party solutions. For more information, see  Using Metric Streams. To create a metric stream, you must be logged on to an account that has the iam:PassRole permission and either the CloudWatchFullAccess policy or the cloudwatch:PutMetricStream permission. When you create or update a metric stream, you choose one of the following:   Stream metrics from all metric namespaces in the account.   Stream metrics from all metric namespaces in the account, except for the namespaces that you list in ExcludeFilters.   Stream metrics from only the metric namespaces that you list in IncludeFilters.   By default, a metric stream always sends the MAX, MIN, SUM, and SAMPLECOUNT statistics for each metric that is streamed. You can use the StatisticsConfigurations parameter to have the metric stream also send additional statistics in the stream. Streaming additional statistics incurs additional costs. For more information, see Amazon CloudWatch Pricing.  When you use PutMetricStream to create a new metric stream, the stream is created in the running state. If you use it to update an existing stream, the state of the stream is not changed.
    */
   putMetricStream(params: CloudWatch.Types.PutMetricStreamInput, callback?: (err: AWSError, data: CloudWatch.Types.PutMetricStreamOutput) => void): Request<CloudWatch.Types.PutMetricStreamOutput, AWSError>;
   /**
-   * Creates or updates a metric stream. Metric streams can automatically stream CloudWatch metrics to Amazon Web Services destinations including Amazon S3 and to many third-party solutions. For more information, see  Using Metric Streams. To create a metric stream, you must be logged on to an account that has the iam:PassRole permission and either the CloudWatchFullAccess policy or the cloudwatch:PutMetricStream permission. When you create or update a metric stream, you choose one of the following:   Stream metrics from all metric namespaces in the account.   Stream metrics from all metric namespaces in the account, except for the namespaces that you list in ExcludeFilters.   Stream metrics from only the metric namespaces that you list in IncludeFilters.   By default, a metric stream always sends the MAX, MIN, SUM, and SAMPLECOUNT statistics for each metric that is streamed. You can use the StatisticsConfigurations parameter to have the metric stream also send extended statistics in the stream. Streaming extended statistics incurs additional costs. For more information, see Amazon CloudWatch Pricing.  When you use PutMetricStream to create a new metric stream, the stream is created in the running state. If you use it to update an existing stream, the state of the stream is not changed.
+   * Creates or updates a metric stream. Metric streams can automatically stream CloudWatch metrics to Amazon Web Services destinations including Amazon S3 and to many third-party solutions. For more information, see  Using Metric Streams. To create a metric stream, you must be logged on to an account that has the iam:PassRole permission and either the CloudWatchFullAccess policy or the cloudwatch:PutMetricStream permission. When you create or update a metric stream, you choose one of the following:   Stream metrics from all metric namespaces in the account.   Stream metrics from all metric namespaces in the account, except for the namespaces that you list in ExcludeFilters.   Stream metrics from only the metric namespaces that you list in IncludeFilters.   By default, a metric stream always sends the MAX, MIN, SUM, and SAMPLECOUNT statistics for each metric that is streamed. You can use the StatisticsConfigurations parameter to have the metric stream also send additional statistics in the stream. Streaming additional statistics incurs additional costs. For more information, see Amazon CloudWatch Pricing.  When you use PutMetricStream to create a new metric stream, the stream is created in the running state. If you use it to update an existing stream, the state of the stream is not changed.
    */
   putMetricStream(callback?: (err: AWSError, data: CloudWatch.Types.PutMetricStreamOutput) => void): Request<CloudWatch.Types.PutMetricStreamOutput, AWSError>;
   /**
@@ -1077,7 +1077,7 @@ declare namespace CloudWatch {
      */
     OutputFormat?: MetricStreamOutputFormat;
     /**
-     * Each entry in this array displays information about one or more metrics that include extended statistics in the metric stream. For more information about extended statistics, see  CloudWatch statistics definitions. 
+     * Each entry in this array displays information about one or more metrics that include additional statistics in the metric stream. For more information about the additional statistics, see  CloudWatch statistics definitions. 
      */
     StatisticsConfigurations?: MetricStreamStatisticsConfigurations;
   }
@@ -1601,11 +1601,11 @@ declare namespace CloudWatch {
   export type MetricStreamStatisticsAdditionalStatistics = MetricStreamStatistic[];
   export interface MetricStreamStatisticsConfiguration {
     /**
-     * An array of metric name and namespace pairs that stream the extended statistics listed in the value of the AdditionalStatistics parameter. There can be as many as 100 pairs in the array. All metrics that match the combination of metric name and namespace will be streamed with the extended statistics, no matter their dimensions.
+     * An array of metric name and namespace pairs that stream the additional statistics listed in the value of the AdditionalStatistics parameter. There can be as many as 100 pairs in the array. All metrics that match the combination of metric name and namespace will be streamed with the additional statistics, no matter their dimensions.
      */
     IncludeMetrics: MetricStreamStatisticsIncludeMetrics;
     /**
-     * The list of extended statistics that are to be streamed for the metrics listed in the IncludeMetrics array in this structure. This list can include as many as 20 statistics. If the OutputFormat for the stream is opentelemetry0.7, the only valid values are p??  percentile statistics such as p90, p99 and so on. If the OutputFormat for the stream is json, the valid values are include the abbreviations for all of the extended statistics listed in  CloudWatch statistics definitions. For example, this includes tm98,  wm90, PR(:300), and so on.
+     * The list of additional statistics that are to be streamed for the metrics listed in the IncludeMetrics array in this structure. This list can include as many as 20 statistics. If the OutputFormat for the stream is opentelemetry0.7, the only valid values are p??  percentile statistics such as p90, p99 and so on. If the OutputFormat for the stream is json, the valid values include the abbreviations for all of the statistics listed in  CloudWatch statistics definitions. For example, this includes tm98,  wm90, PR(:300), and so on.
      */
     AdditionalStatistics: MetricStreamStatisticsAdditionalStatistics;
   }
@@ -1613,7 +1613,7 @@ declare namespace CloudWatch {
   export type MetricStreamStatisticsIncludeMetrics = MetricStreamStatisticsMetric[];
   export interface MetricStreamStatisticsMetric {
     /**
-     * The metric namespace for the metric.
+     * The namespace of the metric.
      */
     Namespace: Namespace;
     /**
@@ -1818,7 +1818,7 @@ declare namespace CloudWatch {
      */
     ComparisonOperator: ComparisonOperator;
     /**
-     *  Sets how this alarm is to handle missing data points. If TreatMissingData is omitted, the default behavior of missing is used. For more information, see Configuring How CloudWatch Alarms Treats Missing Data. Valid Values: breaching | notBreaching | ignore | missing 
+     *  Sets how this alarm is to handle missing data points. If TreatMissingData is omitted, the default behavior of missing is used. For more information, see Configuring How CloudWatch Alarms Treats Missing Data. Valid Values: breaching | notBreaching | ignore | missing   Alarms that evaluate metrics in the AWS/DynamoDB namespace always ignore missing data even if you choose a different option for TreatMissingData. When an AWS/DynamoDB metric has missing data, alarms that evaluate that metric remain in their current state. 
      */
     TreatMissingData?: TreatMissingData;
     /**
@@ -1878,7 +1878,7 @@ declare namespace CloudWatch {
      */
     Tags?: TagList;
     /**
-     * By default, a metric stream always sends the MAX, MIN, SUM, and SAMPLECOUNT statistics for each metric that is streamed. You can use this parameter to have the metric stream also send extended statistics in the stream. This array can have up to 100 members. For each entry in this array, you specify one or more metrics and the list of extended statistics to stream for those metrics. The extended statistics that you can stream depend on the stream's OutputFormat. If the OutputFormat is json, you can stream any extended statistic that is supported by CloudWatch, listed in  CloudWatch statistics definitions. If the OutputFormat is opentelemetry0.7, you can stream percentile statistics (p??).
+     * By default, a metric stream always sends the MAX, MIN, SUM, and SAMPLECOUNT statistics for each metric that is streamed. You can use this parameter to have the metric stream also send additional statistics in the stream. This array can have up to 100 members. For each entry in this array, you specify one or more metrics and the list of additional statistics to stream for those metrics. The additional statistics that you can stream depend on the stream's OutputFormat. If the OutputFormat is json, you can stream any additional statistic that is supported by CloudWatch, listed in  CloudWatch statistics definitions. If the OutputFormat is opentelemetry0.7, you can stream percentile statistics such as p95, p99.9 and so on.
      */
     StatisticsConfigurations?: MetricStreamStatisticsConfigurations;
   }
