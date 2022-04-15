@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1115.0-->
+<!--LATEST=2.1116.0-->
 <!--ENTRYINSERT-->
+
+## 2.1116.0
+* feature: Athena: This release adds subfields, ErrorMessage, Retryable, to the AthenaError response object in the GetQueryExecution API when a query fails.
+* feature: Lightsail: This release adds support to describe the synchronization status of the account-level block public access feature for your Amazon Lightsail buckets.
+* feature: RDS: Removes Amazon RDS on VMware with the deletion of APIs related to Custom Availability Zones and Media installation
 
 ## 2.1115.0
 * feature: AppStream: Includes updates for create and update fleet APIs to manage the session scripts locations for Elastic fleets.

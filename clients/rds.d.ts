@@ -118,14 +118,6 @@ declare class RDS extends Service {
    */
   copyOptionGroup(callback?: (err: AWSError, data: RDS.Types.CopyOptionGroupResult) => void): Request<RDS.Types.CopyOptionGroupResult, AWSError>;
   /**
-   * Creates a custom Availability Zone (AZ). A custom AZ is an on-premises AZ that is integrated with a VMware vSphere cluster. For more information about RDS on VMware, see the  RDS on VMware User Guide. 
-   */
-  createCustomAvailabilityZone(params: RDS.Types.CreateCustomAvailabilityZoneMessage, callback?: (err: AWSError, data: RDS.Types.CreateCustomAvailabilityZoneResult) => void): Request<RDS.Types.CreateCustomAvailabilityZoneResult, AWSError>;
-  /**
-   * Creates a custom Availability Zone (AZ). A custom AZ is an on-premises AZ that is integrated with a VMware vSphere cluster. For more information about RDS on VMware, see the  RDS on VMware User Guide. 
-   */
-  createCustomAvailabilityZone(callback?: (err: AWSError, data: RDS.Types.CreateCustomAvailabilityZoneResult) => void): Request<RDS.Types.CreateCustomAvailabilityZoneResult, AWSError>;
-  /**
    * Creates a custom DB engine version (CEV). A CEV is a binary volume snapshot of a database engine and specific AMI. The supported engines are the following:   Oracle Database 12.1 Enterprise Edition with the January 2021 or later RU/RUR   Oracle Database 19c Enterprise Edition with the January 2021 or later RU/RUR   Amazon RDS, which is a fully managed service, supplies the Amazon Machine Image (AMI) and database software. The Amazon RDS database software is preinstalled, so you need only select a DB engine and version, and create your database. With Amazon RDS Custom for Oracle, you upload your database installation files in Amazon S3. When you create a custom engine version, you specify the files in a JSON document called a CEV manifest. This document describes installation .zip files stored in Amazon S3. RDS Custom creates your CEV from the installation files that you provided. This service model is called Bring Your Own Media (BYOM). Creation takes approximately two hours. If creation fails, RDS Custom issues RDS-EVENT-0196 with the message Creation failed for custom engine version, and includes details about the failure. For example, the event prints missing files. After you create the CEV, it is available for use. You can create multiple CEVs, and create multiple RDS Custom instances from any CEV. You can also change the status of a CEV to make it available or inactive.  The MediaImport service that imports files from Amazon S3 to create CEVs isn't integrated with Amazon Web Services CloudTrail. If you turn on data logging for Amazon RDS in CloudTrail, calls to the CreateCustomDbEngineVersion event aren't logged. However, you might see calls from the API gateway that accesses your Amazon S3 bucket. These calls originate from the MediaImport service for the CreateCustomDbEngineVersion event.  For more information, see  Creating a CEV in the Amazon RDS User Guide.
    */
   createCustomDBEngineVersion(params: RDS.Types.CreateCustomDBEngineVersionMessage, callback?: (err: AWSError, data: RDS.Types.DBEngineVersion) => void): Request<RDS.Types.DBEngineVersion, AWSError>;
@@ -254,14 +246,6 @@ declare class RDS extends Service {
    */
   createOptionGroup(callback?: (err: AWSError, data: RDS.Types.CreateOptionGroupResult) => void): Request<RDS.Types.CreateOptionGroupResult, AWSError>;
   /**
-   * Deletes a custom Availability Zone (AZ). A custom AZ is an on-premises AZ that is integrated with a VMware vSphere cluster. For more information about RDS on VMware, see the  RDS on VMware User Guide. 
-   */
-  deleteCustomAvailabilityZone(params: RDS.Types.DeleteCustomAvailabilityZoneMessage, callback?: (err: AWSError, data: RDS.Types.DeleteCustomAvailabilityZoneResult) => void): Request<RDS.Types.DeleteCustomAvailabilityZoneResult, AWSError>;
-  /**
-   * Deletes a custom Availability Zone (AZ). A custom AZ is an on-premises AZ that is integrated with a VMware vSphere cluster. For more information about RDS on VMware, see the  RDS on VMware User Guide. 
-   */
-  deleteCustomAvailabilityZone(callback?: (err: AWSError, data: RDS.Types.DeleteCustomAvailabilityZoneResult) => void): Request<RDS.Types.DeleteCustomAvailabilityZoneResult, AWSError>;
-  /**
    * Deletes a custom engine version. To run this command, make sure you meet the following prerequisites:   The CEV must not be the default for RDS Custom. If it is, change the default before running this command.   The CEV must not be associated with an RDS Custom DB instance, RDS Custom instance snapshot, or automated backup of your RDS Custom instance.   Typically, deletion takes a few minutes.  The MediaImport service that imports files from Amazon S3 to create CEVs isn't integrated with Amazon Web Services CloudTrail. If you turn on data logging for Amazon RDS in CloudTrail, calls to the DeleteCustomDbEngineVersion event aren't logged. However, you might see calls from the API gateway that accesses your Amazon S3 bucket. These calls originate from the MediaImport service for the DeleteCustomDbEngineVersion event.  For more information, see  Deleting a CEV in the Amazon RDS User Guide.
    */
   deleteCustomDBEngineVersion(params: RDS.Types.DeleteCustomDBEngineVersionMessage, callback?: (err: AWSError, data: RDS.Types.DBEngineVersion) => void): Request<RDS.Types.DBEngineVersion, AWSError>;
@@ -382,14 +366,6 @@ declare class RDS extends Service {
    */
   deleteGlobalCluster(callback?: (err: AWSError, data: RDS.Types.DeleteGlobalClusterResult) => void): Request<RDS.Types.DeleteGlobalClusterResult, AWSError>;
   /**
-   * Deletes the installation medium for a DB engine that requires an on-premises customer provided license, such as Microsoft SQL Server.
-   */
-  deleteInstallationMedia(params: RDS.Types.DeleteInstallationMediaMessage, callback?: (err: AWSError, data: RDS.Types.InstallationMedia) => void): Request<RDS.Types.InstallationMedia, AWSError>;
-  /**
-   * Deletes the installation medium for a DB engine that requires an on-premises customer provided license, such as Microsoft SQL Server.
-   */
-  deleteInstallationMedia(callback?: (err: AWSError, data: RDS.Types.InstallationMedia) => void): Request<RDS.Types.InstallationMedia, AWSError>;
-  /**
    * Deletes an existing option group.
    */
   deleteOptionGroup(params: RDS.Types.DeleteOptionGroupMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -421,14 +397,6 @@ declare class RDS extends Service {
    * Lists the set of CA certificates provided by Amazon RDS for this Amazon Web Services account.
    */
   describeCertificates(callback?: (err: AWSError, data: RDS.Types.CertificateMessage) => void): Request<RDS.Types.CertificateMessage, AWSError>;
-  /**
-   * Returns information about custom Availability Zones (AZs). A custom AZ is an on-premises AZ that is integrated with a VMware vSphere cluster. For more information about RDS on VMware, see the  RDS on VMware User Guide. 
-   */
-  describeCustomAvailabilityZones(params: RDS.Types.DescribeCustomAvailabilityZonesMessage, callback?: (err: AWSError, data: RDS.Types.CustomAvailabilityZoneMessage) => void): Request<RDS.Types.CustomAvailabilityZoneMessage, AWSError>;
-  /**
-   * Returns information about custom Availability Zones (AZs). A custom AZ is an on-premises AZ that is integrated with a VMware vSphere cluster. For more information about RDS on VMware, see the  RDS on VMware User Guide. 
-   */
-  describeCustomAvailabilityZones(callback?: (err: AWSError, data: RDS.Types.CustomAvailabilityZoneMessage) => void): Request<RDS.Types.CustomAvailabilityZoneMessage, AWSError>;
   /**
    * Returns information about backtracks for a DB cluster. For more information on Amazon Aurora, see  What is Amazon Aurora? in the Amazon Aurora User Guide.  This action only applies to Aurora MySQL DB clusters. 
    */
@@ -654,14 +622,6 @@ declare class RDS extends Service {
    */
   describeGlobalClusters(callback?: (err: AWSError, data: RDS.Types.GlobalClustersMessage) => void): Request<RDS.Types.GlobalClustersMessage, AWSError>;
   /**
-   * Describes the available installation media for a DB engine that requires an on-premises customer provided license, such as Microsoft SQL Server.
-   */
-  describeInstallationMedia(params: RDS.Types.DescribeInstallationMediaMessage, callback?: (err: AWSError, data: RDS.Types.InstallationMediaMessage) => void): Request<RDS.Types.InstallationMediaMessage, AWSError>;
-  /**
-   * Describes the available installation media for a DB engine that requires an on-premises customer provided license, such as Microsoft SQL Server.
-   */
-  describeInstallationMedia(callback?: (err: AWSError, data: RDS.Types.InstallationMediaMessage) => void): Request<RDS.Types.InstallationMediaMessage, AWSError>;
-  /**
    * Describes all available options.
    */
   describeOptionGroupOptions(params: RDS.Types.DescribeOptionGroupOptionsMessage, callback?: (err: AWSError, data: RDS.Types.OptionGroupOptionsMessage) => void): Request<RDS.Types.OptionGroupOptionsMessage, AWSError>;
@@ -750,14 +710,6 @@ declare class RDS extends Service {
    */
   failoverGlobalCluster(callback?: (err: AWSError, data: RDS.Types.FailoverGlobalClusterResult) => void): Request<RDS.Types.FailoverGlobalClusterResult, AWSError>;
   /**
-   * Imports the installation media for a DB engine that requires an on-premises customer provided license, such as SQL Server.
-   */
-  importInstallationMedia(params: RDS.Types.ImportInstallationMediaMessage, callback?: (err: AWSError, data: RDS.Types.InstallationMedia) => void): Request<RDS.Types.InstallationMedia, AWSError>;
-  /**
-   * Imports the installation media for a DB engine that requires an on-premises customer provided license, such as SQL Server.
-   */
-  importInstallationMedia(callback?: (err: AWSError, data: RDS.Types.InstallationMedia) => void): Request<RDS.Types.InstallationMedia, AWSError>;
-  /**
    * Lists all tags on an Amazon RDS resource. For an overview on tagging an Amazon RDS resource, see Tagging Amazon RDS Resources in the Amazon RDS User Guide.
    */
   listTagsForResource(params: RDS.Types.ListTagsForResourceMessage, callback?: (err: AWSError, data: RDS.Types.TagListMessage) => void): Request<RDS.Types.TagListMessage, AWSError>;
@@ -766,11 +718,11 @@ declare class RDS extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: RDS.Types.TagListMessage) => void): Request<RDS.Types.TagListMessage, AWSError>;
   /**
-   * Override the system-default Secure Sockets Layer/Transport Layer Security (SSL/TLS) certificate for Amazon RDS for new DB instances temporarily, or remove the override. By using this operation, you can specify an RDS-approved SSL/TLS certificate for new DB instances that is different from the default certificate provided by RDS. You can also use this operation to remove the override, so that new DB instances use the default certificate provided by RDS. You might need to override the default certificate in the following situations:   You already migrated your applications to support the latest certificate authority (CA) certificate, but the new CA certificate is not yet the RDS default CA certificate for the specified Amazon Web Services Region.   RDS has already moved to a new default CA certificate for the specified Amazon Web Services Region, but you are still in the process of supporting the new CA certificate. In this case, you temporarily need additional time to finish your application changes.   For more information about rotating your SSL/TLS certificate for RDS DB engines, see  Rotating Your SSL/TLS Certificate in the Amazon RDS User Guide. For more information about rotating your SSL/TLS certificate for Aurora DB engines, see  Rotating Your SSL/TLS Certificate in the Amazon Aurora User Guide.
+   * Override the system-default Secure Sockets Layer/Transport Layer Security (SSL/TLS) certificate for Amazon RDS for new DB instances, or remove the override. By using this operation, you can specify an RDS-approved SSL/TLS certificate for new DB instances that is different from the default certificate provided by RDS. You can also use this operation to remove the override, so that new DB instances use the default certificate provided by RDS. You might need to override the default certificate in the following situations:   You already migrated your applications to support the latest certificate authority (CA) certificate, but the new CA certificate is not yet the RDS default CA certificate for the specified Amazon Web Services Region.   RDS has already moved to a new default CA certificate for the specified Amazon Web Services Region, but you are still in the process of supporting the new CA certificate. In this case, you temporarily need additional time to finish your application changes.   For more information about rotating your SSL/TLS certificate for RDS DB engines, see  Rotating Your SSL/TLS Certificate in the Amazon RDS User Guide. For more information about rotating your SSL/TLS certificate for Aurora DB engines, see  Rotating Your SSL/TLS Certificate in the Amazon Aurora User Guide.
    */
   modifyCertificates(params: RDS.Types.ModifyCertificatesMessage, callback?: (err: AWSError, data: RDS.Types.ModifyCertificatesResult) => void): Request<RDS.Types.ModifyCertificatesResult, AWSError>;
   /**
-   * Override the system-default Secure Sockets Layer/Transport Layer Security (SSL/TLS) certificate for Amazon RDS for new DB instances temporarily, or remove the override. By using this operation, you can specify an RDS-approved SSL/TLS certificate for new DB instances that is different from the default certificate provided by RDS. You can also use this operation to remove the override, so that new DB instances use the default certificate provided by RDS. You might need to override the default certificate in the following situations:   You already migrated your applications to support the latest certificate authority (CA) certificate, but the new CA certificate is not yet the RDS default CA certificate for the specified Amazon Web Services Region.   RDS has already moved to a new default CA certificate for the specified Amazon Web Services Region, but you are still in the process of supporting the new CA certificate. In this case, you temporarily need additional time to finish your application changes.   For more information about rotating your SSL/TLS certificate for RDS DB engines, see  Rotating Your SSL/TLS Certificate in the Amazon RDS User Guide. For more information about rotating your SSL/TLS certificate for Aurora DB engines, see  Rotating Your SSL/TLS Certificate in the Amazon Aurora User Guide.
+   * Override the system-default Secure Sockets Layer/Transport Layer Security (SSL/TLS) certificate for Amazon RDS for new DB instances, or remove the override. By using this operation, you can specify an RDS-approved SSL/TLS certificate for new DB instances that is different from the default certificate provided by RDS. You can also use this operation to remove the override, so that new DB instances use the default certificate provided by RDS. You might need to override the default certificate in the following situations:   You already migrated your applications to support the latest certificate authority (CA) certificate, but the new CA certificate is not yet the RDS default CA certificate for the specified Amazon Web Services Region.   RDS has already moved to a new default CA certificate for the specified Amazon Web Services Region, but you are still in the process of supporting the new CA certificate. In this case, you temporarily need additional time to finish your application changes.   For more information about rotating your SSL/TLS certificate for RDS DB engines, see  Rotating Your SSL/TLS Certificate in the Amazon RDS User Guide. For more information about rotating your SSL/TLS certificate for Aurora DB engines, see  Rotating Your SSL/TLS Certificate in the Amazon Aurora User Guide.
    */
   modifyCertificates(callback?: (err: AWSError, data: RDS.Types.ModifyCertificatesResult) => void): Request<RDS.Types.ModifyCertificatesResult, AWSError>;
   /**
@@ -1616,27 +1568,6 @@ declare namespace RDS {
   export interface CopyOptionGroupResult {
     OptionGroup?: OptionGroup;
   }
-  export interface CreateCustomAvailabilityZoneMessage {
-    /**
-     * The name of the custom Availability Zone (AZ).
-     */
-    CustomAvailabilityZoneName: String;
-    /**
-     * The ID of an existing virtual private network (VPN) between the Amazon RDS website and the VMware vSphere cluster.
-     */
-    ExistingVpnId?: String;
-    /**
-     * The name of a new VPN tunnel between the Amazon RDS website and the VMware vSphere cluster. Specify this parameter only if ExistingVpnId isn't specified.
-     */
-    NewVpnTunnelName?: String;
-    /**
-     * The IP address of network traffic from your on-premises data center. A custom AZ receives the network traffic. Specify this parameter only if ExistingVpnId isn't specified.
-     */
-    VpnTunnelOriginatorIP?: String;
-  }
-  export interface CreateCustomAvailabilityZoneResult {
-    CustomAvailabilityZone?: CustomAvailabilityZone;
-  }
   export interface CreateCustomDBEngineVersionMessage {
     /**
      * The database engine to use for your custom engine version (CEV). The only supported value is custom-oracle-ee.
@@ -1955,7 +1886,7 @@ declare namespace RDS {
      */
     VpcSecurityGroupIds?: VpcSecurityGroupIdList;
     /**
-     * The Availability Zone (AZ) where the database will be created. For information on Amazon Web Services Regions and Availability Zones, see Regions and Availability Zones.  Amazon Aurora  Not applicable. Availability Zones are managed by the DB cluster. Default: A random, system-chosen Availability Zone in the endpoint's Amazon Web Services Region. Example: us-east-1d  Constraint: The AvailabilityZone parameter can't be specified if the DB instance is a Multi-AZ deployment. The specified Availability Zone must be in the same Amazon Web Services Region as the current endpoint.  If you're creating a DB instance in an RDS on VMware environment, specify the identifier of the custom Availability Zone to create the DB instance in. For more information about RDS on VMware, see the  RDS on VMware User Guide.  
+     * The Availability Zone (AZ) where the database will be created. For information on Amazon Web Services Regions and Availability Zones, see Regions and Availability Zones.  Amazon Aurora  Each Aurora DB cluster hosts copies of its storage in three separate Availability Zones. Specify one of these Availability Zones. Aurora automatically chooses an appropriate Availability Zone if you don't specify one. Default: A random, system-chosen Availability Zone in the endpoint's Amazon Web Services Region. Example: us-east-1d  Constraint: The AvailabilityZone parameter can't be specified if the DB instance is a Multi-AZ deployment. The specified Availability Zone must be in the same Amazon Web Services Region as the current endpoint.  If you're creating a DB instance in an RDS on VMware environment, specify the identifier of the custom Availability Zone to create the DB instance in. For more information about RDS on VMware, see the  RDS on VMware User Guide.  
      */
     AvailabilityZone?: String;
     /**
@@ -2497,35 +2428,6 @@ declare namespace RDS {
   }
   export interface CreateOptionGroupResult {
     OptionGroup?: OptionGroup;
-  }
-  export interface CustomAvailabilityZone {
-    /**
-     * The identifier of the custom AZ. Amazon RDS generates a unique identifier when a custom AZ is created.
-     */
-    CustomAvailabilityZoneId?: String;
-    /**
-     * The name of the custom AZ.
-     */
-    CustomAvailabilityZoneName?: String;
-    /**
-     * The status of the custom AZ.
-     */
-    CustomAvailabilityZoneStatus?: String;
-    /**
-     * Information about the virtual private network (VPN) between the VMware vSphere cluster and the Amazon Web Services website.
-     */
-    VpnDetails?: VpnDetails;
-  }
-  export type CustomAvailabilityZoneList = CustomAvailabilityZone[];
-  export interface CustomAvailabilityZoneMessage {
-    /**
-     * An optional pagination token provided by a previous DescribeCustomAvailabilityZones request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
-     */
-    Marker?: String;
-    /**
-     * The list of CustomAvailabilityZone objects for the Amazon Web Services account.
-     */
-    CustomAvailabilityZones?: CustomAvailabilityZoneList;
   }
   export type CustomDBEngineVersionManifest = string;
   export type CustomEngineName = string;
@@ -4194,15 +4096,6 @@ declare namespace RDS {
     DBSubnetGroups?: DBSubnetGroups;
   }
   export type DBSubnetGroups = DBSubnetGroup[];
-  export interface DeleteCustomAvailabilityZoneMessage {
-    /**
-     * The custom AZ identifier.
-     */
-    CustomAvailabilityZoneId: String;
-  }
-  export interface DeleteCustomAvailabilityZoneResult {
-    CustomAvailabilityZone?: CustomAvailabilityZone;
-  }
   export interface DeleteCustomDBEngineVersionMessage {
     /**
      * The database engine. The only supported engine is custom-oracle-ee.
@@ -4354,12 +4247,6 @@ declare namespace RDS {
   export interface DeleteGlobalClusterResult {
     GlobalCluster?: GlobalCluster;
   }
-  export interface DeleteInstallationMediaMessage {
-    /**
-     * The installation medium ID.
-     */
-    InstallationMediaId: String;
-  }
   export interface DeleteOptionGroupMessage {
     /**
      * The name of the option group to be deleted.  You can't delete default option groups. 
@@ -4403,24 +4290,6 @@ declare namespace RDS {
     MaxRecords?: IntegerOptional;
     /**
      * An optional pagination token provided by a previous DescribeCertificates request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
-     */
-    Marker?: String;
-  }
-  export interface DescribeCustomAvailabilityZonesMessage {
-    /**
-     * The custom AZ identifier. If this parameter is specified, information from only the specific custom AZ is returned.
-     */
-    CustomAvailabilityZoneId?: String;
-    /**
-     * A filter that specifies one or more custom AZs to describe.
-     */
-    Filters?: FilterList;
-    /**
-     * The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so you can retrieve the remaining results. Default: 100 Constraints: Minimum 20, maximum 100.
-     */
-    MaxRecords?: IntegerOptional;
-    /**
-     * An optional pagination token provided by a previous DescribeCustomAvailabilityZones request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
      */
     Marker?: String;
   }
@@ -4984,7 +4853,7 @@ declare namespace RDS {
   }
   export interface DescribeEngineDefaultParametersMessage {
     /**
-     * The name of the DB parameter group family.
+     * The name of the DB parameter group family. Valid Values:    aurora5.6     aurora-mysql5.7     aurora-mysql8.0     aurora-postgresql10     aurora-postgresql11     aurora-postgresql12     aurora-postgresql13     mariadb10.2     mariadb10.3     mariadb10.4     mariadb10.5     mariadb10.6     mysql5.7     mysql8.0     postgres10     postgres11     postgres12     postgres13     postgres14     sqlserver-ee-11.0     sqlserver-ee-12.0     sqlserver-ee-13.0     sqlserver-ee-14.0     sqlserver-ee-15.0     sqlserver-ex-11.0     sqlserver-ex-12.0     sqlserver-ex-13.0     sqlserver-ex-14.0     sqlserver-ex-15.0     sqlserver-se-11.0     sqlserver-se-12.0     sqlserver-se-13.0     sqlserver-se-14.0     sqlserver-se-15.0     sqlserver-web-11.0     sqlserver-web-12.0     sqlserver-web-13.0     sqlserver-web-14.0     sqlserver-web-15.0   
      */
     DBParameterGroupFamily: String;
     /**
@@ -5106,24 +4975,6 @@ declare namespace RDS {
     MaxRecords?: IntegerOptional;
     /**
      * An optional pagination token provided by a previous DescribeGlobalClusters request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
-     */
-    Marker?: String;
-  }
-  export interface DescribeInstallationMediaMessage {
-    /**
-     * The installation medium ID.
-     */
-    InstallationMediaId?: String;
-    /**
-     * A filter that specifies one or more installation media to describe. Supported filters include the following:    custom-availability-zone-id - Accepts custom Availability Zone (AZ) identifiers. The results list includes information about only the custom AZs identified by these identifiers.    engine - Accepts database engines. The results list includes information about only the database engines identified by these identifiers. For more information about the valid engines for installation media, see ImportInstallationMedia.  
-     */
-    Filters?: FilterList;
-    /**
-     * An optional pagination token provided by a previous DescribeInstallationMedia request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
-     */
-    MaxRecords?: IntegerOptional;
-    /**
-     * An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
      */
     Marker?: String;
   }
@@ -5780,79 +5631,6 @@ declare namespace RDS {
     CIDRIP?: String;
   }
   export type IPRangeList = IPRange[];
-  export interface ImportInstallationMediaMessage {
-    /**
-     * The identifier of the custom Availability Zone (AZ) to import the installation media to.
-     */
-    CustomAvailabilityZoneId: String;
-    /**
-     * The name of the database engine to be used for this instance. The list only includes supported DB engines that require an on-premises customer provided license. Valid Values:    sqlserver-ee     sqlserver-se     sqlserver-ex     sqlserver-web   
-     */
-    Engine: String;
-    /**
-     * The version number of the database engine to use. For a list of valid engine versions, call DescribeDBEngineVersions. The following are the database engines and links to information about the major and minor versions. The list only includes DB engines that require an on-premises customer provided license.  Microsoft SQL Server  See  Microsoft SQL Server Versions on Amazon RDS in the Amazon RDS User Guide.
-     */
-    EngineVersion: String;
-    /**
-     * The path to the installation medium for the specified DB engine. Example: SQLServerISO/en_sql_server_2016_enterprise_x64_dvd_8701793.iso 
-     */
-    EngineInstallationMediaPath: String;
-    /**
-     * The path to the installation medium for the operating system associated with the specified DB engine. Example: WindowsISO/en_windows_server_2016_x64_dvd_9327751.iso 
-     */
-    OSInstallationMediaPath: String;
-  }
-  export interface InstallationMedia {
-    /**
-     * The installation medium ID.
-     */
-    InstallationMediaId?: String;
-    /**
-     * The custom Availability Zone (AZ) that contains the installation media.
-     */
-    CustomAvailabilityZoneId?: String;
-    /**
-     * The DB engine.
-     */
-    Engine?: String;
-    /**
-     * The engine version of the DB engine.
-     */
-    EngineVersion?: String;
-    /**
-     * The path to the installation medium for the DB engine.
-     */
-    EngineInstallationMediaPath?: String;
-    /**
-     * The path to the installation medium for the operating system associated with the DB engine.
-     */
-    OSInstallationMediaPath?: String;
-    /**
-     * The status of the installation medium.
-     */
-    Status?: String;
-    /**
-     * If an installation media failure occurred, the cause of the failure.
-     */
-    FailureCause?: InstallationMediaFailureCause;
-  }
-  export interface InstallationMediaFailureCause {
-    /**
-     * The reason that an installation media import failed.
-     */
-    Message?: String;
-  }
-  export type InstallationMediaList = InstallationMedia[];
-  export interface InstallationMediaMessage {
-    /**
-     * An optional pagination token provided by a previous DescribeInstallationMedia request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
-     */
-    Marker?: String;
-    /**
-     * The list of InstallationMedia objects for the Amazon Web Services account.
-     */
-    InstallationMedia?: InstallationMediaList;
-  }
   export type Integer = number;
   export type IntegerOptional = number;
   export type KeyList = String[];
@@ -8567,7 +8345,6 @@ declare namespace RDS {
   export type String = string;
   export type String255 = string;
   export type StringList = String[];
-  export type StringSensitive = string;
   export interface Subnet {
     /**
      * The identifier of the subnet.
@@ -8761,32 +8538,6 @@ declare namespace RDS {
     Status?: String;
   }
   export type VpcSecurityGroupMembershipList = VpcSecurityGroupMembership[];
-  export interface VpnDetails {
-    /**
-     * The ID of the VPN.
-     */
-    VpnId?: String;
-    /**
-     * The IP address of network traffic from your on-premises data center. A custom AZ receives the network traffic.
-     */
-    VpnTunnelOriginatorIP?: String;
-    /**
-     * The IP address of network traffic from Amazon Web Services to your on-premises data center.
-     */
-    VpnGatewayIp?: String;
-    /**
-     * The preshared key (PSK) for the VPN.
-     */
-    VpnPSK?: StringSensitive;
-    /**
-     * The name of the VPN.
-     */
-    VpnName?: String;
-    /**
-     * The state of the VPN.
-     */
-    VpnState?: String;
-  }
   export type WriteForwardingStatus = "enabled"|"disabled"|"enabling"|"disabling"|"unknown"|string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
