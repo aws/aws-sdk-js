@@ -3283,11 +3283,19 @@ declare namespace Redshift {
     /**
      * The name of an existing S3 bucket where the log files are to be stored. Constraints:   Must be in the same region as the cluster   The cluster must have read bucket and put object permissions  
      */
-    BucketName: String;
+    BucketName?: String;
     /**
      * The prefix applied to the log file names. Constraints:   Cannot exceed 512 characters   Cannot contain spaces( ), double quotes ("), single quotes ('), a backslash (\), or control characters. The hexadecimal codes for invalid characters are:    x00 to x20   x22   x27   x5c   x7f or larger    
      */
     S3KeyPrefix?: String;
+    /**
+     * The log destination type. An enum with possible values of s3 and cloudwatch.
+     */
+    LogDestinationType?: LogDestinationType;
+    /**
+     * The collection of exported log types. Log types include the connection log, user log and user activity log.
+     */
+    LogExports?: LogTypeList;
   }
   export interface EnableSnapshotCopyMessage {
     /**
@@ -3737,6 +3745,8 @@ declare namespace Redshift {
   export type ImportTablesNotStarted = String[];
   export type Integer = number;
   export type IntegerOptional = number;
+  export type LogDestinationType = "s3"|"cloudwatch"|string;
+  export type LogTypeList = String[];
   export interface LoggingStatus {
     /**
      *  true if logging is on, false if logging is off.
@@ -3762,6 +3772,14 @@ declare namespace Redshift {
      * The message indicating that logs failed to be delivered.
      */
     LastFailureMessage?: String;
+    /**
+     * The log destination type. An enum with possible values of s3 and cloudwatch.
+     */
+    LogDestinationType?: LogDestinationType;
+    /**
+     * The collection of exported log types. Log types include the connection log, user log and user activity log.
+     */
+    LogExports?: LogTypeList;
   }
   export type Long = number;
   export type LongOptional = number;
@@ -4814,7 +4832,7 @@ declare namespace Redshift {
      */
     ManualSnapshotRetentionPeriod?: IntegerOptional;
     /**
-     * The Key Management Service (KMS) key ID of the encryption key to encrypt data in the cluster restored from a shared snapshot. You can also provide the key ID when you restore from an unencrypted snapshot to an encrypted cluster in the same account. Additionally, you can specify a new KMS key ID when you restore from an encrypted snapshot in the same account in order to change it. In that case, the restored cluster is encrypted with the new KMS key ID.
+     * The Key Management Service (KMS) key ID of the encryption key that encrypts data in the cluster restored from a shared snapshot. You can also provide the key ID when you restore from an unencrypted snapshot to an encrypted cluster in the same account. Additionally, you can specify a new KMS key ID when you restore from an encrypted snapshot in the same account in order to change it. In that case, the restored cluster is encrypted with the new KMS key ID.
      */
     KmsKeyId?: String;
     /**
@@ -4866,7 +4884,7 @@ declare namespace Redshift {
      */
     TargetReservedNodeOfferingId?: String;
     /**
-     * Enables support for restoring an unencrypted snapshot to a cluster encrypted with Key Management Service (KMS) and a CMK.
+     * Enables support for restoring an unencrypted snapshot to a cluster encrypted with Key Management Service (KMS) and a customer managed key.
      */
     Encrypted?: BooleanOptional;
   }

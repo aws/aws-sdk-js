@@ -436,6 +436,22 @@ declare class Personalize extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: Personalize.Types.ListTagsForResourceResponse) => void): Request<Personalize.Types.ListTagsForResourceResponse, AWSError>;
   /**
+   * Starts a recommender that is INACTIVE. Starting a recommender does not create any new models, but resumes billing and automatic retraining for the recommender.
+   */
+  startRecommender(params: Personalize.Types.StartRecommenderRequest, callback?: (err: AWSError, data: Personalize.Types.StartRecommenderResponse) => void): Request<Personalize.Types.StartRecommenderResponse, AWSError>;
+  /**
+   * Starts a recommender that is INACTIVE. Starting a recommender does not create any new models, but resumes billing and automatic retraining for the recommender.
+   */
+  startRecommender(callback?: (err: AWSError, data: Personalize.Types.StartRecommenderResponse) => void): Request<Personalize.Types.StartRecommenderResponse, AWSError>;
+  /**
+   * Stops a recommender that is ACTIVE. Stopping a recommender halts billing and automatic retraining for the recommender.
+   */
+  stopRecommender(params: Personalize.Types.StopRecommenderRequest, callback?: (err: AWSError, data: Personalize.Types.StopRecommenderResponse) => void): Request<Personalize.Types.StopRecommenderResponse, AWSError>;
+  /**
+   * Stops a recommender that is ACTIVE. Stopping a recommender halts billing and automatic retraining for the recommender.
+   */
+  stopRecommender(callback?: (err: AWSError, data: Personalize.Types.StopRecommenderResponse) => void): Request<Personalize.Types.StopRecommenderResponse, AWSError>;
+  /**
    * Stops creating a solution version that is in a state of CREATE_PENDING or CREATE IN_PROGRESS.  Depending on the current state of the solution version, the solution version state changes as follows:   CREATE_PENDING &gt; CREATE_STOPPED or   CREATE_IN_PROGRESS &gt; CREATE_STOPPING &gt; CREATE_STOPPED   You are billed for all of the training completed up until you stop the solution version creation. You cannot resume creating a solution version once it has been stopped.
    */
   stopSolutionVersionCreation(params: Personalize.Types.StopSolutionVersionCreationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -460,11 +476,11 @@ declare class Personalize extends Service {
    */
   untagResource(callback?: (err: AWSError, data: Personalize.Types.UntagResourceResponse) => void): Request<Personalize.Types.UntagResourceResponse, AWSError>;
   /**
-   * Updates a campaign by either deploying a new solution or changing the value of the campaign's minProvisionedTPS parameter. To update a campaign, the campaign status must be ACTIVE or CREATE FAILED. Check the campaign status using the DescribeCampaign operation.  You must wait until the status of the updated campaign is ACTIVE before asking the campaign for recommendations.  For more information on campaigns, see CreateCampaign.
+   * Updates a campaign by either deploying a new solution or changing the value of the campaign's minProvisionedTPS parameter. To update a campaign, the campaign status must be ACTIVE or CREATE FAILED. Check the campaign status using the DescribeCampaign operation.  You can still get recommendations from a campaign while an update is in progress. The campaign will use the previous solution version and campaign configuration to generate recommendations until the latest campaign update status is Active.   For more information on campaigns, see CreateCampaign.
    */
   updateCampaign(params: Personalize.Types.UpdateCampaignRequest, callback?: (err: AWSError, data: Personalize.Types.UpdateCampaignResponse) => void): Request<Personalize.Types.UpdateCampaignResponse, AWSError>;
   /**
-   * Updates a campaign by either deploying a new solution or changing the value of the campaign's minProvisionedTPS parameter. To update a campaign, the campaign status must be ACTIVE or CREATE FAILED. Check the campaign status using the DescribeCampaign operation.  You must wait until the status of the updated campaign is ACTIVE before asking the campaign for recommendations.  For more information on campaigns, see CreateCampaign.
+   * Updates a campaign by either deploying a new solution or changing the value of the campaign's minProvisionedTPS parameter. To update a campaign, the campaign status must be ACTIVE or CREATE FAILED. Check the campaign status using the DescribeCampaign operation.  You can still get recommendations from a campaign while an update is in progress. The campaign will use the previous solution version and campaign configuration to generate recommendations until the latest campaign update status is Active.   For more information on campaigns, see CreateCampaign.
    */
   updateCampaign(callback?: (err: AWSError, data: Personalize.Types.UpdateCampaignResponse) => void): Request<Personalize.Types.UpdateCampaignResponse, AWSError>;
   /**
@@ -2880,7 +2896,31 @@ declare namespace Personalize {
   }
   export type SolutionVersions = SolutionVersionSummary[];
   export type Solutions = SolutionSummary[];
+  export interface StartRecommenderRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the recommender to start.
+     */
+    recommenderArn: Arn;
+  }
+  export interface StartRecommenderResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the recommender you started.
+     */
+    recommenderArn?: Arn;
+  }
   export type Status = string;
+  export interface StopRecommenderRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the recommender to stop.
+     */
+    recommenderArn: Arn;
+  }
+  export interface StopRecommenderResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the recommender you stopped.
+     */
+    recommenderArn?: Arn;
+  }
   export interface StopSolutionVersionCreationRequest {
     /**
      * The Amazon Resource Name (ARN) of the solution version you want to stop creating.

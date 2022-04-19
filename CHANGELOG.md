@@ -1,6 +1,17 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1116.0-->
+<!--LATEST=2.1117.0-->
 <!--ENTRYINSERT-->
+
+## 2.1117.0
+* feature: AutoScaling: EC2 Auto Scaling now adds default instance warm-up times for all scaling activities, health check replacements, and other replacement events in the Auto Scaling instance lifecycle.
+* feature: KMS: Adds support for KMS keys and APIs that generate and verify HMAC codes
+* feature: Kendra: Amazon Kendra now provides a data source connector for Quip. For more information, see https://docs.aws.amazon.com/kendra/latest/dg/data-source-quip.html
+* feature: Personalize: Adding StartRecommender and StopRecommender APIs for Personalize.
+* feature: Polly: Amazon Polly adds new Austrian German voice - Hannah. Hannah is available as Neural voice only.
+* feature: Redshift: Introduces new fields for LogDestinationType and LogExports on EnableLogging requests and Enable/Disable/DescribeLogging responses. Customers can now select CloudWatch Logs as a destination for their Audit Logs.
+* feature: SSM: Added offset support for specifying the number of days to wait after the date and time specified by a CRON expression when creating SSM association.
+* feature: Textract: This release adds support for specifying and extracting information from documents using the Queries feature within Analyze Document API
+* feature: WorkLink: Amazon WorkLink is no longer supported. This will be removed in a future version of the SDK.
 
 ## 2.1116.0
 * feature: Athena: This release adds subfields, ErrorMessage, Retryable, to the AthenaError response object in the GetQueryExecution API when a query fails.

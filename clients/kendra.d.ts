@@ -1336,6 +1336,10 @@ declare namespace Kendra {
      * Provides the configuration information to connect to Box as your data source.
      */
     BoxConfiguration?: BoxConfiguration;
+    /**
+     * Provides the configuration information to connect to Quip as your data source.
+     */
+    QuipConfiguration?: QuipConfiguration;
   }
   export type DataSourceDateFieldFormat = string;
   export type DataSourceFieldName = string;
@@ -1471,7 +1475,7 @@ declare namespace Kendra {
     IndexFieldName: IndexFieldName;
   }
   export type DataSourceToIndexFieldMappingList = DataSourceToIndexFieldMapping[];
-  export type DataSourceType = "S3"|"SHAREPOINT"|"DATABASE"|"SALESFORCE"|"ONEDRIVE"|"SERVICENOW"|"CUSTOM"|"CONFLUENCE"|"GOOGLEDRIVE"|"WEBCRAWLER"|"WORKDOCS"|"FSX"|"SLACK"|"BOX"|string;
+  export type DataSourceType = "S3"|"SHAREPOINT"|"DATABASE"|"SALESFORCE"|"ONEDRIVE"|"SERVICENOW"|"CUSTOM"|"CONFLUENCE"|"GOOGLEDRIVE"|"WEBCRAWLER"|"WORKDOCS"|"FSX"|"SLACK"|"BOX"|"QUIP"|string;
   export interface DataSourceVpcConfiguration {
     /**
      * A list of identifiers for subnets within your Amazon VPC. The subnets should be able to connect to each other in the VPC, and they should have outgoing access to the Internet through a NAT device.
@@ -2232,6 +2236,7 @@ declare namespace Kendra {
      */
     S3Prefix?: S3ObjectKey;
   }
+  export type Domain = string;
   export type Duration = string;
   export type Endpoint = string;
   export type EndpointType = "HOME"|string;
@@ -2427,6 +2432,8 @@ declare namespace Kendra {
   export type FaqSummaryItems = FaqSummary[];
   export type FeedbackToken = string;
   export type FileSystemId = string;
+  export type FolderId = string;
+  export type FolderIdList = FolderId[];
   export interface FsxConfiguration {
     /**
      * The identifier of the Amazon FSx file system. You can find your file system ID on the file system dashboard in the Amazon FSx console. For information on how to create a file system in Amazon FSx console, using Windows File Server as an example, see Amazon FSx Getting started guide.
@@ -3357,6 +3364,56 @@ declare namespace Kendra {
   export type QuerySuggestionsId = string;
   export type QuerySuggestionsStatus = "ACTIVE"|"UPDATING"|string;
   export type QueryText = string;
+  export interface QuipConfiguration {
+    /**
+     * The configuration information to connect to your Quip data source domain.
+     */
+    Domain: Domain;
+    /**
+     * The Amazon Resource Name (ARN) of an Secrets Manager secret that contains the key-value pairs that are required to connect to your Quip file system. Windows is currently the only supported type. The secret must contain a JSON structure with the following keys:   username—The Active Directory user name, along with the Domain Name System (DNS) domain name. For example, user@corp.example.com. The Active Directory user account must have read and mounting access to the Quip file system for Windows.   password—The password of the Active Directory user account with read and mounting access to the Quip Windows file system.  
+     */
+    SecretArn: SecretArn;
+    /**
+     * Specify whether to crawl file comments in your Quip data source. You can specify one or more of these options.
+     */
+    CrawlFileComments?: Boolean;
+    /**
+     * Specify whether to crawl chat rooms in your Quip data source. You can specify one or more of these options.
+     */
+    CrawlChatRooms?: Boolean;
+    /**
+     * Specify whether to crawl attachments in your Quip data source. You can specify one or more of these options.
+     */
+    CrawlAttachments?: Boolean;
+    /**
+     * The identifier of the Quip folder IDs to index.
+     */
+    FolderIds?: FolderIdList;
+    /**
+     * A list of field mappings to apply when indexing Quip threads.
+     */
+    ThreadFieldMappings?: DataSourceToIndexFieldMappingList;
+    /**
+     * A list of field mappings to apply when indexing Quip messages.
+     */
+    MessageFieldMappings?: DataSourceToIndexFieldMappingList;
+    /**
+     * A list of field mappings to apply when indexing Quip attachments.
+     */
+    AttachmentFieldMappings?: DataSourceToIndexFieldMappingList;
+    /**
+     * A list of regular expression patterns to include certain files in your Quip file system. Files that match the patterns are included in the index. Files that don't match the patterns are excluded from the index. If a file matches both an inclusion pattern and an exclusion pattern, the exclusion pattern takes precedence, and the file isn't included in the index.
+     */
+    InclusionPatterns?: DataSourceInclusionsExclusionsStrings;
+    /**
+     * A list of regular expression patterns to exclude certain files in your Quip file system. Files that match the patterns are excluded from the index. Files that don’t match the patterns are included in the index. If a file matches both an inclusion pattern and an exclusion pattern, the exclusion pattern takes precedence, and the file isn't included in the index.
+     */
+    ExclusionPatterns?: DataSourceInclusionsExclusionsStrings;
+    /**
+     * Configuration information for connecting to an Amazon Virtual Private Cloud (VPC) for your Quip. Your Quip instance must reside inside your VPC.
+     */
+    VpcConfiguration?: DataSourceVpcConfiguration;
+  }
   export type ReadAccessType = "ALLOW"|"DENY"|string;
   export interface Relevance {
     /**
