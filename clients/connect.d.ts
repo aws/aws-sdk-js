@@ -60,6 +60,14 @@ declare class Connect extends Service {
    */
   associateLexBot(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Associates a contact flow with a phone number claimed to your Amazon Connect instance.
+   */
+  associatePhoneNumberContactFlow(params: Connect.Types.AssociatePhoneNumberContactFlowRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Associates a contact flow with a phone number claimed to your Amazon Connect instance.
+   */
+  associatePhoneNumberContactFlow(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * This API is in preview release for Amazon Connect and is subject to change. Associates a set of quick connects with a queue.
    */
   associateQueueQuickConnects(params: Connect.Types.AssociateQueueQuickConnectsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -83,6 +91,14 @@ declare class Connect extends Service {
    * This API is in preview release for Amazon Connect and is subject to change. Associates a security key to the instance.
    */
   associateSecurityKey(callback?: (err: AWSError, data: Connect.Types.AssociateSecurityKeyResponse) => void): Request<Connect.Types.AssociateSecurityKeyResponse, AWSError>;
+  /**
+   * Claims an available phone number to your Amazon Connect instance.
+   */
+  claimPhoneNumber(params: Connect.Types.ClaimPhoneNumberRequest, callback?: (err: AWSError, data: Connect.Types.ClaimPhoneNumberResponse) => void): Request<Connect.Types.ClaimPhoneNumberResponse, AWSError>;
+  /**
+   * Claims an available phone number to your Amazon Connect instance.
+   */
+  claimPhoneNumber(callback?: (err: AWSError, data: Connect.Types.ClaimPhoneNumberResponse) => void): Request<Connect.Types.ClaimPhoneNumberResponse, AWSError>;
   /**
    * This API is in preview release for Amazon Connect and is subject to change. Creates an agent status for the specified Amazon Connect instance.
    */
@@ -348,6 +364,14 @@ declare class Connect extends Service {
    */
   describeInstanceStorageConfig(callback?: (err: AWSError, data: Connect.Types.DescribeInstanceStorageConfigResponse) => void): Request<Connect.Types.DescribeInstanceStorageConfigResponse, AWSError>;
   /**
+   * Gets details and status of a phone number that’s claimed to your Amazon Connect instance
+   */
+  describePhoneNumber(params: Connect.Types.DescribePhoneNumberRequest, callback?: (err: AWSError, data: Connect.Types.DescribePhoneNumberResponse) => void): Request<Connect.Types.DescribePhoneNumberResponse, AWSError>;
+  /**
+   * Gets details and status of a phone number that’s claimed to your Amazon Connect instance
+   */
+  describePhoneNumber(callback?: (err: AWSError, data: Connect.Types.DescribePhoneNumberResponse) => void): Request<Connect.Types.DescribePhoneNumberResponse, AWSError>;
+  /**
    * This API is in preview release for Amazon Connect and is subject to change. Describes the specified queue.
    */
   describeQueue(params: Connect.Types.DescribeQueueRequest, callback?: (err: AWSError, data: Connect.Types.DescribeQueueResponse) => void): Request<Connect.Types.DescribeQueueResponse, AWSError>;
@@ -451,6 +475,14 @@ declare class Connect extends Service {
    * This API is in preview release for Amazon Connect and is subject to change. Revokes authorization from the specified instance to access the specified Amazon Lex bot.
    */
   disassociateLexBot(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Removes the contact flow association from a phone number claimed to your Amazon Connect instance, if a contact flow association exists.
+   */
+  disassociatePhoneNumberContactFlow(params: Connect.Types.DisassociatePhoneNumberContactFlowRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Removes the contact flow association from a phone number claimed to your Amazon Connect instance, if a contact flow association exists.
+   */
+  disassociatePhoneNumberContactFlow(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * This API is in preview release for Amazon Connect and is subject to change. Disassociates a set of quick connects from a queue.
    */
@@ -628,6 +660,14 @@ declare class Connect extends Service {
    */
   listPhoneNumbers(callback?: (err: AWSError, data: Connect.Types.ListPhoneNumbersResponse) => void): Request<Connect.Types.ListPhoneNumbersResponse, AWSError>;
   /**
+   * Lists phone numbers claimed to your Amazon Connect instance.  For more information about phone numbers, see Set Up Phone Numbers for Your Contact Center in the Amazon Connect Administrator Guide.
+   */
+  listPhoneNumbersV2(params: Connect.Types.ListPhoneNumbersV2Request, callback?: (err: AWSError, data: Connect.Types.ListPhoneNumbersV2Response) => void): Request<Connect.Types.ListPhoneNumbersV2Response, AWSError>;
+  /**
+   * Lists phone numbers claimed to your Amazon Connect instance.  For more information about phone numbers, see Set Up Phone Numbers for Your Contact Center in the Amazon Connect Administrator Guide.
+   */
+  listPhoneNumbersV2(callback?: (err: AWSError, data: Connect.Types.ListPhoneNumbersV2Response) => void): Request<Connect.Types.ListPhoneNumbersV2Response, AWSError>;
+  /**
    * Provides information about the prompts for the specified Amazon Connect instance.
    */
   listPrompts(params: Connect.Types.ListPromptsRequest, callback?: (err: AWSError, data: Connect.Types.ListPromptsResponse) => void): Request<Connect.Types.ListPromptsResponse, AWSError>;
@@ -732,6 +772,14 @@ declare class Connect extends Service {
    */
   listUsers(callback?: (err: AWSError, data: Connect.Types.ListUsersResponse) => void): Request<Connect.Types.ListUsersResponse, AWSError>;
   /**
+   * Releases a phone number previously claimed to an Amazon Connect instance.
+   */
+  releasePhoneNumber(params: Connect.Types.ReleasePhoneNumberRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Releases a phone number previously claimed to an Amazon Connect instance.
+   */
+  releasePhoneNumber(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * When a contact is being recorded, and the recording has been suspended using SuspendContactRecording, this API resumes recording the call. Only voice recordings are supported at this time.
    */
   resumeContactRecording(params: Connect.Types.ResumeContactRecordingRequest, callback?: (err: AWSError, data: Connect.Types.ResumeContactRecordingResponse) => void): Request<Connect.Types.ResumeContactRecordingResponse, AWSError>;
@@ -739,6 +787,14 @@ declare class Connect extends Service {
    * When a contact is being recorded, and the recording has been suspended using SuspendContactRecording, this API resumes recording the call. Only voice recordings are supported at this time.
    */
   resumeContactRecording(callback?: (err: AWSError, data: Connect.Types.ResumeContactRecordingResponse) => void): Request<Connect.Types.ResumeContactRecordingResponse, AWSError>;
+  /**
+   * Searches for available phone numbers that you can claim to your Amazon Connect instance.
+   */
+  searchAvailablePhoneNumbers(params: Connect.Types.SearchAvailablePhoneNumbersRequest, callback?: (err: AWSError, data: Connect.Types.SearchAvailablePhoneNumbersResponse) => void): Request<Connect.Types.SearchAvailablePhoneNumbersResponse, AWSError>;
+  /**
+   * Searches for available phone numbers that you can claim to your Amazon Connect instance.
+   */
+  searchAvailablePhoneNumbers(callback?: (err: AWSError, data: Connect.Types.SearchAvailablePhoneNumbersResponse) => void): Request<Connect.Types.SearchAvailablePhoneNumbersResponse, AWSError>;
   /**
    * Searches for vocabularies within a specific Amazon Connect instance using State, NameStartsWith, and LanguageCode.
    */
@@ -820,11 +876,11 @@ declare class Connect extends Service {
    */
   suspendContactRecording(callback?: (err: AWSError, data: Connect.Types.SuspendContactRecordingResponse) => void): Request<Connect.Types.SuspendContactRecordingResponse, AWSError>;
   /**
-   * Adds the specified tags to the specified resource. The supported resource types are users, routing profiles, queues, quick connects, contact flows, agent status, and hours of operation. For sample policies that use tags, see Amazon Connect Identity-Based Policy Examples in the Amazon Connect Administrator Guide.
+   * Adds the specified tags to the specified resource. The supported resource types are users, routing profiles, queues, quick connects, contact flows, agent status, hours of operation, and phone number. For sample policies that use tags, see Amazon Connect Identity-Based Policy Examples in the Amazon Connect Administrator Guide.
    */
   tagResource(params: Connect.Types.TagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Adds the specified tags to the specified resource. The supported resource types are users, routing profiles, queues, quick connects, contact flows, agent status, and hours of operation. For sample policies that use tags, see Amazon Connect Identity-Based Policy Examples in the Amazon Connect Administrator Guide.
+   * Adds the specified tags to the specified resource. The supported resource types are users, routing profiles, queues, quick connects, contact flows, agent status, hours of operation, and phone number. For sample policies that use tags, see Amazon Connect Identity-Based Policy Examples in the Amazon Connect Administrator Guide.
    */
   tagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -931,6 +987,14 @@ declare class Connect extends Service {
    * This API is in preview release for Amazon Connect and is subject to change. Updates an existing configuration for a resource type. This API is idempotent.
    */
   updateInstanceStorageConfig(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Updates your claimed phone number from its current Amazon Connect instance to another Amazon Connect instance in the same Region.
+   */
+  updatePhoneNumber(params: Connect.Types.UpdatePhoneNumberRequest, callback?: (err: AWSError, data: Connect.Types.UpdatePhoneNumberResponse) => void): Request<Connect.Types.UpdatePhoneNumberResponse, AWSError>;
+  /**
+   * Updates your claimed phone number from its current Amazon Connect instance to another Amazon Connect instance in the same Region.
+   */
+  updatePhoneNumber(callback?: (err: AWSError, data: Connect.Types.UpdatePhoneNumberResponse) => void): Request<Connect.Types.UpdatePhoneNumberResponse, AWSError>;
   /**
    * This API is in preview release for Amazon Connect and is subject to change. Updates the hours of operation for the specified queue.
    */
@@ -1249,6 +1313,20 @@ declare namespace Connect {
      */
     LexBot: LexBot;
   }
+  export interface AssociatePhoneNumberContactFlowRequest {
+    /**
+     * A unique identifier for the phone number.
+     */
+    PhoneNumberId: PhoneNumberId;
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The identifier of the contact flow.
+     */
+    ContactFlowId: ContactFlowId;
+  }
   export interface AssociateQueueQuickConnectsRequest {
     /**
      * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
@@ -1323,6 +1401,21 @@ declare namespace Connect {
   export type Attributes = {[key: string]: AttributeValue};
   export type AttributesList = Attribute[];
   export type AutoAccept = boolean;
+  export interface AvailableNumberSummary {
+    /**
+     * The phone number. Phone numbers are formatted [+] [country code] [subscriber number including area code].
+     */
+    PhoneNumber?: PhoneNumber;
+    /**
+     * The ISO country code.
+     */
+    PhoneNumberCountryCode?: PhoneNumberCountryCode;
+    /**
+     * The type of phone number.
+     */
+    PhoneNumberType?: PhoneNumberType;
+  }
+  export type AvailableNumbersList = AvailableNumberSummary[];
   export type Boolean = boolean;
   export type BotName = string;
   export type BucketName = string;
@@ -1349,6 +1442,76 @@ declare namespace Connect {
     StreamingEndpointArn: ChatStreamingEndpointARN;
   }
   export type ChatStreamingEndpointARN = string;
+  export interface ClaimPhoneNumberRequest {
+    /**
+     * The Amazon Resource Name (ARN) for Amazon Connect instances that phone numbers are claimed to.
+     */
+    TargetArn: ARN;
+    /**
+     * The phone number you want to claim. Phone numbers are formatted [+] [country code] [subscriber number including area code].
+     */
+    PhoneNumber: PhoneNumber;
+    /**
+     * The description of the phone number.
+     */
+    PhoneNumberDescription?: PhoneNumberDescription;
+    /**
+     * The tags used to organize, track, or control access for this resource.
+     */
+    Tags?: TagMap;
+    /**
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+     */
+    ClientToken?: ClientToken;
+  }
+  export interface ClaimPhoneNumberResponse {
+    /**
+     * The identifier of the phone number.
+     */
+    PhoneNumberId?: PhoneNumberId;
+    /**
+     * The Amazon Resource Name (ARN) of the phone number.
+     */
+    PhoneNumberArn?: ARN;
+  }
+  export interface ClaimedPhoneNumberSummary {
+    /**
+     * The identifier of the phone number.
+     */
+    PhoneNumberId?: PhoneNumberId;
+    /**
+     * The Amazon Resource Name (ARN) of the phone number.
+     */
+    PhoneNumberArn?: ARN;
+    /**
+     * The phone number. Phone numbers are formatted [+] [country code] [subscriber number including area code].
+     */
+    PhoneNumber?: PhoneNumber;
+    /**
+     * The ISO country code.
+     */
+    PhoneNumberCountryCode?: PhoneNumberCountryCode;
+    /**
+     * The type of phone number.
+     */
+    PhoneNumberType?: PhoneNumberType;
+    /**
+     * The description of the phone number.
+     */
+    PhoneNumberDescription?: PhoneNumberDescription;
+    /**
+     * The Amazon Resource Name (ARN) for Amazon Connect instances that phone numbers are claimed to.
+     */
+    TargetArn?: ARN;
+    /**
+     * The tags used to organize, track, or control access for this resource.
+     */
+    Tags?: TagMap;
+    /**
+     * The status of the phone number.
+     */
+    PhoneNumberStatus?: PhoneNumberStatus;
+  }
   export type ClientToken = string;
   export type CommonNameLength127 = string;
   export type Comparison = "LT"|string;
@@ -2379,6 +2542,18 @@ declare namespace Connect {
      */
     StorageConfig?: InstanceStorageConfig;
   }
+  export interface DescribePhoneNumberRequest {
+    /**
+     * The identifier of the phone number.
+     */
+    PhoneNumberId: PhoneNumberId;
+  }
+  export interface DescribePhoneNumberResponse {
+    /**
+     * Information about a phone number that's been claimed to your Amazon Connect instance. 
+     */
+    ClaimedPhoneNumberSummary?: ClaimedPhoneNumberSummary;
+  }
   export interface DescribeQueueRequest {
     /**
      * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
@@ -2576,6 +2751,16 @@ declare namespace Connect {
      * The Region in which the Amazon Lex bot has been created.
      */
     LexRegion: LexRegion;
+  }
+  export interface DisassociatePhoneNumberContactFlowRequest {
+    /**
+     * The identifier of the phone number.
+     */
+    PhoneNumberId: PhoneNumberId;
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     */
+    InstanceId: InstanceId;
   }
   export interface DisassociateQueueQuickConnectsRequest {
     /**
@@ -3187,6 +3372,7 @@ declare namespace Connect {
      */
     EncryptionConfig: EncryptionConfig;
   }
+  export type LargeNextToken = string;
   export interface LexBot {
     /**
      * The name of the Amazon Lex bot.
@@ -3610,6 +3796,69 @@ declare namespace Connect {
      */
     NextToken?: NextToken;
   }
+  export interface ListPhoneNumbersSummary {
+    /**
+     * The identifier of the phone number.
+     */
+    PhoneNumberId?: PhoneNumberId;
+    /**
+     * The Amazon Resource Name (ARN) of the phone number.
+     */
+    PhoneNumberArn?: ARN;
+    /**
+     * The phone number. Phone numbers are formatted [+] [country code] [subscriber number including area code].
+     */
+    PhoneNumber?: PhoneNumber;
+    /**
+     * The ISO country code.
+     */
+    PhoneNumberCountryCode?: PhoneNumberCountryCode;
+    /**
+     * The type of phone number.
+     */
+    PhoneNumberType?: PhoneNumberType;
+    /**
+     * The Amazon Resource Name (ARN) for Amazon Connect instances that phone numbers are claimed to.
+     */
+    TargetArn?: ARN;
+  }
+  export type ListPhoneNumbersSummaryList = ListPhoneNumbersSummary[];
+  export interface ListPhoneNumbersV2Request {
+    /**
+     * The Amazon Resource Name (ARN) for Amazon Connect instances that phone numbers are claimed to. If TargetArn input is not provided, this API lists numbers claimed to all the Amazon Connect instances belonging to your account.
+     */
+    TargetArn?: ARN;
+    /**
+     * The maximum number of results to return per page.
+     */
+    MaxResults?: MaxResult1000;
+    /**
+     * The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+     */
+    NextToken?: LargeNextToken;
+    /**
+     * The ISO country code.
+     */
+    PhoneNumberCountryCodes?: PhoneNumberCountryCodes;
+    /**
+     * The type of phone number.
+     */
+    PhoneNumberTypes?: PhoneNumberTypes;
+    /**
+     * The prefix of the phone number. If provided, it must contain + as part of the country code.
+     */
+    PhoneNumberPrefix?: PhoneNumberPrefix;
+  }
+  export interface ListPhoneNumbersV2Response {
+    /**
+     * If there are additional results, this is the token for the next set of results.
+     */
+    NextToken?: LargeNextToken;
+    /**
+     * Information about phone numbers that have been claimed to your Amazon Connect instances.
+     */
+    ListPhoneNumbersSummaryList?: ListPhoneNumbersSummaryList;
+  }
   export interface ListPromptsRequest {
     /**
      * The identifier of the Amazon Connect instance.
@@ -3986,12 +4235,24 @@ declare namespace Connect {
   export type PhoneNumber = string;
   export type PhoneNumberCountryCode = "AF"|"AL"|"DZ"|"AS"|"AD"|"AO"|"AI"|"AQ"|"AG"|"AR"|"AM"|"AW"|"AU"|"AT"|"AZ"|"BS"|"BH"|"BD"|"BB"|"BY"|"BE"|"BZ"|"BJ"|"BM"|"BT"|"BO"|"BA"|"BW"|"BR"|"IO"|"VG"|"BN"|"BG"|"BF"|"BI"|"KH"|"CM"|"CA"|"CV"|"KY"|"CF"|"TD"|"CL"|"CN"|"CX"|"CC"|"CO"|"KM"|"CK"|"CR"|"HR"|"CU"|"CW"|"CY"|"CZ"|"CD"|"DK"|"DJ"|"DM"|"DO"|"TL"|"EC"|"EG"|"SV"|"GQ"|"ER"|"EE"|"ET"|"FK"|"FO"|"FJ"|"FI"|"FR"|"PF"|"GA"|"GM"|"GE"|"DE"|"GH"|"GI"|"GR"|"GL"|"GD"|"GU"|"GT"|"GG"|"GN"|"GW"|"GY"|"HT"|"HN"|"HK"|"HU"|"IS"|"IN"|"ID"|"IR"|"IQ"|"IE"|"IM"|"IL"|"IT"|"CI"|"JM"|"JP"|"JE"|"JO"|"KZ"|"KE"|"KI"|"KW"|"KG"|"LA"|"LV"|"LB"|"LS"|"LR"|"LY"|"LI"|"LT"|"LU"|"MO"|"MK"|"MG"|"MW"|"MY"|"MV"|"ML"|"MT"|"MH"|"MR"|"MU"|"YT"|"MX"|"FM"|"MD"|"MC"|"MN"|"ME"|"MS"|"MA"|"MZ"|"MM"|"NA"|"NR"|"NP"|"NL"|"AN"|"NC"|"NZ"|"NI"|"NE"|"NG"|"NU"|"KP"|"MP"|"NO"|"OM"|"PK"|"PW"|"PA"|"PG"|"PY"|"PE"|"PH"|"PN"|"PL"|"PT"|"PR"|"QA"|"CG"|"RE"|"RO"|"RU"|"RW"|"BL"|"SH"|"KN"|"LC"|"MF"|"PM"|"VC"|"WS"|"SM"|"ST"|"SA"|"SN"|"RS"|"SC"|"SL"|"SG"|"SX"|"SK"|"SI"|"SB"|"SO"|"ZA"|"KR"|"ES"|"LK"|"SD"|"SR"|"SJ"|"SZ"|"SE"|"CH"|"SY"|"TW"|"TJ"|"TZ"|"TH"|"TG"|"TK"|"TO"|"TT"|"TN"|"TR"|"TM"|"TC"|"TV"|"VI"|"UG"|"UA"|"AE"|"GB"|"US"|"UY"|"UZ"|"VU"|"VA"|"VE"|"VN"|"WF"|"EH"|"YE"|"ZM"|"ZW"|string;
   export type PhoneNumberCountryCodes = PhoneNumberCountryCode[];
+  export type PhoneNumberDescription = string;
   export type PhoneNumberId = string;
+  export type PhoneNumberPrefix = string;
   export interface PhoneNumberQuickConnectConfig {
     /**
      * The phone number in E.164 format.
      */
     PhoneNumber: PhoneNumber;
+  }
+  export interface PhoneNumberStatus {
+    /**
+     * The status.
+     */
+    Status?: PhoneNumberWorkflowStatus;
+    /**
+     * The status message.
+     */
+    Message?: PhoneNumberWorkflowMessage;
   }
   export interface PhoneNumberSummary {
     /**
@@ -4018,6 +4279,8 @@ declare namespace Connect {
   export type PhoneNumberSummaryList = PhoneNumberSummary[];
   export type PhoneNumberType = "TOLL_FREE"|"DID"|string;
   export type PhoneNumberTypes = PhoneNumberType[];
+  export type PhoneNumberWorkflowMessage = string;
+  export type PhoneNumberWorkflowStatus = "CLAIMED"|"IN_PROGRESS"|"FAILED"|string;
   export type PhoneType = "SOFT_PHONE"|"DESK_PHONE"|string;
   export type Prefix = string;
   export type Priority = number;
@@ -4228,6 +4491,16 @@ declare namespace Connect {
   export type ReferenceType = "URL"|"ATTACHMENT"|string;
   export type ReferenceTypes = ReferenceType[];
   export type ReferenceValue = string;
+  export interface ReleasePhoneNumberRequest {
+    /**
+     * The identifier of the phone number.
+     */
+    PhoneNumberId: PhoneNumberId;
+    /**
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+     */
+    ClientToken?: ClientToken;
+  }
   export interface ResumeContactRecordingRequest {
     /**
      * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
@@ -4362,6 +4635,42 @@ declare namespace Connect {
      * The Amazon S3 encryption configuration.
      */
     EncryptionConfig?: EncryptionConfig;
+  }
+  export interface SearchAvailablePhoneNumbersRequest {
+    /**
+     * The Amazon Resource Name (ARN) for Amazon Connect instances that phone numbers are claimed to.
+     */
+    TargetArn: ARN;
+    /**
+     * The ISO country code.
+     */
+    PhoneNumberCountryCode: PhoneNumberCountryCode;
+    /**
+     * The type of phone number.
+     */
+    PhoneNumberType: PhoneNumberType;
+    /**
+     * The prefix of the phone number. If provided, it must contain + as part of the country code.
+     */
+    PhoneNumberPrefix?: PhoneNumberPrefix;
+    /**
+     * The maximum number of results to return per page.
+     */
+    MaxResults?: MaxResult10;
+    /**
+     * The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+     */
+    NextToken?: LargeNextToken;
+  }
+  export interface SearchAvailablePhoneNumbersResponse {
+    /**
+     * If there are additional results, this is the token for the next set of results.
+     */
+    NextToken?: LargeNextToken;
+    /**
+     * A list of available phone numbers that you can claim for your Amazon Connect instance.
+     */
+    AvailableNumbersList?: AvailableNumbersList;
   }
   export interface SearchVocabulariesRequest {
     /**
@@ -4989,6 +5298,30 @@ declare namespace Connect {
      */
     ResourceType: InstanceStorageResourceType;
     StorageConfig: InstanceStorageConfig;
+  }
+  export interface UpdatePhoneNumberRequest {
+    /**
+     * The identifier of the phone number.
+     */
+    PhoneNumberId: PhoneNumberId;
+    /**
+     * The Amazon Resource Name (ARN) for Amazon Connect instances that phone numbers are claimed to.
+     */
+    TargetArn: ARN;
+    /**
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+     */
+    ClientToken?: ClientToken;
+  }
+  export interface UpdatePhoneNumberResponse {
+    /**
+     * The identifier of the phone number.
+     */
+    PhoneNumberId?: PhoneNumberId;
+    /**
+     * The Amazon Resource Name (ARN) of the phone number.
+     */
+    PhoneNumberArn?: ARN;
   }
   export interface UpdateQueueHoursOfOperationRequest {
     /**

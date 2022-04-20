@@ -1225,9 +1225,6 @@
     },
     "DescribeJobsRequest": {
       "type": "structure",
-      "required": [
-        "filters"
-      ],
       "members": {
         "filters": {
           "shape": "DescribeJobsRequestFilters",
@@ -1284,9 +1281,6 @@
     },
     "DescribeReplicationConfigurationTemplatesRequest": {
       "type": "structure",
-      "required": [
-        "replicationConfigurationTemplateIDs"
-      ],
       "members": {
         "maxResults": {
           "shape": "StrictlyPositiveInteger",
@@ -1317,9 +1311,6 @@
     },
     "DescribeSourceServersRequest": {
       "type": "structure",
-      "required": [
-        "filters"
-      ],
       "members": {
         "filters": {
           "shape": "DescribeSourceServersRequestFilters",

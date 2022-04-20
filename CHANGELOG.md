@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1117.0-->
+<!--LATEST=2.1118.0-->
 <!--ENTRYINSERT-->
+
+## 2.1118.0
+* feature: Connect: This release adds APIs to search, claim, release, list, update, and describe phone numbers. You can also use them to associate and disassociate contact flows to phone numbers.
+* feature: Macie2: Sensitive data findings in Amazon Macie now indicate how Macie found the sensitive data that produced a finding (originType).
+* feature: Mgn: Removed required annotation from input fields in Describe operations requests. Added quotaValue to ServiceQuotaExceededException
+* feature: RDS: Added a new cluster-level attribute to set the capacity range for Aurora Serverless v2 instances.
 
 ## 2.1117.0
 * feature: AutoScaling: EC2 Auto Scaling now adds default instance warm-up times for all scaling activities, health check replacements, and other replacement events in the Auto Scaling instance lifecycle.

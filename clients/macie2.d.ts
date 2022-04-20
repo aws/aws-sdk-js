@@ -934,6 +934,10 @@ declare namespace Macie2 {
      */
     jobId?: __string;
     /**
+     * Specifies how Amazon Macie found the sensitive data that produced the finding: SENSITIVE_DATA_DISCOVERY_JOB, for a classification job.
+     */
+    originType?: OriginType;
+    /**
      * The status and other details of the finding.
      */
     result?: ClassificationResult;
@@ -1897,7 +1901,7 @@ declare namespace Macie2 {
   }
   export interface GetFindingsRequest {
     /**
-     * An array of strings that lists the unique identifiers for the findings to retrieve.
+     * An array of strings that lists the unique identifiers for the findings to retrieve. You can specify as many as 50 unique identifiers in this array.
      */
     findingIds: __listOf__string;
     /**
@@ -2669,6 +2673,7 @@ declare namespace Macie2 {
     records?: Records;
   }
   export type OrderBy = "ASC"|"DESC"|string;
+  export type OriginType = "SENSITIVE_DATA_DISCOVERY_JOB"|string;
   export interface Page {
     /**
      *  Reserved for future use.
@@ -3301,7 +3306,7 @@ declare namespace Macie2 {
      */
     resourceArn: __string;
     /**
-     * The key of the tag to remove from the resource. To remove multiple tags, append the tagKeys parameter and argument for each additional tag to remove, separated by an ampersand (&amp;).
+     * One or more tags (keys) to remove from the resource. In an HTTP request to remove multiple tags, append the tagKeys parameter and argument for each tag to remove, and separate them with an ampersand (&amp;).
      */
     tagKeys: __listOf__string;
   }

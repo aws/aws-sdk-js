@@ -1802,6 +1802,7 @@ declare namespace RDS {
      * The amount of time, in days, to retain Performance Insights data. Valid values are 7 or 731 (2 years). Valid for: Multi-AZ DB clusters only
      */
     PerformanceInsightsRetentionPeriod?: IntegerOptional;
+    ServerlessV2ScalingConfiguration?: ServerlessV2ScalingConfiguration;
     /**
      * The ID of the region that contains the source for the read replica.
      */
@@ -2696,6 +2697,7 @@ declare namespace RDS {
      * The amount of time, in days, to retain Performance Insights data. Valid values are 7 or 731 (2 years). This setting is only for non-Aurora Multi-AZ DB clusters.
      */
     PerformanceInsightsRetentionPeriod?: IntegerOptional;
+    ServerlessV2ScalingConfiguration?: ServerlessV2ScalingConfigurationInfo;
   }
   export interface DBClusterBacktrack {
     /**
@@ -5864,6 +5866,7 @@ declare namespace RDS {
      * The amount of time, in days, to retain Performance Insights data. Valid values are 7 or 731 (2 years). Valid for: Multi-AZ DB clusters only
      */
     PerformanceInsightsRetentionPeriod?: IntegerOptional;
+    ServerlessV2ScalingConfiguration?: ServerlessV2ScalingConfiguration;
   }
   export interface ModifyDBClusterParameterGroupMessage {
     /**
@@ -7384,6 +7387,7 @@ declare namespace RDS {
      * Specify the name of the IAM role to be used when making API calls to the Directory Service.
      */
     DomainIAMRoleName?: String;
+    ServerlessV2ScalingConfiguration?: ServerlessV2ScalingConfiguration;
   }
   export interface RestoreDBClusterFromS3Result {
     DBCluster?: DBCluster;
@@ -7493,6 +7497,7 @@ declare namespace RDS {
      * A value that indicates whether the DB cluster is publicly accessible. When the DB cluster is publicly accessible, its Domain Name System (DNS) endpoint resolves to the private IP address from within the DB cluster's virtual private cloud (VPC). It resolves to the public IP address from outside of the DB cluster's VPC. Access to the DB cluster is ultimately controlled by the security group it uses. That public access is not permitted if the security group assigned to the DB cluster doesn't permit it. When the DB cluster isn't publicly accessible, it is an internal DB cluster with a DNS name that resolves to a private IP address. Default: The default behavior varies depending on whether DBSubnetGroupName is specified. If DBSubnetGroupName isn't specified, and PubliclyAccessible isn't specified, the following applies:   If the default VPC in the target Region doesn’t have an internet gateway attached to it, the DB cluster is private.   If the default VPC in the target Region has an internet gateway attached to it, the DB cluster is public.   If DBSubnetGroupName is specified, and PubliclyAccessible isn't specified, the following applies:   If the subnets are part of a VPC that doesn’t have an internet gateway attached to it, the DB cluster is private.   If the subnets are part of a VPC that has an internet gateway attached to it, the DB cluster is public.   Valid for: Aurora DB clusters and Multi-AZ DB clusters
      */
     PubliclyAccessible?: BooleanOptional;
+    ServerlessV2ScalingConfiguration?: ServerlessV2ScalingConfiguration;
   }
   export interface RestoreDBClusterFromSnapshotResult {
     DBCluster?: DBCluster;
@@ -7595,6 +7600,7 @@ declare namespace RDS {
      * The amount of Provisioned IOPS (input/output operations per second) to be initially allocated for each DB instance in the Multi-AZ DB cluster. For information about valid Iops values, see Amazon RDS Provisioned IOPS storage to improve performance in the Amazon RDS User Guide. Constraints: Must be a multiple between .5 and 50 of the storage amount for the DB instance. Valid for: Multi-AZ DB clusters only
      */
     Iops?: IntegerOptional;
+    ServerlessV2ScalingConfiguration?: ServerlessV2ScalingConfiguration;
   }
   export interface RestoreDBClusterToPointInTimeResult {
     DBCluster?: DBCluster;
@@ -8138,6 +8144,26 @@ declare namespace RDS {
      * The number of seconds before scaling times out. What happens when an attempted scaling action times out is determined by the TimeoutAction setting.
      */
     SecondsBeforeTimeout?: IntegerOptional;
+  }
+  export interface ServerlessV2ScalingConfiguration {
+    /**
+     * The minimum number of Aurora capacity units (ACUs) for a DB instance in an Aurora Serverless v2 cluster. You can specify ACU values in half-step increments, such as 8, 8.5, 9, and so on. The smallest value that you can use is 0.5.
+     */
+    MinCapacity?: DoubleOptional;
+    /**
+     * The maximum number of Aurora capacity units (ACUs) for a DB instance in an Aurora Serverless v2 cluster. You can specify ACU values in half-step increments, such as 40, 40.5, 41, and so on. The largest value that you can use is 128.
+     */
+    MaxCapacity?: DoubleOptional;
+  }
+  export interface ServerlessV2ScalingConfigurationInfo {
+    /**
+     * The minimum number of Aurora capacity units (ACUs) for a DB instance in an Aurora Serverless v2 cluster. You can specify ACU values in half-step increments, such as 8, 8.5, 9, and so on. The smallest value that you can use is 0.5.
+     */
+    MinCapacity?: DoubleOptional;
+    /**
+     * The maximum number of Aurora capacity units (ACUs) for a DB instance in an Aurora Serverless v2 cluster. You can specify ACU values in half-step increments, such as 40, 40.5, 41, and so on. The largest value that you can use is 128.
+     */
+    MaxCapacity?: DoubleOptional;
   }
   export type SourceIdsList = String[];
   export interface SourceRegion {

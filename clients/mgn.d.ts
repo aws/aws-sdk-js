@@ -481,7 +481,7 @@ declare namespace Mgn {
     /**
      * Request to describe Job log filters.
      */
-    filters: DescribeJobsRequestFilters;
+    filters?: DescribeJobsRequestFilters;
     /**
      * Request to describe job log items by max results.
      */
@@ -528,7 +528,7 @@ declare namespace Mgn {
     /**
      * Request to describe Replication Configuration template by template IDs.
      */
-    replicationConfigurationTemplateIDs: ReplicationConfigurationTemplateIDs;
+    replicationConfigurationTemplateIDs?: ReplicationConfigurationTemplateIDs;
   }
   export interface DescribeReplicationConfigurationTemplatesResponse {
     /**
@@ -544,7 +544,7 @@ declare namespace Mgn {
     /**
      * Request to filter Source Servers list.
      */
-    filters: DescribeSourceServersRequestFilters;
+    filters?: DescribeSourceServersRequestFilters;
     /**
      * Request to filter Source Servers list by maximum results.
      */
