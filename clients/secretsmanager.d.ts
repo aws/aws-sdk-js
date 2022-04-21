@@ -20,11 +20,11 @@ declare class SecretsManager extends Service {
    */
   cancelRotateSecret(callback?: (err: AWSError, data: SecretsManager.Types.CancelRotateSecretResponse) => void): Request<SecretsManager.Types.CancelRotateSecretResponse, AWSError>;
   /**
-   * Creates a new secret. A secret is a set of credentials, such as a user name and password, that you store in an encrypted form in Secrets Manager. The secret also includes the connection information to access a database or other service, which Secrets Manager doesn't encrypt. A secret in Secrets Manager consists of both the protected secret data and the important information needed to manage the secret. For information about creating a secret in the console, see Create a secret. To create a secret, you can provide the secret value to be encrypted in either the SecretString parameter or the SecretBinary parameter, but not both. If you include SecretString or SecretBinary then Secrets Manager creates an initial secret version and automatically attaches the staging label AWSCURRENT to it. If you don't specify an KMS encryption key, Secrets Manager uses the Amazon Web Services managed key aws/secretsmanager. If this key doesn't already exist in your account, then Secrets Manager creates it for you automatically. All users and roles in the Amazon Web Services account automatically have access to use aws/secretsmanager. Creating aws/secretsmanager can result in a one-time significant delay in returning the result. If the secret is in a different Amazon Web Services account from the credentials calling the API, then you can't use aws/secretsmanager to encrypt the secret, and you must create and use a customer managed KMS key.   Required permissions:  secretsmanager:CreateSecret. For more information, see  IAM policy actions for Secrets Manager and Authentication and access control in Secrets Manager. 
+   * Creates a new secret. A secret can be a password, a set of credentials such as a user name and password, an OAuth token, or other secret information that you store in an encrypted form in Secrets Manager. The secret also includes the connection information to access a database or other service, which Secrets Manager doesn't encrypt. A secret in Secrets Manager consists of both the protected secret data and the important information needed to manage the secret. For information about creating a secret in the console, see Create a secret. To create a secret, you can provide the secret value to be encrypted in either the SecretString parameter or the SecretBinary parameter, but not both. If you include SecretString or SecretBinary then Secrets Manager creates an initial secret version and automatically attaches the staging label AWSCURRENT to it. For database credentials you want to rotate, for Secrets Manager to be able to rotate the secret, you must make sure the JSON you store in the SecretString matches the JSON structure of a database secret. If you don't specify an KMS encryption key, Secrets Manager uses the Amazon Web Services managed key aws/secretsmanager. If this key doesn't already exist in your account, then Secrets Manager creates it for you automatically. All users and roles in the Amazon Web Services account automatically have access to use aws/secretsmanager. Creating aws/secretsmanager can result in a one-time significant delay in returning the result. If the secret is in a different Amazon Web Services account from the credentials calling the API, then you can't use aws/secretsmanager to encrypt the secret, and you must create and use a customer managed KMS key.   Required permissions:  secretsmanager:CreateSecret. If you include tags in the secret, you also need secretsmanager:TagResource. For more information, see  IAM policy actions for Secrets Manager and Authentication and access control in Secrets Manager.  To encrypt the secret with a KMS key other than aws/secretsmanager, you need kms:GenerateDataKey and kms:Decrypt permission to the key. 
    */
   createSecret(params: SecretsManager.Types.CreateSecretRequest, callback?: (err: AWSError, data: SecretsManager.Types.CreateSecretResponse) => void): Request<SecretsManager.Types.CreateSecretResponse, AWSError>;
   /**
-   * Creates a new secret. A secret is a set of credentials, such as a user name and password, that you store in an encrypted form in Secrets Manager. The secret also includes the connection information to access a database or other service, which Secrets Manager doesn't encrypt. A secret in Secrets Manager consists of both the protected secret data and the important information needed to manage the secret. For information about creating a secret in the console, see Create a secret. To create a secret, you can provide the secret value to be encrypted in either the SecretString parameter or the SecretBinary parameter, but not both. If you include SecretString or SecretBinary then Secrets Manager creates an initial secret version and automatically attaches the staging label AWSCURRENT to it. If you don't specify an KMS encryption key, Secrets Manager uses the Amazon Web Services managed key aws/secretsmanager. If this key doesn't already exist in your account, then Secrets Manager creates it for you automatically. All users and roles in the Amazon Web Services account automatically have access to use aws/secretsmanager. Creating aws/secretsmanager can result in a one-time significant delay in returning the result. If the secret is in a different Amazon Web Services account from the credentials calling the API, then you can't use aws/secretsmanager to encrypt the secret, and you must create and use a customer managed KMS key.   Required permissions:  secretsmanager:CreateSecret. For more information, see  IAM policy actions for Secrets Manager and Authentication and access control in Secrets Manager. 
+   * Creates a new secret. A secret can be a password, a set of credentials such as a user name and password, an OAuth token, or other secret information that you store in an encrypted form in Secrets Manager. The secret also includes the connection information to access a database or other service, which Secrets Manager doesn't encrypt. A secret in Secrets Manager consists of both the protected secret data and the important information needed to manage the secret. For information about creating a secret in the console, see Create a secret. To create a secret, you can provide the secret value to be encrypted in either the SecretString parameter or the SecretBinary parameter, but not both. If you include SecretString or SecretBinary then Secrets Manager creates an initial secret version and automatically attaches the staging label AWSCURRENT to it. For database credentials you want to rotate, for Secrets Manager to be able to rotate the secret, you must make sure the JSON you store in the SecretString matches the JSON structure of a database secret. If you don't specify an KMS encryption key, Secrets Manager uses the Amazon Web Services managed key aws/secretsmanager. If this key doesn't already exist in your account, then Secrets Manager creates it for you automatically. All users and roles in the Amazon Web Services account automatically have access to use aws/secretsmanager. Creating aws/secretsmanager can result in a one-time significant delay in returning the result. If the secret is in a different Amazon Web Services account from the credentials calling the API, then you can't use aws/secretsmanager to encrypt the secret, and you must create and use a customer managed KMS key.   Required permissions:  secretsmanager:CreateSecret. If you include tags in the secret, you also need secretsmanager:TagResource. For more information, see  IAM policy actions for Secrets Manager and Authentication and access control in Secrets Manager.  To encrypt the secret with a KMS key other than aws/secretsmanager, you need kms:GenerateDataKey and kms:Decrypt permission to the key. 
    */
   createSecret(callback?: (err: AWSError, data: SecretsManager.Types.CreateSecretResponse) => void): Request<SecretsManager.Types.CreateSecretResponse, AWSError>;
   /**
@@ -132,11 +132,11 @@ declare class SecretsManager extends Service {
    */
   restoreSecret(callback?: (err: AWSError, data: SecretsManager.Types.RestoreSecretResponse) => void): Request<SecretsManager.Types.RestoreSecretResponse, AWSError>;
   /**
-   * Configures and starts the asynchronous process of rotating the secret. If you include the configuration parameters, the operation sets the values for the secret and then immediately starts a rotation. If you don't include the configuration parameters, the operation starts a rotation with the values already stored in the secret. For more information about rotation, see Rotate secrets. To configure rotation, you include the ARN of an Amazon Web Services Lambda function and the schedule for the rotation. The Lambda rotation function creates a new version of the secret and creates or updates the credentials on the database or service to match. After testing the new credentials, the function marks the new secret version with the staging label AWSCURRENT. Then anyone who retrieves the secret gets the new version. For more information, see How rotation works. When rotation is successful, the AWSPENDING staging label might be attached to the same version as the AWSCURRENT version, or it might not be attached to any version. If the AWSPENDING staging label is present but not attached to the same version as AWSCURRENT, then any later invocation of RotateSecret assumes that a previous rotation request is still in progress and returns an error.  Required permissions:  secretsmanager:RotateSecret. For more information, see  IAM policy actions for Secrets Manager and Authentication and access control in Secrets Manager. You also need lambda:InvokeFunction permissions on the rotation function. For more information, see  Permissions for rotation.
+   * Configures and starts the asynchronous process of rotating the secret. For more information about rotation, see Rotate secrets. If you include the configuration parameters, the operation sets the values for the secret and then immediately starts a rotation. If you don't include the configuration parameters, the operation starts a rotation with the values already stored in the secret.  For database credentials you want to rotate, for Secrets Manager to be able to rotate the secret, you must make sure the secret value is in the  JSON structure of a database secret. In particular, if you want to use the  alternating users strategy, your secret must contain the ARN of a superuser secret. To configure rotation, you also need the ARN of an Amazon Web Services Lambda function and the schedule for the rotation. The Lambda rotation function creates a new version of the secret and creates or updates the credentials on the database or service to match. After testing the new credentials, the function marks the new secret version with the staging label AWSCURRENT. Then anyone who retrieves the secret gets the new version. For more information, see How rotation works. You can create the Lambda rotation function based on the rotation function templates that Secrets Manager provides. Choose a template that matches your Rotation strategy. When rotation is successful, the AWSPENDING staging label might be attached to the same version as the AWSCURRENT version, or it might not be attached to any version. If the AWSPENDING staging label is present but not attached to the same version as AWSCURRENT, then any later invocation of RotateSecret assumes that a previous rotation request is still in progress and returns an error.  Required permissions:  secretsmanager:RotateSecret. For more information, see  IAM policy actions for Secrets Manager and Authentication and access control in Secrets Manager. You also need lambda:InvokeFunction permissions on the rotation function. For more information, see  Permissions for rotation.
    */
   rotateSecret(params: SecretsManager.Types.RotateSecretRequest, callback?: (err: AWSError, data: SecretsManager.Types.RotateSecretResponse) => void): Request<SecretsManager.Types.RotateSecretResponse, AWSError>;
   /**
-   * Configures and starts the asynchronous process of rotating the secret. If you include the configuration parameters, the operation sets the values for the secret and then immediately starts a rotation. If you don't include the configuration parameters, the operation starts a rotation with the values already stored in the secret. For more information about rotation, see Rotate secrets. To configure rotation, you include the ARN of an Amazon Web Services Lambda function and the schedule for the rotation. The Lambda rotation function creates a new version of the secret and creates or updates the credentials on the database or service to match. After testing the new credentials, the function marks the new secret version with the staging label AWSCURRENT. Then anyone who retrieves the secret gets the new version. For more information, see How rotation works. When rotation is successful, the AWSPENDING staging label might be attached to the same version as the AWSCURRENT version, or it might not be attached to any version. If the AWSPENDING staging label is present but not attached to the same version as AWSCURRENT, then any later invocation of RotateSecret assumes that a previous rotation request is still in progress and returns an error.  Required permissions:  secretsmanager:RotateSecret. For more information, see  IAM policy actions for Secrets Manager and Authentication and access control in Secrets Manager. You also need lambda:InvokeFunction permissions on the rotation function. For more information, see  Permissions for rotation.
+   * Configures and starts the asynchronous process of rotating the secret. For more information about rotation, see Rotate secrets. If you include the configuration parameters, the operation sets the values for the secret and then immediately starts a rotation. If you don't include the configuration parameters, the operation starts a rotation with the values already stored in the secret.  For database credentials you want to rotate, for Secrets Manager to be able to rotate the secret, you must make sure the secret value is in the  JSON structure of a database secret. In particular, if you want to use the  alternating users strategy, your secret must contain the ARN of a superuser secret. To configure rotation, you also need the ARN of an Amazon Web Services Lambda function and the schedule for the rotation. The Lambda rotation function creates a new version of the secret and creates or updates the credentials on the database or service to match. After testing the new credentials, the function marks the new secret version with the staging label AWSCURRENT. Then anyone who retrieves the secret gets the new version. For more information, see How rotation works. You can create the Lambda rotation function based on the rotation function templates that Secrets Manager provides. Choose a template that matches your Rotation strategy. When rotation is successful, the AWSPENDING staging label might be attached to the same version as the AWSCURRENT version, or it might not be attached to any version. If the AWSPENDING staging label is present but not attached to the same version as AWSCURRENT, then any later invocation of RotateSecret assumes that a previous rotation request is still in progress and returns an error.  Required permissions:  secretsmanager:RotateSecret. For more information, see  IAM policy actions for Secrets Manager and Authentication and access control in Secrets Manager. You also need lambda:InvokeFunction permissions on the rotation function. For more information, see  Permissions for rotation.
    */
   rotateSecret(callback?: (err: AWSError, data: SecretsManager.Types.RotateSecretResponse) => void): Request<SecretsManager.Types.RotateSecretResponse, AWSError>;
   /**
@@ -194,7 +194,7 @@ declare namespace SecretsManager {
   export type BooleanType = boolean;
   export interface CancelRotateSecretRequest {
     /**
-     * The ARN or name of the secret. For an ARN, we recommend that you specify a complete ARN rather than a partial ARN.
+     * The ARN or name of the secret. For an ARN, we recommend that you specify a complete ARN rather than a partial ARN. See Finding a secret from a partial ARN.
      */
     SecretId: SecretIdType;
   }
@@ -272,7 +272,7 @@ declare namespace SecretsManager {
   export type CreatedDateType = Date;
   export interface DeleteResourcePolicyRequest {
     /**
-     * The ARN or name of the secret to delete the attached resource-based policy for. For an ARN, we recommend that you specify a complete ARN rather than a partial ARN.
+     * The ARN or name of the secret to delete the attached resource-based policy for. For an ARN, we recommend that you specify a complete ARN rather than a partial ARN. See Finding a secret from a partial ARN.
      */
     SecretId: SecretIdType;
   }
@@ -288,7 +288,7 @@ declare namespace SecretsManager {
   }
   export interface DeleteSecretRequest {
     /**
-     * The ARN or name of the secret to delete. For an ARN, we recommend that you specify a complete ARN rather than a partial ARN.
+     * The ARN or name of the secret to delete. For an ARN, we recommend that you specify a complete ARN rather than a partial ARN. See Finding a secret from a partial ARN.
      */
     SecretId: SecretIdType;
     /**
@@ -318,7 +318,7 @@ declare namespace SecretsManager {
   export type DeletionDateType = Date;
   export interface DescribeSecretRequest {
     /**
-     * The ARN or name of the secret.  For an ARN, we recommend that you specify a complete ARN rather than a partial ARN.
+     * The ARN or name of the secret.  For an ARN, we recommend that you specify a complete ARN rather than a partial ARN. See Finding a secret from a partial ARN.
      */
     SecretId: SecretIdType;
   }
@@ -456,7 +456,7 @@ declare namespace SecretsManager {
   }
   export interface GetResourcePolicyRequest {
     /**
-     * The ARN or name of the secret to retrieve the attached resource-based policy for. For an ARN, we recommend that you specify a complete ARN rather than a partial ARN.
+     * The ARN or name of the secret to retrieve the attached resource-based policy for. For an ARN, we recommend that you specify a complete ARN rather than a partial ARN. See Finding a secret from a partial ARN.
      */
     SecretId: SecretIdType;
   }
@@ -476,7 +476,7 @@ declare namespace SecretsManager {
   }
   export interface GetSecretValueRequest {
     /**
-     * The ARN or name of the secret to retrieve. For an ARN, we recommend that you specify a complete ARN rather than a partial ARN.
+     * The ARN or name of the secret to retrieve. For an ARN, we recommend that you specify a complete ARN rather than a partial ARN. See Finding a secret from a partial ARN.
      */
     SecretId: SecretIdType;
     /**
@@ -526,7 +526,7 @@ declare namespace SecretsManager {
   export type LastRotatedDateType = Date;
   export interface ListSecretVersionIdsRequest {
     /**
-     * The ARN or name of the secret whose versions you want to list. For an ARN, we recommend that you specify a complete ARN rather than a partial ARN.
+     * The ARN or name of the secret whose versions you want to list. For an ARN, we recommend that you specify a complete ARN rather than a partial ARN. See Finding a secret from a partial ARN.
      */
     SecretId: SecretIdType;
     /**
@@ -596,7 +596,7 @@ declare namespace SecretsManager {
   export type PasswordLengthType = number;
   export interface PutResourcePolicyRequest {
     /**
-     * The ARN or name of the secret to attach the resource-based policy. For an ARN, we recommend that you specify a complete ARN rather than a partial ARN.
+     * The ARN or name of the secret to attach the resource-based policy. For an ARN, we recommend that you specify a complete ARN rather than a partial ARN. See Finding a secret from a partial ARN.
      */
     SecretId: SecretIdType;
     /**
@@ -620,7 +620,7 @@ declare namespace SecretsManager {
   }
   export interface PutSecretValueRequest {
     /**
-     * The ARN or name of the secret to add a new version to. For an ARN, we recommend that you specify a complete ARN rather than a partial ARN. If the secret doesn't already exist, use CreateSecret instead.
+     * The ARN or name of the secret to add a new version to. For an ARN, we recommend that you specify a complete ARN rather than a partial ARN. See Finding a secret from a partial ARN. If the secret doesn't already exist, use CreateSecret instead.
      */
     SecretId: SecretIdType;
     /**
@@ -742,7 +742,7 @@ declare namespace SecretsManager {
   export type RequireEachIncludedTypeType = boolean;
   export interface RestoreSecretRequest {
     /**
-     * The ARN or name of the secret to restore. For an ARN, we recommend that you specify a complete ARN rather than a partial ARN.
+     * The ARN or name of the secret to restore. For an ARN, we recommend that you specify a complete ARN rather than a partial ARN. See Finding a secret from a partial ARN.
      */
     SecretId: SecretIdType;
   }
@@ -758,7 +758,7 @@ declare namespace SecretsManager {
   }
   export interface RotateSecretRequest {
     /**
-     * The ARN or name of the secret to rotate. For an ARN, we recommend that you specify a complete ARN rather than a partial ARN.
+     * The ARN or name of the secret to rotate. For an ARN, we recommend that you specify a complete ARN rather than a partial ARN. See Finding a secret from a partial ARN.
      */
     SecretId: SecretIdType;
     /**
@@ -938,7 +938,7 @@ declare namespace SecretsManager {
   export type TagListType = Tag[];
   export interface TagResourceRequest {
     /**
-     * The identifier for the secret to attach tags to. You can specify either the Amazon Resource Name (ARN) or the friendly name of the secret. For an ARN, we recommend that you specify a complete ARN rather than a partial ARN.
+     * The identifier for the secret to attach tags to. You can specify either the Amazon Resource Name (ARN) or the friendly name of the secret. For an ARN, we recommend that you specify a complete ARN rather than a partial ARN. See Finding a secret from a partial ARN.
      */
     SecretId: SecretIdType;
     /**
@@ -950,7 +950,7 @@ declare namespace SecretsManager {
   export type TimestampType = Date;
   export interface UntagResourceRequest {
     /**
-     * The ARN or name of the secret. For an ARN, we recommend that you specify a complete ARN rather than a partial ARN.
+     * The ARN or name of the secret. For an ARN, we recommend that you specify a complete ARN rather than a partial ARN. See Finding a secret from a partial ARN.
      */
     SecretId: SecretIdType;
     /**
@@ -960,7 +960,7 @@ declare namespace SecretsManager {
   }
   export interface UpdateSecretRequest {
     /**
-     * The ARN or name of the secret. For an ARN, we recommend that you specify a complete ARN rather than a partial ARN.
+     * The ARN or name of the secret. For an ARN, we recommend that you specify a complete ARN rather than a partial ARN. See Finding a secret from a partial ARN.
      */
     SecretId: SecretIdType;
     /**
@@ -1000,7 +1000,7 @@ declare namespace SecretsManager {
   }
   export interface UpdateSecretVersionStageRequest {
     /**
-     * The ARN or the name of the secret with the version and staging labelsto modify. For an ARN, we recommend that you specify a complete ARN rather than a partial ARN.
+     * The ARN or the name of the secret with the version and staging labelsto modify. For an ARN, we recommend that you specify a complete ARN rather than a partial ARN. See Finding a secret from a partial ARN.
      */
     SecretId: SecretIdType;
     /**

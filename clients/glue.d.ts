@@ -68,6 +68,14 @@ declare class Glue extends Service {
    */
   batchGetCrawlers(callback?: (err: AWSError, data: Glue.Types.BatchGetCrawlersResponse) => void): Request<Glue.Types.BatchGetCrawlersResponse, AWSError>;
   /**
+   * 
+   */
+  batchGetCustomEntityTypes(params: Glue.Types.BatchGetCustomEntityTypesRequest, callback?: (err: AWSError, data: Glue.Types.BatchGetCustomEntityTypesResponse) => void): Request<Glue.Types.BatchGetCustomEntityTypesResponse, AWSError>;
+  /**
+   * 
+   */
+  batchGetCustomEntityTypes(callback?: (err: AWSError, data: Glue.Types.BatchGetCustomEntityTypesResponse) => void): Request<Glue.Types.BatchGetCustomEntityTypesResponse, AWSError>;
+  /**
    * Returns a list of resource metadata for a given list of development endpoint names. After calling the ListDevEndpoints operation, you can call this operation to access the data to which you have been granted permissions. This operation supports all IAM permissions, including permission conditions that uses tags.
    */
   batchGetDevEndpoints(params: Glue.Types.BatchGetDevEndpointsRequest, callback?: (err: AWSError, data: Glue.Types.BatchGetDevEndpointsResponse) => void): Request<Glue.Types.BatchGetDevEndpointsResponse, AWSError>;
@@ -179,6 +187,14 @@ declare class Glue extends Service {
    * Creates a new crawler with specified targets, role, configuration, and optional schedule. At least one crawl target must be specified, in the s3Targets field, the jdbcTargets field, or the DynamoDBTargets field.
    */
   createCrawler(callback?: (err: AWSError, data: Glue.Types.CreateCrawlerResponse) => void): Request<Glue.Types.CreateCrawlerResponse, AWSError>;
+  /**
+   * 
+   */
+  createCustomEntityType(params: Glue.Types.CreateCustomEntityTypeRequest, callback?: (err: AWSError, data: Glue.Types.CreateCustomEntityTypeResponse) => void): Request<Glue.Types.CreateCustomEntityTypeResponse, AWSError>;
+  /**
+   * 
+   */
+  createCustomEntityType(callback?: (err: AWSError, data: Glue.Types.CreateCustomEntityTypeResponse) => void): Request<Glue.Types.CreateCustomEntityTypeResponse, AWSError>;
   /**
    * Creates a new database in a Data Catalog.
    */
@@ -347,6 +363,14 @@ declare class Glue extends Service {
    * Removes a specified crawler from the Glue Data Catalog, unless the crawler state is RUNNING.
    */
   deleteCrawler(callback?: (err: AWSError, data: Glue.Types.DeleteCrawlerResponse) => void): Request<Glue.Types.DeleteCrawlerResponse, AWSError>;
+  /**
+   * 
+   */
+  deleteCustomEntityType(params: Glue.Types.DeleteCustomEntityTypeRequest, callback?: (err: AWSError, data: Glue.Types.DeleteCustomEntityTypeResponse) => void): Request<Glue.Types.DeleteCustomEntityTypeResponse, AWSError>;
+  /**
+   * 
+   */
+  deleteCustomEntityType(callback?: (err: AWSError, data: Glue.Types.DeleteCustomEntityTypeResponse) => void): Request<Glue.Types.DeleteCustomEntityTypeResponse, AWSError>;
   /**
    * Removes a specified database from a Data Catalog.  After completing this operation, you no longer have access to the tables (and all table versions and partitions that might belong to the tables) and the user-defined functions in the deleted database. Glue deletes these "orphaned" resources asynchronously in a timely manner, at the discretion of the service. To ensure the immediate deletion of all related resources, before calling DeleteDatabase, use DeleteTableVersion or BatchDeleteTableVersion, DeletePartition or BatchDeletePartition, DeleteUserDefinedFunction, and DeleteTable or BatchDeleteTable, to delete any resources that belong to the database. 
    */
@@ -587,6 +611,14 @@ declare class Glue extends Service {
    * Retrieves metadata for all crawlers defined in the customer account.
    */
   getCrawlers(callback?: (err: AWSError, data: Glue.Types.GetCrawlersResponse) => void): Request<Glue.Types.GetCrawlersResponse, AWSError>;
+  /**
+   * 
+   */
+  getCustomEntityType(params: Glue.Types.GetCustomEntityTypeRequest, callback?: (err: AWSError, data: Glue.Types.GetCustomEntityTypeResponse) => void): Request<Glue.Types.GetCustomEntityTypeResponse, AWSError>;
+  /**
+   * 
+   */
+  getCustomEntityType(callback?: (err: AWSError, data: Glue.Types.GetCustomEntityTypeResponse) => void): Request<Glue.Types.GetCustomEntityTypeResponse, AWSError>;
   /**
    * Retrieves the security configuration for a specified catalog.
    */
@@ -987,6 +1019,14 @@ declare class Glue extends Service {
    * Retrieves the names of all crawler resources in this Amazon Web Services account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names. This operation takes the optional Tags field, which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag are retrieved.
    */
   listCrawlers(callback?: (err: AWSError, data: Glue.Types.ListCrawlersResponse) => void): Request<Glue.Types.ListCrawlersResponse, AWSError>;
+  /**
+   * 
+   */
+  listCustomEntityTypes(params: Glue.Types.ListCustomEntityTypesRequest, callback?: (err: AWSError, data: Glue.Types.ListCustomEntityTypesResponse) => void): Request<Glue.Types.ListCustomEntityTypesResponse, AWSError>;
+  /**
+   * 
+   */
+  listCustomEntityTypes(callback?: (err: AWSError, data: Glue.Types.ListCustomEntityTypesResponse) => void): Request<Glue.Types.ListCustomEntityTypesResponse, AWSError>;
   /**
    * Retrieves the names of all DevEndpoint resources in this Amazon Web Services account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names. This operation takes the optional Tags field, which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag are retrieved.
    */
@@ -1655,6 +1695,13 @@ declare namespace Glue {
      * A list of names of crawlers that were not found.
      */
     CrawlersNotFound?: CrawlerNameList;
+  }
+  export interface BatchGetCustomEntityTypesRequest {
+    Names: CustomEntityTypeNames;
+  }
+  export interface BatchGetCustomEntityTypesResponse {
+    CustomEntityTypes?: CustomEntityTypes;
+    CustomEntityTypesNotFound?: CustomEntityTypeNames;
   }
   export interface BatchGetDevEndpointsRequest {
     /**
@@ -2413,6 +2460,7 @@ declare namespace Glue {
      */
     Connections?: OrchestrationStringList;
   }
+  export type ContextWords = NameString[];
   export interface Crawl {
     /**
      * The state of the crawler.
@@ -2743,6 +2791,14 @@ declare namespace Glue {
      * Enables the processing of files that contain only one column.
      */
     AllowSingleColumn?: NullableBoolean;
+  }
+  export interface CreateCustomEntityTypeRequest {
+    Name: NameString;
+    RegexString: NameString;
+    ContextWords?: ContextWords;
+  }
+  export interface CreateCustomEntityTypeResponse {
+    Name?: NameString;
   }
   export interface CreateDatabaseRequest {
     /**
@@ -3518,6 +3574,13 @@ declare namespace Glue {
   export type CsvHeader = NameString[];
   export type CsvHeaderOption = "UNKNOWN"|"PRESENT"|"ABSENT"|string;
   export type CsvQuoteSymbol = string;
+  export interface CustomEntityType {
+    Name: NameString;
+    RegexString: NameString;
+    ContextWords?: ContextWords;
+  }
+  export type CustomEntityTypeNames = NameString[];
+  export type CustomEntityTypes = CustomEntityType[];
   export type CustomPatterns = string;
   export type DagEdges = CodeGenEdge[];
   export type DagNodes = CodeGenNode[];
@@ -3742,6 +3805,12 @@ declare namespace Glue {
     Name: NameString;
   }
   export interface DeleteCrawlerResponse {
+  }
+  export interface DeleteCustomEntityTypeRequest {
+    Name: NameString;
+  }
+  export interface DeleteCustomEntityTypeResponse {
+    Name?: NameString;
   }
   export interface DeleteDatabaseRequest {
     /**
@@ -4608,6 +4677,14 @@ declare namespace Glue {
      * A continuation token, if the returned list has not reached the end of those defined in this customer account.
      */
     NextToken?: Token;
+  }
+  export interface GetCustomEntityTypeRequest {
+    Name: NameString;
+  }
+  export interface GetCustomEntityTypeResponse {
+    Name?: NameString;
+    RegexString?: NameString;
+    ContextWords?: ContextWords;
   }
   export interface GetDataCatalogEncryptionSettingsRequest {
     /**
@@ -6386,6 +6463,14 @@ declare namespace Glue {
      * A continuation token, if the returned list does not contain the last metric available.
      */
     NextToken?: Token;
+  }
+  export interface ListCustomEntityTypesRequest {
+    NextToken?: PaginationToken;
+    MaxResults?: PageSize;
+  }
+  export interface ListCustomEntityTypesResponse {
+    CustomEntityTypes?: CustomEntityTypes;
+    NextToken?: PaginationToken;
   }
   export interface ListDevEndpointsRequest {
     /**

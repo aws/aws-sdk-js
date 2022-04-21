@@ -108,6 +108,14 @@ declare class LookoutMetrics extends Service {
    */
   describeMetricSet(callback?: (err: AWSError, data: LookoutMetrics.Types.DescribeMetricSetResponse) => void): Request<LookoutMetrics.Types.DescribeMetricSetResponse, AWSError>;
   /**
+   * Detects an Amazon S3 dataset's file format, interval, and offset.
+   */
+  detectMetricSetConfig(params: LookoutMetrics.Types.DetectMetricSetConfigRequest, callback?: (err: AWSError, data: LookoutMetrics.Types.DetectMetricSetConfigResponse) => void): Request<LookoutMetrics.Types.DetectMetricSetConfigResponse, AWSError>;
+  /**
+   * Detects an Amazon S3 dataset's file format, interval, and offset.
+   */
+  detectMetricSetConfig(callback?: (err: AWSError, data: LookoutMetrics.Types.DetectMetricSetConfigResponse) => void): Request<LookoutMetrics.Types.DetectMetricSetConfigResponse, AWSError>;
+  /**
    * Returns details about a group of anomalous metrics.
    */
   getAnomalyGroup(params: LookoutMetrics.Types.GetAnomalyGroupRequest, callback?: (err: AWSError, data: LookoutMetrics.Types.GetAnomalyGroupResponse) => void): Request<LookoutMetrics.Types.GetAnomalyGroupResponse, AWSError>;
@@ -480,6 +488,48 @@ declare namespace LookoutMetrics {
     FlowName?: FlowName;
   }
   export type Arn = string;
+  export interface AttributeValue {
+    /**
+     * A string.
+     */
+    S?: StringAttributeValue;
+    /**
+     * A number.
+     */
+    N?: NumberAttributeValue;
+    /**
+     * A binary value.
+     */
+    B?: BinaryAttributeValue;
+    /**
+     * A list of strings.
+     */
+    SS?: StringListAttributeValue;
+    /**
+     * A list of numbers.
+     */
+    NS?: NumberListAttributeValue;
+    /**
+     * A list of binary values.
+     */
+    BS?: BinaryListAttributeValue;
+  }
+  export interface AutoDetectionMetricSource {
+    /**
+     * The source's source config.
+     */
+    S3SourceConfig?: AutoDetectionS3SourceConfig;
+  }
+  export interface AutoDetectionS3SourceConfig {
+    /**
+     * The config's templated path list.
+     */
+    TemplatedPathList?: TemplatedPathList;
+    /**
+     * The config's historical data path list.
+     */
+    HistoricalDataPathList?: HistoricalDataPathList;
+  }
   export interface BackTestAnomalyDetectorRequest {
     /**
      * The Amazon Resource Name (ARN) of the anomaly detector.
@@ -488,6 +538,8 @@ declare namespace LookoutMetrics {
   }
   export interface BackTestAnomalyDetectorResponse {
   }
+  export type BinaryAttributeValue = string;
+  export type BinaryListAttributeValue = BinaryAttributeValue[];
   export type Boolean = boolean;
   export type CSVFileCompression = "NONE"|"GZIP"|string;
   export type Charset = string;
@@ -498,6 +550,7 @@ declare namespace LookoutMetrics {
     RoleArn?: Arn;
   }
   export type ColumnName = string;
+  export type Confidence = "HIGH"|"LOW"|"NONE"|string;
   export interface ContributionMatrix {
     /**
      * A list of contributing dimensions.
@@ -818,6 +871,108 @@ declare namespace LookoutMetrics {
      * Contains information about the dataset's source data.
      */
     MetricSource?: MetricSource;
+  }
+  export interface DetectMetricSetConfigRequest {
+    /**
+     * An anomaly detector ARN.
+     */
+    AnomalyDetectorArn: Arn;
+    /**
+     * A data source.
+     */
+    AutoDetectionMetricSource: AutoDetectionMetricSource;
+  }
+  export interface DetectMetricSetConfigResponse {
+    /**
+     * The inferred dataset configuration for the datasource.
+     */
+    DetectedMetricSetConfig?: DetectedMetricSetConfig;
+  }
+  export interface DetectedCsvFormatDescriptor {
+    /**
+     * The format's file compression.
+     */
+    FileCompression?: DetectedField;
+    /**
+     * The format's charset.
+     */
+    Charset?: DetectedField;
+    /**
+     * Whether the format includes a header.
+     */
+    ContainsHeader?: DetectedField;
+    /**
+     * The format's delimiter.
+     */
+    Delimiter?: DetectedField;
+    /**
+     * The format's header list.
+     */
+    HeaderList?: DetectedField;
+    /**
+     * The format's quote symbol.
+     */
+    QuoteSymbol?: DetectedField;
+  }
+  export interface DetectedField {
+    /**
+     * The field's value.
+     */
+    Value?: AttributeValue;
+    /**
+     * The field's confidence.
+     */
+    Confidence?: Confidence;
+    /**
+     * The field's message.
+     */
+    Message?: Message;
+  }
+  export interface DetectedFileFormatDescriptor {
+    /**
+     * Details about a CSV format.
+     */
+    CsvFormatDescriptor?: DetectedCsvFormatDescriptor;
+    /**
+     * Details about a JSON format.
+     */
+    JsonFormatDescriptor?: DetectedJsonFormatDescriptor;
+  }
+  export interface DetectedJsonFormatDescriptor {
+    /**
+     * The format's file compression.
+     */
+    FileCompression?: DetectedField;
+    /**
+     * The format's character set.
+     */
+    Charset?: DetectedField;
+  }
+  export interface DetectedMetricSetConfig {
+    /**
+     * The dataset's offset.
+     */
+    Offset?: DetectedField;
+    /**
+     * The dataset's interval.
+     */
+    MetricSetFrequency?: DetectedField;
+    /**
+     * The dataset's data source.
+     */
+    MetricSource?: DetectedMetricSource;
+  }
+  export interface DetectedMetricSource {
+    /**
+     * The data source's source configuration.
+     */
+    S3SourceConfig?: DetectedS3SourceConfig;
+  }
+  export interface DetectedS3SourceConfig {
+    /**
+     * The source's file format descriptor.
+     */
+    FileFormatDescriptor?: DetectedFileFormatDescriptor;
   }
   export interface DimensionContribution {
     /**
@@ -1189,6 +1344,7 @@ declare namespace LookoutMetrics {
     Tags?: TagMap;
   }
   export type MaxResults = number;
+  export type Message = string;
   export interface Metric {
     /**
      * The name of the metric.
@@ -1277,6 +1433,8 @@ declare namespace LookoutMetrics {
   export type MetricValueList = MetricValue[];
   export type Namespace = string;
   export type NextToken = string;
+  export type NumberAttributeValue = string;
+  export type NumberListAttributeValue = NumberAttributeValue[];
   export type Offset = number;
   export type PoirotSecretManagerArn = string;
   export interface PutFeedbackRequest {
@@ -1414,6 +1572,8 @@ declare namespace LookoutMetrics {
   export type SecurityGroupId = string;
   export type SecurityGroupIdList = SecurityGroupId[];
   export type SensitivityThreshold = number;
+  export type StringAttributeValue = string;
+  export type StringListAttributeValue = StringAttributeValue[];
   export type SubnetId = string;
   export type SubnetIdList = SubnetId[];
   export type TableName = string;

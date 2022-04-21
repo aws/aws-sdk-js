@@ -45,6 +45,30 @@ declare class IoTSiteWise extends Service {
    */
   batchDisassociateProjectAssets(callback?: (err: AWSError, data: IoTSiteWise.Types.BatchDisassociateProjectAssetsResponse) => void): Request<IoTSiteWise.Types.BatchDisassociateProjectAssetsResponse, AWSError>;
   /**
+   * Gets aggregated values (for example, average, minimum, and maximum) for one or more asset properties. For more information, see Querying aggregates in the IoT SiteWise User Guide.
+   */
+  batchGetAssetPropertyAggregates(params: IoTSiteWise.Types.BatchGetAssetPropertyAggregatesRequest, callback?: (err: AWSError, data: IoTSiteWise.Types.BatchGetAssetPropertyAggregatesResponse) => void): Request<IoTSiteWise.Types.BatchGetAssetPropertyAggregatesResponse, AWSError>;
+  /**
+   * Gets aggregated values (for example, average, minimum, and maximum) for one or more asset properties. For more information, see Querying aggregates in the IoT SiteWise User Guide.
+   */
+  batchGetAssetPropertyAggregates(callback?: (err: AWSError, data: IoTSiteWise.Types.BatchGetAssetPropertyAggregatesResponse) => void): Request<IoTSiteWise.Types.BatchGetAssetPropertyAggregatesResponse, AWSError>;
+  /**
+   * Gets the current value for one or more asset properties. For more information, see Querying current values in the IoT SiteWise User Guide.
+   */
+  batchGetAssetPropertyValue(params: IoTSiteWise.Types.BatchGetAssetPropertyValueRequest, callback?: (err: AWSError, data: IoTSiteWise.Types.BatchGetAssetPropertyValueResponse) => void): Request<IoTSiteWise.Types.BatchGetAssetPropertyValueResponse, AWSError>;
+  /**
+   * Gets the current value for one or more asset properties. For more information, see Querying current values in the IoT SiteWise User Guide.
+   */
+  batchGetAssetPropertyValue(callback?: (err: AWSError, data: IoTSiteWise.Types.BatchGetAssetPropertyValueResponse) => void): Request<IoTSiteWise.Types.BatchGetAssetPropertyValueResponse, AWSError>;
+  /**
+   * Gets the historical values for one or more asset properties. For more information, see Querying historical values in the IoT SiteWise User Guide.
+   */
+  batchGetAssetPropertyValueHistory(params: IoTSiteWise.Types.BatchGetAssetPropertyValueHistoryRequest, callback?: (err: AWSError, data: IoTSiteWise.Types.BatchGetAssetPropertyValueHistoryResponse) => void): Request<IoTSiteWise.Types.BatchGetAssetPropertyValueHistoryResponse, AWSError>;
+  /**
+   * Gets the historical values for one or more asset properties. For more information, see Querying historical values in the IoT SiteWise User Guide.
+   */
+  batchGetAssetPropertyValueHistory(callback?: (err: AWSError, data: IoTSiteWise.Types.BatchGetAssetPropertyValueHistoryResponse) => void): Request<IoTSiteWise.Types.BatchGetAssetPropertyValueHistoryResponse, AWSError>;
+  /**
    * Sends a list of asset property values to IoT SiteWise. Each value is a timestamp-quality-value (TQV) data point. For more information, see Ingesting data using the API in the IoT SiteWise User Guide. To identify an asset property, you must specify one of the following:   The assetId and propertyId of an asset property.   A propertyAlias, which is a data stream alias (for example, /company/windfarm/3/turbine/7/temperature). To define an asset property's alias, see UpdateAssetProperty.    With respect to Unix epoch time, IoT SiteWise accepts only TQVs that have a timestamp of no more than 7 days in the past and no more than 10 minutes in the future. IoT SiteWise rejects timestamps outside of the inclusive range of [-7 days, +10 minutes] and returns a TimestampOutOfRangeException error. For each asset property, IoT SiteWise overwrites TQVs with duplicate timestamps unless the newer TQV has a different quality. For example, if you store a TQV {T1, GOOD, V1}, then storing {T1, GOOD, V2} replaces the existing TQV.  IoT SiteWise authorizes access to each BatchPutAssetPropertyValue entry individually. For more information, see BatchPutAssetPropertyValue authorization in the IoT SiteWise User Guide.
    */
   batchPutAssetPropertyValue(params: IoTSiteWise.Types.BatchPutAssetPropertyValueRequest, callback?: (err: AWSError, data: IoTSiteWise.Types.BatchPutAssetPropertyValueResponse) => void): Request<IoTSiteWise.Types.BatchPutAssetPropertyValueResponse, AWSError>;
@@ -1103,6 +1127,351 @@ declare namespace IoTSiteWise {
      * A list of associated error information, if any.
      */
     errors?: BatchDisassociateProjectAssetsErrors;
+  }
+  export type BatchEntryCompletionStatus = "SUCCESS"|"ERROR"|string;
+  export type BatchGetAssetPropertyAggregatesEntries = BatchGetAssetPropertyAggregatesEntry[];
+  export interface BatchGetAssetPropertyAggregatesEntry {
+    /**
+     * The ID of the entry.
+     */
+    entryId: EntryId;
+    /**
+     * The ID of the asset in which the asset property was created.
+     */
+    assetId?: ID;
+    /**
+     * The ID of the asset property.
+     */
+    propertyId?: ID;
+    /**
+     * The alias that identifies the property, such as an OPC-UA server data stream path (for example, /company/windfarm/3/turbine/7/temperature). For more information, see Mapping industrial data streams to asset properties in the IoT SiteWise User Guide.
+     */
+    propertyAlias?: AssetPropertyAlias;
+    /**
+     * The data aggregating function.
+     */
+    aggregateTypes: AggregateTypes;
+    /**
+     * The time interval over which to aggregate data.
+     */
+    resolution: Resolution;
+    /**
+     * The exclusive start of the range from which to query historical data, expressed in seconds in Unix epoch time.
+     */
+    startDate: Timestamp;
+    /**
+     * The inclusive end of the range from which to query historical data, expressed in seconds in Unix epoch time.
+     */
+    endDate: Timestamp;
+    /**
+     * The quality by which to filter asset data.
+     */
+    qualities?: Qualities;
+    /**
+     * The chronological sorting order of the requested information. Default: ASCENDING 
+     */
+    timeOrdering?: TimeOrdering;
+  }
+  export type BatchGetAssetPropertyAggregatesErrorCode = "ResourceNotFoundException"|"InvalidRequestException"|"AccessDeniedException"|string;
+  export type BatchGetAssetPropertyAggregatesErrorEntries = BatchGetAssetPropertyAggregatesErrorEntry[];
+  export interface BatchGetAssetPropertyAggregatesErrorEntry {
+    /**
+     * The error code.
+     */
+    errorCode: BatchGetAssetPropertyAggregatesErrorCode;
+    /**
+     * The associated error message.
+     */
+    errorMessage: ErrorMessage;
+    /**
+     * The ID of the entry.
+     */
+    entryId: EntryId;
+  }
+  export interface BatchGetAssetPropertyAggregatesErrorInfo {
+    /**
+     * The error code.
+     */
+    errorCode: BatchGetAssetPropertyAggregatesErrorCode;
+    /**
+     * The date the error occurred, in Unix epoch time.
+     */
+    errorTimestamp: Timestamp;
+  }
+  export type BatchGetAssetPropertyAggregatesMaxResults = number;
+  export interface BatchGetAssetPropertyAggregatesRequest {
+    /**
+     * The list of asset property aggregate entries for the batch get request. You can specify up to 16 entries per request.
+     */
+    entries: BatchGetAssetPropertyAggregatesEntries;
+    /**
+     * The token to be used for the next set of paginated results.
+     */
+    nextToken?: NextToken;
+    /**
+     * The maximum number of results to return for each paginated request. A result set is returned in the two cases, whichever occurs first.   The size of the result set is less than 1 MB.   The number of data points in the result set is less than the value of maxResults. The maximum value of maxResults is 4000.  
+     */
+    maxResults?: BatchGetAssetPropertyAggregatesMaxResults;
+  }
+  export interface BatchGetAssetPropertyAggregatesResponse {
+    /**
+     * A list of the errors (if any) associated with the batch request. Each error entry contains the entryId of the entry that failed.
+     */
+    errorEntries: BatchGetAssetPropertyAggregatesErrorEntries;
+    /**
+     * A list of entries that were processed successfully by this batch request. Each success entry contains the entryId of the entry that succeeded and the latest query result.
+     */
+    successEntries: BatchGetAssetPropertyAggregatesSuccessEntries;
+    /**
+     * A list of entries that were not processed by this batch request. because these entries had been completely processed by previous paginated requests. Each skipped entry contains the entryId of the entry that skipped.
+     */
+    skippedEntries: BatchGetAssetPropertyAggregatesSkippedEntries;
+    /**
+     * The token for the next set of results, or null if there are no additional results.
+     */
+    nextToken?: NextToken;
+  }
+  export type BatchGetAssetPropertyAggregatesSkippedEntries = BatchGetAssetPropertyAggregatesSkippedEntry[];
+  export interface BatchGetAssetPropertyAggregatesSkippedEntry {
+    /**
+     * The ID of the entry.
+     */
+    entryId: EntryId;
+    /**
+     * The completion status of each entry that is associated with the BatchGetAssetPropertyAggregates API.
+     */
+    completionStatus: BatchEntryCompletionStatus;
+    /**
+     * The error information, such as the error code and the timestamp.
+     */
+    errorInfo?: BatchGetAssetPropertyAggregatesErrorInfo;
+  }
+  export type BatchGetAssetPropertyAggregatesSuccessEntries = BatchGetAssetPropertyAggregatesSuccessEntry[];
+  export interface BatchGetAssetPropertyAggregatesSuccessEntry {
+    /**
+     * The ID of the entry.
+     */
+    entryId: EntryId;
+    /**
+     * The requested aggregated asset property values (for example, average, minimum, and maximum).
+     */
+    aggregatedValues: AggregatedValues;
+  }
+  export type BatchGetAssetPropertyValueEntries = BatchGetAssetPropertyValueEntry[];
+  export interface BatchGetAssetPropertyValueEntry {
+    /**
+     * The ID of the entry.
+     */
+    entryId: EntryId;
+    /**
+     * The ID of the asset in which the asset property was created.
+     */
+    assetId?: ID;
+    /**
+     * The ID of the asset property.
+     */
+    propertyId?: ID;
+    /**
+     * The alias that identifies the property, such as an OPC-UA server data stream path (for example, /company/windfarm/3/turbine/7/temperature). For more information, see Mapping industrial data streams to asset properties in the IoT SiteWise User Guide.
+     */
+    propertyAlias?: AssetPropertyAlias;
+  }
+  export type BatchGetAssetPropertyValueErrorCode = "ResourceNotFoundException"|"InvalidRequestException"|"AccessDeniedException"|string;
+  export type BatchGetAssetPropertyValueErrorEntries = BatchGetAssetPropertyValueErrorEntry[];
+  export interface BatchGetAssetPropertyValueErrorEntry {
+    /**
+     * The error code.
+     */
+    errorCode: BatchGetAssetPropertyValueErrorCode;
+    /**
+     * The associated error message.
+     */
+    errorMessage: ErrorMessage;
+    /**
+     * The ID of the entry.
+     */
+    entryId: EntryId;
+  }
+  export interface BatchGetAssetPropertyValueErrorInfo {
+    /**
+     * The error code.
+     */
+    errorCode: BatchGetAssetPropertyValueErrorCode;
+    /**
+     * The date the error occurred, in Unix epoch time.
+     */
+    errorTimestamp: Timestamp;
+  }
+  export type BatchGetAssetPropertyValueHistoryEntries = BatchGetAssetPropertyValueHistoryEntry[];
+  export interface BatchGetAssetPropertyValueHistoryEntry {
+    /**
+     * The ID of the entry.
+     */
+    entryId: EntryId;
+    /**
+     * The ID of the asset in which the asset property was created.
+     */
+    assetId?: ID;
+    /**
+     * The ID of the asset property.
+     */
+    propertyId?: ID;
+    /**
+     * The alias that identifies the property, such as an OPC-UA server data stream path (for example, /company/windfarm/3/turbine/7/temperature). For more information, see Mapping industrial data streams to asset properties in the IoT SiteWise User Guide.
+     */
+    propertyAlias?: AssetPropertyAlias;
+    /**
+     * The exclusive start of the range from which to query historical data, expressed in seconds in Unix epoch time.
+     */
+    startDate?: Timestamp;
+    /**
+     * The inclusive end of the range from which to query historical data, expressed in seconds in Unix epoch time.
+     */
+    endDate?: Timestamp;
+    /**
+     * The quality by which to filter asset data.
+     */
+    qualities?: Qualities;
+    /**
+     * The chronological sorting order of the requested information. Default: ASCENDING 
+     */
+    timeOrdering?: TimeOrdering;
+  }
+  export type BatchGetAssetPropertyValueHistoryErrorCode = "ResourceNotFoundException"|"InvalidRequestException"|"AccessDeniedException"|string;
+  export type BatchGetAssetPropertyValueHistoryErrorEntries = BatchGetAssetPropertyValueHistoryErrorEntry[];
+  export interface BatchGetAssetPropertyValueHistoryErrorEntry {
+    /**
+     * The error code.
+     */
+    errorCode: BatchGetAssetPropertyValueHistoryErrorCode;
+    /**
+     * The associated error message.
+     */
+    errorMessage: ErrorMessage;
+    /**
+     * The ID of the entry.
+     */
+    entryId: EntryId;
+  }
+  export interface BatchGetAssetPropertyValueHistoryErrorInfo {
+    /**
+     * The error code.
+     */
+    errorCode: BatchGetAssetPropertyValueHistoryErrorCode;
+    /**
+     * The date the error occurred, in Unix epoch time.
+     */
+    errorTimestamp: Timestamp;
+  }
+  export type BatchGetAssetPropertyValueHistoryMaxResults = number;
+  export interface BatchGetAssetPropertyValueHistoryRequest {
+    /**
+     * The list of asset property historical value entries for the batch get request. You can specify up to 16 entries per request.
+     */
+    entries: BatchGetAssetPropertyValueHistoryEntries;
+    /**
+     * The token to be used for the next set of paginated results.
+     */
+    nextToken?: NextToken;
+    /**
+     * The maximum number of results to return for each paginated request. A result set is returned in the two cases, whichever occurs first.   The size of the result set is less than 1 MB.   The number of data points in the result set is less than the value of maxResults. The maximum value of maxResults is 4000.  
+     */
+    maxResults?: BatchGetAssetPropertyValueHistoryMaxResults;
+  }
+  export interface BatchGetAssetPropertyValueHistoryResponse {
+    /**
+     * A list of the errors (if any) associated with the batch request. Each error entry contains the entryId of the entry that failed.
+     */
+    errorEntries: BatchGetAssetPropertyValueHistoryErrorEntries;
+    /**
+     * A list of entries that were processed successfully by this batch request. Each success entry contains the entryId of the entry that succeeded and the latest query result.
+     */
+    successEntries: BatchGetAssetPropertyValueHistorySuccessEntries;
+    /**
+     * A list of entries that were not processed by this batch request. because these entries had been completely processed by previous paginated requests. Each skipped entry contains the entryId of the entry that skipped.
+     */
+    skippedEntries: BatchGetAssetPropertyValueHistorySkippedEntries;
+    /**
+     * The token for the next set of results, or null if there are no additional results.
+     */
+    nextToken?: NextToken;
+  }
+  export type BatchGetAssetPropertyValueHistorySkippedEntries = BatchGetAssetPropertyValueHistorySkippedEntry[];
+  export interface BatchGetAssetPropertyValueHistorySkippedEntry {
+    /**
+     * The ID of the entry.
+     */
+    entryId: EntryId;
+    /**
+     * The completion status of each entry that is associated with the BatchGetAssetPropertyValueHistory API.
+     */
+    completionStatus: BatchEntryCompletionStatus;
+    /**
+     * The error information, such as the error code and the timestamp.
+     */
+    errorInfo?: BatchGetAssetPropertyValueHistoryErrorInfo;
+  }
+  export type BatchGetAssetPropertyValueHistorySuccessEntries = BatchGetAssetPropertyValueHistorySuccessEntry[];
+  export interface BatchGetAssetPropertyValueHistorySuccessEntry {
+    /**
+     * The ID of the entry.
+     */
+    entryId: EntryId;
+    /**
+     * The requested historical values for the specified asset property.
+     */
+    assetPropertyValueHistory: AssetPropertyValueHistory;
+  }
+  export interface BatchGetAssetPropertyValueRequest {
+    /**
+     * The list of asset property value entries for the batch get request. You can specify up to 16 entries per request.
+     */
+    entries: BatchGetAssetPropertyValueEntries;
+    /**
+     * The token to be used for the next set of paginated results.
+     */
+    nextToken?: NextToken;
+  }
+  export interface BatchGetAssetPropertyValueResponse {
+    /**
+     * A list of the errors (if any) associated with the batch request. Each error entry contains the entryId of the entry that failed.
+     */
+    errorEntries: BatchGetAssetPropertyValueErrorEntries;
+    /**
+     * A list of entries that were processed successfully by this batch request. Each success entry contains the entryId of the entry that succeeded and the latest query result.
+     */
+    successEntries: BatchGetAssetPropertyValueSuccessEntries;
+    /**
+     * A list of entries that were not processed by this batch request. because these entries had been completely processed by previous paginated requests. Each skipped entry contains the entryId of the entry that skipped.
+     */
+    skippedEntries: BatchGetAssetPropertyValueSkippedEntries;
+    /**
+     * The token for the next set of results, or null if there are no additional results.
+     */
+    nextToken?: NextToken;
+  }
+  export type BatchGetAssetPropertyValueSkippedEntries = BatchGetAssetPropertyValueSkippedEntry[];
+  export interface BatchGetAssetPropertyValueSkippedEntry {
+    /**
+     * The ID of the entry.
+     */
+    entryId: EntryId;
+    /**
+     * The completion status of each entry that is associated with the BatchGetAssetPropertyValue request.
+     */
+    completionStatus: BatchEntryCompletionStatus;
+    /**
+     * The error information, such as the error code and the timestamp.
+     */
+    errorInfo?: BatchGetAssetPropertyValueErrorInfo;
+  }
+  export type BatchGetAssetPropertyValueSuccessEntries = BatchGetAssetPropertyValueSuccessEntry[];
+  export interface BatchGetAssetPropertyValueSuccessEntry {
+    /**
+     * The ID of the entry.
+     */
+    entryId: EntryId;
+    assetPropertyValue?: AssetPropertyValue;
   }
   export interface BatchPutAssetPropertyError {
     /**

@@ -28,6 +28,14 @@ declare class MediaTailor extends Service {
    */
   createChannel(callback?: (err: AWSError, data: MediaTailor.Types.CreateChannelResponse) => void): Request<MediaTailor.Types.CreateChannelResponse, AWSError>;
   /**
+   * Creates name for a specific live source in a source location.
+   */
+  createLiveSource(params: MediaTailor.Types.CreateLiveSourceRequest, callback?: (err: AWSError, data: MediaTailor.Types.CreateLiveSourceResponse) => void): Request<MediaTailor.Types.CreateLiveSourceResponse, AWSError>;
+  /**
+   * Creates name for a specific live source in a source location.
+   */
+  createLiveSource(callback?: (err: AWSError, data: MediaTailor.Types.CreateLiveSourceResponse) => void): Request<MediaTailor.Types.CreateLiveSourceResponse, AWSError>;
+  /**
    * Creates a new prefetch schedule for the specified playback configuration.
    */
   createPrefetchSchedule(params: MediaTailor.Types.CreatePrefetchScheduleRequest, callback?: (err: AWSError, data: MediaTailor.Types.CreatePrefetchScheduleResponse) => void): Request<MediaTailor.Types.CreatePrefetchScheduleResponse, AWSError>;
@@ -76,6 +84,14 @@ declare class MediaTailor extends Service {
    */
   deleteChannelPolicy(callback?: (err: AWSError, data: MediaTailor.Types.DeleteChannelPolicyResponse) => void): Request<MediaTailor.Types.DeleteChannelPolicyResponse, AWSError>;
   /**
+   * Deletes a specific live source in a specific source location.
+   */
+  deleteLiveSource(params: MediaTailor.Types.DeleteLiveSourceRequest, callback?: (err: AWSError, data: MediaTailor.Types.DeleteLiveSourceResponse) => void): Request<MediaTailor.Types.DeleteLiveSourceResponse, AWSError>;
+  /**
+   * Deletes a specific live source in a specific source location.
+   */
+  deleteLiveSource(callback?: (err: AWSError, data: MediaTailor.Types.DeleteLiveSourceResponse) => void): Request<MediaTailor.Types.DeleteLiveSourceResponse, AWSError>;
+  /**
    * Deletes the playback configuration for the specified name.  
    */
   deletePlaybackConfiguration(params: MediaTailor.Types.DeletePlaybackConfigurationRequest, callback?: (err: AWSError, data: MediaTailor.Types.DeletePlaybackConfigurationResponse) => void): Request<MediaTailor.Types.DeletePlaybackConfigurationResponse, AWSError>;
@@ -123,6 +139,14 @@ declare class MediaTailor extends Service {
    * Describes the properties of a specific channel.
    */
   describeChannel(callback?: (err: AWSError, data: MediaTailor.Types.DescribeChannelResponse) => void): Request<MediaTailor.Types.DescribeChannelResponse, AWSError>;
+  /**
+   * Provides details about a specific live source in a specific source location.
+   */
+  describeLiveSource(params: MediaTailor.Types.DescribeLiveSourceRequest, callback?: (err: AWSError, data: MediaTailor.Types.DescribeLiveSourceResponse) => void): Request<MediaTailor.Types.DescribeLiveSourceResponse, AWSError>;
+  /**
+   * Provides details about a specific live source in a specific source location.
+   */
+  describeLiveSource(callback?: (err: AWSError, data: MediaTailor.Types.DescribeLiveSourceResponse) => void): Request<MediaTailor.Types.DescribeLiveSourceResponse, AWSError>;
   /**
    * Retrieves the properties of the requested program.
    */
@@ -195,6 +219,14 @@ declare class MediaTailor extends Service {
    * Retrieves a list of channels that are associated with this account.
    */
   listChannels(callback?: (err: AWSError, data: MediaTailor.Types.ListChannelsResponse) => void): Request<MediaTailor.Types.ListChannelsResponse, AWSError>;
+  /**
+   * lists all the live sources in a source location.
+   */
+  listLiveSources(params: MediaTailor.Types.ListLiveSourcesRequest, callback?: (err: AWSError, data: MediaTailor.Types.ListLiveSourcesResponse) => void): Request<MediaTailor.Types.ListLiveSourcesResponse, AWSError>;
+  /**
+   * lists all the live sources in a source location.
+   */
+  listLiveSources(callback?: (err: AWSError, data: MediaTailor.Types.ListLiveSourcesResponse) => void): Request<MediaTailor.Types.ListLiveSourcesResponse, AWSError>;
   /**
    * Returns a list of the playback configurations defined in AWS Elemental MediaTailor. You can specify a maximum number of configurations to return at a time. The default maximum is 50. Results are returned in pagefuls. If MediaTailor has more configurations than the specified maximum, it provides parameters in the response that you can use to retrieve the next pageful.  
    */
@@ -291,6 +323,14 @@ declare class MediaTailor extends Service {
    * Updates an existing channel.
    */
   updateChannel(callback?: (err: AWSError, data: MediaTailor.Types.UpdateChannelResponse) => void): Request<MediaTailor.Types.UpdateChannelResponse, AWSError>;
+  /**
+   * Updates a specific live source in a specific source location.
+   */
+  updateLiveSource(params: MediaTailor.Types.UpdateLiveSourceRequest, callback?: (err: AWSError, data: MediaTailor.Types.UpdateLiveSourceResponse) => void): Request<MediaTailor.Types.UpdateLiveSourceResponse, AWSError>;
+  /**
+   * Updates a specific live source in a specific source location.
+   */
+  updateLiveSource(callback?: (err: AWSError, data: MediaTailor.Types.UpdateLiveSourceResponse) => void): Request<MediaTailor.Types.UpdateLiveSourceResponse, AWSError>;
   /**
    * Updates a source location on a specific channel.
    */
@@ -398,7 +438,7 @@ declare namespace MediaTailor {
   }
   export interface CdnConfiguration {
     /**
-     * A non-default content delivery network (CDN) to serve ad segments. By default, AWS Elemental MediaTailor uses Amazon CloudFront with default cache settings as its CDN for ad segments. To set up an alternate CDN, create a rule in your CDN for the origin ads.mediatailor.&amp;lt;region&gt;.amazonaws.com. Then specify the rule's name in this AdSegmentUrlPrefix. When AWS Elemental MediaTailor serves a manifest, it reports your CDN as the source for ad segments.
+     * A non-default content delivery network (CDN) to serve ad segments. By default, AWS Elemental MediaTailor uses Amazon CloudFront with default cache settings as its CDN for ad segments. To set up an alternate CDN, create a rule in your CDN for the origin ads.mediatailor.&amp;lt;region>.amazonaws.com. Then specify the rule's name in this AdSegmentUrlPrefix. When AWS Elemental MediaTailor serves a manifest, it reports your CDN as the source for ad segments.
      */
     AdSegmentUrlPrefix?: __string;
     /**
@@ -443,6 +483,10 @@ declare namespace MediaTailor {
      * The tags to assign to the channel.
      */
     Tags?: __mapOf__string;
+    /**
+     * The tier for this channel. STANDARD tier channels can contain live programs.
+     */
+    Tier: __string;
   }
   export type ChannelState = "RUNNING"|"STOPPED"|string;
   export type ConfigurationAliasesRequest = {[key: string]: __mapOf__string};
@@ -488,6 +532,10 @@ declare namespace MediaTailor {
      * The tags to assign to the channel.
      */
     Tags?: __mapOf__string;
+    /**
+     * The tier of the channel.
+     */
+    Tier?: Tier;
   }
   export interface CreateChannelResponse {
     /**
@@ -524,6 +572,58 @@ declare namespace MediaTailor {
     PlaybackMode?: __string;
     /**
      * The tags assigned to the channel.
+     */
+    Tags?: __mapOf__string;
+    /**
+     * The channel's tier.
+     */
+    Tier?: __string;
+  }
+  export interface CreateLiveSourceRequest {
+    /**
+     * A list of HTTP package configuration parameters for this live source.
+     */
+    HttpPackageConfigurations: HttpPackageConfigurations;
+    /**
+     * The identifier for the live source you are working on.
+     */
+    LiveSourceName: __string;
+    /**
+     * The identifier for the source location you are working on.
+     */
+    SourceLocationName: __string;
+    /**
+     * The tags to assign to the live source.
+     */
+    Tags?: __mapOf__string;
+  }
+  export interface CreateLiveSourceResponse {
+    /**
+     * The ARN of the live source.
+     */
+    Arn?: __string;
+    /**
+     * The timestamp that indicates when the live source was created.
+     */
+    CreationTime?: __timestampUnix;
+    /**
+     * The HTTP package configurations.
+     */
+    HttpPackageConfigurations?: HttpPackageConfigurations;
+    /**
+     * The timestamp that indicates when the live source was modified.
+     */
+    LastModifiedTime?: __timestampUnix;
+    /**
+     * The name of the live source.
+     */
+    LiveSourceName?: __string;
+    /**
+     * The name of the source location associated with the VOD source.
+     */
+    SourceLocationName?: __string;
+    /**
+     * The tags assigned to the live source.
      */
     Tags?: __mapOf__string;
   }
@@ -585,6 +685,10 @@ declare namespace MediaTailor {
      */
     ChannelName: __string;
     /**
+     * The name of the LiveSource for this Program.
+     */
+    LiveSourceName?: __string;
+    /**
      * The identifier for the program you are working on.
      */
     ProgramName: __string;
@@ -599,7 +703,7 @@ declare namespace MediaTailor {
     /**
      * The name that's used to refer to a VOD source.
      */
-    VodSourceName: __string;
+    VodSourceName?: __string;
   }
   export interface CreateProgramResponse {
     /**
@@ -618,6 +722,10 @@ declare namespace MediaTailor {
      * The timestamp of when the program was created.
      */
     CreationTime?: __timestampUnix;
+    /**
+     * The name of the LiveSource for this Program.
+     */
+    LiveSourceName?: __string;
     /**
      * The name of the program.
      */
@@ -648,6 +756,9 @@ declare namespace MediaTailor {
      * The source's HTTP package configurations.
      */
     HttpConfiguration: HttpConfiguration;
+    /**
+     * A list of the segment delivery configurations associated with this resource.
+     */
     SegmentDeliveryConfigurations?: __listOfSegmentDeliveryConfiguration;
     /**
      * The identifier for the source location you are working on.
@@ -683,6 +794,9 @@ declare namespace MediaTailor {
      * The timestamp that indicates when the source location was last modified.
      */
     LastModifiedTime?: __timestampUnix;
+    /**
+     * A list of the segment delivery configurations associated with this resource.
+     */
     SegmentDeliveryConfigurations?: __listOfSegmentDeliveryConfiguration;
     /**
      * The name of the source location.
@@ -695,7 +809,7 @@ declare namespace MediaTailor {
   }
   export interface CreateVodSourceRequest {
     /**
-     * An array of HTTP package configuration parameters for this VOD source.
+     * A list of HTTP package configuration parameters for this VOD source.
      */
     HttpPackageConfigurations: HttpPackageConfigurations;
     /**
@@ -725,7 +839,7 @@ declare namespace MediaTailor {
      */
     HttpPackageConfigurations?: HttpPackageConfigurations;
     /**
-     * The ARN for the VOD source.
+     * The last modified time of the VOD source.
      */
     LastModifiedTime?: __timestampUnix;
     /**
@@ -804,6 +918,18 @@ declare namespace MediaTailor {
     ChannelName: __string;
   }
   export interface DeleteChannelResponse {
+  }
+  export interface DeleteLiveSourceRequest {
+    /**
+     * The identifier for the live source you are working on.
+     */
+    LiveSourceName: __string;
+    /**
+     * The identifier for the source location you are working on.
+     */
+    SourceLocationName: __string;
+  }
+  export interface DeleteLiveSourceResponse {
   }
   export interface DeletePlaybackConfigurationRequest {
     /**
@@ -900,6 +1026,50 @@ declare namespace MediaTailor {
      * The tags assigned to the channel.
      */
     Tags?: __mapOf__string;
+    /**
+     * The channel's tier.
+     */
+    Tier?: __string;
+  }
+  export interface DescribeLiveSourceRequest {
+    /**
+     * The identifier for the live source you are working on.
+     */
+    LiveSourceName: __string;
+    /**
+     * The identifier for the source location you are working on.
+     */
+    SourceLocationName: __string;
+  }
+  export interface DescribeLiveSourceResponse {
+    /**
+     * The ARN of the live source.
+     */
+    Arn?: __string;
+    /**
+     * The timestamp that indicates when the live source was created.
+     */
+    CreationTime?: __timestampUnix;
+    /**
+     * The HTTP package configurations.
+     */
+    HttpPackageConfigurations?: HttpPackageConfigurations;
+    /**
+     * The timestamp that indicates when the live source was modified.
+     */
+    LastModifiedTime?: __timestampUnix;
+    /**
+     * The name of the live source.
+     */
+    LiveSourceName?: __string;
+    /**
+     * The name of the source location associated with the VOD source.
+     */
+    SourceLocationName?: __string;
+    /**
+     * The tags assigned to the live source.
+     */
+    Tags?: __mapOf__string;
   }
   export interface DescribeProgramRequest {
     /**
@@ -928,6 +1098,10 @@ declare namespace MediaTailor {
      * The timestamp of when the program was created.
      */
     CreationTime?: __timestampUnix;
+    /**
+     * The name of the LiveSource for this Program.
+     */
+    LiveSourceName?: __string;
     /**
      * The name of the program.
      */
@@ -976,6 +1150,9 @@ declare namespace MediaTailor {
      * The timestamp that indicates when the source location was last modified.
      */
     LastModifiedTime?: __timestampUnix;
+    /**
+     * A list of the segment delivery configurations associated with this resource.
+     */
     SegmentDeliveryConfigurations?: __listOfSegmentDeliveryConfiguration;
     /**
      * The name of the source location.
@@ -1010,7 +1187,7 @@ declare namespace MediaTailor {
      */
     HttpPackageConfigurations?: HttpPackageConfigurations;
     /**
-     * The ARN for the VOD source.
+     * The last modified time of the VOD source.
      */
     LastModifiedTime?: __timestampUnix;
     /**
@@ -1058,7 +1235,7 @@ declare namespace MediaTailor {
   }
   export interface GetChannelScheduleResponse {
     /**
-     * An array of schedule entries for the channel.
+     * A list of schedule entries for the channel.
      */
     Items?: __listOfScheduleEntry;
     /**
@@ -1235,7 +1412,7 @@ declare namespace MediaTailor {
   }
   export interface ListAlertsResponse {
     /**
-     * An array of alerts that are associated with this resource.
+     * A list of alerts that are associated with this resource.
      */
     Items?: __listOfAlert;
     /**
@@ -1255,11 +1432,35 @@ declare namespace MediaTailor {
   }
   export interface ListChannelsResponse {
     /**
-     * An array of channels that are associated with this account.
+     * A list of channels that are associated with this account.
      */
     Items?: __listOfChannel;
     /**
      * Pagination token returned by the list request when results exceed the maximum allowed. Use the token to fetch the next page of results.
+     */
+    NextToken?: __string;
+  }
+  export interface ListLiveSourcesRequest {
+    /**
+     * Upper bound on number of records to return. The maximum number of results is 100.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * Pagination token from the GET list request. Use the token to fetch the next page of results.
+     */
+    NextToken?: __string;
+    /**
+     * The identifier for the source location you are working on.
+     */
+    SourceLocationName: __string;
+  }
+  export interface ListLiveSourcesResponse {
+    /**
+     * Lists the live sources.
+     */
+    Items?: __listOfLiveSource;
+    /**
+     * Pagination token from the list request. Use the token to fetch the next page of results.
      */
     NextToken?: __string;
   }
@@ -1323,7 +1524,7 @@ declare namespace MediaTailor {
   }
   export interface ListSourceLocationsResponse {
     /**
-     * An array of source locations.
+     * A list of source locations.
      */
     Items?: __listOfSourceLocation;
     /**
@@ -1376,6 +1577,36 @@ declare namespace MediaTailor {
      * The maximum allowed duration for the pre-roll ad avail. AWS Elemental MediaTailor won't play pre-roll ads to exceed this duration, regardless of the total duration of ads that the ADS returns.
      */
     MaxDurationSeconds?: __integer;
+  }
+  export interface LiveSource {
+    /**
+     * The ARN for the live source.
+     */
+    Arn: __string;
+    /**
+     * The timestamp that indicates when the live source was created.
+     */
+    CreationTime?: __timestampUnix;
+    /**
+     * The HTTP package configurations for the live source.
+     */
+    HttpPackageConfigurations: HttpPackageConfigurations;
+    /**
+     * The timestamp that indicates when the live source was last modified.
+     */
+    LastModifiedTime?: __timestampUnix;
+    /**
+     * The name that's used to refer to a live source.
+     */
+    LiveSourceName: __string;
+    /**
+     * The name of the source location.
+     */
+    SourceLocationName: __string;
+    /**
+     * The tags assigned to the live source.
+     */
+    Tags?: __mapOf__string;
   }
   export interface LogConfiguration {
     /**
@@ -1760,6 +1991,10 @@ declare namespace MediaTailor {
      */
     ChannelName: __string;
     /**
+     * The name of the live source used for the program.
+     */
+    LiveSourceName?: __string;
+    /**
      * The name of the program.
      */
     ProgramName: __string;
@@ -1778,7 +2013,7 @@ declare namespace MediaTailor {
     /**
      * The name of the VOD source.
      */
-    VodSourceName: __string;
+    VodSourceName?: __string;
   }
   export type ScheduleEntryType = "PROGRAM"|"FILLER_SLATE"|string;
   export interface SecretsManagerAccessTokenConfiguration {
@@ -1796,7 +2031,13 @@ declare namespace MediaTailor {
     SecretStringKey?: __string;
   }
   export interface SegmentDeliveryConfiguration {
+    /**
+     * The base URL of the host or path of the segment delivery server that you're using to serve segments. This is typically a content delivery network (CDN). The URL can be absolute or relative. To use an absolute URL include the protocol, such as https://example.com/some/path. To use a relative URL specify the relative path, such as /some/path*.
+     */
     BaseUrl?: __string;
+    /**
+     * A unique identifier used to distinguish between multiple segment delivery configurations in a source location.
+     */
     Name?: __string;
   }
   export interface SlateSource {
@@ -1834,6 +2075,9 @@ declare namespace MediaTailor {
      * The timestamp that indicates when the source location was last modified.
      */
     LastModifiedTime?: __timestampUnix;
+    /**
+     * The segment delivery configurations for the source location.
+     */
     SegmentDeliveryConfigurations?: __listOfSegmentDeliveryConfiguration;
     /**
      * The name of the source location.
@@ -1888,7 +2132,12 @@ declare namespace MediaTailor {
      */
     Tags: __mapOf__string;
   }
+  export type Tier = "BASIC"|"STANDARD"|string;
   export interface Transition {
+    /**
+     * The duration of the live program in seconds.
+     */
+    DurationMillis?: __long;
     /**
      * The position where this program will be inserted relative to the RelativePosition.
      */
@@ -1968,6 +2217,54 @@ declare namespace MediaTailor {
      * The tags assigned to the channel.
      */
     Tags?: __mapOf__string;
+    /**
+     * The channel's tier.
+     */
+    Tier?: __string;
+  }
+  export interface UpdateLiveSourceRequest {
+    /**
+     * A list of HTTP package configurations for the live source on this account.
+     */
+    HttpPackageConfigurations: HttpPackageConfigurations;
+    /**
+     * The identifier for the live source you are working on.
+     */
+    LiveSourceName: __string;
+    /**
+     * The identifier for the source location you are working on.
+     */
+    SourceLocationName: __string;
+  }
+  export interface UpdateLiveSourceResponse {
+    /**
+     * The ARN of the live source.
+     */
+    Arn?: __string;
+    /**
+     * The timestamp that indicates when the live source was created.
+     */
+    CreationTime?: __timestampUnix;
+    /**
+     * The HTTP package configurations.
+     */
+    HttpPackageConfigurations?: HttpPackageConfigurations;
+    /**
+     * The timestamp that indicates when the live source was modified.
+     */
+    LastModifiedTime?: __timestampUnix;
+    /**
+     * The name of the live source.
+     */
+    LiveSourceName?: __string;
+    /**
+     * The name of the source location associated with the VOD source.
+     */
+    SourceLocationName?: __string;
+    /**
+     * The tags assigned to the live source.
+     */
+    Tags?: __mapOf__string;
   }
   export interface UpdateSourceLocationRequest {
     /**
@@ -1982,6 +2279,9 @@ declare namespace MediaTailor {
      * The HTTP configuration for the source location.
      */
     HttpConfiguration: HttpConfiguration;
+    /**
+     * A list of the segment delivery configurations associated with this resource.
+     */
     SegmentDeliveryConfigurations?: __listOfSegmentDeliveryConfiguration;
     /**
      * The identifier for the source location you are working on.
@@ -2013,6 +2313,9 @@ declare namespace MediaTailor {
      * The timestamp that indicates when the source location was last modified.
      */
     LastModifiedTime?: __timestampUnix;
+    /**
+     * A list of the segment delivery configurations associated with this resource.
+     */
     SegmentDeliveryConfigurations?: __listOfSegmentDeliveryConfiguration;
     /**
      * The name of the source location.
@@ -2025,7 +2328,7 @@ declare namespace MediaTailor {
   }
   export interface UpdateVodSourceRequest {
     /**
-     * An array of HTTP package configurations for the VOD source on this account.
+     * A list of HTTP package configurations for the VOD source on this account.
      */
     HttpPackageConfigurations: HttpPackageConfigurations;
     /**
@@ -2051,7 +2354,7 @@ declare namespace MediaTailor {
      */
     HttpPackageConfigurations?: HttpPackageConfigurations;
     /**
-     * The ARN for the VOD source.
+     * The last modified time of the VOD source.
      */
     LastModifiedTime?: __timestampUnix;
     /**
@@ -2105,6 +2408,7 @@ declare namespace MediaTailor {
   export type __listOfAlert = Alert[];
   export type __listOfAvailMatchingCriteria = AvailMatchingCriteria[];
   export type __listOfChannel = Channel[];
+  export type __listOfLiveSource = LiveSource[];
   export type __listOfPlaybackConfiguration = PlaybackConfiguration[];
   export type __listOfPrefetchSchedule = PrefetchSchedule[];
   export type __listOfScheduleAdBreak = ScheduleAdBreak[];

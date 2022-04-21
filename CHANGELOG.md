@@ -1,6 +1,15 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1118.0-->
+<!--LATEST=2.1119.0-->
 <!--ENTRYINSERT-->
+
+## 2.1119.0
+* feature: Glue: This release adds APIs to create, read, delete, list, and batch read of Glue custom entity types
+* feature: IoTSiteWise: This release adds 3 new batch data query APIs : BatchGetAssetPropertyValue, BatchGetAssetPropertyValueHistory and BatchGetAssetPropertyAggregates
+* feature: IoTTwinMaker: General availability (GA) for AWS IoT TwinMaker. For more information, see https://docs.aws.amazon.com/iot-twinmaker/latest/apireference/Welcome.html
+* feature: LookoutMetrics: Added DetectMetricSetConfig API for detecting configuration required for creating metric set from provided S3 data source.
+* feature: MediaTailor: This release introduces tiered channels and adds support for live sources. Customers using a STANDARD channel can now create programs using live sources.
+* feature: StorageGateway: This release adds support for minimum of 5 character length virtual tape barcodes.
+* feature: Wisdom: This release updates the GetRecommendations API to include a trigger event list for classifying and grouping recommendations.
 
 ## 2.1118.0
 * feature: Connect: This release adds APIs to search, claim, release, list, update, and describe phone numbers. You can also use them to associate and disassociate contact flows to phone numbers.
