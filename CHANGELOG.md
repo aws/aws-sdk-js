@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1119.0-->
+<!--LATEST=2.1120.0-->
 <!--ENTRYINSERT-->
+
+## 2.1120.0
+* feature: ChimeSDKMeetings: Include additional exceptions types.
+* feature: EC2: Adds support for waiters that automatically poll for a deleted NAT Gateway until it reaches the deleted state.
 
 ## 2.1119.0
 * feature: Glue: This release adds APIs to create, read, delete, list, and batch read of Glue custom entity types
