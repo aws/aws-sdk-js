@@ -608,6 +608,7 @@ declare namespace SecurityHub {
   export type AdminStatus = "ENABLED"|"DISABLE_IN_PROGRESS"|string;
   export type AdminsMaxResults = number;
   export type ArnList = NonEmptyString[];
+  export type AutoEnableStandards = "NONE"|"DEFAULT"|string;
   export interface AvailabilityZone {
     /**
      * The name of the Availability Zone.
@@ -7197,11 +7198,11 @@ declare namespace SecurityHub {
      */
     ProductArn: NonEmptyString;
     /**
-     * The name of the product that generated the finding. Security Hub populates this attribute automatically for each finding. You cannot update it using BatchImportFindings or BatchUpdateFindings. The exception to this is when you use a custom integration. When you use the Security Hub console to filter findings by product name, you use this attribute. When you use the Security Hub API to filter findings by product name, you use the aws/securityhub/ProductName attribute under ProductFields. Security Hub does not synchronize those two attributes.
+     * The name of the product that generated the finding. Security Hub populates this attribute automatically for each finding. You cannot update this attribute with BatchImportFindings or BatchUpdateFindings. The exception to this is a custom integration. When you use the Security Hub console or API to filter findings by product name, you use this attribute.
      */
     ProductName?: NonEmptyString;
     /**
-     * The name of the company for the product that generated the finding. Security Hub populates this attribute automatically for each finding. You cannot be updated using BatchImportFindings or BatchUpdateFindings. The exception to this is when you use a custom integration. When you use the Security Hub console to filter findings by company name, you use this attribute. When you use the Security Hub API to filter findings by company name, you use the aws/securityhub/CompanyName attribute under ProductFields. Security Hub does not synchronize those two attributes.
+     * The name of the company for the product that generated the finding. Security Hub populates this attribute automatically for each finding. You cannot update this attribute with BatchImportFindings or BatchUpdateFindings. The exception to this is a custom integration. When you use the Security Hub console or API to filter findings by company name, you use this attribute.
      */
     CompanyName?: NonEmptyString;
     /**
@@ -7427,11 +7428,11 @@ declare namespace SecurityHub {
      */
     ProductFields?: MapFilterList;
     /**
-     * The name of the solution (product) that generates findings. Note that this is a filter against the aws/securityhub/ProductName field in ProductFields. It is not a filter for the top-level ProductName field.
+     * The name of the solution (product) that generates findings.
      */
     ProductName?: StringFilterList;
     /**
-     * The name of the findings provider (company) that owns the solution (product) that generates findings. Note that this is a filter against the aws/securityhub/CompanyName field in ProductFields. It is not a filter for the top-level CompanyName field.
+     * The name of the findings provider (company) that owns the solution (product) that generates findings.
      */
     CompanyName?: StringFilterList;
     /**
@@ -8543,6 +8544,10 @@ declare namespace SecurityHub {
      * Whether the maximum number of allowed member accounts are already associated with the Security Hub administrator account.
      */
     MemberAccountLimitReached?: Boolean;
+    /**
+     * Whether to automatically enable Security Hub default standards for new member accounts in the organization. The default value of this parameter is equal to DEFAULT. If equal to DEFAULT, then Security Hub default standards are automatically enabled for new member accounts. If equal to NONE, then default standards are not automatically enabled for new member accounts.
+     */
+    AutoEnableStandards?: AutoEnableStandards;
   }
   export interface DescribeProductsRequest {
     /**
@@ -10646,6 +10651,10 @@ declare namespace SecurityHub {
      * Whether to automatically enable Security Hub for new accounts in the organization. By default, this is false, and new accounts are not added automatically. To automatically enable Security Hub for new accounts, set this to true.
      */
     AutoEnable: Boolean;
+    /**
+     * Whether to automatically enable Security Hub default standards for new member accounts in the organization. By default, this parameter is equal to DEFAULT, and new member accounts are automatically enabled with default Security Hub standards. To opt out of enabling default standards for new member accounts, set this parameter equal to NONE.
+     */
+    AutoEnableStandards?: AutoEnableStandards;
   }
   export interface UpdateOrganizationConfigurationResponse {
   }
