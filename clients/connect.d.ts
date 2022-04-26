@@ -796,6 +796,14 @@ declare class Connect extends Service {
    */
   searchAvailablePhoneNumbers(callback?: (err: AWSError, data: Connect.Types.SearchAvailablePhoneNumbersResponse) => void): Request<Connect.Types.SearchAvailablePhoneNumbersResponse, AWSError>;
   /**
+   * Searches users in an Amazon Connect instance, with optional filtering.
+   */
+  searchUsers(params: Connect.Types.SearchUsersRequest, callback?: (err: AWSError, data: Connect.Types.SearchUsersResponse) => void): Request<Connect.Types.SearchUsersResponse, AWSError>;
+  /**
+   * Searches users in an Amazon Connect instance, with optional filtering.
+   */
+  searchUsers(callback?: (err: AWSError, data: Connect.Types.SearchUsersResponse) => void): Request<Connect.Types.SearchUsersResponse, AWSError>;
+  /**
    * Searches for vocabularies within a specific Amazon Connect instance using State, NameStartsWith, and LanguageCode.
    */
   searchVocabularies(params: Connect.Types.SearchVocabulariesRequest, callback?: (err: AWSError, data: Connect.Types.SearchVocabulariesResponse) => void): Request<Connect.Types.SearchVocabulariesResponse, AWSError>;
@@ -1236,6 +1244,7 @@ declare namespace Connect {
      */
     AwaitAnswerMachinePrompt?: Boolean;
   }
+  export type ApproximateTotalCount = number;
   export interface AssociateApprovedOriginRequest {
     /**
      * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
@@ -1466,7 +1475,7 @@ declare namespace Connect {
   }
   export interface ClaimPhoneNumberResponse {
     /**
-     * The identifier of the phone number.
+     * A unique identifier for the phone number.
      */
     PhoneNumberId?: PhoneNumberId;
     /**
@@ -1476,7 +1485,7 @@ declare namespace Connect {
   }
   export interface ClaimedPhoneNumberSummary {
     /**
-     * The identifier of the phone number.
+     * A unique identifier for the phone number.
      */
     PhoneNumberId?: PhoneNumberId;
     /**
@@ -1700,6 +1709,20 @@ declare namespace Connect {
   export type ContactId = string;
   export type ContactInitiationMethod = "INBOUND"|"OUTBOUND"|"TRANSFER"|"QUEUE_TRANSFER"|"CALLBACK"|"API"|string;
   export type ContactReferences = {[key: string]: Reference};
+  export interface ControlPlaneTagFilter {
+    /**
+     * A list of conditions which would be applied together with an OR condition. 
+     */
+    OrConditions?: TagOrConditionList;
+    /**
+     * A list of conditions which would be applied together with an AND condition.
+     */
+    AndConditions?: TagAndConditionList;
+    /**
+     * A leaf node condition which can be used to specify a tag condition. 
+     */
+    TagCondition?: TagCondition;
+  }
   export interface CreateAgentStatusRequest {
     /**
      * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
@@ -2544,13 +2567,13 @@ declare namespace Connect {
   }
   export interface DescribePhoneNumberRequest {
     /**
-     * The identifier of the phone number.
+     * A unique identifier for the phone number.
      */
     PhoneNumberId: PhoneNumberId;
   }
   export interface DescribePhoneNumberResponse {
     /**
-     * Information about a phone number that's been claimed to your Amazon Connect instance. 
+     * Information about a phone number that's been claimed to your Amazon Connect instance.
      */
     ClaimedPhoneNumberSummary?: ClaimedPhoneNumberSummary;
   }
@@ -2754,7 +2777,7 @@ declare namespace Connect {
   }
   export interface DisassociatePhoneNumberContactFlowRequest {
     /**
-     * The identifier of the phone number.
+     * A unique identifier for the phone number.
      */
     PhoneNumberId: PhoneNumberId;
     /**
@@ -2965,7 +2988,18 @@ declare namespace Connect {
      */
     Tags?: TagMap;
   }
+  export interface HierarchyGroupCondition {
+    /**
+     * The value in the hierarchy group condition.
+     */
+    Value?: String;
+    /**
+     * The type of hierarchy group match.
+     */
+    HierarchyGroupMatchType?: HierarchyGroupMatchType;
+  }
   export type HierarchyGroupId = string;
+  export type HierarchyGroupMatchType = "EXACT"|"WITH_CHILD_GROUPS"|string;
   export type HierarchyGroupName = string;
   export interface HierarchyGroupSummary {
     /**
@@ -3798,7 +3832,7 @@ declare namespace Connect {
   }
   export interface ListPhoneNumbersSummary {
     /**
-     * The identifier of the phone number.
+     * A unique identifier for the phone number.
      */
     PhoneNumberId?: PhoneNumberId;
     /**
@@ -4203,6 +4237,7 @@ declare namespace Connect {
   export type MinutesLimit60 = number;
   export type Name = string;
   export type NextToken = string;
+  export type NextToken2500 = string;
   export type Origin = string;
   export type OriginsList = Origin[];
   export interface OutboundCallerConfig {
@@ -4493,7 +4528,7 @@ declare namespace Connect {
   export type ReferenceValue = string;
   export interface ReleasePhoneNumberRequest {
     /**
-     * The identifier of the phone number.
+     * A unique identifier for the phone number.
      */
     PhoneNumberId: PhoneNumberId;
     /**
@@ -4671,6 +4706,39 @@ declare namespace Connect {
      * A list of available phone numbers that you can claim for your Amazon Connect instance.
      */
     AvailableNumbersList?: AvailableNumbersList;
+  }
+  export interface SearchUsersRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     */
+    InstanceId?: InstanceId;
+    /**
+     * The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+     */
+    NextToken?: NextToken2500;
+    /**
+     * The maximum number of results to return per page.
+     */
+    MaxResults?: MaxResult100;
+    /**
+     * Filters to be applied to search results.
+     */
+    SearchFilter?: UserSearchFilter;
+    SearchCriteria?: UserSearchCriteria;
+  }
+  export interface SearchUsersResponse {
+    /**
+     * Information about the users.
+     */
+    Users?: UserSearchSummaryList;
+    /**
+     * If there are additional results, this is the token for the next set of results.
+     */
+    NextToken?: NextToken2500;
+    /**
+     * The total number of users who matched your search query.
+     */
+    ApproximateTotalCount?: ApproximateTotalCount;
   }
   export interface SearchVocabulariesRequest {
     /**
@@ -5004,6 +5072,21 @@ declare namespace Connect {
   export type StorageType = "S3"|"KINESIS_VIDEO_STREAM"|"KINESIS_STREAM"|"KINESIS_FIREHOSE"|string;
   export type StreamingId = string;
   export type String = string;
+  export type StringComparisonType = "STARTS_WITH"|"CONTAINS"|"EXACT"|string;
+  export interface StringCondition {
+    /**
+     * The name of the field in the string condition.
+     */
+    FieldName?: String;
+    /**
+     * The value of the string.
+     */
+    Value?: String;
+    /**
+     * The type of comparison to be made when evaluating the string condition.
+     */
+    ComparisonType?: StringComparisonType;
+  }
   export type SupportedMessagingContentType = string;
   export type SupportedMessagingContentTypes = SupportedMessagingContentType[];
   export interface SuspendContactRecordingRequest {
@@ -5022,9 +5105,21 @@ declare namespace Connect {
   }
   export interface SuspendContactRecordingResponse {
   }
+  export type TagAndConditionList = TagCondition[];
+  export interface TagCondition {
+    /**
+     * The tag key in the tag condition.
+     */
+    TagKey?: String;
+    /**
+     * The tag value in the tag condition.
+     */
+    TagValue?: String;
+  }
   export type TagKey = string;
   export type TagKeyList = TagKey[];
   export type TagMap = {[key: string]: TagValue};
+  export type TagOrConditionList = TagAndConditionList[];
   export interface TagResourceRequest {
     /**
      * The Amazon Resource Name (ARN) of the resource.
@@ -5301,7 +5396,7 @@ declare namespace Connect {
   }
   export interface UpdatePhoneNumberRequest {
     /**
-     * The identifier of the phone number.
+     * A unique identifier for the phone number.
      */
     PhoneNumberId: PhoneNumberId;
     /**
@@ -5315,7 +5410,7 @@ declare namespace Connect {
   }
   export interface UpdatePhoneNumberResponse {
     /**
-     * The identifier of the phone number.
+     * A unique identifier for the phone number.
      */
     PhoneNumberId?: PhoneNumberId;
     /**
@@ -5686,6 +5781,16 @@ declare namespace Connect {
      */
     Email?: Email;
   }
+  export interface UserIdentityInfoLite {
+    /**
+     * The user's first name.
+     */
+    FirstName?: AgentFirstName;
+    /**
+     * The user's last name.
+     */
+    LastName?: AgentLastName;
+  }
   export interface UserPhoneConfig {
     /**
      * The phone type.
@@ -5714,6 +5819,68 @@ declare namespace Connect {
      */
     ContactFlowId: ContactFlowId;
   }
+  export type UserSearchConditionList = UserSearchCriteria[];
+  export interface UserSearchCriteria {
+    /**
+     * A list of conditions which would be applied together with an OR condition.
+     */
+    OrConditions?: UserSearchConditionList;
+    /**
+     * A list of conditions which would be applied together with an AND condition. 
+     */
+    AndConditions?: UserSearchConditionList;
+    /**
+     * A leaf node condition which can be used to specify a string condition.
+     */
+    StringCondition?: StringCondition;
+    /**
+     * A leaf node condition which can be used to specify a hierarchy group condition.
+     */
+    HierarchyGroupCondition?: HierarchyGroupCondition;
+  }
+  export interface UserSearchFilter {
+    TagFilter?: ControlPlaneTagFilter;
+  }
+  export interface UserSearchSummary {
+    /**
+     * The Amazon Resource Name (ARN) of the user.
+     */
+    Arn?: ARN;
+    /**
+     * The directory identifier of the user.
+     */
+    DirectoryUserId?: DirectoryUserId;
+    /**
+     * The identifier of the user's hierarchy group.
+     */
+    HierarchyGroupId?: HierarchyGroupId;
+    /**
+     * The identifier of the user's summary.
+     */
+    Id?: UserId;
+    /**
+     * The user's first name and last name.
+     */
+    IdentityInfo?: UserIdentityInfoLite;
+    PhoneConfig?: UserPhoneConfig;
+    /**
+     * The identifier of the user's routing profile.
+     */
+    RoutingProfileId?: RoutingProfileId;
+    /**
+     * The identifiers of the user's security profiles.
+     */
+    SecurityProfileIds?: SecurityProfileIds;
+    /**
+     * The tags used to organize, track, or control access for this resource.
+     */
+    Tags?: TagMap;
+    /**
+     * The name of the user.
+     */
+    Username?: AgentUsername;
+  }
+  export type UserSearchSummaryList = UserSearchSummary[];
   export interface UserSummary {
     /**
      * The identifier of the user account.

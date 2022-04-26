@@ -28,19 +28,28 @@
           "shape": "BadRequestException"
         },
         {
-          "shape": "UnauthorizedException"
-        },
-        {
-          "shape": "ServiceUnavailableException"
+          "shape": "ForbiddenException"
         },
         {
           "shape": "NotFoundException"
         },
         {
-          "shape": "ForbiddenException"
+          "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "UnprocessableEntityException"
         },
         {
           "shape": "LimitExceededException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        },
+        {
+          "shape": "ThrottlingException"
         }
       ],
       "documentation": "<p>Creates up to 100 attendees for an active Amazon Chime SDK meeting. For more information about the Amazon Chime SDK, see <a href=\"https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html\">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i>.</p>"
@@ -65,19 +74,25 @@
           "shape": "ForbiddenException"
         },
         {
+          "shape": "NotFoundException"
+        },
+        {
           "shape": "UnauthorizedException"
         },
         {
           "shape": "UnprocessableEntityException"
         },
         {
+          "shape": "LimitExceededException"
+        },
+        {
           "shape": "ServiceUnavailableException"
         },
         {
-          "shape": "NotFoundException"
+          "shape": "ServiceFailureException"
         },
         {
-          "shape": "LimitExceededException"
+          "shape": "ThrottlingException"
         }
       ],
       "documentation": "<p> Creates a new attendee for an active Amazon Chime SDK meeting. For more information about the Amazon Chime SDK, see <a href=\"https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html\">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i>. </p>"
@@ -99,10 +114,19 @@
           "shape": "BadRequestException"
         },
         {
-          "shape": "ServiceUnavailableException"
+          "shape": "ForbiddenException"
         },
         {
           "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
         },
         {
           "shape": "LimitExceededException"
@@ -127,10 +151,19 @@
           "shape": "BadRequestException"
         },
         {
-          "shape": "ServiceUnavailableException"
+          "shape": "ForbiddenException"
         },
         {
           "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
         },
         {
           "shape": "LimitExceededException"
@@ -150,10 +183,25 @@
       },
       "errors": [
         {
+          "shape": "BadRequestException"
+        },
+        {
           "shape": "ForbiddenException"
         },
         {
           "shape": "NotFoundException"
+        },
+        {
+          "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        },
+        {
+          "shape": "ThrottlingException"
         }
       ],
       "documentation": "<p>Deletes an attendee from the specified Amazon Chime SDK meeting and deletes their <code>JoinToken</code>. Attendees are automatically deleted when a Amazon Chime SDK meeting is deleted. For more information about the Amazon Chime SDK, see <a href=\"https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html\">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i>.</p>"
@@ -174,6 +222,21 @@
         },
         {
           "shape": "ForbiddenException"
+        },
+        {
+          "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        },
+        {
+          "shape": "ThrottlingException"
         }
       ],
       "documentation": "<p>Deletes the specified Amazon Chime SDK meeting. The operation deletes all attendees, disconnects all clients, and prevents new clients from joining the meeting. For more information about the Amazon Chime SDK, see <a href=\"https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html\">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i>.</p>"
@@ -195,10 +258,22 @@
           "shape": "BadRequestException"
         },
         {
+          "shape": "ForbiddenException"
+        },
+        {
           "shape": "NotFoundException"
         },
         {
-          "shape": "ForbiddenException"
+          "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        },
+        {
+          "shape": "ThrottlingException"
         }
       ],
       "documentation": "<p> Gets the Amazon Chime SDK attendee details for a specified meeting ID and attendee ID. For more information about the Amazon Chime SDK, see <a href=\"https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html\">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i>. </p>"
@@ -224,6 +299,18 @@
         },
         {
           "shape": "ForbiddenException"
+        },
+        {
+          "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        },
+        {
+          "shape": "ThrottlingException"
         }
       ],
       "documentation": "<p>Gets the Amazon Chime SDK meeting details for the specified meeting ID. For more information about the Amazon Chime SDK, see <a href=\"https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html\">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i>.</p>"
@@ -246,10 +333,22 @@
           "shape": "BadRequestException"
         },
         {
+          "shape": "ForbiddenException"
+        },
+        {
           "shape": "NotFoundException"
         },
         {
-          "shape": "ForbiddenException"
+          "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        },
+        {
+          "shape": "ThrottlingException"
         }
       ],
       "documentation": "<p> Lists the attendees for the specified Amazon Chime SDK meeting. For more information about the Amazon Chime SDK, see <a href=\"https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html\">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i>. </p>"
@@ -284,7 +383,13 @@
           "shape": "UnprocessableEntityException"
         },
         {
+          "shape": "ThrottlingException"
+        },
+        {
           "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
         }
       ],
       "documentation": "<p>Starts transcription for the specified <code>meetingId</code>.</p>"
@@ -316,7 +421,13 @@
           "shape": "UnprocessableEntityException"
         },
         {
+          "shape": "ThrottlingException"
+        },
+        {
           "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
         }
       ],
       "documentation": "<p>Stops transcription for the specified <code>meetingId</code>.</p>"
