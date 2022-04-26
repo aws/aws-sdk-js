@@ -3912,6 +3912,10 @@ declare namespace CloudFront {
      * A configuration for a set of custom HTTP response headers.
      */
     CustomHeadersConfig?: ResponseHeadersPolicyCustomHeadersConfig;
+    /**
+     * A configuration for enabling the Server-Timing header in HTTP responses sent from CloudFront.
+     */
+    ServerTimingHeadersConfig?: ResponseHeadersPolicyServerTimingHeadersConfig;
   }
   export interface ResponseHeadersPolicyContentSecurityPolicy {
     /**
@@ -4048,6 +4052,16 @@ declare namespace CloudFront {
      */
     StrictTransportSecurity?: ResponseHeadersPolicyStrictTransportSecurity;
   }
+  export interface ResponseHeadersPolicyServerTimingHeadersConfig {
+    /**
+     * A Boolean that determines whether CloudFront adds the Server-Timing header to HTTP responses that it sends in response to requests that match a cache behavior that's associated with this response headers policy.
+     */
+    Enabled: boolean;
+    /**
+     * A number 0–100 (inclusive) that specifies the percentage of responses that you want CloudFront to add the Server-Timing header to. When you set the sampling rate to 100, CloudFront adds the Server-Timing header to the HTTP response for every request that matches the cache behavior that this response headers policy is attached to. When you set it to 50, CloudFront adds the header to 50% of the responses for requests that match the cache behavior. You can set the sampling rate to any number 0–100 with up to four decimal places.
+     */
+    SamplingRate?: SamplingRate;
+  }
   export interface ResponseHeadersPolicyStrictTransportSecurity {
     /**
      * A Boolean that determines whether CloudFront overrides the Strict-Transport-Security HTTP response header received from the origin with the one specified in this response headers policy.
@@ -4119,6 +4133,7 @@ declare namespace CloudFront {
     OriginAccessIdentity: string;
   }
   export type SSLSupportMethod = "sni-only"|"vip"|"static-ip"|string;
+  export type SamplingRate = number;
   export interface _Signer {
     /**
      * An Amazon Web Services account number that contains active CloudFront key pairs that CloudFront can use to verify the signatures of signed URLs and signed cookies. If the Amazon Web Services account that owns the key pairs is the same account that owns the CloudFront distribution, the value of this field is self.

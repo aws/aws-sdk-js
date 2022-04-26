@@ -68,11 +68,11 @@ declare class Glue extends Service {
    */
   batchGetCrawlers(callback?: (err: AWSError, data: Glue.Types.BatchGetCrawlersResponse) => void): Request<Glue.Types.BatchGetCrawlersResponse, AWSError>;
   /**
-   * 
+   * Retrieves the details for the custom patterns specified by a list of names.
    */
   batchGetCustomEntityTypes(params: Glue.Types.BatchGetCustomEntityTypesRequest, callback?: (err: AWSError, data: Glue.Types.BatchGetCustomEntityTypesResponse) => void): Request<Glue.Types.BatchGetCustomEntityTypesResponse, AWSError>;
   /**
-   * 
+   * Retrieves the details for the custom patterns specified by a list of names.
    */
   batchGetCustomEntityTypes(callback?: (err: AWSError, data: Glue.Types.BatchGetCustomEntityTypesResponse) => void): Request<Glue.Types.BatchGetCustomEntityTypesResponse, AWSError>;
   /**
@@ -188,11 +188,11 @@ declare class Glue extends Service {
    */
   createCrawler(callback?: (err: AWSError, data: Glue.Types.CreateCrawlerResponse) => void): Request<Glue.Types.CreateCrawlerResponse, AWSError>;
   /**
-   * 
+   * Creates a custom pattern that is used to detect sensitive data across the columns and rows of your structured data. Each custom pattern you create specifies a regular expression and an optional list of context words. If no context words are passed only a regular expression is checked.
    */
   createCustomEntityType(params: Glue.Types.CreateCustomEntityTypeRequest, callback?: (err: AWSError, data: Glue.Types.CreateCustomEntityTypeResponse) => void): Request<Glue.Types.CreateCustomEntityTypeResponse, AWSError>;
   /**
-   * 
+   * Creates a custom pattern that is used to detect sensitive data across the columns and rows of your structured data. Each custom pattern you create specifies a regular expression and an optional list of context words. If no context words are passed only a regular expression is checked.
    */
   createCustomEntityType(callback?: (err: AWSError, data: Glue.Types.CreateCustomEntityTypeResponse) => void): Request<Glue.Types.CreateCustomEntityTypeResponse, AWSError>;
   /**
@@ -364,11 +364,11 @@ declare class Glue extends Service {
    */
   deleteCrawler(callback?: (err: AWSError, data: Glue.Types.DeleteCrawlerResponse) => void): Request<Glue.Types.DeleteCrawlerResponse, AWSError>;
   /**
-   * 
+   * Deletes a custom pattern by specifying its name.
    */
   deleteCustomEntityType(params: Glue.Types.DeleteCustomEntityTypeRequest, callback?: (err: AWSError, data: Glue.Types.DeleteCustomEntityTypeResponse) => void): Request<Glue.Types.DeleteCustomEntityTypeResponse, AWSError>;
   /**
-   * 
+   * Deletes a custom pattern by specifying its name.
    */
   deleteCustomEntityType(callback?: (err: AWSError, data: Glue.Types.DeleteCustomEntityTypeResponse) => void): Request<Glue.Types.DeleteCustomEntityTypeResponse, AWSError>;
   /**
@@ -612,11 +612,11 @@ declare class Glue extends Service {
    */
   getCrawlers(callback?: (err: AWSError, data: Glue.Types.GetCrawlersResponse) => void): Request<Glue.Types.GetCrawlersResponse, AWSError>;
   /**
-   * 
+   * Retrieves the details of a custom pattern by specifying its name.
    */
   getCustomEntityType(params: Glue.Types.GetCustomEntityTypeRequest, callback?: (err: AWSError, data: Glue.Types.GetCustomEntityTypeResponse) => void): Request<Glue.Types.GetCustomEntityTypeResponse, AWSError>;
   /**
-   * 
+   * Retrieves the details of a custom pattern by specifying its name.
    */
   getCustomEntityType(callback?: (err: AWSError, data: Glue.Types.GetCustomEntityTypeResponse) => void): Request<Glue.Types.GetCustomEntityTypeResponse, AWSError>;
   /**
@@ -1020,11 +1020,11 @@ declare class Glue extends Service {
    */
   listCrawlers(callback?: (err: AWSError, data: Glue.Types.ListCrawlersResponse) => void): Request<Glue.Types.ListCrawlersResponse, AWSError>;
   /**
-   * 
+   * Lists all the custom patterns that have been created.
    */
   listCustomEntityTypes(params: Glue.Types.ListCustomEntityTypesRequest, callback?: (err: AWSError, data: Glue.Types.ListCustomEntityTypesResponse) => void): Request<Glue.Types.ListCustomEntityTypesResponse, AWSError>;
   /**
-   * 
+   * Lists all the custom patterns that have been created.
    */
   listCustomEntityTypes(callback?: (err: AWSError, data: Glue.Types.ListCustomEntityTypesResponse) => void): Request<Glue.Types.ListCustomEntityTypesResponse, AWSError>;
   /**
@@ -1697,10 +1697,19 @@ declare namespace Glue {
     CrawlersNotFound?: CrawlerNameList;
   }
   export interface BatchGetCustomEntityTypesRequest {
+    /**
+     * A list of names of the custom patterns that you want to retrieve.
+     */
     Names: CustomEntityTypeNames;
   }
   export interface BatchGetCustomEntityTypesResponse {
+    /**
+     * A list of CustomEntityType objects representing the custom patterns that have been created.
+     */
     CustomEntityTypes?: CustomEntityTypes;
+    /**
+     * A list of the names of custom patterns that were not found.
+     */
     CustomEntityTypesNotFound?: CustomEntityTypeNames;
   }
   export interface BatchGetDevEndpointsRequest {
@@ -2566,6 +2575,9 @@ declare namespace Glue {
      * The name of the SecurityConfiguration structure to be used by this crawler.
      */
     CrawlerSecurityConfiguration?: CrawlerSecurityConfiguration;
+    /**
+     * Specifies whether the crawler should use AWS Lake Formation credentials for the crawler instead of the IAM role credentials.
+     */
     LakeFormationConfiguration?: LakeFormationConfiguration;
   }
   export type CrawlerConfiguration = string;
@@ -2793,11 +2805,23 @@ declare namespace Glue {
     AllowSingleColumn?: NullableBoolean;
   }
   export interface CreateCustomEntityTypeRequest {
+    /**
+     * A name for the custom pattern that allows it to be retrieved or deleted later. This name must be unique per Amazon Web Services account.
+     */
     Name: NameString;
+    /**
+     * A regular expression string that is used for detecting sensitive data in a custom pattern.
+     */
     RegexString: NameString;
+    /**
+     * A list of context words. If none of these context words are found within the vicinity of the regular expression the data will not be detected as sensitive data. If no context words are passed only a regular expression is checked.
+     */
     ContextWords?: ContextWords;
   }
   export interface CreateCustomEntityTypeResponse {
+    /**
+     * The name of the custom pattern you created.
+     */
     Name?: NameString;
   }
   export interface CreateDatabaseRequest {
@@ -3575,8 +3599,17 @@ declare namespace Glue {
   export type CsvHeaderOption = "UNKNOWN"|"PRESENT"|"ABSENT"|string;
   export type CsvQuoteSymbol = string;
   export interface CustomEntityType {
+    /**
+     * A name for the custom pattern that allows it to be retrieved or deleted later. This name must be unique per Amazon Web Services account.
+     */
     Name: NameString;
+    /**
+     * A regular expression string that is used for detecting sensitive data in a custom pattern.
+     */
     RegexString: NameString;
+    /**
+     * A list of context words. If none of these context words are found within the vicinity of the regular expression the data will not be detected as sensitive data. If no context words are passed only a regular expression is checked.
+     */
     ContextWords?: ContextWords;
   }
   export type CustomEntityTypeNames = NameString[];
@@ -3807,9 +3840,15 @@ declare namespace Glue {
   export interface DeleteCrawlerResponse {
   }
   export interface DeleteCustomEntityTypeRequest {
+    /**
+     * The name of the custom pattern that you want to delete.
+     */
     Name: NameString;
   }
   export interface DeleteCustomEntityTypeResponse {
+    /**
+     * The name of the custom pattern you deleted.
+     */
     Name?: NameString;
   }
   export interface DeleteDatabaseRequest {
@@ -4679,11 +4718,23 @@ declare namespace Glue {
     NextToken?: Token;
   }
   export interface GetCustomEntityTypeRequest {
+    /**
+     * The name of the custom pattern that you want to retrieve.
+     */
     Name: NameString;
   }
   export interface GetCustomEntityTypeResponse {
+    /**
+     * The name of the custom pattern that you retrieved.
+     */
     Name?: NameString;
+    /**
+     * A regular expression string that is used for detecting sensitive data in a custom pattern.
+     */
     RegexString?: NameString;
+    /**
+     * A list of context words if specified when you created the custom pattern. If none of these context words are found within the vicinity of the regular expression the data will not be detected as sensitive data.
+     */
     ContextWords?: ContextWords;
   }
   export interface GetDataCatalogEncryptionSettingsRequest {
@@ -6356,7 +6407,13 @@ declare namespace Glue {
     OutputS3Path?: UriString;
   }
   export interface LakeFormationConfiguration {
+    /**
+     * Specifies whether to use AWS Lake Formation credentials for the crawler instead of the IAM role credentials.
+     */
     UseLakeFormationCredentials?: NullableBoolean;
+    /**
+     * Required for cross account crawls. For same account crawls as the target data, this can be left as null.
+     */
     AccountId?: AccountId;
   }
   export type Language = "PYTHON"|"SCALA"|string;
@@ -6465,11 +6522,23 @@ declare namespace Glue {
     NextToken?: Token;
   }
   export interface ListCustomEntityTypesRequest {
+    /**
+     * A paginated token to offset the results.
+     */
     NextToken?: PaginationToken;
+    /**
+     * The maximum number of results to return.
+     */
     MaxResults?: PageSize;
   }
   export interface ListCustomEntityTypesResponse {
+    /**
+     * A list of CustomEntityType objects representing custom patterns.
+     */
     CustomEntityTypes?: CustomEntityTypes;
+    /**
+     * A pagination token, if more results are available.
+     */
     NextToken?: PaginationToken;
   }
   export interface ListDevEndpointsRequest {

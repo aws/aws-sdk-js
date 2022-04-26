@@ -4142,6 +4142,10 @@ declare namespace SageMaker {
      */
     StoppingConditions?: RecommendationJobStoppingConditions;
     /**
+     * Provides information about the output artifacts and the KMS key to use for Amazon S3 server-side encryption.
+     */
+    OutputConfig?: RecommendationJobOutputConfig;
+    /**
      * The metadata that you apply to Amazon Web Services resources to help you categorize and organize them. Each tag consists of a key and a value, both of which you define. For more information, see Tagging Amazon Web Services Resources in the Amazon Web Services General Reference.
      */
     Tags?: TagList;
@@ -15191,6 +15195,12 @@ declare namespace SageMaker {
   export type RStudioServerProUserGroup = "R_STUDIO_ADMIN"|"R_STUDIO_USER"|string;
   export type RealtimeInferenceInstanceTypes = ProductionVariantInstanceType[];
   export type RecommendationJobArn = string;
+  export interface RecommendationJobCompiledOutputConfig {
+    /**
+     * Identifies the Amazon S3 bucket where you want SageMaker to store the compiled model artifacts.
+     */
+    S3OutputUri?: S3Uri;
+  }
   export type RecommendationJobDescription = string;
   export interface RecommendationJobInputConfig {
     /**
@@ -15213,8 +15223,22 @@ declare namespace SageMaker {
      * Specifies the endpoint configuration to use for a job.
      */
     EndpointConfigurations?: EndpointInputConfigurations;
+    /**
+     * The Amazon Resource Name (ARN) of a Amazon Web Services Key Management Service (Amazon Web Services KMS) key that Amazon SageMaker uses to encrypt data on the storage volume attached to the ML compute instance that hosts the endpoint. This key will be passed to SageMaker Hosting for endpoint creation.  The SageMaker execution role must have kms:CreateGrant permission in order to encrypt data on the storage volume of the endpoints created for inference recommendation. The inference recommendation job will fail asynchronously during endpoint configuration creation if the role passed does not have kms:CreateGrant permission. The KmsKeyId can be any of the following formats:   // KMS Key ID  "1234abcd-12ab-34cd-56ef-1234567890ab"    // Amazon Resource Name (ARN) of a KMS Key  "arn:aws:kms:&lt;region&gt;:&lt;account&gt;:key/&lt;key-id-12ab-34cd-56ef-1234567890ab&gt;"    // KMS Key Alias  "alias/ExampleAlias"    // Amazon Resource Name (ARN) of a KMS Key Alias  "arn:aws:kms:&lt;region&gt;:&lt;account&gt;:alias/&lt;ExampleAlias&gt;"    For more information about key identifiers, see Key identifiers (KeyID) in the Amazon Web Services Key Management Service (Amazon Web Services KMS) documentation.
+     */
+    VolumeKmsKeyId?: KmsKeyId;
   }
   export type RecommendationJobName = string;
+  export interface RecommendationJobOutputConfig {
+    /**
+     * The Amazon Resource Name (ARN) of a Amazon Web Services Key Management Service (Amazon Web Services KMS) key that Amazon SageMaker uses to encrypt your output artifacts with Amazon S3 server-side encryption. The SageMaker execution role must have kms:GenerateDataKey permission. The KmsKeyId can be any of the following formats:   // KMS Key ID  "1234abcd-12ab-34cd-56ef-1234567890ab"    // Amazon Resource Name (ARN) of a KMS Key  "arn:aws:kms:&lt;region&gt;:&lt;account&gt;:key/&lt;key-id-12ab-34cd-56ef-1234567890ab&gt;"    // KMS Key Alias  "alias/ExampleAlias"    // Amazon Resource Name (ARN) of a KMS Key Alias  "arn:aws:kms:&lt;region&gt;:&lt;account&gt;:alias/&lt;ExampleAlias&gt;"    For more information about key identifiers, see Key identifiers (KeyID) in the Amazon Web Services Key Management Service (Amazon Web Services KMS) documentation.
+     */
+    KmsKeyId?: KmsKeyId;
+    /**
+     * Provides information about the output configuration for the compiled model.
+     */
+    CompiledOutputConfig?: RecommendationJobCompiledOutputConfig;
+  }
   export interface RecommendationJobResourceLimit {
     /**
      * Defines the maximum number of load tests.

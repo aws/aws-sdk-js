@@ -304,6 +304,7 @@ export abstract class ConfigurationServicePlaceholders {
   billingconductor?: AWS.Billingconductor.Types.ClientConfiguration;
   gamesparks?: AWS.GameSparks.Types.ClientConfiguration;
   pinpointsmsvoicev2?: AWS.PinpointSMSVoiceV2.Types.ClientConfiguration;
+  ivschat?: AWS.Ivschat.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -610,4 +611,5 @@ export interface ConfigurationServiceApiVersions {
   billingconductor?: AWS.Billingconductor.Types.apiVersion;
   gamesparks?: AWS.GameSparks.Types.apiVersion;
   pinpointsmsvoicev2?: AWS.PinpointSMSVoiceV2.Types.apiVersion;
+  ivschat?: AWS.Ivschat.Types.apiVersion;
 }

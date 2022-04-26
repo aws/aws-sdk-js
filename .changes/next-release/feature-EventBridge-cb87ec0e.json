@@ -1,5 +1,0 @@
-{
-  "type": "feature",
-  "category": "EventBridge",
-  "description": "Throw runtime error when unsupported parameter EndpointId is supplied with PutEvents API"
-}

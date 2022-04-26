@@ -1,6 +1,15 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1121.0-->
+<!--LATEST=2.1122.0-->
 <!--ENTRYINSERT-->
+
+## 2.1122.0
+* feature: CloudFront: CloudFront now supports the Server-Timing header in HTTP responses sent from CloudFront. You can use this header to view metrics that help you gain insights about the behavior and performance of CloudFront. To use this header, enable it in a response headers policy.
+* feature: EventBridge: Throw runtime error when unsupported parameter EndpointId is supplied with PutEvents API
+* feature: Ivschat: Adds new APIs for IVS Chat, a feature for building interactive chat experiences alongside an IVS broadcast.
+* feature: Lightsail: This release adds support for Lightsail load balancer HTTP to HTTPS redirect and TLS policy configuration.
+* feature: NetworkFirewall: AWS Network Firewall now enables customers to use a customer managed AWS KMS key for the encryption of their firewall resources.
+* feature: S3: Add error message to try v3 SDK when customer uses multi-regional ARN in s3
+* feature: SageMaker: SageMaker Inference Recommender now accepts customer KMS key ID for encryption of endpoints and compilation outputs created during inference recommendation.
 
 ## 2.1121.0
 * feature: Connect: This release adds SearchUsers API which can be used to search for users with a Connect Instance

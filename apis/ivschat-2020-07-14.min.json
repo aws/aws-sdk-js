@@ -1,0 +1,443 @@
+{
+  "version": "2.0",
+  "metadata": {
+    "apiVersion": "2020-07-14",
+    "endpointPrefix": "ivschat",
+    "jsonVersion": "1.1",
+    "protocol": "rest-json",
+    "serviceAbbreviation": "ivschat",
+    "serviceFullName": "Amazon Interactive Video Service Chat",
+    "serviceId": "ivschat",
+    "signatureVersion": "v4",
+    "signingName": "ivschat",
+    "uid": "ivschat-2020-07-14"
+  },
+  "operations": {
+    "CreateChatToken": {
+      "http": {
+        "requestUri": "/CreateChatToken",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "roomIdentifier",
+          "userId"
+        ],
+        "members": {
+          "attributes": {
+            "type": "map",
+            "key": {},
+            "value": {}
+          },
+          "capabilities": {
+            "type": "list",
+            "member": {}
+          },
+          "roomIdentifier": {},
+          "sessionDurationInMinutes": {
+            "type": "integer"
+          },
+          "userId": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "sessionExpirationTime": {
+            "shape": "Sa"
+          },
+          "token": {},
+          "tokenExpirationTime": {
+            "shape": "Sa"
+          }
+        }
+      }
+    },
+    "CreateRoom": {
+      "http": {
+        "requestUri": "/CreateRoom",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "maximumMessageLength": {
+            "type": "integer"
+          },
+          "maximumMessageRatePerSecond": {
+            "type": "integer"
+          },
+          "messageReviewHandler": {
+            "shape": "Sf"
+          },
+          "name": {},
+          "tags": {
+            "shape": "Sj"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "arn": {},
+          "createTime": {
+            "shape": "Sa"
+          },
+          "id": {},
+          "maximumMessageLength": {
+            "type": "integer"
+          },
+          "maximumMessageRatePerSecond": {
+            "type": "integer"
+          },
+          "messageReviewHandler": {
+            "shape": "Sf"
+          },
+          "name": {},
+          "tags": {
+            "shape": "Sj"
+          },
+          "updateTime": {
+            "shape": "Sa"
+          }
+        }
+      }
+    },
+    "DeleteMessage": {
+      "http": {
+        "requestUri": "/DeleteMessage",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "id",
+          "roomIdentifier"
+        ],
+        "members": {
+          "id": {},
+          "reason": {},
+          "roomIdentifier": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "id": {}
+        }
+      }
+    },
+    "DeleteRoom": {
+      "http": {
+        "requestUri": "/DeleteRoom",
+        "responseCode": 204
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "identifier"
+        ],
+        "members": {
+          "identifier": {}
+        }
+      }
+    },
+    "DisconnectUser": {
+      "http": {
+        "requestUri": "/DisconnectUser",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "roomIdentifier",
+          "userId"
+        ],
+        "members": {
+          "reason": {},
+          "roomIdentifier": {},
+          "userId": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "GetRoom": {
+      "http": {
+        "requestUri": "/GetRoom",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "identifier"
+        ],
+        "members": {
+          "identifier": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "arn": {},
+          "createTime": {
+            "shape": "Sa"
+          },
+          "id": {},
+          "maximumMessageLength": {
+            "type": "integer"
+          },
+          "maximumMessageRatePerSecond": {
+            "type": "integer"
+          },
+          "messageReviewHandler": {
+            "shape": "Sf"
+          },
+          "name": {},
+          "tags": {
+            "shape": "Sj"
+          },
+          "updateTime": {
+            "shape": "Sa"
+          }
+        }
+      }
+    },
+    "ListRooms": {
+      "http": {
+        "requestUri": "/ListRooms",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "maxResults": {
+            "type": "integer"
+          },
+          "messageReviewHandlerUri": {},
+          "name": {},
+          "nextToken": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "rooms"
+        ],
+        "members": {
+          "nextToken": {},
+          "rooms": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "arn": {},
+                "createTime": {
+                  "shape": "Sa"
+                },
+                "id": {},
+                "messageReviewHandler": {
+                  "shape": "Sf"
+                },
+                "name": {},
+                "tags": {
+                  "shape": "Sj"
+                },
+                "updateTime": {
+                  "shape": "Sa"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "ListTagsForResource": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/tags/{resourceArn}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "resourceArn"
+        ],
+        "members": {
+          "resourceArn": {
+            "location": "uri",
+            "locationName": "resourceArn"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "tags"
+        ],
+        "members": {
+          "tags": {
+            "shape": "Sj"
+          }
+        }
+      }
+    },
+    "SendEvent": {
+      "http": {
+        "requestUri": "/SendEvent",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "eventName",
+          "roomIdentifier"
+        ],
+        "members": {
+          "attributes": {
+            "type": "map",
+            "key": {},
+            "value": {}
+          },
+          "eventName": {},
+          "roomIdentifier": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "id": {}
+        }
+      }
+    },
+    "TagResource": {
+      "http": {
+        "requestUri": "/tags/{resourceArn}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "resourceArn",
+          "tags"
+        ],
+        "members": {
+          "resourceArn": {
+            "location": "uri",
+            "locationName": "resourceArn"
+          },
+          "tags": {
+            "shape": "Sj"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "UntagResource": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/tags/{resourceArn}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "resourceArn",
+          "tagKeys"
+        ],
+        "members": {
+          "resourceArn": {
+            "location": "uri",
+            "locationName": "resourceArn"
+          },
+          "tagKeys": {
+            "location": "querystring",
+            "locationName": "tagKeys",
+            "type": "list",
+            "member": {}
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      },
+      "idempotent": true
+    },
+    "UpdateRoom": {
+      "http": {
+        "requestUri": "/UpdateRoom",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "identifier"
+        ],
+        "members": {
+          "identifier": {},
+          "maximumMessageLength": {
+            "type": "integer"
+          },
+          "maximumMessageRatePerSecond": {
+            "type": "integer"
+          },
+          "messageReviewHandler": {
+            "shape": "Sf"
+          },
+          "name": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "arn": {},
+          "createTime": {
+            "shape": "Sa"
+          },
+          "id": {},
+          "maximumMessageLength": {
+            "type": "integer"
+          },
+          "maximumMessageRatePerSecond": {
+            "type": "integer"
+          },
+          "messageReviewHandler": {
+            "shape": "Sf"
+          },
+          "name": {},
+          "tags": {
+            "shape": "Sj"
+          },
+          "updateTime": {
+            "shape": "Sa"
+          }
+        }
+      }
+    }
+  },
+  "shapes": {
+    "Sa": {
+      "type": "timestamp",
+      "timestampFormat": "iso8601"
+    },
+    "Sf": {
+      "type": "structure",
+      "members": {
+        "fallbackResult": {},
+        "uri": {}
+      }
+    },
+    "Sj": {
+      "type": "map",
+      "key": {},
+      "value": {}
+    }
+  }
+}
