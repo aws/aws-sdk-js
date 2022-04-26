@@ -187,9 +187,6 @@
         return (this.config.region = 'mock-region');
       },
       setupRequestListeners: function (request) {
-        request.on('extractData', function (resp) {
-          return (resp.data = (resp.httpResponse.body || '').toString());
-        });
         return request.on('extractError', function (resp) {
           return (resp.error = {
             code:

@@ -32,7 +32,7 @@
         return expect(data).to.equal(null);
       }));
     });
-    it('can receive a modeled exception with error code mapping', function () {
+    it('can receive a modeled exception without error code mapping', function () {
       var req;
       helpers.mockHttpResponse(500, {}, ['ServiceUnavailableException']);
       return (req = service.makeRequest('operation', {}, function (err, data) {
