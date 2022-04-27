@@ -304,5 +304,6 @@ module.exports = {
   Billingconductor: require('./billingconductor'),
   GameSparks: require('./gamesparks'),
   PinpointSMSVoiceV2: require('./pinpointsmsvoicev2'),
-  Ivschat: require('./ivschat')
+  Ivschat: require('./ivschat'),
+  ChimeSDKMediaPipelines: require('./chimesdkmediapipelines')
 };

@@ -305,6 +305,7 @@ export abstract class ConfigurationServicePlaceholders {
   gamesparks?: AWS.GameSparks.Types.ClientConfiguration;
   pinpointsmsvoicev2?: AWS.PinpointSMSVoiceV2.Types.ClientConfiguration;
   ivschat?: AWS.Ivschat.Types.ClientConfiguration;
+  chimesdkmediapipelines?: AWS.ChimeSDKMediaPipelines.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -612,4 +613,5 @@ export interface ConfigurationServiceApiVersions {
   gamesparks?: AWS.GameSparks.Types.apiVersion;
   pinpointsmsvoicev2?: AWS.PinpointSMSVoiceV2.Types.apiVersion;
   ivschat?: AWS.Ivschat.Types.apiVersion;
+  chimesdkmediapipelines?: AWS.ChimeSDKMediaPipelines.Types.apiVersion;
 }

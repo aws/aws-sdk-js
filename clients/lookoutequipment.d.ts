@@ -60,19 +60,19 @@ declare class LookoutEquipment extends Service {
    */
   deleteModel(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Provides information on a specific data ingestion job such as creation time, dataset ARN, status, and so on. 
+   * Provides information on a specific data ingestion job such as creation time, dataset ARN, and status.
    */
   describeDataIngestionJob(params: LookoutEquipment.Types.DescribeDataIngestionJobRequest, callback?: (err: AWSError, data: LookoutEquipment.Types.DescribeDataIngestionJobResponse) => void): Request<LookoutEquipment.Types.DescribeDataIngestionJobResponse, AWSError>;
   /**
-   * Provides information on a specific data ingestion job such as creation time, dataset ARN, status, and so on. 
+   * Provides information on a specific data ingestion job such as creation time, dataset ARN, and status.
    */
   describeDataIngestionJob(callback?: (err: AWSError, data: LookoutEquipment.Types.DescribeDataIngestionJobResponse) => void): Request<LookoutEquipment.Types.DescribeDataIngestionJobResponse, AWSError>;
   /**
-   * Provides a JSON description of the data that is in each time series dataset, including names, column names, and data types.
+   * Provides a JSON description of the data in each time series dataset, including names, column names, and data types.
    */
   describeDataset(params: LookoutEquipment.Types.DescribeDatasetRequest, callback?: (err: AWSError, data: LookoutEquipment.Types.DescribeDatasetResponse) => void): Request<LookoutEquipment.Types.DescribeDatasetResponse, AWSError>;
   /**
-   * Provides a JSON description of the data that is in each time series dataset, including names, column names, and data types.
+   * Provides a JSON description of the data in each time series dataset, including names, column names, and data types.
    */
   describeDataset(callback?: (err: AWSError, data: LookoutEquipment.Types.DescribeDatasetResponse) => void): Request<LookoutEquipment.Types.DescribeDatasetResponse, AWSError>;
   /**
@@ -132,6 +132,14 @@ declare class LookoutEquipment extends Service {
    */
   listModels(callback?: (err: AWSError, data: LookoutEquipment.Types.ListModelsResponse) => void): Request<LookoutEquipment.Types.ListModelsResponse, AWSError>;
   /**
+   *  Lists statistics about the data collected for each of the sensors that have been successfully ingested in the particular dataset. Can also be used to retreive Sensor Statistics for a previous ingestion job. 
+   */
+  listSensorStatistics(params: LookoutEquipment.Types.ListSensorStatisticsRequest, callback?: (err: AWSError, data: LookoutEquipment.Types.ListSensorStatisticsResponse) => void): Request<LookoutEquipment.Types.ListSensorStatisticsResponse, AWSError>;
+  /**
+   *  Lists statistics about the data collected for each of the sensors that have been successfully ingested in the particular dataset. Can also be used to retreive Sensor Statistics for a previous ingestion job. 
+   */
+  listSensorStatistics(callback?: (err: AWSError, data: LookoutEquipment.Types.ListSensorStatisticsResponse) => void): Request<LookoutEquipment.Types.ListSensorStatisticsResponse, AWSError>;
+  /**
    * Lists all the tags for a specified resource, including key and value. 
    */
   listTagsForResource(params: LookoutEquipment.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: LookoutEquipment.Types.ListTagsForResourceResponse) => void): Request<LookoutEquipment.Types.ListTagsForResourceResponse, AWSError>;
@@ -190,8 +198,30 @@ declare class LookoutEquipment extends Service {
 }
 declare namespace LookoutEquipment {
   export type AmazonResourceArn = string;
+  export type Boolean = boolean;
   export type BoundedLengthString = string;
+  export interface CategoricalValues {
+    /**
+     *  Indicates whether there is a potential data issue related to categorical values. 
+     */
+    Status: StatisticalIssueStatus;
+    /**
+     *  Indicates the number of categories in the data. 
+     */
+    NumberOfCategory?: Integer;
+  }
+  export type ComponentName = string;
   export type ComponentTimestampDelimiter = string;
+  export interface CountPercent {
+    /**
+     *  Indicates the count of occurences of the given statistic. 
+     */
+    Count: Integer;
+    /**
+     *  Indicates the percentage of occurances of the given statistic. 
+     */
+    Percentage: Float;
+  }
   export interface CreateDatasetRequest {
     /**
      * The name of the dataset being created. 
@@ -200,7 +230,7 @@ declare namespace LookoutEquipment {
     /**
      * A JSON description of the data that is in each time series dataset, including names, column names, and data types. 
      */
-    DatasetSchema: DatasetSchema;
+    DatasetSchema?: DatasetSchema;
     /**
      * Provides the identifier of the KMS key used to encrypt dataset data by Amazon Lookout for Equipment. 
      */
@@ -368,7 +398,7 @@ declare namespace LookoutEquipment {
      */
     DatasetArn?: DatasetArn;
     /**
-     *  Specifies information for the input data for the data inference job, including data S3 location parameters. 
+     *  Specifies information for the input data for the data inference job, including data Amazon S3 location parameters. 
      */
     IngestionInputConfiguration?: IngestionInputConfiguration;
     /**
@@ -382,6 +412,29 @@ declare namespace LookoutEquipment {
      */
     TargetSamplingRate?: TargetSamplingRate;
   }
+  export interface DataQualitySummary {
+    /**
+     *  Parameter that gives information about insufficient data for sensors in the dataset. This includes information about those sensors that have complete data missing and those with a short date range. 
+     */
+    InsufficientSensorData: InsufficientSensorData;
+    /**
+     *  Parameter that gives information about data that is missing over all the sensors in the input data. 
+     */
+    MissingSensorData: MissingSensorData;
+    /**
+     *  Parameter that gives information about data that is invalid over all the sensors in the input data. 
+     */
+    InvalidSensorData: InvalidSensorData;
+    /**
+     *  Parameter that gives information about unsupported timestamps in the input data. 
+     */
+    UnsupportedTimestamps: UnsupportedTimestamps;
+    /**
+     *  Parameter that gives information about duplicate timestamps in the input data. 
+     */
+    DuplicateTimestamps: DuplicateTimestamps;
+  }
+  export type DataSizeInBytes = number;
   export type DataUploadFrequency = "PT5M"|"PT10M"|"PT15M"|"PT30M"|"PT1H"|string;
   export type DatasetArn = string;
   export type DatasetIdentifier = string;
@@ -465,6 +518,27 @@ declare namespace LookoutEquipment {
      * Specifies the reason for failure when a data ingestion job has failed. 
      */
     FailedReason?: BoundedLengthString;
+    /**
+     *  Gives statistics about a completed ingestion job. These statistics primarily relate to quantifying incorrect data such as MissingCompleteSensorData, MissingSensorData, UnsupportedDateFormats, InsufficientSensorData, and DuplicateTimeStamps. 
+     */
+    DataQualitySummary?: DataQualitySummary;
+    IngestedFilesSummary?: IngestedFilesSummary;
+    /**
+     *  Provides details about status of the ingestion job that is currently in progress. 
+     */
+    StatusDetail?: BoundedLengthString;
+    /**
+     *  Indicates the size of the ingested dataset. 
+     */
+    IngestedDataSize?: DataSizeInBytes;
+    /**
+     *  Indicates the earliest timestamp corresponding to data that was successfully ingested during this specific ingestion job. 
+     */
+    DataStartTime?: Timestamp;
+    /**
+     *  Indicates the latest timestamp corresponding to data that was successfully ingested during this specific ingestion job. 
+     */
+    DataEndTime?: Timestamp;
   }
   export interface DescribeDatasetRequest {
     /**
@@ -505,6 +579,26 @@ declare namespace LookoutEquipment {
      * Specifies the S3 location configuration for the data input for the data ingestion job. 
      */
     IngestionInputConfiguration?: IngestionInputConfiguration;
+    /**
+     *  Gives statistics associated with the given dataset for the latest successful associated ingestion job id. These statistics primarily relate to quantifying incorrect data such as MissingCompleteSensorData, MissingSensorData, UnsupportedDateFormats, InsufficientSensorData, and DuplicateTimeStamps. 
+     */
+    DataQualitySummary?: DataQualitySummary;
+    /**
+     *  IngestedFilesSummary associated with the given dataset for the latest successful associated ingestion job id. 
+     */
+    IngestedFilesSummary?: IngestedFilesSummary;
+    /**
+     *  The Amazon Resource Name (ARN) of the IAM role that you are using for this the data ingestion job. 
+     */
+    RoleArn?: IamRoleArn;
+    /**
+     *  Indicates the earliest timestamp corresponding to data that was successfully ingested during the most recent ingestion of this particular dataset. 
+     */
+    DataStartTime?: Timestamp;
+    /**
+     *  Indicates the latest timestamp corresponding to data that was successfully ingested during the most recent ingestion of this particular dataset. 
+     */
+    DataEndTime?: Timestamp;
   }
   export interface DescribeInferenceSchedulerRequest {
     /**
@@ -658,7 +752,14 @@ declare namespace LookoutEquipment {
      */
     OffCondition?: OffCondition;
   }
+  export interface DuplicateTimestamps {
+    /**
+     *  Indicates the total number of duplicate timestamps. 
+     */
+    TotalNumberOfDuplicateTimestamps: Integer;
+  }
   export type FileNameTimestampFormat = string;
+  export type Float = number;
   export type IamRoleArn = string;
   export type IdempotenceToken = string;
   export type InferenceExecutionStatus = "IN_PROGRESS"|"SUCCESS"|"FAILED"|string;
@@ -697,7 +798,7 @@ declare namespace LookoutEquipment {
      */
     DataInputConfiguration?: InferenceInputConfiguration;
     /**
-     *  Specifies configuration information for the output results from for the inference execution, including the output S3 location. 
+     *  Specifies configuration information for the output results from for the inference execution, including the output Amazon S3 location. 
      */
     DataOutputConfiguration?: InferenceOutputConfiguration;
     /**
@@ -715,11 +816,11 @@ declare namespace LookoutEquipment {
   }
   export interface InferenceInputConfiguration {
     /**
-     *  Specifies configuration information for the input data for the inference, including S3 location of input data.. 
+     *  Specifies configuration information for the input data for the inference, including Amazon S3 location of input data.
      */
     S3InputConfiguration?: InferenceS3InputConfiguration;
     /**
-     * Indicates the difference between your time zone and Greenwich Mean Time (GMT). 
+     * Indicates the difference between your time zone and Coordinated Universal Time (UTC).
      */
     InputTimeZoneOffset?: TimeZoneOffset;
     /**
@@ -802,6 +903,20 @@ declare namespace LookoutEquipment {
      */
     DataUploadFrequency?: DataUploadFrequency;
   }
+  export interface IngestedFilesSummary {
+    /**
+     * Indicates the total number of files that were submitted for ingestion.
+     */
+    TotalNumberOfFiles: Integer;
+    /**
+     * Indicates the number of files that were successfully ingested.
+     */
+    IngestedNumberOfFiles: Integer;
+    /**
+     * Indicates the number of files that were discarded. A file could be discarded because its format is invalid (for example, a jpg or pdf) or not readable.
+     */
+    DiscardedFiles?: ListOfDiscardedFiles;
+  }
   export interface IngestionInputConfiguration {
     /**
      * The location information for the S3 bucket used for input data for the data ingestion. 
@@ -819,8 +934,34 @@ declare namespace LookoutEquipment {
      * The prefix for the S3 location being used for the input data for the data ingestion. 
      */
     Prefix?: S3Prefix;
+    /**
+     *  Pattern for matching the Amazon S3 files which will be used for ingestion. If no KeyPattern is provided, we will use the default hierarchy file structure, which is same as KeyPattern {prefix}/{component_name}/* 
+     */
+    KeyPattern?: KeyPattern;
   }
   export type InlineDataSchema = string;
+  export interface InsufficientSensorData {
+    /**
+     *  Parameter that describes the total number of sensors that have data completely missing for it. 
+     */
+    MissingCompleteSensorData: MissingCompleteSensorData;
+    /**
+     *  Parameter that describes the total number of sensors that have a short date range of less than 90 days of data overall. 
+     */
+    SensorsWithShortDateRange: SensorsWithShortDateRange;
+  }
+  export type Integer = number;
+  export interface InvalidSensorData {
+    /**
+     *  Indicates the number of sensors that have at least some invalid values. 
+     */
+    AffectedSensorCount: Integer;
+    /**
+     *  Indicates the total number of invalid values across all the sensors. 
+     */
+    TotalNumberOfInvalidValues: Integer;
+  }
+  export type KeyPattern = string;
   export type KmsKeyArn = string;
   export interface LabelsInputConfiguration {
     /**
@@ -837,6 +978,20 @@ declare namespace LookoutEquipment {
      *  The prefix for the S3 bucket used for the label data. 
      */
     Prefix?: S3Prefix;
+  }
+  export interface LargeTimestampGaps {
+    /**
+     *  Indicates whether there is a potential data issue related to large gaps in timestamps. 
+     */
+    Status: StatisticalIssueStatus;
+    /**
+     *  Indicates the number of large timestamp gaps, if there are any. 
+     */
+    NumberOfLargeTimestampGaps?: Integer;
+    /**
+     *  Indicates the size of the largest timestamp gap, in days. 
+     */
+    MaxTimestampGapInDays?: Integer;
   }
   export interface ListDataIngestionJobsRequest {
     /**
@@ -986,6 +1141,35 @@ declare namespace LookoutEquipment {
      */
     ModelSummaries?: ModelSummaries;
   }
+  export type ListOfDiscardedFiles = S3Object[];
+  export interface ListSensorStatisticsRequest {
+    /**
+     *  The name of the dataset associated with the list of Sensor Statistics. 
+     */
+    DatasetName: DatasetName;
+    /**
+     *  The ingestion job id associated with the list of Sensor Statistics. To get sensor statistics for a particular ingestion job id, both dataset name and ingestion job id must be submitted as inputs. 
+     */
+    IngestionJobId?: IngestionJobId;
+    /**
+     *  Specifies the maximum number of sensors for which to retrieve statistics. 
+     */
+    MaxResults?: MaxResults;
+    /**
+     *  An opaque pagination token indicating where to continue the listing of sensor statistics. 
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListSensorStatisticsResponse {
+    /**
+     *  Provides ingestion-based statistics regarding the specified sensor with respect to various validation types, such as whether data exists, the number and percentage of missing values, and the number and percentage of duplicate timestamps. 
+     */
+    SensorStatisticsSummaries?: SensorStatisticsSummaries;
+    /**
+     *  An opaque pagination token indicating where to continue the listing of sensor statistics. 
+     */
+    NextToken?: NextToken;
+  }
   export interface ListTagsForResourceRequest {
     /**
      * The Amazon Resource Name (ARN) of the resource (such as the dataset or model) that is the focus of the ListTagsForResource operation. 
@@ -999,6 +1183,22 @@ declare namespace LookoutEquipment {
     Tags?: TagList;
   }
   export type MaxResults = number;
+  export interface MissingCompleteSensorData {
+    /**
+     *  Indicates the number of sensors that have data missing completely. 
+     */
+    AffectedSensorCount: Integer;
+  }
+  export interface MissingSensorData {
+    /**
+     *  Indicates the number of sensors that have atleast some data missing. 
+     */
+    AffectedSensorCount: Integer;
+    /**
+     *  Indicates the total number of missing values across all the sensors. 
+     */
+    TotalNumberOfMissingValues: Integer;
+  }
   export type ModelArn = string;
   export type ModelMetrics = string;
   export type ModelName = string;
@@ -1030,6 +1230,23 @@ declare namespace LookoutEquipment {
      */
     CreatedAt?: Timestamp;
   }
+  export interface MonotonicValues {
+    /**
+     *  Indicates whether there is a potential data issue related to having monotonic values. 
+     */
+    Status: StatisticalIssueStatus;
+    /**
+     *  Indicates the monotonicity of values. Can be INCREASING, DECREASING, or STATIC. 
+     */
+    Monotonicity?: Monotonicity;
+  }
+  export type Monotonicity = "DECREASING"|"INCREASING"|"STATIC"|string;
+  export interface MultipleOperatingModes {
+    /**
+     *  Indicates whether there is a potential data issue related to having multiple operating modes. 
+     */
+    Status: StatisticalIssueStatus;
+  }
   export type NameOrArn = string;
   export type NextToken = string;
   export type OffCondition = string;
@@ -1046,6 +1263,68 @@ declare namespace LookoutEquipment {
     Key: S3Key;
   }
   export type S3Prefix = string;
+  export type SensorName = string;
+  export type SensorStatisticsSummaries = SensorStatisticsSummary[];
+  export interface SensorStatisticsSummary {
+    /**
+     *  Name of the component to which the particular sensor belongs for which the statistics belong to. 
+     */
+    ComponentName?: ComponentName;
+    /**
+     *  Name of the sensor that the statistics belong to. 
+     */
+    SensorName?: SensorName;
+    /**
+     *  Parameter that indicates whether data exists for the sensor that the statistics belong to. 
+     */
+    DataExists?: Boolean;
+    /**
+     *  Parameter that describes the total number of, and percentage of, values that are missing for the sensor that the statistics belong to. 
+     */
+    MissingValues?: CountPercent;
+    /**
+     *  Parameter that describes the total number of, and percentage of, values that are invalid for the sensor that the statistics belong to. 
+     */
+    InvalidValues?: CountPercent;
+    /**
+     *  Parameter that describes the total number of invalid date entries associated with the sensor that the statistics belong to. 
+     */
+    InvalidDateEntries?: CountPercent;
+    /**
+     *  Parameter that describes the total number of duplicate timestamp records associated with the sensor that the statistics belong to. 
+     */
+    DuplicateTimestamps?: CountPercent;
+    /**
+     *  Parameter that describes potential risk about whether data associated with the sensor is categorical. 
+     */
+    CategoricalValues?: CategoricalValues;
+    /**
+     *  Parameter that describes potential risk about whether data associated with the sensor has more than one operating mode. 
+     */
+    MultipleOperatingModes?: MultipleOperatingModes;
+    /**
+     *  Parameter that describes potential risk about whether data associated with the sensor contains one or more large gaps between consecutive timestamps. 
+     */
+    LargeTimestampGaps?: LargeTimestampGaps;
+    /**
+     *  Parameter that describes potential risk about whether data associated with the sensor is mostly monotonic. 
+     */
+    MonotonicValues?: MonotonicValues;
+    /**
+     *  Indicates the time reference to indicate the beginning of valid data associated with the sensor that the statistics belong to. 
+     */
+    DataStartTime?: Timestamp;
+    /**
+     *  Indicates the time reference to indicate the end of valid data associated with the sensor that the statistics belong to. 
+     */
+    DataEndTime?: Timestamp;
+  }
+  export interface SensorsWithShortDateRange {
+    /**
+     *  Indicates the number of sensors that have less than 90 days of data. 
+     */
+    AffectedSensorCount: Integer;
+  }
   export interface StartDataIngestionJobRequest {
     /**
      * The name of the dataset being used by the data ingestion job. 
@@ -1102,6 +1381,7 @@ declare namespace LookoutEquipment {
      */
     Status?: InferenceSchedulerStatus;
   }
+  export type StatisticalIssueStatus = "POTENTIAL_ISSUE_DETECTED"|"NO_ISSUE_DETECTED"|string;
   export interface StopInferenceSchedulerRequest {
     /**
      * The name of the inference scheduler to be stopped. 
@@ -1159,6 +1439,12 @@ declare namespace LookoutEquipment {
   export type TargetSamplingRate = "PT1S"|"PT5S"|"PT10S"|"PT15S"|"PT30S"|"PT1M"|"PT5M"|"PT10M"|"PT15M"|"PT30M"|"PT1H"|string;
   export type TimeZoneOffset = string;
   export type Timestamp = Date;
+  export interface UnsupportedTimestamps {
+    /**
+     *  Indicates the total number of unsupported timestamps across the ingested data. 
+     */
+    TotalNumberOfUnsupportedTimestamps: Integer;
+  }
   export interface UntagResourceRequest {
     /**
      * The Amazon Resource Name (ARN) of the resource to which the tag is currently associated. 

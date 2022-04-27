@@ -303,3 +303,4 @@ export import Billingconductor = require('./billingconductor');
 export import GameSparks = require('./gamesparks');
 export import PinpointSMSVoiceV2 = require('./pinpointsmsvoicev2');
 export import Ivschat = require('./ivschat');
+export import ChimeSDKMediaPipelines = require('./chimesdkmediapipelines');
