@@ -772,6 +772,14 @@ declare class Connect extends Service {
    */
   listUsers(callback?: (err: AWSError, data: Connect.Types.ListUsersResponse) => void): Request<Connect.Types.ListUsersResponse, AWSError>;
   /**
+   * Changes the current status of a user or agent in Amazon Connect. If the agent is currently handling a contact, this sets the agent's next status. For more information, see Agent status and Set your next status in the Amazon Connect Administrator Guide.
+   */
+  putUserStatus(params: Connect.Types.PutUserStatusRequest, callback?: (err: AWSError, data: Connect.Types.PutUserStatusResponse) => void): Request<Connect.Types.PutUserStatusResponse, AWSError>;
+  /**
+   * Changes the current status of a user or agent in Amazon Connect. If the agent is currently handling a contact, this sets the agent's next status. For more information, see Agent status and Set your next status in the Amazon Connect Administrator Guide.
+   */
+  putUserStatus(callback?: (err: AWSError, data: Connect.Types.PutUserStatusResponse) => void): Request<Connect.Types.PutUserStatusResponse, AWSError>;
+  /**
    * Releases a phone number previously claimed to an Amazon Connect instance.
    */
   releasePhoneNumber(params: Connect.Types.ReleasePhoneNumberRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -4336,6 +4344,22 @@ declare namespace Connect {
     Name?: PromptName;
   }
   export type PromptSummaryList = PromptSummary[];
+  export interface PutUserStatusRequest {
+    /**
+     * The identifier of the user.
+     */
+    UserId: UserId;
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The identifier of the agent status.
+     */
+    AgentStatusId: AgentStatusId;
+  }
+  export interface PutUserStatusResponse {
+  }
   export interface Queue {
     /**
      * The name of the queue.

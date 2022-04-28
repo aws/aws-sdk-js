@@ -44,11 +44,11 @@ declare class Braket extends Service {
    */
   createQuantumTask(callback?: (err: AWSError, data: Braket.Types.CreateQuantumTaskResponse) => void): Request<Braket.Types.CreateQuantumTaskResponse, AWSError>;
   /**
-   * Retrieves the devices available in Amazon Braket.
+   * Retrieves the devices available in Amazon Braket.  For backwards compatibility with older versions of BraketSchemas, OpenQASM information is omitted from GetDevice API calls. To get this information the user-agent needs to present a recent version of the BraketSchemas (1.8.0 or later). The Braket SDK automatically reports this for you. If you do not see OpenQASM results in the GetDevice response when using a Braket SDK, you may need to set AWS_EXECUTION_ENV environment variable to configure user-agent. See the code examples provided below for how to do this for the AWS CLI, Boto3, and the Go, Java, and JavaScript/TypeScript SDKs. 
    */
   getDevice(params: Braket.Types.GetDeviceRequest, callback?: (err: AWSError, data: Braket.Types.GetDeviceResponse) => void): Request<Braket.Types.GetDeviceResponse, AWSError>;
   /**
-   * Retrieves the devices available in Amazon Braket.
+   * Retrieves the devices available in Amazon Braket.  For backwards compatibility with older versions of BraketSchemas, OpenQASM information is omitted from GetDevice API calls. To get this information the user-agent needs to present a recent version of the BraketSchemas (1.8.0 or later). The Braket SDK automatically reports this for you. If you do not see OpenQASM results in the GetDevice response when using a Braket SDK, you may need to set AWS_EXECUTION_ENV environment variable to configure user-agent. See the code examples provided below for how to do this for the AWS CLI, Boto3, and the Go, Java, and JavaScript/TypeScript SDKs. 
    */
   getDevice(callback?: (err: AWSError, data: Braket.Types.GetDeviceResponse) => void): Request<Braket.Types.GetDeviceResponse, AWSError>;
   /**
@@ -508,6 +508,10 @@ declare namespace Braket {
   export type InputFileConfigChannelNameString = string;
   export interface InstanceConfig {
     /**
+     * Configures the number of resource instances to use while running an Amazon Braket job on Amazon Braket. The default value is 1.
+     */
+    instanceCount?: InstanceConfigInstanceCountInteger;
+    /**
      * Configures the type resource instances to use while running an Amazon Braket hybrid job.
      */
     instanceType: InstanceType;
@@ -516,6 +520,7 @@ declare namespace Braket {
      */
     volumeSizeInGb: InstanceConfigVolumeSizeInGbInteger;
   }
+  export type InstanceConfigInstanceCountInteger = number;
   export type InstanceConfigVolumeSizeInGbInteger = number;
   export type InstanceType = "ml.m4.xlarge"|"ml.m4.2xlarge"|"ml.m4.4xlarge"|"ml.m4.10xlarge"|"ml.m4.16xlarge"|"ml.g4dn.xlarge"|"ml.g4dn.2xlarge"|"ml.g4dn.4xlarge"|"ml.g4dn.8xlarge"|"ml.g4dn.12xlarge"|"ml.g4dn.16xlarge"|"ml.m5.large"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.12xlarge"|"ml.m5.24xlarge"|"ml.c4.xlarge"|"ml.c4.2xlarge"|"ml.c4.4xlarge"|"ml.c4.8xlarge"|"ml.p2.xlarge"|"ml.p2.8xlarge"|"ml.p2.16xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|"ml.p3dn.24xlarge"|"ml.p4d.24xlarge"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.18xlarge"|"ml.c5n.xlarge"|"ml.c5n.2xlarge"|"ml.c5n.4xlarge"|"ml.c5n.9xlarge"|"ml.c5n.18xlarge"|string;
   export type Integer = number;

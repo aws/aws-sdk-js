@@ -494,6 +494,10 @@ declare namespace NetworkFirewall {
      * A complex type that contains settings for encryption of your rule group resources.
      */
     EncryptionConfiguration?: EncryptionConfiguration;
+    /**
+     * A complex type that contains metadata about the rule group that your own rule group is copied from. You can use the metadata to keep track of updates made to the originating rule group.
+     */
+    SourceMetadata?: SourceMetadata;
   }
   export interface CreateRuleGroupResponse {
     /**
@@ -687,6 +691,10 @@ declare namespace NetworkFirewall {
      */
     Capacity?: RuleCapacity;
     StatefulRuleOptions?: StatefulRuleOptions;
+    /**
+     * The last time that the rule group was changed.
+     */
+    LastModifiedTime?: LastUpdateTime;
   }
   export interface DescribeRuleGroupRequest {
     /**
@@ -770,7 +778,7 @@ declare namespace NetworkFirewall {
     /**
      * The type of Amazon Web Services KMS key to use for encryption of your Network Firewall resources.
      */
-    Type?: EncryptionType;
+    Type: EncryptionType;
   }
   export type EncryptionType = "CUSTOMER_KMS"|"AWS_OWNED_KMS_KEY"|string;
   export type EndpointId = string;
@@ -916,6 +924,10 @@ declare namespace NetworkFirewall {
      * A complex type that contains the Amazon Web Services KMS encryption configuration settings for your firewall policy.
      */
     EncryptionConfiguration?: EncryptionConfiguration;
+    /**
+     * The last time that the firewall policy was changed.
+     */
+    LastModifiedTime?: LastUpdateTime;
   }
   export interface FirewallStatus {
     /**
@@ -972,6 +984,7 @@ declare namespace NetworkFirewall {
   export type IPSets = {[key: string]: IPSet};
   export type KeyId = string;
   export type Keyword = string;
+  export type LastUpdateTime = Date;
   export interface ListFirewallPoliciesRequest {
     /**
      * When you request a list of objects with a MaxResults setting, if the number of objects that are still available for retrieval exceeds the maximum you requested, Network Firewall returns a NextToken value in the response. To retrieve the next batch of objects, use the token returned from the prior request in your next request.
@@ -1029,6 +1042,14 @@ declare namespace NetworkFirewall {
      * The scope of the request. The default setting of ACCOUNT or a setting of NULL returns all of the rule groups in your account. A setting of MANAGED returns all available managed rule groups.
      */
     Scope?: ResourceManagedStatus;
+    /**
+     * Indicates the general category of the Amazon Web Services managed rule group.
+     */
+    ManagedType?: ResourceManagedType;
+    /**
+     * Indicates whether the rule group is stateless or stateful. If the rule group is stateless, it contains stateless rules. If it is stateful, it contains stateful rules.
+     */
+    Type?: RuleGroupType;
   }
   export interface ListRuleGroupsResponse {
     /**
@@ -1174,6 +1195,7 @@ declare namespace NetworkFirewall {
   export type ResourceArn = string;
   export type ResourceId = string;
   export type ResourceManagedStatus = "MANAGED"|"ACCOUNT"|string;
+  export type ResourceManagedType = "AWS_MANAGED_THREAT_SIGNATURES"|"AWS_MANAGED_DOMAIN_LISTS"|string;
   export type ResourceName = string;
   export type ResourceStatus = "ACTIVE"|"DELETING"|string;
   export type RuleCapacity = number;
@@ -1256,6 +1278,18 @@ declare namespace NetworkFirewall {
      * A complex type that contains the Amazon Web Services KMS encryption configuration settings for your rule group.
      */
     EncryptionConfiguration?: EncryptionConfiguration;
+    /**
+     * A complex type that contains metadata about the rule group that your own rule group is copied from. You can use the metadata to track the version updates made to the originating rule group.
+     */
+    SourceMetadata?: SourceMetadata;
+    /**
+     * The Amazon resource name (ARN) of the Amazon Simple Notification Service SNS topic that's used to record changes to the managed rule group. You can subscribe to the SNS topic to receive notifications when the managed rule group is modified, such as for new versions and for version expiration. For more information, see the Amazon Simple Notification Service Developer Guide..
+     */
+    SnsTopic?: ResourceArn;
+    /**
+     * The last time that the rule group was changed.
+     */
+    LastModifiedTime?: LastUpdateTime;
   }
   export type RuleGroupType = "STATELESS"|"STATEFUL"|string;
   export type RuleGroups = RuleGroupMetadata[];
@@ -1319,6 +1353,16 @@ declare namespace NetworkFirewall {
   export type Setting = string;
   export type Settings = Setting[];
   export type Source = string;
+  export interface SourceMetadata {
+    /**
+     * The Amazon Resource Name (ARN) of the rule group that your own rule group is copied from.
+     */
+    SourceArn?: ResourceArn;
+    /**
+     * The update token of the Amazon Web Services managed rule group that your own rule group is copied from. To determine the update token for the managed rule group, call DescribeRuleGroup.
+     */
+    SourceUpdateToken?: UpdateToken;
+  }
   export type StatefulAction = "PASS"|"DROP"|"ALERT"|string;
   export type StatefulActions = CollectionMember_String[];
   export interface StatefulEngineOptions {
@@ -1716,6 +1760,10 @@ declare namespace NetworkFirewall {
      * A complex type that contains settings for encryption of your rule group resources.
      */
     EncryptionConfiguration?: EncryptionConfiguration;
+    /**
+     * A complex type that contains metadata about the rule group that your own rule group is copied from. You can use the metadata to keep track of updates made to the originating rule group.
+     */
+    SourceMetadata?: SourceMetadata;
   }
   export interface UpdateRuleGroupResponse {
     /**

@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1123.0-->
+<!--LATEST=2.1124.0-->
 <!--ENTRYINSERT-->
+
+## 2.1124.0
+* feature: Braket: This release enables Braket Hybrid Jobs with Embedded Simulators to have multiple instances.
+* feature: Connect: This release introduces an API for changing the current agent status of a user in Connect.
+* feature: EC2: This release adds support to query the public key and creation date of EC2 Key Pairs. Additionally, the format (pem or ppk) of a key pair can be specified when creating a new key pair.
+* feature: NetworkFirewall: AWS Network Firewall adds support for stateful threat signature AWS managed rule groups.
 
 ## 2.1123.0
 * feature: ChimeSDKMediaPipelines: For Amazon Chime SDK meetings, the Amazon Chime Media Pipelines SDK allows builders to capture audio, video, and content share streams. You can also capture meeting events, live transcripts, and data messages. The pipelines save the artifacts to an Amazon S3 bucket that you designate.
