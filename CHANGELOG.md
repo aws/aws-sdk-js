@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1124.0-->
+<!--LATEST=2.1125.0-->
 <!--ENTRYINSERT-->
+
+## 2.1125.0
+* feature: CodeGuruReviewer: Amazon CodeGuru Reviewer now supports suppressing recommendations from being generated on specific files and directories.
+* feature: MediaConvert: AWS Elemental MediaConvert SDK nows supports creation of Dolby Vision profile 8.1, the ability to generate black frames of video, and introduces audio-only DASH and CMAF support.
+* feature: RDS: Feature - Adds support for Internet Protocol Version 6 (IPv6) on RDS database instances.
+* feature: SSM: Update the StartChangeRequestExecution, adding TargetMaps to the Runbook parameter
+* feature: WAFV2: You can now inspect all request headers and all cookies. You can now specify how to handle oversize body contents in your rules that inspect the body.
 
 ## 2.1124.0
 * feature: Braket: This release enables Braket Hybrid Jobs with Embedded Simulators to have multiple instances.

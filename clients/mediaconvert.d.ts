@@ -1666,7 +1666,11 @@ declare namespace MediaConvert {
      */
     L6Mode?: DolbyVisionLevel6Mode;
     /**
-     * In the current MediaConvert implementation, the Dolby Vision profile is always 5 (PROFILE_5). Therefore, all of your inputs must contain Dolby Vision frame interleaved data.
+     * Required when you set Dolby Vision Profile (Profile) to Profile 8.1 (PROFILE_8_1). When you set Content mapping (Mapping) to None (HDR10_NOMAP), content mapping is not applied to the HDR10-compatible signal. Depending on the source peak nit level, clipping might occur on HDR devices without Dolby Vision. When you set Content mapping to Static (HDR10_1000), the transcoder creates a 1,000 nits peak HDR10-compatible signal by applying static content mapping to the source. This mode is speed-optimized for PQ10 sources with metadata that is created from analysis. For graded Dolby Vision content, be aware that creative intent might not be guaranteed with extreme 1,000 nits trims.
+     */
+    Mapping?: DolbyVisionMapping;
+    /**
+     * Required when you use Dolby Vision (DolbyVision) processing. Set Profile (DolbyVisionProfile) to Profile 5 (Profile_5) to only include frame-interleaved Dolby Vision metadata in your output. Set Profile to Profile 8.1 (Profile_8_1) to include both frame-interleaved Dolby Vision metadata and HDR10 metadata in your output.
      */
     Profile?: DolbyVisionProfile;
   }
@@ -1681,7 +1685,8 @@ declare namespace MediaConvert {
     MaxFall?: __integerMin0Max65535;
   }
   export type DolbyVisionLevel6Mode = "PASSTHROUGH"|"RECALCULATE"|"SPECIFY"|string;
-  export type DolbyVisionProfile = "PROFILE_5"|string;
+  export type DolbyVisionMapping = "HDR10_NOMAP"|"HDR10_1000"|string;
+  export type DolbyVisionProfile = "PROFILE_5"|"PROFILE_8_1"|string;
   export type DropFrameTimecode = "DISABLED"|"ENABLED"|string;
   export interface DvbNitSettings {
     /**
@@ -3084,6 +3089,10 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     TimecodeStart?: __stringMin11Max11Pattern01D20305D205D;
     /**
+     * Use this setting if you do not have a video input or if you want to add black video frames before, or after, other inputs. When you include Video generator, MediaConvert creates a video input with black frames and without an audio track. You can specify a value for Video generator, or you can specify an Input file, but you cannot specify both.
+     */
+    VideoGenerator?: InputVideoGenerator;
+    /**
      * Input video selectors contain the video settings for the input. Each of your inputs can have up to one video selector.
      */
     VideoSelector?: VideoSelector;
@@ -3199,6 +3208,12 @@ Within your job settings, all of your DVB-Sub settings must be identical.
     VideoSelector?: VideoSelector;
   }
   export type InputTimecodeSource = "EMBEDDED"|"ZEROBASED"|"SPECIFIEDSTART"|string;
+  export interface InputVideoGenerator {
+    /**
+     * Specify an integer value for Black video duration from 50 to 86400000 to generate a black video input for that many milliseconds. Required when you include Video generator.
+     */
+    Duration?: __integerMin50Max86400000;
+  }
   export interface InsertableImage {
     /**
      * Specify the time, in milliseconds, for the image to remain on the output video. This duration includes fade-in time but not fade-out time.
@@ -4645,6 +4660,7 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     HlsSettings?: HlsSettings;
   }
+  export type PadVideo = "DISABLED"|"BLACK"|string;
   export interface PartnerWatermarking {
     /**
      * For forensic video watermarking, MediaConvert supports Nagra NexGuard File Marker watermarking. MediaConvert supports both PreRelease Content (NGPR/G2) and OTT Streaming workflows.
@@ -5477,6 +5493,10 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     Hdr10Metadata?: Hdr10Metadata;
     /**
+     * Use this setting if your input has video and audio durations that don't align, and your output or player has strict alignment requirements. Examples: Input audio track has a delayed start. Input video track ends before audio ends. When you set Pad video (padVideo) to Black (BLACK), MediaConvert generates black video frames so that output video and audio durations match. Black video frames are added at the beginning or end, depending on your input. To keep the default behavior and not generate black video, set Pad video to Disabled (DISABLED) or leave blank.
+     */
+    PadVideo?: PadVideo;
+    /**
      * Use PID (Pid) to select specific video data from an input file. Specify this value as an integer; the system automatically converts it to the hexidecimal value. For example, 257 selects PID 0x101. A PID, or packet identifier, is an identifier for a set of data in an MPEG-2 transport stream container.
      */
     Pid?: __integerMin1Max2147483647;
@@ -5932,6 +5952,7 @@ Within your job settings, all of your DVB-Sub settings must be identical.
   export type __integerMin3Max15 = number;
   export type __integerMin48000Max48000 = number;
   export type __integerMin4Max12 = number;
+  export type __integerMin50Max86400000 = number;
   export type __integerMin6000Max1024000 = number;
   export type __integerMin64000Max640000 = number;
   export type __integerMin8000Max192000 = number;

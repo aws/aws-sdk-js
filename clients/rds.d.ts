@@ -2050,6 +2050,10 @@ declare namespace RDS {
      * Specifies where automated backups and manual snapshots are stored. Possible values are outposts (Amazon Web Services Outposts) and region (Amazon Web Services Region). The default is region. For more information, see Working with Amazon RDS on Amazon Web Services Outposts in the Amazon RDS User Guide.
      */
     BackupTarget?: String;
+    /**
+     * The network type of the DB instance. Valid values:    IPV4     DUAL    The network type is determined by the DBSubnetGroup specified for the DB instance. A DBSubnetGroup can support only the IPv4 protocol or the IPv4 and the IPv6 protocols (DUAL). For more information, see  Working with a DB instance in a VPC in the Amazon RDS User Guide. 
+     */
+    NetworkType?: String;
   }
   export interface CreateDBInstanceReadReplicaMessage {
     /**
@@ -2181,6 +2185,10 @@ declare namespace RDS {
      * The instance profile associated with the underlying Amazon EC2 instance of an RDS Custom DB instance. The instance profile must meet the following requirements:   The profile must exist in your account.   The profile must have an IAM role that Amazon EC2 has permissions to assume.   The instance profile name and the associated IAM role name must start with the prefix AWSRDSCustom.   For the list of permissions required for the IAM role, see  Configure IAM and your VPC in the Amazon RDS User Guide. This setting is required for RDS Custom.
      */
     CustomIamInstanceProfile?: String;
+    /**
+     * The network type of the DB instance. Valid values:    IPV4     DUAL    The network type is determined by the DBSubnetGroup specified for read replica. A DBSubnetGroup can support only the IPv4 protocol or the IPv4 and the IPv6 protocols (DUAL). For more information, see  Working with a DB instance in a VPC in the Amazon RDS User Guide. 
+     */
+    NetworkType?: String;
     /**
      * The ID of the region that contains the source for the read replica.
      */
@@ -3440,6 +3448,10 @@ declare namespace RDS {
      * Specifies where automated backups and manual snapshots are stored: Amazon Web Services Outposts or the Amazon Web Services Region.
      */
     BackupTarget?: String;
+    /**
+     * The network type of the DB instance. Valid values:    IPV4     DUAL    The network type is determined by the DBSubnetGroup specified for the DB instance. A DBSubnetGroup can support only the IPv4 protocol or the IPv4 and the IPv6 protocols (DUAL). For more information, see  Working with a DB instance in a VPC in the Amazon RDS User Guide and  Working with a DB instance in a VPC in the Amazon Aurora User Guide. 
+     */
+    NetworkType?: String;
   }
   export interface DBInstanceAutomatedBackup {
     /**
@@ -4086,6 +4098,10 @@ declare namespace RDS {
      * The Amazon Resource Name (ARN) for the DB subnet group.
      */
     DBSubnetGroupArn?: String;
+    /**
+     * The network type of the DB subnet group. Valid values:    IPV4     DUAL    A DBSubnetGroup can support only the IPv4 protocol or the IPv4 and the IPv6 protocols (DUAL). For more information, see  Working with a DB instance in a VPC in the Amazon RDS User Guide. 
+     */
+    SupportedNetworkTypes?: StringList;
   }
   export interface DBSubnetGroupMessage {
     /**
@@ -6091,6 +6107,10 @@ declare namespace RDS {
      * The number of minutes to pause the automation. When the time period ends, RDS Custom resumes full automation. The minimum value is 60 (default). The maximum value is 1,440.
      */
     ResumeFullAutomationModeMinutes?: IntegerOptional;
+    /**
+     * The network type of the DB instance. Valid values:    IPV4     DUAL    The network type is determined by the DBSubnetGroup specified for the DB instance. A DBSubnetGroup can support only the IPv4 protocol or the IPv4 and the IPv6 protocols (DUAL). For more information, see  Working with a DB instance in a VPC in the Amazon RDS User Guide. 
+     */
+    NetworkType?: String;
   }
   export interface ModifyDBInstanceResult {
     DBInstance?: DBInstance;
@@ -6717,6 +6737,10 @@ declare namespace RDS {
      * Whether DB instances can be configured as a Multi-AZ DB cluster. For more information on Multi-AZ DB clusters, see  Multi-AZ deployments with two readable standby DB instances in the Amazon RDS User Guide. 
      */
     SupportsClusters?: Boolean;
+    /**
+     * The network types supported by the DB instance (IPV4 or DUAL). A DB instance can support only the IPv4 protocol or the IPv4 and the IPv6 protocols (DUAL). For more information, see  Working with a DB instance in a VPC in the Amazon RDS User Guide. 
+     */
+    SupportedNetworkTypes?: StringList;
   }
   export type OrderableDBInstanceOptionsList = OrderableDBInstanceOption[];
   export interface OrderableDBInstanceOptionsMessage {
@@ -7727,6 +7751,10 @@ declare namespace RDS {
      * Specifies where automated backups and manual snapshots are stored for the restored DB instance. Possible values are outposts (Amazon Web Services Outposts) and region (Amazon Web Services Region). The default is region. For more information, see Working with Amazon RDS on Amazon Web Services Outposts in the Amazon RDS User Guide.
      */
     BackupTarget?: String;
+    /**
+     * The network type of the DB instance. Valid values:    IPV4     DUAL    The network type is determined by the DBSubnetGroup specified for the DB instance. A DBSubnetGroup can support only the IPv4 protocol or the IPv4 and the IPv6 protocols (DUAL). For more information, see  Working with a DB instance in a VPC in the Amazon RDS User Guide. 
+     */
+    NetworkType?: String;
   }
   export interface RestoreDBInstanceFromDBSnapshotResult {
     DBInstance?: DBInstance;
@@ -7908,6 +7936,10 @@ declare namespace RDS {
      * The upper limit in gibibytes (GiB) to which Amazon RDS can automatically scale the storage of the DB instance. For more information about this setting, including limitations that apply to it, see  Managing capacity automatically with Amazon RDS storage autoscaling in the Amazon RDS User Guide.
      */
     MaxAllocatedStorage?: IntegerOptional;
+    /**
+     * The network type of the DB instance. Valid values:    IPV4     DUAL    The network type is determined by the DBSubnetGroup specified for the DB instance. A DBSubnetGroup can support only the IPv4 protocol or the IPv4 and the IPv6 protocols (DUAL). For more information, see  Working with a DB instance in a VPC in the Amazon RDS User Guide. 
+     */
+    NetworkType?: String;
   }
   export interface RestoreDBInstanceFromS3Result {
     DBInstance?: DBInstance;
@@ -8054,6 +8086,10 @@ declare namespace RDS {
      * Specifies where automated backups and manual snapshots are stored for the restored DB instance. Possible values are outposts (Amazon Web Services Outposts) and region (Amazon Web Services Region). The default is region. For more information, see Working with Amazon RDS on Amazon Web Services Outposts in the Amazon RDS User Guide.
      */
     BackupTarget?: String;
+    /**
+     * The network type of the DB instance. Valid values:    IPV4     DUAL    The network type is determined by the DBSubnetGroup specified for the DB instance. A DBSubnetGroup can support only the IPv4 protocol or the IPv4 and the IPv6 protocols (DUAL). For more information, see  Working with a DB instance in a VPC in the Amazon RDS User Guide. 
+     */
+    NetworkType?: String;
   }
   export interface RestoreDBInstanceToPointInTimeResult {
     DBInstance?: DBInstance;

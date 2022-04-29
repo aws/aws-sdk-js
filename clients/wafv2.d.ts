@@ -12,11 +12,11 @@ declare class WAFV2 extends Service {
   constructor(options?: WAFV2.Types.ClientConfiguration)
   config: Config & WAFV2.Types.ClientConfiguration;
   /**
-   * Associates a web ACL with a regional application resource, to protect the resource. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, or an AppSync GraphQL API.  For Amazon CloudFront, don't use this call. Instead, use your CloudFront distribution configuration. To associate a web ACL, in the CloudFront call UpdateDistribution, set the web ACL ID to the Amazon Resource Name (ARN) of the web ACL. For information, see UpdateDistribution.
+   * Associates a web ACL with a regional application resource, to protect the resource. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, or an AppSync GraphQL API.  For Amazon CloudFront, don't use this call. Instead, use your CloudFront distribution configuration. To associate a web ACL, in the CloudFront call UpdateDistribution, set the web ACL ID to the Amazon Resource Name (ARN) of the web ACL. For information, see UpdateDistribution. When you make changes to web ACLs or web ACL components, like rules and rule groups, WAF propagates the changes everywhere that the web ACL and its components are stored and used. Your changes are applied within seconds, but there might be a brief period of inconsistency when the changes have arrived in some places and not in others. So, for example, if you change a rule action setting, the action might be the old action in one area and the new action in another area. Or if you add an IP address to an IP set used in a blocking rule, the new address might briefly be blocked in one area while still allowed in another. This temporary inconsistency can occur when you first associate a web ACL with an Amazon Web Services resource and when you change a web ACL that is already associated with a resource. Generally, any inconsistencies of this type last only a few seconds.
    */
   associateWebACL(params: WAFV2.Types.AssociateWebACLRequest, callback?: (err: AWSError, data: WAFV2.Types.AssociateWebACLResponse) => void): Request<WAFV2.Types.AssociateWebACLResponse, AWSError>;
   /**
-   * Associates a web ACL with a regional application resource, to protect the resource. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, or an AppSync GraphQL API.  For Amazon CloudFront, don't use this call. Instead, use your CloudFront distribution configuration. To associate a web ACL, in the CloudFront call UpdateDistribution, set the web ACL ID to the Amazon Resource Name (ARN) of the web ACL. For information, see UpdateDistribution.
+   * Associates a web ACL with a regional application resource, to protect the resource. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, or an AppSync GraphQL API.  For Amazon CloudFront, don't use this call. Instead, use your CloudFront distribution configuration. To associate a web ACL, in the CloudFront call UpdateDistribution, set the web ACL ID to the Amazon Resource Name (ARN) of the web ACL. For information, see UpdateDistribution. When you make changes to web ACLs or web ACL components, like rules and rule groups, WAF propagates the changes everywhere that the web ACL and its components are stored and used. Your changes are applied within seconds, but there might be a brief period of inconsistency when the changes have arrived in some places and not in others. So, for example, if you change a rule action setting, the action might be the old action in one area and the new action in another area. Or if you add an IP address to an IP set used in a blocking rule, the new address might briefly be blocked in one area while still allowed in another. This temporary inconsistency can occur when you first associate a web ACL with an Amazon Web Services resource and when you change a web ACL that is already associated with a resource. Generally, any inconsistencies of this type last only a few seconds.
    */
   associateWebACL(callback?: (err: AWSError, data: WAFV2.Types.AssociateWebACLResponse) => void): Request<WAFV2.Types.AssociateWebACLResponse, AWSError>;
   /**
@@ -108,11 +108,11 @@ declare class WAFV2 extends Service {
    */
   deleteRuleGroup(callback?: (err: AWSError, data: WAFV2.Types.DeleteRuleGroupResponse) => void): Request<WAFV2.Types.DeleteRuleGroupResponse, AWSError>;
   /**
-   * Deletes the specified WebACL. You can only use this if ManagedByFirewallManager is false in the specified WebACL. 
+   * Deletes the specified WebACL.  You can only use this if ManagedByFirewallManager is false in the specified WebACL.   Before deleting any web ACL, first disassociate it from all resources.   To retrieve a list of the resources that are associated with a web ACL, use the following calls:   For regional resources, call ListResourcesForWebACL.   For Amazon CloudFront distributions, use the CloudFront call ListDistributionsByWebACLId. For information, see ListDistributionsByWebACLId.     To disassociate a resource from a web ACL, use the following calls:   For regional resources, call DisassociateWebACL.   For Amazon CloudFront distributions, provide an empty web ACL ID in the CloudFront call UpdateDistribution. For information, see UpdateDistribution.     
    */
   deleteWebACL(params: WAFV2.Types.DeleteWebACLRequest, callback?: (err: AWSError, data: WAFV2.Types.DeleteWebACLResponse) => void): Request<WAFV2.Types.DeleteWebACLResponse, AWSError>;
   /**
-   * Deletes the specified WebACL. You can only use this if ManagedByFirewallManager is false in the specified WebACL. 
+   * Deletes the specified WebACL.  You can only use this if ManagedByFirewallManager is false in the specified WebACL.   Before deleting any web ACL, first disassociate it from all resources.   To retrieve a list of the resources that are associated with a web ACL, use the following calls:   For regional resources, call ListResourcesForWebACL.   For Amazon CloudFront distributions, use the CloudFront call ListDistributionsByWebACLId. For information, see ListDistributionsByWebACLId.     To disassociate a resource from a web ACL, use the following calls:   For regional resources, call DisassociateWebACL.   For Amazon CloudFront distributions, provide an empty web ACL ID in the CloudFront call UpdateDistribution. For information, see UpdateDistribution.     
    */
   deleteWebACL(callback?: (err: AWSError, data: WAFV2.Types.DeleteWebACLResponse) => void): Request<WAFV2.Types.DeleteWebACLResponse, AWSError>;
   /**
@@ -124,11 +124,11 @@ declare class WAFV2 extends Service {
    */
   describeManagedRuleGroup(callback?: (err: AWSError, data: WAFV2.Types.DescribeManagedRuleGroupResponse) => void): Request<WAFV2.Types.DescribeManagedRuleGroupResponse, AWSError>;
   /**
-   * Disassociates a web ACL from a regional application resource. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, or an AppSync GraphQL API.  For Amazon CloudFront, don't use this call. Instead, use your CloudFront distribution configuration. To disassociate a web ACL, provide an empty web ACL ID in the CloudFront call UpdateDistribution. For information, see UpdateDistribution.
+   * Disassociates the specified regional application resource from any existing web ACL association. A resource can have at most one web ACL association. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, or an AppSync GraphQL API.  For Amazon CloudFront, don't use this call. Instead, use your CloudFront distribution configuration. To disassociate a web ACL, provide an empty web ACL ID in the CloudFront call UpdateDistribution. For information, see UpdateDistribution.
    */
   disassociateWebACL(params: WAFV2.Types.DisassociateWebACLRequest, callback?: (err: AWSError, data: WAFV2.Types.DisassociateWebACLResponse) => void): Request<WAFV2.Types.DisassociateWebACLResponse, AWSError>;
   /**
-   * Disassociates a web ACL from a regional application resource. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, or an AppSync GraphQL API.  For Amazon CloudFront, don't use this call. Instead, use your CloudFront distribution configuration. To disassociate a web ACL, provide an empty web ACL ID in the CloudFront call UpdateDistribution. For information, see UpdateDistribution.
+   * Disassociates the specified regional application resource from any existing web ACL association. A resource can have at most one web ACL association. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, or an AppSync GraphQL API.  For Amazon CloudFront, don't use this call. Instead, use your CloudFront distribution configuration. To disassociate a web ACL, provide an empty web ACL ID in the CloudFront call UpdateDistribution. For information, see UpdateDistribution.
    */
   disassociateWebACL(callback?: (err: AWSError, data: WAFV2.Types.DisassociateWebACLResponse) => void): Request<WAFV2.Types.DisassociateWebACLResponse, AWSError>;
   /**
@@ -356,11 +356,11 @@ declare class WAFV2 extends Service {
    */
   untagResource(callback?: (err: AWSError, data: WAFV2.Types.UntagResourceResponse) => void): Request<WAFV2.Types.UntagResourceResponse, AWSError>;
   /**
-   * Updates the specified IPSet.   This operation completely replaces the mutable specifications that you already have for the IP set with the ones that you provide to this call. To modify the IP set, retrieve it by calling GetIPSet, update the settings as needed, and then provide the complete IP set specification to this call. 
+   * Updates the specified IPSet.   This operation completely replaces the mutable specifications that you already have for the IP set with the ones that you provide to this call. To modify the IP set, retrieve it by calling GetIPSet, update the settings as needed, and then provide the complete IP set specification to this call.  When you make changes to web ACLs or web ACL components, like rules and rule groups, WAF propagates the changes everywhere that the web ACL and its components are stored and used. Your changes are applied within seconds, but there might be a brief period of inconsistency when the changes have arrived in some places and not in others. So, for example, if you change a rule action setting, the action might be the old action in one area and the new action in another area. Or if you add an IP address to an IP set used in a blocking rule, the new address might briefly be blocked in one area while still allowed in another. This temporary inconsistency can occur when you first associate a web ACL with an Amazon Web Services resource and when you change a web ACL that is already associated with a resource. Generally, any inconsistencies of this type last only a few seconds.
    */
   updateIPSet(params: WAFV2.Types.UpdateIPSetRequest, callback?: (err: AWSError, data: WAFV2.Types.UpdateIPSetResponse) => void): Request<WAFV2.Types.UpdateIPSetResponse, AWSError>;
   /**
-   * Updates the specified IPSet.   This operation completely replaces the mutable specifications that you already have for the IP set with the ones that you provide to this call. To modify the IP set, retrieve it by calling GetIPSet, update the settings as needed, and then provide the complete IP set specification to this call. 
+   * Updates the specified IPSet.   This operation completely replaces the mutable specifications that you already have for the IP set with the ones that you provide to this call. To modify the IP set, retrieve it by calling GetIPSet, update the settings as needed, and then provide the complete IP set specification to this call.  When you make changes to web ACLs or web ACL components, like rules and rule groups, WAF propagates the changes everywhere that the web ACL and its components are stored and used. Your changes are applied within seconds, but there might be a brief period of inconsistency when the changes have arrived in some places and not in others. So, for example, if you change a rule action setting, the action might be the old action in one area and the new action in another area. Or if you add an IP address to an IP set used in a blocking rule, the new address might briefly be blocked in one area while still allowed in another. This temporary inconsistency can occur when you first associate a web ACL with an Amazon Web Services resource and when you change a web ACL that is already associated with a resource. Generally, any inconsistencies of this type last only a few seconds.
    */
   updateIPSet(callback?: (err: AWSError, data: WAFV2.Types.UpdateIPSetResponse) => void): Request<WAFV2.Types.UpdateIPSetResponse, AWSError>;
   /**
@@ -372,27 +372,27 @@ declare class WAFV2 extends Service {
    */
   updateManagedRuleSetVersionExpiryDate(callback?: (err: AWSError, data: WAFV2.Types.UpdateManagedRuleSetVersionExpiryDateResponse) => void): Request<WAFV2.Types.UpdateManagedRuleSetVersionExpiryDateResponse, AWSError>;
   /**
-   * Updates the specified RegexPatternSet.  This operation completely replaces the mutable specifications that you already have for the regex pattern set with the ones that you provide to this call. To modify the regex pattern set, retrieve it by calling GetRegexPatternSet, update the settings as needed, and then provide the complete regex pattern set specification to this call. 
+   * Updates the specified RegexPatternSet.  This operation completely replaces the mutable specifications that you already have for the regex pattern set with the ones that you provide to this call. To modify the regex pattern set, retrieve it by calling GetRegexPatternSet, update the settings as needed, and then provide the complete regex pattern set specification to this call.  When you make changes to web ACLs or web ACL components, like rules and rule groups, WAF propagates the changes everywhere that the web ACL and its components are stored and used. Your changes are applied within seconds, but there might be a brief period of inconsistency when the changes have arrived in some places and not in others. So, for example, if you change a rule action setting, the action might be the old action in one area and the new action in another area. Or if you add an IP address to an IP set used in a blocking rule, the new address might briefly be blocked in one area while still allowed in another. This temporary inconsistency can occur when you first associate a web ACL with an Amazon Web Services resource and when you change a web ACL that is already associated with a resource. Generally, any inconsistencies of this type last only a few seconds.
    */
   updateRegexPatternSet(params: WAFV2.Types.UpdateRegexPatternSetRequest, callback?: (err: AWSError, data: WAFV2.Types.UpdateRegexPatternSetResponse) => void): Request<WAFV2.Types.UpdateRegexPatternSetResponse, AWSError>;
   /**
-   * Updates the specified RegexPatternSet.  This operation completely replaces the mutable specifications that you already have for the regex pattern set with the ones that you provide to this call. To modify the regex pattern set, retrieve it by calling GetRegexPatternSet, update the settings as needed, and then provide the complete regex pattern set specification to this call. 
+   * Updates the specified RegexPatternSet.  This operation completely replaces the mutable specifications that you already have for the regex pattern set with the ones that you provide to this call. To modify the regex pattern set, retrieve it by calling GetRegexPatternSet, update the settings as needed, and then provide the complete regex pattern set specification to this call.  When you make changes to web ACLs or web ACL components, like rules and rule groups, WAF propagates the changes everywhere that the web ACL and its components are stored and used. Your changes are applied within seconds, but there might be a brief period of inconsistency when the changes have arrived in some places and not in others. So, for example, if you change a rule action setting, the action might be the old action in one area and the new action in another area. Or if you add an IP address to an IP set used in a blocking rule, the new address might briefly be blocked in one area while still allowed in another. This temporary inconsistency can occur when you first associate a web ACL with an Amazon Web Services resource and when you change a web ACL that is already associated with a resource. Generally, any inconsistencies of this type last only a few seconds.
    */
   updateRegexPatternSet(callback?: (err: AWSError, data: WAFV2.Types.UpdateRegexPatternSetResponse) => void): Request<WAFV2.Types.UpdateRegexPatternSetResponse, AWSError>;
   /**
-   * Updates the specified RuleGroup.  This operation completely replaces the mutable specifications that you already have for the rule group with the ones that you provide to this call. To modify the rule group, retrieve it by calling GetRuleGroup, update the settings as needed, and then provide the complete rule group specification to this call.   A rule group defines a collection of rules to inspect and control web requests that you can use in a WebACL. When you create a rule group, you define an immutable capacity limit. If you update a rule group, you must stay within the capacity. This allows others to reuse the rule group with confidence in its capacity requirements. 
+   * Updates the specified RuleGroup.  This operation completely replaces the mutable specifications that you already have for the rule group with the ones that you provide to this call. To modify the rule group, retrieve it by calling GetRuleGroup, update the settings as needed, and then provide the complete rule group specification to this call.  When you make changes to web ACLs or web ACL components, like rules and rule groups, WAF propagates the changes everywhere that the web ACL and its components are stored and used. Your changes are applied within seconds, but there might be a brief period of inconsistency when the changes have arrived in some places and not in others. So, for example, if you change a rule action setting, the action might be the old action in one area and the new action in another area. Or if you add an IP address to an IP set used in a blocking rule, the new address might briefly be blocked in one area while still allowed in another. This temporary inconsistency can occur when you first associate a web ACL with an Amazon Web Services resource and when you change a web ACL that is already associated with a resource. Generally, any inconsistencies of this type last only a few seconds.  A rule group defines a collection of rules to inspect and control web requests that you can use in a WebACL. When you create a rule group, you define an immutable capacity limit. If you update a rule group, you must stay within the capacity. This allows others to reuse the rule group with confidence in its capacity requirements. 
    */
   updateRuleGroup(params: WAFV2.Types.UpdateRuleGroupRequest, callback?: (err: AWSError, data: WAFV2.Types.UpdateRuleGroupResponse) => void): Request<WAFV2.Types.UpdateRuleGroupResponse, AWSError>;
   /**
-   * Updates the specified RuleGroup.  This operation completely replaces the mutable specifications that you already have for the rule group with the ones that you provide to this call. To modify the rule group, retrieve it by calling GetRuleGroup, update the settings as needed, and then provide the complete rule group specification to this call.   A rule group defines a collection of rules to inspect and control web requests that you can use in a WebACL. When you create a rule group, you define an immutable capacity limit. If you update a rule group, you must stay within the capacity. This allows others to reuse the rule group with confidence in its capacity requirements. 
+   * Updates the specified RuleGroup.  This operation completely replaces the mutable specifications that you already have for the rule group with the ones that you provide to this call. To modify the rule group, retrieve it by calling GetRuleGroup, update the settings as needed, and then provide the complete rule group specification to this call.  When you make changes to web ACLs or web ACL components, like rules and rule groups, WAF propagates the changes everywhere that the web ACL and its components are stored and used. Your changes are applied within seconds, but there might be a brief period of inconsistency when the changes have arrived in some places and not in others. So, for example, if you change a rule action setting, the action might be the old action in one area and the new action in another area. Or if you add an IP address to an IP set used in a blocking rule, the new address might briefly be blocked in one area while still allowed in another. This temporary inconsistency can occur when you first associate a web ACL with an Amazon Web Services resource and when you change a web ACL that is already associated with a resource. Generally, any inconsistencies of this type last only a few seconds.  A rule group defines a collection of rules to inspect and control web requests that you can use in a WebACL. When you create a rule group, you define an immutable capacity limit. If you update a rule group, you must stay within the capacity. This allows others to reuse the rule group with confidence in its capacity requirements. 
    */
   updateRuleGroup(callback?: (err: AWSError, data: WAFV2.Types.UpdateRuleGroupResponse) => void): Request<WAFV2.Types.UpdateRuleGroupResponse, AWSError>;
   /**
-   * Updates the specified WebACL.  This operation completely replaces the mutable specifications that you already have for the web ACL with the ones that you provide to this call. To modify the web ACL, retrieve it by calling GetWebACL, update the settings as needed, and then provide the complete web ACL specification to this call.   A web ACL defines a collection of rules to use to inspect and control web requests. Each rule has an action defined (allow, block, or count) for requests that match the statement of the rule. In the web ACL, you assign a default action to take (allow, block) for any request that does not match any of the rules. The rules in a web ACL can be a combination of the types Rule, RuleGroup, and managed rule group. You can associate a web ACL with one or more Amazon Web Services resources to protect. The resources can be an Amazon CloudFront distribution, an Amazon API Gateway REST API, an Application Load Balancer, or an AppSync GraphQL API. 
+   * Updates the specified WebACL. While updating a web ACL, WAF provides continous coverage to the resources that you have associated with the web ACL.  When you make changes to web ACLs or web ACL components, like rules and rule groups, WAF propagates the changes everywhere that the web ACL and its components are stored and used. Your changes are applied within seconds, but there might be a brief period of inconsistency when the changes have arrived in some places and not in others. So, for example, if you change a rule action setting, the action might be the old action in one area and the new action in another area. Or if you add an IP address to an IP set used in a blocking rule, the new address might briefly be blocked in one area while still allowed in another. This temporary inconsistency can occur when you first associate a web ACL with an Amazon Web Services resource and when you change a web ACL that is already associated with a resource. Generally, any inconsistencies of this type last only a few seconds.  This operation completely replaces the mutable specifications that you already have for the web ACL with the ones that you provide to this call. To modify the web ACL, retrieve it by calling GetWebACL, update the settings as needed, and then provide the complete web ACL specification to this call.   A web ACL defines a collection of rules to use to inspect and control web requests. Each rule has an action defined (allow, block, or count) for requests that match the statement of the rule. In the web ACL, you assign a default action to take (allow, block) for any request that does not match any of the rules. The rules in a web ACL can be a combination of the types Rule, RuleGroup, and managed rule group. You can associate a web ACL with one or more Amazon Web Services resources to protect. The resources can be an Amazon CloudFront distribution, an Amazon API Gateway REST API, an Application Load Balancer, or an AppSync GraphQL API. 
    */
   updateWebACL(params: WAFV2.Types.UpdateWebACLRequest, callback?: (err: AWSError, data: WAFV2.Types.UpdateWebACLResponse) => void): Request<WAFV2.Types.UpdateWebACLResponse, AWSError>;
   /**
-   * Updates the specified WebACL.  This operation completely replaces the mutable specifications that you already have for the web ACL with the ones that you provide to this call. To modify the web ACL, retrieve it by calling GetWebACL, update the settings as needed, and then provide the complete web ACL specification to this call.   A web ACL defines a collection of rules to use to inspect and control web requests. Each rule has an action defined (allow, block, or count) for requests that match the statement of the rule. In the web ACL, you assign a default action to take (allow, block) for any request that does not match any of the rules. The rules in a web ACL can be a combination of the types Rule, RuleGroup, and managed rule group. You can associate a web ACL with one or more Amazon Web Services resources to protect. The resources can be an Amazon CloudFront distribution, an Amazon API Gateway REST API, an Application Load Balancer, or an AppSync GraphQL API. 
+   * Updates the specified WebACL. While updating a web ACL, WAF provides continous coverage to the resources that you have associated with the web ACL.  When you make changes to web ACLs or web ACL components, like rules and rule groups, WAF propagates the changes everywhere that the web ACL and its components are stored and used. Your changes are applied within seconds, but there might be a brief period of inconsistency when the changes have arrived in some places and not in others. So, for example, if you change a rule action setting, the action might be the old action in one area and the new action in another area. Or if you add an IP address to an IP set used in a blocking rule, the new address might briefly be blocked in one area while still allowed in another. This temporary inconsistency can occur when you first associate a web ACL with an Amazon Web Services resource and when you change a web ACL that is already associated with a resource. Generally, any inconsistencies of this type last only a few seconds.  This operation completely replaces the mutable specifications that you already have for the web ACL with the ones that you provide to this call. To modify the web ACL, retrieve it by calling GetWebACL, update the settings as needed, and then provide the complete web ACL specification to this call.   A web ACL defines a collection of rules to use to inspect and control web requests. Each rule has an action defined (allow, block, or count) for requests that match the statement of the rule. In the web ACL, you assign a default action to take (allow, block) for any request that does not match any of the rules. The rules in a web ACL can be a combination of the types Rule, RuleGroup, and managed rule group. You can associate a web ACL with one or more Amazon Web Services resources to protect. The resources can be an Amazon CloudFront distribution, an Amazon API Gateway REST API, an Application Load Balancer, or an AppSync GraphQL API. 
    */
   updateWebACL(callback?: (err: AWSError, data: WAFV2.Types.UpdateWebACLResponse) => void): Request<WAFV2.Types.UpdateWebACLResponse, AWSError>;
 }
@@ -440,6 +440,10 @@ declare namespace WAFV2 {
     CustomResponse?: CustomResponse;
   }
   export interface Body {
+    /**
+     * What WAF should do if the body is larger than WAF can inspect. WAF does not support inspecting the entire contents of the body of a web request when the body exceeds 8 KB (8192 bytes). Only the first 8 KB of the request body are forwarded to WAF by the underlying host service.  The options for oversize handling are the following:    CONTINUE - Inspect the body normally, according to the rule inspection criteria.     MATCH - Treat the web request as matching the rule statement. WAF applies the rule action to the request.    NO_MATCH - Treat the web request as not matching the rule statement.   You can combine the MATCH or NO_MATCH settings for oversize handling with your rule and web ACL action settings, so that you block any request whose body is over 8 KB.  Default: CONTINUE 
+     */
+    OversizeHandling?: OversizeHandling;
   }
   export type BodyParsingFallbackBehavior = "MATCH"|"NO_MATCH"|"EVALUATE_AS_STRING"|string;
   export type Boolean = boolean;
@@ -449,7 +453,7 @@ declare namespace WAFV2 {
      */
     SearchString: SearchString;
     /**
-     * The part of a web request that you want WAF to inspect. For more information, see FieldToMatch. 
+     * The part of the web request that you want WAF to inspect. For more information, see FieldToMatch. 
      */
     FieldToMatch: FieldToMatch;
     /**
@@ -457,7 +461,7 @@ declare namespace WAFV2 {
      */
     TextTransformations: TextTransformations;
     /**
-     * The area within the portion of a web request that you want WAF to search for SearchString. Valid values include the following:  CONTAINS  The specified part of the web request must include the value of SearchString, but the location doesn't matter.  CONTAINS_WORD  The specified part of the web request must include the value of SearchString, and SearchString must contain only alphanumeric characters or underscore (A-Z, a-z, 0-9, or _). In addition, SearchString must be a word, which means that both of the following are true:    SearchString is at the beginning of the specified part of the web request or is preceded by a character other than an alphanumeric character or underscore (_). Examples include the value of a header and ;BadBot.    SearchString is at the end of the specified part of the web request or is followed by a character other than an alphanumeric character or underscore (_), for example, BadBot; and -BadBot;.    EXACTLY  The value of the specified part of the web request must exactly match the value of SearchString.  STARTS_WITH  The value of SearchString must appear at the beginning of the specified part of the web request.  ENDS_WITH  The value of SearchString must appear at the end of the specified part of the web request.
+     * The area within the portion of the web request that you want WAF to search for SearchString. Valid values include the following:  CONTAINS  The specified part of the web request must include the value of SearchString, but the location doesn't matter.  CONTAINS_WORD  The specified part of the web request must include the value of SearchString, and SearchString must contain only alphanumeric characters or underscore (A-Z, a-z, 0-9, or _). In addition, SearchString must be a word, which means that both of the following are true:    SearchString is at the beginning of the specified part of the web request or is preceded by a character other than an alphanumeric character or underscore (_). Examples include the value of a header and ;BadBot.    SearchString is at the end of the specified part of the web request or is followed by a character other than an alphanumeric character or underscore (_), for example, BadBot; and -BadBot;.    EXACTLY  The value of the specified part of the web request must exactly match the value of SearchString.  STARTS_WITH  The value of SearchString must appear at the beginning of the specified part of the web request.  ENDS_WITH  The value of SearchString must appear at the end of the specified part of the web request.
      */
     PositionalConstraint: PositionalConstraint;
   }
@@ -517,6 +521,35 @@ declare namespace WAFV2 {
   }
   export type Conditions = Condition[];
   export type ConsumedCapacity = number;
+  export interface CookieMatchPattern {
+    /**
+     * Inspect all cookies. 
+     */
+    All?: All;
+    /**
+     * Inspect only the cookies that have a key that matches one of the strings specified here. 
+     */
+    IncludedCookies?: CookieNames;
+    /**
+     * Inspect only the cookies whose keys don't match any of the strings specified here. 
+     */
+    ExcludedCookies?: CookieNames;
+  }
+  export type CookieNames = SingleCookieName[];
+  export interface Cookies {
+    /**
+     * The filter to use to identify the subset of cookies to inspect in a web request.  You must specify exactly one setting: either All, IncludedCookies, or ExcludedCookies. Example JSON: "CookieMatchPattern": { "IncludedCookies": {"KeyToInclude1", "KeyToInclude2", "KeyToInclude3"} } 
+     */
+    MatchPattern: CookieMatchPattern;
+    /**
+     * The parts of the cookies to inspect with the rule inspection criteria. If you specify All, WAF inspects both keys and values. 
+     */
+    MatchScope: MapMatchScope;
+    /**
+     * What WAF should do if the cookies of the request are larger than WAF can inspect. WAF does not support inspecting the entire contents of request cookies when they exceed 8 KB (8192 bytes) or 200 total cookies. The underlying host service forwards a maximum of 200 cookies and at most 8 KB of cookie contents to WAF.  The options for oversize handling are the following:    CONTINUE - Inspect the cookies normally, according to the rule inspection criteria.     MATCH - Treat the web request as matching the rule statement. WAF applies the rule action to the request.    NO_MATCH - Treat the web request as not matching the rule statement.  
+     */
+    OversizeHandling: OversizeHandling;
+  }
   export interface CountAction {
     /**
      * Defines custom handling for the web request. For information about customizing web requests and responses, see Customizing web requests and responses in WAF in the WAF Developer Guide. 
@@ -524,7 +557,7 @@ declare namespace WAFV2 {
     CustomRequestHandling?: CustomRequestHandling;
   }
   export type Country = string;
-  export type CountryCode = "AF"|"AX"|"AL"|"DZ"|"AS"|"AD"|"AO"|"AI"|"AQ"|"AG"|"AR"|"AM"|"AW"|"AU"|"AT"|"AZ"|"BS"|"BH"|"BD"|"BB"|"BY"|"BE"|"BZ"|"BJ"|"BM"|"BT"|"BO"|"BQ"|"BA"|"BW"|"BV"|"BR"|"IO"|"BN"|"BG"|"BF"|"BI"|"KH"|"CM"|"CA"|"CV"|"KY"|"CF"|"TD"|"CL"|"CN"|"CX"|"CC"|"CO"|"KM"|"CG"|"CD"|"CK"|"CR"|"CI"|"HR"|"CU"|"CW"|"CY"|"CZ"|"DK"|"DJ"|"DM"|"DO"|"EC"|"EG"|"SV"|"GQ"|"ER"|"EE"|"ET"|"FK"|"FO"|"FJ"|"FI"|"FR"|"GF"|"PF"|"TF"|"GA"|"GM"|"GE"|"DE"|"GH"|"GI"|"GR"|"GL"|"GD"|"GP"|"GU"|"GT"|"GG"|"GN"|"GW"|"GY"|"HT"|"HM"|"VA"|"HN"|"HK"|"HU"|"IS"|"IN"|"ID"|"IR"|"IQ"|"IE"|"IM"|"IL"|"IT"|"JM"|"JP"|"JE"|"JO"|"KZ"|"KE"|"KI"|"KP"|"KR"|"KW"|"KG"|"LA"|"LV"|"LB"|"LS"|"LR"|"LY"|"LI"|"LT"|"LU"|"MO"|"MK"|"MG"|"MW"|"MY"|"MV"|"ML"|"MT"|"MH"|"MQ"|"MR"|"MU"|"YT"|"MX"|"FM"|"MD"|"MC"|"MN"|"ME"|"MS"|"MA"|"MZ"|"MM"|"NA"|"NR"|"NP"|"NL"|"NC"|"NZ"|"NI"|"NE"|"NG"|"NU"|"NF"|"MP"|"NO"|"OM"|"PK"|"PW"|"PS"|"PA"|"PG"|"PY"|"PE"|"PH"|"PN"|"PL"|"PT"|"PR"|"QA"|"RE"|"RO"|"RU"|"RW"|"BL"|"SH"|"KN"|"LC"|"MF"|"PM"|"VC"|"WS"|"SM"|"ST"|"SA"|"SN"|"RS"|"SC"|"SL"|"SG"|"SX"|"SK"|"SI"|"SB"|"SO"|"ZA"|"GS"|"SS"|"ES"|"LK"|"SD"|"SR"|"SJ"|"SZ"|"SE"|"CH"|"SY"|"TW"|"TJ"|"TZ"|"TH"|"TL"|"TG"|"TK"|"TO"|"TT"|"TN"|"TR"|"TM"|"TC"|"TV"|"UG"|"UA"|"AE"|"GB"|"US"|"UM"|"UY"|"UZ"|"VU"|"VE"|"VN"|"VG"|"VI"|"WF"|"EH"|"YE"|"ZM"|"ZW"|string;
+  export type CountryCode = "AF"|"AX"|"AL"|"DZ"|"AS"|"AD"|"AO"|"AI"|"AQ"|"AG"|"AR"|"AM"|"AW"|"AU"|"AT"|"AZ"|"BS"|"BH"|"BD"|"BB"|"BY"|"BE"|"BZ"|"BJ"|"BM"|"BT"|"BO"|"BQ"|"BA"|"BW"|"BV"|"BR"|"IO"|"BN"|"BG"|"BF"|"BI"|"KH"|"CM"|"CA"|"CV"|"KY"|"CF"|"TD"|"CL"|"CN"|"CX"|"CC"|"CO"|"KM"|"CG"|"CD"|"CK"|"CR"|"CI"|"HR"|"CU"|"CW"|"CY"|"CZ"|"DK"|"DJ"|"DM"|"DO"|"EC"|"EG"|"SV"|"GQ"|"ER"|"EE"|"ET"|"FK"|"FO"|"FJ"|"FI"|"FR"|"GF"|"PF"|"TF"|"GA"|"GM"|"GE"|"DE"|"GH"|"GI"|"GR"|"GL"|"GD"|"GP"|"GU"|"GT"|"GG"|"GN"|"GW"|"GY"|"HT"|"HM"|"VA"|"HN"|"HK"|"HU"|"IS"|"IN"|"ID"|"IR"|"IQ"|"IE"|"IM"|"IL"|"IT"|"JM"|"JP"|"JE"|"JO"|"KZ"|"KE"|"KI"|"KP"|"KR"|"KW"|"KG"|"LA"|"LV"|"LB"|"LS"|"LR"|"LY"|"LI"|"LT"|"LU"|"MO"|"MK"|"MG"|"MW"|"MY"|"MV"|"ML"|"MT"|"MH"|"MQ"|"MR"|"MU"|"YT"|"MX"|"FM"|"MD"|"MC"|"MN"|"ME"|"MS"|"MA"|"MZ"|"MM"|"NA"|"NR"|"NP"|"NL"|"NC"|"NZ"|"NI"|"NE"|"NG"|"NU"|"NF"|"MP"|"NO"|"OM"|"PK"|"PW"|"PS"|"PA"|"PG"|"PY"|"PE"|"PH"|"PN"|"PL"|"PT"|"PR"|"QA"|"RE"|"RO"|"RU"|"RW"|"BL"|"SH"|"KN"|"LC"|"MF"|"PM"|"VC"|"WS"|"SM"|"ST"|"SA"|"SN"|"RS"|"SC"|"SL"|"SG"|"SX"|"SK"|"SI"|"SB"|"SO"|"ZA"|"GS"|"SS"|"ES"|"LK"|"SD"|"SR"|"SJ"|"SZ"|"SE"|"CH"|"SY"|"TW"|"TJ"|"TZ"|"TH"|"TL"|"TG"|"TK"|"TO"|"TT"|"TN"|"TR"|"TM"|"TC"|"TV"|"UG"|"UA"|"AE"|"GB"|"US"|"UM"|"UY"|"UZ"|"VU"|"VE"|"VN"|"VG"|"VI"|"WF"|"EH"|"YE"|"ZM"|"ZW"|"XK"|string;
   export type CountryCodes = CountryCode[];
   export interface CreateIPSetRequest {
     /**
@@ -908,11 +941,11 @@ declare namespace WAFV2 {
   export type FieldIdentifier = string;
   export interface FieldToMatch {
     /**
-     * Inspect a single header. Provide the name of the header to inspect, for example, User-Agent or Referer. This setting isn't case sensitive. Example JSON: "SingleHeader": { "Name": "haystack" } 
+     * Inspect a single header. Provide the name of the header to inspect, for example, User-Agent or Referer. This setting isn't case sensitive. Example JSON: "SingleHeader": { "Name": "haystack" }  Alternately, you can filter and inspect all headers with the Headers FieldToMatch setting. 
      */
     SingleHeader?: SingleHeader;
     /**
-     * Inspect a single query argument. Provide the name of the query argument to inspect, such as UserName or SalesRegion. The name can be up to 30 characters long and isn't case sensitive.  This is used only to indicate the web request component for WAF to inspect, in the FieldToMatch specification.  Example JSON: "SingleQueryArgument": { "Name": "myArgument" } 
+     * Inspect a single query argument. Provide the name of the query argument to inspect, such as UserName or SalesRegion. The name can be up to 30 characters long and isn't case sensitive.  Example JSON: "SingleQueryArgument": { "Name": "myArgument" } 
      */
     SingleQueryArgument?: SingleQueryArgument;
     /**
@@ -920,7 +953,7 @@ declare namespace WAFV2 {
      */
     AllQueryArguments?: AllQueryArguments;
     /**
-     * Inspect the request URI path. This is the part of a web request that identifies a resource, for example, /images/daily-ad.jpg.
+     * Inspect the request URI path. This is the part of the web request that identifies a resource, for example, /images/daily-ad.jpg.
      */
     UriPath?: UriPath;
     /**
@@ -928,7 +961,7 @@ declare namespace WAFV2 {
      */
     QueryString?: QueryString;
     /**
-     * Inspect the request body as plain text. The request body immediately follows the request headers. This is the part of a request that contains any additional data that you want to send to your web server as the HTTP request body, such as data from a form.  Note that only the first 8 KB (8192 bytes) of the request body are forwarded to WAF for inspection by the underlying host service. If you don't need to inspect more than 8 KB, you can guarantee that you don't allow additional bytes in by combining a statement that inspects the body of the web request, such as ByteMatchStatement or RegexPatternSetReferenceStatement, with a SizeConstraintStatement that enforces an 8 KB size limit on the body of the request. WAF doesn't support inspecting the entire contents of web requests whose bodies exceed the 8 KB limit.
+     * Inspect the request body as plain text. The request body immediately follows the request headers. This is the part of a request that contains any additional data that you want to send to your web server as the HTTP request body, such as data from a form.  Only the first 8 KB (8192 bytes) of the request body are forwarded to WAF for inspection by the underlying host service. For information about how to handle oversized request bodies, see the Body object configuration. 
      */
     Body?: Body;
     /**
@@ -936,9 +969,17 @@ declare namespace WAFV2 {
      */
     Method?: Method;
     /**
-     * Inspect the request body as JSON. The request body immediately follows the request headers. This is the part of a request that contains any additional data that you want to send to your web server as the HTTP request body, such as data from a form.  Note that only the first 8 KB (8192 bytes) of the request body are forwarded to WAF for inspection by the underlying host service. If you don't need to inspect more than 8 KB, you can guarantee that you don't allow additional bytes in by combining a statement that inspects the body of the web request, such as ByteMatchStatement or RegexPatternSetReferenceStatement, with a SizeConstraintStatement that enforces an 8 KB size limit on the body of the request. WAF doesn't support inspecting the entire contents of web requests whose bodies exceed the 8 KB limit.
+     * Inspect the request body as JSON. The request body immediately follows the request headers. This is the part of a request that contains any additional data that you want to send to your web server as the HTTP request body, such as data from a form.  Only the first 8 KB (8192 bytes) of the request body are forwarded to WAF for inspection by the underlying host service. For information about how to handle oversized request bodies, see the JsonBody object configuration. 
      */
     JsonBody?: JsonBody;
+    /**
+     * Inspect the request headers. You must configure scope and pattern matching filters in the Headers object, to define the set of headers to and the parts of the headers that WAF inspects.  Only the first 8 KB (8192 bytes) of a request's headers and only the first 200 headers are forwarded to WAF for inspection by the underlying host service. You must configure how to handle any oversize header content in the Headers object. WAF applies the pattern matching filters to the headers that it receives from the underlying host service. 
+     */
+    Headers?: Headers;
+    /**
+     * Inspect the request cookies. You must configure scope and pattern matching filters in the Cookies object, to define the set of cookies and the parts of the cookies that WAF inspects.  Only the first 8 KB (8192 bytes) of a request's cookies and only the first 200 cookies are forwarded to WAF for inspection by the underlying host service. You must configure how to handle any oversize cookie content in the Cookies object. WAF applies the pattern matching filters to the cookies that it receives from the underlying host service. 
+     */
+    Cookies?: Cookies;
   }
   export type FieldToMatchData = string;
   export interface Filter {
@@ -1316,8 +1357,37 @@ declare namespace WAFV2 {
     Headers?: HTTPHeaders;
   }
   export type HTTPVersion = string;
+  export interface HeaderMatchPattern {
+    /**
+     * Inspect all headers. 
+     */
+    All?: All;
+    /**
+     * Inspect only the headers that have a key that matches one of the strings specified here. 
+     */
+    IncludedHeaders?: HeaderNames;
+    /**
+     * Inspect only the headers whose keys don't match any of the strings specified here. 
+     */
+    ExcludedHeaders?: HeaderNames;
+  }
   export type HeaderName = string;
+  export type HeaderNames = FieldToMatchData[];
   export type HeaderValue = string;
+  export interface Headers {
+    /**
+     * The filter to use to identify the subset of headers to inspect in a web request.  You must specify exactly one setting: either All, IncludedHeaders, or ExcludedHeaders. Example JSON: "HeaderMatchPattern": { "ExcludedHeaders": {"KeyToExclude1", "KeyToExclude2"} } 
+     */
+    MatchPattern: HeaderMatchPattern;
+    /**
+     * The parts of the headers to match with the rule inspection criteria. If you specify All, WAF inspects both keys and values. 
+     */
+    MatchScope: MapMatchScope;
+    /**
+     * What WAF should do if the headers of the request are larger than WAF can inspect. WAF does not support inspecting the entire contents of request headers when they exceed 8 KB (8192 bytes) or 200 total headers. The underlying host service forwards a maximum of 200 headers and at most 8 KB of header contents to WAF.  The options for oversize handling are the following:    CONTINUE - Inspect the headers normally, according to the rule inspection criteria.     MATCH - Treat the web request as matching the rule statement. WAF applies the rule action to the request.    NO_MATCH - Treat the web request as not matching the rule statement.  
+     */
+    OversizeHandling: OversizeHandling;
+  }
   export type IPAddress = string;
   export type IPAddressVersion = "IPV4"|"IPV6"|string;
   export type IPAddresses = IPAddress[];
@@ -1414,6 +1484,10 @@ declare namespace WAFV2 {
      * What WAF should do if it fails to completely parse the JSON body. The options are the following:    EVALUATE_AS_STRING - Inspect the body as plain text. WAF applies the text transformations and inspection criteria that you defined for the JSON inspection to the body text string.    MATCH - Treat the web request as matching the rule statement. WAF applies the rule action to the request.    NO_MATCH - Treat the web request as not matching the rule statement.   If you don't provide this setting, WAF parses and evaluates the content only up to the first parsing failure that it encounters.  WAF does its best to parse the entire JSON body, but might be forced to stop for reasons such as invalid characters, duplicate keys, truncation, and any content whose root node isn't an object or an array.  WAF parses the JSON in the following examples as two valid key, value pairs:    Missing comma: {"key1":"value1""key2":"value2"}    Missing colon: {"key1":"value1","key2""value2"}    Extra colons: {"key1"::"value1","key2""value2"}   
      */
     InvalidFallbackBehavior?: BodyParsingFallbackBehavior;
+    /**
+     * What WAF should do if the body is larger than WAF can inspect. WAF does not support inspecting the entire contents of the body of a web request when the body exceeds 8 KB (8192 bytes). Only the first 8 KB of the request body are forwarded to WAF by the underlying host service.  The options for oversize handling are the following:    CONTINUE - Inspect the body normally, according to the rule inspection criteria.     MATCH - Treat the web request as matching the rule statement. WAF applies the rule action to the request.    NO_MATCH - Treat the web request as not matching the rule statement.   You can combine the MATCH or NO_MATCH settings for oversize handling with your rule and web ACL action settings, so that you block any request whose body is over 8 KB.  Default: CONTINUE 
+     */
+    OversizeHandling?: OversizeHandling;
   }
   export interface JsonMatchPattern {
     /**
@@ -1924,6 +1998,7 @@ declare namespace WAFV2 {
      */
     ExpiryTimestamp?: Timestamp;
   }
+  export type MapMatchScope = "ALL"|"KEY"|"VALUE"|string;
   export interface Method {
   }
   export type MetricName = string;
@@ -1971,6 +2046,7 @@ declare namespace WAFV2 {
      */
     None?: NoneAction;
   }
+  export type OversizeHandling = "CONTINUE"|"MATCH"|"NO_MATCH"|string;
   export type PaginationLimit = number;
   export interface PasswordField {
     /**
@@ -2085,7 +2161,7 @@ declare namespace WAFV2 {
      */
     RegexString: RegexPatternString;
     /**
-     * The part of a web request that you want WAF to inspect. For more information, see FieldToMatch. 
+     * The part of the web request that you want WAF to inspect. For more information, see FieldToMatch. 
      */
     FieldToMatch: FieldToMatch;
     /**
@@ -2121,7 +2197,7 @@ declare namespace WAFV2 {
      */
     ARN: ResourceArn;
     /**
-     * The part of a web request that you want WAF to inspect. For more information, see FieldToMatch. 
+     * The part of the web request that you want WAF to inspect. For more information, see FieldToMatch. 
      */
     FieldToMatch: FieldToMatch;
     /**
@@ -2359,6 +2435,7 @@ declare namespace WAFV2 {
   export type SampledHTTPRequests = SampledHTTPRequest[];
   export type Scope = "CLOUDFRONT"|"REGIONAL"|string;
   export type SearchString = Buffer|Uint8Array|Blob|string;
+  export type SingleCookieName = string;
   export interface SingleHeader {
     /**
      * The name of the query header to inspect.
@@ -2374,7 +2451,7 @@ declare namespace WAFV2 {
   export type Size = number;
   export interface SizeConstraintStatement {
     /**
-     * The part of a web request that you want WAF to inspect. For more information, see FieldToMatch. 
+     * The part of the web request that you want WAF to inspect. For more information, see FieldToMatch. 
      */
     FieldToMatch: FieldToMatch;
     /**
@@ -2393,7 +2470,7 @@ declare namespace WAFV2 {
   export type SolveTimestamp = number;
   export interface SqliMatchStatement {
     /**
-     * The part of a web request that you want WAF to inspect. For more information, see FieldToMatch. 
+     * The part of the web request that you want WAF to inspect. For more information, see FieldToMatch. 
      */
     FieldToMatch: FieldToMatch;
     /**
@@ -2849,7 +2926,7 @@ declare namespace WAFV2 {
   }
   export interface XssMatchStatement {
     /**
-     * The part of a web request that you want WAF to inspect. For more information, see FieldToMatch. 
+     * The part of the web request that you want WAF to inspect. For more information, see FieldToMatch. 
      */
     FieldToMatch: FieldToMatch;
     /**

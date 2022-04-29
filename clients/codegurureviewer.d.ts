@@ -262,9 +262,13 @@ declare namespace CodeGuruReviewer {
      */
     Metrics?: Metrics;
     /**
-     * They types of analysis performed during a repository analysis or a pull request review. You can specify either Security, CodeQuality, or both.
+     * The types of analysis performed during a repository analysis or a pull request review. You can specify either Security, CodeQuality, or both.
      */
     AnalysisTypes?: AnalysisTypes;
+    /**
+     * The state of the aws-codeguru-reviewer.yml configuration file that allows the configuration of the CodeGuru Reviewer analysis. The file either exists, doesn't exist, or exists with errors at the root directory of your repository.
+     */
+    ConfigFileState?: ConfigFileState;
   }
   export type CodeReviewName = string;
   export type CodeReviewSummaries = CodeReviewSummary[];
@@ -340,6 +344,7 @@ declare namespace CodeGuruReviewer {
     MergeBaseCommit?: CommitId;
   }
   export type CommitId = string;
+  export type ConfigFileState = "Present"|"Absent"|"PresentWithErrors"|string;
   export type ConnectionArn = string;
   export interface CreateCodeReviewRequest {
     /**
@@ -455,6 +460,7 @@ declare namespace CodeGuruReviewer {
   }
   export type KMSKeyId = string;
   export type LineNumber = number;
+  export type LinesOfCodeCount = number;
   export type ListCodeReviewsMaxResults = number;
   export interface ListCodeReviewsRequest {
     /**
@@ -599,12 +605,15 @@ declare namespace CodeGuruReviewer {
   }
   export type LongDescription = string;
   export type MaxResults = number;
-  export type MeteredLinesOfCodeCount = number;
   export interface Metrics {
     /**
-     *  MeteredLinesOfCode is the number of lines of code in the repository where the code review happened. This does not include non-code lines such as comments and blank lines. 
+     *  MeteredLinesOfCodeCount is the number of lines of code in the repository where the code review happened. This does not include non-code lines such as comments and blank lines. 
      */
-    MeteredLinesOfCodeCount?: MeteredLinesOfCodeCount;
+    MeteredLinesOfCodeCount?: LinesOfCodeCount;
+    /**
+     *  SuppressedLinesOfCodeCount is the number of lines of code in the repository where the code review happened that CodeGuru Reviewer did not analyze. The lines suppressed in the analysis is based on the excludeFiles variable in the aws-codeguru-reviewer.yml file. This number does not include non-code lines such as comments and blank lines. 
+     */
+    SuppressedLinesOfCodeCount?: LinesOfCodeCount;
     /**
      *  Total number of recommendations found in the code review. 
      */
@@ -614,7 +623,11 @@ declare namespace CodeGuruReviewer {
     /**
      *  Lines of code metered in the code review. For the initial code review pull request and all subsequent revisions, this includes all lines of code in the files added to the pull request. In subsequent revisions, for files that already existed in the pull request, this includes only the changed lines of code. In both cases, this does not include non-code lines such as comments and import statements. For example, if you submit a pull request containing 5 files, each with 500 lines of code, and in a subsequent revision you added a new file with 200 lines of code, and also modified a total of 25 lines across the initial 5 files, MeteredLinesOfCodeCount includes the first 5 files (5 * 500 = 2,500 lines), the new file (200 lines) and the 25 changed lines of code for a total of 2,725 lines of code. 
      */
-    MeteredLinesOfCodeCount?: MeteredLinesOfCodeCount;
+    MeteredLinesOfCodeCount?: LinesOfCodeCount;
+    /**
+     * Lines of code suppressed in the code review based on the excludeFiles element in the aws-codeguru-reviewer.yml file. For full repository analyses, this number includes all lines of code in the files that are suppressed. For pull requests, this number only includes the changed lines of code that are suppressed. In both cases, this number does not include non-code lines such as comments and import statements. For example, if you initiate a full repository analysis on a repository containing 5 files, each file with 100 lines of code, and 2 files are listed as excluded in the aws-codeguru-reviewer.yml file, then SuppressedLinesOfCodeCount returns 200 (2 * 100) as the total number of lines of code suppressed. However, if you submit a pull request for the same repository, then SuppressedLinesOfCodeCount only includes the lines in the 2 files that changed. If only 1 of the 2 files changed in the pull request, then SuppressedLinesOfCodeCount returns 100 (1 * 100) as the total number of lines of code suppressed.
+     */
+    SuppressedLinesOfCodeCount?: LinesOfCodeCount;
     /**
      *  Total number of recommendations found in the code review. 
      */
