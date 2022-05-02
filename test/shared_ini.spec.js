@@ -183,7 +183,7 @@ if (AWS.util.isNode()) {
 
       it('profile config/credentials is not configurable', function() {
         delete iniFile.resolvedProfiles['/foo/.aws/config'];
-        iniFile.resolvedProfiles['/foo/.aws/credentials'].default = {};
+        delete iniFile.resolvedProfiles['/foo/.aws/credentials'];
         validateCachedFiles(iniFile, {
           '/foo/.aws/config': {
             'default': {
@@ -197,6 +197,55 @@ if (AWS.util.isNode()) {
               'aws_secret_access_key': 'secret2'
             }
           },
+        });
+      });
+    });
+
+    describe('resolvedSsoSessions', function() {
+      var iniFile;
+
+      function validateSsoSessionCachedFiles(iniFile, expectedCache) {
+        helpers.spyOn(AWS.util, 'readFileSync').andCallFake(function() {throw new Error('shouldn\'t load new profiles');});
+        for (var i = 0, filePaths = Object.keys(expectedCache); i < filePaths.length; i++) {
+          var path = filePaths[i];
+          expect(iniFile.loadSsoSessionsFrom({filename: path})).to.eql(expectedCache[path]);
+        }
+      }
+
+      beforeEach(function() {
+        process.env.HOME = '/foo';
+        helpers.spyOn(AWS.util, 'readFileSync').andCallFake(function() {
+          return '[sso-session mock-sso-session]\nsso_start_url = mock_sso_start_url\nsso_region = mock_sso_region';
+        });
+        iniFile = new IniLoader();
+        iniFile.loadSsoSessionsFrom({});
+      });
+
+      afterEach(function() {
+        iniFile.clearCachedFiles();
+      });
+
+      it('is un-enumerable', function() {
+        expect(iniFile.resolvedSsoSessions).to.eql({});
+        validateSsoSessionCachedFiles(iniFile, {
+          '/foo/.aws/config': {
+            'mock-sso-session': {
+              'sso_start_url': 'mock_sso_start_url',
+              'sso_region': 'mock_sso_region'
+            }
+          }
+        });
+      });
+
+      it('profile config is not configurable', function() {
+        delete iniFile.resolvedSsoSessions['/foo/.aws/config'];
+        validateSsoSessionCachedFiles(iniFile, {
+          '/foo/.aws/config': {
+            'mock-sso-session': {
+              'sso_start_url': 'mock_sso_start_url',
+              'sso_region': 'mock_sso_region'
+            }
+          }
         });
       });
     });
