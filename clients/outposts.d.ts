@@ -84,11 +84,11 @@ declare class Outposts extends Service {
    */
   getOutpost(callback?: (err: AWSError, data: Outposts.Types.GetOutpostOutput) => void): Request<Outposts.Types.GetOutpostOutput, AWSError>;
   /**
-   * Lists the instance types for the specified Outpost.
+   * Gets the instance types for the specified Outpost.
    */
   getOutpostInstanceTypes(params: Outposts.Types.GetOutpostInstanceTypesInput, callback?: (err: AWSError, data: Outposts.Types.GetOutpostInstanceTypesOutput) => void): Request<Outposts.Types.GetOutpostInstanceTypesOutput, AWSError>;
   /**
-   * Lists the instance types for the specified Outpost.
+   * Gets the instance types for the specified Outpost.
    */
   getOutpostInstanceTypes(callback?: (err: AWSError, data: Outposts.Types.GetOutpostInstanceTypesOutput) => void): Request<Outposts.Types.GetOutpostInstanceTypesOutput, AWSError>;
   /**
@@ -108,35 +108,43 @@ declare class Outposts extends Service {
    */
   getSiteAddress(callback?: (err: AWSError, data: Outposts.Types.GetSiteAddressOutput) => void): Request<Outposts.Types.GetSiteAddressOutput, AWSError>;
   /**
-   * Use to create a list of every item in the catalog. Add filters to your request to return a more specific list of results. Use filters to match an item class, storage option, or EC2 family.  If you specify multiple filters, the filters are joined with an AND, and the request returns only results that match all of the specified filters.
+   *  Lists the hardware assets in an Outpost. If you are using Dedicated Hosts on Amazon Web Services Outposts, you can filter your request by host ID to return a list of hardware assets that allocate resources for Dedicated Hosts. 
+   */
+  listAssets(params: Outposts.Types.ListAssetsInput, callback?: (err: AWSError, data: Outposts.Types.ListAssetsOutput) => void): Request<Outposts.Types.ListAssetsOutput, AWSError>;
+  /**
+   *  Lists the hardware assets in an Outpost. If you are using Dedicated Hosts on Amazon Web Services Outposts, you can filter your request by host ID to return a list of hardware assets that allocate resources for Dedicated Hosts. 
+   */
+  listAssets(callback?: (err: AWSError, data: Outposts.Types.ListAssetsOutput) => void): Request<Outposts.Types.ListAssetsOutput, AWSError>;
+  /**
+   * Lists the items in the catalog. Add filters to your request to return a more specific list of results. Use filters to match an item class, storage option, or EC2 family.  If you specify multiple filters, the filters are joined with an AND, and the request returns only results that match all of the specified filters.
    */
   listCatalogItems(params: Outposts.Types.ListCatalogItemsInput, callback?: (err: AWSError, data: Outposts.Types.ListCatalogItemsOutput) => void): Request<Outposts.Types.ListCatalogItemsOutput, AWSError>;
   /**
-   * Use to create a list of every item in the catalog. Add filters to your request to return a more specific list of results. Use filters to match an item class, storage option, or EC2 family.  If you specify multiple filters, the filters are joined with an AND, and the request returns only results that match all of the specified filters.
+   * Lists the items in the catalog. Add filters to your request to return a more specific list of results. Use filters to match an item class, storage option, or EC2 family.  If you specify multiple filters, the filters are joined with an AND, and the request returns only results that match all of the specified filters.
    */
   listCatalogItems(callback?: (err: AWSError, data: Outposts.Types.ListCatalogItemsOutput) => void): Request<Outposts.Types.ListCatalogItemsOutput, AWSError>;
   /**
-   * Create a list of the Outpost orders for your Amazon Web Services account. You can filter your request by Outpost to return a more specific list of results. 
+   * Lists the Outpost orders for your Amazon Web Services account. You can filter your request by Outpost to return a more specific list of results. 
    */
   listOrders(params: Outposts.Types.ListOrdersInput, callback?: (err: AWSError, data: Outposts.Types.ListOrdersOutput) => void): Request<Outposts.Types.ListOrdersOutput, AWSError>;
   /**
-   * Create a list of the Outpost orders for your Amazon Web Services account. You can filter your request by Outpost to return a more specific list of results. 
+   * Lists the Outpost orders for your Amazon Web Services account. You can filter your request by Outpost to return a more specific list of results. 
    */
   listOrders(callback?: (err: AWSError, data: Outposts.Types.ListOrdersOutput) => void): Request<Outposts.Types.ListOrdersOutput, AWSError>;
   /**
-   * Create a list of the Outposts for your Amazon Web Services account. Add filters to your request to return a more specific list of results. Use filters to match an Outpost lifecycle status, Availability Zone (us-east-1a), and AZ ID (use1-az1).  If you specify multiple filters, the filters are joined with an AND, and the request returns only results that match all of the specified filters.
+   * Lists the Outposts for your Amazon Web Services account. Add filters to your request to return a more specific list of results. Use filters to match an Outpost lifecycle status, Availability Zone (us-east-1a), and AZ ID (use1-az1).  If you specify multiple filters, the filters are joined with an AND, and the request returns only results that match all of the specified filters.
    */
   listOutposts(params: Outposts.Types.ListOutpostsInput, callback?: (err: AWSError, data: Outposts.Types.ListOutpostsOutput) => void): Request<Outposts.Types.ListOutpostsOutput, AWSError>;
   /**
-   * Create a list of the Outposts for your Amazon Web Services account. Add filters to your request to return a more specific list of results. Use filters to match an Outpost lifecycle status, Availability Zone (us-east-1a), and AZ ID (use1-az1).  If you specify multiple filters, the filters are joined with an AND, and the request returns only results that match all of the specified filters.
+   * Lists the Outposts for your Amazon Web Services account. Add filters to your request to return a more specific list of results. Use filters to match an Outpost lifecycle status, Availability Zone (us-east-1a), and AZ ID (use1-az1).  If you specify multiple filters, the filters are joined with an AND, and the request returns only results that match all of the specified filters.
    */
   listOutposts(callback?: (err: AWSError, data: Outposts.Types.ListOutpostsOutput) => void): Request<Outposts.Types.ListOutpostsOutput, AWSError>;
   /**
-   * Create a list of the Outpost sites for your Amazon Web Services account. Add operating address filters to your request to return a more specific list of results. Use filters to match site city, country code, or state/region of the operating address.  If you specify multiple filters, the filters are joined with an AND, and the request returns only results that match all of the specified filters.
+   * Lists the Outpost sites for your Amazon Web Services account. Add operating address filters to your request to return a more specific list of results. Use filters to match site city, country code, or state/region of the operating address.  If you specify multiple filters, the filters are joined with an AND, and the request returns only results that match all of the specified filters.
    */
   listSites(params: Outposts.Types.ListSitesInput, callback?: (err: AWSError, data: Outposts.Types.ListSitesOutput) => void): Request<Outposts.Types.ListSitesOutput, AWSError>;
   /**
-   * Create a list of the Outpost sites for your Amazon Web Services account. Add operating address filters to your request to return a more specific list of results. Use filters to match site city, country code, or state/region of the operating address.  If you specify multiple filters, the filters are joined with an AND, and the request returns only results that match all of the specified filters.
+   * Lists the Outpost sites for your Amazon Web Services account. Add operating address filters to your request to return a more specific list of results. Use filters to match site city, country code, or state/region of the operating address.  If you specify multiple filters, the filters are joined with an AND, and the request returns only results that match all of the specified filters.
    */
   listSites(callback?: (err: AWSError, data: Outposts.Types.ListSitesOutput) => void): Request<Outposts.Types.ListSitesOutput, AWSError>;
   /**
@@ -249,6 +257,27 @@ declare namespace Outposts {
   export type AddressLine3 = string;
   export type AddressType = "SHIPPING_ADDRESS"|"OPERATING_ADDRESS"|string;
   export type Arn = string;
+  export type AssetId = string;
+  export interface AssetInfo {
+    /**
+     *  The ID of the asset. 
+     */
+    AssetId?: AssetId;
+    /**
+     *  The rack ID of the asset. 
+     */
+    RackId?: RackId;
+    /**
+     *  The type of the asset. 
+     */
+    AssetType?: AssetType;
+    /**
+     *  Information about compute hardware assets. 
+     */
+    ComputeAttributes?: ComputeAttributes;
+  }
+  export type AssetListDefinition = AssetInfo[];
+  export type AssetType = "COMPUTE"|string;
   export type AvailabilityZone = string;
   export type AvailabilityZoneId = string;
   export type AvailabilityZoneIdList = AvailabilityZoneId[];
@@ -299,6 +328,12 @@ declare namespace Outposts {
   export type CatalogItemWeightLbs = number;
   export type City = string;
   export type CityList = City[];
+  export interface ComputeAttributes {
+    /**
+     *  The host ID of any Dedicated Hosts on the asset. 
+     */
+    HostId?: HostId;
+  }
   export type ContactName = string;
   export type ContactPhoneNumber = string;
   export type CountryCode = string;
@@ -487,6 +522,8 @@ declare namespace Outposts {
   export interface GetSiteOutput {
     Site?: Site;
   }
+  export type HostId = string;
+  export type HostIdList = HostId[];
   export type ISO8601Timestamp = Date;
   export type InstanceType = string;
   export interface InstanceTypeItem {
@@ -529,6 +566,25 @@ declare namespace Outposts {
   export type LineItemRequestListDefinition = LineItemRequest[];
   export type LineItemStatus = "PREPARING"|"BUILDING"|"SHIPPED"|"DELIVERED"|"INSTALLING"|"INSTALLED"|"ERROR"|"CANCELLED"|string;
   export type LineItemStatusCounts = {[key: string]: LineItemQuantity};
+  export interface ListAssetsInput {
+    /**
+     *  The ID or the Amazon Resource Name (ARN) of the Outpost. 
+     */
+    OutpostIdentifier: OutpostIdentifier;
+    /**
+     *  A filter for the host ID of Dedicated Hosts on the Outpost.  Filter values are case sensitive. If you specify multiple values for a filter, the values are joined with an OR, and the request returns all results that match any of the specified values.
+     */
+    HostIdFilter?: HostIdList;
+    MaxResults?: MaxResults1000;
+    NextToken?: Token;
+  }
+  export interface ListAssetsOutput {
+    /**
+     *  Information about hardware assets. 
+     */
+    Assets?: AssetListDefinition;
+    NextToken?: Token;
+  }
   export interface ListCatalogItemsInput {
     NextToken?: Token;
     MaxResults?: MaxResults1000;
@@ -726,6 +782,7 @@ declare namespace Outposts {
   export type PowerFeedDrop = "ABOVE_RACK"|"BELOW_RACK"|string;
   export type PowerPhase = "SINGLE_PHASE"|"THREE_PHASE"|string;
   export type Quantity = string;
+  export type RackId = string;
   export interface RackPhysicalProperties {
     /**
      * The power draw available at the hardware placement position for the rack. 
