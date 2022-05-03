@@ -37,6 +37,14 @@ declare class KinesisVideoArchivedMedia extends Service {
    */
   getHLSStreamingSessionURL(callback?: (err: AWSError, data: KinesisVideoArchivedMedia.Types.GetHLSStreamingSessionURLOutput) => void): Request<KinesisVideoArchivedMedia.Types.GetHLSStreamingSessionURLOutput, AWSError>;
   /**
+   * Retrieves a list of Images corresponding to each timestamp for a given time range, sampling interval, and image format configuration.
+   */
+  getImages(params: KinesisVideoArchivedMedia.Types.GetImagesInput, callback?: (err: AWSError, data: KinesisVideoArchivedMedia.Types.GetImagesOutput) => void): Request<KinesisVideoArchivedMedia.Types.GetImagesOutput, AWSError>;
+  /**
+   * Retrieves a list of Images corresponding to each timestamp for a given time range, sampling interval, and image format configuration.
+   */
+  getImages(callback?: (err: AWSError, data: KinesisVideoArchivedMedia.Types.GetImagesOutput) => void): Request<KinesisVideoArchivedMedia.Types.GetImagesOutput, AWSError>;
+  /**
    * Gets media for a list of fragments (specified by fragment number) from the archived data in an Amazon Kinesis video stream.  You must first call the GetDataEndpoint API to get an endpoint. Then send the GetMediaForFragmentList requests to this endpoint using the --endpoint-url parameter.   For limits, see Kinesis Video Streams Limits.  If an error is thrown after invoking a Kinesis Video Streams archived media API, in addition to the HTTP status code and the response body, it includes the following pieces of information:     x-amz-ErrorType HTTP header – contains a more specific error type in addition to what the HTTP status code provides.     x-amz-RequestId HTTP header – if you want to report an issue to AWS, the support team can better diagnose the problem if given the Request Id.   Both the HTTP status code and the ErrorType header can be utilized to make programmatic decisions about whether errors are retry-able and under what conditions, as well as provide information on what actions the client programmer might need to take in order to successfully try again. For more information, see the Errors section at the bottom of this topic, as well as Common Errors.  
    */
   getMediaForFragmentList(params: KinesisVideoArchivedMedia.Types.GetMediaForFragmentListInput, callback?: (err: AWSError, data: KinesisVideoArchivedMedia.Types.GetMediaForFragmentListOutput) => void): Request<KinesisVideoArchivedMedia.Types.GetMediaForFragmentListOutput, AWSError>;
@@ -104,6 +112,10 @@ declare namespace KinesisVideoArchivedMedia {
     EndTimestamp?: Timestamp;
   }
   export type Expires = number;
+  export type Format = "JPEG"|"PNG"|string;
+  export type FormatConfig = {[key: string]: FormatConfigValue};
+  export type FormatConfigKey = "JPEGQuality"|string;
+  export type FormatConfigValue = string;
   export interface Fragment {
     /**
      * The unique identifier of the fragment. This value monotonically increases based on the ingestion order.
@@ -248,6 +260,67 @@ declare namespace KinesisVideoArchivedMedia {
      */
     HLSStreamingSessionURL?: HLSStreamingSessionURL;
   }
+  export interface GetImagesInput {
+    /**
+     * The name of the stream from which to retrieve the images. You must specify either the StreamName or the StreamARN.
+     */
+    StreamName?: StreamName;
+    /**
+     * The Amazon Resource Name (ARN) of the stream from which to retrieve the images. You must specify either the StreamName or the StreamARN.
+     */
+    StreamARN?: ResourceARN;
+    /**
+     * The origin of the Server or Producer timestamps to use to generate the images.
+     */
+    ImageSelectorType: ImageSelectorType;
+    /**
+     * The starting point from which the images should be generated. This StartTimestamp must be within an inclusive range of timestamps for an image to be returned.
+     */
+    StartTimestamp: Timestamp;
+    /**
+     * The end timestamp for the range of images to be generated.
+     */
+    EndTimestamp: Timestamp;
+    /**
+     * The time interval in milliseconds (ms) at which the images need to be generated from the stream. The minimum value that can be provided is 3000 ms. If the timestamp range is less than the sampling interval, the Image from the startTimestamp will be returned if available.   The minimum value of 3000 ms is a soft limit. If needed, a lower sampling frequency can be requested. 
+     */
+    SamplingInterval: SamplingInterval;
+    /**
+     * The format that will be used to encode the image.
+     */
+    Format: Format;
+    /**
+     * The list of a key-value pair structure that contains extra parameters that can be applied when the image is generated. The FormatConfig key is the JPEGQuality, which indicates the JPEG quality key to be used to generate the image. The FormatConfig value accepts ints from 1 to 100. If the value is 1, the image will be generated with less quality and the best compression. If the value is 100, the image will be generated with the best quality and less compression. If no value is provided, the default value of the JPEGQuality key will be set to 80.
+     */
+    FormatConfig?: FormatConfig;
+    /**
+     * The width of the output image that is used in conjunction with the HeightPixels parameter. When both WidthPixels and HeightPixels parameters are provided, the image will be stretched to fit the specified aspect ratio. If only the WidthPixels parameter is provided or if only the HeightPixels is provided, a ValidationException will be thrown. If neither parameter is provided, the original image size from the stream will be returned.
+     */
+    WidthPixels?: WidthPixels;
+    /**
+     * The height of the output image that is used in conjunction with the WidthPixels parameter. When both HeightPixels and WidthPixels parameters are provided, the image will be stretched to fit the specified aspect ratio. If only the HeightPixels parameter is provided, its original aspect ratio will be used to calculate the WidthPixels ratio. If neither parameter is provided, the original image size will be returned.
+     */
+    HeightPixels?: HeightPixels;
+    /**
+     * The maximum number of images to be returned by the API.   The default limit is 100 images per API response. The additional results will be paginated.  
+     */
+    MaxResults?: GetImagesMaxResults;
+    /**
+     * A token that specifies where to start paginating the next set of Images. This is the GetImages:NextToken from a previously truncated response.
+     */
+    NextToken?: NextToken;
+  }
+  export type GetImagesMaxResults = number;
+  export interface GetImagesOutput {
+    /**
+     * The list of images generated from the video stream. If there is no media available for the given timestamp, the NO_MEDIA error will be listed in the output. If an error occurs while the image is being generated, the MEDIA_ERROR will be listed in the output as the cause of the missing image. 
+     */
+    Images?: Images;
+    /**
+     * The encrypted token that was used in the request to get more images.
+     */
+    NextToken?: NextToken;
+  }
   export interface GetMediaForFragmentListInput {
     /**
      * The name of the stream from which to retrieve fragment media. Specify either this parameter or the StreamARN parameter.
@@ -298,6 +371,25 @@ declare namespace KinesisVideoArchivedMedia {
      */
     EndTimestamp?: Timestamp;
   }
+  export type HeightPixels = number;
+  export interface Image {
+    /**
+     * An attribute of the Image object that is used to extract an image from the video stream. This field is used to manage gaps on images or to better understand the pagination window.
+     */
+    TimeStamp?: Timestamp;
+    /**
+     * The error message shown when the image for the provided timestamp was not extracted due to a non-tryable error. An error will be returned if:    There is no media that exists for the specified Timestamp.     The media for the specified time does not allow an image to be extracted. In this case the media is audio only, or the incorrect media has been ingested.  
+     */
+    Error?: ImageError;
+    /**
+     * An attribute of the Image object that is Base64 encoded.
+     */
+    ImageContent?: ImageContent;
+  }
+  export type ImageContent = string;
+  export type ImageError = "NO_MEDIA"|"MEDIA_ERROR"|string;
+  export type ImageSelectorType = "PRODUCER_TIMESTAMP"|"SERVER_TIMESTAMP"|string;
+  export type Images = Image[];
   export interface ListFragmentsInput {
     /**
      * The name of the stream from which to retrieve a fragment list. Specify either this parameter or the StreamARN parameter.
@@ -335,6 +427,7 @@ declare namespace KinesisVideoArchivedMedia {
   export type NextToken = string;
   export type Payload = Buffer|Uint8Array|Blob|string|Readable;
   export type ResourceARN = string;
+  export type SamplingInterval = number;
   export type StreamName = string;
   export type Timestamp = Date;
   export interface TimestampRange {
@@ -347,6 +440,7 @@ declare namespace KinesisVideoArchivedMedia {
      */
     EndTimestamp: Timestamp;
   }
+  export type WidthPixels = number;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

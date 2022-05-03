@@ -2822,6 +2822,7 @@ declare namespace SageMaker {
   }
   export type AutoMLMaxResults = number;
   export type AutoMLMetricEnum = "Accuracy"|"MSE"|"F1"|"F1macro"|"AUC"|string;
+  export type AutoMLMetricExtendedEnum = "Accuracy"|"MSE"|"F1"|"F1macro"|"AUC"|"RMSE"|"MAE"|"R2"|"BalancedAccuracy"|"Precision"|"PrecisionMacro"|"Recall"|"RecallMacro"|"LogLoss"|string;
   export type AutoMLNameContains = string;
   export interface AutoMLOutputDataConfig {
     /**
@@ -12810,6 +12811,10 @@ declare namespace SageMaker {
      * The dataset split from which the AutoML job produced the metric.
      */
     Set?: MetricSetSource;
+    /**
+     * The name of the standard metric.
+     */
+    StandardMetricName?: AutoMLMetricExtendedEnum;
   }
   export interface MetricDefinition {
     /**
@@ -15173,6 +15178,11 @@ declare namespace SageMaker {
   export type QueryProperties = {[key: string]: String256};
   export type QueryTypes = String40[];
   export interface RSessionAppSettings {
+    DefaultResourceSpec?: ResourceSpec;
+    /**
+     * A list of custom SageMaker images that are configured to run as a RSession app.
+     */
+    CustomImages?: CustomImages;
   }
   export type RStudioServerProAccessStatus = "ENABLED"|"DISABLED"|string;
   export interface RStudioServerProAppSettings {
