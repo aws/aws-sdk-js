@@ -1253,6 +1253,10 @@ declare namespace SSM {
      * Number of days to wait after the scheduled day to run an association.
      */
     ScheduleOffset?: ScheduleOffset;
+    /**
+     * A key-value mapping of document parameters to target resources. Both Targets and TargetMaps can't be specified together.
+     */
+    TargetMaps?: TargetMaps;
   }
   export type AssociationComplianceSeverity = "CRITICAL"|"HIGH"|"MEDIUM"|"LOW"|"UNSPECIFIED"|string;
   export interface AssociationDescription {
@@ -1356,6 +1360,10 @@ declare namespace SSM {
      * Number of days to wait after the scheduled day to run an association.
      */
     ScheduleOffset?: ScheduleOffset;
+    /**
+     * A key-value mapping of document parameters to target resources. Both Targets and TargetMaps can't be specified together.
+     */
+    TargetMaps?: TargetMaps;
   }
   export type AssociationDescriptionList = AssociationDescription[];
   export interface AssociationExecution {
@@ -1592,6 +1600,10 @@ declare namespace SSM {
      * Number of days to wait after the scheduled day to run an association.
      */
     ScheduleOffset?: ScheduleOffset;
+    /**
+     * A key-value mapping of document parameters to target resources. Both Targets and TargetMaps can't be specified together.
+     */
+    TargetMaps?: TargetMaps;
   }
   export type AssociationVersionList = AssociationVersionInfo[];
   export interface AttachmentContent {
@@ -2489,6 +2501,10 @@ declare namespace SSM {
      * Number of days to wait after the scheduled day to run an association.
      */
     ScheduleOffset?: ScheduleOffset;
+    /**
+     * A key-value mapping of document parameters to target resources. Both Targets and TargetMaps can't be specified together.
+     */
+    TargetMaps?: TargetMaps;
   }
   export interface CreateAssociationBatchResult {
     /**
@@ -2569,6 +2585,10 @@ declare namespace SSM {
      * Number of days to wait after the scheduled day to run an association. For example, if you specified a cron schedule of cron(0 0 ? * THU#2 *), you could specify an offset of 3 to run the association each Sunday after the second Thursday of the month. For more information about cron schedules for associations, see Reference: Cron and rate expressions for Systems Manager in the Amazon Web Services Systems Manager User Guide.   To use offsets, you must specify the ApplyOnlyAtCronInterval parameter. This option tells the system not to run an association immediately after you create it.  
      */
     ScheduleOffset?: ScheduleOffset;
+    /**
+     * A key-value mapping of document parameters to target resources. Both Targets and TargetMaps can't be specified together.
+     */
+    TargetMaps?: TargetMaps;
   }
   export interface CreateAssociationResult {
     /**
@@ -9161,6 +9181,10 @@ declare namespace SSM {
      * Number of days to wait after the scheduled day to run an association. For example, if you specified a cron schedule of cron(0 0 ? * THU#2 *), you could specify an offset of 3 to run the association each Sunday after the second Thursday of the month. For more information about cron schedules for associations, see Reference: Cron and rate expressions for Systems Manager in the Amazon Web Services Systems Manager User Guide.   To use offsets, you must specify the ApplyOnlyAtCronInterval parameter. This option tells the system not to run an association immediately after you create it.  
      */
     ScheduleOffset?: ScheduleOffset;
+    /**
+     * A key-value mapping of document parameters to target resources. Both Targets and TargetMaps can't be specified together.
+     */
+    TargetMaps?: TargetMaps;
   }
   export interface UpdateAssociationResult {
     /**

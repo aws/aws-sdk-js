@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1127.0-->
+<!--LATEST=2.1128.0-->
 <!--ENTRYINSERT-->
+
+## 2.1128.0
+* feature: Backup: Adds support to 2 new filters about job complete time for 3 list jobs APIs in AWS Backup
+* feature: IoTSecureTunneling: This release introduces a new API RotateTunnelAccessToken that allow revoking the existing tokens and generate new tokens
+* feature: SSM: This release adds the TargetMaps parameter in SSM State Manager API.
 
 ## 2.1127.0
 * feature: EC2: Adds support for allocating Dedicated Hosts on AWS  Outposts. The AllocateHosts API now accepts an OutpostArn request  parameter, and the DescribeHosts API now includes an OutpostArn response parameter.

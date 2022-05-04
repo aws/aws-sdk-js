@@ -1765,7 +1765,7 @@ declare namespace Backup {
      */
     ControlInputParameters?: ControlInputParameters;
     /**
-     * The scope of a control. The control scope defines what the control will evaluate. Three examples of control scopes are: a specific backup plan, all backup plans with a specific tag, or all backup plans. For more information, see ControlScope.
+     * The scope of a control. The control scope defines what the control will evaluate. Three examples of control scopes are: a specific backup plan, all backup plans with a specific tag, or all backup plans. For more information, see  ControlScope. 
      */
     ControlScope?: ControlScope;
   }
@@ -2004,6 +2004,14 @@ declare namespace Backup {
      * The account ID to list the jobs from. Returns only backup jobs associated with the specified account ID. If used from an Organizations management account, passing * returns all jobs across the organization.
      */
     ByAccountId?: AccountId;
+    /**
+     * Returns only backup jobs completed after a date expressed in Unix format and Coordinated Universal Time (UTC).
+     */
+    ByCompleteAfter?: timestamp;
+    /**
+     * Returns only backup jobs completed before a date expressed in Unix format and Coordinated Universal Time (UTC).
+     */
+    ByCompleteBefore?: timestamp;
   }
   export interface ListBackupJobsOutput {
     /**
@@ -2164,6 +2172,14 @@ declare namespace Backup {
      * The account ID to list the jobs from. Returns only copy jobs associated with the specified account ID.
      */
     ByAccountId?: AccountId;
+    /**
+     * Returns only copy jobs completed before a date expressed in Unix format and Coordinated Universal Time (UTC).
+     */
+    ByCompleteBefore?: timestamp;
+    /**
+     * Returns only copy jobs completed after a date expressed in Unix format and Coordinated Universal Time (UTC).
+     */
+    ByCompleteAfter?: timestamp;
   }
   export interface ListCopyJobsOutput {
     /**
@@ -2365,6 +2381,14 @@ declare namespace Backup {
      * Returns only restore jobs associated with the specified job status.
      */
     ByStatus?: RestoreJobStatus;
+    /**
+     * Returns only copy jobs completed before a date expressed in Unix format and Coordinated Universal Time (UTC).
+     */
+    ByCompleteBefore?: timestamp;
+    /**
+     * Returns only copy jobs completed after a date expressed in Unix format and Coordinated Universal Time (UTC).
+     */
+    ByCompleteAfter?: timestamp;
   }
   export interface ListRestoreJobsOutput {
     /**

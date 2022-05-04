@@ -836,11 +836,11 @@ declare class Lightsail extends Service {
    */
   getLoadBalancerTlsCertificates(callback?: (err: AWSError, data: Lightsail.Types.GetLoadBalancerTlsCertificatesResult) => void): Request<Lightsail.Types.GetLoadBalancerTlsCertificatesResult, AWSError>;
   /**
-   * Returns a list of TLS security policies that you can apply to Lightsail load balancers. For more information about load balancer TLS security policies, see Load balancer TLS security policies in the Amazon Lightsail Developer Guide.
+   * Returns a list of TLS security policies that you can apply to Lightsail load balancers. For more information about load balancer TLS security policies, see Configuring TLS security policies on your Amazon Lightsail load balancers in the Amazon Lightsail Developer Guide.
    */
   getLoadBalancerTlsPolicies(params: Lightsail.Types.GetLoadBalancerTlsPoliciesRequest, callback?: (err: AWSError, data: Lightsail.Types.GetLoadBalancerTlsPoliciesResult) => void): Request<Lightsail.Types.GetLoadBalancerTlsPoliciesResult, AWSError>;
   /**
-   * Returns a list of TLS security policies that you can apply to Lightsail load balancers. For more information about load balancer TLS security policies, see Load balancer TLS security policies in the Amazon Lightsail Developer Guide.
+   * Returns a list of TLS security policies that you can apply to Lightsail load balancers. For more information about load balancer TLS security policies, see Configuring TLS security policies on your Amazon Lightsail load balancers in the Amazon Lightsail Developer Guide.
    */
   getLoadBalancerTlsPolicies(callback?: (err: AWSError, data: Lightsail.Types.GetLoadBalancerTlsPoliciesResult) => void): Request<Lightsail.Types.GetLoadBalancerTlsPoliciesResult, AWSError>;
   /**
@@ -2904,7 +2904,7 @@ declare namespace Lightsail {
      */
     ipAddressType?: IpAddressType;
     /**
-     * The name of the TLS policy to apply to the load balancer. Use the GetLoadBalancerTlsPolicies action to get a list of TLS policy names that you can specify. For more information about load balancer TLS policies, see Load balancer TLS security policies in the Amazon Lightsail Developer Guide.
+     * The name of the TLS policy to apply to the load balancer. Use the GetLoadBalancerTlsPolicies action to get a list of TLS policy names that you can specify. For more information about load balancer TLS policies, see Configuring TLS security policies on your Amazon Lightsail load balancers in the Amazon Lightsail Developer Guide.
      */
     tlsPolicyName?: string;
   }
@@ -5625,7 +5625,7 @@ declare namespace Lightsail {
      */
     httpsRedirectionEnabled?: boolean;
     /**
-     * The name of the TLS security policy for the load balancer. The following TLS security policy names are possible:    TLS-2016-08     TLS-FS-Res-1-2-2019-08   
+     * The name of the TLS security policy for the load balancer.
      */
     tlsPolicyName?: ResourceName;
   }
@@ -5800,7 +5800,7 @@ declare namespace Lightsail {
   export type LoadBalancerTlsCertificateSummaryList = LoadBalancerTlsCertificateSummary[];
   export interface LoadBalancerTlsPolicy {
     /**
-     * The name of the TLS security policy. The following TLS security policy names are possible:    TLS-2016-08     TLS-FS-Res-1-2-2019-08    You can specify either of these values for the tlsSecurityPolicyName request parameter in the CreateLoadBalancer action, and the attributeValue request parameter in the UpdateLoadBalancerAttribute action.
+     * The name of the TLS security policy.
      */
     name?: ResourceName;
     /**
@@ -5812,7 +5812,7 @@ declare namespace Lightsail {
      */
     description?: string;
     /**
-     * The protocols used in a given TLS security policy. The following protocols are possible:    Protocol-TLSv1     Protocol-TLSv1.1     Protocol-TLSv1.2   
+     * The protocols used in a given TLS security policy.
      */
     protocols?: StringList;
     /**
@@ -7004,7 +7004,7 @@ declare namespace Lightsail {
      */
     attributeName: LoadBalancerAttributeName;
     /**
-     * The value that you want to specify for the attribute name. The following values are supported depending on what you specify for the attributeName request parameter:   If you specify HealthCheckPath for the attributeName request parameter, then the attributeValue request parameter must be the path to ping on the target (for example, /weather/us/wa/seattle).   If you specify SessionStickinessEnabled for the attributeName request parameter, then the attributeValue request parameter must be true or false.   If you specify SessionStickiness_LB_CookieDurationSeconds for the attributeName request parameter, then the attributeValue request parameter must be an interger that represents the cookie duration in seconds.   If you specify HttpsRedirectionEnabled for the attributeName request parameter, then the attributeValue request parameter must be true or false.   If you specify TlsPolicyName for the attributeName request parameter, then the attributeValue request parameter must be TLS version 1.0, 1.1, and 1.2 or TLS version 1.2.  
+     * The value that you want to specify for the attribute name. The following values are supported depending on what you specify for the attributeName request parameter:   If you specify HealthCheckPath for the attributeName request parameter, then the attributeValue request parameter must be the path to ping on the target (for example, /weather/us/wa/seattle).   If you specify SessionStickinessEnabled for the attributeName request parameter, then the attributeValue request parameter must be true to activate session stickiness or false to deactivate session stickiness.   If you specify SessionStickiness_LB_CookieDurationSeconds for the attributeName request parameter, then the attributeValue request parameter must be an interger that represents the cookie duration in seconds.   If you specify HttpsRedirectionEnabled for the attributeName request parameter, then the attributeValue request parameter must be true to activate HTTP to HTTPS redirection or false to deactivate HTTP to HTTPS redirection.   If you specify TlsPolicyName for the attributeName request parameter, then the attributeValue request parameter must be the name of the TLS policy. Use the GetLoadBalancerTlsPolicies action to get a list of TLS policy names that you can specify.  
      */
     attributeValue: StringMax256;
   }
