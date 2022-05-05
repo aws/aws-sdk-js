@@ -2175,13 +2175,17 @@ declare namespace Kendra {
   }
   export interface DocumentAttributeValueCountPair {
     /**
-     * The value of the attribute. For example, "HR."
+     * The value of the attribute. For example, "HR".
      */
     DocumentAttributeValue?: DocumentAttributeValue;
     /**
      * The number of documents in the response that have the attribute value for the key.
      */
     Count?: Integer;
+    /**
+     * Contains the results of a document attribute that is a nested facet. A FacetResult contains the counts for each facet nested within a facet. For example, the document attribute or facet "Department" includes a value called "Engineering". In addition, the document attribute or facet "SubDepartment" includes the values "Frontend" and "Backend" for documents assigned to "Engineering". You can display nested facets in the search results so that documents can be searched not only by department but also by a sub department within a department. The counts for documents that belong to "Frontend" and "Backend" within "Engineering" are returned for a query.
+     */
+    FacetResults?: FacetResultList;
   }
   export type DocumentAttributeValueCountPairList = DocumentAttributeValueCountPair[];
   export type DocumentAttributeValueType = "STRING_VALUE"|"STRING_LIST_VALUE"|"LONG_VALUE"|"DATE_VALUE"|string;
@@ -2359,6 +2363,14 @@ declare namespace Kendra {
      * The unique key for the document attribute.
      */
     DocumentAttributeKey?: DocumentAttributeKey;
+    /**
+     * An array of document attributes that are nested facets within a facet. For example, the document attribute or facet "Department" includes a value called "Engineering". In addition, the document attribute or facet "SubDepartment" includes the values "Frontend" and "Backend" for documents assigned to "Engineering". You can display nested facets in the search results so that documents can be searched not only by department but also by a sub department within a department. This helps your users further narrow their search. You can only have one nested facet within a facet. If you want to increase this limit, contact Support.
+     */
+    Facets?: FacetList;
+    /**
+     * Maximum number of facet values per facet. The default is 10. You can use this to limit the number of facet values to less than 10. If you want to increase the default, contact Support.
+     */
+    MaxResults?: TopDocumentAttributeValueCountPairsSize;
   }
   export type FacetList = Facet[];
   export interface FacetResult {
@@ -3221,11 +3233,11 @@ declare namespace Kendra {
      */
     AttributeFilter?: AttributeFilter;
     /**
-     * An array of documents attributes. Amazon Kendra returns a count for each attribute key specified. You can use this information to help narrow the search for your user.
+     * An array of documents attributes. Amazon Kendra returns a count for each attribute key specified. This helps your users narrow their search.
      */
     Facets?: FacetList;
     /**
-     * An array of document attributes to include in the response. No other document attributes are included in the response. By default all document attributes are included in the response. 
+     * An array of document attributes to include in the response. You can limit the response to include certain document attributes. By default all document attributes are included in the response.
      */
     RequestedDocumentAttributes?: DocumentAttributeKeyList;
     /**
@@ -3317,7 +3329,7 @@ declare namespace Kendra {
      */
     DocumentURI?: Url;
     /**
-     * An array of document attributes for the document that the query result maps to. For example, the document author (Author) or the source URI (SourceUri) of the document.
+     * An array of document attributes assigned to a document in the search results. For example, the document author (_author) or the source URI (_source_uri) of the document.
      */
     DocumentAttributes?: DocumentAttributeList;
     /**
@@ -3366,23 +3378,23 @@ declare namespace Kendra {
   export type QueryText = string;
   export interface QuipConfiguration {
     /**
-     * The configuration information to connect to your Quip data source domain.
+     * The Quip site domain.
      */
     Domain: Domain;
     /**
-     * The Amazon Resource Name (ARN) of an Secrets Manager secret that contains the key-value pairs that are required to connect to your Quip file system. Windows is currently the only supported type. The secret must contain a JSON structure with the following keys:   username—The Active Directory user name, along with the Domain Name System (DNS) domain name. For example, user@corp.example.com. The Active Directory user account must have read and mounting access to the Quip file system for Windows.   password—The password of the Active Directory user account with read and mounting access to the Quip Windows file system.  
+     * The Amazon Resource Name (ARN) of an Secrets Manager secret that contains the key-value pairs that are required to connect to your Quip. The secret must contain a JSON structure with the following keys:   accessToken—The token created in Quip. For more information, see Authentication for a Quip data source.  
      */
     SecretArn: SecretArn;
     /**
-     * Specify whether to crawl file comments in your Quip data source. You can specify one or more of these options.
+     * Specify whether to crawl file comments in Quip. You can specify one or more of these options.
      */
     CrawlFileComments?: Boolean;
     /**
-     * Specify whether to crawl chat rooms in your Quip data source. You can specify one or more of these options.
+     * Specify whether to crawl chat rooms in Quip. You can specify one or more of these options.
      */
     CrawlChatRooms?: Boolean;
     /**
-     * Specify whether to crawl attachments in your Quip data source. You can specify one or more of these options.
+     * Specify whether to crawl attachments in Quip. You can specify one or more of these options.
      */
     CrawlAttachments?: Boolean;
     /**
@@ -3390,15 +3402,15 @@ declare namespace Kendra {
      */
     FolderIds?: FolderIdList;
     /**
-     * A list of field mappings to apply when indexing Quip threads.
+     * A list of DataSourceToIndexFieldMapping objects that map attributes or field names of Quip threads to Amazon Kendra index field names. To create custom fields, use the UpdateIndex API before you map to Quip fields. For more information, see Mapping data source fields. The Quip field names must exist in your Quip custom metadata.
      */
     ThreadFieldMappings?: DataSourceToIndexFieldMappingList;
     /**
-     * A list of field mappings to apply when indexing Quip messages.
+     * A list of DataSourceToIndexFieldMapping objects that map attributes or field names of Quip messages to Amazon Kendra index field names. To create custom fields, use the UpdateIndex API before you map to Quip fields. For more information, see Mapping data source fields. The Quip field names must exist in your Quip custom metadata.
      */
     MessageFieldMappings?: DataSourceToIndexFieldMappingList;
     /**
-     * A list of field mappings to apply when indexing Quip attachments.
+     * A list of DataSourceToIndexFieldMapping objects that map attributes or field names of Quip attachments to Amazon Kendra index field names. To create custom fields, use the UpdateIndex API before you map to Quip fields. For more information, see Mapping data source fields. The Quip field names must exist in your Quip custom metadata.
      */
     AttachmentFieldMappings?: DataSourceToIndexFieldMappingList;
     /**
@@ -3410,7 +3422,7 @@ declare namespace Kendra {
      */
     ExclusionPatterns?: DataSourceInclusionsExclusionsStrings;
     /**
-     * Configuration information for connecting to an Amazon Virtual Private Cloud (VPC) for your Quip. Your Quip instance must reside inside your VPC.
+     * Configuration information for an Amazon Virtual Private Cloud (VPC) to connect to your Quip. For more information, see Configuring a VPC.
      */
     VpcConfiguration?: DataSourceVpcConfiguration;
   }
@@ -4103,6 +4115,7 @@ declare namespace Kendra {
   export type Timestamp = Date;
   export type Title = string;
   export type Token = string;
+  export type TopDocumentAttributeValueCountPairsSize = number;
   export interface UntagResourceRequest {
     /**
      * The Amazon Resource Name (ARN) of the index, FAQ, or data source to remove the tag from.

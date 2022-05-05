@@ -2827,6 +2827,7 @@ declare namespace Iot {
   }
   export type Boolean = boolean;
   export type BooleanKey = boolean;
+  export type BooleanWrapperObject = boolean;
   export interface Bucket {
     /**
      * The value counted for the particular bucket.
@@ -6527,6 +6528,7 @@ declare namespace Iot {
      * A key-value map that pairs the patterns that need to be replaced in a managed template job document schema. You can use the description of each key as a guidance to specify the inputs during runtime when creating a job.
      */
     documentParameters?: ParameterMap;
+    isConcurrent?: BooleanWrapperObject;
   }
   export type JobArn = string;
   export type JobDescription = string;
@@ -6723,6 +6725,7 @@ declare namespace Iot {
      * The time, in seconds since the epoch, when the job completed.
      */
     completedAt?: DateType;
+    isConcurrent?: BooleanWrapperObject;
   }
   export type JobSummaryList = JobSummary[];
   export type JobTargets = TargetArn[];

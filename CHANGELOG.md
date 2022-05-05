@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1128.0-->
+<!--LATEST=2.1129.0-->
 <!--ENTRYINSERT-->
+
+## 2.1129.0
+* feature: DataSync: AWS DataSync now supports a new ObjectTags Task API option that can be used to control whether Object Tags are transferred.
+* feature: EC2: Amazon EC2 I4i instances are powered by 3rd generation Intel Xeon Scalable processors and feature up to 30 TB of local AWS Nitro SSD storage
+* feature: Iot: AWS IoT Jobs now allows you to create up to 100,000 active continuous and snapshot jobs by using concurrency control.
+* feature: Kendra: AWS Kendra now supports hierarchical facets for a query. For more information, see https://docs.aws.amazon.com/kendra/latest/dg/filtering.html
 
 ## 2.1128.0
 * feature: Backup: Adds support to 2 new filters about job complete time for 3 list jobs APIs in AWS Backup
