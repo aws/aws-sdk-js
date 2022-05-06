@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1129.0-->
+<!--LATEST=2.1130.0-->
 <!--ENTRYINSERT-->
+
+## 2.1130.0
+* feature: EC2: Add new state values for IPAMs, IPAM Scopes, and IPAM Pools.
+* feature: Location: Amazon Location Service now includes a MaxResults parameter for ListGeofences requests.
+* feature: MediaPackage: This release adds Dvb Dash 2014 as an available profile option for Dash Origin Endpoints.
+* feature: Redshift: Introduces new field 'LoadSampleData' in CreateCluster operation. Customers can now specify 'LoadSampleData' option during creation of a cluster, which results in loading of sample data in the cluster that is created.
 
 ## 2.1129.0
 * feature: DataSync: AWS DataSync now supports a new ObjectTags Task API option that can be used to control whether Object Tags are transferred.

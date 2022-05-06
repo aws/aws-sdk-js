@@ -21711,7 +21711,7 @@ declare namespace EC2 {
   export type IpamPoolCidrState = "pending-provision"|"provisioned"|"failed-provision"|"pending-deprovision"|"deprovisioned"|"failed-deprovision"|"pending-import"|"failed-import"|string;
   export type IpamPoolId = string;
   export type IpamPoolSet = IpamPool[];
-  export type IpamPoolState = "create-in-progress"|"create-complete"|"create-failed"|"modify-in-progress"|"modify-complete"|"modify-failed"|"delete-in-progress"|"delete-complete"|"delete-failed"|string;
+  export type IpamPoolState = "create-in-progress"|"create-complete"|"create-failed"|"modify-in-progress"|"modify-complete"|"modify-failed"|"delete-in-progress"|"delete-complete"|"delete-failed"|"isolate-in-progress"|"isolate-complete"|"restore-in-progress"|string;
   export interface IpamResourceCidr {
     /**
      * The IPAM ID for an IPAM resource.
@@ -21835,10 +21835,10 @@ declare namespace EC2 {
   }
   export type IpamScopeId = string;
   export type IpamScopeSet = IpamScope[];
-  export type IpamScopeState = "create-in-progress"|"create-complete"|"create-failed"|"modify-in-progress"|"modify-complete"|"modify-failed"|"delete-in-progress"|"delete-complete"|"delete-failed"|string;
+  export type IpamScopeState = "create-in-progress"|"create-complete"|"create-failed"|"modify-in-progress"|"modify-complete"|"modify-failed"|"delete-in-progress"|"delete-complete"|"delete-failed"|"isolate-in-progress"|"isolate-complete"|"restore-in-progress"|string;
   export type IpamScopeType = "public"|"private"|string;
   export type IpamSet = Ipam[];
-  export type IpamState = "create-in-progress"|"create-complete"|"create-failed"|"modify-in-progress"|"modify-complete"|"modify-failed"|"delete-in-progress"|"delete-complete"|"delete-failed"|string;
+  export type IpamState = "create-in-progress"|"create-complete"|"create-failed"|"modify-in-progress"|"modify-complete"|"modify-failed"|"delete-in-progress"|"delete-complete"|"delete-failed"|"isolate-in-progress"|"isolate-complete"|"restore-in-progress"|string;
   export type Ipv4PoolCoipId = string;
   export type Ipv4PoolEc2Id = string;
   export type Ipv4PrefixList = Ipv4PrefixSpecificationRequest[];

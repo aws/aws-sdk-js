@@ -516,7 +516,7 @@ the Channel source contains SCTE-35 ad markers.
      */
     PeriodTriggers?: __listOf__PeriodTriggersElement;
     /**
-     * The Dynamic Adaptive Streaming over HTTP (DASH) profile type.  When set to "HBBTV_1_5", HbbTV 1.5 compliant output is enabled.
+     * The Dynamic Adaptive Streaming over HTTP (DASH) profile type.  When set to "HBBTV_1_5", HbbTV 1.5 compliant output is enabled. When set to "DVB-DASH_2014", DVB-DASH 2014 compliant output is enabled.
      */
     Profile?: Profile;
     /**
@@ -539,7 +539,7 @@ rounded to the nearest multiple of the source segment duration.
      */
     UtcTiming?: UtcTiming;
     /**
-     * Specifies the value attribute of the UTCTiming field when utcTiming is set to HTTP-ISO or HTTP-HEAD
+     * Specifies the value attribute of the UTCTiming field when utcTiming is set to HTTP-ISO, HTTP-HEAD or HTTP-XSDATE
      */
     UtcTimingUri?: __string;
   }
@@ -1135,7 +1135,7 @@ If not specified, there will be no time delay in effect for the OriginEndpoint.
   export type PlaylistType = "NONE"|"EVENT"|"VOD"|string;
   export type PresetSpeke20Audio = "PRESET-AUDIO-1"|string;
   export type PresetSpeke20Video = "PRESET-VIDEO-1"|string;
-  export type Profile = "NONE"|"HBBTV_1_5"|"HYBRIDCAST"|string;
+  export type Profile = "NONE"|"HBBTV_1_5"|"HYBRIDCAST"|"DVB_DASH_2014"|string;
   export interface RotateChannelCredentialsRequest {
     /**
      * The ID of the channel to update.
@@ -1387,7 +1387,7 @@ If not specified, there will be no time delay in effect for the OriginEndpoint.
      */
     Whitelist?: __listOf__string;
   }
-  export type UtcTiming = "NONE"|"HTTP-HEAD"|"HTTP-ISO"|string;
+  export type UtcTiming = "NONE"|"HTTP-HEAD"|"HTTP-ISO"|"HTTP-XSDATE"|string;
   export type __AdTriggersElement = "SPLICE_INSERT"|"BREAK"|"PROVIDER_ADVERTISEMENT"|"DISTRIBUTOR_ADVERTISEMENT"|"PROVIDER_PLACEMENT_OPPORTUNITY"|"DISTRIBUTOR_PLACEMENT_OPPORTUNITY"|"PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY"|"DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY"|string;
   export type __PeriodTriggersElement = "ADS"|string;
   export type __boolean = boolean;
