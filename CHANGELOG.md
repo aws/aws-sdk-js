@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1130.0-->
+<!--LATEST=2.1131.0-->
 <!--ENTRYINSERT-->
+
+## 2.1131.0
+* feature: CloudControl: SDK release for Cloud Control API to include paginators for Python SDK.
+* feature: Evidently: Add detail message inside GetExperimentResults API response to indicate experiment result availability
 
 ## 2.1130.0
 * feature: EC2: Add new state values for IPAMs, IPAM Scopes, and IPAM Pools.

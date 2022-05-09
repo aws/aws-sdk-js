@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "CloudControl",
+        "description": "SDK release for Cloud Control API to include paginators for Python SDK."
+    },
+    {
+        "type": "feature",
+        "category": "Evidently",
+        "description": "Add detail message inside GetExperimentResults API response to indicate experiment result availability"
+    }
+]
