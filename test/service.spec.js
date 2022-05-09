@@ -13,18 +13,18 @@
   metadata = require('../apis/metadata.json');
 
   describe('AWSQuery compatible error codes', function () {
-    var service;
-    var mapping = { ServiceError: { code: 'Custom.ErrorCode' } };
+    let service;
+    let mapping = { ServiceError: { code: 'Custom.ErrorCode' } };
 
     beforeEach(function(done) {
-      var CustomService = MockServiceWithErrorCodeMapping(mapping);
+      let CustomService = MockServiceWithErrorCodeMapping(mapping);
       service = new CustomService({maxRetries: 0});
       return done()
     });
 
     it('awsQueryCompatible trait is translated to correct property', function() {
       expect(service.api.errorCodeMapping).toBeDefined;
-      expect(service.api.errorCodeMapping.ServiceError.code).to.equal(mapping.ServiceError.code);
+      return expect(service.api.errorCodeMapping.ServiceError.code).to.equal(mapping.ServiceError.code);
     });
 
     it('can receive a modeled exception with error code mapping', function () {
@@ -47,7 +47,7 @@
   });
 
   describe('AWSQuery compatible error codes without mapping', function () {
-    var service;
+    let service;
 
     beforeEach(function (done) {
       service = new MockService({ maxRetries: 0 });
@@ -55,7 +55,7 @@
     });
 
     it('error code mapping property is undefined', function () {
-      expect(service.api.errorCodeMapping).toBeUndefined;
+      return expect(service.api.errorCodeMapping).toBeUndefined;
     });
 
     it('can receive a modeled exception', function () {
