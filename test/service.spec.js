@@ -15,31 +15,56 @@
   describe('AWSQuery compatible error codes', function () {
     var service;
     var mapping = { ServiceError: { code: 'Custom.ErrorCode' } };
-    beforeEach(function() {
+
+    beforeEach(function(done) {
       var CustomService = MockServiceWithErrorCodeMapping(mapping);
       service = new CustomService({maxRetries: 0});
+      return done()
     });
+
     it('awsQueryCompatible trait is translated to correct property', function() {
       expect(service.api.errorCodeMapping).toBeDefined;
       expect(service.api.errorCodeMapping.ServiceError.code).to.equal(mapping.ServiceError.code);
     });
+
     it('can receive a modeled exception with error code mapping', function () {
-      var req;
       helpers.mockHttpResponse(500, {}, ['ServiceError']);
-      return (req = service.makeRequest('operation', {}, function (err, data) {
+      return (service.makeRequest('operation', {}, function (err, data) {
         expect(err.code).to.equal(mapping.ServiceError.code);
         expect(err.statusCode).to.equal(500);
         return expect(data).to.equal(null);
       }));
     });
+
     it('can receive a modeled exception without error code mapping', function () {
-      var req;
       helpers.mockHttpResponse(500, {}, ['ServiceUnavailableException']);
-      return (req = service.makeRequest('operation', {}, function (err, data) {
+      return (service.makeRequest('operation', {}, function (err, data) {
         expect(err.code).to.equal('ServiceUnavailableException');
         expect(err.statusCode).to.equal(500);
         return expect(data).to.equal(null);
       }));
+    });
+  });
+
+  describe('AWSQuery compatible error codes without mapping', function () {
+    var service;
+
+    beforeEach(function (done) {
+      service = new MockService({ maxRetries: 0 });
+      return done();
+    });
+
+    it('error code mapping property is undefined', function () {
+      expect(service.api.errorCodeMapping).toBeUndefined;
+    });
+
+    it('can receive a modeled exception', function () {
+      helpers.mockHttpResponse(500, {}, ['ServiceError']);
+      return service.makeRequest('operation', {}, function (err, data) {
+        expect(err.code).to.equal('ServiceError');
+        expect(err.statusCode).to.equal(500);
+        return expect(data).to.equal(null);
+      });
     });
   });
 
