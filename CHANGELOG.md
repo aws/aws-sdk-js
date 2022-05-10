@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1131.0-->
+<!--LATEST=2.1132.0-->
 <!--ENTRYINSERT-->
+
+## 2.1132.0
+* feature: EC2: Added support for using NitroTPM and UEFI Secure Boot on EC2 instances.
+* feature: EKS: Adds BOTTLEROCKET_ARM_64_NVIDIA and BOTTLEROCKET_x86_64_NVIDIA AMI types to EKS managed nodegroups
+* feature: EMR: This release updates the Amazon EMR ModifyInstanceGroups API to support "MERGE" type cluster reconfiguration. Also, added the ability to specify a particular Amazon Linux release for all nodes in a cluster launch request.
 
 ## 2.1131.0
 * feature: CloudControl: SDK release for Cloud Control API to include paginators for Python SDK.

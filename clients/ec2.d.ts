@@ -2997,6 +2997,14 @@ declare class EC2 extends Service {
    */
   getInstanceTypesFromInstanceRequirements(callback?: (err: AWSError, data: EC2.Types.GetInstanceTypesFromInstanceRequirementsResult) => void): Request<EC2.Types.GetInstanceTypesFromInstanceRequirementsResult, AWSError>;
   /**
+   * A binary representation of the UEFI variable store. Only non-volatile variables are stored. This is a base64 encoded and zlib compressed binary value that must be properly encoded. When you use register-image to create an AMI, you can create an exact copy of your variable store by passing the UEFI data in the UefiData parameter. You can modify the UEFI data by using the python-uefivars tool on GitHub. You can use the tool to convert the UEFI data into a human-readable format (JSON), which you can inspect and modify, and then convert back into the binary format to use with register-image. For more information, see UEFI Secure Boot in the Amazon EC2 User Guide.
+   */
+  getInstanceUefiData(params: EC2.Types.GetInstanceUefiDataRequest, callback?: (err: AWSError, data: EC2.Types.GetInstanceUefiDataResult) => void): Request<EC2.Types.GetInstanceUefiDataResult, AWSError>;
+  /**
+   * A binary representation of the UEFI variable store. Only non-volatile variables are stored. This is a base64 encoded and zlib compressed binary value that must be properly encoded. When you use register-image to create an AMI, you can create an exact copy of your variable store by passing the UEFI data in the UefiData parameter. You can modify the UEFI data by using the python-uefivars tool on GitHub. You can use the tool to convert the UEFI data into a human-readable format (JSON), which you can inspect and modify, and then convert back into the binary format to use with register-image. For more information, see UEFI Secure Boot in the Amazon EC2 User Guide.
+   */
+  getInstanceUefiData(callback?: (err: AWSError, data: EC2.Types.GetInstanceUefiDataResult) => void): Request<EC2.Types.GetInstanceUefiDataResult, AWSError>;
+  /**
    * Retrieve historical information about a CIDR within an IPAM scope. For more information, see View the history of IP addresses in the Amazon VPC IPAM User Guide.
    */
   getIpamAddressHistory(params: EC2.Types.GetIpamAddressHistoryRequest, callback?: (err: AWSError, data: EC2.Types.GetIpamAddressHistoryResult) => void): Request<EC2.Types.GetIpamAddressHistoryResult, AWSError>;
@@ -18191,6 +18199,26 @@ declare namespace EC2 {
      */
     NextToken?: String;
   }
+  export interface GetInstanceUefiDataRequest {
+    /**
+     * The ID of the instance from which to retrieve the UEFI data.
+     */
+    InstanceId: InstanceId;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface GetInstanceUefiDataResult {
+    /**
+     * The ID of the instance from which to retrieve the UEFI data.
+     */
+    InstanceId?: InstanceId;
+    /**
+     * Base64 representation of the non-volatile UEFI variable store.
+     */
+    UefiData?: String;
+  }
   export interface GetIpamAddressHistoryRequest {
     /**
      * A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
@@ -19365,6 +19393,10 @@ declare namespace EC2 {
      */
     BootMode?: BootModeValues;
     /**
+     * If the image is configured for NitroTPM support, the value is v2.0. For more information, see NitroTPM in the Amazon Elastic Compute Cloud User Guide.
+     */
+    TpmSupport?: TpmSupportValues;
+    /**
      * The date and time to deprecate the AMI, in UTC, in the following format: YYYY-MM-DDTHH:MM:SSZ. If you specified a value for seconds, Amazon EC2 rounds the seconds to the nearest minute.
      */
     DeprecationTime?: String;
@@ -19407,11 +19439,19 @@ declare namespace EC2 {
      */
     BootMode?: AttributeValue;
     /**
+     * If the image is configured for NitroTPM support, the value is v2.0.
+     */
+    TpmSupport?: AttributeValue;
+    /**
+     * Base64 representation of the non-volatile UEFI variable store. To retrieve the UEFI data, use the GetInstanceUefiData command. You can inspect and modify the UEFI data by using the python-uefivars tool on GitHub. For more information, see UEFI Secure Boot in the Amazon Elastic Compute Cloud User Guide.
+     */
+    UefiData?: AttributeValue;
+    /**
      * The date and time, in ISO 8601 date-time format, when the AMI was last used to launch an EC2 instance. When the AMI is used, there is a 24-hour delay before that usage is reported.   lastLaunchedTime data is available starting April 2017. 
      */
     LastLaunchedTime?: AttributeValue;
   }
-  export type ImageAttributeName = "description"|"kernel"|"ramdisk"|"launchPermission"|"productCodes"|"blockDeviceMapping"|"sriovNetSupport"|"bootMode"|"lastLaunchedTime"|string;
+  export type ImageAttributeName = "description"|"kernel"|"ramdisk"|"launchPermission"|"productCodes"|"blockDeviceMapping"|"sriovNetSupport"|"bootMode"|"tpmSupport"|"uefiData"|"lastLaunchedTime"|string;
   export interface ImageDiskContainer {
     /**
      * The description of the disk image.
@@ -20236,6 +20276,10 @@ declare namespace EC2 {
      * The IPv6 address assigned to the instance.
      */
     Ipv6Address?: String;
+    /**
+     * If the instance is configured for NitroTPM support, the value is v2.0. For more information, see NitroTPM in the Amazon EC2 User Guide.
+     */
+    TpmSupport?: String;
     /**
      * Provides information on the recovery and maintenance options of your instance.
      */
@@ -27010,6 +27054,14 @@ declare namespace EC2 {
      * The boot mode of the AMI. For more information, see Boot modes in the Amazon Elastic Compute Cloud User Guide.
      */
     BootMode?: BootModeValues;
+    /**
+     * Set to v2.0 to enable Trusted Platform Module (TPM) support. For more information, see NitroTPM in the Amazon Elastic Compute Cloud User Guide.
+     */
+    TpmSupport?: TpmSupportValues;
+    /**
+     * Base64 representation of the non-volatile UEFI variable store. To retrieve the UEFI data, use the GetInstanceUefiData command. You can inspect and modify the UEFI data by using the python-uefivars tool on GitHub. For more information, see UEFI Secure Boot in the Amazon Elastic Compute Cloud User Guide.
+     */
+    UefiData?: StringType;
   }
   export interface RegisterImageResult {
     /**
@@ -30926,6 +30978,7 @@ declare namespace EC2 {
   export type StoreImageTaskResultSet = StoreImageTaskResult[];
   export type String = string;
   export type StringList = String[];
+  export type StringType = string;
   export interface Subnet {
     /**
      * The Availability Zone of the subnet.
@@ -31364,6 +31417,7 @@ declare namespace EC2 {
      */
     Max?: Double;
   }
+  export type TpmSupportValues = "v2.0"|string;
   export type TrafficDirection = "ingress"|"egress"|string;
   export interface TrafficMirrorFilter {
     /**

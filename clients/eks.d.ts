@@ -149,11 +149,11 @@ declare class EKS extends Service {
    */
   describeNodegroup(callback?: (err: AWSError, data: EKS.Types.DescribeNodegroupResponse) => void): Request<EKS.Types.DescribeNodegroupResponse, AWSError>;
   /**
-   * Returns descriptive information about an update against your Amazon EKS cluster or associated managed node group. When the status of the update is Succeeded, the update is complete. If an update fails, the status is Failed, and an error detail explains the reason for the failure.
+   * Returns descriptive information about an update against your Amazon EKS cluster or associated managed node group or Amazon EKS add-on. When the status of the update is Succeeded, the update is complete. If an update fails, the status is Failed, and an error detail explains the reason for the failure.
    */
   describeUpdate(params: EKS.Types.DescribeUpdateRequest, callback?: (err: AWSError, data: EKS.Types.DescribeUpdateResponse) => void): Request<EKS.Types.DescribeUpdateResponse, AWSError>;
   /**
-   * Returns descriptive information about an update against your Amazon EKS cluster or associated managed node group. When the status of the update is Succeeded, the update is complete. If an update fails, the status is Failed, and an error detail explains the reason for the failure.
+   * Returns descriptive information about an update against your Amazon EKS cluster or associated managed node group or Amazon EKS add-on. When the status of the update is Succeeded, the update is complete. If an update fails, the status is Failed, and an error detail explains the reason for the failure.
    */
   describeUpdate(callback?: (err: AWSError, data: EKS.Types.DescribeUpdateResponse) => void): Request<EKS.Types.DescribeUpdateResponse, AWSError>;
   /**
@@ -350,7 +350,7 @@ declare class EKS extends Service {
   waitFor(state: "fargateProfileDeleted", callback?: (err: AWSError, data: EKS.Types.DescribeFargateProfileResponse) => void): Request<EKS.Types.DescribeFargateProfileResponse, AWSError>;
 }
 declare namespace EKS {
-  export type AMITypes = "AL2_x86_64"|"AL2_x86_64_GPU"|"AL2_ARM_64"|"CUSTOM"|"BOTTLEROCKET_ARM_64"|"BOTTLEROCKET_x86_64"|string;
+  export type AMITypes = "AL2_x86_64"|"AL2_x86_64_GPU"|"AL2_ARM_64"|"CUSTOM"|"BOTTLEROCKET_ARM_64"|"BOTTLEROCKET_x86_64"|"BOTTLEROCKET_ARM_64_NVIDIA"|"BOTTLEROCKET_x86_64_NVIDIA"|string;
   export interface Addon {
     /**
      * The name of the add-on.
@@ -781,7 +781,7 @@ declare namespace EKS {
      */
     labels?: labelsMap;
     /**
-     * The Kubernetes taints to be applied to the nodes in the node group.
+     * The Kubernetes taints to be applied to the nodes in the node group. For more information, see Node taints on managed node groups.
      */
     taints?: taintsList;
     /**
@@ -1001,11 +1001,11 @@ declare namespace EKS {
      */
     updateId: String;
     /**
-     * The name of the Amazon EKS node group associated with the update.
+     * The name of the Amazon EKS node group associated with the update. This parameter is required if the update is a node group update.
      */
     nodegroupName?: String;
     /**
-     * The name of the add-on. The name must match one of the names returned by  ListAddons .
+     * The name of the add-on. The name must match one of the names returned by  ListAddons . This parameter is required if the update is an add-on update.
      */
     addonName?: String;
   }
@@ -1119,7 +1119,7 @@ declare namespace EKS {
   }
   export interface IdentityProviderConfig {
     /**
-     * The type of the identity provider configuration.
+     * The type of the identity provider configuration. The only type available is oidc.
      */
     type: String;
     /**
@@ -1157,21 +1157,21 @@ declare namespace EKS {
      */
     serviceIpv4Cidr?: String;
     /**
-     * Specify which IP version is used to assign Kubernetes Pod and Service IP addresses. If you don't specify a value, ipv4 is used by default. You can only specify an IP family when you create a cluster and can't change this value once the cluster is created. If you specify ipv6, the VPC and subnets that you specify for cluster creation must have both IPv4 and IPv6 CIDR blocks assigned to them.  You can only specify ipv6 for 1.21 and later clusters that use version 1.10.0 or later of the Amazon VPC CNI add-on. If you specify ipv6, then ensure that your VPC meets the requirements and that you're familiar with the considerations listed in Assigning IPv6 addresses to Pods and Services in the Amazon EKS User Guide. If you specify ipv6, Kubernetes assigns Service and Pod addresses from the unique local address range (fc00::/7). You can't specify a custom IPv6 CIDR block.
+     * Specify which IP family is used to assign Kubernetes pod and service IP addresses. If you don't specify a value, ipv4 is used by default. You can only specify an IP family when you create a cluster and can't change this value once the cluster is created. If you specify ipv6, the VPC and subnets that you specify for cluster creation must have both IPv4 and IPv6 CIDR blocks assigned to them. You can't specify ipv6 for clusters in China Regions. You can only specify ipv6 for 1.21 and later clusters that use version 1.10.1 or later of the Amazon VPC CNI add-on. If you specify ipv6, then ensure that your VPC meets the requirements listed in the considerations listed in Assigning IPv6 addresses to pods and services in the Amazon EKS User Guide. Kubernetes assigns services IPv6 addresses from the unique local address range (fc00::/7). You can't specify a custom IPv6 CIDR block. Pod addresses are assigned from the subnet's IPv6 CIDR.
      */
     ipFamily?: IpFamily;
   }
   export interface KubernetesNetworkConfigResponse {
     /**
-     * The CIDR block that Kubernetes Pod and Service IP addresses are assigned from. Kubernetes assigns addresses from an IPv4 CIDR block assigned to a subnet that the node is in. If you didn't specify a CIDR block when you created the cluster, then Kubernetes assigns addresses from either the 10.100.0.0/16 or 172.20.0.0/16 CIDR blocks. If this was specified, then it was specified when the cluster was created and it can't be changed.
+     * The CIDR block that Kubernetes pod and service IP addresses are assigned from. Kubernetes assigns addresses from an IPv4 CIDR block assigned to a subnet that the node is in. If you didn't specify a CIDR block when you created the cluster, then Kubernetes assigns addresses from either the 10.100.0.0/16 or 172.20.0.0/16 CIDR blocks. If this was specified, then it was specified when the cluster was created and it can't be changed.
      */
     serviceIpv4Cidr?: String;
     /**
-     * The CIDR block that Kubernetes Pod and Service IP addresses are assigned from if you created a 1.21 or later cluster with version 1.10.0 or later of the Amazon VPC CNI add-on and specified ipv6 for ipFamily when you created the cluster. Kubernetes assigns addresses from the unique local address range (fc00::/7).
+     * The CIDR block that Kubernetes pod and service IP addresses are assigned from if you created a 1.21 or later cluster with version 1.10.1 or later of the Amazon VPC CNI add-on and specified ipv6 for ipFamily when you created the cluster. Kubernetes assigns service addresses from the unique local address range (fc00::/7) because you can't specify a custom IPv6 CIDR block when you create the cluster.
      */
     serviceIpv6Cidr?: String;
     /**
-     * The IP family used to assign Kubernetes Pod and Service IP addresses. The IP family is always ipv4, unless you have a 1.21 or later cluster running version 1.10.0 or later of the Amazon VPC CNI add-on and specified ipv6 when you created the cluster. 
+     * The IP family used to assign Kubernetes pod and service IP addresses. The IP family is always ipv4, unless you have a 1.21 or later cluster running version 1.10.1 or later of the Amazon VPC CNI add-on and specified ipv6 when you created the cluster. 
      */
     ipFamily?: IpFamily;
   }
@@ -1443,7 +1443,7 @@ declare namespace EKS {
      */
     labels?: labelsMap;
     /**
-     * The Kubernetes taints to be applied to the nodes in the node group when they are created. Effect is one of No_Schedule, Prefer_No_Schedule, or No_Execute. Kubernetes taints can be used together with tolerations to control how workloads are scheduled to your nodes.
+     * The Kubernetes taints to be applied to the nodes in the node group when they are created. Effect is one of No_Schedule, Prefer_No_Schedule, or No_Execute. Kubernetes taints can be used together with tolerations to control how workloads are scheduled to your nodes. For more information, see Node taints on managed node groups.
      */
     taints?: taintsList;
     /**
@@ -1807,7 +1807,7 @@ declare namespace EKS {
      */
     labels?: UpdateLabelsPayload;
     /**
-     * The Kubernetes taints to be applied to the nodes in the node group after the update.
+     * The Kubernetes taints to be applied to the nodes in the node group after the update. For more information, see Node taints on managed node groups.
      */
     taints?: UpdateTaintsPayload;
     /**
