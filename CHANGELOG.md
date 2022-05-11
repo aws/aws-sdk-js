@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1132.0-->
+<!--LATEST=2.1133.0-->
 <!--ENTRYINSERT-->
+
+## 2.1133.0
+* feature: EC2: This release updates AWS PrivateLink APIs to support IPv6 for PrivateLink Services and Endpoints of type 'Interface'.
 
 ## 2.1132.0
 * feature: EC2: Added support for using NitroTPM and UEFI Secure Boot on EC2 instances.

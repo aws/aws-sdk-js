@@ -9081,10 +9081,6 @@ declare namespace EC2 {
   }
   export interface CreateSubnetCidrReservationRequest {
     /**
-     * The tags to assign to the subnet CIDR reservation.
-     */
-    TagSpecifications?: TagSpecificationList;
-    /**
      * The ID of the subnet.
      */
     SubnetId: SubnetId;
@@ -9104,6 +9100,10 @@ declare namespace EC2 {
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
     DryRun?: Boolean;
+    /**
+     * The tags to assign to the subnet CIDR reservation.
+     */
+    TagSpecifications?: TagSpecificationList;
   }
   export interface CreateSubnetCidrReservationResult {
     /**
@@ -9772,6 +9772,14 @@ declare namespace EC2 {
      */
     SecurityGroupIds?: VpcEndpointSecurityGroupIdList;
     /**
+     * The IP address type for the endpoint.
+     */
+    IpAddressType?: IpAddressType;
+    /**
+     * The DNS options for the endpoint.
+     */
+    DnsOptions?: DnsOptionsSpecification;
+    /**
      * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to ensure idempotency.
      */
     ClientToken?: String;
@@ -9815,6 +9823,10 @@ declare namespace EC2 {
      * The Amazon Resource Names (ARNs) of one or more Gateway Load Balancers.
      */
     GatewayLoadBalancerArns?: ValueStringList;
+    /**
+     * The supported IP address types. The possible values are ipv4 and ipv6.
+     */
+    SupportedIpAddressTypes?: ValueStringList;
     /**
      * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to ensure idempotency.
      */
@@ -15212,7 +15224,7 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * One or more filters.    service-id - The ID of the service.    vpc-endpoint-owner - The ID of the Amazon Web Services account ID that owns the endpoint.    vpc-endpoint-state - The state of the endpoint (pendingAcceptance | pending | available | deleting | deleted | rejected | failed).    vpc-endpoint-id - The ID of the endpoint.  
+     * One or more filters.    ip-address-type - The IP address type (ipv4 | ipv6).    service-id - The ID of the service.    vpc-endpoint-owner - The ID of the Amazon Web Services account ID that owns the endpoint.    vpc-endpoint-state - The state of the endpoint (pendingAcceptance | pending | available | deleting | deleted | rejected | failed).    vpc-endpoint-id - The ID of the endpoint.  
      */
     Filters?: FilterList;
     /**
@@ -15244,7 +15256,7 @@ declare namespace EC2 {
      */
     ServiceIds?: VpcEndpointServiceIdList;
     /**
-     * One or more filters.    service-name - The name of the service.    service-id - The ID of the service.    service-state - The state of the service (Pending | Available | Deleting | Deleted | Failed).     tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.  
+     * One or more filters.    service-name - The name of the service.    service-id - The ID of the service.    service-state - The state of the service (Pending | Available | Deleting | Deleted | Failed).     supported-ip-address-types - The IP address type (ipv4 | ipv6).    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.  
      */
     Filters?: FilterList;
     /**
@@ -15308,7 +15320,7 @@ declare namespace EC2 {
      */
     ServiceNames?: ValueStringList;
     /**
-     * One or more filters.    service-name - The name of the service.    service-type - The type of service (Interface | Gateway).    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.  
+     * One or more filters.    service-name - The name of the service.    service-type - The type of service (Interface | Gateway).    supported-ip-address-types - The IP address type (ipv4 | ipv6).    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.  
      */
     Filters?: FilterList;
     /**
@@ -15344,7 +15356,7 @@ declare namespace EC2 {
      */
     VpcEndpointIds?: VpcEndpointIdList;
     /**
-     * One or more filters.    service-name - The name of the service.    vpc-id - The ID of the VPC in which the endpoint resides.    vpc-endpoint-id - The ID of the endpoint.    vpc-endpoint-state - The state of the endpoint (pendingAcceptance | pending | available | deleting | deleted | rejected | failed).    vpc-endpoint-type - The type of VPC endpoint (Interface | Gateway | GatewayLoadBalancer).    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.  
+     * One or more filters.    ip-address-type - The IP address type (ipv4 | ipv6).    service-name - The name of the service.    vpc-id - The ID of the VPC in which the endpoint resides.    vpc-endpoint-id - The ID of the endpoint.    vpc-endpoint-state - The state of the endpoint (pendingAcceptance | pending | available | deleting | deleted | rejected | failed).    vpc-endpoint-type - The type of VPC endpoint (Interface | Gateway | GatewayLoadBalancer).    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.  
      */
     Filters?: FilterList;
     /**
@@ -16196,6 +16208,19 @@ declare namespace EC2 {
   }
   export type DnsEntrySet = DnsEntry[];
   export type DnsNameState = "pendingVerification"|"verified"|"failed"|string;
+  export interface DnsOptions {
+    /**
+     * The DNS records created for the endpoint.
+     */
+    DnsRecordIpType?: DnsRecordIpType;
+  }
+  export interface DnsOptionsSpecification {
+    /**
+     * The DNS records created for the endpoint.
+     */
+    DnsRecordIpType?: DnsRecordIpType;
+  }
+  export type DnsRecordIpType = "ipv4"|"dualstack"|"ipv6"|"service-defined"|string;
   export interface DnsServersOptionsModifyStructure {
     /**
      * The IPv4 address range, in CIDR notation, of the DNS servers to be used. You can specify up to two DNS servers. Ensure that the DNS servers can be reached by the clients. The specified values overwrite the existing values.
@@ -21439,6 +21464,7 @@ declare namespace EC2 {
   export type InternetGatewayList = InternetGateway[];
   export type IpAddress = string;
   export type IpAddressList = IpAddress[];
+  export type IpAddressType = "ipv4"|"dualstack"|"ipv6"|string;
   export interface IpPermission {
     /**
      * The start of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 type number. A value of -1 indicates all ICMP/ICMPv6 types. If you specify all ICMP/ICMPv6 types, you must specify all codes.
@@ -24833,6 +24859,14 @@ declare namespace EC2 {
      */
     RemoveSecurityGroupIds?: VpcEndpointSecurityGroupIdList;
     /**
+     * The IP address type for the endpoint.
+     */
+    IpAddressType?: IpAddressType;
+    /**
+     * The DNS options for the endpoint.
+     */
+    DnsOptions?: DnsOptionsSpecification;
+    /**
      * (Interface endpoint) Indicates whether a private hosted zone is associated with the VPC.
      */
     PrivateDnsEnabled?: Boolean;
@@ -24880,6 +24914,14 @@ declare namespace EC2 {
      * The Amazon Resource Names (ARNs) of Gateway Load Balancers to remove from your service configuration.
      */
     RemoveGatewayLoadBalancerArns?: ValueStringList;
+    /**
+     * The IP address types to add to your service configuration.
+     */
+    AddSupportedIpAddressTypes?: ValueStringList;
+    /**
+     * The IP address types to remove from your service configuration.
+     */
+    RemoveSupportedIpAddressTypes?: ValueStringList;
   }
   export interface ModifyVpcEndpointServiceConfigurationResult {
     /**
@@ -29814,6 +29856,10 @@ declare namespace EC2 {
      */
     GatewayLoadBalancerArns?: ValueStringList;
     /**
+     * The supported IP address types.
+     */
+    SupportedIpAddressTypes?: SupportedIpAddressTypes;
+    /**
      * The DNS names for the service.
      */
     BaseEndpointDnsNames?: ValueStringList;
@@ -29835,6 +29881,7 @@ declare namespace EC2 {
     Tags?: TagList;
   }
   export type ServiceConfigurationSet = ServiceConfiguration[];
+  export type ServiceConnectivityType = "ipv4"|"ipv6"|string;
   export interface ServiceDetail {
     /**
      * The Amazon Resource Name (ARN) of the service.
@@ -29892,6 +29939,10 @@ declare namespace EC2 {
      * The verification state of the VPC endpoint service. Consumers of the endpoint service cannot use the private name when the state is not verified.
      */
     PrivateDnsNameVerificationState?: DnsNameState;
+    /**
+     * The supported IP address types.
+     */
+    SupportedIpAddressTypes?: SupportedIpAddressTypes;
   }
   export type ServiceDetailSet = ServiceDetail[];
   export type ServiceState = "Pending"|"Available"|"Deleting"|"Deleted"|"Failed"|string;
@@ -31155,6 +31206,7 @@ declare namespace EC2 {
   }
   export type SuccessfulQueuedPurchaseDeletionSet = SuccessfulQueuedPurchaseDeletion[];
   export type SummaryStatus = "ok"|"impaired"|"insufficient-data"|"not-applicable"|"initializing"|string;
+  export type SupportedIpAddressTypes = ServiceConnectivityType[];
   export interface Tag {
     /**
      * The key of the tag. Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with aws:.
@@ -33239,7 +33291,7 @@ declare namespace EC2 {
   export type VpcClassicLinkList = VpcClassicLink[];
   export interface VpcEndpoint {
     /**
-     * The ID of the VPC endpoint.
+     * The ID of the endpoint.
      */
     VpcEndpointId?: String;
     /**
@@ -33255,7 +33307,7 @@ declare namespace EC2 {
      */
     ServiceName?: String;
     /**
-     * The state of the VPC endpoint.
+     * The state of the endpoint.
      */
     State?: State;
     /**
@@ -33267,7 +33319,7 @@ declare namespace EC2 {
      */
     RouteTableIds?: ValueStringList;
     /**
-     * (Interface endpoint) One or more subnets in which the endpoint is located.
+     * (Interface endpoint) The subnets for the endpoint.
      */
     SubnetIds?: ValueStringList;
     /**
@@ -33275,11 +33327,19 @@ declare namespace EC2 {
      */
     Groups?: GroupIdentifierSet;
     /**
+     * The IP address type for the endpoint.
+     */
+    IpAddressType?: IpAddressType;
+    /**
+     * The DNS options for the endpoint.
+     */
+    DnsOptions?: DnsOptions;
+    /**
      * (Interface endpoint) Indicates whether the VPC is associated with a private hosted zone.
      */
     PrivateDnsEnabled?: Boolean;
     /**
-     * Indicates whether the VPC endpoint is being managed by its service.
+     * Indicates whether the endpoint is being managed by its service.
      */
     RequesterManaged?: Boolean;
     /**
@@ -33291,19 +33351,19 @@ declare namespace EC2 {
      */
     DnsEntries?: DnsEntrySet;
     /**
-     * The date and time that the VPC endpoint was created.
+     * The date and time that the endpoint was created.
      */
     CreationTimestamp?: MillisecondDateTime;
     /**
-     * Any tags assigned to the VPC endpoint.
+     * Any tags assigned to the endpoint.
      */
     Tags?: TagList;
     /**
-     * The ID of the Amazon Web Services account that owns the VPC endpoint.
+     * The ID of the Amazon Web Services account that owns the endpoint.
      */
     OwnerId?: String;
     /**
-     * The last error that occurred for VPC endpoint.
+     * The last error that occurred for endpoint.
      */
     LastError?: LastError;
   }
@@ -33340,6 +33400,10 @@ declare namespace EC2 {
      * The Amazon Resource Names (ARNs) of the Gateway Load Balancers for the service.
      */
     GatewayLoadBalancerArns?: ValueStringList;
+    /**
+     * The IP address type for the endpoint.
+     */
+    IpAddressType?: IpAddressType;
   }
   export type VpcEndpointConnectionSet = VpcEndpointConnection[];
   export type VpcEndpointId = string;
