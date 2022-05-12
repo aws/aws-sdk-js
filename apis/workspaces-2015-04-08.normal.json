@@ -1841,7 +1841,7 @@
     },
     "ClientLoginMessage": {
       "type": "string",
-      "max": 600,
+      "max": 850,
       "min": 0,
       "pattern": "^.*$"
     },

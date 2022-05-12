@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1133.0-->
+<!--LATEST=2.1134.0-->
 <!--ENTRYINSERT-->
+
+## 2.1134.0
+* feature: EC2: This release introduces a target type Gateway Load Balancer Endpoint for mirrored traffic. Customers can now specify GatewayLoadBalancerEndpoint option during the creation of a traffic mirror target.
+* feature: Kendra: Amazon Kendra now provides a data source connector for Jira. For more information, see https://docs.aws.amazon.com/kendra/latest/dg/data-source-jira.html
+* feature: Lambda: Lambda releases NodeJs 16 managed runtime to be available in all commercial regions.
+* feature: Lightsail: This release adds support to include inactive database bundles in the response of the GetRelationalDatabaseBundles request.
+* feature: SSMIncidents: Adding support for dynamic SSM Runbook parameter values. Updating validation pattern for engagements. Adding ConflictException to UpdateReplicationSet API contract.
+* feature: WorkSpaces: Increased the character limit of the login message from 600 to 850 characters.
 
 ## 2.1133.0
 * feature: EC2: This release updates AWS PrivateLink APIs to support IPv6 for PrivateLink Services and Endpoints of type 'Interface'.

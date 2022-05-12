@@ -556,11 +556,11 @@ declare class Lightsail extends Service {
    */
   getBuckets(callback?: (err: AWSError, data: Lightsail.Types.GetBucketsResult) => void): Request<Lightsail.Types.GetBucketsResult, AWSError>;
   /**
-   * Returns the list of bundles that are available for purchase. A bundle describes the specs for your virtual private server (or instance).
+   * Returns the bundles that you can apply to an Amazon Lightsail instance when you create it. A bundle describes the specifications of an instance, such as the monthly cost, amount of memory, the number of vCPUs, amount of storage space, and monthly network data transfer quota.  Bundles are referred to as instance plans in the Lightsail console. 
    */
   getBundles(params: Lightsail.Types.GetBundlesRequest, callback?: (err: AWSError, data: Lightsail.Types.GetBundlesResult) => void): Request<Lightsail.Types.GetBundlesResult, AWSError>;
   /**
-   * Returns the list of bundles that are available for purchase. A bundle describes the specs for your virtual private server (or instance).
+   * Returns the bundles that you can apply to an Amazon Lightsail instance when you create it. A bundle describes the specifications of an instance, such as the monthly cost, amount of memory, the number of vCPUs, amount of storage space, and monthly network data transfer quota.  Bundles are referred to as instance plans in the Lightsail console. 
    */
   getBundles(callback?: (err: AWSError, data: Lightsail.Types.GetBundlesResult) => void): Request<Lightsail.Types.GetBundlesResult, AWSError>;
   /**
@@ -3896,7 +3896,7 @@ declare namespace Lightsail {
   }
   export interface GetBlueprintsRequest {
     /**
-     * A Boolean value indicating whether to include inactive results in your request.
+     * A Boolean value that indicates whether to include inactive (unavailable) blueprints in the response of your request.
      */
     includeInactive?: boolean;
     /**
@@ -3928,7 +3928,7 @@ declare namespace Lightsail {
   }
   export interface GetBucketBundlesRequest {
     /**
-     * A Boolean value that indicates whether to include inactive (unavailable) bundles in the response.
+     * A Boolean value that indicates whether to include inactive (unavailable) bundles in the response of your request.
      */
     includeInactive?: boolean;
   }
@@ -4008,7 +4008,7 @@ declare namespace Lightsail {
   }
   export interface GetBundlesRequest {
     /**
-     * A Boolean value that indicates whether to include inactive bundle results in your request.
+     * A Boolean value that indicates whether to include inactive (unavailable) bundles in the response of your request.
      */
     includeInactive?: boolean;
     /**
@@ -4729,6 +4729,10 @@ declare namespace Lightsail {
      * The token to advance to the next page of results from your request. To get a page token, perform an initial GetRelationalDatabaseBundles request. If your results are paginated, the response will return a next page token that you can specify as the page token in a subsequent request.
      */
     pageToken?: string;
+    /**
+     * A Boolean value that indicates whether to include inactive (unavailable) bundles in the response of your request.
+     */
+    includeInactive?: boolean;
   }
   export interface GetRelationalDatabaseBundlesResult {
     /**

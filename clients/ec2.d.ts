@@ -797,11 +797,11 @@ declare class EC2 extends Service {
    */
   createTrafficMirrorSession(callback?: (err: AWSError, data: EC2.Types.CreateTrafficMirrorSessionResult) => void): Request<EC2.Types.CreateTrafficMirrorSessionResult, AWSError>;
   /**
-   * Creates a target for your Traffic Mirror session. A Traffic Mirror target is the destination for mirrored traffic. The Traffic Mirror source and the Traffic Mirror target (monitoring appliances) can be in the same VPC, or in different VPCs connected via VPC peering or a transit gateway. A Traffic Mirror target can be a network interface, or a Network Load Balancer. To use the target in a Traffic Mirror session, use CreateTrafficMirrorSession.
+   * Creates a target for your Traffic Mirror session. A Traffic Mirror target is the destination for mirrored traffic. The Traffic Mirror source and the Traffic Mirror target (monitoring appliances) can be in the same VPC, or in different VPCs connected via VPC peering or a transit gateway. A Traffic Mirror target can be a network interface, a Network Load Balancer, or a Gateway Load Balancer endpoint. To use the target in a Traffic Mirror session, use CreateTrafficMirrorSession.
    */
   createTrafficMirrorTarget(params: EC2.Types.CreateTrafficMirrorTargetRequest, callback?: (err: AWSError, data: EC2.Types.CreateTrafficMirrorTargetResult) => void): Request<EC2.Types.CreateTrafficMirrorTargetResult, AWSError>;
   /**
-   * Creates a target for your Traffic Mirror session. A Traffic Mirror target is the destination for mirrored traffic. The Traffic Mirror source and the Traffic Mirror target (monitoring appliances) can be in the same VPC, or in different VPCs connected via VPC peering or a transit gateway. A Traffic Mirror target can be a network interface, or a Network Load Balancer. To use the target in a Traffic Mirror session, use CreateTrafficMirrorSession.
+   * Creates a target for your Traffic Mirror session. A Traffic Mirror target is the destination for mirrored traffic. The Traffic Mirror source and the Traffic Mirror target (monitoring appliances) can be in the same VPC, or in different VPCs connected via VPC peering or a transit gateway. A Traffic Mirror target can be a network interface, a Network Load Balancer, or a Gateway Load Balancer endpoint. To use the target in a Traffic Mirror session, use CreateTrafficMirrorSession.
    */
   createTrafficMirrorTarget(callback?: (err: AWSError, data: EC2.Types.CreateTrafficMirrorTargetResult) => void): Request<EC2.Types.CreateTrafficMirrorTargetResult, AWSError>;
   /**
@@ -9334,6 +9334,10 @@ declare namespace EC2 {
      * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to ensure idempotency.
      */
     ClientToken?: String;
+    /**
+     * The ID of the Gateway Load Balancer endpoint.
+     */
+    GatewayLoadBalancerEndpointId?: VpcEndpointId;
   }
   export interface CreateTrafficMirrorTargetResult {
     /**
@@ -31649,11 +31653,15 @@ declare namespace EC2 {
      * The tags assigned to the Traffic Mirror target.
      */
     Tags?: TagList;
+    /**
+     * The ID of the Gateway Load Balancer endpoint.
+     */
+    GatewayLoadBalancerEndpointId?: String;
   }
   export type TrafficMirrorTargetId = string;
   export type TrafficMirrorTargetIdList = TrafficMirrorTargetId[];
   export type TrafficMirrorTargetSet = TrafficMirrorTarget[];
-  export type TrafficMirrorTargetType = "network-interface"|"network-load-balancer"|string;
+  export type TrafficMirrorTargetType = "network-interface"|"network-load-balancer"|"gateway-load-balancer-endpoint"|string;
   export type TrafficMirroringMaxResults = number;
   export type TrafficType = "ACCEPT"|"REJECT"|"ALL"|string;
   export type TransitAssociationGatewayId = string;

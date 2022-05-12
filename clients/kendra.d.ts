@@ -1340,6 +1340,10 @@ declare namespace Kendra {
      * Provides the configuration information to connect to Quip as your data source.
      */
     QuipConfiguration?: QuipConfiguration;
+    /**
+     * Provides the configuration information to connect to Jira as your data source.
+     */
+    JiraConfiguration?: JiraConfiguration;
   }
   export type DataSourceDateFieldFormat = string;
   export type DataSourceFieldName = string;
@@ -1475,7 +1479,7 @@ declare namespace Kendra {
     IndexFieldName: IndexFieldName;
   }
   export type DataSourceToIndexFieldMappingList = DataSourceToIndexFieldMapping[];
-  export type DataSourceType = "S3"|"SHAREPOINT"|"DATABASE"|"SALESFORCE"|"ONEDRIVE"|"SERVICENOW"|"CUSTOM"|"CONFLUENCE"|"GOOGLEDRIVE"|"WEBCRAWLER"|"WORKDOCS"|"FSX"|"SLACK"|"BOX"|"QUIP"|string;
+  export type DataSourceType = "S3"|"SHAREPOINT"|"DATABASE"|"SALESFORCE"|"ONEDRIVE"|"SERVICENOW"|"CUSTOM"|"CONFLUENCE"|"GOOGLEDRIVE"|"WEBCRAWLER"|"WORKDOCS"|"FSX"|"SLACK"|"BOX"|"QUIP"|"JIRA"|string;
   export interface DataSourceVpcConfiguration {
     /**
      * A list of identifiers for subnets within your Amazon VPC. The subnets should be able to connect to each other in the VPC, and they should have outgoing access to the Internet through a NAT device.
@@ -2727,7 +2731,74 @@ declare namespace Kendra {
   export type InlineCustomDocumentEnrichmentConfigurationList = InlineCustomDocumentEnrichmentConfiguration[];
   export type Integer = number;
   export type Interval = "THIS_MONTH"|"THIS_WEEK"|"ONE_WEEK_AGO"|"TWO_WEEKS_AGO"|"ONE_MONTH_AGO"|"TWO_MONTHS_AGO"|string;
+  export type IssueSubEntity = "COMMENTS"|"ATTACHMENTS"|"WORKLOGS"|string;
+  export type IssueSubEntityFilter = IssueSubEntity[];
+  export type IssueType = String[];
   export type Issuer = string;
+  export type JiraAccountUrl = string;
+  export interface JiraConfiguration {
+    /**
+     * The URL of the Jira account. For example, company.attlassian.net or https://jira.company.com. You can find your Jira account URL in the URL of your profile page for Jira desktop.
+     */
+    JiraAccountUrl: JiraAccountUrl;
+    /**
+     * The Amazon Resource Name (ARN) of an Secrets Manager secret that contains the key-value pairs required to connect to your Jira data source. The secret must contain a JSON structure with the following keys:   jira-id—The Active Directory user name, along with the Domain Name System (DNS) domain name. For example, user@corp.example.com.   jiraCredentials—The password of the Jira account user.  
+     */
+    SecretArn: SecretArn;
+    /**
+     * Specify to use the change log option to update your index.
+     */
+    UseChangeLog?: Boolean;
+    /**
+     * Specify which projects to crawl in your Jira data source. You can specify one or more Jira project IDs.
+     */
+    Project?: Project;
+    /**
+     * Specify which issue types to crawl in your Jira data source. You can specify one or more of these options to crawl.
+     */
+    IssueType?: IssueType;
+    /**
+     * Specify which statuses to crawl in your Jira data source. You can specify one or more of these options to crawl.
+     */
+    Status?: JiraStatus;
+    /**
+     * Specify whether to crawl comments, attachments, and work logs. You can specify one or more of these options.
+     */
+    IssueSubEntityFilter?: IssueSubEntityFilter;
+    /**
+     * A list of DataSourceToIndexFieldMapping objects that map attributes or field names of Jira attachments to Amazon Kendra index field names. To create custom fields, use the UpdateIndex API before you map to Jira fields. For more information, see  Mapping data source fields. The Jira data source field names must exist in your Jira custom metadata.
+     */
+    AttachmentFieldMappings?: DataSourceToIndexFieldMappingList;
+    /**
+     * A list of DataSourceToIndexFieldMapping objects that map attributes or field names of Jira comments to Amazon Kendra index field names. To create custom fields, use the UpdateIndex API before you map to Jira fields. For more information, see  Mapping data source fields. The Jira data source field names must exist in your Jira custom metadata.
+     */
+    CommentFieldMappings?: DataSourceToIndexFieldMappingList;
+    /**
+     * A list of DataSourceToIndexFieldMapping objects that map attributes or field names of Jira issues to Amazon Kendra index field names. To create custom fields, use the UpdateIndex API before you map to Jira fields. For more information, see  Mapping data source fields. The Jira data source field names must exist in your Jira custom metadata.
+     */
+    IssueFieldMappings?: DataSourceToIndexFieldMappingList;
+    /**
+     * A list of DataSourceToIndexFieldMapping objects that map attributes or field names of Jira projects to Amazon Kendra index field names. To create custom fields, use the UpdateIndex API before you map to Jira fields. For more information, see  Mapping data source fields. The Jira data source field names must exist in your Jira custom metadata.
+     */
+    ProjectFieldMappings?: DataSourceToIndexFieldMappingList;
+    /**
+     * A list of DataSourceToIndexFieldMapping objects that map attributes or field names of Jira work logs to Amazon Kendra index field names. To create custom fields, use the UpdateIndex API before you map to Jira fields. For more information, see  Mapping data source fields. The Jira data source field names must exist in your Jira custom metadata.
+     */
+    WorkLogFieldMappings?: DataSourceToIndexFieldMappingList;
+    /**
+     * A list of regular expression patterns to include certain file paths, file names, and file types in your Jira data source. Files that match the patterns are included in the index. Files that don't match the patterns are excluded from the index. If a file matches both an inclusion pattern and an exclusion pattern, the exclusion pattern takes precedence and the file isn't included in the index.
+     */
+    InclusionPatterns?: DataSourceInclusionsExclusionsStrings;
+    /**
+     * A list of regular expression patterns to exclude certain file paths, file names, and file types in your Jira data source. Files that match the patterns are excluded from the index. Files that don’t match the patterns are included in the index. If a file matches both an inclusion pattern and an exclusion pattern, the exclusion pattern takes precedence and the file isn't included in the index.
+     */
+    ExclusionPatterns?: DataSourceInclusionsExclusionsStrings;
+    /**
+     * Configuration information for an Amazon Virtual Private Cloud to connect to your Jira. Your Jira account must reside inside your VPC.
+     */
+    VpcConfiguration?: DataSourceVpcConfiguration;
+  }
+  export type JiraStatus = String[];
   export interface JsonTokenTypeConfiguration {
     /**
      * The user name attribute field.
@@ -3175,6 +3246,7 @@ declare namespace Kendra {
   export type PrincipalOrderingId = number;
   export type PrincipalType = "USER"|"GROUP"|string;
   export type PrivateChannelFilter = String[];
+  export type Project = String[];
   export interface ProxyConfiguration {
     /**
      * The name of the website host you want to connect to via a web proxy server. For example, the host name of https://a.example.com/page1.html is "a.example.com".

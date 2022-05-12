@@ -155,7 +155,7 @@ declare namespace Ivschat {
      */
     maximumMessageLength?: RoomMaxMessageLength;
     /**
-     * Maximum number of messages per second that a client can send to the room. Default: 10.
+     * Maximum number of messages per second that can be sent to the room (by all clients). Default: 10. 
      */
     maximumMessageRatePerSecond?: RoomMaxMessageRatePerSecond;
     /**
@@ -189,7 +189,7 @@ declare namespace Ivschat {
      */
     maximumMessageLength?: RoomMaxMessageLength;
     /**
-     * Maximum number of messages per second that a client can send to the room, from the request.
+     * Maximum number of messages per second that can be sent to the room (by all clients), from the request.
      */
     maximumMessageRatePerSecond?: RoomMaxMessageRatePerSecond;
     /**
@@ -278,7 +278,7 @@ declare namespace Ivschat {
      */
     maximumMessageLength?: RoomMaxMessageLength;
     /**
-     * Maximum number of messages per second that a client can send to the room. Default: 10.
+     * Maximum number of messages per second that can be sent to the room (by all clients). Default: 10.
      */
     maximumMessageRatePerSecond?: RoomMaxMessageRatePerSecond;
     /**
@@ -453,7 +453,7 @@ declare namespace Ivschat {
      */
     maximumMessageLength?: RoomMaxMessageLength;
     /**
-     * The maximum number of messages per second that a client can send to the room. Default: 10.
+     * Maximum number of messages per second that can be sent to the room (by all clients). Default: 10.
      */
     maximumMessageRatePerSecond?: RoomMaxMessageRatePerSecond;
     /**
@@ -483,7 +483,7 @@ declare namespace Ivschat {
      */
     maximumMessageLength?: RoomMaxMessageLength;
     /**
-     * Maximum number of messages per second that a client can send to the room, from the request.
+     * Maximum number of messages per second that can be sent to the room (by all clients), from the request.
      */
     maximumMessageRatePerSecond?: RoomMaxMessageRatePerSecond;
     /**

@@ -165,11 +165,11 @@ declare class SSMIncidents extends Service {
    */
   listTimelineEvents(callback?: (err: AWSError, data: SSMIncidents.Types.ListTimelineEventsOutput) => void): Request<SSMIncidents.Types.ListTimelineEventsOutput, AWSError>;
   /**
-   * Adds a resource policy to the specified response plan.
+   * Adds a resource policy to the specified response plan. The resource policy is used to share the response plan using Resource Access Manager (RAM). For more information about cross-account sharing, see Setting up cross-account functionality.
    */
   putResourcePolicy(params: SSMIncidents.Types.PutResourcePolicyInput, callback?: (err: AWSError, data: SSMIncidents.Types.PutResourcePolicyOutput) => void): Request<SSMIncidents.Types.PutResourcePolicyOutput, AWSError>;
   /**
-   * Adds a resource policy to the specified response plan.
+   * Adds a resource policy to the specified response plan. The resource policy is used to share the response plan using Resource Access Manager (RAM). For more information about cross-account sharing, see Setting up cross-account functionality.
    */
   putResourcePolicy(callback?: (err: AWSError, data: SSMIncidents.Types.PutResourcePolicyOutput) => void): Request<SSMIncidents.Types.PutResourcePolicyOutput, AWSError>;
   /**
@@ -386,7 +386,7 @@ declare namespace SSMIncidents {
      */
     clientToken?: ClientToken;
     /**
-     * A short description of the event as a valid JSON string. There is no other schema imposed.
+     * A short description of the event.
      */
     eventData: EventData;
     /**
@@ -467,6 +467,14 @@ declare namespace SSMIncidents {
   }
   export interface DeleteTimelineEventOutput {
   }
+  export interface DynamicSsmParameterValue {
+    /**
+     * Variable dynamic parameters. A parameter value is determined when an incident is created.
+     */
+    variable?: VariableType;
+  }
+  export type DynamicSsmParameters = {[key: string]: DynamicSsmParameterValue};
+  export type DynamicSsmParametersKeyString = string;
   export interface EmptyChatChannel {
   }
   export type EngagementSet = SsmContactsArn[];
@@ -671,7 +679,7 @@ declare namespace SSMIncidents {
      */
     createdBy: Arn;
     /**
-     * The principal the assumed the role specified of the createdBy.
+     * The service principal that assumed the role specified in createdBy. If no service principal assumed the role this will be left blank.
      */
     invokedBy?: ServicePrincipal;
     /**
@@ -744,7 +752,7 @@ declare namespace SSMIncidents {
   export type IntegerList = Integer[];
   export interface ItemIdentifier {
     /**
-     * The type of related item. Incident Manager supports the following types:    ANALYSIS     INCIDENT     METRIC     PARENT     ATTACHMENT     OTHER   
+     * The type of related item. 
      */
     type: ItemType;
     /**
@@ -752,7 +760,7 @@ declare namespace SSMIncidents {
      */
     value: ItemValue;
   }
-  export type ItemType = "ANALYSIS"|"INCIDENT"|"METRIC"|"PARENT"|"ATTACHMENT"|"OTHER"|"AUTOMATION"|string;
+  export type ItemType = "ANALYSIS"|"INCIDENT"|"METRIC"|"PARENT"|"ATTACHMENT"|"OTHER"|"AUTOMATION"|"INVOLVED_RESOURCE"|string;
   export interface ItemValue {
     /**
      * The Amazon Resource Name (ARN) of the related item, if the related item is an Amazon resource.
@@ -1065,6 +1073,10 @@ declare namespace SSMIncidents {
      */
     documentVersion?: SsmAutomationDocumentVersionString;
     /**
+     * The key-value pair to resolve dynamic parameter values when processing a Systems Manager Automation runbook.
+     */
+    dynamicParameters?: DynamicSsmParameters;
+    /**
      * The key-value pair parameters to use when running the automation document.
      */
     parameters?: SsmParameters;
@@ -1368,6 +1380,7 @@ declare namespace SSMIncidents {
   export interface UpdateTimelineEventOutput {
   }
   export type Url = string;
+  export type VariableType = "INCIDENT_RECORD_ARN"|"INVOLVED_RESOURCES"|string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

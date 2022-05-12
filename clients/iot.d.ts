@@ -3573,7 +3573,7 @@ declare namespace Iot {
      */
     presignedUrlConfig?: PresignedUrlConfig;
     /**
-     * Specifies whether the job will continue to run (CONTINUOUS), or will be complete after all those things specified as targets have completed the job (SNAPSHOT). If continuous, the job may also be run on a thing when a change is detected in a target. For example, a job will run on a thing when the thing is added to a target group, even after the job was completed by all things originally in the group.
+     * Specifies whether the job will continue to run (CONTINUOUS), or will be complete after all those things specified as targets have completed the job (SNAPSHOT). If continuous, the job may also be run on a thing when a change is detected in a target. For example, a job will run on a thing when the thing is added to a target group, even after the job was completed by all things originally in the group.  We recommend that you use continuous jobs instead of snapshot jobs for dynamic thing group targets. By using continuous jobs, devices that join the group receive the job execution even after the job has been created. 
      */
     targetSelection?: TargetSelection;
     /**
@@ -3605,7 +3605,7 @@ declare namespace Iot {
      */
     jobExecutionsRetryConfig?: JobExecutionsRetryConfig;
     /**
-     * Parameters of a managed template that you can specify to create the job document.
+     * Parameters of an Amazon Web Services managed template that you can specify to create the job document.   documentParameters can only be used when creating jobs from Amazon Web Services managed templates. This parameter can't be used with custom job templates or to create jobs from them. 
      */
     documentParameters?: ParameterMap;
   }
@@ -4230,11 +4230,11 @@ declare namespace Iot {
      */
     certificateChain?: CodeSigningCertificateChain;
     /**
-     * The hash algorithm used to code sign the file.
+     * The hash algorithm used to code sign the file. You can use a string as the algorithm name if the target over-the-air (OTA) update devices are able to verify the signature that was generated using the same signature algorithm. For example, FreeRTOS uses SHA256 or SHA1, so you can pass either of them based on which was used for generating the signature.
      */
     hashAlgorithm?: HashAlgorithm;
     /**
-     * The signature algorithm used to code sign the file.
+     * The signature algorithm used to code sign the file. You can use a string as the algorithm name if the target over-the-air (OTA) update devices are able to verify the signature that was generated using the same signature algorithm. For example, FreeRTOS uses ECDSA or RSA, so you can pass either of them based on which was used for generating the signature.
      */
     signatureAlgorithm?: SignatureAlgorithm;
   }
@@ -5100,7 +5100,7 @@ declare namespace Iot {
      */
     environments?: Environments;
     /**
-     * A map of key-value pairs that you can use as guidance to specify the inputs for creating a job from a managed template.
+     * A map of key-value pairs that you can use as guidance to specify the inputs for creating a job from a managed template.   documentParameters can only be used when creating jobs from Amazon Web Services managed templates. This parameter can't be used with custom job templates or to create jobs from them. 
      */
     documentParameters?: DocumentParameters;
     /**
@@ -6453,7 +6453,7 @@ declare namespace Iot {
      */
     jobId?: JobId;
     /**
-     * Specifies whether the job will continue to run (CONTINUOUS), or will be complete after all those things specified as targets have completed the job (SNAPSHOT). If continuous, the job may also be run on a thing when a change is detected in a target. For example, a job will run on a device when the thing representing the device is added to a target group, even after the job was completed by all things originally in the group. 
+     * Specifies whether the job will continue to run (CONTINUOUS), or will be complete after all those things specified as targets have completed the job (SNAPSHOT). If continuous, the job may also be run on a thing when a change is detected in a target. For example, a job will run on a device when the thing representing the device is added to a target group, even after the job was completed by all things originally in the group.   We recommend that you use continuous jobs instead of snapshot jobs for dynamic thing group targets. By using continuous jobs, devices that join the group receive the job execution even after the job has been created. 
      */
     targetSelection?: TargetSelection;
     /**
@@ -6525,7 +6525,7 @@ declare namespace Iot {
      */
     jobExecutionsRetryConfig?: JobExecutionsRetryConfig;
     /**
-     * A key-value map that pairs the patterns that need to be replaced in a managed template job document schema. You can use the description of each key as a guidance to specify the inputs during runtime when creating a job.
+     * A key-value map that pairs the patterns that need to be replaced in a managed template job document schema. You can use the description of each key as a guidance to specify the inputs during runtime when creating a job.   documentParameters can only be used when creating jobs from Amazon Web Services managed templates. This parameter can't be used with custom job templates or to create jobs from them. 
      */
     documentParameters?: ParameterMap;
     isConcurrent?: BooleanWrapperObject;
@@ -6706,7 +6706,7 @@ declare namespace Iot {
      */
     thingGroupId?: ThingGroupId;
     /**
-     * Specifies whether the job will continue to run (CONTINUOUS), or will be complete after all those things specified as targets have completed the job (SNAPSHOT). If continuous, the job may also be run on a thing when a change is detected in a target. For example, a job will run on a thing when the thing is added to a target group, even after the job was completed by all things originally in the group.
+     * Specifies whether the job will continue to run (CONTINUOUS), or will be complete after all those things specified as targets have completed the job (SNAPSHOT). If continuous, the job may also be run on a thing when a change is detected in a target. For example, a job will run on a thing when the thing is added to a target group, even after the job was completed by all things originally in the group.  We recommend that you use continuous jobs instead of snapshot jobs for dynamic thing group targets. By using continuous jobs, devices that join the group receive the job execution even after the job has been created. 
      */
     targetSelection?: TargetSelection;
     /**
@@ -7445,7 +7445,7 @@ declare namespace Iot {
      */
     status?: JobStatus;
     /**
-     * Specifies whether the job will continue to run (CONTINUOUS), or will be complete after all those things specified as targets have completed the job (SNAPSHOT). If continuous, the job may also be run on a thing when a change is detected in a target. For example, a job will run on a thing when the thing is added to a target group, even after the job was completed by all things originally in the group. 
+     * Specifies whether the job will continue to run (CONTINUOUS), or will be complete after all those things specified as targets have completed the job (SNAPSHOT). If continuous, the job may also be run on a thing when a change is detected in a target. For example, a job will run on a thing when the thing is added to a target group, even after the job was completed by all things originally in the group.   We recommend that you use continuous jobs instead of snapshot jobs for dynamic thing group targets. By using continuous jobs, devices that join the group receive the job execution even after the job has been created. 
      */
     targetSelection?: TargetSelection;
     /**
