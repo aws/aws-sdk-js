@@ -20,11 +20,11 @@ declare class IotData extends Service {
    */
   deleteThingShadow(callback?: (err: AWSError, data: IotData.Types.DeleteThingShadowResponse) => void): Request<IotData.Types.DeleteThingShadowResponse, AWSError>;
   /**
-   * Gets the details of a single retained message for the specified topic. This action returns the message payload of the retained message, which can incur messaging costs. To list only the topic names of the retained messages, call ListRetainedMessages. Requires permission to access the GetRetainedMessage action. For more information about messaging costs, see IoT Core pricing - Messaging.
+   * Gets the details of a single retained message for the specified topic. This action returns the message payload of the retained message, which can incur messaging costs. To list only the topic names of the retained messages, call ListRetainedMessages. Requires permission to access the GetRetainedMessage action. For more information about messaging costs, see Amazon Web Services IoT Core pricing - Messaging.
    */
   getRetainedMessage(params: IotData.Types.GetRetainedMessageRequest, callback?: (err: AWSError, data: IotData.Types.GetRetainedMessageResponse) => void): Request<IotData.Types.GetRetainedMessageResponse, AWSError>;
   /**
-   * Gets the details of a single retained message for the specified topic. This action returns the message payload of the retained message, which can incur messaging costs. To list only the topic names of the retained messages, call ListRetainedMessages. Requires permission to access the GetRetainedMessage action. For more information about messaging costs, see IoT Core pricing - Messaging.
+   * Gets the details of a single retained message for the specified topic. This action returns the message payload of the retained message, which can incur messaging costs. To list only the topic names of the retained messages, call ListRetainedMessages. Requires permission to access the GetRetainedMessage action. For more information about messaging costs, see Amazon Web Services IoT Core pricing - Messaging.
    */
   getRetainedMessage(callback?: (err: AWSError, data: IotData.Types.GetRetainedMessageResponse) => void): Request<IotData.Types.GetRetainedMessageResponse, AWSError>;
   /**
@@ -44,19 +44,19 @@ declare class IotData extends Service {
    */
   listNamedShadowsForThing(callback?: (err: AWSError, data: IotData.Types.ListNamedShadowsForThingResponse) => void): Request<IotData.Types.ListNamedShadowsForThingResponse, AWSError>;
   /**
-   * Lists summary information about the retained messages stored for the account. This action returns only the topic names of the retained messages. It doesn't return any message payloads. Although this action doesn't return a message payload, it can still incur messaging costs. To get the message payload of a retained message, call GetRetainedMessage with the topic name of the retained message. Requires permission to access the ListRetainedMessages action. For more information about messaging costs, see IoT Core pricing - Messaging.
+   * Lists summary information about the retained messages stored for the account. This action returns only the topic names of the retained messages. It doesn't return any message payloads. Although this action doesn't return a message payload, it can still incur messaging costs. To get the message payload of a retained message, call GetRetainedMessage with the topic name of the retained message. Requires permission to access the ListRetainedMessages action. For more information about messaging costs, see Amazon Web Services IoT Core pricing - Messaging.
    */
   listRetainedMessages(params: IotData.Types.ListRetainedMessagesRequest, callback?: (err: AWSError, data: IotData.Types.ListRetainedMessagesResponse) => void): Request<IotData.Types.ListRetainedMessagesResponse, AWSError>;
   /**
-   * Lists summary information about the retained messages stored for the account. This action returns only the topic names of the retained messages. It doesn't return any message payloads. Although this action doesn't return a message payload, it can still incur messaging costs. To get the message payload of a retained message, call GetRetainedMessage with the topic name of the retained message. Requires permission to access the ListRetainedMessages action. For more information about messaging costs, see IoT Core pricing - Messaging.
+   * Lists summary information about the retained messages stored for the account. This action returns only the topic names of the retained messages. It doesn't return any message payloads. Although this action doesn't return a message payload, it can still incur messaging costs. To get the message payload of a retained message, call GetRetainedMessage with the topic name of the retained message. Requires permission to access the ListRetainedMessages action. For more information about messaging costs, see Amazon Web Services IoT Core pricing - Messaging.
    */
   listRetainedMessages(callback?: (err: AWSError, data: IotData.Types.ListRetainedMessagesResponse) => void): Request<IotData.Types.ListRetainedMessagesResponse, AWSError>;
   /**
-   * Publishes an MQTT message. Requires permission to access the Publish action. For more information about MQTT messages, see MQTT Protocol in the IoT Developer Guide. For more information about messaging costs, see IoT Core pricing - Messaging.
+   * Publishes an MQTT message. Requires permission to access the Publish action. For more information about MQTT messages, see MQTT Protocol in the IoT Developer Guide. For more information about messaging costs, see Amazon Web Services IoT Core pricing - Messaging.
    */
   publish(params: IotData.Types.PublishRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Publishes an MQTT message. Requires permission to access the Publish action. For more information about MQTT messages, see MQTT Protocol in the IoT Developer Guide. For more information about messaging costs, see IoT Core pricing - Messaging.
+   * Publishes an MQTT message. Requires permission to access the Publish action. For more information about MQTT messages, see MQTT Protocol in the IoT Developer Guide. For more information about messaging costs, see Amazon Web Services IoT Core pricing - Messaging.
    */
   publish(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -194,7 +194,7 @@ declare namespace IotData {
      */
     retain?: Retain;
     /**
-     * The message body. MQTT accepts text, binary, and empty (null) message payloads. Publishing an empty (null) payload with retain = true deletes the retained message identified by topic from IoT Core.
+     * The message body. MQTT accepts text, binary, and empty (null) message payloads. Publishing an empty (null) payload with retain = true deletes the retained message identified by topic from Amazon Web Services IoT Core.
      */
     payload?: Payload;
   }

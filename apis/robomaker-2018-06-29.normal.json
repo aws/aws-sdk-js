@@ -92,7 +92,9 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Cancels the specified deployment job.</p>"
+      "documentation": "<p>Cancels the specified deployment job.</p> <important> <p>This API will no longer be supported as of May 2, 2022. Use it to remove resources that were created for Deployment Service.</p> </important>",
+      "deprecated": true,
+      "deprecatedMessage": "Support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html."
     },
     "CancelSimulationJob": {
       "name": "CancelSimulationJob",
@@ -241,7 +243,9 @@
           "shape": "IdempotentParameterMismatchException"
         }
       ],
-      "documentation": "<p>Deploys a specific version of a robot application to robots in a fleet.</p> <p>The robot application must have a numbered <code>applicationVersion</code> for consistency reasons. To create a new version, use <code>CreateRobotApplicationVersion</code> or see <a href=\"https://docs.aws.amazon.com/robomaker/latest/dg/create-robot-application-version.html\">Creating a Robot Application Version</a>. </p> <note> <p>After 90 days, deployment jobs expire and will be deleted. They will no longer be accessible. </p> </note>"
+      "documentation": "<p>Deploys a specific version of a robot application to robots in a fleet.</p> <important> <p>This API is no longer supported and will throw an error if used.</p> </important> <p>The robot application must have a numbered <code>applicationVersion</code> for consistency reasons. To create a new version, use <code>CreateRobotApplicationVersion</code> or see <a href=\"https://docs.aws.amazon.com/robomaker/latest/dg/create-robot-application-version.html\">Creating a Robot Application Version</a>. </p> <note> <p>After 90 days, deployment jobs expire and will be deleted. They will no longer be accessible. </p> </note>",
+      "deprecated": true,
+      "deprecatedMessage": "AWS RoboMaker is unable to process this request as the support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html."
     },
     "CreateFleet": {
       "name": "CreateFleet",
@@ -269,7 +273,9 @@
           "shape": "LimitExceededException"
         }
       ],
-      "documentation": "<p>Creates a fleet, a logical group of robots running the same robot application.</p>"
+      "documentation": "<p>Creates a fleet, a logical group of robots running the same robot application.</p> <important> <p>This API is no longer supported and will throw an error if used.</p> </important>",
+      "deprecated": true,
+      "deprecatedMessage": "AWS RoboMaker is unable to process this request as the support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html."
     },
     "CreateRobot": {
       "name": "CreateRobot",
@@ -300,7 +306,9 @@
           "shape": "ResourceAlreadyExistsException"
         }
       ],
-      "documentation": "<p>Creates a robot.</p>"
+      "documentation": "<p>Creates a robot.</p> <important> <p>This API is no longer supported and will throw an error if used.</p> </important>",
+      "deprecated": true,
+      "deprecatedMessage": "AWS RoboMaker is unable to process this request as the support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html."
     },
     "CreateRobotApplication": {
       "name": "CreateRobotApplication",
@@ -597,7 +605,9 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Deletes a fleet.</p>"
+      "documentation": "<p>Deletes a fleet.</p> <important> <p>This API will no longer be supported as of May 2, 2022. Use it to remove resources that were created for Deployment Service.</p> </important>",
+      "deprecated": true,
+      "deprecatedMessage": "Support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html."
     },
     "DeleteRobot": {
       "name": "DeleteRobot",
@@ -622,7 +632,9 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Deletes a robot.</p>"
+      "documentation": "<p>Deletes a robot.</p> <important> <p>This API will no longer be supported as of May 2, 2022. Use it to remove resources that were created for Deployment Service.</p> </important>",
+      "deprecated": true,
+      "deprecatedMessage": "Support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html."
     },
     "DeleteRobotApplication": {
       "name": "DeleteRobotApplication",
@@ -728,7 +740,9 @@
           "shape": "ResourceNotFoundException"
         }
       ],
-      "documentation": "<p>Deregisters a robot.</p>"
+      "documentation": "<p>Deregisters a robot.</p> <important> <p>This API will no longer be supported as of May 2, 2022. Use it to remove resources that were created for Deployment Service.</p> </important>",
+      "deprecated": true,
+      "deprecatedMessage": "Support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html."
     },
     "DescribeDeploymentJob": {
       "name": "DescribeDeploymentJob",
@@ -756,7 +770,9 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Describes a deployment job.</p>"
+      "documentation": "<p>Describes a deployment job.</p> <important> <p>This API will no longer be supported as of May 2, 2022. Use it to remove resources that were created for Deployment Service.</p> </important>",
+      "deprecated": true,
+      "deprecatedMessage": "Support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html."
     },
     "DescribeFleet": {
       "name": "DescribeFleet",
@@ -784,7 +800,9 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Describes a fleet.</p>"
+      "documentation": "<p>Describes a fleet.</p> <important> <p>This API will no longer be supported as of May 2, 2022. Use it to remove resources that were created for Deployment Service.</p> </important>",
+      "deprecated": true,
+      "deprecatedMessage": "Support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html."
     },
     "DescribeRobot": {
       "name": "DescribeRobot",
@@ -812,7 +830,9 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Describes a robot.</p>"
+      "documentation": "<p>Describes a robot.</p> <important> <p>This API will no longer be supported as of May 2, 2022. Use it to remove resources that were created for Deployment Service.</p> </important>",
+      "deprecated": true,
+      "deprecatedMessage": "Support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html."
     },
     "DescribeRobotApplication": {
       "name": "DescribeRobotApplication",
@@ -1089,7 +1109,9 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Returns a list of deployment jobs for a fleet. You can optionally provide filters to retrieve specific deployment jobs. </p>"
+      "documentation": "<p>Returns a list of deployment jobs for a fleet. You can optionally provide filters to retrieve specific deployment jobs.</p> <important> <p>This API will no longer be supported as of May 2, 2022. Use it to remove resources that were created for Deployment Service.</p> </important>",
+      "deprecated": true,
+      "deprecatedMessage": "Support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html."
     },
     "ListFleets": {
       "name": "ListFleets",
@@ -1117,7 +1139,9 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Returns a list of fleets. You can optionally provide filters to retrieve specific fleets. </p>"
+      "documentation": "<p>Returns a list of fleets. You can optionally provide filters to retrieve specific fleets.</p> <important> <p>This API will no longer be supported as of May 2, 2022. Use it to remove resources that were created for Deployment Service.</p> </important>",
+      "deprecated": true,
+      "deprecatedMessage": "Support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html."
     },
     "ListRobotApplications": {
       "name": "ListRobotApplications",
@@ -1170,7 +1194,9 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Returns a list of robots. You can optionally provide filters to retrieve specific robots.</p>"
+      "documentation": "<p>Returns a list of robots. You can optionally provide filters to retrieve specific robots.</p> <important> <p>This API will no longer be supported as of May 2, 2022. Use it to remove resources that were created for Deployment Service.</p> </important>",
+      "deprecated": true,
+      "deprecatedMessage": "Support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html."
     },
     "ListSimulationApplications": {
       "name": "ListSimulationApplications",
@@ -1401,7 +1427,9 @@
           "shape": "ResourceNotFoundException"
         }
       ],
-      "documentation": "<p>Registers a robot with a fleet.</p>"
+      "documentation": "<p>Registers a robot with a fleet.</p> <important> <p>This API is no longer supported and will throw an error if used.</p> </important>",
+      "deprecated": true,
+      "deprecatedMessage": "AWS RoboMaker is unable to process this request as the support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html."
     },
     "RestartSimulationJob": {
       "name": "RestartSimulationJob",
@@ -1500,7 +1528,9 @@
           "shape": "IdempotentParameterMismatchException"
         }
       ],
-      "documentation": "<p>Syncrhonizes robots in a fleet to the latest deployment. This is helpful if robots were added after a deployment.</p>"
+      "documentation": "<p>Syncrhonizes robots in a fleet to the latest deployment. This is helpful if robots were added after a deployment.</p> <important> <p>This API will no longer be supported as of May 2, 2022. Use it to remove resources that were created for Deployment Service.</p> </important>",
+      "deprecated": true,
+      "deprecatedMessage": "Support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html."
     },
     "TagResource": {
       "name": "TagResource",
@@ -1751,11 +1781,15 @@
           "shape": "Arn",
           "documentation": "<p>The deployment job ARN to cancel.</p>"
         }
-      }
+      },
+      "deprecated": true,
+      "deprecatedMessage": "Support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html."
     },
     "CancelDeploymentJobResponse": {
       "type": "structure",
-      "members": {}
+      "members": {},
+      "deprecated": true,
+      "deprecatedMessage": "Support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html."
     },
     "CancelSimulationJobBatchRequest": {
       "type": "structure",
@@ -1911,7 +1945,9 @@
           "shape": "TagMap",
           "documentation": "<p>A map that contains tag keys and tag values that are attached to the deployment job.</p>"
         }
-      }
+      },
+      "deprecated": true,
+      "deprecatedMessage": "AWS RoboMaker is unable to process this request as the support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html."
     },
     "CreateDeploymentJobResponse": {
       "type": "structure",
@@ -1952,7 +1988,9 @@
           "shape": "TagMap",
           "documentation": "<p>The list of all tags added to the deployment job.</p>"
         }
-      }
+      },
+      "deprecated": true,
+      "deprecatedMessage": "AWS RoboMaker is unable to process this request as the support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html."
     },
     "CreateFleetRequest": {
       "type": "structure",
@@ -1968,7 +2006,9 @@
           "shape": "TagMap",
           "documentation": "<p>A map that contains tag keys and tag values that are attached to the fleet.</p>"
         }
-      }
+      },
+      "deprecated": true,
+      "deprecatedMessage": "AWS RoboMaker is unable to process this request as the support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html."
     },
     "CreateFleetResponse": {
       "type": "structure",
@@ -1989,7 +2029,9 @@
           "shape": "TagMap",
           "documentation": "<p>The list of all tags added to the fleet.</p>"
         }
-      }
+      },
+      "deprecated": true,
+      "deprecatedMessage": "AWS RoboMaker is unable to process this request as the support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html."
     },
     "CreateRobotApplicationRequest": {
       "type": "structure",
@@ -2146,7 +2188,9 @@
           "shape": "TagMap",
           "documentation": "<p>A map that contains tag keys and tag values that are attached to the robot.</p>"
         }
-      }
+      },
+      "deprecated": true,
+      "deprecatedMessage": "AWS RoboMaker is unable to process this request as the support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html."
     },
     "CreateRobotResponse": {
       "type": "structure",
@@ -2175,7 +2219,9 @@
           "shape": "TagMap",
           "documentation": "<p>The list of all tags added to the robot.</p>"
         }
-      }
+      },
+      "deprecated": true,
+      "deprecatedMessage": "AWS RoboMaker is unable to process this request as the support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html."
     },
     "CreateSimulationApplicationRequest": {
       "type": "structure",
@@ -2728,7 +2774,7 @@
       "member": {
         "shape": "DataSourceConfig"
       },
-      "max": 5,
+      "max": 6,
       "min": 1
     },
     "DataSourceNames": {
@@ -2761,11 +2807,15 @@
           "shape": "Arn",
           "documentation": "<p>The Amazon Resource Name (ARN) of the fleet.</p>"
         }
-      }
+      },
+      "deprecated": true,
+      "deprecatedMessage": "Support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html."
     },
     "DeleteFleetResponse": {
       "type": "structure",
-      "members": {}
+      "members": {},
+      "deprecated": true,
+      "deprecatedMessage": "Support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html."
     },
     "DeleteRobotApplicationRequest": {
       "type": "structure",
@@ -2797,11 +2847,15 @@
           "shape": "Arn",
           "documentation": "<p>The Amazon Resource Name (ARN) of the robot.</p>"
         }
-      }
+      },
+      "deprecated": true,
+      "deprecatedMessage": "Support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html."
     },
     "DeleteRobotResponse": {
       "type": "structure",
-      "members": {}
+      "members": {},
+      "deprecated": true,
+      "deprecatedMessage": "Support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html."
     },
     "DeleteSimulationApplicationRequest": {
       "type": "structure",
@@ -3032,7 +3086,9 @@
           "shape": "Arn",
           "documentation": "<p>The Amazon Resource Name (ARN) of the robot.</p>"
         }
-      }
+      },
+      "deprecated": true,
+      "deprecatedMessage": "Support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html."
     },
     "DeregisterRobotResponse": {
       "type": "structure",
@@ -3045,7 +3101,9 @@
           "shape": "Arn",
           "documentation": "<p>The Amazon Resource Name (ARN) of the robot.</p>"
         }
-      }
+      },
+      "deprecated": true,
+      "deprecatedMessage": "Support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html."
     },
     "DescribeDeploymentJobRequest": {
       "type": "structure",
@@ -3057,7 +3115,9 @@
           "shape": "Arn",
           "documentation": "<p>The Amazon Resource Name (ARN) of the deployment job.</p>"
         }
-      }
+      },
+      "deprecated": true,
+      "deprecatedMessage": "Support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html."
     },
     "DescribeDeploymentJobResponse": {
       "type": "structure",
@@ -3102,7 +3162,9 @@
           "shape": "TagMap",
           "documentation": "<p>The list of all tags added to the specified deployment job.</p>"
         }
-      }
+      },
+      "deprecated": true,
+      "deprecatedMessage": "Support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html."
     },
     "DescribeFleetRequest": {
       "type": "structure",
@@ -3114,7 +3176,9 @@
           "shape": "Arn",
           "documentation": "<p>The Amazon Resource Name (ARN) of the fleet.</p>"
         }
-      }
+      },
+      "deprecated": true,
+      "deprecatedMessage": "Support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html."
     },
     "DescribeFleetResponse": {
       "type": "structure",
@@ -3151,7 +3215,9 @@
           "shape": "TagMap",
           "documentation": "<p>The list of all tags added to the specified fleet.</p>"
         }
-      }
+      },
+      "deprecated": true,
+      "deprecatedMessage": "Support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html."
     },
     "DescribeRobotApplicationRequest": {
       "type": "structure",
@@ -3224,7 +3290,9 @@
           "shape": "Arn",
           "documentation": "<p>The Amazon Resource Name (ARN) of the robot to be described.</p>"
         }
-      }
+      },
+      "deprecated": true,
+      "deprecatedMessage": "Support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html."
     },
     "DescribeRobotResponse": {
       "type": "structure",
@@ -3269,7 +3337,9 @@
           "shape": "TagMap",
           "documentation": "<p>The list of all tags added to the specified robot.</p>"
         }
-      }
+      },
+      "deprecated": true,
+      "deprecatedMessage": "Support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html."
     },
     "DescribeSimulationApplicationRequest": {
       "type": "structure",
@@ -3733,7 +3803,7 @@
       "value": {
         "shape": "EnvironmentVariableValue"
       },
-      "max": 16,
+      "max": 20,
       "min": 0
     },
     "EnvironmentVariableValue": {
@@ -4010,7 +4080,9 @@
           "shape": "MaxResults",
           "documentation": "<p>When this parameter is used, <code>ListDeploymentJobs</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListDeploymentJobs</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 200. If this parameter is not used, then <code>ListDeploymentJobs</code> returns up to 200 results and a <code>nextToken</code> value if applicable. </p>"
         }
-      }
+      },
+      "deprecated": true,
+      "deprecatedMessage": "Support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html."
     },
     "ListDeploymentJobsResponse": {
       "type": "structure",
@@ -4023,7 +4095,9 @@
           "shape": "PaginationToken",
           "documentation": "<p>If the previous paginated request did not return all of the remaining results, the response object's <code>nextToken</code> parameter value is set to a token. To retrieve the next set of results, call <code>ListDeploymentJobs</code> again and assign that token to the request object's <code>nextToken</code> parameter. If there are no remaining results, the previous response object's NextToken parameter is set to null. </p>"
         }
-      }
+      },
+      "deprecated": true,
+      "deprecatedMessage": "Support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html."
     },
     "ListFleetsRequest": {
       "type": "structure",
@@ -4040,7 +4114,9 @@
           "shape": "Filters",
           "documentation": "<p>Optional filters to limit results.</p> <p>The filter name <code>name</code> is supported. When filtering, you must use the complete value of the filtered item. You can use up to three filters.</p>"
         }
-      }
+      },
+      "deprecated": true,
+      "deprecatedMessage": "Support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html."
     },
     "ListFleetsResponse": {
       "type": "structure",
@@ -4053,7 +4129,9 @@
           "shape": "PaginationToken",
           "documentation": "<p>If the previous paginated request did not return all of the remaining results, the response object's <code>nextToken</code> parameter value is set to a token. To retrieve the next set of results, call <code>ListFleets</code> again and assign that token to the request object's <code>nextToken</code> parameter. If there are no remaining results, the previous response object's NextToken parameter is set to null. </p>"
         }
-      }
+      },
+      "deprecated": true,
+      "deprecatedMessage": "Support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html."
     },
     "ListRobotApplicationsRequest": {
       "type": "structure",
@@ -4104,7 +4182,9 @@
           "shape": "Filters",
           "documentation": "<p>Optional filters to limit results.</p> <p>The filter names <code>status</code> and <code>fleetName</code> are supported. When filtering, you must use the complete value of the filtered item. You can use up to three filters, but they must be for the same named item. For example, if you are looking for items with the status <code>Registered</code> or the status <code>Available</code>.</p>"
         }
-      }
+      },
+      "deprecated": true,
+      "deprecatedMessage": "Support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html."
     },
     "ListRobotsResponse": {
       "type": "structure",
@@ -4117,7 +4197,9 @@
           "shape": "PaginationToken",
           "documentation": "<p>If the previous paginated request did not return all of the remaining results, the response object's <code>nextToken</code> parameter value is set to a token. To retrieve the next set of results, call <code>ListRobots</code> again and assign that token to the request object's <code>nextToken</code> parameter. If there are no remaining results, the previous response object's NextToken parameter is set to null. </p>"
         }
-      }
+      },
+      "deprecated": true,
+      "deprecatedMessage": "Support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html."
     },
     "ListSimulationApplicationsRequest": {
       "type": "structure",
@@ -4363,13 +4445,12 @@
     },
     "LoggingConfig": {
       "type": "structure",
-      "required": [
-        "recordAllRosTopics"
-      ],
       "members": {
         "recordAllRosTopics": {
           "shape": "BoxedBoolean",
-          "documentation": "<p>A boolean indicating whether to record all ROS topics.</p>"
+          "documentation": "<p>A boolean indicating whether to record all ROS topics.</p> <important> <p>This API is no longer supported and will throw an error if used.</p> </important>",
+          "deprecated": true,
+          "deprecatedMessage": "AWS RoboMaker is ending support for ROS software suite. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/software-support-policy.html."
         }
       },
       "documentation": "<p>The logging configuration.</p>"
@@ -4533,7 +4614,9 @@
           "shape": "Arn",
           "documentation": "<p>The Amazon Resource Name (ARN) of the robot.</p>"
         }
-      }
+      },
+      "deprecated": true,
+      "deprecatedMessage": "AWS RoboMaker is unable to process this request as the support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html."
     },
     "RegisterRobotResponse": {
       "type": "structure",
@@ -4546,7 +4629,9 @@
           "shape": "Arn",
           "documentation": "<p>Information about the robot registration.</p>"
         }
-      }
+      },
+      "deprecated": true,
+      "deprecatedMessage": "AWS RoboMaker is unable to process this request as the support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html."
     },
     "RenderingEngine": {
       "type": "structure",
@@ -4669,7 +4754,9 @@
         },
         "useDefaultUploadConfigurations": {
           "shape": "BoxedBoolean",
-          "documentation": "<p>A Boolean indicating whether to use default upload configurations. By default, <code>.ros</code> and <code>.gazebo</code> files are uploaded when the application terminates and all ROS topics will be recorded.</p> <p>If you set this value, you must specify an <code>outputLocation</code>. </p>"
+          "documentation": "<p>A Boolean indicating whether to use default upload configurations. By default, <code>.ros</code> and <code>.gazebo</code> files are uploaded when the application terminates and all ROS topics will be recorded.</p> <p>If you set this value, you must specify an <code>outputLocation</code>.</p> <important> <p>This API is no longer supported and will throw an error if used.</p> </important>",
+          "deprecated": true,
+          "deprecatedMessage": "AWS RoboMaker is ending support for ROS software suite. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/software-support-policy.html."
         },
         "tools": {
           "shape": "Tools",
@@ -4677,7 +4764,9 @@
         },
         "useDefaultTools": {
           "shape": "BoxedBoolean",
-          "documentation": "<p>A Boolean indicating whether to use default robot application tools. The default tools are rviz, rqt, terminal and rosbag record. The default is <code>False</code>. </p>"
+          "documentation": "<p>A Boolean indicating whether to use default robot application tools. The default tools are rviz, rqt, terminal and rosbag record. The default is <code>False</code>.</p> <important> <p>This API is no longer supported and will throw an error if used.</p> </important>",
+          "deprecated": true,
+          "deprecatedMessage": "AWS RoboMaker is ending support for ROS software suite. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/software-support-policy.html."
         }
       },
       "documentation": "<p>Application configuration information for a robot.</p>"
@@ -4947,7 +5036,9 @@
         },
         "useDefaultUploadConfigurations": {
           "shape": "BoxedBoolean",
-          "documentation": "<p>A Boolean indicating whether to use default upload configurations. By default, <code>.ros</code> and <code>.gazebo</code> files are uploaded when the application terminates and all ROS topics will be recorded.</p> <p>If you set this value, you must specify an <code>outputLocation</code>. </p>"
+          "documentation": "<p>A Boolean indicating whether to use default upload configurations. By default, <code>.ros</code> and <code>.gazebo</code> files are uploaded when the application terminates and all ROS topics will be recorded.</p> <p>If you set this value, you must specify an <code>outputLocation</code>.</p> <important> <p>This API is no longer supported and will throw an error if used.</p> </important>",
+          "deprecated": true,
+          "deprecatedMessage": "AWS RoboMaker is ending support for ROS software suite. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/software-support-policy.html."
         },
         "tools": {
           "shape": "Tools",
@@ -4955,7 +5046,9 @@
         },
         "useDefaultTools": {
           "shape": "BoxedBoolean",
-          "documentation": "<p>A Boolean indicating whether to use default simulation application tools. The default tools are rviz, rqt, terminal and rosbag record. The default is <code>False</code>. </p>"
+          "documentation": "<p>A Boolean indicating whether to use default simulation application tools. The default tools are rviz, rqt, terminal and rosbag record. The default is <code>False</code>.</p> <important> <p>This API is no longer supported and will throw an error if used.</p> </important>",
+          "deprecated": true,
+          "deprecatedMessage": "AWS RoboMaker is ending support for ROS software suite. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/software-support-policy.html."
         }
       },
       "documentation": "<p>Information about a simulation application configuration.</p>"
@@ -5505,7 +5598,9 @@
           "shape": "Arn",
           "documentation": "<p>The target fleet for the synchronization.</p>"
         }
-      }
+      },
+      "deprecated": true,
+      "deprecatedMessage": "Support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html."
     },
     "SyncDeploymentJobResponse": {
       "type": "structure",
@@ -5542,7 +5637,9 @@
           "shape": "CreatedAt",
           "documentation": "<p>The time, in milliseconds since the epoch, when the fleet was created.</p>"
         }
-      }
+      },
+      "deprecated": true,
+      "deprecatedMessage": "Support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html."
     },
     "TagKey": {
       "type": "string",
@@ -6088,6 +6185,9 @@
         "worlds": {
           "shape": "Arns",
           "documentation": "<p>A list of worlds.</p>"
+        },
+        "outputLocation": {
+          "shape": "OutputLocation"
         }
       },
       "documentation": "<p>Information about a world export job.</p>"

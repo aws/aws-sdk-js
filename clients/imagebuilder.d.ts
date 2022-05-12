@@ -20,11 +20,11 @@ declare class Imagebuilder extends Service {
    */
   cancelImageCreation(callback?: (err: AWSError, data: Imagebuilder.Types.CancelImageCreationResponse) => void): Request<Imagebuilder.Types.CancelImageCreationResponse, AWSError>;
   /**
-   * Creates a new component that can be used to build, validate, test, and assess your image.
+   * Creates a new component that can be used to build, validate, test, and assess your image. The component is based on a YAML document that you specify using exactly one of the following methods:   Inline, using the data property in the request body.   A URL that points to a YAML document file stored in Amazon S3, using the uri property in the request body.  
    */
   createComponent(params: Imagebuilder.Types.CreateComponentRequest, callback?: (err: AWSError, data: Imagebuilder.Types.CreateComponentResponse) => void): Request<Imagebuilder.Types.CreateComponentResponse, AWSError>;
   /**
-   * Creates a new component that can be used to build, validate, test, and assess your image.
+   * Creates a new component that can be used to build, validate, test, and assess your image. The component is based on a YAML document that you specify using exactly one of the following methods:   Inline, using the data property in the request body.   A URL that points to a YAML document file stored in Amazon S3, using the uri property in the request body.  
    */
   createComponent(callback?: (err: AWSError, data: Imagebuilder.Types.CreateComponentResponse) => void): Request<Imagebuilder.Types.CreateComponentResponse, AWSError>;
   /**
@@ -228,6 +228,14 @@ declare class Imagebuilder extends Service {
    */
   importComponent(callback?: (err: AWSError, data: Imagebuilder.Types.ImportComponentResponse) => void): Request<Imagebuilder.Types.ImportComponentResponse, AWSError>;
   /**
+   * When you export your virtual machine (VM) from its virtualization environment, that process creates a set of one or more disk container files that act as snapshots of your VM’s environment, settings, and data. The Amazon EC2 API ImportImage action uses those files to import your VM and create an AMI. To import using the CLI command, see import-image  You can reference the task ID from the VM import to pull in the AMI that the import created as the base image for your Image Builder recipe.
+   */
+  importVmImage(params: Imagebuilder.Types.ImportVmImageRequest, callback?: (err: AWSError, data: Imagebuilder.Types.ImportVmImageResponse) => void): Request<Imagebuilder.Types.ImportVmImageResponse, AWSError>;
+  /**
+   * When you export your virtual machine (VM) from its virtualization environment, that process creates a set of one or more disk container files that act as snapshots of your VM’s environment, settings, and data. The Amazon EC2 API ImportImage action uses those files to import your VM and create an AMI. To import using the CLI command, see import-image  You can reference the task ID from the VM import to pull in the AMI that the import created as the base image for your Image Builder recipe.
+   */
+  importVmImage(callback?: (err: AWSError, data: Imagebuilder.Types.ImportVmImageResponse) => void): Request<Imagebuilder.Types.ImportVmImageResponse, AWSError>;
+  /**
    *  Returns the list of component build versions for the specified semantic version.  The semantic version has four nodes: &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can assign values for the first three, and can filter on all of them.  Filtering: With semantic versioning, you have the flexibility to use wildcards (x) to specify the most recent versions or nodes when selecting the base image or components for your recipe. When you use a wildcard in any node, all nodes to the right of the first wildcard must also be wildcards. 
    */
   listComponentBuildVersions(params: Imagebuilder.Types.ListComponentBuildVersionsRequest, callback?: (err: AWSError, data: Imagebuilder.Types.ListComponentBuildVersionsResponse) => void): Request<Imagebuilder.Types.ListComponentBuildVersionsResponse, AWSError>;
@@ -332,11 +340,11 @@ declare class Imagebuilder extends Service {
    */
   putComponentPolicy(callback?: (err: AWSError, data: Imagebuilder.Types.PutComponentPolicyResponse) => void): Request<Imagebuilder.Types.PutComponentPolicyResponse, AWSError>;
   /**
-   * Applies a policy to a container image. We recommend that you call the RAM API CreateResourceShare (https://docs.aws.amazon.com/ram/latest/APIReference/API_CreateResourceShare.html) to share resources. If you call the Image Builder API PutContainerImagePolicy, you must also call the RAM API PromoteResourceShareCreatedFromPolicy (https://docs.aws.amazon.com/ram/latest/APIReference/API_PromoteResourceShareCreatedFromPolicy.html) in order for the resource to be visible to all principals with whom the resource is shared.
+   * Applies a policy to a container image. We recommend that you call the RAM API CreateResourceShare (https://docs.aws.amazon.com//ram/latest/APIReference/API_CreateResourceShare.html) to share resources. If you call the Image Builder API PutContainerImagePolicy, you must also call the RAM API PromoteResourceShareCreatedFromPolicy (https://docs.aws.amazon.com//ram/latest/APIReference/API_PromoteResourceShareCreatedFromPolicy.html) in order for the resource to be visible to all principals with whom the resource is shared.
    */
   putContainerRecipePolicy(params: Imagebuilder.Types.PutContainerRecipePolicyRequest, callback?: (err: AWSError, data: Imagebuilder.Types.PutContainerRecipePolicyResponse) => void): Request<Imagebuilder.Types.PutContainerRecipePolicyResponse, AWSError>;
   /**
-   * Applies a policy to a container image. We recommend that you call the RAM API CreateResourceShare (https://docs.aws.amazon.com/ram/latest/APIReference/API_CreateResourceShare.html) to share resources. If you call the Image Builder API PutContainerImagePolicy, you must also call the RAM API PromoteResourceShareCreatedFromPolicy (https://docs.aws.amazon.com/ram/latest/APIReference/API_PromoteResourceShareCreatedFromPolicy.html) in order for the resource to be visible to all principals with whom the resource is shared.
+   * Applies a policy to a container image. We recommend that you call the RAM API CreateResourceShare (https://docs.aws.amazon.com//ram/latest/APIReference/API_CreateResourceShare.html) to share resources. If you call the Image Builder API PutContainerImagePolicy, you must also call the RAM API PromoteResourceShareCreatedFromPolicy (https://docs.aws.amazon.com//ram/latest/APIReference/API_PromoteResourceShareCreatedFromPolicy.html) in order for the resource to be visible to all principals with whom the resource is shared.
    */
   putContainerRecipePolicy(callback?: (err: AWSError, data: Imagebuilder.Types.PutContainerRecipePolicyResponse) => void): Request<Imagebuilder.Types.PutContainerRecipePolicyResponse, AWSError>;
   /**
@@ -413,7 +421,7 @@ declare namespace Imagebuilder {
      */
     systemsManagerAgent?: SystemsManagerAgent;
     /**
-     * Use this property to provide commands or a command script to run when you launch your build instance.  The userDataOverride property replaces any commands that Image Builder might have added to ensure that Systems Manager is installed on your Linux build instance. If you override the user data, make sure that you add commands to install Systems Manager, if it is not pre-installed on your base image. 
+     * Use this property to provide commands or a command script to run when you launch your build instance. The userDataOverride property replaces any commands that Image Builder might have added to ensure that Systems Manager is installed on your Linux build instance. If you override the user data, make sure that you add commands to install Systems Manager, if it is not pre-installed on your base image.  The user data is always base 64 encoded. For example, the following commands are encoded as IyEvYmluL2Jhc2gKbWtkaXIgLXAgL3Zhci9iYi8KdG91Y2ggL3Zhci$:  #!/bin/bash  mkdir -p /var/bb/ touch /var 
      */
     userDataOverride?: UserDataOverride;
   }
@@ -446,7 +454,7 @@ declare namespace Imagebuilder {
      */
     name?: AmiNameString;
     /**
-     * The description of the distribution configuration. Minimum and maximum length are in characters.
+     * The description of the AMI distribution configuration. Minimum and maximum length are in characters.
      */
     description?: NonEmptyString;
     /**
@@ -470,13 +478,14 @@ declare namespace Imagebuilder {
   export type AmiNameString = string;
   export type Arn = string;
   export type Boolean = boolean;
+  export type BuildType = "USER_INITIATED"|"SCHEDULED"|"IMPORT"|string;
   export interface CancelImageCreationRequest {
     /**
      * The Amazon Resource Name (ARN) of the image whose creation you want to cancel.
      */
     imageBuildVersionArn: ImageBuildVersionArn;
     /**
-     * The idempotency token used to make this request idempotent.
+     * Unique, case-sensitive identifier you provide to ensure idempotency of the request. For more information, see Ensuring idempotency in the Amazon EC2 API Reference.
      */
     clientToken: ClientToken;
   }
@@ -486,7 +495,7 @@ declare namespace Imagebuilder {
      */
     requestId?: NonEmptyString;
     /**
-     * The idempotency token used to make this request idempotent.
+     * The idempotency token that was used for this request.
      */
     clientToken?: ClientToken;
     /**
@@ -541,7 +550,7 @@ declare namespace Imagebuilder {
      */
     owner?: NonEmptyString;
     /**
-     * The data of the component.
+     * Component data contains the YAML document content for the component.
      */
     data?: ComponentData;
     /**
@@ -873,11 +882,11 @@ declare namespace Imagebuilder {
      */
     supportedOsVersions?: OsVersionList;
     /**
-     * The data of the component. Used to specify the data inline. Either data or uri can be used to specify the data within the component.
+     * Component data contains inline YAML document content for the component. Alternatively, you can specify the uri of a YAML document file stored in Amazon S3. However, you cannot specify both properties.
      */
     data?: InlineComponentData;
     /**
-     * The uri of the component. Must be an Amazon S3 URL and the requester must have permission to access the Amazon S3 bucket. If you use Amazon S3, you can specify component content up to your service quota. Either data or uri can be used to specify the data within the component.
+     * The uri of a YAML component document file. This must be an S3 URL (s3://bucket/key), and the requester must have permission to access the S3 bucket it points to. If you use Amazon S3, you can specify component content up to your service quota. Alternatively, you can specify the YAML document inline, using the component data property. You cannot specify both properties.
      */
     uri?: Uri;
     /**
@@ -1229,7 +1238,7 @@ declare namespace Imagebuilder {
      */
     terminateInstanceOnFailure?: NullableBoolean;
     /**
-     * The SNS topic on which to send image build events.
+     * The Amazon Resource Name (ARN) for the SNS topic to which we send image build event notifications.  EC2 Image Builder is unable to send notifications to SNS topics that are encrypted using keys from other accounts. The key that is used to encrypt the SNS topic must reside in the account that the Image Builder service runs under. 
      */
     snsTopicArn?: SnsTopicArn;
     /**
@@ -1376,6 +1385,7 @@ declare namespace Imagebuilder {
      */
     infrastructureConfigurationArn?: InfrastructureConfigurationArn;
   }
+  export type DiskImageFormat = "VMDK"|"RAW"|"VHD"|string;
   export interface Distribution {
     /**
      * The target Region.
@@ -1397,6 +1407,14 @@ declare namespace Imagebuilder {
      * A group of launchTemplateConfiguration settings that apply to image distribution for specified accounts.
      */
     launchTemplateConfigurations?: LaunchTemplateConfigurationList;
+    /**
+     * Configure export settings to deliver disk images created from your image build, using a file format that is compatible with your VMs in that Region.
+     */
+    s3ExportConfiguration?: S3ExportConfiguration;
+    /**
+     * The Windows faster-launching configurations to use for AMI distribution.
+     */
+    fastLaunchConfigurations?: FastLaunchConfigurationList;
   }
   export interface DistributionConfiguration {
     /**
@@ -1506,6 +1524,49 @@ declare namespace Imagebuilder {
   export type EbsVolumeThroughput = number;
   export type EbsVolumeType = "standard"|"io1"|"io2"|"gp2"|"gp3"|"sc1"|"st1"|string;
   export type EmptyString = string;
+  export interface FastLaunchConfiguration {
+    /**
+     * A Boolean that represents the current state of faster launching for the Windows AMI. Set to true to start using Windows faster launching, or false to stop using it.
+     */
+    enabled: Boolean;
+    /**
+     * Configuration settings for managing the number of snapshots that are created from pre-provisioned instances for the Windows AMI when faster launching is enabled.
+     */
+    snapshotConfiguration?: FastLaunchSnapshotConfiguration;
+    /**
+     * The maximum number of parallel instances that are launched for creating resources.
+     */
+    maxParallelLaunches?: MaxParallelLaunches;
+    /**
+     * The launch template that the fast-launch enabled Windows AMI uses when it launches Windows instances to create pre-provisioned snapshots.
+     */
+    launchTemplate?: FastLaunchLaunchTemplateSpecification;
+    /**
+     * The owner account ID for the fast-launch enabled Windows AMI.
+     */
+    accountId?: AccountId;
+  }
+  export type FastLaunchConfigurationList = FastLaunchConfiguration[];
+  export interface FastLaunchLaunchTemplateSpecification {
+    /**
+     * The ID of the launch template to use for faster launching for a Windows AMI.
+     */
+    launchTemplateId?: LaunchTemplateId;
+    /**
+     * The name of the launch template to use for faster launching for a Windows AMI.
+     */
+    launchTemplateName?: NonEmptyString;
+    /**
+     * The version of the launch template to use for faster launching for a Windows AMI.
+     */
+    launchTemplateVersion?: NonEmptyString;
+  }
+  export interface FastLaunchSnapshotConfiguration {
+    /**
+     * The number of pre-provisioned snapshots to keep on hand for a fast-launch enabled Windows AMI.
+     */
+    targetResourceCount?: TargetResourceCount;
+  }
   export interface Filter {
     /**
      * The name of the filter. Filter names are case-sensitive.
@@ -1771,6 +1832,10 @@ declare namespace Imagebuilder {
      * The tags of the image.
      */
     tags?: TagMap;
+    /**
+     * Indicates the type of build that created this image. The build can be initiated in the following ways:    USER_INITIATED – A manual pipeline build request.    SCHEDULED – A pipeline build initiated by a cron expression in the Image Builder pipeline, or from EventBridge.    IMPORT – A VM import created the image to use as the base image for the recipe.  
+     */
+    buildType?: BuildType;
   }
   export type ImageBuildVersionArn = string;
   export type ImageBuilderArn = string;
@@ -2003,11 +2068,15 @@ declare namespace Imagebuilder {
      * The tags of the image.
      */
     tags?: TagMap;
+    /**
+     * Indicates the type of build that created this image. The build can be initiated in the following ways:    USER_INITIATED – A manual pipeline build request.    SCHEDULED – A pipeline build initiated by a cron expression in the Image Builder pipeline, or from EventBridge.    IMPORT – A VM import created the image to use as the base image for the recipe.  
+     */
+    buildType?: BuildType;
   }
   export type ImageSummaryList = ImageSummary[];
   export interface ImageTestsConfiguration {
     /**
-     * Defines if tests should be executed when building this image.
+     * Determines if tests should run after building the image. Image Builder defaults to enable tests to run following the image build, before image distribution.
      */
     imageTestsEnabled?: NullableBoolean;
     /**
@@ -2050,6 +2119,10 @@ declare namespace Imagebuilder {
      * The date on which this specific version of the Image Builder image was created.
      */
     dateCreated?: DateTime;
+    /**
+     * Indicates the type of build that created this image. The build can be initiated in the following ways:    USER_INITIATED – A manual pipeline build request.    SCHEDULED – A pipeline build initiated by a cron expression in the Image Builder pipeline, or from EventBridge.    IMPORT – A VM import created the image to use as the base image for the recipe.  
+     */
+    buildType?: BuildType;
   }
   export type ImageVersionArn = string;
   export type ImageVersionArnOrBuildVersionArn = string;
@@ -2118,6 +2191,54 @@ declare namespace Imagebuilder {
      */
     componentBuildVersionArn?: ComponentBuildVersionArn;
   }
+  export interface ImportVmImageRequest {
+    /**
+     * The name of the base image that is created by the import process.
+     */
+    name: NonEmptyString;
+    /**
+     * The semantic version to attach to the base image that was created during the import process. This version follows the semantic version syntax.  The semantic version has four nodes: &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can assign values for the first three, and can filter on all of them.  Assignment: For the first three nodes you can assign any positive integer value, including zero, with an upper limit of 2^30-1, or 1073741823 for each node. Image Builder automatically assigns the build number to the fourth node.  Patterns: You can use any numeric pattern that adheres to the assignment requirements for the nodes that you can assign. For example, you might choose a software version pattern, such as 1.0.0, or a date, such as 2021.01.01. 
+     */
+    semanticVersion: VersionNumber;
+    /**
+     * The description for the base image that is created by the import process.
+     */
+    description?: NonEmptyString;
+    /**
+     * The operating system platform for the imported VM.
+     */
+    platform: Platform;
+    /**
+     * The operating system version for the imported VM.
+     */
+    osVersion?: OsVersion;
+    /**
+     * The importTaskId (API) or ImportTaskId (CLI) from the Amazon EC2 VM import process. Image Builder retrieves information from the import process to pull in the AMI that is created from the VM source as the base image for your recipe.
+     */
+    vmImportTaskId: NonEmptyString;
+    /**
+     * Tags that are attached to the import resources.
+     */
+    tags?: TagMap;
+    /**
+     * Unique, case-sensitive identifier you provide to ensure idempotency of the request. For more information, see Ensuring idempotency in the Amazon EC2 API Reference.
+     */
+    clientToken: ClientToken;
+  }
+  export interface ImportVmImageResponse {
+    /**
+     * The request ID that uniquely identifies this request.
+     */
+    requestId?: NonEmptyString;
+    /**
+     * The Amazon Resource Name (ARN) of the AMI that was created during the VM import process. This AMI is used as the base image for the recipe that imported the VM.
+     */
+    imageArn?: Arn;
+    /**
+     * The idempotency token that was used for this request.
+     */
+    clientToken?: ClientToken;
+  }
   export interface InfrastructureConfiguration {
     /**
      * The Amazon Resource Name (ARN) of the infrastructure configuration.
@@ -2160,7 +2281,7 @@ declare namespace Imagebuilder {
      */
     terminateInstanceOnFailure?: NullableBoolean;
     /**
-     * The SNS topic Amazon Resource Name (ARN) of the infrastructure configuration.
+     * The Amazon Resource Name (ARN) for the SNS topic to which we send image build event notifications.  EC2 Image Builder is unable to send notifications to SNS topics that are encrypted using keys from other accounts. The key that is used to encrypt the SNS topic must reside in the account that the Image Builder service runs under. 
      */
     snsTopicArn?: NonEmptyString;
     /**
@@ -2277,6 +2398,14 @@ declare namespace Imagebuilder {
      * The name of the group.
      */
     userGroups?: StringList;
+    /**
+     * The ARN for an Amazon Web Services Organization that you want to share your AMI with. For more information, see What is Organizations?.
+     */
+    organizationArns?: OrganizationArnList;
+    /**
+     * The ARN for an Organizations organizational unit (OU) that you want to share your AMI with. For more information about key concepts for Organizations, see Organizations terminology and concepts.
+     */
+    organizationalUnitArns?: OrganizationalUnitArnList;
   }
   export interface LaunchTemplateConfiguration {
     /**
@@ -2658,8 +2787,13 @@ declare namespace Imagebuilder {
      */
     s3Logs?: S3Logs;
   }
+  export type MaxParallelLaunches = number;
   export type NonEmptyString = string;
   export type NullableBoolean = boolean;
+  export type OrganizationArn = string;
+  export type OrganizationArnList = OrganizationArn[];
+  export type OrganizationalUnitArn = string;
+  export type OrganizationalUnitArnList = OrganizationalUnitArn[];
   export type OsVersion = string;
   export type OsVersionList = OsVersion[];
   export interface OutputResources {
@@ -2762,13 +2896,31 @@ declare namespace Imagebuilder {
   export type ResourcePolicyDocument = string;
   export type ResourceTagMap = {[key: string]: TagValue};
   export type RestrictedInteger = number;
+  export interface S3ExportConfiguration {
+    /**
+     * The name of the role that grants VM Import/Export permission to export images to your S3 bucket.
+     */
+    roleName: NonEmptyString;
+    /**
+     * Export the updated image to one of the following supported disk image formats:    Virtual Hard Disk (VHD) – Compatible with Citrix Xen and Microsoft Hyper-V virtualization products.    Stream-optimized ESX Virtual Machine Disk (VMDK) – Compatible with VMware ESX and VMware vSphere versions 4, 5, and 6.    Raw – Raw format.  
+     */
+    diskImageFormat: DiskImageFormat;
+    /**
+     * The S3 bucket in which to store the output disk images for your VM.
+     */
+    s3Bucket: NonEmptyString;
+    /**
+     * The Amazon S3 path for the bucket where the output disk images for your VM are stored.
+     */
+    s3Prefix?: NonEmptyString;
+  }
   export interface S3Logs {
     /**
-     * The Amazon S3 bucket in which to store the logs.
+     * The S3 bucket in which to store the logs.
      */
     s3BucketName?: NonEmptyString;
     /**
-     * The Amazon S3 path in which to store the logs.
+     * The Amazon S3 path to the bucket where the logs are stored.
      */
     s3KeyPrefix?: NonEmptyString;
   }
@@ -2845,6 +2997,7 @@ declare namespace Imagebuilder {
      */
     repositoryName: NonEmptyString;
   }
+  export type TargetResourceCount = number;
   export type Timezone = string;
   export interface UntagResourceRequest {
     /**
@@ -2988,7 +3141,7 @@ declare namespace Imagebuilder {
      */
     terminateInstanceOnFailure?: NullableBoolean;
     /**
-     * The SNS topic on which to send image build events.
+     * The Amazon Resource Name (ARN) for the SNS topic to which we send image build event notifications.  EC2 Image Builder is unable to send notifications to SNS topics that are encrypted using keys from other accounts. The key that is used to encrypt the SNS topic must reside in the account that the Image Builder service runs under. 
      */
     snsTopicArn?: SnsTopicArn;
     /**

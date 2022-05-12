@@ -68,6 +68,14 @@ declare class Glue extends Service {
    */
   batchGetCrawlers(callback?: (err: AWSError, data: Glue.Types.BatchGetCrawlersResponse) => void): Request<Glue.Types.BatchGetCrawlersResponse, AWSError>;
   /**
+   * Retrieves the details for the custom patterns specified by a list of names.
+   */
+  batchGetCustomEntityTypes(params: Glue.Types.BatchGetCustomEntityTypesRequest, callback?: (err: AWSError, data: Glue.Types.BatchGetCustomEntityTypesResponse) => void): Request<Glue.Types.BatchGetCustomEntityTypesResponse, AWSError>;
+  /**
+   * Retrieves the details for the custom patterns specified by a list of names.
+   */
+  batchGetCustomEntityTypes(callback?: (err: AWSError, data: Glue.Types.BatchGetCustomEntityTypesResponse) => void): Request<Glue.Types.BatchGetCustomEntityTypesResponse, AWSError>;
+  /**
    * Returns a list of resource metadata for a given list of development endpoint names. After calling the ListDevEndpoints operation, you can call this operation to access the data to which you have been granted permissions. This operation supports all IAM permissions, including permission conditions that uses tags.
    */
   batchGetDevEndpoints(params: Glue.Types.BatchGetDevEndpointsRequest, callback?: (err: AWSError, data: Glue.Types.BatchGetDevEndpointsResponse) => void): Request<Glue.Types.BatchGetDevEndpointsResponse, AWSError>;
@@ -132,6 +140,14 @@ declare class Glue extends Service {
    */
   cancelMLTaskRun(callback?: (err: AWSError, data: Glue.Types.CancelMLTaskRunResponse) => void): Request<Glue.Types.CancelMLTaskRunResponse, AWSError>;
   /**
+   * Cancels the statement..
+   */
+  cancelStatement(params: Glue.Types.CancelStatementRequest, callback?: (err: AWSError, data: Glue.Types.CancelStatementResponse) => void): Request<Glue.Types.CancelStatementResponse, AWSError>;
+  /**
+   * Cancels the statement..
+   */
+  cancelStatement(callback?: (err: AWSError, data: Glue.Types.CancelStatementResponse) => void): Request<Glue.Types.CancelStatementResponse, AWSError>;
+  /**
    * Validates the supplied schema. This call has no side effects, it simply validates using the supplied schema using DataFormat as the format. Since it does not take a schema set name, no compatibility checks are performed.
    */
   checkSchemaVersionValidity(params: Glue.Types.CheckSchemaVersionValidityInput, callback?: (err: AWSError, data: Glue.Types.CheckSchemaVersionValidityResponse) => void): Request<Glue.Types.CheckSchemaVersionValidityResponse, AWSError>;
@@ -171,6 +187,14 @@ declare class Glue extends Service {
    * Creates a new crawler with specified targets, role, configuration, and optional schedule. At least one crawl target must be specified, in the s3Targets field, the jdbcTargets field, or the DynamoDBTargets field.
    */
   createCrawler(callback?: (err: AWSError, data: Glue.Types.CreateCrawlerResponse) => void): Request<Glue.Types.CreateCrawlerResponse, AWSError>;
+  /**
+   * Creates a custom pattern that is used to detect sensitive data across the columns and rows of your structured data. Each custom pattern you create specifies a regular expression and an optional list of context words. If no context words are passed only a regular expression is checked.
+   */
+  createCustomEntityType(params: Glue.Types.CreateCustomEntityTypeRequest, callback?: (err: AWSError, data: Glue.Types.CreateCustomEntityTypeResponse) => void): Request<Glue.Types.CreateCustomEntityTypeResponse, AWSError>;
+  /**
+   * Creates a custom pattern that is used to detect sensitive data across the columns and rows of your structured data. Each custom pattern you create specifies a regular expression and an optional list of context words. If no context words are passed only a regular expression is checked.
+   */
+  createCustomEntityType(callback?: (err: AWSError, data: Glue.Types.CreateCustomEntityTypeResponse) => void): Request<Glue.Types.CreateCustomEntityTypeResponse, AWSError>;
   /**
    * Creates a new database in a Data Catalog.
    */
@@ -252,6 +276,14 @@ declare class Glue extends Service {
    */
   createSecurityConfiguration(callback?: (err: AWSError, data: Glue.Types.CreateSecurityConfigurationResponse) => void): Request<Glue.Types.CreateSecurityConfigurationResponse, AWSError>;
   /**
+   * Creates a new session.
+   */
+  createSession(params: Glue.Types.CreateSessionRequest, callback?: (err: AWSError, data: Glue.Types.CreateSessionResponse) => void): Request<Glue.Types.CreateSessionResponse, AWSError>;
+  /**
+   * Creates a new session.
+   */
+  createSession(callback?: (err: AWSError, data: Glue.Types.CreateSessionResponse) => void): Request<Glue.Types.CreateSessionResponse, AWSError>;
+  /**
    * Creates a new table definition in the Data Catalog.
    */
   createTable(params: Glue.Types.CreateTableRequest, callback?: (err: AWSError, data: Glue.Types.CreateTableResponse) => void): Request<Glue.Types.CreateTableResponse, AWSError>;
@@ -331,6 +363,14 @@ declare class Glue extends Service {
    * Removes a specified crawler from the Glue Data Catalog, unless the crawler state is RUNNING.
    */
   deleteCrawler(callback?: (err: AWSError, data: Glue.Types.DeleteCrawlerResponse) => void): Request<Glue.Types.DeleteCrawlerResponse, AWSError>;
+  /**
+   * Deletes a custom pattern by specifying its name.
+   */
+  deleteCustomEntityType(params: Glue.Types.DeleteCustomEntityTypeRequest, callback?: (err: AWSError, data: Glue.Types.DeleteCustomEntityTypeResponse) => void): Request<Glue.Types.DeleteCustomEntityTypeResponse, AWSError>;
+  /**
+   * Deletes a custom pattern by specifying its name.
+   */
+  deleteCustomEntityType(callback?: (err: AWSError, data: Glue.Types.DeleteCustomEntityTypeResponse) => void): Request<Glue.Types.DeleteCustomEntityTypeResponse, AWSError>;
   /**
    * Removes a specified database from a Data Catalog.  After completing this operation, you no longer have access to the tables (and all table versions and partitions that might belong to the tables) and the user-defined functions in the deleted database. Glue deletes these "orphaned" resources asynchronously in a timely manner, at the discretion of the service. To ensure the immediate deletion of all related resources, before calling DeleteDatabase, use DeleteTableVersion or BatchDeleteTableVersion, DeletePartition or BatchDeletePartition, DeleteUserDefinedFunction, and DeleteTable or BatchDeleteTable, to delete any resources that belong to the database. 
    */
@@ -419,6 +459,14 @@ declare class Glue extends Service {
    * Deletes a specified security configuration.
    */
   deleteSecurityConfiguration(callback?: (err: AWSError, data: Glue.Types.DeleteSecurityConfigurationResponse) => void): Request<Glue.Types.DeleteSecurityConfigurationResponse, AWSError>;
+  /**
+   * Deletes the session.
+   */
+  deleteSession(params: Glue.Types.DeleteSessionRequest, callback?: (err: AWSError, data: Glue.Types.DeleteSessionResponse) => void): Request<Glue.Types.DeleteSessionResponse, AWSError>;
+  /**
+   * Deletes the session.
+   */
+  deleteSession(callback?: (err: AWSError, data: Glue.Types.DeleteSessionResponse) => void): Request<Glue.Types.DeleteSessionResponse, AWSError>;
   /**
    * Removes a table definition from the Data Catalog.  After completing this operation, you no longer have access to the table versions and partitions that belong to the deleted table. Glue deletes these "orphaned" resources asynchronously in a timely manner, at the discretion of the service. To ensure the immediate deletion of all related resources, before calling DeleteTable, use DeleteTableVersion or BatchDeleteTableVersion, and DeletePartition or BatchDeletePartition, to delete any resources that belong to the table. 
    */
@@ -563,6 +611,14 @@ declare class Glue extends Service {
    * Retrieves metadata for all crawlers defined in the customer account.
    */
   getCrawlers(callback?: (err: AWSError, data: Glue.Types.GetCrawlersResponse) => void): Request<Glue.Types.GetCrawlersResponse, AWSError>;
+  /**
+   * Retrieves the details of a custom pattern by specifying its name.
+   */
+  getCustomEntityType(params: Glue.Types.GetCustomEntityTypeRequest, callback?: (err: AWSError, data: Glue.Types.GetCustomEntityTypeResponse) => void): Request<Glue.Types.GetCustomEntityTypeResponse, AWSError>;
+  /**
+   * Retrieves the details of a custom pattern by specifying its name.
+   */
+  getCustomEntityType(callback?: (err: AWSError, data: Glue.Types.GetCustomEntityTypeResponse) => void): Request<Glue.Types.GetCustomEntityTypeResponse, AWSError>;
   /**
    * Retrieves the security configuration for a specified catalog.
    */
@@ -796,6 +852,22 @@ declare class Glue extends Service {
    */
   getSecurityConfigurations(callback?: (err: AWSError, data: Glue.Types.GetSecurityConfigurationsResponse) => void): Request<Glue.Types.GetSecurityConfigurationsResponse, AWSError>;
   /**
+   * Retrieves the session.
+   */
+  getSession(params: Glue.Types.GetSessionRequest, callback?: (err: AWSError, data: Glue.Types.GetSessionResponse) => void): Request<Glue.Types.GetSessionResponse, AWSError>;
+  /**
+   * Retrieves the session.
+   */
+  getSession(callback?: (err: AWSError, data: Glue.Types.GetSessionResponse) => void): Request<Glue.Types.GetSessionResponse, AWSError>;
+  /**
+   * Retrieves the statement.
+   */
+  getStatement(params: Glue.Types.GetStatementRequest, callback?: (err: AWSError, data: Glue.Types.GetStatementResponse) => void): Request<Glue.Types.GetStatementResponse, AWSError>;
+  /**
+   * Retrieves the statement.
+   */
+  getStatement(callback?: (err: AWSError, data: Glue.Types.GetStatementResponse) => void): Request<Glue.Types.GetStatementResponse, AWSError>;
+  /**
    * Retrieves the Table definition in a Data Catalog for a specified table.
    */
   getTable(params: Glue.Types.GetTableRequest, callback?: (err: AWSError, data: Glue.Types.GetTableResponse) => void): Request<Glue.Types.GetTableResponse, AWSError>;
@@ -851,6 +923,30 @@ declare class Glue extends Service {
    * Gets all the triggers associated with a job.
    */
   getTriggers(callback?: (err: AWSError, data: Glue.Types.GetTriggersResponse) => void): Request<Glue.Types.GetTriggersResponse, AWSError>;
+  /**
+   * 
+   */
+  getUnfilteredPartitionMetadata(params: Glue.Types.GetUnfilteredPartitionMetadataRequest, callback?: (err: AWSError, data: Glue.Types.GetUnfilteredPartitionMetadataResponse) => void): Request<Glue.Types.GetUnfilteredPartitionMetadataResponse, AWSError>;
+  /**
+   * 
+   */
+  getUnfilteredPartitionMetadata(callback?: (err: AWSError, data: Glue.Types.GetUnfilteredPartitionMetadataResponse) => void): Request<Glue.Types.GetUnfilteredPartitionMetadataResponse, AWSError>;
+  /**
+   * 
+   */
+  getUnfilteredPartitionsMetadata(params: Glue.Types.GetUnfilteredPartitionsMetadataRequest, callback?: (err: AWSError, data: Glue.Types.GetUnfilteredPartitionsMetadataResponse) => void): Request<Glue.Types.GetUnfilteredPartitionsMetadataResponse, AWSError>;
+  /**
+   * 
+   */
+  getUnfilteredPartitionsMetadata(callback?: (err: AWSError, data: Glue.Types.GetUnfilteredPartitionsMetadataResponse) => void): Request<Glue.Types.GetUnfilteredPartitionsMetadataResponse, AWSError>;
+  /**
+   * 
+   */
+  getUnfilteredTableMetadata(params: Glue.Types.GetUnfilteredTableMetadataRequest, callback?: (err: AWSError, data: Glue.Types.GetUnfilteredTableMetadataResponse) => void): Request<Glue.Types.GetUnfilteredTableMetadataResponse, AWSError>;
+  /**
+   * 
+   */
+  getUnfilteredTableMetadata(callback?: (err: AWSError, data: Glue.Types.GetUnfilteredTableMetadataResponse) => void): Request<Glue.Types.GetUnfilteredTableMetadataResponse, AWSError>;
   /**
    * Retrieves a specified function definition from the Data Catalog.
    */
@@ -924,6 +1020,14 @@ declare class Glue extends Service {
    */
   listCrawlers(callback?: (err: AWSError, data: Glue.Types.ListCrawlersResponse) => void): Request<Glue.Types.ListCrawlersResponse, AWSError>;
   /**
+   * Lists all the custom patterns that have been created.
+   */
+  listCustomEntityTypes(params: Glue.Types.ListCustomEntityTypesRequest, callback?: (err: AWSError, data: Glue.Types.ListCustomEntityTypesResponse) => void): Request<Glue.Types.ListCustomEntityTypesResponse, AWSError>;
+  /**
+   * Lists all the custom patterns that have been created.
+   */
+  listCustomEntityTypes(callback?: (err: AWSError, data: Glue.Types.ListCustomEntityTypesResponse) => void): Request<Glue.Types.ListCustomEntityTypesResponse, AWSError>;
+  /**
    * Retrieves the names of all DevEndpoint resources in this Amazon Web Services account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names. This operation takes the optional Tags field, which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag are retrieved.
    */
   listDevEndpoints(params: Glue.Types.ListDevEndpointsRequest, callback?: (err: AWSError, data: Glue.Types.ListDevEndpointsResponse) => void): Request<Glue.Types.ListDevEndpointsResponse, AWSError>;
@@ -971,6 +1075,22 @@ declare class Glue extends Service {
    * Returns a list of schemas with minimal details. Schemas in Deleting status will not be included in the results. Empty results will be returned if there are no schemas available. When the RegistryId is not provided, all the schemas across registries will be part of the API response.
    */
   listSchemas(callback?: (err: AWSError, data: Glue.Types.ListSchemasResponse) => void): Request<Glue.Types.ListSchemasResponse, AWSError>;
+  /**
+   * Retrieve a session..
+   */
+  listSessions(params: Glue.Types.ListSessionsRequest, callback?: (err: AWSError, data: Glue.Types.ListSessionsResponse) => void): Request<Glue.Types.ListSessionsResponse, AWSError>;
+  /**
+   * Retrieve a session..
+   */
+  listSessions(callback?: (err: AWSError, data: Glue.Types.ListSessionsResponse) => void): Request<Glue.Types.ListSessionsResponse, AWSError>;
+  /**
+   * Lists statements for the session.
+   */
+  listStatements(params: Glue.Types.ListStatementsRequest, callback?: (err: AWSError, data: Glue.Types.ListStatementsResponse) => void): Request<Glue.Types.ListStatementsResponse, AWSError>;
+  /**
+   * Lists statements for the session.
+   */
+  listStatements(callback?: (err: AWSError, data: Glue.Types.ListStatementsResponse) => void): Request<Glue.Types.ListStatementsResponse, AWSError>;
   /**
    * Retrieves the names of all trigger resources in this Amazon Web Services account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names. This operation takes the optional Tags field, which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag are retrieved.
    */
@@ -1059,6 +1179,14 @@ declare class Glue extends Service {
    * Restarts selected nodes of a previous partially completed workflow run and resumes the workflow run. The selected nodes and all nodes that are downstream from the selected nodes are run.
    */
   resumeWorkflowRun(callback?: (err: AWSError, data: Glue.Types.ResumeWorkflowRunResponse) => void): Request<Glue.Types.ResumeWorkflowRunResponse, AWSError>;
+  /**
+   * Executes the statement.
+   */
+  runStatement(params: Glue.Types.RunStatementRequest, callback?: (err: AWSError, data: Glue.Types.RunStatementResponse) => void): Request<Glue.Types.RunStatementResponse, AWSError>;
+  /**
+   * Executes the statement.
+   */
+  runStatement(callback?: (err: AWSError, data: Glue.Types.RunStatementResponse) => void): Request<Glue.Types.RunStatementResponse, AWSError>;
   /**
    * Searches a set of tables based on properties in the table metadata as well as on the parent database. You can search against text or filter conditions.  You can only get tables that you have access to based on the security policies defined in Lake Formation. You need at least a read-only access to the table for it to be returned. If you do not have access to all the columns in the table, these columns will not be searched against when returning the list of tables back to you. If you have access to the columns but not the data in the columns, those columns and the associated metadata for those columns will be included in the search. 
    */
@@ -1163,6 +1291,14 @@ declare class Glue extends Service {
    * Sets the schedule state of the specified crawler to NOT_SCHEDULED, but does not stop the crawler if it is already running.
    */
   stopCrawlerSchedule(callback?: (err: AWSError, data: Glue.Types.StopCrawlerScheduleResponse) => void): Request<Glue.Types.StopCrawlerScheduleResponse, AWSError>;
+  /**
+   * Stops the session.
+   */
+  stopSession(params: Glue.Types.StopSessionRequest, callback?: (err: AWSError, data: Glue.Types.StopSessionResponse) => void): Request<Glue.Types.StopSessionResponse, AWSError>;
+  /**
+   * Stops the session.
+   */
+  stopSession(callback?: (err: AWSError, data: Glue.Types.StopSessionResponse) => void): Request<Glue.Types.StopSessionResponse, AWSError>;
   /**
    * Stops a specified trigger.
    */
@@ -1341,6 +1477,7 @@ declare class Glue extends Service {
   updateWorkflow(callback?: (err: AWSError, data: Glue.Types.UpdateWorkflowResponse) => void): Request<Glue.Types.UpdateWorkflowResponse, AWSError>;
 }
 declare namespace Glue {
+  export type AccountId = string;
   export interface Action {
     /**
      * The name of a job to be run.
@@ -1370,6 +1507,22 @@ declare namespace Glue {
   export type ActionList = Action[];
   export type AdditionalPlanOptionsMap = {[key: string]: GenericString};
   export type AttemptCount = number;
+  export type AuditColumnNamesList = ColumnNameString[];
+  export interface AuditContext {
+    /**
+     * The context for the audit..
+     */
+    AdditionalAuditContext?: AuditContextString;
+    /**
+     * The requested columns for audit.
+     */
+    RequestedColumns?: AuditColumnNamesList;
+    /**
+     * All columns request for audit.
+     */
+    AllColumnsRequested?: NullableBoolean;
+  }
+  export type AuditContextString = string;
   export interface BackfillError {
     /**
      * The error code for an error that occurred when registering partition indexes for an existing table.
@@ -1466,6 +1619,10 @@ declare namespace Glue {
      * A list of the table to delete.
      */
     TablesToDelete: BatchDeleteTableNameList;
+    /**
+     * The transaction ID at which to delete the table contents.
+     */
+    TransactionId?: TransactionIdString;
   }
   export interface BatchDeleteTableResponse {
     /**
@@ -1538,6 +1695,22 @@ declare namespace Glue {
      * A list of names of crawlers that were not found.
      */
     CrawlersNotFound?: CrawlerNameList;
+  }
+  export interface BatchGetCustomEntityTypesRequest {
+    /**
+     * A list of names of the custom patterns that you want to retrieve.
+     */
+    Names: CustomEntityTypeNames;
+  }
+  export interface BatchGetCustomEntityTypesResponse {
+    /**
+     * A list of CustomEntityType objects representing the custom patterns that have been created.
+     */
+    CustomEntityTypes?: CustomEntityTypes;
+    /**
+     * A list of the names of custom patterns that were not found.
+     */
+    CustomEntityTypesNotFound?: CustomEntityTypeNames;
   }
   export interface BatchGetDevEndpointsRequest {
     /**
@@ -1889,6 +2062,22 @@ declare namespace Glue {
      */
     Status?: TaskStatusType;
   }
+  export interface CancelStatementRequest {
+    /**
+     * The Session ID of the statement to be cancelled.
+     */
+    SessionId: NameString;
+    /**
+     * The ID of the statement to be cancelled.
+     */
+    Id: IntegerValue;
+    /**
+     * The origin of the request to cancel the statement.
+     */
+    RequestOrigin?: OrchestrationNameString;
+  }
+  export interface CancelStatementResponse {
+  }
   export type CatalogEncryptionMode = "DISABLED"|"SSE-KMS"|string;
   export type CatalogEntries = CatalogEntry[];
   export interface CatalogEntry {
@@ -1927,11 +2116,15 @@ declare namespace Glue {
      * A list of the tables to be synchronized.
      */
     Tables: CatalogTablesList;
+    /**
+     * The name of the connection for an Amazon S3-backed Data Catalog table to be a target of the crawl when using a Catalog connection type paired with a NETWORK Connection type.
+     */
+    ConnectionName?: ConnectionName;
   }
   export type CatalogTargetList = CatalogTarget[];
   export interface CheckSchemaVersionValidityInput {
     /**
-     * The data format of the schema definition. Currently AVRO and JSON are supported.
+     * The data format of the schema definition. Currently AVRO, JSON and PROTOBUF are supported.
      */
     DataFormat: DataFormat;
     /**
@@ -2074,6 +2267,11 @@ declare namespace Glue {
   export type ColumnImportanceList = ColumnImportance[];
   export type ColumnList = Column[];
   export type ColumnNameString = string;
+  export interface ColumnRowFilter {
+    ColumnName?: NameString;
+    RowFilterExpression?: PredicateString;
+  }
+  export type ColumnRowFilterList = ColumnRowFilter[];
   export interface ColumnStatistics {
     /**
      * Name of column which statistics belong to.
@@ -2271,6 +2469,7 @@ declare namespace Glue {
      */
     Connections?: OrchestrationStringList;
   }
+  export type ContextWords = NameString[];
   export interface Crawl {
     /**
      * The state of the crawler.
@@ -2376,6 +2575,10 @@ declare namespace Glue {
      * The name of the SecurityConfiguration structure to be used by this crawler.
      */
     CrawlerSecurityConfiguration?: CrawlerSecurityConfiguration;
+    /**
+     * Specifies whether the crawler should use AWS Lake Formation credentials for the crawler instead of the IAM role credentials.
+     */
+    LakeFormationConfiguration?: LakeFormationConfiguration;
   }
   export type CrawlerConfiguration = string;
   export type CrawlerLineageSettings = "ENABLE"|"DISABLE"|string;
@@ -2445,6 +2648,10 @@ declare namespace Glue {
      * Specifies Glue Data Catalog targets.
      */
     CatalogTargets?: CatalogTargetList;
+    /**
+     * Specifies Delta data store targets.
+     */
+    DeltaTargets?: DeltaTargetList;
   }
   export interface CreateBlueprintRequest {
     /**
@@ -2551,6 +2758,7 @@ declare namespace Glue {
      * Specifies data lineage configuration settings for the crawler.
      */
     LineageConfiguration?: LineageConfiguration;
+    LakeFormationConfiguration?: LakeFormationConfiguration;
     /**
      * Crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler's behavior. For more information, see Configuring a Crawler.
      */
@@ -2595,6 +2803,26 @@ declare namespace Glue {
      * Enables the processing of files that contain only one column.
      */
     AllowSingleColumn?: NullableBoolean;
+  }
+  export interface CreateCustomEntityTypeRequest {
+    /**
+     * A name for the custom pattern that allows it to be retrieved or deleted later. This name must be unique per Amazon Web Services account.
+     */
+    Name: NameString;
+    /**
+     * A regular expression string that is used for detecting sensitive data in a custom pattern.
+     */
+    RegexString: NameString;
+    /**
+     * A list of context words. If none of these context words are found within the vicinity of the regular expression the data will not be detected as sensitive data. If no context words are passed only a regular expression is checked.
+     */
+    ContextWords?: ContextWords;
+  }
+  export interface CreateCustomEntityTypeResponse {
+    /**
+     * The name of the custom pattern you created.
+     */
+    Name?: NameString;
   }
   export interface CreateDatabaseRequest {
     /**
@@ -3002,7 +3230,7 @@ declare namespace Glue {
      */
     SchemaName: SchemaRegistryNameString;
     /**
-     * The data format of the schema definition. Currently AVRO and JSON are supported.
+     * The data format of the schema definition. Currently AVRO, JSON and PROTOBUF are supported.
      */
     DataFormat: DataFormat;
     /**
@@ -3044,7 +3272,7 @@ declare namespace Glue {
      */
     Description?: DescriptionString;
     /**
-     * The data format of the schema definition. Currently AVRO and JSON are supported.
+     * The data format of the schema definition. Currently AVRO, JSON and PROTOBUF are supported.
      */
     DataFormat?: DataFormat;
     /**
@@ -3124,6 +3352,74 @@ declare namespace Glue {
      */
     CreatedTimestamp?: TimestampValue;
   }
+  export interface CreateSessionRequest {
+    /**
+     * The ID of the session request. 
+     */
+    Id: NameString;
+    /**
+     * The description of the session. 
+     */
+    Description?: DescriptionString;
+    /**
+     * The IAM Role ARN 
+     */
+    Role: OrchestrationRoleArn;
+    /**
+     * The SessionCommand that runs the job. 
+     */
+    Command: SessionCommand;
+    /**
+     * The number of seconds before request times out. 
+     */
+    Timeout?: Timeout;
+    /**
+     * The number of seconds when idle before request times out. 
+     */
+    IdleTimeout?: Timeout;
+    /**
+     * A map array of key-value pairs. Max is 75 pairs. 
+     */
+    DefaultArguments?: OrchestrationArgumentsMap;
+    /**
+     * The number of connections to use for the session. 
+     */
+    Connections?: ConnectionsList;
+    /**
+     * The number of AWS Glue data processing units (DPUs) that can be allocated when the job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB memory. 
+     */
+    MaxCapacity?: NullableDouble;
+    /**
+     * The number of workers to use for the session. 
+     */
+    NumberOfWorkers?: NullableInteger;
+    /**
+     * The Worker Type. Can be one of G.1X, G.2X, Standard 
+     */
+    WorkerType?: WorkerType;
+    /**
+     * The name of the SecurityConfiguration structure to be used with the session 
+     */
+    SecurityConfiguration?: NameString;
+    /**
+     * The Glue version determines the versions of Apache Spark and Python that AWS Glue supports. The GlueVersion must be greater than 2.0. 
+     */
+    GlueVersion?: GlueVersionString;
+    /**
+     * The map of key value pairs (tags) belonging to the session.
+     */
+    Tags?: TagsMap;
+    /**
+     * The origin of the request. 
+     */
+    RequestOrigin?: OrchestrationNameString;
+  }
+  export interface CreateSessionResponse {
+    /**
+     * Returns the session object in the response.
+     */
+    Session?: Session;
+  }
   export interface CreateTableRequest {
     /**
      * The ID of the Data Catalog in which to create the Table. If none is supplied, the Amazon Web Services account ID is used by default.
@@ -3141,6 +3437,10 @@ declare namespace Glue {
      * A list of partition indexes, PartitionIndex structures, to create in the table.
      */
     PartitionIndexes?: PartitionIndexList;
+    /**
+     * The ID of the transaction.
+     */
+    TransactionId?: TransactionIdString;
   }
   export interface CreateTableResponse {
   }
@@ -3298,6 +3598,22 @@ declare namespace Glue {
   export type CsvHeader = NameString[];
   export type CsvHeaderOption = "UNKNOWN"|"PRESENT"|"ABSENT"|string;
   export type CsvQuoteSymbol = string;
+  export interface CustomEntityType {
+    /**
+     * A name for the custom pattern that allows it to be retrieved or deleted later. This name must be unique per Amazon Web Services account.
+     */
+    Name: NameString;
+    /**
+     * A regular expression string that is used for detecting sensitive data in a custom pattern.
+     */
+    RegexString: NameString;
+    /**
+     * A list of context words. If none of these context words are found within the vicinity of the regular expression the data will not be detected as sensitive data. If no context words are passed only a regular expression is checked.
+     */
+    ContextWords?: ContextWords;
+  }
+  export type CustomEntityTypeNames = NameString[];
+  export type CustomEntityTypes = CustomEntityType[];
   export type CustomPatterns = string;
   export type DagEdges = CodeGenEdge[];
   export type DagNodes = CodeGenNode[];
@@ -3311,7 +3627,7 @@ declare namespace Glue {
      */
     ConnectionPasswordEncryption?: ConnectionPasswordEncryption;
   }
-  export type DataFormat = "AVRO"|"JSON"|string;
+  export type DataFormat = "AVRO"|"JSON"|"PROTOBUF"|string;
   export interface DataLakePrincipal {
     /**
      * An identifier for the Lake Formation principal.
@@ -3523,6 +3839,18 @@ declare namespace Glue {
   }
   export interface DeleteCrawlerResponse {
   }
+  export interface DeleteCustomEntityTypeRequest {
+    /**
+     * The name of the custom pattern that you want to delete.
+     */
+    Name: NameString;
+  }
+  export interface DeleteCustomEntityTypeResponse {
+    /**
+     * The name of the custom pattern you deleted.
+     */
+    Name?: NameString;
+  }
   export interface DeleteDatabaseRequest {
     /**
      * The ID of the Data Catalog in which the database resides. If none is provided, the Amazon Web Services account ID is used by default.
@@ -3683,6 +4011,22 @@ declare namespace Glue {
   }
   export interface DeleteSecurityConfigurationResponse {
   }
+  export interface DeleteSessionRequest {
+    /**
+     * The ID of the session to be deleted.
+     */
+    Id: NameString;
+    /**
+     * The name of the origin of the delete session request.
+     */
+    RequestOrigin?: OrchestrationNameString;
+  }
+  export interface DeleteSessionResponse {
+    /**
+     * Returns the ID of the deleted session.
+     */
+    Id?: NameString;
+  }
   export interface DeleteTableRequest {
     /**
      * The ID of the Data Catalog where the table resides. If none is provided, the Amazon Web Services account ID is used by default.
@@ -3696,6 +4040,10 @@ declare namespace Glue {
      * The name of the table to be deleted. For Hive compatibility, this name is entirely lowercase.
      */
     Name: NameString;
+    /**
+     * The transaction ID at which to delete the table contents.
+     */
+    TransactionId?: TransactionIdString;
   }
   export interface DeleteTableResponse {
   }
@@ -3759,6 +4107,21 @@ declare namespace Glue {
      */
     Name?: NameString;
   }
+  export interface DeltaTarget {
+    /**
+     * A list of the Amazon S3 paths to the Delta tables.
+     */
+    DeltaTables?: PathList;
+    /**
+     * The name of the connection to use to connect to the Delta table target.
+     */
+    ConnectionName?: ConnectionName;
+    /**
+     * Specifies whether to write the manifest files to the Delta table path.
+     */
+    WriteManifest?: NullableBoolean;
+  }
+  export type DeltaTargetList = DeltaTarget[];
   export type DescriptionString = string;
   export type DescriptionStringRemovable = string;
   export interface DevEndpoint {
@@ -3895,6 +4258,7 @@ declare namespace Glue {
      */
     NumberOfDistinctValues: NonNegativeLong;
   }
+  export type DoubleValue = number;
   export interface DynamoDBTarget {
     /**
      * The name of the DynamoDB table to crawl.
@@ -4352,6 +4716,26 @@ declare namespace Glue {
      * A continuation token, if the returned list has not reached the end of those defined in this customer account.
      */
     NextToken?: Token;
+  }
+  export interface GetCustomEntityTypeRequest {
+    /**
+     * The name of the custom pattern that you want to retrieve.
+     */
+    Name: NameString;
+  }
+  export interface GetCustomEntityTypeResponse {
+    /**
+     * The name of the custom pattern that you retrieved.
+     */
+    Name?: NameString;
+    /**
+     * A regular expression string that is used for detecting sensitive data in a custom pattern.
+     */
+    RegexString?: NameString;
+    /**
+     * A list of context words if specified when you created the custom pattern. If none of these context words are found within the vicinity of the regular expression the data will not be detected as sensitive data.
+     */
+    ContextWords?: ContextWords;
   }
   export interface GetDataCatalogEncryptionSettingsRequest {
     /**
@@ -4850,6 +5234,14 @@ declare namespace Glue {
      * When true, specifies not returning the partition column schema. Useful when you are interested only in other partition attributes such as partition values or location. This approach avoids the problem of a large response by not returning duplicate data.
      */
     ExcludeColumnSchema?: BooleanNullable;
+    /**
+     * The transaction ID at which to read the partition contents.
+     */
+    TransactionId?: TransactionIdString;
+    /**
+     * The time as of when to read the partition contents. If not set, the most recent transaction commit time will be used. Cannot be specified along with TransactionId.
+     */
+    QueryAsOfTime?: Timestamp;
   }
   export interface GetPartitionsResponse {
     /**
@@ -4994,7 +5386,7 @@ declare namespace Glue {
      */
     SchemaArn?: GlueResourceArn;
     /**
-     * The data format of the schema definition. Currently only AVRO and JSON are supported.
+     * The data format of the schema definition. Currently AVRO, JSON and PROTOBUF are supported.
      */
     DataFormat?: DataFormat;
     /**
@@ -5034,7 +5426,7 @@ declare namespace Glue {
      */
     Description?: DescriptionString;
     /**
-     * The data format of the schema definition. Currently AVRO and JSON are supported.
+     * The data format of the schema definition. Currently AVRO, JSON and PROTOBUF are supported.
      */
     DataFormat?: DataFormat;
     /**
@@ -5090,7 +5482,7 @@ declare namespace Glue {
      */
     SchemaDefinition?: SchemaDefinitionString;
     /**
-     * The data format of the schema definition. Currently AVRO and JSON are supported.
+     * The data format of the schema definition. Currently AVRO, JSON and PROTOBUF are supported.
      */
     DataFormat?: DataFormat;
     /**
@@ -5166,6 +5558,42 @@ declare namespace Glue {
      */
     NextToken?: GenericString;
   }
+  export interface GetSessionRequest {
+    /**
+     * The ID of the session. 
+     */
+    Id: NameString;
+    /**
+     * The origin of the request. 
+     */
+    RequestOrigin?: OrchestrationNameString;
+  }
+  export interface GetSessionResponse {
+    /**
+     * The session object is returned in the response.
+     */
+    Session?: Session;
+  }
+  export interface GetStatementRequest {
+    /**
+     * The Session ID of the statement.
+     */
+    SessionId: NameString;
+    /**
+     * The Id of the statement.
+     */
+    Id: IntegerValue;
+    /**
+     * The origin of the request.
+     */
+    RequestOrigin?: OrchestrationNameString;
+  }
+  export interface GetStatementResponse {
+    /**
+     * Returns the statement.
+     */
+    Statement?: Statement;
+  }
   export interface GetTableRequest {
     /**
      * The ID of the Data Catalog where the table resides. If none is provided, the Amazon Web Services account ID is used by default.
@@ -5179,6 +5607,14 @@ declare namespace Glue {
      * The name of the table for which to retrieve the definition. For Hive compatibility, this name is entirely lowercase.
      */
     Name: NameString;
+    /**
+     * The transaction ID at which to read the table contents. 
+     */
+    TransactionId?: TransactionIdString;
+    /**
+     * The time as of when to read the table contents. If not set, the most recent transaction commit time will be used. Cannot be specified along with TransactionId.
+     */
+    QueryAsOfTime?: Timestamp;
   }
   export interface GetTableResponse {
     /**
@@ -5264,6 +5700,14 @@ declare namespace Glue {
      * The maximum number of tables to return in a single response.
      */
     MaxResults?: CatalogGetterPageSize;
+    /**
+     * The transaction ID at which to read the table contents.
+     */
+    TransactionId?: TransactionIdString;
+    /**
+     * The time as of when to read the table contents. If not set, the most recent transaction commit time will be used. Cannot be specified along with TransactionId.
+     */
+    QueryAsOfTime?: Timestamp;
   }
   export interface GetTablesResponse {
     /**
@@ -5322,6 +5766,47 @@ declare namespace Glue {
      * A continuation token, if not all the requested triggers have yet been returned.
      */
     NextToken?: GenericString;
+  }
+  export interface GetUnfilteredPartitionMetadataRequest {
+    CatalogId: CatalogIdString;
+    DatabaseName: NameString;
+    TableName: NameString;
+    PartitionValues: ValueStringList;
+    AuditContext?: AuditContext;
+    SupportedPermissionTypes: PermissionTypeList;
+  }
+  export interface GetUnfilteredPartitionMetadataResponse {
+    Partition?: Partition;
+    AuthorizedColumns?: NameStringList;
+    IsRegisteredWithLakeFormation?: Boolean;
+  }
+  export interface GetUnfilteredPartitionsMetadataRequest {
+    CatalogId: CatalogIdString;
+    DatabaseName: NameString;
+    TableName: NameString;
+    Expression?: PredicateString;
+    AuditContext?: AuditContext;
+    SupportedPermissionTypes: PermissionTypeList;
+    NextToken?: Token;
+    Segment?: Segment;
+    MaxResults?: PageSize;
+  }
+  export interface GetUnfilteredPartitionsMetadataResponse {
+    UnfilteredPartitions?: UnfilteredPartitionList;
+    NextToken?: Token;
+  }
+  export interface GetUnfilteredTableMetadataRequest {
+    CatalogId: CatalogIdString;
+    DatabaseName: NameString;
+    Name: NameString;
+    AuditContext?: AuditContext;
+    SupportedPermissionTypes: PermissionTypeList;
+  }
+  export interface GetUnfilteredTableMetadataResponse {
+    Table?: Table;
+    AuthorizedColumns?: NameStringList;
+    IsRegisteredWithLakeFormation?: Boolean;
+    CellFilters?: ColumnRowFilterList;
   }
   export interface GetUserDefinedFunctionRequest {
     /**
@@ -5799,6 +6284,10 @@ declare namespace Glue {
      * Glue version determines the versions of Apache Spark and Python that Glue supports. The Python version indicates the version supported for jobs of type Spark.  For more information about the available Glue versions and corresponding Spark and Python versions, see Glue version in the developer guide. Jobs that are created without specifying a Glue version default to Glue 0.9.
      */
     GlueVersion?: GlueVersionString;
+    /**
+     * This field populates only when an Auto Scaling job run completes, and represents the total time each executor ran during the lifecycle of a job run in seconds, multiplied by a DPU factor (1 for G.1X and 2 for G.2X workers). This value may be different than the executionEngineRuntime * MaxCapacity as in the case of Auto Scaling jobs, as the number of executors running at a given time may be less than the MaxCapacity. Therefore, it is possible that the value of DPUSeconds is less than executionEngineRuntime * MaxCapacity.
+     */
+    DPUSeconds?: NullableDouble;
   }
   export type JobRunList = JobRun[];
   export type JobRunState = "STARTING"|"RUNNING"|"STOPPING"|"STOPPED"|"SUCCEEDED"|"FAILED"|"TIMEOUT"|string;
@@ -5917,6 +6406,16 @@ declare namespace Glue {
      */
     OutputS3Path?: UriString;
   }
+  export interface LakeFormationConfiguration {
+    /**
+     * Specifies whether to use AWS Lake Formation credentials for the crawler instead of the IAM role credentials.
+     */
+    UseLakeFormationCredentials?: NullableBoolean;
+    /**
+     * Required for cross account crawls. For same account crawls as the target data, this can be left as null.
+     */
+    AccountId?: AccountId;
+  }
   export type Language = "PYTHON"|"SCALA"|string;
   export interface LastActiveDefinition {
     /**
@@ -6021,6 +6520,26 @@ declare namespace Glue {
      * A continuation token, if the returned list does not contain the last metric available.
      */
     NextToken?: Token;
+  }
+  export interface ListCustomEntityTypesRequest {
+    /**
+     * A paginated token to offset the results.
+     */
+    NextToken?: PaginationToken;
+    /**
+     * The maximum number of results to return.
+     */
+    MaxResults?: PageSize;
+  }
+  export interface ListCustomEntityTypesResponse {
+    /**
+     * A list of CustomEntityType objects representing custom patterns.
+     */
+    CustomEntityTypes?: CustomEntityTypes;
+    /**
+     * A pagination token, if more results are available.
+     */
+    NextToken?: PaginationToken;
   }
   export interface ListDevEndpointsRequest {
     /**
@@ -6170,6 +6689,56 @@ declare namespace Glue {
      */
     NextToken?: SchemaRegistryTokenString;
   }
+  export interface ListSessionsRequest {
+    /**
+     * The token for the next set of results, or null if there are no more result. 
+     */
+    NextToken?: OrchestrationToken;
+    /**
+     * The maximum number of results. 
+     */
+    MaxResults?: PageSize;
+    /**
+     * Tags belonging to the session. 
+     */
+    Tags?: TagsMap;
+    /**
+     * The origin of the request. 
+     */
+    RequestOrigin?: OrchestrationNameString;
+  }
+  export interface ListSessionsResponse {
+    /**
+     * Returns the Id of the session. 
+     */
+    Ids?: SessionIdList;
+    /**
+     * Returns the session object. 
+     */
+    Sessions?: SessionList;
+    /**
+     * The token for the next set of results, or null if there are no more result. 
+     */
+    NextToken?: OrchestrationToken;
+  }
+  export interface ListStatementsRequest {
+    /**
+     * The Session ID of the statements.
+     */
+    SessionId: NameString;
+    /**
+     * The origin of the request to list statements.
+     */
+    RequestOrigin?: OrchestrationNameString;
+    NextToken?: OrchestrationToken;
+  }
+  export interface ListStatementsResponse {
+    /**
+     * Returns the list of statements.
+     */
+    Statements?: StatementList;
+    NextToken?: OrchestrationToken;
+  }
   export interface ListTriggersRequest {
     /**
      * A continuation token, if this is a continuation request.
@@ -6234,6 +6803,7 @@ declare namespace Glue {
   }
   export type LocationMap = {[key: string]: ColumnValuesString};
   export type LocationString = string;
+  export type LocationStringList = LocationString[];
   export type LogGroup = string;
   export type LogStream = string;
   export type Logical = "AND"|"ANY"|string;
@@ -6257,6 +6827,7 @@ declare namespace Glue {
      */
     NumberOfDistinctValues: NonNegativeLong;
   }
+  export type LongValue = number;
   export interface MLTransform {
     /**
      * The unique transform ID that is generated for the machine learning transform. The ID is guaranteed to be unique and does not change.
@@ -6468,10 +7039,15 @@ declare namespace Glue {
   export type NullableBoolean = boolean;
   export type NullableDouble = number;
   export type NullableInteger = number;
+  export type OrchestrationArgumentsMap = {[key: string]: OrchestrationArgumentsValue};
+  export type OrchestrationArgumentsValue = string;
   export type OrchestrationIAMRoleArn = string;
   export type OrchestrationNameString = string;
+  export type OrchestrationRoleArn = string;
   export type OrchestrationS3Location = string;
+  export type OrchestrationStatementCodeString = string;
   export type OrchestrationStringList = GenericString[];
+  export type OrchestrationToken = string;
   export interface Order {
     /**
      * The name of the column.
@@ -6612,6 +7188,8 @@ declare namespace Glue {
   export type PathList = Path[];
   export type Permission = "ALL"|"SELECT"|"ALTER"|"DROP"|"DELETE"|"INSERT"|"CREATE_DATABASE"|"CREATE_TABLE"|"DATA_LOCATION_ACCESS"|string;
   export type PermissionList = Permission[];
+  export type PermissionType = "COLUMN_PERMISSION"|"CELL_FILTER_PERMISSION"|string;
+  export type PermissionTypeList = PermissionType[];
   export interface PhysicalConnectionRequirements {
     /**
      * The subnet ID used by the connection.
@@ -7008,6 +7586,26 @@ declare namespace Glue {
   export type RoleString = string;
   export type RowTag = string;
   export type RunId = string;
+  export interface RunStatementRequest {
+    /**
+     * The Session Id of the statement to be run.
+     */
+    SessionId: NameString;
+    /**
+     * The statement code to be run.
+     */
+    Code: OrchestrationStatementCodeString;
+    /**
+     * The origin of the request.
+     */
+    RequestOrigin?: OrchestrationNameString;
+  }
+  export interface RunStatementResponse {
+    /**
+     * Returns the Id of the statement that was run.
+     */
+    Id?: IntegerValue;
+  }
   export interface S3Encryption {
     /**
      * The encryption mode to use for Amazon S3 data.
@@ -7275,6 +7873,73 @@ declare namespace Glue {
      */
     Parameters?: ParametersMap;
   }
+  export interface Session {
+    /**
+     * The ID of the session.
+     */
+    Id?: NameString;
+    /**
+     * The time and date when the session was created.
+     */
+    CreatedOn?: TimestampValue;
+    /**
+     * The session status. 
+     */
+    Status?: SessionStatus;
+    /**
+     * The error message displayed during the session.
+     */
+    ErrorMessage?: DescriptionString;
+    /**
+     * The description of the session.
+     */
+    Description?: DescriptionString;
+    /**
+     * The name or Amazon Resource Name (ARN) of the IAM role associated with the Session.
+     */
+    Role?: OrchestrationRoleArn;
+    /**
+     * The command object.See SessionCommand.
+     */
+    Command?: SessionCommand;
+    /**
+     * A map array of key-value pairs. Max is 75 pairs. 
+     */
+    DefaultArguments?: OrchestrationArgumentsMap;
+    /**
+     * The number of connections used for the session.
+     */
+    Connections?: ConnectionsList;
+    /**
+     * The code execution progress of the session.
+     */
+    Progress?: DoubleValue;
+    /**
+     * The number of AWS Glue data processing units (DPUs) that can be allocated when the job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB memory. 
+     */
+    MaxCapacity?: NullableDouble;
+    /**
+     * The name of the SecurityConfiguration structure to be used with the session.
+     */
+    SecurityConfiguration?: NameString;
+    /**
+     * The Glue version determines the versions of Apache Spark and Python that AWS Glue supports. The GlueVersion must be greater than 2.0.
+     */
+    GlueVersion?: GlueVersionString;
+  }
+  export interface SessionCommand {
+    /**
+     * Specifies the name of the SessionCommand.Can be 'glueetl' or 'gluestreaming'.
+     */
+    Name?: NameString;
+    /**
+     * Specifies the Python version. The Python version indicates the version supported for jobs of type Spark.
+     */
+    PythonVersion?: PythonVersionString;
+  }
+  export type SessionIdList = NameString[];
+  export type SessionList = Session[];
+  export type SessionStatus = "PROVISIONING"|"READY"|"FAILED"|"TIMEOUT"|"STOPPING"|"STOPPED"|string;
   export interface SkewedInfo {
     /**
      * A list of names of columns that contain skewed values.
@@ -7467,6 +8132,10 @@ declare namespace Glue {
      * The name of the workflow to start.
      */
     Name: NameString;
+    /**
+     * The workflow run properties for the new workflow run.
+     */
+    RunProperties?: WorkflowRunProperties;
   }
   export interface StartWorkflowRunResponse {
     /**
@@ -7484,6 +8153,70 @@ declare namespace Glue {
      */
     BatchWindow?: NullableInteger;
   }
+  export interface Statement {
+    /**
+     * The ID of the statement.
+     */
+    Id?: IntegerValue;
+    /**
+     * The execution code of the statement.
+     */
+    Code?: GenericString;
+    /**
+     * The state while request is actioned.
+     */
+    State?: StatementState;
+    /**
+     * The output in JSON.
+     */
+    Output?: StatementOutput;
+    /**
+     * The code execution progress.
+     */
+    Progress?: DoubleValue;
+    /**
+     * The unix time and date that the job definition was started.
+     */
+    StartedOn?: LongValue;
+    /**
+     * The unix time and date that the job definition was completed.
+     */
+    CompletedOn?: LongValue;
+  }
+  export type StatementList = Statement[];
+  export interface StatementOutput {
+    /**
+     * The code execution output.
+     */
+    Data?: StatementOutputData;
+    /**
+     * The execution count of the output.
+     */
+    ExecutionCount?: IntegerValue;
+    /**
+     * The status of the code execution output.
+     */
+    Status?: StatementState;
+    /**
+     * The name of the error in the output.
+     */
+    ErrorName?: GenericString;
+    /**
+     * The error value of the output.
+     */
+    ErrorValue?: GenericString;
+    /**
+     * The traceback of the output.
+     */
+    Traceback?: OrchestrationStringList;
+  }
+  export interface StatementOutputData {
+    /**
+     * The code execution output in text format.
+     */
+    TextPlain?: GenericString;
+  }
+  export type StatementState = "WAITING"|"RUNNING"|"AVAILABLE"|"CANCELLING"|"CANCELLED"|"ERROR"|string;
   export interface StopCrawlerRequest {
     /**
      * Name of the crawler to stop.
@@ -7499,6 +8232,22 @@ declare namespace Glue {
     CrawlerName: NameString;
   }
   export interface StopCrawlerScheduleResponse {
+  }
+  export interface StopSessionRequest {
+    /**
+     * The ID of the session to be stopped.
+     */
+    Id: NameString;
+    /**
+     * The origin of the request.
+     */
+    RequestOrigin?: OrchestrationNameString;
+  }
+  export interface StopSessionResponse {
+    /**
+     * Returns the Id of the stopped session.
+     */
+    Id?: NameString;
   }
   export interface StopTriggerRequest {
     /**
@@ -7533,6 +8282,7 @@ declare namespace Glue {
      * The physical location of the table. By default, this takes the form of the warehouse location, followed by the database location in the warehouse, followed by the table name.
      */
     Location?: LocationString;
+    AdditionalLocations?: LocationStringList;
     /**
      * The input format: SequenceFileInputFormat (binary), or TextInputFormat, or a custom format.
      */
@@ -7674,6 +8424,7 @@ declare namespace Glue {
      * The ID of the Data Catalog in which the table resides.
      */
     CatalogId?: CatalogIdString;
+    VersionId?: VersionString;
   }
   export interface TableError {
     /**
@@ -7900,6 +8651,7 @@ declare namespace Glue {
   export type TimestampValue = Date;
   export type Token = string;
   export type TotalSegmentsInteger = number;
+  export type TransactionIdString = string;
   export interface TransformEncryption {
     /**
      * An MLUserDataEncryption object containing the encryption mode and customer-provided KMS key ID.
@@ -8054,6 +8806,12 @@ declare namespace Glue {
   }
   export type TypeString = string;
   export type URI = string;
+  export interface UnfilteredPartition {
+    Partition?: Partition;
+    AuthorizedColumns?: NameStringList;
+    IsRegisteredWithLakeFormation?: Boolean;
+  }
+  export type UnfilteredPartitionList = UnfilteredPartition[];
   export interface UntagResourceRequest {
     /**
      * The Amazon Resource Name (ARN) of the resource from which to remove the tags.
@@ -8221,6 +8979,7 @@ declare namespace Glue {
      * Specifies data lineage configuration settings for the crawler.
      */
     LineageConfiguration?: LineageConfiguration;
+    LakeFormationConfiguration?: LakeFormationConfiguration;
     /**
      * Crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler's behavior. For more information, see Configuring a Crawler.
      */
@@ -8515,6 +9274,11 @@ declare namespace Glue {
      * By default, UpdateTable always creates an archived version of the table before updating it. However, if skipArchive is set to true, UpdateTable does not create the archived version.
      */
     SkipArchive?: BooleanNullable;
+    /**
+     * The transaction ID at which to update the table contents. 
+     */
+    TransactionId?: TransactionIdString;
+    VersionId?: VersionString;
   }
   export interface UpdateTableResponse {
   }

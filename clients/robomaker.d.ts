@@ -28,11 +28,11 @@ declare class RoboMaker extends Service {
    */
   batchDescribeSimulationJob(callback?: (err: AWSError, data: RoboMaker.Types.BatchDescribeSimulationJobResponse) => void): Request<RoboMaker.Types.BatchDescribeSimulationJobResponse, AWSError>;
   /**
-   * Cancels the specified deployment job.
+   * Cancels the specified deployment job.  This API will no longer be supported as of May 2, 2022. Use it to remove resources that were created for Deployment Service. 
    */
   cancelDeploymentJob(params: RoboMaker.Types.CancelDeploymentJobRequest, callback?: (err: AWSError, data: RoboMaker.Types.CancelDeploymentJobResponse) => void): Request<RoboMaker.Types.CancelDeploymentJobResponse, AWSError>;
   /**
-   * Cancels the specified deployment job.
+   * Cancels the specified deployment job.  This API will no longer be supported as of May 2, 2022. Use it to remove resources that were created for Deployment Service. 
    */
   cancelDeploymentJob(callback?: (err: AWSError, data: RoboMaker.Types.CancelDeploymentJobResponse) => void): Request<RoboMaker.Types.CancelDeploymentJobResponse, AWSError>;
   /**
@@ -68,27 +68,27 @@ declare class RoboMaker extends Service {
    */
   cancelWorldGenerationJob(callback?: (err: AWSError, data: RoboMaker.Types.CancelWorldGenerationJobResponse) => void): Request<RoboMaker.Types.CancelWorldGenerationJobResponse, AWSError>;
   /**
-   * Deploys a specific version of a robot application to robots in a fleet. The robot application must have a numbered applicationVersion for consistency reasons. To create a new version, use CreateRobotApplicationVersion or see Creating a Robot Application Version.   After 90 days, deployment jobs expire and will be deleted. They will no longer be accessible.  
+   * Deploys a specific version of a robot application to robots in a fleet.  This API is no longer supported and will throw an error if used.  The robot application must have a numbered applicationVersion for consistency reasons. To create a new version, use CreateRobotApplicationVersion or see Creating a Robot Application Version.   After 90 days, deployment jobs expire and will be deleted. They will no longer be accessible.  
    */
   createDeploymentJob(params: RoboMaker.Types.CreateDeploymentJobRequest, callback?: (err: AWSError, data: RoboMaker.Types.CreateDeploymentJobResponse) => void): Request<RoboMaker.Types.CreateDeploymentJobResponse, AWSError>;
   /**
-   * Deploys a specific version of a robot application to robots in a fleet. The robot application must have a numbered applicationVersion for consistency reasons. To create a new version, use CreateRobotApplicationVersion or see Creating a Robot Application Version.   After 90 days, deployment jobs expire and will be deleted. They will no longer be accessible.  
+   * Deploys a specific version of a robot application to robots in a fleet.  This API is no longer supported and will throw an error if used.  The robot application must have a numbered applicationVersion for consistency reasons. To create a new version, use CreateRobotApplicationVersion or see Creating a Robot Application Version.   After 90 days, deployment jobs expire and will be deleted. They will no longer be accessible.  
    */
   createDeploymentJob(callback?: (err: AWSError, data: RoboMaker.Types.CreateDeploymentJobResponse) => void): Request<RoboMaker.Types.CreateDeploymentJobResponse, AWSError>;
   /**
-   * Creates a fleet, a logical group of robots running the same robot application.
+   * Creates a fleet, a logical group of robots running the same robot application.  This API is no longer supported and will throw an error if used. 
    */
   createFleet(params: RoboMaker.Types.CreateFleetRequest, callback?: (err: AWSError, data: RoboMaker.Types.CreateFleetResponse) => void): Request<RoboMaker.Types.CreateFleetResponse, AWSError>;
   /**
-   * Creates a fleet, a logical group of robots running the same robot application.
+   * Creates a fleet, a logical group of robots running the same robot application.  This API is no longer supported and will throw an error if used. 
    */
   createFleet(callback?: (err: AWSError, data: RoboMaker.Types.CreateFleetResponse) => void): Request<RoboMaker.Types.CreateFleetResponse, AWSError>;
   /**
-   * Creates a robot.
+   * Creates a robot.  This API is no longer supported and will throw an error if used. 
    */
   createRobot(params: RoboMaker.Types.CreateRobotRequest, callback?: (err: AWSError, data: RoboMaker.Types.CreateRobotResponse) => void): Request<RoboMaker.Types.CreateRobotResponse, AWSError>;
   /**
-   * Creates a robot.
+   * Creates a robot.  This API is no longer supported and will throw an error if used. 
    */
   createRobot(callback?: (err: AWSError, data: RoboMaker.Types.CreateRobotResponse) => void): Request<RoboMaker.Types.CreateRobotResponse, AWSError>;
   /**
@@ -156,19 +156,19 @@ declare class RoboMaker extends Service {
    */
   createWorldTemplate(callback?: (err: AWSError, data: RoboMaker.Types.CreateWorldTemplateResponse) => void): Request<RoboMaker.Types.CreateWorldTemplateResponse, AWSError>;
   /**
-   * Deletes a fleet.
+   * Deletes a fleet.  This API will no longer be supported as of May 2, 2022. Use it to remove resources that were created for Deployment Service. 
    */
   deleteFleet(params: RoboMaker.Types.DeleteFleetRequest, callback?: (err: AWSError, data: RoboMaker.Types.DeleteFleetResponse) => void): Request<RoboMaker.Types.DeleteFleetResponse, AWSError>;
   /**
-   * Deletes a fleet.
+   * Deletes a fleet.  This API will no longer be supported as of May 2, 2022. Use it to remove resources that were created for Deployment Service. 
    */
   deleteFleet(callback?: (err: AWSError, data: RoboMaker.Types.DeleteFleetResponse) => void): Request<RoboMaker.Types.DeleteFleetResponse, AWSError>;
   /**
-   * Deletes a robot.
+   * Deletes a robot.  This API will no longer be supported as of May 2, 2022. Use it to remove resources that were created for Deployment Service. 
    */
   deleteRobot(params: RoboMaker.Types.DeleteRobotRequest, callback?: (err: AWSError, data: RoboMaker.Types.DeleteRobotResponse) => void): Request<RoboMaker.Types.DeleteRobotResponse, AWSError>;
   /**
-   * Deletes a robot.
+   * Deletes a robot.  This API will no longer be supported as of May 2, 2022. Use it to remove resources that were created for Deployment Service. 
    */
   deleteRobot(callback?: (err: AWSError, data: RoboMaker.Types.DeleteRobotResponse) => void): Request<RoboMaker.Types.DeleteRobotResponse, AWSError>;
   /**
@@ -196,35 +196,35 @@ declare class RoboMaker extends Service {
    */
   deleteWorldTemplate(callback?: (err: AWSError, data: RoboMaker.Types.DeleteWorldTemplateResponse) => void): Request<RoboMaker.Types.DeleteWorldTemplateResponse, AWSError>;
   /**
-   * Deregisters a robot.
+   * Deregisters a robot.  This API will no longer be supported as of May 2, 2022. Use it to remove resources that were created for Deployment Service. 
    */
   deregisterRobot(params: RoboMaker.Types.DeregisterRobotRequest, callback?: (err: AWSError, data: RoboMaker.Types.DeregisterRobotResponse) => void): Request<RoboMaker.Types.DeregisterRobotResponse, AWSError>;
   /**
-   * Deregisters a robot.
+   * Deregisters a robot.  This API will no longer be supported as of May 2, 2022. Use it to remove resources that were created for Deployment Service. 
    */
   deregisterRobot(callback?: (err: AWSError, data: RoboMaker.Types.DeregisterRobotResponse) => void): Request<RoboMaker.Types.DeregisterRobotResponse, AWSError>;
   /**
-   * Describes a deployment job.
+   * Describes a deployment job.  This API will no longer be supported as of May 2, 2022. Use it to remove resources that were created for Deployment Service. 
    */
   describeDeploymentJob(params: RoboMaker.Types.DescribeDeploymentJobRequest, callback?: (err: AWSError, data: RoboMaker.Types.DescribeDeploymentJobResponse) => void): Request<RoboMaker.Types.DescribeDeploymentJobResponse, AWSError>;
   /**
-   * Describes a deployment job.
+   * Describes a deployment job.  This API will no longer be supported as of May 2, 2022. Use it to remove resources that were created for Deployment Service. 
    */
   describeDeploymentJob(callback?: (err: AWSError, data: RoboMaker.Types.DescribeDeploymentJobResponse) => void): Request<RoboMaker.Types.DescribeDeploymentJobResponse, AWSError>;
   /**
-   * Describes a fleet.
+   * Describes a fleet.  This API will no longer be supported as of May 2, 2022. Use it to remove resources that were created for Deployment Service. 
    */
   describeFleet(params: RoboMaker.Types.DescribeFleetRequest, callback?: (err: AWSError, data: RoboMaker.Types.DescribeFleetResponse) => void): Request<RoboMaker.Types.DescribeFleetResponse, AWSError>;
   /**
-   * Describes a fleet.
+   * Describes a fleet.  This API will no longer be supported as of May 2, 2022. Use it to remove resources that were created for Deployment Service. 
    */
   describeFleet(callback?: (err: AWSError, data: RoboMaker.Types.DescribeFleetResponse) => void): Request<RoboMaker.Types.DescribeFleetResponse, AWSError>;
   /**
-   * Describes a robot.
+   * Describes a robot.  This API will no longer be supported as of May 2, 2022. Use it to remove resources that were created for Deployment Service. 
    */
   describeRobot(params: RoboMaker.Types.DescribeRobotRequest, callback?: (err: AWSError, data: RoboMaker.Types.DescribeRobotResponse) => void): Request<RoboMaker.Types.DescribeRobotResponse, AWSError>;
   /**
-   * Describes a robot.
+   * Describes a robot.  This API will no longer be supported as of May 2, 2022. Use it to remove resources that were created for Deployment Service. 
    */
   describeRobot(callback?: (err: AWSError, data: RoboMaker.Types.DescribeRobotResponse) => void): Request<RoboMaker.Types.DescribeRobotResponse, AWSError>;
   /**
@@ -300,19 +300,19 @@ declare class RoboMaker extends Service {
    */
   getWorldTemplateBody(callback?: (err: AWSError, data: RoboMaker.Types.GetWorldTemplateBodyResponse) => void): Request<RoboMaker.Types.GetWorldTemplateBodyResponse, AWSError>;
   /**
-   * Returns a list of deployment jobs for a fleet. You can optionally provide filters to retrieve specific deployment jobs. 
+   * Returns a list of deployment jobs for a fleet. You can optionally provide filters to retrieve specific deployment jobs.  This API will no longer be supported as of May 2, 2022. Use it to remove resources that were created for Deployment Service. 
    */
   listDeploymentJobs(params: RoboMaker.Types.ListDeploymentJobsRequest, callback?: (err: AWSError, data: RoboMaker.Types.ListDeploymentJobsResponse) => void): Request<RoboMaker.Types.ListDeploymentJobsResponse, AWSError>;
   /**
-   * Returns a list of deployment jobs for a fleet. You can optionally provide filters to retrieve specific deployment jobs. 
+   * Returns a list of deployment jobs for a fleet. You can optionally provide filters to retrieve specific deployment jobs.  This API will no longer be supported as of May 2, 2022. Use it to remove resources that were created for Deployment Service. 
    */
   listDeploymentJobs(callback?: (err: AWSError, data: RoboMaker.Types.ListDeploymentJobsResponse) => void): Request<RoboMaker.Types.ListDeploymentJobsResponse, AWSError>;
   /**
-   * Returns a list of fleets. You can optionally provide filters to retrieve specific fleets. 
+   * Returns a list of fleets. You can optionally provide filters to retrieve specific fleets.  This API will no longer be supported as of May 2, 2022. Use it to remove resources that were created for Deployment Service. 
    */
   listFleets(params: RoboMaker.Types.ListFleetsRequest, callback?: (err: AWSError, data: RoboMaker.Types.ListFleetsResponse) => void): Request<RoboMaker.Types.ListFleetsResponse, AWSError>;
   /**
-   * Returns a list of fleets. You can optionally provide filters to retrieve specific fleets. 
+   * Returns a list of fleets. You can optionally provide filters to retrieve specific fleets.  This API will no longer be supported as of May 2, 2022. Use it to remove resources that were created for Deployment Service. 
    */
   listFleets(callback?: (err: AWSError, data: RoboMaker.Types.ListFleetsResponse) => void): Request<RoboMaker.Types.ListFleetsResponse, AWSError>;
   /**
@@ -324,11 +324,11 @@ declare class RoboMaker extends Service {
    */
   listRobotApplications(callback?: (err: AWSError, data: RoboMaker.Types.ListRobotApplicationsResponse) => void): Request<RoboMaker.Types.ListRobotApplicationsResponse, AWSError>;
   /**
-   * Returns a list of robots. You can optionally provide filters to retrieve specific robots.
+   * Returns a list of robots. You can optionally provide filters to retrieve specific robots.  This API will no longer be supported as of May 2, 2022. Use it to remove resources that were created for Deployment Service. 
    */
   listRobots(params: RoboMaker.Types.ListRobotsRequest, callback?: (err: AWSError, data: RoboMaker.Types.ListRobotsResponse) => void): Request<RoboMaker.Types.ListRobotsResponse, AWSError>;
   /**
-   * Returns a list of robots. You can optionally provide filters to retrieve specific robots.
+   * Returns a list of robots. You can optionally provide filters to retrieve specific robots.  This API will no longer be supported as of May 2, 2022. Use it to remove resources that were created for Deployment Service. 
    */
   listRobots(callback?: (err: AWSError, data: RoboMaker.Types.ListRobotsResponse) => void): Request<RoboMaker.Types.ListRobotsResponse, AWSError>;
   /**
@@ -396,11 +396,11 @@ declare class RoboMaker extends Service {
    */
   listWorlds(callback?: (err: AWSError, data: RoboMaker.Types.ListWorldsResponse) => void): Request<RoboMaker.Types.ListWorldsResponse, AWSError>;
   /**
-   * Registers a robot with a fleet.
+   * Registers a robot with a fleet.  This API is no longer supported and will throw an error if used. 
    */
   registerRobot(params: RoboMaker.Types.RegisterRobotRequest, callback?: (err: AWSError, data: RoboMaker.Types.RegisterRobotResponse) => void): Request<RoboMaker.Types.RegisterRobotResponse, AWSError>;
   /**
-   * Registers a robot with a fleet.
+   * Registers a robot with a fleet.  This API is no longer supported and will throw an error if used. 
    */
   registerRobot(callback?: (err: AWSError, data: RoboMaker.Types.RegisterRobotResponse) => void): Request<RoboMaker.Types.RegisterRobotResponse, AWSError>;
   /**
@@ -420,11 +420,11 @@ declare class RoboMaker extends Service {
    */
   startSimulationJobBatch(callback?: (err: AWSError, data: RoboMaker.Types.StartSimulationJobBatchResponse) => void): Request<RoboMaker.Types.StartSimulationJobBatchResponse, AWSError>;
   /**
-   * Syncrhonizes robots in a fleet to the latest deployment. This is helpful if robots were added after a deployment.
+   * Syncrhonizes robots in a fleet to the latest deployment. This is helpful if robots were added after a deployment.  This API will no longer be supported as of May 2, 2022. Use it to remove resources that were created for Deployment Service. 
    */
   syncDeploymentJob(params: RoboMaker.Types.SyncDeploymentJobRequest, callback?: (err: AWSError, data: RoboMaker.Types.SyncDeploymentJobResponse) => void): Request<RoboMaker.Types.SyncDeploymentJobResponse, AWSError>;
   /**
-   * Syncrhonizes robots in a fleet to the latest deployment. This is helpful if robots were added after a deployment.
+   * Syncrhonizes robots in a fleet to the latest deployment. This is helpful if robots were added after a deployment.  This API will no longer be supported as of May 2, 2022. Use it to remove resources that were created for Deployment Service. 
    */
   syncDeploymentJob(callback?: (err: AWSError, data: RoboMaker.Types.SyncDeploymentJobResponse) => void): Request<RoboMaker.Types.SyncDeploymentJobResponse, AWSError>;
   /**
@@ -2447,9 +2447,9 @@ declare namespace RoboMaker {
   }
   export interface LoggingConfig {
     /**
-     * A boolean indicating whether to record all ROS topics.
+     * A boolean indicating whether to record all ROS topics.  This API is no longer supported and will throw an error if used. 
      */
-    recordAllRosTopics: BoxedBoolean;
+    recordAllRosTopics?: BoxedBoolean;
   }
   export type MaxConcurrency = number;
   export type MaxResults = number;
@@ -2622,7 +2622,7 @@ declare namespace RoboMaker {
      */
     uploadConfigurations?: UploadConfigurations;
     /**
-     * A Boolean indicating whether to use default upload configurations. By default, .ros and .gazebo files are uploaded when the application terminates and all ROS topics will be recorded. If you set this value, you must specify an outputLocation. 
+     * A Boolean indicating whether to use default upload configurations. By default, .ros and .gazebo files are uploaded when the application terminates and all ROS topics will be recorded. If you set this value, you must specify an outputLocation.  This API is no longer supported and will throw an error if used. 
      */
     useDefaultUploadConfigurations?: BoxedBoolean;
     /**
@@ -2630,7 +2630,7 @@ declare namespace RoboMaker {
      */
     tools?: Tools;
     /**
-     * A Boolean indicating whether to use default robot application tools. The default tools are rviz, rqt, terminal and rosbag record. The default is False. 
+     * A Boolean indicating whether to use default robot application tools. The default tools are rviz, rqt, terminal and rosbag record. The default is False.  This API is no longer supported and will throw an error if used. 
      */
     useDefaultTools?: BoxedBoolean;
   }
@@ -2759,7 +2759,7 @@ declare namespace RoboMaker {
      */
     worldConfigs?: WorldConfigs;
     /**
-     * A Boolean indicating whether to use default upload configurations. By default, .ros and .gazebo files are uploaded when the application terminates and all ROS topics will be recorded. If you set this value, you must specify an outputLocation. 
+     * A Boolean indicating whether to use default upload configurations. By default, .ros and .gazebo files are uploaded when the application terminates and all ROS topics will be recorded. If you set this value, you must specify an outputLocation.  This API is no longer supported and will throw an error if used. 
      */
     useDefaultUploadConfigurations?: BoxedBoolean;
     /**
@@ -2767,7 +2767,7 @@ declare namespace RoboMaker {
      */
     tools?: Tools;
     /**
-     * A Boolean indicating whether to use default simulation application tools. The default tools are rviz, rqt, terminal and rosbag record. The default is False. 
+     * A Boolean indicating whether to use default simulation application tools. The default tools are rviz, rqt, terminal and rosbag record. The default is False.  This API is no longer supported and will throw an error if used. 
      */
     useDefaultTools?: BoxedBoolean;
   }
@@ -3492,6 +3492,7 @@ declare namespace RoboMaker {
      * A list of worlds.
      */
     worlds?: Arns;
+    outputLocation?: OutputLocation;
   }
   export interface WorldFailure {
     /**

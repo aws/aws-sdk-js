@@ -153,6 +153,10 @@ declare namespace LexRuntimeV2 {
      * The name of the slot that should be elicited from the user.
      */
     slotToElicit?: NonEmptyString;
+    /**
+     * Configures the slot to use spell-by-letter or spell-by-word style. When you use a style on a slot, users can spell out their input to make it clear to your bot.   Spell by letter - "b" "o" "b"   Spell by word - "b as in boy" "o as in oscar" "b as in boy"   For more information, see  Using spelling to enter slot values .
+     */
+    slotElicitationStyle?: StyleType;
   }
   export type DialogActionType = "Close"|"ConfirmIntent"|"Delegate"|"ElicitIntent"|"ElicitSlot"|"None"|string;
   export type Double = number;
@@ -258,6 +262,7 @@ declare namespace LexRuntimeV2 {
   }
   export type MessageContentType = "CustomPayload"|"ImageResponseCard"|"PlainText"|"SSML"|string;
   export type Messages = Message[];
+  export type Name = string;
   export type NonEmptyString = string;
   export type ParameterName = string;
   export interface PutSessionRequest {
@@ -448,6 +453,26 @@ declare namespace LexRuntimeV2 {
      */
     audioStream?: BlobStream;
   }
+  export interface RuntimeHintDetails {
+    /**
+     * One or more strings that Amazon Lex V2 should look for in the input to the bot. Each phrase is given preference when deciding on slot values.
+     */
+    runtimeHintValues: RuntimeHintValuesList;
+  }
+  export type RuntimeHintPhrase = string;
+  export interface RuntimeHintValue {
+    /**
+     * The phrase that Amazon Lex V2 should look for in the user's input to the bot.
+     */
+    phrase: RuntimeHintPhrase;
+  }
+  export type RuntimeHintValuesList = RuntimeHintValue[];
+  export interface RuntimeHints {
+    /**
+     * A list of the slots in the intent that should have runtime hints added, and the phrases that should be added for each slot. The first level of the slotHints map is the name of the intent. The second level is the name of the slot within the intent. For more information, see Using hints to improve accuracy. The intent name and slot name must exist.
+     */
+    slotHints?: SlotHintsIntentMap;
+  }
   export type SensitiveNonEmptyString = string;
   export interface SentimentResponse {
     /**
@@ -494,9 +519,13 @@ declare namespace LexRuntimeV2 {
      */
     sessionAttributes?: StringMap;
     /**
-     * 
+     * A unique identifier for a specific request.
      */
     originatingRequestId?: NonEmptyString;
+    /**
+     * Hints for phrases that a customer is likely to use for a slot. Amazon Lex V2 uses the hints to help determine the correct value of a slot.
+     */
+    runtimeHints?: RuntimeHints;
   }
   export type Shape = "Scalar"|"List"|string;
   export interface Slot {
@@ -513,10 +542,13 @@ declare namespace LexRuntimeV2 {
      */
     values?: Values;
   }
+  export type SlotHintsIntentMap = {[key: string]: SlotHintsSlotMap};
+  export type SlotHintsSlotMap = {[key: string]: RuntimeHintDetails};
   export type Slots = {[key: string]: Slot};
   export type String = string;
   export type StringList = NonEmptyString[];
   export type StringMap = {[key: string]: String};
+  export type StyleType = "Default"|"SpellByLetter"|"SpellByWord"|string;
   export type Text = string;
   export interface Value {
     /**

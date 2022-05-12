@@ -164,11 +164,11 @@ declare class Iot extends Service {
    */
   createBillingGroup(callback?: (err: AWSError, data: Iot.Types.CreateBillingGroupResponse) => void): Request<Iot.Types.CreateBillingGroupResponse, AWSError>;
   /**
-   * Creates an X.509 certificate using the specified certificate signing request.  Note: The CSR must include a public key that is either an RSA key with a length of at least 2048 bits or an ECC key from NIST P-256 or NIST P-384 curves.   Note: Reusing the same certificate signing request (CSR) results in a distinct certificate. Requires permission to access the CreateCertificateFromCsr action. You can create multiple certificates in a batch by creating a directory, copying multiple .csr files into that directory, and then specifying that directory on the command line. The following commands show how to create a batch of certificates given a batch of CSRs. Assuming a set of CSRs are located inside of the directory my-csr-directory: On Linux and OS X, the command is: $ ls my-csr-directory/ | xargs -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{} This command lists all of the CSRs in my-csr-directory and pipes each CSR file name to the aws iot create-certificate-from-csr Amazon Web Services CLI command to create a certificate for the corresponding CSR. The aws iot create-certificate-from-csr part of the command can also be run in parallel to speed up the certificate creation process: $ ls my-csr-directory/ | xargs -P 10 -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{} On Windows PowerShell, the command to create certificates for all CSRs in my-csr-directory is: &gt; ls -Name my-csr-directory | %{aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/$_} On a Windows command prompt, the command to create certificates for all CSRs in my-csr-directory is: &gt; forfiles /p my-csr-directory /c "cmd /c aws iot create-certificate-from-csr --certificate-signing-request file://@path"
+   * Creates an X.509 certificate using the specified certificate signing request.  Note: The CSR must include a public key that is either an RSA key with a length of at least 2048 bits or an ECC key from NIST P-256, NIST P-384, or NIST P-512 curves. For supported certificates, consult  Certificate signing algorithms supported by IoT.  Note: Reusing the same certificate signing request (CSR) results in a distinct certificate. Requires permission to access the CreateCertificateFromCsr action. You can create multiple certificates in a batch by creating a directory, copying multiple .csr files into that directory, and then specifying that directory on the command line. The following commands show how to create a batch of certificates given a batch of CSRs. Assuming a set of CSRs are located inside of the directory my-csr-directory: On Linux and OS X, the command is: $ ls my-csr-directory/ | xargs -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{} This command lists all of the CSRs in my-csr-directory and pipes each CSR file name to the aws iot create-certificate-from-csr Amazon Web Services CLI command to create a certificate for the corresponding CSR. The aws iot create-certificate-from-csr part of the command can also be run in parallel to speed up the certificate creation process: $ ls my-csr-directory/ | xargs -P 10 -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{} On Windows PowerShell, the command to create certificates for all CSRs in my-csr-directory is: &gt; ls -Name my-csr-directory | %{aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/$_} On a Windows command prompt, the command to create certificates for all CSRs in my-csr-directory is: &gt; forfiles /p my-csr-directory /c "cmd /c aws iot create-certificate-from-csr --certificate-signing-request file://@path"
    */
   createCertificateFromCsr(params: Iot.Types.CreateCertificateFromCsrRequest, callback?: (err: AWSError, data: Iot.Types.CreateCertificateFromCsrResponse) => void): Request<Iot.Types.CreateCertificateFromCsrResponse, AWSError>;
   /**
-   * Creates an X.509 certificate using the specified certificate signing request.  Note: The CSR must include a public key that is either an RSA key with a length of at least 2048 bits or an ECC key from NIST P-256 or NIST P-384 curves.   Note: Reusing the same certificate signing request (CSR) results in a distinct certificate. Requires permission to access the CreateCertificateFromCsr action. You can create multiple certificates in a batch by creating a directory, copying multiple .csr files into that directory, and then specifying that directory on the command line. The following commands show how to create a batch of certificates given a batch of CSRs. Assuming a set of CSRs are located inside of the directory my-csr-directory: On Linux and OS X, the command is: $ ls my-csr-directory/ | xargs -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{} This command lists all of the CSRs in my-csr-directory and pipes each CSR file name to the aws iot create-certificate-from-csr Amazon Web Services CLI command to create a certificate for the corresponding CSR. The aws iot create-certificate-from-csr part of the command can also be run in parallel to speed up the certificate creation process: $ ls my-csr-directory/ | xargs -P 10 -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{} On Windows PowerShell, the command to create certificates for all CSRs in my-csr-directory is: &gt; ls -Name my-csr-directory | %{aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/$_} On a Windows command prompt, the command to create certificates for all CSRs in my-csr-directory is: &gt; forfiles /p my-csr-directory /c "cmd /c aws iot create-certificate-from-csr --certificate-signing-request file://@path"
+   * Creates an X.509 certificate using the specified certificate signing request.  Note: The CSR must include a public key that is either an RSA key with a length of at least 2048 bits or an ECC key from NIST P-256, NIST P-384, or NIST P-512 curves. For supported certificates, consult  Certificate signing algorithms supported by IoT.  Note: Reusing the same certificate signing request (CSR) results in a distinct certificate. Requires permission to access the CreateCertificateFromCsr action. You can create multiple certificates in a batch by creating a directory, copying multiple .csr files into that directory, and then specifying that directory on the command line. The following commands show how to create a batch of certificates given a batch of CSRs. Assuming a set of CSRs are located inside of the directory my-csr-directory: On Linux and OS X, the command is: $ ls my-csr-directory/ | xargs -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{} This command lists all of the CSRs in my-csr-directory and pipes each CSR file name to the aws iot create-certificate-from-csr Amazon Web Services CLI command to create a certificate for the corresponding CSR. The aws iot create-certificate-from-csr part of the command can also be run in parallel to speed up the certificate creation process: $ ls my-csr-directory/ | xargs -P 10 -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{} On Windows PowerShell, the command to create certificates for all CSRs in my-csr-directory is: &gt; ls -Name my-csr-directory | %{aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/$_} On a Windows command prompt, the command to create certificates for all CSRs in my-csr-directory is: &gt; forfiles /p my-csr-directory /c "cmd /c aws iot create-certificate-from-csr --certificate-signing-request file://@path"
    */
   createCertificateFromCsr(callback?: (err: AWSError, data: Iot.Types.CreateCertificateFromCsrResponse) => void): Request<Iot.Types.CreateCertificateFromCsrResponse, AWSError>;
   /**
@@ -788,6 +788,14 @@ declare class Iot extends Service {
    */
   describeJobTemplate(callback?: (err: AWSError, data: Iot.Types.DescribeJobTemplateResponse) => void): Request<Iot.Types.DescribeJobTemplateResponse, AWSError>;
   /**
+   * View details of a managed job template.
+   */
+  describeManagedJobTemplate(params: Iot.Types.DescribeManagedJobTemplateRequest, callback?: (err: AWSError, data: Iot.Types.DescribeManagedJobTemplateResponse) => void): Request<Iot.Types.DescribeManagedJobTemplateResponse, AWSError>;
+  /**
+   * View details of a managed job template.
+   */
+  describeManagedJobTemplate(callback?: (err: AWSError, data: Iot.Types.DescribeManagedJobTemplateResponse) => void): Request<Iot.Types.DescribeManagedJobTemplateResponse, AWSError>;
+  /**
    * Gets information about a mitigation action. Requires permission to access the DescribeMitigationAction action.
    */
   describeMitigationAction(params: Iot.Types.DescribeMitigationActionRequest, callback?: (err: AWSError, data: Iot.Types.DescribeMitigationActionResponse) => void): Request<Iot.Types.DescribeMitigationActionResponse, AWSError>;
@@ -1236,6 +1244,22 @@ declare class Iot extends Service {
    */
   listJobs(callback?: (err: AWSError, data: Iot.Types.ListJobsResponse) => void): Request<Iot.Types.ListJobsResponse, AWSError>;
   /**
+   * Returns a list of managed job templates.
+   */
+  listManagedJobTemplates(params: Iot.Types.ListManagedJobTemplatesRequest, callback?: (err: AWSError, data: Iot.Types.ListManagedJobTemplatesResponse) => void): Request<Iot.Types.ListManagedJobTemplatesResponse, AWSError>;
+  /**
+   * Returns a list of managed job templates.
+   */
+  listManagedJobTemplates(callback?: (err: AWSError, data: Iot.Types.ListManagedJobTemplatesResponse) => void): Request<Iot.Types.ListManagedJobTemplatesResponse, AWSError>;
+  /**
+   * Lists the values reported for an IoT Device Defender metric (device-side metric, cloud-side metric, or custom metric) by the given thing during the specified time period.
+   */
+  listMetricValues(params: Iot.Types.ListMetricValuesRequest, callback?: (err: AWSError, data: Iot.Types.ListMetricValuesResponse) => void): Request<Iot.Types.ListMetricValuesResponse, AWSError>;
+  /**
+   * Lists the values reported for an IoT Device Defender metric (device-side metric, cloud-side metric, or custom metric) by the given thing during the specified time period.
+   */
+  listMetricValues(callback?: (err: AWSError, data: Iot.Types.ListMetricValuesResponse) => void): Request<Iot.Types.ListMetricValuesResponse, AWSError>;
+  /**
    * Gets a list of all mitigation actions that match the specified filter criteria. Requires permission to access the ListMitigationActions action.
    */
   listMitigationActions(params: Iot.Types.ListMitigationActionsRequest, callback?: (err: AWSError, data: Iot.Types.ListMitigationActionsResponse) => void): Request<Iot.Types.ListMitigationActionsResponse, AWSError>;
@@ -1508,11 +1532,11 @@ declare class Iot extends Service {
    */
   registerCertificate(callback?: (err: AWSError, data: Iot.Types.RegisterCertificateResponse) => void): Request<Iot.Types.RegisterCertificateResponse, AWSError>;
   /**
-   * Register a certificate that does not have a certificate authority (CA).
+   * Register a certificate that does not have a certificate authority (CA). For supported certificates, consult  Certificate signing algorithms supported by IoT. 
    */
   registerCertificateWithoutCA(params: Iot.Types.RegisterCertificateWithoutCARequest, callback?: (err: AWSError, data: Iot.Types.RegisterCertificateWithoutCAResponse) => void): Request<Iot.Types.RegisterCertificateWithoutCAResponse, AWSError>;
   /**
-   * Register a certificate that does not have a certificate authority (CA).
+   * Register a certificate that does not have a certificate authority (CA). For supported certificates, consult  Certificate signing algorithms supported by IoT. 
    */
   registerCertificateWithoutCA(callback?: (err: AWSError, data: Iot.Types.RegisterCertificateWithoutCAResponse) => void): Request<Iot.Types.RegisterCertificateWithoutCAResponse, AWSError>;
   /**
@@ -1532,11 +1556,11 @@ declare class Iot extends Service {
    */
   rejectCertificateTransfer(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Removes the given thing from the billing group. Requires permission to access the RemoveThingFromBillingGroup action.
+   * Removes the given thing from the billing group. Requires permission to access the RemoveThingFromBillingGroup action.  This call is asynchronous. It might take several seconds for the detachment to propagate. 
    */
   removeThingFromBillingGroup(params: Iot.Types.RemoveThingFromBillingGroupRequest, callback?: (err: AWSError, data: Iot.Types.RemoveThingFromBillingGroupResponse) => void): Request<Iot.Types.RemoveThingFromBillingGroupResponse, AWSError>;
   /**
-   * Removes the given thing from the billing group. Requires permission to access the RemoveThingFromBillingGroup action.
+   * Removes the given thing from the billing group. Requires permission to access the RemoveThingFromBillingGroup action.  This call is asynchronous. It might take several seconds for the detachment to propagate. 
    */
   removeThingFromBillingGroup(callback?: (err: AWSError, data: Iot.Types.RemoveThingFromBillingGroupResponse) => void): Request<Iot.Types.RemoveThingFromBillingGroupResponse, AWSError>;
   /**
@@ -2060,7 +2084,7 @@ declare namespace Iot {
   export type ActiveViolations = ActiveViolation[];
   export interface AddThingToBillingGroupRequest {
     /**
-     * The name of the billing group.
+     * The name of the billing group.  This call is asynchronous. It might take several seconds for the detachment to propagate. 
      */
     billingGroupName?: BillingGroupName;
     /**
@@ -2110,7 +2134,7 @@ declare namespace Iot {
     /**
      * Specifies if this mitigation action can move the things that triggered the mitigation action even if they are part of one or more dynamic thing groups.
      */
-    overrideDynamicGroups?: OverrideDynamicGroups;
+    overrideDynamicGroups?: NullableBoolean;
   }
   export type AdditionalMetricsToRetainList = BehaviorMetric[];
   export type AdditionalMetricsToRetainV2List = MetricToRetain[];
@@ -2595,6 +2619,10 @@ declare namespace Iot {
      * Specifies whether IoT validates the token signature in an authorization request.
      */
     signingDisabled?: BooleanKey;
+    /**
+     * When true, the result from the authorizer’s Lambda function is cached for the time specified in refreshAfterInSeconds. The cached result is used while the device reuses the same HTTP connection.
+     */
+    enableCachingForHttp?: EnableCachingForHttp;
   }
   export type AuthorizerFunctionArn = string;
   export type AuthorizerName = string;
@@ -2799,6 +2827,7 @@ declare namespace Iot {
   }
   export type Boolean = boolean;
   export type BooleanKey = boolean;
+  export type BooleanWrapperObject = boolean;
   export interface Bucket {
     /**
      * The value counted for the particular bucket.
@@ -3208,7 +3237,7 @@ declare namespace Iot {
      */
     description?: AuditDescription;
     /**
-     *  Each audit supression must have a unique client request token. If you try to create a new audit suppression with the same token as one that already exists, an exception occurs. If you omit this value, Amazon Web Services SDKs will automatically generate a unique client request. 
+     *  Each audit supression must have a unique client request token. If you try to create a new audit suppression with the same token as one that already exists, an exception occurs. If you omit this value, Amazon Web Services SDKs will automatically generate a unique client request.
      */
     clientRequestToken: ClientRequestToken;
   }
@@ -3243,6 +3272,10 @@ declare namespace Iot {
      * Specifies whether IoT validates the token signature in an authorization request.
      */
     signingDisabled?: BooleanKey;
+    /**
+     * When true, the result from the authorizer’s Lambda function is cached for clients that use persistent HTTP connections. The results are cached for the time specified by the Lambda function in refreshAfterInSeconds. This value does not affect authorization of clients that use MQTT connections. The default value is false.
+     */
+    enableCachingForHttp?: EnableCachingForHttp;
   }
   export interface CreateAuthorizerResponse {
     /**
@@ -3308,15 +3341,15 @@ declare namespace Iot {
   }
   export interface CreateCustomMetricRequest {
     /**
-     *  The name of the custom metric. This will be used in the metric report submitted from the device/thing. Shouldn't begin with aws:. Cannot be updated once defined.
+     *  The name of the custom metric. This will be used in the metric report submitted from the device/thing. The name can't begin with aws:. You can't change the name after you define it.
      */
     metricName: MetricName;
     /**
-     *  Field represents a friendly name in the console for the custom metric; it doesn't have to be unique. Don't use this name as the metric identifier in the device metric report. Can be updated once defined.
+     *  The friendly name in the console for the custom metric. This name doesn't have to be unique. Don't use this name as the metric identifier in the device metric report. You can update the friendly name after you define it.
      */
     displayName?: CustomMetricDisplayName;
     /**
-     *  The type of the custom metric. Types include string-list, ip-address-list, number-list, and number. 
+     *  The type of the custom metric.   The type number only takes a single metric value as an input, but when you submit the metrics value in the DeviceMetrics report, you must pass it as an array with a single value. 
      */
     metricType: CustomMetricType;
     /**
@@ -3334,7 +3367,7 @@ declare namespace Iot {
      */
     metricName?: MetricName;
     /**
-     *  The Amazon Resource Number (ARN) of the custom metric, e.g. arn:aws-partition:iot:region:accountId:custommetric/metricName  
+     *  The Amazon Resource Number (ARN) of the custom metric. For example, arn:aws-partition:iot:region:accountId:custommetric/metricName  
      */
     metricArn?: CustomMetricArn;
   }
@@ -3540,7 +3573,7 @@ declare namespace Iot {
      */
     presignedUrlConfig?: PresignedUrlConfig;
     /**
-     * Specifies whether the job will continue to run (CONTINUOUS), or will be complete after all those things specified as targets have completed the job (SNAPSHOT). If continuous, the job may also be run on a thing when a change is detected in a target. For example, a job will run on a thing when the thing is added to a target group, even after the job was completed by all things originally in the group.
+     * Specifies whether the job will continue to run (CONTINUOUS), or will be complete after all those things specified as targets have completed the job (SNAPSHOT). If continuous, the job may also be run on a thing when a change is detected in a target. For example, a job will run on a thing when the thing is added to a target group, even after the job was completed by all things originally in the group.  We recommend that you use continuous jobs instead of snapshot jobs for dynamic thing group targets. By using continuous jobs, devices that join the group receive the job execution even after the job has been created. 
      */
     targetSelection?: TargetSelection;
     /**
@@ -3548,7 +3581,7 @@ declare namespace Iot {
      */
     jobExecutionsRolloutConfig?: JobExecutionsRolloutConfig;
     /**
-     * Allows you to create criteria to abort a job.
+     * Allows you to create the criteria to abort a job.
      */
     abortConfig?: AbortConfig;
     /**
@@ -3567,6 +3600,14 @@ declare namespace Iot {
      * The ARN of the job template used to create the job.
      */
     jobTemplateArn?: JobTemplateArn;
+    /**
+     * Allows you to create the criteria to retry a job.
+     */
+    jobExecutionsRetryConfig?: JobExecutionsRetryConfig;
+    /**
+     * Parameters of an Amazon Web Services managed template that you can specify to create the job document.   documentParameters can only be used when creating jobs from Amazon Web Services managed templates. This parameter can't be used with custom job templates or to create jobs from them. 
+     */
+    documentParameters?: ParameterMap;
   }
   export interface CreateJobResponse {
     /**
@@ -3611,6 +3652,10 @@ declare namespace Iot {
      * Metadata that can be used to manage the job template.
      */
     tags?: TagList;
+    /**
+     * Allows you to create the criteria to retry a job.
+     */
+    jobExecutionsRetryConfig?: JobExecutionsRetryConfig;
   }
   export interface CreateJobTemplateResponse {
     /**
@@ -3924,7 +3969,7 @@ declare namespace Iot {
      */
     roleArn: RoleArn;
     /**
-     * How long (in seconds) the credentials will be valid. The default value is 3,600 seconds.
+     * How long (in seconds) the credentials will be valid. The default value is 3,600 seconds. This value must be less than or equal to the maximum session duration of the IAM role that the role alias references.
      */
     credentialDurationSeconds?: CredentialDurationSeconds;
     /**
@@ -4028,7 +4073,7 @@ declare namespace Iot {
      */
     files: StreamFiles;
     /**
-     * An IAM role that allows the IoT service principal assumes to access your S3 files.
+     * An IAM role that allows the IoT service principal to access your S3 files.
      */
     roleArn: RoleArn;
     /**
@@ -4185,11 +4230,11 @@ declare namespace Iot {
      */
     certificateChain?: CodeSigningCertificateChain;
     /**
-     * The hash algorithm used to code sign the file.
+     * The hash algorithm used to code sign the file. You can use a string as the algorithm name if the target over-the-air (OTA) update devices are able to verify the signature that was generated using the same signature algorithm. For example, FreeRTOS uses SHA256 or SHA1, so you can pass either of them based on which was used for generating the signature.
      */
     hashAlgorithm?: HashAlgorithm;
     /**
-     * The signature algorithm used to code sign the file.
+     * The signature algorithm used to code sign the file. You can use a string as the algorithm name if the target over-the-air (OTA) update devices are able to verify the signature that was generated using the same signature algorithm. For example, FreeRTOS uses ECDSA or RSA, so you can pass either of them based on which was used for generating the signature.
      */
     signatureAlgorithm?: SignatureAlgorithm;
   }
@@ -4727,7 +4772,7 @@ declare namespace Iot {
      */
     metricArn?: CustomMetricArn;
     /**
-     *  The type of the custom metric. Types include string-list, ip-address-list, number-list, and number. 
+     *  The type of the custom metric.   The type number only takes a single metric value as an input, but while submitting the metrics value in the DeviceMetrics report, it must be passed as an array with a single value. 
      */
     metricType?: CustomMetricType;
     /**
@@ -4943,7 +4988,7 @@ declare namespace Iot {
      */
     indexStatus?: IndexStatus;
     /**
-     * Contains a value that specifies the type of indexing performed. Valid values are:   REGISTRY – Your thing index contains only registry data.   REGISTRY_AND_SHADOW - Your thing index contains registry data and shadow data.   REGISTRY_AND_CONNECTIVITY_STATUS - Your thing index contains registry data and thing connectivity status data.   REGISTRY_AND_SHADOW_AND_CONNECTIVITY_STATUS - Your thing index contains registry data, shadow data, and thing connectivity status data.  
+     * Contains a value that specifies the type of indexing performed. Valid values are:   REGISTRY – Your thing index contains only registry data.   REGISTRY_AND_SHADOW - Your thing index contains registry data and shadow data.   REGISTRY_AND_CONNECTIVITY_STATUS - Your thing index contains registry data and thing connectivity status data.   REGISTRY_AND_SHADOW_AND_CONNECTIVITY_STATUS - Your thing index contains registry data, shadow data, and thing connectivity status data.   MULTI_INDEXING_MODE - Your thing index contains multiple data sources. For more information, see GetIndexingConfiguration.  
      */
     schema?: IndexSchema;
   }
@@ -5018,6 +5063,50 @@ declare namespace Iot {
     jobExecutionsRolloutConfig?: JobExecutionsRolloutConfig;
     abortConfig?: AbortConfig;
     timeoutConfig?: TimeoutConfig;
+    /**
+     * The configuration that determines how many retries are allowed for each failure type for a job.
+     */
+    jobExecutionsRetryConfig?: JobExecutionsRetryConfig;
+  }
+  export interface DescribeManagedJobTemplateRequest {
+    /**
+     * The unique name of a managed job template, which is required.
+     */
+    templateName: ManagedJobTemplateName;
+    /**
+     * An optional parameter to specify version of a managed template. If not specified, the pre-defined default version is returned.
+     */
+    templateVersion?: ManagedTemplateVersion;
+  }
+  export interface DescribeManagedJobTemplateResponse {
+    /**
+     * The unique name of a managed template, such as AWS-Reboot.
+     */
+    templateName?: ManagedJobTemplateName;
+    /**
+     * The unique Amazon Resource Name (ARN) of the managed template.
+     */
+    templateArn?: JobTemplateArn;
+    /**
+     * The unique description of a managed template.
+     */
+    description?: JobDescription;
+    /**
+     * The version for a managed template.
+     */
+    templateVersion?: ManagedTemplateVersion;
+    /**
+     * A list of environments that are supported with the managed job template.
+     */
+    environments?: Environments;
+    /**
+     * A map of key-value pairs that you can use as guidance to specify the inputs for creating a job from a managed template.   documentParameters can only be used when creating jobs from Amazon Web Services managed templates. This parameter can't be used with custom job templates or to create jobs from them. 
+     */
+    documentParameters?: DocumentParameters;
+    /**
+     * The document schema for a managed job template.
+     */
+    document?: JobDocument;
   }
   export interface DescribeMitigationActionRequest {
     /**
@@ -5580,6 +5669,7 @@ declare namespace Iot {
   }
   export type DetectMitigationActionsToExecuteList = MitigationActionName[];
   export type DeviceCertificateUpdateAction = "DEACTIVATE"|string;
+  export type DeviceDefenderIndexingMode = "OFF"|"VIOLATIONS"|string;
   export type DeviceDefenderThingName = string;
   export type DimensionArn = string;
   export type DimensionName = string;
@@ -5596,6 +5686,29 @@ declare namespace Iot {
     ruleName: RuleName;
   }
   export type DisconnectReason = string;
+  export interface DocumentParameter {
+    /**
+     * Key of the map field containing the patterns that need to be replaced in a managed template job document schema.
+     */
+    key?: ParameterKey;
+    /**
+     * Description of the map field containing the patterns that need to be replaced in a managed template job document schema.
+     */
+    description?: JobDescription;
+    /**
+     * A regular expression of the patterns that need to be replaced in a managed template job document schema.
+     */
+    regex?: Regex;
+    /**
+     * An example illustrating a pattern that need to be replaced in a managed template job document schema.
+     */
+    example?: Example;
+    /**
+     * Specifies whether a pattern that needs to be replaced in a managed template job document schema is optional or required.
+     */
+    optional?: Optional;
+  }
+  export type DocumentParameters = DocumentParameter[];
   export type DomainConfigurationArn = string;
   export type DomainConfigurationName = string;
   export type DomainConfigurationStatus = "ENABLED"|"DISABLED"|string;
@@ -5713,6 +5826,7 @@ declare namespace Iot {
   export type ElasticsearchId = string;
   export type ElasticsearchIndex = string;
   export type ElasticsearchType = string;
+  export type EnableCachingForHttp = boolean;
   export interface EnableIoTLoggingParams {
     /**
      * The Amazon Resource Name (ARN) of the IAM role used for logging.
@@ -5732,6 +5846,8 @@ declare namespace Iot {
   export type Enabled = boolean;
   export type EndpointAddress = string;
   export type EndpointType = string;
+  export type Environment = string;
+  export type Environments = Environment[];
   export type ErrorCode = string;
   export interface ErrorInfo {
     /**
@@ -5747,6 +5863,7 @@ declare namespace Iot {
   export type EvaluationStatistic = string;
   export type EventConfigurations = {[key: string]: Configuration};
   export type EventType = "THING"|"THING_GROUP"|"THING_TYPE"|"THING_GROUP_MEMBERSHIP"|"THING_GROUP_HIERARCHY"|"THING_TYPE_ASSOCIATION"|"JOB"|"JOB_EXECUTION"|"POLICY"|"CERTIFICATE"|"CA_CERTIFICATE"|string;
+  export type Example = string;
   export type ExecutionNamePrefix = string;
   export type ExecutionNumber = number;
   export type ExpectedVersion = number;
@@ -5894,7 +6011,7 @@ declare namespace Iot {
   }
   export interface GetBucketsAggregationResponse {
     /**
-     * The total number of documents that fit the query string criteria and contain a value for the Aggregation field targeted in the request.
+     * The total number of things that fit the query string criteria.
      */
     totalCount?: Count;
     /**
@@ -6336,7 +6453,7 @@ declare namespace Iot {
      */
     jobId?: JobId;
     /**
-     * Specifies whether the job will continue to run (CONTINUOUS), or will be complete after all those things specified as targets have completed the job (SNAPSHOT). If continuous, the job may also be run on a thing when a change is detected in a target. For example, a job will run on a device when the thing representing the device is added to a target group, even after the job was completed by all things originally in the group. 
+     * Specifies whether the job will continue to run (CONTINUOUS), or will be complete after all those things specified as targets have completed the job (SNAPSHOT). If continuous, the job may also be run on a thing when a change is detected in a target. For example, a job will run on a device when the thing representing the device is added to a target group, even after the job was completed by all things originally in the group.   We recommend that you use continuous jobs instead of snapshot jobs for dynamic thing group targets. By using continuous jobs, devices that join the group receive the job execution even after the job has been created. 
      */
     targetSelection?: TargetSelection;
     /**
@@ -6403,6 +6520,15 @@ declare namespace Iot {
      * The ARN of the job template used to create the job.
      */
     jobTemplateArn?: JobTemplateArn;
+    /**
+     * The configuration for the criteria to retry the job.
+     */
+    jobExecutionsRetryConfig?: JobExecutionsRetryConfig;
+    /**
+     * A key-value map that pairs the patterns that need to be replaced in a managed template job document schema. You can use the description of each key as a guidance to specify the inputs during runtime when creating a job.   documentParameters can only be used when creating jobs from Amazon Web Services managed templates. This parameter can't be used with custom job templates or to create jobs from them. 
+     */
+    documentParameters?: ParameterMap;
+    isConcurrent?: BooleanWrapperObject;
   }
   export type JobArn = string;
   export type JobDescription = string;
@@ -6483,6 +6609,10 @@ declare namespace Iot {
      * A string (consisting of the digits "0" through "9") which identifies this particular job execution on this particular device. It can be used later in commands which return or update job execution information.
      */
     executionNumber?: ExecutionNumber;
+    /**
+     * The number that indicates how many retry attempts have been completed for this job on this device.
+     */
+    retryAttempt?: RetryAttempt;
   }
   export interface JobExecutionSummaryForJob {
     /**
@@ -6506,6 +6636,12 @@ declare namespace Iot {
     jobExecutionSummary?: JobExecutionSummary;
   }
   export type JobExecutionSummaryForThingList = JobExecutionSummaryForThing[];
+  export interface JobExecutionsRetryConfig {
+    /**
+     * The list of criteria that determines how many retries are allowed for each failure type for a job.
+     */
+    criteriaList: RetryCriteriaList;
+  }
   export interface JobExecutionsRolloutConfig {
     /**
      * The maximum number of things that will be notified of a pending job, per minute. This parameter allows you to create a staged rollout.
@@ -6570,7 +6706,7 @@ declare namespace Iot {
      */
     thingGroupId?: ThingGroupId;
     /**
-     * Specifies whether the job will continue to run (CONTINUOUS), or will be complete after all those things specified as targets have completed the job (SNAPSHOT). If continuous, the job may also be run on a thing when a change is detected in a target. For example, a job will run on a thing when the thing is added to a target group, even after the job was completed by all things originally in the group.
+     * Specifies whether the job will continue to run (CONTINUOUS), or will be complete after all those things specified as targets have completed the job (SNAPSHOT). If continuous, the job may also be run on a thing when a change is detected in a target. For example, a job will run on a thing when the thing is added to a target group, even after the job was completed by all things originally in the group.  We recommend that you use continuous jobs instead of snapshot jobs for dynamic thing group targets. By using continuous jobs, devices that join the group receive the job execution even after the job has been created. 
      */
     targetSelection?: TargetSelection;
     /**
@@ -6589,6 +6725,7 @@ declare namespace Iot {
      * The time, in seconds since the epoch, when the job completed.
      */
     completedAt?: DateType;
+    isConcurrent?: BooleanWrapperObject;
   }
   export type JobSummaryList = JobSummary[];
   export type JobTargets = TargetArn[];
@@ -7267,6 +7404,10 @@ declare namespace Iot {
      * The token to retrieve the next set of results.
      */
     nextToken?: NextToken;
+    /**
+     * The unique identifier you assigned to this job when it was created.
+     */
+    jobId?: JobId;
   }
   export interface ListJobExecutionsForThingResponse {
     /**
@@ -7304,7 +7445,7 @@ declare namespace Iot {
      */
     status?: JobStatus;
     /**
-     * Specifies whether the job will continue to run (CONTINUOUS), or will be complete after all those things specified as targets have completed the job (SNAPSHOT). If continuous, the job may also be run on a thing when a change is detected in a target. For example, a job will run on a thing when the thing is added to a target group, even after the job was completed by all things originally in the group. 
+     * Specifies whether the job will continue to run (CONTINUOUS), or will be complete after all those things specified as targets have completed the job (SNAPSHOT). If continuous, the job may also be run on a thing when a change is detected in a target. For example, a job will run on a thing when the thing is added to a target group, even after the job was completed by all things originally in the group.   We recommend that you use continuous jobs instead of snapshot jobs for dynamic thing group targets. By using continuous jobs, devices that join the group receive the job execution even after the job has been created. 
      */
     targetSelection?: TargetSelection;
     /**
@@ -7335,6 +7476,74 @@ declare namespace Iot {
     jobs?: JobSummaryList;
     /**
      * The token for the next set of results, or null if there are no additional results.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListManagedJobTemplatesRequest {
+    /**
+     * An optional parameter for template name. If specified, only the versions of the managed job templates that have the specified template name will be returned.
+     */
+    templateName?: ManagedJobTemplateName;
+    /**
+     * Maximum number of entries that can be returned.
+     */
+    maxResults?: LaserMaxResults;
+    /**
+     * The token to retrieve the next set of results.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListManagedJobTemplatesResponse {
+    /**
+     * A list of managed job templates that are returned.
+     */
+    managedJobTemplates?: ManagedJobTemplatesSummaryList;
+    /**
+     * The token to retrieve the next set of results.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListMetricValuesRequest {
+    /**
+     * The name of the thing for which security profile metric values are returned.
+     */
+    thingName: DeviceDefenderThingName;
+    /**
+     * The name of the security profile metric for which values are returned.
+     */
+    metricName: BehaviorMetric;
+    /**
+     * The dimension name.
+     */
+    dimensionName?: DimensionName;
+    /**
+     * The dimension value operator.
+     */
+    dimensionValueOperator?: DimensionValueOperator;
+    /**
+     * The start of the time period for which metric values are returned.
+     */
+    startTime: Timestamp;
+    /**
+     * The end of the time period for which metric values are returned.
+     */
+    endTime: Timestamp;
+    /**
+     * The maximum number of results to return at one time.
+     */
+    maxResults?: MaxResults;
+    /**
+     * The token for the next set of results.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListMetricValuesResponse {
+    /**
+     * The data the thing reports for the metric during the specified time period.
+     */
+    metricDatumList?: MetricDatumList;
+    /**
+     * A token that can be used to retrieve the next set of results, or null if there are no additional results.
      */
     nextToken?: NextToken;
   }
@@ -8156,7 +8365,7 @@ declare namespace Iot {
   }
   export type LogTargetConfigurations = LogTargetConfiguration[];
   export type LogTargetName = string;
-  export type LogTargetType = "DEFAULT"|"THING_GROUP"|string;
+  export type LogTargetType = "DEFAULT"|"THING_GROUP"|"CLIENT_ID"|"SOURCE_IP"|"PRINCIPAL_ID"|string;
   export interface LoggingOptionsPayload {
     /**
      * The ARN of the IAM role that grants access.
@@ -8173,6 +8382,31 @@ declare namespace Iot {
      */
     confidenceLevel: ConfidenceLevel;
   }
+  export type ManagedJobTemplateName = string;
+  export interface ManagedJobTemplateSummary {
+    /**
+     * The Amazon Resource Name (ARN) for a managed template.
+     */
+    templateArn?: JobTemplateArn;
+    /**
+     * The unique Name for a managed template.
+     */
+    templateName?: ManagedJobTemplateName;
+    /**
+     * The description for a managed template.
+     */
+    description?: JobDescription;
+    /**
+     * A list of environments that are supported with the managed job template.
+     */
+    environments?: Environments;
+    /**
+     * The version for a managed template.
+     */
+    templateVersion?: ManagedTemplateVersion;
+  }
+  export type ManagedJobTemplatesSummaryList = ManagedJobTemplateSummary[];
+  export type ManagedTemplateVersion = string;
   export type Marker = string;
   export type MaxBuckets = number;
   export type MaxJobExecutionsPerMin = number;
@@ -8182,6 +8416,17 @@ declare namespace Iot {
   export type Message = string;
   export type MessageFormat = "RAW"|"JSON"|string;
   export type MessageId = string;
+  export interface MetricDatum {
+    /**
+     * The time the metric value was reported.
+     */
+    timestamp?: Timestamp;
+    /**
+     * The value reported for the metric.
+     */
+    value?: MetricValue;
+  }
+  export type MetricDatumList = MetricDatum[];
   export interface MetricDimension {
     /**
      * A unique identifier for the dimension.
@@ -8318,6 +8563,7 @@ declare namespace Iot {
   }
   export type MqttPassword = Buffer|Uint8Array|Blob|string;
   export type MqttUsername = string;
+  export type NamedShadowIndexingMode = "OFF"|"ON"|string;
   export type NamespaceId = string;
   export type NextToken = string;
   export type NonCompliantChecksCount = number;
@@ -8339,6 +8585,7 @@ declare namespace Iot {
   export type NullableBoolean = boolean;
   export type Number = number;
   export type NumberList = Number[];
+  export type NumberOfRetries = number;
   export type NumberOfThings = number;
   export type OTAUpdateArn = string;
   export type OTAUpdateDescription = string;
@@ -8476,6 +8723,7 @@ declare namespace Iot {
      */
     id: ElasticsearchId;
   }
+  export type Optional = boolean;
   export type OptionalVersion = number;
   export interface OutgoingCertificate {
     /**
@@ -8507,6 +8755,9 @@ declare namespace Iot {
   export type OverrideDynamicGroups = boolean;
   export type PageSize = number;
   export type Parameter = string;
+  export type ParameterKey = string;
+  export type ParameterMap = {[key: string]: ParameterValue};
+  export type ParameterValue = string;
   export type Parameters = {[key: string]: Value};
   export type PartitionKey = string;
   export type PayloadField = string;
@@ -8724,6 +8975,7 @@ declare namespace Iot {
   export type ReasonForNonComplianceCodes = ReasonForNonComplianceCode[];
   export type Recursive = boolean;
   export type RecursiveWithoutDefault = boolean;
+  export type Regex = string;
   export interface RegisterCACertificateRequest {
     /**
      * The CA certificate.
@@ -8734,7 +8986,7 @@ declare namespace Iot {
      */
     verificationCertificate: CertificatePem;
     /**
-     * A boolean value that specifies if the CA certificate is set to active.
+     * A boolean value that specifies if the CA certificate is set to active. Valid values: ACTIVE | INACTIVE 
      */
     setAsActive?: SetAsActive;
     /**
@@ -8770,11 +9022,11 @@ declare namespace Iot {
      */
     caCertificatePem?: CertificatePem;
     /**
-     * A boolean value that specifies if the certificate is set to active.
+     * A boolean value that specifies if the certificate is set to active. Valid values: ACTIVE | INACTIVE 
      */
     setAsActive?: SetAsActiveFlag;
     /**
-     * The status of the register certificate request.
+     * The status of the register certificate request. Valid values that you can use include ACTIVE, INACTIVE, and REVOKED.
      */
     status?: CertificateStatus;
   }
@@ -8985,6 +9237,19 @@ declare namespace Iot {
   export type ResourceLogicalId = string;
   export type ResourceType = "DEVICE_CERTIFICATE"|"CA_CERTIFICATE"|"IOT_POLICY"|"COGNITO_IDENTITY_POOL"|"CLIENT_ID"|"ACCOUNT_SETTINGS"|"ROLE_ALIAS"|"IAM_ROLE"|string;
   export type Resources = Resource[];
+  export type RetryAttempt = number;
+  export interface RetryCriteria {
+    /**
+     * The type of job execution failures that can initiate a job retry.
+     */
+    failureType: RetryableFailureType;
+    /**
+     * The number of retries allowed for a failure type for the job.
+     */
+    numberOfRetries: NumberOfRetries;
+  }
+  export type RetryCriteriaList = RetryCriteria[];
+  export type RetryableFailureType = "FAILED"|"TIMED_OUT"|"ALL"|string;
   export type RoleAlias = string;
   export type RoleAliasArn = string;
   export interface RoleAliasDescription {
@@ -9445,7 +9710,7 @@ declare namespace Iot {
   }
   export interface Statistics {
     /**
-     * The count of things that match the query.
+     * The count of things that match the query string criteria and contain a valid aggregation field value.
      */
     count?: Count;
     /**
@@ -9831,9 +10096,13 @@ declare namespace Iot {
      */
     attributes?: Attributes;
     /**
-     * The shadow.
+     * The unnamed shadow and named shadow. For more information about shadows, see IoT Device Shadow service. 
      */
     shadow?: JsonDocument;
+    /**
+     * Contains Device Defender data. For more information about Device Defender, see Device Defender. 
+     */
+    deviceDefender?: JsonDocument;
     /**
      * Indicates whether the thing is connected to the Amazon Web Services IoT Core service.
      */
@@ -9920,6 +10189,14 @@ declare namespace Iot {
      * Thing connectivity indexing mode. Valid values are:    STATUS – Your thing index contains connectivity status. To enable thing connectivity indexing, thingIndexMode must not be set to OFF.   OFF - Thing connectivity status indexing is disabled.  
      */
     thingConnectivityIndexingMode?: ThingConnectivityIndexingMode;
+    /**
+     * Device Defender indexing mode. Valid values are:   VIOLATIONS – Your thing index contains Device Defender violations. To enable Device Defender indexing, deviceDefenderIndexingMode must not be set to OFF.   OFF - Device Defender indexing is disabled.   For more information about Device Defender violations, see Device Defender Detect. 
+     */
+    deviceDefenderIndexingMode?: DeviceDefenderIndexingMode;
+    /**
+     * Named shadow indexing mode. Valid values are:   ON – Your thing index contains named shadow. To enable thing named shadow indexing, namedShadowIndexingMode must not be set to OFF.   OFF - Named shadow indexing is disabled.   For more information about Shadows, see IoT Device Shadow service. 
+     */
+    namedShadowIndexingMode?: NamedShadowIndexingMode;
     /**
      * Contains fields that are indexed and whose types are already known by the Fleet Indexing service.
      */
@@ -10319,6 +10596,10 @@ declare namespace Iot {
      * The status of the update authorizer request.
      */
     status?: AuthorizerStatus;
+    /**
+     * When true, the result from the authorizer’s Lambda function is cached for the time specified in refreshAfterInSeconds. The cached result is used while the device reuses the same HTTP connection.
+     */
+    enableCachingForHttp?: EnableCachingForHttp;
   }
   export interface UpdateAuthorizerResponse {
     /**
@@ -10408,7 +10689,7 @@ declare namespace Iot {
      */
     metricArn?: CustomMetricArn;
     /**
-     *  The type of the custom metric. Types include string-list, ip-address-list, number-list, and number. 
+     *  The type of the custom metric.   The type number only takes a single metric value as an input, but while submitting the metrics value in the DeviceMetrics report, it must be passed as an array with a single value. 
      */
     metricType?: CustomMetricType;
     /**
@@ -10617,6 +10898,10 @@ declare namespace Iot {
      * The namespace used to indicate that a job is a customer-managed job. When you specify a value for this parameter, Amazon Web Services IoT Core sends jobs notifications to MQTT topics that contain the value in the following format.  $aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/   The namespaceId feature is in public preview. 
      */
     namespaceId?: NamespaceId;
+    /**
+     * Allows you to create the criteria to retry a job.
+     */
+    jobExecutionsRetryConfig?: JobExecutionsRetryConfig;
   }
   export interface UpdateMitigationActionRequest {
     /**
@@ -10684,7 +10969,7 @@ declare namespace Iot {
      */
     roleArn?: RoleArn;
     /**
-     * The number of seconds the credential will be valid.
+     * The number of seconds the credential will be valid. This value must be less than or equal to the maximum session duration of the IAM role that the role alias references.
      */
     credentialDurationSeconds?: CredentialDurationSeconds;
   }

@@ -286,6 +286,26 @@ export abstract class ConfigurationServicePlaceholders {
   cloudcontrol?: AWS.CloudControl.Types.ClientConfiguration;
   grafana?: AWS.Grafana.Types.ClientConfiguration;
   panorama?: AWS.Panorama.Types.ClientConfiguration;
+  chimesdkmeetings?: AWS.ChimeSDKMeetings.Types.ClientConfiguration;
+  resiliencehub?: AWS.Resiliencehub.Types.ClientConfiguration;
+  migrationhubstrategy?: AWS.MigrationHubStrategy.Types.ClientConfiguration;
+  appconfigdata?: AWS.AppConfigData.Types.ClientConfiguration;
+  drs?: AWS.Drs.Types.ClientConfiguration;
+  migrationhubrefactorspaces?: AWS.MigrationHubRefactorSpaces.Types.ClientConfiguration;
+  evidently?: AWS.Evidently.Types.ClientConfiguration;
+  inspector2?: AWS.Inspector2.Types.ClientConfiguration;
+  rbin?: AWS.Rbin.Types.ClientConfiguration;
+  rum?: AWS.RUM.Types.ClientConfiguration;
+  backupgateway?: AWS.BackupGateway.Types.ClientConfiguration;
+  iottwinmaker?: AWS.IoTTwinMaker.Types.ClientConfiguration;
+  workspacesweb?: AWS.WorkSpacesWeb.Types.ClientConfiguration;
+  amplifyuibuilder?: AWS.AmplifyUIBuilder.Types.ClientConfiguration;
+  keyspaces?: AWS.Keyspaces.Types.ClientConfiguration;
+  billingconductor?: AWS.Billingconductor.Types.ClientConfiguration;
+  gamesparks?: AWS.GameSparks.Types.ClientConfiguration;
+  pinpointsmsvoicev2?: AWS.PinpointSMSVoiceV2.Types.ClientConfiguration;
+  ivschat?: AWS.Ivschat.Types.ClientConfiguration;
+  chimesdkmediapipelines?: AWS.ChimeSDKMediaPipelines.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -574,4 +594,24 @@ export interface ConfigurationServiceApiVersions {
   cloudcontrol?: AWS.CloudControl.Types.apiVersion;
   grafana?: AWS.Grafana.Types.apiVersion;
   panorama?: AWS.Panorama.Types.apiVersion;
+  chimesdkmeetings?: AWS.ChimeSDKMeetings.Types.apiVersion;
+  resiliencehub?: AWS.Resiliencehub.Types.apiVersion;
+  migrationhubstrategy?: AWS.MigrationHubStrategy.Types.apiVersion;
+  appconfigdata?: AWS.AppConfigData.Types.apiVersion;
+  drs?: AWS.Drs.Types.apiVersion;
+  migrationhubrefactorspaces?: AWS.MigrationHubRefactorSpaces.Types.apiVersion;
+  evidently?: AWS.Evidently.Types.apiVersion;
+  inspector2?: AWS.Inspector2.Types.apiVersion;
+  rbin?: AWS.Rbin.Types.apiVersion;
+  rum?: AWS.RUM.Types.apiVersion;
+  backupgateway?: AWS.BackupGateway.Types.apiVersion;
+  iottwinmaker?: AWS.IoTTwinMaker.Types.apiVersion;
+  workspacesweb?: AWS.WorkSpacesWeb.Types.apiVersion;
+  amplifyuibuilder?: AWS.AmplifyUIBuilder.Types.apiVersion;
+  keyspaces?: AWS.Keyspaces.Types.apiVersion;
+  billingconductor?: AWS.Billingconductor.Types.apiVersion;
+  gamesparks?: AWS.GameSparks.Types.apiVersion;
+  pinpointsmsvoicev2?: AWS.PinpointSMSVoiceV2.Types.apiVersion;
+  ivschat?: AWS.Ivschat.Types.apiVersion;
+  chimesdkmediapipelines?: AWS.ChimeSDKMediaPipelines.Types.apiVersion;
 }

@@ -1,0 +1,27 @@
+[
+    {
+        "type": "bugfix",
+        "category": "Route53",
+        "description": "fix Route53 endpoints resolution for us-iso-* regions"
+    },
+    {
+        "type": "feature",
+        "category": "CostExplorer",
+        "description": "Added three new APIs to support tagging and resource-level authorization on Cost Explorer resources: TagResource, UntagResource, ListTagsForResource.  Added optional parameters to CreateCostCategoryDefinition, CreateAnomalySubscription and CreateAnomalyMonitor APIs to support Tag On Create."
+    },
+    {
+        "type": "feature",
+        "category": "LakeFormation",
+        "description": "The release fixes the incorrect permissions called out in the documentation - DESCRIBE_TAG, ASSOCIATE_TAG, DELETE_TAG, ALTER_TAG. This trebuchet release fixes the corresponding SDK and documentation."
+    },
+    {
+        "type": "feature",
+        "category": "Location",
+        "description": "Amazon Location Service now includes a MaxResults parameter for GetDevicePositionHistory requests."
+    },
+    {
+        "type": "feature",
+        "category": "Polly",
+        "description": "Amazon Polly adds new Catalan voice - Arlet. Arlet is available as Neural voice only."
+    }
+]

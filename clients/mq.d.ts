@@ -189,6 +189,16 @@ declare class MQ extends Service {
   updateUser(callback?: (err: AWSError, data: MQ.Types.UpdateUserResponse) => void): Request<MQ.Types.UpdateUserResponse, AWSError>;
 }
 declare namespace MQ {
+  export interface ActionRequired {
+    /**
+     * The code you can use to resolve your broker issue when the broker is in a CRITICAL_ACTION_REQUIRED state. You can find instructions by choosing the link for your code from the list of action required codes in Amazon MQ action required codes. Each code references a topic with detailed information, instructions, and recommendations for how to resolve the issue and prevent future occurrences.
+     */
+    ActionRequiredCode?: __string;
+    /**
+     * Information about the action required to resolve your broker issue when the broker is in a CRITICAL_ACTION_REQUIRED state.
+     */
+    ActionRequiredInfo?: __string;
+  }
   export type AuthenticationStrategy = "SIMPLE"|"LDAP"|string;
   export interface AvailabilityZone {
     /**
@@ -246,7 +256,7 @@ declare namespace MQ {
      */
     SupportedEngineVersions?: __listOf__string;
   }
-  export type BrokerState = "CREATION_IN_PROGRESS"|"CREATION_FAILED"|"DELETION_IN_PROGRESS"|"RUNNING"|"REBOOT_IN_PROGRESS"|string;
+  export type BrokerState = "CREATION_IN_PROGRESS"|"CREATION_FAILED"|"DELETION_IN_PROGRESS"|"RUNNING"|"REBOOT_IN_PROGRESS"|"CRITICAL_ACTION_REQUIRED"|string;
   export type BrokerStorageType = "EBS"|"EFS"|string;
   export interface BrokerSummary {
     /**
@@ -640,6 +650,10 @@ declare namespace MQ {
     BrokerId: __string;
   }
   export interface DescribeBrokerResponse {
+    /**
+     * A list of actions required for a broker.
+     */
+    ActionsRequired?: __listOfActionRequired;
     /**
      * The authentication strategy used to secure the broker. The default is SIMPLE.
      */
@@ -1368,6 +1382,7 @@ declare namespace MQ {
   export type __boolean = boolean;
   export type __integer = number;
   export type __integerMin5Max100 = number;
+  export type __listOfActionRequired = ActionRequired[];
   export type __listOfAvailabilityZone = AvailabilityZone[];
   export type __listOfBrokerEngineType = BrokerEngineType[];
   export type __listOfBrokerInstance = BrokerInstance[];

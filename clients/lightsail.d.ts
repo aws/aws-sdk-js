@@ -20,11 +20,11 @@ declare class Lightsail extends Service {
    */
   allocateStaticIp(callback?: (err: AWSError, data: Lightsail.Types.AllocateStaticIpResult) => void): Request<Lightsail.Types.AllocateStaticIpResult, AWSError>;
   /**
-   * Attaches an SSL/TLS certificate to your Amazon Lightsail content delivery network (CDN) distribution. After the certificate is attached, your distribution accepts HTTPS traffic for all of the domains that are associated with the certificate. Use the CreateCertificate action to create a certificate that you can attach to your distribution.  Only certificates created in the us-east-1 AWS Region can be attached to Lightsail distributions. Lightsail distributions are global resources that can reference an origin in any AWS Region, and distribute its content globally. However, all distributions are located in the us-east-1 Region. 
+   * Attaches an SSL/TLS certificate to your Amazon Lightsail content delivery network (CDN) distribution. After the certificate is attached, your distribution accepts HTTPS traffic for all of the domains that are associated with the certificate. Use the CreateCertificate action to create a certificate that you can attach to your distribution.  Only certificates created in the us-east-1 Amazon Web Services Region can be attached to Lightsail distributions. Lightsail distributions are global resources that can reference an origin in any Amazon Web Services Region, and distribute its content globally. However, all distributions are located in the us-east-1 Region. 
    */
   attachCertificateToDistribution(params: Lightsail.Types.AttachCertificateToDistributionRequest, callback?: (err: AWSError, data: Lightsail.Types.AttachCertificateToDistributionResult) => void): Request<Lightsail.Types.AttachCertificateToDistributionResult, AWSError>;
   /**
-   * Attaches an SSL/TLS certificate to your Amazon Lightsail content delivery network (CDN) distribution. After the certificate is attached, your distribution accepts HTTPS traffic for all of the domains that are associated with the certificate. Use the CreateCertificate action to create a certificate that you can attach to your distribution.  Only certificates created in the us-east-1 AWS Region can be attached to Lightsail distributions. Lightsail distributions are global resources that can reference an origin in any AWS Region, and distribute its content globally. However, all distributions are located in the us-east-1 Region. 
+   * Attaches an SSL/TLS certificate to your Amazon Lightsail content delivery network (CDN) distribution. After the certificate is attached, your distribution accepts HTTPS traffic for all of the domains that are associated with the certificate. Use the CreateCertificate action to create a certificate that you can attach to your distribution.  Only certificates created in the us-east-1 Amazon Web Services Region can be attached to Lightsail distributions. Lightsail distributions are global resources that can reference an origin in any Amazon Web Services Region, and distribute its content globally. However, all distributions are located in the us-east-1 Region. 
    */
   attachCertificateToDistribution(callback?: (err: AWSError, data: Lightsail.Types.AttachCertificateToDistributionResult) => void): Request<Lightsail.Types.AttachCertificateToDistributionResult, AWSError>;
   /**
@@ -68,11 +68,11 @@ declare class Lightsail extends Service {
    */
   closeInstancePublicPorts(callback?: (err: AWSError, data: Lightsail.Types.CloseInstancePublicPortsResult) => void): Request<Lightsail.Types.CloseInstancePublicPortsResult, AWSError>;
   /**
-   * Copies a manual snapshot of an instance or disk as another manual snapshot, or copies an automatic snapshot of an instance or disk as a manual snapshot. This operation can also be used to copy a manual or automatic snapshot of an instance or a disk from one AWS Region to another in Amazon Lightsail. When copying a manual snapshot, be sure to define the source region, source snapshot name, and target snapshot name parameters. When copying an automatic snapshot, be sure to define the source region, source resource name, target snapshot name, and either the restore date or the use latest restorable auto snapshot parameters.
+   * Copies a manual snapshot of an instance or disk as another manual snapshot, or copies an automatic snapshot of an instance or disk as a manual snapshot. This operation can also be used to copy a manual or automatic snapshot of an instance or a disk from one Amazon Web Services Region to another in Amazon Lightsail. When copying a manual snapshot, be sure to define the source region, source snapshot name, and target snapshot name parameters. When copying an automatic snapshot, be sure to define the source region, source resource name, target snapshot name, and either the restore date or the use latest restorable auto snapshot parameters.
    */
   copySnapshot(params: Lightsail.Types.CopySnapshotRequest, callback?: (err: AWSError, data: Lightsail.Types.CopySnapshotResult) => void): Request<Lightsail.Types.CopySnapshotResult, AWSError>;
   /**
-   * Copies a manual snapshot of an instance or disk as another manual snapshot, or copies an automatic snapshot of an instance or disk as a manual snapshot. This operation can also be used to copy a manual or automatic snapshot of an instance or a disk from one AWS Region to another in Amazon Lightsail. When copying a manual snapshot, be sure to define the source region, source snapshot name, and target snapshot name parameters. When copying an automatic snapshot, be sure to define the source region, source resource name, target snapshot name, and either the restore date or the use latest restorable auto snapshot parameters.
+   * Copies a manual snapshot of an instance or disk as another manual snapshot, or copies an automatic snapshot of an instance or disk as a manual snapshot. This operation can also be used to copy a manual or automatic snapshot of an instance or a disk from one Amazon Web Services Region to another in Amazon Lightsail. When copying a manual snapshot, be sure to define the source region, source snapshot name, and target snapshot name parameters. When copying an automatic snapshot, be sure to define the source region, source resource name, target snapshot name, and either the restore date or the use latest restorable auto snapshot parameters.
    */
   copySnapshot(callback?: (err: AWSError, data: Lightsail.Types.CopySnapshotResult) => void): Request<Lightsail.Types.CopySnapshotResult, AWSError>;
   /**
@@ -92,11 +92,11 @@ declare class Lightsail extends Service {
    */
   createBucketAccessKey(callback?: (err: AWSError, data: Lightsail.Types.CreateBucketAccessKeyResult) => void): Request<Lightsail.Types.CreateBucketAccessKeyResult, AWSError>;
   /**
-   * Creates an SSL/TLS certificate for an Amazon Lightsail content delivery network (CDN) distribution and a container service. After the certificate is valid, use the AttachCertificateToDistribution action to use the certificate and its domains with your distribution. Or use the UpdateContainerService action to use the certificate and its domains with your container service.  Only certificates created in the us-east-1 AWS Region can be attached to Lightsail distributions. Lightsail distributions are global resources that can reference an origin in any AWS Region, and distribute its content globally. However, all distributions are located in the us-east-1 Region. 
+   * Creates an SSL/TLS certificate for an Amazon Lightsail content delivery network (CDN) distribution and a container service. After the certificate is valid, use the AttachCertificateToDistribution action to use the certificate and its domains with your distribution. Or use the UpdateContainerService action to use the certificate and its domains with your container service.  Only certificates created in the us-east-1 Amazon Web Services Region can be attached to Lightsail distributions. Lightsail distributions are global resources that can reference an origin in any Amazon Web Services Region, and distribute its content globally. However, all distributions are located in the us-east-1 Region. 
    */
   createCertificate(params: Lightsail.Types.CreateCertificateRequest, callback?: (err: AWSError, data: Lightsail.Types.CreateCertificateResult) => void): Request<Lightsail.Types.CreateCertificateResult, AWSError>;
   /**
-   * Creates an SSL/TLS certificate for an Amazon Lightsail content delivery network (CDN) distribution and a container service. After the certificate is valid, use the AttachCertificateToDistribution action to use the certificate and its domains with your distribution. Or use the UpdateContainerService action to use the certificate and its domains with your container service.  Only certificates created in the us-east-1 AWS Region can be attached to Lightsail distributions. Lightsail distributions are global resources that can reference an origin in any AWS Region, and distribute its content globally. However, all distributions are located in the us-east-1 Region. 
+   * Creates an SSL/TLS certificate for an Amazon Lightsail content delivery network (CDN) distribution and a container service. After the certificate is valid, use the AttachCertificateToDistribution action to use the certificate and its domains with your distribution. Or use the UpdateContainerService action to use the certificate and its domains with your container service.  Only certificates created in the us-east-1 Amazon Web Services Region can be attached to Lightsail distributions. Lightsail distributions are global resources that can reference an origin in any Amazon Web Services Region, and distribute its content globally. However, all distributions are located in the us-east-1 Region. 
    */
   createCertificate(callback?: (err: AWSError, data: Lightsail.Types.CreateCertificateResult) => void): Request<Lightsail.Types.CreateCertificateResult, AWSError>;
   /**
@@ -108,11 +108,11 @@ declare class Lightsail extends Service {
    */
   createCloudFormationStack(callback?: (err: AWSError, data: Lightsail.Types.CreateCloudFormationStackResult) => void): Request<Lightsail.Types.CreateCloudFormationStackResult, AWSError>;
   /**
-   * Creates an email or SMS text message contact method. A contact method is used to send you notifications about your Amazon Lightsail resources. You can add one email address and one mobile phone number contact method in each AWS Region. However, SMS text messaging is not supported in some AWS Regions, and SMS text messages cannot be sent to some countries/regions. For more information, see Notifications in Amazon Lightsail.
+   * Creates an email or SMS text message contact method. A contact method is used to send you notifications about your Amazon Lightsail resources. You can add one email address and one mobile phone number contact method in each Amazon Web Services Region. However, SMS text messaging is not supported in some Amazon Web Services Regions, and SMS text messages cannot be sent to some countries/regions. For more information, see Notifications in Amazon Lightsail.
    */
   createContactMethod(params: Lightsail.Types.CreateContactMethodRequest, callback?: (err: AWSError, data: Lightsail.Types.CreateContactMethodResult) => void): Request<Lightsail.Types.CreateContactMethodResult, AWSError>;
   /**
-   * Creates an email or SMS text message contact method. A contact method is used to send you notifications about your Amazon Lightsail resources. You can add one email address and one mobile phone number contact method in each AWS Region. However, SMS text messaging is not supported in some AWS Regions, and SMS text messages cannot be sent to some countries/regions. For more information, see Notifications in Amazon Lightsail.
+   * Creates an email or SMS text message contact method. A contact method is used to send you notifications about your Amazon Lightsail resources. You can add one email address and one mobile phone number contact method in each Amazon Web Services Region. However, SMS text messaging is not supported in some Amazon Web Services Regions, and SMS text messages cannot be sent to some countries/regions. For more information, see Notifications in Amazon Lightsail.
    */
   createContactMethod(callback?: (err: AWSError, data: Lightsail.Types.CreateContactMethodResult) => void): Request<Lightsail.Types.CreateContactMethodResult, AWSError>;
   /**
@@ -124,11 +124,11 @@ declare class Lightsail extends Service {
    */
   createContainerService(callback?: (err: AWSError, data: Lightsail.Types.CreateContainerServiceResult) => void): Request<Lightsail.Types.CreateContainerServiceResult, AWSError>;
   /**
-   * Creates a deployment for your Amazon Lightsail container service. A deployment specifies the containers that will be launched on the container service and their settings, such as the ports to open, the environment variables to apply, and the launch command to run. It also specifies the container that will serve as the public endpoint of the deployment and its settings, such as the HTTP or HTTPS port to use, and the health check configuration. You can deploy containers to your container service using container images from a public registry like Docker Hub, or from your local machine. For more information, see Creating container images for your Amazon Lightsail container services in the Amazon Lightsail Developer Guide.
+   * Creates a deployment for your Amazon Lightsail container service. A deployment specifies the containers that will be launched on the container service and their settings, such as the ports to open, the environment variables to apply, and the launch command to run. It also specifies the container that will serve as the public endpoint of the deployment and its settings, such as the HTTP or HTTPS port to use, and the health check configuration. You can deploy containers to your container service using container images from a public registry such as Amazon ECR Public, or from your local machine. For more information, see Creating container images for your Amazon Lightsail container services in the Amazon Lightsail Developer Guide.
    */
   createContainerServiceDeployment(params: Lightsail.Types.CreateContainerServiceDeploymentRequest, callback?: (err: AWSError, data: Lightsail.Types.CreateContainerServiceDeploymentResult) => void): Request<Lightsail.Types.CreateContainerServiceDeploymentResult, AWSError>;
   /**
-   * Creates a deployment for your Amazon Lightsail container service. A deployment specifies the containers that will be launched on the container service and their settings, such as the ports to open, the environment variables to apply, and the launch command to run. It also specifies the container that will serve as the public endpoint of the deployment and its settings, such as the HTTP or HTTPS port to use, and the health check configuration. You can deploy containers to your container service using container images from a public registry like Docker Hub, or from your local machine. For more information, see Creating container images for your Amazon Lightsail container services in the Amazon Lightsail Developer Guide.
+   * Creates a deployment for your Amazon Lightsail container service. A deployment specifies the containers that will be launched on the container service and their settings, such as the ports to open, the environment variables to apply, and the launch command to run. It also specifies the container that will serve as the public endpoint of the deployment and its settings, such as the HTTP or HTTPS port to use, and the health check configuration. You can deploy containers to your container service using container images from a public registry such as Amazon ECR Public, or from your local machine. For more information, see Creating container images for your Amazon Lightsail container services in the Amazon Lightsail Developer Guide.
    */
   createContainerServiceDeployment(callback?: (err: AWSError, data: Lightsail.Types.CreateContainerServiceDeploymentResult) => void): Request<Lightsail.Types.CreateContainerServiceDeploymentResult, AWSError>;
   /**
@@ -212,11 +212,11 @@ declare class Lightsail extends Service {
    */
   createInstancesFromSnapshot(callback?: (err: AWSError, data: Lightsail.Types.CreateInstancesFromSnapshotResult) => void): Request<Lightsail.Types.CreateInstancesFromSnapshotResult, AWSError>;
   /**
-   * Creates an SSH key pair. The create key pair operation supports tag-based access control via request tags. For more information, see the Amazon Lightsail Developer Guide.
+   * Creates a custom SSH key pair that you can use with an Amazon Lightsail instance.  Use the DownloadDefaultKeyPair action to create a Lightsail default key pair in an Amazon Web Services Region where a default key pair does not currently exist.  The create key pair operation supports tag-based access control via request tags. For more information, see the Amazon Lightsail Developer Guide.
    */
   createKeyPair(params: Lightsail.Types.CreateKeyPairRequest, callback?: (err: AWSError, data: Lightsail.Types.CreateKeyPairResult) => void): Request<Lightsail.Types.CreateKeyPairResult, AWSError>;
   /**
-   * Creates an SSH key pair. The create key pair operation supports tag-based access control via request tags. For more information, see the Amazon Lightsail Developer Guide.
+   * Creates a custom SSH key pair that you can use with an Amazon Lightsail instance.  Use the DownloadDefaultKeyPair action to create a Lightsail default key pair in an Amazon Web Services Region where a default key pair does not currently exist.  The create key pair operation supports tag-based access control via request tags. For more information, see the Amazon Lightsail Developer Guide.
    */
   createKeyPair(callback?: (err: AWSError, data: Lightsail.Types.CreateKeyPairResult) => void): Request<Lightsail.Types.CreateKeyPairResult, AWSError>;
   /**
@@ -276,11 +276,11 @@ declare class Lightsail extends Service {
    */
   deleteAutoSnapshot(callback?: (err: AWSError, data: Lightsail.Types.DeleteAutoSnapshotResult) => void): Request<Lightsail.Types.DeleteAutoSnapshotResult, AWSError>;
   /**
-   * Deletes a Amazon Lightsail bucket.  When you delete your bucket, the bucket name is released and can be reused for a new bucket in your account or another AWS account. 
+   * Deletes a Amazon Lightsail bucket.  When you delete your bucket, the bucket name is released and can be reused for a new bucket in your account or another Amazon Web Services account. 
    */
   deleteBucket(params: Lightsail.Types.DeleteBucketRequest, callback?: (err: AWSError, data: Lightsail.Types.DeleteBucketResult) => void): Request<Lightsail.Types.DeleteBucketResult, AWSError>;
   /**
-   * Deletes a Amazon Lightsail bucket.  When you delete your bucket, the bucket name is released and can be reused for a new bucket in your account or another AWS account. 
+   * Deletes a Amazon Lightsail bucket.  When you delete your bucket, the bucket name is released and can be reused for a new bucket in your account or another Amazon Web Services account. 
    */
   deleteBucket(callback?: (err: AWSError, data: Lightsail.Types.DeleteBucketResult) => void): Request<Lightsail.Types.DeleteBucketResult, AWSError>;
   /**
@@ -300,11 +300,11 @@ declare class Lightsail extends Service {
    */
   deleteCertificate(callback?: (err: AWSError, data: Lightsail.Types.DeleteCertificateResult) => void): Request<Lightsail.Types.DeleteCertificateResult, AWSError>;
   /**
-   * Deletes a contact method. A contact method is used to send you notifications about your Amazon Lightsail resources. You can add one email address and one mobile phone number contact method in each AWS Region. However, SMS text messaging is not supported in some AWS Regions, and SMS text messages cannot be sent to some countries/regions. For more information, see Notifications in Amazon Lightsail.
+   * Deletes a contact method. A contact method is used to send you notifications about your Amazon Lightsail resources. You can add one email address and one mobile phone number contact method in each Amazon Web Services Region. However, SMS text messaging is not supported in some Amazon Web Services Regions, and SMS text messages cannot be sent to some countries/regions. For more information, see Notifications in Amazon Lightsail.
    */
   deleteContactMethod(params: Lightsail.Types.DeleteContactMethodRequest, callback?: (err: AWSError, data: Lightsail.Types.DeleteContactMethodResult) => void): Request<Lightsail.Types.DeleteContactMethodResult, AWSError>;
   /**
-   * Deletes a contact method. A contact method is used to send you notifications about your Amazon Lightsail resources. You can add one email address and one mobile phone number contact method in each AWS Region. However, SMS text messaging is not supported in some AWS Regions, and SMS text messages cannot be sent to some countries/regions. For more information, see Notifications in Amazon Lightsail.
+   * Deletes a contact method. A contact method is used to send you notifications about your Amazon Lightsail resources. You can add one email address and one mobile phone number contact method in each Amazon Web Services Region. However, SMS text messaging is not supported in some Amazon Web Services Regions, and SMS text messages cannot be sent to some countries/regions. For more information, see Notifications in Amazon Lightsail.
    */
   deleteContactMethod(callback?: (err: AWSError, data: Lightsail.Types.DeleteContactMethodResult) => void): Request<Lightsail.Types.DeleteContactMethodResult, AWSError>;
   /**
@@ -380,11 +380,11 @@ declare class Lightsail extends Service {
    */
   deleteInstanceSnapshot(callback?: (err: AWSError, data: Lightsail.Types.DeleteInstanceSnapshotResult) => void): Request<Lightsail.Types.DeleteInstanceSnapshotResult, AWSError>;
   /**
-   * Deletes a specific SSH key pair. The delete key pair operation supports tag-based access control via resource tags applied to the resource identified by key pair name. For more information, see the Amazon Lightsail Developer Guide.
+   * Deletes the specified key pair by removing the public key from Amazon Lightsail. You can delete key pairs that were created using the ImportKeyPair and CreateKeyPair actions, as well as the Lightsail default key pair. A new default key pair will not be created unless you launch an instance without specifying a custom key pair, or you call the DownloadDefaultKeyPair API.  The delete key pair operation supports tag-based access control via resource tags applied to the resource identified by key pair name. For more information, see the Amazon Lightsail Developer Guide.
    */
   deleteKeyPair(params: Lightsail.Types.DeleteKeyPairRequest, callback?: (err: AWSError, data: Lightsail.Types.DeleteKeyPairResult) => void): Request<Lightsail.Types.DeleteKeyPairResult, AWSError>;
   /**
-   * Deletes a specific SSH key pair. The delete key pair operation supports tag-based access control via resource tags applied to the resource identified by key pair name. For more information, see the Amazon Lightsail Developer Guide.
+   * Deletes the specified key pair by removing the public key from Amazon Lightsail. You can delete key pairs that were created using the ImportKeyPair and CreateKeyPair actions, as well as the Lightsail default key pair. A new default key pair will not be created unless you launch an instance without specifying a custom key pair, or you call the DownloadDefaultKeyPair API.  The delete key pair operation supports tag-based access control via resource tags applied to the resource identified by key pair name. For more information, see the Amazon Lightsail Developer Guide.
    */
   deleteKeyPair(callback?: (err: AWSError, data: Lightsail.Types.DeleteKeyPairResult) => void): Request<Lightsail.Types.DeleteKeyPairResult, AWSError>;
   /**
@@ -468,11 +468,11 @@ declare class Lightsail extends Service {
    */
   disableAddOn(callback?: (err: AWSError, data: Lightsail.Types.DisableAddOnResult) => void): Request<Lightsail.Types.DisableAddOnResult, AWSError>;
   /**
-   * Downloads the default SSH key pair from the user's account.
+   * Downloads the regional Amazon Lightsail default key pair. This action also creates a Lightsail default key pair if a default key pair does not currently exist in the Amazon Web Services Region.
    */
   downloadDefaultKeyPair(params: Lightsail.Types.DownloadDefaultKeyPairRequest, callback?: (err: AWSError, data: Lightsail.Types.DownloadDefaultKeyPairResult) => void): Request<Lightsail.Types.DownloadDefaultKeyPairResult, AWSError>;
   /**
-   * Downloads the default SSH key pair from the user's account.
+   * Downloads the regional Amazon Lightsail default key pair. This action also creates a Lightsail default key pair if a default key pair does not currently exist in the Amazon Web Services Region.
    */
   downloadDefaultKeyPair(callback?: (err: AWSError, data: Lightsail.Types.DownloadDefaultKeyPairResult) => void): Request<Lightsail.Types.DownloadDefaultKeyPairResult, AWSError>;
   /**
@@ -548,19 +548,19 @@ declare class Lightsail extends Service {
    */
   getBucketMetricData(callback?: (err: AWSError, data: Lightsail.Types.GetBucketMetricDataResult) => void): Request<Lightsail.Types.GetBucketMetricDataResult, AWSError>;
   /**
-   * Returns information about one or more Amazon Lightsail buckets. For more information about buckets, see Buckets in Amazon Lightsail in the Amazon Lightsail Developer Guide..
+   * Returns information about one or more Amazon Lightsail buckets. The information returned includes the synchronization status of the Amazon Simple Storage Service (Amazon S3) account-level block public access feature for your Lightsail buckets. For more information about buckets, see Buckets in Amazon Lightsail in the Amazon Lightsail Developer Guide.
    */
   getBuckets(params: Lightsail.Types.GetBucketsRequest, callback?: (err: AWSError, data: Lightsail.Types.GetBucketsResult) => void): Request<Lightsail.Types.GetBucketsResult, AWSError>;
   /**
-   * Returns information about one or more Amazon Lightsail buckets. For more information about buckets, see Buckets in Amazon Lightsail in the Amazon Lightsail Developer Guide..
+   * Returns information about one or more Amazon Lightsail buckets. The information returned includes the synchronization status of the Amazon Simple Storage Service (Amazon S3) account-level block public access feature for your Lightsail buckets. For more information about buckets, see Buckets in Amazon Lightsail in the Amazon Lightsail Developer Guide.
    */
   getBuckets(callback?: (err: AWSError, data: Lightsail.Types.GetBucketsResult) => void): Request<Lightsail.Types.GetBucketsResult, AWSError>;
   /**
-   * Returns the list of bundles that are available for purchase. A bundle describes the specs for your virtual private server (or instance).
+   * Returns the bundles that you can apply to an Amazon Lightsail instance when you create it. A bundle describes the specifications of an instance, such as the monthly cost, amount of memory, the number of vCPUs, amount of storage space, and monthly network data transfer quota.  Bundles are referred to as instance plans in the Lightsail console. 
    */
   getBundles(params: Lightsail.Types.GetBundlesRequest, callback?: (err: AWSError, data: Lightsail.Types.GetBundlesResult) => void): Request<Lightsail.Types.GetBundlesResult, AWSError>;
   /**
-   * Returns the list of bundles that are available for purchase. A bundle describes the specs for your virtual private server (or instance).
+   * Returns the bundles that you can apply to an Amazon Lightsail instance when you create it. A bundle describes the specifications of an instance, such as the monthly cost, amount of memory, the number of vCPUs, amount of storage space, and monthly network data transfer quota.  Bundles are referred to as instance plans in the Lightsail console. 
    */
   getBundles(callback?: (err: AWSError, data: Lightsail.Types.GetBundlesResult) => void): Request<Lightsail.Types.GetBundlesResult, AWSError>;
   /**
@@ -580,11 +580,11 @@ declare class Lightsail extends Service {
    */
   getCloudFormationStackRecords(callback?: (err: AWSError, data: Lightsail.Types.GetCloudFormationStackRecordsResult) => void): Request<Lightsail.Types.GetCloudFormationStackRecordsResult, AWSError>;
   /**
-   * Returns information about the configured contact methods. Specify a protocol in your request to return information about a specific contact method. A contact method is used to send you notifications about your Amazon Lightsail resources. You can add one email address and one mobile phone number contact method in each AWS Region. However, SMS text messaging is not supported in some AWS Regions, and SMS text messages cannot be sent to some countries/regions. For more information, see Notifications in Amazon Lightsail.
+   * Returns information about the configured contact methods. Specify a protocol in your request to return information about a specific contact method. A contact method is used to send you notifications about your Amazon Lightsail resources. You can add one email address and one mobile phone number contact method in each Amazon Web Services Region. However, SMS text messaging is not supported in some Amazon Web Services Regions, and SMS text messages cannot be sent to some countries/regions. For more information, see Notifications in Amazon Lightsail.
    */
   getContactMethods(params: Lightsail.Types.GetContactMethodsRequest, callback?: (err: AWSError, data: Lightsail.Types.GetContactMethodsResult) => void): Request<Lightsail.Types.GetContactMethodsResult, AWSError>;
   /**
-   * Returns information about the configured contact methods. Specify a protocol in your request to return information about a specific contact method. A contact method is used to send you notifications about your Amazon Lightsail resources. You can add one email address and one mobile phone number contact method in each AWS Region. However, SMS text messaging is not supported in some AWS Regions, and SMS text messages cannot be sent to some countries/regions. For more information, see Notifications in Amazon Lightsail.
+   * Returns information about the configured contact methods. Specify a protocol in your request to return information about a specific contact method. A contact method is used to send you notifications about your Amazon Lightsail resources. You can add one email address and one mobile phone number contact method in each Amazon Web Services Region. However, SMS text messaging is not supported in some Amazon Web Services Regions, and SMS text messages cannot be sent to some countries/regions. For more information, see Notifications in Amazon Lightsail.
    */
   getContactMethods(callback?: (err: AWSError, data: Lightsail.Types.GetContactMethodsResult) => void): Request<Lightsail.Types.GetContactMethodsResult, AWSError>;
   /**
@@ -676,11 +676,11 @@ declare class Lightsail extends Service {
    */
   getDisks(callback?: (err: AWSError, data: Lightsail.Types.GetDisksResult) => void): Request<Lightsail.Types.GetDisksResult, AWSError>;
   /**
-   * Returns the bundles that can be applied to your Amazon Lightsail content delivery network (CDN) distributions. A distribution bundle specifies the monthly network transfer quota and monthly cost of your dsitribution.
+   * Returns the bundles that can be applied to your Amazon Lightsail content delivery network (CDN) distributions. A distribution bundle specifies the monthly network transfer quota and monthly cost of your distribution.
    */
   getDistributionBundles(params: Lightsail.Types.GetDistributionBundlesRequest, callback?: (err: AWSError, data: Lightsail.Types.GetDistributionBundlesResult) => void): Request<Lightsail.Types.GetDistributionBundlesResult, AWSError>;
   /**
-   * Returns the bundles that can be applied to your Amazon Lightsail content delivery network (CDN) distributions. A distribution bundle specifies the monthly network transfer quota and monthly cost of your dsitribution.
+   * Returns the bundles that can be applied to your Amazon Lightsail content delivery network (CDN) distributions. A distribution bundle specifies the monthly network transfer quota and monthly cost of your distribution.
    */
   getDistributionBundles(callback?: (err: AWSError, data: Lightsail.Types.GetDistributionBundlesResult) => void): Request<Lightsail.Types.GetDistributionBundlesResult, AWSError>;
   /**
@@ -835,6 +835,14 @@ declare class Lightsail extends Service {
    * Returns information about the TLS certificates that are associated with the specified Lightsail load balancer. TLS is just an updated, more secure version of Secure Socket Layer (SSL). You can have a maximum of 2 certificates associated with a Lightsail load balancer. One is active and the other is inactive.
    */
   getLoadBalancerTlsCertificates(callback?: (err: AWSError, data: Lightsail.Types.GetLoadBalancerTlsCertificatesResult) => void): Request<Lightsail.Types.GetLoadBalancerTlsCertificatesResult, AWSError>;
+  /**
+   * Returns a list of TLS security policies that you can apply to Lightsail load balancers. For more information about load balancer TLS security policies, see Configuring TLS security policies on your Amazon Lightsail load balancers in the Amazon Lightsail Developer Guide.
+   */
+  getLoadBalancerTlsPolicies(params: Lightsail.Types.GetLoadBalancerTlsPoliciesRequest, callback?: (err: AWSError, data: Lightsail.Types.GetLoadBalancerTlsPoliciesResult) => void): Request<Lightsail.Types.GetLoadBalancerTlsPoliciesResult, AWSError>;
+  /**
+   * Returns a list of TLS security policies that you can apply to Lightsail load balancers. For more information about load balancer TLS security policies, see Configuring TLS security policies on your Amazon Lightsail load balancers in the Amazon Lightsail Developer Guide.
+   */
+  getLoadBalancerTlsPolicies(callback?: (err: AWSError, data: Lightsail.Types.GetLoadBalancerTlsPoliciesResult) => void): Request<Lightsail.Types.GetLoadBalancerTlsPoliciesResult, AWSError>;
   /**
    * Returns information about all load balancers in an account.
    */
@@ -1076,11 +1084,11 @@ declare class Lightsail extends Service {
    */
   resetDistributionCache(callback?: (err: AWSError, data: Lightsail.Types.ResetDistributionCacheResult) => void): Request<Lightsail.Types.ResetDistributionCacheResult, AWSError>;
   /**
-   * Sends a verification request to an email contact method to ensure it's owned by the requester. SMS contact methods don't need to be verified. A contact method is used to send you notifications about your Amazon Lightsail resources. You can add one email address and one mobile phone number contact method in each AWS Region. However, SMS text messaging is not supported in some AWS Regions, and SMS text messages cannot be sent to some countries/regions. For more information, see Notifications in Amazon Lightsail. A verification request is sent to the contact method when you initially create it. Use this action to send another verification request if a previous verification request was deleted, or has expired.  Notifications are not sent to an email contact method until after it is verified, and confirmed as valid. 
+   * Sends a verification request to an email contact method to ensure it's owned by the requester. SMS contact methods don't need to be verified. A contact method is used to send you notifications about your Amazon Lightsail resources. You can add one email address and one mobile phone number contact method in each Amazon Web Services Region. However, SMS text messaging is not supported in some Amazon Web Services Regions, and SMS text messages cannot be sent to some countries/regions. For more information, see Notifications in Amazon Lightsail. A verification request is sent to the contact method when you initially create it. Use this action to send another verification request if a previous verification request was deleted, or has expired.  Notifications are not sent to an email contact method until after it is verified, and confirmed as valid. 
    */
   sendContactMethodVerification(params: Lightsail.Types.SendContactMethodVerificationRequest, callback?: (err: AWSError, data: Lightsail.Types.SendContactMethodVerificationResult) => void): Request<Lightsail.Types.SendContactMethodVerificationResult, AWSError>;
   /**
-   * Sends a verification request to an email contact method to ensure it's owned by the requester. SMS contact methods don't need to be verified. A contact method is used to send you notifications about your Amazon Lightsail resources. You can add one email address and one mobile phone number contact method in each AWS Region. However, SMS text messaging is not supported in some AWS Regions, and SMS text messages cannot be sent to some countries/regions. For more information, see Notifications in Amazon Lightsail. A verification request is sent to the contact method when you initially create it. Use this action to send another verification request if a previous verification request was deleted, or has expired.  Notifications are not sent to an email contact method until after it is verified, and confirmed as valid. 
+   * Sends a verification request to an email contact method to ensure it's owned by the requester. SMS contact methods don't need to be verified. A contact method is used to send you notifications about your Amazon Lightsail resources. You can add one email address and one mobile phone number contact method in each Amazon Web Services Region. However, SMS text messaging is not supported in some Amazon Web Services Regions, and SMS text messages cannot be sent to some countries/regions. For more information, see Notifications in Amazon Lightsail. A verification request is sent to the contact method when you initially create it. Use this action to send another verification request if a previous verification request was deleted, or has expired.  Notifications are not sent to an email contact method until after it is verified, and confirmed as valid. 
    */
   sendContactMethodVerification(callback?: (err: AWSError, data: Lightsail.Types.SendContactMethodVerificationResult) => void): Request<Lightsail.Types.SendContactMethodVerificationResult, AWSError>;
   /**
@@ -1092,11 +1100,11 @@ declare class Lightsail extends Service {
    */
   setIpAddressType(callback?: (err: AWSError, data: Lightsail.Types.SetIpAddressTypeResult) => void): Request<Lightsail.Types.SetIpAddressTypeResult, AWSError>;
   /**
-   * Sets the Amazon Lightsail resources that can access the specified Lightsail bucket. Lightsail buckets currently support setting access for Lightsail instances in the same AWS Region.
+   * Sets the Amazon Lightsail resources that can access the specified Lightsail bucket. Lightsail buckets currently support setting access for Lightsail instances in the same Amazon Web Services Region.
    */
   setResourceAccessForBucket(params: Lightsail.Types.SetResourceAccessForBucketRequest, callback?: (err: AWSError, data: Lightsail.Types.SetResourceAccessForBucketResult) => void): Request<Lightsail.Types.SetResourceAccessForBucketResult, AWSError>;
   /**
-   * Sets the Amazon Lightsail resources that can access the specified Lightsail bucket. Lightsail buckets currently support setting access for Lightsail instances in the same AWS Region.
+   * Sets the Amazon Lightsail resources that can access the specified Lightsail bucket. Lightsail buckets currently support setting access for Lightsail instances in the same Amazon Web Services Region.
    */
   setResourceAccessForBucket(callback?: (err: AWSError, data: Lightsail.Types.SetResourceAccessForBucketResult) => void): Request<Lightsail.Types.SetResourceAccessForBucketResult, AWSError>;
   /**
@@ -1164,11 +1172,11 @@ declare class Lightsail extends Service {
    */
   untagResource(callback?: (err: AWSError, data: Lightsail.Types.UntagResourceResult) => void): Request<Lightsail.Types.UntagResourceResult, AWSError>;
   /**
-   * Updates an existing Amazon Lightsail bucket. Use this action to update the configuration of an existing bucket, such as versioning, public accessibility, and the AWS accounts that can access the bucket.
+   * Updates an existing Amazon Lightsail bucket. Use this action to update the configuration of an existing bucket, such as versioning, public accessibility, and the Amazon Web Services accounts that can access the bucket.
    */
   updateBucket(params: Lightsail.Types.UpdateBucketRequest, callback?: (err: AWSError, data: Lightsail.Types.UpdateBucketResult) => void): Request<Lightsail.Types.UpdateBucketResult, AWSError>;
   /**
-   * Updates an existing Amazon Lightsail bucket. Use this action to update the configuration of an existing bucket, such as versioning, public accessibility, and the AWS accounts that can access the bucket.
+   * Updates an existing Amazon Lightsail bucket. Use this action to update the configuration of an existing bucket, such as versioning, public accessibility, and the Amazon Web Services accounts that can access the bucket.
    */
   updateBucket(callback?: (err: AWSError, data: Lightsail.Types.UpdateBucketResult) => void): Request<Lightsail.Types.UpdateBucketResult, AWSError>;
   /**
@@ -1196,11 +1204,11 @@ declare class Lightsail extends Service {
    */
   updateDistribution(callback?: (err: AWSError, data: Lightsail.Types.UpdateDistributionResult) => void): Request<Lightsail.Types.UpdateDistributionResult, AWSError>;
   /**
-   * Updates the bundle of your Amazon Lightsail content delivery network (CDN) distribution. A distribution bundle specifies the monthly network transfer quota and monthly cost of your dsitribution. Update your distribution's bundle if your distribution is going over its monthly network transfer quota and is incurring an overage fee. You can update your distribution's bundle only one time within your monthly AWS billing cycle. To determine if you can update your distribution's bundle, use the GetDistributions action. The ableToUpdateBundle parameter in the result will indicate whether you can currently update your distribution's bundle.
+   * Updates the bundle of your Amazon Lightsail content delivery network (CDN) distribution. A distribution bundle specifies the monthly network transfer quota and monthly cost of your distribution. Update your distribution's bundle if your distribution is going over its monthly network transfer quota and is incurring an overage fee. You can update your distribution's bundle only one time within your monthly AWS billing cycle. To determine if you can update your distribution's bundle, use the GetDistributions action. The ableToUpdateBundle parameter in the result will indicate whether you can currently update your distribution's bundle.
    */
   updateDistributionBundle(params: Lightsail.Types.UpdateDistributionBundleRequest, callback?: (err: AWSError, data: Lightsail.Types.UpdateDistributionBundleResult) => void): Request<Lightsail.Types.UpdateDistributionBundleResult, AWSError>;
   /**
-   * Updates the bundle of your Amazon Lightsail content delivery network (CDN) distribution. A distribution bundle specifies the monthly network transfer quota and monthly cost of your dsitribution. Update your distribution's bundle if your distribution is going over its monthly network transfer quota and is incurring an overage fee. You can update your distribution's bundle only one time within your monthly AWS billing cycle. To determine if you can update your distribution's bundle, use the GetDistributions action. The ableToUpdateBundle parameter in the result will indicate whether you can currently update your distribution's bundle.
+   * Updates the bundle of your Amazon Lightsail content delivery network (CDN) distribution. A distribution bundle specifies the monthly network transfer quota and monthly cost of your distribution. Update your distribution's bundle if your distribution is going over its monthly network transfer quota and is incurring an overage fee. You can update your distribution's bundle only one time within your monthly AWS billing cycle. To determine if you can update your distribution's bundle, use the GetDistributions action. The ableToUpdateBundle parameter in the result will indicate whether you can currently update your distribution's bundle.
    */
   updateDistributionBundle(callback?: (err: AWSError, data: Lightsail.Types.UpdateDistributionBundleResult) => void): Request<Lightsail.Types.UpdateDistributionBundleResult, AWSError>;
   /**
@@ -1287,6 +1295,25 @@ declare namespace Lightsail {
     allowPublicOverrides?: boolean;
   }
   export type AccessType = "public"|"private"|string;
+  export interface AccountLevelBpaSync {
+    /**
+     * The status of the account-level BPA synchronization. The following statuses are possible:    InSync - Account-level BPA is synchronized. The Amazon S3 account-level BPA configuration applies to your Lightsail buckets.    NeverSynced - Synchronization has not yet happened. The Amazon S3 account-level BPA configuration does not apply to your Lightsail buckets.    Failed - Synchronization failed. The Amazon S3 account-level BPA configuration does not apply to your Lightsail buckets.    Defaulted - Synchronization failed and account-level BPA for your Lightsail buckets is defaulted to active.    You might need to complete further actions if the status is Failed or Defaulted. The message parameter provides more information for those statuses. 
+     */
+    status?: AccountLevelBpaSyncStatus;
+    /**
+     * The timestamp of when the account-level BPA configuration was last synchronized. This value is null when the account-level BPA configuration has not been synchronized.
+     */
+    lastSyncedAt?: IsoDate;
+    /**
+     * A message that provides a reason for a Failed or Defaulted synchronization status. The following messages are possible:    SYNC_ON_HOLD - The synchronization has not yet happened. This status message occurs immediately after you create your first Lightsail bucket. This status message should change after the first synchronization happens, approximately 1 hour after the first bucket is created.    DEFAULTED_FOR_SLR_MISSING - The synchronization failed because the required service-linked role is missing from your Amazon Web Services account. The account-level BPA configuration for your Lightsail buckets is defaulted to active until the synchronization can occur. This means that all your buckets are private and not publicly accessible. For more information about how to create the required service-linked role to allow synchronization, see Using Service-Linked Roles for Amazon Lightsail in the Amazon Lightsail Developer Guide.    DEFAULTED_FOR_SLR_MISSING_ON_HOLD - The synchronization failed because the required service-linked role is missing from your Amazon Web Services account. Account-level BPA is not yet configured for your Lightsail buckets. Therefore, only the bucket access permissions and individual object access permissions apply to your Lightsail buckets. For more information about how to create the required service-linked role to allow synchronization, see Using Service-Linked Roles for Amazon Lightsail in the Amazon Lightsail Developer Guide.    Unknown - The reason that synchronization failed is unknown. Contact Amazon Web Services Support for more information.  
+     */
+    message?: BPAStatusMessage;
+    /**
+     * A Boolean value that indicates whether account-level block public access is affecting your Lightsail buckets.
+     */
+    bpaImpactsLightsail?: boolean;
+  }
+  export type AccountLevelBpaSyncStatus = "InSync"|"Failed"|"NeverSynced"|"Defaulted"|string;
   export interface AddOn {
     /**
      * The name of the add-on.
@@ -1548,6 +1575,7 @@ declare namespace Lightsail {
     state?: NonEmptyString;
   }
   export type AvailabilityZoneList = AvailabilityZone[];
+  export type BPAStatusMessage = "DEFAULTED_FOR_SLR_MISSING"|"SYNC_ON_HOLD"|"DEFAULTED_FOR_SLR_MISSING_ON_HOLD"|"Unknown"|string;
   export type Base64 = string;
   export type BehaviorEnum = "dont-cache"|"cache"|string;
   export interface Blueprint {
@@ -1627,6 +1655,9 @@ declare namespace Lightsail {
      * The URL of the bucket.
      */
     url?: NonEmptyString;
+    /**
+     * An object that describes the location of the bucket, such as the Amazon Web Services Region and Availability Zone.
+     */
     location?: ResourceLocation;
     /**
      * The name of the bucket.
@@ -1645,11 +1676,11 @@ declare namespace Lightsail {
      */
     objectVersioning?: NonEmptyString;
     /**
-     * Indicates whether the bundle that is currently applied to a bucket can be changed to another bundle. You can update a bucket's bundle only one time within a monthly AWS billing cycle. Use the UpdateBucketBundle action to change a bucket's bundle.
+     * Indicates whether the bundle that is currently applied to a bucket can be changed to another bundle. You can update a bucket's bundle only one time within a monthly Amazon Web Services billing cycle. Use the UpdateBucketBundle action to change a bucket's bundle.
      */
     ableToUpdateBundle?: boolean;
     /**
-     * An array of strings that specify the AWS account IDs that have read-only access to the bucket.
+     * An array of strings that specify the Amazon Web Services account IDs that have read-only access to the bucket.
      */
     readonlyAccessAccounts?: PartnerIdList;
     /**
@@ -1660,7 +1691,26 @@ declare namespace Lightsail {
      * An object that describes the state of the bucket.
      */
     state?: BucketState;
+    /**
+     * An object that describes the access log configuration for the bucket.
+     */
+    accessLogConfig?: BucketAccessLogConfig;
   }
+  export interface BucketAccessLogConfig {
+    /**
+     * A Boolean value that indicates whether bucket access logging is enabled for the bucket.
+     */
+    enabled: boolean;
+    /**
+     * The name of the bucket where the access logs are saved. The destination can be a Lightsail bucket in the same account, and in the same Amazon Web Services Region as the source bucket.  This parameter is required when enabling the access log for a bucket, and should be omitted when disabling the access log. 
+     */
+    destination?: BucketName;
+    /**
+     * The optional object prefix for the bucket access log. The prefix is an optional addition to the object key that organizes your access log files in the destination bucket. For example, if you specify a logs/ prefix, then each log object will begin with the logs/ prefix in its key (for example, logs/2021-11-01-21-32-16-E568B2907131C0C0).  This parameter can be optionally specified when enabling the access log for a bucket, and should be omitted when disabling the access log. 
+     */
+    prefix?: BucketAccessLogPrefix;
+  }
+  export type BucketAccessLogPrefix = string;
   export interface BucketBundle {
     /**
      * The ID of the bundle.
@@ -1941,7 +1991,7 @@ declare namespace Lightsail {
      */
     createdAt?: IsoDate;
     /**
-     * A list of objects describing the Availability Zone and AWS Region of the CloudFormation stack record.
+     * A list of objects describing the Availability Zone and Amazon Web Services Region of the CloudFormation stack record.
      */
     location?: ResourceLocation;
     /**
@@ -2004,6 +2054,9 @@ declare namespace Lightsail {
      * The timestamp when the contact method was created.
      */
     createdAt?: IsoDate;
+    /**
+     * An object that describes the location of the contact method, such as the Amazon Web Services Region and Availability Zone.
+     */
     location?: ResourceLocation;
     /**
      * The Lightsail resource type (e.g., ContactMethod).
@@ -2021,7 +2074,7 @@ declare namespace Lightsail {
   export type ContactProtocolsList = ContactProtocol[];
   export interface Container {
     /**
-     * The name of the image used for the container. Container images sourced from your Lightsail container service, that are registered and stored on your service, start with a colon (:). For example, :container-service-1.mystaticwebsite.1. Container images sourced from a public registry like Docker Hub don't start with a colon. For example, nginx:latest or nginx.
+     * The name of the image used for the container. Container images sourced from your Lightsail container service, that are registered and stored on your service, start with a colon (:). For example, if your container service name is container-service-1, the container image label is mystaticsite, and you want to use the third (3) version of the registered container image, then you should specify :container-service-1.mystaticsite.3. To use the latest version of a container image, specify latest instead of a version number (for example, :container-service-1.mystaticsite.latest). Lightsail will automatically use the highest numbered version of the registered container image. Container images sourced from a public registry like Docker Hub don't start with a colon. For example, nginx:latest or nginx.
      */
     image?: string;
     /**
@@ -2069,7 +2122,7 @@ declare namespace Lightsail {
      */
     createdAt?: IsoDate;
     /**
-     * An object that describes the location of the container service, such as the AWS Region and Availability Zone.
+     * An object that describes the location of the container service, such as the Amazon Web Services Region and Availability Zone.
      */
     location?: ResourceLocation;
     /**
@@ -2113,7 +2166,7 @@ declare namespace Lightsail {
      */
     isDisabled?: boolean;
     /**
-     * The principal ARN of the container service. The principal ARN can be used to create a trust relationship between your standard AWS account and your Lightsail container service. This allows you to give your service permission to access resources in your standard AWS account.
+     * The principal ARN of the container service. The principal ARN can be used to create a trust relationship between your standard Amazon Web Services account and your Lightsail container service. This allows you to give your service permission to access resources in your standard Amazon Web Services account.
      */
     principalArn?: string;
     /**
@@ -2319,7 +2372,7 @@ declare namespace Lightsail {
      */
     targetSnapshotName: ResourceName;
     /**
-     * The AWS Region where the source manual or automatic snapshot is located.
+     * The Amazon Web Services Region where the source manual or automatic snapshot is located.
      */
     sourceRegion: RegionName;
   }
@@ -2415,7 +2468,7 @@ declare namespace Lightsail {
   }
   export interface CreateContactMethodRequest {
     /**
-     * The protocol of the contact method, such as Email or SMS (text messaging). The SMS protocol is supported only in the following AWS Regions.   US East (N. Virginia) (us-east-1)   US West (Oregon) (us-west-2)   Europe (Ireland) (eu-west-1)   Asia Pacific (Tokyo) (ap-northeast-1)   Asia Pacific (Singapore) (ap-southeast-1)   Asia Pacific (Sydney) (ap-southeast-2)   For a list of countries/regions where SMS text messages can be sent, and the latest AWS Regions where SMS text messaging is supported, see Supported Regions and Countries in the Amazon SNS Developer Guide. For more information about notifications in Amazon Lightsail, see Notifications in Amazon Lightsail.
+     * The protocol of the contact method, such as Email or SMS (text messaging). The SMS protocol is supported only in the following Amazon Web Services Regions.   US East (N. Virginia) (us-east-1)   US West (Oregon) (us-west-2)   Europe (Ireland) (eu-west-1)   Asia Pacific (Tokyo) (ap-northeast-1)   Asia Pacific (Singapore) (ap-southeast-1)   Asia Pacific (Sydney) (ap-southeast-2)   For a list of countries/regions where SMS text messages can be sent, and the latest Amazon Web Services Regions where SMS text messaging is supported, see Supported Regions and Countries in the Amazon SNS Developer Guide. For more information about notifications in Amazon Lightsail, see Notifications in Amazon Lightsail.
      */
     protocol: ContactProtocol;
     /**
@@ -2459,7 +2512,7 @@ declare namespace Lightsail {
   }
   export interface CreateContainerServiceRequest {
     /**
-     * The name for the container service. The name that you specify for your container service will make up part of its default domain. The default domain of a container service is typically https://&lt;ServiceName&gt;.&lt;RandomGUID&gt;.&lt;AWSRegion&gt;.cs.amazonlightsail.com. If the name of your container service is container-service-1, and it's located in the US East (Ohio) AWS region (us-east-2), then the domain for your container service will be like the following example: https://container-service-1.ur4EXAMPLE2uq.us-east-2.cs.amazonlightsail.com  The following are the requirements for container service names:   Must be unique within each AWS Region in your Lightsail account.   Must contain 1 to 63 characters.   Must contain only alphanumeric characters and hyphens.   A hyphen (-) can separate words but cannot be at the start or end of the name.  
+     * The name for the container service. The name that you specify for your container service will make up part of its default domain. The default domain of a container service is typically https://&lt;ServiceName&gt;.&lt;RandomGUID&gt;.&lt;AWSRegion&gt;.cs.amazonlightsail.com. If the name of your container service is container-service-1, and it's located in the US East (Ohio) AWS region (us-east-2), then the domain for your container service will be like the following example: https://container-service-1.ur4EXAMPLE2uq.us-east-2.cs.amazonlightsail.com  The following are the requirements for container service names:   Must be unique within each Amazon Web Services Region in your Lightsail account.   Must contain 1 to 63 characters.   Must contain only alphanumeric characters and hyphens.   A hyphen (-) can separate words but cannot be at the start or end of the name.  
      */
     serviceName: ContainerServiceName;
     /**
@@ -2471,7 +2524,7 @@ declare namespace Lightsail {
      */
     scale: ContainerServiceScale;
     /**
-     * The tag keys and optional values to add to the certificate during create. Use the TagResource action to tag a resource after it's created. For more information about tags in Lightsail, see the Amazon Lightsail Developer Guide.
+     * The tag keys and optional values to add to the container service during create. Use the TagResource action to tag a resource after it's created. For more information about tags in Lightsail, see the Amazon Lightsail Developer Guide.
      */
     tags?: TagList;
     /**
@@ -2591,7 +2644,7 @@ declare namespace Lightsail {
      */
     distributionName: ResourceName;
     /**
-     * An object that describes the origin resource for the distribution, such as a Lightsail instance or load balancer. The distribution pulls, caches, and serves content from the origin.
+     * An object that describes the origin resource for the distribution, such as a Lightsail instance, bucket, or load balancer. The distribution pulls, caches, and serves content from the origin.
      */
     origin: InputOrigin;
     /**
@@ -2850,6 +2903,10 @@ declare namespace Lightsail {
      * The IP address type for the load balancer. The possible values are ipv4 for IPv4 only, and dualstack for IPv4 and IPv6. The default value is dualstack.
      */
     ipAddressType?: IpAddressType;
+    /**
+     * The name of the TLS policy to apply to the load balancer. Use the GetLoadBalancerTlsPolicies action to get a list of TLS policy names that you can specify. For more information about load balancer TLS policies, see Configuring TLS security policies on your Amazon Lightsail load balancers in the Amazon Lightsail Developer Guide.
+     */
+    tlsPolicyName?: string;
   }
   export interface CreateLoadBalancerResult {
     /**
@@ -3206,6 +3263,10 @@ declare namespace Lightsail {
      * The name of the key pair to delete.
      */
     keyPairName: ResourceName;
+    /**
+     * The RSA fingerprint of the Lightsail default key pair to delete.  The expectedFingerprint parameter is required only when specifying to delete a Lightsail default key pair. 
+     */
+    expectedFingerprint?: string;
   }
   export interface DeleteKeyPairResult {
     /**
@@ -3653,6 +3714,10 @@ declare namespace Lightsail {
      * A base64-encoded RSA private key.
      */
     privateKeyBase64?: Base64;
+    /**
+     * The timestamp when the default key pair was created.
+     */
+    createdAt?: IsoDate;
   }
   export type EligibleToRenew = string;
   export interface EnableAddOnRequest {
@@ -3831,7 +3896,7 @@ declare namespace Lightsail {
   }
   export interface GetBlueprintsRequest {
     /**
-     * A Boolean value indicating whether to include inactive results in your request.
+     * A Boolean value that indicates whether to include inactive (unavailable) blueprints in the response of your request.
      */
     includeInactive?: boolean;
     /**
@@ -3863,7 +3928,7 @@ declare namespace Lightsail {
   }
   export interface GetBucketBundlesRequest {
     /**
-     * A Boolean value that indicates whether to include inactive (unavailable) bundles in the response.
+     * A Boolean value that indicates whether to include inactive (unavailable) bundles in the response of your request.
      */
     includeInactive?: boolean;
   }
@@ -3915,7 +3980,7 @@ declare namespace Lightsail {
   }
   export interface GetBucketsRequest {
     /**
-     * The name of the bucket for which to return information. When omitted, the response includes all of your buckets in the AWS Region where the request is made.
+     * The name of the bucket for which to return information. When omitted, the response includes all of your buckets in the Amazon Web Services Region where the request is made.
      */
     bucketName?: BucketName;
     /**
@@ -3936,10 +4001,14 @@ declare namespace Lightsail {
      * The token to advance to the next page of results from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another GetBuckets request and specify the next page token using the pageToken parameter.
      */
     nextPageToken?: string;
+    /**
+     * An object that describes the synchronization status of the Amazon S3 account-level block public access feature for your Lightsail buckets. For more information about this feature and how it affects Lightsail buckets, see Block public access for buckets in Amazon Lightsail.
+     */
+    accountLevelBpaSync?: AccountLevelBpaSync;
   }
   export interface GetBundlesRequest {
     /**
-     * A Boolean value that indicates whether to include inactive bundle results in your request.
+     * A Boolean value that indicates whether to include inactive (unavailable) bundles in the response of your request.
      */
     includeInactive?: boolean;
     /**
@@ -3959,7 +4028,7 @@ declare namespace Lightsail {
   }
   export interface GetCertificatesRequest {
     /**
-     * The status of the certificates for which to return information. For example, specify ISSUED to return only certificates with an ISSUED status. When omitted, the response includes all of your certificates in the AWS Region where the request is made, regardless of their current status.
+     * The status of the certificates for which to return information. For example, specify ISSUED to return only certificates with an ISSUED status. When omitted, the response includes all of your certificates in the Amazon Web Services Region where the request is made, regardless of their current status.
      */
     certificateStatuses?: CertificateStatusList;
     /**
@@ -3967,7 +4036,7 @@ declare namespace Lightsail {
      */
     includeCertificateDetails?: IncludeCertificateDetails;
     /**
-     * The name for the certificate for which to return information. When omitted, the response includes all of your certificates in the AWS Region where the request is made.
+     * The name for the certificate for which to return information. When omitted, the response includes all of your certificates in the Amazon Web Services Region where the request is made.
      */
     certificateName?: CertificateName;
   }
@@ -4119,7 +4188,7 @@ declare namespace Lightsail {
   }
   export interface GetContainerServicesRequest {
     /**
-     * The name of the container service for which to return information. When omitted, the response includes all of your container services in the AWS Region where the request is made.
+     * The name of the container service for which to return information. When omitted, the response includes all of your container services in the Amazon Web Services Region where the request is made.
      */
     serviceName?: ContainerServiceName;
   }
@@ -4245,7 +4314,7 @@ declare namespace Lightsail {
   }
   export interface GetDistributionsRequest {
     /**
-     * The name of the distribution for which to return information. When omitted, the response includes all of your distributions in the AWS Region where the request is made.
+     * The name of the distribution for which to return information. When omitted, the response includes all of your distributions in the Amazon Web Services Region where the request is made.
      */
     distributionName?: ResourceName;
     /**
@@ -4460,6 +4529,10 @@ declare namespace Lightsail {
      * The token to advance to the next page of results from your request. To get a page token, perform an initial GetKeyPairs request. If your results are paginated, the response will return a next page token that you can specify as the page token in a subsequent request.
      */
     pageToken?: string;
+    /**
+     * A Boolean value that indicates whether to include the default key pair in the response of your request.
+     */
+    includeDefaultKeyPair?: boolean;
   }
   export interface GetKeyPairsResult {
     /**
@@ -4534,6 +4607,22 @@ declare namespace Lightsail {
      * An array of LoadBalancerTlsCertificate objects describing your SSL/TLS certificates.
      */
     tlsCertificates?: LoadBalancerTlsCertificateList;
+  }
+  export interface GetLoadBalancerTlsPoliciesRequest {
+    /**
+     * The token to advance to the next page of results from your request. To get a page token, perform an initial GetLoadBalancerTlsPolicies request. If your results are paginated, the response will return a next page token that you can specify as the page token in a subsequent request.
+     */
+    pageToken?: string;
+  }
+  export interface GetLoadBalancerTlsPoliciesResult {
+    /**
+     * An array of objects that describe the TLS security policies that are available.
+     */
+    tlsPolicies?: LoadBalancerTlsPolicyList;
+    /**
+     * The token to advance to the next page of results from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another GetLoadBalancerTlsPolicies request and specify the next page token using the pageToken parameter.
+     */
+    nextPageToken?: string;
   }
   export interface GetLoadBalancersRequest {
     /**
@@ -4640,6 +4729,10 @@ declare namespace Lightsail {
      * The token to advance to the next page of results from your request. To get a page token, perform an initial GetRelationalDatabaseBundles request. If your results are paginated, the response will return a next page token that you can specify as the page token in a subsequent request.
      */
     pageToken?: string;
+    /**
+     * A Boolean value that indicates whether to include inactive (unavailable) bundles in the response of your request.
+     */
+    includeInactive?: boolean;
   }
   export interface GetRelationalDatabaseBundlesResult {
     /**
@@ -5398,7 +5491,7 @@ declare namespace Lightsail {
      */
     createdAt?: IsoDate;
     /**
-     * An object that describes the location of the distribution, such as the AWS Region and Availability Zone.  Lightsail distributions are global resources that can reference an origin in any AWS Region, and distribute its content globally. However, all distributions are located in the us-east-1 Region. 
+     * An object that describes the location of the distribution, such as the Amazon Web Services Region and Availability Zone.  Lightsail distributions are global resources that can reference an origin in any Amazon Web Services Region, and distribute its content globally. However, all distributions are located in the us-east-1 Region. 
      */
     location?: ResourceLocation;
     /**
@@ -5430,7 +5523,7 @@ declare namespace Lightsail {
      */
     certificateName?: ResourceName;
     /**
-     * An object that describes the origin resource of the distribution, such as a Lightsail instance or load balancer. The distribution pulls, caches, and serves content from the origin.
+     * An object that describes the origin resource of the distribution, such as a Lightsail instance, bucket, or load balancer. The distribution pulls, caches, and serves content from the origin.
      */
     origin?: Origin;
     /**
@@ -5531,8 +5624,16 @@ declare namespace Lightsail {
      * The IP address type of the load balancer. The possible values are ipv4 for IPv4 only, and dualstack for IPv4 and IPv6.
      */
     ipAddressType?: IpAddressType;
+    /**
+     * A Boolean value that indicates whether HTTPS redirection is enabled for the load balancer.
+     */
+    httpsRedirectionEnabled?: boolean;
+    /**
+     * The name of the TLS security policy for the load balancer.
+     */
+    tlsPolicyName?: ResourceName;
   }
-  export type LoadBalancerAttributeName = "HealthCheckPath"|"SessionStickinessEnabled"|"SessionStickiness_LB_CookieDurationSeconds"|string;
+  export type LoadBalancerAttributeName = "HealthCheckPath"|"SessionStickinessEnabled"|"SessionStickiness_LB_CookieDurationSeconds"|"HttpsRedirectionEnabled"|"TlsPolicyName"|string;
   export type LoadBalancerConfigurationOptions = {[key: string]: string};
   export type LoadBalancerList = LoadBalancer[];
   export type LoadBalancerMetricName = "ClientTLSNegotiationErrorCount"|"HealthyHostCount"|"UnhealthyHostCount"|"HTTPCode_LB_4XX_Count"|"HTTPCode_LB_5XX_Count"|"HTTPCode_Instance_2XX_Count"|"HTTPCode_Instance_3XX_Count"|"HTTPCode_Instance_4XX_Count"|"HTTPCode_Instance_5XX_Count"|"InstanceResponseTime"|"RejectedConnectionCount"|"RequestCount"|string;
@@ -5701,6 +5802,29 @@ declare namespace Lightsail {
     isAttached?: boolean;
   }
   export type LoadBalancerTlsCertificateSummaryList = LoadBalancerTlsCertificateSummary[];
+  export interface LoadBalancerTlsPolicy {
+    /**
+     * The name of the TLS security policy.
+     */
+    name?: ResourceName;
+    /**
+     * A Boolean value that indicates whether the TLS security policy is the default.
+     */
+    isDefault?: boolean;
+    /**
+     * The description of the TLS security policy.
+     */
+    description?: string;
+    /**
+     * The protocols used in a given TLS security policy.
+     */
+    protocols?: StringList;
+    /**
+     * The ciphers used by the TLS security policy. The ciphers are listed in order of preference.
+     */
+    ciphers?: StringList;
+  }
+  export type LoadBalancerTlsPolicyList = LoadBalancerTlsPolicy[];
   export interface LogEvent {
     /**
      * The timestamp when the database log event was created.
@@ -5805,7 +5929,7 @@ declare namespace Lightsail {
      */
     createdAt?: IsoDate;
     /**
-     * The AWS Region and Availability Zone.
+     * The Amazon Web Services Region and Availability Zone.
      */
     location?: ResourceLocation;
     /**
@@ -5974,7 +6098,7 @@ declare namespace Lightsail {
      */
     treatMissingData?: TreatMissingData;
     /**
-     * The contact protocols to use for the alarm, such as Email, SMS (text messaging), or both. A notification is sent via the specified contact protocol if notifications are enabled for the alarm, and when the alarm is triggered. A notification is not sent if a contact protocol is not specified, if the specified contact protocol is not configured in the AWS Region, or if notifications are not enabled for the alarm using the notificationEnabled paramater. Use the CreateContactMethod action to configure a contact protocol in an AWS Region.
+     * The contact protocols to use for the alarm, such as Email, SMS (text messaging), or both. A notification is sent via the specified contact protocol if notifications are enabled for the alarm, and when the alarm is triggered. A notification is not sent if a contact protocol is not specified, if the specified contact protocol is not configured in the Amazon Web Services Region, or if notifications are not enabled for the alarm using the notificationEnabled paramater. Use the CreateContactMethod action to configure a contact protocol in an Amazon Web Services Region.
      */
     contactProtocols?: ContactProtocolsList;
     /**
@@ -6086,6 +6210,9 @@ declare namespace Lightsail {
     digest: string;
   }
   export interface RegisterContainerImageResult {
+    /**
+     * An object that describes a container image that is registered to a Lightsail container service
+     */
     containerImage?: ContainerImage;
   }
   export interface RelationalDatabase {
@@ -6514,7 +6641,7 @@ declare namespace Lightsail {
   export type SerialNumber = string;
   export interface SetIpAddressTypeRequest {
     /**
-     * The resource type. The possible values are Distribution, Instance, and LoadBalancer.  Distribution-related APIs are available only in the N. Virginia (us-east-1) AWS Region. Set your AWS Region configuration to us-east-1 to create, view, or edit distributions. 
+     * The resource type. The possible values are Distribution, Instance, and LoadBalancer.  Distribution-related APIs are available only in the N. Virginia (us-east-1) Amazon Web Services Region. Set your Amazon Web Services Region configuration to us-east-1 to create, view, or edit distributions. 
      */
     resourceType: ResourceType;
     /**
@@ -6761,9 +6888,13 @@ declare namespace Lightsail {
      */
     versioning?: NonEmptyString;
     /**
-     * An array of strings to specify the AWS account IDs that can access the bucket. You can give a maximum of 10 AWS accounts access to a bucket.
+     * An array of strings to specify the Amazon Web Services account IDs that can access the bucket. You can give a maximum of 10 Amazon Web Services accounts access to a bucket.
      */
     readonlyAccessAccounts?: PartnerIdList;
+    /**
+     * An object that describes the access log configuration for the bucket.
+     */
+    accessLogConfig?: BucketAccessLogConfig;
   }
   export interface UpdateBucketResult {
     /**
@@ -6814,6 +6945,9 @@ declare namespace Lightsail {
     bundleId?: string;
   }
   export interface UpdateDistributionBundleResult {
+    /**
+     * An object that describes the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
+     */
     operation?: Operation;
   }
   export interface UpdateDistributionRequest {
@@ -6822,7 +6956,7 @@ declare namespace Lightsail {
      */
     distributionName: ResourceName;
     /**
-     * An object that describes the origin resource for the distribution, such as a Lightsail instance or load balancer. The distribution pulls, caches, and serves content from the origin.
+     * An object that describes the origin resource for the distribution, such as a Lightsail instance, bucket, or load balancer. The distribution pulls, caches, and serves content from the origin.
      */
     origin?: InputOrigin;
     /**
@@ -6870,11 +7004,11 @@ declare namespace Lightsail {
      */
     loadBalancerName: ResourceName;
     /**
-     * The name of the attribute you want to update. Valid values are below.
+     * The name of the attribute you want to update.
      */
     attributeName: LoadBalancerAttributeName;
     /**
-     * The value that you want to specify for the attribute name.
+     * The value that you want to specify for the attribute name. The following values are supported depending on what you specify for the attributeName request parameter:   If you specify HealthCheckPath for the attributeName request parameter, then the attributeValue request parameter must be the path to ping on the target (for example, /weather/us/wa/seattle).   If you specify SessionStickinessEnabled for the attributeName request parameter, then the attributeValue request parameter must be true to activate session stickiness or false to deactivate session stickiness.   If you specify SessionStickiness_LB_CookieDurationSeconds for the attributeName request parameter, then the attributeValue request parameter must be an interger that represents the cookie duration in seconds.   If you specify HttpsRedirectionEnabled for the attributeName request parameter, then the attributeValue request parameter must be true to activate HTTP to HTTPS redirection or false to deactivate HTTP to HTTPS redirection.   If you specify TlsPolicyName for the attributeName request parameter, then the attributeValue request parameter must be the name of the TLS policy. Use the GetLoadBalancerTlsPolicies action to get a list of TLS policy names that you can specify.  
      */
     attributeValue: StringMax256;
   }

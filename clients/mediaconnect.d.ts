@@ -358,6 +358,16 @@ declare namespace MediaConnect {
      */
     VpcInterfaces?: __listOfVpcInterface;
   }
+  export interface AddMaintenance {
+    /**
+     * A day of a week when the maintenance will happen. Use Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday.
+     */
+    MaintenanceDay: MaintenanceDay;
+    /**
+     * UTC time when the maintenance will happen. Use 24-hour HH:MM format. Minutes must be 00. Example: 13:00. The default value is 02:00.
+     */
+    MaintenanceStartHour: __string;
+  }
   export interface AddMediaStreamRequest {
     /**
      * The attributes that you want to assign to the new media stream.
@@ -406,7 +416,7 @@ declare namespace MediaConnect {
      */
     Encryption?: Encryption;
     /**
-     * The maximum latency in milliseconds for Zixi-based streams.
+     * The maximum latency in milliseconds. This parameter applies only to RIST-based, Zixi-based, and Fujitsu-based streams.
      */
     MaxLatency?: __integer;
     /**
@@ -433,6 +443,10 @@ declare namespace MediaConnect {
      * The remote ID for the Zixi-pull output stream.
      */
     RemoteId?: __string;
+    /**
+     * The port that the flow uses to send outbound requests to initiate connection with the sender.
+     */
+    SenderControlPort?: __integer;
     /**
      * The smoothing latency in milliseconds for RIST, RTP, and RTP-FEC streams.
      */
@@ -476,6 +490,7 @@ declare namespace MediaConnect {
      * The VPC interfaces you want on the flow.
      */
     VpcInterfaces?: __listOfVpcInterfaceRequest;
+    Maintenance?: AddMaintenance;
   }
   export interface CreateFlowResponse {
     Flow?: Flow;
@@ -708,6 +723,7 @@ declare namespace MediaConnect {
      * The VPC Interfaces for this flow.
      */
     VpcInterfaces?: __listOfVpcInterface;
+    Maintenance?: Maintenance;
   }
   export interface Fmtp {
     /**
@@ -983,7 +999,27 @@ declare namespace MediaConnect {
      * The current status of the flow.
      */
     Status: Status;
+    Maintenance?: Maintenance;
   }
+  export interface Maintenance {
+    /**
+     * A day of a week when the maintenance will happen. Use Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday.
+     */
+    MaintenanceDay?: MaintenanceDay;
+    /**
+     * The Maintenance has to be performed before this deadline in ISO UTC format. Example: 2021-01-30T08:30:00Z.
+     */
+    MaintenanceDeadline?: __string;
+    /**
+     * A scheduled date in ISO UTC format when the maintenance will happen. Use YYYY-MM-DD format. Example: 2021-01-30.
+     */
+    MaintenanceScheduledDate?: __string;
+    /**
+     * UTC time when the maintenance will happen. Use 24-hour HH:MM format. Minutes must be 00. Example: 13:00. The default value is 02:00.
+     */
+    MaintenanceStartHour?: __string;
+  }
+  export type MaintenanceDay = "Monday"|"Tuesday"|"Wednesday"|"Thursday"|"Friday"|"Saturday"|"Sunday"|string;
   export type MaxResults = number;
   export interface MediaStream {
     /**
@@ -1200,7 +1236,7 @@ declare namespace MediaConnect {
     VpcInterfaceAttachment?: VpcInterfaceAttachment;
   }
   export type PriceUnits = "HOURLY"|string;
-  export type Protocol = "zixi-push"|"rtp-fec"|"rtp"|"zixi-pull"|"rist"|"st2110-jpegxs"|"cdi"|"srt-listener"|string;
+  export type Protocol = "zixi-push"|"rtp-fec"|"rtp"|"zixi-pull"|"rist"|"st2110-jpegxs"|"cdi"|"srt-listener"|"fujitsu-qos"|string;
   export interface PurchaseOfferingRequest {
     /**
      * The Amazon Resource Name (ARN) of the offering.
@@ -1412,7 +1448,7 @@ declare namespace MediaConnect {
      */
     MaxBitrate?: __integer;
     /**
-     * The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.
+     * The maximum latency in milliseconds. This parameter applies only to RIST-based, Zixi-based, and Fujitsu-based streams.
      */
     MaxLatency?: __integer;
     /**
@@ -1435,6 +1471,14 @@ declare namespace MediaConnect {
      * The protocol that is used by the source.
      */
     Protocol?: Protocol;
+    /**
+     * The port that the flow uses to send outbound requests to initiate connection with the sender.
+     */
+    SenderControlPort?: __integer;
+    /**
+     * The IP address that the flow communicates with to initiate connection with the sender.
+     */
+    SenderIpAddress?: __string;
     /**
      * The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.
      */
@@ -1481,6 +1525,14 @@ declare namespace MediaConnect {
      * The name of the source.
      */
     Name: __string;
+    /**
+     * The port that the flow uses to send outbound requests to initiate connection with the sender.
+     */
+    SenderControlPort?: __integer;
+    /**
+     * The IP address that the flow communicates with to initiate connection with the sender.
+     */
+    SenderIpAddress?: __string;
     /**
      * The ARN of the source.
      */
@@ -1560,7 +1612,7 @@ declare namespace MediaConnect {
      */
     MaxBitrate?: __integer;
     /**
-     * The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.
+     * The maximum latency in milliseconds. This parameter applies only to RIST-based, Zixi-based, and Fujitsu-based streams.
      */
     MaxLatency?: __integer;
     /**
@@ -1579,6 +1631,14 @@ declare namespace MediaConnect {
      * The remote ID for the Zixi-pull stream.
      */
     RemoteId?: __string;
+    /**
+     * The port that the flow uses to send outbound requests to initiate connection with the sender.
+     */
+    SenderControlPort?: __integer;
+    /**
+     * The IP address that the flow communicates with to initiate connection with the sender.
+     */
+    SenderIpAddress?: __string;
     /**
      * The smoothing latency in milliseconds for RIST, RTP, and RTP-FEC streams.
      */
@@ -1749,7 +1809,7 @@ declare namespace MediaConnect {
      */
     FlowArn: __string;
     /**
-     * The maximum latency in milliseconds for Zixi-based streams.
+     * The maximum latency in milliseconds. This parameter applies only to RIST-based, Zixi-based, and Fujitsu-based streams.
      */
     MaxLatency?: __integer;
     /**
@@ -1776,6 +1836,14 @@ declare namespace MediaConnect {
      * The remote ID for the Zixi-pull stream.
      */
     RemoteId?: __string;
+    /**
+     * The port that the flow uses to send outbound requests to initiate connection with the sender.
+     */
+    SenderControlPort?: __integer;
+    /**
+     * The IP address that the flow communicates with to initiate connection with the sender.
+     */
+    SenderIpAddress?: __string;
     /**
      * The smoothing latency in milliseconds for RIST, RTP, and RTP-FEC streams.
      */
@@ -1805,6 +1873,7 @@ declare namespace MediaConnect {
      */
     FlowArn: __string;
     SourceFailoverConfig?: UpdateFailoverConfig;
+    Maintenance?: UpdateMaintenance;
   }
   export interface UpdateFlowResponse {
     Flow?: Flow;
@@ -1835,7 +1904,7 @@ declare namespace MediaConnect {
      */
     MaxBitrate?: __integer;
     /**
-     * The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.
+     * The maximum latency in milliseconds. This parameter applies only to RIST-based, Zixi-based, and Fujitsu-based streams.
      */
     MaxLatency?: __integer;
     /**
@@ -1854,6 +1923,14 @@ declare namespace MediaConnect {
      * The protocol that is used by the source.
      */
     Protocol?: Protocol;
+    /**
+     * The port that the flow uses to send outbound requests to initiate connection with the sender.
+     */
+    SenderControlPort?: __integer;
+    /**
+     * The IP address that the flow communicates with to initiate connection with the sender.
+     */
+    SenderIpAddress?: __string;
     /**
      * The ARN of the source that you want to update.
      */
@@ -1881,9 +1958,23 @@ declare namespace MediaConnect {
      */
     Source?: Source;
   }
+  export interface UpdateMaintenance {
+    /**
+     * A day of a week when the maintenance will happen. use Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday.
+     */
+    MaintenanceDay?: MaintenanceDay;
+    /**
+     * A scheduled date in ISO UTC format when the maintenance will happen. Use YYYY-MM-DD format. Example: 2021-01-30.
+     */
+    MaintenanceScheduledDate?: __string;
+    /**
+     * UTC time when the maintenance will happen. Use 24-hour HH:MM format. Minutes must be 00. Example: 13:00. The default value is 02:00.
+     */
+    MaintenanceStartHour?: __string;
+  }
   export interface VpcInterface {
     /**
-     * Immutable and has to be a unique against other VpcInterfaces in this Flow
+     * Immutable and has to be a unique against other VpcInterfaces in this Flow.
      */
     Name: __string;
     /**

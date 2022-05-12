@@ -378,6 +378,10 @@ rounded to the nearest multiple of the source fragment duration.
      * The Dynamic Adaptive Streaming over HTTP (DASH) profile type.  When set to "HBBTV_1_5", HbbTV 1.5 compliant output is enabled.
      */
     Profile?: Profile;
+    /**
+     * The source of scte markers used. When set to SEGMENTS, the scte markers are sourced from the segments of the ingested content. When set to MANIFEST, the scte markers are sourced from the manifest of the ingested content.
+     */
+    ScteMarkersSource?: ScteMarkersSource;
     StreamSelection?: StreamSelection;
   }
   export interface DashPackage {
@@ -756,6 +760,7 @@ rounded to the nearest multiple of the source fragment duration.
     Tags?: Tags;
   }
   export type Profile = "NONE"|"HBBTV_1_5"|string;
+  export type ScteMarkersSource = "SEGMENTS"|"MANIFEST"|string;
   export type SegmentTemplateFormat = "NUMBER_WITH_TIMELINE"|"TIME_WITH_TIMELINE"|"NUMBER_WITH_DURATION"|string;
   export interface SpekeKeyProvider {
     /**

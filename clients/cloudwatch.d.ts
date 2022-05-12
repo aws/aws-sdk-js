@@ -53,19 +53,19 @@ declare class CloudWatch extends Service {
    */
   deleteMetricStream(callback?: (err: AWSError, data: CloudWatch.Types.DeleteMetricStreamOutput) => void): Request<CloudWatch.Types.DeleteMetricStreamOutput, AWSError>;
   /**
-   * Retrieves the history for the specified alarm. You can filter the results by date range or item type. If an alarm name is not specified, the histories for either all metric alarms or all composite alarms are returned. CloudWatch retains the history of an alarm even if you delete the alarm.
+   * Retrieves the history for the specified alarm. You can filter the results by date range or item type. If an alarm name is not specified, the histories for either all metric alarms or all composite alarms are returned. CloudWatch retains the history of an alarm even if you delete the alarm. To use this operation and return information about a composite alarm, you must be signed on with the cloudwatch:DescribeAlarmHistory permission that is scoped to *. You can't return information about composite alarms if your cloudwatch:DescribeAlarmHistory permission has a narrower scope.
    */
   describeAlarmHistory(params: CloudWatch.Types.DescribeAlarmHistoryInput, callback?: (err: AWSError, data: CloudWatch.Types.DescribeAlarmHistoryOutput) => void): Request<CloudWatch.Types.DescribeAlarmHistoryOutput, AWSError>;
   /**
-   * Retrieves the history for the specified alarm. You can filter the results by date range or item type. If an alarm name is not specified, the histories for either all metric alarms or all composite alarms are returned. CloudWatch retains the history of an alarm even if you delete the alarm.
+   * Retrieves the history for the specified alarm. You can filter the results by date range or item type. If an alarm name is not specified, the histories for either all metric alarms or all composite alarms are returned. CloudWatch retains the history of an alarm even if you delete the alarm. To use this operation and return information about a composite alarm, you must be signed on with the cloudwatch:DescribeAlarmHistory permission that is scoped to *. You can't return information about composite alarms if your cloudwatch:DescribeAlarmHistory permission has a narrower scope.
    */
   describeAlarmHistory(callback?: (err: AWSError, data: CloudWatch.Types.DescribeAlarmHistoryOutput) => void): Request<CloudWatch.Types.DescribeAlarmHistoryOutput, AWSError>;
   /**
-   * Retrieves the specified alarms. You can filter the results by specifying a prefix for the alarm name, the alarm state, or a prefix for any action.
+   * Retrieves the specified alarms. You can filter the results by specifying a prefix for the alarm name, the alarm state, or a prefix for any action. To use this operation and return information about composite alarms, you must be signed on with the cloudwatch:DescribeAlarms permission that is scoped to *. You can't return information about composite alarms if your cloudwatch:DescribeAlarms permission has a narrower scope.
    */
   describeAlarms(params: CloudWatch.Types.DescribeAlarmsInput, callback?: (err: AWSError, data: CloudWatch.Types.DescribeAlarmsOutput) => void): Request<CloudWatch.Types.DescribeAlarmsOutput, AWSError>;
   /**
-   * Retrieves the specified alarms. You can filter the results by specifying a prefix for the alarm name, the alarm state, or a prefix for any action.
+   * Retrieves the specified alarms. You can filter the results by specifying a prefix for the alarm name, the alarm state, or a prefix for any action. To use this operation and return information about composite alarms, you must be signed on with the cloudwatch:DescribeAlarms permission that is scoped to *. You can't return information about composite alarms if your cloudwatch:DescribeAlarms permission has a narrower scope.
    */
   describeAlarms(callback?: (err: AWSError, data: CloudWatch.Types.DescribeAlarmsOutput) => void): Request<CloudWatch.Types.DescribeAlarmsOutput, AWSError>;
   /**
@@ -77,11 +77,11 @@ declare class CloudWatch extends Service {
    */
   describeAlarmsForMetric(callback?: (err: AWSError, data: CloudWatch.Types.DescribeAlarmsForMetricOutput) => void): Request<CloudWatch.Types.DescribeAlarmsForMetricOutput, AWSError>;
   /**
-   * Lists the anomaly detection models that you have created in your account. You can list all models in your account or filter the results to only the models that are related to a certain namespace, metric name, or metric dimension.
+   * Lists the anomaly detection models that you have created in your account. For single metric anomaly detectors, you can list all of the models in your account or filter the results to only the models that are related to a certain namespace, metric name, or metric dimension. For metric math anomaly detectors, you can list them by adding METRIC_MATH to the AnomalyDetectorTypes array. This will return all metric math anomaly detectors in your account.
    */
   describeAnomalyDetectors(params: CloudWatch.Types.DescribeAnomalyDetectorsInput, callback?: (err: AWSError, data: CloudWatch.Types.DescribeAnomalyDetectorsOutput) => void): Request<CloudWatch.Types.DescribeAnomalyDetectorsOutput, AWSError>;
   /**
-   * Lists the anomaly detection models that you have created in your account. You can list all models in your account or filter the results to only the models that are related to a certain namespace, metric name, or metric dimension.
+   * Lists the anomaly detection models that you have created in your account. For single metric anomaly detectors, you can list all of the models in your account or filter the results to only the models that are related to a certain namespace, metric name, or metric dimension. For metric math anomaly detectors, you can list them by adding METRIC_MATH to the AnomalyDetectorTypes array. This will return all metric math anomaly detectors in your account.
    */
   describeAnomalyDetectors(callback?: (err: AWSError, data: CloudWatch.Types.DescribeAnomalyDetectorsOutput) => void): Request<CloudWatch.Types.DescribeAnomalyDetectorsOutput, AWSError>;
   /**
@@ -141,11 +141,11 @@ declare class CloudWatch extends Service {
    */
   getInsightRuleReport(callback?: (err: AWSError, data: CloudWatch.Types.GetInsightRuleReportOutput) => void): Request<CloudWatch.Types.GetInsightRuleReportOutput, AWSError>;
   /**
-   * You can use the GetMetricData API to retrieve as many as 500 different metrics in a single request, with a total of as many as 100,800 data points. You can also optionally perform math expressions on the values of the returned statistics, to create new time series that represent new insights into your data. For example, using Lambda metrics, you could divide the Errors metric by the Invocations metric to get an error rate time series. For more information about metric math expressions, see Metric Math Syntax and Functions in the Amazon CloudWatch User Guide. Calls to the GetMetricData API have a different pricing structure than calls to GetMetricStatistics. For more information about pricing, see Amazon CloudWatch Pricing. Amazon CloudWatch retains metric data as follows:   Data points with a period of less than 60 seconds are available for 3 hours. These data points are high-resolution metrics and are available only for custom metrics that have been defined with a StorageResolution of 1.   Data points with a period of 60 seconds (1-minute) are available for 15 days.   Data points with a period of 300 seconds (5-minute) are available for 63 days.   Data points with a period of 3600 seconds (1 hour) are available for 455 days (15 months).   Data points that are initially published with a shorter period are aggregated together for long-term storage. For example, if you collect data using a period of 1 minute, the data remains available for 15 days with 1-minute resolution. After 15 days, this data is still available, but is aggregated and retrievable only with a resolution of 5 minutes. After 63 days, the data is further aggregated and is available with a resolution of 1 hour. If you omit Unit in your request, all data that was collected with any unit is returned, along with the corresponding units that were specified when the data was reported to CloudWatch. If you specify a unit, the operation returns only data that was collected with that unit specified. If you specify a unit that does not match the data collected, the results of the operation are null. CloudWatch does not perform unit conversions.
+   * You can use the GetMetricData API to retrieve CloudWatch metric values. The operation can also include a CloudWatch Metrics Insights query, and one or more metric math functions. A GetMetricData operation that does not include a query can retrieve as many as 500 different metrics in a single request, with a total of as many as 100,800 data points. You can also optionally perform metric math expressions on the values of the returned statistics, to create new time series that represent new insights into your data. For example, using Lambda metrics, you could divide the Errors metric by the Invocations metric to get an error rate time series. For more information about metric math expressions, see Metric Math Syntax and Functions in the Amazon CloudWatch User Guide. If you include a Metrics Insights query, each GetMetricData operation can include only one query. But the same GetMetricData operation can also retrieve other metrics. Metrics Insights queries can query only the most recent three hours of metric data. For more information about Metrics Insights, see Query your metrics with CloudWatch Metrics Insights. Calls to the GetMetricData API have a different pricing structure than calls to GetMetricStatistics. For more information about pricing, see Amazon CloudWatch Pricing. Amazon CloudWatch retains metric data as follows:   Data points with a period of less than 60 seconds are available for 3 hours. These data points are high-resolution metrics and are available only for custom metrics that have been defined with a StorageResolution of 1.   Data points with a period of 60 seconds (1-minute) are available for 15 days.   Data points with a period of 300 seconds (5-minute) are available for 63 days.   Data points with a period of 3600 seconds (1 hour) are available for 455 days (15 months).   Data points that are initially published with a shorter period are aggregated together for long-term storage. For example, if you collect data using a period of 1 minute, the data remains available for 15 days with 1-minute resolution. After 15 days, this data is still available, but is aggregated and retrievable only with a resolution of 5 minutes. After 63 days, the data is further aggregated and is available with a resolution of 1 hour. If you omit Unit in your request, all data that was collected with any unit is returned, along with the corresponding units that were specified when the data was reported to CloudWatch. If you specify a unit, the operation returns only data that was collected with that unit specified. If you specify a unit that does not match the data collected, the results of the operation are null. CloudWatch does not perform unit conversions.  Using Metrics Insights queries with metric math  You can't mix a Metric Insights query and metric math syntax in the same expression, but you can reference results from a Metrics Insights query within other Metric math expressions. A Metrics Insights query without a GROUP BY clause returns a single time-series (TS), and can be used as input for a metric math expression that expects a single time series. A Metrics Insights query with a GROUP BY clause returns an array of time-series (TS[]), and can be used as input for a metric math expression that expects an array of time series. 
    */
   getMetricData(params: CloudWatch.Types.GetMetricDataInput, callback?: (err: AWSError, data: CloudWatch.Types.GetMetricDataOutput) => void): Request<CloudWatch.Types.GetMetricDataOutput, AWSError>;
   /**
-   * You can use the GetMetricData API to retrieve as many as 500 different metrics in a single request, with a total of as many as 100,800 data points. You can also optionally perform math expressions on the values of the returned statistics, to create new time series that represent new insights into your data. For example, using Lambda metrics, you could divide the Errors metric by the Invocations metric to get an error rate time series. For more information about metric math expressions, see Metric Math Syntax and Functions in the Amazon CloudWatch User Guide. Calls to the GetMetricData API have a different pricing structure than calls to GetMetricStatistics. For more information about pricing, see Amazon CloudWatch Pricing. Amazon CloudWatch retains metric data as follows:   Data points with a period of less than 60 seconds are available for 3 hours. These data points are high-resolution metrics and are available only for custom metrics that have been defined with a StorageResolution of 1.   Data points with a period of 60 seconds (1-minute) are available for 15 days.   Data points with a period of 300 seconds (5-minute) are available for 63 days.   Data points with a period of 3600 seconds (1 hour) are available for 455 days (15 months).   Data points that are initially published with a shorter period are aggregated together for long-term storage. For example, if you collect data using a period of 1 minute, the data remains available for 15 days with 1-minute resolution. After 15 days, this data is still available, but is aggregated and retrievable only with a resolution of 5 minutes. After 63 days, the data is further aggregated and is available with a resolution of 1 hour. If you omit Unit in your request, all data that was collected with any unit is returned, along with the corresponding units that were specified when the data was reported to CloudWatch. If you specify a unit, the operation returns only data that was collected with that unit specified. If you specify a unit that does not match the data collected, the results of the operation are null. CloudWatch does not perform unit conversions.
+   * You can use the GetMetricData API to retrieve CloudWatch metric values. The operation can also include a CloudWatch Metrics Insights query, and one or more metric math functions. A GetMetricData operation that does not include a query can retrieve as many as 500 different metrics in a single request, with a total of as many as 100,800 data points. You can also optionally perform metric math expressions on the values of the returned statistics, to create new time series that represent new insights into your data. For example, using Lambda metrics, you could divide the Errors metric by the Invocations metric to get an error rate time series. For more information about metric math expressions, see Metric Math Syntax and Functions in the Amazon CloudWatch User Guide. If you include a Metrics Insights query, each GetMetricData operation can include only one query. But the same GetMetricData operation can also retrieve other metrics. Metrics Insights queries can query only the most recent three hours of metric data. For more information about Metrics Insights, see Query your metrics with CloudWatch Metrics Insights. Calls to the GetMetricData API have a different pricing structure than calls to GetMetricStatistics. For more information about pricing, see Amazon CloudWatch Pricing. Amazon CloudWatch retains metric data as follows:   Data points with a period of less than 60 seconds are available for 3 hours. These data points are high-resolution metrics and are available only for custom metrics that have been defined with a StorageResolution of 1.   Data points with a period of 60 seconds (1-minute) are available for 15 days.   Data points with a period of 300 seconds (5-minute) are available for 63 days.   Data points with a period of 3600 seconds (1 hour) are available for 455 days (15 months).   Data points that are initially published with a shorter period are aggregated together for long-term storage. For example, if you collect data using a period of 1 minute, the data remains available for 15 days with 1-minute resolution. After 15 days, this data is still available, but is aggregated and retrievable only with a resolution of 5 minutes. After 63 days, the data is further aggregated and is available with a resolution of 1 hour. If you omit Unit in your request, all data that was collected with any unit is returned, along with the corresponding units that were specified when the data was reported to CloudWatch. If you specify a unit, the operation returns only data that was collected with that unit specified. If you specify a unit that does not match the data collected, the results of the operation are null. CloudWatch does not perform unit conversions.  Using Metrics Insights queries with metric math  You can't mix a Metric Insights query and metric math syntax in the same expression, but you can reference results from a Metrics Insights query within other Metric math expressions. A Metrics Insights query without a GROUP BY clause returns a single time-series (TS), and can be used as input for a metric math expression that expects a single time series. A Metrics Insights query with a GROUP BY clause returns an array of time-series (TS[]), and can be used as input for a metric math expression that expects an array of time series. 
    */
   getMetricData(callback?: (err: AWSError, data: CloudWatch.Types.GetMetricDataOutput) => void): Request<CloudWatch.Types.GetMetricDataOutput, AWSError>;
   /**
@@ -213,11 +213,11 @@ declare class CloudWatch extends Service {
    */
   putAnomalyDetector(callback?: (err: AWSError, data: CloudWatch.Types.PutAnomalyDetectorOutput) => void): Request<CloudWatch.Types.PutAnomalyDetectorOutput, AWSError>;
   /**
-   * Creates or updates a composite alarm. When you create a composite alarm, you specify a rule expression for the alarm that takes into account the alarm states of other alarms that you have created. The composite alarm goes into ALARM state only if all conditions of the rule are met. The alarms specified in a composite alarm's rule expression can include metric alarms and other composite alarms. Using composite alarms can reduce alarm noise. You can create multiple metric alarms, and also create a composite alarm and set up alerts only for the composite alarm. For example, you could create a composite alarm that goes into ALARM state only when more than one of the underlying metric alarms are in ALARM state. Currently, the only alarm actions that can be taken by composite alarms are notifying SNS topics.  It is possible to create a loop or cycle of composite alarms, where composite alarm A depends on composite alarm B, and composite alarm B also depends on composite alarm A. In this scenario, you can't delete any composite alarm that is part of the cycle because there is always still a composite alarm that depends on that alarm that you want to delete. To get out of such a situation, you must break the cycle by changing the rule of one of the composite alarms in the cycle to remove a dependency that creates the cycle. The simplest change to make to break a cycle is to change the AlarmRule of one of the alarms to False.  Additionally, the evaluation of composite alarms stops if CloudWatch detects a cycle in the evaluation path.   When this operation creates an alarm, the alarm state is immediately set to INSUFFICIENT_DATA. The alarm is then evaluated and its state is set appropriately. Any actions associated with the new state are then executed. For a composite alarm, this initial time after creation is the only time that the alarm can be in INSUFFICIENT_DATA state. When you update an existing alarm, its state is left unchanged, but the update completely overwrites the previous configuration of the alarm. If you are an IAM user, you must have iam:CreateServiceLinkedRole to create a composite alarm that has Systems Manager OpsItem actions.
+   * Creates or updates a composite alarm. When you create a composite alarm, you specify a rule expression for the alarm that takes into account the alarm states of other alarms that you have created. The composite alarm goes into ALARM state only if all conditions of the rule are met. The alarms specified in a composite alarm's rule expression can include metric alarms and other composite alarms. The rule expression of a composite alarm can include as many as 100 underlying alarms. Any single alarm can be included in the rule expressions of as many as 150 composite alarms. Using composite alarms can reduce alarm noise. You can create multiple metric alarms, and also create a composite alarm and set up alerts only for the composite alarm. For example, you could create a composite alarm that goes into ALARM state only when more than one of the underlying metric alarms are in ALARM state. Currently, the only alarm actions that can be taken by composite alarms are notifying SNS topics.  It is possible to create a loop or cycle of composite alarms, where composite alarm A depends on composite alarm B, and composite alarm B also depends on composite alarm A. In this scenario, you can't delete any composite alarm that is part of the cycle because there is always still a composite alarm that depends on that alarm that you want to delete. To get out of such a situation, you must break the cycle by changing the rule of one of the composite alarms in the cycle to remove a dependency that creates the cycle. The simplest change to make to break a cycle is to change the AlarmRule of one of the alarms to False.  Additionally, the evaluation of composite alarms stops if CloudWatch detects a cycle in the evaluation path.   When this operation creates an alarm, the alarm state is immediately set to INSUFFICIENT_DATA. The alarm is then evaluated and its state is set appropriately. Any actions associated with the new state are then executed. For a composite alarm, this initial time after creation is the only time that the alarm can be in INSUFFICIENT_DATA state. When you update an existing alarm, its state is left unchanged, but the update completely overwrites the previous configuration of the alarm. To use this operation, you must be signed on with the cloudwatch:PutCompositeAlarm permission that is scoped to *. You can't create a composite alarms if your cloudwatch:PutCompositeAlarm permission has a narrower scope. If you are an IAM user, you must have iam:CreateServiceLinkedRole to create a composite alarm that has Systems Manager OpsItem actions.
    */
   putCompositeAlarm(params: CloudWatch.Types.PutCompositeAlarmInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Creates or updates a composite alarm. When you create a composite alarm, you specify a rule expression for the alarm that takes into account the alarm states of other alarms that you have created. The composite alarm goes into ALARM state only if all conditions of the rule are met. The alarms specified in a composite alarm's rule expression can include metric alarms and other composite alarms. Using composite alarms can reduce alarm noise. You can create multiple metric alarms, and also create a composite alarm and set up alerts only for the composite alarm. For example, you could create a composite alarm that goes into ALARM state only when more than one of the underlying metric alarms are in ALARM state. Currently, the only alarm actions that can be taken by composite alarms are notifying SNS topics.  It is possible to create a loop or cycle of composite alarms, where composite alarm A depends on composite alarm B, and composite alarm B also depends on composite alarm A. In this scenario, you can't delete any composite alarm that is part of the cycle because there is always still a composite alarm that depends on that alarm that you want to delete. To get out of such a situation, you must break the cycle by changing the rule of one of the composite alarms in the cycle to remove a dependency that creates the cycle. The simplest change to make to break a cycle is to change the AlarmRule of one of the alarms to False.  Additionally, the evaluation of composite alarms stops if CloudWatch detects a cycle in the evaluation path.   When this operation creates an alarm, the alarm state is immediately set to INSUFFICIENT_DATA. The alarm is then evaluated and its state is set appropriately. Any actions associated with the new state are then executed. For a composite alarm, this initial time after creation is the only time that the alarm can be in INSUFFICIENT_DATA state. When you update an existing alarm, its state is left unchanged, but the update completely overwrites the previous configuration of the alarm. If you are an IAM user, you must have iam:CreateServiceLinkedRole to create a composite alarm that has Systems Manager OpsItem actions.
+   * Creates or updates a composite alarm. When you create a composite alarm, you specify a rule expression for the alarm that takes into account the alarm states of other alarms that you have created. The composite alarm goes into ALARM state only if all conditions of the rule are met. The alarms specified in a composite alarm's rule expression can include metric alarms and other composite alarms. The rule expression of a composite alarm can include as many as 100 underlying alarms. Any single alarm can be included in the rule expressions of as many as 150 composite alarms. Using composite alarms can reduce alarm noise. You can create multiple metric alarms, and also create a composite alarm and set up alerts only for the composite alarm. For example, you could create a composite alarm that goes into ALARM state only when more than one of the underlying metric alarms are in ALARM state. Currently, the only alarm actions that can be taken by composite alarms are notifying SNS topics.  It is possible to create a loop or cycle of composite alarms, where composite alarm A depends on composite alarm B, and composite alarm B also depends on composite alarm A. In this scenario, you can't delete any composite alarm that is part of the cycle because there is always still a composite alarm that depends on that alarm that you want to delete. To get out of such a situation, you must break the cycle by changing the rule of one of the composite alarms in the cycle to remove a dependency that creates the cycle. The simplest change to make to break a cycle is to change the AlarmRule of one of the alarms to False.  Additionally, the evaluation of composite alarms stops if CloudWatch detects a cycle in the evaluation path.   When this operation creates an alarm, the alarm state is immediately set to INSUFFICIENT_DATA. The alarm is then evaluated and its state is set appropriately. Any actions associated with the new state are then executed. For a composite alarm, this initial time after creation is the only time that the alarm can be in INSUFFICIENT_DATA state. When you update an existing alarm, its state is left unchanged, but the update completely overwrites the previous configuration of the alarm. To use this operation, you must be signed on with the cloudwatch:PutCompositeAlarm permission that is scoped to *. You can't create a composite alarms if your cloudwatch:PutCompositeAlarm permission has a narrower scope. If you are an IAM user, you must have iam:CreateServiceLinkedRole to create a composite alarm that has Systems Manager OpsItem actions.
    */
   putCompositeAlarm(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -237,11 +237,11 @@ declare class CloudWatch extends Service {
    */
   putInsightRule(callback?: (err: AWSError, data: CloudWatch.Types.PutInsightRuleOutput) => void): Request<CloudWatch.Types.PutInsightRuleOutput, AWSError>;
   /**
-   * Creates or updates an alarm and associates it with the specified metric, metric math expression, or anomaly detection model. Alarms based on anomaly detection models cannot have Auto Scaling actions. When this operation creates an alarm, the alarm state is immediately set to INSUFFICIENT_DATA. The alarm is then evaluated and its state is set appropriately. Any actions associated with the new state are then executed. When you update an existing alarm, its state is left unchanged, but the update completely overwrites the previous configuration of the alarm. If you are an IAM user, you must have Amazon EC2 permissions for some alarm operations:   The iam:CreateServiceLinkedRole for all alarms with EC2 actions   The iam:CreateServiceLinkedRole to create an alarm with Systems Manager OpsItem actions.   The first time you create an alarm in the Management Console, the CLI, or by using the PutMetricAlarm API, CloudWatch creates the necessary service-linked role for you. The service-linked roles are called AWSServiceRoleForCloudWatchEvents and AWSServiceRoleForCloudWatchAlarms_ActionSSM. For more information, see Amazon Web Services service-linked role.  Cross-account alarms  You can set an alarm on metrics in the current account, or in another account. To create a cross-account alarm that watches a metric in a different account, you must have completed the following pre-requisites:   The account where the metrics are located (the sharing account) must already have a sharing role named CloudWatch-CrossAccountSharingRole. If it does not already have this role, you must create it using the instructions in Set up a sharing account in  Cross-account cross-Region CloudWatch console. The policy for that role must grant access to the ID of the account where you are creating the alarm.    The account where you are creating the alarm (the monitoring account) must already have a service-linked role named AWSServiceRoleForCloudWatchCrossAccount to allow CloudWatch to assume the sharing role in the sharing account. If it does not, you must create it following the directions in Set up a monitoring account in  Cross-account cross-Region CloudWatch console.  
+   * Creates or updates an alarm and associates it with the specified metric, metric math expression, or anomaly detection model. Alarms based on anomaly detection models cannot have Auto Scaling actions. When this operation creates an alarm, the alarm state is immediately set to INSUFFICIENT_DATA. The alarm is then evaluated and its state is set appropriately. Any actions associated with the new state are then executed. When you update an existing alarm, its state is left unchanged, but the update completely overwrites the previous configuration of the alarm. If you are an IAM user, you must have Amazon EC2 permissions for some alarm operations:   The iam:CreateServiceLinkedRole for all alarms with EC2 actions   The iam:CreateServiceLinkedRole to create an alarm with Systems Manager OpsItem actions.   The first time you create an alarm in the Amazon Web Services Management Console, the CLI, or by using the PutMetricAlarm API, CloudWatch creates the necessary service-linked role for you. The service-linked roles are called AWSServiceRoleForCloudWatchEvents and AWSServiceRoleForCloudWatchAlarms_ActionSSM. For more information, see Amazon Web Services service-linked role.  Cross-account alarms  You can set an alarm on metrics in the current account, or in another account. To create a cross-account alarm that watches a metric in a different account, you must have completed the following pre-requisites:   The account where the metrics are located (the sharing account) must already have a sharing role named CloudWatch-CrossAccountSharingRole. If it does not already have this role, you must create it using the instructions in Set up a sharing account in  Cross-account cross-Region CloudWatch console. The policy for that role must grant access to the ID of the account where you are creating the alarm.    The account where you are creating the alarm (the monitoring account) must already have a service-linked role named AWSServiceRoleForCloudWatchCrossAccount to allow CloudWatch to assume the sharing role in the sharing account. If it does not, you must create it following the directions in Set up a monitoring account in  Cross-account cross-Region CloudWatch console.  
    */
   putMetricAlarm(params: CloudWatch.Types.PutMetricAlarmInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Creates or updates an alarm and associates it with the specified metric, metric math expression, or anomaly detection model. Alarms based on anomaly detection models cannot have Auto Scaling actions. When this operation creates an alarm, the alarm state is immediately set to INSUFFICIENT_DATA. The alarm is then evaluated and its state is set appropriately. Any actions associated with the new state are then executed. When you update an existing alarm, its state is left unchanged, but the update completely overwrites the previous configuration of the alarm. If you are an IAM user, you must have Amazon EC2 permissions for some alarm operations:   The iam:CreateServiceLinkedRole for all alarms with EC2 actions   The iam:CreateServiceLinkedRole to create an alarm with Systems Manager OpsItem actions.   The first time you create an alarm in the Management Console, the CLI, or by using the PutMetricAlarm API, CloudWatch creates the necessary service-linked role for you. The service-linked roles are called AWSServiceRoleForCloudWatchEvents and AWSServiceRoleForCloudWatchAlarms_ActionSSM. For more information, see Amazon Web Services service-linked role.  Cross-account alarms  You can set an alarm on metrics in the current account, or in another account. To create a cross-account alarm that watches a metric in a different account, you must have completed the following pre-requisites:   The account where the metrics are located (the sharing account) must already have a sharing role named CloudWatch-CrossAccountSharingRole. If it does not already have this role, you must create it using the instructions in Set up a sharing account in  Cross-account cross-Region CloudWatch console. The policy for that role must grant access to the ID of the account where you are creating the alarm.    The account where you are creating the alarm (the monitoring account) must already have a service-linked role named AWSServiceRoleForCloudWatchCrossAccount to allow CloudWatch to assume the sharing role in the sharing account. If it does not, you must create it following the directions in Set up a monitoring account in  Cross-account cross-Region CloudWatch console.  
+   * Creates or updates an alarm and associates it with the specified metric, metric math expression, or anomaly detection model. Alarms based on anomaly detection models cannot have Auto Scaling actions. When this operation creates an alarm, the alarm state is immediately set to INSUFFICIENT_DATA. The alarm is then evaluated and its state is set appropriately. Any actions associated with the new state are then executed. When you update an existing alarm, its state is left unchanged, but the update completely overwrites the previous configuration of the alarm. If you are an IAM user, you must have Amazon EC2 permissions for some alarm operations:   The iam:CreateServiceLinkedRole for all alarms with EC2 actions   The iam:CreateServiceLinkedRole to create an alarm with Systems Manager OpsItem actions.   The first time you create an alarm in the Amazon Web Services Management Console, the CLI, or by using the PutMetricAlarm API, CloudWatch creates the necessary service-linked role for you. The service-linked roles are called AWSServiceRoleForCloudWatchEvents and AWSServiceRoleForCloudWatchAlarms_ActionSSM. For more information, see Amazon Web Services service-linked role.  Cross-account alarms  You can set an alarm on metrics in the current account, or in another account. To create a cross-account alarm that watches a metric in a different account, you must have completed the following pre-requisites:   The account where the metrics are located (the sharing account) must already have a sharing role named CloudWatch-CrossAccountSharingRole. If it does not already have this role, you must create it using the instructions in Set up a sharing account in  Cross-account cross-Region CloudWatch console. The policy for that role must grant access to the ID of the account where you are creating the alarm.    The account where you are creating the alarm (the monitoring account) must already have a service-linked role named AWSServiceRoleForCloudWatchCrossAccount to allow CloudWatch to assume the sharing role in the sharing account. If it does not, you must create it following the directions in Set up a monitoring account in  Cross-account cross-Region CloudWatch console.  
    */
   putMetricAlarm(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -253,11 +253,11 @@ declare class CloudWatch extends Service {
    */
   putMetricData(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Creates or updates a metric stream. Metric streams can automatically stream CloudWatch metrics to Amazon Web Services destinations including Amazon S3 and to many third-party solutions. For more information, see  Using Metric Streams. To create a metric stream, you must be logged on to an account that has the iam:PassRole permission and either the CloudWatchFullAccess policy or the cloudwatch:PutMetricStream permission. When you create or update a metric stream, you choose one of the following:   Stream metrics from all metric namespaces in the account.   Stream metrics from all metric namespaces in the account, except for the namespaces that you list in ExcludeFilters.   Stream metrics from only the metric namespaces that you list in IncludeFilters.   When you use PutMetricStream to create a new metric stream, the stream is created in the running state. If you use it to update an existing stream, the state of the stream is not changed.
+   * Creates or updates a metric stream. Metric streams can automatically stream CloudWatch metrics to Amazon Web Services destinations including Amazon S3 and to many third-party solutions. For more information, see  Using Metric Streams. To create a metric stream, you must be logged on to an account that has the iam:PassRole permission and either the CloudWatchFullAccess policy or the cloudwatch:PutMetricStream permission. When you create or update a metric stream, you choose one of the following:   Stream metrics from all metric namespaces in the account.   Stream metrics from all metric namespaces in the account, except for the namespaces that you list in ExcludeFilters.   Stream metrics from only the metric namespaces that you list in IncludeFilters.   By default, a metric stream always sends the MAX, MIN, SUM, and SAMPLECOUNT statistics for each metric that is streamed. You can use the StatisticsConfigurations parameter to have the metric stream also send additional statistics in the stream. Streaming additional statistics incurs additional costs. For more information, see Amazon CloudWatch Pricing.  When you use PutMetricStream to create a new metric stream, the stream is created in the running state. If you use it to update an existing stream, the state of the stream is not changed.
    */
   putMetricStream(params: CloudWatch.Types.PutMetricStreamInput, callback?: (err: AWSError, data: CloudWatch.Types.PutMetricStreamOutput) => void): Request<CloudWatch.Types.PutMetricStreamOutput, AWSError>;
   /**
-   * Creates or updates a metric stream. Metric streams can automatically stream CloudWatch metrics to Amazon Web Services destinations including Amazon S3 and to many third-party solutions. For more information, see  Using Metric Streams. To create a metric stream, you must be logged on to an account that has the iam:PassRole permission and either the CloudWatchFullAccess policy or the cloudwatch:PutMetricStream permission. When you create or update a metric stream, you choose one of the following:   Stream metrics from all metric namespaces in the account.   Stream metrics from all metric namespaces in the account, except for the namespaces that you list in ExcludeFilters.   Stream metrics from only the metric namespaces that you list in IncludeFilters.   When you use PutMetricStream to create a new metric stream, the stream is created in the running state. If you use it to update an existing stream, the state of the stream is not changed.
+   * Creates or updates a metric stream. Metric streams can automatically stream CloudWatch metrics to Amazon Web Services destinations including Amazon S3 and to many third-party solutions. For more information, see  Using Metric Streams. To create a metric stream, you must be logged on to an account that has the iam:PassRole permission and either the CloudWatchFullAccess policy or the cloudwatch:PutMetricStream permission. When you create or update a metric stream, you choose one of the following:   Stream metrics from all metric namespaces in the account.   Stream metrics from all metric namespaces in the account, except for the namespaces that you list in ExcludeFilters.   Stream metrics from only the metric namespaces that you list in IncludeFilters.   By default, a metric stream always sends the MAX, MIN, SUM, and SAMPLECOUNT statistics for each metric that is streamed. You can use the StatisticsConfigurations parameter to have the metric stream also send additional statistics in the stream. Streaming additional statistics incurs additional costs. For more information, see Amazon CloudWatch Pricing.  When you use PutMetricStream to create a new metric stream, the stream is created in the running state. If you use it to update an existing stream, the state of the stream is not changed.
    */
   putMetricStream(callback?: (err: AWSError, data: CloudWatch.Types.PutMetricStreamOutput) => void): Request<CloudWatch.Types.PutMetricStreamOutput, AWSError>;
   /**
@@ -382,6 +382,14 @@ declare namespace CloudWatch {
      * The current status of the anomaly detector's training. The possible values are TRAINED | PENDING_TRAINING | TRAINED_INSUFFICIENT_DATA 
      */
     StateValue?: AnomalyDetectorStateValue;
+    /**
+     * The CloudWatch metric and statistic for this anomaly detector.
+     */
+    SingleMetricAnomalyDetector?: SingleMetricAnomalyDetector;
+    /**
+     * The CloudWatch metric math expression for this anomaly detector.
+     */
+    MetricMathAnomalyDetector?: MetricMathAnomalyDetector;
   }
   export interface AnomalyDetectorConfiguration {
     /**
@@ -397,6 +405,8 @@ declare namespace CloudWatch {
   export type AnomalyDetectorMetricStat = string;
   export type AnomalyDetectorMetricTimezone = string;
   export type AnomalyDetectorStateValue = "PENDING_TRAINING"|"TRAINED_INSUFFICIENT_DATA"|"TRAINED"|string;
+  export type AnomalyDetectorType = "SINGLE_METRIC"|"METRIC_MATH"|string;
+  export type AnomalyDetectorTypes = AnomalyDetectorType[];
   export type AnomalyDetectors = AnomalyDetector[];
   export type BatchFailures = PartialFailure[];
   export type ComparisonOperator = "GreaterThanOrEqualToThreshold"|"GreaterThanThreshold"|"LessThanThreshold"|"LessThanOrEqualToThreshold"|"LessThanLowerOrGreaterThanUpperThreshold"|"LessThanLowerThreshold"|"GreaterThanUpperThreshold"|string;
@@ -541,11 +551,11 @@ declare namespace CloudWatch {
     /**
      * The namespace associated with the anomaly detection model to delete.
      */
-    Namespace: Namespace;
+    Namespace?: Namespace;
     /**
      * The metric name associated with the anomaly detection model to delete.
      */
-    MetricName: MetricName;
+    MetricName?: MetricName;
     /**
      * The metric dimensions associated with the anomaly detection model to delete.
      */
@@ -553,7 +563,15 @@ declare namespace CloudWatch {
     /**
      * The statistic associated with the anomaly detection model to delete.
      */
-    Stat: AnomalyDetectorMetricStat;
+    Stat?: AnomalyDetectorMetricStat;
+    /**
+     * A single metric anomaly detector to be deleted. When using SingleMetricAnomalyDetector, you cannot include the following parameters in the same operation:    Dimensions,    MetricName     Namespace     Stat    the MetricMathAnomalyDetector parameters of DeleteAnomalyDetectorInput    Instead, specify the single metric anomaly detector attributes as part of the SingleMetricAnomalyDetector property.
+     */
+    SingleMetricAnomalyDetector?: SingleMetricAnomalyDetector;
+    /**
+     * The metric math anomaly detector to be deleted. When using MetricMathAnomalyDetector, you cannot include following parameters in the same operation:    Dimensions,    MetricName     Namespace     Stat    the SingleMetricAnomalyDetector parameters of DeleteAnomalyDetectorInput    Instead, specify the metric math anomaly detector attributes as part of the MetricMathAnomalyDetector property.
+     */
+    MetricMathAnomalyDetector?: MetricMathAnomalyDetector;
   }
   export interface DeleteAnomalyDetectorOutput {
   }
@@ -738,6 +756,10 @@ declare namespace CloudWatch {
      * Limits the results to only the anomaly detection models that are associated with the specified metric dimensions. If there are multiple metrics that have these dimensions and have anomaly detection models associated, they're all returned.
      */
     Dimensions?: Dimensions;
+    /**
+     * The anomaly detector types to request when using DescribeAnomalyDetectorsInput. If empty, defaults to SINGLE_METRIC.
+     */
+    AnomalyDetectorTypes?: AnomalyDetectorTypes;
   }
   export interface DescribeAnomalyDetectorsOutput {
     /**
@@ -771,7 +793,7 @@ declare namespace CloudWatch {
   }
   export interface Dimension {
     /**
-     * The name of the dimension. Dimension names must contain only ASCII characters and must include at least one non-whitespace character.
+     * The name of the dimension. Dimension names must contain only ASCII characters, must include at least one non-whitespace character, and cannot start with a colon (:).
      */
     Name: DimensionName;
     /**
@@ -915,7 +937,7 @@ declare namespace CloudWatch {
   }
   export interface GetMetricDataInput {
     /**
-     * The metric queries to be returned. A single GetMetricData call can include as many as 500 MetricDataQuery structures. Each of these structures can specify either a metric to retrieve, or a math expression to perform on retrieved data. 
+     * The metric queries to be returned. A single GetMetricData call can include as many as 500 MetricDataQuery structures. Each of these structures can specify either a metric to retrieve, a Metrics Insights query, or a math expression to perform on retrieved data. 
      */
     MetricDataQueries: MetricDataQueries;
     /**
@@ -1051,9 +1073,13 @@ declare namespace CloudWatch {
      */
     LastUpdateDate?: Timestamp;
     /**
-     * 
+     * The output format for the stream. Valid values are json and opentelemetry0.7. For more information about metric stream output formats, see  Metric streams output formats.
      */
     OutputFormat?: MetricStreamOutputFormat;
+    /**
+     * Each entry in this array displays information about one or more metrics that include additional statistics in the metric stream. For more information about the additional statistics, see  CloudWatch statistics definitions. 
+     */
+    StatisticsConfigurations?: MetricStreamStatisticsConfigurations;
   }
   export interface GetMetricWidgetImageInput {
     /**
@@ -1084,7 +1110,7 @@ declare namespace CloudWatch {
      */
     State: InsightRuleState;
     /**
-     * For rules that you create, this is always {"Name": "CloudWatchLogRule", "Version": 1}. For built-in rules, this is {"Name": "ServiceLogRule", "Version": 1} 
+     * For rules that you create, this is always {"Name": "CloudWatchLogRule", "Version": 1}. For managed rules, this is {"Name": "ServiceLogRule", "Version": 1} 
      */
     Schema: InsightRuleSchema;
     /**
@@ -1386,7 +1412,7 @@ declare namespace CloudWatch {
      */
     ComparisonOperator?: ComparisonOperator;
     /**
-     * Sets how this alarm is to handle missing data points. If this parameter is omitted, the default behavior of missing is used.
+     * Sets how this alarm is to handle missing data points. The valid values are breaching, notBreaching, ignore, and missing. For more information, see Configuring how CloudWatch alarms treat missing data. If this parameter is omitted, the default behavior of missing is used.
      */
     TreatMissingData?: TreatMissingData;
     /**
@@ -1415,7 +1441,7 @@ declare namespace CloudWatch {
      */
     MetricStat?: MetricStat;
     /**
-     * The math expression to be performed on the returned data, if this object is performing a math expression. This expression can use the Id of the other metrics to refer to those metrics, and can also use the Id of other expressions to use the result of those expressions. For more information about metric math expressions, see Metric Math Syntax and Functions in the Amazon CloudWatch User Guide. Within each MetricDataQuery object, you must specify either Expression or MetricStat but not both.
+     * This field can contain either a Metrics Insights query, or a metric math expression to be performed on the returned data. For more information about Metrics Insights queries, see Metrics Insights query components and syntax in the Amazon CloudWatch User Guide. A math expression can use the Id of the other metrics or queries to refer to those metrics, and can also use the Id of other expressions to use the result of those expressions. For more information about metric math expressions, see Metric Math Syntax and Functions in the Amazon CloudWatch User Guide. Within each MetricDataQuery object, you must specify either Expression or MetricStat but not both.
      */
     Expression?: MetricExpression;
     /**
@@ -1504,6 +1530,12 @@ declare namespace CloudWatch {
   export type MetricExpression = string;
   export type MetricId = string;
   export type MetricLabel = string;
+  export interface MetricMathAnomalyDetector {
+    /**
+     * An array of metric data query structures that enables you to create an anomaly detector based on the result of a metric math expression. Each item in MetricDataQueries gets a metric or performs a math expression. One item in MetricDataQueries is the expression that provides the time series that the anomaly detector uses as input. Designate the expression by setting ReturnData to True for this object in the array. For all other expressions and metrics, set ReturnData to False. The designated expression must return a single time series.
+     */
+    MetricDataQueries?: MetricDataQueries;
+  }
   export type MetricName = string;
   export interface MetricStat {
     /**
@@ -1565,6 +1597,30 @@ declare namespace CloudWatch {
   export type MetricStreamNames = MetricStreamName[];
   export type MetricStreamOutputFormat = "json"|"opentelemetry0.7"|string;
   export type MetricStreamState = string;
+  export type MetricStreamStatistic = string;
+  export type MetricStreamStatisticsAdditionalStatistics = MetricStreamStatistic[];
+  export interface MetricStreamStatisticsConfiguration {
+    /**
+     * An array of metric name and namespace pairs that stream the additional statistics listed in the value of the AdditionalStatistics parameter. There can be as many as 100 pairs in the array. All metrics that match the combination of metric name and namespace will be streamed with the additional statistics, no matter their dimensions.
+     */
+    IncludeMetrics: MetricStreamStatisticsIncludeMetrics;
+    /**
+     * The list of additional statistics that are to be streamed for the metrics listed in the IncludeMetrics array in this structure. This list can include as many as 20 statistics. If the OutputFormat for the stream is opentelemetry0.7, the only valid values are p??  percentile statistics such as p90, p99 and so on. If the OutputFormat for the stream is json, the valid values include the abbreviations for all of the statistics listed in  CloudWatch statistics definitions. For example, this includes tm98,  wm90, PR(:300), and so on.
+     */
+    AdditionalStatistics: MetricStreamStatisticsAdditionalStatistics;
+  }
+  export type MetricStreamStatisticsConfigurations = MetricStreamStatisticsConfiguration[];
+  export type MetricStreamStatisticsIncludeMetrics = MetricStreamStatisticsMetric[];
+  export interface MetricStreamStatisticsMetric {
+    /**
+     * The namespace of the metric.
+     */
+    Namespace: Namespace;
+    /**
+     * The name of the metric.
+     */
+    MetricName: MetricName;
+  }
   export type MetricWidget = string;
   export type MetricWidgetImage = Buffer|Uint8Array|Blob|string;
   export type Metrics = Metric[];
@@ -1594,11 +1650,11 @@ declare namespace CloudWatch {
     /**
      * The namespace of the metric to create the anomaly detection model for.
      */
-    Namespace: Namespace;
+    Namespace?: Namespace;
     /**
      * The name of the metric to create the anomaly detection model for.
      */
-    MetricName: MetricName;
+    MetricName?: MetricName;
     /**
      * The metric dimensions to create the anomaly detection model for.
      */
@@ -1606,11 +1662,19 @@ declare namespace CloudWatch {
     /**
      * The statistic to use for the metric and the anomaly detection model.
      */
-    Stat: AnomalyDetectorMetricStat;
+    Stat?: AnomalyDetectorMetricStat;
     /**
      * The configuration specifies details about how the anomaly detection model is to be trained, including time ranges to exclude when training and updating the model. You can specify as many as 10 time ranges. The configuration can also include the time zone to use for the metric.
      */
     Configuration?: AnomalyDetectorConfiguration;
+    /**
+     * A single metric anomaly detector to be created. When using SingleMetricAnomalyDetector, you cannot include the following parameters in the same operation:    Dimensions     MetricName     Namespace     Stat    the MetricMatchAnomalyDetector parameters of PutAnomalyDetectorInput    Instead, specify the single metric anomaly detector attributes as part of the property SingleMetricAnomalyDetector.
+     */
+    SingleMetricAnomalyDetector?: SingleMetricAnomalyDetector;
+    /**
+     * The metric math anomaly detector to be created. When using MetricMathAnomalyDetector, you cannot include the following parameters in the same operation:    Dimensions     MetricName     Namespace     Stat    the SingleMetricAnomalyDetector parameters of PutAnomalyDetectorInput    Instead, specify the metric math anomaly detector attributes as part of the property MetricMathAnomalyDetector.
+     */
+    MetricMathAnomalyDetector?: MetricMathAnomalyDetector;
   }
   export interface PutAnomalyDetectorOutput {
   }
@@ -1754,7 +1818,7 @@ declare namespace CloudWatch {
      */
     ComparisonOperator: ComparisonOperator;
     /**
-     *  Sets how this alarm is to handle missing data points. If TreatMissingData is omitted, the default behavior of missing is used. For more information, see Configuring How CloudWatch Alarms Treats Missing Data. Valid Values: breaching | notBreaching | ignore | missing 
+     *  Sets how this alarm is to handle missing data points. If TreatMissingData is omitted, the default behavior of missing is used. For more information, see Configuring How CloudWatch Alarms Treats Missing Data. Valid Values: breaching | notBreaching | ignore | missing   Alarms that evaluate metrics in the AWS/DynamoDB namespace always ignore missing data even if you choose a different option for TreatMissingData. When an AWS/DynamoDB metric has missing data, alarms that evaluate that metric remain in their current state. 
      */
     TreatMissingData?: TreatMissingData;
     /**
@@ -1813,6 +1877,10 @@ declare namespace CloudWatch {
      * A list of key-value pairs to associate with the metric stream. You can associate as many as 50 tags with a metric stream. Tags can help you organize and categorize your resources. You can also use them to scope user permissions by granting a user permission to access or change only resources with certain tag values. You can use this parameter only when you are creating a new metric stream. If you are using this operation to update an existing metric stream, any tags you specify in this parameter are ignored. To change the tags of an existing metric stream, use TagResource or UntagResource.
      */
     Tags?: TagList;
+    /**
+     * By default, a metric stream always sends the MAX, MIN, SUM, and SAMPLECOUNT statistics for each metric that is streamed. You can use this parameter to have the metric stream also send additional statistics in the stream. This array can have up to 100 members. For each entry in this array, you specify one or more metrics and the list of additional statistics to stream for those metrics. The additional statistics that you can stream depend on the stream's OutputFormat. If the OutputFormat is json, you can stream any additional statistic that is supported by CloudWatch, listed in  CloudWatch statistics definitions. If the OutputFormat is opentelemetry0.7, you can stream percentile statistics such as p95, p99.9 and so on.
+     */
+    StatisticsConfigurations?: MetricStreamStatisticsConfigurations;
   }
   export interface PutMetricStreamOutput {
     /**
@@ -1852,6 +1920,24 @@ declare namespace CloudWatch {
      * The reason that this alarm is set to this specific state, in JSON format. For SNS or EC2 alarm actions, this is just informational. But for EC2 Auto Scaling or application Auto Scaling alarm actions, the Auto Scaling policy uses the information in this field to take the correct action.
      */
     StateReasonData?: StateReasonData;
+  }
+  export interface SingleMetricAnomalyDetector {
+    /**
+     * The namespace of the metric to create the anomaly detection model for.
+     */
+    Namespace?: Namespace;
+    /**
+     * The name of the metric to create the anomaly detection model for.
+     */
+    MetricName?: MetricName;
+    /**
+     * The metric dimensions to create the anomaly detection model for.
+     */
+    Dimensions?: Dimensions;
+    /**
+     * The statistic to use for the metric and anomaly detection model.
+     */
+    Stat?: AnomalyDetectorMetricStat;
   }
   export type Size = number;
   export type StandardUnit = "Seconds"|"Microseconds"|"Milliseconds"|"Bytes"|"Kilobytes"|"Megabytes"|"Gigabytes"|"Terabytes"|"Bits"|"Kilobits"|"Megabits"|"Gigabits"|"Terabits"|"Percent"|"Count"|"Bytes/Second"|"Kilobytes/Second"|"Megabytes/Second"|"Gigabytes/Second"|"Terabytes/Second"|"Bits/Second"|"Kilobits/Second"|"Megabits/Second"|"Gigabits/Second"|"Terabits/Second"|"Count/Second"|"None"|string;

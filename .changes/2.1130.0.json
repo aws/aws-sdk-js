@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "Add new state values for IPAMs, IPAM Scopes, and IPAM Pools."
+    },
+    {
+        "type": "feature",
+        "category": "Location",
+        "description": "Amazon Location Service now includes a MaxResults parameter for ListGeofences requests."
+    },
+    {
+        "type": "feature",
+        "category": "MediaPackage",
+        "description": "This release adds Dvb Dash 2014 as an available profile option for Dash Origin Endpoints."
+    },
+    {
+        "type": "feature",
+        "category": "Redshift",
+        "description": "Introduces new field 'LoadSampleData' in CreateCluster operation. Customers can now specify 'LoadSampleData' option during creation of a cluster, which results in loading of sample data in the cluster that is created."
+    }
+]

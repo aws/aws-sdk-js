@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "KafkaConnect",
+        "description": "Adds operation for custom plugin deletion (DeleteCustomPlugin) and adds new StateDescription field to DescribeCustomPlugin and DescribeConnector responses to return errors from asynchronous resource creation."
+    },
+    {
+        "type": "feature",
+        "category": "MediaPackage",
+        "description": "This release adds Hybridcast as an available profile option for Dash Origin Endpoints."
+    },
+    {
+        "type": "feature",
+        "category": "Mgn",
+        "description": "Add support for GP3 and IO2 volume types. Add bootMode to LaunchConfiguration object (and as a parameter to UpdateLaunchConfigurationRequest)."
+    }
+]

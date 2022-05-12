@@ -53,11 +53,11 @@ declare class SSMIncidents extends Service {
    */
   deleteReplicationSet(callback?: (err: AWSError, data: SSMIncidents.Types.DeleteReplicationSetOutput) => void): Request<SSMIncidents.Types.DeleteReplicationSetOutput, AWSError>;
   /**
-   * Deletes the resource policy that AWS Resource Access Manager uses to share your Incident Manager resource.
+   * Deletes the resource policy that Resource Access Manager uses to share your Incident Manager resource.
    */
   deleteResourcePolicy(params: SSMIncidents.Types.DeleteResourcePolicyInput, callback?: (err: AWSError, data: SSMIncidents.Types.DeleteResourcePolicyOutput) => void): Request<SSMIncidents.Types.DeleteResourcePolicyOutput, AWSError>;
   /**
-   * Deletes the resource policy that AWS Resource Access Manager uses to share your Incident Manager resource.
+   * Deletes the resource policy that Resource Access Manager uses to share your Incident Manager resource.
    */
   deleteResourcePolicy(callback?: (err: AWSError, data: SSMIncidents.Types.DeleteResourcePolicyOutput) => void): Request<SSMIncidents.Types.DeleteResourcePolicyOutput, AWSError>;
   /**
@@ -77,11 +77,11 @@ declare class SSMIncidents extends Service {
    */
   deleteTimelineEvent(callback?: (err: AWSError, data: SSMIncidents.Types.DeleteTimelineEventOutput) => void): Request<SSMIncidents.Types.DeleteTimelineEventOutput, AWSError>;
   /**
-   * Returns the details of the specified incident record.
+   * Returns the details for the specified incident record.
    */
   getIncidentRecord(params: SSMIncidents.Types.GetIncidentRecordInput, callback?: (err: AWSError, data: SSMIncidents.Types.GetIncidentRecordOutput) => void): Request<SSMIncidents.Types.GetIncidentRecordOutput, AWSError>;
   /**
-   * Returns the details of the specified incident record.
+   * Returns the details for the specified incident record.
    */
   getIncidentRecord(callback?: (err: AWSError, data: SSMIncidents.Types.GetIncidentRecordOutput) => void): Request<SSMIncidents.Types.GetIncidentRecordOutput, AWSError>;
   /**
@@ -157,19 +157,19 @@ declare class SSMIncidents extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: SSMIncidents.Types.ListTagsForResourceResponse) => void): Request<SSMIncidents.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Lists timeline events of the specified incident record.
+   * Lists timeline events for the specified incident record.
    */
   listTimelineEvents(params: SSMIncidents.Types.ListTimelineEventsInput, callback?: (err: AWSError, data: SSMIncidents.Types.ListTimelineEventsOutput) => void): Request<SSMIncidents.Types.ListTimelineEventsOutput, AWSError>;
   /**
-   * Lists timeline events of the specified incident record.
+   * Lists timeline events for the specified incident record.
    */
   listTimelineEvents(callback?: (err: AWSError, data: SSMIncidents.Types.ListTimelineEventsOutput) => void): Request<SSMIncidents.Types.ListTimelineEventsOutput, AWSError>;
   /**
-   * Adds a resource policy to the specified response plan.
+   * Adds a resource policy to the specified response plan. The resource policy is used to share the response plan using Resource Access Manager (RAM). For more information about cross-account sharing, see Setting up cross-account functionality.
    */
   putResourcePolicy(params: SSMIncidents.Types.PutResourcePolicyInput, callback?: (err: AWSError, data: SSMIncidents.Types.PutResourcePolicyOutput) => void): Request<SSMIncidents.Types.PutResourcePolicyOutput, AWSError>;
   /**
-   * Adds a resource policy to the specified response plan.
+   * Adds a resource policy to the specified response plan. The resource policy is used to share the response plan using Resource Access Manager (RAM). For more information about cross-account sharing, see Setting up cross-account functionality.
    */
   putResourcePolicy(callback?: (err: AWSError, data: SSMIncidents.Types.PutResourcePolicyOutput) => void): Request<SSMIncidents.Types.PutResourcePolicyOutput, AWSError>;
   /**
@@ -205,11 +205,11 @@ declare class SSMIncidents extends Service {
    */
   updateDeletionProtection(callback?: (err: AWSError, data: SSMIncidents.Types.UpdateDeletionProtectionOutput) => void): Request<SSMIncidents.Types.UpdateDeletionProtectionOutput, AWSError>;
   /**
-   * Update the details of an incident record. You can use this action to update an incident record from the defined chat channel. For more information about using actions in chat channels, see Interacting through chat.
+   * Update the details of an incident record. You can use this operation to update an incident record from the defined chat channel. For more information about using actions in chat channels, see Interacting through chat.
    */
   updateIncidentRecord(params: SSMIncidents.Types.UpdateIncidentRecordInput, callback?: (err: AWSError, data: SSMIncidents.Types.UpdateIncidentRecordOutput) => void): Request<SSMIncidents.Types.UpdateIncidentRecordOutput, AWSError>;
   /**
-   * Update the details of an incident record. You can use this action to update an incident record from the defined chat channel. For more information about using actions in chat channels, see Interacting through chat.
+   * Update the details of an incident record. You can use this operation to update an incident record from the defined chat channel. For more information about using actions in chat channels, see Interacting through chat.
    */
   updateIncidentRecord(callback?: (err: AWSError, data: SSMIncidents.Types.UpdateIncidentRecordOutput) => void): Request<SSMIncidents.Types.UpdateIncidentRecordOutput, AWSError>;
   /**
@@ -271,7 +271,7 @@ declare namespace SSMIncidents {
   export type ActionsList = Action[];
   export interface AddRegionAction {
     /**
-     * The Region name to add to the replication set.
+     * The Amazon Web Services Region name to add to the replication set.
      */
     regionName: RegionName;
     /**
@@ -300,7 +300,7 @@ declare namespace SSMIncidents {
   export type Boolean = boolean;
   export interface ChatChannel {
     /**
-     * The SNS targets that AWS Chatbot uses to notify the chat channel of updates to an incident. You can also make updates to the incident through the chat channel by using the SNS topics. 
+     * The Amazon SNS targets that Chatbot uses to notify the chat channel of updates to an incident. You can also make updates to the incident through the chat channel by using the Amazon SNS topics. 
      */
     chatbotSns?: ChatbotSnsConfigurationSet;
     /**
@@ -326,7 +326,7 @@ declare namespace SSMIncidents {
   }
   export interface CreateReplicationSetInput {
     /**
-     * A token ensuring that the action is called only once with the specified details.
+     * A token ensuring that the operation is called only once with the specified details.
      */
     clientToken?: ClientToken;
     /**
@@ -346,11 +346,11 @@ declare namespace SSMIncidents {
      */
     actions?: ActionsList;
     /**
-     * The AWS Chatbot chat channel used for collaboration during an incident.
+     * The Chatbot chat channel used for collaboration during an incident.
      */
     chatChannel?: ChatChannel;
     /**
-     * A token ensuring that the action is called only once with the specified details.
+     * A token ensuring that the operation is called only once with the specified details.
      */
     clientToken?: ClientToken;
     /**
@@ -386,7 +386,7 @@ declare namespace SSMIncidents {
      */
     clientToken?: ClientToken;
     /**
-     * A valid JSON string. There is no other schema imposed. A short description of the event.
+     * A short description of the event.
      */
     eventData: EventData;
     /**
@@ -398,7 +398,7 @@ declare namespace SSMIncidents {
      */
     eventType: TimelineEventType;
     /**
-     * The Amazon Resource Name (ARN) of the incident record you are adding the event to.
+     * The Amazon Resource Name (ARN) of the incident record to which the event will be added.
      */
     incidentRecordArn: Arn;
   }
@@ -423,7 +423,7 @@ declare namespace SSMIncidents {
   }
   export interface DeleteRegionAction {
     /**
-     * The name of the Region you're deleting from the replication set.
+     * The name of the Amazon Web Services Region you're deleting from the replication set.
      */
     regionName: RegionName;
   }
@@ -461,12 +461,20 @@ declare namespace SSMIncidents {
      */
     eventId: UUID;
     /**
-     * The Amazon Resource Name (ARN) of the incident that the event is part of.
+     * The Amazon Resource Name (ARN) of the incident that includes the timeline event.
      */
     incidentRecordArn: Arn;
   }
   export interface DeleteTimelineEventOutput {
   }
+  export interface DynamicSsmParameterValue {
+    /**
+     * Variable dynamic parameters. A parameter value is determined when an incident is created.
+     */
+    variable?: VariableType;
+  }
+  export type DynamicSsmParameters = {[key: string]: DynamicSsmParameterValue};
+  export type DynamicSsmParametersKeyString = string;
   export interface EmptyChatChannel {
   }
   export type EngagementSet = SsmContactsArn[];
@@ -514,7 +522,7 @@ declare namespace SSMIncidents {
   }
   export interface GetIncidentRecordOutput {
     /**
-     * Details structure of the incident record.
+     * Details the structure of the incident record.
      */
     incidentRecord: IncidentRecord;
   }
@@ -570,7 +578,7 @@ declare namespace SSMIncidents {
      */
     arn: Arn;
     /**
-     * The AWS Chatbot chat channel used for collaboration during an incident.
+     * The Chatbot chat channel used for collaboration during an incident.
      */
     chatChannel?: ChatChannel;
     /**
@@ -586,17 +594,17 @@ declare namespace SSMIncidents {
      */
     incidentTemplate: IncidentTemplate;
     /**
-     * The short format name of the response plan. Can't contain spaces.
+     * The short format name of the response plan. The name can't contain spaces.
      */
     name: ResponsePlanName;
   }
   export interface GetTimelineEventInput {
     /**
-     * The ID of the event. You can get an event's ID when you create it or by using ListTimelineEvents.
+     * The ID of the event. You can get an event's ID when you create it, or by using ListTimelineEvents.
      */
     eventId: UUID;
     /**
-     * The Amazon Resource Name (ARN) of the incident that the timeline event is part of.
+     * The Amazon Resource Name (ARN) of the incident that includes the timeline event.
      */
     incidentRecordArn: Arn;
   }
@@ -625,7 +633,7 @@ declare namespace SSMIncidents {
      */
     creationTime: Timestamp;
     /**
-     * The string Incident Manager uses to prevent duplicate incidents from being created by the same incident.
+     * The string Incident Manager uses to prevent duplicate incidents from being created by the same incident in the same account.
      */
     dedupeString: DedupeString;
     /**
@@ -645,7 +653,7 @@ declare namespace SSMIncidents {
      */
     lastModifiedTime: Timestamp;
     /**
-     * The SNS targets that are notified when updates are made to an incident.
+     * The Amazon SNS targets that are notified when updates are made to an incident.
      */
     notificationTargets?: NotificationTargetSet;
     /**
@@ -657,7 +665,7 @@ declare namespace SSMIncidents {
      */
     status: IncidentRecordStatus;
     /**
-     * The summary of the incident. The summary is a brief synopsis of what occurred, what is currently happening, and context.
+     * The summary of the incident. The summary is a brief synopsis of what occurred, what's currently happening, and context of the incident.
      */
     summary?: IncidentSummary;
     /**
@@ -671,15 +679,15 @@ declare namespace SSMIncidents {
      */
     createdBy: Arn;
     /**
-     * The principal the assumed the role specified of the createdBy.
+     * The service principal that assumed the role specified in createdBy. If no service principal assumed the role this will be left blank.
      */
-    invokedBy?: Arn;
+    invokedBy?: ServicePrincipal;
     /**
      * The resource that caused the incident to be created.
      */
     resourceArn?: Arn;
     /**
-     * The service that started the incident. This can be manually created from Incident Manager, automatically created using an AWS CloudWatch alarm, or Amazon EventBridge event.
+     * The service that started the incident. This can be manually created from Incident Manager, automatically created using an Amazon CloudWatch alarm, or Amazon EventBridge event.
      */
     source: IncidentSource;
   }
@@ -727,7 +735,7 @@ declare namespace SSMIncidents {
      */
     impact: Impact;
     /**
-     * The SNS targets that are notified when updates are made to an incident.
+     * The Amazon SNS targets that are notified when updates are made to an incident.
      */
     notificationTargets?: NotificationTargetSet;
     /**
@@ -744,7 +752,7 @@ declare namespace SSMIncidents {
   export type IntegerList = Integer[];
   export interface ItemIdentifier {
     /**
-     * The type of related item. Incident Manager supports the following types:    ANALYSIS     INCIDENT     METRIC     PARENT     ATTACHMENT     OTHER   
+     * The type of related item. 
      */
     type: ItemType;
     /**
@@ -752,24 +760,24 @@ declare namespace SSMIncidents {
      */
     value: ItemValue;
   }
-  export type ItemType = "ANALYSIS"|"INCIDENT"|"METRIC"|"PARENT"|"ATTACHMENT"|"OTHER"|string;
+  export type ItemType = "ANALYSIS"|"INCIDENT"|"METRIC"|"PARENT"|"ATTACHMENT"|"OTHER"|"AUTOMATION"|"INVOLVED_RESOURCE"|string;
   export interface ItemValue {
     /**
      * The Amazon Resource Name (ARN) of the related item, if the related item is an Amazon resource.
      */
     arn?: Arn;
     /**
-     * The metric definition, if the related item is a metric in CloudWatch.
+     * The metric definition, if the related item is a metric in Amazon CloudWatch.
      */
     metricDefinition?: MetricDefinition;
     /**
-     * The URL, if the related item is a non-AWS resource.
+     * The URL, if the related item is a non-Amazon Web Services resource.
      */
     url?: Url;
   }
   export interface ListIncidentRecordsInput {
     /**
-     * Filter the list of incident records you are searching through. You can filter on the following keys:    creationTime     impact     status     createdBy   
+     * Filters the list of incident records through which you are searching. You can filter on the following keys:    creationTime     impact     status     createdBy    Note the following when deciding how to use Filters:   If you don't specify a Filter, the response includes all incident records.   If you specify more than one filter in a single request, the response returns incident records that match all filters.   If you specify a filter with more than one value, the response returns incident records that match any of the values provided.  
      */
     filters?: FilterList;
     /**
@@ -793,7 +801,7 @@ declare namespace SSMIncidents {
   }
   export interface ListRelatedItemsInput {
     /**
-     * The Amazon Resource Name (ARN) of the incident record that you are listing related items for.
+     * The Amazon Resource Name (ARN) of the incident record containing the listed related items.
      */
     incidentRecordArn: Arn;
     /**
@@ -869,11 +877,11 @@ declare namespace SSMIncidents {
   }
   export interface ListTimelineEventsInput {
     /**
-     * Filters the timeline events based on the provided conditional values. You can filter timeline events using the following keys:    eventTime     eventType   
+     * Filters the timeline events based on the provided conditional values. You can filter timeline events using the following keys:    eventTime     eventType    Note the following when deciding how to use Filters:   If you don't specify a Filter, the response includes all timeline events.   If you specify more than one filter in a single request, the response returns timeline events that match all filters.   If you specify a filter with more than one value, the response returns timeline events that match any of the values provided.  
      */
     filters?: FilterList;
     /**
-     * The Amazon Resource Name (ARN) of the incident that the event is part of.
+     * The Amazon Resource Name (ARN) of the incident that includes the timeline event.
      */
     incidentRecordArn: Arn;
     /**
@@ -934,19 +942,19 @@ declare namespace SSMIncidents {
   export type RawData = string;
   export interface RegionInfo {
     /**
-     * The ID of the KMS key used to encrypt the data in this Region.
+     * The ID of the KMS key used to encrypt the data in this Amazon Web Services Region.
      */
     sseKmsKeyId?: SseKmsKey;
     /**
-     * The status of the Region in the replication set.
+     * The status of the Amazon Web Services Region in the replication set.
      */
     status: RegionStatus;
     /**
-     * Information displayed about the status of the Region.
+     * Information displayed about the status of the Amazon Web Services Region.
      */
     statusMessage?: String;
     /**
-     * The most recent date and time that the Region's status was updated.
+     * The most recent date and time that Incident Manager updated the Amazon Web Services Region's status.
      */
     statusUpdateDateTime: Timestamp;
   }
@@ -996,7 +1004,7 @@ declare namespace SSMIncidents {
      */
     createdTime: Timestamp;
     /**
-     * Determines if the replication set deletion protection is enabled or not. If deletion protection is enabled, you can't delete the last Region in the replication set. 
+     * Determines if the replication set deletion protection is enabled or not. If deletion protection is enabled, you can't delete the last Amazon Web Services Region in the replication set. 
      */
     deletionProtected: Boolean;
     /**
@@ -1008,7 +1016,7 @@ declare namespace SSMIncidents {
      */
     lastModifiedTime: Timestamp;
     /**
-     * The map between each Region in your replication set and the KMS key that is used to encrypt the data in that Region.
+     * The map between each Amazon Web Services Region in your replication set and the KMS key that's used to encrypt the data in that Region.
      */
     regionMap: RegionInfoMap;
     /**
@@ -1028,7 +1036,7 @@ declare namespace SSMIncidents {
      */
     policyId: PolicyId;
     /**
-     * The Region that policy allows resources to be used in.
+     * The Amazon Web Services Region that policy allows resources to be used in.
      */
     ramResourceShareRegion: String;
   }
@@ -1051,6 +1059,7 @@ declare namespace SSMIncidents {
   }
   export type ResponsePlanSummaryList = ResponsePlanSummary[];
   export type RoleArn = string;
+  export type ServicePrincipal = string;
   export type SnsArn = string;
   export type SortOrder = "ASCENDING"|"DESCENDING"|string;
   export type SseKmsKey = string;
@@ -1063,6 +1072,10 @@ declare namespace SSMIncidents {
      * The automation document's version to use when running.
      */
     documentVersion?: SsmAutomationDocumentVersionString;
+    /**
+     * The key-value pair to resolve dynamic parameter values when processing a Systems Manager Automation runbook.
+     */
+    dynamicParameters?: DynamicSsmParameters;
     /**
      * The key-value pair parameters to use when running the automation document.
      */
@@ -1086,7 +1099,7 @@ declare namespace SSMIncidents {
   export type SsmTargetAccount = "RESPONSE_PLAN_OWNER_ACCOUNT"|"IMPACTED_ACCOUNT"|string;
   export interface StartIncidentInput {
     /**
-     * A token ensuring that the action is called only once with the specified details.
+     * A token ensuring that the operation is called only once with the specified details.
      */
     clientToken?: ClientToken;
     /**
@@ -1094,11 +1107,11 @@ declare namespace SSMIncidents {
      */
     impact?: Impact;
     /**
-     * Add related items to the incident for other responders to use. Related items are AWS resources, external links, or files uploaded to an S3 bucket. 
+     * Add related items to the incident for other responders to use. Related items are AWS resources, external links, or files uploaded to an Amazon S3 bucket. 
      */
     relatedItems?: RelatedItemList;
     /**
-     * The Amazon Resource Name (ARN) of the response plan that pre-defines summary, chat channels, SNS topics, runbooks, title, and impact of the incident. 
+     * The Amazon Resource Name (ARN) of the response plan that pre-defines summary, chat channels, Amazon SNS topics, runbooks, title, and impact of the incident. 
      */
     responsePlanArn: Arn;
     /**
@@ -1166,11 +1179,11 @@ declare namespace SSMIncidents {
   export type Timestamp = Date;
   export interface TriggerDetails {
     /**
-     * Raw data passed from either EventBridge, CloudWatch, or Incident Manager when an incident is created.
+     * Raw data passed from either Amazon EventBridge, Amazon CloudWatch, or Incident Manager when an incident is created.
      */
     rawData?: RawData;
     /**
-     * Identifies the service that sourced the event. All events sourced from within AWS begin with "aws." Customer-generated events can have any value here, as long as it doesn't begin with "aws." We recommend the use of Java package-name style reverse domain-name strings. 
+     * Identifies the service that sourced the event. All events sourced from within Amazon Web Services begin with "aws." Customer-generated events can have any value here, as long as it doesn't begin with "aws." We recommend the use of Java package-name style reverse domain-name strings. 
      */
     source: IncidentSource;
     /**
@@ -1178,7 +1191,7 @@ declare namespace SSMIncidents {
      */
     timestamp: Timestamp;
     /**
-     * The ARN of the source that detected the incident.
+     * The Amazon Resource Name (ARN) of the source that detected the incident.
      */
     triggerArn?: Arn;
   }
@@ -1201,7 +1214,7 @@ declare namespace SSMIncidents {
      */
     arn: Arn;
     /**
-     * A token ensuring that the action is called only once with the specified details.
+     * A token ensuring that the operation is called only once with the specified details.
      */
     clientToken?: ClientToken;
     /**
@@ -1217,19 +1230,19 @@ declare namespace SSMIncidents {
      */
     arn: Arn;
     /**
-     * The AWS Chatbot chat channel for responders to collaborate in.
+     * The Chatbot chat channel where responders can collaborate.
      */
     chatChannel?: ChatChannel;
     /**
-     * A token ensuring that the action is called only once with the specified details.
+     * A token that ensures that the operation is called only once with the specified details.
      */
     clientToken?: ClientToken;
     /**
-     * Defines the impact to customers and applications. Providing an impact overwrites the impact provided by the response plan.  Possible impacts:     1 - Critical impact, this typically relates to full application failure that impacts many to all customers.     2 - High impact, partial application failure with impact to many customers.    3 - Medium impact, the application is providing reduced service to customers.    4 - Low impact, customer might aren't impacted by the problem yet.    5 - No impact, customers aren't currently impacted but urgent action is needed to avoid impact.  
+     * Defines the impact of the incident to customers and applications. Providing an impact overwrites the impact provided by the response plan.  Possible impacts:     1 - Critical impact, full application failure that impacts many to all customers.     2 - High impact, partial application failure with impact to many customers.    3 - Medium impact, the application is providing reduced service to customers.    4 - Low impact, customer aren't impacted by the problem yet.    5 - No impact, customers aren't currently impacted but urgent action is needed to avoid impact.  
      */
     impact?: Impact;
     /**
-     * The SNS targets that are notified when updates are made to an incident. Using multiple SNS topics creates redundancy in the case that a Region is down during the incident.
+     * The Amazon SNS targets that are notified when updates are made to an incident. Using multiple SNS topics creates redundancy in the event that a Region is down during the incident.
      */
     notificationTargets?: NotificationTargetSet;
     /**
@@ -1237,11 +1250,11 @@ declare namespace SSMIncidents {
      */
     status?: IncidentRecordStatus;
     /**
-     * The summary describes what has happened during the incident.
+     * A longer description of what occurred during the incident.
      */
     summary?: IncidentSummary;
     /**
-     * The title of the incident is a brief and easily recognizable.
+     * A brief description of the incident.
      */
     title?: IncidentTitle;
   }
@@ -1249,11 +1262,11 @@ declare namespace SSMIncidents {
   }
   export interface UpdateRelatedItemsInput {
     /**
-     * A token ensuring that the action is called only once with the specified details.
+     * A token ensuring that the operation is called only once with the specified details.
      */
     clientToken?: ClientToken;
     /**
-     * The Amazon Resource Name (ARN) of the incident record you are updating related items in.
+     * The Amazon Resource Name (ARN) of the incident record containing the related items you are updating.
      */
     incidentRecordArn: Arn;
     /**
@@ -1265,11 +1278,11 @@ declare namespace SSMIncidents {
   }
   export interface UpdateReplicationSetAction {
     /**
-     * Details about the Region that you're adding to the replication set.
+     * Details about the Amazon Web Services Region that you're adding to the replication set.
      */
     addRegionAction?: AddRegionAction;
     /**
-     * Details about the Region that you're deleting to the replication set.
+     * Details about the Amazon Web Services Region that you're deleting to the replication set.
      */
     deleteRegionAction?: DeleteRegionAction;
   }
@@ -1283,7 +1296,7 @@ declare namespace SSMIncidents {
      */
     arn: Arn;
     /**
-     * A token ensuring that the action is called only once with the specified details.
+     * A token ensuring that the operation is called only once with the specified details.
      */
     clientToken?: ClientToken;
   }
@@ -1300,15 +1313,15 @@ declare namespace SSMIncidents {
      */
     arn: Arn;
     /**
-     * The AWS Chatbot chat channel used for collaboration during an incident. Use the empty structure to remove the chat channel from the response plan.
+     * The Chatbot chat channel used for collaboration during an incident. Use the empty structure to remove the chat channel from the response plan.
      */
     chatChannel?: ChatChannel;
     /**
-     * A token ensuring that the action is called only once with the specified details.
+     * A token ensuring that the operation is called only once with the specified details.
      */
     clientToken?: ClientToken;
     /**
-     * The long format name of the response plan. Can't contain spaces.
+     * The long format name of the response plan. The display name can't contain spaces.
      */
     displayName?: ResponsePlanDisplayName;
     /**
@@ -1316,7 +1329,7 @@ declare namespace SSMIncidents {
      */
     engagements?: EngagementSet;
     /**
-     * Used to create only one incident record for an incident.
+     * The string Incident Manager uses to prevent duplicate incidents from being created by the same incident in the same account.
      */
     incidentTemplateDedupeString?: DedupeString;
     /**
@@ -1324,7 +1337,7 @@ declare namespace SSMIncidents {
      */
     incidentTemplateImpact?: Impact;
     /**
-     * The SNS targets that are notified when updates are made to an incident.
+     * The Amazon SNS targets that are notified when updates are made to an incident.
      */
     incidentTemplateNotificationTargets?: NotificationTargetSet;
     /**
@@ -1332,7 +1345,7 @@ declare namespace SSMIncidents {
      */
     incidentTemplateSummary?: IncidentSummary;
     /**
-     * The short format name of the incident. Can't contain spaces.
+     * The short format name of the incident. The title can't contain spaces.
      */
     incidentTemplateTitle?: IncidentTitle;
   }
@@ -1340,7 +1353,7 @@ declare namespace SSMIncidents {
   }
   export interface UpdateTimelineEventInput {
     /**
-     * A token ensuring that the action is called only once with the specified details.
+     * A token ensuring that the operation is called only once with the specified details.
      */
     clientToken?: ClientToken;
     /**
@@ -1360,13 +1373,14 @@ declare namespace SSMIncidents {
      */
     eventType?: TimelineEventType;
     /**
-     * The Amazon Resource Name (ARN) of the incident that the timeline event is part of.
+     * The Amazon Resource Name (ARN) of the incident that includes the timeline event.
      */
     incidentRecordArn: Arn;
   }
   export interface UpdateTimelineEventOutput {
   }
   export type Url = string;
+  export type VariableType = "INCIDENT_RECORD_ARN"|"INVOLVED_RESOURCES"|string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

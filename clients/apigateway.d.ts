@@ -2941,7 +2941,7 @@ declare namespace APIGateway {
      */
     loggingLevel?: String;
     /**
-     * Specifies whether data trace logging is enabled for this method, which affects the log entries pushed to Amazon CloudWatch Logs. The PATCH path for this setting is /{method_setting_key}/logging/dataTrace, and the value is a Boolean.
+     * Specifies whether full requests and responses are logged for this method, which affects the log entries pushed to Amazon CloudWatch Logs. This can be useful to troubleshoot APIs, but can result in logging sensitive data. We recommend that you don't enable this option for production APIs. The PATCH path for this setting is /{method_setting_key}/logging/dataTrace, and the value is a Boolean.
      */
     dataTraceEnabled?: Boolean;
     /**
@@ -3280,7 +3280,7 @@ declare namespace APIGateway {
   export type QuotaPeriodType = "DAY"|"WEEK"|"MONTH"|string;
   export interface QuotaSettings {
     /**
-     * The maximum number of requests that can be made in a given time period.
+     * The target maximum number of requests that can be made in a given time period.
      */
     limit?: Integer;
     /**
@@ -3706,11 +3706,11 @@ declare namespace APIGateway {
   }
   export interface ThrottleSettings {
     /**
-     * The API request burst limit, the maximum rate limit over a time ranging from one to a few seconds, depending upon whether the underlying token bucket is at its full capacity.
+     * The API target request burst rate limit. This allows more requests through for a period of time than the target rate limit.
      */
     burstLimit?: Integer;
     /**
-     * The API request steady-state rate limit.
+     * The API target request rate limit.
      */
     rateLimit?: Double;
   }
@@ -4069,11 +4069,11 @@ declare namespace APIGateway {
      */
     apiStages?: ListOfApiStage;
     /**
-     * The request throttle limits of a usage plan.
+     * Map containing method level throttling information for API stage in a usage plan.
      */
     throttle?: ThrottleSettings;
     /**
-     * The maximum number of permitted requests per a given unit time interval.
+     * The target maximum number of permitted requests per a given unit time interval.
      */
     quota?: QuotaSettings;
     /**

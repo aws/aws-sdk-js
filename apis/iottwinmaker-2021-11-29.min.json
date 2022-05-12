@@ -1,0 +1,1682 @@
+{
+  "version": "2.0",
+  "metadata": {
+    "apiVersion": "2021-11-29",
+    "endpointPrefix": "iottwinmaker",
+    "jsonVersion": "1.1",
+    "protocol": "rest-json",
+    "serviceFullName": "AWS IoT TwinMaker",
+    "serviceId": "IoTTwinMaker",
+    "signatureVersion": "v4",
+    "signingName": "iottwinmaker",
+    "uid": "iottwinmaker-2021-11-29"
+  },
+  "operations": {
+    "BatchPutPropertyValues": {
+      "http": {
+        "requestUri": "/workspaces/{workspaceId}/entity-properties",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "entries",
+          "workspaceId"
+        ],
+        "members": {
+          "entries": {
+            "type": "list",
+            "member": {
+              "shape": "S3"
+            }
+          },
+          "workspaceId": {
+            "location": "uri",
+            "locationName": "workspaceId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "errorEntries"
+        ],
+        "members": {
+          "errorEntries": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "errors"
+              ],
+              "members": {
+                "errors": {
+                  "type": "list",
+                  "member": {
+                    "type": "structure",
+                    "required": [
+                      "entry",
+                      "errorCode",
+                      "errorMessage"
+                    ],
+                    "members": {
+                      "entry": {
+                        "shape": "S3"
+                      },
+                      "errorCode": {},
+                      "errorMessage": {}
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "endpoint": {
+        "hostPrefix": "data."
+      }
+    },
+    "CreateComponentType": {
+      "http": {
+        "requestUri": "/workspaces/{workspaceId}/component-types/{componentTypeId}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "componentTypeId",
+          "workspaceId"
+        ],
+        "members": {
+          "componentTypeId": {
+            "location": "uri",
+            "locationName": "componentTypeId"
+          },
+          "description": {},
+          "extendsFrom": {
+            "shape": "Sv"
+          },
+          "functions": {
+            "shape": "Sw"
+          },
+          "isSingleton": {
+            "type": "boolean"
+          },
+          "propertyDefinitions": {
+            "shape": "S13"
+          },
+          "tags": {
+            "shape": "S1a"
+          },
+          "workspaceId": {
+            "location": "uri",
+            "locationName": "workspaceId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "arn",
+          "creationDateTime",
+          "state"
+        ],
+        "members": {
+          "arn": {},
+          "creationDateTime": {
+            "type": "timestamp"
+          },
+          "state": {}
+        }
+      },
+      "endpoint": {
+        "hostPrefix": "api."
+      }
+    },
+    "CreateEntity": {
+      "http": {
+        "requestUri": "/workspaces/{workspaceId}/entities",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "entityName",
+          "workspaceId"
+        ],
+        "members": {
+          "components": {
+            "type": "map",
+            "key": {},
+            "value": {
+              "type": "structure",
+              "members": {
+                "componentTypeId": {},
+                "description": {},
+                "properties": {
+                  "shape": "S1j"
+                }
+              }
+            }
+          },
+          "description": {},
+          "entityId": {},
+          "entityName": {},
+          "parentEntityId": {},
+          "tags": {
+            "shape": "S1a"
+          },
+          "workspaceId": {
+            "location": "uri",
+            "locationName": "workspaceId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "arn",
+          "creationDateTime",
+          "entityId",
+          "state"
+        ],
+        "members": {
+          "arn": {},
+          "creationDateTime": {
+            "type": "timestamp"
+          },
+          "entityId": {},
+          "state": {}
+        }
+      },
+      "endpoint": {
+        "hostPrefix": "api."
+      }
+    },
+    "CreateScene": {
+      "http": {
+        "requestUri": "/workspaces/{workspaceId}/scenes",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "contentLocation",
+          "sceneId",
+          "workspaceId"
+        ],
+        "members": {
+          "capabilities": {
+            "shape": "S1q"
+          },
+          "contentLocation": {},
+          "description": {},
+          "sceneId": {},
+          "tags": {
+            "shape": "S1a"
+          },
+          "workspaceId": {
+            "location": "uri",
+            "locationName": "workspaceId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "arn",
+          "creationDateTime"
+        ],
+        "members": {
+          "arn": {},
+          "creationDateTime": {
+            "type": "timestamp"
+          }
+        }
+      },
+      "endpoint": {
+        "hostPrefix": "api."
+      }
+    },
+    "CreateWorkspace": {
+      "http": {
+        "requestUri": "/workspaces/{workspaceId}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "role",
+          "s3Location",
+          "workspaceId"
+        ],
+        "members": {
+          "description": {},
+          "role": {},
+          "s3Location": {},
+          "tags": {
+            "shape": "S1a"
+          },
+          "workspaceId": {
+            "location": "uri",
+            "locationName": "workspaceId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "arn",
+          "creationDateTime"
+        ],
+        "members": {
+          "arn": {},
+          "creationDateTime": {
+            "type": "timestamp"
+          }
+        }
+      },
+      "endpoint": {
+        "hostPrefix": "api."
+      }
+    },
+    "DeleteComponentType": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/workspaces/{workspaceId}/component-types/{componentTypeId}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "componentTypeId",
+          "workspaceId"
+        ],
+        "members": {
+          "componentTypeId": {
+            "location": "uri",
+            "locationName": "componentTypeId"
+          },
+          "workspaceId": {
+            "location": "uri",
+            "locationName": "workspaceId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "state"
+        ],
+        "members": {
+          "state": {}
+        }
+      },
+      "endpoint": {
+        "hostPrefix": "api."
+      }
+    },
+    "DeleteEntity": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/workspaces/{workspaceId}/entities/{entityId}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "entityId",
+          "workspaceId"
+        ],
+        "members": {
+          "entityId": {
+            "location": "uri",
+            "locationName": "entityId"
+          },
+          "isRecursive": {
+            "location": "querystring",
+            "locationName": "isRecursive",
+            "type": "boolean"
+          },
+          "workspaceId": {
+            "location": "uri",
+            "locationName": "workspaceId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "state"
+        ],
+        "members": {
+          "state": {}
+        }
+      },
+      "endpoint": {
+        "hostPrefix": "api."
+      }
+    },
+    "DeleteScene": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/workspaces/{workspaceId}/scenes/{sceneId}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "sceneId",
+          "workspaceId"
+        ],
+        "members": {
+          "sceneId": {
+            "location": "uri",
+            "locationName": "sceneId"
+          },
+          "workspaceId": {
+            "location": "uri",
+            "locationName": "workspaceId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      },
+      "endpoint": {
+        "hostPrefix": "api."
+      }
+    },
+    "DeleteWorkspace": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/workspaces/{workspaceId}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "workspaceId"
+        ],
+        "members": {
+          "workspaceId": {
+            "location": "uri",
+            "locationName": "workspaceId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      },
+      "endpoint": {
+        "hostPrefix": "api."
+      }
+    },
+    "GetComponentType": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/workspaces/{workspaceId}/component-types/{componentTypeId}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "componentTypeId",
+          "workspaceId"
+        ],
+        "members": {
+          "componentTypeId": {
+            "location": "uri",
+            "locationName": "componentTypeId"
+          },
+          "workspaceId": {
+            "location": "uri",
+            "locationName": "workspaceId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "arn",
+          "componentTypeId",
+          "creationDateTime",
+          "updateDateTime",
+          "workspaceId"
+        ],
+        "members": {
+          "arn": {},
+          "componentTypeId": {},
+          "creationDateTime": {
+            "type": "timestamp"
+          },
+          "description": {},
+          "extendsFrom": {
+            "shape": "Sv"
+          },
+          "functions": {
+            "type": "map",
+            "key": {},
+            "value": {
+              "type": "structure",
+              "members": {
+                "implementedBy": {
+                  "shape": "Sy"
+                },
+                "isInherited": {
+                  "type": "boolean"
+                },
+                "requiredProperties": {
+                  "shape": "S11"
+                },
+                "scope": {}
+              }
+            }
+          },
+          "isAbstract": {
+            "type": "boolean"
+          },
+          "isSchemaInitialized": {
+            "type": "boolean"
+          },
+          "isSingleton": {
+            "type": "boolean"
+          },
+          "propertyDefinitions": {
+            "type": "map",
+            "key": {},
+            "value": {
+              "shape": "S2b"
+            }
+          },
+          "status": {
+            "shape": "S2c"
+          },
+          "updateDateTime": {
+            "type": "timestamp"
+          },
+          "workspaceId": {}
+        }
+      },
+      "endpoint": {
+        "hostPrefix": "api."
+      }
+    },
+    "GetEntity": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/workspaces/{workspaceId}/entities/{entityId}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "entityId",
+          "workspaceId"
+        ],
+        "members": {
+          "entityId": {
+            "location": "uri",
+            "locationName": "entityId"
+          },
+          "workspaceId": {
+            "location": "uri",
+            "locationName": "workspaceId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "arn",
+          "creationDateTime",
+          "entityId",
+          "entityName",
+          "hasChildEntities",
+          "parentEntityId",
+          "status",
+          "updateDateTime",
+          "workspaceId"
+        ],
+        "members": {
+          "arn": {},
+          "components": {
+            "type": "map",
+            "key": {},
+            "value": {
+              "type": "structure",
+              "members": {
+                "componentName": {},
+                "componentTypeId": {},
+                "definedIn": {},
+                "description": {},
+                "properties": {
+                  "type": "map",
+                  "key": {},
+                  "value": {
+                    "type": "structure",
+                    "members": {
+                      "definition": {
+                        "shape": "S2b"
+                      },
+                      "value": {
+                        "shape": "Sd"
+                      }
+                    }
+                  }
+                },
+                "status": {
+                  "shape": "S2c"
+                }
+              }
+            }
+          },
+          "creationDateTime": {
+            "type": "timestamp"
+          },
+          "description": {},
+          "entityId": {},
+          "entityName": {},
+          "hasChildEntities": {
+            "type": "boolean"
+          },
+          "parentEntityId": {},
+          "status": {
+            "shape": "S2c"
+          },
+          "updateDateTime": {
+            "type": "timestamp"
+          },
+          "workspaceId": {}
+        }
+      },
+      "endpoint": {
+        "hostPrefix": "api."
+      }
+    },
+    "GetPropertyValue": {
+      "http": {
+        "requestUri": "/workspaces/{workspaceId}/entity-properties/value",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "selectedProperties",
+          "workspaceId"
+        ],
+        "members": {
+          "componentName": {},
+          "componentTypeId": {},
+          "entityId": {},
+          "selectedProperties": {
+            "shape": "S2n"
+          },
+          "workspaceId": {
+            "location": "uri",
+            "locationName": "workspaceId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "propertyValues"
+        ],
+        "members": {
+          "propertyValues": {
+            "type": "map",
+            "key": {},
+            "value": {
+              "type": "structure",
+              "required": [
+                "propertyReference"
+              ],
+              "members": {
+                "propertyReference": {
+                  "shape": "S4"
+                },
+                "propertyValue": {
+                  "shape": "Sd"
+                }
+              }
+            }
+          }
+        }
+      },
+      "endpoint": {
+        "hostPrefix": "data."
+      }
+    },
+    "GetPropertyValueHistory": {
+      "http": {
+        "requestUri": "/workspaces/{workspaceId}/entity-properties/history",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "selectedProperties",
+          "workspaceId"
+        ],
+        "members": {
+          "componentName": {},
+          "componentTypeId": {},
+          "endDateTime": {
+            "deprecated": true,
+            "deprecatedMessage": "This field is deprecated and will throw an error in the future. Use endTime instead.",
+            "type": "timestamp"
+          },
+          "endTime": {},
+          "entityId": {},
+          "interpolation": {
+            "type": "structure",
+            "members": {
+              "interpolationType": {},
+              "intervalInSeconds": {
+                "type": "long"
+              }
+            }
+          },
+          "maxResults": {
+            "type": "integer"
+          },
+          "nextToken": {},
+          "orderByTime": {},
+          "propertyFilters": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "operator": {},
+                "propertyName": {},
+                "value": {
+                  "shape": "Sd"
+                }
+              }
+            }
+          },
+          "selectedProperties": {
+            "shape": "S2n"
+          },
+          "startDateTime": {
+            "deprecated": true,
+            "deprecatedMessage": "This field is deprecated and will throw an error in the future. Use startTime instead.",
+            "type": "timestamp"
+          },
+          "startTime": {},
+          "workspaceId": {
+            "location": "uri",
+            "locationName": "workspaceId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "propertyValues"
+        ],
+        "members": {
+          "nextToken": {},
+          "propertyValues": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "entityPropertyReference"
+              ],
+              "members": {
+                "entityPropertyReference": {
+                  "shape": "S4"
+                },
+                "values": {
+                  "type": "list",
+                  "member": {
+                    "shape": "Sa"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "endpoint": {
+        "hostPrefix": "data."
+      }
+    },
+    "GetScene": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/workspaces/{workspaceId}/scenes/{sceneId}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "sceneId",
+          "workspaceId"
+        ],
+        "members": {
+          "sceneId": {
+            "location": "uri",
+            "locationName": "sceneId"
+          },
+          "workspaceId": {
+            "location": "uri",
+            "locationName": "workspaceId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "arn",
+          "contentLocation",
+          "creationDateTime",
+          "sceneId",
+          "updateDateTime",
+          "workspaceId"
+        ],
+        "members": {
+          "arn": {},
+          "capabilities": {
+            "shape": "S1q"
+          },
+          "contentLocation": {},
+          "creationDateTime": {
+            "type": "timestamp"
+          },
+          "description": {},
+          "sceneId": {},
+          "updateDateTime": {
+            "type": "timestamp"
+          },
+          "workspaceId": {}
+        }
+      },
+      "endpoint": {
+        "hostPrefix": "api."
+      }
+    },
+    "GetWorkspace": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/workspaces/{workspaceId}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "workspaceId"
+        ],
+        "members": {
+          "workspaceId": {
+            "location": "uri",
+            "locationName": "workspaceId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "arn",
+          "creationDateTime",
+          "role",
+          "s3Location",
+          "updateDateTime",
+          "workspaceId"
+        ],
+        "members": {
+          "arn": {},
+          "creationDateTime": {
+            "type": "timestamp"
+          },
+          "description": {},
+          "role": {},
+          "s3Location": {},
+          "updateDateTime": {
+            "type": "timestamp"
+          },
+          "workspaceId": {}
+        }
+      },
+      "endpoint": {
+        "hostPrefix": "api."
+      }
+    },
+    "ListComponentTypes": {
+      "http": {
+        "requestUri": "/workspaces/{workspaceId}/component-types-list",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "workspaceId"
+        ],
+        "members": {
+          "filters": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "extendsFrom": {},
+                "isAbstract": {
+                  "type": "boolean"
+                },
+                "namespace": {}
+              },
+              "union": true
+            }
+          },
+          "maxResults": {
+            "type": "integer"
+          },
+          "nextToken": {},
+          "workspaceId": {
+            "location": "uri",
+            "locationName": "workspaceId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "componentTypeSummaries",
+          "workspaceId"
+        ],
+        "members": {
+          "componentTypeSummaries": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "arn",
+                "componentTypeId",
+                "creationDateTime",
+                "updateDateTime"
+              ],
+              "members": {
+                "arn": {},
+                "componentTypeId": {},
+                "creationDateTime": {
+                  "type": "timestamp"
+                },
+                "description": {},
+                "status": {
+                  "shape": "S2c"
+                },
+                "updateDateTime": {
+                  "type": "timestamp"
+                }
+              }
+            }
+          },
+          "maxResults": {
+            "type": "integer"
+          },
+          "nextToken": {},
+          "workspaceId": {}
+        }
+      },
+      "endpoint": {
+        "hostPrefix": "api."
+      }
+    },
+    "ListEntities": {
+      "http": {
+        "requestUri": "/workspaces/{workspaceId}/entities-list",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "workspaceId"
+        ],
+        "members": {
+          "filters": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "componentTypeId": {},
+                "externalId": {},
+                "parentEntityId": {}
+              },
+              "union": true
+            }
+          },
+          "maxResults": {
+            "type": "integer"
+          },
+          "nextToken": {},
+          "workspaceId": {
+            "location": "uri",
+            "locationName": "workspaceId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "entitySummaries": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "arn",
+                "creationDateTime",
+                "entityId",
+                "entityName",
+                "status",
+                "updateDateTime"
+              ],
+              "members": {
+                "arn": {},
+                "creationDateTime": {
+                  "type": "timestamp"
+                },
+                "description": {},
+                "entityId": {},
+                "entityName": {},
+                "hasChildEntities": {
+                  "type": "boolean"
+                },
+                "parentEntityId": {},
+                "status": {
+                  "shape": "S2c"
+                },
+                "updateDateTime": {
+                  "type": "timestamp"
+                }
+              }
+            }
+          },
+          "nextToken": {}
+        }
+      },
+      "endpoint": {
+        "hostPrefix": "api."
+      }
+    },
+    "ListScenes": {
+      "http": {
+        "requestUri": "/workspaces/{workspaceId}/scenes-list",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "workspaceId"
+        ],
+        "members": {
+          "maxResults": {
+            "type": "integer"
+          },
+          "nextToken": {},
+          "workspaceId": {
+            "location": "uri",
+            "locationName": "workspaceId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "nextToken": {},
+          "sceneSummaries": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "arn",
+                "contentLocation",
+                "creationDateTime",
+                "sceneId",
+                "updateDateTime"
+              ],
+              "members": {
+                "arn": {},
+                "contentLocation": {},
+                "creationDateTime": {
+                  "type": "timestamp"
+                },
+                "description": {},
+                "sceneId": {},
+                "updateDateTime": {
+                  "type": "timestamp"
+                }
+              }
+            }
+          }
+        }
+      },
+      "endpoint": {
+        "hostPrefix": "api."
+      }
+    },
+    "ListTagsForResource": {
+      "http": {
+        "requestUri": "/tags-list",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "resourceARN"
+        ],
+        "members": {
+          "maxResults": {
+            "type": "integer"
+          },
+          "nextToken": {},
+          "resourceARN": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "nextToken": {},
+          "tags": {
+            "shape": "S1a"
+          }
+        }
+      },
+      "endpoint": {
+        "hostPrefix": "api."
+      }
+    },
+    "ListWorkspaces": {
+      "http": {
+        "requestUri": "/workspaces-list",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "maxResults": {
+            "type": "integer"
+          },
+          "nextToken": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "nextToken": {},
+          "workspaceSummaries": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "arn",
+                "creationDateTime",
+                "updateDateTime",
+                "workspaceId"
+              ],
+              "members": {
+                "arn": {},
+                "creationDateTime": {
+                  "type": "timestamp"
+                },
+                "description": {},
+                "updateDateTime": {
+                  "type": "timestamp"
+                },
+                "workspaceId": {}
+              }
+            }
+          }
+        }
+      },
+      "endpoint": {
+        "hostPrefix": "api."
+      }
+    },
+    "TagResource": {
+      "http": {
+        "requestUri": "/tags",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "resourceARN",
+          "tags"
+        ],
+        "members": {
+          "resourceARN": {},
+          "tags": {
+            "shape": "S1a"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      },
+      "endpoint": {
+        "hostPrefix": "api."
+      }
+    },
+    "UntagResource": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/tags",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "resourceARN",
+          "tagKeys"
+        ],
+        "members": {
+          "resourceARN": {
+            "location": "querystring",
+            "locationName": "resourceARN"
+          },
+          "tagKeys": {
+            "location": "querystring",
+            "locationName": "tagKeys",
+            "type": "list",
+            "member": {}
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      },
+      "endpoint": {
+        "hostPrefix": "api."
+      }
+    },
+    "UpdateComponentType": {
+      "http": {
+        "method": "PUT",
+        "requestUri": "/workspaces/{workspaceId}/component-types/{componentTypeId}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "componentTypeId",
+          "workspaceId"
+        ],
+        "members": {
+          "componentTypeId": {
+            "location": "uri",
+            "locationName": "componentTypeId"
+          },
+          "description": {},
+          "extendsFrom": {
+            "shape": "Sv"
+          },
+          "functions": {
+            "shape": "Sw"
+          },
+          "isSingleton": {
+            "type": "boolean"
+          },
+          "propertyDefinitions": {
+            "shape": "S13"
+          },
+          "workspaceId": {
+            "location": "uri",
+            "locationName": "workspaceId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "arn",
+          "componentTypeId",
+          "state",
+          "workspaceId"
+        ],
+        "members": {
+          "arn": {},
+          "componentTypeId": {},
+          "state": {},
+          "workspaceId": {}
+        }
+      },
+      "endpoint": {
+        "hostPrefix": "api."
+      }
+    },
+    "UpdateEntity": {
+      "http": {
+        "method": "PUT",
+        "requestUri": "/workspaces/{workspaceId}/entities/{entityId}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "entityId",
+          "workspaceId"
+        ],
+        "members": {
+          "componentUpdates": {
+            "type": "map",
+            "key": {},
+            "value": {
+              "type": "structure",
+              "members": {
+                "componentTypeId": {},
+                "description": {},
+                "propertyUpdates": {
+                  "shape": "S1j"
+                },
+                "updateType": {}
+              }
+            }
+          },
+          "description": {},
+          "entityId": {
+            "location": "uri",
+            "locationName": "entityId"
+          },
+          "entityName": {},
+          "parentEntityUpdate": {
+            "type": "structure",
+            "required": [
+              "updateType"
+            ],
+            "members": {
+              "parentEntityId": {},
+              "updateType": {}
+            }
+          },
+          "workspaceId": {
+            "location": "uri",
+            "locationName": "workspaceId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "state",
+          "updateDateTime"
+        ],
+        "members": {
+          "state": {},
+          "updateDateTime": {
+            "type": "timestamp"
+          }
+        }
+      },
+      "endpoint": {
+        "hostPrefix": "api."
+      }
+    },
+    "UpdateScene": {
+      "http": {
+        "method": "PUT",
+        "requestUri": "/workspaces/{workspaceId}/scenes/{sceneId}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "sceneId",
+          "workspaceId"
+        ],
+        "members": {
+          "capabilities": {
+            "shape": "S1q"
+          },
+          "contentLocation": {},
+          "description": {},
+          "sceneId": {
+            "location": "uri",
+            "locationName": "sceneId"
+          },
+          "workspaceId": {
+            "location": "uri",
+            "locationName": "workspaceId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "updateDateTime"
+        ],
+        "members": {
+          "updateDateTime": {
+            "type": "timestamp"
+          }
+        }
+      },
+      "endpoint": {
+        "hostPrefix": "api."
+      }
+    },
+    "UpdateWorkspace": {
+      "http": {
+        "method": "PUT",
+        "requestUri": "/workspaces/{workspaceId}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "workspaceId"
+        ],
+        "members": {
+          "description": {},
+          "role": {},
+          "workspaceId": {
+            "location": "uri",
+            "locationName": "workspaceId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "updateDateTime"
+        ],
+        "members": {
+          "updateDateTime": {
+            "type": "timestamp"
+          }
+        }
+      },
+      "endpoint": {
+        "hostPrefix": "api."
+      }
+    }
+  },
+  "shapes": {
+    "S3": {
+      "type": "structure",
+      "required": [
+        "entityPropertyReference"
+      ],
+      "members": {
+        "entityPropertyReference": {
+          "shape": "S4"
+        },
+        "propertyValues": {
+          "type": "list",
+          "member": {
+            "shape": "Sa"
+          }
+        }
+      }
+    },
+    "S4": {
+      "type": "structure",
+      "required": [
+        "propertyName"
+      ],
+      "members": {
+        "componentName": {},
+        "entityId": {},
+        "externalIdProperty": {
+          "type": "map",
+          "key": {},
+          "value": {}
+        },
+        "propertyName": {}
+      }
+    },
+    "Sa": {
+      "type": "structure",
+      "required": [
+        "value"
+      ],
+      "members": {
+        "time": {},
+        "timestamp": {
+          "deprecated": true,
+          "deprecatedMessage": "This field is deprecated and will throw an error in the future. Use time instead.",
+          "type": "timestamp"
+        },
+        "value": {
+          "shape": "Sd"
+        }
+      }
+    },
+    "Sd": {
+      "type": "structure",
+      "members": {
+        "booleanValue": {
+          "type": "boolean"
+        },
+        "doubleValue": {
+          "type": "double"
+        },
+        "expression": {},
+        "integerValue": {
+          "type": "integer"
+        },
+        "listValue": {
+          "shape": "Si"
+        },
+        "longValue": {
+          "type": "long"
+        },
+        "mapValue": {
+          "type": "map",
+          "key": {},
+          "value": {
+            "shape": "Sd"
+          }
+        },
+        "relationshipValue": {
+          "type": "structure",
+          "members": {
+            "targetComponentName": {},
+            "targetEntityId": {}
+          }
+        },
+        "stringValue": {}
+      }
+    },
+    "Si": {
+      "type": "list",
+      "member": {
+        "shape": "Sd"
+      }
+    },
+    "Sv": {
+      "type": "list",
+      "member": {}
+    },
+    "Sw": {
+      "type": "map",
+      "key": {},
+      "value": {
+        "type": "structure",
+        "members": {
+          "implementedBy": {
+            "shape": "Sy"
+          },
+          "requiredProperties": {
+            "shape": "S11"
+          },
+          "scope": {}
+        }
+      }
+    },
+    "Sy": {
+      "type": "structure",
+      "members": {
+        "isNative": {
+          "type": "boolean"
+        },
+        "lambda": {
+          "type": "structure",
+          "required": [
+            "arn"
+          ],
+          "members": {
+            "arn": {}
+          }
+        }
+      }
+    },
+    "S11": {
+      "type": "list",
+      "member": {}
+    },
+    "S13": {
+      "type": "map",
+      "key": {},
+      "value": {
+        "shape": "S14"
+      }
+    },
+    "S14": {
+      "type": "structure",
+      "members": {
+        "configuration": {
+          "shape": "S15"
+        },
+        "dataType": {
+          "shape": "S17"
+        },
+        "defaultValue": {
+          "shape": "Sd"
+        },
+        "isExternalId": {
+          "type": "boolean"
+        },
+        "isRequiredInEntity": {
+          "type": "boolean"
+        },
+        "isStoredExternally": {
+          "type": "boolean"
+        },
+        "isTimeSeries": {
+          "type": "boolean"
+        }
+      }
+    },
+    "S15": {
+      "type": "map",
+      "key": {},
+      "value": {}
+    },
+    "S17": {
+      "type": "structure",
+      "required": [
+        "type"
+      ],
+      "members": {
+        "allowedValues": {
+          "shape": "Si"
+        },
+        "nestedType": {
+          "shape": "S17"
+        },
+        "relationship": {
+          "type": "structure",
+          "members": {
+            "relationshipType": {},
+            "targetComponentTypeId": {}
+          }
+        },
+        "type": {},
+        "unitOfMeasure": {}
+      }
+    },
+    "S1a": {
+      "type": "map",
+      "key": {},
+      "value": {}
+    },
+    "S1j": {
+      "type": "map",
+      "key": {},
+      "value": {
+        "type": "structure",
+        "members": {
+          "definition": {
+            "shape": "S14"
+          },
+          "updateType": {},
+          "value": {
+            "shape": "Sd"
+          }
+        }
+      }
+    },
+    "S1q": {
+      "type": "list",
+      "member": {}
+    },
+    "S2b": {
+      "type": "structure",
+      "required": [
+        "dataType",
+        "isExternalId",
+        "isFinal",
+        "isImported",
+        "isInherited",
+        "isRequiredInEntity",
+        "isStoredExternally",
+        "isTimeSeries"
+      ],
+      "members": {
+        "configuration": {
+          "shape": "S15"
+        },
+        "dataType": {
+          "shape": "S17"
+        },
+        "defaultValue": {
+          "shape": "Sd"
+        },
+        "isExternalId": {
+          "type": "boolean"
+        },
+        "isFinal": {
+          "type": "boolean"
+        },
+        "isImported": {
+          "type": "boolean"
+        },
+        "isInherited": {
+          "type": "boolean"
+        },
+        "isRequiredInEntity": {
+          "type": "boolean"
+        },
+        "isStoredExternally": {
+          "type": "boolean"
+        },
+        "isTimeSeries": {
+          "type": "boolean"
+        }
+      }
+    },
+    "S2c": {
+      "type": "structure",
+      "members": {
+        "error": {
+          "type": "structure",
+          "members": {
+            "code": {},
+            "message": {}
+          }
+        },
+        "state": {}
+      }
+    },
+    "S2n": {
+      "type": "list",
+      "member": {}
+    }
+  }
+}

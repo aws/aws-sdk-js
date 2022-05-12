@@ -44,6 +44,14 @@ declare class WorkSpaces extends Service {
    */
   copyWorkspaceImage(callback?: (err: AWSError, data: WorkSpaces.Types.CopyWorkspaceImageResult) => void): Request<WorkSpaces.Types.CopyWorkspaceImageResult, AWSError>;
   /**
+   * Creates a client-add-in for Amazon Connect within a directory. You can create only one Amazon Connect client add-in within a directory. This client add-in allows WorkSpaces users to seamlessly connect to Amazon Connect.
+   */
+  createConnectClientAddIn(params: WorkSpaces.Types.CreateConnectClientAddInRequest, callback?: (err: AWSError, data: WorkSpaces.Types.CreateConnectClientAddInResult) => void): Request<WorkSpaces.Types.CreateConnectClientAddInResult, AWSError>;
+  /**
+   * Creates a client-add-in for Amazon Connect within a directory. You can create only one Amazon Connect client add-in within a directory. This client add-in allows WorkSpaces users to seamlessly connect to Amazon Connect.
+   */
+  createConnectClientAddIn(callback?: (err: AWSError, data: WorkSpaces.Types.CreateConnectClientAddInResult) => void): Request<WorkSpaces.Types.CreateConnectClientAddInResult, AWSError>;
+  /**
    * Creates the specified connection alias for use with cross-Region redirection. For more information, see  Cross-Region Redirection for Amazon WorkSpaces.
    */
   createConnectionAlias(params: WorkSpaces.Types.CreateConnectionAliasRequest, callback?: (err: AWSError, data: WorkSpaces.Types.CreateConnectionAliasResult) => void): Request<WorkSpaces.Types.CreateConnectionAliasResult, AWSError>;
@@ -68,11 +76,11 @@ declare class WorkSpaces extends Service {
    */
   createTags(callback?: (err: AWSError, data: WorkSpaces.Types.CreateTagsResult) => void): Request<WorkSpaces.Types.CreateTagsResult, AWSError>;
   /**
-   * Creates a new updated WorkSpace image based on the specified source image. The new updated WorkSpace image has the latest drivers and other updates required by the Amazon WorkSpaces components. To determine which WorkSpace images need to be updated with the latest Amazon WorkSpaces requirements, use  DescribeWorkspaceImages.    Only Windows 10 WorkSpace images can be programmatically updated at this time.   Microsoft Windows updates and other application updates are not included in the update process.   The source WorkSpace image is not deleted. You can delete the source image after you've verified your new updated image and created a new bundle.    
+   * Creates a new updated WorkSpace image based on the specified source image. The new updated WorkSpace image has the latest drivers and other updates required by the Amazon WorkSpaces components. To determine which WorkSpace images need to be updated with the latest Amazon WorkSpaces requirements, use  DescribeWorkspaceImages.    Only Windows 10, Windows Sever 2016, and Windows Server 2019 WorkSpace images can be programmatically updated at this time.   Microsoft Windows updates and other application updates are not included in the update process.   The source WorkSpace image is not deleted. You can delete the source image after you've verified your new updated image and created a new bundle.    
    */
   createUpdatedWorkspaceImage(params: WorkSpaces.Types.CreateUpdatedWorkspaceImageRequest, callback?: (err: AWSError, data: WorkSpaces.Types.CreateUpdatedWorkspaceImageResult) => void): Request<WorkSpaces.Types.CreateUpdatedWorkspaceImageResult, AWSError>;
   /**
-   * Creates a new updated WorkSpace image based on the specified source image. The new updated WorkSpace image has the latest drivers and other updates required by the Amazon WorkSpaces components. To determine which WorkSpace images need to be updated with the latest Amazon WorkSpaces requirements, use  DescribeWorkspaceImages.    Only Windows 10 WorkSpace images can be programmatically updated at this time.   Microsoft Windows updates and other application updates are not included in the update process.   The source WorkSpace image is not deleted. You can delete the source image after you've verified your new updated image and created a new bundle.    
+   * Creates a new updated WorkSpace image based on the specified source image. The new updated WorkSpace image has the latest drivers and other updates required by the Amazon WorkSpaces components. To determine which WorkSpace images need to be updated with the latest Amazon WorkSpaces requirements, use  DescribeWorkspaceImages.    Only Windows 10, Windows Sever 2016, and Windows Server 2019 WorkSpace images can be programmatically updated at this time.   Microsoft Windows updates and other application updates are not included in the update process.   The source WorkSpace image is not deleted. You can delete the source image after you've verified your new updated image and created a new bundle.    
    */
   createUpdatedWorkspaceImage(callback?: (err: AWSError, data: WorkSpaces.Types.CreateUpdatedWorkspaceImageResult) => void): Request<WorkSpaces.Types.CreateUpdatedWorkspaceImageResult, AWSError>;
   /**
@@ -91,6 +99,22 @@ declare class WorkSpaces extends Service {
    * Creates one or more WorkSpaces. This operation is asynchronous and returns before the WorkSpaces are created.
    */
   createWorkspaces(callback?: (err: AWSError, data: WorkSpaces.Types.CreateWorkspacesResult) => void): Request<WorkSpaces.Types.CreateWorkspacesResult, AWSError>;
+  /**
+   * Deletes customized client branding. Client branding allows you to customize your WorkSpace's client login portal. You can tailor your login portal company logo, the support email address, support link, link to reset password, and a custom message for users trying to sign in. After you delete your customized client branding, your login portal reverts to the default client branding.
+   */
+  deleteClientBranding(params: WorkSpaces.Types.DeleteClientBrandingRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DeleteClientBrandingResult) => void): Request<WorkSpaces.Types.DeleteClientBrandingResult, AWSError>;
+  /**
+   * Deletes customized client branding. Client branding allows you to customize your WorkSpace's client login portal. You can tailor your login portal company logo, the support email address, support link, link to reset password, and a custom message for users trying to sign in. After you delete your customized client branding, your login portal reverts to the default client branding.
+   */
+  deleteClientBranding(callback?: (err: AWSError, data: WorkSpaces.Types.DeleteClientBrandingResult) => void): Request<WorkSpaces.Types.DeleteClientBrandingResult, AWSError>;
+  /**
+   * Deletes a client-add-in for Amazon Connect that is configured within a directory.
+   */
+  deleteConnectClientAddIn(params: WorkSpaces.Types.DeleteConnectClientAddInRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DeleteConnectClientAddInResult) => void): Request<WorkSpaces.Types.DeleteConnectClientAddInResult, AWSError>;
+  /**
+   * Deletes a client-add-in for Amazon Connect that is configured within a directory.
+   */
+  deleteConnectClientAddIn(callback?: (err: AWSError, data: WorkSpaces.Types.DeleteConnectClientAddInResult) => void): Request<WorkSpaces.Types.DeleteConnectClientAddInResult, AWSError>;
   /**
    * Deletes the specified connection alias. For more information, see  Cross-Region Redirection for Amazon WorkSpaces.   If you will no longer be using a fully qualified domain name (FQDN) as the registration code for your WorkSpaces users, you must take certain precautions to prevent potential security issues. For more information, see  Security Considerations if You Stop Using Cross-Region Redirection.   To delete a connection alias that has been shared, the shared account must first disassociate the connection alias from any directories it has been associated with. Then you must unshare the connection alias from the account it has been shared with. You can delete a connection alias only after it is no longer shared with any accounts or associated with any directories. 
    */
@@ -156,6 +180,14 @@ declare class WorkSpaces extends Service {
    */
   describeAccountModifications(callback?: (err: AWSError, data: WorkSpaces.Types.DescribeAccountModificationsResult) => void): Request<WorkSpaces.Types.DescribeAccountModificationsResult, AWSError>;
   /**
+   * Describes the specified client branding. Client branding allows you to customize the log in page of various device types for your users. You can add your company logo, the support email address, support link, link to reset password, and a custom message for users trying to sign in.  Only device types that have branding information configured will be shown in the response. 
+   */
+  describeClientBranding(params: WorkSpaces.Types.DescribeClientBrandingRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DescribeClientBrandingResult) => void): Request<WorkSpaces.Types.DescribeClientBrandingResult, AWSError>;
+  /**
+   * Describes the specified client branding. Client branding allows you to customize the log in page of various device types for your users. You can add your company logo, the support email address, support link, link to reset password, and a custom message for users trying to sign in.  Only device types that have branding information configured will be shown in the response. 
+   */
+  describeClientBranding(callback?: (err: AWSError, data: WorkSpaces.Types.DescribeClientBrandingResult) => void): Request<WorkSpaces.Types.DescribeClientBrandingResult, AWSError>;
+  /**
    * Retrieves a list that describes one or more specified Amazon WorkSpaces clients.
    */
   describeClientProperties(params: WorkSpaces.Types.DescribeClientPropertiesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DescribeClientPropertiesResult) => void): Request<WorkSpaces.Types.DescribeClientPropertiesResult, AWSError>;
@@ -163,6 +195,14 @@ declare class WorkSpaces extends Service {
    * Retrieves a list that describes one or more specified Amazon WorkSpaces clients.
    */
   describeClientProperties(callback?: (err: AWSError, data: WorkSpaces.Types.DescribeClientPropertiesResult) => void): Request<WorkSpaces.Types.DescribeClientPropertiesResult, AWSError>;
+  /**
+   * Retrieves a list of Amazon Connect client add-ins that have been created.
+   */
+  describeConnectClientAddIns(params: WorkSpaces.Types.DescribeConnectClientAddInsRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DescribeConnectClientAddInsResult) => void): Request<WorkSpaces.Types.DescribeConnectClientAddInsResult, AWSError>;
+  /**
+   * Retrieves a list of Amazon Connect client add-ins that have been created.
+   */
+  describeConnectClientAddIns(callback?: (err: AWSError, data: WorkSpaces.Types.DescribeConnectClientAddInsResult) => void): Request<WorkSpaces.Types.DescribeConnectClientAddInsResult, AWSError>;
   /**
    * Describes the permissions that the owner of a connection alias has granted to another Amazon Web Services account for the specified connection alias. For more information, see  Cross-Region Redirection for Amazon WorkSpaces.
    */
@@ -267,6 +307,14 @@ declare class WorkSpaces extends Service {
    * Disassociates the specified IP access control group from the specified directory.
    */
   disassociateIpGroups(callback?: (err: AWSError, data: WorkSpaces.Types.DisassociateIpGroupsResult) => void): Request<WorkSpaces.Types.DisassociateIpGroupsResult, AWSError>;
+  /**
+   * Imports client branding. Client branding allows you to customize your WorkSpace's client login portal. You can tailor your login portal company logo, the support email address, support link, link to reset password, and a custom message for users trying to sign in. After you import client branding, the default branding experience for the specified platform type is replaced with the imported experience    You must specify at least one platform type when importing client branding.   You can import up to 6 MB of data with each request. If your request exceeds this limit, you can import client branding for different platform types using separate requests.   In each platform type, the SupportEmail and SupportLink parameters are mutually exclusive. You can specify only one parameter for each platform type, but not both.   Imported data can take up to a minute to appear in the WorkSpaces client.   
+   */
+  importClientBranding(params: WorkSpaces.Types.ImportClientBrandingRequest, callback?: (err: AWSError, data: WorkSpaces.Types.ImportClientBrandingResult) => void): Request<WorkSpaces.Types.ImportClientBrandingResult, AWSError>;
+  /**
+   * Imports client branding. Client branding allows you to customize your WorkSpace's client login portal. You can tailor your login portal company logo, the support email address, support link, link to reset password, and a custom message for users trying to sign in. After you import client branding, the default branding experience for the specified platform type is replaced with the imported experience    You must specify at least one platform type when importing client branding.   You can import up to 6 MB of data with each request. If your request exceeds this limit, you can import client branding for different platform types using separate requests.   In each platform type, the SupportEmail and SupportLink parameters are mutually exclusive. You can specify only one parameter for each platform type, but not both.   Imported data can take up to a minute to appear in the WorkSpaces client.   
+   */
+  importClientBranding(callback?: (err: AWSError, data: WorkSpaces.Types.ImportClientBrandingResult) => void): Request<WorkSpaces.Types.ImportClientBrandingResult, AWSError>;
   /**
    * Imports the specified Windows 10 Bring Your Own License (BYOL) image into Amazon WorkSpaces. The image must be an already licensed Amazon EC2 image that is in your Amazon Web Services account, and you must own the image. For more information about creating BYOL images, see  Bring Your Own Windows Desktop Licenses.
    */
@@ -412,6 +460,14 @@ declare class WorkSpaces extends Service {
    */
   terminateWorkspaces(callback?: (err: AWSError, data: WorkSpaces.Types.TerminateWorkspacesResult) => void): Request<WorkSpaces.Types.TerminateWorkspacesResult, AWSError>;
   /**
+   * Updates a Amazon Connect client add-in. Use this action to update the name and endpoint URL of a Amazon Connect client add-in.
+   */
+  updateConnectClientAddIn(params: WorkSpaces.Types.UpdateConnectClientAddInRequest, callback?: (err: AWSError, data: WorkSpaces.Types.UpdateConnectClientAddInResult) => void): Request<WorkSpaces.Types.UpdateConnectClientAddInResult, AWSError>;
+  /**
+   * Updates a Amazon Connect client add-in. Use this action to update the name and endpoint URL of a Amazon Connect client add-in.
+   */
+  updateConnectClientAddIn(callback?: (err: AWSError, data: WorkSpaces.Types.UpdateConnectClientAddInResult) => void): Request<WorkSpaces.Types.UpdateConnectClientAddInResult, AWSError>;
+  /**
    * Shares or unshares a connection alias with one account by specifying whether that account has permission to associate the connection alias with a directory. If the association permission is granted, the connection alias is shared with that account. If the association permission is revoked, the connection alias is unshared with the account. For more information, see  Cross-Region Redirection for Amazon WorkSpaces.    Before performing this operation, call  DescribeConnectionAliases to make sure that the current state of the connection alias is CREATED.   To delete a connection alias that has been shared, the shared account must first disassociate the connection alias from any directories it has been associated with. Then you must unshare the connection alias from the account it has been shared with. You can delete a connection alias only after it is no longer shared with any accounts or associated with any directories.   
    */
   updateConnectionAliasPermission(params: WorkSpaces.Types.UpdateConnectionAliasPermissionRequest, callback?: (err: AWSError, data: WorkSpaces.Types.UpdateConnectionAliasPermissionResult) => void): Request<WorkSpaces.Types.UpdateConnectionAliasPermissionResult, AWSError>;
@@ -474,7 +530,10 @@ declare namespace WorkSpaces {
     ErrorMessage?: Description;
   }
   export type AccountModificationList = AccountModification[];
+  export type AddInName = string;
+  export type AddInUrl = string;
   export type Alias = string;
+  export type AmazonUuid = string;
   export type Application = "Microsoft_Office_2016"|"Microsoft_Office_2019"|string;
   export type ApplicationList = Application[];
   export interface AssociateConnectionAliasRequest {
@@ -524,6 +583,11 @@ declare namespace WorkSpaces {
   export type BundleIdList = BundleId[];
   export type BundleList = WorkspaceBundle[];
   export type BundleOwner = string;
+  export type ClientDeviceType = "DeviceTypeWindows"|"DeviceTypeOsx"|"DeviceTypeAndroid"|"DeviceTypeIos"|"DeviceTypeLinux"|"DeviceTypeWeb"|string;
+  export type ClientDeviceTypeList = ClientDeviceType[];
+  export type ClientEmail = string;
+  export type ClientLocale = string;
+  export type ClientLoginMessage = string;
   export interface ClientProperties {
     /**
      * Specifies whether users can cache their credentials on the Amazon WorkSpaces client. When enabled, users can choose to reconnect to their WorkSpaces without re-entering their credentials. 
@@ -541,7 +605,8 @@ declare namespace WorkSpaces {
      */
     ClientProperties?: ClientProperties;
   }
-  export type Compute = "VALUE"|"STANDARD"|"PERFORMANCE"|"POWER"|"GRAPHICS"|"POWERPRO"|"GRAPHICSPRO"|string;
+  export type ClientUrl = string;
+  export type Compute = "VALUE"|"STANDARD"|"PERFORMANCE"|"POWER"|"GRAPHICS"|"POWERPRO"|"GRAPHICSPRO"|"GRAPHICS_G4DN"|"GRAPHICSPRO_G4DN"|string;
   export interface ComputeType {
     /**
      * The compute type.
@@ -549,6 +614,25 @@ declare namespace WorkSpaces {
     Name?: Compute;
   }
   export type ComputerName = string;
+  export interface ConnectClientAddIn {
+    /**
+     * The client add-in identifier.
+     */
+    AddInId?: AmazonUuid;
+    /**
+     * The directory identifier for which the client add-in is configured.
+     */
+    ResourceId?: DirectoryId;
+    /**
+     * The name of the client add in.
+     */
+    Name?: AddInName;
+    /**
+     * The endpoint URL of the client add-in.
+     */
+    URL?: AddInUrl;
+  }
+  export type ConnectClientAddInList = ConnectClientAddIn[];
   export interface ConnectionAlias {
     /**
      * The connection string specified for the connection alias. The connection string must be in the form of a fully qualified domain name (FQDN), such as www.example.com.
@@ -635,6 +719,26 @@ declare namespace WorkSpaces {
      * The identifier of the image.
      */
     ImageId?: WorkspaceImageId;
+  }
+  export interface CreateConnectClientAddInRequest {
+    /**
+     * The directory identifier for which to configure the client add-in.
+     */
+    ResourceId: DirectoryId;
+    /**
+     * The name of the client add-in.
+     */
+    Name: AddInName;
+    /**
+     * The endpoint URL of the Amazon Connect client add-in.
+     */
+    URL: AddInUrl;
+  }
+  export interface CreateConnectClientAddInResult {
+    /**
+     * The client add-in identifier.
+     */
+    AddInId?: AmazonUuid;
   }
   export interface CreateConnectionAliasRequest {
     /**
@@ -757,6 +861,51 @@ declare namespace WorkSpaces {
   export type DedicatedTenancyModificationStateEnum = "PENDING"|"COMPLETED"|"FAILED"|string;
   export type DedicatedTenancySupportEnum = "ENABLED"|string;
   export type DedicatedTenancySupportResultEnum = "ENABLED"|"DISABLED"|string;
+  export interface DefaultClientBrandingAttributes {
+    /**
+     * The logo URL. This is the link where users can download the logo image. The only supported image format is .png.
+     */
+    LogoUrl?: ClientUrl;
+    /**
+     * The support email. The company's customer support email address.    In each platform type, the SupportEmail and SupportLink parameters are mutually exclusive. You can specify one parameter for each platform type, but not both.   The default email is workspaces-feedback@amazon.com.   
+     */
+    SupportEmail?: ClientEmail;
+    /**
+     * The support link. The link for the company's customer support page for their WorkSpace.    In each platform type, the SupportEmail and SupportLink parameters are mutually exclusive.You can specify one parameter for each platform type, but not both.   The default support link is workspaces-feedback@amazon.com.   
+     */
+    SupportLink?: ClientUrl;
+    /**
+     * The forgotten password link. This is the web address that users can go to if they forget the password for their WorkSpace.
+     */
+    ForgotPasswordLink?: ClientUrl;
+    /**
+     * The login message. Specified as a key value pair, in which the key is a locale and the value is the localized message for that locale. The only key supported is en_US. 
+     */
+    LoginMessage?: LoginMessage;
+  }
+  export interface DefaultImportClientBrandingAttributes {
+    /**
+     * The logo. This is the link where users can download the logo image. The only image format accepted is .png.
+     */
+    Logo?: DefaultLogo;
+    /**
+     * The support email. The company's customer support email address.    In each platform type, the SupportEmail and SupportLink parameters are mutually exclusive. You can specify one parameter for each platform type, but not both.   The default email is workspaces-feedback@amazon.com.   
+     */
+    SupportEmail?: ClientEmail;
+    /**
+     * The support link. The link for the company's customer support page for their WorkSpace.    In each platform type, the SupportEmail and SupportLink parameters are mutually exclusive. You can specify one parameter for each platform type, but not both.   The default support link is workspaces-feedback@amazon.com.   
+     */
+    SupportLink?: ClientUrl;
+    /**
+     * The forgotten password link. This is the web address that users can go to if they forget the password for their WorkSpace.
+     */
+    ForgotPasswordLink?: ClientUrl;
+    /**
+     * The login message. Specified as a key value pair, in which the key is a locale and the value is the localized message for that locale. The only key supported is en_US. 
+     */
+    LoginMessage?: LoginMessage;
+  }
+  export type DefaultLogo = Buffer|Uint8Array|Blob|string;
   export type DefaultOu = string;
   export interface DefaultWorkspaceCreationProperties {
     /**
@@ -783,6 +932,30 @@ declare namespace WorkSpaces {
      * Specifies whether maintenance mode is enabled for WorkSpaces. For more information, see WorkSpace Maintenance.
      */
     EnableMaintenanceMode?: BooleanObject;
+  }
+  export interface DeleteClientBrandingRequest {
+    /**
+     * The directory identifier of the WorkSpace for which you want to delete client branding.
+     */
+    ResourceId: DirectoryId;
+    /**
+     * The device type for which you want to delete client branding.
+     */
+    Platforms: ClientDeviceTypeList;
+  }
+  export interface DeleteClientBrandingResult {
+  }
+  export interface DeleteConnectClientAddInRequest {
+    /**
+     * The identifier of the client add-in to delete.
+     */
+    AddInId: AmazonUuid;
+    /**
+     * The directory identifier for which the client add-in is configured.
+     */
+    ResourceId: DirectoryId;
+  }
+  export interface DeleteConnectClientAddInResult {
   }
   export interface DeleteConnectionAliasRequest {
     /**
@@ -864,6 +1037,38 @@ declare namespace WorkSpaces {
      */
     DedicatedTenancyManagementCidrRange?: DedicatedTenancyManagementCidrRange;
   }
+  export interface DescribeClientBrandingRequest {
+    /**
+     * The directory identifier of the WorkSpace for which you want to view client branding information.
+     */
+    ResourceId: DirectoryId;
+  }
+  export interface DescribeClientBrandingResult {
+    /**
+     * The branding information for Windows devices.
+     */
+    DeviceTypeWindows?: DefaultClientBrandingAttributes;
+    /**
+     * The branding information for macOS devices.
+     */
+    DeviceTypeOsx?: DefaultClientBrandingAttributes;
+    /**
+     * The branding information for Android devices.
+     */
+    DeviceTypeAndroid?: DefaultClientBrandingAttributes;
+    /**
+     * The branding information for iOS devices.
+     */
+    DeviceTypeIos?: IosClientBrandingAttributes;
+    /**
+     * The branding information for Linux devices.
+     */
+    DeviceTypeLinux?: DefaultClientBrandingAttributes;
+    /**
+     * The branding information for Web access.
+     */
+    DeviceTypeWeb?: DefaultClientBrandingAttributes;
+  }
   export interface DescribeClientPropertiesRequest {
     /**
      * The resource identifier, in the form of directory IDs.
@@ -875,6 +1080,30 @@ declare namespace WorkSpaces {
      * Information about the specified Amazon WorkSpaces clients.
      */
     ClientPropertiesList?: ClientPropertiesList;
+  }
+  export interface DescribeConnectClientAddInsRequest {
+    /**
+     * The directory identifier for which the client add-in is configured.
+     */
+    ResourceId: DirectoryId;
+    /**
+     * If you received a NextToken from a previous call that was paginated, provide this token to receive the next set of results.
+     */
+    NextToken?: PaginationToken;
+    /**
+     * The maximum number of items to return.
+     */
+    MaxResults?: Limit;
+  }
+  export interface DescribeConnectClientAddInsResult {
+    /**
+     * Information about client add-ins.
+     */
+    AddIns?: ConnectClientAddInList;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return. 
+     */
+    NextToken?: PaginationToken;
   }
   export interface DescribeConnectionAliasPermissionsRequest {
     /**
@@ -1214,13 +1443,69 @@ declare namespace WorkSpaces {
   }
   export type ImagePermissions = ImagePermission[];
   export type ImageType = "OWNED"|"SHARED"|string;
+  export interface ImportClientBrandingRequest {
+    /**
+     * The directory identifier of the WorkSpace for which you want to import client branding.
+     */
+    ResourceId: DirectoryId;
+    /**
+     * The branding information to import for Windows devices.
+     */
+    DeviceTypeWindows?: DefaultImportClientBrandingAttributes;
+    /**
+     * The branding information to import for macOS devices.
+     */
+    DeviceTypeOsx?: DefaultImportClientBrandingAttributes;
+    /**
+     * The branding information to import for Android devices.
+     */
+    DeviceTypeAndroid?: DefaultImportClientBrandingAttributes;
+    /**
+     * The branding information to import for iOS devices.
+     */
+    DeviceTypeIos?: IosImportClientBrandingAttributes;
+    /**
+     * The branding information to import for Linux devices.
+     */
+    DeviceTypeLinux?: DefaultImportClientBrandingAttributes;
+    /**
+     * The branding information to import for web access.
+     */
+    DeviceTypeWeb?: DefaultImportClientBrandingAttributes;
+  }
+  export interface ImportClientBrandingResult {
+    /**
+     * The branding information configured for Windows devices.
+     */
+    DeviceTypeWindows?: DefaultClientBrandingAttributes;
+    /**
+     * The branding information configured for macOS devices.
+     */
+    DeviceTypeOsx?: DefaultClientBrandingAttributes;
+    /**
+     * The branding information configured for Android devices.
+     */
+    DeviceTypeAndroid?: DefaultClientBrandingAttributes;
+    /**
+     * The branding information configured for iOS devices.
+     */
+    DeviceTypeIos?: IosClientBrandingAttributes;
+    /**
+     * The branding information configured for Linux devices.
+     */
+    DeviceTypeLinux?: DefaultClientBrandingAttributes;
+    /**
+     * The branding information configured for web access.
+     */
+    DeviceTypeWeb?: DefaultClientBrandingAttributes;
+  }
   export interface ImportWorkspaceImageRequest {
     /**
      * The identifier of the EC2 image.
      */
     Ec2ImageId: Ec2ImageId;
     /**
-     * The ingestion process to be used when importing the image, depending on which protocol you want to use for your BYOL Workspace image, either PCoIP or WorkSpaces Streaming Protocol (WSP). To use WSP, specify a value that ends in _WSP. To use PCoIP, specify a value that does not end in _WSP.  For non-GPU-enabled bundles (bundles other than Graphics or GraphicsPro), specify BYOL_REGULAR or BYOL_REGULAR_WSP, depending on the protocol.
+     * The ingestion process to be used when importing the image, depending on which protocol you want to use for your BYOL Workspace image, either PCoIP or WorkSpaces Streaming Protocol (WSP). To use WSP, specify a value that ends in _WSP. To use PCoIP, specify a value that does not end in _WSP.  For non-GPU-enabled images (bundles other than Graphics.g4dn, GraphicsPro.g4dn, Graphics, or GraphicsPro), specify BYOL_REGULAR or BYOL_REGULAR_WSP, depending on the protocol.  Use BYOL_GRAPHICS_G4DN ingestion for both Graphics.g4dn and GraphicsPro.g4dn. 
      */
     IngestionProcess: WorkspaceImageIngestionProcess;
     /**
@@ -1236,7 +1521,7 @@ declare namespace WorkSpaces {
      */
     Tags?: TagList;
     /**
-     * If specified, the version of Microsoft Office to subscribe to. Valid only for Windows 10 BYOL images. For more information about subscribing to Office for BYOL images, see  Bring Your Own Windows Desktop Licenses.  Although this parameter is an array, only one item is allowed at this time. 
+     * If specified, the version of Microsoft Office to subscribe to. Valid only for Windows 10 BYOL images. For more information about subscribing to Office for BYOL images, see  Bring Your Own Windows Desktop Licenses.    Although this parameter is an array, only one item is allowed at this time   Microsoft Office 2016 application subscription through AWS is currently not supported for Graphics.g4dn Bring Your Own License (BYOL) images   
      */
     Applications?: ApplicationList;
   }
@@ -1246,6 +1531,69 @@ declare namespace WorkSpaces {
      */
     ImageId?: WorkspaceImageId;
   }
+  export type Ios2XLogo = Buffer|Uint8Array|Blob|string;
+  export type Ios3XLogo = Buffer|Uint8Array|Blob|string;
+  export interface IosClientBrandingAttributes {
+    /**
+     * The logo. This is the link where users can download the logo image. This is the standard-resolution display that has a 1:1 pixel density (or @1x), where one pixel is equal to one point.
+     */
+    LogoUrl?: ClientUrl;
+    /**
+     * The @2x version of the logo. This is the higher resolution display that offers a scale factor of 2.0 (or @2x).   For more information about iOS image size and resolution, see Image Size and Resolution  in the Apple Human Interface Guidelines. 
+     */
+    Logo2xUrl?: ClientUrl;
+    /**
+     * The @3x version of the logo. This is the higher resolution display that offers a scale factor of 3.0 (or @3x).   For more information about iOS image size and resolution, see Image Size and Resolution  in the Apple Human Interface Guidelines. 
+     */
+    Logo3xUrl?: ClientUrl;
+    /**
+     * The support email. The company's customer support email address.    In each platform type, the SupportEmail and SupportLink parameters are mutually exclusive. You can specify one parameter for each platform type, but not both.   The default email is workspaces-feedback@amazon.com.   
+     */
+    SupportEmail?: ClientEmail;
+    /**
+     * The support link. The link for the company's customer support page for their WorkSpace.    In each platform type, the SupportEmail and SupportLink parameters are mutually exclusive. You can specify one parameter for each platform type, but not both.   The default support link is workspaces-feedback@amazon.com.   
+     */
+    SupportLink?: ClientUrl;
+    /**
+     * The forgotten password link. This is the web address that users can go to if they forget the password for their WorkSpace.
+     */
+    ForgotPasswordLink?: ClientUrl;
+    /**
+     * The login message. Specified as a key value pair, in which the key is a locale and the value is the localized message for that locale. The only key supported is en_US. 
+     */
+    LoginMessage?: LoginMessage;
+  }
+  export interface IosImportClientBrandingAttributes {
+    /**
+     * The logo. This is the link where users can download the logo image. This is the standard-resolution display that has a 1:1 pixel density (or @1x), where one pixel is equal to one point.
+     */
+    Logo?: IosLogo;
+    /**
+     * The @2x version of the logo. This is the higher resolution display that offers a scale factor of 2.0 (or @2x).   For more information about iOS image size and resolution, see Image Size and Resolution  in the Apple Human Interface Guidelines. 
+     */
+    Logo2x?: Ios2XLogo;
+    /**
+     * The @3x version of the logo. This is the higher resolution display that offers a scale factor of 3.0 (or @3x).   For more information about iOS image size and resolution, see Image Size and Resolution  in the Apple Human Interface Guidelines. 
+     */
+    Logo3x?: Ios3XLogo;
+    /**
+     * The support email. The company's customer support email address.    In each platform type, the SupportEmail and SupportLink parameters are mutually exclusive. You can specify one parameter for each platform type, but not both.   The default email is workspaces-feedback@amazon.com.   
+     */
+    SupportEmail?: ClientEmail;
+    /**
+     * The support link. The link for the company's customer support page for their WorkSpace.    In each platform type, the SupportEmail and SupportLink parameters are mutually exclusive. You can specify one parameter for each platform type, but not both.   The default support link is workspaces-feedback@amazon.com.   
+     */
+    SupportLink?: ClientUrl;
+    /**
+     * The forgotten password link. This is the web address that users can go to if they forget the password for their WorkSpace.
+     */
+    ForgotPasswordLink?: ClientUrl;
+    /**
+     * The login message. Specified as a key value pair, in which the key is a locale and the value is the localized message for that locale. The only key supported is en_US. 
+     */
+    LoginMessage?: LoginMessage;
+  }
+  export type IosLogo = Buffer|Uint8Array|Blob|string;
   export type IpAddress = string;
   export type IpGroupDesc = string;
   export type IpGroupId = string;
@@ -1290,6 +1638,7 @@ declare namespace WorkSpaces {
      */
     NextToken?: PaginationToken;
   }
+  export type LoginMessage = {[key: string]: ClientLoginMessage};
   export type ManagementCidrRangeConstraint = string;
   export type ManagementCidrRangeMaxResults = number;
   export interface MigrateWorkspaceRequest {
@@ -1623,6 +1972,26 @@ declare namespace WorkSpaces {
     FailedRequests?: FailedTerminateWorkspaceRequests;
   }
   export type Timestamp = Date;
+  export interface UpdateConnectClientAddInRequest {
+    /**
+     * The identifier of the client add-in to update.
+     */
+    AddInId: AmazonUuid;
+    /**
+     * The directory identifier for which the client add-in is configured.
+     */
+    ResourceId: DirectoryId;
+    /**
+     * The name of the client add-in.
+     */
+    Name?: AddInName;
+    /**
+     * The endpoint URL of the Amazon Connect client add-in.
+     */
+    URL?: AddInUrl;
+  }
+  export interface UpdateConnectClientAddInResult {
+  }
   export interface UpdateConnectionAliasPermissionRequest {
     /**
      * The identifier of the connection alias that you want to update permissions for.
@@ -2001,7 +2370,7 @@ declare namespace WorkSpaces {
   export type WorkspaceImageErrorCode = string;
   export type WorkspaceImageId = string;
   export type WorkspaceImageIdList = WorkspaceImageId[];
-  export type WorkspaceImageIngestionProcess = "BYOL_REGULAR"|"BYOL_GRAPHICS"|"BYOL_GRAPHICSPRO"|"BYOL_REGULAR_WSP"|string;
+  export type WorkspaceImageIngestionProcess = "BYOL_REGULAR"|"BYOL_GRAPHICS"|"BYOL_GRAPHICSPRO"|"BYOL_GRAPHICS_G4DN"|"BYOL_REGULAR_WSP"|string;
   export type WorkspaceImageList = WorkspaceImage[];
   export type WorkspaceImageName = string;
   export type WorkspaceImageRequiredTenancy = "DEFAULT"|"DEDICATED"|string;

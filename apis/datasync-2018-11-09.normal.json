@@ -80,6 +80,50 @@
       ],
       "documentation": "<p>Creates an endpoint for an Amazon EFS file system.</p>"
     },
+    "CreateLocationFsxLustre": {
+      "name": "CreateLocationFsxLustre",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateLocationFsxLustreRequest"
+      },
+      "output": {
+        "shape": "CreateLocationFsxLustreResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InternalException"
+        }
+      ],
+      "documentation": "<p>Creates an endpoint for an Amazon FSx for Lustre file system.</p>"
+    },
+    "CreateLocationFsxOpenZfs": {
+      "name": "CreateLocationFsxOpenZfs",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateLocationFsxOpenZfsRequest"
+      },
+      "output": {
+        "shape": "CreateLocationFsxOpenZfsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InternalException"
+        }
+      ],
+      "documentation": "<p>Creates an endpoint for an Amazon FSx for OpenZFS file system.</p>"
+    },
     "CreateLocationFsxWindows": {
       "name": "CreateLocationFsxWindows",
       "http": {
@@ -101,6 +145,28 @@
         }
       ],
       "documentation": "<p>Creates an endpoint for an Amazon FSx for Windows File Server file system.</p>"
+    },
+    "CreateLocationHdfs": {
+      "name": "CreateLocationHdfs",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateLocationHdfsRequest"
+      },
+      "output": {
+        "shape": "CreateLocationHdfsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InternalException"
+        }
+      ],
+      "documentation": "<p>Creates an endpoint for a Hadoop Distributed File System (HDFS). </p>"
     },
     "CreateLocationNfs": {
       "name": "CreateLocationNfs",
@@ -322,6 +388,50 @@
       ],
       "documentation": "<p>Returns metadata, such as the path information about an Amazon EFS location.</p>"
     },
+    "DescribeLocationFsxLustre": {
+      "name": "DescribeLocationFsxLustre",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeLocationFsxLustreRequest"
+      },
+      "output": {
+        "shape": "DescribeLocationFsxLustreResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InternalException"
+        }
+      ],
+      "documentation": "<p>Returns metadata about an Amazon FSx for Lustre location, such as information about its path.</p>"
+    },
+    "DescribeLocationFsxOpenZfs": {
+      "name": "DescribeLocationFsxOpenZfs",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeLocationFsxOpenZfsRequest"
+      },
+      "output": {
+        "shape": "DescribeLocationFsxOpenZfsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InternalException"
+        }
+      ],
+      "documentation": "<p>Returns metadata about an Amazon FSx for OpenZFS location, such as information about its path.</p>"
+    },
     "DescribeLocationFsxWindows": {
       "name": "DescribeLocationFsxWindows",
       "http": {
@@ -342,7 +452,29 @@
           "shape": "InternalException"
         }
       ],
-      "documentation": "<p>Returns metadata, such as the path information about an Amazon FSx for Windows File Server location.</p>"
+      "documentation": "<p>Returns metadata about an Amazon FSx for Windows File Server location, such as information about its path.</p>"
+    },
+    "DescribeLocationHdfs": {
+      "name": "DescribeLocationHdfs",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeLocationHdfsRequest"
+      },
+      "output": {
+        "shape": "DescribeLocationHdfsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InternalException"
+        }
+      ],
+      "documentation": "<p>Returns metadata, such as the authentication information about the Hadoop Distributed File System (HDFS) location. </p>"
     },
     "DescribeLocationNfs": {
       "name": "DescribeLocationNfs",
@@ -674,6 +806,28 @@
       ],
       "documentation": "<p>Updates the name of an agent.</p>"
     },
+    "UpdateLocationHdfs": {
+      "name": "UpdateLocationHdfs",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateLocationHdfsRequest"
+      },
+      "output": {
+        "shape": "UpdateLocationHdfsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InternalException"
+        }
+      ],
+      "documentation": "<p>Updates some parameters of a previously created location for a Hadoop Distributed File System cluster.</p>"
+    },
     "UpdateLocationNfs": {
       "name": "UpdateLocationNfs",
       "http": {
@@ -942,6 +1096,79 @@
       },
       "documentation": "<p>CreateLocationEfs</p>"
     },
+    "CreateLocationFsxLustreRequest": {
+      "type": "structure",
+      "required": [
+        "FsxFilesystemArn",
+        "SecurityGroupArns"
+      ],
+      "members": {
+        "FsxFilesystemArn": {
+          "shape": "FsxFilesystemArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) for the FSx for Lustre file system.</p>"
+        },
+        "SecurityGroupArns": {
+          "shape": "Ec2SecurityGroupArnList",
+          "documentation": "<p>The Amazon Resource Names (ARNs) of the security groups that are used to configure the FSx for Lustre file system.</p>"
+        },
+        "Subdirectory": {
+          "shape": "FsxLustreSubdirectory",
+          "documentation": "<p>A subdirectory in the location's path. This subdirectory in the FSx for Lustre file system is used to read data from the FSx for Lustre source location or write data to the FSx for Lustre destination.</p>"
+        },
+        "Tags": {
+          "shape": "InputTagList",
+          "documentation": "<p>The key-value pair that represents a tag that you want to add to the resource. The value can be an empty string. This value helps you manage, filter, and search for your resources. We recommend that you create a name tag for your location.</p>"
+        }
+      }
+    },
+    "CreateLocationFsxLustreResponse": {
+      "type": "structure",
+      "members": {
+        "LocationArn": {
+          "shape": "LocationArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the FSx for Lustre file system location that's created. </p>"
+        }
+      }
+    },
+    "CreateLocationFsxOpenZfsRequest": {
+      "type": "structure",
+      "required": [
+        "FsxFilesystemArn",
+        "Protocol",
+        "SecurityGroupArns"
+      ],
+      "members": {
+        "FsxFilesystemArn": {
+          "shape": "FsxFilesystemArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the FSx for OpenZFS file system.</p>"
+        },
+        "Protocol": {
+          "shape": "FsxProtocol",
+          "documentation": "<p>The type of protocol that DataSync uses to access your file system.</p>"
+        },
+        "SecurityGroupArns": {
+          "shape": "Ec2SecurityGroupArnList",
+          "documentation": "<p>The ARNs of the security groups that are used to configure the FSx for OpenZFS file system.</p>"
+        },
+        "Subdirectory": {
+          "shape": "FsxOpenZfsSubdirectory",
+          "documentation": "<p>A subdirectory in the location's path that must begin with <code>/fsx</code>. DataSync uses this subdirectory to read or write data (depending on whether the file system is a source or destination location).</p>"
+        },
+        "Tags": {
+          "shape": "InputTagList",
+          "documentation": "<p>The key-value pair that represents a tag that you want to add to the resource. The value can be an empty string. This value helps you manage, filter, and search for your resources. We recommend that you create a name tag for your location.</p>"
+        }
+      }
+    },
+    "CreateLocationFsxOpenZfsResponse": {
+      "type": "structure",
+      "members": {
+        "LocationArn": {
+          "shape": "LocationArn",
+          "documentation": "<p>The ARN of the FSx for OpenZFS file system location that you created.</p>"
+        }
+      }
+    },
     "CreateLocationFsxWindowsRequest": {
       "type": "structure",
       "required": [
@@ -953,7 +1180,7 @@
       "members": {
         "Subdirectory": {
           "shape": "FsxWindowsSubdirectory",
-          "documentation": "<p>A subdirectory in the location’s path. This subdirectory in the Amazon FSx for Windows File Server file system is used to read data from the Amazon FSx for Windows File Server source location or write data to the FSx for Windows File Server destination.</p>"
+          "documentation": "<p>A subdirectory in the location's path. This subdirectory in the Amazon FSx for Windows File Server file system is used to read data from the Amazon FSx for Windows File Server source location or write data to the FSx for Windows File Server destination.</p>"
         },
         "FsxFilesystemArn": {
           "shape": "FsxFilesystemArn",
@@ -961,7 +1188,7 @@
         },
         "SecurityGroupArns": {
           "shape": "Ec2SecurityGroupArnList",
-          "documentation": "<p>The Amazon Resource Names (ARNs) of the security groups that are to use to configure the FSx for Windows File Server file system.</p>"
+          "documentation": "<p>The ARNs of the security groups that are used to configure the FSx for Windows File Server file system.</p>"
         },
         "Tags": {
           "shape": "InputTagList",
@@ -986,7 +1213,78 @@
       "members": {
         "LocationArn": {
           "shape": "LocationArn",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the FSx for Windows File Server file system location that is created.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the FSx for Windows File Server file system location you created.</p>"
+        }
+      }
+    },
+    "CreateLocationHdfsRequest": {
+      "type": "structure",
+      "required": [
+        "NameNodes",
+        "AuthenticationType",
+        "AgentArns"
+      ],
+      "members": {
+        "Subdirectory": {
+          "shape": "HdfsSubdirectory",
+          "documentation": "<p>A subdirectory in the HDFS cluster. This subdirectory is used to read data from or write data to the HDFS cluster. If the subdirectory isn't specified, it will default to <code>/</code>.</p>"
+        },
+        "NameNodes": {
+          "shape": "HdfsNameNodeList",
+          "documentation": "<p>The NameNode that manages the HDFS namespace. The NameNode performs operations such as opening, closing, and renaming files and directories. The NameNode contains the information to map blocks of data to the DataNodes. You can use only one NameNode.</p>"
+        },
+        "BlockSize": {
+          "shape": "HdfsBlockSize",
+          "documentation": "<p>The size of data blocks to write into the HDFS cluster. The block size must be a multiple of 512 bytes. The default block size is 128 mebibytes (MiB).</p>"
+        },
+        "ReplicationFactor": {
+          "shape": "HdfsReplicationFactor",
+          "documentation": "<p>The number of DataNodes to replicate the data to when writing to the HDFS cluster. By default, data is replicated to three DataNodes.</p>"
+        },
+        "KmsKeyProviderUri": {
+          "shape": "KmsKeyProviderUri",
+          "documentation": "<p>The URI of the HDFS cluster's Key Management Server (KMS). </p>"
+        },
+        "QopConfiguration": {
+          "shape": "QopConfiguration",
+          "documentation": "<p>The Quality of Protection (QOP) configuration specifies the Remote Procedure Call (RPC) and data transfer protection settings configured on the Hadoop Distributed File System (HDFS) cluster. If <code>QopConfiguration</code> isn't specified, <code>RpcProtection</code> and <code>DataTransferProtection</code> default to <code>PRIVACY</code>. If you set <code>RpcProtection</code> or <code>DataTransferProtection</code>, the other parameter assumes the same value. </p>"
+        },
+        "AuthenticationType": {
+          "shape": "HdfsAuthenticationType",
+          "documentation": "<p>The type of authentication used to determine the identity of the user. </p>"
+        },
+        "SimpleUser": {
+          "shape": "HdfsUser",
+          "documentation": "<p>The user name used to identify the client on the host operating system. </p> <note> <p>If <code>SIMPLE</code> is specified for <code>AuthenticationType</code>, this parameter is required. </p> </note>"
+        },
+        "KerberosPrincipal": {
+          "shape": "KerberosPrincipal",
+          "documentation": "<p>The Kerberos principal with access to the files and folders on the HDFS cluster. </p> <note> <p>If <code>KERBEROS</code> is specified for <code>AuthenticationType</code>, this parameter is required.</p> </note>"
+        },
+        "KerberosKeytab": {
+          "shape": "KerberosKeytabFile",
+          "documentation": "<p>The Kerberos key table (keytab) that contains mappings between the defined Kerberos principal and the encrypted keys. You can load the keytab from a file by providing the file's address. If you're using the CLI, it performs base64 encoding for you. Otherwise, provide the base64-encoded text. </p> <note> <p>If <code>KERBEROS</code> is specified for <code>AuthenticationType</code>, this parameter is required. </p> </note>"
+        },
+        "KerberosKrb5Conf": {
+          "shape": "KerberosKrb5ConfFile",
+          "documentation": "<p>The <code>krb5.conf</code> file that contains the Kerberos configuration information. You can load the <code>krb5.conf</code> file by providing the file's address. If you're using the CLI, it performs the base64 encoding for you. Otherwise, provide the base64-encoded text. </p> <note> <p>If <code>KERBEROS</code> is specified for <code>AuthenticationType</code>, this parameter is required.</p> </note>"
+        },
+        "AgentArns": {
+          "shape": "AgentArnList",
+          "documentation": "<p>The Amazon Resource Names (ARNs) of the agents that are used to connect to the HDFS cluster.</p>"
+        },
+        "Tags": {
+          "shape": "InputTagList",
+          "documentation": "<p>The key-value pair that represents the tag that you want to add to the location. The value can be an empty string. We recommend using tags to name your resources. </p>"
+        }
+      }
+    },
+    "CreateLocationHdfsResponse": {
+      "type": "structure",
+      "members": {
+        "LocationArn": {
+          "shape": "LocationArn",
+          "documentation": "<p>The ARN of the source HDFS cluster location that's created. </p>"
         }
       }
     },
@@ -1004,7 +1302,7 @@
         },
         "ServerHostname": {
           "shape": "ServerHostname",
-          "documentation": "<p>The name of the NFS server. This value is the IP address or Domain Name Service (DNS) name of the NFS server. An agent that is installed on-premises uses this host name to mount the NFS server in a network. </p> <p>If you are copying data to or from your Snowcone device, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#nfs-on-snowcone\">NFS Server on Snowcone</a> for more information.</p> <note> <p>This name must either be DNS-compliant or must be an IP version 4 (IPv4) address.</p> </note>"
+          "documentation": "<p>The name of the NFS server. This value is the IP address or Domain Name Service (DNS) name of the NFS server. An agent that is installed on-premises uses this hostname to mount the NFS server in a network. </p> <p>If you are copying data to or from your Snowcone device, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#nfs-on-snowcone\">NFS Server on Snowcone</a> for more information.</p> <note> <p>This name must either be DNS-compliant or must be an IP version 4 (IPv4) address.</p> </note>"
         },
         "OnPremConfig": {
           "shape": "OnPremConfig",
@@ -1041,7 +1339,7 @@
       "members": {
         "ServerHostname": {
           "shape": "ServerHostname",
-          "documentation": "<p>The name of the self-managed object storage server. This value is the IP address or Domain Name Service (DNS) name of the object storage server. An agent uses this host name to mount the object storage server in a network. </p>"
+          "documentation": "<p>The name of the self-managed object storage server. This value is the IP address or Domain Name Service (DNS) name of the object storage server. An agent uses this hostname to mount the object storage server in a network. </p>"
         },
         "ServerPort": {
           "shape": "ObjectStorageServerPort",
@@ -1112,7 +1410,7 @@
         },
         "AgentArns": {
           "shape": "AgentArnList",
-          "documentation": "<p>If you are using DataSync on an Amazon Web Services Outpost, specify the Amazon Resource Names (ARNs) of the DataSync agents deployed on your Outpost. For more information about launching a DataSync agent on an Amazon Web Services Outpost, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/deploy-agents.html#outposts-agent\">Deploy your DataSync agent on Outposts</a>.</p>"
+          "documentation": "<p>If you're using DataSync on an Amazon Web Services Outpost, specify the Amazon Resource Names (ARNs) of the DataSync agents deployed on your Outpost. For more information about launching a DataSync agent on an Amazon Web Services Outpost, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/deploy-agents.html#outposts-agent\">Deploy your DataSync agent on Outposts</a>.</p>"
         },
         "Tags": {
           "shape": "InputTagList",
@@ -1227,7 +1525,7 @@
         },
         "Includes": {
           "shape": "FilterList",
-          "documentation": "<p>A list of filter rules that determines which files to include when running a task. The pattern should contain a single filter string that consists of the patterns to include. The patterns are delimited by \"|\" (that is, a pipe). For example: <code>\"/folder1|/folder2</code>\"</p>"
+          "documentation": "<p>A list of filter rules that determines which files to include when running a task. The pattern contains a single filter string that consists of the patterns to include. The patterns are delimited by \"|\" (that is, a pipe), for example, <code>\"/folder1|/folder2\"</code>.</p>"
         }
       },
       "documentation": "<p>CreateTaskRequest</p>"
@@ -1374,6 +1672,76 @@
       },
       "documentation": "<p>DescribeLocationEfsResponse</p>"
     },
+    "DescribeLocationFsxLustreRequest": {
+      "type": "structure",
+      "required": [
+        "LocationArn"
+      ],
+      "members": {
+        "LocationArn": {
+          "shape": "LocationArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the FSx for Lustre location to describe. </p>"
+        }
+      }
+    },
+    "DescribeLocationFsxLustreResponse": {
+      "type": "structure",
+      "members": {
+        "LocationArn": {
+          "shape": "LocationArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the FSx for Lustre location that was described.</p>"
+        },
+        "LocationUri": {
+          "shape": "LocationUri",
+          "documentation": "<p>The URI of the FSx for Lustre location that was described.</p>"
+        },
+        "SecurityGroupArns": {
+          "shape": "Ec2SecurityGroupArnList",
+          "documentation": "<p>The Amazon Resource Names (ARNs) of the security groups that are configured for the FSx for Lustre file system.</p>"
+        },
+        "CreationTime": {
+          "shape": "Time",
+          "documentation": "<p>The time that the FSx for Lustre location was created.</p>"
+        }
+      }
+    },
+    "DescribeLocationFsxOpenZfsRequest": {
+      "type": "structure",
+      "required": [
+        "LocationArn"
+      ],
+      "members": {
+        "LocationArn": {
+          "shape": "LocationArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the FSx for OpenZFS location to describe.</p>"
+        }
+      }
+    },
+    "DescribeLocationFsxOpenZfsResponse": {
+      "type": "structure",
+      "members": {
+        "LocationArn": {
+          "shape": "LocationArn",
+          "documentation": "<p>The ARN of the FSx for OpenZFS location that was described.</p>"
+        },
+        "LocationUri": {
+          "shape": "LocationUri",
+          "documentation": "<p>The uniform resource identifier (URI) of the FSx for OpenZFS location that was described.</p> <p>Example: <code>fsxz://us-west-2.fs-1234567890abcdef02/fsx/folderA/folder</code> </p>"
+        },
+        "SecurityGroupArns": {
+          "shape": "Ec2SecurityGroupArnList",
+          "documentation": "<p>The ARNs of the security groups that are configured for the FSx for OpenZFS file system.</p>"
+        },
+        "Protocol": {
+          "shape": "FsxProtocol",
+          "documentation": "<p>The type of protocol that DataSync uses to access your file system.</p>"
+        },
+        "CreationTime": {
+          "shape": "Time",
+          "documentation": "<p>The time that the FSx for OpenZFS location was created.</p>"
+        }
+      }
+    },
     "DescribeLocationFsxWindowsRequest": {
       "type": "structure",
       "required": [
@@ -1412,6 +1780,71 @@
         "Domain": {
           "shape": "SmbDomain",
           "documentation": "<p>The name of the Windows domain that the FSx for Windows File Server belongs to.</p>"
+        }
+      }
+    },
+    "DescribeLocationHdfsRequest": {
+      "type": "structure",
+      "required": [
+        "LocationArn"
+      ],
+      "members": {
+        "LocationArn": {
+          "shape": "LocationArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the HDFS cluster location to describe.</p>"
+        }
+      }
+    },
+    "DescribeLocationHdfsResponse": {
+      "type": "structure",
+      "members": {
+        "LocationArn": {
+          "shape": "LocationArn",
+          "documentation": "<p>The ARN of the HDFS cluster location.</p>"
+        },
+        "LocationUri": {
+          "shape": "LocationUri",
+          "documentation": "<p>The URI of the HDFS cluster location.</p>"
+        },
+        "NameNodes": {
+          "shape": "HdfsNameNodeList",
+          "documentation": "<p>The NameNode that manage the HDFS namespace. </p>"
+        },
+        "BlockSize": {
+          "shape": "HdfsBlockSize",
+          "documentation": "<p>The size of the data blocks to write into the HDFS cluster. </p>"
+        },
+        "ReplicationFactor": {
+          "shape": "HdfsReplicationFactor",
+          "documentation": "<p>The number of DataNodes to replicate the data to when writing to the HDFS cluster. </p>"
+        },
+        "KmsKeyProviderUri": {
+          "shape": "KmsKeyProviderUri",
+          "documentation": "<p> The URI of the HDFS cluster's Key Management Server (KMS). </p>"
+        },
+        "QopConfiguration": {
+          "shape": "QopConfiguration",
+          "documentation": "<p>The Quality of Protection (QOP) configuration specifies the Remote Procedure Call (RPC) and data transfer protection settings configured on the Hadoop Distributed File System (HDFS) cluster. </p>"
+        },
+        "AuthenticationType": {
+          "shape": "HdfsAuthenticationType",
+          "documentation": "<p>The type of authentication used to determine the identity of the user. </p>"
+        },
+        "SimpleUser": {
+          "shape": "HdfsUser",
+          "documentation": "<p>The user name used to identify the client on the host operating system. This parameter is used if the <code>AuthenticationType</code> is defined as <code>SIMPLE</code>.</p>"
+        },
+        "KerberosPrincipal": {
+          "shape": "KerberosPrincipal",
+          "documentation": "<p>The Kerberos principal with access to the files and folders on the HDFS cluster. This parameter is used if the <code>AuthenticationType</code> is defined as <code>KERBEROS</code>.</p>"
+        },
+        "AgentArns": {
+          "shape": "AgentArnList",
+          "documentation": "<p>The ARNs of the agents that are used to connect to the HDFS cluster. </p>"
+        },
+        "CreationTime": {
+          "shape": "Time",
+          "documentation": "<p>The time that the HDFS location was created.</p>"
         }
       }
     },
@@ -1701,11 +2134,11 @@
         },
         "SourceNetworkInterfaceArns": {
           "shape": "SourceNetworkInterfaceArns",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the source ENIs (Elastic Network Interface) that was created for your subnet.</p>"
+          "documentation": "<p>The Amazon Resource Names (ARNs) of the source elastic network interfaces (ENIs) that were created for your subnet.</p>"
         },
         "DestinationNetworkInterfaceArns": {
           "shape": "DestinationNetworkInterfaceArns",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the destination ENIs (Elastic Network Interface) that was created for your subnet.</p>"
+          "documentation": "<p>The Amazon Resource Names (ARNs) of the destination elastic network interfaces (ENIs) that were created for your subnet.</p>"
         },
         "Options": {
           "shape": "Options",
@@ -1713,7 +2146,7 @@
         },
         "Excludes": {
           "shape": "FilterList",
-          "documentation": "<p>A list of filter rules that determines which files to exclude from a task. The list should contain a single filter string that consists of the patterns to exclude. The patterns are delimited by \"|\" (that is, a pipe), for example: <code>\"/folder1|/folder2\"</code> </p> <p> </p>"
+          "documentation": "<p>A list of filter rules that determines which files to exclude from a task. The list should contain a single filter string that consists of the patterns to exclude. The patterns are delimited by \"|\" (that is, a pipe), for example, <code>\"/folder1|/folder2\"</code>. </p> <p> </p>"
         },
         "Schedule": {
           "shape": "TaskSchedule",
@@ -1733,7 +2166,7 @@
         },
         "Includes": {
           "shape": "FilterList",
-          "documentation": "<p>A list of filter rules that determines which files to include when running a task. The pattern should contain a single filter string that consists of the patterns to include. The patterns are delimited by \"|\" (that is, a pipe). For example: <code>\"/folder1|/folder2</code>\"</p>"
+          "documentation": "<p>A list of filter rules that determines which files to include when running a task. The pattern contains a single filter string that consists of the patterns to include. The patterns are delimited by \"|\" (that is, a pipe), for example, <code>\"/folder1|/folder2</code>\".</p>"
         }
       },
       "documentation": "<p>DescribeTaskResponse</p>"
@@ -1757,14 +2190,14 @@
       "members": {
         "SubnetArn": {
           "shape": "Ec2SubnetArn",
-          "documentation": "<p>The ARN of the subnet and the security group that DataSync uses to access the target EFS file system.</p>"
+          "documentation": "<p>The ARN of the subnet that DataSync uses to access the target EFS file system.</p>"
         },
         "SecurityGroupArns": {
           "shape": "Ec2SecurityGroupArnList",
           "documentation": "<p>The Amazon Resource Names (ARNs) of the security groups that are configured for the Amazon EC2 resource.</p>"
         }
       },
-      "documentation": "<p>The subnet and the security group that DataSync uses to access target EFS file system. The subnet must have at least one mount target for that file system. The security group that you provide needs to be able to communicate with the security group on the mount target in the subnet specified. </p>"
+      "documentation": "<p>The subnet that DataSync uses to access target EFS file system. The subnet must have at least one mount target for that file system. The security group that you provide needs to be able to communicate with the security group on the mount target in the subnet specified. </p>"
     },
     "Ec2SecurityGroupArn": {
       "type": "string",
@@ -1846,7 +2279,7 @@
     },
     "FilterValue": {
       "type": "string",
-      "max": 409600,
+      "max": 102400,
       "pattern": "^[^\\x00]+$"
     },
     "FilterValues": {
@@ -1859,6 +2292,35 @@
       "type": "string",
       "max": 128,
       "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):fsx:[a-z\\-0-9]*:[0-9]{12}:file-system/fs-.*$"
+    },
+    "FsxLustreSubdirectory": {
+      "type": "string",
+      "max": 4096,
+      "pattern": "^[a-zA-Z0-9_\\-\\+\\./\\(\\)\\$\\p{Zs}]+$"
+    },
+    "FsxOpenZfsSubdirectory": {
+      "type": "string",
+      "max": 4096,
+      "pattern": "^[^\\u0000\\u0085\\u2028\\u2029\\r\\n]{1,4096}$"
+    },
+    "FsxProtocol": {
+      "type": "structure",
+      "members": {
+        "NFS": {
+          "shape": "FsxProtocolNfs",
+          "documentation": "<p>Represents the Network File System (NFS) protocol that DataSync uses to access your FSx for OpenZFS file system.</p>"
+        }
+      },
+      "documentation": "<p>Represents the protocol that DataSync uses to access your Amazon FSx for OpenZFS file system.</p>"
+    },
+    "FsxProtocolNfs": {
+      "type": "structure",
+      "members": {
+        "MountOptions": {
+          "shape": "NfsMountOptions"
+        }
+      },
+      "documentation": "<p>Represents the Network File System (NFS) protocol that DataSync uses to access your Amazon FSx for OpenZFS file system.</p>"
     },
     "FsxWindowsSubdirectory": {
       "type": "string",
@@ -1874,6 +2336,91 @@
         "BOTH"
       ]
     },
+    "HdfsAuthenticationType": {
+      "type": "string",
+      "enum": [
+        "SIMPLE",
+        "KERBEROS"
+      ]
+    },
+    "HdfsBlockSize": {
+      "type": "integer",
+      "box": true,
+      "max": 1073741824,
+      "min": 1048576
+    },
+    "HdfsDataTransferProtection": {
+      "type": "string",
+      "enum": [
+        "DISABLED",
+        "AUTHENTICATION",
+        "INTEGRITY",
+        "PRIVACY"
+      ]
+    },
+    "HdfsNameNode": {
+      "type": "structure",
+      "required": [
+        "Hostname",
+        "Port"
+      ],
+      "members": {
+        "Hostname": {
+          "shape": "HdfsServerHostname",
+          "documentation": "<p>The hostname of the NameNode in the HDFS cluster. This value is the IP address or Domain Name Service (DNS) name of the NameNode. An agent that's installed on-premises uses this hostname to communicate with the NameNode in the network.</p>"
+        },
+        "Port": {
+          "shape": "HdfsServerPort",
+          "documentation": "<p>The port that the NameNode uses to listen to client requests.</p>"
+        }
+      },
+      "documentation": "<p>The NameNode of the Hadoop Distributed File System (HDFS). The NameNode manages the file system's namespace. The NameNode performs operations such as opening, closing, and renaming files and directories. The NameNode contains the information to map blocks of data to the DataNodes.</p>"
+    },
+    "HdfsNameNodeList": {
+      "type": "list",
+      "member": {
+        "shape": "HdfsNameNode"
+      },
+      "min": 1
+    },
+    "HdfsReplicationFactor": {
+      "type": "integer",
+      "box": true,
+      "max": 512,
+      "min": 1
+    },
+    "HdfsRpcProtection": {
+      "type": "string",
+      "enum": [
+        "DISABLED",
+        "AUTHENTICATION",
+        "INTEGRITY",
+        "PRIVACY"
+      ]
+    },
+    "HdfsServerHostname": {
+      "type": "string",
+      "max": 255,
+      "min": 1,
+      "pattern": "^(([a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9\\-]*[A-Za-z0-9])$"
+    },
+    "HdfsServerPort": {
+      "type": "integer",
+      "box": true,
+      "max": 65536,
+      "min": 1
+    },
+    "HdfsSubdirectory": {
+      "type": "string",
+      "max": 4096,
+      "pattern": "^[a-zA-Z0-9_\\-\\+\\./\\(\\)\\$\\p{Zs}]+$"
+    },
+    "HdfsUser": {
+      "type": "string",
+      "max": 256,
+      "min": 1,
+      "pattern": "^[_.A-Za-z0-9][-_.A-Za-z0-9]*$"
+    },
     "IamRoleArn": {
       "type": "string",
       "max": 2048,
@@ -1886,6 +2433,26 @@
       },
       "max": 50,
       "min": 0
+    },
+    "KerberosKeytabFile": {
+      "type": "blob",
+      "max": 65536
+    },
+    "KerberosKrb5ConfFile": {
+      "type": "blob",
+      "max": 131072
+    },
+    "KerberosPrincipal": {
+      "type": "string",
+      "max": 256,
+      "min": 1,
+      "pattern": "^.+$"
+    },
+    "KmsKeyProviderUri": {
+      "type": "string",
+      "max": 255,
+      "min": 1,
+      "pattern": "^kms:\\/\\/http[s]?@(([a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9\\-]*[A-Za-z0-9])(;(([a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9\\-]*[A-Za-z0-9]))*:[0-9]{1,5}\\/kms$"
     },
     "ListAgentsRequest": {
       "type": "structure",
@@ -2103,7 +2670,7 @@
         },
         "LocationUri": {
           "shape": "LocationUri",
-          "documentation": "<p>Represents a list of URLs of a location. <code>LocationUri</code> returns an array that contains a list of locations when the <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/API_ListLocations.html\">ListLocations</a> operation is called.</p> <p>Format: <code>TYPE://GLOBAL_ID/SUBDIR</code>.</p> <p>TYPE designates the type of location. Valid values: NFS | EFS | S3.</p> <p>GLOBAL_ID is the globally unique identifier of the resource that backs the location. An example for EFS is <code>us-east-2.fs-abcd1234</code>. An example for Amazon S3 is the bucket name, such as <code>myBucket</code>. An example for NFS is a valid IPv4 address or a host name compliant with Domain Name Service (DNS).</p> <p>SUBDIR is a valid file system path, delimited by forward slashes as is the *nix convention. For NFS and Amazon EFS, it's the export path to mount the location. For Amazon S3, it's the prefix path that you mount to and treat as the root of the location.</p> <p/>"
+          "documentation": "<p>Represents a list of URIs of a location. <code>LocationUri</code> returns an array that contains a list of locations when the <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/API_ListLocations.html\">ListLocations</a> operation is called.</p> <p>Format: <code>TYPE://GLOBAL_ID/SUBDIR</code>.</p> <p>TYPE designates the type of location (for example, <code>nfs</code> or <code>s3</code>).</p> <p>GLOBAL_ID is the globally unique identifier of the resource that backs the location. An example for EFS is <code>us-east-2.fs-abcd1234</code>. An example for Amazon S3 is the bucket name, such as <code>myBucket</code>. An example for NFS is a valid IPv4 address or a hostname that is compliant with Domain Name Service (DNS).</p> <p>SUBDIR is a valid file system path, delimited by forward slashes as is the *nix convention. For NFS and Amazon EFS, it's the export path to mount the location. For Amazon S3, it's the prefix path that you mount to and treat as the root of the location.</p> <p/>"
         }
       },
       "documentation": "<p>Represents a single entry in a list of locations. <code>LocationListEntry</code> returns an array that contains a list of locations when the <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/API_ListLocations.html\">ListLocations</a> operation is called.</p>"
@@ -2111,7 +2678,7 @@
     "LocationUri": {
       "type": "string",
       "max": 4356,
-      "pattern": "^(efs|nfs|s3|smb|fsxw)://[a-zA-Z0-9.\\-]+$"
+      "pattern": "^(efs|nfs|s3|smb|hdfs|fsx[a-z0-9]+)://[a-zA-Z0-9.:/\\-]+$"
     },
     "LogGroupArn": {
       "type": "string",
@@ -2153,7 +2720,7 @@
       "members": {
         "Version": {
           "shape": "NfsVersion",
-          "documentation": "<p>The specific NFS version that you want DataSync to use to mount your NFS share. If the server refuses to use the version specified, the sync will fail. If you don't specify a version, DataSync defaults to <code>AUTOMATIC</code>. That is, DataSync automatically selects a version based on negotiation with the NFS server.</p> <p>You can specify the following NFS versions:</p> <ul> <li> <p> <b> <a href=\"https://tools.ietf.org/html/rfc1813\">NFSv3</a> </b> - stateless protocol version that allows for asynchronous writes on the server.</p> </li> <li> <p> <b> <a href=\"https://tools.ietf.org/html/rfc3530\">NFSv4.0</a> </b> - stateful, firewall-friendly protocol version that supports delegations and pseudo filesystems.</p> </li> <li> <p> <b> <a href=\"https://tools.ietf.org/html/rfc5661\">NFSv4.1</a> </b> - stateful protocol version that supports sessions, directory delegations, and parallel data processing. Version 4.1 also includes all features available in version 4.0.</p> </li> </ul>"
+          "documentation": "<p>The specific NFS version that you want DataSync to use to mount your NFS share. If the server refuses to use the version specified, the sync will fail. If you don't specify a version, DataSync defaults to <code>AUTOMATIC</code>. That is, DataSync automatically selects a version based on negotiation with the NFS server.</p> <p>You can specify the following NFS versions:</p> <ul> <li> <p> <b> <a href=\"https://tools.ietf.org/html/rfc1813\">NFSv3</a> </b> - stateless protocol version that allows for asynchronous writes on the server.</p> </li> <li> <p> <b> <a href=\"https://tools.ietf.org/html/rfc3530\">NFSv4.0</a> </b> - stateful, firewall-friendly protocol version that supports delegations and pseudo file systems.</p> </li> <li> <p> <b> <a href=\"https://tools.ietf.org/html/rfc5661\">NFSv4.1</a> </b> - stateful protocol version that supports sessions, directory delegations, and parallel data processing. Version 4.1 also includes all features available in version 4.0.</p> </li> </ul>"
         }
       },
       "documentation": "<p>Represents the mount options that are available for DataSync to access an NFS location.</p>"
@@ -2204,6 +2771,13 @@
         "HTTP"
       ]
     },
+    "ObjectTags": {
+      "type": "string",
+      "enum": [
+        "PRESERVE",
+        "NONE"
+      ]
+    },
     "OnPremConfig": {
       "type": "structure",
       "required": [
@@ -2237,7 +2811,7 @@
       "members": {
         "VerifyMode": {
           "shape": "VerifyMode",
-          "documentation": "<p>A value that determines whether a data integrity verification should be performed at the end of a task execution after all data and metadata have been transferred. For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-task.html\">Configure task settings</a>. </p> <p>Default value: POINT_IN_TIME_CONSISTENT.</p> <p>ONLY_FILES_TRANSFERRED (recommended): Perform verification only on files that were transferred. </p> <p>POINT_IN_TIME_CONSISTENT: Scan the entire source and entire destination at the end of the transfer to verify that source and destination are fully synchronized. This option isn't supported when transferring to S3 Glacier or S3 Glacier Deep Archive storage classes.</p> <p>NONE: No additional verification is done at the end of the transfer, but all data transmissions are integrity-checked with checksum verification during the transfer.</p>"
+          "documentation": "<p>A value that determines whether a data integrity verification should be performed at the end of a task execution after all data and metadata have been transferred. For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-task.html\">Configure task settings</a>. </p> <p>Default value: POINT_IN_TIME_CONSISTENT.</p> <p>ONLY_FILES_TRANSFERRED (recommended): Perform verification only on files that were transferred. </p> <p>POINT_IN_TIME_CONSISTENT: Scan the entire source and entire destination at the end of the transfer to verify that source and destination are fully synchronized. This option isn't supported when transferring to S3 Glacier Flexible Retrieval or S3 Glacier Deep Archive storage classes.</p> <p>NONE: No additional verification is done at the end of the transfer, but all data transmissions are integrity-checked with checksum verification during the transfer.</p>"
         },
         "OverwriteMode": {
           "shape": "OverwriteMode",
@@ -2249,7 +2823,7 @@
         },
         "Mtime": {
           "shape": "Mtime",
-          "documentation": "<p>A value that indicates the last time that a file was modified (that is, a file was written to) before the PREPARING phase. This option is required for cases when you need to run the same task more than one time. </p> <p>Default value: PRESERVE. </p> <p>PRESERVE: Preserve original <code>Mtime</code> (recommended)</p> <p> NONE: Ignore <code>Mtime</code>. </p> <note> <p>If <code>Mtime</code> is set to PRESERVE, <code>Atime</code> must be set to BEST_EFFORT.</p> <p>If <code>Mtime</code> is set to NONE, <code>Atime</code> must also be set to NONE. </p> </note>"
+          "documentation": "<p>A value that indicates the last time that a file was modified (that is, a file was written to) before the PREPARING phase. This option is required for cases when you need to run the same task more than one time. </p> <p>Default Value: <code>PRESERVE</code> </p> <p>PRESERVE: Preserve original <code>Mtime</code> (recommended)</p> <p> NONE: Ignore <code>Mtime</code>. </p> <note> <p>If <code>Mtime</code> is set to PRESERVE, <code>Atime</code> must be set to BEST_EFFORT.</p> <p>If <code>Mtime</code> is set to NONE, <code>Atime</code> must also be set to NONE. </p> </note>"
         },
         "Uid": {
           "shape": "Uid",
@@ -2290,6 +2864,10 @@
         "SecurityDescriptorCopyFlags": {
           "shape": "SmbSecurityDescriptorCopyFlags",
           "documentation": "<p>A value that determines which components of the SMB security descriptor are copied from source to destination objects. </p> <p>This value is only used for transfers between SMB and Amazon FSx for Windows File Server locations, or between two Amazon FSx for Windows File Server locations. For more information about how DataSync handles metadata, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/special-files.html\">How DataSync Handles Metadata and Special Files</a>. </p> <p>Default value: OWNER_DACL.</p> <p> <b>OWNER_DACL</b>: For each copied object, DataSync copies the following metadata:</p> <ul> <li> <p>Object owner.</p> </li> <li> <p>NTFS discretionary access control lists (DACLs), which determine whether to grant access to an object.</p> </li> </ul> <p>When choosing this option, DataSync does NOT copy the NTFS system access control lists (SACLs), which are used by administrators to log attempts to access a secured object.</p> <p> <b>OWNER_DACL_SACL</b>: For each copied object, DataSync copies the following metadata:</p> <ul> <li> <p>Object owner.</p> </li> <li> <p>NTFS discretionary access control lists (DACLs), which determine whether to grant access to an object.</p> </li> <li> <p>NTFS system access control lists (SACLs), which are used by administrators to log attempts to access a secured object.</p> </li> </ul> <p>Copying SACLs requires granting additional permissions to the Windows user that DataSync uses to access your SMB location. For information about choosing a user that ensures sufficient permissions to files, folders, and metadata, see <a href=\"create-smb-location.html#SMBuser\">user</a>.</p> <p> <b>NONE</b>: None of the SMB security descriptor components are copied. Destination objects are owned by the user that was provided for accessing the destination location. DACLs and SACLs are set based on the destination server’s configuration. </p>"
+        },
+        "ObjectTags": {
+          "shape": "ObjectTags",
+          "documentation": "<p>Specifies whether object tags are maintained when transferring between object storage systems. If you want your DataSync task to ignore object tags, specify the <code>NONE</code> value.</p> <p>Default Value: <code>PRESERVE</code> </p>"
         }
       },
       "documentation": "<p>Represents the options that are available to control the behavior of a <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html\">StartTaskExecution</a> operation. Behavior includes preserving metadata such as user ID (UID), group ID (GID), and file permissions, and also overwriting files in the destination, data integrity verification, and so on.</p> <p>A task has a set of default options associated with it. If you don't specify an option in <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html\">StartTaskExecution</a>, the default value is used. You can override the defaults options on each task execution by specifying an overriding <code>Options</code> value to <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html\">StartTaskExecution</a>.</p>"
@@ -2376,6 +2954,20 @@
       },
       "documentation": "<p>The VPC endpoint, subnet, and security group that an agent uses to access IP addresses in a VPC (Virtual Private Cloud).</p>"
     },
+    "QopConfiguration": {
+      "type": "structure",
+      "members": {
+        "RpcProtection": {
+          "shape": "HdfsRpcProtection",
+          "documentation": "<p>The RPC protection setting configured on the HDFS cluster. This setting corresponds to your <code>hadoop.rpc.protection</code> setting in your <code>core-site.xml</code> file on your Hadoop cluster.</p>"
+        },
+        "DataTransferProtection": {
+          "shape": "HdfsDataTransferProtection",
+          "documentation": "<p>The data transfer protection setting configured on the HDFS cluster. This setting corresponds to your <code>dfs.data.transfer.protection</code> setting in the <code>hdfs-site.xml</code> file on your Hadoop cluster.</p>"
+        }
+      },
+      "documentation": "<p>The Quality of Protection (QOP) configuration specifies the Remote Procedure Call (RPC) and data transfer privacy settings configured on the Hadoop Distributed File System (HDFS) cluster.</p>"
+    },
     "S3BucketArn": {
       "type": "string",
       "max": 156,
@@ -2389,10 +2981,10 @@
       "members": {
         "BucketAccessRoleArn": {
           "shape": "IamRoleArn",
-          "documentation": "<p>The Amazon S3 bucket to access. This bucket is used as a parameter in the <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/API_CreateLocationS3.html\">CreateLocationS3</a> operation. </p>"
+          "documentation": "<p>The ARN of the IAM role for accessing the S3 bucket. </p>"
         }
       },
-      "documentation": "<p>The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role that is used to access an Amazon S3 bucket.</p> <p>For detailed information about using such a role, see Creating a Location for Amazon S3 in the <i>DataSync User Guide</i>.</p>"
+      "documentation": "<p>The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role used to access an Amazon S3 bucket.</p> <p>For detailed information about using such a role, see Creating a Location for Amazon S3 in the <i>DataSync User Guide</i>.</p>"
     },
     "S3StorageClass": {
       "type": "string",
@@ -2489,11 +3081,11 @@
         },
         "Includes": {
           "shape": "FilterList",
-          "documentation": "<p>A list of filter rules that determines which files to include when running a task. The pattern should contain a single filter string that consists of the patterns to include. The patterns are delimited by \"|\" (that is, a pipe). For example: <code>\"/folder1|/folder2\"</code> </p> <p> </p>"
+          "documentation": "<p>A list of filter rules that determines which files to include when running a task. The pattern should contain a single filter string that consists of the patterns to include. The patterns are delimited by \"|\" (that is, a pipe), for example, <code>\"/folder1|/folder2\"</code>. </p> <p> </p>"
         },
         "Excludes": {
           "shape": "FilterList",
-          "documentation": "<p>A list of filter rules that determines which files to exclude from a task. The list should contain a single filter string that consists of the patterns to exclude. The patterns are delimited by \"|\" (that is, a pipe), for example, <code>\"/folder1|/folder2\"</code>. </p>"
+          "documentation": "<p>A list of filter rules that determines which files to exclude from a task. The list contains a single filter string that consists of the patterns to exclude. The patterns are delimited by \"|\" (that is, a pipe), for example, <code>\"/folder1|/folder2\"</code>. </p>"
         }
       },
       "documentation": "<p>StartTaskExecutionRequest</p>"
@@ -2537,7 +3129,7 @@
           "documentation": "<p>The value for an Amazon Web Services resource tag.</p>"
         }
       },
-      "documentation": "<p>Represents a single entry in a list of AWS resource tags. <code>TagListEntry</code> returns an array that contains a list of tasks when the <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/API_ListTagsForResource.html\">ListTagsForResource</a> operation is called.</p>"
+      "documentation": "<p>Represents a single entry in a list of Amazon Web Services resource tags. <code>TagListEntry</code> returns an array that contains a list of tasks when the <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/API_ListTagsForResource.html\">ListTagsForResource</a> operation is called.</p>"
     },
     "TagResourceRequest": {
       "type": "structure",
@@ -2808,6 +3400,70 @@
       "type": "structure",
       "members": {}
     },
+    "UpdateLocationHdfsRequest": {
+      "type": "structure",
+      "required": [
+        "LocationArn"
+      ],
+      "members": {
+        "LocationArn": {
+          "shape": "LocationArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the source HDFS cluster location.</p>"
+        },
+        "Subdirectory": {
+          "shape": "HdfsSubdirectory",
+          "documentation": "<p>A subdirectory in the HDFS cluster. This subdirectory is used to read data from or write data to the HDFS cluster.</p>"
+        },
+        "NameNodes": {
+          "shape": "HdfsNameNodeList",
+          "documentation": "<p>The NameNode that manages the HDFS namespace. The NameNode performs operations such as opening, closing, and renaming files and directories. The NameNode contains the information to map blocks of data to the DataNodes. You can use only one NameNode.</p>"
+        },
+        "BlockSize": {
+          "shape": "HdfsBlockSize",
+          "documentation": "<p>The size of the data blocks to write into the HDFS cluster. </p>"
+        },
+        "ReplicationFactor": {
+          "shape": "HdfsReplicationFactor",
+          "documentation": "<p>The number of DataNodes to replicate the data to when writing to the HDFS cluster. </p>"
+        },
+        "KmsKeyProviderUri": {
+          "shape": "KmsKeyProviderUri",
+          "documentation": "<p>The URI of the HDFS cluster's Key Management Server (KMS). </p>"
+        },
+        "QopConfiguration": {
+          "shape": "QopConfiguration",
+          "documentation": "<p>The Quality of Protection (QOP) configuration specifies the Remote Procedure Call (RPC) and data transfer privacy settings configured on the Hadoop Distributed File System (HDFS) cluster. </p>"
+        },
+        "AuthenticationType": {
+          "shape": "HdfsAuthenticationType",
+          "documentation": "<p>The type of authentication used to determine the identity of the user. </p>"
+        },
+        "SimpleUser": {
+          "shape": "HdfsUser",
+          "documentation": "<p>The user name used to identify the client on the host operating system.</p>"
+        },
+        "KerberosPrincipal": {
+          "shape": "KerberosPrincipal",
+          "documentation": "<p>The Kerberos principal with access to the files and folders on the HDFS cluster. </p>"
+        },
+        "KerberosKeytab": {
+          "shape": "KerberosKeytabFile",
+          "documentation": "<p>The Kerberos key table (keytab) that contains mappings between the defined Kerberos principal and the encrypted keys. You can load the keytab from a file by providing the file's address. If you use the CLI, it performs base64 encoding for you. Otherwise, provide the base64-encoded text.</p>"
+        },
+        "KerberosKrb5Conf": {
+          "shape": "KerberosKrb5ConfFile",
+          "documentation": "<p>The <code>krb5.conf</code> file that contains the Kerberos configuration information. You can load the <code>krb5.conf</code> file by providing the file's address. If you're using the CLI, it performs the base64 encoding for you. Otherwise, provide the base64-encoded text.</p>"
+        },
+        "AgentArns": {
+          "shape": "AgentArnList",
+          "documentation": "<p>The ARNs of the agents that are used to connect to the HDFS cluster. </p>"
+        }
+      }
+    },
+    "UpdateLocationHdfsResponse": {
+      "type": "structure",
+      "members": {}
+    },
     "UpdateLocationNfsRequest": {
       "type": "structure",
       "required": [
@@ -2948,7 +3604,7 @@
         },
         "Excludes": {
           "shape": "FilterList",
-          "documentation": "<p>A list of filter rules that determines which files to exclude from a task. The list should contain a single filter string that consists of the patterns to exclude. The patterns are delimited by \"|\" (that is, a pipe), for example: <code>\"/folder1|/folder2\"</code> </p> <p> </p>"
+          "documentation": "<p>A list of filter rules that determines which files to exclude from a task. The list should contain a single filter string that consists of the patterns to exclude. The patterns are delimited by \"|\" (that is, a pipe), for example, <code>\"/folder1|/folder2\"</code>.</p> <p> </p>"
         },
         "Schedule": {
           "shape": "TaskSchedule",
@@ -2960,11 +3616,11 @@
         },
         "CloudWatchLogGroupArn": {
           "shape": "LogGroupArn",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the resource name of the CloudWatch LogGroup.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the resource name of the Amazon CloudWatch log group.</p>"
         },
         "Includes": {
           "shape": "FilterList",
-          "documentation": "<p>A list of filter rules that determines which files to include when running a task. The pattern should contain a single filter string that consists of the patterns to include. The patterns are delimited by \"|\" (that is, a pipe). For example: <code>\"/folder1|/folder2</code>\"</p>"
+          "documentation": "<p>A list of filter rules that determines which files to include when running a task. The pattern contains a single filter string that consists of the patterns to include. The patterns are delimited by \"|\" (that is, a pipe), for example, <code>\"/folder1|/folder2\"</code>.</p>"
         }
       },
       "documentation": "<p>UpdateTaskResponse</p>"

@@ -52,19 +52,27 @@ declare class Mgn extends Service {
    */
   deleteSourceServer(callback?: (err: AWSError, data: Mgn.Types.DeleteSourceServerResponse) => void): Request<Mgn.Types.DeleteSourceServerResponse, AWSError>;
   /**
-   * Retrieves detailed Job log with paging.
+   * Deletes a given vCenter client by ID.
+   */
+  deleteVcenterClient(params: Mgn.Types.DeleteVcenterClientRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a given vCenter client by ID.
+   */
+  deleteVcenterClient(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Retrieves detailed job log items with paging.
    */
   describeJobLogItems(params: Mgn.Types.DescribeJobLogItemsRequest, callback?: (err: AWSError, data: Mgn.Types.DescribeJobLogItemsResponse) => void): Request<Mgn.Types.DescribeJobLogItemsResponse, AWSError>;
   /**
-   * Retrieves detailed Job log with paging.
+   * Retrieves detailed job log items with paging.
    */
   describeJobLogItems(callback?: (err: AWSError, data: Mgn.Types.DescribeJobLogItemsResponse) => void): Request<Mgn.Types.DescribeJobLogItemsResponse, AWSError>;
   /**
-   * Returns a list of Jobs. Use the JobsID and fromDate and toData filters to limit which jobs are returned. The response is sorted by creationDataTime - latest date first. Jobs are normaly created by the StartTest, StartCutover, and TerminateTargetInstances APIs. Jobs are also created by DiagnosticLaunch and TerminateDiagnosticInstances, which are APIs available only to *Support* and only used in response to relevant support tickets.
+   * Returns a list of Jobs. Use the JobsID and fromDate and toData filters to limit which jobs are returned. The response is sorted by creationDataTime - latest date first. Jobs are normally created by the StartTest, StartCutover, and TerminateTargetInstances APIs. Jobs are also created by DiagnosticLaunch and TerminateDiagnosticInstances, which are APIs available only to *Support* and only used in response to relevant support tickets.
    */
   describeJobs(params: Mgn.Types.DescribeJobsRequest, callback?: (err: AWSError, data: Mgn.Types.DescribeJobsResponse) => void): Request<Mgn.Types.DescribeJobsResponse, AWSError>;
   /**
-   * Returns a list of Jobs. Use the JobsID and fromDate and toData filters to limit which jobs are returned. The response is sorted by creationDataTime - latest date first. Jobs are normaly created by the StartTest, StartCutover, and TerminateTargetInstances APIs. Jobs are also created by DiagnosticLaunch and TerminateDiagnosticInstances, which are APIs available only to *Support* and only used in response to relevant support tickets.
+   * Returns a list of Jobs. Use the JobsID and fromDate and toData filters to limit which jobs are returned. The response is sorted by creationDataTime - latest date first. Jobs are normally created by the StartTest, StartCutover, and TerminateTargetInstances APIs. Jobs are also created by DiagnosticLaunch and TerminateDiagnosticInstances, which are APIs available only to *Support* and only used in response to relevant support tickets.
    */
   describeJobs(callback?: (err: AWSError, data: Mgn.Types.DescribeJobsResponse) => void): Request<Mgn.Types.DescribeJobsResponse, AWSError>;
   /**
@@ -84,19 +92,27 @@ declare class Mgn extends Service {
    */
   describeSourceServers(callback?: (err: AWSError, data: Mgn.Types.DescribeSourceServersResponse) => void): Request<Mgn.Types.DescribeSourceServersResponse, AWSError>;
   /**
-   * Disconnects specific Source Servers from Application Migration Service. Data replication is stopped immediately. All AWS resources created by Application Migration Service for enabling the replication of these source servers will be terminated / deleted within 90 minutes. Launched Test or Cutover instances will NOT be terminated. If the agent on the source server has not been prevented from communciating with the Application Migration Service service, then it will receive a command to uninstall itself (within approximately 10 minutes). The following properties of the SourceServer will be changed immediately: dataReplicationInfo.dataReplicationState will be set to DISCONNECTED; The totalStorageBytes property for each of dataReplicationInfo.replicatedDisks will be set to zero; dataReplicationInfo.lagDuration and dataReplicationInfo.lagDurationwill be nullified.
+   * Returns a list of the installed vCenter clients.
+   */
+  describeVcenterClients(params: Mgn.Types.DescribeVcenterClientsRequest, callback?: (err: AWSError, data: Mgn.Types.DescribeVcenterClientsResponse) => void): Request<Mgn.Types.DescribeVcenterClientsResponse, AWSError>;
+  /**
+   * Returns a list of the installed vCenter clients.
+   */
+  describeVcenterClients(callback?: (err: AWSError, data: Mgn.Types.DescribeVcenterClientsResponse) => void): Request<Mgn.Types.DescribeVcenterClientsResponse, AWSError>;
+  /**
+   * Disconnects specific Source Servers from Application Migration Service. Data replication is stopped immediately. All AWS resources created by Application Migration Service for enabling the replication of these source servers will be terminated / deleted within 90 minutes. Launched Test or Cutover instances will NOT be terminated. If the agent on the source server has not been prevented from communicating with the Application Migration Service service, then it will receive a command to uninstall itself (within approximately 10 minutes). The following properties of the SourceServer will be changed immediately: dataReplicationInfo.dataReplicationState will be set to DISCONNECTED; The totalStorageBytes property for each of dataReplicationInfo.replicatedDisks will be set to zero; dataReplicationInfo.lagDuration and dataReplicationInfo.lagDuration will be nullified.
    */
   disconnectFromService(params: Mgn.Types.DisconnectFromServiceRequest, callback?: (err: AWSError, data: Mgn.Types.SourceServer) => void): Request<Mgn.Types.SourceServer, AWSError>;
   /**
-   * Disconnects specific Source Servers from Application Migration Service. Data replication is stopped immediately. All AWS resources created by Application Migration Service for enabling the replication of these source servers will be terminated / deleted within 90 minutes. Launched Test or Cutover instances will NOT be terminated. If the agent on the source server has not been prevented from communciating with the Application Migration Service service, then it will receive a command to uninstall itself (within approximately 10 minutes). The following properties of the SourceServer will be changed immediately: dataReplicationInfo.dataReplicationState will be set to DISCONNECTED; The totalStorageBytes property for each of dataReplicationInfo.replicatedDisks will be set to zero; dataReplicationInfo.lagDuration and dataReplicationInfo.lagDurationwill be nullified.
+   * Disconnects specific Source Servers from Application Migration Service. Data replication is stopped immediately. All AWS resources created by Application Migration Service for enabling the replication of these source servers will be terminated / deleted within 90 minutes. Launched Test or Cutover instances will NOT be terminated. If the agent on the source server has not been prevented from communicating with the Application Migration Service service, then it will receive a command to uninstall itself (within approximately 10 minutes). The following properties of the SourceServer will be changed immediately: dataReplicationInfo.dataReplicationState will be set to DISCONNECTED; The totalStorageBytes property for each of dataReplicationInfo.replicatedDisks will be set to zero; dataReplicationInfo.lagDuration and dataReplicationInfo.lagDuration will be nullified.
    */
   disconnectFromService(callback?: (err: AWSError, data: Mgn.Types.SourceServer) => void): Request<Mgn.Types.SourceServer, AWSError>;
   /**
-   * Finalizes the cutover immediately for specific Source Servers. All AWS resources created by Application Migration Service for enabling the replication of these source servers will be terminated / deleted within 90 minutes. Launched Test or Cutover instances will NOT be terminated. The AWS Replication Agent will receive a command to uninstall itself (within 10 minutes). The following properties of the SourceServer will be changed immediately: dataReplicationInfo.dataReplicationState will be to DISCONNECTED; The SourceServer.lifeCycle.state will be changed to CUTOVER; The totalStorageBytes property fo each of dataReplicationInfo.replicatedDisks will be set to zero; dataReplicationInfo.lagDuration and dataReplicationInfo.lagDurationwill be nullified.
+   * Finalizes the cutover immediately for specific Source Servers. All AWS resources created by Application Migration Service for enabling the replication of these source servers will be terminated / deleted within 90 minutes. Launched Test or Cutover instances will NOT be terminated. The AWS Replication Agent will receive a command to uninstall itself (within 10 minutes). The following properties of the SourceServer will be changed immediately: dataReplicationInfo.dataReplicationState will be changed to DISCONNECTED; The SourceServer.lifeCycle.state will be changed to CUTOVER; The totalStorageBytes property fo each of dataReplicationInfo.replicatedDisks will be set to zero; dataReplicationInfo.lagDuration and dataReplicationInfo.lagDuration will be nullified.
    */
   finalizeCutover(params: Mgn.Types.FinalizeCutoverRequest, callback?: (err: AWSError, data: Mgn.Types.SourceServer) => void): Request<Mgn.Types.SourceServer, AWSError>;
   /**
-   * Finalizes the cutover immediately for specific Source Servers. All AWS resources created by Application Migration Service for enabling the replication of these source servers will be terminated / deleted within 90 minutes. Launched Test or Cutover instances will NOT be terminated. The AWS Replication Agent will receive a command to uninstall itself (within 10 minutes). The following properties of the SourceServer will be changed immediately: dataReplicationInfo.dataReplicationState will be to DISCONNECTED; The SourceServer.lifeCycle.state will be changed to CUTOVER; The totalStorageBytes property fo each of dataReplicationInfo.replicatedDisks will be set to zero; dataReplicationInfo.lagDuration and dataReplicationInfo.lagDurationwill be nullified.
+   * Finalizes the cutover immediately for specific Source Servers. All AWS resources created by Application Migration Service for enabling the replication of these source servers will be terminated / deleted within 90 minutes. Launched Test or Cutover instances will NOT be terminated. The AWS Replication Agent will receive a command to uninstall itself (within 10 minutes). The following properties of the SourceServer will be changed immediately: dataReplicationInfo.dataReplicationState will be changed to DISCONNECTED; The SourceServer.lifeCycle.state will be changed to CUTOVER; The totalStorageBytes property fo each of dataReplicationInfo.replicatedDisks will be set to zero; dataReplicationInfo.lagDuration and dataReplicationInfo.lagDuration will be nullified.
    */
   finalizeCutover(callback?: (err: AWSError, data: Mgn.Types.SourceServer) => void): Request<Mgn.Types.SourceServer, AWSError>;
   /**
@@ -132,11 +148,11 @@ declare class Mgn extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: Mgn.Types.ListTagsForResourceResponse) => void): Request<Mgn.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Archives specific Source Servers by setting the SourceServer.isArchived property to true for specified SourceServers by ID. This command only works for SourceServers with a lifecycle.state which equals DISCONNECTED or CUTOVER.
+   * Archives specific Source Servers by setting the SourceServer.isArchived property to true for specified SourceServers by ID. This command only works for SourceServers with a lifecycle. state which equals DISCONNECTED or CUTOVER.
    */
   markAsArchived(params: Mgn.Types.MarkAsArchivedRequest, callback?: (err: AWSError, data: Mgn.Types.SourceServer) => void): Request<Mgn.Types.SourceServer, AWSError>;
   /**
-   * Archives specific Source Servers by setting the SourceServer.isArchived property to true for specified SourceServers by ID. This command only works for SourceServers with a lifecycle.state which equals DISCONNECTED or CUTOVER.
+   * Archives specific Source Servers by setting the SourceServer.isArchived property to true for specified SourceServers by ID. This command only works for SourceServers with a lifecycle. state which equals DISCONNECTED or CUTOVER.
    */
   markAsArchived(callback?: (err: AWSError, data: Mgn.Types.SourceServer) => void): Request<Mgn.Types.SourceServer, AWSError>;
   /**
@@ -156,11 +172,19 @@ declare class Mgn extends Service {
    */
   startCutover(callback?: (err: AWSError, data: Mgn.Types.StartCutoverResponse) => void): Request<Mgn.Types.StartCutoverResponse, AWSError>;
   /**
-   * Lauches a Test Instance for specific Source Servers. This command starts a LAUNCH job whose initiatedBy property is StartTest and changes the SourceServer.lifeCycle.state property to TESTING.
+   * Starts replication for SNAPSHOT_SHIPPING agents.
+   */
+  startReplication(params: Mgn.Types.StartReplicationRequest, callback?: (err: AWSError, data: Mgn.Types.SourceServer) => void): Request<Mgn.Types.SourceServer, AWSError>;
+  /**
+   * Starts replication for SNAPSHOT_SHIPPING agents.
+   */
+  startReplication(callback?: (err: AWSError, data: Mgn.Types.SourceServer) => void): Request<Mgn.Types.SourceServer, AWSError>;
+  /**
+   * Launches a Test Instance for specific Source Servers. This command starts a LAUNCH job whose initiatedBy property is StartTest and changes the SourceServer.lifeCycle.state property to TESTING.
    */
   startTest(params: Mgn.Types.StartTestRequest, callback?: (err: AWSError, data: Mgn.Types.StartTestResponse) => void): Request<Mgn.Types.StartTestResponse, AWSError>;
   /**
-   * Lauches a Test Instance for specific Source Servers. This command starts a LAUNCH job whose initiatedBy property is StartTest and changes the SourceServer.lifeCycle.state property to TESTING.
+   * Launches a Test Instance for specific Source Servers. This command starts a LAUNCH job whose initiatedBy property is StartTest and changes the SourceServer.lifeCycle.state property to TESTING.
    */
   startTest(callback?: (err: AWSError, data: Mgn.Types.StartTestResponse) => void): Request<Mgn.Types.StartTestResponse, AWSError>;
   /**
@@ -211,10 +235,19 @@ declare class Mgn extends Service {
    * Updates multiple ReplicationConfigurationTemplates by ID.
    */
   updateReplicationConfigurationTemplate(callback?: (err: AWSError, data: Mgn.Types.ReplicationConfigurationTemplate) => void): Request<Mgn.Types.ReplicationConfigurationTemplate, AWSError>;
+  /**
+   * Allows you to change between the AGENT_BASED replication type and the SNAPSHOT_SHIPPING replication type.
+   */
+  updateSourceServerReplicationType(params: Mgn.Types.UpdateSourceServerReplicationTypeRequest, callback?: (err: AWSError, data: Mgn.Types.SourceServer) => void): Request<Mgn.Types.SourceServer, AWSError>;
+  /**
+   * Allows you to change between the AGENT_BASED replication type and the SNAPSHOT_SHIPPING replication type.
+   */
+  updateSourceServerReplicationType(callback?: (err: AWSError, data: Mgn.Types.SourceServer) => void): Request<Mgn.Types.SourceServer, AWSError>;
 }
 declare namespace Mgn {
   export type ARN = string;
   export type Boolean = boolean;
+  export type BootMode = "LEGACY_BIOS"|"UEFI"|string;
   export type BoundedString = string;
   export interface CPU {
     /**
@@ -262,15 +295,15 @@ declare namespace Mgn {
      */
     dataPlaneRouting: ReplicationConfigurationDataPlaneRouting;
     /**
-     * Request to configure the Staging Disk EBS volume type to "gp2" during Replication Settings template creation.
+     * Request to configure the default large staging disk EBS volume type during Replication Settings template creation.
      */
     defaultLargeStagingDiskType: ReplicationConfigurationDefaultLargeStagingDiskType;
     /**
-     * Request to configure EBS enryption during Replication Settings template creation.
+     * Request to configure EBS encryption during Replication Settings template creation.
      */
     ebsEncryption: ReplicationConfigurationEbsEncryption;
     /**
-     * Request to configure an EBS enryption key during Replication Settings template creation.
+     * Request to configure an EBS encryption key during Replication Settings template creation.
      */
     ebsEncryptionKeyArn?: ARN;
     /**
@@ -278,7 +311,7 @@ declare namespace Mgn {
      */
     replicationServerInstanceType: EC2InstanceType;
     /**
-     * Request to configure the Replication Server Secuirity group ID during Replication Settings template creation.
+     * Request to configure the Replication Server Security group ID during Replication Settings template creation.
      */
     replicationServersSecurityGroupsIDs: ReplicationServersSecurityGroupsIDs;
     /**
@@ -286,7 +319,7 @@ declare namespace Mgn {
      */
     stagingAreaSubnetId: SubnetID;
     /**
-     * Request to configure Staiging Area tags during Replication Settings template creation.
+     * Request to configure Staging Area tags during Replication Settings template creation.
      */
     stagingAreaTags: TagsMap;
     /**
@@ -308,7 +341,7 @@ declare namespace Mgn {
      */
     rawError?: LargeBoundedString;
   }
-  export type DataReplicationErrorString = "AGENT_NOT_SEEN"|"SNAPSHOTS_FAILURE"|"NOT_CONVERGING"|"UNSTABLE_NETWORK"|"FAILED_TO_CREATE_SECURITY_GROUP"|"FAILED_TO_LAUNCH_REPLICATION_SERVER"|"FAILED_TO_BOOT_REPLICATION_SERVER"|"FAILED_TO_AUTHENTICATE_WITH_SERVICE"|"FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE"|"FAILED_TO_CREATE_STAGING_DISKS"|"FAILED_TO_ATTACH_STAGING_DISKS"|"FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT"|"FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER"|"FAILED_TO_START_DATA_TRANSFER"|string;
+  export type DataReplicationErrorString = "AGENT_NOT_SEEN"|"SNAPSHOTS_FAILURE"|"NOT_CONVERGING"|"UNSTABLE_NETWORK"|"FAILED_TO_CREATE_SECURITY_GROUP"|"FAILED_TO_LAUNCH_REPLICATION_SERVER"|"FAILED_TO_BOOT_REPLICATION_SERVER"|"FAILED_TO_AUTHENTICATE_WITH_SERVICE"|"FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE"|"FAILED_TO_CREATE_STAGING_DISKS"|"FAILED_TO_ATTACH_STAGING_DISKS"|"FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT"|"FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER"|"FAILED_TO_START_DATA_TRANSFER"|"UNSUPPORTED_VM_CONFIGURATION"|"LAST_SNAPSHOT_JOB_FAILED"|string;
   export interface DataReplicationInfo {
     /**
      * Error in obtaining data replication info.
@@ -327,9 +360,13 @@ declare namespace Mgn {
      */
     etaDateTime?: ISO8601DatetimeString;
     /**
-     * Request to query data replication lag durating.
+     * Request to query data replication lag duration.
      */
     lagDuration?: ISO8601DatetimeString;
+    /**
+     * Request to query data replication last snapshot time.
+     */
+    lastSnapshotDateTime?: ISO8601DatetimeString;
     /**
      * Request to query disks replicated.
      */
@@ -385,7 +422,7 @@ declare namespace Mgn {
   export type DataReplicationInitiationStepName = "WAIT"|"CREATE_SECURITY_GROUP"|"LAUNCH_REPLICATION_SERVER"|"BOOT_REPLICATION_SERVER"|"AUTHENTICATE_WITH_SERVICE"|"DOWNLOAD_REPLICATION_SOFTWARE"|"CREATE_STAGING_DISKS"|"ATTACH_STAGING_DISKS"|"PAIR_REPLICATION_SERVER_WITH_AGENT"|"CONNECT_AGENT_TO_REPLICATION_SERVER"|"START_DATA_TRANSFER"|string;
   export type DataReplicationInitiationStepStatus = "NOT_STARTED"|"IN_PROGRESS"|"SUCCEEDED"|"FAILED"|"SKIPPED"|string;
   export type DataReplicationInitiationSteps = DataReplicationInitiationStep[];
-  export type DataReplicationState = "STOPPED"|"INITIATING"|"INITIAL_SYNC"|"BACKLOG"|"CREATING_SNAPSHOT"|"CONTINUOUS"|"PAUSED"|"RESCAN"|"STALLED"|"DISCONNECTED"|string;
+  export type DataReplicationState = "STOPPED"|"INITIATING"|"INITIAL_SYNC"|"BACKLOG"|"CREATING_SNAPSHOT"|"CONTINUOUS"|"PAUSED"|"RESCAN"|"STALLED"|"DISCONNECTED"|"PENDING_SNAPSHOT_SHIPPING"|"SHIPPING_SNAPSHOT"|string;
   export interface DeleteJobRequest {
     /**
      * Request to delete Job from service by Job ID.
@@ -409,6 +446,12 @@ declare namespace Mgn {
     sourceServerID: SourceServerID;
   }
   export interface DeleteSourceServerResponse {
+  }
+  export interface DeleteVcenterClientRequest {
+    /**
+     * ID of resource to be deleted.
+     */
+    vcenterClientID: VcenterClientID;
   }
   export interface DescribeJobLogItemsRequest {
     /**
@@ -438,13 +481,13 @@ declare namespace Mgn {
     /**
      * Request to describe Job log filters.
      */
-    filters: DescribeJobsRequestFilters;
+    filters?: DescribeJobsRequestFilters;
     /**
-     * Request to describe Job log by max results.
+     * Request to describe job log items by max results.
      */
     maxResults?: StrictlyPositiveInteger;
     /**
-     * Request to describe Job logby next token.
+     * Request to describe job log items by next token.
      */
     nextToken?: PaginationToken;
   }
@@ -458,7 +501,7 @@ declare namespace Mgn {
      */
     jobIDs?: DescribeJobsRequestFiltersJobIDs;
     /**
-     * Request to describe Job log by last date.
+     * Request to describe job log items by last date.
      */
     toDate?: ISO8601DatetimeString;
   }
@@ -485,7 +528,7 @@ declare namespace Mgn {
     /**
      * Request to describe Replication Configuration template by template IDs.
      */
-    replicationConfigurationTemplateIDs: ReplicationConfigurationTemplateIDs;
+    replicationConfigurationTemplateIDs?: ReplicationConfigurationTemplateIDs;
   }
   export interface DescribeReplicationConfigurationTemplatesResponse {
     /**
@@ -501,7 +544,7 @@ declare namespace Mgn {
     /**
      * Request to filter Source Servers list.
      */
-    filters: DescribeSourceServersRequestFilters;
+    filters?: DescribeSourceServersRequestFilters;
     /**
      * Request to filter Source Servers list by maximum results.
      */
@@ -517,6 +560,14 @@ declare namespace Mgn {
      */
     isArchived?: Boolean;
     /**
+     * Request to filter Source Servers list by life cycle states.
+     */
+    lifeCycleStates?: LifeCycleStates;
+    /**
+     * Request to filter Source Servers list by replication type.
+     */
+    replicationTypes?: ReplicationTypes;
+    /**
      * Request to filter Source Servers list by Source Server ID.
      */
     sourceServerIDs?: DescribeSourceServersRequestFiltersIDs;
@@ -529,6 +580,26 @@ declare namespace Mgn {
     items?: SourceServersList;
     /**
      * Request to filter Source Servers next token.
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface DescribeVcenterClientsRequest {
+    /**
+     * Maximum results to be returned in DescribeVcenterClients.
+     */
+    maxResults?: StrictlyPositiveInteger;
+    /**
+     * Next pagination token to be provided for DescribeVcenterClients.
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface DescribeVcenterClientsResponse {
+    /**
+     * List of items returned by DescribeVcenterClients.
+     */
+    items?: VcenterClientList;
+    /**
+     * Next pagination token returned from DescribeVcenterClients.
      */
     nextToken?: PaginationToken;
   }
@@ -553,7 +624,7 @@ declare namespace Mgn {
   export type EC2InstanceType = string;
   export interface FinalizeCutoverRequest {
     /**
-     * Request to finalize Cutover by Soure Server ID.
+     * Request to finalize Cutover by Source Server ID.
      */
     sourceServerID: SourceServerID;
   }
@@ -566,7 +637,7 @@ declare namespace Mgn {
   }
   export interface GetReplicationConfigurationRequest {
     /**
-     * Request to get Replication Configuaration by Source Server ID.
+     * Request to get Replication Configuration by Source Server ID.
      */
     sourceServerID: SourceServerID;
   }
@@ -585,6 +656,10 @@ declare namespace Mgn {
      * Hostname identification hint.
      */
     hostname?: BoundedString;
+    /**
+     * vCenter VM path identification hint.
+     */
+    vmPath?: BoundedString;
     /**
      * vmWare UUID identification hint.
      */
@@ -625,7 +700,7 @@ declare namespace Mgn {
      */
     status?: JobStatus;
     /**
-     * Tags associated with spcific Job.
+     * Tags associated with specific Job.
      */
     tags?: TagsMap;
     /**
@@ -674,6 +749,10 @@ declare namespace Mgn {
   export type LargeBoundedString = string;
   export interface LaunchConfiguration {
     /**
+     * Launch configuration boot mode.
+     */
+    bootMode?: BootMode;
+    /**
      * Copy Private IP during Launch Configuration.
      */
     copyPrivateIp?: Boolean;
@@ -682,27 +761,27 @@ declare namespace Mgn {
      */
     copyTags?: Boolean;
     /**
-     * Configure EC2 lauch configuration template ID.
+     * Launch configuration EC2 Launch template ID.
      */
     ec2LaunchTemplateID?: BoundedString;
     /**
-     * Configure launch dispostion for launch configuration.
+     * Launch disposition for launch configuration.
      */
     launchDisposition?: LaunchDisposition;
     /**
-     * Configure launch configuration OS licensing.
+     * Launch configuration OS licensing.
      */
     licensing?: Licensing;
     /**
-     * Configure launch configuration name.
+     * Launch configuration name.
      */
     name?: SmallBoundedString;
     /**
-     * Configure launch configuration Source Server ID.
+     * Launch configuration Source Server ID.
      */
     sourceServerID?: SourceServerID;
     /**
-     * Configure launch configuration Target instance type right sizing method.
+     * Launch configuration Target instance type right sizing method.
      */
     targetInstanceTypeRightSizingMethod?: TargetInstanceTypeRightSizingMethod;
   }
@@ -710,15 +789,15 @@ declare namespace Mgn {
   export type LaunchStatus = "PENDING"|"IN_PROGRESS"|"LAUNCHED"|"FAILED"|"TERMINATED"|string;
   export interface LaunchedInstance {
     /**
-     * Configure launced instance EC2 ID.
+     * Launched instance EC2 ID.
      */
     ec2InstanceID?: EC2InstanceID;
     /**
-     * Configure launced instance first boot.
+     * Launched instance first boot.
      */
     firstBoot?: FirstBoot;
     /**
-     * Configure launced instance Job ID.
+     * Launched instance Job ID.
      */
     jobID?: JobID;
   }
@@ -796,7 +875,7 @@ declare namespace Mgn {
   }
   export interface LifeCycleLastTest {
     /**
-     * Lifecycle last Test finlized.
+     * Lifecycle last Test finalized.
      */
     finalized?: LifeCycleLastTestFinalized;
     /**
@@ -830,7 +909,8 @@ declare namespace Mgn {
      */
     apiCallDateTime?: ISO8601DatetimeString;
   }
-  export type LifeCycleState = "STOPPED"|"NOT_READY"|"READY_FOR_TEST"|"TESTING"|"READY_FOR_CUTOVER"|"CUTTING_OVER"|"CUTOVER"|"DISCONNECTED"|string;
+  export type LifeCycleState = "STOPPED"|"NOT_READY"|"READY_FOR_TEST"|"TESTING"|"READY_FOR_CUTOVER"|"CUTTING_OVER"|"CUTOVER"|"DISCONNECTED"|"DISCOVERED"|string;
+  export type LifeCycleStates = LifeCycleState[];
   export interface ListTagsForResourceRequest {
     /**
      * List tags for resource request by ARN.
@@ -946,7 +1026,7 @@ declare namespace Mgn {
     useDedicatedReplicationServer?: Boolean;
   }
   export type ReplicationConfigurationDataPlaneRouting = "PRIVATE_IP"|"PUBLIC_IP"|string;
-  export type ReplicationConfigurationDefaultLargeStagingDiskType = "GP2"|"ST1"|string;
+  export type ReplicationConfigurationDefaultLargeStagingDiskType = "GP2"|"ST1"|"GP3"|string;
   export type ReplicationConfigurationEbsEncryption = "DEFAULT"|"CUSTOM"|string;
   export interface ReplicationConfigurationReplicatedDisk {
     /**
@@ -965,8 +1045,12 @@ declare namespace Mgn {
      * Replication Configuration replicated disk staging disk type.
      */
     stagingDiskType?: ReplicationConfigurationReplicatedDiskStagingDiskType;
+    /**
+     * Replication Configuration replicated disk throughput.
+     */
+    throughput?: PositiveInteger;
   }
-  export type ReplicationConfigurationReplicatedDiskStagingDiskType = "AUTO"|"GP2"|"IO1"|"SC1"|"ST1"|"STANDARD"|string;
+  export type ReplicationConfigurationReplicatedDiskStagingDiskType = "AUTO"|"GP2"|"IO1"|"SC1"|"ST1"|"STANDARD"|"GP3"|"IO2"|string;
   export type ReplicationConfigurationReplicatedDisks = ReplicationConfigurationReplicatedDisk[];
   export interface ReplicationConfigurationTemplate {
     /**
@@ -978,7 +1062,7 @@ declare namespace Mgn {
      */
     associateDefaultSecurityGroup?: Boolean;
     /**
-     * Replication Configuration template bandwidth throtting.
+     * Replication Configuration template bandwidth throttling.
      */
     bandwidthThrottling?: PositiveInteger;
     /**
@@ -990,7 +1074,7 @@ declare namespace Mgn {
      */
     dataPlaneRouting?: ReplicationConfigurationDataPlaneRouting;
     /**
-     * Replication Configuration template use dedault large Staging Disk type.
+     * Replication Configuration template use default large Staging Disk type.
      */
     defaultLargeStagingDiskType?: ReplicationConfigurationDefaultLargeStagingDiskType;
     /**
@@ -1002,7 +1086,7 @@ declare namespace Mgn {
      */
     ebsEncryptionKeyArn?: ARN;
     /**
-     * Replication Configuration template template ID.
+     * Replication Configuration template ID.
      */
     replicationConfigurationTemplateID: ReplicationConfigurationTemplateID;
     /**
@@ -1034,6 +1118,8 @@ declare namespace Mgn {
   export type ReplicationConfigurationTemplateIDs = ReplicationConfigurationTemplateID[];
   export type ReplicationConfigurationTemplates = ReplicationConfigurationTemplate[];
   export type ReplicationServersSecurityGroupsIDs = SecurityGroupID[];
+  export type ReplicationType = "AGENT_BASED"|"SNAPSHOT_SHIPPING"|string;
+  export type ReplicationTypes = ReplicationType[];
   export interface RetryDataReplicationRequest {
     /**
      * Retry data replication for Source Server ID.
@@ -1098,6 +1184,10 @@ declare namespace Mgn {
      */
     lifeCycle?: LifeCycle;
     /**
+     * Source server replication type.
+     */
+    replicationType?: ReplicationType;
+    /**
      * Source server properties.
      */
     sourceProperties?: SourceProperties;
@@ -1109,6 +1199,10 @@ declare namespace Mgn {
      * Source server Tags.
      */
     tags?: TagsMap;
+    /**
+     * Source server vCenter client id.
+     */
+    vcenterClientID?: VcenterClientID;
   }
   export type SourceServerID = string;
   export type SourceServersList = SourceServer[];
@@ -1128,6 +1222,12 @@ declare namespace Mgn {
      * Start Cutover Job response.
      */
     job?: Job;
+  }
+  export interface StartReplicationRequest {
+    /**
+     * ID of source server on which to start replication.
+     */
+    sourceServerID: SourceServerID;
   }
   export interface StartTestRequest {
     /**
@@ -1191,6 +1291,10 @@ declare namespace Mgn {
     tagKeys: TagKeys;
   }
   export interface UpdateLaunchConfigurationRequest {
+    /**
+     * Update Launch configuration boot mode request.
+     */
+    bootMode?: BootMode;
     /**
      * Update Launch configuration copy Private IP request.
      */
@@ -1340,6 +1444,52 @@ declare namespace Mgn {
      */
     useDedicatedReplicationServer?: Boolean;
   }
+  export interface UpdateSourceServerReplicationTypeRequest {
+    /**
+     * Replication type to which to update source server.
+     */
+    replicationType: ReplicationType;
+    /**
+     * ID of source server on which to update replication type.
+     */
+    sourceServerID: SourceServerID;
+  }
+  export interface VcenterClient {
+    /**
+     * Arn of vCenter client.
+     */
+    arn?: ARN;
+    /**
+     * Datacenter name of vCenter client.
+     */
+    datacenterName?: BoundedString;
+    /**
+     * Hostname of vCenter client .
+     */
+    hostname?: BoundedString;
+    /**
+     * Last seen time of vCenter client.
+     */
+    lastSeenDatetime?: ISO8601DatetimeString;
+    /**
+     * Tags for Source Server of vCenter client.
+     */
+    sourceServerTags?: TagsMap;
+    /**
+     * Tags for vCenter client.
+     */
+    tags?: TagsMap;
+    /**
+     * ID of vCenter client.
+     */
+    vcenterClientID?: VcenterClientID;
+    /**
+     * Vcenter UUID of vCenter client.
+     */
+    vcenterUUID?: BoundedString;
+  }
+  export type VcenterClientID = string;
+  export type VcenterClientList = VcenterClient[];
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

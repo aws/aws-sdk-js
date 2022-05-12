@@ -325,11 +325,11 @@ declare class S3Control extends Service {
    */
   listAccessPoints(callback?: (err: AWSError, data: S3Control.Types.ListAccessPointsResult) => void): Request<S3Control.Types.ListAccessPointsResult, AWSError>;
   /**
-   * Returns a list of the access points associated with the Object Lambda Access Point. You can retrieve up to 1000 access points per call. If there are more than 1,000 access points (or the number specified in maxResults, whichever is less), the response will include a continuation token that you can use to list the additional access points. The following actions are related to ListAccessPointsForObjectLambda:    CreateAccessPointForObjectLambda     DeleteAccessPointForObjectLambda     GetAccessPointForObjectLambda   
+   * Returns some or all (up to 1,000) access points associated with the Object Lambda Access Point per call. If there are more access points than what can be returned in one call, the response will include a continuation token that you can use to list the additional access points. The following actions are related to ListAccessPointsForObjectLambda:    CreateAccessPointForObjectLambda     DeleteAccessPointForObjectLambda     GetAccessPointForObjectLambda   
    */
   listAccessPointsForObjectLambda(params: S3Control.Types.ListAccessPointsForObjectLambdaRequest, callback?: (err: AWSError, data: S3Control.Types.ListAccessPointsForObjectLambdaResult) => void): Request<S3Control.Types.ListAccessPointsForObjectLambdaResult, AWSError>;
   /**
-   * Returns a list of the access points associated with the Object Lambda Access Point. You can retrieve up to 1000 access points per call. If there are more than 1,000 access points (or the number specified in maxResults, whichever is less), the response will include a continuation token that you can use to list the additional access points. The following actions are related to ListAccessPointsForObjectLambda:    CreateAccessPointForObjectLambda     DeleteAccessPointForObjectLambda     GetAccessPointForObjectLambda   
+   * Returns some or all (up to 1,000) access points associated with the Object Lambda Access Point per call. If there are more access points than what can be returned in one call, the response will include a continuation token that you can use to list the additional access points. The following actions are related to ListAccessPointsForObjectLambda:    CreateAccessPointForObjectLambda     DeleteAccessPointForObjectLambda     GetAccessPointForObjectLambda   
    */
   listAccessPointsForObjectLambda(callback?: (err: AWSError, data: S3Control.Types.ListAccessPointsForObjectLambdaResult) => void): Request<S3Control.Types.ListAccessPointsForObjectLambdaResult, AWSError>;
   /**
@@ -413,11 +413,11 @@ declare class S3Control extends Service {
    */
   putBucketTagging(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Sets the supplied tag-set on an S3 Batch Operations job. A tag is a key-value pair. You can associate S3 Batch Operations tags with any job by sending a PUT request against the tagging subresource that is associated with the job. To modify the existing tag set, you can either replace the existing tag set entirely, or make changes within the existing tag set by retrieving the existing tag set using GetJobTagging, modify that tag set, and use this action to replace the tag set with the one you modified. For more information, see Controlling access and labeling jobs using tags in the Amazon S3 User Guide.      If you send this request with an empty tag set, Amazon S3 deletes the existing tag set on the Batch Operations job. If you use this method, you are charged for a Tier 1 Request (PUT). For more information, see Amazon S3 pricing.   For deleting existing tags for your Batch Operations job, a DeleteJobTagging request is preferred because it achieves the same result without incurring charges.   A few things to consider about using tags:   Amazon S3 limits the maximum number of tags to 50 tags per job.   You can associate up to 50 tags with a job as long as they have unique tag keys.   A tag key can be up to 128 Unicode characters in length, and tag values can be up to 256 Unicode characters in length.   The key and values are case sensitive.   For tagging-related restrictions related to characters and encodings, see User-Defined Tag Restrictions in the Billing and Cost Management User Guide.       To use this action, you must have permission to perform the s3:PutJobTagging action. Related actions include:    CreatJob     GetJobTagging     DeleteJobTagging   
+   * Sets the supplied tag-set on an S3 Batch Operations job. A tag is a key-value pair. You can associate S3 Batch Operations tags with any job by sending a PUT request against the tagging subresource that is associated with the job. To modify the existing tag set, you can either replace the existing tag set entirely, or make changes within the existing tag set by retrieving the existing tag set using GetJobTagging, modify that tag set, and use this action to replace the tag set with the one you modified. For more information, see Controlling access and labeling jobs using tags in the Amazon S3 User Guide.      If you send this request with an empty tag set, Amazon S3 deletes the existing tag set on the Batch Operations job. If you use this method, you are charged for a Tier 1 Request (PUT). For more information, see Amazon S3 pricing.   For deleting existing tags for your Batch Operations job, a DeleteJobTagging request is preferred because it achieves the same result without incurring charges.   A few things to consider about using tags:   Amazon S3 limits the maximum number of tags to 50 tags per job.   You can associate up to 50 tags with a job as long as they have unique tag keys.   A tag key can be up to 128 Unicode characters in length, and tag values can be up to 256 Unicode characters in length.   The key and values are case sensitive.   For tagging-related restrictions related to characters and encodings, see User-Defined Tag Restrictions in the Billing and Cost Management User Guide.       To use this action, you must have permission to perform the s3:PutJobTagging action. Related actions include:    CreateJob     GetJobTagging     DeleteJobTagging   
    */
   putJobTagging(params: S3Control.Types.PutJobTaggingRequest, callback?: (err: AWSError, data: S3Control.Types.PutJobTaggingResult) => void): Request<S3Control.Types.PutJobTaggingResult, AWSError>;
   /**
-   * Sets the supplied tag-set on an S3 Batch Operations job. A tag is a key-value pair. You can associate S3 Batch Operations tags with any job by sending a PUT request against the tagging subresource that is associated with the job. To modify the existing tag set, you can either replace the existing tag set entirely, or make changes within the existing tag set by retrieving the existing tag set using GetJobTagging, modify that tag set, and use this action to replace the tag set with the one you modified. For more information, see Controlling access and labeling jobs using tags in the Amazon S3 User Guide.      If you send this request with an empty tag set, Amazon S3 deletes the existing tag set on the Batch Operations job. If you use this method, you are charged for a Tier 1 Request (PUT). For more information, see Amazon S3 pricing.   For deleting existing tags for your Batch Operations job, a DeleteJobTagging request is preferred because it achieves the same result without incurring charges.   A few things to consider about using tags:   Amazon S3 limits the maximum number of tags to 50 tags per job.   You can associate up to 50 tags with a job as long as they have unique tag keys.   A tag key can be up to 128 Unicode characters in length, and tag values can be up to 256 Unicode characters in length.   The key and values are case sensitive.   For tagging-related restrictions related to characters and encodings, see User-Defined Tag Restrictions in the Billing and Cost Management User Guide.       To use this action, you must have permission to perform the s3:PutJobTagging action. Related actions include:    CreatJob     GetJobTagging     DeleteJobTagging   
+   * Sets the supplied tag-set on an S3 Batch Operations job. A tag is a key-value pair. You can associate S3 Batch Operations tags with any job by sending a PUT request against the tagging subresource that is associated with the job. To modify the existing tag set, you can either replace the existing tag set entirely, or make changes within the existing tag set by retrieving the existing tag set using GetJobTagging, modify that tag set, and use this action to replace the tag set with the one you modified. For more information, see Controlling access and labeling jobs using tags in the Amazon S3 User Guide.      If you send this request with an empty tag set, Amazon S3 deletes the existing tag set on the Batch Operations job. If you use this method, you are charged for a Tier 1 Request (PUT). For more information, see Amazon S3 pricing.   For deleting existing tags for your Batch Operations job, a DeleteJobTagging request is preferred because it achieves the same result without incurring charges.   A few things to consider about using tags:   Amazon S3 limits the maximum number of tags to 50 tags per job.   You can associate up to 50 tags with a job as long as they have unique tag keys.   A tag key can be up to 128 Unicode characters in length, and tag values can be up to 256 Unicode characters in length.   The key and values are case sensitive.   For tagging-related restrictions related to characters and encodings, see User-Defined Tag Restrictions in the Billing and Cost Management User Guide.       To use this action, you must have permission to perform the s3:PutJobTagging action. Related actions include:    CreateJob     GetJobTagging     DeleteJobTagging   
    */
   putJobTagging(callback?: (err: AWSError, data: S3Control.Types.PutJobTaggingResult) => void): Request<S3Control.Types.PutJobTaggingResult, AWSError>;
   /**
@@ -429,11 +429,11 @@ declare class S3Control extends Service {
    */
   putMultiRegionAccessPointPolicy(callback?: (err: AWSError, data: S3Control.Types.PutMultiRegionAccessPointPolicyResult) => void): Request<S3Control.Types.PutMultiRegionAccessPointPolicyResult, AWSError>;
   /**
-   * Creates or modifies the PublicAccessBlock configuration for an Amazon Web Services account. For more information, see  Using Amazon S3 block public access. Related actions include:    GetPublicAccessBlock     DeletePublicAccessBlock   
+   * Creates or modifies the PublicAccessBlock configuration for an Amazon Web Services account. For this operation, users must have the s3:PutBucketPublicAccessBlock permission. For more information, see  Using Amazon S3 block public access. Related actions include:    GetPublicAccessBlock     DeletePublicAccessBlock   
    */
   putPublicAccessBlock(params: S3Control.Types.PutPublicAccessBlockRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Creates or modifies the PublicAccessBlock configuration for an Amazon Web Services account. For more information, see  Using Amazon S3 block public access. Related actions include:    GetPublicAccessBlock     DeletePublicAccessBlock   
+   * Creates or modifies the PublicAccessBlock configuration for an Amazon Web Services account. For this operation, users must have the s3:PutBucketPublicAccessBlock permission. For more information, see  Using Amazon S3 block public access. Related actions include:    GetPublicAccessBlock     DeletePublicAccessBlock   
    */
   putPublicAccessBlock(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -621,6 +621,12 @@ declare namespace S3Control {
   export type BucketLocationConstraint = "EU"|"eu-west-1"|"us-west-1"|"us-west-2"|"ap-south-1"|"ap-southeast-1"|"ap-southeast-2"|"ap-northeast-1"|"sa-east-1"|"cn-north-1"|"eu-central-1"|string;
   export type BucketName = string;
   export type Buckets = S3BucketArnString[];
+  export interface CloudWatchMetrics {
+    /**
+     * A container that indicates whether CloudWatch publishing for S3 Storage Lens metrics is enabled. A value of true indicates that CloudWatch publishing for S3 Storage Lens metrics is enabled.
+     */
+    IsEnabled: IsEnabled;
+  }
   export type ConfigId = string;
   export type ConfirmRemoveSelfBucketAccess = boolean;
   export type ConfirmationRequired = boolean;
@@ -759,7 +765,7 @@ declare namespace S3Control {
     /**
      * Configuration parameters for the manifest.
      */
-    Manifest: JobManifest;
+    Manifest?: JobManifest;
     /**
      * A description for this job. You can use any string within the permitted length. Descriptions don't need to be unique and can be used for multiple jobs.
      */
@@ -776,6 +782,10 @@ declare namespace S3Control {
      * A set of tags to associate with the S3 Batch Operations job. This is an optional parameter. 
      */
     Tags?: S3TagSet;
+    /**
+     * The attribute container for the ManifestGenerator details. Jobs must be created with either a manifest file or a ManifestGenerator, but not both.
+     */
+    ManifestGenerator?: JobManifestGenerator;
   }
   export interface CreateJobResult {
     /**
@@ -1018,6 +1028,17 @@ declare namespace S3Control {
   export type ExpiredObjectDeleteMarker = boolean;
   export type Format = "CSV"|"Parquet"|string;
   export type FunctionArnString = string;
+  export interface GeneratedManifestEncryption {
+    /**
+     * Specifies the use of SSE-S3 to encrypt generated manifest objects.
+     */
+    SSES3?: SSES3Encryption;
+    /**
+     * Configuration details on how SSE-KMS is used to encrypt generated manifest objects.
+     */
+    SSEKMS?: SSEKMSEncryption;
+  }
+  export type GeneratedManifestFormat = "S3InventoryReport_CSV_20211130"|string;
   export interface GetAccessPointConfigurationForObjectLambdaRequest {
     /**
      * The account ID for the account that owns the specified Object Lambda Access Point.
@@ -1431,6 +1452,14 @@ declare namespace S3Control {
      * The reason why the specified job was suspended. A job is only suspended if you create it through the Amazon S3 console. When you create the job, it enters the Suspended state to await confirmation before running. After you confirm the job, it automatically exits the Suspended state.
      */
     SuspendedCause?: SuspendedCause;
+    /**
+     * The manifest generator that was used to generate a job manifest for this job.
+     */
+    ManifestGenerator?: JobManifestGenerator;
+    /**
+     * The attribute of the JobDescriptor containing details about the job's generated manifest.
+     */
+    GeneratedManifestDescriptor?: S3GeneratedManifestDescriptor;
   }
   export interface JobFailure {
     /**
@@ -1494,6 +1523,30 @@ declare namespace S3Control {
   export type JobManifestFieldList = JobManifestFieldName[];
   export type JobManifestFieldName = "Ignore"|"Bucket"|"Key"|"VersionId"|string;
   export type JobManifestFormat = "S3BatchOperations_CSV_20180820"|"S3InventoryReport_CSV_20161130"|string;
+  export interface JobManifestGenerator {
+    /**
+     * The S3 job ManifestGenerator's configuration details.
+     */
+    S3JobManifestGenerator?: S3JobManifestGenerator;
+  }
+  export interface JobManifestGeneratorFilter {
+    /**
+     * Include objects in the generated manifest only if they are eligible for replication according to the Replication configuration on the source bucket.
+     */
+    EligibleForReplication?: Boolean;
+    /**
+     * If provided, the generated manifest should include only source bucket objects that were created after this time.
+     */
+    CreatedAfter?: ObjectCreationTime;
+    /**
+     * If provided, the generated manifest should include only source bucket objects that were created before this time.
+     */
+    CreatedBefore?: ObjectCreationTime;
+    /**
+     * If provided, the generated manifest should include only source bucket objects that have one of the specified Replication statuses.
+     */
+    ObjectReplicationStatuses?: ReplicationStatusFilterList;
+  }
   export interface JobManifestLocation {
     /**
      * The Amazon Resource Name (ARN) for a manifest object.  Replacement must be made for object keys containing special characters (such as carriage returns) when using XML requests. For more information, see  XML related object key constraints. 
@@ -1547,6 +1600,10 @@ declare namespace S3Control {
     S3InitiateRestoreObject?: S3InitiateRestoreObjectOperation;
     S3PutObjectLegalHold?: S3SetObjectLegalHoldOperation;
     S3PutObjectRetention?: S3SetObjectRetentionOperation;
+    /**
+     * Directs the specified job to invoke ReplicateObject on every object in the job's manifest.
+     */
+    S3ReplicateObject?: S3ReplicateObjectOperation;
   }
   export type JobPriority = number;
   export interface JobProgressSummary {
@@ -1562,6 +1619,10 @@ declare namespace S3Control {
      * 
      */
     NumberOfTasksFailed?: JobNumberOfTasksFailed;
+    /**
+     * The JobTimers attribute of a job's progress summary.
+     */
+    Timers?: JobTimers;
   }
   export interface JobReport {
     /**
@@ -1591,6 +1652,13 @@ declare namespace S3Control {
   export type JobStatusList = JobStatus[];
   export type JobStatusUpdateReason = string;
   export type JobTerminationDate = Date;
+  export type JobTimeInStateSeconds = number;
+  export interface JobTimers {
+    /**
+     * Indicates the elapsed time in seconds the job has been in the Active job state.
+     */
+    ElapsedTimeInActiveSeconds?: JobTimeInStateSeconds;
+  }
   export type JobTotalNumberOfTasks = number;
   export type KmsKeyArnString = string;
   export interface LambdaInvokeOperation {
@@ -1685,7 +1753,7 @@ declare namespace S3Control {
      */
     NextToken?: NonEmptyMaxLength1024String;
     /**
-     * The maximum number of access points that you want to include in the list. If there are more than this number of access points, then the response will include a continuation token in the NextToken field that you can use to retrieve the next page of access points.
+     * The maximum number of access points that you want to include in the list. The response may contain fewer access points but will never contain more. If there are more than this number of access points, then the response will include a continuation token in the NextToken field that you can use to retrieve the next page of access points.
      */
     MaxResults?: MaxResults;
   }
@@ -1846,6 +1914,7 @@ declare namespace S3Control {
     StorageLensConfigurationList?: StorageLensConfigurationList;
   }
   export type Location = string;
+  export type ManifestPrefixString = string;
   export type MaxLength1024String = string;
   export type MaxResults = number;
   export type MinStorageBytesPercentage = number;
@@ -1926,6 +1995,7 @@ declare namespace S3Control {
     StorageClass?: TransitionStorageClass;
   }
   export type NoncurrentVersionTransitionList = NoncurrentVersionTransition[];
+  export type ObjectCreationTime = Date;
   export interface ObjectLambdaAccessPoint {
     /**
      * The name of the Object Lambda Access Point.
@@ -1981,7 +2051,7 @@ declare namespace S3Control {
   export type ObjectLambdaTransformationConfigurationActionsList = ObjectLambdaTransformationConfigurationAction[];
   export type ObjectLambdaTransformationConfigurationsList = ObjectLambdaTransformationConfiguration[];
   export type ObjectLockEnabledForBucket = boolean;
-  export type OperationName = "LambdaInvoke"|"S3PutObjectCopy"|"S3PutObjectAcl"|"S3PutObjectTagging"|"S3DeleteObjectTagging"|"S3InitiateRestoreObject"|"S3PutObjectLegalHold"|"S3PutObjectRetention"|string;
+  export type OperationName = "LambdaInvoke"|"S3PutObjectCopy"|"S3PutObjectAcl"|"S3PutObjectTagging"|"S3DeleteObjectTagging"|"S3InitiateRestoreObject"|"S3PutObjectLegalHold"|"S3PutObjectRetention"|"S3ReplicateObject"|string;
   export type OutputSchemaVersion = "V_1"|string;
   export type Policy = string;
   export interface PolicyStatus {
@@ -2250,6 +2320,8 @@ declare namespace S3Control {
   }
   export type RegionalBucketList = RegionalBucket[];
   export type Regions = S3AWSRegion[];
+  export type ReplicationStatus = "COMPLETED"|"FAILED"|"REPLICA"|"NONE"|string;
+  export type ReplicationStatusFilterList = ReplicationStatus[];
   export type ReportPrefixString = string;
   export type RequestedJobStatus = "Cancelled"|"Ready"|string;
   export type S3AWSRegion = string;
@@ -2302,6 +2374,7 @@ declare namespace S3Control {
     Encryption?: StorageLensDataExportEncryption;
   }
   export type S3CannedAccessControlList = "private"|"public-read"|"public-read-write"|"aws-exec-read"|"authenticated-read"|"bucket-owner-read"|"bucket-owner-full-control"|string;
+  export type S3ChecksumAlgorithm = "CRC32"|"CRC32C"|"SHA1"|"SHA256"|string;
   export type S3ContentLength = number;
   export interface S3CopyObjectOperation {
     /**
@@ -2325,7 +2398,7 @@ declare namespace S3Control {
      */
     ModifiedSinceConstraint?: TimeStamp;
     /**
-     * 
+     * If you don't provide this parameter, Amazon S3 copies all the metadata from the original objects. If you specify an empty set, the new objects will have no tags. Otherwise, Amazon S3 assigns the supplied tags to the new objects.
      */
     NewObjectMetadata?: S3ObjectMetadata;
     /**
@@ -2353,7 +2426,7 @@ declare namespace S3Control {
      */
     SSEAwsKmsKeyId?: KmsKeyArnString;
     /**
-     * Specifies the folder prefix into which you would like the objects to be copied. For example, to copy objects into a folder named "Folder1" in the destination bucket, set the TargetKeyPrefix to "Folder1/".
+     * Specifies the folder prefix into which you would like the objects to be copied. For example, to copy objects into a folder named Folder1 in the destination bucket, set the TargetKeyPrefix to Folder1.
      */
     TargetKeyPrefix?: NonEmptyMaxLength1024String;
     /**
@@ -2372,10 +2445,21 @@ declare namespace S3Control {
      * Specifies whether Amazon S3 should use an S3 Bucket Key for object encryption with server-side encryption using Amazon Web Services KMS (SSE-KMS). Setting this header to true causes Amazon S3 to use an S3 Bucket Key for object encryption with SSE-KMS. Specifying this header with an object action doesn’t affect bucket-level settings for S3 Bucket Key.
      */
     BucketKeyEnabled?: Boolean;
+    /**
+     * Indicates the algorithm you want Amazon S3 to use to create the checksum. For more information see  Checking object integrity in the Amazon S3 User Guide.
+     */
+    ChecksumAlgorithm?: S3ChecksumAlgorithm;
   }
   export interface S3DeleteObjectTaggingOperation {
   }
   export type S3ExpirationInDays = number;
+  export interface S3GeneratedManifestDescriptor {
+    /**
+     * The format of the generated manifest.
+     */
+    Format?: GeneratedManifestFormat;
+    Location?: JobManifestLocation;
+  }
   export type S3GlacierJobTier = "BULK"|"STANDARD"|string;
   export interface S3Grant {
     /**
@@ -2413,7 +2497,51 @@ declare namespace S3Control {
      */
     GlacierJobTier?: S3GlacierJobTier;
   }
+  export interface S3JobManifestGenerator {
+    /**
+     * The Amazon Web Services account ID that owns the bucket the generated manifest is written to. If provided the generated manifest bucket's owner Amazon Web Services account ID must match this value, else the job fails.
+     */
+    ExpectedBucketOwner?: AccountId;
+    /**
+     * The source bucket used by the ManifestGenerator.
+     */
+    SourceBucket: S3BucketArnString;
+    /**
+     * Specifies the location the generated manifest will be written to.
+     */
+    ManifestOutputLocation?: S3ManifestOutputLocation;
+    /**
+     * Specifies rules the S3JobManifestGenerator should use to use to decide whether an object in the source bucket should or should not be included in the generated job manifest.
+     */
+    Filter?: JobManifestGeneratorFilter;
+    /**
+     * Determines whether or not to write the job's generated manifest to a bucket.
+     */
+    EnableManifestOutput: Boolean;
+  }
   export type S3KeyArnString = string;
+  export interface S3ManifestOutputLocation {
+    /**
+     * The Account ID that owns the bucket the generated manifest is written to.
+     */
+    ExpectedManifestBucketOwner?: AccountId;
+    /**
+     * The bucket ARN the generated manifest should be written to.
+     */
+    Bucket: S3BucketArnString;
+    /**
+     * Prefix identifying one or more objects to which the manifest applies.
+     */
+    ManifestPrefix?: ManifestPrefixString;
+    /**
+     * Specifies what encryption should be used when the generated manifest objects are written.
+     */
+    ManifestEncryption?: GeneratedManifestEncryption;
+    /**
+     * The format of the generated manifest.
+     */
+    ManifestFormat: GeneratedManifestFormat;
+  }
   export type S3MetadataDirective = "COPY"|"REPLACE"|string;
   export interface S3ObjectLockLegalHold {
     /**
@@ -2483,6 +2611,8 @@ declare namespace S3Control {
   export type S3ObjectVersionId = string;
   export type S3Permission = "FULL_CONTROL"|"READ"|"WRITE"|"READ_ACP"|"WRITE_ACP"|string;
   export type S3RegionalBucketArn = string;
+  export interface S3ReplicateObjectOperation {
+  }
   export interface S3Retention {
     /**
      * The date when the applied Object Lock retention will expire on all objects set by the Batch Operations job.
@@ -2522,7 +2652,7 @@ declare namespace S3Control {
      */
     TagSet?: S3TagSet;
   }
-  export type S3StorageClass = "STANDARD"|"STANDARD_IA"|"ONEZONE_IA"|"GLACIER"|"INTELLIGENT_TIERING"|"DEEP_ARCHIVE"|string;
+  export type S3StorageClass = "STANDARD"|"STANDARD_IA"|"ONEZONE_IA"|"GLACIER"|"INTELLIGENT_TIERING"|"DEEP_ARCHIVE"|"GLACIER_IR"|string;
   export interface S3Tag {
     /**
      * 
@@ -2541,8 +2671,16 @@ declare namespace S3Control {
      */
     KeyId: SSEKMSKeyId;
   }
+  export interface SSEKMSEncryption {
+    /**
+     * Specifies the ID of the Amazon Web Services Key Management Service (Amazon Web Services KMS) symmetric customer managed key to use for encrypting generated manifest objects.
+     */
+    KeyId: KmsKeyArnString;
+  }
   export type SSEKMSKeyId = string;
   export interface SSES3 {
+  }
+  export interface SSES3Encryption {
   }
   export interface SelectionCriteria {
     /**
@@ -2605,7 +2743,11 @@ declare namespace S3Control {
     /**
      * A container for the bucket where the S3 Storage Lens metrics export will be located.  This bucket must be located in the same Region as the storage lens configuration.  
      */
-    S3BucketDestination: S3BucketDestination;
+    S3BucketDestination?: S3BucketDestination;
+    /**
+     * A container for enabling Amazon CloudWatch publishing for S3 Storage Lens metrics.
+     */
+    CloudWatchMetrics?: CloudWatchMetrics;
   }
   export interface StorageLensDataExportEncryption {
     /**

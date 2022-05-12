@@ -52,6 +52,14 @@ declare class LookoutMetrics extends Service {
    */
   createMetricSet(callback?: (err: AWSError, data: LookoutMetrics.Types.CreateMetricSetResponse) => void): Request<LookoutMetrics.Types.CreateMetricSetResponse, AWSError>;
   /**
+   * Deactivates an anomaly detector.
+   */
+  deactivateAnomalyDetector(params: LookoutMetrics.Types.DeactivateAnomalyDetectorRequest, callback?: (err: AWSError, data: LookoutMetrics.Types.DeactivateAnomalyDetectorResponse) => void): Request<LookoutMetrics.Types.DeactivateAnomalyDetectorResponse, AWSError>;
+  /**
+   * Deactivates an anomaly detector.
+   */
+  deactivateAnomalyDetector(callback?: (err: AWSError, data: LookoutMetrics.Types.DeactivateAnomalyDetectorResponse) => void): Request<LookoutMetrics.Types.DeactivateAnomalyDetectorResponse, AWSError>;
+  /**
    * Deletes an alert.
    */
   deleteAlert(params: LookoutMetrics.Types.DeleteAlertRequest, callback?: (err: AWSError, data: LookoutMetrics.Types.DeleteAlertResponse) => void): Request<LookoutMetrics.Types.DeleteAlertResponse, AWSError>;
@@ -100,6 +108,14 @@ declare class LookoutMetrics extends Service {
    */
   describeMetricSet(callback?: (err: AWSError, data: LookoutMetrics.Types.DescribeMetricSetResponse) => void): Request<LookoutMetrics.Types.DescribeMetricSetResponse, AWSError>;
   /**
+   * Detects an Amazon S3 dataset's file format, interval, and offset.
+   */
+  detectMetricSetConfig(params: LookoutMetrics.Types.DetectMetricSetConfigRequest, callback?: (err: AWSError, data: LookoutMetrics.Types.DetectMetricSetConfigResponse) => void): Request<LookoutMetrics.Types.DetectMetricSetConfigResponse, AWSError>;
+  /**
+   * Detects an Amazon S3 dataset's file format, interval, and offset.
+   */
+  detectMetricSetConfig(callback?: (err: AWSError, data: LookoutMetrics.Types.DetectMetricSetConfigResponse) => void): Request<LookoutMetrics.Types.DetectMetricSetConfigResponse, AWSError>;
+  /**
    * Returns details about a group of anomalous metrics.
    */
   getAnomalyGroup(params: LookoutMetrics.Types.GetAnomalyGroupRequest, callback?: (err: AWSError, data: LookoutMetrics.Types.GetAnomalyGroupResponse) => void): Request<LookoutMetrics.Types.GetAnomalyGroupResponse, AWSError>;
@@ -139,6 +155,14 @@ declare class LookoutMetrics extends Service {
    * Lists the detectors in the current AWS Region. Amazon Lookout for Metrics API actions are eventually consistent. If you do a read operation on a resource immediately after creating or modifying it, use retries to allow time for the write operation to complete.
    */
   listAnomalyDetectors(callback?: (err: AWSError, data: LookoutMetrics.Types.ListAnomalyDetectorsResponse) => void): Request<LookoutMetrics.Types.ListAnomalyDetectorsResponse, AWSError>;
+  /**
+   * Returns a list of measures that are potential causes or effects of an anomaly group.
+   */
+  listAnomalyGroupRelatedMetrics(params: LookoutMetrics.Types.ListAnomalyGroupRelatedMetricsRequest, callback?: (err: AWSError, data: LookoutMetrics.Types.ListAnomalyGroupRelatedMetricsResponse) => void): Request<LookoutMetrics.Types.ListAnomalyGroupRelatedMetricsResponse, AWSError>;
+  /**
+   * Returns a list of measures that are potential causes or effects of an anomaly group.
+   */
+  listAnomalyGroupRelatedMetrics(callback?: (err: AWSError, data: LookoutMetrics.Types.ListAnomalyGroupRelatedMetricsResponse) => void): Request<LookoutMetrics.Types.ListAnomalyGroupRelatedMetricsResponse, AWSError>;
   /**
    * Returns a list of anomaly groups.
    */
@@ -332,8 +356,9 @@ declare namespace LookoutMetrics {
     AnomalyDetectorFrequency?: Frequency;
   }
   export type AnomalyDetectorDescription = string;
+  export type AnomalyDetectorFailureType = "ACTIVATION_FAILURE"|"BACK_TEST_ACTIVATION_FAILURE"|"DELETION_FAILURE"|"DEACTIVATION_FAILURE"|string;
   export type AnomalyDetectorName = string;
-  export type AnomalyDetectorStatus = "ACTIVE"|"ACTIVATING"|"DELETING"|"FAILED"|"INACTIVE"|"LEARNING"|"BACK_TEST_ACTIVATING"|"BACK_TEST_ACTIVE"|"BACK_TEST_COMPLETE"|string;
+  export type AnomalyDetectorStatus = "ACTIVE"|"ACTIVATING"|"DELETING"|"FAILED"|"INACTIVE"|"LEARNING"|"BACK_TEST_ACTIVATING"|"BACK_TEST_ACTIVE"|"BACK_TEST_COMPLETE"|"DEACTIVATED"|"DEACTIVATING"|string;
   export interface AnomalyDetectorSummary {
     /**
      * The ARN of the detector.
@@ -456,13 +481,55 @@ declare namespace LookoutMetrics {
     /**
      * An IAM role that gives Amazon Lookout for Metrics permission to access the flow.
      */
-    RoleArn: Arn;
+    RoleArn?: Arn;
     /**
      *  name of the flow.
      */
-    FlowName: FlowName;
+    FlowName?: FlowName;
   }
   export type Arn = string;
+  export interface AttributeValue {
+    /**
+     * A string.
+     */
+    S?: StringAttributeValue;
+    /**
+     * A number.
+     */
+    N?: NumberAttributeValue;
+    /**
+     * A binary value.
+     */
+    B?: BinaryAttributeValue;
+    /**
+     * A list of strings.
+     */
+    SS?: StringListAttributeValue;
+    /**
+     * A list of numbers.
+     */
+    NS?: NumberListAttributeValue;
+    /**
+     * A list of binary values.
+     */
+    BS?: BinaryListAttributeValue;
+  }
+  export interface AutoDetectionMetricSource {
+    /**
+     * The source's source config.
+     */
+    S3SourceConfig?: AutoDetectionS3SourceConfig;
+  }
+  export interface AutoDetectionS3SourceConfig {
+    /**
+     * The config's templated path list.
+     */
+    TemplatedPathList?: TemplatedPathList;
+    /**
+     * The config's historical data path list.
+     */
+    HistoricalDataPathList?: HistoricalDataPathList;
+  }
   export interface BackTestAnomalyDetectorRequest {
     /**
      * The Amazon Resource Name (ARN) of the anomaly detector.
@@ -471,6 +538,8 @@ declare namespace LookoutMetrics {
   }
   export interface BackTestAnomalyDetectorResponse {
   }
+  export type BinaryAttributeValue = string;
+  export type BinaryListAttributeValue = BinaryAttributeValue[];
   export type Boolean = boolean;
   export type CSVFileCompression = "NONE"|"GZIP"|string;
   export type Charset = string;
@@ -478,9 +547,10 @@ declare namespace LookoutMetrics {
     /**
      * An IAM role that gives Amazon Lookout for Metrics permission to access data in Amazon CloudWatch.
      */
-    RoleArn: Arn;
+    RoleArn?: Arn;
   }
   export type ColumnName = string;
+  export type Confidence = "HIGH"|"LOW"|"NONE"|string;
   export interface ContributionMatrix {
     /**
      * A list of contributing dimensions.
@@ -629,6 +699,14 @@ declare namespace LookoutMetrics {
   export type DatabaseHost = string;
   export type DatabasePort = number;
   export type DateTimeFormat = string;
+  export interface DeactivateAnomalyDetectorRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the anomaly detector.
+     */
+    AnomalyDetectorArn: Arn;
+  }
+  export interface DeactivateAnomalyDetectorResponse {
+  }
   export interface DeleteAlertRequest {
     /**
      * The ARN of the alert to delete.
@@ -722,13 +800,17 @@ declare namespace LookoutMetrics {
      */
     Status?: AnomalyDetectorStatus;
     /**
-     * The reason that the detector failed, if any.
+     * The reason that the detector failed.
      */
     FailureReason?: ErrorMessage;
     /**
      * The ARN of the KMS key to use to encrypt your data.
      */
     KmsKeyArn?: KmsKeyArn;
+    /**
+     * The process that caused the detector to fail.
+     */
+    FailureType?: AnomalyDetectorFailureType;
   }
   export interface DescribeMetricSetRequest {
     /**
@@ -789,6 +871,108 @@ declare namespace LookoutMetrics {
      * Contains information about the dataset's source data.
      */
     MetricSource?: MetricSource;
+  }
+  export interface DetectMetricSetConfigRequest {
+    /**
+     * An anomaly detector ARN.
+     */
+    AnomalyDetectorArn: Arn;
+    /**
+     * A data source.
+     */
+    AutoDetectionMetricSource: AutoDetectionMetricSource;
+  }
+  export interface DetectMetricSetConfigResponse {
+    /**
+     * The inferred dataset configuration for the datasource.
+     */
+    DetectedMetricSetConfig?: DetectedMetricSetConfig;
+  }
+  export interface DetectedCsvFormatDescriptor {
+    /**
+     * The format's file compression.
+     */
+    FileCompression?: DetectedField;
+    /**
+     * The format's charset.
+     */
+    Charset?: DetectedField;
+    /**
+     * Whether the format includes a header.
+     */
+    ContainsHeader?: DetectedField;
+    /**
+     * The format's delimiter.
+     */
+    Delimiter?: DetectedField;
+    /**
+     * The format's header list.
+     */
+    HeaderList?: DetectedField;
+    /**
+     * The format's quote symbol.
+     */
+    QuoteSymbol?: DetectedField;
+  }
+  export interface DetectedField {
+    /**
+     * The field's value.
+     */
+    Value?: AttributeValue;
+    /**
+     * The field's confidence.
+     */
+    Confidence?: Confidence;
+    /**
+     * The field's message.
+     */
+    Message?: Message;
+  }
+  export interface DetectedFileFormatDescriptor {
+    /**
+     * Details about a CSV format.
+     */
+    CsvFormatDescriptor?: DetectedCsvFormatDescriptor;
+    /**
+     * Details about a JSON format.
+     */
+    JsonFormatDescriptor?: DetectedJsonFormatDescriptor;
+  }
+  export interface DetectedJsonFormatDescriptor {
+    /**
+     * The format's file compression.
+     */
+    FileCompression?: DetectedField;
+    /**
+     * The format's character set.
+     */
+    Charset?: DetectedField;
+  }
+  export interface DetectedMetricSetConfig {
+    /**
+     * The dataset's offset.
+     */
+    Offset?: DetectedField;
+    /**
+     * The dataset's interval.
+     */
+    MetricSetFrequency?: DetectedField;
+    /**
+     * The dataset's data source.
+     */
+    MetricSource?: DetectedMetricSource;
+  }
+  export interface DetectedMetricSource {
+    /**
+     * The data source's source configuration.
+     */
+    S3SourceConfig?: DetectedS3SourceConfig;
+  }
+  export interface DetectedS3SourceConfig {
+    /**
+     * The source's file format descriptor.
+     */
+    FileFormatDescriptor?: DetectedFileFormatDescriptor;
   }
   export interface DimensionContribution {
     /**
@@ -919,6 +1103,25 @@ declare namespace LookoutMetrics {
   export type HistoricalDataPath = string;
   export type HistoricalDataPathList = HistoricalDataPath[];
   export type Integer = number;
+  export interface InterMetricImpactDetails {
+    /**
+     * The name of the measure.
+     */
+    MetricName?: MetricName;
+    /**
+     * The ID of the anomaly group.
+     */
+    AnomalyGroupId?: UUID;
+    /**
+     * Whether a measure is a potential cause of the anomaly group (CAUSE_OF_INPUT_ANOMALY_GROUP), or whether the measure is impacted by the anomaly group (EFFECT_OF_INPUT_ANOMALY_GROUP).
+     */
+    RelationshipType?: RelationshipType;
+    /**
+     * For potential causes (CAUSE_OF_INPUT_ANOMALY_GROUP), the percentage contribution the measure has in causing the anomalies.
+     */
+    ContributionPercentage?: MetricChangePercentage;
+  }
+  export type InterMetricImpactList = InterMetricImpactDetails[];
   export interface ItemizedMetricStats {
     /**
      * The name of the measure.
@@ -993,6 +1196,38 @@ declare namespace LookoutMetrics {
     AnomalyDetectorSummaryList?: AnomalyDetectorSummaryList;
     /**
      * If the response is truncated, the service returns this token. To retrieve the next set of results, use the token in the next request.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListAnomalyGroupRelatedMetricsRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the anomaly detector.
+     */
+    AnomalyDetectorArn: Arn;
+    /**
+     * The ID of the anomaly group.
+     */
+    AnomalyGroupId: UUID;
+    /**
+     * Filter for potential causes (CAUSE_OF_INPUT_ANOMALY_GROUP) or downstream effects (EFFECT_OF_INPUT_ANOMALY_GROUP) of the anomaly group.
+     */
+    RelationshipTypeFilter?: RelationshipType;
+    /**
+     * The maximum number of results to return.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * Specify the pagination token that's returned by a previous request to retrieve the next page of results.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListAnomalyGroupRelatedMetricsResponse {
+    /**
+     * Aggregated details about the measures contributing to the anomaly group, and the measures potentially impacted by the anomaly group.
+     */
+    InterMetricImpactList?: InterMetricImpactList;
+    /**
+     * The pagination token that's included if more results are available.
      */
     NextToken?: NextToken;
   }
@@ -1109,6 +1344,7 @@ declare namespace LookoutMetrics {
     Tags?: TagMap;
   }
   export type MaxResults = number;
+  export type Message = string;
   export interface Metric {
     /**
      * The name of the metric.
@@ -1123,6 +1359,7 @@ declare namespace LookoutMetrics {
      */
     Namespace?: Namespace;
   }
+  export type MetricChangePercentage = number;
   export interface MetricLevelImpact {
     /**
      * The name of the measure.
@@ -1196,6 +1433,8 @@ declare namespace LookoutMetrics {
   export type MetricValueList = MetricValue[];
   export type Namespace = string;
   export type NextToken = string;
+  export type NumberAttributeValue = string;
+  export type NumberListAttributeValue = NumberAttributeValue[];
   export type Offset = number;
   export type PoirotSecretManagerArn = string;
   export interface PutFeedbackRequest {
@@ -1217,35 +1456,35 @@ declare namespace LookoutMetrics {
     /**
      * A string identifying the database instance.
      */
-    DBInstanceIdentifier: RDSDatabaseIdentifier;
+    DBInstanceIdentifier?: RDSDatabaseIdentifier;
     /**
      * The host name of the database.
      */
-    DatabaseHost: DatabaseHost;
+    DatabaseHost?: DatabaseHost;
     /**
      * The port number where the database can be accessed.
      */
-    DatabasePort: DatabasePort;
+    DatabasePort?: DatabasePort;
     /**
      * The Amazon Resource Name (ARN) of the AWS Secrets Manager role.
      */
-    SecretManagerArn: PoirotSecretManagerArn;
+    SecretManagerArn?: PoirotSecretManagerArn;
     /**
      * The name of the RDS database.
      */
-    DatabaseName: RDSDatabaseName;
+    DatabaseName?: RDSDatabaseName;
     /**
      * The name of the table in the database.
      */
-    TableName: TableName;
+    TableName?: TableName;
     /**
      * The Amazon Resource Name (ARN) of the role.
      */
-    RoleArn: Arn;
+    RoleArn?: Arn;
     /**
      * An object containing information about the Amazon Virtual Private Cloud (VPC) configuration.
      */
-    VpcConfiguration: VpcConfiguration;
+    VpcConfiguration?: VpcConfiguration;
   }
   export type RedshiftClusterIdentifier = string;
   export type RedshiftDatabaseName = string;
@@ -1253,41 +1492,42 @@ declare namespace LookoutMetrics {
     /**
      * A string identifying the Redshift cluster.
      */
-    ClusterIdentifier: RedshiftClusterIdentifier;
+    ClusterIdentifier?: RedshiftClusterIdentifier;
     /**
      * The name of the database host.
      */
-    DatabaseHost: DatabaseHost;
+    DatabaseHost?: DatabaseHost;
     /**
      * The port number where the database can be accessed.
      */
-    DatabasePort: DatabasePort;
+    DatabasePort?: DatabasePort;
     /**
      * The Amazon Resource Name (ARN) of the AWS Secrets Manager role.
      */
-    SecretManagerArn: PoirotSecretManagerArn;
+    SecretManagerArn?: PoirotSecretManagerArn;
     /**
      * The Redshift database name.
      */
-    DatabaseName: RedshiftDatabaseName;
+    DatabaseName?: RedshiftDatabaseName;
     /**
      * The table name of the Redshift database.
      */
-    TableName: TableName;
+    TableName?: TableName;
     /**
      * The Amazon Resource Name (ARN) of the role providing access to the database.
      */
-    RoleArn: Arn;
+    RoleArn?: Arn;
     /**
      * Contains information about the Amazon Virtual Private Cloud (VPC) configuration.
      */
-    VpcConfiguration: VpcConfiguration;
+    VpcConfiguration?: VpcConfiguration;
   }
+  export type RelationshipType = "CAUSE_OF_INPUT_ANOMALY_GROUP"|"EFFECT_OF_INPUT_ANOMALY_GROUP"|string;
   export interface S3SourceConfig {
     /**
      * The ARN of an IAM role that has read and write access permissions to the source S3 bucket.
      */
-    RoleArn: Arn;
+    RoleArn?: Arn;
     /**
      * A list of templated paths to the source files.
      */
@@ -1332,6 +1572,8 @@ declare namespace LookoutMetrics {
   export type SecurityGroupId = string;
   export type SecurityGroupIdList = SecurityGroupId[];
   export type SensitivityThreshold = number;
+  export type StringAttributeValue = string;
+  export type StringListAttributeValue = StringAttributeValue[];
   export type SubnetId = string;
   export type SubnetIdList = SubnetId[];
   export type TableName = string;

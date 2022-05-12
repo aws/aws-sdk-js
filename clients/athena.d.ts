@@ -268,6 +268,14 @@ declare class Athena extends Service {
    */
   updateDataCatalog(callback?: (err: AWSError, data: Athena.Types.UpdateDataCatalogOutput) => void): Request<Athena.Types.UpdateDataCatalogOutput, AWSError>;
   /**
+   * Updates a NamedQuery object. The database or workgroup cannot be updated.
+   */
+  updateNamedQuery(params: Athena.Types.UpdateNamedQueryInput, callback?: (err: AWSError, data: Athena.Types.UpdateNamedQueryOutput) => void): Request<Athena.Types.UpdateNamedQueryOutput, AWSError>;
+  /**
+   * Updates a NamedQuery object. The database or workgroup cannot be updated.
+   */
+  updateNamedQuery(callback?: (err: AWSError, data: Athena.Types.UpdateNamedQueryOutput) => void): Request<Athena.Types.UpdateNamedQueryOutput, AWSError>;
+  /**
    * Updates a prepared statement.
    */
   updatePreparedStatement(params: Athena.Types.UpdatePreparedStatementInput, callback?: (err: AWSError, data: Athena.Types.UpdatePreparedStatementOutput) => void): Request<Athena.Types.UpdatePreparedStatementOutput, AWSError>;
@@ -285,7 +293,31 @@ declare class Athena extends Service {
   updateWorkGroup(callback?: (err: AWSError, data: Athena.Types.UpdateWorkGroupOutput) => void): Request<Athena.Types.UpdateWorkGroupOutput, AWSError>;
 }
 declare namespace Athena {
+  export interface AclConfiguration {
+    /**
+     * The Amazon S3 canned ACL that Athena should specify when storing query results. Currently the only supported canned ACL is BUCKET_OWNER_FULL_CONTROL. If a query runs in a workgroup and the workgroup overrides client-side settings, then the Amazon S3 canned ACL specified in the workgroup's settings is used for all queries that run in the workgroup. For more information about Amazon S3 canned ACLs, see Canned ACL in the Amazon S3 User Guide.
+     */
+    S3AclOption: S3AclOption;
+  }
   export type AmazonResourceName = string;
+  export interface AthenaError {
+    /**
+     * An integer value that specifies the category of a query failure error. The following list shows the category for each integer value.  1 - System  2 - User  3 - Other
+     */
+    ErrorCategory?: ErrorCategory;
+    /**
+     * An integer value that provides specific information about an Athena query error. For the meaning of specific values, see the Error Type Reference in the Amazon Athena User Guide.
+     */
+    ErrorType?: ErrorType;
+    /**
+     * True if the query might succeed if resubmitted.
+     */
+    Retryable?: Boolean;
+    /**
+     * Contains a short description of the error that occurred.
+     */
+    ErrorMessage?: String;
+  }
   export interface BatchGetNamedQueryInput {
     /**
      * An array of query IDs.
@@ -384,7 +416,7 @@ declare namespace Athena {
   export type CommentString = string;
   export interface CreateDataCatalogInput {
     /**
-     * The name of the data catalog to create. The catalog name must be unique for the Amazon Web Services account and can use a maximum of 128 alphanumeric, underscore, at sign, or hyphen characters.
+     * The name of the data catalog to create. The catalog name must be unique for the Amazon Web Services account and can use a maximum of 127 alphanumeric, underscore, at sign, or hyphen characters. The remainder of the length constraint of 256 is reserved for use by Athena.
      */
     Name: CatalogNameString;
     /**
@@ -480,7 +512,7 @@ declare namespace Athena {
   }
   export interface DataCatalog {
     /**
-     * The name of the data catalog. The catalog name must be unique for the Amazon Web Services account and can use a maximum of 128 alphanumeric, underscore, at sign, or hyphen characters.
+     * The name of the data catalog. The catalog name must be unique for the Amazon Web Services account and can use a maximum of 127 alphanumeric, underscore, at sign, or hyphen characters. The remainder of the length constraint of 256 is reserved for use by Athena.
      */
     Name: CatalogNameString;
     /**
@@ -498,7 +530,7 @@ declare namespace Athena {
   }
   export interface DataCatalogSummary {
     /**
-     * The name of the data catalog.
+     * The name of the data catalog. The catalog name is unique for the Amazon Web Services account and can use a maximum of 127 alphanumeric, underscore, at sign, or hyphen characters. The remainder of the length constraint of 256 is reserved for use by Athena.
      */
     CatalogName?: CatalogNameString;
     /**
@@ -574,11 +606,11 @@ declare namespace Athena {
   export type DescriptionString = string;
   export interface EncryptionConfiguration {
     /**
-     * Indicates whether Amazon S3 server-side encryption with Amazon S3-managed keys (SSE-S3), server-side encryption with KMS-managed keys (SSE-KMS), or client-side encryption with KMS-managed keys (CSE-KMS) is used. If a query runs in a workgroup and the workgroup overrides client-side settings, then the workgroup's setting for encryption is used. It specifies whether query results must be encrypted, for all queries that run in this workgroup. 
+     * Indicates whether Amazon S3 server-side encryption with Amazon S3-managed keys (SSE_S3), server-side encryption with KMS-managed keys (SSE_KMS), or client-side encryption with KMS-managed keys (CSE_KMS) is used. If a query runs in a workgroup and the workgroup overrides client-side settings, then the workgroup's setting for encryption is used. It specifies whether query results must be encrypted, for all queries that run in this workgroup. 
      */
     EncryptionOption: EncryptionOption;
     /**
-     * For SSE-KMS and CSE-KMS, this is the KMS key ARN or ID.
+     * For SSE_KMS and CSE_KMS, this is the KMS key ARN or ID.
      */
     KmsKey?: String;
   }
@@ -594,8 +626,10 @@ declare namespace Athena {
     EffectiveEngineVersion?: NameString;
   }
   export type EngineVersionsList = EngineVersion[];
+  export type ErrorCategory = number;
   export type ErrorCode = string;
   export type ErrorMessage = string;
+  export type ErrorType = number;
   export type ExpressionString = string;
   export interface GetDataCatalogInput {
     /**
@@ -966,7 +1000,7 @@ declare namespace Athena {
      */
     Database: DatabaseString;
     /**
-     * The SQL query statements that comprise the query.
+     * The SQL statements that make up the query.
      */
     QueryString: QueryString;
     /**
@@ -978,6 +1012,7 @@ declare namespace Athena {
      */
     WorkGroup?: WorkGroupName;
   }
+  export type NamedQueryDescriptionString = string;
   export type NamedQueryId = string;
   export type NamedQueryIdList = NamedQueryId[];
   export type NamedQueryList = NamedQuery[];
@@ -1115,6 +1150,10 @@ declare namespace Athena {
      * The date and time that the query completed.
      */
     CompletionDateTime?: _Date;
+    /**
+     * Provides information about an Athena query error.
+     */
+    AthenaError?: AthenaError;
   }
   export type QueryString = string;
   export interface ResultConfiguration {
@@ -1123,9 +1162,17 @@ declare namespace Athena {
      */
     OutputLocation?: String;
     /**
-     * If query results are encrypted in Amazon S3, indicates the encryption option used (for example, SSE-KMS or CSE-KMS) and key information. This is a client-side setting. If workgroup settings override client-side settings, then the query uses the encryption configuration that is specified for the workgroup, and also uses the location for storing query results specified in the workgroup. See WorkGroupConfiguration$EnforceWorkGroupConfiguration and Workgroup Settings Override Client-Side Settings.
+     * If query results are encrypted in Amazon S3, indicates the encryption option used (for example, SSE_KMS or CSE_KMS) and key information. This is a client-side setting. If workgroup settings override client-side settings, then the query uses the encryption configuration that is specified for the workgroup, and also uses the location for storing query results specified in the workgroup. See WorkGroupConfiguration$EnforceWorkGroupConfiguration and Workgroup Settings Override Client-Side Settings.
      */
     EncryptionConfiguration?: EncryptionConfiguration;
+    /**
+     * The Amazon Web Services account ID that you expect to be the owner of the Amazon S3 bucket specified by ResultConfiguration$OutputLocation. If set, Athena uses the value for ExpectedBucketOwner when it makes Amazon S3 calls to your specified output location. If the ExpectedBucketOwner Amazon Web Services account ID does not match the actual owner of the Amazon S3 bucket, the call fails with a permissions error. This is a client-side setting. If workgroup settings override client-side settings, then the query uses the ExpectedBucketOwner setting that is specified for the workgroup, and also uses the location for storing query results specified in the workgroup. See WorkGroupConfiguration$EnforceWorkGroupConfiguration and Workgroup Settings Override Client-Side Settings.
+     */
+    ExpectedBucketOwner?: String;
+    /**
+     * Indicates that an Amazon S3 canned ACL should be set to control ownership of stored query results. Currently the only supported canned ACL is BUCKET_OWNER_FULL_CONTROL. This is a client-side setting. If workgroup settings override client-side settings, then the query uses the ACL configuration that is specified for the workgroup, and also uses the location for storing query results specified in the workgroup. For more information, see WorkGroupConfiguration$EnforceWorkGroupConfiguration and Workgroup Settings Override Client-Side Settings.
+     */
+    AclConfiguration?: AclConfiguration;
   }
   export interface ResultConfigurationUpdates {
     /**
@@ -1144,6 +1191,22 @@ declare namespace Athena {
      * If set to "true", indicates that the previously-specified encryption configuration (also known as the client-side setting) for queries in this workgroup should be ignored and set to null. If set to "false" or not set, and a value is present in the EncryptionConfiguration in ResultConfigurationUpdates (the client-side setting), the EncryptionConfiguration in the workgroup's ResultConfiguration will be updated with the new value. For more information, see Workgroup Settings Override Client-Side Settings.
      */
     RemoveEncryptionConfiguration?: BoxedBoolean;
+    /**
+     * The Amazon Web Services account ID that you expect to be the owner of the Amazon S3 bucket specified by ResultConfiguration$OutputLocation. If set, Athena uses the value for ExpectedBucketOwner when it makes Amazon S3 calls to your specified output location. If the ExpectedBucketOwner Amazon Web Services account ID does not match the actual owner of the Amazon S3 bucket, the call fails with a permissions error. If workgroup settings override client-side settings, then the query uses the ExpectedBucketOwner setting that is specified for the workgroup, and also uses the location for storing query results specified in the workgroup. See WorkGroupConfiguration$EnforceWorkGroupConfiguration and Workgroup Settings Override Client-Side Settings.
+     */
+    ExpectedBucketOwner?: String;
+    /**
+     * If set to "true", removes the Amazon Web Services account ID previously specified for ResultConfiguration$ExpectedBucketOwner. If set to "false" or not set, and a value is present in the ExpectedBucketOwner in ResultConfigurationUpdates (the client-side setting), the ExpectedBucketOwner in the workgroup's ResultConfiguration is updated with the new value. For more information, see Workgroup Settings Override Client-Side Settings.
+     */
+    RemoveExpectedBucketOwner?: BoxedBoolean;
+    /**
+     * The ACL configuration for the query results.
+     */
+    AclConfiguration?: AclConfiguration;
+    /**
+     * If set to true, indicates that the previously-specified ACL configuration for queries in this workgroup should be ignored and set to null. If set to false or not set, and a value is present in the AclConfiguration of ResultConfigurationUpdates, the AclConfiguration in the workgroup's ResultConfiguration is updated with the new value. For more information, see Workgroup Settings Override Client-Side Settings.
+     */
+    RemoveAclConfiguration?: BoxedBoolean;
   }
   export interface ResultSet {
     /**
@@ -1168,6 +1231,7 @@ declare namespace Athena {
     Data?: datumList;
   }
   export type RowList = Row[];
+  export type S3AclOption = "BUCKET_OWNER_FULL_CONTROL"|string;
   export interface StartQueryExecutionInput {
     /**
      * The SQL query statements to be executed.
@@ -1312,7 +1376,7 @@ declare namespace Athena {
   }
   export interface UpdateDataCatalogInput {
     /**
-     * The name of the data catalog to update. The catalog name must be unique for the Amazon Web Services account and can use a maximum of 128 alphanumeric, underscore, at sign, or hyphen characters.
+     * The name of the data catalog to update. The catalog name must be unique for the Amazon Web Services account and can use a maximum of 127 alphanumeric, underscore, at sign, or hyphen characters. The remainder of the length constraint of 256 is reserved for use by Athena.
      */
     Name: CatalogNameString;
     /**
@@ -1329,6 +1393,26 @@ declare namespace Athena {
     Parameters?: ParametersMap;
   }
   export interface UpdateDataCatalogOutput {
+  }
+  export interface UpdateNamedQueryInput {
+    /**
+     * The unique identifier (UUID) of the query.
+     */
+    NamedQueryId: NamedQueryId;
+    /**
+     * The name of the query.
+     */
+    Name: NameString;
+    /**
+     * The query description.
+     */
+    Description?: NamedQueryDescriptionString;
+    /**
+     * The contents of the query with all query statements.
+     */
+    QueryString: QueryString;
+  }
+  export interface UpdateNamedQueryOutput {
   }
   export interface UpdatePreparedStatementInput {
     /**

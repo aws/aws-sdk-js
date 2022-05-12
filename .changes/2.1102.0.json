@@ -1,0 +1,7 @@
+[
+    {
+        "type": "feature",
+        "category": "MediaLive",
+        "description": "This release adds support for selecting a maintenance window."
+    }
+]

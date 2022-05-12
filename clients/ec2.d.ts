@@ -85,6 +85,14 @@ declare class EC2 extends Service {
    */
   allocateHosts(callback?: (err: AWSError, data: EC2.Types.AllocateHostsResult) => void): Request<EC2.Types.AllocateHostsResult, AWSError>;
   /**
+   * Allocate a CIDR from an IPAM pool. In IPAM, an allocation is a CIDR assignment from an IPAM pool to another resource or IPAM pool. For more information, see Allocate CIDRs in the Amazon VPC IPAM User Guide. 
+   */
+  allocateIpamPoolCidr(params: EC2.Types.AllocateIpamPoolCidrRequest, callback?: (err: AWSError, data: EC2.Types.AllocateIpamPoolCidrResult) => void): Request<EC2.Types.AllocateIpamPoolCidrResult, AWSError>;
+  /**
+   * Allocate a CIDR from an IPAM pool. In IPAM, an allocation is a CIDR assignment from an IPAM pool to another resource or IPAM pool. For more information, see Allocate CIDRs in the Amazon VPC IPAM User Guide. 
+   */
+  allocateIpamPoolCidr(callback?: (err: AWSError, data: EC2.Types.AllocateIpamPoolCidrResult) => void): Request<EC2.Types.AllocateIpamPoolCidrResult, AWSError>;
+  /**
    * Applies a security group to the association between the target network and the Client VPN endpoint. This action replaces the existing security groups with the specified security groups.
    */
   applySecurityGroupsToClientVpnTargetNetwork(params: EC2.Types.ApplySecurityGroupsToClientVpnTargetNetworkRequest, callback?: (err: AWSError, data: EC2.Types.ApplySecurityGroupsToClientVpnTargetNetworkResult) => void): Request<EC2.Types.ApplySecurityGroupsToClientVpnTargetNetworkResult, AWSError>;
@@ -253,11 +261,11 @@ declare class EC2 extends Service {
    */
   authorizeClientVpnIngress(callback?: (err: AWSError, data: EC2.Types.AuthorizeClientVpnIngressResult) => void): Request<EC2.Types.AuthorizeClientVpnIngressResult, AWSError>;
   /**
-   * [VPC only] Adds the specified outbound (egress) rules to a security group for use with a VPC. An outbound rule permits instances to send traffic to the specified IPv4 or IPv6 CIDR address ranges, or to the instances that are associated with the specified destination security groups. You specify a protocol for each rule (for example, TCP). For the TCP and UDP protocols, you must also specify the destination port or port range. For the ICMP protocol, you must also specify the ICMP type and code. You can use -1 for the type or code to mean all types or all codes. Rule changes are propagated to affected instances as quickly as possible. However, a small delay might occur. For information about VPC security group quotas, see Amazon VPC quotas.
+   * [VPC only] Adds the specified outbound (egress) rules to a security group for use with a VPC. An outbound rule permits instances to send traffic to the specified IPv4 or IPv6 CIDR address ranges, or to the instances that are associated with the specified source security groups. You specify a protocol for each rule (for example, TCP). For the TCP and UDP protocols, you must also specify the destination port or port range. For the ICMP protocol, you must also specify the ICMP type and code. You can use -1 for the type or code to mean all types or all codes. Rule changes are propagated to affected instances as quickly as possible. However, a small delay might occur. For information about VPC security group quotas, see Amazon VPC quotas.
    */
   authorizeSecurityGroupEgress(params: EC2.Types.AuthorizeSecurityGroupEgressRequest, callback?: (err: AWSError, data: EC2.Types.AuthorizeSecurityGroupEgressResult) => void): Request<EC2.Types.AuthorizeSecurityGroupEgressResult, AWSError>;
   /**
-   * [VPC only] Adds the specified outbound (egress) rules to a security group for use with a VPC. An outbound rule permits instances to send traffic to the specified IPv4 or IPv6 CIDR address ranges, or to the instances that are associated with the specified destination security groups. You specify a protocol for each rule (for example, TCP). For the TCP and UDP protocols, you must also specify the destination port or port range. For the ICMP protocol, you must also specify the ICMP type and code. You can use -1 for the type or code to mean all types or all codes. Rule changes are propagated to affected instances as quickly as possible. However, a small delay might occur. For information about VPC security group quotas, see Amazon VPC quotas.
+   * [VPC only] Adds the specified outbound (egress) rules to a security group for use with a VPC. An outbound rule permits instances to send traffic to the specified IPv4 or IPv6 CIDR address ranges, or to the instances that are associated with the specified source security groups. You specify a protocol for each rule (for example, TCP). For the TCP and UDP protocols, you must also specify the destination port or port range. For the ICMP protocol, you must also specify the ICMP type and code. You can use -1 for the type or code to mean all types or all codes. Rule changes are propagated to affected instances as quickly as possible. However, a small delay might occur. For information about VPC security group quotas, see Amazon VPC quotas.
    */
   authorizeSecurityGroupEgress(callback?: (err: AWSError, data: EC2.Types.AuthorizeSecurityGroupEgressResult) => void): Request<EC2.Types.AuthorizeSecurityGroupEgressResult, AWSError>;
   /**
@@ -421,11 +429,11 @@ declare class EC2 extends Service {
    */
   createClientVpnRoute(callback?: (err: AWSError, data: EC2.Types.CreateClientVpnRouteResult) => void): Request<EC2.Types.CreateClientVpnRouteResult, AWSError>;
   /**
-   * Provides information to Amazon Web Services about your VPN customer gateway device. The customer gateway is the appliance at your end of the VPN connection. (The device on the Amazon Web Services side of the VPN connection is the virtual private gateway.) You must provide the internet-routable IP address of the customer gateway's external interface. The IP address must be static and can be behind a device performing network address translation (NAT). For devices that use Border Gateway Protocol (BGP), you can also provide the device's BGP Autonomous System Number (ASN). You can use an existing ASN assigned to your network. If you don't have an ASN already, you can use a private ASN (in the 64512 - 65534 range).  Amazon EC2 supports all 4-byte ASN numbers in the range of 1 - 2147483647, with the exception of the following:   7224 - reserved in the us-east-1 Region   9059 - reserved in the eu-west-1 Region   17943 - reserved in the ap-southeast-1 Region   10124 - reserved in the ap-northeast-1 Region    For more information, see Amazon Web Services Site-to-Site VPN in the Amazon Web Services Site-to-Site VPN User Guide.  To create more than one customer gateway with the same VPN type, IP address, and BGP ASN, specify a unique device name for each customer gateway. Identical requests return information about the existing customer gateway and do not create new customer gateways. 
+   * Provides information to Amazon Web Services about your VPN customer gateway device. The customer gateway is the appliance at your end of the VPN connection. (The device on the Amazon Web Services side of the VPN connection is the virtual private gateway.) You must provide the internet-routable IP address of the customer gateway's external interface. The IP address must be static and can be behind a device performing network address translation (NAT). For devices that use Border Gateway Protocol (BGP), you can also provide the device's BGP Autonomous System Number (ASN). You can use an existing ASN assigned to your network. If you don't have an ASN already, you can use a private ASN. For more information, see Customer gateway options for your Site-to-Site VPN connection in the Amazon Web Services Site-to-Site VPN User Guide. To create more than one customer gateway with the same VPN type, IP address, and BGP ASN, specify a unique device name for each customer gateway. An identical request returns information about the existing customer gateway; it doesn't create a new customer gateway.
    */
   createCustomerGateway(params: EC2.Types.CreateCustomerGatewayRequest, callback?: (err: AWSError, data: EC2.Types.CreateCustomerGatewayResult) => void): Request<EC2.Types.CreateCustomerGatewayResult, AWSError>;
   /**
-   * Provides information to Amazon Web Services about your VPN customer gateway device. The customer gateway is the appliance at your end of the VPN connection. (The device on the Amazon Web Services side of the VPN connection is the virtual private gateway.) You must provide the internet-routable IP address of the customer gateway's external interface. The IP address must be static and can be behind a device performing network address translation (NAT). For devices that use Border Gateway Protocol (BGP), you can also provide the device's BGP Autonomous System Number (ASN). You can use an existing ASN assigned to your network. If you don't have an ASN already, you can use a private ASN (in the 64512 - 65534 range).  Amazon EC2 supports all 4-byte ASN numbers in the range of 1 - 2147483647, with the exception of the following:   7224 - reserved in the us-east-1 Region   9059 - reserved in the eu-west-1 Region   17943 - reserved in the ap-southeast-1 Region   10124 - reserved in the ap-northeast-1 Region    For more information, see Amazon Web Services Site-to-Site VPN in the Amazon Web Services Site-to-Site VPN User Guide.  To create more than one customer gateway with the same VPN type, IP address, and BGP ASN, specify a unique device name for each customer gateway. Identical requests return information about the existing customer gateway and do not create new customer gateways. 
+   * Provides information to Amazon Web Services about your VPN customer gateway device. The customer gateway is the appliance at your end of the VPN connection. (The device on the Amazon Web Services side of the VPN connection is the virtual private gateway.) You must provide the internet-routable IP address of the customer gateway's external interface. The IP address must be static and can be behind a device performing network address translation (NAT). For devices that use Border Gateway Protocol (BGP), you can also provide the device's BGP Autonomous System Number (ASN). You can use an existing ASN assigned to your network. If you don't have an ASN already, you can use a private ASN. For more information, see Customer gateway options for your Site-to-Site VPN connection in the Amazon Web Services Site-to-Site VPN User Guide. To create more than one customer gateway with the same VPN type, IP address, and BGP ASN, specify a unique device name for each customer gateway. An identical request returns information about the existing customer gateway; it doesn't create a new customer gateway.
    */
   createCustomerGateway(callback?: (err: AWSError, data: EC2.Types.CreateCustomerGatewayResult) => void): Request<EC2.Types.CreateCustomerGatewayResult, AWSError>;
   /**
@@ -461,11 +469,11 @@ declare class EC2 extends Service {
    */
   createEgressOnlyInternetGateway(callback?: (err: AWSError, data: EC2.Types.CreateEgressOnlyInternetGatewayResult) => void): Request<EC2.Types.CreateEgressOnlyInternetGatewayResult, AWSError>;
   /**
-   * Launches an EC2 Fleet. You can create a single EC2 Fleet that includes multiple launch specifications that vary by instance type, AMI, Availability Zone, or subnet. For more information, see Launching an EC2 Fleet in the Amazon EC2 User Guide.
+   * Launches an EC2 Fleet. You can create a single EC2 Fleet that includes multiple launch specifications that vary by instance type, AMI, Availability Zone, or subnet. For more information, see EC2 Fleet in the Amazon EC2 User Guide.
    */
   createFleet(params: EC2.Types.CreateFleetRequest, callback?: (err: AWSError, data: EC2.Types.CreateFleetResult) => void): Request<EC2.Types.CreateFleetResult, AWSError>;
   /**
-   * Launches an EC2 Fleet. You can create a single EC2 Fleet that includes multiple launch specifications that vary by instance type, AMI, Availability Zone, or subnet. For more information, see Launching an EC2 Fleet in the Amazon EC2 User Guide.
+   * Launches an EC2 Fleet. You can create a single EC2 Fleet that includes multiple launch specifications that vary by instance type, AMI, Availability Zone, or subnet. For more information, see EC2 Fleet in the Amazon EC2 User Guide.
    */
   createFleet(callback?: (err: AWSError, data: EC2.Types.CreateFleetResult) => void): Request<EC2.Types.CreateFleetResult, AWSError>;
   /**
@@ -485,11 +493,11 @@ declare class EC2 extends Service {
    */
   createFpgaImage(callback?: (err: AWSError, data: EC2.Types.CreateFpgaImageResult) => void): Request<EC2.Types.CreateFpgaImageResult, AWSError>;
   /**
-   * Creates an Amazon EBS-backed AMI from an Amazon EBS-backed instance that is either running or stopped. If you customized your instance with instance store volumes or Amazon EBS volumes in addition to the root device volume, the new AMI contains block device mapping information for those volumes. When you launch an instance from this new AMI, the instance automatically launches with those additional volumes. For more information, see Creating Amazon EBS-Backed Linux AMIs in the Amazon Elastic Compute Cloud User Guide.
+   * Creates an Amazon EBS-backed AMI from an Amazon EBS-backed instance that is either running or stopped. By default, when Amazon EC2 creates the new AMI, it reboots the instance so that it can take snapshots of the attached volumes while data is at rest, in order to ensure a consistent state. You can set the NoReboot parameter to true in the API request, or use the --no-reboot option in the CLI to prevent Amazon EC2 from shutting down and rebooting the instance.  If you choose to bypass the shutdown and reboot process by setting the NoReboot parameter to true in the API request, or by using the --no-reboot option in the CLI, we can't guarantee the file system integrity of the created image.  If you customized your instance with instance store volumes or Amazon EBS volumes in addition to the root device volume, the new AMI contains block device mapping information for those volumes. When you launch an instance from this new AMI, the instance automatically launches with those additional volumes. For more information, see Creating Amazon EBS-Backed Linux AMIs in the Amazon Elastic Compute Cloud User Guide.
    */
   createImage(params: EC2.Types.CreateImageRequest, callback?: (err: AWSError, data: EC2.Types.CreateImageResult) => void): Request<EC2.Types.CreateImageResult, AWSError>;
   /**
-   * Creates an Amazon EBS-backed AMI from an Amazon EBS-backed instance that is either running or stopped. If you customized your instance with instance store volumes or Amazon EBS volumes in addition to the root device volume, the new AMI contains block device mapping information for those volumes. When you launch an instance from this new AMI, the instance automatically launches with those additional volumes. For more information, see Creating Amazon EBS-Backed Linux AMIs in the Amazon Elastic Compute Cloud User Guide.
+   * Creates an Amazon EBS-backed AMI from an Amazon EBS-backed instance that is either running or stopped. By default, when Amazon EC2 creates the new AMI, it reboots the instance so that it can take snapshots of the attached volumes while data is at rest, in order to ensure a consistent state. You can set the NoReboot parameter to true in the API request, or use the --no-reboot option in the CLI to prevent Amazon EC2 from shutting down and rebooting the instance.  If you choose to bypass the shutdown and reboot process by setting the NoReboot parameter to true in the API request, or by using the --no-reboot option in the CLI, we can't guarantee the file system integrity of the created image.  If you customized your instance with instance store volumes or Amazon EBS volumes in addition to the root device volume, the new AMI contains block device mapping information for those volumes. When you launch an instance from this new AMI, the instance automatically launches with those additional volumes. For more information, see Creating Amazon EBS-Backed Linux AMIs in the Amazon Elastic Compute Cloud User Guide.
    */
   createImage(callback?: (err: AWSError, data: EC2.Types.CreateImageResult) => void): Request<EC2.Types.CreateImageResult, AWSError>;
   /**
@@ -517,19 +525,43 @@ declare class EC2 extends Service {
    */
   createInternetGateway(callback?: (err: AWSError, data: EC2.Types.CreateInternetGatewayResult) => void): Request<EC2.Types.CreateInternetGatewayResult, AWSError>;
   /**
-   * Creates an ED25519 or 2048-bit RSA key pair with the specified name. Amazon EC2 stores the public key and displays the private key for you to save to a file. The private key is returned as an unencrypted PEM encoded PKCS#1 private key. If a key with the specified name already exists, Amazon EC2 returns an error. The key pair returned to you is available only in the Amazon Web Services Region in which you create it. If you prefer, you can create your own key pair using a third-party tool and upload it to any Region using ImportKeyPair. You can have up to 5,000 key pairs per Amazon Web Services Region. For more information, see Amazon EC2 key pairs in the Amazon Elastic Compute Cloud User Guide.
+   * Create an IPAM. Amazon VPC IP Address Manager (IPAM) is a VPC feature that you can use to automate your IP address management workflows including assigning, tracking, troubleshooting, and auditing IP addresses across Amazon Web Services Regions and accounts throughout your Amazon Web Services Organization. For more information, see Create an IPAM in the Amazon VPC IPAM User Guide. 
+   */
+  createIpam(params: EC2.Types.CreateIpamRequest, callback?: (err: AWSError, data: EC2.Types.CreateIpamResult) => void): Request<EC2.Types.CreateIpamResult, AWSError>;
+  /**
+   * Create an IPAM. Amazon VPC IP Address Manager (IPAM) is a VPC feature that you can use to automate your IP address management workflows including assigning, tracking, troubleshooting, and auditing IP addresses across Amazon Web Services Regions and accounts throughout your Amazon Web Services Organization. For more information, see Create an IPAM in the Amazon VPC IPAM User Guide. 
+   */
+  createIpam(callback?: (err: AWSError, data: EC2.Types.CreateIpamResult) => void): Request<EC2.Types.CreateIpamResult, AWSError>;
+  /**
+   * Create an IP address pool for Amazon VPC IP Address Manager (IPAM). In IPAM, a pool is a collection of contiguous IP addresses CIDRs. Pools enable you to organize your IP addresses according to your routing and security needs. For example, if you have separate routing and security needs for development and production applications, you can create a pool for each. For more information, see Create a top-level pool in the Amazon VPC IPAM User Guide. 
+   */
+  createIpamPool(params: EC2.Types.CreateIpamPoolRequest, callback?: (err: AWSError, data: EC2.Types.CreateIpamPoolResult) => void): Request<EC2.Types.CreateIpamPoolResult, AWSError>;
+  /**
+   * Create an IP address pool for Amazon VPC IP Address Manager (IPAM). In IPAM, a pool is a collection of contiguous IP addresses CIDRs. Pools enable you to organize your IP addresses according to your routing and security needs. For example, if you have separate routing and security needs for development and production applications, you can create a pool for each. For more information, see Create a top-level pool in the Amazon VPC IPAM User Guide. 
+   */
+  createIpamPool(callback?: (err: AWSError, data: EC2.Types.CreateIpamPoolResult) => void): Request<EC2.Types.CreateIpamPoolResult, AWSError>;
+  /**
+   * Create an IPAM scope. In IPAM, a scope is the highest-level container within IPAM. An IPAM contains two default scopes. Each scope represents the IP space for a single network. The private scope is intended for all private IP address space. The public scope is intended for all public IP address space. Scopes enable you to reuse IP addresses across multiple unconnected networks without causing IP address overlap or conflict. For more information, see Add a scope in the Amazon VPC IPAM User Guide.
+   */
+  createIpamScope(params: EC2.Types.CreateIpamScopeRequest, callback?: (err: AWSError, data: EC2.Types.CreateIpamScopeResult) => void): Request<EC2.Types.CreateIpamScopeResult, AWSError>;
+  /**
+   * Create an IPAM scope. In IPAM, a scope is the highest-level container within IPAM. An IPAM contains two default scopes. Each scope represents the IP space for a single network. The private scope is intended for all private IP address space. The public scope is intended for all public IP address space. Scopes enable you to reuse IP addresses across multiple unconnected networks without causing IP address overlap or conflict. For more information, see Add a scope in the Amazon VPC IPAM User Guide.
+   */
+  createIpamScope(callback?: (err: AWSError, data: EC2.Types.CreateIpamScopeResult) => void): Request<EC2.Types.CreateIpamScopeResult, AWSError>;
+  /**
+   * Creates an ED25519 or 2048-bit RSA key pair with the specified name and in the specified PEM or PPK format. Amazon EC2 stores the public key and displays the private key for you to save to a file. The private key is returned as an unencrypted PEM encoded PKCS#1 private key or an unencrypted PPK formatted private key for use with PuTTY. If a key with the specified name already exists, Amazon EC2 returns an error. The key pair returned to you is available only in the Amazon Web Services Region in which you create it. If you prefer, you can create your own key pair using a third-party tool and upload it to any Region using ImportKeyPair. You can have up to 5,000 key pairs per Amazon Web Services Region. For more information, see Amazon EC2 key pairs in the Amazon Elastic Compute Cloud User Guide.
    */
   createKeyPair(params: EC2.Types.CreateKeyPairRequest, callback?: (err: AWSError, data: EC2.Types.KeyPair) => void): Request<EC2.Types.KeyPair, AWSError>;
   /**
-   * Creates an ED25519 or 2048-bit RSA key pair with the specified name. Amazon EC2 stores the public key and displays the private key for you to save to a file. The private key is returned as an unencrypted PEM encoded PKCS#1 private key. If a key with the specified name already exists, Amazon EC2 returns an error. The key pair returned to you is available only in the Amazon Web Services Region in which you create it. If you prefer, you can create your own key pair using a third-party tool and upload it to any Region using ImportKeyPair. You can have up to 5,000 key pairs per Amazon Web Services Region. For more information, see Amazon EC2 key pairs in the Amazon Elastic Compute Cloud User Guide.
+   * Creates an ED25519 or 2048-bit RSA key pair with the specified name and in the specified PEM or PPK format. Amazon EC2 stores the public key and displays the private key for you to save to a file. The private key is returned as an unencrypted PEM encoded PKCS#1 private key or an unencrypted PPK formatted private key for use with PuTTY. If a key with the specified name already exists, Amazon EC2 returns an error. The key pair returned to you is available only in the Amazon Web Services Region in which you create it. If you prefer, you can create your own key pair using a third-party tool and upload it to any Region using ImportKeyPair. You can have up to 5,000 key pairs per Amazon Web Services Region. For more information, see Amazon EC2 key pairs in the Amazon Elastic Compute Cloud User Guide.
    */
   createKeyPair(callback?: (err: AWSError, data: EC2.Types.KeyPair) => void): Request<EC2.Types.KeyPair, AWSError>;
   /**
-   * Creates a launch template. A launch template contains the parameters to launch an instance. When you launch an instance using RunInstances, you can specify a launch template instead of providing the launch parameters in the request. For more information, see Launching an instance from a launch template in the Amazon Elastic Compute Cloud User Guide.
+   * Creates a launch template. A launch template contains the parameters to launch an instance. When you launch an instance using RunInstances, you can specify a launch template instead of providing the launch parameters in the request. For more information, see Launching an instance from a launch template in the Amazon Elastic Compute Cloud User Guide. If you want to clone an existing launch template as the basis for creating a new launch template, you can use the Amazon EC2 console. The API, SDKs, and CLI do not support cloning a template. For more information, see Create a launch template from an existing launch template in the Amazon Elastic Compute Cloud User Guide.
    */
   createLaunchTemplate(params: EC2.Types.CreateLaunchTemplateRequest, callback?: (err: AWSError, data: EC2.Types.CreateLaunchTemplateResult) => void): Request<EC2.Types.CreateLaunchTemplateResult, AWSError>;
   /**
-   * Creates a launch template. A launch template contains the parameters to launch an instance. When you launch an instance using RunInstances, you can specify a launch template instead of providing the launch parameters in the request. For more information, see Launching an instance from a launch template in the Amazon Elastic Compute Cloud User Guide.
+   * Creates a launch template. A launch template contains the parameters to launch an instance. When you launch an instance using RunInstances, you can specify a launch template instead of providing the launch parameters in the request. For more information, see Launching an instance from a launch template in the Amazon Elastic Compute Cloud User Guide. If you want to clone an existing launch template as the basis for creating a new launch template, you can use the Amazon EC2 console. The API, SDKs, and CLI do not support cloning a template. For more information, see Create a launch template from an existing launch template in the Amazon Elastic Compute Cloud User Guide.
    */
   createLaunchTemplate(callback?: (err: AWSError, data: EC2.Types.CreateLaunchTemplateResult) => void): Request<EC2.Types.CreateLaunchTemplateResult, AWSError>;
   /**
@@ -589,6 +621,14 @@ declare class EC2 extends Service {
    */
   createNetworkAclEntry(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Creates a Network Access Scope. Amazon Web Services Network Access Analyzer enables cloud networking and cloud operations teams to verify that their networks on Amazon Web Services conform to their network security and governance objectives. For more information, see the Amazon Web Services Network Access Analyzer Guide.
+   */
+  createNetworkInsightsAccessScope(params: EC2.Types.CreateNetworkInsightsAccessScopeRequest, callback?: (err: AWSError, data: EC2.Types.CreateNetworkInsightsAccessScopeResult) => void): Request<EC2.Types.CreateNetworkInsightsAccessScopeResult, AWSError>;
+  /**
+   * Creates a Network Access Scope. Amazon Web Services Network Access Analyzer enables cloud networking and cloud operations teams to verify that their networks on Amazon Web Services conform to their network security and governance objectives. For more information, see the Amazon Web Services Network Access Analyzer Guide.
+   */
+  createNetworkInsightsAccessScope(callback?: (err: AWSError, data: EC2.Types.CreateNetworkInsightsAccessScopeResult) => void): Request<EC2.Types.CreateNetworkInsightsAccessScopeResult, AWSError>;
+  /**
    * Creates a path to analyze for reachability. Reachability Analyzer enables you to analyze and debug network reachability between two resources in your virtual private cloud (VPC). For more information, see What is Reachability Analyzer.
    */
   createNetworkInsightsPath(params: EC2.Types.CreateNetworkInsightsPathRequest, callback?: (err: AWSError, data: EC2.Types.CreateNetworkInsightsPathResult) => void): Request<EC2.Types.CreateNetworkInsightsPathResult, AWSError>;
@@ -620,6 +660,14 @@ declare class EC2 extends Service {
    * Creates a placement group in which to launch instances. The strategy of the placement group determines how the instances are organized within the group.  A cluster placement group is a logical grouping of instances within a single Availability Zone that benefit from low network latency, high network throughput. A spread placement group places instances on distinct hardware. A partition placement group places groups of instances in different partitions, where instances in one partition do not share the same hardware with instances in another partition. For more information, see Placement groups in the Amazon EC2 User Guide.
    */
   createPlacementGroup(callback?: (err: AWSError, data: EC2.Types.CreatePlacementGroupResult) => void): Request<EC2.Types.CreatePlacementGroupResult, AWSError>;
+  /**
+   * Creates a public IPv4 address pool. A public IPv4 pool is an EC2 IP address pool required for the public IPv4 CIDRs that you own and bring to Amazon Web Services to manage with IPAM. IPv6 addresses you bring to Amazon Web Services, however, use IPAM pools only. To monitor the status of pool creation, use DescribePublicIpv4Pools.
+   */
+  createPublicIpv4Pool(params: EC2.Types.CreatePublicIpv4PoolRequest, callback?: (err: AWSError, data: EC2.Types.CreatePublicIpv4PoolResult) => void): Request<EC2.Types.CreatePublicIpv4PoolResult, AWSError>;
+  /**
+   * Creates a public IPv4 address pool. A public IPv4 pool is an EC2 IP address pool required for the public IPv4 CIDRs that you own and bring to Amazon Web Services to manage with IPAM. IPv6 addresses you bring to Amazon Web Services, however, use IPAM pools only. To monitor the status of pool creation, use DescribePublicIpv4Pools.
+   */
+  createPublicIpv4Pool(callback?: (err: AWSError, data: EC2.Types.CreatePublicIpv4PoolResult) => void): Request<EC2.Types.CreatePublicIpv4PoolResult, AWSError>;
   /**
    * Creates a root volume replacement task for an Amazon EC2 instance. The root volume can either be restored to its initial launch state, or it can be restored using a specific snapshot. For more information, see Replace a root volume in the Amazon Elastic Compute Cloud User Guide.
    */
@@ -749,11 +797,11 @@ declare class EC2 extends Service {
    */
   createTrafficMirrorSession(callback?: (err: AWSError, data: EC2.Types.CreateTrafficMirrorSessionResult) => void): Request<EC2.Types.CreateTrafficMirrorSessionResult, AWSError>;
   /**
-   * Creates a target for your Traffic Mirror session. A Traffic Mirror target is the destination for mirrored traffic. The Traffic Mirror source and the Traffic Mirror target (monitoring appliances) can be in the same VPC, or in different VPCs connected via VPC peering or a transit gateway. A Traffic Mirror target can be a network interface, or a Network Load Balancer. To use the target in a Traffic Mirror session, use CreateTrafficMirrorSession.
+   * Creates a target for your Traffic Mirror session. A Traffic Mirror target is the destination for mirrored traffic. The Traffic Mirror source and the Traffic Mirror target (monitoring appliances) can be in the same VPC, or in different VPCs connected via VPC peering or a transit gateway. A Traffic Mirror target can be a network interface, a Network Load Balancer, or a Gateway Load Balancer endpoint. To use the target in a Traffic Mirror session, use CreateTrafficMirrorSession.
    */
   createTrafficMirrorTarget(params: EC2.Types.CreateTrafficMirrorTargetRequest, callback?: (err: AWSError, data: EC2.Types.CreateTrafficMirrorTargetResult) => void): Request<EC2.Types.CreateTrafficMirrorTargetResult, AWSError>;
   /**
-   * Creates a target for your Traffic Mirror session. A Traffic Mirror target is the destination for mirrored traffic. The Traffic Mirror source and the Traffic Mirror target (monitoring appliances) can be in the same VPC, or in different VPCs connected via VPC peering or a transit gateway. A Traffic Mirror target can be a network interface, or a Network Load Balancer. To use the target in a Traffic Mirror session, use CreateTrafficMirrorSession.
+   * Creates a target for your Traffic Mirror session. A Traffic Mirror target is the destination for mirrored traffic. The Traffic Mirror source and the Traffic Mirror target (monitoring appliances) can be in the same VPC, or in different VPCs connected via VPC peering or a transit gateway. A Traffic Mirror target can be a network interface, a Network Load Balancer, or a Gateway Load Balancer endpoint. To use the target in a Traffic Mirror session, use CreateTrafficMirrorSession.
    */
   createTrafficMirrorTarget(callback?: (err: AWSError, data: EC2.Types.CreateTrafficMirrorTargetResult) => void): Request<EC2.Types.CreateTrafficMirrorTargetResult, AWSError>;
   /**
@@ -845,11 +893,11 @@ declare class EC2 extends Service {
    */
   createVpc(callback?: (err: AWSError, data: EC2.Types.CreateVpcResult) => void): Request<EC2.Types.CreateVpcResult, AWSError>;
   /**
-   * Creates a VPC endpoint for a specified service. An endpoint enables you to create a private connection between your VPC and the service. The service may be provided by Amazon Web Services, an Amazon Web Services Marketplace Partner, or another Amazon Web Services account. For more information, see VPC Endpoints in the Amazon Virtual Private Cloud User Guide. A gateway endpoint serves as a target for a route in your route table for traffic destined for the Amazon Web Service. You can specify an endpoint policy to attach to the endpoint, which will control access to the service from your VPC. You can also specify the VPC route tables that use the endpoint. An interface endpoint is a network interface in your subnet that serves as an endpoint for communicating with the specified service. You can specify the subnets in which to create an endpoint, and the security groups to associate with the endpoint network interface. A GatewayLoadBalancer endpoint is a network interface in your subnet that serves an endpoint for communicating with a Gateway Load Balancer that you've configured as a VPC endpoint service. Use DescribeVpcEndpointServices to get a list of supported services.
+   * Creates a VPC endpoint for a specified service. An endpoint enables you to create a private connection between your VPC and the service. The service may be provided by Amazon Web Services, an Amazon Web Services Marketplace Partner, or another Amazon Web Services account. For more information, see the Amazon Web Services PrivateLink Guide.
    */
   createVpcEndpoint(params: EC2.Types.CreateVpcEndpointRequest, callback?: (err: AWSError, data: EC2.Types.CreateVpcEndpointResult) => void): Request<EC2.Types.CreateVpcEndpointResult, AWSError>;
   /**
-   * Creates a VPC endpoint for a specified service. An endpoint enables you to create a private connection between your VPC and the service. The service may be provided by Amazon Web Services, an Amazon Web Services Marketplace Partner, or another Amazon Web Services account. For more information, see VPC Endpoints in the Amazon Virtual Private Cloud User Guide. A gateway endpoint serves as a target for a route in your route table for traffic destined for the Amazon Web Service. You can specify an endpoint policy to attach to the endpoint, which will control access to the service from your VPC. You can also specify the VPC route tables that use the endpoint. An interface endpoint is a network interface in your subnet that serves as an endpoint for communicating with the specified service. You can specify the subnets in which to create an endpoint, and the security groups to associate with the endpoint network interface. A GatewayLoadBalancer endpoint is a network interface in your subnet that serves an endpoint for communicating with a Gateway Load Balancer that you've configured as a VPC endpoint service. Use DescribeVpcEndpointServices to get a list of supported services.
+   * Creates a VPC endpoint for a specified service. An endpoint enables you to create a private connection between your VPC and the service. The service may be provided by Amazon Web Services, an Amazon Web Services Marketplace Partner, or another Amazon Web Services account. For more information, see the Amazon Web Services PrivateLink Guide.
    */
   createVpcEndpoint(callback?: (err: AWSError, data: EC2.Types.CreateVpcEndpointResult) => void): Request<EC2.Types.CreateVpcEndpointResult, AWSError>;
   /**
@@ -861,11 +909,11 @@ declare class EC2 extends Service {
    */
   createVpcEndpointConnectionNotification(callback?: (err: AWSError, data: EC2.Types.CreateVpcEndpointConnectionNotificationResult) => void): Request<EC2.Types.CreateVpcEndpointConnectionNotificationResult, AWSError>;
   /**
-   * Creates a VPC endpoint service configuration to which service consumers (Amazon Web Services accounts, IAM users, and IAM roles) can connect. To create an endpoint service configuration, you must first create one of the following for your service:   A Network Load Balancer. Service consumers connect to your service using an interface endpoint.   A Gateway Load Balancer. Service consumers connect to your service using a Gateway Load Balancer endpoint.   For more information, see VPC Endpoint Services in the Amazon Virtual Private Cloud User Guide.  If you set the private DNS name, you must prove that you own the private DNS domain name. For more information, see VPC Endpoint Service Private DNS Name Verification in the Amazon Virtual Private Cloud User Guide.
+   * Creates a VPC endpoint service to which service consumers (Amazon Web Services accounts, IAM users, and IAM roles) can connect. Before you create an endpoint service, you must create one of the following for your service:   A Network Load Balancer. Service consumers connect to your service using an interface endpoint.   A Gateway Load Balancer. Service consumers connect to your service using a Gateway Load Balancer endpoint.   If you set the private DNS name, you must prove that you own the private DNS domain name. For more information, see the Amazon Web Services PrivateLink Guide.
    */
   createVpcEndpointServiceConfiguration(params: EC2.Types.CreateVpcEndpointServiceConfigurationRequest, callback?: (err: AWSError, data: EC2.Types.CreateVpcEndpointServiceConfigurationResult) => void): Request<EC2.Types.CreateVpcEndpointServiceConfigurationResult, AWSError>;
   /**
-   * Creates a VPC endpoint service configuration to which service consumers (Amazon Web Services accounts, IAM users, and IAM roles) can connect. To create an endpoint service configuration, you must first create one of the following for your service:   A Network Load Balancer. Service consumers connect to your service using an interface endpoint.   A Gateway Load Balancer. Service consumers connect to your service using a Gateway Load Balancer endpoint.   For more information, see VPC Endpoint Services in the Amazon Virtual Private Cloud User Guide.  If you set the private DNS name, you must prove that you own the private DNS domain name. For more information, see VPC Endpoint Service Private DNS Name Verification in the Amazon Virtual Private Cloud User Guide.
+   * Creates a VPC endpoint service to which service consumers (Amazon Web Services accounts, IAM users, and IAM roles) can connect. Before you create an endpoint service, you must create one of the following for your service:   A Network Load Balancer. Service consumers connect to your service using an interface endpoint.   A Gateway Load Balancer. Service consumers connect to your service using a Gateway Load Balancer endpoint.   If you set the private DNS name, you must prove that you own the private DNS domain name. For more information, see the Amazon Web Services PrivateLink Guide.
    */
   createVpcEndpointServiceConfiguration(callback?: (err: AWSError, data: EC2.Types.CreateVpcEndpointServiceConfigurationResult) => void): Request<EC2.Types.CreateVpcEndpointServiceConfigurationResult, AWSError>;
   /**
@@ -949,11 +997,11 @@ declare class EC2 extends Service {
    */
   deleteEgressOnlyInternetGateway(callback?: (err: AWSError, data: EC2.Types.DeleteEgressOnlyInternetGatewayResult) => void): Request<EC2.Types.DeleteEgressOnlyInternetGatewayResult, AWSError>;
   /**
-   * Deletes the specified EC2 Fleet. After you delete an EC2 Fleet, it launches no new instances. You must specify whether a deleted EC2 Fleet should also terminate its instances. If you choose to terminate the instances, the EC2 Fleet enters the deleted_terminating state. Otherwise, the EC2 Fleet enters the deleted_running state, and the instances continue to run until they are interrupted or you terminate them manually. For instant fleets, EC2 Fleet must terminate the instances when the fleet is deleted. A deleted instant fleet with running instances is not supported.  Restrictions    You can delete up to 25 instant fleets in a single request. If you exceed this number, no instant fleets are deleted and an error is returned. There is no restriction on the number of fleets of type maintain or request that can be deleted in a single request.   Up to 1000 instances can be terminated in a single request to delete instant fleets.   For more information, see Deleting an EC2 Fleet in the Amazon EC2 User Guide.
+   * Deletes the specified EC2 Fleet. After you delete an EC2 Fleet, it launches no new instances. You must specify whether a deleted EC2 Fleet should also terminate its instances. If you choose to terminate the instances, the EC2 Fleet enters the deleted_terminating state. Otherwise, the EC2 Fleet enters the deleted_running state, and the instances continue to run until they are interrupted or you terminate them manually. For instant fleets, EC2 Fleet must terminate the instances when the fleet is deleted. A deleted instant fleet with running instances is not supported.  Restrictions    You can delete up to 25 instant fleets in a single request. If you exceed this number, no instant fleets are deleted and an error is returned. There is no restriction on the number of fleets of type maintain or request that can be deleted in a single request.   Up to 1000 instances can be terminated in a single request to delete instant fleets.   For more information, see Delete an EC2 Fleet in the Amazon EC2 User Guide.
    */
   deleteFleets(params: EC2.Types.DeleteFleetsRequest, callback?: (err: AWSError, data: EC2.Types.DeleteFleetsResult) => void): Request<EC2.Types.DeleteFleetsResult, AWSError>;
   /**
-   * Deletes the specified EC2 Fleet. After you delete an EC2 Fleet, it launches no new instances. You must specify whether a deleted EC2 Fleet should also terminate its instances. If you choose to terminate the instances, the EC2 Fleet enters the deleted_terminating state. Otherwise, the EC2 Fleet enters the deleted_running state, and the instances continue to run until they are interrupted or you terminate them manually. For instant fleets, EC2 Fleet must terminate the instances when the fleet is deleted. A deleted instant fleet with running instances is not supported.  Restrictions    You can delete up to 25 instant fleets in a single request. If you exceed this number, no instant fleets are deleted and an error is returned. There is no restriction on the number of fleets of type maintain or request that can be deleted in a single request.   Up to 1000 instances can be terminated in a single request to delete instant fleets.   For more information, see Deleting an EC2 Fleet in the Amazon EC2 User Guide.
+   * Deletes the specified EC2 Fleet. After you delete an EC2 Fleet, it launches no new instances. You must specify whether a deleted EC2 Fleet should also terminate its instances. If you choose to terminate the instances, the EC2 Fleet enters the deleted_terminating state. Otherwise, the EC2 Fleet enters the deleted_running state, and the instances continue to run until they are interrupted or you terminate them manually. For instant fleets, EC2 Fleet must terminate the instances when the fleet is deleted. A deleted instant fleet with running instances is not supported.  Restrictions    You can delete up to 25 instant fleets in a single request. If you exceed this number, no instant fleets are deleted and an error is returned. There is no restriction on the number of fleets of type maintain or request that can be deleted in a single request.   Up to 1000 instances can be terminated in a single request to delete instant fleets.   For more information, see Delete an EC2 Fleet in the Amazon EC2 User Guide.
    */
   deleteFleets(callback?: (err: AWSError, data: EC2.Types.DeleteFleetsResult) => void): Request<EC2.Types.DeleteFleetsResult, AWSError>;
   /**
@@ -988,6 +1036,30 @@ declare class EC2 extends Service {
    * Deletes the specified internet gateway. You must detach the internet gateway from the VPC before you can delete it.
    */
   deleteInternetGateway(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Delete an IPAM. Deleting an IPAM removes all monitored data associated with the IPAM including the historical data for CIDRs. For more information, see Delete an IPAM in the Amazon VPC IPAM User Guide. 
+   */
+  deleteIpam(params: EC2.Types.DeleteIpamRequest, callback?: (err: AWSError, data: EC2.Types.DeleteIpamResult) => void): Request<EC2.Types.DeleteIpamResult, AWSError>;
+  /**
+   * Delete an IPAM. Deleting an IPAM removes all monitored data associated with the IPAM including the historical data for CIDRs. For more information, see Delete an IPAM in the Amazon VPC IPAM User Guide. 
+   */
+  deleteIpam(callback?: (err: AWSError, data: EC2.Types.DeleteIpamResult) => void): Request<EC2.Types.DeleteIpamResult, AWSError>;
+  /**
+   * Delete an IPAM pool.  You cannot delete an IPAM pool if there are allocations in it or CIDRs provisioned to it. To release allocations, see ReleaseIpamPoolAllocation. To deprovision pool CIDRs, see DeprovisionIpamPoolCidr.  For more information, see Delete a pool in the Amazon VPC IPAM User Guide. 
+   */
+  deleteIpamPool(params: EC2.Types.DeleteIpamPoolRequest, callback?: (err: AWSError, data: EC2.Types.DeleteIpamPoolResult) => void): Request<EC2.Types.DeleteIpamPoolResult, AWSError>;
+  /**
+   * Delete an IPAM pool.  You cannot delete an IPAM pool if there are allocations in it or CIDRs provisioned to it. To release allocations, see ReleaseIpamPoolAllocation. To deprovision pool CIDRs, see DeprovisionIpamPoolCidr.  For more information, see Delete a pool in the Amazon VPC IPAM User Guide. 
+   */
+  deleteIpamPool(callback?: (err: AWSError, data: EC2.Types.DeleteIpamPoolResult) => void): Request<EC2.Types.DeleteIpamPoolResult, AWSError>;
+  /**
+   * Delete the scope for an IPAM. You cannot delete the default scopes. For more information, see Delete a scope in the Amazon VPC IPAM User Guide. 
+   */
+  deleteIpamScope(params: EC2.Types.DeleteIpamScopeRequest, callback?: (err: AWSError, data: EC2.Types.DeleteIpamScopeResult) => void): Request<EC2.Types.DeleteIpamScopeResult, AWSError>;
+  /**
+   * Delete the scope for an IPAM. You cannot delete the default scopes. For more information, see Delete a scope in the Amazon VPC IPAM User Guide. 
+   */
+  deleteIpamScope(callback?: (err: AWSError, data: EC2.Types.DeleteIpamScopeResult) => void): Request<EC2.Types.DeleteIpamScopeResult, AWSError>;
   /**
    * Deletes the specified key pair, by removing the public key from Amazon EC2.
    */
@@ -1061,6 +1133,22 @@ declare class EC2 extends Service {
    */
   deleteNetworkAclEntry(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Deletes the specified Network Access Scope.
+   */
+  deleteNetworkInsightsAccessScope(params: EC2.Types.DeleteNetworkInsightsAccessScopeRequest, callback?: (err: AWSError, data: EC2.Types.DeleteNetworkInsightsAccessScopeResult) => void): Request<EC2.Types.DeleteNetworkInsightsAccessScopeResult, AWSError>;
+  /**
+   * Deletes the specified Network Access Scope.
+   */
+  deleteNetworkInsightsAccessScope(callback?: (err: AWSError, data: EC2.Types.DeleteNetworkInsightsAccessScopeResult) => void): Request<EC2.Types.DeleteNetworkInsightsAccessScopeResult, AWSError>;
+  /**
+   * Deletes the specified Network Access Scope analysis.
+   */
+  deleteNetworkInsightsAccessScopeAnalysis(params: EC2.Types.DeleteNetworkInsightsAccessScopeAnalysisRequest, callback?: (err: AWSError, data: EC2.Types.DeleteNetworkInsightsAccessScopeAnalysisResult) => void): Request<EC2.Types.DeleteNetworkInsightsAccessScopeAnalysisResult, AWSError>;
+  /**
+   * Deletes the specified Network Access Scope analysis.
+   */
+  deleteNetworkInsightsAccessScopeAnalysis(callback?: (err: AWSError, data: EC2.Types.DeleteNetworkInsightsAccessScopeAnalysisResult) => void): Request<EC2.Types.DeleteNetworkInsightsAccessScopeAnalysisResult, AWSError>;
+  /**
    * Deletes the specified network insights analysis.
    */
   deleteNetworkInsightsAnalysis(params: EC2.Types.DeleteNetworkInsightsAnalysisRequest, callback?: (err: AWSError, data: EC2.Types.DeleteNetworkInsightsAnalysisResult) => void): Request<EC2.Types.DeleteNetworkInsightsAnalysisResult, AWSError>;
@@ -1100,6 +1188,14 @@ declare class EC2 extends Service {
    * Deletes the specified placement group. You must terminate all instances in the placement group before you can delete the placement group. For more information, see Placement groups in the Amazon EC2 User Guide.
    */
   deletePlacementGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Delete a public IPv4 pool. A public IPv4 pool is an EC2 IP address pool required for the public IPv4 CIDRs that you own and bring to Amazon Web Services to manage with IPAM. IPv6 addresses you bring to Amazon Web Services, however, use IPAM pools only.
+   */
+  deletePublicIpv4Pool(params: EC2.Types.DeletePublicIpv4PoolRequest, callback?: (err: AWSError, data: EC2.Types.DeletePublicIpv4PoolResult) => void): Request<EC2.Types.DeletePublicIpv4PoolResult, AWSError>;
+  /**
+   * Delete a public IPv4 pool. A public IPv4 pool is an EC2 IP address pool required for the public IPv4 CIDRs that you own and bring to Amazon Web Services to manage with IPAM. IPv6 addresses you bring to Amazon Web Services, however, use IPAM pools only.
+   */
+  deletePublicIpv4Pool(callback?: (err: AWSError, data: EC2.Types.DeletePublicIpv4PoolResult) => void): Request<EC2.Types.DeletePublicIpv4PoolResult, AWSError>;
   /**
    * Deletes the queued purchases for the specified Reserved Instances.
    */
@@ -1357,19 +1453,35 @@ declare class EC2 extends Service {
    */
   deprovisionByoipCidr(callback?: (err: AWSError, data: EC2.Types.DeprovisionByoipCidrResult) => void): Request<EC2.Types.DeprovisionByoipCidrResult, AWSError>;
   /**
-   * Deregisters the specified AMI. After you deregister an AMI, it can't be used to launch new instances; however, it doesn't affect any instances that you've already launched from the AMI. You'll continue to incur usage costs for those instances until you terminate them. When you deregister an Amazon EBS-backed AMI, it doesn't affect the snapshot that was created for the root volume of the instance during the AMI creation process. When you deregister an instance store-backed AMI, it doesn't affect the files that you uploaded to Amazon S3 when you created the AMI.
+   * Deprovision a CIDR provisioned from an IPAM pool. If you deprovision a CIDR from a pool that has a source pool, the CIDR is recycled back into the source pool. For more information, see Deprovision pool CIDRs in the Amazon VPC IPAM User Guide.
+   */
+  deprovisionIpamPoolCidr(params: EC2.Types.DeprovisionIpamPoolCidrRequest, callback?: (err: AWSError, data: EC2.Types.DeprovisionIpamPoolCidrResult) => void): Request<EC2.Types.DeprovisionIpamPoolCidrResult, AWSError>;
+  /**
+   * Deprovision a CIDR provisioned from an IPAM pool. If you deprovision a CIDR from a pool that has a source pool, the CIDR is recycled back into the source pool. For more information, see Deprovision pool CIDRs in the Amazon VPC IPAM User Guide.
+   */
+  deprovisionIpamPoolCidr(callback?: (err: AWSError, data: EC2.Types.DeprovisionIpamPoolCidrResult) => void): Request<EC2.Types.DeprovisionIpamPoolCidrResult, AWSError>;
+  /**
+   * Deprovision a CIDR from a public IPv4 pool.
+   */
+  deprovisionPublicIpv4PoolCidr(params: EC2.Types.DeprovisionPublicIpv4PoolCidrRequest, callback?: (err: AWSError, data: EC2.Types.DeprovisionPublicIpv4PoolCidrResult) => void): Request<EC2.Types.DeprovisionPublicIpv4PoolCidrResult, AWSError>;
+  /**
+   * Deprovision a CIDR from a public IPv4 pool.
+   */
+  deprovisionPublicIpv4PoolCidr(callback?: (err: AWSError, data: EC2.Types.DeprovisionPublicIpv4PoolCidrResult) => void): Request<EC2.Types.DeprovisionPublicIpv4PoolCidrResult, AWSError>;
+  /**
+   * Deregisters the specified AMI. After you deregister an AMI, it can't be used to launch new instances. If you deregister an AMI that matches a Recycle Bin retention rule, the AMI is retained in the Recycle Bin for the specified retention period. For more information, see Recycle Bin in the Amazon Elastic Compute Cloud User Guide. When you deregister an AMI, it doesn't affect any instances that you've already launched from the AMI. You'll continue to incur usage costs for those instances until you terminate them. When you deregister an Amazon EBS-backed AMI, it doesn't affect the snapshot that was created for the root volume of the instance during the AMI creation process. When you deregister an instance store-backed AMI, it doesn't affect the files that you uploaded to Amazon S3 when you created the AMI.
    */
   deregisterImage(params: EC2.Types.DeregisterImageRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deregisters the specified AMI. After you deregister an AMI, it can't be used to launch new instances; however, it doesn't affect any instances that you've already launched from the AMI. You'll continue to incur usage costs for those instances until you terminate them. When you deregister an Amazon EBS-backed AMI, it doesn't affect the snapshot that was created for the root volume of the instance during the AMI creation process. When you deregister an instance store-backed AMI, it doesn't affect the files that you uploaded to Amazon S3 when you created the AMI.
+   * Deregisters the specified AMI. After you deregister an AMI, it can't be used to launch new instances. If you deregister an AMI that matches a Recycle Bin retention rule, the AMI is retained in the Recycle Bin for the specified retention period. For more information, see Recycle Bin in the Amazon Elastic Compute Cloud User Guide. When you deregister an AMI, it doesn't affect any instances that you've already launched from the AMI. You'll continue to incur usage costs for those instances until you terminate them. When you deregister an Amazon EBS-backed AMI, it doesn't affect the snapshot that was created for the root volume of the instance during the AMI creation process. When you deregister an instance store-backed AMI, it doesn't affect the files that you uploaded to Amazon S3 when you created the AMI.
    */
   deregisterImage(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * c Deregisters tag keys to prevent tags that have the specified tag keys from being included in scheduled event notifications for resources in the Region.
+   * Deregisters tag keys to prevent tags that have the specified tag keys from being included in scheduled event notifications for resources in the Region.
    */
   deregisterInstanceEventNotificationAttributes(params: EC2.Types.DeregisterInstanceEventNotificationAttributesRequest, callback?: (err: AWSError, data: EC2.Types.DeregisterInstanceEventNotificationAttributesResult) => void): Request<EC2.Types.DeregisterInstanceEventNotificationAttributesResult, AWSError>;
   /**
-   * c Deregisters tag keys to prevent tags that have the specified tag keys from being included in scheduled event notifications for resources in the Region.
+   * Deregisters tag keys to prevent tags that have the specified tag keys from being included in scheduled event notifications for resources in the Region.
    */
   deregisterInstanceEventNotificationAttributes(callback?: (err: AWSError, data: EC2.Types.DeregisterInstanceEventNotificationAttributesResult) => void): Request<EC2.Types.DeregisterInstanceEventNotificationAttributesResult, AWSError>;
   /**
@@ -1389,11 +1501,11 @@ declare class EC2 extends Service {
    */
   deregisterTransitGatewayMulticastGroupSources(callback?: (err: AWSError, data: EC2.Types.DeregisterTransitGatewayMulticastGroupSourcesResult) => void): Request<EC2.Types.DeregisterTransitGatewayMulticastGroupSourcesResult, AWSError>;
   /**
-   * Describes attributes of your AWS account. The following are the supported account attributes:    supported-platforms: Indicates whether your account can launch instances into EC2-Classic and EC2-VPC, or only into EC2-VPC.    default-vpc: The ID of the default VPC for your account, or none.    max-instances: This attribute is no longer supported. The returned value does not reflect your actual vCPU limit for running On-Demand Instances. For more information, see On-Demand Instance Limits in the Amazon Elastic Compute Cloud User Guide.    vpc-max-security-groups-per-interface: The maximum number of security groups that you can assign to a network interface.    max-elastic-ips: The maximum number of Elastic IP addresses that you can allocate for use with EC2-Classic.     vpc-max-elastic-ips: The maximum number of Elastic IP addresses that you can allocate for use with EC2-VPC.  
+   * Describes attributes of your Amazon Web Services account. The following are the supported account attributes:    supported-platforms: Indicates whether your account can launch instances into EC2-Classic and EC2-VPC, or only into EC2-VPC.    default-vpc: The ID of the default VPC for your account, or none.    max-instances: This attribute is no longer supported. The returned value does not reflect your actual vCPU limit for running On-Demand Instances. For more information, see On-Demand Instance Limits in the Amazon Elastic Compute Cloud User Guide.    vpc-max-security-groups-per-interface: The maximum number of security groups that you can assign to a network interface.    max-elastic-ips: The maximum number of Elastic IP addresses that you can allocate for use with EC2-Classic.     vpc-max-elastic-ips: The maximum number of Elastic IP addresses that you can allocate for use with EC2-VPC.  
    */
   describeAccountAttributes(params: EC2.Types.DescribeAccountAttributesRequest, callback?: (err: AWSError, data: EC2.Types.DescribeAccountAttributesResult) => void): Request<EC2.Types.DescribeAccountAttributesResult, AWSError>;
   /**
-   * Describes attributes of your AWS account. The following are the supported account attributes:    supported-platforms: Indicates whether your account can launch instances into EC2-Classic and EC2-VPC, or only into EC2-VPC.    default-vpc: The ID of the default VPC for your account, or none.    max-instances: This attribute is no longer supported. The returned value does not reflect your actual vCPU limit for running On-Demand Instances. For more information, see On-Demand Instance Limits in the Amazon Elastic Compute Cloud User Guide.    vpc-max-security-groups-per-interface: The maximum number of security groups that you can assign to a network interface.    max-elastic-ips: The maximum number of Elastic IP addresses that you can allocate for use with EC2-Classic.     vpc-max-elastic-ips: The maximum number of Elastic IP addresses that you can allocate for use with EC2-VPC.  
+   * Describes attributes of your Amazon Web Services account. The following are the supported account attributes:    supported-platforms: Indicates whether your account can launch instances into EC2-Classic and EC2-VPC, or only into EC2-VPC.    default-vpc: The ID of the default VPC for your account, or none.    max-instances: This attribute is no longer supported. The returned value does not reflect your actual vCPU limit for running On-Demand Instances. For more information, see On-Demand Instance Limits in the Amazon Elastic Compute Cloud User Guide.    vpc-max-security-groups-per-interface: The maximum number of security groups that you can assign to a network interface.    max-elastic-ips: The maximum number of Elastic IP addresses that you can allocate for use with EC2-Classic.     vpc-max-elastic-ips: The maximum number of Elastic IP addresses that you can allocate for use with EC2-VPC.  
    */
   describeAccountAttributes(callback?: (err: AWSError, data: EC2.Types.DescribeAccountAttributesResult) => void): Request<EC2.Types.DescribeAccountAttributesResult, AWSError>;
   /**
@@ -1581,6 +1693,14 @@ declare class EC2 extends Service {
    */
   describeExportTasks(callback?: (err: AWSError, data: EC2.Types.DescribeExportTasksResult) => void): Request<EC2.Types.DescribeExportTasksResult, AWSError>;
   /**
+   * Describe details for Windows AMIs that are configured for faster launching.
+   */
+  describeFastLaunchImages(params: EC2.Types.DescribeFastLaunchImagesRequest, callback?: (err: AWSError, data: EC2.Types.DescribeFastLaunchImagesResult) => void): Request<EC2.Types.DescribeFastLaunchImagesResult, AWSError>;
+  /**
+   * Describe details for Windows AMIs that are configured for faster launching.
+   */
+  describeFastLaunchImages(callback?: (err: AWSError, data: EC2.Types.DescribeFastLaunchImagesResult) => void): Request<EC2.Types.DescribeFastLaunchImagesResult, AWSError>;
+  /**
    * Describes the state of fast snapshot restores for your snapshots.
    */
   describeFastSnapshotRestores(params: EC2.Types.DescribeFastSnapshotRestoresRequest, callback?: (err: AWSError, data: EC2.Types.DescribeFastSnapshotRestoresResult) => void): Request<EC2.Types.DescribeFastSnapshotRestoresResult, AWSError>;
@@ -1597,19 +1717,19 @@ declare class EC2 extends Service {
    */
   describeFleetHistory(callback?: (err: AWSError, data: EC2.Types.DescribeFleetHistoryResult) => void): Request<EC2.Types.DescribeFleetHistoryResult, AWSError>;
   /**
-   * Describes the running instances for the specified EC2 Fleet. For more information, see Monitoring your EC2 Fleet in the Amazon EC2 User Guide.
+   * Describes the running instances for the specified EC2 Fleet. For more information, see Monitor your EC2 Fleet in the Amazon EC2 User Guide.
    */
   describeFleetInstances(params: EC2.Types.DescribeFleetInstancesRequest, callback?: (err: AWSError, data: EC2.Types.DescribeFleetInstancesResult) => void): Request<EC2.Types.DescribeFleetInstancesResult, AWSError>;
   /**
-   * Describes the running instances for the specified EC2 Fleet. For more information, see Monitoring your EC2 Fleet in the Amazon EC2 User Guide.
+   * Describes the running instances for the specified EC2 Fleet. For more information, see Monitor your EC2 Fleet in the Amazon EC2 User Guide.
    */
   describeFleetInstances(callback?: (err: AWSError, data: EC2.Types.DescribeFleetInstancesResult) => void): Request<EC2.Types.DescribeFleetInstancesResult, AWSError>;
   /**
-   * Describes the specified EC2 Fleets or all of your EC2 Fleets. For more information, see Monitoring your EC2 Fleet in the Amazon EC2 User Guide.
+   * Describes the specified EC2 Fleets or all of your EC2 Fleets. For more information, see Monitor your EC2 Fleet in the Amazon EC2 User Guide.
    */
   describeFleets(params: EC2.Types.DescribeFleetsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeFleetsResult) => void): Request<EC2.Types.DescribeFleetsResult, AWSError>;
   /**
-   * Describes the specified EC2 Fleets or all of your EC2 Fleets. For more information, see Monitoring your EC2 Fleet in the Amazon EC2 User Guide.
+   * Describes the specified EC2 Fleets or all of your EC2 Fleets. For more information, see Monitor your EC2 Fleet in the Amazon EC2 User Guide.
    */
   describeFleets(callback?: (err: AWSError, data: EC2.Types.DescribeFleetsResult) => void): Request<EC2.Types.DescribeFleetsResult, AWSError>;
   /**
@@ -1749,11 +1869,11 @@ declare class EC2 extends Service {
    */
   describeInstanceEventWindows(callback?: (err: AWSError, data: EC2.Types.DescribeInstanceEventWindowsResult) => void): Request<EC2.Types.DescribeInstanceEventWindowsResult, AWSError>;
   /**
-   * Describes the status of the specified instances or all of your instances. By default, only running instances are described, unless you specifically indicate to return the status of all instances. Instance status includes the following components:    Status checks - Amazon EC2 performs status checks on running EC2 instances to identify hardware and software issues. For more information, see Status checks for your instances and Troubleshooting instances with failed status checks in the Amazon EC2 User Guide.    Scheduled events - Amazon EC2 can schedule events (such as reboot, stop, or terminate) for your instances related to hardware issues, software updates, or system maintenance. For more information, see Scheduled events for your instances in the Amazon EC2 User Guide.    Instance state - You can manage your instances from the moment you launch them through their termination. For more information, see Instance lifecycle in the Amazon EC2 User Guide.  
+   * Describes the status of the specified instances or all of your instances. By default, only running instances are described, unless you specifically indicate to return the status of all instances. Instance status includes the following components:    Status checks - Amazon EC2 performs status checks on running EC2 instances to identify hardware and software issues. For more information, see Status checks for your instances and Troubleshoot instances with failed status checks in the Amazon EC2 User Guide.    Scheduled events - Amazon EC2 can schedule events (such as reboot, stop, or terminate) for your instances related to hardware issues, software updates, or system maintenance. For more information, see Scheduled events for your instances in the Amazon EC2 User Guide.    Instance state - You can manage your instances from the moment you launch them through their termination. For more information, see Instance lifecycle in the Amazon EC2 User Guide.  
    */
   describeInstanceStatus(params: EC2.Types.DescribeInstanceStatusRequest, callback?: (err: AWSError, data: EC2.Types.DescribeInstanceStatusResult) => void): Request<EC2.Types.DescribeInstanceStatusResult, AWSError>;
   /**
-   * Describes the status of the specified instances or all of your instances. By default, only running instances are described, unless you specifically indicate to return the status of all instances. Instance status includes the following components:    Status checks - Amazon EC2 performs status checks on running EC2 instances to identify hardware and software issues. For more information, see Status checks for your instances and Troubleshooting instances with failed status checks in the Amazon EC2 User Guide.    Scheduled events - Amazon EC2 can schedule events (such as reboot, stop, or terminate) for your instances related to hardware issues, software updates, or system maintenance. For more information, see Scheduled events for your instances in the Amazon EC2 User Guide.    Instance state - You can manage your instances from the moment you launch them through their termination. For more information, see Instance lifecycle in the Amazon EC2 User Guide.  
+   * Describes the status of the specified instances or all of your instances. By default, only running instances are described, unless you specifically indicate to return the status of all instances. Instance status includes the following components:    Status checks - Amazon EC2 performs status checks on running EC2 instances to identify hardware and software issues. For more information, see Status checks for your instances and Troubleshoot instances with failed status checks in the Amazon EC2 User Guide.    Scheduled events - Amazon EC2 can schedule events (such as reboot, stop, or terminate) for your instances related to hardware issues, software updates, or system maintenance. For more information, see Scheduled events for your instances in the Amazon EC2 User Guide.    Instance state - You can manage your instances from the moment you launch them through their termination. For more information, see Instance lifecycle in the Amazon EC2 User Guide.  
    */
   describeInstanceStatus(callback?: (err: AWSError, data: EC2.Types.DescribeInstanceStatusResult) => void): Request<EC2.Types.DescribeInstanceStatusResult, AWSError>;
   /**
@@ -1788,6 +1908,30 @@ declare class EC2 extends Service {
    * Describes one or more of your internet gateways.
    */
   describeInternetGateways(callback?: (err: AWSError, data: EC2.Types.DescribeInternetGatewaysResult) => void): Request<EC2.Types.DescribeInternetGatewaysResult, AWSError>;
+  /**
+   * Get information about your IPAM pools.
+   */
+  describeIpamPools(params: EC2.Types.DescribeIpamPoolsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeIpamPoolsResult) => void): Request<EC2.Types.DescribeIpamPoolsResult, AWSError>;
+  /**
+   * Get information about your IPAM pools.
+   */
+  describeIpamPools(callback?: (err: AWSError, data: EC2.Types.DescribeIpamPoolsResult) => void): Request<EC2.Types.DescribeIpamPoolsResult, AWSError>;
+  /**
+   * Get information about your IPAM scopes.
+   */
+  describeIpamScopes(params: EC2.Types.DescribeIpamScopesRequest, callback?: (err: AWSError, data: EC2.Types.DescribeIpamScopesResult) => void): Request<EC2.Types.DescribeIpamScopesResult, AWSError>;
+  /**
+   * Get information about your IPAM scopes.
+   */
+  describeIpamScopes(callback?: (err: AWSError, data: EC2.Types.DescribeIpamScopesResult) => void): Request<EC2.Types.DescribeIpamScopesResult, AWSError>;
+  /**
+   * Get information about your IPAM pools. For more information, see What is IPAM? in the Amazon VPC IPAM User Guide. 
+   */
+  describeIpams(params: EC2.Types.DescribeIpamsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeIpamsResult) => void): Request<EC2.Types.DescribeIpamsResult, AWSError>;
+  /**
+   * Get information about your IPAM pools. For more information, see What is IPAM? in the Amazon VPC IPAM User Guide. 
+   */
+  describeIpams(callback?: (err: AWSError, data: EC2.Types.DescribeIpamsResult) => void): Request<EC2.Types.DescribeIpamsResult, AWSError>;
   /**
    * Describes your IPv6 address pools.
    */
@@ -1900,6 +2044,22 @@ declare class EC2 extends Service {
    * Describes one or more of your network ACLs. For more information, see Network ACLs in the Amazon Virtual Private Cloud User Guide.
    */
   describeNetworkAcls(callback?: (err: AWSError, data: EC2.Types.DescribeNetworkAclsResult) => void): Request<EC2.Types.DescribeNetworkAclsResult, AWSError>;
+  /**
+   * Describes the specified Network Access Scope analyses.
+   */
+  describeNetworkInsightsAccessScopeAnalyses(params: EC2.Types.DescribeNetworkInsightsAccessScopeAnalysesRequest, callback?: (err: AWSError, data: EC2.Types.DescribeNetworkInsightsAccessScopeAnalysesResult) => void): Request<EC2.Types.DescribeNetworkInsightsAccessScopeAnalysesResult, AWSError>;
+  /**
+   * Describes the specified Network Access Scope analyses.
+   */
+  describeNetworkInsightsAccessScopeAnalyses(callback?: (err: AWSError, data: EC2.Types.DescribeNetworkInsightsAccessScopeAnalysesResult) => void): Request<EC2.Types.DescribeNetworkInsightsAccessScopeAnalysesResult, AWSError>;
+  /**
+   * Describes the specified Network Access Scopes.
+   */
+  describeNetworkInsightsAccessScopes(params: EC2.Types.DescribeNetworkInsightsAccessScopesRequest, callback?: (err: AWSError, data: EC2.Types.DescribeNetworkInsightsAccessScopesResult) => void): Request<EC2.Types.DescribeNetworkInsightsAccessScopesResult, AWSError>;
+  /**
+   * Describes the specified Network Access Scopes.
+   */
+  describeNetworkInsightsAccessScopes(callback?: (err: AWSError, data: EC2.Types.DescribeNetworkInsightsAccessScopesResult) => void): Request<EC2.Types.DescribeNetworkInsightsAccessScopesResult, AWSError>;
   /**
    * Describes one or more of your network insights analyses.
    */
@@ -2077,6 +2237,14 @@ declare class EC2 extends Service {
    */
   describeSnapshotAttribute(callback?: (err: AWSError, data: EC2.Types.DescribeSnapshotAttributeResult) => void): Request<EC2.Types.DescribeSnapshotAttributeResult, AWSError>;
   /**
+   * Describes the storage tier status of one or more Amazon EBS snapshots.
+   */
+  describeSnapshotTierStatus(params: EC2.Types.DescribeSnapshotTierStatusRequest, callback?: (err: AWSError, data: EC2.Types.DescribeSnapshotTierStatusResult) => void): Request<EC2.Types.DescribeSnapshotTierStatusResult, AWSError>;
+  /**
+   * Describes the storage tier status of one or more Amazon EBS snapshots.
+   */
+  describeSnapshotTierStatus(callback?: (err: AWSError, data: EC2.Types.DescribeSnapshotTierStatusResult) => void): Request<EC2.Types.DescribeSnapshotTierStatusResult, AWSError>;
+  /**
    * Describes the specified EBS snapshots available to you or all of the EBS snapshots available to you. The snapshots available to you include public snapshots, private snapshots that you own, and private snapshots owned by other Amazon Web Services accounts for which you have explicit create volume permissions. The create volume permissions fall into the following categories:    public: The owner of the snapshot granted create volume permissions for the snapshot to the all group. All Amazon Web Services accounts have create volume permissions for these snapshots.    explicit: The owner of the snapshot granted create volume permissions to a specific Amazon Web Services account.    implicit: An Amazon Web Services account has implicit create volume permissions for all snapshots it owns.   The list of snapshots returned can be filtered by specifying snapshot IDs, snapshot owners, or Amazon Web Services accounts with create volume permissions. If no options are specified, Amazon EC2 returns all snapshots for which you have create volume permissions. If you specify one or more snapshot IDs, only snapshots that have the specified IDs are returned. If you specify an invalid snapshot ID, an error is returned. If you specify a snapshot ID for which you do not have access, it is not included in the returned results. If you specify one or more snapshot owners using the OwnerIds option, only snapshots from the specified owners and for which you have access are returned. The results can include the Amazon Web Services account IDs of the specified owners, amazon for snapshots owned by Amazon, or self for snapshots that you own. If you specify a list of restorable users, only snapshots with create snapshot permissions for those users are returned. You can specify Amazon Web Services account IDs (if you own the snapshots), self for snapshots for which you own or have explicit permissions, or all for public snapshots. If you are describing a long list of snapshots, we recommend that you paginate the output to make the list more manageable. The MaxResults parameter sets the maximum number of results returned in a single page. If the list of results exceeds your MaxResults value, then that number of results is returned along with a NextToken value that can be passed to a subsequent DescribeSnapshots request to retrieve the remaining results. To get the state of fast snapshot restores for a snapshot, use DescribeFastSnapshotRestores. For more information about EBS snapshots, see Amazon EBS snapshots in the Amazon Elastic Compute Cloud User Guide.
    */
   describeSnapshots(params: EC2.Types.DescribeSnapshotsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeSnapshotsResult) => void): Request<EC2.Types.DescribeSnapshotsResult, AWSError>;
@@ -2133,11 +2301,11 @@ declare class EC2 extends Service {
    */
   describeSpotPriceHistory(callback?: (err: AWSError, data: EC2.Types.DescribeSpotPriceHistoryResult) => void): Request<EC2.Types.DescribeSpotPriceHistoryResult, AWSError>;
   /**
-   * [VPC only] Describes the stale security group rules for security groups in a specified VPC. Rules are stale when they reference a deleted security group in a peer VPC, or a security group in a peer VPC for which the VPC peering connection has been deleted.
+   * [VPC only] Describes the stale security group rules for security groups in a specified VPC. Rules are stale when they reference a deleted security group in the same VPC or in a peer VPC, or if they reference a security group in a peer VPC for which the VPC peering connection has been deleted.
    */
   describeStaleSecurityGroups(params: EC2.Types.DescribeStaleSecurityGroupsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeStaleSecurityGroupsResult) => void): Request<EC2.Types.DescribeStaleSecurityGroupsResult, AWSError>;
   /**
-   * [VPC only] Describes the stale security group rules for security groups in a specified VPC. Rules are stale when they reference a deleted security group in a peer VPC, or a security group in a peer VPC for which the VPC peering connection has been deleted.
+   * [VPC only] Describes the stale security group rules for security groups in a specified VPC. Rules are stale when they reference a deleted security group in the same VPC or in a peer VPC, or if they reference a security group in a peer VPC for which the VPC peering connection has been deleted.
    */
   describeStaleSecurityGroups(callback?: (err: AWSError, data: EC2.Types.DescribeStaleSecurityGroupsResult) => void): Request<EC2.Types.DescribeStaleSecurityGroupsResult, AWSError>;
   /**
@@ -2445,6 +2613,14 @@ declare class EC2 extends Service {
    */
   disableEbsEncryptionByDefault(callback?: (err: AWSError, data: EC2.Types.DisableEbsEncryptionByDefaultResult) => void): Request<EC2.Types.DisableEbsEncryptionByDefaultResult, AWSError>;
   /**
+   * Discontinue faster launching for a Windows AMI, and clean up existing pre-provisioned snapshots. When you disable faster launching, the AMI uses the standard launch process for each instance. All pre-provisioned snapshots must be removed before you can enable faster launching again.  To change these settings, you must own the AMI. 
+   */
+  disableFastLaunch(params: EC2.Types.DisableFastLaunchRequest, callback?: (err: AWSError, data: EC2.Types.DisableFastLaunchResult) => void): Request<EC2.Types.DisableFastLaunchResult, AWSError>;
+  /**
+   * Discontinue faster launching for a Windows AMI, and clean up existing pre-provisioned snapshots. When you disable faster launching, the AMI uses the standard launch process for each instance. All pre-provisioned snapshots must be removed before you can enable faster launching again.  To change these settings, you must own the AMI. 
+   */
+  disableFastLaunch(callback?: (err: AWSError, data: EC2.Types.DisableFastLaunchResult) => void): Request<EC2.Types.DisableFastLaunchResult, AWSError>;
+  /**
    * Disables fast snapshot restores for the specified snapshots in the specified Availability Zones.
    */
   disableFastSnapshotRestores(params: EC2.Types.DisableFastSnapshotRestoresRequest, callback?: (err: AWSError, data: EC2.Types.DisableFastSnapshotRestoresResult) => void): Request<EC2.Types.DisableFastSnapshotRestoresResult, AWSError>;
@@ -2460,6 +2636,14 @@ declare class EC2 extends Service {
    * Cancels the deprecation of the specified AMI. For more information, see Deprecate an AMI in the Amazon Elastic Compute Cloud User Guide.
    */
   disableImageDeprecation(callback?: (err: AWSError, data: EC2.Types.DisableImageDeprecationResult) => void): Request<EC2.Types.DisableImageDeprecationResult, AWSError>;
+  /**
+   * Disable the IPAM account. For more information, see Enable integration with Organizations in the Amazon VPC IPAM User Guide. 
+   */
+  disableIpamOrganizationAdminAccount(params: EC2.Types.DisableIpamOrganizationAdminAccountRequest, callback?: (err: AWSError, data: EC2.Types.DisableIpamOrganizationAdminAccountResult) => void): Request<EC2.Types.DisableIpamOrganizationAdminAccountResult, AWSError>;
+  /**
+   * Disable the IPAM account. For more information, see Enable integration with Organizations in the Amazon VPC IPAM User Guide. 
+   */
+  disableIpamOrganizationAdminAccount(callback?: (err: AWSError, data: EC2.Types.DisableIpamOrganizationAdminAccountResult) => void): Request<EC2.Types.DisableIpamOrganizationAdminAccountResult, AWSError>;
   /**
    * Disables access to the EC2 serial console of all instances for your account. By default, access to the EC2 serial console is disabled for your account. For more information, see Manage account access to the EC2 serial console in the Amazon EC2 User Guide.
    */
@@ -2597,6 +2781,14 @@ declare class EC2 extends Service {
    */
   enableEbsEncryptionByDefault(callback?: (err: AWSError, data: EC2.Types.EnableEbsEncryptionByDefaultResult) => void): Request<EC2.Types.EnableEbsEncryptionByDefaultResult, AWSError>;
   /**
+   * When you enable faster launching for a Windows AMI, images are pre-provisioned, using snapshots to launch instances up to 65% faster. To create the optimized Windows image, Amazon EC2 launches an instance and runs through Sysprep steps, rebooting as required. Then it creates a set of reserved snapshots that are used for subsequent launches. The reserved snapshots are automatically replenished as they are used, depending on your settings for launch frequency.  To change these settings, you must own the AMI. 
+   */
+  enableFastLaunch(params: EC2.Types.EnableFastLaunchRequest, callback?: (err: AWSError, data: EC2.Types.EnableFastLaunchResult) => void): Request<EC2.Types.EnableFastLaunchResult, AWSError>;
+  /**
+   * When you enable faster launching for a Windows AMI, images are pre-provisioned, using snapshots to launch instances up to 65% faster. To create the optimized Windows image, Amazon EC2 launches an instance and runs through Sysprep steps, rebooting as required. Then it creates a set of reserved snapshots that are used for subsequent launches. The reserved snapshots are automatically replenished as they are used, depending on your settings for launch frequency.  To change these settings, you must own the AMI. 
+   */
+  enableFastLaunch(callback?: (err: AWSError, data: EC2.Types.EnableFastLaunchResult) => void): Request<EC2.Types.EnableFastLaunchResult, AWSError>;
+  /**
    * Enables fast snapshot restores for the specified snapshots in the specified Availability Zones. You get the full benefit of fast snapshot restores after they enter the enabled state. To get the current state of fast snapshot restores, use DescribeFastSnapshotRestores. To disable fast snapshot restores, use DisableFastSnapshotRestores. For more information, see Amazon EBS fast snapshot restore in the Amazon Elastic Compute Cloud User Guide.
    */
   enableFastSnapshotRestores(params: EC2.Types.EnableFastSnapshotRestoresRequest, callback?: (err: AWSError, data: EC2.Types.EnableFastSnapshotRestoresResult) => void): Request<EC2.Types.EnableFastSnapshotRestoresResult, AWSError>;
@@ -2612,6 +2804,14 @@ declare class EC2 extends Service {
    * Enables deprecation of the specified AMI at the specified date and time. For more information, see Deprecate an AMI in the Amazon Elastic Compute Cloud User Guide.
    */
   enableImageDeprecation(callback?: (err: AWSError, data: EC2.Types.EnableImageDeprecationResult) => void): Request<EC2.Types.EnableImageDeprecationResult, AWSError>;
+  /**
+   * Enable an Organizations member account as the IPAM admin account. You cannot select the Organizations management account as the IPAM admin account. For more information, see Enable integration with Organizations in the Amazon VPC IPAM User Guide. 
+   */
+  enableIpamOrganizationAdminAccount(params: EC2.Types.EnableIpamOrganizationAdminAccountRequest, callback?: (err: AWSError, data: EC2.Types.EnableIpamOrganizationAdminAccountResult) => void): Request<EC2.Types.EnableIpamOrganizationAdminAccountResult, AWSError>;
+  /**
+   * Enable an Organizations member account as the IPAM admin account. You cannot select the Organizations management account as the IPAM admin account. For more information, see Enable integration with Organizations in the Amazon VPC IPAM User Guide. 
+   */
+  enableIpamOrganizationAdminAccount(callback?: (err: AWSError, data: EC2.Types.EnableIpamOrganizationAdminAccountResult) => void): Request<EC2.Types.EnableIpamOrganizationAdminAccountResult, AWSError>;
   /**
    * Enables access to the EC2 serial console of all instances for your account. By default, access to the EC2 serial console is disabled for your account. For more information, see Manage account access to the EC2 serial console in the Amazon EC2 User Guide.
    */
@@ -2789,6 +2989,54 @@ declare class EC2 extends Service {
    */
   getHostReservationPurchasePreview(callback?: (err: AWSError, data: EC2.Types.GetHostReservationPurchasePreviewResult) => void): Request<EC2.Types.GetHostReservationPurchasePreviewResult, AWSError>;
   /**
+   * Returns a list of instance types with the specified instance attributes. You can use the response to preview the instance types without launching instances. Note that the response does not consider capacity. When you specify multiple parameters, you get instance types that satisfy all of the specified parameters. If you specify multiple values for a parameter, you get instance types that satisfy any of the specified values. For more information, see Preview instance types with specified attributes, Attribute-based instance type selection for EC2 Fleet, Attribute-based instance type selection for Spot Fleet, and Spot placement score in the Amazon EC2 User Guide, and Creating an Auto Scaling group using attribute-based instance type selection in the Amazon EC2 Auto Scaling User Guide.
+   */
+  getInstanceTypesFromInstanceRequirements(params: EC2.Types.GetInstanceTypesFromInstanceRequirementsRequest, callback?: (err: AWSError, data: EC2.Types.GetInstanceTypesFromInstanceRequirementsResult) => void): Request<EC2.Types.GetInstanceTypesFromInstanceRequirementsResult, AWSError>;
+  /**
+   * Returns a list of instance types with the specified instance attributes. You can use the response to preview the instance types without launching instances. Note that the response does not consider capacity. When you specify multiple parameters, you get instance types that satisfy all of the specified parameters. If you specify multiple values for a parameter, you get instance types that satisfy any of the specified values. For more information, see Preview instance types with specified attributes, Attribute-based instance type selection for EC2 Fleet, Attribute-based instance type selection for Spot Fleet, and Spot placement score in the Amazon EC2 User Guide, and Creating an Auto Scaling group using attribute-based instance type selection in the Amazon EC2 Auto Scaling User Guide.
+   */
+  getInstanceTypesFromInstanceRequirements(callback?: (err: AWSError, data: EC2.Types.GetInstanceTypesFromInstanceRequirementsResult) => void): Request<EC2.Types.GetInstanceTypesFromInstanceRequirementsResult, AWSError>;
+  /**
+   * A binary representation of the UEFI variable store. Only non-volatile variables are stored. This is a base64 encoded and zlib compressed binary value that must be properly encoded. When you use register-image to create an AMI, you can create an exact copy of your variable store by passing the UEFI data in the UefiData parameter. You can modify the UEFI data by using the python-uefivars tool on GitHub. You can use the tool to convert the UEFI data into a human-readable format (JSON), which you can inspect and modify, and then convert back into the binary format to use with register-image. For more information, see UEFI Secure Boot in the Amazon EC2 User Guide.
+   */
+  getInstanceUefiData(params: EC2.Types.GetInstanceUefiDataRequest, callback?: (err: AWSError, data: EC2.Types.GetInstanceUefiDataResult) => void): Request<EC2.Types.GetInstanceUefiDataResult, AWSError>;
+  /**
+   * A binary representation of the UEFI variable store. Only non-volatile variables are stored. This is a base64 encoded and zlib compressed binary value that must be properly encoded. When you use register-image to create an AMI, you can create an exact copy of your variable store by passing the UEFI data in the UefiData parameter. You can modify the UEFI data by using the python-uefivars tool on GitHub. You can use the tool to convert the UEFI data into a human-readable format (JSON), which you can inspect and modify, and then convert back into the binary format to use with register-image. For more information, see UEFI Secure Boot in the Amazon EC2 User Guide.
+   */
+  getInstanceUefiData(callback?: (err: AWSError, data: EC2.Types.GetInstanceUefiDataResult) => void): Request<EC2.Types.GetInstanceUefiDataResult, AWSError>;
+  /**
+   * Retrieve historical information about a CIDR within an IPAM scope. For more information, see View the history of IP addresses in the Amazon VPC IPAM User Guide.
+   */
+  getIpamAddressHistory(params: EC2.Types.GetIpamAddressHistoryRequest, callback?: (err: AWSError, data: EC2.Types.GetIpamAddressHistoryResult) => void): Request<EC2.Types.GetIpamAddressHistoryResult, AWSError>;
+  /**
+   * Retrieve historical information about a CIDR within an IPAM scope. For more information, see View the history of IP addresses in the Amazon VPC IPAM User Guide.
+   */
+  getIpamAddressHistory(callback?: (err: AWSError, data: EC2.Types.GetIpamAddressHistoryResult) => void): Request<EC2.Types.GetIpamAddressHistoryResult, AWSError>;
+  /**
+   * Get a list of all the CIDR allocations in an IPAM pool.
+   */
+  getIpamPoolAllocations(params: EC2.Types.GetIpamPoolAllocationsRequest, callback?: (err: AWSError, data: EC2.Types.GetIpamPoolAllocationsResult) => void): Request<EC2.Types.GetIpamPoolAllocationsResult, AWSError>;
+  /**
+   * Get a list of all the CIDR allocations in an IPAM pool.
+   */
+  getIpamPoolAllocations(callback?: (err: AWSError, data: EC2.Types.GetIpamPoolAllocationsResult) => void): Request<EC2.Types.GetIpamPoolAllocationsResult, AWSError>;
+  /**
+   * Get the CIDRs provisioned to an IPAM pool.
+   */
+  getIpamPoolCidrs(params: EC2.Types.GetIpamPoolCidrsRequest, callback?: (err: AWSError, data: EC2.Types.GetIpamPoolCidrsResult) => void): Request<EC2.Types.GetIpamPoolCidrsResult, AWSError>;
+  /**
+   * Get the CIDRs provisioned to an IPAM pool.
+   */
+  getIpamPoolCidrs(callback?: (err: AWSError, data: EC2.Types.GetIpamPoolCidrsResult) => void): Request<EC2.Types.GetIpamPoolCidrsResult, AWSError>;
+  /**
+   * Get information about the resources in a scope.
+   */
+  getIpamResourceCidrs(params: EC2.Types.GetIpamResourceCidrsRequest, callback?: (err: AWSError, data: EC2.Types.GetIpamResourceCidrsResult) => void): Request<EC2.Types.GetIpamResourceCidrsResult, AWSError>;
+  /**
+   * Get information about the resources in a scope.
+   */
+  getIpamResourceCidrs(callback?: (err: AWSError, data: EC2.Types.GetIpamResourceCidrsResult) => void): Request<EC2.Types.GetIpamResourceCidrsResult, AWSError>;
+  /**
    * Retrieves the configuration data of the specified instance. You can use this data to create a launch template.  This action calls on other describe actions to get instance information. Depending on your instance configuration, you may need to allow the following actions in your IAM policy: DescribeSpotInstanceRequests, DescribeInstanceCreditSpecifications, DescribeVolumes, DescribeInstanceAttribute, and DescribeElasticGpus. Or, you can allow describe* depending on your instance requirements.
    */
   getLaunchTemplateData(params: EC2.Types.GetLaunchTemplateDataRequest, callback?: (err: AWSError, data: EC2.Types.GetLaunchTemplateDataResult) => void): Request<EC2.Types.GetLaunchTemplateDataResult, AWSError>;
@@ -2813,6 +3061,22 @@ declare class EC2 extends Service {
    */
   getManagedPrefixListEntries(callback?: (err: AWSError, data: EC2.Types.GetManagedPrefixListEntriesResult) => void): Request<EC2.Types.GetManagedPrefixListEntriesResult, AWSError>;
   /**
+   * Gets the findings for the specified Network Access Scope analysis.
+   */
+  getNetworkInsightsAccessScopeAnalysisFindings(params: EC2.Types.GetNetworkInsightsAccessScopeAnalysisFindingsRequest, callback?: (err: AWSError, data: EC2.Types.GetNetworkInsightsAccessScopeAnalysisFindingsResult) => void): Request<EC2.Types.GetNetworkInsightsAccessScopeAnalysisFindingsResult, AWSError>;
+  /**
+   * Gets the findings for the specified Network Access Scope analysis.
+   */
+  getNetworkInsightsAccessScopeAnalysisFindings(callback?: (err: AWSError, data: EC2.Types.GetNetworkInsightsAccessScopeAnalysisFindingsResult) => void): Request<EC2.Types.GetNetworkInsightsAccessScopeAnalysisFindingsResult, AWSError>;
+  /**
+   * Gets the content for the specified Network Access Scope.
+   */
+  getNetworkInsightsAccessScopeContent(params: EC2.Types.GetNetworkInsightsAccessScopeContentRequest, callback?: (err: AWSError, data: EC2.Types.GetNetworkInsightsAccessScopeContentResult) => void): Request<EC2.Types.GetNetworkInsightsAccessScopeContentResult, AWSError>;
+  /**
+   * Gets the content for the specified Network Access Scope.
+   */
+  getNetworkInsightsAccessScopeContent(callback?: (err: AWSError, data: EC2.Types.GetNetworkInsightsAccessScopeContentResult) => void): Request<EC2.Types.GetNetworkInsightsAccessScopeContentResult, AWSError>;
+  /**
    * Retrieves the encrypted administrator password for a running Windows instance. The Windows password is generated at boot by the EC2Config service or EC2Launch scripts (Windows Server 2016 and later). This usually only happens the first time an instance is launched. For more information, see EC2Config and EC2Launch in the Amazon EC2 User Guide. For the EC2Config service, the password is not generated for rebundled AMIs unless Ec2SetPassword is enabled before bundling. The password is encrypted using the key pair that you specified when you launched the instance. You must provide the corresponding key pair file. When you launch an instance, password generation and encryption may take a few minutes. If you try to retrieve the password before it's available, the output returns an empty string. We recommend that you wait up to 15 minutes after launching an instance before trying to retrieve the generated password.
    */
   getPasswordData(params: EC2.Types.GetPasswordDataRequest, callback?: (err: AWSError, data: EC2.Types.GetPasswordDataResult) => void): Request<EC2.Types.GetPasswordDataResult, AWSError>;
@@ -2836,6 +3100,14 @@ declare class EC2 extends Service {
    * Retrieves the access status of your account to the EC2 serial console of all instances. By default, access to the EC2 serial console is disabled for your account. For more information, see Manage account access to the EC2 serial console in the Amazon EC2 User Guide.
    */
   getSerialConsoleAccessStatus(callback?: (err: AWSError, data: EC2.Types.GetSerialConsoleAccessStatusResult) => void): Request<EC2.Types.GetSerialConsoleAccessStatusResult, AWSError>;
+  /**
+   * Calculates the Spot placement score for a Region or Availability Zone based on the specified target capacity and compute requirements. You can specify your compute requirements either by using InstanceRequirementsWithMetadata and letting Amazon EC2 choose the optimal instance types to fulfill your Spot request, or you can specify the instance types by using InstanceTypes. For more information, see Spot placement score in the Amazon EC2 User Guide.
+   */
+  getSpotPlacementScores(params: EC2.Types.GetSpotPlacementScoresRequest, callback?: (err: AWSError, data: EC2.Types.GetSpotPlacementScoresResult) => void): Request<EC2.Types.GetSpotPlacementScoresResult, AWSError>;
+  /**
+   * Calculates the Spot placement score for a Region or Availability Zone based on the specified target capacity and compute requirements. You can specify your compute requirements either by using InstanceRequirementsWithMetadata and letting Amazon EC2 choose the optimal instance types to fulfill your Spot request, or you can specify the instance types by using InstanceTypes. For more information, see Spot placement score in the Amazon EC2 User Guide.
+   */
+  getSpotPlacementScores(callback?: (err: AWSError, data: EC2.Types.GetSpotPlacementScoresResult) => void): Request<EC2.Types.GetSpotPlacementScoresResult, AWSError>;
   /**
    * Gets information about the subnet CIDR reservations.
    */
@@ -2949,6 +3221,22 @@ declare class EC2 extends Service {
    */
   importVolume(callback?: (err: AWSError, data: EC2.Types.ImportVolumeResult) => void): Request<EC2.Types.ImportVolumeResult, AWSError>;
   /**
+   * Lists one or more AMIs that are currently in the Recycle Bin. For more information, see Recycle Bin in the Amazon Elastic Compute Cloud User Guide.
+   */
+  listImagesInRecycleBin(params: EC2.Types.ListImagesInRecycleBinRequest, callback?: (err: AWSError, data: EC2.Types.ListImagesInRecycleBinResult) => void): Request<EC2.Types.ListImagesInRecycleBinResult, AWSError>;
+  /**
+   * Lists one or more AMIs that are currently in the Recycle Bin. For more information, see Recycle Bin in the Amazon Elastic Compute Cloud User Guide.
+   */
+  listImagesInRecycleBin(callback?: (err: AWSError, data: EC2.Types.ListImagesInRecycleBinResult) => void): Request<EC2.Types.ListImagesInRecycleBinResult, AWSError>;
+  /**
+   * Lists one or more snapshots that are currently in the Recycle Bin.
+   */
+  listSnapshotsInRecycleBin(params: EC2.Types.ListSnapshotsInRecycleBinRequest, callback?: (err: AWSError, data: EC2.Types.ListSnapshotsInRecycleBinResult) => void): Request<EC2.Types.ListSnapshotsInRecycleBinResult, AWSError>;
+  /**
+   * Lists one or more snapshots that are currently in the Recycle Bin.
+   */
+  listSnapshotsInRecycleBin(callback?: (err: AWSError, data: EC2.Types.ListSnapshotsInRecycleBinResult) => void): Request<EC2.Types.ListSnapshotsInRecycleBinResult, AWSError>;
+  /**
    * Modifies an attribute of the specified Elastic IP address. For requirements, see Using reverse DNS for email applications.
    */
   modifyAddressAttribute(params: EC2.Types.ModifyAddressAttributeRequest, callback?: (err: AWSError, data: EC2.Types.ModifyAddressAttributeResult) => void): Request<EC2.Types.ModifyAddressAttributeResult, AWSError>;
@@ -3053,11 +3341,11 @@ declare class EC2 extends Service {
    */
   modifyImageAttribute(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Modifies the specified attribute of the specified instance. You can specify only one attribute at a time.  Note: Using this action to change the security groups associated with an elastic network interface (ENI) attached to an instance in a VPC can result in an error if the instance has more than one ENI. To change the security groups associated with an ENI attached to an instance that has multiple ENIs, we recommend that you use the ModifyNetworkInterfaceAttribute action. To modify some attributes, the instance must be stopped. For more information, see Modifying attributes of a stopped instance in the Amazon EC2 User Guide.
+   * Modifies the specified attribute of the specified instance. You can specify only one attribute at a time.  Note: Using this action to change the security groups associated with an elastic network interface (ENI) attached to an instance in a VPC can result in an error if the instance has more than one ENI. To change the security groups associated with an ENI attached to an instance that has multiple ENIs, we recommend that you use the ModifyNetworkInterfaceAttribute action. To modify some attributes, the instance must be stopped. For more information, see Modify a stopped instance in the Amazon EC2 User Guide.
    */
   modifyInstanceAttribute(params: EC2.Types.ModifyInstanceAttributeRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Modifies the specified attribute of the specified instance. You can specify only one attribute at a time.  Note: Using this action to change the security groups associated with an elastic network interface (ENI) attached to an instance in a VPC can result in an error if the instance has more than one ENI. To change the security groups associated with an ENI attached to an instance that has multiple ENIs, we recommend that you use the ModifyNetworkInterfaceAttribute action. To modify some attributes, the instance must be stopped. For more information, see Modifying attributes of a stopped instance in the Amazon EC2 User Guide.
+   * Modifies the specified attribute of the specified instance. You can specify only one attribute at a time.  Note: Using this action to change the security groups associated with an elastic network interface (ENI) attached to an instance in a VPC can result in an error if the instance has more than one ENI. To change the security groups associated with an ENI attached to an instance that has multiple ENIs, we recommend that you use the ModifyNetworkInterfaceAttribute action. To modify some attributes, the instance must be stopped. For more information, see Modify a stopped instance in the Amazon EC2 User Guide.
    */
   modifyInstanceAttribute(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -3093,6 +3381,14 @@ declare class EC2 extends Service {
    */
   modifyInstanceEventWindow(callback?: (err: AWSError, data: EC2.Types.ModifyInstanceEventWindowResult) => void): Request<EC2.Types.ModifyInstanceEventWindowResult, AWSError>;
   /**
+   * Modifies the recovery behavior of your instance to disable simplified automatic recovery or set the recovery behavior to default. The default configuration will not enable simplified automatic recovery for an unsupported instance type. For more information, see Simplified automatic recovery.
+   */
+  modifyInstanceMaintenanceOptions(params: EC2.Types.ModifyInstanceMaintenanceOptionsRequest, callback?: (err: AWSError, data: EC2.Types.ModifyInstanceMaintenanceOptionsResult) => void): Request<EC2.Types.ModifyInstanceMaintenanceOptionsResult, AWSError>;
+  /**
+   * Modifies the recovery behavior of your instance to disable simplified automatic recovery or set the recovery behavior to default. The default configuration will not enable simplified automatic recovery for an unsupported instance type. For more information, see Simplified automatic recovery.
+   */
+  modifyInstanceMaintenanceOptions(callback?: (err: AWSError, data: EC2.Types.ModifyInstanceMaintenanceOptionsResult) => void): Request<EC2.Types.ModifyInstanceMaintenanceOptionsResult, AWSError>;
+  /**
    * Modify the instance metadata parameters on a running or stopped instance. When you modify the parameters on a stopped instance, they are applied when the instance is started. When you modify the parameters on a running instance, the API responds with a state of “pending”. After the parameter modifications are successfully applied to the instance, the state of the modifications changes from “pending” to “applied” in subsequent describe-instances API calls. For more information, see Instance metadata and user data in the Amazon EC2 User Guide.
    */
   modifyInstanceMetadataOptions(params: EC2.Types.ModifyInstanceMetadataOptionsRequest, callback?: (err: AWSError, data: EC2.Types.ModifyInstanceMetadataOptionsResult) => void): Request<EC2.Types.ModifyInstanceMetadataOptionsResult, AWSError>;
@@ -3108,6 +3404,38 @@ declare class EC2 extends Service {
    * Modifies the placement attributes for a specified instance. You can do the following:   Modify the affinity between an instance and a Dedicated Host. When affinity is set to host and the instance is not associated with a specific Dedicated Host, the next time the instance is launched, it is automatically associated with the host on which it lands. If the instance is restarted or rebooted, this relationship persists.   Change the Dedicated Host with which an instance is associated.   Change the instance tenancy of an instance.   Move an instance to or from a placement group.   At least one attribute for affinity, host ID, tenancy, or placement group name must be specified in the request. Affinity and tenancy can be modified in the same request. To modify the host ID, tenancy, placement group, or partition for an instance, the instance must be in the stopped state.
    */
   modifyInstancePlacement(callback?: (err: AWSError, data: EC2.Types.ModifyInstancePlacementResult) => void): Request<EC2.Types.ModifyInstancePlacementResult, AWSError>;
+  /**
+   * Modify the configurations of an IPAM. 
+   */
+  modifyIpam(params: EC2.Types.ModifyIpamRequest, callback?: (err: AWSError, data: EC2.Types.ModifyIpamResult) => void): Request<EC2.Types.ModifyIpamResult, AWSError>;
+  /**
+   * Modify the configurations of an IPAM. 
+   */
+  modifyIpam(callback?: (err: AWSError, data: EC2.Types.ModifyIpamResult) => void): Request<EC2.Types.ModifyIpamResult, AWSError>;
+  /**
+   * Modify the configurations of an IPAM pool. For more information, see Modify a pool in the Amazon VPC IPAM User Guide. 
+   */
+  modifyIpamPool(params: EC2.Types.ModifyIpamPoolRequest, callback?: (err: AWSError, data: EC2.Types.ModifyIpamPoolResult) => void): Request<EC2.Types.ModifyIpamPoolResult, AWSError>;
+  /**
+   * Modify the configurations of an IPAM pool. For more information, see Modify a pool in the Amazon VPC IPAM User Guide. 
+   */
+  modifyIpamPool(callback?: (err: AWSError, data: EC2.Types.ModifyIpamPoolResult) => void): Request<EC2.Types.ModifyIpamPoolResult, AWSError>;
+  /**
+   * Modify a resource CIDR. You can use this action to transfer resource CIDRs between scopes and ignore resource CIDRs that you do not want to manage. If set to false, the resource will not be tracked for overlap, it cannot be auto-imported into a pool, and it will be removed from any pool it has an allocation in. For more information, see Move resource CIDRs between scopes and Change the monitoring state of resource CIDRs in the Amazon VPC IPAM User Guide.
+   */
+  modifyIpamResourceCidr(params: EC2.Types.ModifyIpamResourceCidrRequest, callback?: (err: AWSError, data: EC2.Types.ModifyIpamResourceCidrResult) => void): Request<EC2.Types.ModifyIpamResourceCidrResult, AWSError>;
+  /**
+   * Modify a resource CIDR. You can use this action to transfer resource CIDRs between scopes and ignore resource CIDRs that you do not want to manage. If set to false, the resource will not be tracked for overlap, it cannot be auto-imported into a pool, and it will be removed from any pool it has an allocation in. For more information, see Move resource CIDRs between scopes and Change the monitoring state of resource CIDRs in the Amazon VPC IPAM User Guide.
+   */
+  modifyIpamResourceCidr(callback?: (err: AWSError, data: EC2.Types.ModifyIpamResourceCidrResult) => void): Request<EC2.Types.ModifyIpamResourceCidrResult, AWSError>;
+  /**
+   * Modify an IPAM scope.
+   */
+  modifyIpamScope(params: EC2.Types.ModifyIpamScopeRequest, callback?: (err: AWSError, data: EC2.Types.ModifyIpamScopeResult) => void): Request<EC2.Types.ModifyIpamScopeResult, AWSError>;
+  /**
+   * Modify an IPAM scope.
+   */
+  modifyIpamScope(callback?: (err: AWSError, data: EC2.Types.ModifyIpamScopeResult) => void): Request<EC2.Types.ModifyIpamScopeResult, AWSError>;
   /**
    * Modifies a launch template. You can specify which version of the launch template to set as the default version. When launching an instance, the default version applies when a launch template version is not specified.
    */
@@ -3133,6 +3461,14 @@ declare class EC2 extends Service {
    */
   modifyNetworkInterfaceAttribute(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Modifies the options for instance hostnames for the specified instance.
+   */
+  modifyPrivateDnsNameOptions(params: EC2.Types.ModifyPrivateDnsNameOptionsRequest, callback?: (err: AWSError, data: EC2.Types.ModifyPrivateDnsNameOptionsResult) => void): Request<EC2.Types.ModifyPrivateDnsNameOptionsResult, AWSError>;
+  /**
+   * Modifies the options for instance hostnames for the specified instance.
+   */
+  modifyPrivateDnsNameOptions(callback?: (err: AWSError, data: EC2.Types.ModifyPrivateDnsNameOptionsResult) => void): Request<EC2.Types.ModifyPrivateDnsNameOptionsResult, AWSError>;
+  /**
    * Modifies the Availability Zone, instance count, instance type, or network platform (EC2-Classic or EC2-VPC) of your Reserved Instances. The Reserved Instances to be modified must be identical, except for Availability Zone, network platform, and instance type. For more information, see Modifying Reserved Instances in the Amazon EC2 User Guide.
    */
   modifyReservedInstances(params: EC2.Types.ModifyReservedInstancesRequest, callback?: (err: AWSError, data: EC2.Types.ModifyReservedInstancesResult) => void): Request<EC2.Types.ModifyReservedInstancesResult, AWSError>;
@@ -3157,6 +3493,14 @@ declare class EC2 extends Service {
    */
   modifySnapshotAttribute(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Archives an Amazon EBS snapshot. When you archive a snapshot, it is converted to a full snapshot that includes all of the blocks of data that were written to the volume at the time the snapshot was created, and moved from the standard tier to the archive tier. For more information, see Archive Amazon EBS snapshots in the Amazon Elastic Compute Cloud User Guide.
+   */
+  modifySnapshotTier(params: EC2.Types.ModifySnapshotTierRequest, callback?: (err: AWSError, data: EC2.Types.ModifySnapshotTierResult) => void): Request<EC2.Types.ModifySnapshotTierResult, AWSError>;
+  /**
+   * Archives an Amazon EBS snapshot. When you archive a snapshot, it is converted to a full snapshot that includes all of the blocks of data that were written to the volume at the time the snapshot was created, and moved from the standard tier to the archive tier. For more information, see Archive Amazon EBS snapshots in the Amazon Elastic Compute Cloud User Guide.
+   */
+  modifySnapshotTier(callback?: (err: AWSError, data: EC2.Types.ModifySnapshotTierResult) => void): Request<EC2.Types.ModifySnapshotTierResult, AWSError>;
+  /**
    * Modifies the specified Spot Fleet request. You can only modify a Spot Fleet request of type maintain. While the Spot Fleet request is being modified, it is in the modifying state. To scale up your Spot Fleet, increase its target capacity. The Spot Fleet launches the additional Spot Instances according to the allocation strategy for the Spot Fleet request. If the allocation strategy is lowestPrice, the Spot Fleet launches instances using the Spot Instance pool with the lowest price. If the allocation strategy is diversified, the Spot Fleet distributes the instances across the Spot Instance pools. If the allocation strategy is capacityOptimized, Spot Fleet launches instances from Spot Instance pools with optimal capacity for the number of instances that are launching. To scale down your Spot Fleet, decrease its target capacity. First, the Spot Fleet cancels any open requests that exceed the new target capacity. You can request that the Spot Fleet terminate Spot Instances until the size of the fleet no longer exceeds the new target capacity. If the allocation strategy is lowestPrice, the Spot Fleet terminates the instances with the highest price per unit. If the allocation strategy is capacityOptimized, the Spot Fleet terminates the instances in the Spot Instance pools that have the least available Spot Instance capacity. If the allocation strategy is diversified, the Spot Fleet terminates instances across the Spot Instance pools. Alternatively, you can request that the Spot Fleet keep the fleet at its current size, but not replace any Spot Instances that are interrupted or that you terminate manually. If you are finished with your Spot Fleet for now, but will use it again later, you can set the target capacity to 0.
    */
   modifySpotFleetRequest(params: EC2.Types.ModifySpotFleetRequestRequest, callback?: (err: AWSError, data: EC2.Types.ModifySpotFleetRequestResponse) => void): Request<EC2.Types.ModifySpotFleetRequestResponse, AWSError>;
@@ -3165,11 +3509,11 @@ declare class EC2 extends Service {
    */
   modifySpotFleetRequest(callback?: (err: AWSError, data: EC2.Types.ModifySpotFleetRequestResponse) => void): Request<EC2.Types.ModifySpotFleetRequestResponse, AWSError>;
   /**
-   * Modifies a subnet attribute. You can only modify one attribute at a time.
+   * Modifies a subnet attribute. You can only modify one attribute at a time. Use this action to modify subnets on Amazon Web Services Outposts.   To modify a subnet on an Outpost rack, set both MapCustomerOwnedIpOnLaunch and CustomerOwnedIpv4Pool. These two parameters act as a single attribute.   To modify a subnet on an Outpost server, set either EnableLniAtDeviceIndex or DisableLniAtDeviceIndex.   For more information about Amazon Web Services Outposts, see the following:    Outpost servers     Outpost racks   
    */
   modifySubnetAttribute(params: EC2.Types.ModifySubnetAttributeRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Modifies a subnet attribute. You can only modify one attribute at a time.
+   * Modifies a subnet attribute. You can only modify one attribute at a time. Use this action to modify subnets on Amazon Web Services Outposts.   To modify a subnet on an Outpost rack, set both MapCustomerOwnedIpOnLaunch and CustomerOwnedIpv4Pool. These two parameters act as a single attribute.   To modify a subnet on an Outpost server, set either EnableLniAtDeviceIndex or DisableLniAtDeviceIndex.   For more information about Amazon Web Services Outposts, see the following:    Outpost servers     Outpost racks   
    */
   modifySubnetAttribute(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -3221,11 +3565,11 @@ declare class EC2 extends Service {
    */
   modifyTransitGatewayVpcAttachment(callback?: (err: AWSError, data: EC2.Types.ModifyTransitGatewayVpcAttachmentResult) => void): Request<EC2.Types.ModifyTransitGatewayVpcAttachmentResult, AWSError>;
   /**
-   * You can modify several parameters of an existing EBS volume, including volume size, volume type, and IOPS capacity. If your EBS volume is attached to a current-generation EC2 instance type, you might be able to apply these changes without stopping the instance or detaching the volume from it. For more information about modifying EBS volumes, see Amazon EBS Elastic Volumes (Linux instances) or Amazon EBS Elastic Volumes (Windows instances). When you complete a resize operation on your volume, you need to extend the volume's file-system size to take advantage of the new storage capacity. For more information, see Extend a Linux file system or Extend a Windows file system.  You can use CloudWatch Events to check the status of a modification to an EBS volume. For information about CloudWatch Events, see the Amazon CloudWatch Events User Guide. You can also track the status of a modification using DescribeVolumesModifications. For information about tracking status changes using either method, see Monitor the progress of volume modifications. With previous-generation instance types, resizing an EBS volume might require detaching and reattaching the volume or stopping and restarting the instance. If you reach the maximum volume modification rate per volume limit, you must wait at least six hours before applying further modifications to the affected EBS volume.
+   * You can modify several parameters of an existing EBS volume, including volume size, volume type, and IOPS capacity. If your EBS volume is attached to a current-generation EC2 instance type, you might be able to apply these changes without stopping the instance or detaching the volume from it. For more information about modifying EBS volumes, see Amazon EBS Elastic Volumes (Linux instances) or Amazon EBS Elastic Volumes (Windows instances). When you complete a resize operation on your volume, you need to extend the volume's file-system size to take advantage of the new storage capacity. For more information, see Extend a Linux file system or Extend a Windows file system.  You can use CloudWatch Events to check the status of a modification to an EBS volume. For information about CloudWatch Events, see the Amazon CloudWatch Events User Guide. You can also track the status of a modification using DescribeVolumesModifications. For information about tracking status changes using either method, see Monitor the progress of volume modifications. With previous-generation instance types, resizing an EBS volume might require detaching and reattaching the volume or stopping and restarting the instance. After modifying a volume, you must wait at least six hours and ensure that the volume is in the in-use or available state before you can modify the same volume. This is sometimes referred to as a cooldown period.
    */
   modifyVolume(params: EC2.Types.ModifyVolumeRequest, callback?: (err: AWSError, data: EC2.Types.ModifyVolumeResult) => void): Request<EC2.Types.ModifyVolumeResult, AWSError>;
   /**
-   * You can modify several parameters of an existing EBS volume, including volume size, volume type, and IOPS capacity. If your EBS volume is attached to a current-generation EC2 instance type, you might be able to apply these changes without stopping the instance or detaching the volume from it. For more information about modifying EBS volumes, see Amazon EBS Elastic Volumes (Linux instances) or Amazon EBS Elastic Volumes (Windows instances). When you complete a resize operation on your volume, you need to extend the volume's file-system size to take advantage of the new storage capacity. For more information, see Extend a Linux file system or Extend a Windows file system.  You can use CloudWatch Events to check the status of a modification to an EBS volume. For information about CloudWatch Events, see the Amazon CloudWatch Events User Guide. You can also track the status of a modification using DescribeVolumesModifications. For information about tracking status changes using either method, see Monitor the progress of volume modifications. With previous-generation instance types, resizing an EBS volume might require detaching and reattaching the volume or stopping and restarting the instance. If you reach the maximum volume modification rate per volume limit, you must wait at least six hours before applying further modifications to the affected EBS volume.
+   * You can modify several parameters of an existing EBS volume, including volume size, volume type, and IOPS capacity. If your EBS volume is attached to a current-generation EC2 instance type, you might be able to apply these changes without stopping the instance or detaching the volume from it. For more information about modifying EBS volumes, see Amazon EBS Elastic Volumes (Linux instances) or Amazon EBS Elastic Volumes (Windows instances). When you complete a resize operation on your volume, you need to extend the volume's file-system size to take advantage of the new storage capacity. For more information, see Extend a Linux file system or Extend a Windows file system.  You can use CloudWatch Events to check the status of a modification to an EBS volume. For information about CloudWatch Events, see the Amazon CloudWatch Events User Guide. You can also track the status of a modification using DescribeVolumesModifications. For information about tracking status changes using either method, see Monitor the progress of volume modifications. With previous-generation instance types, resizing an EBS volume might require detaching and reattaching the volume or stopping and restarting the instance. After modifying a volume, you must wait at least six hours and ensure that the volume is in the in-use or available state before you can modify the same volume. This is sometimes referred to as a cooldown period.
    */
   modifyVolume(callback?: (err: AWSError, data: EC2.Types.ModifyVolumeResult) => void): Request<EC2.Types.ModifyVolumeResult, AWSError>;
   /**
@@ -3245,11 +3589,11 @@ declare class EC2 extends Service {
    */
   modifyVpcAttribute(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Modifies attributes of a specified VPC endpoint. The attributes that you can modify depend on the type of VPC endpoint (interface, gateway, or Gateway Load Balancer). For more information, see VPC Endpoints in the Amazon Virtual Private Cloud User Guide.
+   * Modifies attributes of a specified VPC endpoint. The attributes that you can modify depend on the type of VPC endpoint (interface, gateway, or Gateway Load Balancer). For more information, see the Amazon Web Services PrivateLink Guide.
    */
   modifyVpcEndpoint(params: EC2.Types.ModifyVpcEndpointRequest, callback?: (err: AWSError, data: EC2.Types.ModifyVpcEndpointResult) => void): Request<EC2.Types.ModifyVpcEndpointResult, AWSError>;
   /**
-   * Modifies attributes of a specified VPC endpoint. The attributes that you can modify depend on the type of VPC endpoint (interface, gateway, or Gateway Load Balancer). For more information, see VPC Endpoints in the Amazon Virtual Private Cloud User Guide.
+   * Modifies attributes of a specified VPC endpoint. The attributes that you can modify depend on the type of VPC endpoint (interface, gateway, or Gateway Load Balancer). For more information, see the Amazon Web Services PrivateLink Guide.
    */
   modifyVpcEndpoint(callback?: (err: AWSError, data: EC2.Types.ModifyVpcEndpointResult) => void): Request<EC2.Types.ModifyVpcEndpointResult, AWSError>;
   /**
@@ -3261,13 +3605,21 @@ declare class EC2 extends Service {
    */
   modifyVpcEndpointConnectionNotification(callback?: (err: AWSError, data: EC2.Types.ModifyVpcEndpointConnectionNotificationResult) => void): Request<EC2.Types.ModifyVpcEndpointConnectionNotificationResult, AWSError>;
   /**
-   * Modifies the attributes of your VPC endpoint service configuration. You can change the Network Load Balancers or Gateway Load Balancers for your service, and you can specify whether acceptance is required for requests to connect to your endpoint service through an interface VPC endpoint. If you set or modify the private DNS name, you must prove that you own the private DNS domain name. For more information, see VPC Endpoint Service Private DNS Name Verification in the Amazon Virtual Private Cloud User Guide.
+   * Modifies the attributes of your VPC endpoint service configuration. You can change the Network Load Balancers or Gateway Load Balancers for your service, and you can specify whether acceptance is required for requests to connect to your endpoint service through an interface VPC endpoint. If you set or modify the private DNS name, you must prove that you own the private DNS domain name.
    */
   modifyVpcEndpointServiceConfiguration(params: EC2.Types.ModifyVpcEndpointServiceConfigurationRequest, callback?: (err: AWSError, data: EC2.Types.ModifyVpcEndpointServiceConfigurationResult) => void): Request<EC2.Types.ModifyVpcEndpointServiceConfigurationResult, AWSError>;
   /**
-   * Modifies the attributes of your VPC endpoint service configuration. You can change the Network Load Balancers or Gateway Load Balancers for your service, and you can specify whether acceptance is required for requests to connect to your endpoint service through an interface VPC endpoint. If you set or modify the private DNS name, you must prove that you own the private DNS domain name. For more information, see VPC Endpoint Service Private DNS Name Verification in the Amazon Virtual Private Cloud User Guide.
+   * Modifies the attributes of your VPC endpoint service configuration. You can change the Network Load Balancers or Gateway Load Balancers for your service, and you can specify whether acceptance is required for requests to connect to your endpoint service through an interface VPC endpoint. If you set or modify the private DNS name, you must prove that you own the private DNS domain name.
    */
   modifyVpcEndpointServiceConfiguration(callback?: (err: AWSError, data: EC2.Types.ModifyVpcEndpointServiceConfigurationResult) => void): Request<EC2.Types.ModifyVpcEndpointServiceConfigurationResult, AWSError>;
+  /**
+   * Modifies the payer responsibility for your VPC endpoint service.
+   */
+  modifyVpcEndpointServicePayerResponsibility(params: EC2.Types.ModifyVpcEndpointServicePayerResponsibilityRequest, callback?: (err: AWSError, data: EC2.Types.ModifyVpcEndpointServicePayerResponsibilityResult) => void): Request<EC2.Types.ModifyVpcEndpointServicePayerResponsibilityResult, AWSError>;
+  /**
+   * Modifies the payer responsibility for your VPC endpoint service.
+   */
+  modifyVpcEndpointServicePayerResponsibility(callback?: (err: AWSError, data: EC2.Types.ModifyVpcEndpointServicePayerResponsibilityResult) => void): Request<EC2.Types.ModifyVpcEndpointServicePayerResponsibilityResult, AWSError>;
   /**
    * Modifies the permissions for your VPC endpoint service. You can add or remove permissions for service consumers (IAM users, IAM roles, and Amazon Web Services accounts) to connect to your endpoint service. If you grant permissions to all principals, the service is public. Any users who know the name of a public service can send a request to attach an endpoint. If the service does not require manual approval, attachments are automatically approved.
    */
@@ -3325,11 +3677,11 @@ declare class EC2 extends Service {
    */
   modifyVpnTunnelOptions(callback?: (err: AWSError, data: EC2.Types.ModifyVpnTunnelOptionsResult) => void): Request<EC2.Types.ModifyVpnTunnelOptionsResult, AWSError>;
   /**
-   * Enables detailed monitoring for a running instance. Otherwise, basic monitoring is enabled. For more information, see Monitoring your instances and volumes in the Amazon EC2 User Guide. To disable detailed monitoring, see .
+   * Enables detailed monitoring for a running instance. Otherwise, basic monitoring is enabled. For more information, see Monitor your instances using CloudWatch in the Amazon EC2 User Guide. To disable detailed monitoring, see UnmonitorInstances.
    */
   monitorInstances(params: EC2.Types.MonitorInstancesRequest, callback?: (err: AWSError, data: EC2.Types.MonitorInstancesResult) => void): Request<EC2.Types.MonitorInstancesResult, AWSError>;
   /**
-   * Enables detailed monitoring for a running instance. Otherwise, basic monitoring is enabled. For more information, see Monitoring your instances and volumes in the Amazon EC2 User Guide. To disable detailed monitoring, see .
+   * Enables detailed monitoring for a running instance. Otherwise, basic monitoring is enabled. For more information, see Monitor your instances using CloudWatch in the Amazon EC2 User Guide. To disable detailed monitoring, see UnmonitorInstances.
    */
   monitorInstances(callback?: (err: AWSError, data: EC2.Types.MonitorInstancesResult) => void): Request<EC2.Types.MonitorInstancesResult, AWSError>;
   /**
@@ -3341,6 +3693,14 @@ declare class EC2 extends Service {
    */
   moveAddressToVpc(callback?: (err: AWSError, data: EC2.Types.MoveAddressToVpcResult) => void): Request<EC2.Types.MoveAddressToVpcResult, AWSError>;
   /**
+   * Move an BYOIP IPv4 CIDR to IPAM from a public IPv4 pool. If you already have an IPv4 BYOIP CIDR with Amazon Web Services, you can move the CIDR to IPAM from a public IPv4 pool. You cannot move an IPv6 CIDR to IPAM. If you are bringing a new IP address to Amazon Web Services for the first time, complete the steps in Tutorial: BYOIP address CIDRs to IPAM.
+   */
+  moveByoipCidrToIpam(params: EC2.Types.MoveByoipCidrToIpamRequest, callback?: (err: AWSError, data: EC2.Types.MoveByoipCidrToIpamResult) => void): Request<EC2.Types.MoveByoipCidrToIpamResult, AWSError>;
+  /**
+   * Move an BYOIP IPv4 CIDR to IPAM from a public IPv4 pool. If you already have an IPv4 BYOIP CIDR with Amazon Web Services, you can move the CIDR to IPAM from a public IPv4 pool. You cannot move an IPv6 CIDR to IPAM. If you are bringing a new IP address to Amazon Web Services for the first time, complete the steps in Tutorial: BYOIP address CIDRs to IPAM.
+   */
+  moveByoipCidrToIpam(callback?: (err: AWSError, data: EC2.Types.MoveByoipCidrToIpamResult) => void): Request<EC2.Types.MoveByoipCidrToIpamResult, AWSError>;
+  /**
    * Provisions an IPv4 or IPv6 address range for use with your Amazon Web Services resources through bring your own IP addresses (BYOIP) and creates a corresponding address pool. After the address range is provisioned, it is ready to be advertised using AdvertiseByoipCidr. Amazon Web Services verifies that you own the address range and are authorized to advertise it. You must ensure that the address range is registered to you and that you created an RPKI ROA to authorize Amazon ASNs 16509 and 14618 to advertise the address range. For more information, see Bring your own IP addresses (BYOIP) in the Amazon Elastic Compute Cloud User Guide. Provisioning an address range is an asynchronous operation, so the call returns immediately, but the address range is not ready to use until its status changes from pending-provision to provisioned. To monitor the status of an address range, use DescribeByoipCidrs. To allocate an Elastic IP address from your IPv4 address pool, use AllocateAddress with either the specific address from the address pool or the ID of the address pool.
    */
   provisionByoipCidr(params: EC2.Types.ProvisionByoipCidrRequest, callback?: (err: AWSError, data: EC2.Types.ProvisionByoipCidrResult) => void): Request<EC2.Types.ProvisionByoipCidrResult, AWSError>;
@@ -3348,6 +3708,22 @@ declare class EC2 extends Service {
    * Provisions an IPv4 or IPv6 address range for use with your Amazon Web Services resources through bring your own IP addresses (BYOIP) and creates a corresponding address pool. After the address range is provisioned, it is ready to be advertised using AdvertiseByoipCidr. Amazon Web Services verifies that you own the address range and are authorized to advertise it. You must ensure that the address range is registered to you and that you created an RPKI ROA to authorize Amazon ASNs 16509 and 14618 to advertise the address range. For more information, see Bring your own IP addresses (BYOIP) in the Amazon Elastic Compute Cloud User Guide. Provisioning an address range is an asynchronous operation, so the call returns immediately, but the address range is not ready to use until its status changes from pending-provision to provisioned. To monitor the status of an address range, use DescribeByoipCidrs. To allocate an Elastic IP address from your IPv4 address pool, use AllocateAddress with either the specific address from the address pool or the ID of the address pool.
    */
   provisionByoipCidr(callback?: (err: AWSError, data: EC2.Types.ProvisionByoipCidrResult) => void): Request<EC2.Types.ProvisionByoipCidrResult, AWSError>;
+  /**
+   * Provision a CIDR to an IPAM pool. You can use this action to provision new CIDRs to a top-level pool or to transfer a CIDR from a top-level pool to a pool within it. For more information, see Provision CIDRs to pools in the Amazon VPC IPAM User Guide. 
+   */
+  provisionIpamPoolCidr(params: EC2.Types.ProvisionIpamPoolCidrRequest, callback?: (err: AWSError, data: EC2.Types.ProvisionIpamPoolCidrResult) => void): Request<EC2.Types.ProvisionIpamPoolCidrResult, AWSError>;
+  /**
+   * Provision a CIDR to an IPAM pool. You can use this action to provision new CIDRs to a top-level pool or to transfer a CIDR from a top-level pool to a pool within it. For more information, see Provision CIDRs to pools in the Amazon VPC IPAM User Guide. 
+   */
+  provisionIpamPoolCidr(callback?: (err: AWSError, data: EC2.Types.ProvisionIpamPoolCidrResult) => void): Request<EC2.Types.ProvisionIpamPoolCidrResult, AWSError>;
+  /**
+   * Provision a CIDR to a public IPv4 pool. For more information about IPAM, see What is IPAM? in the Amazon VPC IPAM User Guide.
+   */
+  provisionPublicIpv4PoolCidr(params: EC2.Types.ProvisionPublicIpv4PoolCidrRequest, callback?: (err: AWSError, data: EC2.Types.ProvisionPublicIpv4PoolCidrResult) => void): Request<EC2.Types.ProvisionPublicIpv4PoolCidrResult, AWSError>;
+  /**
+   * Provision a CIDR to a public IPv4 pool. For more information about IPAM, see What is IPAM? in the Amazon VPC IPAM User Guide.
+   */
+  provisionPublicIpv4PoolCidr(callback?: (err: AWSError, data: EC2.Types.ProvisionPublicIpv4PoolCidrResult) => void): Request<EC2.Types.ProvisionPublicIpv4PoolCidrResult, AWSError>;
   /**
    * Purchase a reservation with configurations that match those of your Dedicated Host. You must have active Dedicated Hosts in your account before you purchase a reservation. This action results in the specified reservation being purchased and charged to your account.
    */
@@ -3373,11 +3749,11 @@ declare class EC2 extends Service {
    */
   purchaseScheduledInstances(callback?: (err: AWSError, data: EC2.Types.PurchaseScheduledInstancesResult) => void): Request<EC2.Types.PurchaseScheduledInstancesResult, AWSError>;
   /**
-   * Requests a reboot of the specified instances. This operation is asynchronous; it only queues a request to reboot the specified instances. The operation succeeds if the instances are valid and belong to you. Requests to reboot terminated instances are ignored. If an instance does not cleanly shut down within a few minutes, Amazon EC2 performs a hard reboot. For more information about troubleshooting, see Getting console output and rebooting instances in the Amazon EC2 User Guide.
+   * Requests a reboot of the specified instances. This operation is asynchronous; it only queues a request to reboot the specified instances. The operation succeeds if the instances are valid and belong to you. Requests to reboot terminated instances are ignored. If an instance does not cleanly shut down within a few minutes, Amazon EC2 performs a hard reboot. For more information about troubleshooting, see Troubleshoot an unreachable instance in the Amazon EC2 User Guide.
    */
   rebootInstances(params: EC2.Types.RebootInstancesRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Requests a reboot of the specified instances. This operation is asynchronous; it only queues a request to reboot the specified instances. The operation succeeds if the instances are valid and belong to you. Requests to reboot terminated instances are ignored. If an instance does not cleanly shut down within a few minutes, Amazon EC2 performs a hard reboot. For more information about troubleshooting, see Getting console output and rebooting instances in the Amazon EC2 User Guide.
+   * Requests a reboot of the specified instances. This operation is asynchronous; it only queues a request to reboot the specified instances. The operation succeeds if the instances are valid and belong to you. Requests to reboot terminated instances are ignored. If an instance does not cleanly shut down within a few minutes, Amazon EC2 performs a hard reboot. For more information about troubleshooting, see Troubleshoot an unreachable instance in the Amazon EC2 User Guide.
    */
   rebootInstances(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -3389,11 +3765,11 @@ declare class EC2 extends Service {
    */
   registerImage(callback?: (err: AWSError, data: EC2.Types.RegisterImageResult) => void): Request<EC2.Types.RegisterImageResult, AWSError>;
   /**
-   * Registers a set of tag keys to include in scheduled event notifications for your resources.  To remove tags, use .
+   * Registers a set of tag keys to include in scheduled event notifications for your resources.  To remove tags, use DeregisterInstanceEventNotificationAttributes.
    */
   registerInstanceEventNotificationAttributes(params: EC2.Types.RegisterInstanceEventNotificationAttributesRequest, callback?: (err: AWSError, data: EC2.Types.RegisterInstanceEventNotificationAttributesResult) => void): Request<EC2.Types.RegisterInstanceEventNotificationAttributesResult, AWSError>;
   /**
-   * Registers a set of tag keys to include in scheduled event notifications for your resources.  To remove tags, use .
+   * Registers a set of tag keys to include in scheduled event notifications for your resources.  To remove tags, use DeregisterInstanceEventNotificationAttributes.
    */
   registerInstanceEventNotificationAttributes(callback?: (err: AWSError, data: EC2.Types.RegisterInstanceEventNotificationAttributesResult) => void): Request<EC2.Types.RegisterInstanceEventNotificationAttributesResult, AWSError>;
   /**
@@ -3469,6 +3845,14 @@ declare class EC2 extends Service {
    */
   releaseHosts(callback?: (err: AWSError, data: EC2.Types.ReleaseHostsResult) => void): Request<EC2.Types.ReleaseHostsResult, AWSError>;
   /**
+   * Release an allocation within an IPAM pool. You can only use this action to release manual allocations. To remove an allocation for a resource without deleting the resource, set its monitored state to false using ModifyIpamResourceCidr. For more information, see Release an allocation in the Amazon VPC IPAM User Guide. 
+   */
+  releaseIpamPoolAllocation(params: EC2.Types.ReleaseIpamPoolAllocationRequest, callback?: (err: AWSError, data: EC2.Types.ReleaseIpamPoolAllocationResult) => void): Request<EC2.Types.ReleaseIpamPoolAllocationResult, AWSError>;
+  /**
+   * Release an allocation within an IPAM pool. You can only use this action to release manual allocations. To remove an allocation for a resource without deleting the resource, set its monitored state to false using ModifyIpamResourceCidr. For more information, see Release an allocation in the Amazon VPC IPAM User Guide. 
+   */
+  releaseIpamPoolAllocation(callback?: (err: AWSError, data: EC2.Types.ReleaseIpamPoolAllocationResult) => void): Request<EC2.Types.ReleaseIpamPoolAllocationResult, AWSError>;
+  /**
    * Replaces an IAM instance profile for the specified running instance. You can use this action to change the IAM instance profile that's associated with an instance without having to disassociate the existing IAM instance profile first. Use DescribeIamInstanceProfileAssociations to get the association ID.
    */
   replaceIamInstanceProfileAssociation(params: EC2.Types.ReplaceIamInstanceProfileAssociationRequest, callback?: (err: AWSError, data: EC2.Types.ReplaceIamInstanceProfileAssociationResult) => void): Request<EC2.Types.ReplaceIamInstanceProfileAssociationResult, AWSError>;
@@ -3525,19 +3909,19 @@ declare class EC2 extends Service {
    */
   reportInstanceStatus(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Creates a Spot Fleet request. The Spot Fleet request specifies the total target capacity and the On-Demand target capacity. Amazon EC2 calculates the difference between the total capacity and On-Demand capacity, and launches the difference as Spot capacity. You can submit a single request that includes multiple launch specifications that vary by instance type, AMI, Availability Zone, or subnet. By default, the Spot Fleet requests Spot Instances in the Spot Instance pool where the price per unit is the lowest. Each launch specification can include its own instance weighting that reflects the value of the instance type to your application workload. Alternatively, you can specify that the Spot Fleet distribute the target capacity across the Spot pools included in its launch specifications. By ensuring that the Spot Instances in your Spot Fleet are in different Spot pools, you can improve the availability of your fleet. You can specify tags for the Spot Fleet request and instances launched by the fleet. You cannot tag other resource types in a Spot Fleet request because only the spot-fleet-request and instance resource types are supported. For more information, see Spot Fleet requests in the Amazon EC2 User Guide for Linux Instances.
+   * Creates a Spot Fleet request. The Spot Fleet request specifies the total target capacity and the On-Demand target capacity. Amazon EC2 calculates the difference between the total capacity and On-Demand capacity, and launches the difference as Spot capacity. You can submit a single request that includes multiple launch specifications that vary by instance type, AMI, Availability Zone, or subnet. By default, the Spot Fleet requests Spot Instances in the Spot Instance pool where the price per unit is the lowest. Each launch specification can include its own instance weighting that reflects the value of the instance type to your application workload. Alternatively, you can specify that the Spot Fleet distribute the target capacity across the Spot pools included in its launch specifications. By ensuring that the Spot Instances in your Spot Fleet are in different Spot pools, you can improve the availability of your fleet. You can specify tags for the Spot Fleet request and instances launched by the fleet. You cannot tag other resource types in a Spot Fleet request because only the spot-fleet-request and instance resource types are supported. For more information, see Spot Fleet requests in the Amazon EC2 User Guide for Linux Instances.  We strongly discourage using the RequestSpotFleet API because it is a legacy API with no planned investment. For options for requesting Spot Instances, see Which is the best Spot request method to use? in the Amazon EC2 User Guide for Linux Instances. 
    */
   requestSpotFleet(params: EC2.Types.RequestSpotFleetRequest, callback?: (err: AWSError, data: EC2.Types.RequestSpotFleetResponse) => void): Request<EC2.Types.RequestSpotFleetResponse, AWSError>;
   /**
-   * Creates a Spot Fleet request. The Spot Fleet request specifies the total target capacity and the On-Demand target capacity. Amazon EC2 calculates the difference between the total capacity and On-Demand capacity, and launches the difference as Spot capacity. You can submit a single request that includes multiple launch specifications that vary by instance type, AMI, Availability Zone, or subnet. By default, the Spot Fleet requests Spot Instances in the Spot Instance pool where the price per unit is the lowest. Each launch specification can include its own instance weighting that reflects the value of the instance type to your application workload. Alternatively, you can specify that the Spot Fleet distribute the target capacity across the Spot pools included in its launch specifications. By ensuring that the Spot Instances in your Spot Fleet are in different Spot pools, you can improve the availability of your fleet. You can specify tags for the Spot Fleet request and instances launched by the fleet. You cannot tag other resource types in a Spot Fleet request because only the spot-fleet-request and instance resource types are supported. For more information, see Spot Fleet requests in the Amazon EC2 User Guide for Linux Instances.
+   * Creates a Spot Fleet request. The Spot Fleet request specifies the total target capacity and the On-Demand target capacity. Amazon EC2 calculates the difference between the total capacity and On-Demand capacity, and launches the difference as Spot capacity. You can submit a single request that includes multiple launch specifications that vary by instance type, AMI, Availability Zone, or subnet. By default, the Spot Fleet requests Spot Instances in the Spot Instance pool where the price per unit is the lowest. Each launch specification can include its own instance weighting that reflects the value of the instance type to your application workload. Alternatively, you can specify that the Spot Fleet distribute the target capacity across the Spot pools included in its launch specifications. By ensuring that the Spot Instances in your Spot Fleet are in different Spot pools, you can improve the availability of your fleet. You can specify tags for the Spot Fleet request and instances launched by the fleet. You cannot tag other resource types in a Spot Fleet request because only the spot-fleet-request and instance resource types are supported. For more information, see Spot Fleet requests in the Amazon EC2 User Guide for Linux Instances.  We strongly discourage using the RequestSpotFleet API because it is a legacy API with no planned investment. For options for requesting Spot Instances, see Which is the best Spot request method to use? in the Amazon EC2 User Guide for Linux Instances. 
    */
   requestSpotFleet(callback?: (err: AWSError, data: EC2.Types.RequestSpotFleetResponse) => void): Request<EC2.Types.RequestSpotFleetResponse, AWSError>;
   /**
-   * Creates a Spot Instance request. For more information, see Spot Instance requests in the Amazon EC2 User Guide for Linux Instances.
+   * Creates a Spot Instance request. For more information, see Spot Instance requests in the Amazon EC2 User Guide for Linux Instances.  We strongly discourage using the RequestSpotInstances API because it is a legacy API with no planned investment. For options for requesting Spot Instances, see Which is the best Spot request method to use? in the Amazon EC2 User Guide for Linux Instances. 
    */
   requestSpotInstances(params: EC2.Types.RequestSpotInstancesRequest, callback?: (err: AWSError, data: EC2.Types.RequestSpotInstancesResult) => void): Request<EC2.Types.RequestSpotInstancesResult, AWSError>;
   /**
-   * Creates a Spot Instance request. For more information, see Spot Instance requests in the Amazon EC2 User Guide for Linux Instances.
+   * Creates a Spot Instance request. For more information, see Spot Instance requests in the Amazon EC2 User Guide for Linux Instances.  We strongly discourage using the RequestSpotInstances API because it is a legacy API with no planned investment. For options for requesting Spot Instances, see Which is the best Spot request method to use? in the Amazon EC2 User Guide for Linux Instances. 
    */
   requestSpotInstances(callback?: (err: AWSError, data: EC2.Types.RequestSpotInstancesResult) => void): Request<EC2.Types.RequestSpotInstancesResult, AWSError>;
   /**
@@ -3605,6 +3989,14 @@ declare class EC2 extends Service {
    */
   restoreAddressToClassic(callback?: (err: AWSError, data: EC2.Types.RestoreAddressToClassicResult) => void): Request<EC2.Types.RestoreAddressToClassicResult, AWSError>;
   /**
+   * Restores an AMI from the Recycle Bin. For more information, see Recycle Bin in the Amazon Elastic Compute Cloud User Guide.
+   */
+  restoreImageFromRecycleBin(params: EC2.Types.RestoreImageFromRecycleBinRequest, callback?: (err: AWSError, data: EC2.Types.RestoreImageFromRecycleBinResult) => void): Request<EC2.Types.RestoreImageFromRecycleBinResult, AWSError>;
+  /**
+   * Restores an AMI from the Recycle Bin. For more information, see Recycle Bin in the Amazon Elastic Compute Cloud User Guide.
+   */
+  restoreImageFromRecycleBin(callback?: (err: AWSError, data: EC2.Types.RestoreImageFromRecycleBinResult) => void): Request<EC2.Types.RestoreImageFromRecycleBinResult, AWSError>;
+  /**
    * Restores the entries from a previous version of a managed prefix list to a new version of the prefix list.
    */
   restoreManagedPrefixListVersion(params: EC2.Types.RestoreManagedPrefixListVersionRequest, callback?: (err: AWSError, data: EC2.Types.RestoreManagedPrefixListVersionResult) => void): Request<EC2.Types.RestoreManagedPrefixListVersionResult, AWSError>;
@@ -3612,6 +4004,22 @@ declare class EC2 extends Service {
    * Restores the entries from a previous version of a managed prefix list to a new version of the prefix list.
    */
   restoreManagedPrefixListVersion(callback?: (err: AWSError, data: EC2.Types.RestoreManagedPrefixListVersionResult) => void): Request<EC2.Types.RestoreManagedPrefixListVersionResult, AWSError>;
+  /**
+   * Restores a snapshot from the Recycle Bin. For more information, see Restore snapshots from the Recycle Bin in the Amazon Elastic Compute Cloud User Guide.
+   */
+  restoreSnapshotFromRecycleBin(params: EC2.Types.RestoreSnapshotFromRecycleBinRequest, callback?: (err: AWSError, data: EC2.Types.RestoreSnapshotFromRecycleBinResult) => void): Request<EC2.Types.RestoreSnapshotFromRecycleBinResult, AWSError>;
+  /**
+   * Restores a snapshot from the Recycle Bin. For more information, see Restore snapshots from the Recycle Bin in the Amazon Elastic Compute Cloud User Guide.
+   */
+  restoreSnapshotFromRecycleBin(callback?: (err: AWSError, data: EC2.Types.RestoreSnapshotFromRecycleBinResult) => void): Request<EC2.Types.RestoreSnapshotFromRecycleBinResult, AWSError>;
+  /**
+   * Restores an archived Amazon EBS snapshot for use temporarily or permanently, or modifies the restore period or restore type for a snapshot that was previously temporarily restored. For more information see  Restore an archived snapshot and  modify the restore period or restore type for a temporarily restored snapshot in the Amazon Elastic Compute Cloud User Guide.
+   */
+  restoreSnapshotTier(params: EC2.Types.RestoreSnapshotTierRequest, callback?: (err: AWSError, data: EC2.Types.RestoreSnapshotTierResult) => void): Request<EC2.Types.RestoreSnapshotTierResult, AWSError>;
+  /**
+   * Restores an archived Amazon EBS snapshot for use temporarily or permanently, or modifies the restore period or restore type for a snapshot that was previously temporarily restored. For more information see  Restore an archived snapshot and  modify the restore period or restore type for a temporarily restored snapshot in the Amazon Elastic Compute Cloud User Guide.
+   */
+  restoreSnapshotTier(callback?: (err: AWSError, data: EC2.Types.RestoreSnapshotTierResult) => void): Request<EC2.Types.RestoreSnapshotTierResult, AWSError>;
   /**
    * Removes an ingress authorization rule from a Client VPN endpoint. 
    */
@@ -3677,21 +4085,29 @@ declare class EC2 extends Service {
    */
   searchTransitGatewayRoutes(callback?: (err: AWSError, data: EC2.Types.SearchTransitGatewayRoutesResult) => void): Request<EC2.Types.SearchTransitGatewayRoutesResult, AWSError>;
   /**
-   * Sends a diagnostic interrupt to the specified Amazon EC2 instance to trigger a kernel panic (on Linux instances), or a blue screen/stop error (on Windows instances). For instances based on Intel and AMD processors, the interrupt is received as a non-maskable interrupt (NMI). In general, the operating system crashes and reboots when a kernel panic or stop error is triggered. The operating system can also be configured to perform diagnostic tasks, such as generating a memory dump file, loading a secondary kernel, or obtaining a call trace. Before sending a diagnostic interrupt to your instance, ensure that its operating system is configured to perform the required diagnostic tasks. For more information about configuring your operating system to generate a crash dump when a kernel panic or stop error occurs, see Send a diagnostic interrupt (Linux instances) or Send a Diagnostic Interrupt (Windows instances).
+   * Sends a diagnostic interrupt to the specified Amazon EC2 instance to trigger a kernel panic (on Linux instances), or a blue screen/stop error (on Windows instances). For instances based on Intel and AMD processors, the interrupt is received as a non-maskable interrupt (NMI). In general, the operating system crashes and reboots when a kernel panic or stop error is triggered. The operating system can also be configured to perform diagnostic tasks, such as generating a memory dump file, loading a secondary kernel, or obtaining a call trace. Before sending a diagnostic interrupt to your instance, ensure that its operating system is configured to perform the required diagnostic tasks. For more information about configuring your operating system to generate a crash dump when a kernel panic or stop error occurs, see Send a diagnostic interrupt (for advanced users) (Linux instances) or Send a diagnostic interrupt (for advanced users) (Windows instances).
    */
   sendDiagnosticInterrupt(params: EC2.Types.SendDiagnosticInterruptRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Sends a diagnostic interrupt to the specified Amazon EC2 instance to trigger a kernel panic (on Linux instances), or a blue screen/stop error (on Windows instances). For instances based on Intel and AMD processors, the interrupt is received as a non-maskable interrupt (NMI). In general, the operating system crashes and reboots when a kernel panic or stop error is triggered. The operating system can also be configured to perform diagnostic tasks, such as generating a memory dump file, loading a secondary kernel, or obtaining a call trace. Before sending a diagnostic interrupt to your instance, ensure that its operating system is configured to perform the required diagnostic tasks. For more information about configuring your operating system to generate a crash dump when a kernel panic or stop error occurs, see Send a diagnostic interrupt (Linux instances) or Send a Diagnostic Interrupt (Windows instances).
+   * Sends a diagnostic interrupt to the specified Amazon EC2 instance to trigger a kernel panic (on Linux instances), or a blue screen/stop error (on Windows instances). For instances based on Intel and AMD processors, the interrupt is received as a non-maskable interrupt (NMI). In general, the operating system crashes and reboots when a kernel panic or stop error is triggered. The operating system can also be configured to perform diagnostic tasks, such as generating a memory dump file, loading a secondary kernel, or obtaining a call trace. Before sending a diagnostic interrupt to your instance, ensure that its operating system is configured to perform the required diagnostic tasks. For more information about configuring your operating system to generate a crash dump when a kernel panic or stop error occurs, see Send a diagnostic interrupt (for advanced users) (Linux instances) or Send a diagnostic interrupt (for advanced users) (Windows instances).
    */
   sendDiagnosticInterrupt(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Starts an Amazon EBS-backed instance that you've previously stopped. Instances that use Amazon EBS volumes as their root devices can be quickly stopped and started. When an instance is stopped, the compute resources are released and you are not billed for instance usage. However, your root partition Amazon EBS volume remains and continues to persist your data, and you are charged for Amazon EBS volume usage. You can restart your instance at any time. Every time you start your instance, Amazon EC2 charges a one-minute minimum for instance usage, and thereafter charges per second for instance usage. Before stopping an instance, make sure it is in a state from which it can be restarted. Stopping an instance does not preserve data stored in RAM. Performing this operation on an instance that uses an instance store as its root device returns an error. If you attempt to start a T3 instance with host tenancy and the unlimted CPU credit option, the request fails. The unlimited CPU credit option is not supported on Dedicated Hosts. Before you start the instance, either change its CPU credit option to standard, or change its tenancy to default or dedicated. For more information, see Stopping instances in the Amazon EC2 User Guide.
+   * Starts an Amazon EBS-backed instance that you've previously stopped. Instances that use Amazon EBS volumes as their root devices can be quickly stopped and started. When an instance is stopped, the compute resources are released and you are not billed for instance usage. However, your root partition Amazon EBS volume remains and continues to persist your data, and you are charged for Amazon EBS volume usage. You can restart your instance at any time. Every time you start your instance, Amazon EC2 charges a one-minute minimum for instance usage, and thereafter charges per second for instance usage. Before stopping an instance, make sure it is in a state from which it can be restarted. Stopping an instance does not preserve data stored in RAM. Performing this operation on an instance that uses an instance store as its root device returns an error. If you attempt to start a T3 instance with host tenancy and the unlimted CPU credit option, the request fails. The unlimited CPU credit option is not supported on Dedicated Hosts. Before you start the instance, either change its CPU credit option to standard, or change its tenancy to default or dedicated. For more information, see Stop and start your instance in the Amazon EC2 User Guide.
    */
   startInstances(params: EC2.Types.StartInstancesRequest, callback?: (err: AWSError, data: EC2.Types.StartInstancesResult) => void): Request<EC2.Types.StartInstancesResult, AWSError>;
   /**
-   * Starts an Amazon EBS-backed instance that you've previously stopped. Instances that use Amazon EBS volumes as their root devices can be quickly stopped and started. When an instance is stopped, the compute resources are released and you are not billed for instance usage. However, your root partition Amazon EBS volume remains and continues to persist your data, and you are charged for Amazon EBS volume usage. You can restart your instance at any time. Every time you start your instance, Amazon EC2 charges a one-minute minimum for instance usage, and thereafter charges per second for instance usage. Before stopping an instance, make sure it is in a state from which it can be restarted. Stopping an instance does not preserve data stored in RAM. Performing this operation on an instance that uses an instance store as its root device returns an error. If you attempt to start a T3 instance with host tenancy and the unlimted CPU credit option, the request fails. The unlimited CPU credit option is not supported on Dedicated Hosts. Before you start the instance, either change its CPU credit option to standard, or change its tenancy to default or dedicated. For more information, see Stopping instances in the Amazon EC2 User Guide.
+   * Starts an Amazon EBS-backed instance that you've previously stopped. Instances that use Amazon EBS volumes as their root devices can be quickly stopped and started. When an instance is stopped, the compute resources are released and you are not billed for instance usage. However, your root partition Amazon EBS volume remains and continues to persist your data, and you are charged for Amazon EBS volume usage. You can restart your instance at any time. Every time you start your instance, Amazon EC2 charges a one-minute minimum for instance usage, and thereafter charges per second for instance usage. Before stopping an instance, make sure it is in a state from which it can be restarted. Stopping an instance does not preserve data stored in RAM. Performing this operation on an instance that uses an instance store as its root device returns an error. If you attempt to start a T3 instance with host tenancy and the unlimted CPU credit option, the request fails. The unlimited CPU credit option is not supported on Dedicated Hosts. Before you start the instance, either change its CPU credit option to standard, or change its tenancy to default or dedicated. For more information, see Stop and start your instance in the Amazon EC2 User Guide.
    */
   startInstances(callback?: (err: AWSError, data: EC2.Types.StartInstancesResult) => void): Request<EC2.Types.StartInstancesResult, AWSError>;
+  /**
+   * Starts analyzing the specified Network Access Scope.
+   */
+  startNetworkInsightsAccessScopeAnalysis(params: EC2.Types.StartNetworkInsightsAccessScopeAnalysisRequest, callback?: (err: AWSError, data: EC2.Types.StartNetworkInsightsAccessScopeAnalysisResult) => void): Request<EC2.Types.StartNetworkInsightsAccessScopeAnalysisResult, AWSError>;
+  /**
+   * Starts analyzing the specified Network Access Scope.
+   */
+  startNetworkInsightsAccessScopeAnalysis(callback?: (err: AWSError, data: EC2.Types.StartNetworkInsightsAccessScopeAnalysisResult) => void): Request<EC2.Types.StartNetworkInsightsAccessScopeAnalysisResult, AWSError>;
   /**
    * Starts analyzing the specified path. If the path is reachable, the operation returns the shortest feasible path.
    */
@@ -3701,19 +4117,19 @@ declare class EC2 extends Service {
    */
   startNetworkInsightsAnalysis(callback?: (err: AWSError, data: EC2.Types.StartNetworkInsightsAnalysisResult) => void): Request<EC2.Types.StartNetworkInsightsAnalysisResult, AWSError>;
   /**
-   * Initiates the verification process to prove that the service provider owns the private DNS name domain for the endpoint service. The service provider must successfully perform the verification before the consumer can use the name to access the service. Before the service provider runs this command, they must add a record to the DNS server. For more information, see Adding a TXT Record to Your Domain's DNS Server  in the Amazon VPC User Guide.
+   * Initiates the verification process to prove that the service provider owns the private DNS name domain for the endpoint service. The service provider must successfully perform the verification before the consumer can use the name to access the service. Before the service provider runs this command, they must add a record to the DNS server.
    */
   startVpcEndpointServicePrivateDnsVerification(params: EC2.Types.StartVpcEndpointServicePrivateDnsVerificationRequest, callback?: (err: AWSError, data: EC2.Types.StartVpcEndpointServicePrivateDnsVerificationResult) => void): Request<EC2.Types.StartVpcEndpointServicePrivateDnsVerificationResult, AWSError>;
   /**
-   * Initiates the verification process to prove that the service provider owns the private DNS name domain for the endpoint service. The service provider must successfully perform the verification before the consumer can use the name to access the service. Before the service provider runs this command, they must add a record to the DNS server. For more information, see Adding a TXT Record to Your Domain's DNS Server  in the Amazon VPC User Guide.
+   * Initiates the verification process to prove that the service provider owns the private DNS name domain for the endpoint service. The service provider must successfully perform the verification before the consumer can use the name to access the service. Before the service provider runs this command, they must add a record to the DNS server.
    */
   startVpcEndpointServicePrivateDnsVerification(callback?: (err: AWSError, data: EC2.Types.StartVpcEndpointServicePrivateDnsVerificationResult) => void): Request<EC2.Types.StartVpcEndpointServicePrivateDnsVerificationResult, AWSError>;
   /**
-   * Stops an Amazon EBS-backed instance. You can use the Stop action to hibernate an instance if the instance is enabled for hibernation and it meets the hibernation prerequisites. For more information, see Hibernate your instance in the Amazon EC2 User Guide. We don't charge usage for a stopped instance, or data transfer fees; however, your root partition Amazon EBS volume remains and continues to persist your data, and you are charged for Amazon EBS volume usage. Every time you start your instance, Amazon EC2 charges a one-minute minimum for instance usage, and thereafter charges per second for instance usage. You can't stop or hibernate instance store-backed instances. You can't use the Stop action to hibernate Spot Instances, but you can specify that Amazon EC2 should hibernate Spot Instances when they are interrupted. For more information, see Hibernating interrupted Spot Instances in the Amazon EC2 User Guide. When you stop or hibernate an instance, we shut it down. You can restart your instance at any time. Before stopping or hibernating an instance, make sure it is in a state from which it can be restarted. Stopping an instance does not preserve data stored in RAM, but hibernating an instance does preserve data stored in RAM. If an instance cannot hibernate successfully, a normal shutdown occurs. Stopping and hibernating an instance is different to rebooting or terminating it. For example, when you stop or hibernate an instance, the root device and any other devices attached to the instance persist. When you terminate an instance, the root device and any other devices attached during the instance launch are automatically deleted. For more information about the differences between rebooting, stopping, hibernating, and terminating instances, see Instance lifecycle in the Amazon EC2 User Guide. When you stop an instance, we attempt to shut it down forcibly after a short while. If your instance appears stuck in the stopping state after a period of time, there may be an issue with the underlying host computer. For more information, see Troubleshooting stopping your instance in the Amazon EC2 User Guide.
+   * Stops an Amazon EBS-backed instance. For more information, see Stop and start your instance in the Amazon EC2 User Guide. You can use the Stop action to hibernate an instance if the instance is enabled for hibernation and it meets the hibernation prerequisites. For more information, see Hibernate your instance in the Amazon EC2 User Guide. We don't charge usage for a stopped instance, or data transfer fees; however, your root partition Amazon EBS volume remains and continues to persist your data, and you are charged for Amazon EBS volume usage. Every time you start your instance, Amazon EC2 charges a one-minute minimum for instance usage, and thereafter charges per second for instance usage. You can't stop or hibernate instance store-backed instances. You can't use the Stop action to hibernate Spot Instances, but you can specify that Amazon EC2 should hibernate Spot Instances when they are interrupted. For more information, see Hibernating interrupted Spot Instances in the Amazon EC2 User Guide. When you stop or hibernate an instance, we shut it down. You can restart your instance at any time. Before stopping or hibernating an instance, make sure it is in a state from which it can be restarted. Stopping an instance does not preserve data stored in RAM, but hibernating an instance does preserve data stored in RAM. If an instance cannot hibernate successfully, a normal shutdown occurs. Stopping and hibernating an instance is different to rebooting or terminating it. For example, when you stop or hibernate an instance, the root device and any other devices attached to the instance persist. When you terminate an instance, the root device and any other devices attached during the instance launch are automatically deleted. For more information about the differences between rebooting, stopping, hibernating, and terminating instances, see Instance lifecycle in the Amazon EC2 User Guide. When you stop an instance, we attempt to shut it down forcibly after a short while. If your instance appears stuck in the stopping state after a period of time, there may be an issue with the underlying host computer. For more information, see Troubleshoot stopping your instance in the Amazon EC2 User Guide.
    */
   stopInstances(params: EC2.Types.StopInstancesRequest, callback?: (err: AWSError, data: EC2.Types.StopInstancesResult) => void): Request<EC2.Types.StopInstancesResult, AWSError>;
   /**
-   * Stops an Amazon EBS-backed instance. You can use the Stop action to hibernate an instance if the instance is enabled for hibernation and it meets the hibernation prerequisites. For more information, see Hibernate your instance in the Amazon EC2 User Guide. We don't charge usage for a stopped instance, or data transfer fees; however, your root partition Amazon EBS volume remains and continues to persist your data, and you are charged for Amazon EBS volume usage. Every time you start your instance, Amazon EC2 charges a one-minute minimum for instance usage, and thereafter charges per second for instance usage. You can't stop or hibernate instance store-backed instances. You can't use the Stop action to hibernate Spot Instances, but you can specify that Amazon EC2 should hibernate Spot Instances when they are interrupted. For more information, see Hibernating interrupted Spot Instances in the Amazon EC2 User Guide. When you stop or hibernate an instance, we shut it down. You can restart your instance at any time. Before stopping or hibernating an instance, make sure it is in a state from which it can be restarted. Stopping an instance does not preserve data stored in RAM, but hibernating an instance does preserve data stored in RAM. If an instance cannot hibernate successfully, a normal shutdown occurs. Stopping and hibernating an instance is different to rebooting or terminating it. For example, when you stop or hibernate an instance, the root device and any other devices attached to the instance persist. When you terminate an instance, the root device and any other devices attached during the instance launch are automatically deleted. For more information about the differences between rebooting, stopping, hibernating, and terminating instances, see Instance lifecycle in the Amazon EC2 User Guide. When you stop an instance, we attempt to shut it down forcibly after a short while. If your instance appears stuck in the stopping state after a period of time, there may be an issue with the underlying host computer. For more information, see Troubleshooting stopping your instance in the Amazon EC2 User Guide.
+   * Stops an Amazon EBS-backed instance. For more information, see Stop and start your instance in the Amazon EC2 User Guide. You can use the Stop action to hibernate an instance if the instance is enabled for hibernation and it meets the hibernation prerequisites. For more information, see Hibernate your instance in the Amazon EC2 User Guide. We don't charge usage for a stopped instance, or data transfer fees; however, your root partition Amazon EBS volume remains and continues to persist your data, and you are charged for Amazon EBS volume usage. Every time you start your instance, Amazon EC2 charges a one-minute minimum for instance usage, and thereafter charges per second for instance usage. You can't stop or hibernate instance store-backed instances. You can't use the Stop action to hibernate Spot Instances, but you can specify that Amazon EC2 should hibernate Spot Instances when they are interrupted. For more information, see Hibernating interrupted Spot Instances in the Amazon EC2 User Guide. When you stop or hibernate an instance, we shut it down. You can restart your instance at any time. Before stopping or hibernating an instance, make sure it is in a state from which it can be restarted. Stopping an instance does not preserve data stored in RAM, but hibernating an instance does preserve data stored in RAM. If an instance cannot hibernate successfully, a normal shutdown occurs. Stopping and hibernating an instance is different to rebooting or terminating it. For example, when you stop or hibernate an instance, the root device and any other devices attached to the instance persist. When you terminate an instance, the root device and any other devices attached during the instance launch are automatically deleted. For more information about the differences between rebooting, stopping, hibernating, and terminating instances, see Instance lifecycle in the Amazon EC2 User Guide. When you stop an instance, we attempt to shut it down forcibly after a short while. If your instance appears stuck in the stopping state after a period of time, there may be an issue with the underlying host computer. For more information, see Troubleshoot stopping your instance in the Amazon EC2 User Guide.
    */
   stopInstances(callback?: (err: AWSError, data: EC2.Types.StopInstancesResult) => void): Request<EC2.Types.StopInstancesResult, AWSError>;
   /**
@@ -3893,6 +4309,14 @@ declare class EC2 extends Service {
    */
   waitFor(state: "instanceTerminated", callback?: (err: AWSError, data: EC2.Types.DescribeInstancesResult) => void): Request<EC2.Types.DescribeInstancesResult, AWSError>;
   /**
+   * Waits for the internetGatewayExists state by periodically calling the underlying EC2.describeInternetGatewaysoperation every 5 seconds (at most 6 times).
+   */
+  waitFor(state: "internetGatewayExists", params: EC2.Types.DescribeInternetGatewaysRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: EC2.Types.DescribeInternetGatewaysResult) => void): Request<EC2.Types.DescribeInternetGatewaysResult, AWSError>;
+  /**
+   * Waits for the internetGatewayExists state by periodically calling the underlying EC2.describeInternetGatewaysoperation every 5 seconds (at most 6 times).
+   */
+  waitFor(state: "internetGatewayExists", callback?: (err: AWSError, data: EC2.Types.DescribeInternetGatewaysResult) => void): Request<EC2.Types.DescribeInternetGatewaysResult, AWSError>;
+  /**
    * Waits for the keyPairExists state by periodically calling the underlying EC2.describeKeyPairsoperation every 5 seconds (at most 6 times).
    */
   waitFor(state: "keyPairExists", params: EC2.Types.DescribeKeyPairsRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: EC2.Types.DescribeKeyPairsResult) => void): Request<EC2.Types.DescribeKeyPairsResult, AWSError>;
@@ -3908,6 +4332,14 @@ declare class EC2 extends Service {
    * Waits for the natGatewayAvailable state by periodically calling the underlying EC2.describeNatGatewaysoperation every 15 seconds (at most 40 times).
    */
   waitFor(state: "natGatewayAvailable", callback?: (err: AWSError, data: EC2.Types.DescribeNatGatewaysResult) => void): Request<EC2.Types.DescribeNatGatewaysResult, AWSError>;
+  /**
+   * Waits for the natGatewayDeleted state by periodically calling the underlying EC2.describeNatGatewaysoperation every 15 seconds (at most 40 times).
+   */
+  waitFor(state: "natGatewayDeleted", params: EC2.Types.DescribeNatGatewaysRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: EC2.Types.DescribeNatGatewaysResult) => void): Request<EC2.Types.DescribeNatGatewaysResult, AWSError>;
+  /**
+   * Waits for the natGatewayDeleted state by periodically calling the underlying EC2.describeNatGatewaysoperation every 15 seconds (at most 40 times).
+   */
+  waitFor(state: "natGatewayDeleted", callback?: (err: AWSError, data: EC2.Types.DescribeNatGatewaysResult) => void): Request<EC2.Types.DescribeNatGatewaysResult, AWSError>;
   /**
    * Waits for the networkInterfaceAvailable state by periodically calling the underlying EC2.describeNetworkInterfacesoperation every 20 seconds (at most 10 times).
    */
@@ -4038,6 +4470,52 @@ declare class EC2 extends Service {
   waitFor(state: "vpcPeeringConnectionDeleted", callback?: (err: AWSError, data: EC2.Types.DescribeVpcPeeringConnectionsResult) => void): Request<EC2.Types.DescribeVpcPeeringConnectionsResult, AWSError>;
 }
 declare namespace EC2 {
+  export interface AcceleratorCount {
+    /**
+     * The minimum number of accelerators. If this parameter is not specified, there is no minimum limit.
+     */
+    Min?: Integer;
+    /**
+     * The maximum number of accelerators. If this parameter is not specified, there is no maximum limit.
+     */
+    Max?: Integer;
+  }
+  export interface AcceleratorCountRequest {
+    /**
+     * The minimum number of accelerators. To specify no minimum limit, omit this parameter.
+     */
+    Min?: Integer;
+    /**
+     * The maximum number of accelerators. To specify no maximum limit, omit this parameter. To exclude accelerator-enabled instance types, set Max to 0.
+     */
+    Max?: Integer;
+  }
+  export type AcceleratorManufacturer = "nvidia"|"amd"|"amazon-web-services"|"xilinx"|string;
+  export type AcceleratorManufacturerSet = AcceleratorManufacturer[];
+  export type AcceleratorName = "a100"|"v100"|"k80"|"t4"|"m60"|"radeon-pro-v520"|"vu9p"|string;
+  export type AcceleratorNameSet = AcceleratorName[];
+  export interface AcceleratorTotalMemoryMiB {
+    /**
+     * The minimum amount of accelerator memory, in MiB. If this parameter is not specified, there is no minimum limit.
+     */
+    Min?: Integer;
+    /**
+     * The maximum amount of accelerator memory, in MiB. If this parameter is not specified, there is no maximum limit.
+     */
+    Max?: Integer;
+  }
+  export interface AcceleratorTotalMemoryMiBRequest {
+    /**
+     * The minimum amount of accelerator memory, in MiB. To specify no minimum limit, omit this parameter.
+     */
+    Min?: Integer;
+    /**
+     * The maximum amount of accelerator memory, in MiB. To specify no maximum limit, omit this parameter.
+     */
+    Max?: Integer;
+  }
+  export type AcceleratorType = "gpu"|"fpga"|"inference"|string;
+  export type AcceleratorTypeSet = AcceleratorType[];
   export interface AcceptReservedInstancesExchangeQuoteRequest {
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
@@ -4147,6 +4625,55 @@ declare namespace EC2 {
      */
     VpcPeeringConnection?: VpcPeeringConnection;
   }
+  export interface AccessScopeAnalysisFinding {
+    /**
+     * The ID of the Network Access Scope analysis.
+     */
+    NetworkInsightsAccessScopeAnalysisId?: NetworkInsightsAccessScopeAnalysisId;
+    /**
+     * The ID of the Network Access Scope.
+     */
+    NetworkInsightsAccessScopeId?: NetworkInsightsAccessScopeId;
+    /**
+     * The ID of the finding.
+     */
+    FindingId?: String;
+    /**
+     * The finding components.
+     */
+    FindingComponents?: PathComponentList;
+  }
+  export type AccessScopeAnalysisFindingList = AccessScopeAnalysisFinding[];
+  export interface AccessScopePath {
+    /**
+     * The source.
+     */
+    Source?: PathStatement;
+    /**
+     * The destination.
+     */
+    Destination?: PathStatement;
+    /**
+     * The through resources.
+     */
+    ThroughResources?: ThroughResourcesStatementList;
+  }
+  export type AccessScopePathList = AccessScopePath[];
+  export type AccessScopePathListRequest = AccessScopePathRequest[];
+  export interface AccessScopePathRequest {
+    /**
+     * The source.
+     */
+    Source?: PathStatementRequest;
+    /**
+     * The destination.
+     */
+    Destination?: PathStatementRequest;
+    /**
+     * The through resources.
+     */
+    ThroughResources?: ThroughResourcesStatementRequestList;
+  }
   export interface AccountAttribute {
     /**
      * The name of the account attribute.
@@ -4187,6 +4714,13 @@ declare namespace EC2 {
   }
   export type ActiveInstanceSet = ActiveInstance[];
   export type ActivityStatus = "error"|"pending_fulfillment"|"pending_termination"|"fulfilled"|string;
+  export interface AddIpamOperatingRegion {
+    /**
+     * The name of the operating Region.
+     */
+    RegionName?: String;
+  }
+  export type AddIpamOperatingRegionSet = AddIpamOperatingRegion[];
   export type AddPrefixListEntries = AddPrefixListEntry[];
   export interface AddPrefixListEntry {
     /**
@@ -4198,6 +4732,17 @@ declare namespace EC2 {
      */
     Description?: String;
   }
+  export interface AdditionalDetail {
+    /**
+     * The information type.
+     */
+    AdditionalDetailType?: String;
+    /**
+     * The path component.
+     */
+    Component?: AnalysisComponent;
+  }
+  export type AdditionalDetailList = AdditionalDetail[];
   export interface Address {
     /**
      * The ID of the instance that the address is associated with (if any).
@@ -4275,6 +4820,7 @@ declare namespace EC2 {
     PtrRecordUpdate?: PtrUpdateStatus;
   }
   export type AddressAttributeName = "domain-name"|string;
+  export type AddressFamily = "ipv4"|"ipv6"|string;
   export type AddressList = Address[];
   export type AddressMaxResults = number;
   export type AddressSet = AddressAttribute[];
@@ -4392,12 +4938,56 @@ declare namespace EC2 {
      * Indicates whether to enable or disable host recovery for the Dedicated Host. Host recovery is disabled by default. For more information, see  Host recovery in the Amazon EC2 User Guide. Default: off 
      */
     HostRecovery?: HostRecovery;
+    /**
+     * The Amazon Resource Name (ARN) of the Amazon Web Services Outpost on which to allocate the Dedicated Host.
+     */
+    OutpostArn?: String;
   }
   export interface AllocateHostsResult {
     /**
      * The ID of the allocated Dedicated Host. This is used to launch an instance onto a specific host.
      */
     HostIds?: ResponseHostIdList;
+  }
+  export interface AllocateIpamPoolCidrRequest {
+    /**
+     * A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The ID of the IPAM pool from which you would like to allocate a CIDR.
+     */
+    IpamPoolId: IpamPoolId;
+    /**
+     * The CIDR you would like to allocate from the IPAM pool. Note the following:   If there is no DefaultNetmaskLength allocation rule set on the pool, you must specify either the NetmaskLength or the CIDR.   If the DefaultNetmaskLength allocation rule is set on the pool, you can specify either the NetmaskLength or the CIDR and the DefaultNetmaskLength allocation rule will be ignored.   Possible values: Any available IPv4 or IPv6 CIDR.
+     */
+    Cidr?: String;
+    /**
+     * The netmask length of the CIDR you would like to allocate from the IPAM pool. Note the following:   If there is no DefaultNetmaskLength allocation rule set on the pool, you must specify either the NetmaskLength or the CIDR.   If the DefaultNetmaskLength allocation rule is set on the pool, you can specify either the NetmaskLength or the CIDR and the DefaultNetmaskLength allocation rule will be ignored.   Possible netmask lengths for IPv4 addresses are 0 - 32. Possible netmask lengths for IPv6 addresses are 0 - 128.
+     */
+    NetmaskLength?: Integer;
+    /**
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see Ensuring Idempotency.
+     */
+    ClientToken?: String;
+    /**
+     * A description for the allocation.
+     */
+    Description?: String;
+    /**
+     * A preview of the next available CIDR in a pool.
+     */
+    PreviewNextCidr?: Boolean;
+    /**
+     * Exclude a particular CIDR range from being returned by the pool.
+     */
+    DisallowedCidrs?: IpamPoolAllocationDisallowedCidrs;
+  }
+  export interface AllocateIpamPoolCidrResult {
+    /**
+     * Information about the allocation created.
+     */
+    IpamPoolAllocation?: IpamPoolAllocation;
   }
   export type AllocationId = string;
   export type AllocationIdList = AllocationId[];
@@ -4462,6 +5052,10 @@ declare namespace EC2 {
      * The Amazon Resource Name (ARN) of the component.
      */
     Arn?: String;
+    /**
+     * The name of the analysis component.
+     */
+    Name?: String;
   }
   export type AnalysisComponentList = AnalysisComponent[];
   export interface AnalysisLoadBalancerListener {
@@ -4544,7 +5138,7 @@ declare namespace EC2 {
      */
     NetworkInterfaceId?: String;
     /**
-     * Describes how the route was created. The following are possible values:    CreateRouteTable - The route was automatically created when the route table was created.    CreateRoute - The route was manually added to the route table.    EnableVgwRoutePropagation - The route was propagated by route propagation.  
+     * Describes how the route was created. The following are the possible values:   CreateRouteTable - The route was automatically created when the route table was created.   CreateRoute - The route was manually added to the route table.   EnableVgwRoutePropagation - The route was propagated by route propagation.  
      */
     Origin?: String;
     /**
@@ -4562,7 +5156,7 @@ declare namespace EC2 {
      */
     Cidr?: String;
     /**
-     * The direction. The following are possible values:   egress   ingress  
+     * The direction. The following are the possible values:   egress   ingress  
      */
     Direction?: String;
     /**
@@ -4610,6 +5204,7 @@ declare namespace EC2 {
   }
   export type ArchitectureType = "i386"|"x86_64"|"arm64"|"x86_64_mac"|string;
   export type ArchitectureTypeList = ArchitectureType[];
+  export type ArchitectureTypeSet = ArchitectureType[];
   export type ArchitectureValues = "i386"|"x86_64"|"arm64"|"x86_64_mac"|string;
   export type ArnList = ResourceArn[];
   export interface AssignIpv6AddressesRequest {
@@ -4877,7 +5472,7 @@ declare namespace EC2 {
   }
   export interface AssociateSubnetCidrBlockResult {
     /**
-     * Information about the IPv6 CIDR block association.
+     * Information about the IPv6 association.
      */
     Ipv6CidrBlockAssociation?: SubnetIpv6CidrBlockAssociation;
     /**
@@ -4990,6 +5585,22 @@ declare namespace EC2 {
      * An IPv6 CIDR block from the IPv6 address pool. You must also specify Ipv6Pool in the request. To let Amazon choose the IPv6 CIDR block for you, omit this parameter.
      */
     Ipv6CidrBlock?: String;
+    /**
+     * Associate a CIDR allocated from an IPv4 IPAM pool to a VPC. For more information about Amazon VPC IP Address Manager (IPAM), see What is IPAM? in the Amazon VPC IPAM User Guide.
+     */
+    Ipv4IpamPoolId?: IpamPoolId;
+    /**
+     * The netmask length of the IPv4 CIDR you would like to associate from an Amazon VPC IP Address Manager (IPAM) pool. For more information about IPAM, see What is IPAM? in the Amazon VPC IPAM User Guide. 
+     */
+    Ipv4NetmaskLength?: NetmaskLength;
+    /**
+     * Associates a CIDR allocated from an IPv6 IPAM pool to a VPC. For more information about Amazon VPC IP Address Manager (IPAM), see What is IPAM? in the Amazon VPC IPAM User Guide.
+     */
+    Ipv6IpamPoolId?: IpamPoolId;
+    /**
+     * The netmask length of the IPv6 CIDR you would like to associate from an Amazon VPC IP Address Manager (IPAM) pool. For more information about IPAM, see What is IPAM? in the Amazon VPC IPAM User Guide. 
+     */
+    Ipv6NetmaskLength?: NetmaskLength;
   }
   export interface AssociateVpcCidrBlockResult {
     /**
@@ -5365,7 +5976,7 @@ declare namespace EC2 {
   export type AutoRecoveryFlag = boolean;
   export interface AvailabilityZone {
     /**
-     * The state of the Availability Zone, Local Zone, or Wavelength Zone.
+     * The state of the Availability Zone, Local Zone, or Wavelength Zone. This value is always available.
      */
     State?: AvailabilityZoneState;
     /**
@@ -5431,8 +6042,29 @@ declare namespace EC2 {
     AvailableVCpus?: Integer;
   }
   export type AvailableInstanceCapacityList = InstanceCapacity[];
+  export type BareMetal = "included"|"required"|"excluded"|string;
   export type BareMetalFlag = boolean;
   export type BaselineBandwidthInMbps = number;
+  export interface BaselineEbsBandwidthMbps {
+    /**
+     * The minimum baseline bandwidth, in Mbps. If this parameter is not specified, there is no minimum limit.
+     */
+    Min?: Integer;
+    /**
+     * The maximum baseline bandwidth, in Mbps. If this parameter is not specified, there is no maximum limit.
+     */
+    Max?: Integer;
+  }
+  export interface BaselineEbsBandwidthMbpsRequest {
+    /**
+     * The minimum baseline bandwidth, in Mbps. To specify no minimum limit, omit this parameter.
+     */
+    Min?: Integer;
+    /**
+     * The maximum baseline bandwidth, in Mbps. To specify no maximum limit, omit this parameter.
+     */
+    Max?: Integer;
+  }
   export type BaselineIops = number;
   export type BaselineThroughputInMBps = number;
   export type BatchState = "submitted"|"active"|"cancelled"|"failed"|"cancelled_running"|"cancelled_terminating"|"modifying"|string;
@@ -5466,6 +6098,7 @@ declare namespace EC2 {
   export type BootModeType = "legacy-bios"|"uefi"|string;
   export type BootModeTypeList = BootModeType[];
   export type BootModeValues = "legacy-bios"|"uefi"|string;
+  export type BoxedDouble = number;
   export type BundleId = string;
   export type BundleIdStringList = BundleId[];
   export interface BundleInstanceRequest {
@@ -5534,6 +6167,7 @@ declare namespace EC2 {
   }
   export type BundleTaskList = BundleTask[];
   export type BundleTaskState = "pending"|"waiting-for-shutdown"|"bundling"|"storing"|"cancelling"|"complete"|"failed"|string;
+  export type BurstablePerformance = "included"|"required"|"excluded"|string;
   export type BurstablePerformanceFlag = boolean;
   export interface ByoipCidr {
     /**
@@ -5853,6 +6487,10 @@ declare namespace EC2 {
      * The ID of the Capacity Reservation Fleet to which the Capacity Reservation belongs. Only valid for Capacity Reservations that were created by a Capacity Reservation Fleet.
      */
     CapacityReservationFleetId?: String;
+    /**
+     * The Amazon Resource Name (ARN) of the cluster placement group in which the Capacity Reservation was created. For more information, see  Capacity Reservations for cluster placement groups in the Amazon EC2 User Guide.
+     */
+    PlacementGroupArn?: PlacementGroupArn;
   }
   export interface CapacityReservationFleet {
     /**
@@ -5936,7 +6574,7 @@ declare namespace EC2 {
   export type CapacityReservationGroupSet = CapacityReservationGroup[];
   export type CapacityReservationId = string;
   export type CapacityReservationIdSet = CapacityReservationId[];
-  export type CapacityReservationInstancePlatform = "Linux/UNIX"|"Red Hat Enterprise Linux"|"SUSE Linux"|"Windows"|"Windows with SQL Server"|"Windows with SQL Server Enterprise"|"Windows with SQL Server Standard"|"Windows with SQL Server Web"|"Linux with SQL Server Standard"|"Linux with SQL Server Web"|"Linux with SQL Server Enterprise"|string;
+  export type CapacityReservationInstancePlatform = "Linux/UNIX"|"Red Hat Enterprise Linux"|"SUSE Linux"|"Windows"|"Windows with SQL Server"|"Windows with SQL Server Enterprise"|"Windows with SQL Server Standard"|"Windows with SQL Server Web"|"Linux with SQL Server Standard"|"Linux with SQL Server Web"|"Linux with SQL Server Enterprise"|"RHEL with SQL Server Standard"|"RHEL with SQL Server Enterprise"|"RHEL with SQL Server Web"|"RHEL with HA"|"RHEL with HA and SQL Server Standard"|"RHEL with HA and SQL Server Enterprise"|string;
   export interface CapacityReservationOptions {
     /**
      * Indicates whether to use unused Capacity Reservations for fulfilling On-Demand capacity. If you specify use-capacity-reservations-first, the fleet uses unused Capacity Reservations to fulfill On-Demand capacity up to the target On-Demand capacity. If multiple instance pools have unused Capacity Reservations, the On-Demand allocation strategy (lowest-price or prioritized) is applied. If the number of unused Capacity Reservations is less than the On-Demand target capacity, the remaining On-Demand target capacity is launched according to the On-Demand allocation strategy (lowest-price or prioritized). If you do not specify a value, the fleet fulfils the On-Demand capacity according to the chosen On-Demand allocation strategy.
@@ -6145,6 +6783,26 @@ declare namespace EC2 {
      */
     UploadStart?: DateTime;
   }
+  export interface ClientLoginBannerOptions {
+    /**
+     * Enable or disable a customizable text banner that will be displayed on Amazon Web Services provided clients when a VPN session is established. Valid values: true | false  Default value: false 
+     */
+    Enabled?: Boolean;
+    /**
+     * Customizable text that will be displayed in a banner on Amazon Web Services provided clients when a VPN session is established. UTF-8 encoded characters only. Maximum of 1400 characters.
+     */
+    BannerText?: String;
+  }
+  export interface ClientLoginBannerResponseOptions {
+    /**
+     * Current state of text banner feature. Valid values: true | false 
+     */
+    Enabled?: Boolean;
+    /**
+     * Customizable text that will be displayed in a banner on Amazon Web Services provided clients when a VPN session is established. UTF-8 encoded characters only. Maximum of 1400 characters.
+     */
+    BannerText?: String;
+  }
   export type ClientVpnAssociationId = string;
   export interface ClientVpnAuthentication {
     /**
@@ -6351,6 +7009,14 @@ declare namespace EC2 {
      * The options for managing connection authorization for new client connections.
      */
     ClientConnectOptions?: ClientConnectResponseOptions;
+    /**
+     * The maximum VPN session duration time in hours. Valid values: 8 | 10 | 12 | 24  Default value: 24 
+     */
+    SessionTimeoutHours?: Integer;
+    /**
+     * Options for enabling a customizable text banner that will be displayed on Amazon Web Services provided clients when a VPN session is established.
+     */
+    ClientLoginBannerOptions?: ClientLoginBannerResponseOptions;
   }
   export interface ClientVpnEndpointAttributeStatus {
     /**
@@ -6442,7 +7108,7 @@ declare namespace EC2 {
     /**
      * The ID of the address pool.
      */
-    PoolId?: CoipPoolId;
+    PoolId?: Ipv4PoolCoipId;
     /**
      * The address ranges of the address pool.
      */
@@ -6461,7 +7127,7 @@ declare namespace EC2 {
     PoolArn?: ResourceArn;
   }
   export type CoipPoolId = string;
-  export type CoipPoolIdSet = CoipPoolId[];
+  export type CoipPoolIdSet = Ipv4PoolCoipId[];
   export type CoipPoolMaxResults = number;
   export type CoipPoolSet = CoipPool[];
   export interface ConfirmProductInstanceRequest {
@@ -6717,6 +7383,9 @@ declare namespace EC2 {
   export type CopyTagsFromSource = "volume"|string;
   export type CoreCount = number;
   export type CoreCountList = CoreCount[];
+  export type CoreNetworkArn = string;
+  export type CpuManufacturer = "intel"|"amd"|"amazon-web-services"|string;
+  export type CpuManufacturerSet = CpuManufacturer[];
   export interface CpuOptions {
     /**
      * The number of CPU cores for the instance.
@@ -6882,6 +7551,10 @@ declare namespace EC2 {
      * The Amazon Resource Name (ARN) of the Outpost on which to create the Capacity Reservation.
      */
     OutpostArn?: OutpostArn;
+    /**
+     * The Amazon Resource Name (ARN) of the cluster placement group in which to create the Capacity Reservation. For more information, see  Capacity Reservations for cluster placement groups in the Amazon EC2 User Guide.
+     */
+    PlacementGroupArn?: PlacementGroupArn;
   }
   export interface CreateCapacityReservationResult {
     /**
@@ -6978,6 +7651,14 @@ declare namespace EC2 {
      * The options for managing connection authorization for new client connections.
      */
     ClientConnectOptions?: ClientConnectOptions;
+    /**
+     * The maximum VPN session duration time in hours. Valid values: 8 | 10 | 12 | 24  Default value: 24 
+     */
+    SessionTimeoutHours?: Integer;
+    /**
+     * Options for enabling a customizable text banner that will be displayed on Amazon Web Services provided clients when a VPN session is established.
+     */
+    ClientLoginBannerOptions?: ClientLoginBannerOptions;
   }
   export interface CreateClientVpnEndpointResult {
     /**
@@ -7070,6 +7751,10 @@ declare namespace EC2 {
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
     DryRun?: Boolean;
+    /**
+     * Indicates whether to create an IPv6 only subnet. If you already have a default subnet for this Availability Zone, you must delete it before you can create an IPv6 only subnet.
+     */
+    Ipv6Native?: Boolean;
   }
   export interface CreateDefaultSubnetResult {
     /**
@@ -7147,11 +7832,11 @@ declare namespace EC2 {
      */
     Lifecycle?: InstanceLifecycle;
     /**
-     * The error code that indicates why the instance could not be launched. For more information about error codes, see Error Codes.
+     * The error code that indicates why the instance could not be launched. For more information about error codes, see Error codes.
      */
     ErrorCode?: String;
     /**
-     * The error message that describes why the instance could not be launched. For more information about error messages, see Error Codes.
+     * The error message that describes why the instance could not be launched. For more information about error messages, see Error codes.
      */
     ErrorMessage?: String;
   }
@@ -7185,7 +7870,7 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see Ensuring Idempotency.
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see Ensuring idempotency.
      */
     ClientToken?: String;
     /**
@@ -7381,7 +8066,7 @@ declare namespace EC2 {
      */
     Name: String;
     /**
-     * By default, Amazon EC2 attempts to shut down and reboot the instance before creating the image. If the No Reboot option is set, Amazon EC2 doesn't shut down the instance before creating the image. Without a reboot, the AMI will be crash consistent (all the volumes are snapshotted at the same time), but not application consistent (all the operating system buffers are not flushed to disk before the snapshots are created).
+     * By default, when Amazon EC2 creates the new AMI, it reboots the instance so that it can take snapshots of the attached volumes while data is at rest, in order to ensure a consistent state. You can set the NoReboot parameter to true in the API request, or use the --no-reboot option in the CLI to prevent Amazon EC2 from shutting down and rebooting the instance.  If you choose to bypass the shutdown and reboot process by setting the NoReboot parameter to true in the API request, or by using the --no-reboot option in the CLI, we can't guarantee the file system integrity of the created image.  Default: false (follow standard reboot process)
      */
     NoReboot?: Boolean;
     /**
@@ -7467,6 +8152,130 @@ declare namespace EC2 {
      */
     InternetGateway?: InternetGateway;
   }
+  export interface CreateIpamPoolRequest {
+    /**
+     * A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The ID of the scope in which you would like to create the IPAM pool.
+     */
+    IpamScopeId: IpamScopeId;
+    /**
+     * In IPAM, the locale is the Amazon Web Services Region where you want to make an IPAM pool available for allocations. Only resources in the same Region as the locale of the pool can get IP address allocations from the pool. You can only allocate a CIDR for a VPC, for example, from an IPAM pool that shares a locale with the VPC’s Region. Note that once you choose a Locale for a pool, you cannot modify it. If you do not choose a locale, resources in Regions others than the IPAM's home region cannot use CIDRs from this pool. Possible values: Any Amazon Web Services Region, such as us-east-1.
+     */
+    Locale?: String;
+    /**
+     * The ID of the source IPAM pool. Use this option to create a pool within an existing pool. Note that the CIDR you provision for the pool within the source pool must be available in the source pool's CIDR range.
+     */
+    SourceIpamPoolId?: IpamPoolId;
+    /**
+     * A description for the IPAM pool.
+     */
+    Description?: String;
+    /**
+     * The IP protocol assigned to this IPAM pool. You must choose either IPv4 or IPv6 protocol for a pool.
+     */
+    AddressFamily: AddressFamily;
+    /**
+     * If selected, IPAM will continuously look for resources within the CIDR range of this pool and automatically import them as allocations into your IPAM. The CIDRs that will be allocated for these resources must not already be allocated to other resources in order for the import to succeed. IPAM will import a CIDR regardless of its compliance with the pool's allocation rules, so a resource might be imported and subsequently marked as noncompliant. If IPAM discovers multiple CIDRs that overlap, IPAM will import the largest CIDR only. If IPAM discovers multiple CIDRs with matching CIDRs, IPAM will randomly import one of them only.  A locale must be set on the pool for this feature to work.
+     */
+    AutoImport?: Boolean;
+    /**
+     * Determines if the pool is publicly advertisable. This option is not available for pools with AddressFamily set to ipv4.
+     */
+    PubliclyAdvertisable?: Boolean;
+    /**
+     * The minimum netmask length required for CIDR allocations in this IPAM pool to be compliant. The minimum netmask length must be less than the maximum netmask length. Possible netmask lengths for IPv4 addresses are 0 - 32. Possible netmask lengths for IPv6 addresses are 0 - 128.
+     */
+    AllocationMinNetmaskLength?: IpamNetmaskLength;
+    /**
+     * The maximum netmask length possible for CIDR allocations in this IPAM pool to be compliant. The maximum netmask length must be greater than the minimum netmask length. Possible netmask lengths for IPv4 addresses are 0 - 32. Possible netmask lengths for IPv6 addresses are 0 - 128.
+     */
+    AllocationMaxNetmaskLength?: IpamNetmaskLength;
+    /**
+     * The default netmask length for allocations added to this pool. If, for example, the CIDR assigned to this pool is 10.0.0.0/8 and you enter 16 here, new allocations will default to 10.0.0.0/16.
+     */
+    AllocationDefaultNetmaskLength?: IpamNetmaskLength;
+    /**
+     * Tags that are required for resources that use CIDRs from this IPAM pool. Resources that do not have these tags will not be allowed to allocate space from the pool. If the resources have their tags changed after they have allocated space or if the allocation tagging requirements are changed on the pool, the resource may be marked as noncompliant.
+     */
+    AllocationResourceTags?: RequestIpamResourceTagList;
+    /**
+     * The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.
+     */
+    TagSpecifications?: TagSpecificationList;
+    /**
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see Ensuring Idempotency.
+     */
+    ClientToken?: String;
+    /**
+     * Limits which service in Amazon Web Services that the pool can be used in. "ec2", for example, allows users to use space for Elastic IP addresses and VPCs.
+     */
+    AwsService?: IpamPoolAwsService;
+  }
+  export interface CreateIpamPoolResult {
+    /**
+     * Information about the IPAM pool created.
+     */
+    IpamPool?: IpamPool;
+  }
+  export interface CreateIpamRequest {
+    /**
+     * A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * A description for the IPAM.
+     */
+    Description?: String;
+    /**
+     * The operating Regions for the IPAM. Operating Regions are Amazon Web Services Regions where the IPAM is allowed to manage IP address CIDRs. IPAM only discovers and monitors resources in the Amazon Web Services Regions you select as operating Regions. For more information about operating Regions, see Create an IPAM in the Amazon VPC IPAM User Guide. 
+     */
+    OperatingRegions?: AddIpamOperatingRegionSet;
+    /**
+     * The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.
+     */
+    TagSpecifications?: TagSpecificationList;
+    /**
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see Ensuring Idempotency.
+     */
+    ClientToken?: String;
+  }
+  export interface CreateIpamResult {
+    /**
+     * Information about the IPAM created.
+     */
+    Ipam?: Ipam;
+  }
+  export interface CreateIpamScopeRequest {
+    /**
+     * A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The ID of the IPAM for which you're creating this scope.
+     */
+    IpamId: IpamId;
+    /**
+     * A description for the scope you're creating.
+     */
+    Description?: String;
+    /**
+     * The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.
+     */
+    TagSpecifications?: TagSpecificationList;
+    /**
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see Ensuring Idempotency.
+     */
+    ClientToken?: String;
+  }
+  export interface CreateIpamScopeResult {
+    /**
+     * Information about the created scope.
+     */
+    IpamScope?: IpamScope;
+  }
   export interface CreateKeyPairRequest {
     /**
      * A unique name for the key pair. Constraints: Up to 255 ASCII characters
@@ -7477,13 +8286,17 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * The type of key pair. Note that ED25519 keys are not supported for Windows instances, EC2 Instance Connect, and EC2 Serial Console. Default: rsa 
+     * The type of key pair. Note that ED25519 keys are not supported for Windows instances. Default: rsa 
      */
     KeyType?: KeyType;
     /**
      * The tags to apply to the new key pair.
      */
     TagSpecifications?: TagSpecificationList;
+    /**
+     * The format of the key pair. Default: pem 
+     */
+    KeyFormat?: KeyFormat;
   }
   export interface CreateLaunchTemplateRequest {
     /**
@@ -7743,6 +8556,38 @@ declare namespace EC2 {
      */
     NetworkAcl?: NetworkAcl;
   }
+  export interface CreateNetworkInsightsAccessScopeRequest {
+    /**
+     * The paths to match.
+     */
+    MatchPaths?: AccessScopePathListRequest;
+    /**
+     * The paths to exclude.
+     */
+    ExcludePaths?: AccessScopePathListRequest;
+    /**
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to ensure idempotency.
+     */
+    ClientToken: String;
+    /**
+     * The tags to apply.
+     */
+    TagSpecifications?: TagSpecificationList;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface CreateNetworkInsightsAccessScopeResult {
+    /**
+     * The Network Access Scope.
+     */
+    NetworkInsightsAccessScope?: NetworkInsightsAccessScope;
+    /**
+     * The Network Access Scope content.
+     */
+    NetworkInsightsAccessScopeContent?: NetworkInsightsAccessScopeContent;
+  }
   export interface CreateNetworkInsightsPathRequest {
     /**
      * The IP address of the Amazon Web Services resource that is the source of the path.
@@ -7755,11 +8600,11 @@ declare namespace EC2 {
     /**
      * The Amazon Web Services resource that is the source of the path.
      */
-    Source: String;
+    Source: NetworkInsightsResourceId;
     /**
      * The Amazon Web Services resource that is the destination of the path.
      */
-    Destination: String;
+    Destination: NetworkInsightsResourceId;
     /**
      * The protocol.
      */
@@ -7865,7 +8710,7 @@ declare namespace EC2 {
      */
     Ipv6PrefixCount?: Integer;
     /**
-     * Indicates the type of network interface. To create an Elastic Fabric Adapter (EFA), specify efa. For more information, see  Elastic Fabric Adapter in the Amazon Elastic Compute Cloud User Guide. To create a trunk network interface, specify efa. For more information, see  Network interface trunking in the Amazon Elastic Compute Cloud User Guide.
+     * The type of network interface. The default is interface. The only supported values are efa and trunk.
      */
     InterfaceType?: NetworkInterfaceCreationType;
     /**
@@ -7915,6 +8760,22 @@ declare namespace EC2 {
   }
   export interface CreatePlacementGroupResult {
     PlacementGroup?: PlacementGroup;
+  }
+  export interface CreatePublicIpv4PoolRequest {
+    /**
+     * A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.
+     */
+    TagSpecifications?: TagSpecificationList;
+  }
+  export interface CreatePublicIpv4PoolResult {
+    /**
+     * The ID of the public IPv4 pool.
+     */
+    PoolId?: Ipv4PoolEc2Id;
   }
   export interface CreateReplaceRootVolumeTaskRequest {
     /**
@@ -8057,6 +8918,10 @@ declare namespace EC2 {
      * The ID of a VPC peering connection.
      */
     VpcPeeringConnectionId?: VpcPeeringConnectionId;
+    /**
+     * The Amazon Resource Name (ARN) of the core network.
+     */
+    CoreNetworkArn?: CoreNetworkArn;
   }
   export interface CreateRouteResult {
     /**
@@ -8216,10 +9081,6 @@ declare namespace EC2 {
   }
   export interface CreateSubnetCidrReservationRequest {
     /**
-     * The tags to assign to the subnet CIDR reservation.
-     */
-    TagSpecifications?: TagSpecificationList;
-    /**
      * The ID of the subnet.
      */
     SubnetId: SubnetId;
@@ -8239,6 +9100,10 @@ declare namespace EC2 {
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
     DryRun?: Boolean;
+    /**
+     * The tags to assign to the subnet CIDR reservation.
+     */
+    TagSpecifications?: TagSpecificationList;
   }
   export interface CreateSubnetCidrReservationResult {
     /**
@@ -8260,11 +9125,11 @@ declare namespace EC2 {
      */
     AvailabilityZoneId?: String;
     /**
-     * The IPv4 network range for the subnet, in CIDR notation. For example, 10.0.0.0/24. We modify the specified CIDR block to its canonical form; for example, if you specify 100.68.0.18/18, we modify it to 100.68.0.0/18.
+     * The IPv4 network range for the subnet, in CIDR notation. For example, 10.0.0.0/24. We modify the specified CIDR block to its canonical form; for example, if you specify 100.68.0.18/18, we modify it to 100.68.0.0/18. This parameter is not supported for an IPv6 only subnet.
      */
-    CidrBlock: String;
+    CidrBlock?: String;
     /**
-     * The IPv6 network range for the subnet, in CIDR notation. The subnet size must use a /64 prefix length.
+     * The IPv6 network range for the subnet, in CIDR notation. The subnet size must use a /64 prefix length. This parameter is required for an IPv6 only subnet.
      */
     Ipv6CidrBlock?: String;
     /**
@@ -8279,6 +9144,10 @@ declare namespace EC2 {
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
     DryRun?: Boolean;
+    /**
+     * Indicates whether to create an IPv6 only subnet.
+     */
+    Ipv6Native?: Boolean;
   }
   export interface CreateSubnetResult {
     /**
@@ -8465,6 +9334,10 @@ declare namespace EC2 {
      * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to ensure idempotency.
      */
     ClientToken?: String;
+    /**
+     * The ID of the Gateway Load Balancer endpoint.
+     */
+    GatewayLoadBalancerEndpointId?: VpcEndpointId;
   }
   export interface CreateTrafficMirrorTargetResult {
     /**
@@ -8903,6 +9776,14 @@ declare namespace EC2 {
      */
     SecurityGroupIds?: VpcEndpointSecurityGroupIdList;
     /**
+     * The IP address type for the endpoint.
+     */
+    IpAddressType?: IpAddressType;
+    /**
+     * The DNS options for the endpoint.
+     */
+    DnsOptions?: DnsOptionsSpecification;
+    /**
      * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to ensure idempotency.
      */
     ClientToken?: String;
@@ -8931,7 +9812,7 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * Indicates whether requests from service consumers to create an endpoint to your service must be accepted. To accept a request, use AcceptVpcEndpointConnections.
+     * Indicates whether requests from service consumers to create an endpoint to your service must be accepted manually.
      */
     AcceptanceRequired?: Boolean;
     /**
@@ -8946,6 +9827,10 @@ declare namespace EC2 {
      * The Amazon Resource Names (ARNs) of one or more Gateway Load Balancers.
      */
     GatewayLoadBalancerArns?: ValueStringList;
+    /**
+     * The supported IP address types. The possible values are ipv4 and ipv6.
+     */
+    SupportedIpAddressTypes?: ValueStringList;
     /**
      * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to ensure idempotency.
      */
@@ -9001,7 +9886,7 @@ declare namespace EC2 {
     /**
      * The IPv4 network range for the VPC, in CIDR notation. For example, 10.0.0.0/16. We modify the specified CIDR block to its canonical form; for example, if you specify 100.68.0.18/18, we modify it to 100.68.0.0/18.
      */
-    CidrBlock: String;
+    CidrBlock?: String;
     /**
      * Requests an Amazon-provided IPv6 CIDR block with a /56 prefix length for the VPC. You cannot specify the range of IP addresses, or the size of the CIDR block.
      */
@@ -9014,6 +9899,22 @@ declare namespace EC2 {
      * The IPv6 CIDR block from the IPv6 address pool. You must also specify Ipv6Pool in the request. To let Amazon choose the IPv6 CIDR block for you, omit this parameter.
      */
     Ipv6CidrBlock?: String;
+    /**
+     * The ID of an IPv4 IPAM pool you want to use for allocating this VPC's CIDR. For more information, see What is IPAM? in the Amazon VPC IPAM User Guide. 
+     */
+    Ipv4IpamPoolId?: IpamPoolId;
+    /**
+     * The netmask length of the IPv4 CIDR you want to allocate to this VPC from an Amazon VPC IP Address Manager (IPAM) pool. For more information about IPAM, see What is IPAM? in the Amazon VPC IPAM User Guide.
+     */
+    Ipv4NetmaskLength?: NetmaskLength;
+    /**
+     * The ID of an IPv6 IPAM pool which will be used to allocate this VPC an IPv6 CIDR. IPAM is a VPC feature that you can use to automate your IP address management workflows including assigning, tracking, troubleshooting, and auditing IP addresses across Amazon Web Services Regions and accounts throughout your Amazon Web Services Organization. For more information, see What is IPAM? in the Amazon VPC IPAM User Guide.
+     */
+    Ipv6IpamPoolId?: IpamPoolId;
+    /**
+     * The netmask length of the IPv6 CIDR you want to allocate to this VPC from an Amazon VPC IP Address Manager (IPAM) pool. For more information about IPAM, see What is IPAM? in the Amazon VPC IPAM User Guide.
+     */
+    Ipv6NetmaskLength?: NetmaskLength;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -9389,6 +10290,58 @@ declare namespace EC2 {
      */
     InternetGatewayId: InternetGatewayId;
   }
+  export interface DeleteIpamPoolRequest {
+    /**
+     * A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The ID of the pool to delete.
+     */
+    IpamPoolId: IpamPoolId;
+  }
+  export interface DeleteIpamPoolResult {
+    /**
+     * Information about the results of the deletion.
+     */
+    IpamPool?: IpamPool;
+  }
+  export interface DeleteIpamRequest {
+    /**
+     * A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The ID of the IPAM to delete.
+     */
+    IpamId: IpamId;
+    /**
+     * Enables you to quickly delete an IPAM, private scopes, pools in private scopes, and any allocations in the pools in private scopes. You cannot delete the IPAM with this option if there is a pool in your public scope. If you use this option, IPAM does the following:   Deallocates any CIDRs allocated to VPC resources (such as VPCs) in pools in private scopes.  No VPC resources are deleted as a result of enabling this option. The CIDR associated with the resource will no longer be allocated from an IPAM pool, but the CIDR itself will remain unchanged.    Deprovisions all IPv4 CIDRs provisioned to IPAM pools in private scopes.   Deletes all IPAM pools in private scopes.   Deletes all non-default private scopes in the IPAM.   Deletes the default public and private scopes and the IPAM.  
+     */
+    Cascade?: Boolean;
+  }
+  export interface DeleteIpamResult {
+    /**
+     * Information about the results of the deletion.
+     */
+    Ipam?: Ipam;
+  }
+  export interface DeleteIpamScopeRequest {
+    /**
+     * A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The ID of the scope to delete.
+     */
+    IpamScopeId: IpamScopeId;
+  }
+  export interface DeleteIpamScopeResult {
+    /**
+     * Information about the results of the deletion.
+     */
+    IpamScope?: IpamScope;
+  }
   export interface DeleteKeyPairRequest {
     /**
      * The name of the key pair.
@@ -9581,6 +10534,38 @@ declare namespace EC2 {
      */
     NetworkAclId: NetworkAclId;
   }
+  export interface DeleteNetworkInsightsAccessScopeAnalysisRequest {
+    /**
+     * The ID of the Network Access Scope analysis.
+     */
+    NetworkInsightsAccessScopeAnalysisId: NetworkInsightsAccessScopeAnalysisId;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface DeleteNetworkInsightsAccessScopeAnalysisResult {
+    /**
+     * The ID of the Network Access Scope analysis.
+     */
+    NetworkInsightsAccessScopeAnalysisId?: NetworkInsightsAccessScopeAnalysisId;
+  }
+  export interface DeleteNetworkInsightsAccessScopeRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The ID of the Network Access Scope.
+     */
+    NetworkInsightsAccessScopeId: NetworkInsightsAccessScopeId;
+  }
+  export interface DeleteNetworkInsightsAccessScopeResult {
+    /**
+     * The ID of the Network Access Scope.
+     */
+    NetworkInsightsAccessScopeId?: NetworkInsightsAccessScopeId;
+  }
   export interface DeleteNetworkInsightsAnalysisRequest {
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
@@ -9652,6 +10637,22 @@ declare namespace EC2 {
      * The name of the placement group.
      */
     GroupName: PlacementGroupName;
+  }
+  export interface DeletePublicIpv4PoolRequest {
+    /**
+     * A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The ID of the public IPv4 pool you want to delete.
+     */
+    PoolId: Ipv4PoolEc2Id;
+  }
+  export interface DeletePublicIpv4PoolResult {
+    /**
+     * Information about the result of deleting the public IPv4 pool.
+     */
+    ReturnValue?: Boolean;
   }
   export interface DeleteQueuedReservedInstancesError {
     /**
@@ -9783,7 +10784,7 @@ declare namespace EC2 {
      */
     Resources: ResourceIdList;
     /**
-     * The tags to delete. Specify a tag key and an optional tag value to delete specific tags. If you specify a tag key without a tag value, we delete any tag with this key regardless of its value. If you specify a tag key with an empty string as the tag value, we delete the tag only if its value is an empty string. If you omit this parameter, we delete all user-defined tags for the specified resources. We do not delete Amazon Web Services-generated tags (tags that have the aws: prefix).
+     * The tags to delete. Specify a tag key and an optional tag value to delete specific tags. If you specify a tag key without a tag value, we delete any tag with this key regardless of its value. If you specify a tag key with an empty string as the tag value, we delete the tag only if its value is an empty string. If you omit this parameter, we delete all user-defined tags for the specified resources. We do not delete Amazon Web Services-generated tags (tags that have the aws: prefix). Constraints: Up to 1000 tags.
      */
     Tags?: TagList;
   }
@@ -10133,6 +11134,51 @@ declare namespace EC2 {
      */
     ByoipCidr?: ByoipCidr;
   }
+  export interface DeprovisionIpamPoolCidrRequest {
+    /**
+     * A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The ID of the pool that has the CIDR you want to deprovision.
+     */
+    IpamPoolId: IpamPoolId;
+    /**
+     * The CIDR which you want to deprovision from the pool.
+     */
+    Cidr?: String;
+  }
+  export interface DeprovisionIpamPoolCidrResult {
+    /**
+     * The deprovisioned pool CIDR.
+     */
+    IpamPoolCidr?: IpamPoolCidr;
+  }
+  export interface DeprovisionPublicIpv4PoolCidrRequest {
+    /**
+     * A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The ID of the pool that you want to deprovision the CIDR from.
+     */
+    PoolId: Ipv4PoolEc2Id;
+    /**
+     * The CIDR you want to deprovision from the pool.
+     */
+    Cidr: String;
+  }
+  export interface DeprovisionPublicIpv4PoolCidrResult {
+    /**
+     * The ID of the pool that you deprovisioned the CIDR from.
+     */
+    PoolId?: Ipv4PoolEc2Id;
+    /**
+     * The deprovisioned CIDRs.
+     */
+    DeprovisionedAddresses?: DeprovisionedAddressSet;
+  }
+  export type DeprovisionedAddressSet = String[];
   export interface DeregisterImageRequest {
     /**
      * The ID of the AMI.
@@ -10307,7 +11353,7 @@ declare namespace EC2 {
   }
   export interface DescribeAvailabilityZonesRequest {
     /**
-     * The filters.    group-name - For Availability Zones, use the Region name. For Local Zones, use the name of the group associated with the Local Zone (for example, us-west-2-lax-1) For Wavelength Zones, use the name of the group associated with the Wavelength Zone (for example, us-east-1-wl1-bos-wlz-1).    message - The Zone message.    opt-in-status - The opt-in status (opted-in, and not-opted-in | opt-in-not-required).    parent-zoneID - The ID of the zone that handles some of the Local Zone and Wavelength Zone control plane operations, such as API calls.    parent-zoneName - The ID of the zone that handles some of the Local Zone and Wavelength Zone control plane operations, such as API calls.    region-name - The name of the Region for the Zone (for example, us-east-1).    state - The state of the Availability Zone, the Local Zone, or the Wavelength Zone (available | information | impaired | unavailable).    zone-id - The ID of the Availability Zone (for example, use1-az1), the Local Zone (for example, usw2-lax1-az1), or the Wavelength Zone (for example, us-east-1-wl1-bos-wlz-1).    zone-type - The type of zone, for example, local-zone.    zone-name - The name of the Availability Zone (for example, us-east-1a), the Local Zone (for example, us-west-2-lax-1a), or the Wavelength Zone (for example, us-east-1-wl1-bos-wlz-1).    zone-type - The type of zone, for example, local-zone.  
+     * The filters.    group-name - For Availability Zones, use the Region name. For Local Zones, use the name of the group associated with the Local Zone (for example, us-west-2-lax-1) For Wavelength Zones, use the name of the group associated with the Wavelength Zone (for example, us-east-1-wl1-bos-wlz-1).    message - The Zone message.    opt-in-status - The opt-in status (opted-in, and not-opted-in | opt-in-not-required).    parent-zoneID - The ID of the zone that handles some of the Local Zone and Wavelength Zone control plane operations, such as API calls.    parent-zoneName - The ID of the zone that handles some of the Local Zone and Wavelength Zone control plane operations, such as API calls.    region-name - The name of the Region for the Zone (for example, us-east-1).    state - The state of the Availability Zone, the Local Zone, or the Wavelength Zone (available).    zone-id - The ID of the Availability Zone (for example, use1-az1), the Local Zone (for example, usw2-lax1-az1), or the Wavelength Zone (for example, us-east-1-wl1-bos-wlz-1).    zone-type - The type of zone, for example, local-zone.    zone-name - The name of the Availability Zone (for example, us-east-1a), the Local Zone (for example, us-west-2-lax-1a), or the Wavelength Zone (for example, us-east-1-wl1-bos-wlz-1).    zone-type - The type of zone, for example, local-zone.  
      */
     Filters?: FilterList;
     /**
@@ -10426,7 +11472,7 @@ declare namespace EC2 {
      */
     MaxResults?: DescribeCapacityReservationsMaxResults;
     /**
-     * One or more filters.    instance-type - The type of instance for which the Capacity Reservation reserves capacity.    owner-id - The ID of the Amazon Web Services account that owns the Capacity Reservation.    availability-zone-id - The Availability Zone ID of the Capacity Reservation.    instance-platform - The type of operating system for which the Capacity Reservation reserves capacity.    availability-zone - The Availability Zone ID of the Capacity Reservation.    tenancy - Indicates the tenancy of the Capacity Reservation. A Capacity Reservation can have one of the following tenancy settings:    default - The Capacity Reservation is created on hardware that is shared with other Amazon Web Services accounts.    dedicated - The Capacity Reservation is created on single-tenant hardware that is dedicated to a single Amazon Web Services account.      outpost-arn - The Amazon Resource Name (ARN) of the Outpost on which the Capacity Reservation was created.    state - The current state of the Capacity Reservation. A Capacity Reservation can be in one of the following states:    active- The Capacity Reservation is active and the capacity is available for your use.    expired - The Capacity Reservation expired automatically at the date and time specified in your request. The reserved capacity is no longer available for your use.    cancelled - The Capacity Reservation was cancelled. The reserved capacity is no longer available for your use.    pending - The Capacity Reservation request was successful but the capacity provisioning is still pending.    failed - The Capacity Reservation request has failed. A request might fail due to invalid request parameters, capacity constraints, or instance limit constraints. Failed requests are retained for 60 minutes.      start-date - The date and time at which the Capacity Reservation was started.    end-date - The date and time at which the Capacity Reservation expires. When a Capacity Reservation expires, the reserved capacity is released and you can no longer launch instances into it. The Capacity Reservation's state changes to expired when it reaches its end date and time.    end-date-type - Indicates the way in which the Capacity Reservation ends. A Capacity Reservation can have one of the following end types:    unlimited - The Capacity Reservation remains active until you explicitly cancel it.    limited - The Capacity Reservation expires automatically at a specified date and time.      instance-match-criteria - Indicates the type of instance launches that the Capacity Reservation accepts. The options include:    open - The Capacity Reservation accepts all instances that have matching attributes (instance type, platform, and Availability Zone). Instances that have matching attributes launch into the Capacity Reservation automatically without specifying any additional parameters.    targeted - The Capacity Reservation only accepts instances that have matching attributes (instance type, platform, and Availability Zone), and explicitly target the Capacity Reservation. This ensures that only permitted instances can use the reserved capacity.    
+     * One or more filters.    instance-type - The type of instance for which the Capacity Reservation reserves capacity.    owner-id - The ID of the Amazon Web Services account that owns the Capacity Reservation.    instance-platform - The type of operating system for which the Capacity Reservation reserves capacity.    availability-zone - The Availability Zone of the Capacity Reservation.    tenancy - Indicates the tenancy of the Capacity Reservation. A Capacity Reservation can have one of the following tenancy settings:    default - The Capacity Reservation is created on hardware that is shared with other Amazon Web Services accounts.    dedicated - The Capacity Reservation is created on single-tenant hardware that is dedicated to a single Amazon Web Services account.      outpost-arn - The Amazon Resource Name (ARN) of the Outpost on which the Capacity Reservation was created.    state - The current state of the Capacity Reservation. A Capacity Reservation can be in one of the following states:    active- The Capacity Reservation is active and the capacity is available for your use.    expired - The Capacity Reservation expired automatically at the date and time specified in your request. The reserved capacity is no longer available for your use.    cancelled - The Capacity Reservation was cancelled. The reserved capacity is no longer available for your use.    pending - The Capacity Reservation request was successful but the capacity provisioning is still pending.    failed - The Capacity Reservation request has failed. A request might fail due to invalid request parameters, capacity constraints, or instance limit constraints. Failed requests are retained for 60 minutes.      start-date - The date and time at which the Capacity Reservation was started.    end-date - The date and time at which the Capacity Reservation expires. When a Capacity Reservation expires, the reserved capacity is released and you can no longer launch instances into it. The Capacity Reservation's state changes to expired when it reaches its end date and time.    end-date-type - Indicates the way in which the Capacity Reservation ends. A Capacity Reservation can have one of the following end types:    unlimited - The Capacity Reservation remains active until you explicitly cancel it.    limited - The Capacity Reservation expires automatically at a specified date and time.      instance-match-criteria - Indicates the type of instance launches that the Capacity Reservation accepts. The options include:    open - The Capacity Reservation accepts all instances that have matching attributes (instance type, platform, and Availability Zone). Instances that have matching attributes launch into the Capacity Reservation automatically without specifying any additional parameters.    targeted - The Capacity Reservation only accepts instances that have matching attributes (instance type, platform, and Availability Zone), and explicitly target the Capacity Reservation. This ensures that only permitted instances can use the reserved capacity.      placement-group-arn - The ARN of the cluster placement group in which the Capacity Reservation was created.  
      */
     Filters?: FilterList;
     /**
@@ -10684,7 +11730,7 @@ declare namespace EC2 {
      */
     PoolIds?: CoipPoolIdSet;
     /**
-     * The filters. The following are the possible values:    coip-pool.pool-id       coip-pool.local-gateway-route-table-id   
+     * One or more filters.    coip-pool.local-gateway-route-table-id - The ID of the local gateway route table.    coip-pool.pool-id - The ID of the address pool.  
      */
     Filters?: FilterList;
     /**
@@ -10899,6 +11945,78 @@ declare namespace EC2 {
      */
     ExportTasks?: ExportTaskList;
   }
+  export interface DescribeFastLaunchImagesRequest {
+    /**
+     * Details for one or more Windows AMI image IDs.
+     */
+    ImageIds?: FastLaunchImageIdList;
+    /**
+     * Use the following filters to streamline results.    resource-type - The resource type for pre-provisioning.    launch-template - The launch template that is associated with the pre-provisioned Windows AMI.    owner-id - The owner ID for the pre-provisioning resource.    state - The current state of fast launching for the Windows AMI.  
+     */
+    Filters?: FilterList;
+    /**
+     * The maximum number of results to return in a single call. To retrieve the remaining results, make another request with the returned NextToken value. If this parameter is not specified, then all results are returned.
+     */
+    MaxResults?: DescribeFastLaunchImagesRequestMaxResults;
+    /**
+     * The token for the next set of results.
+     */
+    NextToken?: NextToken;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export type DescribeFastLaunchImagesRequestMaxResults = number;
+  export interface DescribeFastLaunchImagesResult {
+    /**
+     * A collection of details about the fast-launch enabled Windows images that meet the requested criteria.
+     */
+    FastLaunchImages?: DescribeFastLaunchImagesSuccessSet;
+    /**
+     * The token to use for the next set of results. This value is null when there are no more results to return.
+     */
+    NextToken?: NextToken;
+  }
+  export interface DescribeFastLaunchImagesSuccessItem {
+    /**
+     * The image ID that identifies the fast-launch enabled Windows image.
+     */
+    ImageId?: ImageId;
+    /**
+     * The resource type that is used for pre-provisioning the Windows AMI. Supported values include: snapshot.
+     */
+    ResourceType?: FastLaunchResourceType;
+    /**
+     * A group of parameters that are used for pre-provisioning the associated Windows AMI using snapshots.
+     */
+    SnapshotConfiguration?: FastLaunchSnapshotConfigurationResponse;
+    /**
+     * The launch template that the fast-launch enabled Windows AMI uses when it launches Windows instances from pre-provisioned snapshots.
+     */
+    LaunchTemplate?: FastLaunchLaunchTemplateSpecificationResponse;
+    /**
+     * The maximum number of parallel instances that are launched for creating resources.
+     */
+    MaxParallelLaunches?: Integer;
+    /**
+     * The owner ID for the fast-launch enabled Windows AMI.
+     */
+    OwnerId?: String;
+    /**
+     * The current state of faster launching for the specified Windows AMI.
+     */
+    State?: FastLaunchStateCode;
+    /**
+     * The reason that faster launching for the Windows AMI changed to the current state.
+     */
+    StateTransitionReason?: String;
+    /**
+     * The time that faster launching for the Windows AMI changed to the current state.
+     */
+    StateTransitionTime?: MillisecondDateTime;
+  }
+  export type DescribeFastLaunchImagesSuccessSet = DescribeFastLaunchImagesSuccessItem[];
   export interface DescribeFastSnapshotRestoreSuccessItem {
     /**
      * The ID of the snapshot.
@@ -10985,11 +12103,11 @@ declare namespace EC2 {
      */
     Lifecycle?: InstanceLifecycle;
     /**
-     * The error code that indicates why the instance could not be launched. For more information about error codes, see Error Codes.
+     * The error code that indicates why the instance could not be launched. For more information about error codes, see Error codes.
      */
     ErrorCode?: String;
     /**
-     * The error message that describes why the instance could not be launched. For more information about error messages, see Error Codes.
+     * The error message that describes why the instance could not be launched. For more information about error messages, see Error codes.
      */
     ErrorMessage?: String;
   }
@@ -11115,7 +12233,7 @@ declare namespace EC2 {
      */
     NextToken?: String;
     /**
-     * The ID of the EC2 Fleets.
+     * The IDs of the EC2 Fleets.  If a fleet is of type instant, you must specify the fleet ID, otherwise it does not appear in the response. 
      */
     FleetIds?: FleetIdSet;
     /**
@@ -11388,11 +12506,11 @@ declare namespace EC2 {
   }
   export interface DescribeImagesRequest {
     /**
-     * Scopes the images by users with explicit launch permissions. Specify an Amazon Web Services account ID, self (the sender of the request), or all (public AMIs).
+     * Scopes the images by users with explicit launch permissions. Specify an Amazon Web Services account ID, self (the sender of the request), or all (public AMIs).   If you specify an Amazon Web Services account ID that is not your own, only AMIs shared with that specific Amazon Web Services account ID are returned. However, AMIs that are shared with the account’s organization or organizational unit (OU) are not returned.   If you specify self or your own Amazon Web Services account ID, AMIs shared with your account are returned. In addition, AMIs that are shared with the organization or OU of which you are member are also returned.    If you specify all, all public AMIs are returned.  
      */
     ExecutableUsers?: ExecutableByStringList;
     /**
-     * The filters.    architecture - The image architecture (i386 | x86_64 | arm64).    block-device-mapping.delete-on-termination - A Boolean value that indicates whether the Amazon EBS volume is deleted on instance termination.    block-device-mapping.device-name - The device name specified in the block device mapping (for example, /dev/sdh or xvdh).    block-device-mapping.snapshot-id - The ID of the snapshot used for the Amazon EBS volume.    block-device-mapping.volume-size - The volume size of the Amazon EBS volume, in GiB.    block-device-mapping.volume-type - The volume type of the Amazon EBS volume (io1 | io2 | gp2 | gp3 | sc1 | st1 | standard).    block-device-mapping.encrypted - A Boolean that indicates whether the Amazon EBS volume is encrypted.    description - The description of the image (provided during image creation).    ena-support - A Boolean that indicates whether enhanced networking with ENA is enabled.    hypervisor - The hypervisor type (ovm | xen).    image-id - The ID of the image.    image-type - The image type (machine | kernel | ramdisk).    is-public - A Boolean that indicates whether the image is public.    kernel-id - The kernel ID.    manifest-location - The location of the image manifest.    name - The name of the AMI (provided during image creation).    owner-alias - The owner alias (amazon | aws-marketplace). The valid aliases are defined in an Amazon-maintained list. This is not the Amazon Web Services account alias that can be set using the IAM console. We recommend that you use the Owner request parameter instead of this filter.    owner-id - The Amazon Web Services account ID of the owner. We recommend that you use the Owner request parameter instead of this filter.    platform - The platform. To only list Windows-based AMIs, use windows.    product-code - The product code.    product-code.type - The type of the product code (marketplace).    ramdisk-id - The RAM disk ID.    root-device-name - The device name of the root device volume (for example, /dev/sda1).    root-device-type - The type of the root device volume (ebs | instance-store).    state - The state of the image (available | pending | failed).    state-reason-code - The reason code for the state change.    state-reason-message - The message for the state change.    sriov-net-support - A value of simple indicates that enhanced networking with the Intel 82599 VF interface is enabled.    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.    virtualization-type - The virtualization type (paravirtual | hvm).  
+     * The filters.    architecture - The image architecture (i386 | x86_64 | arm64).    block-device-mapping.delete-on-termination - A Boolean value that indicates whether the Amazon EBS volume is deleted on instance termination.    block-device-mapping.device-name - The device name specified in the block device mapping (for example, /dev/sdh or xvdh).    block-device-mapping.snapshot-id - The ID of the snapshot used for the Amazon EBS volume.    block-device-mapping.volume-size - The volume size of the Amazon EBS volume, in GiB.    block-device-mapping.volume-type - The volume type of the Amazon EBS volume (io1 | io2 | gp2 | gp3 | sc1 | st1 | standard).    block-device-mapping.encrypted - A Boolean that indicates whether the Amazon EBS volume is encrypted.    creation-date - The time when the image was created, in the ISO 8601 format in the UTC time zone (YYYY-MM-DDThh:mm:ss.sssZ), for example, 2021-09-29T11:04:43.305Z. You can use a wildcard (*), for example, 2021-09-29T*, which matches an entire day.    description - The description of the image (provided during image creation).    ena-support - A Boolean that indicates whether enhanced networking with ENA is enabled.    hypervisor - The hypervisor type (ovm | xen).    image-id - The ID of the image.    image-type - The image type (machine | kernel | ramdisk).    is-public - A Boolean that indicates whether the image is public.    kernel-id - The kernel ID.    manifest-location - The location of the image manifest.    name - The name of the AMI (provided during image creation).    owner-alias - The owner alias (amazon | aws-marketplace). The valid aliases are defined in an Amazon-maintained list. This is not the Amazon Web Services account alias that can be set using the IAM console. We recommend that you use the Owner request parameter instead of this filter.    owner-id - The Amazon Web Services account ID of the owner. We recommend that you use the Owner request parameter instead of this filter.    platform - The platform. To only list Windows-based AMIs, use windows.    product-code - The product code.    product-code.type - The type of the product code (marketplace).    ramdisk-id - The RAM disk ID.    root-device-name - The device name of the root device volume (for example, /dev/sda1).    root-device-type - The type of the root device volume (ebs | instance-store).    state - The state of the image (available | pending | failed).    state-reason-code - The reason code for the state change.    state-reason-message - The message for the state change.    sriov-net-support - A value of simple indicates that enhanced networking with the Intel 82599 VF interface is enabled.    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.    virtualization-type - The virtualization type (paravirtual | hvm).  
      */
     Filters?: FilterList;
     /**
@@ -11651,7 +12769,7 @@ declare namespace EC2 {
      */
     InstanceTypes?: RequestInstanceTypeList;
     /**
-     * One or more filters. Filter names and values are case-sensitive.    auto-recovery-supported - Indicates whether auto recovery is supported (true | false).    bare-metal - Indicates whether it is a bare metal instance type (true | false).    burstable-performance-supported - Indicates whether it is a burstable performance instance type (true | false).    current-generation - Indicates whether this instance type is the latest generation instance type of an instance family (true | false).    ebs-info.ebs-optimized-info.baseline-bandwidth-in-mbps - The baseline bandwidth performance for an EBS-optimized instance type, in Mbps.    ebs-info.ebs-optimized-info.baseline-iops - The baseline input/output storage operations per second for an EBS-optimized instance type.    ebs-info.ebs-optimized-info.baseline-throughput-in-mbps - The baseline throughput performance for an EBS-optimized instance type, in MB/s.    ebs-info.ebs-optimized-info.maximum-bandwidth-in-mbps - The maximum bandwidth performance for an EBS-optimized instance type, in Mbps.    ebs-info.ebs-optimized-info.maximum-iops - The maximum input/output storage operations per second for an EBS-optimized instance type.    ebs-info.ebs-optimized-info.maximum-throughput-in-mbps - The maximum throughput performance for an EBS-optimized instance type, in MB/s.    ebs-info.ebs-optimized-support - Indicates whether the instance type is EBS-optimized (supported | unsupported | default).    ebs-info.encryption-support - Indicates whether EBS encryption is supported (supported | unsupported).    ebs-info.nvme-support - Indicates whether non-volatile memory express (NVMe) is supported for EBS volumes (required | supported | unsupported).    free-tier-eligible - Indicates whether the instance type is eligible to use in the free tier (true | false).    hibernation-supported - Indicates whether On-Demand hibernation is supported (true | false).    hypervisor - The hypervisor (nitro | xen).    instance-storage-info.disk.count - The number of local disks.    instance-storage-info.disk.size-in-gb - The storage size of each instance storage disk, in GB.    instance-storage-info.disk.type - The storage technology for the local instance storage disks (hdd | ssd).    instance-storage-info.encryption-supported - Indicates whether data is encrypted at rest (required | unsupported).    instance-storage-info.nvme-support - Indicates whether non-volatile memory express (NVMe) is supported for instance store (required | supported | unsupported).    instance-storage-info.total-size-in-gb - The total amount of storage available from all local instance storage, in GB.    instance-storage-supported - Indicates whether the instance type has local instance storage (true | false).    instance-type - The instance type (for example c5.2xlarge or c5*).    memory-info.size-in-mib - The memory size.    network-info.efa-info.maximum-efa-interfaces - The maximum number of Elastic Fabric Adapters (EFAs) per instance.    network-info.efa-supported - Indicates whether the instance type supports Elastic Fabric Adapter (EFA) (true | false).    network-info.ena-support - Indicates whether Elastic Network Adapter (ENA) is supported or required (required | supported | unsupported).    network-info.encryption-in-transit-supported - Indicates whether the instance type automatically encrypts in-transit traffic between instances (true | false).    network-info.ipv4-addresses-per-interface - The maximum number of private IPv4 addresses per network interface.    network-info.ipv6-addresses-per-interface - The maximum number of private IPv6 addresses per network interface.    network-info.ipv6-supported - Indicates whether the instance type supports IPv6 (true | false).    network-info.maximum-network-interfaces - The maximum number of network interfaces per instance.    network-info.network-performance - The network performance (for example, "25 Gigabit").    processor-info.supported-architecture - The CPU architecture (arm64 | i386 | x86_64).    processor-info.sustained-clock-speed-in-ghz - The CPU clock speed, in GHz.    supported-boot-mode - The boot mode (legacy-bios | uefi).    supported-root-device-type - The root device type (ebs | instance-store).    supported-usage-class - The usage class (on-demand | spot).    supported-virtualization-type - The virtualization type (hvm | paravirtual).    vcpu-info.default-cores - The default number of cores for the instance type.    vcpu-info.default-threads-per-core - The default number of threads per core for the instance type.    vcpu-info.default-vcpus - The default number of vCPUs for the instance type.    vcpu-info.valid-cores - The number of cores that can be configured for the instance type.    vcpu-info.valid-threads-per-core - The number of threads per core that can be configured for the instance type. For example, "1" or "1,2".  
+     * One or more filters. Filter names and values are case-sensitive.    auto-recovery-supported - Indicates whether auto recovery is supported (true | false).    bare-metal - Indicates whether it is a bare metal instance type (true | false).    burstable-performance-supported - Indicates whether it is a burstable performance instance type (true | false).    current-generation - Indicates whether this instance type is the latest generation instance type of an instance family (true | false).    ebs-info.ebs-optimized-info.baseline-bandwidth-in-mbps - The baseline bandwidth performance for an EBS-optimized instance type, in Mbps.    ebs-info.ebs-optimized-info.baseline-iops - The baseline input/output storage operations per second for an EBS-optimized instance type.    ebs-info.ebs-optimized-info.baseline-throughput-in-mbps - The baseline throughput performance for an EBS-optimized instance type, in MB/s.    ebs-info.ebs-optimized-info.maximum-bandwidth-in-mbps - The maximum bandwidth performance for an EBS-optimized instance type, in Mbps.    ebs-info.ebs-optimized-info.maximum-iops - The maximum input/output storage operations per second for an EBS-optimized instance type.    ebs-info.ebs-optimized-info.maximum-throughput-in-mbps - The maximum throughput performance for an EBS-optimized instance type, in MB/s.    ebs-info.ebs-optimized-support - Indicates whether the instance type is EBS-optimized (supported | unsupported | default).    ebs-info.encryption-support - Indicates whether EBS encryption is supported (supported | unsupported).    ebs-info.nvme-support - Indicates whether non-volatile memory express (NVMe) is supported for EBS volumes (required | supported | unsupported).    free-tier-eligible - Indicates whether the instance type is eligible to use in the free tier (true | false).    hibernation-supported - Indicates whether On-Demand hibernation is supported (true | false).    hypervisor - The hypervisor (nitro | xen).    instance-storage-info.disk.count - The number of local disks.    instance-storage-info.disk.size-in-gb - The storage size of each instance storage disk, in GB.    instance-storage-info.disk.type - The storage technology for the local instance storage disks (hdd | ssd).    instance-storage-info.encryption-support - Indicates whether data is encrypted at rest (required | supported | unsupported).    instance-storage-info.nvme-support - Indicates whether non-volatile memory express (NVMe) is supported for instance store (required | supported | unsupported).    instance-storage-info.total-size-in-gb - The total amount of storage available from all local instance storage, in GB.    instance-storage-supported - Indicates whether the instance type has local instance storage (true | false).    instance-type - The instance type (for example c5.2xlarge or c5*).    memory-info.size-in-mib - The memory size.    network-info.efa-info.maximum-efa-interfaces - The maximum number of Elastic Fabric Adapters (EFAs) per instance.    network-info.efa-supported - Indicates whether the instance type supports Elastic Fabric Adapter (EFA) (true | false).    network-info.ena-support - Indicates whether Elastic Network Adapter (ENA) is supported or required (required | supported | unsupported).    network-info.encryption-in-transit-supported - Indicates whether the instance type automatically encrypts in-transit traffic between instances (true | false).    network-info.ipv4-addresses-per-interface - The maximum number of private IPv4 addresses per network interface.    network-info.ipv6-addresses-per-interface - The maximum number of private IPv6 addresses per network interface.    network-info.ipv6-supported - Indicates whether the instance type supports IPv6 (true | false).    network-info.maximum-network-cards - The maximum number of network cards per instance.    network-info.maximum-network-interfaces - The maximum number of network interfaces per instance.    network-info.network-performance - The network performance (for example, "25 Gigabit").    processor-info.supported-architecture - The CPU architecture (arm64 | i386 | x86_64).    processor-info.sustained-clock-speed-in-ghz - The CPU clock speed, in GHz.    supported-boot-mode - The boot mode (legacy-bios | uefi).    supported-root-device-type - The root device type (ebs | instance-store).    supported-usage-class - The usage class (on-demand | spot).    supported-virtualization-type - The virtualization type (hvm | paravirtual).    vcpu-info.default-cores - The default number of cores for the instance type.    vcpu-info.default-threads-per-core - The default number of threads per core for the instance type.    vcpu-info.default-vcpus - The default number of vCPUs for the instance type.    vcpu-info.valid-cores - The number of cores that can be configured for the instance type.    vcpu-info.valid-threads-per-core - The number of threads per core that can be configured for the instance type. For example, "1" or "1,2".  
      */
     Filters?: FilterList;
     /**
@@ -11675,7 +12793,7 @@ declare namespace EC2 {
   }
   export interface DescribeInstancesRequest {
     /**
-     * The filters.    affinity - The affinity setting for an instance running on a Dedicated Host (default | host).    architecture - The instance architecture (i386 | x86_64 | arm64).    availability-zone - The Availability Zone of the instance.    block-device-mapping.attach-time - The attach time for an EBS volume mapped to the instance, for example, 2010-09-15T17:15:20.000Z.    block-device-mapping.delete-on-termination - A Boolean that indicates whether the EBS volume is deleted on instance termination.    block-device-mapping.device-name - The device name specified in the block device mapping (for example, /dev/sdh or xvdh).    block-device-mapping.status - The status for the EBS volume (attaching | attached | detaching | detached).    block-device-mapping.volume-id - The volume ID of the EBS volume.    client-token - The idempotency token you provided when you launched the instance.    dns-name - The public DNS name of the instance.    group-id - The ID of the security group for the instance. EC2-Classic only.    group-name - The name of the security group for the instance. EC2-Classic only.    hibernation-options.configured - A Boolean that indicates whether the instance is enabled for hibernation. A value of true means that the instance is enabled for hibernation.     host-id - The ID of the Dedicated Host on which the instance is running, if applicable.    hypervisor - The hypervisor type of the instance (ovm | xen). The value xen is used for both Xen and Nitro hypervisors.    iam-instance-profile.arn - The instance profile associated with the instance. Specified as an ARN.    image-id - The ID of the image used to launch the instance.    instance-id - The ID of the instance.    instance-lifecycle - Indicates whether this is a Spot Instance or a Scheduled Instance (spot | scheduled).    instance-state-code - The state of the instance, as a 16-bit unsigned integer. The high byte is used for internal purposes and should be ignored. The low byte is set based on the state represented. The valid values are: 0 (pending), 16 (running), 32 (shutting-down), 48 (terminated), 64 (stopping), and 80 (stopped).    instance-state-name - The state of the instance (pending | running | shutting-down | terminated | stopping | stopped).    instance-type - The type of instance (for example, t2.micro).    instance.group-id - The ID of the security group for the instance.     instance.group-name - The name of the security group for the instance.     ip-address - The public IPv4 address of the instance.    kernel-id - The kernel ID.    key-name - The name of the key pair used when the instance was launched.    launch-index - When launching multiple instances, this is the index for the instance in the launch group (for example, 0, 1, 2, and so on).     launch-time - The time when the instance was launched.    metadata-options.http-tokens - The metadata request authorization state (optional | required)    metadata-options.http-put-response-hop-limit - The http metadata request put response hop limit (integer, possible values 1 to 64)    metadata-options.http-endpoint - Enable or disable metadata access on http endpoint (enabled | disabled)    monitoring-state - Indicates whether detailed monitoring is enabled (disabled | enabled).    network-interface.addresses.private-ip-address - The private IPv4 address associated with the network interface.    network-interface.addresses.primary - Specifies whether the IPv4 address of the network interface is the primary private IPv4 address.    network-interface.addresses.association.public-ip - The ID of the association of an Elastic IP address (IPv4) with a network interface.    network-interface.addresses.association.ip-owner-id - The owner ID of the private IPv4 address associated with the network interface.    network-interface.association.public-ip - The address of the Elastic IP address (IPv4) bound to the network interface.    network-interface.association.ip-owner-id - The owner of the Elastic IP address (IPv4) associated with the network interface.    network-interface.association.allocation-id - The allocation ID returned when you allocated the Elastic IP address (IPv4) for your network interface.    network-interface.association.association-id - The association ID returned when the network interface was associated with an IPv4 address.    network-interface.attachment.attachment-id - The ID of the interface attachment.    network-interface.attachment.instance-id - The ID of the instance to which the network interface is attached.    network-interface.attachment.instance-owner-id - The owner ID of the instance to which the network interface is attached.    network-interface.attachment.device-index - The device index to which the network interface is attached.    network-interface.attachment.status - The status of the attachment (attaching | attached | detaching | detached).    network-interface.attachment.attach-time - The time that the network interface was attached to an instance.    network-interface.attachment.delete-on-termination - Specifies whether the attachment is deleted when an instance is terminated.    network-interface.availability-zone - The Availability Zone for the network interface.    network-interface.description - The description of the network interface.    network-interface.group-id - The ID of a security group associated with the network interface.    network-interface.group-name - The name of a security group associated with the network interface.    network-interface.ipv6-addresses.ipv6-address - The IPv6 address associated with the network interface.    network-interface.mac-address - The MAC address of the network interface.    network-interface.network-interface-id - The ID of the network interface.    network-interface.owner-id - The ID of the owner of the network interface.    network-interface.private-dns-name - The private DNS name of the network interface.    network-interface.requester-id - The requester ID for the network interface.    network-interface.requester-managed - Indicates whether the network interface is being managed by Amazon Web Services.    network-interface.status - The status of the network interface (available) | in-use).    network-interface.source-dest-check - Whether the network interface performs source/destination checking. A value of true means that checking is enabled, and false means that checking is disabled. The value must be false for the network interface to perform network address translation (NAT) in your VPC.    network-interface.subnet-id - The ID of the subnet for the network interface.    network-interface.vpc-id - The ID of the VPC for the network interface.    outpost-arn - The Amazon Resource Name (ARN) of the Outpost.    owner-id - The Amazon Web Services account ID of the instance owner.    placement-group-name - The name of the placement group for the instance.    placement-partition-number - The partition in which the instance is located.    platform - The platform. To list only Windows instances, use windows.    private-dns-name - The private IPv4 DNS name of the instance.    private-ip-address - The private IPv4 address of the instance.    product-code - The product code associated with the AMI used to launch the instance.    product-code.type - The type of product code (devpay | marketplace).    ramdisk-id - The RAM disk ID.    reason - The reason for the current state of the instance (for example, shows "User Initiated [date]" when you stop or terminate the instance). Similar to the state-reason-code filter.    requester-id - The ID of the entity that launched the instance on your behalf (for example, Amazon Web Services Management Console, Auto Scaling, and so on).    reservation-id - The ID of the instance's reservation. A reservation ID is created any time you launch an instance. A reservation ID has a one-to-one relationship with an instance launch request, but can be associated with more than one instance if you launch multiple instances using the same launch request. For example, if you launch one instance, you get one reservation ID. If you launch ten instances using the same launch request, you also get one reservation ID.    root-device-name - The device name of the root device volume (for example, /dev/sda1).    root-device-type - The type of the root device volume (ebs | instance-store).    source-dest-check - Indicates whether the instance performs source/destination checking. A value of true means that checking is enabled, and false means that checking is disabled. The value must be false for the instance to perform network address translation (NAT) in your VPC.     spot-instance-request-id - The ID of the Spot Instance request.    state-reason-code - The reason code for the state change.    state-reason-message - A message that describes the state change.    subnet-id - The ID of the subnet for the instance.    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources that have a tag with a specific key, regardless of the tag value.    tenancy - The tenancy of an instance (dedicated | default | host).    virtualization-type - The virtualization type of the instance (paravirtual | hvm).    vpc-id - The ID of the VPC that the instance is running in.  
+     * The filters.    affinity - The affinity setting for an instance running on a Dedicated Host (default | host).    architecture - The instance architecture (i386 | x86_64 | arm64).    availability-zone - The Availability Zone of the instance.    block-device-mapping.attach-time - The attach time for an EBS volume mapped to the instance, for example, 2010-09-15T17:15:20.000Z.    block-device-mapping.delete-on-termination - A Boolean that indicates whether the EBS volume is deleted on instance termination.    block-device-mapping.device-name - The device name specified in the block device mapping (for example, /dev/sdh or xvdh).    block-device-mapping.status - The status for the EBS volume (attaching | attached | detaching | detached).    block-device-mapping.volume-id - The volume ID of the EBS volume.    capacity-reservation-id - The ID of the Capacity Reservation into which the instance was launched.    client-token - The idempotency token you provided when you launched the instance.    dns-name - The public DNS name of the instance.    group-id - The ID of the security group for the instance. EC2-Classic only.    group-name - The name of the security group for the instance. EC2-Classic only.    hibernation-options.configured - A Boolean that indicates whether the instance is enabled for hibernation. A value of true means that the instance is enabled for hibernation.     host-id - The ID of the Dedicated Host on which the instance is running, if applicable.    hypervisor - The hypervisor type of the instance (ovm | xen). The value xen is used for both Xen and Nitro hypervisors.    iam-instance-profile.arn - The instance profile associated with the instance. Specified as an ARN.    image-id - The ID of the image used to launch the instance.    instance-id - The ID of the instance.    instance-lifecycle - Indicates whether this is a Spot Instance or a Scheduled Instance (spot | scheduled).    instance-state-code - The state of the instance, as a 16-bit unsigned integer. The high byte is used for internal purposes and should be ignored. The low byte is set based on the state represented. The valid values are: 0 (pending), 16 (running), 32 (shutting-down), 48 (terminated), 64 (stopping), and 80 (stopped).    instance-state-name - The state of the instance (pending | running | shutting-down | terminated | stopping | stopped).    instance-type - The type of instance (for example, t2.micro).    instance.group-id - The ID of the security group for the instance.     instance.group-name - The name of the security group for the instance.     ip-address - The public IPv4 address of the instance.    kernel-id - The kernel ID.    key-name - The name of the key pair used when the instance was launched.    launch-index - When launching multiple instances, this is the index for the instance in the launch group (for example, 0, 1, 2, and so on).     launch-time - The time when the instance was launched, in the ISO 8601 format in the UTC time zone (YYYY-MM-DDThh:mm:ss.sssZ), for example, 2021-09-29T11:04:43.305Z. You can use a wildcard (*), for example, 2021-09-29T*, which matches an entire day.    metadata-options.http-tokens - The metadata request authorization state (optional | required)    metadata-options.http-put-response-hop-limit - The http metadata request put response hop limit (integer, possible values 1 to 64)    metadata-options.http-endpoint - Enable or disable metadata access on http endpoint (enabled | disabled)    monitoring-state - Indicates whether detailed monitoring is enabled (disabled | enabled).    network-interface.addresses.private-ip-address - The private IPv4 address associated with the network interface.    network-interface.addresses.primary - Specifies whether the IPv4 address of the network interface is the primary private IPv4 address.    network-interface.addresses.association.public-ip - The ID of the association of an Elastic IP address (IPv4) with a network interface.    network-interface.addresses.association.ip-owner-id - The owner ID of the private IPv4 address associated with the network interface.    network-interface.association.public-ip - The address of the Elastic IP address (IPv4) bound to the network interface.    network-interface.association.ip-owner-id - The owner of the Elastic IP address (IPv4) associated with the network interface.    network-interface.association.allocation-id - The allocation ID returned when you allocated the Elastic IP address (IPv4) for your network interface.    network-interface.association.association-id - The association ID returned when the network interface was associated with an IPv4 address.    network-interface.attachment.attachment-id - The ID of the interface attachment.    network-interface.attachment.instance-id - The ID of the instance to which the network interface is attached.    network-interface.attachment.instance-owner-id - The owner ID of the instance to which the network interface is attached.    network-interface.attachment.device-index - The device index to which the network interface is attached.    network-interface.attachment.status - The status of the attachment (attaching | attached | detaching | detached).    network-interface.attachment.attach-time - The time that the network interface was attached to an instance.    network-interface.attachment.delete-on-termination - Specifies whether the attachment is deleted when an instance is terminated.    network-interface.availability-zone - The Availability Zone for the network interface.    network-interface.description - The description of the network interface.    network-interface.group-id - The ID of a security group associated with the network interface.    network-interface.group-name - The name of a security group associated with the network interface.    network-interface.ipv6-addresses.ipv6-address - The IPv6 address associated with the network interface.    network-interface.mac-address - The MAC address of the network interface.    network-interface.network-interface-id - The ID of the network interface.    network-interface.owner-id - The ID of the owner of the network interface.    network-interface.private-dns-name - The private DNS name of the network interface.    network-interface.requester-id - The requester ID for the network interface.    network-interface.requester-managed - Indicates whether the network interface is being managed by Amazon Web Services.    network-interface.status - The status of the network interface (available) | in-use).    network-interface.source-dest-check - Whether the network interface performs source/destination checking. A value of true means that checking is enabled, and false means that checking is disabled. The value must be false for the network interface to perform network address translation (NAT) in your VPC.    network-interface.subnet-id - The ID of the subnet for the network interface.    network-interface.vpc-id - The ID of the VPC for the network interface.    outpost-arn - The Amazon Resource Name (ARN) of the Outpost.    owner-id - The Amazon Web Services account ID of the instance owner.    placement-group-name - The name of the placement group for the instance.    placement-partition-number - The partition in which the instance is located.    platform - The platform. To list only Windows instances, use windows.    private-dns-name - The private IPv4 DNS name of the instance.    private-ip-address - The private IPv4 address of the instance.    product-code - The product code associated with the AMI used to launch the instance.    product-code.type - The type of product code (devpay | marketplace).    ramdisk-id - The RAM disk ID.    reason - The reason for the current state of the instance (for example, shows "User Initiated [date]" when you stop or terminate the instance). Similar to the state-reason-code filter.    requester-id - The ID of the entity that launched the instance on your behalf (for example, Amazon Web Services Management Console, Auto Scaling, and so on).    reservation-id - The ID of the instance's reservation. A reservation ID is created any time you launch an instance. A reservation ID has a one-to-one relationship with an instance launch request, but can be associated with more than one instance if you launch multiple instances using the same launch request. For example, if you launch one instance, you get one reservation ID. If you launch ten instances using the same launch request, you also get one reservation ID.    root-device-name - The device name of the root device volume (for example, /dev/sda1).    root-device-type - The type of the root device volume (ebs | instance-store).    source-dest-check - Indicates whether the instance performs source/destination checking. A value of true means that checking is enabled, and false means that checking is disabled. The value must be false for the instance to perform network address translation (NAT) in your VPC.     spot-instance-request-id - The ID of the Spot Instance request.    state-reason-code - The reason code for the state change.    state-reason-message - A message that describes the state change.    subnet-id - The ID of the subnet for the instance.    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources that have a tag with a specific key, regardless of the tag value.    tenancy - The tenancy of an instance (dedicated | default | host).    virtualization-type - The virtualization type of the instance (paravirtual | hvm).    vpc-id - The ID of the VPC that the instance is running in.  
      */
     Filters?: FilterList;
     /**
@@ -11738,6 +12856,102 @@ declare namespace EC2 {
      */
     NextToken?: String;
   }
+  export interface DescribeIpamPoolsRequest {
+    /**
+     * A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * One or more filters for the request. For more information about filtering, see Filtering CLI output.
+     */
+    Filters?: FilterList;
+    /**
+     * The maximum number of results to return in the request.
+     */
+    MaxResults?: IpamMaxResults;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: NextToken;
+    /**
+     * The IDs of the IPAM pools you would like information on.
+     */
+    IpamPoolIds?: ValueStringList;
+  }
+  export interface DescribeIpamPoolsResult {
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: NextToken;
+    /**
+     * Information about the IPAM pools.
+     */
+    IpamPools?: IpamPoolSet;
+  }
+  export interface DescribeIpamScopesRequest {
+    /**
+     * A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * One or more filters for the request. For more information about filtering, see Filtering CLI output.
+     */
+    Filters?: FilterList;
+    /**
+     * The maximum number of results to return in the request.
+     */
+    MaxResults?: IpamMaxResults;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: NextToken;
+    /**
+     * The IDs of the scopes you want information on.
+     */
+    IpamScopeIds?: ValueStringList;
+  }
+  export interface DescribeIpamScopesResult {
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: NextToken;
+    /**
+     * The scopes you want information on.
+     */
+    IpamScopes?: IpamScopeSet;
+  }
+  export interface DescribeIpamsRequest {
+    /**
+     * A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * One or more filters for the request. For more information about filtering, see Filtering CLI output.
+     */
+    Filters?: FilterList;
+    /**
+     * The maximum number of results to return in the request.
+     */
+    MaxResults?: IpamMaxResults;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: NextToken;
+    /**
+     * The IDs of the IPAMs you want information on.
+     */
+    IpamIds?: ValueStringList;
+  }
+  export interface DescribeIpamsResult {
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: NextToken;
+    /**
+     * Information about the IPAMs.
+     */
+    Ipams?: IpamSet;
+  }
   export interface DescribeIpv6PoolsRequest {
     /**
      * The IDs of the IPv6 address pools.
@@ -11787,6 +13001,10 @@ declare namespace EC2 {
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
     DryRun?: Boolean;
+    /**
+     * If true, the public key material is included in the response. Default: false 
+     */
+    IncludePublicKey?: Boolean;
   }
   export interface DescribeKeyPairsResult {
     /**
@@ -11828,7 +13046,7 @@ declare namespace EC2 {
      */
     MaxResults?: Integer;
     /**
-     * One or more filters.    create-time - The time the launch template version was created.    ebs-optimized - A boolean that indicates whether the instance is optimized for Amazon EBS I/O.    iam-instance-profile - The ARN of the IAM instance profile.    image-id - The ID of the AMI.    instance-type - The instance type.    is-default-version - A boolean that indicates whether the launch template version is the default version.    kernel-id - The kernel ID.    ram-disk-id - The RAM disk ID.  
+     * One or more filters.    create-time - The time the launch template version was created.    ebs-optimized - A boolean that indicates whether the instance is optimized for Amazon EBS I/O.    http-endpoint - Indicates whether the HTTP metadata endpoint on your instances is enabled (enabled | disabled).    http-protocol-ipv4 - Indicates whether the IPv4 endpoint for the instance metadata service is enabled (enabled | disabled).    host-resource-group-arn - The ARN of the host resource group in which to launch the instances.    http-tokens - The state of token usage for your instance metadata requests (optional | required).    iam-instance-profile - The ARN of the IAM instance profile.    image-id - The ID of the AMI.    instance-type - The instance type.    is-default-version - A boolean that indicates whether the launch template version is the default version.    kernel-id - The kernel ID.    license-configuration-arn - The ARN of the license configuration.    network-card-index - The index of the network card.    ram-disk-id - The RAM disk ID.  
      */
     Filters?: FilterList;
   }
@@ -11885,7 +13103,7 @@ declare namespace EC2 {
      */
     LocalGatewayRouteTableVirtualInterfaceGroupAssociationIds?: LocalGatewayRouteTableVirtualInterfaceGroupAssociationIdSet;
     /**
-     * One or more filters.    local-gateway-id - The ID of a local gateway.    local-gateway-route-table-id - The ID of the local gateway route table.    local-gateway-route-table-virtual-interface-group-association-id - The ID of the association.    local-gateway-route-table-virtual-interface-group-id - The ID of the virtual interface group.    state - The state of the association.  
+     * One or more filters.    local-gateway-id - The ID of a local gateway.    local-gateway-route-table-arn - The Amazon Resource Name (ARN) of the local gateway route table for the virtual interface group.    local-gateway-route-table-id - The ID of the local gateway route table.    local-gateway-route-table-virtual-interface-group-association-id - The ID of the association.    local-gateway-route-table-virtual-interface-group-id - The ID of the virtual interface group.    owner-id - The ID of the Amazon Web Services account that owns the local gateway virtual interface group association.    state - The state of the association.  
      */
     Filters?: FilterList;
     /**
@@ -11917,7 +13135,7 @@ declare namespace EC2 {
      */
     LocalGatewayRouteTableVpcAssociationIds?: LocalGatewayRouteTableVpcAssociationIdSet;
     /**
-     * One or more filters.    local-gateway-id - The ID of a local gateway.    local-gateway-route-table-id - The ID of the local gateway route table.    local-gateway-route-table-vpc-association-id - The ID of the association.    state - The state of the association.    vpc-id - The ID of the VPC.  
+     * One or more filters.    local-gateway-id - The ID of a local gateway.    local-gateway-route-table-arn - The Amazon Resource Name (ARN) of the local gateway route table for the association.    local-gateway-route-table-id - The ID of the local gateway route table.    local-gateway-route-table-vpc-association-id - The ID of the association.    owner-id - The ID of the Amazon Web Services account that owns the local gateway route table for the association.    state - The state of the association.    vpc-id - The ID of the VPC.  
      */
     Filters?: FilterList;
     /**
@@ -11949,7 +13167,7 @@ declare namespace EC2 {
      */
     LocalGatewayRouteTableIds?: LocalGatewayRouteTableIdSet;
     /**
-     * One or more filters.    local-gateway-id - The ID of a local gateway.    local-gateway-route-table-id - The ID of a local gateway route table.    outpost-arn - The Amazon Resource Name (ARN) of the Outpost.    state - The state of the local gateway route table.  
+     * One or more filters.    local-gateway-id - The ID of a local gateway.    local-gateway-route-table-arn - The Amazon Resource Name (ARN) of the local gateway route table.    local-gateway-route-table-id - The ID of a local gateway route table.    outpost-arn - The Amazon Resource Name (ARN) of the Outpost.    owner-id - The ID of the Amazon Web Services account that owns the local gateway route table.    state - The state of the local gateway route table.  
      */
     Filters?: FilterList;
     /**
@@ -11981,7 +13199,7 @@ declare namespace EC2 {
      */
     LocalGatewayVirtualInterfaceGroupIds?: LocalGatewayVirtualInterfaceGroupIdSet;
     /**
-     * One or more filters.    local-gateway-id - The ID of a local gateway.    local-gateway-virtual-interface-id - The ID of the virtual interface.    local-gateway-virtual-interface-group-id - The ID of the virtual interface group.  
+     * One or more filters.    local-gateway-id - The ID of a local gateway.    local-gateway-virtual-interface-group-id - The ID of the virtual interface group.    local-gateway-virtual-interface-id - The ID of the virtual interface.    owner-id - The ID of the Amazon Web Services account that owns the local gateway virtual interface group.  
      */
     Filters?: FilterList;
     /**
@@ -12013,7 +13231,7 @@ declare namespace EC2 {
      */
     LocalGatewayVirtualInterfaceIds?: LocalGatewayVirtualInterfaceIdSet;
     /**
-     * One or more filters.
+     * One or more filters.    local-address - The local address.    local-bgp-asn - The Border Gateway Protocol (BGP) Autonomous System Number (ASN) of the local gateway.    local-gateway-id - The ID of the local gateway.    local-gateway-virtual-interface-id - The ID of the virtual interface.    owner-id - The ID of the Amazon Web Services account that owns the local gateway virtual interface.    peer-address - The peer address.    peer-bgp-asn - The peer BGP ASN.    vlan - The ID of the VLAN.  
      */
     Filters?: FilterList;
     /**
@@ -12041,11 +13259,11 @@ declare namespace EC2 {
   }
   export interface DescribeLocalGatewaysRequest {
     /**
-     * One or more filters.    local-gateway-id - The ID of a local gateway.    local-gateway-route-table-id - The ID of the local gateway route table.    local-gateway-route-table-virtual-interface-group-association-id - The ID of the association.    local-gateway-route-table-virtual-interface-group-id - The ID of the virtual interface group.    outpost-arn - The Amazon Resource Name (ARN) of the Outpost.    state - The state of the association.  
+     * The IDs of the local gateways.
      */
     LocalGatewayIds?: LocalGatewayIdSet;
     /**
-     * One or more filters.
+     * One or more filters.    local-gateway-id - The ID of a local gateway.    outpost-arn - The Amazon Resource Name (ARN) of the Outpost.    owner-id - The ID of the Amazon Web Services account that owns the local gateway.    state - The state of the association.  
      */
     Filters?: FilterList;
     /**
@@ -12202,6 +13420,82 @@ declare namespace EC2 {
      */
     NextToken?: String;
   }
+  export interface DescribeNetworkInsightsAccessScopeAnalysesRequest {
+    /**
+     * The IDs of the Network Access Scope analyses.
+     */
+    NetworkInsightsAccessScopeAnalysisIds?: NetworkInsightsAccessScopeAnalysisIdList;
+    /**
+     * The ID of the Network Access Scope.
+     */
+    NetworkInsightsAccessScopeId?: NetworkInsightsAccessScopeId;
+    /**
+     * Filters the results based on the start time. The analysis must have started on or after this time.
+     */
+    AnalysisStartTimeBegin?: MillisecondDateTime;
+    /**
+     * Filters the results based on the start time. The analysis must have started on or before this time.
+     */
+    AnalysisStartTimeEnd?: MillisecondDateTime;
+    /**
+     * There are no supported filters.
+     */
+    Filters?: FilterList;
+    /**
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
+     */
+    MaxResults?: NetworkInsightsMaxResults;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: NextToken;
+  }
+  export interface DescribeNetworkInsightsAccessScopeAnalysesResult {
+    /**
+     * The Network Access Scope analyses.
+     */
+    NetworkInsightsAccessScopeAnalyses?: NetworkInsightsAccessScopeAnalysisList;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: String;
+  }
+  export interface DescribeNetworkInsightsAccessScopesRequest {
+    /**
+     * The IDs of the Network Access Scopes.
+     */
+    NetworkInsightsAccessScopeIds?: NetworkInsightsAccessScopeIdList;
+    /**
+     * There are no supported filters.
+     */
+    Filters?: FilterList;
+    /**
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
+     */
+    MaxResults?: NetworkInsightsMaxResults;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: NextToken;
+  }
+  export interface DescribeNetworkInsightsAccessScopesResult {
+    /**
+     * The Network Access Scopes.
+     */
+    NetworkInsightsAccessScopes?: NetworkInsightsAccessScopeList;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: String;
+  }
   export interface DescribeNetworkInsightsAnalysesRequest {
     /**
      * The ID of the network insights analyses. You must specify either analysis IDs or a path ID.
@@ -12220,7 +13514,7 @@ declare namespace EC2 {
      */
     AnalysisEndTime?: MillisecondDateTime;
     /**
-     * The filters. The following are possible values:   PathFound - A Boolean value that indicates whether a feasible path is found.   Status - The status of the analysis (running | succeeded | failed).  
+     * The filters. The following are the possible values:   PathFound - A Boolean value that indicates whether a feasible path is found.   Status - The status of the analysis (running | succeeded | failed).  
      */
     Filters?: FilterList;
     /**
@@ -12252,7 +13546,7 @@ declare namespace EC2 {
      */
     NetworkInsightsPathIds?: NetworkInsightsPathIdList;
     /**
-     * The filters. The following are possible values:   Destination - The ID of the resource.   DestinationPort - The destination port.   Name - The path name.   Protocol - The protocol.   Source - The ID of the resource.  
+     * The filters. The following are the possible values:   Destination - The ID of the resource.   DestinationPort - The destination port.   Name - The path name.   Protocol - The protocol.   Source - The ID of the resource.  
      */
     Filters?: FilterList;
     /**
@@ -12346,7 +13640,7 @@ declare namespace EC2 {
   export type DescribeNetworkInterfacesMaxResults = number;
   export interface DescribeNetworkInterfacesRequest {
     /**
-     * One or more filters.    addresses.private-ip-address - The private IPv4 addresses associated with the network interface.    addresses.primary - Whether the private IPv4 address is the primary IP address associated with the network interface.     addresses.association.public-ip - The association ID returned when the network interface was associated with the Elastic IP address (IPv4).    addresses.association.owner-id - The owner ID of the addresses associated with the network interface.    association.association-id - The association ID returned when the network interface was associated with an IPv4 address.    association.allocation-id - The allocation ID returned when you allocated the Elastic IP address (IPv4) for your network interface.    association.ip-owner-id - The owner of the Elastic IP address (IPv4) associated with the network interface.    association.public-ip - The address of the Elastic IP address (IPv4) bound to the network interface.    association.public-dns-name - The public DNS name for the network interface (IPv4).    attachment.attachment-id - The ID of the interface attachment.    attachment.attach-time - The time that the network interface was attached to an instance.    attachment.delete-on-termination - Indicates whether the attachment is deleted when an instance is terminated.    attachment.device-index - The device index to which the network interface is attached.    attachment.instance-id - The ID of the instance to which the network interface is attached.    attachment.instance-owner-id - The owner ID of the instance to which the network interface is attached.    attachment.status - The status of the attachment (attaching | attached | detaching | detached).    availability-zone - The Availability Zone of the network interface.    description - The description of the network interface.    group-id - The ID of a security group associated with the network interface.    group-name - The name of a security group associated with the network interface.    ipv6-addresses.ipv6-address - An IPv6 address associated with the network interface.    mac-address - The MAC address of the network interface.    network-interface-id - The ID of the network interface.    owner-id - The Amazon Web Services account ID of the network interface owner.    private-ip-address - The private IPv4 address or addresses of the network interface.    private-dns-name - The private DNS name of the network interface (IPv4).    requester-id - The alias or Amazon Web Services account ID of the principal or service that created the network interface.    requester-managed - Indicates whether the network interface is being managed by an Amazon Web Service (for example, Amazon Web Services Management Console, Auto Scaling, and so on).    source-dest-check - Indicates whether the network interface performs source/destination checking. A value of true means checking is enabled, and false means checking is disabled. The value must be false for the network interface to perform network address translation (NAT) in your VPC.     status - The status of the network interface. If the network interface is not attached to an instance, the status is available; if a network interface is attached to an instance the status is in-use.    subnet-id - The ID of the subnet for the network interface.    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.    vpc-id - The ID of the VPC for the network interface.  
+     * One or more filters.    addresses.private-ip-address - The private IPv4 addresses associated with the network interface.    addresses.primary - Whether the private IPv4 address is the primary IP address associated with the network interface.     addresses.association.public-ip - The association ID returned when the network interface was associated with the Elastic IP address (IPv4).    addresses.association.owner-id - The owner ID of the addresses associated with the network interface.    association.association-id - The association ID returned when the network interface was associated with an IPv4 address.    association.allocation-id - The allocation ID returned when you allocated the Elastic IP address (IPv4) for your network interface.    association.ip-owner-id - The owner of the Elastic IP address (IPv4) associated with the network interface.    association.public-ip - The address of the Elastic IP address (IPv4) bound to the network interface.    association.public-dns-name - The public DNS name for the network interface (IPv4).    attachment.attachment-id - The ID of the interface attachment.    attachment.attach-time - The time that the network interface was attached to an instance.    attachment.delete-on-termination - Indicates whether the attachment is deleted when an instance is terminated.    attachment.device-index - The device index to which the network interface is attached.    attachment.instance-id - The ID of the instance to which the network interface is attached.    attachment.instance-owner-id - The owner ID of the instance to which the network interface is attached.    attachment.status - The status of the attachment (attaching | attached | detaching | detached).    availability-zone - The Availability Zone of the network interface.    description - The description of the network interface.    group-id - The ID of a security group associated with the network interface.    group-name - The name of a security group associated with the network interface.    ipv6-addresses.ipv6-address - An IPv6 address associated with the network interface.    interface-type - The type of network interface (api_gateway_managed | aws_codestar_connections_managed | branch | efa | gateway_load_balancer | gateway_load_balancer_endpoint | global_accelerator_managed | interface | iot_rules_managed | lambda | load_balancer | nat_gateway | network_load_balancer | quicksight | transit_gateway | trunk | vpc_endpoint).    mac-address - The MAC address of the network interface.    network-interface-id - The ID of the network interface.    owner-id - The Amazon Web Services account ID of the network interface owner.    private-ip-address - The private IPv4 address or addresses of the network interface.    private-dns-name - The private DNS name of the network interface (IPv4).    requester-id - The alias or Amazon Web Services account ID of the principal or service that created the network interface.    requester-managed - Indicates whether the network interface is being managed by an Amazon Web Service (for example, Amazon Web Services Management Console, Auto Scaling, and so on).    source-dest-check - Indicates whether the network interface performs source/destination checking. A value of true means checking is enabled, and false means checking is disabled. The value must be false for the network interface to perform network address translation (NAT) in your VPC.     status - The status of the network interface. If the network interface is not attached to an instance, the status is available; if a network interface is attached to an instance the status is in-use.    subnet-id - The ID of the subnet for the network interface.    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.    vpc-id - The ID of the VPC for the network interface.  
      */
     Filters?: FilterList;
     /**
@@ -12378,7 +13672,7 @@ declare namespace EC2 {
   }
   export interface DescribePlacementGroupsRequest {
     /**
-     * The filters.    group-name - The name of the placement group.    state - The state of the placement group (pending | available | deleting | deleted).    strategy - The strategy of the placement group (cluster | spread | partition).    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources that have a tag with a specific key, regardless of the tag value.  
+     * The filters.    group-name - The name of the placement group.    group-arn - The Amazon Resource Name (ARN) of the placement group.    state - The state of the placement group (pending | available | deleting | deleted).    strategy - The strategy of the placement group (cluster | spread | partition).    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources that have a tag with a specific key, regardless of the tag value.  
      */
     Filters?: FilterList;
     /**
@@ -12918,9 +14212,38 @@ declare namespace EC2 {
      */
     SnapshotId?: String;
   }
+  export type DescribeSnapshotTierStatusMaxResults = number;
+  export interface DescribeSnapshotTierStatusRequest {
+    /**
+     * The filters.    snapshot-id - The snapshot ID.    volume-id - The ID of the volume the snapshot is for.    last-tiering-operation - The state of the last archive or restore action. (archival-in-progress | archival-completed | archival-failed | permanent-restore-in-progress | permanent-restore-completed | permanent-restore-failed | temporary-restore-in-progress | temporary-restore-completed | temporary-restore-failed)  
+     */
+    Filters?: FilterList;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: String;
+    /**
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
+     */
+    MaxResults?: DescribeSnapshotTierStatusMaxResults;
+  }
+  export interface DescribeSnapshotTierStatusResult {
+    /**
+     * Information about the snapshot's storage tier.
+     */
+    SnapshotTierStatuses?: snapshotTierStatusSet;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: String;
+  }
   export interface DescribeSnapshotsRequest {
     /**
-     * The filters.    description - A description of the snapshot.    encrypted - Indicates whether the snapshot is encrypted (true | false)    owner-alias - The owner alias, from an Amazon-maintained list (amazon). This is not the user-configured Amazon Web Services account alias set using the IAM console. We recommend that you use the related parameter instead of this filter.    owner-id - The Amazon Web Services account ID of the owner. We recommend that you use the related parameter instead of this filter.    progress - The progress of the snapshot, as a percentage (for example, 80%).    snapshot-id - The snapshot ID.    start-time - The time stamp when the snapshot was initiated.    status - The status of the snapshot (pending | completed | error).    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.    volume-id - The ID of the volume the snapshot is for.    volume-size - The size of the volume, in GiB.  
+     * The filters.    description - A description of the snapshot.    encrypted - Indicates whether the snapshot is encrypted (true | false)    owner-alias - The owner alias, from an Amazon-maintained list (amazon). This is not the user-configured Amazon Web Services account alias set using the IAM console. We recommend that you use the related parameter instead of this filter.    owner-id - The Amazon Web Services account ID of the owner. We recommend that you use the related parameter instead of this filter.    progress - The progress of the snapshot, as a percentage (for example, 80%).    snapshot-id - The snapshot ID.    start-time - The time stamp when the snapshot was initiated.    status - The status of the snapshot (pending | completed | error).    storage-tier - The storage tier of the snapshot (archive | standard).    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.    volume-id - The ID of the volume the snapshot is for.    volume-size - The size of the volume, in GiB.  
      */
     Filters?: FilterList;
     /**
@@ -13226,7 +14549,7 @@ declare namespace EC2 {
   export type DescribeSubnetsMaxResults = number;
   export interface DescribeSubnetsRequest {
     /**
-     * One or more filters.    availability-zone - The Availability Zone for the subnet. You can also use availabilityZone as the filter name.    availability-zone-id - The ID of the Availability Zone for the subnet. You can also use availabilityZoneId as the filter name.    available-ip-address-count - The number of IPv4 addresses in the subnet that are available.    cidr-block - The IPv4 CIDR block of the subnet. The CIDR block you specify must exactly match the subnet's CIDR block for information to be returned for the subnet. You can also use cidr or cidrBlock as the filter names.    default-for-az - Indicates whether this is the default subnet for the Availability Zone. You can also use defaultForAz as the filter name.    ipv6-cidr-block-association.ipv6-cidr-block - An IPv6 CIDR block associated with the subnet.    ipv6-cidr-block-association.association-id - An association ID for an IPv6 CIDR block associated with the subnet.    ipv6-cidr-block-association.state - The state of an IPv6 CIDR block associated with the subnet.    outpost-arn - The Amazon Resource Name (ARN) of the Outpost.    owner-id - The ID of the Amazon Web Services account that owns the subnet.    state - The state of the subnet (pending | available).    subnet-arn - The Amazon Resource Name (ARN) of the subnet.    subnet-id - The ID of the subnet.    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.    vpc-id - The ID of the VPC for the subnet.  
+     * One or more filters.    availability-zone - The Availability Zone for the subnet. You can also use availabilityZone as the filter name.    availability-zone-id - The ID of the Availability Zone for the subnet. You can also use availabilityZoneId as the filter name.    available-ip-address-count - The number of IPv4 addresses in the subnet that are available.    cidr-block - The IPv4 CIDR block of the subnet. The CIDR block you specify must exactly match the subnet's CIDR block for information to be returned for the subnet. You can also use cidr or cidrBlock as the filter names.    default-for-az - Indicates whether this is the default subnet for the Availability Zone (true | false). You can also use defaultForAz as the filter name.    ipv6-cidr-block-association.ipv6-cidr-block - An IPv6 CIDR block associated with the subnet.    ipv6-cidr-block-association.association-id - An association ID for an IPv6 CIDR block associated with the subnet.    ipv6-cidr-block-association.state - The state of an IPv6 CIDR block associated with the subnet.    ipv6-native - Indicates whether this is an IPv6 only subnet (true | false).    outpost-arn - The Amazon Resource Name (ARN) of the Outpost.    owner-id - The ID of the Amazon Web Services account that owns the subnet.    state - The state of the subnet (pending | available).    subnet-arn - The Amazon Resource Name (ARN) of the subnet.    subnet-id - The ID of the subnet.    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.    vpc-id - The ID of the VPC for the subnet.  
      */
     Filters?: FilterList;
     /**
@@ -13905,7 +15228,7 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * One or more filters.    service-id - The ID of the service.    vpc-endpoint-owner - The ID of the Amazon Web Services account ID that owns the endpoint.    vpc-endpoint-state - The state of the endpoint (pendingAcceptance | pending | available | deleting | deleted | rejected | failed).    vpc-endpoint-id - The ID of the endpoint.  
+     * One or more filters.    ip-address-type - The IP address type (ipv4 | ipv6).    service-id - The ID of the service.    vpc-endpoint-owner - The ID of the Amazon Web Services account ID that owns the endpoint.    vpc-endpoint-state - The state of the endpoint (pendingAcceptance | pending | available | deleting | deleted | rejected | failed).    vpc-endpoint-id - The ID of the endpoint.  
      */
     Filters?: FilterList;
     /**
@@ -13937,7 +15260,7 @@ declare namespace EC2 {
      */
     ServiceIds?: VpcEndpointServiceIdList;
     /**
-     * One or more filters.    service-name - The name of the service.    service-id - The ID of the service.    service-state - The state of the service (Pending | Available | Deleting | Deleted | Failed).     tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.  
+     * One or more filters.    service-name - The name of the service.    service-id - The ID of the service.    service-state - The state of the service (Pending | Available | Deleting | Deleted | Failed).     supported-ip-address-types - The IP address type (ipv4 | ipv6).    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.  
      */
     Filters?: FilterList;
     /**
@@ -14001,7 +15324,7 @@ declare namespace EC2 {
      */
     ServiceNames?: ValueStringList;
     /**
-     * One or more filters.    service-name - The name of the service.    service-type - The type of service (Interface | Gateway).    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.  
+     * One or more filters.    service-name - The name of the service.    service-type - The type of service (Interface | Gateway).    supported-ip-address-types - The IP address type (ipv4 | ipv6).    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.  
      */
     Filters?: FilterList;
     /**
@@ -14037,7 +15360,7 @@ declare namespace EC2 {
      */
     VpcEndpointIds?: VpcEndpointIdList;
     /**
-     * One or more filters.    service-name - The name of the service.    vpc-id - The ID of the VPC in which the endpoint resides.    vpc-endpoint-id - The ID of the endpoint.    vpc-endpoint-state - The state of the endpoint (pendingAcceptance | pending | available | deleting | deleted | rejected | failed).    vpc-endpoint-type - The type of VPC endpoint (Interface | Gateway | GatewayLoadBalancer).    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.  
+     * One or more filters.    ip-address-type - The IP address type (ipv4 | ipv6).    service-name - The name of the service.    vpc-id - The ID of the VPC in which the endpoint resides.    vpc-endpoint-id - The ID of the endpoint.    vpc-endpoint-state - The state of the endpoint (pendingAcceptance | pending | available | deleting | deleted | rejected | failed).    vpc-endpoint-type - The type of VPC endpoint (Interface | Gateway | GatewayLoadBalancer).    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.  
      */
     Filters?: FilterList;
     /**
@@ -14336,6 +15659,58 @@ declare namespace EC2 {
      */
     EbsEncryptionByDefault?: Boolean;
   }
+  export interface DisableFastLaunchRequest {
+    /**
+     * The ID of the image for which you’re turning off faster launching, and removing pre-provisioned snapshots.
+     */
+    ImageId: ImageId;
+    /**
+     * Forces the image settings to turn off faster launching for your Windows AMI. This parameter overrides any errors that are encountered while cleaning up resources in your account.
+     */
+    Force?: Boolean;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface DisableFastLaunchResult {
+    /**
+     * The ID of the image for which faster-launching has been turned off.
+     */
+    ImageId?: ImageId;
+    /**
+     * The pre-provisioning resource type that must be cleaned after turning off faster launching for the Windows AMI. Supported values include: snapshot.
+     */
+    ResourceType?: FastLaunchResourceType;
+    /**
+     * Parameters that were used for faster launching for the Windows AMI before faster launching was turned off. This informs the clean-up process.
+     */
+    SnapshotConfiguration?: FastLaunchSnapshotConfigurationResponse;
+    /**
+     * The launch template that was used to launch Windows instances from pre-provisioned snapshots.
+     */
+    LaunchTemplate?: FastLaunchLaunchTemplateSpecificationResponse;
+    /**
+     * The maximum number of parallel instances to launch for creating resources.
+     */
+    MaxParallelLaunches?: Integer;
+    /**
+     * The owner of the Windows AMI for which faster launching was turned off.
+     */
+    OwnerId?: String;
+    /**
+     * The current state of faster launching for the specified Windows AMI.
+     */
+    State?: FastLaunchStateCode;
+    /**
+     * The reason that the state changed for faster launching for the Windows AMI.
+     */
+    StateTransitionReason?: String;
+    /**
+     * The time that the state changed for faster launching for the Windows AMI.
+     */
+    StateTransitionTime?: MillisecondDateTime;
+  }
   export interface DisableFastSnapshotRestoreErrorItem {
     /**
      * The ID of the snapshot.
@@ -14454,6 +15829,22 @@ declare namespace EC2 {
      * Returns true if the request succeeds; otherwise, it returns an error.
      */
     Return?: Boolean;
+  }
+  export interface DisableIpamOrganizationAdminAccountRequest {
+    /**
+     * A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The Organizations member account ID that you want to disable as IPAM account.
+     */
+    DelegatedAdminAccountId: String;
+  }
+  export interface DisableIpamOrganizationAdminAccountResult {
+    /**
+     * The result of disabling the IPAM account.
+     */
+    Success?: Boolean;
   }
   export interface DisableSerialConsoleAccessRequest {
     /**
@@ -14821,6 +16212,19 @@ declare namespace EC2 {
   }
   export type DnsEntrySet = DnsEntry[];
   export type DnsNameState = "pendingVerification"|"verified"|"failed"|string;
+  export interface DnsOptions {
+    /**
+     * The DNS records created for the endpoint.
+     */
+    DnsRecordIpType?: DnsRecordIpType;
+  }
+  export interface DnsOptionsSpecification {
+    /**
+     * The DNS records created for the endpoint.
+     */
+    DnsRecordIpType?: DnsRecordIpType;
+  }
+  export type DnsRecordIpType = "ipv4"|"dualstack"|"ipv6"|"service-defined"|string;
   export interface DnsServersOptionsModifyStructure {
     /**
      * The IPv4 address range, in CIDR notation, of the DNS servers to be used. You can specify up to two DNS servers. Ensure that the DNS servers can be reached by the clients. The specified values overwrite the existing values.
@@ -14865,11 +16269,11 @@ declare namespace EC2 {
      */
     Throughput?: Integer;
     /**
-     * The ARN of the Outpost on which the snapshot is stored.
+     * The ARN of the Outpost on which the snapshot is stored. This parameter is only supported on BlockDeviceMapping objects called by  CreateImage.
      */
     OutpostArn?: String;
     /**
-     * Indicates whether the encryption state of an EBS volume is changed while being restored from a backing snapshot. The effect of setting the encryption state to true depends on the volume origin (new or from a snapshot), starting encryption state, ownership, and whether encryption by default is enabled. For more information, see Amazon EBS encryption in the Amazon EC2 User Guide. In no case can you remove encryption from an encrypted volume. Encrypted volumes can only be attached to instances that support Amazon EBS encryption. For more information, see Supported instance types. This parameter is not returned by .
+     * Indicates whether the encryption state of an EBS volume is changed while being restored from a backing snapshot. The effect of setting the encryption state to true depends on the volume origin (new or from a snapshot), starting encryption state, ownership, and whether encryption by default is enabled. For more information, see Amazon EBS encryption in the Amazon EC2 User Guide. In no case can you remove encryption from an encrypted volume. Encrypted volumes can only be attached to instances that support Amazon EBS encryption. For more information, see Supported instance types. This parameter is not returned by DescribeImageAttribute.
      */
     Encrypted?: Boolean;
   }
@@ -14976,7 +16380,7 @@ declare namespace EC2 {
     /**
      * The ID of the Elastic Graphics accelerator.
      */
-    ElasticGpuId?: String;
+    ElasticGpuId?: ElasticGpuId;
     /**
      * The ID of the association.
      */
@@ -15091,6 +16495,70 @@ declare namespace EC2 {
      * The updated status of encryption by default.
      */
     EbsEncryptionByDefault?: Boolean;
+  }
+  export interface EnableFastLaunchRequest {
+    /**
+     * The ID of the image for which you’re enabling faster launching.
+     */
+    ImageId: ImageId;
+    /**
+     * The type of resource to use for pre-provisioning the Windows AMI for faster launching. Supported values include: snapshot, which is the default value.
+     */
+    ResourceType?: String;
+    /**
+     * Configuration settings for creating and managing the snapshots that are used for pre-provisioning the Windows AMI for faster launching. The associated ResourceType must be snapshot.
+     */
+    SnapshotConfiguration?: FastLaunchSnapshotConfigurationRequest;
+    /**
+     * The launch template to use when launching Windows instances from pre-provisioned snapshots. Launch template parameters can include either the name or ID of the launch template, but not both.
+     */
+    LaunchTemplate?: FastLaunchLaunchTemplateSpecificationRequest;
+    /**
+     * The maximum number of parallel instances to launch for creating resources. Value must be 6 or greater. 
+     */
+    MaxParallelLaunches?: Integer;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface EnableFastLaunchResult {
+    /**
+     * The image ID that identifies the Windows AMI for which faster launching was enabled.
+     */
+    ImageId?: ImageId;
+    /**
+     * The type of resource that was defined for pre-provisioning the Windows AMI for faster launching.
+     */
+    ResourceType?: FastLaunchResourceType;
+    /**
+     * The configuration settings that were defined for creating and managing the pre-provisioned snapshots for faster launching of the Windows AMI. This property is returned when the associated resourceType is snapshot.
+     */
+    SnapshotConfiguration?: FastLaunchSnapshotConfigurationResponse;
+    /**
+     * The launch template that is used when launching Windows instances from pre-provisioned snapshots.
+     */
+    LaunchTemplate?: FastLaunchLaunchTemplateSpecificationResponse;
+    /**
+     * The maximum number of parallel instances to launch for creating resources.
+     */
+    MaxParallelLaunches?: Integer;
+    /**
+     * The owner ID for the Windows AMI for which faster launching was enabled.
+     */
+    OwnerId?: String;
+    /**
+     * The current state of faster launching for the specified Windows AMI.
+     */
+    State?: FastLaunchStateCode;
+    /**
+     * The reason that the state changed for faster launching for the Windows AMI.
+     */
+    StateTransitionReason?: String;
+    /**
+     * The time that the state changed for faster launching for the Windows AMI.
+     */
+    StateTransitionTime?: MillisecondDateTime;
   }
   export interface EnableFastSnapshotRestoreErrorItem {
     /**
@@ -15215,6 +16683,22 @@ declare namespace EC2 {
      */
     Return?: Boolean;
   }
+  export interface EnableIpamOrganizationAdminAccountRequest {
+    /**
+     * A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The Organizations member account ID that you want to enable as the IPAM account.
+     */
+    DelegatedAdminAccountId: String;
+  }
+  export interface EnableIpamOrganizationAdminAccountResult {
+    /**
+     * The result of enabling the IPAM account.
+     */
+    Success?: Boolean;
+  }
   export interface EnableSerialConsoleAccessRequest {
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
@@ -15333,6 +16817,8 @@ declare namespace EC2 {
   }
   export type EventType = "instanceChange"|"fleetRequestChange"|"error"|"information"|string;
   export type ExcessCapacityTerminationPolicy = "noTermination"|"default"|string;
+  export type ExcludedInstanceType = string;
+  export type ExcludedInstanceTypeSet = ExcludedInstanceType[];
   export type ExecutableByStringList = String[];
   export interface Explanation {
     /**
@@ -15380,7 +16866,7 @@ declare namespace EC2 {
      */
     DestinationVpc?: AnalysisComponent;
     /**
-     * The direction. The following are possible values:   egress   ingress  
+     * The direction. The following are the possible values:   egress   ingress  
      */
     Direction?: String;
     /**
@@ -15515,6 +17001,22 @@ declare namespace EC2 {
      * The VPN gateway.
      */
     VpnGateway?: AnalysisComponent;
+    /**
+     * The transit gateway.
+     */
+    TransitGateway?: AnalysisComponent;
+    /**
+     * The transit gateway route table.
+     */
+    TransitGatewayRouteTable?: AnalysisComponent;
+    /**
+     * The transit gateway route table route.
+     */
+    TransitGatewayRouteTableRoute?: TransitGatewayRouteTableRoute;
+    /**
+     * The transit gateway attachment.
+     */
+    TransitGatewayAttachment?: AnalysisComponent;
   }
   export type ExplanationList = Explanation[];
   export interface ExportClientVpnClientCertificateRevocationListRequest {
@@ -15804,6 +17306,49 @@ declare namespace EC2 {
     ReservedInstancesId?: String;
   }
   export type FailedQueuedPurchaseDeletionSet = FailedQueuedPurchaseDeletion[];
+  export type FastLaunchImageIdList = ImageId[];
+  export interface FastLaunchLaunchTemplateSpecificationRequest {
+    /**
+     * The ID of the launch template to use for faster launching for a Windows AMI.
+     */
+    LaunchTemplateId?: LaunchTemplateId;
+    /**
+     * The name of the launch template to use for faster launching for a Windows AMI.
+     */
+    LaunchTemplateName?: String;
+    /**
+     * The version of the launch template to use for faster launching for a Windows AMI.
+     */
+    Version: String;
+  }
+  export interface FastLaunchLaunchTemplateSpecificationResponse {
+    /**
+     * The ID of the launch template for faster launching of the associated Windows AMI.
+     */
+    LaunchTemplateId?: LaunchTemplateId;
+    /**
+     * The name of the launch template for faster launching of the associated Windows AMI.
+     */
+    LaunchTemplateName?: String;
+    /**
+     * The version of the launch template for faster launching of the associated Windows AMI.
+     */
+    Version?: String;
+  }
+  export type FastLaunchResourceType = "snapshot"|string;
+  export interface FastLaunchSnapshotConfigurationRequest {
+    /**
+     * The number of pre-provisioned snapshots to keep on hand for a fast-launch enabled Windows AMI.
+     */
+    TargetResourceCount?: Integer;
+  }
+  export interface FastLaunchSnapshotConfigurationResponse {
+    /**
+     * The number of pre-provisioned snapshots requested to keep on hand for a fast-launch enabled Windows AMI.
+     */
+    TargetResourceCount?: Integer;
+  }
+  export type FastLaunchStateCode = "enabling"|"enabling-failed"|"enabled"|"enabled-failed"|"disabling"|"disabling-failed"|string;
   export type FastSnapshotRestoreStateCode = "enabling"|"optimizing"|"enabled"|"disabling"|"disabled"|string;
   export interface FederatedAuthentication {
     /**
@@ -15831,11 +17376,12 @@ declare namespace EC2 {
      */
     Name?: String;
     /**
-     * The filter values. Filter values are case-sensitive.
+     * The filter values. Filter values are case-sensitive. If you specify multiple values for a filter, the values are joined with an OR, and the request returns all results that match any of the specified values.
      */
     Values?: ValueStringList;
   }
   export type FilterList = Filter[];
+  export type FindingsFound = "true"|"false"|"unknown"|string;
   export type FleetActivityStatus = "error"|"pending_fulfillment"|"pending_termination"|"fulfilled"|string;
   export interface FleetCapacityReservation {
     /**
@@ -15904,7 +17450,7 @@ declare namespace EC2 {
      */
     FleetState?: FleetStateCode;
     /**
-     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see Ensuring Idempotency. Constraints: Maximum 64 ASCII characters
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see Ensuring idempotency. Constraints: Maximum 64 ASCII characters
      */
     ClientToken?: String;
     /**
@@ -16001,7 +17547,7 @@ declare namespace EC2 {
   }
   export interface FleetLaunchTemplateOverrides {
     /**
-     * The instance type.
+     * The instance type.  If you specify InstanceTypes, you can't specify InstanceRequirements. 
      */
     InstanceType?: InstanceType;
     /**
@@ -16028,12 +17574,16 @@ declare namespace EC2 {
      * The location where the instance launched, if applicable.
      */
     Placement?: PlacementResponse;
+    /**
+     * The attributes for the instance types. When you specify instance attributes, Amazon EC2 will identify instance types with those attributes.  If you specify InstanceRequirements, you can't specify InstanceTypes. 
+     */
+    InstanceRequirements?: InstanceRequirements;
   }
   export type FleetLaunchTemplateOverridesList = FleetLaunchTemplateOverrides[];
   export type FleetLaunchTemplateOverridesListRequest = FleetLaunchTemplateOverridesRequest[];
   export interface FleetLaunchTemplateOverridesRequest {
     /**
-     * The instance type.
+     * The instance type.  If you specify InstanceTypes, you can't specify InstanceRequirements. 
      */
     InstanceType?: InstanceType;
     /**
@@ -16060,6 +17610,10 @@ declare namespace EC2 {
      * The location where the instance launched, if applicable.
      */
     Placement?: Placement;
+    /**
+     * The attributes for the instance types. When you specify instance attributes, Amazon EC2 will identify instance types with those attributes.  If you specify InstanceRequirements, you can't specify InstanceTypes. 
+     */
+    InstanceRequirements?: InstanceRequirementsRequest;
   }
   export interface FleetLaunchTemplateSpecification {
     /**
@@ -16090,19 +17644,27 @@ declare namespace EC2 {
     Version?: String;
   }
   export type FleetOnDemandAllocationStrategy = "lowest-price"|"prioritized"|string;
-  export type FleetReplacementStrategy = "launch"|string;
+  export type FleetReplacementStrategy = "launch"|"launch-before-terminate"|string;
   export type FleetSet = FleetData[];
   export interface FleetSpotCapacityRebalance {
     /**
-     * To allow EC2 Fleet to launch a replacement Spot Instance when an instance rebalance notification is emitted for an existing Spot Instance in the fleet, specify launch. Only available for fleets of type maintain.  When a replacement instance is launched, the instance marked for rebalance is not automatically terminated. You can terminate it, or you can leave it running. You are charged for both instances while they are running. 
+     * The replacement strategy to use. Only available for fleets of type maintain.  launch - EC2 Fleet launches a new replacement Spot Instance when a rebalance notification is emitted for an existing Spot Instance in the fleet. EC2 Fleet does not terminate the instances that receive a rebalance notification. You can terminate the old instances, or you can leave them running. You are charged for all instances while they are running.   launch-before-terminate - EC2 Fleet launches a new replacement Spot Instance when a rebalance notification is emitted for an existing Spot Instance in the fleet, and then, after a delay that you specify (in TerminationDelay), terminates the instances that received a rebalance notification.
      */
     ReplacementStrategy?: FleetReplacementStrategy;
+    /**
+     * The amount of time (in seconds) that Amazon EC2 waits before terminating the old Spot Instance after launching a new replacement Spot Instance. Required when ReplacementStrategy is set to launch-before-terminate. Not valid when ReplacementStrategy is set to launch. Valid values: Minimum value of 120 seconds. Maximum value of 7200 seconds.
+     */
+    TerminationDelay?: Integer;
   }
   export interface FleetSpotCapacityRebalanceRequest {
     /**
-     * The replacement strategy to use. Only available for fleets of type maintain. To allow EC2 Fleet to launch a replacement Spot Instance when an instance rebalance notification is emitted for an existing Spot Instance in the fleet, specify launch. You must specify a value, otherwise you get an error.  When a replacement instance is launched, the instance marked for rebalance is not automatically terminated. You can terminate it, or you can leave it running. You are charged for all instances while they are running. 
+     * The replacement strategy to use. Only available for fleets of type maintain.  launch - EC2 Fleet launches a replacement Spot Instance when a rebalance notification is emitted for an existing Spot Instance in the fleet. EC2 Fleet does not terminate the instances that receive a rebalance notification. You can terminate the old instances, or you can leave them running. You are charged for all instances while they are running.   launch-before-terminate - EC2 Fleet launches a replacement Spot Instance when a rebalance notification is emitted for an existing Spot Instance in the fleet, and then, after a delay that you specify (in TerminationDelay), terminates the instances that received a rebalance notification.
      */
     ReplacementStrategy?: FleetReplacementStrategy;
+    /**
+     * The amount of time (in seconds) that Amazon EC2 waits before terminating the old Spot Instance after launching a new replacement Spot Instance. Required when ReplacementStrategy is set to launch-before-terminate. Not valid when ReplacementStrategy is set to launch. Valid values: Minimum value of 120 seconds. Maximum value of 7200 seconds.
+     */
+    TerminationDelay?: Integer;
   }
   export interface FleetSpotMaintenanceStrategies {
     /**
@@ -16326,6 +17888,7 @@ declare namespace EC2 {
   }
   export type FreeTierEligibleFlag = boolean;
   export type GVCDMaxResults = number;
+  export type GatewayAssociationState = "associated"|"not-associated"|"associating"|"disassociating"|string;
   export type GatewayType = "ipsec.1"|string;
   export interface GetAssociatedEnclaveCertificateIamRolesRequest {
     /**
@@ -16424,9 +17987,9 @@ declare namespace EC2 {
     /**
      * The ID of the address pool.
      */
-    PoolId: CoipPoolId;
+    PoolId: Ipv4PoolCoipId;
     /**
-     * The filters. The following are the possible values:    coip-address-usage.allocation-id       coip-address-usage.aws-account-id       coip-address-usage.aws-service       coip-address-usage.co-ip   
+     * One or more filters.    coip-address-usage.allocation-id - The allocation ID of the address.    coip-address-usage.aws-account-id - The ID of the Amazon Web Services account that is using the customer-owned IP address.    coip-address-usage.aws-service - The Amazon Web Services service that is using the customer-owned IP address.    coip-address-usage.co-ip - The customer-owned IP address.  
      */
     Filters?: FilterList;
     /**
@@ -16629,6 +18192,224 @@ declare namespace EC2 {
      */
     TotalUpfrontPrice?: String;
   }
+  export interface GetInstanceTypesFromInstanceRequirementsRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The processor architecture type.
+     */
+    ArchitectureTypes: ArchitectureTypeSet;
+    /**
+     * The virtualization type.
+     */
+    VirtualizationTypes: VirtualizationTypeSet;
+    /**
+     * The attributes required for the instance types.
+     */
+    InstanceRequirements: InstanceRequirementsRequest;
+    /**
+     * The maximum number of results to return in a single call. Specify a value between 1 and&#x2028; 1000. The default value is 1000. To retrieve the remaining results, make another call with&#x2028; the returned NextToken value.
+     */
+    MaxResults?: Integer;
+    /**
+     * The token for the next set of results.
+     */
+    NextToken?: String;
+  }
+  export interface GetInstanceTypesFromInstanceRequirementsResult {
+    /**
+     * The instance types with the specified instance attributes.
+     */
+    InstanceTypes?: InstanceTypeInfoFromInstanceRequirementsSet;
+    /**
+     * The token for the next set of results.
+     */
+    NextToken?: String;
+  }
+  export interface GetInstanceUefiDataRequest {
+    /**
+     * The ID of the instance from which to retrieve the UEFI data.
+     */
+    InstanceId: InstanceId;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface GetInstanceUefiDataResult {
+    /**
+     * The ID of the instance from which to retrieve the UEFI data.
+     */
+    InstanceId?: InstanceId;
+    /**
+     * Base64 representation of the non-volatile UEFI variable store.
+     */
+    UefiData?: String;
+  }
+  export interface GetIpamAddressHistoryRequest {
+    /**
+     * A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The CIDR you want the history of. The CIDR can be an IPv4 or IPv6 IP address range. If you enter a /16 IPv4 CIDR, you will get records that match it exactly. You will not get records for any subnets within the /16 CIDR.
+     */
+    Cidr: String;
+    /**
+     * The ID of the IPAM scope that the CIDR is in.
+     */
+    IpamScopeId: IpamScopeId;
+    /**
+     * The ID of the VPC you want your history records filtered by.
+     */
+    VpcId?: String;
+    /**
+     * The start of the time period for which you are looking for history. If you omit this option, it will default to the value of EndTime.
+     */
+    StartTime?: MillisecondDateTime;
+    /**
+     * The end of the time period for which you are looking for history. If you omit this option, it will default to the current time.
+     */
+    EndTime?: MillisecondDateTime;
+    /**
+     * The maximum number of historical results you would like returned per page. Defaults to 100.
+     */
+    MaxResults?: IpamAddressHistoryMaxResults;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: NextToken;
+  }
+  export interface GetIpamAddressHistoryResult {
+    /**
+     * A historical record for a CIDR within an IPAM scope. If the CIDR is associated with an EC2 instance, you will see an object in the response for the instance and one for the network interface.
+     */
+    HistoryRecords?: IpamAddressHistoryRecordSet;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: NextToken;
+  }
+  export type GetIpamPoolAllocationsMaxResults = number;
+  export interface GetIpamPoolAllocationsRequest {
+    /**
+     * A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The ID of the IPAM pool you want to see the allocations for.
+     */
+    IpamPoolId: IpamPoolId;
+    /**
+     * The ID of the allocation.
+     */
+    IpamPoolAllocationId?: IpamPoolAllocationId;
+    /**
+     * One or more filters for the request. For more information about filtering, see Filtering CLI output.
+     */
+    Filters?: FilterList;
+    /**
+     * The maximum number of results you would like returned per page.
+     */
+    MaxResults?: GetIpamPoolAllocationsMaxResults;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: NextToken;
+  }
+  export interface GetIpamPoolAllocationsResult {
+    /**
+     * The IPAM pool allocations you want information on.
+     */
+    IpamPoolAllocations?: IpamPoolAllocationSet;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: NextToken;
+  }
+  export interface GetIpamPoolCidrsRequest {
+    /**
+     * A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The ID of the IPAM pool you want the CIDR for.
+     */
+    IpamPoolId: IpamPoolId;
+    /**
+     * One or more filters for the request. For more information about filtering, see Filtering CLI output.
+     */
+    Filters?: FilterList;
+    /**
+     * The maximum number of results to return in the request.
+     */
+    MaxResults?: IpamMaxResults;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: NextToken;
+  }
+  export interface GetIpamPoolCidrsResult {
+    /**
+     * Information about the CIDRs provisioned to an IPAM pool.
+     */
+    IpamPoolCidrs?: IpamPoolCidrSet;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: NextToken;
+  }
+  export interface GetIpamResourceCidrsRequest {
+    /**
+     * A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * One or more filters for the request. For more information about filtering, see Filtering CLI output.
+     */
+    Filters?: FilterList;
+    /**
+     * The maximum number of results to return in the request.
+     */
+    MaxResults?: IpamMaxResults;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: NextToken;
+    /**
+     * The ID of the scope that the resource is in.
+     */
+    IpamScopeId: IpamScopeId;
+    /**
+     * The ID of the IPAM pool that the resource is in.
+     */
+    IpamPoolId?: IpamPoolId;
+    /**
+     * The ID of the resource.
+     */
+    ResourceId?: String;
+    /**
+     * The resource type.
+     */
+    ResourceType?: IpamResourceType;
+    ResourceTag?: RequestIpamResourceTag;
+    /**
+     * The ID of the Amazon Web Services account that owns the resource.
+     */
+    ResourceOwner?: String;
+  }
+  export interface GetIpamResourceCidrsResult {
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: NextToken;
+    /**
+     * The resource CIDRs.
+     */
+    IpamResourceCidrs?: IpamResourceCidrSet;
+  }
   export interface GetLaunchTemplateDataRequest {
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
@@ -16705,6 +18486,58 @@ declare namespace EC2 {
      * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
      */
     NextToken?: NextToken;
+  }
+  export interface GetNetworkInsightsAccessScopeAnalysisFindingsRequest {
+    /**
+     * The ID of the Network Access Scope analysis.
+     */
+    NetworkInsightsAccessScopeAnalysisId: NetworkInsightsAccessScopeAnalysisId;
+    /**
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
+     */
+    MaxResults?: NetworkInsightsMaxResults;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: NextToken;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface GetNetworkInsightsAccessScopeAnalysisFindingsResult {
+    /**
+     * The ID of the Network Access Scope analysis.
+     */
+    NetworkInsightsAccessScopeAnalysisId?: NetworkInsightsAccessScopeAnalysisId;
+    /**
+     * The status of Network Access Scope Analysis.
+     */
+    AnalysisStatus?: AnalysisStatus;
+    /**
+     * The findings associated with Network Access Scope Analysis.
+     */
+    AnalysisFindings?: AccessScopeAnalysisFindingList;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: String;
+  }
+  export interface GetNetworkInsightsAccessScopeContentRequest {
+    /**
+     * The ID of the Network Access Scope.
+     */
+    NetworkInsightsAccessScopeId: NetworkInsightsAccessScopeId;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface GetNetworkInsightsAccessScopeContentResult {
+    /**
+     * The Network Access Scope content.
+     */
+    NetworkInsightsAccessScopeContent?: NetworkInsightsAccessScopeContent;
   }
   export interface GetPasswordDataRequest {
     /**
@@ -16793,6 +18626,54 @@ declare namespace EC2 {
      * If true, access to the EC2 serial console of all instances is enabled for your account. If false, access to the EC2 serial console of all instances is disabled for your account.
      */
     SerialConsoleAccessEnabled?: Boolean;
+  }
+  export interface GetSpotPlacementScoresRequest {
+    /**
+     * The instance types. We recommend that you specify at least three instance types. If you specify one or two instance types, or specify variations of a single instance type (for example, an m3.xlarge with and without instance storage), the returned placement score will always be low.  If you specify InstanceTypes, you can't specify InstanceRequirementsWithMetadata.
+     */
+    InstanceTypes?: InstanceTypes;
+    /**
+     * The target capacity.
+     */
+    TargetCapacity: SpotPlacementScoresTargetCapacity;
+    /**
+     * The unit for the target capacity. Default: units (translates to number of instances)
+     */
+    TargetCapacityUnitType?: TargetCapacityUnitType;
+    /**
+     * Specify true so that the response returns a list of scored Availability Zones. Otherwise, the response returns a list of scored Regions. A list of scored Availability Zones is useful if you want to launch all of your Spot capacity into a single Availability Zone.
+     */
+    SingleAvailabilityZone?: Boolean;
+    /**
+     * The Regions used to narrow down the list of Regions to be scored. Enter the Region code, for example, us-east-1.
+     */
+    RegionNames?: RegionNames;
+    /**
+     * The attributes for the instance types. When you specify instance attributes, Amazon EC2 will identify instance types with those attributes. If you specify InstanceRequirementsWithMetadata, you can't specify InstanceTypes.
+     */
+    InstanceRequirementsWithMetadata?: InstanceRequirementsWithMetadataRequest;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The maximum number of results to return in a single call. Specify a value between 1 and&#x2028; 1000. The default value is 1000. To retrieve the remaining results, make another call with&#x2028; the returned NextToken value.
+     */
+    MaxResults?: SpotPlacementScoresMaxResults;
+    /**
+     * The token for the next set of results.
+     */
+    NextToken?: String;
+  }
+  export interface GetSpotPlacementScoresResult {
+    /**
+     * The Spot placement score for the top 10 Regions or Availability Zones, scored on a scale from 1 to 10. Each score&#x2028; reflects how likely it is that each Region or Availability Zone will succeed at fulfilling the specified target capacity&#x2028; at the time of the Spot placement score request. A score of 10 means that your Spot capacity request is highly likely to succeed in that Region or Availability Zone.  If you request a Spot placement score for Regions, a high score assumes that your fleet request will be configured to use all Availability Zones and the capacity-optimized allocation strategy. If you request a Spot placement score for Availability Zones, a high score assumes that your fleet request will be configured to use a single Availability Zone and the capacity-optimized allocation strategy. Different&#x2028; Regions or Availability Zones might return the same score.  The Spot placement score serves as a recommendation only. No score guarantees that your Spot request will be fully or partially fulfilled. 
+     */
+    SpotPlacementScores?: SpotPlacementScores;
+    /**
+     * The token for the next set of results.
+     */
+    NextToken?: String;
   }
   export type GetSubnetCidrReservationsMaxResults = number;
   export interface GetSubnetCidrReservationsRequest {
@@ -17205,6 +19086,10 @@ declare namespace EC2 {
      * Indicates whether the Dedicated Host is in a host resource group. If memberOfServiceLinkedResourceGroup is true, the host is in a host resource group; otherwise, it is not.
      */
     MemberOfServiceLinkedResourceGroup?: Boolean;
+    /**
+     * The Amazon Resource Name (ARN) of the Amazon Web Services Outpost on which the Dedicated Host is allocated.
+     */
+    OutpostArn?: String;
   }
   export interface HostInstance {
     /**
@@ -17242,7 +19127,7 @@ declare namespace EC2 {
     /**
      * The ID of the offering.
      */
-    OfferingId?: String;
+    OfferingId?: OfferingId;
     /**
      * The available payment option.
      */
@@ -17300,7 +19185,7 @@ declare namespace EC2 {
     /**
      * The ID of the reservation that specifies the associated Dedicated Hosts.
      */
-    HostReservationId?: String;
+    HostReservationId?: HostReservationId;
     /**
      * The hourly price of the reservation.
      */
@@ -17312,7 +19197,7 @@ declare namespace EC2 {
     /**
      * The ID of the reservation. This remains the same regardless of which Dedicated Hosts are associated with it.
      */
-    OfferingId?: String;
+    OfferingId?: OfferingId;
     /**
      * The payment option selected for this reservation.
      */
@@ -17338,6 +19223,7 @@ declare namespace EC2 {
   export type HostReservationIdSet = HostReservationId[];
   export type HostReservationSet = HostReservation[];
   export type HostTenancy = "dedicated"|"host"|string;
+  export type HostnameType = "ip-name"|"resource-name"|string;
   export type Hour = number;
   export type HttpTokensState = "optional"|"required"|string;
   export type HypervisorType = "ovm"|"xen"|string;
@@ -17536,6 +19422,10 @@ declare namespace EC2 {
      */
     BootMode?: BootModeValues;
     /**
+     * If the image is configured for NitroTPM support, the value is v2.0. For more information, see NitroTPM in the Amazon Elastic Compute Cloud User Guide.
+     */
+    TpmSupport?: TpmSupportValues;
+    /**
      * The date and time to deprecate the AMI, in UTC, in the following format: YYYY-MM-DDTHH:MM:SSZ. If you specified a value for seconds, Amazon EC2 rounds the seconds to the nearest minute.
      */
     DeprecationTime?: String;
@@ -17573,9 +19463,24 @@ declare namespace EC2 {
      * Indicates whether enhanced networking with the Intel 82599 Virtual Function interface is enabled.
      */
     SriovNetSupport?: AttributeValue;
+    /**
+     * The boot mode.
+     */
     BootMode?: AttributeValue;
+    /**
+     * If the image is configured for NitroTPM support, the value is v2.0.
+     */
+    TpmSupport?: AttributeValue;
+    /**
+     * Base64 representation of the non-volatile UEFI variable store. To retrieve the UEFI data, use the GetInstanceUefiData command. You can inspect and modify the UEFI data by using the python-uefivars tool on GitHub. For more information, see UEFI Secure Boot in the Amazon Elastic Compute Cloud User Guide.
+     */
+    UefiData?: AttributeValue;
+    /**
+     * The date and time, in ISO 8601 date-time format, when the AMI was last used to launch an EC2 instance. When the AMI is used, there is a 24-hour delay before that usage is reported.   lastLaunchedTime data is available starting April 2017. 
+     */
+    LastLaunchedTime?: AttributeValue;
   }
-  export type ImageAttributeName = "description"|"kernel"|"ramdisk"|"launchPermission"|"productCodes"|"blockDeviceMapping"|"sriovNetSupport"|"bootMode"|string;
+  export type ImageAttributeName = "description"|"kernel"|"ramdisk"|"launchPermission"|"productCodes"|"blockDeviceMapping"|"sriovNetSupport"|"bootMode"|"tpmSupport"|"uefiData"|"lastLaunchedTime"|string;
   export interface ImageDiskContainer {
     /**
      * The description of the disk image.
@@ -17607,6 +19512,29 @@ declare namespace EC2 {
   export type ImageIdList = ImageId[];
   export type ImageIdStringList = ImageId[];
   export type ImageList = Image[];
+  export interface ImageRecycleBinInfo {
+    /**
+     * The ID of the AMI.
+     */
+    ImageId?: String;
+    /**
+     * The name of the AMI.
+     */
+    Name?: String;
+    /**
+     * The description of the AMI.
+     */
+    Description?: String;
+    /**
+     * The date and time when the AMI entered the Recycle Bin.
+     */
+    RecycleBinEnterTime?: MillisecondDateTime;
+    /**
+     * The date and time when the AMI is to be permanently deleted from the Recycle Bin.
+     */
+    RecycleBinExitTime?: MillisecondDateTime;
+  }
+  export type ImageRecycleBinInfoList = ImageRecycleBinInfo[];
   export type ImageState = "pending"|"available"|"invalid"|"deregistered"|"transient"|"failed"|"error"|string;
   export type ImageTypeValues = "machine"|"kernel"|"ramdisk"|string;
   export interface ImportClientVpnClientCertificateRevocationListRequest {
@@ -17645,7 +19573,7 @@ declare namespace EC2 {
   export type ImportImageLicenseSpecificationListResponse = ImportImageLicenseConfigurationResponse[];
   export interface ImportImageRequest {
     /**
-     * The architecture of the virtual machine. Valid values: i386 | x86_64 | arm64 
+     * The architecture of the virtual machine. Valid values: i386 | x86_64 
      */
     Architecture?: String;
     /**
@@ -17990,7 +19918,7 @@ declare namespace EC2 {
   }
   export interface ImportKeyPairResult {
     /**
-     * The MD5 public key fingerprint as specified in section 4 of RFC 4716.
+     *   For RSA key pairs, the key fingerprint is the MD5 public key fingerprint as specified in section 4 of RFC 4716.   For ED25519 key pairs, the key fingerprint is the base64-encoded SHA-256 digest, which is the default for OpenSSH, starting with OpenSSH 6.8.  
      */
     KeyFingerprint?: String;
     /**
@@ -18369,6 +20297,22 @@ declare namespace EC2 {
      * The time that the usage operation was last updated.
      */
     UsageOperationUpdateTime?: MillisecondDateTime;
+    /**
+     * The options for the instance hostname.
+     */
+    PrivateDnsNameOptions?: PrivateDnsNameOptionsResponse;
+    /**
+     * The IPv6 address assigned to the instance.
+     */
+    Ipv6Address?: String;
+    /**
+     * If the instance is configured for NitroTPM support, the value is v2.0. For more information, see NitroTPM in the Amazon EC2 User Guide.
+     */
+    TpmSupport?: String;
+    /**
+     * Provides information on the recovery and maintenance options of your instance.
+     */
+    MaintenanceOptions?: InstanceMaintenanceOptions;
   }
   export interface InstanceAttribute {
     /**
@@ -18437,6 +20381,7 @@ declare namespace EC2 {
     UserData?: AttributeValue;
   }
   export type InstanceAttributeName = "instanceType"|"kernel"|"ramdisk"|"userData"|"disableApiTermination"|"instanceInitiatedShutdownBehavior"|"rootDeviceName"|"blockDeviceMapping"|"productCodes"|"sourceDestCheck"|"groupSet"|"ebsOptimized"|"sriovNetSupport"|"enaSupport"|"enclaveOptions"|string;
+  export type InstanceAutoRecoveryState = "disabled"|"default"|string;
   export interface InstanceBlockDeviceMapping {
     /**
      * The device name (for example, /dev/sdh or xvdh).
@@ -18660,6 +20605,8 @@ declare namespace EC2 {
      */
     CpuCredits?: String;
   }
+  export type InstanceGeneration = "current"|"previous"|string;
+  export type InstanceGenerationSet = InstanceGeneration[];
   export type InstanceHealthStatus = "healthy"|"unhealthy"|string;
   export type InstanceId = string;
   export type InstanceIdList = InstanceId[];
@@ -18698,6 +20645,18 @@ declare namespace EC2 {
   export type InstanceLifecycle = "spot"|"on-demand"|string;
   export type InstanceLifecycleType = "spot"|"scheduled"|string;
   export type InstanceList = Instance[];
+  export interface InstanceMaintenanceOptions {
+    /**
+     * Provides information on the current automatic recovery behavior of your instance.
+     */
+    AutoRecovery?: InstanceAutoRecoveryState;
+  }
+  export interface InstanceMaintenanceOptionsRequest {
+    /**
+     * Disables the automatic recovery behavior of your instance or sets it to default. For more information, see Simplified automatic recovery.
+     */
+    AutoRecovery?: InstanceAutoRecoveryState;
+  }
   export interface InstanceMarketOptionsRequest {
     /**
      * The market type.
@@ -18712,7 +20671,7 @@ declare namespace EC2 {
   export type InstanceMetadataEndpointState = "disabled"|"enabled"|string;
   export interface InstanceMetadataOptionsRequest {
     /**
-     * The state of token usage for your instance metadata requests. If the parameter is not specified in the request, the default state is optional. If the state is optional, you can choose to retrieve instance metadata with or without a signed token header on your request. If you retrieve the IAM role credentials without a token, the version 1.0 role credentials are returned. If you retrieve the IAM role credentials using a valid signed token, the version 2.0 role credentials are returned. If the state is required, you must send a signed token header with any instance metadata retrieval requests. In this state, retrieving the IAM role credentials always returns the version 2.0 credentials; the version 1.0 credentials are not available.
+     * The state of token usage for your instance metadata requests. If the state is optional, you can choose to retrieve instance metadata with or without a signed token header on your request. If you retrieve the IAM role credentials without a token, the version 1.0 role credentials are returned. If you retrieve the IAM role credentials using a valid signed token, the version 2.0 role credentials are returned. If the state is required, you must send a signed token header with any instance metadata retrieval requests. In this state, retrieving the IAM role credentials always returns the version 2.0 credentials; the version 1.0 credentials are not available. Default: optional 
      */
     HttpTokens?: HttpTokensState;
     /**
@@ -18720,13 +20679,17 @@ declare namespace EC2 {
      */
     HttpPutResponseHopLimit?: Integer;
     /**
-     * Enables or disables the HTTP metadata endpoint on your instances. If the parameter is not specified, the default state is enabled. If you specify a value of disabled, you will not be able to access your instance metadata.
+     * Enables or disables the HTTP metadata endpoint on your instances. If you specify a value of disabled, you cannot access your instance metadata. Default: enabled 
      */
     HttpEndpoint?: InstanceMetadataEndpointState;
     /**
      * Enables or disables the IPv6 endpoint for the instance metadata service.
      */
     HttpProtocolIpv6?: InstanceMetadataProtocolState;
+    /**
+     * Set to enabled to allow access to instance tags from the instance metadata. Set to disabled to turn off access to instance tags from the instance metadata. For more information, see Work with instance tags using the instance metadata. Default: disabled 
+     */
+    InstanceMetadataTags?: InstanceMetadataTagsState;
   }
   export interface InstanceMetadataOptionsResponse {
     /**
@@ -18734,7 +20697,7 @@ declare namespace EC2 {
      */
     State?: InstanceMetadataOptionsState;
     /**
-     * The state of token usage for your instance metadata requests. If the parameter is not specified in the request, the default state is optional. If the state is optional, you can choose to retrieve instance metadata with or without a signed token header on your request. If you retrieve the IAM role credentials without a token, the version 1.0 role credentials are returned. If you retrieve the IAM role credentials using a valid signed token, the version 2.0 role credentials are returned. If the state is required, you must send a signed token header with any instance metadata retrieval requests. In this state, retrieving the IAM role credential always returns the version 2.0 credentials; the version 1.0 credentials are not available.
+     * The state of token usage for your instance metadata requests. If the state is optional, you can choose to retrieve instance metadata with or without a signed token header on your request. If you retrieve the IAM role credentials without a token, the version 1.0 role credentials are returned. If you retrieve the IAM role credentials using a valid signed token, the version 2.0 role credentials are returned. If the state is required, you must send a signed token header with any instance metadata retrieval requests. In this state, retrieving the IAM role credential always returns the version 2.0 credentials; the version 1.0 credentials are not available. Default: optional 
      */
     HttpTokens?: HttpTokensState;
     /**
@@ -18742,16 +20705,21 @@ declare namespace EC2 {
      */
     HttpPutResponseHopLimit?: Integer;
     /**
-     * Indicates whether the HTTP metadata endpoint on your instances is enabled or disabled.
+     * Indicates whether the HTTP metadata endpoint on your instances is enabled or disabled. If the value is disabled, you cannot access your instance metadata.
      */
     HttpEndpoint?: InstanceMetadataEndpointState;
     /**
      * Indicates whether the IPv6 endpoint for the instance metadata service is enabled or disabled.
      */
     HttpProtocolIpv6?: InstanceMetadataProtocolState;
+    /**
+     * Indicates whether access to instance tags from the instance metadata is enabled or disabled. For more information, see Work with instance tags using the instance metadata.
+     */
+    InstanceMetadataTags?: InstanceMetadataTagsState;
   }
   export type InstanceMetadataOptionsState = "pending"|"applied"|string;
   export type InstanceMetadataProtocolState = "disabled"|"enabled"|string;
+  export type InstanceMetadataTagsState = "disabled"|"enabled"|string;
   export interface InstanceMonitoring {
     /**
      * The ID of the instance.
@@ -18825,7 +20793,7 @@ declare namespace EC2 {
      */
     VpcId?: String;
     /**
-     * Describes the type of network interface. Valid values: interface | efa | trunk 
+     * The type of network interface. Valid values: interface | efa | trunk 
      */
     InterfaceType?: String;
     /**
@@ -18842,6 +20810,10 @@ declare namespace EC2 {
      * The carrier IP address associated with the network interface.
      */
     CarrierIp?: String;
+    /**
+     * The customer-owned IP address associated with the network interface.
+     */
+    CustomerOwnedIp?: String;
     /**
      * The ID of the owner of the Elastic IP address.
      */
@@ -18936,7 +20908,7 @@ declare namespace EC2 {
      */
     AssociateCarrierIpAddress?: Boolean;
     /**
-     * The type of network interface. To create an Elastic Fabric Adapter (EFA), specify efa. For more information, see Elastic Fabric Adapter in the Amazon Elastic Compute Cloud User Guide. Valid values: interface | efa 
+     * The type of network interface. Valid values: interface | efa 
      */
     InterfaceType?: String;
     /**
@@ -18980,6 +20952,192 @@ declare namespace EC2 {
     PrivateIpAddress?: String;
   }
   export type InstancePrivateIpAddressList = InstancePrivateIpAddress[];
+  export interface InstanceRequirements {
+    /**
+     * The minimum and maximum number of vCPUs.
+     */
+    VCpuCount?: VCpuCountRange;
+    /**
+     * The minimum and maximum amount of memory, in MiB.
+     */
+    MemoryMiB?: MemoryMiB;
+    /**
+     * The CPU manufacturers to include.   For instance types with Intel CPUs, specify intel.   For instance types with AMD CPUs, specify amd.   For instance types with Amazon Web Services CPUs, specify amazon-web-services.    Don't confuse the CPU manufacturer with the CPU architecture. Instances will be launched with a compatible CPU architecture based on the Amazon Machine Image (AMI) that you specify in your launch template.  Default: Any manufacturer
+     */
+    CpuManufacturers?: CpuManufacturerSet;
+    /**
+     * The minimum and maximum amount of memory per vCPU, in GiB. Default: No minimum or maximum limits
+     */
+    MemoryGiBPerVCpu?: MemoryGiBPerVCpu;
+    /**
+     * The instance types to exclude. You can use strings with one or more wild cards, represented by an asterisk (*), to exclude an instance type, size, or generation. The following are examples: m5.8xlarge, c5*.*, m5a.*, r*, *3*. For example, if you specify c5*,Amazon EC2 will exclude the entire C5 instance family, which includes all C5a and C5n instance types. If you specify m5a.*, Amazon EC2 will exclude all the M5a instance types, but not the M5n instance types. Default: No excluded instance types
+     */
+    ExcludedInstanceTypes?: ExcludedInstanceTypeSet;
+    /**
+     * Indicates whether current or previous generation instance types are included. The current generation instance types are recommended for use. Current generation instance types are typically the latest two to three generations in each instance family. For more information, see Instance types in the Amazon EC2 User Guide. For current generation instance types, specify current. For previous generation instance types, specify previous. Default: Current and previous generation instance types
+     */
+    InstanceGenerations?: InstanceGenerationSet;
+    /**
+     * The price protection threshold for Spot Instances. This is the maximum you’ll pay for a Spot Instance, expressed as a percentage above the cheapest M, C, or R instance type with your specified attributes. When Amazon EC2 selects instance types with your attributes, it excludes instance types priced above your threshold. The parameter accepts an integer, which Amazon EC2 interprets as a percentage. To turn off price protection, specify a high value, such as 999999. This parameter is not supported for GetSpotPlacementScores and GetInstanceTypesFromInstanceRequirements.  If you set TargetCapacityUnitType to vcpu or memory-mib, the price protection threshold is applied based on the per-vCPU or per-memory price instead of the per-instance price.  Default: 100 
+     */
+    SpotMaxPricePercentageOverLowestPrice?: Integer;
+    /**
+     * The price protection threshold for On-Demand Instances. This is the maximum you’ll pay for an On-Demand Instance, expressed as a percentage above the cheapest M, C, or R instance type with your specified attributes. When Amazon EC2 selects instance types with your attributes, it excludes instance types priced above your threshold. The parameter accepts an integer, which Amazon EC2 interprets as a percentage. To turn off price protection, specify a high value, such as 999999. This parameter is not supported for GetSpotPlacementScores and GetInstanceTypesFromInstanceRequirements.  If you set TargetCapacityUnitType to vcpu or memory-mib, the price protection threshold is applied based on the per-vCPU or per-memory price instead of the per-instance price.  Default: 20 
+     */
+    OnDemandMaxPricePercentageOverLowestPrice?: Integer;
+    /**
+     * Indicates whether bare metal instance types must be included, excluded, or required.   To include bare metal instance types, specify included.   To require only bare metal instance types, specify required.   To exclude bare metal instance types, specify excluded.   Default: excluded 
+     */
+    BareMetal?: BareMetal;
+    /**
+     * Indicates whether burstable performance T instance types are included, excluded, or required. For more information, see Burstable performance instances.   To include burstable performance instance types, specify included.   To require only burstable performance instance types, specify required.   To exclude burstable performance instance types, specify excluded.   Default: excluded 
+     */
+    BurstablePerformance?: BurstablePerformance;
+    /**
+     * Indicates whether instance types must support hibernation for On-Demand Instances. This parameter is not supported for GetSpotPlacementScores. Default: false 
+     */
+    RequireHibernateSupport?: Boolean;
+    /**
+     * The minimum and maximum number of network interfaces. Default: No minimum or maximum limits
+     */
+    NetworkInterfaceCount?: NetworkInterfaceCount;
+    /**
+     * Indicates whether instance types with instance store volumes are included, excluded, or required. For more information, Amazon EC2 instance store in the Amazon EC2 User Guide.   To include instance types with instance store volumes, specify included.   To require only instance types with instance store volumes, specify required.   To exclude instance types with instance store volumes, specify excluded.   Default: included 
+     */
+    LocalStorage?: LocalStorage;
+    /**
+     * The type of local storage that is required.   For instance types with hard disk drive (HDD) storage, specify hdd.   For instance types with solid state drive (SDD) storage, specify sdd.   Default: hdd and sdd 
+     */
+    LocalStorageTypes?: LocalStorageTypeSet;
+    /**
+     * The minimum and maximum amount of total local storage, in GB. Default: No minimum or maximum limits
+     */
+    TotalLocalStorageGB?: TotalLocalStorageGB;
+    /**
+     * The minimum and maximum baseline bandwidth to Amazon EBS, in Mbps. For more information, see Amazon EBS–optimized instances in the Amazon EC2 User Guide. Default: No minimum or maximum limits
+     */
+    BaselineEbsBandwidthMbps?: BaselineEbsBandwidthMbps;
+    /**
+     * The accelerator types that must be on the instance type.   For instance types with GPU accelerators, specify gpu.   For instance types with FPGA accelerators, specify fpga.   For instance types with inference accelerators, specify inference.   Default: Any accelerator type
+     */
+    AcceleratorTypes?: AcceleratorTypeSet;
+    /**
+     * The minimum and maximum number of accelerators (GPUs, FPGAs, or Amazon Web Services Inferentia chips) on an instance. To exclude accelerator-enabled instance types, set Max to 0. Default: No minimum or maximum limits
+     */
+    AcceleratorCount?: AcceleratorCount;
+    /**
+     * Indicates whether instance types must have accelerators by specific manufacturers.   For instance types with NVIDIA devices, specify nvidia.   For instance types with AMD devices, specify amd.   For instance types with Amazon Web Services devices, specify amazon-web-services.   For instance types with Xilinx devices, specify xilinx.   Default: Any manufacturer
+     */
+    AcceleratorManufacturers?: AcceleratorManufacturerSet;
+    /**
+     * The accelerators that must be on the instance type.   For instance types with NVIDIA A100 GPUs, specify a100.   For instance types with NVIDIA V100 GPUs, specify v100.   For instance types with NVIDIA K80 GPUs, specify k80.   For instance types with NVIDIA T4 GPUs, specify t4.   For instance types with NVIDIA M60 GPUs, specify m60.   For instance types with AMD Radeon Pro V520 GPUs, specify radeon-pro-v520.   For instance types with Xilinx VU9P FPGAs, specify vu9p.   Default: Any accelerator
+     */
+    AcceleratorNames?: AcceleratorNameSet;
+    /**
+     * The minimum and maximum amount of total accelerator memory, in MiB. Default: No minimum or maximum limits
+     */
+    AcceleratorTotalMemoryMiB?: AcceleratorTotalMemoryMiB;
+  }
+  export interface InstanceRequirementsRequest {
+    /**
+     * The minimum and maximum number of vCPUs.
+     */
+    VCpuCount: VCpuCountRangeRequest;
+    /**
+     * The minimum and maximum amount of memory, in MiB.
+     */
+    MemoryMiB: MemoryMiBRequest;
+    /**
+     * The CPU manufacturers to include.   For instance types with Intel CPUs, specify intel.   For instance types with AMD CPUs, specify amd.   For instance types with Amazon Web Services CPUs, specify amazon-web-services.    Don't confuse the CPU manufacturer with the CPU architecture. Instances will be launched with a compatible CPU architecture based on the Amazon Machine Image (AMI) that you specify in your launch template.  Default: Any manufacturer
+     */
+    CpuManufacturers?: CpuManufacturerSet;
+    /**
+     * The minimum and maximum amount of memory per vCPU, in GiB. Default: No minimum or maximum limits
+     */
+    MemoryGiBPerVCpu?: MemoryGiBPerVCpuRequest;
+    /**
+     * The instance types to exclude. You can use strings with one or more wild cards, represented by an asterisk (*), to exclude an instance family, type, size, or generation. The following are examples: m5.8xlarge, c5*.*, m5a.*, r*, *3*. For example, if you specify c5*,Amazon EC2 will exclude the entire C5 instance family, which includes all C5a and C5n instance types. If you specify m5a.*, Amazon EC2 will exclude all the M5a instance types, but not the M5n instance types. Default: No excluded instance types
+     */
+    ExcludedInstanceTypes?: ExcludedInstanceTypeSet;
+    /**
+     * Indicates whether current or previous generation instance types are included. The current generation instance types are recommended for use. Current generation instance types are typically the latest two to three generations in each instance family. For more information, see Instance types in the Amazon EC2 User Guide. For current generation instance types, specify current. For previous generation instance types, specify previous. Default: Current and previous generation instance types
+     */
+    InstanceGenerations?: InstanceGenerationSet;
+    /**
+     * The price protection threshold for Spot Instance. This is the maximum you’ll pay for an Spot Instance, expressed as a percentage above the cheapest M, C, or R instance type with your specified attributes. When Amazon EC2 selects instance types with your attributes, it excludes instance types priced above your threshold. The parameter accepts an integer, which Amazon EC2 interprets as a percentage. To turn off price protection, specify a high value, such as 999999. This parameter is not supported for GetSpotPlacementScores and GetInstanceTypesFromInstanceRequirements.  If you set TargetCapacityUnitType to vcpu or memory-mib, the price protection threshold is applied based on the per-vCPU or per-memory price instead of the per-instance price.  Default: 100 
+     */
+    SpotMaxPricePercentageOverLowestPrice?: Integer;
+    /**
+     * The price protection threshold for On-Demand Instances. This is the maximum you’ll pay for an On-Demand Instance, expressed as a percentage above the cheapest M, C, or R instance type with your specified attributes. When Amazon EC2 selects instance types with your attributes, it excludes instance types priced above your threshold. The parameter accepts an integer, which Amazon EC2 interprets as a percentage. To turn off price protection, specify a high value, such as 999999. This parameter is not supported for GetSpotPlacementScores and GetInstanceTypesFromInstanceRequirements.  If you set TargetCapacityUnitType to vcpu or memory-mib, the price protection threshold is applied based on the per-vCPU or per-memory price instead of the per-instance price.  Default: 20 
+     */
+    OnDemandMaxPricePercentageOverLowestPrice?: Integer;
+    /**
+     * Indicates whether bare metal instance types must be included, excluded, or required.   To include bare metal instance types, specify included.   To require only bare metal instance types, specify required.   To exclude bare metal instance types, specify excluded.   Default: excluded 
+     */
+    BareMetal?: BareMetal;
+    /**
+     * Indicates whether burstable performance T instance types are included, excluded, or required. For more information, see Burstable performance instances.   To include burstable performance instance types, specify included.   To require only burstable performance instance types, specify required.   To exclude burstable performance instance types, specify excluded.   Default: excluded 
+     */
+    BurstablePerformance?: BurstablePerformance;
+    /**
+     * Indicates whether instance types must support hibernation for On-Demand Instances. This parameter is not supported for GetSpotPlacementScores. Default: false 
+     */
+    RequireHibernateSupport?: Boolean;
+    /**
+     * The minimum and maximum number of network interfaces. Default: No minimum or maximum limits
+     */
+    NetworkInterfaceCount?: NetworkInterfaceCountRequest;
+    /**
+     * Indicates whether instance types with instance store volumes are included, excluded, or required. For more information, Amazon EC2 instance store in the Amazon EC2 User Guide.   To include instance types with instance store volumes, specify included.   To require only instance types with instance store volumes, specify required.   To exclude instance types with instance store volumes, specify excluded.   Default: included 
+     */
+    LocalStorage?: LocalStorage;
+    /**
+     * The type of local storage that is required.   For instance types with hard disk drive (HDD) storage, specify hdd.   For instance types with solid state drive (SDD) storage, specify sdd.   Default: hdd and sdd 
+     */
+    LocalStorageTypes?: LocalStorageTypeSet;
+    /**
+     * The minimum and maximum amount of total local storage, in GB. Default: No minimum or maximum limits
+     */
+    TotalLocalStorageGB?: TotalLocalStorageGBRequest;
+    /**
+     * The minimum and maximum baseline bandwidth to Amazon EBS, in Mbps. For more information, see Amazon EBS–optimized instances in the Amazon EC2 User Guide. Default: No minimum or maximum limits
+     */
+    BaselineEbsBandwidthMbps?: BaselineEbsBandwidthMbpsRequest;
+    /**
+     * The accelerator types that must be on the instance type.   To include instance types with GPU hardware, specify gpu.   To include instance types with FPGA hardware, specify fpga.   To include instance types with inference hardware, specify inference.   Default: Any accelerator type
+     */
+    AcceleratorTypes?: AcceleratorTypeSet;
+    /**
+     * The minimum and maximum number of accelerators (GPUs, FPGAs, or Amazon Web Services Inferentia chips) on an instance. To exclude accelerator-enabled instance types, set Max to 0. Default: No minimum or maximum limits
+     */
+    AcceleratorCount?: AcceleratorCountRequest;
+    /**
+     * Indicates whether instance types must have accelerators by specific manufacturers.   For instance types with NVIDIA devices, specify nvidia.   For instance types with AMD devices, specify amd.   For instance types with Amazon Web Services devices, specify amazon-web-services.   For instance types with Xilinx devices, specify xilinx.   Default: Any manufacturer
+     */
+    AcceleratorManufacturers?: AcceleratorManufacturerSet;
+    /**
+     * The accelerators that must be on the instance type.   For instance types with NVIDIA A100 GPUs, specify a100.   For instance types with NVIDIA V100 GPUs, specify v100.   For instance types with NVIDIA K80 GPUs, specify k80.   For instance types with NVIDIA T4 GPUs, specify t4.   For instance types with NVIDIA M60 GPUs, specify m60.   For instance types with AMD Radeon Pro V520 GPUs, specify radeon-pro-v520.   For instance types with Xilinx VU9P FPGAs, specify  vu9p.   Default: Any accelerator
+     */
+    AcceleratorNames?: AcceleratorNameSet;
+    /**
+     * The minimum and maximum amount of total accelerator memory, in MiB. Default: No minimum or maximum limits
+     */
+    AcceleratorTotalMemoryMiB?: AcceleratorTotalMemoryMiBRequest;
+  }
+  export interface InstanceRequirementsWithMetadataRequest {
+    /**
+     * The architecture type.
+     */
+    ArchitectureTypes?: ArchitectureTypeSet;
+    /**
+     * The virtualization type.
+     */
+    VirtualizationTypes?: VirtualizationTypeSet;
+    /**
+     * The attributes for the instance types. When you specify instance attributes, Amazon EC2 will identify instance types with those attributes.
+     */
+    InstanceRequirements?: InstanceRequirementsRequest;
+  }
   export interface InstanceSpecification {
     /**
      * The instance to specify which volumes should be snapshotted.
@@ -19130,7 +21288,7 @@ declare namespace EC2 {
      */
     IncludeAllTagsOfInstance?: Boolean;
   }
-  export type InstanceType = "t1.micro"|"t2.nano"|"t2.micro"|"t2.small"|"t2.medium"|"t2.large"|"t2.xlarge"|"t2.2xlarge"|"t3.nano"|"t3.micro"|"t3.small"|"t3.medium"|"t3.large"|"t3.xlarge"|"t3.2xlarge"|"t3a.nano"|"t3a.micro"|"t3a.small"|"t3a.medium"|"t3a.large"|"t3a.xlarge"|"t3a.2xlarge"|"t4g.nano"|"t4g.micro"|"t4g.small"|"t4g.medium"|"t4g.large"|"t4g.xlarge"|"t4g.2xlarge"|"m1.small"|"m1.medium"|"m1.large"|"m1.xlarge"|"m3.medium"|"m3.large"|"m3.xlarge"|"m3.2xlarge"|"m4.large"|"m4.xlarge"|"m4.2xlarge"|"m4.4xlarge"|"m4.10xlarge"|"m4.16xlarge"|"m2.xlarge"|"m2.2xlarge"|"m2.4xlarge"|"cr1.8xlarge"|"r3.large"|"r3.xlarge"|"r3.2xlarge"|"r3.4xlarge"|"r3.8xlarge"|"r4.large"|"r4.xlarge"|"r4.2xlarge"|"r4.4xlarge"|"r4.8xlarge"|"r4.16xlarge"|"r5.large"|"r5.xlarge"|"r5.2xlarge"|"r5.4xlarge"|"r5.8xlarge"|"r5.12xlarge"|"r5.16xlarge"|"r5.24xlarge"|"r5.metal"|"r5a.large"|"r5a.xlarge"|"r5a.2xlarge"|"r5a.4xlarge"|"r5a.8xlarge"|"r5a.12xlarge"|"r5a.16xlarge"|"r5a.24xlarge"|"r5b.large"|"r5b.xlarge"|"r5b.2xlarge"|"r5b.4xlarge"|"r5b.8xlarge"|"r5b.12xlarge"|"r5b.16xlarge"|"r5b.24xlarge"|"r5b.metal"|"r5d.large"|"r5d.xlarge"|"r5d.2xlarge"|"r5d.4xlarge"|"r5d.8xlarge"|"r5d.12xlarge"|"r5d.16xlarge"|"r5d.24xlarge"|"r5d.metal"|"r5ad.large"|"r5ad.xlarge"|"r5ad.2xlarge"|"r5ad.4xlarge"|"r5ad.8xlarge"|"r5ad.12xlarge"|"r5ad.16xlarge"|"r5ad.24xlarge"|"r6g.metal"|"r6g.medium"|"r6g.large"|"r6g.xlarge"|"r6g.2xlarge"|"r6g.4xlarge"|"r6g.8xlarge"|"r6g.12xlarge"|"r6g.16xlarge"|"r6gd.metal"|"r6gd.medium"|"r6gd.large"|"r6gd.xlarge"|"r6gd.2xlarge"|"r6gd.4xlarge"|"r6gd.8xlarge"|"r6gd.12xlarge"|"r6gd.16xlarge"|"x1.16xlarge"|"x1.32xlarge"|"x1e.xlarge"|"x1e.2xlarge"|"x1e.4xlarge"|"x1e.8xlarge"|"x1e.16xlarge"|"x1e.32xlarge"|"i2.xlarge"|"i2.2xlarge"|"i2.4xlarge"|"i2.8xlarge"|"i3.large"|"i3.xlarge"|"i3.2xlarge"|"i3.4xlarge"|"i3.8xlarge"|"i3.16xlarge"|"i3.metal"|"i3en.large"|"i3en.xlarge"|"i3en.2xlarge"|"i3en.3xlarge"|"i3en.6xlarge"|"i3en.12xlarge"|"i3en.24xlarge"|"i3en.metal"|"hi1.4xlarge"|"hs1.8xlarge"|"c1.medium"|"c1.xlarge"|"c3.large"|"c3.xlarge"|"c3.2xlarge"|"c3.4xlarge"|"c3.8xlarge"|"c4.large"|"c4.xlarge"|"c4.2xlarge"|"c4.4xlarge"|"c4.8xlarge"|"c5.large"|"c5.xlarge"|"c5.2xlarge"|"c5.4xlarge"|"c5.9xlarge"|"c5.12xlarge"|"c5.18xlarge"|"c5.24xlarge"|"c5.metal"|"c5a.large"|"c5a.xlarge"|"c5a.2xlarge"|"c5a.4xlarge"|"c5a.8xlarge"|"c5a.12xlarge"|"c5a.16xlarge"|"c5a.24xlarge"|"c5ad.large"|"c5ad.xlarge"|"c5ad.2xlarge"|"c5ad.4xlarge"|"c5ad.8xlarge"|"c5ad.12xlarge"|"c5ad.16xlarge"|"c5ad.24xlarge"|"c5d.large"|"c5d.xlarge"|"c5d.2xlarge"|"c5d.4xlarge"|"c5d.9xlarge"|"c5d.12xlarge"|"c5d.18xlarge"|"c5d.24xlarge"|"c5d.metal"|"c5n.large"|"c5n.xlarge"|"c5n.2xlarge"|"c5n.4xlarge"|"c5n.9xlarge"|"c5n.18xlarge"|"c5n.metal"|"c6g.metal"|"c6g.medium"|"c6g.large"|"c6g.xlarge"|"c6g.2xlarge"|"c6g.4xlarge"|"c6g.8xlarge"|"c6g.12xlarge"|"c6g.16xlarge"|"c6gd.metal"|"c6gd.medium"|"c6gd.large"|"c6gd.xlarge"|"c6gd.2xlarge"|"c6gd.4xlarge"|"c6gd.8xlarge"|"c6gd.12xlarge"|"c6gd.16xlarge"|"c6gn.medium"|"c6gn.large"|"c6gn.xlarge"|"c6gn.2xlarge"|"c6gn.4xlarge"|"c6gn.8xlarge"|"c6gn.12xlarge"|"c6gn.16xlarge"|"cc1.4xlarge"|"cc2.8xlarge"|"g2.2xlarge"|"g2.8xlarge"|"g3.4xlarge"|"g3.8xlarge"|"g3.16xlarge"|"g3s.xlarge"|"g4ad.xlarge"|"g4ad.2xlarge"|"g4ad.4xlarge"|"g4ad.8xlarge"|"g4ad.16xlarge"|"g4dn.xlarge"|"g4dn.2xlarge"|"g4dn.4xlarge"|"g4dn.8xlarge"|"g4dn.12xlarge"|"g4dn.16xlarge"|"g4dn.metal"|"cg1.4xlarge"|"p2.xlarge"|"p2.8xlarge"|"p2.16xlarge"|"p3.2xlarge"|"p3.8xlarge"|"p3.16xlarge"|"p3dn.24xlarge"|"p4d.24xlarge"|"d2.xlarge"|"d2.2xlarge"|"d2.4xlarge"|"d2.8xlarge"|"d3.xlarge"|"d3.2xlarge"|"d3.4xlarge"|"d3.8xlarge"|"d3en.xlarge"|"d3en.2xlarge"|"d3en.4xlarge"|"d3en.6xlarge"|"d3en.8xlarge"|"d3en.12xlarge"|"f1.2xlarge"|"f1.4xlarge"|"f1.16xlarge"|"m5.large"|"m5.xlarge"|"m5.2xlarge"|"m5.4xlarge"|"m5.8xlarge"|"m5.12xlarge"|"m5.16xlarge"|"m5.24xlarge"|"m5.metal"|"m5a.large"|"m5a.xlarge"|"m5a.2xlarge"|"m5a.4xlarge"|"m5a.8xlarge"|"m5a.12xlarge"|"m5a.16xlarge"|"m5a.24xlarge"|"m5d.large"|"m5d.xlarge"|"m5d.2xlarge"|"m5d.4xlarge"|"m5d.8xlarge"|"m5d.12xlarge"|"m5d.16xlarge"|"m5d.24xlarge"|"m5d.metal"|"m5ad.large"|"m5ad.xlarge"|"m5ad.2xlarge"|"m5ad.4xlarge"|"m5ad.8xlarge"|"m5ad.12xlarge"|"m5ad.16xlarge"|"m5ad.24xlarge"|"m5zn.large"|"m5zn.xlarge"|"m5zn.2xlarge"|"m5zn.3xlarge"|"m5zn.6xlarge"|"m5zn.12xlarge"|"m5zn.metal"|"h1.2xlarge"|"h1.4xlarge"|"h1.8xlarge"|"h1.16xlarge"|"z1d.large"|"z1d.xlarge"|"z1d.2xlarge"|"z1d.3xlarge"|"z1d.6xlarge"|"z1d.12xlarge"|"z1d.metal"|"u-6tb1.56xlarge"|"u-6tb1.112xlarge"|"u-9tb1.112xlarge"|"u-12tb1.112xlarge"|"u-6tb1.metal"|"u-9tb1.metal"|"u-12tb1.metal"|"u-18tb1.metal"|"u-24tb1.metal"|"a1.medium"|"a1.large"|"a1.xlarge"|"a1.2xlarge"|"a1.4xlarge"|"a1.metal"|"m5dn.large"|"m5dn.xlarge"|"m5dn.2xlarge"|"m5dn.4xlarge"|"m5dn.8xlarge"|"m5dn.12xlarge"|"m5dn.16xlarge"|"m5dn.24xlarge"|"m5dn.metal"|"m5n.large"|"m5n.xlarge"|"m5n.2xlarge"|"m5n.4xlarge"|"m5n.8xlarge"|"m5n.12xlarge"|"m5n.16xlarge"|"m5n.24xlarge"|"m5n.metal"|"r5dn.large"|"r5dn.xlarge"|"r5dn.2xlarge"|"r5dn.4xlarge"|"r5dn.8xlarge"|"r5dn.12xlarge"|"r5dn.16xlarge"|"r5dn.24xlarge"|"r5dn.metal"|"r5n.large"|"r5n.xlarge"|"r5n.2xlarge"|"r5n.4xlarge"|"r5n.8xlarge"|"r5n.12xlarge"|"r5n.16xlarge"|"r5n.24xlarge"|"r5n.metal"|"inf1.xlarge"|"inf1.2xlarge"|"inf1.6xlarge"|"inf1.24xlarge"|"m6g.metal"|"m6g.medium"|"m6g.large"|"m6g.xlarge"|"m6g.2xlarge"|"m6g.4xlarge"|"m6g.8xlarge"|"m6g.12xlarge"|"m6g.16xlarge"|"m6gd.metal"|"m6gd.medium"|"m6gd.large"|"m6gd.xlarge"|"m6gd.2xlarge"|"m6gd.4xlarge"|"m6gd.8xlarge"|"m6gd.12xlarge"|"m6gd.16xlarge"|"m6i.large"|"m6i.xlarge"|"m6i.2xlarge"|"m6i.4xlarge"|"m6i.8xlarge"|"m6i.12xlarge"|"m6i.16xlarge"|"m6i.24xlarge"|"m6i.32xlarge"|"mac1.metal"|"x2gd.medium"|"x2gd.large"|"x2gd.xlarge"|"x2gd.2xlarge"|"x2gd.4xlarge"|"x2gd.8xlarge"|"x2gd.12xlarge"|"x2gd.16xlarge"|"x2gd.metal"|"vt1.3xlarge"|"vt1.6xlarge"|"vt1.24xlarge"|string;
+  export type InstanceType = "a1.medium"|"a1.large"|"a1.xlarge"|"a1.2xlarge"|"a1.4xlarge"|"a1.metal"|"c1.medium"|"c1.xlarge"|"c3.large"|"c3.xlarge"|"c3.2xlarge"|"c3.4xlarge"|"c3.8xlarge"|"c4.large"|"c4.xlarge"|"c4.2xlarge"|"c4.4xlarge"|"c4.8xlarge"|"c5.large"|"c5.xlarge"|"c5.2xlarge"|"c5.4xlarge"|"c5.9xlarge"|"c5.12xlarge"|"c5.18xlarge"|"c5.24xlarge"|"c5.metal"|"c5a.large"|"c5a.xlarge"|"c5a.2xlarge"|"c5a.4xlarge"|"c5a.8xlarge"|"c5a.12xlarge"|"c5a.16xlarge"|"c5a.24xlarge"|"c5ad.large"|"c5ad.xlarge"|"c5ad.2xlarge"|"c5ad.4xlarge"|"c5ad.8xlarge"|"c5ad.12xlarge"|"c5ad.16xlarge"|"c5ad.24xlarge"|"c5d.large"|"c5d.xlarge"|"c5d.2xlarge"|"c5d.4xlarge"|"c5d.9xlarge"|"c5d.12xlarge"|"c5d.18xlarge"|"c5d.24xlarge"|"c5d.metal"|"c5n.large"|"c5n.xlarge"|"c5n.2xlarge"|"c5n.4xlarge"|"c5n.9xlarge"|"c5n.18xlarge"|"c5n.metal"|"c6g.medium"|"c6g.large"|"c6g.xlarge"|"c6g.2xlarge"|"c6g.4xlarge"|"c6g.8xlarge"|"c6g.12xlarge"|"c6g.16xlarge"|"c6g.metal"|"c6gd.medium"|"c6gd.large"|"c6gd.xlarge"|"c6gd.2xlarge"|"c6gd.4xlarge"|"c6gd.8xlarge"|"c6gd.12xlarge"|"c6gd.16xlarge"|"c6gd.metal"|"c6gn.medium"|"c6gn.large"|"c6gn.xlarge"|"c6gn.2xlarge"|"c6gn.4xlarge"|"c6gn.8xlarge"|"c6gn.12xlarge"|"c6gn.16xlarge"|"c6i.large"|"c6i.xlarge"|"c6i.2xlarge"|"c6i.4xlarge"|"c6i.8xlarge"|"c6i.12xlarge"|"c6i.16xlarge"|"c6i.24xlarge"|"c6i.32xlarge"|"c6i.metal"|"cc1.4xlarge"|"cc2.8xlarge"|"cg1.4xlarge"|"cr1.8xlarge"|"d2.xlarge"|"d2.2xlarge"|"d2.4xlarge"|"d2.8xlarge"|"d3.xlarge"|"d3.2xlarge"|"d3.4xlarge"|"d3.8xlarge"|"d3en.xlarge"|"d3en.2xlarge"|"d3en.4xlarge"|"d3en.6xlarge"|"d3en.8xlarge"|"d3en.12xlarge"|"dl1.24xlarge"|"f1.2xlarge"|"f1.4xlarge"|"f1.16xlarge"|"g2.2xlarge"|"g2.8xlarge"|"g3.4xlarge"|"g3.8xlarge"|"g3.16xlarge"|"g3s.xlarge"|"g4ad.xlarge"|"g4ad.2xlarge"|"g4ad.4xlarge"|"g4ad.8xlarge"|"g4ad.16xlarge"|"g4dn.xlarge"|"g4dn.2xlarge"|"g4dn.4xlarge"|"g4dn.8xlarge"|"g4dn.12xlarge"|"g4dn.16xlarge"|"g4dn.metal"|"g5.xlarge"|"g5.2xlarge"|"g5.4xlarge"|"g5.8xlarge"|"g5.12xlarge"|"g5.16xlarge"|"g5.24xlarge"|"g5.48xlarge"|"g5g.xlarge"|"g5g.2xlarge"|"g5g.4xlarge"|"g5g.8xlarge"|"g5g.16xlarge"|"g5g.metal"|"hi1.4xlarge"|"hpc6a.48xlarge"|"hs1.8xlarge"|"h1.2xlarge"|"h1.4xlarge"|"h1.8xlarge"|"h1.16xlarge"|"i2.xlarge"|"i2.2xlarge"|"i2.4xlarge"|"i2.8xlarge"|"i3.large"|"i3.xlarge"|"i3.2xlarge"|"i3.4xlarge"|"i3.8xlarge"|"i3.16xlarge"|"i3.metal"|"i3en.large"|"i3en.xlarge"|"i3en.2xlarge"|"i3en.3xlarge"|"i3en.6xlarge"|"i3en.12xlarge"|"i3en.24xlarge"|"i3en.metal"|"im4gn.large"|"im4gn.xlarge"|"im4gn.2xlarge"|"im4gn.4xlarge"|"im4gn.8xlarge"|"im4gn.16xlarge"|"inf1.xlarge"|"inf1.2xlarge"|"inf1.6xlarge"|"inf1.24xlarge"|"is4gen.medium"|"is4gen.large"|"is4gen.xlarge"|"is4gen.2xlarge"|"is4gen.4xlarge"|"is4gen.8xlarge"|"m1.small"|"m1.medium"|"m1.large"|"m1.xlarge"|"m2.xlarge"|"m2.2xlarge"|"m2.4xlarge"|"m3.medium"|"m3.large"|"m3.xlarge"|"m3.2xlarge"|"m4.large"|"m4.xlarge"|"m4.2xlarge"|"m4.4xlarge"|"m4.10xlarge"|"m4.16xlarge"|"m5.large"|"m5.xlarge"|"m5.2xlarge"|"m5.4xlarge"|"m5.8xlarge"|"m5.12xlarge"|"m5.16xlarge"|"m5.24xlarge"|"m5.metal"|"m5a.large"|"m5a.xlarge"|"m5a.2xlarge"|"m5a.4xlarge"|"m5a.8xlarge"|"m5a.12xlarge"|"m5a.16xlarge"|"m5a.24xlarge"|"m5ad.large"|"m5ad.xlarge"|"m5ad.2xlarge"|"m5ad.4xlarge"|"m5ad.8xlarge"|"m5ad.12xlarge"|"m5ad.16xlarge"|"m5ad.24xlarge"|"m5d.large"|"m5d.xlarge"|"m5d.2xlarge"|"m5d.4xlarge"|"m5d.8xlarge"|"m5d.12xlarge"|"m5d.16xlarge"|"m5d.24xlarge"|"m5d.metal"|"m5dn.large"|"m5dn.xlarge"|"m5dn.2xlarge"|"m5dn.4xlarge"|"m5dn.8xlarge"|"m5dn.12xlarge"|"m5dn.16xlarge"|"m5dn.24xlarge"|"m5dn.metal"|"m5n.large"|"m5n.xlarge"|"m5n.2xlarge"|"m5n.4xlarge"|"m5n.8xlarge"|"m5n.12xlarge"|"m5n.16xlarge"|"m5n.24xlarge"|"m5n.metal"|"m5zn.large"|"m5zn.xlarge"|"m5zn.2xlarge"|"m5zn.3xlarge"|"m5zn.6xlarge"|"m5zn.12xlarge"|"m5zn.metal"|"m6a.large"|"m6a.xlarge"|"m6a.2xlarge"|"m6a.4xlarge"|"m6a.8xlarge"|"m6a.12xlarge"|"m6a.16xlarge"|"m6a.24xlarge"|"m6a.32xlarge"|"m6a.48xlarge"|"m6g.metal"|"m6g.medium"|"m6g.large"|"m6g.xlarge"|"m6g.2xlarge"|"m6g.4xlarge"|"m6g.8xlarge"|"m6g.12xlarge"|"m6g.16xlarge"|"m6gd.metal"|"m6gd.medium"|"m6gd.large"|"m6gd.xlarge"|"m6gd.2xlarge"|"m6gd.4xlarge"|"m6gd.8xlarge"|"m6gd.12xlarge"|"m6gd.16xlarge"|"m6i.large"|"m6i.xlarge"|"m6i.2xlarge"|"m6i.4xlarge"|"m6i.8xlarge"|"m6i.12xlarge"|"m6i.16xlarge"|"m6i.24xlarge"|"m6i.32xlarge"|"m6i.metal"|"mac1.metal"|"p2.xlarge"|"p2.8xlarge"|"p2.16xlarge"|"p3.2xlarge"|"p3.8xlarge"|"p3.16xlarge"|"p3dn.24xlarge"|"p4d.24xlarge"|"r3.large"|"r3.xlarge"|"r3.2xlarge"|"r3.4xlarge"|"r3.8xlarge"|"r4.large"|"r4.xlarge"|"r4.2xlarge"|"r4.4xlarge"|"r4.8xlarge"|"r4.16xlarge"|"r5.large"|"r5.xlarge"|"r5.2xlarge"|"r5.4xlarge"|"r5.8xlarge"|"r5.12xlarge"|"r5.16xlarge"|"r5.24xlarge"|"r5.metal"|"r5a.large"|"r5a.xlarge"|"r5a.2xlarge"|"r5a.4xlarge"|"r5a.8xlarge"|"r5a.12xlarge"|"r5a.16xlarge"|"r5a.24xlarge"|"r5ad.large"|"r5ad.xlarge"|"r5ad.2xlarge"|"r5ad.4xlarge"|"r5ad.8xlarge"|"r5ad.12xlarge"|"r5ad.16xlarge"|"r5ad.24xlarge"|"r5b.large"|"r5b.xlarge"|"r5b.2xlarge"|"r5b.4xlarge"|"r5b.8xlarge"|"r5b.12xlarge"|"r5b.16xlarge"|"r5b.24xlarge"|"r5b.metal"|"r5d.large"|"r5d.xlarge"|"r5d.2xlarge"|"r5d.4xlarge"|"r5d.8xlarge"|"r5d.12xlarge"|"r5d.16xlarge"|"r5d.24xlarge"|"r5d.metal"|"r5dn.large"|"r5dn.xlarge"|"r5dn.2xlarge"|"r5dn.4xlarge"|"r5dn.8xlarge"|"r5dn.12xlarge"|"r5dn.16xlarge"|"r5dn.24xlarge"|"r5dn.metal"|"r5n.large"|"r5n.xlarge"|"r5n.2xlarge"|"r5n.4xlarge"|"r5n.8xlarge"|"r5n.12xlarge"|"r5n.16xlarge"|"r5n.24xlarge"|"r5n.metal"|"r6g.medium"|"r6g.large"|"r6g.xlarge"|"r6g.2xlarge"|"r6g.4xlarge"|"r6g.8xlarge"|"r6g.12xlarge"|"r6g.16xlarge"|"r6g.metal"|"r6gd.medium"|"r6gd.large"|"r6gd.xlarge"|"r6gd.2xlarge"|"r6gd.4xlarge"|"r6gd.8xlarge"|"r6gd.12xlarge"|"r6gd.16xlarge"|"r6gd.metal"|"r6i.large"|"r6i.xlarge"|"r6i.2xlarge"|"r6i.4xlarge"|"r6i.8xlarge"|"r6i.12xlarge"|"r6i.16xlarge"|"r6i.24xlarge"|"r6i.32xlarge"|"r6i.metal"|"t1.micro"|"t2.nano"|"t2.micro"|"t2.small"|"t2.medium"|"t2.large"|"t2.xlarge"|"t2.2xlarge"|"t3.nano"|"t3.micro"|"t3.small"|"t3.medium"|"t3.large"|"t3.xlarge"|"t3.2xlarge"|"t3a.nano"|"t3a.micro"|"t3a.small"|"t3a.medium"|"t3a.large"|"t3a.xlarge"|"t3a.2xlarge"|"t4g.nano"|"t4g.micro"|"t4g.small"|"t4g.medium"|"t4g.large"|"t4g.xlarge"|"t4g.2xlarge"|"u-6tb1.56xlarge"|"u-6tb1.112xlarge"|"u-9tb1.112xlarge"|"u-12tb1.112xlarge"|"u-6tb1.metal"|"u-9tb1.metal"|"u-12tb1.metal"|"u-18tb1.metal"|"u-24tb1.metal"|"vt1.3xlarge"|"vt1.6xlarge"|"vt1.24xlarge"|"x1.16xlarge"|"x1.32xlarge"|"x1e.xlarge"|"x1e.2xlarge"|"x1e.4xlarge"|"x1e.8xlarge"|"x1e.16xlarge"|"x1e.32xlarge"|"x2iezn.2xlarge"|"x2iezn.4xlarge"|"x2iezn.6xlarge"|"x2iezn.8xlarge"|"x2iezn.12xlarge"|"x2iezn.metal"|"x2gd.medium"|"x2gd.large"|"x2gd.xlarge"|"x2gd.2xlarge"|"x2gd.4xlarge"|"x2gd.8xlarge"|"x2gd.12xlarge"|"x2gd.16xlarge"|"x2gd.metal"|"z1d.large"|"z1d.xlarge"|"z1d.2xlarge"|"z1d.3xlarge"|"z1d.6xlarge"|"z1d.12xlarge"|"z1d.metal"|"x2idn.16xlarge"|"x2idn.24xlarge"|"x2idn.32xlarge"|"x2iedn.xlarge"|"x2iedn.2xlarge"|"x2iedn.4xlarge"|"x2iedn.8xlarge"|"x2iedn.16xlarge"|"x2iedn.24xlarge"|"x2iedn.32xlarge"|"c6a.large"|"c6a.xlarge"|"c6a.2xlarge"|"c6a.4xlarge"|"c6a.8xlarge"|"c6a.12xlarge"|"c6a.16xlarge"|"c6a.24xlarge"|"c6a.32xlarge"|"c6a.48xlarge"|"c6a.metal"|"m6a.metal"|"i4i.large"|"i4i.xlarge"|"i4i.2xlarge"|"i4i.4xlarge"|"i4i.8xlarge"|"i4i.16xlarge"|"i4i.32xlarge"|string;
   export type InstanceTypeHypervisor = "nitro"|"xen"|string;
   export interface InstanceTypeInfo {
     /**
@@ -19230,6 +21388,13 @@ declare namespace EC2 {
      */
     SupportedBootModes?: BootModeTypeList;
   }
+  export interface InstanceTypeInfoFromInstanceRequirements {
+    /**
+     * The matching instance type.
+     */
+    InstanceType?: String;
+  }
+  export type InstanceTypeInfoFromInstanceRequirementsSet = InstanceTypeInfoFromInstanceRequirements[];
   export type InstanceTypeInfoList = InstanceTypeInfo[];
   export type InstanceTypeList = InstanceType[];
   export interface InstanceTypeOffering {
@@ -19247,6 +21412,7 @@ declare namespace EC2 {
     Location?: Location;
   }
   export type InstanceTypeOfferingsList = InstanceTypeOffering[];
+  export type InstanceTypes = String[];
   export interface InstanceUsage {
     /**
      * The ID of the Amazon Web Services account that is making use of the Capacity Reservation.
@@ -19302,6 +21468,7 @@ declare namespace EC2 {
   export type InternetGatewayList = InternetGateway[];
   export type IpAddress = string;
   export type IpAddressList = IpAddress[];
+  export type IpAddressType = "ipv4"|"dualstack"|"ipv6"|string;
   export interface IpPermission {
     /**
      * The start of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 type number. A value of -1 indicates all ICMP/ICMPv6 types. If you specify all ICMP/ICMPv6 types, you must specify all codes.
@@ -19346,6 +21513,407 @@ declare namespace EC2 {
   }
   export type IpRangeList = IpRange[];
   export type IpRanges = String[];
+  export interface Ipam {
+    /**
+     * The Amazon Web Services account ID of the owner of the IPAM.
+     */
+    OwnerId?: String;
+    /**
+     * The ID of the IPAM.
+     */
+    IpamId?: IpamId;
+    /**
+     * The ARN of the IPAM.
+     */
+    IpamArn?: ResourceArn;
+    /**
+     * The Amazon Web Services Region of the IPAM.
+     */
+    IpamRegion?: String;
+    /**
+     * The ID of the IPAM's default public scope.
+     */
+    PublicDefaultScopeId?: IpamScopeId;
+    /**
+     * The ID of the IPAM's default private scope.
+     */
+    PrivateDefaultScopeId?: IpamScopeId;
+    /**
+     * The number of scopes in the IPAM. The scope quota is 5. For more information on quotas, see Quotas in IPAM in the Amazon VPC IPAM User Guide. 
+     */
+    ScopeCount?: Integer;
+    /**
+     * The description for the IPAM.
+     */
+    Description?: String;
+    /**
+     * The operating Regions for an IPAM. Operating Regions are Amazon Web Services Regions where the IPAM is allowed to manage IP address CIDRs. IPAM only discovers and monitors resources in the Amazon Web Services Regions you select as operating Regions. For more information about operating Regions, see Create an IPAM in the Amazon VPC IPAM User Guide.
+     */
+    OperatingRegions?: IpamOperatingRegionSet;
+    /**
+     * The state of the IPAM.
+     */
+    State?: IpamState;
+    /**
+     * The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.
+     */
+    Tags?: TagList;
+  }
+  export type IpamAddressHistoryMaxResults = number;
+  export interface IpamAddressHistoryRecord {
+    /**
+     * The ID of the resource owner.
+     */
+    ResourceOwnerId?: String;
+    /**
+     * The Amazon Web Services Region of the resource.
+     */
+    ResourceRegion?: String;
+    /**
+     * The type of the resource.
+     */
+    ResourceType?: IpamAddressHistoryResourceType;
+    /**
+     * The ID of the resource.
+     */
+    ResourceId?: String;
+    /**
+     * The CIDR of the resource.
+     */
+    ResourceCidr?: String;
+    /**
+     * The name of the resource.
+     */
+    ResourceName?: String;
+    /**
+     * The compliance status of a resource. For more information on compliance statuses, see Monitor CIDR usage by resource in the Amazon VPC IPAM User Guide.
+     */
+    ResourceComplianceStatus?: IpamComplianceStatus;
+    /**
+     * The overlap status of an IPAM resource. The overlap status tells you if the CIDR for a resource overlaps with another CIDR in the scope. For more information on overlap statuses, see Monitor CIDR usage by resource in the Amazon VPC IPAM User Guide.
+     */
+    ResourceOverlapStatus?: IpamOverlapStatus;
+    /**
+     * The VPC ID of the resource.
+     */
+    VpcId?: String;
+    /**
+     * Sampled start time of the resource-to-CIDR association within the IPAM scope. Changes are picked up in periodic snapshots, so the start time may have occurred before this specific time.
+     */
+    SampledStartTime?: MillisecondDateTime;
+    /**
+     * Sampled end time of the resource-to-CIDR association within the IPAM scope. Changes are picked up in periodic snapshots, so the end time may have occurred before this specific time.
+     */
+    SampledEndTime?: MillisecondDateTime;
+  }
+  export type IpamAddressHistoryRecordSet = IpamAddressHistoryRecord[];
+  export type IpamAddressHistoryResourceType = "eip"|"vpc"|"subnet"|"network-interface"|"instance"|string;
+  export interface IpamCidrAuthorizationContext {
+    /**
+     * The plain-text authorization message for the prefix and account.
+     */
+    Message?: String;
+    /**
+     * The signed authorization message for the prefix and account.
+     */
+    Signature?: String;
+  }
+  export type IpamComplianceStatus = "compliant"|"noncompliant"|"unmanaged"|"ignored"|string;
+  export type IpamId = string;
+  export type IpamManagementState = "managed"|"unmanaged"|"ignored"|string;
+  export type IpamMaxResults = number;
+  export type IpamNetmaskLength = number;
+  export interface IpamOperatingRegion {
+    /**
+     * The name of the operating Region.
+     */
+    RegionName?: String;
+  }
+  export type IpamOperatingRegionSet = IpamOperatingRegion[];
+  export type IpamOverlapStatus = "overlapping"|"nonoverlapping"|"ignored"|string;
+  export interface IpamPool {
+    /**
+     * The Amazon Web Services account ID of the owner of the IPAM pool.
+     */
+    OwnerId?: String;
+    /**
+     * The ID of the IPAM pool.
+     */
+    IpamPoolId?: IpamPoolId;
+    /**
+     * The ID of the source IPAM pool. You can use this option to create an IPAM pool within an existing source pool.
+     */
+    SourceIpamPoolId?: IpamPoolId;
+    /**
+     * The ARN of the IPAM pool.
+     */
+    IpamPoolArn?: ResourceArn;
+    /**
+     * The ARN of the scope of the IPAM pool.
+     */
+    IpamScopeArn?: ResourceArn;
+    /**
+     * In IPAM, a scope is the highest-level container within IPAM. An IPAM contains two default scopes. Each scope represents the IP space for a single network. The private scope is intended for all private IP address space. The public scope is intended for all public IP address space. Scopes enable you to reuse IP addresses across multiple unconnected networks without causing IP address overlap or conflict.
+     */
+    IpamScopeType?: IpamScopeType;
+    /**
+     * The ARN of the IPAM.
+     */
+    IpamArn?: ResourceArn;
+    /**
+     * The Amazon Web Services Region of the IPAM pool.
+     */
+    IpamRegion?: String;
+    /**
+     * The locale of the IPAM pool. In IPAM, the locale is the Amazon Web Services Region where you want to make an IPAM pool available for allocations. Only resources in the same Region as the locale of the pool can get IP address allocations from the pool. You can only allocate a CIDR for a VPC, for example, from an IPAM pool that shares a locale with the VPC’s Region. Note that once you choose a Locale for a pool, you cannot modify it. If you choose an Amazon Web Services Region for locale that has not been configured as an operating Region for the IPAM, you'll get an error.
+     */
+    Locale?: String;
+    /**
+     * The depth of pools in your IPAM pool. The pool depth quota is 10. For more information, see Quotas in IPAM in the Amazon VPC IPAM User Guide. 
+     */
+    PoolDepth?: Integer;
+    /**
+     * The state of the IPAM pool.
+     */
+    State?: IpamPoolState;
+    /**
+     * A message related to the failed creation of an IPAM pool.
+     */
+    StateMessage?: String;
+    /**
+     * The description of the IPAM pool.
+     */
+    Description?: String;
+    /**
+     * If selected, IPAM will continuously look for resources within the CIDR range of this pool and automatically import them as allocations into your IPAM. The CIDRs that will be allocated for these resources must not already be allocated to other resources in order for the import to succeed. IPAM will import a CIDR regardless of its compliance with the pool's allocation rules, so a resource might be imported and subsequently marked as noncompliant. If IPAM discovers multiple CIDRs that overlap, IPAM will import the largest CIDR only. If IPAM discovers multiple CIDRs with matching CIDRs, IPAM will randomly import one of them only.  A locale must be set on the pool for this feature to work.
+     */
+    AutoImport?: Boolean;
+    /**
+     * Determines if a pool is publicly advertisable. This option is not available for pools with AddressFamily set to ipv4.
+     */
+    PubliclyAdvertisable?: Boolean;
+    /**
+     * The address family of the pool.
+     */
+    AddressFamily?: AddressFamily;
+    /**
+     * The minimum netmask length required for CIDR allocations in this IPAM pool to be compliant. The minimum netmask length must be less than the maximum netmask length. Possible netmask lengths for IPv4 addresses are 0 - 32. Possible netmask lengths for IPv6 addresses are 0 - 128.
+     */
+    AllocationMinNetmaskLength?: IpamNetmaskLength;
+    /**
+     * The maximum netmask length possible for CIDR allocations in this IPAM pool to be compliant. The maximum netmask length must be greater than the minimum netmask length. Possible netmask lengths for IPv4 addresses are 0 - 32. Possible netmask lengths for IPv6 addresses are 0 - 128.
+     */
+    AllocationMaxNetmaskLength?: IpamNetmaskLength;
+    /**
+     * The default netmask length for allocations added to this pool. If, for example, the CIDR assigned to this pool is 10.0.0.0/8 and you enter 16 here, new allocations will default to 10.0.0.0/16.
+     */
+    AllocationDefaultNetmaskLength?: IpamNetmaskLength;
+    /**
+     * Tags that are required for resources that use CIDRs from this IPAM pool. Resources that do not have these tags will not be allowed to allocate space from the pool. If the resources have their tags changed after they have allocated space or if the allocation tagging requirements are changed on the pool, the resource may be marked as noncompliant.
+     */
+    AllocationResourceTags?: IpamResourceTagList;
+    /**
+     * The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.
+     */
+    Tags?: TagList;
+    /**
+     * Limits which service in Amazon Web Services that the pool can be used in. "ec2", for example, allows users to use space for Elastic IP addresses and VPCs.
+     */
+    AwsService?: IpamPoolAwsService;
+  }
+  export interface IpamPoolAllocation {
+    /**
+     * The CIDR for the allocation. A CIDR is a representation of an IP address and its associated network mask (or netmask) and refers to a range of IP addresses. An IPv4 CIDR example is 10.24.34.0/23. An IPv6 CIDR example is 2001:DB8::/32.
+     */
+    Cidr?: String;
+    /**
+     * The ID of an allocation.
+     */
+    IpamPoolAllocationId?: IpamPoolAllocationId;
+    /**
+     * A description of the pool allocation.
+     */
+    Description?: String;
+    /**
+     * The ID of the resource.
+     */
+    ResourceId?: String;
+    /**
+     * The type of the resource.
+     */
+    ResourceType?: IpamPoolAllocationResourceType;
+    /**
+     * The Amazon Web Services Region of the resource.
+     */
+    ResourceRegion?: String;
+    /**
+     * The owner of the resource.
+     */
+    ResourceOwner?: String;
+  }
+  export type IpamPoolAllocationDisallowedCidrs = String[];
+  export type IpamPoolAllocationId = string;
+  export type IpamPoolAllocationResourceType = "ipam-pool"|"vpc"|"ec2-public-ipv4-pool"|"custom"|string;
+  export type IpamPoolAllocationSet = IpamPoolAllocation[];
+  export type IpamPoolAwsService = "ec2"|string;
+  export interface IpamPoolCidr {
+    /**
+     * The CIDR provisioned to the IPAM pool. A CIDR is a representation of an IP address and its associated network mask (or netmask) and refers to a range of IP addresses. An IPv4 CIDR example is 10.24.34.0/23. An IPv6 CIDR example is 2001:DB8::/32.
+     */
+    Cidr?: String;
+    /**
+     * The state of the CIDR.
+     */
+    State?: IpamPoolCidrState;
+    /**
+     * Details related to why an IPAM pool CIDR failed to be provisioned.
+     */
+    FailureReason?: IpamPoolCidrFailureReason;
+  }
+  export type IpamPoolCidrFailureCode = "cidr-not-available"|string;
+  export interface IpamPoolCidrFailureReason {
+    /**
+     * An error code related to why an IPAM pool CIDR failed to be provisioned.
+     */
+    Code?: IpamPoolCidrFailureCode;
+    /**
+     * A message related to why an IPAM pool CIDR failed to be provisioned.
+     */
+    Message?: String;
+  }
+  export type IpamPoolCidrSet = IpamPoolCidr[];
+  export type IpamPoolCidrState = "pending-provision"|"provisioned"|"failed-provision"|"pending-deprovision"|"deprovisioned"|"failed-deprovision"|"pending-import"|"failed-import"|string;
+  export type IpamPoolId = string;
+  export type IpamPoolSet = IpamPool[];
+  export type IpamPoolState = "create-in-progress"|"create-complete"|"create-failed"|"modify-in-progress"|"modify-complete"|"modify-failed"|"delete-in-progress"|"delete-complete"|"delete-failed"|"isolate-in-progress"|"isolate-complete"|"restore-in-progress"|string;
+  export interface IpamResourceCidr {
+    /**
+     * The IPAM ID for an IPAM resource.
+     */
+    IpamId?: IpamId;
+    /**
+     * The scope ID for an IPAM resource.
+     */
+    IpamScopeId?: IpamScopeId;
+    /**
+     * The pool ID for an IPAM resource.
+     */
+    IpamPoolId?: IpamPoolId;
+    /**
+     * The Amazon Web Services Region for an IPAM resource.
+     */
+    ResourceRegion?: String;
+    /**
+     * The Amazon Web Services account number of the owner of an IPAM resource.
+     */
+    ResourceOwnerId?: String;
+    /**
+     * The ID of an IPAM resource.
+     */
+    ResourceId?: String;
+    /**
+     * The name of an IPAM resource.
+     */
+    ResourceName?: String;
+    /**
+     * The CIDR for an IPAM resource.
+     */
+    ResourceCidr?: String;
+    /**
+     * The type of IPAM resource.
+     */
+    ResourceType?: IpamResourceType;
+    /**
+     * The tags for an IPAM resource.
+     */
+    ResourceTags?: IpamResourceTagList;
+    /**
+     * The IP address space in the IPAM pool that is allocated to this resource. To convert the decimal to a percentage, multiply the decimal by 100.
+     */
+    IpUsage?: BoxedDouble;
+    /**
+     * The compliance status of the IPAM resource. For more information on compliance statuses, see Monitor CIDR usage by resource in the Amazon VPC IPAM User Guide.
+     */
+    ComplianceStatus?: IpamComplianceStatus;
+    /**
+     * The management state of the resource. For more information about management states, see Monitor CIDR usage by resource in the Amazon VPC IPAM User Guide.
+     */
+    ManagementState?: IpamManagementState;
+    /**
+     * The overlap status of an IPAM resource. The overlap status tells you if the CIDR for a resource overlaps with another CIDR in the scope. For more information on overlap statuses, see Monitor CIDR usage by resource in the Amazon VPC IPAM User Guide.
+     */
+    OverlapStatus?: IpamOverlapStatus;
+    /**
+     * The ID of a VPC.
+     */
+    VpcId?: String;
+  }
+  export type IpamResourceCidrSet = IpamResourceCidr[];
+  export interface IpamResourceTag {
+    /**
+     * The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.
+     */
+    Key?: String;
+    /**
+     * The value of the tag.
+     */
+    Value?: String;
+  }
+  export type IpamResourceTagList = IpamResourceTag[];
+  export type IpamResourceType = "vpc"|"subnet"|"eip"|"public-ipv4-pool"|"ipv6-pool"|string;
+  export interface IpamScope {
+    /**
+     * The Amazon Web Services account ID of the owner of the scope.
+     */
+    OwnerId?: String;
+    /**
+     * The ID of the scope.
+     */
+    IpamScopeId?: IpamScopeId;
+    /**
+     * The ARN of the scope.
+     */
+    IpamScopeArn?: ResourceArn;
+    /**
+     * The ARN of the IPAM.
+     */
+    IpamArn?: ResourceArn;
+    /**
+     * The Amazon Web Services Region of the IPAM scope.
+     */
+    IpamRegion?: String;
+    /**
+     * The type of the scope.
+     */
+    IpamScopeType?: IpamScopeType;
+    /**
+     * Defines if the scope is the default scope or not.
+     */
+    IsDefault?: Boolean;
+    /**
+     * The description of the scope.
+     */
+    Description?: String;
+    /**
+     * The number of pools in the scope.
+     */
+    PoolCount?: Integer;
+    /**
+     * The state of the IPAM scope.
+     */
+    State?: IpamScopeState;
+    /**
+     * The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.
+     */
+    Tags?: TagList;
+  }
+  export type IpamScopeId = string;
+  export type IpamScopeSet = IpamScope[];
+  export type IpamScopeState = "create-in-progress"|"create-complete"|"create-failed"|"modify-in-progress"|"modify-complete"|"modify-failed"|"delete-in-progress"|"delete-complete"|"delete-failed"|"isolate-in-progress"|"isolate-complete"|"restore-in-progress"|string;
+  export type IpamScopeType = "public"|"private"|string;
+  export type IpamSet = Ipam[];
+  export type IpamState = "create-in-progress"|"create-complete"|"create-failed"|"modify-in-progress"|"modify-complete"|"modify-failed"|"delete-in-progress"|"delete-complete"|"delete-failed"|"isolate-in-progress"|"isolate-complete"|"restore-in-progress"|string;
+  export type Ipv4PoolCoipId = string;
   export type Ipv4PoolEc2Id = string;
   export type Ipv4PrefixList = Ipv4PrefixSpecificationRequest[];
   export type Ipv4PrefixListResponse = Ipv4PrefixSpecificationResponse[];
@@ -19445,10 +22013,11 @@ declare namespace EC2 {
   export type Ipv6RangeList = Ipv6Range[];
   export type Ipv6SupportValue = "enable"|"disable"|string;
   export type KernelId = string;
+  export type KeyFormat = "pem"|"ppk"|string;
   export type KeyNameStringList = KeyPairName[];
   export interface KeyPair {
     /**
-     * The SHA-1 digest of the DER encoded private key.
+     *   For RSA key pairs, the key fingerprint is the SHA-1 digest of the DER encoded private key.   For ED25519 key pairs, the key fingerprint is the base64-encoded SHA-256 digest, which is the default for OpenSSH, starting with OpenSSH 6.8.  
      */
     KeyFingerprint?: String;
     /**
@@ -19476,7 +22045,7 @@ declare namespace EC2 {
      */
     KeyPairId?: String;
     /**
-     * If you used CreateKeyPair to create the key pair:   For RSA key pairs, the key fingerprint is the SHA-1 digest of the DER encoded private key.    For ED25519 key pairs, the key fingerprint is the base64-encoded SHA-256 digest, which is the default for OpenSSH, starting with OpenSSH 6.8.   If you used ImportKeyPair to provide Amazon Web Services the public key:   For RSA key pairs, the key fingerprint is the MD5 public key fingerprint as specified in section 4 of RFC4716.   For ED25519 key pairs, the key fingerprint is the base64-encoded SHA-256 digest, which is the default for OpenSSH, starting with OpenSSH 6.8.  
+     * If you used CreateKeyPair to create the key pair:   For RSA key pairs, the key fingerprint is the SHA-1 digest of the DER encoded private key.   For ED25519 key pairs, the key fingerprint is the base64-encoded SHA-256 digest, which is the default for OpenSSH, starting with OpenSSH 6.8.   If you used ImportKeyPair to provide Amazon Web Services the public key:   For RSA key pairs, the key fingerprint is the MD5 public key fingerprint as specified in section 4 of RFC4716.   For ED25519 key pairs, the key fingerprint is the base64-encoded SHA-256 digest, which is the default for OpenSSH, starting with OpenSSH 6.8.  
      */
     KeyFingerprint?: String;
     /**
@@ -19491,6 +22060,14 @@ declare namespace EC2 {
      * Any tags applied to the key pair.
      */
     Tags?: TagList;
+    /**
+     * The public key material.
+     */
+    PublicKey?: String;
+    /**
+     * If you used Amazon EC2 to create the key pair, this is the date and time when the key was created, in ISO 8601 date-time format, in the UTC time zone. If you imported an existing key pair to Amazon EC2, this is the date and time the key was imported, in ISO 8601 date-time format, in the UTC time zone.
+     */
+    CreateTime?: MillisecondDateTime;
   }
   export type KeyPairList = KeyPairInfo[];
   export type KeyPairName = string;
@@ -19515,15 +22092,23 @@ declare namespace EC2 {
      * The Amazon Web Services account ID. Constraints: Up to 10 000 account IDs can be specified in a single request.
      */
     UserId?: String;
+    /**
+     * The Amazon Resource Name (ARN) of an organization.
+     */
+    OrganizationArn?: String;
+    /**
+     * The Amazon Resource Name (ARN) of an organizational unit (OU).
+     */
+    OrganizationalUnitArn?: String;
   }
   export type LaunchPermissionList = LaunchPermission[];
   export interface LaunchPermissionModifications {
     /**
-     * The Amazon Web Services account ID to add to the list of launch permissions for the AMI.
+     * The Amazon Web Services account ID, organization ARN, or OU ARN to add to the list of launch permissions for the AMI.
      */
     Add?: LaunchPermissionList;
     /**
-     * The Amazon Web Services account ID to remove from the list of launch permissions for the AMI.
+     * The Amazon Web Services account ID, organization ARN, or OU ARN to remove from the list of launch permissions for the AMI.
      */
     Remove?: LaunchPermissionList;
   }
@@ -19557,7 +22142,7 @@ declare namespace EC2 {
      */
     ImageId?: String;
     /**
-     * The instance type.
+     * The instance type. Only one instance type can be specified.
      */
     InstanceType?: InstanceType;
     /**
@@ -19627,6 +22212,7 @@ declare namespace EC2 {
      */
     Overrides?: FleetLaunchTemplateOverrides;
   }
+  export type LaunchTemplateAutoRecoveryState = "default"|"disabled"|string;
   export interface LaunchTemplateBlockDeviceMapping {
     /**
      * The device name.
@@ -19855,6 +22441,18 @@ declare namespace EC2 {
   }
   export type LaunchTemplateId = string;
   export type LaunchTemplateIdStringList = LaunchTemplateId[];
+  export interface LaunchTemplateInstanceMaintenanceOptions {
+    /**
+     * Disables the automatic recovery behavior of your instance or sets it to default.
+     */
+    AutoRecovery?: LaunchTemplateAutoRecoveryState;
+  }
+  export interface LaunchTemplateInstanceMaintenanceOptionsRequest {
+    /**
+     * Disables the automatic recovery behavior of your instance or sets it to default. For more information, see Simplified automatic recovery.
+     */
+    AutoRecovery?: LaunchTemplateAutoRecoveryState;
+  }
   export interface LaunchTemplateInstanceMarketOptions {
     /**
      * The market type.
@@ -19890,13 +22488,17 @@ declare namespace EC2 {
      */
     HttpPutResponseHopLimit?: Integer;
     /**
-     * This parameter enables or disables the HTTP metadata endpoint on your instances. If the parameter is not specified, the default state is enabled.  If you specify a value of disabled, you will not be able to access your instance metadata.  
+     * Enables or disables the HTTP metadata endpoint on your instances. If the parameter is not specified, the default state is enabled.  If you specify a value of disabled, you will not be able to access your instance metadata.  
      */
     HttpEndpoint?: LaunchTemplateInstanceMetadataEndpointState;
     /**
      * Enables or disables the IPv6 endpoint for the instance metadata service. Default: disabled 
      */
     HttpProtocolIpv6?: LaunchTemplateInstanceMetadataProtocolIpv6;
+    /**
+     * Set to enabled to allow access to instance tags from the instance metadata. Set to disabled to turn off access to instance tags from the instance metadata. For more information, see Work with instance tags using the instance metadata. Default: disabled 
+     */
+    InstanceMetadataTags?: LaunchTemplateInstanceMetadataTagsState;
   }
   export interface LaunchTemplateInstanceMetadataOptionsRequest {
     /**
@@ -19908,16 +22510,21 @@ declare namespace EC2 {
      */
     HttpPutResponseHopLimit?: Integer;
     /**
-     * This parameter enables or disables the HTTP metadata endpoint on your instances. If the parameter is not specified, the default state is enabled.  If you specify a value of disabled, you will not be able to access your instance metadata.  
+     * Enables or disables the HTTP metadata endpoint on your instances. If the parameter is not specified, the default state is enabled.  If you specify a value of disabled, you will not be able to access your instance metadata.  
      */
     HttpEndpoint?: LaunchTemplateInstanceMetadataEndpointState;
     /**
      * Enables or disables the IPv6 endpoint for the instance metadata service. Default: disabled 
      */
     HttpProtocolIpv6?: LaunchTemplateInstanceMetadataProtocolIpv6;
+    /**
+     * Set to enabled to allow access to instance tags from the instance metadata. Set to disabled to turn off access to instance tags from the instance metadata. For more information, see Work with instance tags using the instance metadata. Default: disabled 
+     */
+    InstanceMetadataTags?: LaunchTemplateInstanceMetadataTagsState;
   }
   export type LaunchTemplateInstanceMetadataOptionsState = "pending"|"applied"|string;
   export type LaunchTemplateInstanceMetadataProtocolIpv6 = "disabled"|"enabled"|string;
+  export type LaunchTemplateInstanceMetadataTagsState = "disabled"|"enabled"|string;
   export interface LaunchTemplateInstanceNetworkInterfaceSpecification {
     /**
      * Indicates whether to associate a Carrier IP address with eth0 for a new network interface. Use this option when you launch an instance in a Wavelength Zone and want to associate a Carrier IP address with the network interface. For more information about Carrier IP addresses, see Carrier IP addresses in the Wavelength Developer Guide.
@@ -20117,6 +22724,10 @@ declare namespace EC2 {
      * The priority for the launch template override. The highest priority is launched first. If OnDemandAllocationStrategy is set to prioritized, Spot Fleet uses priority to determine which launch template override to use first in fulfilling On-Demand capacity. If the Spot AllocationStrategy is set to capacityOptimizedPrioritized, Spot Fleet uses priority on a best-effort basis to determine which launch template override to use in fulfilling Spot capacity, but optimizes for capacity first. Valid values are whole numbers starting at 0. The lower the number, the higher the priority. If no number is set, the launch template override has the lowest priority. You can set the same priority for different launch template overrides.
      */
     Priority?: Double;
+    /**
+     * The instance requirements. When you specify instance requirements, Amazon EC2 will identify instance types with the provided requirements, and then use your On-Demand and Spot allocation strategies to launch instances from these instance types, in the same way as when you specify a list of instance types.  If you specify InstanceRequirements, you can't specify InstanceTypes. 
+     */
+    InstanceRequirements?: InstanceRequirements;
   }
   export type LaunchTemplateOverridesList = LaunchTemplateOverrides[];
   export interface LaunchTemplatePlacement {
@@ -20186,6 +22797,34 @@ declare namespace EC2 {
      * The number of the partition the instance should launch in. Valid only if the placement group strategy is set to partition.
      */
     PartitionNumber?: Integer;
+  }
+  export interface LaunchTemplatePrivateDnsNameOptions {
+    /**
+     * The type of hostname to assign to an instance.
+     */
+    HostnameType?: HostnameType;
+    /**
+     * Indicates whether to respond to DNS queries for instance hostnames with DNS A records.
+     */
+    EnableResourceNameDnsARecord?: Boolean;
+    /**
+     * Indicates whether to respond to DNS queries for instance hostnames with DNS AAAA records.
+     */
+    EnableResourceNameDnsAAAARecord?: Boolean;
+  }
+  export interface LaunchTemplatePrivateDnsNameOptionsRequest {
+    /**
+     * The type of hostname for Amazon EC2 instances. For IPv4 only subnets, an instance DNS name must be based on the instance IPv4 address. For IPv6 native subnets, an instance DNS name must be based on the instance ID. For dual-stack subnets, you can specify whether DNS names use the instance IPv4 address or the instance ID.
+     */
+    HostnameType?: HostnameType;
+    /**
+     * Indicates whether to respond to DNS queries for instance hostnames with DNS A records.
+     */
+    EnableResourceNameDnsARecord?: Boolean;
+    /**
+     * Indicates whether to respond to DNS queries for instance hostnames with DNS AAAA records.
+     */
+    EnableResourceNameDnsAAAARecord?: Boolean;
   }
   export type LaunchTemplateSet = LaunchTemplate[];
   export interface LaunchTemplateSpecification {
@@ -20259,7 +22898,7 @@ declare namespace EC2 {
   export type LaunchTemplateTagSpecificationList = LaunchTemplateTagSpecification[];
   export interface LaunchTemplateTagSpecificationRequest {
     /**
-     * The type of resource to tag. Currently, the resource types that support tagging on creation are instance and volume. To tag a resource after it has been created, see CreateTags.
+     * The type of resource to tag. Currently, the resource types that support tagging on creation are instance, volume, elastic-gpu, network-interface, and spot-instances-request. To tag a resource after it has been created, see CreateTags.
      */
     ResourceType?: ResourceType;
     /**
@@ -20329,6 +22968,64 @@ declare namespace EC2 {
   }
   export type LicenseList = LicenseConfiguration[];
   export type LicenseSpecificationListRequest = LicenseConfigurationRequest[];
+  export type ListImagesInRecycleBinMaxResults = number;
+  export interface ListImagesInRecycleBinRequest {
+    /**
+     * The IDs of the AMIs to list. Omit this parameter to list all of the AMIs that are in the Recycle Bin. You can specify up to 20 IDs in a single request.
+     */
+    ImageIds?: ImageIdStringList;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: String;
+    /**
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value. If you do not specify a value for MaxResults, the request returns 1,000 items per page by default. For more information, see  Pagination.
+     */
+    MaxResults?: ListImagesInRecycleBinMaxResults;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface ListImagesInRecycleBinResult {
+    /**
+     * Information about the AMIs.
+     */
+    Images?: ImageRecycleBinInfoList;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: String;
+  }
+  export type ListSnapshotsInRecycleBinMaxResults = number;
+  export interface ListSnapshotsInRecycleBinRequest {
+    /**
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
+     */
+    MaxResults?: ListSnapshotsInRecycleBinMaxResults;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: String;
+    /**
+     * The IDs of the snapshots to list. Omit this parameter to list all of the snapshots that are in the Recycle Bin.
+     */
+    SnapshotIds?: SnapshotIdStringList;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface ListSnapshotsInRecycleBinResult {
+    /**
+     * Information about the snapshots.
+     */
+    Snapshots?: SnapshotRecycleBinInfoList;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: String;
+  }
   export type ListingState = "available"|"sold"|"cancelled"|"pending"|string;
   export type ListingStatus = "active"|"pending"|"cancelled"|"closed"|string;
   export interface LoadBalancersConfig {
@@ -20605,6 +23302,9 @@ declare namespace EC2 {
   export type LocalGatewayVirtualInterfaceId = string;
   export type LocalGatewayVirtualInterfaceIdSet = LocalGatewayVirtualInterfaceId[];
   export type LocalGatewayVirtualInterfaceSet = LocalGatewayVirtualInterface[];
+  export type LocalStorage = "included"|"required"|"excluded"|string;
+  export type LocalStorageType = "hdd"|"ssd"|string;
+  export type LocalStorageTypeSet = LocalStorageType[];
   export type Location = string;
   export type LocationType = "region"|"availability-zone"|"availability-zone-id"|string;
   export type LogDestinationType = "cloud-watch-logs"|"s3"|string;
@@ -20663,11 +23363,51 @@ declare namespace EC2 {
   export type MaximumNetworkCards = number;
   export type MaximumThroughputInMBps = number;
   export type MembershipType = "static"|"igmp"|string;
+  export interface MemoryGiBPerVCpu {
+    /**
+     * The minimum amount of memory per vCPU, in GiB. If this parameter is not specified, there is no minimum limit.
+     */
+    Min?: Double;
+    /**
+     * The maximum amount of memory per vCPU, in GiB. If this parameter is not specified, there is no maximum limit.
+     */
+    Max?: Double;
+  }
+  export interface MemoryGiBPerVCpuRequest {
+    /**
+     * The minimum amount of memory per vCPU, in GiB. To specify no minimum limit, omit this parameter.
+     */
+    Min?: Double;
+    /**
+     * The maximum amount of memory per vCPU, in GiB. To specify no maximum limit, omit this parameter.
+     */
+    Max?: Double;
+  }
   export interface MemoryInfo {
     /**
      * The size of the memory, in MiB.
      */
     SizeInMiB?: MemorySize;
+  }
+  export interface MemoryMiB {
+    /**
+     * The minimum amount of memory, in MiB. If this parameter is not specified, there is no minimum limit.
+     */
+    Min?: Integer;
+    /**
+     * The maximum amount of memory, in MiB. If this parameter is not specified, there is no maximum limit.
+     */
+    Max?: Integer;
+  }
+  export interface MemoryMiBRequest {
+    /**
+     * The minimum amount of memory, in MiB. To specify no minimum limit, specify 0.
+     */
+    Min: Integer;
+    /**
+     * The maximum amount of memory, in MiB. To specify no maximum limit, omit this parameter.
+     */
+    Max?: Integer;
   }
   export type MemorySize = number;
   export type MillisecondDateTime = Date;
@@ -20765,6 +23505,10 @@ declare namespace EC2 {
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
     DryRun?: Boolean;
+    /**
+     * Reserved for future use.
+     */
+    AdditionalInfo?: String;
   }
   export interface ModifyCapacityReservationResult {
     /**
@@ -20821,6 +23565,14 @@ declare namespace EC2 {
      * The options for managing connection authorization for new client connections.
      */
     ClientConnectOptions?: ClientConnectOptions;
+    /**
+     * The maximum VPN session duration time in hours. Valid values: 8 | 10 | 12 | 24  Default value: 24 
+     */
+    SessionTimeoutHours?: Integer;
+    /**
+     * Options for enabling a customizable text banner that will be displayed on Amazon Web Services provided clients when a VPN session is established.
+     */
+    ClientLoginBannerOptions?: ClientLoginBannerOptions;
   }
   export interface ModifyClientVpnEndpointResult {
     /**
@@ -20892,7 +23644,7 @@ declare namespace EC2 {
   }
   export interface ModifyFleetResult {
     /**
-     * Is true if the request succeeds, and an error otherwise.
+     * If the request succeeds, the response returns true. If the request fails, no response is returned, and instead an error message is returned.
      */
     Return?: Boolean;
   }
@@ -21002,7 +23754,7 @@ declare namespace EC2 {
   }
   export interface ModifyImageAttributeRequest {
     /**
-     * The name of the attribute to modify. The valid values are description and launchPermission.
+     * The name of the attribute to modify. Valid values: description | launchPermission 
      */
     Attribute?: String;
     /**
@@ -21041,6 +23793,14 @@ declare namespace EC2 {
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
     DryRun?: Boolean;
+    /**
+     * The Amazon Resource Name (ARN) of an organization. This parameter can be used only when the Attribute parameter is launchPermission.
+     */
+    OrganizationArns?: OrganizationArnStringList;
+    /**
+     * The Amazon Resource Name (ARN) of an organizational unit (OU). This parameter can be used only when the Attribute parameter is launchPermission.
+     */
+    OrganizationalUnitArns?: OrganizationalUnitArnStringList;
   }
   export interface ModifyInstanceAttributeRequest {
     /**
@@ -21052,7 +23812,7 @@ declare namespace EC2 {
      */
     Attribute?: InstanceAttributeName;
     /**
-     * Modifies the DeleteOnTermination attribute for volumes that are currently attached. The volume must be owned by the caller. If no value is specified for DeleteOnTermination, the default is true and the volume is deleted when the instance is terminated. To add instance store volumes to an Amazon EBS-backed instance, you must add them when you launch the instance. For more information, see Updating the block device mapping when launching an instance in the Amazon EC2 User Guide.
+     * Modifies the DeleteOnTermination attribute for volumes that are currently attached. The volume must be owned by the caller. If no value is specified for DeleteOnTermination, the default is true and the volume is deleted when the instance is terminated. To add instance store volumes to an Amazon EBS-backed instance, you must add them when you launch the instance. For more information, see Update the block device mapping when launching an instance in the Amazon EC2 User Guide.
      */
     BlockDeviceMappings?: InstanceBlockDeviceMappingSpecificationList;
     /**
@@ -21201,6 +23961,30 @@ declare namespace EC2 {
      */
     InstanceEventWindow?: InstanceEventWindow;
   }
+  export interface ModifyInstanceMaintenanceOptionsRequest {
+    /**
+     * The ID of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * Disables the automatic recovery behavior of your instance or sets it to default.
+     */
+    AutoRecovery?: InstanceAutoRecoveryState;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface ModifyInstanceMaintenanceOptionsResult {
+    /**
+     * The ID of the instance.
+     */
+    InstanceId?: String;
+    /**
+     * Provides information on the current automatic recovery behavior of your instance.
+     */
+    AutoRecovery?: InstanceAutoRecoveryState;
+  }
   export interface ModifyInstanceMetadataOptionsRequest {
     /**
      * The ID of the instance.
@@ -21215,7 +23999,7 @@ declare namespace EC2 {
      */
     HttpPutResponseHopLimit?: Integer;
     /**
-     * This parameter enables or disables the HTTP metadata endpoint on your instances. If the parameter is not specified, the existing state is maintained.  If you specify a value of disabled, you will not be able to access your instance metadata. 
+     * Enables or disables the HTTP metadata endpoint on your instances. If this parameter is not specified, the existing state is maintained. If you specify a value of disabled, you cannot access your instance metadata.
      */
     HttpEndpoint?: InstanceMetadataEndpointState;
     /**
@@ -21223,9 +24007,13 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * Enables or disables the IPv6 endpoint for the instance metadata service.
+     * Enables or disables the IPv6 endpoint for the instance metadata service. This setting applies only if you have enabled the HTTP metadata endpoint.
      */
     HttpProtocolIpv6?: InstanceMetadataProtocolState;
+    /**
+     * Set to enabled to allow access to instance tags from the instance metadata. Set to disabled to turn off access to instance tags from the instance metadata. For more information, see Work with instance tags using the instance metadata. Default: disabled 
+     */
+    InstanceMetadataTags?: InstanceMetadataTagsState;
   }
   export interface ModifyInstanceMetadataOptionsResult {
     /**
@@ -21259,7 +24047,7 @@ declare namespace EC2 {
      */
     Tenancy?: HostTenancy;
     /**
-     * Reserved for future use.
+     * The number of the partition in which to place the instance. Valid only if the placement group strategy is set to partition.
      */
     PartitionNumber?: Integer;
     /**
@@ -21272,6 +24060,135 @@ declare namespace EC2 {
      * Is true if the request succeeds, and an error otherwise.
      */
     Return?: Boolean;
+  }
+  export interface ModifyIpamPoolRequest {
+    /**
+     * A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The ID of the IPAM pool you want to modify.
+     */
+    IpamPoolId: IpamPoolId;
+    /**
+     * The description of the IPAM pool you want to modify.
+     */
+    Description?: String;
+    /**
+     * If true, IPAM will continuously look for resources within the CIDR range of this pool and automatically import them as allocations into your IPAM. The CIDRs that will be allocated for these resources must not already be allocated to other resources in order for the import to succeed. IPAM will import a CIDR regardless of its compliance with the pool's allocation rules, so a resource might be imported and subsequently marked as noncompliant. If IPAM discovers multiple CIDRs that overlap, IPAM will import the largest CIDR only. If IPAM discovers multiple CIDRs with matching CIDRs, IPAM will randomly import one of them only.  A locale must be set on the pool for this feature to work.
+     */
+    AutoImport?: Boolean;
+    /**
+     * The minimum netmask length required for CIDR allocations in this IPAM pool to be compliant. Possible netmask lengths for IPv4 addresses are 0 - 32. Possible netmask lengths for IPv6 addresses are 0 - 128. The minimum netmask length must be less than the maximum netmask length.
+     */
+    AllocationMinNetmaskLength?: IpamNetmaskLength;
+    /**
+     * The maximum netmask length possible for CIDR allocations in this IPAM pool to be compliant. Possible netmask lengths for IPv4 addresses are 0 - 32. Possible netmask lengths for IPv6 addresses are 0 - 128.The maximum netmask length must be greater than the minimum netmask length.
+     */
+    AllocationMaxNetmaskLength?: IpamNetmaskLength;
+    /**
+     * The default netmask length for allocations added to this pool. If, for example, the CIDR assigned to this pool is 10.0.0.0/8 and you enter 16 here, new allocations will default to 10.0.0.0/16.
+     */
+    AllocationDefaultNetmaskLength?: IpamNetmaskLength;
+    /**
+     * Clear the default netmask length allocation rule for this pool.
+     */
+    ClearAllocationDefaultNetmaskLength?: Boolean;
+    /**
+     * Add tag allocation rules to a pool. For more information about allocation rules, see Create a top-level pool in the Amazon VPC IPAM User Guide.
+     */
+    AddAllocationResourceTags?: RequestIpamResourceTagList;
+    /**
+     * Remove tag allocation rules from a pool.
+     */
+    RemoveAllocationResourceTags?: RequestIpamResourceTagList;
+  }
+  export interface ModifyIpamPoolResult {
+    /**
+     * The results of the modification.
+     */
+    IpamPool?: IpamPool;
+  }
+  export interface ModifyIpamRequest {
+    /**
+     * A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The ID of the IPAM you want to modify.
+     */
+    IpamId: IpamId;
+    /**
+     * The description of the IPAM you want to modify.
+     */
+    Description?: String;
+    /**
+     * Choose the operating Regions for the IPAM. Operating Regions are Amazon Web Services Regions where the IPAM is allowed to manage IP address CIDRs. IPAM only discovers and monitors resources in the Amazon Web Services Regions you select as operating Regions. For more information about operating Regions, see Create an IPAM in the Amazon VPC IPAM User Guide.
+     */
+    AddOperatingRegions?: AddIpamOperatingRegionSet;
+    /**
+     * The operating Regions to remove.
+     */
+    RemoveOperatingRegions?: RemoveIpamOperatingRegionSet;
+  }
+  export interface ModifyIpamResourceCidrRequest {
+    /**
+     * A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The ID of the resource you want to modify.
+     */
+    ResourceId: String;
+    /**
+     * The CIDR of the resource you want to modify.
+     */
+    ResourceCidr: String;
+    /**
+     * The Amazon Web Services Region of the resource you want to modify.
+     */
+    ResourceRegion: String;
+    /**
+     * The ID of the current scope that the resource CIDR is in.
+     */
+    CurrentIpamScopeId: IpamScopeId;
+    /**
+     * The ID of the scope you want to transfer the resource CIDR to.
+     */
+    DestinationIpamScopeId?: IpamScopeId;
+    /**
+     * Determines if the resource is monitored by IPAM. If a resource is monitored, the resource is discovered by IPAM and you can view details about the resource’s CIDR.
+     */
+    Monitored: Boolean;
+  }
+  export interface ModifyIpamResourceCidrResult {
+    IpamResourceCidr?: IpamResourceCidr;
+  }
+  export interface ModifyIpamResult {
+    /**
+     * The results of the modification.
+     */
+    Ipam?: Ipam;
+  }
+  export interface ModifyIpamScopeRequest {
+    /**
+     * A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The ID of the scope you want to modify.
+     */
+    IpamScopeId: IpamScopeId;
+    /**
+     * The description of the scope you want to modify.
+     */
+    Description?: String;
+  }
+  export interface ModifyIpamScopeResult {
+    /**
+     * The results of the modification.
+     */
+    IpamScope?: IpamScope;
   }
   export interface ModifyLaunchTemplateRequest {
     /**
@@ -21363,6 +24280,34 @@ declare namespace EC2 {
      */
     SourceDestCheck?: AttributeBooleanValue;
   }
+  export interface ModifyPrivateDnsNameOptionsRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The ID of the instance.
+     */
+    InstanceId?: InstanceId;
+    /**
+     * The type of hostname for EC2 instances. For IPv4 only subnets, an instance DNS name must be based on the instance IPv4 address. For IPv6 only subnets, an instance DNS name must be based on the instance ID. For dual-stack subnets, you can specify whether DNS names use the instance IPv4 address or the instance ID.
+     */
+    PrivateDnsHostnameType?: HostnameType;
+    /**
+     * Indicates whether to respond to DNS queries for instance hostnames with DNS A records.
+     */
+    EnableResourceNameDnsARecord?: Boolean;
+    /**
+     * Indicates whether to respond to DNS queries for instance hostnames with DNS AAAA records.
+     */
+    EnableResourceNameDnsAAAARecord?: Boolean;
+  }
+  export interface ModifyPrivateDnsNameOptionsResult {
+    /**
+     * Returns true if the request succeeds; otherwise, it returns an error.
+     */
+    Return?: Boolean;
+  }
   export interface ModifyReservedInstancesRequest {
     /**
      * The IDs of the Reserved Instances to modify.
@@ -21433,6 +24378,30 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
   }
+  export interface ModifySnapshotTierRequest {
+    /**
+     * The ID of the snapshot.
+     */
+    SnapshotId: SnapshotId;
+    /**
+     * The name of the storage tier. You must specify archive.
+     */
+    StorageTier?: TargetStorageTier;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface ModifySnapshotTierResult {
+    /**
+     * The ID of the snapshot.
+     */
+    SnapshotId?: String;
+    /**
+     * The date and time when the archive process was started.
+     */
+    TieringStartTime?: MillisecondDateTime;
+  }
   export interface ModifySpotFleetRequestRequest {
     /**
      * Indicates whether running Spot Instances should be terminated if the target capacity of the Spot Fleet request is decreased below the current size of the Spot Fleet.
@@ -21461,7 +24430,7 @@ declare namespace EC2 {
   }
   export interface ModifySpotFleetRequestResponse {
     /**
-     * Is true if the request succeeds, and an error otherwise.
+     * If the request succeeds, the response returns true. If the request fails, no response is returned, and instead an error message is returned.
      */
     Return?: Boolean;
   }
@@ -21486,6 +24455,30 @@ declare namespace EC2 {
      * The customer-owned IPv4 address pool associated with the subnet. You must set this value when you specify true for MapCustomerOwnedIpOnLaunch.
      */
     CustomerOwnedIpv4Pool?: CoipPoolId;
+    /**
+     * Indicates whether DNS queries made to the Amazon-provided DNS Resolver in this subnet should return synthetic IPv6 addresses for IPv4-only destinations.
+     */
+    EnableDns64?: AttributeBooleanValue;
+    /**
+     * The type of hostname to assign to instances in the subnet at launch. For IPv4-only and dual-stack (IPv4 and IPv6) subnets, an instance DNS name can be based on the instance IPv4 address (ip-name) or the instance ID (resource-name). For IPv6 only subnets, an instance DNS name must be based on the instance ID (resource-name).
+     */
+    PrivateDnsHostnameTypeOnLaunch?: HostnameType;
+    /**
+     * Indicates whether to respond to DNS queries for instance hostnames with DNS A records.
+     */
+    EnableResourceNameDnsARecordOnLaunch?: AttributeBooleanValue;
+    /**
+     * Indicates whether to respond to DNS queries for instance hostnames with DNS AAAA records.
+     */
+    EnableResourceNameDnsAAAARecordOnLaunch?: AttributeBooleanValue;
+    /**
+     *  Indicates the device position for local network interfaces in this subnet. For example, 1 indicates local network interfaces in this subnet are the secondary network interface (eth1). A local network interface cannot be the primary network interface (eth0). 
+     */
+    EnableLniAtDeviceIndex?: Integer;
+    /**
+     *  Specify true to indicate that local network interfaces at the current position should be disabled. 
+     */
+    DisableLniAtDeviceIndex?: AttributeBooleanValue;
   }
   export interface ModifyTrafficMirrorFilterNetworkServicesRequest {
     /**
@@ -21870,6 +24863,14 @@ declare namespace EC2 {
      */
     RemoveSecurityGroupIds?: VpcEndpointSecurityGroupIdList;
     /**
+     * The IP address type for the endpoint.
+     */
+    IpAddressType?: IpAddressType;
+    /**
+     * The DNS options for the endpoint.
+     */
+    DnsOptions?: DnsOptionsSpecification;
+    /**
      * (Interface endpoint) Indicates whether a private hosted zone is associated with the VPC.
      */
     PrivateDnsEnabled?: Boolean;
@@ -21917,12 +24918,40 @@ declare namespace EC2 {
      * The Amazon Resource Names (ARNs) of Gateway Load Balancers to remove from your service configuration.
      */
     RemoveGatewayLoadBalancerArns?: ValueStringList;
+    /**
+     * The IP address types to add to your service configuration.
+     */
+    AddSupportedIpAddressTypes?: ValueStringList;
+    /**
+     * The IP address types to remove from your service configuration.
+     */
+    RemoveSupportedIpAddressTypes?: ValueStringList;
   }
   export interface ModifyVpcEndpointServiceConfigurationResult {
     /**
      * Returns true if the request succeeds; otherwise, it returns an error.
      */
     Return?: Boolean;
+  }
+  export interface ModifyVpcEndpointServicePayerResponsibilityRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The ID of the service.
+     */
+    ServiceId: VpcEndpointServiceId;
+    /**
+     * The entity that is responsible for the endpoint costs. The default is the endpoint owner. If you set the payer responsibility to the service owner, you cannot set it back to the endpoint owner.
+     */
+    PayerResponsibility: PayerResponsibility;
+  }
+  export interface ModifyVpcEndpointServicePayerResponsibilityResult {
+    /**
+     * Returns true if the request succeeds; otherwise, it returns an error.
+     */
+    ReturnValue?: Boolean;
   }
   export interface ModifyVpcEndpointServicePermissionsRequest {
     /**
@@ -22122,7 +25151,7 @@ declare namespace EC2 {
      */
     ReplayWindowSize?: Integer;
     /**
-     * The number of seconds after which a DPD timeout occurs. Constraints: A value between 0 and 30. Default: 30 
+     * The number of seconds after which a DPD timeout occurs. Constraints: A value greater than or equal to 30. Default: 30 
      */
     DPDTimeoutSeconds?: Integer;
     /**
@@ -22204,6 +25233,27 @@ declare namespace EC2 {
      * The status of the move of the IP address.
      */
     Status?: Status;
+  }
+  export interface MoveByoipCidrToIpamRequest {
+    /**
+     * A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The BYOIP CIDR.
+     */
+    Cidr: String;
+    /**
+     * The IPAM pool ID.
+     */
+    IpamPoolId: IpamPoolId;
+    /**
+     * The Amazon Web Services account ID of the owner of the IPAM pool.
+     */
+    IpamPoolOwner: String;
+  }
+  export interface MoveByoipCidrToIpamResult {
+    ByoipCidr?: ByoipCidr;
   }
   export type MoveStatus = "movingToVpc"|"restoringToClassic"|string;
   export interface MovingAddressStatus {
@@ -22291,6 +25341,7 @@ declare namespace EC2 {
   export type NatGatewayIdStringList = NatGatewayId[];
   export type NatGatewayList = NatGateway[];
   export type NatGatewayState = "pending"|"failed"|"available"|"deleting"|"deleted"|string;
+  export type NetmaskLength = number;
   export interface NetworkAcl {
     /**
      * Any associations between the network ACL and one or more subnets
@@ -22441,6 +25492,94 @@ declare namespace EC2 {
      */
     EncryptionInTransitSupported?: EncryptionInTransitSupported;
   }
+  export interface NetworkInsightsAccessScope {
+    /**
+     * The ID of the Network Access Scope.
+     */
+    NetworkInsightsAccessScopeId?: NetworkInsightsAccessScopeId;
+    /**
+     * The Amazon Resource Name (ARN) of the Network Access Scope.
+     */
+    NetworkInsightsAccessScopeArn?: ResourceArn;
+    /**
+     * The creation date.
+     */
+    CreatedDate?: MillisecondDateTime;
+    /**
+     * The last updated date.
+     */
+    UpdatedDate?: MillisecondDateTime;
+    /**
+     * The tags.
+     */
+    Tags?: TagList;
+  }
+  export interface NetworkInsightsAccessScopeAnalysis {
+    /**
+     * The ID of the Network Access Scope analysis.
+     */
+    NetworkInsightsAccessScopeAnalysisId?: NetworkInsightsAccessScopeAnalysisId;
+    /**
+     * The Amazon Resource Name (ARN) of the Network Access Scope analysis.
+     */
+    NetworkInsightsAccessScopeAnalysisArn?: ResourceArn;
+    /**
+     * The ID of the Network Access Scope.
+     */
+    NetworkInsightsAccessScopeId?: NetworkInsightsAccessScopeId;
+    /**
+     * The status.
+     */
+    Status?: AnalysisStatus;
+    /**
+     * The status message.
+     */
+    StatusMessage?: String;
+    /**
+     * The warning message.
+     */
+    WarningMessage?: String;
+    /**
+     * The analysis start date.
+     */
+    StartDate?: MillisecondDateTime;
+    /**
+     * The analysis end date.
+     */
+    EndDate?: MillisecondDateTime;
+    /**
+     * Indicates whether there are findings.
+     */
+    FindingsFound?: FindingsFound;
+    /**
+     * The number of network interfaces analyzed.
+     */
+    AnalyzedEniCount?: Integer;
+    /**
+     * The tags.
+     */
+    Tags?: TagList;
+  }
+  export type NetworkInsightsAccessScopeAnalysisId = string;
+  export type NetworkInsightsAccessScopeAnalysisIdList = NetworkInsightsAccessScopeAnalysisId[];
+  export type NetworkInsightsAccessScopeAnalysisList = NetworkInsightsAccessScopeAnalysis[];
+  export interface NetworkInsightsAccessScopeContent {
+    /**
+     * The ID of the Network Access Scope.
+     */
+    NetworkInsightsAccessScopeId?: NetworkInsightsAccessScopeId;
+    /**
+     * The paths to match.
+     */
+    MatchPaths?: AccessScopePathList;
+    /**
+     * The paths to exclude.
+     */
+    ExcludePaths?: AccessScopePathList;
+  }
+  export type NetworkInsightsAccessScopeId = string;
+  export type NetworkInsightsAccessScopeIdList = NetworkInsightsAccessScopeId[];
+  export type NetworkInsightsAccessScopeList = NetworkInsightsAccessScope[];
   export interface NetworkInsightsAnalysis {
     /**
      * The ID of the network insights analysis.
@@ -22470,6 +25609,10 @@ declare namespace EC2 {
      * The status message, if the status is failed.
      */
     StatusMessage?: String;
+    /**
+     * The warning message.
+     */
+    WarningMessage?: String;
     /**
      * Indicates whether the destination is reachable from the source.
      */
@@ -22544,6 +25687,7 @@ declare namespace EC2 {
   export type NetworkInsightsPathId = string;
   export type NetworkInsightsPathIdList = NetworkInsightsPathId[];
   export type NetworkInsightsPathList = NetworkInsightsPath[];
+  export type NetworkInsightsResourceId = string;
   export interface NetworkInterface {
     /**
      * The association information for an Elastic IP address (IPv4) associated with the network interface.
@@ -22637,6 +25781,18 @@ declare namespace EC2 {
      * The ID of the VPC.
      */
     VpcId?: String;
+    /**
+     * Indicates whether a network interface with an IPv6 address is unreachable from the public internet. If the value is true, inbound traffic from the internet is dropped and you cannot assign an elastic IP address to the network interface. The network interface is reachable from peered VPCs and resources connected through a transit gateway, including on-premises networks.
+     */
+    DenyAllIgwTraffic?: Boolean;
+    /**
+     * Indicates whether this is an IPv6 only network interface.
+     */
+    Ipv6Native?: Boolean;
+    /**
+     * The IPv6 globally unique address associated with the network interface.
+     */
+    Ipv6Address?: String;
   }
   export interface NetworkInterfaceAssociation {
     /**
@@ -22714,6 +25870,26 @@ declare namespace EC2 {
   }
   export type NetworkInterfaceAttachmentId = string;
   export type NetworkInterfaceAttribute = "description"|"groupSet"|"sourceDestCheck"|"attachment"|string;
+  export interface NetworkInterfaceCount {
+    /**
+     * The minimum number of network interfaces. If this parameter is not specified, there is no minimum limit.
+     */
+    Min?: Integer;
+    /**
+     * The maximum number of network interfaces. If this parameter is not specified, there is no maximum limit.
+     */
+    Max?: Integer;
+  }
+  export interface NetworkInterfaceCountRequest {
+    /**
+     * The minimum number of network interfaces. To specify no minimum limit, omit this parameter.
+     */
+    Min?: Integer;
+    /**
+     * The maximum number of network interfaces. To specify no maximum limit, omit this parameter.
+     */
+    Max?: Integer;
+  }
   export type NetworkInterfaceCreationType = "efa"|"branch"|"trunk"|string;
   export type NetworkInterfaceId = string;
   export type NetworkInterfaceIdList = NetworkInterfaceId[];
@@ -22785,7 +25961,7 @@ declare namespace EC2 {
   }
   export type NetworkInterfacePrivateIpAddressList = NetworkInterfacePrivateIpAddress[];
   export type NetworkInterfaceStatus = "available"|"associated"|"attaching"|"in-use"|"detaching"|string;
-  export type NetworkInterfaceType = "interface"|"natGateway"|"efa"|"trunk"|string;
+  export type NetworkInterfaceType = "interface"|"natGateway"|"efa"|"trunk"|"load_balancer"|"network_load_balancer"|"vpc_endpoint"|"branch"|"transit_gateway"|"lambda"|"quicksight"|"global_accelerator_managed"|"api_gateway_managed"|"gateway_load_balancer"|"gateway_load_balancer_endpoint"|"iot_rules_managed"|"aws_codestar_connections_managed"|string;
   export type NetworkPerformance = string;
   export interface NewDhcpConfiguration {
     Key?: String;
@@ -22801,7 +25977,7 @@ declare namespace EC2 {
   export type OnDemandAllocationStrategy = "lowestPrice"|"prioritized"|string;
   export interface OnDemandOptions {
     /**
-     * The order of the launch template overrides to use in fulfilling On-Demand capacity. If you specify lowest-price, EC2 Fleet uses price to determine the order, launching the lowest price first. If you specify prioritized, EC2 Fleet uses the priority that you assigned to each launch template override, launching the highest priority first. If you do not specify a value, EC2 Fleet defaults to lowest-price.
+     * The strategy that determines the order of the launch template overrides to use in fulfilling On-Demand capacity.  lowest-price - EC2 Fleet uses price to determine the order, launching the lowest price first.  prioritized - EC2 Fleet uses the priority that you assigned to each launch template override, launching the highest priority first. Default: lowest-price 
      */
     AllocationStrategy?: FleetOnDemandAllocationStrategy;
     /**
@@ -22817,7 +25993,7 @@ declare namespace EC2 {
      */
     SingleAvailabilityZone?: Boolean;
     /**
-     * The minimum target capacity for On-Demand Instances in the fleet. If the minimum target capacity is not reached, the fleet launches no instances.
+     * The minimum target capacity for On-Demand Instances in the fleet. If the minimum target capacity is not reached, the fleet launches no instances. Supported only for fleets of type instant. At least one of the following must be specified: SingleAvailabilityZone | SingleInstanceType 
      */
     MinTargetCapacity?: Integer;
     /**
@@ -22827,7 +26003,7 @@ declare namespace EC2 {
   }
   export interface OnDemandOptionsRequest {
     /**
-     * The order of the launch template overrides to use in fulfilling On-Demand capacity. If you specify lowest-price, EC2 Fleet uses price to determine the order, launching the lowest price first. If you specify prioritized, EC2 Fleet uses the priority that you assigned to each launch template override, launching the highest priority first. If you do not specify a value, EC2 Fleet defaults to lowest-price.
+     * The strategy that determines the order of the launch template overrides to use in fulfilling On-Demand capacity.  lowest-price - EC2 Fleet uses price to determine the order, launching the lowest price first.  prioritized - EC2 Fleet uses the priority that you assigned to each launch template override, launching the highest priority first. Default: lowest-price 
      */
     AllocationStrategy?: FleetOnDemandAllocationStrategy;
     /**
@@ -22843,7 +26019,7 @@ declare namespace EC2 {
      */
     SingleAvailabilityZone?: Boolean;
     /**
-     * The minimum target capacity for On-Demand Instances in the fleet. If the minimum target capacity is not reached, the fleet launches no instances.
+     * The minimum target capacity for On-Demand Instances in the fleet. If the minimum target capacity is not reached, the fleet launches no instances. Supported only for fleets of type instant. At least one of the following must be specified: SingleAvailabilityZone | SingleInstanceType 
      */
     MinTargetCapacity?: Integer;
     /**
@@ -22852,8 +26028,70 @@ declare namespace EC2 {
     MaxTotalPrice?: String;
   }
   export type OperationType = "add"|"remove"|string;
+  export type OrganizationArnStringList = String[];
+  export type OrganizationalUnitArnStringList = String[];
   export type OutpostArn = string;
   export type OwnerStringList = String[];
+  export interface PacketHeaderStatement {
+    /**
+     * The source addresses.
+     */
+    SourceAddresses?: ValueStringList;
+    /**
+     * The destination addresses.
+     */
+    DestinationAddresses?: ValueStringList;
+    /**
+     * The source ports.
+     */
+    SourcePorts?: ValueStringList;
+    /**
+     * The destination ports.
+     */
+    DestinationPorts?: ValueStringList;
+    /**
+     * The source prefix lists.
+     */
+    SourcePrefixLists?: ValueStringList;
+    /**
+     * The destination prefix lists.
+     */
+    DestinationPrefixLists?: ValueStringList;
+    /**
+     * The protocols.
+     */
+    Protocols?: ProtocolList;
+  }
+  export interface PacketHeaderStatementRequest {
+    /**
+     * The source addresses.
+     */
+    SourceAddresses?: ValueStringList;
+    /**
+     * The destination addresses.
+     */
+    DestinationAddresses?: ValueStringList;
+    /**
+     * The source ports.
+     */
+    SourcePorts?: ValueStringList;
+    /**
+     * The destination ports.
+     */
+    DestinationPorts?: ValueStringList;
+    /**
+     * The source prefix lists.
+     */
+    SourcePrefixLists?: ValueStringList;
+    /**
+     * The destination prefix lists.
+     */
+    DestinationPrefixLists?: ValueStringList;
+    /**
+     * The protocols.
+     */
+    Protocols?: ProtocolList;
+  }
   export type PartitionLoadFrequency = "none"|"daily"|"weekly"|"monthly"|string;
   export interface PathComponent {
     /**
@@ -22864,6 +26102,10 @@ declare namespace EC2 {
      * The network ACL rule.
      */
     AclRule?: AnalysisAclRule;
+    /**
+     * The resource to which the path component is attached.
+     */
+    AttachedTo?: AnalysisComponent;
     /**
      * The component.
      */
@@ -22900,8 +26142,38 @@ declare namespace EC2 {
      * The component VPC.
      */
     Vpc?: AnalysisComponent;
+    /**
+     * The additional details.
+     */
+    AdditionalDetails?: AdditionalDetailList;
+    TransitGateway?: AnalysisComponent;
+    /**
+     * The route in a transit gateway route table.
+     */
+    TransitGatewayRouteTableRoute?: TransitGatewayRouteTableRoute;
   }
   export type PathComponentList = PathComponent[];
+  export interface PathStatement {
+    /**
+     * The packet header statement.
+     */
+    PacketHeaderStatement?: PacketHeaderStatement;
+    /**
+     * The resource statement.
+     */
+    ResourceStatement?: ResourceStatement;
+  }
+  export interface PathStatementRequest {
+    /**
+     * The packet header statement.
+     */
+    PacketHeaderStatement?: PacketHeaderStatementRequest;
+    /**
+     * The resource statement.
+     */
+    ResourceStatement?: ResourceStatementRequest;
+  }
+  export type PayerResponsibility = "ServiceOwner"|string;
   export type PaymentOption = "AllUpfront"|"PartialUpfront"|"NoUpfront"|string;
   export interface PciId {
     /**
@@ -23072,7 +26344,7 @@ declare namespace EC2 {
      */
     GroupName?: PlacementGroupName;
     /**
-     * The number of the partition the instance is in. Valid only if the placement group strategy is set to partition. This parameter is not supported by CreateFleet.
+     * The number of the partition that the instance is in. Valid only if the placement group strategy is set to partition. This parameter is not supported by CreateFleet.
      */
     PartitionNumber?: Integer;
     /**
@@ -23117,7 +26389,12 @@ declare namespace EC2 {
      * Any tags applied to the placement group.
      */
     Tags?: TagList;
+    /**
+     * The Amazon Resource Name (ARN) of the placement group.
+     */
+    GroupArn?: String;
   }
+  export type PlacementGroupArn = string;
   export type PlacementGroupId = string;
   export type PlacementGroupIdStringList = PlacementGroupId[];
   export interface PlacementGroupInfo {
@@ -23295,6 +26572,48 @@ declare namespace EC2 {
      */
     Name?: String;
   }
+  export interface PrivateDnsNameOptionsOnLaunch {
+    /**
+     * The type of hostname for EC2 instances. For IPv4 only subnets, an instance DNS name must be based on the instance IPv4 address. For IPv6 only subnets, an instance DNS name must be based on the instance ID. For dual-stack subnets, you can specify whether DNS names use the instance IPv4 address or the instance ID.
+     */
+    HostnameType?: HostnameType;
+    /**
+     * Indicates whether to respond to DNS queries for instance hostnames with DNS A records.
+     */
+    EnableResourceNameDnsARecord?: Boolean;
+    /**
+     * Indicates whether to respond to DNS queries for instance hostname with DNS AAAA records.
+     */
+    EnableResourceNameDnsAAAARecord?: Boolean;
+  }
+  export interface PrivateDnsNameOptionsRequest {
+    /**
+     * The type of hostname for EC2 instances. For IPv4 only subnets, an instance DNS name must be based on the instance IPv4 address. For IPv6 only subnets, an instance DNS name must be based on the instance ID. For dual-stack subnets, you can specify whether DNS names use the instance IPv4 address or the instance ID.
+     */
+    HostnameType?: HostnameType;
+    /**
+     * Indicates whether to respond to DNS queries for instance hostnames with DNS A records.
+     */
+    EnableResourceNameDnsARecord?: Boolean;
+    /**
+     * Indicates whether to respond to DNS queries for instance hostnames with DNS AAAA records.
+     */
+    EnableResourceNameDnsAAAARecord?: Boolean;
+  }
+  export interface PrivateDnsNameOptionsResponse {
+    /**
+     * The type of hostname to assign to an instance.
+     */
+    HostnameType?: HostnameType;
+    /**
+     * Indicates whether to respond to DNS queries for instance hostnames with DNS A records.
+     */
+    EnableResourceNameDnsARecord?: Boolean;
+    /**
+     * Indicates whether to respond to DNS queries for instance hostnames with DNS AAAA records.
+     */
+    EnableResourceNameDnsAAAARecord?: Boolean;
+  }
   export type PrivateIpAddressConfigSet = ScheduledInstancesPrivateIpAddressConfig[];
   export interface PrivateIpAddressSpecification {
     /**
@@ -23341,6 +26660,7 @@ declare namespace EC2 {
   }
   export type PropagatingVgwList = PropagatingVgw[];
   export type Protocol = "tcp"|"udp"|string;
+  export type ProtocolList = Protocol[];
   export type ProtocolValue = "gre"|string;
   export interface ProvisionByoipCidrRequest {
     /**
@@ -23377,6 +26697,55 @@ declare namespace EC2 {
      * Information about the address range.
      */
     ByoipCidr?: ByoipCidr;
+  }
+  export interface ProvisionIpamPoolCidrRequest {
+    /**
+     * A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The ID of the IPAM pool to which you want to assign a CIDR.
+     */
+    IpamPoolId: IpamPoolId;
+    /**
+     * The CIDR you want to assign to the IPAM pool.
+     */
+    Cidr?: String;
+    /**
+     * A signed document that proves that you are authorized to bring a specified IP address range to Amazon using BYOIP. This option applies to public pools only.
+     */
+    CidrAuthorizationContext?: IpamCidrAuthorizationContext;
+  }
+  export interface ProvisionIpamPoolCidrResult {
+    /**
+     * Information about the provisioned CIDR.
+     */
+    IpamPoolCidr?: IpamPoolCidr;
+  }
+  export interface ProvisionPublicIpv4PoolCidrRequest {
+    /**
+     * A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The ID of the IPAM pool you would like to use to allocate this CIDR.
+     */
+    IpamPoolId: IpamPoolId;
+    /**
+     * The ID of the public IPv4 pool you would like to use for this CIDR.
+     */
+    PoolId: Ipv4PoolEc2Id;
+    /**
+     * The netmask length of the CIDR you would like to allocate to the public IPv4 pool.
+     */
+    NetmaskLength: Integer;
+  }
+  export interface ProvisionPublicIpv4PoolCidrResult {
+    /**
+     * The ID of the pool that you want to provision the CIDR to.
+     */
+    PoolId?: Ipv4PoolEc2Id;
+    PoolAddressRange?: PublicIpv4PoolRange;
   }
   export interface ProvisionedBandwidth {
     /**
@@ -23483,7 +26852,7 @@ declare namespace EC2 {
     /**
      * The ID of the reservation.
      */
-    HostReservationId?: String;
+    HostReservationId?: HostReservationId;
     /**
      * The hourly price of the reservation per hour.
      */
@@ -23673,6 +27042,7 @@ declare namespace EC2 {
   }
   export type RegionList = Region[];
   export type RegionNameStringList = String[];
+  export type RegionNames = String[];
   export interface RegisterImageRequest {
     /**
      * The full path to your AMI manifest in Amazon S3 storage. The specified bucket must have the aws-exec-read canned access control list (ACL) to ensure that it can be accessed by Amazon EC2. For more information, see Canned ACLs in the Amazon S3 Service Developer Guide.
@@ -23730,6 +27100,14 @@ declare namespace EC2 {
      * The boot mode of the AMI. For more information, see Boot modes in the Amazon Elastic Compute Cloud User Guide.
      */
     BootMode?: BootModeValues;
+    /**
+     * Set to v2.0 to enable Trusted Platform Module (TPM) support. For more information, see NitroTPM in the Amazon Elastic Compute Cloud User Guide.
+     */
+    TpmSupport?: TpmSupportValues;
+    /**
+     * Base64 representation of the non-volatile UEFI variable store. To retrieve the UEFI data, use the GetInstanceUefiData command. You can inspect and modify the UEFI data by using the python-uefivars tool on GitHub. For more information, see UEFI Secure Boot in the Amazon Elastic Compute Cloud User Guide.
+     */
+    UefiData?: StringType;
   }
   export interface RegisterImageResult {
     /**
@@ -23934,6 +27312,37 @@ declare namespace EC2 {
      */
     Unsuccessful?: UnsuccessfulItemList;
   }
+  export interface ReleaseIpamPoolAllocationRequest {
+    /**
+     * A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The ID of the IPAM pool which contains the allocation you want to release.
+     */
+    IpamPoolId: IpamPoolId;
+    /**
+     * The CIDR of the allocation you want to release.
+     */
+    Cidr: String;
+    /**
+     * The ID of the allocation.
+     */
+    IpamPoolAllocationId: IpamPoolAllocationId;
+  }
+  export interface ReleaseIpamPoolAllocationResult {
+    /**
+     * Indicates if the release was successful.
+     */
+    Success?: Boolean;
+  }
+  export interface RemoveIpamOperatingRegion {
+    /**
+     * The name of the operating Region you want to remove.
+     */
+    RegionName?: String;
+  }
+  export type RemoveIpamOperatingRegionSet = RemoveIpamOperatingRegion[];
   export type RemovePrefixListEntries = RemovePrefixListEntry[];
   export interface RemovePrefixListEntry {
     /**
@@ -24114,6 +27523,10 @@ declare namespace EC2 {
      * The ID of a VPC peering connection.
      */
     VpcPeeringConnectionId?: VpcPeeringConnectionId;
+    /**
+     * The Amazon Resource Name (ARN) of the core network.
+     */
+    CoreNetworkArn?: CoreNetworkArn;
   }
   export interface ReplaceRouteTableAssociationRequest {
     /**
@@ -24167,7 +27580,7 @@ declare namespace EC2 {
      */
     Route?: TransitGatewayRoute;
   }
-  export type ReplacementStrategy = "launch"|string;
+  export type ReplacementStrategy = "launch"|"launch-before-terminate"|string;
   export type ReportInstanceReasonCodes = "instance-stuck-in-state"|"unresponsive"|"not-accepting-credentials"|"password-not-available"|"performance-network"|"performance-instance-store"|"performance-ebs-volume"|"performance-other"|"other"|string;
   export interface ReportInstanceStatusRequest {
     /**
@@ -24203,6 +27616,17 @@ declare namespace EC2 {
   export type RequestHostIdList = DedicatedHostId[];
   export type RequestHostIdSet = DedicatedHostId[];
   export type RequestInstanceTypeList = InstanceType[];
+  export interface RequestIpamResourceTag {
+    /**
+     * The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.
+     */
+    Key?: String;
+    /**
+     * The value for the tag.
+     */
+    Value?: String;
+  }
+  export type RequestIpamResourceTagList = RequestIpamResourceTag[];
   export interface RequestLaunchTemplateData {
     /**
      * The ID of the kernel.  We recommend that you use PV-GRUB instead of kernels and RAM disks. For more information, see User Provided Kernels in the Amazon Elastic Compute Cloud User Guide. 
@@ -24229,7 +27653,7 @@ declare namespace EC2 {
      */
     ImageId?: ImageId;
     /**
-     * The instance type. For more information, see Instance Types in the Amazon Elastic Compute Cloud User Guide.
+     * The instance type. For more information, see Instance Types in the Amazon Elastic Compute Cloud User Guide. If you specify InstanceTypes, you can't specify InstanceRequirements.
      */
     InstanceType?: InstanceType;
     /**
@@ -24312,6 +27736,18 @@ declare namespace EC2 {
      * Indicates whether the instance is enabled for Amazon Web Services Nitro Enclaves. For more information, see  What is Amazon Web Services Nitro Enclaves? in the Amazon Web Services Nitro Enclaves User Guide. You can't enable Amazon Web Services Nitro Enclaves and hibernation on the same instance.
      */
     EnclaveOptions?: LaunchTemplateEnclaveOptionsRequest;
+    /**
+     * The attributes for the instance types. When you specify instance attributes, Amazon EC2 will identify instance types with these attributes. If you specify InstanceRequirements, you can't specify InstanceTypes.
+     */
+    InstanceRequirements?: InstanceRequirementsRequest;
+    /**
+     * The options for the instance hostname. The default values are inherited from the subnet.
+     */
+    PrivateDnsNameOptions?: LaunchTemplatePrivateDnsNameOptionsRequest;
+    /**
+     * The maintenance options for the instance.
+     */
+    MaintenanceOptions?: LaunchTemplateInstanceMaintenanceOptionsRequest;
   }
   export interface RequestSpotFleetRequest {
     /**
@@ -24419,7 +27855,7 @@ declare namespace EC2 {
      */
     ImageId?: ImageId;
     /**
-     * The instance type.
+     * The instance type. Only one instance type can be specified.
      */
     InstanceType?: InstanceType;
     /**
@@ -24887,7 +28323,7 @@ declare namespace EC2 {
   }
   export interface ResetInstanceAttributeRequest {
     /**
-     * The attribute to reset.  You can only reset the following attributes: kernel | ramdisk | sourceDestCheck. To change an instance attribute, use ModifyInstanceAttribute. 
+     * The attribute to reset.  You can only reset the following attributes: kernel | ramdisk | sourceDestCheck. 
      */
     Attribute: InstanceAttributeName;
     /**
@@ -24930,7 +28366,27 @@ declare namespace EC2 {
   export type ResourceArn = string;
   export type ResourceIdList = TaggableResourceId[];
   export type ResourceList = String[];
-  export type ResourceType = "capacity-reservation"|"client-vpn-endpoint"|"customer-gateway"|"carrier-gateway"|"dedicated-host"|"dhcp-options"|"egress-only-internet-gateway"|"elastic-ip"|"elastic-gpu"|"export-image-task"|"export-instance-task"|"fleet"|"fpga-image"|"host-reservation"|"image"|"import-image-task"|"import-snapshot-task"|"instance"|"instance-event-window"|"internet-gateway"|"ipv4pool-ec2"|"ipv6pool-ec2"|"key-pair"|"launch-template"|"local-gateway"|"local-gateway-route-table"|"local-gateway-virtual-interface"|"local-gateway-virtual-interface-group"|"local-gateway-route-table-vpc-association"|"local-gateway-route-table-virtual-interface-group-association"|"natgateway"|"network-acl"|"network-interface"|"network-insights-analysis"|"network-insights-path"|"placement-group"|"prefix-list"|"replace-root-volume-task"|"reserved-instances"|"route-table"|"security-group"|"security-group-rule"|"snapshot"|"spot-fleet-request"|"spot-instances-request"|"subnet"|"traffic-mirror-filter"|"traffic-mirror-session"|"traffic-mirror-target"|"transit-gateway"|"transit-gateway-attachment"|"transit-gateway-connect-peer"|"transit-gateway-multicast-domain"|"transit-gateway-route-table"|"volume"|"vpc"|"vpc-endpoint"|"vpc-endpoint-service"|"vpc-peering-connection"|"vpn-connection"|"vpn-gateway"|"vpc-flow-log"|string;
+  export interface ResourceStatement {
+    /**
+     * The resources.
+     */
+    Resources?: ValueStringList;
+    /**
+     * The resource types.
+     */
+    ResourceTypes?: ValueStringList;
+  }
+  export interface ResourceStatementRequest {
+    /**
+     * The resources.
+     */
+    Resources?: ValueStringList;
+    /**
+     * The resource types.
+     */
+    ResourceTypes?: ValueStringList;
+  }
+  export type ResourceType = "capacity-reservation"|"client-vpn-endpoint"|"customer-gateway"|"carrier-gateway"|"dedicated-host"|"dhcp-options"|"egress-only-internet-gateway"|"elastic-ip"|"elastic-gpu"|"export-image-task"|"export-instance-task"|"fleet"|"fpga-image"|"host-reservation"|"image"|"import-image-task"|"import-snapshot-task"|"instance"|"instance-event-window"|"internet-gateway"|"ipam"|"ipam-pool"|"ipam-scope"|"ipv4pool-ec2"|"ipv6pool-ec2"|"key-pair"|"launch-template"|"local-gateway"|"local-gateway-route-table"|"local-gateway-virtual-interface"|"local-gateway-virtual-interface-group"|"local-gateway-route-table-vpc-association"|"local-gateway-route-table-virtual-interface-group-association"|"natgateway"|"network-acl"|"network-interface"|"network-insights-analysis"|"network-insights-path"|"network-insights-access-scope"|"network-insights-access-scope-analysis"|"placement-group"|"prefix-list"|"replace-root-volume-task"|"reserved-instances"|"route-table"|"security-group"|"security-group-rule"|"snapshot"|"spot-fleet-request"|"spot-instances-request"|"subnet"|"subnet-cidr-reservation"|"traffic-mirror-filter"|"traffic-mirror-session"|"traffic-mirror-target"|"transit-gateway"|"transit-gateway-attachment"|"transit-gateway-connect-peer"|"transit-gateway-multicast-domain"|"transit-gateway-route-table"|"volume"|"vpc"|"vpc-endpoint"|"vpc-endpoint-service"|"vpc-peering-connection"|"vpn-connection"|"vpn-gateway"|"vpc-flow-log"|string;
   export interface ResponseError {
     /**
      * The error code.
@@ -25052,6 +28508,18 @@ declare namespace EC2 {
      * Indicates whether the instance is enabled for Amazon Web Services Nitro Enclaves.
      */
     EnclaveOptions?: LaunchTemplateEnclaveOptions;
+    /**
+     * The attributes for the instance types. When you specify instance attributes, Amazon EC2 will identify instance types with these attributes. If you specify InstanceRequirements, you can't specify InstanceTypes.
+     */
+    InstanceRequirements?: InstanceRequirements;
+    /**
+     * The options for the instance hostname.
+     */
+    PrivateDnsNameOptions?: LaunchTemplatePrivateDnsNameOptions;
+    /**
+     * The maintenance options for your instance.
+     */
+    MaintenanceOptions?: LaunchTemplateInstanceMaintenanceOptions;
   }
   export type RestorableByStringList = String[];
   export interface RestoreAddressToClassicRequest {
@@ -25073,6 +28541,22 @@ declare namespace EC2 {
      * The move status for the IP address.
      */
     Status?: Status;
+  }
+  export interface RestoreImageFromRecycleBinRequest {
+    /**
+     * The ID of the AMI to restore.
+     */
+    ImageId: ImageId;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface RestoreImageFromRecycleBinResult {
+    /**
+     * Returns true if the request succeeds; otherwise, it returns an error.
+     */
+    Return?: Boolean;
   }
   export interface RestoreManagedPrefixListVersionRequest {
     /**
@@ -25097,6 +28581,95 @@ declare namespace EC2 {
      * Information about the prefix list.
      */
     PrefixList?: ManagedPrefixList;
+  }
+  export interface RestoreSnapshotFromRecycleBinRequest {
+    /**
+     * The ID of the snapshot to restore.
+     */
+    SnapshotId: SnapshotId;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface RestoreSnapshotFromRecycleBinResult {
+    /**
+     * The ID of the snapshot.
+     */
+    SnapshotId?: String;
+    /**
+     * The ARN of the Outpost on which the snapshot is stored. For more information, see Amazon EBS local snapshots on Outposts in the Amazon Elastic Compute Cloud User Guide.
+     */
+    OutpostArn?: String;
+    /**
+     * The description for the snapshot.
+     */
+    Description?: String;
+    /**
+     * Indicates whether the snapshot is encrypted.
+     */
+    Encrypted?: Boolean;
+    /**
+     * The ID of the Amazon Web Services account that owns the EBS snapshot.
+     */
+    OwnerId?: String;
+    /**
+     * The progress of the snapshot, as a percentage.
+     */
+    Progress?: String;
+    /**
+     * The time stamp when the snapshot was initiated.
+     */
+    StartTime?: MillisecondDateTime;
+    /**
+     * The state of the snapshot.
+     */
+    State?: SnapshotState;
+    /**
+     * The ID of the volume that was used to create the snapshot.
+     */
+    VolumeId?: String;
+    /**
+     * The size of the volume, in GiB.
+     */
+    VolumeSize?: Integer;
+  }
+  export interface RestoreSnapshotTierRequest {
+    /**
+     * The ID of the snapshot to restore.
+     */
+    SnapshotId: SnapshotId;
+    /**
+     * Specifies the number of days for which to temporarily restore an archived snapshot. Required for temporary restores only. The snapshot will be automatically re-archived after this period. To temporarily restore an archived snapshot, specify the number of days and omit the PermanentRestore parameter or set it to false.
+     */
+    TemporaryRestoreDays?: RestoreSnapshotTierRequestTemporaryRestoreDays;
+    /**
+     * Indicates whether to permanently restore an archived snapshot. To permanently restore an archived snapshot, specify true and omit the RestoreSnapshotTierRequest$TemporaryRestoreDays parameter.
+     */
+    PermanentRestore?: Boolean;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export type RestoreSnapshotTierRequestTemporaryRestoreDays = number;
+  export interface RestoreSnapshotTierResult {
+    /**
+     * The ID of the snapshot.
+     */
+    SnapshotId?: String;
+    /**
+     * The date and time when the snapshot restore process started.
+     */
+    RestoreStartTime?: MillisecondDateTime;
+    /**
+     * For temporary restores only. The number of days for which the archived snapshot is temporarily restored.
+     */
+    RestoreDuration?: Integer;
+    /**
+     * Indicates whether the snapshot is permanently restored. true indicates a permanent restore. false indicates a temporary restore.
+     */
+    IsPermanentRestore?: Boolean;
   }
   export type ResultRange = number;
   export interface RevokeClientVpnIngressRequest {
@@ -25298,6 +28871,10 @@ declare namespace EC2 {
      * The ID of a VPC peering connection.
      */
     VpcPeeringConnectionId?: String;
+    /**
+     * The Amazon Resource Name (ARN) of the core network.
+     */
+    CoreNetworkArn?: CoreNetworkArn;
   }
   export type RouteGatewayId = string;
   export type RouteList = Route[];
@@ -25444,9 +29021,9 @@ declare namespace EC2 {
      */
     SubnetId?: SubnetId;
     /**
-     * The user data to make available to the instance. For more information, see Running commands on your Linux instance at launch (Linux) and Adding User Data (Windows). If you are using a command line tool, base64-encoding is performed for you, and you can load the text from a file. Otherwise, you must provide base64-encoded text. User data is limited to 16 KB.
+     * The user data script to make available to the instance. For more information, see Run commands on your Linux instance at launch and Run commands on your Windows instance at launch. If you are using a command line tool, base64-encoding is performed for you, and you can load the text from a file. Otherwise, you must provide base64-encoded text. User data is limited to 16 KB.
      */
-    UserData?: String;
+    UserData?: RunInstancesUserData;
     /**
      * Reserved.
      */
@@ -25508,7 +29085,7 @@ declare namespace EC2 {
      */
     CreditSpecification?: CreditSpecificationRequest;
     /**
-     * The CPU options for the instance. For more information, see Optimizing CPU options in the Amazon EC2 User Guide.
+     * The CPU options for the instance. For more information, see Optimize CPU options in the Amazon EC2 User Guide.
      */
     CpuOptions?: CpuOptionsRequest;
     /**
@@ -25531,7 +29108,16 @@ declare namespace EC2 {
      * Indicates whether the instance is enabled for Amazon Web Services Nitro Enclaves. For more information, see  What is Amazon Web Services Nitro Enclaves? in the Amazon Web Services Nitro Enclaves User Guide. You can't enable Amazon Web Services Nitro Enclaves and hibernation on the same instance.
      */
     EnclaveOptions?: EnclaveOptionsRequest;
+    /**
+     * The options for the instance hostname. The default values are inherited from the subnet.
+     */
+    PrivateDnsNameOptions?: PrivateDnsNameOptionsRequest;
+    /**
+     * The maintenance and recovery options for the instance.
+     */
+    MaintenanceOptions?: InstanceMaintenanceOptionsRequest;
   }
+  export type RunInstancesUserData = string;
   export interface RunScheduledInstancesRequest {
     /**
      * Unique, case-sensitive identifier that ensures the idempotency of the request. For more information, see Ensuring Idempotency.
@@ -25961,7 +29547,7 @@ declare namespace EC2 {
      */
     LocalGatewayRouteTableId: LocalGatewayRoutetableId;
     /**
-     * One or more filters.
+     * One or more filters.    route-search.exact-match - The exact match of the specified filter.    route-search.longest-prefix-match - The longest prefix that matches the route.    route-search.subnet-of-match - The routes with a subnet that match the specified CIDR filter.    route-search.supernet-of-match - The routes with a CIDR that encompass the CIDR filter. For example, if you have 10.0.1.0/29 and 10.0.1.0/31 routes in your route table and you specify supernet-of-match as 10.0.1.0/30, then the result returns 10.0.1.0/29.    state - The state of the route.    type - The route type.  
      */
     Filters?: FilterList;
     /**
@@ -26274,6 +29860,10 @@ declare namespace EC2 {
      */
     GatewayLoadBalancerArns?: ValueStringList;
     /**
+     * The supported IP address types.
+     */
+    SupportedIpAddressTypes?: SupportedIpAddressTypes;
+    /**
      * The DNS names for the service.
      */
     BaseEndpointDnsNames?: ValueStringList;
@@ -26286,11 +29876,16 @@ declare namespace EC2 {
      */
     PrivateDnsNameConfiguration?: PrivateDnsNameConfiguration;
     /**
+     * The payer responsibility.
+     */
+    PayerResponsibility?: PayerResponsibility;
+    /**
      * Any tags assigned to the service.
      */
     Tags?: TagList;
   }
   export type ServiceConfigurationSet = ServiceConfiguration[];
+  export type ServiceConnectivityType = "ipv4"|"ipv6"|string;
   export interface ServiceDetail {
     /**
      * The Amazon Resource Name (ARN) of the service.
@@ -26337,6 +29932,10 @@ declare namespace EC2 {
      */
     ManagesVpcEndpoints?: Boolean;
     /**
+     * The payer responsibility.
+     */
+    PayerResponsibility?: PayerResponsibility;
+    /**
      * Any tags assigned to the service.
      */
     Tags?: TagList;
@@ -26344,6 +29943,10 @@ declare namespace EC2 {
      * The verification state of the VPC endpoint service. Consumers of the endpoint service cannot use the private name when the state is not verified.
      */
     PrivateDnsNameVerificationState?: DnsNameState;
+    /**
+     * The supported IP address types.
+     */
+    SupportedIpAddressTypes?: SupportedIpAddressTypes;
   }
   export type ServiceDetailSet = ServiceDetail[];
   export type ServiceState = "Pending"|"Available"|"Deleting"|"Deleted"|"Failed"|string;
@@ -26437,6 +30040,14 @@ declare namespace EC2 {
      * Any tags assigned to the snapshot.
      */
     Tags?: TagList;
+    /**
+     * The storage tier in which the snapshot is stored. standard indicates that the snapshot is stored in the standard snapshot storage tier and that it is ready for use. archive indicates that the snapshot is currently archived and that it must be restored before it can be used.
+     */
+    StorageTier?: StorageTier;
+    /**
+     * Only for archived snapshots that are temporarily restored. Indicates the date and time when a temporarily restored snapshot will be automatically re-archived.
+     */
+    RestoreExpiryTime?: MillisecondDateTime;
   }
   export type SnapshotAttributeName = "productCodes"|"createVolumePermission"|string;
   export interface SnapshotDetail {
@@ -26549,8 +30160,31 @@ declare namespace EC2 {
     OutpostArn?: String;
   }
   export type SnapshotList = Snapshot[];
+  export interface SnapshotRecycleBinInfo {
+    /**
+     * The ID of the snapshot.
+     */
+    SnapshotId?: String;
+    /**
+     * The date and time when the snaphsot entered the Recycle Bin.
+     */
+    RecycleBinEnterTime?: MillisecondDateTime;
+    /**
+     * The date and time when the snapshot is to be permanently deleted from the Recycle Bin.
+     */
+    RecycleBinExitTime?: MillisecondDateTime;
+    /**
+     * The description for the snapshot.
+     */
+    Description?: String;
+    /**
+     * The ID of the volume from which the snapshot was created.
+     */
+    VolumeId?: String;
+  }
+  export type SnapshotRecycleBinInfoList = SnapshotRecycleBinInfo[];
   export type SnapshotSet = SnapshotInfo[];
-  export type SnapshotState = "pending"|"completed"|"error"|string;
+  export type SnapshotState = "pending"|"completed"|"error"|"recoverable"|"recovering"|string;
   export interface SnapshotTaskDetail {
     /**
      * The description of the snapshot.
@@ -26597,12 +30231,66 @@ declare namespace EC2 {
      */
     UserBucket?: UserBucketDetails;
   }
+  export interface SnapshotTierStatus {
+    /**
+     * The ID of the snapshot.
+     */
+    SnapshotId?: SnapshotId;
+    /**
+     * The ID of the volume from which the snapshot was created.
+     */
+    VolumeId?: VolumeId;
+    /**
+     * The state of the snapshot.
+     */
+    Status?: SnapshotState;
+    /**
+     * The ID of the Amazon Web Services account that owns the snapshot.
+     */
+    OwnerId?: String;
+    /**
+     * The tags that are assigned to the snapshot.
+     */
+    Tags?: TagList;
+    /**
+     * The storage tier in which the snapshot is stored. standard indicates that the snapshot is stored in the standard snapshot storage tier and that it is ready for use. archive indicates that the snapshot is currently archived and that it must be restored before it can be used.
+     */
+    StorageTier?: StorageTier;
+    /**
+     * The date and time when the last archive or restore process was started.
+     */
+    LastTieringStartTime?: MillisecondDateTime;
+    /**
+     * The progress of the last archive or restore process, as a percentage.
+     */
+    LastTieringProgress?: Integer;
+    /**
+     * The status of the last archive or restore process.
+     */
+    LastTieringOperationStatus?: TieringOperationStatus;
+    /**
+     * A message describing the status of the last archive or restore process.
+     */
+    LastTieringOperationStatusDetail?: String;
+    /**
+     * The date and time when the last archive process was completed.
+     */
+    ArchivalCompleteTime?: MillisecondDateTime;
+    /**
+     * Only for archived snapshots that are temporarily restored. Indicates the date and time when a temporarily restored snapshot will be automatically re-archived.
+     */
+    RestoreExpiryTime?: MillisecondDateTime;
+  }
   export type SpotAllocationStrategy = "lowest-price"|"diversified"|"capacity-optimized"|"capacity-optimized-prioritized"|string;
   export interface SpotCapacityRebalance {
     /**
-     * The replacement strategy to use. Only available for fleets of type maintain. You must specify a value, otherwise you get an error. To allow Spot Fleet to launch a replacement Spot Instance when an instance rebalance notification is emitted for a Spot Instance in the fleet, specify launch.  When a replacement instance is launched, the instance marked for rebalance is not automatically terminated. You can terminate it, or you can leave it running. You are charged for all instances while they are running. 
+     * The replacement strategy to use. Only available for fleets of type maintain.  launch - Spot Fleet launches a new replacement Spot Instance when a rebalance notification is emitted for an existing Spot Instance in the fleet. Spot Fleet does not terminate the instances that receive a rebalance notification. You can terminate the old instances, or you can leave them running. You are charged for all instances while they are running.   launch-before-terminate - Spot Fleet launches a new replacement Spot Instance when a rebalance notification is emitted for an existing Spot Instance in the fleet, and then, after a delay that you specify (in TerminationDelay), terminates the instances that received a rebalance notification.
      */
     ReplacementStrategy?: ReplacementStrategy;
+    /**
+     * The amount of time (in seconds) that Amazon EC2 waits before terminating the old Spot Instance after launching a new replacement Spot Instance. Required when ReplacementStrategy is set to launch-before-terminate. Not valid when ReplacementStrategy is set to launch. Valid values: Minimum value of 120 seconds. Maximum value of 7200 seconds.
+     */
+    TerminationDelay?: Integer;
   }
   export interface SpotDatafeedSubscription {
     /**
@@ -26699,6 +30387,10 @@ declare namespace EC2 {
      * The tags to apply during creation.
      */
     TagSpecifications?: SpotFleetTagSpecificationList;
+    /**
+     * The attributes for the instance types. When you specify instance attributes, Amazon EC2 will identify instance types with those attributes.  If you specify InstanceRequirements, you can't specify InstanceTypes. 
+     */
+    InstanceRequirements?: InstanceRequirements;
   }
   export interface SpotFleetMonitoring {
     /**
@@ -26830,6 +30522,10 @@ declare namespace EC2 {
      */
     Context?: String;
     /**
+     * The unit for the target capacity. Default: units (translates to number of instances)
+     */
+    TargetCapacityUnitType?: TargetCapacityUnitType;
+    /**
      * The key-value pair for tagging the Spot Fleet request on creation. The value for ResourceType must be spot-fleet-request, otherwise the Spot Fleet request fails. To tag instances at launch, specify the tags in the launch template (valid only if you use LaunchTemplateConfigs) or in the  SpotFleetTagSpecification  (valid only if you use LaunchSpecifications). For information about tagging after launch, see Tagging Your Resources.
      */
     TagSpecifications?: TagSpecificationList;
@@ -26899,7 +30595,7 @@ declare namespace EC2 {
      */
     SpotPrice?: String;
     /**
-     * The state of the Spot Instance request. Spot status information helps track your Spot Instance requests. For more information, see Spot status in the Amazon EC2 User Guide for Linux Instances.
+     * The state of the Spot Instance request. Spot request status information helps track your Spot Instance requests. For more information, see Spot request status in the Amazon EC2 User Guide for Linux Instances.
      */
     State?: SpotInstanceState;
     /**
@@ -26943,7 +30639,7 @@ declare namespace EC2 {
   }
   export interface SpotInstanceStatus {
     /**
-     * The status code. For a list of status codes, see Spot status codes in the Amazon EC2 User Guide for Linux Instances.
+     * The status code. For a list of status codes, see Spot request status codes in the Amazon EC2 User Guide for Linux Instances.
      */
     Code?: String;
     /**
@@ -26958,7 +30654,7 @@ declare namespace EC2 {
   export type SpotInstanceType = "one-time"|"persistent"|string;
   export interface SpotMaintenanceStrategies {
     /**
-     * The strategy to use when Amazon EC2 emits a signal that your Spot Instance is at an elevated risk of being interrupted.
+     * The Spot Instance replacement strategy to use when Amazon EC2 emits a signal that your Spot Instance is at an elevated risk of being interrupted. For more information, see Capacity rebalancing in the Amazon EC2 User Guide for Linux Instances.
      */
     CapacityRebalance?: SpotCapacityRebalance;
   }
@@ -26986,7 +30682,7 @@ declare namespace EC2 {
   }
   export interface SpotOptions {
     /**
-     * Indicates how to allocate the target Spot Instance capacity across the Spot Instance pools specified by the EC2 Fleet. If the allocation strategy is lowest-price, EC2 Fleet launches instances from the Spot Instance pools with the lowest price. This is the default allocation strategy. If the allocation strategy is diversified, EC2 Fleet launches instances from all of the Spot Instance pools that you specify. If the allocation strategy is capacity-optimized (recommended), EC2 Fleet launches instances from Spot Instance pools with optimal capacity for the number of instances that are launching. To give certain instance types a higher chance of launching first, use capacity-optimized-prioritized. Set a priority for each instance type by using the Priority parameter for LaunchTemplateOverrides. You can assign the same priority to different LaunchTemplateOverrides. EC2 implements the priorities on a best-effort basis, but optimizes for capacity first. capacity-optimized-prioritized is supported only if your fleet uses a launch template. Note that if the On-Demand AllocationStrategy is set to prioritized, the same priority is applied when fulfilling On-Demand capacity.
+     * The strategy that determines how to allocate the target Spot Instance capacity across the Spot Instance pools specified by the EC2 Fleet.  lowest-price - EC2 Fleet launches instances from the Spot Instance pools with the lowest price.  diversified - EC2 Fleet launches instances from all of the Spot Instance pools that you specify.  capacity-optimized (recommended) - EC2 Fleet launches instances from Spot Instance pools with optimal capacity for the number of instances that are launching. To give certain instance types a higher chance of launching first, use capacity-optimized-prioritized. Set a priority for each instance type by using the Priority parameter for LaunchTemplateOverrides. You can assign the same priority to different LaunchTemplateOverrides. EC2 implements the priorities on a best-effort basis, but optimizes for capacity first. capacity-optimized-prioritized is supported only if your fleet uses a launch template. Note that if the On-Demand AllocationStrategy is set to prioritized, the same priority is applied when fulfilling On-Demand capacity. Default: lowest-price 
      */
     AllocationStrategy?: SpotAllocationStrategy;
     /**
@@ -26994,11 +30690,11 @@ declare namespace EC2 {
      */
     MaintenanceStrategies?: FleetSpotMaintenanceStrategies;
     /**
-     * The behavior when a Spot Instance is interrupted. The default is terminate.
+     * The behavior when a Spot Instance is interrupted. Default: terminate 
      */
     InstanceInterruptionBehavior?: SpotInstanceInterruptionBehavior;
     /**
-     * The number of Spot pools across which to allocate your target Spot capacity. Valid only when AllocationStrategy is set to lowest-price. EC2 Fleet selects the cheapest Spot pools and evenly allocates your target Spot capacity across the number of Spot pools that you specify. Note that EC2 Fleet attempts to draw Spot Instances from the number of pools that you specify on a best effort basis. If a pool runs out of Spot capacity before fulfilling your target capacity, EC2 Fleet will continue to fulfill your request by drawing from the next cheapest pool. To ensure that your target capacity is met, you might receive Spot Instances from more than the number of pools that you specified. Similarly, if most of the pools have no Spot capacity, you might receive your full target capacity from fewer than the number of pools that you specified.
+     * The number of Spot pools across which to allocate your target Spot capacity. Supported only when AllocationStrategy is set to lowest-price. EC2 Fleet selects the cheapest Spot pools and evenly allocates your target Spot capacity across the number of Spot pools that you specify. Note that EC2 Fleet attempts to draw Spot Instances from the number of pools that you specify on a best effort basis. If a pool runs out of Spot capacity before fulfilling your target capacity, EC2 Fleet will continue to fulfill your request by drawing from the next cheapest pool. To ensure that your target capacity is met, you might receive Spot Instances from more than the number of pools that you specified. Similarly, if most of the pools have no Spot capacity, you might receive your full target capacity from fewer than the number of pools that you specified.
      */
     InstancePoolsToUseCount?: Integer;
     /**
@@ -27010,7 +30706,7 @@ declare namespace EC2 {
      */
     SingleAvailabilityZone?: Boolean;
     /**
-     * The minimum target capacity for Spot Instances in the fleet. If the minimum target capacity is not reached, the fleet launches no instances.
+     * The minimum target capacity for Spot Instances in the fleet. If the minimum target capacity is not reached, the fleet launches no instances. Supported only for fleets of type instant. At least one of the following must be specified: SingleAvailabilityZone | SingleInstanceType 
      */
     MinTargetCapacity?: Integer;
     /**
@@ -27020,7 +30716,7 @@ declare namespace EC2 {
   }
   export interface SpotOptionsRequest {
     /**
-     * Indicates how to allocate the target Spot Instance capacity across the Spot Instance pools specified by the EC2 Fleet. If the allocation strategy is lowest-price, EC2 Fleet launches instances from the Spot Instance pools with the lowest price. This is the default allocation strategy. If the allocation strategy is diversified, EC2 Fleet launches instances from all of the Spot Instance pools that you specify. If the allocation strategy is capacity-optimized (recommended), EC2 Fleet launches instances from Spot Instance pools with optimal capacity for the number of instances that are launching. To give certain instance types a higher chance of launching first, use capacity-optimized-prioritized. Set a priority for each instance type by using the Priority parameter for LaunchTemplateOverrides. You can assign the same priority to different LaunchTemplateOverrides. EC2 implements the priorities on a best-effort basis, but optimizes for capacity first. capacity-optimized-prioritized is supported only if your fleet uses a launch template. Note that if the On-Demand AllocationStrategy is set to prioritized, the same priority is applied when fulfilling On-Demand capacity.
+     * The strategy that determines how to allocate the target Spot Instance capacity across the Spot Instance pools specified by the EC2 Fleet.  lowest-price - EC2 Fleet launches instances from the Spot Instance pools with the lowest price.  diversified - EC2 Fleet launches instances from all of the Spot Instance pools that you specify.  capacity-optimized (recommended) - EC2 Fleet launches instances from Spot Instance pools with optimal capacity for the number of instances that are launching. To give certain instance types a higher chance of launching first, use capacity-optimized-prioritized. Set a priority for each instance type by using the Priority parameter for LaunchTemplateOverrides. You can assign the same priority to different LaunchTemplateOverrides. EC2 implements the priorities on a best-effort basis, but optimizes for capacity first. capacity-optimized-prioritized is supported only if your fleet uses a launch template. Note that if the On-Demand AllocationStrategy is set to prioritized, the same priority is applied when fulfilling On-Demand capacity. Default: lowest-price 
      */
     AllocationStrategy?: SpotAllocationStrategy;
     /**
@@ -27028,11 +30724,11 @@ declare namespace EC2 {
      */
     MaintenanceStrategies?: FleetSpotMaintenanceStrategiesRequest;
     /**
-     * The behavior when a Spot Instance is interrupted. The default is terminate.
+     * The behavior when a Spot Instance is interrupted. Default: terminate 
      */
     InstanceInterruptionBehavior?: SpotInstanceInterruptionBehavior;
     /**
-     * The number of Spot pools across which to allocate your target Spot capacity. Valid only when Spot AllocationStrategy is set to lowest-price. EC2 Fleet selects the cheapest Spot pools and evenly allocates your target Spot capacity across the number of Spot pools that you specify. Note that EC2 Fleet attempts to draw Spot Instances from the number of pools that you specify on a best effort basis. If a pool runs out of Spot capacity before fulfilling your target capacity, EC2 Fleet will continue to fulfill your request by drawing from the next cheapest pool. To ensure that your target capacity is met, you might receive Spot Instances from more than the number of pools that you specified. Similarly, if most of the pools have no Spot capacity, you might receive your full target capacity from fewer than the number of pools that you specified.
+     * The number of Spot pools across which to allocate your target Spot capacity. Supported only when Spot AllocationStrategy is set to lowest-price. EC2 Fleet selects the cheapest Spot pools and evenly allocates your target Spot capacity across the number of Spot pools that you specify. Note that EC2 Fleet attempts to draw Spot Instances from the number of pools that you specify on a best effort basis. If a pool runs out of Spot capacity before fulfilling your target capacity, EC2 Fleet will continue to fulfill your request by drawing from the next cheapest pool. To ensure that your target capacity is met, you might receive Spot Instances from more than the number of pools that you specified. Similarly, if most of the pools have no Spot capacity, you might receive your full target capacity from fewer than the number of pools that you specified.
      */
     InstancePoolsToUseCount?: Integer;
     /**
@@ -27044,7 +30740,7 @@ declare namespace EC2 {
      */
     SingleAvailabilityZone?: Boolean;
     /**
-     * The minimum target capacity for Spot Instances in the fleet. If the minimum target capacity is not reached, the fleet launches no instances.
+     * The minimum target capacity for Spot Instances in the fleet. If the minimum target capacity is not reached, the fleet launches no instances. Supported only for fleets of type instant. At least one of the following must be specified: SingleAvailabilityZone | SingleInstanceType 
      */
     MinTargetCapacity?: Integer;
     /**
@@ -27066,6 +30762,23 @@ declare namespace EC2 {
      */
     Tenancy?: Tenancy;
   }
+  export interface SpotPlacementScore {
+    /**
+     * The Region.
+     */
+    Region?: String;
+    /**
+     * The Availability Zone.
+     */
+    AvailabilityZoneId?: String;
+    /**
+     * The placement score, on a scale from 1 to 10. A score of 10 indicates that your Spot request is highly likely to succeed in this Region or Availability Zone. A score of 1 indicates that your Spot request is not likely to succeed. 
+     */
+    Score?: Integer;
+  }
+  export type SpotPlacementScores = SpotPlacementScore[];
+  export type SpotPlacementScoresMaxResults = number;
+  export type SpotPlacementScoresTargetCapacity = number;
   export interface SpotPrice {
     /**
      * The Availability Zone.
@@ -27162,6 +30875,30 @@ declare namespace EC2 {
      * Information about the started instances.
      */
     StartingInstances?: InstanceStateChangeList;
+  }
+  export interface StartNetworkInsightsAccessScopeAnalysisRequest {
+    /**
+     * The ID of the Network Access Scope.
+     */
+    NetworkInsightsAccessScopeId: NetworkInsightsAccessScopeId;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The tags to apply.
+     */
+    TagSpecifications?: TagSpecificationList;
+    /**
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to ensure idempotency.
+     */
+    ClientToken: String;
+  }
+  export interface StartNetworkInsightsAccessScopeAnalysisResult {
+    /**
+     * The Network Access Scope analysis.
+     */
+    NetworkInsightsAccessScopeAnalysis?: NetworkInsightsAccessScopeAnalysis;
   }
   export interface StartNetworkInsightsAnalysisRequest {
     /**
@@ -27262,6 +30999,7 @@ declare namespace EC2 {
      */
     Key?: String;
   }
+  export type StorageTier = "archive"|"standard"|string;
   export interface StoreImageTaskResult {
     /**
      * The ID of the AMI that is being stored.
@@ -27295,6 +31033,7 @@ declare namespace EC2 {
   export type StoreImageTaskResultSet = StoreImageTaskResult[];
   export type String = string;
   export type StringList = String[];
+  export type StringType = string;
   export interface Subnet {
     /**
      * The Availability Zone of the subnet.
@@ -27316,6 +31055,10 @@ declare namespace EC2 {
      * Indicates whether this is the default subnet for the Availability Zone.
      */
     DefaultForAz?: Boolean;
+    /**
+     *  Indicates the device position for local network interfaces in this subnet. For example, 1 indicates local network interfaces in this subnet are the secondary network interface (eth1). 
+     */
+    EnableLniAtDeviceIndex?: Integer;
     /**
      * Indicates whether instances launched in this subnet receive a public IPv4 address.
      */
@@ -27364,6 +31107,18 @@ declare namespace EC2 {
      * The Amazon Resource Name (ARN) of the Outpost.
      */
     OutpostArn?: String;
+    /**
+     * Indicates whether DNS queries made to the Amazon-provided DNS Resolver in this subnet should return synthetic IPv6 addresses for IPv4-only destinations.
+     */
+    EnableDns64?: Boolean;
+    /**
+     * Indicates whether this is an IPv6 only subnet.
+     */
+    Ipv6Native?: Boolean;
+    /**
+     * The type of hostnames to assign to instances in the subnet at launch. An instance hostname is based on the IPv4 address or ID of the instance.
+     */
+    PrivateDnsNameOptionsOnLaunch?: PrivateDnsNameOptionsOnLaunch;
   }
   export interface SubnetAssociation {
     /**
@@ -27425,7 +31180,7 @@ declare namespace EC2 {
   export type SubnetIdStringList = SubnetId[];
   export interface SubnetIpv6CidrBlockAssociation {
     /**
-     * The association ID for the CIDR block.
+     * The ID of the association.
      */
     AssociationId?: SubnetCidrAssociationId;
     /**
@@ -27433,7 +31188,7 @@ declare namespace EC2 {
      */
     Ipv6CidrBlock?: String;
     /**
-     * Information about the state of the CIDR block.
+     * The state of the CIDR block.
      */
     Ipv6CidrBlockState?: SubnetCidrBlockState;
   }
@@ -27455,13 +31210,14 @@ declare namespace EC2 {
   }
   export type SuccessfulQueuedPurchaseDeletionSet = SuccessfulQueuedPurchaseDeletion[];
   export type SummaryStatus = "ok"|"impaired"|"insufficient-data"|"not-applicable"|"initializing"|string;
+  export type SupportedIpAddressTypes = ServiceConnectivityType[];
   export interface Tag {
     /**
      * The key of the tag. Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with aws:.
      */
     Key?: String;
     /**
-     * The value of the tag. Constraints: Tag values are case-sensitive and accept a maximum of 255 Unicode characters.
+     * The value of the tag. Constraints: Tag values are case-sensitive and accept a maximum of 256 Unicode characters.
      */
     Value?: String;
   }
@@ -27514,6 +31270,10 @@ declare namespace EC2 {
      * The default TotalTargetCapacity, which is either Spot or On-Demand.
      */
     DefaultTargetCapacityType?: DefaultTargetCapacityType;
+    /**
+     * The unit for the target capacity. Default: units (translates to number of instances)
+     */
+    TargetCapacityUnitType?: TargetCapacityUnitType;
   }
   export interface TargetCapacitySpecificationRequest {
     /**
@@ -27532,7 +31292,12 @@ declare namespace EC2 {
      * The default TotalTargetCapacity, which is either Spot or On-Demand.
      */
     DefaultTargetCapacityType?: DefaultTargetCapacityType;
+    /**
+     * The unit for the target capacity. Default: units (translates to number of instances)
+     */
+    TargetCapacityUnitType?: TargetCapacityUnitType;
   }
+  export type TargetCapacityUnitType = "vcpu"|"memory-mib"|"units"|string;
   export interface TargetConfiguration {
     /**
      * The number of instances the Convertible Reserved Instance offering can be applied to. This parameter is reserved and cannot be specified in a request
@@ -27605,6 +31370,7 @@ declare namespace EC2 {
     TargetConfiguration?: TargetConfiguration;
   }
   export type TargetReservationValueSet = TargetReservationValue[];
+  export type TargetStorageTier = "archive"|string;
   export type TelemetryStatus = "UP"|"DOWN"|string;
   export type Tenancy = "default"|"dedicated"|"host"|string;
   export interface TerminateClientVpnConnectionsRequest {
@@ -27672,6 +31438,42 @@ declare namespace EC2 {
   }
   export type ThreadsPerCore = number;
   export type ThreadsPerCoreList = ThreadsPerCore[];
+  export interface ThroughResourcesStatement {
+    /**
+     * The resource statement.
+     */
+    ResourceStatement?: ResourceStatement;
+  }
+  export type ThroughResourcesStatementList = ThroughResourcesStatement[];
+  export interface ThroughResourcesStatementRequest {
+    /**
+     * The resource statement.
+     */
+    ResourceStatement?: ResourceStatementRequest;
+  }
+  export type ThroughResourcesStatementRequestList = ThroughResourcesStatementRequest[];
+  export type TieringOperationStatus = "archival-in-progress"|"archival-completed"|"archival-failed"|"temporary-restore-in-progress"|"temporary-restore-completed"|"temporary-restore-failed"|"permanent-restore-in-progress"|"permanent-restore-completed"|"permanent-restore-failed"|string;
+  export interface TotalLocalStorageGB {
+    /**
+     * The minimum amount of total local storage, in GB. If this parameter is not specified, there is no minimum limit.
+     */
+    Min?: Double;
+    /**
+     * The maximum amount of total local storage, in GB. If this parameter is not specified, there is no maximum limit.
+     */
+    Max?: Double;
+  }
+  export interface TotalLocalStorageGBRequest {
+    /**
+     * The minimum amount of total local storage, in GB. To specify no minimum limit, omit this parameter.
+     */
+    Min?: Double;
+    /**
+     * The maximum amount of total local storage, in GB. To specify no maximum limit, omit this parameter.
+     */
+    Max?: Double;
+  }
+  export type TpmSupportValues = "v2.0"|string;
   export type TrafficDirection = "ingress"|"egress"|string;
   export interface TrafficMirrorFilter {
     /**
@@ -27851,11 +31653,15 @@ declare namespace EC2 {
      * The tags assigned to the Traffic Mirror target.
      */
     Tags?: TagList;
+    /**
+     * The ID of the Gateway Load Balancer endpoint.
+     */
+    GatewayLoadBalancerEndpointId?: String;
   }
   export type TrafficMirrorTargetId = string;
   export type TrafficMirrorTargetIdList = TrafficMirrorTargetId[];
   export type TrafficMirrorTargetSet = TrafficMirrorTarget[];
-  export type TrafficMirrorTargetType = "network-interface"|"network-load-balancer"|string;
+  export type TrafficMirrorTargetType = "network-interface"|"network-load-balancer"|"gateway-load-balancer-endpoint"|string;
   export type TrafficMirroringMaxResults = number;
   export type TrafficType = "ACCEPT"|"REJECT"|"ALL"|string;
   export type TransitAssociationGatewayId = string;
@@ -28595,6 +32401,36 @@ declare namespace EC2 {
     State?: TransitGatewayPropagationState;
   }
   export type TransitGatewayRouteTablePropagationList = TransitGatewayRouteTablePropagation[];
+  export interface TransitGatewayRouteTableRoute {
+    /**
+     * The CIDR block used for destination matches.
+     */
+    DestinationCidr?: String;
+    /**
+     * The state of the route.
+     */
+    State?: String;
+    /**
+     * The route origin. The following are the possible values:   static   propagated  
+     */
+    RouteOrigin?: String;
+    /**
+     * The ID of the prefix list.
+     */
+    PrefixListId?: String;
+    /**
+     * The ID of the route attachment.
+     */
+    AttachmentId?: String;
+    /**
+     * The ID of the resource for the route attachment.
+     */
+    ResourceId?: String;
+    /**
+     * The resource type for the route attachment.
+     */
+    ResourceType?: String;
+  }
   export type TransitGatewayRouteTableState = "pending"|"available"|"deleting"|"deleted"|string;
   export type TransitGatewayRouteType = "static"|"propagated"|string;
   export type TransitGatewayState = "pending"|"available"|"modifying"|"deleting"|"deleted"|string;
@@ -28988,6 +32824,26 @@ declare namespace EC2 {
   export type UserIdGroupPairSet = UserIdGroupPair[];
   export type UserIdStringList = String[];
   export type VCpuCount = number;
+  export interface VCpuCountRange {
+    /**
+     * The minimum number of vCPUs. If the value is 0, there is no minimum limit.
+     */
+    Min?: Integer;
+    /**
+     * The maximum number of vCPUs. If this parameter is not specified, there is no maximum limit.
+     */
+    Max?: Integer;
+  }
+  export interface VCpuCountRangeRequest {
+    /**
+     * The minimum number of vCPUs. To specify no minimum limit, specify 0.
+     */
+    Min: Integer;
+    /**
+     * The maximum number of vCPUs. To specify no maximum limit, omit this parameter.
+     */
+    Max?: Integer;
+  }
   export interface VCpuInfo {
     /**
      * The default number of vCPUs for the instance type.
@@ -29058,6 +32914,7 @@ declare namespace EC2 {
   export type VgwTelemetryList = VgwTelemetry[];
   export type VirtualizationType = "hvm"|"paravirtual"|string;
   export type VirtualizationTypeList = VirtualizationType[];
+  export type VirtualizationTypeSet = VirtualizationType[];
   export interface Volume {
     /**
      * Information about the volume attachments.
@@ -29442,7 +33299,7 @@ declare namespace EC2 {
   export type VpcClassicLinkList = VpcClassicLink[];
   export interface VpcEndpoint {
     /**
-     * The ID of the VPC endpoint.
+     * The ID of the endpoint.
      */
     VpcEndpointId?: String;
     /**
@@ -29458,7 +33315,7 @@ declare namespace EC2 {
      */
     ServiceName?: String;
     /**
-     * The state of the VPC endpoint.
+     * The state of the endpoint.
      */
     State?: State;
     /**
@@ -29470,7 +33327,7 @@ declare namespace EC2 {
      */
     RouteTableIds?: ValueStringList;
     /**
-     * (Interface endpoint) One or more subnets in which the endpoint is located.
+     * (Interface endpoint) The subnets for the endpoint.
      */
     SubnetIds?: ValueStringList;
     /**
@@ -29478,11 +33335,19 @@ declare namespace EC2 {
      */
     Groups?: GroupIdentifierSet;
     /**
+     * The IP address type for the endpoint.
+     */
+    IpAddressType?: IpAddressType;
+    /**
+     * The DNS options for the endpoint.
+     */
+    DnsOptions?: DnsOptions;
+    /**
      * (Interface endpoint) Indicates whether the VPC is associated with a private hosted zone.
      */
     PrivateDnsEnabled?: Boolean;
     /**
-     * Indicates whether the VPC endpoint is being managed by its service.
+     * Indicates whether the endpoint is being managed by its service.
      */
     RequesterManaged?: Boolean;
     /**
@@ -29494,19 +33359,19 @@ declare namespace EC2 {
      */
     DnsEntries?: DnsEntrySet;
     /**
-     * The date and time that the VPC endpoint was created.
+     * The date and time that the endpoint was created.
      */
     CreationTimestamp?: MillisecondDateTime;
     /**
-     * Any tags assigned to the VPC endpoint.
+     * Any tags assigned to the endpoint.
      */
     Tags?: TagList;
     /**
-     * The ID of the Amazon Web Services account that owns the VPC endpoint.
+     * The ID of the Amazon Web Services account that owns the endpoint.
      */
     OwnerId?: String;
     /**
-     * The last error that occurred for VPC endpoint.
+     * The last error that occurred for endpoint.
      */
     LastError?: LastError;
   }
@@ -29543,6 +33408,10 @@ declare namespace EC2 {
      * The Amazon Resource Names (ARNs) of the Gateway Load Balancers for the service.
      */
     GatewayLoadBalancerArns?: ValueStringList;
+    /**
+     * The IP address type for the endpoint.
+     */
+    IpAddressType?: IpAddressType;
   }
   export type VpcEndpointConnectionSet = VpcEndpointConnection[];
   export type VpcEndpointId = string;
@@ -29700,6 +33569,18 @@ declare namespace EC2 {
      * The ID of the transit gateway associated with the VPN connection.
      */
     TransitGatewayId?: String;
+    /**
+     * The ARN of the core network.
+     */
+    CoreNetworkArn?: String;
+    /**
+     * The ARN of the core network attachment.
+     */
+    CoreNetworkAttachmentArn?: String;
+    /**
+     * The current state of the gateway association.
+     */
+    GatewayAssociationState?: GatewayAssociationState;
     /**
      * The VPN connection options.
      */
@@ -29895,7 +33776,7 @@ declare namespace EC2 {
      */
     ReplayWindowSize?: Integer;
     /**
-     * The number of seconds after which a DPD timeout occurs. Constraints: A value between 0 and 30. Default: 30 
+     * The number of seconds after which a DPD timeout occurs. Constraints: A value greater than or equal to 30. Default: 30 
      */
     DPDTimeoutSeconds?: Integer;
     /**
@@ -29956,6 +33837,7 @@ declare namespace EC2 {
   export type ZoneIdStringList = String[];
   export type ZoneNameStringList = String[];
   export type scope = "Availability Zone"|"Region"|string;
+  export type snapshotTierStatusSet = SnapshotTierStatus[];
   export type totalFpgaMemory = number;
   export type totalGpuMemory = number;
   /**

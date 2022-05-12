@@ -220,6 +220,14 @@ declare class CostExplorer extends Service {
    */
   listCostCategoryDefinitions(callback?: (err: AWSError, data: CostExplorer.Types.ListCostCategoryDefinitionsResponse) => void): Request<CostExplorer.Types.ListCostCategoryDefinitionsResponse, AWSError>;
   /**
+   * Returns a list of resource tags associated with the resource specified by the Amazon Resource Name (ARN). 
+   */
+  listTagsForResource(params: CostExplorer.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: CostExplorer.Types.ListTagsForResourceResponse) => void): Request<CostExplorer.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Returns a list of resource tags associated with the resource specified by the Amazon Resource Name (ARN). 
+   */
+  listTagsForResource(callback?: (err: AWSError, data: CostExplorer.Types.ListTagsForResourceResponse) => void): Request<CostExplorer.Types.ListTagsForResourceResponse, AWSError>;
+  /**
    * Modifies the feedback property of a given cost anomaly. 
    */
   provideAnomalyFeedback(params: CostExplorer.Types.ProvideAnomalyFeedbackRequest, callback?: (err: AWSError, data: CostExplorer.Types.ProvideAnomalyFeedbackResponse) => void): Request<CostExplorer.Types.ProvideAnomalyFeedbackResponse, AWSError>;
@@ -228,11 +236,27 @@ declare class CostExplorer extends Service {
    */
   provideAnomalyFeedback(callback?: (err: AWSError, data: CostExplorer.Types.ProvideAnomalyFeedbackResponse) => void): Request<CostExplorer.Types.ProvideAnomalyFeedbackResponse, AWSError>;
   /**
-   * Updates an existing cost anomaly monitor. The changes made are applied going forward, and doesn'tt change anomalies detected in the past. 
+   * An API operation for adding one or more tags (key-value pairs) to a resource. You can use the TagResource operation with a resource that already has tags. If you specify a new tag key for the resource, this tag is appended to the list of tags associated with the resource. If you specify a tag key that is already associated with the resource, the new tag value you specify replaces the previous value for that tag.  Although the maximum number of array members is 200, user-tag maximum is 50. The remaining are reserved for Amazon Web Services use.
+   */
+  tagResource(params: CostExplorer.Types.TagResourceRequest, callback?: (err: AWSError, data: CostExplorer.Types.TagResourceResponse) => void): Request<CostExplorer.Types.TagResourceResponse, AWSError>;
+  /**
+   * An API operation for adding one or more tags (key-value pairs) to a resource. You can use the TagResource operation with a resource that already has tags. If you specify a new tag key for the resource, this tag is appended to the list of tags associated with the resource. If you specify a tag key that is already associated with the resource, the new tag value you specify replaces the previous value for that tag.  Although the maximum number of array members is 200, user-tag maximum is 50. The remaining are reserved for Amazon Web Services use.
+   */
+  tagResource(callback?: (err: AWSError, data: CostExplorer.Types.TagResourceResponse) => void): Request<CostExplorer.Types.TagResourceResponse, AWSError>;
+  /**
+   *  Removes one or more tags from a resource. Specify only tag key(s) in your request. Do not specify the value. 
+   */
+  untagResource(params: CostExplorer.Types.UntagResourceRequest, callback?: (err: AWSError, data: CostExplorer.Types.UntagResourceResponse) => void): Request<CostExplorer.Types.UntagResourceResponse, AWSError>;
+  /**
+   *  Removes one or more tags from a resource. Specify only tag key(s) in your request. Do not specify the value. 
+   */
+  untagResource(callback?: (err: AWSError, data: CostExplorer.Types.UntagResourceResponse) => void): Request<CostExplorer.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Updates an existing cost anomaly monitor. The changes made are applied going forward, and doesn't change anomalies detected in the past. 
    */
   updateAnomalyMonitor(params: CostExplorer.Types.UpdateAnomalyMonitorRequest, callback?: (err: AWSError, data: CostExplorer.Types.UpdateAnomalyMonitorResponse) => void): Request<CostExplorer.Types.UpdateAnomalyMonitorResponse, AWSError>;
   /**
-   * Updates an existing cost anomaly monitor. The changes made are applied going forward, and doesn'tt change anomalies detected in the past. 
+   * Updates an existing cost anomaly monitor. The changes made are applied going forward, and doesn't change anomalies detected in the past. 
    */
   updateAnomalyMonitor(callback?: (err: AWSError, data: CostExplorer.Types.UpdateAnomalyMonitorResponse) => void): Request<CostExplorer.Types.UpdateAnomalyMonitorResponse, AWSError>;
   /**
@@ -617,6 +641,10 @@ declare namespace CostExplorer {
      * The cost anomaly detection monitor object that you want to create.
      */
     AnomalyMonitor: AnomalyMonitor;
+    /**
+     *  An optional list of tags to associate with the specified  AnomalyMonitor . You can use resource tags to control access to your monitor using IAM policies. Each tag consists of a key and a value, and each key must be unique for the resource. The following restrictions apply to resource tags:   Although the maximum number of array members is 200, you can assign a maximum of 50 user-tags to one resource. The remaining are reserved for Amazon Web Services use   The maximum length of a key is 128 characters   The maximum length of a value is 256 characters   Valid characters for keys and values are: A-Z, a-z, spaces, _.:/=+-    Keys and values are case sensitive   Keys and values are trimmed for any leading or trailing whitespaces   Don’t use aws: as a prefix for your keys. This prefix is reserved for Amazon Web Services use  
+     */
+    ResourceTags?: ResourceTagList;
   }
   export interface CreateAnomalyMonitorResponse {
     /**
@@ -629,6 +657,10 @@ declare namespace CostExplorer {
      * The cost anomaly subscription object that you want to create. 
      */
     AnomalySubscription: AnomalySubscription;
+    /**
+     *  An optional list of tags to associate with the specified  AnomalySubscription . You can use resource tags to control access to your subscription using IAM policies. Each tag consists of a key and a value, and each key must be unique for the resource. The following restrictions apply to resource tags:   Although the maximum number of array members is 200, you can assign a maximum of 50 user-tags to one resource. The remaining are reserved for Amazon Web Services use   The maximum length of a key is 128 characters   The maximum length of a value is 256 characters   Valid characters for keys and values are: A-Z, a-z, spaces, _.:/=+-    Keys and values are case sensitive   Keys and values are trimmed for any leading or trailing whitespaces   Don’t use aws: as a prefix for your keys. This prefix is reserved for Amazon Web Services use  
+     */
+    ResourceTags?: ResourceTagList;
   }
   export interface CreateAnomalySubscriptionResponse {
     /**
@@ -648,6 +680,10 @@ declare namespace CostExplorer {
      *  The split charge rules used to allocate your charges between your Cost Category values. 
      */
     SplitChargeRules?: CostCategorySplitChargeRulesList;
+    /**
+     *  An optional list of tags to associate with the specified  CostCategory . You can use resource tags to control access to your cost category using IAM policies. Each tag consists of a key and a value, and each key must be unique for the resource. The following restrictions apply to resource tags:   Although the maximum number of array members is 200, you can assign a maximum of 50 user-tags to one resource. The remaining are reserved for Amazon Web Services use   The maximum length of a key is 128 characters   The maximum length of a value is 256 characters   Valid characters for keys and values are: A-Z, a-z, spaces, _.:/=+-    Keys and values are case sensitive   Keys and values are trimmed for any leading or trailing whitespaces   Don’t use aws: as a prefix for your keys. This prefix is reserved for Amazon Web Services use  
+     */
+    ResourceTags?: ResourceTagList;
   }
   export interface CreateCostCategoryDefinitionResponse {
     /**
@@ -760,7 +796,7 @@ declare namespace CostExplorer {
   export interface DescribeCostCategoryDefinitionResponse {
     CostCategory?: CostCategory;
   }
-  export type Dimension = "AZ"|"INSTANCE_TYPE"|"LINKED_ACCOUNT"|"LINKED_ACCOUNT_NAME"|"OPERATION"|"PURCHASE_TYPE"|"REGION"|"SERVICE"|"SERVICE_CODE"|"USAGE_TYPE"|"USAGE_TYPE_GROUP"|"RECORD_TYPE"|"OPERATING_SYSTEM"|"TENANCY"|"SCOPE"|"PLATFORM"|"SUBSCRIPTION_ID"|"LEGAL_ENTITY_NAME"|"DEPLOYMENT_OPTION"|"DATABASE_ENGINE"|"CACHE_ENGINE"|"INSTANCE_TYPE_FAMILY"|"BILLING_ENTITY"|"RESERVATION_ID"|"RESOURCE_ID"|"RIGHTSIZING_TYPE"|"SAVINGS_PLANS_TYPE"|"SAVINGS_PLAN_ARN"|"PAYMENT_OPTION"|"AGREEMENT_END_DATE_TIME_AFTER"|"AGREEMENT_END_DATE_TIME_BEFORE"|string;
+  export type Dimension = "AZ"|"INSTANCE_TYPE"|"LINKED_ACCOUNT"|"LINKED_ACCOUNT_NAME"|"OPERATION"|"PURCHASE_TYPE"|"REGION"|"SERVICE"|"SERVICE_CODE"|"USAGE_TYPE"|"USAGE_TYPE_GROUP"|"RECORD_TYPE"|"OPERATING_SYSTEM"|"TENANCY"|"SCOPE"|"PLATFORM"|"SUBSCRIPTION_ID"|"LEGAL_ENTITY_NAME"|"DEPLOYMENT_OPTION"|"DATABASE_ENGINE"|"CACHE_ENGINE"|"INSTANCE_TYPE_FAMILY"|"BILLING_ENTITY"|"RESERVATION_ID"|"RESOURCE_ID"|"RIGHTSIZING_TYPE"|"SAVINGS_PLANS_TYPE"|"SAVINGS_PLAN_ARN"|"PAYMENT_OPTION"|"AGREEMENT_END_DATE_TIME_AFTER"|"AGREEMENT_END_DATE_TIME_BEFORE"|"INVOICING_ENTITY"|string;
   export interface DimensionValues {
     /**
      * The names of the metadata types that you can use to filter and group your results. For example, AZ returns a list of Availability Zones.
@@ -1125,7 +1161,7 @@ declare namespace CostExplorer {
      */
     Granularity: Granularity;
     /**
-     * Filters Amazon Web Services costs by different dimensions. For example, you can specify SERVICE and LINKED_ACCOUNT and get the costs that are associated with that account's usage of that service. You can nest Expression objects to define any combination of dimension filters. For more information, see Expression. 
+     * Filters Amazon Web Services costs by different dimensions. For example, you can specify SERVICE and LINKED_ACCOUNT and get the costs that are associated with that account's usage of that service. You can nest Expression objects to define any combination of dimension filters. For more information, see Expression.  Valid values for MatchOptions for Dimensions are EQUALS and CASE_SENSITIVE. Valid values for MatchOptions for CostCategories and Tags are EQUALS, ABSENT, and CASE_SENSITIVE. Default values are EQUALS and CASE_SENSITIVE.
      */
     Filter?: Expression;
     /**
@@ -1133,7 +1169,7 @@ declare namespace CostExplorer {
      */
     Metrics: MetricNames;
     /**
-     * You can group Amazon Web Services costs using up to two different groups, either dimensions, tag keys, cost categories, or any two group by types. Valid values for the DIMENSION type are AZ, INSTANCE_TYPE, LEGAL_ENTITY_NAME, LINKED_ACCOUNT, OPERATION, PLATFORM, PURCHASE_TYPE, SERVICE, TENANCY, RECORD_TYPE, and USAGE_TYPE. When you group by the TAG type and include a valid tag key, you get all tag values, including empty strings.
+     * You can group Amazon Web Services costs using up to two different groups, either dimensions, tag keys, cost categories, or any two group by types. Valid values for the DIMENSION type are AZ, INSTANCE_TYPE, LEGAL_ENTITY_NAME, INVOICING_ENTITY, LINKED_ACCOUNT, OPERATION, PLATFORM, PURCHASE_TYPE, SERVICE, TENANCY, RECORD_TYPE, and USAGE_TYPE. When you group by the TAG type and include a valid tag key, you get all tag values, including empty strings.
      */
     GroupBy?: GroupDefinitions;
     /**
@@ -1169,7 +1205,7 @@ declare namespace CostExplorer {
      */
     Granularity: Granularity;
     /**
-     * Filters Amazon Web Services costs by different dimensions. For example, you can specify SERVICE and LINKED_ACCOUNT and get the costs that are associated with that account's usage of that service. You can nest Expression objects to define any combination of dimension filters. For more information, see Expression.  The GetCostAndUsageWithResources operation requires that you either group by or filter by a ResourceId. It requires the Expression "SERVICE = Amazon Elastic Compute Cloud - Compute" in the filter.
+     * Filters Amazon Web Services costs by different dimensions. For example, you can specify SERVICE and LINKED_ACCOUNT and get the costs that are associated with that account's usage of that service. You can nest Expression objects to define any combination of dimension filters. For more information, see Expression.  The GetCostAndUsageWithResources operation requires that you either group by or filter by a ResourceId. It requires the Expression "SERVICE = Amazon Elastic Compute Cloud - Compute" in the filter. Valid values for MatchOptions for Dimensions are EQUALS and CASE_SENSITIVE. Valid values for MatchOptions for CostCategories and Tags are EQUALS, ABSENT, and CASE_SENSITIVE. Default values are EQUALS and CASE_SENSITIVE.
      */
     Filter: Expression;
     /**
@@ -1292,7 +1328,7 @@ declare namespace CostExplorer {
      */
     Dimension: Dimension;
     /**
-     * The context for the call to GetDimensionValues. This can be RESERVATIONS or COST_AND_USAGE. The default value is COST_AND_USAGE. If the context is set to RESERVATIONS, the resulting dimension values can be used in the GetReservationUtilization operation. If the context is set to COST_AND_USAGE, the resulting dimension values can be used in the GetCostAndUsage operation. If you set the context to COST_AND_USAGE, you can use the following dimensions for searching:   AZ - The Availability Zone. An example is us-east-1a.   DATABASE_ENGINE - The Amazon Relational Database Service database. Examples are Aurora or MySQL.   INSTANCE_TYPE - The type of Amazon EC2 instance. An example is m4.xlarge.   LEGAL_ENTITY_NAME - The name of the organization that sells you Amazon Web Services services, such as Amazon Web Services.   LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the Amazon Web Services ID of the member account.   OPERATING_SYSTEM - The operating system. Examples are Windows or Linux.   OPERATION - The action performed. Examples include RunInstance and CreateBucket.   PLATFORM - The Amazon EC2 operating system. Examples are Windows or Linux.   PURCHASE_TYPE - The reservation type of the purchase to which this usage is related. Examples include On-Demand Instances and Standard Reserved Instances.   SERVICE - The Amazon Web Services service such as Amazon DynamoDB.   USAGE_TYPE - The type of usage. An example is DataTransfer-In-Bytes. The response for the GetDimensionValues operation includes a unit attribute. Examples include GB and Hrs.   USAGE_TYPE_GROUP - The grouping of common usage types. An example is Amazon EC2: CloudWatch – Alarms. The response for this operation includes a unit attribute.   REGION - The Amazon Web Services Region.   RECORD_TYPE - The different types of charges such as RI fees, usage costs, tax refunds, and credits.   RESOURCE_ID - The unique identifier of the resource. ResourceId is an opt-in feature only available for last 14 days for EC2-Compute Service.   If you set the context to RESERVATIONS, you can use the following dimensions for searching:   AZ - The Availability Zone. An example is us-east-1a.   CACHE_ENGINE - The Amazon ElastiCache operating system. Examples are Windows or Linux.   DEPLOYMENT_OPTION - The scope of Amazon Relational Database Service deployments. Valid values are SingleAZ and MultiAZ.   INSTANCE_TYPE - The type of Amazon EC2 instance. An example is m4.xlarge.   LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the Amazon Web Services ID of the member account.   PLATFORM - The Amazon EC2 operating system. Examples are Windows or Linux.   REGION - The Amazon Web Services Region.   SCOPE (Utilization only) - The scope of a Reserved Instance (RI). Values are regional or a single Availability Zone.   TAG (Coverage only) - The tags that are associated with a Reserved Instance (RI).   TENANCY - The tenancy of a resource. Examples are shared or dedicated.   If you set the context to SAVINGS_PLANS, you can use the following dimensions for searching:   SAVINGS_PLANS_TYPE - Type of Savings Plans (EC2 Instance or Compute)   PAYMENT_OPTION - Payment option for the given Savings Plans (for example, All Upfront)   REGION - The Amazon Web Services Region.   INSTANCE_TYPE_FAMILY - The family of instances (For example, m5)   LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the Amazon Web Services ID of the member account.   SAVINGS_PLAN_ARN - The unique identifier for your Savings Plan  
+     * The context for the call to GetDimensionValues. This can be RESERVATIONS or COST_AND_USAGE. The default value is COST_AND_USAGE. If the context is set to RESERVATIONS, the resulting dimension values can be used in the GetReservationUtilization operation. If the context is set to COST_AND_USAGE, the resulting dimension values can be used in the GetCostAndUsage operation. If you set the context to COST_AND_USAGE, you can use the following dimensions for searching:   AZ - The Availability Zone. An example is us-east-1a.   BILLING_ENTITY - The Amazon Web Services seller that your account is with. Possible values are the following: - Amazon Web Services(Amazon Web Services): The entity that sells Amazon Web Services services. - AISPL (Amazon Internet Services Pvt. Ltd.): The local Indian entity that is an acting reseller for Amazon Web Services services in India. - Amazon Web Services Marketplace: The entity that supports the sale of solutions built on Amazon Web Services by third-party software providers.   CACHE_ENGINE - The Amazon ElastiCache operating system. Examples are Windows or Linux.   DEPLOYMENT_OPTION - The scope of Amazon Relational Database Service deployments. Valid values are SingleAZ and MultiAZ.   DATABASE_ENGINE - The Amazon Relational Database Service database. Examples are Aurora or MySQL.   INSTANCE_TYPE - The type of Amazon EC2 instance. An example is m4.xlarge.   INSTANCE_TYPE_FAMILY - A family of instance types optimized to fit different use cases. Examples are Compute Optimized (C4, C5, C6g, C7g etc.), Memory Optimization (R4, R5n, R5b, R6g etc).   INVOICING_ENTITY - The name of the entity issuing the Amazon Web Services invoice.   LEGAL_ENTITY_NAME - The name of the organization that sells you Amazon Web Services services, such as Amazon Web Services.   LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the Amazon Web Services ID of the member account.   OPERATING_SYSTEM - The operating system. Examples are Windows or Linux.   OPERATION - The action performed. Examples include RunInstance and CreateBucket.   PLATFORM - The Amazon EC2 operating system. Examples are Windows or Linux.   PURCHASE_TYPE - The reservation type of the purchase to which this usage is related. Examples include On-Demand Instances and Standard Reserved Instances.   RESERVATION_ID - The unique identifier for an Amazon Web Services Reservation Instance.   SAVINGS_PLAN_ARN - The unique identifier for your Savings Plans.   SAVINGS_PLANS_TYPE - Type of Savings Plans (EC2 Instance or Compute).   SERVICE - The Amazon Web Services service such as Amazon DynamoDB.   TENANCY - The tenancy of a resource. Examples are shared or dedicated.   USAGE_TYPE - The type of usage. An example is DataTransfer-In-Bytes. The response for the GetDimensionValues operation includes a unit attribute. Examples include GB and Hrs.   USAGE_TYPE_GROUP - The grouping of common usage types. An example is Amazon EC2: CloudWatch – Alarms. The response for this operation includes a unit attribute.   REGION - The Amazon Web Services Region.   RECORD_TYPE - The different types of charges such as RI fees, usage costs, tax refunds, and credits.   RESOURCE_ID - The unique identifier of the resource. ResourceId is an opt-in feature only available for last 14 days for EC2-Compute Service.   If you set the context to RESERVATIONS, you can use the following dimensions for searching:   AZ - The Availability Zone. An example is us-east-1a.   CACHE_ENGINE - The Amazon ElastiCache operating system. Examples are Windows or Linux.   DEPLOYMENT_OPTION - The scope of Amazon Relational Database Service deployments. Valid values are SingleAZ and MultiAZ.   INSTANCE_TYPE - The type of Amazon EC2 instance. An example is m4.xlarge.   LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the Amazon Web Services ID of the member account.   PLATFORM - The Amazon EC2 operating system. Examples are Windows or Linux.   REGION - The Amazon Web Services Region.   SCOPE (Utilization only) - The scope of a Reserved Instance (RI). Values are regional or a single Availability Zone.   TAG (Coverage only) - The tags that are associated with a Reserved Instance (RI).   TENANCY - The tenancy of a resource. Examples are shared or dedicated.   If you set the context to SAVINGS_PLANS, you can use the following dimensions for searching:   SAVINGS_PLANS_TYPE - Type of Savings Plans (EC2 Instance or Compute)   PAYMENT_OPTION - Payment option for the given Savings Plans (for example, All Upfront)   REGION - The Amazon Web Services Region.   INSTANCE_TYPE_FAMILY - The family of instances (For example, m5)   LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the Amazon Web Services ID of the member account.   SAVINGS_PLAN_ARN - The unique identifier for your Savings Plans.  
      */
     Context?: Context;
     Filter?: Expression;
@@ -1333,7 +1369,7 @@ declare namespace CostExplorer {
      */
     TimePeriod: DateInterval;
     /**
-     * You can group the data by the following attributes:   AZ   CACHE_ENGINE   DATABASE_ENGINE   DEPLOYMENT_OPTION   INSTANCE_TYPE   LINKED_ACCOUNT   OPERATING_SYSTEM   PLATFORM   REGION   TENANCY  
+     * You can group the data by the following attributes:   AZ   CACHE_ENGINE   DATABASE_ENGINE   DEPLOYMENT_OPTION   INSTANCE_TYPE   INVOICING_ENTITY   LINKED_ACCOUNT   OPERATING_SYSTEM   PLATFORM   REGION   TENANCY  
      */
     GroupBy?: GroupDefinitions;
     /**
@@ -1804,7 +1840,7 @@ declare namespace CostExplorer {
      */
     ElastiCacheInstanceDetails?: ElastiCacheInstanceDetails;
     /**
-     * The Amazon ES instances that Amazon Web Services recommends that you purchase.
+     * The Amazon OpenSearch Service instances that Amazon Web Services recommends that you purchase.
      */
     ESInstanceDetails?: ESInstanceDetails;
   }
@@ -1833,6 +1869,18 @@ declare namespace CostExplorer {
      *  The token to retrieve the next set of results. Amazon Web Services provides the token when the response from a previous call has more results than the maximum page size. 
      */
     NextToken?: NextPageToken;
+  }
+  export interface ListTagsForResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource. For a list of supported resources, see ResourceTag.
+     */
+    ResourceArn: Arn;
+  }
+  export interface ListTagsForResourceResponse {
+    /**
+     * A list of tag key value pairs that are associated with the response. 
+     */
+    ResourceTags?: ResourceTagList;
   }
   export type LookbackPeriodInDays = "SEVEN_DAYS"|"THIRTY_DAYS"|"SIXTY_DAYS"|string;
   export type MatchOption = "EQUALS"|"ABSENT"|"STARTS_WITH"|"ENDS_WITH"|"CONTAINS"|"CASE_SENSITIVE"|"CASE_INSENSITIVE"|string;
@@ -2221,6 +2269,20 @@ declare namespace CostExplorer {
      */
     EC2ResourceDetails?: EC2ResourceDetails;
   }
+  export interface ResourceTag {
+    /**
+     *  The key that is associated with the tag. 
+     */
+    Key: ResourceTagKey;
+    /**
+     *  The value that is associated with the tag. 
+     */
+    Value: ResourceTagValue;
+  }
+  export type ResourceTagKey = string;
+  export type ResourceTagKeyList = ResourceTagKey[];
+  export type ResourceTagList = ResourceTag[];
+  export type ResourceTagValue = string;
   export interface ResourceUtilization {
     /**
      * The utilization of current Amazon EC2 instance. 
@@ -2679,6 +2741,18 @@ declare namespace CostExplorer {
   export type SupportedSavingsPlansType = "COMPUTE_SP"|"EC2_INSTANCE_SP"|"SAGEMAKER_SP"|string;
   export type TagKey = string;
   export type TagList = Entity[];
+  export interface TagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource. For a list of supported resources, see ResourceTag. 
+     */
+    ResourceArn: Arn;
+    /**
+     *  A list of tag key-value pairs to be added to the resource. Each tag consists of a key and a value, and each key must be unique for the resource. The following restrictions apply to resource tags:   Although the maximum number of array members is 200, you can assign a maximum of 50 user-tags to one resource. The remaining are reserved for Amazon Web Services use   The maximum length of a key is 128 characters   The maximum length of a value is 256 characters   Valid characters for keys and values are: A-Z, a-z, spaces, _.:/=+-    Keys and values are case sensitive   Keys and values are trimmed for any leading or trailing whitespaces   Don’t use aws: as a prefix for your keys. This prefix is reserved for Amazon Web Services use  
+     */
+    ResourceTags: ResourceTagList;
+  }
+  export interface TagResourceResponse {
+  }
   export interface TagValues {
     /**
      * The key for the tag.
@@ -2757,6 +2831,18 @@ declare namespace CostExplorer {
   export type TotalRunningHours = string;
   export type TotalRunningNormalizedUnits = string;
   export type UnrealizedSavings = string;
+  export interface UntagResourceRequest {
+    /**
+     *  The Amazon Resource Name (ARN) of the resource. For a list of supported resources, see ResourceTag. 
+     */
+    ResourceArn: Arn;
+    /**
+     *  A list of tag keys associated with tags that need to be removed from the resource. If you specify a tag key that does not exist, it is ignored. Although the maximum number of array members is 200, user-tag maximum is 50. The remaining are reserved for Amazon Web Services use. 
+     */
+    ResourceTagKeys: ResourceTagKeyList;
+  }
+  export interface UntagResourceResponse {
+  }
   export type UnusedHours = string;
   export type UnusedUnits = string;
   export interface UpdateAnomalyMonitorRequest {

@@ -3,7 +3,6 @@
   "metadata": {
     "apiVersion": "2020-11-30",
     "endpointPrefix": "greengrass",
-    "jsonVersion": "1.1",
     "protocol": "rest-json",
     "serviceAbbreviation": "AWS GreengrassV2",
     "serviceFullName": "AWS IoT Greengrass V2",
@@ -12,6 +11,29 @@
     "uid": "greengrassv2-2020-11-30"
   },
   "operations": {
+    "AssociateServiceRoleToAccount": {
+      "name": "AssociateServiceRoleToAccount",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/greengrass/servicerole",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "AssociateServiceRoleToAccountRequest"
+      },
+      "output": {
+        "shape": "AssociateServiceRoleToAccountResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Associates a Greengrass service role with IoT Greengrass for your Amazon Web Services account in this Amazon Web Services Region. IoT Greengrass uses this role to verify the identity of client devices and manage core device connectivity information. The role must include the <a href=\"https://console.aws.amazon.com/iam/home#/policies/arn:awsiam::aws:policy/service-role/AWSGreengrassResourceAccessRolePolicy\">AWSGreengrassResourceAccessRolePolicy</a> managed policy or a custom policy that defines equivalent permissions for the IoT Greengrass features that you use. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-service-role.html\">Greengrass service role</a> in the <i>IoT Greengrass Version 2 Developer Guide</i>.</p>"
+    },
     "BatchAssociateClientDeviceWithCoreDevice": {
       "name": "BatchAssociateClientDeviceWithCoreDevice",
       "http": {
@@ -42,7 +64,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Associate a list of client devices with a core device. Use this API operation to specify which client devices can discover a core device through cloud discovery. With cloud discovery, client devices connect to IoT Greengrass to retrieve associated core devices' connectivity information and certificates. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/configure-cloud-discovery.html\">Configure cloud discovery</a> in the <i>IoT Greengrass V2 Developer Guide</i>.</p> <note> <p>Client devices are local IoT devices that connect to and communicate with an IoT Greengrass core device over MQTT. You can connect client devices to a core device to sync MQTT messages and data to Amazon Web Services IoT Core and interact with client devices in Greengrass components. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/interact-with-local-iot-devices.html\">Interact with local IoT devices</a> in the <i>IoT Greengrass V2 Developer Guide</i>.</p> </note>"
+      "documentation": "<p>Associates a list of client devices with a core device. Use this API operation to specify which client devices can discover a core device through cloud discovery. With cloud discovery, client devices connect to IoT Greengrass to retrieve associated core devices' connectivity information and certificates. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/configure-cloud-discovery.html\">Configure cloud discovery</a> in the <i>IoT Greengrass V2 Developer Guide</i>.</p> <note> <p>Client devices are local IoT devices that connect to and communicate with an IoT Greengrass core device over MQTT. You can connect client devices to a core device to sync MQTT messages and data to Amazon Web Services IoT Core and interact with client devices in Greengrass components. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/interact-with-local-iot-devices.html\">Interact with local IoT devices</a> in the <i>IoT Greengrass V2 Developer Guide</i>.</p> </note>"
     },
     "BatchDisassociateClientDeviceFromCoreDevice": {
       "name": "BatchDisassociateClientDeviceFromCoreDevice",
@@ -74,7 +96,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Disassociate a list of client devices from a core device. After you disassociate a client device from a core device, the client device won't be able to use cloud discovery to retrieve the core device's connectivity information and certificates.</p>"
+      "documentation": "<p>Disassociates a list of client devices from a core device. After you disassociate a client device from a core device, the client device won't be able to use cloud discovery to retrieve the core device's connectivity information and certificates.</p>"
     },
     "CancelDeployment": {
       "name": "CancelDeployment",
@@ -146,7 +168,7 @@
           "shape": "RequestAlreadyInProgressException"
         }
       ],
-      "documentation": "<p>Creates a component. Components are software that run on Greengrass core devices. After you develop and test a component on your core device, you can use this operation to upload your component to IoT Greengrass. Then, you can deploy the component to other core devices.</p> <p>You can use this operation to do the following:</p> <ul> <li> <p> <b>Create components from recipes</b> </p> <p>Create a component from a recipe, which is a file that defines the component's metadata, parameters, dependencies, lifecycle, artifacts, and platform capability. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/component-recipe-reference.html\">IoT Greengrass component recipe reference</a> in the <i>IoT Greengrass V2 Developer Guide</i>.</p> <p>To create a component from a recipe, specify <code>inlineRecipe</code> when you call this operation.</p> </li> <li> <p> <b>Create components from Lambda functions</b> </p> <p>Create a component from an Lambda function that runs on IoT Greengrass. This creates a recipe and artifacts from the Lambda function's deployment package. You can use this operation to migrate Lambda functions from IoT Greengrass V1 to IoT Greengrass V2.</p> <p>This function only accepts Lambda functions that use the following runtimes:</p> <ul> <li> <p>Python 2.7 – <code>python2.7</code> </p> </li> <li> <p>Python 3.7 – <code>python3.7</code> </p> </li> <li> <p>Python 3.8 – <code>python3.8</code> </p> </li> <li> <p>Java 8 – <code>java8</code> </p> </li> <li> <p>Node.js 10 – <code>nodejs10.x</code> </p> </li> <li> <p>Node.js 12 – <code>nodejs12.x</code> </p> </li> </ul> <p>To create a component from a Lambda function, specify <code>lambdaFunction</code> when you call this operation.</p> </li> </ul>"
+      "documentation": "<p>Creates a component. Components are software that run on Greengrass core devices. After you develop and test a component on your core device, you can use this operation to upload your component to IoT Greengrass. Then, you can deploy the component to other core devices.</p> <p>You can use this operation to do the following:</p> <ul> <li> <p> <b>Create components from recipes</b> </p> <p>Create a component from a recipe, which is a file that defines the component's metadata, parameters, dependencies, lifecycle, artifacts, and platform capability. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/component-recipe-reference.html\">IoT Greengrass component recipe reference</a> in the <i>IoT Greengrass V2 Developer Guide</i>.</p> <p>To create a component from a recipe, specify <code>inlineRecipe</code> when you call this operation.</p> </li> <li> <p> <b>Create components from Lambda functions</b> </p> <p>Create a component from an Lambda function that runs on IoT Greengrass. This creates a recipe and artifacts from the Lambda function's deployment package. You can use this operation to migrate Lambda functions from IoT Greengrass V1 to IoT Greengrass V2.</p> <p>This function only accepts Lambda functions that use the following runtimes:</p> <ul> <li> <p>Python 2.7 – <code>python2.7</code> </p> </li> <li> <p>Python 3.7 – <code>python3.7</code> </p> </li> <li> <p>Python 3.8 – <code>python3.8</code> </p> </li> <li> <p>Java 8 – <code>java8</code> </p> </li> <li> <p>Node.js 10 – <code>nodejs10.x</code> </p> </li> <li> <p>Node.js 12 – <code>nodejs12.x</code> </p> </li> </ul> <p>To create a component from a Lambda function, specify <code>lambdaFunction</code> when you call this operation.</p> <note> <p>IoT Greengrass currently supports Lambda functions on only Linux core devices.</p> </note> </li> </ul>"
     },
     "CreateDeployment": {
       "name": "CreateDeployment",
@@ -181,7 +203,7 @@
           "shape": "RequestAlreadyInProgressException"
         }
       ],
-      "documentation": "<p>Creates a continuous deployment for a target, which is a Greengrass core device or group of core devices. When you add a new core device to a group of core devices that has a deployment, IoT Greengrass deploys that group's deployment to the new device.</p> <p>You can define one deployment for each target. When you create a new deployment for a target that has an existing deployment, you replace the previous deployment. IoT Greengrass applies the new deployment to the target devices.</p> <p>Every deployment has a revision number that indicates how many deployment revisions you define for a target. Use this operation to create a new revision of an existing deployment. This operation returns the revision number of the new deployment when you create it.</p> <p>For more information, see the <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/create-deployments.html\">Create deployments</a> in the <i>IoT Greengrass V2 Developer Guide</i>.</p>"
+      "documentation": "<p>Creates a continuous deployment for a target, which is a Greengrass core device or group of core devices. When you add a new core device to a group of core devices that has a deployment, IoT Greengrass deploys that group's deployment to the new device.</p> <p>You can define one deployment for each target. When you create a new deployment for a target that has an existing deployment, you replace the previous deployment. IoT Greengrass applies the new deployment to the target devices.</p> <p>Every deployment has a revision number that indicates how many deployment revisions you define for a target. Use this operation to create a new revision of an existing deployment.</p> <p>For more information, see the <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/create-deployments.html\">Create deployments</a> in the <i>IoT Greengrass V2 Developer Guide</i>.</p>"
     },
     "DeleteComponent": {
       "name": "DeleteComponent",
@@ -278,6 +300,26 @@
       ],
       "documentation": "<p>Retrieves metadata for a version of a component.</p>"
     },
+    "DisassociateServiceRoleFromAccount": {
+      "name": "DisassociateServiceRoleFromAccount",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/greengrass/servicerole",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "DisassociateServiceRoleFromAccountRequest"
+      },
+      "output": {
+        "shape": "DisassociateServiceRoleFromAccountResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Disassociates the Greengrass service role from IoT Greengrass for your Amazon Web Services account in this Amazon Web Services Region. Without a service role, IoT Greengrass can't verify the identity of client devices or manage core device connectivity information. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-service-role.html\">Greengrass service role</a> in the <i>IoT Greengrass Version 2 Developer Guide</i>.</p>"
+    },
     "GetComponent": {
       "name": "GetComponent",
       "http": {
@@ -340,6 +382,29 @@
       ],
       "documentation": "<p>Gets the pre-signed URL to download a public component artifact. Core devices call this operation to identify the URL that they can use to download an artifact to install.</p>"
     },
+    "GetConnectivityInfo": {
+      "name": "GetConnectivityInfo",
+      "http": {
+        "method": "GET",
+        "requestUri": "/greengrass/things/{thingName}/connectivityInfo",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "GetConnectivityInfoRequest"
+      },
+      "output": {
+        "shape": "GetConnectivityInfoResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Retrieves connectivity information for a Greengrass core device.</p> <p>Connectivity information includes endpoints and ports where client devices can connect to an MQTT broker on the core device. When a client device calls the <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-discover-api.html\">IoT Greengrass discovery API</a>, IoT Greengrass returns connectivity information for all of the core devices where the client device can connect. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/connect-client-devices.html\">Connect client devices to core devices</a> in the <i>IoT Greengrass Version 2 Developer Guide</i>.</p>"
+    },
     "GetCoreDevice": {
       "name": "GetCoreDevice",
       "http": {
@@ -401,6 +466,26 @@
         }
       ],
       "documentation": "<p>Gets a deployment. Deployments define the components that run on Greengrass core devices.</p>"
+    },
+    "GetServiceRoleForAccount": {
+      "name": "GetServiceRoleForAccount",
+      "http": {
+        "method": "GET",
+        "requestUri": "/greengrass/servicerole",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "GetServiceRoleForAccountRequest"
+      },
+      "output": {
+        "shape": "GetServiceRoleForAccountResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Gets the service role associated with IoT Greengrass for your Amazon Web Services account in this Amazon Web Services Region. IoT Greengrass uses this role to verify the identity of client devices and manage core device connectivity information. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-service-role.html\">Greengrass service role</a> in the <i>IoT Greengrass Version 2 Developer Guide</i>.</p>"
     },
     "ListClientDevicesAssociatedWithCoreDevice": {
       "name": "ListClientDevicesAssociatedWithCoreDevice",
@@ -719,6 +804,29 @@
         }
       ],
       "documentation": "<p>Removes a tag from an IoT Greengrass resource.</p>"
+    },
+    "UpdateConnectivityInfo": {
+      "name": "UpdateConnectivityInfo",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/greengrass/things/{thingName}/connectivityInfo",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "UpdateConnectivityInfoRequest"
+      },
+      "output": {
+        "shape": "UpdateConnectivityInfoResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Updates connectivity information for a Greengrass core device.</p> <p>Connectivity information includes endpoints and ports where client devices can connect to an MQTT broker on the core device. When a client device calls the <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-discover-api.html\">IoT Greengrass discovery API</a>, IoT Greengrass returns connectivity information for all of the core devices where the client device can connect. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/connect-client-devices.html\">Connect client devices to core devices</a> in the <i>IoT Greengrass Version 2 Developer Guide</i>.</p>"
     }
   },
   "shapes": {
@@ -768,6 +876,29 @@
       },
       "max": 100,
       "min": 1
+    },
+    "AssociateServiceRoleToAccountRequest": {
+      "type": "structure",
+      "required": [
+        "roleArn"
+      ],
+      "members": {
+        "roleArn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the service role to associate with IoT Greengrass for your Amazon Web Services account in this Amazon Web Services Region.</p>",
+          "locationName": "RoleArn"
+        }
+      }
+    },
+    "AssociateServiceRoleToAccountResponse": {
+      "type": "structure",
+      "members": {
+        "associatedAt": {
+          "shape": "String",
+          "documentation": "<p>The time when the service role was associated with IoT Greengrass for your Amazon Web Services account in this Amazon Web Services Region.</p>",
+          "locationName": "AssociatedAt"
+        }
+      }
     },
     "AssociatedClientDevice": {
       "type": "structure",
@@ -841,7 +972,7 @@
       "members": {
         "errorEntries": {
           "shape": "DisassociateClientDeviceFromCoreDeviceErrorList",
-          "documentation": "<p>The list of errors (if any) for the entries in the request. Each error entry contains the name of the IoT thing that failed to disassociate.</p>"
+          "documentation": "<p>The list of any errors for the entries in the request. Each error entry contains the name of the IoT thing that failed to disassociate.</p>"
         }
       }
     },
@@ -1106,11 +1237,15 @@
       "members": {
         "posixUser": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The POSIX system user and (optional) group to use to run this component. Specify the user and group separated by a colon (<code>:</code>) in the following format: <code>user:group</code>. The group is optional. If you don't specify a group, the IoT Greengrass Core software uses the primary user for the group.</p> <p>If you omit this parameter, the IoT Greengrass Core software uses the default system user and group that you configure on the Greengrass nucleus component. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/configure-greengrass-core-v2.html#configure-component-user\">Configure the user and group that run components</a>.</p>"
+          "documentation": "<p>The POSIX system user and, optionally, group to use to run this component on Linux core devices. The user, and group if specified, must exist on each Linux core device. Specify the user and group separated by a colon (<code>:</code>) in the following format: <code>user:group</code>. The group is optional. If you don't specify a group, the IoT Greengrass Core software uses the primary user for the group.</p> <p>If you omit this parameter, the IoT Greengrass Core software uses the default system user and group that you configure on the Greengrass nucleus component. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/configure-greengrass-core-v2.html#configure-component-user\">Configure the user and group that run components</a>.</p>"
         },
         "systemResourceLimits": {
           "shape": "SystemResourceLimits",
-          "documentation": "<p>The system resource limits to apply to this component's process on the core device.</p> <p>If you omit this parameter, the IoT Greengrass Core software uses the default system resource limits that you configure on the Greengrass nucleus component. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/configure-greengrass-core-v2.html#configure-component-system-resource-limits\">Configure system resource limits for components</a>.</p>"
+          "documentation": "<p>The system resource limits to apply to this component's process on the core device. IoT Greengrass currently supports this feature on only Linux core devices.</p> <p>If you omit this parameter, the IoT Greengrass Core software uses the default system resource limits that you configure on the Greengrass nucleus component. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/configure-greengrass-core-v2.html#configure-component-system-resource-limits\">Configure system resource limits for components</a>.</p>"
+        },
+        "windowsUser": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The Windows user to use to run this component on Windows core devices. The user must exist on each Windows core device, and its name and password must be in the LocalSystem account's Credentials Manager instance.</p> <p>If you omit this parameter, the IoT Greengrass Core software uses the default Windows user that you configure on the Greengrass nucleus component. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/configure-greengrass-core-v2.html#configure-component-user\">Configure the user and group that run components</a>.</p>"
         }
       },
       "documentation": "<p>Contains information system user and group that the IoT Greengrass Core software uses to run component processes on the core device. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/configure-greengrass-core-v2.html#configure-component-user\">Configure the user and group that run components</a> in the <i>IoT Greengrass V2 Developer Guide</i>.</p>"
@@ -1164,6 +1299,32 @@
         "PRIVATE",
         "PUBLIC"
       ]
+    },
+    "ConnectivityInfo": {
+      "type": "structure",
+      "members": {
+        "id": {
+          "shape": "String",
+          "documentation": "<p>An ID for the connectivity information.</p>",
+          "locationName": "Id"
+        },
+        "hostAddress": {
+          "shape": "String",
+          "documentation": "<p>The IP address or DNS address where client devices can connect to an MQTT broker on the Greengrass core device.</p>",
+          "locationName": "HostAddress"
+        },
+        "portNumber": {
+          "shape": "PortNumberInt",
+          "documentation": "<p>The port where the MQTT broker operates on the core device. This port is typically 8883, which is the default port for the MQTT broker component that runs on core devices.</p>",
+          "locationName": "PortNumber"
+        },
+        "metadata": {
+          "shape": "String",
+          "documentation": "<p>Additional metadata to provide to client devices that connect to this core device.</p>",
+          "locationName": "Metadata"
+        }
+      },
+      "documentation": "<p>Contains information about an endpoint and port where client devices can connect to an MQTT broker on a Greengrass core device.</p>"
     },
     "CoreDevice": {
       "type": "structure",
@@ -1600,6 +1761,20 @@
       "max": 100,
       "min": 1
     },
+    "DisassociateServiceRoleFromAccountRequest": {
+      "type": "structure",
+      "members": {}
+    },
+    "DisassociateServiceRoleFromAccountResponse": {
+      "type": "structure",
+      "members": {
+        "disassociatedAt": {
+          "shape": "String",
+          "documentation": "<p>The time when the service role was disassociated from IoT Greengrass for your Amazon Web Services account in this Amazon Web Services Region.</p>",
+          "locationName": "DisassociatedAt"
+        }
+      }
+    },
     "EffectiveDeployment": {
       "type": "structure",
       "required": [
@@ -1758,6 +1933,35 @@
         }
       }
     },
+    "GetConnectivityInfoRequest": {
+      "type": "structure",
+      "required": [
+        "thingName"
+      ],
+      "members": {
+        "thingName": {
+          "shape": "CoreDeviceThingName",
+          "documentation": "<p>The name of the core device. This is also the name of the IoT thing.</p>",
+          "location": "uri",
+          "locationName": "thingName"
+        }
+      }
+    },
+    "GetConnectivityInfoResponse": {
+      "type": "structure",
+      "members": {
+        "connectivityInfo": {
+          "shape": "connectivityInfoList",
+          "documentation": "<p>The connectivity information for the core device.</p>",
+          "locationName": "ConnectivityInfo"
+        },
+        "message": {
+          "shape": "String",
+          "documentation": "<p>A message about the connectivity information request.</p>",
+          "locationName": "Message"
+        }
+      }
+    },
     "GetCoreDeviceRequest": {
       "type": "structure",
       "required": [
@@ -1873,6 +2077,25 @@
         "tags": {
           "shape": "TagMap",
           "documentation": "<p>A list of key-value pairs that contain metadata for the resource. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html\">Tag your resources</a> in the <i>IoT Greengrass V2 Developer Guide</i>.</p>"
+        }
+      }
+    },
+    "GetServiceRoleForAccountRequest": {
+      "type": "structure",
+      "members": {}
+    },
+    "GetServiceRoleForAccountResponse": {
+      "type": "structure",
+      "members": {
+        "associatedAt": {
+          "shape": "String",
+          "documentation": "<p>The time when the service role was associated with IoT Greengrass for your Amazon Web Services account in this Amazon Web Services Region.</p>",
+          "locationName": "AssociatedAt"
+        },
+        "roleArn": {
+          "shape": "String",
+          "documentation": "<p>The ARN of the service role that is associated with IoT Greengrass for your Amazon Web Services account in this Amazon Web Services Region.</p>",
+          "locationName": "RoleArn"
         }
       }
     },
@@ -2710,6 +2933,11 @@
         "shape": "NonEmptyString"
       }
     },
+    "PortNumberInt": {
+      "type": "integer",
+      "max": 65535,
+      "min": 0
+    },
     "PublisherString": {
       "type": "string"
     },
@@ -2896,6 +3124,47 @@
     "UntagResourceResponse": {
       "type": "structure",
       "members": {}
+    },
+    "UpdateConnectivityInfoRequest": {
+      "type": "structure",
+      "required": [
+        "thingName",
+        "connectivityInfo"
+      ],
+      "members": {
+        "thingName": {
+          "shape": "CoreDeviceThingName",
+          "documentation": "<p>The name of the core device. This is also the name of the IoT thing.</p>",
+          "location": "uri",
+          "locationName": "thingName"
+        },
+        "connectivityInfo": {
+          "shape": "connectivityInfoList",
+          "documentation": "<p>The connectivity information for the core device.</p>",
+          "locationName": "ConnectivityInfo"
+        }
+      }
+    },
+    "UpdateConnectivityInfoResponse": {
+      "type": "structure",
+      "members": {
+        "version": {
+          "shape": "String",
+          "documentation": "<p>The new version of the connectivity information for the core device.</p>",
+          "locationName": "Version"
+        },
+        "message": {
+          "shape": "String",
+          "documentation": "<p>A message about the connectivity information update request.</p>",
+          "locationName": "Message"
+        }
+      }
+    },
+    "connectivityInfoList": {
+      "type": "list",
+      "member": {
+        "shape": "ConnectivityInfo"
+      }
     }
   },
   "documentation": "<p>IoT Greengrass brings local compute, messaging, data management, sync, and ML inference capabilities to edge devices. This enables devices to collect and analyze data closer to the source of information, react autonomously to local events, and communicate securely with each other on local networks. Local devices can also communicate securely with Amazon Web Services IoT Core and export IoT data to the Amazon Web Services Cloud. IoT Greengrass developers can use Lambda functions and components to create and deploy applications to fleets of edge devices for local operation.</p> <p>IoT Greengrass Version 2 provides a new major version of the IoT Greengrass Core software, new APIs, and a new console. Use this API reference to learn how to use the IoT Greengrass V2 API operations to manage components, manage deployments, and core devices.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/what-is-iot-greengrass.html\">What is IoT Greengrass?</a> in the <i>IoT Greengrass V2 Developer Guide</i>.</p>"

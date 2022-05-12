@@ -2,6 +2,7 @@ import {Request} from '../lib/request';
 import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
+import {WaiterConfiguration} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config-base';
 interface Blob {}
@@ -267,6 +268,22 @@ declare class Transfer extends Service {
    * Assigns new properties to a user. Parameters you pass modify any or all of the following: the home directory, role, and policy for the UserName and ServerId you specify. The response returns the ServerId and the UserName for the updated user.
    */
   updateUser(callback?: (err: AWSError, data: Transfer.Types.UpdateUserResponse) => void): Request<Transfer.Types.UpdateUserResponse, AWSError>;
+  /**
+   * Waits for the serverOffline state by periodically calling the underlying Transfer.describeServeroperation every 30 seconds (at most 120 times).
+   */
+  waitFor(state: "serverOffline", params: Transfer.Types.DescribeServerRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: Transfer.Types.DescribeServerResponse) => void): Request<Transfer.Types.DescribeServerResponse, AWSError>;
+  /**
+   * Waits for the serverOffline state by periodically calling the underlying Transfer.describeServeroperation every 30 seconds (at most 120 times).
+   */
+  waitFor(state: "serverOffline", callback?: (err: AWSError, data: Transfer.Types.DescribeServerResponse) => void): Request<Transfer.Types.DescribeServerResponse, AWSError>;
+  /**
+   * Waits for the serverOnline state by periodically calling the underlying Transfer.describeServeroperation every 30 seconds (at most 120 times).
+   */
+  waitFor(state: "serverOnline", params: Transfer.Types.DescribeServerRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: Transfer.Types.DescribeServerResponse) => void): Request<Transfer.Types.DescribeServerResponse, AWSError>;
+  /**
+   * Waits for the serverOnline state by periodically calling the underlying Transfer.describeServeroperation every 30 seconds (at most 120 times).
+   */
+  waitFor(state: "serverOnline", callback?: (err: AWSError, data: Transfer.Types.DescribeServerResponse) => void): Request<Transfer.Types.DescribeServerResponse, AWSError>;
 }
 declare namespace Transfer {
   export type AddressAllocationId = string;
@@ -279,11 +296,18 @@ declare namespace Transfer {
      * The name of the step, used as an identifier.
      */
     Name?: WorkflowStepName;
+    /**
+     * Specifies the location for the file being copied. Only applicable for Copy type workflow steps. Use ${Transfer:username} in this field to parametrize the destination prefix by username.
+     */
     DestinationFileLocation?: InputFileLocation;
     /**
      * A flag that indicates whether or not to overwrite an existing file of the same name. The default is FALSE.
      */
     OverwriteExisting?: OverwriteExisting;
+    /**
+     * Specifies which file to use as input to the workflow step: either the output from the previous step, or the originally uploaded file for the workflow.   Enter ${previous.file} to use the previous file as the input. In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value.   Enter ${original.file} to use the originally-uploaded file location as input for this step.  
+     */
+    SourceFileLocation?: SourceFileLocation;
   }
   export interface CreateAccessRequest {
     /**
@@ -295,7 +319,7 @@ declare namespace Transfer {
      */
     HomeDirectoryType?: HomeDirectoryType;
     /**
-     * Logical directory mappings that specify what Amazon S3 or Amazon EFS paths and keys should be visible to your user and how you want to make them visible. You must specify the Entry and Target pair, where Entry shows how the path is made visible and Target is the actual Amazon S3 or Amazon EFS path. If you only specify a target, it is displayed as is. You also must ensure that your Amazon Web Services Identity and Access Management (IAM) role provides access to paths in Target. This value can only be set when HomeDirectoryType is set to LOGICAL. The following is an Entry and Target pair example.  [ { "Entry": "/directory1", "Target": "/bucket_name/home/mydirectory" } ]  In most cases, you can use this value instead of the session policy to lock down your user to the designated home directory ("chroot"). To do this, you can set Entry to / and set Target to the HomeDirectory parameter value. The following is an Entry and Target pair example for chroot.  [ { "Entry:": "/", "Target": "/bucket_name/home/mydirectory" } ]   If the target of a logical directory entry does not exist in Amazon S3 or EFS, the entry is ignored. As a workaround, you can use the Amazon S3 API or EFS API to create 0 byte objects as place holders for your directory. If using the CLI, use the s3api or efsapi call instead of s3 or efs so you can use the put-object operation. For example, you use the following: aws s3api put-object --bucket bucketname --key path/to/folder/. Make sure that the end of the key name ends in a / for it to be considered a folder. 
+     * Logical directory mappings that specify what Amazon S3 or Amazon EFS paths and keys should be visible to your user and how you want to make them visible. You must specify the Entry and Target pair, where Entry shows how the path is made visible and Target is the actual Amazon S3 or Amazon EFS path. If you only specify a target, it is displayed as is. You also must ensure that your Amazon Web Services Identity and Access Management (IAM) role provides access to paths in Target. This value can only be set when HomeDirectoryType is set to LOGICAL. The following is an Entry and Target pair example.  [ { "Entry": "/directory1", "Target": "/bucket_name/home/mydirectory" } ]  In most cases, you can use this value instead of the session policy to lock down your user to the designated home directory ("chroot"). To do this, you can set Entry to / and set Target to the HomeDirectory parameter value. The following is an Entry and Target pair example for chroot.  [ { "Entry": "/", "Target": "/bucket_name/home/mydirectory" } ] 
      */
     HomeDirectoryMappings?: HomeDirectoryMappings;
     /**
@@ -344,7 +368,7 @@ declare namespace Transfer {
      */
     EndpointType?: EndpointType;
     /**
-     * The RSA private key as generated by the ssh-keygen -N "" -m PEM -f my-new-server-key command.  If you aren't planning to migrate existing users from an existing SFTP-enabled server to a new server, don't update the host key. Accidentally changing a server's host key can be disruptive.  For more information, see Change the host key for your SFTP-enabled server in the Amazon Web Services Transfer Family User Guide.
+     * The RSA or ECDSA private key to use for your server. Use the following command to generate an RSA 2048 bit key with no passphrase:  ssh-keygen -t rsa -b 2048 -N "" -m PEM -f my-new-server-key. Use a minimum value of 2048 for the -b option: you can create a stronger key using 3072 or 4096. Use the following command to generate an ECDSA 256 bit key with no passphrase:  ssh-keygen -t ecdsa -b 256 -N "" -m PEM -f my-new-server-key. Valid values for the -b option for ECDSA are 256, 384, and 521. For both of these commands, you can replace my-new-server-key with a string of your choice.  If you aren't planning to migrate existing users from an existing SFTP-enabled server to a new server, don't update the host key. Accidentally changing a server's host key can be disruptive.  For more information, see Change the host key for your SFTP-enabled server in the Amazon Web Services Transfer Family User Guide.
      */
     HostKey?: HostKey;
     /**
@@ -352,7 +376,7 @@ declare namespace Transfer {
      */
     IdentityProviderDetails?: IdentityProviderDetails;
     /**
-     * Specifies the mode of authentication for a server. The default value is SERVICE_MANAGED, which allows you to store and access user credentials within the Amazon Web Services Transfer Family service. Use AWS_DIRECTORY_SERVICE to provide access to Active Directory groups in Amazon Web Services Managed Active Directory or Microsoft Active Directory in your on-premises environment or in Amazon Web Services using AD Connectors. This option also requires you to provide a Directory ID using the IdentityProviderDetails parameter. Use the API_GATEWAY value to integrate with an identity provider of your choosing. The API_GATEWAY setting requires you to provide an API Gateway endpoint URL to call for authentication using the IdentityProviderDetails parameter.
+     * Specifies the mode of authentication for a server. The default value is SERVICE_MANAGED, which allows you to store and access user credentials within the Amazon Web Services Transfer Family service. Use AWS_DIRECTORY_SERVICE to provide access to Active Directory groups in Amazon Web Services Managed Active Directory or Microsoft Active Directory in your on-premises environment or in Amazon Web Services using AD Connectors. This option also requires you to provide a Directory ID using the IdentityProviderDetails parameter. Use the API_GATEWAY value to integrate with an identity provider of your choosing. The API_GATEWAY setting requires you to provide an API Gateway endpoint URL to call for authentication using the IdentityProviderDetails parameter. Use the AWS_LAMBDA value to directly use a Lambda function as your identity provider. If you choose this value, you must specify the ARN for the lambda function in the Function parameter for the IdentityProviderDetails data type.
      */
     IdentityProviderType?: IdentityProviderType;
     /**
@@ -360,9 +384,21 @@ declare namespace Transfer {
      */
     LoggingRole?: Role;
     /**
+     * Specify a string to display when users connect to a server. This string is displayed after the user authenticates.  The SFTP protocol does not support post-authentication display banners. 
+     */
+    PostAuthenticationLoginBanner?: PostAuthenticationLoginBanner;
+    /**
+     * Specify a string to display when users connect to a server. This string is displayed before the user authenticates. For example, the following banner displays details about using the system.  This system is for the use of authorized users only. Individuals using this computer system without authority, or in excess of their authority, are subject to having all of their activities on this system monitored and recorded by system personnel. 
+     */
+    PreAuthenticationLoginBanner?: PreAuthenticationLoginBanner;
+    /**
      * Specifies the file transfer protocol or protocols over which your file transfer protocol client can connect to your server's endpoint. The available protocols are:    SFTP (Secure Shell (SSH) File Transfer Protocol): File transfer over SSH    FTPS (File Transfer Protocol Secure): File transfer with TLS encryption    FTP (File Transfer Protocol): Unencrypted file transfer    If you select FTPS, you must choose a certificate stored in Amazon Web Services Certificate Manager (ACM) which is used to identify your server when clients connect to it over FTPS. If Protocol includes either FTP or FTPS, then the EndpointType must be VPC and the IdentityProviderType must be AWS_DIRECTORY_SERVICE or API_GATEWAY. If Protocol includes FTP, then AddressAllocationIds cannot be associated. If Protocol is set only to SFTP, the EndpointType can be set to PUBLIC and the IdentityProviderType can be set to SERVICE_MANAGED. 
      */
     Protocols?: Protocols;
+    /**
+     * The protocol settings that are configured for your server.  Use the PassiveIp parameter to indicate passive mode (for FTP and FTPS protocols). Enter a single dotted-quad IPv4 address, such as the external IP address of a firewall, router, or load balancer.  Use the TlsSessionResumptionMode parameter to determine whether or not your Transfer server resumes recent, negotiated sessions through a unique session ID.
+     */
+    ProtocolDetails?: ProtocolDetails;
     /**
      * Specifies the name of the security policy that is attached to the server.
      */
@@ -392,7 +428,7 @@ declare namespace Transfer {
      */
     HomeDirectoryType?: HomeDirectoryType;
     /**
-     * Logical directory mappings that specify what Amazon S3 or Amazon EFS paths and keys should be visible to your user and how you want to make them visible. You must specify the Entry and Target pair, where Entry shows how the path is made visible and Target is the actual Amazon S3 or Amazon EFS path. If you only specify a target, it is displayed as is. You also must ensure that your Amazon Web Services Identity and Access Management (IAM) role provides access to paths in Target. This value can only be set when HomeDirectoryType is set to LOGICAL. The following is an Entry and Target pair example.  [ { "Entry": "/directory1", "Target": "/bucket_name/home/mydirectory" } ]  In most cases, you can use this value instead of the session policy to lock your user down to the designated home directory ("chroot"). To do this, you can set Entry to / and set Target to the HomeDirectory parameter value. The following is an Entry and Target pair example for chroot.  [ { "Entry:": "/", "Target": "/bucket_name/home/mydirectory" } ]   If the target of a logical directory entry does not exist in Amazon S3 or EFS, the entry is ignored. As a workaround, you can use the Amazon S3 API or EFS API to create 0 byte objects as place holders for your directory. If using the CLI, use the s3api or efsapi call instead of s3 or efs so you can use the put-object operation. For example, you use the following: aws s3api put-object --bucket bucketname --key path/to/folder/. Make sure that the end of the key name ends in a / for it to be considered a folder. 
+     * Logical directory mappings that specify what Amazon S3 or Amazon EFS paths and keys should be visible to your user and how you want to make them visible. You must specify the Entry and Target pair, where Entry shows how the path is made visible and Target is the actual Amazon S3 or Amazon EFS path. If you only specify a target, it is displayed as is. You also must ensure that your Amazon Web Services Identity and Access Management (IAM) role provides access to paths in Target. This value can only be set when HomeDirectoryType is set to LOGICAL. The following is an Entry and Target pair example.  [ { "Entry": "/directory1", "Target": "/bucket_name/home/mydirectory" } ]  In most cases, you can use this value instead of the session policy to lock your user down to the designated home directory ("chroot"). To do this, you can set Entry to / and set Target to the HomeDirectory parameter value. The following is an Entry and Target pair example for chroot.  [ { "Entry": "/", "Target": "/bucket_name/home/mydirectory" } ] 
      */
     HomeDirectoryMappings?: HomeDirectoryMappings;
     /**
@@ -412,7 +448,7 @@ declare namespace Transfer {
      */
     ServerId: ServerId;
     /**
-     * The public portion of the Secure Shell (SSH) key used to authenticate the user to the server.
+     * The public portion of the Secure Shell (SSH) key used to authenticate the user to the server.   Currently, Transfer Family does not accept elliptical curve keys (keys beginning with ecdsa).  
      */
     SshPublicKeyBody?: SshPublicKeyBody;
     /**
@@ -440,7 +476,7 @@ declare namespace Transfer {
      */
     Description?: WorkflowDescription;
     /**
-     * Specifies the details for the steps that are in the specified workflow.  The TYPE specifies which of the following actions is being taken for this step.     Copy: copy the file to another location    Custom: custom step with a lambda target    Delete: delete the file    Tag: add a tag to the file     Currently, copying and tagging are supported only on S3.    For file location, you specify either the S3 bucket and key, or the EFS filesystem ID and path. 
+     * Specifies the details for the steps that are in the specified workflow.  The TYPE specifies which of the following actions is being taken for this step.     COPY: copy the file to another location    CUSTOM: custom step with a lambda target    DELETE: delete the file    TAG: add a tag to the file     Currently, copying and tagging are supported only on S3.    For file location, you specify either the S3 bucket and key, or the EFS filesystem ID and path. 
      */
     Steps: WorkflowSteps;
     /**
@@ -471,6 +507,10 @@ declare namespace Transfer {
      * Timeout, in seconds, for the step.
      */
     TimeoutSeconds?: CustomStepTimeoutSeconds;
+    /**
+     * Specifies which file to use as input to the workflow step: either the output from the previous step, or the originally uploaded file for the workflow.   Enter ${previous.file} to use the previous file as the input. In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value.   Enter ${original.file} to use the originally-uploaded file location as input for this step.  
+     */
+    SourceFileLocation?: SourceFileLocation;
   }
   export type CustomStepStatus = "SUCCESS"|"FAILURE"|string;
   export type CustomStepTarget = string;
@@ -511,6 +551,10 @@ declare namespace Transfer {
      * The name of the step, used as an identifier.
      */
     Name?: WorkflowStepName;
+    /**
+     * Specifies which file to use as input to the workflow step: either the output from the previous step, or the originally uploaded file for the workflow.   Enter ${previous.file} to use the previous file as the input. In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value.   Enter ${original.file} to use the originally-uploaded file location as input for this step.  
+     */
+    SourceFileLocation?: SourceFileLocation;
   }
   export interface DeleteUserRequest {
     /**
@@ -742,13 +786,21 @@ declare namespace Transfer {
      */
     IdentityProviderDetails?: IdentityProviderDetails;
     /**
-     * Specifies the mode of authentication for a server. The default value is SERVICE_MANAGED, which allows you to store and access user credentials within the Amazon Web Services Transfer Family service. Use AWS_DIRECTORY_SERVICE to provide access to Active Directory groups in Amazon Web Services Managed Active Directory or Microsoft Active Directory in your on-premises environment or in Amazon Web Services using AD Connectors. This option also requires you to provide a Directory ID using the IdentityProviderDetails parameter. Use the API_GATEWAY value to integrate with an identity provider of your choosing. The API_GATEWAY setting requires you to provide an API Gateway endpoint URL to call for authentication using the IdentityProviderDetails parameter.
+     * Specifies the mode of authentication for a server. The default value is SERVICE_MANAGED, which allows you to store and access user credentials within the Amazon Web Services Transfer Family service. Use AWS_DIRECTORY_SERVICE to provide access to Active Directory groups in Amazon Web Services Managed Active Directory or Microsoft Active Directory in your on-premises environment or in Amazon Web Services using AD Connectors. This option also requires you to provide a Directory ID using the IdentityProviderDetails parameter. Use the API_GATEWAY value to integrate with an identity provider of your choosing. The API_GATEWAY setting requires you to provide an API Gateway endpoint URL to call for authentication using the IdentityProviderDetails parameter. Use the AWS_LAMBDA value to directly use a Lambda function as your identity provider. If you choose this value, you must specify the ARN for the lambda function in the Function parameter for the IdentityProviderDetails data type.
      */
     IdentityProviderType?: IdentityProviderType;
     /**
      * Specifies the Amazon Resource Name (ARN) of the Amazon Web Services Identity and Access Management (IAM) role that allows a server to turn on Amazon CloudWatch logging for Amazon S3 or Amazon EFS events. When set, user activity can be viewed in your CloudWatch logs.
      */
     LoggingRole?: Role;
+    /**
+     * Specify a string to display when users connect to a server. This string is displayed after the user authenticates.  The SFTP protocol does not support post-authentication display banners. 
+     */
+    PostAuthenticationLoginBanner?: PostAuthenticationLoginBanner;
+    /**
+     * Specify a string to display when users connect to a server. This string is displayed before the user authenticates. For example, the following banner displays details about using the system.  This system is for the use of authorized users only. Individuals using this computer system without authority, or in excess of their authority, are subject to having all of their activities on this system monitored and recorded by system personnel. 
+     */
+    PreAuthenticationLoginBanner?: PreAuthenticationLoginBanner;
     /**
      * Specifies the file transfer protocol or protocols over which your file transfer protocol client can connect to your server's endpoint. The available protocols are:    SFTP (Secure Shell (SSH) File Transfer Protocol): File transfer over SSH    FTPS (File Transfer Protocol Secure): File transfer with TLS encryption    FTP (File Transfer Protocol): Unencrypted file transfer  
      */
@@ -885,7 +937,7 @@ declare namespace Transfer {
   export type EndpointType = "PUBLIC"|"VPC"|"VPC_ENDPOINT"|string;
   export interface ExecutionError {
     /**
-     * Specifies the error type: currently, the only valid value is PERMISSION_DENIED, which occurs if your policy does not contain the correct permissions to complete one or more of the steps in the workflow.
+     * Specifies the error type.    ALREADY_EXISTS: occurs for a copy step, if the overwrite option is not selected and a file with the same name already exists in the target location.    BAD_REQUEST: a general bad request: for example, a step that attempts to tag an EFS file returns BAD_REQUEST, as only S3 files can be tagged.    CUSTOM_STEP_FAILED: occurs when the custom step provided a callback that indicates failure.    INTERNAL_SERVER_ERROR: a catch-all error that can occur for a variety of reasons.    NOT_FOUND: occurs when a requested entity, for example a source file for a copy step, does not exist.    PERMISSION_DENIED: occurs if your policy does not contain the correct permissions to complete one or more of the steps in the workflow.    TIMEOUT: occurs when the execution times out.   You can set the TimeoutSeconds for a custom step, anywhere from 1 second to 1800 seconds (30 minutes).      THROTTLED: occurs if you exceed the new execution refill rate of one workflow per second.  
      */
     Type: ExecutionErrorType;
     /**
@@ -894,7 +946,7 @@ declare namespace Transfer {
     Message: ExecutionErrorMessage;
   }
   export type ExecutionErrorMessage = string;
-  export type ExecutionErrorType = "PERMISSION_DENIED"|string;
+  export type ExecutionErrorType = "PERMISSION_DENIED"|"CUSTOM_STEP_FAILED"|"THROTTLED"|"ALREADY_EXISTS"|"NOT_FOUND"|"BAD_REQUEST"|"TIMEOUT"|"INTERNAL_SERVER_ERROR"|string;
   export type ExecutionId = string;
   export interface ExecutionResults {
     /**
@@ -909,7 +961,7 @@ declare namespace Transfer {
   export type ExecutionStatus = "IN_PROGRESS"|"COMPLETED"|"EXCEPTION"|"HANDLING_EXCEPTION"|string;
   export interface ExecutionStepResult {
     /**
-     * One of the available step types.    Copy: copy the file to another location    Custom: custom step with a lambda target    Delete: delete the file    Tag: add a tag to the file  
+     * One of the available step types.    COPY: copy the file to another location    CUSTOM: custom step with a lambda target    DELETE: delete the file    TAG: add a tag to the file  
      */
     StepType?: WorkflowStepType;
     /**
@@ -934,6 +986,7 @@ declare namespace Transfer {
     EfsFileLocation?: EfsFileLocation;
   }
   export type Fips = boolean;
+  export type Function = string;
   export type HomeDirectory = string;
   export interface HomeDirectoryMapEntry {
     /**
@@ -959,11 +1012,15 @@ declare namespace Transfer {
      */
     InvocationRole?: Role;
     /**
-     * The identifier of the Amazon Web ServicesDirectory Service directory that you want to stop sharing.
+     * The identifier of the Amazon Web Services Directory Service directory that you want to stop sharing.
      */
     DirectoryId?: DirectoryId;
+    /**
+     * The ARN for a lambda function to use for the Identity provider.
+     */
+    Function?: Function;
   }
-  export type IdentityProviderType = "SERVICE_MANAGED"|"API_GATEWAY"|"AWS_DIRECTORY_SERVICE"|string;
+  export type IdentityProviderType = "SERVICE_MANAGED"|"API_GATEWAY"|"AWS_DIRECTORY_SERVICE"|"AWS_LAMBDA"|string;
   export interface ImportSshPublicKeyRequest {
     /**
      * A system-assigned unique identifier for a server.
@@ -1222,7 +1279,7 @@ declare namespace Transfer {
      */
     Domain?: Domain;
     /**
-     * Specifies the mode of authentication for a server. The default value is SERVICE_MANAGED, which allows you to store and access user credentials within the Amazon Web Services Transfer Family service. Use AWS_DIRECTORY_SERVICE to provide access to Active Directory groups in Amazon Web Services Managed Active Directory or Microsoft Active Directory in your on-premises environment or in Amazon Web Services using AD Connectors. This option also requires you to provide a Directory ID using the IdentityProviderDetails parameter. Use the API_GATEWAY value to integrate with an identity provider of your choosing. The API_GATEWAY setting requires you to provide an API Gateway endpoint URL to call for authentication using the IdentityProviderDetails parameter.
+     * Specifies the mode of authentication for a server. The default value is SERVICE_MANAGED, which allows you to store and access user credentials within the Amazon Web Services Transfer Family service. Use AWS_DIRECTORY_SERVICE to provide access to Active Directory groups in Amazon Web Services Managed Active Directory or Microsoft Active Directory in your on-premises environment or in Amazon Web Services using AD Connectors. This option also requires you to provide a Directory ID using the IdentityProviderDetails parameter. Use the API_GATEWAY value to integrate with an identity provider of your choosing. The API_GATEWAY setting requires you to provide an API Gateway endpoint URL to call for authentication using the IdentityProviderDetails parameter. Use the AWS_LAMBDA value to directly use a Lambda function as your identity provider. If you choose this value, you must specify the ARN for the lambda function in the Function parameter for the IdentityProviderDetails data type.
      */
     IdentityProviderType?: IdentityProviderType;
     /**
@@ -1325,12 +1382,18 @@ declare namespace Transfer {
      */
     SecondaryGids?: SecondaryGids;
   }
+  export type PostAuthenticationLoginBanner = string;
+  export type PreAuthenticationLoginBanner = string;
   export type Protocol = "SFTP"|"FTP"|"FTPS"|string;
   export interface ProtocolDetails {
     /**
      *  Indicates passive mode, for FTP and FTPS protocols. Enter a single dotted-quad IPv4 address, such as the external IP address of a firewall, router, or load balancer. For example:    aws transfer update-server --protocol-details PassiveIp=0.0.0.0   Replace  0.0.0.0  in the example above with the actual IP address you want to use.   If you change the PassiveIp value, you must stop and then restart your Transfer server for the change to take effect. For details on using Passive IP (PASV) in a NAT environment, see Configuring your FTPS server behind a firewall or NAT with Amazon Web Services Transfer Family.  
      */
     PassiveIp?: PassiveIp;
+    /**
+     * A property used with Transfer servers that use the FTPS protocol. TLS Session Resumption provides a mechanism to resume or share a negotiated secret key between the control and data connection for an FTPS session. TlsSessionResumptionMode determines whether or not the server resumes recent, negotiated sessions through a unique session ID. This property is available during CreateServer and UpdateServer calls. If a TlsSessionResumptionMode value is not specified during CreateServer, it is set to ENFORCED by default.    DISABLED: the server does not process TLS session resumption client requests and creates a new TLS session for each request.     ENABLED: the server processes and accepts clients that are performing TLS session resumption. The server doesn't reject client data connections that do not perform the TLS session resumption client processing.    ENFORCED: the server processes and accepts clients that are performing TLS session resumption. The server rejects client data connections that do not perform the TLS session resumption client processing. Before you set the value to ENFORCED, test your clients.  Not all FTPS clients perform TLS session resumption. So, if you choose to enforce TLS session resumption, you prevent any connections from FTPS clients that don't perform the protocol negotiation. To determine whether or not you can use the ENFORCED value, you need to test your clients.   
+     */
+    TlsSessionResumptionMode?: TlsSessionResumptionMode;
   }
   export type Protocols = Protocol[];
   export type Response = string;
@@ -1415,6 +1478,7 @@ declare namespace Transfer {
     UserDetails: UserDetails;
   }
   export type SessionId = string;
+  export type SourceFileLocation = string;
   export type SourceIp = string;
   export interface SshPublicKey {
     /**
@@ -1482,6 +1546,10 @@ declare namespace Transfer {
      * Array that contains from 1 to 10 key/value pairs.
      */
     Tags?: S3Tags;
+    /**
+     * Specifies which file to use as input to the workflow step: either the output from the previous step, or the originally uploaded file for the workflow.   Enter ${previous.file} to use the previous file as the input. In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value.   Enter ${original.file} to use the originally-uploaded file location as input for this step.  
+     */
+    SourceFileLocation?: SourceFileLocation;
   }
   export type TagValue = string;
   export type Tags = Tag[];
@@ -1517,7 +1585,7 @@ declare namespace Transfer {
      */
     StatusCode: StatusCode;
     /**
-     * A message that indicates whether the test was successful or not.
+     * A message that indicates whether the test was successful or not.  If an empty string is returned, the most likely cause is that the authentication failed due to an incorrect username or password. 
      */
     Message?: Message;
     /**
@@ -1525,6 +1593,7 @@ declare namespace Transfer {
      */
     Url: Url;
   }
+  export type TlsSessionResumptionMode = "DISABLED"|"ENABLED"|"ENFORCED"|string;
   export interface UntagResourceRequest {
     /**
      * The value of the resource that will have the tag removed. An Amazon Resource Name (ARN) is an identifier for a specific Amazon Web Services resource, such as a server, user, or role.
@@ -1545,7 +1614,7 @@ declare namespace Transfer {
      */
     HomeDirectoryType?: HomeDirectoryType;
     /**
-     * Logical directory mappings that specify what Amazon S3 or Amazon EFS paths and keys should be visible to your user and how you want to make them visible. You must specify the Entry and Target pair, where Entry shows how the path is made visible and Target is the actual Amazon S3 or Amazon EFS path. If you only specify a target, it is displayed as is. You also must ensure that your Amazon Web Services Identity and Access Management (IAM) role provides access to paths in Target. This value can only be set when HomeDirectoryType is set to LOGICAL. The following is an Entry and Target pair example.  [ { "Entry": "/directory1", "Target": "/bucket_name/home/mydirectory" } ]  In most cases, you can use this value instead of the session policy to lock down your user to the designated home directory ("chroot"). To do this, you can set Entry to / and set Target to the HomeDirectory parameter value. The following is an Entry and Target pair example for chroot.  [ { "Entry:": "/", "Target": "/bucket_name/home/mydirectory" } ]   If the target of a logical directory entry does not exist in Amazon S3 or EFS, the entry is ignored. As a workaround, you can use the Amazon S3 API or EFS API to create 0 byte objects as place holders for your directory. If using the CLI, use the s3api or efsapi call instead of s3 or efs so you can use the put-object operation. For example, you use the following: aws s3api put-object --bucket bucketname --key path/to/folder/. Make sure that the end of the key name ends in a / for it to be considered a folder. 
+     * Logical directory mappings that specify what Amazon S3 or Amazon EFS paths and keys should be visible to your user and how you want to make them visible. You must specify the Entry and Target pair, where Entry shows how the path is made visible and Target is the actual Amazon S3 or Amazon EFS path. If you only specify a target, it is displayed as is. You also must ensure that your Amazon Web Services Identity and Access Management (IAM) role provides access to paths in Target. This value can only be set when HomeDirectoryType is set to LOGICAL. The following is an Entry and Target pair example.  [ { "Entry": "/directory1", "Target": "/bucket_name/home/mydirectory" } ]  In most cases, you can use this value instead of the session policy to lock down your user to the designated home directory ("chroot"). To do this, you can set Entry to / and set Target to the HomeDirectory parameter value. The following is an Entry and Target pair example for chroot.  [ { "Entry": "/", "Target": "/bucket_name/home/mydirectory" } ] 
      */
     HomeDirectoryMappings?: HomeDirectoryMappings;
     /**
@@ -1582,7 +1651,7 @@ declare namespace Transfer {
      */
     Certificate?: Certificate;
     /**
-     *  The protocol settings that are configured for your server.   Use the PassiveIp parameter to indicate passive mode (for FTP and FTPS protocols). Enter a single dotted-quad IPv4 address, such as the external IP address of a firewall, router, or load balancer. 
+     *  The protocol settings that are configured for your server.   Use the PassiveIp parameter to indicate passive mode (for FTP and FTPS protocols). Enter a single dotted-quad IPv4 address, such as the external IP address of a firewall, router, or load balancer.  Use the TlsSessionResumptionMode parameter to determine whether or not your Transfer server resumes recent, negotiated sessions through a unique session ID.
      */
     ProtocolDetails?: ProtocolDetails;
     /**
@@ -1594,7 +1663,7 @@ declare namespace Transfer {
      */
     EndpointType?: EndpointType;
     /**
-     * The RSA private key as generated by ssh-keygen -N "" -m PEM -f my-new-server-key.  If you aren't planning to migrate existing users from an existing server to a new server, don't update the host key. Accidentally changing a server's host key can be disruptive.  For more information, see Change the host key for your SFTP-enabled server in the Amazon Web ServicesTransfer Family User Guide.
+     * The RSA or ECDSA private key to use for your server. Use the following command to generate an RSA 2048 bit key with no passphrase:  ssh-keygen -t rsa -b 2048 -N "" -m PEM -f my-new-server-key. Use a minimum value of 2048 for the -b option: you can create a stronger key using 3072 or 4096. Use the following command to generate an ECDSA 256 bit key with no passphrase:  ssh-keygen -t ecdsa -b 256 -N "" -m PEM -f my-new-server-key. Valid values for the -b option for ECDSA are 256, 384, and 521. For both of these commands, you can replace my-new-server-key with a string of your choice.  If you aren't planning to migrate existing users from an existing SFTP-enabled server to a new server, don't update the host key. Accidentally changing a server's host key can be disruptive.  For more information, see Change the host key for your SFTP-enabled server in the Amazon Web Services Transfer Family User Guide.
      */
     HostKey?: HostKey;
     /**
@@ -1605,6 +1674,14 @@ declare namespace Transfer {
      * Specifies the Amazon Resource Name (ARN) of the Amazon Web Services Identity and Access Management (IAM) role that allows a server to turn on Amazon CloudWatch logging for Amazon S3 or Amazon EFS events. When set, user activity can be viewed in your CloudWatch logs.
      */
     LoggingRole?: NullableRole;
+    /**
+     * Specify a string to display when users connect to a server. This string is displayed after the user authenticates.  The SFTP protocol does not support post-authentication display banners. 
+     */
+    PostAuthenticationLoginBanner?: PostAuthenticationLoginBanner;
+    /**
+     * Specify a string to display when users connect to a server. This string is displayed before the user authenticates. For example, the following banner displays details about using the system.  This system is for the use of authorized users only. Individuals using this computer system without authority, or in excess of their authority, are subject to having all of their activities on this system monitored and recorded by system personnel. 
+     */
+    PreAuthenticationLoginBanner?: PreAuthenticationLoginBanner;
     /**
      * Specifies the file transfer protocol or protocols over which your file transfer protocol client can connect to your server's endpoint. The available protocols are:   Secure Shell (SSH) File Transfer Protocol (SFTP): File transfer over SSH   File Transfer Protocol Secure (FTPS): File transfer with TLS encryption   File Transfer Protocol (FTP): Unencrypted file transfer    If you select FTPS, you must choose a certificate stored in Amazon Web ServicesCertificate Manager (ACM) which will be used to identify your server when clients connect to it over FTPS. If Protocol includes either FTP or FTPS, then the EndpointType must be VPC and the IdentityProviderType must be AWS_DIRECTORY_SERVICE or API_GATEWAY. If Protocol includes FTP, then AddressAllocationIds cannot be associated. If Protocol is set only to SFTP, the EndpointType can be set to PUBLIC and the IdentityProviderType can be set to SERVICE_MANAGED. 
      */
@@ -1618,7 +1695,7 @@ declare namespace Transfer {
      */
     ServerId: ServerId;
     /**
-     * Specifies the workflow ID for the workflow to assign and the execution role used for executing the workflow.
+     * Specifies the workflow ID for the workflow to assign and the execution role used for executing the workflow. To remove an associated workflow from a server, you can provide an empty OnUpload object, as in the following example.  aws transfer update-server --server-id s-01234567890abcdef --workflow-details '{"OnUpload":[]}' 
      */
     WorkflowDetails?: WorkflowDetails;
   }
@@ -1638,7 +1715,7 @@ declare namespace Transfer {
      */
     HomeDirectoryType?: HomeDirectoryType;
     /**
-     * Logical directory mappings that specify what Amazon S3 or Amazon EFS paths and keys should be visible to your user and how you want to make them visible. You must specify the Entry and Target pair, where Entry shows how the path is made visible and Target is the actual Amazon S3 or Amazon EFS path. If you only specify a target, it is displayed as is. You also must ensure that your Amazon Web Services Identity and Access Management (IAM) role provides access to paths in Target. This value can only be set when HomeDirectoryType is set to LOGICAL. The following is an Entry and Target pair example.  [ { "Entry": "/directory1", "Target": "/bucket_name/home/mydirectory" } ]  In most cases, you can use this value instead of the session policy to lock down your user to the designated home directory ("chroot"). To do this, you can set Entry to '/' and set Target to the HomeDirectory parameter value. The following is an Entry and Target pair example for chroot.  [ { "Entry:": "/", "Target": "/bucket_name/home/mydirectory" } ]   If the target of a logical directory entry does not exist in Amazon S3 or EFS, the entry is ignored. As a workaround, you can use the Amazon S3 API or EFS API to create 0 byte objects as place holders for your directory. If using the CLI, use the s3api or efsapi call instead of s3 or efs so you can use the put-object operation. For example, you use the following: aws s3api put-object --bucket bucketname --key path/to/folder/. Make sure that the end of the key name ends in a / for it to be considered a folder. 
+     * Logical directory mappings that specify what Amazon S3 or Amazon EFS paths and keys should be visible to your user and how you want to make them visible. You must specify the Entry and Target pair, where Entry shows how the path is made visible and Target is the actual Amazon S3 or Amazon EFS path. If you only specify a target, it is displayed as is. You also must ensure that your Amazon Web Services Identity and Access Management (IAM) role provides access to paths in Target. This value can only be set when HomeDirectoryType is set to LOGICAL. The following is an Entry and Target pair example.  [ { "Entry": "/directory1", "Target": "/bucket_name/home/mydirectory" } ]  In most cases, you can use this value instead of the session policy to lock down your user to the designated home directory ("chroot"). To do this, you can set Entry to '/' and set Target to the HomeDirectory parameter value. The following is an Entry and Target pair example for chroot.  [ { "Entry": "/", "Target": "/bucket_name/home/mydirectory" } ] 
      */
     HomeDirectoryMappings?: HomeDirectoryMappings;
     /**
@@ -1705,14 +1782,14 @@ declare namespace Transfer {
   }
   export interface WorkflowDetails {
     /**
-     * A trigger that starts a workflow: the workflow begins to execute after a file is uploaded.
+     * A trigger that starts a workflow: the workflow begins to execute after a file is uploaded. To remove an associated workflow from a server, you can provide an empty OnUpload object, as in the following example.  aws transfer update-server --server-id s-01234567890abcdef --workflow-details '{"OnUpload":[]}' 
      */
     OnUpload: OnUploadWorkflowDetails;
   }
   export type WorkflowId = string;
   export interface WorkflowStep {
     /**
-     *  Currently, the following step types are supported.     Copy: copy the file to another location    Custom: custom step with a lambda target    Delete: delete the file    Tag: add a tag to the file  
+     *  Currently, the following step types are supported.     COPY: copy the file to another location    CUSTOM: custom step with a lambda target    DELETE: delete the file    TAG: add a tag to the file  
      */
     Type?: WorkflowStepType;
     /**

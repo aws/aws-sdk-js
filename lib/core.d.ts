@@ -10,6 +10,7 @@ export {EnvironmentCredentials} from './credentials/environment_credentials';
 export {FileSystemCredentials} from './credentials/file_system_credentials';
 export {SAMLCredentials} from './credentials/saml_credentials';
 export {SharedIniFileCredentials} from './credentials/shared_ini_file_credentials';
+export {SsoCredentials} from './credentials/sso_credentials';
 export {ProcessCredentials} from './credentials/process_credentials';
 export {TemporaryCredentials} from './credentials/temporary_credentials';
 export {ChainableTemporaryCredentials} from './credentials/chainable_temporary_credentials';

@@ -29,11 +29,11 @@ declare class EMR extends Service {
    */
   addInstanceGroups(callback?: (err: AWSError, data: EMR.Types.AddInstanceGroupsOutput) => void): Request<EMR.Types.AddInstanceGroupsOutput, AWSError>;
   /**
-   * AddJobFlowSteps adds new steps to a running cluster. A maximum of 256 steps are allowed in each job flow. If your cluster is long-running (such as a Hive data warehouse) or complex, you may require more than 256 steps to process your data. You can bypass the 256-step limitation in various ways, including using SSH to connect to the master node and submitting queries directly to the software running on the master node, such as Hive and Hadoop. For more information on how to do this, see Add More than 256 Steps to a Cluster in the Amazon EMR Management Guide. A step specifies the location of a JAR file stored either on the master node of the cluster or in Amazon S3. Each step is performed by the main function of the main class of the JAR file. The main class can be specified either in the manifest of the JAR or by using the MainFunction parameter of the step. Amazon EMR executes each step in the order listed. For a step to be considered complete, the main function must exit with a zero exit code and all Hadoop jobs started while the step was running must have completed and run successfully. You can only add steps to a cluster that is in one of the following states: STARTING, BOOTSTRAPPING, RUNNING, or WAITING.
+   * AddJobFlowSteps adds new steps to a running cluster. A maximum of 256 steps are allowed in each job flow. If your cluster is long-running (such as a Hive data warehouse) or complex, you may require more than 256 steps to process your data. You can bypass the 256-step limitation in various ways, including using SSH to connect to the master node and submitting queries directly to the software running on the master node, such as Hive and Hadoop. For more information on how to do this, see Add More than 256 Steps to a Cluster in the Amazon EMR Management Guide. A step specifies the location of a JAR file stored either on the master node of the cluster or in Amazon S3. Each step is performed by the main function of the main class of the JAR file. The main class can be specified either in the manifest of the JAR or by using the MainFunction parameter of the step. Amazon EMR executes each step in the order listed. For a step to be considered complete, the main function must exit with a zero exit code and all Hadoop jobs started while the step was running must have completed and run successfully. You can only add steps to a cluster that is in one of the following states: STARTING, BOOTSTRAPPING, RUNNING, or WAITING.  The string values passed into HadoopJarStep object cannot exceed a total of 10240 characters. 
    */
   addJobFlowSteps(params: EMR.Types.AddJobFlowStepsInput, callback?: (err: AWSError, data: EMR.Types.AddJobFlowStepsOutput) => void): Request<EMR.Types.AddJobFlowStepsOutput, AWSError>;
   /**
-   * AddJobFlowSteps adds new steps to a running cluster. A maximum of 256 steps are allowed in each job flow. If your cluster is long-running (such as a Hive data warehouse) or complex, you may require more than 256 steps to process your data. You can bypass the 256-step limitation in various ways, including using SSH to connect to the master node and submitting queries directly to the software running on the master node, such as Hive and Hadoop. For more information on how to do this, see Add More than 256 Steps to a Cluster in the Amazon EMR Management Guide. A step specifies the location of a JAR file stored either on the master node of the cluster or in Amazon S3. Each step is performed by the main function of the main class of the JAR file. The main class can be specified either in the manifest of the JAR or by using the MainFunction parameter of the step. Amazon EMR executes each step in the order listed. For a step to be considered complete, the main function must exit with a zero exit code and all Hadoop jobs started while the step was running must have completed and run successfully. You can only add steps to a cluster that is in one of the following states: STARTING, BOOTSTRAPPING, RUNNING, or WAITING.
+   * AddJobFlowSteps adds new steps to a running cluster. A maximum of 256 steps are allowed in each job flow. If your cluster is long-running (such as a Hive data warehouse) or complex, you may require more than 256 steps to process your data. You can bypass the 256-step limitation in various ways, including using SSH to connect to the master node and submitting queries directly to the software running on the master node, such as Hive and Hadoop. For more information on how to do this, see Add More than 256 Steps to a Cluster in the Amazon EMR Management Guide. A step specifies the location of a JAR file stored either on the master node of the cluster or in Amazon S3. Each step is performed by the main function of the main class of the JAR file. The main class can be specified either in the manifest of the JAR or by using the MainFunction parameter of the step. Amazon EMR executes each step in the order listed. For a step to be considered complete, the main function must exit with a zero exit code and all Hadoop jobs started while the step was running must have completed and run successfully. You can only add steps to a cluster that is in one of the following states: STARTING, BOOTSTRAPPING, RUNNING, or WAITING.  The string values passed into HadoopJarStep object cannot exceed a total of 10240 characters. 
    */
   addJobFlowSteps(callback?: (err: AWSError, data: EMR.Types.AddJobFlowStepsOutput) => void): Request<EMR.Types.AddJobFlowStepsOutput, AWSError>;
   /**
@@ -309,11 +309,11 @@ declare class EMR extends Service {
    */
   putAutoScalingPolicy(callback?: (err: AWSError, data: EMR.Types.PutAutoScalingPolicyOutput) => void): Request<EMR.Types.PutAutoScalingPolicyOutput, AWSError>;
   /**
-   * Creates or updates an auto-termination policy for an Amazon EMR cluster. An auto-termination policy defines the amount of idle time in seconds after which a cluster automatically terminates. For alternative cluster termination options, see Control cluster termination.
+   *  Auto-termination is supported in Amazon EMR versions 5.30.0 and 6.1.0 and later. For more information, see Using an auto-termination policy.  Creates or updates an auto-termination policy for an Amazon EMR cluster. An auto-termination policy defines the amount of idle time in seconds after which a cluster automatically terminates. For alternative cluster termination options, see Control cluster termination.
    */
   putAutoTerminationPolicy(params: EMR.Types.PutAutoTerminationPolicyInput, callback?: (err: AWSError, data: EMR.Types.PutAutoTerminationPolicyOutput) => void): Request<EMR.Types.PutAutoTerminationPolicyOutput, AWSError>;
   /**
-   * Creates or updates an auto-termination policy for an Amazon EMR cluster. An auto-termination policy defines the amount of idle time in seconds after which a cluster automatically terminates. For alternative cluster termination options, see Control cluster termination.
+   *  Auto-termination is supported in Amazon EMR versions 5.30.0 and 6.1.0 and later. For more information, see Using an auto-termination policy.  Creates or updates an auto-termination policy for an Amazon EMR cluster. An auto-termination policy defines the amount of idle time in seconds after which a cluster automatically terminates. For alternative cluster termination options, see Control cluster termination.
    */
   putAutoTerminationPolicy(callback?: (err: AWSError, data: EMR.Types.PutAutoTerminationPolicyOutput) => void): Request<EMR.Types.PutAutoTerminationPolicyOutput, AWSError>;
   /**
@@ -381,11 +381,11 @@ declare class EMR extends Service {
    */
   setTerminationProtection(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Sets the Cluster$VisibleToAllUsers value for an EMR cluster. When true, IAM principals in the Amazon Web Services account can perform EMR cluster actions that their IAM policies allow. When false, only the IAM principal that created the cluster and the Amazon Web Services account root user can perform EMR actions on the cluster, regardless of IAM permissions policies attached to other IAM principals. This action works on running clusters. When you create a cluster, use the RunJobFlowInput$VisibleToAllUsers parameter. For more information, see Understanding the EMR Cluster VisibleToAllUsers Setting in the Amazon EMRManagement Guide.
+   *  The SetVisibleToAllUsers parameter is no longer supported. Your cluster may be visible to all users in your account. To restrict cluster access using an IAM policy, see Identity and Access Management for EMR.   Sets the Cluster$VisibleToAllUsers value for an EMR cluster. When true, IAM principals in the Amazon Web Services account can perform EMR cluster actions that their IAM policies allow. When false, only the IAM principal that created the cluster and the Amazon Web Services account root user can perform EMR actions on the cluster, regardless of IAM permissions policies attached to other IAM principals. This action works on running clusters. When you create a cluster, use the RunJobFlowInput$VisibleToAllUsers parameter. For more information, see Understanding the EMR Cluster VisibleToAllUsers Setting in the Amazon EMRManagement Guide.
    */
   setVisibleToAllUsers(params: EMR.Types.SetVisibleToAllUsersInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Sets the Cluster$VisibleToAllUsers value for an EMR cluster. When true, IAM principals in the Amazon Web Services account can perform EMR cluster actions that their IAM policies allow. When false, only the IAM principal that created the cluster and the Amazon Web Services account root user can perform EMR actions on the cluster, regardless of IAM permissions policies attached to other IAM principals. This action works on running clusters. When you create a cluster, use the RunJobFlowInput$VisibleToAllUsers parameter. For more information, see Understanding the EMR Cluster VisibleToAllUsers Setting in the Amazon EMRManagement Guide.
+   *  The SetVisibleToAllUsers parameter is no longer supported. Your cluster may be visible to all users in your account. To restrict cluster access using an IAM policy, see Identity and Access Management for EMR.   Sets the Cluster$VisibleToAllUsers value for an EMR cluster. When true, IAM principals in the Amazon Web Services account can perform EMR cluster actions that their IAM policies allow. When false, only the IAM principal that created the cluster and the Amazon Web Services account root user can perform EMR actions on the cluster, regardless of IAM permissions policies attached to other IAM principals. This action works on running clusters. When you create a cluster, use the RunJobFlowInput$VisibleToAllUsers parameter. For more information, see Understanding the EMR Cluster VisibleToAllUsers Setting in the Amazon EMRManagement Guide.
    */
   setVisibleToAllUsers(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -769,7 +769,7 @@ declare namespace EMR {
      */
     TerminationProtected?: Boolean;
     /**
-     * Indicates whether the cluster is visible to IAM principals in the Amazon Web Services account associated with the cluster. When true, IAM principals in the Amazon Web Services account can perform EMR cluster actions on the cluster that their IAM policies allow. When false, only the IAM principal that created the cluster and the Amazon Web Services account root user can perform EMR actions, regardless of IAM permissions policies attached to other IAM principals. The default value is true if a value is not provided when creating a cluster using the EMR API RunJobFlow command, the CLI create-cluster command, or the Amazon Web Services Management Console. IAM principals that are allowed to perform actions on the cluster can use the SetVisibleToAllUsers action to change the value on a running cluster. For more information, see Understanding the EMR Cluster VisibleToAllUsers Setting in the Amazon EMRManagement Guide.
+     * Indicates whether the cluster is visible to IAM principals in the Amazon Web Services account associated with the cluster. When true, IAM principals in the Amazon Web Services account can perform EMR cluster actions on the cluster that their IAM policies allow. When false, only the IAM principal that created the cluster and the Amazon Web Services account root user can perform EMR actions, regardless of IAM permissions policies attached to other IAM principals. The default value is true if a value is not provided when creating a cluster using the EMR API RunJobFlow command, the CLI create-cluster command, or the Amazon Web Services Management Console.
      */
     VisibleToAllUsers?: Boolean;
     /**
@@ -840,6 +840,10 @@ declare namespace EMR {
      * Placement group configured for an Amazon EMR cluster.
      */
     PlacementGroups?: PlacementGroupConfigList;
+    /**
+     * The Amazon Linux release specified in a cluster launch RunJobFlow request. If no Amazon Linux release was specified, the default Amazon Linux release is shown in the response.
+     */
+    OSReleaseLabel?: String;
   }
   export type ClusterId = string;
   export type ClusterState = "STARTING"|"BOOTSTRAPPING"|"RUNNING"|"WAITING"|"TERMINATING"|"TERMINATED"|"TERMINATED_WITH_ERRORS"|string;
@@ -1178,6 +1182,10 @@ declare namespace EMR {
      * The pagination token. Reserved for future use. Currently set to null.
      */
     NextToken?: String;
+    /**
+     * The list of available Amazon Linux release versions for an Amazon EMR release. Contains a Label field that is formatted as shown in  Amazon Linux 2 Release Notes . For example, 2.0.20220218.1.
+     */
+    AvailableOSReleases?: OSReleaseList;
   }
   export interface DescribeSecurityConfigurationInput {
     /**
@@ -1782,7 +1790,7 @@ declare namespace EMR {
      */
     InstanceRunningCount: Integer;
     /**
-     * State of instance group. The following values are deprecated: STARTING, TERMINATED, and FAILED.
+     * State of instance group. The following values are no longer supported: STARTING, TERMINATED, and FAILED.
      */
     State: InstanceGroupState;
     /**
@@ -1831,6 +1839,10 @@ declare namespace EMR {
      * Policy for customizing shrink operations.
      */
     ShrinkPolicy?: ShrinkPolicy;
+    /**
+     * Type of reconfiguration requested. Valid values are MERGE and OVERWRITE.
+     */
+    ReconfigurationType?: ReconfigurationType;
     /**
      * A list of new or modified configurations to apply for an instance group.
      */
@@ -2047,7 +2059,7 @@ declare namespace EMR {
      */
     SupportedProducts?: SupportedProductsList;
     /**
-     * Indicates whether the cluster is visible to IAM principals in the Amazon Web Services account associated with the cluster. When true, IAM principals in the Amazon Web Services account can perform EMR cluster actions that their IAM policies allow. When false, only the IAM principal that created the cluster and the Amazon Web Services account root user can perform EMR actions, regardless of IAM permissions policies attached to other IAM principals. The default value is true if a value is not provided when creating a cluster using the EMR API RunJobFlow command, the CLI create-cluster command, or the Amazon Web Services Management Console. IAM principals that are authorized to perform actions on the cluster can use the SetVisibleToAllUsers action to change the value on a running cluster. For more information, see Understanding the EMR Cluster VisibleToAllUsers Setting in the Amazon EMRManagement Guide.
+     * Indicates whether the cluster is visible to IAM principals in the Amazon Web Services account associated with the cluster. When true, IAM principals in the Amazon Web Services account can perform EMR cluster actions that their IAM policies allow. When false, only the IAM principal that created the cluster and the Amazon Web Services account root user can perform EMR actions, regardless of IAM permissions policies attached to other IAM principals. The default value is true if a value is not provided when creating a cluster using the EMR API RunJobFlow command, the CLI create-cluster command, or the Amazon Web Services Management Console.
      */
     VisibleToAllUsers?: Boolean;
     /**
@@ -2662,6 +2674,13 @@ declare namespace EMR {
     EndTime?: _Date;
   }
   export type NotebookExecutionSummaryList = NotebookExecutionSummary[];
+  export interface OSRelease {
+    /**
+     * The Amazon Linux release specified for a cluster in the RunJobFlow request. The format is as shown in  Amazon Linux 2 Release Notes . For example, 2.0.20220218.1.
+     */
+    Label?: String;
+  }
+  export type OSReleaseList = OSRelease[];
   export interface OnDemandCapacityReservationOptions {
     /**
      * Indicates whether to use unused Capacity Reservations for fulfilling On-Demand capacity. If you specify use-capacity-reservations-first, the fleet uses unused Capacity Reservations to fulfill On-Demand capacity up to the target On-Demand capacity. If multiple instance pools have unused Capacity Reservations, the On-Demand allocation strategy (lowest-price) is applied. If the number of unused Capacity Reservations is less than the On-Demand target capacity, the remaining On-Demand target capacity is launched according to the On-Demand allocation strategy (lowest-price). If you do not specify a value, the fleet fulfills the On-Demand capacity according to the chosen On-Demand allocation strategy.
@@ -2788,6 +2807,7 @@ declare namespace EMR {
   }
   export interface PutManagedScalingPolicyOutput {
   }
+  export type ReconfigurationType = "OVERWRITE"|"MERGE"|string;
   export interface ReleaseLabelFilter {
     /**
      * Optional release label version prefix filter. For example, emr-5.
@@ -2886,7 +2906,7 @@ declare namespace EMR {
      */
     NewSupportedProducts?: NewSupportedProductsList;
     /**
-     * Applies to Amazon EMR releases 4.0 and later. A case-insensitive list of applications for Amazon EMR to install and configure when launching the cluster. For a list of applications available for each Amazon EMR release version, see the Amazon EMR Release Guide.
+     * Applies to Amazon EMR releases 4.0 and later. A case-insensitive list of applications for Amazon EMR to install and configure when launching the cluster. For a list of applications available for each Amazon EMR release version, see the Amazon EMRRelease Guide.
      */
     Applications?: ApplicationList;
     /**
@@ -2894,7 +2914,7 @@ declare namespace EMR {
      */
     Configurations?: ConfigurationList;
     /**
-     * Set this value to true so that IAM principals in the Amazon Web Services account associated with the cluster can perform EMR actions on the cluster that their IAM policies allow. This value defaults to true for clusters created using the EMR API or the CLI create-cluster command. When set to false, only the IAM principal that created the cluster and the Amazon Web Services account root user can perform EMR actions for the cluster, regardless of the IAM permissions policies attached to other IAM principals. For more information, see Understanding the EMR Cluster VisibleToAllUsers Setting in the Amazon EMRManagement Guide.
+     *  The VisibleToAllUsers parameter is no longer supported. By default, the value is set to true. Setting it to false now has no effect.  Set this value to true so that IAM principals in the Amazon Web Services account associated with the cluster can perform EMR actions on the cluster that their IAM policies allow. This value defaults to true for clusters created using the EMR API or the CLI create-cluster command. When set to false, only the IAM principal that created the cluster and the Amazon Web Services account root user can perform EMR actions for the cluster, regardless of the IAM permissions policies attached to other IAM principals. For more information, see Understanding the EMR Cluster VisibleToAllUsers Setting in the Amazon EMRManagement Guide.
      */
     VisibleToAllUsers?: Boolean;
     /**
@@ -2950,6 +2970,10 @@ declare namespace EMR {
      */
     PlacementGroupConfigs?: PlacementGroupConfigList;
     AutoTerminationPolicy?: AutoTerminationPolicy;
+    /**
+     * Specifies a particular Amazon Linux release for all nodes in a cluster launch RunJobFlow request. If a release is not specified, Amazon EMR uses the latest validated Amazon Linux release for cluster launch.
+     */
+    OSReleaseLabel?: XmlStringMaxLen256;
   }
   export interface RunJobFlowOutput {
     /**
@@ -3152,7 +3176,7 @@ declare namespace EMR {
      */
     TimeoutAction: SpotProvisioningTimeoutAction;
     /**
-     * The defined duration for Spot Instances (also known as Spot blocks) in minutes. When specified, the Spot Instance does not terminate before the defined duration expires, and defined duration pricing for Spot Instances applies. Valid values are 60, 120, 180, 240, 300, or 360. The duration period starts as soon as a Spot Instance receives its instance ID. At the end of the duration, Amazon EC2 marks the Spot Instance for termination and provides a Spot Instance termination notice, which gives the instance a two-minute warning before it terminates. 
+     * The defined duration for Spot Instances (also known as Spot blocks) in minutes. When specified, the Spot Instance does not terminate before the defined duration expires, and defined duration pricing for Spot Instances applies. Valid values are 60, 120, 180, 240, 300, or 360. The duration period starts as soon as a Spot Instance receives its instance ID. At the end of the duration, Amazon EC2 marks the Spot Instance for termination and provides a Spot Instance termination notice, which gives the instance a two-minute warning before it terminates.   Spot Instances with a defined duration (also known as Spot blocks) are no longer available to new customers from July 1, 2021. For customers who have previously used the feature, we will continue to support Spot Instances with a defined duration until December 31, 2022.  
      */
     BlockDurationMinutes?: WholeNumber;
     /**
@@ -3468,7 +3492,7 @@ declare namespace EMR {
   export type SupportedProductsList = XmlStringMaxLen256[];
   export interface Tag {
     /**
-     * A user-defined key, which is the minimum required information for a valid tag. For more information, see Tag . 
+     * A user-defined key, which is the minimum required information for a valid tag. For more information, see Tag. 
      */
     Key?: String;
     /**
@@ -3530,7 +3554,7 @@ declare namespace EMR {
   }
   export interface VolumeSpecification {
     /**
-     * The volume type. Volume types supported are gp2, io1, standard.
+     * The volume type. Volume types supported are gp2, io1, and standard.
      */
     VolumeType: String;
     /**

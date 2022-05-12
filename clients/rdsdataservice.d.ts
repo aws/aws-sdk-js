@@ -44,11 +44,11 @@ declare class RDSDataService extends Service {
    */
   executeSql(callback?: (err: AWSError, data: RDSDataService.Types.ExecuteSqlResponse) => void): Request<RDSDataService.Types.ExecuteSqlResponse, AWSError>;
   /**
-   * Runs a SQL statement against a database.  If a call isn't part of a transaction because it doesn't include the transactionID parameter, changes that result from the call are committed automatically.  The response size limit is 1 MB. If the call returns more than 1 MB of response data, the call is terminated.
+   * Runs a SQL statement against a database.  If a call isn't part of a transaction because it doesn't include the transactionID parameter, changes that result from the call are committed automatically.  If the binary response data from the database is more than 1 MB, the call is terminated.
    */
   executeStatement(params: RDSDataService.Types.ExecuteStatementRequest, callback?: (err: AWSError, data: RDSDataService.Types.ExecuteStatementResponse) => void): Request<RDSDataService.Types.ExecuteStatementResponse, AWSError>;
   /**
-   * Runs a SQL statement against a database.  If a call isn't part of a transaction because it doesn't include the transactionID parameter, changes that result from the call are committed automatically.  The response size limit is 1 MB. If the call returns more than 1 MB of response data, the call is terminated.
+   * Runs a SQL statement against a database.  If a call isn't part of a transaction because it doesn't include the transactionID parameter, changes that result from the call are committed automatically.  If the binary response data from the database is more than 1 MB, the call is terminated.
    */
   executeStatement(callback?: (err: AWSError, data: RDSDataService.Types.ExecuteStatementResponse) => void): Request<RDSDataService.Types.ExecuteStatementResponse, AWSError>;
   /**
@@ -73,11 +73,11 @@ declare namespace RDSDataService {
      */
     booleanValues?: BooleanArray;
     /**
-     * An array of integers.
+     * An array of floating-point numbers.
      */
     doubleValues?: DoubleArray;
     /**
-     * An array of floating point numbers.
+     * An array of integers.
      */
     longValues?: LongArray;
     /**
@@ -273,6 +273,10 @@ declare namespace RDSDataService {
      */
     database?: DbName;
     /**
+     * A value that indicates whether to format the result set as a single JSON string. This parameter only applies to SELECT statements and is ignored for other types of statements. Allowed values are NONE and JSON. The default value is NONE. The result is returned in the formattedRecords field. For usage information about the JSON format for result sets, see Using the Data API in the Amazon Aurora User Guide.
+     */
+    formatRecordsAs?: RecordsFormatType;
+    /**
      * A value that indicates whether to include metadata in the results.
      */
     includeResultMetadata?: Boolean;
@@ -307,11 +311,15 @@ declare namespace RDSDataService {
   }
   export interface ExecuteStatementResponse {
     /**
-     * Metadata for the columns included in the results.
+     * Metadata for the columns included in the results. This field is blank if the formatRecordsAs parameter is set to JSON.
      */
     columnMetadata?: Metadata;
     /**
-     * Values for fields generated during the request.  &lt;note&gt; &lt;p&gt;The &lt;code&gt;generatedFields&lt;/code&gt; data isn't supported by Aurora PostgreSQL. To get the values of generated fields, use the &lt;code&gt;RETURNING&lt;/code&gt; clause. For more information, see &lt;a href=&quot;https://www.postgresql.org/docs/10/dml-returning.html&quot;&gt;Returning Data From Modified Rows&lt;/a&gt; in the PostgreSQL documentation.&lt;/p&gt; &lt;/note&gt; 
+     * A string value that represents the result set of a SELECT statement in JSON format. This value is only present when the formatRecordsAs parameter is set to JSON. The size limit for this field is currently 10 MB. If the JSON-formatted string representing the result set requires more than 10 MB, the call returns an error.
+     */
+    formattedRecords?: FormattedSqlRecords;
+    /**
+     * Values for fields generated during a DML request.  &lt;note&gt; &lt;p&gt;The &lt;code&gt;generatedFields&lt;/code&gt; data isn't supported by Aurora PostgreSQL. To get the values of generated fields, use the &lt;code&gt;RETURNING&lt;/code&gt; clause. For more information, see &lt;a href=&quot;https://www.postgresql.org/docs/10/dml-returning.html&quot;&gt;Returning Data From Modified Rows&lt;/a&gt; in the PostgreSQL documentation.&lt;/p&gt; &lt;/note&gt; 
      */
     generatedFields?: FieldList;
     /**
@@ -319,7 +327,7 @@ declare namespace RDSDataService {
      */
     numberOfRecordsUpdated?: RecordsUpdated;
     /**
-     * The records returned by the SQL statement.
+     * The records returned by the SQL statement. This field is blank if the formatRecordsAs parameter is set to JSON.
      */
     records?: SqlRecords;
   }
@@ -354,10 +362,12 @@ declare namespace RDSDataService {
     stringValue?: String;
   }
   export type FieldList = Field[];
+  export type FormattedSqlRecords = string;
   export type Id = string;
   export type Integer = number;
   export type Long = number;
   export type LongArray = BoxedLong[];
+  export type LongReturnType = "STRING"|"LONG"|string;
   export type Metadata = ColumnMetadata[];
   export type ParameterName = string;
   export interface Record {
@@ -367,6 +377,7 @@ declare namespace RDSDataService {
     values?: Row;
   }
   export type Records = Record[];
+  export type RecordsFormatType = "NONE"|"JSON"|string;
   export type RecordsUpdated = number;
   export interface ResultFrame {
     /**
@@ -393,6 +404,10 @@ declare namespace RDSDataService {
      * A value that indicates how a field of DECIMAL type is represented in the response. The value of STRING, the default, specifies that it is converted to a String value. The value of DOUBLE_OR_LONG specifies that it is converted to a Long value if its scale is 0, or to a Double value otherwise.  Conversion to Double or Long can result in roundoff errors due to precision loss. We recommend converting to String, especially when working with currency values. 
      */
     decimalReturnType?: DecimalReturnType;
+    /**
+     * A value that indicates how a field of LONG type is represented. Allowed values are LONG and STRING. The default is LONG. Specify STRING if the length or precision of numeric values might cause truncation or rounding errors. 
+     */
+    longReturnType?: LongReturnType;
   }
   export interface RollbackTransactionRequest {
     /**

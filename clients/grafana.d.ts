@@ -68,6 +68,14 @@ declare class Grafana extends Service {
    */
   listPermissions(callback?: (err: AWSError, data: Grafana.Types.ListPermissionsResponse) => void): Request<Grafana.Types.ListPermissionsResponse, AWSError>;
   /**
+   * The ListTagsForResource operation returns the tags that are associated with the Amazon Managed Service for Grafana resource specified by the resourceArn. Currently, the only resource that can be tagged is a workspace. 
+   */
+  listTagsForResource(params: Grafana.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: Grafana.Types.ListTagsForResourceResponse) => void): Request<Grafana.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * The ListTagsForResource operation returns the tags that are associated with the Amazon Managed Service for Grafana resource specified by the resourceArn. Currently, the only resource that can be tagged is a workspace. 
+   */
+  listTagsForResource(callback?: (err: AWSError, data: Grafana.Types.ListTagsForResourceResponse) => void): Request<Grafana.Types.ListTagsForResourceResponse, AWSError>;
+  /**
    * Returns a list of Amazon Managed Grafana workspaces in the account, with some information about each workspace. For more complete information about one workspace, use DescribeWorkspace.
    */
   listWorkspaces(params: Grafana.Types.ListWorkspacesRequest, callback?: (err: AWSError, data: Grafana.Types.ListWorkspacesResponse) => void): Request<Grafana.Types.ListWorkspacesResponse, AWSError>;
@@ -75,6 +83,22 @@ declare class Grafana extends Service {
    * Returns a list of Amazon Managed Grafana workspaces in the account, with some information about each workspace. For more complete information about one workspace, use DescribeWorkspace.
    */
   listWorkspaces(callback?: (err: AWSError, data: Grafana.Types.ListWorkspacesResponse) => void): Request<Grafana.Types.ListWorkspacesResponse, AWSError>;
+  /**
+   * The TagResource operation associates tags with an Amazon Managed Grafana resource. Currently, the only resource that can be tagged is workspaces.  If you specify a new tag key for the resource, this tag is appended to the list of tags associated with the resource. If you specify a tag key that is already associated with the resource, the new tag value that you specify replaces the previous value for that tag.
+   */
+  tagResource(params: Grafana.Types.TagResourceRequest, callback?: (err: AWSError, data: Grafana.Types.TagResourceResponse) => void): Request<Grafana.Types.TagResourceResponse, AWSError>;
+  /**
+   * The TagResource operation associates tags with an Amazon Managed Grafana resource. Currently, the only resource that can be tagged is workspaces.  If you specify a new tag key for the resource, this tag is appended to the list of tags associated with the resource. If you specify a tag key that is already associated with the resource, the new tag value that you specify replaces the previous value for that tag.
+   */
+  tagResource(callback?: (err: AWSError, data: Grafana.Types.TagResourceResponse) => void): Request<Grafana.Types.TagResourceResponse, AWSError>;
+  /**
+   * The UntagResource operation removes the association of the tag with the Amazon Managed Grafana resource. 
+   */
+  untagResource(params: Grafana.Types.UntagResourceRequest, callback?: (err: AWSError, data: Grafana.Types.UntagResourceResponse) => void): Request<Grafana.Types.UntagResourceResponse, AWSError>;
+  /**
+   * The UntagResource operation removes the association of the tag with the Amazon Managed Grafana resource. 
+   */
+  untagResource(callback?: (err: AWSError, data: Grafana.Types.UntagResourceResponse) => void): Request<Grafana.Types.UntagResourceResponse, AWSError>;
   /**
    * Updates which users in a workspace have the Grafana Admin or Editor roles.
    */
@@ -199,7 +223,7 @@ declare namespace Grafana {
      */
     organizationRoleName?: OrganizationRoleName;
     /**
-     * If you specify Service Managed, Amazon Managed Grafana automatically creates the IAM roles and provisions the permissions that the workspace needs to use Amazon Web Services data sources and notification channels. If you specify CUSTOMER_MANAGED, you will manage those roles and permissions yourself. If you are creating this workspace in a member account of an organization that is not a delegated administrator account, and you want the workspace to access data sources in other Amazon Web Services accounts in the organization, you must choose CUSTOMER_MANAGED. For more information, see Amazon Managed Grafana permissions and policies for Amazon Web Services data sources and notification channels 
+     * If you specify SERVICE_MANAGED on AWS Grafana console, Amazon Managed Grafana automatically creates the IAM roles and provisions the permissions that the workspace needs to use Amazon Web Services data sources and notification channels. In CLI mode, the permissionType SERVICE_MANAGED will not create the IAM role for you. If you specify CUSTOMER_MANAGED, you will manage those roles and permissions yourself. If you are creating this workspace in a member account of an organization that is not a delegated administrator account, and you want the workspace to access data sources in other Amazon Web Services accounts in the organization, you must choose CUSTOMER_MANAGED. For more information, see Amazon Managed Grafana permissions and policies for Amazon Web Services data sources and notification channels.
      */
     permissionType: PermissionType;
     /**
@@ -207,11 +231,15 @@ declare namespace Grafana {
      */
     stackSetName?: StackSetName;
     /**
+     * The list of tags associated with the workspace.
+     */
+    tags?: TagMap;
+    /**
      * Specify the Amazon Web Services data sources that you want to be queried in this workspace. Specifying these data sources here enables Amazon Managed Grafana to create IAM roles and permissions that allow Amazon Managed Grafana to read data from these sources. You must still add them as data sources in the Grafana console in the workspace. If you don't specify a data source here, you can still add it as a data source in the workspace console later. However, you will then have to manually configure permissions for it.
      */
     workspaceDataSources?: DataSourceTypesList;
     /**
-     * A description for the workspace. This is used only to help you identify this workspace.
+     * A description for the workspace. This is used only to help you identify this workspace. Pattern: ^[\\p{L}\\p{Z}\\p{N}\\p{P}]{0,2048}$ 
      */
     workspaceDescription?: Description;
     /**
@@ -227,7 +255,7 @@ declare namespace Grafana {
      */
     workspaceOrganizationalUnits?: OrganizationalUnitList;
     /**
-     * The workspace needs an IAM role that grants permissions to the Amazon Web Services resources that the workspace will view data from. If you already have a role that you want to use, specify it here. If you omit this field and you specify some Amazon Web Services resources in workspaceDataSources or workspaceNotificationDestinations, a new IAM role with the necessary permissions is automatically created.
+     * The workspace needs an IAM role that grants permissions to the Amazon Web Services resources that the workspace will view data from. If you already have a role that you want to use, specify it here. The permission type should be set to CUSTOMER_MANAGED.
      */
     workspaceRoleArn?: IamRoleArn;
   }
@@ -237,7 +265,7 @@ declare namespace Grafana {
      */
     workspace: WorkspaceDescription;
   }
-  export type DataSourceType = "AMAZON_OPENSEARCH_SERVICE"|"CLOUDWATCH"|"PROMETHEUS"|"XRAY"|"TIMESTREAM"|"SITEWISE"|string;
+  export type DataSourceType = "AMAZON_OPENSEARCH_SERVICE"|"CLOUDWATCH"|"PROMETHEUS"|"XRAY"|"TIMESTREAM"|"SITEWISE"|"ATHENA"|"REDSHIFT"|string;
   export type DataSourceTypesList = DataSourceType[];
   export interface DeleteWorkspaceRequest {
     /**
@@ -344,6 +372,18 @@ declare namespace Grafana {
      */
     permissions: PermissionEntryList;
   }
+  export interface ListTagsForResourceRequest {
+    /**
+     * The ARN of the resource the list of tags are associated with.
+     */
+    resourceArn: String;
+  }
+  export interface ListTagsForResourceResponse {
+    /**
+     * The list of tags that are associated with the resource.
+     */
+    tags?: TagMap;
+  }
   export interface ListWorkspacesRequest {
     /**
      * The maximum number of workspaces to include in the results.
@@ -434,7 +474,35 @@ declare namespace Grafana {
   export type SsoId = string;
   export type StackSetName = string;
   export type String = string;
+  export type TagKey = string;
+  export type TagKeys = TagKey[];
+  export type TagMap = {[key: string]: TagValue};
+  export interface TagResourceRequest {
+    /**
+     * The ARN of the resource the tag is associated with.
+     */
+    resourceArn: String;
+    /**
+     * The list of tag keys and values to associate with the resource. You can associate tag keys only, tags (key and values) only or a combination of tag keys and tags.
+     */
+    tags: TagMap;
+  }
+  export interface TagResourceResponse {
+  }
+  export type TagValue = string;
   export type Timestamp = Date;
+  export interface UntagResourceRequest {
+    /**
+     * The ARN of the resource the tag association is removed from. 
+     */
+    resourceArn: String;
+    /**
+     * The key values of the tag to be removed from the resource.
+     */
+    tagKeys: TagKeys;
+  }
+  export interface UntagResourceResponse {
+  }
   export type UpdateAction = "ADD"|"REVOKE"|string;
   export interface UpdateError {
     /**
@@ -557,7 +625,7 @@ declare namespace Grafana {
   }
   export interface User {
     /**
-     * The ID of the user or group.
+     * The ID of the user or group. Pattern: ^([0-9a-fA-F]{10}-|)[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}$ 
      */
     id: SsoId;
     /**
@@ -649,6 +717,10 @@ declare namespace Grafana {
      */
     status: WorkspaceStatus;
     /**
+     * The list of tags associated with the workspace.
+     */
+    tags?: TagMap;
+    /**
      * The IAM role that grants permissions to the Amazon Web Services resources that the workspace will view data from. This role must already exist.
      */
     workspaceRoleArn?: IamRoleArn;
@@ -698,6 +770,10 @@ declare namespace Grafana {
      * The current status of the workspace.
      */
     status: WorkspaceStatus;
+    /**
+     * The list of tags associated with the workspace.
+     */
+    tags?: TagMap;
   }
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

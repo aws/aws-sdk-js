@@ -12,19 +12,27 @@ declare class Personalize extends Service {
   constructor(options?: Personalize.Types.ClientConfiguration)
   config: Config & Personalize.Types.ClientConfiguration;
   /**
-   * Creates a batch inference job. The operation can handle up to 50 million records and the input file must be in JSON format. For more information, see recommendations-batch.
+   * Creates a batch inference job. The operation can handle up to 50 million records and the input file must be in JSON format. For more information, see Creating a batch inference job. 
    */
   createBatchInferenceJob(params: Personalize.Types.CreateBatchInferenceJobRequest, callback?: (err: AWSError, data: Personalize.Types.CreateBatchInferenceJobResponse) => void): Request<Personalize.Types.CreateBatchInferenceJobResponse, AWSError>;
   /**
-   * Creates a batch inference job. The operation can handle up to 50 million records and the input file must be in JSON format. For more information, see recommendations-batch.
+   * Creates a batch inference job. The operation can handle up to 50 million records and the input file must be in JSON format. For more information, see Creating a batch inference job. 
    */
   createBatchInferenceJob(callback?: (err: AWSError, data: Personalize.Types.CreateBatchInferenceJobResponse) => void): Request<Personalize.Types.CreateBatchInferenceJobResponse, AWSError>;
   /**
-   * Creates a campaign by deploying a solution version. When a client calls the GetRecommendations and GetPersonalizedRanking APIs, a campaign is specified in the request.  Minimum Provisioned TPS and Auto-Scaling  A transaction is a single GetRecommendations or GetPersonalizedRanking call. Transactions per second (TPS) is the throughput and unit of billing for Amazon Personalize. The minimum provisioned TPS (minProvisionedTPS) specifies the baseline throughput provisioned by Amazon Personalize, and thus, the minimum billing charge.   If your TPS increases beyond minProvisionedTPS, Amazon Personalize auto-scales the provisioned capacity up and down, but never below minProvisionedTPS. There's a short time delay while the capacity is increased that might cause loss of transactions. The actual TPS used is calculated as the average requests/second within a 5-minute window. You pay for maximum of either the minimum provisioned TPS or the actual TPS. We recommend starting with a low minProvisionedTPS, track your usage using Amazon CloudWatch metrics, and then increase the minProvisionedTPS as necessary.  Status  A campaign can be in one of the following states:   CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED   DELETE PENDING &gt; DELETE IN_PROGRESS   To get the campaign status, call DescribeCampaign.  Wait until the status of the campaign is ACTIVE before asking the campaign for recommendations.   Related APIs     ListCampaigns     DescribeCampaign     UpdateCampaign     DeleteCampaign   
+   * Creates a batch segment job. The operation can handle up to 50 million records and the input file must be in JSON format. For more information, see Getting batch recommendations and user segments.
+   */
+  createBatchSegmentJob(params: Personalize.Types.CreateBatchSegmentJobRequest, callback?: (err: AWSError, data: Personalize.Types.CreateBatchSegmentJobResponse) => void): Request<Personalize.Types.CreateBatchSegmentJobResponse, AWSError>;
+  /**
+   * Creates a batch segment job. The operation can handle up to 50 million records and the input file must be in JSON format. For more information, see Getting batch recommendations and user segments.
+   */
+  createBatchSegmentJob(callback?: (err: AWSError, data: Personalize.Types.CreateBatchSegmentJobResponse) => void): Request<Personalize.Types.CreateBatchSegmentJobResponse, AWSError>;
+  /**
+   * Creates a campaign that deploys a solution version. When a client calls the GetRecommendations and GetPersonalizedRanking APIs, a campaign is specified in the request.  Minimum Provisioned TPS and Auto-Scaling  A transaction is a single GetRecommendations or GetPersonalizedRanking call. Transactions per second (TPS) is the throughput and unit of billing for Amazon Personalize. The minimum provisioned TPS (minProvisionedTPS) specifies the baseline throughput provisioned by Amazon Personalize, and thus, the minimum billing charge.   If your TPS increases beyond minProvisionedTPS, Amazon Personalize auto-scales the provisioned capacity up and down, but never below minProvisionedTPS. There's a short time delay while the capacity is increased that might cause loss of transactions. The actual TPS used is calculated as the average requests/second within a 5-minute window. You pay for maximum of either the minimum provisioned TPS or the actual TPS. We recommend starting with a low minProvisionedTPS, track your usage using Amazon CloudWatch metrics, and then increase the minProvisionedTPS as necessary.  Status  A campaign can be in one of the following states:   CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED   DELETE PENDING &gt; DELETE IN_PROGRESS   To get the campaign status, call DescribeCampaign.  Wait until the status of the campaign is ACTIVE before asking the campaign for recommendations.   Related APIs     ListCampaigns     DescribeCampaign     UpdateCampaign     DeleteCampaign   
    */
   createCampaign(params: Personalize.Types.CreateCampaignRequest, callback?: (err: AWSError, data: Personalize.Types.CreateCampaignResponse) => void): Request<Personalize.Types.CreateCampaignResponse, AWSError>;
   /**
-   * Creates a campaign by deploying a solution version. When a client calls the GetRecommendations and GetPersonalizedRanking APIs, a campaign is specified in the request.  Minimum Provisioned TPS and Auto-Scaling  A transaction is a single GetRecommendations or GetPersonalizedRanking call. Transactions per second (TPS) is the throughput and unit of billing for Amazon Personalize. The minimum provisioned TPS (minProvisionedTPS) specifies the baseline throughput provisioned by Amazon Personalize, and thus, the minimum billing charge.   If your TPS increases beyond minProvisionedTPS, Amazon Personalize auto-scales the provisioned capacity up and down, but never below minProvisionedTPS. There's a short time delay while the capacity is increased that might cause loss of transactions. The actual TPS used is calculated as the average requests/second within a 5-minute window. You pay for maximum of either the minimum provisioned TPS or the actual TPS. We recommend starting with a low minProvisionedTPS, track your usage using Amazon CloudWatch metrics, and then increase the minProvisionedTPS as necessary.  Status  A campaign can be in one of the following states:   CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED   DELETE PENDING &gt; DELETE IN_PROGRESS   To get the campaign status, call DescribeCampaign.  Wait until the status of the campaign is ACTIVE before asking the campaign for recommendations.   Related APIs     ListCampaigns     DescribeCampaign     UpdateCampaign     DeleteCampaign   
+   * Creates a campaign that deploys a solution version. When a client calls the GetRecommendations and GetPersonalizedRanking APIs, a campaign is specified in the request.  Minimum Provisioned TPS and Auto-Scaling  A transaction is a single GetRecommendations or GetPersonalizedRanking call. Transactions per second (TPS) is the throughput and unit of billing for Amazon Personalize. The minimum provisioned TPS (minProvisionedTPS) specifies the baseline throughput provisioned by Amazon Personalize, and thus, the minimum billing charge.   If your TPS increases beyond minProvisionedTPS, Amazon Personalize auto-scales the provisioned capacity up and down, but never below minProvisionedTPS. There's a short time delay while the capacity is increased that might cause loss of transactions. The actual TPS used is calculated as the average requests/second within a 5-minute window. You pay for maximum of either the minimum provisioned TPS or the actual TPS. We recommend starting with a low minProvisionedTPS, track your usage using Amazon CloudWatch metrics, and then increase the minProvisionedTPS as necessary.  Status  A campaign can be in one of the following states:   CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED   DELETE PENDING &gt; DELETE IN_PROGRESS   To get the campaign status, call DescribeCampaign.  Wait until the status of the campaign is ACTIVE before asking the campaign for recommendations.   Related APIs     ListCampaigns     DescribeCampaign     UpdateCampaign     DeleteCampaign   
    */
   createCampaign(callback?: (err: AWSError, data: Personalize.Types.CreateCampaignResponse) => void): Request<Personalize.Types.CreateCampaignResponse, AWSError>;
   /**
@@ -44,11 +52,11 @@ declare class Personalize extends Service {
    */
   createDatasetExportJob(callback?: (err: AWSError, data: Personalize.Types.CreateDatasetExportJobResponse) => void): Request<Personalize.Types.CreateDatasetExportJobResponse, AWSError>;
   /**
-   * Creates an empty dataset group. A dataset group contains related datasets that supply data for training a model. A dataset group can contain at most three datasets, one for each type of dataset:   Interactions   Items   Users   To train a model (create a solution), a dataset group that contains an Interactions dataset is required. Call CreateDataset to add a dataset to the group. A dataset group can be in one of the following states:   CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED   DELETE PENDING   To get the status of the dataset group, call DescribeDatasetGroup. If the status shows as CREATE FAILED, the response includes a failureReason key, which describes why the creation failed.  You must wait until the status of the dataset group is ACTIVE before adding a dataset to the group.  You can specify an Key Management Service (KMS) key to encrypt the datasets in the group. If you specify a KMS key, you must also include an Identity and Access Management (IAM) role that has permission to access the key.  APIs that require a dataset group ARN in the request     CreateDataset     CreateEventTracker     CreateSolution     Related APIs     ListDatasetGroups     DescribeDatasetGroup     DeleteDatasetGroup   
+   * Creates an empty dataset group. A dataset group is a container for Amazon Personalize resources. A dataset group can contain at most three datasets, one for each type of dataset:   Interactions   Items   Users    A dataset group can be a Domain dataset group, where you specify a domain and use pre-configured resources like recommenders, or a Custom dataset group, where you use custom resources, such as a solution with a solution version, that you deploy with a campaign. If you start with a Domain dataset group, you can still add custom resources such as solutions and solution versions trained with recipes for custom use cases and deployed with campaigns.  A dataset group can be in one of the following states:   CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED   DELETE PENDING   To get the status of the dataset group, call DescribeDatasetGroup. If the status shows as CREATE FAILED, the response includes a failureReason key, which describes why the creation failed.  You must wait until the status of the dataset group is ACTIVE before adding a dataset to the group.  You can specify an Key Management Service (KMS) key to encrypt the datasets in the group. If you specify a KMS key, you must also include an Identity and Access Management (IAM) role that has permission to access the key.  APIs that require a dataset group ARN in the request     CreateDataset     CreateEventTracker     CreateSolution     Related APIs     ListDatasetGroups     DescribeDatasetGroup     DeleteDatasetGroup   
    */
   createDatasetGroup(params: Personalize.Types.CreateDatasetGroupRequest, callback?: (err: AWSError, data: Personalize.Types.CreateDatasetGroupResponse) => void): Request<Personalize.Types.CreateDatasetGroupResponse, AWSError>;
   /**
-   * Creates an empty dataset group. A dataset group contains related datasets that supply data for training a model. A dataset group can contain at most three datasets, one for each type of dataset:   Interactions   Items   Users   To train a model (create a solution), a dataset group that contains an Interactions dataset is required. Call CreateDataset to add a dataset to the group. A dataset group can be in one of the following states:   CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED   DELETE PENDING   To get the status of the dataset group, call DescribeDatasetGroup. If the status shows as CREATE FAILED, the response includes a failureReason key, which describes why the creation failed.  You must wait until the status of the dataset group is ACTIVE before adding a dataset to the group.  You can specify an Key Management Service (KMS) key to encrypt the datasets in the group. If you specify a KMS key, you must also include an Identity and Access Management (IAM) role that has permission to access the key.  APIs that require a dataset group ARN in the request     CreateDataset     CreateEventTracker     CreateSolution     Related APIs     ListDatasetGroups     DescribeDatasetGroup     DeleteDatasetGroup   
+   * Creates an empty dataset group. A dataset group is a container for Amazon Personalize resources. A dataset group can contain at most three datasets, one for each type of dataset:   Interactions   Items   Users    A dataset group can be a Domain dataset group, where you specify a domain and use pre-configured resources like recommenders, or a Custom dataset group, where you use custom resources, such as a solution with a solution version, that you deploy with a campaign. If you start with a Domain dataset group, you can still add custom resources such as solutions and solution versions trained with recipes for custom use cases and deployed with campaigns.  A dataset group can be in one of the following states:   CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED   DELETE PENDING   To get the status of the dataset group, call DescribeDatasetGroup. If the status shows as CREATE FAILED, the response includes a failureReason key, which describes why the creation failed.  You must wait until the status of the dataset group is ACTIVE before adding a dataset to the group.  You can specify an Key Management Service (KMS) key to encrypt the datasets in the group. If you specify a KMS key, you must also include an Identity and Access Management (IAM) role that has permission to access the key.  APIs that require a dataset group ARN in the request     CreateDataset     CreateEventTracker     CreateSolution     Related APIs     ListDatasetGroups     DescribeDatasetGroup     DeleteDatasetGroup   
    */
   createDatasetGroup(callback?: (err: AWSError, data: Personalize.Types.CreateDatasetGroupResponse) => void): Request<Personalize.Types.CreateDatasetGroupResponse, AWSError>;
   /**
@@ -68,19 +76,27 @@ declare class Personalize extends Service {
    */
   createEventTracker(callback?: (err: AWSError, data: Personalize.Types.CreateEventTrackerResponse) => void): Request<Personalize.Types.CreateEventTrackerResponse, AWSError>;
   /**
-   * Creates a recommendation filter. For more information, see filter.
+   * Creates a recommendation filter. For more information, see Filtering recommendations and user segments.
    */
   createFilter(params: Personalize.Types.CreateFilterRequest, callback?: (err: AWSError, data: Personalize.Types.CreateFilterResponse) => void): Request<Personalize.Types.CreateFilterResponse, AWSError>;
   /**
-   * Creates a recommendation filter. For more information, see filter.
+   * Creates a recommendation filter. For more information, see Filtering recommendations and user segments.
    */
   createFilter(callback?: (err: AWSError, data: Personalize.Types.CreateFilterResponse) => void): Request<Personalize.Types.CreateFilterResponse, AWSError>;
   /**
-   * Creates an Amazon Personalize schema from the specified schema string. The schema you create must be in Avro JSON format. Amazon Personalize recognizes three schema variants. Each schema is associated with a dataset type and has a set of required field and keywords. You specify a schema when you call CreateDataset.  Related APIs     ListSchemas     DescribeSchema     DeleteSchema   
+   * Creates a recommender with the recipe (a Domain dataset group use case) you specify. You create recommenders for a Domain dataset group and specify the recommender's Amazon Resource Name (ARN) when you make a GetRecommendations request.   Minimum recommendation requests per second  When you create a recommender, you can configure the recommender's minimum recommendation requests per second. The minimum recommendation requests per second (minRecommendationRequestsPerSecond) specifies the baseline recommendation request throughput provisioned by Amazon Personalize. The default minRecommendationRequestsPerSecond is 1. A recommendation request is a single GetRecommendations operation. Request throughput is measured in requests per second and Amazon Personalize uses your requests per second to derive your requests per hour and the price of your recommender usage.   If your requests per second increases beyond minRecommendationRequestsPerSecond, Amazon Personalize auto-scales the provisioned capacity up and down, but never below minRecommendationRequestsPerSecond. There's a short time delay while the capacity is increased that might cause loss of requests.  Your bill is the greater of either the minimum requests per hour (based on minRecommendationRequestsPerSecond) or the actual number of requests. The actual request throughput used is calculated as the average requests/second within a one-hour window. We recommend starting with the default minRecommendationRequestsPerSecond, track your usage using Amazon CloudWatch metrics, and then increase the minRecommendationRequestsPerSecond as necessary.   Status  A recommender can be in one of the following states:   CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED   DELETE PENDING &gt; DELETE IN_PROGRESS   To get the recommender status, call DescribeRecommender.  Wait until the status of the recommender is ACTIVE before asking the recommender for recommendations.   Related APIs     ListRecommenders     DescribeRecommender     UpdateRecommender     DeleteRecommender   
+   */
+  createRecommender(params: Personalize.Types.CreateRecommenderRequest, callback?: (err: AWSError, data: Personalize.Types.CreateRecommenderResponse) => void): Request<Personalize.Types.CreateRecommenderResponse, AWSError>;
+  /**
+   * Creates a recommender with the recipe (a Domain dataset group use case) you specify. You create recommenders for a Domain dataset group and specify the recommender's Amazon Resource Name (ARN) when you make a GetRecommendations request.   Minimum recommendation requests per second  When you create a recommender, you can configure the recommender's minimum recommendation requests per second. The minimum recommendation requests per second (minRecommendationRequestsPerSecond) specifies the baseline recommendation request throughput provisioned by Amazon Personalize. The default minRecommendationRequestsPerSecond is 1. A recommendation request is a single GetRecommendations operation. Request throughput is measured in requests per second and Amazon Personalize uses your requests per second to derive your requests per hour and the price of your recommender usage.   If your requests per second increases beyond minRecommendationRequestsPerSecond, Amazon Personalize auto-scales the provisioned capacity up and down, but never below minRecommendationRequestsPerSecond. There's a short time delay while the capacity is increased that might cause loss of requests.  Your bill is the greater of either the minimum requests per hour (based on minRecommendationRequestsPerSecond) or the actual number of requests. The actual request throughput used is calculated as the average requests/second within a one-hour window. We recommend starting with the default minRecommendationRequestsPerSecond, track your usage using Amazon CloudWatch metrics, and then increase the minRecommendationRequestsPerSecond as necessary.   Status  A recommender can be in one of the following states:   CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED   DELETE PENDING &gt; DELETE IN_PROGRESS   To get the recommender status, call DescribeRecommender.  Wait until the status of the recommender is ACTIVE before asking the recommender for recommendations.   Related APIs     ListRecommenders     DescribeRecommender     UpdateRecommender     DeleteRecommender   
+   */
+  createRecommender(callback?: (err: AWSError, data: Personalize.Types.CreateRecommenderResponse) => void): Request<Personalize.Types.CreateRecommenderResponse, AWSError>;
+  /**
+   * Creates an Amazon Personalize schema from the specified schema string. The schema you create must be in Avro JSON format. Amazon Personalize recognizes three schema variants. Each schema is associated with a dataset type and has a set of required field and keywords. If you are creating a schema for a dataset in a Domain dataset group, you provide the domain of the Domain dataset group. You specify a schema when you call CreateDataset.  Related APIs     ListSchemas     DescribeSchema     DeleteSchema   
    */
   createSchema(params: Personalize.Types.CreateSchemaRequest, callback?: (err: AWSError, data: Personalize.Types.CreateSchemaResponse) => void): Request<Personalize.Types.CreateSchemaResponse, AWSError>;
   /**
-   * Creates an Amazon Personalize schema from the specified schema string. The schema you create must be in Avro JSON format. Amazon Personalize recognizes three schema variants. Each schema is associated with a dataset type and has a set of required field and keywords. You specify a schema when you call CreateDataset.  Related APIs     ListSchemas     DescribeSchema     DeleteSchema   
+   * Creates an Amazon Personalize schema from the specified schema string. The schema you create must be in Avro JSON format. Amazon Personalize recognizes three schema variants. Each schema is associated with a dataset type and has a set of required field and keywords. If you are creating a schema for a dataset in a Domain dataset group, you provide the domain of the Domain dataset group. You specify a schema when you call CreateDataset.  Related APIs     ListSchemas     DescribeSchema     DeleteSchema   
    */
   createSchema(callback?: (err: AWSError, data: Personalize.Types.CreateSchemaResponse) => void): Request<Personalize.Types.CreateSchemaResponse, AWSError>;
   /**
@@ -92,19 +108,19 @@ declare class Personalize extends Service {
    */
   createSolution(callback?: (err: AWSError, data: Personalize.Types.CreateSolutionResponse) => void): Request<Personalize.Types.CreateSolutionResponse, AWSError>;
   /**
-   * Trains or retrains an active solution. A solution is created using the CreateSolution operation and must be in the ACTIVE state before calling CreateSolutionVersion. A new version of the solution is created every time you call this operation.  Status  A solution version can be in one of the following states:   CREATE PENDING   CREATE IN_PROGRESS   ACTIVE   CREATE FAILED   CREATE STOPPING   CREATE STOPPED   To get the status of the version, call DescribeSolutionVersion. Wait until the status shows as ACTIVE before calling CreateCampaign. If the status shows as CREATE FAILED, the response includes a failureReason key, which describes why the job failed.  Related APIs     ListSolutionVersions     DescribeSolutionVersion       ListSolutions     CreateSolution     DescribeSolution     DeleteSolution   
+   * Trains or retrains an active solution in a Custom dataset group. A solution is created using the CreateSolution operation and must be in the ACTIVE state before calling CreateSolutionVersion. A new version of the solution is created every time you call this operation.  Status  A solution version can be in one of the following states:   CREATE PENDING   CREATE IN_PROGRESS   ACTIVE   CREATE FAILED   CREATE STOPPING   CREATE STOPPED   To get the status of the version, call DescribeSolutionVersion. Wait until the status shows as ACTIVE before calling CreateCampaign. If the status shows as CREATE FAILED, the response includes a failureReason key, which describes why the job failed.  Related APIs     ListSolutionVersions     DescribeSolutionVersion     ListSolutions     CreateSolution     DescribeSolution     DeleteSolution   
    */
   createSolutionVersion(params: Personalize.Types.CreateSolutionVersionRequest, callback?: (err: AWSError, data: Personalize.Types.CreateSolutionVersionResponse) => void): Request<Personalize.Types.CreateSolutionVersionResponse, AWSError>;
   /**
-   * Trains or retrains an active solution. A solution is created using the CreateSolution operation and must be in the ACTIVE state before calling CreateSolutionVersion. A new version of the solution is created every time you call this operation.  Status  A solution version can be in one of the following states:   CREATE PENDING   CREATE IN_PROGRESS   ACTIVE   CREATE FAILED   CREATE STOPPING   CREATE STOPPED   To get the status of the version, call DescribeSolutionVersion. Wait until the status shows as ACTIVE before calling CreateCampaign. If the status shows as CREATE FAILED, the response includes a failureReason key, which describes why the job failed.  Related APIs     ListSolutionVersions     DescribeSolutionVersion       ListSolutions     CreateSolution     DescribeSolution     DeleteSolution   
+   * Trains or retrains an active solution in a Custom dataset group. A solution is created using the CreateSolution operation and must be in the ACTIVE state before calling CreateSolutionVersion. A new version of the solution is created every time you call this operation.  Status  A solution version can be in one of the following states:   CREATE PENDING   CREATE IN_PROGRESS   ACTIVE   CREATE FAILED   CREATE STOPPING   CREATE STOPPED   To get the status of the version, call DescribeSolutionVersion. Wait until the status shows as ACTIVE before calling CreateCampaign. If the status shows as CREATE FAILED, the response includes a failureReason key, which describes why the job failed.  Related APIs     ListSolutionVersions     DescribeSolutionVersion     ListSolutions     CreateSolution     DescribeSolution     DeleteSolution   
    */
   createSolutionVersion(callback?: (err: AWSError, data: Personalize.Types.CreateSolutionVersionResponse) => void): Request<Personalize.Types.CreateSolutionVersionResponse, AWSError>;
   /**
-   * Removes a campaign by deleting the solution deployment. The solution that the campaign is based on is not deleted and can be redeployed when needed. A deleted campaign can no longer be specified in a GetRecommendations request. For more information on campaigns, see CreateCampaign.
+   * Removes a campaign by deleting the solution deployment. The solution that the campaign is based on is not deleted and can be redeployed when needed. A deleted campaign can no longer be specified in a GetRecommendations request. For information on creating campaigns, see CreateCampaign.
    */
   deleteCampaign(params: Personalize.Types.DeleteCampaignRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Removes a campaign by deleting the solution deployment. The solution that the campaign is based on is not deleted and can be redeployed when needed. A deleted campaign can no longer be specified in a GetRecommendations request. For more information on campaigns, see CreateCampaign.
+   * Removes a campaign by deleting the solution deployment. The solution that the campaign is based on is not deleted and can be redeployed when needed. A deleted campaign can no longer be specified in a GetRecommendations request. For information on creating campaigns, see CreateCampaign.
    */
   deleteCampaign(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -140,6 +156,14 @@ declare class Personalize extends Service {
    */
   deleteFilter(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Deactivates and removes a recommender. A deleted recommender can no longer be specified in a GetRecommendations request.
+   */
+  deleteRecommender(params: Personalize.Types.DeleteRecommenderRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deactivates and removes a recommender. A deleted recommender can no longer be specified in a GetRecommendations request.
+   */
+  deleteRecommender(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Deletes a schema. Before deleting a schema, you must delete all datasets referencing the schema. For more information on schemas, see CreateSchema.
    */
   deleteSchema(params: Personalize.Types.DeleteSchemaRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -171,6 +195,14 @@ declare class Personalize extends Service {
    * Gets the properties of a batch inference job including name, Amazon Resource Name (ARN), status, input and output configurations, and the ARN of the solution version used to generate the recommendations.
    */
   describeBatchInferenceJob(callback?: (err: AWSError, data: Personalize.Types.DescribeBatchInferenceJobResponse) => void): Request<Personalize.Types.DescribeBatchInferenceJobResponse, AWSError>;
+  /**
+   * Gets the properties of a batch segment job including name, Amazon Resource Name (ARN), status, input and output configurations, and the ARN of the solution version used to generate segments.
+   */
+  describeBatchSegmentJob(params: Personalize.Types.DescribeBatchSegmentJobRequest, callback?: (err: AWSError, data: Personalize.Types.DescribeBatchSegmentJobResponse) => void): Request<Personalize.Types.DescribeBatchSegmentJobResponse, AWSError>;
+  /**
+   * Gets the properties of a batch segment job including name, Amazon Resource Name (ARN), status, input and output configurations, and the ARN of the solution version used to generate segments.
+   */
+  describeBatchSegmentJob(callback?: (err: AWSError, data: Personalize.Types.DescribeBatchSegmentJobResponse) => void): Request<Personalize.Types.DescribeBatchSegmentJobResponse, AWSError>;
   /**
    * Describes the given campaign, including its status. A campaign can be in one of the following states:   CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED   DELETE PENDING &gt; DELETE IN_PROGRESS   When the status is CREATE FAILED, the response includes the failureReason key, which describes why. For more information on campaigns, see CreateCampaign.
    */
@@ -244,6 +276,14 @@ declare class Personalize extends Service {
    */
   describeRecipe(callback?: (err: AWSError, data: Personalize.Types.DescribeRecipeResponse) => void): Request<Personalize.Types.DescribeRecipeResponse, AWSError>;
   /**
+   * Describes the given recommender, including its status. A recommender can be in one of the following states:   CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED   DELETE PENDING &gt; DELETE IN_PROGRESS   When the status is CREATE FAILED, the response includes the failureReason key, which describes why. For more information on recommenders, see CreateRecommender.
+   */
+  describeRecommender(params: Personalize.Types.DescribeRecommenderRequest, callback?: (err: AWSError, data: Personalize.Types.DescribeRecommenderResponse) => void): Request<Personalize.Types.DescribeRecommenderResponse, AWSError>;
+  /**
+   * Describes the given recommender, including its status. A recommender can be in one of the following states:   CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED   DELETE PENDING &gt; DELETE IN_PROGRESS   When the status is CREATE FAILED, the response includes the failureReason key, which describes why. For more information on recommenders, see CreateRecommender.
+   */
+  describeRecommender(callback?: (err: AWSError, data: Personalize.Types.DescribeRecommenderResponse) => void): Request<Personalize.Types.DescribeRecommenderResponse, AWSError>;
+  /**
    * Describes a schema. For more information on schemas, see CreateSchema.
    */
   describeSchema(params: Personalize.Types.DescribeSchemaRequest, callback?: (err: AWSError, data: Personalize.Types.DescribeSchemaResponse) => void): Request<Personalize.Types.DescribeSchemaResponse, AWSError>;
@@ -260,11 +300,11 @@ declare class Personalize extends Service {
    */
   describeSolution(callback?: (err: AWSError, data: Personalize.Types.DescribeSolutionResponse) => void): Request<Personalize.Types.DescribeSolutionResponse, AWSError>;
   /**
-   * Describes a specific version of a solution. For more information on solutions, see CreateSolution.
+   * Describes a specific version of a solution. For more information on solutions, see CreateSolution 
    */
   describeSolutionVersion(params: Personalize.Types.DescribeSolutionVersionRequest, callback?: (err: AWSError, data: Personalize.Types.DescribeSolutionVersionResponse) => void): Request<Personalize.Types.DescribeSolutionVersionResponse, AWSError>;
   /**
-   * Describes a specific version of a solution. For more information on solutions, see CreateSolution.
+   * Describes a specific version of a solution. For more information on solutions, see CreateSolution 
    */
   describeSolutionVersion(callback?: (err: AWSError, data: Personalize.Types.DescribeSolutionVersionResponse) => void): Request<Personalize.Types.DescribeSolutionVersionResponse, AWSError>;
   /**
@@ -283,6 +323,14 @@ declare class Personalize extends Service {
    * Gets a list of the batch inference jobs that have been performed off of a solution version.
    */
   listBatchInferenceJobs(callback?: (err: AWSError, data: Personalize.Types.ListBatchInferenceJobsResponse) => void): Request<Personalize.Types.ListBatchInferenceJobsResponse, AWSError>;
+  /**
+   * Gets a list of the batch segment jobs that have been performed off of a solution version that you specify.
+   */
+  listBatchSegmentJobs(params: Personalize.Types.ListBatchSegmentJobsRequest, callback?: (err: AWSError, data: Personalize.Types.ListBatchSegmentJobsResponse) => void): Request<Personalize.Types.ListBatchSegmentJobsResponse, AWSError>;
+  /**
+   * Gets a list of the batch segment jobs that have been performed off of a solution version that you specify.
+   */
+  listBatchSegmentJobs(callback?: (err: AWSError, data: Personalize.Types.ListBatchSegmentJobsResponse) => void): Request<Personalize.Types.ListBatchSegmentJobsResponse, AWSError>;
   /**
    * Returns a list of campaigns that use the given solution. When a solution is not specified, all the campaigns associated with the account are listed. The response provides the properties for each campaign, including the Amazon Resource Name (ARN). For more information on campaigns, see CreateCampaign.
    */
@@ -348,6 +396,14 @@ declare class Personalize extends Service {
    */
   listRecipes(callback?: (err: AWSError, data: Personalize.Types.ListRecipesResponse) => void): Request<Personalize.Types.ListRecipesResponse, AWSError>;
   /**
+   * Returns a list of recommenders in a given Domain dataset group. When a Domain dataset group is not specified, all the recommenders associated with the account are listed. The response provides the properties for each recommender, including the Amazon Resource Name (ARN). For more information on recommenders, see CreateRecommender.
+   */
+  listRecommenders(params: Personalize.Types.ListRecommendersRequest, callback?: (err: AWSError, data: Personalize.Types.ListRecommendersResponse) => void): Request<Personalize.Types.ListRecommendersResponse, AWSError>;
+  /**
+   * Returns a list of recommenders in a given Domain dataset group. When a Domain dataset group is not specified, all the recommenders associated with the account are listed. The response provides the properties for each recommender, including the Amazon Resource Name (ARN). For more information on recommenders, see CreateRecommender.
+   */
+  listRecommenders(callback?: (err: AWSError, data: Personalize.Types.ListRecommendersResponse) => void): Request<Personalize.Types.ListRecommendersResponse, AWSError>;
+  /**
    * Returns the list of schemas associated with the account. The response provides the properties for each schema, including the Amazon Resource Name (ARN). For more information on schemas, see CreateSchema.
    */
   listSchemas(params: Personalize.Types.ListSchemasRequest, callback?: (err: AWSError, data: Personalize.Types.ListSchemasResponse) => void): Request<Personalize.Types.ListSchemasResponse, AWSError>;
@@ -356,11 +412,11 @@ declare class Personalize extends Service {
    */
   listSchemas(callback?: (err: AWSError, data: Personalize.Types.ListSchemasResponse) => void): Request<Personalize.Types.ListSchemasResponse, AWSError>;
   /**
-   * Returns a list of solution versions for the given solution. When a solution is not specified, all the solution versions associated with the account are listed. The response provides the properties for each solution version, including the Amazon Resource Name (ARN). For more information on solutions, see CreateSolution.
+   * Returns a list of solution versions for the given solution. When a solution is not specified, all the solution versions associated with the account are listed. The response provides the properties for each solution version, including the Amazon Resource Name (ARN).
    */
   listSolutionVersions(params: Personalize.Types.ListSolutionVersionsRequest, callback?: (err: AWSError, data: Personalize.Types.ListSolutionVersionsResponse) => void): Request<Personalize.Types.ListSolutionVersionsResponse, AWSError>;
   /**
-   * Returns a list of solution versions for the given solution. When a solution is not specified, all the solution versions associated with the account are listed. The response provides the properties for each solution version, including the Amazon Resource Name (ARN). For more information on solutions, see CreateSolution.
+   * Returns a list of solution versions for the given solution. When a solution is not specified, all the solution versions associated with the account are listed. The response provides the properties for each solution version, including the Amazon Resource Name (ARN).
    */
   listSolutionVersions(callback?: (err: AWSError, data: Personalize.Types.ListSolutionVersionsResponse) => void): Request<Personalize.Types.ListSolutionVersionsResponse, AWSError>;
   /**
@@ -372,6 +428,30 @@ declare class Personalize extends Service {
    */
   listSolutions(callback?: (err: AWSError, data: Personalize.Types.ListSolutionsResponse) => void): Request<Personalize.Types.ListSolutionsResponse, AWSError>;
   /**
+   * Get a list of tags attached to a resource.
+   */
+  listTagsForResource(params: Personalize.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: Personalize.Types.ListTagsForResourceResponse) => void): Request<Personalize.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Get a list of tags attached to a resource.
+   */
+  listTagsForResource(callback?: (err: AWSError, data: Personalize.Types.ListTagsForResourceResponse) => void): Request<Personalize.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Starts a recommender that is INACTIVE. Starting a recommender does not create any new models, but resumes billing and automatic retraining for the recommender.
+   */
+  startRecommender(params: Personalize.Types.StartRecommenderRequest, callback?: (err: AWSError, data: Personalize.Types.StartRecommenderResponse) => void): Request<Personalize.Types.StartRecommenderResponse, AWSError>;
+  /**
+   * Starts a recommender that is INACTIVE. Starting a recommender does not create any new models, but resumes billing and automatic retraining for the recommender.
+   */
+  startRecommender(callback?: (err: AWSError, data: Personalize.Types.StartRecommenderResponse) => void): Request<Personalize.Types.StartRecommenderResponse, AWSError>;
+  /**
+   * Stops a recommender that is ACTIVE. Stopping a recommender halts billing and automatic retraining for the recommender.
+   */
+  stopRecommender(params: Personalize.Types.StopRecommenderRequest, callback?: (err: AWSError, data: Personalize.Types.StopRecommenderResponse) => void): Request<Personalize.Types.StopRecommenderResponse, AWSError>;
+  /**
+   * Stops a recommender that is ACTIVE. Stopping a recommender halts billing and automatic retraining for the recommender.
+   */
+  stopRecommender(callback?: (err: AWSError, data: Personalize.Types.StopRecommenderResponse) => void): Request<Personalize.Types.StopRecommenderResponse, AWSError>;
+  /**
    * Stops creating a solution version that is in a state of CREATE_PENDING or CREATE IN_PROGRESS.  Depending on the current state of the solution version, the solution version state changes as follows:   CREATE_PENDING &gt; CREATE_STOPPED or   CREATE_IN_PROGRESS &gt; CREATE_STOPPING &gt; CREATE_STOPPED   You are billed for all of the training completed up until you stop the solution version creation. You cannot resume creating a solution version once it has been stopped.
    */
   stopSolutionVersionCreation(params: Personalize.Types.StopSolutionVersionCreationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -380,13 +460,37 @@ declare class Personalize extends Service {
    */
   stopSolutionVersionCreation(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates a campaign by either deploying a new solution or changing the value of the campaign's minProvisionedTPS parameter. To update a campaign, the campaign status must be ACTIVE or CREATE FAILED. Check the campaign status using the DescribeCampaign API.  You must wait until the status of the updated campaign is ACTIVE before asking the campaign for recommendations.  For more information on campaigns, see CreateCampaign.
+   * Add a list of tags to a resource.
+   */
+  tagResource(params: Personalize.Types.TagResourceRequest, callback?: (err: AWSError, data: Personalize.Types.TagResourceResponse) => void): Request<Personalize.Types.TagResourceResponse, AWSError>;
+  /**
+   * Add a list of tags to a resource.
+   */
+  tagResource(callback?: (err: AWSError, data: Personalize.Types.TagResourceResponse) => void): Request<Personalize.Types.TagResourceResponse, AWSError>;
+  /**
+   * Remove tags that are attached to a resource.
+   */
+  untagResource(params: Personalize.Types.UntagResourceRequest, callback?: (err: AWSError, data: Personalize.Types.UntagResourceResponse) => void): Request<Personalize.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Remove tags that are attached to a resource.
+   */
+  untagResource(callback?: (err: AWSError, data: Personalize.Types.UntagResourceResponse) => void): Request<Personalize.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Updates a campaign by either deploying a new solution or changing the value of the campaign's minProvisionedTPS parameter. To update a campaign, the campaign status must be ACTIVE or CREATE FAILED. Check the campaign status using the DescribeCampaign operation.  You can still get recommendations from a campaign while an update is in progress. The campaign will use the previous solution version and campaign configuration to generate recommendations until the latest campaign update status is Active.   For more information on campaigns, see CreateCampaign.
    */
   updateCampaign(params: Personalize.Types.UpdateCampaignRequest, callback?: (err: AWSError, data: Personalize.Types.UpdateCampaignResponse) => void): Request<Personalize.Types.UpdateCampaignResponse, AWSError>;
   /**
-   * Updates a campaign by either deploying a new solution or changing the value of the campaign's minProvisionedTPS parameter. To update a campaign, the campaign status must be ACTIVE or CREATE FAILED. Check the campaign status using the DescribeCampaign API.  You must wait until the status of the updated campaign is ACTIVE before asking the campaign for recommendations.  For more information on campaigns, see CreateCampaign.
+   * Updates a campaign by either deploying a new solution or changing the value of the campaign's minProvisionedTPS parameter. To update a campaign, the campaign status must be ACTIVE or CREATE FAILED. Check the campaign status using the DescribeCampaign operation.  You can still get recommendations from a campaign while an update is in progress. The campaign will use the previous solution version and campaign configuration to generate recommendations until the latest campaign update status is Active.   For more information on campaigns, see CreateCampaign.
    */
   updateCampaign(callback?: (err: AWSError, data: Personalize.Types.UpdateCampaignResponse) => void): Request<Personalize.Types.UpdateCampaignResponse, AWSError>;
+  /**
+   * Updates the recommender to modify the recommender configuration.
+   */
+  updateRecommender(params: Personalize.Types.UpdateRecommenderRequest, callback?: (err: AWSError, data: Personalize.Types.UpdateRecommenderResponse) => void): Request<Personalize.Types.UpdateRecommenderResponse, AWSError>;
+  /**
+   * Updates the recommender to modify the recommender configuration.
+   */
+  updateRecommender(callback?: (err: AWSError, data: Personalize.Types.UpdateRecommenderResponse) => void): Request<Personalize.Types.UpdateRecommenderResponse, AWSError>;
 }
 declare namespace Personalize {
   export type AccountId = string;
@@ -564,6 +668,93 @@ declare namespace Personalize {
     solutionVersionArn?: Arn;
   }
   export type BatchInferenceJobs = BatchInferenceJobSummary[];
+  export interface BatchSegmentJob {
+    /**
+     * The name of the batch segment job.
+     */
+    jobName?: Name;
+    /**
+     * The Amazon Resource Name (ARN) of the batch segment job.
+     */
+    batchSegmentJobArn?: Arn;
+    /**
+     * The ARN of the filter used on the batch segment job.
+     */
+    filterArn?: Arn;
+    /**
+     * If the batch segment job failed, the reason for the failure.
+     */
+    failureReason?: FailureReason;
+    /**
+     * The Amazon Resource Name (ARN) of the solution version used by the batch segment job to generate batch segments.
+     */
+    solutionVersionArn?: Arn;
+    /**
+     * The number of predicted users generated by the batch segment job for each line of input data.
+     */
+    numResults?: NumBatchResults;
+    /**
+     * The Amazon S3 path that leads to the input data used to generate the batch segment job.
+     */
+    jobInput?: BatchSegmentJobInput;
+    /**
+     * The Amazon S3 bucket that contains the output data generated by the batch segment job.
+     */
+    jobOutput?: BatchSegmentJobOutput;
+    /**
+     * The ARN of the Amazon Identity and Access Management (IAM) role that requested the batch segment job.
+     */
+    roleArn?: RoleArn;
+    /**
+     * The status of the batch segment job. The status is one of the following values:   PENDING   IN PROGRESS   ACTIVE   CREATE FAILED  
+     */
+    status?: Status;
+    /**
+     * The time at which the batch segment job was created.
+     */
+    creationDateTime?: _Date;
+    /**
+     * The time at which the batch segment job last updated.
+     */
+    lastUpdatedDateTime?: _Date;
+  }
+  export interface BatchSegmentJobInput {
+    s3DataSource: S3DataConfig;
+  }
+  export interface BatchSegmentJobOutput {
+    s3DataDestination: S3DataConfig;
+  }
+  export interface BatchSegmentJobSummary {
+    /**
+     * The Amazon Resource Name (ARN) of the batch segment job.
+     */
+    batchSegmentJobArn?: Arn;
+    /**
+     * The name of the batch segment job.
+     */
+    jobName?: Name;
+    /**
+     * The status of the batch segment job. The status is one of the following values:   PENDING   IN PROGRESS   ACTIVE   CREATE FAILED  
+     */
+    status?: Status;
+    /**
+     * The time at which the batch segment job was created.
+     */
+    creationDateTime?: _Date;
+    /**
+     * The time at which the batch segment job was last updated.
+     */
+    lastUpdatedDateTime?: _Date;
+    /**
+     * If the batch segment job failed, the reason for the failure.
+     */
+    failureReason?: FailureReason;
+    /**
+     * The Amazon Resource Name (ARN) of the solution version used by the batch segment job to generate batch segments.
+     */
+    solutionVersionArn?: Arn;
+  }
+  export type BatchSegmentJobs = BatchSegmentJobSummary[];
   export type Boolean = boolean;
   export interface Campaign {
     /**
@@ -606,7 +797,7 @@ declare namespace Personalize {
   }
   export interface CampaignConfig {
     /**
-     * A string to string map specifying the exploration configuration hyperparameters, including explorationWeight and explorationItemAgeCutOff, you want to use to configure the amount of item exploration Amazon Personalize uses when recommending items. Provide itemExplorationConfig data only if your solution uses the User-Personalization recipe.
+     * Specifies the exploration configuration hyperparameters, including explorationWeight and explorationItemAgeCutOff, you want to use to configure the amount of item exploration Amazon Personalize uses when recommending items. Provide itemExplorationConfig data only if your solution uses the User-Personalization recipe.
      */
     itemExplorationConfig?: HyperParameters;
   }
@@ -704,11 +895,11 @@ declare namespace Personalize {
      */
     solutionVersionArn: Arn;
     /**
-     * The ARN of the filter to apply to the batch inference job. For more information on using filters, see Filtering Batch Recommendations..
+     * The ARN of the filter to apply to the batch inference job. For more information on using filters, see Filtering batch recommendations.
      */
     filterArn?: Arn;
     /**
-     * The number of recommendations to retreive.
+     * The number of recommendations to retrieve.
      */
     numResults?: NumBatchResults;
     /**
@@ -727,12 +918,56 @@ declare namespace Personalize {
      * The configuration details of a batch inference job.
      */
     batchInferenceJobConfig?: BatchInferenceJobConfig;
+    /**
+     * A list of tags to apply to the batch inference job.
+     */
+    tags?: Tags;
   }
   export interface CreateBatchInferenceJobResponse {
     /**
      * The ARN of the batch inference job.
      */
     batchInferenceJobArn?: Arn;
+  }
+  export interface CreateBatchSegmentJobRequest {
+    /**
+     * The name of the batch segment job to create.
+     */
+    jobName: Name;
+    /**
+     * The Amazon Resource Name (ARN) of the solution version you want the batch segment job to use to generate batch segments.
+     */
+    solutionVersionArn: Arn;
+    /**
+     * The ARN of the filter to apply to the batch segment job. For more information on using filters, see Filtering batch recommendations.
+     */
+    filterArn?: Arn;
+    /**
+     * The number of predicted users generated by the batch segment job for each line of input data.
+     */
+    numResults?: NumBatchResults;
+    /**
+     * The Amazon S3 path for the input data used to generate the batch segment job.
+     */
+    jobInput: BatchSegmentJobInput;
+    /**
+     * The Amazon S3 path for the bucket where the job's output will be stored.
+     */
+    jobOutput: BatchSegmentJobOutput;
+    /**
+     * The ARN of the Amazon Identity and Access Management role that has permissions to read and write to your input and output Amazon S3 buckets respectively.
+     */
+    roleArn: RoleArn;
+    /**
+     * A list of tags to apply to the batch segment job.
+     */
+    tags?: Tags;
+  }
+  export interface CreateBatchSegmentJobResponse {
+    /**
+     * The ARN of the batch segment job.
+     */
+    batchSegmentJobArn?: Arn;
   }
   export interface CreateCampaignRequest {
     /**
@@ -751,6 +986,10 @@ declare namespace Personalize {
      * The configuration details of a campaign.
      */
     campaignConfig?: CampaignConfig;
+    /**
+     * A list of tags to apply to the campaign.
+     */
+    tags?: Tags;
   }
   export interface CreateCampaignResponse {
     /**
@@ -779,6 +1018,10 @@ declare namespace Personalize {
      * The path to the Amazon S3 bucket where the job's output is stored.
      */
     jobOutput: DatasetExportJobOutput;
+    /**
+     * A list of tags to apply to the dataset export job.
+     */
+    tags?: Tags;
   }
   export interface CreateDatasetExportJobResponse {
     /**
@@ -799,12 +1042,24 @@ declare namespace Personalize {
      * The Amazon Resource Name (ARN) of a Key Management Service (KMS) key used to encrypt the datasets.
      */
     kmsKeyArn?: KmsKeyArn;
+    /**
+     * The domain of the dataset group. Specify a domain to create a Domain dataset group. The domain you specify determines the default schemas for datasets and the use cases available for recommenders. If you don't specify a domain, you create a Custom dataset group with solution versions that you deploy with a campaign. 
+     */
+    domain?: Domain;
+    /**
+     * A list of tags to apply to the dataset group.
+     */
+    tags?: Tags;
   }
   export interface CreateDatasetGroupResponse {
     /**
      * The Amazon Resource Name (ARN) of the new dataset group.
      */
     datasetGroupArn?: Arn;
+    /**
+     * The domain for the new Domain dataset group.
+     */
+    domain?: Domain;
   }
   export interface CreateDatasetImportJobRequest {
     /**
@@ -823,6 +1078,10 @@ declare namespace Personalize {
      * The ARN of the IAM role that has permissions to read from the Amazon S3 data source.
      */
     roleArn: RoleArn;
+    /**
+     * A list of tags to apply to the dataset import job.
+     */
+    tags?: Tags;
   }
   export interface CreateDatasetImportJobResponse {
     /**
@@ -847,6 +1106,10 @@ declare namespace Personalize {
      * The type of dataset. One of the following (case insensitive) values:   Interactions   Items   Users  
      */
     datasetType: DatasetType;
+    /**
+     * A list of tags to apply to the dataset.
+     */
+    tags?: Tags;
   }
   export interface CreateDatasetResponse {
     /**
@@ -863,6 +1126,10 @@ declare namespace Personalize {
      * The Amazon Resource Name (ARN) of the dataset group that receives the event data.
      */
     datasetGroupArn: Arn;
+    /**
+     * A list of tags to apply to the event tracker.
+     */
+    tags?: Tags;
   }
   export interface CreateEventTrackerResponse {
     /**
@@ -884,15 +1151,47 @@ declare namespace Personalize {
      */
     datasetGroupArn: Arn;
     /**
-     * The filter expression defines which items are included or excluded from recommendations. Filter expression must follow specific format rules. For information about filter expression structure and syntax, see filter-expressions.
+     * The filter expression defines which items are included or excluded from recommendations. Filter expression must follow specific format rules. For information about filter expression structure and syntax, see Filter expressions.
      */
     filterExpression: FilterExpression;
+    /**
+     * A list of tags to apply to the filter.
+     */
+    tags?: Tags;
   }
   export interface CreateFilterResponse {
     /**
      * The ARN of the new filter.
      */
     filterArn?: Arn;
+  }
+  export interface CreateRecommenderRequest {
+    /**
+     * The name of the recommender.
+     */
+    name: Name;
+    /**
+     * The Amazon Resource Name (ARN) of the destination domain dataset group for the recommender.
+     */
+    datasetGroupArn: Arn;
+    /**
+     * The Amazon Resource Name (ARN) of the recipe that the recommender will use. For a recommender, a recipe is a Domain dataset group use case. Only Domain dataset group use cases can be used to create a recommender. For information about use cases see Choosing recommender use cases. 
+     */
+    recipeArn: Arn;
+    /**
+     * The configuration details of the recommender.
+     */
+    recommenderConfig?: RecommenderConfig;
+    /**
+     * A list of tags to apply to the recommender.
+     */
+    tags?: Tags;
+  }
+  export interface CreateRecommenderResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the recommender.
+     */
+    recommenderArn?: Arn;
   }
   export interface CreateSchemaRequest {
     /**
@@ -903,6 +1202,10 @@ declare namespace Personalize {
      * A schema in Avro JSON format.
      */
     schema: AvroSchema;
+    /**
+     * The domain for the schema. If you are creating a schema for a dataset in a Domain dataset group, specify the domain you chose when you created the Domain dataset group.
+     */
+    domain?: Domain;
   }
   export interface CreateSchemaResponse {
     /**
@@ -939,6 +1242,10 @@ declare namespace Personalize {
      * The configuration to use with the solution. When performAutoML is set to true, Amazon Personalize only evaluates the autoMLConfig section of the solution configuration.  Amazon Personalize doesn't support configuring the hpoObjective at this time. 
      */
     solutionConfig?: SolutionConfig;
+    /**
+     * A list of tags to apply to the solution.
+     */
+    tags?: Tags;
   }
   export interface CreateSolutionResponse {
     /**
@@ -955,6 +1262,10 @@ declare namespace Personalize {
      * The scope of training to be performed when creating the solution version. The FULL option trains the solution version based on the entirety of the input solution's training data, while the UPDATE option processes only the data that has changed in comparison to the input solution. Choose UPDATE when you want to incrementally update your solution version instead of creating an entirely new one.  The UPDATE option can only be used when you already have an active solution version created from the input solution using the FULL option and the input solution was trained with the User-Personalization recipe or the HRNN-Coldstart recipe. 
      */
     trainingMode?: TrainingMode;
+    /**
+     * A list of tags to apply to the solution version.
+     */
+    tags?: Tags;
   }
   export interface CreateSolutionVersionResponse {
     /**
@@ -1107,6 +1418,10 @@ declare namespace Personalize {
      * If creating a dataset group fails, provides the reason why.
      */
     failureReason?: FailureReason;
+    /**
+     * The domain of a Domain dataset group.
+     */
+    domain?: Domain;
   }
   export interface DatasetGroupSummary {
     /**
@@ -1133,6 +1448,10 @@ declare namespace Personalize {
      * If creating a dataset group fails, the reason behind the failure.
      */
     failureReason?: FailureReason;
+    /**
+     * The domain of a Domain dataset group.
+     */
+    domain?: Domain;
   }
   export type DatasetGroups = DatasetGroupSummary[];
   export interface DatasetImportJob {
@@ -1221,6 +1540,10 @@ declare namespace Personalize {
      * The date and time (in Unix time) that the schema was last updated.
      */
     lastUpdatedDateTime?: _Date;
+    /**
+     * The domain of a schema that you created for a dataset in a Domain dataset group.
+     */
+    domain?: Domain;
   }
   export interface DatasetSchemaSummary {
     /**
@@ -1239,6 +1562,10 @@ declare namespace Personalize {
      * The date and time (in Unix time) that the schema was last updated.
      */
     lastUpdatedDateTime?: _Date;
+    /**
+     * The domain of a schema that you created for a dataset in a Domain dataset group.
+     */
+    domain?: Domain;
   }
   export interface DatasetSummary {
     /**
@@ -1366,6 +1693,12 @@ declare namespace Personalize {
      */
     filterArn: Arn;
   }
+  export interface DeleteRecommenderRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the recommender to delete.
+     */
+    recommenderArn: Arn;
+  }
   export interface DeleteSchemaRequest {
     /**
      * The Amazon Resource Name (ARN) of the schema to delete.
@@ -1401,6 +1734,18 @@ declare namespace Personalize {
      * Information on the specified batch inference job.
      */
     batchInferenceJob?: BatchInferenceJob;
+  }
+  export interface DescribeBatchSegmentJobRequest {
+    /**
+     * The ARN of the batch segment job to describe.
+     */
+    batchSegmentJobArn: Arn;
+  }
+  export interface DescribeBatchSegmentJobResponse {
+    /**
+     * Information on the specified batch segment job.
+     */
+    batchSegmentJob?: BatchSegmentJob;
   }
   export interface DescribeCampaignRequest {
     /**
@@ -1510,6 +1855,18 @@ declare namespace Personalize {
      */
     recipe?: Recipe;
   }
+  export interface DescribeRecommenderRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the recommender to describe.
+     */
+    recommenderArn: Arn;
+  }
+  export interface DescribeRecommenderResponse {
+    /**
+     * The properties of the recommender.
+     */
+    recommender?: Recommender;
+  }
   export interface DescribeSchemaRequest {
     /**
      * The Amazon Resource Name (ARN) of the schema to retrieve.
@@ -1548,6 +1905,7 @@ declare namespace Personalize {
   }
   export type Description = string;
   export type DockerURI = string;
+  export type Domain = "ECOMMERCE"|"VIDEO_ON_DEMAND"|string;
   export interface EventTracker {
     /**
      * The name of the event tracker.
@@ -1662,7 +2020,7 @@ declare namespace Personalize {
      */
     failureReason?: FailureReason;
     /**
-     * Specifies the type of item interactions to filter out of recommendation results. The filter expression must follow specific format rules. For information about filter expression structure and syntax, see filter-expressions.
+     * Specifies the type of item interactions to filter out of recommendation results. The filter expression must follow specific format rules. For information about filter expression structure and syntax, see Filter expressions.
      */
     filterExpression?: FilterExpression;
     /**
@@ -1812,6 +2170,30 @@ declare namespace Personalize {
      * A list containing information on each job that is returned.
      */
     batchInferenceJobs?: BatchInferenceJobs;
+    /**
+     * The token to use to retrieve the next page of results. The value is null when there are no more results to return.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListBatchSegmentJobsRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the solution version that the batch segment jobs used to generate batch segments.
+     */
+    solutionVersionArn?: Arn;
+    /**
+     * The token to request the next page of results.
+     */
+    nextToken?: NextToken;
+    /**
+     * The maximum number of batch segment job results to return in each page. The default value is 100.
+     */
+    maxResults?: MaxResults;
+  }
+  export interface ListBatchSegmentJobsResponse {
+    /**
+     * A list containing information on each job that is returned.
+     */
+    batchSegmentJobs?: BatchSegmentJobs;
     /**
      * The token to use to retrieve the next page of results. The value is null when there are no more results to return.
      */
@@ -1994,6 +2376,10 @@ declare namespace Personalize {
      * The maximum number of recipes to return.
      */
     maxResults?: MaxResults;
+    /**
+     *  Filters returned recipes by domain for a Domain dataset group. Only recipes (Domain dataset group use cases) for this domain are included in the response. If you don't specify a domain, all recipes are returned. 
+     */
+    domain?: Domain;
   }
   export interface ListRecipesResponse {
     /**
@@ -2002,6 +2388,30 @@ declare namespace Personalize {
     recipes?: Recipes;
     /**
      * A token for getting the next set of recipes.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListRecommendersRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the Domain dataset group to list the recommenders for. When a Domain dataset group is not specified, all the recommenders associated with the account are listed.
+     */
+    datasetGroupArn?: Arn;
+    /**
+     * A token returned from the previous call to ListRecommenders for getting the next set of recommenders (if they exist).
+     */
+    nextToken?: NextToken;
+    /**
+     * The maximum number of recommenders to return.
+     */
+    maxResults?: MaxResults;
+  }
+  export interface ListRecommendersResponse {
+    /**
+     * A list of the recommenders.
+     */
+    recommenders?: Recommenders;
+    /**
+     * A token for getting the next set of recommenders (if they exist).
      */
     nextToken?: NextToken;
   }
@@ -2072,6 +2482,18 @@ declare namespace Personalize {
      * A token for getting the next set of solutions (if they exist).
      */
     nextToken?: NextToken;
+  }
+  export interface ListTagsForResourceRequest {
+    /**
+     * The resource's Amazon Resource Name.
+     */
+    resourceArn: Arn;
+  }
+  export interface ListTagsForResourceResponse {
+    /**
+     * The resource's tags.
+     */
+    tags?: Tags;
   }
   export type MaxResults = number;
   export type MetricName = string;
@@ -2156,9 +2578,122 @@ declare namespace Personalize {
      * The date and time (in Unix time) that the recipe was last updated.
      */
     lastUpdatedDateTime?: _Date;
+    /**
+     * The domain of the recipe (if the recipe is a Domain dataset group use case).
+     */
+    domain?: Domain;
   }
   export type RecipeType = string;
   export type Recipes = RecipeSummary[];
+  export interface Recommender {
+    /**
+     * The Amazon Resource Name (ARN) of the recommender.
+     */
+    recommenderArn?: Arn;
+    /**
+     * The Amazon Resource Name (ARN) of the Domain dataset group that contains the recommender.
+     */
+    datasetGroupArn?: Arn;
+    /**
+     * The name of the recommender.
+     */
+    name?: Name;
+    /**
+     * The Amazon Resource Name (ARN) of the recipe (Domain dataset group use case) that the recommender was created for. 
+     */
+    recipeArn?: Arn;
+    /**
+     * The configuration details of the recommender.
+     */
+    recommenderConfig?: RecommenderConfig;
+    /**
+     * The date and time (in Unix format) that the recommender was created.
+     */
+    creationDateTime?: _Date;
+    /**
+     * The date and time (in Unix format) that the recommender was last updated.
+     */
+    lastUpdatedDateTime?: _Date;
+    /**
+     * The status of the recommender. A recommender can be in one of the following states:   CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED   DELETE PENDING &gt; DELETE IN_PROGRESS  
+     */
+    status?: Status;
+    /**
+     * If a recommender fails, the reason behind the failure.
+     */
+    failureReason?: FailureReason;
+    /**
+     * Provides a summary of the latest updates to the recommender. 
+     */
+    latestRecommenderUpdate?: RecommenderUpdateSummary;
+  }
+  export interface RecommenderConfig {
+    /**
+     * Specifies the exploration configuration hyperparameters, including explorationWeight and explorationItemAgeCutOff, you want to use to configure the amount of item exploration Amazon Personalize uses when recommending items. Provide itemExplorationConfig data only if your recommenders generate personalized recommendations for a user (not popular items or similar items).
+     */
+    itemExplorationConfig?: HyperParameters;
+    /**
+     * Specifies the requested minimum provisioned recommendation requests per second that Amazon Personalize will support.
+     */
+    minRecommendationRequestsPerSecond?: TransactionsPerSecond;
+  }
+  export interface RecommenderSummary {
+    /**
+     * The name of the recommender.
+     */
+    name?: Name;
+    /**
+     * The Amazon Resource Name (ARN) of the recommender.
+     */
+    recommenderArn?: Arn;
+    /**
+     * The Amazon Resource Name (ARN) of the Domain dataset group that contains the recommender.
+     */
+    datasetGroupArn?: Arn;
+    /**
+     * The Amazon Resource Name (ARN) of the recipe (Domain dataset group use case) that the recommender was created for.
+     */
+    recipeArn?: Arn;
+    /**
+     * The configuration details of the recommender.
+     */
+    recommenderConfig?: RecommenderConfig;
+    /**
+     * The status of the recommender. A recommender can be in one of the following states:   CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED   DELETE PENDING &gt; DELETE IN_PROGRESS  
+     */
+    status?: Status;
+    /**
+     * The date and time (in Unix format) that the recommender was created.
+     */
+    creationDateTime?: _Date;
+    /**
+     * The date and time (in Unix format) that the recommender was last updated.
+     */
+    lastUpdatedDateTime?: _Date;
+  }
+  export interface RecommenderUpdateSummary {
+    /**
+     * The configuration details of the recommender update.
+     */
+    recommenderConfig?: RecommenderConfig;
+    /**
+     * The date and time (in Unix format) that the recommender update was created.
+     */
+    creationDateTime?: _Date;
+    /**
+     * The date and time (in Unix time) that the recommender update was last updated.
+     */
+    lastUpdatedDateTime?: _Date;
+    /**
+     * The status of the recommender update. A recommender can be in one of the following states:   CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED   DELETE PENDING &gt; DELETE IN_PROGRESS  
+     */
+    status?: Status;
+    /**
+     * If a recommender update fails, the reason behind the failure.
+     */
+    failureReason?: FailureReason;
+  }
+  export type Recommenders = RecommenderSummary[];
   export type ResourceConfig = {[key: string]: ParameterValue};
   export type RoleArn = string;
   export interface S3DataConfig {
@@ -2167,7 +2702,7 @@ declare namespace Personalize {
      */
     path: S3Location;
     /**
-     * The Amazon Resource Name (ARN) of the Key Management Service (KMS) key that Amazon Personalize uses to encrypt or decrypt the input and output files of a batch inference job.
+     * The Amazon Resource Name (ARN) of the Key Management Service (KMS) key that Amazon Personalize uses to encrypt or decrypt the input and output files.
      */
     kmsKeyArn?: KmsKeyArn;
   }
@@ -2361,13 +2896,63 @@ declare namespace Personalize {
   }
   export type SolutionVersions = SolutionVersionSummary[];
   export type Solutions = SolutionSummary[];
+  export interface StartRecommenderRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the recommender to start.
+     */
+    recommenderArn: Arn;
+  }
+  export interface StartRecommenderResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the recommender you started.
+     */
+    recommenderArn?: Arn;
+  }
   export type Status = string;
+  export interface StopRecommenderRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the recommender to stop.
+     */
+    recommenderArn: Arn;
+  }
+  export interface StopRecommenderResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the recommender you stopped.
+     */
+    recommenderArn?: Arn;
+  }
   export interface StopSolutionVersionCreationRequest {
     /**
      * The Amazon Resource Name (ARN) of the solution version you want to stop creating.
      */
     solutionVersionArn: Arn;
   }
+  export interface Tag {
+    /**
+     * One part of a key-value pair that makes up a tag. A key is a general label that acts like a category for more specific tag values.
+     */
+    tagKey: TagKey;
+    /**
+     * The optional part of a key-value pair that makes up a tag. A value acts as a descriptor within a tag category (key).
+     */
+    tagValue: TagValue;
+  }
+  export type TagKey = string;
+  export type TagKeys = TagKey[];
+  export interface TagResourceRequest {
+    /**
+     * The resource's Amazon Resource Name (ARN).
+     */
+    resourceArn: Arn;
+    /**
+     * Tags to apply to the resource. For more information see Tagging Personalize resources.
+     */
+    tags: Tags;
+  }
+  export interface TagResourceResponse {
+  }
+  export type TagValue = string;
+  export type Tags = Tag[];
   export type TrackingId = string;
   export type TrainingHours = number;
   export type TrainingInputMode = string;
@@ -2379,6 +2964,18 @@ declare namespace Personalize {
      * A list of the hyperparameter values of the best performing model.
      */
     algorithmHyperParameters?: HyperParameters;
+  }
+  export interface UntagResourceRequest {
+    /**
+     * The resource's Amazon Resource Name (ARN).
+     */
+    resourceArn: Arn;
+    /**
+     * Keys to remove from the resource's tags.
+     */
+    tagKeys: TagKeys;
+  }
+  export interface UntagResourceResponse {
   }
   export interface UpdateCampaignRequest {
     /**
@@ -2403,6 +3000,22 @@ declare namespace Personalize {
      * The same campaign ARN as given in the request.
      */
     campaignArn?: Arn;
+  }
+  export interface UpdateRecommenderRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the recommender to modify.
+     */
+    recommenderArn: Arn;
+    /**
+     * The configuration details of the recommender.
+     */
+    recommenderConfig: RecommenderConfig;
+  }
+  export interface UpdateRecommenderResponse {
+    /**
+     * The same recommender Amazon Resource Name (ARN) as given in the request.
+     */
+    recommenderArn?: Arn;
   }
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

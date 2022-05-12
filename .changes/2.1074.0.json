@@ -1,0 +1,22 @@
+[
+    {
+        "type": "bugfix",
+        "category": "ParamValidator",
+        "description": "Fix the validation error when assign non-object values to member with document trait"
+    },
+    {
+        "type": "feature",
+        "category": "Appflow",
+        "description": "Launching Amazon AppFlow SAP as a destination connector SDK."
+    },
+    {
+        "type": "feature",
+        "category": "Athena",
+        "description": "This release adds a subfield, ErrorType, to the AthenaError response object in the GetQueryExecution API when a query fails."
+    },
+    {
+        "type": "feature",
+        "category": "RDS",
+        "description": "Adds support for determining which Aurora PostgreSQL versions support Babelfish."
+    }
+]

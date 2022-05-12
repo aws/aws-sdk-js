@@ -61,7 +61,7 @@
           "shape": "ServiceQuotaExceededException"
         }
       ],
-      "documentation": "<p>Create an App Runner automatic scaling configuration resource. App Runner requires this resource when you create App Runner services that require non-default auto scaling settings. You can share an auto scaling configuration across multiple services.</p> <p>Create multiple revisions of a configuration by using the same <code>AutoScalingConfigurationName</code> and different <code>AutoScalingConfigurationRevision</code> values. When you create a service, you can set it to use the latest active revision of an auto scaling configuration or a specific revision.</p> <p>Configure a higher <code>MinSize</code> to increase the spread of your App Runner service over more Availability Zones in the Amazon Web Services Region. The tradeoff is a higher minimal cost.</p> <p>Configure a lower <code>MaxSize</code> to control your cost. The tradeoff is lower responsiveness during peak demand.</p>"
+      "documentation": "<p>Create an App Runner automatic scaling configuration resource. App Runner requires this resource when you create or update App Runner services and you require non-default auto scaling settings. You can share an auto scaling configuration across multiple services.</p> <p>Create multiple revisions of a configuration by calling this action multiple times using the same <code>AutoScalingConfigurationName</code>. The call returns incremental <code>AutoScalingConfigurationRevision</code> values. When you create a service and configure an auto scaling configuration resource, the service uses the latest active revision of the auto scaling configuration by default. You can optionally configure the service to use a specific revision.</p> <p>Configure a higher <code>MinSize</code> to increase the spread of your App Runner service over more Availability Zones in the Amazon Web Services Region. The tradeoff is a higher minimal cost.</p> <p>Configure a lower <code>MaxSize</code> to control your cost. The tradeoff is lower responsiveness during peak demand.</p>"
     },
     "CreateConnection": {
       "name": "CreateConnection",
@@ -88,6 +88,31 @@
       ],
       "documentation": "<p>Create an App Runner connection resource. App Runner requires a connection resource when you create App Runner services that access private repositories from certain third-party providers. You can share a connection across multiple services.</p> <p>A connection resource is needed to access GitHub repositories. GitHub requires a user interface approval process through the App Runner console before you can use the connection.</p>"
     },
+    "CreateObservabilityConfiguration": {
+      "name": "CreateObservabilityConfiguration",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateObservabilityConfigurationRequest"
+      },
+      "output": {
+        "shape": "CreateObservabilityConfigurationResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InternalServiceErrorException"
+        },
+        {
+          "shape": "ServiceQuotaExceededException"
+        }
+      ],
+      "documentation": "<p>Create an App Runner observability configuration resource. App Runner requires this resource when you create or update App Runner services and you want to enable non-default observability features. You can share an observability configuration across multiple services.</p> <p>Create multiple revisions of a configuration by calling this action multiple times using the same <code>ObservabilityConfigurationName</code>. The call returns incremental <code>ObservabilityConfigurationRevision</code> values. When you create a service and configure an observability configuration resource, the service uses the latest active revision of the observability configuration by default. You can optionally configure the service to use a specific revision.</p> <p>The observability configuration resource is designed to configure multiple features (currently one feature, tracing). This action takes optional parameters that describe the configuration of these features (currently one parameter, <code>TraceConfiguration</code>). If you don't specify a feature parameter, App Runner doesn't enable the feature.</p>"
+    },
     "CreateService": {
       "name": "CreateService",
       "http": {
@@ -112,6 +137,31 @@
         }
       ],
       "documentation": "<p>Create an App Runner service. After the service is created, the action also automatically starts a deployment.</p> <p>This is an asynchronous operation. On a successful call, you can use the returned <code>OperationId</code> and the <a href=\"https://docs.aws.amazon.com/apprunner/latest/api/API_ListOperations.html\">ListOperations</a> call to track the operation's progress.</p>"
+    },
+    "CreateVpcConnector": {
+      "name": "CreateVpcConnector",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateVpcConnectorRequest"
+      },
+      "output": {
+        "shape": "CreateVpcConnectorResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InternalServiceErrorException"
+        },
+        {
+          "shape": "ServiceQuotaExceededException"
+        }
+      ],
+      "documentation": "<p>Create an App Runner VPC connector resource. App Runner requires this resource when you want to associate your App Runner service to a custom Amazon Virtual Private Cloud (Amazon VPC).</p>"
     },
     "DeleteAutoScalingConfiguration": {
       "name": "DeleteAutoScalingConfiguration",
@@ -163,6 +213,31 @@
       ],
       "documentation": "<p>Delete an App Runner connection. You must first ensure that there are no running App Runner services that use this connection. If there are any, the <code>DeleteConnection</code> action fails.</p>"
     },
+    "DeleteObservabilityConfiguration": {
+      "name": "DeleteObservabilityConfiguration",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteObservabilityConfigurationRequest"
+      },
+      "output": {
+        "shape": "DeleteObservabilityConfigurationResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InternalServiceErrorException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p>Delete an App Runner observability configuration resource. You can delete a specific revision or the latest active revision. You can't delete a configuration that's used by one or more App Runner services.</p>"
+    },
     "DeleteService": {
       "name": "DeleteService",
       "http": {
@@ -190,6 +265,31 @@
         }
       ],
       "documentation": "<p>Delete an App Runner service.</p> <p>This is an asynchronous operation. On a successful call, you can use the returned <code>OperationId</code> and the <a>ListOperations</a> call to track the operation's progress.</p>"
+    },
+    "DeleteVpcConnector": {
+      "name": "DeleteVpcConnector",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteVpcConnectorRequest"
+      },
+      "output": {
+        "shape": "DeleteVpcConnectorResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InternalServiceErrorException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p>Delete an App Runner VPC connector resource. You can't delete a connector that's used by one or more App Runner services.</p>"
     },
     "DescribeAutoScalingConfiguration": {
       "name": "DescribeAutoScalingConfiguration",
@@ -241,6 +341,31 @@
       ],
       "documentation": "<p>Return a description of custom domain names that are associated with an App Runner service.</p>"
     },
+    "DescribeObservabilityConfiguration": {
+      "name": "DescribeObservabilityConfiguration",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeObservabilityConfigurationRequest"
+      },
+      "output": {
+        "shape": "DescribeObservabilityConfigurationResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InternalServiceErrorException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p>Return a full description of an App Runner observability configuration resource.</p>"
+    },
     "DescribeService": {
       "name": "DescribeService",
       "http": {
@@ -265,6 +390,31 @@
         }
       ],
       "documentation": "<p>Return a full description of an App Runner service.</p>"
+    },
+    "DescribeVpcConnector": {
+      "name": "DescribeVpcConnector",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeVpcConnectorRequest"
+      },
+      "output": {
+        "shape": "DescribeVpcConnectorResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InternalServiceErrorException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p>Return a description of an App Runner VPC connector resource.</p>"
     },
     "DisassociateCustomDomain": {
       "name": "DisassociateCustomDomain",
@@ -314,7 +464,7 @@
           "shape": "InternalServiceErrorException"
         }
       ],
-      "documentation": "<p>Returns a list of App Runner automatic scaling configurations in your Amazon Web Services account. You can query the revisions for a specific configuration name or the revisions for all configurations in your account. You can optionally query only the latest revision of each requested name.</p>"
+      "documentation": "<p>Returns a list of active App Runner automatic scaling configurations in your Amazon Web Services account. You can query the revisions for a specific configuration name or the revisions for all active configurations in your account. You can optionally query only the latest revision of each requested name.</p> <p>To retrieve a full description of a particular configuration revision, call and provide one of the ARNs returned by <code>ListAutoScalingConfigurations</code>.</p>"
     },
     "ListConnections": {
       "name": "ListConnections",
@@ -337,6 +487,28 @@
         }
       ],
       "documentation": "<p>Returns a list of App Runner connections that are associated with your Amazon Web Services account.</p>"
+    },
+    "ListObservabilityConfigurations": {
+      "name": "ListObservabilityConfigurations",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListObservabilityConfigurationsRequest"
+      },
+      "output": {
+        "shape": "ListObservabilityConfigurationsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InternalServiceErrorException"
+        }
+      ],
+      "documentation": "<p>Returns a list of active App Runner observability configurations in your Amazon Web Services account. You can query the revisions for a specific configuration name or the revisions for all active configurations in your account. You can optionally query only the latest revision of each requested name.</p> <p>To retrieve a full description of a particular configuration revision, call and provide one of the ARNs returned by <code>ListObservabilityConfigurations</code>.</p>"
     },
     "ListOperations": {
       "name": "ListOperations",
@@ -412,6 +584,28 @@
         }
       ],
       "documentation": "<p>List tags that are associated with for an App Runner resource. The response contains a list of tag key-value pairs.</p>"
+    },
+    "ListVpcConnectors": {
+      "name": "ListVpcConnectors",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListVpcConnectorsRequest"
+      },
+      "output": {
+        "shape": "ListVpcConnectorsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InternalServiceErrorException"
+        }
+      ],
+      "documentation": "<p>Returns a list of App Runner VPC connectors in your Amazon Web Services account.</p>"
     },
     "PauseService": {
       "name": "PauseService",
@@ -675,7 +869,7 @@
         },
         "Latest": {
           "shape": "Boolean",
-          "documentation": "<p>It's set to <code>true</code> for the configuration with the highest <code>Revision</code> among all configurations that share the same <code>Name</code>. It's set to <code>false</code> otherwise.</p>"
+          "documentation": "<p>It's set to <code>true</code> for the configuration with the highest <code>Revision</code> among all configurations that share the same <code>AutoScalingConfigurationName</code>. It's set to <code>false</code> otherwise.</p>"
         },
         "Status": {
           "shape": "AutoScalingConfigurationStatus",
@@ -702,7 +896,7 @@
           "documentation": "<p>The time when the auto scaling configuration was deleted. It's in Unix time stamp format.</p>"
         }
       },
-      "documentation": "<p>Describes an App Runner automatic scaling configuration resource. Multiple revisions of a configuration have the same <code>AutoScalingConfigurationName</code> and different <code>AutoScalingConfigurationRevision</code> values.</p> <p>A higher <code>MinSize</code> increases the spread of your App Runner service over more Availability Zones in the Amazon Web Services Region. The tradeoff is a higher minimal cost.</p> <p>A lower <code>MaxSize</code> controls your cost. The tradeoff is lower responsiveness during peak demand.</p>"
+      "documentation": "<p>Describes an App Runner automatic scaling configuration resource.</p> <p>A higher <code>MinSize</code> increases the spread of your App Runner service over more Availability Zones in the Amazon Web Services Region. The tradeoff is a higher minimal cost.</p> <p>A lower <code>MaxSize</code> controls your cost. The tradeoff is lower responsiveness during peak demand.</p> <p>Multiple revisions of a configuration might have the same <code>AutoScalingConfigurationName</code> and different <code>AutoScalingConfigurationRevision</code> values.</p>"
     },
     "AutoScalingConfigurationName": {
       "type": "string",
@@ -746,6 +940,7 @@
     },
     "BuildCommand": {
       "type": "string",
+      "pattern": "[^\\x0a\\x0d]+",
       "sensitive": true
     },
     "CertificateValidationRecord": {
@@ -946,7 +1141,7 @@
       "members": {
         "AutoScalingConfigurationName": {
           "shape": "AutoScalingConfigurationName",
-          "documentation": "<p>A name for the auto scaling configuration. When you use it for the first time in an Amazon Web Services Region, App Runner creates revision number <code>1</code> of this name. When you use the same name in subsequent calls, App Runner creates incremental revisions of the configuration.</p>"
+          "documentation": "<p>A name for the auto scaling configuration. When you use it for the first time in an Amazon Web Services Region, App Runner creates revision number <code>1</code> of this name. When you use the same name in subsequent calls, App Runner creates incremental revisions of the configuration.</p> <note> <p>The name <code>DefaultConfiguration</code> is reserved (it's the configuration that App Runner uses if you don't provide a custome one). You can't use it to create a new auto scaling configuration, and you can't create a revision of it.</p> <p>When you want to use your own auto scaling configuration for your App Runner service, <i>create a configuration with a different name</i>, and then provide it when you create or update your service.</p> </note>"
         },
         "MaxConcurrency": {
           "shape": "ASConfigMaxConcurrency",
@@ -1011,6 +1206,38 @@
         }
       }
     },
+    "CreateObservabilityConfigurationRequest": {
+      "type": "structure",
+      "required": [
+        "ObservabilityConfigurationName"
+      ],
+      "members": {
+        "ObservabilityConfigurationName": {
+          "shape": "ObservabilityConfigurationName",
+          "documentation": "<p>A name for the observability configuration. When you use it for the first time in an Amazon Web Services Region, App Runner creates revision number <code>1</code> of this name. When you use the same name in subsequent calls, App Runner creates incremental revisions of the configuration.</p> <note> <p>The name <code>DefaultConfiguration</code> is reserved. You can't use it to create a new observability configuration, and you can't create a revision of it.</p> <p>When you want to use your own observability configuration for your App Runner service, <i>create a configuration with a different name</i>, and then provide it when you create or update your service.</p> </note>"
+        },
+        "TraceConfiguration": {
+          "shape": "TraceConfiguration",
+          "documentation": "<p>The configuration of the tracing feature within this observability configuration. If you don't specify it, App Runner doesn't enable tracing.</p>"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>A list of metadata items that you can associate with your observability configuration resource. A tag is a key-value pair.</p>"
+        }
+      }
+    },
+    "CreateObservabilityConfigurationResponse": {
+      "type": "structure",
+      "required": [
+        "ObservabilityConfiguration"
+      ],
+      "members": {
+        "ObservabilityConfiguration": {
+          "shape": "ObservabilityConfiguration",
+          "documentation": "<p>A description of the App Runner observability configuration that's created by this request.</p>"
+        }
+      }
+    },
     "CreateServiceRequest": {
       "type": "structure",
       "required": [
@@ -1020,7 +1247,7 @@
       "members": {
         "ServiceName": {
           "shape": "ServiceName",
-          "documentation": "<p>A name for the new service. It must be unique across all the running App Runner services in your Amazon Web Services account in the Amazon Web Services Region.</p>"
+          "documentation": "<p>A name for the App Runner service. It must be unique across all the running App Runner services in your Amazon Web Services account in the Amazon Web Services Region.</p>"
         },
         "SourceConfiguration": {
           "shape": "SourceConfiguration",
@@ -1028,23 +1255,31 @@
         },
         "InstanceConfiguration": {
           "shape": "InstanceConfiguration",
-          "documentation": "<p>The runtime configuration of instances (scaling units) of the App Runner service.</p>"
+          "documentation": "<p>The runtime configuration of instances (scaling units) of your service.</p>"
         },
         "Tags": {
           "shape": "TagList",
-          "documentation": "<p>An optional list of metadata items that you can associate with your service resource. A tag is a key-value pair.</p>"
+          "documentation": "<p>An optional list of metadata items that you can associate with the App Runner service resource. A tag is a key-value pair.</p>"
         },
         "EncryptionConfiguration": {
           "shape": "EncryptionConfiguration",
-          "documentation": "<p>An optional custom encryption key that App Runner uses to encrypt the copy of your source repository that it maintains and your service logs. By default, App Runner uses an Amazon Web Services managed CMK.</p>"
+          "documentation": "<p>An optional custom encryption key that App Runner uses to encrypt the copy of your source repository that it maintains and your service logs. By default, App Runner uses an Amazon Web Services managed key.</p>"
         },
         "HealthCheckConfiguration": {
           "shape": "HealthCheckConfiguration",
-          "documentation": "<p>The settings for the health check that App Runner performs to monitor the health of your service.</p>"
+          "documentation": "<p>The settings for the health check that App Runner performs to monitor the health of the App Runner service.</p>"
         },
         "AutoScalingConfigurationArn": {
           "shape": "AppRunnerResourceArn",
-          "documentation": "<p>The Amazon Resource Name (ARN) of an App Runner automatic scaling configuration resource that you want to associate with your service. If not provided, App Runner associates the latest revision of a default auto scaling configuration.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of an App Runner automatic scaling configuration resource that you want to associate with your service. If not provided, App Runner associates the latest revision of a default auto scaling configuration.</p> <p>Specify an ARN with a name and a revision number to associate that revision. For example: <code>arn:aws:apprunner:us-east-1:123456789012:autoscalingconfiguration/high-availability/3</code> </p> <p>Specify just the name to associate the latest revision. For example: <code>arn:aws:apprunner:us-east-1:123456789012:autoscalingconfiguration/high-availability</code> </p>"
+        },
+        "NetworkConfiguration": {
+          "shape": "NetworkConfiguration",
+          "documentation": "<p>Configuration settings related to network traffic of the web application that the App Runner service runs.</p>"
+        },
+        "ObservabilityConfiguration": {
+          "shape": "ServiceObservabilityConfiguration",
+          "documentation": "<p>The observability configuration of your service.</p>"
         }
       }
     },
@@ -1062,6 +1297,43 @@
         "OperationId": {
           "shape": "UUID",
           "documentation": "<p>The unique ID of the asynchronous operation that this request started. You can use it combined with the <a href=\"https://docs.aws.amazon.com/apprunner/latest/api/API_ListOperations.html\">ListOperations</a> call to track the operation's progress.</p>"
+        }
+      }
+    },
+    "CreateVpcConnectorRequest": {
+      "type": "structure",
+      "required": [
+        "VpcConnectorName",
+        "Subnets"
+      ],
+      "members": {
+        "VpcConnectorName": {
+          "shape": "VpcConnectorName",
+          "documentation": "<p>A name for the VPC connector.</p>"
+        },
+        "Subnets": {
+          "shape": "StringList",
+          "documentation": "<p>A list of IDs of subnets that App Runner should use when it associates your service with a custom Amazon VPC. Specify IDs of subnets of a single Amazon VPC. App Runner determines the Amazon VPC from the subnets you specify.</p>"
+        },
+        "SecurityGroups": {
+          "shape": "StringList",
+          "documentation": "<p>A list of IDs of security groups that App Runner should use for access to Amazon Web Services resources under the specified subnets. If not specified, App Runner uses the default security group of the Amazon VPC. The default security group allows all outbound traffic.</p>"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>A list of metadata items that you can associate with your VPC connector resource. A tag is a key-value pair.</p>"
+        }
+      }
+    },
+    "CreateVpcConnectorResponse": {
+      "type": "structure",
+      "required": [
+        "VpcConnector"
+      ],
+      "members": {
+        "VpcConnector": {
+          "shape": "VpcConnector",
+          "documentation": "<p>A description of the App Runner VPC connector that's created by this request.</p>"
         }
       }
     },
@@ -1155,6 +1427,30 @@
         }
       }
     },
+    "DeleteObservabilityConfigurationRequest": {
+      "type": "structure",
+      "required": [
+        "ObservabilityConfigurationArn"
+      ],
+      "members": {
+        "ObservabilityConfigurationArn": {
+          "shape": "AppRunnerResourceArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the App Runner observability configuration that you want to delete.</p> <p>The ARN can be a full observability configuration ARN, or a partial ARN ending with either <code>.../<i>name</i> </code> or <code>.../<i>name</i>/<i>revision</i> </code>. If a revision isn't specified, the latest active revision is deleted.</p>"
+        }
+      }
+    },
+    "DeleteObservabilityConfigurationResponse": {
+      "type": "structure",
+      "required": [
+        "ObservabilityConfiguration"
+      ],
+      "members": {
+        "ObservabilityConfiguration": {
+          "shape": "ObservabilityConfiguration",
+          "documentation": "<p>A description of the App Runner observability configuration that this request just deleted.</p>"
+        }
+      }
+    },
     "DeleteServiceRequest": {
       "type": "structure",
       "required": [
@@ -1181,6 +1477,30 @@
         "OperationId": {
           "shape": "UUID",
           "documentation": "<p>The unique ID of the asynchronous operation that this request started. You can use it combined with the <a>ListOperations</a> call to track the operation's progress.</p>"
+        }
+      }
+    },
+    "DeleteVpcConnectorRequest": {
+      "type": "structure",
+      "required": [
+        "VpcConnectorArn"
+      ],
+      "members": {
+        "VpcConnectorArn": {
+          "shape": "AppRunnerResourceArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the App Runner VPC connector that you want to delete.</p> <p>The ARN must be a full VPC connector ARN.</p>"
+        }
+      }
+    },
+    "DeleteVpcConnectorResponse": {
+      "type": "structure",
+      "required": [
+        "VpcConnector"
+      ],
+      "members": {
+        "VpcConnector": {
+          "shape": "VpcConnector",
+          "documentation": "<p>A description of the App Runner VPC connector that this request just deleted.</p>"
         }
       }
     },
@@ -1259,6 +1579,30 @@
         }
       }
     },
+    "DescribeObservabilityConfigurationRequest": {
+      "type": "structure",
+      "required": [
+        "ObservabilityConfigurationArn"
+      ],
+      "members": {
+        "ObservabilityConfigurationArn": {
+          "shape": "AppRunnerResourceArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the App Runner observability configuration that you want a description for.</p> <p>The ARN can be a full observability configuration ARN, or a partial ARN ending with either <code>.../<i>name</i> </code> or <code>.../<i>name</i>/<i>revision</i> </code>. If a revision isn't specified, the latest active revision is described.</p>"
+        }
+      }
+    },
+    "DescribeObservabilityConfigurationResponse": {
+      "type": "structure",
+      "required": [
+        "ObservabilityConfiguration"
+      ],
+      "members": {
+        "ObservabilityConfiguration": {
+          "shape": "ObservabilityConfiguration",
+          "documentation": "<p>A full description of the App Runner observability configuration that you specified in this request.</p>"
+        }
+      }
+    },
     "DescribeServiceRequest": {
       "type": "structure",
       "required": [
@@ -1280,6 +1624,30 @@
         "Service": {
           "shape": "Service",
           "documentation": "<p>A full description of the App Runner service that you specified in this request.</p>"
+        }
+      }
+    },
+    "DescribeVpcConnectorRequest": {
+      "type": "structure",
+      "required": [
+        "VpcConnectorArn"
+      ],
+      "members": {
+        "VpcConnectorArn": {
+          "shape": "AppRunnerResourceArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the App Runner VPC connector that you want a description for.</p> <p>The ARN must be a full VPC connector ARN.</p>"
+        }
+      }
+    },
+    "DescribeVpcConnectorResponse": {
+      "type": "structure",
+      "required": [
+        "VpcConnector"
+      ],
+      "members": {
+        "VpcConnector": {
+          "shape": "VpcConnector",
+          "documentation": "<p>A description of the App Runner VPC connector that you specified in this request.</p>"
         }
       }
     },
@@ -1325,7 +1693,29 @@
     "DomainName": {
       "type": "string",
       "max": 255,
-      "min": 1
+      "min": 1,
+      "pattern": "[A-Za-z0-9*.-]{1,255}"
+    },
+    "EgressConfiguration": {
+      "type": "structure",
+      "members": {
+        "EgressType": {
+          "shape": "EgressType",
+          "documentation": "<p>The type of egress configuration.</p> <p>Set to <code>DEFAULT</code> for access to resources hosted on public networks.</p> <p>Set to <code>VPC</code> to associate your service to a custom VPC specified by <code>VpcConnectorArn</code>.</p>"
+        },
+        "VpcConnectorArn": {
+          "shape": "AppRunnerResourceArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the App Runner VPC connector that you want to associate with your App Runner service. Only valid when <code>EgressType = VPC</code>.</p>"
+        }
+      },
+      "documentation": "<p>Describes configuration settings related to outbound network traffic of an App Runner service.</p>"
+    },
+    "EgressType": {
+      "type": "string",
+      "enum": [
+        "DEFAULT",
+        "VPC"
+      ]
     },
     "EncryptionConfiguration": {
       "type": "structure",
@@ -1409,7 +1799,7 @@
           "documentation": "<p>Environment variables that are available to your running App Runner service. An array of key-value pairs. Keys with a prefix of <code>AWSAPPRUNNER</code> are reserved for system use and aren't valid.</p>"
         },
         "StartCommand": {
-          "shape": "String",
+          "shape": "StartCommand",
           "documentation": "<p>An optional command that App Runner runs to start the application in the source image. If specified, this command overrides the Docker image’s default start command.</p>"
         },
         "Port": {
@@ -1486,11 +1876,11 @@
       "members": {
         "AutoScalingConfigurationName": {
           "shape": "AutoScalingConfigurationName",
-          "documentation": "<p>The name of the App Runner auto scaling configuration that you want to list. If specified, App Runner lists revisions that share this name. If not specified, App Runner returns revisions of all configurations.</p>"
+          "documentation": "<p>The name of the App Runner auto scaling configuration that you want to list. If specified, App Runner lists revisions that share this name. If not specified, App Runner returns revisions of all active configurations.</p>"
         },
         "LatestOnly": {
           "shape": "Boolean",
-          "documentation": "<p>Set to <code>true</code> to list only the latest revision for each requested configuration name.</p> <p>Keep as <code>false</code> to list all revisions for each requested configuration name.</p> <p>Default: <code>false</code> </p>"
+          "documentation": "<p>Set to <code>true</code> to list only the latest revision for each requested configuration name.</p> <p>Set to <code>false</code> to list all revisions for each requested configuration name.</p> <p>Default: <code>true</code> </p>"
         },
         "MaxResults": {
           "shape": "MaxResults",
@@ -1548,6 +1938,43 @@
         "NextToken": {
           "shape": "NextToken",
           "documentation": "<p>The token that you can pass in a subsequent request to get the next result page. Returned in a paginated request.</p>"
+        }
+      }
+    },
+    "ListObservabilityConfigurationsRequest": {
+      "type": "structure",
+      "members": {
+        "ObservabilityConfigurationName": {
+          "shape": "ObservabilityConfigurationName",
+          "documentation": "<p>The name of the App Runner observability configuration that you want to list. If specified, App Runner lists revisions that share this name. If not specified, App Runner returns revisions of all active configurations.</p>"
+        },
+        "LatestOnly": {
+          "shape": "Boolean",
+          "documentation": "<p>Set to <code>true</code> to list only the latest revision for each requested configuration name.</p> <p>Set to <code>false</code> to list all revisions for each requested configuration name.</p> <p>Default: <code>true</code> </p>"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of results to include in each response (result page). It's used for a paginated request.</p> <p>If you don't specify <code>MaxResults</code>, the request retrieves all available results in a single response.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>A token from a previous result page. It's used for a paginated request. The request retrieves the next result page. All other parameter values must be identical to the ones that are specified in the initial request.</p> <p>If you don't specify <code>NextToken</code>, the request retrieves the first result page.</p>"
+        }
+      }
+    },
+    "ListObservabilityConfigurationsResponse": {
+      "type": "structure",
+      "required": [
+        "ObservabilityConfigurationSummaryList"
+      ],
+      "members": {
+        "ObservabilityConfigurationSummaryList": {
+          "shape": "ObservabilityConfigurationSummaryList",
+          "documentation": "<p>A list of summary information records for observability configurations. In a paginated request, the request returns up to <code>MaxResults</code> records for each call.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token that you can pass in a subsequent request to get the next result page. It's returned in a paginated request.</p>"
         }
       }
     },
@@ -1639,6 +2066,35 @@
         }
       }
     },
+    "ListVpcConnectorsRequest": {
+      "type": "structure",
+      "members": {
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of results to include in each response (result page). It's used for a paginated request.</p> <p>If you don't specify <code>MaxResults</code>, the request retrieves all available results in a single response.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>A token from a previous result page. It's used for a paginated request. The request retrieves the next result page. All other parameter values must be identical to the ones that are specified in the initial request.</p> <p>If you don't specify <code>NextToken</code>, the request retrieves the first result page.</p>"
+        }
+      }
+    },
+    "ListVpcConnectorsResponse": {
+      "type": "structure",
+      "required": [
+        "VpcConnectors"
+      ],
+      "members": {
+        "VpcConnectors": {
+          "shape": "VpcConnectors",
+          "documentation": "<p>A list of information records for VPC connectors. In a paginated request, the request returns up to <code>MaxResults</code> records for each call.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token that you can pass in a subsequent request to get the next result page. It's returned in a paginated request.</p>"
+        }
+      }
+    },
     "MaxResults": {
       "type": "integer",
       "max": 100,
@@ -1650,6 +2106,16 @@
       "min": 4,
       "pattern": "2048|3072|4096|(2|3|4) GB"
     },
+    "NetworkConfiguration": {
+      "type": "structure",
+      "members": {
+        "EgressConfiguration": {
+          "shape": "EgressConfiguration",
+          "documentation": "<p>Network configuration settings for outbound message traffic.</p>"
+        }
+      },
+      "documentation": "<p>Describes configuration settings related to network traffic of an App Runner service. Consists of embedded objects for each configurable network feature.</p>"
+    },
     "NextToken": {
       "type": "string",
       "max": 1024,
@@ -1658,6 +2124,81 @@
     },
     "NullableBoolean": {
       "type": "boolean"
+    },
+    "ObservabilityConfiguration": {
+      "type": "structure",
+      "members": {
+        "ObservabilityConfigurationArn": {
+          "shape": "AppRunnerResourceArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of this observability configuration.</p>"
+        },
+        "ObservabilityConfigurationName": {
+          "shape": "ObservabilityConfigurationName",
+          "documentation": "<p>The customer-provided observability configuration name. It can be used in multiple revisions of a configuration.</p>"
+        },
+        "TraceConfiguration": {
+          "shape": "TraceConfiguration",
+          "documentation": "<p>The configuration of the tracing feature within this observability configuration. If not specified, tracing isn't enabled.</p>"
+        },
+        "ObservabilityConfigurationRevision": {
+          "shape": "Integer",
+          "documentation": "<p>The revision of this observability configuration. It's unique among all the active configurations (<code>\"Status\": \"ACTIVE\"</code>) that share the same <code>ObservabilityConfigurationName</code>.</p>"
+        },
+        "Latest": {
+          "shape": "Boolean",
+          "documentation": "<p>It's set to <code>true</code> for the configuration with the highest <code>Revision</code> among all configurations that share the same <code>ObservabilityConfigurationName</code>. It's set to <code>false</code> otherwise.</p>"
+        },
+        "Status": {
+          "shape": "ObservabilityConfigurationStatus",
+          "documentation": "<p>The current state of the observability configuration. If the status of a configuration revision is <code>INACTIVE</code>, it was deleted and can't be used. Inactive configuration revisions are permanently removed some time after they are deleted.</p>"
+        },
+        "CreatedAt": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time when the observability configuration was created. It's in Unix time stamp format.</p>"
+        },
+        "DeletedAt": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time when the observability configuration was deleted. It's in Unix time stamp format.</p>"
+        }
+      },
+      "documentation": "<p>Describes an App Runner observability configuration resource. Multiple revisions of a configuration have the same <code>ObservabilityConfigurationName</code> and different <code>ObservabilityConfigurationRevision</code> values.</p> <p>The resource is designed to configure multiple features (currently one feature, tracing). This type contains optional members that describe the configuration of these features (currently one member, <code>TraceConfiguration</code>). If a feature member isn't specified, the feature isn't enabled.</p>"
+    },
+    "ObservabilityConfigurationName": {
+      "type": "string",
+      "max": 32,
+      "min": 4,
+      "pattern": "[A-Za-z0-9][A-Za-z0-9\\-_]{3,31}"
+    },
+    "ObservabilityConfigurationStatus": {
+      "type": "string",
+      "enum": [
+        "ACTIVE",
+        "INACTIVE"
+      ]
+    },
+    "ObservabilityConfigurationSummary": {
+      "type": "structure",
+      "members": {
+        "ObservabilityConfigurationArn": {
+          "shape": "AppRunnerResourceArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of this observability configuration.</p>"
+        },
+        "ObservabilityConfigurationName": {
+          "shape": "ObservabilityConfigurationName",
+          "documentation": "<p>The customer-provided observability configuration name. It can be used in multiple revisions of a configuration.</p>"
+        },
+        "ObservabilityConfigurationRevision": {
+          "shape": "Integer",
+          "documentation": "<p>The revision of this observability configuration. It's unique among all the active configurations (<code>\"Status\": \"ACTIVE\"</code>) that share the same <code>ObservabilityConfigurationName</code>.</p>"
+        }
+      },
+      "documentation": "<p>Provides summary information about an App Runner observability configuration resource.</p> <p>This type contains limited information about an observability configuration. It includes only identification information, without configuration details. It's returned by the <a>ListObservabilityConfigurations</a> action. Complete configuration information is returned by the <a>CreateObservabilityConfiguration</a>, <a>DescribeObservabilityConfiguration</a>, and <a>DeleteObservabilityConfiguration</a> actions using the <a>ObservabilityConfiguration</a> type.</p>"
+    },
+    "ObservabilityConfigurationSummaryList": {
+      "type": "list",
+      "member": {
+        "shape": "ObservabilityConfigurationSummary"
+      }
     },
     "OperationStatus": {
       "type": "string",
@@ -1793,7 +2334,10 @@
       "type": "string",
       "enum": [
         "PYTHON_3",
-        "NODEJS_12"
+        "NODEJS_12",
+        "NODEJS_14",
+        "CORRETTO_8",
+        "CORRETTO_11"
       ]
     },
     "RuntimeEnvironmentVariables": {
@@ -1807,10 +2351,16 @@
     },
     "RuntimeEnvironmentVariablesKey": {
       "type": "string",
+      "max": 51200,
+      "min": 1,
+      "pattern": ".*",
       "sensitive": true
     },
     "RuntimeEnvironmentVariablesValue": {
       "type": "string",
+      "max": 51200,
+      "min": 0,
+      "pattern": ".*",
       "sensitive": true
     },
     "Service": {
@@ -1825,7 +2375,8 @@
         "Status",
         "SourceConfiguration",
         "InstanceConfiguration",
-        "AutoScalingConfigurationSummary"
+        "AutoScalingConfigurationSummary",
+        "NetworkConfiguration"
       ],
       "members": {
         "ServiceName": {
@@ -1870,7 +2421,7 @@
         },
         "EncryptionConfiguration": {
           "shape": "EncryptionConfiguration",
-          "documentation": "<p>The encryption key that App Runner uses to encrypt the service logs and the copy of the source repository that App Runner maintains for the service. It can be either a customer-provided encryption key or an Amazon Web Services managed CMK.</p>"
+          "documentation": "<p>The encryption key that App Runner uses to encrypt the service logs and the copy of the source repository that App Runner maintains for the service. It can be either a customer-provided encryption key or an Amazon Web Services managed key.</p>"
         },
         "HealthCheckConfiguration": {
           "shape": "HealthCheckConfiguration",
@@ -1879,6 +2430,14 @@
         "AutoScalingConfigurationSummary": {
           "shape": "AutoScalingConfigurationSummary",
           "documentation": "<p>Summary information for the App Runner automatic scaling configuration resource that's associated with this service.</p>"
+        },
+        "NetworkConfiguration": {
+          "shape": "NetworkConfiguration",
+          "documentation": "<p>Configuration settings related to network traffic of the web application that this service runs.</p>"
+        },
+        "ObservabilityConfiguration": {
+          "shape": "ServiceObservabilityConfiguration",
+          "documentation": "<p>The observability configuration of this service.</p>"
         }
       },
       "documentation": "<p>Describes an App Runner service. It can describe a service in any state, including deleted services.</p> <p>This type contains the full information about a service, including configuration details. It's returned by the <a href=\"https://docs.aws.amazon.com/apprunner/latest/api/API_CreateService.html\">CreateService</a>, <a href=\"https://docs.aws.amazon.com/apprunner/latest/api/API_DescribeService.html\">DescribeService</a>, and <a href=\"https://docs.aws.amazon.com/apprunner/latest/api/API_DeleteService.html\">DeleteService</a> actions. A subset of this information is returned by the <a href=\"https://docs.aws.amazon.com/apprunner/latest/api/API_ListServices.html\">ListServices</a> action using the <a href=\"https://docs.aws.amazon.com/apprunner/latest/api/API_ServiceSummary.html\">ServiceSummary</a> type.</p>"
@@ -1899,6 +2458,23 @@
       "max": 40,
       "min": 4,
       "pattern": "[A-Za-z0-9][A-Za-z0-9-_]{3,39}"
+    },
+    "ServiceObservabilityConfiguration": {
+      "type": "structure",
+      "required": [
+        "ObservabilityEnabled"
+      ],
+      "members": {
+        "ObservabilityEnabled": {
+          "shape": "Boolean",
+          "documentation": "<p>When <code>true</code>, an observability configuration resource is associated with the service, and an <code>ObservabilityConfigurationArn</code> is specified.</p>"
+        },
+        "ObservabilityConfigurationArn": {
+          "shape": "AppRunnerResourceArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the observability configuration that is associated with the service. Specified only when <code>ObservabilityEnabled</code> is <code>true</code>.</p> <p>Specify an ARN with a name and a revision number to associate that revision. For example: <code>arn:aws:apprunner:us-east-1:123456789012:observabilityconfiguration/xray-tracing/3</code> </p> <p>Specify just the name to associate the latest revision. For example: <code>arn:aws:apprunner:us-east-1:123456789012:observabilityconfiguration/xray-tracing</code> </p>"
+        }
+      },
+      "documentation": "<p>Describes the observability configuration of an App Runner service. These are additional observability features, like tracing, that you choose to enable. They're configured in a separate resource that you associate with your service.</p>"
     },
     "ServiceStatus": {
       "type": "string",
@@ -1999,6 +2575,7 @@
     },
     "StartCommand": {
       "type": "string",
+      "pattern": "[^\\x0a\\x0d]+",
       "sensitive": true
     },
     "StartDeploymentRequest": {
@@ -2030,6 +2607,12 @@
       "max": 51200,
       "min": 0,
       "pattern": ".*"
+    },
+    "StringList": {
+      "type": "list",
+      "member": {
+        "shape": "String"
+      }
     },
     "Tag": {
       "type": "structure",
@@ -2093,6 +2676,25 @@
     "Timestamp": {
       "type": "timestamp"
     },
+    "TraceConfiguration": {
+      "type": "structure",
+      "required": [
+        "Vendor"
+      ],
+      "members": {
+        "Vendor": {
+          "shape": "TracingVendor",
+          "documentation": "<p>The implementation provider chosen for tracing App Runner services.</p>"
+        }
+      },
+      "documentation": "<p>Describes the configuration of the tracing feature within an App Runner observability configuration.</p>"
+    },
+    "TracingVendor": {
+      "type": "string",
+      "enum": [
+        "AWSXRAY"
+      ]
+    },
     "UUID": {
       "type": "string",
       "max": 36,
@@ -2136,15 +2738,23 @@
         },
         "InstanceConfiguration": {
           "shape": "InstanceConfiguration",
-          "documentation": "<p>The runtime configuration to apply to instances (scaling units) of the App Runner service.</p>"
+          "documentation": "<p>The runtime configuration to apply to instances (scaling units) of your service.</p>"
         },
         "AutoScalingConfigurationArn": {
           "shape": "AppRunnerResourceArn",
-          "documentation": "<p>The Amazon Resource Name (ARN) of an App Runner automatic scaling configuration resource that you want to associate with your service.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of an App Runner automatic scaling configuration resource that you want to associate with the App Runner service.</p>"
         },
         "HealthCheckConfiguration": {
           "shape": "HealthCheckConfiguration",
-          "documentation": "<p>The settings for the health check that App Runner performs to monitor the health of your service.</p>"
+          "documentation": "<p>The settings for the health check that App Runner performs to monitor the health of the App Runner service.</p>"
+        },
+        "NetworkConfiguration": {
+          "shape": "NetworkConfiguration",
+          "documentation": "<p>Configuration settings related to network traffic of the web application that the App Runner service runs.</p>"
+        },
+        "ObservabilityConfiguration": {
+          "shape": "ServiceObservabilityConfiguration",
+          "documentation": "<p>The observability configuration of your service.</p>"
         }
       }
     },
@@ -2163,6 +2773,63 @@
           "shape": "UUID",
           "documentation": "<p>The unique ID of the asynchronous operation that this request started. You can use it combined with the <a>ListOperations</a> call to track the operation's progress.</p>"
         }
+      }
+    },
+    "VpcConnector": {
+      "type": "structure",
+      "members": {
+        "VpcConnectorName": {
+          "shape": "VpcConnectorName",
+          "documentation": "<p>The customer-provided VPC connector name.</p>"
+        },
+        "VpcConnectorArn": {
+          "shape": "AppRunnerResourceArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of this VPC connector.</p>"
+        },
+        "VpcConnectorRevision": {
+          "shape": "Integer",
+          "documentation": "<p>The revision of this VPC connector. It's unique among all the active connectors (<code>\"Status\": \"ACTIVE\"</code>) that share the same <code>Name</code>.</p> <note> <p>At this time, App Runner supports only one revision per name.</p> </note>"
+        },
+        "Subnets": {
+          "shape": "StringList",
+          "documentation": "<p>A list of IDs of subnets that App Runner uses for your service. All IDs are of subnets of a single Amazon VPC.</p>"
+        },
+        "SecurityGroups": {
+          "shape": "StringList",
+          "documentation": "<p>A list of IDs of security groups that App Runner uses for access to Amazon Web Services resources under the specified subnets. If not specified, App Runner uses the default security group of the Amazon VPC. The default security group allows all outbound traffic.</p>"
+        },
+        "Status": {
+          "shape": "VpcConnectorStatus",
+          "documentation": "<p>The current state of the VPC connector. If the status of a connector revision is <code>INACTIVE</code>, it was deleted and can't be used. Inactive connector revisions are permanently removed some time after they are deleted.</p>"
+        },
+        "CreatedAt": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time when the VPC connector was created. It's in Unix time stamp format.</p>"
+        },
+        "DeletedAt": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time when the VPC connector was deleted. It's in Unix time stamp format.</p>"
+        }
+      },
+      "documentation": "<p>Describes an App Runner VPC connector resource. A VPC connector describes the Amazon Virtual Private Cloud (Amazon VPC) that an App Runner service is associated with, and the subnets and security group that are used.</p> <p>Multiple revisions of a connector might have the same <code>Name</code> and different <code>Revision</code> values.</p> <note> <p>At this time, App Runner supports only one revision per name.</p> </note>"
+    },
+    "VpcConnectorName": {
+      "type": "string",
+      "max": 40,
+      "min": 4,
+      "pattern": "[A-Za-z0-9][A-Za-z0-9\\-_]{3,39}"
+    },
+    "VpcConnectorStatus": {
+      "type": "string",
+      "enum": [
+        "ACTIVE",
+        "INACTIVE"
+      ]
+    },
+    "VpcConnectors": {
+      "type": "list",
+      "member": {
+        "shape": "VpcConnector"
       }
     }
   },

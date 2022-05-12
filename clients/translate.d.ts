@@ -12,11 +12,11 @@ declare class Translate extends Service {
   constructor(options?: Translate.Types.ClientConfiguration)
   config: Config & Translate.Types.ClientConfiguration;
   /**
-   * Creates a parallel data resource in Amazon Translate by importing an input file from Amazon S3. Parallel data files contain examples of source phrases and their translations from your translation memory. By adding parallel data, you can influence the style, tone, and word choice in your translation output.
+   * Creates a parallel data resource in Amazon Translate by importing an input file from Amazon S3. Parallel data files contain examples that show how you want segments of text to be translated. By adding parallel data, you can influence the style, tone, and word choice in your translation output.
    */
   createParallelData(params: Translate.Types.CreateParallelDataRequest, callback?: (err: AWSError, data: Translate.Types.CreateParallelDataResponse) => void): Request<Translate.Types.CreateParallelDataResponse, AWSError>;
   /**
-   * Creates a parallel data resource in Amazon Translate by importing an input file from Amazon S3. Parallel data files contain examples of source phrases and their translations from your translation memory. By adding parallel data, you can influence the style, tone, and word choice in your translation output.
+   * Creates a parallel data resource in Amazon Translate by importing an input file from Amazon S3. Parallel data files contain examples that show how you want segments of text to be translated. By adding parallel data, you can influence the style, tone, and word choice in your translation output.
    */
   createParallelData(callback?: (err: AWSError, data: Translate.Types.CreateParallelDataResponse) => void): Request<Translate.Types.CreateParallelDataResponse, AWSError>;
   /**
@@ -36,11 +36,11 @@ declare class Translate extends Service {
    */
   deleteTerminology(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Gets the properties associated with an asycnhronous batch translation job including name, ID, status, source and target languages, input/output S3 buckets, and so on.
+   * Gets the properties associated with an asynchronous batch translation job including name, ID, status, source and target languages, input/output S3 buckets, and so on.
    */
   describeTextTranslationJob(params: Translate.Types.DescribeTextTranslationJobRequest, callback?: (err: AWSError, data: Translate.Types.DescribeTextTranslationJobResponse) => void): Request<Translate.Types.DescribeTextTranslationJobResponse, AWSError>;
   /**
-   * Gets the properties associated with an asycnhronous batch translation job including name, ID, status, source and target languages, input/output S3 buckets, and so on.
+   * Gets the properties associated with an asynchronous batch translation job including name, ID, status, source and target languages, input/output S3 buckets, and so on.
    */
   describeTextTranslationJob(callback?: (err: AWSError, data: Translate.Types.DescribeTextTranslationJobResponse) => void): Request<Translate.Types.DescribeTextTranslationJobResponse, AWSError>;
   /**
@@ -203,18 +203,20 @@ declare namespace Translate {
     TextTranslationJobProperties?: TextTranslationJobProperties;
   }
   export type Description = string;
+  export type Directionality = "UNI"|"MULTI"|string;
   export interface EncryptionKey {
     /**
-     * The type of encryption key used by Amazon Translate to encrypt custom terminologies.
+     * The type of encryption key used by Amazon Translate to encrypt this object.
      */
     Type: EncryptionKeyType;
     /**
-     * The Amazon Resource Name (ARN) of the encryption key being used to encrypt the custom terminology.
+     * The Amazon Resource Name (ARN) of the encryption key being used to encrypt this object.
      */
     Id: EncryptionKeyID;
   }
   export type EncryptionKeyID = string;
   export type EncryptionKeyType = "KMS"|string;
+  export type Formality = "FORMAL"|"INFORMAL"|string;
   export interface GetParallelDataRequest {
     /**
      * The name of the parallel data resource that is being retrieved.
@@ -227,7 +229,7 @@ declare namespace Translate {
      */
     ParallelDataProperties?: ParallelDataProperties;
     /**
-     * The location of the most recent parallel data input file that was successfully imported into Amazon Translate. The location is returned as a presigned URL that has a 30 minute expiration.
+     * The Amazon S3 location of the most recent parallel data input file that was successfully imported into Amazon Translate. The location is returned as a presigned URL that has a 30 minute expiration.  Amazon Translate doesn't scan all input files for the risk of CSV injection attacks.  CSV injection occurs when a .csv or .tsv file is altered so that a record contains malicious code. The record begins with a special character, such as =, +, -, or @. When the file is opened in a spreadsheet program, the program might interpret the record as a formula and run the code within it. Before you download an input file from Amazon S3, ensure that you recognize the file and trust its creator. 
      */
     DataLocation?: ParallelDataDataLocation;
     /**
@@ -245,9 +247,9 @@ declare namespace Translate {
      */
     Name: ResourceName;
     /**
-     * The data format of the custom terminology being retrieved, either CSV or TMX.
+     * The data format of the custom terminology being retrieved. If you don't specify this parameter, Amazon Translate returns a file that has the same format as the file that was imported to create the terminology.  If you specify this parameter when you retrieve a multi-directional terminology resource, you must specify the same format as that of the input file that was imported to create it. Otherwise, Amazon Translate throws an error.
      */
-    TerminologyDataFormat: TerminologyDataFormat;
+    TerminologyDataFormat?: TerminologyDataFormat;
   }
   export interface GetTerminologyResponse {
     /**
@@ -255,9 +257,13 @@ declare namespace Translate {
      */
     TerminologyProperties?: TerminologyProperties;
     /**
-     * The data location of the custom terminology being retrieved. The custom terminology file is returned in a presigned url that has a 30 minute expiration.
+     * The Amazon S3 location of the most recent custom terminology input file that was successfully imported into Amazon Translate. The location is returned as a presigned URL that has a 30 minute expiration.  Amazon Translate doesn't scan all input files for the risk of CSV injection attacks.  CSV injection occurs when a .csv or .tsv file is altered so that a record contains malicious code. The record begins with a special character, such as =, +, -, or @. When the file is opened in a spreadsheet program, the program might interpret the record as a formula and run the code within it. Before you download an input file from Amazon S3, ensure that you recognize the file and trust its creator. 
      */
     TerminologyDataLocation?: TerminologyDataLocation;
+    /**
+     * The Amazon S3 location of a file that provides any errors or warnings that were produced by your input file. This file was created when Amazon Translate attempted to create a terminology resource. The location is returned as a presigned URL to that has a 30 minute expiration.
+     */
+    AuxiliaryDataLocation?: TerminologyDataLocation;
   }
   export type IamRoleArn = string;
   export interface ImportTerminologyRequest {
@@ -287,6 +293,10 @@ declare namespace Translate {
      * The properties of the custom terminology being imported.
      */
     TerminologyProperties?: TerminologyProperties;
+    /**
+     * The Amazon S3 location of a file that provides any errors or warnings that were produced by your input file. This file was created when Amazon Translate attempted to create a terminology resource. The location is returned as a presigned URL to that has a 30 minute expiration.
+     */
+    AuxiliaryDataLocation?: TerminologyDataLocation;
   }
   export interface InputDataConfig {
     /**
@@ -294,7 +304,7 @@ declare namespace Translate {
      */
     S3Uri: S3Uri;
     /**
-     * Describes the format of the data that you submit to Amazon Translate as input. You can specify one of the following multipurpose internet mail extension (MIME) types:    text/html: The input data consists of one or more HTML files. Amazon Translate translates only the text that resides in the html element in each file.    text/plain: The input data consists of one or more unformatted text files. Amazon Translate translates every character in this type of input.    application/vnd.openxmlformats-officedocument.wordprocessingml.document: The input data consists of one or more Word documents (.docx).    application/vnd.openxmlformats-officedocument.presentationml.presentation: The input data consists of one or more PowerPoint Presentation files (.pptx).    application/vnd.openxmlformats-officedocument.spreadsheetml.sheet: The input data consists of one or more Excel Workbook files (.xlsx).    If you structure your input data as HTML, ensure that you set this parameter to text/html. By doing so, you cut costs by limiting the translation to the contents of the html element in each file. Otherwise, if you set this parameter to text/plain, your costs will cover the translation of every character. 
+     * Describes the format of the data that you submit to Amazon Translate as input. You can specify one of the following multipurpose internet mail extension (MIME) types:    text/html: The input data consists of one or more HTML files. Amazon Translate translates only the text that resides in the html element in each file.    text/plain: The input data consists of one or more unformatted text files. Amazon Translate translates every character in this type of input.    application/vnd.openxmlformats-officedocument.wordprocessingml.document: The input data consists of one or more Word documents (.docx).    application/vnd.openxmlformats-officedocument.presentationml.presentation: The input data consists of one or more PowerPoint Presentation files (.pptx).    application/vnd.openxmlformats-officedocument.spreadsheetml.sheet: The input data consists of one or more Excel Workbook files (.xlsx).    application/x-xliff+xml: The input data consists of one or more XML Localization Interchange File Format (XLIFF) files (.xlf). Amazon Translate supports only XLIFF version 1.2.    If you structure your input data as HTML, ensure that you set this parameter to text/html. By doing so, you cut costs by limiting the translation to the contents of the html element in each file. Otherwise, if you set this parameter to text/plain, your costs will cover the translation of every character. 
      */
     ContentType: ContentType;
   }
@@ -378,7 +388,7 @@ declare namespace Translate {
      */
     TextTranslationJobPropertiesList?: TextTranslationJobPropertiesList;
     /**
-     * The token to use to retreive the next page of results. This value is null when there are no more results to return.
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
      */
     NextToken?: NextToken;
   }
@@ -391,6 +401,7 @@ declare namespace Translate {
      * The URI of the S3 folder that contains a translation job's output file. The folder must be in the same Region as the API endpoint that you are calling.
      */
     S3Uri: S3Uri;
+    EncryptionKey?: EncryptionKey;
   }
   export type ParallelDataArn = string;
   export interface ParallelDataConfig {
@@ -409,7 +420,7 @@ declare namespace Translate {
      */
     RepositoryType: String;
     /**
-     * The Amazon S3 location of the parallel data input file. The location is returned as a presigned URL to that has a 30 minute expiration.
+     * The Amazon S3 location of the parallel data input file. The location is returned as a presigned URL to that has a 30 minute expiration.  Amazon Translate doesn't scan all input files for the risk of CSV injection attacks.  CSV injection occurs when a .csv or .tsv file is altered so that a record contains malicious code. The record begins with a special character, such as =, +, -, or @. When the file is opened in a spreadsheet program, the program might interpret the record as a formula and run the code within it. Before you download an input file from Amazon S3, ensure that you recognize the file and trust its creator. 
      */
     Location: String;
   }
@@ -483,6 +494,7 @@ declare namespace Translate {
   }
   export type ParallelDataPropertiesList = ParallelDataProperties[];
   export type ParallelDataStatus = "CREATING"|"UPDATING"|"ACTIVE"|"DELETING"|"FAILED"|string;
+  export type Profanity = "MASK"|string;
   export type ResourceName = string;
   export type ResourceNameList = ResourceName[];
   export type S3Uri = string;
@@ -500,7 +512,7 @@ declare namespace Translate {
      */
     OutputDataConfig: OutputDataConfig;
     /**
-     * The Amazon Resource Name (ARN) of an AWS Identity Access and Management (IAM) role that grants Amazon Translate read access to your input data. For more nformation, see identity-and-access-management.
+     * The Amazon Resource Name (ARN) of an AWS Identity Access and Management (IAM) role that grants Amazon Translate read access to your input data. For more information, see identity-and-access-management.
      */
     DataAccessRoleArn: IamRoleArn;
     /**
@@ -512,17 +524,21 @@ declare namespace Translate {
      */
     TargetLanguageCodes: TargetLanguageCodeStringList;
     /**
-     * The name of the terminology to use in the batch translation job. For a list of available terminologies, use the ListTerminologies operation.
+     * The name of a custom terminology resource to add to the translation job. This resource lists examples source terms and the desired translation for each term. This parameter accepts only one custom terminology resource. For a list of available custom terminology resources, use the ListTerminologies operation. For more information, see how-custom-terminology.
      */
     TerminologyNames?: ResourceNameList;
     /**
-     * The names of the parallel data resources to use in the batch translation job. For a list of available parallel data resources, use the ListParallelData operation.
+     * The name of a parallel data resource to add to the translation job. This resource consists of examples that show how you want segments of text to be translated. When you add parallel data to a translation job, you create an Active Custom Translation job.  This parameter accepts only one parallel data resource.  Active Custom Translation jobs are priced at a higher rate than other jobs that don't use parallel data. For more information, see Amazon Translate pricing.  For a list of available parallel data resources, use the ListParallelData operation. For more information, see customizing-translations-parallel-data.
      */
     ParallelDataNames?: ResourceNameList;
     /**
      * A unique identifier for the request. This token is auto-generated when using the Amazon Translate SDK.
      */
     ClientToken: ClientTokenString;
+    /**
+     * Settings to configure your translation output, including the option to mask profane words and phrases.
+     */
+    Settings?: TranslationSettings;
   }
   export interface StartTextTranslationJobResponse {
     /**
@@ -570,18 +586,22 @@ declare namespace Translate {
      */
     File: TerminologyFile;
     /**
-     * The data format of the custom terminology. Either CSV or TMX.
+     * The data format of the custom terminology.
      */
     Format: TerminologyDataFormat;
+    /**
+     * The directionality of your terminology resource indicates whether it has one source language (uni-directional) or multiple (multi-directional).  UNI  The terminology resource has one source language (for example, the first column in a CSV file), and all of its other languages are target languages.   MULTI  Any language in the terminology resource can be the source language or a target language. A single multi-directional terminology resource can be used for jobs that translate different language pairs. For example, if the terminology contains terms in English and Spanish, then it can be used for jobs that translate English to Spanish and jobs that translate Spanish to English.   When you create a custom terminology resource without specifying the directionality, it behaves as uni-directional terminology, although this parameter will have a null value.
+     */
+    Directionality?: Directionality;
   }
-  export type TerminologyDataFormat = "CSV"|"TMX"|string;
+  export type TerminologyDataFormat = "CSV"|"TMX"|"TSV"|string;
   export interface TerminologyDataLocation {
     /**
      * The repository type for the custom terminology data.
      */
     RepositoryType: String;
     /**
-     * The location of the custom terminology data.
+     * The Amazon S3 location of the most recent custom terminology input file that was successfully imported into Amazon Translate. The location is returned as a presigned URL that has a 30 minute expiration.  Amazon Translate doesn't scan all input files for the risk of CSV injection attacks.  CSV injection occurs when a .csv or .tsv file is altered so that a record contains malicious code. The record begins with a special character, such as =, +, -, or @. When the file is opened in a spreadsheet program, the program might interpret the record as a formula and run the code within it. Before you download an input file from Amazon S3, ensure that you recognize the file and trust its creator. 
      */
     Location: String;
   }
@@ -604,7 +624,7 @@ declare namespace Translate {
      */
     SourceLanguageCode?: LanguageCodeString;
     /**
-     * The language codes for the target languages available with the custom terminology file. All possible target languages are returned in array.
+     * The language codes for the target languages available with the custom terminology resource. All possible target languages are returned in array.
      */
     TargetLanguageCodes?: LanguageCodeStringList;
     /**
@@ -627,6 +647,22 @@ declare namespace Translate {
      * The time at which the custom terminology was last update, based on the timestamp.
      */
     LastUpdatedAt?: Timestamp;
+    /**
+     * The directionality of your terminology resource indicates whether it has one source language (uni-directional) or multiple (multi-directional).   UNI  The terminology resource has one source language (the first column in a CSV file), and all of its other languages are target languages.  MULTI  Any language in the terminology resource can be the source language.  
+     */
+    Directionality?: Directionality;
+    /**
+     * Additional information from Amazon Translate about the terminology resource.
+     */
+    Message?: UnboundedLengthString;
+    /**
+     * The number of terms in the input file that Amazon Translate skipped when you created or updated the terminology resource.
+     */
+    SkippedTermCount?: Integer;
+    /**
+     * The format of the custom terminology input file.
+     */
+    Format?: TerminologyDataFormat;
   }
   export type TerminologyPropertiesList = TerminologyProperties[];
   export interface TextTranslationJobFilter {
@@ -681,7 +717,7 @@ declare namespace Translate {
      */
     ParallelDataNames?: ResourceNameList;
     /**
-     * An explanation of any errors that may have occured during the translation job.
+     * An explanation of any errors that may have occurred during the translation job.
      */
     Message?: UnboundedLengthString;
     /**
@@ -704,6 +740,10 @@ declare namespace Translate {
      * The Amazon Resource Name (ARN) of an AWS Identity Access and Management (IAM) role that granted Amazon Translate read access to the job's input data.
      */
     DataAccessRoleArn?: IamRoleArn;
+    /**
+     * Settings that configure the translation output.
+     */
+    Settings?: TranslationSettings;
   }
   export type TextTranslationJobPropertiesList = TextTranslationJobProperties[];
   export type Timestamp = Date;
@@ -724,6 +764,10 @@ declare namespace Translate {
      * The language code requested for the language of the target text. The language must be a language supported by Amazon Translate.
      */
     TargetLanguageCode: LanguageCodeString;
+    /**
+     * Settings to configure your translation output, including the option to mask profane words and phrases.
+     */
+    Settings?: TranslationSettings;
   }
   export interface TranslateTextResponse {
     /**
@@ -742,6 +786,17 @@ declare namespace Translate {
      * The names of the custom terminologies applied to the input text by Amazon Translate for the translated text response.
      */
     AppliedTerminologies?: AppliedTerminologyList;
+    /**
+     * Settings that configure the translation output.
+     */
+    AppliedSettings?: TranslationSettings;
+  }
+  export interface TranslationSettings {
+    Formality?: Formality;
+    /**
+     * Enable the profanity setting if you want Amazon Translate to mask profane words and phrases in your translation output. To mask profane words and phrases, Amazon Translate replaces them with the grawlix string “?$#@$“. This 5-character sequence is used for each profane word or phrase, regardless of the length or number of words. Amazon Translate does not detect profanity in all of its supported languages. For languages that support profanity detection, see Supported Languages and Language Codes in the Amazon Translate Developer Guide.
+     */
+    Profanity?: Profanity;
   }
   export type UnboundedLengthString = string;
   export interface UpdateParallelDataRequest {

@@ -1,14 +1,14 @@
 {
   "name": "aws-sdk",
   "description": "AWS SDK for JavaScript",
-  "version": "2.1012.0",
+  "version": "2.1134.0",
   "author": {
     "name": "Amazon Web Services",
     "email": "",
     "url": "https://aws.amazon.com/"
   },
   "config": {
-    "test_args": "test test/json test/model test/protocol test/query test/services test/signers test/xml test/s3 test/cloudfront test/dynamodb test/polly test/rds test/publisher test/event-stream"
+    "test_args": "test test/json test/model test/protocol test/query test/services test/signers test/xml test/s3 test/cloudfront test/dynamodb test/polly test/rds test/publisher test/event-stream test/endpoint"
   },
   "homepage": "https://github.com/aws/aws-sdk-js",
   "contributors": [
@@ -44,7 +44,7 @@
     "buffer": "4.9.2",
     "events": "1.1.1",
     "ieee754": "1.1.13",
-    "jmespath": "0.15.0",
+    "jmespath": "0.16.0",
     "querystring": "0.2.0",
     "sax": "1.2.1",
     "url": "0.10.3",
@@ -74,7 +74,7 @@
   "types": "index.d.ts",
   "typings": "index.d.ts",
   "engines": {
-    "node": ">= 0.8.0"
+    "node": ">= 10.0.0"
   },
   "repository": {
     "type": "git",
@@ -144,7 +144,6 @@
     "translate-api-test": "mocha scripts/lib/translate-api.spec.js",
     "typings-generator-test": "mocha scripts/lib/prune-shapes.spec.js",
     "helper-test": "mocha scripts/lib/test-helper.spec.js",
-    "csm-functional-test": "mocha test/publisher/functional_test",
-    "postinstall": "node scripts/check-node-version.js"
+    "csm-functional-test": "mocha test/publisher/functional_test"
   }
 }

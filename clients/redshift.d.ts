@@ -45,11 +45,11 @@ declare class Redshift extends Service {
    */
   authorizeClusterSecurityGroupIngress(callback?: (err: AWSError, data: Redshift.Types.AuthorizeClusterSecurityGroupIngressResult) => void): Request<Redshift.Types.AuthorizeClusterSecurityGroupIngressResult, AWSError>;
   /**
-   * From a data producer account, authorizes the sharing of a datashare with one or more consumer accounts. To authorize a datashare for a data consumer, the producer account must have the correct access privileges.
+   * From a data producer account, authorizes the sharing of a datashare with one or more consumer accounts or managing entities. To authorize a datashare for a data consumer, the producer account must have the correct access permissions.
    */
   authorizeDataShare(params: Redshift.Types.AuthorizeDataShareMessage, callback?: (err: AWSError, data: Redshift.Types.DataShare) => void): Request<Redshift.Types.DataShare, AWSError>;
   /**
-   * From a data producer account, authorizes the sharing of a datashare with one or more consumer accounts. To authorize a datashare for a data consumer, the producer account must have the correct access privileges.
+   * From a data producer account, authorizes the sharing of a datashare with one or more consumer accounts or managing entities. To authorize a datashare for a data consumer, the producer account must have the correct access permissions.
    */
   authorizeDataShare(callback?: (err: AWSError, data: Redshift.Types.DataShare) => void): Request<Redshift.Types.DataShare, AWSError>;
   /**
@@ -189,11 +189,11 @@ declare class Redshift extends Service {
    */
   createScheduledAction(callback?: (err: AWSError, data: Redshift.Types.ScheduledAction) => void): Request<Redshift.Types.ScheduledAction, AWSError>;
   /**
-   * Creates a snapshot copy grant that permits Amazon Redshift to use a customer master key (CMK) from Key Management Service (KMS) to encrypt copied snapshots in a destination region.  For more information about managing snapshot copy grants, go to Amazon Redshift Database Encryption in the Amazon Redshift Cluster Management Guide. 
+   * Creates a snapshot copy grant that permits Amazon Redshift to use an encrypted symmetric key from Key Management Service (KMS) to encrypt copied snapshots in a destination region.  For more information about managing snapshot copy grants, go to Amazon Redshift Database Encryption in the Amazon Redshift Cluster Management Guide. 
    */
   createSnapshotCopyGrant(params: Redshift.Types.CreateSnapshotCopyGrantMessage, callback?: (err: AWSError, data: Redshift.Types.CreateSnapshotCopyGrantResult) => void): Request<Redshift.Types.CreateSnapshotCopyGrantResult, AWSError>;
   /**
-   * Creates a snapshot copy grant that permits Amazon Redshift to use a customer master key (CMK) from Key Management Service (KMS) to encrypt copied snapshots in a destination region.  For more information about managing snapshot copy grants, go to Amazon Redshift Database Encryption in the Amazon Redshift Cluster Management Guide. 
+   * Creates a snapshot copy grant that permits Amazon Redshift to use an encrypted symmetric key from Key Management Service (KMS) to encrypt copied snapshots in a destination region.  For more information about managing snapshot copy grants, go to Amazon Redshift Database Encryption in the Amazon Redshift Cluster Management Guide. 
    */
   createSnapshotCopyGrant(callback?: (err: AWSError, data: Redshift.Types.CreateSnapshotCopyGrantResult) => void): Request<Redshift.Types.CreateSnapshotCopyGrantResult, AWSError>;
   /**
@@ -221,11 +221,11 @@ declare class Redshift extends Service {
    */
   createUsageLimit(callback?: (err: AWSError, data: Redshift.Types.UsageLimit) => void): Request<Redshift.Types.UsageLimit, AWSError>;
   /**
-   * From the producer account, removes authorization from the specified datashare. 
+   * From a datashare producer account, removes authorization from the specified datashare. 
    */
   deauthorizeDataShare(params: Redshift.Types.DeauthorizeDataShareMessage, callback?: (err: AWSError, data: Redshift.Types.DataShare) => void): Request<Redshift.Types.DataShare, AWSError>;
   /**
-   * From the producer account, removes authorization from the specified datashare. 
+   * From a datashare producer account, removes authorization from the specified datashare. 
    */
   deauthorizeDataShare(callback?: (err: AWSError, data: Redshift.Types.DataShare) => void): Request<Redshift.Types.DataShare, AWSError>;
   /**
@@ -565,6 +565,14 @@ declare class Redshift extends Service {
    */
   describePartners(callback?: (err: AWSError, data: Redshift.Types.DescribePartnersOutputMessage) => void): Request<Redshift.Types.DescribePartnersOutputMessage, AWSError>;
   /**
+   * Returns exchange status details and associated metadata for a reserved-node exchange. Statuses include such values as in progress and requested.
+   */
+  describeReservedNodeExchangeStatus(params: Redshift.Types.DescribeReservedNodeExchangeStatusInputMessage, callback?: (err: AWSError, data: Redshift.Types.DescribeReservedNodeExchangeStatusOutputMessage) => void): Request<Redshift.Types.DescribeReservedNodeExchangeStatusOutputMessage, AWSError>;
+  /**
+   * Returns exchange status details and associated metadata for a reserved-node exchange. Statuses include such values as in progress and requested.
+   */
+  describeReservedNodeExchangeStatus(callback?: (err: AWSError, data: Redshift.Types.DescribeReservedNodeExchangeStatusOutputMessage) => void): Request<Redshift.Types.DescribeReservedNodeExchangeStatusOutputMessage, AWSError>;
+  /**
    * Returns a list of the available reserved node offerings by Amazon Redshift with their descriptions including the node type, the fixed and recurring costs of reserving the node and duration the node will be reserved for you. These descriptions help you determine which reserve node offering you want to purchase. You then use the unique offering ID in you call to PurchaseReservedNodeOffering to reserve one or more nodes for your Amazon Redshift cluster.   For more information about reserved node offerings, go to Purchasing Reserved Nodes in the Amazon Redshift Cluster Management Guide.
    */
   describeReservedNodeOfferings(params: Redshift.Types.DescribeReservedNodeOfferingsMessage, callback?: (err: AWSError, data: Redshift.Types.ReservedNodeOfferingsMessage) => void): Request<Redshift.Types.ReservedNodeOfferingsMessage, AWSError>;
@@ -649,19 +657,19 @@ declare class Redshift extends Service {
    */
   disableLogging(callback?: (err: AWSError, data: Redshift.Types.LoggingStatus) => void): Request<Redshift.Types.LoggingStatus, AWSError>;
   /**
-   * Disables the automatic copying of snapshots from one region to another region for a specified cluster. If your cluster and its snapshots are encrypted using a customer master key (CMK) from Key Management Service, use DeleteSnapshotCopyGrant to delete the grant that grants Amazon Redshift permission to the CMK in the destination region. 
+   * Disables the automatic copying of snapshots from one region to another region for a specified cluster. If your cluster and its snapshots are encrypted using an encrypted symmetric key from Key Management Service, use DeleteSnapshotCopyGrant to delete the grant that grants Amazon Redshift permission to the key in the destination region. 
    */
   disableSnapshotCopy(params: Redshift.Types.DisableSnapshotCopyMessage, callback?: (err: AWSError, data: Redshift.Types.DisableSnapshotCopyResult) => void): Request<Redshift.Types.DisableSnapshotCopyResult, AWSError>;
   /**
-   * Disables the automatic copying of snapshots from one region to another region for a specified cluster. If your cluster and its snapshots are encrypted using a customer master key (CMK) from Key Management Service, use DeleteSnapshotCopyGrant to delete the grant that grants Amazon Redshift permission to the CMK in the destination region. 
+   * Disables the automatic copying of snapshots from one region to another region for a specified cluster. If your cluster and its snapshots are encrypted using an encrypted symmetric key from Key Management Service, use DeleteSnapshotCopyGrant to delete the grant that grants Amazon Redshift permission to the key in the destination region. 
    */
   disableSnapshotCopy(callback?: (err: AWSError, data: Redshift.Types.DisableSnapshotCopyResult) => void): Request<Redshift.Types.DisableSnapshotCopyResult, AWSError>;
   /**
-   * From a consumer account, remove association for the specified datashare. 
+   * From a datashare consumer account, remove association for the specified datashare. 
    */
   disassociateDataShareConsumer(params: Redshift.Types.DisassociateDataShareConsumerMessage, callback?: (err: AWSError, data: Redshift.Types.DataShare) => void): Request<Redshift.Types.DataShare, AWSError>;
   /**
-   * From a consumer account, remove association for the specified datashare. 
+   * From a datashare consumer account, remove association for the specified datashare. 
    */
   disassociateDataShareConsumer(callback?: (err: AWSError, data: Redshift.Types.DataShare) => void): Request<Redshift.Types.DataShare, AWSError>;
   /**
@@ -681,13 +689,21 @@ declare class Redshift extends Service {
    */
   enableSnapshotCopy(callback?: (err: AWSError, data: Redshift.Types.EnableSnapshotCopyResult) => void): Request<Redshift.Types.EnableSnapshotCopyResult, AWSError>;
   /**
-   * Returns a database user name and temporary password with temporary authorization to log on to an Amazon Redshift database. The action returns the database user name prefixed with IAM: if AutoCreate is False or IAMA: if AutoCreate is True. You can optionally specify one or more database user groups that the user will join at log on. By default, the temporary credentials expire in 900 seconds. You can optionally specify a duration between 900 seconds (15 minutes) and 3600 seconds (60 minutes). For more information, see Using IAM Authentication to Generate Database User Credentials in the Amazon Redshift Cluster Management Guide. The Identity and Access Management (IAM) user or role that runs GetClusterCredentials must have an IAM policy attached that allows access to all necessary actions and resources. For more information about permissions, see Resource Policies for GetClusterCredentials in the Amazon Redshift Cluster Management Guide. If the DbGroups parameter is specified, the IAM policy must allow the redshift:JoinGroup action with access to the listed dbgroups.  In addition, if the AutoCreate parameter is set to True, then the policy must include the redshift:CreateClusterUser privilege. If the DbName parameter is specified, the IAM policy must allow access to the resource dbname for the specified database name. 
+   * Returns a database user name and temporary password with temporary authorization to log on to an Amazon Redshift database. The action returns the database user name prefixed with IAM: if AutoCreate is False or IAMA: if AutoCreate is True. You can optionally specify one or more database user groups that the user will join at log on. By default, the temporary credentials expire in 900 seconds. You can optionally specify a duration between 900 seconds (15 minutes) and 3600 seconds (60 minutes). For more information, see Using IAM Authentication to Generate Database User Credentials in the Amazon Redshift Cluster Management Guide. The Identity and Access Management (IAM) user or role that runs GetClusterCredentials must have an IAM policy attached that allows access to all necessary actions and resources. For more information about permissions, see Resource Policies for GetClusterCredentials in the Amazon Redshift Cluster Management Guide. If the DbGroups parameter is specified, the IAM policy must allow the redshift:JoinGroup action with access to the listed dbgroups.  In addition, if the AutoCreate parameter is set to True, then the policy must include the redshift:CreateClusterUser permission. If the DbName parameter is specified, the IAM policy must allow access to the resource dbname for the specified database name. 
    */
   getClusterCredentials(params: Redshift.Types.GetClusterCredentialsMessage, callback?: (err: AWSError, data: Redshift.Types.ClusterCredentials) => void): Request<Redshift.Types.ClusterCredentials, AWSError>;
   /**
-   * Returns a database user name and temporary password with temporary authorization to log on to an Amazon Redshift database. The action returns the database user name prefixed with IAM: if AutoCreate is False or IAMA: if AutoCreate is True. You can optionally specify one or more database user groups that the user will join at log on. By default, the temporary credentials expire in 900 seconds. You can optionally specify a duration between 900 seconds (15 minutes) and 3600 seconds (60 minutes). For more information, see Using IAM Authentication to Generate Database User Credentials in the Amazon Redshift Cluster Management Guide. The Identity and Access Management (IAM) user or role that runs GetClusterCredentials must have an IAM policy attached that allows access to all necessary actions and resources. For more information about permissions, see Resource Policies for GetClusterCredentials in the Amazon Redshift Cluster Management Guide. If the DbGroups parameter is specified, the IAM policy must allow the redshift:JoinGroup action with access to the listed dbgroups.  In addition, if the AutoCreate parameter is set to True, then the policy must include the redshift:CreateClusterUser privilege. If the DbName parameter is specified, the IAM policy must allow access to the resource dbname for the specified database name. 
+   * Returns a database user name and temporary password with temporary authorization to log on to an Amazon Redshift database. The action returns the database user name prefixed with IAM: if AutoCreate is False or IAMA: if AutoCreate is True. You can optionally specify one or more database user groups that the user will join at log on. By default, the temporary credentials expire in 900 seconds. You can optionally specify a duration between 900 seconds (15 minutes) and 3600 seconds (60 minutes). For more information, see Using IAM Authentication to Generate Database User Credentials in the Amazon Redshift Cluster Management Guide. The Identity and Access Management (IAM) user or role that runs GetClusterCredentials must have an IAM policy attached that allows access to all necessary actions and resources. For more information about permissions, see Resource Policies for GetClusterCredentials in the Amazon Redshift Cluster Management Guide. If the DbGroups parameter is specified, the IAM policy must allow the redshift:JoinGroup action with access to the listed dbgroups.  In addition, if the AutoCreate parameter is set to True, then the policy must include the redshift:CreateClusterUser permission. If the DbName parameter is specified, the IAM policy must allow access to the resource dbname for the specified database name. 
    */
   getClusterCredentials(callback?: (err: AWSError, data: Redshift.Types.ClusterCredentials) => void): Request<Redshift.Types.ClusterCredentials, AWSError>;
+  /**
+   * Gets the configuration options for the reserved-node exchange. These options include information about the source reserved node and target reserved node offering. Details include the node type, the price, the node count, and the offering type.
+   */
+  getReservedNodeExchangeConfigurationOptions(params: Redshift.Types.GetReservedNodeExchangeConfigurationOptionsInputMessage, callback?: (err: AWSError, data: Redshift.Types.GetReservedNodeExchangeConfigurationOptionsOutputMessage) => void): Request<Redshift.Types.GetReservedNodeExchangeConfigurationOptionsOutputMessage, AWSError>;
+  /**
+   * Gets the configuration options for the reserved-node exchange. These options include information about the source reserved node and target reserved node offering. Details include the node type, the price, the node count, and the offering type.
+   */
+  getReservedNodeExchangeConfigurationOptions(callback?: (err: AWSError, data: Redshift.Types.GetReservedNodeExchangeConfigurationOptionsOutputMessage) => void): Request<Redshift.Types.GetReservedNodeExchangeConfigurationOptionsOutputMessage, AWSError>;
   /**
    * Returns an array of DC2 ReservedNodeOfferings that matches the payment type, term, and usage price of the given DC1 reserved node.
    */
@@ -729,11 +745,11 @@ declare class Redshift extends Service {
    */
   modifyClusterDbRevision(callback?: (err: AWSError, data: Redshift.Types.ModifyClusterDbRevisionResult) => void): Request<Redshift.Types.ModifyClusterDbRevisionResult, AWSError>;
   /**
-   * Modifies the list of Identity and Access Management (IAM) roles that can be used by the cluster to access other Amazon Web Services services. A cluster can have up to 10 IAM roles associated at any time.
+   * Modifies the list of Identity and Access Management (IAM) roles that can be used by the cluster to access other Amazon Web Services services. The maximum number of IAM roles that you can associate is subject to a quota. For more information, go to Quotas and limits in the Amazon Redshift Cluster Management Guide.
    */
   modifyClusterIamRoles(params: Redshift.Types.ModifyClusterIamRolesMessage, callback?: (err: AWSError, data: Redshift.Types.ModifyClusterIamRolesResult) => void): Request<Redshift.Types.ModifyClusterIamRolesResult, AWSError>;
   /**
-   * Modifies the list of Identity and Access Management (IAM) roles that can be used by the cluster to access other Amazon Web Services services. A cluster can have up to 10 IAM roles associated at any time.
+   * Modifies the list of Identity and Access Management (IAM) roles that can be used by the cluster to access other Amazon Web Services services. The maximum number of IAM roles that you can associate is subject to a quota. For more information, go to Quotas and limits in the Amazon Redshift Cluster Management Guide.
    */
   modifyClusterIamRoles(callback?: (err: AWSError, data: Redshift.Types.ModifyClusterIamRolesResult) => void): Request<Redshift.Types.ModifyClusterIamRolesResult, AWSError>;
   /**
@@ -849,11 +865,11 @@ declare class Redshift extends Service {
    */
   rebootCluster(callback?: (err: AWSError, data: Redshift.Types.RebootClusterResult) => void): Request<Redshift.Types.RebootClusterResult, AWSError>;
   /**
-   * From the consumer account, rejects the specified datashare.
+   * From a datashare consumer account, rejects the specified datashare.
    */
   rejectDataShare(params: Redshift.Types.RejectDataShareMessage, callback?: (err: AWSError, data: Redshift.Types.DataShare) => void): Request<Redshift.Types.DataShare, AWSError>;
   /**
-   * From the consumer account, rejects the specified datashare.
+   * From a datashare consumer account, rejects the specified datashare.
    */
   rejectDataShare(callback?: (err: AWSError, data: Redshift.Types.DataShare) => void): Request<Redshift.Types.DataShare, AWSError>;
   /**
@@ -1039,6 +1055,10 @@ declare namespace Redshift {
      * The Amazon Resource Name (ARN) of the consumer that is associated with the datashare.
      */
     ConsumerArn?: String;
+    /**
+     * From a datashare consumer account, associates a datashare with all existing and future namespaces in the specified Amazon Web Services Region.
+     */
+    ConsumerRegion?: String;
   }
   export type AssociatedClusterList = ClusterAssociatedToSchedule[];
   export type AttributeList = AccountAttribute[];
@@ -1090,7 +1110,7 @@ declare namespace Redshift {
      */
     DataShareArn: String;
     /**
-     * The identifier of the data consumer that is authorized to access the datashare. This identifier is an AWS account ID.
+     * The identifier of the data consumer that is authorized to access the datashare. This identifier is an Amazon Web Services account ID or a keyword, such as ADX.
      */
     ConsumerIdentifier: String;
   }
@@ -1387,6 +1407,14 @@ declare namespace Redshift {
      * The AQUA (Advanced Query Accelerator) configuration of the cluster.
      */
     AquaConfiguration?: AquaConfiguration;
+    /**
+     * The Amazon Resource Name (ARN) for the IAM role set as default for the cluster.
+     */
+    DefaultIamRoleArn?: String;
+    /**
+     * The status of the reserved-node exchange request. Statuses include in-progress and requested.
+     */
+    ReservedNodeExchangeStatus?: ReservedNodeExchangeStatus;
   }
   export interface ClusterAssociatedToSchedule {
     /**
@@ -1400,7 +1428,7 @@ declare namespace Redshift {
   }
   export interface ClusterCredentials {
     /**
-     * A database user name that is authorized to log on to the database DbName using the password DbPassword. If the specified DbUser exists in the database, the new user name has the same database privileges as the the user named in DbUser. By default, the user is added to PUBLIC. If the DbGroups parameter is specifed, DbUser is added to the listed groups for any sessions created using these credentials.
+     * A database user name that is authorized to log on to the database DbName using the password DbPassword. If the specified DbUser exists in the database, the new user name has the same database permissions as the the user named in DbUser. By default, the user is added to PUBLIC. If the DbGroups parameter is specifed, DbUser is added to the listed groups for any sessions created using these credentials.
      */
     DbUser?: String;
     /**
@@ -1744,7 +1772,7 @@ declare namespace Redshift {
      */
     MasterUsername: String;
     /**
-     * The password associated with the admin user account for the cluster that is being created. Constraints:   Must be between 8 and 64 characters in length.   Must contain at least one uppercase letter.   Must contain at least one lowercase letter.   Must contain one number.   Can be any printable ASCII character (ASCII code 33 to 126) except ' (single quote), " (double quote), \, /, @, or space.  
+     * The password associated with the admin user account for the cluster that is being created. Constraints:   Must be between 8 and 64 characters in length.   Must contain at least one uppercase letter.   Must contain at least one lowercase letter.   Must contain one number.   Can be any printable ASCII character (ASCII code 33-126) except ' (single quote), " (double quote), \, /, or @.  
      */
     MasterUserPassword: String;
     /**
@@ -1832,7 +1860,7 @@ declare namespace Redshift {
      */
     AdditionalInfo?: String;
     /**
-     * A list of Identity and Access Management (IAM) roles that can be used by the cluster to access other Amazon Web Services services. You must supply the IAM roles in their Amazon Resource Name (ARN) format. You can supply up to 10 IAM roles in a single request. A cluster can have up to 10 IAM roles associated with it at any time.
+     * A list of Identity and Access Management (IAM) roles that can be used by the cluster to access other Amazon Web Services services. You must supply the IAM roles in their Amazon Resource Name (ARN) format.  The maximum number of IAM roles that you can associate is subject to a quota. For more information, go to Quotas and limits in the Amazon Redshift Cluster Management Guide.
      */
     IamRoles?: IamRoleArnList;
     /**
@@ -1851,6 +1879,14 @@ declare namespace Redshift {
      * The value represents how the cluster is configured to use AQUA (Advanced Query Accelerator) when it is created. Possible values include the following.   enabled - Use AQUA if it is available for the current Amazon Web Services Region and Amazon Redshift node type.   disabled - Don't use AQUA.    auto - Amazon Redshift determines whether to use AQUA.  
      */
     AquaConfigurationStatus?: AquaConfigurationStatus;
+    /**
+     * The Amazon Resource Name (ARN) for the IAM role that was set as default for the cluster when the cluster was created. 
+     */
+    DefaultIamRoleArn?: String;
+    /**
+     * A flag that specifies whether to load sample data once the cluster is created.
+     */
+    LoadSampleData?: String;
   }
   export interface CreateClusterParameterGroupMessage {
     /**
@@ -2080,7 +2116,7 @@ declare namespace Redshift {
      */
     SnapshotCopyGrantName: String;
     /**
-     * The unique identifier of the customer master key (CMK) to which to grant Amazon Redshift permission. If no key is specified, the default key is used.
+     * The unique identifier of the encrypted symmetric key to which to grant Amazon Redshift permission. If no key is specified, the default key is used.
      */
     KmsKeyId?: String;
     /**
@@ -2137,7 +2173,7 @@ declare namespace Redshift {
      */
     FeatureType: UsageLimitFeatureType;
     /**
-     * The type of limit. Depending on the feature type, this can be based on a time duration or data size. If FeatureType is spectrum, then LimitType must be data-scanned. If FeatureType is concurrency-scaling, then LimitType must be time. 
+     * The type of limit. Depending on the feature type, this can be based on a time duration or data size. If FeatureType is spectrum, then LimitType must be data-scanned. If FeatureType is concurrency-scaling, then LimitType must be time. If FeatureType is cross-region-datasharing, then LimitType must be data-scanned. 
      */
     LimitType: UsageLimitLimitType;
     /**
@@ -2181,9 +2217,13 @@ declare namespace Redshift {
      */
     AllowPubliclyAccessibleConsumers?: Boolean;
     /**
-     * A value that specifies when the datashare has an association between a producer and data consumers.
+     * A value that specifies when the datashare has an association between producer and data consumers.
      */
     DataShareAssociations?: DataShareAssociationList;
+    /**
+     * The identifier of a datashare to show its managing entity.
+     */
+    ManagedBy?: String;
   }
   export interface DataShareAssociation {
     /**
@@ -2194,6 +2234,10 @@ declare namespace Redshift {
      * The status of the datashare that is associated.
      */
     Status?: DataShareStatus;
+    /**
+     * The Amazon Web Services Region of the consumer accounts that have an association with a producer datashare.
+     */
+    ConsumerRegion?: String;
     /**
      * The creation date of the datashare that is associated.
      */
@@ -2241,7 +2285,7 @@ declare namespace Redshift {
      */
     DataShareArn: String;
     /**
-     * The identifier of the data consumer that is to have authorization removed from the datashare. This identifier is an AWS account ID.
+     * The identifier of the data consumer that is to have authorization removed from the datashare. This identifier is an Amazon Web Services account ID or a keyword, such as ADX.
      */
     ConsumerIdentifier: String;
   }
@@ -2631,7 +2675,7 @@ declare namespace Redshift {
      */
     MaxRecords?: IntegerOptional;
     /**
-     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeDataSharesForConsumer request exceed the value specified in MaxRecords, AWS returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request. 
+     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeDataSharesForConsumer request exceed the value specified in MaxRecords, Amazon Web Services returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request. 
      */
     Marker?: String;
   }
@@ -2641,7 +2685,7 @@ declare namespace Redshift {
      */
     DataShares?: DataShareList;
     /**
-     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeDataSharesForConsumer request exceed the value specified in MaxRecords, AWS returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request. 
+     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeDataSharesForConsumer request exceed the value specified in MaxRecords, Amazon Web Services returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request. 
      */
     Marker?: String;
   }
@@ -2659,7 +2703,7 @@ declare namespace Redshift {
      */
     MaxRecords?: IntegerOptional;
     /**
-     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeDataSharesForProducer request exceed the value specified in MaxRecords, AWS returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request. 
+     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeDataSharesForProducer request exceed the value specified in MaxRecords, Amazon Web Services returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request. 
      */
     Marker?: String;
   }
@@ -2669,7 +2713,7 @@ declare namespace Redshift {
      */
     DataShares?: DataShareList;
     /**
-     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeDataSharesForProducer request exceed the value specified in MaxRecords, AWS returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request. 
+     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeDataSharesForProducer request exceed the value specified in MaxRecords, Amazon Web Services returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request. 
      */
     Marker?: String;
   }
@@ -2683,7 +2727,7 @@ declare namespace Redshift {
      */
     MaxRecords?: IntegerOptional;
     /**
-     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeDataShares request exceed the value specified in MaxRecords, AWS returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request. 
+     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeDataShares request exceed the value specified in MaxRecords, Amazon Web Services returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request. 
      */
     Marker?: String;
   }
@@ -2693,7 +2737,7 @@ declare namespace Redshift {
      */
     DataShares?: DataShareList;
     /**
-     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeDataShares request exceed the value specified in MaxRecords, AWS returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request. 
+     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeDataShares request exceed the value specified in MaxRecords, Amazon Web Services returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request. 
      */
     Marker?: String;
   }
@@ -2942,6 +2986,34 @@ declare namespace Redshift {
      */
     PartnerIntegrationInfoList?: PartnerIntegrationInfoList;
   }
+  export interface DescribeReservedNodeExchangeStatusInputMessage {
+    /**
+     * The identifier of the source reserved node in a reserved-node exchange request.
+     */
+    ReservedNodeId?: String;
+    /**
+     * The identifier of the reserved-node exchange request.
+     */
+    ReservedNodeExchangeRequestId?: String;
+    /**
+     * The maximum number of response records to return in each call. If the number of remaining response records exceeds the specified MaxRecords value, a value is returned in a Marker field of the response. You can retrieve the next set of records by retrying the command with the returned marker value.
+     */
+    MaxRecords?: IntegerOptional;
+    /**
+     * An optional pagination token provided by a previous DescribeReservedNodeExchangeStatus request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by the MaxRecords parameter. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request.
+     */
+    Marker?: String;
+  }
+  export interface DescribeReservedNodeExchangeStatusOutputMessage {
+    /**
+     * The details of the reserved-node exchange request, including the status, request time, source reserved-node identifier, and additional details.
+     */
+    ReservedNodeExchangeStatusDetails?: ReservedNodeExchangeStatusList;
+    /**
+     * A pagination token provided by a previous DescribeReservedNodeExchangeStatus request.
+     */
+    Marker?: String;
+  }
   export interface DescribeReservedNodeOfferingsMessage {
     /**
      * The unique identifier for the offering.
@@ -3170,6 +3242,10 @@ declare namespace Redshift {
      * The Amazon Resource Name (ARN) of the consumer that association for the datashare is removed from.
      */
     ConsumerArn?: String;
+    /**
+     * From a datashare consumer account, removes association of a datashare from all the existing and future namespaces in the specified Amazon Web Services Region.
+     */
+    ConsumerRegion?: String;
   }
   export type Double = number;
   export type DoubleOptional = number;
@@ -3211,11 +3287,19 @@ declare namespace Redshift {
     /**
      * The name of an existing S3 bucket where the log files are to be stored. Constraints:   Must be in the same region as the cluster   The cluster must have read bucket and put object permissions  
      */
-    BucketName: String;
+    BucketName?: String;
     /**
      * The prefix applied to the log file names. Constraints:   Cannot exceed 512 characters   Cannot contain spaces( ), double quotes ("), single quotes ('), a backslash (\), or control characters. The hexadecimal codes for invalid characters are:    x00 to x20   x22   x27   x5c   x7f or larger    
      */
     S3KeyPrefix?: String;
+    /**
+     * The log destination type. An enum with possible values of s3 and cloudwatch.
+     */
+    LogDestinationType?: LogDestinationType;
+    /**
+     * The collection of exported log types. Log types include the connection log, user log and user activity log.
+     */
+    LogExports?: LogTypeList;
   }
   export interface EnableSnapshotCopyMessage {
     /**
@@ -3516,6 +3600,38 @@ declare namespace Redshift {
      */
     DbGroups?: DbGroupList;
   }
+  export interface GetReservedNodeExchangeConfigurationOptionsInputMessage {
+    /**
+     * The action type of the reserved-node configuration. The action type can be an exchange initiated from either a snapshot or a resize.
+     */
+    ActionType: ReservedNodeExchangeActionType;
+    /**
+     * The identifier for the cluster that is the source for a reserved-node exchange.
+     */
+    ClusterIdentifier?: String;
+    /**
+     * The identifier for the snapshot that is the source for the reserved-node exchange.
+     */
+    SnapshotIdentifier?: String;
+    /**
+     * The maximum number of response records to return in each call. If the number of remaining response records exceeds the specified MaxRecords value, a value is returned in a Marker field of the response. You can retrieve the next set of records by retrying the command with the returned marker value.
+     */
+    MaxRecords?: IntegerOptional;
+    /**
+     * An optional pagination token provided by a previous GetReservedNodeExchangeConfigurationOptions request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by the MaxRecords parameter. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request.
+     */
+    Marker?: String;
+  }
+  export interface GetReservedNodeExchangeConfigurationOptionsOutputMessage {
+    /**
+     * A pagination token provided by a previous GetReservedNodeExchangeConfigurationOptions request.
+     */
+    Marker?: String;
+    /**
+     * the configuration options for the reserved-node exchange. These options include information about the source reserved node and target reserved node. Details include the node type, the price, the node count, and the offering type.
+     */
+    ReservedNodeConfigurationOptionList?: ReservedNodeConfigurationOptionList;
+  }
   export interface GetReservedNodeExchangeOfferingsInputMessage {
     /**
      * A string representing the node identifier for the DC1 Reserved Node to be exchanged.
@@ -3633,6 +3749,8 @@ declare namespace Redshift {
   export type ImportTablesNotStarted = String[];
   export type Integer = number;
   export type IntegerOptional = number;
+  export type LogDestinationType = "s3"|"cloudwatch"|string;
+  export type LogTypeList = String[];
   export interface LoggingStatus {
     /**
      *  true if logging is on, false if logging is off.
@@ -3658,6 +3776,14 @@ declare namespace Redshift {
      * The message indicating that logs failed to be delivered.
      */
     LastFailureMessage?: String;
+    /**
+     * The log destination type. An enum with possible values of s3 and cloudwatch.
+     */
+    LogDestinationType?: LogDestinationType;
+    /**
+     * The collection of exported log types. Log types include the connection log, user log and user activity log.
+     */
+    LogExports?: LogTypeList;
   }
   export type Long = number;
   export type LongOptional = number;
@@ -3731,13 +3857,17 @@ declare namespace Redshift {
      */
     ClusterIdentifier: String;
     /**
-     * Zero or more IAM roles to associate with the cluster. The roles must be in their Amazon Resource Name (ARN) format. You can associate up to 10 IAM roles with a single cluster in a single request.
+     * Zero or more IAM roles to associate with the cluster. The roles must be in their Amazon Resource Name (ARN) format. 
      */
     AddIamRoles?: IamRoleArnList;
     /**
-     * Zero or more IAM roles in ARN format to disassociate from the cluster. You can disassociate up to 10 IAM roles from a single cluster in a single request.
+     * Zero or more IAM roles in ARN format to disassociate from the cluster. 
      */
     RemoveIamRoles?: IamRoleArnList;
+    /**
+     * The Amazon Resource Name (ARN) for the IAM role that was set as default for the cluster when the cluster was last modified.
+     */
+    DefaultIamRoleArn?: String;
   }
   export interface ModifyClusterIamRolesResult {
     Cluster?: Cluster;
@@ -3797,7 +3927,7 @@ declare namespace Redshift {
      */
     VpcSecurityGroupIds?: VpcSecurityGroupIdList;
     /**
-     * The new password for the cluster admin user. This change is asynchronously applied as soon as possible. Between the time of the request and the completion of the request, the MasterUserPassword element exists in the PendingModifiedValues element of the operation response.   Operations never return the password, so this operation provides a way to regain access to the admin user account for a cluster if the password is lost.  Default: Uses existing setting. Constraints:   Must be between 8 and 64 characters in length.   Must contain at least one uppercase letter.   Must contain at least one lowercase letter.   Must contain one number.   Can be any printable ASCII character (ASCII code 33 to 126) except ' (single quote), " (double quote), \, /, @, or space.  
+     * The new password for the cluster admin user. This change is asynchronously applied as soon as possible. Between the time of the request and the completion of the request, the MasterUserPassword element exists in the PendingModifiedValues element of the operation response.   Operations never return the password, so this operation provides a way to regain access to the admin user account for a cluster if the password is lost.  Default: Uses existing setting. Constraints:   Must be between 8 and 64 characters in length.   Must contain at least one uppercase letter.   Must contain at least one lowercase letter.   Must contain one number.   Can be any printable ASCII character (ASCII code 33-126) except ' (single quote), " (double quote), \, /, or @.  
      */
     MasterUserPassword?: String;
     /**
@@ -4397,6 +4527,56 @@ declare namespace Redshift {
      */
     ReservedNodeOfferingType?: ReservedNodeOfferingType;
   }
+  export interface ReservedNodeConfigurationOption {
+    SourceReservedNode?: ReservedNode;
+    /**
+     * The target reserved-node count.
+     */
+    TargetReservedNodeCount?: Integer;
+    TargetReservedNodeOffering?: ReservedNodeOffering;
+  }
+  export type ReservedNodeConfigurationOptionList = ReservedNodeConfigurationOption[];
+  export type ReservedNodeExchangeActionType = "restore-cluster"|"resize-cluster"|string;
+  export interface ReservedNodeExchangeStatus {
+    /**
+     * The identifier of the reserved-node exchange request.
+     */
+    ReservedNodeExchangeRequestId?: String;
+    /**
+     * The status of the reserved-node exchange request. Statuses include in-progress and requested.
+     */
+    Status?: ReservedNodeExchangeStatusType;
+    /**
+     * A date and time that indicate when the reserved-node exchange was requested.
+     */
+    RequestTime?: TStamp;
+    /**
+     * The identifier of the source reserved node.
+     */
+    SourceReservedNodeId?: String;
+    /**
+     * The source reserved-node type, for example ds2.xlarge.
+     */
+    SourceReservedNodeType?: String;
+    /**
+     * The source reserved-node count in the cluster.
+     */
+    SourceReservedNodeCount?: Integer;
+    /**
+     * The identifier of the target reserved node offering.
+     */
+    TargetReservedNodeOfferingId?: String;
+    /**
+     * The node type of the target reserved node, for example ra3.4xlarge.
+     */
+    TargetReservedNodeType?: String;
+    /**
+     * The count of target reserved nodes in the cluster.
+     */
+    TargetReservedNodeCount?: Integer;
+  }
+  export type ReservedNodeExchangeStatusList = ReservedNodeExchangeStatus[];
+  export type ReservedNodeExchangeStatusType = "REQUESTED"|"PENDING"|"IN_PROGRESS"|"RETRYING"|"SUCCEEDED"|"FAILED"|string;
   export type ReservedNodeList = ReservedNode[];
   export interface ReservedNodeOffering {
     /**
@@ -4493,6 +4673,14 @@ declare namespace Redshift {
      * A boolean value indicating whether the resize operation is using the classic resize process. If you don't provide this parameter or set the value to false, the resize type is elastic. 
      */
     Classic?: BooleanOptional;
+    /**
+     * The identifier of the reserved node.
+     */
+    ReservedNodeId?: String;
+    /**
+     * The identifier of the target reserved node offering.
+     */
+    TargetReservedNodeOfferingId?: String;
   }
   export interface ResizeClusterResult {
     Cluster?: Cluster;
@@ -4648,7 +4836,7 @@ declare namespace Redshift {
      */
     ManualSnapshotRetentionPeriod?: IntegerOptional;
     /**
-     * The Key Management Service (KMS) key ID of the encryption key that you want to use to encrypt data in the cluster that you restore from a shared snapshot.
+     * The Key Management Service (KMS) key ID of the encryption key that encrypts data in the cluster restored from a shared snapshot. You can also provide the key ID when you restore from an unencrypted snapshot to an encrypted cluster in the same account. Additionally, you can specify a new KMS key ID when you restore from an encrypted snapshot in the same account in order to change it. In that case, the restored cluster is encrypted with the new KMS key ID.
      */
     KmsKeyId?: String;
     /**
@@ -4664,7 +4852,7 @@ declare namespace Redshift {
      */
     AdditionalInfo?: String;
     /**
-     * A list of Identity and Access Management (IAM) roles that can be used by the cluster to access other Amazon Web Services services. You must supply the IAM roles in their Amazon Resource Name (ARN) format. You can supply up to 10 IAM roles in a single request. A cluster can have up to 10 IAM roles associated at any time.
+     * A list of Identity and Access Management (IAM) roles that can be used by the cluster to access other Amazon Web Services services. You must supply the IAM roles in their Amazon Resource Name (ARN) format.  The maximum number of IAM roles that you can associate is subject to a quota. For more information, go to Quotas and limits in the Amazon Redshift Cluster Management Guide.
      */
     IamRoles?: IamRoleArnList;
     /**
@@ -4687,6 +4875,22 @@ declare namespace Redshift {
      * The value represents how the cluster is configured to use AQUA (Advanced Query Accelerator) after the cluster is restored. Possible values include the following.   enabled - Use AQUA if it is available for the current Amazon Web Services Region and Amazon Redshift node type.   disabled - Don't use AQUA.    auto - Amazon Redshift determines whether to use AQUA.  
      */
     AquaConfigurationStatus?: AquaConfigurationStatus;
+    /**
+     * The Amazon Resource Name (ARN) for the IAM role that was set as default for the cluster when the cluster was last modified while it was restored from a snapshot.
+     */
+    DefaultIamRoleArn?: String;
+    /**
+     * The identifier of the target reserved node offering.
+     */
+    ReservedNodeId?: String;
+    /**
+     * The identifier of the target reserved node offering.
+     */
+    TargetReservedNodeOfferingId?: String;
+    /**
+     * Enables support for restoring an unencrypted snapshot to a cluster encrypted with Key Management Service (KMS) and a customer managed key.
+     */
+    Encrypted?: BooleanOptional;
   }
   export interface RestoreFromClusterSnapshotResult {
     Cluster?: Cluster;
@@ -5074,7 +5278,7 @@ declare namespace Redshift {
      */
     SnapshotCopyGrantName?: String;
     /**
-     * The unique identifier of the customer master key (CMK) in Amazon Web Services KMS to which Amazon Redshift is granted permission.
+     * The unique identifier of the encrypted symmetric key in Amazon Web Services KMS to which Amazon Redshift is granted permission.
      */
     KmsKeyId?: String;
     /**
@@ -5394,7 +5598,7 @@ declare namespace Redshift {
     Tags?: TagList;
   }
   export type UsageLimitBreachAction = "log"|"emit-metric"|"disable"|string;
-  export type UsageLimitFeatureType = "spectrum"|"concurrency-scaling"|string;
+  export type UsageLimitFeatureType = "spectrum"|"concurrency-scaling"|"cross-region-datasharing"|string;
   export type UsageLimitLimitType = "time"|"data-scanned"|string;
   export interface UsageLimitList {
     /**

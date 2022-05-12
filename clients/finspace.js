@@ -5,7 +5,6 @@ var apiLoader = AWS.apiLoader;
 
 apiLoader.services['finspace'] = {};
 AWS.Finspace = Service.defineService('finspace', ['2021-03-12']);
-require('../lib/services/finspace');
 Object.defineProperty(apiLoader.services['finspace'], '2021-03-12', {
   get: function get() {
     var model = require('../apis/finspace-2021-03-12.min.json');

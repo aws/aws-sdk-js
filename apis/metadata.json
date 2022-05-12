@@ -1093,5 +1093,71 @@
   },
   "panorama": {
     "name": "Panorama"
+  },
+  "chimesdkmeetings": {
+    "prefix": "chime-sdk-meetings",
+    "name": "ChimeSDKMeetings"
+  },
+  "resiliencehub": {
+    "name": "Resiliencehub"
+  },
+  "migrationhubstrategy": {
+    "name": "MigrationHubStrategy"
+  },
+  "appconfigdata": {
+    "name": "AppConfigData"
+  },
+  "drs": {
+    "name": "Drs"
+  },
+  "migrationhubrefactorspaces": {
+    "prefix": "migration-hub-refactor-spaces",
+    "name": "MigrationHubRefactorSpaces"
+  },
+  "evidently": {
+    "name": "Evidently"
+  },
+  "inspector2": {
+    "name": "Inspector2"
+  },
+  "rbin": {
+    "name": "Rbin"
+  },
+  "rum": {
+    "name": "RUM"
+  },
+  "backupgateway": {
+    "prefix": "backup-gateway",
+    "name": "BackupGateway"
+  },
+  "iottwinmaker": {
+    "name": "IoTTwinMaker"
+  },
+  "workspacesweb": {
+    "prefix": "workspaces-web",
+    "name": "WorkSpacesWeb"
+  },
+  "amplifyuibuilder": {
+    "name": "AmplifyUIBuilder"
+  },
+  "keyspaces": {
+    "name": "Keyspaces"
+  },
+  "billingconductor": {
+    "name": "Billingconductor"
+  },
+  "gamesparks": {
+    "name": "GameSparks"
+  },
+  "pinpointsmsvoicev2": {
+    "prefix": "pinpoint-sms-voice-v2",
+    "name": "PinpointSMSVoiceV2"
+  },
+  "ivschat": {
+    "name": "Ivschat"
+  },
+  "chimesdkmediapipelines": {
+    "prefix": "chime-sdk-media-pipelines",
+    "name": "ChimeSDKMediaPipelines"
   }
 }

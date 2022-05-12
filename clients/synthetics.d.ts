@@ -20,27 +20,27 @@ declare class Synthetics extends Service {
    */
   createCanary(callback?: (err: AWSError, data: Synthetics.Types.CreateCanaryResponse) => void): Request<Synthetics.Types.CreateCanaryResponse, AWSError>;
   /**
-   * Permanently deletes the specified canary. When you delete a canary, resources used and created by the canary are not automatically deleted. After you delete a canary that you do not intend to use again, you should also delete the following:   The Lambda functions and layers used by this canary. These have the prefix cwsyn-MyCanaryName .   The CloudWatch alarms created for this canary. These alarms have a name of Synthetics-SharpDrop-Alarm-MyCanaryName .   Amazon S3 objects and buckets, such as the canary's artifact location.   IAM roles created for the canary. If they were created in the console, these roles have the name  role/service-role/CloudWatchSyntheticsRole-MyCanaryName .   CloudWatch Logs log groups created for the canary. These logs groups have the name /aws/lambda/cwsyn-MyCanaryName .    Before you delete a canary, you might want to use GetCanary to display the information about this canary. Make note of the information returned by this operation so that you can delete these resources after you delete the canary.
+   * Permanently deletes the specified canary. If you specify DeleteLambda to true, CloudWatch Synthetics also deletes the Lambda functions and layers that are used by the canary. Other esources used and created by the canary are not automatically deleted. After you delete a canary that you do not intend to use again, you should also delete the following:   The CloudWatch alarms created for this canary. These alarms have a name of Synthetics-SharpDrop-Alarm-MyCanaryName .   Amazon S3 objects and buckets, such as the canary's artifact location.   IAM roles created for the canary. If they were created in the console, these roles have the name  role/service-role/CloudWatchSyntheticsRole-MyCanaryName .   CloudWatch Logs log groups created for the canary. These logs groups have the name /aws/lambda/cwsyn-MyCanaryName .    Before you delete a canary, you might want to use GetCanary to display the information about this canary. Make note of the information returned by this operation so that you can delete these resources after you delete the canary.
    */
   deleteCanary(params: Synthetics.Types.DeleteCanaryRequest, callback?: (err: AWSError, data: Synthetics.Types.DeleteCanaryResponse) => void): Request<Synthetics.Types.DeleteCanaryResponse, AWSError>;
   /**
-   * Permanently deletes the specified canary. When you delete a canary, resources used and created by the canary are not automatically deleted. After you delete a canary that you do not intend to use again, you should also delete the following:   The Lambda functions and layers used by this canary. These have the prefix cwsyn-MyCanaryName .   The CloudWatch alarms created for this canary. These alarms have a name of Synthetics-SharpDrop-Alarm-MyCanaryName .   Amazon S3 objects and buckets, such as the canary's artifact location.   IAM roles created for the canary. If they were created in the console, these roles have the name  role/service-role/CloudWatchSyntheticsRole-MyCanaryName .   CloudWatch Logs log groups created for the canary. These logs groups have the name /aws/lambda/cwsyn-MyCanaryName .    Before you delete a canary, you might want to use GetCanary to display the information about this canary. Make note of the information returned by this operation so that you can delete these resources after you delete the canary.
+   * Permanently deletes the specified canary. If you specify DeleteLambda to true, CloudWatch Synthetics also deletes the Lambda functions and layers that are used by the canary. Other esources used and created by the canary are not automatically deleted. After you delete a canary that you do not intend to use again, you should also delete the following:   The CloudWatch alarms created for this canary. These alarms have a name of Synthetics-SharpDrop-Alarm-MyCanaryName .   Amazon S3 objects and buckets, such as the canary's artifact location.   IAM roles created for the canary. If they were created in the console, these roles have the name  role/service-role/CloudWatchSyntheticsRole-MyCanaryName .   CloudWatch Logs log groups created for the canary. These logs groups have the name /aws/lambda/cwsyn-MyCanaryName .    Before you delete a canary, you might want to use GetCanary to display the information about this canary. Make note of the information returned by this operation so that you can delete these resources after you delete the canary.
    */
   deleteCanary(callback?: (err: AWSError, data: Synthetics.Types.DeleteCanaryResponse) => void): Request<Synthetics.Types.DeleteCanaryResponse, AWSError>;
   /**
-   * This operation returns a list of the canaries in your account, along with full details about each canary. This operation does not have resource-level authorization, so if a user is able to use DescribeCanaries, the user can see all of the canaries in the account. A deny policy can only be used to restrict access to all canaries. It cannot be used on specific resources. 
+   * This operation returns a list of the canaries in your account, along with full details about each canary. This operation supports resource-level authorization using an IAM policy and the Names parameter. If you specify the Names parameter, the operation is successful only if you have authorization to view all the canaries that you specify in your request. If you do not have permission to view any of the canaries, the request fails with a 403 response. You are required to use the Names parameter if you are logged on to a user or role that has an IAM policy that restricts which canaries that you are allowed to view. For more information, see  Limiting a user to viewing specific canaries.
    */
   describeCanaries(params: Synthetics.Types.DescribeCanariesRequest, callback?: (err: AWSError, data: Synthetics.Types.DescribeCanariesResponse) => void): Request<Synthetics.Types.DescribeCanariesResponse, AWSError>;
   /**
-   * This operation returns a list of the canaries in your account, along with full details about each canary. This operation does not have resource-level authorization, so if a user is able to use DescribeCanaries, the user can see all of the canaries in the account. A deny policy can only be used to restrict access to all canaries. It cannot be used on specific resources. 
+   * This operation returns a list of the canaries in your account, along with full details about each canary. This operation supports resource-level authorization using an IAM policy and the Names parameter. If you specify the Names parameter, the operation is successful only if you have authorization to view all the canaries that you specify in your request. If you do not have permission to view any of the canaries, the request fails with a 403 response. You are required to use the Names parameter if you are logged on to a user or role that has an IAM policy that restricts which canaries that you are allowed to view. For more information, see  Limiting a user to viewing specific canaries.
    */
   describeCanaries(callback?: (err: AWSError, data: Synthetics.Types.DescribeCanariesResponse) => void): Request<Synthetics.Types.DescribeCanariesResponse, AWSError>;
   /**
-   * Use this operation to see information from the most recent run of each canary that you have created.
+   * Use this operation to see information from the most recent run of each canary that you have created. This operation supports resource-level authorization using an IAM policy and the Names parameter. If you specify the Names parameter, the operation is successful only if you have authorization to view all the canaries that you specify in your request. If you do not have permission to view any of the canaries, the request fails with a 403 response. You are required to use the Names parameter if you are logged on to a user or role that has an IAM policy that restricts which canaries that you are allowed to view. For more information, see  Limiting a user to viewing specific canaries.
    */
   describeCanariesLastRun(params: Synthetics.Types.DescribeCanariesLastRunRequest, callback?: (err: AWSError, data: Synthetics.Types.DescribeCanariesLastRunResponse) => void): Request<Synthetics.Types.DescribeCanariesLastRunResponse, AWSError>;
   /**
-   * Use this operation to see information from the most recent run of each canary that you have created.
+   * Use this operation to see information from the most recent run of each canary that you have created. This operation supports resource-level authorization using an IAM policy and the Names parameter. If you specify the Names parameter, the operation is successful only if you have authorization to view all the canaries that you specify in your request. If you do not have permission to view any of the canaries, the request fails with a 403 response. You are required to use the Names parameter if you are logged on to a user or role that has an IAM policy that restricts which canaries that you are allowed to view. For more information, see  Limiting a user to viewing specific canaries.
    */
   describeCanariesLastRun(callback?: (err: AWSError, data: Synthetics.Types.DescribeCanariesLastRunResponse) => void): Request<Synthetics.Types.DescribeCanariesLastRunResponse, AWSError>;
   /**
@@ -221,13 +221,13 @@ declare namespace Synthetics {
      */
     S3Version?: String;
     /**
-     * If you input your canary script directly into the canary instead of referring to an S3 location, the value of this parameter is the base64-encoded contents of the .zip file that contains the script. It must be smaller than 256 Kb.
+     * If you input your canary script directly into the canary instead of referring to an S3 location, the value of this parameter is the base64-encoded contents of the .zip file that contains the script. It must be smaller than 225 Kb. For large canary scripts, we recommend that you use an S3 location instead of inputting it directly with this parameter.
      */
     ZipFile?: _Blob;
     /**
-     * The entry point to use for the source code when running the canary. This value must end with the string .handler. The string is limited to 29 characters or fewer.
+     * The entry point to use for the source code when running the canary. For canaries that use the syn-python-selenium-1.0 runtime or a syn-nodejs.puppeteer runtime earlier than syn-nodejs.puppeteer-3.4, the handler must be specified as  fileName.handler. For syn-python-selenium-1.1, syn-nodejs.puppeteer-3.4, and later runtimes, the handler can be specified as  fileName.functionName , or you can specify a folder where canary scripts reside as  folder/fileName.functionName .
      */
-    Handler: String;
+    Handler: CodeHandler;
   }
   export interface CanaryCodeOutput {
     /**
@@ -352,7 +352,7 @@ declare namespace Synthetics {
     DurationInSeconds?: MaxOneYearInSeconds;
   }
   export type CanaryState = "CREATING"|"READY"|"STARTING"|"RUNNING"|"UPDATING"|"STOPPING"|"STOPPED"|"ERROR"|"DELETING"|string;
-  export type CanaryStateReasonCode = "INVALID_PERMISSIONS"|string;
+  export type CanaryStateReasonCode = "INVALID_PERMISSIONS"|"CREATE_PENDING"|"CREATE_IN_PROGRESS"|"CREATE_FAILED"|"UPDATE_PENDING"|"UPDATE_IN_PROGRESS"|"UPDATE_COMPLETE"|"ROLLBACK_COMPLETE"|"ROLLBACK_FAILED"|"DELETE_IN_PROGRESS"|"DELETE_FAILED"|"SYNC_DELETE_IN_PROGRESS"|string;
   export interface CanaryStatus {
     /**
      * The current state of the canary.
@@ -385,6 +385,7 @@ declare namespace Synthetics {
      */
     LastStopped?: Timestamp;
   }
+  export type CodeHandler = string;
   export interface CreateCanaryRequest {
     /**
      * The name for this canary. Be sure to give it a descriptive name that distinguishes it from other canaries in your account. Do not include secrets or proprietary information in your canary names. The canary name makes up part of the canary ARN, and the ARN is included in outbound calls over the internet. For more information, see Security Considerations for Synthetics Canaries.
@@ -446,9 +447,14 @@ declare namespace Synthetics {
      * The name of the canary that you want to delete. To find the names of your canaries, use DescribeCanaries.
      */
     Name: CanaryName;
+    /**
+     * Specifies whether to also delete the Lambda functions and layers used by this canary. The default is false. Type: Boolean
+     */
+    DeleteLambda?: boolean;
   }
   export interface DeleteCanaryResponse {
   }
+  export type DescribeCanariesLastRunNameFilter = CanaryName[];
   export interface DescribeCanariesLastRunRequest {
     /**
      * A token that indicates that there is more data available. You can use this token in a subsequent DescribeCanaries operation to retrieve the next set of results.
@@ -458,6 +464,10 @@ declare namespace Synthetics {
      * Specify this parameter to limit how many runs are returned each time you use the DescribeLastRun operation. If you omit this parameter, the default of 100 is used.
      */
     MaxResults?: MaxSize100;
+    /**
+     * Use this parameter to return only canaries that match the names that you specify here. You can specify as many as five canary names. If you specify this parameter, the operation is successful only if you have authorization to view all the canaries that you specify in your request. If you do not have permission to view any of the canaries, the request fails with a 403 response. You are required to use the Names parameter if you are logged on to a user or role that has an IAM policy that restricts which canaries that you are allowed to view. For more information, see  Limiting a user to viewing specific canaries.
+     */
+    Names?: DescribeCanariesLastRunNameFilter;
   }
   export interface DescribeCanariesLastRunResponse {
     /**
@@ -469,6 +479,7 @@ declare namespace Synthetics {
      */
     NextToken?: Token;
   }
+  export type DescribeCanariesNameFilter = CanaryName[];
   export interface DescribeCanariesRequest {
     /**
      * A token that indicates that there is more data available. You can use this token in a subsequent operation to retrieve the next set of results.
@@ -478,6 +489,10 @@ declare namespace Synthetics {
      * Specify this parameter to limit how many canaries are returned each time you use the DescribeCanaries operation. If you omit this parameter, the default of 100 is used.
      */
     MaxResults?: MaxCanaryResults;
+    /**
+     * Use this parameter to return only canaries that match the names that you specify here. You can specify as many as five canary names. If you specify this parameter, the operation is successful only if you have authorization to view all the canaries that you specify in your request. If you do not have permission to view any of the canaries, the request fails with a 403 response. You are required to use this parameter if you are logged on to a user or role that has an IAM policy that restricts which canaries that you are allowed to view. For more information, see  Limiting a user to viewing specific canaries.
+     */
+    Names?: DescribeCanariesNameFilter;
   }
   export interface DescribeCanariesResponse {
     /**

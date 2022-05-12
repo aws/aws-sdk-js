@@ -269,11 +269,11 @@ declare class DMS extends Service {
    */
   describeReplicationSubnetGroups(callback?: (err: AWSError, data: DMS.Types.DescribeReplicationSubnetGroupsResponse) => void): Request<DMS.Types.DescribeReplicationSubnetGroupsResponse, AWSError>;
   /**
-   * Returns the task assessment results from the Amazon S3 bucket that DMS creates in your Amazon Web Services account. This action always returns the latest results. For more information about DMS task assessments, see Creating a task assessment report in the  Database Migration Service User Guide.
+   * Returns the task assessment results from the Amazon S3 bucket that DMS creates in your Amazon Web Services account. This action always returns the latest results. For more information about DMS task assessments, see Creating a task assessment report in the Database Migration Service User Guide.
    */
   describeReplicationTaskAssessmentResults(params: DMS.Types.DescribeReplicationTaskAssessmentResultsMessage, callback?: (err: AWSError, data: DMS.Types.DescribeReplicationTaskAssessmentResultsResponse) => void): Request<DMS.Types.DescribeReplicationTaskAssessmentResultsResponse, AWSError>;
   /**
-   * Returns the task assessment results from the Amazon S3 bucket that DMS creates in your Amazon Web Services account. This action always returns the latest results. For more information about DMS task assessments, see Creating a task assessment report in the  Database Migration Service User Guide.
+   * Returns the task assessment results from the Amazon S3 bucket that DMS creates in your Amazon Web Services account. This action always returns the latest results. For more information about DMS task assessments, see Creating a task assessment report in the Database Migration Service User Guide.
    */
   describeReplicationTaskAssessmentResults(callback?: (err: AWSError, data: DMS.Types.DescribeReplicationTaskAssessmentResultsResponse) => void): Request<DMS.Types.DescribeReplicationTaskAssessmentResultsResponse, AWSError>;
   /**
@@ -421,11 +421,11 @@ declare class DMS extends Service {
    */
   startReplicationTask(callback?: (err: AWSError, data: DMS.Types.StartReplicationTaskResponse) => void): Request<DMS.Types.StartReplicationTaskResponse, AWSError>;
   /**
-   *  Starts the replication task assessment for unsupported data types in the source database. 
+   *  Starts the replication task assessment for unsupported data types in the source database.  You can only use this operation for a task if the following conditions are true:   The task must be in the stopped state.   The task must have successful connections to the source and target.   If either of these conditions are not met, an InvalidResourceStateFault error will result.  For information about DMS task assessments, see Creating a task assessment report in the Database Migration Service User Guide.
    */
   startReplicationTaskAssessment(params: DMS.Types.StartReplicationTaskAssessmentMessage, callback?: (err: AWSError, data: DMS.Types.StartReplicationTaskAssessmentResponse) => void): Request<DMS.Types.StartReplicationTaskAssessmentResponse, AWSError>;
   /**
-   *  Starts the replication task assessment for unsupported data types in the source database. 
+   *  Starts the replication task assessment for unsupported data types in the source database.  You can only use this operation for a task if the following conditions are true:   The task must be in the stopped state.   The task must have successful connections to the source and target.   If either of these conditions are not met, an InvalidResourceStateFault error will result.  For information about DMS task assessments, see Creating a task assessment report in the Database Migration Service User Guide.
    */
   startReplicationTaskAssessment(callback?: (err: AWSError, data: DMS.Types.StartReplicationTaskAssessmentResponse) => void): Request<DMS.Types.StartReplicationTaskAssessmentResponse, AWSError>;
   /**
@@ -604,7 +604,7 @@ declare namespace DMS {
      */
     CertificatePem?: String;
     /**
-     * The location of an imported Oracle Wallet certificate for use with SSL.
+     * The location of an imported Oracle Wallet certificate for use with SSL. Example: filebase64("${path.root}/rds-ca-2019-root.sso") 
      */
     CertificateWallet?: CertificateWallet;
     /**
@@ -673,7 +673,7 @@ declare namespace DMS {
      */
     EndpointType: ReplicationEndpointTypeValue;
     /**
-     * The type of engine for the endpoint. Valid values, depending on the EndpointType value, include "mysql", "oracle", "postgres", "mariadb", "aurora", "aurora-postgresql", "redshift", "s3", "db2", "azuredb", "sybase", "dynamodb", "mongodb", "kinesis", "kafka", "elasticsearch", "docdb", "sqlserver", and "neptune".
+     * The type of engine for the endpoint. Valid values, depending on the EndpointType value, include "mysql", "oracle", "postgres", "mariadb", "aurora", "aurora-postgresql", "opensearch", "redshift", "s3", "db2", "azuredb", "sybase", "dynamodb", "mongodb", "kinesis", "kafka", "elasticsearch", "docdb", "sqlserver", and "neptune".
      */
     EngineName: String;
     /**
@@ -749,7 +749,7 @@ declare namespace DMS {
      */
     KafkaSettings?: KafkaSettings;
     /**
-     * Settings in JSON format for the target Elasticsearch endpoint. For more information about the available settings, see Extra Connection Attributes When Using Elasticsearch as a Target for DMS in the Database Migration Service User Guide.
+     * Settings in JSON format for the target OpenSearch endpoint. For more information about the available settings, see Extra Connection Attributes When Using OpenSearch as a Target for DMS in the Database Migration Service User Guide.
      */
     ElasticsearchSettings?: ElasticsearchSettings;
     /**
@@ -790,6 +790,10 @@ declare namespace DMS {
      * Settings in JSON format for the target Redis endpoint.
      */
     RedisSettings?: RedisSettings;
+    /**
+     * Settings in JSON format for the source GCP MySQL endpoint.
+     */
+    GcpMySQLSettings?: GcpMySQLSettings;
   }
   export interface CreateEndpointResponse {
     /**
@@ -990,7 +994,7 @@ declare namespace DMS {
   export type DatePartitionSequenceValue = "YYYYMMDD"|"YYYYMMDDHH"|"YYYYMM"|"MMYYYYDD"|"DDMMYYYY"|string;
   export interface DeleteCertificateMessage {
     /**
-     * The Amazon Resource Name (ARN) of the deleted certificate.
+     * The Amazon Resource Name (ARN) of the certificate.
      */
     CertificateArn: String;
   }
@@ -1138,7 +1142,7 @@ declare namespace DMS {
   }
   export interface DescribeCertificatesMessage {
     /**
-     * Filters applied to the certificates described in the form of key-value pairs.
+     * Filters applied to the certificates described in the form of key-value pairs. Valid values are certificate-arn and certificate-id.
      */
     Filters?: FilterList;
     /**
@@ -1278,7 +1282,7 @@ declare namespace DMS {
      */
     SubscriptionName?: String;
     /**
-     * Filters applied to event subscriptions.
+     * Filters applied to event subscriptions. Valid filter names: event-subscription-arn | event-subscription-id 
      */
     Filters?: FilterList;
     /**
@@ -1326,7 +1330,7 @@ declare namespace DMS {
      */
     EventCategories?: EventCategoriesList;
     /**
-     * Filters applied to events.
+     * Filters applied to events. The only valid filter is replication-instance-id.
      */
     Filters?: FilterList;
     /**
@@ -1713,15 +1717,15 @@ declare namespace DMS {
      */
     ServiceAccessRoleArn: String;
     /**
-     * The endpoint for the Elasticsearch cluster. DMS uses HTTPS if a transport protocol (http/https) is not specified.
+     * The endpoint for the OpenSearch cluster. DMS uses HTTPS if a transport protocol (http/https) is not specified.
      */
     EndpointUri: String;
     /**
-     * The maximum percentage of records that can fail to be written before a full load operation stops. To avoid early failure, this counter is only effective after 1000 records are transferred. Elasticsearch also has the concept of error monitoring during the last 10 minutes of an Observation Window. If transfer of all records fail in the last 10 minutes, the full load operation stops. 
+     * The maximum percentage of records that can fail to be written before a full load operation stops. To avoid early failure, this counter is only effective after 1000 records are transferred. OpenSearch also has the concept of error monitoring during the last 10 minutes of an Observation Window. If transfer of all records fail in the last 10 minutes, the full load operation stops. 
      */
     FullLoadErrorPercentage?: IntegerOptional;
     /**
-     * The maximum number of seconds for which DMS retries failed API requests to the Elasticsearch cluster.
+     * The maximum number of seconds for which DMS retries failed API requests to the OpenSearch cluster.
      */
     ErrorRetryDuration?: IntegerOptional;
   }
@@ -1737,7 +1741,7 @@ declare namespace DMS {
      */
     EndpointType?: ReplicationEndpointTypeValue;
     /**
-     * The database engine name. Valid values, depending on the EndpointType, include "mysql", "oracle", "postgres", "mariadb", "aurora", "aurora-postgresql", "redshift", "s3", "db2", "azuredb", "sybase", "dynamodb", "mongodb", "kinesis", "kafka", "elasticsearch", "documentdb", "sqlserver", and "neptune".
+     * The database engine name. Valid values, depending on the EndpointType, include "mysql", "oracle", "postgres", "mariadb", "aurora", "aurora-postgresql", "opensearch", "redshift", "s3", "db2", "azuredb", "sybase", "dynamodb", "mongodb", "kinesis", "kafka", "elasticsearch", "documentdb", "sqlserver", and "neptune".
      */
     EngineName?: String;
     /**
@@ -1805,7 +1809,7 @@ declare namespace DMS {
      */
     S3Settings?: S3Settings;
     /**
-     * The settings in JSON format for the DMS transfer type of source endpoint.  Possible settings include the following:    ServiceAccessRoleArn - - The Amazon Resource Name (ARN) used by the service access IAM role. The role must allow the iam:PassRole action.    BucketName - The name of the S3 bucket to use.   Shorthand syntax for these settings is as follows: ServiceAccessRoleArn=string,BucketName=string,  JSON syntax for these settings is as follows: { "ServiceAccessRoleArn": "string", "BucketName": "string"}  
+     * The settings for the DMS Transfer type source. For more information, see the DmsTransferSettings structure. 
      */
     DmsTransferSettings?: DmsTransferSettings;
     /**
@@ -1821,7 +1825,7 @@ declare namespace DMS {
      */
     KafkaSettings?: KafkaSettings;
     /**
-     * The settings for the Elasticsearch source endpoint. For more information, see the ElasticsearchSettings structure.
+     * The settings for the OpenSearch source endpoint. For more information, see the ElasticsearchSettings structure.
      */
     ElasticsearchSettings?: ElasticsearchSettings;
     /**
@@ -1861,6 +1865,10 @@ declare namespace DMS {
      * The settings for the Redis target endpoint. For more information, see the RedisSettings structure.
      */
     RedisSettings?: RedisSettings;
+    /**
+     * Settings in JSON format for the source GCP MySQL endpoint.
+     */
+    GcpMySQLSettings?: GcpMySQLSettings;
   }
   export type EndpointList = Endpoint[];
   export interface EndpointSetting {
@@ -1991,6 +1999,64 @@ declare namespace DMS {
   }
   export type FilterList = Filter[];
   export type FilterValueList = String[];
+  export interface GcpMySQLSettings {
+    /**
+     * Specifies a script to run immediately after DMS connects to the endpoint. The migration task continues running regardless if the SQL statement succeeds or fails. For this parameter, provide the code of the script itself, not the name of a file containing the script. 
+     */
+    AfterConnectScript?: String;
+    /**
+     * Adjusts the behavior of DMS when migrating from an SQL Server source database that is hosted as part of an Always On availability group cluster. If you need DMS to poll all the nodes in the Always On cluster for transaction backups, set this attribute to false. 
+     */
+    CleanSourceMetadataOnMismatch?: BooleanOptional;
+    /**
+     * Database name for the endpoint. For a MySQL source or target endpoint, don't explicitly specify the database using the DatabaseName request parameter on either the CreateEndpoint or ModifyEndpoint API call. Specifying DatabaseName when you create or modify a MySQL endpoint replicates all the task tables to this single database. For MySQL endpoints, you specify the database only when you specify the schema in the table-mapping rules of the DMS task. 
+     */
+    DatabaseName?: String;
+    /**
+     * Specifies how often to check the binary log for new changes/events when the database is idle. The default is five seconds. Example: eventsPollInterval=5;  In the example, DMS checks for changes in the binary logs every five seconds. 
+     */
+    EventsPollInterval?: IntegerOptional;
+    /**
+     * Specifies where to migrate source tables on the target, either to a single database or multiple databases. Example: targetDbType=MULTIPLE_DATABASES 
+     */
+    TargetDbType?: TargetDbType;
+    /**
+     * Specifies the maximum size (in KB) of any .csv file used to transfer data to a MySQL-compatible database. Example: maxFileSize=512 
+     */
+    MaxFileSize?: IntegerOptional;
+    /**
+     * Improves performance when loading data into the MySQL-compatible target database. Specifies how many threads to use to load the data into the MySQL-compatible target database. Setting a large number of threads can have an adverse effect on database performance, because a separate connection is required for each thread. The default is one. Example: parallelLoadThreads=1 
+     */
+    ParallelLoadThreads?: IntegerOptional;
+    /**
+     * Endpoint connection password.
+     */
+    Password?: SecretString;
+    /**
+     * 
+     */
+    Port?: IntegerOptional;
+    /**
+     * Endpoint TCP port.
+     */
+    ServerName?: String;
+    /**
+     * Specifies the time zone for the source MySQL database. Example: serverTimezone=US/Pacific;  Note: Do not enclose time zones in single quotes.
+     */
+    ServerTimezone?: String;
+    /**
+     * Endpoint connection user name.
+     */
+    Username?: String;
+    /**
+     * The full Amazon Resource Name (ARN) of the IAM role that specifies DMS as the trusted entity and grants the required permissions to access the value in SecretsManagerSecret. The role must allow the iam:PassRole action. SecretsManagerSecret has the value of the Amazon Web Services Secrets Manager secret that allows access to the MySQL endpoint.  You can specify one of two sets of values for these permissions. You can specify the values for this setting and SecretsManagerSecretId. Or you can specify clear-text values for UserName, Password, ServerName, and Port. You can't specify both. For more information on creating this SecretsManagerSecret and the SecretsManagerAccessRoleArn and SecretsManagerSecretId required to access it, see Using secrets to access Database Migration Service resources in the Database Migration Service User Guide.  
+     */
+    SecretsManagerAccessRoleArn?: String;
+    /**
+     * The full ARN, partial ARN, or friendly name of the SecretsManagerSecret that contains the MySQL endpoint connection details. 
+     */
+    SecretsManagerSecretId?: String;
+  }
   export interface IBMDb2Settings {
     /**
      * Database name for the endpoint.
@@ -2043,7 +2109,7 @@ declare namespace DMS {
      */
     CertificatePem?: SecretString;
     /**
-     * The location of an imported Oracle Wallet certificate for use with SSL. Provide the name of a .sso file using the fileb:// prefix. You can't provide the certificate inline. 
+     * The location of an imported Oracle Wallet certificate for use with SSL. Provide the name of a .sso file using the fileb:// prefix. You can't provide the certificate inline. Example: filebase64("${path.root}/rds-ca-2019-root.sso") 
      */
     CertificateWallet?: CertificateWallet;
     /**
@@ -2271,7 +2337,7 @@ declare namespace DMS {
      */
     EndpointType?: ReplicationEndpointTypeValue;
     /**
-     * The type of engine for the endpoint. Valid values, depending on the EndpointType, include "mysql", "oracle", "postgres", "mariadb", "aurora", "aurora-postgresql", "redshift", "s3", "db2", "azuredb", "sybase", "dynamodb", "mongodb", "kinesis", "kafka", "elasticsearch", "documentdb", "sqlserver", and "neptune".
+     * The type of engine for the endpoint. Valid values, depending on the EndpointType, include "mysql", "oracle", "postgres", "mariadb", "aurora", "aurora-postgresql", "opensearch", "redshift", "s3", "db2", "azuredb", "sybase", "dynamodb", "mongodb", "kinesis", "kafka", "elasticsearch", "documentdb", "sqlserver", and "neptune".
      */
     EngineName?: String;
     /**
@@ -2339,7 +2405,7 @@ declare namespace DMS {
      */
     KafkaSettings?: KafkaSettings;
     /**
-     * Settings in JSON format for the target Elasticsearch endpoint. For more information about the available settings, see Extra Connection Attributes When Using Elasticsearch as a Target for DMS in the Database Migration Service User Guide. 
+     * Settings in JSON format for the target OpenSearch endpoint. For more information about the available settings, see Extra Connection Attributes When Using OpenSearch as a Target for DMS in the Database Migration Service User Guide. 
      */
     ElasticsearchSettings?: ElasticsearchSettings;
     /**
@@ -2383,6 +2449,10 @@ declare namespace DMS {
      * If this attribute is Y, the current call to ModifyEndpoint replaces all existing endpoint settings with the exact settings that you specify in this call. If this attribute is N, the current call to ModifyEndpoint does two things:    It replaces any endpoint settings that already exist with new values, for settings with the same names.   It creates new endpoint settings that you specify in the call, for settings with different names.    For example, if you call create-endpoint ... --endpoint-settings '{"a":1}' ..., the endpoint has the following endpoint settings: '{"a":1}'. If you then call modify-endpoint ... --endpoint-settings '{"b":2}' ... for the same endpoint, the endpoint has the following settings: '{"a":1,"b":2}'.  However, suppose that you follow this with a call to modify-endpoint ... --endpoint-settings '{"b":2}' --exact-settings ... for that same endpoint again. Then the endpoint has the following settings: '{"b":2}'. All existing settings are replaced with the exact settings that you specify. 
      */
     ExactSettings?: BooleanOptional;
+    /**
+     * Settings in JSON format for the source GCP MySQL endpoint.
+     */
+    GcpMySQLSettings?: GcpMySQLSettings;
   }
   export interface ModifyEndpointResponse {
     /**
@@ -2622,7 +2692,7 @@ declare namespace DMS {
      */
     DatabaseName?: String;
     /**
-     * Specifies how often to check the binary log for new changes/events when the database is idle. Example: eventsPollInterval=5;  In the example, DMS checks for changes in the binary logs every five seconds.
+     * Specifies how often to check the binary log for new changes/events when the database is idle. The default is five seconds. Example: eventsPollInterval=5;  In the example, DMS checks for changes in the binary logs every five seconds.
      */
     EventsPollInterval?: IntegerOptional;
     /**
@@ -2634,7 +2704,7 @@ declare namespace DMS {
      */
     MaxFileSize?: IntegerOptional;
     /**
-     * Improves performance when loading data into the MySQL-compatible target database. Specifies how many threads to use to load the data into the MySQL-compatible target database. Setting a large number of threads can have an adverse effect on database performance, because a separate connection is required for each thread. Example: parallelLoadThreads=1 
+     * Improves performance when loading data into the MySQL-compatible target database. Specifies how many threads to use to load the data into the MySQL-compatible target database. Setting a large number of threads can have an adverse effect on database performance, because a separate connection is required for each thread. The default is one. Example: parallelLoadThreads=1 
      */
     ParallelLoadThreads?: IntegerOptional;
     /**
@@ -2974,7 +3044,7 @@ declare namespace DMS {
      */
     Password?: SecretString;
     /**
-     * Endpoint TCP port.
+     * Endpoint TCP port. The default is 5432.
      */
     Port?: IntegerOptional;
     /**
@@ -3766,6 +3836,10 @@ declare namespace DMS {
      */
     CdcPath?: String;
     /**
+     * When set to true, this parameter uses the task start time as the timestamp column value instead of the time data is written to target. For full load, when useTaskStartTimeForFullLoadTimestamp is set to true, each row of the timestamp column contains the task start time. For CDC loads, each row of the timestamp column contains the transaction commit time. When useTaskStartTimeForFullLoadTimestamp is set to false, the full load timestamp in the timestamp column increments with the time data arrives at the target. 
+     */
+    UseTaskStartTimeForFullLoadTimestamp?: BooleanOptional;
+    /**
      * A value that enables DMS to specify a predefined (canned) access control list for objects created in an Amazon S3 bucket as .csv or .parquet files. For more information about Amazon S3 canned ACLs, see Canned ACL in the Amazon S3 Developer Guide.  The default value is NONE. Valid values include NONE, PRIVATE, PUBLIC_READ, PUBLIC_READ_WRITE, AUTHENTICATED_READ, AWS_EXEC_READ, BUCKET_OWNER_READ, and BUCKET_OWNER_FULL_CONTROL.
      */
     CannedAclForObjects?: CannedAclForObjectsValue;
@@ -3797,6 +3871,10 @@ declare namespace DMS {
      * For an S3 source, when this value is set to true or y, each leading double quotation mark has to be followed by an ending double quotation mark. This formatting complies with RFC 4180. When this value is set to false or n, string literals are copied to the target as is. In this case, a delimiter (row or column) signals the end of the field. Thus, you can't use a delimiter as part of the string, because it signals the end of the value. For an S3 target, an optional parameter used to set behavior to comply with RFC 4180 for data migrated to Amazon S3 using .csv file format only. When this value is set to true or y using Amazon S3 as a target, if the data has quotation marks or newline characters in it, DMS encloses the entire column with an additional pair of double quotation marks ("). Every quotation mark within the data is repeated twice. The default value is true. Valid values include true, false, y, and n.
      */
     Rfc4180?: BooleanOptional;
+    /**
+     * When creating an S3 target endpoint, set DatePartitionTimezone to convert the current UTC time into a specified time zone. The conversion occurs when a date partition folder is created and a CDC filename is generated. The time zone format is Area/Location. Use this parameter when DatePartitionedEnabled is set to true, as shown in the following example.  s3-settings='{"DatePartitionEnabled": true, "DatePartitionSequence": "YYYYMMDDHH", "DatePartitionDelimiter": "SLASH", "DatePartitionTimezone":"Asia/Seoul", "BucketName": "dms-nattarat-test"}' 
+     */
+    DatePartitionTimezone?: String;
   }
   export type SafeguardPolicy = "rely-on-sql-server-replication-agent"|"exclusive-automatic-truncation"|"shared-automatic-truncation"|string;
   export type SchemaList = String[];
@@ -3866,7 +3944,7 @@ declare namespace DMS {
      */
     ReplicationTaskArn: String;
     /**
-     * A type of replication task.
+     * The type of replication task to start. When the migration type is full-load or full-load-and-cdc, the only valid value for the first run of the task is start-replication. You use reload-target to restart the task and resume-processing to resume the task. When the migration type is cdc, you use start-replication to start or restart the task, and resume-processing to resume the task. reload-target is not a valid value for a task with migration type of cdc.
      */
     StartReplicationTaskType: StartReplicationTaskTypeValue;
     /**
@@ -3951,7 +4029,7 @@ declare namespace DMS {
      */
     Password?: SecretString;
     /**
-     * Endpoint TCP port.
+     * Endpoint TCP port. The default is 5000.
      */
     Port?: IntegerOptional;
     /**

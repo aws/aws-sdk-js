@@ -91,6 +91,16 @@
     expect(util.queryStringParse(reqUrl.query)).to.eql(util.queryStringParse(dataUrl.query));
     if (svc.api.protocol === 'query' || svc.api.protocol === 'ec2') {
       expect(sortQS(req.httpRequest.body)).to.equal(sortQS(data.body));
+    } else if (svc.api.protocol.match(/(rest-json)/)) {
+      if (data.body) {
+        expect(req.httpRequest.headers['Content-Length']).to.equal(req.httpRequest.body.length);
+        expect(req.httpRequest.body.replace(/\s+/g, '')).to.equal(data.body.replace(/\s+/g, ''));
+      }
+      if (data.headers) {
+        Object.keys(data.headers).forEach((key) => {
+          expect(req.httpRequest.headers[key]).to.equal(data.headers[key]);
+        });
+      }
     } else if (svc.api.protocol.match(/(json|xml)/)) {
       if (req.httpRequest.body === '{}') {
         req.httpRequest.body = '';

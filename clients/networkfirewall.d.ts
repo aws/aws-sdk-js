@@ -20,27 +20,27 @@ declare class NetworkFirewall extends Service {
    */
   associateFirewallPolicy(callback?: (err: AWSError, data: NetworkFirewall.Types.AssociateFirewallPolicyResponse) => void): Request<NetworkFirewall.Types.AssociateFirewallPolicyResponse, AWSError>;
   /**
-   * Associates the specified subnets in the Amazon VPC to the firewall. You can specify one subnet for each of the Availability Zones that the VPC spans.  This request creates an AWS Network Firewall firewall endpoint in each of the subnets. To enable the firewall's protections, you must also modify the VPC's route tables for each subnet's Availability Zone, to redirect the traffic that's coming into and going out of the zone through the firewall endpoint. 
+   * Associates the specified subnets in the Amazon VPC to the firewall. You can specify one subnet for each of the Availability Zones that the VPC spans.  This request creates an Network Firewall firewall endpoint in each of the subnets. To enable the firewall's protections, you must also modify the VPC's route tables for each subnet's Availability Zone, to redirect the traffic that's coming into and going out of the zone through the firewall endpoint. 
    */
   associateSubnets(params: NetworkFirewall.Types.AssociateSubnetsRequest, callback?: (err: AWSError, data: NetworkFirewall.Types.AssociateSubnetsResponse) => void): Request<NetworkFirewall.Types.AssociateSubnetsResponse, AWSError>;
   /**
-   * Associates the specified subnets in the Amazon VPC to the firewall. You can specify one subnet for each of the Availability Zones that the VPC spans.  This request creates an AWS Network Firewall firewall endpoint in each of the subnets. To enable the firewall's protections, you must also modify the VPC's route tables for each subnet's Availability Zone, to redirect the traffic that's coming into and going out of the zone through the firewall endpoint. 
+   * Associates the specified subnets in the Amazon VPC to the firewall. You can specify one subnet for each of the Availability Zones that the VPC spans.  This request creates an Network Firewall firewall endpoint in each of the subnets. To enable the firewall's protections, you must also modify the VPC's route tables for each subnet's Availability Zone, to redirect the traffic that's coming into and going out of the zone through the firewall endpoint. 
    */
   associateSubnets(callback?: (err: AWSError, data: NetworkFirewall.Types.AssociateSubnetsResponse) => void): Request<NetworkFirewall.Types.AssociateSubnetsResponse, AWSError>;
   /**
-   * Creates an AWS Network Firewall Firewall and accompanying FirewallStatus for a VPC.  The firewall defines the configuration settings for an AWS Network Firewall firewall. The settings that you can define at creation include the firewall policy, the subnets in your VPC to use for the firewall endpoints, and any tags that are attached to the firewall AWS resource.  After you create a firewall, you can provide additional settings, like the logging configuration.  To update the settings for a firewall, you use the operations that apply to the settings themselves, for example UpdateLoggingConfiguration, AssociateSubnets, and UpdateFirewallDeleteProtection.  To manage a firewall's tags, use the standard AWS resource tagging operations, ListTagsForResource, TagResource, and UntagResource. To retrieve information about firewalls, use ListFirewalls and DescribeFirewall.
+   * Creates an Network Firewall Firewall and accompanying FirewallStatus for a VPC.  The firewall defines the configuration settings for an Network Firewall firewall. The settings that you can define at creation include the firewall policy, the subnets in your VPC to use for the firewall endpoints, and any tags that are attached to the firewall Amazon Web Services resource.  After you create a firewall, you can provide additional settings, like the logging configuration.  To update the settings for a firewall, you use the operations that apply to the settings themselves, for example UpdateLoggingConfiguration, AssociateSubnets, and UpdateFirewallDeleteProtection.  To manage a firewall's tags, use the standard Amazon Web Services resource tagging operations, ListTagsForResource, TagResource, and UntagResource. To retrieve information about firewalls, use ListFirewalls and DescribeFirewall.
    */
   createFirewall(params: NetworkFirewall.Types.CreateFirewallRequest, callback?: (err: AWSError, data: NetworkFirewall.Types.CreateFirewallResponse) => void): Request<NetworkFirewall.Types.CreateFirewallResponse, AWSError>;
   /**
-   * Creates an AWS Network Firewall Firewall and accompanying FirewallStatus for a VPC.  The firewall defines the configuration settings for an AWS Network Firewall firewall. The settings that you can define at creation include the firewall policy, the subnets in your VPC to use for the firewall endpoints, and any tags that are attached to the firewall AWS resource.  After you create a firewall, you can provide additional settings, like the logging configuration.  To update the settings for a firewall, you use the operations that apply to the settings themselves, for example UpdateLoggingConfiguration, AssociateSubnets, and UpdateFirewallDeleteProtection.  To manage a firewall's tags, use the standard AWS resource tagging operations, ListTagsForResource, TagResource, and UntagResource. To retrieve information about firewalls, use ListFirewalls and DescribeFirewall.
+   * Creates an Network Firewall Firewall and accompanying FirewallStatus for a VPC.  The firewall defines the configuration settings for an Network Firewall firewall. The settings that you can define at creation include the firewall policy, the subnets in your VPC to use for the firewall endpoints, and any tags that are attached to the firewall Amazon Web Services resource.  After you create a firewall, you can provide additional settings, like the logging configuration.  To update the settings for a firewall, you use the operations that apply to the settings themselves, for example UpdateLoggingConfiguration, AssociateSubnets, and UpdateFirewallDeleteProtection.  To manage a firewall's tags, use the standard Amazon Web Services resource tagging operations, ListTagsForResource, TagResource, and UntagResource. To retrieve information about firewalls, use ListFirewalls and DescribeFirewall.
    */
   createFirewall(callback?: (err: AWSError, data: NetworkFirewall.Types.CreateFirewallResponse) => void): Request<NetworkFirewall.Types.CreateFirewallResponse, AWSError>;
   /**
-   * Creates the firewall policy for the firewall according to the specifications.  An AWS Network Firewall firewall policy defines the behavior of a firewall, in a collection of stateless and stateful rule groups and other settings. You can use one firewall policy for multiple firewalls. 
+   * Creates the firewall policy for the firewall according to the specifications.  An Network Firewall firewall policy defines the behavior of a firewall, in a collection of stateless and stateful rule groups and other settings. You can use one firewall policy for multiple firewalls. 
    */
   createFirewallPolicy(params: NetworkFirewall.Types.CreateFirewallPolicyRequest, callback?: (err: AWSError, data: NetworkFirewall.Types.CreateFirewallPolicyResponse) => void): Request<NetworkFirewall.Types.CreateFirewallPolicyResponse, AWSError>;
   /**
-   * Creates the firewall policy for the firewall according to the specifications.  An AWS Network Firewall firewall policy defines the behavior of a firewall, in a collection of stateless and stateful rule groups and other settings. You can use one firewall policy for multiple firewalls. 
+   * Creates the firewall policy for the firewall according to the specifications.  An Network Firewall firewall policy defines the behavior of a firewall, in a collection of stateless and stateful rule groups and other settings. You can use one firewall policy for multiple firewalls. 
    */
   createFirewallPolicy(callback?: (err: AWSError, data: NetworkFirewall.Types.CreateFirewallPolicyResponse) => void): Request<NetworkFirewall.Types.CreateFirewallPolicyResponse, AWSError>;
   /**
@@ -124,6 +124,14 @@ declare class NetworkFirewall extends Service {
    */
   describeRuleGroup(callback?: (err: AWSError, data: NetworkFirewall.Types.DescribeRuleGroupResponse) => void): Request<NetworkFirewall.Types.DescribeRuleGroupResponse, AWSError>;
   /**
+   * High-level information about a rule group, returned by operations like create and describe. You can use the information provided in the metadata to retrieve and manage a rule group. You can retrieve all objects for a rule group by calling DescribeRuleGroup. 
+   */
+  describeRuleGroupMetadata(params: NetworkFirewall.Types.DescribeRuleGroupMetadataRequest, callback?: (err: AWSError, data: NetworkFirewall.Types.DescribeRuleGroupMetadataResponse) => void): Request<NetworkFirewall.Types.DescribeRuleGroupMetadataResponse, AWSError>;
+  /**
+   * High-level information about a rule group, returned by operations like create and describe. You can use the information provided in the metadata to retrieve and manage a rule group. You can retrieve all objects for a rule group by calling DescribeRuleGroup. 
+   */
+  describeRuleGroupMetadata(callback?: (err: AWSError, data: NetworkFirewall.Types.DescribeRuleGroupMetadataResponse) => void): Request<NetworkFirewall.Types.DescribeRuleGroupMetadataResponse, AWSError>;
+  /**
    * Removes the specified subnet associations from the firewall. This removes the firewall endpoints from the subnets and removes any network filtering protections that the endpoints were providing. 
    */
   disassociateSubnets(params: NetworkFirewall.Types.DisassociateSubnetsRequest, callback?: (err: AWSError, data: NetworkFirewall.Types.DisassociateSubnetsResponse) => void): Request<NetworkFirewall.Types.DisassociateSubnetsResponse, AWSError>;
@@ -156,35 +164,35 @@ declare class NetworkFirewall extends Service {
    */
   listRuleGroups(callback?: (err: AWSError, data: NetworkFirewall.Types.ListRuleGroupsResponse) => void): Request<NetworkFirewall.Types.ListRuleGroupsResponse, AWSError>;
   /**
-   * Retrieves the tags associated with the specified resource. Tags are key:value pairs that you can use to categorize and manage your resources, for purposes like billing. For example, you might set the tag key to "customer" and the value to the customer name or ID. You can specify one or more tags to add to each AWS resource, up to 50 tags for a resource. You can tag the AWS resources that you manage through AWS Network Firewall: firewalls, firewall policies, and rule groups. 
+   * Retrieves the tags associated with the specified resource. Tags are key:value pairs that you can use to categorize and manage your resources, for purposes like billing. For example, you might set the tag key to "customer" and the value to the customer name or ID. You can specify one or more tags to add to each Amazon Web Services resource, up to 50 tags for a resource. You can tag the Amazon Web Services resources that you manage through Network Firewall: firewalls, firewall policies, and rule groups. 
    */
   listTagsForResource(params: NetworkFirewall.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: NetworkFirewall.Types.ListTagsForResourceResponse) => void): Request<NetworkFirewall.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Retrieves the tags associated with the specified resource. Tags are key:value pairs that you can use to categorize and manage your resources, for purposes like billing. For example, you might set the tag key to "customer" and the value to the customer name or ID. You can specify one or more tags to add to each AWS resource, up to 50 tags for a resource. You can tag the AWS resources that you manage through AWS Network Firewall: firewalls, firewall policies, and rule groups. 
+   * Retrieves the tags associated with the specified resource. Tags are key:value pairs that you can use to categorize and manage your resources, for purposes like billing. For example, you might set the tag key to "customer" and the value to the customer name or ID. You can specify one or more tags to add to each Amazon Web Services resource, up to 50 tags for a resource. You can tag the Amazon Web Services resources that you manage through Network Firewall: firewalls, firewall policies, and rule groups. 
    */
   listTagsForResource(callback?: (err: AWSError, data: NetworkFirewall.Types.ListTagsForResourceResponse) => void): Request<NetworkFirewall.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Creates or updates an AWS Identity and Access Management policy for your rule group or firewall policy. Use this to share rule groups and firewall policies between accounts. This operation works in conjunction with the AWS Resource Access Manager (RAM) service to manage resource sharing for Network Firewall.  Use this operation to create or update a resource policy for your rule group or firewall policy. In the policy, you specify the accounts that you want to share the resource with and the operations that you want the accounts to be able to perform.  When you add an account in the resource policy, you then run the following Resource Access Manager (RAM) operations to access and accept the shared rule group or firewall policy.     GetResourceShareInvitations - Returns the Amazon Resource Names (ARNs) of the resource share invitations.     AcceptResourceShareInvitation - Accepts the share invitation for a specified resource share.    For additional information about resource sharing using RAM, see AWS Resource Access Manager User Guide.
+   * Creates or updates an IAM policy for your rule group or firewall policy. Use this to share rule groups and firewall policies between accounts. This operation works in conjunction with the Amazon Web Services Resource Access Manager (RAM) service to manage resource sharing for Network Firewall.  Use this operation to create or update a resource policy for your rule group or firewall policy. In the policy, you specify the accounts that you want to share the resource with and the operations that you want the accounts to be able to perform.  When you add an account in the resource policy, you then run the following Resource Access Manager (RAM) operations to access and accept the shared rule group or firewall policy.     GetResourceShareInvitations - Returns the Amazon Resource Names (ARNs) of the resource share invitations.     AcceptResourceShareInvitation - Accepts the share invitation for a specified resource share.    For additional information about resource sharing using RAM, see Resource Access Manager User Guide.
    */
   putResourcePolicy(params: NetworkFirewall.Types.PutResourcePolicyRequest, callback?: (err: AWSError, data: NetworkFirewall.Types.PutResourcePolicyResponse) => void): Request<NetworkFirewall.Types.PutResourcePolicyResponse, AWSError>;
   /**
-   * Creates or updates an AWS Identity and Access Management policy for your rule group or firewall policy. Use this to share rule groups and firewall policies between accounts. This operation works in conjunction with the AWS Resource Access Manager (RAM) service to manage resource sharing for Network Firewall.  Use this operation to create or update a resource policy for your rule group or firewall policy. In the policy, you specify the accounts that you want to share the resource with and the operations that you want the accounts to be able to perform.  When you add an account in the resource policy, you then run the following Resource Access Manager (RAM) operations to access and accept the shared rule group or firewall policy.     GetResourceShareInvitations - Returns the Amazon Resource Names (ARNs) of the resource share invitations.     AcceptResourceShareInvitation - Accepts the share invitation for a specified resource share.    For additional information about resource sharing using RAM, see AWS Resource Access Manager User Guide.
+   * Creates or updates an IAM policy for your rule group or firewall policy. Use this to share rule groups and firewall policies between accounts. This operation works in conjunction with the Amazon Web Services Resource Access Manager (RAM) service to manage resource sharing for Network Firewall.  Use this operation to create or update a resource policy for your rule group or firewall policy. In the policy, you specify the accounts that you want to share the resource with and the operations that you want the accounts to be able to perform.  When you add an account in the resource policy, you then run the following Resource Access Manager (RAM) operations to access and accept the shared rule group or firewall policy.     GetResourceShareInvitations - Returns the Amazon Resource Names (ARNs) of the resource share invitations.     AcceptResourceShareInvitation - Accepts the share invitation for a specified resource share.    For additional information about resource sharing using RAM, see Resource Access Manager User Guide.
    */
   putResourcePolicy(callback?: (err: AWSError, data: NetworkFirewall.Types.PutResourcePolicyResponse) => void): Request<NetworkFirewall.Types.PutResourcePolicyResponse, AWSError>;
   /**
-   * Adds the specified tags to the specified resource. Tags are key:value pairs that you can use to categorize and manage your resources, for purposes like billing. For example, you might set the tag key to "customer" and the value to the customer name or ID. You can specify one or more tags to add to each AWS resource, up to 50 tags for a resource. You can tag the AWS resources that you manage through AWS Network Firewall: firewalls, firewall policies, and rule groups. 
+   * Adds the specified tags to the specified resource. Tags are key:value pairs that you can use to categorize and manage your resources, for purposes like billing. For example, you might set the tag key to "customer" and the value to the customer name or ID. You can specify one or more tags to add to each Amazon Web Services resource, up to 50 tags for a resource. You can tag the Amazon Web Services resources that you manage through Network Firewall: firewalls, firewall policies, and rule groups. 
    */
   tagResource(params: NetworkFirewall.Types.TagResourceRequest, callback?: (err: AWSError, data: NetworkFirewall.Types.TagResourceResponse) => void): Request<NetworkFirewall.Types.TagResourceResponse, AWSError>;
   /**
-   * Adds the specified tags to the specified resource. Tags are key:value pairs that you can use to categorize and manage your resources, for purposes like billing. For example, you might set the tag key to "customer" and the value to the customer name or ID. You can specify one or more tags to add to each AWS resource, up to 50 tags for a resource. You can tag the AWS resources that you manage through AWS Network Firewall: firewalls, firewall policies, and rule groups. 
+   * Adds the specified tags to the specified resource. Tags are key:value pairs that you can use to categorize and manage your resources, for purposes like billing. For example, you might set the tag key to "customer" and the value to the customer name or ID. You can specify one or more tags to add to each Amazon Web Services resource, up to 50 tags for a resource. You can tag the Amazon Web Services resources that you manage through Network Firewall: firewalls, firewall policies, and rule groups. 
    */
   tagResource(callback?: (err: AWSError, data: NetworkFirewall.Types.TagResourceResponse) => void): Request<NetworkFirewall.Types.TagResourceResponse, AWSError>;
   /**
-   * Removes the tags with the specified keys from the specified resource. Tags are key:value pairs that you can use to categorize and manage your resources, for purposes like billing. For example, you might set the tag key to "customer" and the value to the customer name or ID. You can specify one or more tags to add to each AWS resource, up to 50 tags for a resource. You can manage tags for the AWS resources that you manage through AWS Network Firewall: firewalls, firewall policies, and rule groups. 
+   * Removes the tags with the specified keys from the specified resource. Tags are key:value pairs that you can use to categorize and manage your resources, for purposes like billing. For example, you might set the tag key to "customer" and the value to the customer name or ID. You can specify one or more tags to add to each Amazon Web Services resource, up to 50 tags for a resource. You can manage tags for the Amazon Web Services resources that you manage through Network Firewall: firewalls, firewall policies, and rule groups. 
    */
   untagResource(params: NetworkFirewall.Types.UntagResourceRequest, callback?: (err: AWSError, data: NetworkFirewall.Types.UntagResourceResponse) => void): Request<NetworkFirewall.Types.UntagResourceResponse, AWSError>;
   /**
-   * Removes the tags with the specified keys from the specified resource. Tags are key:value pairs that you can use to categorize and manage your resources, for purposes like billing. For example, you might set the tag key to "customer" and the value to the customer name or ID. You can specify one or more tags to add to each AWS resource, up to 50 tags for a resource. You can manage tags for the AWS resources that you manage through AWS Network Firewall: firewalls, firewall policies, and rule groups. 
+   * Removes the tags with the specified keys from the specified resource. Tags are key:value pairs that you can use to categorize and manage your resources, for purposes like billing. For example, you might set the tag key to "customer" and the value to the customer name or ID. You can specify one or more tags to add to each Amazon Web Services resource, up to 50 tags for a resource. You can manage tags for the Amazon Web Services resources that you manage through Network Firewall: firewalls, firewall policies, and rule groups. 
    */
   untagResource(callback?: (err: AWSError, data: NetworkFirewall.Types.UntagResourceResponse) => void): Request<NetworkFirewall.Types.UntagResourceResponse, AWSError>;
   /**
@@ -204,6 +212,14 @@ declare class NetworkFirewall extends Service {
    */
   updateFirewallDescription(callback?: (err: AWSError, data: NetworkFirewall.Types.UpdateFirewallDescriptionResponse) => void): Request<NetworkFirewall.Types.UpdateFirewallDescriptionResponse, AWSError>;
   /**
+   * A complex type that contains settings for encryption of your firewall resources.
+   */
+  updateFirewallEncryptionConfiguration(params: NetworkFirewall.Types.UpdateFirewallEncryptionConfigurationRequest, callback?: (err: AWSError, data: NetworkFirewall.Types.UpdateFirewallEncryptionConfigurationResponse) => void): Request<NetworkFirewall.Types.UpdateFirewallEncryptionConfigurationResponse, AWSError>;
+  /**
+   * A complex type that contains settings for encryption of your firewall resources.
+   */
+  updateFirewallEncryptionConfiguration(callback?: (err: AWSError, data: NetworkFirewall.Types.UpdateFirewallEncryptionConfigurationResponse) => void): Request<NetworkFirewall.Types.UpdateFirewallEncryptionConfigurationResponse, AWSError>;
+  /**
    * Updates the properties of the specified firewall policy.
    */
   updateFirewallPolicy(params: NetworkFirewall.Types.UpdateFirewallPolicyRequest, callback?: (err: AWSError, data: NetworkFirewall.Types.UpdateFirewallPolicyResponse) => void): Request<NetworkFirewall.Types.UpdateFirewallPolicyResponse, AWSError>;
@@ -212,11 +228,11 @@ declare class NetworkFirewall extends Service {
    */
   updateFirewallPolicy(callback?: (err: AWSError, data: NetworkFirewall.Types.UpdateFirewallPolicyResponse) => void): Request<NetworkFirewall.Types.UpdateFirewallPolicyResponse, AWSError>;
   /**
-   * 
+   * Modifies the flag, ChangeProtection, which indicates whether it is possible to change the firewall. If the flag is set to TRUE, the firewall is protected from changes. This setting helps protect against accidentally changing a firewall that's in use.
    */
   updateFirewallPolicyChangeProtection(params: NetworkFirewall.Types.UpdateFirewallPolicyChangeProtectionRequest, callback?: (err: AWSError, data: NetworkFirewall.Types.UpdateFirewallPolicyChangeProtectionResponse) => void): Request<NetworkFirewall.Types.UpdateFirewallPolicyChangeProtectionResponse, AWSError>;
   /**
-   * 
+   * Modifies the flag, ChangeProtection, which indicates whether it is possible to change the firewall. If the flag is set to TRUE, the firewall is protected from changes. This setting helps protect against accidentally changing a firewall that's in use.
    */
   updateFirewallPolicyChangeProtection(callback?: (err: AWSError, data: NetworkFirewall.Types.UpdateFirewallPolicyChangeProtectionResponse) => void): Request<NetworkFirewall.Types.UpdateFirewallPolicyChangeProtectionResponse, AWSError>;
   /**
@@ -374,6 +390,10 @@ declare namespace NetworkFirewall {
      * Indicates whether you want Network Firewall to just check the validity of the request, rather than run the request.  If set to TRUE, Network Firewall checks whether the request can run successfully, but doesn't actually make the requested changes. The call returns the value that the request would return if you ran it with dry run set to FALSE, but doesn't make additions or changes to your resources. This option allows you to make sure that you have the required permissions to run the request and that your request parameters are valid.  If set to FALSE, Network Firewall makes the requested changes to your resources. 
      */
     DryRun?: Boolean;
+    /**
+     * A complex type that contains settings for encryption of your firewall policy resources.
+     */
+    EncryptionConfiguration?: EncryptionConfiguration;
   }
   export interface CreateFirewallPolicyResponse {
     /**
@@ -422,6 +442,10 @@ declare namespace NetworkFirewall {
      * The key:value pairs to associate with the resource.
      */
     Tags?: TagList;
+    /**
+     * A complex type that contains settings for encryption of your firewall resources.
+     */
+    EncryptionConfiguration?: EncryptionConfiguration;
   }
   export interface CreateFirewallResponse {
     /**
@@ -466,6 +490,14 @@ declare namespace NetworkFirewall {
      * Indicates whether you want Network Firewall to just check the validity of the request, rather than run the request.  If set to TRUE, Network Firewall checks whether the request can run successfully, but doesn't actually make the requested changes. The call returns the value that the request would return if you ran it with dry run set to FALSE, but doesn't make additions or changes to your resources. This option allows you to make sure that you have the required permissions to run the request and that your request parameters are valid.  If set to FALSE, Network Firewall makes the requested changes to your resources. 
      */
     DryRun?: Boolean;
+    /**
+     * A complex type that contains settings for encryption of your rule group resources.
+     */
+    EncryptionConfiguration?: EncryptionConfiguration;
+    /**
+     * A complex type that contains metadata about the rule group that your own rule group is copied from. You can use the metadata to keep track of updates made to the originating rule group.
+     */
+    SourceMetadata?: SourceMetadata;
   }
   export interface CreateRuleGroupResponse {
     /**
@@ -619,9 +651,50 @@ declare namespace NetworkFirewall {
   }
   export interface DescribeResourcePolicyResponse {
     /**
-     * The AWS Identity and Access Management policy for the resource. 
+     * The IAM policy for the resource. 
      */
     Policy?: PolicyString;
+  }
+  export interface DescribeRuleGroupMetadataRequest {
+    /**
+     * The descriptive name of the rule group. You can't change the name of a rule group after you create it. You must specify the ARN or the name, and you can specify both. 
+     */
+    RuleGroupName?: ResourceName;
+    /**
+     * The descriptive name of the rule group. You can't change the name of a rule group after you create it. You must specify the ARN or the name, and you can specify both. 
+     */
+    RuleGroupArn?: ResourceArn;
+    /**
+     * Indicates whether the rule group is stateless or stateful. If the rule group is stateless, it contains stateless rules. If it is stateful, it contains stateful rules.   This setting is required for requests that do not include the RuleGroupARN. 
+     */
+    Type?: RuleGroupType;
+  }
+  export interface DescribeRuleGroupMetadataResponse {
+    /**
+     * The descriptive name of the rule group. You can't change the name of a rule group after you create it. You must specify the ARN or the name, and you can specify both. 
+     */
+    RuleGroupArn: ResourceArn;
+    /**
+     * The descriptive name of the rule group. You can't change the name of a rule group after you create it. You must specify the ARN or the name, and you can specify both. 
+     */
+    RuleGroupName: ResourceName;
+    /**
+     * Returns the metadata objects for the specified rule group. 
+     */
+    Description?: Description;
+    /**
+     * Indicates whether the rule group is stateless or stateful. If the rule group is stateless, it contains stateless rules. If it is stateful, it contains stateful rules.   This setting is required for requests that do not include the RuleGroupARN. 
+     */
+    Type?: RuleGroupType;
+    /**
+     * The maximum operating resources that this rule group can use. Rule group capacity is fixed at creation. When you update a rule group, you are limited to this capacity. When you reference a rule group from a firewall policy, Network Firewall reserves this capacity for the rule group.  You can retrieve the capacity that would be required for a rule group before you create the rule group by calling CreateRuleGroup with DryRun set to TRUE. 
+     */
+    Capacity?: RuleCapacity;
+    StatefulRuleOptions?: StatefulRuleOptions;
+    /**
+     * The last time that the rule group was changed.
+     */
+    LastModifiedTime?: LastUpdateTime;
   }
   export interface DescribeRuleGroupRequest {
     /**
@@ -643,7 +716,7 @@ declare namespace NetworkFirewall {
      */
     UpdateToken: UpdateToken;
     /**
-     * The object that defines the rules in a rule group. This, along with RuleGroupResponse, define the rule group. You can retrieve all objects for a rule group by calling DescribeRuleGroup.  AWS Network Firewall uses a rule group to inspect and control network traffic. You define stateless rule groups to inspect individual packets and you define stateful rule groups to inspect packets in the context of their traffic flow.  To use a rule group, you include it by reference in an Network Firewall firewall policy, then you use the policy in a firewall. You can reference a rule group from more than one firewall policy, and you can use a firewall policy in more than one firewall. 
+     * The object that defines the rules in a rule group. This, along with RuleGroupResponse, define the rule group. You can retrieve all objects for a rule group by calling DescribeRuleGroup.  Network Firewall uses a rule group to inspect and control network traffic. You define stateless rule groups to inspect individual packets and you define stateful rule groups to inspect packets in the context of their traffic flow.  To use a rule group, you include it by reference in an Network Firewall firewall policy, then you use the policy in a firewall. You can reference a rule group from more than one firewall policy, and you can use a firewall policy in more than one firewall. 
      */
     RuleGroup?: RuleGroup;
     /**
@@ -697,6 +770,17 @@ declare namespace NetworkFirewall {
      */
     UpdateToken?: UpdateToken;
   }
+  export interface EncryptionConfiguration {
+    /**
+     * The ID of the Amazon Web Services Key Management Service (KMS) customer managed key. You can use any of the key identifiers that KMS supports, unless you're using a key that's managed by another account. If you're using a key managed by another account, then specify the key ARN. For more information, see Key ID in the Amazon Web Services KMS Developer Guide.
+     */
+    KeyId?: KeyId;
+    /**
+     * The type of Amazon Web Services KMS key to use for encryption of your Network Firewall resources.
+     */
+    Type: EncryptionType;
+  }
+  export type EncryptionType = "CUSTOMER_KMS"|"AWS_OWNED_KMS_KEY"|string;
   export type EndpointId = string;
   export interface Firewall {
     /**
@@ -743,6 +827,10 @@ declare namespace NetworkFirewall {
      * 
      */
     Tags?: TagList;
+    /**
+     * A complex type that contains the Amazon Web Services KMS encryption configuration settings for your firewall.
+     */
+    EncryptionConfiguration?: EncryptionConfiguration;
   }
   export interface FirewallMetadata {
     /**
@@ -777,7 +865,7 @@ declare namespace NetworkFirewall {
      */
     StatefulRuleGroupReferences?: StatefulRuleGroupReferences;
     /**
-     * The default actions to take on a packet that doesn't match any stateful rules.
+     * The default actions to take on a packet that doesn't match any stateful rules. The stateful default action is optional, and is only valid when using the strict rule order. Valid values of the stateful default action:   aws:drop_strict   aws:drop_established   aws:alert_strict   aws:alert_established   For more information, see Strict evaluation order in the Network Firewall Developer Guide. 
      */
     StatefulDefaultActions?: StatefulActions;
     /**
@@ -832,6 +920,14 @@ declare namespace NetworkFirewall {
      * The number of firewalls that are associated with this firewall policy.
      */
     NumberOfAssociations?: NumberOfAssociations;
+    /**
+     * A complex type that contains the Amazon Web Services KMS encryption configuration settings for your firewall policy.
+     */
+    EncryptionConfiguration?: EncryptionConfiguration;
+    /**
+     * The last time that the firewall policy was changed.
+     */
+    LastModifiedTime?: LastUpdateTime;
   }
   export interface FirewallStatus {
     /**
@@ -855,7 +951,7 @@ declare namespace NetworkFirewall {
   export type HashMapValue = string;
   export interface Header {
     /**
-     * The protocol to inspect for. To specify all, you can use IP, because all traffic on AWS and on the internet is IP.
+     * The protocol to inspect for. To specify all, you can use IP, because all traffic on Amazon Web Services and on the internet is IP.
      */
     Protocol: StatefulRuleProtocol;
     /**
@@ -886,7 +982,9 @@ declare namespace NetworkFirewall {
     Definition: VariableDefinitionList;
   }
   export type IPSets = {[key: string]: IPSet};
+  export type KeyId = string;
   export type Keyword = string;
+  export type LastUpdateTime = Date;
   export interface ListFirewallPoliciesRequest {
     /**
      * When you request a list of objects with a MaxResults setting, if the number of objects that are still available for retrieval exceeds the maximum you requested, Network Firewall returns a NextToken value in the response. To retrieve the next batch of objects, use the token returned from the prior request in your next request.
@@ -940,6 +1038,18 @@ declare namespace NetworkFirewall {
      * The maximum number of objects that you want Network Firewall to return for this request. If more objects are available, in the response, Network Firewall provides a NextToken value that you can use in a subsequent call to get the next batch of objects.
      */
     MaxResults?: PaginationMaxResults;
+    /**
+     * The scope of the request. The default setting of ACCOUNT or a setting of NULL returns all of the rule groups in your account. A setting of MANAGED returns all available managed rule groups.
+     */
+    Scope?: ResourceManagedStatus;
+    /**
+     * Indicates the general category of the Amazon Web Services managed rule group.
+     */
+    ManagedType?: ResourceManagedType;
+    /**
+     * Indicates whether the rule group is stateless or stateful. If the rule group is stateless, it contains stateless rules. If it is stateful, it contains stateful rules.
+     */
+    Type?: RuleGroupType;
   }
   export interface ListRuleGroupsResponse {
     /**
@@ -1026,6 +1136,7 @@ declare namespace NetworkFirewall {
     TCPFlags?: TCPFlags;
   }
   export type NumberOfAssociations = number;
+  export type OverrideAction = "DROP_TO_ALERT"|string;
   export type PaginationMaxResults = number;
   export type PaginationToken = string;
   export interface PerObjectStatus {
@@ -1075,7 +1186,7 @@ declare namespace NetworkFirewall {
      */
     ResourceArn: ResourceArn;
     /**
-     * The AWS Identity and Access Management policy statement that lists the accounts that you want to share your rule group or firewall policy with and the operations that you want the accounts to be able to perform.  For a rule group resource, you can specify the following operations in the Actions section of the statement:   network-firewall:CreateFirewallPolicy   network-firewall:UpdateFirewallPolicy   network-firewall:ListRuleGroups   For a firewall policy resource, you can specify the following operations in the Actions section of the statement:   network-firewall:CreateFirewall   network-firewall:UpdateFirewall   network-firewall:AssociateFirewallPolicy   network-firewall:ListFirewallPolicies   In the Resource section of the statement, you specify the ARNs for the rule groups and firewall policies that you want to share with the account that you specified in Arn.
+     * The IAM policy statement that lists the accounts that you want to share your rule group or firewall policy with and the operations that you want the accounts to be able to perform.  For a rule group resource, you can specify the following operations in the Actions section of the statement:   network-firewall:CreateFirewallPolicy   network-firewall:UpdateFirewallPolicy   network-firewall:ListRuleGroups   For a firewall policy resource, you can specify the following operations in the Actions section of the statement:   network-firewall:CreateFirewall   network-firewall:UpdateFirewall   network-firewall:AssociateFirewallPolicy   network-firewall:ListFirewallPolicies   In the Resource section of the statement, you specify the ARNs for the rule groups and firewall policies that you want to share with the account that you specified in Arn.
      */
     Policy: PolicyString;
   }
@@ -1083,6 +1194,8 @@ declare namespace NetworkFirewall {
   }
   export type ResourceArn = string;
   export type ResourceId = string;
+  export type ResourceManagedStatus = "MANAGED"|"ACCOUNT"|string;
+  export type ResourceManagedType = "AWS_MANAGED_THREAT_SIGNATURES"|"AWS_MANAGED_DOMAIN_LISTS"|string;
   export type ResourceName = string;
   export type ResourceStatus = "ACTIVE"|"DELETING"|string;
   export type RuleCapacity = number;
@@ -1161,6 +1274,22 @@ declare namespace NetworkFirewall {
      * The number of firewall policies that use this rule group.
      */
     NumberOfAssociations?: NumberOfAssociations;
+    /**
+     * A complex type that contains the Amazon Web Services KMS encryption configuration settings for your rule group.
+     */
+    EncryptionConfiguration?: EncryptionConfiguration;
+    /**
+     * A complex type that contains metadata about the rule group that your own rule group is copied from. You can use the metadata to track the version updates made to the originating rule group.
+     */
+    SourceMetadata?: SourceMetadata;
+    /**
+     * The Amazon resource name (ARN) of the Amazon Simple Notification Service SNS topic that's used to record changes to the managed rule group. You can subscribe to the SNS topic to receive notifications when the managed rule group is modified, such as for new versions and for version expiration. For more information, see the Amazon Simple Notification Service Developer Guide..
+     */
+    SnsTopic?: ResourceArn;
+    /**
+     * The last time that the rule group was changed.
+     */
+    LastModifiedTime?: LastUpdateTime;
   }
   export type RuleGroupType = "STATELESS"|"STATEFUL"|string;
   export type RuleGroups = RuleGroupMetadata[];
@@ -1208,7 +1337,7 @@ declare namespace NetworkFirewall {
   }
   export interface RulesSourceList {
     /**
-     * The domains that you want to inspect for in your traffic flows. To provide multiple domains, separate them with commas. Valid domain specifications are the following:   Explicit names. For example, abc.example.com matches only the domain abc.example.com.   Names that use a domain wildcard, which you indicate with an initial '.'. For example,.example.com matches example.com and matches all subdomains of example.com, such as abc.example.com and www.example.com.   
+     * The domains that you want to inspect for in your traffic flows. Valid domain specifications are the following:   Explicit names. For example, abc.example.com matches only the domain abc.example.com.   Names that use a domain wildcard, which you indicate with an initial '.'. For example,.example.com matches example.com and matches all subdomains of example.com, such as abc.example.com and www.example.com.   
      */
     Targets: RuleTargets;
     /**
@@ -1224,11 +1353,21 @@ declare namespace NetworkFirewall {
   export type Setting = string;
   export type Settings = Setting[];
   export type Source = string;
+  export interface SourceMetadata {
+    /**
+     * The Amazon Resource Name (ARN) of the rule group that your own rule group is copied from.
+     */
+    SourceArn?: ResourceArn;
+    /**
+     * The update token of the Amazon Web Services managed rule group that your own rule group is copied from. To determine the update token for the managed rule group, call DescribeRuleGroup.
+     */
+    SourceUpdateToken?: UpdateToken;
+  }
   export type StatefulAction = "PASS"|"DROP"|"ALERT"|string;
   export type StatefulActions = CollectionMember_String[];
   export interface StatefulEngineOptions {
     /**
-     * Indicates how to manage the order of stateful rule evaluation for the policy. By default, Network Firewall leaves the rule evaluation order up to the Suricata rule processing engine. If you set this to STRICT_ORDER, your rules are evaluated in the exact order that you provide them in the policy. With strict ordering, the rule groups are evaluated by order of priority, starting from the lowest number, and the rules in each rule group are processed in the order that they're defined. 
+     * Indicates how to manage the order of stateful rule evaluation for the policy. DEFAULT_ACTION_ORDER is the default behavior. Stateful rules are provided to the rule engine as Suricata compatible strings, and Suricata evaluates them based on certain settings. For more information, see Evaluation order for stateful rules in the Network Firewall Developer Guide. 
      */
     RuleOrder?: RuleOrder;
   }
@@ -1247,6 +1386,12 @@ declare namespace NetworkFirewall {
     RuleOptions: RuleOptions;
   }
   export type StatefulRuleDirection = "FORWARD"|"ANY"|string;
+  export interface StatefulRuleGroupOverride {
+    /**
+     * The action that changes the rule group from DROP to ALERT. This only applies to managed rule groups.
+     */
+    Action?: OverrideAction;
+  }
   export interface StatefulRuleGroupReference {
     /**
      * The Amazon Resource Name (ARN) of the stateful rule group.
@@ -1256,11 +1401,15 @@ declare namespace NetworkFirewall {
      * An integer setting that indicates the order in which to run the stateful rule groups in a single FirewallPolicy. This setting only applies to firewall policies that specify the STRICT_ORDER rule order in the stateful engine options settings. Network Firewall evalutes each stateful rule group against a packet starting with the group that has the lowest priority setting. You must ensure that the priority settings are unique within each policy. You can change the priority settings of your rule groups at any time. To make it easier to insert rule groups later, number them so there's a wide range in between, for example use 100, 200, and so on. 
      */
     Priority?: Priority;
+    /**
+     * The action that allows the policy owner to override the behavior of the rule group within a policy.
+     */
+    Override?: StatefulRuleGroupOverride;
   }
   export type StatefulRuleGroupReferences = StatefulRuleGroupReference[];
   export interface StatefulRuleOptions {
     /**
-     * Indicates how to manage the order of the rule evaluation for the rule group. By default, Network Firewall leaves the rule evaluation order up to the Suricata rule processing engine. If you set this to STRICT_ORDER, your rules are evaluated in the exact order that they're listed in your Suricata rules string. 
+     * Indicates how to manage the order of the rule evaluation for the rule group. DEFAULT_ACTION_ORDER is the default behavior. Stateful rules are provided to the rule engine as Suricata compatible strings, and Suricata evaluates them based on certain settings. For more information, see Evaluation order for stateful rules in the Network Firewall Developer Guide. 
      */
     RuleOrder?: RuleOrder;
   }
@@ -1399,7 +1548,7 @@ declare namespace NetworkFirewall {
      */
     FirewallName?: ResourceName;
     /**
-     * 
+     * A flag indicating whether it is possible to delete the firewall. A setting of TRUE indicates that the firewall is protected against deletion. Use this setting to protect against accidentally deleting a firewall that is in use. When you create a firewall, the operation initializes this flag to TRUE.
      */
     DeleteProtection?: Boolean;
     /**
@@ -1442,6 +1591,36 @@ declare namespace NetworkFirewall {
      * An optional token that you can use for optimistic locking. Network Firewall returns a token to your requests that access the firewall. The token marks the state of the firewall resource at the time of the request.  To make an unconditional change to the firewall, omit the token in your update request. Without the token, Network Firewall performs your updates regardless of whether the firewall has changed since you last retrieved it. To make a conditional change to the firewall, provide the token in your update request. Network Firewall uses the token to ensure that the firewall hasn't changed since you last retrieved it. If it has changed, the operation fails with an InvalidTokenException. If this happens, retrieve the firewall again to get a current copy of it with a new token. Reapply your changes as needed, then try the operation again using the new token. 
      */
     UpdateToken?: UpdateToken;
+  }
+  export interface UpdateFirewallEncryptionConfigurationRequest {
+    /**
+     * An optional token that you can use for optimistic locking. Network Firewall returns a token to your requests that access the firewall. The token marks the state of the firewall resource at the time of the request.  To make an unconditional change to the firewall, omit the token in your update request. Without the token, Network Firewall performs your updates regardless of whether the firewall has changed since you last retrieved it. To make a conditional change to the firewall, provide the token in your update request. Network Firewall uses the token to ensure that the firewall hasn't changed since you last retrieved it. If it has changed, the operation fails with an InvalidTokenException. If this happens, retrieve the firewall again to get a current copy of it with a new token. Reapply your changes as needed, then try the operation again using the new token. 
+     */
+    UpdateToken?: UpdateToken;
+    /**
+     * The Amazon Resource Name (ARN) of the firewall.
+     */
+    FirewallArn?: ResourceArn;
+    /**
+     * The descriptive name of the firewall. You can't change the name of a firewall after you create it.
+     */
+    FirewallName?: ResourceName;
+    EncryptionConfiguration?: EncryptionConfiguration;
+  }
+  export interface UpdateFirewallEncryptionConfigurationResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the firewall.
+     */
+    FirewallArn?: ResourceArn;
+    /**
+     * The descriptive name of the firewall. You can't change the name of a firewall after you create it.
+     */
+    FirewallName?: ResourceName;
+    /**
+     * An optional token that you can use for optimistic locking. Network Firewall returns a token to your requests that access the firewall. The token marks the state of the firewall resource at the time of the request.  To make an unconditional change to the firewall, omit the token in your update request. Without the token, Network Firewall performs your updates regardless of whether the firewall has changed since you last retrieved it. To make a conditional change to the firewall, provide the token in your update request. Network Firewall uses the token to ensure that the firewall hasn't changed since you last retrieved it. If it has changed, the operation fails with an InvalidTokenException. If this happens, retrieve the firewall again to get a current copy of it with a new token. Reapply your changes as needed, then try the operation again using the new token. 
+     */
+    UpdateToken?: UpdateToken;
+    EncryptionConfiguration?: EncryptionConfiguration;
   }
   export interface UpdateFirewallPolicyChangeProtectionRequest {
     /**
@@ -1504,6 +1683,10 @@ declare namespace NetworkFirewall {
      * Indicates whether you want Network Firewall to just check the validity of the request, rather than run the request.  If set to TRUE, Network Firewall checks whether the request can run successfully, but doesn't actually make the requested changes. The call returns the value that the request would return if you ran it with dry run set to FALSE, but doesn't make additions or changes to your resources. This option allows you to make sure that you have the required permissions to run the request and that your request parameters are valid.  If set to FALSE, Network Firewall makes the requested changes to your resources. 
      */
     DryRun?: Boolean;
+    /**
+     * A complex type that contains settings for encryption of your firewall policy resources.
+     */
+    EncryptionConfiguration?: EncryptionConfiguration;
   }
   export interface UpdateFirewallPolicyResponse {
     /**
@@ -1573,6 +1756,14 @@ declare namespace NetworkFirewall {
      * Indicates whether you want Network Firewall to just check the validity of the request, rather than run the request.  If set to TRUE, Network Firewall checks whether the request can run successfully, but doesn't actually make the requested changes. The call returns the value that the request would return if you ran it with dry run set to FALSE, but doesn't make additions or changes to your resources. This option allows you to make sure that you have the required permissions to run the request and that your request parameters are valid.  If set to FALSE, Network Firewall makes the requested changes to your resources. 
      */
     DryRun?: Boolean;
+    /**
+     * A complex type that contains settings for encryption of your rule group resources.
+     */
+    EncryptionConfiguration?: EncryptionConfiguration;
+    /**
+     * A complex type that contains metadata about the rule group that your own rule group is copied from. You can use the metadata to keep track of updates made to the originating rule group.
+     */
+    SourceMetadata?: SourceMetadata;
   }
   export interface UpdateRuleGroupResponse {
     /**

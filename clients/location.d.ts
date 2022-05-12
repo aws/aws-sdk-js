@@ -36,11 +36,11 @@ declare class Location extends Service {
    */
   batchDeleteGeofence(callback?: (err: AWSError, data: Location.Types.BatchDeleteGeofenceResponse) => void): Request<Location.Types.BatchDeleteGeofenceResponse, AWSError>;
   /**
-   * Evaluates device positions against the geofence geometries from a given geofence collection. This operation always returns an empty response because geofences are asynchronously evaluated. The evaluation determines if the device has entered or exited a geofenced area, and then publishes one of the following events to Amazon EventBridge:    ENTER if Amazon Location determines that the tracked device has entered a geofenced area.    EXIT if Amazon Location determines that the tracked device has exited a geofenced area.    The last geofence that a device was observed within is tracked for 30 days after the most recent device position update. 
+   * Evaluates device positions against the geofence geometries from a given geofence collection. This operation always returns an empty response because geofences are asynchronously evaluated. The evaluation determines if the device has entered or exited a geofenced area, and then publishes one of the following events to Amazon EventBridge:    ENTER if Amazon Location determines that the tracked device has entered a geofenced area.    EXIT if Amazon Location determines that the tracked device has exited a geofenced area.    The last geofence that a device was observed within is tracked for 30 days after the most recent device position update.   Geofence evaluation uses the given device position. It does not account for the optional Accuracy of a DevicePositionUpdate.   The DeviceID is used as a string to represent the device. You do not need to have a Tracker associated with the DeviceID. 
    */
   batchEvaluateGeofences(params: Location.Types.BatchEvaluateGeofencesRequest, callback?: (err: AWSError, data: Location.Types.BatchEvaluateGeofencesResponse) => void): Request<Location.Types.BatchEvaluateGeofencesResponse, AWSError>;
   /**
-   * Evaluates device positions against the geofence geometries from a given geofence collection. This operation always returns an empty response because geofences are asynchronously evaluated. The evaluation determines if the device has entered or exited a geofenced area, and then publishes one of the following events to Amazon EventBridge:    ENTER if Amazon Location determines that the tracked device has entered a geofenced area.    EXIT if Amazon Location determines that the tracked device has exited a geofenced area.    The last geofence that a device was observed within is tracked for 30 days after the most recent device position update. 
+   * Evaluates device positions against the geofence geometries from a given geofence collection. This operation always returns an empty response because geofences are asynchronously evaluated. The evaluation determines if the device has entered or exited a geofenced area, and then publishes one of the following events to Amazon EventBridge:    ENTER if Amazon Location determines that the tracked device has entered a geofenced area.    EXIT if Amazon Location determines that the tracked device has exited a geofenced area.    The last geofence that a device was observed within is tracked for 30 days after the most recent device position update.   Geofence evaluation uses the given device position. It does not account for the optional Accuracy of a DevicePositionUpdate.   The DeviceID is used as a string to represent the device. You do not need to have a Tracker associated with the DeviceID. 
    */
   batchEvaluateGeofences(callback?: (err: AWSError, data: Location.Types.BatchEvaluateGeofencesResponse) => void): Request<Location.Types.BatchEvaluateGeofencesResponse, AWSError>;
   /**
@@ -60,21 +60,29 @@ declare class Location extends Service {
    */
   batchPutGeofence(callback?: (err: AWSError, data: Location.Types.BatchPutGeofenceResponse) => void): Request<Location.Types.BatchPutGeofenceResponse, AWSError>;
   /**
-   * Uploads position update data for one or more devices to a tracker resource. Amazon Location uses the data when it reports the last known device position and position history. Amazon Location retains location data for 30 days.  Position updates are handled based on the PositionFiltering property of the tracker. When PositionFiltering is set to TimeBased, updates are evaluated against linked geofence collections, and location data is stored at a maximum of one position per 30 second interval. If your update frequency is more often than every 30 seconds, only one update per 30 seconds is stored for each unique device ID. When PositionFiltering is set to DistanceBased filtering, location data is stored and evaluated against linked geofence collections only if the device has moved more than 30 m (98.4 ft). 
+   * Uploads position update data for one or more devices to a tracker resource. Amazon Location uses the data when it reports the last known device position and position history. Amazon Location retains location data for 30 days.  Position updates are handled based on the PositionFiltering property of the tracker. When PositionFiltering is set to TimeBased, updates are evaluated against linked geofence collections, and location data is stored at a maximum of one position per 30 second interval. If your update frequency is more often than every 30 seconds, only one update per 30 seconds is stored for each unique device ID. When PositionFiltering is set to DistanceBased filtering, location data is stored and evaluated against linked geofence collections only if the device has moved more than 30 m (98.4 ft). When PositionFiltering is set to AccuracyBased filtering, location data is stored and evaluated against linked geofence collections only if the device has moved more than the measured accuracy. For example, if two consecutive updates from a device have a horizontal accuracy of 5 m and 10 m, the second update is neither stored or evaluated if the device has moved less than 15 m. If PositionFiltering is set to AccuracyBased filtering, Amazon Location uses the default value { "Horizontal": 0} when accuracy is not provided on a DevicePositionUpdate. 
    */
   batchUpdateDevicePosition(params: Location.Types.BatchUpdateDevicePositionRequest, callback?: (err: AWSError, data: Location.Types.BatchUpdateDevicePositionResponse) => void): Request<Location.Types.BatchUpdateDevicePositionResponse, AWSError>;
   /**
-   * Uploads position update data for one or more devices to a tracker resource. Amazon Location uses the data when it reports the last known device position and position history. Amazon Location retains location data for 30 days.  Position updates are handled based on the PositionFiltering property of the tracker. When PositionFiltering is set to TimeBased, updates are evaluated against linked geofence collections, and location data is stored at a maximum of one position per 30 second interval. If your update frequency is more often than every 30 seconds, only one update per 30 seconds is stored for each unique device ID. When PositionFiltering is set to DistanceBased filtering, location data is stored and evaluated against linked geofence collections only if the device has moved more than 30 m (98.4 ft). 
+   * Uploads position update data for one or more devices to a tracker resource. Amazon Location uses the data when it reports the last known device position and position history. Amazon Location retains location data for 30 days.  Position updates are handled based on the PositionFiltering property of the tracker. When PositionFiltering is set to TimeBased, updates are evaluated against linked geofence collections, and location data is stored at a maximum of one position per 30 second interval. If your update frequency is more often than every 30 seconds, only one update per 30 seconds is stored for each unique device ID. When PositionFiltering is set to DistanceBased filtering, location data is stored and evaluated against linked geofence collections only if the device has moved more than 30 m (98.4 ft). When PositionFiltering is set to AccuracyBased filtering, location data is stored and evaluated against linked geofence collections only if the device has moved more than the measured accuracy. For example, if two consecutive updates from a device have a horizontal accuracy of 5 m and 10 m, the second update is neither stored or evaluated if the device has moved less than 15 m. If PositionFiltering is set to AccuracyBased filtering, Amazon Location uses the default value { "Horizontal": 0} when accuracy is not provided on a DevicePositionUpdate. 
    */
   batchUpdateDevicePosition(callback?: (err: AWSError, data: Location.Types.BatchUpdateDevicePositionResponse) => void): Request<Location.Types.BatchUpdateDevicePositionResponse, AWSError>;
   /**
-   *  Calculates a route given the following required parameters: DeparturePostiton and DestinationPosition. Requires that you first create a route calculator resource  By default, a request that doesn't specify a departure time uses the best time of day to travel with the best traffic conditions when calculating the route. Additional options include:    Specifying a departure time using either DepartureTime or DepartureNow. This calculates a route based on predictive traffic data at the given time.   You can't specify both DepartureTime and DepartureNow in a single request. Specifying both parameters returns an error message.     Specifying a travel mode using TravelMode. This lets you specify an additional route preference such as CarModeOptions if traveling by Car, or TruckModeOptions if traveling by Truck.    
+   *  Calculates a route given the following required parameters: DeparturePosition and DestinationPosition. Requires that you first create a route calculator resource. By default, a request that doesn't specify a departure time uses the best time of day to travel with the best traffic conditions when calculating the route. Additional options include:    Specifying a departure time using either DepartureTime or DepartNow. This calculates a route based on predictive traffic data at the given time.   You can't specify both DepartureTime and DepartNow in a single request. Specifying both parameters returns a validation error.     Specifying a travel mode using TravelMode sets the transportation mode used to calculate the routes. This also lets you specify additional route preferences in CarModeOptions if traveling by Car, or TruckModeOptions if traveling by Truck.  
    */
   calculateRoute(params: Location.Types.CalculateRouteRequest, callback?: (err: AWSError, data: Location.Types.CalculateRouteResponse) => void): Request<Location.Types.CalculateRouteResponse, AWSError>;
   /**
-   *  Calculates a route given the following required parameters: DeparturePostiton and DestinationPosition. Requires that you first create a route calculator resource  By default, a request that doesn't specify a departure time uses the best time of day to travel with the best traffic conditions when calculating the route. Additional options include:    Specifying a departure time using either DepartureTime or DepartureNow. This calculates a route based on predictive traffic data at the given time.   You can't specify both DepartureTime and DepartureNow in a single request. Specifying both parameters returns an error message.     Specifying a travel mode using TravelMode. This lets you specify an additional route preference such as CarModeOptions if traveling by Car, or TruckModeOptions if traveling by Truck.    
+   *  Calculates a route given the following required parameters: DeparturePosition and DestinationPosition. Requires that you first create a route calculator resource. By default, a request that doesn't specify a departure time uses the best time of day to travel with the best traffic conditions when calculating the route. Additional options include:    Specifying a departure time using either DepartureTime or DepartNow. This calculates a route based on predictive traffic data at the given time.   You can't specify both DepartureTime and DepartNow in a single request. Specifying both parameters returns a validation error.     Specifying a travel mode using TravelMode sets the transportation mode used to calculate the routes. This also lets you specify additional route preferences in CarModeOptions if traveling by Car, or TruckModeOptions if traveling by Truck.  
    */
   calculateRoute(callback?: (err: AWSError, data: Location.Types.CalculateRouteResponse) => void): Request<Location.Types.CalculateRouteResponse, AWSError>;
+  /**
+   *   Calculates a route matrix given the following required parameters: DeparturePositions and DestinationPositions. CalculateRouteMatrix calculates routes and returns the travel time and travel distance from each departure position to each destination position in the request. For example, given departure positions A and B, and destination positions X and Y, CalculateRouteMatrix will return time and distance for routes from A to X, A to Y, B to X, and B to Y (in that order). The number of results returned (and routes calculated) will be the number of DeparturePositions times the number of DestinationPositions.  Your account is charged for each route calculated, not the number of requests.  Requires that you first create a route calculator resource. By default, a request that doesn't specify a departure time uses the best time of day to travel with the best traffic conditions when calculating routes. Additional options include:     Specifying a departure time using either DepartureTime or DepartNow. This calculates routes based on predictive traffic data at the given time.   You can't specify both DepartureTime and DepartNow in a single request. Specifying both parameters returns a validation error.     Specifying a travel mode using TravelMode sets the transportation mode used to calculate the routes. This also lets you specify additional route preferences in CarModeOptions if traveling by Car, or TruckModeOptions if traveling by Truck.  
+   */
+  calculateRouteMatrix(params: Location.Types.CalculateRouteMatrixRequest, callback?: (err: AWSError, data: Location.Types.CalculateRouteMatrixResponse) => void): Request<Location.Types.CalculateRouteMatrixResponse, AWSError>;
+  /**
+   *   Calculates a route matrix given the following required parameters: DeparturePositions and DestinationPositions. CalculateRouteMatrix calculates routes and returns the travel time and travel distance from each departure position to each destination position in the request. For example, given departure positions A and B, and destination positions X and Y, CalculateRouteMatrix will return time and distance for routes from A to X, A to Y, B to X, and B to Y (in that order). The number of results returned (and routes calculated) will be the number of DeparturePositions times the number of DestinationPositions.  Your account is charged for each route calculated, not the number of requests.  Requires that you first create a route calculator resource. By default, a request that doesn't specify a departure time uses the best time of day to travel with the best traffic conditions when calculating routes. Additional options include:     Specifying a departure time using either DepartureTime or DepartNow. This calculates routes based on predictive traffic data at the given time.   You can't specify both DepartureTime and DepartNow in a single request. Specifying both parameters returns a validation error.     Specifying a travel mode using TravelMode sets the transportation mode used to calculate the routes. This also lets you specify additional route preferences in CarModeOptions if traveling by Car, or TruckModeOptions if traveling by Truck.  
+   */
+  calculateRouteMatrix(callback?: (err: AWSError, data: Location.Types.CalculateRouteMatrixResponse) => void): Request<Location.Types.CalculateRouteMatrixResponse, AWSError>;
   /**
    * Creates a geofence collection, which manages and stores geofences.
    */
@@ -84,27 +92,27 @@ declare class Location extends Service {
    */
   createGeofenceCollection(callback?: (err: AWSError, data: Location.Types.CreateGeofenceCollectionResponse) => void): Request<Location.Types.CreateGeofenceCollectionResponse, AWSError>;
   /**
-   * Creates a map resource in your AWS account, which provides map tiles of different styles sourced from global location data providers.
+   * Creates a map resource in your AWS account, which provides map tiles of different styles sourced from global location data providers.  If your application is tracking or routing assets you use in your business, such as delivery vehicles or employees, you may only use HERE as your geolocation provider. See section 82 of the AWS service terms for more details. 
    */
   createMap(params: Location.Types.CreateMapRequest, callback?: (err: AWSError, data: Location.Types.CreateMapResponse) => void): Request<Location.Types.CreateMapResponse, AWSError>;
   /**
-   * Creates a map resource in your AWS account, which provides map tiles of different styles sourced from global location data providers.
+   * Creates a map resource in your AWS account, which provides map tiles of different styles sourced from global location data providers.  If your application is tracking or routing assets you use in your business, such as delivery vehicles or employees, you may only use HERE as your geolocation provider. See section 82 of the AWS service terms for more details. 
    */
   createMap(callback?: (err: AWSError, data: Location.Types.CreateMapResponse) => void): Request<Location.Types.CreateMapResponse, AWSError>;
   /**
-   * Creates a place index resource in your AWS account, which supports functions with geospatial data sourced from your chosen data provider.
+   * Creates a place index resource in your AWS account. Use a place index resource to geocode addresses and other text queries by using the SearchPlaceIndexForText operation, and reverse geocode coordinates by using the SearchPlaceIndexForPosition operation, and enable autosuggestions by using the SearchPlaceIndexForSuggestions operation.  If your application is tracking or routing assets you use in your business, such as delivery vehicles or employees, you may only use HERE as your geolocation provider. See section 82 of the AWS service terms for more details. 
    */
   createPlaceIndex(params: Location.Types.CreatePlaceIndexRequest, callback?: (err: AWSError, data: Location.Types.CreatePlaceIndexResponse) => void): Request<Location.Types.CreatePlaceIndexResponse, AWSError>;
   /**
-   * Creates a place index resource in your AWS account, which supports functions with geospatial data sourced from your chosen data provider.
+   * Creates a place index resource in your AWS account. Use a place index resource to geocode addresses and other text queries by using the SearchPlaceIndexForText operation, and reverse geocode coordinates by using the SearchPlaceIndexForPosition operation, and enable autosuggestions by using the SearchPlaceIndexForSuggestions operation.  If your application is tracking or routing assets you use in your business, such as delivery vehicles or employees, you may only use HERE as your geolocation provider. See section 82 of the AWS service terms for more details. 
    */
   createPlaceIndex(callback?: (err: AWSError, data: Location.Types.CreatePlaceIndexResponse) => void): Request<Location.Types.CreatePlaceIndexResponse, AWSError>;
   /**
-   * Creates a route calculator resource in your AWS account. You can send requests to a route calculator resource to estimate travel time, distance, and get directions. A route calculator sources traffic and road network data from your chosen data provider.
+   * Creates a route calculator resource in your AWS account. You can send requests to a route calculator resource to estimate travel time, distance, and get directions. A route calculator sources traffic and road network data from your chosen data provider.  If your application is tracking or routing assets you use in your business, such as delivery vehicles or employees, you may only use HERE as your geolocation provider. See section 82 of the AWS service terms for more details. 
    */
   createRouteCalculator(params: Location.Types.CreateRouteCalculatorRequest, callback?: (err: AWSError, data: Location.Types.CreateRouteCalculatorResponse) => void): Request<Location.Types.CreateRouteCalculatorResponse, AWSError>;
   /**
-   * Creates a route calculator resource in your AWS account. You can send requests to a route calculator resource to estimate travel time, distance, and get directions. A route calculator sources traffic and road network data from your chosen data provider.
+   * Creates a route calculator resource in your AWS account. You can send requests to a route calculator resource to estimate travel time, distance, and get directions. A route calculator sources traffic and road network data from your chosen data provider.  If your application is tracking or routing assets you use in your business, such as delivery vehicles or employees, you may only use HERE as your geolocation provider. See section 82 of the AWS service terms for more details. 
    */
   createRouteCalculator(callback?: (err: AWSError, data: Location.Types.CreateRouteCalculatorResponse) => void): Request<Location.Types.CreateRouteCalculatorResponse, AWSError>;
   /**
@@ -348,11 +356,19 @@ declare class Location extends Service {
    */
   searchPlaceIndexForPosition(callback?: (err: AWSError, data: Location.Types.SearchPlaceIndexForPositionResponse) => void): Request<Location.Types.SearchPlaceIndexForPositionResponse, AWSError>;
   /**
-   * Geocodes free-form text, such as an address, name, city, or region to allow you to search for Places or points of interest.  Includes the option to apply additional parameters to narrow your list of results.  You can search for places near a given position using BiasPosition, or filter results within a bounding box using FilterBBox. Providing both parameters simultaneously returns an error. 
+   * Generates suggestions for addresses and points of interest based on partial or misspelled free-form text. This operation is also known as autocomplete, autosuggest, or fuzzy matching. Optional parameters let you narrow your search results by bounding box or country, or bias your search toward a specific position on the globe.  You can search for suggested place names near a specified position by using BiasPosition, or filter results within a bounding box by using FilterBBox. These parameters are mutually exclusive; using both BiasPosition and FilterBBox in the same command returns an error. 
+   */
+  searchPlaceIndexForSuggestions(params: Location.Types.SearchPlaceIndexForSuggestionsRequest, callback?: (err: AWSError, data: Location.Types.SearchPlaceIndexForSuggestionsResponse) => void): Request<Location.Types.SearchPlaceIndexForSuggestionsResponse, AWSError>;
+  /**
+   * Generates suggestions for addresses and points of interest based on partial or misspelled free-form text. This operation is also known as autocomplete, autosuggest, or fuzzy matching. Optional parameters let you narrow your search results by bounding box or country, or bias your search toward a specific position on the globe.  You can search for suggested place names near a specified position by using BiasPosition, or filter results within a bounding box by using FilterBBox. These parameters are mutually exclusive; using both BiasPosition and FilterBBox in the same command returns an error. 
+   */
+  searchPlaceIndexForSuggestions(callback?: (err: AWSError, data: Location.Types.SearchPlaceIndexForSuggestionsResponse) => void): Request<Location.Types.SearchPlaceIndexForSuggestionsResponse, AWSError>;
+  /**
+   * Geocodes free-form text, such as an address, name, city, or region to allow you to search for Places or points of interest.  Optional parameters let you narrow your search results by bounding box or country, or bias your search toward a specific position on the globe.  You can search for places near a given position using BiasPosition, or filter results within a bounding box using FilterBBox. Providing both parameters simultaneously returns an error.  Search results are returned in order of highest to lowest relevance.
    */
   searchPlaceIndexForText(params: Location.Types.SearchPlaceIndexForTextRequest, callback?: (err: AWSError, data: Location.Types.SearchPlaceIndexForTextResponse) => void): Request<Location.Types.SearchPlaceIndexForTextResponse, AWSError>;
   /**
-   * Geocodes free-form text, such as an address, name, city, or region to allow you to search for Places or points of interest.  Includes the option to apply additional parameters to narrow your list of results.  You can search for places near a given position using BiasPosition, or filter results within a bounding box using FilterBBox. Providing both parameters simultaneously returns an error. 
+   * Geocodes free-form text, such as an address, name, city, or region to allow you to search for Places or points of interest.  Optional parameters let you narrow your search results by bounding box or country, or bias your search toward a specific position on the globe.  You can search for places near a given position using BiasPosition, or filter results within a bounding box using FilterBBox. Providing both parameters simultaneously returns an error.  Search results are returned in order of highest to lowest relevance.
    */
   searchPlaceIndexForText(callback?: (err: AWSError, data: Location.Types.SearchPlaceIndexForTextResponse) => void): Request<Location.Types.SearchPlaceIndexForTextResponse, AWSError>;
   /**
@@ -658,9 +674,89 @@ declare namespace Location {
      */
     AvoidTolls?: Boolean;
   }
+  export interface CalculateRouteMatrixRequest {
+    /**
+     * The name of the route calculator resource that you want to use to calculate the route matrix. 
+     */
+    CalculatorName: ResourceName;
+    /**
+     * Specifies route preferences when traveling by Car, such as avoiding routes that use ferries or tolls. Requirements: TravelMode must be specified as Car.
+     */
+    CarModeOptions?: CalculateRouteCarModeOptions;
+    /**
+     * Sets the time of departure as the current time. Uses the current time to calculate the route matrix. You can't set both DepartureTime and DepartNow. If neither is set, the best time of day to travel with the best traffic conditions is used to calculate the route matrix. Default Value: false  Valid Values: false | true 
+     */
+    DepartNow?: Boolean;
+    /**
+     * The list of departure (origin) positions for the route matrix. An array of points, each of which is itself a 2-value array defined in WGS 84 format: [longitude, latitude]. For example, [-123.115, 49.285].  Depending on the data provider selected in the route calculator resource there may be additional restrictions on the inputs you can choose. See  Position restrictions in the Amazon Location Service Developer Guide.   For route calculators that use Esri as the data provider, if you specify a departure that's not located on a road, Amazon Location  moves the position to the nearest road. The snapped value is available in the result in SnappedDeparturePositions.  Valid Values: [-180 to 180,-90 to 90] 
+     */
+    DeparturePositions: CalculateRouteMatrixRequestDeparturePositionsList;
+    /**
+     * Specifies the desired time of departure. Uses the given time to calculate the route matrix. You can't set both DepartureTime and DepartNow. If neither is set, the best time of day to travel with the best traffic conditions is used to calculate the route matrix.  Setting a departure time in the past returns a 400 ValidationException error.    In ISO 8601 format: YYYY-MM-DDThh:mm:ss.sssZ. For example, 2020–07-2T12:15:20.000Z+01:00   
+     */
+    DepartureTime?: Timestamp;
+    /**
+     * The list of destination positions for the route matrix. An array of points, each of which is itself a 2-value array defined in WGS 84 format: [longitude, latitude]. For example, [-122.339, 47.615]   Depending on the data provider selected in the route calculator resource there may be additional restrictions on the inputs you can choose. See  Position restrictions in the Amazon Location Service Developer Guide.   For route calculators that use Esri as the data provider, if you specify a destination that's not located on a road, Amazon Location  moves the position to the nearest road. The snapped value is available in the result in SnappedDestinationPositions.  Valid Values: [-180 to 180,-90 to 90] 
+     */
+    DestinationPositions: CalculateRouteMatrixRequestDestinationPositionsList;
+    /**
+     * Set the unit system to specify the distance. Default Value: Kilometers 
+     */
+    DistanceUnit?: DistanceUnit;
+    /**
+     * Specifies the mode of transport when calculating a route. Used in estimating the speed of travel and road compatibility. The TravelMode you specify also determines how you specify route preferences:    If traveling by Car use the CarModeOptions parameter.   If traveling by Truck use the TruckModeOptions parameter.   Default Value: Car 
+     */
+    TravelMode?: TravelMode;
+    /**
+     * Specifies route preferences when traveling by Truck, such as avoiding routes that use ferries or tolls, and truck specifications to consider when choosing an optimal road. Requirements: TravelMode must be specified as Truck.
+     */
+    TruckModeOptions?: CalculateRouteTruckModeOptions;
+  }
+  export type CalculateRouteMatrixRequestDeparturePositionsList = Position[];
+  export type CalculateRouteMatrixRequestDestinationPositionsList = Position[];
+  export interface CalculateRouteMatrixResponse {
+    /**
+     * The calculated route matrix containing the results for all pairs of DeparturePositions to DestinationPositions. Each row corresponds to one entry in DeparturePositions. Each entry in the row corresponds to the route from that entry in DeparturePositions to an entry in DestinationPositions. 
+     */
+    RouteMatrix: RouteMatrix;
+    /**
+     * For routes calculated using an Esri route calculator resource, departure positions are snapped to the closest road. For Esri route calculator resources, this returns the list of departure/origin positions used for calculation of the RouteMatrix.
+     */
+    SnappedDeparturePositions?: CalculateRouteMatrixResponseSnappedDeparturePositionsList;
+    /**
+     * The list of destination positions for the route matrix used for calculation of the RouteMatrix.
+     */
+    SnappedDestinationPositions?: CalculateRouteMatrixResponseSnappedDestinationPositionsList;
+    /**
+     * Contains information about the route matrix, DataSource, DistanceUnit, RouteCount and ErrorCount.
+     */
+    Summary: CalculateRouteMatrixSummary;
+  }
+  export type CalculateRouteMatrixResponseSnappedDeparturePositionsList = Position[];
+  export type CalculateRouteMatrixResponseSnappedDestinationPositionsList = Position[];
+  export interface CalculateRouteMatrixSummary {
+    /**
+     * The data provider of traffic and road network data used to calculate the routes. Indicates one of the available providers:    Esri     Here    For more information about data providers, see Amazon Location Service data providers.
+     */
+    DataSource: String;
+    /**
+     * The unit of measurement for route distances.
+     */
+    DistanceUnit: DistanceUnit;
+    /**
+     * The count of error results in the route matrix. If this number is 0, all routes were calculated successfully.
+     */
+    ErrorCount: CalculateRouteMatrixSummaryErrorCountInteger;
+    /**
+     * The count of cells in the route matrix. Equal to the number of DeparturePositions multiplied by the number of DestinationPositions.
+     */
+    RouteCount: CalculateRouteMatrixSummaryRouteCountInteger;
+  }
+  export type CalculateRouteMatrixSummaryErrorCountInteger = number;
+  export type CalculateRouteMatrixSummaryRouteCountInteger = number;
   export interface CalculateRouteRequest {
     /**
-     * The name of the route calculator resource that you want to use to calculate a route. 
+     * The name of the route calculator resource that you want to use to calculate the route. 
      */
     CalculatorName: ResourceName;
     /**
@@ -672,15 +768,15 @@ declare namespace Location {
      */
     DepartNow?: Boolean;
     /**
-     * The start position for the route. Defined in WGS 84 format: [longitude, latitude].   For example, [-123.115, 49.285]     If you specify a departure that's not located on a road, Amazon Location moves the position to the nearest road. If Esri is the provider for your route calculator, specifying a route that is longer than 400 km returns a 400 RoutesValidationException error.  Valid Values: [-180 to 180,-90 to 90] 
+     * The start position for the route. Defined in World Geodetic System (WGS 84) format: [longitude, latitude].   For example, [-123.115, 49.285]     If you specify a departure that's not located on a road, Amazon Location moves the position to the nearest road. If Esri is the provider for your route calculator, specifying a route that is longer than 400 km returns a 400 RoutesValidationException error.  Valid Values: [-180 to 180,-90 to 90] 
      */
     DeparturePosition: Position;
     /**
-     * Specifies the desired time of departure. Uses the given time to calculate a route. Otherwise, the best time of day to travel with the best traffic conditions is used to calculate the route.  Setting a departure time in the past returns a 400 ValidationException error.    In ISO 8601 format: YYYY-MM-DDThh:mm:ss.sssZ. For example, 2020–07-2T12:15:20.000Z+01:00   
+     * Specifies the desired time of departure. Uses the given time to calculate the route. Otherwise, the best time of day to travel with the best traffic conditions is used to calculate the route.  Setting a departure time in the past returns a 400 ValidationException error.    In ISO 8601 format: YYYY-MM-DDThh:mm:ss.sssZ. For example, 2020–07-2T12:15:20.000Z+01:00   
      */
     DepartureTime?: Timestamp;
     /**
-     * The finish position for the route. Defined in WGS 84 format: [longitude, latitude].    For example, [-122.339, 47.615]     If you specify a destination that's not located on a road, Amazon Location moves the position to the nearest road.   Valid Values: [-180 to 180,-90 to 90] 
+     * The finish position for the route. Defined in World Geodetic System (WGS 84) format: [longitude, latitude].    For example, [-122.339, 47.615]     If you specify a destination that's not located on a road, Amazon Location moves the position to the nearest road.   Valid Values: [-180 to 180,-90 to 90] 
      */
     DestinationPosition: Position;
     /**
@@ -692,7 +788,7 @@ declare namespace Location {
      */
     IncludeLegGeometry?: Boolean;
     /**
-     * Specifies the mode of transport when calculating a route. Used in estimating the speed of travel and road compatibility. The TravelMode you specify determines how you specify route preferences:    If traveling by Car use the CarModeOptions parameter.   If traveling by Truck use the TruckModeOptions parameter.   Default Value: Car 
+     * Specifies the mode of transport when calculating a route. Used in estimating the speed of travel and road compatibility. The TravelMode you specify also determines how you specify route preferences:    If traveling by Car use the CarModeOptions parameter.   If traveling by Truck use the TruckModeOptions parameter.   Default Value: Car 
      */
     TravelMode?: TravelMode;
     /**
@@ -725,7 +821,7 @@ declare namespace Location {
      */
     Distance: CalculateRouteSummaryDistanceDouble;
     /**
-     * The unit of measurement for the distance.
+     * The unit of measurement for route distances.
      */
     DistanceUnit: DistanceUnit;
     /**
@@ -745,7 +841,7 @@ declare namespace Location {
      */
     AvoidFerries?: Boolean;
     /**
-     * Avoids ferries when calculating routes. Default Value: false  Valid Values: false | true 
+     * Avoids tolls when calculating routes. Default Value: false  Valid Values: false | true 
      */
     AvoidTolls?: Boolean;
     /**
@@ -773,15 +869,15 @@ declare namespace Location {
      */
     KmsKeyId?: KmsKeyId;
     /**
-     * Specifies the pricing plan for the geofence collection. For additional details and restrictions on each pricing plan option, see the Amazon Location Service pricing page.
+     * No longer used. If included, the only allowed value is RequestBasedUsage.
      */
-    PricingPlan: PricingPlan;
+    PricingPlan?: PricingPlan;
     /**
-     * Specifies the data provider for the geofence collection.   Required value for the following pricing plans: MobileAssetTracking | MobileAssetManagement    For more information about Data Providers, and Pricing plans, see the Amazon Location Service product page.  Amazon Location Service only uses PricingPlanDataSource to calculate billing for your geofence collection. Your data won't be shared with the data provider, and will remain in your AWS account or Region unless you move it.  Valid Values: Esri | Here 
+     * This parameter is no longer used.
      */
     PricingPlanDataSource?: String;
     /**
-     * Applies one or more tags to the geofence collection. A tag is a key-value pair helps manage, identify, search, and filter your resources by labelling them. Format: "key" : "value"  Restrictions:   Maximum 50 tags per resource   Each resource tag must be unique with a maximum of one value.   Maximum key length: 128 Unicode characters in UTF-8   Maximum value length: 256 Unicode characters in UTF-8   Can use alphanumeric characters (A–Z, a–z, 0–9), and the following characters: + - = . _ : / @.   
+     * Applies one or more tags to the geofence collection. A tag is a key-value pair helps manage, identify, search, and filter your resources by labelling them. Format: "key" : "value"  Restrictions:   Maximum 50 tags per resource   Each resource tag must be unique with a maximum of one value.   Maximum key length: 128 Unicode characters in UTF-8   Maximum value length: 256 Unicode characters in UTF-8   Can use alphanumeric characters (A–Z, a–z, 0–9), and the following characters: + - = . _ : / @.    Cannot use "aws:" as a prefix for a key.  
      */
     Tags?: TagMap;
   }
@@ -813,11 +909,11 @@ declare namespace Location {
      */
     MapName: ResourceName;
     /**
-     * Specifies the pricing plan for your map resource. For additional details and restrictions on each pricing plan option, see Amazon Location Service pricing.
+     * No longer used. If included, the only allowed value is RequestBasedUsage.
      */
-    PricingPlan: PricingPlan;
+    PricingPlan?: PricingPlan;
     /**
-     * Applies one or more tags to the map resource. A tag is a key-value pair helps manage, identify, search, and filter your resources by labelling them. Format: "key" : "value"  Restrictions:   Maximum 50 tags per resource   Each resource tag must be unique with a maximum of one value.   Maximum key length: 128 Unicode characters in UTF-8   Maximum value length: 256 Unicode characters in UTF-8   Can use alphanumeric characters (A–Z, a–z, 0–9), and the following characters: + - = . _ : / @.   
+     * Applies one or more tags to the map resource. A tag is a key-value pair helps manage, identify, search, and filter your resources by labelling them. Format: "key" : "value"  Restrictions:   Maximum 50 tags per resource   Each resource tag must be unique with a maximum of one value.   Maximum key length: 128 Unicode characters in UTF-8   Maximum value length: 256 Unicode characters in UTF-8   Can use alphanumeric characters (A–Z, a–z, 0–9), and the following characters: + - = . _ : / @.    Cannot use "aws:" as a prefix for a key.  
      */
     Tags?: TagMap;
   }
@@ -837,7 +933,7 @@ declare namespace Location {
   }
   export interface CreatePlaceIndexRequest {
     /**
-     * Specifies the data provider of geospatial data.  This field is case-sensitive. Enter the valid values as shown. For example, entering HERE returns an error.  Valid values include:    Esri – For additional information about Esri's coverage in your region of interest, see Esri details on geocoding coverage.    Here – For additional information about HERE Technologies' coverage in your region of interest, see HERE details on goecoding coverage.  Place index resources using HERE Technologies as a data provider can't store results for locations in Japan. For more information, see the AWS Service Terms for Amazon Location Service.    For additional information , see Data providers on the Amazon Location Service Developer Guide.
+     * Specifies the geospatial data provider for the new place index.  This field is case-sensitive. Enter the valid values as shown. For example, entering HERE returns an error.  Valid values include:    Esri – For additional information about Esri's coverage in your region of interest, see Esri details on geocoding coverage.    Here – For additional information about HERE Technologies' coverage in your region of interest, see HERE details on goecoding coverage.  If you specify HERE Technologies (Here) as the data provider, you may not store results for locations in Japan. For more information, see the AWS Service Terms for Amazon Location Service.    For additional information , see Data providers on the Amazon Location Service Developer Guide.
      */
     DataSource: String;
     /**
@@ -853,11 +949,11 @@ declare namespace Location {
      */
     IndexName: ResourceName;
     /**
-     * Specifies the pricing plan for your place index resource. For additional details and restrictions on each pricing plan option, see Amazon Location Service pricing.
+     * No longer used. If included, the only allowed value is RequestBasedUsage.
      */
-    PricingPlan: PricingPlan;
+    PricingPlan?: PricingPlan;
     /**
-     * Applies one or more tags to the place index resource. A tag is a key-value pair helps manage, identify, search, and filter your resources by labelling them. Format: "key" : "value"  Restrictions:   Maximum 50 tags per resource   Each resource tag must be unique with a maximum of one value.   Maximum key length: 128 Unicode characters in UTF-8   Maximum value length: 256 Unicode characters in UTF-8   Can use alphanumeric characters (A–Z, a–z, 0–9), and the following characters: + - = . _ : / @.   
+     * Applies one or more tags to the place index resource. A tag is a key-value pair that helps you manage, identify, search, and filter your resources. Format: "key" : "value"  Restrictions:   Maximum 50 tags per resource.   Each tag key must be unique and must have exactly one associated value.   Maximum key length: 128 Unicode characters in UTF-8.   Maximum value length: 256 Unicode characters in UTF-8.   Can use alphanumeric characters (A–Z, a–z, 0–9), and the following characters: + - = . _ : / @   Cannot use "aws:" as a prefix for a key.  
      */
     Tags?: TagMap;
   }
@@ -889,11 +985,11 @@ declare namespace Location {
      */
     Description?: ResourceDescription;
     /**
-     * Specifies the pricing plan for your route calculator resource. For additional details and restrictions on each pricing plan option, see Amazon Location Service pricing.
+     * No longer used. If included, the only allowed value is RequestBasedUsage.
      */
-    PricingPlan: PricingPlan;
+    PricingPlan?: PricingPlan;
     /**
-     * Applies one or more tags to the route calculator resource. A tag is a key-value pair helps manage, identify, search, and filter your resources by labelling them.   For example: { "tag1" : "value1", "tag2" : "value2"}   Format: "key" : "value"  Restrictions:   Maximum 50 tags per resource   Each resource tag must be unique with a maximum of one value.   Maximum key length: 128 Unicode characters in UTF-8   Maximum value length: 256 Unicode characters in UTF-8   Can use alphanumeric characters (A–Z, a–z, 0–9), and the following characters: + - = . _ : / @.   
+     * Applies one or more tags to the route calculator resource. A tag is a key-value pair helps manage, identify, search, and filter your resources by labelling them.   For example: { "tag1" : "value1", "tag2" : "value2"}   Format: "key" : "value"  Restrictions:   Maximum 50 tags per resource   Each resource tag must be unique with a maximum of one value.   Maximum key length: 128 Unicode characters in UTF-8   Maximum value length: 256 Unicode characters in UTF-8   Can use alphanumeric characters (A–Z, a–z, 0–9), and the following characters: + - = . _ : / @.    Cannot use "aws:" as a prefix for a key.  
      */
     Tags?: TagMap;
   }
@@ -921,19 +1017,19 @@ declare namespace Location {
      */
     KmsKeyId?: KmsKeyId;
     /**
-     * Specifies the position filtering for the tracker resource. Valid values:    TimeBased - Location updates are evaluated against linked geofence collections, but not every location update is stored. If your update frequency is more often than 30 seconds, only one update per 30 seconds is stored for each unique device ID.     DistanceBased - If the device has moved less than 30 m (98.4 ft), location updates are ignored. Location updates within this distance are neither evaluated against linked geofence collections, nor stored. This helps control costs by reducing the number of geofence evaluations and device positions to retrieve. Distance-based filtering can also reduce the jitter effect when displaying device trajectory on a map.    This field is optional. If not specified, the default value is TimeBased.
+     * Specifies the position filtering for the tracker resource. Valid values:    TimeBased - Location updates are evaluated against linked geofence collections, but not every location update is stored. If your update frequency is more often than 30 seconds, only one update per 30 seconds is stored for each unique device ID.     DistanceBased - If the device has moved less than 30 m (98.4 ft), location updates are ignored. Location updates within this area are neither evaluated against linked geofence collections, nor stored. This helps control costs by reducing the number of geofence evaluations and historical device positions to paginate through. Distance-based filtering can also reduce the effects of GPS noise when displaying device trajectories on a map.     AccuracyBased - If the device has moved less than the measured accuracy, location updates are ignored. For example, if two consecutive updates from a device have a horizontal accuracy of 5 m and 10 m, the second update is ignored if the device has moved less than 15 m. Ignored location updates are neither evaluated against linked geofence collections, nor stored. This can reduce the effects of GPS noise when displaying device trajectories on a map, and can help control your costs by reducing the number of geofence evaluations.    This field is optional. If not specified, the default value is TimeBased.
      */
     PositionFiltering?: PositionFiltering;
     /**
-     * Specifies the pricing plan for the tracker resource. For additional details and restrictions on each pricing plan option, see Amazon Location Service pricing.
+     * No longer used. If included, the only allowed value is RequestBasedUsage.
      */
-    PricingPlan: PricingPlan;
+    PricingPlan?: PricingPlan;
     /**
-     * Specifies the data provider for the tracker resource.   Required value for the following pricing plans: MobileAssetTracking | MobileAssetManagement    For more information about Data Providers, and Pricing plans, see the Amazon Location Service product page.  Amazon Location Service only uses PricingPlanDataSource to calculate billing for your tracker resource. Your data will not be shared with the data provider, and will remain in your AWS account or Region unless you move it.  Valid values: Esri | Here 
+     * This parameter is no longer used.
      */
     PricingPlanDataSource?: String;
     /**
-     * Applies one or more tags to the tracker resource. A tag is a key-value pair helps manage, identify, search, and filter your resources by labelling them. Format: "key" : "value"  Restrictions:   Maximum 50 tags per resource   Each resource tag must be unique with a maximum of one value.   Maximum key length: 128 Unicode characters in UTF-8   Maximum value length: 256 Unicode characters in UTF-8   Can use alphanumeric characters (A–Z, a–z, 0–9), and the following characters: + - = . _ : / @.   
+     * Applies one or more tags to the tracker resource. A tag is a key-value pair helps manage, identify, search, and filter your resources by labelling them. Format: "key" : "value"  Restrictions:   Maximum 50 tags per resource   Each resource tag must be unique with a maximum of one value.   Maximum key length: 128 Unicode characters in UTF-8   Maximum value length: 256 Unicode characters in UTF-8   Can use alphanumeric characters (A–Z, a–z, 0–9), and the following characters: + - = . _ : / @.    Cannot use "aws:" as a prefix for a key.  
      */
     Tags?: TagMap;
     /**
@@ -1029,11 +1125,11 @@ declare namespace Location {
      */
     KmsKeyId?: KmsKeyId;
     /**
-     * The pricing plan selected for the specified geofence collection. For additional details and restrictions on each pricing plan option, see the Amazon Location Service pricing page.
+     * No longer used. Always returns RequestBasedUsage.
      */
-    PricingPlan: PricingPlan;
+    PricingPlan?: PricingPlan;
     /**
-     * The specified data provider for the geofence collection.
+     * No longer used. Always returns an empty string.
      */
     PricingPlanDataSource?: String;
     /**
@@ -1077,9 +1173,9 @@ declare namespace Location {
      */
     MapName: ResourceName;
     /**
-     * The pricing plan selected for the specified map resource.  &lt;p&gt;For additional details and restrictions on each pricing plan option, see &lt;a href=&quot;https://aws.amazon.com/location/pricing/&quot;&gt;Amazon Location Service pricing&lt;/a&gt;.&lt;/p&gt; 
+     * No longer used. Always returns RequestBasedUsage.
      */
-    PricingPlan: PricingPlan;
+    PricingPlan?: PricingPlan;
     /**
      * Tags associated with the map resource.
      */
@@ -1101,7 +1197,7 @@ declare namespace Location {
      */
     CreateTime: Timestamp;
     /**
-     * The data provider of geospatial data. Indicates one of the available providers:    Esri     Here    For additional details on data providers, see Amazon Location Service data providers.
+     * The data provider of geospatial data. Values can be one of the following:    Esri     Here    For more information about data providers, see Amazon Location Service data providers.
      */
     DataSource: String;
     /**
@@ -1121,9 +1217,9 @@ declare namespace Location {
      */
     IndexName: ResourceName;
     /**
-     * The pricing plan selected for the specified place index resource. For additional details and restrictions on each pricing plan option, see Amazon Location Service pricing.
+     * No longer used. Always returns RequestBasedUsage.
      */
-    PricingPlan: PricingPlan;
+    PricingPlan?: PricingPlan;
     /**
      * Tags associated with place index resource.
      */
@@ -1161,9 +1257,9 @@ declare namespace Location {
      */
     Description: ResourceDescription;
     /**
-     * The pricing plan selected for the specified route calculator resource. For additional details and restrictions on each pricing plan option, see Amazon Location Service pricing.
+     * Always returns RequestBasedUsage.
      */
-    PricingPlan: PricingPlan;
+    PricingPlan?: PricingPlan;
     /**
      * Tags associated with route calculator resource.
      */
@@ -1197,11 +1293,11 @@ declare namespace Location {
      */
     PositionFiltering?: PositionFiltering;
     /**
-     * The pricing plan selected for the specified tracker resource. For additional details and restrictions on each pricing plan option, see Amazon Location Service pricing.
+     * Always returns RequestBasedUsage.
      */
-    PricingPlan: PricingPlan;
+    PricingPlan?: PricingPlan;
     /**
-     * The specified data provider for the tracker resource.
+     * No longer used. Always returns an empty string.
      */
     PricingPlanDataSource?: String;
     /**
@@ -1223,6 +1319,10 @@ declare namespace Location {
   }
   export interface DevicePosition {
     /**
+     * The accuracy of the device position.
+     */
+    Accuracy?: PositionalAccuracy;
+    /**
      * The device whose position you retrieved.
      */
     DeviceId?: Id;
@@ -1230,6 +1330,10 @@ declare namespace Location {
      * The last known device position.
      */
     Position: Position;
+    /**
+     * The properties associated with the position.
+     */
+    PositionProperties?: PropertyMap;
     /**
      * The timestamp for when the tracker resource received the device position in  ISO 8601 format: YYYY-MM-DDThh:mm:ss.sssZ. 
      */
@@ -1242,6 +1346,10 @@ declare namespace Location {
   export type DevicePositionList = DevicePosition[];
   export interface DevicePositionUpdate {
     /**
+     * The accuracy of the device position.
+     */
+    Accuracy?: PositionalAccuracy;
+    /**
      * The device associated to the position update.
      */
     DeviceId: Id;
@@ -1249,6 +1357,10 @@ declare namespace Location {
      * The latest device position defined in WGS 84 format: [X or longitude, Y or latitude].
      */
     Position: Position;
+    /**
+     * Associates one of more properties with the position update. A property is a key-value pair stored with the position update and added to any geofence event the update may trigger. Format: "key" : "value" 
+     */
+    PositionProperties?: PropertyMap;
     /**
      * The timestamp at which the device's position was determined. Uses ISO 8601 format: YYYY-MM-DDThh:mm:ss.sssZ 
      */
@@ -1285,6 +1397,10 @@ declare namespace Location {
      */
     EndTimeExclusive?: Timestamp;
     /**
+     * An optional limit for the number of device positions returned in a single call. Default value: 100 
+     */
+    MaxResults?: GetDevicePositionHistoryRequestMaxResultsInteger;
+    /**
      * The pagination token specifying which page of results to return in the response. If no token is provided, the default page is the first page.  Default value: null 
      */
     NextToken?: Token;
@@ -1297,6 +1413,7 @@ declare namespace Location {
      */
     TrackerName: ResourceName;
   }
+  export type GetDevicePositionHistoryRequestMaxResultsInteger = number;
   export interface GetDevicePositionHistoryResponse {
     /**
      * Contains the position history details for the requested device.
@@ -1319,6 +1436,10 @@ declare namespace Location {
   }
   export interface GetDevicePositionResponse {
     /**
+     * The accuracy of the device position.
+     */
+    Accuracy?: PositionalAccuracy;
+    /**
      * The device whose position you retrieved.
      */
     DeviceId?: Id;
@@ -1326,6 +1447,10 @@ declare namespace Location {
      * The last known device position.
      */
     Position: Position;
+    /**
+     * The properties associated with the position.
+     */
+    PositionProperties?: PropertyMap;
     /**
      * The timestamp for when the tracker resource received the device position in  ISO 8601  format: YYYY-MM-DDThh:mm:ss.sssZ. 
      */
@@ -1369,7 +1494,7 @@ declare namespace Location {
   }
   export interface GetMapGlyphsRequest {
     /**
-     * A comma-separated list of fonts to load glyphs from in order of preference. For example, Noto Sans Regular, Arial Unicode. Valid fonts stacks for Esri styles:    VectorEsriDarkGrayCanvas – Ubuntu Medium Italic | Ubuntu Medium | Ubuntu Italic | Ubuntu Regular | Ubuntu Bold    VectorEsriLightGrayCanvas – Ubuntu Italic | Ubuntu Regular | Ubuntu Light | Ubuntu Bold    VectorEsriTopographic – Noto Sans Italic | Noto Sans Regular | Noto Sans Bold | Noto Serif Regular | Roboto Condensed Light Italic    VectorEsriStreets – Arial Regular | Arial Italic | Arial Bold    VectorEsriNavigation – Arial Regular | Arial Italic | Arial Bold    Valid font stacks for HERE Technologies styles:    VectorHereBerlin – Fira GO Regular | Fira GO Bold   
+     * A comma-separated list of fonts to load glyphs from in order of preference. For example, Noto Sans Regular, Arial Unicode. Valid fonts stacks for Esri styles:    VectorEsriDarkGrayCanvas – Ubuntu Medium Italic | Ubuntu Medium | Ubuntu Italic | Ubuntu Regular | Ubuntu Bold    VectorEsriLightGrayCanvas – Ubuntu Italic | Ubuntu Regular | Ubuntu Light | Ubuntu Bold    VectorEsriTopographic – Noto Sans Italic | Noto Sans Regular | Noto Sans Bold | Noto Serif Regular | Roboto Condensed Light Italic    VectorEsriStreets – Arial Regular | Arial Italic | Arial Bold    VectorEsriNavigation – Arial Regular | Arial Italic | Arial Bold    Valid font stacks for HERE Technologies styles:    VectorHereBerlin – Fira GO Regular | Fira GO Bold    VectorHereExplore, VectorHereExploreTruck – Firo GO Italic | Fira GO Map | Fira GO Map Bold | Noto Sans CJK JP Bold | Noto Sans CJK JP Light | Noto Sans CJK JP Regular   
      */
     FontStack: String;
     /**
@@ -1461,8 +1586,10 @@ declare namespace Location {
     ContentType?: String;
   }
   export type Id = string;
+  export type Integer = number;
   export type IntendedUse = "SingleUse"|"Storage"|string;
   export type KmsKeyId = string;
+  export type LanguageTag = string;
   export interface Leg {
     /**
      * The distance between the leg's StartPosition and EndPosition along a calculated route.    The default measurement is Kilometers unless the request specifies a DistanceUnit of Miles.  
@@ -1528,6 +1655,10 @@ declare namespace Location {
   }
   export interface ListDevicePositionsResponseEntry {
     /**
+     * The accuracy of the device position.
+     */
+    Accuracy?: PositionalAccuracy;
+    /**
      * The ID of the device for this position.
      */
     DeviceId: Id;
@@ -1535,6 +1666,10 @@ declare namespace Location {
      * The last known device position. Empty if no positions currently stored.
      */
     Position: Position;
+    /**
+     * The properties associated with the position.
+     */
+    PositionProperties?: PropertyMap;
     /**
      * The timestamp at which the device position was determined. Uses  ISO 8601 format: YYYY-MM-DDThh:mm:ss.sssZ.
      */
@@ -1576,11 +1711,11 @@ declare namespace Location {
      */
     Description: ResourceDescription;
     /**
-     * The pricing plan for the specified geofence collection. For additional details and restrictions on each pricing plan option, see the Amazon Location Service pricing page.
+     * No longer used. Always returns RequestBasedUsage.
      */
-    PricingPlan: PricingPlan;
+    PricingPlan?: PricingPlan;
     /**
-     * The specified data provider for the geofence collection.
+     * No longer used. Always returns an empty string.
      */
     PricingPlanDataSource?: String;
     /**
@@ -1618,10 +1753,15 @@ declare namespace Location {
      */
     CollectionName: ResourceName;
     /**
+     * An optional limit for the number of geofences returned in a single call.  Default value: 100 
+     */
+    MaxResults?: ListGeofencesRequestMaxResultsInteger;
+    /**
      * The pagination token specifying which page of results to return in the response. If no token is provided, the default page is the first page.  Default value: null 
      */
     NextToken?: Token;
   }
+  export type ListGeofencesRequestMaxResultsInteger = number;
   export interface ListGeofencesResponse {
     /**
      * Contains a list of geofences stored in the geofence collection.
@@ -1671,9 +1811,9 @@ declare namespace Location {
      */
     MapName: ResourceName;
     /**
-     * The pricing plan for the specified map resource. For additional details and restrictions on each pricing plan option, see Amazon Location Service pricing.
+     * No longer used. Always returns RequestBasedUsage.
      */
-    PricingPlan: PricingPlan;
+    PricingPlan?: PricingPlan;
     /**
      * The timestamp for when the map resource was last updated in ISO 8601 format: YYYY-MM-DDThh:mm:ss.sssZ.
      */
@@ -1697,7 +1837,7 @@ declare namespace Location {
      */
     Entries: ListPlaceIndexesResponseEntryList;
     /**
-     * A pagination token indicating there are additional pages available. You can use the token in a following request to fetch the next set of results.
+     * A pagination token indicating that there are additional pages available. You can use the token in a new request to fetch the next page of results.
      */
     NextToken?: Token;
   }
@@ -1707,7 +1847,7 @@ declare namespace Location {
      */
     CreateTime: Timestamp;
     /**
-     * The data provider of geospatial data. Indicates one of the available providers:    Esri     Here    For additional details on data providers, see Amazon Location Service data providers.
+     * The data provider of geospatial data. Values can be one of the following:    Esri     Here    For more information about data providers, see Amazon Location Service data providers.
      */
     DataSource: String;
     /**
@@ -1719,9 +1859,9 @@ declare namespace Location {
      */
     IndexName: ResourceName;
     /**
-     * The pricing plan for the specified place index resource. For additional details and restrictions on each pricing plan option, see Amazon Location Service pricing.
+     * No longer used. Always returns RequestBasedUsage.
      */
-    PricingPlan: PricingPlan;
+    PricingPlan?: PricingPlan;
     /**
      * The timestamp for when the place index resource was last updated in ISO 8601 format: YYYY-MM-DDThh:mm:ss.sssZ. 
      */
@@ -1767,9 +1907,9 @@ declare namespace Location {
      */
     Description: ResourceDescription;
     /**
-     * The pricing plan for the specified route calculator resource. For additional details and restrictions on each pricing plan option, see Amazon Location Service pricing.
+     * Always returns RequestBasedUsage.
      */
-    PricingPlan: PricingPlan;
+    PricingPlan?: PricingPlan;
     /**
      * The timestamp when the route calculator resource was last updated in ISO 8601 format: YYYY-MM-DDThh:mm:ss.sssZ.    For example, 2020–07-2T12:15:20.000Z+01:00   
      */
@@ -1844,11 +1984,11 @@ declare namespace Location {
      */
     Description: ResourceDescription;
     /**
-     * The pricing plan for the specified tracker resource. For additional details and restrictions on each pricing plan option, see Amazon Location Service pricing.
+     * Always returns RequestBasedUsage.
      */
-    PricingPlan: PricingPlan;
+    PricingPlan?: PricingPlan;
     /**
-     * The specified data provider for the tracker resource.
+     * No longer used. Always returns an empty string.
      */
     PricingPlanDataSource?: String;
     /**
@@ -1863,7 +2003,7 @@ declare namespace Location {
   export type ListTrackersResponseEntryList = ListTrackersResponseEntry[];
   export interface MapConfiguration {
     /**
-     * Specifies the map style selected from an available data provider. Valid Esri map styles:    VectorEsriDarkGrayCanvas – The Esri Dark Gray Canvas map style. A vector basemap with a dark gray, neutral background with minimal colors, labels, and features that's designed to draw attention to your thematic content.     RasterEsriImagery – The Esri Imagery map style. A raster basemap that provides one meter or better satellite and aerial imagery in many parts of the world and lower resolution satellite imagery worldwide.     VectorEsriLightGrayCanvas – The Esri Light Gray Canvas map style, which provides a detailed vector basemap with a light gray, neutral background style with minimal colors, labels, and features that's designed to draw attention to your thematic content.     VectorEsriTopographic – The Esri Light map style, which provides a detailed vector basemap with a classic Esri map style.    VectorEsriStreets – The Esri World Streets map style, which provides a detailed vector basemap for the world symbolized with a classic Esri street map style. The vector tile layer is similar in content and style to the World Street Map raster map.    VectorEsriNavigation – The Esri World Navigation map style, which provides a detailed basemap for the world symbolized with a custom navigation map style that's designed for use during the day in mobile devices.   Valid HERE Technologies map styles:    VectorHereBerlin – The HERE Berlin map style is a high contrast detailed base map of the world that blends 3D and 2D rendering.  When using HERE as your data provider, and selecting the Style VectorHereBerlin, you may not use HERE Technologies maps for Asset Management. See the AWS Service Terms for Amazon Location Service.   
+     * Specifies the map style selected from an available data provider. Valid Esri map styles:    VectorEsriDarkGrayCanvas – The Esri Dark Gray Canvas map style. A vector basemap with a dark gray, neutral background with minimal colors, labels, and features that's designed to draw attention to your thematic content.     RasterEsriImagery – The Esri Imagery map style. A raster basemap that provides one meter or better satellite and aerial imagery in many parts of the world and lower resolution satellite imagery worldwide.     VectorEsriLightGrayCanvas – The Esri Light Gray Canvas map style, which provides a detailed vector basemap with a light gray, neutral background style with minimal colors, labels, and features that's designed to draw attention to your thematic content.     VectorEsriTopographic – The Esri Light map style, which provides a detailed vector basemap with a classic Esri map style.    VectorEsriStreets – The Esri World Streets map style, which provides a detailed vector basemap for the world symbolized with a classic Esri street map style. The vector tile layer is similar in content and style to the World Street Map raster map.    VectorEsriNavigation – The Esri World Navigation map style, which provides a detailed basemap for the world symbolized with a custom navigation map style that's designed for use during the day in mobile devices.   Valid HERE Technologies map styles:    VectorHereBerlin – The HERE Berlin map style is a high contrast detailed base map of the world that blends 3D and 2D rendering.    VectorHereExplore – A default HERE map style containing a neutral, global map and its features including roads, buildings, landmarks, and water features. It also now includes a fully designed map of Japan.    VectorHereExploreTruck – A global map containing truck restrictions and attributes (e.g. width / height / HAZMAT) symbolized with highlighted segments and icons on top of HERE Explore to support use cases within transport and logistics.  
      */
     Style: MapStyle;
   }
@@ -1878,6 +2018,10 @@ declare namespace Location {
      */
     Country?: String;
     Geometry: PlaceGeometry;
+    /**
+     *  True if the result is interpolated from other known places.  False if the Place is a known place. Not returned when the partner does not provide the information. For example, returns False for an address location that is found in the partner data, but returns True if an address does not exist in the partner data and its location is calculated by interpolating between other known addresses. 
+     */
+    Interpolated?: Boolean;
     /**
      * The full name and address of the point of interest such as a city, region, or country. For example, 123 Any Street, Any Town, USA.
      */
@@ -1903,9 +2047,13 @@ declare namespace Location {
      */
     Street?: String;
     /**
-     * A country, or an area that's part of a larger region . For example, Metro Vancouver.
+     * A country, or an area that's part of a larger region. For example, Metro Vancouver.
      */
     SubRegion?: String;
+    /**
+     * The time zone in which the Place is located. Returned only when using Here as the selected partner.
+     */
+    TimeZone?: TimeZone;
   }
   export interface PlaceGeometry {
     /**
@@ -1915,8 +2063,18 @@ declare namespace Location {
   }
   export type PlaceIndexSearchResultLimit = number;
   export type Position = Double[];
-  export type PositionFiltering = "TimeBased"|"DistanceBased"|string;
+  export type PositionFiltering = "TimeBased"|"DistanceBased"|"AccuracyBased"|string;
+  export interface PositionalAccuracy {
+    /**
+     * Estimated maximum distance, in meters, between the measured position and the true position of a device, along the Earth's surface.
+     */
+    Horizontal: PositionalAccuracyHorizontalDouble;
+  }
+  export type PositionalAccuracyHorizontalDouble = number;
   export type PricingPlan = "RequestBasedUsage"|"MobileAssetTracking"|"MobileAssetManagement"|string;
+  export type PropertyMap = {[key: string]: PropertyMapValueString};
+  export type PropertyMapKeyString = string;
+  export type PropertyMapValueString = string;
   export interface PutGeofenceRequest {
     /**
      * The geofence collection to store the geofence in.
@@ -1947,31 +2105,86 @@ declare namespace Location {
   }
   export type ResourceDescription = string;
   export type ResourceName = string;
+  export type RouteMatrix = RouteMatrixRow[];
+  export interface RouteMatrixEntry {
+    /**
+     * The total distance of travel for the route.
+     */
+    Distance?: RouteMatrixEntryDistanceDouble;
+    /**
+     * The expected duration of travel for the route.
+     */
+    DurationSeconds?: RouteMatrixEntryDurationSecondsDouble;
+    /**
+     * An error corresponding to the calculation of a route between the DeparturePosition and DestinationPosition.
+     */
+    Error?: RouteMatrixEntryError;
+  }
+  export type RouteMatrixEntryDistanceDouble = number;
+  export type RouteMatrixEntryDurationSecondsDouble = number;
+  export interface RouteMatrixEntryError {
+    /**
+     * The type of error which occurred for the route calculation.
+     */
+    Code: RouteMatrixErrorCode;
+    /**
+     * A message about the error that occurred for the route calculation.
+     */
+    Message?: String;
+  }
+  export type RouteMatrixErrorCode = "RouteNotFound"|"RouteTooLong"|"PositionsNotFound"|"DestinationPositionNotFound"|"DeparturePositionNotFound"|"OtherValidationError"|string;
+  export type RouteMatrixRow = RouteMatrixEntry[];
   export interface SearchForPositionResult {
     /**
-     * Contains details about the relevant point of interest.
+     * The distance in meters of a great-circle arc between the query position and the result.  A great-circle arc is the shortest path on a sphere, in this case the Earth. This returns the shortest distance between two locations. 
+     */
+    Distance: SearchForPositionResultDistanceDouble;
+    /**
+     * Details about the search result, such as its address and position.
      */
     Place: Place;
   }
+  export type SearchForPositionResultDistanceDouble = number;
   export type SearchForPositionResultList = SearchForPositionResult[];
+  export interface SearchForSuggestionsResult {
+    /**
+     * The text of the place suggestion, typically formatted as an address string.
+     */
+    Text: String;
+  }
+  export type SearchForSuggestionsResultList = SearchForSuggestionsResult[];
   export interface SearchForTextResult {
     /**
-     * Contains details about the relevant point of interest.
+     * The distance in meters of a great-circle arc between the bias position specified and the result. Distance will be returned only if a bias position was specified in the query.  A great-circle arc is the shortest path on a sphere, in this case the Earth. This returns the shortest distance between two locations. 
+     */
+    Distance?: SearchForTextResultDistanceDouble;
+    /**
+     * Details about the search result, such as its address and position.
      */
     Place: Place;
+    /**
+     * The relative confidence in the match for a result among the results returned. For example, if more fields for an address match (including house number, street, city, country/region, and postal code), the relevance score is closer to 1. Returned only when the partner selected is Esri.
+     */
+    Relevance?: SearchForTextResultRelevanceDouble;
   }
+  export type SearchForTextResultDistanceDouble = number;
   export type SearchForTextResultList = SearchForTextResult[];
+  export type SearchForTextResultRelevanceDouble = number;
   export interface SearchPlaceIndexForPositionRequest {
     /**
      * The name of the place index resource you want to use for the search.
      */
     IndexName: ResourceName;
     /**
-     * An optional paramer. The maximum number of results returned per request.  Default value: 50 
+     * The preferred language used to return results. The value must be a valid BCP 47 language tag, for example, en for English. This setting affects the languages used in the results, but not the results themselves. If no language is specified, or not supported for a particular result, the partner automatically chooses a language for the result. For an example, we'll use the Greek language. You search for a location around Athens, Greece, with the language parameter set to en. The city in the results will most likely be returned as Athens. If you set the language parameter to el, for Greek, then the city in the results will more likely be returned as Αθήνα. If the data provider does not have a value for Greek, the result will be in a language that the provider does support.
+     */
+    Language?: LanguageTag;
+    /**
+     * An optional parameter. The maximum number of results returned per request. Default value: 50 
      */
     MaxResults?: PlaceIndexSearchResultLimit;
     /**
-     * Specifies a coordinate for the query defined by a longitude, and latitude.   The first position is the X coordinate, or longitude.   The second position is the Y coordinate, or latitude.    For example, position=xLongitude&amp;position=yLatitude .
+     * Specifies the longitude and latitude of the position to query.  This parameter must contain a pair of numbers. The first number represents the X coordinate, or longitude; the second number represents the Y coordinate, or latitude. For example, [-123.1174, 49.2847] represents a position with longitude -123.1174 and latitude 49.2847.
      */
     Position: Position;
   }
@@ -1981,35 +2194,39 @@ declare namespace Location {
      */
     Results: SearchForPositionResultList;
     /**
-     * Contains a summary of the request.
+     * Contains a summary of the request. Echoes the input values for Position, Language, MaxResults, and the DataSource of the place index. 
      */
     Summary: SearchPlaceIndexForPositionSummary;
   }
   export interface SearchPlaceIndexForPositionSummary {
     /**
-     * The data provider of geospatial data. Indicates one of the available providers:   Esri   HERE   For additional details on data providers, see Amazon Location Service data providers.
+     * The geospatial data provider attached to the place index resource specified in the request. Values can be one of the following:   Esri   Here   For more information about data providers, see Amazon Location Service data providers.
      */
     DataSource: String;
     /**
-     * An optional parameter. The maximum number of results returned per request.  Default value: 50 
+     * The preferred language used to return results. Matches the language in the request. The value is a valid BCP 47 language tag, for example, en for English.
+     */
+    Language?: LanguageTag;
+    /**
+     * Contains the optional result count limit that is specified in the request. Default value: 50 
      */
     MaxResults?: PlaceIndexSearchResultLimit;
     /**
-     * The position given in the reverse geocoding request.
+     * The position specified in the request.
      */
     Position: Position;
   }
-  export interface SearchPlaceIndexForTextRequest {
+  export interface SearchPlaceIndexForSuggestionsRequest {
     /**
-     * Searches for results closest to the given position. An optional parameter defined by longitude, and latitude.   The first bias position is the X coordinate, or longitude.   The second bias position is the Y coordinate, or latitude.    For example, bias=xLongitude&amp;bias=yLatitude.
+     * An optional parameter that indicates a preference for place suggestions that are closer to a specified position.  If provided, this parameter must contain a pair of numbers. The first number represents the X coordinate, or longitude; the second number represents the Y coordinate, or latitude. For example, [-123.1174, 49.2847] represents the position with longitude -123.1174 and latitude 49.2847.   BiasPosition and FilterBBox are mutually exclusive. Specifying both options results in an error.  
      */
     BiasPosition?: Position;
     /**
-     * Filters the results by returning only Places within the provided bounding box. An optional parameter. The first 2 bbox parameters describe the lower southwest corner:   The first bbox position is the X coordinate or longitude of the lower southwest corner.   The second bbox position is the Y coordinate or latitude of the lower southwest corner.   For example, bbox=xLongitudeSW&amp;bbox=yLatitudeSW. The next bbox parameters describe the upper northeast corner:   The third bbox position is the X coordinate, or longitude of the upper northeast corner.   The fourth bbox position is the Y coordinate, or longitude of the upper northeast corner.   For example, bbox=xLongitudeNE&amp;bbox=yLatitudeNE 
+     * An optional parameter that limits the search results by returning only suggestions within a specified bounding box.  If provided, this parameter must contain a total of four consecutive numbers in two pairs. The first pair of numbers represents the X and Y coordinates (longitude and latitude, respectively) of the southwest corner of the bounding box; the second pair of numbers represents the X and Y coordinates (longitude and latitude, respectively) of the northeast corner of the bounding box. For example, [-12.7935, -37.4835, -12.0684, -36.9542] represents a bounding box where the southwest corner has longitude -12.7935 and latitude -37.4835, and the northeast corner has longitude -12.0684 and latitude -36.9542.   FilterBBox and BiasPosition are mutually exclusive. Specifying both options results in an error.  
      */
     FilterBBox?: BoundingBox;
     /**
-     * Limits the search to the given a list of countries/regions. An optional parameter.   Use the ISO 3166 3-digit country code. For example, Australia uses three upper-case characters: AUS.  
+     * An optional parameter that limits the search results by returning only suggestions within the provided list of countries.   Use the ISO 3166 3-digit country code. For example, Australia uses three upper-case characters: AUS.  
      */
     FilterCountries?: CountryCodeList;
     /**
@@ -2017,54 +2234,136 @@ declare namespace Location {
      */
     IndexName: ResourceName;
     /**
+     * The preferred language used to return results. The value must be a valid BCP 47 language tag, for example, en for English. This setting affects the languages used in the results. If no language is specified, or not supported for a particular result, the partner automatically chooses a language for the result. For an example, we'll use the Greek language. You search for Athens, Gr to get suggestions with the language parameter set to en. The results found will most likely be returned as Athens, Greece. If you set the language parameter to el, for Greek, then the result found will more likely be returned as Αθήνα, Ελλάδα. If the data provider does not have a value for Greek, the result will be in a language that the provider does support.
+     */
+    Language?: LanguageTag;
+    /**
+     * An optional parameter. The maximum number of results returned per request.  The default: 5 
+     */
+    MaxResults?: SearchPlaceIndexForSuggestionsRequestMaxResultsInteger;
+    /**
+     * The free-form partial text to use to generate place suggestions. For example, eiffel tow.
+     */
+    Text: SearchPlaceIndexForSuggestionsRequestTextString;
+  }
+  export type SearchPlaceIndexForSuggestionsRequestMaxResultsInteger = number;
+  export type SearchPlaceIndexForSuggestionsRequestTextString = string;
+  export interface SearchPlaceIndexForSuggestionsResponse {
+    /**
+     * A list of place suggestions that best match the search text.
+     */
+    Results: SearchForSuggestionsResultList;
+    /**
+     * Contains a summary of the request. Echoes the input values for BiasPosition, FilterBBox, FilterCountries, Language, MaxResults, and Text. Also includes the DataSource of the place index. 
+     */
+    Summary: SearchPlaceIndexForSuggestionsSummary;
+  }
+  export interface SearchPlaceIndexForSuggestionsSummary {
+    /**
+     * Contains the coordinates for the optional bias position specified in the request. This parameter contains a pair of numbers. The first number represents the X coordinate, or longitude; the second number represents the Y coordinate, or latitude. For example, [-123.1174, 49.2847] represents the position with longitude -123.1174 and latitude 49.2847.
+     */
+    BiasPosition?: Position;
+    /**
+     * The geospatial data provider attached to the place index resource specified in the request. Values can be one of the following:   Esri   Here   For more information about data providers, see Amazon Location Service data providers.
+     */
+    DataSource: String;
+    /**
+     * Contains the coordinates for the optional bounding box specified in the request.
+     */
+    FilterBBox?: BoundingBox;
+    /**
+     * Contains the optional country filter specified in the request.
+     */
+    FilterCountries?: CountryCodeList;
+    /**
+     * The preferred language used to return results. Matches the language in the request. The value is a valid BCP 47 language tag, for example, en for English.
+     */
+    Language?: LanguageTag;
+    /**
+     * Contains the optional result count limit specified in the request.
+     */
+    MaxResults?: Integer;
+    /**
+     * The free-form partial text input specified in the request.
+     */
+    Text: SensitiveString;
+  }
+  export interface SearchPlaceIndexForTextRequest {
+    /**
+     * An optional parameter that indicates a preference for places that are closer to a specified position.  If provided, this parameter must contain a pair of numbers. The first number represents the X coordinate, or longitude; the second number represents the Y coordinate, or latitude. For example, [-123.1174, 49.2847] represents the position with longitude -123.1174 and latitude 49.2847.   BiasPosition and FilterBBox are mutually exclusive. Specifying both options results in an error.  
+     */
+    BiasPosition?: Position;
+    /**
+     * An optional parameter that limits the search results by returning only places that are within the provided bounding box.  If provided, this parameter must contain a total of four consecutive numbers in two pairs. The first pair of numbers represents the X and Y coordinates (longitude and latitude, respectively) of the southwest corner of the bounding box; the second pair of numbers represents the X and Y coordinates (longitude and latitude, respectively) of the northeast corner of the bounding box. For example, [-12.7935, -37.4835, -12.0684, -36.9542] represents a bounding box where the southwest corner has longitude -12.7935 and latitude -37.4835, and the northeast corner has longitude -12.0684 and latitude -36.9542.   FilterBBox and BiasPosition are mutually exclusive. Specifying both options results in an error.  
+     */
+    FilterBBox?: BoundingBox;
+    /**
+     * An optional parameter that limits the search results by returning only places that are in a specified list of countries.   Valid values include ISO 3166 3-digit country codes. For example, Australia uses three upper-case characters: AUS.  
+     */
+    FilterCountries?: CountryCodeList;
+    /**
+     * The name of the place index resource you want to use for the search.
+     */
+    IndexName: ResourceName;
+    /**
+     * The preferred language used to return results. The value must be a valid BCP 47 language tag, for example, en for English. This setting affects the languages used in the results, but not the results themselves. If no language is specified, or not supported for a particular result, the partner automatically chooses a language for the result. For an example, we'll use the Greek language. You search for Athens, Greece, with the language parameter set to en. The result found will most likely be returned as Athens. If you set the language parameter to el, for Greek, then the result found will more likely be returned as Αθήνα. If the data provider does not have a value for Greek, the result will be in a language that the provider does support.
+     */
+    Language?: LanguageTag;
+    /**
      * An optional parameter. The maximum number of results returned per request.  The default: 50 
      */
     MaxResults?: PlaceIndexSearchResultLimit;
     /**
-     * The address, name, city, or region to be used in the search. In free-form text format. For example, 123 Any Street.
+     * The address, name, city, or region to be used in the search in free-form text format. For example, 123 Any Street.
      */
-    Text: SyntheticSearchPlaceIndexForTextRequestString;
+    Text: SearchPlaceIndexForTextRequestTextString;
   }
+  export type SearchPlaceIndexForTextRequestTextString = string;
   export interface SearchPlaceIndexForTextResponse {
     /**
-     * A list of Places closest to the specified position. Each result contains additional information about the specific point of interest. 
+     * A list of Places matching the input text. Each result contains additional information about the specific point of interest.  Not all response properties are included with all responses. Some properties may only be returned by specific data partners.
      */
     Results: SearchForTextResultList;
     /**
-     * Contains a summary of the request. Contains the BiasPosition, DataSource, FilterBBox, FilterCountries, MaxResults, ResultBBox, and Text.
+     * Contains a summary of the request. Echoes the input values for BiasPosition, FilterBBox, FilterCountries, Language, MaxResults, and Text. Also includes the DataSource of the place index and the bounding box, ResultBBox, which surrounds the search results. 
      */
     Summary: SearchPlaceIndexForTextSummary;
   }
   export interface SearchPlaceIndexForTextSummary {
     /**
-     * Contains the coordinates for the bias position entered in the geocoding request.
+     * Contains the coordinates for the optional bias position specified in the request. This parameter contains a pair of numbers. The first number represents the X coordinate, or longitude; the second number represents the Y coordinate, or latitude. For example, [-123.1174, 49.2847] represents the position with longitude -123.1174 and latitude 49.2847.
      */
     BiasPosition?: Position;
     /**
-     * The data provider of geospatial data. Indicates one of the available providers:   Esri   HERE   For additional details on data providers, see Amazon Location Service data providers.
+     * The geospatial data provider attached to the place index resource specified in the request. Values can be one of the following:   Esri   Here   For more information about data providers, see Amazon Location Service data providers.
      */
     DataSource: String;
     /**
-     * Contains the coordinates for the optional bounding box coordinated entered in the geocoding request.
+     * Contains the coordinates for the optional bounding box specified in the request.
      */
     FilterBBox?: BoundingBox;
     /**
-     * Contains the country filter entered in the geocoding request.
+     * Contains the optional country filter specified in the request.
      */
     FilterCountries?: CountryCodeList;
     /**
-     * Contains the maximum number of results indicated for the request.
+     * The preferred language used to return results. Matches the language in the request. The value is a valid BCP 47 language tag, for example, en for English.
+     */
+    Language?: LanguageTag;
+    /**
+     * Contains the optional result count limit specified in the request.
      */
     MaxResults?: PlaceIndexSearchResultLimit;
     /**
-     * A bounding box that contains the search results within the specified area indicated by FilterBBox. A subset of bounding box specified using FilterBBox.
+     * The bounding box that fully contains all search results.  If you specified the optional FilterBBox parameter in the request, ResultBBox is contained within FilterBBox. 
      */
     ResultBBox?: BoundingBox;
     /**
-     * The address, name, city or region to be used in the geocoding request. In free-form text format. For example, Vancouver.
+     * The search text specified in the request.
      */
-    Text: SyntheticSearchPlaceIndexForTextSummaryString;
+    Text: SensitiveString;
   }
+  export type SensitiveString = string;
   export interface Step {
     /**
      * The travel distance between the step's StartPosition and EndPosition.
@@ -2092,8 +2391,6 @@ declare namespace Location {
   export type StepGeometryOffsetInteger = number;
   export type StepList = Step[];
   export type String = string;
-  export type SyntheticSearchPlaceIndexForTextRequestString = string;
-  export type SyntheticSearchPlaceIndexForTextSummaryString = string;
   export type TagKey = string;
   export type TagKeys = String[];
   export type TagMap = {[key: string]: TagValue};
@@ -2103,13 +2400,23 @@ declare namespace Location {
      */
     ResourceArn: Arn;
     /**
-     * Tags that have been applied to the specified resource. Tags are mapped from the tag key to the tag value: "TagKey" : "TagValue".   Format example: {"tag1" : "value1", "tag2" : "value2"}    
+     * Applies one or more tags to specific resource. A tag is a key-value pair that helps you manage, identify, search, and filter your resources. Format: "key" : "value"  Restrictions:   Maximum 50 tags per resource.   Each tag key must be unique and must have exactly one associated value.   Maximum key length: 128 Unicode characters in UTF-8.   Maximum value length: 256 Unicode characters in UTF-8.   Can use alphanumeric characters (A–Z, a–z, 0–9), and the following characters: + - = . _ : / @   Cannot use "aws:" as a prefix for a key.  
      */
     Tags: TagMap;
   }
   export interface TagResourceResponse {
   }
   export type TagValue = string;
+  export interface TimeZone {
+    /**
+     * The name of the time zone, following the  IANA time zone standard. For example, America/Los_Angeles.
+     */
+    Name: String;
+    /**
+     * The time zone's offset, in seconds, from UTC.
+     */
+    Offset?: Integer;
+  }
   export type Timestamp = Date;
   export type Token = string;
   export type TravelMode = "Car"|"Truck"|"Walking"|string;
@@ -2167,11 +2474,11 @@ declare namespace Location {
      */
     Description?: ResourceDescription;
     /**
-     * Updates the pricing plan for the geofence collection. For more information about each pricing plan option restrictions, see Amazon Location Service pricing.
+     * No longer used. If included, the only allowed value is RequestBasedUsage.
      */
     PricingPlan?: PricingPlan;
     /**
-     * Updates the data provider for the geofence collection.  A required value for the following pricing plans: MobileAssetTracking| MobileAssetManagement  For more information about data providers and pricing plans, see the Amazon Location Service product page.  This can only be updated when updating the PricingPlan in the same request. Amazon Location Service uses PricingPlanDataSource to calculate billing for your geofence collection. Your data won't be shared with the data provider, and will remain in your AWS account and Region unless you move it. 
+     * This parameter is no longer used.
      */
     PricingPlanDataSource?: String;
   }
@@ -2199,7 +2506,7 @@ declare namespace Location {
      */
     MapName: ResourceName;
     /**
-     * Updates the pricing plan for the map resource. For more information about each pricing plan option restrictions, see Amazon Location Service pricing.
+     * No longer used. If included, the only allowed value is RequestBasedUsage.
      */
     PricingPlan?: PricingPlan;
   }
@@ -2231,7 +2538,7 @@ declare namespace Location {
      */
     IndexName: ResourceName;
     /**
-     * Updates the pricing plan for the place index resource. For more information about each pricing plan option restrictions, see Amazon Location Service pricing.
+     * No longer used. If included, the only allowed value is RequestBasedUsage.
      */
     PricingPlan?: PricingPlan;
   }
@@ -2259,7 +2566,7 @@ declare namespace Location {
      */
     Description?: ResourceDescription;
     /**
-     * Updates the pricing plan for the route calculator resource. For more information about each pricing plan option restrictions, see Amazon Location Service pricing.
+     * No longer used. If included, the only allowed value is RequestBasedUsage.
      */
     PricingPlan?: PricingPlan;
   }
@@ -2283,15 +2590,15 @@ declare namespace Location {
      */
     Description?: ResourceDescription;
     /**
-     * Updates the position filtering for the tracker resource. Valid values:    TimeBased - Location updates are evaluated against linked geofence collections, but not every location update is stored. If your update frequency is more often than 30 seconds, only one update per 30 seconds is stored for each unique device ID.     DistanceBased - If the device has moved less than 30 m (98.4 ft), location updates are ignored. Location updates within this distance are neither evaluated against linked geofence collections, nor stored. This helps control costs by reducing the number of geofence evaluations and device positions to retrieve. Distance-based filtering can also reduce the jitter effect when displaying device trajectory on a map.   
+     * Updates the position filtering for the tracker resource. Valid values:    TimeBased - Location updates are evaluated against linked geofence collections, but not every location update is stored. If your update frequency is more often than 30 seconds, only one update per 30 seconds is stored for each unique device ID.     DistanceBased - If the device has moved less than 30 m (98.4 ft), location updates are ignored. Location updates within this distance are neither evaluated against linked geofence collections, nor stored. This helps control costs by reducing the number of geofence evaluations and historical device positions to paginate through. Distance-based filtering can also reduce the effects of GPS noise when displaying device trajectories on a map.     AccuracyBased - If the device has moved less than the measured accuracy, location updates are ignored. For example, if two consecutive updates from a device have a horizontal accuracy of 5 m and 10 m, the second update is ignored if the device has moved less than 15 m. Ignored location updates are neither evaluated against linked geofence collections, nor stored. This helps educe the effects of GPS noise when displaying device trajectories on a map, and can help control costs by reducing the number of geofence evaluations.   
      */
     PositionFiltering?: PositionFiltering;
     /**
-     * Updates the pricing plan for the tracker resource. For more information about each pricing plan option restrictions, see Amazon Location Service pricing.
+     * No longer used. If included, the only allowed value is RequestBasedUsage.
      */
     PricingPlan?: PricingPlan;
     /**
-     * Updates the data provider for the tracker resource.  A required value for the following pricing plans: MobileAssetTracking| MobileAssetManagement  For more information about data providers and pricing plans, see the Amazon Location Service product page  This can only be updated when updating the PricingPlan in the same request. Amazon Location Service uses PricingPlanDataSource to calculate billing for your tracker resource. Your data won't be shared with the data provider, and will remain in your AWS account and Region unless you move it. 
+     * This parameter is no longer used.
      */
     PricingPlanDataSource?: String;
     /**

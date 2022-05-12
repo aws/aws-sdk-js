@@ -265,6 +265,7 @@
 
   function navExpander() {
     var done = false, timer = setTimeout(postMessage, 500);
+    var pathId = $('#app-script').attr('pathid');
     function postMessage() {
       if (done) return;
       clearTimeout(timer);

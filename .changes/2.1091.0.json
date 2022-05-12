@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "LexModelsV2",
+        "description": "This release makes slotTypeId an optional parameter in CreateSlot and UpdateSlot APIs in Amazon Lex V2 for model building. Customers can create and update slots without specifying a slot type id."
+    },
+    {
+        "type": "feature",
+        "category": "TranscribeService",
+        "description": "Documentation fix for API `StartMedicalTranscriptionJobRequest`, now showing min sample rate as 16khz"
+    },
+    {
+        "type": "feature",
+        "category": "Transfer",
+        "description": "Adding more descriptive error types for managed workflows"
+    }
+]

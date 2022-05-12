@@ -751,6 +751,29 @@
       ],
       "documentation": "<p>Updates the data catalog that has the specified name.</p>"
     },
+    "UpdateNamedQuery": {
+      "name": "UpdateNamedQuery",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateNamedQueryInput"
+      },
+      "output": {
+        "shape": "UpdateNamedQueryOutput"
+      },
+      "errors": [
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "InvalidRequestException"
+        }
+      ],
+      "documentation": "<p>Updates a <a>NamedQuery</a> object. The database or workgroup cannot be updated.</p>",
+      "idempotent": true
+    },
     "UpdatePreparedStatement": {
       "name": "UpdatePreparedStatement",
       "http": {
@@ -800,10 +823,45 @@
     }
   },
   "shapes": {
+    "AclConfiguration": {
+      "type": "structure",
+      "required": [
+        "S3AclOption"
+      ],
+      "members": {
+        "S3AclOption": {
+          "shape": "S3AclOption",
+          "documentation": "<p>The Amazon S3 canned ACL that Athena should specify when storing query results. Currently the only supported canned ACL is <code>BUCKET_OWNER_FULL_CONTROL</code>. If a query runs in a workgroup and the workgroup overrides client-side settings, then the Amazon S3 canned ACL specified in the workgroup's settings is used for all queries that run in the workgroup. For more information about Amazon S3 canned ACLs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/acl-overview.html#canned-acl\">Canned ACL</a> in the <i>Amazon S3 User Guide</i>.</p>"
+        }
+      },
+      "documentation": "<p>Indicates that an Amazon S3 canned ACL should be set to control ownership of stored query results. When Athena stores query results in Amazon S3, the canned ACL is set with the <code>x-amz-acl</code> request header. For more information about S3 Object Ownership, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html#object-ownership-overview\">Object Ownership settings</a> in the <i>Amazon S3 User Guide</i>.</p>"
+    },
     "AmazonResourceName": {
       "type": "string",
       "max": 1011,
       "min": 1
+    },
+    "AthenaError": {
+      "type": "structure",
+      "members": {
+        "ErrorCategory": {
+          "shape": "ErrorCategory",
+          "documentation": "<p>An integer value that specifies the category of a query failure error. The following list shows the category for each integer value.</p> <p> <b>1</b> - System</p> <p> <b>2</b> - User</p> <p> <b>3</b> - Other</p>"
+        },
+        "ErrorType": {
+          "shape": "ErrorType",
+          "documentation": "<p>An integer value that provides specific information about an Athena query error. For the meaning of specific values, see the <a href=\"https://docs.aws.amazon.com/athena/latest/ug/error-reference.html#error-reference-error-type-reference\">Error Type Reference</a> in the <i>Amazon Athena User Guide</i>.</p>"
+        },
+        "Retryable": {
+          "shape": "Boolean",
+          "documentation": "<p>True if the query might succeed if resubmitted.</p>"
+        },
+        "ErrorMessage": {
+          "shape": "String",
+          "documentation": "<p>Contains a short description of the error that occurred.</p>"
+        }
+      },
+      "documentation": "<p>Provides information about an Athena query error. The <code>AthenaError</code> feature provides standardized error information to help you understand failed queries and take steps after a query failure occurs. <code>AthenaError</code> includes an <code>ErrorCategory</code> field that specifies whether the cause of the failed query is due to system error, user error, or other error.</p>"
     },
     "BatchGetNamedQueryInput": {
       "type": "structure",
@@ -977,7 +1035,7 @@
       "members": {
         "Name": {
           "shape": "CatalogNameString",
-          "documentation": "<p>The name of the data catalog to create. The catalog name must be unique for the Amazon Web Services account and can use a maximum of 128 alphanumeric, underscore, at sign, or hyphen characters.</p>"
+          "documentation": "<p>The name of the data catalog to create. The catalog name must be unique for the Amazon Web Services account and can use a maximum of 127 alphanumeric, underscore, at sign, or hyphen characters. The remainder of the length constraint of 256 is reserved for use by Athena.</p>"
         },
         "Type": {
           "shape": "DataCatalogType",
@@ -1112,7 +1170,7 @@
       "members": {
         "Name": {
           "shape": "CatalogNameString",
-          "documentation": "<p>The name of the data catalog. The catalog name must be unique for the Amazon Web Services account and can use a maximum of 128 alphanumeric, underscore, at sign, or hyphen characters.</p>"
+          "documentation": "<p>The name of the data catalog. The catalog name must be unique for the Amazon Web Services account and can use a maximum of 127 alphanumeric, underscore, at sign, or hyphen characters. The remainder of the length constraint of 256 is reserved for use by Athena.</p>"
         },
         "Description": {
           "shape": "DescriptionString",
@@ -1134,7 +1192,7 @@
       "members": {
         "CatalogName": {
           "shape": "CatalogNameString",
-          "documentation": "<p>The name of the data catalog.</p>"
+          "documentation": "<p>The name of the data catalog. The catalog name is unique for the Amazon Web Services account and can use a maximum of 127 alphanumeric, underscore, at sign, or hyphen characters. The remainder of the length constraint of 256 is reserved for use by Athena.</p>"
         },
         "Type": {
           "shape": "DataCatalogType",
@@ -1289,14 +1347,14 @@
       "members": {
         "EncryptionOption": {
           "shape": "EncryptionOption",
-          "documentation": "<p>Indicates whether Amazon S3 server-side encryption with Amazon S3-managed keys (<code>SSE-S3</code>), server-side encryption with KMS-managed keys (<code>SSE-KMS</code>), or client-side encryption with KMS-managed keys (CSE-KMS) is used.</p> <p>If a query runs in a workgroup and the workgroup overrides client-side settings, then the workgroup's setting for encryption is used. It specifies whether query results must be encrypted, for all queries that run in this workgroup. </p>"
+          "documentation": "<p>Indicates whether Amazon S3 server-side encryption with Amazon S3-managed keys (<code>SSE_S3</code>), server-side encryption with KMS-managed keys (<code>SSE_KMS</code>), or client-side encryption with KMS-managed keys (<code>CSE_KMS</code>) is used.</p> <p>If a query runs in a workgroup and the workgroup overrides client-side settings, then the workgroup's setting for encryption is used. It specifies whether query results must be encrypted, for all queries that run in this workgroup. </p>"
         },
         "KmsKey": {
           "shape": "String",
-          "documentation": "<p>For <code>SSE-KMS</code> and <code>CSE-KMS</code>, this is the KMS key ARN or ID.</p>"
+          "documentation": "<p>For <code>SSE_KMS</code> and <code>CSE_KMS</code>, this is the KMS key ARN or ID.</p>"
         }
       },
-      "documentation": "<p>If query results are encrypted in Amazon S3, indicates the encryption option used (for example, <code>SSE-KMS</code> or <code>CSE-KMS</code>) and key information.</p>"
+      "documentation": "<p>If query results are encrypted in Amazon S3, indicates the encryption option used (for example, <code>SSE_KMS</code> or <code>CSE_KMS</code>) and key information.</p>"
     },
     "EncryptionOption": {
       "type": "string",
@@ -1328,6 +1386,12 @@
       "max": 10,
       "min": 0
     },
+    "ErrorCategory": {
+      "type": "integer",
+      "box": true,
+      "max": 3,
+      "min": 1
+    },
     "ErrorCode": {
       "type": "string",
       "documentation": "<p>The error code returned when the query execution failed to process, or when the processing request for the named query failed.</p>",
@@ -1336,6 +1400,12 @@
     },
     "ErrorMessage": {
       "type": "string"
+    },
+    "ErrorType": {
+      "type": "integer",
+      "box": true,
+      "max": 9999,
+      "min": 0
     },
     "ExpressionString": {
       "type": "string",
@@ -1928,7 +1998,7 @@
         },
         "QueryString": {
           "shape": "QueryString",
-          "documentation": "<p>The SQL query statements that comprise the query.</p>"
+          "documentation": "<p>The SQL statements that make up the query.</p>"
         },
         "NamedQueryId": {
           "shape": "NamedQueryId",
@@ -1939,7 +2009,12 @@
           "documentation": "<p>The name of the workgroup that contains the named query.</p>"
         }
       },
-      "documentation": "<p>A query, where <code>QueryString</code> is the list of SQL query statements that comprise the query.</p>"
+      "documentation": "<p>A query, where <code>QueryString</code> contains the SQL statements that make up the query.</p>"
+    },
+    "NamedQueryDescriptionString": {
+      "type": "string",
+      "max": 1024,
+      "min": 0
     },
     "NamedQueryId": {
       "type": "string"
@@ -2154,6 +2229,10 @@
         "CompletionDateTime": {
           "shape": "Date",
           "documentation": "<p>The date and time that the query completed.</p>"
+        },
+        "AthenaError": {
+          "shape": "AthenaError",
+          "documentation": "<p>Provides information about an Athena query error.</p>"
         }
       },
       "documentation": "<p>The completion date, current state, submission time, and state change reason (if applicable) for the query execution.</p>"
@@ -2172,7 +2251,15 @@
         },
         "EncryptionConfiguration": {
           "shape": "EncryptionConfiguration",
-          "documentation": "<p>If query results are encrypted in Amazon S3, indicates the encryption option used (for example, <code>SSE-KMS</code> or <code>CSE-KMS</code>) and key information. This is a client-side setting. If workgroup settings override client-side settings, then the query uses the encryption configuration that is specified for the workgroup, and also uses the location for storing query results specified in the workgroup. See <a>WorkGroupConfiguration$EnforceWorkGroupConfiguration</a> and <a href=\"https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html\">Workgroup Settings Override Client-Side Settings</a>.</p>"
+          "documentation": "<p>If query results are encrypted in Amazon S3, indicates the encryption option used (for example, <code>SSE_KMS</code> or <code>CSE_KMS</code>) and key information. This is a client-side setting. If workgroup settings override client-side settings, then the query uses the encryption configuration that is specified for the workgroup, and also uses the location for storing query results specified in the workgroup. See <a>WorkGroupConfiguration$EnforceWorkGroupConfiguration</a> and <a href=\"https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html\">Workgroup Settings Override Client-Side Settings</a>.</p>"
+        },
+        "ExpectedBucketOwner": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Web Services account ID that you expect to be the owner of the Amazon S3 bucket specified by <a>ResultConfiguration$OutputLocation</a>. If set, Athena uses the value for <code>ExpectedBucketOwner</code> when it makes Amazon S3 calls to your specified output location. If the <code>ExpectedBucketOwner</code> Amazon Web Services account ID does not match the actual owner of the Amazon S3 bucket, the call fails with a permissions error.</p> <p>This is a client-side setting. If workgroup settings override client-side settings, then the query uses the <code>ExpectedBucketOwner</code> setting that is specified for the workgroup, and also uses the location for storing query results specified in the workgroup. See <a>WorkGroupConfiguration$EnforceWorkGroupConfiguration</a> and <a href=\"https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html\">Workgroup Settings Override Client-Side Settings</a>.</p>"
+        },
+        "AclConfiguration": {
+          "shape": "AclConfiguration",
+          "documentation": "<p>Indicates that an Amazon S3 canned ACL should be set to control ownership of stored query results. Currently the only supported canned ACL is <code>BUCKET_OWNER_FULL_CONTROL</code>. This is a client-side setting. If workgroup settings override client-side settings, then the query uses the ACL configuration that is specified for the workgroup, and also uses the location for storing query results specified in the workgroup. For more information, see <a>WorkGroupConfiguration$EnforceWorkGroupConfiguration</a> and <a href=\"https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html\">Workgroup Settings Override Client-Side Settings</a>.</p>"
         }
       },
       "documentation": "<p>The location in Amazon S3 where query results are stored and the encryption option, if any, used for query results. These are known as \"client-side settings\". If workgroup settings override client-side settings, then the query uses the workgroup settings.</p>"
@@ -2195,6 +2282,22 @@
         "RemoveEncryptionConfiguration": {
           "shape": "BoxedBoolean",
           "documentation": "<p>If set to \"true\", indicates that the previously-specified encryption configuration (also known as the client-side setting) for queries in this workgroup should be ignored and set to null. If set to \"false\" or not set, and a value is present in the <code>EncryptionConfiguration</code> in <code>ResultConfigurationUpdates</code> (the client-side setting), the <code>EncryptionConfiguration</code> in the workgroup's <code>ResultConfiguration</code> will be updated with the new value. For more information, see <a href=\"https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html\">Workgroup Settings Override Client-Side Settings</a>.</p>"
+        },
+        "ExpectedBucketOwner": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Web Services account ID that you expect to be the owner of the Amazon S3 bucket specified by <a>ResultConfiguration$OutputLocation</a>. If set, Athena uses the value for <code>ExpectedBucketOwner</code> when it makes Amazon S3 calls to your specified output location. If the <code>ExpectedBucketOwner</code> Amazon Web Services account ID does not match the actual owner of the Amazon S3 bucket, the call fails with a permissions error.</p> <p>If workgroup settings override client-side settings, then the query uses the <code>ExpectedBucketOwner</code> setting that is specified for the workgroup, and also uses the location for storing query results specified in the workgroup. See <a>WorkGroupConfiguration$EnforceWorkGroupConfiguration</a> and <a href=\"https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html\">Workgroup Settings Override Client-Side Settings</a>.</p>"
+        },
+        "RemoveExpectedBucketOwner": {
+          "shape": "BoxedBoolean",
+          "documentation": "<p>If set to \"true\", removes the Amazon Web Services account ID previously specified for <a>ResultConfiguration$ExpectedBucketOwner</a>. If set to \"false\" or not set, and a value is present in the <code>ExpectedBucketOwner</code> in <code>ResultConfigurationUpdates</code> (the client-side setting), the <code>ExpectedBucketOwner</code> in the workgroup's <code>ResultConfiguration</code> is updated with the new value. For more information, see <a href=\"https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html\">Workgroup Settings Override Client-Side Settings</a>.</p>"
+        },
+        "AclConfiguration": {
+          "shape": "AclConfiguration",
+          "documentation": "<p>The ACL configuration for the query results.</p>"
+        },
+        "RemoveAclConfiguration": {
+          "shape": "BoxedBoolean",
+          "documentation": "<p>If set to <code>true</code>, indicates that the previously-specified ACL configuration for queries in this workgroup should be ignored and set to null. If set to <code>false</code> or not set, and a value is present in the <code>AclConfiguration</code> of <code>ResultConfigurationUpdates</code>, the <code>AclConfiguration</code> in the workgroup's <code>ResultConfiguration</code> is updated with the new value. For more information, see <a href=\"https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html\">Workgroup Settings Override Client-Side Settings</a>.</p>"
         }
       },
       "documentation": "<p>The information about the updates in the query results, such as output location and encryption configuration for the query results.</p>"
@@ -2211,7 +2314,7 @@
           "documentation": "<p>The metadata that describes the column structure and data types of a table of query results.</p>"
         }
       },
-      "documentation": "<p>The metadata and rows that comprise a query result set. The metadata describes the column structure and data types. To return a <code>ResultSet</code> object, use <a>GetQueryResults</a>.</p>"
+      "documentation": "<p>The metadata and rows that make up a query result set. The metadata describes the column structure and data types. To return a <code>ResultSet</code> object, use <a>GetQueryResults</a>.</p>"
     },
     "ResultSetMetadata": {
       "type": "structure",
@@ -2231,13 +2334,19 @@
           "documentation": "<p>The data that populates a row in a query result table.</p>"
         }
       },
-      "documentation": "<p>The rows that comprise a query result table.</p>"
+      "documentation": "<p>The rows that make up a query result table.</p>"
     },
     "RowList": {
       "type": "list",
       "member": {
         "shape": "Row"
       }
+    },
+    "S3AclOption": {
+      "type": "string",
+      "enum": [
+        "BUCKET_OWNER_FULL_CONTROL"
+      ]
     },
     "StartQueryExecutionInput": {
       "type": "structure",
@@ -2507,7 +2616,7 @@
       "members": {
         "Name": {
           "shape": "CatalogNameString",
-          "documentation": "<p>The name of the data catalog to update. The catalog name must be unique for the Amazon Web Services account and can use a maximum of 128 alphanumeric, underscore, at sign, or hyphen characters.</p>"
+          "documentation": "<p>The name of the data catalog to update. The catalog name must be unique for the Amazon Web Services account and can use a maximum of 127 alphanumeric, underscore, at sign, or hyphen characters. The remainder of the length constraint of 256 is reserved for use by Athena.</p>"
         },
         "Type": {
           "shape": "DataCatalogType",
@@ -2524,6 +2633,36 @@
       }
     },
     "UpdateDataCatalogOutput": {
+      "type": "structure",
+      "members": {}
+    },
+    "UpdateNamedQueryInput": {
+      "type": "structure",
+      "required": [
+        "NamedQueryId",
+        "Name",
+        "QueryString"
+      ],
+      "members": {
+        "NamedQueryId": {
+          "shape": "NamedQueryId",
+          "documentation": "<p>The unique identifier (UUID) of the query.</p>"
+        },
+        "Name": {
+          "shape": "NameString",
+          "documentation": "<p>The name of the query.</p>"
+        },
+        "Description": {
+          "shape": "NamedQueryDescriptionString",
+          "documentation": "<p>The query description.</p>"
+        },
+        "QueryString": {
+          "shape": "QueryString",
+          "documentation": "<p>The contents of the query with all query statements.</p>"
+        }
+      }
+    },
+    "UpdateNamedQueryOutput": {
       "type": "structure",
       "members": {}
     },

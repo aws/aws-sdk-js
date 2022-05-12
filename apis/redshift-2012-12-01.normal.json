@@ -145,7 +145,7 @@
           "shape": "InvalidDataShareFault"
         }
       ],
-      "documentation": "<p>From a data producer account, authorizes the sharing of a datashare with one or more consumer accounts. To authorize a datashare for a data consumer, the producer account must have the correct access privileges.</p>"
+      "documentation": "<p>From a data producer account, authorizes the sharing of a datashare with one or more consumer accounts or managing entities. To authorize a datashare for a data consumer, the producer account must have the correct access permissions.</p>"
     },
     "AuthorizeEndpointAccess": {
       "name": "AuthorizeEndpointAccess",
@@ -790,7 +790,7 @@
           "shape": "DependentServiceRequestThrottlingFault"
         }
       ],
-      "documentation": "<p>Creates a snapshot copy grant that permits Amazon Redshift to use a customer master key (CMK) from Key Management Service (KMS) to encrypt copied snapshots in a destination region.</p> <p> For more information about managing snapshot copy grants, go to <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html\">Amazon Redshift Database Encryption</a> in the <i>Amazon Redshift Cluster Management Guide</i>. </p>"
+      "documentation": "<p>Creates a snapshot copy grant that permits Amazon Redshift to use an encrypted symmetric key from Key Management Service (KMS) to encrypt copied snapshots in a destination region.</p> <p> For more information about managing snapshot copy grants, go to <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html\">Amazon Redshift Database Encryption</a> in the <i>Amazon Redshift Cluster Management Guide</i>. </p>"
     },
     "CreateSnapshotSchedule": {
       "name": "CreateSnapshotSchedule",
@@ -908,7 +908,7 @@
           "shape": "InvalidDataShareFault"
         }
       ],
-      "documentation": "<p>From the producer account, removes authorization from the specified datashare. </p>"
+      "documentation": "<p>From a datashare producer account, removes authorization from the specified datashare. </p>"
     },
     "DeleteAuthenticationProfile": {
       "name": "DeleteAuthenticationProfile",
@@ -1805,6 +1805,32 @@
       ],
       "documentation": "<p>Returns information about the partner integrations defined for a cluster.</p>"
     },
+    "DescribeReservedNodeExchangeStatus": {
+      "name": "DescribeReservedNodeExchangeStatus",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeReservedNodeExchangeStatusInputMessage"
+      },
+      "output": {
+        "shape": "DescribeReservedNodeExchangeStatusOutputMessage",
+        "resultWrapper": "DescribeReservedNodeExchangeStatusResult"
+      },
+      "errors": [
+        {
+          "shape": "ReservedNodeNotFoundFault"
+        },
+        {
+          "shape": "ReservedNodeExchangeNotFoundFault"
+        },
+        {
+          "shape": "UnsupportedOperationFault"
+        }
+      ],
+      "documentation": "<p>Returns exchange status details and associated metadata for a reserved-node exchange. Statuses include such values as in progress and requested.</p>"
+    },
     "DescribeReservedNodeOfferings": {
       "name": "DescribeReservedNodeOfferings",
       "http": {
@@ -2069,7 +2095,7 @@
           "shape": "UnauthorizedOperation"
         }
       ],
-      "documentation": "<p>Disables the automatic copying of snapshots from one region to another region for a specified cluster.</p> <p>If your cluster and its snapshots are encrypted using a customer master key (CMK) from Key Management Service, use <a>DeleteSnapshotCopyGrant</a> to delete the grant that grants Amazon Redshift permission to the CMK in the destination region. </p>"
+      "documentation": "<p>Disables the automatic copying of snapshots from one region to another region for a specified cluster.</p> <p>If your cluster and its snapshots are encrypted using an encrypted symmetric key from Key Management Service, use <a>DeleteSnapshotCopyGrant</a> to delete the grant that grants Amazon Redshift permission to the key in the destination region. </p>"
     },
     "DisassociateDataShareConsumer": {
       "name": "DisassociateDataShareConsumer",
@@ -2092,7 +2118,7 @@
           "shape": "InvalidNamespaceFault"
         }
       ],
-      "documentation": "<p>From a consumer account, remove association for the specified datashare. </p>"
+      "documentation": "<p>From a datashare consumer account, remove association for the specified datashare. </p>"
     },
     "EnableLogging": {
       "name": "EnableLogging",
@@ -2200,7 +2226,48 @@
           "shape": "UnsupportedOperationFault"
         }
       ],
-      "documentation": "<p>Returns a database user name and temporary password with temporary authorization to log on to an Amazon Redshift database. The action returns the database user name prefixed with <code>IAM:</code> if <code>AutoCreate</code> is <code>False</code> or <code>IAMA:</code> if <code>AutoCreate</code> is <code>True</code>. You can optionally specify one or more database user groups that the user will join at log on. By default, the temporary credentials expire in 900 seconds. You can optionally specify a duration between 900 seconds (15 minutes) and 3600 seconds (60 minutes). For more information, see <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/generating-user-credentials.html\">Using IAM Authentication to Generate Database User Credentials</a> in the Amazon Redshift Cluster Management Guide.</p> <p>The Identity and Access Management (IAM) user or role that runs GetClusterCredentials must have an IAM policy attached that allows access to all necessary actions and resources. For more information about permissions, see <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html#redshift-policy-resources.getclustercredentials-resources\">Resource Policies for GetClusterCredentials</a> in the Amazon Redshift Cluster Management Guide.</p> <p>If the <code>DbGroups</code> parameter is specified, the IAM policy must allow the <code>redshift:JoinGroup</code> action with access to the listed <code>dbgroups</code>. </p> <p>In addition, if the <code>AutoCreate</code> parameter is set to <code>True</code>, then the policy must include the <code>redshift:CreateClusterUser</code> privilege.</p> <p>If the <code>DbName</code> parameter is specified, the IAM policy must allow access to the resource <code>dbname</code> for the specified database name. </p>"
+      "documentation": "<p>Returns a database user name and temporary password with temporary authorization to log on to an Amazon Redshift database. The action returns the database user name prefixed with <code>IAM:</code> if <code>AutoCreate</code> is <code>False</code> or <code>IAMA:</code> if <code>AutoCreate</code> is <code>True</code>. You can optionally specify one or more database user groups that the user will join at log on. By default, the temporary credentials expire in 900 seconds. You can optionally specify a duration between 900 seconds (15 minutes) and 3600 seconds (60 minutes). For more information, see <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/generating-user-credentials.html\">Using IAM Authentication to Generate Database User Credentials</a> in the Amazon Redshift Cluster Management Guide.</p> <p>The Identity and Access Management (IAM) user or role that runs GetClusterCredentials must have an IAM policy attached that allows access to all necessary actions and resources. For more information about permissions, see <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html#redshift-policy-resources.getclustercredentials-resources\">Resource Policies for GetClusterCredentials</a> in the Amazon Redshift Cluster Management Guide.</p> <p>If the <code>DbGroups</code> parameter is specified, the IAM policy must allow the <code>redshift:JoinGroup</code> action with access to the listed <code>dbgroups</code>. </p> <p>In addition, if the <code>AutoCreate</code> parameter is set to <code>True</code>, then the policy must include the <code>redshift:CreateClusterUser</code> permission.</p> <p>If the <code>DbName</code> parameter is specified, the IAM policy must allow access to the resource <code>dbname</code> for the specified database name. </p>"
+    },
+    "GetReservedNodeExchangeConfigurationOptions": {
+      "name": "GetReservedNodeExchangeConfigurationOptions",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetReservedNodeExchangeConfigurationOptionsInputMessage"
+      },
+      "output": {
+        "shape": "GetReservedNodeExchangeConfigurationOptionsOutputMessage",
+        "resultWrapper": "GetReservedNodeExchangeConfigurationOptionsResult"
+      },
+      "errors": [
+        {
+          "shape": "ReservedNodeNotFoundFault"
+        },
+        {
+          "shape": "InvalidReservedNodeStateFault"
+        },
+        {
+          "shape": "ReservedNodeAlreadyMigratedFault"
+        },
+        {
+          "shape": "ReservedNodeOfferingNotFoundFault"
+        },
+        {
+          "shape": "UnsupportedOperationFault"
+        },
+        {
+          "shape": "DependentServiceUnavailableFault"
+        },
+        {
+          "shape": "ClusterNotFoundFault"
+        },
+        {
+          "shape": "ClusterSnapshotNotFoundFault"
+        }
+      ],
+      "documentation": "<p>Gets the configuration options for the reserved-node exchange. These options include information about the source reserved node and target reserved node offering. Details include the node type, the price, the node count, and the offering type.</p>"
     },
     "GetReservedNodeExchangeOfferings": {
       "name": "GetReservedNodeExchangeOfferings",
@@ -2410,7 +2477,7 @@
           "shape": "ClusterNotFoundFault"
         }
       ],
-      "documentation": "<p>Modifies the list of Identity and Access Management (IAM) roles that can be used by the cluster to access other Amazon Web Services services.</p> <p>A cluster can have up to 10 IAM roles associated at any time.</p>"
+      "documentation": "<p>Modifies the list of Identity and Access Management (IAM) roles that can be used by the cluster to access other Amazon Web Services services.</p> <p>The maximum number of IAM roles that you can associate is subject to a quota. For more information, go to <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html\">Quotas and limits</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>"
     },
     "ModifyClusterMaintenance": {
       "name": "ModifyClusterMaintenance",
@@ -2829,7 +2896,7 @@
           "shape": "InvalidDataShareFault"
         }
       ],
-      "documentation": "<p>From the consumer account, rejects the specified datashare.</p>"
+      "documentation": "<p>From a datashare consumer account, rejects the specified datashare.</p>"
     },
     "ResetClusterParameterGroup": {
       "name": "ResetClusterParameterGroup",
@@ -2894,6 +2961,24 @@
         },
         {
           "shape": "LimitExceededFault"
+        },
+        {
+          "shape": "ReservedNodeNotFoundFault"
+        },
+        {
+          "shape": "InvalidReservedNodeStateFault"
+        },
+        {
+          "shape": "ReservedNodeAlreadyMigratedFault"
+        },
+        {
+          "shape": "ReservedNodeOfferingNotFoundFault"
+        },
+        {
+          "shape": "DependentServiceUnavailableFault"
+        },
+        {
+          "shape": "ReservedNodeAlreadyExistsFault"
         }
       ],
       "documentation": "<p>Changes the size of the cluster. You can change the cluster's type, or change the number or type of nodes. The default behavior is to use the elastic resize method. With an elastic resize, your cluster is available for read and write operations more quickly than with the classic resize method. </p> <p>Elastic resize operations have the following restrictions:</p> <ul> <li> <p>You can only resize clusters of the following types:</p> <ul> <li> <p>dc1.large (if your cluster is in a VPC)</p> </li> <li> <p>dc1.8xlarge (if your cluster is in a VPC)</p> </li> <li> <p>dc2.large</p> </li> <li> <p>dc2.8xlarge</p> </li> <li> <p>ds2.xlarge</p> </li> <li> <p>ds2.8xlarge</p> </li> <li> <p>ra3.xlplus</p> </li> <li> <p>ra3.4xlarge</p> </li> <li> <p>ra3.16xlarge</p> </li> </ul> </li> <li> <p>The type of nodes that you add must match the node type for the cluster.</p> </li> </ul>"
@@ -2986,6 +3071,27 @@
         },
         {
           "shape": "InvalidTagFault"
+        },
+        {
+          "shape": "ReservedNodeNotFoundFault"
+        },
+        {
+          "shape": "InvalidReservedNodeStateFault"
+        },
+        {
+          "shape": "ReservedNodeAlreadyMigratedFault"
+        },
+        {
+          "shape": "ReservedNodeOfferingNotFoundFault"
+        },
+        {
+          "shape": "DependentServiceUnavailableFault"
+        },
+        {
+          "shape": "ReservedNodeAlreadyExistsFault"
+        },
+        {
+          "shape": "UnsupportedOperationFault"
         }
       ],
       "documentation": "<p>Creates a new cluster from a snapshot. By default, Amazon Redshift creates the resulting cluster with the same configuration as the original cluster from which the snapshot was created, except that the new cluster is created with the default cluster security and parameter groups. After Amazon Redshift creates the cluster, you can use the <a>ModifyCluster</a> API to associate a different security group and different parameter group with the restored cluster. If you are using a DS node type, you can also choose to change to another DS node type of the same size during restore.</p> <p>If you restore a cluster into a VPC, you must provide a cluster subnet group where you want the cluster restored.</p> <p> For more information about working with snapshots, go to <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html\">Amazon Redshift Snapshots</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>"
@@ -3323,6 +3429,10 @@
         "ConsumerArn": {
           "shape": "String",
           "documentation": "<p>The Amazon Resource Name (ARN) of the consumer that is associated with the datashare.</p>"
+        },
+        "ConsumerRegion": {
+          "shape": "String",
+          "documentation": "<p>From a datashare consumer account, associates a datashare with all existing and future namespaces in the specified Amazon Web Services Region.</p>"
         }
       }
     },
@@ -3442,7 +3552,7 @@
         },
         "ConsumerIdentifier": {
           "shape": "String",
-          "documentation": "<p>The identifier of the data consumer that is authorized to access the datashare. This identifier is an AWS account ID.</p>"
+          "documentation": "<p>The identifier of the data consumer that is authorized to access the datashare. This identifier is an Amazon Web Services account ID or a keyword, such as ADX.</p>"
         }
       }
     },
@@ -3810,6 +3920,14 @@
         "AquaConfiguration": {
           "shape": "AquaConfiguration",
           "documentation": "<p>The AQUA (Advanced Query Accelerator) configuration of the cluster.</p>"
+        },
+        "DefaultIamRoleArn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) for the IAM role set as default for the cluster.</p>"
+        },
+        "ReservedNodeExchangeStatus": {
+          "shape": "ReservedNodeExchangeStatus",
+          "documentation": "<p>The status of the reserved-node exchange request. Statuses include in-progress and requested.</p>"
         }
       },
       "documentation": "<p>Describes a cluster.</p>",
@@ -3834,7 +3952,7 @@
       "members": {
         "DbUser": {
           "shape": "String",
-          "documentation": "<p>A database user name that is authorized to log on to the database <code>DbName</code> using the password <code>DbPassword</code>. If the specified DbUser exists in the database, the new user name has the same database privileges as the the user named in DbUser. By default, the user is added to PUBLIC. If the <code>DbGroups</code> parameter is specifed, <code>DbUser</code> is added to the listed groups for any sessions created using these credentials.</p>"
+          "documentation": "<p>A database user name that is authorized to log on to the database <code>DbName</code> using the password <code>DbPassword</code>. If the specified DbUser exists in the database, the new user name has the same database permissions as the the user named in DbUser. By default, the user is added to PUBLIC. If the <code>DbGroups</code> parameter is specifed, <code>DbUser</code> is added to the listed groups for any sessions created using these credentials.</p>"
         },
         "DbPassword": {
           "shape": "SensitiveString",
@@ -4353,7 +4471,7 @@
         },
         "MasterUserPassword": {
           "shape": "String",
-          "documentation": "<p>The password associated with the admin user account for the cluster that is being created.</p> <p>Constraints:</p> <ul> <li> <p>Must be between 8 and 64 characters in length.</p> </li> <li> <p>Must contain at least one uppercase letter.</p> </li> <li> <p>Must contain at least one lowercase letter.</p> </li> <li> <p>Must contain one number.</p> </li> <li> <p>Can be any printable ASCII character (ASCII code 33 to 126) except ' (single quote), \" (double quote), \\, /, @, or space.</p> </li> </ul>"
+          "documentation": "<p>The password associated with the admin user account for the cluster that is being created.</p> <p>Constraints:</p> <ul> <li> <p>Must be between 8 and 64 characters in length.</p> </li> <li> <p>Must contain at least one uppercase letter.</p> </li> <li> <p>Must contain at least one lowercase letter.</p> </li> <li> <p>Must contain one number.</p> </li> <li> <p>Can be any printable ASCII character (ASCII code 33-126) except ' (single quote), \" (double quote), \\, /, or @.</p> </li> </ul>"
         },
         "ClusterSecurityGroups": {
           "shape": "ClusterSecurityGroupNameList",
@@ -4441,7 +4559,7 @@
         },
         "IamRoles": {
           "shape": "IamRoleArnList",
-          "documentation": "<p>A list of Identity and Access Management (IAM) roles that can be used by the cluster to access other Amazon Web Services services. You must supply the IAM roles in their Amazon Resource Name (ARN) format. You can supply up to 10 IAM roles in a single request.</p> <p>A cluster can have up to 10 IAM roles associated with it at any time.</p>"
+          "documentation": "<p>A list of Identity and Access Management (IAM) roles that can be used by the cluster to access other Amazon Web Services services. You must supply the IAM roles in their Amazon Resource Name (ARN) format. </p> <p>The maximum number of IAM roles that you can associate is subject to a quota. For more information, go to <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html\">Quotas and limits</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>"
         },
         "MaintenanceTrackName": {
           "shape": "String",
@@ -4458,6 +4576,14 @@
         "AquaConfigurationStatus": {
           "shape": "AquaConfigurationStatus",
           "documentation": "<p>The value represents how the cluster is configured to use AQUA (Advanced Query Accelerator) when it is created. Possible values include the following.</p> <ul> <li> <p>enabled - Use AQUA if it is available for the current Amazon Web Services Region and Amazon Redshift node type.</p> </li> <li> <p>disabled - Don't use AQUA. </p> </li> <li> <p>auto - Amazon Redshift determines whether to use AQUA.</p> </li> </ul>"
+        },
+        "DefaultIamRoleArn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) for the IAM role that was set as default for the cluster when the cluster was created. </p>"
+        },
+        "LoadSampleData": {
+          "shape": "String",
+          "documentation": "<p>A flag that specifies whether to load sample data once the cluster is created.</p>"
         }
       },
       "documentation": "<p/>"
@@ -4813,7 +4939,7 @@
         },
         "KmsKeyId": {
           "shape": "String",
-          "documentation": "<p>The unique identifier of the customer master key (CMK) to which to grant Amazon Redshift permission. If no key is specified, the default key is used.</p>"
+          "documentation": "<p>The unique identifier of the encrypted symmetric key to which to grant Amazon Redshift permission. If no key is specified, the default key is used.</p>"
         },
         "Tags": {
           "shape": "TagList",
@@ -4896,7 +5022,7 @@
         },
         "LimitType": {
           "shape": "UsageLimitLimitType",
-          "documentation": "<p>The type of limit. Depending on the feature type, this can be based on a time duration or data size. If <code>FeatureType</code> is <code>spectrum</code>, then <code>LimitType</code> must be <code>data-scanned</code>. If <code>FeatureType</code> is <code>concurrency-scaling</code>, then <code>LimitType</code> must be <code>time</code>. </p>"
+          "documentation": "<p>The type of limit. Depending on the feature type, this can be based on a time duration or data size. If <code>FeatureType</code> is <code>spectrum</code>, then <code>LimitType</code> must be <code>data-scanned</code>. If <code>FeatureType</code> is <code>concurrency-scaling</code>, then <code>LimitType</code> must be <code>time</code>. If <code>FeatureType</code> is <code>cross-region-datasharing</code>, then <code>LimitType</code> must be <code>data-scanned</code>. </p>"
         },
         "Amount": {
           "shape": "Long",
@@ -4946,7 +5072,11 @@
         },
         "DataShareAssociations": {
           "shape": "DataShareAssociationList",
-          "documentation": "<p>A value that specifies when the datashare has an association between a producer and data consumers.</p>"
+          "documentation": "<p>A value that specifies when the datashare has an association between producer and data consumers.</p>"
+        },
+        "ManagedBy": {
+          "shape": "String",
+          "documentation": "<p>The identifier of a datashare to show its managing entity.</p>"
         }
       }
     },
@@ -4960,6 +5090,10 @@
         "Status": {
           "shape": "DataShareStatus",
           "documentation": "<p>The status of the datashare that is associated.</p>"
+        },
+        "ConsumerRegion": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Web Services Region of the consumer accounts that have an association with a producer datashare.</p>"
         },
         "CreatedDate": {
           "shape": "TStamp",
@@ -5062,7 +5196,7 @@
         },
         "ConsumerIdentifier": {
           "shape": "String",
-          "documentation": "<p>The identifier of the data consumer that is to have authorization removed from the datashare. This identifier is an AWS account ID.</p>"
+          "documentation": "<p>The identifier of the data consumer that is to have authorization removed from the datashare. This identifier is an Amazon Web Services account ID or a keyword, such as ADX.</p>"
         }
       }
     },
@@ -5636,7 +5770,7 @@
         },
         "Marker": {
           "shape": "String",
-          "documentation": "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeDataSharesForConsumer</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p>"
+          "documentation": "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeDataSharesForConsumer</a> request exceed the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p>"
         }
       }
     },
@@ -5649,7 +5783,7 @@
         },
         "Marker": {
           "shape": "String",
-          "documentation": "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeDataSharesForConsumer</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p>"
+          "documentation": "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeDataSharesForConsumer</a> request exceed the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p>"
         }
       }
     },
@@ -5670,7 +5804,7 @@
         },
         "Marker": {
           "shape": "String",
-          "documentation": "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeDataSharesForProducer</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p>"
+          "documentation": "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeDataSharesForProducer</a> request exceed the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p>"
         }
       }
     },
@@ -5683,7 +5817,7 @@
         },
         "Marker": {
           "shape": "String",
-          "documentation": "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeDataSharesForProducer</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p>"
+          "documentation": "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeDataSharesForProducer</a> request exceed the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p>"
         }
       }
     },
@@ -5700,7 +5834,7 @@
         },
         "Marker": {
           "shape": "String",
-          "documentation": "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeDataShares</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p>"
+          "documentation": "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeDataShares</a> request exceed the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p>"
         }
       }
     },
@@ -5713,7 +5847,7 @@
         },
         "Marker": {
           "shape": "String",
-          "documentation": "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeDataShares</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p>"
+          "documentation": "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeDataShares</a> request exceed the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p>"
         }
       }
     },
@@ -6028,6 +6162,40 @@
         }
       }
     },
+    "DescribeReservedNodeExchangeStatusInputMessage": {
+      "type": "structure",
+      "members": {
+        "ReservedNodeId": {
+          "shape": "String",
+          "documentation": "<p>The identifier of the source reserved node in a reserved-node exchange request.</p>"
+        },
+        "ReservedNodeExchangeRequestId": {
+          "shape": "String",
+          "documentation": "<p>The identifier of the reserved-node exchange request.</p>"
+        },
+        "MaxRecords": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>The maximum number of response records to return in each call. If the number of remaining response records exceeds the specified <code>MaxRecords</code> value, a value is returned in a <code>Marker</code> field of the response. You can retrieve the next set of records by retrying the command with the returned marker value.</p>"
+        },
+        "Marker": {
+          "shape": "String",
+          "documentation": "<p>An optional pagination token provided by a previous <code>DescribeReservedNodeExchangeStatus</code> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by the <code>MaxRecords</code> parameter. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request.</p>"
+        }
+      }
+    },
+    "DescribeReservedNodeExchangeStatusOutputMessage": {
+      "type": "structure",
+      "members": {
+        "ReservedNodeExchangeStatusDetails": {
+          "shape": "ReservedNodeExchangeStatusList",
+          "documentation": "<p>The details of the reserved-node exchange request, including the status, request time, source reserved-node identifier, and additional details.</p>"
+        },
+        "Marker": {
+          "shape": "String",
+          "documentation": "<p>A pagination token provided by a previous <code>DescribeReservedNodeExchangeStatus</code> request.</p>"
+        }
+      }
+    },
     "DescribeReservedNodeOfferingsMessage": {
       "type": "structure",
       "members": {
@@ -6318,6 +6486,10 @@
         "ConsumerArn": {
           "shape": "String",
           "documentation": "<p>The Amazon Resource Name (ARN) of the consumer that association for the datashare is removed from.</p>"
+        },
+        "ConsumerRegion": {
+          "shape": "String",
+          "documentation": "<p>From a datashare consumer account, removes association of a datashare from all the existing and future namespaces in the specified Amazon Web Services Region.</p>"
         }
       }
     },
@@ -6380,8 +6552,7 @@
     "EnableLoggingMessage": {
       "type": "structure",
       "required": [
-        "ClusterIdentifier",
-        "BucketName"
+        "ClusterIdentifier"
       ],
       "members": {
         "ClusterIdentifier": {
@@ -6395,6 +6566,14 @@
         "S3KeyPrefix": {
           "shape": "String",
           "documentation": "<p>The prefix applied to the log file names.</p> <p>Constraints:</p> <ul> <li> <p>Cannot exceed 512 characters</p> </li> <li> <p>Cannot contain spaces( ), double quotes (\"), single quotes ('), a backslash (\\), or control characters. The hexadecimal codes for invalid characters are: </p> <ul> <li> <p>x00 to x20</p> </li> <li> <p>x22</p> </li> <li> <p>x27</p> </li> <li> <p>x5c</p> </li> <li> <p>x7f or larger</p> </li> </ul> </li> </ul>"
+        },
+        "LogDestinationType": {
+          "shape": "LogDestinationType",
+          "documentation": "<p>The log destination type. An enum with possible values of <code>s3</code> and <code>cloudwatch</code>.</p>"
+        },
+        "LogExports": {
+          "shape": "LogTypeList",
+          "documentation": "<p>The collection of exported log types. Log types include the connection log, user log and user activity log.</p>"
         }
       },
       "documentation": "<p/>"
@@ -6810,6 +6989,47 @@
       },
       "documentation": "<p>The request parameters to get cluster credentials.</p>"
     },
+    "GetReservedNodeExchangeConfigurationOptionsInputMessage": {
+      "type": "structure",
+      "required": [
+        "ActionType"
+      ],
+      "members": {
+        "ActionType": {
+          "shape": "ReservedNodeExchangeActionType",
+          "documentation": "<p>The action type of the reserved-node configuration. The action type can be an exchange initiated from either a snapshot or a resize.</p>"
+        },
+        "ClusterIdentifier": {
+          "shape": "String",
+          "documentation": "<p>The identifier for the cluster that is the source for a reserved-node exchange.</p>"
+        },
+        "SnapshotIdentifier": {
+          "shape": "String",
+          "documentation": "<p>The identifier for the snapshot that is the source for the reserved-node exchange.</p>"
+        },
+        "MaxRecords": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>The maximum number of response records to return in each call. If the number of remaining response records exceeds the specified <code>MaxRecords</code> value, a value is returned in a <code>Marker</code> field of the response. You can retrieve the next set of records by retrying the command with the returned marker value.</p>"
+        },
+        "Marker": {
+          "shape": "String",
+          "documentation": "<p>An optional pagination token provided by a previous <code>GetReservedNodeExchangeConfigurationOptions</code> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by the <code>MaxRecords</code> parameter. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request.</p>"
+        }
+      }
+    },
+    "GetReservedNodeExchangeConfigurationOptionsOutputMessage": {
+      "type": "structure",
+      "members": {
+        "Marker": {
+          "shape": "String",
+          "documentation": "<p>A pagination token provided by a previous <code>GetReservedNodeExchangeConfigurationOptions</code> request.</p>"
+        },
+        "ReservedNodeConfigurationOptionList": {
+          "shape": "ReservedNodeConfigurationOptionList",
+          "documentation": "<p>the configuration options for the reserved-node exchange. These options include information about the source reserved node and target reserved node. Details include the node type, the price, the node count, and the offering type.</p>"
+        }
+      }
+    },
     "GetReservedNodeExchangeOfferingsInputMessage": {
       "type": "structure",
       "required": [
@@ -7006,6 +7226,19 @@
     "IntegerOptional": {
       "type": "integer"
     },
+    "LogDestinationType": {
+      "type": "string",
+      "enum": [
+        "s3",
+        "cloudwatch"
+      ]
+    },
+    "LogTypeList": {
+      "type": "list",
+      "member": {
+        "shape": "String"
+      }
+    },
     "LoggingStatus": {
       "type": "structure",
       "members": {
@@ -7032,6 +7265,14 @@
         "LastFailureMessage": {
           "shape": "String",
           "documentation": "<p>The message indicating that logs failed to be delivered.</p>"
+        },
+        "LogDestinationType": {
+          "shape": "LogDestinationType",
+          "documentation": "<p>The log destination type. An enum with possible values of <code>s3</code> and <code>cloudwatch</code>.</p>"
+        },
+        "LogExports": {
+          "shape": "LogTypeList",
+          "documentation": "<p>The collection of exported log types. Log types include the connection log, user log and user activity log.</p>"
         }
       },
       "documentation": "<p>Describes the status of logging for a cluster.</p>"
@@ -7159,11 +7400,15 @@
         },
         "AddIamRoles": {
           "shape": "IamRoleArnList",
-          "documentation": "<p>Zero or more IAM roles to associate with the cluster. The roles must be in their Amazon Resource Name (ARN) format. You can associate up to 10 IAM roles with a single cluster in a single request.</p>"
+          "documentation": "<p>Zero or more IAM roles to associate with the cluster. The roles must be in their Amazon Resource Name (ARN) format. </p>"
         },
         "RemoveIamRoles": {
           "shape": "IamRoleArnList",
-          "documentation": "<p>Zero or more IAM roles in ARN format to disassociate from the cluster. You can disassociate up to 10 IAM roles from a single cluster in a single request.</p>"
+          "documentation": "<p>Zero or more IAM roles in ARN format to disassociate from the cluster. </p>"
+        },
+        "DefaultIamRoleArn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) for the IAM role that was set as default for the cluster when the cluster was last modified.</p>"
         }
       },
       "documentation": "<p/>"
@@ -7248,7 +7493,7 @@
         },
         "MasterUserPassword": {
           "shape": "String",
-          "documentation": "<p>The new password for the cluster admin user. This change is asynchronously applied as soon as possible. Between the time of the request and the completion of the request, the <code>MasterUserPassword</code> element exists in the <code>PendingModifiedValues</code> element of the operation response. </p> <note> <p>Operations never return the password, so this operation provides a way to regain access to the admin user account for a cluster if the password is lost.</p> </note> <p>Default: Uses existing setting.</p> <p>Constraints:</p> <ul> <li> <p>Must be between 8 and 64 characters in length.</p> </li> <li> <p>Must contain at least one uppercase letter.</p> </li> <li> <p>Must contain at least one lowercase letter.</p> </li> <li> <p>Must contain one number.</p> </li> <li> <p>Can be any printable ASCII character (ASCII code 33 to 126) except ' (single quote), \" (double quote), \\, /, @, or space.</p> </li> </ul>"
+          "documentation": "<p>The new password for the cluster admin user. This change is asynchronously applied as soon as possible. Between the time of the request and the completion of the request, the <code>MasterUserPassword</code> element exists in the <code>PendingModifiedValues</code> element of the operation response. </p> <note> <p>Operations never return the password, so this operation provides a way to regain access to the admin user account for a cluster if the password is lost.</p> </note> <p>Default: Uses existing setting.</p> <p>Constraints:</p> <ul> <li> <p>Must be between 8 and 64 characters in length.</p> </li> <li> <p>Must contain at least one uppercase letter.</p> </li> <li> <p>Must contain at least one lowercase letter.</p> </li> <li> <p>Must contain one number.</p> </li> <li> <p>Can be any printable ASCII character (ASCII code 33-126) except ' (single quote), \" (double quote), \\, /, or @.</p> </li> </ul>"
         },
         "ClusterParameterGroupName": {
           "shape": "String",
@@ -8150,6 +8395,98 @@
       "documentation": "<p>Describes a reserved node. You can call the <a>DescribeReservedNodeOfferings</a> API to obtain the available reserved node offerings. </p>",
       "wrapper": true
     },
+    "ReservedNodeConfigurationOption": {
+      "type": "structure",
+      "members": {
+        "SourceReservedNode": {
+          "shape": "ReservedNode"
+        },
+        "TargetReservedNodeCount": {
+          "shape": "Integer",
+          "documentation": "<p>The target reserved-node count.</p>"
+        },
+        "TargetReservedNodeOffering": {
+          "shape": "ReservedNodeOffering"
+        }
+      },
+      "documentation": "<p>Details for a reserved-node exchange. Examples include the node type for a reserved node, the price for a node, the node's state, and other details.</p>",
+      "wrapper": true
+    },
+    "ReservedNodeConfigurationOptionList": {
+      "type": "list",
+      "member": {
+        "shape": "ReservedNodeConfigurationOption",
+        "locationName": "ReservedNodeConfigurationOption"
+      }
+    },
+    "ReservedNodeExchangeActionType": {
+      "type": "string",
+      "enum": [
+        "restore-cluster",
+        "resize-cluster"
+      ]
+    },
+    "ReservedNodeExchangeStatus": {
+      "type": "structure",
+      "members": {
+        "ReservedNodeExchangeRequestId": {
+          "shape": "String",
+          "documentation": "<p>The identifier of the reserved-node exchange request.</p>"
+        },
+        "Status": {
+          "shape": "ReservedNodeExchangeStatusType",
+          "documentation": "<p>The status of the reserved-node exchange request. Statuses include in-progress and requested.</p>"
+        },
+        "RequestTime": {
+          "shape": "TStamp",
+          "documentation": "<p>A date and time that indicate when the reserved-node exchange was requested.</p>"
+        },
+        "SourceReservedNodeId": {
+          "shape": "String",
+          "documentation": "<p>The identifier of the source reserved node.</p>"
+        },
+        "SourceReservedNodeType": {
+          "shape": "String",
+          "documentation": "<p>The source reserved-node type, for example ds2.xlarge.</p>"
+        },
+        "SourceReservedNodeCount": {
+          "shape": "Integer",
+          "documentation": "<p>The source reserved-node count in the cluster.</p>"
+        },
+        "TargetReservedNodeOfferingId": {
+          "shape": "String",
+          "documentation": "<p>The identifier of the target reserved node offering.</p>"
+        },
+        "TargetReservedNodeType": {
+          "shape": "String",
+          "documentation": "<p>The node type of the target reserved node, for example ra3.4xlarge.</p>"
+        },
+        "TargetReservedNodeCount": {
+          "shape": "Integer",
+          "documentation": "<p>The count of target reserved nodes in the cluster.</p>"
+        }
+      },
+      "documentation": "<p>Reserved-node status details, such as the source reserved-node identifier, the target reserved-node identifier, the node type, the node count, and other details.</p>",
+      "wrapper": true
+    },
+    "ReservedNodeExchangeStatusList": {
+      "type": "list",
+      "member": {
+        "shape": "ReservedNodeExchangeStatus",
+        "locationName": "ReservedNodeExchangeStatus"
+      }
+    },
+    "ReservedNodeExchangeStatusType": {
+      "type": "string",
+      "enum": [
+        "REQUESTED",
+        "PENDING",
+        "IN_PROGRESS",
+        "RETRYING",
+        "SUCCEEDED",
+        "FAILED"
+      ]
+    },
     "ReservedNodeList": {
       "type": "list",
       "member": {
@@ -8288,6 +8625,14 @@
         "Classic": {
           "shape": "BooleanOptional",
           "documentation": "<p>A boolean value indicating whether the resize operation is using the classic resize process. If you don't provide this parameter or set the value to <code>false</code>, the resize type is elastic. </p>"
+        },
+        "ReservedNodeId": {
+          "shape": "String",
+          "documentation": "<p>The identifier of the reserved node.</p>"
+        },
+        "TargetReservedNodeOfferingId": {
+          "shape": "String",
+          "documentation": "<p>The identifier of the target reserved node offering.</p>"
         }
       },
       "documentation": "<p>Describes a resize cluster operation. For example, a scheduled action to run the <code>ResizeCluster</code> API operation. </p>"
@@ -8472,7 +8817,7 @@
         },
         "KmsKeyId": {
           "shape": "String",
-          "documentation": "<p>The Key Management Service (KMS) key ID of the encryption key that you want to use to encrypt data in the cluster that you restore from a shared snapshot.</p>"
+          "documentation": "<p>The Key Management Service (KMS) key ID of the encryption key that encrypts data in the cluster restored from a shared snapshot. You can also provide the key ID when you restore from an unencrypted snapshot to an encrypted cluster in the same account. Additionally, you can specify a new KMS key ID when you restore from an encrypted snapshot in the same account in order to change it. In that case, the restored cluster is encrypted with the new KMS key ID.</p>"
         },
         "NodeType": {
           "shape": "String",
@@ -8488,7 +8833,7 @@
         },
         "IamRoles": {
           "shape": "IamRoleArnList",
-          "documentation": "<p>A list of Identity and Access Management (IAM) roles that can be used by the cluster to access other Amazon Web Services services. You must supply the IAM roles in their Amazon Resource Name (ARN) format. You can supply up to 10 IAM roles in a single request.</p> <p>A cluster can have up to 10 IAM roles associated at any time.</p>"
+          "documentation": "<p>A list of Identity and Access Management (IAM) roles that can be used by the cluster to access other Amazon Web Services services. You must supply the IAM roles in their Amazon Resource Name (ARN) format. </p> <p>The maximum number of IAM roles that you can associate is subject to a quota. For more information, go to <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html\">Quotas and limits</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>"
         },
         "MaintenanceTrackName": {
           "shape": "String",
@@ -8509,6 +8854,22 @@
         "AquaConfigurationStatus": {
           "shape": "AquaConfigurationStatus",
           "documentation": "<p>The value represents how the cluster is configured to use AQUA (Advanced Query Accelerator) after the cluster is restored. Possible values include the following.</p> <ul> <li> <p>enabled - Use AQUA if it is available for the current Amazon Web Services Region and Amazon Redshift node type.</p> </li> <li> <p>disabled - Don't use AQUA. </p> </li> <li> <p>auto - Amazon Redshift determines whether to use AQUA.</p> </li> </ul>"
+        },
+        "DefaultIamRoleArn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) for the IAM role that was set as default for the cluster when the cluster was last modified while it was restored from a snapshot.</p>"
+        },
+        "ReservedNodeId": {
+          "shape": "String",
+          "documentation": "<p>The identifier of the target reserved node offering.</p>"
+        },
+        "TargetReservedNodeOfferingId": {
+          "shape": "String",
+          "documentation": "<p>The identifier of the target reserved node offering.</p>"
+        },
+        "Encrypted": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>Enables support for restoring an unencrypted snapshot to a cluster encrypted with Key Management Service (KMS) and a customer managed key.</p>"
         }
       },
       "documentation": "<p/>"
@@ -9079,14 +9440,14 @@
         },
         "KmsKeyId": {
           "shape": "String",
-          "documentation": "<p>The unique identifier of the customer master key (CMK) in Amazon Web Services KMS to which Amazon Redshift is granted permission.</p>"
+          "documentation": "<p>The unique identifier of the encrypted symmetric key in Amazon Web Services KMS to which Amazon Redshift is granted permission.</p>"
         },
         "Tags": {
           "shape": "TagList",
           "documentation": "<p>A list of tag instances.</p>"
         }
       },
-      "documentation": "<p>The snapshot copy grant that grants Amazon Redshift permission to encrypt copied snapshots with the specified customer master key (CMK) from Amazon Web Services KMS in the destination region.</p> <p> For more information about managing snapshot copy grants, go to <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html\">Amazon Redshift Database Encryption</a> in the <i>Amazon Redshift Cluster Management Guide</i>. </p>",
+      "documentation": "<p>The snapshot copy grant that grants Amazon Redshift permission to encrypt copied snapshots with the specified encrypted symmetric key from Amazon Web Services KMS in the destination region.</p> <p> For more information about managing snapshot copy grants, go to <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html\">Amazon Redshift Database Encryption</a> in the <i>Amazon Redshift Cluster Management Guide</i>. </p>",
       "wrapper": true
     },
     "SnapshotCopyGrantList": {
@@ -9615,7 +9976,8 @@
       "type": "string",
       "enum": [
         "spectrum",
-        "concurrency-scaling"
+        "concurrency-scaling",
+        "cross-region-datasharing"
       ]
     },
     "UsageLimitLimitType": {

@@ -20,13 +20,21 @@ declare class CustomerProfiles extends Service {
    */
   addProfileKey(callback?: (err: AWSError, data: CustomerProfiles.Types.AddProfileKeyResponse) => void): Request<CustomerProfiles.Types.AddProfileKeyResponse, AWSError>;
   /**
-   * Creates a domain, which is a container for all customer data, such as customer profile attributes, object types, profile keys, and encryption keys. You can create multiple domains, and each domain can have multiple third-party integrations. Each Amazon Connect instance can be associated with only one domain. Multiple Amazon Connect instances can be associated with one domain. Use this API or UpdateDomain to enable identity resolution: set Matching to true. 
+   * Creates a domain, which is a container for all customer data, such as customer profile attributes, object types, profile keys, and encryption keys. You can create multiple domains, and each domain can have multiple third-party integrations. Each Amazon Connect instance can be associated with only one domain. Multiple Amazon Connect instances can be associated with one domain. Use this API or UpdateDomain to enable identity resolution: set Matching to true.  To prevent cross-service impersonation when you call this API, see Cross-service confused deputy prevention for sample policies that you should apply. 
    */
   createDomain(params: CustomerProfiles.Types.CreateDomainRequest, callback?: (err: AWSError, data: CustomerProfiles.Types.CreateDomainResponse) => void): Request<CustomerProfiles.Types.CreateDomainResponse, AWSError>;
   /**
-   * Creates a domain, which is a container for all customer data, such as customer profile attributes, object types, profile keys, and encryption keys. You can create multiple domains, and each domain can have multiple third-party integrations. Each Amazon Connect instance can be associated with only one domain. Multiple Amazon Connect instances can be associated with one domain. Use this API or UpdateDomain to enable identity resolution: set Matching to true. 
+   * Creates a domain, which is a container for all customer data, such as customer profile attributes, object types, profile keys, and encryption keys. You can create multiple domains, and each domain can have multiple third-party integrations. Each Amazon Connect instance can be associated with only one domain. Multiple Amazon Connect instances can be associated with one domain. Use this API or UpdateDomain to enable identity resolution: set Matching to true.  To prevent cross-service impersonation when you call this API, see Cross-service confused deputy prevention for sample policies that you should apply. 
    */
   createDomain(callback?: (err: AWSError, data: CustomerProfiles.Types.CreateDomainResponse) => void): Request<CustomerProfiles.Types.CreateDomainResponse, AWSError>;
+  /**
+   *  Creates an integration workflow. An integration workflow is an async process which ingests historic data and sets up an integration for ongoing updates. The supported Amazon AppFlow sources are Salesforce, ServiceNow, and Marketo. 
+   */
+  createIntegrationWorkflow(params: CustomerProfiles.Types.CreateIntegrationWorkflowRequest, callback?: (err: AWSError, data: CustomerProfiles.Types.CreateIntegrationWorkflowResponse) => void): Request<CustomerProfiles.Types.CreateIntegrationWorkflowResponse, AWSError>;
+  /**
+   *  Creates an integration workflow. An integration workflow is an async process which ingests historic data and sets up an integration for ongoing updates. The supported Amazon AppFlow sources are Salesforce, ServiceNow, and Marketo. 
+   */
+  createIntegrationWorkflow(callback?: (err: AWSError, data: CustomerProfiles.Types.CreateIntegrationWorkflowResponse) => void): Request<CustomerProfiles.Types.CreateIntegrationWorkflowResponse, AWSError>;
   /**
    * Creates a standard profile. A standard profile represents the following attributes for a customer profile in a domain.
    */
@@ -84,6 +92,22 @@ declare class CustomerProfiles extends Service {
    */
   deleteProfileObjectType(callback?: (err: AWSError, data: CustomerProfiles.Types.DeleteProfileObjectTypeResponse) => void): Request<CustomerProfiles.Types.DeleteProfileObjectTypeResponse, AWSError>;
   /**
+   * Deletes the specified workflow and all its corresponding resources. This is an async process.
+   */
+  deleteWorkflow(params: CustomerProfiles.Types.DeleteWorkflowRequest, callback?: (err: AWSError, data: CustomerProfiles.Types.DeleteWorkflowResponse) => void): Request<CustomerProfiles.Types.DeleteWorkflowResponse, AWSError>;
+  /**
+   * Deletes the specified workflow and all its corresponding resources. This is an async process.
+   */
+  deleteWorkflow(callback?: (err: AWSError, data: CustomerProfiles.Types.DeleteWorkflowResponse) => void): Request<CustomerProfiles.Types.DeleteWorkflowResponse, AWSError>;
+  /**
+   * Tests the auto-merging settings of your Identity Resolution Job without merging your data. It randomly selects a sample of matching groups from the existing matching results, and applies the automerging settings that you provided. You can then view the number of profiles in the sample, the number of matches, and the number of profiles identified to be merged. This enables you to evaluate the accuracy of the attributes in your matching list.  You can't view which profiles are matched and would be merged.  We strongly recommend you use this API to do a dry run of the automerging process before running the Identity Resolution Job. Include at least two matching attributes. If your matching list includes too few attributes (such as only FirstName or only LastName), there may be a large number of matches. This increases the chances of erroneous merges. 
+   */
+  getAutoMergingPreview(params: CustomerProfiles.Types.GetAutoMergingPreviewRequest, callback?: (err: AWSError, data: CustomerProfiles.Types.GetAutoMergingPreviewResponse) => void): Request<CustomerProfiles.Types.GetAutoMergingPreviewResponse, AWSError>;
+  /**
+   * Tests the auto-merging settings of your Identity Resolution Job without merging your data. It randomly selects a sample of matching groups from the existing matching results, and applies the automerging settings that you provided. You can then view the number of profiles in the sample, the number of matches, and the number of profiles identified to be merged. This enables you to evaluate the accuracy of the attributes in your matching list.  You can't view which profiles are matched and would be merged.  We strongly recommend you use this API to do a dry run of the automerging process before running the Identity Resolution Job. Include at least two matching attributes. If your matching list includes too few attributes (such as only FirstName or only LastName), there may be a large number of matches. This increases the chances of erroneous merges. 
+   */
+  getAutoMergingPreview(callback?: (err: AWSError, data: CustomerProfiles.Types.GetAutoMergingPreviewResponse) => void): Request<CustomerProfiles.Types.GetAutoMergingPreviewResponse, AWSError>;
+  /**
    * Returns information about a specific domain.
    */
   getDomain(params: CustomerProfiles.Types.GetDomainRequest, callback?: (err: AWSError, data: CustomerProfiles.Types.GetDomainResponse) => void): Request<CustomerProfiles.Types.GetDomainResponse, AWSError>;
@@ -91,6 +115,14 @@ declare class CustomerProfiles extends Service {
    * Returns information about a specific domain.
    */
   getDomain(callback?: (err: AWSError, data: CustomerProfiles.Types.GetDomainResponse) => void): Request<CustomerProfiles.Types.GetDomainResponse, AWSError>;
+  /**
+   * Returns information about an Identity Resolution Job in a specific domain.  Identity Resolution Jobs are set up using the Amazon Connect admin console. For more information, see Use Identity Resolution to consolidate similar profiles.
+   */
+  getIdentityResolutionJob(params: CustomerProfiles.Types.GetIdentityResolutionJobRequest, callback?: (err: AWSError, data: CustomerProfiles.Types.GetIdentityResolutionJobResponse) => void): Request<CustomerProfiles.Types.GetIdentityResolutionJobResponse, AWSError>;
+  /**
+   * Returns information about an Identity Resolution Job in a specific domain.  Identity Resolution Jobs are set up using the Amazon Connect admin console. For more information, see Use Identity Resolution to consolidate similar profiles.
+   */
+  getIdentityResolutionJob(callback?: (err: AWSError, data: CustomerProfiles.Types.GetIdentityResolutionJobResponse) => void): Request<CustomerProfiles.Types.GetIdentityResolutionJobResponse, AWSError>;
   /**
    * Returns an integration for a domain.
    */
@@ -100,11 +132,11 @@ declare class CustomerProfiles extends Service {
    */
   getIntegration(callback?: (err: AWSError, data: CustomerProfiles.Types.GetIntegrationResponse) => void): Request<CustomerProfiles.Types.GetIntegrationResponse, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and subject to change. Before calling this API, use CreateDomain or UpdateDomain to enable identity resolution: set Matching to true. GetMatches returns potentially matching profiles, based on the results of the latest run of a machine learning process.   Amazon Connect starts a batch process every Saturday at 12AM UTC to identify matching profiles. The results are returned up to seven days after the Saturday run.  Amazon Connect uses the following profile attributes to identify matches:   PhoneNumber   HomePhoneNumber   BusinessPhoneNumber   MobilePhoneNumber   EmailAddress   PersonalEmailAddress   BusinessEmailAddress   FullName   BusinessName   For example, two or more profiles—with spelling mistakes such as John Doe and Jhn Doe, or different casing email addresses such as JOHN_DOE@ANYCOMPANY.COM and johndoe@anycompany.com, or different phone number formats such as 555-010-0000 and +1-555-010-0000—can be detected as belonging to the same customer John Doe and merged into a unified profile.
+   * Before calling this API, use CreateDomain or UpdateDomain to enable identity resolution: set Matching to true. GetMatches returns potentially matching profiles, based on the results of the latest run of a machine learning process.   The process of matching duplicate profiles. If Matching = true, Amazon Connect Customer Profiles starts a weekly batch process called Identity Resolution Job. If you do not specify a date and time for Identity Resolution Job to run, by default it runs every Saturday at 12AM UTC to detect duplicate profiles in your domains.  After the Identity Resolution Job completes, use the GetMatches API to return and review the results. Or, if you have configured ExportingConfig in the MatchingRequest, you can download the results from S3.  Amazon Connect uses the following profile attributes to identify matches:   PhoneNumber   HomePhoneNumber   BusinessPhoneNumber   MobilePhoneNumber   EmailAddress   PersonalEmailAddress   BusinessEmailAddress   FullName   For example, two or more profiles—with spelling mistakes such as John Doe and Jhn Doe, or different casing email addresses such as JOHN_DOE@ANYCOMPANY.COM and johndoe@anycompany.com, or different phone number formats such as 555-010-0000 and +1-555-010-0000—can be detected as belonging to the same customer John Doe and merged into a unified profile.
    */
   getMatches(params: CustomerProfiles.Types.GetMatchesRequest, callback?: (err: AWSError, data: CustomerProfiles.Types.GetMatchesResponse) => void): Request<CustomerProfiles.Types.GetMatchesResponse, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and subject to change. Before calling this API, use CreateDomain or UpdateDomain to enable identity resolution: set Matching to true. GetMatches returns potentially matching profiles, based on the results of the latest run of a machine learning process.   Amazon Connect starts a batch process every Saturday at 12AM UTC to identify matching profiles. The results are returned up to seven days after the Saturday run.  Amazon Connect uses the following profile attributes to identify matches:   PhoneNumber   HomePhoneNumber   BusinessPhoneNumber   MobilePhoneNumber   EmailAddress   PersonalEmailAddress   BusinessEmailAddress   FullName   BusinessName   For example, two or more profiles—with spelling mistakes such as John Doe and Jhn Doe, or different casing email addresses such as JOHN_DOE@ANYCOMPANY.COM and johndoe@anycompany.com, or different phone number formats such as 555-010-0000 and +1-555-010-0000—can be detected as belonging to the same customer John Doe and merged into a unified profile.
+   * Before calling this API, use CreateDomain or UpdateDomain to enable identity resolution: set Matching to true. GetMatches returns potentially matching profiles, based on the results of the latest run of a machine learning process.   The process of matching duplicate profiles. If Matching = true, Amazon Connect Customer Profiles starts a weekly batch process called Identity Resolution Job. If you do not specify a date and time for Identity Resolution Job to run, by default it runs every Saturday at 12AM UTC to detect duplicate profiles in your domains.  After the Identity Resolution Job completes, use the GetMatches API to return and review the results. Or, if you have configured ExportingConfig in the MatchingRequest, you can download the results from S3.  Amazon Connect uses the following profile attributes to identify matches:   PhoneNumber   HomePhoneNumber   BusinessPhoneNumber   MobilePhoneNumber   EmailAddress   PersonalEmailAddress   BusinessEmailAddress   FullName   For example, two or more profiles—with spelling mistakes such as John Doe and Jhn Doe, or different casing email addresses such as JOHN_DOE@ANYCOMPANY.COM and johndoe@anycompany.com, or different phone number formats such as 555-010-0000 and +1-555-010-0000—can be detected as belonging to the same customer John Doe and merged into a unified profile.
    */
   getMatches(callback?: (err: AWSError, data: CustomerProfiles.Types.GetMatchesResponse) => void): Request<CustomerProfiles.Types.GetMatchesResponse, AWSError>;
   /**
@@ -124,6 +156,22 @@ declare class CustomerProfiles extends Service {
    */
   getProfileObjectTypeTemplate(callback?: (err: AWSError, data: CustomerProfiles.Types.GetProfileObjectTypeTemplateResponse) => void): Request<CustomerProfiles.Types.GetProfileObjectTypeTemplateResponse, AWSError>;
   /**
+   * Get details of specified workflow.
+   */
+  getWorkflow(params: CustomerProfiles.Types.GetWorkflowRequest, callback?: (err: AWSError, data: CustomerProfiles.Types.GetWorkflowResponse) => void): Request<CustomerProfiles.Types.GetWorkflowResponse, AWSError>;
+  /**
+   * Get details of specified workflow.
+   */
+  getWorkflow(callback?: (err: AWSError, data: CustomerProfiles.Types.GetWorkflowResponse) => void): Request<CustomerProfiles.Types.GetWorkflowResponse, AWSError>;
+  /**
+   * Get granular list of steps in workflow.
+   */
+  getWorkflowSteps(params: CustomerProfiles.Types.GetWorkflowStepsRequest, callback?: (err: AWSError, data: CustomerProfiles.Types.GetWorkflowStepsResponse) => void): Request<CustomerProfiles.Types.GetWorkflowStepsResponse, AWSError>;
+  /**
+   * Get granular list of steps in workflow.
+   */
+  getWorkflowSteps(callback?: (err: AWSError, data: CustomerProfiles.Types.GetWorkflowStepsResponse) => void): Request<CustomerProfiles.Types.GetWorkflowStepsResponse, AWSError>;
+  /**
    * Lists all of the integrations associated to a specific URI in the AWS account.
    */
   listAccountIntegrations(params: CustomerProfiles.Types.ListAccountIntegrationsRequest, callback?: (err: AWSError, data: CustomerProfiles.Types.ListAccountIntegrationsResponse) => void): Request<CustomerProfiles.Types.ListAccountIntegrationsResponse, AWSError>;
@@ -139,6 +187,14 @@ declare class CustomerProfiles extends Service {
    * Returns a list of all the domains for an AWS account that have been created.
    */
   listDomains(callback?: (err: AWSError, data: CustomerProfiles.Types.ListDomainsResponse) => void): Request<CustomerProfiles.Types.ListDomainsResponse, AWSError>;
+  /**
+   * Lists all of the Identity Resolution Jobs in your domain. The response sorts the list by JobStartTime.
+   */
+  listIdentityResolutionJobs(params: CustomerProfiles.Types.ListIdentityResolutionJobsRequest, callback?: (err: AWSError, data: CustomerProfiles.Types.ListIdentityResolutionJobsResponse) => void): Request<CustomerProfiles.Types.ListIdentityResolutionJobsResponse, AWSError>;
+  /**
+   * Lists all of the Identity Resolution Jobs in your domain. The response sorts the list by JobStartTime.
+   */
+  listIdentityResolutionJobs(callback?: (err: AWSError, data: CustomerProfiles.Types.ListIdentityResolutionJobsResponse) => void): Request<CustomerProfiles.Types.ListIdentityResolutionJobsResponse, AWSError>;
   /**
    * Lists all of the integrations in your domain.
    */
@@ -180,11 +236,19 @@ declare class CustomerProfiles extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: CustomerProfiles.Types.ListTagsForResourceResponse) => void): Request<CustomerProfiles.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and subject to change. Runs an AWS Lambda job that does the following:   All the profileKeys in the ProfileToBeMerged will be moved to the main profile.   All the objects in the ProfileToBeMerged will be moved to the main profile.   All the ProfileToBeMerged will be deleted at the end.   All the profileKeys in the ProfileIdsToBeMerged will be moved to the main profile.   Standard fields are merged as follows:   Fields are always "union"-ed if there are no conflicts in standard fields or attributeKeys.   When there are conflicting fields:   If no SourceProfileIds entry is specified, the main Profile value is always taken.    If a SourceProfileIds entry is specified, the specified profileId is always taken, even if it is a NULL value.       You can use MergeProfiles together with GetMatches, which returns potentially matching profiles, or use it with the results of another matching system. After profiles have been merged, they cannot be separated (unmerged).
+   * Query to list all workflows.
+   */
+  listWorkflows(params: CustomerProfiles.Types.ListWorkflowsRequest, callback?: (err: AWSError, data: CustomerProfiles.Types.ListWorkflowsResponse) => void): Request<CustomerProfiles.Types.ListWorkflowsResponse, AWSError>;
+  /**
+   * Query to list all workflows.
+   */
+  listWorkflows(callback?: (err: AWSError, data: CustomerProfiles.Types.ListWorkflowsResponse) => void): Request<CustomerProfiles.Types.ListWorkflowsResponse, AWSError>;
+  /**
+   * Runs an AWS Lambda job that does the following:   All the profileKeys in the ProfileToBeMerged will be moved to the main profile.   All the objects in the ProfileToBeMerged will be moved to the main profile.   All the ProfileToBeMerged will be deleted at the end.   All the profileKeys in the ProfileIdsToBeMerged will be moved to the main profile.   Standard fields are merged as follows:   Fields are always "union"-ed if there are no conflicts in standard fields or attributeKeys.   When there are conflicting fields:   If no SourceProfileIds entry is specified, the main Profile value is always taken.    If a SourceProfileIds entry is specified, the specified profileId is always taken, even if it is a NULL value.       You can use MergeProfiles together with GetMatches, which returns potentially matching profiles, or use it with the results of another matching system. After profiles have been merged, they cannot be separated (unmerged).
    */
   mergeProfiles(params: CustomerProfiles.Types.MergeProfilesRequest, callback?: (err: AWSError, data: CustomerProfiles.Types.MergeProfilesResponse) => void): Request<CustomerProfiles.Types.MergeProfilesResponse, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and subject to change. Runs an AWS Lambda job that does the following:   All the profileKeys in the ProfileToBeMerged will be moved to the main profile.   All the objects in the ProfileToBeMerged will be moved to the main profile.   All the ProfileToBeMerged will be deleted at the end.   All the profileKeys in the ProfileIdsToBeMerged will be moved to the main profile.   Standard fields are merged as follows:   Fields are always "union"-ed if there are no conflicts in standard fields or attributeKeys.   When there are conflicting fields:   If no SourceProfileIds entry is specified, the main Profile value is always taken.    If a SourceProfileIds entry is specified, the specified profileId is always taken, even if it is a NULL value.       You can use MergeProfiles together with GetMatches, which returns potentially matching profiles, or use it with the results of another matching system. After profiles have been merged, they cannot be separated (unmerged).
+   * Runs an AWS Lambda job that does the following:   All the profileKeys in the ProfileToBeMerged will be moved to the main profile.   All the objects in the ProfileToBeMerged will be moved to the main profile.   All the ProfileToBeMerged will be deleted at the end.   All the profileKeys in the ProfileIdsToBeMerged will be moved to the main profile.   Standard fields are merged as follows:   Fields are always "union"-ed if there are no conflicts in standard fields or attributeKeys.   When there are conflicting fields:   If no SourceProfileIds entry is specified, the main Profile value is always taken.    If a SourceProfileIds entry is specified, the specified profileId is always taken, even if it is a NULL value.       You can use MergeProfiles together with GetMatches, which returns potentially matching profiles, or use it with the results of another matching system. After profiles have been merged, they cannot be separated (unmerged).
    */
   mergeProfiles(callback?: (err: AWSError, data: CustomerProfiles.Types.MergeProfilesResponse) => void): Request<CustomerProfiles.Types.MergeProfilesResponse, AWSError>;
   /**
@@ -236,11 +300,11 @@ declare class CustomerProfiles extends Service {
    */
   untagResource(callback?: (err: AWSError, data: CustomerProfiles.Types.UntagResourceResponse) => void): Request<CustomerProfiles.Types.UntagResourceResponse, AWSError>;
   /**
-   * Updates the properties of a domain, including creating or selecting a dead letter queue or an encryption key. After a domain is created, the name can’t be changed. Use this API or CreateDomain to enable identity resolution: set Matching to true. 
+   * Updates the properties of a domain, including creating or selecting a dead letter queue or an encryption key. After a domain is created, the name can’t be changed. Use this API or CreateDomain to enable identity resolution: set Matching to true.  To prevent cross-service impersonation when you call this API, see Cross-service confused deputy prevention for sample policies that you should apply. 
    */
   updateDomain(params: CustomerProfiles.Types.UpdateDomainRequest, callback?: (err: AWSError, data: CustomerProfiles.Types.UpdateDomainResponse) => void): Request<CustomerProfiles.Types.UpdateDomainResponse, AWSError>;
   /**
-   * Updates the properties of a domain, including creating or selecting a dead letter queue or an encryption key. After a domain is created, the name can’t be changed. Use this API or CreateDomain to enable identity resolution: set Matching to true. 
+   * Updates the properties of a domain, including creating or selecting a dead letter queue or an encryption key. After a domain is created, the name can’t be changed. Use this API or CreateDomain to enable identity resolution: set Matching to true.  To prevent cross-service impersonation when you call this API, see Cross-service confused deputy prevention for sample policies that you should apply. 
    */
   updateDomain(callback?: (err: AWSError, data: CustomerProfiles.Types.UpdateDomainResponse) => void): Request<CustomerProfiles.Types.UpdateDomainResponse, AWSError>;
   /**
@@ -324,10 +388,115 @@ declare namespace CustomerProfiles {
      */
     PostalCode?: string1To255;
   }
+  export interface AppflowIntegration {
+    FlowDefinition: FlowDefinition;
+    /**
+     * Batches in workflow of type APPFLOW_INTEGRATION.
+     */
+    Batches?: Batches;
+  }
+  export interface AppflowIntegrationWorkflowAttributes {
+    /**
+     * Specifies the source connector type, such as Salesforce, ServiceNow, and Marketo. Indicates source of ingestion.
+     */
+    SourceConnectorType: SourceConnectorType;
+    /**
+     * The name of the AppFlow connector profile used for ingestion.
+     */
+    ConnectorProfileName: ConnectorProfileName;
+    /**
+     * The Amazon Resource Name (ARN) of the IAM role. Customer Profiles assumes this role to create resources on your behalf as part of workflow execution.
+     */
+    RoleArn?: string1To255;
+  }
+  export interface AppflowIntegrationWorkflowMetrics {
+    /**
+     * Number of records processed in APPFLOW_INTEGRATION workflow.
+     */
+    RecordsProcessed: long;
+    /**
+     * Total steps completed in APPFLOW_INTEGRATION workflow.
+     */
+    StepsCompleted: long;
+    /**
+     * Total steps in APPFLOW_INTEGRATION workflow.
+     */
+    TotalSteps: long;
+  }
+  export interface AppflowIntegrationWorkflowStep {
+    /**
+     * Name of the flow created during execution of workflow step. APPFLOW_INTEGRATION workflow type creates an appflow flow during workflow step execution on the customers behalf.
+     */
+    FlowName: FlowName;
+    /**
+     * Workflow step status for APPFLOW_INTEGRATION workflow.
+     */
+    Status: Status;
+    /**
+     * Message indicating execution of workflow step for APPFLOW_INTEGRATION workflow.
+     */
+    ExecutionMessage: string1To255;
+    /**
+     * Total number of records processed during execution of workflow step for APPFLOW_INTEGRATION workflow.
+     */
+    RecordsProcessed: long;
+    /**
+     * Start datetime of records pulled in batch during execution of workflow step for APPFLOW_INTEGRATION workflow.
+     */
+    BatchRecordsStartTime: string1To255;
+    /**
+     * End datetime of records pulled in batch during execution of workflow step for APPFLOW_INTEGRATION workflow.
+     */
+    BatchRecordsEndTime: string1To255;
+    /**
+     * Creation timestamp of workflow step for APPFLOW_INTEGRATION workflow.
+     */
+    CreatedAt: timestamp;
+    /**
+     * Last updated timestamp for workflow step for APPFLOW_INTEGRATION workflow.
+     */
+    LastUpdatedAt: timestamp;
+  }
   export type AttributeSourceIdMap = {[key: string]: uuid};
   export type Attributes = {[key: string]: string1To255};
+  export interface AutoMerging {
+    /**
+     * The flag that enables the auto-merging of duplicate profiles.
+     */
+    Enabled: optionalBoolean;
+    /**
+     * A list of matching attributes that represent matching criteria. If two profiles meet at least one of the requirements in the matching attributes list, they will be merged.
+     */
+    Consolidation?: Consolidation;
+    /**
+     * How the auto-merging process should resolve conflicts between different profiles. For example, if Profile A and Profile B have the same FirstName and LastName (and that is the matching criteria), which EmailAddress should be used? 
+     */
+    ConflictResolution?: ConflictResolution;
+  }
+  export interface Batch {
+    /**
+     * Start time of batch to split ingestion.
+     */
+    StartTime: timestamp;
+    /**
+     * End time of batch to split ingestion.
+     */
+    EndTime: timestamp;
+  }
+  export type Batches = Batch[];
   export type BucketName = string;
   export type BucketPrefix = string;
+  export interface ConflictResolution {
+    /**
+     * How the auto-merging process should resolve conflicts between different profiles.    RECENCY: Uses the data that was most recently updated.    SOURCE: Uses the data from a specific source. For example, if a company has been aquired or two departments have merged, data from the specified source is used. If two duplicate profiles are from the same source, then RECENCY is used again.  
+     */
+    ConflictResolvingModel: ConflictResolvingModel;
+    /**
+     * The ObjectType name that is used to resolve profile merging conflicts when choosing SOURCE as the ConflictResolvingModel.
+     */
+    SourceName?: string1To255;
+  }
+  export type ConflictResolvingModel = "RECENCY"|"SOURCE"|string;
   export interface ConnectorOperator {
     /**
      * The operation to be performed on the provided Marketo source fields.
@@ -351,6 +520,12 @@ declare namespace CustomerProfiles {
     Zendesk?: ZendeskConnectorOperator;
   }
   export type ConnectorProfileName = string;
+  export interface Consolidation {
+    /**
+     * A list of matching criteria.
+     */
+    MatchingAttributesList: MatchingAttributesList;
+  }
   export interface CreateDomainRequest {
     /**
      * The unique name of the domain.
@@ -369,7 +544,7 @@ declare namespace CustomerProfiles {
      */
     DeadLetterQueueUrl?: sqsQueueUrl;
     /**
-     * The process of matching duplicate profiles. If Matching = true, Amazon Connect Customer Profiles starts a weekly batch process every Saturday at 12AM UTC to detect duplicate profiles in your domains. After that batch process completes, use the GetMatches API to return and review the results. 
+     * The process of matching duplicate profiles. If Matching = true, Amazon Connect Customer Profiles starts a weekly batch process called Identity Resolution Job. If you do not specify a date and time for Identity Resolution Job to run, by default it runs every Saturday at 12AM UTC to detect duplicate profiles in your domains.  After the Identity Resolution Job completes, use the GetMatches API to return and review the results. Or, if you have configured ExportingConfig in the MatchingRequest, you can download the results from S3.
      */
     Matching?: MatchingRequest;
     /**
@@ -395,7 +570,7 @@ declare namespace CustomerProfiles {
      */
     DeadLetterQueueUrl?: sqsQueueUrl;
     /**
-     * The process of matching duplicate profiles. If Matching = true, Amazon Connect Customer Profiles starts a weekly batch process every Saturday at 12AM UTC to detect duplicate profiles in your domains. After that batch process completes, use the GetMatches API to return and review the results. 
+     * The process of matching duplicate profiles. If Matching = true, Amazon Connect Customer Profiles starts a weekly batch process called Identity Resolution Job. If you do not specify a date and time for Identity Resolution Job to run, by default it runs every Saturday at 12AM UTC to detect duplicate profiles in your domains.  After the Identity Resolution Job completes, use the GetMatches API to return and review the results. Or, if you have configured ExportingConfig in the MatchingRequest, you can download the results from S3.
      */
     Matching?: MatchingResponse;
     /**
@@ -410,6 +585,42 @@ declare namespace CustomerProfiles {
      * The tags used to organize, track, or control access for this resource.
      */
     Tags?: TagMap;
+  }
+  export interface CreateIntegrationWorkflowRequest {
+    /**
+     * The unique name of the domain.
+     */
+    DomainName: name;
+    /**
+     * The type of workflow. The only supported value is APPFLOW_INTEGRATION.
+     */
+    WorkflowType: WorkflowType;
+    /**
+     * Configuration data for integration workflow.
+     */
+    IntegrationConfig: IntegrationConfig;
+    /**
+     * The name of the profile object type.
+     */
+    ObjectTypeName: typeName;
+    /**
+     * The Amazon Resource Name (ARN) of the IAM role. Customer Profiles assumes this role to create resources on your behalf as part of workflow execution.
+     */
+    RoleArn: RoleArn;
+    /**
+     * The tags used to organize, track, or control access for this resource.
+     */
+    Tags?: TagMap;
+  }
+  export interface CreateIntegrationWorkflowResponse {
+    /**
+     * Unique identifier for the workflow.
+     */
+    WorkflowId: uuid;
+    /**
+     * A message indicating create request was received.
+     */
+    Message: string1To255;
   }
   export interface CreateProfileRequest {
     /**
@@ -618,6 +829,18 @@ declare namespace CustomerProfiles {
      */
     Message?: message;
   }
+  export interface DeleteWorkflowRequest {
+    /**
+     * The unique name of the domain.
+     */
+    DomainName: name;
+    /**
+     * Unique identifier for the workflow.
+     */
+    WorkflowId: string1To255;
+  }
+  export interface DeleteWorkflowResponse {
+  }
   export type DestinationField = string;
   export type DomainList = ListDomainItem[];
   export interface DomainStats {
@@ -637,6 +860,19 @@ declare namespace CustomerProfiles {
      * The total size, in bytes, of all objects in the domain.
      */
     TotalSize?: long;
+  }
+  export type Double = number;
+  export interface ExportingConfig {
+    /**
+     * The S3 location where Identity Resolution Jobs write result files.
+     */
+    S3Exporting?: S3ExportingConfig;
+  }
+  export interface ExportingLocation {
+    /**
+     * Information about the S3 location where Identity Resolution Jobs write result files.
+     */
+    S3Exporting?: S3ExportingLocation;
   }
   export type FieldContentType = "STRING"|"NUMBER"|"PHONE_NUMBER"|"EMAIL_ADDRESS"|"NAME"|string;
   export type FieldMap = {[key: string]: ObjectTypeField};
@@ -756,6 +992,38 @@ declare namespace CustomerProfiles {
   export type FlowDescription = string;
   export type FlowName = string;
   export type Gender = "MALE"|"FEMALE"|"UNSPECIFIED"|string;
+  export interface GetAutoMergingPreviewRequest {
+    /**
+     * The unique name of the domain.
+     */
+    DomainName: name;
+    /**
+     * A list of matching attributes that represent matching criteria.
+     */
+    Consolidation: Consolidation;
+    /**
+     * How the auto-merging process should resolve conflicts between different profiles.
+     */
+    ConflictResolution: ConflictResolution;
+  }
+  export interface GetAutoMergingPreviewResponse {
+    /**
+     * The unique name of the domain.
+     */
+    DomainName: name;
+    /**
+     * The number of match groups in the domain that have been reviewed in this preview dry run.
+     */
+    NumberOfMatchesInSample?: long;
+    /**
+     * The number of profiles found in this preview dry run.
+     */
+    NumberOfProfilesInSample?: long;
+    /**
+     * The number of profiles that would be merged if this wasn't a preview dry run.
+     */
+    NumberOfProfilesWillBeMerged?: long;
+  }
   export interface GetDomainRequest {
     /**
      * The unique name of the domain.
@@ -784,7 +1052,7 @@ declare namespace CustomerProfiles {
      */
     Stats?: DomainStats;
     /**
-     * The process of matching duplicate profiles. If Matching = true, Amazon Connect Customer Profiles starts a weekly batch process every Saturday at 12AM UTC to detect duplicate profiles in your domains. After that batch process completes, use the GetMatches API to return and review the results. 
+     * The process of matching duplicate profiles. If Matching = true, Amazon Connect Customer Profiles starts a weekly batch process called Identity Resolution Job. If you do not specify a date and time for Identity Resolution Job to run, by default it runs every Saturday at 12AM UTC to detect duplicate profiles in your domains.  After the Identity Resolution Job completes, use the GetMatches API to return and review the results. Or, if you have configured ExportingConfig in the MatchingRequest, you can download the results from S3.
      */
     Matching?: MatchingResponse;
     /**
@@ -799,6 +1067,62 @@ declare namespace CustomerProfiles {
      * The tags used to organize, track, or control access for this resource.
      */
     Tags?: TagMap;
+  }
+  export interface GetIdentityResolutionJobRequest {
+    /**
+     * The unique name of the domain.
+     */
+    DomainName: name;
+    /**
+     * The unique identifier of the Identity Resolution Job.
+     */
+    JobId: uuid;
+  }
+  export interface GetIdentityResolutionJobResponse {
+    /**
+     * The unique name of the domain.
+     */
+    DomainName?: name;
+    /**
+     * The unique identifier of the Identity Resolution Job.
+     */
+    JobId?: uuid;
+    /**
+     * The status of the Identity Resolution Job.    PENDING: The Identity Resolution Job is scheduled but has not started yet. If you turn off the Identity Resolution feature in your domain, jobs in the PENDING state are deleted.    PREPROCESSING: The Identity Resolution Job is loading your data.    FIND_MATCHING: The Identity Resolution Job is using the machine learning model to identify profiles that belong to the same matching group.    MERGING: The Identity Resolution Job is merging duplicate profiles.    COMPLETED: The Identity Resolution Job completed successfully.    PARTIAL_SUCCESS: There's a system error and not all of the data is merged. The Identity Resolution Job writes a message indicating the source of the problem.    FAILED: The Identity Resolution Job did not merge any data. It writes a message indicating the source of the problem.  
+     */
+    Status?: IdentityResolutionJobStatus;
+    /**
+     * The error messages that are generated when the Identity Resolution Job runs.
+     */
+    Message?: stringTo2048;
+    /**
+     * The timestamp of when the Identity Resolution Job was started or will be started.
+     */
+    JobStartTime?: timestamp;
+    /**
+     * The timestamp of when the Identity Resolution Job was completed.
+     */
+    JobEndTime?: timestamp;
+    /**
+     * The timestamp of when the Identity Resolution Job was most recently edited.
+     */
+    LastUpdatedAt?: timestamp;
+    /**
+     * The timestamp of when the Identity Resolution Job will expire.
+     */
+    JobExpirationTime?: timestamp;
+    /**
+     * Configuration settings for how to perform the auto-merging of profiles.
+     */
+    AutoMerging?: AutoMerging;
+    /**
+     * The S3 location where the Identity Resolution Job writes result files.
+     */
+    ExportingLocation?: ExportingLocation;
+    /**
+     * Statistics about the Identity Resolution Job.
+     */
+    JobStats?: JobStats;
   }
   export interface GetIntegrationRequest {
     /**
@@ -822,7 +1146,7 @@ declare namespace CustomerProfiles {
     /**
      * The name of the profile object type.
      */
-    ObjectTypeName: typeName;
+    ObjectTypeName?: typeName;
     /**
      * The timestamp of when the domain was created.
      */
@@ -835,6 +1159,14 @@ declare namespace CustomerProfiles {
      * The tags used to organize, track, or control access for this resource.
      */
     Tags?: TagMap;
+    /**
+     * A map in which each key is an event type from an external application such as Segment or Shopify, and each value is an ObjectTypeName (template) used to ingest the event. It supports the following event types: SegmentIdentify, ShopifyCreateCustomers, ShopifyUpdateCustomers, ShopifyCreateDraftOrders, ShopifyUpdateDraftOrders, ShopifyCreateOrders, and ShopifyUpdatedOrders.
+     */
+    ObjectTypeNames?: ObjectTypeNames;
+    /**
+     * Unique identifier for the workflow.
+     */
+    WorkflowId?: string1To255;
   }
   export interface GetMatchesRequest {
     /**
@@ -904,6 +1236,10 @@ declare namespace CustomerProfiles {
      */
     AllowProfileCreation?: boolean;
     /**
+     * The format of your sourceLastUpdatedTimestamp that was previously set up.
+     */
+    SourceLastUpdatedTimestampFormat?: string1To255;
+    /**
      * A map of the name and ObjectType field.
      */
     Fields?: FieldMap;
@@ -948,6 +1284,10 @@ declare namespace CustomerProfiles {
      */
     AllowProfileCreation?: boolean;
     /**
+     * The format of your sourceLastUpdatedTimestamp that was previously set up.
+     */
+    SourceLastUpdatedTimestampFormat?: string1To255;
+    /**
      * A map of the name and ObjectType field.
      */
     Fields?: FieldMap;
@@ -956,13 +1296,161 @@ declare namespace CustomerProfiles {
      */
     Keys?: KeyMap;
   }
+  export interface GetWorkflowRequest {
+    /**
+     * The unique name of the domain.
+     */
+    DomainName: name;
+    /**
+     * Unique identifier for the workflow.
+     */
+    WorkflowId: uuid;
+  }
+  export interface GetWorkflowResponse {
+    /**
+     * Unique identifier for the workflow.
+     */
+    WorkflowId?: uuid;
+    /**
+     * The type of workflow. The only supported value is APPFLOW_INTEGRATION.
+     */
+    WorkflowType?: WorkflowType;
+    /**
+     * Status of workflow execution.
+     */
+    Status?: Status;
+    /**
+     * Workflow error messages during execution (if any).
+     */
+    ErrorDescription?: string1To255;
+    /**
+     * The timestamp that represents when workflow execution started.
+     */
+    StartDate?: timestamp;
+    /**
+     * The timestamp that represents when workflow execution last updated.
+     */
+    LastUpdatedAt?: timestamp;
+    /**
+     * Attributes provided for workflow execution.
+     */
+    Attributes?: WorkflowAttributes;
+    /**
+     * Workflow specific execution metrics.
+     */
+    Metrics?: WorkflowMetrics;
+  }
+  export interface GetWorkflowStepsRequest {
+    /**
+     * The unique name of the domain.
+     */
+    DomainName: name;
+    /**
+     * Unique identifier for the workflow.
+     */
+    WorkflowId: uuid;
+    /**
+     * The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+     */
+    NextToken?: token;
+    /**
+     * The maximum number of results to return per page.
+     */
+    MaxResults?: maxSize100;
+  }
+  export interface GetWorkflowStepsResponse {
+    /**
+     * Unique identifier for the workflow.
+     */
+    WorkflowId?: uuid;
+    /**
+     * The type of workflow. The only supported value is APPFLOW_INTEGRATION.
+     */
+    WorkflowType?: WorkflowType;
+    /**
+     * List containing workflow step details.
+     */
+    Items?: WorkflowStepsList;
+    /**
+     * If there are additional results, this is the token for the next set of results.
+     */
+    NextToken?: token;
+  }
+  export interface IdentityResolutionJob {
+    /**
+     * The unique name of the domain.
+     */
+    DomainName?: name;
+    /**
+     * The unique identifier of the Identity Resolution Job.
+     */
+    JobId?: uuid;
+    /**
+     * The status of the Identity Resolution Job.    PENDING: The Identity Resolution Job is scheduled but has not started yet. If you turn off the Identity Resolution feature in your domain, jobs in the PENDING state are deleted.    PREPROCESSING: The Identity Resolution Job is loading your data.    FIND_MATCHING: The Identity Resolution Job is using the machine learning model to identify profiles that belong to the same matching group.    MERGING: The Identity Resolution Job is merging duplicate profiles.    COMPLETED: The Identity Resolution Job completed successfully.    PARTIAL_SUCCESS: There's a system error and not all of the data is merged. The Identity Resolution Job writes a message indicating the source of the problem.    FAILED: The Identity Resolution Job did not merge any data. It writes a message indicating the source of the problem.  
+     */
+    Status?: IdentityResolutionJobStatus;
+    /**
+     * The timestamp of when the job was started or will be started.
+     */
+    JobStartTime?: timestamp;
+    /**
+     * The timestamp of when the job was completed.
+     */
+    JobEndTime?: timestamp;
+    /**
+     * Statistics about an Identity Resolution Job.
+     */
+    JobStats?: JobStats;
+    /**
+     * The S3 location where the Identity Resolution Job writes result files.
+     */
+    ExportingLocation?: ExportingLocation;
+    /**
+     * The error messages that are generated when the Identity Resolution Job runs.
+     */
+    Message?: stringTo2048;
+  }
+  export type IdentityResolutionJobStatus = "PENDING"|"PREPROCESSING"|"FIND_MATCHING"|"MERGING"|"COMPLETED"|"PARTIAL_SUCCESS"|"FAILED"|string;
+  export type IdentityResolutionJobsList = IdentityResolutionJob[];
   export interface IncrementalPullConfig {
     /**
      * A field that specifies the date time or timestamp field as the criteria to use when importing incremental records from the source.
      */
     DatetimeTypeFieldName?: DatetimeTypeFieldName;
   }
+  export interface IntegrationConfig {
+    /**
+     * Configuration data for APPFLOW_INTEGRATION workflow type.
+     */
+    AppflowIntegration?: AppflowIntegration;
+  }
   export type IntegrationList = ListIntegrationItem[];
+  export interface JobSchedule {
+    /**
+     * The day when the Identity Resolution Job should run every week.
+     */
+    DayOfTheWeek: JobScheduleDayOfTheWeek;
+    /**
+     * The time when the Identity Resolution Job should run every week.
+     */
+    Time: JobScheduleTime;
+  }
+  export type JobScheduleDayOfTheWeek = "SUNDAY"|"MONDAY"|"TUESDAY"|"WEDNESDAY"|"THURSDAY"|"FRIDAY"|"SATURDAY"|string;
+  export type JobScheduleTime = string;
+  export interface JobStats {
+    /**
+     * The number of profiles reviewed.
+     */
+    NumberOfProfilesReviewed?: long;
+    /**
+     * The number of matches found.
+     */
+    NumberOfMatchesFound?: long;
+    /**
+     * The number of merges completed.
+     */
+    NumberOfMergesDone?: long;
+  }
   export type KeyMap = {[key: string]: ObjectTypeKeyList};
   export type KmsArn = string;
   export interface ListAccountIntegrationsRequest {
@@ -978,6 +1466,10 @@ declare namespace CustomerProfiles {
      * The maximum number of objects returned per page.
      */
     MaxResults?: maxSize100;
+    /**
+     * Boolean to indicate if hidden integration should be returned. Defaults to False.
+     */
+    IncludeHidden?: optionalBoolean;
   }
   export interface ListAccountIntegrationsResponse {
     /**
@@ -1027,6 +1519,30 @@ declare namespace CustomerProfiles {
      */
     NextToken?: token;
   }
+  export interface ListIdentityResolutionJobsRequest {
+    /**
+     * The unique name of the domain.
+     */
+    DomainName: name;
+    /**
+     * The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+     */
+    NextToken?: token;
+    /**
+     * The maximum number of results to return per page.
+     */
+    MaxResults?: maxSize100;
+  }
+  export interface ListIdentityResolutionJobsResponse {
+    /**
+     * A list of Identity Resolution Jobs.
+     */
+    IdentityResolutionJobsList?: IdentityResolutionJobsList;
+    /**
+     * If there are additional results, this is the token for the next set of results.
+     */
+    NextToken?: token;
+  }
   export interface ListIntegrationItem {
     /**
      * The unique name of the domain.
@@ -1039,7 +1555,7 @@ declare namespace CustomerProfiles {
     /**
      * The name of the profile object type.
      */
-    ObjectTypeName: typeName;
+    ObjectTypeName?: typeName;
     /**
      * The timestamp of when the domain was created.
      */
@@ -1052,6 +1568,14 @@ declare namespace CustomerProfiles {
      * The tags used to organize, track, or control access for this resource.
      */
     Tags?: TagMap;
+    /**
+     * A map in which each key is an event type from an external application such as Segment or Shopify, and each value is an ObjectTypeName (template) used to ingest the event. It supports the following event types: SegmentIdentify, ShopifyCreateCustomers, ShopifyUpdateCustomers, ShopifyCreateDraftOrders, ShopifyUpdateDraftOrders, ShopifyCreateOrders, and ShopifyUpdatedOrders.
+     */
+    ObjectTypeNames?: ObjectTypeNames;
+    /**
+     * Unique identifier for the workflow.
+     */
+    WorkflowId?: string1To255;
   }
   export interface ListIntegrationsRequest {
     /**
@@ -1066,6 +1590,10 @@ declare namespace CustomerProfiles {
      * The maximum number of objects returned per page.
      */
     MaxResults?: maxSize100;
+    /**
+     * Boolean to indicate if hidden integration should be returned. Defaults to False.
+     */
+    IncludeHidden?: optionalBoolean;
   }
   export interface ListIntegrationsResponse {
     /**
@@ -1193,7 +1721,7 @@ declare namespace CustomerProfiles {
      */
     ProfileId: uuid;
     /**
-     * Applies a filter to the response to include profile objects with the specified index values. This filter is only supported for ObjectTypeName _asset and _case.
+     * Applies a filter to the response to include profile objects with the specified index values. This filter is only supported for ObjectTypeName _asset, _case and _order.
      */
     ObjectFilter?: ObjectFilter;
   }
@@ -1219,6 +1747,72 @@ declare namespace CustomerProfiles {
      */
     tags?: TagMap;
   }
+  export interface ListWorkflowsItem {
+    /**
+     * The type of workflow. The only supported value is APPFLOW_INTEGRATION.
+     */
+    WorkflowType: WorkflowType;
+    /**
+     * Unique identifier for the workflow.
+     */
+    WorkflowId: string1To255;
+    /**
+     * Status of workflow execution.
+     */
+    Status: Status;
+    /**
+     * Description for workflow execution status.
+     */
+    StatusDescription: string1To255;
+    /**
+     * Creation timestamp for workflow.
+     */
+    CreatedAt: timestamp;
+    /**
+     * Last updated timestamp for workflow.
+     */
+    LastUpdatedAt: timestamp;
+  }
+  export interface ListWorkflowsRequest {
+    /**
+     * The unique name of the domain.
+     */
+    DomainName: name;
+    /**
+     * The type of workflow. The only supported value is APPFLOW_INTEGRATION.
+     */
+    WorkflowType?: WorkflowType;
+    /**
+     * Status of workflow execution.
+     */
+    Status?: Status;
+    /**
+     * Retrieve workflows started after timestamp.
+     */
+    QueryStartDate?: timestamp;
+    /**
+     * Retrieve workflows ended after timestamp.
+     */
+    QueryEndDate?: timestamp;
+    /**
+     * The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+     */
+    NextToken?: token;
+    /**
+     * The maximum number of results to return per page.
+     */
+    MaxResults?: maxSize100;
+  }
+  export interface ListWorkflowsResponse {
+    /**
+     * List containing workflow details.
+     */
+    Items?: WorkflowList;
+    /**
+     * If there are additional results, this is the token for the next set of results.
+     */
+    NextToken?: token;
+  }
   export type MarketoConnectorOperator = "PROJECTION"|"LESS_THAN"|"GREATER_THAN"|"BETWEEN"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string;
   export interface MarketoSourceProperties {
     /**
@@ -1235,19 +1829,49 @@ declare namespace CustomerProfiles {
      * A list of identifiers for profiles that match.
      */
     ProfileIds?: ProfileIdList;
+    /**
+     * A number between 0 and 1 that represents the confidence level of assigning profiles to a matching group. A score of 1 likely indicates an exact match.
+     */
+    ConfidenceScore?: Double;
   }
   export type MatchesList = MatchItem[];
+  export type MatchingAttributes = string1To255[];
+  export type MatchingAttributesList = MatchingAttributes[];
   export interface MatchingRequest {
     /**
      * The flag that enables the matching process of duplicate profiles.
      */
     Enabled: optionalBoolean;
+    /**
+     * The day and time when do you want to start the Identity Resolution Job every week.
+     */
+    JobSchedule?: JobSchedule;
+    /**
+     * Configuration information about the auto-merging process.
+     */
+    AutoMerging?: AutoMerging;
+    /**
+     * Configuration information for exporting Identity Resolution results, for example, to an S3 bucket.
+     */
+    ExportingConfig?: ExportingConfig;
   }
   export interface MatchingResponse {
     /**
      * The flag that enables the matching process of duplicate profiles.
      */
     Enabled?: optionalBoolean;
+    /**
+     * The day and time when do you want to start the Identity Resolution Job every week.
+     */
+    JobSchedule?: JobSchedule;
+    /**
+     * Configuration information about the auto-merging process.
+     */
+    AutoMerging?: AutoMerging;
+    /**
+     * Configuration information for exporting Identity Resolution results, for example, to an S3 bucket.
+     */
+    ExportingConfig?: ExportingConfig;
   }
   export interface MergeProfilesRequest {
     /**
@@ -1276,7 +1900,7 @@ declare namespace CustomerProfiles {
   export type Object = string;
   export interface ObjectFilter {
     /**
-     * A searchable identifier of a standard profile object. The predefined keys you can use to search for _asset include: _assetId, _assetName, _serialNumber. The predefined keys you can use to search for _case include: _caseId.
+     * A searchable identifier of a standard profile object. The predefined keys you can use to search for _asset include: _assetId, _assetName, _serialNumber. The predefined keys you can use to search for _case include: _caseId. The predefined keys you can use to search for _order include: _orderId.
      */
     KeyName: name;
     /**
@@ -1300,7 +1924,7 @@ declare namespace CustomerProfiles {
   }
   export interface ObjectTypeKey {
     /**
-     * The types of keys that a ProfileObject can have. Each ProfileObject can have only 1 UNIQUE key but multiple PROFILE keys. PROFILE, ASSET or CASE means that this key can be used to tie an object to a PROFILE, ASSET or CASE respectively. UNIQUE means that it can be used to uniquely identify an object. If a key a is marked as SECONDARY, it will be used to search for profiles after all other PROFILE keys have been searched. A LOOKUP_ONLY key is only used to match a profile but is not persisted to be used for searching of the profile. A NEW_ONLY key is only used if the profile does not already exist before the object is ingested, otherwise it is only used for matching objects to profiles.
+     * The types of keys that a ProfileObject can have. Each ProfileObject can have only 1 UNIQUE key but multiple PROFILE keys. PROFILE, ASSET, CASE, or ORDER means that this key can be used to tie an object to a PROFILE, ASSET, CASE, or ORDER respectively. UNIQUE means that it can be used to uniquely identify an object. If a key a is marked as SECONDARY, it will be used to search for profiles after all other PROFILE keys have been searched. A LOOKUP_ONLY key is only used to match a profile but is not persisted to be used for searching of the profile. A NEW_ONLY key is only used if the profile does not already exist before the object is ingested, otherwise it is only used for matching objects to profiles.
      */
     StandardIdentifiers?: StandardIdentifierList;
     /**
@@ -1309,6 +1933,7 @@ declare namespace CustomerProfiles {
     FieldNames?: FieldNameList;
   }
   export type ObjectTypeKeyList = ObjectTypeKey[];
+  export type ObjectTypeNames = {[key: string]: typeName};
   export type OperatorPropertiesKeys = "VALUE"|"VALUES"|"DATA_TYPE"|"UPPER_BOUND"|"LOWER_BOUND"|"SOURCE_DATA_TYPE"|"DESTINATION_DATA_TYPE"|"VALIDATION_ACTION"|"MASK_VALUE"|"MASK_LENGTH"|"TRUNCATE_LENGTH"|"MATH_OPERATION_FIELDS_ORDER"|"CONCAT_FORMAT"|"SUBFIELD_CATEGORY_MAP"|string;
   export type PartyType = "INDIVIDUAL"|"BUSINESS"|"OTHER"|string;
   export interface Profile {
@@ -1420,7 +2045,7 @@ declare namespace CustomerProfiles {
     /**
      * The name of the profile object type.
      */
-    ObjectTypeName: typeName;
+    ObjectTypeName?: typeName;
     /**
      * The tags used to organize, track, or control access for this resource.
      */
@@ -1429,6 +2054,10 @@ declare namespace CustomerProfiles {
      * The configuration that controls how Customer Profiles retrieves data from the source.
      */
     FlowDefinition?: FlowDefinition;
+    /**
+     * A map in which each key is an event type from an external application such as Segment or Shopify, and each value is an ObjectTypeName (template) used to ingest the event. It supports the following event types: SegmentIdentify, ShopifyCreateCustomers, ShopifyUpdateCustomers, ShopifyCreateDraftOrders, ShopifyUpdateDraftOrders, ShopifyCreateOrders, and ShopifyUpdatedOrders.
+     */
+    ObjectTypeNames?: ObjectTypeNames;
   }
   export interface PutIntegrationResponse {
     /**
@@ -1442,7 +2071,7 @@ declare namespace CustomerProfiles {
     /**
      * The name of the profile object type.
      */
-    ObjectTypeName: typeName;
+    ObjectTypeName?: typeName;
     /**
      * The timestamp of when the domain was created.
      */
@@ -1455,6 +2084,14 @@ declare namespace CustomerProfiles {
      * The tags used to organize, track, or control access for this resource.
      */
     Tags?: TagMap;
+    /**
+     * A map in which each key is an event type from an external application such as Segment or Shopify, and each value is an ObjectTypeName (template) used to ingest the event. It supports the following event types: SegmentIdentify, ShopifyCreateCustomers, ShopifyUpdateCustomers, ShopifyCreateDraftOrders, ShopifyUpdateDraftOrders, ShopifyCreateOrders, and ShopifyUpdatedOrders.
+     */
+    ObjectTypeNames?: ObjectTypeNames;
+    /**
+     * Unique identifier for the workflow.
+     */
+    WorkflowId?: string1To255;
   }
   export interface PutProfileObjectRequest {
     /**
@@ -1506,6 +2143,10 @@ declare namespace CustomerProfiles {
      */
     AllowProfileCreation?: boolean;
     /**
+     * The format of your sourceLastUpdatedTimestamp that was previously set up. 
+     */
+    SourceLastUpdatedTimestampFormat?: string1To255;
+    /**
      * A map of the name and ObjectType field.
      */
     Fields?: FieldMap;
@@ -1544,6 +2185,10 @@ declare namespace CustomerProfiles {
      */
     AllowProfileCreation?: boolean;
     /**
+     * The format of your sourceLastUpdatedTimestamp that was previously set up in fields that were parsed using SimpleDateFormat. If you have sourceLastUpdatedTimestamp in your field, you must set up sourceLastUpdatedTimestampFormat.
+     */
+    SourceLastUpdatedTimestampFormat?: string1To255;
+    /**
      * A map of the name and ObjectType field.
      */
     Fields?: FieldMap;
@@ -1564,7 +2209,28 @@ declare namespace CustomerProfiles {
      */
     Tags?: TagMap;
   }
+  export type RoleArn = string;
   export type S3ConnectorOperator = "PROJECTION"|"LESS_THAN"|"GREATER_THAN"|"BETWEEN"|"LESS_THAN_OR_EQUAL_TO"|"GREATER_THAN_OR_EQUAL_TO"|"EQUAL_TO"|"NOT_EQUAL_TO"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string;
+  export interface S3ExportingConfig {
+    /**
+     * The name of the S3 bucket where Identity Resolution Jobs write result files.
+     */
+    S3BucketName: s3BucketName;
+    /**
+     * The S3 key name of the location where Identity Resolution Jobs write result files.
+     */
+    S3KeyName?: s3KeyNameCustomerOutputConfig;
+  }
+  export interface S3ExportingLocation {
+    /**
+     * The name of the S3 bucket name where Identity Resolution Jobs write result files.
+     */
+    S3BucketName?: s3BucketName;
+    /**
+     * The S3 key name of the location where Identity Resolution Jobs write result files.
+     */
+    S3KeyName?: s3KeyName;
+  }
   export interface S3SourceProperties {
     /**
      * The Amazon S3 bucket name where the source files are stored.
@@ -1636,7 +2302,7 @@ declare namespace CustomerProfiles {
      */
     DomainName: name;
     /**
-     * A searchable identifier of a customer profile. The predefined keys you can use to search include: _account, _profileId, _fullName, _phone, _email, _ctrContactId, _marketoLeadId, _salesforceAccountId, _salesforceContactId, _zendeskUserId, _zendeskExternalId, _serviceNowSystemId.
+     * A searchable identifier of a customer profile. The predefined keys you can use to search include: _account, _profileId, _assetId, _caseId, _orderId, _fullName, _phone, _email, _ctrContactId, _marketoLeadId, _salesforceAccountId, _salesforceContactId, _salesforceAssetId, _zendeskUserId, _zendeskExternalId, _zendeskTicketId, _serviceNowSystemId, _serviceNowIncidentId, _segmentUserId, _shopifyCustomerId, _shopifyOrderId.
      */
     KeyName: name;
     /**
@@ -1703,8 +2369,9 @@ declare namespace CustomerProfiles {
      */
     SourceConnectorProperties: SourceConnectorProperties;
   }
-  export type StandardIdentifier = "PROFILE"|"ASSET"|"CASE"|"UNIQUE"|"SECONDARY"|"LOOKUP_ONLY"|"NEW_ONLY"|string;
+  export type StandardIdentifier = "PROFILE"|"ASSET"|"CASE"|"UNIQUE"|"SECONDARY"|"LOOKUP_ONLY"|"NEW_ONLY"|"ORDER"|string;
   export type StandardIdentifierList = StandardIdentifier[];
+  export type Status = "NOT_STARTED"|"IN_PROGRESS"|"COMPLETE"|"FAILED"|"SPLIT"|"RETRY"|"CANCELLED"|string;
   export type TagArn = string;
   export type TagKey = string;
   export type TagKeyList = TagKey[];
@@ -1838,7 +2505,7 @@ declare namespace CustomerProfiles {
      */
     DeadLetterQueueUrl?: sqsQueueUrl;
     /**
-     * The process of matching duplicate profiles. If Matching = true, Amazon Connect Customer Profiles starts a weekly batch process every Saturday at 12AM UTC to detect duplicate profiles in your domains. After that batch process completes, use the GetMatches API to return and review the results. 
+     * The process of matching duplicate profiles. If Matching = true, Amazon Connect Customer Profiles starts a weekly batch process called Identity Resolution Job. If you do not specify a date and time for Identity Resolution Job to run, by default it runs every Saturday at 12AM UTC to detect duplicate profiles in your domains.  After the Identity Resolution Job completes, use the GetMatches API to return and review the results. Or, if you have configured ExportingConfig in the MatchingRequest, you can download the results from S3.
      */
     Matching?: MatchingRequest;
     /**
@@ -1864,7 +2531,7 @@ declare namespace CustomerProfiles {
      */
     DeadLetterQueueUrl?: sqsQueueUrl;
     /**
-     * The process of matching duplicate profiles. If Matching = true, Amazon Connect Customer Profiles starts a weekly batch process every Saturday at 12AM UTC to detect duplicate profiles in your domains. After that batch process completes, use the GetMatches API to return and review the results. 
+     * The process of matching duplicate profiles. If Matching = true, Amazon Connect Customer Profiles starts a weekly batch process called Identity Resolution Job. If you do not specify a date and time for Identity Resolution Job to run, by default it runs every Saturday at 12AM UTC to detect duplicate profiles in your domains.  After the Identity Resolution Job completes, use the GetMatches API to return and review the results. Or, if you have configured ExportingConfig in the MatchingRequest, you can download the results from S3.
      */
     Matching?: MatchingResponse;
     /**
@@ -1980,6 +2647,27 @@ declare namespace CustomerProfiles {
      */
     ProfileId: uuid;
   }
+  export interface WorkflowAttributes {
+    /**
+     * Workflow attributes specific to APPFLOW_INTEGRATION workflow.
+     */
+    AppflowIntegration?: AppflowIntegrationWorkflowAttributes;
+  }
+  export type WorkflowList = ListWorkflowsItem[];
+  export interface WorkflowMetrics {
+    /**
+     * Workflow execution metrics for APPFLOW_INTEGRATION workflow.
+     */
+    AppflowIntegration?: AppflowIntegrationWorkflowMetrics;
+  }
+  export interface WorkflowStepItem {
+    /**
+     * Workflow step information specific to APPFLOW_INTEGRATION workflow.
+     */
+    AppflowIntegration?: AppflowIntegrationWorkflowStep;
+  }
+  export type WorkflowStepsList = WorkflowStepItem[];
+  export type WorkflowType = "APPFLOW_INTEGRATION"|string;
   export type ZendeskConnectorOperator = "PROJECTION"|"GREATER_THAN"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string;
   export interface ZendeskSourceProperties {
     /**
@@ -1995,6 +2683,9 @@ declare namespace CustomerProfiles {
   export type message = string;
   export type optionalBoolean = boolean;
   export type requestValueList = string1To255[];
+  export type s3BucketName = string;
+  export type s3KeyName = string;
+  export type s3KeyNameCustomerOutputConfig = string;
   export type sqsQueueUrl = string;
   export type string0To1000 = string;
   export type string0To255 = string;

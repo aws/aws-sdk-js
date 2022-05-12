@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "CloudWatch",
+        "description": "Adds support for additional statistics in CloudWatch Metric Streams."
+    },
+    {
+        "type": "feature",
+        "category": "FSx",
+        "description": "This release adds support for deploying FSx for ONTAP file systems in a single Availability Zone."
+    }
+]

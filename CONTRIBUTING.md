@@ -70,7 +70,7 @@ Please be aware of the following notes prior to opening a pull request:
 To run the tests locally, install `phantomjs`. You can do so using [Homebrew][homebrew]:
 
 ```
-brew cask install phantomjs
+brew install --cask phantomjs
 ```
 
 Then, to run all tests:
@@ -95,6 +95,18 @@ specific service, for example:
 ```
 AWS_REGION=[set region] node node_modules/cucumber/bin/cucumber.js --tag @s3
 ```
+
+Hardcoded region strings are not allowed in the SDK. To check the code for
+the presence of hardcoded region strings, run
+
+```
+node ./scripts/region-checker/index.js
+```
+
+from the project root directory. If this command shows any output, the PR will
+not be merged. Any lines that appear here must have the region string removed
+or be added to `scripts/region-checker/allowlist.js`. Lines should only be
+allowlisted if absolutely necessary.
 
 ### Testing the documentation changes:
 

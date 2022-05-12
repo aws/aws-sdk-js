@@ -12,35 +12,43 @@ declare class Textract extends Service {
   constructor(options?: Textract.Types.ClientConfiguration)
   config: Config & Textract.Types.ClientConfiguration;
   /**
-   * Analyzes an input document for relationships between detected items.  The types of information returned are as follows:    Form data (key-value pairs). The related information is returned in two Block objects, each of type KEY_VALUE_SET: a KEY Block object and a VALUE Block object. For example, Name: Ana Silva Carolina contains a key and value. Name: is the key. Ana Silva Carolina is the value.   Table and table cell data. A TABLE Block object contains information about a detected table. A CELL Block object is returned for each cell in a table.   Lines and words of text. A LINE Block object contains one or more WORD Block objects. All lines and words that are detected in the document are returned (including text that doesn't have a relationship with the value of FeatureTypes).    Selection elements such as check boxes and option buttons (radio buttons) can be detected in form data and in tables. A SELECTION_ELEMENT Block object contains information about a selection element, including the selection status. You can choose which type of analysis to perform by specifying the FeatureTypes list.  The output is returned in a list of Block objects.  AnalyzeDocument is a synchronous operation. To analyze documents asynchronously, use StartDocumentAnalysis. For more information, see Document Text Analysis.
+   * Analyzes an input document for relationships between detected items.  The types of information returned are as follows:    Form data (key-value pairs). The related information is returned in two Block objects, each of type KEY_VALUE_SET: a KEY Block object and a VALUE Block object. For example, Name: Ana Silva Carolina contains a key and value. Name: is the key. Ana Silva Carolina is the value.   Table and table cell data. A TABLE Block object contains information about a detected table. A CELL Block object is returned for each cell in a table.   Lines and words of text. A LINE Block object contains one or more WORD Block objects. All lines and words that are detected in the document are returned (including text that doesn't have a relationship with the value of FeatureTypes).    Queries.A QUERIES_RESULT Block object contains the answer to the query, the alias associated and an ID that connect it to the query asked. This Block also contains a location and attached confidence score.   Selection elements such as check boxes and option buttons (radio buttons) can be detected in form data and in tables. A SELECTION_ELEMENT Block object contains information about a selection element, including the selection status. You can choose which type of analysis to perform by specifying the FeatureTypes list.  The output is returned in a list of Block objects.  AnalyzeDocument is a synchronous operation. To analyze documents asynchronously, use StartDocumentAnalysis. For more information, see Document Text Analysis.
    */
   analyzeDocument(params: Textract.Types.AnalyzeDocumentRequest, callback?: (err: AWSError, data: Textract.Types.AnalyzeDocumentResponse) => void): Request<Textract.Types.AnalyzeDocumentResponse, AWSError>;
   /**
-   * Analyzes an input document for relationships between detected items.  The types of information returned are as follows:    Form data (key-value pairs). The related information is returned in two Block objects, each of type KEY_VALUE_SET: a KEY Block object and a VALUE Block object. For example, Name: Ana Silva Carolina contains a key and value. Name: is the key. Ana Silva Carolina is the value.   Table and table cell data. A TABLE Block object contains information about a detected table. A CELL Block object is returned for each cell in a table.   Lines and words of text. A LINE Block object contains one or more WORD Block objects. All lines and words that are detected in the document are returned (including text that doesn't have a relationship with the value of FeatureTypes).    Selection elements such as check boxes and option buttons (radio buttons) can be detected in form data and in tables. A SELECTION_ELEMENT Block object contains information about a selection element, including the selection status. You can choose which type of analysis to perform by specifying the FeatureTypes list.  The output is returned in a list of Block objects.  AnalyzeDocument is a synchronous operation. To analyze documents asynchronously, use StartDocumentAnalysis. For more information, see Document Text Analysis.
+   * Analyzes an input document for relationships between detected items.  The types of information returned are as follows:    Form data (key-value pairs). The related information is returned in two Block objects, each of type KEY_VALUE_SET: a KEY Block object and a VALUE Block object. For example, Name: Ana Silva Carolina contains a key and value. Name: is the key. Ana Silva Carolina is the value.   Table and table cell data. A TABLE Block object contains information about a detected table. A CELL Block object is returned for each cell in a table.   Lines and words of text. A LINE Block object contains one or more WORD Block objects. All lines and words that are detected in the document are returned (including text that doesn't have a relationship with the value of FeatureTypes).    Queries.A QUERIES_RESULT Block object contains the answer to the query, the alias associated and an ID that connect it to the query asked. This Block also contains a location and attached confidence score.   Selection elements such as check boxes and option buttons (radio buttons) can be detected in form data and in tables. A SELECTION_ELEMENT Block object contains information about a selection element, including the selection status. You can choose which type of analysis to perform by specifying the FeatureTypes list.  The output is returned in a list of Block objects.  AnalyzeDocument is a synchronous operation. To analyze documents asynchronously, use StartDocumentAnalysis. For more information, see Document Text Analysis.
    */
   analyzeDocument(callback?: (err: AWSError, data: Textract.Types.AnalyzeDocumentResponse) => void): Request<Textract.Types.AnalyzeDocumentResponse, AWSError>;
   /**
-   * Analyzes an input document for financially related relationships between text. Information is returned as ExpenseDocuments and seperated as follows.    LineItemGroups- A data set containing LineItems which store information about the lines of text, such as an item purchased and its price on a receipt.    SummaryFields- Contains all other information a receipt, such as header information or the vendors name.  
+   *  AnalyzeExpense synchronously analyzes an input document for financially related relationships between text. Information is returned as ExpenseDocuments and seperated as follows.    LineItemGroups- A data set containing LineItems which store information about the lines of text, such as an item purchased and its price on a receipt.    SummaryFields- Contains all other information a receipt, such as header information or the vendors name.  
    */
   analyzeExpense(params: Textract.Types.AnalyzeExpenseRequest, callback?: (err: AWSError, data: Textract.Types.AnalyzeExpenseResponse) => void): Request<Textract.Types.AnalyzeExpenseResponse, AWSError>;
   /**
-   * Analyzes an input document for financially related relationships between text. Information is returned as ExpenseDocuments and seperated as follows.    LineItemGroups- A data set containing LineItems which store information about the lines of text, such as an item purchased and its price on a receipt.    SummaryFields- Contains all other information a receipt, such as header information or the vendors name.  
+   *  AnalyzeExpense synchronously analyzes an input document for financially related relationships between text. Information is returned as ExpenseDocuments and seperated as follows.    LineItemGroups- A data set containing LineItems which store information about the lines of text, such as an item purchased and its price on a receipt.    SummaryFields- Contains all other information a receipt, such as header information or the vendors name.  
    */
   analyzeExpense(callback?: (err: AWSError, data: Textract.Types.AnalyzeExpenseResponse) => void): Request<Textract.Types.AnalyzeExpenseResponse, AWSError>;
   /**
-   * Detects text in the input document. Amazon Textract can detect lines of text and the words that make up a line of text. The input document must be an image in JPEG or PNG format. DetectDocumentText returns the detected text in an array of Block objects.  Each document page has as an associated Block of type PAGE. Each PAGE Block object is the parent of LINE Block objects that represent the lines of detected text on a page. A LINE Block object is a parent for each word that makes up the line. Words are represented by Block objects of type WORD.  DetectDocumentText is a synchronous operation. To analyze documents asynchronously, use StartDocumentTextDetection. For more information, see Document Text Detection.
+   * Analyzes identity documents for relevant information. This information is extracted and returned as IdentityDocumentFields, which records both the normalized field and value of the extracted text.Unlike other Amazon Textract operations, AnalyzeID doesn't return any Geometry data.
+   */
+  analyzeID(params: Textract.Types.AnalyzeIDRequest, callback?: (err: AWSError, data: Textract.Types.AnalyzeIDResponse) => void): Request<Textract.Types.AnalyzeIDResponse, AWSError>;
+  /**
+   * Analyzes identity documents for relevant information. This information is extracted and returned as IdentityDocumentFields, which records both the normalized field and value of the extracted text.Unlike other Amazon Textract operations, AnalyzeID doesn't return any Geometry data.
+   */
+  analyzeID(callback?: (err: AWSError, data: Textract.Types.AnalyzeIDResponse) => void): Request<Textract.Types.AnalyzeIDResponse, AWSError>;
+  /**
+   * Detects text in the input document. Amazon Textract can detect lines of text and the words that make up a line of text. The input document must be an image in JPEG, PNG, PDF, or TIFF format. DetectDocumentText returns the detected text in an array of Block objects.  Each document page has as an associated Block of type PAGE. Each PAGE Block object is the parent of LINE Block objects that represent the lines of detected text on a page. A LINE Block object is a parent for each word that makes up the line. Words are represented by Block objects of type WORD.  DetectDocumentText is a synchronous operation. To analyze documents asynchronously, use StartDocumentTextDetection. For more information, see Document Text Detection.
    */
   detectDocumentText(params: Textract.Types.DetectDocumentTextRequest, callback?: (err: AWSError, data: Textract.Types.DetectDocumentTextResponse) => void): Request<Textract.Types.DetectDocumentTextResponse, AWSError>;
   /**
-   * Detects text in the input document. Amazon Textract can detect lines of text and the words that make up a line of text. The input document must be an image in JPEG or PNG format. DetectDocumentText returns the detected text in an array of Block objects.  Each document page has as an associated Block of type PAGE. Each PAGE Block object is the parent of LINE Block objects that represent the lines of detected text on a page. A LINE Block object is a parent for each word that makes up the line. Words are represented by Block objects of type WORD.  DetectDocumentText is a synchronous operation. To analyze documents asynchronously, use StartDocumentTextDetection. For more information, see Document Text Detection.
+   * Detects text in the input document. Amazon Textract can detect lines of text and the words that make up a line of text. The input document must be an image in JPEG, PNG, PDF, or TIFF format. DetectDocumentText returns the detected text in an array of Block objects.  Each document page has as an associated Block of type PAGE. Each PAGE Block object is the parent of LINE Block objects that represent the lines of detected text on a page. A LINE Block object is a parent for each word that makes up the line. Words are represented by Block objects of type WORD.  DetectDocumentText is a synchronous operation. To analyze documents asynchronously, use StartDocumentTextDetection. For more information, see Document Text Detection.
    */
   detectDocumentText(callback?: (err: AWSError, data: Textract.Types.DetectDocumentTextResponse) => void): Request<Textract.Types.DetectDocumentTextResponse, AWSError>;
   /**
-   * Gets the results for an Amazon Textract asynchronous operation that analyzes text in a document. You start asynchronous text analysis by calling StartDocumentAnalysis, which returns a job identifier (JobId). When the text analysis operation finishes, Amazon Textract publishes a completion status to the Amazon Simple Notification Service (Amazon SNS) topic that's registered in the initial call to StartDocumentAnalysis. To get the results of the text-detection operation, first check that the status value published to the Amazon SNS topic is SUCCEEDED. If so, call GetDocumentAnalysis, and pass the job identifier (JobId) from the initial call to StartDocumentAnalysis.  GetDocumentAnalysis returns an array of Block objects. The following types of information are returned:    Form data (key-value pairs). The related information is returned in two Block objects, each of type KEY_VALUE_SET: a KEY Block object and a VALUE Block object. For example, Name: Ana Silva Carolina contains a key and value. Name: is the key. Ana Silva Carolina is the value.   Table and table cell data. A TABLE Block object contains information about a detected table. A CELL Block object is returned for each cell in a table.   Lines and words of text. A LINE Block object contains one or more WORD Block objects. All lines and words that are detected in the document are returned (including text that doesn't have a relationship with the value of the StartDocumentAnalysis FeatureTypes input parameter).    Selection elements such as check boxes and option buttons (radio buttons) can be detected in form data and in tables. A SELECTION_ELEMENT Block object contains information about a selection element, including the selection status. Use the MaxResults parameter to limit the number of blocks that are returned. If there are more results than specified in MaxResults, the value of NextToken in the operation response contains a pagination token for getting the next set of results. To get the next page of results, call GetDocumentAnalysis, and populate the NextToken request parameter with the token value that's returned from the previous call to GetDocumentAnalysis. For more information, see Document Text Analysis.
+   * Gets the results for an Amazon Textract asynchronous operation that analyzes text in a document. You start asynchronous text analysis by calling StartDocumentAnalysis, which returns a job identifier (JobId). When the text analysis operation finishes, Amazon Textract publishes a completion status to the Amazon Simple Notification Service (Amazon SNS) topic that's registered in the initial call to StartDocumentAnalysis. To get the results of the text-detection operation, first check that the status value published to the Amazon SNS topic is SUCCEEDED. If so, call GetDocumentAnalysis, and pass the job identifier (JobId) from the initial call to StartDocumentAnalysis.  GetDocumentAnalysis returns an array of Block objects. The following types of information are returned:    Form data (key-value pairs). The related information is returned in two Block objects, each of type KEY_VALUE_SET: a KEY Block object and a VALUE Block object. For example, Name: Ana Silva Carolina contains a key and value. Name: is the key. Ana Silva Carolina is the value.   Table and table cell data. A TABLE Block object contains information about a detected table. A CELL Block object is returned for each cell in a table.   Lines and words of text. A LINE Block object contains one or more WORD Block objects. All lines and words that are detected in the document are returned (including text that doesn't have a relationship with the value of the StartDocumentAnalysis FeatureTypes input parameter).    Queries. A QUERIES_RESULT Block object contains the answer to the query, the alias associated and an ID that connect it to the query asked. This Block also contains a location and attached confidence score   Selection elements such as check boxes and option buttons (radio buttons) can be detected in form data and in tables. A SELECTION_ELEMENT Block object contains information about a selection element, including the selection status. Use the MaxResults parameter to limit the number of blocks that are returned. If there are more results than specified in MaxResults, the value of NextToken in the operation response contains a pagination token for getting the next set of results. To get the next page of results, call GetDocumentAnalysis, and populate the NextToken request parameter with the token value that's returned from the previous call to GetDocumentAnalysis. For more information, see Document Text Analysis.
    */
   getDocumentAnalysis(params: Textract.Types.GetDocumentAnalysisRequest, callback?: (err: AWSError, data: Textract.Types.GetDocumentAnalysisResponse) => void): Request<Textract.Types.GetDocumentAnalysisResponse, AWSError>;
   /**
-   * Gets the results for an Amazon Textract asynchronous operation that analyzes text in a document. You start asynchronous text analysis by calling StartDocumentAnalysis, which returns a job identifier (JobId). When the text analysis operation finishes, Amazon Textract publishes a completion status to the Amazon Simple Notification Service (Amazon SNS) topic that's registered in the initial call to StartDocumentAnalysis. To get the results of the text-detection operation, first check that the status value published to the Amazon SNS topic is SUCCEEDED. If so, call GetDocumentAnalysis, and pass the job identifier (JobId) from the initial call to StartDocumentAnalysis.  GetDocumentAnalysis returns an array of Block objects. The following types of information are returned:    Form data (key-value pairs). The related information is returned in two Block objects, each of type KEY_VALUE_SET: a KEY Block object and a VALUE Block object. For example, Name: Ana Silva Carolina contains a key and value. Name: is the key. Ana Silva Carolina is the value.   Table and table cell data. A TABLE Block object contains information about a detected table. A CELL Block object is returned for each cell in a table.   Lines and words of text. A LINE Block object contains one or more WORD Block objects. All lines and words that are detected in the document are returned (including text that doesn't have a relationship with the value of the StartDocumentAnalysis FeatureTypes input parameter).    Selection elements such as check boxes and option buttons (radio buttons) can be detected in form data and in tables. A SELECTION_ELEMENT Block object contains information about a selection element, including the selection status. Use the MaxResults parameter to limit the number of blocks that are returned. If there are more results than specified in MaxResults, the value of NextToken in the operation response contains a pagination token for getting the next set of results. To get the next page of results, call GetDocumentAnalysis, and populate the NextToken request parameter with the token value that's returned from the previous call to GetDocumentAnalysis. For more information, see Document Text Analysis.
+   * Gets the results for an Amazon Textract asynchronous operation that analyzes text in a document. You start asynchronous text analysis by calling StartDocumentAnalysis, which returns a job identifier (JobId). When the text analysis operation finishes, Amazon Textract publishes a completion status to the Amazon Simple Notification Service (Amazon SNS) topic that's registered in the initial call to StartDocumentAnalysis. To get the results of the text-detection operation, first check that the status value published to the Amazon SNS topic is SUCCEEDED. If so, call GetDocumentAnalysis, and pass the job identifier (JobId) from the initial call to StartDocumentAnalysis.  GetDocumentAnalysis returns an array of Block objects. The following types of information are returned:    Form data (key-value pairs). The related information is returned in two Block objects, each of type KEY_VALUE_SET: a KEY Block object and a VALUE Block object. For example, Name: Ana Silva Carolina contains a key and value. Name: is the key. Ana Silva Carolina is the value.   Table and table cell data. A TABLE Block object contains information about a detected table. A CELL Block object is returned for each cell in a table.   Lines and words of text. A LINE Block object contains one or more WORD Block objects. All lines and words that are detected in the document are returned (including text that doesn't have a relationship with the value of the StartDocumentAnalysis FeatureTypes input parameter).    Queries. A QUERIES_RESULT Block object contains the answer to the query, the alias associated and an ID that connect it to the query asked. This Block also contains a location and attached confidence score   Selection elements such as check boxes and option buttons (radio buttons) can be detected in form data and in tables. A SELECTION_ELEMENT Block object contains information about a selection element, including the selection status. Use the MaxResults parameter to limit the number of blocks that are returned. If there are more results than specified in MaxResults, the value of NextToken in the operation response contains a pagination token for getting the next set of results. To get the next page of results, call GetDocumentAnalysis, and populate the NextToken request parameter with the token value that's returned from the previous call to GetDocumentAnalysis. For more information, see Document Text Analysis.
    */
   getDocumentAnalysis(callback?: (err: AWSError, data: Textract.Types.GetDocumentAnalysisResponse) => void): Request<Textract.Types.GetDocumentAnalysisResponse, AWSError>;
   /**
@@ -52,26 +60,42 @@ declare class Textract extends Service {
    */
   getDocumentTextDetection(callback?: (err: AWSError, data: Textract.Types.GetDocumentTextDetectionResponse) => void): Request<Textract.Types.GetDocumentTextDetectionResponse, AWSError>;
   /**
-   * Starts the asynchronous analysis of an input document for relationships between detected items such as key-value pairs, tables, and selection elements.  StartDocumentAnalysis can analyze text in documents that are in JPEG, PNG, and PDF format. The documents are stored in an Amazon S3 bucket. Use DocumentLocation to specify the bucket name and file name of the document.   StartDocumentAnalysis returns a job identifier (JobId) that you use to get the results of the operation. When text analysis is finished, Amazon Textract publishes a completion status to the Amazon Simple Notification Service (Amazon SNS) topic that you specify in NotificationChannel. To get the results of the text analysis operation, first check that the status value published to the Amazon SNS topic is SUCCEEDED. If so, call GetDocumentAnalysis, and pass the job identifier (JobId) from the initial call to StartDocumentAnalysis. For more information, see Document Text Analysis.
+   * Gets the results for an Amazon Textract asynchronous operation that analyzes invoices and receipts. Amazon Textract finds contact information, items purchased, and vendor name, from input invoices and receipts. You start asynchronous invoice/receipt analysis by calling StartExpenseAnalysis, which returns a job identifier (JobId). Upon completion of the invoice/receipt analysis, Amazon Textract publishes the completion status to the Amazon Simple Notification Service (Amazon SNS) topic. This topic must be registered in the initial call to StartExpenseAnalysis. To get the results of the invoice/receipt analysis operation, first ensure that the status value published to the Amazon SNS topic is SUCCEEDED. If so, call GetExpenseAnalysis, and pass the job identifier (JobId) from the initial call to StartExpenseAnalysis. Use the MaxResults parameter to limit the number of blocks that are returned. If there are more results than specified in MaxResults, the value of NextToken in the operation response contains a pagination token for getting the next set of results. To get the next page of results, call GetExpenseAnalysis, and populate the NextToken request parameter with the token value that's returned from the previous call to GetExpenseAnalysis. For more information, see Analyzing Invoices and Receipts.
+   */
+  getExpenseAnalysis(params: Textract.Types.GetExpenseAnalysisRequest, callback?: (err: AWSError, data: Textract.Types.GetExpenseAnalysisResponse) => void): Request<Textract.Types.GetExpenseAnalysisResponse, AWSError>;
+  /**
+   * Gets the results for an Amazon Textract asynchronous operation that analyzes invoices and receipts. Amazon Textract finds contact information, items purchased, and vendor name, from input invoices and receipts. You start asynchronous invoice/receipt analysis by calling StartExpenseAnalysis, which returns a job identifier (JobId). Upon completion of the invoice/receipt analysis, Amazon Textract publishes the completion status to the Amazon Simple Notification Service (Amazon SNS) topic. This topic must be registered in the initial call to StartExpenseAnalysis. To get the results of the invoice/receipt analysis operation, first ensure that the status value published to the Amazon SNS topic is SUCCEEDED. If so, call GetExpenseAnalysis, and pass the job identifier (JobId) from the initial call to StartExpenseAnalysis. Use the MaxResults parameter to limit the number of blocks that are returned. If there are more results than specified in MaxResults, the value of NextToken in the operation response contains a pagination token for getting the next set of results. To get the next page of results, call GetExpenseAnalysis, and populate the NextToken request parameter with the token value that's returned from the previous call to GetExpenseAnalysis. For more information, see Analyzing Invoices and Receipts.
+   */
+  getExpenseAnalysis(callback?: (err: AWSError, data: Textract.Types.GetExpenseAnalysisResponse) => void): Request<Textract.Types.GetExpenseAnalysisResponse, AWSError>;
+  /**
+   * Starts the asynchronous analysis of an input document for relationships between detected items such as key-value pairs, tables, and selection elements.  StartDocumentAnalysis can analyze text in documents that are in JPEG, PNG, TIFF, and PDF format. The documents are stored in an Amazon S3 bucket. Use DocumentLocation to specify the bucket name and file name of the document.   StartDocumentAnalysis returns a job identifier (JobId) that you use to get the results of the operation. When text analysis is finished, Amazon Textract publishes a completion status to the Amazon Simple Notification Service (Amazon SNS) topic that you specify in NotificationChannel. To get the results of the text analysis operation, first check that the status value published to the Amazon SNS topic is SUCCEEDED. If so, call GetDocumentAnalysis, and pass the job identifier (JobId) from the initial call to StartDocumentAnalysis. For more information, see Document Text Analysis.
    */
   startDocumentAnalysis(params: Textract.Types.StartDocumentAnalysisRequest, callback?: (err: AWSError, data: Textract.Types.StartDocumentAnalysisResponse) => void): Request<Textract.Types.StartDocumentAnalysisResponse, AWSError>;
   /**
-   * Starts the asynchronous analysis of an input document for relationships between detected items such as key-value pairs, tables, and selection elements.  StartDocumentAnalysis can analyze text in documents that are in JPEG, PNG, and PDF format. The documents are stored in an Amazon S3 bucket. Use DocumentLocation to specify the bucket name and file name of the document.   StartDocumentAnalysis returns a job identifier (JobId) that you use to get the results of the operation. When text analysis is finished, Amazon Textract publishes a completion status to the Amazon Simple Notification Service (Amazon SNS) topic that you specify in NotificationChannel. To get the results of the text analysis operation, first check that the status value published to the Amazon SNS topic is SUCCEEDED. If so, call GetDocumentAnalysis, and pass the job identifier (JobId) from the initial call to StartDocumentAnalysis. For more information, see Document Text Analysis.
+   * Starts the asynchronous analysis of an input document for relationships between detected items such as key-value pairs, tables, and selection elements.  StartDocumentAnalysis can analyze text in documents that are in JPEG, PNG, TIFF, and PDF format. The documents are stored in an Amazon S3 bucket. Use DocumentLocation to specify the bucket name and file name of the document.   StartDocumentAnalysis returns a job identifier (JobId) that you use to get the results of the operation. When text analysis is finished, Amazon Textract publishes a completion status to the Amazon Simple Notification Service (Amazon SNS) topic that you specify in NotificationChannel. To get the results of the text analysis operation, first check that the status value published to the Amazon SNS topic is SUCCEEDED. If so, call GetDocumentAnalysis, and pass the job identifier (JobId) from the initial call to StartDocumentAnalysis. For more information, see Document Text Analysis.
    */
   startDocumentAnalysis(callback?: (err: AWSError, data: Textract.Types.StartDocumentAnalysisResponse) => void): Request<Textract.Types.StartDocumentAnalysisResponse, AWSError>;
   /**
-   * Starts the asynchronous detection of text in a document. Amazon Textract can detect lines of text and the words that make up a line of text.  StartDocumentTextDetection can analyze text in documents that are in JPEG, PNG, and PDF format. The documents are stored in an Amazon S3 bucket. Use DocumentLocation to specify the bucket name and file name of the document.   StartTextDetection returns a job identifier (JobId) that you use to get the results of the operation. When text detection is finished, Amazon Textract publishes a completion status to the Amazon Simple Notification Service (Amazon SNS) topic that you specify in NotificationChannel. To get the results of the text detection operation, first check that the status value published to the Amazon SNS topic is SUCCEEDED. If so, call GetDocumentTextDetection, and pass the job identifier (JobId) from the initial call to StartDocumentTextDetection. For more information, see Document Text Detection.
+   * Starts the asynchronous detection of text in a document. Amazon Textract can detect lines of text and the words that make up a line of text.  StartDocumentTextDetection can analyze text in documents that are in JPEG, PNG, TIFF, and PDF format. The documents are stored in an Amazon S3 bucket. Use DocumentLocation to specify the bucket name and file name of the document.   StartTextDetection returns a job identifier (JobId) that you use to get the results of the operation. When text detection is finished, Amazon Textract publishes a completion status to the Amazon Simple Notification Service (Amazon SNS) topic that you specify in NotificationChannel. To get the results of the text detection operation, first check that the status value published to the Amazon SNS topic is SUCCEEDED. If so, call GetDocumentTextDetection, and pass the job identifier (JobId) from the initial call to StartDocumentTextDetection. For more information, see Document Text Detection.
    */
   startDocumentTextDetection(params: Textract.Types.StartDocumentTextDetectionRequest, callback?: (err: AWSError, data: Textract.Types.StartDocumentTextDetectionResponse) => void): Request<Textract.Types.StartDocumentTextDetectionResponse, AWSError>;
   /**
-   * Starts the asynchronous detection of text in a document. Amazon Textract can detect lines of text and the words that make up a line of text.  StartDocumentTextDetection can analyze text in documents that are in JPEG, PNG, and PDF format. The documents are stored in an Amazon S3 bucket. Use DocumentLocation to specify the bucket name and file name of the document.   StartTextDetection returns a job identifier (JobId) that you use to get the results of the operation. When text detection is finished, Amazon Textract publishes a completion status to the Amazon Simple Notification Service (Amazon SNS) topic that you specify in NotificationChannel. To get the results of the text detection operation, first check that the status value published to the Amazon SNS topic is SUCCEEDED. If so, call GetDocumentTextDetection, and pass the job identifier (JobId) from the initial call to StartDocumentTextDetection. For more information, see Document Text Detection.
+   * Starts the asynchronous detection of text in a document. Amazon Textract can detect lines of text and the words that make up a line of text.  StartDocumentTextDetection can analyze text in documents that are in JPEG, PNG, TIFF, and PDF format. The documents are stored in an Amazon S3 bucket. Use DocumentLocation to specify the bucket name and file name of the document.   StartTextDetection returns a job identifier (JobId) that you use to get the results of the operation. When text detection is finished, Amazon Textract publishes a completion status to the Amazon Simple Notification Service (Amazon SNS) topic that you specify in NotificationChannel. To get the results of the text detection operation, first check that the status value published to the Amazon SNS topic is SUCCEEDED. If so, call GetDocumentTextDetection, and pass the job identifier (JobId) from the initial call to StartDocumentTextDetection. For more information, see Document Text Detection.
    */
   startDocumentTextDetection(callback?: (err: AWSError, data: Textract.Types.StartDocumentTextDetectionResponse) => void): Request<Textract.Types.StartDocumentTextDetectionResponse, AWSError>;
+  /**
+   * Starts the asynchronous analysis of invoices or receipts for data like contact information, items purchased, and vendor names.  StartExpenseAnalysis can analyze text in documents that are in JPEG, PNG, and PDF format. The documents must be stored in an Amazon S3 bucket. Use the DocumentLocation parameter to specify the name of your S3 bucket and the name of the document in that bucket.   StartExpenseAnalysis returns a job identifier (JobId) that you will provide to GetExpenseAnalysis to retrieve the results of the operation. When the analysis of the input invoices/receipts is finished, Amazon Textract publishes a completion status to the Amazon Simple Notification Service (Amazon SNS) topic that you provide to the NotificationChannel. To obtain the results of the invoice and receipt analysis operation, ensure that the status value published to the Amazon SNS topic is SUCCEEDED. If so, call GetExpenseAnalysis, and pass the job identifier (JobId) that was returned by your call to StartExpenseAnalysis. For more information, see Analyzing Invoices and Receipts.
+   */
+  startExpenseAnalysis(params: Textract.Types.StartExpenseAnalysisRequest, callback?: (err: AWSError, data: Textract.Types.StartExpenseAnalysisResponse) => void): Request<Textract.Types.StartExpenseAnalysisResponse, AWSError>;
+  /**
+   * Starts the asynchronous analysis of invoices or receipts for data like contact information, items purchased, and vendor names.  StartExpenseAnalysis can analyze text in documents that are in JPEG, PNG, and PDF format. The documents must be stored in an Amazon S3 bucket. Use the DocumentLocation parameter to specify the name of your S3 bucket and the name of the document in that bucket.   StartExpenseAnalysis returns a job identifier (JobId) that you will provide to GetExpenseAnalysis to retrieve the results of the operation. When the analysis of the input invoices/receipts is finished, Amazon Textract publishes a completion status to the Amazon Simple Notification Service (Amazon SNS) topic that you provide to the NotificationChannel. To obtain the results of the invoice and receipt analysis operation, ensure that the status value published to the Amazon SNS topic is SUCCEEDED. If so, call GetExpenseAnalysis, and pass the job identifier (JobId) that was returned by your call to StartExpenseAnalysis. For more information, see Analyzing Invoices and Receipts.
+   */
+  startExpenseAnalysis(callback?: (err: AWSError, data: Textract.Types.StartExpenseAnalysisResponse) => void): Request<Textract.Types.StartExpenseAnalysisResponse, AWSError>;
 }
 declare namespace Textract {
   export interface AnalyzeDocumentRequest {
     /**
-     * The input document as base64-encoded bytes or an Amazon S3 object. If you use the AWS CLI to call Amazon Textract operations, you can't pass image bytes. The document must be an image in JPEG or PNG format. If you're using an AWS SDK to call Amazon Textract, you might not need to base64-encode image bytes that are passed using the Bytes field. 
+     * The input document as base64-encoded bytes or an Amazon S3 object. If you use the AWS CLI to call Amazon Textract operations, you can't pass image bytes. The document must be an image in JPEG, PNG, PDF, or TIFF format. If you're using an AWS SDK to call Amazon Textract, you might not need to base64-encode image bytes that are passed using the Bytes field. 
      */
     Document: Document;
     /**
@@ -82,6 +106,10 @@ declare namespace Textract {
      * Sets the configuration for the human in the loop workflow for analyzing documents.
      */
     HumanLoopConfig?: HumanLoopConfig;
+    /**
+     * Contains Queries and the alias for those Queries, as determined by the input. 
+     */
+    QueriesConfig?: QueriesConfig;
   }
   export interface AnalyzeDocumentResponse {
     /**
@@ -111,9 +139,40 @@ declare namespace Textract {
      */
     ExpenseDocuments?: ExpenseDocumentList;
   }
+  export interface AnalyzeIDDetections {
+    /**
+     * Text of either the normalized field or value associated with it.
+     */
+    Text: String;
+    /**
+     * Only returned for dates, returns the type of value detected and the date written in a more machine readable way.
+     */
+    NormalizedValue?: NormalizedValue;
+    /**
+     * The confidence score of the detected text.
+     */
+    Confidence?: Percent;
+  }
+  export interface AnalyzeIDRequest {
+    /**
+     * The document being passed to AnalyzeID.
+     */
+    DocumentPages: DocumentPages;
+  }
+  export interface AnalyzeIDResponse {
+    /**
+     * The list of documents processed by AnalyzeID. Includes a number denoting their place in the list and the response structure for the document.
+     */
+    IdentityDocuments?: IdentityDocumentList;
+    DocumentMetadata?: DocumentMetadata;
+    /**
+     * The version of the AnalyzeIdentity API being used to process documents.
+     */
+    AnalyzeIDModelVersion?: String;
+  }
   export interface Block {
     /**
-     * The type of text item that's recognized. In operations for text detection, the following types are returned:    PAGE - Contains a list of the LINE Block objects that are detected on a document page.    WORD - A word detected on a document page. A word is one or more ISO basic Latin script characters that aren't separated by spaces.    LINE - A string of tab-delimited, contiguous words that are detected on a document page.   In text analysis operations, the following types are returned:    PAGE - Contains a list of child Block objects that are detected on a document page.    KEY_VALUE_SET - Stores the KEY and VALUE Block objects for linked text that's detected on a document page. Use the EntityType field to determine if a KEY_VALUE_SET object is a KEY Block object or a VALUE Block object.     WORD - A word that's detected on a document page. A word is one or more ISO basic Latin script characters that aren't separated by spaces.    LINE - A string of tab-delimited, contiguous words that are detected on a document page.    TABLE - A table that's detected on a document page. A table is grid-based information with two or more rows or columns, with a cell span of one row and one column each.     CELL - A cell within a detected table. The cell is the parent of the block that contains the text in the cell.    SELECTION_ELEMENT - A selection element such as an option button (radio button) or a check box that's detected on a document page. Use the value of SelectionStatus to determine the status of the selection element.  
+     * The type of text item that's recognized. In operations for text detection, the following types are returned:    PAGE - Contains a list of the LINE Block objects that are detected on a document page.    WORD - A word detected on a document page. A word is one or more ISO basic Latin script characters that aren't separated by spaces.    LINE - A string of tab-delimited, contiguous words that are detected on a document page.   In text analysis operations, the following types are returned:    PAGE - Contains a list of child Block objects that are detected on a document page.    KEY_VALUE_SET - Stores the KEY and VALUE Block objects for linked text that's detected on a document page. Use the EntityType field to determine if a KEY_VALUE_SET object is a KEY Block object or a VALUE Block object.     WORD - A word that's detected on a document page. A word is one or more ISO basic Latin script characters that aren't separated by spaces.    LINE - A string of tab-delimited, contiguous words that are detected on a document page.    TABLE - A table that's detected on a document page. A table is grid-based information with two or more rows or columns, with a cell span of one row and one column each.     CELL - A cell within a detected table. The cell is the parent of the block that contains the text in the cell.    SELECTION_ELEMENT - A selection element such as an option button (radio button) or a check box that's detected on a document page. Use the value of SelectionStatus to determine the status of the selection element.    QUERY - A question asked during the call of AnalyzeDocument. Contains an alias and an ID that attachs it to its answer.    QUERY_RESULT - A response to a question asked during the call of analyze document. Comes with an alias and ID for ease of locating in a response. Also contains location and confidence score.  
      */
     BlockType?: BlockType;
     /**
@@ -165,12 +224,16 @@ declare namespace Textract {
      */
     SelectionStatus?: SelectionStatus;
     /**
-     * The page on which a block was detected. Page is returned by asynchronous operations. Page values greater than 1 are only returned for multipage documents that are in PDF format. A scanned image (JPEG/PNG), even if it contains multiple document pages, is considered to be a single-page document. The value of Page is always 1. Synchronous operations don't return Page because every input document is considered to be a single-page document.
+     * The page on which a block was detected. Page is returned by asynchronous operations. Page values greater than 1 are only returned for multipage documents that are in PDF or TIFF format. A scanned image (JPEG/PNG), even if it contains multiple document pages, is considered to be a single-page document. The value of Page is always 1. Synchronous operations don't return Page because every input document is considered to be a single-page document.
      */
     Page?: UInteger;
+    /**
+     * 
+     */
+    Query?: Query;
   }
   export type BlockList = Block[];
-  export type BlockType = "KEY_VALUE_SET"|"PAGE"|"LINE"|"WORD"|"TABLE"|"CELL"|"SELECTION_ELEMENT"|string;
+  export type BlockType = "KEY_VALUE_SET"|"PAGE"|"LINE"|"WORD"|"TABLE"|"CELL"|"SELECTION_ELEMENT"|"MERGED_CELL"|"TITLE"|"QUERY"|"QUERY_RESULT"|string;
   export interface BoundingBox {
     /**
      * The width of the bounding box as a ratio of the overall document page width.
@@ -234,7 +297,8 @@ declare namespace Textract {
      */
     Pages?: UInteger;
   }
-  export type EntityType = "KEY"|"VALUE"|string;
+  export type DocumentPages = Document[];
+  export type EntityType = "KEY"|"VALUE"|"COLUMN_HEADER"|string;
   export type EntityTypes = EntityType[];
   export type ErrorCode = string;
   export interface ExpenseDetection {
@@ -292,7 +356,7 @@ declare namespace Textract {
      */
     Confidence?: Percent;
   }
-  export type FeatureType = "TABLES"|"FORMS"|string;
+  export type FeatureType = "TABLES"|"FORMS"|"QUERIES"|string;
   export type FeatureTypes = FeatureType[];
   export type Float = number;
   export type FlowDefinitionArn = string;
@@ -394,6 +458,50 @@ declare namespace Textract {
      */
     DetectDocumentTextModelVersion?: String;
   }
+  export interface GetExpenseAnalysisRequest {
+    /**
+     * A unique identifier for the text detection job. The JobId is returned from StartExpenseAnalysis. A JobId value is only valid for 7 days.
+     */
+    JobId: JobId;
+    /**
+     * The maximum number of results to return per paginated call. The largest value you can specify is 20. If you specify a value greater than 20, a maximum of 20 results is returned. The default value is 20.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * If the previous response was incomplete (because there are more blocks to retrieve), Amazon Textract returns a pagination token in the response. You can use this pagination token to retrieve the next set of blocks.
+     */
+    NextToken?: PaginationToken;
+  }
+  export interface GetExpenseAnalysisResponse {
+    /**
+     * Information about a document that Amazon Textract processed. DocumentMetadata is returned in every page of paginated responses from an Amazon Textract operation.
+     */
+    DocumentMetadata?: DocumentMetadata;
+    /**
+     * The current status of the text detection job.
+     */
+    JobStatus?: JobStatus;
+    /**
+     * If the response is truncated, Amazon Textract returns this token. You can use this token in the subsequent request to retrieve the next set of text-detection results.
+     */
+    NextToken?: PaginationToken;
+    /**
+     * The expenses detected by Amazon Textract.
+     */
+    ExpenseDocuments?: ExpenseDocumentList;
+    /**
+     * A list of warnings that occurred during the text-detection operation for the document.
+     */
+    Warnings?: Warnings;
+    /**
+     * Returns if the detection job could not be completed. Contains explanation for what error occured. 
+     */
+    StatusMessage?: StatusMessage;
+    /**
+     * The current model version of AnalyzeExpense.
+     */
+    AnalyzeExpenseModelVersion?: String;
+  }
   export type HumanLoopActivationConditionsEvaluationResults = string;
   export interface HumanLoopActivationOutput {
     /**
@@ -434,6 +542,22 @@ declare namespace Textract {
   }
   export type HumanLoopName = string;
   export type IdList = NonEmptyString[];
+  export interface IdentityDocument {
+    /**
+     * Denotes the placement of a document in the IdentityDocument list. The first document is marked 1, the second 2 and so on.
+     */
+    DocumentIndex?: UInteger;
+    /**
+     * The structure used to record information extracted from identity documents. Contains both normalized field and value of the extracted text.
+     */
+    IdentityDocumentFields?: IdentityDocumentFieldList;
+  }
+  export interface IdentityDocumentField {
+    Type?: AnalyzeIDDetections;
+    ValueDetection?: AnalyzeIDDetections;
+  }
+  export type IdentityDocumentFieldList = IdentityDocumentField[];
+  export type IdentityDocumentList = IdentityDocument[];
   export type ImageBlob = Buffer|Uint8Array|Blob|string;
   export type JobId = string;
   export type JobStatus = "IN_PROGRESS"|"SUCCEEDED"|"FAILED"|"PARTIAL_SUCCESS"|string;
@@ -459,6 +583,16 @@ declare namespace Textract {
   export type LineItemList = LineItemFields[];
   export type MaxResults = number;
   export type NonEmptyString = string;
+  export interface NormalizedValue {
+    /**
+     * The value of the date, written as Year-Month-DayTHour:Minute:Second.
+     */
+    Value?: String;
+    /**
+     * The normalized type of the value detected. In this case, DATE.
+     */
+    ValueType?: ValueType;
+  }
   export interface NotificationChannel {
     /**
      * The Amazon SNS topic that Amazon Textract posts the completion status to.
@@ -493,6 +627,30 @@ declare namespace Textract {
     Y?: Float;
   }
   export type Polygon = Point[];
+  export type Queries = Query[];
+  export interface QueriesConfig {
+    /**
+     * 
+     */
+    Queries: Queries;
+  }
+  export interface Query {
+    /**
+     * Question that Amazon Textract will apply to the document. An example would be "What is the customer's SSN?"
+     */
+    Text: QueryInput;
+    /**
+     * Alias attached to the query, for ease of location.
+     */
+    Alias?: QueryInput;
+    /**
+     * List of pages associated with the query. The following is a list of rules for using this parameter.   If a page is not specified, it is set to ["1"] by default.   The following characters are allowed in the parameter's string: 0 1 2 3 4 5 6 7 8 9 - *. No whitespace is allowed.   When using * to indicate all pages, it must be the only element in the string.   You can use page intervals, such as [“1-3”, “1-1”, “4-*”]. Where * indicates last page of document.   Specified pages must be greater than 0 and less than or equal to the number of pages in the document.  
+     */
+    Pages?: QueryPages;
+  }
+  export type QueryInput = string;
+  export type QueryPage = string;
+  export type QueryPages = QueryPage[];
   export interface Relationship {
     /**
      * The type of relationship that the blocks in the IDs array have with the current block. The relationship can be VALUE or CHILD. A relationship of type VALUE is a list that contains the ID of the VALUE block that's associated with the KEY of a key-value pair. A relationship of type CHILD is a list of IDs that identify WORD blocks in the case of lines Cell blocks in the case of Tables, and WORD blocks in the case of Selection Elements.
@@ -504,7 +662,7 @@ declare namespace Textract {
     Ids?: IdList;
   }
   export type RelationshipList = Relationship[];
-  export type RelationshipType = "VALUE"|"CHILD"|"COMPLEX_FEATURES"|string;
+  export type RelationshipType = "VALUE"|"CHILD"|"COMPLEX_FEATURES"|"MERGED_CELL"|"TITLE"|"ANSWER"|string;
   export type RoleArn = string;
   export type S3Bucket = string;
   export interface S3Object {
@@ -513,7 +671,7 @@ declare namespace Textract {
      */
     Bucket?: S3Bucket;
     /**
-     * The file name of the input document. Synchronous operations can use image files that are in JPEG or PNG format. Asynchronous operations also support PDF format files.
+     * The file name of the input document. Synchronous operations can use image files that are in JPEG or PNG format. Asynchronous operations also support PDF and TIFF format files.
      */
     Name?: S3ObjectName;
     /**
@@ -554,6 +712,7 @@ declare namespace Textract {
      * The KMS key used to encrypt the inference results. This can be in either Key ID or Key Alias format. When a KMS key is provided, the KMS key will be used for server-side encryption of the objects in the customer bucket. When this parameter is not enabled, the result will be encrypted server side,using SSE-S3.
      */
     KMSKeyId?: KMSKeyId;
+    QueriesConfig?: QueriesConfig;
   }
   export interface StartDocumentAnalysisResponse {
     /**
@@ -593,10 +752,43 @@ declare namespace Textract {
      */
     JobId?: JobId;
   }
+  export interface StartExpenseAnalysisRequest {
+    /**
+     * The location of the document to be processed.
+     */
+    DocumentLocation: DocumentLocation;
+    /**
+     * The idempotent token that's used to identify the start request. If you use the same token with multiple StartDocumentTextDetection requests, the same JobId is returned. Use ClientRequestToken to prevent the same job from being accidentally started more than once. For more information, see Calling Amazon Textract Asynchronous Operations 
+     */
+    ClientRequestToken?: ClientRequestToken;
+    /**
+     * An identifier you specify that's included in the completion notification published to the Amazon SNS topic. For example, you can use JobTag to identify the type of document that the completion notification corresponds to (such as a tax form or a receipt).
+     */
+    JobTag?: JobTag;
+    /**
+     * The Amazon SNS topic ARN that you want Amazon Textract to publish the completion status of the operation to. 
+     */
+    NotificationChannel?: NotificationChannel;
+    /**
+     * Sets if the output will go to a customer defined bucket. By default, Amazon Textract will save the results internally to be accessed by the GetExpenseAnalysis operation.
+     */
+    OutputConfig?: OutputConfig;
+    /**
+     * The KMS key used to encrypt the inference results. This can be in either Key ID or Key Alias format. When a KMS key is provided, the KMS key will be used for server-side encryption of the objects in the customer bucket. When this parameter is not enabled, the result will be encrypted server side,using SSE-S3.
+     */
+    KMSKeyId?: KMSKeyId;
+  }
+  export interface StartExpenseAnalysisResponse {
+    /**
+     * A unique identifier for the text detection job. The JobId is returned from StartExpenseAnalysis. A JobId value is only valid for 7 days.
+     */
+    JobId?: JobId;
+  }
   export type StatusMessage = string;
   export type String = string;
   export type TextType = "HANDWRITING"|"PRINTED"|string;
   export type UInteger = number;
+  export type ValueType = "DATE"|string;
   export interface Warning {
     /**
      * The error code for the warning.

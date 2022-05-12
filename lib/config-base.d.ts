@@ -83,6 +83,7 @@ export interface HTTPOptions {
 export interface Logger {
     write?: (chunk: any, encoding?: string, callback?: () => void) => void
     log?: (...messages: any[]) => void;
+    warn?: (...message: any[]) => void;
 }
 export interface ParamValidation {
     /**
@@ -267,4 +268,12 @@ export abstract class ConfigurationOptions {
      * regional endpoints. 
      */
     stsRegionalEndpoints?: "legacy"|"regional";
+    /**
+     * Enables FIPS compatible endpoints.
+     */
+    useFipsEndpoint?: boolean;
+    /**
+     * Enables IPv6 dualstack endpoint.
+     */
+    useDualstackEndpoint?: boolean;
 }

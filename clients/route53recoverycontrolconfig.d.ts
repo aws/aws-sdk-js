@@ -13,19 +13,19 @@ declare class Route53RecoveryControlConfig extends Service {
   constructor(options?: Route53RecoveryControlConfig.Types.ClientConfiguration)
   config: Config & Route53RecoveryControlConfig.Types.ClientConfiguration;
   /**
-   * Create a new cluster. A cluster is a set of redundant Regional endpoints against which you can run API calls to update or get the state of one or more routing controls. Each cluster has a name, status, Amazon Resource Name (ARN), and an array of the five cluster endpoints (one for each supported Amazon Web Services Region) that you can use with API calls to the Amazon Route 53 Application Recovery Controller cluster data plane.
+   * Create a new cluster. A cluster is a set of redundant Regional endpoints against which you can run API calls to update or get the state of one or more routing controls. Each cluster has a name, status, Amazon Resource Name (ARN), and an array of the five cluster endpoints (one for each supported Amazon Web Services Region) that you can use with API calls to the cluster data plane.
    */
   createCluster(params: Route53RecoveryControlConfig.Types.CreateClusterRequest, callback?: (err: AWSError, data: Route53RecoveryControlConfig.Types.CreateClusterResponse) => void): Request<Route53RecoveryControlConfig.Types.CreateClusterResponse, AWSError>;
   /**
-   * Create a new cluster. A cluster is a set of redundant Regional endpoints against which you can run API calls to update or get the state of one or more routing controls. Each cluster has a name, status, Amazon Resource Name (ARN), and an array of the five cluster endpoints (one for each supported Amazon Web Services Region) that you can use with API calls to the Amazon Route 53 Application Recovery Controller cluster data plane.
+   * Create a new cluster. A cluster is a set of redundant Regional endpoints against which you can run API calls to update or get the state of one or more routing controls. Each cluster has a name, status, Amazon Resource Name (ARN), and an array of the five cluster endpoints (one for each supported Amazon Web Services Region) that you can use with API calls to the cluster data plane.
    */
   createCluster(callback?: (err: AWSError, data: Route53RecoveryControlConfig.Types.CreateClusterResponse) => void): Request<Route53RecoveryControlConfig.Types.CreateClusterResponse, AWSError>;
   /**
-   * Creates a new control panel. A control panel represents a group of routing controls that can be changed together in a single transaction. You can use a control panel to centrally view the operational status of applications across your organization, and trigger multi-app failovers in a single transaction, for example, to fail over an Availability Zone or AWS Region.
+   * Creates a new control panel. A control panel represents a group of routing controls that can be changed together in a single transaction. You can use a control panel to centrally view the operational status of applications across your organization, and trigger multi-app failovers in a single transaction, for example, to fail over an Availability Zone or Amazon Web Services Region.
    */
   createControlPanel(params: Route53RecoveryControlConfig.Types.CreateControlPanelRequest, callback?: (err: AWSError, data: Route53RecoveryControlConfig.Types.CreateControlPanelResponse) => void): Request<Route53RecoveryControlConfig.Types.CreateControlPanelResponse, AWSError>;
   /**
-   * Creates a new control panel. A control panel represents a group of routing controls that can be changed together in a single transaction. You can use a control panel to centrally view the operational status of applications across your organization, and trigger multi-app failovers in a single transaction, for example, to fail over an Availability Zone or AWS Region.
+   * Creates a new control panel. A control panel represents a group of routing controls that can be changed together in a single transaction. You can use a control panel to centrally view the operational status of applications across your organization, and trigger multi-app failovers in a single transaction, for example, to fail over an Availability Zone or Amazon Web Services Region.
    */
   createControlPanel(callback?: (err: AWSError, data: Route53RecoveryControlConfig.Types.CreateControlPanelResponse) => void): Request<Route53RecoveryControlConfig.Types.CreateControlPanelResponse, AWSError>;
   /**
@@ -37,11 +37,11 @@ declare class Route53RecoveryControlConfig extends Service {
    */
   createRoutingControl(callback?: (err: AWSError, data: Route53RecoveryControlConfig.Types.CreateRoutingControlResponse) => void): Request<Route53RecoveryControlConfig.Types.CreateRoutingControlResponse, AWSError>;
   /**
-   * Creates a safety rule in a control panel. Safety rules let you add safeguards around enabling and disabling routing controls, to help prevent unexpected outcomes. There are two types of safety rules: assertion rules and gating rules. Assertion rule: An assertion rule enforces that, when a routing control state is changed, the criteria set by the rule configuration is met. Otherwise, the change to the routing control is not accepted. Gating rule: A gating rule verifies that a set of gating controls evaluates as true, based on a rule configuration that you specify. If the gating rule evaluates to true, Amazon Route 53 Application Recovery Controller allows a set of routing control state changes to run and complete against the set of target controls.
+   * Creates a safety rule in a control panel. Safety rules let you add safeguards around changing routing control states, and for enabling and disabling routing controls, to help prevent unexpected outcomes. There are two types of safety rules: assertion rules and gating rules. Assertion rule: An assertion rule enforces that, when you change a routing control state, that a certain criteria is met. For example, the criteria might be that at least one routing control state is On after the transation so that traffic continues to flow to at least one cell for the application. This ensures that you avoid a fail-open scenario. Gating rule: A gating rule lets you configure a gating routing control as an overall "on/off" switch for a group of routing controls. Or, you can configure more complex gating scenarios, for example by configuring multiple gating routing controls. For more information, see Safety rules in the Amazon Route 53 Application Recovery Controller Developer Guide.
    */
   createSafetyRule(params: Route53RecoveryControlConfig.Types.CreateSafetyRuleRequest, callback?: (err: AWSError, data: Route53RecoveryControlConfig.Types.CreateSafetyRuleResponse) => void): Request<Route53RecoveryControlConfig.Types.CreateSafetyRuleResponse, AWSError>;
   /**
-   * Creates a safety rule in a control panel. Safety rules let you add safeguards around enabling and disabling routing controls, to help prevent unexpected outcomes. There are two types of safety rules: assertion rules and gating rules. Assertion rule: An assertion rule enforces that, when a routing control state is changed, the criteria set by the rule configuration is met. Otherwise, the change to the routing control is not accepted. Gating rule: A gating rule verifies that a set of gating controls evaluates as true, based on a rule configuration that you specify. If the gating rule evaluates to true, Amazon Route 53 Application Recovery Controller allows a set of routing control state changes to run and complete against the set of target controls.
+   * Creates a safety rule in a control panel. Safety rules let you add safeguards around changing routing control states, and for enabling and disabling routing controls, to help prevent unexpected outcomes. There are two types of safety rules: assertion rules and gating rules. Assertion rule: An assertion rule enforces that, when you change a routing control state, that a certain criteria is met. For example, the criteria might be that at least one routing control state is On after the transation so that traffic continues to flow to at least one cell for the application. This ensures that you avoid a fail-open scenario. Gating rule: A gating rule lets you configure a gating routing control as an overall "on/off" switch for a group of routing controls. Or, you can configure more complex gating scenarios, for example by configuring multiple gating routing controls. For more information, see Safety rules in the Amazon Route 53 Application Recovery Controller Developer Guide.
    */
   createSafetyRule(callback?: (err: AWSError, data: Route53RecoveryControlConfig.Types.CreateSafetyRuleResponse) => void): Request<Route53RecoveryControlConfig.Types.CreateSafetyRuleResponse, AWSError>;
   /**
@@ -101,11 +101,11 @@ declare class Route53RecoveryControlConfig extends Service {
    */
   describeRoutingControl(callback?: (err: AWSError, data: Route53RecoveryControlConfig.Types.DescribeRoutingControlResponse) => void): Request<Route53RecoveryControlConfig.Types.DescribeRoutingControlResponse, AWSError>;
   /**
-   * Describes the safety rules (that is, the assertion rules and gating rules) for the routing controls in a control panel.
+   * Returns information about a safety rule.
    */
   describeSafetyRule(params: Route53RecoveryControlConfig.Types.DescribeSafetyRuleRequest, callback?: (err: AWSError, data: Route53RecoveryControlConfig.Types.DescribeSafetyRuleResponse) => void): Request<Route53RecoveryControlConfig.Types.DescribeSafetyRuleResponse, AWSError>;
   /**
-   * Describes the safety rules (that is, the assertion rules and gating rules) for the routing controls in a control panel.
+   * Returns information about a safety rule.
    */
   describeSafetyRule(callback?: (err: AWSError, data: Route53RecoveryControlConfig.Types.DescribeSafetyRuleResponse) => void): Request<Route53RecoveryControlConfig.Types.DescribeSafetyRuleResponse, AWSError>;
   /**
@@ -125,11 +125,11 @@ declare class Route53RecoveryControlConfig extends Service {
    */
   listClusters(callback?: (err: AWSError, data: Route53RecoveryControlConfig.Types.ListClustersResponse) => void): Request<Route53RecoveryControlConfig.Types.ListClustersResponse, AWSError>;
   /**
-   * Returns an array of control panels for a cluster.
+   * Returns an array of control panels in an account or in a cluster.
    */
   listControlPanels(params: Route53RecoveryControlConfig.Types.ListControlPanelsRequest, callback?: (err: AWSError, data: Route53RecoveryControlConfig.Types.ListControlPanelsResponse) => void): Request<Route53RecoveryControlConfig.Types.ListControlPanelsResponse, AWSError>;
   /**
-   * Returns an array of control panels for a cluster.
+   * Returns an array of control panels in an account or in a cluster.
    */
   listControlPanels(callback?: (err: AWSError, data: Route53RecoveryControlConfig.Types.ListControlPanelsResponse) => void): Request<Route53RecoveryControlConfig.Types.ListControlPanelsResponse, AWSError>;
   /**
@@ -149,6 +149,30 @@ declare class Route53RecoveryControlConfig extends Service {
    */
   listSafetyRules(callback?: (err: AWSError, data: Route53RecoveryControlConfig.Types.ListSafetyRulesResponse) => void): Request<Route53RecoveryControlConfig.Types.ListSafetyRulesResponse, AWSError>;
   /**
+   * Lists the tags for a resource.
+   */
+  listTagsForResource(params: Route53RecoveryControlConfig.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: Route53RecoveryControlConfig.Types.ListTagsForResourceResponse) => void): Request<Route53RecoveryControlConfig.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Lists the tags for a resource.
+   */
+  listTagsForResource(callback?: (err: AWSError, data: Route53RecoveryControlConfig.Types.ListTagsForResourceResponse) => void): Request<Route53RecoveryControlConfig.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Adds a tag to a resource.
+   */
+  tagResource(params: Route53RecoveryControlConfig.Types.TagResourceRequest, callback?: (err: AWSError, data: Route53RecoveryControlConfig.Types.TagResourceResponse) => void): Request<Route53RecoveryControlConfig.Types.TagResourceResponse, AWSError>;
+  /**
+   * Adds a tag to a resource.
+   */
+  tagResource(callback?: (err: AWSError, data: Route53RecoveryControlConfig.Types.TagResourceResponse) => void): Request<Route53RecoveryControlConfig.Types.TagResourceResponse, AWSError>;
+  /**
+   * Removes a tag from a resource.
+   */
+  untagResource(params: Route53RecoveryControlConfig.Types.UntagResourceRequest, callback?: (err: AWSError, data: Route53RecoveryControlConfig.Types.UntagResourceResponse) => void): Request<Route53RecoveryControlConfig.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Removes a tag from a resource.
+   */
+  untagResource(callback?: (err: AWSError, data: Route53RecoveryControlConfig.Types.UntagResourceResponse) => void): Request<Route53RecoveryControlConfig.Types.UntagResourceResponse, AWSError>;
+  /**
    * Updates a control panel. The only update you can make to a control panel is to change the name of the control panel.
    */
   updateControlPanel(params: Route53RecoveryControlConfig.Types.UpdateControlPanelRequest, callback?: (err: AWSError, data: Route53RecoveryControlConfig.Types.UpdateControlPanelResponse) => void): Request<Route53RecoveryControlConfig.Types.UpdateControlPanelResponse, AWSError>;
@@ -165,11 +189,11 @@ declare class Route53RecoveryControlConfig extends Service {
    */
   updateRoutingControl(callback?: (err: AWSError, data: Route53RecoveryControlConfig.Types.UpdateRoutingControlResponse) => void): Request<Route53RecoveryControlConfig.Types.UpdateRoutingControlResponse, AWSError>;
   /**
-   * Update a safety rule (an assertion rule or gating rule) for the routing controls in a control panel. You can only update the name and the waiting period for a safety rule. To make other updates, delete the safety rule and create a new safety rule.
+   * Update a safety rule (an assertion rule or gating rule). You can only update the name and the waiting period for a safety rule. To make other updates, delete the safety rule and create a new one.
    */
   updateSafetyRule(params: Route53RecoveryControlConfig.Types.UpdateSafetyRuleRequest, callback?: (err: AWSError, data: Route53RecoveryControlConfig.Types.UpdateSafetyRuleResponse) => void): Request<Route53RecoveryControlConfig.Types.UpdateSafetyRuleResponse, AWSError>;
   /**
-   * Update a safety rule (an assertion rule or gating rule) for the routing controls in a control panel. You can only update the name and the waiting period for a safety rule. To make other updates, delete the safety rule and create a new safety rule.
+   * Update a safety rule (an assertion rule or gating rule). You can only update the name and the waiting period for a safety rule. To make other updates, delete the safety rule and create a new one.
    */
   updateSafetyRule(callback?: (err: AWSError, data: Route53RecoveryControlConfig.Types.UpdateSafetyRuleResponse) => void): Request<Route53RecoveryControlConfig.Types.UpdateSafetyRuleResponse, AWSError>;
   /**
@@ -226,23 +250,23 @@ declare namespace Route53RecoveryControlConfig {
     /**
      * The routing controls that are part of transactions that are evaluated to determine if a request to change a routing control state is allowed. For example, you might include three routing controls, one for each of three Amazon Web Services Regions.
      */
-    AssertedControls: __listOf__string;
+    AssertedControls: __listOf__stringMin1Max256PatternAZaZ09;
     /**
      * The Amazon Resource Name (ARN) of the control panel.
      */
-    ControlPanelArn: __string;
+    ControlPanelArn: __stringMin1Max256PatternAZaZ09;
     /**
      * Name of the assertion rule. You can use any non-white space character in the name.
      */
     Name: __stringMin1Max64PatternS;
     /**
-     * The criteria that you set for specific assertion controls (routing controls) that designate how many controls must be enabled as the result of a transaction. For example, if you have three assertion controls, you might specify atleast 2 for your rule configuration. This means that at least two assertion controls must be enabled, so that at least two Amazon Web Services Regions are enabled.
+     * The criteria that you set for specific assertion routing controls (AssertedControls) that designate how many routing control states must be ON as the result of a transaction. For example, if you have three assertion routing controls, you might specify atleast 2 for your rule configuration. This means that at least two assertion routing control states must be ON, so that at least two Amazon Web Services Regions have traffic flowing to them.
      */
     RuleConfig: RuleConfig;
     /**
      * The Amazon Resource Name (ARN) of the assertion rule.
      */
-    SafetyRuleArn: __string;
+    SafetyRuleArn: __stringMin1Max256PatternAZaZ09;
     /**
      * The deployment status of an assertion rule. Status can be one of the following: PENDING, DEPLOYED, PENDING_DELETION.
      */
@@ -260,7 +284,7 @@ declare namespace Route53RecoveryControlConfig {
     /**
      * The Amazon Resource Name (ARN) of the assertion rule.
      */
-    SafetyRuleArn: __string;
+    SafetyRuleArn: __stringMin1Max256PatternAZaZ09;
     /**
      * An evaluation period, in milliseconds (ms), during which any request against the target routing controls will fail. This helps prevent "flapping" of state. The wait period is 5000 ms by default, but you can choose a custom value.
      */
@@ -270,9 +294,9 @@ declare namespace Route53RecoveryControlConfig {
     /**
      * The Amazon Resource Name (ARN) of the cluster.
      */
-    ClusterArn?: __string;
+    ClusterArn?: __stringMin1Max256PatternAZaZ09;
     /**
-     * Endpoints for a cluster. Specify one of these endpoints when you want to set or retrieve a routing control state in the cluster. To get or update the routing control state, see the Amazon Route 53 Application Recovery Controller Cluster (Data Plane) Actions.
+     * Endpoints for a cluster. Specify one of these endpoints when you want to set or retrieve a routing control state in the cluster. To get or update the routing control state, see the Amazon Route 53 Application Recovery Controller Routing Control Actions.
      */
     ClusterEndpoints?: __listOfClusterEndpoint;
     /**
@@ -286,23 +310,23 @@ declare namespace Route53RecoveryControlConfig {
   }
   export interface ClusterEndpoint {
     /**
-     * A cluster endpoint. Specify an endpoint and Amazon Web Services Region when you want to set or retrieve a routing control state in the cluster. To get or update the routing control state, see the Amazon Route 53 Application Recovery Controller Cluster (Data Plane) Actions.
+     * A cluster endpoint. Specify an endpoint and Amazon Web Services Region when you want to set or retrieve a routing control state in the cluster. To get or update the routing control state, see the Amazon Route 53 Application Recovery Controller Routing Control Actions.
      */
-    Endpoint?: __stringMin1Max128;
+    Endpoint?: __stringMin1Max128PatternAZaZ09;
     /**
      * The Amazon Web Services Region for a cluster endpoint.
      */
-    Region?: __stringMin1Max32;
+    Region?: __stringMin1Max32PatternS;
   }
   export interface ControlPanel {
     /**
      * The Amazon Resource Name (ARN) of the cluster that includes the control panel.
      */
-    ClusterArn?: __string;
+    ClusterArn?: __stringMin1Max256PatternAZaZ09;
     /**
      * The Amazon Resource Name (ARN) of the control panel.
      */
-    ControlPanelArn?: __string;
+    ControlPanelArn?: __stringMin1Max256PatternAZaZ09;
     /**
      * A flag that Amazon Route 53 Application Recovery Controller sets to true to designate the default control panel for a cluster. When you create a cluster, Amazon Route 53 Application Recovery Controller creates a control panel, and sets this flag for that control panel. If you create a control panel yourself, this flag is set to false.
      */
@@ -322,13 +346,17 @@ declare namespace Route53RecoveryControlConfig {
   }
   export interface CreateClusterRequest {
     /**
-     * Unique client idempotency token.
+     * A unique, case-sensitive string of up to 64 ASCII characters. To make an idempotent API request with an action, specify a client token in the request.
      */
-    ClientToken?: __stringMax64;
+    ClientToken?: __stringMin1Max64PatternS;
     /**
      * The name of the cluster.
      */
     ClusterName: __stringMin1Max64PatternS;
+    /**
+     * The tags associated with the cluster.
+     */
+    Tags?: __mapOf__stringMin0Max256PatternS;
   }
   export interface CreateClusterResponse {
     /**
@@ -338,17 +366,21 @@ declare namespace Route53RecoveryControlConfig {
   }
   export interface CreateControlPanelRequest {
     /**
-     * Unique client idempotency token.
+     * A unique, case-sensitive string of up to 64 ASCII characters. To make an idempotent API request with an action, specify a client token in the request.
      */
-    ClientToken?: __stringMax64;
+    ClientToken?: __stringMin1Max64PatternS;
     /**
      * The Amazon Resource Name (ARN) of the cluster for the control panel.
      */
-    ClusterArn: __string;
+    ClusterArn: __stringMin1Max256PatternAZaZ09;
     /**
      * The name of the control panel.
      */
     ControlPanelName: __stringMin1Max64PatternS;
+    /**
+     * The tags associated with the control panel.
+     */
+    Tags?: __mapOf__stringMin0Max256PatternS;
   }
   export interface CreateControlPanelResponse {
     /**
@@ -358,17 +390,17 @@ declare namespace Route53RecoveryControlConfig {
   }
   export interface CreateRoutingControlRequest {
     /**
-     * Unique client idempotency token.
+     * A unique, case-sensitive string of up to 64 ASCII characters. To make an idempotent API request with an action, specify a client token in the request.
      */
-    ClientToken?: __stringMax64;
+    ClientToken?: __stringMin1Max64PatternS;
     /**
      * The Amazon Resource Name (ARN) of the cluster that includes the routing control.
      */
-    ClusterArn: __string;
+    ClusterArn: __stringMin1Max256PatternAZaZ09;
     /**
      * The Amazon Resource Name (ARN) of the control panel that includes the routing control.
      */
-    ControlPanelArn?: __string;
+    ControlPanelArn?: __stringMin1Max256PatternAZaZ09;
     /**
      * The name of the routing control.
      */
@@ -381,15 +413,31 @@ declare namespace Route53RecoveryControlConfig {
     RoutingControl?: RoutingControl;
   }
   export interface CreateSafetyRuleRequest {
+    /**
+     * The assertion rule requested.
+     */
     AssertionRule?: NewAssertionRule;
     /**
-     * Unique client idempotency token.
+     * A unique, case-sensitive string of up to 64 ASCII characters. To make an idempotent API request with an action, specify a client token in the request.
      */
-    ClientToken?: __stringMax64;
+    ClientToken?: __stringMin1Max64PatternS;
+    /**
+     * The gating rule requested.
+     */
     GatingRule?: NewGatingRule;
+    /**
+     * The tags associated with the safety rule.
+     */
+    Tags?: __mapOf__stringMin0Max256PatternS;
   }
   export interface CreateSafetyRuleResponse {
+    /**
+     * The assertion rule created.
+     */
     AssertionRule?: AssertionRule;
+    /**
+     * The gating rule created.
+     */
     GatingRule?: GatingRule;
   }
   export interface DeleteClusterRequest {
@@ -402,7 +450,7 @@ declare namespace Route53RecoveryControlConfig {
   }
   export interface DeleteControlPanelRequest {
     /**
-     * The Amazon Resource Name (ARN) of the control panel that you're deleting.
+     * The Amazon Resource Name (ARN) of the control panel.
      */
     ControlPanelArn: __string;
   }
@@ -418,7 +466,7 @@ declare namespace Route53RecoveryControlConfig {
   }
   export interface DeleteSafetyRuleRequest {
     /**
-     * The request body that you include when you update a safety rule.
+     * The ARN of the safety rule.
      */
     SafetyRuleArn: __string;
   }
@@ -426,7 +474,7 @@ declare namespace Route53RecoveryControlConfig {
   }
   export interface DescribeClusterRequest {
     /**
-     * The Amazon Resource Name (ARN) of the cluster that you're getting details for.
+     * The Amazon Resource Name (ARN) of the cluster.
      */
     ClusterArn: __string;
   }
@@ -438,7 +486,7 @@ declare namespace Route53RecoveryControlConfig {
   }
   export interface DescribeControlPanelRequest {
     /**
-     * The Amazon Resource Name (ARN) of the control panel that you're getting details for.
+     * The Amazon Resource Name (ARN) of the control panel.
      */
     ControlPanelArn: __string;
   }
@@ -450,7 +498,7 @@ declare namespace Route53RecoveryControlConfig {
   }
   export interface DescribeRoutingControlRequest {
     /**
-     * The Amazon Resource Name (ARN) of the routing control that you're getting details for.
+     * The Amazon Resource Name (ARN) of the routing control.
      */
     RoutingControlArn: __string;
   }
@@ -462,43 +510,49 @@ declare namespace Route53RecoveryControlConfig {
   }
   export interface DescribeSafetyRuleRequest {
     /**
-     * The request body that you include when you update a safety rule.
+     * The ARN of the safety rule.
      */
     SafetyRuleArn: __string;
   }
   export interface DescribeSafetyRuleResponse {
+    /**
+     * The assertion rule in the response.
+     */
     AssertionRule?: AssertionRule;
+    /**
+     * The gating rule in the response.
+     */
     GatingRule?: GatingRule;
   }
   export interface GatingRule {
     /**
      * The Amazon Resource Name (ARN) of the control panel.
      */
-    ControlPanelArn: __string;
+    ControlPanelArn: __stringMin1Max256PatternAZaZ09;
     /**
-     * The gating controls for the gating rule. That is, routing controls that are evaluated by the rule configuration that you specify.
+     * An array of gating routing control Amazon Resource Names (ARNs). For a simple "on/off" switch, specify the ARN for one routing control. The gating routing controls are evaluated by the rule configuration that you specify to determine if the target routing control states can be changed.
      */
-    GatingControls: __listOf__string;
+    GatingControls: __listOf__stringMin1Max256PatternAZaZ09;
     /**
-     * The name for the gating rule.
+     * The name for the gating rule. You can use any non-white space character in the name.
      */
     Name: __stringMin1Max64PatternS;
     /**
-     * The criteria that you set for specific gating controls (routing controls) that designates how many controls must be enabled to allow you to change (set or unset) the target controls.
+     * The criteria that you set for gating routing controls that designates how many of the routing control states must be ON to allow you to update target routing control states.
      */
     RuleConfig: RuleConfig;
     /**
      * The Amazon Resource Name (ARN) of the gating rule.
      */
-    SafetyRuleArn: __string;
+    SafetyRuleArn: __stringMin1Max256PatternAZaZ09;
     /**
      * The deployment status of a gating rule. Status can be one of the following: PENDING, DEPLOYED, PENDING_DELETION.
      */
     Status: Status;
     /**
-     * Routing controls that can only be set or unset if the specified RuleConfig evaluates to true for the specified GatingControls. For example, say you have three gating controls, one for each of three Amazon Web Services Regions. Now you specify ATLEAST 2 as your RuleConfig. With these settings, you can only change (set or unset) the routing controls that you have specified as TargetControls if that rule evaluates to true. In other words, your ability to change the routing controls that you have specified as TargetControls is gated by the rule that you set for the routing controls in GatingControls.
+     * An array of target routing control Amazon Resource Names (ARNs) for which the states can only be updated if the rule configuration that you specify evaluates to true for the gating routing control. As a simple example, if you have a single gating control, it acts as an overall "on/off" switch for a set of target routing controls. You can use this to manually override automated fail over, for example.
      */
-    TargetControls: __listOf__string;
+    TargetControls: __listOf__stringMin1Max256PatternAZaZ09;
     /**
      * An evaluation period, in milliseconds (ms), during which any request against the target routing controls will fail. This helps prevent "flapping" of state. The wait period is 5000 ms by default, but you can choose a custom value.
      */
@@ -506,13 +560,13 @@ declare namespace Route53RecoveryControlConfig {
   }
   export interface GatingRuleUpdate {
     /**
-     * The name for the gating rule.
+     * The name for the gating rule. You can use any non-white space character in the name.
      */
     Name: __stringMin1Max64PatternS;
     /**
      * The Amazon Resource Name (ARN) of the gating rule.
      */
-    SafetyRuleArn: __string;
+    SafetyRuleArn: __stringMin1Max256PatternAZaZ09;
     /**
      * An evaluation period, in milliseconds (ms), during which any request against the target routing controls will fail. This helps prevent "flapping" of state. The wait period is 5000 ms by default, but you can choose a custom value.
      */
@@ -528,7 +582,7 @@ declare namespace Route53RecoveryControlConfig {
      */
     NextToken?: __string;
     /**
-     * The Amazon Resource Name (ARN) of the routing control that you're getting details for.
+     * The Amazon Resource Name (ARN) of the routing control.
      */
     RoutingControlArn: __string;
   }
@@ -536,11 +590,11 @@ declare namespace Route53RecoveryControlConfig {
     /**
      * Identifiers for the health checks.
      */
-    HealthCheckIds?: __listOf__string;
+    HealthCheckIds?: __listOf__stringMax36PatternS;
     /**
-     * The token that identifies which batch of results you want to see.
+     * Next token for listing health checks.
      */
-    NextToken?: __stringMax8096;
+    NextToken?: __stringMin1Max8096PatternS;
   }
   export interface ListClustersRequest {
     /**
@@ -560,7 +614,7 @@ declare namespace Route53RecoveryControlConfig {
     /**
      * The token that identifies which batch of results you want to see.
      */
-    NextToken?: __stringMax8096;
+    NextToken?: __stringMin1Max8096PatternS;
   }
   export interface ListControlPanelsRequest {
     /**
@@ -584,11 +638,11 @@ declare namespace Route53RecoveryControlConfig {
     /**
      * The token that identifies which batch of results you want to see.
      */
-    NextToken?: __stringMax8096;
+    NextToken?: __stringMin1Max8096PatternS;
   }
   export interface ListRoutingControlsRequest {
     /**
-     * The Amazon Resource Name (ARN) of the control panel that you're getting routing control details for.
+     * The Amazon Resource Name (ARN) of the control panel.
      */
     ControlPanelArn: __string;
     /**
@@ -604,7 +658,7 @@ declare namespace Route53RecoveryControlConfig {
     /**
      * The token that identifies which batch of results you want to see.
      */
-    NextToken?: __stringMax8096;
+    NextToken?: __stringMin1Max8096PatternS;
     /**
      * An array of routing controls.
      */
@@ -612,7 +666,7 @@ declare namespace Route53RecoveryControlConfig {
   }
   export interface ListSafetyRulesRequest {
     /**
-     * The Amazon Resource Name (ARN) of the control panel that you're getting details for.
+     * The Amazon Resource Name (ARN) of the control panel.
      */
     ControlPanelArn: __string;
     /**
@@ -628,28 +682,40 @@ declare namespace Route53RecoveryControlConfig {
     /**
      * The token that identifies which batch of results you want to see.
      */
-    NextToken?: __stringMax8096;
+    NextToken?: __stringMin1Max8096PatternS;
     /**
      * The list of safety rules in a control panel.
      */
     SafetyRules?: __listOfRule;
+  }
+  export interface ListTagsForResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) for the resource that's tagged.
+     */
+    ResourceArn: __string;
+  }
+  export interface ListTagsForResourceResponse {
+    /**
+     * The tags associated with the resource.
+     */
+    Tags?: __mapOf__stringMin0Max256PatternS;
   }
   export type MaxResults = number;
   export interface NewAssertionRule {
     /**
      * The routing controls that are part of transactions that are evaluated to determine if a request to change a routing control state is allowed. For example, you might include three routing controls, one for each of three Amazon Web Services Regions.
      */
-    AssertedControls: __listOf__string;
+    AssertedControls: __listOf__stringMin1Max256PatternAZaZ09;
     /**
      * The Amazon Resource Name (ARN) for the control panel.
      */
-    ControlPanelArn: __string;
+    ControlPanelArn: __stringMin1Max256PatternAZaZ09;
     /**
      * The name of the assertion rule. You can use any non-white space character in the name.
      */
     Name: __stringMin1Max64PatternS;
     /**
-     * The criteria that you set for specific assertion controls (routing controls) that designate how many controls must be enabled as the result of a transaction. For example, if you have three assertion controls, you might specify atleast 2 for your rule configuration. This means that at least two assertion controls must be enabled, so that at least two Amazon Web Services Regions are enabled.
+     * The criteria that you set for specific assertion controls (routing controls) that designate how many control states must be ON as the result of a transaction. For example, if you have three assertion controls, you might specify ATLEAST 2for your rule configuration. This means that at least two assertion controls must be ON, so that at least two Amazon Web Services Regions have traffic flowing to them.
      */
     RuleConfig: RuleConfig;
     /**
@@ -661,23 +727,23 @@ declare namespace Route53RecoveryControlConfig {
     /**
      * The Amazon Resource Name (ARN) of the control panel.
      */
-    ControlPanelArn: __string;
+    ControlPanelArn: __stringMin1Max256PatternAZaZ09;
     /**
      * The gating controls for the new gating rule. That is, routing controls that are evaluated by the rule configuration that you specify.
      */
-    GatingControls: __listOf__string;
+    GatingControls: __listOf__stringMin1Max256PatternAZaZ09;
     /**
      * The name for the new gating rule.
      */
     Name: __stringMin1Max64PatternS;
     /**
-     * The criteria that you set for specific gating controls (routing controls) that designates how many controls must be enabled to allow you to change (set or unset) the target controls.
+     * The criteria that you set for specific gating controls (routing controls) that designates how many control states must be ON to allow you to change (set or unset) the target control states.
      */
     RuleConfig: RuleConfig;
     /**
      * Routing controls that can only be set or unset if the specified RuleConfig evaluates to true for the specified GatingControls. For example, say you have three gating controls, one for each of three Amazon Web Services Regions. Now you specify AtLeast 2 as your RuleConfig. With these settings, you can only change (set or unset) the routing controls that you have specified as TargetControls if that rule evaluates to true. In other words, your ability to change the routing controls that you have specified as TargetControls is gated by the rule that you set for the routing controls in GatingControls.
      */
-    TargetControls: __listOf__string;
+    TargetControls: __listOf__stringMin1Max256PatternAZaZ09;
     /**
      * An evaluation period, in milliseconds (ms), during which any request against the target routing controls will fail. This helps prevent "flapping" of state. The wait period is 5000 ms by default, but you can choose a custom value.
      */
@@ -687,7 +753,7 @@ declare namespace Route53RecoveryControlConfig {
     /**
      * The Amazon Resource Name (ARN) of the control panel that includes the routing control.
      */
-    ControlPanelArn?: __string;
+    ControlPanelArn?: __stringMin1Max256PatternAZaZ09;
     /**
      * The name of the routing control.
      */
@@ -695,7 +761,7 @@ declare namespace Route53RecoveryControlConfig {
     /**
      * The Amazon Resource Name (ARN) of the routing control.
      */
-    RoutingControlArn?: __string;
+    RoutingControlArn?: __stringMin1Max256PatternAZaZ09;
     /**
      * The deployment status of a routing control. Status can be one of the following: PENDING, DEPLOYED, PENDING_DELETION.
      */
@@ -703,11 +769,11 @@ declare namespace Route53RecoveryControlConfig {
   }
   export interface Rule {
     /**
-     * An assertion rule enforces that, when a routing control state is changed, the criteria set by the rule configuration is met. Otherwise, the change to the routing control is not accepted.
+     * An assertion rule enforces that, when a routing control state is changed, the criteria set by the rule configuration is met. Otherwise, the change to the routing control state is not accepted. For example, the criteria might be that at least one routing control state is On after the transation so that traffic continues to flow to at least one cell for the application. This ensures that you avoid a fail-open scenario.
      */
     ASSERTION?: AssertionRule;
     /**
-     * A gating rule verifies that a set of gating controls evaluates as true, based on a rule configuration that you specify. If the gating rule evaluates to true, Amazon Route 53 Application Recovery Controller allows a set of routing control state changes to run and complete against the set of target controls.
+     * A gating rule verifies that a gating routing control or set of gating rounting controls, evaluates as true, based on a rule configuration that you specify, which allows a set of routing control state changes to complete. For example, if you specify one gating routing control and you set the Type in the rule configuration to OR, that indicates that you must set the gating routing control to On for the rule to evaluate as true; that is, for the gating control "switch" to be "On". When you do that, then you can update the routing control states for the target routing controls that you specify in the gating rule.
      */
     GATING?: GatingRule;
   }
@@ -727,11 +793,35 @@ declare namespace Route53RecoveryControlConfig {
   }
   export type RuleType = "ATLEAST"|"AND"|"OR"|string;
   export type Status = "PENDING"|"DEPLOYED"|"PENDING_DELETION"|string;
+  export interface TagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) for the resource that's tagged.
+     */
+    ResourceArn: __string;
+    /**
+     * The tags associated with the resource.
+     */
+    Tags: __mapOf__stringMin0Max256PatternS;
+  }
+  export interface TagResourceResponse {
+  }
+  export interface UntagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) for the resource that's tagged.
+     */
+    ResourceArn: __string;
+    /**
+     * Keys for the tags to be removed.
+     */
+    TagKeys: __listOf__string;
+  }
+  export interface UntagResourceResponse {
+  }
   export interface UpdateControlPanelRequest {
     /**
      * The Amazon Resource Name (ARN) of the control panel.
      */
-    ControlPanelArn: __string;
+    ControlPanelArn: __stringMin1Max256PatternAZaZ09;
     /**
      * The name of the control panel.
      */
@@ -747,7 +837,7 @@ declare namespace Route53RecoveryControlConfig {
     /**
      * The Amazon Resource Name (ARN) of the routing control.
      */
-    RoutingControlArn: __string;
+    RoutingControlArn: __stringMin1Max256PatternAZaZ09;
     /**
      * The name of the routing control.
      */
@@ -760,11 +850,23 @@ declare namespace Route53RecoveryControlConfig {
     RoutingControl?: RoutingControl;
   }
   export interface UpdateSafetyRuleRequest {
+    /**
+     * The assertion rule to update.
+     */
     AssertionRuleUpdate?: AssertionRuleUpdate;
+    /**
+     * The gating rule to update.
+     */
     GatingRuleUpdate?: GatingRuleUpdate;
   }
   export interface UpdateSafetyRuleResponse {
+    /**
+     * The assertion rule updated.
+     */
     AssertionRule?: AssertionRule;
+    /**
+     * The gating rule updated.
+     */
     GatingRule?: GatingRule;
   }
   export type __boolean = boolean;
@@ -775,12 +877,17 @@ declare namespace Route53RecoveryControlConfig {
   export type __listOfRoutingControl = RoutingControl[];
   export type __listOfRule = Rule[];
   export type __listOf__string = __string[];
+  export type __listOf__stringMax36PatternS = __stringMax36PatternS[];
+  export type __listOf__stringMin1Max256PatternAZaZ09 = __stringMin1Max256PatternAZaZ09[];
+  export type __mapOf__stringMin0Max256PatternS = {[key: string]: __stringMin0Max256PatternS};
   export type __string = string;
-  export type __stringMax64 = string;
-  export type __stringMax8096 = string;
-  export type __stringMin1Max128 = string;
-  export type __stringMin1Max32 = string;
+  export type __stringMax36PatternS = string;
+  export type __stringMin0Max256PatternS = string;
+  export type __stringMin1Max128PatternAZaZ09 = string;
+  export type __stringMin1Max256PatternAZaZ09 = string;
+  export type __stringMin1Max32PatternS = string;
   export type __stringMin1Max64PatternS = string;
+  export type __stringMin1Max8096PatternS = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

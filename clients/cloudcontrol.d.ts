@@ -13,11 +13,11 @@ declare class CloudControl extends Service {
   constructor(options?: CloudControl.Types.ClientConfiguration)
   config: Config & CloudControl.Types.ClientConfiguration;
   /**
-   * Cancels the specified resource operation request. For more information, see Canceling resource operation requests in the Amazon Web Services Cloud Control API User Guide. Only resource operations requests with a status of PENDING or IN_PROGRESS can be cancelled.
+   * Cancels the specified resource operation request. For more information, see Canceling resource operation requests in the Amazon Web Services Cloud Control API User Guide. Only resource operations requests with a status of PENDING or IN_PROGRESS can be canceled.
    */
   cancelResourceRequest(params: CloudControl.Types.CancelResourceRequestInput, callback?: (err: AWSError, data: CloudControl.Types.CancelResourceRequestOutput) => void): Request<CloudControl.Types.CancelResourceRequestOutput, AWSError>;
   /**
-   * Cancels the specified resource operation request. For more information, see Canceling resource operation requests in the Amazon Web Services Cloud Control API User Guide. Only resource operations requests with a status of PENDING or IN_PROGRESS can be cancelled.
+   * Cancels the specified resource operation request. For more information, see Canceling resource operation requests in the Amazon Web Services Cloud Control API User Guide. Only resource operations requests with a status of PENDING or IN_PROGRESS can be canceled.
    */
   cancelResourceRequest(callback?: (err: AWSError, data: CloudControl.Types.CancelResourceRequestOutput) => void): Request<CloudControl.Types.CancelResourceRequestOutput, AWSError>;
   /**
@@ -37,11 +37,11 @@ declare class CloudControl extends Service {
    */
   deleteResource(callback?: (err: AWSError, data: CloudControl.Types.DeleteResourceOutput) => void): Request<CloudControl.Types.DeleteResourceOutput, AWSError>;
   /**
-   * Returns information about the current state of the specified resource. For details, see Reading a resource's current state. You can use this action to return information about an existing resource in your account and Amazon Web Services Region, whether or not those resources were provisioned using Cloud Control API.
+   * Returns information about the current state of the specified resource. For details, see Reading a resource's current state. You can use this action to return information about an existing resource in your account and Amazon Web Services Region, whether those resources were provisioned using Cloud Control API.
    */
   getResource(params: CloudControl.Types.GetResourceInput, callback?: (err: AWSError, data: CloudControl.Types.GetResourceOutput) => void): Request<CloudControl.Types.GetResourceOutput, AWSError>;
   /**
-   * Returns information about the current state of the specified resource. For details, see Reading a resource's current state. You can use this action to return information about an existing resource in your account and Amazon Web Services Region, whether or not those resources were provisioned using Cloud Control API.
+   * Returns information about the current state of the specified resource. For details, see Reading a resource's current state. You can use this action to return information about an existing resource in your account and Amazon Web Services Region, whether those resources were provisioned using Cloud Control API.
    */
   getResource(callback?: (err: AWSError, data: CloudControl.Types.GetResourceOutput) => void): Request<CloudControl.Types.GetResourceOutput, AWSError>;
   /**
@@ -53,35 +53,35 @@ declare class CloudControl extends Service {
    */
   getResourceRequestStatus(callback?: (err: AWSError, data: CloudControl.Types.GetResourceRequestStatusOutput) => void): Request<CloudControl.Types.GetResourceRequestStatusOutput, AWSError>;
   /**
-   * Returns existing resource operation requests. This includes requests of all status types. For more information, see Listing active resource operation requests in the Amazon Web Services Cloud Control API User Guide.  Resource operation requests expire after seven days. 
+   * Returns existing resource operation requests. This includes requests of all status types. For more information, see Listing active resource operation requests in the Amazon Web Services Cloud Control API User Guide.  Resource operation requests expire after 7 days. 
    */
   listResourceRequests(params: CloudControl.Types.ListResourceRequestsInput, callback?: (err: AWSError, data: CloudControl.Types.ListResourceRequestsOutput) => void): Request<CloudControl.Types.ListResourceRequestsOutput, AWSError>;
   /**
-   * Returns existing resource operation requests. This includes requests of all status types. For more information, see Listing active resource operation requests in the Amazon Web Services Cloud Control API User Guide.  Resource operation requests expire after seven days. 
+   * Returns existing resource operation requests. This includes requests of all status types. For more information, see Listing active resource operation requests in the Amazon Web Services Cloud Control API User Guide.  Resource operation requests expire after 7 days. 
    */
   listResourceRequests(callback?: (err: AWSError, data: CloudControl.Types.ListResourceRequestsOutput) => void): Request<CloudControl.Types.ListResourceRequestsOutput, AWSError>;
   /**
-   * Returns information about the specified resources. For more information, see Discovering resources in the Amazon Web Services Cloud Control API User Guide. You can use this action to return information about existing resources in your account and Amazon Web Services Region, whether or not those resources were provisioned using Cloud Control API.
+   * Returns information about the specified resources. For more information, see Discovering resources in the Amazon Web Services Cloud Control API User Guide. You can use this action to return information about existing resources in your account and Amazon Web Services Region, whether those resources were provisioned using Cloud Control API.
    */
   listResources(params: CloudControl.Types.ListResourcesInput, callback?: (err: AWSError, data: CloudControl.Types.ListResourcesOutput) => void): Request<CloudControl.Types.ListResourcesOutput, AWSError>;
   /**
-   * Returns information about the specified resources. For more information, see Discovering resources in the Amazon Web Services Cloud Control API User Guide. You can use this action to return information about existing resources in your account and Amazon Web Services Region, whether or not those resources were provisioned using Cloud Control API.
+   * Returns information about the specified resources. For more information, see Discovering resources in the Amazon Web Services Cloud Control API User Guide. You can use this action to return information about existing resources in your account and Amazon Web Services Region, whether those resources were provisioned using Cloud Control API.
    */
   listResources(callback?: (err: AWSError, data: CloudControl.Types.ListResourcesOutput) => void): Request<CloudControl.Types.ListResourcesOutput, AWSError>;
   /**
-   * Updates the specified property values in the resource. You specify your resource property updates as a list of patch operations contained in a JSON patch document that adheres to the  RFC 6902 - JavaScript Object Notation (JSON) Patch  standard. For details on how Cloud Control API performs resource update operations, see Updating a resource in the Amazon Web Services Cloud Control API User Guide. After you have initiated a resource update request, you can monitor the progress of your request by calling GetResourceRequestStatus using the RequestToken of the ProgressEvent returned by UpdateResource. For more information about the properties of a specific resource, refer to the related topic for the resource in the Resource and property types reference in the Amazon Web Services CloudFormation Users Guide.
+   * Updates the specified property values in the resource. You specify your resource property updates as a list of patch operations contained in a JSON patch document that adheres to the  RFC 6902 - JavaScript Object Notation (JSON) Patch  standard. For details on how Cloud Control API performs resource update operations, see Updating a resource in the Amazon Web Services Cloud Control API User Guide. After you have initiated a resource update request, you can monitor the progress of your request by calling GetResourceRequestStatus using the RequestToken of the ProgressEvent returned by UpdateResource. For more information about the properties of a specific resource, refer to the related topic for the resource in the Resource and property types reference in the CloudFormation Users Guide.
    */
   updateResource(params: CloudControl.Types.UpdateResourceInput, callback?: (err: AWSError, data: CloudControl.Types.UpdateResourceOutput) => void): Request<CloudControl.Types.UpdateResourceOutput, AWSError>;
   /**
-   * Updates the specified property values in the resource. You specify your resource property updates as a list of patch operations contained in a JSON patch document that adheres to the  RFC 6902 - JavaScript Object Notation (JSON) Patch  standard. For details on how Cloud Control API performs resource update operations, see Updating a resource in the Amazon Web Services Cloud Control API User Guide. After you have initiated a resource update request, you can monitor the progress of your request by calling GetResourceRequestStatus using the RequestToken of the ProgressEvent returned by UpdateResource. For more information about the properties of a specific resource, refer to the related topic for the resource in the Resource and property types reference in the Amazon Web Services CloudFormation Users Guide.
+   * Updates the specified property values in the resource. You specify your resource property updates as a list of patch operations contained in a JSON patch document that adheres to the  RFC 6902 - JavaScript Object Notation (JSON) Patch  standard. For details on how Cloud Control API performs resource update operations, see Updating a resource in the Amazon Web Services Cloud Control API User Guide. After you have initiated a resource update request, you can monitor the progress of your request by calling GetResourceRequestStatus using the RequestToken of the ProgressEvent returned by UpdateResource. For more information about the properties of a specific resource, refer to the related topic for the resource in the Resource and property types reference in the CloudFormation Users Guide.
    */
   updateResource(callback?: (err: AWSError, data: CloudControl.Types.UpdateResourceOutput) => void): Request<CloudControl.Types.UpdateResourceOutput, AWSError>;
   /**
-   * Waits for the resourceRequestSuccess state by periodically calling the underlying CloudControl.getResourceRequestStatusoperation every 5 seconds (at most 720 times). Wait until resource operation request is successful
+   * Waits for the resourceRequestSuccess state by periodically calling the underlying CloudControl.getResourceRequestStatusoperation every 5 seconds (at most 24 times). Wait until resource operation request is successful
    */
   waitFor(state: "resourceRequestSuccess", params: CloudControl.Types.GetResourceRequestStatusInput & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: CloudControl.Types.GetResourceRequestStatusOutput) => void): Request<CloudControl.Types.GetResourceRequestStatusOutput, AWSError>;
   /**
-   * Waits for the resourceRequestSuccess state by periodically calling the underlying CloudControl.getResourceRequestStatusoperation every 5 seconds (at most 720 times). Wait until resource operation request is successful
+   * Waits for the resourceRequestSuccess state by periodically calling the underlying CloudControl.getResourceRequestStatusoperation every 5 seconds (at most 24 times). Wait until resource operation request is successful
    */
   waitFor(state: "resourceRequestSuccess", callback?: (err: AWSError, data: CloudControl.Types.GetResourceRequestStatusOutput) => void): Request<CloudControl.Types.GetResourceRequestStatusOutput, AWSError>;
 }
@@ -106,7 +106,7 @@ declare namespace CloudControl {
      */
     TypeVersionId?: TypeVersionId;
     /**
-     * The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) for Cloud Control API to use when performing this resource operation. The role specified must have the permissions required for this operation. The necessary permissions for each event handler are defined in the  handlers  section of the resource type definition schema. If you do not specify a role, Cloud Control API uses a temporary session created using your Amazon Web Services user credentials. For more information, see Specifying credentials in the Amazon Web Services Cloud Control API User Guide.
+     * The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role for Cloud Control API to use when performing this resource operation. The role specified must have the permissions required for this operation. The necessary permissions for each event handler are defined in the  handlers  section of the resource type definition schema. If you do not specify a role, Cloud Control API uses a temporary session created using your Amazon Web Services user credentials. For more information, see Specifying credentials in the Amazon Web Services Cloud Control API User Guide.
      */
     RoleArn?: RoleArn;
     /**
@@ -114,7 +114,7 @@ declare namespace CloudControl {
      */
     ClientToken?: ClientToken;
     /**
-     * Structured data format representing the desired state of the resource, consisting of that resource's properties and their desired values.   Cloud Control API currently supports JSON as a structured data format.  Specify the desired state as one of the following:   A JSON blob   A local path containing the desired state in JSON data format   For more information, see Composing the desired state of the resource in the Amazon Web Services Cloud Control API User Guide. For more information about the properties of a specific resource, refer to the related topic for the resource in the Resource and property types reference in the Amazon Web Services CloudFormation Users Guide.
+     * Structured data format representing the desired state of the resource, consisting of that resource's properties and their desired values.  Cloud Control API currently supports JSON as a structured data format.   &lt;p&gt;Specify the desired state as one of the following:&lt;/p&gt; &lt;ul&gt; &lt;li&gt; &lt;p&gt;A JSON blob&lt;/p&gt; &lt;/li&gt; &lt;li&gt; &lt;p&gt;A local path containing the desired state in JSON data format&lt;/p&gt; &lt;/li&gt; &lt;/ul&gt; &lt;p&gt;For more information, see &lt;a href=&quot;https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-create.html#resource-operations-create-desiredstate&quot;&gt;Composing the desired state of the resource&lt;/a&gt; in the &lt;i&gt;Amazon Web Services Cloud Control API User Guide&lt;/i&gt;.&lt;/p&gt; &lt;p&gt;For more information about the properties of a specific resource, refer to the related topic for the resource in the &lt;a href=&quot;https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html&quot;&gt;Resource and property types reference&lt;/a&gt; in the &lt;i&gt;CloudFormation Users Guide&lt;/i&gt;.&lt;/p&gt; 
      */
     DesiredState: Properties;
   }
@@ -134,7 +134,7 @@ declare namespace CloudControl {
      */
     TypeVersionId?: TypeVersionId;
     /**
-     * The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) for Cloud Control API to use when performing this resource operation. The role specified must have the permissions required for this operation. The necessary permissions for each event handler are defined in the  handlers  section of the resource type definition schema. If you do not specify a role, Cloud Control API uses a temporary session created using your Amazon Web Services user credentials. For more information, see Specifying credentials in the Amazon Web Services Cloud Control API User Guide.
+     * The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role for Cloud Control API to use when performing this resource operation. The role specified must have the permissions required for this operation. The necessary permissions for each event handler are defined in the  handlers  section of the resource type definition schema. If you do not specify a role, Cloud Control API uses a temporary session created using your Amazon Web Services user credentials. For more information, see Specifying credentials in the Amazon Web Services Cloud Control API User Guide.
      */
     RoleArn?: RoleArn;
     /**
@@ -142,7 +142,7 @@ declare namespace CloudControl {
      */
     ClientToken?: ClientToken;
     /**
-     * The identifier for the resource. You can specify the primary identifier, or any secondary identifier defined for the resource type in its resource schema. You can only specify one identifier. Primary identifiers can be specified as a string or JSON; secondary identifiers must be specified as JSON. For compound primary identifiers (that is, one that consists of multiple resource properties strung together), to specify the primary identifier as a string, list the property values in the order they are specified in the primary identifier definition, separated by |.  For more information, see Identifying resources in the Amazon Web Services Cloud Control API User Guide.
+     * The identifier for the resource. You can specify the primary identifier, or any secondary identifier defined for the resource type in its resource schema. You can only specify one identifier. Primary identifiers can be specified as a string or JSON; secondary identifiers must be specified as JSON. For compound primary identifiers (that is, one that consists of multiple resource properties strung together), to specify the primary identifier as a string, list the property values in the order they are specified in the primary identifier definition, separated by |. For more information, see Identifying resources in the Amazon Web Services Cloud Control API User Guide.
      */
     Identifier: Identifier;
   }
@@ -162,11 +162,11 @@ declare namespace CloudControl {
      */
     TypeVersionId?: TypeVersionId;
     /**
-     * The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) for Cloud Control API to use when performing this resource operation. The role specified must have the permissions required for this operation. The necessary permissions for each event handler are defined in the  handlers  section of the resource type definition schema. If you do not specify a role, Cloud Control API uses a temporary session created using your Amazon Web Services user credentials. For more information, see Specifying credentials in the Amazon Web Services Cloud Control API User Guide.
+     * The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role for Cloud Control API to use when performing this resource operation. The role specified must have the permissions required for this operation. The necessary permissions for each event handler are defined in the  handlers  section of the resource type definition schema. If you do not specify a role, Cloud Control API uses a temporary session created using your Amazon Web Services user credentials. For more information, see Specifying credentials in the Amazon Web Services Cloud Control API User Guide.
      */
     RoleArn?: RoleArn;
     /**
-     * The identifier for the resource. You can specify the primary identifier, or any secondary identifier defined for the resource type in its resource schema. You can only specify one identifier. Primary identifiers can be specified as a string or JSON; secondary identifiers must be specified as JSON. For compound primary identifiers (that is, one that consists of multiple resource properties strung together), to specify the primary identifier as a string, list the property values in the order they are specified in the primary identifier definition, separated by |.  For more information, see Identifying resources in the Amazon Web Services Cloud Control API User Guide.
+     * The identifier for the resource. You can specify the primary identifier, or any secondary identifier defined for the resource type in its resource schema. You can only specify one identifier. Primary identifiers can be specified as a string or JSON; secondary identifiers must be specified as JSON. For compound primary identifiers (that is, one that consists of multiple resource properties strung together), to specify the primary identifier as a string, list the property values in the order they are specified in the primary identifier definition, separated by |. For more information, see Identifying resources in the Amazon Web Services Cloud Control API User Guide.
      */
     Identifier: Identifier;
   }
@@ -226,7 +226,7 @@ declare namespace CloudControl {
      */
     TypeVersionId?: TypeVersionId;
     /**
-     * The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) for Cloud Control API to use when performing this resource operation. The role specified must have the permissions required for this operation. The necessary permissions for each event handler are defined in the  handlers  section of the resource type definition schema. If you do not specify a role, Cloud Control API uses a temporary session created using your Amazon Web Services user credentials. For more information, see Specifying credentials in the Amazon Web Services Cloud Control API User Guide.
+     * The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role for Cloud Control API to use when performing this resource operation. The role specified must have the permissions required for this operation. The necessary permissions for each event handler are defined in the  handlers  section of the resource type definition schema. If you do not specify a role, Cloud Control API uses a temporary session created using your Amazon Web Services user credentials. For more information, see Specifying credentials in the Amazon Web Services Cloud Control API User Guide.
      */
     RoleArn?: RoleArn;
     /**
@@ -234,7 +234,7 @@ declare namespace CloudControl {
      */
     NextToken?: HandlerNextToken;
     /**
-     * The maximum number of results to be returned with a single call. If the number of available results exceeds this maximum, the response includes a NextToken value that you can assign to the NextToken request parameter to get the next set of results. The default is 20.
+     * Reserved.
      */
     MaxResults?: MaxResults;
     /**
@@ -281,7 +281,7 @@ declare namespace CloudControl {
      */
     Operation?: Operation;
     /**
-     * The current status of the resource operation request.    PENDING: The resource operation has not yet started.    IN_PROGRESS: The resource operation is currently in progress.    SUCCESS: The resource operation has successfully completed.    FAILED: The resource operation has failed. Refer to the error code and status message for more information.    CANCEL_IN_PROGRESS: The resource operation is in the process of being canceled.    CANCEL_COMPLETE: The resource operation has been canceled.  
+     * The current status of the resource operation request.    PENDING: The resource operation hasn't yet started.    IN_PROGRESS: The resource operation is currently in progress.    SUCCESS: The resource operation has successfully completed.    FAILED: The resource operation has failed. Refer to the error code and status message for more information.    CANCEL_IN_PROGRESS: The resource operation is in the process of being canceled.    CANCEL_COMPLETE: The resource operation has been canceled.  
      */
     OperationStatus?: OperationStatus;
     /**
@@ -324,7 +324,7 @@ declare namespace CloudControl {
      */
     Operations?: Operations;
     /**
-     * The operation statuses to include in the filter.    PENDING: The operation has been requested, but not yet initiated.    IN_PROGRESS: The operation is currently in progress.    SUCCESS: The operation has successfully completed.    FAILED: The operation has failed.    CANCEL_IN_PROGRESS: The operation is currently in the process of being canceled.    CANCEL_COMPLETE: The operation has been canceled.  
+     * The operation statuses to include in the filter.    PENDING: The operation has been requested, but not yet initiated.    IN_PROGRESS: The operation is in progress.    SUCCESS: The operation completed.    FAILED: The operation failed.    CANCEL_IN_PROGRESS: The operation is in the process of being canceled.    CANCEL_COMPLETE: The operation has been canceled.  
      */
     OperationStatuses?: OperationStatuses;
   }
@@ -344,7 +344,7 @@ declare namespace CloudControl {
      */
     TypeVersionId?: TypeVersionId;
     /**
-     * The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) for Cloud Control API to use when performing this resource operation. The role specified must have the permissions required for this operation. The necessary permissions for each event handler are defined in the  handlers  section of the resource type definition schema. If you do not specify a role, Cloud Control API uses a temporary session created using your Amazon Web Services user credentials. For more information, see Specifying credentials in the Amazon Web Services Cloud Control API User Guide.
+     * The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role for Cloud Control API to use when performing this resource operation. The role specified must have the permissions required for this operation. The necessary permissions for each event handler are defined in the  handlers  section of the resource type definition schema. If you do not specify a role, Cloud Control API uses a temporary session created using your Amazon Web Services user credentials. For more information, see Specifying credentials in the Amazon Web Services Cloud Control API User Guide.
      */
     RoleArn?: RoleArn;
     /**
@@ -352,7 +352,7 @@ declare namespace CloudControl {
      */
     ClientToken?: ClientToken;
     /**
-     * The identifier for the resource. You can specify the primary identifier, or any secondary identifier defined for the resource type in its resource schema. You can only specify one identifier. Primary identifiers can be specified as a string or JSON; secondary identifiers must be specified as JSON. For compound primary identifiers (that is, one that consists of multiple resource properties strung together), to specify the primary identifier as a string, list the property values in the order they are specified in the primary identifier definition, separated by |.  For more information, see Identifying resources in the Amazon Web Services Cloud Control API User Guide.
+     * The identifier for the resource. You can specify the primary identifier, or any secondary identifier defined for the resource type in its resource schema. You can only specify one identifier. Primary identifiers can be specified as a string or JSON; secondary identifiers must be specified as JSON. For compound primary identifiers (that is, one that consists of multiple resource properties strung together), to specify the primary identifier as a string, list the property values in the order they are specified in the primary identifier definition, separated by |. For more information, see Identifying resources in the Amazon Web Services Cloud Control API User Guide.
      */
     Identifier: Identifier;
     /**

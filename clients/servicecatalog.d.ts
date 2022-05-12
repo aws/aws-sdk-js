@@ -1771,6 +1771,10 @@ declare namespace ServiceCatalog {
      * The output of the provisioning artifact.
      */
     ProvisioningArtifactOutputs?: ProvisioningArtifactOutputs;
+    /**
+     * A list of the keys and descriptions of the outputs. These outputs can be referenced from a provisioned product launched from this provisioning artifact.
+     */
+    ProvisioningArtifactOutputKeys?: ProvisioningArtifactOutputs;
   }
   export interface DescribeRecordInput {
     /**

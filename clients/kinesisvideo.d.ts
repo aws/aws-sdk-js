@@ -44,6 +44,22 @@ declare class KinesisVideo extends Service {
    */
   deleteStream(callback?: (err: AWSError, data: KinesisVideo.Types.DeleteStreamOutput) => void): Request<KinesisVideo.Types.DeleteStreamOutput, AWSError>;
   /**
+   * Gets the ImageGenerationConfiguration for a given Kinesis video stream.
+   */
+  describeImageGenerationConfiguration(params: KinesisVideo.Types.DescribeImageGenerationConfigurationInput, callback?: (err: AWSError, data: KinesisVideo.Types.DescribeImageGenerationConfigurationOutput) => void): Request<KinesisVideo.Types.DescribeImageGenerationConfigurationOutput, AWSError>;
+  /**
+   * Gets the ImageGenerationConfiguration for a given Kinesis video stream.
+   */
+  describeImageGenerationConfiguration(callback?: (err: AWSError, data: KinesisVideo.Types.DescribeImageGenerationConfigurationOutput) => void): Request<KinesisVideo.Types.DescribeImageGenerationConfigurationOutput, AWSError>;
+  /**
+   * Gets the NotificationConfiguration for a given Kinesis video stream.
+   */
+  describeNotificationConfiguration(params: KinesisVideo.Types.DescribeNotificationConfigurationInput, callback?: (err: AWSError, data: KinesisVideo.Types.DescribeNotificationConfigurationOutput) => void): Request<KinesisVideo.Types.DescribeNotificationConfigurationOutput, AWSError>;
+  /**
+   * Gets the NotificationConfiguration for a given Kinesis video stream.
+   */
+  describeNotificationConfiguration(callback?: (err: AWSError, data: KinesisVideo.Types.DescribeNotificationConfigurationOutput) => void): Request<KinesisVideo.Types.DescribeNotificationConfigurationOutput, AWSError>;
+  /**
    * Returns the most current information about the signaling channel. You must specify either the name or the Amazon Resource Name (ARN) of the channel that you want to describe.
    */
   describeSignalingChannel(params: KinesisVideo.Types.DescribeSignalingChannelInput, callback?: (err: AWSError, data: KinesisVideo.Types.DescribeSignalingChannelOutput) => void): Request<KinesisVideo.Types.DescribeSignalingChannelOutput, AWSError>;
@@ -108,19 +124,19 @@ declare class KinesisVideo extends Service {
    */
   listTagsForStream(callback?: (err: AWSError, data: KinesisVideo.Types.ListTagsForStreamOutput) => void): Request<KinesisVideo.Types.ListTagsForStreamOutput, AWSError>;
   /**
-   * Adds one or more tags to a signaling channel. A tag is a key-value pair (the value is optional) that you can define and assign to AWS resources. If you specify a tag that already exists, the tag value is replaced with the value that you specify in the request. For more information, see Using Cost Allocation Tags in the AWS Billing and Cost Management User Guide.
+   * Adds one or more tags to a signaling channel. A tag is a key-value pair (the value is optional) that you can define and assign to Amazon Web Services resources. If you specify a tag that already exists, the tag value is replaced with the value that you specify in the request. For more information, see Using Cost Allocation Tags in the Billing and Cost Management and Cost Management User Guide.
    */
   tagResource(params: KinesisVideo.Types.TagResourceInput, callback?: (err: AWSError, data: KinesisVideo.Types.TagResourceOutput) => void): Request<KinesisVideo.Types.TagResourceOutput, AWSError>;
   /**
-   * Adds one or more tags to a signaling channel. A tag is a key-value pair (the value is optional) that you can define and assign to AWS resources. If you specify a tag that already exists, the tag value is replaced with the value that you specify in the request. For more information, see Using Cost Allocation Tags in the AWS Billing and Cost Management User Guide.
+   * Adds one or more tags to a signaling channel. A tag is a key-value pair (the value is optional) that you can define and assign to Amazon Web Services resources. If you specify a tag that already exists, the tag value is replaced with the value that you specify in the request. For more information, see Using Cost Allocation Tags in the Billing and Cost Management and Cost Management User Guide.
    */
   tagResource(callback?: (err: AWSError, data: KinesisVideo.Types.TagResourceOutput) => void): Request<KinesisVideo.Types.TagResourceOutput, AWSError>;
   /**
-   * Adds one or more tags to a stream. A tag is a key-value pair (the value is optional) that you can define and assign to AWS resources. If you specify a tag that already exists, the tag value is replaced with the value that you specify in the request. For more information, see Using Cost Allocation Tags in the AWS Billing and Cost Management User Guide.  You must provide either the StreamName or the StreamARN. This operation requires permission for the KinesisVideo:TagStream action. Kinesis video streams support up to 50 tags.
+   * Adds one or more tags to a stream. A tag is a key-value pair (the value is optional) that you can define and assign to Amazon Web Services resources. If you specify a tag that already exists, the tag value is replaced with the value that you specify in the request. For more information, see Using Cost Allocation Tags in the Billing and Cost Management and Cost Management User Guide.  You must provide either the StreamName or the StreamARN. This operation requires permission for the KinesisVideo:TagStream action. A Kinesis video stream can support up to 50 tags.
    */
   tagStream(params: KinesisVideo.Types.TagStreamInput, callback?: (err: AWSError, data: KinesisVideo.Types.TagStreamOutput) => void): Request<KinesisVideo.Types.TagStreamOutput, AWSError>;
   /**
-   * Adds one or more tags to a stream. A tag is a key-value pair (the value is optional) that you can define and assign to AWS resources. If you specify a tag that already exists, the tag value is replaced with the value that you specify in the request. For more information, see Using Cost Allocation Tags in the AWS Billing and Cost Management User Guide.  You must provide either the StreamName or the StreamARN. This operation requires permission for the KinesisVideo:TagStream action. Kinesis video streams support up to 50 tags.
+   * Adds one or more tags to a stream. A tag is a key-value pair (the value is optional) that you can define and assign to Amazon Web Services resources. If you specify a tag that already exists, the tag value is replaced with the value that you specify in the request. For more information, see Using Cost Allocation Tags in the Billing and Cost Management and Cost Management User Guide.  You must provide either the StreamName or the StreamARN. This operation requires permission for the KinesisVideo:TagStream action. A Kinesis video stream can support up to 50 tags.
    */
   tagStream(callback?: (err: AWSError, data: KinesisVideo.Types.TagStreamOutput) => void): Request<KinesisVideo.Types.TagStreamOutput, AWSError>;
   /**
@@ -148,6 +164,22 @@ declare class KinesisVideo extends Service {
    */
   updateDataRetention(callback?: (err: AWSError, data: KinesisVideo.Types.UpdateDataRetentionOutput) => void): Request<KinesisVideo.Types.UpdateDataRetentionOutput, AWSError>;
   /**
+   * Updates the StreamInfo and ImageProcessingConfiguration fields.
+   */
+  updateImageGenerationConfiguration(params: KinesisVideo.Types.UpdateImageGenerationConfigurationInput, callback?: (err: AWSError, data: KinesisVideo.Types.UpdateImageGenerationConfigurationOutput) => void): Request<KinesisVideo.Types.UpdateImageGenerationConfigurationOutput, AWSError>;
+  /**
+   * Updates the StreamInfo and ImageProcessingConfiguration fields.
+   */
+  updateImageGenerationConfiguration(callback?: (err: AWSError, data: KinesisVideo.Types.UpdateImageGenerationConfigurationOutput) => void): Request<KinesisVideo.Types.UpdateImageGenerationConfigurationOutput, AWSError>;
+  /**
+   * Updates the notification information for a stream.
+   */
+  updateNotificationConfiguration(params: KinesisVideo.Types.UpdateNotificationConfigurationInput, callback?: (err: AWSError, data: KinesisVideo.Types.UpdateNotificationConfigurationOutput) => void): Request<KinesisVideo.Types.UpdateNotificationConfigurationOutput, AWSError>;
+  /**
+   * Updates the notification information for a stream.
+   */
+  updateNotificationConfiguration(callback?: (err: AWSError, data: KinesisVideo.Types.UpdateNotificationConfigurationOutput) => void): Request<KinesisVideo.Types.UpdateNotificationConfigurationOutput, AWSError>;
+  /**
    * Updates the existing signaling channel. This is an asynchronous operation and takes time to complete.  If the MessageTtlSeconds value is updated (either increased or reduced), it only applies to new messages sent via this channel after it's been updated. Existing messages are still expired as per the previous MessageTtlSeconds value.
    */
   updateSignalingChannel(params: KinesisVideo.Types.UpdateSignalingChannelInput, callback?: (err: AWSError, data: KinesisVideo.Types.UpdateSignalingChannelOutput) => void): Request<KinesisVideo.Types.UpdateSignalingChannelOutput, AWSError>;
@@ -165,7 +197,7 @@ declare class KinesisVideo extends Service {
   updateStream(callback?: (err: AWSError, data: KinesisVideo.Types.UpdateStreamOutput) => void): Request<KinesisVideo.Types.UpdateStreamOutput, AWSError>;
 }
 declare namespace KinesisVideo {
-  export type APIName = "PUT_MEDIA"|"GET_MEDIA"|"LIST_FRAGMENTS"|"GET_MEDIA_FOR_FRAGMENT_LIST"|"GET_HLS_STREAMING_SESSION_URL"|"GET_DASH_STREAMING_SESSION_URL"|"GET_CLIP"|string;
+  export type APIName = "PUT_MEDIA"|"GET_MEDIA"|"LIST_FRAGMENTS"|"GET_MEDIA_FOR_FRAGMENT_LIST"|"GET_HLS_STREAMING_SESSION_URL"|"GET_DASH_STREAMING_SESSION_URL"|"GET_CLIP"|"GET_IMAGES"|string;
   export interface ChannelInfo {
     /**
      * The name of the signaling channel.
@@ -210,11 +242,12 @@ declare namespace KinesisVideo {
   }
   export type ChannelProtocol = "WSS"|"HTTPS"|string;
   export type ChannelRole = "MASTER"|"VIEWER"|string;
-  export type ChannelType = "SINGLE_MASTER"|string;
+  export type ChannelType = "SINGLE_MASTER"|"FULL_MESH"|string;
   export type ComparisonOperator = "BEGINS_WITH"|string;
+  export type ConfigurationStatus = "ENABLED"|"DISABLED"|string;
   export interface CreateSignalingChannelInput {
     /**
-     * A name for the signaling channel that you are creating. It must be unique for each AWS account and AWS Region.
+     * A name for the signaling channel that you are creating. It must be unique for each Amazon Web Services account and Amazon Web Services Region.
      */
     ChannelName: ChannelName;
     /**
@@ -250,7 +283,7 @@ declare namespace KinesisVideo {
      */
     MediaType?: MediaType;
     /**
-     * The ID of the AWS Key Management Service (AWS KMS) key that you want Kinesis Video Streams to use to encrypt stream data. If no key ID is specified, the default, Kinesis Video-managed key (aws/kinesisvideo) is used.  For more information, see DescribeKey. 
+     * The ID of the Key Management Service (KMS) key that you want Kinesis Video Streams to use to encrypt stream data. If no key ID is specified, the default, Kinesis Video-managed key (aws/kinesisvideo) is used.  For more information, see DescribeKey. 
      */
     KmsKeyId?: KmsKeyId;
     /**
@@ -295,6 +328,38 @@ declare namespace KinesisVideo {
   }
   export interface DeleteStreamOutput {
   }
+  export interface DescribeImageGenerationConfigurationInput {
+    /**
+     * The name of the stream from which to retrieve the image generation configuration. You must specify either the StreamName or the StreamARN. 
+     */
+    StreamName?: StreamName;
+    /**
+     * The Amazon Resource Name (ARN) of the Kinesis video stream from which to retrieve the image generation configuration. You must specify either the StreamName or the StreamARN.
+     */
+    StreamARN?: ResourceARN;
+  }
+  export interface DescribeImageGenerationConfigurationOutput {
+    /**
+     * The structure that contains the information required for the Kinesis video stream (KVS) images delivery. If this structure is null, the configuration will be deleted from the stream.
+     */
+    ImageGenerationConfiguration?: ImageGenerationConfiguration;
+  }
+  export interface DescribeNotificationConfigurationInput {
+    /**
+     * The name of the stream from which to retrieve the notification configuration. You must specify either the StreamName or the StreamARN.
+     */
+    StreamName?: StreamName;
+    /**
+     * The Amazon Resource Name (ARN) of the Kinesis video stream from where you want to retrieve the notification configuration. You must specify either the StreamName or the StreamARN.
+     */
+    StreamARN?: ResourceARN;
+  }
+  export interface DescribeNotificationConfigurationOutput {
+    /**
+     * The structure that contains the information required for notifications. If the structure is null, the configuration will be deleted from the stream.
+     */
+    NotificationConfiguration?: NotificationConfiguration;
+  }
   export interface DescribeSignalingChannelInput {
     /**
      * The name of the signaling channel that you want to describe.
@@ -327,7 +392,13 @@ declare namespace KinesisVideo {
      */
     StreamInfo?: StreamInfo;
   }
+  export type DestinationRegion = string;
+  export type DestinationUri = string;
   export type DeviceName = string;
+  export type Format = "JPEG"|"PNG"|string;
+  export type FormatConfig = {[key: string]: FormatConfigValue};
+  export type FormatConfigKey = "JPEGQuality"|string;
+  export type FormatConfigValue = string;
   export interface GetDataEndpointInput {
     /**
      * The name of the stream that you want to get the endpoint for. You must specify either this parameter or a StreamARN in the request.
@@ -364,6 +435,52 @@ declare namespace KinesisVideo {
      */
     ResourceEndpointList?: ResourceEndpointList;
   }
+  export type HeightPixels = number;
+  export interface ImageGenerationConfiguration {
+    /**
+     * Indicates whether the ContinuousImageGenerationConfigurations API is enabled or disabled.
+     */
+    Status: ConfigurationStatus;
+    /**
+     * The origin of the Server or Producer timestamps to use to generate the images.
+     */
+    ImageSelectorType: ImageSelectorType;
+    /**
+     * The structure that contains the information required to deliver images to a customer.
+     */
+    DestinationConfig: ImageGenerationDestinationConfig;
+    /**
+     * The time interval in milliseconds (ms) at which the images need to be generated from the stream. The minimum value that can be provided is 33 ms, because a camera that generates content at 30 FPS would create a frame every 33.3 ms. If the timestamp range is less than the sampling interval, the Image from the StartTimestamp will be returned if available. 
+     */
+    SamplingInterval: SamplingInterval;
+    /**
+     * The accepted image format.
+     */
+    Format: Format;
+    /**
+     * The list of a key-value pair structure that contains extra parameters that can be applied when the image is generated. The FormatConfig key is the JPEGQuality, which indicates the JPEG quality key to be used to generate the image. The FormatConfig value accepts ints from 1 to 100. If the value is 1, the image will be generated with less quality and the best compression. If the value is 100, the image will be generated with the best quality and less compression. If no value is provided, the default value of the JPEGQuality key will be set to 80.
+     */
+    FormatConfig?: FormatConfig;
+    /**
+     * The width of the output image that is used in conjunction with the HeightPixels parameter. When both WidthPixels and HeightPixels parameters are provided, the image will be stretched to fit the specified aspect ratio. If only the WidthPixels parameter is provided, its original aspect ratio will be used to calculate the HeightPixels ratio. If neither parameter is provided, the original image size will be returned.
+     */
+    WidthPixels?: WidthPixels;
+    /**
+     * The height of the output image that is used in conjunction with the WidthPixels parameter. When both HeightPixels and WidthPixels parameters are provided, the image will be stretched to fit the specified aspect ratio. If only the HeightPixels parameter is provided, its original aspect ratio will be used to calculate the WidthPixels ratio. If neither parameter is provided, the original image size will be returned.
+     */
+    HeightPixels?: HeightPixels;
+  }
+  export interface ImageGenerationDestinationConfig {
+    /**
+     * The Uniform Resource Idenifier (URI) that identifies where the images will be delivered.
+     */
+    Uri: DestinationUri;
+    /**
+     * The AWS Region of the S3 bucket where images will be delivered. This DestinationRegion must match the Region where the stream is located.
+     */
+    DestinationRegion: DestinationRegion;
+  }
+  export type ImageSelectorType = "SERVER_TIMESTAMP"|"PRODUCER_TIMESTAMP"|string;
   export type KmsKeyId = string;
   export type ListOfProtocols = ChannelProtocol[];
   export interface ListSignalingChannelsInput {
@@ -462,6 +579,22 @@ declare namespace KinesisVideo {
   export type MediaType = string;
   export type MessageTtlSeconds = number;
   export type NextToken = string;
+  export interface NotificationConfiguration {
+    /**
+     * Indicates if a notification configuration is enabled or disabled.
+     */
+    Status: ConfigurationStatus;
+    /**
+     * The destination information required to deliver a notification to a customer.
+     */
+    DestinationConfig: NotificationDestinationConfig;
+  }
+  export interface NotificationDestinationConfig {
+    /**
+     * The Uniform Resource Idenifier (URI) that identifies where the images will be delivered.
+     */
+    Uri: DestinationUri;
+  }
   export type ResourceARN = string;
   export type ResourceEndpoint = string;
   export type ResourceEndpointList = ResourceEndpointListItem[];
@@ -476,6 +609,7 @@ declare namespace KinesisVideo {
     ResourceEndpoint?: ResourceEndpoint;
   }
   export type ResourceTags = {[key: string]: TagValue};
+  export type SamplingInterval = number;
   export interface SingleMasterChannelEndpointConfiguration {
     /**
      * This property is used to determine the nature of communication over this SINGLE_MASTER signaling channel. If WSS is specified, this API returns a websocket endpoint. If HTTPS is specified, this API returns an HTTPS endpoint.
@@ -488,7 +622,7 @@ declare namespace KinesisVideo {
   }
   export interface SingleMasterConfiguration {
     /**
-     * The period of time a signaling channel retains underlivered messages before they are discarded.
+     * The period of time a signaling channel retains undelivered messages before they are discarded.
      */
     MessageTtlSeconds?: MessageTtlSeconds;
   }
@@ -511,7 +645,7 @@ declare namespace KinesisVideo {
      */
     MediaType?: MediaType;
     /**
-     * The ID of the AWS Key Management Service (AWS KMS) key that Kinesis Video Streams uses to encrypt data on the stream.
+     * The ID of the Key Management Service (KMS) key that Kinesis Video Streams uses to encrypt data on the stream.
      */
     KmsKeyId?: KmsKeyId;
     /**
@@ -640,6 +774,38 @@ declare namespace KinesisVideo {
   export type UpdateDataRetentionOperation = "INCREASE_DATA_RETENTION"|"DECREASE_DATA_RETENTION"|string;
   export interface UpdateDataRetentionOutput {
   }
+  export interface UpdateImageGenerationConfigurationInput {
+    /**
+     * The name of the stream from which to update the image generation configuration. You must specify either the StreamName or the StreamARN.
+     */
+    StreamName?: StreamName;
+    /**
+     * The Amazon Resource Name (ARN) of the Kinesis video stream from where you want to update the image generation configuration. You must specify either the StreamName or the StreamARN.
+     */
+    StreamARN?: ResourceARN;
+    /**
+     * The structure that contains the information required for the KVS images delivery. If the structure is null, the configuration will be deleted from the stream.
+     */
+    ImageGenerationConfiguration?: ImageGenerationConfiguration;
+  }
+  export interface UpdateImageGenerationConfigurationOutput {
+  }
+  export interface UpdateNotificationConfigurationInput {
+    /**
+     * The name of the stream from which to update the notification configuration. You must specify either the StreamName or the StreamARN.
+     */
+    StreamName?: StreamName;
+    /**
+     * The Amazon Resource Name (ARN) of the Kinesis video stream from where you want to update the notification configuration. You must specify either the StreamName or the StreamARN.
+     */
+    StreamARN?: ResourceARN;
+    /**
+     * The structure containing the information required for notifications. If the structure is null, the configuration will be deleted from the stream.
+     */
+    NotificationConfiguration?: NotificationConfiguration;
+  }
+  export interface UpdateNotificationConfigurationOutput {
+  }
   export interface UpdateSignalingChannelInput {
     /**
      * The Amazon Resource Name (ARN) of the signaling channel that you want to update.
@@ -681,6 +847,7 @@ declare namespace KinesisVideo {
   export interface UpdateStreamOutput {
   }
   export type Version = string;
+  export type WidthPixels = number;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

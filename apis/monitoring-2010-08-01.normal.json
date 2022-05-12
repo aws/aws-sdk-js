@@ -53,6 +53,9 @@
         },
         {
           "shape": "MissingRequiredParameterException"
+        },
+        {
+          "shape": "InvalidParameterCombinationException"
         }
       ],
       "documentation": "<p>Deletes the specified anomaly detection model from your account.</p>"
@@ -150,7 +153,7 @@
           "shape": "InvalidNextToken"
         }
       ],
-      "documentation": "<p>Retrieves the history for the specified alarm. You can filter the results by date range or item type. If an alarm name is not specified, the histories for either all metric alarms or all composite alarms are returned.</p> <p>CloudWatch retains the history of an alarm even if you delete the alarm.</p>"
+      "documentation": "<p>Retrieves the history for the specified alarm. You can filter the results by date range or item type. If an alarm name is not specified, the histories for either all metric alarms or all composite alarms are returned.</p> <p>CloudWatch retains the history of an alarm even if you delete the alarm.</p> <p>To use this operation and return information about a composite alarm, you must be signed on with the <code>cloudwatch:DescribeAlarmHistory</code> permission that is scoped to <code>*</code>. You can't return information about composite alarms if your <code>cloudwatch:DescribeAlarmHistory</code> permission has a narrower scope.</p>"
     },
     "DescribeAlarms": {
       "name": "DescribeAlarms",
@@ -170,7 +173,7 @@
           "shape": "InvalidNextToken"
         }
       ],
-      "documentation": "<p>Retrieves the specified alarms. You can filter the results by specifying a prefix for the alarm name, the alarm state, or a prefix for any action.</p>"
+      "documentation": "<p>Retrieves the specified alarms. You can filter the results by specifying a prefix for the alarm name, the alarm state, or a prefix for any action.</p> <p>To use this operation and return information about composite alarms, you must be signed on with the <code>cloudwatch:DescribeAlarms</code> permission that is scoped to <code>*</code>. You can't return information about composite alarms if your <code>cloudwatch:DescribeAlarms</code> permission has a narrower scope.</p>"
     },
     "DescribeAlarmsForMetric": {
       "name": "DescribeAlarmsForMetric",
@@ -209,9 +212,12 @@
         },
         {
           "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "InvalidParameterCombinationException"
         }
       ],
-      "documentation": "<p>Lists the anomaly detection models that you have created in your account. You can list all models in your account or filter the results to only the models that are related to a certain namespace, metric name, or metric dimension.</p>"
+      "documentation": "<p>Lists the anomaly detection models that you have created in your account. For single metric anomaly detectors, you can list all of the models in your account or filter the results to only the models that are related to a certain namespace, metric name, or metric dimension. For metric math anomaly detectors, you can list them by adding <code>METRIC_MATH</code> to the <code>AnomalyDetectorTypes</code> array. This will return all metric math anomaly detectors in your account.</p>"
     },
     "DescribeInsightRules": {
       "name": "DescribeInsightRules",
@@ -374,7 +380,7 @@
           "shape": "InvalidNextToken"
         }
       ],
-      "documentation": "<p>You can use the <code>GetMetricData</code> API to retrieve as many as 500 different metrics in a single request, with a total of as many as 100,800 data points. You can also optionally perform math expressions on the values of the returned statistics, to create new time series that represent new insights into your data. For example, using Lambda metrics, you could divide the Errors metric by the Invocations metric to get an error rate time series. For more information about metric math expressions, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/using-metric-math.html#metric-math-syntax\">Metric Math Syntax and Functions</a> in the <i>Amazon CloudWatch User Guide</i>.</p> <p>Calls to the <code>GetMetricData</code> API have a different pricing structure than calls to <code>GetMetricStatistics</code>. For more information about pricing, see <a href=\"https://aws.amazon.com/cloudwatch/pricing/\">Amazon CloudWatch Pricing</a>.</p> <p>Amazon CloudWatch retains metric data as follows:</p> <ul> <li> <p>Data points with a period of less than 60 seconds are available for 3 hours. These data points are high-resolution metrics and are available only for custom metrics that have been defined with a <code>StorageResolution</code> of 1.</p> </li> <li> <p>Data points with a period of 60 seconds (1-minute) are available for 15 days.</p> </li> <li> <p>Data points with a period of 300 seconds (5-minute) are available for 63 days.</p> </li> <li> <p>Data points with a period of 3600 seconds (1 hour) are available for 455 days (15 months).</p> </li> </ul> <p>Data points that are initially published with a shorter period are aggregated together for long-term storage. For example, if you collect data using a period of 1 minute, the data remains available for 15 days with 1-minute resolution. After 15 days, this data is still available, but is aggregated and retrievable only with a resolution of 5 minutes. After 63 days, the data is further aggregated and is available with a resolution of 1 hour.</p> <p>If you omit <code>Unit</code> in your request, all data that was collected with any unit is returned, along with the corresponding units that were specified when the data was reported to CloudWatch. If you specify a unit, the operation returns only data that was collected with that unit specified. If you specify a unit that does not match the data collected, the results of the operation are null. CloudWatch does not perform unit conversions.</p>"
+      "documentation": "<p>You can use the <code>GetMetricData</code> API to retrieve CloudWatch metric values. The operation can also include a CloudWatch Metrics Insights query, and one or more metric math functions.</p> <p>A <code>GetMetricData</code> operation that does not include a query can retrieve as many as 500 different metrics in a single request, with a total of as many as 100,800 data points. You can also optionally perform metric math expressions on the values of the returned statistics, to create new time series that represent new insights into your data. For example, using Lambda metrics, you could divide the Errors metric by the Invocations metric to get an error rate time series. For more information about metric math expressions, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/using-metric-math.html#metric-math-syntax\">Metric Math Syntax and Functions</a> in the <i>Amazon CloudWatch User Guide</i>.</p> <p>If you include a Metrics Insights query, each <code>GetMetricData</code> operation can include only one query. But the same <code>GetMetricData</code> operation can also retrieve other metrics. Metrics Insights queries can query only the most recent three hours of metric data. For more information about Metrics Insights, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/query_with_cloudwatch-metrics-insights.html\">Query your metrics with CloudWatch Metrics Insights</a>.</p> <p>Calls to the <code>GetMetricData</code> API have a different pricing structure than calls to <code>GetMetricStatistics</code>. For more information about pricing, see <a href=\"https://aws.amazon.com/cloudwatch/pricing/\">Amazon CloudWatch Pricing</a>.</p> <p>Amazon CloudWatch retains metric data as follows:</p> <ul> <li> <p>Data points with a period of less than 60 seconds are available for 3 hours. These data points are high-resolution metrics and are available only for custom metrics that have been defined with a <code>StorageResolution</code> of 1.</p> </li> <li> <p>Data points with a period of 60 seconds (1-minute) are available for 15 days.</p> </li> <li> <p>Data points with a period of 300 seconds (5-minute) are available for 63 days.</p> </li> <li> <p>Data points with a period of 3600 seconds (1 hour) are available for 455 days (15 months).</p> </li> </ul> <p>Data points that are initially published with a shorter period are aggregated together for long-term storage. For example, if you collect data using a period of 1 minute, the data remains available for 15 days with 1-minute resolution. After 15 days, this data is still available, but is aggregated and retrievable only with a resolution of 5 minutes. After 63 days, the data is further aggregated and is available with a resolution of 1 hour.</p> <p>If you omit <code>Unit</code> in your request, all data that was collected with any unit is returned, along with the corresponding units that were specified when the data was reported to CloudWatch. If you specify a unit, the operation returns only data that was collected with that unit specified. If you specify a unit that does not match the data collected, the results of the operation are null. CloudWatch does not perform unit conversions.</p> <p> <b>Using Metrics Insights queries with metric math</b> </p> <p>You can't mix a Metric Insights query and metric math syntax in the same expression, but you can reference results from a Metrics Insights query within other Metric math expressions. A Metrics Insights query without a <b>GROUP BY</b> clause returns a single time-series (TS), and can be used as input for a metric math expression that expects a single time series. A Metrics Insights query with a <b>GROUP BY</b> clause returns an array of time-series (TS[]), and can be used as input for a metric math expression that expects an array of time series. </p>"
     },
     "GetMetricStatistics": {
       "name": "GetMetricStatistics",
@@ -578,6 +584,9 @@
         },
         {
           "shape": "MissingRequiredParameterException"
+        },
+        {
+          "shape": "InvalidParameterCombinationException"
         }
       ],
       "documentation": "<p>Creates an anomaly detection model for a CloudWatch metric. You can use the model to display a band of expected normal values when the metric is graphed.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Anomaly_Detection.html\">CloudWatch Anomaly Detection</a>.</p>"
@@ -596,7 +605,7 @@
           "shape": "LimitExceededFault"
         }
       ],
-      "documentation": "<p>Creates or updates a <i>composite alarm</i>. When you create a composite alarm, you specify a rule expression for the alarm that takes into account the alarm states of other alarms that you have created. The composite alarm goes into ALARM state only if all conditions of the rule are met.</p> <p>The alarms specified in a composite alarm's rule expression can include metric alarms and other composite alarms.</p> <p>Using composite alarms can reduce alarm noise. You can create multiple metric alarms, and also create a composite alarm and set up alerts only for the composite alarm. For example, you could create a composite alarm that goes into ALARM state only when more than one of the underlying metric alarms are in ALARM state.</p> <p>Currently, the only alarm actions that can be taken by composite alarms are notifying SNS topics.</p> <note> <p>It is possible to create a loop or cycle of composite alarms, where composite alarm A depends on composite alarm B, and composite alarm B also depends on composite alarm A. In this scenario, you can't delete any composite alarm that is part of the cycle because there is always still a composite alarm that depends on that alarm that you want to delete.</p> <p>To get out of such a situation, you must break the cycle by changing the rule of one of the composite alarms in the cycle to remove a dependency that creates the cycle. The simplest change to make to break a cycle is to change the <code>AlarmRule</code> of one of the alarms to <code>False</code>. </p> <p>Additionally, the evaluation of composite alarms stops if CloudWatch detects a cycle in the evaluation path. </p> </note> <p>When this operation creates an alarm, the alarm state is immediately set to <code>INSUFFICIENT_DATA</code>. The alarm is then evaluated and its state is set appropriately. Any actions associated with the new state are then executed. For a composite alarm, this initial time after creation is the only time that the alarm can be in <code>INSUFFICIENT_DATA</code> state.</p> <p>When you update an existing alarm, its state is left unchanged, but the update completely overwrites the previous configuration of the alarm.</p> <p>If you are an IAM user, you must have <code>iam:CreateServiceLinkedRole</code> to create a composite alarm that has Systems Manager OpsItem actions.</p>"
+      "documentation": "<p>Creates or updates a <i>composite alarm</i>. When you create a composite alarm, you specify a rule expression for the alarm that takes into account the alarm states of other alarms that you have created. The composite alarm goes into ALARM state only if all conditions of the rule are met.</p> <p>The alarms specified in a composite alarm's rule expression can include metric alarms and other composite alarms. The rule expression of a composite alarm can include as many as 100 underlying alarms. Any single alarm can be included in the rule expressions of as many as 150 composite alarms.</p> <p>Using composite alarms can reduce alarm noise. You can create multiple metric alarms, and also create a composite alarm and set up alerts only for the composite alarm. For example, you could create a composite alarm that goes into ALARM state only when more than one of the underlying metric alarms are in ALARM state.</p> <p>Currently, the only alarm actions that can be taken by composite alarms are notifying SNS topics.</p> <note> <p>It is possible to create a loop or cycle of composite alarms, where composite alarm A depends on composite alarm B, and composite alarm B also depends on composite alarm A. In this scenario, you can't delete any composite alarm that is part of the cycle because there is always still a composite alarm that depends on that alarm that you want to delete.</p> <p>To get out of such a situation, you must break the cycle by changing the rule of one of the composite alarms in the cycle to remove a dependency that creates the cycle. The simplest change to make to break a cycle is to change the <code>AlarmRule</code> of one of the alarms to <code>False</code>. </p> <p>Additionally, the evaluation of composite alarms stops if CloudWatch detects a cycle in the evaluation path. </p> </note> <p>When this operation creates an alarm, the alarm state is immediately set to <code>INSUFFICIENT_DATA</code>. The alarm is then evaluated and its state is set appropriately. Any actions associated with the new state are then executed. For a composite alarm, this initial time after creation is the only time that the alarm can be in <code>INSUFFICIENT_DATA</code> state.</p> <p>When you update an existing alarm, its state is left unchanged, but the update completely overwrites the previous configuration of the alarm.</p> <p>To use this operation, you must be signed on with the <code>cloudwatch:PutCompositeAlarm</code> permission that is scoped to <code>*</code>. You can't create a composite alarms if your <code>cloudwatch:PutCompositeAlarm</code> permission has a narrower scope.</p> <p>If you are an IAM user, you must have <code>iam:CreateServiceLinkedRole</code> to create a composite alarm that has Systems Manager OpsItem actions.</p>"
     },
     "PutDashboard": {
       "name": "PutDashboard",
@@ -661,7 +670,7 @@
           "shape": "LimitExceededFault"
         }
       ],
-      "documentation": "<p>Creates or updates an alarm and associates it with the specified metric, metric math expression, or anomaly detection model.</p> <p>Alarms based on anomaly detection models cannot have Auto Scaling actions.</p> <p>When this operation creates an alarm, the alarm state is immediately set to <code>INSUFFICIENT_DATA</code>. The alarm is then evaluated and its state is set appropriately. Any actions associated with the new state are then executed.</p> <p>When you update an existing alarm, its state is left unchanged, but the update completely overwrites the previous configuration of the alarm.</p> <p>If you are an IAM user, you must have Amazon EC2 permissions for some alarm operations:</p> <ul> <li> <p>The <code>iam:CreateServiceLinkedRole</code> for all alarms with EC2 actions</p> </li> <li> <p>The <code>iam:CreateServiceLinkedRole</code> to create an alarm with Systems Manager OpsItem actions.</p> </li> </ul> <p>The first time you create an alarm in the Management Console, the CLI, or by using the PutMetricAlarm API, CloudWatch creates the necessary service-linked role for you. The service-linked roles are called <code>AWSServiceRoleForCloudWatchEvents</code> and <code>AWSServiceRoleForCloudWatchAlarms_ActionSSM</code>. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html#iam-term-service-linked-role\">Amazon Web Services service-linked role</a>.</p> <p> <b>Cross-account alarms</b> </p> <p>You can set an alarm on metrics in the current account, or in another account. To create a cross-account alarm that watches a metric in a different account, you must have completed the following pre-requisites:</p> <ul> <li> <p>The account where the metrics are located (the <i>sharing account</i>) must already have a sharing role named <b>CloudWatch-CrossAccountSharingRole</b>. If it does not already have this role, you must create it using the instructions in <b>Set up a sharing account</b> in <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Cross-Account-Cross-Region.html#enable-cross-account-cross-Region\"> Cross-account cross-Region CloudWatch console</a>. The policy for that role must grant access to the ID of the account where you are creating the alarm. </p> </li> <li> <p>The account where you are creating the alarm (the <i>monitoring account</i>) must already have a service-linked role named <b>AWSServiceRoleForCloudWatchCrossAccount</b> to allow CloudWatch to assume the sharing role in the sharing account. If it does not, you must create it following the directions in <b>Set up a monitoring account</b> in <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Cross-Account-Cross-Region.html#enable-cross-account-cross-Region\"> Cross-account cross-Region CloudWatch console</a>.</p> </li> </ul>"
+      "documentation": "<p>Creates or updates an alarm and associates it with the specified metric, metric math expression, or anomaly detection model.</p> <p>Alarms based on anomaly detection models cannot have Auto Scaling actions.</p> <p>When this operation creates an alarm, the alarm state is immediately set to <code>INSUFFICIENT_DATA</code>. The alarm is then evaluated and its state is set appropriately. Any actions associated with the new state are then executed.</p> <p>When you update an existing alarm, its state is left unchanged, but the update completely overwrites the previous configuration of the alarm.</p> <p>If you are an IAM user, you must have Amazon EC2 permissions for some alarm operations:</p> <ul> <li> <p>The <code>iam:CreateServiceLinkedRole</code> for all alarms with EC2 actions</p> </li> <li> <p>The <code>iam:CreateServiceLinkedRole</code> to create an alarm with Systems Manager OpsItem actions.</p> </li> </ul> <p>The first time you create an alarm in the Amazon Web Services Management Console, the CLI, or by using the PutMetricAlarm API, CloudWatch creates the necessary service-linked role for you. The service-linked roles are called <code>AWSServiceRoleForCloudWatchEvents</code> and <code>AWSServiceRoleForCloudWatchAlarms_ActionSSM</code>. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html#iam-term-service-linked-role\">Amazon Web Services service-linked role</a>.</p> <p> <b>Cross-account alarms</b> </p> <p>You can set an alarm on metrics in the current account, or in another account. To create a cross-account alarm that watches a metric in a different account, you must have completed the following pre-requisites:</p> <ul> <li> <p>The account where the metrics are located (the <i>sharing account</i>) must already have a sharing role named <b>CloudWatch-CrossAccountSharingRole</b>. If it does not already have this role, you must create it using the instructions in <b>Set up a sharing account</b> in <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Cross-Account-Cross-Region.html#enable-cross-account-cross-Region\"> Cross-account cross-Region CloudWatch console</a>. The policy for that role must grant access to the ID of the account where you are creating the alarm. </p> </li> <li> <p>The account where you are creating the alarm (the <i>monitoring account</i>) must already have a service-linked role named <b>AWSServiceRoleForCloudWatchCrossAccount</b> to allow CloudWatch to assume the sharing role in the sharing account. If it does not, you must create it following the directions in <b>Set up a monitoring account</b> in <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Cross-Account-Cross-Region.html#enable-cross-account-cross-Region\"> Cross-account cross-Region CloudWatch console</a>.</p> </li> </ul>"
     },
     "PutMetricData": {
       "name": "PutMetricData",
@@ -718,7 +727,7 @@
           "shape": "InvalidParameterCombinationException"
         }
       ],
-      "documentation": "<p>Creates or updates a metric stream. Metric streams can automatically stream CloudWatch metrics to Amazon Web Services destinations including Amazon S3 and to many third-party solutions.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Metric-Streams.html\"> Using Metric Streams</a>.</p> <p>To create a metric stream, you must be logged on to an account that has the <code>iam:PassRole</code> permission and either the <code>CloudWatchFullAccess</code> policy or the <code>cloudwatch:PutMetricStream</code> permission.</p> <p>When you create or update a metric stream, you choose one of the following:</p> <ul> <li> <p>Stream metrics from all metric namespaces in the account.</p> </li> <li> <p>Stream metrics from all metric namespaces in the account, except for the namespaces that you list in <code>ExcludeFilters</code>.</p> </li> <li> <p>Stream metrics from only the metric namespaces that you list in <code>IncludeFilters</code>.</p> </li> </ul> <p>When you use <code>PutMetricStream</code> to create a new metric stream, the stream is created in the <code>running</code> state. If you use it to update an existing stream, the state of the stream is not changed.</p>"
+      "documentation": "<p>Creates or updates a metric stream. Metric streams can automatically stream CloudWatch metrics to Amazon Web Services destinations including Amazon S3 and to many third-party solutions.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Metric-Streams.html\"> Using Metric Streams</a>.</p> <p>To create a metric stream, you must be logged on to an account that has the <code>iam:PassRole</code> permission and either the <code>CloudWatchFullAccess</code> policy or the <code>cloudwatch:PutMetricStream</code> permission.</p> <p>When you create or update a metric stream, you choose one of the following:</p> <ul> <li> <p>Stream metrics from all metric namespaces in the account.</p> </li> <li> <p>Stream metrics from all metric namespaces in the account, except for the namespaces that you list in <code>ExcludeFilters</code>.</p> </li> <li> <p>Stream metrics from only the metric namespaces that you list in <code>IncludeFilters</code>.</p> </li> </ul> <p>By default, a metric stream always sends the <code>MAX</code>, <code>MIN</code>, <code>SUM</code>, and <code>SAMPLECOUNT</code> statistics for each metric that is streamed. You can use the <code>StatisticsConfigurations</code> parameter to have the metric stream also send additional statistics in the stream. Streaming additional statistics incurs additional costs. For more information, see <a href=\"https://aws.amazon.com/cloudwatch/pricing/\">Amazon CloudWatch Pricing</a>. </p> <p>When you use <code>PutMetricStream</code> to create a new metric stream, the stream is created in the <code>running</code> state. If you use it to update an existing stream, the state of the stream is not changed.</p>"
     },
     "SetAlarmState": {
       "name": "SetAlarmState",
@@ -955,19 +964,27 @@
       "members": {
         "Namespace": {
           "shape": "Namespace",
-          "documentation": "<p>The namespace of the metric associated with the anomaly detection model.</p>"
+          "documentation": "<p>The namespace of the metric associated with the anomaly detection model.</p>",
+          "deprecated": true,
+          "deprecatedMessage": "Use SingleMetricAnomalyDetector.Namespace property."
         },
         "MetricName": {
           "shape": "MetricName",
-          "documentation": "<p>The name of the metric associated with the anomaly detection model.</p>"
+          "documentation": "<p>The name of the metric associated with the anomaly detection model.</p>",
+          "deprecated": true,
+          "deprecatedMessage": "Use SingleMetricAnomalyDetector.MetricName property."
         },
         "Dimensions": {
           "shape": "Dimensions",
-          "documentation": "<p>The metric dimensions associated with the anomaly detection model.</p>"
+          "documentation": "<p>The metric dimensions associated with the anomaly detection model.</p>",
+          "deprecated": true,
+          "deprecatedMessage": "Use SingleMetricAnomalyDetector.Dimensions property."
         },
         "Stat": {
           "shape": "AnomalyDetectorMetricStat",
-          "documentation": "<p>The statistic associated with the anomaly detection model.</p>"
+          "documentation": "<p>The statistic associated with the anomaly detection model.</p>",
+          "deprecated": true,
+          "deprecatedMessage": "Use SingleMetricAnomalyDetector.Stat property."
         },
         "Configuration": {
           "shape": "AnomalyDetectorConfiguration",
@@ -976,9 +993,17 @@
         "StateValue": {
           "shape": "AnomalyDetectorStateValue",
           "documentation": "<p>The current status of the anomaly detector's training. The possible values are <code>TRAINED | PENDING_TRAINING | TRAINED_INSUFFICIENT_DATA</code> </p>"
+        },
+        "SingleMetricAnomalyDetector": {
+          "shape": "SingleMetricAnomalyDetector",
+          "documentation": "<p>The CloudWatch metric and statistic for this anomaly detector.</p>"
+        },
+        "MetricMathAnomalyDetector": {
+          "shape": "MetricMathAnomalyDetector",
+          "documentation": "<p>The CloudWatch metric math expression for this anomaly detector.</p>"
         }
       },
-      "documentation": "<p>An anomaly detection model associated with a particular CloudWatch metric and statistic. You can use the model to display a band of expected normal values when the metric is graphed.</p>"
+      "documentation": "<p>An anomaly detection model associated with a particular CloudWatch metric, statistic, or metric math expression. You can use the model to display a band of expected, normal values when the metric is graphed.</p>"
     },
     "AnomalyDetectorConfiguration": {
       "type": "structure",
@@ -1002,7 +1027,8 @@
     },
     "AnomalyDetectorMetricStat": {
       "type": "string",
-      "pattern": "(SampleCount|Average|Sum|Minimum|Maximum|p(\\d{1,2}|100)(\\.\\d{0,2})?|[ou]\\d+(\\.\\d*)?)(_E|_L|_H)?"
+      "max": 50,
+      "pattern": "(SampleCount|Average|Sum|Minimum|Maximum|IQM|(p|tc|tm|ts|wm)(\\d{1,2}(\\.\\d{0,10})?|100)|[ou]\\d+(\\.\\d*)?)(_E|_L|_H)?|(TM|TC|TS|WM)\\(((((\\d{1,2})(\\.\\d{0,10})?|100(\\.0{0,10})?)%)?:((\\d{1,2})(\\.\\d{0,10})?|100(\\.0{0,10})?)%|((\\d{1,2})(\\.\\d{0,10})?|100(\\.0{0,10})?)%:(((\\d{1,2})(\\.\\d{0,10})?|100(\\.0{0,10})?)%)?)\\)|(TM|TC|TS|WM|PR)\\(((\\d+(\\.\\d{0,10})?|(\\d+(\\.\\d{0,10})?[Ee][+-]?\\d+)):((\\d+(\\.\\d{0,10})?|(\\d+(\\.\\d{0,10})?[Ee][+-]?\\d+)))?|((\\d+(\\.\\d{0,10})?|(\\d+(\\.\\d{0,10})?[Ee][+-]?\\d+)))?:(\\d+(\\.\\d{0,10})?|(\\d+(\\.\\d{0,10})?[Ee][+-]?\\d+)))\\)"
     },
     "AnomalyDetectorMetricTimezone": {
       "type": "string",
@@ -1016,6 +1042,20 @@
         "TRAINED_INSUFFICIENT_DATA",
         "TRAINED"
       ]
+    },
+    "AnomalyDetectorType": {
+      "type": "string",
+      "enum": [
+        "SINGLE_METRIC",
+        "METRIC_MATH"
+      ]
+    },
+    "AnomalyDetectorTypes": {
+      "type": "list",
+      "member": {
+        "shape": "AnomalyDetectorType"
+      },
+      "max": 2
     },
     "AnomalyDetectors": {
       "type": "list",
@@ -1285,27 +1325,38 @@
     },
     "DeleteAnomalyDetectorInput": {
       "type": "structure",
-      "required": [
-        "Namespace",
-        "MetricName",
-        "Stat"
-      ],
       "members": {
         "Namespace": {
           "shape": "Namespace",
-          "documentation": "<p>The namespace associated with the anomaly detection model to delete.</p>"
+          "documentation": "<p>The namespace associated with the anomaly detection model to delete.</p>",
+          "deprecated": true,
+          "deprecatedMessage": "Use SingleMetricAnomalyDetector."
         },
         "MetricName": {
           "shape": "MetricName",
-          "documentation": "<p>The metric name associated with the anomaly detection model to delete.</p>"
+          "documentation": "<p>The metric name associated with the anomaly detection model to delete.</p>",
+          "deprecated": true,
+          "deprecatedMessage": "Use SingleMetricAnomalyDetector."
         },
         "Dimensions": {
           "shape": "Dimensions",
-          "documentation": "<p>The metric dimensions associated with the anomaly detection model to delete.</p>"
+          "documentation": "<p>The metric dimensions associated with the anomaly detection model to delete.</p>",
+          "deprecated": true,
+          "deprecatedMessage": "Use SingleMetricAnomalyDetector."
         },
         "Stat": {
           "shape": "AnomalyDetectorMetricStat",
-          "documentation": "<p>The statistic associated with the anomaly detection model to delete.</p>"
+          "documentation": "<p>The statistic associated with the anomaly detection model to delete.</p>",
+          "deprecated": true,
+          "deprecatedMessage": "Use SingleMetricAnomalyDetector."
+        },
+        "SingleMetricAnomalyDetector": {
+          "shape": "SingleMetricAnomalyDetector",
+          "documentation": "<p>A single metric anomaly detector to be deleted.</p> <p>When using <code>SingleMetricAnomalyDetector</code>, you cannot include the following parameters in the same operation:</p> <ul> <li> <p> <code>Dimensions</code>,</p> </li> <li> <p> <code>MetricName</code> </p> </li> <li> <p> <code>Namespace</code> </p> </li> <li> <p> <code>Stat</code> </p> </li> <li> <p>the <code>MetricMathAnomalyDetector</code> parameters of <code>DeleteAnomalyDetectorInput</code> </p> </li> </ul> <p>Instead, specify the single metric anomaly detector attributes as part of the <code>SingleMetricAnomalyDetector</code> property.</p>"
+        },
+        "MetricMathAnomalyDetector": {
+          "shape": "MetricMathAnomalyDetector",
+          "documentation": "<p>The metric math anomaly detector to be deleted.</p> <p>When using <code>MetricMathAnomalyDetector</code>, you cannot include following parameters in the same operation:</p> <ul> <li> <p> <code>Dimensions</code>,</p> </li> <li> <p> <code>MetricName</code> </p> </li> <li> <p> <code>Namespace</code> </p> </li> <li> <p> <code>Stat</code> </p> </li> <li> <p>the <code>SingleMetricAnomalyDetector</code> parameters of <code>DeleteAnomalyDetectorInput</code> </p> </li> </ul> <p>Instead, specify the metric math anomaly detector attributes as part of the <code>MetricMathAnomalyDetector</code> property.</p>"
         }
       }
     },
@@ -1542,6 +1593,10 @@
         "Dimensions": {
           "shape": "Dimensions",
           "documentation": "<p>Limits the results to only the anomaly detection models that are associated with the specified metric dimensions. If there are multiple metrics that have these dimensions and have anomaly detection models associated, they're all returned.</p>"
+        },
+        "AnomalyDetectorTypes": {
+          "shape": "AnomalyDetectorTypes",
+          "documentation": "<p>The anomaly detector types to request when using <code>DescribeAnomalyDetectorsInput</code>. If empty, defaults to <code>SINGLE_METRIC</code>.</p>"
         }
       }
     },
@@ -1593,14 +1648,14 @@
       "members": {
         "Name": {
           "shape": "DimensionName",
-          "documentation": "<p>The name of the dimension. Dimension names must contain only ASCII characters and must include at least one non-whitespace character.</p>"
+          "documentation": "<p>The name of the dimension. Dimension names must contain only ASCII characters, must include at least one non-whitespace character, and cannot start with a colon (<code>:</code>).</p>"
         },
         "Value": {
           "shape": "DimensionValue",
           "documentation": "<p>The value of the dimension. Dimension values must contain only ASCII characters and must include at least one non-whitespace character.</p>"
         }
       },
-      "documentation": "<p>A dimension is a name/value pair that is part of the identity of a metric. You can assign up to 10 dimensions to a metric. Because dimensions are part of the unique identifier for a metric, whenever you add a unique name/value pair to one of your metrics, you are creating a new variation of that metric. </p>",
+      "documentation": "<p>A dimension is a name/value pair that is part of the identity of a metric. Because dimensions are part of the unique identifier for a metric, whenever you add a unique name/value pair to one of your metrics, you are creating a new variation of that metric. For example, many Amazon EC2 metrics publish <code>InstanceId</code> as a dimension name, and the actual instance ID as the value for that dimension.</p> <p>You can assign up to 10 dimensions to a metric.</p>",
       "xmlOrder": [
         "Name",
         "Value"
@@ -1853,7 +1908,7 @@
       "members": {
         "MetricDataQueries": {
           "shape": "MetricDataQueries",
-          "documentation": "<p>The metric queries to be returned. A single <code>GetMetricData</code> call can include as many as 500 <code>MetricDataQuery</code> structures. Each of these structures can specify either a metric to retrieve, or a math expression to perform on retrieved data. </p>"
+          "documentation": "<p>The metric queries to be returned. A single <code>GetMetricData</code> call can include as many as 500 <code>MetricDataQuery</code> structures. Each of these structures can specify either a metric to retrieve, a Metrics Insights query, or a math expression to perform on retrieved data. </p>"
         },
         "StartTime": {
           "shape": "Timestamp",
@@ -2018,7 +2073,11 @@
         },
         "OutputFormat": {
           "shape": "MetricStreamOutputFormat",
-          "documentation": "<p/>"
+          "documentation": "<p>The output format for the stream. Valid values are <code>json</code> and <code>opentelemetry0.7</code>. For more information about metric stream output formats, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-metric-streams-formats.html\"> Metric streams output formats</a>.</p>"
+        },
+        "StatisticsConfigurations": {
+          "shape": "MetricStreamStatisticsConfigurations",
+          "documentation": "<p>Each entry in this array displays information about one or more metrics that include additional statistics in the metric stream. For more information about the additional statistics, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html.html\"> CloudWatch statistics definitions</a>. </p>"
         }
       }
     },
@@ -2084,14 +2143,14 @@
         },
         "Schema": {
           "shape": "InsightRuleSchema",
-          "documentation": "<p>For rules that you create, this is always <code>{\"Name\": \"CloudWatchLogRule\", \"Version\": 1}</code>. For built-in rules, this is <code>{\"Name\": \"ServiceLogRule\", \"Version\": 1}</code> </p>"
+          "documentation": "<p>For rules that you create, this is always <code>{\"Name\": \"CloudWatchLogRule\", \"Version\": 1}</code>. For managed rules, this is <code>{\"Name\": \"ServiceLogRule\", \"Version\": 1}</code> </p>"
         },
         "Definition": {
           "shape": "InsightRuleDefinition",
           "documentation": "<p>The definition of the rule, as a JSON object. The definition contains the keywords used to define contributors, the value to aggregate on if this rule returns a sum instead of a count, and the filters. For details on the valid syntax, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ContributorInsights-RuleSyntax.html\">Contributor Insights Rule Syntax</a>.</p>"
         }
       },
-      "documentation": "<p>This structure contains the definition for a Contributor Insights rule.</p>"
+      "documentation": "<p>This structure contains the definition for a Contributor Insights rule. For more information about this rule, see<a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ContributorInsights.html\"> Using Constributor Insights to analyze high-cardinality data</a> in the <i>Amazon CloudWatch User Guide</i>.</p>"
     },
     "InsightRuleAggregationStatistic": {
       "type": "string"
@@ -2564,7 +2623,7 @@
         },
         "TreatMissingData": {
           "shape": "TreatMissingData",
-          "documentation": "<p>Sets how this alarm is to handle missing data points. If this parameter is omitted, the default behavior of <code>missing</code> is used.</p>"
+          "documentation": "<p>Sets how this alarm is to handle missing data points. The valid values are <code>breaching</code>, <code>notBreaching</code>, <code>ignore</code>, and <code>missing</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarms-and-missing-data\">Configuring how CloudWatch alarms treat missing data</a>.</p> <p>If this parameter is omitted, the default behavior of <code>missing</code> is used.</p>"
         },
         "EvaluateLowSampleCountPercentile": {
           "shape": "EvaluateLowSampleCountPercentile",
@@ -2644,7 +2703,7 @@
         },
         "Expression": {
           "shape": "MetricExpression",
-          "documentation": "<p>The math expression to be performed on the returned data, if this object is performing a math expression. This expression can use the <code>Id</code> of the other metrics to refer to those metrics, and can also use the <code>Id</code> of other expressions to use the result of those expressions. For more information about metric math expressions, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/using-metric-math.html#metric-math-syntax\">Metric Math Syntax and Functions</a> in the <i>Amazon CloudWatch User Guide</i>.</p> <p>Within each MetricDataQuery object, you must specify either <code>Expression</code> or <code>MetricStat</code> but not both.</p>"
+          "documentation": "<p>This field can contain either a Metrics Insights query, or a metric math expression to be performed on the returned data. For more information about Metrics Insights queries, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch-metrics-insights-querylanguage\">Metrics Insights query components and syntax</a> in the <i>Amazon CloudWatch User Guide</i>.</p> <p>A math expression can use the <code>Id</code> of the other metrics or queries to refer to those metrics, and can also use the <code>Id</code> of other expressions to use the result of those expressions. For more information about metric math expressions, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/using-metric-math.html#metric-math-syntax\">Metric Math Syntax and Functions</a> in the <i>Amazon CloudWatch User Guide</i>.</p> <p>Within each MetricDataQuery object, you must specify either <code>Expression</code> or <code>MetricStat</code> but not both.</p>"
         },
         "Label": {
           "shape": "MetricLabel",
@@ -2663,7 +2722,7 @@
           "documentation": "<p>The ID of the account where the metrics are located, if this is a cross-account alarm.</p> <p>Use this field only for <code>PutMetricAlarm</code> operations. It is not used in <code>GetMetricData</code> operations.</p>"
         }
       },
-      "documentation": "<p>This structure is used in both <code>GetMetricData</code> and <code>PutMetricAlarm</code>. The supported use of this structure is different for those two operations.</p> <p>When used in <code>GetMetricData</code>, it indicates the metric data to return, and whether this call is just retrieving a batch set of data for one metric, or is performing a math expression on metric data. A single <code>GetMetricData</code> call can include up to 500 <code>MetricDataQuery</code> structures.</p> <p>When used in <code>PutMetricAlarm</code>, it enables you to create an alarm based on a metric math expression. Each <code>MetricDataQuery</code> in the array specifies either a metric to retrieve, or a math expression to be performed on retrieved metrics. A single <code>PutMetricAlarm</code> call can include up to 20 <code>MetricDataQuery</code> structures in the array. The 20 structures can include as many as 10 structures that contain a <code>MetricStat</code> parameter to retrieve a metric, and as many as 10 structures that contain the <code>Expression</code> parameter to perform a math expression. Of those <code>Expression</code> structures, one must have <code>True</code> as the value for <code>ReturnData</code>. The result of this expression is the value the alarm watches.</p> <p>Any expression used in a <code>PutMetricAlarm</code> operation must return a single time series. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/using-metric-math.html#metric-math-syntax\">Metric Math Syntax and Functions</a> in the <i>Amazon CloudWatch User Guide</i>.</p> <p>Some of the parameters of this structure also have different uses whether you are using this structure in a <code>GetMetricData</code> operation or a <code>PutMetricAlarm</code> operation. These differences are explained in the following parameter list.</p>"
+      "documentation": "<p>This structure is used in both <code>GetMetricData</code> and <code>PutMetricAlarm</code>. The supported use of this structure is different for those two operations.</p> <p>When used in <code>GetMetricData</code>, it indicates the metric data to return, and whether this call is just retrieving a batch set of data for one metric, or is performing a Metrics Insights query or a math expression. A single <code>GetMetricData</code> call can include up to 500 <code>MetricDataQuery</code> structures.</p> <p>When used in <code>PutMetricAlarm</code>, it enables you to create an alarm based on a metric math expression. Each <code>MetricDataQuery</code> in the array specifies either a metric to retrieve, or a math expression to be performed on retrieved metrics. A single <code>PutMetricAlarm</code> call can include up to 20 <code>MetricDataQuery</code> structures in the array. The 20 structures can include as many as 10 structures that contain a <code>MetricStat</code> parameter to retrieve a metric, and as many as 10 structures that contain the <code>Expression</code> parameter to perform a math expression. Of those <code>Expression</code> structures, one must have <code>True</code> as the value for <code>ReturnData</code>. The result of this expression is the value the alarm watches.</p> <p>Any expression used in a <code>PutMetricAlarm</code> operation must return a single time series. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/using-metric-math.html#metric-math-syntax\">Metric Math Syntax and Functions</a> in the <i>Amazon CloudWatch User Guide</i>.</p> <p>Some of the parameters of this structure also have different uses whether you are using this structure in a <code>GetMetricData</code> operation or a <code>PutMetricAlarm</code> operation. These differences are explained in the following parameter list.</p>"
     },
     "MetricDataResult": {
       "type": "structure",
@@ -2764,6 +2823,16 @@
     },
     "MetricLabel": {
       "type": "string"
+    },
+    "MetricMathAnomalyDetector": {
+      "type": "structure",
+      "members": {
+        "MetricDataQueries": {
+          "shape": "MetricDataQueries",
+          "documentation": "<p>An array of metric data query structures that enables you to create an anomaly detector based on the result of a metric math expression. Each item in <code>MetricDataQueries</code> gets a metric or performs a math expression. One item in <code>MetricDataQueries</code> is the expression that provides the time series that the anomaly detector uses as input. Designate the expression by setting <code>ReturnData</code> to <code>True</code> for this object in the array. For all other expressions and metrics, set <code>ReturnData</code> to <code>False</code>. The designated expression must return a single time series.</p>"
+        }
+      },
+      "documentation": "<p>Indicates the CloudWatch math expression that provides the time series the anomaly detector uses as input. The designated math expression must return a single time series.</p>"
     },
     "MetricName": {
       "type": "string",
@@ -2876,6 +2945,63 @@
     "MetricStreamState": {
       "type": "string"
     },
+    "MetricStreamStatistic": {
+      "type": "string"
+    },
+    "MetricStreamStatisticsAdditionalStatistics": {
+      "type": "list",
+      "member": {
+        "shape": "MetricStreamStatistic"
+      }
+    },
+    "MetricStreamStatisticsConfiguration": {
+      "type": "structure",
+      "required": [
+        "IncludeMetrics",
+        "AdditionalStatistics"
+      ],
+      "members": {
+        "IncludeMetrics": {
+          "shape": "MetricStreamStatisticsIncludeMetrics",
+          "documentation": "<p>An array of metric name and namespace pairs that stream the additional statistics listed in the value of the <code>AdditionalStatistics</code> parameter. There can be as many as 100 pairs in the array.</p> <p>All metrics that match the combination of metric name and namespace will be streamed with the additional statistics, no matter their dimensions.</p>"
+        },
+        "AdditionalStatistics": {
+          "shape": "MetricStreamStatisticsAdditionalStatistics",
+          "documentation": "<p>The list of additional statistics that are to be streamed for the metrics listed in the <code>IncludeMetrics</code> array in this structure. This list can include as many as 20 statistics.</p> <p>If the <code>OutputFormat</code> for the stream is <code>opentelemetry0.7</code>, the only valid values are <code>p<i>??</i> </code> percentile statistics such as <code>p90</code>, <code>p99</code> and so on.</p> <p>If the <code>OutputFormat</code> for the stream is <code>json</code>, the valid values include the abbreviations for all of the statistics listed in <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html.html\"> CloudWatch statistics definitions</a>. For example, this includes <code>tm98, </code> <code>wm90</code>, <code>PR(:300)</code>, and so on.</p>"
+        }
+      },
+      "documentation": "<p>By default, a metric stream always sends the <code>MAX</code>, <code>MIN</code>, <code>SUM</code>, and <code>SAMPLECOUNT</code> statistics for each metric that is streamed. This structure contains information for one metric that includes additional statistics in the stream. For more information about statistics, see CloudWatch, listed in <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html.html\"> CloudWatch statistics definitions</a>.</p>"
+    },
+    "MetricStreamStatisticsConfigurations": {
+      "type": "list",
+      "member": {
+        "shape": "MetricStreamStatisticsConfiguration"
+      }
+    },
+    "MetricStreamStatisticsIncludeMetrics": {
+      "type": "list",
+      "member": {
+        "shape": "MetricStreamStatisticsMetric"
+      }
+    },
+    "MetricStreamStatisticsMetric": {
+      "type": "structure",
+      "required": [
+        "Namespace",
+        "MetricName"
+      ],
+      "members": {
+        "Namespace": {
+          "shape": "Namespace",
+          "documentation": "<p>The namespace of the metric.</p>"
+        },
+        "MetricName": {
+          "shape": "MetricName",
+          "documentation": "<p>The name of the metric.</p>"
+        }
+      },
+      "documentation": "<p>This object contains the information for one metric that is to be streamed with additional statistics.</p>"
+    },
     "MetricWidget": {
       "type": "string"
     },
@@ -2928,31 +3054,42 @@
     },
     "PutAnomalyDetectorInput": {
       "type": "structure",
-      "required": [
-        "Namespace",
-        "MetricName",
-        "Stat"
-      ],
       "members": {
         "Namespace": {
           "shape": "Namespace",
-          "documentation": "<p>The namespace of the metric to create the anomaly detection model for.</p>"
+          "documentation": "<p>The namespace of the metric to create the anomaly detection model for.</p>",
+          "deprecated": true,
+          "deprecatedMessage": "Use SingleMetricAnomalyDetector."
         },
         "MetricName": {
           "shape": "MetricName",
-          "documentation": "<p>The name of the metric to create the anomaly detection model for.</p>"
+          "documentation": "<p>The name of the metric to create the anomaly detection model for.</p>",
+          "deprecated": true,
+          "deprecatedMessage": "Use SingleMetricAnomalyDetector."
         },
         "Dimensions": {
           "shape": "Dimensions",
-          "documentation": "<p>The metric dimensions to create the anomaly detection model for.</p>"
+          "documentation": "<p>The metric dimensions to create the anomaly detection model for.</p>",
+          "deprecated": true,
+          "deprecatedMessage": "Use SingleMetricAnomalyDetector."
         },
         "Stat": {
           "shape": "AnomalyDetectorMetricStat",
-          "documentation": "<p>The statistic to use for the metric and the anomaly detection model.</p>"
+          "documentation": "<p>The statistic to use for the metric and the anomaly detection model.</p>",
+          "deprecated": true,
+          "deprecatedMessage": "Use SingleMetricAnomalyDetector."
         },
         "Configuration": {
           "shape": "AnomalyDetectorConfiguration",
           "documentation": "<p>The configuration specifies details about how the anomaly detection model is to be trained, including time ranges to exclude when training and updating the model. You can specify as many as 10 time ranges.</p> <p>The configuration can also include the time zone to use for the metric.</p>"
+        },
+        "SingleMetricAnomalyDetector": {
+          "shape": "SingleMetricAnomalyDetector",
+          "documentation": "<p>A single metric anomaly detector to be created.</p> <p>When using <code>SingleMetricAnomalyDetector</code>, you cannot include the following parameters in the same operation:</p> <ul> <li> <p> <code>Dimensions</code> </p> </li> <li> <p> <code>MetricName</code> </p> </li> <li> <p> <code>Namespace</code> </p> </li> <li> <p> <code>Stat</code> </p> </li> <li> <p>the <code>MetricMatchAnomalyDetector</code> parameters of <code>PutAnomalyDetectorInput</code> </p> </li> </ul> <p>Instead, specify the single metric anomaly detector attributes as part of the property <code>SingleMetricAnomalyDetector</code>.</p>"
+        },
+        "MetricMathAnomalyDetector": {
+          "shape": "MetricMathAnomalyDetector",
+          "documentation": "<p>The metric math anomaly detector to be created.</p> <p>When using <code>MetricMathAnomalyDetector</code>, you cannot include the following parameters in the same operation:</p> <ul> <li> <p> <code>Dimensions</code> </p> </li> <li> <p> <code>MetricName</code> </p> </li> <li> <p> <code>Namespace</code> </p> </li> <li> <p> <code>Stat</code> </p> </li> <li> <p>the <code>SingleMetricAnomalyDetector</code> parameters of <code>PutAnomalyDetectorInput</code> </p> </li> </ul> <p>Instead, specify the metric math anomaly detector attributes as part of the property <code>MetricMathAnomalyDetector</code>.</p>"
         }
       }
     },
@@ -3134,7 +3271,7 @@
         },
         "TreatMissingData": {
           "shape": "TreatMissingData",
-          "documentation": "<p> Sets how this alarm is to handle missing data points. If <code>TreatMissingData</code> is omitted, the default behavior of <code>missing</code> is used. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarms-and-missing-data\">Configuring How CloudWatch Alarms Treats Missing Data</a>.</p> <p>Valid Values: <code>breaching | notBreaching | ignore | missing</code> </p>"
+          "documentation": "<p> Sets how this alarm is to handle missing data points. If <code>TreatMissingData</code> is omitted, the default behavior of <code>missing</code> is used. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarms-and-missing-data\">Configuring How CloudWatch Alarms Treats Missing Data</a>.</p> <p>Valid Values: <code>breaching | notBreaching | ignore | missing</code> </p> <note> <p>Alarms that evaluate metrics in the <code>AWS/DynamoDB</code> namespace always <code>ignore</code> missing data even if you choose a different option for <code>TreatMissingData</code>. When an <code>AWS/DynamoDB</code> metric has missing data, alarms that evaluate that metric remain in their current state.</p> </note>"
         },
         "EvaluateLowSampleCountPercentile": {
           "shape": "EvaluateLowSampleCountPercentile",
@@ -3207,6 +3344,10 @@
         "Tags": {
           "shape": "TagList",
           "documentation": "<p>A list of key-value pairs to associate with the metric stream. You can associate as many as 50 tags with a metric stream.</p> <p>Tags can help you organize and categorize your resources. You can also use them to scope user permissions by granting a user permission to access or change only resources with certain tag values.</p> <p>You can use this parameter only when you are creating a new metric stream. If you are using this operation to update an existing metric stream, any tags you specify in this parameter are ignored. To change the tags of an existing metric stream, use <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_TagResource.html\">TagResource</a> or <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_UntagResource.html\">UntagResource</a>.</p>"
+        },
+        "StatisticsConfigurations": {
+          "shape": "MetricStreamStatisticsConfigurations",
+          "documentation": "<p>By default, a metric stream always sends the <code>MAX</code>, <code>MIN</code>, <code>SUM</code>, and <code>SAMPLECOUNT</code> statistics for each metric that is streamed. You can use this parameter to have the metric stream also send additional statistics in the stream. This array can have up to 100 members.</p> <p>For each entry in this array, you specify one or more metrics and the list of additional statistics to stream for those metrics. The additional statistics that you can stream depend on the stream's <code>OutputFormat</code>. If the <code>OutputFormat</code> is <code>json</code>, you can stream any additional statistic that is supported by CloudWatch, listed in <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html.html\"> CloudWatch statistics definitions</a>. If the <code>OutputFormat</code> is <code>opentelemetry0.7</code>, you can stream percentile statistics such as p95, p99.9 and so on.</p>"
         }
       }
     },
@@ -3294,6 +3435,28 @@
           "documentation": "<p>The reason that this alarm is set to this specific state, in JSON format.</p> <p>For SNS or EC2 alarm actions, this is just informational. But for EC2 Auto Scaling or application Auto Scaling alarm actions, the Auto Scaling policy uses the information in this field to take the correct action.</p>"
         }
       }
+    },
+    "SingleMetricAnomalyDetector": {
+      "type": "structure",
+      "members": {
+        "Namespace": {
+          "shape": "Namespace",
+          "documentation": "<p>The namespace of the metric to create the anomaly detection model for.</p>"
+        },
+        "MetricName": {
+          "shape": "MetricName",
+          "documentation": "<p>The name of the metric to create the anomaly detection model for.</p>"
+        },
+        "Dimensions": {
+          "shape": "Dimensions",
+          "documentation": "<p>The metric dimensions to create the anomaly detection model for.</p>"
+        },
+        "Stat": {
+          "shape": "AnomalyDetectorMetricStat",
+          "documentation": "<p>The statistic to use for the metric and anomaly detection model.</p>"
+        }
+      },
+      "documentation": "<p>Designates the CloudWatch metric and statistic that provides the time series the anomaly detector uses as input.</p>"
     },
     "Size": {
       "type": "long"

@@ -36,6 +36,22 @@ declare class DataSync extends Service {
    */
   createLocationEfs(callback?: (err: AWSError, data: DataSync.Types.CreateLocationEfsResponse) => void): Request<DataSync.Types.CreateLocationEfsResponse, AWSError>;
   /**
+   * Creates an endpoint for an Amazon FSx for Lustre file system.
+   */
+  createLocationFsxLustre(params: DataSync.Types.CreateLocationFsxLustreRequest, callback?: (err: AWSError, data: DataSync.Types.CreateLocationFsxLustreResponse) => void): Request<DataSync.Types.CreateLocationFsxLustreResponse, AWSError>;
+  /**
+   * Creates an endpoint for an Amazon FSx for Lustre file system.
+   */
+  createLocationFsxLustre(callback?: (err: AWSError, data: DataSync.Types.CreateLocationFsxLustreResponse) => void): Request<DataSync.Types.CreateLocationFsxLustreResponse, AWSError>;
+  /**
+   * Creates an endpoint for an Amazon FSx for OpenZFS file system.
+   */
+  createLocationFsxOpenZfs(params: DataSync.Types.CreateLocationFsxOpenZfsRequest, callback?: (err: AWSError, data: DataSync.Types.CreateLocationFsxOpenZfsResponse) => void): Request<DataSync.Types.CreateLocationFsxOpenZfsResponse, AWSError>;
+  /**
+   * Creates an endpoint for an Amazon FSx for OpenZFS file system.
+   */
+  createLocationFsxOpenZfs(callback?: (err: AWSError, data: DataSync.Types.CreateLocationFsxOpenZfsResponse) => void): Request<DataSync.Types.CreateLocationFsxOpenZfsResponse, AWSError>;
+  /**
    * Creates an endpoint for an Amazon FSx for Windows File Server file system.
    */
   createLocationFsxWindows(params: DataSync.Types.CreateLocationFsxWindowsRequest, callback?: (err: AWSError, data: DataSync.Types.CreateLocationFsxWindowsResponse) => void): Request<DataSync.Types.CreateLocationFsxWindowsResponse, AWSError>;
@@ -43,6 +59,14 @@ declare class DataSync extends Service {
    * Creates an endpoint for an Amazon FSx for Windows File Server file system.
    */
   createLocationFsxWindows(callback?: (err: AWSError, data: DataSync.Types.CreateLocationFsxWindowsResponse) => void): Request<DataSync.Types.CreateLocationFsxWindowsResponse, AWSError>;
+  /**
+   * Creates an endpoint for a Hadoop Distributed File System (HDFS). 
+   */
+  createLocationHdfs(params: DataSync.Types.CreateLocationHdfsRequest, callback?: (err: AWSError, data: DataSync.Types.CreateLocationHdfsResponse) => void): Request<DataSync.Types.CreateLocationHdfsResponse, AWSError>;
+  /**
+   * Creates an endpoint for a Hadoop Distributed File System (HDFS). 
+   */
+  createLocationHdfs(callback?: (err: AWSError, data: DataSync.Types.CreateLocationHdfsResponse) => void): Request<DataSync.Types.CreateLocationHdfsResponse, AWSError>;
   /**
    * Defines a file system on a Network File System (NFS) server that can be read from or written to.
    */
@@ -124,13 +148,37 @@ declare class DataSync extends Service {
    */
   describeLocationEfs(callback?: (err: AWSError, data: DataSync.Types.DescribeLocationEfsResponse) => void): Request<DataSync.Types.DescribeLocationEfsResponse, AWSError>;
   /**
-   * Returns metadata, such as the path information about an Amazon FSx for Windows File Server location.
+   * Returns metadata about an Amazon FSx for Lustre location, such as information about its path.
+   */
+  describeLocationFsxLustre(params: DataSync.Types.DescribeLocationFsxLustreRequest, callback?: (err: AWSError, data: DataSync.Types.DescribeLocationFsxLustreResponse) => void): Request<DataSync.Types.DescribeLocationFsxLustreResponse, AWSError>;
+  /**
+   * Returns metadata about an Amazon FSx for Lustre location, such as information about its path.
+   */
+  describeLocationFsxLustre(callback?: (err: AWSError, data: DataSync.Types.DescribeLocationFsxLustreResponse) => void): Request<DataSync.Types.DescribeLocationFsxLustreResponse, AWSError>;
+  /**
+   * Returns metadata about an Amazon FSx for OpenZFS location, such as information about its path.
+   */
+  describeLocationFsxOpenZfs(params: DataSync.Types.DescribeLocationFsxOpenZfsRequest, callback?: (err: AWSError, data: DataSync.Types.DescribeLocationFsxOpenZfsResponse) => void): Request<DataSync.Types.DescribeLocationFsxOpenZfsResponse, AWSError>;
+  /**
+   * Returns metadata about an Amazon FSx for OpenZFS location, such as information about its path.
+   */
+  describeLocationFsxOpenZfs(callback?: (err: AWSError, data: DataSync.Types.DescribeLocationFsxOpenZfsResponse) => void): Request<DataSync.Types.DescribeLocationFsxOpenZfsResponse, AWSError>;
+  /**
+   * Returns metadata about an Amazon FSx for Windows File Server location, such as information about its path.
    */
   describeLocationFsxWindows(params: DataSync.Types.DescribeLocationFsxWindowsRequest, callback?: (err: AWSError, data: DataSync.Types.DescribeLocationFsxWindowsResponse) => void): Request<DataSync.Types.DescribeLocationFsxWindowsResponse, AWSError>;
   /**
-   * Returns metadata, such as the path information about an Amazon FSx for Windows File Server location.
+   * Returns metadata about an Amazon FSx for Windows File Server location, such as information about its path.
    */
   describeLocationFsxWindows(callback?: (err: AWSError, data: DataSync.Types.DescribeLocationFsxWindowsResponse) => void): Request<DataSync.Types.DescribeLocationFsxWindowsResponse, AWSError>;
+  /**
+   * Returns metadata, such as the authentication information about the Hadoop Distributed File System (HDFS) location. 
+   */
+  describeLocationHdfs(params: DataSync.Types.DescribeLocationHdfsRequest, callback?: (err: AWSError, data: DataSync.Types.DescribeLocationHdfsResponse) => void): Request<DataSync.Types.DescribeLocationHdfsResponse, AWSError>;
+  /**
+   * Returns metadata, such as the authentication information about the Hadoop Distributed File System (HDFS) location. 
+   */
+  describeLocationHdfs(callback?: (err: AWSError, data: DataSync.Types.DescribeLocationHdfsResponse) => void): Request<DataSync.Types.DescribeLocationHdfsResponse, AWSError>;
   /**
    * Returns metadata, such as the path information, about an NFS location.
    */
@@ -251,6 +299,14 @@ declare class DataSync extends Service {
    * Updates the name of an agent.
    */
   updateAgent(callback?: (err: AWSError, data: DataSync.Types.UpdateAgentResponse) => void): Request<DataSync.Types.UpdateAgentResponse, AWSError>;
+  /**
+   * Updates some parameters of a previously created location for a Hadoop Distributed File System cluster.
+   */
+  updateLocationHdfs(params: DataSync.Types.UpdateLocationHdfsRequest, callback?: (err: AWSError, data: DataSync.Types.UpdateLocationHdfsResponse) => void): Request<DataSync.Types.UpdateLocationHdfsResponse, AWSError>;
+  /**
+   * Updates some parameters of a previously created location for a Hadoop Distributed File System cluster.
+   */
+  updateLocationHdfs(callback?: (err: AWSError, data: DataSync.Types.UpdateLocationHdfsResponse) => void): Request<DataSync.Types.UpdateLocationHdfsResponse, AWSError>;
   /**
    * Updates some of the parameters of a previously created location for Network File System (NFS) access. For information about creating an NFS location, see Creating a location for NFS.
    */
@@ -378,9 +434,61 @@ declare namespace DataSync {
      */
     LocationArn?: LocationArn;
   }
+  export interface CreateLocationFsxLustreRequest {
+    /**
+     * The Amazon Resource Name (ARN) for the FSx for Lustre file system.
+     */
+    FsxFilesystemArn: FsxFilesystemArn;
+    /**
+     * The Amazon Resource Names (ARNs) of the security groups that are used to configure the FSx for Lustre file system.
+     */
+    SecurityGroupArns: Ec2SecurityGroupArnList;
+    /**
+     * A subdirectory in the location's path. This subdirectory in the FSx for Lustre file system is used to read data from the FSx for Lustre source location or write data to the FSx for Lustre destination.
+     */
+    Subdirectory?: FsxLustreSubdirectory;
+    /**
+     * The key-value pair that represents a tag that you want to add to the resource. The value can be an empty string. This value helps you manage, filter, and search for your resources. We recommend that you create a name tag for your location.
+     */
+    Tags?: InputTagList;
+  }
+  export interface CreateLocationFsxLustreResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the FSx for Lustre file system location that's created. 
+     */
+    LocationArn?: LocationArn;
+  }
+  export interface CreateLocationFsxOpenZfsRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the FSx for OpenZFS file system.
+     */
+    FsxFilesystemArn: FsxFilesystemArn;
+    /**
+     * The type of protocol that DataSync uses to access your file system.
+     */
+    Protocol: FsxProtocol;
+    /**
+     * The ARNs of the security groups that are used to configure the FSx for OpenZFS file system.
+     */
+    SecurityGroupArns: Ec2SecurityGroupArnList;
+    /**
+     * A subdirectory in the location's path that must begin with /fsx. DataSync uses this subdirectory to read or write data (depending on whether the file system is a source or destination location).
+     */
+    Subdirectory?: FsxOpenZfsSubdirectory;
+    /**
+     * The key-value pair that represents a tag that you want to add to the resource. The value can be an empty string. This value helps you manage, filter, and search for your resources. We recommend that you create a name tag for your location.
+     */
+    Tags?: InputTagList;
+  }
+  export interface CreateLocationFsxOpenZfsResponse {
+    /**
+     * The ARN of the FSx for OpenZFS file system location that you created.
+     */
+    LocationArn?: LocationArn;
+  }
   export interface CreateLocationFsxWindowsRequest {
     /**
-     * A subdirectory in the location’s path. This subdirectory in the Amazon FSx for Windows File Server file system is used to read data from the Amazon FSx for Windows File Server source location or write data to the FSx for Windows File Server destination.
+     * A subdirectory in the location's path. This subdirectory in the Amazon FSx for Windows File Server file system is used to read data from the Amazon FSx for Windows File Server source location or write data to the FSx for Windows File Server destination.
      */
     Subdirectory?: FsxWindowsSubdirectory;
     /**
@@ -388,7 +496,7 @@ declare namespace DataSync {
      */
     FsxFilesystemArn: FsxFilesystemArn;
     /**
-     * The Amazon Resource Names (ARNs) of the security groups that are to use to configure the FSx for Windows File Server file system.
+     * The ARNs of the security groups that are used to configure the FSx for Windows File Server file system.
      */
     SecurityGroupArns: Ec2SecurityGroupArnList;
     /**
@@ -410,7 +518,67 @@ declare namespace DataSync {
   }
   export interface CreateLocationFsxWindowsResponse {
     /**
-     * The Amazon Resource Name (ARN) of the FSx for Windows File Server file system location that is created.
+     * The Amazon Resource Name (ARN) of the FSx for Windows File Server file system location you created.
+     */
+    LocationArn?: LocationArn;
+  }
+  export interface CreateLocationHdfsRequest {
+    /**
+     * A subdirectory in the HDFS cluster. This subdirectory is used to read data from or write data to the HDFS cluster. If the subdirectory isn't specified, it will default to /.
+     */
+    Subdirectory?: HdfsSubdirectory;
+    /**
+     * The NameNode that manages the HDFS namespace. The NameNode performs operations such as opening, closing, and renaming files and directories. The NameNode contains the information to map blocks of data to the DataNodes. You can use only one NameNode.
+     */
+    NameNodes: HdfsNameNodeList;
+    /**
+     * The size of data blocks to write into the HDFS cluster. The block size must be a multiple of 512 bytes. The default block size is 128 mebibytes (MiB).
+     */
+    BlockSize?: HdfsBlockSize;
+    /**
+     * The number of DataNodes to replicate the data to when writing to the HDFS cluster. By default, data is replicated to three DataNodes.
+     */
+    ReplicationFactor?: HdfsReplicationFactor;
+    /**
+     * The URI of the HDFS cluster's Key Management Server (KMS). 
+     */
+    KmsKeyProviderUri?: KmsKeyProviderUri;
+    /**
+     * The Quality of Protection (QOP) configuration specifies the Remote Procedure Call (RPC) and data transfer protection settings configured on the Hadoop Distributed File System (HDFS) cluster. If QopConfiguration isn't specified, RpcProtection and DataTransferProtection default to PRIVACY. If you set RpcProtection or DataTransferProtection, the other parameter assumes the same value. 
+     */
+    QopConfiguration?: QopConfiguration;
+    /**
+     * The type of authentication used to determine the identity of the user. 
+     */
+    AuthenticationType: HdfsAuthenticationType;
+    /**
+     * The user name used to identify the client on the host operating system.   If SIMPLE is specified for AuthenticationType, this parameter is required.  
+     */
+    SimpleUser?: HdfsUser;
+    /**
+     * The Kerberos principal with access to the files and folders on the HDFS cluster.   If KERBEROS is specified for AuthenticationType, this parameter is required. 
+     */
+    KerberosPrincipal?: KerberosPrincipal;
+    /**
+     * The Kerberos key table (keytab) that contains mappings between the defined Kerberos principal and the encrypted keys. You can load the keytab from a file by providing the file's address. If you're using the CLI, it performs base64 encoding for you. Otherwise, provide the base64-encoded text.   If KERBEROS is specified for AuthenticationType, this parameter is required.  
+     */
+    KerberosKeytab?: KerberosKeytabFile;
+    /**
+     * The krb5.conf file that contains the Kerberos configuration information. You can load the krb5.conf file by providing the file's address. If you're using the CLI, it performs the base64 encoding for you. Otherwise, provide the base64-encoded text.   If KERBEROS is specified for AuthenticationType, this parameter is required. 
+     */
+    KerberosKrb5Conf?: KerberosKrb5ConfFile;
+    /**
+     * The Amazon Resource Names (ARNs) of the agents that are used to connect to the HDFS cluster.
+     */
+    AgentArns: AgentArnList;
+    /**
+     * The key-value pair that represents the tag that you want to add to the location. The value can be an empty string. We recommend using tags to name your resources. 
+     */
+    Tags?: InputTagList;
+  }
+  export interface CreateLocationHdfsResponse {
+    /**
+     * The ARN of the source HDFS cluster location that's created. 
      */
     LocationArn?: LocationArn;
   }
@@ -420,7 +588,7 @@ declare namespace DataSync {
      */
     Subdirectory: NfsSubdirectory;
     /**
-     * The name of the NFS server. This value is the IP address or Domain Name Service (DNS) name of the NFS server. An agent that is installed on-premises uses this host name to mount the NFS server in a network.  If you are copying data to or from your Snowcone device, see NFS Server on Snowcone for more information.  This name must either be DNS-compliant or must be an IP version 4 (IPv4) address. 
+     * The name of the NFS server. This value is the IP address or Domain Name Service (DNS) name of the NFS server. An agent that is installed on-premises uses this hostname to mount the NFS server in a network.  If you are copying data to or from your Snowcone device, see NFS Server on Snowcone for more information.  This name must either be DNS-compliant or must be an IP version 4 (IPv4) address. 
      */
     ServerHostname: ServerHostname;
     /**
@@ -444,7 +612,7 @@ declare namespace DataSync {
   }
   export interface CreateLocationObjectStorageRequest {
     /**
-     * The name of the self-managed object storage server. This value is the IP address or Domain Name Service (DNS) name of the object storage server. An agent uses this host name to mount the object storage server in a network. 
+     * The name of the self-managed object storage server. This value is the IP address or Domain Name Service (DNS) name of the object storage server. An agent uses this hostname to mount the object storage server in a network. 
      */
     ServerHostname: ServerHostname;
     /**
@@ -501,7 +669,7 @@ declare namespace DataSync {
     S3StorageClass?: S3StorageClass;
     S3Config: S3Config;
     /**
-     * If you are using DataSync on an Amazon Web Services Outpost, specify the Amazon Resource Names (ARNs) of the DataSync agents deployed on your Outpost. For more information about launching a DataSync agent on an Amazon Web Services Outpost, see Deploy your DataSync agent on Outposts.
+     * If you're using DataSync on an Amazon Web Services Outpost, specify the Amazon Resource Names (ARNs) of the DataSync agents deployed on your Outpost. For more information about launching a DataSync agent on an Amazon Web Services Outpost, see Deploy your DataSync agent on Outposts.
      */
     AgentArns?: AgentArnList;
     /**
@@ -589,7 +757,7 @@ declare namespace DataSync {
      */
     Tags?: InputTagList;
     /**
-     * A list of filter rules that determines which files to include when running a task. The pattern should contain a single filter string that consists of the patterns to include. The patterns are delimited by "|" (that is, a pipe). For example: "/folder1|/folder2"
+     * A list of filter rules that determines which files to include when running a task. The pattern contains a single filter string that consists of the patterns to include. The patterns are delimited by "|" (that is, a pipe), for example, "/folder1|/folder2".
      */
     Includes?: FilterList;
   }
@@ -680,6 +848,58 @@ declare namespace DataSync {
      */
     CreationTime?: Time;
   }
+  export interface DescribeLocationFsxLustreRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the FSx for Lustre location to describe. 
+     */
+    LocationArn: LocationArn;
+  }
+  export interface DescribeLocationFsxLustreResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the FSx for Lustre location that was described.
+     */
+    LocationArn?: LocationArn;
+    /**
+     * The URI of the FSx for Lustre location that was described.
+     */
+    LocationUri?: LocationUri;
+    /**
+     * The Amazon Resource Names (ARNs) of the security groups that are configured for the FSx for Lustre file system.
+     */
+    SecurityGroupArns?: Ec2SecurityGroupArnList;
+    /**
+     * The time that the FSx for Lustre location was created.
+     */
+    CreationTime?: Time;
+  }
+  export interface DescribeLocationFsxOpenZfsRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the FSx for OpenZFS location to describe.
+     */
+    LocationArn: LocationArn;
+  }
+  export interface DescribeLocationFsxOpenZfsResponse {
+    /**
+     * The ARN of the FSx for OpenZFS location that was described.
+     */
+    LocationArn?: LocationArn;
+    /**
+     * The uniform resource identifier (URI) of the FSx for OpenZFS location that was described. Example: fsxz://us-west-2.fs-1234567890abcdef02/fsx/folderA/folder 
+     */
+    LocationUri?: LocationUri;
+    /**
+     * The ARNs of the security groups that are configured for the FSx for OpenZFS file system.
+     */
+    SecurityGroupArns?: Ec2SecurityGroupArnList;
+    /**
+     * The type of protocol that DataSync uses to access your file system.
+     */
+    Protocol?: FsxProtocol;
+    /**
+     * The time that the FSx for OpenZFS location was created.
+     */
+    CreationTime?: Time;
+  }
   export interface DescribeLocationFsxWindowsRequest {
     /**
      * The Amazon Resource Name (ARN) of the FSx for Windows File Server location to describe.
@@ -711,6 +931,62 @@ declare namespace DataSync {
      * The name of the Windows domain that the FSx for Windows File Server belongs to.
      */
     Domain?: SmbDomain;
+  }
+  export interface DescribeLocationHdfsRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the HDFS cluster location to describe.
+     */
+    LocationArn: LocationArn;
+  }
+  export interface DescribeLocationHdfsResponse {
+    /**
+     * The ARN of the HDFS cluster location.
+     */
+    LocationArn?: LocationArn;
+    /**
+     * The URI of the HDFS cluster location.
+     */
+    LocationUri?: LocationUri;
+    /**
+     * The NameNode that manage the HDFS namespace. 
+     */
+    NameNodes?: HdfsNameNodeList;
+    /**
+     * The size of the data blocks to write into the HDFS cluster. 
+     */
+    BlockSize?: HdfsBlockSize;
+    /**
+     * The number of DataNodes to replicate the data to when writing to the HDFS cluster. 
+     */
+    ReplicationFactor?: HdfsReplicationFactor;
+    /**
+     *  The URI of the HDFS cluster's Key Management Server (KMS). 
+     */
+    KmsKeyProviderUri?: KmsKeyProviderUri;
+    /**
+     * The Quality of Protection (QOP) configuration specifies the Remote Procedure Call (RPC) and data transfer protection settings configured on the Hadoop Distributed File System (HDFS) cluster. 
+     */
+    QopConfiguration?: QopConfiguration;
+    /**
+     * The type of authentication used to determine the identity of the user. 
+     */
+    AuthenticationType?: HdfsAuthenticationType;
+    /**
+     * The user name used to identify the client on the host operating system. This parameter is used if the AuthenticationType is defined as SIMPLE.
+     */
+    SimpleUser?: HdfsUser;
+    /**
+     * The Kerberos principal with access to the files and folders on the HDFS cluster. This parameter is used if the AuthenticationType is defined as KERBEROS.
+     */
+    KerberosPrincipal?: KerberosPrincipal;
+    /**
+     * The ARNs of the agents that are used to connect to the HDFS cluster. 
+     */
+    AgentArns?: AgentArnList;
+    /**
+     * The time that the HDFS location was created.
+     */
+    CreationTime?: Time;
   }
   export interface DescribeLocationNfsRequest {
     /**
@@ -927,11 +1203,11 @@ declare namespace DataSync {
      */
     CloudWatchLogGroupArn?: LogGroupArn;
     /**
-     * The Amazon Resource Name (ARN) of the source ENIs (Elastic Network Interface) that was created for your subnet.
+     * The Amazon Resource Names (ARNs) of the source elastic network interfaces (ENIs) that were created for your subnet.
      */
     SourceNetworkInterfaceArns?: SourceNetworkInterfaceArns;
     /**
-     * The Amazon Resource Name (ARN) of the destination ENIs (Elastic Network Interface) that was created for your subnet.
+     * The Amazon Resource Names (ARNs) of the destination elastic network interfaces (ENIs) that were created for your subnet.
      */
     DestinationNetworkInterfaceArns?: DestinationNetworkInterfaceArns;
     /**
@@ -939,7 +1215,7 @@ declare namespace DataSync {
      */
     Options?: Options;
     /**
-     * A list of filter rules that determines which files to exclude from a task. The list should contain a single filter string that consists of the patterns to exclude. The patterns are delimited by "|" (that is, a pipe), for example: "/folder1|/folder2"   
+     * A list of filter rules that determines which files to exclude from a task. The list should contain a single filter string that consists of the patterns to exclude. The patterns are delimited by "|" (that is, a pipe), for example, "/folder1|/folder2".   
      */
     Excludes?: FilterList;
     /**
@@ -959,7 +1235,7 @@ declare namespace DataSync {
      */
     CreationTime?: Time;
     /**
-     * A list of filter rules that determines which files to include when running a task. The pattern should contain a single filter string that consists of the patterns to include. The patterns are delimited by "|" (that is, a pipe). For example: "/folder1|/folder2"
+     * A list of filter rules that determines which files to include when running a task. The pattern contains a single filter string that consists of the patterns to include. The patterns are delimited by "|" (that is, a pipe), for example, "/folder1|/folder2".
      */
     Includes?: FilterList;
   }
@@ -967,7 +1243,7 @@ declare namespace DataSync {
   export type Duration = number;
   export interface Ec2Config {
     /**
-     * The ARN of the subnet and the security group that DataSync uses to access the target EFS file system.
+     * The ARN of the subnet that DataSync uses to access the target EFS file system.
      */
     SubnetArn: Ec2SubnetArn;
     /**
@@ -998,10 +1274,45 @@ declare namespace DataSync {
   export type FilterValue = string;
   export type FilterValues = FilterAttributeValue[];
   export type FsxFilesystemArn = string;
+  export type FsxLustreSubdirectory = string;
+  export type FsxOpenZfsSubdirectory = string;
+  export interface FsxProtocol {
+    /**
+     * Represents the Network File System (NFS) protocol that DataSync uses to access your FSx for OpenZFS file system.
+     */
+    NFS?: FsxProtocolNfs;
+  }
+  export interface FsxProtocolNfs {
+    MountOptions?: NfsMountOptions;
+  }
   export type FsxWindowsSubdirectory = string;
   export type Gid = "NONE"|"INT_VALUE"|"NAME"|"BOTH"|string;
+  export type HdfsAuthenticationType = "SIMPLE"|"KERBEROS"|string;
+  export type HdfsBlockSize = number;
+  export type HdfsDataTransferProtection = "DISABLED"|"AUTHENTICATION"|"INTEGRITY"|"PRIVACY"|string;
+  export interface HdfsNameNode {
+    /**
+     * The hostname of the NameNode in the HDFS cluster. This value is the IP address or Domain Name Service (DNS) name of the NameNode. An agent that's installed on-premises uses this hostname to communicate with the NameNode in the network.
+     */
+    Hostname: HdfsServerHostname;
+    /**
+     * The port that the NameNode uses to listen to client requests.
+     */
+    Port: HdfsServerPort;
+  }
+  export type HdfsNameNodeList = HdfsNameNode[];
+  export type HdfsReplicationFactor = number;
+  export type HdfsRpcProtection = "DISABLED"|"AUTHENTICATION"|"INTEGRITY"|"PRIVACY"|string;
+  export type HdfsServerHostname = string;
+  export type HdfsServerPort = number;
+  export type HdfsSubdirectory = string;
+  export type HdfsUser = string;
   export type IamRoleArn = string;
   export type InputTagList = TagListEntry[];
+  export type KerberosKeytabFile = Buffer|Uint8Array|Blob|string;
+  export type KerberosKrb5ConfFile = Buffer|Uint8Array|Blob|string;
+  export type KerberosPrincipal = string;
+  export type KmsKeyProviderUri = string;
   export interface ListAgentsRequest {
     /**
      * The maximum number of agents to list.
@@ -1142,7 +1453,7 @@ declare namespace DataSync {
      */
     LocationArn?: LocationArn;
     /**
-     * Represents a list of URLs of a location. LocationUri returns an array that contains a list of locations when the ListLocations operation is called. Format: TYPE://GLOBAL_ID/SUBDIR. TYPE designates the type of location. Valid values: NFS | EFS | S3. GLOBAL_ID is the globally unique identifier of the resource that backs the location. An example for EFS is us-east-2.fs-abcd1234. An example for Amazon S3 is the bucket name, such as myBucket. An example for NFS is a valid IPv4 address or a host name compliant with Domain Name Service (DNS). SUBDIR is a valid file system path, delimited by forward slashes as is the *nix convention. For NFS and Amazon EFS, it's the export path to mount the location. For Amazon S3, it's the prefix path that you mount to and treat as the root of the location. 
+     * Represents a list of URIs of a location. LocationUri returns an array that contains a list of locations when the ListLocations operation is called. Format: TYPE://GLOBAL_ID/SUBDIR. TYPE designates the type of location (for example, nfs or s3). GLOBAL_ID is the globally unique identifier of the resource that backs the location. An example for EFS is us-east-2.fs-abcd1234. An example for Amazon S3 is the bucket name, such as myBucket. An example for NFS is a valid IPv4 address or a hostname that is compliant with Domain Name Service (DNS). SUBDIR is a valid file system path, delimited by forward slashes as is the *nix convention. For NFS and Amazon EFS, it's the export path to mount the location. For Amazon S3, it's the prefix path that you mount to and treat as the root of the location. 
      */
     LocationUri?: LocationUri;
   }
@@ -1155,7 +1466,7 @@ declare namespace DataSync {
   export type NextToken = string;
   export interface NfsMountOptions {
     /**
-     * The specific NFS version that you want DataSync to use to mount your NFS share. If the server refuses to use the version specified, the sync will fail. If you don't specify a version, DataSync defaults to AUTOMATIC. That is, DataSync automatically selects a version based on negotiation with the NFS server. You can specify the following NFS versions:     NFSv3  - stateless protocol version that allows for asynchronous writes on the server.     NFSv4.0  - stateful, firewall-friendly protocol version that supports delegations and pseudo filesystems.     NFSv4.1  - stateful protocol version that supports sessions, directory delegations, and parallel data processing. Version 4.1 also includes all features available in version 4.0.  
+     * The specific NFS version that you want DataSync to use to mount your NFS share. If the server refuses to use the version specified, the sync will fail. If you don't specify a version, DataSync defaults to AUTOMATIC. That is, DataSync automatically selects a version based on negotiation with the NFS server. You can specify the following NFS versions:     NFSv3  - stateless protocol version that allows for asynchronous writes on the server.     NFSv4.0  - stateful, firewall-friendly protocol version that supports delegations and pseudo file systems.     NFSv4.1  - stateful protocol version that supports sessions, directory delegations, and parallel data processing. Version 4.1 also includes all features available in version 4.0.  
      */
     Version?: NfsVersion;
   }
@@ -1166,6 +1477,7 @@ declare namespace DataSync {
   export type ObjectStorageSecretKey = string;
   export type ObjectStorageServerPort = number;
   export type ObjectStorageServerProtocol = "HTTPS"|"HTTP"|string;
+  export type ObjectTags = "PRESERVE"|"NONE"|string;
   export interface OnPremConfig {
     /**
      * ARNs of the agents to use for an NFS location.
@@ -1175,7 +1487,7 @@ declare namespace DataSync {
   export type Operator = "Equals"|"NotEquals"|"In"|"LessThanOrEqual"|"LessThan"|"GreaterThanOrEqual"|"GreaterThan"|"Contains"|"NotContains"|"BeginsWith"|string;
   export interface Options {
     /**
-     * A value that determines whether a data integrity verification should be performed at the end of a task execution after all data and metadata have been transferred. For more information, see Configure task settings.  Default value: POINT_IN_TIME_CONSISTENT. ONLY_FILES_TRANSFERRED (recommended): Perform verification only on files that were transferred.  POINT_IN_TIME_CONSISTENT: Scan the entire source and entire destination at the end of the transfer to verify that source and destination are fully synchronized. This option isn't supported when transferring to S3 Glacier or S3 Glacier Deep Archive storage classes. NONE: No additional verification is done at the end of the transfer, but all data transmissions are integrity-checked with checksum verification during the transfer.
+     * A value that determines whether a data integrity verification should be performed at the end of a task execution after all data and metadata have been transferred. For more information, see Configure task settings.  Default value: POINT_IN_TIME_CONSISTENT. ONLY_FILES_TRANSFERRED (recommended): Perform verification only on files that were transferred.  POINT_IN_TIME_CONSISTENT: Scan the entire source and entire destination at the end of the transfer to verify that source and destination are fully synchronized. This option isn't supported when transferring to S3 Glacier Flexible Retrieval or S3 Glacier Deep Archive storage classes. NONE: No additional verification is done at the end of the transfer, but all data transmissions are integrity-checked with checksum verification during the transfer.
      */
     VerifyMode?: VerifyMode;
     /**
@@ -1187,7 +1499,7 @@ declare namespace DataSync {
      */
     Atime?: Atime;
     /**
-     * A value that indicates the last time that a file was modified (that is, a file was written to) before the PREPARING phase. This option is required for cases when you need to run the same task more than one time.  Default value: PRESERVE.  PRESERVE: Preserve original Mtime (recommended)  NONE: Ignore Mtime.   If Mtime is set to PRESERVE, Atime must be set to BEST_EFFORT. If Mtime is set to NONE, Atime must also be set to NONE.  
+     * A value that indicates the last time that a file was modified (that is, a file was written to) before the PREPARING phase. This option is required for cases when you need to run the same task more than one time.  Default Value: PRESERVE  PRESERVE: Preserve original Mtime (recommended)  NONE: Ignore Mtime.   If Mtime is set to PRESERVE, Atime must be set to BEST_EFFORT. If Mtime is set to NONE, Atime must also be set to NONE.  
      */
     Mtime?: Mtime;
     /**
@@ -1230,6 +1542,10 @@ declare namespace DataSync {
      * A value that determines which components of the SMB security descriptor are copied from source to destination objects.  This value is only used for transfers between SMB and Amazon FSx for Windows File Server locations, or between two Amazon FSx for Windows File Server locations. For more information about how DataSync handles metadata, see How DataSync Handles Metadata and Special Files.  Default value: OWNER_DACL.  OWNER_DACL: For each copied object, DataSync copies the following metadata:   Object owner.   NTFS discretionary access control lists (DACLs), which determine whether to grant access to an object.   When choosing this option, DataSync does NOT copy the NTFS system access control lists (SACLs), which are used by administrators to log attempts to access a secured object.  OWNER_DACL_SACL: For each copied object, DataSync copies the following metadata:   Object owner.   NTFS discretionary access control lists (DACLs), which determine whether to grant access to an object.   NTFS system access control lists (SACLs), which are used by administrators to log attempts to access a secured object.   Copying SACLs requires granting additional permissions to the Windows user that DataSync uses to access your SMB location. For information about choosing a user that ensures sufficient permissions to files, folders, and metadata, see user.  NONE: None of the SMB security descriptor components are copied. Destination objects are owned by the user that was provided for accessing the destination location. DACLs and SACLs are set based on the destination server’s configuration. 
      */
     SecurityDescriptorCopyFlags?: SmbSecurityDescriptorCopyFlags;
+    /**
+     * Specifies whether object tags are maintained when transferring between object storage systems. If you want your DataSync task to ignore object tags, specify the NONE value. Default Value: PRESERVE 
+     */
+    ObjectTags?: ObjectTags;
   }
   export type OutputTagList = TagListEntry[];
   export type OverwriteMode = "ALWAYS"|"NEVER"|string;
@@ -1257,10 +1573,20 @@ declare namespace DataSync {
      */
     SecurityGroupArns?: PLSecurityGroupArnList;
   }
+  export interface QopConfiguration {
+    /**
+     * The RPC protection setting configured on the HDFS cluster. This setting corresponds to your hadoop.rpc.protection setting in your core-site.xml file on your Hadoop cluster.
+     */
+    RpcProtection?: HdfsRpcProtection;
+    /**
+     * The data transfer protection setting configured on the HDFS cluster. This setting corresponds to your dfs.data.transfer.protection setting in the hdfs-site.xml file on your Hadoop cluster.
+     */
+    DataTransferProtection?: HdfsDataTransferProtection;
+  }
   export type S3BucketArn = string;
   export interface S3Config {
     /**
-     * The Amazon S3 bucket to access. This bucket is used as a parameter in the CreateLocationS3 operation. 
+     * The ARN of the IAM role for accessing the S3 bucket. 
      */
     BucketAccessRoleArn: IamRoleArn;
   }
@@ -1288,11 +1614,11 @@ declare namespace DataSync {
     TaskArn: TaskArn;
     OverrideOptions?: Options;
     /**
-     * A list of filter rules that determines which files to include when running a task. The pattern should contain a single filter string that consists of the patterns to include. The patterns are delimited by "|" (that is, a pipe). For example: "/folder1|/folder2"   
+     * A list of filter rules that determines which files to include when running a task. The pattern should contain a single filter string that consists of the patterns to include. The patterns are delimited by "|" (that is, a pipe), for example, "/folder1|/folder2".   
      */
     Includes?: FilterList;
     /**
-     * A list of filter rules that determines which files to exclude from a task. The list should contain a single filter string that consists of the patterns to exclude. The patterns are delimited by "|" (that is, a pipe), for example, "/folder1|/folder2". 
+     * A list of filter rules that determines which files to exclude from a task. The list contains a single filter string that consists of the patterns to exclude. The patterns are delimited by "|" (that is, a pipe), for example, "/folder1|/folder2". 
      */
     Excludes?: FilterList;
   }
@@ -1446,6 +1772,62 @@ declare namespace DataSync {
   }
   export interface UpdateAgentResponse {
   }
+  export interface UpdateLocationHdfsRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the source HDFS cluster location.
+     */
+    LocationArn: LocationArn;
+    /**
+     * A subdirectory in the HDFS cluster. This subdirectory is used to read data from or write data to the HDFS cluster.
+     */
+    Subdirectory?: HdfsSubdirectory;
+    /**
+     * The NameNode that manages the HDFS namespace. The NameNode performs operations such as opening, closing, and renaming files and directories. The NameNode contains the information to map blocks of data to the DataNodes. You can use only one NameNode.
+     */
+    NameNodes?: HdfsNameNodeList;
+    /**
+     * The size of the data blocks to write into the HDFS cluster. 
+     */
+    BlockSize?: HdfsBlockSize;
+    /**
+     * The number of DataNodes to replicate the data to when writing to the HDFS cluster. 
+     */
+    ReplicationFactor?: HdfsReplicationFactor;
+    /**
+     * The URI of the HDFS cluster's Key Management Server (KMS). 
+     */
+    KmsKeyProviderUri?: KmsKeyProviderUri;
+    /**
+     * The Quality of Protection (QOP) configuration specifies the Remote Procedure Call (RPC) and data transfer privacy settings configured on the Hadoop Distributed File System (HDFS) cluster. 
+     */
+    QopConfiguration?: QopConfiguration;
+    /**
+     * The type of authentication used to determine the identity of the user. 
+     */
+    AuthenticationType?: HdfsAuthenticationType;
+    /**
+     * The user name used to identify the client on the host operating system.
+     */
+    SimpleUser?: HdfsUser;
+    /**
+     * The Kerberos principal with access to the files and folders on the HDFS cluster. 
+     */
+    KerberosPrincipal?: KerberosPrincipal;
+    /**
+     * The Kerberos key table (keytab) that contains mappings between the defined Kerberos principal and the encrypted keys. You can load the keytab from a file by providing the file's address. If you use the CLI, it performs base64 encoding for you. Otherwise, provide the base64-encoded text.
+     */
+    KerberosKeytab?: KerberosKeytabFile;
+    /**
+     * The krb5.conf file that contains the Kerberos configuration information. You can load the krb5.conf file by providing the file's address. If you're using the CLI, it performs the base64 encoding for you. Otherwise, provide the base64-encoded text.
+     */
+    KerberosKrb5Conf?: KerberosKrb5ConfFile;
+    /**
+     * The ARNs of the agents that are used to connect to the HDFS cluster. 
+     */
+    AgentArns?: AgentArnList;
+  }
+  export interface UpdateLocationHdfsResponse {
+  }
   export interface UpdateLocationNfsRequest {
     /**
      * The Amazon Resource Name (ARN) of the NFS location to update.
@@ -1537,7 +1919,7 @@ declare namespace DataSync {
     TaskArn: TaskArn;
     Options?: Options;
     /**
-     * A list of filter rules that determines which files to exclude from a task. The list should contain a single filter string that consists of the patterns to exclude. The patterns are delimited by "|" (that is, a pipe), for example: "/folder1|/folder2"   
+     * A list of filter rules that determines which files to exclude from a task. The list should contain a single filter string that consists of the patterns to exclude. The patterns are delimited by "|" (that is, a pipe), for example, "/folder1|/folder2".  
      */
     Excludes?: FilterList;
     /**
@@ -1549,11 +1931,11 @@ declare namespace DataSync {
      */
     Name?: TagValue;
     /**
-     * The Amazon Resource Name (ARN) of the resource name of the CloudWatch LogGroup.
+     * The Amazon Resource Name (ARN) of the resource name of the Amazon CloudWatch log group.
      */
     CloudWatchLogGroupArn?: LogGroupArn;
     /**
-     * A list of filter rules that determines which files to include when running a task. The pattern should contain a single filter string that consists of the patterns to include. The patterns are delimited by "|" (that is, a pipe). For example: "/folder1|/folder2"
+     * A list of filter rules that determines which files to include when running a task. The pattern contains a single filter string that consists of the patterns to include. The patterns are delimited by "|" (that is, a pipe), for example, "/folder1|/folder2".
      */
     Includes?: FilterList;
   }

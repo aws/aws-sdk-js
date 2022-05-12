@@ -22,11 +22,11 @@ declare class Lambda extends Service {
    */
   addLayerVersionPermission(callback?: (err: AWSError, data: Lambda.Types.AddLayerVersionPermissionResponse) => void): Request<Lambda.Types.AddLayerVersionPermissionResponse, AWSError>;
   /**
-   * Grants an Amazon Web Services service or another account permission to use a function. You can apply the policy at the function level, or specify a qualifier to restrict access to a single version or alias. If you use a qualifier, the invoker must use the full Amazon Resource Name (ARN) of that version or alias to invoke the function. Note: Lambda does not support adding policies to version $LATEST. To grant permission to another account, specify the account ID as the Principal. For Amazon Web Services services, the principal is a domain-style identifier defined by the service, like s3.amazonaws.com or sns.amazonaws.com. For Amazon Web Services services, you can also specify the ARN of the associated resource as the SourceArn. If you grant permission to a service principal without specifying the source, other accounts could potentially configure resources in their account to invoke your Lambda function. This action adds a statement to a resource-based permissions policy for the function. For more information about function policies, see Lambda Function Policies. 
+   * Grants an Amazon Web Services service, account, or organization permission to use a function. You can apply the policy at the function level, or specify a qualifier to restrict access to a single version or alias. If you use a qualifier, the invoker must use the full Amazon Resource Name (ARN) of that version or alias to invoke the function. Note: Lambda does not support adding policies to version $LATEST. To grant permission to another account, specify the account ID as the Principal. To grant permission to an organization defined in Organizations, specify the organization ID as the PrincipalOrgID. For Amazon Web Services services, the principal is a domain-style identifier defined by the service, like s3.amazonaws.com or sns.amazonaws.com. For Amazon Web Services services, you can also specify the ARN of the associated resource as the SourceArn. If you grant permission to a service principal without specifying the source, other accounts could potentially configure resources in their account to invoke your Lambda function. This action adds a statement to a resource-based permissions policy for the function. For more information about function policies, see Lambda Function Policies. 
    */
   addPermission(params: Lambda.Types.AddPermissionRequest, callback?: (err: AWSError, data: Lambda.Types.AddPermissionResponse) => void): Request<Lambda.Types.AddPermissionResponse, AWSError>;
   /**
-   * Grants an Amazon Web Services service or another account permission to use a function. You can apply the policy at the function level, or specify a qualifier to restrict access to a single version or alias. If you use a qualifier, the invoker must use the full Amazon Resource Name (ARN) of that version or alias to invoke the function. Note: Lambda does not support adding policies to version $LATEST. To grant permission to another account, specify the account ID as the Principal. For Amazon Web Services services, the principal is a domain-style identifier defined by the service, like s3.amazonaws.com or sns.amazonaws.com. For Amazon Web Services services, you can also specify the ARN of the associated resource as the SourceArn. If you grant permission to a service principal without specifying the source, other accounts could potentially configure resources in their account to invoke your Lambda function. This action adds a statement to a resource-based permissions policy for the function. For more information about function policies, see Lambda Function Policies. 
+   * Grants an Amazon Web Services service, account, or organization permission to use a function. You can apply the policy at the function level, or specify a qualifier to restrict access to a single version or alias. If you use a qualifier, the invoker must use the full Amazon Resource Name (ARN) of that version or alias to invoke the function. Note: Lambda does not support adding policies to version $LATEST. To grant permission to another account, specify the account ID as the Principal. To grant permission to an organization defined in Organizations, specify the organization ID as the PrincipalOrgID. For Amazon Web Services services, the principal is a domain-style identifier defined by the service, like s3.amazonaws.com or sns.amazonaws.com. For Amazon Web Services services, you can also specify the ARN of the associated resource as the SourceArn. If you grant permission to a service principal without specifying the source, other accounts could potentially configure resources in their account to invoke your Lambda function. This action adds a statement to a resource-based permissions policy for the function. For more information about function policies, see Lambda Function Policies. 
    */
   addPermission(callback?: (err: AWSError, data: Lambda.Types.AddPermissionResponse) => void): Request<Lambda.Types.AddPermissionResponse, AWSError>;
   /**
@@ -46,11 +46,11 @@ declare class Lambda extends Service {
    */
   createCodeSigningConfig(callback?: (err: AWSError, data: Lambda.Types.CreateCodeSigningConfigResponse) => void): Request<Lambda.Types.CreateCodeSigningConfigResponse, AWSError>;
   /**
-   * Creates a mapping between an event source and an Lambda function. Lambda reads items from the event source and triggers the function. For details about each event source type, see the following topics.      Configuring a Dynamo DB stream as an event source      Configuring a Kinesis stream as an event source      Configuring an Amazon SQS queue as an event source      Configuring an MQ broker as an event source      Configuring MSK as an event source      Configuring Self-Managed Apache Kafka as an event source    The following error handling options are only available for stream sources (DynamoDB and Kinesis):    BisectBatchOnFunctionError - If the function returns an error, split the batch in two and retry.    DestinationConfig - Send discarded records to an Amazon SQS queue or Amazon SNS topic.    MaximumRecordAgeInSeconds - Discard records older than the specified age. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires    MaximumRetryAttempts - Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires.    ParallelizationFactor - Process multiple batches from each shard concurrently.  
+   * Creates a mapping between an event source and an Lambda function. Lambda reads items from the event source and triggers the function. For details about how to configure different event sources, see the following topics.      Amazon DynamoDB Streams      Amazon Kinesis      Amazon SQS      Amazon MQ and RabbitMQ      Amazon MSK      Apache Kafka    The following error handling options are only available for stream sources (DynamoDB and Kinesis):    BisectBatchOnFunctionError - If the function returns an error, split the batch in two and retry.    DestinationConfig - Send discarded records to an Amazon SQS queue or Amazon SNS topic.    MaximumRecordAgeInSeconds - Discard records older than the specified age. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires    MaximumRetryAttempts - Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires.    ParallelizationFactor - Process multiple batches from each shard concurrently.   For information about which configuration parameters apply to each event source, see the following topics.     Amazon DynamoDB Streams      Amazon Kinesis      Amazon SQS      Amazon MQ and RabbitMQ      Amazon MSK      Apache Kafka   
    */
   createEventSourceMapping(params: Lambda.Types.CreateEventSourceMappingRequest, callback?: (err: AWSError, data: Lambda.Types.EventSourceMappingConfiguration) => void): Request<Lambda.Types.EventSourceMappingConfiguration, AWSError>;
   /**
-   * Creates a mapping between an event source and an Lambda function. Lambda reads items from the event source and triggers the function. For details about each event source type, see the following topics.      Configuring a Dynamo DB stream as an event source      Configuring a Kinesis stream as an event source      Configuring an Amazon SQS queue as an event source      Configuring an MQ broker as an event source      Configuring MSK as an event source      Configuring Self-Managed Apache Kafka as an event source    The following error handling options are only available for stream sources (DynamoDB and Kinesis):    BisectBatchOnFunctionError - If the function returns an error, split the batch in two and retry.    DestinationConfig - Send discarded records to an Amazon SQS queue or Amazon SNS topic.    MaximumRecordAgeInSeconds - Discard records older than the specified age. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires    MaximumRetryAttempts - Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires.    ParallelizationFactor - Process multiple batches from each shard concurrently.  
+   * Creates a mapping between an event source and an Lambda function. Lambda reads items from the event source and triggers the function. For details about how to configure different event sources, see the following topics.      Amazon DynamoDB Streams      Amazon Kinesis      Amazon SQS      Amazon MQ and RabbitMQ      Amazon MSK      Apache Kafka    The following error handling options are only available for stream sources (DynamoDB and Kinesis):    BisectBatchOnFunctionError - If the function returns an error, split the batch in two and retry.    DestinationConfig - Send discarded records to an Amazon SQS queue or Amazon SNS topic.    MaximumRecordAgeInSeconds - Discard records older than the specified age. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires    MaximumRetryAttempts - Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires.    ParallelizationFactor - Process multiple batches from each shard concurrently.   For information about which configuration parameters apply to each event source, see the following topics.     Amazon DynamoDB Streams      Amazon Kinesis      Amazon SQS      Amazon MQ and RabbitMQ      Amazon MSK      Apache Kafka   
    */
   createEventSourceMapping(callback?: (err: AWSError, data: Lambda.Types.EventSourceMappingConfiguration) => void): Request<Lambda.Types.EventSourceMappingConfiguration, AWSError>;
   /**
@@ -61,6 +61,14 @@ declare class Lambda extends Service {
    * Creates a Lambda function. To create a function, you need a deployment package and an execution role. The deployment package is a .zip file archive or container image that contains your function code. The execution role grants the function permission to use Amazon Web Services services, such as Amazon CloudWatch Logs for log streaming and X-Ray for request tracing. You set the package type to Image if the deployment package is a container image. For a container image, the code property must include the URI of a container image in the Amazon ECR registry. You do not need to specify the handler and runtime properties.  You set the package type to Zip if the deployment package is a .zip file archive. For a .zip file archive, the code property specifies the location of the .zip file. You must also specify the handler and runtime properties. The code in the deployment package must be compatible with the target instruction set architecture of the function (x86-64 or arm64). If you do not specify the architecture, the default value is x86-64. When you create a function, Lambda provisions an instance of the function and its supporting resources. If your function connects to a VPC, this process can take a minute or so. During this time, you can't invoke or modify the function. The State, StateReason, and StateReasonCode fields in the response from GetFunctionConfiguration indicate when the function is ready to invoke. For more information, see Function States. A function has an unpublished version, and can have published versions and aliases. The unpublished version changes when you update your function's code and configuration. A published version is a snapshot of your function code and configuration that can't be changed. An alias is a named resource that maps to a version, and can be changed to map to a different version. Use the Publish parameter to create version 1 of your function from its initial configuration. The other parameters let you configure version-specific and function-level settings. You can modify version-specific settings later with UpdateFunctionConfiguration. Function-level settings apply to both the unpublished and published versions of the function, and include tags (TagResource) and per-function concurrency limits (PutFunctionConcurrency). You can use code signing if your deployment package is a .zip file archive. To enable code signing for this function, specify the ARN of a code-signing configuration. When a user attempts to deploy a code package with UpdateFunctionCode, Lambda checks that the code package has a valid signature from a trusted publisher. The code-signing configuration includes set set of signing profiles, which define the trusted publishers for this function. If another account or an Amazon Web Services service invokes your function, use AddPermission to grant permission by creating a resource-based IAM policy. You can grant permissions at the function level, on a version, or on an alias. To invoke your function directly, use Invoke. To invoke your function in response to events in other Amazon Web Services services, create an event source mapping (CreateEventSourceMapping), or configure a function trigger in the other service. For more information, see Invoking Functions.
    */
   createFunction(callback?: (err: AWSError, data: Lambda.Types.FunctionConfiguration) => void): Request<Lambda.Types.FunctionConfiguration, AWSError>;
+  /**
+   * Creates a Lambda function URL with the specified configuration parameters. A function URL is a dedicated HTTP(S) endpoint that you can use to invoke your function.
+   */
+  createFunctionUrlConfig(params: Lambda.Types.CreateFunctionUrlConfigRequest, callback?: (err: AWSError, data: Lambda.Types.CreateFunctionUrlConfigResponse) => void): Request<Lambda.Types.CreateFunctionUrlConfigResponse, AWSError>;
+  /**
+   * Creates a Lambda function URL with the specified configuration parameters. A function URL is a dedicated HTTP(S) endpoint that you can use to invoke your function.
+   */
+  createFunctionUrlConfig(callback?: (err: AWSError, data: Lambda.Types.CreateFunctionUrlConfigResponse) => void): Request<Lambda.Types.CreateFunctionUrlConfigResponse, AWSError>;
   /**
    * Deletes a Lambda function alias.
    */
@@ -117,6 +125,14 @@ declare class Lambda extends Service {
    * Deletes the configuration for asynchronous invocation for a function, version, or alias. To configure options for asynchronous invocation, use PutFunctionEventInvokeConfig.
    */
   deleteFunctionEventInvokeConfig(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a Lambda function URL. When you delete a function URL, you can't recover it. Creating a new function URL results in a different URL address.
+   */
+  deleteFunctionUrlConfig(params: Lambda.Types.DeleteFunctionUrlConfigRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a Lambda function URL. When you delete a function URL, you can't recover it. Creating a new function URL results in a different URL address.
+   */
+  deleteFunctionUrlConfig(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes a version of an Lambda layer. Deleted versions can no longer be viewed or added to functions. To avoid breaking functions, a copy of the version remains in Lambda until no functions refer to it.
    */
@@ -206,6 +222,14 @@ declare class Lambda extends Service {
    */
   getFunctionEventInvokeConfig(callback?: (err: AWSError, data: Lambda.Types.FunctionEventInvokeConfig) => void): Request<Lambda.Types.FunctionEventInvokeConfig, AWSError>;
   /**
+   * Returns details about a Lambda function URL.
+   */
+  getFunctionUrlConfig(params: Lambda.Types.GetFunctionUrlConfigRequest, callback?: (err: AWSError, data: Lambda.Types.GetFunctionUrlConfigResponse) => void): Request<Lambda.Types.GetFunctionUrlConfigResponse, AWSError>;
+  /**
+   * Returns details about a Lambda function URL.
+   */
+  getFunctionUrlConfig(callback?: (err: AWSError, data: Lambda.Types.GetFunctionUrlConfigResponse) => void): Request<Lambda.Types.GetFunctionUrlConfigResponse, AWSError>;
+  /**
    * Returns information about a version of an Lambda layer, with a link to download the layer archive that's valid for 10 minutes.
    */
   getLayerVersion(params: Lambda.Types.GetLayerVersionRequest, callback?: (err: AWSError, data: Lambda.Types.GetLayerVersionResponse) => void): Request<Lambda.Types.GetLayerVersionResponse, AWSError>;
@@ -293,6 +317,14 @@ declare class Lambda extends Service {
    * Retrieves a list of configurations for asynchronous invocation for a function. To configure options for asynchronous invocation, use PutFunctionEventInvokeConfig.
    */
   listFunctionEventInvokeConfigs(callback?: (err: AWSError, data: Lambda.Types.ListFunctionEventInvokeConfigsResponse) => void): Request<Lambda.Types.ListFunctionEventInvokeConfigsResponse, AWSError>;
+  /**
+   * Returns a list of Lambda function URLs for the specified function.
+   */
+  listFunctionUrlConfigs(params: Lambda.Types.ListFunctionUrlConfigsRequest, callback?: (err: AWSError, data: Lambda.Types.ListFunctionUrlConfigsResponse) => void): Request<Lambda.Types.ListFunctionUrlConfigsResponse, AWSError>;
+  /**
+   * Returns a list of Lambda function URLs for the specified function.
+   */
+  listFunctionUrlConfigs(callback?: (err: AWSError, data: Lambda.Types.ListFunctionUrlConfigsResponse) => void): Request<Lambda.Types.ListFunctionUrlConfigsResponse, AWSError>;
   /**
    * Returns a list of Lambda functions, with the version-specific configuration of each. Lambda returns up to 50 functions per call. Set FunctionVersion to ALL to include all published versions of each function in addition to the unpublished version.   The ListFunctions action returns a subset of the FunctionConfiguration fields. To get the additional fields (State, StateReasonCode, StateReason, LastUpdateStatus, LastUpdateStatusReason, LastUpdateStatusReasonCode) for a function or version, use GetFunction. 
    */
@@ -446,19 +478,19 @@ declare class Lambda extends Service {
    */
   updateCodeSigningConfig(callback?: (err: AWSError, data: Lambda.Types.UpdateCodeSigningConfigResponse) => void): Request<Lambda.Types.UpdateCodeSigningConfigResponse, AWSError>;
   /**
-   * Updates an event source mapping. You can change the function that Lambda invokes, or pause invocation and resume later from the same location. The following error handling options are only available for stream sources (DynamoDB and Kinesis):    BisectBatchOnFunctionError - If the function returns an error, split the batch in two and retry.    DestinationConfig - Send discarded records to an Amazon SQS queue or Amazon SNS topic.    MaximumRecordAgeInSeconds - Discard records older than the specified age. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires    MaximumRetryAttempts - Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires.    ParallelizationFactor - Process multiple batches from each shard concurrently.  
+   * Updates an event source mapping. You can change the function that Lambda invokes, or pause invocation and resume later from the same location. For details about how to configure different event sources, see the following topics.      Amazon DynamoDB Streams      Amazon Kinesis      Amazon SQS      Amazon MQ and RabbitMQ      Amazon MSK      Apache Kafka    The following error handling options are only available for stream sources (DynamoDB and Kinesis):    BisectBatchOnFunctionError - If the function returns an error, split the batch in two and retry.    DestinationConfig - Send discarded records to an Amazon SQS queue or Amazon SNS topic.    MaximumRecordAgeInSeconds - Discard records older than the specified age. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires    MaximumRetryAttempts - Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires.    ParallelizationFactor - Process multiple batches from each shard concurrently.   For information about which configuration parameters apply to each event source, see the following topics.     Amazon DynamoDB Streams      Amazon Kinesis      Amazon SQS      Amazon MQ and RabbitMQ      Amazon MSK      Apache Kafka   
    */
   updateEventSourceMapping(params: Lambda.Types.UpdateEventSourceMappingRequest, callback?: (err: AWSError, data: Lambda.Types.EventSourceMappingConfiguration) => void): Request<Lambda.Types.EventSourceMappingConfiguration, AWSError>;
   /**
-   * Updates an event source mapping. You can change the function that Lambda invokes, or pause invocation and resume later from the same location. The following error handling options are only available for stream sources (DynamoDB and Kinesis):    BisectBatchOnFunctionError - If the function returns an error, split the batch in two and retry.    DestinationConfig - Send discarded records to an Amazon SQS queue or Amazon SNS topic.    MaximumRecordAgeInSeconds - Discard records older than the specified age. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires    MaximumRetryAttempts - Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires.    ParallelizationFactor - Process multiple batches from each shard concurrently.  
+   * Updates an event source mapping. You can change the function that Lambda invokes, or pause invocation and resume later from the same location. For details about how to configure different event sources, see the following topics.      Amazon DynamoDB Streams      Amazon Kinesis      Amazon SQS      Amazon MQ and RabbitMQ      Amazon MSK      Apache Kafka    The following error handling options are only available for stream sources (DynamoDB and Kinesis):    BisectBatchOnFunctionError - If the function returns an error, split the batch in two and retry.    DestinationConfig - Send discarded records to an Amazon SQS queue or Amazon SNS topic.    MaximumRecordAgeInSeconds - Discard records older than the specified age. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires    MaximumRetryAttempts - Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires.    ParallelizationFactor - Process multiple batches from each shard concurrently.   For information about which configuration parameters apply to each event source, see the following topics.     Amazon DynamoDB Streams      Amazon Kinesis      Amazon SQS      Amazon MQ and RabbitMQ      Amazon MSK      Apache Kafka   
    */
   updateEventSourceMapping(callback?: (err: AWSError, data: Lambda.Types.EventSourceMappingConfiguration) => void): Request<Lambda.Types.EventSourceMappingConfiguration, AWSError>;
   /**
-   * Updates a Lambda function's code. If code signing is enabled for the function, the code package must be signed by a trusted publisher. For more information, see Configuring code signing. The function's code is locked when you publish a version. You can't modify the code of a published version, only the unpublished version.  For a function defined as a container image, Lambda resolves the image tag to an image digest. In Amazon ECR, if you update the image tag to a new image, Lambda does not automatically update the function. 
+   * Updates a Lambda function's code. If code signing is enabled for the function, the code package must be signed by a trusted publisher. For more information, see Configuring code signing. If the function's package type is Image, you must specify the code package in ImageUri as the URI of a container image in the Amazon ECR registry.  If the function's package type is Zip, you must specify the deployment package as a .zip file archive. Enter the Amazon S3 bucket and key of the code .zip file location. You can also provide the function code inline using the ZipFile field.  The code in the deployment package must be compatible with the target instruction set architecture of the function (x86-64 or arm64).  The function's code is locked when you publish a version. You can't modify the code of a published version, only the unpublished version.  For a function defined as a container image, Lambda resolves the image tag to an image digest. In Amazon ECR, if you update the image tag to a new image, Lambda does not automatically update the function. 
    */
   updateFunctionCode(params: Lambda.Types.UpdateFunctionCodeRequest, callback?: (err: AWSError, data: Lambda.Types.FunctionConfiguration) => void): Request<Lambda.Types.FunctionConfiguration, AWSError>;
   /**
-   * Updates a Lambda function's code. If code signing is enabled for the function, the code package must be signed by a trusted publisher. For more information, see Configuring code signing. The function's code is locked when you publish a version. You can't modify the code of a published version, only the unpublished version.  For a function defined as a container image, Lambda resolves the image tag to an image digest. In Amazon ECR, if you update the image tag to a new image, Lambda does not automatically update the function. 
+   * Updates a Lambda function's code. If code signing is enabled for the function, the code package must be signed by a trusted publisher. For more information, see Configuring code signing. If the function's package type is Image, you must specify the code package in ImageUri as the URI of a container image in the Amazon ECR registry.  If the function's package type is Zip, you must specify the deployment package as a .zip file archive. Enter the Amazon S3 bucket and key of the code .zip file location. You can also provide the function code inline using the ZipFile field.  The code in the deployment package must be compatible with the target instruction set architecture of the function (x86-64 or arm64).  The function's code is locked when you publish a version. You can't modify the code of a published version, only the unpublished version.  For a function defined as a container image, Lambda resolves the image tag to an image digest. In Amazon ECR, if you update the image tag to a new image, Lambda does not automatically update the function. 
    */
   updateFunctionCode(callback?: (err: AWSError, data: Lambda.Types.FunctionConfiguration) => void): Request<Lambda.Types.FunctionConfiguration, AWSError>;
   /**
@@ -478,6 +510,14 @@ declare class Lambda extends Service {
    */
   updateFunctionEventInvokeConfig(callback?: (err: AWSError, data: Lambda.Types.FunctionEventInvokeConfig) => void): Request<Lambda.Types.FunctionEventInvokeConfig, AWSError>;
   /**
+   * Updates the configuration for a Lambda function URL.
+   */
+  updateFunctionUrlConfig(params: Lambda.Types.UpdateFunctionUrlConfigRequest, callback?: (err: AWSError, data: Lambda.Types.UpdateFunctionUrlConfigResponse) => void): Request<Lambda.Types.UpdateFunctionUrlConfigResponse, AWSError>;
+  /**
+   * Updates the configuration for a Lambda function URL.
+   */
+  updateFunctionUrlConfig(callback?: (err: AWSError, data: Lambda.Types.UpdateFunctionUrlConfigResponse) => void): Request<Lambda.Types.UpdateFunctionUrlConfigResponse, AWSError>;
+  /**
    * Waits for the functionExists state by periodically calling the underlying Lambda.getFunctionoperation every 1 seconds (at most 20 times).
    */
   waitFor(state: "functionExists", params: Lambda.Types.GetFunctionRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: Lambda.Types.GetFunctionResponse) => void): Request<Lambda.Types.GetFunctionResponse, AWSError>;
@@ -486,21 +526,37 @@ declare class Lambda extends Service {
    */
   waitFor(state: "functionExists", callback?: (err: AWSError, data: Lambda.Types.GetFunctionResponse) => void): Request<Lambda.Types.GetFunctionResponse, AWSError>;
   /**
-   * Waits for the functionActive state by periodically calling the underlying Lambda.getFunctionConfigurationoperation every 5 seconds (at most 60 times). Waits for the function's State to be Active.
+   * Waits for the functionActive state by periodically calling the underlying Lambda.getFunctionConfigurationoperation every 5 seconds (at most 60 times). Waits for the function's State to be Active. This waiter uses GetFunctionConfiguration API. This should be used after new function creation.
    */
   waitFor(state: "functionActive", params: Lambda.Types.GetFunctionConfigurationRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: Lambda.Types.FunctionConfiguration) => void): Request<Lambda.Types.FunctionConfiguration, AWSError>;
   /**
-   * Waits for the functionActive state by periodically calling the underlying Lambda.getFunctionConfigurationoperation every 5 seconds (at most 60 times). Waits for the function's State to be Active.
+   * Waits for the functionActive state by periodically calling the underlying Lambda.getFunctionConfigurationoperation every 5 seconds (at most 60 times). Waits for the function's State to be Active. This waiter uses GetFunctionConfiguration API. This should be used after new function creation.
    */
   waitFor(state: "functionActive", callback?: (err: AWSError, data: Lambda.Types.FunctionConfiguration) => void): Request<Lambda.Types.FunctionConfiguration, AWSError>;
   /**
-   * Waits for the functionUpdated state by periodically calling the underlying Lambda.getFunctionConfigurationoperation every 5 seconds (at most 60 times). Waits for the function's LastUpdateStatus to be Successful.
+   * Waits for the functionUpdated state by periodically calling the underlying Lambda.getFunctionConfigurationoperation every 5 seconds (at most 60 times). Waits for the function's LastUpdateStatus to be Successful. This waiter uses GetFunctionConfiguration API. This should be used after function updates.
    */
   waitFor(state: "functionUpdated", params: Lambda.Types.GetFunctionConfigurationRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: Lambda.Types.FunctionConfiguration) => void): Request<Lambda.Types.FunctionConfiguration, AWSError>;
   /**
-   * Waits for the functionUpdated state by periodically calling the underlying Lambda.getFunctionConfigurationoperation every 5 seconds (at most 60 times). Waits for the function's LastUpdateStatus to be Successful.
+   * Waits for the functionUpdated state by periodically calling the underlying Lambda.getFunctionConfigurationoperation every 5 seconds (at most 60 times). Waits for the function's LastUpdateStatus to be Successful. This waiter uses GetFunctionConfiguration API. This should be used after function updates.
    */
   waitFor(state: "functionUpdated", callback?: (err: AWSError, data: Lambda.Types.FunctionConfiguration) => void): Request<Lambda.Types.FunctionConfiguration, AWSError>;
+  /**
+   * Waits for the functionActiveV2 state by periodically calling the underlying Lambda.getFunctionoperation every 1 seconds (at most 300 times). Waits for the function's State to be Active. This waiter uses GetFunction API. This should be used after new function creation.
+   */
+  waitFor(state: "functionActiveV2", params: Lambda.Types.GetFunctionRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: Lambda.Types.GetFunctionResponse) => void): Request<Lambda.Types.GetFunctionResponse, AWSError>;
+  /**
+   * Waits for the functionActiveV2 state by periodically calling the underlying Lambda.getFunctionoperation every 1 seconds (at most 300 times). Waits for the function's State to be Active. This waiter uses GetFunction API. This should be used after new function creation.
+   */
+  waitFor(state: "functionActiveV2", callback?: (err: AWSError, data: Lambda.Types.GetFunctionResponse) => void): Request<Lambda.Types.GetFunctionResponse, AWSError>;
+  /**
+   * Waits for the functionUpdatedV2 state by periodically calling the underlying Lambda.getFunctionoperation every 1 seconds (at most 300 times). Waits for the function's LastUpdateStatus to be Successful. This waiter uses GetFunction API. This should be used after function updates.
+   */
+  waitFor(state: "functionUpdatedV2", params: Lambda.Types.GetFunctionRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: Lambda.Types.GetFunctionResponse) => void): Request<Lambda.Types.GetFunctionResponse, AWSError>;
+  /**
+   * Waits for the functionUpdatedV2 state by periodically calling the underlying Lambda.getFunctionoperation every 1 seconds (at most 300 times). Waits for the function's LastUpdateStatus to be Successful. This waiter uses GetFunction API. This should be used after function updates.
+   */
+  waitFor(state: "functionUpdatedV2", callback?: (err: AWSError, data: Lambda.Types.GetFunctionResponse) => void): Request<Lambda.Types.GetFunctionResponse, AWSError>;
 }
 declare namespace Lambda {
   export interface AccountLimit {
@@ -613,6 +669,14 @@ declare namespace Lambda {
      * Only update the policy if the revision ID matches the ID that's specified. Use this option to avoid modifying a policy that has changed since you last read it.
      */
     RevisionId?: String;
+    /**
+     * The identifier for your organization in Organizations. Use this to grant permissions to all the Amazon Web Services accounts under this organization.
+     */
+    PrincipalOrgID?: PrincipalOrgID;
+    /**
+     * The type of authentication that your function URL uses. Set to AWS_IAM if you want to restrict access to authenticated IAM users only. Set to NONE if you want to bypass IAM authentication to create a public endpoint. For more information, see  Security and auth model for Lambda function URLs.
+     */
+    FunctionUrlAuthType?: FunctionUrlAuthType;
   }
   export interface AddPermissionResponse {
     /**
@@ -656,6 +720,9 @@ declare namespace Lambda {
      */
     AdditionalVersionWeights?: AdditionalVersionWeights;
   }
+  export type AllowCredentials = boolean;
+  export type AllowMethodsList = Method[];
+  export type AllowOriginsList = Origin[];
   export interface AllowedPublishers {
     /**
      * The Amazon Resource Name (ARN) for each of the signing profiles. A signing profile defines a trusted user who can sign a code package. 
@@ -714,6 +781,32 @@ declare namespace Lambda {
      */
     ReservedConcurrentExecutions?: ReservedConcurrentExecutions;
   }
+  export interface Cors {
+    /**
+     * Whether to allow cookies or other credentials in requests to your function URL. The default is false.
+     */
+    AllowCredentials?: AllowCredentials;
+    /**
+     * The HTTP headers that origins can include in requests to your function URL. For example: Date, Keep-Alive, X-Custom-Header.
+     */
+    AllowHeaders?: HeadersList;
+    /**
+     * The HTTP methods that are allowed when calling your function URL. For example: GET, POST, DELETE, or the wildcard character (*).
+     */
+    AllowMethods?: AllowMethodsList;
+    /**
+     * The origins that can access your function URL. You can list any number of specific origins, separated by a comma. For example: https://www.example.com, http://localhost:60905. Alternatively, you can grant access to all origins using the wildcard character (*).
+     */
+    AllowOrigins?: AllowOriginsList;
+    /**
+     * The HTTP headers in your function response that you want to expose to origins that call your function URL. For example: Date, Keep-Alive, X-Custom-Header.
+     */
+    ExposeHeaders?: HeadersList;
+    /**
+     * The maximum amount of time, in seconds, that web browsers can cache results of a preflight request. By default, this is set to 0, which means that the browser doesn't cache results.
+     */
+    MaxAge?: MaxAge;
+  }
   export interface CreateAliasRequest {
     /**
      * The name of the Lambda function.  Name formats     Function name - MyFunction.    Function ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction.    Partial ARN - 123456789012:function:MyFunction.   The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.
@@ -770,9 +863,13 @@ declare namespace Lambda {
      */
     Enabled?: Enabled;
     /**
-     * The maximum number of records in each batch that Lambda pulls from your stream or queue and sends to your function. Lambda passes all of the records in the batch to the function in a single call, up to the payload limit for synchronous invocation (6 MB).    Amazon Kinesis - Default 100. Max 10,000.    Amazon DynamoDB Streams - Default 100. Max 1,000.    Amazon Simple Queue Service - Default 10. For standard queues the max is 10,000. For FIFO queues the max is 10.    Amazon Managed Streaming for Apache Kafka - Default 100. Max 10,000.    Self-Managed Apache Kafka - Default 100. Max 10,000.  
+     * The maximum number of records in each batch that Lambda pulls from your stream or queue and sends to your function. Lambda passes all of the records in the batch to the function in a single call, up to the payload limit for synchronous invocation (6 MB).    Amazon Kinesis - Default 100. Max 10,000.    Amazon DynamoDB Streams - Default 100. Max 10,000.    Amazon Simple Queue Service - Default 10. For standard queues the max is 10,000. For FIFO queues the max is 10.    Amazon Managed Streaming for Apache Kafka - Default 100. Max 10,000.    Self-Managed Apache Kafka - Default 100. Max 10,000.    Amazon MQ (ActiveMQ and RabbitMQ) - Default 100. Max 10,000.  
      */
     BatchSize?: BatchSize;
+    /**
+     * (Streams and Amazon SQS) An object that defines the filter criteria that determine whether Lambda should process an event. For more information, see Lambda event filtering.
+     */
+    FilterCriteria?: FilterCriteria;
     /**
      * (Streams and Amazon SQS standard queues) The maximum amount of time, in seconds, that Lambda spends gathering records before invoking the function. Default: 0 Related setting: When you set BatchSize to a value greater than 10, you must set MaximumBatchingWindowInSeconds to at least 1.
      */
@@ -826,7 +923,7 @@ declare namespace Lambda {
      */
     SelfManagedEventSource?: SelfManagedEventSource;
     /**
-     * (Streams only) A list of current response type enums applied to the event source mapping.
+     * (Streams and Amazon SQS) A list of current response type enums applied to the event source mapping.
      */
     FunctionResponseTypes?: FunctionResponseTypeList;
   }
@@ -836,7 +933,7 @@ declare namespace Lambda {
      */
     FunctionName: FunctionName;
     /**
-     * The identifier of the function's runtime.
+     * The identifier of the function's runtime. Runtime is required if the deployment package is a .zip file archive. 
      */
     Runtime?: Runtime;
     /**
@@ -844,7 +941,7 @@ declare namespace Lambda {
      */
     Role: RoleArn;
     /**
-     * The name of the method within your code that Lambda calls to execute your function. The format includes the file name. It can also include namespaces and other qualifiers, depending on the runtime. For more information, see Programming Model.
+     * The name of the method within your code that Lambda calls to execute your function. Handler is required if the deployment package is a .zip file archive. The format includes the file name. It can also include namespaces and other qualifiers, depending on the runtime. For more information, see Programming Model.
      */
     Handler?: Handler;
     /**
@@ -856,7 +953,7 @@ declare namespace Lambda {
      */
     Description?: Description;
     /**
-     * The amount of time that Lambda allows a function to run before stopping it. The default is 3 seconds. The maximum allowed value is 900 seconds. For additional information, see Lambda execution environment.
+     * The amount of time (in seconds) that Lambda allows a function to run before stopping it. The default is 3 seconds. The maximum allowed value is 900 seconds. For additional information, see Lambda execution environment.
      */
     Timeout?: Timeout;
     /**
@@ -912,9 +1009,53 @@ declare namespace Lambda {
      */
     CodeSigningConfigArn?: CodeSigningConfigArn;
     /**
-     * The instruction set architecture that the function supports. Enter a string array with one of the valid values. The default value is x86_64.
+     * The instruction set architecture that the function supports. Enter a string array with one of the valid values (arm64 or x86_64). The default value is x86_64.
      */
     Architectures?: ArchitecturesList;
+    /**
+     * The size of the function’s /tmp directory in MB. The default value is 512, but can be any whole number between 512 and 10240 MB.
+     */
+    EphemeralStorage?: EphemeralStorage;
+  }
+  export interface CreateFunctionUrlConfigRequest {
+    /**
+     * The name of the Lambda function.  Name formats     Function name - my-function.    Function ARN - arn:aws:lambda:us-west-2:123456789012:function:my-function.    Partial ARN - 123456789012:function:my-function.   The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.
+     */
+    FunctionName: FunctionName;
+    /**
+     * The alias name.
+     */
+    Qualifier?: FunctionUrlQualifier;
+    /**
+     * The type of authentication that your function URL uses. Set to AWS_IAM if you want to restrict access to authenticated IAM users only. Set to NONE if you want to bypass IAM authentication to create a public endpoint. For more information, see  Security and auth model for Lambda function URLs.
+     */
+    AuthType: FunctionUrlAuthType;
+    /**
+     * The cross-origin resource sharing (CORS) settings for your function URL.
+     */
+    Cors?: Cors;
+  }
+  export interface CreateFunctionUrlConfigResponse {
+    /**
+     * The HTTP URL endpoint for your function.
+     */
+    FunctionUrl: FunctionUrl;
+    /**
+     * The Amazon Resource Name (ARN) of your function.
+     */
+    FunctionArn: FunctionArn;
+    /**
+     * The type of authentication that your function URL uses. Set to AWS_IAM if you want to restrict access to authenticated IAM users only. Set to NONE if you want to bypass IAM authentication to create a public endpoint. For more information, see  Security and auth model for Lambda function URLs.
+     */
+    AuthType: FunctionUrlAuthType;
+    /**
+     * The cross-origin resource sharing (CORS) settings for your function URL.
+     */
+    Cors?: Cors;
+    /**
+     * When the function URL was created, in ISO-8601 format (YYYY-MM-DDThh:mm:ss.sTZD).
+     */
+    CreationTime: Timestamp;
   }
   export type _Date = Date;
   export interface DeadLetterConfig {
@@ -978,6 +1119,16 @@ declare namespace Lambda {
      * Specify a version to delete. You can't delete a version that's referenced by an alias.
      */
     Qualifier?: Qualifier;
+  }
+  export interface DeleteFunctionUrlConfigRequest {
+    /**
+     * The name of the Lambda function.  Name formats     Function name - my-function.    Function ARN - arn:aws:lambda:us-west-2:123456789012:function:my-function.    Partial ARN - 123456789012:function:my-function.   The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.
+     */
+    FunctionName: FunctionName;
+    /**
+     * The alias name.
+     */
+    Qualifier?: FunctionUrlQualifier;
   }
   export interface DeleteLayerVersionRequest {
     /**
@@ -1045,6 +1196,13 @@ declare namespace Lambda {
   export type EnvironmentVariableName = string;
   export type EnvironmentVariableValue = string;
   export type EnvironmentVariables = {[key: string]: EnvironmentVariableValue};
+  export interface EphemeralStorage {
+    /**
+     * The size of the function’s /tmp directory.
+     */
+    Size: EphemeralStorageSize;
+  }
+  export type EphemeralStorageSize = number;
   export interface EventSourceMappingConfiguration {
     /**
      * The identifier of the event source mapping.
@@ -1074,6 +1232,10 @@ declare namespace Lambda {
      * The Amazon Resource Name (ARN) of the event source.
      */
     EventSourceArn?: Arn;
+    /**
+     * (Streams and Amazon SQS) An object that defines the filter criteria that determine whether Lambda should process an event. For more information, see Lambda event filtering.
+     */
+    FilterCriteria?: FilterCriteria;
     /**
      * The ARN of the Lambda function.
      */
@@ -1131,7 +1293,7 @@ declare namespace Lambda {
      */
     TumblingWindowInSeconds?: TumblingWindowInSeconds;
     /**
-     * (Streams only) A list of current response type enums applied to the event source mapping.
+     * (Streams and Amazon SQS) A list of current response type enums applied to the event source mapping.
      */
     FunctionResponseTypes?: FunctionResponseTypeList;
   }
@@ -1150,6 +1312,19 @@ declare namespace Lambda {
     LocalMountPath: LocalMountPath;
   }
   export type FileSystemConfigList = FileSystemConfig[];
+  export interface Filter {
+    /**
+     *  A filter pattern. For more information on the syntax of a filter pattern, see  Filter rule syntax. 
+     */
+    Pattern?: Pattern;
+  }
+  export interface FilterCriteria {
+    /**
+     *  A list of filters. 
+     */
+    Filters?: FilterList;
+  }
+  export type FilterList = Filter[];
   export type FunctionArn = string;
   export type FunctionArnList = FunctionArn[];
   export interface FunctionCode {
@@ -1254,7 +1429,7 @@ declare namespace Lambda {
      */
     Environment?: EnvironmentResponse;
     /**
-     * The KMS key that's used to encrypt the function's environment variables. This key is only returned if you've configured a customer managed CMK.
+     * The KMS key that's used to encrypt the function's environment variables. This key is only returned if you've configured a customer managed key.
      */
     KMSKeyArn?: KMSKeyArn;
     /**
@@ -1262,7 +1437,7 @@ declare namespace Lambda {
      */
     TracingConfig?: TracingConfigResponse;
     /**
-     * For Lambda@Edge functions, the ARN of the master function.
+     * For Lambda@Edge functions, the ARN of the main function.
      */
     MasterArn?: FunctionArn;
     /**
@@ -1321,6 +1496,10 @@ declare namespace Lambda {
      * The instruction set architecture that the function supports. Architecture is a string array with one of the valid values. The default architecture value is x86_64.
      */
     Architectures?: ArchitecturesList;
+    /**
+     * The size of the function’s /tmp directory in MB. The default value is 512, but can be any whole number between 512 and 10240 MB.
+     */
+    EphemeralStorage?: EphemeralStorage;
   }
   export interface FunctionEventInvokeConfig {
     /**
@@ -1349,6 +1528,36 @@ declare namespace Lambda {
   export type FunctionName = string;
   export type FunctionResponseType = "ReportBatchItemFailures"|string;
   export type FunctionResponseTypeList = FunctionResponseType[];
+  export type FunctionUrl = string;
+  export type FunctionUrlAuthType = "NONE"|"AWS_IAM"|string;
+  export interface FunctionUrlConfig {
+    /**
+     * The HTTP URL endpoint for your function.
+     */
+    FunctionUrl: FunctionUrl;
+    /**
+     * The Amazon Resource Name (ARN) of your function.
+     */
+    FunctionArn: FunctionArn;
+    /**
+     * When the function URL was created, in ISO-8601 format (YYYY-MM-DDThh:mm:ss.sTZD).
+     */
+    CreationTime: Timestamp;
+    /**
+     * When the function URL configuration was last updated, in ISO-8601 format (YYYY-MM-DDThh:mm:ss.sTZD).
+     */
+    LastModifiedTime: Timestamp;
+    /**
+     * The cross-origin resource sharing (CORS) settings for your function URL.
+     */
+    Cors?: Cors;
+    /**
+     * The type of authentication that your function URL uses. Set to AWS_IAM if you want to restrict access to authenticated IAM users only. Set to NONE if you want to bypass IAM authentication to create a public endpoint. For more information, see  Security and auth model for Lambda function URLs.
+     */
+    AuthType: FunctionUrlAuthType;
+  }
+  export type FunctionUrlConfigList = FunctionUrlConfig[];
+  export type FunctionUrlQualifier = string;
   export type FunctionVersion = "ALL"|string;
   export interface GetAccountSettingsRequest {
   }
@@ -1465,6 +1674,42 @@ declare namespace Lambda {
      * The function's reserved concurrency.
      */
     Concurrency?: Concurrency;
+  }
+  export interface GetFunctionUrlConfigRequest {
+    /**
+     * The name of the Lambda function.  Name formats     Function name - my-function.    Function ARN - arn:aws:lambda:us-west-2:123456789012:function:my-function.    Partial ARN - 123456789012:function:my-function.   The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.
+     */
+    FunctionName: FunctionName;
+    /**
+     * The alias name.
+     */
+    Qualifier?: FunctionUrlQualifier;
+  }
+  export interface GetFunctionUrlConfigResponse {
+    /**
+     * The HTTP URL endpoint for your function.
+     */
+    FunctionUrl: FunctionUrl;
+    /**
+     * The Amazon Resource Name (ARN) of your function.
+     */
+    FunctionArn: FunctionArn;
+    /**
+     * The type of authentication that your function URL uses. Set to AWS_IAM if you want to restrict access to authenticated IAM users only. Set to NONE if you want to bypass IAM authentication to create a public endpoint. For more information, see  Security and auth model for Lambda function URLs.
+     */
+    AuthType: FunctionUrlAuthType;
+    /**
+     * The cross-origin resource sharing (CORS) settings for your function URL.
+     */
+    Cors?: Cors;
+    /**
+     * When the function URL was created, in ISO-8601 format (YYYY-MM-DDThh:mm:ss.sTZD).
+     */
+    CreationTime: Timestamp;
+    /**
+     * When the function URL configuration was last updated, in ISO-8601 format (YYYY-MM-DDThh:mm:ss.sTZD).
+     */
+    LastModifiedTime: Timestamp;
   }
   export interface GetLayerVersionByArnRequest {
     /**
@@ -1597,6 +1842,8 @@ declare namespace Lambda {
     LastModified?: Timestamp;
   }
   export type Handler = string;
+  export type Header = string;
+  export type HeadersList = Header[];
   export type HttpStatus = number;
   export interface ImageConfig {
     /**
@@ -1651,7 +1898,7 @@ declare namespace Lambda {
      */
     ClientContext?: String;
     /**
-     * The JSON that you want to provide to your Lambda function as input.
+     * The JSON that you want to provide to your Lambda function as input. You can enter the JSON directly. For example, --payload '{ "key": "value" }'. You can also specify a file path. For example, --payload file://payload.json. 
      */
     Payload?: _Blob;
     /**
@@ -1915,6 +2162,30 @@ declare namespace Lambda {
      */
     NextMarker?: String;
   }
+  export interface ListFunctionUrlConfigsRequest {
+    /**
+     * The name of the Lambda function.  Name formats     Function name - my-function.    Function ARN - arn:aws:lambda:us-west-2:123456789012:function:my-function.    Partial ARN - 123456789012:function:my-function.   The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.
+     */
+    FunctionName: FunctionName;
+    /**
+     * Specify the pagination token that's returned by a previous request to retrieve the next page of results.
+     */
+    Marker?: String;
+    /**
+     * The maximum number of function URLs to return in the response. Note that ListFunctionUrlConfigs returns a maximum of 50 items in each response, even if you set the number higher.
+     */
+    MaxItems?: MaxItems;
+  }
+  export interface ListFunctionUrlConfigsResponse {
+    /**
+     * A list of function URL configurations.
+     */
+    FunctionUrlConfigs: FunctionUrlConfigList;
+    /**
+     * The pagination token that's included if more results are available.
+     */
+    NextMarker?: String;
+  }
   export interface ListFunctionsByCodeSigningConfigRequest {
     /**
      * The The Amazon Resource Name (ARN) of the code signing configuration.
@@ -2091,7 +2362,9 @@ declare namespace Lambda {
   export type LogType = "None"|"Tail"|string;
   export type Long = number;
   export type MasterRegion = string;
+  export type MaxAge = number;
   export type MaxFunctionEventInvokeConfigListItems = number;
+  export type MaxItems = number;
   export type MaxLayerListItems = number;
   export type MaxListItems = number;
   export type MaxProvisionedConcurrencyConfigListItems = number;
@@ -2101,6 +2374,7 @@ declare namespace Lambda {
   export type MaximumRetryAttempts = number;
   export type MaximumRetryAttemptsEventSourceMapping = number;
   export type MemorySize = number;
+  export type Method = string;
   export type NameSpacedFunctionArn = string;
   export type NamespacedFunctionName = string;
   export type NamespacedStatementId = string;
@@ -2118,10 +2392,13 @@ declare namespace Lambda {
     Destination?: DestinationArn;
   }
   export type OrganizationId = string;
+  export type Origin = string;
   export type PackageType = "Zip"|"Image"|string;
   export type ParallelizationFactor = number;
+  export type Pattern = string;
   export type PositiveInteger = number;
   export type Principal = string;
+  export type PrincipalOrgID = string;
   export type ProvisionedConcurrencyConfigList = ProvisionedConcurrencyConfigListItem[];
   export interface ProvisionedConcurrencyConfigListItem {
     /**
@@ -2370,7 +2647,7 @@ declare namespace Lambda {
   export type ReservedConcurrentExecutions = number;
   export type ResourceArn = string;
   export type RoleArn = string;
-  export type Runtime = "nodejs"|"nodejs4.3"|"nodejs6.10"|"nodejs8.10"|"nodejs10.x"|"nodejs12.x"|"nodejs14.x"|"java8"|"java8.al2"|"java11"|"python2.7"|"python3.6"|"python3.7"|"python3.8"|"python3.9"|"dotnetcore1.0"|"dotnetcore2.0"|"dotnetcore2.1"|"dotnetcore3.1"|"nodejs4.3-edge"|"go1.x"|"ruby2.5"|"ruby2.7"|"provided"|"provided.al2"|string;
+  export type Runtime = "nodejs"|"nodejs4.3"|"nodejs6.10"|"nodejs8.10"|"nodejs10.x"|"nodejs12.x"|"nodejs14.x"|"nodejs16.x"|"java8"|"java8.al2"|"java11"|"python2.7"|"python3.6"|"python3.7"|"python3.8"|"python3.9"|"dotnetcore1.0"|"dotnetcore2.0"|"dotnetcore2.1"|"dotnetcore3.1"|"dotnet6"|"nodejs4.3-edge"|"go1.x"|"ruby2.5"|"ruby2.7"|"provided"|"provided.al2"|string;
   export type S3Bucket = string;
   export type S3Key = string;
   export type S3ObjectVersion = string;
@@ -2386,7 +2663,7 @@ declare namespace Lambda {
   export type SigningProfileVersionArns = Arn[];
   export interface SourceAccessConfiguration {
     /**
-     * The type of authentication protocol, VPC components, or virtual host for your event source. For example: "Type":"SASL_SCRAM_512_AUTH".    BASIC_AUTH - (Amazon MQ) The Secrets Manager secret that stores your broker credentials.    BASIC_AUTH - (Self-managed Apache Kafka) The Secrets Manager ARN of your secret key used for SASL/PLAIN authentication of your Apache Kafka brokers.    VPC_SUBNET - The subnets associated with your VPC. Lambda connects to these subnets to fetch data from your self-managed Apache Kafka cluster.    VPC_SECURITY_GROUP - The VPC security group used to manage access to your self-managed Apache Kafka brokers.    SASL_SCRAM_256_AUTH - The Secrets Manager ARN of your secret key used for SASL SCRAM-256 authentication of your self-managed Apache Kafka brokers.    SASL_SCRAM_512_AUTH - The Secrets Manager ARN of your secret key used for SASL SCRAM-512 authentication of your self-managed Apache Kafka brokers.    VIRTUAL_HOST - (Amazon MQ) The name of the virtual host in your RabbitMQ broker. Lambda uses this RabbitMQ host as the event source.  
+     * The type of authentication protocol, VPC components, or virtual host for your event source. For example: "Type":"SASL_SCRAM_512_AUTH".    BASIC_AUTH - (Amazon MQ) The Secrets Manager secret that stores your broker credentials.    BASIC_AUTH - (Self-managed Apache Kafka) The Secrets Manager ARN of your secret key used for SASL/PLAIN authentication of your Apache Kafka brokers.    VPC_SUBNET - The subnets associated with your VPC. Lambda connects to these subnets to fetch data from your self-managed Apache Kafka cluster.    VPC_SECURITY_GROUP - The VPC security group used to manage access to your self-managed Apache Kafka brokers.    SASL_SCRAM_256_AUTH - The Secrets Manager ARN of your secret key used for SASL SCRAM-256 authentication of your self-managed Apache Kafka brokers.    SASL_SCRAM_512_AUTH - The Secrets Manager ARN of your secret key used for SASL SCRAM-512 authentication of your self-managed Apache Kafka brokers.    VIRTUAL_HOST - (Amazon MQ) The name of the virtual host in your RabbitMQ broker. Lambda uses this RabbitMQ host as the event source. This property cannot be specified in an UpdateEventSourceMapping API call.    CLIENT_CERTIFICATE_TLS_AUTH - (Amazon MSK, Self-managed Apache Kafka) The Secrets Manager ARN of your secret key containing the certificate chain (X.509 PEM), private key (PKCS#8 PEM), and private key password (optional) used for mutual TLS authentication of your MSK/Apache Kafka brokers.    SERVER_ROOT_CA_CERTIFICATE - (Self-managed Apache Kafka) The Secrets Manager ARN of your secret key containing the root CA certificate (X.509 PEM) used for TLS encryption of your Apache Kafka brokers.   
      */
     Type?: SourceAccessType;
     /**
@@ -2395,7 +2672,7 @@ declare namespace Lambda {
     URI?: URI;
   }
   export type SourceAccessConfigurations = SourceAccessConfiguration[];
-  export type SourceAccessType = "BASIC_AUTH"|"VPC_SUBNET"|"VPC_SECURITY_GROUP"|"SASL_SCRAM_512_AUTH"|"SASL_SCRAM_256_AUTH"|"VIRTUAL_HOST"|string;
+  export type SourceAccessType = "BASIC_AUTH"|"VPC_SUBNET"|"VPC_SECURITY_GROUP"|"SASL_SCRAM_512_AUTH"|"SASL_SCRAM_256_AUTH"|"VIRTUAL_HOST"|"CLIENT_CERTIFICATE_TLS_AUTH"|"SERVER_ROOT_CA_CERTIFICATE"|string;
   export type SourceOwner = string;
   export type State = "Pending"|"Active"|"Inactive"|"Failed"|string;
   export type StateReason = string;
@@ -2513,9 +2790,13 @@ declare namespace Lambda {
      */
     Enabled?: Enabled;
     /**
-     * The maximum number of records in each batch that Lambda pulls from your stream or queue and sends to your function. Lambda passes all of the records in the batch to the function in a single call, up to the payload limit for synchronous invocation (6 MB).    Amazon Kinesis - Default 100. Max 10,000.    Amazon DynamoDB Streams - Default 100. Max 1,000.    Amazon Simple Queue Service - Default 10. For standard queues the max is 10,000. For FIFO queues the max is 10.    Amazon Managed Streaming for Apache Kafka - Default 100. Max 10,000.    Self-Managed Apache Kafka - Default 100. Max 10,000.  
+     * The maximum number of records in each batch that Lambda pulls from your stream or queue and sends to your function. Lambda passes all of the records in the batch to the function in a single call, up to the payload limit for synchronous invocation (6 MB).    Amazon Kinesis - Default 100. Max 10,000.    Amazon DynamoDB Streams - Default 100. Max 10,000.    Amazon Simple Queue Service - Default 10. For standard queues the max is 10,000. For FIFO queues the max is 10.    Amazon Managed Streaming for Apache Kafka - Default 100. Max 10,000.    Self-Managed Apache Kafka - Default 100. Max 10,000.    Amazon MQ (ActiveMQ and RabbitMQ) - Default 100. Max 10,000.  
      */
     BatchSize?: BatchSize;
+    /**
+     * (Streams and Amazon SQS) An object that defines the filter criteria that determine whether Lambda should process an event. For more information, see Lambda event filtering.
+     */
+    FilterCriteria?: FilterCriteria;
     /**
      * (Streams and Amazon SQS standard queues) The maximum amount of time, in seconds, that Lambda spends gathering records before invoking the function. Default: 0 Related setting: When you set BatchSize to a value greater than 10, you must set MaximumBatchingWindowInSeconds to at least 1.
      */
@@ -2549,7 +2830,7 @@ declare namespace Lambda {
      */
     TumblingWindowInSeconds?: TumblingWindowInSeconds;
     /**
-     * (Streams only) A list of current response type enums applied to the event source mapping.
+     * (Streams and Amazon SQS) A list of current response type enums applied to the event source mapping.
      */
     FunctionResponseTypes?: FunctionResponseTypeList;
   }
@@ -2559,15 +2840,15 @@ declare namespace Lambda {
      */
     FunctionName: FunctionName;
     /**
-     * The base64-encoded contents of the deployment package. Amazon Web Services SDK and Amazon Web Services CLI clients handle the encoding for you.
+     * The base64-encoded contents of the deployment package. Amazon Web Services SDK and Amazon Web Services CLI clients handle the encoding for you. Use only with a function defined with a .zip file archive deployment package.
      */
     ZipFile?: _Blob;
     /**
-     * An Amazon S3 bucket in the same Amazon Web Services Region as your function. The bucket can be in a different Amazon Web Services account.
+     * An Amazon S3 bucket in the same Amazon Web Services Region as your function. The bucket can be in a different Amazon Web Services account. Use only with a function defined with a .zip file archive deployment package.
      */
     S3Bucket?: S3Bucket;
     /**
-     * The Amazon S3 key of the deployment package.
+     * The Amazon S3 key of the deployment package. Use only with a function defined with a .zip file archive deployment package.
      */
     S3Key?: S3Key;
     /**
@@ -2575,7 +2856,7 @@ declare namespace Lambda {
      */
     S3ObjectVersion?: S3ObjectVersion;
     /**
-     * URI of a container image in the Amazon ECR registry.
+     * URI of a container image in the Amazon ECR registry. Do not use for a function defined with a .zip file archive.
      */
     ImageUri?: String;
     /**
@@ -2591,7 +2872,7 @@ declare namespace Lambda {
      */
     RevisionId?: String;
     /**
-     * The instruction set architecture that the function supports. Enter a string array with one of the valid values. The default value is x86_64.
+     * The instruction set architecture that the function supports. Enter a string array with one of the valid values (arm64 or x86_64). The default value is x86_64.
      */
     Architectures?: ArchitecturesList;
   }
@@ -2605,7 +2886,7 @@ declare namespace Lambda {
      */
     Role?: RoleArn;
     /**
-     * The name of the method within your code that Lambda calls to execute your function. The format includes the file name. It can also include namespaces and other qualifiers, depending on the runtime. For more information, see Programming Model.
+     * The name of the method within your code that Lambda calls to execute your function. Handler is required if the deployment package is a .zip file archive. The format includes the file name. It can also include namespaces and other qualifiers, depending on the runtime. For more information, see Programming Model.
      */
     Handler?: Handler;
     /**
@@ -2613,7 +2894,7 @@ declare namespace Lambda {
      */
     Description?: Description;
     /**
-     * The amount of time that Lambda allows a function to run before stopping it. The default is 3 seconds. The maximum allowed value is 900 seconds. For additional information, see Lambda execution environment.
+     * The amount of time (in seconds) that Lambda allows a function to run before stopping it. The default is 3 seconds. The maximum allowed value is 900 seconds. For additional information, see Lambda execution environment.
      */
     Timeout?: Timeout;
     /**
@@ -2629,7 +2910,7 @@ declare namespace Lambda {
      */
     Environment?: Environment;
     /**
-     * The identifier of the function's runtime.
+     * The identifier of the function's runtime. Runtime is required if the deployment package is a .zip file archive. 
      */
     Runtime?: Runtime;
     /**
@@ -2660,6 +2941,10 @@ declare namespace Lambda {
      *  Container image configuration values that override the values in the container image Docker file.
      */
     ImageConfig?: ImageConfig;
+    /**
+     * The size of the function’s /tmp directory in MB. The default value is 512, but can be any whole number between 512 and 10240 MB.
+     */
+    EphemeralStorage?: EphemeralStorage;
   }
   export interface UpdateFunctionEventInvokeConfigRequest {
     /**
@@ -2682,6 +2967,50 @@ declare namespace Lambda {
      * A destination for events after they have been sent to a function for processing.  Destinations     Function - The Amazon Resource Name (ARN) of a Lambda function.    Queue - The ARN of an SQS queue.    Topic - The ARN of an SNS topic.    Event Bus - The ARN of an Amazon EventBridge event bus.  
      */
     DestinationConfig?: DestinationConfig;
+  }
+  export interface UpdateFunctionUrlConfigRequest {
+    /**
+     * The name of the Lambda function.  Name formats     Function name - my-function.    Function ARN - arn:aws:lambda:us-west-2:123456789012:function:my-function.    Partial ARN - 123456789012:function:my-function.   The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.
+     */
+    FunctionName: FunctionName;
+    /**
+     * The alias name.
+     */
+    Qualifier?: FunctionUrlQualifier;
+    /**
+     * The type of authentication that your function URL uses. Set to AWS_IAM if you want to restrict access to authenticated IAM users only. Set to NONE if you want to bypass IAM authentication to create a public endpoint. For more information, see  Security and auth model for Lambda function URLs.
+     */
+    AuthType?: FunctionUrlAuthType;
+    /**
+     * The cross-origin resource sharing (CORS) settings for your function URL.
+     */
+    Cors?: Cors;
+  }
+  export interface UpdateFunctionUrlConfigResponse {
+    /**
+     * The HTTP URL endpoint for your function.
+     */
+    FunctionUrl: FunctionUrl;
+    /**
+     * The Amazon Resource Name (ARN) of your function.
+     */
+    FunctionArn: FunctionArn;
+    /**
+     * The type of authentication that your function URL uses. Set to AWS_IAM if you want to restrict access to authenticated IAM users only. Set to NONE if you want to bypass IAM authentication to create a public endpoint. For more information, see  Security and auth model for Lambda function URLs.
+     */
+    AuthType: FunctionUrlAuthType;
+    /**
+     * The cross-origin resource sharing (CORS) settings for your function URL.
+     */
+    Cors?: Cors;
+    /**
+     * When the function URL was created, in ISO-8601 format (YYYY-MM-DDThh:mm:ss.sTZD).
+     */
+    CreationTime: Timestamp;
+    /**
+     * When the function URL configuration was last updated, in ISO-8601 format (YYYY-MM-DDThh:mm:ss.sTZD).
+     */
+    LastModifiedTime: Timestamp;
   }
   export type Version = string;
   export interface VpcConfig {

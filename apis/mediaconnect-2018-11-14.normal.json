@@ -1342,6 +1342,26 @@
         }
       }
     },
+    "AddMaintenance": {
+      "type": "structure",
+      "members": {
+        "MaintenanceDay": {
+          "shape": "MaintenanceDay",
+          "locationName": "maintenanceDay",
+          "documentation": "A day of a week when the maintenance will happen. Use Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday."
+        },
+        "MaintenanceStartHour": {
+          "shape": "__string",
+          "locationName": "maintenanceStartHour",
+          "documentation": "UTC time when the maintenance will happen. Use 24-hour HH:MM format. Minutes must be 00. Example: 13:00. The default value is 02:00."
+        }
+      },
+      "documentation": "Create maintenance setting for a flow",
+      "required": [
+        "MaintenanceDay",
+        "MaintenanceStartHour"
+      ]
+    },
     "AddMediaStreamRequest": {
       "type": "structure",
       "members": {
@@ -1414,7 +1434,7 @@
         "MaxLatency": {
           "shape": "__integer",
           "locationName": "maxLatency",
-          "documentation": "The maximum latency in milliseconds for Zixi-based streams."
+          "documentation": "The maximum latency in milliseconds. This parameter applies only to RIST-based, Zixi-based, and Fujitsu-based streams."
         },
         "MediaStreamOutputConfigurations": {
           "shape": "__listOfMediaStreamOutputConfigurationRequest",
@@ -1445,6 +1465,11 @@
           "shape": "__string",
           "locationName": "remoteId",
           "documentation": "The remote ID for the Zixi-pull output stream."
+        },
+        "SenderControlPort": {
+          "shape": "__integer",
+          "locationName": "senderControlPort",
+          "documentation": "The port that the flow uses to send outbound requests to initiate connection with the sender."
         },
         "SmoothingLatency": {
           "shape": "__integer",
@@ -1531,6 +1556,10 @@
           "shape": "__listOfVpcInterfaceRequest",
           "locationName": "vpcInterfaces",
           "documentation": "The VPC interfaces you want on the flow."
+        },
+        "Maintenance": {
+          "shape": "AddMaintenance",
+          "locationName": "maintenance"
         }
       },
       "documentation": "Creates a new flow. The request must include one source. The request optionally can include outputs (up to 50) and entitlements (up to 50).",
@@ -1899,7 +1928,7 @@
           "locationName": "state"
         }
       },
-      "documentation": "The settings for source failover"
+      "documentation": "The settings for source failover."
     },
     "FailoverMode": {
       "type": "string",
@@ -1972,6 +2001,10 @@
           "shape": "__listOfVpcInterface",
           "locationName": "vpcInterfaces",
           "documentation": "The VPC Interfaces for this flow."
+        },
+        "Maintenance": {
+          "shape": "Maintenance",
+          "locationName": "maintenance"
         }
       },
       "documentation": "The settings for a flow, including its source, outputs, and entitlements.",
@@ -2433,6 +2466,10 @@
           "shape": "Status",
           "locationName": "status",
           "documentation": "The current status of the flow."
+        },
+        "Maintenance": {
+          "shape": "Maintenance",
+          "locationName": "maintenance"
         }
       },
       "documentation": "Provides a summary of a flow, including its ARN, Availability Zone, and source type.",
@@ -2443,6 +2480,44 @@
         "AvailabilityZone",
         "FlowArn",
         "Name"
+      ]
+    },
+    "Maintenance": {
+      "type": "structure",
+      "members": {
+        "MaintenanceDay": {
+          "shape": "MaintenanceDay",
+          "locationName": "maintenanceDay",
+          "documentation": "A day of a week when the maintenance will happen. Use Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday."
+        },
+        "MaintenanceDeadline": {
+          "shape": "__string",
+          "locationName": "maintenanceDeadline",
+          "documentation": "The Maintenance has to be performed before this deadline in ISO UTC format. Example: 2021-01-30T08:30:00Z."
+        },
+        "MaintenanceScheduledDate": {
+          "shape": "__string",
+          "locationName": "maintenanceScheduledDate",
+          "documentation": "A scheduled date in ISO UTC format when the maintenance will happen. Use YYYY-MM-DD format. Example: 2021-01-30."
+        },
+        "MaintenanceStartHour": {
+          "shape": "__string",
+          "locationName": "maintenanceStartHour",
+          "documentation": "UTC time when the maintenance will happen. Use 24-hour HH:MM format. Minutes must be 00. Example: 13:00. The default value is 02:00."
+        }
+      },
+      "documentation": "The maintenance setting of a flow"
+    },
+    "MaintenanceDay": {
+      "type": "string",
+      "enum": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
       ]
     },
     "MaxResults": {
@@ -2823,7 +2898,8 @@
         "rist",
         "st2110-jpegxs",
         "cdi",
-        "srt-listener"
+        "srt-listener",
+        "fujitsu-qos"
       ]
     },
     "PurchaseOfferingRequest": {
@@ -3215,7 +3291,7 @@
         "MaxLatency": {
           "shape": "__integer",
           "locationName": "maxLatency",
-          "documentation": "The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams."
+          "documentation": "The maximum latency in milliseconds. This parameter applies only to RIST-based, Zixi-based, and Fujitsu-based streams."
         },
         "MaxSyncBuffer": {
           "shape": "__integer",
@@ -3241,6 +3317,16 @@
           "shape": "Protocol",
           "locationName": "protocol",
           "documentation": "The protocol that is used by the source."
+        },
+        "SenderControlPort": {
+          "shape": "__integer",
+          "locationName": "senderControlPort",
+          "documentation": "The port that the flow uses to send outbound requests to initiate connection with the sender."
+        },
+        "SenderIpAddress": {
+          "shape": "__string",
+          "locationName": "senderIpAddress",
+          "documentation": "The IP address that the flow communicates with to initiate connection with the sender."
         },
         "StreamId": {
           "shape": "__string",
@@ -3302,6 +3388,16 @@
           "shape": "__string",
           "locationName": "name",
           "documentation": "The name of the source."
+        },
+        "SenderControlPort": {
+          "shape": "__integer",
+          "locationName": "senderControlPort",
+          "documentation": "The port that the flow uses to send outbound requests to initiate connection with the sender."
+        },
+        "SenderIpAddress": {
+          "shape": "__string",
+          "locationName": "senderIpAddress",
+          "documentation": "The IP address that the flow communicates with to initiate connection with the sender."
         },
         "SourceArn": {
           "shape": "__string",
@@ -3476,7 +3572,7 @@
         "MaxLatency": {
           "shape": "__integer",
           "locationName": "maxLatency",
-          "documentation": "The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams."
+          "documentation": "The maximum latency in milliseconds. This parameter applies only to RIST-based, Zixi-based, and Fujitsu-based streams."
         },
         "MaxSyncBuffer": {
           "shape": "__integer",
@@ -3497,6 +3593,16 @@
           "shape": "__string",
           "locationName": "remoteId",
           "documentation": "The remote ID for the Zixi-pull stream."
+        },
+        "SenderControlPort": {
+          "shape": "__integer",
+          "locationName": "senderControlPort",
+          "documentation": "The port that the flow uses to send outbound requests to initiate connection with the sender."
+        },
+        "SenderIpAddress": {
+          "shape": "__string",
+          "locationName": "senderIpAddress",
+          "documentation": "The IP address that the flow communicates with to initiate connection with the sender."
         },
         "SmoothingLatency": {
           "shape": "__integer",
@@ -3609,7 +3715,7 @@
           "locationName": "state"
         }
       },
-      "documentation": "The settings for source failover"
+      "documentation": "The settings for source failover."
     },
     "UpdateFlowEntitlementRequest": {
       "type": "structure",
@@ -3763,7 +3869,7 @@
         "MaxLatency": {
           "shape": "__integer",
           "locationName": "maxLatency",
-          "documentation": "The maximum latency in milliseconds for Zixi-based streams."
+          "documentation": "The maximum latency in milliseconds. This parameter applies only to RIST-based, Zixi-based, and Fujitsu-based streams."
         },
         "MediaStreamOutputConfigurations": {
           "shape": "__listOfMediaStreamOutputConfigurationRequest",
@@ -3795,6 +3901,16 @@
           "shape": "__string",
           "locationName": "remoteId",
           "documentation": "The remote ID for the Zixi-pull stream."
+        },
+        "SenderControlPort": {
+          "shape": "__integer",
+          "locationName": "senderControlPort",
+          "documentation": "The port that the flow uses to send outbound requests to initiate connection with the sender."
+        },
+        "SenderIpAddress": {
+          "shape": "__string",
+          "locationName": "senderIpAddress",
+          "documentation": "The IP address that the flow communicates with to initiate connection with the sender."
         },
         "SmoothingLatency": {
           "shape": "__integer",
@@ -3845,6 +3961,10 @@
         "SourceFailoverConfig": {
           "shape": "UpdateFailoverConfig",
           "locationName": "sourceFailoverConfig"
+        },
+        "Maintenance": {
+          "shape": "UpdateMaintenance",
+          "locationName": "maintenance"
         }
       },
       "documentation": "A request to update flow.",
@@ -3898,7 +4018,7 @@
         "MaxLatency": {
           "shape": "__integer",
           "locationName": "maxLatency",
-          "documentation": "The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams."
+          "documentation": "The maximum latency in milliseconds. This parameter applies only to RIST-based, Zixi-based, and Fujitsu-based streams."
         },
         "MaxSyncBuffer": {
           "shape": "__integer",
@@ -3919,6 +4039,16 @@
           "shape": "Protocol",
           "locationName": "protocol",
           "documentation": "The protocol that is used by the source."
+        },
+        "SenderControlPort": {
+          "shape": "__integer",
+          "locationName": "senderControlPort",
+          "documentation": "The port that the flow uses to send outbound requests to initiate connection with the sender."
+        },
+        "SenderIpAddress": {
+          "shape": "__string",
+          "locationName": "senderIpAddress",
+          "documentation": "The IP address that the flow communicates with to initiate connection with the sender."
         },
         "SourceArn": {
           "shape": "__string",
@@ -3963,13 +4093,34 @@
         }
       }
     },
+    "UpdateMaintenance": {
+      "type": "structure",
+      "members": {
+        "MaintenanceDay": {
+          "shape": "MaintenanceDay",
+          "locationName": "maintenanceDay",
+          "documentation": "A day of a week when the maintenance will happen. use Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday."
+        },
+        "MaintenanceScheduledDate": {
+          "shape": "__string",
+          "locationName": "maintenanceScheduledDate",
+          "documentation": "A scheduled date in ISO UTC format when the maintenance will happen. Use YYYY-MM-DD format. Example: 2021-01-30."
+        },
+        "MaintenanceStartHour": {
+          "shape": "__string",
+          "locationName": "maintenanceStartHour",
+          "documentation": "UTC time when the maintenance will happen. Use 24-hour HH:MM format. Minutes must be 00. Example: 13:00. The default value is 02:00."
+        }
+      },
+      "documentation": "Update maintenance setting for a flow"
+    },
     "VpcInterface": {
       "type": "structure",
       "members": {
         "Name": {
           "shape": "__string",
           "locationName": "name",
-          "documentation": "Immutable and has to be a unique against other VpcInterfaces in this Flow"
+          "documentation": "Immutable and has to be a unique against other VpcInterfaces in this Flow."
         },
         "NetworkInterfaceIds": {
           "shape": "__listOf__string",

@@ -12,11 +12,11 @@ declare class AuditManager extends Service {
   constructor(options?: AuditManager.Types.ClientConfiguration)
   config: Config & AuditManager.Types.ClientConfiguration;
   /**
-   *  Associates an evidence folder to the specified assessment report in Audit Manager. 
+   *  Associates an evidence folder to an assessment report in a Audit Manager assessment. 
    */
   associateAssessmentReportEvidenceFolder(params: AuditManager.Types.AssociateAssessmentReportEvidenceFolderRequest, callback?: (err: AWSError, data: AuditManager.Types.AssociateAssessmentReportEvidenceFolderResponse) => void): Request<AuditManager.Types.AssociateAssessmentReportEvidenceFolderResponse, AWSError>;
   /**
-   *  Associates an evidence folder to the specified assessment report in Audit Manager. 
+   *  Associates an evidence folder to an assessment report in a Audit Manager assessment. 
    */
   associateAssessmentReportEvidenceFolder(callback?: (err: AWSError, data: AuditManager.Types.AssociateAssessmentReportEvidenceFolderResponse) => void): Request<AuditManager.Types.AssociateAssessmentReportEvidenceFolderResponse, AWSError>;
   /**
@@ -28,35 +28,35 @@ declare class AuditManager extends Service {
    */
   batchAssociateAssessmentReportEvidence(callback?: (err: AWSError, data: AuditManager.Types.BatchAssociateAssessmentReportEvidenceResponse) => void): Request<AuditManager.Types.BatchAssociateAssessmentReportEvidenceResponse, AWSError>;
   /**
-   *  Create a batch of delegations for a specified assessment in Audit Manager. 
+   *  Creates a batch of delegations for an assessment in Audit Manager. 
    */
   batchCreateDelegationByAssessment(params: AuditManager.Types.BatchCreateDelegationByAssessmentRequest, callback?: (err: AWSError, data: AuditManager.Types.BatchCreateDelegationByAssessmentResponse) => void): Request<AuditManager.Types.BatchCreateDelegationByAssessmentResponse, AWSError>;
   /**
-   *  Create a batch of delegations for a specified assessment in Audit Manager. 
+   *  Creates a batch of delegations for an assessment in Audit Manager. 
    */
   batchCreateDelegationByAssessment(callback?: (err: AWSError, data: AuditManager.Types.BatchCreateDelegationByAssessmentResponse) => void): Request<AuditManager.Types.BatchCreateDelegationByAssessmentResponse, AWSError>;
   /**
-   *  Deletes the delegations in the specified Audit Manager assessment. 
+   *  Deletes a batch of delegations for an assessment in Audit Manager. 
    */
   batchDeleteDelegationByAssessment(params: AuditManager.Types.BatchDeleteDelegationByAssessmentRequest, callback?: (err: AWSError, data: AuditManager.Types.BatchDeleteDelegationByAssessmentResponse) => void): Request<AuditManager.Types.BatchDeleteDelegationByAssessmentResponse, AWSError>;
   /**
-   *  Deletes the delegations in the specified Audit Manager assessment. 
+   *  Deletes a batch of delegations for an assessment in Audit Manager. 
    */
   batchDeleteDelegationByAssessment(callback?: (err: AWSError, data: AuditManager.Types.BatchDeleteDelegationByAssessmentResponse) => void): Request<AuditManager.Types.BatchDeleteDelegationByAssessmentResponse, AWSError>;
   /**
-   *  Disassociates a list of evidence from the specified assessment report in Audit Manager. 
+   *  Disassociates a list of evidence from an assessment report in Audit Manager. 
    */
   batchDisassociateAssessmentReportEvidence(params: AuditManager.Types.BatchDisassociateAssessmentReportEvidenceRequest, callback?: (err: AWSError, data: AuditManager.Types.BatchDisassociateAssessmentReportEvidenceResponse) => void): Request<AuditManager.Types.BatchDisassociateAssessmentReportEvidenceResponse, AWSError>;
   /**
-   *  Disassociates a list of evidence from the specified assessment report in Audit Manager. 
+   *  Disassociates a list of evidence from an assessment report in Audit Manager. 
    */
   batchDisassociateAssessmentReportEvidence(callback?: (err: AWSError, data: AuditManager.Types.BatchDisassociateAssessmentReportEvidenceResponse) => void): Request<AuditManager.Types.BatchDisassociateAssessmentReportEvidenceResponse, AWSError>;
   /**
-   *  Uploads one or more pieces of evidence to the specified control in the assessment in Audit Manager. 
+   *  Uploads one or more pieces of evidence to a control in an Audit Manager assessment. 
    */
   batchImportEvidenceToAssessmentControl(params: AuditManager.Types.BatchImportEvidenceToAssessmentControlRequest, callback?: (err: AWSError, data: AuditManager.Types.BatchImportEvidenceToAssessmentControlResponse) => void): Request<AuditManager.Types.BatchImportEvidenceToAssessmentControlResponse, AWSError>;
   /**
-   *  Uploads one or more pieces of evidence to the specified control in the assessment in Audit Manager. 
+   *  Uploads one or more pieces of evidence to a control in an Audit Manager assessment. 
    */
   batchImportEvidenceToAssessmentControl(callback?: (err: AWSError, data: AuditManager.Types.BatchImportEvidenceToAssessmentControlResponse) => void): Request<AuditManager.Types.BatchImportEvidenceToAssessmentControlResponse, AWSError>;
   /**
@@ -108,11 +108,19 @@ declare class AuditManager extends Service {
    */
   deleteAssessmentFramework(callback?: (err: AWSError, data: AuditManager.Types.DeleteAssessmentFrameworkResponse) => void): Request<AuditManager.Types.DeleteAssessmentFrameworkResponse, AWSError>;
   /**
-   *  Deletes an assessment report from an assessment in Audit Manager. 
+   *  Deletes a share request for a custom framework in Audit Manager. 
+   */
+  deleteAssessmentFrameworkShare(params: AuditManager.Types.DeleteAssessmentFrameworkShareRequest, callback?: (err: AWSError, data: AuditManager.Types.DeleteAssessmentFrameworkShareResponse) => void): Request<AuditManager.Types.DeleteAssessmentFrameworkShareResponse, AWSError>;
+  /**
+   *  Deletes a share request for a custom framework in Audit Manager. 
+   */
+  deleteAssessmentFrameworkShare(callback?: (err: AWSError, data: AuditManager.Types.DeleteAssessmentFrameworkShareResponse) => void): Request<AuditManager.Types.DeleteAssessmentFrameworkShareResponse, AWSError>;
+  /**
+   * Deletes an assessment report in Audit Manager.  When you run the DeleteAssessmentReport operation, Audit Manager attempts to delete the following data:   The specified assessment report that’s stored in your S3 bucket   The associated metadata that’s stored in Audit Manager   If Audit Manager can’t access the assessment report in your S3 bucket, the report isn’t deleted. In this event, the DeleteAssessmentReport operation doesn’t fail. Instead, it proceeds to delete the associated metadata only. You must then delete the assessment report from the S3 bucket yourself.  This scenario happens when Audit Manager receives a 403 (Forbidden) or 404 (Not Found) error from Amazon S3. To avoid this, make sure that your S3 bucket is available, and that you configured the correct permissions for Audit Manager to delete resources in your S3 bucket. For an example permissions policy that you can use, see Assessment report destination permissions in the Audit Manager User Guide. For information about the issues that could cause a 403 (Forbidden) or 404 (Not Found) error from Amazon S3, see List of Error Codes in the Amazon Simple Storage Service API Reference. 
    */
   deleteAssessmentReport(params: AuditManager.Types.DeleteAssessmentReportRequest, callback?: (err: AWSError, data: AuditManager.Types.DeleteAssessmentReportResponse) => void): Request<AuditManager.Types.DeleteAssessmentReportResponse, AWSError>;
   /**
-   *  Deletes an assessment report from an assessment in Audit Manager. 
+   * Deletes an assessment report in Audit Manager.  When you run the DeleteAssessmentReport operation, Audit Manager attempts to delete the following data:   The specified assessment report that’s stored in your S3 bucket   The associated metadata that’s stored in Audit Manager   If Audit Manager can’t access the assessment report in your S3 bucket, the report isn’t deleted. In this event, the DeleteAssessmentReport operation doesn’t fail. Instead, it proceeds to delete the associated metadata only. You must then delete the assessment report from the S3 bucket yourself.  This scenario happens when Audit Manager receives a 403 (Forbidden) or 404 (Not Found) error from Amazon S3. To avoid this, make sure that your S3 bucket is available, and that you configured the correct permissions for Audit Manager to delete resources in your S3 bucket. For an example permissions policy that you can use, see Assessment report destination permissions in the Audit Manager User Guide. For information about the issues that could cause a 403 (Forbidden) or 404 (Not Found) error from Amazon S3, see List of Error Codes in the Amazon Simple Storage Service API Reference. 
    */
   deleteAssessmentReport(callback?: (err: AWSError, data: AuditManager.Types.DeleteAssessmentReportResponse) => void): Request<AuditManager.Types.DeleteAssessmentReportResponse, AWSError>;
   /**
@@ -124,19 +132,19 @@ declare class AuditManager extends Service {
    */
   deleteControl(callback?: (err: AWSError, data: AuditManager.Types.DeleteControlResponse) => void): Request<AuditManager.Types.DeleteControlResponse, AWSError>;
   /**
-   *  Deregisters an account in Audit Manager. 
+   *  Deregisters an account in Audit Manager.   When you deregister your account from Audit Manager, your data isn’t deleted. If you want to delete your resource data, you must perform that task separately before you deregister your account. Either, you can do this in the Audit Manager console. Or, you can use one of the delete API operations that are provided by Audit Manager.  To delete your Audit Manager resource data, see the following instructions:     DeleteAssessment (see also: Deleting an assessment in the Audit Manager User Guide)    DeleteAssessmentFramework (see also: Deleting a custom framework in the Audit Manager User Guide)    DeleteAssessmentFrameworkShare (see also: Deleting a share request in the Audit Manager User Guide)    DeleteAssessmentReport (see also: Deleting an assessment report in the Audit Manager User Guide)    DeleteControl (see also: Deleting a custom control in the Audit Manager User Guide)   At this time, Audit Manager doesn't provide an option to delete evidence. All available delete operations are listed above. 
    */
   deregisterAccount(params: AuditManager.Types.DeregisterAccountRequest, callback?: (err: AWSError, data: AuditManager.Types.DeregisterAccountResponse) => void): Request<AuditManager.Types.DeregisterAccountResponse, AWSError>;
   /**
-   *  Deregisters an account in Audit Manager. 
+   *  Deregisters an account in Audit Manager.   When you deregister your account from Audit Manager, your data isn’t deleted. If you want to delete your resource data, you must perform that task separately before you deregister your account. Either, you can do this in the Audit Manager console. Or, you can use one of the delete API operations that are provided by Audit Manager.  To delete your Audit Manager resource data, see the following instructions:     DeleteAssessment (see also: Deleting an assessment in the Audit Manager User Guide)    DeleteAssessmentFramework (see also: Deleting a custom framework in the Audit Manager User Guide)    DeleteAssessmentFrameworkShare (see also: Deleting a share request in the Audit Manager User Guide)    DeleteAssessmentReport (see also: Deleting an assessment report in the Audit Manager User Guide)    DeleteControl (see also: Deleting a custom control in the Audit Manager User Guide)   At this time, Audit Manager doesn't provide an option to delete evidence. All available delete operations are listed above. 
    */
   deregisterAccount(callback?: (err: AWSError, data: AuditManager.Types.DeregisterAccountResponse) => void): Request<AuditManager.Types.DeregisterAccountResponse, AWSError>;
   /**
-   * Removes the specified member account as a delegated administrator for Audit Manager.   When you remove a delegated administrator from your Audit Manager settings, or when you deregister a delegated administrator from Organizations, you continue to have access to the evidence that you previously collected under that account. However, Audit Manager will stop collecting and attaching evidence to that delegated administrator account moving forward. 
+   * Removes the specified Amazon Web Services account as a delegated administrator for Audit Manager.   When you remove a delegated administrator from your Audit Manager settings, you continue to have access to the evidence that you previously collected under that account. This is also the case when you deregister a delegated administrator from Organizations. However, Audit Manager will stop collecting and attaching evidence to that delegated administrator account moving forward.   When you deregister a delegated administrator account for Audit Manager, the data for that account isn’t deleted. If you want to delete resource data for a delegated administrator account, you must perform that task separately before you deregister the account. Either, you can do this in the Audit Manager console. Or, you can use one of the delete API operations that are provided by Audit Manager.  To delete your Audit Manager resource data, see the following instructions:     DeleteAssessment (see also: Deleting an assessment in the Audit Manager User Guide)    DeleteAssessmentFramework (see also: Deleting a custom framework in the Audit Manager User Guide)    DeleteAssessmentFrameworkShare (see also: Deleting a share request in the Audit Manager User Guide)    DeleteAssessmentReport (see also: Deleting an assessment report in the Audit Manager User Guide)    DeleteControl (see also: Deleting a custom control in the Audit Manager User Guide)   At this time, Audit Manager doesn't provide an option to delete evidence. All available delete operations are listed above. 
    */
   deregisterOrganizationAdminAccount(params: AuditManager.Types.DeregisterOrganizationAdminAccountRequest, callback?: (err: AWSError, data: AuditManager.Types.DeregisterOrganizationAdminAccountResponse) => void): Request<AuditManager.Types.DeregisterOrganizationAdminAccountResponse, AWSError>;
   /**
-   * Removes the specified member account as a delegated administrator for Audit Manager.   When you remove a delegated administrator from your Audit Manager settings, or when you deregister a delegated administrator from Organizations, you continue to have access to the evidence that you previously collected under that account. However, Audit Manager will stop collecting and attaching evidence to that delegated administrator account moving forward. 
+   * Removes the specified Amazon Web Services account as a delegated administrator for Audit Manager.   When you remove a delegated administrator from your Audit Manager settings, you continue to have access to the evidence that you previously collected under that account. This is also the case when you deregister a delegated administrator from Organizations. However, Audit Manager will stop collecting and attaching evidence to that delegated administrator account moving forward.   When you deregister a delegated administrator account for Audit Manager, the data for that account isn’t deleted. If you want to delete resource data for a delegated administrator account, you must perform that task separately before you deregister the account. Either, you can do this in the Audit Manager console. Or, you can use one of the delete API operations that are provided by Audit Manager.  To delete your Audit Manager resource data, see the following instructions:     DeleteAssessment (see also: Deleting an assessment in the Audit Manager User Guide)    DeleteAssessmentFramework (see also: Deleting a custom framework in the Audit Manager User Guide)    DeleteAssessmentFrameworkShare (see also: Deleting a share request in the Audit Manager User Guide)    DeleteAssessmentReport (see also: Deleting an assessment report in the Audit Manager User Guide)    DeleteControl (see also: Deleting a custom control in the Audit Manager User Guide)   At this time, Audit Manager doesn't provide an option to delete evidence. All available delete operations are listed above. 
    */
   deregisterOrganizationAdminAccount(callback?: (err: AWSError, data: AuditManager.Types.DeregisterOrganizationAdminAccountResponse) => void): Request<AuditManager.Types.DeregisterOrganizationAdminAccountResponse, AWSError>;
   /**
@@ -156,27 +164,27 @@ declare class AuditManager extends Service {
    */
   getAccountStatus(callback?: (err: AWSError, data: AuditManager.Types.GetAccountStatusResponse) => void): Request<AuditManager.Types.GetAccountStatusResponse, AWSError>;
   /**
-   *  Returns an assessment from Audit Manager. 
+   * Returns an assessment from Audit Manager. 
    */
   getAssessment(params: AuditManager.Types.GetAssessmentRequest, callback?: (err: AWSError, data: AuditManager.Types.GetAssessmentResponse) => void): Request<AuditManager.Types.GetAssessmentResponse, AWSError>;
   /**
-   *  Returns an assessment from Audit Manager. 
+   * Returns an assessment from Audit Manager. 
    */
   getAssessment(callback?: (err: AWSError, data: AuditManager.Types.GetAssessmentResponse) => void): Request<AuditManager.Types.GetAssessmentResponse, AWSError>;
   /**
-   *  Returns a framework from Audit Manager. 
+   * Returns a framework from Audit Manager. 
    */
   getAssessmentFramework(params: AuditManager.Types.GetAssessmentFrameworkRequest, callback?: (err: AWSError, data: AuditManager.Types.GetAssessmentFrameworkResponse) => void): Request<AuditManager.Types.GetAssessmentFrameworkResponse, AWSError>;
   /**
-   *  Returns a framework from Audit Manager. 
+   * Returns a framework from Audit Manager. 
    */
   getAssessmentFramework(callback?: (err: AWSError, data: AuditManager.Types.GetAssessmentFrameworkResponse) => void): Request<AuditManager.Types.GetAssessmentFrameworkResponse, AWSError>;
   /**
-   *  Returns the URL of a specified assessment report in Audit Manager. 
+   *  Returns the URL of an assessment report in Audit Manager. 
    */
   getAssessmentReportUrl(params: AuditManager.Types.GetAssessmentReportUrlRequest, callback?: (err: AWSError, data: AuditManager.Types.GetAssessmentReportUrlResponse) => void): Request<AuditManager.Types.GetAssessmentReportUrlResponse, AWSError>;
   /**
-   *  Returns the URL of a specified assessment report in Audit Manager. 
+   *  Returns the URL of an assessment report in Audit Manager. 
    */
   getAssessmentReportUrl(callback?: (err: AWSError, data: AuditManager.Types.GetAssessmentReportUrlResponse) => void): Request<AuditManager.Types.GetAssessmentReportUrlResponse, AWSError>;
   /**
@@ -236,13 +244,29 @@ declare class AuditManager extends Service {
    */
   getEvidenceFoldersByAssessment(callback?: (err: AWSError, data: AuditManager.Types.GetEvidenceFoldersByAssessmentResponse) => void): Request<AuditManager.Types.GetEvidenceFoldersByAssessmentResponse, AWSError>;
   /**
-   *  Returns a list of evidence folders associated with a specified control of an assessment in Audit Manager. 
+   *  Returns a list of evidence folders that are associated with a specified control of an assessment in Audit Manager. 
    */
   getEvidenceFoldersByAssessmentControl(params: AuditManager.Types.GetEvidenceFoldersByAssessmentControlRequest, callback?: (err: AWSError, data: AuditManager.Types.GetEvidenceFoldersByAssessmentControlResponse) => void): Request<AuditManager.Types.GetEvidenceFoldersByAssessmentControlResponse, AWSError>;
   /**
-   *  Returns a list of evidence folders associated with a specified control of an assessment in Audit Manager. 
+   *  Returns a list of evidence folders that are associated with a specified control of an assessment in Audit Manager. 
    */
   getEvidenceFoldersByAssessmentControl(callback?: (err: AWSError, data: AuditManager.Types.GetEvidenceFoldersByAssessmentControlResponse) => void): Request<AuditManager.Types.GetEvidenceFoldersByAssessmentControlResponse, AWSError>;
+  /**
+   * Gets the latest analytics data for all your current active assessments. 
+   */
+  getInsights(params: AuditManager.Types.GetInsightsRequest, callback?: (err: AWSError, data: AuditManager.Types.GetInsightsResponse) => void): Request<AuditManager.Types.GetInsightsResponse, AWSError>;
+  /**
+   * Gets the latest analytics data for all your current active assessments. 
+   */
+  getInsights(callback?: (err: AWSError, data: AuditManager.Types.GetInsightsResponse) => void): Request<AuditManager.Types.GetInsightsResponse, AWSError>;
+  /**
+   * Gets the latest analytics data for a specific active assessment. 
+   */
+  getInsightsByAssessment(params: AuditManager.Types.GetInsightsByAssessmentRequest, callback?: (err: AWSError, data: AuditManager.Types.GetInsightsByAssessmentResponse) => void): Request<AuditManager.Types.GetInsightsByAssessmentResponse, AWSError>;
+  /**
+   * Gets the latest analytics data for a specific active assessment. 
+   */
+  getInsightsByAssessment(callback?: (err: AWSError, data: AuditManager.Types.GetInsightsByAssessmentResponse) => void): Request<AuditManager.Types.GetInsightsByAssessmentResponse, AWSError>;
   /**
    *  Returns the name of the delegated Amazon Web Services administrator account for the organization. 
    */
@@ -260,19 +284,35 @@ declare class AuditManager extends Service {
    */
   getServicesInScope(callback?: (err: AWSError, data: AuditManager.Types.GetServicesInScopeResponse) => void): Request<AuditManager.Types.GetServicesInScopeResponse, AWSError>;
   /**
-   *  Returns the settings for the specified account. 
+   *  Returns the settings for the specified Amazon Web Services account. 
    */
   getSettings(params: AuditManager.Types.GetSettingsRequest, callback?: (err: AWSError, data: AuditManager.Types.GetSettingsResponse) => void): Request<AuditManager.Types.GetSettingsResponse, AWSError>;
   /**
-   *  Returns the settings for the specified account. 
+   *  Returns the settings for the specified Amazon Web Services account. 
    */
   getSettings(callback?: (err: AWSError, data: AuditManager.Types.GetSettingsResponse) => void): Request<AuditManager.Types.GetSettingsResponse, AWSError>;
   /**
-   *  Returns a list of the frameworks available in the Audit Manager framework library. 
+   * Lists the latest analytics data for controls within a specific control domain and a specific active assessment.  Control insights are listed only if the control belongs to the control domain and assessment that was specified. Moreover, the control must have collected evidence on the lastUpdated date of controlInsightsByAssessment. If neither of these conditions are met, no data is listed for that control.  
+   */
+  listAssessmentControlInsightsByControlDomain(params: AuditManager.Types.ListAssessmentControlInsightsByControlDomainRequest, callback?: (err: AWSError, data: AuditManager.Types.ListAssessmentControlInsightsByControlDomainResponse) => void): Request<AuditManager.Types.ListAssessmentControlInsightsByControlDomainResponse, AWSError>;
+  /**
+   * Lists the latest analytics data for controls within a specific control domain and a specific active assessment.  Control insights are listed only if the control belongs to the control domain and assessment that was specified. Moreover, the control must have collected evidence on the lastUpdated date of controlInsightsByAssessment. If neither of these conditions are met, no data is listed for that control.  
+   */
+  listAssessmentControlInsightsByControlDomain(callback?: (err: AWSError, data: AuditManager.Types.ListAssessmentControlInsightsByControlDomainResponse) => void): Request<AuditManager.Types.ListAssessmentControlInsightsByControlDomainResponse, AWSError>;
+  /**
+   *  Returns a list of sent or received share requests for custom frameworks in Audit Manager. 
+   */
+  listAssessmentFrameworkShareRequests(params: AuditManager.Types.ListAssessmentFrameworkShareRequestsRequest, callback?: (err: AWSError, data: AuditManager.Types.ListAssessmentFrameworkShareRequestsResponse) => void): Request<AuditManager.Types.ListAssessmentFrameworkShareRequestsResponse, AWSError>;
+  /**
+   *  Returns a list of sent or received share requests for custom frameworks in Audit Manager. 
+   */
+  listAssessmentFrameworkShareRequests(callback?: (err: AWSError, data: AuditManager.Types.ListAssessmentFrameworkShareRequestsResponse) => void): Request<AuditManager.Types.ListAssessmentFrameworkShareRequestsResponse, AWSError>;
+  /**
+   *  Returns a list of the frameworks that are available in the Audit Manager framework library. 
    */
   listAssessmentFrameworks(params: AuditManager.Types.ListAssessmentFrameworksRequest, callback?: (err: AWSError, data: AuditManager.Types.ListAssessmentFrameworksResponse) => void): Request<AuditManager.Types.ListAssessmentFrameworksResponse, AWSError>;
   /**
-   *  Returns a list of the frameworks available in the Audit Manager framework library. 
+   *  Returns a list of the frameworks that are available in the Audit Manager framework library. 
    */
   listAssessmentFrameworks(callback?: (err: AWSError, data: AuditManager.Types.ListAssessmentFrameworksResponse) => void): Request<AuditManager.Types.ListAssessmentFrameworksResponse, AWSError>;
   /**
@@ -292,6 +332,30 @@ declare class AuditManager extends Service {
    */
   listAssessments(callback?: (err: AWSError, data: AuditManager.Types.ListAssessmentsResponse) => void): Request<AuditManager.Types.ListAssessmentsResponse, AWSError>;
   /**
+   * Lists the latest analytics data for control domains across all of your active assessments.   A control domain is listed only if at least one of the controls within that domain collected evidence on the lastUpdated date of controlDomainInsights. If this condition isn’t met, no data is listed for that control domain. 
+   */
+  listControlDomainInsights(params: AuditManager.Types.ListControlDomainInsightsRequest, callback?: (err: AWSError, data: AuditManager.Types.ListControlDomainInsightsResponse) => void): Request<AuditManager.Types.ListControlDomainInsightsResponse, AWSError>;
+  /**
+   * Lists the latest analytics data for control domains across all of your active assessments.   A control domain is listed only if at least one of the controls within that domain collected evidence on the lastUpdated date of controlDomainInsights. If this condition isn’t met, no data is listed for that control domain. 
+   */
+  listControlDomainInsights(callback?: (err: AWSError, data: AuditManager.Types.ListControlDomainInsightsResponse) => void): Request<AuditManager.Types.ListControlDomainInsightsResponse, AWSError>;
+  /**
+   * Lists analytics data for control domains within a specified active assessment.  A control domain is listed only if at least one of the controls within that domain collected evidence on the lastUpdated date of controlDomainInsights. If this condition isn’t met, no data is listed for that domain. 
+   */
+  listControlDomainInsightsByAssessment(params: AuditManager.Types.ListControlDomainInsightsByAssessmentRequest, callback?: (err: AWSError, data: AuditManager.Types.ListControlDomainInsightsByAssessmentResponse) => void): Request<AuditManager.Types.ListControlDomainInsightsByAssessmentResponse, AWSError>;
+  /**
+   * Lists analytics data for control domains within a specified active assessment.  A control domain is listed only if at least one of the controls within that domain collected evidence on the lastUpdated date of controlDomainInsights. If this condition isn’t met, no data is listed for that domain. 
+   */
+  listControlDomainInsightsByAssessment(callback?: (err: AWSError, data: AuditManager.Types.ListControlDomainInsightsByAssessmentResponse) => void): Request<AuditManager.Types.ListControlDomainInsightsByAssessmentResponse, AWSError>;
+  /**
+   * Lists the latest analytics data for controls within a specific control domain across all active assessments.  Control insights are listed only if the control belongs to the control domain that was specified and the control collected evidence on the lastUpdated date of controlInsightsMetadata. If neither of these conditions are met, no data is listed for that control.  
+   */
+  listControlInsightsByControlDomain(params: AuditManager.Types.ListControlInsightsByControlDomainRequest, callback?: (err: AWSError, data: AuditManager.Types.ListControlInsightsByControlDomainResponse) => void): Request<AuditManager.Types.ListControlInsightsByControlDomainResponse, AWSError>;
+  /**
+   * Lists the latest analytics data for controls within a specific control domain across all active assessments.  Control insights are listed only if the control belongs to the control domain that was specified and the control collected evidence on the lastUpdated date of controlInsightsMetadata. If neither of these conditions are met, no data is listed for that control.  
+   */
+  listControlInsightsByControlDomain(callback?: (err: AWSError, data: AuditManager.Types.ListControlInsightsByControlDomainResponse) => void): Request<AuditManager.Types.ListControlInsightsByControlDomainResponse, AWSError>;
+  /**
    *  Returns a list of controls from Audit Manager. 
    */
   listControls(params: AuditManager.Types.ListControlsRequest, callback?: (err: AWSError, data: AuditManager.Types.ListControlsResponse) => void): Request<AuditManager.Types.ListControlsResponse, AWSError>;
@@ -300,11 +364,11 @@ declare class AuditManager extends Service {
    */
   listControls(callback?: (err: AWSError, data: AuditManager.Types.ListControlsResponse) => void): Request<AuditManager.Types.ListControlsResponse, AWSError>;
   /**
-   *  Returns a list of keywords that pre-mapped to the specified control data source. 
+   *  Returns a list of keywords that are pre-mapped to the specified control data source. 
    */
   listKeywordsForDataSource(params: AuditManager.Types.ListKeywordsForDataSourceRequest, callback?: (err: AWSError, data: AuditManager.Types.ListKeywordsForDataSourceResponse) => void): Request<AuditManager.Types.ListKeywordsForDataSourceResponse, AWSError>;
   /**
-   *  Returns a list of keywords that pre-mapped to the specified control data source. 
+   *  Returns a list of keywords that are pre-mapped to the specified control data source. 
    */
   listKeywordsForDataSource(callback?: (err: AWSError, data: AuditManager.Types.ListKeywordsForDataSourceResponse) => void): Request<AuditManager.Types.ListKeywordsForDataSourceResponse, AWSError>;
   /**
@@ -324,21 +388,29 @@ declare class AuditManager extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: AuditManager.Types.ListTagsForResourceResponse) => void): Request<AuditManager.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   *  Enables Audit Manager for the specified account. 
+   *  Enables Audit Manager for the specified Amazon Web Services account. 
    */
   registerAccount(params: AuditManager.Types.RegisterAccountRequest, callback?: (err: AWSError, data: AuditManager.Types.RegisterAccountResponse) => void): Request<AuditManager.Types.RegisterAccountResponse, AWSError>;
   /**
-   *  Enables Audit Manager for the specified account. 
+   *  Enables Audit Manager for the specified Amazon Web Services account. 
    */
   registerAccount(callback?: (err: AWSError, data: AuditManager.Types.RegisterAccountResponse) => void): Request<AuditManager.Types.RegisterAccountResponse, AWSError>;
   /**
-   *  Enables an account within the organization as the delegated administrator for Audit Manager. 
+   *  Enables an Amazon Web Services account within the organization as the delegated administrator for Audit Manager. 
    */
   registerOrganizationAdminAccount(params: AuditManager.Types.RegisterOrganizationAdminAccountRequest, callback?: (err: AWSError, data: AuditManager.Types.RegisterOrganizationAdminAccountResponse) => void): Request<AuditManager.Types.RegisterOrganizationAdminAccountResponse, AWSError>;
   /**
-   *  Enables an account within the organization as the delegated administrator for Audit Manager. 
+   *  Enables an Amazon Web Services account within the organization as the delegated administrator for Audit Manager. 
    */
   registerOrganizationAdminAccount(callback?: (err: AWSError, data: AuditManager.Types.RegisterOrganizationAdminAccountResponse) => void): Request<AuditManager.Types.RegisterOrganizationAdminAccountResponse, AWSError>;
+  /**
+   *  Creates a share request for a custom framework in Audit Manager.  The share request specifies a recipient and notifies them that a custom framework is available. Recipients have 120 days to accept or decline the request. If no action is taken, the share request expires.  When you invoke the StartAssessmentFrameworkShare API, you are about to share a custom framework with another Amazon Web Services account. You may not share a custom framework that is derived from a standard framework if the standard framework is designated as not eligible for sharing by Amazon Web Services, unless you have obtained permission to do so from the owner of the standard framework. To learn more about which standard frameworks are eligible for sharing, see Framework sharing eligibility in the Audit Manager User Guide. 
+   */
+  startAssessmentFrameworkShare(params: AuditManager.Types.StartAssessmentFrameworkShareRequest, callback?: (err: AWSError, data: AuditManager.Types.StartAssessmentFrameworkShareResponse) => void): Request<AuditManager.Types.StartAssessmentFrameworkShareResponse, AWSError>;
+  /**
+   *  Creates a share request for a custom framework in Audit Manager.  The share request specifies a recipient and notifies them that a custom framework is available. Recipients have 120 days to accept or decline the request. If no action is taken, the share request expires.  When you invoke the StartAssessmentFrameworkShare API, you are about to share a custom framework with another Amazon Web Services account. You may not share a custom framework that is derived from a standard framework if the standard framework is designated as not eligible for sharing by Amazon Web Services, unless you have obtained permission to do so from the owner of the standard framework. To learn more about which standard frameworks are eligible for sharing, see Framework sharing eligibility in the Audit Manager User Guide. 
+   */
+  startAssessmentFrameworkShare(callback?: (err: AWSError, data: AuditManager.Types.StartAssessmentFrameworkShareResponse) => void): Request<AuditManager.Types.StartAssessmentFrameworkShareResponse, AWSError>;
   /**
    *  Tags the specified resource in Audit Manager. 
    */
@@ -388,6 +460,14 @@ declare class AuditManager extends Service {
    */
   updateAssessmentFramework(callback?: (err: AWSError, data: AuditManager.Types.UpdateAssessmentFrameworkResponse) => void): Request<AuditManager.Types.UpdateAssessmentFrameworkResponse, AWSError>;
   /**
+   *  Updates a share request for a custom framework in Audit Manager. 
+   */
+  updateAssessmentFrameworkShare(params: AuditManager.Types.UpdateAssessmentFrameworkShareRequest, callback?: (err: AWSError, data: AuditManager.Types.UpdateAssessmentFrameworkShareResponse) => void): Request<AuditManager.Types.UpdateAssessmentFrameworkShareResponse, AWSError>;
+  /**
+   *  Updates a share request for a custom framework in Audit Manager. 
+   */
+  updateAssessmentFrameworkShare(callback?: (err: AWSError, data: AuditManager.Types.UpdateAssessmentFrameworkShareResponse) => void): Request<AuditManager.Types.UpdateAssessmentFrameworkShareResponse, AWSError>;
+  /**
    *  Updates the status of an assessment in Audit Manager. 
    */
   updateAssessmentStatus(params: AuditManager.Types.UpdateAssessmentStatusRequest, callback?: (err: AWSError, data: AuditManager.Types.UpdateAssessmentStatusResponse) => void): Request<AuditManager.Types.UpdateAssessmentStatusResponse, AWSError>;
@@ -423,15 +503,15 @@ declare class AuditManager extends Service {
 declare namespace AuditManager {
   export interface AWSAccount {
     /**
-     *  The identifier for the specified account. 
+     *  The identifier for the Amazon Web Services account. 
      */
     id?: AccountId;
     /**
-     *  The email address associated with the specified account. 
+     *  The email address that's associated with the Amazon Web Services account. 
      */
     emailAddress?: EmailAddress;
     /**
-     *  The name of the specified account. 
+     *  The name of the Amazon Web Services account. 
      */
     name?: AccountName;
   }
@@ -456,53 +536,53 @@ declare namespace AuditManager {
      */
     arn?: AuditManagerArn;
     /**
-     *  The account associated with the assessment. 
+     *  The Amazon Web Services account that's associated with the assessment. 
      */
     awsAccount?: AWSAccount;
     /**
-     *  The metadata for the specified assessment. 
+     *  The metadata for the assessment. 
      */
     metadata?: AssessmentMetadata;
     /**
-     *  The framework from which the assessment was created. 
+     *  The framework that the assessment was created from. 
      */
     framework?: AssessmentFramework;
     /**
-     *  The tags associated with the assessment. 
+     *  The tags that are associated with the assessment. 
      */
     tags?: TagMap;
   }
   export interface AssessmentControl {
     /**
-     *  The identifier for the specified control. 
+     *  The identifier for the control. 
      */
     id?: UUID;
     /**
-     *  The name of the specified control. 
+     *  The name of the control. 
      */
     name?: ControlName;
     /**
-     *  The description of the specified control. 
+     *  The description of the control. 
      */
     description?: ControlDescription;
     /**
-     *  The status of the specified control. 
+     *  The status of the control. 
      */
     status?: ControlStatus;
     /**
-     *  The response of the specified control. 
+     *  The response of the control. 
      */
     response?: ControlResponse;
     /**
-     *  The list of comments attached to the specified control. 
+     *  The list of comments that's attached to the control. 
      */
     comments?: ControlComments;
     /**
-     *  The list of data sources for the specified evidence. 
+     *  The list of data sources for the evidence. 
      */
     evidenceSources?: EvidenceSources;
     /**
-     *  The amount of evidence generated for the control. 
+     *  The amount of evidence that's generated for the control. 
      */
     evidenceCount?: Integer;
     /**
@@ -524,23 +604,23 @@ declare namespace AuditManager {
      */
     status?: ControlSetStatus;
     /**
-     *  The roles associated with the control set. 
+     *  The roles that are associated with the control set. 
      */
     roles?: Roles;
     /**
-     *  The list of controls contained with the control set. 
+     *  The list of controls that's contained with the control set. 
      */
     controls?: AssessmentControls;
     /**
-     *  The delegations associated with the control set. 
+     *  The delegations that are associated with the control set. 
      */
     delegations?: Delegations;
     /**
-     *  The total number of evidence objects retrieved automatically for the control set. 
+     *  The total number of evidence objects that are retrieved automatically for the control set. 
      */
     systemEvidenceCount?: Integer;
     /**
-     *  The total number of evidence objects uploaded manually to the control set. 
+     *  The total number of evidence objects that are uploaded manually to the control set. 
      */
     manualEvidenceCount?: Integer;
   }
@@ -549,7 +629,7 @@ declare namespace AuditManager {
   export type AssessmentDescription = string;
   export interface AssessmentEvidenceFolder {
     /**
-     *  The name of the specified evidence folder. 
+     *  The name of the evidence folder. 
      */
     name?: AssessmentEvidenceFolderName;
     /**
@@ -557,7 +637,7 @@ declare namespace AuditManager {
      */
     date?: Timestamp;
     /**
-     *  The identifier for the specified assessment. 
+     *  The identifier for the assessment. 
      */
     assessmentId?: UUID;
     /**
@@ -565,15 +645,15 @@ declare namespace AuditManager {
      */
     controlSetId?: ControlSetId;
     /**
-     *  The unique identifier for the specified control. 
+     *  The unique identifier for the control. 
      */
     controlId?: UUID;
     /**
-     *  The identifier for the folder in which evidence is stored. 
+     *  The identifier for the folder that the evidence is stored in. 
      */
     id?: UUID;
     /**
-     *  The Amazon Web Service from which the evidence was collected. 
+     *  The Amazon Web Service that the evidence was collected from. 
      */
     dataSource?: String;
     /**
@@ -585,7 +665,7 @@ declare namespace AuditManager {
      */
     totalEvidence?: Integer;
     /**
-     *  The total count of evidence included in the assessment report. 
+     *  The total count of evidence that's included in the assessment report. 
      */
     assessmentReportSelectionCount?: Integer;
     /**
@@ -593,7 +673,7 @@ declare namespace AuditManager {
      */
     controlName?: ControlName;
     /**
-     *  The amount of evidence included in the evidence folder. 
+     *  The amount of evidence that's included in the evidence folder. 
      */
     evidenceResourcesIncludedCount?: Integer;
     /**
@@ -617,7 +697,7 @@ declare namespace AuditManager {
      */
     evidenceByTypeUserActivityCount?: Integer;
     /**
-     *  The total number of Amazon Web Services resources assessed to generate the evidence. 
+     *  The total number of Amazon Web Services resources that were assessed to generate the evidence. 
      */
     evidenceAwsServiceSourceCount?: Integer;
   }
@@ -629,12 +709,12 @@ declare namespace AuditManager {
      */
     id?: UUID;
     /**
-     *  The Amazon Resource Name (ARN) of the specified framework. 
+     *  The Amazon Resource Name (ARN) of the framework. 
      */
     arn?: AuditManagerArn;
     metadata?: FrameworkMetadata;
     /**
-     *  The control sets associated with the framework. 
+     *  The control sets that are associated with the framework. 
      */
     controlSets?: AssessmentControlSets;
   }
@@ -645,23 +725,23 @@ declare namespace AuditManager {
      */
     arn?: AuditManagerArn;
     /**
-     *  The unique identified for the specified framework. 
+     *  The unique identifier for the framework. 
      */
     id?: UUID;
     /**
-     *  The framework type, such as standard or custom. 
+     *  The framework type, such as a standard framework or a custom framework. 
      */
     type?: FrameworkType;
     /**
-     *  The name of the specified framework. 
+     *  The name of the framework. 
      */
     name?: FrameworkName;
     /**
-     *  The description of the specified framework. 
+     *  The description of the framework. 
      */
     description?: FrameworkDescription;
     /**
-     *  The logo associated with the framework. 
+     *  The logo that's associated with the framework. 
      */
     logo?: Filename;
     /**
@@ -669,11 +749,11 @@ declare namespace AuditManager {
      */
     complianceType?: ComplianceType;
     /**
-     *  The number of controls associated with the specified framework. 
+     *  The number of controls that are associated with the framework. 
      */
     controlsCount?: ControlsCount;
     /**
-     *  The number of control sets associated with the specified framework. 
+     *  The number of control sets that are associated with the framework. 
      */
     controlSetsCount?: ControlSetsCount;
     /**
@@ -685,6 +765,69 @@ declare namespace AuditManager {
      */
     lastUpdatedAt?: Timestamp;
   }
+  export interface AssessmentFrameworkShareRequest {
+    /**
+     *  The unique identifier for the share request. 
+     */
+    id?: UUID;
+    /**
+     * The unique identifier for the shared custom framework. 
+     */
+    frameworkId?: UUID;
+    /**
+     *  The name of the custom framework that the share request is for. 
+     */
+    frameworkName?: FrameworkName;
+    /**
+     * The description of the shared custom framework.
+     */
+    frameworkDescription?: FrameworkDescription;
+    /**
+     *  The status of the share request. 
+     */
+    status?: ShareRequestStatus;
+    /**
+     *  The Amazon Web Services account of the sender. 
+     */
+    sourceAccount?: AccountId;
+    /**
+     *  The Amazon Web Services account of the recipient. 
+     */
+    destinationAccount?: AccountId;
+    /**
+     *  The Amazon Web Services Region of the recipient. 
+     */
+    destinationRegion?: Region;
+    /**
+     *  The time when the share request expires. 
+     */
+    expirationTime?: Timestamp;
+    /**
+     *  The time when the share request was created. 
+     */
+    creationTime?: Timestamp;
+    /**
+     *  Specifies when the share request was last updated. 
+     */
+    lastUpdated?: Timestamp;
+    /**
+     *  An optional comment from the sender about the share request. 
+     */
+    comment?: ShareRequestComment;
+    /**
+     * The number of standard controls that are part of the shared custom framework. 
+     */
+    standardControlsCount?: NullableInteger;
+    /**
+     * The number of custom controls that are part of the shared custom framework.
+     */
+    customControlsCount?: NullableInteger;
+    /**
+     * The compliance type that the shared custom framework supports, such as CIS or HIPAA.
+     */
+    complianceType?: ComplianceType;
+  }
+  export type AssessmentFrameworkShareRequestList = AssessmentFrameworkShareRequest[];
   export interface AssessmentMetadata {
     /**
      *  The name of the assessment. 
@@ -699,7 +842,7 @@ declare namespace AuditManager {
      */
     description?: AssessmentDescription;
     /**
-     *  The name of a compliance standard related to the assessment, such as PCI-DSS. 
+     *  The name of the compliance standard that's related to the assessment, such as PCI-DSS. 
      */
     complianceType?: ComplianceType;
     /**
@@ -707,19 +850,19 @@ declare namespace AuditManager {
      */
     status?: AssessmentStatus;
     /**
-     *  The destination in which evidence reports are stored for the specified assessment. 
+     *  The destination that evidence reports are stored in for the assessment. 
      */
     assessmentReportsDestination?: AssessmentReportsDestination;
     /**
-     *  The wrapper of accounts and services in scope for the assessment. 
+     *  The wrapper of Amazon Web Services accounts and services that are in scope for the assessment. 
      */
     scope?: Scope;
     /**
-     *  The roles associated with the assessment. 
+     *  The roles that are associated with the assessment. 
      */
     roles?: Roles;
     /**
-     *  The delegations associated with the assessment. 
+     *  The delegations that are associated with the assessment. 
      */
     delegations?: Delegations;
     /**
@@ -741,7 +884,7 @@ declare namespace AuditManager {
      */
     id?: UUID;
     /**
-     *  The name of the compliance standard related to the assessment, such as PCI-DSS. 
+     *  The name of the compliance standard that's related to the assessment, such as PCI-DSS. 
      */
     complianceType?: ComplianceType;
     /**
@@ -749,11 +892,11 @@ declare namespace AuditManager {
      */
     status?: AssessmentStatus;
     /**
-     *  The roles associated with the assessment. 
+     *  The roles that are associated with the assessment. 
      */
     roles?: Roles;
     /**
-     *  The delegations associated with the assessment. 
+     *  The delegations that are associated with the assessment. 
      */
     delegations?: Delegations;
     /**
@@ -768,11 +911,11 @@ declare namespace AuditManager {
   export type AssessmentName = string;
   export interface AssessmentReport {
     /**
-     *  The unique identifier for the specified assessment report. 
+     *  The unique identifier for the assessment report. 
      */
     id?: UUID;
     /**
-     *  The name given to the assessment report. 
+     *  The name that's given to the assessment report. 
      */
     name?: AssessmentReportName;
     /**
@@ -780,7 +923,7 @@ declare namespace AuditManager {
      */
     description?: AssessmentReportDescription;
     /**
-     *  The identifier for the specified account. 
+     *  The identifier for the specified Amazon Web Services account. 
      */
     awsAccountId?: AccountId;
     /**
@@ -812,11 +955,11 @@ declare namespace AuditManager {
      */
     evidenceId?: UUID;
     /**
-     *  The error code returned by the AssessmentReportEvidence API. 
+     *  The error code that the AssessmentReportEvidence API returned. 
      */
     errorCode?: ErrorCode;
     /**
-     *  The error message returned by the AssessmentReportEvidence API. 
+     *  The error message that the AssessmentReportEvidence API returned. 
      */
     errorMessage?: ErrorMessage;
   }
@@ -831,7 +974,7 @@ declare namespace AuditManager {
      */
     name?: AssessmentReportName;
     /**
-     *  The description of the specified assessment report. 
+     *  The description of the assessment report. 
      */
     description?: AssessmentReportDescription;
     /**
@@ -871,11 +1014,11 @@ declare namespace AuditManager {
   export type AssessmentStatus = "ACTIVE"|"INACTIVE"|string;
   export interface AssociateAssessmentReportEvidenceFolderRequest {
     /**
-     *  The identifier for the specified assessment. 
+     *  The identifier for the assessment. 
      */
     assessmentId: UUID;
     /**
-     *  The identifier for the folder in which evidence is stored. 
+     *  The identifier for the folder that the evidence is stored in. 
      */
     evidenceFolderId: UUID;
   }
@@ -884,11 +1027,11 @@ declare namespace AuditManager {
   export type AuditManagerArn = string;
   export interface BatchAssociateAssessmentReportEvidenceRequest {
     /**
-     *  The unique identifier for the specified assessment. 
+     *  The identifier for the assessment. 
      */
     assessmentId: UUID;
     /**
-     *  The identifier for the folder in which the evidence is stored. 
+     *  The identifier for the folder that the evidence is stored in. 
      */
     evidenceFolderId: UUID;
     /**
@@ -898,11 +1041,11 @@ declare namespace AuditManager {
   }
   export interface BatchAssociateAssessmentReportEvidenceResponse {
     /**
-     *  The identifier for the evidence. 
+     *  The list of evidence identifiers. 
      */
     evidenceIds?: EvidenceIds;
     /**
-     *  A list of errors returned by the BatchAssociateAssessmentReportEvidence API. 
+     *  A list of errors that the BatchAssociateAssessmentReportEvidence API returned. 
      */
     errors?: AssessmentReportEvidenceErrors;
   }
@@ -912,11 +1055,11 @@ declare namespace AuditManager {
      */
     createDelegationRequest?: CreateDelegationRequest;
     /**
-     *  The error code returned by the BatchCreateDelegationByAssessment API. 
+     *  The error code that the BatchCreateDelegationByAssessment API returned. 
      */
     errorCode?: ErrorCode;
     /**
-     *  The error message returned by the BatchCreateDelegationByAssessment API. 
+     *  The error message that the BatchCreateDelegationByAssessment API returned. 
      */
     errorMessage?: ErrorMessage;
   }
@@ -927,58 +1070,58 @@ declare namespace AuditManager {
      */
     createDelegationRequests: CreateDelegationRequests;
     /**
-     *  The identifier for the specified assessment. 
+     *  The identifier for the assessment. 
      */
     assessmentId: UUID;
   }
   export interface BatchCreateDelegationByAssessmentResponse {
     /**
-     *  The delegations associated with the assessment. 
+     *  The delegations that are associated with the assessment. 
      */
     delegations?: Delegations;
     /**
-     *  A list of errors returned by the BatchCreateDelegationByAssessment API. 
+     *  A list of errors that the BatchCreateDelegationByAssessment API returned. 
      */
     errors?: BatchCreateDelegationByAssessmentErrors;
   }
   export interface BatchDeleteDelegationByAssessmentError {
     /**
-     *  The identifier for the specified delegation. 
+     *  The identifier for the delegation. 
      */
     delegationId?: UUID;
     /**
-     *  The error code returned by the BatchDeleteDelegationByAssessment API. 
+     *  The error code that the BatchDeleteDelegationByAssessment API returned. 
      */
     errorCode?: ErrorCode;
     /**
-     *  The error message returned by the BatchDeleteDelegationByAssessment API. 
+     *  The error message that the BatchDeleteDelegationByAssessment API returned. 
      */
     errorMessage?: ErrorMessage;
   }
   export type BatchDeleteDelegationByAssessmentErrors = BatchDeleteDelegationByAssessmentError[];
   export interface BatchDeleteDelegationByAssessmentRequest {
     /**
-     *  The identifiers for the specified delegations. 
+     *  The identifiers for the delegations. 
      */
     delegationIds: DelegationIds;
     /**
-     *  The identifier for the specified assessment. 
+     *  The identifier for the assessment. 
      */
     assessmentId: UUID;
   }
   export interface BatchDeleteDelegationByAssessmentResponse {
     /**
-     *  A list of errors returned by the BatchDeleteDelegationByAssessment API. 
+     *  A list of errors that the BatchDeleteDelegationByAssessment API returned. 
      */
     errors?: BatchDeleteDelegationByAssessmentErrors;
   }
   export interface BatchDisassociateAssessmentReportEvidenceRequest {
     /**
-     *  The identifier for the specified assessment. 
+     *  The identifier for the assessment. 
      */
     assessmentId: UUID;
     /**
-     *  The identifier for the folder in which evidence is stored. 
+     *  The identifier for the folder that the evidence is stored in. 
      */
     evidenceFolderId: UUID;
     /**
@@ -992,36 +1135,36 @@ declare namespace AuditManager {
      */
     evidenceIds?: EvidenceIds;
     /**
-     *  A list of errors returned by the BatchDisassociateAssessmentReportEvidence API. 
+     *  A list of errors that the BatchDisassociateAssessmentReportEvidence API returned. 
      */
     errors?: AssessmentReportEvidenceErrors;
   }
   export interface BatchImportEvidenceToAssessmentControlError {
     /**
-     *  Manual evidence that cannot be collected automatically by Audit Manager. 
+     *  Manual evidence that can't be collected automatically by Audit Manager. 
      */
     manualEvidence?: ManualEvidence;
     /**
-     *  The error code returned by the BatchImportEvidenceToAssessmentControl API. 
+     *  The error code that the BatchImportEvidenceToAssessmentControl API returned. 
      */
     errorCode?: ErrorCode;
     /**
-     *  The error message returned by the BatchImportEvidenceToAssessmentControl API. 
+     *  The error message that the BatchImportEvidenceToAssessmentControl API returned. 
      */
     errorMessage?: ErrorMessage;
   }
   export type BatchImportEvidenceToAssessmentControlErrors = BatchImportEvidenceToAssessmentControlError[];
   export interface BatchImportEvidenceToAssessmentControlRequest {
     /**
-     *  The identifier for the specified assessment. 
+     *  The identifier for the assessment. 
      */
     assessmentId: UUID;
     /**
-     *  The identifier for the specified control set. 
+     *  The identifier for the control set. 
      */
     controlSetId: ControlSetId;
     /**
-     *  The identifier for the specified control. 
+     *  The identifier for the control. 
      */
     controlId: UUID;
     /**
@@ -1031,26 +1174,26 @@ declare namespace AuditManager {
   }
   export interface BatchImportEvidenceToAssessmentControlResponse {
     /**
-     *  A list of errors returned by the BatchImportEvidenceToAssessmentControl API. 
+     *  A list of errors that the BatchImportEvidenceToAssessmentControl API returned. 
      */
     errors?: BatchImportEvidenceToAssessmentControlErrors;
   }
   export type Boolean = boolean;
   export interface ChangeLog {
     /**
-     *  The changelog object type, such as an assessment, control, or control set. 
+     *  The object that was changed, such as an assessment, control, or control set. 
      */
     objectType?: ObjectTypeEnum;
     /**
-     *  The name of the changelog object. 
+     *  The name of the object that changed. This could be the name of an assessment, control, or control set.
      */
     objectName?: NonEmptyString;
     /**
-     *  The action performed. 
+     *  The action that was performed. 
      */
     action?: ActionEnum;
     /**
-     *  The time of creation for the changelog object. 
+     *  The time when the action was performed and the changelog record was created. 
      */
     createdAt?: Timestamp;
     /**
@@ -1062,7 +1205,7 @@ declare namespace AuditManager {
   export type ComplianceType = string;
   export interface Control {
     /**
-     *  The Amazon Resource Name (ARN) of the specified control. 
+     *  The Amazon Resource Name (ARN) of the control. 
      */
     arn?: AuditManagerArn;
     /**
@@ -1070,19 +1213,19 @@ declare namespace AuditManager {
      */
     id?: UUID;
     /**
-     *  The type of control, such as custom or standard. 
+     *  The type of control, such as a custom control or a standard control. 
      */
     type?: ControlType;
     /**
-     *  The name of the specified control. 
+     *  The name of the control. 
      */
     name?: ControlName;
     /**
-     *  The description of the specified control. 
+     *  The description of the control. 
      */
     description?: ControlDescription;
     /**
-     *  The steps to follow to determine if the control has been satisfied. 
+     *  The steps that you should follow to determine if the control has been satisfied. 
      */
     testingInformation?: TestingInformation;
     /**
@@ -1090,15 +1233,15 @@ declare namespace AuditManager {
      */
     actionPlanTitle?: ActionPlanTitle;
     /**
-     *  The recommended actions to carry out if the control is not fulfilled. 
+     *  The recommended actions to carry out if the control isn't fulfilled. 
      */
     actionPlanInstructions?: ActionPlanInstructions;
     /**
-     *  The data source that determines from where Audit Manager collects evidence for the control. 
+     *  The data source that determines where Audit Manager collects evidence from for the control. 
      */
     controlSources?: ControlSources;
     /**
-     *  The data mapping sources for the specified control. 
+     *  The data mapping sources for the control. 
      */
     controlMappingSources?: ControlMappingSources;
     /**
@@ -1139,21 +1282,90 @@ declare namespace AuditManager {
   export type ControlCommentBody = string;
   export type ControlComments = ControlComment[];
   export type ControlDescription = string;
+  export interface ControlDomainInsights {
+    /**
+     * The name of the control domain. 
+     */
+    name?: NonEmptyString;
+    /**
+     * The unique identifier for the control domain. 
+     */
+    id?: UUID;
+    /**
+     * The number of controls in the control domain that collected non-compliant evidence on the lastUpdated date. 
+     */
+    controlsCountByNoncompliantEvidence?: NullableInteger;
+    /**
+     * The total number of controls in the control domain. 
+     */
+    totalControlsCount?: NullableInteger;
+    /**
+     * A breakdown of the compliance check status for the evidence that’s associated with the control domain. 
+     */
+    evidenceInsights?: EvidenceInsights;
+    /**
+     * The time when the control domain insights were last updated. 
+     */
+    lastUpdated?: Timestamp;
+  }
+  export type ControlDomainInsightsList = ControlDomainInsights[];
+  export type ControlInsightsMetadata = ControlInsightsMetadataItem[];
+  export type ControlInsightsMetadataByAssessment = ControlInsightsMetadataByAssessmentItem[];
+  export interface ControlInsightsMetadataByAssessmentItem {
+    /**
+     * The name of the assessment control. 
+     */
+    name?: NonEmptyString;
+    /**
+     * The unique identifier for the assessment control. 
+     */
+    id?: UUID;
+    /**
+     * A breakdown of the compliance check status for the evidence that’s associated with the assessment control. 
+     */
+    evidenceInsights?: EvidenceInsights;
+    /**
+     * The name of the control set that the assessment control belongs to. 
+     */
+    controlSetName?: NonEmptyString;
+    /**
+     * The time when the assessment control insights were last updated. 
+     */
+    lastUpdated?: Timestamp;
+  }
+  export interface ControlInsightsMetadataItem {
+    /**
+     * The name of the control. 
+     */
+    name?: NonEmptyString;
+    /**
+     * The unique identifier for the control. 
+     */
+    id?: UUID;
+    /**
+     * A breakdown of the compliance check status for the evidence that’s associated with the control. 
+     */
+    evidenceInsights?: EvidenceInsights;
+    /**
+     * The time when the control insights were last updated. 
+     */
+    lastUpdated?: Timestamp;
+  }
   export interface ControlMappingSource {
     /**
-     *  The unique identifier for the specified source. 
+     *  The unique identifier for the source. 
      */
     sourceId?: UUID;
     /**
-     *  The name of the specified source. 
+     *  The name of the source. 
      */
     sourceName?: SourceName;
     /**
-     *  The description of the specified source. 
+     *  The description of the source. 
      */
     sourceDescription?: SourceDescription;
     /**
-     *  The setup option for the data source, which reflects if the evidence collection is automated or manual. 
+     *  The setup option for the data source. This option reflects if the evidence collection is automated or manual. 
      */
     sourceSetUpOption?: SourceSetUpOption;
     /**
@@ -1162,30 +1374,30 @@ declare namespace AuditManager {
     sourceType?: SourceType;
     sourceKeyword?: SourceKeyword;
     /**
-     *  The frequency of evidence collection for the specified control mapping source. 
+     *  The frequency of evidence collection for the control mapping source. 
      */
     sourceFrequency?: SourceFrequency;
     /**
-     *  The instructions for troubleshooting the specified control. 
+     *  The instructions for troubleshooting the control. 
      */
     troubleshootingText?: TroubleshootingText;
   }
   export type ControlMappingSources = ControlMappingSource[];
   export interface ControlMetadata {
     /**
-     *  The Amazon Resource Name (ARN) of the specified control. 
+     *  The Amazon Resource Name (ARN) of the control. 
      */
     arn?: AuditManagerArn;
     /**
-     *  The unique identifier for the specified control. 
+     *  The unique identifier for the control. 
      */
     id?: UUID;
     /**
-     *  The name of the specified control. 
+     *  The name of the control. 
      */
     name?: ControlName;
     /**
-     *  The data source that determines from where Audit Manager collects evidence for the control. 
+     *  The data source that determines where Audit Manager collects evidence from for the control. 
      */
     controlSources?: ControlSources;
     /**
@@ -1228,15 +1440,15 @@ declare namespace AuditManager {
     /**
      *  The unique identifier of the control. 
      */
-    id?: UUID;
+    id: UUID;
   }
   export interface CreateAssessmentFrameworkControlSet {
     /**
-     *  The name of the specified control set. 
+     *  The name of the control set. 
      */
     name: ControlSetName;
     /**
-     *  The list of controls within the control set. This does not contain the control set ID. 
+     *  The list of controls within the control set. This doesn't contain the control set ID. 
      */
     controls?: CreateAssessmentFrameworkControls;
   }
@@ -1256,17 +1468,17 @@ declare namespace AuditManager {
      */
     complianceType?: ComplianceType;
     /**
-     *  The control sets to be associated with the framework. 
+     *  The control sets that are associated with the framework. 
      */
     controlSets: CreateAssessmentFrameworkControlSets;
     /**
-     *  The tags associated with the framework. 
+     *  The tags that are associated with the framework. 
      */
     tags?: TagMap;
   }
   export interface CreateAssessmentFrameworkResponse {
     /**
-     *  The name of the new framework returned by the CreateAssessmentFramework API. 
+     *  The name of the new framework that the CreateAssessmentFramework API returned. 
      */
     framework?: Framework;
   }
@@ -1280,13 +1492,13 @@ declare namespace AuditManager {
      */
     description?: AssessmentReportDescription;
     /**
-     *  The identifier for the specified assessment. 
+     *  The identifier for the assessment. 
      */
     assessmentId: UUID;
   }
   export interface CreateAssessmentReportResponse {
     /**
-     *  The new assessment report returned by the CreateAssessmentReport API. 
+     *  The new assessment report that the CreateAssessmentReport API returned. 
      */
     assessmentReport?: AssessmentReport;
   }
@@ -1300,20 +1512,20 @@ declare namespace AuditManager {
      */
     description?: AssessmentDescription;
     /**
-     *  The assessment report storage destination for the specified assessment that is being created. 
+     *  The assessment report storage destination for the assessment that's being created. 
      */
     assessmentReportsDestination: AssessmentReportsDestination;
     scope: Scope;
     /**
-     *  The list of roles for the specified assessment. 
+     *  The list of roles for the assessment. 
      */
     roles: Roles;
     /**
-     *  The identifier for the specified framework. 
+     *  The identifier for the framework that the assessment will be created from. 
      */
     frameworkId: UUID;
     /**
-     *  The tags associated with the assessment. 
+     *  The tags that are associated with the assessment. 
      */
     tags?: TagMap;
   }
@@ -1326,7 +1538,7 @@ declare namespace AuditManager {
      */
     sourceName?: SourceName;
     /**
-     *  The description of the data source that determines from where Audit Manager collects evidence for the control. 
+     *  The description of the data source that determines where Audit Manager collects evidence from for the control. 
      */
     sourceDescription?: SourceDescription;
     /**
@@ -1339,11 +1551,11 @@ declare namespace AuditManager {
     sourceType?: SourceType;
     sourceKeyword?: SourceKeyword;
     /**
-     *  The frequency of evidence collection for the specified control mapping source. 
+     *  The frequency of evidence collection for the control mapping source. 
      */
     sourceFrequency?: SourceFrequency;
     /**
-     *  The instructions for troubleshooting the specified control. 
+     *  The instructions for troubleshooting the control. 
      */
     troubleshootingText?: TroubleshootingText;
   }
@@ -1358,7 +1570,7 @@ declare namespace AuditManager {
      */
     description?: ControlDescription;
     /**
-     *  The steps to follow to determine if the control has been satisfied. 
+     *  The steps to follow to determine if the control is satisfied. 
      */
     testingInformation?: TestingInformation;
     /**
@@ -1366,27 +1578,27 @@ declare namespace AuditManager {
      */
     actionPlanTitle?: ActionPlanTitle;
     /**
-     *  The recommended actions to carry out if the control is not fulfilled. 
+     *  The recommended actions to carry out if the control isn't fulfilled. 
      */
     actionPlanInstructions?: ActionPlanInstructions;
     /**
-     *  The data mapping sources for the specified control. 
+     *  The data mapping sources for the control. 
      */
     controlMappingSources: CreateControlMappingSources;
     /**
-     *  The tags associated with the control. 
+     *  The tags that are associated with the control. 
      */
     tags?: TagMap;
   }
   export interface CreateControlResponse {
     /**
-     *  The new control returned by the CreateControl API. 
+     *  The new control that the CreateControl API returned. 
      */
     control?: Control;
   }
   export interface CreateDelegationRequest {
     /**
-     *  A comment related to the delegation request. 
+     *  A comment that's related to the delegation request. 
      */
     comment?: DelegationComment;
     /**
@@ -1410,11 +1622,11 @@ declare namespace AuditManager {
      */
     id?: UUID;
     /**
-     *  The name of the associated assessment. 
+     *  The name of the assessment that's associated with the delegation. 
      */
     assessmentName?: AssessmentName;
     /**
-     *  The identifier for the associated assessment. 
+     *  The identifier for the assessment that's associated with the delegation. 
      */
     assessmentId?: UUID;
     /**
@@ -1438,11 +1650,11 @@ declare namespace AuditManager {
      */
     lastUpdated?: Timestamp;
     /**
-     *  The identifier for the associated control set. 
+     *  The identifier for the control set that's associated with the delegation. 
      */
     controlSetId?: ControlSetId;
     /**
-     *  The comment related to the delegation. 
+     *  The comment that's related to the delegation. 
      */
     comment?: DelegationComment;
     /**
@@ -1462,11 +1674,11 @@ declare namespace AuditManager {
      */
     assessmentName?: AssessmentName;
     /**
-     *  The unique identifier for the specified assessment. 
+     *  The unique identifier for the assessment. 
      */
     assessmentId?: UUID;
     /**
-     *  The current status of the delgation. 
+     *  The current status of the delegation. 
      */
     status?: DelegationStatus;
     /**
@@ -1478,7 +1690,7 @@ declare namespace AuditManager {
      */
     creationTime?: Timestamp;
     /**
-     *  Specifies the name of the control set delegated for review. 
+     *  Specifies the name of the control set that was delegated for review. 
      */
     controlSetName?: NonEmptyString;
   }
@@ -1487,15 +1699,27 @@ declare namespace AuditManager {
   export type Delegations = Delegation[];
   export interface DeleteAssessmentFrameworkRequest {
     /**
-     *  The identifier for the specified framework. 
+     *  The identifier for the custom framework. 
      */
     frameworkId: UUID;
   }
   export interface DeleteAssessmentFrameworkResponse {
   }
+  export interface DeleteAssessmentFrameworkShareRequest {
+    /**
+     * The unique identifier for the share request to be deleted.
+     */
+    requestId: UUID;
+    /**
+     * Specifies whether the share request is a sent request or a received request.
+     */
+    requestType: ShareRequestType;
+  }
+  export interface DeleteAssessmentFrameworkShareResponse {
+  }
   export interface DeleteAssessmentReportRequest {
     /**
-     *  The identifier for the specified assessment. 
+     *  The unique identifier for the assessment. 
      */
     assessmentId: UUID;
     /**
@@ -1507,7 +1731,7 @@ declare namespace AuditManager {
   }
   export interface DeleteAssessmentRequest {
     /**
-     *  The identifier for the specified assessment. 
+     *  The identifier for the assessment. 
      */
     assessmentId: UUID;
   }
@@ -1515,7 +1739,7 @@ declare namespace AuditManager {
   }
   export interface DeleteControlRequest {
     /**
-     *  The identifier for the specified control. 
+     *  The unique identifier for the control. 
      */
     controlId: UUID;
   }
@@ -1531,7 +1755,7 @@ declare namespace AuditManager {
   }
   export interface DeregisterOrganizationAdminAccountRequest {
     /**
-     *  The identifier for the specified administrator account. 
+     *  The identifier for the administrator account. 
      */
     adminAccountId?: AccountId;
   }
@@ -1539,11 +1763,11 @@ declare namespace AuditManager {
   }
   export interface DisassociateAssessmentReportEvidenceFolderRequest {
     /**
-     *  The identifier for the specified assessment. 
+     *  The unique identifier for the assessment. 
      */
     assessmentId: UUID;
     /**
-     *  The identifier for the folder in which evidence is stored. 
+     *  The unique identifier for the folder that the evidence is stored in. 
      */
     evidenceFolderId: UUID;
   }
@@ -1555,11 +1779,11 @@ declare namespace AuditManager {
   export type EventName = string;
   export interface Evidence {
     /**
-     *  The data source from which the specified evidence was collected. 
+     *  The data source where the evidence was collected from. 
      */
     dataSource?: String;
     /**
-     *  The identifier for the specified account. 
+     *  The identifier for the Amazon Web Services account. 
      */
     evidenceAwsAccountId?: AccountId;
     /**
@@ -1567,11 +1791,11 @@ declare namespace AuditManager {
      */
     time?: Timestamp;
     /**
-     *  The Amazon Web Service from which the evidence is collected. 
+     *  The Amazon Web Service that the evidence is collected from. 
      */
     eventSource?: AWSServiceName;
     /**
-     *  The name of the specified evidence event. 
+     *  The name of the evidence event. 
      */
     eventName?: EventName;
     /**
@@ -1579,15 +1803,15 @@ declare namespace AuditManager {
      */
     evidenceByType?: String;
     /**
-     *  The list of resources assessed to generate the evidence. 
+     *  The list of resources that are assessed to generate the evidence. 
      */
     resourcesIncluded?: Resources;
     /**
-     *  The names and values used by the evidence event, including an attribute name (such as allowUsersToChangePassword) and value (such as true or false). 
+     *  The names and values that are used by the evidence event. This includes an attribute name (such as allowUsersToChangePassword) and value (such as true or false). 
      */
     attributes?: EvidenceAttributes;
     /**
-     *  The unique identifier for the IAM user or role associated with the evidence. 
+     *  The unique identifier for the IAM user or role that's associated with the evidence. 
      */
     iamId?: IamArn;
     /**
@@ -1595,15 +1819,15 @@ declare namespace AuditManager {
      */
     complianceCheck?: String;
     /**
-     *  The account from which the evidence is collected, and its organization path. 
+     *  The Amazon Web Services account that the evidence is collected from, and its organization path. 
      */
     awsOrganization?: String;
     /**
-     *  The identifier for the specified account. 
+     *  The identifier for the Amazon Web Services account. 
      */
     awsAccountId?: AccountId;
     /**
-     *  The identifier for the folder in which the evidence is stored. 
+     *  The identifier for the folder that the evidence is stored in. 
      */
     evidenceFolderId?: UUID;
     /**
@@ -1619,24 +1843,38 @@ declare namespace AuditManager {
   export type EvidenceAttributeValue = string;
   export type EvidenceAttributes = {[key: string]: EvidenceAttributeValue};
   export type EvidenceIds = UUID[];
+  export interface EvidenceInsights {
+    /**
+     * The number of compliance check evidence that Audit Manager classified as non-compliant. This includes evidence that was collected from Security Hub with a Fail ruling, or collected from Config with a Non-compliant ruling. 
+     */
+    noncompliantEvidenceCount?: NullableInteger;
+    /**
+     * The number of compliance check evidence that Audit Manager classified as compliant. This includes evidence that was collected from Security Hub with a Pass ruling, or collected from Config with a Compliant ruling. 
+     */
+    compliantEvidenceCount?: NullableInteger;
+    /**
+     * The number of evidence that a compliance check ruling isn't available for. Evidence is inconclusive when the associated control uses Security Hub or Config as a data source but you didn't enable those services. This is also the case when a control uses a data source that doesn’t support compliance checks (for example, manual evidence, API calls, or CloudTrail).   If evidence has a compliance check status of not applicable in the console, it's classified as inconclusive in EvidenceInsights data. 
+     */
+    inconclusiveEvidenceCount?: NullableInteger;
+  }
   export type EvidenceList = Evidence[];
   export type EvidenceSources = NonEmptyString[];
   export type Filename = string;
   export interface Framework {
     /**
-     *  The Amazon Resource Name (ARN) of the specified framework. 
+     *  The Amazon Resource Name (ARN) of the framework. 
      */
     arn?: AuditManagerArn;
     /**
-     *  The unique identifier for the specified framework. 
+     *  The unique identifier for the framework. 
      */
     id?: UUID;
     /**
-     *  The name of the specified framework. 
+     *  The name of the framework. 
      */
     name?: FrameworkName;
     /**
-     *  The framework type, such as custom or standard. 
+     *  The framework type, such as a custom framework or a standard framework. 
      */
     type?: FrameworkType;
     /**
@@ -1644,19 +1882,19 @@ declare namespace AuditManager {
      */
     complianceType?: ComplianceType;
     /**
-     *  The description of the specified framework. 
+     *  The description of the framework. 
      */
     description?: FrameworkDescription;
     /**
-     *  The logo associated with the framework. 
+     *  The logo that's associated with the framework. 
      */
     logo?: Filename;
     /**
-     *  The sources from which Audit Manager collects evidence for the control. 
+     *  The sources that Audit Manager collects evidence from for the control. 
      */
     controlSources?: ControlSources;
     /**
-     *  The control sets associated with the framework. 
+     *  The control sets that are associated with the framework. 
      */
     controlSets?: ControlSets;
     /**
@@ -1676,7 +1914,7 @@ declare namespace AuditManager {
      */
     lastUpdatedBy?: LastUpdatedBy;
     /**
-     *  The tags associated with the framework. 
+     *  The tags that are associated with the framework. 
      */
     tags?: TagMap;
   }
@@ -1691,11 +1929,11 @@ declare namespace AuditManager {
      */
     description?: AssessmentFrameworkDescription;
     /**
-     *  The logo associated with the framework. 
+     *  The logo that's associated with the framework. 
      */
     logo?: Filename;
     /**
-     *  The compliance standard associated with the framework, such as PCI-DSS or HIPAA. 
+     *  The compliance standard that's associated with the framework. For example, this could be PCI DSS or HIPAA. 
      */
     complianceType?: ComplianceType;
   }
@@ -1707,29 +1945,29 @@ declare namespace AuditManager {
   }
   export interface GetAccountStatusResponse {
     /**
-     *  The status of the specified account. 
+     *  The status of the Amazon Web Services account. 
      */
     status?: AccountStatus;
   }
   export interface GetAssessmentFrameworkRequest {
     /**
-     *  The identifier for the specified framework. 
+     *  The identifier for the framework. 
      */
     frameworkId: UUID;
   }
   export interface GetAssessmentFrameworkResponse {
     /**
-     *  The framework returned by the GetAssessmentFramework API. 
+     *  The framework that the GetAssessmentFramework API returned. 
      */
     framework?: Framework;
   }
   export interface GetAssessmentReportUrlRequest {
     /**
-     *  The identifier for the assessment report. 
+     *  The unique identifier for the assessment report. 
      */
     assessmentReportId: UUID;
     /**
-     *  The identifier for the specified assessment. 
+     *  The unique identifier for the assessment. 
      */
     assessmentId: UUID;
   }
@@ -1738,7 +1976,7 @@ declare namespace AuditManager {
   }
   export interface GetAssessmentRequest {
     /**
-     *  The identifier for the specified assessment. 
+     * The unique identifier for the assessment. 
      */
     assessmentId: UUID;
   }
@@ -1748,71 +1986,71 @@ declare namespace AuditManager {
   }
   export interface GetChangeLogsRequest {
     /**
-     *  The identifier for the specified assessment. 
+     * The unique identifier for the assessment. 
      */
     assessmentId: UUID;
     /**
-     *  The identifier for the specified control set. 
+     *  The unique identifier for the control set. 
      */
     controlSetId?: ControlSetId;
     /**
-     *  The identifier for the specified control. 
+     *  The unique identifier for the control. 
      */
     controlId?: UUID;
     /**
-     *  The pagination token used to fetch the next set of results. 
+     *  The pagination token that's used to fetch the next set of results. 
      */
     nextToken?: Token;
     /**
-     *  Represents the maximum number of results per page, or per API request call. 
+     * Represents the maximum number of results on a page or for an API request call. 
      */
     maxResults?: MaxResults;
   }
   export interface GetChangeLogsResponse {
     /**
-     *  The list of user activity for the control. 
+     * The list of user activity for the control. 
      */
     changeLogs?: ChangeLogs;
     /**
-     *  The pagination token used to fetch the next set of results. 
+     * The pagination token that's used to fetch the next set of results. 
      */
     nextToken?: Token;
   }
   export interface GetControlRequest {
     /**
-     *  The identifier for the specified control. 
+     *  The identifier for the control. 
      */
     controlId: UUID;
   }
   export interface GetControlResponse {
     /**
-     *  The name of the control returned by the GetControl API. 
+     *  The name of the control that the GetControl API returned. 
      */
     control?: Control;
   }
   export interface GetDelegationsRequest {
     /**
-     *  The pagination token used to fetch the next set of results. 
+     *  The pagination token that's used to fetch the next set of results. 
      */
     nextToken?: Token;
     /**
-     *  Represents the maximum number of results per page, or per API request call. 
+     *  Represents the maximum number of results on a page or for an API request call. 
      */
     maxResults?: MaxResults;
   }
   export interface GetDelegationsResponse {
     /**
-     *  The list of delegations returned by the GetDelegations API. 
+     *  The list of delegations that the GetDelegations API returned. 
      */
     delegations?: DelegationMetadataList;
     /**
-     *  The pagination token used to fetch the next set of results. 
+     *  The pagination token that's used to fetch the next set of results. 
      */
     nextToken?: Token;
   }
   export interface GetEvidenceByEvidenceFolderRequest {
     /**
-     *  The identifier for the specified assessment. 
+     *  The identifier for the assessment. 
      */
     assessmentId: UUID;
     /**
@@ -1820,137 +2058,157 @@ declare namespace AuditManager {
      */
     controlSetId: ControlSetId;
     /**
-     *  The unique identifier for the folder in which the evidence is stored. 
+     *  The unique identifier for the folder that the evidence is stored in. 
      */
     evidenceFolderId: UUID;
     /**
-     *  The pagination token used to fetch the next set of results. 
+     *  The pagination token that's used to fetch the next set of results. 
      */
     nextToken?: Token;
     /**
-     *  Represents the maximum number of results per page, or per API request call. 
+     *  Represents the maximum number of results on a page or for an API request call. 
      */
     maxResults?: MaxResults;
   }
   export interface GetEvidenceByEvidenceFolderResponse {
     /**
-     *  The list of evidence returned by the GetEvidenceByEvidenceFolder API. 
+     *  The list of evidence that the GetEvidenceByEvidenceFolder API returned. 
      */
     evidence?: EvidenceList;
     /**
-     *  The pagination token used to fetch the next set of results. 
+     *  The pagination token that's used to fetch the next set of results. 
      */
     nextToken?: Token;
   }
   export interface GetEvidenceFolderRequest {
     /**
-     *  The identifier for the specified assessment. 
+     *  The unique identifier for the assessment. 
      */
     assessmentId: UUID;
     /**
-     *  The identifier for the specified control set. 
+     *  The unique identifier for the control set. 
      */
     controlSetId: ControlSetId;
     /**
-     *  The identifier for the folder in which the evidence is stored. 
+     *  The unique identifier for the folder that the evidence is stored in. 
      */
     evidenceFolderId: UUID;
   }
   export interface GetEvidenceFolderResponse {
     /**
-     *  The folder in which evidence is stored. 
+     *  The folder that the evidence is stored in. 
      */
     evidenceFolder?: AssessmentEvidenceFolder;
   }
   export interface GetEvidenceFoldersByAssessmentControlRequest {
     /**
-     *  The identifier for the specified assessment. 
+     *  The identifier for the assessment. 
      */
     assessmentId: UUID;
     /**
-     *  The identifier for the specified control set. 
+     *  The identifier for the control set. 
      */
     controlSetId: ControlSetId;
     /**
-     *  The identifier for the specified control. 
+     *  The identifier for the control. 
      */
     controlId: UUID;
     /**
-     *  The pagination token used to fetch the next set of results. 
+     *  The pagination token that's used to fetch the next set of results. 
      */
     nextToken?: Token;
     /**
-     *  Represents the maximum number of results per page, or per API request call. 
+     *  Represents the maximum number of results on a page or for an API request call. 
      */
     maxResults?: MaxResults;
   }
   export interface GetEvidenceFoldersByAssessmentControlResponse {
     /**
-     *  The list of evidence folders returned by the GetEvidenceFoldersByAssessmentControl API. 
+     *  The list of evidence folders that the GetEvidenceFoldersByAssessmentControl API returned. 
      */
     evidenceFolders?: AssessmentEvidenceFolders;
     /**
-     *  The pagination token used to fetch the next set of results. 
+     *  The pagination token that's used to fetch the next set of results. 
      */
     nextToken?: Token;
   }
   export interface GetEvidenceFoldersByAssessmentRequest {
     /**
-     *  The identifier for the specified assessment. 
+     *  The unique identifier for the assessment. 
      */
     assessmentId: UUID;
     /**
-     *  The pagination token used to fetch the next set of results. 
+     *  The pagination token that's used to fetch the next set of results. 
      */
     nextToken?: Token;
     /**
-     *  Represents the maximum number of results per page, or per API request call. 
+     *  Represents the maximum number of results on a page or for an API request call. 
      */
     maxResults?: MaxResults;
   }
   export interface GetEvidenceFoldersByAssessmentResponse {
     /**
-     *  The list of evidence folders returned by the GetEvidenceFoldersByAssessment API. 
+     *  The list of evidence folders that the GetEvidenceFoldersByAssessment API returned. 
      */
     evidenceFolders?: AssessmentEvidenceFolders;
     /**
-     *  The pagination token used to fetch the next set of results. 
+     *  The pagination token that's used to fetch the next set of results. 
      */
     nextToken?: Token;
   }
   export interface GetEvidenceRequest {
     /**
-     *  The identifier for the specified assessment. 
+     *  The unique identifier for the assessment. 
      */
     assessmentId: UUID;
     /**
-     *  The identifier for the specified control set. 
+     *  The unique identifier for the control set. 
      */
     controlSetId: ControlSetId;
     /**
-     *  The identifier for the folder in which the evidence is stored. 
+     *  The unique identifier for the folder that the evidence is stored in. 
      */
     evidenceFolderId: UUID;
     /**
-     *  The identifier for the evidence. 
+     *  The unique identifier for the evidence. 
      */
     evidenceId: UUID;
   }
   export interface GetEvidenceResponse {
     /**
-     *  The evidence returned by the GetEvidenceResponse API. 
+     *  The evidence that the GetEvidenceResponse API returned. 
      */
     evidence?: Evidence;
+  }
+  export interface GetInsightsByAssessmentRequest {
+    /**
+     * The unique identifier for the assessment. 
+     */
+    assessmentId: UUID;
+  }
+  export interface GetInsightsByAssessmentResponse {
+    /**
+     *  The assessment analytics data that the GetInsightsByAssessment API returned. 
+     */
+    insights?: InsightsByAssessment;
+  }
+  export interface GetInsightsRequest {
+  }
+  export interface GetInsightsResponse {
+    /**
+     * The analytics data that the GetInsights API returned. 
+     */
+    insights?: Insights;
   }
   export interface GetOrganizationAdminAccountRequest {
   }
   export interface GetOrganizationAdminAccountResponse {
     /**
-     *  The identifier for the specified administrator account. 
+     *  The identifier for the administrator account. 
      */
     adminAccountId?: AccountId;
     /**
-     *  The identifier for the specified organization. 
+     *  The identifier for the organization. 
      */
     organizationId?: organizationId;
   }
@@ -1958,7 +2216,7 @@ declare namespace AuditManager {
   }
   export interface GetServicesInScopeResponse {
     /**
-     *  The metadata associated with the Amazon Web Service. 
+     *  The metadata that's associated with the Amazon Web Service. 
      */
     serviceMetadata?: ServiceMetadataList;
   }
@@ -1976,132 +2234,312 @@ declare namespace AuditManager {
   }
   export type HyperlinkName = string;
   export type IamArn = string;
+  export interface Insights {
+    /**
+     * The number of active assessments in Audit Manager. 
+     */
+    activeAssessmentsCount?: NullableInteger;
+    /**
+     * The number of compliance check evidence that Audit Manager classified as non-compliant on the lastUpdated date. This includes evidence that was collected from Security Hub with a Fail ruling, or collected from Config with a Non-compliant ruling. 
+     */
+    noncompliantEvidenceCount?: NullableInteger;
+    /**
+     * The number of compliance check evidence that Audit Manager classified as compliant on the lastUpdated date. This includes evidence that was collected from Security Hub with a Pass ruling, or collected from Config with a Compliant ruling. 
+     */
+    compliantEvidenceCount?: NullableInteger;
+    /**
+     * The number of evidence without a compliance check ruling. Evidence is inconclusive when the associated control uses Security Hub or Config as a data source but you didn't enable those services. This is also the case when a control uses a data source that doesn’t support compliance checks (for example: manual evidence, API calls, or CloudTrail).   If evidence has a compliance check status of not applicable, it's classed as inconclusive in Insights data. 
+     */
+    inconclusiveEvidenceCount?: NullableInteger;
+    /**
+     * The number of assessment controls that collected non-compliant evidence on the lastUpdated date. 
+     */
+    assessmentControlsCountByNoncompliantEvidence?: NullableInteger;
+    /**
+     * The total number of controls across all active assessments. 
+     */
+    totalAssessmentControlsCount?: NullableInteger;
+    /**
+     * The time when the cross-assessment insights were last updated. 
+     */
+    lastUpdated?: Timestamp;
+  }
+  export interface InsightsByAssessment {
+    /**
+     * The number of compliance check evidence that Audit Manager classified as non-compliant. This includes evidence that was collected from Security Hub with a Fail ruling, or collected from Config with a Non-compliant ruling. 
+     */
+    noncompliantEvidenceCount?: NullableInteger;
+    /**
+     * The number of compliance check evidence that Audit Manager classified as compliant. This includes evidence that was collected from Security Hub with a Pass ruling, or collected from Config with a Compliant ruling. 
+     */
+    compliantEvidenceCount?: NullableInteger;
+    /**
+     * The amount of evidence without a compliance check ruling. Evidence is inconclusive if the associated control uses Security Hub or Config as a data source and you didn't enable those services. This is also the case if a control uses a data source that doesn’t support compliance checks (for example, manual evidence, API calls, or CloudTrail).   If evidence has a compliance check status of not applicable, it's classified as inconclusive in InsightsByAssessment data. 
+     */
+    inconclusiveEvidenceCount?: NullableInteger;
+    /**
+     * The number of assessment controls that collected non-compliant evidence on the lastUpdated date. 
+     */
+    assessmentControlsCountByNoncompliantEvidence?: NullableInteger;
+    /**
+     * The total number of controls in the assessment. 
+     */
+    totalAssessmentControlsCount?: NullableInteger;
+    /**
+     * The time when the assessment insights were last updated.
+     */
+    lastUpdated?: Timestamp;
+  }
   export type Integer = number;
   export type KeywordInputType = "SELECT_FROM_LIST"|string;
   export type KeywordValue = string;
   export type Keywords = KeywordValue[];
   export type KmsKey = string;
   export type LastUpdatedBy = string;
-  export interface ListAssessmentFrameworksRequest {
+  export interface ListAssessmentControlInsightsByControlDomainRequest {
     /**
-     *  The type of framework, such as standard or custom. 
+     * The unique identifier for the control domain. 
      */
-    frameworkType: FrameworkType;
+    controlDomainId: UUID;
     /**
-     *  The pagination token used to fetch the next set of results. 
+     * The unique identifier for the active assessment. 
+     */
+    assessmentId: UUID;
+    /**
+     * The pagination token that's used to fetch the next set of results. 
      */
     nextToken?: Token;
     /**
-     *  Represents the maximum number of results per page, or per API request call. 
+     * Represents the maximum number of results on a page or for an API request call. 
+     */
+    maxResults?: MaxResults;
+  }
+  export interface ListAssessmentControlInsightsByControlDomainResponse {
+    /**
+     * The assessment control analytics data that the ListAssessmentControlInsightsByControlDomain API returned. 
+     */
+    controlInsightsByAssessment?: ControlInsightsMetadataByAssessment;
+    /**
+     * The pagination token that's used to fetch the next set of results. 
+     */
+    nextToken?: Token;
+  }
+  export interface ListAssessmentFrameworkShareRequestsRequest {
+    /**
+     *  Specifies whether the share request is a sent request or a received request.
+     */
+    requestType: ShareRequestType;
+    /**
+     *  The pagination token that's used to fetch the next set of results. 
+     */
+    nextToken?: Token;
+    /**
+     *  Represents the maximum number of results on a page or for an API request call. 
+     */
+    maxResults?: MaxResults;
+  }
+  export interface ListAssessmentFrameworkShareRequestsResponse {
+    /**
+     *  The list of share requests that the ListAssessmentFrameworkShareRequests API returned. 
+     */
+    assessmentFrameworkShareRequests?: AssessmentFrameworkShareRequestList;
+    /**
+     *  The pagination token that's used to fetch the next set of results. 
+     */
+    nextToken?: Token;
+  }
+  export interface ListAssessmentFrameworksRequest {
+    /**
+     *  The type of framework, such as a standard framework or a custom framework. 
+     */
+    frameworkType: FrameworkType;
+    /**
+     *  The pagination token that's used to fetch the next set of results. 
+     */
+    nextToken?: Token;
+    /**
+     *  Represents the maximum number of results on a page or for an API request call. 
      */
     maxResults?: MaxResults;
   }
   export interface ListAssessmentFrameworksResponse {
     /**
-     *  The list of metadata objects for the specified framework. 
+     *  The list of metadata objects for the framework. 
      */
     frameworkMetadataList?: FrameworkMetadataList;
     /**
-     *  The pagination token used to fetch the next set of results. 
+     *  The pagination token that's used to fetch the next set of results. 
      */
     nextToken?: Token;
   }
   export type ListAssessmentMetadata = AssessmentMetadataItem[];
   export interface ListAssessmentReportsRequest {
     /**
-     *  The pagination token used to fetch the next set of results. 
+     *  The pagination token that's used to fetch the next set of results. 
      */
     nextToken?: Token;
     /**
-     *  Represents the maximum number of results per page, or per API request call. 
+     *  Represents the maximum number of results on a page or for an API request call. 
      */
     maxResults?: MaxResults;
   }
   export interface ListAssessmentReportsResponse {
     /**
-     *  The list of assessment reports returned by the ListAssessmentReports API. 
+     *  The list of assessment reports that the ListAssessmentReports API returned. 
      */
     assessmentReports?: AssessmentReportsMetadata;
     /**
-     *  The pagination token used to fetch the next set of results. 
+     *  The pagination token that's used to fetch the next set of results. 
      */
     nextToken?: Token;
   }
   export interface ListAssessmentsRequest {
     /**
-     *  The pagination token used to fetch the next set of results. 
+     *  The current status of the assessment.
+     */
+    status?: AssessmentStatus;
+    /**
+     *  The pagination token that's used to fetch the next set of results. 
      */
     nextToken?: Token;
     /**
-     *  Represents the maximum number of results per page, or per API request call. 
+     *  Represents the maximum number of results on a page or for an API request call. 
      */
     maxResults?: MaxResults;
   }
   export interface ListAssessmentsResponse {
     /**
-     *  The metadata associated with the assessment. 
+     *  The metadata that's associated with the assessment. 
      */
     assessmentMetadata?: ListAssessmentMetadata;
     /**
-     *  The pagination token used to fetch the next set of results. 
+     *  The pagination token that's used to fetch the next set of results. 
+     */
+    nextToken?: Token;
+  }
+  export interface ListControlDomainInsightsByAssessmentRequest {
+    /**
+     * The unique identifier for the active assessment. 
+     */
+    assessmentId: UUID;
+    /**
+     * The pagination token that's used to fetch the next set of results. 
+     */
+    nextToken?: Token;
+    /**
+     * Represents the maximum number of results on a page or for an API request call. 
+     */
+    maxResults?: MaxResults;
+  }
+  export interface ListControlDomainInsightsByAssessmentResponse {
+    /**
+     * The control domain analytics data that the ListControlDomainInsightsByAssessment API returned. 
+     */
+    controlDomainInsights?: ControlDomainInsightsList;
+    /**
+     * The pagination token that's used to fetch the next set of results. 
+     */
+    nextToken?: Token;
+  }
+  export interface ListControlDomainInsightsRequest {
+    /**
+     * The pagination token that's used to fetch the next set of results. 
+     */
+    nextToken?: Token;
+    /**
+     * Represents the maximum number of results on a page or for an API request call. 
+     */
+    maxResults?: MaxResults;
+  }
+  export interface ListControlDomainInsightsResponse {
+    /**
+     * The control domain analytics data that the ListControlDomainInsights API returned. 
+     */
+    controlDomainInsights?: ControlDomainInsightsList;
+    /**
+     * The pagination token that's used to fetch the next set of results. 
+     */
+    nextToken?: Token;
+  }
+  export interface ListControlInsightsByControlDomainRequest {
+    /**
+     * The unique identifier for the control domain. 
+     */
+    controlDomainId: UUID;
+    /**
+     * The pagination token that's used to fetch the next set of results. 
+     */
+    nextToken?: Token;
+    /**
+     * Represents the maximum number of results on a page or for an API request call. 
+     */
+    maxResults?: MaxResults;
+  }
+  export interface ListControlInsightsByControlDomainResponse {
+    /**
+     * The control analytics data that the ListControlInsightsByControlDomain API returned. 
+     */
+    controlInsightsMetadata?: ControlInsightsMetadata;
+    /**
+     * The pagination token that's used to fetch the next set of results. 
      */
     nextToken?: Token;
   }
   export interface ListControlsRequest {
     /**
-     *  The type of control, such as standard or custom. 
+     *  The type of control, such as a standard control or a custom control. 
      */
     controlType: ControlType;
     /**
-     *  The pagination token used to fetch the next set of results. 
+     *  The pagination token that's used to fetch the next set of results. 
      */
     nextToken?: Token;
     /**
-     *  Represents the maximum number of results per page, or per API request call. 
+     *  Represents the maximum number of results on a page or for an API request call. 
      */
     maxResults?: MaxResults;
   }
   export interface ListControlsResponse {
     /**
-     *  The list of control metadata objects returned by the ListControls API. 
+     *  The list of control metadata objects that the ListControls API returned. 
      */
     controlMetadataList?: ControlMetadataList;
     /**
-     *  The pagination token used to fetch the next set of results. 
+     *  The pagination token that's used to fetch the next set of results. 
      */
     nextToken?: Token;
   }
   export interface ListKeywordsForDataSourceRequest {
     /**
-     *  The control mapping data source to which the keywords apply. 
+     *  The control mapping data source that the keywords apply to. 
      */
     source: SourceType;
     /**
-     *  The pagination token used to fetch the next set of results. 
+     *  The pagination token that's used to fetch the next set of results. 
      */
     nextToken?: Token;
     /**
-     *  Represents the maximum number of results per page, or per API request call. 
+     *  Represents the maximum number of results on a page or for an API request call. 
      */
     maxResults?: MaxResults;
   }
   export interface ListKeywordsForDataSourceResponse {
     /**
-     *  The list of keywords for the specified event mapping source. 
+     *  The list of keywords for the event mapping source. 
      */
     keywords?: Keywords;
     /**
-     *  The pagination token used to fetch the next set of results. 
+     *  The pagination token that's used to fetch the next set of results. 
      */
     nextToken?: Token;
   }
   export interface ListNotificationsRequest {
     /**
-     *  The pagination token used to fetch the next set of results. 
+     *  The pagination token that's used to fetch the next set of results. 
      */
     nextToken?: Token;
     /**
-     *  Represents the maximum number of results per page, or per API request call. 
+     *  Represents the maximum number of results on a page or for an API request call. 
      */
     maxResults?: MaxResults;
   }
@@ -2111,19 +2549,19 @@ declare namespace AuditManager {
      */
     notifications?: Notifications;
     /**
-     *  The pagination token used to fetch the next set of results. 
+     *  The pagination token that's used to fetch the next set of results. 
      */
     nextToken?: Token;
   }
   export interface ListTagsForResourceRequest {
     /**
-     *  The Amazon Resource Name (ARN) of the specified resource. 
+     *  The Amazon Resource Name (ARN) of the resource. 
      */
     resourceArn: AuditManagerArn;
   }
   export interface ListTagsForResourceResponse {
     /**
-     *  The list of tags returned by the ListTagsForResource API. 
+     *  The list of tags that the ListTagsForResource API returned. 
      */
     tags?: TagMap;
   }
@@ -2142,7 +2580,7 @@ declare namespace AuditManager {
      */
     id?: TimestampUUID;
     /**
-     *  The identifier for the specified assessment. 
+     *  The identifier for the assessment. 
      */
     assessmentId?: UUID;
     /**
@@ -2150,7 +2588,7 @@ declare namespace AuditManager {
      */
     assessmentName?: AssessmentName;
     /**
-     *  The identifier for the specified control set. 
+     *  The identifier for the control set. 
      */
     controlSetId?: ControlSetId;
     /**
@@ -2171,7 +2609,9 @@ declare namespace AuditManager {
     source?: NonEmptyString;
   }
   export type Notifications = Notification[];
+  export type NullableInteger = number;
   export type ObjectTypeEnum = "ASSESSMENT"|"CONTROL_SET"|"CONTROL"|"DELEGATION"|"ASSESSMENT_REPORT"|string;
+  export type Region = string;
   export interface RegisterAccountRequest {
     /**
      *  The KMS key details. 
@@ -2190,27 +2630,27 @@ declare namespace AuditManager {
   }
   export interface RegisterOrganizationAdminAccountRequest {
     /**
-     *  The identifier for the specified delegated administrator account. 
+     *  The identifier for the delegated administrator account. 
      */
     adminAccountId: AccountId;
   }
   export interface RegisterOrganizationAdminAccountResponse {
     /**
-     *  The identifier for the specified delegated administrator account. 
+     *  The identifier for the delegated administrator account. 
      */
     adminAccountId?: AccountId;
     /**
-     *  The identifier for the specified organization. 
+     *  The identifier for the organization. 
      */
     organizationId?: organizationId;
   }
   export interface Resource {
     /**
-     *  The Amazon Resource Name (ARN) for the specified resource. 
+     *  The Amazon Resource Name (ARN) for the resource. 
      */
     arn?: GenericArn;
     /**
-     *  The value of the specified resource. 
+     *  The value of the resource. 
      */
     value?: String;
   }
@@ -2231,11 +2671,11 @@ declare namespace AuditManager {
   export type SNSTopic = string;
   export interface Scope {
     /**
-     *  The accounts included in the scope of the assessment. 
+     *  The Amazon Web Services accounts that are included in the scope of the assessment. 
      */
     awsAccounts?: AWSAccounts;
     /**
-     *  The Amazon Web Services services included in the scope of the assessment. 
+     *  The Amazon Web Services services that are included in the scope of the assessment. 
      */
     awsServices?: AWSServices;
   }
@@ -2249,11 +2689,11 @@ declare namespace AuditManager {
      */
     displayName?: NonEmptyString;
     /**
-     *  The description of the specified Amazon Web Service. 
+     *  The description of the Amazon Web Service. 
      */
     description?: NonEmptyString;
     /**
-     *  The category in which the Amazon Web Service belongs, such as compute, storage, database, and so on. 
+     *  The category that the Amazon Web Service belongs to, such as compute, storage, or database. 
      */
     category?: NonEmptyString;
   }
@@ -2281,33 +2721,61 @@ declare namespace AuditManager {
      */
     kmsKey?: KmsKey;
   }
+  export type ShareRequestAction = "ACCEPT"|"DECLINE"|"REVOKE"|string;
+  export type ShareRequestComment = string;
+  export type ShareRequestStatus = "ACTIVE"|"REPLICATING"|"SHARED"|"EXPIRING"|"FAILED"|"EXPIRED"|"DECLINED"|"REVOKED"|string;
+  export type ShareRequestType = "SENT"|"RECEIVED"|string;
   export type SnsArn = string;
   export type SourceDescription = string;
   export type SourceFrequency = "DAILY"|"WEEKLY"|"MONTHLY"|string;
   export interface SourceKeyword {
     /**
-     *  The method of input for the specified keyword. 
+     *  The input method for the keyword. 
      */
     keywordInputType?: KeywordInputType;
     /**
-     *  The value of the keyword used to search CloudTrail logs, Config rules, Security Hub checks, and Amazon Web Services API names when mapping a control data source. 
+     *  The value of the keyword that's used when mapping a control data source. For example, this can be a CloudTrail event name, a rule name for Config, a Security Hub control, or the name of an Amazon Web Services API call.  If you’re mapping a data source to a rule in Config, the keywordValue that you specify depends on the type of rule:   For managed rules, you can use the rule identifier as the keywordValue. You can find the rule identifier from the list of Config managed rules.   Managed rule name: s3-bucket-acl-prohibited   keywordValue: S3_BUCKET_ACL_PROHIBITED      For custom rules, you form the keywordValue by adding the Custom_ prefix to the rule name. This prefix distinguishes the rule from a managed rule.   Custom rule name: my-custom-config-rule  keywordValue: Custom_my-custom-config-rule      For service-linked rules, you form the keywordValue by adding the Custom_ prefix to the rule name. In addition, you remove the suffix ID that appears at the end of the rule name.   Service-linked rule name: CustomRuleForAccount-conformance-pack-szsm1uv0w  keywordValue: Custom_CustomRuleForAccount-conformance-pack    Service-linked rule name: securityhub-api-gw-cache-encrypted-101104e1  keywordValue: Custom_securityhub-api-gw-cache-encrypted    Service-linked rule name: OrgConfigRule-s3-bucket-versioning-enabled-dbgzf8ba  keywordValue: Custom_OrgConfigRule-s3-bucket-versioning-enabled     
      */
     keywordValue?: KeywordValue;
   }
   export type SourceName = string;
   export type SourceSetUpOption = "System_Controls_Mapping"|"Procedural_Controls_Mapping"|string;
   export type SourceType = "AWS_Cloudtrail"|"AWS_Config"|"AWS_Security_Hub"|"AWS_API_Call"|"MANUAL"|string;
+  export interface StartAssessmentFrameworkShareRequest {
+    /**
+     *  The unique identifier for the custom framework to be shared. 
+     */
+    frameworkId: UUID;
+    /**
+     *  The Amazon Web Services account of the recipient. 
+     */
+    destinationAccount: AccountId;
+    /**
+     *  The Amazon Web Services Region of the recipient. 
+     */
+    destinationRegion: Region;
+    /**
+     *  An optional comment from the sender about the share request. 
+     */
+    comment?: ShareRequestComment;
+  }
+  export interface StartAssessmentFrameworkShareResponse {
+    /**
+     *  The share request that's created by the StartAssessmentFrameworkShare API. 
+     */
+    assessmentFrameworkShareRequest?: AssessmentFrameworkShareRequest;
+  }
   export type String = string;
   export type TagKey = string;
   export type TagKeyList = TagKey[];
   export type TagMap = {[key: string]: TagValue};
   export interface TagResourceRequest {
     /**
-     *  The Amazon Resource Name (ARN) of the specified resource. 
+     *  The Amazon Resource Name (ARN) of the resource. 
      */
     resourceArn: AuditManagerArn;
     /**
-     *  The tags to be associated with the resource. 
+     *  The tags that are associated with the resource. 
      */
     tags: TagMap;
   }
@@ -2321,7 +2789,7 @@ declare namespace AuditManager {
   export type TroubleshootingText = string;
   export interface URL {
     /**
-     *  The name or word used as a hyperlink to the URL. 
+     *  The name or word that's used as a hyperlink to the URL. 
      */
     hyperlinkName?: HyperlinkName;
     /**
@@ -2344,53 +2812,53 @@ declare namespace AuditManager {
   }
   export interface UpdateAssessmentControlRequest {
     /**
-     *  The identifier for the specified assessment. 
+     *  The unique identifier for the assessment. 
      */
     assessmentId: UUID;
     /**
-     *  The identifier for the specified control set. 
+     *  The unique identifier for the control set. 
      */
     controlSetId: ControlSetId;
     /**
-     *  The identifier for the specified control. 
+     *  The unique identifier for the control. 
      */
     controlId: UUID;
     /**
-     *  The status of the specified control. 
+     *  The status of the control. 
      */
     controlStatus?: ControlStatus;
     /**
-     *  The comment body text for the specified control. 
+     *  The comment body text for the control. 
      */
     commentBody?: ControlCommentBody;
   }
   export interface UpdateAssessmentControlResponse {
     /**
-     *  The name of the updated control set returned by the UpdateAssessmentControl API. 
+     *  The name of the updated control set that the UpdateAssessmentControl API returned. 
      */
     control?: AssessmentControl;
   }
   export interface UpdateAssessmentControlSetStatusRequest {
     /**
-     *  The identifier for the specified assessment. 
+     *  The unique identifier for the assessment. 
      */
     assessmentId: UUID;
     /**
-     *  The identifier for the specified control set. 
+     *  The unique identifier for the control set. 
      */
     controlSetId: String;
     /**
-     *  The status of the control set that is being updated. 
+     *  The status of the control set that's being updated. 
      */
     status: ControlSetStatus;
     /**
-     *  The comment related to the status update. 
+     *  The comment that's related to the status update. 
      */
     comment: DelegationComment;
   }
   export interface UpdateAssessmentControlSetStatusResponse {
     /**
-     *  The name of the updated control set returned by the UpdateAssessmentControlSetStatus API. 
+     *  The name of the updated control set that the UpdateAssessmentControlSetStatus API returned. 
      */
     controlSet?: AssessmentControlSet;
   }
@@ -2404,14 +2872,14 @@ declare namespace AuditManager {
      */
     name: ControlSetName;
     /**
-     *  The list of controls contained within the control set. 
+     *  The list of controls that are contained within the control set. 
      */
-    controls?: CreateAssessmentFrameworkControls;
+    controls: CreateAssessmentFrameworkControls;
   }
   export type UpdateAssessmentFrameworkControlSets = UpdateAssessmentFrameworkControlSet[];
   export interface UpdateAssessmentFrameworkRequest {
     /**
-     *  The identifier for the specified framework. 
+     *  The unique identifier for the framework. 
      */
     frameworkId: UUID;
     /**
@@ -2419,7 +2887,7 @@ declare namespace AuditManager {
      */
     name: FrameworkName;
     /**
-     *  The description of the framework that is to be updated. 
+     *  The description of the updated framework. 
      */
     description?: FrameworkDescription;
     /**
@@ -2427,71 +2895,91 @@ declare namespace AuditManager {
      */
     complianceType?: ComplianceType;
     /**
-     *  The control sets associated with the framework. 
+     *  The control sets that are associated with the framework. 
      */
     controlSets: UpdateAssessmentFrameworkControlSets;
   }
   export interface UpdateAssessmentFrameworkResponse {
     /**
-     *  The name of the specified framework. 
+     *  The name of the framework. 
      */
     framework?: Framework;
   }
+  export interface UpdateAssessmentFrameworkShareRequest {
+    /**
+     *  The unique identifier for the share request. 
+     */
+    requestId: UUID;
+    /**
+     * Specifies whether the share request is a sent request or a received request.
+     */
+    requestType: ShareRequestType;
+    /**
+     * Specifies the update action for the share request.
+     */
+    action: ShareRequestAction;
+  }
+  export interface UpdateAssessmentFrameworkShareResponse {
+    /**
+     *  The updated share request that's returned by the UpdateAssessmentFrameworkShare operation. 
+     */
+    assessmentFrameworkShareRequest?: AssessmentFrameworkShareRequest;
+  }
   export interface UpdateAssessmentRequest {
     /**
-     *  The identifier for the specified assessment. 
+     *  The unique identifier for the assessment. 
      */
     assessmentId: UUID;
     /**
-     *  The name of the specified assessment to be updated. 
+     *  The name of the assessment to be updated. 
      */
     assessmentName?: AssessmentName;
     /**
-     *  The description of the specified assessment. 
+     *  The description of the assessment. 
      */
     assessmentDescription?: AssessmentDescription;
     /**
-     *  The scope of the specified assessment. 
+     *  The scope of the assessment. 
      */
     scope: Scope;
     /**
-     *  The assessment report storage destination for the specified assessment that is being updated. 
+     *  The assessment report storage destination for the assessment that's being updated. 
      */
     assessmentReportsDestination?: AssessmentReportsDestination;
     /**
-     *  The list of roles for the specified assessment. 
+     *  The list of roles for the assessment. 
      */
     roles?: Roles;
   }
   export interface UpdateAssessmentResponse {
     /**
-     *  The response object (name of the updated assessment) for the UpdateAssessmentRequest API. 
+     *  The response object for the UpdateAssessmentRequest API. This is the name of the updated assessment.
      */
     assessment?: Assessment;
   }
   export interface UpdateAssessmentStatusRequest {
     /**
-     *  The identifier for the specified assessment. 
+     *  The unique identifier for the assessment. 
      */
     assessmentId: UUID;
     /**
-     *  The current status of the specified assessment. 
+     *  The current status of the assessment. 
      */
     status: AssessmentStatus;
   }
   export interface UpdateAssessmentStatusResponse {
     /**
-     *  The name of the updated assessment returned by the UpdateAssessmentStatus API. 
+     *  The name of the updated assessment that the UpdateAssessmentStatus API returned. 
      */
     assessment?: Assessment;
   }
   export interface UpdateControlRequest {
     /**
-     *  The identifier for the specified control. 
+     *  The identifier for the control. 
      */
     controlId: UUID;
     /**
-     *  The name of the control to be updated. 
+     *  The name of the updated control. 
      */
     name: ControlName;
     /**
@@ -2499,7 +2987,7 @@ declare namespace AuditManager {
      */
     description?: ControlDescription;
     /**
-     *  The steps that to follow to determine if the control has been satisfied. 
+     *  The steps that you should follow to determine if the control is met. 
      */
     testingInformation?: TestingInformation;
     /**
@@ -2507,23 +2995,23 @@ declare namespace AuditManager {
      */
     actionPlanTitle?: ActionPlanTitle;
     /**
-     *  The recommended actions to carry out if the control is not fulfilled. 
+     *  The recommended actions to carry out if the control isn't fulfilled. 
      */
     actionPlanInstructions?: ActionPlanInstructions;
     /**
-     *  The data mapping sources for the specified control. 
+     *  The data mapping sources for the control. 
      */
     controlMappingSources: ControlMappingSources;
   }
   export interface UpdateControlResponse {
     /**
-     *  The name of the updated control set returned by the UpdateControl API. 
+     *  The name of the updated control set that the UpdateControl API returned. 
      */
     control?: Control;
   }
   export interface UpdateSettingsRequest {
     /**
-     *  The Amazon Simple Notification Service (Amazon SNS) topic to which Audit Manager sends notifications. 
+     *  The Amazon Simple Notification Service (Amazon SNS) topic that Audit Manager sends notifications to. 
      */
     snsTopic?: SnsArn;
     /**
@@ -2549,7 +3037,7 @@ declare namespace AuditManager {
   export type Username = string;
   export interface ValidateAssessmentReportIntegrityRequest {
     /**
-     *  The relative path of the specified Amazon S3 bucket in which the assessment report is stored. 
+     *  The relative path of the Amazon S3 bucket that the assessment report is stored in. 
      */
     s3RelativePath: S3Url;
   }
@@ -2559,7 +3047,7 @@ declare namespace AuditManager {
      */
     signatureValid?: Boolean;
     /**
-     *  The signature algorithm used to code sign the assessment report file. 
+     *  The signature algorithm that's used to code sign the assessment report file. 
      */
     signatureAlgorithm?: String;
     /**

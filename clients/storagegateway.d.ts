@@ -52,11 +52,11 @@ declare class StorageGateway extends Service {
    */
   addWorkingStorage(callback?: (err: AWSError, data: StorageGateway.Types.AddWorkingStorageOutput) => void): Request<StorageGateway.Types.AddWorkingStorageOutput, AWSError>;
   /**
-   * Assigns a tape to a tape pool for archiving. The tape assigned to a pool is archived in the S3 storage class that is associated with the pool. When you use your backup application to eject the tape, the tape is archived directly into the S3 storage class (S3 Glacier or S3 Glacier Deep Archive) that corresponds to the pool. Valid Values: GLACIER | DEEP_ARCHIVE 
+   * Assigns a tape to a tape pool for archiving. The tape assigned to a pool is archived in the S3 storage class that is associated with the pool. When you use your backup application to eject the tape, the tape is archived directly into the S3 storage class (S3 Glacier or S3 Glacier Deep Archive) that corresponds to the pool.
    */
   assignTapePool(params: StorageGateway.Types.AssignTapePoolInput, callback?: (err: AWSError, data: StorageGateway.Types.AssignTapePoolOutput) => void): Request<StorageGateway.Types.AssignTapePoolOutput, AWSError>;
   /**
-   * Assigns a tape to a tape pool for archiving. The tape assigned to a pool is archived in the S3 storage class that is associated with the pool. When you use your backup application to eject the tape, the tape is archived directly into the S3 storage class (S3 Glacier or S3 Glacier Deep Archive) that corresponds to the pool. Valid Values: GLACIER | DEEP_ARCHIVE 
+   * Assigns a tape to a tape pool for archiving. The tape assigned to a pool is archived in the S3 storage class that is associated with the pool. When you use your backup application to eject the tape, the tape is archived directly into the S3 storage class (S3 Glacier or S3 Glacier Deep Archive) that corresponds to the pool.
    */
   assignTapePool(callback?: (err: AWSError, data: StorageGateway.Types.AssignTapePoolOutput) => void): Request<StorageGateway.Types.AssignTapePoolOutput, AWSError>;
   /**
@@ -172,11 +172,11 @@ declare class StorageGateway extends Service {
    */
   deleteAutomaticTapeCreationPolicy(callback?: (err: AWSError, data: StorageGateway.Types.DeleteAutomaticTapeCreationPolicyOutput) => void): Request<StorageGateway.Types.DeleteAutomaticTapeCreationPolicyOutput, AWSError>;
   /**
-   * Deletes the bandwidth rate limits of a gateway. You can delete either the upload and download bandwidth rate limit, or you can delete both. If you delete only one of the limits, the other limit remains unchanged. To specify which gateway to work with, use the Amazon Resource Name (ARN) of the gateway in your request. This operation is supported for the stored volume, cached volume and tape gateway types.
+   * Deletes the bandwidth rate limits of a gateway. You can delete either the upload and download bandwidth rate limit, or you can delete both. If you delete only one of the limits, the other limit remains unchanged. To specify which gateway to work with, use the Amazon Resource Name (ARN) of the gateway in your request. This operation is supported only for the stored volume, cached volume, and tape gateway types.
    */
   deleteBandwidthRateLimit(params: StorageGateway.Types.DeleteBandwidthRateLimitInput, callback?: (err: AWSError, data: StorageGateway.Types.DeleteBandwidthRateLimitOutput) => void): Request<StorageGateway.Types.DeleteBandwidthRateLimitOutput, AWSError>;
   /**
-   * Deletes the bandwidth rate limits of a gateway. You can delete either the upload and download bandwidth rate limit, or you can delete both. If you delete only one of the limits, the other limit remains unchanged. To specify which gateway to work with, use the Amazon Resource Name (ARN) of the gateway in your request. This operation is supported for the stored volume, cached volume and tape gateway types.
+   * Deletes the bandwidth rate limits of a gateway. You can delete either the upload and download bandwidth rate limit, or you can delete both. If you delete only one of the limits, the other limit remains unchanged. To specify which gateway to work with, use the Amazon Resource Name (ARN) of the gateway in your request. This operation is supported only for the stored volume, cached volume, and tape gateway types.
    */
   deleteBandwidthRateLimit(callback?: (err: AWSError, data: StorageGateway.Types.DeleteBandwidthRateLimitOutput) => void): Request<StorageGateway.Types.DeleteBandwidthRateLimitOutput, AWSError>;
   /**
@@ -204,11 +204,11 @@ declare class StorageGateway extends Service {
    */
   deleteGateway(callback?: (err: AWSError, data: StorageGateway.Types.DeleteGatewayOutput) => void): Request<StorageGateway.Types.DeleteGatewayOutput, AWSError>;
   /**
-   * Deletes a snapshot of a volume. You can take snapshots of your gateway volumes on a scheduled or ad hoc basis. This API action enables you to delete a snapshot schedule for a volume. For more information, see Backing up your volumes. In the DeleteSnapshotSchedule request, you identify the volume by providing its Amazon Resource Name (ARN). This operation is only supported in stored and cached volume gateway types.  To list or delete a snapshot, you must use the Amazon EC2 API. For more information, go to DescribeSnapshots in the Amazon Elastic Compute Cloud API Reference. 
+   * Deletes a snapshot of a volume. You can take snapshots of your gateway volumes on a scheduled or ad hoc basis. This API action enables you to delete a snapshot schedule for a volume. For more information, see Backing up your volumes. In the DeleteSnapshotSchedule request, you identify the volume by providing its Amazon Resource Name (ARN). This operation is only supported for cached volume gateway types.  To list or delete a snapshot, you must use the Amazon EC2 API. For more information, go to DescribeSnapshots in the Amazon Elastic Compute Cloud API Reference. 
    */
   deleteSnapshotSchedule(params: StorageGateway.Types.DeleteSnapshotScheduleInput, callback?: (err: AWSError, data: StorageGateway.Types.DeleteSnapshotScheduleOutput) => void): Request<StorageGateway.Types.DeleteSnapshotScheduleOutput, AWSError>;
   /**
-   * Deletes a snapshot of a volume. You can take snapshots of your gateway volumes on a scheduled or ad hoc basis. This API action enables you to delete a snapshot schedule for a volume. For more information, see Backing up your volumes. In the DeleteSnapshotSchedule request, you identify the volume by providing its Amazon Resource Name (ARN). This operation is only supported in stored and cached volume gateway types.  To list or delete a snapshot, you must use the Amazon EC2 API. For more information, go to DescribeSnapshots in the Amazon Elastic Compute Cloud API Reference. 
+   * Deletes a snapshot of a volume. You can take snapshots of your gateway volumes on a scheduled or ad hoc basis. This API action enables you to delete a snapshot schedule for a volume. For more information, see Backing up your volumes. In the DeleteSnapshotSchedule request, you identify the volume by providing its Amazon Resource Name (ARN). This operation is only supported for cached volume gateway types.  To list or delete a snapshot, you must use the Amazon EC2 API. For more information, go to DescribeSnapshots in the Amazon Elastic Compute Cloud API Reference. 
    */
   deleteSnapshotSchedule(callback?: (err: AWSError, data: StorageGateway.Types.DeleteSnapshotScheduleOutput) => void): Request<StorageGateway.Types.DeleteSnapshotScheduleOutput, AWSError>;
   /**
@@ -252,19 +252,19 @@ declare class StorageGateway extends Service {
    */
   describeAvailabilityMonitorTest(callback?: (err: AWSError, data: StorageGateway.Types.DescribeAvailabilityMonitorTestOutput) => void): Request<StorageGateway.Types.DescribeAvailabilityMonitorTestOutput, AWSError>;
   /**
-   * Returns the bandwidth rate limits of a gateway. By default, these limits are not set, which means no bandwidth rate limiting is in effect. This operation is supported for the stored volume, cached volume, and tape gateway types. This operation only returns a value for a bandwidth rate limit only if the limit is set. If no limits are set for the gateway, then this operation returns only the gateway ARN in the response body. To specify which gateway to describe, use the Amazon Resource Name (ARN) of the gateway in your request.
+   * Returns the bandwidth rate limits of a gateway. By default, these limits are not set, which means no bandwidth rate limiting is in effect. This operation is supported only for the stored volume, cached volume, and tape gateway types. To describe bandwidth rate limits for S3 file gateways, use DescribeBandwidthRateLimitSchedule. This operation returns a value for a bandwidth rate limit only if the limit is set. If no limits are set for the gateway, then this operation returns only the gateway ARN in the response body. To specify which gateway to describe, use the Amazon Resource Name (ARN) of the gateway in your request.
    */
   describeBandwidthRateLimit(params: StorageGateway.Types.DescribeBandwidthRateLimitInput, callback?: (err: AWSError, data: StorageGateway.Types.DescribeBandwidthRateLimitOutput) => void): Request<StorageGateway.Types.DescribeBandwidthRateLimitOutput, AWSError>;
   /**
-   * Returns the bandwidth rate limits of a gateway. By default, these limits are not set, which means no bandwidth rate limiting is in effect. This operation is supported for the stored volume, cached volume, and tape gateway types. This operation only returns a value for a bandwidth rate limit only if the limit is set. If no limits are set for the gateway, then this operation returns only the gateway ARN in the response body. To specify which gateway to describe, use the Amazon Resource Name (ARN) of the gateway in your request.
+   * Returns the bandwidth rate limits of a gateway. By default, these limits are not set, which means no bandwidth rate limiting is in effect. This operation is supported only for the stored volume, cached volume, and tape gateway types. To describe bandwidth rate limits for S3 file gateways, use DescribeBandwidthRateLimitSchedule. This operation returns a value for a bandwidth rate limit only if the limit is set. If no limits are set for the gateway, then this operation returns only the gateway ARN in the response body. To specify which gateway to describe, use the Amazon Resource Name (ARN) of the gateway in your request.
    */
   describeBandwidthRateLimit(callback?: (err: AWSError, data: StorageGateway.Types.DescribeBandwidthRateLimitOutput) => void): Request<StorageGateway.Types.DescribeBandwidthRateLimitOutput, AWSError>;
   /**
-   *  Returns information about the bandwidth rate limit schedule of a gateway. By default, gateways do not have bandwidth rate limit schedules, which means no bandwidth rate limiting is in effect. This operation is supported only in the volume and tape gateway types.  This operation returns information about a gateway's bandwidth rate limit schedule. A bandwidth rate limit schedule consists of one or more bandwidth rate limit intervals. A bandwidth rate limit interval defines a period of time on one or more days of the week, during which bandwidth rate limits are specified for uploading, downloading, or both.   A bandwidth rate limit interval consists of one or more days of the week, a start hour and minute, an ending hour and minute, and bandwidth rate limits for uploading and downloading   If no bandwidth rate limit schedule intervals are set for the gateway, this operation returns an empty response. To specify which gateway to describe, use the Amazon Resource Name (ARN) of the gateway in your request.
+   *  Returns information about the bandwidth rate limit schedule of a gateway. By default, gateways do not have bandwidth rate limit schedules, which means no bandwidth rate limiting is in effect. This operation is supported only for volume, tape and S3 file gateways. FSx file gateways do not support bandwidth rate limits. This operation returns information about a gateway's bandwidth rate limit schedule. A bandwidth rate limit schedule consists of one or more bandwidth rate limit intervals. A bandwidth rate limit interval defines a period of time on one or more days of the week, during which bandwidth rate limits are specified for uploading, downloading, or both.   A bandwidth rate limit interval consists of one or more days of the week, a start hour and minute, an ending hour and minute, and bandwidth rate limits for uploading and downloading   If no bandwidth rate limit schedule intervals are set for the gateway, this operation returns an empty response. To specify which gateway to describe, use the Amazon Resource Name (ARN) of the gateway in your request.
    */
   describeBandwidthRateLimitSchedule(params: StorageGateway.Types.DescribeBandwidthRateLimitScheduleInput, callback?: (err: AWSError, data: StorageGateway.Types.DescribeBandwidthRateLimitScheduleOutput) => void): Request<StorageGateway.Types.DescribeBandwidthRateLimitScheduleOutput, AWSError>;
   /**
-   *  Returns information about the bandwidth rate limit schedule of a gateway. By default, gateways do not have bandwidth rate limit schedules, which means no bandwidth rate limiting is in effect. This operation is supported only in the volume and tape gateway types.  This operation returns information about a gateway's bandwidth rate limit schedule. A bandwidth rate limit schedule consists of one or more bandwidth rate limit intervals. A bandwidth rate limit interval defines a period of time on one or more days of the week, during which bandwidth rate limits are specified for uploading, downloading, or both.   A bandwidth rate limit interval consists of one or more days of the week, a start hour and minute, an ending hour and minute, and bandwidth rate limits for uploading and downloading   If no bandwidth rate limit schedule intervals are set for the gateway, this operation returns an empty response. To specify which gateway to describe, use the Amazon Resource Name (ARN) of the gateway in your request.
+   *  Returns information about the bandwidth rate limit schedule of a gateway. By default, gateways do not have bandwidth rate limit schedules, which means no bandwidth rate limiting is in effect. This operation is supported only for volume, tape and S3 file gateways. FSx file gateways do not support bandwidth rate limits. This operation returns information about a gateway's bandwidth rate limit schedule. A bandwidth rate limit schedule consists of one or more bandwidth rate limit intervals. A bandwidth rate limit interval defines a period of time on one or more days of the week, during which bandwidth rate limits are specified for uploading, downloading, or both.   A bandwidth rate limit interval consists of one or more days of the week, a start hour and minute, an ending hour and minute, and bandwidth rate limits for uploading and downloading   If no bandwidth rate limit schedule intervals are set for the gateway, this operation returns an empty response. To specify which gateway to describe, use the Amazon Resource Name (ARN) of the gateway in your request.
    */
   describeBandwidthRateLimitSchedule(callback?: (err: AWSError, data: StorageGateway.Types.DescribeBandwidthRateLimitScheduleOutput) => void): Request<StorageGateway.Types.DescribeBandwidthRateLimitScheduleOutput, AWSError>;
   /**
@@ -524,19 +524,19 @@ declare class StorageGateway extends Service {
    */
   listVolumes(callback?: (err: AWSError, data: StorageGateway.Types.ListVolumesOutput) => void): Request<StorageGateway.Types.ListVolumesOutput, AWSError>;
   /**
-   * Sends you notification through CloudWatch Events when all files written to your file share have been uploaded to Amazon S3. Storage Gateway can send a notification through Amazon CloudWatch Events when all files written to your file share up to that point in time have been uploaded to Amazon S3. These files include files written to the file share up to the time that you make a request for notification. When the upload is done, Storage Gateway sends you notification through an Amazon CloudWatch Event. You can configure CloudWatch Events to send the notification through event targets such as Amazon SNS or Lambda function. This operation is only supported for S3 File Gateways. For more information, see Getting file upload notification in the Storage Gateway User Guide.
+   * Sends you notification through CloudWatch Events when all files written to your file share have been uploaded to S3. Amazon S3. Storage Gateway can send a notification through Amazon CloudWatch Events when all files written to your file share up to that point in time have been uploaded to Amazon S3. These files include files written to the file share up to the time that you make a request for notification. When the upload is done, Storage Gateway sends you notification through an Amazon CloudWatch Event. You can configure CloudWatch Events to send the notification through event targets such as Amazon SNS or Lambda function. This operation is only supported for S3 File Gateways. For more information, see Getting file upload notification in the Storage Gateway User Guide.
    */
   notifyWhenUploaded(params: StorageGateway.Types.NotifyWhenUploadedInput, callback?: (err: AWSError, data: StorageGateway.Types.NotifyWhenUploadedOutput) => void): Request<StorageGateway.Types.NotifyWhenUploadedOutput, AWSError>;
   /**
-   * Sends you notification through CloudWatch Events when all files written to your file share have been uploaded to Amazon S3. Storage Gateway can send a notification through Amazon CloudWatch Events when all files written to your file share up to that point in time have been uploaded to Amazon S3. These files include files written to the file share up to the time that you make a request for notification. When the upload is done, Storage Gateway sends you notification through an Amazon CloudWatch Event. You can configure CloudWatch Events to send the notification through event targets such as Amazon SNS or Lambda function. This operation is only supported for S3 File Gateways. For more information, see Getting file upload notification in the Storage Gateway User Guide.
+   * Sends you notification through CloudWatch Events when all files written to your file share have been uploaded to S3. Amazon S3. Storage Gateway can send a notification through Amazon CloudWatch Events when all files written to your file share up to that point in time have been uploaded to Amazon S3. These files include files written to the file share up to the time that you make a request for notification. When the upload is done, Storage Gateway sends you notification through an Amazon CloudWatch Event. You can configure CloudWatch Events to send the notification through event targets such as Amazon SNS or Lambda function. This operation is only supported for S3 File Gateways. For more information, see Getting file upload notification in the Storage Gateway User Guide.
    */
   notifyWhenUploaded(callback?: (err: AWSError, data: StorageGateway.Types.NotifyWhenUploadedOutput) => void): Request<StorageGateway.Types.NotifyWhenUploadedOutput, AWSError>;
   /**
-   * Refreshes the cached inventory of objects for the specified file share. This operation finds objects in the Amazon S3 bucket that were added, removed, or replaced since the gateway last listed the bucket's contents and cached the results. This operation does not import files into the S3 File Gateway cache storage. It only updates the cached inventory to reflect changes in the inventory of the objects in the S3 bucket. This operation is only supported in the S3 File Gateway types. You can subscribe to be notified through an Amazon CloudWatch event when your RefreshCache operation completes. For more information, see Getting notified about file operations in the Storage Gateway User Guide. This operation is Only supported for S3 File Gateways. When this API is called, it only initiates the refresh operation. When the API call completes and returns a success code, it doesn't necessarily mean that the file refresh has completed. You should use the refresh-complete notification to determine that the operation has completed before you check for new files on the gateway file share. You can subscribe to be notified through a CloudWatch event when your RefreshCache operation completes. Throttle limit: This API is asynchronous, so the gateway will accept no more than two refreshes at any time. We recommend using the refresh-complete CloudWatch event notification before issuing additional requests. For more information, see Getting notified about file operations in the Storage Gateway User Guide. If you invoke the RefreshCache API when two requests are already being processed, any new request will cause an InvalidGatewayRequestException error because too many requests were sent to the server. For more information, see Getting notified about file operations in the Storage Gateway User Guide.
+   * Refreshes the cached inventory of objects for the specified file share. This operation finds objects in the Amazon S3 bucket that were added, removed, or replaced since the gateway last listed the bucket's contents and cached the results. This operation does not import files into the S3 File Gateway cache storage. It only updates the cached inventory to reflect changes in the inventory of the objects in the S3 bucket. This operation is only supported in the S3 File Gateway types. You can subscribe to be notified through an Amazon CloudWatch event when your RefreshCache operation completes. For more information, see Getting notified about file operations in the Storage Gateway User Guide. This operation is Only supported for S3 File Gateways. When this API is called, it only initiates the refresh operation. When the API call completes and returns a success code, it doesn't necessarily mean that the file refresh has completed. You should use the refresh-complete notification to determine that the operation has completed before you check for new files on the gateway file share. You can subscribe to be notified through a CloudWatch event when your RefreshCache operation completes. Throttle limit: This API is asynchronous, so the gateway will accept no more than two refreshes at any time. We recommend using the refresh-complete CloudWatch event notification before issuing additional requests. For more information, see Getting notified about file operations in the Storage Gateway User Guide.    Wait at least 60 seconds between consecutive RefreshCache API requests.   RefreshCache does not evict cache entries if invoked consecutively within 60 seconds of a previous RefreshCache request.   If you invoke the RefreshCache API when two requests are already being processed, any new request will cause an InvalidGatewayRequestException error because too many requests were sent to the server.     The S3 bucket name does not need to be included when entering the list of folders in the FolderList parameter.  For more information, see Getting notified about file operations in the Storage Gateway User Guide.
    */
   refreshCache(params: StorageGateway.Types.RefreshCacheInput, callback?: (err: AWSError, data: StorageGateway.Types.RefreshCacheOutput) => void): Request<StorageGateway.Types.RefreshCacheOutput, AWSError>;
   /**
-   * Refreshes the cached inventory of objects for the specified file share. This operation finds objects in the Amazon S3 bucket that were added, removed, or replaced since the gateway last listed the bucket's contents and cached the results. This operation does not import files into the S3 File Gateway cache storage. It only updates the cached inventory to reflect changes in the inventory of the objects in the S3 bucket. This operation is only supported in the S3 File Gateway types. You can subscribe to be notified through an Amazon CloudWatch event when your RefreshCache operation completes. For more information, see Getting notified about file operations in the Storage Gateway User Guide. This operation is Only supported for S3 File Gateways. When this API is called, it only initiates the refresh operation. When the API call completes and returns a success code, it doesn't necessarily mean that the file refresh has completed. You should use the refresh-complete notification to determine that the operation has completed before you check for new files on the gateway file share. You can subscribe to be notified through a CloudWatch event when your RefreshCache operation completes. Throttle limit: This API is asynchronous, so the gateway will accept no more than two refreshes at any time. We recommend using the refresh-complete CloudWatch event notification before issuing additional requests. For more information, see Getting notified about file operations in the Storage Gateway User Guide. If you invoke the RefreshCache API when two requests are already being processed, any new request will cause an InvalidGatewayRequestException error because too many requests were sent to the server. For more information, see Getting notified about file operations in the Storage Gateway User Guide.
+   * Refreshes the cached inventory of objects for the specified file share. This operation finds objects in the Amazon S3 bucket that were added, removed, or replaced since the gateway last listed the bucket's contents and cached the results. This operation does not import files into the S3 File Gateway cache storage. It only updates the cached inventory to reflect changes in the inventory of the objects in the S3 bucket. This operation is only supported in the S3 File Gateway types. You can subscribe to be notified through an Amazon CloudWatch event when your RefreshCache operation completes. For more information, see Getting notified about file operations in the Storage Gateway User Guide. This operation is Only supported for S3 File Gateways. When this API is called, it only initiates the refresh operation. When the API call completes and returns a success code, it doesn't necessarily mean that the file refresh has completed. You should use the refresh-complete notification to determine that the operation has completed before you check for new files on the gateway file share. You can subscribe to be notified through a CloudWatch event when your RefreshCache operation completes. Throttle limit: This API is asynchronous, so the gateway will accept no more than two refreshes at any time. We recommend using the refresh-complete CloudWatch event notification before issuing additional requests. For more information, see Getting notified about file operations in the Storage Gateway User Guide.    Wait at least 60 seconds between consecutive RefreshCache API requests.   RefreshCache does not evict cache entries if invoked consecutively within 60 seconds of a previous RefreshCache request.   If you invoke the RefreshCache API when two requests are already being processed, any new request will cause an InvalidGatewayRequestException error because too many requests were sent to the server.     The S3 bucket name does not need to be included when entering the list of folders in the FolderList parameter.  For more information, see Getting notified about file operations in the Storage Gateway User Guide.
    */
   refreshCache(callback?: (err: AWSError, data: StorageGateway.Types.RefreshCacheOutput) => void): Request<StorageGateway.Types.RefreshCacheOutput, AWSError>;
   /**
@@ -620,19 +620,19 @@ declare class StorageGateway extends Service {
    */
   updateAutomaticTapeCreationPolicy(callback?: (err: AWSError, data: StorageGateway.Types.UpdateAutomaticTapeCreationPolicyOutput) => void): Request<StorageGateway.Types.UpdateAutomaticTapeCreationPolicyOutput, AWSError>;
   /**
-   * Updates the bandwidth rate limits of a gateway. You can update both the upload and download bandwidth rate limit or specify only one of the two. If you don't set a bandwidth rate limit, the existing rate limit remains. This operation is supported for the stored volume, cached volume, and tape gateway types. By default, a gateway's bandwidth rate limits are not set. If you don't set any limit, the gateway does not have any limitations on its bandwidth usage and could potentially use the maximum available bandwidth. To specify which gateway to update, use the Amazon Resource Name (ARN) of the gateway in your request.
+   * Updates the bandwidth rate limits of a gateway. You can update both the upload and download bandwidth rate limit or specify only one of the two. If you don't set a bandwidth rate limit, the existing rate limit remains. This operation is supported only for the stored volume, cached volume, and tape gateway types. To update bandwidth rate limits for S3 file gateways, use UpdateBandwidthRateLimitSchedule. By default, a gateway's bandwidth rate limits are not set. If you don't set any limit, the gateway does not have any limitations on its bandwidth usage and could potentially use the maximum available bandwidth. To specify which gateway to update, use the Amazon Resource Name (ARN) of the gateway in your request.
    */
   updateBandwidthRateLimit(params: StorageGateway.Types.UpdateBandwidthRateLimitInput, callback?: (err: AWSError, data: StorageGateway.Types.UpdateBandwidthRateLimitOutput) => void): Request<StorageGateway.Types.UpdateBandwidthRateLimitOutput, AWSError>;
   /**
-   * Updates the bandwidth rate limits of a gateway. You can update both the upload and download bandwidth rate limit or specify only one of the two. If you don't set a bandwidth rate limit, the existing rate limit remains. This operation is supported for the stored volume, cached volume, and tape gateway types. By default, a gateway's bandwidth rate limits are not set. If you don't set any limit, the gateway does not have any limitations on its bandwidth usage and could potentially use the maximum available bandwidth. To specify which gateway to update, use the Amazon Resource Name (ARN) of the gateway in your request.
+   * Updates the bandwidth rate limits of a gateway. You can update both the upload and download bandwidth rate limit or specify only one of the two. If you don't set a bandwidth rate limit, the existing rate limit remains. This operation is supported only for the stored volume, cached volume, and tape gateway types. To update bandwidth rate limits for S3 file gateways, use UpdateBandwidthRateLimitSchedule. By default, a gateway's bandwidth rate limits are not set. If you don't set any limit, the gateway does not have any limitations on its bandwidth usage and could potentially use the maximum available bandwidth. To specify which gateway to update, use the Amazon Resource Name (ARN) of the gateway in your request.
    */
   updateBandwidthRateLimit(callback?: (err: AWSError, data: StorageGateway.Types.UpdateBandwidthRateLimitOutput) => void): Request<StorageGateway.Types.UpdateBandwidthRateLimitOutput, AWSError>;
   /**
-   *  Updates the bandwidth rate limit schedule for a specified gateway. By default, gateways do not have bandwidth rate limit schedules, which means no bandwidth rate limiting is in effect. Use this to initiate or update a gateway's bandwidth rate limit schedule. This operation is supported in the volume and tape gateway types. 
+   *  Updates the bandwidth rate limit schedule for a specified gateway. By default, gateways do not have bandwidth rate limit schedules, which means no bandwidth rate limiting is in effect. Use this to initiate or update a gateway's bandwidth rate limit schedule. This operation is supported only for volume, tape and S3 file gateways. FSx file gateways do not support bandwidth rate limits.
    */
   updateBandwidthRateLimitSchedule(params: StorageGateway.Types.UpdateBandwidthRateLimitScheduleInput, callback?: (err: AWSError, data: StorageGateway.Types.UpdateBandwidthRateLimitScheduleOutput) => void): Request<StorageGateway.Types.UpdateBandwidthRateLimitScheduleOutput, AWSError>;
   /**
-   *  Updates the bandwidth rate limit schedule for a specified gateway. By default, gateways do not have bandwidth rate limit schedules, which means no bandwidth rate limiting is in effect. Use this to initiate or update a gateway's bandwidth rate limit schedule. This operation is supported in the volume and tape gateway types. 
+   *  Updates the bandwidth rate limit schedule for a specified gateway. By default, gateways do not have bandwidth rate limit schedules, which means no bandwidth rate limiting is in effect. Use this to initiate or update a gateway's bandwidth rate limit schedule. This operation is supported only for volume, tape and S3 file gateways. FSx file gateways do not support bandwidth rate limits.
    */
   updateBandwidthRateLimitSchedule(callback?: (err: AWSError, data: StorageGateway.Types.UpdateBandwidthRateLimitScheduleOutput) => void): Request<StorageGateway.Types.UpdateBandwidthRateLimitScheduleOutput, AWSError>;
   /**
@@ -751,7 +751,7 @@ declare namespace StorageGateway {
      */
     GatewayRegion: RegionId;
     /**
-     * A value that defines the type of gateway to activate. The type specified is critical to all later functions of the gateway and cannot be changed after activation. The default value is CACHED. Valid Values: STORED | CACHED | VTL | FILE_S3 | FILE_FSX_SMB| 
+     * A value that defines the type of gateway to activate. The type specified is critical to all later functions of the gateway and cannot be changed after activation. The default value is CACHED. Valid Values: STORED | CACHED | VTL | VTL_SNOW | FILE_S3 | FILE_FSX_SMB 
      */
     GatewayType?: GatewayType;
     /**
@@ -824,7 +824,7 @@ declare namespace StorageGateway {
      */
     TapeARN: TapeARN;
     /**
-     * The ID of the pool that you want to add your tape to for archiving. The tape in this pool is archived in the S3 storage class that is associated with the pool. When you use your backup application to eject the tape, the tape is archived directly into the storage class (S3 Glacier or S3 Glacier Deep Archive) that corresponds to the pool. Valid Values: GLACIER | DEEP_ARCHIVE 
+     * The ID of the pool that you want to add your tape to for archiving. The tape in this pool is archived in the S3 storage class that is associated with the pool. When you use your backup application to eject the tape, the tape is archived directly into the storage class (S3 Glacier or S3 Glacier Deep Archive) that corresponds to the pool.
      */
     PoolId: PoolId;
     /**
@@ -924,7 +924,7 @@ declare namespace StorageGateway {
      */
     TapeBarcodePrefix: TapeBarcodePrefix;
     /**
-     * The ID of the pool that you want to add your tape to for archiving. The tape in this pool is archived in the Amazon S3 storage class that is associated with the pool. When you use your backup application to eject the tape, the tape is archived directly into the storage class (S3 Glacier or S3 Glacier Deep Archive) that corresponds to the pool. Valid Values: GLACIER | DEEP_ARCHIVE 
+     * The ID of the pool that you want to add your tape to for archiving. The tape in this pool is archived in the Amazon S3 storage class that is associated with the pool. When you use your backup application to eject the tape, the tape is archived directly into the storage class (S3 Glacier or S3 Glacier Deep Archive) that corresponds to the pool.
      */
     PoolId: PoolId;
     /**
@@ -1026,7 +1026,7 @@ declare namespace StorageGateway {
      */
     CreatedDate?: CreatedDate;
     /**
-     * The size of the data stored on the volume in bytes. This value is calculated based on the number of blocks that are touched, instead of the actual amount of data written. This value can be useful for sequential write patterns but less accurate for random write patterns. VolumeUsedInBytes is different from the compressed size of the volume, which is the value that is used to calculate your bill.  This value is not available for volumes created prior to May 13, 2015, until you store data on the volume. 
+     * The size of the data stored on the volume in bytes. This value is calculated based on the number of blocks that are touched, instead of the actual amount of data written. This value can be useful for sequential write patterns but less accurate for random write patterns. VolumeUsedInBytes is different from the compressed size of the volume, which is the value that is used to calculate your bill.  This value is not available for volumes created prior to May 13, 2015, until you store data on the volume. If you use a delete tool that overwrites the data on your volume with random data, your usage will not be reduced. This is because the random data is not compressible. If you want to reduce the amount of billed storage on your volume, we recommend overwriting your files with zeros to compress the data to a negligible amount of actual storage. 
      */
     VolumeUsedInBytes?: VolumeUsedInBytes;
     KMSKey?: KMSKey;
@@ -1164,7 +1164,7 @@ declare namespace StorageGateway {
      */
     LocationARN: LocationARN;
     /**
-     * The default storage class for objects put into an Amazon S3 bucket by the S3 File Gateway. The default value is S3_INTELLIGENT_TIERING. Optional. Valid Values: S3_STANDARD | S3_INTELLIGENT_TIERING | S3_STANDARD_IA | S3_ONEZONE_IA 
+     * The default storage class for objects put into an Amazon S3 bucket by the S3 File Gateway. The default value is S3_STANDARD. Optional. Valid Values: S3_STANDARD | S3_INTELLIGENT_TIERING | S3_STANDARD_IA | S3_ONEZONE_IA 
      */
     DefaultStorageClass?: StorageClass;
     /**
@@ -1252,7 +1252,7 @@ declare namespace StorageGateway {
      */
     LocationARN: LocationARN;
     /**
-     * The default storage class for objects put into an Amazon S3 bucket by the S3 File Gateway. The default value is S3_INTELLIGENT_TIERING. Optional. Valid Values: S3_STANDARD | S3_INTELLIGENT_TIERING | S3_STANDARD_IA | S3_ONEZONE_IA 
+     * The default storage class for objects put into an Amazon S3 bucket by the S3 File Gateway. The default value is S3_STANDARD. Optional. Valid Values: S3_STANDARD | S3_INTELLIGENT_TIERING | S3_STANDARD_IA | S3_ONEZONE_IA 
      */
     DefaultStorageClass?: StorageClass;
     /**
@@ -1489,7 +1489,7 @@ declare namespace StorageGateway {
      */
     KMSKey?: KMSKey;
     /**
-     * The ID of the pool that you want to add your tape to for archiving. The tape in this pool is archived in the S3 storage class that is associated with the pool. When you use your backup application to eject the tape, the tape is archived directly into the storage class (S3 Glacier or S3 Deep Archive) that corresponds to the pool. Valid Values: GLACIER | DEEP_ARCHIVE 
+     * The ID of the pool that you want to add your tape to for archiving. The tape in this pool is archived in the S3 storage class that is associated with the pool. When you use your backup application to eject the tape, the tape is archived directly into the storage class (S3 Glacier or S3 Deep Archive) that corresponds to the pool.
      */
     PoolId?: PoolId;
     /**
@@ -1537,7 +1537,7 @@ declare namespace StorageGateway {
      */
     KMSKey?: KMSKey;
     /**
-     * The ID of the pool that you want to add your tape to for archiving. The tape in this pool is archived in the S3 storage class that is associated with the pool. When you use your backup application to eject the tape, the tape is archived directly into the storage class (S3 Glacier or S3 Glacier Deep Archive) that corresponds to the pool. Valid Values: GLACIER | DEEP_ARCHIVE 
+     * The ID of the pool that you want to add your tape to for archiving. The tape in this pool is archived in the S3 storage class that is associated with the pool. When you use your backup application to eject the tape, the tape is archived directly into the storage class (S3 Glacier or S3 Glacier Deep Archive) that corresponds to the pool.
      */
     PoolId?: PoolId;
     /**
@@ -1829,7 +1829,7 @@ declare namespace StorageGateway {
      */
     NextUpdateAvailabilityDate?: NextUpdateAvailabilityDate;
     /**
-     * The date on which the last software update was applied to the gateway. If the gateway has never been updated, this field does not return a value in the response.
+     * The date on which the last software update was applied to the gateway. If the gateway has never been updated, this field does not return a value in the response. This only only exist and returns once it have been chosen and set by the SGW service, based on the OS version of the gateway VM
      */
     LastSoftwareUpdate?: LastSoftwareUpdate;
     /**
@@ -1849,11 +1849,11 @@ declare namespace StorageGateway {
      */
     VPCEndpoint?: string;
     /**
-     * The Amazon Resource Name (ARN) of the Amazon CloudWatch log group that is used to monitor events in the gateway.
+     * The Amazon Resource Name (ARN) of the Amazon CloudWatch log group that is used to monitor events in the gateway. This field only only exist and returns once it have been chosen and set by the SGW service, based on the OS version of the gateway VM
      */
     CloudWatchLogGroupARN?: CloudWatchLogGroupARN;
     /**
-     * The type of hypervisor environment used by the host.
+     * The type of hardware or software platform on which the gateway is running.
      */
     HostEnvironment?: HostEnvironment;
     /**
@@ -1876,6 +1876,10 @@ declare namespace StorageGateway {
      * A list of the metadata cache sizes that the gateway can support based on its current hardware specifications.
      */
     SupportedGatewayCapacities?: SupportedGatewayCapacities;
+    /**
+     * A unique identifier for the specific instance of the host platform running the gateway. This value is only available for certain host environments, and its format depends on the host environment type.
+     */
+    HostEnvironmentId?: HostEnvironmentId;
   }
   export interface DescribeMaintenanceStartTimeInput {
     GatewayARN: GatewayARN;
@@ -2353,6 +2357,14 @@ declare namespace StorageGateway {
      * The Amazon Web Services Region where the Amazon EC2 instance is located.
      */
     Ec2InstanceRegion?: Ec2InstanceRegion;
+    /**
+     * The type of hardware or software platform on which the gateway is running.
+     */
+    HostEnvironment?: HostEnvironment;
+    /**
+     * A unique identifier for the specific instance of the host platform running the gateway. This value is only available for certain host environments, and its format depends on the host environment type.
+     */
+    HostEnvironmentId?: HostEnvironmentId;
   }
   export type GatewayName = string;
   export type GatewayNetworkInterfaces = NetworkInterface[];
@@ -2362,7 +2374,8 @@ declare namespace StorageGateway {
   export type GatewayType = string;
   export type Gateways = GatewayInfo[];
   export type Host = string;
-  export type HostEnvironment = "VMWARE"|"HYPER-V"|"EC2"|"KVM"|"OTHER"|string;
+  export type HostEnvironment = "VMWARE"|"HYPER-V"|"EC2"|"KVM"|"OTHER"|"SNOWBALL"|string;
+  export type HostEnvironmentId = string;
   export type Hosts = Host[];
   export type HourOfDay = number;
   export type IPV4Address = string;
@@ -2658,7 +2671,7 @@ declare namespace StorageGateway {
     Role?: Role;
     LocationARN?: LocationARN;
     /**
-     * The default storage class for objects put into an Amazon S3 bucket by the S3 File Gateway. The default value is S3_INTELLIGENT_TIERING. Optional. Valid Values: S3_STANDARD | S3_INTELLIGENT_TIERING | S3_STANDARD_IA | S3_ONEZONE_IA 
+     * The default storage class for objects put into an Amazon S3 bucket by the S3 File Gateway. The default value is S3_STANDARD. Optional. Valid Values: S3_STANDARD | S3_INTELLIGENT_TIERING | S3_STANDARD_IA | S3_ONEZONE_IA 
      */
     DefaultStorageClass?: StorageClass;
     ObjectACL?: ObjectACL;
@@ -2862,7 +2875,7 @@ declare namespace StorageGateway {
     Role?: Role;
     LocationARN?: LocationARN;
     /**
-     * The default storage class for objects put into an Amazon S3 bucket by the S3 File Gateway. The default value is S3_INTELLIGENT_TIERING. Optional. Valid Values: S3_STANDARD | S3_INTELLIGENT_TIERING | S3_STANDARD_IA | S3_ONEZONE_IA 
+     * The default storage class for objects put into an Amazon S3 bucket by the S3 File Gateway. The default value is S3_STANDARD. Optional. Valid Values: S3_STANDARD | S3_INTELLIGENT_TIERING | S3_STANDARD_IA | S3_ONEZONE_IA 
      */
     DefaultStorageClass?: StorageClass;
     ObjectACL?: ObjectACL;
@@ -3101,7 +3114,7 @@ declare namespace StorageGateway {
     TapeUsedInBytes?: TapeUsage;
     KMSKey?: KMSKey;
     /**
-     * The ID of the pool that contains tapes that will be archived. The tapes in this pool are archived in the S3 storage class that is associated with the pool. When you use your backup application to eject the tape, the tape is archived directly into the storage class (S3 Glacier or S3 Glacier Deep Archive) that corresponds to the pool. Valid Values: GLACIER | DEEP_ARCHIVE 
+     * The ID of the pool that contains tapes that will be archived. The tapes in this pool are archived in the S3 storage class that is associated with the pool. When you use your backup application to eject the tape, the tape is archived directly into the storage class (S3 Glacier or S3 Glacier Deep Archive) that corresponds to the pool.
      */
     PoolId?: PoolId;
     /**
@@ -3154,7 +3167,7 @@ declare namespace StorageGateway {
     TapeUsedInBytes?: TapeUsage;
     KMSKey?: KMSKey;
     /**
-     * The ID of the pool that was used to archive the tape. The tapes in this pool are archived in the S3 storage class that is associated with the pool. Valid Values: GLACIER | DEEP_ARCHIVE 
+     * The ID of the pool that was used to archive the tape. The tapes in this pool are archived in the S3 storage class that is associated with the pool.
      */
     PoolId?: PoolId;
     /**
@@ -3197,7 +3210,7 @@ declare namespace StorageGateway {
      */
     GatewayARN?: GatewayARN;
     /**
-     * The ID of the pool that you want to add your tape to for archiving. The tape in this pool is archived in the S3 storage class that is associated with the pool. When you use your backup application to eject the tape, the tape is archived directly into the storage class (S3 Glacier or S3 Glacier Deep Archive) that corresponds to the pool. Valid Values: GLACIER | DEEP_ARCHIVE 
+     * The ID of the pool that you want to add your tape to for archiving. The tape in this pool is archived in the S3 storage class that is associated with the pool. When you use your backup application to eject the tape, the tape is archived directly into the storage class (S3 Glacier or S3 Glacier Deep Archive) that corresponds to the pool.
      */
     PoolId?: PoolId;
     /**
@@ -3395,7 +3408,7 @@ declare namespace StorageGateway {
      */
     NFSFileShareDefaults?: NFSFileShareDefaults;
     /**
-     * The default storage class for objects put into an Amazon S3 bucket by the S3 File Gateway. The default value is S3_INTELLIGENT_TIERING. Optional. Valid Values: S3_STANDARD | S3_INTELLIGENT_TIERING | S3_STANDARD_IA | S3_ONEZONE_IA 
+     * The default storage class for objects put into an Amazon S3 bucket by the S3 File Gateway. The default value is S3_STANDARD. Optional. Valid Values: S3_STANDARD | S3_INTELLIGENT_TIERING | S3_STANDARD_IA | S3_ONEZONE_IA 
      */
     DefaultStorageClass?: StorageClass;
     /**
@@ -3459,7 +3472,7 @@ declare namespace StorageGateway {
      */
     KMSKey?: KMSKey;
     /**
-     * The default storage class for objects put into an Amazon S3 bucket by the S3 File Gateway. The default value is S3_INTELLIGENT_TIERING. Optional. Valid Values: S3_STANDARD | S3_INTELLIGENT_TIERING | S3_STANDARD_IA | S3_ONEZONE_IA 
+     * The default storage class for objects put into an Amazon S3 bucket by the S3 File Gateway. The default value is S3_STANDARD. Optional. Valid Values: S3_STANDARD | S3_INTELLIGENT_TIERING | S3_STANDARD_IA | S3_ONEZONE_IA 
      */
     DefaultStorageClass?: StorageClass;
     /**

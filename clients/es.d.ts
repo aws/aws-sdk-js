@@ -112,6 +112,14 @@ declare class ES extends Service {
    */
   describeDomainAutoTunes(callback?: (err: AWSError, data: ES.Types.DescribeDomainAutoTunesResponse) => void): Request<ES.Types.DescribeDomainAutoTunesResponse, AWSError>;
   /**
+   * Returns information about the current blue/green deployment happening on a domain, including a change ID, status, and progress stages.
+   */
+  describeDomainChangeProgress(params: ES.Types.DescribeDomainChangeProgressRequest, callback?: (err: AWSError, data: ES.Types.DescribeDomainChangeProgressResponse) => void): Request<ES.Types.DescribeDomainChangeProgressResponse, AWSError>;
+  /**
+   * Returns information about the current blue/green deployment happening on a domain, including a change ID, status, and progress stages.
+   */
+  describeDomainChangeProgress(callback?: (err: AWSError, data: ES.Types.DescribeDomainChangeProgressResponse) => void): Request<ES.Types.DescribeDomainChangeProgressResponse, AWSError>;
+  /**
    * Returns domain configuration information about the specified Elasticsearch domain, including the domain ID, domain endpoint, and domain ARN.
    */
   describeElasticsearchDomain(params: ES.Types.DescribeElasticsearchDomainRequest, callback?: (err: AWSError, data: ES.Types.DescribeElasticsearchDomainResponse) => void): Request<ES.Types.DescribeElasticsearchDomainResponse, AWSError>;
@@ -397,6 +405,14 @@ declare namespace ES {
      * Describes the SAML application configured for a domain.
      */
     SAMLOptions?: SAMLOptionsOutput;
+    /**
+     * Specifies the Anonymous Auth Disable Date when Anonymous Auth is enabled.
+     */
+    AnonymousAuthDisableDate?: DisableTimestamp;
+    /**
+     * True if Anonymous auth is enabled. Anonymous auth can be enabled only when AdvancedSecurity is enabled on existing domains.
+     */
+    AnonymousAuthEnabled?: Boolean;
   }
   export interface AdvancedSecurityOptionsInput {
     /**
@@ -415,6 +431,10 @@ declare namespace ES {
      * Specifies the SAML application configuration for the domain.
      */
     SAMLOptions?: SAMLOptionsInput;
+    /**
+     * True if Anonymous auth is enabled. Anonymous auth can be enabled only when AdvancedSecurity is enabled on existing domains.
+     */
+    AnonymousAuthEnabled?: Boolean;
   }
   export interface AdvancedSecurityOptionsStatus {
     /**
@@ -558,6 +578,67 @@ declare namespace ES {
      * The current status of the Elasticsearch service software update.
      */
     ServiceSoftwareOptions?: ServiceSoftwareOptions;
+  }
+  export interface ChangeProgressDetails {
+    /**
+     * The unique change identifier associated with a specific domain configuration change.
+     */
+    ChangeId?: GUID;
+    /**
+     * Contains an optional message associated with the domain configuration change.
+     */
+    Message?: Message;
+  }
+  export interface ChangeProgressStage {
+    /**
+     * The name of the specific progress stage.
+     */
+    Name?: ChangeProgressStageName;
+    /**
+     * The overall status of a specific progress stage.
+     */
+    Status?: ChangeProgressStageStatus;
+    /**
+     * The description of the progress stage.
+     */
+    Description?: Description;
+    /**
+     * The last updated timestamp of the progress stage.
+     */
+    LastUpdated?: LastUpdated;
+  }
+  export type ChangeProgressStageList = ChangeProgressStage[];
+  export type ChangeProgressStageName = string;
+  export type ChangeProgressStageStatus = string;
+  export interface ChangeProgressStatusDetails {
+    /**
+     * The unique change identifier associated with a specific domain configuration change.
+     */
+    ChangeId?: GUID;
+    /**
+     * The time at which the configuration change is made on the domain.
+     */
+    StartTime?: UpdateTimestamp;
+    /**
+     * The overall status of the domain configuration change. This field can take the following values: PENDING, PROCESSING, COMPLETED and FAILED
+     */
+    Status?: OverallChangeStatus;
+    /**
+     * The list of properties involved in the domain configuration change that are still in pending.
+     */
+    PendingProperties?: StringList;
+    /**
+     * The list of properties involved in the domain configuration change that are completed.
+     */
+    CompletedProperties?: StringList;
+    /**
+     * The total number of stages required for the configuration change.
+     */
+    TotalNumberOfStages?: TotalNumberOfStages;
+    /**
+     * The specific stages that the domain is going through to perform the configuration change.
+     */
+    ChangeProgressStages?: ChangeProgressStageList;
   }
   export type CloudWatchLogsLogGroupArn = string;
   export interface CognitoOptions {
@@ -789,6 +870,7 @@ declare namespace ES {
   }
   export type DeploymentCloseDateTimeStamp = Date;
   export type DeploymentStatus = "PENDING_UPDATE"|"IN_PROGRESS"|"COMPLETED"|"NOT_ELIGIBLE"|"ELIGIBLE"|string;
+  export type DeploymentType = string;
   export interface DescribeDomainAutoTunesRequest {
     /**
      * Specifies the domain name for which you want Auto-Tune action details.
@@ -812,6 +894,22 @@ declare namespace ES {
      * Specifies an identifier to allow retrieval of paginated results.
      */
     NextToken?: NextToken;
+  }
+  export interface DescribeDomainChangeProgressRequest {
+    /**
+     * The domain you want to get the progress information about.
+     */
+    DomainName: DomainName;
+    /**
+     * The specific change ID for which you want to get progress information. This is an optional parameter. If omitted, the service returns information about the most recent configuration change. 
+     */
+    ChangeId?: GUID;
+  }
+  export interface DescribeDomainChangeProgressResponse {
+    /**
+     * Progress information for the configuration change that is requested in the DescribeDomainChangeProgress request. 
+     */
+    ChangeProgressStatus?: ChangeProgressStatusDetails;
   }
   export interface DescribeElasticsearchDomainConfigRequest {
     /**
@@ -997,6 +1095,8 @@ declare namespace ES {
      */
     ReservedElasticsearchInstances?: ReservedElasticsearchInstanceList;
   }
+  export type Description = string;
+  export type DisableTimestamp = Date;
   export interface DissociatePackageRequest {
     /**
      * Internal ID of the package that you want to associate with a domain. Use DescribePackages to find this value.
@@ -1103,6 +1203,17 @@ declare namespace ES {
   export type DomainPackageDetailsList = DomainPackageDetails[];
   export type DomainPackageStatus = "ASSOCIATING"|"ASSOCIATION_FAILED"|"ACTIVE"|"DISSOCIATING"|"DISSOCIATION_FAILED"|string;
   export type Double = number;
+  export type DryRun = boolean;
+  export interface DryRunResults {
+    /**
+     *  Specifies the deployment mechanism through which the update shall be applied on the domain. Possible responses are Blue/Green (The update will require a blue/green deployment.) DynamicUpdate (The update can be applied in-place without a Blue/Green deployment required.) Undetermined (The domain is undergoing an update which needs to complete before the deployment type can be predicted.) None (The configuration change matches the current configuration and will not result in any update.) 
+     */
+    DeploymentType?: DeploymentType;
+    /**
+     * Contains an optional message associated with the DryRunResults.
+     */
+    Message?: Message;
+  }
   export interface Duration {
     /**
      *  Integer to specify the value of a maintenance schedule duration. See the Developer Guide for more information.
@@ -1257,6 +1368,10 @@ declare namespace ES {
      * Specifies AutoTuneOptions for the domain. 
      */
     AutoTuneOptions?: AutoTuneOptionsStatus;
+    /**
+     * Specifies change details of the domain configuration change.
+     */
+    ChangeProgressDetails?: ChangeProgressDetails;
   }
   export interface ElasticsearchDomainStatus {
     /**
@@ -1352,6 +1467,10 @@ declare namespace ES {
      * The current status of the Elasticsearch domain's Auto-Tune options.
      */
     AutoTuneOptions?: AutoTuneOptionsOutput;
+    /**
+     * Specifies change details of the domain configuration change.
+     */
+    ChangeProgressDetails?: ChangeProgressDetails;
   }
   export type ElasticsearchDomainStatusList = ElasticsearchDomainStatus[];
   export type ElasticsearchInstanceTypeList = ESPartitionInstanceType[];
@@ -1674,6 +1793,7 @@ declare namespace ES {
   }
   export type MaxResults = number;
   export type MaximumInstanceCount = number;
+  export type Message = string;
   export type MinimumInstanceCount = number;
   export type NextToken = string;
   export interface NodeToNodeEncryptionOptions {
@@ -1750,6 +1870,7 @@ declare namespace ES {
   }
   export type OutboundCrossClusterSearchConnectionStatusCode = "PENDING_ACCEPTANCE"|"VALIDATING"|"VALIDATION_FAILED"|"PROVISIONING"|"ACTIVE"|"REJECTED"|"DELETING"|"DELETED"|string;
   export type OutboundCrossClusterSearchConnections = OutboundCrossClusterSearchConnection[];
+  export type OverallChangeStatus = "PENDING"|"PROCESSING"|"COMPLETED"|"FAILED"|string;
   export type OwnerId = string;
   export type PackageDescription = string;
   export interface PackageDetails {
@@ -2161,6 +2282,7 @@ declare namespace ES {
   export type TagList = Tag[];
   export type TagValue = string;
   export type TimeUnit = "HOURS"|string;
+  export type TotalNumberOfStages = number;
   export type UIntValue = number;
   export interface UpdateElasticsearchDomainConfigRequest {
     /**
@@ -2219,12 +2341,20 @@ declare namespace ES {
      * Specifies Auto-Tune options.
      */
     AutoTuneOptions?: AutoTuneOptions;
+    /**
+     *  This flag, when set to True, specifies whether the UpdateElasticsearchDomain request should return the results of validation checks without actually applying the change. This flag, when set to True, specifies the deployment mechanism through which the update shall be applied on the domain. This will not actually perform the Update. 
+     */
+    DryRun?: DryRun;
   }
   export interface UpdateElasticsearchDomainConfigResponse {
     /**
      * The status of the updated Elasticsearch domain. 
      */
     DomainConfig: ElasticsearchDomainConfig;
+    /**
+     * Contains result of DryRun. 
+     */
+    DryRunResults?: DryRunResults;
   }
   export interface UpdatePackageRequest {
     /**
@@ -2269,6 +2399,7 @@ declare namespace ES {
      *  This flag, when set to True, indicates that an Upgrade Eligibility Check needs to be performed. This will not actually perform the Upgrade. 
      */
     PerformCheckOnly?: Boolean;
+    ChangeProgressDetails?: ChangeProgressDetails;
   }
   export interface UpgradeHistory {
     /**

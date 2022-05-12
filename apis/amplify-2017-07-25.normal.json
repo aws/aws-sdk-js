@@ -1103,6 +1103,7 @@
       "type": "string",
       "max": 255,
       "min": 1,
+      "pattern": "(?s).+",
       "sensitive": true
     },
     "ActiveJobId": {
@@ -1148,7 +1149,7 @@
         },
         "repository": {
           "shape": "Repository",
-          "documentation": "<p> The repository for the Amplify app. </p>"
+          "documentation": "<p> The Git repository for the Amplify app. </p>"
         },
         "platform": {
           "shape": "Platform",
@@ -1188,7 +1189,7 @@
         },
         "basicAuthCredentials": {
           "shape": "BasicAuthCredentials",
-          "documentation": "<p> The basic authorization credentials for branches for the Amplify app. </p>"
+          "documentation": "<p> The basic authorization credentials for branches for the Amplify app. You must base64-encode the authorization credentials and provide them in the format <code>user:password</code>.</p>"
         },
         "customRules": {
           "shape": "CustomRules",
@@ -1217,6 +1218,10 @@
         "autoBranchCreationConfig": {
           "shape": "AutoBranchCreationConfig",
           "documentation": "<p> Describes the automated branch creation configuration for the Amplify app. </p>"
+        },
+        "repositoryCloneMethod": {
+          "shape": "RepositoryCloneMethod",
+          "documentation": "<note> <p>This is for internal use.</p> </note> <p>The Amplify service uses this parameter to specify the authentication protocol to use to access the Git repository for an Amplify app. Amplify specifies <code>TOKEN</code> for a GitHub repository, <code>SIGV4</code> for an Amazon Web Services CodeCommit repository, and <code>SSH</code> for GitLab and Bitbucket repositories.</p>"
         }
       },
       "documentation": "<p> Represents the different branches of a repository for building, deploying, and hosting an Amplify app. </p>"
@@ -1261,7 +1266,8 @@
     },
     "ArtifactId": {
       "type": "string",
-      "max": 255
+      "max": 255,
+      "pattern": "(?s).*"
     },
     "ArtifactUrl": {
       "type": "string",
@@ -1309,7 +1315,7 @@
         },
         "basicAuthCredentials": {
           "shape": "BasicAuthCredentials",
-          "documentation": "<p> The basic authorization credentials for the autocreated branch. </p>"
+          "documentation": "<p> The basic authorization credentials for the autocreated branch. You must base64-encode the authorization credentials and provide them in the format <code>user:password</code>.</p>"
         },
         "enableBasicAuth": {
           "shape": "EnableBasicAuth",
@@ -1337,7 +1343,8 @@
     "AutoBranchCreationPattern": {
       "type": "string",
       "max": 2048,
-      "min": 1
+      "min": 1,
+      "pattern": "(?s).+"
     },
     "AutoBranchCreationPatterns": {
       "type": "list",
@@ -1348,7 +1355,8 @@
     "AutoSubDomainCreationPattern": {
       "type": "string",
       "max": 2048,
-      "min": 1
+      "min": 1,
+      "pattern": "(?s).+"
     },
     "AutoSubDomainCreationPatterns": {
       "type": "list",
@@ -1400,7 +1408,8 @@
     "BackendEnvironmentArn": {
       "type": "string",
       "max": 1000,
-      "min": 1
+      "min": 0,
+      "pattern": "(?s).*"
     },
     "BackendEnvironments": {
       "type": "list",
@@ -1411,6 +1420,7 @@
     "BasicAuthCredentials": {
       "type": "string",
       "max": 2000,
+      "pattern": "(?s).*",
       "sensitive": true
     },
     "Branch": {
@@ -1509,7 +1519,7 @@
         },
         "basicAuthCredentials": {
           "shape": "BasicAuthCredentials",
-          "documentation": "<p> The basic authorization credentials for a branch of an Amplify app. </p>"
+          "documentation": "<p> The basic authorization credentials for a branch of an Amplify app. You must base64-encode the authorization credentials and provide them in the format <code>user:password</code>.</p>"
         },
         "buildSpec": {
           "shape": "BuildSpec",
@@ -1548,12 +1558,14 @@
     },
     "BranchArn": {
       "type": "string",
-      "max": 1000
+      "max": 1000,
+      "pattern": "(?s).*"
     },
     "BranchName": {
       "type": "string",
       "max": 255,
-      "min": 1
+      "min": 1,
+      "pattern": "(?s).+"
     },
     "Branches": {
       "type": "list",
@@ -1566,7 +1578,9 @@
       "type": "string",
       "documentation": "<p> The build specification (build spec) file for an Amplify app build. </p>",
       "max": 25000,
-      "min": 1
+      "min": 1,
+      "pattern": "(?s).+",
+      "sensitive": true
     },
     "CertificateVerificationDNSRecord": {
       "type": "string",
@@ -1574,11 +1588,13 @@
     },
     "CommitId": {
       "type": "string",
-      "max": 255
+      "max": 255,
+      "pattern": "(?s).*"
     },
     "CommitMessage": {
       "type": "string",
-      "max": 10000
+      "max": 10000,
+      "pattern": "(?s).*"
     },
     "CommitTime": {
       "type": "timestamp"
@@ -1586,7 +1602,8 @@
     "Condition": {
       "type": "string",
       "max": 2048,
-      "min": 1
+      "min": 0,
+      "pattern": "(?s).*"
     },
     "Context": {
       "type": "string"
@@ -1619,11 +1636,11 @@
         },
         "oauthToken": {
           "shape": "OauthToken",
-          "documentation": "<p> The OAuth token for a third-party source control system for an Amplify app. The OAuth token is used to create a webhook and a read-only deploy key. The OAuth token is not stored. </p>"
+          "documentation": "<p>The OAuth token for a third-party source control system for an Amplify app. The OAuth token is used to create a webhook and a read-only deploy key using SSH cloning. The OAuth token is not stored.</p> <p>Use <code>oauthToken</code> for repository providers other than GitHub, such as Bitbucket or CodeCommit. To authorize access to GitHub as your repository provider, use <code>accessToken</code>.</p> <p>You must specify either <code>oauthToken</code> or <code>accessToken</code> when you create a new app.</p> <p>Existing Amplify apps deployed from a GitHub repository using OAuth continue to work with CI/CD. However, we strongly recommend that you migrate these apps to use the GitHub App. For more information, see <a href=\"https://docs.aws.amazon.com/amplify/latest/UserGuide/setting-up-GitHub-access.html#migrating-to-github-app-auth\">Migrating an existing OAuth app to the Amplify GitHub App</a> in the <i>Amplify User Guide</i> .</p>"
         },
         "accessToken": {
           "shape": "AccessToken",
-          "documentation": "<p> The personal access token for a third-party source control system for an Amplify app. The personal access token is used to create a webhook and a read-only deploy key. The token is not stored. </p>"
+          "documentation": "<p>The personal access token for a GitHub repository for an Amplify app. The personal access token is used to authorize access to a GitHub repository using the Amplify GitHub App. The token is not stored.</p> <p>Use <code>accessToken</code> for GitHub repositories only. To authorize access to a repository provider such as Bitbucket or CodeCommit, use <code>oauthToken</code>.</p> <p>You must specify either <code>accessToken</code> or <code>oauthToken</code> when you create a new app.</p> <p>Existing Amplify apps deployed from a GitHub repository using OAuth continue to work with CI/CD. However, we strongly recommend that you migrate these apps to use the GitHub App. For more information, see <a href=\"https://docs.aws.amazon.com/amplify/latest/UserGuide/setting-up-GitHub-access.html#migrating-to-github-app-auth\">Migrating an existing OAuth app to the Amplify GitHub App</a> in the <i>Amplify User Guide</i> .</p>"
         },
         "environmentVariables": {
           "shape": "EnvironmentVariables",
@@ -1643,7 +1660,7 @@
         },
         "basicAuthCredentials": {
           "shape": "BasicAuthCredentials",
-          "documentation": "<p> The credentials for basic authorization for an Amplify app. </p>"
+          "documentation": "<p> The credentials for basic authorization for an Amplify app. You must base64-encode the authorization credentials and provide them in the format <code>user:password</code>.</p>"
         },
         "customRules": {
           "shape": "CustomRules",
@@ -1771,7 +1788,7 @@
         },
         "basicAuthCredentials": {
           "shape": "BasicAuthCredentials",
-          "documentation": "<p> The basic authorization credentials for the branch. </p>"
+          "documentation": "<p> The basic authorization credentials for the branch. You must base64-encode the authorization credentials and provide them in the format <code>user:password</code>.</p>"
         },
         "enableBasicAuth": {
           "shape": "EnableBasicAuth",
@@ -1977,7 +1994,8 @@
     "CustomHeaders": {
       "type": "string",
       "max": 25000,
-      "min": 1
+      "min": 0,
+      "pattern": "(?s).*"
     },
     "CustomRule": {
       "type": "structure",
@@ -2222,15 +2240,18 @@
     "DeploymentArtifacts": {
       "type": "string",
       "max": 1000,
-      "min": 1
+      "min": 1,
+      "pattern": "(?s).+"
     },
     "Description": {
       "type": "string",
-      "max": 1000
+      "max": 1000,
+      "pattern": "(?s).*"
     },
     "DisplayName": {
       "type": "string",
-      "max": 255
+      "max": 255,
+      "pattern": "(?s).*"
     },
     "DomainAssociation": {
       "type": "structure",
@@ -2295,11 +2316,13 @@
     },
     "DomainName": {
       "type": "string",
-      "max": 255
+      "max": 64,
+      "pattern": "^(((?!-)[A-Za-z0-9-]{0,62}[A-Za-z0-9])\\.)+((?!-)[A-Za-z0-9-]{1,62}[A-Za-z0-9])(\\.)?$"
     },
     "DomainPrefix": {
       "type": "string",
-      "max": 255
+      "max": 255,
+      "pattern": "(?s).*"
     },
     "DomainStatus": {
       "type": "string",
@@ -2346,16 +2369,19 @@
     },
     "EnvKey": {
       "type": "string",
-      "max": 255
+      "max": 255,
+      "pattern": "(?s).*"
     },
     "EnvValue": {
       "type": "string",
-      "max": 1000
+      "max": 5500,
+      "pattern": "(?s).*"
     },
     "EnvironmentName": {
       "type": "string",
       "max": 255,
-      "min": 1
+      "min": 1,
+      "pattern": "(?s).+"
     },
     "EnvironmentVariables": {
       "type": "map",
@@ -2377,7 +2403,8 @@
     },
     "FileName": {
       "type": "string",
-      "max": 255
+      "max": 255,
+      "pattern": "(?s).*"
     },
     "FileUploadUrls": {
       "type": "map",
@@ -2390,7 +2417,8 @@
     },
     "Framework": {
       "type": "string",
-      "max": 255
+      "max": 255,
+      "pattern": "(?s).*"
     },
     "GenerateAccessLogsRequest": {
       "type": "structure",
@@ -2684,11 +2712,13 @@
     },
     "JobId": {
       "type": "string",
-      "max": 255
+      "max": 255,
+      "pattern": "[0-9]+"
     },
     "JobReason": {
       "type": "string",
-      "max": 255
+      "max": 255,
+      "pattern": "(?s).*"
     },
     "JobStatus": {
       "type": "string",
@@ -3130,7 +3160,8 @@
     },
     "MD5Hash": {
       "type": "string",
-      "max": 32
+      "max": 32,
+      "pattern": "(?s).*"
     },
     "MaxResults": {
       "type": "integer",
@@ -3140,21 +3171,25 @@
     "Name": {
       "type": "string",
       "max": 255,
-      "min": 1
+      "min": 1,
+      "pattern": "(?s).+"
     },
     "NextToken": {
       "type": "string",
-      "max": 2000
+      "max": 2000,
+      "pattern": "(?s).*"
     },
     "OauthToken": {
       "type": "string",
       "max": 1000,
+      "pattern": "(?s).*",
       "sensitive": true
     },
     "Platform": {
       "type": "string",
       "enum": [
-        "WEB"
+        "WEB",
+        "WEB_DYNAMIC"
       ]
     },
     "ProductionBranch": {
@@ -3181,14 +3216,26 @@
     },
     "PullRequestEnvironmentName": {
       "type": "string",
-      "max": 20
+      "max": 20,
+      "pattern": "(?s).*"
     },
     "Repository": {
       "type": "string",
-      "max": 1000
+      "max": 1000,
+      "pattern": "(?s).*"
+    },
+    "RepositoryCloneMethod": {
+      "type": "string",
+      "enum": [
+        "SSH",
+        "TOKEN",
+        "SIGV4"
+      ]
     },
     "ResourceArn": {
       "type": "string",
+      "max": 2048,
+      "min": 0,
       "pattern": "^arn:aws:amplify:.*"
     },
     "Screenshots": {
@@ -3203,21 +3250,25 @@
     "ServiceRoleArn": {
       "type": "string",
       "max": 1000,
-      "min": 1
+      "min": 0,
+      "pattern": "(?s).*"
     },
     "Source": {
       "type": "string",
       "max": 2048,
-      "min": 1
+      "min": 1,
+      "pattern": "(?s).+"
     },
     "SourceUrl": {
       "type": "string",
-      "max": 1000
+      "max": 3000,
+      "pattern": "(?s).*"
     },
     "StackName": {
       "type": "string",
       "max": 255,
-      "min": 1
+      "min": 1,
+      "pattern": "(?s).+"
     },
     "Stage": {
       "type": "string",
@@ -3338,7 +3389,8 @@
     "Status": {
       "type": "string",
       "max": 7,
-      "min": 3
+      "min": 3,
+      "pattern": ".{3,7}"
     },
     "StatusReason": {
       "type": "string",
@@ -3509,7 +3561,10 @@
     },
     "TTL": {
       "type": "string",
-      "documentation": "<p> The content Time to Live (TTL) for the website in seconds. </p>"
+      "documentation": "<p> The content Time to Live (TTL) for the website in seconds. </p>",
+      "max": 32,
+      "min": 0,
+      "pattern": "\\d*"
     },
     "TagKey": {
       "type": "string",
@@ -3534,7 +3589,7 @@
         "shape": "TagValue"
       },
       "max": 50,
-      "min": 1
+      "min": 0
     },
     "TagResourceRequest": {
       "type": "structure",
@@ -3563,12 +3618,14 @@
     },
     "TagValue": {
       "type": "string",
-      "max": 256
+      "max": 256,
+      "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
     },
     "Target": {
       "type": "string",
       "max": 2048,
-      "min": 1
+      "min": 1,
+      "pattern": "(?s).+"
     },
     "TestArtifactsUrl": {
       "type": "string",
@@ -3664,7 +3721,7 @@
         },
         "basicAuthCredentials": {
           "shape": "BasicAuthCredentials",
-          "documentation": "<p> The basic authorization credentials for an Amplify app. </p>"
+          "documentation": "<p> The basic authorization credentials for an Amplify app. You must base64-encode the authorization credentials and provide them in the format <code>user:password</code>.</p>"
         },
         "customRules": {
           "shape": "CustomRules",
@@ -3696,11 +3753,11 @@
         },
         "oauthToken": {
           "shape": "OauthToken",
-          "documentation": "<p> The OAuth token for a third-party source control system for an Amplify app. The token is used to create a webhook and a read-only deploy key. The OAuth token is not stored. </p>"
+          "documentation": "<p>The OAuth token for a third-party source control system for an Amplify app. The OAuth token is used to create a webhook and a read-only deploy key using SSH cloning. The OAuth token is not stored.</p> <p>Use <code>oauthToken</code> for repository providers other than GitHub, such as Bitbucket or CodeCommit.</p> <p>To authorize access to GitHub as your repository provider, use <code>accessToken</code>.</p> <p>You must specify either <code>oauthToken</code> or <code>accessToken</code> when you update an app.</p> <p>Existing Amplify apps deployed from a GitHub repository using OAuth continue to work with CI/CD. However, we strongly recommend that you migrate these apps to use the GitHub App. For more information, see <a href=\"https://docs.aws.amazon.com/amplify/latest/UserGuide/setting-up-GitHub-access.html#migrating-to-github-app-auth\">Migrating an existing OAuth app to the Amplify GitHub App</a> in the <i>Amplify User Guide</i> .</p>"
         },
         "accessToken": {
           "shape": "AccessToken",
-          "documentation": "<p> The personal access token for a third-party source control system for an Amplify app. The token is used to create webhook and a read-only deploy key. The token is not stored. </p>"
+          "documentation": "<p>The personal access token for a GitHub repository for an Amplify app. The personal access token is used to authorize access to a GitHub repository using the Amplify GitHub App. The token is not stored.</p> <p>Use <code>accessToken</code> for GitHub repositories only. To authorize access to a repository provider such as Bitbucket or CodeCommit, use <code>oauthToken</code>.</p> <p>You must specify either <code>accessToken</code> or <code>oauthToken</code> when you update an app.</p> <p>Existing Amplify apps deployed from a GitHub repository using OAuth continue to work with CI/CD. However, we strongly recommend that you migrate these apps to use the GitHub App. For more information, see <a href=\"https://docs.aws.amazon.com/amplify/latest/UserGuide/setting-up-GitHub-access.html#migrating-to-github-app-auth\">Migrating an existing OAuth app to the Amplify GitHub App</a> in the <i>Amplify User Guide</i> .</p>"
         }
       },
       "documentation": "<p> The request structure for the update app request. </p>"
@@ -3763,7 +3820,7 @@
         },
         "basicAuthCredentials": {
           "shape": "BasicAuthCredentials",
-          "documentation": "<p> The basic authorization credentials for the branch. </p>"
+          "documentation": "<p> The basic authorization credentials for the branch. You must base64-encode the authorization credentials and provide them in the format <code>user:password</code>.</p>"
         },
         "enableBasicAuth": {
           "shape": "EnableBasicAuth",
@@ -3817,8 +3874,7 @@
       "type": "structure",
       "required": [
         "appId",
-        "domainName",
-        "subDomainSettings"
+        "domainName"
       ],
       "members": {
         "appId": {
@@ -3960,7 +4016,8 @@
     },
     "WebhookId": {
       "type": "string",
-      "max": 255
+      "max": 255,
+      "pattern": "(?s).*"
     },
     "WebhookUrl": {
       "type": "string",

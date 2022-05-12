@@ -281,6 +281,24 @@
         }
       ]
     },
+    "InternetGatewayExists": {
+      "operation": "DescribeInternetGateways",
+      "delay": 5,
+      "maxAttempts": 6,
+      "acceptors": [
+        {
+          "expected": true,
+          "matcher": "path",
+          "state": "success",
+          "argument": "length(InternetGateways[].InternetGatewayId) > `0`"
+        },
+        {
+          "expected": "InvalidInternetGateway.NotFound",
+          "matcher": "error",
+          "state": "retry"
+        }
+      ]
+    },
     "KeyPairExists": {
       "operation": "DescribeKeyPairs",
       "delay": 5,
@@ -330,6 +348,24 @@
         },
         {
           "state": "retry",
+          "matcher": "error",
+          "expected": "NatGatewayNotFound"
+        }
+      ]
+    },
+    "NatGatewayDeleted": {
+      "operation": "DescribeNatGateways",
+      "delay": 15,
+      "maxAttempts": 40,
+      "acceptors": [
+        {
+          "state": "success",
+          "matcher": "pathAll",
+          "argument": "NatGateways[].State",
+          "expected": "deleted"
+        },
+        {
+          "state": "success",
           "matcher": "error",
           "expected": "NatGatewayNotFound"
         }

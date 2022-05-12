@@ -1496,7 +1496,7 @@ declare namespace DirectConnect {
      */
     virtualInterfaceId?: VirtualInterfaceId;
     /**
-     * The name of the virtual interface assigned by the customer network.
+     * Provides the details about a virtual interface's router.
      */
     virtualInterfaceName?: VirtualInterfaceName;
   }
@@ -1693,6 +1693,7 @@ declare namespace DirectConnect {
      */
     macSecKeys?: MacSecKeyList;
   }
+  export type EnableSiteLink = boolean;
   export type EncryptionMode = string;
   export type EndTime = Date;
   export type FailureTestHistoryStatus = string;
@@ -2043,6 +2044,10 @@ declare namespace DirectConnect {
      * The tags associated with the private virtual interface.
      */
     tags?: TagList;
+    /**
+     * Indicates whether to enable or disable SiteLink.
+     */
+    enableSiteLink?: EnableSiteLink;
   }
   export interface NewPrivateVirtualInterfaceAllocation {
     /**
@@ -2199,6 +2204,10 @@ declare namespace DirectConnect {
      * The tags associated with the transitive virtual interface.
      */
     tags?: TagList;
+    /**
+     * Indicates whether to enable or disable SiteLink.
+     */
+    enableSiteLink?: EnableSiteLink;
   }
   export interface NewTransitVirtualInterfaceAllocation {
     /**
@@ -2298,6 +2307,7 @@ declare namespace DirectConnect {
   }
   export type RouterTypeIdentifier = string;
   export type SecretARN = string;
+  export type SiteLinkEnabled = boolean;
   export type Software = string;
   export interface StartBgpFailoverTestRequest {
     /**
@@ -2447,6 +2457,14 @@ declare namespace DirectConnect {
      * The maximum transmission unit (MTU), in bytes. The supported values are 1500 and 9001. The default value is 1500.
      */
     mtu?: MTU;
+    /**
+     * Indicates whether to enable or disable SiteLink.
+     */
+    enableSiteLink?: EnableSiteLink;
+    /**
+     * The name of the virtual private interface.
+     */
+    virtualInterfaceName?: VirtualInterfaceName;
   }
   export type VLAN = number;
   export type Vendor = string;
@@ -2571,6 +2589,10 @@ declare namespace DirectConnect {
      * The tags associated with the virtual interface.
      */
     tags?: TagList;
+    /**
+     * Indicates whether SiteLink is enabled.
+     */
+    siteLinkEnabled?: SiteLinkEnabled;
   }
   export type VirtualInterfaceId = string;
   export type VirtualInterfaceList = VirtualInterface[];

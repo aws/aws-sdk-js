@@ -103,6 +103,14 @@ declare namespace Finspace {
      * Configuration information when authentication mode is FEDERATED.
      */
     federationParameters?: FederationParameters;
+    /**
+     * Configuration information for the superuser.
+     */
+    superuserParameters?: SuperuserParameters;
+    /**
+     * The list of Amazon Resource Names (ARN) of the data bundles to install. Currently supported data bundle ARNs:    arn:aws:finspace:${Region}::data-bundle/capital-markets-sample - Contains sample Capital Markets datasets, categories and controlled vocabularies.    arn:aws:finspace:${Region}::data-bundle/taq (default) - Contains trades and quotes data in addition to sample Capital Markets data.  
+     */
+    dataBundles?: DataBundleArns;
   }
   export interface CreateEnvironmentResponse {
     /**
@@ -118,6 +126,8 @@ declare namespace Finspace {
      */
     environmentUrl?: url;
   }
+  export type DataBundleArn = string;
+  export type DataBundleArns = DataBundleArn[];
   export interface DeleteEnvironmentRequest {
     /**
      * The identifier for the FinSpace environment.
@@ -127,6 +137,7 @@ declare namespace Finspace {
   export interface DeleteEnvironmentResponse {
   }
   export type Description = string;
+  export type EmailId = string;
   export interface Environment {
     /**
      * The name of the FinSpace environment.
@@ -256,10 +267,25 @@ declare namespace Finspace {
      */
     tags?: TagMap;
   }
+  export type NameString = string;
   export type PaginationToken = string;
   export type ResultLimit = number;
   export type SamlMetadataDocument = string;
   export type SmsDomainUrl = string;
+  export interface SuperuserParameters {
+    /**
+     * The email address of the superuser.
+     */
+    emailAddress: EmailId;
+    /**
+     * The first name of the superuser.
+     */
+    firstName: NameString;
+    /**
+     * The last name of the superuser.
+     */
+    lastName: NameString;
+  }
   export type TagKey = string;
   export type TagKeyList = TagKey[];
   export type TagMap = {[key: string]: TagValue};

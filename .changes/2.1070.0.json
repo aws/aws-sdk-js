@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "AuditManager",
+        "description": "This release updates 3 API parameters. UpdateAssessmentFrameworkControlSet now requires the controls attribute, and CreateAssessmentFrameworkControl requires the id attribute. Additionally, UpdateAssessmentFramework now has a minimum length constraint for the controlSets attribute."
+    },
+    {
+        "type": "feature",
+        "category": "SSMIncidents",
+        "description": "Update RelatedItem enum to support SSM Automation"
+    },
+    {
+        "type": "feature",
+        "category": "Synthetics",
+        "description": "Adding names parameters to the Describe APIs."
+    }
+]

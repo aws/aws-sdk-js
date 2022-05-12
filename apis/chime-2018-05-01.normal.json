@@ -1012,6 +1012,9 @@
           "shape": "UnauthorizedClientException"
         },
         {
+          "shape": "AccessDeniedException"
+        },
+        {
           "shape": "ServiceUnavailableException"
         },
         {
@@ -7062,7 +7065,7 @@
           "shape": "ServiceFailureException"
         }
       ],
-      "documentation": "<p>Allows you to trigger a Lambda function at any time while a call is active, and replace the current actions with new actions returned by the invocation.</p>"
+      "documentation": "<p>Invokes the AWS Lambda function associated with the SIP media application and transaction ID in an update request. The Lambda function can then return a new set of actions.</p>"
     },
     "UpdateSipRule": {
       "name": "UpdateSipRule",
@@ -8711,7 +8714,7 @@
         },
         "Tags": {
           "shape": "TagList",
-          "documentation": "<p>Tags assigned to the <code>AppInstanceUser</code>.</p>"
+          "documentation": "<p>Tags assigned to the <code>AppInstance</code>.</p>"
         }
       }
     },
@@ -10590,6 +10593,10 @@
         "Region": {
           "shape": "TranscribeMedicalRegion",
           "documentation": "<p>The AWS Region passed to Amazon Transcribe Medical. If you don't specify a Region, Amazon Chime uses the meeting's Region.</p>"
+        },
+        "ContentIdentificationType": {
+          "shape": "TranscribeMedicalContentIdentificationType",
+          "documentation": "<p>Set this field to <code>PHI</code> to identify personal health information in the transcription output.</p>"
         }
       },
       "documentation": "<p>Settings specific to the Amazon Transcribe Medical engine.</p>"
@@ -10619,6 +10626,30 @@
         "Region": {
           "shape": "TranscribeRegion",
           "documentation": "<p>The AWS Region passed to Amazon Transcribe. If you don't specify a Region, Amazon Chime uses the meeting's Region.</p>"
+        },
+        "EnablePartialResultsStabilization": {
+          "shape": "Boolean",
+          "documentation": "<p>Generates partial transcription results that are less likely to change as meeting attendees speak. It does so by only allowing the last few words from the partial results to change.</p>"
+        },
+        "PartialResultsStability": {
+          "shape": "TranscribePartialResultsStability",
+          "documentation": "<p>The stabity level of a partial results transcription. Determines how stable you want the transcription results to be. A higher level means the transcription results are less likely to change.</p>"
+        },
+        "ContentIdentificationType": {
+          "shape": "TranscribeContentIdentificationType",
+          "documentation": "<p>Set this field to <code>PII</code> to identify personally identifiable information in the transcription output.</p>"
+        },
+        "ContentRedactionType": {
+          "shape": "TranscribeContentRedactionType",
+          "documentation": "<p>Set this field to <code>PII</code> to redact personally identifiable information in the transcription output. Content redaction is performed only upon complete transcription of the audio segments.</p>"
+        },
+        "PiiEntityTypes": {
+          "shape": "TranscribePiiEntityTypes",
+          "documentation": "<p>Lists the PII entity types you want to identify or redact. To specify entity types, you must enable <code>ContentIdentificationType</code> or <code>ContentRedactionType</code>.</p> <p> <code>PIIEntityTypes</code> must be comma-separated. The available values are: <code>BANK_ACCOUNT_NUMBER</code>, <code>BANK_ROUTING, CREDIT_DEBIT_NUMBER</code>, <code>CREDIT_DEBIT_CVV</code>, <code>CREDIT_DEBIT_EXPIRY</code>, <code>PIN</code>, <code>EMAIL</code>, <code>ADDRESS</code>, <code>NAME</code>, <code>PHONE</code>, <code>SSN</code>, and <code>ALL</code>.</p> <p> <code>PiiEntityTypes</code> is an optional parameter with a default value of <code>ALL</code>.</p>"
+        },
+        "LanguageModelName": {
+          "shape": "TranscribeLanguageModelName",
+          "documentation": "<p>The name of the language model used during transcription.</p>"
         }
       },
       "documentation": "<p>Settings specific to the Amazon Transcribe engine.</p>"
@@ -12777,7 +12808,11 @@
       "members": {
         "EnableSIPLogs": {
           "shape": "Boolean",
-          "documentation": "<p>When true, enables SIP message logs for sending to Amazon CloudWatch Logs.</p>"
+          "documentation": "<p>Boolean that enables SIP message logs to CloudWatch logs.</p>"
+        },
+        "EnableMediaMetricLogs": {
+          "shape": "Boolean",
+          "documentation": "<p>Boolean that enables logging of detailed media metrics for Voice Connectors to CloudWatch logs.</p>"
         }
       },
       "documentation": "<p>The logging configuration associated with an Amazon Chime Voice Connector. Specifies whether SIP message logs are enabled for sending to Amazon CloudWatch Logs.</p>"
@@ -12915,7 +12950,7 @@
         },
         "EventIngestionUrl": {
           "shape": "UriType",
-          "documentation": "<p>The event ingestion URL.</p>"
+          "documentation": "<p>The event ingestion URL to which you send client meeting events.</p>"
         }
       },
       "documentation": "<p>A set of endpoints used by clients to connect to the media service group for an Amazon Chime SDK meeting.</p>"
@@ -14951,6 +14986,18 @@
       "min": 3,
       "pattern": "^8(00|33|44|55|66|77|88)$"
     },
+    "TranscribeContentIdentificationType": {
+      "type": "string",
+      "enum": [
+        "PII"
+      ]
+    },
+    "TranscribeContentRedactionType": {
+      "type": "string",
+      "enum": [
+        "PII"
+      ]
+    },
     "TranscribeLanguageCode": {
       "type": "string",
       "enum": [
@@ -14966,6 +15013,18 @@
         "ja-JP",
         "ko-KR",
         "zh-CN"
+      ]
+    },
+    "TranscribeLanguageModelName": {
+      "type": "string",
+      "max": 200,
+      "min": 1,
+      "pattern": "^[0-9a-zA-Z._-]+"
+    },
+    "TranscribeMedicalContentIdentificationType": {
+      "type": "string",
+      "enum": [
+        "PHI"
       ]
     },
     "TranscribeMedicalLanguageCode": {
@@ -15003,6 +15062,20 @@
         "CONVERSATION",
         "DICTATION"
       ]
+    },
+    "TranscribePartialResultsStability": {
+      "type": "string",
+      "enum": [
+        "low",
+        "medium",
+        "high"
+      ]
+    },
+    "TranscribePiiEntityTypes": {
+      "type": "string",
+      "max": 300,
+      "min": 1,
+      "pattern": "^[A-Z_, ]+"
     },
     "TranscribeRegion": {
       "type": "string",
@@ -16041,6 +16114,10 @@
         "UpdatedTimestamp": {
           "shape": "Iso8601Timestamp",
           "documentation": "<p>The updated Amazon Chime Voice Connector timestamp, in ISO 8601 format.</p>"
+        },
+        "VoiceConnectorArn": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The ARN of the specified Amazon Chime Voice Connector.</p>"
         }
       },
       "documentation": "<p>The Amazon Chime Voice Connector configuration, including outbound host name and encryption settings.</p>"
@@ -16074,6 +16151,10 @@
         "UpdatedTimestamp": {
           "shape": "Iso8601Timestamp",
           "documentation": "<p>The updated Amazon Chime Voice Connector group time stamp, in ISO 8601 format.</p>"
+        },
+        "VoiceConnectorGroupArn": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The ARN of the specified Amazon Chime Voice Connector group.</p>"
         }
       },
       "documentation": "<p>The Amazon Chime Voice Connector group configuration, including associated Amazon Chime Voice Connectors. You can include Amazon Chime Voice Connectors from different AWS Regions in your group. This creates a fault tolerant mechanism for fallback in case of availability events.</p>"
@@ -16141,5 +16222,5 @@
       "documentation": "<p>The Amazon Chime Voice Connector settings. Includes any Amazon S3 buckets designated for storing call detail records.</p>"
     }
   },
-  "documentation": "<p>The Amazon Chime API (application programming interface) is designed for developers to perform key tasks, such as creating and managing Amazon Chime accounts, users, and Voice Connectors. This guide provides detailed information about the Amazon Chime API, including operations, types, inputs and outputs, and error codes. It also includes some server-side API actions to use with the Amazon Chime SDK. For more information about the Amazon Chime SDK, see <a href=\"https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html\"> Using the Amazon Chime SDK </a> in the <i>Amazon Chime Developer Guide</i>.</p> <p>You can use an AWS SDK, the AWS Command Line Interface (AWS CLI), or the REST API to make API calls. We recommend using an AWS SDK or the AWS CLI. Each API operation includes links to information about using it with a language-specific AWS SDK or the AWS CLI.</p> <dl> <dt>Using an AWS SDK</dt> <dd> <p> You don't need to write code to calculate a signature for request authentication. The SDK clients authenticate your requests by using access keys that you provide. For more information about AWS SDKs, see the <a href=\"http://aws.amazon.com/developer/\">AWS Developer Center</a>. </p> </dd> <dt>Using the AWS CLI</dt> <dd> <p>Use your access keys with the AWS CLI to make API calls. For information about setting up the AWS CLI, see <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/installing.html\">Installing the AWS Command Line Interface</a> in the <i>AWS Command Line Interface User Guide</i>. For a list of available Amazon Chime commands, see the <a href=\"https://docs.aws.amazon.com/cli/latest/reference/chime/index.html\">Amazon Chime commands</a> in the <i>AWS CLI Command Reference</i>. </p> </dd> <dt>Using REST APIs</dt> <dd> <p>If you use REST to make API calls, you must authenticate your request by providing a signature. Amazon Chime supports signature version 4. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4 Signing Process</a> in the <i>Amazon Web Services General Reference</i>.</p> <p>When making REST API calls, use the service name <code>chime</code> and REST endpoint <code>https://service.chime.aws.amazon.com</code>.</p> </dd> </dl> <p>Administrative permissions are controlled using AWS Identity and Access Management (IAM). For more information, see <a href=\"https://docs.aws.amazon.com/chime/latest/ag/security-iam.html\">Identity and Access Management for Amazon Chime</a> in the <i>Amazon Chime Administration Guide</i>.</p>"
+  "documentation": "<p>The Amazon Chime API (application programming interface) is designed for developers to perform key tasks, such as creating and managing Amazon Chime accounts, users, and Voice Connectors. This guide provides detailed information about the Amazon Chime API, including operations, types, inputs and outputs, and error codes. It also includes API actions for use with the Amazon Chime SDK, which developers use to build their own communication applications. For more information about the Amazon Chime SDK, see <a href=\"https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html\"> Using the Amazon Chime SDK </a> in the <i>Amazon Chime Developer Guide</i>.</p> <p>You can use an AWS SDK, the AWS Command Line Interface (AWS CLI), or the REST API to make API calls. We recommend using an AWS SDK or the AWS CLI. Each API operation includes links to information about using it with a language-specific AWS SDK or the AWS CLI.</p> <dl> <dt>Using an AWS SDK</dt> <dd> <p> You don't need to write code to calculate a signature for request authentication. The SDK clients authenticate your requests by using access keys that you provide. For more information about AWS SDKs, see the <a href=\"http://aws.amazon.com/developer/\">AWS Developer Center</a>. </p> </dd> <dt>Using the AWS CLI</dt> <dd> <p>Use your access keys with the AWS CLI to make API calls. For information about setting up the AWS CLI, see <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/installing.html\">Installing the AWS Command Line Interface</a> in the <i>AWS Command Line Interface User Guide</i>. For a list of available Amazon Chime commands, see the <a href=\"https://docs.aws.amazon.com/cli/latest/reference/chime/index.html\">Amazon Chime commands</a> in the <i>AWS CLI Command Reference</i>. </p> </dd> <dt>Using REST APIs</dt> <dd> <p>If you use REST to make API calls, you must authenticate your request by providing a signature. Amazon Chime supports signature version 4. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4 Signing Process</a> in the <i>Amazon Web Services General Reference</i>.</p> <p>When making REST API calls, use the service name <code>chime</code> and REST endpoint <code>https://service.chime.aws.amazon.com</code>.</p> </dd> </dl> <p>Administrative permissions are controlled using AWS Identity and Access Management (IAM). For more information, see <a href=\"https://docs.aws.amazon.com/chime/latest/ag/security-iam.html\">Identity and Access Management for Amazon Chime</a> in the <i>Amazon Chime Administration Guide</i>.</p>"
 }

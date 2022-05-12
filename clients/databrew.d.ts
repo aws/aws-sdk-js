@@ -60,6 +60,14 @@ declare class DataBrew extends Service {
    */
   createRecipeJob(callback?: (err: AWSError, data: DataBrew.Types.CreateRecipeJobResponse) => void): Request<DataBrew.Types.CreateRecipeJobResponse, AWSError>;
   /**
+   * Creates a new ruleset that can be used in a profile job to validate the data quality of a dataset.
+   */
+  createRuleset(params: DataBrew.Types.CreateRulesetRequest, callback?: (err: AWSError, data: DataBrew.Types.CreateRulesetResponse) => void): Request<DataBrew.Types.CreateRulesetResponse, AWSError>;
+  /**
+   * Creates a new ruleset that can be used in a profile job to validate the data quality of a dataset.
+   */
+  createRuleset(callback?: (err: AWSError, data: DataBrew.Types.CreateRulesetResponse) => void): Request<DataBrew.Types.CreateRulesetResponse, AWSError>;
+  /**
    * Creates a new schedule for one or more DataBrew jobs. Jobs can be run at a specific date and time, or at regular intervals.
    */
   createSchedule(params: DataBrew.Types.CreateScheduleRequest, callback?: (err: AWSError, data: DataBrew.Types.CreateScheduleResponse) => void): Request<DataBrew.Types.CreateScheduleResponse, AWSError>;
@@ -99,6 +107,14 @@ declare class DataBrew extends Service {
    * Deletes a single version of a DataBrew recipe.
    */
   deleteRecipeVersion(callback?: (err: AWSError, data: DataBrew.Types.DeleteRecipeVersionResponse) => void): Request<DataBrew.Types.DeleteRecipeVersionResponse, AWSError>;
+  /**
+   * Deletes a ruleset.
+   */
+  deleteRuleset(params: DataBrew.Types.DeleteRulesetRequest, callback?: (err: AWSError, data: DataBrew.Types.DeleteRulesetResponse) => void): Request<DataBrew.Types.DeleteRulesetResponse, AWSError>;
+  /**
+   * Deletes a ruleset.
+   */
+  deleteRuleset(callback?: (err: AWSError, data: DataBrew.Types.DeleteRulesetResponse) => void): Request<DataBrew.Types.DeleteRulesetResponse, AWSError>;
   /**
    * Deletes the specified DataBrew schedule.
    */
@@ -147,6 +163,14 @@ declare class DataBrew extends Service {
    * Returns the definition of a specific DataBrew recipe corresponding to a particular version.
    */
   describeRecipe(callback?: (err: AWSError, data: DataBrew.Types.DescribeRecipeResponse) => void): Request<DataBrew.Types.DescribeRecipeResponse, AWSError>;
+  /**
+   * Retrieves detailed information about the ruleset.
+   */
+  describeRuleset(params: DataBrew.Types.DescribeRulesetRequest, callback?: (err: AWSError, data: DataBrew.Types.DescribeRulesetResponse) => void): Request<DataBrew.Types.DescribeRulesetResponse, AWSError>;
+  /**
+   * Retrieves detailed information about the ruleset.
+   */
+  describeRuleset(callback?: (err: AWSError, data: DataBrew.Types.DescribeRulesetResponse) => void): Request<DataBrew.Types.DescribeRulesetResponse, AWSError>;
   /**
    * Returns the definition of a specific DataBrew schedule.
    */
@@ -203,6 +227,14 @@ declare class DataBrew extends Service {
    * Lists all of the DataBrew recipes that are defined.
    */
   listRecipes(callback?: (err: AWSError, data: DataBrew.Types.ListRecipesResponse) => void): Request<DataBrew.Types.ListRecipesResponse, AWSError>;
+  /**
+   * List all rulesets available in the current account or rulesets associated with a specific resource (dataset).
+   */
+  listRulesets(params: DataBrew.Types.ListRulesetsRequest, callback?: (err: AWSError, data: DataBrew.Types.ListRulesetsResponse) => void): Request<DataBrew.Types.ListRulesetsResponse, AWSError>;
+  /**
+   * List all rulesets available in the current account or rulesets associated with a specific resource (dataset).
+   */
+  listRulesets(callback?: (err: AWSError, data: DataBrew.Types.ListRulesetsResponse) => void): Request<DataBrew.Types.ListRulesetsResponse, AWSError>;
   /**
    * Lists the DataBrew schedules that are defined.
    */
@@ -316,6 +348,14 @@ declare class DataBrew extends Service {
    */
   updateRecipeJob(callback?: (err: AWSError, data: DataBrew.Types.UpdateRecipeJobResponse) => void): Request<DataBrew.Types.UpdateRecipeJobResponse, AWSError>;
   /**
+   * Updates specified ruleset.
+   */
+  updateRuleset(params: DataBrew.Types.UpdateRulesetRequest, callback?: (err: AWSError, data: DataBrew.Types.UpdateRulesetResponse) => void): Request<DataBrew.Types.UpdateRulesetResponse, AWSError>;
+  /**
+   * Updates specified ruleset.
+   */
+  updateRuleset(callback?: (err: AWSError, data: DataBrew.Types.UpdateRulesetResponse) => void): Request<DataBrew.Types.UpdateRulesetResponse, AWSError>;
+  /**
    * Modifies the definition of an existing DataBrew schedule.
    */
   updateSchedule(params: DataBrew.Types.UpdateScheduleRequest, callback?: (err: AWSError, data: DataBrew.Types.UpdateScheduleResponse) => void): Request<DataBrew.Types.UpdateScheduleResponse, AWSError>;
@@ -327,6 +367,14 @@ declare class DataBrew extends Service {
 declare namespace DataBrew {
   export type AccountId = string;
   export type ActionId = number;
+  export type AllowedStatisticList = AllowedStatistics[];
+  export interface AllowedStatistics {
+    /**
+     * One or more column statistics to allow for columns that contain detected entities.
+     */
+    Statistics: StatisticList;
+  }
+  export type AnalyticsMode = "ENABLE"|"DISABLE"|string;
   export type Arn = string;
   export type AssumeControl = boolean;
   export type Attempt = number;
@@ -351,6 +399,7 @@ declare namespace DataBrew {
     Errors?: RecipeErrorList;
   }
   export type Bucket = string;
+  export type BucketOwner = string;
   export type CatalogId = string;
   export type ClientSessionId = string;
   export type ColumnName = string;
@@ -457,6 +506,10 @@ declare namespace DataBrew {
      * Configuration for profile jobs. Used to select columns, do evaluations, and override default parameters of evaluations. When configuration is null, the profile job will run with default settings.
      */
     Configuration?: ProfileConfiguration;
+    /**
+     * List of validation configurations that are applied to the profile job.
+     */
+    ValidationConfigurations?: ValidationConfigurationList;
     /**
      * The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role to be assumed when DataBrew runs the job.
      */
@@ -598,6 +651,34 @@ declare namespace DataBrew {
      */
     Name: RecipeName;
   }
+  export interface CreateRulesetRequest {
+    /**
+     * The name of the ruleset to be created. Valid characters are alphanumeric (A-Z, a-z, 0-9), hyphen (-), period (.), and space.
+     */
+    Name: RulesetName;
+    /**
+     * The description of the ruleset.
+     */
+    Description?: RulesetDescription;
+    /**
+     * The Amazon Resource Name (ARN) of a resource (dataset) that the ruleset is associated with.
+     */
+    TargetArn: Arn;
+    /**
+     * A list of rules that are defined with the ruleset. A rule includes one or more checks to be validated on a DataBrew dataset.
+     */
+    Rules: RuleList;
+    /**
+     * Metadata tags to apply to the ruleset.
+     */
+    Tags?: TagMap;
+  }
+  export interface CreateRulesetResponse {
+    /**
+     * The unique name of the created ruleset.
+     */
+    Name: RulesetName;
+  }
   export interface CreateScheduleRequest {
     /**
      * The name or names of one or more jobs to be run.
@@ -693,8 +774,12 @@ declare namespace DataBrew {
     /**
      * The table within the target database.
      */
-    DatabaseTableName: DatabaseTableName;
+    DatabaseTableName?: DatabaseTableName;
     TempDirectory?: S3Location;
+    /**
+     * Custom SQL to run against the provided Glue connection. This SQL will be used as the input for DataBrew projects and jobs.
+     */
+    QueryString?: QueryString;
   }
   export type DatabaseName = string;
   export interface DatabaseOutput {
@@ -874,6 +959,18 @@ declare namespace DataBrew {
      */
     RecipeVersion: RecipeVersion;
   }
+  export interface DeleteRulesetRequest {
+    /**
+     * The name of the ruleset to be deleted.
+     */
+    Name: RulesetName;
+  }
+  export interface DeleteRulesetResponse {
+    /**
+     * The name of the deleted ruleset.
+     */
+    Name: RulesetName;
+  }
   export interface DeleteScheduleRequest {
     /**
      * The name of the schedule to be deleted.
@@ -1012,6 +1109,10 @@ declare namespace DataBrew {
      * Configuration for profile jobs. Used to select columns, do evaluations, and override default parameters of evaluations. When configuration is null, the profile job will run with default settings.
      */
     ProfileConfiguration?: ProfileConfiguration;
+    /**
+     * List of validation configurations that are applied to the profile job.
+     */
+    ValidationConfigurations?: ValidationConfigurationList;
     RecipeReference?: RecipeReference;
     /**
      * The Amazon Resource Name (ARN) of the job.
@@ -1073,6 +1174,10 @@ declare namespace DataBrew {
      * Configuration for profile jobs. Used to select columns, do evaluations, and override default parameters of evaluations. When configuration is null, the profile job will run with default settings.
      */
     ProfileConfiguration?: ProfileConfiguration;
+    /**
+     * List of validation configurations that are applied to the profile job.
+     */
+    ValidationConfigurations?: ValidationConfigurationList;
     /**
      * The unique identifier of the job run.
      */
@@ -1240,6 +1345,54 @@ declare namespace DataBrew {
      */
     RecipeVersion?: RecipeVersion;
   }
+  export interface DescribeRulesetRequest {
+    /**
+     * The name of the ruleset to be described.
+     */
+    Name: RulesetName;
+  }
+  export interface DescribeRulesetResponse {
+    /**
+     * The name of the ruleset.
+     */
+    Name: RulesetName;
+    /**
+     * The description of the ruleset.
+     */
+    Description?: RulesetDescription;
+    /**
+     * The Amazon Resource Name (ARN) of a resource (dataset) that the ruleset is associated with.
+     */
+    TargetArn?: Arn;
+    /**
+     * A list of rules that are defined with the ruleset. A rule includes one or more checks to be validated on a DataBrew dataset.
+     */
+    Rules?: RuleList;
+    /**
+     * The date and time that the ruleset was created.
+     */
+    CreateDate?: _Date;
+    /**
+     * The Amazon Resource Name (ARN) of the user who created the ruleset.
+     */
+    CreatedBy?: CreatedBy;
+    /**
+     * The Amazon Resource Name (ARN) of the user who last modified the ruleset.
+     */
+    LastModifiedBy?: LastModifiedBy;
+    /**
+     * The modification date and time of the ruleset.
+     */
+    LastModifiedDate?: _Date;
+    /**
+     * The Amazon Resource Name (ARN) for the ruleset.
+     */
+    ResourceArn?: Arn;
+    /**
+     * Metadata tags that have been applied to the ruleset.
+     */
+    Tags?: TagMap;
+  }
   export interface DescribeScheduleRequest {
     /**
      * The name of the schedule to be described.
@@ -1284,8 +1437,21 @@ declare namespace DataBrew {
      */
     Name: ScheduleName;
   }
+  export type Disabled = boolean;
   export type EncryptionKeyArn = string;
   export type EncryptionMode = "SSE-KMS"|"SSE-S3"|string;
+  export interface EntityDetectorConfiguration {
+    /**
+     * Entity types to detect. Can be any of the following:   USA_SSN   EMAIL   USA_ITIN   USA_PASSPORT_NUMBER   PHONE_NUMBER   USA_DRIVING_LICENSE   BANK_ACCOUNT   CREDIT_CARD   IP_ADDRESS   MAC_ADDRESS   USA_DEA_NUMBER   USA_HCPCS_CODE   USA_NATIONAL_PROVIDER_IDENTIFIER   USA_NATIONAL_DRUG_CODE   USA_HEALTH_INSURANCE_CLAIM_NUMBER   USA_MEDICARE_BENEFICIARY_IDENTIFIER   USA_CPT_CODE   PERSON_NAME   DATE   The Entity type group USA_ALL is also supported, and includes all of the above entity types except PERSON_NAME and DATE.
+     */
+    EntityTypes: EntityTypeList;
+    /**
+     * Configuration of statistics that are allowed to be run on columns that contain detected entities. When undefined, no statistics will be computed on columns that contain detected entities.
+     */
+    AllowedStatistics?: AllowedStatisticList;
+  }
+  export type EntityType = string;
+  export type EntityTypeList = EntityType[];
   export type ErrorCode = string;
   export interface ExcelOptions {
     /**
@@ -1313,7 +1479,7 @@ declare namespace DataBrew {
      */
     OrderedBy?: OrderedBy;
     /**
-     * A criteria to use for Amazon S3 files sorting before their selection. By default uses DESCENDING order, i.e. most recent files are selected first. Anotherpossible value is ASCENDING.
+     * A criteria to use for Amazon S3 files sorting before their selection. By default uses DESCENDING order, i.e. most recent files are selected first. Another possible value is ASCENDING.
      */
     Order?: Order;
   }
@@ -1357,8 +1523,12 @@ declare namespace DataBrew {
      * Connection information for dataset input files stored in a database.
      */
     DatabaseInputDefinition?: DatabaseInputDefinition;
+    /**
+     * Contains additional resource information needed for specific datasets.
+     */
+    Metadata?: Metadata;
   }
-  export type InputFormat = "CSV"|"JSON"|"PARQUET"|"EXCEL"|string;
+  export type InputFormat = "CSV"|"JSON"|"PARQUET"|"EXCEL"|"ORC"|string;
   export interface Job {
     /**
      * The ID of the Amazon Web Services account that owns the job.
@@ -1452,6 +1622,10 @@ declare namespace DataBrew {
      * A sample configuration for profile jobs only, which determines the number of rows on which the profile job is run. If a JobSample value isn't provided, the default value is used. The default value is CUSTOM_ROWS for the mode parameter and 20,000 for the size parameter.
      */
     JobSample?: JobSample;
+    /**
+     * List of validation configurations that are applied to the profile job.
+     */
+    ValidationConfigurations?: ValidationConfigurationList;
   }
   export type JobList = Job[];
   export type JobName = string;
@@ -1525,6 +1699,10 @@ declare namespace DataBrew {
      * A sample configuration for profile jobs only, which determines the number of rows on which the profile job is run. If a JobSample value isn't provided, the default is used. The default value is CUSTOM_ROWS for the mode parameter and 20,000 for the size parameter.
      */
     JobSample?: JobSample;
+    /**
+     * List of validation configurations that are applied to the profile job run.
+     */
+    ValidationConfigurations?: ValidationConfigurationList;
   }
   export type JobRunErrorMessage = string;
   export type JobRunId = string;
@@ -1690,6 +1868,30 @@ declare namespace DataBrew {
      */
     NextToken?: NextToken;
   }
+  export interface ListRulesetsRequest {
+    /**
+     * The Amazon Resource Name (ARN) of a resource (dataset). Using this parameter indicates to return only those rulesets that are associated with the specified resource.
+     */
+    TargetArn?: Arn;
+    /**
+     * The maximum number of results to return in this request.
+     */
+    MaxResults?: MaxResults100;
+    /**
+     * A token generated by DataBrew that specifies where to continue pagination if a previous request was truncated. To get the next set of pages, pass in the NextToken value from the response object of the previous page call.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListRulesetsResponse {
+    /**
+     * A list of RulesetItem. RulesetItem contains meta data of a ruleset.
+     */
+    Rulesets: RulesetItemList;
+    /**
+     * A token that you can use in a subsequent call to retrieve the next set of results.
+     */
+    NextToken?: NextToken;
+  }
   export interface ListSchedulesRequest {
     /**
      * The name of the job that these schedules apply to.
@@ -1731,8 +1933,15 @@ declare namespace DataBrew {
   export type LogSubscription = "ENABLE"|"DISABLE"|string;
   export type MaxCapacity = number;
   export type MaxFiles = number;
+  export type MaxOutputFiles = number;
   export type MaxResults100 = number;
   export type MaxRetries = number;
+  export interface Metadata {
+    /**
+     * The Amazon Resource Name (ARN) associated with the dataset. Currently, DataBrew only supports ARNs from Amazon AppFlow.
+     */
+    SourceArn?: Arn;
+  }
   export type MultiLine = boolean;
   export type NextToken = string;
   export type OpenedBy = string;
@@ -1764,6 +1973,10 @@ declare namespace DataBrew {
      * Represents options that define how DataBrew formats job output files.
      */
     FormatOptions?: OutputFormatOptions;
+    /**
+     * Maximum number of files to be generated by the job and written to the output folder. For output partitioned by column(s), the MaxOutputFiles value is the maximum number of files per partition.
+     */
+    MaxOutputFiles?: MaxOutputFiles;
   }
   export type OutputFormat = "CSV"|"JSON"|"PARQUET"|"GLUEPARQUET"|"AVRO"|"ORC"|"XML"|"TABLEAUHYPER"|string;
   export interface OutputFormatOptions {
@@ -1808,6 +2021,10 @@ declare namespace DataBrew {
      * List of configurations for column evaluations. ColumnStatisticsConfigurations are used to select evaluations and override parameters of evaluations for particular columns. When ColumnStatisticsConfigurations is undefined, the profile job will profile all supported columns and run all supported evaluations. 
      */
     ColumnStatisticsConfigurations?: ColumnStatisticsConfigurationList;
+    /**
+     * Configuration of entity detection for a profile job. When undefined, entity detection is disabled.
+     */
+    EntityDetectorConfiguration?: EntityDetectorConfiguration;
   }
   export interface Project {
     /**
@@ -1886,6 +2103,7 @@ declare namespace DataBrew {
     Name: RecipeName;
   }
   export type PublishedBy = string;
+  export type QueryString = string;
   export interface Recipe {
     /**
      * The Amazon Resource Name (ARN) of the user who created the recipe.
@@ -1993,6 +2211,85 @@ declare namespace DataBrew {
   }
   export type RecipeVersionList = RecipeVersion[];
   export type Result = string;
+  export type RowRange = number;
+  export interface Rule {
+    /**
+     * The name of the rule.
+     */
+    Name: RuleName;
+    /**
+     * A value that specifies whether the rule is disabled. Once a rule is disabled, a profile job will not validate it during a job run. Default value is false.
+     */
+    Disabled?: Disabled;
+    /**
+     * The expression which includes column references, condition names followed by variable references, possibly grouped and combined with other conditions. For example, (:col1 starts_with :prefix1 or :col1 starts_with :prefix2) and (:col1 ends_with :suffix1 or :col1 ends_with :suffix2). Column and value references are substitution variables that should start with the ':' symbol. Depending on the context, substitution variables' values can be either an actual value or a column name. These values are defined in the SubstitutionMap. If a CheckExpression starts with a column reference, then ColumnSelectors in the rule should be null. If ColumnSelectors has been defined, then there should be no column reference in the left side of a condition, for example, is_between :val1 and :val2. For more information, see Available checks 
+     */
+    CheckExpression: Expression;
+    /**
+     * The map of substitution variable names to their values used in a check expression. Variable names should start with a ':' (colon). Variable values can either be actual values or column names. To differentiate between the two, column names should be enclosed in backticks, for example, ":col1": "`Column A`". 
+     */
+    SubstitutionMap?: ValuesMap;
+    /**
+     * The threshold used with a non-aggregate check expression. Non-aggregate check expressions will be applied to each row in a specific column, and the threshold will be used to determine whether the validation succeeds.
+     */
+    Threshold?: Threshold;
+    /**
+     * List of column selectors. Selectors can be used to select columns using a name or regular expression from the dataset. Rule will be applied to selected columns.
+     */
+    ColumnSelectors?: ColumnSelectorList;
+  }
+  export type RuleCount = number;
+  export type RuleList = Rule[];
+  export type RuleName = string;
+  export type RulesetDescription = string;
+  export interface RulesetItem {
+    /**
+     * The ID of the Amazon Web Services account that owns the ruleset.
+     */
+    AccountId?: AccountId;
+    /**
+     * The Amazon Resource Name (ARN) of the user who created the ruleset.
+     */
+    CreatedBy?: CreatedBy;
+    /**
+     * The date and time that the ruleset was created.
+     */
+    CreateDate?: _Date;
+    /**
+     * The description of the ruleset.
+     */
+    Description?: RulesetDescription;
+    /**
+     * The Amazon Resource Name (ARN) of the user who last modified the ruleset.
+     */
+    LastModifiedBy?: LastModifiedBy;
+    /**
+     * The modification date and time of the ruleset.
+     */
+    LastModifiedDate?: _Date;
+    /**
+     * The name of the ruleset.
+     */
+    Name: RulesetName;
+    /**
+     * The Amazon Resource Name (ARN) for the ruleset.
+     */
+    ResourceArn?: Arn;
+    /**
+     * The number of rules that are defined in the ruleset.
+     */
+    RuleCount?: RuleCount;
+    /**
+     * Metadata tags that have been applied to the ruleset.
+     */
+    Tags?: TagMap;
+    /**
+     * The Amazon Resource Name (ARN) of a resource (dataset) that the ruleset is associated with.
+     */
+    TargetArn: Arn;
+  }
+  export type RulesetItemList = RulesetItem[];
+  export type RulesetName = string;
   export interface S3Location {
     /**
      * The Amazon S3 bucket name.
@@ -2002,6 +2299,10 @@ declare namespace DataBrew {
      * The unique name of the object in the bucket.
      */
     Key?: Key;
+    /**
+     * The Amazon Web Services account ID of the bucket owner.
+     */
+    BucketOwner?: BucketOwner;
   }
   export interface S3TableOutputOptions {
     /**
@@ -2139,6 +2440,7 @@ declare namespace DataBrew {
      */
     ClientSessionId?: ClientSessionId;
   }
+  export type StartRowIndex = number;
   export type StartedBy = string;
   export type Statistic = string;
   export type StatisticList = Statistic[];
@@ -2198,6 +2500,23 @@ declare namespace DataBrew {
   }
   export type TagValue = string;
   export type TargetColumn = string;
+  export interface Threshold {
+    /**
+     * The value of a threshold.
+     */
+    Value: ThresholdValue;
+    /**
+     * The type of a threshold. Used for comparison of an actual count of rows that satisfy the rule to the threshold value.
+     */
+    Type?: ThresholdType;
+    /**
+     * Unit of threshold value. Can be either a COUNT or PERCENTAGE of the full sample size used for validation.
+     */
+    Unit?: ThresholdUnit;
+  }
+  export type ThresholdType = "GREATER_THAN_OR_EQUAL"|"LESS_THAN_OR_EQUAL"|"GREATER_THAN"|"LESS_THAN"|string;
+  export type ThresholdUnit = "COUNT"|"PERCENTAGE"|string;
+  export type ThresholdValue = number;
   export type Timeout = number;
   export type TimezoneOffset = string;
   export interface UntagResourceRequest {
@@ -2264,6 +2583,10 @@ declare namespace DataBrew {
      */
     MaxRetries?: MaxRetries;
     OutputLocation: S3Location;
+    /**
+     * List of validation configurations that are applied to the profile job.
+     */
+    ValidationConfigurations?: ValidationConfigurationList;
     /**
      * The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role to be assumed when DataBrew runs the job.
      */
@@ -2376,6 +2699,26 @@ declare namespace DataBrew {
      */
     Name: RecipeName;
   }
+  export interface UpdateRulesetRequest {
+    /**
+     * The name of the ruleset to be updated.
+     */
+    Name: RulesetName;
+    /**
+     * The description of the ruleset.
+     */
+    Description?: RulesetDescription;
+    /**
+     * A list of rules that are defined with the ruleset. A rule includes one or more checks to be validated on a DataBrew dataset.
+     */
+    Rules: RuleList;
+  }
+  export interface UpdateRulesetResponse {
+    /**
+     * The name of the updated ruleset.
+     */
+    Name: RulesetName;
+  }
   export interface UpdateScheduleRequest {
     /**
      * The name or names of one or more jobs to be run for this schedule.
@@ -2396,6 +2739,18 @@ declare namespace DataBrew {
      */
     Name: ScheduleName;
   }
+  export interface ValidationConfiguration {
+    /**
+     * The Amazon Resource Name (ARN) for the ruleset to be validated in the profile job. The TargetArn of the selected ruleset should be the same as the Amazon Resource Name (ARN) of the dataset that is associated with the profile job.
+     */
+    RulesetArn: Arn;
+    /**
+     * Mode of data quality validation. Default mode is “CHECK_ALL” which verifies all rules defined in the selected ruleset.
+     */
+    ValidationMode?: ValidationMode;
+  }
+  export type ValidationConfigurationList = ValidationConfiguration[];
+  export type ValidationMode = "CHECK_ALL"|string;
   export type ValueReference = string;
   export type ValuesMap = {[key: string]: ConditionValue};
   export interface ViewFrame {
@@ -2411,6 +2766,18 @@ declare namespace DataBrew {
      * A list of columns to hide in the view frame.
      */
     HiddenColumns?: HiddenColumnList;
+    /**
+     * The starting index for the range of rows to return in the view frame.
+     */
+    StartRowIndex?: StartRowIndex;
+    /**
+     * The number of rows to include in the view frame, beginning with the StartRowIndex value.
+     */
+    RowRange?: RowRange;
+    /**
+     * Controls if analytics computation is enabled or disabled. Enabled by default.
+     */
+    Analytics?: AnalyticsMode;
   }
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

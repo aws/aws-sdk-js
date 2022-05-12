@@ -1,11 +1,22 @@
 {
   "pagination": {
+    "DescribeOrganizationResourceCollectionHealth": {
+      "input_token": "NextToken",
+      "output_token": "NextToken",
+      "result_key": [
+        "CloudFormation",
+        "Account",
+        "Service",
+        "Tags"
+      ]
+    },
     "DescribeResourceCollectionHealth": {
       "input_token": "NextToken",
       "output_token": "NextToken",
       "result_key": [
         "CloudFormation",
-        "Service"
+        "Service",
+        "Tags"
       ]
     },
     "GetCostEstimation": {
@@ -28,7 +39,8 @@
       ],
       "output_token": "NextToken",
       "result_key": [
-        "ResourceCollection.CloudFormation.StackNames"
+        "ResourceCollection.CloudFormation.StackNames",
+        "ResourceCollection.Tags"
       ]
     },
     "ListAnomaliesForInsight": {
@@ -60,12 +72,30 @@
       "output_token": "NextToken",
       "result_key": "Channels"
     },
+    "ListOrganizationInsights": {
+      "input_token": "NextToken",
+      "limit_key": "MaxResults",
+      "output_token": "NextToken",
+      "result_key": [
+        "ProactiveInsights",
+        "ReactiveInsights"
+      ]
+    },
     "ListRecommendations": {
       "input_token": "NextToken",
       "output_token": "NextToken",
       "result_key": "Recommendations"
     },
     "SearchInsights": {
+      "input_token": "NextToken",
+      "limit_key": "MaxResults",
+      "output_token": "NextToken",
+      "result_key": [
+        "ProactiveInsights",
+        "ReactiveInsights"
+      ]
+    },
+    "SearchOrganizationInsights": {
       "input_token": "NextToken",
       "limit_key": "MaxResults",
       "output_token": "NextToken",
