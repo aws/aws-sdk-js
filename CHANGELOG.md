@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1134.0-->
+<!--LATEST=2.1135.0-->
 <!--ENTRYINSERT-->
+
+## 2.1135.0
+* feature: Grafana: This release adds APIs for creating and deleting API keys in an Amazon Managed Grafana workspace.
 
 ## 2.1134.0
 * feature: EC2: This release introduces a target type Gateway Load Balancer Endpoint for mirrored traffic. Customers can now specify GatewayLoadBalancerEndpoint option during the creation of a traffic mirror target.

@@ -28,6 +28,14 @@ declare class Grafana extends Service {
    */
   createWorkspace(callback?: (err: AWSError, data: Grafana.Types.CreateWorkspaceResponse) => void): Request<Grafana.Types.CreateWorkspaceResponse, AWSError>;
   /**
+   * Creates an API key for the workspace. This key can be used to authenticate requests sent to the workspace's HTTP API. See  https://docs.aws.amazon.com/grafana/latest/userguide/Using-Grafana-APIs.html for available APIs and example requests.
+   */
+  createWorkspaceApiKey(params: Grafana.Types.CreateWorkspaceApiKeyRequest, callback?: (err: AWSError, data: Grafana.Types.CreateWorkspaceApiKeyResponse) => void): Request<Grafana.Types.CreateWorkspaceApiKeyResponse, AWSError>;
+  /**
+   * Creates an API key for the workspace. This key can be used to authenticate requests sent to the workspace's HTTP API. See  https://docs.aws.amazon.com/grafana/latest/userguide/Using-Grafana-APIs.html for available APIs and example requests.
+   */
+  createWorkspaceApiKey(callback?: (err: AWSError, data: Grafana.Types.CreateWorkspaceApiKeyResponse) => void): Request<Grafana.Types.CreateWorkspaceApiKeyResponse, AWSError>;
+  /**
    * Deletes an Amazon Managed Grafana workspace.
    */
   deleteWorkspace(params: Grafana.Types.DeleteWorkspaceRequest, callback?: (err: AWSError, data: Grafana.Types.DeleteWorkspaceResponse) => void): Request<Grafana.Types.DeleteWorkspaceResponse, AWSError>;
@@ -35,6 +43,14 @@ declare class Grafana extends Service {
    * Deletes an Amazon Managed Grafana workspace.
    */
   deleteWorkspace(callback?: (err: AWSError, data: Grafana.Types.DeleteWorkspaceResponse) => void): Request<Grafana.Types.DeleteWorkspaceResponse, AWSError>;
+  /**
+   * Deletes an API key for a workspace.
+   */
+  deleteWorkspaceApiKey(params: Grafana.Types.DeleteWorkspaceApiKeyRequest, callback?: (err: AWSError, data: Grafana.Types.DeleteWorkspaceApiKeyResponse) => void): Request<Grafana.Types.DeleteWorkspaceApiKeyResponse, AWSError>;
+  /**
+   * Deletes an API key for a workspace.
+   */
+  deleteWorkspaceApiKey(callback?: (err: AWSError, data: Grafana.Types.DeleteWorkspaceApiKeyResponse) => void): Request<Grafana.Types.DeleteWorkspaceApiKeyResponse, AWSError>;
   /**
    * Displays information about one Amazon Managed Grafana workspace.
    */
@@ -128,6 +144,8 @@ declare namespace Grafana {
   export type AccountAccessType = "CURRENT_ACCOUNT"|"ORGANIZATION"|string;
   export type AllowedOrganization = string;
   export type AllowedOrganizations = AllowedOrganization[];
+  export type ApiKeyName = string;
+  export type ApiKeyToken = string;
   export type AssertionAttribute = string;
   export interface AssertionAttributes {
     /**
@@ -205,6 +223,39 @@ declare namespace Grafana {
   }
   export type Boolean = boolean;
   export type ClientToken = string;
+  export interface CreateWorkspaceApiKeyRequest {
+    /**
+     * Specifies the name of the key to create. Key names must be unique to the workspace.
+     */
+    keyName: ApiKeyName;
+    /**
+     * Specifies the permission level of the key. Valid Values: VIEWER | EDITOR | ADMIN 
+     */
+    keyRole: String;
+    /**
+     * Specifies the time in seconds until the key expires. Keys can be valid for up to 30 days.
+     */
+    secondsToLive: CreateWorkspaceApiKeyRequestSecondsToLiveInteger;
+    /**
+     * The ID of the workspace in which to create an API key.
+     */
+    workspaceId: WorkspaceId;
+  }
+  export type CreateWorkspaceApiKeyRequestSecondsToLiveInteger = number;
+  export interface CreateWorkspaceApiKeyResponse {
+    /**
+     * The key token that was created. Use this value as a bearer token to authenticate HTTP requests to the workspace.
+     */
+    key: ApiKeyToken;
+    /**
+     * The name of the key that was created.
+     */
+    keyName: ApiKeyName;
+    /**
+     * The ID of the workspace that the key is valid for.
+     */
+    workspaceId: WorkspaceId;
+  }
   export interface CreateWorkspaceRequest {
     /**
      * Specifies whether the workspace can access Amazon Web Services resources in this Amazon Web Services account only, or whether it can also access Amazon Web Services resources in other accounts in the same organization. If you specify ORGANIZATION, you must specify which organizational units the workspace can access in the workspaceOrganizationalUnits parameter.
@@ -267,6 +318,26 @@ declare namespace Grafana {
   }
   export type DataSourceType = "AMAZON_OPENSEARCH_SERVICE"|"CLOUDWATCH"|"PROMETHEUS"|"XRAY"|"TIMESTREAM"|"SITEWISE"|"ATHENA"|"REDSHIFT"|string;
   export type DataSourceTypesList = DataSourceType[];
+  export interface DeleteWorkspaceApiKeyRequest {
+    /**
+     * The name of the API key to delete.
+     */
+    keyName: ApiKeyName;
+    /**
+     * The ID of the workspace to delete.
+     */
+    workspaceId: WorkspaceId;
+  }
+  export interface DeleteWorkspaceApiKeyResponse {
+    /**
+     * The name of the API key that was deleted.
+     */
+    keyName: ApiKeyName;
+    /**
+     * The ID of the workspace where the key was deleted.
+     */
+    workspaceId: WorkspaceId;
+  }
   export interface DeleteWorkspaceRequest {
     /**
      * The ID of the workspace to delete.
@@ -424,7 +495,7 @@ declare namespace Grafana {
   }
   export type PermissionEntryList = PermissionEntry[];
   export type PermissionType = "CUSTOMER_MANAGED"|"SERVICE_MANAGED"|string;
-  export type Role = "ADMIN"|"EDITOR"|string;
+  export type Role = "ADMIN"|"EDITOR"|"VIEWER"|string;
   export type RoleValue = string;
   export type RoleValueList = RoleValue[];
   export interface RoleValues {
