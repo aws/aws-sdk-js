@@ -146,7 +146,7 @@
     return expect(results[0]).to.eql(results[1]);
   };
 
-  MockService = AWS.Service.defineService('mock', {
+  let mockServiceParams = {
     serviceIdentifier: 'mock',
     initialize: function(config) {
       AWS.Service.prototype.initialize.call(this, config);
@@ -166,7 +166,11 @@
           message: null
         };
       });
-    },
+    }
+  }
+
+  MockService = AWS.Service.defineService('mock', {
+    ...mockServiceParams,
     api: new AWS.Model.Api({
       metadata: {
         endpointPrefix: 'mockservice',
@@ -177,25 +181,7 @@
 
   MockServiceWithErrorCodeMapping = function(mapping) {
     return AWS.Service.defineService('mock', {
-      serviceIdentifier: 'mock',
-      initialize: function (config) {
-        AWS.Service.prototype.initialize.call(this, config);
-        this.config.credentials = {
-          accessKeyId: 'akid',
-          secretAccessKey: 'secret'
-        };
-        return (this.config.region = 'mock-region');
-      },
-      setupRequestListeners: function (request) {
-        return request.on('extractError', function (resp) {
-          return (resp.error = {
-            code:
-              (resp.httpResponse.body || '').toString() ||
-              resp.httpResponse.statusCode,
-            message: null
-          });
-        });
-      },
+      ...mockServiceParams,
       api: new AWS.Model.Api({
         metadata: {
           endpointPrefix: 'mockservice',
