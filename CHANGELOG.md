@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1135.0-->
+<!--LATEST=2.1136.0-->
 <!--ENTRYINSERT-->
+
+## 2.1136.0
+* feature: CloudFront: Introduced a new error (TooLongCSPInResponseHeadersPolicy) that is returned when the value of the Content-Security-Policy header in a response headers policy exceeds the maximum allowed length.
+* feature: Discovery: Add Migration Evaluator Collector details to the GetDiscoverySummary API response
+* feature: Resiliencehub: In this release, we are introducing support for Amazon Elastic Container Service, Amazon Route 53, AWS Elastic Disaster Recovery, AWS Backup in addition to the existing supported Services.  This release also supports Terraform file input from S3 and scheduling daily assessments
+* feature: WorkSpacesWeb: Amazon WorkSpaces Web now supports Administrator timeout control
 
 ## 2.1135.0
 * feature: Grafana: This release adds APIs for creating and deleting API keys in an Amazon Managed Grafana workspace.
